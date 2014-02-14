@@ -7,8 +7,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2013-12-22 07:42+0000\n"
-"PO-Revision-Date: 2013-12-08 21:23+0000\n"
+"POT-Creation-Date: 2014-02-03 11:21+0000\n"
+"PO-Revision-Date: 2014-01-29 13:06+0000\n"
 "Last-Translator: naavis <svnaavis@gmail.com>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
 "Language: fi\n"
@@ -17,7 +17,7 @@ msgstr ""
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=(n != 1);\n"
 "X-Generator: Pootle 2.5.0\n"
-"X-POOTLE-MTIME: 1386537786.890952\n"
+"X-POOTLE-MTIME: 1391000815.477702\n"
 
 #: folders.py:82 models.py:215 models.py:283
 #: templates/rawdata/privatesharedfolder_detail.html:84
@@ -151,11 +151,11 @@ msgstr ""
 #: templates/rawdata/publicdatapool_detail.html:111
 #: templates/rawdata/temporaryarchive_detail.html:24
 msgid "Download"
-msgstr ""
+msgstr "Lataa"
 
 #: templates/rawdata/_browser_js.html:56 templates/rawdata/library.html:150
 msgid "Preprocess"
-msgstr ""
+msgstr "Esikäsittele"
 
 #: templates/rawdata/_browser_js.html:63
 msgid "Share"
@@ -304,11 +304,11 @@ msgstr "Tyypin mukaan"
 
 #: templates/rawdata/help_02.html:28
 msgid "By acquisition date"
-msgstr ""
+msgstr "Kuvauspäivämäärän mukaan"
 
 #: templates/rawdata/help_02.html:29
 msgid "By upload date"
-msgstr ""
+msgstr "Lähetyspäivämäärän mukaan"
 
 #: templates/rawdata/help_02.html:30
 msgid "By subject"
@@ -376,7 +376,7 @@ msgstr ""
 
 #: templates/rawdata/help_03.html:25
 msgid "Do some science."
-msgstr ""
+msgstr "Tee tiedettä."
 
 #: templates/rawdata/help_03.html:26
 msgid ""
@@ -389,7 +389,7 @@ msgstr ""
 
 #: templates/rawdata/library.html:6 templates/rawdata/library.html.py:18
 msgid "Your raw data library"
-msgstr ""
+msgstr "Raakadatakirjastosi"
 
 #: templates/rawdata/library.html:20
 #, python-format
@@ -437,11 +437,11 @@ msgstr "Täällä ei näytä olevan mitään."
 #, python-format
 msgid ""
 "Head over to the <a href=\"%(upload_url)s\">upload page</a> to get started. "
-msgstr ""
+msgstr "Suuntaa <a href=\"%(upload_url)s\">lähetyssivulle</a> aloittaaksesi."
 
 #: templates/rawdata/library.html:156
 msgid "Coming soon!"
-msgstr ""
+msgstr "Tulossa pian!"
 
 #: templates/rawdata/library.html:161
 msgid ""
@@ -465,7 +465,7 @@ msgstr ""
 
 #: templates/rawdata/library.html:171
 msgid "OK"
-msgstr ""
+msgstr "OK"
 
 #: templates/rawdata/plans.html:4 templates/rawdata/plans.html.py:9
 msgid "Plans"
@@ -538,7 +538,7 @@ msgstr ""
 #: templates/rawdata/privatesharedfolder_detail.html:154
 #: templates/rawdata/publicdatapool_detail.html:123
 msgid "Comments"
-msgstr ""
+msgstr "Kommentit"
 
 #: templates/rawdata/privatesharedfolder_detail.html:158
 #: templates/rawdata/publicdatapool_detail.html:127
@@ -551,7 +551,7 @@ msgstr ""
 #: templates/rawdata/privatesharedfolder_detail.html:175
 #: templates/rawdata/privatesharedfolder_list.html:84
 msgid "Delete folder"
-msgstr ""
+msgstr "Poista kansio"
 
 #: templates/rawdata/privatesharedfolder_detail.html:178
 #: templates/rawdata/privatesharedfolder_list.html:87
@@ -622,12 +622,12 @@ msgstr ""
 #: templates/rawdata/privatesharedfolder_form.html:60
 #: templates/rawdata/publicdatapool_form.html:60
 msgid "Send"
-msgstr ""
+msgstr "Lähetä"
 
 #: templates/rawdata/privatesharedfolder_form.html:63
 #: templates/rawdata/publicdatapool_form.html:63
 msgid "Loading..."
-msgstr ""
+msgstr "Ladataan..."
 
 #: templates/rawdata/privatesharedfolder_form.html:73
 msgid ""
@@ -643,7 +643,7 @@ msgstr ""
 #: templates/rawdata/privatesharedfolder_form.html:100
 #: templates/rawdata/publicdatapool_form.html:100
 msgid "Create"
-msgstr ""
+msgstr "Luo"
 
 #: templates/rawdata/privatesharedfolder_list.html:5
 #: templates/rawdata/privatesharedfolder_list.html:11

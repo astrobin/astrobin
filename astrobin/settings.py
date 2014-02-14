@@ -14,7 +14,7 @@ READONLY_MODE = False
 MEDIA_VERSION = '73'
 LONGPOLL_ENABLED = False
 ADS_ENABLED = True
-DONATIONS_ENABLED = False
+DONATIONS_ENABLED = True
 
 ADMINS = (
     ('Salvatore Iovene', 'salvatore@astrobin.com'),
@@ -81,6 +81,8 @@ LANGUAGES = (
     #('pl', gettext('Polish')),
     ('pt-BR', gettext('Brazilian Portuguese')),
     ('el', gettext('Greek')),
+    ('ru', gettext('Russian')),
+    ('ar', gettext('Arabic')),
 )
 MODELTRANSLATION_TRANSLATION_REGISTRY = 'astrobin.translation'
 
@@ -474,7 +476,7 @@ REST_FRAMEWORK = {
 # http://docs.celeryproject.org/en/latest/django/unit-testing.html
 TEST_RUNNER = 'djcelery.contrib.test_runner.CeleryTestSuiteRunner'
 
-RAWDATA_ROOT = '/rawdata/files'
+RAWDATA_ROOT = '/rawdata_s3/files'
 
 # See http://docs.djangoproject.com/en/dev/topics/logging for
 # more details on how to customize your logging configuration.

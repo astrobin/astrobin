@@ -7,16 +7,17 @@ msgid ""
 msgstr ""
 "Project-Id-Version: AstroBin 1.4\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2013-12-22 07:38+0000\n"
-"PO-Revision-Date: 2013-05-05 18:01+0100\n"
-"Last-Translator: dark_sky <bushbarack@yahoo.de>\n"
+"POT-Creation-Date: 2014-02-03 11:17+0000\n"
+"PO-Revision-Date: 2014-01-20 19:07+0000\n"
+"Last-Translator: Michael <Michael.Halscheid@yahoo.com>\n"
 "Language-Team: German <LL@li.org>\n"
 "Language: de\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=(n != 1);\n"
-"X-Generator: Pootle 2.1.6\n"
+"X-Generator: Pootle 2.5.0\n"
+"X-POOTLE-MTIME: 1390244825.725478\n"
 
 #: fields.py:10
 msgid "United Kingdom"
@@ -1020,7 +1021,7 @@ msgstr ""
 "entsprechenden Webspace anbieten, so dass Du diese auf Deinem Server "
 "hinterlegen musst."
 
-#: forms.py:62 models.py:1980 models.py:2062 templates/gear/page.html:197
+#: forms.py:62 models.py:1984 models.py:2066 templates/gear/page.html:197
 #: templates/image/detail/image_title.html:14
 msgid "Link"
 msgstr "Link"
@@ -1029,7 +1030,7 @@ msgstr "Link"
 msgid "Link to TIFF/FITS"
 msgstr "Link zum TIFF/FITS"
 
-#: forms.py:64 models.py:689 views.py:640 templates/maintenance_base.html:310
+#: forms.py:64 models.py:693 views.py:640 templates/maintenance_base.html:310
 #: templates/profile-edit-menu.html:36
 msgid "Locations"
 msgstr "Standorte"
@@ -1057,39 +1058,39 @@ msgstr ""
 "Bitte einen Text eingeben, wenn Du das Bild mit einem Wasserzeichen versehen "
 "möchtest."
 
-#: forms.py:131 forms.py:367 models.py:748
+#: forms.py:131 forms.py:367 models.py:752
 msgid "Imaging telescopes or lenses"
 msgstr "Teleskop oder Objektiv (Aufnahme)"
 
-#: forms.py:132 models.py:749
+#: forms.py:132 models.py:753
 msgid "Guiding telescopes or lenses"
 msgstr "Teleskop oder Objektiv (Nachführung)"
 
-#: forms.py:133 forms.py:227 models.py:750 models.py:1603 views.py:2153
+#: forms.py:133 forms.py:227 models.py:754 models.py:1607 views.py:2153
 msgid "Mounts"
 msgstr "Montierung"
 
-#: forms.py:134 forms.py:368 models.py:751
+#: forms.py:134 forms.py:368 models.py:755
 msgid "Imaging cameras"
 msgstr "Aufnahmekamera"
 
-#: forms.py:135 models.py:752
+#: forms.py:135 models.py:756
 msgid "Guiding cameras"
 msgstr "Nachführkamera"
 
-#: forms.py:136 forms.py:229 models.py:753 models.py:1605 views.py:2154
+#: forms.py:136 forms.py:229 models.py:757 models.py:1609 views.py:2154
 msgid "Focal reducers"
 msgstr "Brennweitenreduzierung"
 
-#: forms.py:137 forms.py:230 models.py:754 models.py:1606 views.py:2155
+#: forms.py:137 forms.py:230 models.py:758 models.py:1610 views.py:2155
 msgid "Software"
 msgstr "Software"
 
-#: forms.py:138 forms.py:231 models.py:755 models.py:1607 views.py:2156
+#: forms.py:138 forms.py:231 models.py:759 models.py:1611 views.py:2156
 msgid "Filters"
 msgstr "Filter"
 
-#: forms.py:139 forms.py:232 models.py:756 models.py:1608 views.py:2157
+#: forms.py:139 forms.py:232 models.py:760 models.py:1612 views.py:2157
 msgid "Accessories"
 msgstr "Zubehör"
 
@@ -1097,7 +1098,7 @@ msgstr "Zubehör"
 msgid "If you have a personal website, put the address here."
 msgstr "Adresse zu deiner Homepage, falls vorhanden."
 
-#: forms.py:171 models.py:1532
+#: forms.py:171 models.py:1536
 msgid "Website"
 msgstr "Webseite"
 
@@ -1121,11 +1122,11 @@ msgstr ""
 "eingegeben wird, ist es nicht mehr möglich, für einzelne Filter verschiedene "
 "Aufnahme-Serien hinzuzufügen."
 
-#: forms.py:226 models.py:1602 views.py:2151
+#: forms.py:226 models.py:1606 views.py:2151
 msgid "Telescopes and lenses"
 msgstr "Teleskope und Objektive"
 
-#: forms.py:228 models.py:1604 views.py:2152
+#: forms.py:228 models.py:1608 views.py:2152
 msgid "Cameras"
 msgstr "Kameras"
 
@@ -1151,7 +1152,7 @@ msgstr "Alles"
 msgid "Images"
 msgstr "Bilder"
 
-#: forms.py:277 models.py:645 views.py:1648
+#: forms.py:277 models.py:649 views.py:1648
 #: templates/maintenance_base.html:304 templates/profile-edit-menu.html:30
 #: templates/wall.html:129 templates/inclusion_tags/search_image_list.html:13
 #: templates/user/profile-subnav.html:130
@@ -1186,7 +1187,7 @@ msgstr "Bitte im Format JJJJ-MM-TT eingeben"
 msgid "Express value in hours"
 msgstr "Gib den Wert in Stunden an"
 
-#: forms.py:357 models.py:769 templates/image/detail/info.html:27
+#: forms.py:357 models.py:773 templates/image/detail/info.html:27
 #: templates/image/detail/info.html:28 templates/search/search.html:239
 msgid "License"
 msgstr "Lizenz"
@@ -1196,7 +1197,7 @@ msgid ""
 "Search for astronomical objects, telescopes or lenses, cameras, filters..."
 msgstr "Suche nach astromischen Objekten, Optiken, Kameras, Filtern, ..."
 
-#: forms.py:366 models.py:680
+#: forms.py:366 models.py:684
 msgid "Main solar system subject"
 msgstr "Objekt im Sonnensystem"
 
@@ -1256,7 +1257,7 @@ msgstr "Längengrad (Minuten)"
 msgid "Longitude (seconds)"
 msgstr "Längengrad (Sekunden)"
 
-#: forms.py:566 forms.py:611 forms.py:652 models.py:1246 models.py:1459
+#: forms.py:566 forms.py:611 forms.py:652 models.py:1250 models.py:1463
 #: templates/image/detail/image_card.html:46
 msgid "Date"
 msgstr "Datum"
@@ -1273,7 +1274,7 @@ msgstr "Bitte einen Wert zwischen 1 und 10 eingeben."
 msgid "The date cannot be in the future."
 msgstr "Das Datum kann nicht in der Zukunft liegen."
 
-#: forms.py:892 forms.py:953 models.py:183 templates/gear/fix.html:32
+#: forms.py:892 forms.py:953 models.py:187 templates/gear/fix.html:32
 #: templates/gear/fix.html.py:33 templates/gear/fix.html:34
 #: templates/gear/fix.html.py:42 templates/gear/fix.html:47
 #: templates/gear/fix.html.py:52 templates/gear/fix.html:57
@@ -1291,11 +1292,11 @@ msgstr "Das Datum kann nicht in der Zukunft liegen."
 msgid "Make"
 msgstr "Hersteller"
 
-#: forms.py:893 forms.py:954 models.py:184
+#: forms.py:893 forms.py:954 models.py:188
 msgid "The make, brand, producer or developer of this product."
 msgstr "Hersteller, Marke oder Entwickler dieses Produkts."
 
-#: forms.py:898 forms.py:959 models.py:191 models.py:1698 models.py:1837
+#: forms.py:898 forms.py:959 models.py:195 models.py:1702 models.py:1841
 #: templates/gear/fix.html:32 templates/gear/fix.html.py:33
 #: templates/gear/fix.html:34 templates/gear/fix.html.py:42
 #: templates/gear/fix.html:47 templates/gear/fix.html.py:52
@@ -1438,158 +1439,166 @@ msgstr ""
 msgid "Attribution-NoDerivs Creative Commons"
 msgstr "Creative Commons: Namensnennung, keine Bearbeitung (CC-BY-ND)"
 
-#: models.py:78 models.py:93 settings.py:72 views.py:719
+#: models.py:78 models.py:95 settings.py:72 views.py:719
 msgid "English"
 msgstr "Englisch"
 
-#: models.py:79 models.py:94 settings.py:73
+#: models.py:79 models.py:96 settings.py:73
 msgid "Italian"
 msgstr "Italienisch"
 
-#: models.py:80 models.py:95 settings.py:74
+#: models.py:80 models.py:97 settings.py:74
 msgid "Spanish"
 msgstr "Spanisch"
 
-#: models.py:81 models.py:96 settings.py:75
+#: models.py:81 models.py:98 settings.py:75
 msgid "French"
 msgstr "Französisch"
 
 # This is the Finnish language, i.e. the language spoken in Finland
-#: models.py:82 models.py:97 settings.py:76
+#: models.py:82 models.py:99 settings.py:76
 msgid "Finnish"
 msgstr "Finnisch"
 
-#: models.py:83 models.py:98 settings.py:77
+#: models.py:83 models.py:100 settings.py:77
 msgid "German"
 msgstr "Deutsch"
 
 # Flexion vom Kontext abhängig
-#: models.py:84 models.py:99 settings.py:78
+#: models.py:84 models.py:101 settings.py:78
 msgid "Dutch"
 msgstr "Niederländisch"
 
-#: models.py:85 models.py:100 settings.py:79
+#: models.py:85 models.py:102 settings.py:79
 msgid "Turkish"
 msgstr "Türkisch"
 
-#: models.py:86 models.py:101 settings.py:80
+#: models.py:86 models.py:103 settings.py:80
 msgid "Albanian"
 msgstr "Albanisch"
 
-#: models.py:87 models.py:102
+#: models.py:87 models.py:104
 msgid "Polish"
 msgstr "Polnisch"
 
-#: models.py:88 models.py:103 settings.py:82
+#: models.py:88 models.py:105 settings.py:82
 msgid "Brazilian Portuguese"
 msgstr "Brasilianisches Portugiesisch"
 
-#: models.py:89 models.py:104 settings.py:83
+#: models.py:89 models.py:106 settings.py:83
 msgid "Greek"
 msgstr "Griechisch"
 
-#: models.py:108
+#: models.py:90 models.py:107 settings.py:84
+msgid "Russian"
+msgstr ""
+
+#: models.py:91 models.py:108 settings.py:85
+msgid "Arabic"
+msgstr ""
+
+#: models.py:112
 msgid "Pulsars"
 msgstr "Pulsare"
 
-#: models.py:109
+#: models.py:113
 msgid "Globular clusters"
 msgstr "Kugelsternhaufen"
 
-#: models.py:110
+#: models.py:114
 msgid "Open clusters"
 msgstr "Offene Sternhaufen"
 
-#: models.py:111
+#: models.py:115
 msgid "Nebulae"
 msgstr "Nebel"
 
-#: models.py:112
+#: models.py:116
 msgid "Planetary nebulae"
 msgstr "Planetarische Nebel"
 
-#: models.py:113
+#: models.py:117
 msgid "Galaxies"
 msgstr "Galaxien"
 
-#: models.py:134 templates/wall.html:90
+#: models.py:138 templates/wall.html:90
 msgid "Sun"
 msgstr "Sonne"
 
-#: models.py:135
+#: models.py:139
 msgid "Earth's Moon"
 msgstr "Erd-Mond"
 
-#: models.py:136
+#: models.py:140
 msgid "Mercury"
 msgstr "Merkur"
 
-#: models.py:137
+#: models.py:141
 msgid "Venus"
 msgstr "Venus"
 
-#: models.py:138
+#: models.py:142
 msgid "Mars"
 msgstr "Mars"
 
-#: models.py:139
+#: models.py:143
 msgid "Jupiter"
 msgstr "Jupiter"
 
-#: models.py:140
+#: models.py:144
 msgid "Saturn"
 msgstr "Saturn"
 
-#: models.py:141
+#: models.py:145
 msgid "Uranus"
 msgstr "Uranus"
 
-#: models.py:142
+#: models.py:146
 msgid "Neptune"
 msgstr "Neptun"
 
-#: models.py:143
+#: models.py:147
 msgid "Minor planet"
 msgstr "Kleinplanet"
 
-#: models.py:144
+#: models.py:148
 msgid "Comet"
 msgstr "Komet"
 
-#: models.py:145 models.py:582 models.py:646 views.py:1649
+#: models.py:149 models.py:586 models.py:650 views.py:1649
 #: templates/wall.html:141 templates/image/edit/acquisition.html:84
 msgid "Other"
 msgstr "Sonstige"
 
-#: models.py:149
+#: models.py:153
 msgid "Center"
 msgstr "Mitte"
 
-#: models.py:150
+#: models.py:154
 msgid "Top left"
 msgstr "Oben links"
 
-#: models.py:151
+#: models.py:155
 msgid "Top center"
 msgstr "Oben Mitte"
 
-#: models.py:152
+#: models.py:156
 msgid "Top right"
 msgstr "Oben rechts"
 
-#: models.py:153
+#: models.py:157
 msgid "Bottom left"
 msgstr "Unten links"
 
-#: models.py:154
+#: models.py:158
 msgid "Bottom center"
 msgstr "Unten Mitte"
 
-#: models.py:155
+#: models.py:159
 msgid "Bottom right"
 msgstr "Unten rechts"
 
-#: models.py:192
+#: models.py:196
 msgid ""
 "Just the name of this product, without any properties or personal "
 "customizations. Try to use the international name, in English language, if "
@@ -1599,130 +1608,130 @@ msgstr ""
 "Versuche einen internationalen, passenden Namen auf Englisch zu finden. "
 "Dieser wird für alle AstroBin-Nutzer verwendet."
 
-#: models.py:355
+#: models.py:359
 msgid "Alias"
 msgstr "Alias"
 
-#: models.py:356
+#: models.py:360
 msgid ""
 "A descriptive name, alias or nickname for your own copy of this product."
 msgstr "Eine Beschreibung, Alias oder Spitznamen für dein Produkt."
 
-#: models.py:363
+#: models.py:367
 msgid "Comment"
 msgstr "Kommentar"
 
-#: models.py:364
+#: models.py:368
 msgid ""
 "Information, description or comment about your own copy of this product."
 msgstr "Informationen, Beschreibung oder Kommentar zur deinem Produkt."
 
-#: models.py:403
+#: models.py:407
 msgid "Refractor: achromatic"
 msgstr "Refraktor: Achromat"
 
-#: models.py:404
+#: models.py:408
 msgid "Refractor: semi-apochromatic"
 msgstr "Refraktor: Halb-Apochromat"
 
-#: models.py:405
+#: models.py:409
 msgid "Refractor: apochromatic"
 msgstr "Refraktor: Apochromat"
 
-#: models.py:406
+#: models.py:410
 msgid "Refractor: non-achromatic Galilean"
 msgstr "Refraktor: Galilei-Fernrohr"
 
-#: models.py:407
+#: models.py:411
 msgid "Refractor: non-achromatic Keplerian"
 msgstr "Refraktor: Kepler-Fernrohr"
 
-#: models.py:408
+#: models.py:412
 msgid "Refractor: superachromat"
 msgstr "Refraktor: Superachromat"
 
-#: models.py:410
+#: models.py:414
 msgid "Reflector: Dall-Kirkham"
 msgstr "Reflektor: Dall-Kirkham"
 
-#: models.py:411
+#: models.py:415
 msgid "Reflector: Nasmyth"
 msgstr "Reflektor: Nasmyth"
 
-#: models.py:412
+#: models.py:416
 msgid "Reflector: Ritchey Chretien"
 msgstr "Reflektor: Ritchey Chretien"
 
-#: models.py:413
+#: models.py:417
 msgid "Reflector: Gregorian"
 msgstr "Reflektor: Gregory-Teleskop"
 
-#: models.py:414
+#: models.py:418
 msgid "Reflector: Herschellian"
 msgstr "Reflektor: Herschel-Teleskop"
 
-#: models.py:415
+#: models.py:419
 msgid "Reflector: Newtonian"
 msgstr "Reflektor: Newton"
 
-#: models.py:417
+#: models.py:421
 msgid "Catadioptric: Argunov-Cassegrain"
 msgstr "Katadiopter: Argunov-Cassegrain"
 
-#: models.py:418
+#: models.py:422
 msgid "Catadioptric: Klevtsov-Cassegrain"
 msgstr "Katadiopter: Klevtsov-Cassegrain"
 
-#: models.py:419
+#: models.py:423
 msgid "Catadioptric: Lurie-Houghton"
 msgstr "Katadiopter: Lurie-Houghton"
 
-#: models.py:420
+#: models.py:424
 msgid "Catadioptric: Maksutov"
 msgstr "Katadiopter: Maksutov"
 
-#: models.py:421
+#: models.py:425
 msgid "Catadioptric: Maksutov-Cassegrain"
 msgstr "Katadiopter: Maksutov-Cassegrain"
 
-#: models.py:422
+#: models.py:426
 msgid "Catadioptric: modified Dall-Kirkham"
 msgstr "Katadiopter: modifiziertes Dall-Kirkham"
 
-#: models.py:423
+#: models.py:427
 msgid "Catadioptric: Schmidt camera"
 msgstr "Katadiopter: Schmidtkamera"
 
-#: models.py:424
+#: models.py:428
 msgid "Catadioptric: Schmidt-Cassegrain"
 msgstr "Katadiopter: Schmidt-Cassegrain"
 
-#: models.py:425
+#: models.py:429
 msgid "Catadioptric: ACF Schmidt-Cassegrain"
 msgstr "Katadiopter: ACF Schmidt-Cassegrain"
 
-#: models.py:426 stats.py:596
+#: models.py:430 stats.py:596
 msgid "Camera lens"
 msgstr "Objektiv"
 
-#: models.py:427
+#: models.py:431
 msgid "Binoculars"
 msgstr "Feldstecher"
 
-#: models.py:431 templates/popover/gear_telescope.html:18
+#: models.py:435 templates/popover/gear_telescope.html:18
 msgid "Aperture"
 msgstr "Öffnung"
 
-#: models.py:432 models.py:441 models.py:511 models.py:520
+#: models.py:436 models.py:445 models.py:515 models.py:524
 msgid "(in mm)"
 msgstr "(in mm)"
 
-#: models.py:440 models.py:1398 templates/image/detail/image_card.html:58
+#: models.py:444 models.py:1402 templates/image/detail/image_card.html:58
 #: templates/popover/gear_telescope.html:19
 msgid "Focal length"
 msgstr "Brennweite"
 
-#: models.py:449 models.py:528 models.py:554 models.py:587
+#: models.py:453 models.py:532 models.py:558 models.py:591
 #: templates/gear/page.html:208 templates/popover/gear_camera.html:16
 #: templates/popover/gear_filter.html:16
 #: templates/popover/gear_software.html:16
@@ -1730,187 +1739,187 @@ msgstr "Brennweite"
 msgid "Type"
 msgstr "Typ"
 
-#: models.py:457 models.py:536 templates/search/search.html:322
+#: models.py:461 models.py:540 templates/search/search.html:322
 msgid "mm"
 msgstr "mm"
 
-#: models.py:465 templates/popover/gear_mount.html:17
+#: models.py:469 templates/popover/gear_mount.html:17
 msgid "Max. payload"
 msgstr "Maximale Tragkraft"
 
-#: models.py:466
+#: models.py:470
 msgid "(in kg)"
 msgstr "(in kg)"
 
-#: models.py:474 templates/popover/gear_mount.html:18
+#: models.py:478 templates/popover/gear_mount.html:18
 msgid "Periodic error"
 msgstr "Periodischer Fehler"
 
-#: models.py:475
+#: models.py:479
 msgid "(peak to peak, in arcseconds)"
 msgstr "(peak-to-peak, in Winkelsekunden)"
 
-#: models.py:484
+#: models.py:488
 msgid "kg"
 msgstr "kg"
 
-#: models.py:492
+#: models.py:496
 msgid "CCD"
 msgstr "CCD"
 
-#: models.py:493
+#: models.py:497
 msgid "DSLR"
 msgstr "DSLR"
 
-#: models.py:494
+#: models.py:498
 msgid "Guider/Planetary"
 msgstr "Guider/Planetenkamera"
 
-#: models.py:495
+#: models.py:499
 msgid "Film"
 msgstr "Film"
 
 # Ist damit eine Kompaktkamera gemeint?
-#: models.py:496
+#: models.py:500
 msgid "Compact"
 msgstr "Kompaktkamera"
 
-#: models.py:497
+#: models.py:501
 msgid "Video camera"
 msgstr "Videokamera"
 
-#: models.py:501 templates/popover/gear_camera.html:18
+#: models.py:505 templates/popover/gear_camera.html:18
 #: templates/search/search.html:329
 msgid "Pixel size"
 msgstr "Pixelgrösse"
 
-#: models.py:502
+#: models.py:506
 msgid "(in &mu;m)"
 msgstr "(in &mu;m)"
 
-#: models.py:510 templates/popover/gear_camera.html:19
+#: models.py:514 templates/popover/gear_camera.html:19
 msgid "Sensor width"
 msgstr "Breite des Sensors"
 
-#: models.py:519 templates/popover/gear_camera.html:20
+#: models.py:523 templates/popover/gear_camera.html:20
 msgid "Sensor height"
 msgstr "Höhe des Sensors"
 
-#: models.py:536 templates/search/search.html:330
+#: models.py:540 templates/search/search.html:330
 msgid "&mu;m"
 msgstr "&mu;m"
 
-#: models.py:549
+#: models.py:553
 msgid "Open source or freeware"
 msgstr "Open Source oder Freeware"
 
-#: models.py:550
+#: models.py:554
 msgid "Paid"
 msgstr "Kommerzielle Software"
 
-#: models.py:566
+#: models.py:570
 msgid "Clear or color"
 msgstr "Klar- oder Farbfilter"
 
-#: models.py:568
+#: models.py:572
 msgid "Broadband: H-Alpha"
 msgstr "Breitband: H-Alpha"
 
-#: models.py:569
+#: models.py:573
 msgid "Broadband: H-Beta"
 msgstr "Breitband: H-Beta"
 
-#: models.py:570
+#: models.py:574
 msgid "Broadband: S-II"
 msgstr "Breitband: S-II"
 
-#: models.py:571
+#: models.py:575
 msgid "Broadband: O-III"
 msgstr "Breitband: O-III"
 
-#: models.py:572
+#: models.py:576
 msgid "Broadband: N-II"
 msgstr "Breitband: N-II"
 
-#: models.py:574
+#: models.py:578
 msgid "Narrowband: H-Alpha"
 msgstr "Schmalband: H-Alpha"
 
-#: models.py:575
+#: models.py:579
 msgid "Narrowband: H-Beta"
 msgstr "Schmalband: H-Beta"
 
-#: models.py:576
+#: models.py:580
 msgid "Narrowband: S-II"
 msgstr "Schmalband: S-II"
 
-#: models.py:577
+#: models.py:581
 msgid "Narrowband: O-III"
 msgstr "Schmalband: O-III"
 
-#: models.py:578
+#: models.py:582
 msgid "Narrowband: N-II"
 msgstr "Schmalband: N-II"
 
-#: models.py:580
+#: models.py:584
 msgid "Light pollution suppression"
 msgstr "Gegen Lichtverschmutzung"
 
-#: models.py:581
+#: models.py:585
 msgid "Planetary"
 msgstr "Planetarisch"
 
-#: models.py:583
+#: models.py:587
 msgid "UHC: Ultra High Contrast"
 msgstr "UHC: Ultra High Contrast"
 
-#: models.py:594 templates/popover/gear_filter.html:18
+#: models.py:598 templates/popover/gear_filter.html:18
 msgid "Bandwidth"
 msgstr "Bandbreite"
 
-#: models.py:595
+#: models.py:599
 msgid "(in nm)"
 msgstr "(in nm)"
 
-#: models.py:604
+#: models.py:608
 msgid "nm"
 msgstr "nm"
 
-#: models.py:641
+#: models.py:645
 msgid "Deep sky object"
 msgstr "Deep-Sky-Objekte"
 
-#: models.py:642
+#: models.py:646
 msgid "Solar system body or event"
 msgstr "Sonnensystemkörper oder -ereignis"
 
-#: models.py:643 views.py:1646 templates/wall.html:117
+#: models.py:647 views.py:1646 templates/wall.html:117
 msgid "Extremely wide field"
 msgstr "\"Extremely wide field\""
 
-#: models.py:644 views.py:1647 templates/wall.html:123
+#: models.py:648 views.py:1647 templates/wall.html:123
 msgid "Star trails"
 msgstr "Startrails"
 
-#: models.py:663 templates/inclusion_tags/image_list.html:12
+#: models.py:667 templates/inclusion_tags/image_list.html:12
 #: templates/inclusion_tags/search_image_list.html:123
 msgid "Title"
 msgstr "Titel"
 
-#: models.py:667 templates/user/profile-subnav.html:124
+#: models.py:671 templates/user/profile-subnav.html:124
 msgid "Subject type"
 msgstr "Objekttyp"
 
-#: models.py:674
+#: models.py:678
 #, fuzzy
 msgid "Objects in field"
 msgstr "Objekt nicht gefunden"
 
-#: models.py:675
+#: models.py:679
 msgid "Use a <strong>comma</strong> to separate the values."
 msgstr "Verwende ein <strong>Komma</strong> um die Werte zu trennen."
 
-#: models.py:681
+#: models.py:685
 msgid ""
 "If the main subject of your image is a body in the solar system, please "
 "select which (or which type) it is."
@@ -1918,161 +1927,161 @@ msgstr ""
 "Wenn es sich bei Deinem Bild um ein Objekt im Sonnensystem handelt, wähle "
 "bitte welches (oder um welchen Typ es sich handelt)."
 
-#: models.py:690
+#: models.py:694
 msgid ""
 "Drag items from the right side to the left side, or click on the plus sign."
 msgstr ""
 "Ziehe die Auswahl von der rechten auf die linke Seite oder klicke auf das "
 "Plus-Symbol."
 
-#: models.py:696 models.py:1845 models.py:2069 templates/gear/page.html:47
+#: models.py:700 models.py:1849 models.py:2073 templates/gear/page.html:47
 #: templates/image/detail/image_description.html:7
 msgid "Description"
 msgstr "Beschreibung"
 
-#: models.py:697
+#: models.py:701
 msgid "HTML tags are allowed."
 msgstr "HTML Tags sind erlaubt."
 
-#: models.py:734
+#: models.py:738
 msgid "Apply watermark to image"
 msgstr "Wasserzeichen hinzufügen"
 
-#: models.py:738 templates/leaderboard.html:20
+#: models.py:742 templates/leaderboard.html:20
 msgid "Position"
 msgstr "Position"
 
-#: models.py:786 templates/image/full.html:56
+#: models.py:790 templates/image/full.html:56
 #: templates/image/detail/image_title.html:7
 msgid "(no title)"
 msgstr "(ohne Titel)"
 
-#: models.py:1247
+#: models.py:1251
 msgid "Please use the following format: yyyy-mm-dd."
 msgstr "Bitte das Format JJJJ-MM-TT verwenden."
 
-#: models.py:1252 models.py:1458 models.py:2045
+#: models.py:1256 models.py:1462 models.py:2049
 msgid "Image"
 msgstr "Bild"
 
-#: models.py:1271
+#: models.py:1275
 msgid "1 - Excellent dark-site sky (BLACK)"
 msgstr "1 - Ausgezeichneter Standort mit sehr dunklem Himmel (SCHWARZ)"
 
-#: models.py:1272
+#: models.py:1276
 msgid "2 - Typical truly dark site (GRAY)"
 msgstr "2 - Standort mit sehr dunklem Himmel (GRAU)"
 
-#: models.py:1273
+#: models.py:1277
 msgid "3 - Rural sky (BLUE)"
 msgstr "3 - ländlicher Himmel (BLAU)"
 
-#: models.py:1274
+#: models.py:1278
 msgid "4 - Rural/suburban transition (GREEN/YELLOW)"
 msgstr "4 - Lländlich/Vorstadt-Himmel (GRÜN/GELB)"
 
-#: models.py:1275
+#: models.py:1279
 msgid "5 - Suburban sky (ORANGE)"
 msgstr "5 - Vorstadt-Himmel (ORANGE)"
 
-#: models.py:1276
+#: models.py:1280
 msgid "6 - Bright suburban sky (RED)"
 msgstr "6 - aufgehellter Vorstadt-Himmel (ROT)"
 
-#: models.py:1277
+#: models.py:1281
 msgid "7 - Suburban/urban transition or Full Moon (RED)"
 msgstr "7 - Zwischen Vorstadt- und Stadt-Himmel oder Vollmond (ROT)"
 
-#: models.py:1278
+#: models.py:1282
 msgid "8 - City sky (WHITE)"
 msgstr "8 - Stadt-Himmel (WEISS)"
 
-#: models.py:1279
+#: models.py:1283
 msgid "9 - Inner city sky (WHITE)"
 msgstr "9 - Innenstadt-Himmel (WEISS)"
 
-#: models.py:1283
+#: models.py:1287
 msgid "Synthetic channel"
 msgstr "Synthetischer Kanal"
 
-#: models.py:1288
+#: models.py:1292
 msgid "Filter"
 msgstr "Filter"
 
-#: models.py:1294
+#: models.py:1298
 msgid "Binning"
 msgstr "Binning"
 
-#: models.py:1297
+#: models.py:1301
 msgid "Number"
 msgstr "Nummer"
 
-#: models.py:1299
+#: models.py:1303
 msgid "The number of sub-frames."
 msgstr "Anzahl der Sub-Frames."
 
-#: models.py:1302
+#: models.py:1306
 msgid "Duration"
 msgstr "Belichtungszeit"
 
-#: models.py:1304
+#: models.py:1308
 msgid "Duration of each sub-frame, in seconds."
 msgstr "Dauer des einzelnen Sub-Frames in Sekunden."
 
-#: models.py:1307
+#: models.py:1311
 msgid "ISO"
 msgstr "ISO"
 
-#: models.py:1311
+#: models.py:1315
 msgid "Gain"
 msgstr "Empfindlichkeit (Gain)"
 
-#: models.py:1316
+#: models.py:1320
 msgid "Sensor cooling"
 msgstr "Chipkühlung"
 
 # wirklich Celsius? oder vielleicht Fahrenheit
-#: models.py:1318
+#: models.py:1322
 msgid "The temperature of the chip. E.g.: -20."
 msgstr "Chiptemperatur, z.B: -20."
 
-#: models.py:1321 views.py:648
+#: models.py:1325 views.py:648
 msgid "Darks"
 msgstr "Darks"
 
-#: models.py:1323
+#: models.py:1327
 msgid "The number of dark frames."
 msgstr "Anzahl der Dark-Frames."
 
-#: models.py:1326 views.py:649
+#: models.py:1330 views.py:649
 msgid "Flats"
 msgstr "Flats"
 
-#: models.py:1328
+#: models.py:1332
 msgid "The number of flat frames."
 msgstr "Anzahl der Flat-Frames."
 
-#: models.py:1331 views.py:650
+#: models.py:1335 views.py:650
 msgid "Flat darks"
 msgstr "Flat Darks"
 
-#: models.py:1333
+#: models.py:1337
 msgid "The number of dark flat frames."
 msgstr "Anzahl der Flat Darks."
 
-#: models.py:1336 views.py:651
+#: models.py:1340 views.py:651
 msgid "Bias"
 msgstr "Bias"
 
-#: models.py:1338
+#: models.py:1342
 msgid "The number of bias/offset frames."
 msgstr "Anzahl der Bias/Offset Frames."
 
-#: models.py:1341 views.py:654
+#: models.py:1345 views.py:654
 msgid "Bortle Dark-Sky Scale"
 msgstr "Bortle Skala"
 
-#: models.py:1345
+#: models.py:1349
 msgid ""
 "Quality of the sky according to <a href=\"http://en.wikipedia.org/wiki/"
 "Bortle_Dark-Sky_Scale\" target=\"_blank\">the Bortle Scale</a>."
@@ -2080,168 +2089,168 @@ msgstr ""
 "Himmelsqualität gemäss <a href=\"http://en.wikipedia.org/wiki/Bortle_Dark-"
 "Sky_Scale\" target=\"_blank\">der Bortle Skala</a>."
 
-#: models.py:1349
+#: models.py:1353
 msgid "Mean mag/arcsec^2"
 msgstr "Durchschnittliche mag/arcsec^2"
 
-#: models.py:1350
+#: models.py:1354
 msgid "As measured with your Sky Quality Meter."
 msgstr "Wie mit dem Sky Quality Meter gemessen."
 
-#: models.py:1355 views.py:656
+#: models.py:1359 views.py:656
 msgid "Mean FWHM"
 msgstr "Durchschnittliche FWHM"
 
-#: models.py:1360 views.py:657
+#: models.py:1364 views.py:657
 msgid "Temperature"
 msgstr "Temperatur"
 
 # isn't it "degree centigrade" in english?
-#: models.py:1363
+#: models.py:1367
 msgid "Ambient temperature (in Centigrade degrees)."
 msgstr "Umgebungstemperatur (in Grad Celsius)."
 
-#: models.py:1384
+#: models.py:1388
 msgid "Number of frames"
 msgstr "Anzahl der Frames"
 
-#: models.py:1385
+#: models.py:1389
 msgid "The total number of frames you have stacked."
 msgstr "Gesamtanzahl der gestackten Frames."
 
-#: models.py:1389 templates/image/detail/image_card.html:55
+#: models.py:1393 templates/image/detail/image_card.html:55
 msgid "FPS"
 msgstr "FPS"
 
-#: models.py:1390
+#: models.py:1394
 msgid "Frames per second."
 msgstr "Bilder pro Sekunde."
 
-#: models.py:1399
+#: models.py:1403
 msgid ""
 "The focal length of the whole optical train, including barlow lenses or "
 "other components."
 msgstr ""
 "Gesamt-Brennweite, inkl. Barlowlinsen und anderen optischen Komponenten."
 
-#: models.py:1405 templates/image/detail/image_card.html:61
+#: models.py:1409 templates/image/detail/image_card.html:61
 msgid "CMI"
 msgstr "CMI"
 
-#: models.py:1406
+#: models.py:1410
 msgid "Latitude of the first Central Meridian."
 msgstr "Breitengrad des ersten, zentralen Meridians."
 
-#: models.py:1414 templates/image/detail/image_card.html:64
+#: models.py:1418 templates/image/detail/image_card.html:64
 msgid "CMII"
 msgstr "CMII"
 
-#: models.py:1415
+#: models.py:1419
 msgid "Latitude of the second Central Meridian."
 msgstr "Breitengrad des 2. zentralen Meridians."
 
-#: models.py:1423 templates/image/detail/image_card.html:67
+#: models.py:1427 templates/image/detail/image_card.html:67
 msgid "CMIII"
 msgstr "CMIII"
 
-#: models.py:1424
+#: models.py:1428
 msgid "Latitude of the third Central Meridian."
 msgstr "Breitengrad des dritten zentralen Meridians."
 
-#: models.py:1432 templates/image/detail/image_card.html:70
+#: models.py:1436 templates/image/detail/image_card.html:70
 msgid "Seeing"
 msgstr "Seeing"
 
-#: models.py:1433
+#: models.py:1437
 msgid "Your estimation of the seeing, on a scale from 1 to 5."
 msgstr "Geschätztes Seeing auf einer Skala von 1 bis 5."
 
-#: models.py:1439 templates/image/detail/image_card.html:73
+#: models.py:1443 templates/image/detail/image_card.html:73
 msgid "Transparency"
 msgstr "Transparenz"
 
-#: models.py:1440
+#: models.py:1444
 msgid "Your estimation of the transparency, on a scale from 1 to 10."
 msgstr "Geschätzte Transparenz auf einer Skala von 1 bis 10."
 
-#: models.py:1446 templates/image/detail/image_card.html:49
+#: models.py:1450 templates/image/detail/image_card.html:49
 msgid "Time"
 msgstr "Uhrzeit"
 
-#: models.py:1447
+#: models.py:1451
 msgid "Please use the following format: hh:mm."
 msgstr "Bitte das Format hh:mm verwenden."
 
-#: models.py:1478
+#: models.py:1482
 msgid "Request from"
 msgstr "Anfrage von"
 
-#: models.py:1490
+#: models.py:1494
 msgid "Additional information"
 msgstr "Zusätzliche Angaben"
 
-#: models.py:1491
+#: models.py:1495
 msgid "TIFF/FITS"
 msgstr "TIFF/FITS"
 
-#: models.py:1492
+#: models.py:1496
 msgid "Higher resolution"
 msgstr "Höhere Auflösung"
 
-#: models.py:1524
+#: models.py:1528
 #, fuzzy
 msgid "Real name"
 msgstr "Richtiger Name"
 
-#: models.py:1525
+#: models.py:1529
 msgid "If present, your real name will be used throughout the website."
 msgstr ""
 "Wenn vorhanden, wird dein richtiger Name wird auf der Webseite verwendet."
 
-#: models.py:1539
+#: models.py:1543
 msgid "Job"
 msgstr "Beruf"
 
-#: models.py:1546
+#: models.py:1550
 msgid "Hobbies"
 msgstr "Hobbys"
 
-#: models.py:1550
+#: models.py:1554
 msgid "Do you have any hobbies other than astrophotography?"
 msgstr "Hast Du neben der Astrofotografie noch andere Hobbys?"
 
-#: models.py:1557
+#: models.py:1561
 msgid "Timezone"
 msgstr "Zeitzone"
 
-#: models.py:1558
+#: models.py:1562
 msgid ""
 "By selecting this, you will see all the dates on AstroBin in your timezone."
 msgstr ""
 "Durch diese Auswahl werden alle Zeitangaben auf AstroBin deiner Zeitzone "
 "entsprechend angezeigt."
 
-#: models.py:1563
+#: models.py:1567
 msgid "About you"
 msgstr "Über Dich"
 
-#: models.py:1564
+#: models.py:1568
 msgid "Write something about yourself. HTML tags are allowed."
 msgstr "Beschreibe Dich kurz. HTML-Tags sind erlaubt."
 
-#: models.py:1572
+#: models.py:1576
 msgid "Company name"
 msgstr "Firmenname"
 
-#: models.py:1573
+#: models.py:1577
 msgid "The name of the company you represent on AstroBin."
 msgstr "Die Firma, die du auf AstroBin vertrittst."
 
-#: models.py:1579
+#: models.py:1583
 msgid "Company description"
 msgstr "Firmenbeschreibung"
 
-#: models.py:1580
+#: models.py:1584
 msgid ""
 "A short description of the company you represent on AstroBin. You can use "
 "some <a href=\"/faq/#comments\">formatting rules</a>."
@@ -2249,91 +2258,91 @@ msgstr ""
 "Kurze Beschreibung der Firma, die du auf AstroBin repräsentierst. Du kannst  "
 "<a href=\"/faq/#comments\">Formatierungen</a> verwenden."
 
-#: models.py:1588
+#: models.py:1592
 msgid "Company website"
 msgstr "Firmenwebseite"
 
-#: models.py:1589
+#: models.py:1593
 msgid "The website of the company you represent on AstroBin."
 msgstr "Die Webseite, der Firma, die du auf AstroBin repräsentierst."
 
-#: models.py:1593
+#: models.py:1597
 msgid "Country of operation"
 msgstr "Vertriebsland"
 
-#: models.py:1618 templates/maintenance_base.html:316
+#: models.py:1622 templates/maintenance_base.html:316
 #: templates/profile-edit-menu.html:42
 msgid "Default license"
 msgstr "Standard Lizenz"
 
-#: models.py:1620
+#: models.py:1624
 msgid ""
 "The license you select here is automatically applied to all your new images."
 msgstr "Diese Lizenz wird automatisch allen Deinen neuen Bildern hinzugefügt."
 
-#: models.py:1653
+#: models.py:1657
 msgid "Language"
 msgstr "Sprache"
 
-#: models.py:1699
+#: models.py:1703
 msgid "A descriptive name, e.g. 'Home observatory' or 'Mount Whitney'."
 msgstr "Beschreibender Name, z.B. \"Heimsternwarte\" oder \"Watzmann\"."
 
-#: models.py:1705
+#: models.py:1709
 msgid "City"
 msgstr "Stadt"
 
-#: models.py:1706
+#: models.py:1710
 msgid "If this location is not in a city, use the name of the closest city."
 msgstr ""
 "Wenn dieser Standort außerhalb einer Stadt liegt, bitte die nächstgelegene "
 "Stadt angeben."
 
-#: models.py:1712
+#: models.py:1716
 msgid "State or province"
 msgstr "Bundesland"
 
-#: models.py:1717
+#: models.py:1721
 msgid "Country"
 msgstr "Land"
 
-#: models.py:1734
+#: models.py:1738
 msgid "North"
 msgstr "Norden"
 
-#: models.py:1734
+#: models.py:1738
 msgid "South"
 msgstr "Süden"
 
-#: models.py:1735
+#: models.py:1739
 msgid "North or south"
 msgstr "Nördlich oder südlich"
 
-#: models.py:1750
+#: models.py:1754
 msgid "East"
 msgstr "Osten"
 
-#: models.py:1750
+#: models.py:1754
 msgid "West"
 msgstr "Westen"
 
-#: models.py:1751
+#: models.py:1755
 msgid "East or West"
 msgstr "Ost oder west"
 
-#: models.py:1755
+#: models.py:1759
 msgid "Altitude"
 msgstr "Höhe"
 
-#: models.py:1756
+#: models.py:1760
 msgid "In meters."
 msgstr "In Metern."
 
-#: models.py:1838
+#: models.py:1842
 msgid "The name of the website or app that wishes to use the APIs."
 msgstr "Name der Webseite oder App, die die APIs verwenden soll."
 
-#: models.py:1846
+#: models.py:1850
 msgid ""
 "Please explain the purpose of your application, and how you intend to use "
 "the API."
@@ -2341,63 +2350,63 @@ msgstr ""
 "Bitte beschreibe die Funktionalität deines Programms sowie die beabsichtigte "
 "Nutzung der API."
 
-#: models.py:1957
+#: models.py:1961
 msgid "AUD - Australian dollars"
 msgstr "AUD - Australian dollars"
 
-#: models.py:1958
+#: models.py:1962
 msgid "CAD - Canadian dollars"
 msgstr "CAD - Canadian dollars"
 
-#: models.py:1959
+#: models.py:1963
 msgid "CHF - Swiss francs"
 msgstr "CHF - Schweizer Franken"
 
-#: models.py:1960
+#: models.py:1964
 msgid "EUR - Euros"
 msgstr "EUR - Euro"
 
-#: models.py:1961
+#: models.py:1965
 msgid "GPB - Pound stelings"
 msgstr "GBP - Britische Pfund"
 
-#: models.py:1962
+#: models.py:1966
 msgid "PLN - Polish zloty"
 msgstr "PLN - Polnische Zloty"
 
-#: models.py:1963
+#: models.py:1967
 msgid "SEK - Swedish krona"
 msgstr "SEK - Swedische Kronen"
 
-#: models.py:1964
+#: models.py:1968
 msgid "USD - American dollars"
 msgstr "USD - Amerikanische Dollar"
 
-#: models.py:1970 models.py:2020
+#: models.py:1974 models.py:2024
 msgid "Producer"
 msgstr "Produzent"
 
-#: models.py:1981 models.py:2063
+#: models.py:1985 models.py:2067
 msgid "The link to this product's page on your website."
 msgstr "Der Link zu deiner Produktseite."
 
-#: models.py:1989
+#: models.py:1993
 msgid "Price"
 msgstr "Preis"
 
-#: models.py:1997
+#: models.py:2001
 msgid "Currency"
 msgstr "Währung"
 
-#: models.py:2013
+#: models.py:2017
 msgid "Retailed gear items"
 msgstr "Verkaufte Artikel"
 
-#: models.py:2029
+#: models.py:2033
 msgid "Proper make"
 msgstr "Eigentlicher Hersteller"
 
-#: models.py:2030
+#: models.py:2034
 msgid ""
 "Sometimes, product make/brand/producer/developer names are not written "
 "properly by the users. Write here the proper make/brand/producer/developer "
@@ -2407,11 +2416,11 @@ msgstr ""
 "richtig geschrieben worden. Nenne hier den richtigen Produkt-, Hersteller-, "
 "Entwicklernamen."
 
-#: models.py:2037
+#: models.py:2041
 msgid "Proper name"
 msgstr "Richtiger Name"
 
-#: models.py:2038
+#: models.py:2042
 msgid ""
 "Sometimes, product names are not written properly by the users. Write here "
 "the proper product name, not including the make/brand/producer/developer "
@@ -2423,7 +2432,7 @@ msgstr ""
 "oder Entwicklernamen hinein.<br/> Es wird empfohlen, möglichst viele Artikel "
 "zu gruppieren. Versuch also einen möglichst generischen Namen zu finden."
 
-#: models.py:2046
+#: models.py:2050
 msgid ""
 "The official, commercial image for this product. Upload an image via the "
 "regular uploading interface, set its subject type to \"Gear\", and then "
@@ -2435,16 +2444,16 @@ msgstr ""
 "Liste aus. Wenn du verschiedene Versionen hoch lädst, erscheinen diese auch "
 "auf der Artikel Seite."
 
-#: models.py:2054
+#: models.py:2058
 msgid "Tagline"
 msgstr "Untertitel"
 
-#: models.py:2055
+#: models.py:2059
 msgid ""
 "A memorable phrase that will sum up this product, for marketing purposes."
 msgstr "Ein Marketingspruch, der dieses Produkt zusammenfasst."
 
-#: models.py:2070
+#: models.py:2074
 msgid ""
 "Here you can write the full commercial description of your product. You can "
 "use some <a href=\"/faq/#comments\">formatting rules</a>."
@@ -2452,7 +2461,7 @@ msgstr ""
 "Kommerzielle Beschreibung deines Produktes. Du kannst <a href=\"/faq/"
 "#comments\">Formatierungen</a> verwenden."
 
-#: models.py:2089
+#: models.py:2093
 msgid "Commercial gear items"
 msgstr "gewerbliche Artikel"
 
@@ -2464,28 +2473,28 @@ msgstr "Keine Resultate."
 msgid "Matching items:"
 msgstr "Passende Einträge:"
 
-#: settings.py:588
+#: settings.py:590
 #, fuzzy
 msgid "Remove from bookmarks"
 msgstr "Als Favorit löschen"
 
-#: settings.py:589
+#: settings.py:591
 msgid "Bookmark"
-msgstr ""
+msgstr "Lesezeichen"
 
-#: settings.py:594 settings.py:596
+#: settings.py:596 settings.py:598
 msgid "Unlike"
 msgstr ""
 
-#: settings.py:595 settings.py:597
+#: settings.py:597 settings.py:599
 msgid "Like"
 msgstr ""
 
-#: settings.py:602
+#: settings.py:604
 msgid "Stop following"
 msgstr "Entfolgen"
 
-#: settings.py:603
+#: settings.py:605
 msgid "Follow"
 msgstr "Folgen"
 
@@ -3704,11 +3713,11 @@ msgstr "Bestenliste"
 msgid "User"
 msgstr "Benutzer"
 
-#: templates/leaderboard.html:25 templates/base/user_links_entries.html:112
+#: templates/leaderboard.html:25 templates/base/user_links_entries.html:122
 msgid "AstroBin index"
 msgstr "AstroBin Index"
 
-#: templates/leaderboard.html:30 templates/base/user_links_entries.html:115
+#: templates/leaderboard.html:30 templates/base/user_links_entries.html:125
 #: templates/user/profile-subnav.html:85
 #, fuzzy
 msgid "Followers"
@@ -3768,31 +3777,31 @@ msgstr "Kontakt"
 
 #: templates/maintenance_base.html:228 templates/upload.html:7
 #: templates/upload.html.py:20 templates/upload.html:36
-#: templates/avatar/change.html:38 templates/base/user_links_entries.html:127
+#: templates/avatar/change.html:38 templates/base/user_links_entries.html:137
 #: templates/image/detail/modals/upload_revision.html:17
 #: templates/index/root.html:151
 msgid "Upload"
 msgstr "Hochladen"
 
 #: templates/maintenance_base.html:231
-#: templates/base/user_links_entries.html:130
+#: templates/base/user_links_entries.html:140
 msgid "My places"
 msgstr "Meine Seiten"
 
 #: templates/maintenance_base.html:237 templates/wall.html:135
-#: templates/base/user_links_entries.html:136
+#: templates/base/user_links_entries.html:146
 #: templates/user/profile-subnav.html:20
 msgid "Commercial products"
 msgstr "gewerbliche Produkte"
 
 #: templates/maintenance_base.html:245
-#: templates/base/user_links_entries.html:144 templates/popover/user.html:30
+#: templates/base/user_links_entries.html:154 templates/popover/user.html:30
 #: templates/user/profile-subnav.html:28
 msgid "Gallery"
 msgstr "Galerie"
 
 #: templates/maintenance_base.html:251 templates/wall.html:48
-#: templates/base/user_links_entries.html:150
+#: templates/base/user_links_entries.html:160
 #: templates/inclusion_tags/search_image_list.html:44
 #: templates/inclusion_tags/search_image_list.html:97
 #: templates/user/profile-subnav.html:42
@@ -3800,25 +3809,25 @@ msgid "Bookmarks"
 msgstr ""
 
 #: templates/maintenance_base.html:257
-#: templates/base/user_links_entries.html:156
+#: templates/base/user_links_entries.html:166
 #: templates/user/profile-subnav.html:48
 #: templates/user/profile/commercial/products.html:209
 msgid "Plots"
 msgstr "Aufnahmepunkte"
 
 #: templates/maintenance_base.html:265
-#: templates/base/user_links_entries.html:181 templates/messages/inbox.html:9
+#: templates/base/user_links_entries.html:191 templates/messages/inbox.html:9
 msgid "My messages"
 msgstr "Meine Nachrichten"
 
 #: templates/maintenance_base.html:271
-#: templates/base/user_links_entries.html:187
+#: templates/base/user_links_entries.html:197
 #: templates/user/profile-subnav.html:70
 msgid "API Keys"
 msgstr "API-Keys"
 
 #: templates/maintenance_base.html:275
-#: templates/base/user_links_entries.html:194
+#: templates/base/user_links_entries.html:204
 msgid "My settings"
 msgstr "Meine Einstellungen"
 
@@ -3843,29 +3852,29 @@ msgid "Avatar"
 msgstr "Profilbild"
 
 #: templates/maintenance_base.html:335
-#: templates/base/user_links_entries.html:201 templates/user/profile.html:90
+#: templates/base/user_links_entries.html:211 templates/user/profile.html:90
 #: templates/user/profile.html.py:93
 msgid "Logout"
 msgstr "Ausloggen"
 
 #: templates/maintenance_base.html:348 templates/maintenance_base.html:349
-#: templates/base/user_links_entries.html:99
+#: templates/base/user_links_entries.html:109
 msgid "Notifications"
 msgstr "Benachrichtigungen"
 
 #: templates/maintenance_base.html:360
-#: templates/base/user_links_entries.html:245
+#: templates/base/user_links_entries.html:255
 msgid "Have an invite? Login!"
 msgstr "Wurdest Du eingeladen? Bitten anmelden!"
 
 #: templates/maintenance_base.html:362
-#: templates/base/user_links_entries.html:247
+#: templates/base/user_links_entries.html:257
 #: templates/registration/activation_complete.html:7
 msgid "Login"
 msgstr "Anmelden"
 
 #: templates/maintenance_base.html:368
-#: templates/base/user_links_entries.html:253
+#: templates/base/user_links_entries.html:263
 #: templates/registration/login.html:15
 msgid "Register"
 msgstr "Registrieren"
@@ -4413,33 +4422,33 @@ msgstr ""
 msgid "AstroBin Raw Data"
 msgstr "AstroBin ist sozial!"
 
-#: templates/base/user_links_entries.html:79
+#: templates/base/user_links_entries.html:89
 msgid "Help with translations!"
 msgstr "Helfe mit beim Übersetzen!"
 
-#: templates/base/user_links_entries.html:87
+#: templates/base/user_links_entries.html:97
 msgid "Please select your language from the options above."
 msgstr "Bitte aus den obenstehenden Optionen die Sprache auswählen."
 
-#: templates/base/user_links_entries.html:165
+#: templates/base/user_links_entries.html:175
 #: templates/user/profile-subnav.html:35
 msgid "Raw data library"
 msgstr ""
 
-#: templates/base/user_links_entries.html:172
+#: templates/base/user_links_entries.html:182
 msgid "Private shared folders"
 msgstr ""
 
-#: templates/base/user_links_entries.html:216
+#: templates/base/user_links_entries.html:226
 msgid "Would you like to start using your real name on AstroBin?"
 msgstr ""
 
-#: templates/base/user_links_entries.html:221
+#: templates/base/user_links_entries.html:231
 #: templates/image/detail/modals/send_to_sharedfolder.html:49
 msgid "OK"
 msgstr ""
 
-#: templates/base/user_links_entries.html:227
+#: templates/base/user_links_entries.html:237
 msgid "No, tranks"
 msgstr ""
 
@@ -6263,20 +6272,12 @@ msgstr ""
 "unter folgender URL: %(object_url)s"
 
 #: templates/notification/rawdata_posted_image_to_public_pool/notice.html:2
+#: templates/notification/rawdata_posted_image_to_public_pool/short.html:2
 #, fuzzy, python-format
 msgid ""
 "<a href=\"%(pool_url)s\"><strong>%(user_name)s</strong> has added a new "
 "processed image to the public data pool: <strong>\"%(pool_name)s.\"</"
 "strong></a>"
-msgstr ""
-"<a href=\"%(url)s\"><strong>%(user)s</strong> hat eine Diskussion zu einem "
-"Teil deiner Ausrüstung gestartet.</a>"
-
-#: templates/notification/rawdata_posted_image_to_public_pool/short.html:2
-#, fuzzy, python-format
-msgid ""
-"<a href=\"%(pool_url)s\"><strong>%(user_name)s</strong> has added a new "
-"processed image to the public data pool: <strong>\"%(pool_name)s.\"</a>"
 msgstr ""
 "<a href=\"%(url)s\"><strong>%(user)s</strong> hat eine Diskussion zu einem "
 "Teil deiner Ausrüstung gestartet.</a>"
@@ -7086,6 +7087,14 @@ msgstr ""
 #: templates/user/profile/edit/retailer.html:6
 msgid "Edit your retailer information"
 msgstr "Deine Händlernformationen bearbeiten"
+
+#, fuzzy
+#~ msgid ""
+#~ "<a href=\"%(pool_url)s\"><strong>%(user_name)s</strong> has added a new "
+#~ "processed image to the public data pool: <strong>\"%(pool_name)s.\"</a>"
+#~ msgstr ""
+#~ "<a href=\"%(url)s\"><strong>%(user)s</strong> hat eine Diskussion zu "
+#~ "einem Teil deiner Ausrüstung gestartet.</a>"
 
 #, fuzzy
 #~ msgid ""

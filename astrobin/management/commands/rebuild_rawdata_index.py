@@ -20,7 +20,7 @@ class Command(BaseCommand):
             print "User not found."
             return
 
-        images = RawImage.objects.filter(user = user)
+        images = RawImage.objects.filter(user = user, indexed = False)
         for i in images:
             try:
                 index_raw_image(i.id)

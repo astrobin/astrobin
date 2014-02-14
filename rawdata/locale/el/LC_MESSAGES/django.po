@@ -7,8 +7,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2013-12-22 07:42+0000\n"
-"PO-Revision-Date: 2012-12-29 19:25+0100\n"
+"POT-Creation-Date: 2014-02-03 11:20+0000\n"
+"PO-Revision-Date: 2014-01-23 17:31+0000\n"
 "Last-Translator: kookoo_gr <kookoo_gr@yahoo.com>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
 "Language: el\n"
@@ -16,7 +16,8 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=(n != 1);\n"
-"X-Generator: Pootle 2.1.6\n"
+"X-Generator: Pootle 2.5.0\n"
+"X-POOTLE-MTIME: 1390498300.150626\n"
 
 #: folders.py:82 models.py:215 models.py:283
 #: templates/rawdata/privatesharedfolder_detail.html:84
@@ -135,6 +136,8 @@ msgid ""
 "You don't have any free space on AstroBin Rawdata. Consider upgrading your "
 "account."
 msgstr ""
+"Δεν έχετε αρκετό ελεύθερο χώρο στα Ανεπεξέργαστα Δεδομένα του AstroBin. "
+"Εξετάστε την αναβάθμιση του λογαριασμού σας."
 
 #: signal_handlers.py:18
 msgid ""
@@ -1016,13 +1019,12 @@ msgid "Please refresh this page in a few seconds."
 msgstr "Παρακαλώ ανανεώστε την σελίδα σε μερικά δευτερόλεπτα."
 
 #: templates/rawdata/uploader.html:4 templates/rawdata/uploader.html.py:8
-#, fuzzy
 msgid "AstroBin Raw Data Uploader"
-msgstr "Ανεπεξέργαστα Δεδομένα του AstroBin"
+msgstr "Ανέβασμα Ανεπεξέργαστων Δεδομένων του AstroBin"
 
 #: templates/rawdata/uploader.html:10
 msgid "A desktop client"
-msgstr ""
+msgstr "Ένα desktop client"
 
 #: templates/rawdata/uploader.html:19
 msgid ""
@@ -1031,6 +1033,10 @@ msgid ""
 "and\n"
 "                reasonably recent Linux distributions."
 msgstr ""
+"Το <strong>Ανέβασμα Ανεπεξέργαστων Δεδομένων του AstroBin</strong>\n"
+"                είναι ένα πρόγραμμα επιφάνειας εργασίας συμβατό με τα "
+"Windows XP, Windows 7, και\n"
+"                με σχετικά πρόσφατες διανομές του Linux."
 
 #: templates/rawdata/uploader.html:24
 msgid ""
@@ -1040,6 +1046,11 @@ msgid ""
 "                them in the root directory that you can specify in the\n"
 "                settings."
 msgstr ""
+"Είναι ένα πρόγραμμα το οποίο λειτουργεί στο υπόβαθρο\n"
+"                και ανεβάζει τα αρχεία ανεπεξέργαστων δεδομένων στο "
+"AstroBin, βρίσκοντας\n"
+"                τες στο κεντρικό φάκελο που μπορείτε να ορίσετε στις\n"
+"                ρυθμίσεις."
 
 #: templates/rawdata/uploader.html:30
 msgid ""
@@ -1051,21 +1062,25 @@ msgid ""
 "                will just know that your data is being safely backed up on\n"
 "                <strong>AstroBin Raw Data</strong>."
 msgstr ""
+"Με το <strong>Ανέβασμα Ανεπεξέργαστων Δεδομένων του AstroBin</strong>\n"
+"                δεν χρειάζετε να ανεβάσετε τα αρχεία ανεπεξέργαστων "
+"δεδομένων χειροκίνητα, έτσι\n"
+"                μπορείτε να το εγκαταστήσετε, να το ρυθμίσετε και να το "
+"ξεχάσετε!\n"
+"                θα ξέρετε ότι τα δεδομένα σας θα είναι ασφαλή στα\n"
+"                <strong>Ανεπεξέργαστα Δεδομένα του AstroBin</strong>."
 
 #: templates/rawdata/uploader.html:43
-#, fuzzy
 msgid "Download for:"
-msgstr "Κατέβασμα"
+msgstr "Κατέβασμα για:"
 
 #: templates/rawdata/uploader.html:62 templates/rawdata/uploader.html.py:67
 #: templates/rawdata/uploader.html:77
-#, fuzzy
 msgid "Download for"
-msgstr "Κατέβασμα"
+msgstr "Κατέβασμα για"
 
 #: templates/rawdata/uploader.html:63 templates/rawdata/uploader.html.py:68
 #: templates/rawdata/uploader.html:78
-#, fuzzy
 msgid "Coming soon"
 msgstr "Σύντομα κοντά σας!"
 

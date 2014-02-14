@@ -7,8 +7,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2013-12-22 07:43+0000\n"
-"PO-Revision-Date: 2013-11-01 23:49+0100\n"
+"POT-Creation-Date: 2014-02-03 11:21+0000\n"
+"PO-Revision-Date: 2014-01-29 01:49+0000\n"
 "Last-Translator: Bufot <bufote@hotmail.com>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
 "Language: ca\n"
@@ -16,7 +16,8 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=(n != 1);\n"
-"X-Generator: Pootle 2.1.6\n"
+"X-Generator: Pootle 2.5.0\n"
+"X-POOTLE-MTIME: 1390960156.180486\n"
 
 #: templates/nested_comments/nestedcomment_app.html:23
 #: templates/nested_comments/nestedcomment_app.html:138
@@ -31,7 +32,6 @@ msgstr "Afegir comentari"
 
 #: templates/nested_comments/nestedcomment_app.html:43
 #: templates/nested_comments/nestedcomment_app.html:177
-#, fuzzy
 msgid ""
 "Please <a href=\"/accounts/login/\">login</a> or <a href=\"/accounts/"
 "register/\">register</a> to leave a comment.</p>"
