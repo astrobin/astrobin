@@ -8,6 +8,9 @@ SUBSCRIPTION_NAMES = (
     'Luna',
     'Sol',
     'Galaxia',
+
+    'test_subscription',
+    'test_subscription_empty',
 )
 
 
