@@ -141,7 +141,6 @@ NOTICE_TYPES = (
 
 def create_notice_types(app, created_models, verbosity, **kwargs):
     for notice_type in NOTICE_TYPES:
-        print "Creating notice: %s" % notice_type[0]
         notification.create_notice_type(notice_type[0],
                                         notice_type[1],
                                         notice_type[2],
