@@ -46,6 +46,7 @@ def setup_data(testcase):
         user = testcase.subscribed_user,
         subscription = testcase.subscription,
         cancelled = False)
+
     testcase.user_subscription_2 = UserSubscription.objects.create(
         user = testcase.subscribed_user_2,
         subscription = testcase.subscription,
