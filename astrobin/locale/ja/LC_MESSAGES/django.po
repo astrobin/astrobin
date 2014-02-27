@@ -8,7 +8,7 @@ msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2014-02-12 07:30+0000\n"
-"PO-Revision-Date: 2014-02-16 00:35+0000\n"
+"PO-Revision-Date: 2014-02-27 11:03+0000\n"
 "Last-Translator: ohmishonin <kasuzen@gmail.com>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
 "Language: ja\n"
@@ -17,7 +17,7 @@ msgstr ""
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=(n != 1);\n"
 "X-Generator: Pootle 2.5.0\n"
-"X-POOTLE-MTIME: 1392510900.5934\n"
+"X-POOTLE-MTIME: 1393499028.546951\n"
 
 #: fields.py:10
 msgid "United Kingdom"
@@ -1045,16 +1045,16 @@ msgid ""
 "if the watermark will appear on the dark sky background, 50 if on some "
 "bright object."
 msgstr ""
-"0は見えないを意味し、100は完全に不透明を意味します。推奨値は以下のとおりです。10だと、ウオーターマーク（著作権表記）は暗い背景でも表示されます。5"
-"0だと、明るい天体上でも表示されます。"
+"0は透明を意味し、100は完全に不透明を意味します。推奨値は以下のとおりです。10だと、著作権表記は暗い背景でも表示されます。50だと、明るい天体上でも"
+"表示されます。"
 
 #: forms.py:104
 msgid "If you want to watermark this image, you must specify some text."
-msgstr "この画像にウオーターマーク（著作権表示）を望むのであれば、テキストを入力する必要があります。"
+msgstr "この画像に著作権表示を望むのであれば、テキストを入力する必要があります。"
 
 #: forms.py:131 forms.py:367 models.py:752
 msgid "Imaging telescopes or lenses"
-msgstr "撮影用望遠鏡もしくはレンズ"
+msgstr "撮像した望遠鏡もしくはレンズ"
 
 #: forms.py:132 models.py:753
 msgid "Guiding telescopes or lenses"
@@ -1062,11 +1062,11 @@ msgstr "ガイド鏡またはレンズ"
 
 #: forms.py:133 forms.py:227 models.py:754 models.py:1607 views.py:2153
 msgid "Mounts"
-msgstr "マウント"
+msgstr "赤道儀"
 
 #: forms.py:134 forms.py:368 models.py:755
 msgid "Imaging cameras"
-msgstr "撮像用カメラ"
+msgstr "撮像したカメラ"
 
 #: forms.py:135 models.py:756
 msgid "Guiding cameras"
@@ -1086,11 +1086,11 @@ msgstr "フィルター"
 
 #: forms.py:139 forms.py:232 models.py:760 models.py:1612 views.py:2157
 msgid "Accessories"
-msgstr "アクセサリー"
+msgstr "アクセサリ"
 
 #: forms.py:161
 msgid "If you have a personal website, put the address here."
-msgstr "あなたが個人サイトを持っているのであれば、ここにそのURLを記入してください"
+msgstr "あなたが個人サイトを持っているのであれば、ここにそのURLを記入してください。"
 
 #: forms.py:171 models.py:1536
 msgid "Website"
@@ -1104,15 +1104,15 @@ msgstr "あなたが所持しているガイド鏡を含む全ての望遠鏡や
 
 #: forms.py:204
 msgid "Your DSLRs, CCDs, planetary cameras and guiding cameras go here."
-msgstr "デジタルスチルカメラやCCDカメラ、惑星撮影用カメラ、ガイド用カメラをここに記入してください。"
+msgstr "デジタルカメラやCCDカメラ、惑星撮影用カメラ、ガイド用カメラをここに記入してください。"
 
 #: forms.py:217
 msgid ""
 "Hint: enter your filters separately! If you enter, for instance, LRGB in one "
 "box, you won't be able to add separate acquisition sessions for them."
 msgstr ""
-"各々のフィルターを記入してください。もしLRGB用のフィルターホイールを記入する場合には、さらにそれぞれのフィルターを追加することはできませんので、個別"
-"にフィルターを記入してください。"
+"各々のフィルターを記入してください。もし、LRGB用のフィルターホイールボックスの場合には、あとでフィルターを追加することはできませんので、ここで個別に"
+"フィルターを記入してください。"
 
 #: forms.py:226 models.py:1606 views.py:2151
 msgid "Telescopes and lenses"
@@ -1165,19 +1165,19 @@ msgstr "カメラのタイプ"
 
 #: forms.py:309 forms.py:314
 msgid "Express value in mm"
-msgstr ""
+msgstr "値をmmで表す"
 
 #: forms.py:320 forms.py:325
 msgid "Express value in &mu;m"
-msgstr ""
+msgstr "値を&mu;mで表す"
 
 #: forms.py:332 forms.py:337 forms.py:565 forms.py:610 forms.py:651
 msgid "Please use the following format: yyyy-mm-dd"
-msgstr "年月日の形式を使ってください"
+msgstr "yyyy-mm-ddの形式を使ってください"
 
 #: forms.py:341 forms.py:345
 msgid "Express value in hours"
-msgstr ""
+msgstr "値を時間で表す"
 
 #: forms.py:357 models.py:773 templates/image/detail/info.html:27
 #: templates/image/detail/info.html:28 templates/search/search.html:239
@@ -1191,7 +1191,7 @@ msgstr "天体名や望遠鏡、レンズ、カメラ、フィルターなどで
 
 #: forms.py:366 models.py:684
 msgid "Main solar system subject"
-msgstr "主となる太陽系の題材"
+msgstr "メインの太陽系の題材"
 
 #: forms.py:369
 msgid "Min. telescope aperture"
@@ -1203,15 +1203,15 @@ msgstr "最大口径"
 
 #: forms.py:371
 msgid "Acquired after"
-msgstr "以降に取得した"
+msgstr "後で撮影"
 
 #: forms.py:372
 msgid "Acquired before"
-msgstr "以前に取得した"
+msgstr "以前に撮影"
 
 #: forms.py:373
 msgid "Min. integration"
-msgstr "合計分数"
+msgstr "最小露出時間"
 
 #: forms.py:374
 msgid "Max. integration"
@@ -1239,15 +1239,15 @@ msgstr "緯度 (秒)"
 
 #: forms.py:533
 msgid "Longitude (degrees)"
-msgstr "経度（度）"
+msgstr "経度 (度)"
 
 #: forms.py:538
 msgid "Longitude (minutes)"
-msgstr "経度（分）"
+msgstr "経度 (分)"
 
 #: forms.py:544
 msgid "Longitude (seconds)"
-msgstr "経度（秒）"
+msgstr "経度 (秒)"
 
 #: forms.py:566 forms.py:611 forms.py:652 models.py:1250 models.py:1463
 #: templates/image/detail/image_card.html:46
@@ -1256,11 +1256,11 @@ msgstr "日付"
 
 #: forms.py:572
 msgid "Please enter a value between 1 and 5."
-msgstr "1〜5の値を入力してください。"
+msgstr "1〜5の間の値を入力してください。"
 
 #: forms.py:579
 msgid "Please enter a value between 1 and 10."
-msgstr "1〜10の値を入力してください。"
+msgstr "1〜10の間の値を入力してください。"
 
 #: forms.py:640 forms.py:658
 msgid "The date cannot be in the future."
@@ -1282,11 +1282,11 @@ msgstr "未来の日付を入力することはできません。"
 #: templates/user/profile/commercial/products.html:38
 #: templates/user/profile/commercial/products.html:120
 msgid "Make"
-msgstr "メーカー"
+msgstr "製造者"
 
 #: forms.py:893 forms.py:954 models.py:188
 msgid "The make, brand, producer or developer of this product."
-msgstr "この製品のメーカー名やブランド名、製造者や開発者の名前"
+msgstr "この製品の製造者名やブランド名、開発者の名前。"
 
 #: forms.py:898 forms.py:959 models.py:195 models.py:1702 models.py:1841
 #: templates/gear/fix.html:32 templates/gear/fix.html.py:33
@@ -1314,19 +1314,19 @@ msgstr "結合"
 msgid ""
 "Use this field to mark that the item you are claiming really is the same "
 "product (or a variation thereof) of something you have claimed before."
-msgstr "本当にあなたが前に主張しているものと同じ製品（またはその変形）であることを示すために、このフィールドを使用します。"
+msgstr "あなたが前に主張しているものと同じ製品 (またはその変形) であることを示すために、このフィールドを使用します。"
 
 #: forms.py:918 forms.py:981
 #, python-format
 msgid ""
 "You can't create more than %d claims. Consider upgrading your affiliation!"
-msgstr ""
+msgstr "あなたは%d以上の主張をすることはできません。あなたのアフィリエイトプログラムをアップグレードすることを考えてください。"
 
 #: forms.py:929 forms.py:1000
 msgid ""
 "Use this field to mark that the item you are merging really is the same "
 "product (or a variation thereof) of something you have claimed before."
-msgstr "あなたがマージしたアイテムが、本当にあなたが前に主張しているものと同じ製品（またはその変形）であることを示すために、この項目を使用します。"
+msgstr "あなたがマージしたアイテムが、本当にあなたが前に主張しているものと同じ製品 (またはその変形) であることを示すために、この項目を使用します。"
 
 #: forms.py:989
 msgid "You have already claimed this product."
@@ -1346,43 +1346,43 @@ msgstr "本文"
 
 #: locale_extras.py:7
 msgid "uploaded a new image"
-msgstr "新しい画像をアップロードしました"
+msgstr "新しい画像をアップロードした"
 
 #: locale_extras.py:8
 msgid "uploaded a new revision of"
-msgstr "修正版をアップロードしました"
+msgstr "修正版をアップロードした"
 
 #: locale_extras.py:9
 msgid "commented on image"
-msgstr "イメージにコメントされました"
+msgstr "イメージにコメントされた"
 
 #: locale_extras.py:10
 msgid "commented on gear item"
-msgstr "機材品にコメントされました"
+msgstr "機材にコメントされた"
 
 #: locale_extras.py:11
 msgid "bookmarked"
-msgstr "ブックマークされました"
+msgstr "ブックマークされた"
 
 #: locale_extras.py:12
 msgid "likes"
-msgstr "Likeされました"
+msgstr "Likeされた"
 
 #: locale_extras.py:13
 msgid "has written a review on"
-msgstr "レビューが記入されました"
+msgstr "レビューが記入された"
 
 #: locale_extras.py:14
 msgid "created a new public data pool"
-msgstr "新しい公開データ領域が作られました"
+msgstr "新しい公開データ領域が作られた"
 
 #: locale_extras.py:15
 msgid "added new data to public data pool"
-msgstr "新しい共有データ領域が追加されました"
+msgstr "新しい公開データ領域が追加された"
 
 #: locale_extras.py:16
 msgid "added a new processed image to public data pool"
-msgstr "共有データ領域に新しい処理済み画像が追加されました"
+msgstr "公開データ領域に新しい処理済み画像が追加された"
 
 #: models.py:68
 msgid "None (All rights reserved)"
@@ -1390,11 +1390,11 @@ msgstr "無し (All rights reserved)"
 
 #: models.py:69
 msgid "Attribution-NonCommercial-ShareAlike Creative Commons"
-msgstr "表示 - 非営利 - 継承 Creative Commons"
+msgstr "表示-非営利-継承 Creative Commons"
 
 #: models.py:70
 msgid "Attribution-NonCommercial Creative Commons"
-msgstr "表示- 非営利 Creative Commons"
+msgstr "表示-非営利 Creative Commons"
 
 #: models.py:71
 msgid "Attribution-NonCommercial-NoDerivs Creative Commons"
@@ -1575,8 +1575,8 @@ msgid ""
 "customizations. Try to use the international name, in English language, if "
 "applicable. This name is shared among all users on AstroBin."
 msgstr ""
-"装飾や個人的にカスタマイズを施すことなく本製品の名前だけ記入してください。その場合、英語や国際的な名前を使用してみてください。この名前はAstroBin"
-"上のすべてのユーザーの間で共有されます。"
+"装飾や個人的にカスタマイズを施すことなく本製品の名前だけ記入してください。その場合、英語といった国際的な名前を使用してみてください。この名前はAstro"
+"Bin上のすべてのユーザーの間で共有されます。"
 
 #: models.py:359
 msgid "Alias"
@@ -1764,7 +1764,7 @@ msgstr "ピクセルサイズ"
 
 #: models.py:506
 msgid "(in &mu;m)"
-msgstr ""
+msgstr "(&mu;m)"
 
 #: models.py:514 templates/popover/gear_camera.html:19
 msgid "Sensor width"
@@ -1776,7 +1776,7 @@ msgstr "センサーサイズ高"
 
 #: models.py:540 templates/search/search.html:330
 msgid "&mu;m"
-msgstr ""
+msgstr "&mu;m"
 
 #: models.py:553
 msgid "Open source or freeware"
@@ -1896,7 +1896,7 @@ msgstr "画像の主とする題材が太陽系のものであるのであれば
 #: models.py:694
 msgid ""
 "Drag items from the right side to the left side, or click on the plus sign."
-msgstr "右側から左側にメモリをドラッグするか、＋ボタンをクリックしてください。"
+msgstr "右側から左側にツマミをドラッグするか、＋ボタンをクリックしてください。"
 
 #: models.py:700 models.py:1849 models.py:2075 templates/gear/page.html:47
 #: templates/image/detail/image_description.html:7
@@ -1909,7 +1909,7 @@ msgstr "HTMLタグは許可されています。"
 
 #: models.py:738
 msgid "Apply watermark to image"
-msgstr "ウオーターマーク（著作権表記）を画像に適用"
+msgstr "著作権表記を画像に適用"
 
 #: models.py:742 templates/leaderboard.html:20
 msgid "Position"
@@ -1930,19 +1930,19 @@ msgstr "画像"
 
 #: models.py:1275
 msgid "1 - Excellent dark-site sky (BLACK)"
-msgstr "1 - 特に暗い場所の空(真っ黒)"
+msgstr "1 - 特に暗い場所の空 (真っ黒)"
 
 #: models.py:1276
 msgid "2 - Typical truly dark site (GRAY)"
-msgstr "2 - 暗い夜空(グレー)"
+msgstr "2 - 暗い夜空 (グレー)"
 
 #: models.py:1277
 msgid "3 - Rural sky (BLUE)"
-msgstr "3 - 青みがかった背景(ブルー)"
+msgstr "3 - 青みがかった背景 (ブルー)"
 
 #: models.py:1278
 msgid "4 - Rural/suburban transition (GREEN/YELLOW)"
-msgstr "4 - 農村／郊外の夜空(グリーン／イエロー)"
+msgstr "4 - 農村／郊外の夜空 (グリーン／イエロー)"
 
 #: models.py:1279
 msgid "5 - Suburban sky (ORANGE)"
@@ -1990,7 +1990,7 @@ msgstr "露出時間"
 
 #: models.py:1308
 msgid "Duration of each sub-frame, in seconds."
-msgstr "それぞれの撮影フレームの露出時間秒"
+msgstr "それぞれの撮影フレームの露出秒。"
 
 #: models.py:1311
 msgid "ISO"
@@ -2006,7 +2006,7 @@ msgstr "冷却センサー"
 
 #: models.py:1322
 msgid "The temperature of the chip. E.g.: -20."
-msgstr "センサーチップ温度（例えば-20）"
+msgstr "センサーチップ温度（例えば-20）。"
 
 #: models.py:1325 views.py:648
 msgid "Darks"
@@ -2014,7 +2014,7 @@ msgstr "ダーク"
 
 #: models.py:1327
 msgid "The number of dark frames."
-msgstr "ダークフレームの枚数"
+msgstr "ダークフレームの枚数。"
 
 #: models.py:1330 views.py:649
 msgid "Flats"
@@ -2022,7 +2022,7 @@ msgstr "フラット"
 
 #: models.py:1332
 msgid "The number of flat frames."
-msgstr "フラットフレームの枚数"
+msgstr "フラットフレームの枚数。"
 
 #: models.py:1335 views.py:650
 msgid "Flat darks"
@@ -2030,7 +2030,7 @@ msgstr "フラットダーク"
 
 #: models.py:1337
 msgid "The number of dark flat frames."
-msgstr "フラットダーク撮影の枚数"
+msgstr "フラットダーク撮影の枚数。"
 
 #: models.py:1340 views.py:651
 msgid "Bias"
@@ -2038,11 +2038,11 @@ msgstr "バイアス"
 
 #: models.py:1342
 msgid "The number of bias/offset frames."
-msgstr "バイアス撮影の枚数"
+msgstr "バイアス撮影の枚数。"
 
 #: models.py:1345 views.py:654
 msgid "Bortle Dark-Sky Scale"
-msgstr "ボートルの夜空の暗さ指数"
+msgstr "ボートルのダークスカイ指数"
 
 #: models.py:1349
 msgid ""
@@ -2050,7 +2050,7 @@ msgid ""
 "Bortle_Dark-Sky_Scale\" target=\"_blank\">the Bortle Scale</a>."
 msgstr ""
 "<a href=\"http://en.wikipedia.org/wiki/Bortle_Dark-Sky_Scale\" "
-"target=\"_blank\">ボートル指数</a> に従った値"
+"target=\"_blank\">ボートルのダークスカイ指数</a> に従った夜空のクオリティ。"
 
 #: models.py:1353
 msgid "Mean mag/arcsec^2"
@@ -2058,7 +2058,7 @@ msgstr "平均 mag/arcsec^2"
 
 #: models.py:1354
 msgid "As measured with your Sky Quality Meter."
-msgstr "あなたのSky Quality Meter（SQM）の測定値"
+msgstr "あなたのSky Quality Meter（SQM）の測定値。"
 
 #: models.py:1359 views.py:656
 msgid "Mean FWHM"
@@ -2070,7 +2070,7 @@ msgstr "気温"
 
 #: models.py:1367
 msgid "Ambient temperature (in Centigrade degrees)."
-msgstr "周囲の温度（摂氏）"
+msgstr "周囲の気温 (摂氏)。"
 
 #: models.py:1388
 msgid "Number of frames"
@@ -2078,7 +2078,7 @@ msgstr "撮影枚数（撮影フレーム数）"
 
 #: models.py:1389
 msgid "The total number of frames you have stacked."
-msgstr "スタック（コンポジット）に利用した全撮影枚数（撮影フレーム数）"
+msgstr "スタック（コンポジット）に利用した全撮影枚数（撮影フレーム数）。"
 
 #: models.py:1393 templates/image/detail/image_card.html:55
 msgid "FPS"
@@ -2092,7 +2092,7 @@ msgstr "フレーム数/秒"
 msgid ""
 "The focal length of the whole optical train, including barlow lenses or "
 "other components."
-msgstr "バーローレンズやその他のコンポーネントを含む全光学列の焦点距離。"
+msgstr "バーローレンズやその他のコンポーネントを含む全光学系の焦点距離。"
 
 #: models.py:1409 templates/image/detail/image_card.html:61
 msgid "CMI"
@@ -2100,7 +2100,7 @@ msgstr "CMI"
 
 #: models.py:1410
 msgid "Latitude of the first Central Meridian."
-msgstr "本初子午線の経度"
+msgstr "本初子午線の経度。"
 
 #: models.py:1418 templates/image/detail/image_card.html:64
 msgid "CMII"
@@ -2108,7 +2108,7 @@ msgstr "CMII"
 
 #: models.py:1419
 msgid "Latitude of the second Central Meridian."
-msgstr "第2子午線の経度"
+msgstr "第2子午線の経度。"
 
 #: models.py:1427 templates/image/detail/image_card.html:67
 msgid "CMIII"
@@ -2116,7 +2116,7 @@ msgstr "CMIII"
 
 #: models.py:1428
 msgid "Latitude of the third Central Meridian."
-msgstr "第3子午線の経度"
+msgstr "第3子午線の経度。"
 
 #: models.py:1436 templates/image/detail/image_card.html:70
 msgid "Seeing"
@@ -2124,7 +2124,7 @@ msgstr "シーイング"
 
 #: models.py:1437
 msgid "Your estimation of the seeing, on a scale from 1 to 5."
-msgstr "あなたが見積もったシーイング（1〜5の間の整数を記入）"
+msgstr "あなたが見積もったシーイング（1〜5の間の整数を記入）。"
 
 #: models.py:1443 templates/image/detail/image_card.html:73
 msgid "Transparency"
@@ -2132,7 +2132,7 @@ msgstr "透明度"
 
 #: models.py:1444
 msgid "Your estimation of the transparency, on a scale from 1 to 10."
-msgstr "あなたが見積もった透明度（1〜10の間の整数を記入）"
+msgstr "あなたが見積もった透明度（1〜10の間の整数を記入）。"
 
 #: models.py:1450 templates/image/detail/image_card.html:49
 msgid "Time"
@@ -2164,7 +2164,7 @@ msgstr "本名"
 
 #: models.py:1529
 msgid "If present, your real name will be used throughout the website."
-msgstr "もし記入をするのであれば、あなたの本名をAstroBin全体でつかうことになります。"
+msgstr "もし記入をするのであれば、あなたの本名をAstroBin全体で使われます。"
 
 #: models.py:1543
 msgid "Job"
@@ -2176,7 +2176,7 @@ msgstr "趣味"
 
 #: models.py:1554
 msgid "Do you have any hobbies other than astrophotography?"
-msgstr "天体写真以外の趣味はありますか？"
+msgstr "天体写真以外の趣味はありますか?"
 
 #: models.py:1561
 msgid "Timezone"
@@ -2185,7 +2185,7 @@ msgstr "タイムゾーン"
 #: models.py:1562
 msgid ""
 "By selecting this, you will see all the dates on AstroBin in your timezone."
-msgstr "もし選択するのであれば、あなたの選択したタイムゾーンがAstroBinでは利用されます。"
+msgstr "それ選択した場合には、AstroBinでは、全てそのタイムゾーンでの日付になります。"
 
 #: models.py:1567
 msgid "About you"
@@ -2193,7 +2193,7 @@ msgstr "あなたについて"
 
 #: models.py:1568
 msgid "Write something about yourself. HTML tags are allowed."
-msgstr "あなた自身について何かかいてください。HTMLタグは利用できます。"
+msgstr "あなた自身について何かかいてください。HTMLタグが利用できます。"
 
 #: models.py:1576
 msgid "Company name"
@@ -2201,7 +2201,7 @@ msgstr "会社名"
 
 #: models.py:1577
 msgid "The name of the company you represent on AstroBin."
-msgstr "AstroBinで表示するあなたの会社名"
+msgstr "AstroBinで表示するあなたの会社名。"
 
 #: models.py:1583
 msgid "Company description"
@@ -2220,7 +2220,7 @@ msgstr "会社のWebサイトのURL"
 
 #: models.py:1593
 msgid "The website of the company you represent on AstroBin."
-msgstr "AstroBin上であなたが表示する会社のWebサイトURL"
+msgstr "AstroBin上であなたが表示する会社のWebサイトURL。"
 
 #: models.py:1597
 msgid "Country of operation"
@@ -2234,7 +2234,7 @@ msgstr "デフォルトのライセンス"
 #: models.py:1624
 msgid ""
 "The license you select here is automatically applied to all your new images."
-msgstr "全ての新しい画像に、自動的に選択したライセンスを適用します。"
+msgstr "全ての新しい画像に、選択したライセンスを自動的に適用します。"
 
 #: models.py:1657
 msgid "Language"
@@ -2242,7 +2242,7 @@ msgstr "言語"
 
 #: models.py:1703
 msgid "A descriptive name, e.g. 'Home observatory' or 'Mount Whitney'."
-msgstr "別名（ベランダ撮影や光が丘など）"
+msgstr "別名（ベランダ撮影や光が丘など）。"
 
 #: models.py:1709
 msgid "City"
@@ -2250,7 +2250,7 @@ msgstr "市区町村"
 
 #: models.py:1710
 msgid "If this location is not in a city, use the name of the closest city."
-msgstr "この場所が町ではない場合、最も近隣の町の名前を使ってください。"
+msgstr "この場所に地名が無い場合、最も近隣の町の名前を使ってください。"
 
 #: models.py:1716
 msgid "State or province"
@@ -2258,7 +2258,7 @@ msgstr "都道府県"
 
 #: models.py:1721
 msgid "Country"
-msgstr "国"
+msgstr "国名"
 
 #: models.py:1738
 msgid "North"
@@ -2290,11 +2290,11 @@ msgstr "高度"
 
 #: models.py:1760
 msgid "In meters."
-msgstr "メートル"
+msgstr "メートル。"
 
 #: models.py:1842
 msgid "The name of the website or app that wishes to use the APIs."
-msgstr "そのWebサイトの名前もしくはAPIを利用することを望むアプリケーションの名前をいれてください。"
+msgstr "ウエブサイトの名前もしくはAPIを利用するアプリケーションの名前"
 
 #: models.py:1850
 msgid ""
@@ -2352,7 +2352,7 @@ msgstr "通貨"
 
 #: models.py:2019
 msgid "Retailed gear items"
-msgstr "販売されている製品"
+msgstr "販売機材"
 
 #: models.py:2035
 msgid "Proper make"
@@ -2364,7 +2364,7 @@ msgid ""
 "properly by the users. Write here the proper make/brand/producer/developer "
 "name."
 msgstr ""
-"時々、メーカー名やブランド名、製作者名、開発者名を利用者が正確に記載していないことがあります。正確にブランド名、製作者名、開発者名を記入してください。"
+"時々、メーカー名やブランド名、製作者名、開発者名をユーザーが正確に記載していないことがあります。正確にブランド名、製作者名、開発者名を記入してください。"
 
 #: models.py:2043
 msgid "Proper name"
@@ -2377,8 +2377,8 @@ msgid ""
 "name.<br/>It is recommended that you try to group as many items as possible, "
 "so try to use a generic version of your product's name."
 msgstr ""
-"時々、製品名を正確に記載しない利用者がいます。ここにはメーカー名やブランド名、製作者名、開発者名を含まない正式な製品名を記載してください。<br/>出来"
-"るだけ多くの製品をグループ化し、製品の一般的な名称をつかっていただくようになることを試みようとしています。"
+"時々、製品名を正確に記載しないユーザーがいます。ここにはメーカー名やブランド名、製作者名、開発者名を含まない正式な製品名を記載してください。<br/>出"
+"来るだけ多くの製品をグループ化し、製品の一般的な名称を使ってもらおうと試みています。"
 
 #: models.py:2052
 msgid ""
@@ -2397,7 +2397,7 @@ msgstr "タグライン"
 #: models.py:2061
 msgid ""
 "A memorable phrase that will sum up this product, for marketing purposes."
-msgstr "販売目的のために製品についていた記憶にのこるフレーズ（キャッチコピー）"
+msgstr "販売目的のために製品についていた記憶にのこるフレーズ（キャッチコピー）。"
 
 #: models.py:2076
 msgid ""
@@ -2405,11 +2405,11 @@ msgid ""
 "use some <a href=\"/faq/#comments\">formatting rules</a>."
 msgstr ""
 "ここには、あなたの製品の商業的な説明を記載することができます。それには、<a "
-"href=\"/faq/#comments\">フォーマット</a>を利用することが可能です。"
+"href=\"/faq/#comments\">フォーマットルール</a>を利用することが可能です。"
 
 #: models.py:2095
 msgid "Commercial gear items"
-msgstr "商業的な機材品"
+msgstr "商業的な機材"
 
 #: search.py:50 templates/image/actions/bring_to_attention.html:32
 msgid "No results. Sorry."
@@ -2562,13 +2562,13 @@ msgstr "問題の報告をいただき、ありがとうございました。全
 #: views.py:937 views.py:2597
 msgid ""
 "Invalid image or no image provided. Allowed formats are JPG, PNG and GIF."
-msgstr "無効な画像もしくは画像がありませんでした。JPGやPNG、GIF形式が利用可能です。"
+msgstr "無効な画像もしくは画像が存在しませんでした。JPGやPNG、GIF形式が利用可能です。"
 
 #: views.py:941 views.py:2608 templates/user/profile/flickr_import.html:10
 msgid ""
 "AstroBin is currently in read-only mode, because of server maintenance. "
 "Please try again soon!"
-msgstr "現在、サーバーをメンテナンス中で、AstroBinは閲覧しかできない状態です。時間が経ってから、もう一度きてください。"
+msgstr "現在、サーバーをメンテナンス中で、AstroBinは閲覧しかできない状態です。時間が経ってから、もう一度きてください!"
 
 #: views.py:964 views.py:2628
 msgid ""
@@ -2598,15 +2598,15 @@ msgstr "修正版を削除しました。"
 
 #: views.py:1596
 msgid "No date specified"
-msgstr "日付が指定されていません。"
+msgstr "日付未指定"
 
 #: views.py:1618 views.py:1679
 msgid "No imaging telescopes or lenses, or no imaging cameras specified"
-msgstr "撮影した望遠鏡かレンズ、カメラが指定されていません。"
+msgstr "撮影した望遠鏡かレンズ、カメラが未指定"
 
 #: views.py:1619
 msgid "Gear images"
-msgstr "機材の画像"
+msgstr "機材画像"
 
 #: views.py:1644 templates/image/edit/acquisition.html:81
 msgid "Deep sky"
@@ -2622,7 +2622,7 @@ msgstr "題材が未指定"
 
 #: views.py:1680
 msgid "No acquisition details specified"
-msgstr "取得詳細が指定されていません。"
+msgstr "撮影詳細が未指定"
 
 #: views.py:1709 views.py:3086 templatetags/tags.py:77
 msgid "minutes"
@@ -2657,7 +2657,7 @@ msgstr "平均露出時間"
 msgid ""
 "There was one or more errors processing the form. You may need to scroll "
 "down to see them."
-msgstr "フォーム画面でいくつかのエラーが発生しました。画面をスクロールして、それを確認してください。"
+msgstr "フォームの処理で、いくつかのエラーが発生しました。画面をスクロールして、それを確認してください。"
 
 #: views.py:2651
 msgid "Image uploaded. Thank you!"
@@ -2677,19 +2677,19 @@ msgstr "デフォルトのフロントページを変更しました。"
 
 #: management/__init__.py:15
 msgid "You have a new follower"
-msgstr "新しいフォロアーが加わりました。"
+msgstr "新しいフォロアーが加わりました"
 
 #: management/__init__.py:21
 msgid "New image from a user you follow"
-msgstr "フォローしているユーザーが新しい画像を投稿しました。"
+msgstr "フォローしているユーザーが新しい画像を投稿しました"
 
 #: management/__init__.py:27
 msgid "Image brought to your attention"
-msgstr "画像があなたの注意をひきました。"
+msgstr "画像があなたの注意をひきました"
 
 #: management/__init__.py:33
 msgid "New image revision from a user you follow"
-msgstr "あなたのフォロアーが修正版を投稿しました。"
+msgstr "あなたのフォロアーが修正版を投稿しました"
 
 #: management/__init__.py:39
 msgid "Your image was plate-solved"
@@ -2705,11 +2705,11 @@ msgstr "Astrobinは新しいブログのエントリーを出力しました"
 
 #: management/__init__.py:57
 msgid "Your image received a new comment"
-msgstr "あなたの画像に新しいコメントが投稿されました。"
+msgstr "あなたの画像に新しいコメントが投稿されました"
 
 #: management/__init__.py:63
 msgid "There was a reply to your comment"
-msgstr "あなたのコメントに返信がありました。"
+msgstr "あなたのコメントに返信がありました"
 
 #: management/__init__.py:69
 msgid "Your image was bookmarked"
@@ -2729,7 +2729,7 @@ msgstr "あなたがフォローしている題材に新しいイメージが追
 
 #: management/__init__.py:93
 msgid "Your API Key request has been approved"
-msgstr "あなたのAPI Keyのリクエストが許可されました"
+msgstr "あなたのAPIキーのリクエストが許可されました"
 
 #: management/__init__.py:99
 msgid "New discussion about a gear item you own"
@@ -2741,23 +2741,23 @@ msgstr "あなたの持っている機材の新しいレビューが投稿され
 
 #: management/__init__.py:111
 msgid "New data posted to public pool"
-msgstr "共有領域に新しいデータが追加されました。"
+msgstr "公開領域に新しいデータが追加された"
 
 #: management/__init__.py:117
 msgid "New image posted to public data pool"
-msgstr "共有データ領域に新しい画像が追加されました。"
+msgstr "公開領域に新しい画像が追加された"
 
 #: management/__init__.py:123
 msgid "New data posted to shared private folder"
-msgstr "共有個人フォルダに新しいデータが追加されました。"
+msgstr "非公開共有フォルダに新しいデータが追加された"
 
 #: management/__init__.py:129
 msgid "New image posted to shared private folder"
-msgstr "共有個人フォルダに新しい画像が追加されました。"
+msgstr "非公開共有フォルダに新しい画像が追加された"
 
 #: management/__init__.py:135
 msgid "You are invited to a shared private folder"
-msgstr "共有個人フォルダに招待されました。"
+msgstr "非公開共有フォルダに招待された"
 
 #: templates/403.html:4 templates/403.html.py:7
 msgid "You are not allowed to see this page."
@@ -2771,7 +2771,7 @@ msgstr "すみません、あなたが探しているページをみつける事
 
 #: templates/500.html:11
 msgid "Fatal error"
-msgstr "重大なエラーが発生しました"
+msgstr "重大なエラーが発生"
 
 #: templates/500.html:13
 msgid "Nothing to worry about, it's not your fault."
@@ -2783,7 +2783,7 @@ msgid ""
 "details, so we will try to fix the problem as soon as possible. Sorry about "
 "the inconvenience! "
 msgstr ""
-"例外が発生しました！我々は技術的な詳細をメールで受け取る事によって、それを出来るだけ早く解決するでしょう。不便をおかけして申し訳けございませんでした。"
+"例外が発生しました！我々は技術的な詳細をメールで受け取る事によって、それを出来るだけ早く解決するでしょう。不便をおかけして申し訳けございませんでした!"
 
 #: templates/500.html:21
 msgid "Go back to the hom page."
@@ -2825,7 +2825,7 @@ msgstr "アフィリエイト"
 
 #: templates/affiliates.html:13
 msgid "The following companies support AstroBin."
-msgstr "以下の会社はAstobinをサポートしています。"
+msgstr "以下の会社はAstoBinをサポートしています。"
 
 #: templates/app_api_key_request.html:5 templates/app_api_key_request.html:8
 msgid "Request an API key"
@@ -2849,7 +2849,7 @@ msgstr "リクエストを送信後、あなたは24時間以内に返事を受�
 msgid ""
 "Please make sure you have read the section about APIs in the <a href="
 "\"%(tos_url)s\">Terms of Service</a>."
-msgstr " <a href=\"%(tos_url)s\">利用規約</a>のAPIについての記載を必ず読んでください。"
+msgstr "<a href=\"%(tos_url)s\">利用規約</a>のAPIについての記載を必ず読んでください。"
 
 #: templates/app_api_key_request.html:20 templates/gear/page.html:112
 #: templates/registration/password_change_form.html:12
@@ -3044,7 +3044,7 @@ msgid ""
 "other as many times as you want!"
 msgstr ""
 "公開エリアはフィニッシュした画像に利用します。お気に入りのフォーラムでフィードバックを受け取ったあとでステージングエリアから公開エリアに画像を移動するこ"
-"とができます。公開エリアとステーイングエリアを何度も往復できることも忘れないようにしてくださいね。"
+"とができます。公開エリアとステージングエリアを何度も往復できることも忘れないようにしてくださいね。"
 
 #: templates/faq.html:83
 msgid ""
@@ -3054,9 +3054,9 @@ msgid ""
 "to Internet Forums, often with little or no data, or to general purpose "
 "image hosting websites, invariably with no data attached."
 msgstr ""
-"インターネットというカオスの海へ大量のゴミを生み出していたように、長期間にわたって発生していたことを終わらせたいという希望をもってAstroBinは生ま"
-"れました。何年もの間、素晴らしい天体写真家たちはインターネットの掲示板に投稿してきたが、多くの場合、ほとんどもしくは全くデータが添付されていなかったり、"
-"汎用の画像ホスティングサイトを利用していた。"
+"長期間にわたってインターネットというカオスの海へ大量のゴミを生み出していたことを終わらせたいという希望をもってAstroBinは生まれました。何年もの間"
+"、素晴らしい天体写真家たちはインターネットの掲示板に投稿してきたが、多くの場合、ほとんどもしくは全くデータが添付されていなかったり、汎用の画像ホスティン"
+"グサイトを利用していました。"
 
 #: templates/faq.html:86
 msgid ""
@@ -3083,9 +3083,9 @@ msgid ""
 "become possible: you could simply upload an image of a galaxy, and AstroBin "
 "could compare it to pictures of the same galaxy taken previously."
 msgstr ""
-"AstroBinは既にスタートし、今回は本当に空には限界があると宣言することができます！すごく大きいアイデアが進行中です。利用者が増大すると、データも増"
-"大します。自動化された超新星探索のようなことが突然可能になって、あなたは簡単に銀河の画像をアップロードしたり、AstroBinで以前撮影した同じ銀河の写"
-"真と比較できるようになります。"
+"<em>AstroBin</em>は既にスタートし、いまでは夜空には限界があると本当に言うことができます！そして、すごく大きいアイデアが進行中です。利用"
+"者が増大すると、データも増大します。自動化された超新星探索のようなことが突然可能になって、あなたは簡単に銀河の画像をアップロードしたり、AstroBin"
+"で以前撮影した同じ銀河の写真と比較できるようになります。"
 
 #: templates/faq.html:99
 msgid ""
@@ -3143,7 +3143,7 @@ msgstr "フォーマットを無視"
 msgid ""
 "The AstroBin index is a function of the number of Likes and the number of "
 "images posted by a user."
-msgstr "AstroBinインデックスは利用者が投稿した画像数やLikeの数によって決定されます。"
+msgstr "AstroBinインデックスはユーザーが投稿した画像数やLikeの数によって決定されます。"
 
 #: templates/faq.html:133
 msgid ""
@@ -3151,8 +3151,8 @@ msgid ""
 "every 24 hours. The same applies for the search index, the Big Wall, and "
 "some other user data."
 msgstr ""
-"計算処理には費用がかかりますので、AstroBinインデックスは24時間ごとにアップデートされます。検索インデックスやビックウォールや利用者のデータにも"
-"適用されます。"
+"計算処理には費用がかかりますので、AstroBinインデックスは24時間ごとにアップデートされます。検索インデックスやビックウォールやユーザーのデータに"
+"も適用されます。"
 
 #: templates/faq.html:140
 msgid ""
@@ -3210,11 +3210,11 @@ msgstr ""
 
 #: templates/guidelines.html:24
 msgid "Be respectful of other users."
-msgstr "他の利用者を尊重する事。"
+msgstr "他のユーザーを尊重する事。"
 
 #: templates/guidelines.html:25
 msgid "Be nice and friendly to other users when you send them messages."
-msgstr "他の利用者とメッセージをやりとりするときには、良い感じでフレンドリーにしましょう。"
+msgstr "他のユーザーとメッセージをやりとりするときには、良い感じでフレンドリーにしましょう。"
 
 #: templates/guidelines.html:28
 msgid "What is forbidden"
@@ -3287,7 +3287,7 @@ msgstr "ヘルプ"
 #: templates/help.html:8 templates/maintenance_base.html:161
 #: templates/base/site_links.html:93 templates/index/root.html:72
 msgid "What is this site?"
-msgstr "このサイトは何ですか？"
+msgstr "このサイトとは？"
 
 #: templates/help.html:10 templates/maintenance_base.html:465
 #: templates/base/alerts.html:13 templates/index/root.html:74
@@ -3302,7 +3302,7 @@ msgid ""
 "numerous Astrophotography forums, I have found that the Internet is lacking "
 "a centralized place where astrophotographers can share their work."
 msgstr ""
-"あなたは天体写真家ですか？自分のハードワークの成果を他人に共有することは好きですか？天体写真家として、数多くの天体についての掲示板への投稿者として、私は"
+"あなたは天体写真家ですか？自分のハードな制作の成果を他人に共有することは好きですか？天体写真家として、数多くの天体についての掲示板への投稿者として、私は"
 "インターネットでは天体写真家が作業を共有し、集まれる場所が無いことを発見してしまった。"
 
 #: templates/help.html:14
@@ -3377,7 +3377,7 @@ msgid ""
 msgstr ""
 "次に撮影する画像がどのようにみえるのかを見ようとしたことはありませんか？<em>AstroBin</em>では、特定の望遠鏡、特定のCCDやカメラ、特定"
 "のフィルターで撮影された特定されたターゲットの全ての画像を検索することができます。6〜8時間露出した全ての画像についてとか、特定の月齢のものとか、それを"
-"叶えることができます。"
+"叶えることができます!"
 
 #: templates/help.html:38
 msgid ""
@@ -3395,7 +3395,7 @@ msgstr ""
 msgid ""
 "Finally, all this information is collected in interesting plots, that can "
 "help you figure out how some gear items are trending."
-msgstr "最終的には、これらすべての情報は機材のトレンドを図としてみせたりすることで、興味深い絵としてあたなに提示されます。"
+msgstr "最終的には、これらすべての情報は機材のトレンドを図としてみせたりすることで、興味深い図画として表示されます。"
 
 #: templates/help.html:45
 msgid "All the data at a glance"
@@ -3425,8 +3425,8 @@ msgid ""
 "are the astronomical objects in your image without you telling!"
 msgstr ""
 "<em>AstroBin</em>は写真をアップロードしたときにコピーをするだけでなく、ヒストグラムや白黒バージョンを自動的に生成します。それによって、"
-"淡い星雲や渦状腕を簡単にみつけられます。画像は図画化され、サイト上で注釈付きで表示されます。<em>AstroBin</em>はあなたが何も教えてくれな"
-"くても、あなたの画像のなかに、どんな天体があるかを知っています！"
+"淡い星雲や渦状腕が簡単にみつけられます。画像は図画化され、サイト上で注釈付きで表示されます。<em>AstroBin</em>はあなたが何も教えてくれな"
+"くても、あなたの画像のなかに、どんな天体があるかを知っています!"
 
 #: templates/help.html:57
 msgid "Protection from theft with automatic watermarking"
@@ -3436,7 +3436,8 @@ msgstr "自動的に著作権表示を加えることで盗難から守る"
 msgid ""
 "<em>AstroBin</em>'s upload wizard will offer you to watermark your image "
 "with the text of your choosing. All it takes is a click!"
-msgstr "AstroBinのアップロードウイザードはあなたが選んだテキストを著作権表示として画像に埋め込みます。クリックするだけ！"
+msgstr ""
+"<em>AstroBin</em>のアップロードウイザードは、あなたが選んだテキストを著作権表示として画像に埋め込みます。それもクリックするだけ!"
 
 #: templates/help.html:63
 msgid "AstroBin supports multiple image revisions"
@@ -3462,7 +3463,8 @@ msgstr "AstroBinはソーシャルだ！"
 msgid ""
 "On <em>AstroBin</em> you can message other astrophotographer, follow them "
 "and be notified when they post new images, or perform requests for more data."
-msgstr "AstroBinでは他の天体写真家にメッセージを送ったり、フォローしたり、新しい画像が投稿されたことを教えてくれたりできます。"
+msgstr ""
+"<em>AstroBin</em>では他の天体写真家にメッセージを送ったり、フォローしたり、新しい画像が投稿されたことを通知してくれたりします。"
 
 #: templates/help.html:74
 msgid ""
@@ -3486,12 +3488,12 @@ msgid ""
 msgstr ""
 "<em>AstroBin</em>が最高の画像ホスティングサービスであることを、あなたは何の疑いもなく理解しているでしょう。これは、長い間、天体写真コミ"
 "ュニティで必要としていたものです。長い間、私はインターネットに散らばっていた素晴らしい画像をみてきました。汎用的な画像ホスティングサイトや掲示板、個人の"
-"Webサイトや一時的な場所もです。それらの画像のなかには、カオスの海で無駄になるのはもったいないぐらい貴重なデータが含まれていました。AstroBinは"
-"世界中の天体写真家のホームとハブを提供しにやってきました。"
+"Webサイトや一時的な場所もです。それらの画像のなかには、カオスの海で無駄にするのはもったいないぐらい貴重なデータが含まれていました。<em>Astro"
+"Bin</em>は世界中の天体写真家の本拠地とハブを提供しているのです。"
 
 #: templates/help.html:81
 msgid "So, what are you waiting for?"
-msgstr "で、あなたは何を待ちますか？"
+msgstr "で、あなたは何を待っているのでしょう？"
 
 #: templates/help.html:82
 msgid "Sign up now!"
@@ -3523,7 +3525,7 @@ msgstr "Leaderboard"
 #: templates/inclusion_tags/search_image_list.html:122
 #: templates/user/profile-subnav.html:95
 msgid "User"
-msgstr "利用者"
+msgstr "ユーザー"
 
 #: templates/leaderboard.html:25 templates/base/user_links_entries.html:122
 msgid "AstroBin index"
@@ -3579,7 +3581,7 @@ msgstr "ステータス"
 #: templates/maintenance_base.html:173 templates/questions.html:4
 #: templates/questions.html.py:7 templates/base/site_links.html:105
 msgid "AstroBin Questions"
-msgstr "AstroBinへの質問"
+msgstr "AstroBin Questions"
 
 #: templates/maintenance_base.html:197 templates/base/site_links.html:136
 #: templates/contact_form/contact.html:5 templates/contact_form/contact.html:8
@@ -3597,7 +3599,7 @@ msgstr "アップロード"
 #: templates/maintenance_base.html:231
 #: templates/base/user_links_entries.html:140
 msgid "My places"
-msgstr "自分の位置"
+msgstr "自分の場所"
 
 #: templates/maintenance_base.html:237 templates/wall.html:135
 #: templates/base/user_links_entries.html:146
@@ -3609,7 +3611,7 @@ msgstr "商業的製品"
 #: templates/base/user_links_entries.html:154 templates/popover/user.html:30
 #: templates/user/profile-subnav.html:28
 msgid "Gallery"
-msgstr "Gallery"
+msgstr "ギャラリー"
 
 #: templates/maintenance_base.html:251 templates/wall.html:48
 #: templates/base/user_links_entries.html:160
@@ -3624,7 +3626,7 @@ msgstr "ブックマーク"
 #: templates/user/profile-subnav.html:48
 #: templates/user/profile/commercial/products.html:209
 msgid "Plots"
-msgstr "描画"
+msgstr "分析結果"
 
 #: templates/maintenance_base.html:265
 #: templates/base/user_links_entries.html:191 templates/messages/inbox.html:9
@@ -3671,7 +3673,7 @@ msgstr "ログアウト"
 #: templates/maintenance_base.html:348 templates/maintenance_base.html:349
 #: templates/base/user_links_entries.html:109
 msgid "Notifications"
-msgstr "通知メッセージ"
+msgstr "通知"
 
 #: templates/maintenance_base.html:360
 #: templates/base/user_links_entries.html:255
@@ -3721,7 +3723,7 @@ msgid ""
 "fill in all of your company details! Click <a href=\"%(the_url)s\">here</a> "
 "to do it now."
 msgstr ""
-"AstroBinに登録する製造者もしくは小売り業者は会社の詳細を記入する事がとても大切です。いますぐ<a href=\"%"
+"AstroBinに登録する製造者もしくは小売り業者の方々は会社の詳細を記入する事がとても大切です。いますぐ<a href=\"%"
 "(the_url)s\">ここを</a>クリックしてください。"
 
 #: templates/maintenance_base.html:493 templates/base/alerts.html:42
@@ -3730,7 +3732,7 @@ msgid ""
 "As a retailer on AstroBin, it's very important that you fill in your country "
 "of operation! Click <a href=\"%(the_url)s\">here</a> to do it now."
 msgstr ""
-"AstroBinに小売業者として登録する場合には、それは、あなたの国での営業にとても重要です。いますぐ<a href=\"%"
+"AstroBinに小売業者として登録することは、あなたの国での営業にとても重要です。いますぐ<a href=\"%"
 "(the_url)s\">ここを</a>クリックしてください。"
 
 #: templates/maintenance_base.html:507 templates/base/footer.html:8
@@ -3818,7 +3820,7 @@ msgid ""
 "will be explained below."
 msgstr ""
 "現在、天文についてのコミュニティにおける最も一般の形式は掲示板です。20年以上の古いコンセプトでは、大量の情報量を上手く捌くことはできないし、そのような"
-"情報を整理すると酷い仕事をしています。以下にその説明を列挙します。"
+"情報を整理すると酷い仕事になります。以下にその説明を列挙します。"
 
 #: templates/questions.html:22
 msgid "What is AstroBin Questions?"
@@ -3867,7 +3869,9 @@ msgid ""
 "an eye. This is an extreme example: what I'm trying to say is that some post "
 "replies might be objectively wrong, and this will worsen the quality of the "
 "community."
-msgstr "あ"
+msgstr ""
+"もし、私が7歳の子供のように書いても、誰もそれを修正することはできません。もし、私がコミュニケーション下手で、誰も私の質問に答えることができなかった場合"
+"、誰も私の言ったことを言い換えることはできません。私がタイプミスを沢山しても、誰もそれを修正することはできません。それは望ましくないです。"
 
 #: templates/questions.html:47
 msgid "Every user has the same importance"
@@ -3923,7 +3927,7 @@ msgstr "AstroBin Questionsのヘルプページ"
 
 #: templates/questions.html:83
 msgid "An extension of this page, as a question on AstroBin Questions"
-msgstr "このページの拡張のような、AstroBin Questionsについての質問"
+msgstr "このページを拡張するための、AstroBin Questionsについての質問"
 
 #: templates/questions.html:90
 msgid "Go to AstroBin Questions!"
@@ -3957,7 +3961,7 @@ msgstr "過去12ヶ月間の総露出時間"
 #: templates/user/plots.html.py:69
 #: templates/user/profile/commercial/products.html:214
 msgid "Please wait: the plot is loading..."
-msgstr "図画を読み込んでいますので、お待ちください"
+msgstr "分析結果を読み込んでいますので、お待ちください"
 
 #: templates/stats.html:21 templates/stats.html.py:35 templates/stats.html:51
 #: templates/stats.html.py:71 templates/stats.html:91
@@ -3971,19 +3975,19 @@ msgstr "読み込み中..."
 
 #: templates/stats.html:45
 msgid "Global distribution of camera types"
-msgstr "カメラのタイプごとの世界分布"
+msgstr "カメラのタイプの全体分布"
 
 #: templates/stats.html:65
 msgid "Global distribution of telescope types"
-msgstr "望遠鏡のタイプごとの世界分布"
+msgstr "望遠鏡のタイプの全体分布"
 
 #: templates/stats.html:87
 msgid "CCD vs DLSR: the global trend"
-msgstr "CCD vs DLSRの世界的トレンド"
+msgstr "CCD vs DLSRの全体の傾向"
 
 #: templates/stats.html:99
 msgid "Global trend of telescope types"
-msgstr "望遠鏡タイプの世界的トレンド"
+msgstr "望遠鏡タイプの全体の傾向"
 
 #: templates/tos.html:11
 msgid ""
@@ -4006,8 +4010,8 @@ msgid ""
 "It's perfect for works in progress that you want to share on Internet "
 "forums. Read more in the <a href=\"%(faq_url)s#6\">FAQ</a>."
 msgstr ""
-"ステージング領域にイメージをアップロードするために、このボタンを使用してください。あなたがインターネット掲示板に共有したいような進行中の作品に最適です。 "
-"<a href=\"%(faq_url)s#6\">FAQ</a>に詳しい記載があります。"
+"<strong>ステージング領域</strong>にイメージをアップロードするためにこのボタンを使ってください。あなたがインターネット掲示板に共有したい"
+"ような進行中の作品には最適です。 <a href=\"%(faq_url)s#6\">FAQ</a>に詳しい記載があります。"
 
 #: templates/upload.html:32
 msgid "Upload as a finished image"
@@ -4021,7 +4025,7 @@ msgid ""
 "on the home page. You can <a href=\"%(flickr_url)s\">import from Flickr</a> "
 "too."
 msgstr ""
-"公開エリアに画像をアップロードするために、このボタンを使ってください。<a href=\"%"
+"<strong>公開エリア</strong>に画像をアップロードするために、このボタンを使ってください。<a href=\"%"
 "(profile_url)s\">あなたのプロフィール</a>やホームページに表示されます。<a href=\"%"
 "(flickr_url)s\">Flickrからインポート</a>を利用することもできます。"
 
@@ -4038,7 +4042,7 @@ msgstr ""
 msgid ""
 "You have no more space left on your Raw Data account. Please delete some "
 "files to make room, or upgrade your account."
-msgstr "あなたはRawデータを保管するスペースがなくなっています。いくつかのファイルを削除するか、あなたのアカウントをアップグレードしてくｄさい。"
+msgstr "あなたはRawデータを保管するスペースがなくなっています。いくつかのファイルを削除するか、あなたのアカウントをアップグレードしてください。"
 
 #: templates/upload.html:87
 msgid "Use the button below to choose files"
@@ -4054,7 +4058,7 @@ msgstr "または、簡単にアップロードできるデスクトップクラ
 
 #: templates/upload.html:94
 msgid "Accepted file types: FIT and digital camera raw files"
-msgstr "FITとデジカメのRawファイルのファイル形式を許可しました"
+msgstr "許可されたファイル形式：FITとデジカメのRawファイル"
 
 #: templates/upload.html:98
 msgid "Filename"
@@ -4095,13 +4099,13 @@ msgstr ""
 #: templates/upload.html:165
 #, python-format
 msgid "Go to the Raw Data <a href=\"%(plans_url)s\">plans page</a>."
-msgstr "Rawデータの<a href=\"%(plans_url)s\">予約ページ</a>に行く"
+msgstr "Rawデータの<a href=\"%(plans_url)s\">計画ページ</a>に行く"
 
 #: templates/upload.html:175
 msgid ""
 "Did you know that AstroBin can host your FIT and digital camera raw files "
 "too?"
-msgstr "AstroBinがFITやデジタルカメラのRawファイルもホストすることをしっていましたか？"
+msgstr "AstroBinがFITやデジタルカメラのRawファイルもホストできることを知っていましたか？"
 
 #: templates/upload.html:178
 #, python-format
@@ -4110,8 +4114,8 @@ msgid ""
 "to safely store all your raw files, and have them neatily organized for "
 "future reference!"
 msgstr ""
-"もし、あなたの全てのRawファイルを安全に保管したいのであれば、AstroBin Raw "
-"Dataをみてください。そして、それらは今後の参照のためにきちんと整理されています。"
+"もし、あなたの全てのRawファイルを安全に保管したいのであれば、<a href=\"%(rawdata_url)s\">AstroBin Raw "
+"Data</a>をみてください。そこでは、それらは今後の参照のためにきちんと整理されています!"
 
 #: templates/upload.html:269
 msgid "Raw files"
@@ -4254,7 +4258,7 @@ msgstr "OK"
 
 #: templates/base/user_links_entries.html:237
 msgid "No, tranks"
-msgstr ""
+msgstr "No, tranks"
 
 #: templates/commercial/products/edit.html:7
 #: templates/commercial/products/edit.html:10
@@ -4523,7 +4527,7 @@ msgid ""
 "be notified of your review."
 msgstr ""
 "レビューを書く時には公正、誠実かつ丁寧にお願いします。多くの人々はあなたのレビューを読むでしょう。おなじ機材を所有するAstroBinの全ての利用者に、"
-"あなたのレビューがあったことを通知しされます。"
+"あなたのレビューがあったことを通知されます。"
 
 #: templates/gear/page.html:105
 msgid ""
@@ -4531,7 +4535,7 @@ msgid ""
 "register/\">register</a> to write a review."
 msgstr ""
 "レビューを書くには<a href=\"/accounts/login/\">ログイン</a>もしくは<a "
-"href=\"/accounts/register/\">新規登録</a>をしてください。"
+"href=\"/accounts/register/\">新規登録</a>してください。"
 
 #: templates/gear/page.html:122
 msgid ""
@@ -4548,7 +4552,7 @@ msgid ""
 "register/\">register</a> to leave a comment."
 msgstr ""
 "コメントを残すには<a href=\"/accounts/login/\">ログイン</a>もしくは<a "
-"href=\"/accounts/register/\">新規登録</a>をしてください。"
+"href=\"/accounts/register/\">新規登録</a>してください。"
 
 #: templates/gear/page.html:144
 msgid "Buy it here"
@@ -4588,7 +4592,7 @@ msgstr "表示"
 
 #: templates/image/full.html:75 templates/image/detail/image_card.html:10
 msgid "Technical card"
-msgstr "技術データ"
+msgstr "Technical card"
 
 #: templates/image/full.html:82
 msgid "Fit to window"
@@ -4629,7 +4633,7 @@ msgstr "完了!"
 
 #: templates/image/actions/bring_to_attention_complete.html:9
 msgid "The image was brought to the attention of the selected users."
-msgstr "画像は選ばれた利用者の注目を得ました。"
+msgstr "選ばれた利用者の注目を画像は得ました。"
 
 #: templates/image/actions/request_additional_information_complete.html:5
 msgid "Additional information requested"
@@ -4727,10 +4731,11 @@ msgid ""
 "revisions, <a href=\"%(promote_url)s\">promote it</a> to the <a href="
 "\"%(profile_url)s\">Public Area</a>."
 msgstr ""
-"この画像は、あなたの<a href=\"%(profile_url)s?staging\">ステージング領域</a>で作業進行中です。これは、あなたが彼らに"
-"下の共有メニューにあるリンクのどれかをクリックしない限り、誰もそれを見る事ができないことを意味します。インターネット掲示板に画像を投稿するリンクとしたり"
-"、それにフィードバックをもらったりすることにつかえます。何回かの修正をしたあとであなたが満足したタイミングで<a href=\"%"
-"(profile_url)s\">公開エリア</a>でそれを<a href=\"%(promote_url)s\">宣伝する</a>でしょう。"
+"この画像は、あなたの<a href=\"%(profile_url)s?staging\">ステージング領域</a>で<strong>作業進行中</stro"
+"ng>です。これは、あなたが下の<em>共有</em>メニューにあるリンクのどれかをクリックしない限り、誰もそれを見る事ができないことを意味します。イン"
+"ターネット掲示板に画像を投稿するためのリンクや、それにフィードバックをもらったりすることに使えます。何回かの修正をしたあとで、あなたが満足したタイミング"
+"に<a href=\"%(profile_url)s\">公開エリア</a>で、それを<a href=\"%"
+"(promote_url)s\">宣伝する</a>ことができます。"
 
 #: templates/image/detail/menu/actions.html:7 templates/messages/inbox.html:30
 #: templates/user/profile/commercial/products.html:43
@@ -4780,7 +4785,7 @@ msgstr "公開データ領域に送る"
 #: templates/image/detail/menu/actions.html:85
 #: templates/image/detail/modals/send_to_sharedfolder.html:7
 msgid "Send to private shared folder"
-msgstr "個人共有フォルダに送る"
+msgstr "非公開共有フォルダに送る"
 
 #: templates/image/detail/menu/actions.html:95
 msgid "Delete original image"
@@ -4803,7 +4808,7 @@ msgstr "問題のあるサムネイルにフラグを立てる"
 
 #: templates/image/detail/menu/actions.html:125
 msgid "Bring to a user's attention"
-msgstr "利用者の注目を得る"
+msgstr "ユーザーの注目を得る"
 
 #: templates/image/detail/menu/share.html:6
 #: templates/image/detail/modals/share.html:7
@@ -4860,14 +4865,16 @@ msgid ""
 "We're really sorry, but liking an image requires an AstroBin index of "
 "<strong>%(min_index_to_like)s</strong> or greater."
 msgstr ""
+"ほんとうに申し訳ありません。しかし、画像をLikeするにはAstroBinインデックスが<strong>%"
+"(min_index_to_like)s</strong>以上必要です。"
 
 #: templates/image/detail/modals/cant_like.html:16
 msgid ""
 "Such limitation improves the website as a whole by discouraging people from "
 "creating fake accounts to like their own images. Thank you for understanding!"
 msgstr ""
-"このWebサイトの人々を自分の画像にLikeするフェイクアカウントを生成するようなことで落胆させることを、その制限で改善できます。理解をしてくれてありが"
-"とう!"
+"自分の画像にLikeするフェイクアカウントを生成するようなことで、このWebサイトの人々を落胆させることを、その制限で改善できます。理解をしてくれてあり"
+"がとう!"
 
 #: templates/image/detail/modals/cant_like.html:20
 #, python-format
@@ -4916,13 +4923,13 @@ msgstr "このイメージとすべての修正版のすべてのサムネイル
 
 #: templates/image/detail/modals/like_this.html:8
 msgid "The following people like this image"
-msgstr "フォローしている人々はこの画像にLikeしてます"
+msgstr "フォローしている人々はこの画像にLikeしました"
 
 #: templates/image/detail/modals/send_to_datapool.html:11
 msgid ""
 "If this image is the result of your processing of a public data pool, you "
 "can send it the pool so it's displayed there."
-msgstr "この画像は公開データ領域のあなたの処理の結果であるのであれば、ここに表示されている画像をその領域に送ることができます。"
+msgstr "この画像はデータ公開領域のあなたの処理の結果であれば、ここに表示されている画像をその領域に送ることができます。"
 
 #: templates/image/detail/modals/send_to_datapool.html:16
 msgid "Use this form to select an existing <strong>public data pool</strong>."
@@ -4938,7 +4945,7 @@ msgstr "このアクションを実行する同意を<a href=\"%(rawdata_url)s\"
 
 #: templates/image/detail/modals/send_to_datapool.html:29
 #: templates/image/detail/modals/send_to_sharedfolder.html:40
-#, fuzzy, python-format
+#, python-format
 msgid ""
 "The <a href=\"%(rawdata_url)s\">Raw Data Platform</a> is primarily a way to "
 "securely back up your raw files, and keep them neatly and effortlessly "
@@ -4946,15 +4953,14 @@ msgid ""
 "perhaps contribute your raw files to scientic discoveries."
 msgstr ""
 "<a href=\"%(rawdata_url)s\">Raw Data Platform</a>はRawデータファイルを安全にバックアップし、キチンと保管"
-"され、効果的に整理される一つの方法です。しかし、し、あなたがAstroBinをサポートすることを意味することから離れていくし、あなたのRawファイルが科"
-"学的発見に貢献できるかもしれません。"
+"され、効果的に整理できる唯一の方法です。しかし、あなたがAstroBinをサポートすることを、それが一部でも意味するのであれば、あなたのRawファイルが"
+"科学的発見に貢献できるかもしれません。"
 
 #: templates/image/detail/modals/send_to_sharedfolder.html:11
-#, fuzzy
 msgid ""
 "If this image is the result of your processing of a private shared folder, "
 "you can send it the folder so it's displayed there."
-msgstr "もし、このイメージが個人のシェアフォルタの自分の処理の結果でであれば、あなたはそれを表示するためにそれをそのフォルダーに送る事ができる。"
+msgstr "もし、このイメージがあなたの非公開共有フォルタでのあなたの処理結果であれば、あなたはそれを表示するためにそれをそのフォルダーに送る事ができる。"
 
 #: templates/image/detail/modals/send_to_sharedfolder.html:17
 msgid ""
@@ -5044,7 +5050,7 @@ msgid ""
 "Is this too much data for you to handle? Go to the <a class=\"button\" href="
 "\"%(basic_form_url)s?edit_type=deep_sky&advanced=false\">basic form</a>."
 msgstr ""
-"これは、あなたにとってとても多いデータであるのであれば、<a class=\"button\" href=\"%"
+"これは、あなたが扱うのに大量のデータであるのであれば、<a class=\"button\" href=\"%"
 "(basic_form_url)s?edit_type=deep_sky&advanced=false\">基本情報登録</a>に行ってください。"
 
 #: templates/image/edit/acquisition.html:38
@@ -5136,6 +5142,10 @@ msgid ""
 "\"_blank\" href=\"http://www.creativecommons.org/\">Creative Commons "
 "website</a>."
 msgstr ""
+"もしあなたが望むのであれば、あなたのコンテンツをクリエイティブコモンズライセンスに関係させることができ、確かな環境化であなたの作品を使う権利を人々に認め"
+"ることができます。詳しく知るためには、<a target=\"_blank\" "
+"href=\"http://www.creativecommons.org/\">Creative Commons "
+"website</a>に訪問してください。"
 
 #: templates/image/edit/license.html:15
 #, python-format
@@ -5143,6 +5153,7 @@ msgid ""
 "Remember that you can change your default license <a href="
 "\"%(change_default_url)s\">here</a>."
 msgstr ""
+"<a href=\"%(change_default_url)s\">ここで</a>、あなたのデフォルトライセンスを変更できることを覚えておいてください。"
 
 #: templates/image/edit/menu.html:6
 msgid "Basic Information"
@@ -5241,7 +5252,9 @@ msgid ""
 "This search found results of multiple types. If you want, you can refine "
 "your search using the <strong>Search type</strong> field in the "
 "<strong>Basic criteria</strong> box."
-msgstr "複数のタイプの検索結果がみつかりました。望むのであれば、基本標準の検索タイプ項目を使って、あなたの検索結果をリファインすることができます。"
+msgstr ""
+"複数のタイプの検索結果がみつかりました。望むのであれば、<strong>基本形式</strong>の<strong>検索タイプ</strong>フィール"
+"ドを使って、あなたの検索結果をリファインすることができます。"
 
 #: templates/inclusion_tags/search_image_list.html:40
 #: templates/inclusion_tags/search_image_list.html:93
@@ -5308,7 +5321,7 @@ msgstr "FITもしくはデジタルカメラのRawファイル"
 msgid ""
 "AstroBin offers the storage of FIT and DSLR camera raw files too, for "
 "archival and sharing purposes!"
-msgstr ""
+msgstr "AstroBinはFITやデジタルカメラのRawファイルの保管や共有の目的のために、ストレージを提供します。"
 
 #: templates/index/root.html:64
 #, python-format
@@ -5318,146 +5331,149 @@ msgid ""
 "your files organized, and allow you to share them with other members. <a "
 "href=\"%(rawdata_url)s\">Want to know more?</a>"
 msgstr ""
+"<strong>AstroBin Raw Data</strong>はあなたの全てのFITやデジタルカメラのRawファイルの安全なストレージとしてのぷら"
+"っとであり、500GB以上も用意されています。あなたのファイルを整理して自動的に保管されます。<a href=\"%"
+"(rawdata_url)s\">もっと知りたいですか？</a>"
 
 #: templates/index/root.html:166
 msgid "Your activity stream"
-msgstr ""
+msgstr "あなたの新着一覧"
 
 #: templates/index/root.html:171
 msgid "Global activity stream"
-msgstr ""
+msgstr "全体の新着一覧"
 
 #: templates/index/root.html:176
 msgid "Recently uploaded"
-msgstr ""
+msgstr "最新画像"
 
 #: templates/index/root.html:181 templates/index/root.html.py:241
 msgid "Recent images from people you follow"
-msgstr ""
+msgstr "あなたがフォローする人々の最新の画像"
 
 #: templates/index/root.html:186 templates/index/root.html.py:252
 msgid "Recently liked"
-msgstr ""
+msgstr "最新のLileされた画像一覧"
 
 #: templates/index/root.html:191 templates/index/root.html.py:263
 msgid "Recently bookmarked"
-msgstr ""
+msgstr "最新のブックマークされた画像一覧"
 
 #: templates/index/root.html:196 templates/index/root.html.py:274
 msgid "Recent images with link to TIFF/FITS"
-msgstr ""
+msgstr "最新のTIFF/FITSにリンクされた画像一覧"
 
 #: templates/index/root.html:206
 msgid "Personal"
-msgstr ""
+msgstr "個人"
 
 #: templates/index/root.html:217
 msgid "Global"
-msgstr ""
+msgstr "全体"
 
 #: templates/index/root.html:230
 msgid "Recent images"
-msgstr ""
+msgstr "最新画像"
 
 #: templates/index/root.html:285
 msgid "Set current front page section as default"
-msgstr ""
+msgstr "現在のフロントページをデフォルトとする"
 
 #: templates/index/root.html:300
 msgid ""
 "To make your personal stream more interesting, you should follow some people!"
-msgstr ""
+msgstr "あなた個人のストリームをもっと楽しくするために、人々をフォローしましょう!"
 
 #: templates/index/root.html:329
 msgid "Do you want your product here?"
-msgstr ""
+msgstr "ここであなたの製品が欲しいですか？"
 
 #: templates/location/edit.html:5 templates/location/edit.html.py:14
 msgid "Edit your location"
-msgstr ""
+msgstr "あなたの場所の編集"
 
 #: templates/location/edit.html:10
 msgid "If this location is missing data, or has incorrect data, please fix it."
-msgstr ""
+msgstr "もしこの場所がまちがっていたり、不正確であれば、それを直してください。"
 
 #: templates/messages/compose.html:6 templates/messages/compose.html.py:9
 #: templates/messages/inbox.html:19
 msgid "Compose message"
-msgstr ""
+msgstr "メッセージの作成"
 
 #: templates/messages/compose.html:44 templates/messages/modal_compose.html:40
 msgid "Type in a search term"
-msgstr ""
+msgstr "検索ワードを入力"
 
 #: templates/messages/compose.html:45 templates/messages/modal_compose.html:41
 msgid "No results"
-msgstr ""
+msgstr "一致するものがありません。"
 
 #: templates/messages/compose.html:46 templates/messages/modal_compose.html:42
 msgid "Searching"
-msgstr ""
+msgstr "検索中"
 
 #: templates/messages/inbox.html:15
 msgid "Messages"
-msgstr ""
+msgstr "メッセージ"
 
 #: templates/messages/inbox.html:26
 msgid "Participants"
-msgstr ""
+msgstr "参加者"
 
 #: templates/messages/inbox.html:27
 msgid "Date and time"
-msgstr ""
+msgstr "日付と時刻"
 
 #: templates/messages/inbox.html:29
 msgid "Excerpt"
-msgstr ""
+msgstr "引用"
 
 #: templates/messages/inbox.html:34
 msgid "New!"
-msgstr ""
+msgstr "新着!"
 
 #: templates/messages/inbox.html:44
 msgid "Read all"
-msgstr ""
+msgstr "すべてを読む"
 
 #: templates/messages/inbox.html:46 templates/messages/view.html:42
 #: templates/messages/view.html.py:77
 msgid "Reply"
-msgstr ""
+msgstr "返信"
 
 #: templates/messages/inbox.html:52
 msgid "No messages"
-msgstr ""
+msgstr "メッセージなし"
 
 #: templates/messages/modal_compose.html:60
 msgid "Message sent"
-msgstr ""
+msgstr "メッセージを送信"
 
 #: templates/messages/view.html:12
 #, python-format
 msgid "A conversation between <a href=\"%(sender_url)s\">you</a> and"
-msgstr ""
+msgstr "<a href=\"%(sender_url)s\">あなた</a>との会話"
 
 #: templates/messages/view.html:20
 msgid "Delete conversation"
-msgstr ""
+msgstr "会話を削除"
 
 #: templates/messages/view.html:23 templates/messages/view.html.py:44
 msgid "or return to messages"
-msgstr ""
+msgstr "またはメッセージに戻る"
 
 #: templates/messages/view.html:64
 msgid "Sending..."
-msgstr ""
+msgstr "送信中..."
 
 #: templates/messages/view.html:86
 msgid "Error. Try again!"
-msgstr ""
+msgstr "エラーが発生しました。再試行してください!"
 
 #: templates/notification/all.html:6 templates/notification/all.html.py:9
 msgid "Here are your notifications"
-msgstr ""
+msgstr "あなたへの通知はこれ"
 
 #: templates/notification/email_body.txt:3
 #, python-format
@@ -5474,6 +5490,16 @@ msgid ""
 "Clear skies,\n"
 "AstroBin.\n"
 msgstr ""
+"こんにちは。 AstroBinで新しい通知がありました。:\n"
+"\n"
+"%(message)s\n"
+"\n"
+"すべての通知をみるために、%(notices_url)s.\n"
+"へいってください。\n"
+"もしメールが届く事を望まないのであれば、http://astrobin.com%(pref_url)s.\n"
+"に行って、あなたの設定を編集してください。\n"
+"Clear skies,\n"
+"AstroBin.\n"
 
 #: templates/notification/api_key_request_approved/full.txt:3
 #, python-format
@@ -5489,6 +5515,16 @@ msgid ""
 "    \n"
 "    Thank you for using AstroBin's APIs!"
 msgstr ""
+"あなたのAPIキーのリクエストがとどきました。\n"
+"\n"
+"    Your key: %(key)s\n"
+"    Your secret: %(secret)s\n"
+"\n"
+"    APIドキュメントを%(api_docs_url)sで読んでください。\n"
+"    \n"
+"    あなたのAPIキーを%(api_keys_url)sでお試しすることができます。\n"
+"    \n"
+"    AstroBin's APIsを使ってくれてありがとう!"
 
 #: templates/notification/api_key_request_approved/notice.html:2
 #: templates/notification/api_key_request_approved/short.html:2
@@ -5496,18 +5532,18 @@ msgstr ""
 msgid ""
 "<a href=\"%(api_keys_url)s\">Your request for an API Key has been approved!</"
 "a>"
-msgstr ""
+msgstr "<a href=\"%(api_keys_url)s\">あなたのAPIキーのリクエストが許可されました!</a>"
 
 #: templates/notification/api_key_request_approved/short.txt:2
 msgid "API Key request approved"
-msgstr ""
+msgstr "APIキーリクエストの許可"
 
 #: templates/notification/attention_request/full.txt:2
 #, python-format
 msgid ""
 "%(originator)s would like to bring the following image to your attention: "
 "%(object_url)s"
-msgstr ""
+msgstr "%(originator)sは、あなたに次の画像に注目してほしい。%(object_url)s"
 
 #: templates/notification/attention_request/notice.html:2
 #: templates/notification/attention_request/short.html:1
@@ -5516,11 +5552,13 @@ msgid ""
 "<a href=\"%(object_url)s\"><strong>%(originator)s</strong> wants to bring an "
 "image to your attention.</a>"
 msgstr ""
+"<a href=\"%(object_url)s\"><strong>%(originator)s</strong> "
+"は、あなたに画像に注目してほしいようです。</a>"
 
 #: templates/notification/attention_request/short.txt:2
 #, python-format
 msgid "%(originator)s wants to bring an image to your attention"
-msgstr ""
+msgstr "%(originator)sは、あなたに画像を注目してほしい"
 
 #: templates/notification/follow_success/notice.html:2
 #: templates/notification/follow_success/short.html:2
@@ -5529,6 +5567,7 @@ msgid ""
 "<a href=\"%(object_url)s\">You are now following <strong>%(object)s</strong>."
 "</a>"
 msgstr ""
+"<a href=\"%(object_url)s\">あなたは今、 <strong>%(object)s</strong>をフォローしました。</a>"
 
 #: templates/notification/image_deleted/full.html:2
 #: templates/notification/image_deleted/full.txt:2
@@ -5536,44 +5575,44 @@ msgstr ""
 #: templates/notification/image_deleted/short.html:2
 #: templates/notification/image_deleted/short.txt:2
 msgid "Your image has been deleted."
-msgstr ""
+msgstr "あなたの画像は削除されました。"
 
 #: templates/notification/image_not_solved/full.txt:2
 #, python-format
 msgid "Your image at %(object_url)s could not be plate-solved."
-msgstr ""
+msgstr "あなたの画像は%(object_url)sで図画化できませんでした。"
 
 #: templates/notification/image_not_solved/notice.html:2
 #: templates/notification/image_not_solved/short.html:2
 #, python-format
 msgid "<a href=\"%(object_url)s\">Your image could not be plate-solved.</a>"
-msgstr ""
+msgstr "<a href=\"%(object_url)s\">あなたの画像は図画化できませんでした。</a>"
 
 #: templates/notification/image_not_solved/short.txt:2
 msgid "Your image could not be plate-solved."
-msgstr ""
+msgstr "あなたの画像は図画化できませんでした。"
 
 #: templates/notification/image_ready/notice.html:2
 #: templates/notification/image_ready/short.html:2
 #, python-format
 msgid "<a href=\"%(object_url)s\">Your image has been processed.</a>"
-msgstr ""
+msgstr "<a href=\"%(object_url)s\">あたなの画像が処理されました。</a>"
 
 #: templates/notification/image_solved/full.txt:2
 #, python-format
 msgid "Your image at %(object_url)s was plate-solved."
-msgstr ""
+msgstr "あなたの画像は%(object_url)sで図画化されました。"
 
 #: templates/notification/image_solved/notice.html:2
 #: templates/notification/image_solved/short.html:2
 #, python-format
 msgid ""
 "<a href=\"%(object_url)s\">Your image has been successfully plate-solved.</a>"
-msgstr ""
+msgstr "<a href=\"%(object_url)s\">あなたの画像は図画化に成功しました。</a>"
 
 #: templates/notification/image_solved/short.txt:2
 msgid "Your image has been successfully plate-solved."
-msgstr ""
+msgstr "あなたの画像は図画化に成功しました。"
 
 #: templates/notification/lacking_data_reminder/full.txt:2
 #, python-format
@@ -5587,6 +5626,14 @@ msgid ""
 "\n"
 "Thank you!"
 msgstr ""
+"不適当なデータをもつ画像が %(number)s枚あります。\n"
+"\n"
+"AstroBinはあなたや全ての利用者にとって素晴らしいサービスにするためにデータに依存しています。\n"
+"以下のURLのあなたの画像のデータを埋めてください。:\n"
+"\n"
+"%(url)s\n"
+"\n"
+"ありがとうございました。"
 
 #: templates/notification/lacking_data_reminder/notice.html:2
 #: templates/notification/lacking_data_reminder/short.html:2
@@ -5595,11 +5642,12 @@ msgid ""
 "<a href=\"%(url)s\">You have <strong>%(number)s</strong> images with "
 "insufficient data!</a>"
 msgstr ""
+"<a href=\"%(url)s\">あなたは不適当なデータを持つ<strong>%(number)s</strong>枚の画像をもっています。</a>"
 
 #: templates/notification/lacking_data_reminder/short.txt:2
 #, python-format
 msgid "You have %(number)s images with insufficient data!"
-msgstr ""
+msgstr "あなたは不適当なデータを持つ%(number)s枚の画像をもっています。"
 
 #: templates/notification/new_blog_entry/full.txt:2
 #, python-format
@@ -5608,6 +5656,9 @@ msgid ""
 "\n"
 "Check it out at the following url: %(object_url)s"
 msgstr ""
+"AstroBinは新しいブログ記事を公開しました。\"%(object)s\"\n"
+"\n"
+"以下のURLをクリックしてください。%(object_url)s"
 
 #: templates/notification/new_blog_entry/notice.html:2
 #: templates/notification/new_blog_entry/short.html:2
@@ -5615,17 +5666,17 @@ msgstr ""
 msgid ""
 "<a href=\"%(object_url)s\">AstroBin has published a new blog entry: "
 "\"%(object)s\"</a>"
-msgstr ""
+msgstr "<a href=\"%(object_url)s\">AstroBinは新しいブログ記事を公開しました。\"%(object)s\"</a>"
 
 #: templates/notification/new_blog_entry/short.txt:2
 #, python-format
 msgid "AstroBin has publushed a new blog entry: %(object)s"
-msgstr ""
+msgstr "AstroBinは新しいブログ記事を公開しました。%(object)s"
 
 #: templates/notification/new_bookmark/full.txt:2
 #, python-format
 msgid "%(user)s has added your image to their bookmarks: %(url)s"
-msgstr ""
+msgstr "%(user)sがあなたの画像をプックマークに追加しました。%(url)s"
 
 #: templates/notification/new_bookmark/notice.html:2
 #: templates/notification/new_bookmark/short.html:2
@@ -5633,55 +5684,55 @@ msgstr ""
 msgid ""
 "<a href=\"%(url)s\"><strong>%(user)s</strong> has added your image to their "
 "bookmarks!</a>"
-msgstr ""
+msgstr "<a href=\"%(url)s\"><strong>%(user)s</strong>があなたの画像をプックマークに追加しました!</a>"
 
 #: templates/notification/new_bookmark/short.txt:2
 #, python-format
 msgid "%(user)s has added yout image to their bookmarks: %(url)s"
-msgstr ""
+msgstr "%(user)sがあなたの画像をプックマークに追加しました。%(url)s"
 
 #: templates/notification/new_comment/full.txt:2
 #, python-format
 msgid ""
 "%(user)s commented on your image! Check it out at the following url: %(url)s"
-msgstr ""
+msgstr "%(user)sがあなたの画像にコメントしました。以下のURLをチェックしてください。%(url)s"
 
 #: templates/notification/new_comment/notice.html:2
 #: templates/notification/new_comment/short.html:2
 #, python-format
 msgid ""
 "<a href=\"%(url)s\"><strong>%(user)s</strong> commented on your image!</a>"
-msgstr ""
+msgstr "<a href=\"%(url)s\"><strong>%(user)s</strong>があたたの画像にコメントしました。</a>"
 
 #: templates/notification/new_comment/short.txt:2
 #, python-format
 msgid "%(user)s commented on your image!"
-msgstr ""
+msgstr "%(user)sがあなたの画像にコメントしました!"
 
 #: templates/notification/new_comment_reply/full.txt:2
 #, python-format
 msgid ""
 "%(user)s replied to your comment. Check it out at the following url: %(url)s"
-msgstr ""
+msgstr "%(user)sがあなたのコメントに返信しました。以下のURLをチェックしてください。%(url)s"
 
 #: templates/notification/new_comment_reply/notice.html:2
 #: templates/notification/new_comment_reply/short.html:2
 #, python-format
 msgid ""
 "<a href=\"%(url)s\"><strong>%(user)s</strong> replied to your comment.</a>"
-msgstr ""
+msgstr "<a href=\"%(url)s\"><strong>%(url)s</strong>があなたのコメントに返信しました。</a>"
 
 #: templates/notification/new_comment_reply/short.txt:2
 #, python-format
 msgid "%(user)s replied to your comment."
-msgstr ""
+msgstr "%(user)sがあなたのコメントに返信しました。"
 
 #: templates/notification/new_follower/full.txt:2
 #, python-format
 msgid ""
 "User %(object)s is now following you. They will be notified when you publish "
 "new images."
-msgstr ""
+msgstr "利用者%(object)sはあなたをフォローしました。あなたが新しい画像を公開したときに彼らに通知されます。"
 
 #: templates/notification/new_follower/notice.html:2
 #: templates/notification/new_follower/short.html:2
@@ -5689,18 +5740,18 @@ msgstr ""
 msgid ""
 "<a href=\"%(object_url)s\"><strong>%(object)s</strong> is now following you."
 "</a>"
-msgstr ""
+msgstr "<a href=\"%(object_url)s\"><strong>%(object)s</strong>はあなたをフォローしました。</a>"
 
 #: templates/notification/new_follower/short.txt:2
 msgid "You have a new follower!"
-msgstr ""
+msgstr "あなたに新しいフォロアーがいます!"
 
 #: templates/notification/new_gear_discussion/full.txt:2
 #, python-format
 msgid ""
 "%(user)s started a new discussion about a gear item you own! Read it at "
 "following url: %(url)s"
-msgstr ""
+msgstr "%(user)sはあなたが所有する機材品についての新しい議論を開始しました。以下のURLでそれを読んでください。%(url)s"
 
 #: templates/notification/new_gear_discussion/notice.html:2
 #: templates/notification/new_gear_discussion/short.html:2
@@ -5709,18 +5760,20 @@ msgid ""
 "<a href=\"%(url)s\"><strong>%(user)s</strong> started a new discussion about "
 "a gear item you own!</a>"
 msgstr ""
+"<a href=\"%(url)s\"><strong>%"
+"(user)s</strong>はあなたが所有する機材品についての新しい議論を開始しました。</a>"
 
 #: templates/notification/new_gear_discussion/short.txt:2
 #, python-format
 msgid "%(user)s started a new discussion about a gear item you own!"
-msgstr ""
+msgstr "%(user)sはあなたが所有する機材についての新しい議論をスタートしました!"
 
 #: templates/notification/new_gear_review/full.txt:2
 #, python-format
 msgid ""
 "%(user)s wrote a review of a gear item you own! Read it at following url: "
 "%(url)s"
-msgstr ""
+msgstr "%(user)sが、あなたが所有する機材品のレビューを書きました。以下のURLで読んでください。%(url)s"
 
 #: templates/notification/new_gear_review/notice.html:2
 #: templates/notification/new_gear_review/short.html:2
@@ -5729,18 +5782,19 @@ msgid ""
 "<a href=\"%(url)s\"><strong>%(user)s</strong> wrote a review of a gear item "
 "you own!</a>"
 msgstr ""
+"<a href=\"%(url)s\"><strong>%(user)s</strong>が、あなたが所有する機材品のレビューを書きました!</a>"
 
 #: templates/notification/new_gear_review/short.txt:2
 #, python-format
 msgid "%(user)s wrote a review of a gear item you own!"
-msgstr ""
+msgstr "%(user)sが、あなたが所有する機材品のレビューを書きました。"
 
 #: templates/notification/new_image/full.txt:2
 #, python-format
 msgid ""
 "%(originator)s has published a new image! Check it out at the following url: "
 "%(object_url)s"
-msgstr ""
+msgstr "%(originator)sが新しい画像を公開しました！以下のURLをチェックしてください。%(object_url)s"
 
 #: templates/notification/new_image/notice.html:2
 #, python-format
@@ -5748,6 +5802,7 @@ msgid ""
 "<a href=\"%(object_url)s\"><strong>%(originator)s</strong> has published a "
 "new image.</a>"
 msgstr ""
+"<a href=\"%(object_url)s\"><strong>%(originator)s</strong>が新しい画像を公開しました。</a>"
 
 #: templates/notification/new_image/short.html:2
 #, python-format
@@ -5755,11 +5810,12 @@ msgid ""
 "<a href=\"%(object_url)s\"><strong>%(originator)s</strong> has published a "
 "new image</a>"
 msgstr ""
+"<a href=\"%(object_url)s\"><strong>%(originator)s</strong>が新しい画像を公開しました！</a>"
 
 #: templates/notification/new_image/short.txt:2
 #, python-format
 msgid "New image by %(originator)s"
-msgstr ""
+msgstr "%(originator)sの新着画像"
 
 #: templates/notification/new_image_from_gear/full.txt:2
 #, python-format
@@ -5767,6 +5823,8 @@ msgid ""
 "New image taken with a gear item you follow: <strong>%(gear)s</strong>. "
 "Check it out at the following url: %(object_url)s"
 msgstr ""
+"あなたのフォローする装備品（<strong>%(gear)s</strong>）の新しい写真が追加されました。以下のURLをチェックしてください。%"
+"(object_url)s"
 
 #: templates/notification/new_image_from_gear/notice.html:2
 #: templates/notification/new_image_from_gear/short.html:2
@@ -5775,11 +5833,12 @@ msgid ""
 "<a href=\"%(object_url)s\">New image taken with a <strong>%(gear)s</strong>."
 "</a>"
 msgstr ""
+"<a href=\"%(object_url)s\"><strong>%(gear)s</strong>についての新しい画像が追加されました。</a>"
 
 #: templates/notification/new_image_from_gear/short.txt:2
 #, python-format
 msgid "New image taken with a %(gear)s"
-msgstr ""
+msgstr "%(gear)sの新しい画像が追加"
 
 #: templates/notification/new_image_of_subject/full.txt:2
 #, python-format
@@ -5787,25 +5846,27 @@ msgid ""
 "New image of a subject you follow: <strong>%(subject)s</strong>. Check it "
 "out at the following url: %(object_url)s"
 msgstr ""
+"あなたがフォローする主題（<strong>%(subject)s</strong>）の新しい画像が追加されました。以下のURLをチェックしてください。%"
+"(object_url)s"
 
 #: templates/notification/new_image_of_subject/notice.html:2
 #: templates/notification/new_image_of_subject/short.html:2
 #, python-format
 msgid ""
 "<a href=\"%(object_url)s\">New image of <strong>%(subject)s</strong>.</a>"
-msgstr ""
+msgstr "<a href=\"%(object_url)s\"><strong>%(subject)s</strong>の新しい画像</a>"
 
 #: templates/notification/new_image_of_subject/short.txt:2
 #, python-format
 msgid "New image of %(subject)s"
-msgstr ""
+msgstr "%(subject)sの新着画像"
 
 #: templates/notification/new_image_revision/full.txt:2
 #, python-format
 msgid ""
 "%(originator)s has published a new image revision! Check it out at the "
 "following url: %(object_url)s"
-msgstr ""
+msgstr "%(originator)sは新しい修正版画像を公開しました。以下のURLをチェックしてください。%(object_url)s"
 
 #: templates/notification/new_image_revision/notice.html:2
 #: templates/notification/new_image_revision/short.html:2
@@ -5814,23 +5875,25 @@ msgid ""
 "<a href=\"%(object_url)s\"><strong>%(originator)s</strong> has published a "
 "new image revision.</a>"
 msgstr ""
+"<a href=\"%(object_url)s\"><strong>%"
+"(originator)s</strong>の新しい修正版画像が公開されました。</a>"
 
 #: templates/notification/new_image_revision/short.txt:2
 #, python-format
 msgid "New image revision by %(originator)s"
-msgstr ""
+msgstr "%(originator)sの新しい修正版画像"
 
 #: templates/notification/new_like/full.txt:2
 #: templates/notification/new_like/short.txt:2
 #, python-format
 msgid "%(user)s likes your image: %(url)s"
-msgstr ""
+msgstr "%(user)sは、あなたの画像（%(url)s）にLikeした"
 
 #: templates/notification/new_like/notice.html:2
 #: templates/notification/new_like/short.html:2
 #, python-format
 msgid "<a href=\"%(url)s\"><strong>%(user)s</strong> likes your image!</a>"
-msgstr ""
+msgstr "<a href=\"%(url)s\"><strong>%(user)s</strong>は、あなたの画像にLikeしました!</a>"
 
 #: templates/notification/rawdata_invited_to_private_folder/full.txt:2
 #, python-format
@@ -5842,6 +5905,11 @@ msgid ""
 "\n"
 "Visit the folder at the following url: %(folder_url)s"
 msgstr ""
+"あなたは非公開共有フォルダ（\"%(folder_name)s\"）に招待されました。\n"
+"\n"
+"あなたはデータを与えられ、そのフォルダの画像を処理できるようになりました。あなたはもっと多くの人々を招待することもできます。\n"
+"\n"
+"以下のURLのフォルダを訪問してください。%(folder_url)s"
 
 #: templates/notification/rawdata_invited_to_private_folder/notice.html:2
 #: templates/notification/rawdata_invited_to_private_folder/short.html:2
@@ -5850,11 +5918,13 @@ msgid ""
 "<a href=\"%(folder_url)s\">You are invited you to the private shared folder: "
 "<strong>\"%(folder_name)s.\"</strong></a>"
 msgstr ""
+"<a href=\"%(folder_url)s\">あなたは非公開共有フォルダ<strong>（\"%"
+"(folder_name)s\"）</strong>に招待されました。</a>"
 
 #: templates/notification/rawdata_invited_to_private_folder/short.txt:2
 #, python-format
 msgid "You are invited you to the private shared folder: %(folder_name)s"
-msgstr ""
+msgstr "あなたは非公開共有フォルダに招待されました。%(folder_name)s"
 
 #: templates/notification/rawdata_posted_image_to_private_folder/full.txt:2
 #, python-format
@@ -5862,6 +5932,8 @@ msgid ""
 "%(user_name)s has added a new processed image to the private shared folder: "
 "\"%(folder_name)s\". Check it out at the following url: %(folder_url)s"
 msgstr ""
+"%(user_name)sは非公開共有フォルダ（\"%(folder_name)s\"）に新しい処理画像が追加しました。以下のURLをチェックしてください。"
+"%(folder_url)s"
 
 #: templates/notification/rawdata_posted_image_to_private_folder/notice.html:2
 #, python-format
@@ -5870,6 +5942,9 @@ msgid ""
 "processed image to the private shared folder: <strong>\"%(folder_name)s.\"</"
 "strong></a>"
 msgstr ""
+"<a href=\"%(folder_url)s\"><strong>%"
+"(user_name)s</strong>は新しい処理画像を非公開共有フォルダ<strong>\"%"
+"(folder_name)s\"</strong>に追加しました。</a>"
 
 #: templates/notification/rawdata_posted_image_to_private_folder/short.html:2
 #, python-format
@@ -5878,11 +5953,15 @@ msgid ""
 "processed image to the private shared folder: <strong>\"%(folder_name)s.\"</"
 "a>"
 msgstr ""
+"<a href=\"%(folder_url)s\"><strong>%(user_name)s</strong>は非公開共有フォルダ<strong>\"%"
+"(folder_name)s\"</strong>に新しい処理画像を追加しました。</a>"
 
 #: templates/notification/rawdata_posted_image_to_private_folder/short.txt:2
 #, python-format
 msgid "New processed image in private shared folder: %(folder_name)s"
 msgstr ""
+"<a href=\"%(folder_url)s\"><strong>%(user_name)s</strong>は非公開共有フォルダ<strong>\"%"
+"(folder_name)s\"</strong>に新しい処理画像を追加しました。</a>"
 
 #: templates/notification/rawdata_posted_image_to_public_pool/full.txt:2
 #, python-format
@@ -5890,6 +5969,8 @@ msgid ""
 "%(user_name)s has added a new processed image to the public data pool: "
 "\"%(pool_name)s\". Check it out at the following url: %(pool_url)s"
 msgstr ""
+"%(user_name)sはデータ公開領域（\"%(pool_name)s\"）に新しい処理画像を追加しました。以下のURLをチェックしてください。%"
+"(pool_url)s"
 
 #: templates/notification/rawdata_posted_image_to_public_pool/notice.html:2
 #: templates/notification/rawdata_posted_image_to_public_pool/short.html:2
@@ -5899,11 +5980,13 @@ msgid ""
 "processed image to the public data pool: <strong>\"%(pool_name)s.\"</"
 "strong></a>"
 msgstr ""
+"<a href=\"%(pool_url)s\"><strong>%(user_name)s</strong>はデータ公開領域<strong>（\"%"
+"(pool_name)s\"）</strong>に新しい処理画像を追加しました。</a>"
 
 #: templates/notification/rawdata_posted_image_to_public_pool/short.txt:2
 #, python-format
 msgid "New processed image in public data pool: %(pool_name)s"
-msgstr ""
+msgstr "データ公開領域（%(pool_name)s）に新しい処理画像が追加された。"
 
 #: templates/notification/rawdata_posted_to_pool/full.txt:2
 #, python-format
@@ -5911,6 +5994,8 @@ msgid ""
 "%(user_name)s has added new data to the public pool: \"%(pool_name)s\". "
 "Check it out at the following url: %(pool_url)s"
 msgstr ""
+"%(user_name)sはデータ共有領域（\"%(pool_name)s\"）に新しいデータが追加しました。以下のURLをチェックしてください。%"
+"(pool_url)s"
 
 #: templates/notification/rawdata_posted_to_pool/notice.html:2
 #, python-format
@@ -5918,6 +6003,8 @@ msgid ""
 "<a href=\"%(pool_url)s\"><strong>%(user_name)s</strong> has added new data "
 "to the public pool: <strong>\"%(pool_name)s.\"</strong></a>"
 msgstr ""
+"<a href=\"%(pool_url)s\"><strong>%(user_name)s</strong>はデータ公開領域<strong>（\"%"
+"(pool_name)s\"）</strong>に新しいデータを追加しました。</a>"
 
 #: templates/notification/rawdata_posted_to_pool/short.html:2
 #, python-format
@@ -5925,11 +6012,13 @@ msgid ""
 "<a href=\"%(pool_url)s\"><strong>%(user_name)s</strong> has added new data "
 "to the public pool: <strong>\"%(pool_name)s.\"</a>"
 msgstr ""
+"<a href=\"%(pool_url)s\"><strong>%(user_name)s</strong>はデータ公開領域<strong>（\"%"
+"(pool_name)s\"）</strong>に新しいデータを追加しました。</a>"
 
 #: templates/notification/rawdata_posted_to_pool/short.txt:2
 #, python-format
 msgid "New data in public pool: %(pool_name)s"
-msgstr ""
+msgstr "データ公開領域（%(pool_name)s）の新しいデータ"
 
 #: templates/notification/rawdata_posted_to_private_folder/full.txt:2
 #, python-format
@@ -5937,6 +6026,8 @@ msgid ""
 "%(user_name)s has added new data to the private shared folder: "
 "\"%(folder_name)s\". Check it out at the following url: %(folder_url)s"
 msgstr ""
+"%(user_name)sは非公開共有フォルダ（\"%(folder_name)s\"）に新しいデータを追加しました。以下のURLをチェックしてください。%"
+"(folder_url)s"
 
 #: templates/notification/rawdata_posted_to_private_folder/notice.html:2
 #, python-format
@@ -5944,6 +6035,8 @@ msgid ""
 "<a href=\"%(folder_url)s\"><strong>%(user_name)s</strong> has added new data "
 "to the private shared folder: <strong>\"%(folder_name)s.\"</strong></a>"
 msgstr ""
+"<a href=\"%(folder_url)s\"><strong>%(user_name)s</strong>は非公開共有フォルダ<strong>（\"%"
+"(folder_name)s\"）</strong>に新しいデータを追加しました。</a>"
 
 #: templates/notification/rawdata_posted_to_private_folder/short.html:2
 #, python-format
@@ -5951,11 +6044,13 @@ msgid ""
 "<a href=\"%(folder_url)s\"><strong>%(user_name)s</strong> has added new data "
 "to the private shared folder: <strong>\"%(folder_name)s.\"</a>"
 msgstr ""
+"<a href=\"%(folder_url)s\"><strong>%(user_name)s</strong>は非公開共有フォルダ<strong>\"%"
+"(folder_name)s\"</strong>に新しいデータを追加しました。</a>"
 
 #: templates/notification/rawdata_posted_to_private_folder/short.txt:2
 #, python-format
 msgid "New data in private shared folder: %(folder_name)s"
-msgstr ""
+msgstr "非公開シェアフォルダ（\"%(folder_name)s\"）の新しいデータ"
 
 #: templates/notification/received_email/full.txt:2
 msgid ""
@@ -5964,19 +6059,23 @@ msgid ""
 "\n"
 "http://astrobin.com/messages/inbox/"
 msgstr ""
+"AstroBinでプライベートメッセージが届いています!\n"
+"以下のリンクからそれを読んでください。\n"
+"\n"
+"http://astrobin.com/messages/inbox/"
 
 #: templates/notification/received_email/notice.html:2
 #: templates/notification/received_email/short.html:2
 #: templates/notification/received_email/short.txt:2
 msgid "You have received a new private message."
-msgstr ""
+msgstr "新しいプライベートメッセージが届いています。"
 
 #: templates/notification/request_fulfilled/full.txt:2
 #, python-format
 msgid ""
 "%(originator)s has fulfilled your request! Check it out at the following "
 "url: %(object_url)s"
-msgstr ""
+msgstr "%(originator)sは、あなたのリクエストを終了しました。以下のURLをチェックしてください。%(object_url)s"
 
 #: templates/notification/request_fulfilled/notice.html:2
 #: templates/notification/request_fulfilled/short.html:2
@@ -5985,11 +6084,13 @@ msgid ""
 "<a href=\"%(object_url)s\"><strong>%(originator)s</strong> has fulfilled "
 "your request</a>"
 msgstr ""
+"<a href=\"%(object_url)s\"><strong>%"
+"(originator)s</strong>は、あなたのリクエストを終了しました。</a>"
 
 #: templates/notification/request_fulfilled/short.txt:2
 #, python-format
 msgid "%(originator)s has fulfilled your request."
-msgstr ""
+msgstr "%(originator)sは、あなたのリクエストを終了しました。"
 
 #: templates/notification/unfollow_success/notice.html:2
 #: templates/notification/unfollow_success/short.html:2
@@ -5998,19 +6099,20 @@ msgid ""
 "<a href=\"%(object_url)s\">You have stopped following <strong>%(object)s</"
 "strong>.</a>"
 msgstr ""
+"<a href=\"%(object_url)s\"><strong>%(object)s</strong>をフォローすることを止めました。</a>"
 
 #: templates/openid_provider/decide.html:4
 #: templates/openid_provider/decide.html:7
 msgid "Allow external login"
-msgstr ""
+msgstr "外部ログインを許可"
 
 #: templates/openid_provider/decide.html:9
 msgid "The following site has requested verification of your account:"
-msgstr ""
+msgstr "以下のサイトはあなたのアカウントの確認をもとめています。"
 
 #: templates/openid_provider/decide.html:15
 msgid "Verify"
-msgstr ""
+msgstr "確認"
 
 #: templates/popover/gear.html:9 templates/popover/gear_accessory.html:22
 #: templates/popover/gear_camera.html:26 templates/popover/gear_filter.html:24
@@ -6019,23 +6121,23 @@ msgstr ""
 #: templates/popover/gear_software.html:23
 #: templates/popover/gear_telescope.html:25 templates/popover/subject.html:22
 msgid "Find images"
-msgstr ""
+msgstr "画像を検索"
 
 #: templates/popover/subject.html:6
 msgid "RA"
-msgstr ""
+msgstr "赤経"
 
 #: templates/popover/subject.html:7
 msgid "Dec"
-msgstr ""
+msgstr "赤緯"
 
 #: templates/privatebeta/invite.html:4 templates/privatebeta/invite.html:13
 msgid "AstroBin is currently in closed beta"
-msgstr ""
+msgstr "AstroBinはグローズドβ中です。"
 
 #: templates/privatebeta/invite.html:9
 msgid "What is AstroBin?"
-msgstr ""
+msgstr "AstroBinとは何でしょう？"
 
 #: templates/privatebeta/invite.html:16
 #, python-format
@@ -6044,261 +6146,267 @@ msgid ""
 "href=\"%(login_url)s\">login</a>, otherwise you can leave us your email "
 "address and we will notify you when the website is up!"
 msgstr ""
+"それはすぐに皆に公開されます。もしあなたが招待された場合、<a href=\"%(login_url)s\">ログイン</a>できるし、あなたのメールアドレ"
+"スを我々に渡したりすると、WEBサイトがアップしたときにあなたに通知することができます!"
 
 #: templates/registration/activate.html:4
 #: templates/registration/activate.html:9
 msgid "Account successfully activated"
-msgstr ""
+msgstr "アカウント作成に成功した"
 
 #: templates/registration/activate.html:10 templates/registration/login.html:5
 #: templates/registration/login.html:13
 #: templates/registration/password_reset_complete.html:8
 msgid "Log in"
-msgstr ""
+msgstr "ログイン"
 
 #: templates/registration/activate.html:12
 msgid "Account activation failed"
-msgstr ""
+msgstr "アカウント作成に失敗"
 
 #: templates/registration/activation_complete.html:4
 #: templates/registration/activation_complete.html:7
 msgid "Your profile is now active."
-msgstr ""
+msgstr "あなたのプロフィールはアクティブになっています。"
 
 #: templates/registration/activation_email.txt:2
 msgid ""
 "Hi,\n"
 "please use the following link to activate your AstroBin account:"
 msgstr ""
+"こんにちは。\n"
+"あなたのAstroBinアカウントを有効化するために以下のリンクを使ってください。"
 
 #: templates/registration/activation_email.txt:7
 #, python-format
 msgid "Link is valid for %(expiration_days)s days."
-msgstr ""
+msgstr "リンクは%(expiration_days)s日間有効です。"
 
 #: templates/registration/activation_email.txt:9
 msgid ""
 "Sincerely,\n"
 "the AstroBin staff."
 msgstr ""
+"敬具\n"
+"AstroBinのスタッフより"
 
 #: templates/registration/activation_email_subject.txt:1
 msgid "Account activation on"
-msgstr ""
+msgstr "ここでアカウントの有効化"
 
 #: templates/registration/login.html:9
 msgid "Login with AstroBin"
-msgstr ""
+msgstr "AstroBinにログイン"
 
 #: templates/registration/login.html:14
 #: templates/registration/password_reset_form.html:5
 #: templates/registration/password_reset_form.html:8
 msgid "Reset password"
-msgstr ""
+msgstr "パスワードのリセット"
 
 #: templates/registration/logout.html:4 templates/registration/logout.html:7
 msgid "Good bye!"
-msgstr ""
+msgstr "さようなら!"
 
 #: templates/registration/logout.html:8
 msgid "You have been logged out. Come back soon!"
-msgstr ""
+msgstr "ログアウトしました。すぐに戻ってきてね!"
 
 #: templates/registration/password_change_done.html:4
 #: templates/registration/password_change_done.html:7
 msgid "Password changed"
-msgstr ""
+msgstr "パスワードの変更"
 
 #: templates/registration/password_change_form.html:5
 #: templates/registration/password_change_form.html:8
 #: templates/user/profile/edit/basic.html:17
 msgid "Change your password"
-msgstr ""
+msgstr "パスワードを変更"
 
 #: templates/registration/password_reset_complete.html:4
 #: templates/registration/password_reset_complete.html:7
 msgid "Password reset successfully"
-msgstr ""
+msgstr "パスワードのリセットに成功"
 
 #: templates/registration/password_reset_confirm.html:5
 #: templates/registration/password_reset_confirm.html:8
 msgid "Password reset confirmation"
-msgstr ""
+msgstr "パスワードのリセットの確認"
 
 #: templates/registration/password_reset_confirm.html:18
 msgid "Password reset failed"
-msgstr ""
+msgstr "パスワードのリセットに失敗した"
 
 #: templates/registration/password_reset_done.html:4
 #: templates/registration/password_reset_done.html:7
 msgid "Email with password reset instructions has been sent."
-msgstr ""
+msgstr "パスワードのリセット指示もメールが送信されました。"
 
 #: templates/registration/password_reset_email.html:2
 #, python-format
 msgid "Reset password at %(site_name)s"
-msgstr ""
+msgstr "%(site_name)sでパスワードをリセット"
 
 #: templates/registration/registration_complete.html:4
 #: templates/registration/registration_complete.html:8
 msgid "Registration completed"
-msgstr ""
+msgstr "登録完了"
 
 #: templates/registration/registration_complete.html:9
 msgid "You are now registered"
-msgstr ""
+msgstr "登録完了"
 
 #: templates/registration/registration_complete.html:14
 msgid ""
 "To confirm your e-mail address, we have sent you an e-mail with an "
 "activation link."
-msgstr ""
+msgstr "あなたのメールアドレスを確認するために、あなたに有効化するためのリンクがあるメールを送信しました。"
 
 #: templates/registration/registration_complete.html:18
 msgid ""
 "If you don't receive the e-mail within a few minutes, remember to check your "
 "spam folder."
-msgstr ""
+msgstr "数分以内にメールが届かない場合には、スパムメールフォルダーをチェックするようにしてください。"
 
 #: templates/registration/registration_form.html:5
 #: templates/registration/registration_form.html:8
 msgid "Register with AstroBin"
-msgstr ""
+msgstr "Astrobinを登録"
 
 #: templates/registration/registration_form.html:11
 #, python-format
 msgid ""
 "By registering with AstroBin, you agree to our <a href=\"%(tos_url)s\">terms "
 "of service</a>."
-msgstr ""
+msgstr "AstroBinに登録することで、あなたは我々の<a href=\"%(tos_url)s\">利用規約</a>に同意します。"
 
 #: templates/search/search.html:7 templates/search/search.html.py:108
 #: templates/search/search.html:253
 msgid "Search"
-msgstr ""
+msgstr "検索"
 
 #: templates/search/search.html:18 templates/user/profile-subnav.html:112
 msgid "Sort"
-msgstr ""
+msgstr "並び替え"
 
 #: templates/search/search.html:25
 msgid "Relevance"
-msgstr ""
+msgstr "関連度"
 
 #: templates/search/search.html:31 templates/user/profile-subnav.html:118
 msgid "Upload time"
-msgstr ""
+msgstr "アップロード時間"
 
 #: templates/search/search.html:77
 msgid "Basic criteria"
-msgstr ""
+msgstr "基本的な分類"
 
 #: templates/search/search.html:263
 msgid "Please input some search terms!"
-msgstr ""
+msgstr "いくつかの検索ワードを入力してください!"
 
 #: templates/search/search.html:321
 msgid "Telescope's aperture"
-msgstr ""
+msgstr "望遠鏡の口径"
 
 #: templates/search/search.html:358 templates/search/search.html.py:365
 #: templates/search/search.html:374
 #: templates/user/profile/flickr_import.html:83
 msgid "Select all"
-msgstr ""
+msgstr "すべて選択"
 
 #: templates/search/search.html:359 templates/search/search.html.py:366
 #: templates/search/search.html:375
 #: templates/user/profile/flickr_import.html:84
 msgid "Select none"
-msgstr ""
+msgstr "選択を解除"
 
 #: templates/search/search.html:360 templates/search/search.html.py:367
 msgid "Select types"
-msgstr ""
+msgstr "種類の選択"
 
 #: templates/search/search.html:361 templates/search/search.html.py:368
 #: templates/search/search.html:377
 msgid "# selected"
-msgstr ""
+msgstr "# 選択済み"
 
 #: templates/search/search.html:376
 msgid "Select licenses"
-msgstr ""
+msgstr "ライセンスを選択"
 
 #: templates/user/api_keys.html:5 templates/user/api_keys.html.py:12
 msgid "Your API Keys"
-msgstr ""
+msgstr "あなたのAPIキー"
 
 #: templates/user/api_keys.html:19
 msgid "Created on"
-msgstr ""
+msgstr "作成日時:"
 
 #: templates/user/api_keys.html:20
 msgid "Active"
-msgstr ""
+msgstr "有効"
 
 #: templates/user/api_keys.html:39
 #, python-format
 msgid ""
 "You don't have any API Keys. Please read the <a href=\"%(api_docs_url)s"
 "\">API documentation</a>."
-msgstr ""
+msgstr "あなたはAPIキーをもっていません。<a href=\"%(api_docs_url)s\">APIドキュメントを読んでください。</a>"
 
 #: templates/user/api_keys.html:47
 msgid "Request an API Key"
-msgstr ""
+msgstr "APIキーをリクエスト"
 
 #: templates/user/bookmarks.html:5
 #, python-format
 msgid "%(user)s's bookmarks"
-msgstr ""
+msgstr "%(user)sのブックマーク"
 
 #: templates/user/bookmarks.html:11
 msgid "Your bookmarks"
-msgstr ""
+msgstr "あなたのブックマーク"
 
 #: templates/user/bookmarks.html:13
 #, python-format
 msgid "%(username)s's bookmarks"
-msgstr ""
+msgstr "%(username)sのブックマーク"
 
 #: templates/user/followers.html:7
 #, python-format
 msgid "%(user)s's followers"
-msgstr ""
+msgstr "%(user)sのフォロアー"
 
 #: templates/user/followers.html:13
 msgid "Your followers"
-msgstr ""
+msgstr "あなたのフォロアー"
 
 #: templates/user/followers.html:15
 #, python-format
 msgid "%(username)s's followers"
-msgstr ""
+msgstr "%(username)sのフォロアー"
 
 #: templates/user/following.html:7
 #, python-format
 msgid "%(user)s's followed users"
-msgstr ""
+msgstr "%(user)sのフォロアー"
 
 #: templates/user/following.html:13
 msgid "Your followed users"
-msgstr ""
+msgstr "あなのフォロアー"
 
 #: templates/user/following.html:15
 #, python-format
 msgid "%(username)s's followed users"
-msgstr ""
+msgstr "%(username)sのフォロアー"
 
 #: templates/user/not_found.html:4 templates/user/not_found.html.py:7
 msgid "User not found:"
-msgstr ""
+msgstr "ユーザーが見つかりません"
 
 #: templates/user/plots.html:5 templates/user/plots.html.py:11
 #, python-format
 msgid "%(user)s's plots"
-msgstr ""
+msgstr "%(user)sの分析結果"
 
 #: templates/user/plots.html:16
 #, python-format
@@ -6308,53 +6416,56 @@ msgid ""
 "make sure by checking whether you have images which lack data <a href="
 "\"%(user_page)s?public&sub=nodata\">here</a>."
 msgstr ""
+"こんにちは、<strong>%(user)s</strong>さん! "
+"もし、あなたの画像に全部のデータを加筆するのであれば、あなたはそれらの図画がとても使いやすいものになると、あなたに知らせたいです。あなたは<a "
+"href=\"%(user_page)s?public&sub=nodata\">ここに</a>データが欠損した画像を持っています。"
 
 #: templates/user/plots.html:24
 msgid "Total integration hours, plotted against time."
-msgstr ""
+msgstr "総粗出時間を時間に対してプロットした。"
 
 #: templates/user/plots.html:37
 msgid ""
 "Total integration hours, plotted against time and arranged by imaging "
 "telescopes and lenses, and imaging cameras."
-msgstr ""
+msgstr "総露出時間は時間に対してプロットされ、撮像した望遠鏡やレンズ、撮像したカメラによって配置されている。"
 
 #: templates/user/plots.html:53
 msgid "Combined view count for all the user's images, plotted against time."
-msgstr ""
+msgstr "全ての利用者の画像の視聴回数を合計し、時間に対してプロットした。"
 
 #: templates/user/plots.html:66
 msgid "Image uploads, plotted against time."
-msgstr ""
+msgstr "アップロード画像を時間に対してプロットした。"
 
 #: templates/user/profile-subnav.html:57
 msgid "Public Area"
-msgstr ""
+msgstr "公開エリア"
 
 #: templates/user/profile-subnav.html:63
 msgid "Staging Area"
-msgstr ""
+msgstr "ステージングエリア"
 
 #: templates/user/profile-subnav.html:79
 msgid "Following"
-msgstr ""
+msgstr "フォローする"
 
 #: templates/user/profile-subnav.html:121
 msgid "Acquisition time"
-msgstr ""
+msgstr "撮影時刻"
 
 #: templates/user/profile-subnav.html:127
 msgid "Year"
-msgstr ""
+msgstr "年"
 
 #: templates/user/profile-subnav.html:134
 msgid "Lacking data"
-msgstr ""
+msgstr "不足しているデータ"
 
 #: templates/user/profile.html:11
 #, python-format
 msgid "%(user)s's gallery"
-msgstr ""
+msgstr "%(user)sのギャラリー"
 
 #: templates/user/profile.html:19
 msgid ""
@@ -6362,10 +6473,12 @@ msgid ""
 "can show people individual images by sharing them using the <em>Share</em> "
 "menu."
 msgstr ""
+"あなたの処理作業中の画像（あなたにしかみえません）が存在します。<em>共有</em>メニューを使って、それらを共有することによって個々の画像を人々にみ"
+"せることができます。"
 
 #: templates/user/profile.html:64
 msgid "These images don't have enough data. It's a shame..."
-msgstr ""
+msgstr "これらの画像は十分なデータを持っていません。それではみっともないです。"
 
 #: templates/user/profile.html:66
 msgid ""
@@ -6373,189 +6486,191 @@ msgid ""
 "in some data. Imaging telescopes, imaging cameras and subjects are the bare "
 "minimum. Dates of acquisitions are very important too."
 msgstr ""
+"もし、あなたの画像をアルバムに分類したいのであれば、あなたはいくつかのデータを本当に埋める必要があります。撮影望遠鏡、撮影カメラ、主題は最低限必要です。"
+"撮影日もとても重要です。"
 
 #: templates/user/profile.html:78
 msgid "Tools"
-msgstr ""
+msgstr "ツール"
 
 #: templates/user/profile.html:82 templates/user/profile.html.py:85
 msgid "Edit profile"
-msgstr ""
+msgstr "プロフィールの編集"
 
 #: templates/user/profile/flickr_import.html:14
 msgid ""
 "Please note: when importing from Flickr, automatic watermarking of the "
 "images it not supported."
-msgstr ""
+msgstr "注意：Flickrからインポートするときには自動的に画像に著作権表示がつきません。"
 
 #: templates/user/profile/flickr_import.html:20
 msgid "Which set"
-msgstr ""
+msgstr "どのセット"
 
 #: templates/user/profile/flickr_import.html:34
 msgid "Import photos"
-msgstr ""
+msgstr "写真をインポート"
 
 #: templates/user/profile/flickr_import.html:36
 msgid "Authenticate with Flickr"
-msgstr ""
+msgstr "Flickrで認証"
 
 #: templates/user/profile/flickr_import.html:43
 msgid ""
 "Unfortunately you need to enable Javascript to be able to import photos from "
 "Flickr at this time."
-msgstr ""
+msgstr "あいにく今は、Flickrから写真をインポートするためはJavascriotをONにする必要があります。"
 
 #: templates/user/profile/flickr_import.html:81
 msgid "Click to select the photos you want to import"
-msgstr ""
+msgstr "インポートしたい写真を選んでクリック"
 
 #: templates/user/profile/flickr_import.html:97
 msgid "Import selected photos"
-msgstr ""
+msgstr "選択した写真をインポート"
 
 #: templates/user/profile/flickr_import.html:107
 msgid "Importing images."
-msgstr ""
+msgstr "画像をインポート中"
 
 #: templates/user/profile/flickr_import.html:107
 msgid "Do not navigate away from this window: this might take a while!"
-msgstr ""
+msgstr "離れてたりして、このウィンドウから移動しないでください：これはしばらく時間がかかるかもしれません！"
 
 #: templates/user/profile/flickr_import.html:116
 msgid ""
 "Done! Go to <a href=\\\"/me\\\">your profile</a> to see the new pictures "
 "(and keep an eye on your notifications)!"
-msgstr ""
+msgstr "完了しました! 新しい画像（あなたの通知）をみるために<a href=\\\"/me\\\">あなたのプロフィール</a>に行ってください。"
 
 #: templates/user/profile/commercial/products.html:7
 #: templates/user/profile/commercial/products.html:15
 #, python-format
 msgid "%(user)s's commercial products"
-msgstr ""
+msgstr "%(user)sの商品"
 
 #: templates/user/profile/commercial/products.html:13
 msgid "Your commercial products"
-msgstr ""
+msgstr "あなたの商品"
 
 #: templates/user/profile/commercial/products.html:22
 msgid ""
 "Please remember that you are only allowed to claim items that you really "
 "produce and/or retail."
-msgstr ""
+msgstr "あなたが本当に製造もしくは販売をしたアイテムだと主張することを許されている事を忘れないようにしてください。"
 
 #: templates/user/profile/commercial/products.html:32
 msgid "As producer"
-msgstr ""
+msgstr "製造者として"
 
 #: templates/user/profile/commercial/products.html:37
 #: templates/user/profile/commercial/products.html:119
 msgid "Gear IDs"
-msgstr ""
+msgstr "機材ID"
 
 #: templates/user/profile/commercial/products.html:95
 msgid "You haven't claimed any commercial products yet."
-msgstr ""
+msgstr "あなたはまだ、商品をひとつも主張していません。"
 
 #: templates/user/profile/commercial/products.html:97
 #, python-format
 msgid "%(user)s hasn't claimed any commercial products yet."
-msgstr ""
+msgstr "%(user)sはまだ、商品をひとつも主張していません。"
 
 #: templates/user/profile/commercial/products.html:114
 msgid "As retailer"
-msgstr ""
+msgstr "販売者として"
 
 #: templates/user/profile/commercial/products.html:177
 msgid "You haven't claimed any retailed products yet."
-msgstr ""
+msgstr "あなたはまだ、販売製品をひとつも主張していません。"
 
 #: templates/user/profile/commercial/products.html:179
 #, python-format
 msgid "%(user)s hasn't claimed any retailed products yet."
-msgstr ""
+msgstr "%(user)sはまだ、販売製品をひとつも主張していません。"
 
 #: templates/user/profile/commercial/products.html:196
 msgid "Claim as producer"
-msgstr ""
+msgstr "製造者として主張"
 
 #: templates/user/profile/commercial/products.html:202
 msgid "Claim as retailer"
-msgstr ""
+msgstr "製造者として主張"
 
 #: templates/user/profile/commercial/products.html:230
 msgid "Claim commercial product"
-msgstr ""
+msgstr "商品にクレーム"
 
 #: templates/user/profile/commercial/products.html:238
 #: templates/user/profile/commercial/products.html:312
 #: templates/user/profile/commercial/products.html:412
 #: templates/user/profile/commercial/products.html:739
 msgid "Claim"
-msgstr ""
+msgstr "クレーム"
 
 #: templates/user/profile/commercial/products.html:247
 #: templates/user/profile/commercial/products.html:321
 msgid "Select items to remove"
-msgstr ""
+msgstr "削除するアイテムを選択"
 
 #: templates/user/profile/commercial/products.html:251
 msgid "Be careful if you try to remove all of these!"
-msgstr ""
+msgstr "これらのすべてを削除しようする場合には注意してください！"
 
 #: templates/user/profile/commercial/products.html:252
 #: templates/user/profile/commercial/products.html:290
 msgid ""
 "All the properties, including the commercial description, of this claim will "
 "be deleted and cannot be recovered!"
-msgstr ""
+msgstr "このクレームによる商品説明を含む全ての項目は削除され、復元することはできません!"
 
 #: templates/user/profile/commercial/products.html:269
 #: templates/user/profile/commercial/products.html:339
 msgid "Select the product you want to merge to"
-msgstr ""
+msgstr "に統合したい製品を選択"
 
 #: templates/user/profile/commercial/products.html:287
 #: templates/user/profile/commercial/products.html:291
 #: templates/user/profile/commercial/products.html:357
 #: templates/user/profile/commercial/products.html:361
 msgid "Are you sure?"
-msgstr ""
+msgstr "本当にいいですか?"
 
 #: templates/user/profile/commercial/products.html:304
 msgid "Claim retailed product"
-msgstr ""
+msgstr "販売製品のクレーム"
 
 #: templates/user/profile/commercial/products.html:360
 msgid ""
 "All the properties of this claim will be deleted and cannot be recovered!"
-msgstr ""
+msgstr "この主張の全ての項目は削除され、元に戻すことはできないでしょう。"
 
 #: templates/user/profile/commercial/products.html:417
 #: templates/user/profile/commercial/products.html:744
 msgid "Please wait..."
-msgstr ""
+msgstr "しばらくお待ちください..."
 
 #: templates/user/profile/edit/basic.html:6
 msgid "Edit your basic information"
-msgstr ""
+msgstr "あなたの基本情報を編集"
 
 #: templates/user/profile/edit/commercial.html:6
 msgid "Edit your commercial information"
-msgstr ""
+msgstr "あなたの商売情報を編集"
 
 #: templates/user/profile/edit/gear.html:6
 msgid "Edit your astrophotography gear"
-msgstr ""
+msgstr "あなたの天体写真機材を編集"
 
 #: templates/user/profile/edit/gear.html:22
 msgid "Edit gear item"
-msgstr ""
+msgstr "機材を編集"
 
 #: templates/user/profile/edit/gear.html:27
 #: templates/user/profile/edit/gear.html:72
 msgid "Please note!"
-msgstr ""
+msgstr "要注意"
 
 #: templates/user/profile/edit/gear.html:28
 #: templates/user/profile/edit/gear.html:73
@@ -6565,56 +6680,58 @@ msgid ""
 "information in there that refers to your personal copy of this product, like "
 "\"modded\", \"sold\", \"broken\", \"a present from my aunt\" and so on. "
 msgstr ""
+"あなたが、この製品のメーカーや名前、プロパティを加筆したり編集した場合、そのデータは全体にいきわたり、すべてのAstroBinユーザーの間にシェアされま"
+"す。「改造した」「売った」「壊れた」「叔父からプレゼントされた」などの個人的なコピーをこの製品情報に書き込まないでください。"
 
 #: templates/user/profile/edit/gear.html:40
 #: templates/user/profile/edit/gear.html:57
 msgid "Close"
-msgstr ""
+msgstr "閉じる"
 
 #: templates/user/profile/edit/gear.html:45
 msgid ""
 "The following information, instead, is personal, and may refer to your copy "
 "of this product."
-msgstr ""
+msgstr "以下の情報は個人的なものであるので、この商品のコピーを参照するようにしてください。"
 
 #: templates/user/profile/edit/gear.html:67
 msgid "Add gear item"
-msgstr ""
+msgstr "機材を追加"
 
 #: templates/user/profile/edit/license.html:6
 msgid "Set your default image license"
-msgstr ""
+msgstr "あなたのデフォルトの画像ライセンスを設定"
 
 #: templates/user/profile/edit/license.html:14
 msgid ""
 "You can set a default type of license for everything you upload into "
 "AstroBin. Change your default here."
-msgstr ""
+msgstr "あなたはAstroBinにアップロードする全ての画像にデフォルトのライセンス形式を設定することができます。"
 
 #: templates/user/profile/edit/locations.html:6
 msgid "Edit your locations"
-msgstr ""
+msgstr "あなたの位置を編集"
 
 #: templates/user/profile/edit/locations.html:12
 msgid ""
 "Use the form below to add a new location. After you add one, a new empty "
 "form will be created at the bottom, in case you want to add more."
-msgstr ""
+msgstr "新しい位置を追加するには以下のフォームを使ってください。あなたが一つを登録したあと、新しい空のフォームが下部につくられます。"
 
 #: templates/user/profile/edit/locations.html:14
 msgid "AstroBin will not share your location details with other users."
-msgstr ""
+msgstr "AstroBinでは他のユーザーにあなたの詳細な位置情報を共有しません。"
 
 #: templates/user/profile/edit/preferences.html:6
 msgid "Edit your site preferences"
-msgstr ""
+msgstr "あなたのサイトの設定を編集"
 
 #: templates/user/profile/edit/preferences.html:12
 msgid ""
 "Select your language, and which e-mail notification you would like to "
 "receive:"
-msgstr ""
+msgstr "あなたの言語を選択し、あなたが受け取りたい言語でメール通知されます。"
 
 #: templates/user/profile/edit/retailer.html:6
 msgid "Edit your retailer information"
-msgstr ""
+msgstr "あなたの販売者情報を編集"
