@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2014-02-03 11:17+0000\n"
+"POT-Creation-Date: 2014-02-12 07:28+0000\n"
 "PO-Revision-Date: 2014-02-05 12:48+0000\n"
 "Last-Translator: Omar <thekingosm168@hotmail.com>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -1021,7 +1021,7 @@ msgstr ""
 "Astrobin لايمكن أن يعرض تخزين هذه الملفات حاليا؛لذلك يجب أن تستضيفهم علي "
 "الموقع الخاص بك."
 
-#: forms.py:62 models.py:1984 models.py:2066 templates/gear/page.html:197
+#: forms.py:62 models.py:1986 models.py:2068 templates/gear/page.html:197
 #: templates/image/detail/image_title.html:14
 msgid "Link"
 msgstr "رابط"
@@ -1322,8 +1322,8 @@ msgid ""
 "Use this field to mark that the item you are claiming really is the same "
 "product (or a variation thereof) of something you have claimed before."
 msgstr ""
-"استخدم هذا الحقل لتأكيد أن المنتج الذي ادّعيته هو نفس المُنتج أو (نسخة "
-"مختلفة قليلاً) من شيء قمت بادّعائه قبل ذلك."
+"استخدم هذا الحقل لتأكيد أن المنتج الذي ادّعيته هو نفس المُنتج أو (نسخة مختلفة "
+"قليلاً) من شيء قمت بادّعائه قبل ذلك."
 
 #: forms.py:918 forms.py:981
 #, python-format
@@ -1914,7 +1914,7 @@ msgstr ""
 "اسحب البنود التي تريدها من الجانب الأيمن إلي الجانب الأيسر ، أو اضغط علي "
 "علامة الزائد."
 
-#: models.py:700 models.py:1849 models.py:2073 templates/gear/page.html:47
+#: models.py:700 models.py:1849 models.py:2075 templates/gear/page.html:47
 #: templates/image/detail/image_description.html:7
 msgid "Description"
 msgstr "الوصف"
@@ -1940,7 +1940,7 @@ msgstr "(بدون عناوين)"
 msgid "Please use the following format: yyyy-mm-dd."
 msgstr "من فضلك استخدم هذا الترتيب: سنة-شهر-يوم."
 
-#: models.py:1256 models.py:1462 models.py:2049
+#: models.py:1256 models.py:1462 models.py:2051
 msgid "Image"
 msgstr "الصورة"
 
@@ -2323,63 +2323,63 @@ msgid ""
 "the API."
 msgstr "من فضلك اشرح الغرض من تطبيقك ، وكيف تنوي استخدام الـ API."
 
-#: models.py:1961
+#: models.py:1963
 msgid "AUD - Australian dollars"
 msgstr "دولار أسترالي"
 
-#: models.py:1962
+#: models.py:1964
 msgid "CAD - Canadian dollars"
 msgstr "دولار كندي"
 
-#: models.py:1963
+#: models.py:1965
 msgid "CHF - Swiss francs"
 msgstr "فرنك سويسري"
 
-#: models.py:1964
+#: models.py:1966
 msgid "EUR - Euros"
 msgstr "يورو"
 
-#: models.py:1965
+#: models.py:1967
 msgid "GPB - Pound stelings"
 msgstr "جنيه إسترليني"
 
-#: models.py:1966
+#: models.py:1968
 msgid "PLN - Polish zloty"
 msgstr "زلوتي بولندي"
 
-#: models.py:1967
+#: models.py:1969
 msgid "SEK - Swedish krona"
 msgstr "كورونا سويدي"
 
-#: models.py:1968
+#: models.py:1970
 msgid "USD - American dollars"
 msgstr "دولار أمريكي"
 
-#: models.py:1974 models.py:2024
+#: models.py:1976 models.py:2026
 msgid "Producer"
 msgstr "المُنتِج"
 
-#: models.py:1985 models.py:2067
+#: models.py:1987 models.py:2069
 msgid "The link to this product's page on your website."
 msgstr "رابط هذا المُنتَج علي موقع الويب الخاص بك."
 
-#: models.py:1993
+#: models.py:1995
 msgid "Price"
 msgstr "السعر"
 
-#: models.py:2001
+#: models.py:2003
 msgid "Currency"
 msgstr "العملة"
 
-#: models.py:2017
+#: models.py:2019
 msgid "Retailed gear items"
 msgstr "الأجهزة المعروضة للبيع"
 
-#: models.py:2033
+#: models.py:2035
 msgid "Proper make"
 msgstr "المُصَنّع الصحيح"
 
-#: models.py:2034
+#: models.py:2036
 msgid ""
 "Sometimes, product make/brand/producer/developer names are not written "
 "properly by the users. Write here the proper make/brand/producer/developer "
@@ -2389,11 +2389,11 @@ msgstr ""
 "المُنتِج أو المطور بطريقة صحيحة. اكتب هنا الاسم الصحيح للمُصَنّع أو العلامة "
 "التجارية أو المُنتِج أو المطور."
 
-#: models.py:2041
+#: models.py:2043
 msgid "Proper name"
 msgstr "اسم الفئة"
 
-#: models.py:2042
+#: models.py:2044
 msgid ""
 "Sometimes, product names are not written properly by the users. Write here "
 "the proper product name, not including the make/brand/producer/developer "
@@ -2401,11 +2401,11 @@ msgid ""
 "so try to use a generic version of your product's name."
 msgstr ""
 "في بعض الأوقات ، لا يكتب المستخدمون اسماء المنتجات بطريقة صحيحة ، و أيضاً "
-"اسماء المُصَنّعين أو العلامة التجارية أو المُنتِج أو المطور. <br/>من الأفضل "
-"أن تحاول وضع عدد أكبر من الأجهزة في مجموعات ، لذلك حاول استخدام الاسم الشائع "
+"اسماء المُصَنّعين أو العلامة التجارية أو المُنتِج أو المطور. <br/>من الأفضل أن "
+"تحاول وضع عدد أكبر من الأجهزة في مجموعات ، لذلك حاول استخدام الاسم الشائع "
 "للمُنتَج الّذي تملكه."
 
-#: models.py:2050
+#: models.py:2052
 msgid ""
 "The official, commercial image for this product. Upload an image via the "
 "regular uploading interface, set its subject type to \"Gear\", and then "
@@ -2416,16 +2416,16 @@ msgstr ""
 "العادية و حدد نوع الصورة \"جهاز\" ، ثم اخترها من هذه القائمة. إذا قمت برفع "
 "العديد من المراجعات ستظهر المراجعات في الصفحة التجارية."
 
-#: models.py:2058
+#: models.py:2060
 msgid "Tagline"
 msgstr "الشعار"
 
-#: models.py:2059
+#: models.py:2061
 msgid ""
 "A memorable phrase that will sum up this product, for marketing purposes."
 msgstr "جملة يمكن تذكُّرها تلخِّص هذا المنتج ، لأغراض التسويق."
 
-#: models.py:2074
+#: models.py:2076
 msgid ""
 "Here you can write the full commercial description of your product. You can "
 "use some <a href=\"/faq/#comments\">formatting rules</a>."
@@ -2433,7 +2433,7 @@ msgstr ""
 "يمكنك كتابة الوصف التجاري الكامل للمُنتج الخاص بك هنا. يمكنك استخدام بعض <a "
 "href=\"/faq/#comments\">قواعد التنسيق</a>."
 
-#: models.py:2093
+#: models.py:2095
 msgid "Commercial gear items"
 msgstr "الأجهزة التجارية"
 
@@ -3068,8 +3068,8 @@ msgid ""
 msgstr ""
 "لا قيمة لهذا. <strong>لم</strong> يتم إنشاء موقع AstroBin لعرض صور جميلة ، "
 "لكن لإعطاء الجميع الفرصة للمشاركة في مجهود كبير و متنامي لمركزة و فهرسة "
-"البيانات المهمة. صورتك صاحبة ال30 دقيقة تعريض لمجرة المرأة المسلسلة M31 "
-"الّتي التقطتها البارحة <em>تنتمي</em> إلي هنا! لا تخجل و انشرها!"
+"البيانات المهمة. صورتك صاحبة ال30 دقيقة تعريض لمجرة المرأة المسلسلة M31 الّتي "
+"التقطتها البارحة <em>تنتمي</em> إلي هنا! لا تخجل و انشرها!"
 
 #: templates/faq.html:73
 msgid ""
@@ -4038,9 +4038,9 @@ msgid ""
 "strong> images, reaching <strong>%(total_integration)s</strong> hours of "
 "integration time."
 msgstr ""
-"<strong>%(total_users)s</strong> مستخدم قاموا برفع <strong>%"
-"(total_images)s</strong> صورة ، وصولاً إلي مدة تعريض للضوء <strong>%"
-"(total_integration)s</strong> ساعة."
+"<strong>%(total_users)s</strong> مستخدم قاموا برفع <strong>%(total_images)s</"
+"strong> صورة ، وصولاً إلي مدة تعريض للضوء <strong>%(total_integration)s</"
+"strong> ساعة."
 
 #: templates/stats.html:17
 msgid "Total integration hours in the last 12 months"
@@ -4120,8 +4120,8 @@ msgid ""
 "too."
 msgstr ""
 "استخدم هذا الزر لرفع صورة إلي <strong>المساحة العامة</strong>. سيتم عرضها في "
-"<a href=\"%(profile_url)s\">ملفك التعريفي</a> و هنا في الصفحة الرئيسية. يمكنك "
-"أيضا <a href=\"%(flickr_url)s\">الاستيراد من موقع Flickr </a>"
+"<a href=\"%(profile_url)s\">ملفك التعريفي</a> و هنا في الصفحة الرئيسية. "
+"يمكنك أيضا <a href=\"%(flickr_url)s\">الاستيراد من موقع Flickr </a>"
 
 #: templates/upload.html:57
 #, python-format
@@ -4457,8 +4457,8 @@ msgid ""
 "at a time, to improve the situation. It's very simple! This is what you need "
 "to do:"
 msgstr ""
-"يمكننا جميعاً العمل معاً بمجهود تعاوني شبيه بأسلوب الـ Wiki ، مشاركات قليلة "
-"في كل مرة لتحسين الوضع. إنه موضوع بسيط! هذا كل ما تحتاج لفعله:"
+"يمكننا جميعاً العمل معاً بمجهود تعاوني شبيه بأسلوب الـ Wiki ، مشاركات قليلة في "
+"كل مرة لتحسين الوضع. إنه موضوع بسيط! هذا كل ما تحتاج لفعله:"
 
 #: templates/gear/fix.html:22
 msgid "Make sure both the make and the name are in English."
@@ -4508,8 +4508,8 @@ msgid ""
 "objects are shared among everyone, in the database. The word \"(sold)\" "
 "should be removed."
 msgstr ""
-"\"مباعة\" هي معلومة خاصة بمستخدم معين. يتم مشاركة الأجهزة بين جميع المستخدمين "
-"في قاعدة البيانات. لذلك يجب حذف كلمة \"(مباعة)\"."
+"\"مباعة\" هي معلومة خاصة بمستخدم معين. يتم مشاركة الأجهزة بين جميع "
+"المستخدمين في قاعدة البيانات. لذلك يجب حذف كلمة \"(مباعة)\"."
 
 #: templates/gear/fix.html:58
 msgid ""
@@ -4517,8 +4517,8 @@ msgid ""
 "objects are shared among everyone, in the database. The word \"(modified)\" "
 "should be removed."
 msgstr ""
-"\"معدلة\" هي معلومة خاصة بمستخدم معين. يتم مشاركة الأجهزة بين جميع المستخدمين "
-"في قاعدة البيانات. لذلك يجب حذف كلمة \"(معدلة)\"."
+"\"معدلة\" هي معلومة خاصة بمستخدم معين. يتم مشاركة الأجهزة بين جميع "
+"المستخدمين في قاعدة البيانات. لذلك يجب حذف كلمة \"(معدلة)\"."
 
 #: templates/gear/fix.html:63
 msgid ""
@@ -4768,8 +4768,8 @@ msgid ""
 "strong>'s preferred language is <strong>%(lang)s</strong>."
 msgstr ""
 "<strong>اترك تعليقك هنا</strong> ، و تذكر أن AstroBin مجتمع دولي: ينصح دائما "
-"باستخدام اللّغة الإنجليزية. لغة <strong>%(user)s</strong> المُفضلة هي "
-"<strong>%(lang)s</strong>."
+"باستخدام اللّغة الإنجليزية. لغة <strong>%(user)s</strong> المُفضلة هي <strong>"
+"%(lang)s</strong>."
 
 #: templates/image/detail/commercial.html:6
 msgid "Made possible by"
@@ -5642,8 +5642,8 @@ msgstr ""
 "\n"
 "لكي تري كل إشعاراتك ، اذهب من فضلك إلي %(notices_url)s.\n"
 "\n"
-"إذا كنت لا تريد استقبال رسائل أخري ، اضبط إعداداتك بالذهاب إلي "
-"http://astrobin.com%(pref_url)s.\n"
+"إذا كنت لا تريد استقبال رسائل أخري ، اضبط إعداداتك بالذهاب إلي http://"
+"astrobin.com%(pref_url)s.\n"
 "\n"
 "نرجو لك سماء صافية \n"
 "AstroBin.\n"
@@ -5765,7 +5765,8 @@ msgid ""
 msgstr ""
 "لديك %(number)s صور بدون بيانات.\n"
 "\n"
-"يعتمد AstroBin علي البيانات لكي يصبح خدمة عظيمة لك و لكل المستخدمين الآخرين.\n"
+"يعتمد AstroBin علي البيانات لكي يصبح خدمة عظيمة لك و لكل المستخدمين "
+"الآخرين.\n"
 "من فضلك املأ بيانات صورك علي الرابط التالي:\n"
 "\n"
 "%(url)s\n"
@@ -5859,7 +5860,8 @@ msgstr "%(user)s قام بالرد علي تعليقك. يمكنك رؤيته ع
 #, python-format
 msgid ""
 "<a href=\"%(url)s\"><strong>%(user)s</strong> replied to your comment.</a>"
-msgstr "<a href=\"%(url)s\"><strong>%(user)s</strong> قام بالرد علي تعليقك.</a>"
+msgstr ""
+"<a href=\"%(url)s\"><strong>%(user)s</strong> قام بالرد علي تعليقك.</a>"
 
 #: templates/notification/new_comment_reply/short.txt:2
 #, python-format
@@ -5880,7 +5882,8 @@ msgstr ""
 msgid ""
 "<a href=\"%(object_url)s\"><strong>%(object)s</strong> is now following you."
 "</a>"
-msgstr "<a href=\"%(object_url)s\"><strong>%(object)s</strong> يتابعك الآن.</a>"
+msgstr ""
+"<a href=\"%(object_url)s\"><strong>%(object)s</strong> يتابعك الآن.</a>"
 
 #: templates/notification/new_follower/short.txt:2
 msgid "You have a new follower!"
@@ -5901,8 +5904,8 @@ msgid ""
 "<a href=\"%(url)s\"><strong>%(user)s</strong> started a new discussion about "
 "a gear item you own!</a>"
 msgstr ""
-"<a href=\"%(url)s\"><strong>%(user)s</strong> بدأ نقاش جديد حول جهاز "
-"تملكه!</a>"
+"<a href=\"%(url)s\"><strong>%(user)s</strong> بدأ نقاش جديد حول جهاز تملكه!</"
+"a>"
 
 #: templates/notification/new_gear_discussion/short.txt:2
 #, python-format
@@ -6022,8 +6025,8 @@ msgid ""
 "<a href=\"%(object_url)s\"><strong>%(originator)s</strong> has published a "
 "new image revision.</a>"
 msgstr ""
-"<a href=\"%(object_url)s\"><strong>%(originator)s</strong> نشر مراجعة "
-"جديدة.</a>"
+"<a href=\"%(object_url)s\"><strong>%(originator)s</strong> نشر مراجعة جديدة."
+"</a>"
 
 #: templates/notification/new_image_revision/short.txt:2
 #, python-format
@@ -6119,8 +6122,8 @@ msgid ""
 "processed image to the public data pool: <strong>\"%(pool_name)s.\"</"
 "strong></a>"
 msgstr ""
-"<a href=\"%(pool_url)s\"><strong>%(user_name)s</strong> أضاف صورة معالجة جديدة "
-"إلي مساحة البيانات العامة: <strong>\"%(pool_name)s.\"</strong></a>"
+"<a href=\"%(pool_url)s\"><strong>%(user_name)s</strong> أضاف صورة معالجة "
+"جديدة إلي مساحة البيانات العامة: <strong>\"%(pool_name)s.\"</strong></a>"
 
 #: templates/notification/rawdata_posted_image_to_public_pool/short.txt:2
 #, python-format
@@ -6142,8 +6145,8 @@ msgid ""
 "<a href=\"%(pool_url)s\"><strong>%(user_name)s</strong> has added new data "
 "to the public pool: <strong>\"%(pool_name)s.\"</strong></a>"
 msgstr ""
-"<a href=\"%(pool_url)s\"><strong>%(user_name)s</strong> أضاف بيانات جديدة إلي "
-"مساحة البيانات العامة <strong>\"%(pool_name)s.\"</strong></a>"
+"<a href=\"%(pool_url)s\"><strong>%(user_name)s</strong> أضاف بيانات جديدة "
+"إلي مساحة البيانات العامة <strong>\"%(pool_name)s.\"</strong></a>"
 
 #: templates/notification/rawdata_posted_to_pool/short.html:2
 #, python-format
@@ -6151,8 +6154,8 @@ msgid ""
 "<a href=\"%(pool_url)s\"><strong>%(user_name)s</strong> has added new data "
 "to the public pool: <strong>\"%(pool_name)s.\"</a>"
 msgstr ""
-"<a href=\"%(pool_url)s\"><strong>%(user_name)s</strong> أضاف بيانات جديدة إلي "
-"مساحة البيانات العامة:<strong>\"%(pool_name)s.\"</a>"
+"<a href=\"%(pool_url)s\"><strong>%(user_name)s</strong> أضاف بيانات جديدة "
+"إلي مساحة البيانات العامة:<strong>\"%(pool_name)s.\"</a>"
 
 #: templates/notification/rawdata_posted_to_pool/short.txt:2
 #, python-format
@@ -6238,8 +6241,8 @@ msgid ""
 "<a href=\"%(object_url)s\">You have stopped following <strong>%(object)s</"
 "strong>.</a>"
 msgstr ""
-"<a href=\"%(object_url)s\">لقد توقّفتَ عن متابعة <strong>%"
-"(object)s</strong>.</a>"
+"<a href=\"%(object_url)s\">لقد توقّفتَ عن متابعة <strong>%(object)s</strong>.</"
+"a>"
 
 #: templates/openid_provider/decide.html:4
 #: templates/openid_provider/decide.html:7
@@ -6836,10 +6839,10 @@ msgid ""
 "information in there that refers to your personal copy of this product, like "
 "\"modded\", \"sold\", \"broken\", \"a present from my aunt\" and so on. "
 msgstr ""
-"عند إضافة أو تعديل اسم المُصَنّع أو الطراز أو خصائص المُنتَج ، تكون البيانات "
-"عامة و يتشاركها جميع مستخدمي AstroBin. لا تكتب أي معلومات خاصة بنسختك "
-"الشخصية من هذا المُنتَج. مثل \"معدلة\" أو \" تم بيعها\" أو \"تحطمت\" أو \"هدية من "
-"عمتي\" إلخ. "
+"عند إضافة أو تعديل اسم المُصَنّع أو الطراز أو خصائص المُنتَج ، تكون البيانات عامة "
+"و يتشاركها جميع مستخدمي AstroBin. لا تكتب أي معلومات خاصة بنسختك الشخصية من "
+"هذا المُنتَج. مثل \"معدلة\" أو \" تم بيعها\" أو \"تحطمت\" أو \"هدية من عمتي\" "
+"إلخ. "
 
 #: templates/user/profile/edit/gear.html:40
 #: templates/user/profile/edit/gear.html:57

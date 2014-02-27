@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2014-02-03 11:19+0000\n"
+"POT-Creation-Date: 2014-02-12 07:30+0000\n"
 "PO-Revision-Date: 2013-11-12 17:01+0000\n"
 "Last-Translator: scyth <scyth1@gmail.com>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -1019,7 +1019,7 @@ msgstr ""
 "umieść link ze zdjęciem w tym pliku. Niestety, Astrobin nie oferuje "
 "przechowywania plików, więc trzeba je przechowywać we własnym zakresie."
 
-#: forms.py:62 models.py:1984 models.py:2066 templates/gear/page.html:197
+#: forms.py:62 models.py:1986 models.py:2068 templates/gear/page.html:197
 #: templates/image/detail/image_title.html:14
 msgid "Link"
 msgstr "Link"
@@ -1918,7 +1918,7 @@ msgid ""
 "Drag items from the right side to the left side, or click on the plus sign."
 msgstr "Przeciągnij elementy z prawej na lewą stronę lub kliknij w plus."
 
-#: models.py:700 models.py:1849 models.py:2073 templates/gear/page.html:47
+#: models.py:700 models.py:1849 models.py:2075 templates/gear/page.html:47
 #: templates/image/detail/image_description.html:7
 msgid "Description"
 msgstr "Opis"
@@ -1944,7 +1944,7 @@ msgstr "(brak tytułu)"
 msgid "Please use the following format: yyyy-mm-dd."
 msgstr "Użyj następującego formatu: yyyy-mm-dd."
 
-#: models.py:1256 models.py:1462 models.py:2049
+#: models.py:1256 models.py:1462 models.py:2051
 msgid "Image"
 msgstr "Zdjęcie"
 
@@ -2331,63 +2331,63 @@ msgid ""
 "the API."
 msgstr "Proszę opisać powód i sposób, w jaki API będzie wykorzystywane."
 
-#: models.py:1961
+#: models.py:1963
 msgid "AUD - Australian dollars"
 msgstr "AUD - Dolary australijskie"
 
-#: models.py:1962
+#: models.py:1964
 msgid "CAD - Canadian dollars"
 msgstr "CAD - Dolary kanadyjskie"
 
-#: models.py:1963
+#: models.py:1965
 msgid "CHF - Swiss francs"
 msgstr "CHF - Franki szwajcarskie"
 
-#: models.py:1964
+#: models.py:1966
 msgid "EUR - Euros"
 msgstr "EUR - Euro"
 
-#: models.py:1965
+#: models.py:1967
 msgid "GPB - Pound stelings"
 msgstr "GBP - Funt szterling"
 
-#: models.py:1966
+#: models.py:1968
 msgid "PLN - Polish zloty"
 msgstr "PLN - Polski złoty"
 
-#: models.py:1967
+#: models.py:1969
 msgid "SEK - Swedish krona"
 msgstr "SEK - Korona szwedzka"
 
-#: models.py:1968
+#: models.py:1970
 msgid "USD - American dollars"
 msgstr "USD - Dolary amerykańskie"
 
-#: models.py:1974 models.py:2024
+#: models.py:1976 models.py:2026
 msgid "Producer"
 msgstr "Producent"
 
-#: models.py:1985 models.py:2067
+#: models.py:1987 models.py:2069
 msgid "The link to this product's page on your website."
 msgstr "Odnośnik to produktu na Twojej stronie."
 
-#: models.py:1993
+#: models.py:1995
 msgid "Price"
 msgstr "Cena"
 
-#: models.py:2001
+#: models.py:2003
 msgid "Currency"
 msgstr "Waluta"
 
-#: models.py:2017
+#: models.py:2019
 msgid "Retailed gear items"
 msgstr "Powiązany sprzęt"
 
-#: models.py:2033
+#: models.py:2035
 msgid "Proper make"
 msgstr "Właściwa marka"
 
-#: models.py:2034
+#: models.py:2036
 msgid ""
 "Sometimes, product make/brand/producer/developer names are not written "
 "properly by the users. Write here the proper make/brand/producer/developer "
@@ -2396,11 +2396,11 @@ msgstr ""
 "Czasami marka/producent/nazwa produktu nie są poprawnie wpisywane przez "
 "użytkowników. Wpisz poprawną markę/producenta/nazwę."
 
-#: models.py:2041
+#: models.py:2043
 msgid "Proper name"
 msgstr "Poprawna nazwa"
 
-#: models.py:2042
+#: models.py:2044
 msgid ""
 "Sometimes, product names are not written properly by the users. Write here "
 "the proper product name, not including the make/brand/producer/developer "
@@ -2412,7 +2412,7 @@ msgstr ""
 ">Zaleca się grupowanie wielu produktów tej samej marki, więc wpisz nazwę "
 "generyczną, bez numeru wersji produktu."
 
-#: models.py:2050
+#: models.py:2052
 msgid ""
 "The official, commercial image for this product. Upload an image via the "
 "regular uploading interface, set its subject type to \"Gear\", and then "
@@ -2423,18 +2423,18 @@ msgstr ""
 "inny obraz, wybierz typ - \"Sprzęt', a później wybierz zdjęcie z listy. "
 "Jeżeli dodasz wiele wersji, wszystkie będą dostępne na stronie produktu."
 
-#: models.py:2058
+#: models.py:2060
 msgid "Tagline"
 msgstr "Slogan reklamowy"
 
-#: models.py:2059
+#: models.py:2061
 msgid ""
 "A memorable phrase that will sum up this product, for marketing purposes."
 msgstr ""
 "Łatwe do zapamiętania zdanie, które podsumowuje ten produkt - dla celów "
 "marketingowych."
 
-#: models.py:2074
+#: models.py:2076
 #, fuzzy
 msgid ""
 "Here you can write the full commercial description of your product. You can "
@@ -2443,7 +2443,7 @@ msgstr ""
 "Tutaj możesz dodać pełny opis produktu. Możesz używać <a href=\"/faq/"
 "#10\">formatowania tekstu</a>."
 
-#: models.py:2093
+#: models.py:2095
 msgid "Commercial gear items"
 msgstr "Sprzęt komercyjny"
 

@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: AstroBin 1.9\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2014-02-03 11:20+0000\n"
+"POT-Creation-Date: 2014-02-12 07:32+0000\n"
 "PO-Revision-Date: 2012-11-25 18:36+0100\n"
 "Last-Translator: strugar <strugar@gmail.com>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -1015,7 +1015,7 @@ msgid ""
 "moment, so you will have to host them on your personal space."
 msgstr ""
 
-#: forms.py:62 models.py:1984 models.py:2066 templates/gear/page.html:197
+#: forms.py:62 models.py:1986 models.py:2068 templates/gear/page.html:197
 #: templates/image/detail/image_title.html:14
 msgid "Link"
 msgstr ""
@@ -1892,7 +1892,7 @@ msgid ""
 "Drag items from the right side to the left side, or click on the plus sign."
 msgstr ""
 
-#: models.py:700 models.py:1849 models.py:2073 templates/gear/page.html:47
+#: models.py:700 models.py:1849 models.py:2075 templates/gear/page.html:47
 #: templates/image/detail/image_description.html:7
 msgid "Description"
 msgstr ""
@@ -1918,7 +1918,7 @@ msgstr ""
 msgid "Please use the following format: yyyy-mm-dd."
 msgstr ""
 
-#: models.py:1256 models.py:1462 models.py:2049
+#: models.py:1256 models.py:1462 models.py:2051
 msgid "Image"
 msgstr ""
 
@@ -2313,71 +2313,71 @@ msgstr ""
 "Molimo Vas da objasnite svrhu Vaše aplikacije, i način na koji nameravate  "
 "da koristite API."
 
-#: models.py:1961
+#: models.py:1963
 #, fuzzy
 msgid "AUD - Australian dollars"
 msgstr "AUD - Australijski dolar"
 
-#: models.py:1962
+#: models.py:1964
 #, fuzzy
 msgid "CAD - Canadian dollars"
 msgstr "CAD - Kanadski dolar"
 
-#: models.py:1963
+#: models.py:1965
 #, fuzzy
 msgid "CHF - Swiss francs"
 msgstr "CHF - Švajcarski franak"
 
-#: models.py:1964
+#: models.py:1966
 #, fuzzy
 msgid "EUR - Euros"
 msgstr "EUR - Euro"
 
-#: models.py:1965
+#: models.py:1967
 #, fuzzy
 msgid "GPB - Pound stelings"
 msgstr "GPB - Britanska funta"
 
-#: models.py:1966
+#: models.py:1968
 #, fuzzy
 msgid "PLN - Polish zloty"
 msgstr "PLN - Poljski zlot"
 
-#: models.py:1967
+#: models.py:1969
 #, fuzzy
 msgid "SEK - Swedish krona"
 msgstr "SEK - Švedska kruna"
 
-#: models.py:1968
+#: models.py:1970
 #, fuzzy
 msgid "USD - American dollars"
 msgstr "USD - Američki dolar"
 
-#: models.py:1974 models.py:2024
+#: models.py:1976 models.py:2026
 msgid "Producer"
 msgstr "Proizvođač"
 
-#: models.py:1985 models.py:2067
+#: models.py:1987 models.py:2069
 msgid "The link to this product's page on your website."
 msgstr "Link ka ovom proizvodu na Vašem web sajtu."
 
-#: models.py:1993
+#: models.py:1995
 msgid "Price"
 msgstr "Cena"
 
-#: models.py:2001
+#: models.py:2003
 msgid "Currency"
 msgstr "Valuta"
 
-#: models.py:2017
+#: models.py:2019
 msgid "Retailed gear items"
 msgstr ""
 
-#: models.py:2033
+#: models.py:2035
 msgid "Proper make"
 msgstr "Tačan model"
 
-#: models.py:2034
+#: models.py:2036
 msgid ""
 "Sometimes, product make/brand/producer/developer names are not written "
 "properly by the users. Write here the proper make/brand/producer/developer "
@@ -2386,11 +2386,11 @@ msgstr ""
 "Korisnici ponekada ne napišu ispravno naziv marke/modela/proizvođača/"
 "developera. Unesite ovde ispravno naziv marke/modela/proizvođača/developera."
 
-#: models.py:2041
+#: models.py:2043
 msgid "Proper name"
 msgstr "Tačno ime"
 
-#: models.py:2042
+#: models.py:2044
 msgid ""
 "Sometimes, product names are not written properly by the users. Write here "
 "the proper product name, not including the make/brand/producer/developer "
@@ -2402,7 +2402,7 @@ msgstr ""
 ">Preporučujemo da grupišete zajedno što je moguće više proizvoda, stoga "
 "pokušajte da koristite generičku verziju imena Vašeg proizvoda."
 
-#: models.py:2050
+#: models.py:2052
 msgid ""
 "The official, commercial image for this product. Upload an image via the "
 "regular uploading interface, set its subject type to \"Gear\", and then "
@@ -2410,16 +2410,16 @@ msgid ""
 "appear in the commercial page."
 msgstr ""
 
-#: models.py:2058
+#: models.py:2060
 msgid "Tagline"
 msgstr ""
 
-#: models.py:2059
+#: models.py:2061
 msgid ""
 "A memorable phrase that will sum up this product, for marketing purposes."
 msgstr ""
 
-#: models.py:2074
+#: models.py:2076
 #, fuzzy
 msgid ""
 "Here you can write the full commercial description of your product. You can "
@@ -2428,7 +2428,7 @@ msgstr ""
 "Ovde možete uneti puni komercijalni opis Vašeg proizvoda. Možete koristiti "
 "<a href=\"/faq/#10\">pravila formatiranja</a>."
 
-#: models.py:2093
+#: models.py:2095
 msgid "Commercial gear items"
 msgstr "Komercijalni zupčanici"
 
