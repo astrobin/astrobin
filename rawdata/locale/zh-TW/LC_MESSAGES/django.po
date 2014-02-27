@@ -8,8 +8,8 @@ msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2014-02-12 07:33+0000\n"
-"PO-Revision-Date: 2014-02-17 01:41+0000\n"
-"Last-Translator: hsao <yklab@seed.net.tw>\n"
+"PO-Revision-Date: 2014-02-19 13:26+0000\n"
+"Last-Translator: mychat_aa <mychat.aa@gmail.com>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
 "Language: zh-TW\n"
 "MIME-Version: 1.0\n"
@@ -17,7 +17,7 @@ msgstr ""
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=(n != 1);\n"
 "X-Generator: Pootle 2.5.0\n"
-"X-POOTLE-MTIME: 1392601275.953684\n"
+"X-POOTLE-MTIME: 1392816410.23460\n"
 
 #: folders.py:82 models.py:215 models.py:283
 #: templates/rawdata/privatesharedfolder_detail.html:84
@@ -37,7 +37,7 @@ msgstr "類型"
 
 #: folders.py:117 templates/rawdata/_folder_dropdown.html:28
 msgid "Upload date"
-msgstr ""
+msgstr "上傳日期"
 
 #: folders.py:141 templates/rawdata/_folder_dropdown.html:21
 #: templates/rawdata/library.html:81 templates/rawdata/rawimage_detail.html:18
@@ -76,11 +76,11 @@ msgstr "使用者"
 
 #: forms.py:87
 msgid "A list of users you want to invite. Use a comma to separate them."
-msgstr ""
+msgstr "邀請用戶列表請用逗號將它們分開"
 
 #: models.py:44 templatetags/rawdata_tags.py:15
 msgid "Unknown"
-msgstr ""
+msgstr "未知"
 
 #: models.py:45
 msgid "Light"
@@ -102,7 +102,7 @@ msgstr "平場"
 msgid ""
 "A public name for this pool. Be descriptive, include the name of the "
 "celestial object and a target focal length in millimeters."
-msgstr ""
+msgstr "用一個公開的名稱去描述，包括天體的對象的名稱和目標的焦距，單位為mm"
 
 #: models.py:220 models.py:288
 #: templates/rawdata/privatesharedfolder_list.html:38
@@ -112,23 +112,23 @@ msgstr "描述"
 
 #: models.py:221
 msgid "Describe the goals and terms of this pool."
-msgstr ""
+msgstr "描述這個資料庫的目標和項目"
 
 #: models.py:284
 msgid ""
 "A name for this folder. Be descriptive, so that the folder can be quickly "
 "recognized by the name."
-msgstr ""
+msgstr "命名這個文件夾。可描述性的，因此，該文件夾可以通過名稱來快速識別。"
 
 #: models.py:289
 msgid "Describe the goals of this folder."
-msgstr ""
+msgstr "描述此文件夾的項目(目標)"
 
 #: serializers.py:38
 msgid ""
 "You don't have any free space on AstroBin Rawdata. Consider upgrading your "
 "account."
-msgstr ""
+msgstr "您不必須有AstroBin RAWDATA任何可用空間。考慮升級您的帳戶。"
 
 #: signal_handlers.py:18
 msgid ""
@@ -138,22 +138,22 @@ msgstr ""
 
 #: templates/rawdata/_browser_js.html:20 templates/rawdata/_images.html:14
 msgid "Select all"
-msgstr ""
+msgstr "全部選取"
 
 #: templates/rawdata/_browser_js.html:40
 msgid "Reset selection"
-msgstr ""
+msgstr "重新選取"
 
 #: templates/rawdata/_browser_js.html:50 templates/rawdata/_images.html:41
 #: templates/rawdata/privatesharedfolder_detail.html:142
 #: templates/rawdata/publicdatapool_detail.html:111
 #: templates/rawdata/temporaryarchive_detail.html:24
 msgid "Download"
-msgstr ""
+msgstr "下載"
 
 #: templates/rawdata/_browser_js.html:56 templates/rawdata/library.html:150
 msgid "Preprocess"
-msgstr ""
+msgstr "預處理"
 
 #: templates/rawdata/_browser_js.html:63
 msgid "Share"
@@ -179,7 +179,7 @@ msgstr "刪除"
 #: templates/rawdata/_folder_dropdown.html:7
 #: templates/rawdata/library.html:129
 msgid "Smart folders"
-msgstr ""
+msgstr "智能資料夾"
 
 #: templates/rawdata/_folders.html:12
 msgid "Files"
@@ -196,7 +196,7 @@ msgstr "已上傳"
 
 #: templates/rawdata/_screenshot_tour.html:3
 msgid "Screenshot tour"
-msgstr ""
+msgstr "螢幕截圖教學"
 
 #: templates/rawdata/help_01.html:4 templates/rawdata/help_01.html.py:8
 #: templates/rawdata/help_01.html:32 templates/rawdata/help_02.html:4
@@ -271,7 +271,7 @@ msgstr "下一頁"
 
 #: templates/rawdata/help_02.html:19
 msgid "How does it work?"
-msgstr ""
+msgstr "原理是什麼？"
 
 #: templates/rawdata/help_02.html:20
 msgid ""
