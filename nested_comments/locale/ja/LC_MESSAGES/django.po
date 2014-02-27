@@ -1,0 +1,138 @@
+# SOME DESCRIPTIVE TITLE.
+# Copyright (C) YEAR THE PACKAGE'S COPYRIGHT HOLDER
+# This file is distributed under the same license as the PACKAGE package.
+# FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
+#
+msgid ""
+msgstr ""
+"Project-Id-Version: PACKAGE VERSION\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2014-02-12 07:33+0000\n"
+"PO-Revision-Date: 2014-02-13 07:02+0000\n"
+"Last-Translator: ohmishonin <kasuzen@gmail.com>\n"
+"Language-Team: LANGUAGE <LL@li.org>\n"
+"Language: ja\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: nplurals=2; plural=(n != 1);\n"
+"X-Generator: Pootle 2.5.0\n"
+"X-POOTLE-MTIME: 1392274925.19612\n"
+
+#: templates/nested_comments/nestedcomment_app.html:23
+#: templates/nested_comments/nestedcomment_app.html:138
+#: templates/nested_comments/nestedcomment_app.html:161
+#: templates/nested_comments/nestedcomment_list.html:58
+msgid "Cancel"
+msgstr "キャンセル"
+
+#: templates/nested_comments/nestedcomment_app.html:38
+msgid "Add a comment"
+msgstr "コメントを追加"
+
+#: templates/nested_comments/nestedcomment_app.html:43
+#: templates/nested_comments/nestedcomment_app.html:177
+msgid ""
+"Please <a href=\"/accounts/login/\">login</a> or <a href=\"/accounts/"
+"register/\">register</a> to leave a comment.</p>"
+msgstr ""
+"コメントを残すためには<a href=\"/accounts/login/\">ログイン</a>か<a "
+"href=\"/accounts/register/\">新規登録</a>をしてください。</p>"
+
+#: templates/nested_comments/nestedcomment_app.html:52
+msgid "There are no comments yet."
+msgstr "コメントが入力されていません。"
+
+#: templates/nested_comments/nestedcomment_app.html:68
+#: templates/nested_comments/nestedcomment_app.html:86
+msgid "(deleted)"
+msgstr "（削除済み）"
+
+#: templates/nested_comments/nestedcomment_app.html:97
+#: templates/nested_comments/nestedcomment_list.html:33
+msgid "Link"
+msgstr "リンク"
+
+#: templates/nested_comments/nestedcomment_app.html:101
+#: templates/nested_comments/nestedcomment_list.html:39
+msgid "Undelete"
+msgstr "削除の取り消し"
+
+#: templates/nested_comments/nestedcomment_app.html:103
+#: templates/nested_comments/nestedcomment_list.html:41
+msgid "Delete"
+msgstr "削除"
+
+#: templates/nested_comments/nestedcomment_app.html:108
+#: templates/nested_comments/nestedcomment_list.html:44
+msgid "Edit"
+msgstr "編集"
+
+#: templates/nested_comments/nestedcomment_app.html:113
+#: templates/nested_comments/nestedcomment_list.html:46
+msgid "Reply"
+msgstr "返信"
+
+#: templates/nested_comments/nestedcomment_app.html:141
+#: templates/nested_comments/nestedcomment_app.html:164
+msgid "The comment cannot be empty."
+msgstr "コメント欄は必ず入力してください。"
+
+#: templates/nested_comments/nestedcomment_app.html:188
+#: templates/nested_comments/nestedcomment_list.html:57
+msgid "Save"
+msgstr "保存"
+
+#: templates/nested_comments/nestedcomment_app.html:198
+msgid "Preview"
+msgstr "プレビュー"
+
+#: templates/nested_comments/nestedcomment_app.html:204
+#: templates/nested_comments/nestedcomment_list.html:60
+msgid "Formatting help"
+msgstr "フォーマットのヘルプ"
+
+#: templates/nested_comments/nestedcomment_app.html:208
+msgid "You type:"
+msgstr "入力例"
+
+#: templates/nested_comments/nestedcomment_app.html:209
+msgid "You see:"
+msgstr "参照"
+
+#: templates/nested_comments/nestedcomment_app.html:214
+#: templates/nested_comments/nestedcomment_app.html:215
+msgid "italics"
+msgstr "斜体"
+
+#: templates/nested_comments/nestedcomment_app.html:219
+#: templates/nested_comments/nestedcomment_app.html:220
+msgid "bold"
+msgstr "太字"
+
+#: templates/nested_comments/nestedcomment_app.html:229
+msgid "(TAB or 4 spaces)"
+msgstr "（タブもしくは4×スペース）"
+
+#: templates/nested_comments/nestedcomment_app.html:229
+#: templates/nested_comments/nestedcomment_app.html:230
+msgid "preformatted text"
+msgstr "整形済みテキスト"
+
+#: templates/nested_comments/nestedcomment_app.html:234
+#: templates/nested_comments/nestedcomment_app.html:235
+msgid "quoted text"
+msgstr "引用文"
+
+#: templates/nested_comments/nestedcomment_app.html:239
+#: templates/nested_comments/nestedcomment_app.html:240
+msgid "escape the formatting syntax"
+msgstr "書式設定を無視する"
+
+#: templates/nested_comments/nestedcomment_list.html:26
+msgid "(comment deleted)"
+msgstr "(コメントは削除されました)"
+
+#: templates/nested_comments/nestedcomment_list.html:75
+msgid "There doesn't seem to be anything here."
+msgstr "ここには何もないようです。"
