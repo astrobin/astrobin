@@ -3,6 +3,7 @@ import urllib
 
 # Django
 from django.conf import settings
+from django.db.models import Q
 from django.template import Library, Node
 
 # Third party
@@ -17,7 +18,19 @@ def donate_modal(context):
     return {
         'base_url': settings.ASTROBIN_BASE_URL,
         'business': settings.SUBSCRIPTION_PAYPAL_SETTINGS['business'],
-        'subscription': Subscription.objects.get(name = 'AstroBin Donor'),
+
+        'monthly_coffee_sub': Subscription.objects.get(name = 'AstroBin Donor Coffee Monthly'),
+        'monthly_snack_sub': Subscription.objects.get(name = 'AstroBin Donor Snack Monthly'),
+        'monthly_pizza_sub': Subscription.objects.get(name = 'AstroBin Donor Pizza Monthly'),
+        'monthly_movie_sub': Subscription.objects.get(name = 'AstroBin Donor Movie Monthly'),
+        'monthly_dinner_sub': Subscription.objects.get(name = 'AstroBin Donor Dinner Monthly'),
+
+        'yearly_coffee_sub': Subscription.objects.get(name = 'AstroBin Donor Coffee Yearly'),
+        'yearly_snack_sub': Subscription.objects.get(name = 'AstroBin Donor Snack Yearly'),
+        'yearly_pizza_sub': Subscription.objects.get(name = 'AstroBin Donor Pizza Yearly'),
+        'yearly_movie_sub': Subscription.objects.get(name = 'AstroBin Donor Movie Yearly'),
+        'yearly_dinner_sub': Subscription.objects.get(name = 'AstroBin Donor Dinner Yearly'),
+
         'request': context['request'],
     }
 
@@ -27,7 +40,19 @@ def remove_ads_modal(context):
     return {
         'base_url': settings.ASTROBIN_BASE_URL,
         'business': settings.SUBSCRIPTION_PAYPAL_SETTINGS['business'],
-        'subscription': Subscription.objects.get(name = 'AstroBin Donor'),
+
+        'monthly_coffee_sub': Subscription.objects.get(name = 'AstroBin Donor Coffee Monthly'),
+        'monthly_snack_sub': Subscription.objects.get(name = 'AstroBin Donor Snack Monthly'),
+        'monthly_pizza_sub': Subscription.objects.get(name = 'AstroBin Donor Pizza Monthly'),
+        'monthly_movie_sub': Subscription.objects.get(name = 'AstroBin Donor Movie Monthly'),
+        'monthly_dinner_sub': Subscription.objects.get(name = 'AstroBin Donor Dinner Monthly'),
+
+        'yearly_coffee_sub': Subscription.objects.get(name = 'AstroBin Donor Coffee Yearly'),
+        'yearly_snack_sub': Subscription.objects.get(name = 'AstroBin Donor Snack Yearly'),
+        'yearly_pizza_sub': Subscription.objects.get(name = 'AstroBin Donor Pizza Yearly'),
+        'yearly_movie_sub': Subscription.objects.get(name = 'AstroBin Donor Movie Yearly'),
+        'yearly_dinner_sub': Subscription.objects.get(name = 'AstroBin Donor Dinner Yearly'),
+
         'request': context['request'],
     }
 
@@ -56,7 +81,27 @@ def donor_badge(user, size = 'large'):
 @register.filter
 def is_donor(user):
     if user.is_authenticated():
-        return UserSubscription.objects.filter(user = user, subscription__name = 'AstroBin Donor').count() > 0
+        try:
+            us = UserSubscription.objects.get(
+                Q(user = user) &
+                Q(
+                    Q(subscription__name = 'AstroBin Donor Coffee Monthly') |
+                    Q(subscription__name = 'AstroBin Donor Snack Monthly') |
+                    Q(subscription__name = 'AstroBin Donor Pizza Monthly') |
+                    Q(subscription__name = 'AstroBin Donor Movie Monthly') |
+                    Q(subscription__name = 'AstroBin Donor Dinner Monthly') |
+
+                    Q(subscription__name = 'AstroBin Donor Coffee Yearly') |
+                    Q(subscription__name = 'AstroBin Donor Snack Yearly') |
+                    Q(subscription__name = 'AstroBin Donor Pizza Yearly') |
+                    Q(subscription__name = 'AstroBin Donor Movie Yearly') |
+                    Q(subscription__name = 'AstroBin Donor Dinner Yearly')
+                ))
+        except UserSubscription.DoesNotExist:
+            return False
+
+        return us.valid()
+
     return False
 
 

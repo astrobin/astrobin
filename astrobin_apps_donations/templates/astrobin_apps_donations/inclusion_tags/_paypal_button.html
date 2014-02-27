@@ -4,8 +4,6 @@
     <input type="hidden" name="cmd" value="_xclick-subscriptions">
     <input type="hidden" name="business" value="{{business}}">
     <input type="hidden" name="lc" value="FI">
-    <input type="hidden" name="item_name" value="{{subscription.name}}">
-    <input type="hidden" name="item_number" value="{{subscription.id}}">
     <input type="hidden" name="no_note" value="1">
     <input type="hidden" name="no_shipping" value="1">
     <input type="hidden" name="rm" value="1">
@@ -16,25 +14,27 @@
     <input type="hidden" name="bn" value="PP-SubscriptionsBF:btn_subscribe_LG.gif:NonHosted">
     <input type="hidden" name="notify_url" value="{{base_url}}/subscriptions/paypal/">
     <input type="hidden" name="custom" value="{{request.user.id}}"/>
+    <input type="hidden" name="item_name" value="{{monthly_pizza_sub.name}}"/>
+    <input type="hidden" name="item_number" value="{{monthly_pizza_sub.id}}"/>
 
     <label for="os0">
         {% trans "What is AstroBin worth to you?" %}
     </label>
     <select name="os0">
         <optgroup label="{% trans "Monthly contributions" %}">
-            <option value="A coffee, once a month">&nbsp;&nbsp;{% blocktrans with 2.50|floatformat:2 as amount %}${{amount}}/month{% endblocktrans %}: {% trans "A coffee" %}</option>
-            <option value="A snack, once a month">&nbsp;&nbsp;{% blocktrans with 3.50|floatformat:2 as amount %}${{amount}}/month{% endblocktrans %}: {% trans "A snack" %}</option>
-            <option value="A pizza, once a month" selected="selected">&nbsp;&nbsp;{% blocktrans with 6.00|floatformat:2 as amount %}${{amount}}/month{% endblocktrans %}: {% trans "A pizza" %}</option>
-            <option value="A movie night for one, once a month">&nbsp;{% blocktrans with 10.00|floatformat:2 as amount %}${{amount}}/month{% endblocktrans %}: {% trans "A movie night for one" %}</option>
-            <option value="A frugal dinner out for one, once a month">&nbsp;{% blocktrans with 25.00|floatformat:2 as amount %}${{amount}}/month{% endblocktrans %}: {% trans "A frugal dinner out for one" %}</option>
+            <option id="coffee_monthly" value="A coffee, once a month">&nbsp;&nbsp;{% blocktrans with 2.50|floatformat:2 as amount %}${{amount}}/month{% endblocktrans %}: {% trans "A coffee" %}</option>
+            <option id="snack_monthly" value="A snack, once a month">&nbsp;&nbsp;{% blocktrans with 3.50|floatformat:2 as amount %}${{amount}}/month{% endblocktrans %}: {% trans "A snack" %}</option>
+            <option id="pizza_monthly" value="A pizza, once a month" selected="selected">&nbsp;&nbsp;{% blocktrans with 6.00|floatformat:2 as amount %}${{amount}}/month{% endblocktrans %}: {% trans "A pizza" %}</option>
+            <option id="movie_monthly" value="A movie night for one, once a month">&nbsp;{% blocktrans with 10.00|floatformat:2 as amount %}${{amount}}/month{% endblocktrans %}: {% trans "A movie night for one" %}</option>
+            <option id="dinner_monthly" value="A frugal dinner out for one, once a month">&nbsp;{% blocktrans with 25.00|floatformat:2 as amount %}${{amount}}/month{% endblocktrans %}: {% trans "A frugal dinner out for one" %}</option>
         </optgroup>
 
         <optgroup label="{% trans "Yearly contributions (cheaper!)" %}">
-            <option value="A coffee, once a month (with yearly payments)">&nbsp;{% blocktrans with 24.00|floatformat:2 as amount %}${{amount}}/year{% endblocktrans %}: {% trans "A coffee" %}</option>
-            <option value="A snack, once a month (with yearly payments)">&nbsp;{% blocktrans with 34.00|floatformat:2 as amount %}${{amount}}/year{% endblocktrans %}: {% trans "A snack" %}</option>
-            <option value="A pizza, once a month (with yearly payments)">&nbsp;{% blocktrans with 60.00|floatformat:2 as amount %}${{amount}}/year{% endblocktrans %}: {% trans "A pizza" %}</option>
-            <option value="A movie night for one, once a month (with yearly payments)">{% blocktrans with 100.00|floatformat:2 as amount %}${{amount}}/year{% endblocktrans %}: {% trans "A movie night for one" %}</option>
-            <option value="A frugal dinner out for one, once a month (with yearly payments)">{% blocktrans with 250.00|floatformat:2 as amount %}${{amount}}/year{% endblocktrans %}: {% trans "A frugal dinner out for one" %}</option>
+            <option id="coffee_yearly" value="A coffee, once a month (with yearly payments)">&nbsp;{% blocktrans with 24.00|floatformat:2 as amount %}${{amount}}/year{% endblocktrans %}: {% trans "A coffee" %}</option>
+            <option id="snack_yearly" value="A snack, once a month (with yearly payments)">&nbsp;{% blocktrans with 34.00|floatformat:2 as amount %}${{amount}}/year{% endblocktrans %}: {% trans "A snack" %}</option>
+            <option id="pizza_yearly" value="A pizza, once a month (with yearly payments)">&nbsp;{% blocktrans with 60.00|floatformat:2 as amount %}${{amount}}/year{% endblocktrans %}: {% trans "A pizza" %}</option>
+            <option id="movie_yearly" value="A movie night for one, once a month (with yearly payments)">{% blocktrans with 100.00|floatformat:2 as amount %}${{amount}}/year{% endblocktrans %}: {% trans "A movie night for one" %}</option>
+            <option id="dinner_yearly" value="A frugal dinner out for one, once a month (with yearly payments)">{% blocktrans with 250.00|floatformat:2 as amount %}${{amount}}/year{% endblocktrans %}: {% trans "A frugal dinner out for one" %}</option>
         </optgroup>
     </select>
 
@@ -53,6 +53,8 @@
     <input type="hidden" name="option_amount1" value="3.50">
     <input type="hidden" name="option_period1" value="M">
     <input type="hidden" name="option_frequency1" value="1">
+    <input type="hidden" name="option_item_name1" value="{{monthly_snack_sub.name}}">
+    <input type="hidden" name="option_item_number1" value="{{monthly_snack_sub.id}}">
 
     <input type="hidden" name="option_select2" value="A pizza, once a month">
     <input type="hidden" name="option_amount2" value="6.00">
@@ -74,6 +76,7 @@
     <input type="hidden" name="option_amount5" value="24.00">
     <input type="hidden" name="option_period5" value="Y">
     <input type="hidden" name="option_frequency5" value="1">
+
 
     <input type="hidden" name="option_select6" value="A snack, once a month (with yearly payments)">
     <input type="hidden" name="option_amount6" value="34.00">
@@ -98,3 +101,47 @@
     <input type="hidden" name="option_index" value="k">
 </form>
 
+<script type="text/javascript">
+    $(document).ready(function() {
+        $('select[name=os0]').change(function() {
+            var item_name = "{{monthly_pizza_sub.name}}";
+            var item_number = "{{monthly_pizza_sub.id}}";
+            var opt = $(this).find('option:selected').attr('id');
+
+            if (opt == 'coffee_monthly') {
+                item_name = "{{monthly_coffee_sub.name}}";
+                item_number = "{{monthly_coffee_sub.id}}";
+            } else if (opt == 'snack_monthly') {
+                item_name = "{{monthly_snack_sub.name}}";
+                item_number = "{{monthly_snack_sub.id}}";
+            } else if (opt == 'pizza_monthly') {
+                item_name = "{{monthly_pizza_esub.name}}";
+                item_number = "{{monthly_pizza_sub.id}}";
+            } else if (opt == 'movie_monthly') {
+                item_name = "{{monthly_movie_sub.name}}";
+                item_number = "{{monthly_movie_sub.id}}";
+            } else if (opt == 'dinner_monthly') {
+                item_name = "{{monthly_dinner_sub.name}}";
+                item_number = "{{monthly_dinner_sub.id}}";
+            } else if (opt == 'coffee_yearly') {
+                item_name = "{{yearly_coffee_sub.name}}";
+                item_number = "{{yearly_coffee_sub.id}}";
+            } else if (opt == 'snack_yearly') {
+                item_name = "{{yearly_snack_sub.name}}";
+                item_number = "{{yearly_snack_sub.id}}";
+            } else if (opt == 'pizza_yearly') {
+                item_name = "{{yearly_pizza_sub.name}}";
+                item_number = "{{yearly_pizza_sub.id}}";
+            } else if (opt == 'movie_yearly') {
+                item_name = "{{yearly_movie_sub.name}}";
+                item_number = "{{yearly_movie_sub.id}}";
+            } else if (opt == 'dinner_yearly') {
+                item_name = "{{yearly_dinner_sub.name}}";
+                item_number = "{{yearly_dinner_sub.id}}";
+            }
+
+            $('input[name=item_name]').val(item_name);
+            $('input[name=item_number]').val(item_number);
+        });
+    });
+</script>
