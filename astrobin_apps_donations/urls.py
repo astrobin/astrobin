@@ -1,9 +1,10 @@
 # Django
 from django.conf.urls.defaults import *
+from django.contrib.auth.decorators import login_required
 from django.views.generic import *
 
 # This app
-from astrobin_apps_donations.views import CancelView, SuccessView
+from astrobin_apps_donations.views import *
 
 urlpatterns = patterns('',
     url(
@@ -15,6 +16,11 @@ urlpatterns = patterns('',
         r'^success/$',
         SuccessView.as_view(),
         name = 'astrobin_apps_donations.success'),
+
+    url(
+        r'^edit/',
+        login_required(EditView.as_view()),
+        name = 'astrobin_apps_donations.edit'),
 
     url(r'^paypal/', include('paypal.standard.ipn.urls')),
 )

@@ -105,6 +105,34 @@ def is_donor(user):
     return False
 
 
+@register.filter
+def has_donation_subscription(user, name):
+    if user.is_authenticated():
+        try:
+            us = UserSubscription.objects.get(
+                Q(user = user) & Q(subscription__name = name))
+        except UserSubscription.DoesNotExist:
+            return False
+
+        return us.valid()
+
+    return False
+
+
+@register.simple_tag(takes_context = True)
+def donation_form_selected(context, name):
+    request = context['request']
+    selected = 'selected="selected"'
+
+    if has_donation_subscription(request.user, name):
+        return selected
+
+    if not is_donor(request.user) and name == 'AstroBin Donor Pizza Monthly':
+        return selected
+
+    return ''
+
+
 @register.inclusion_tag('astrobin_apps_donations/inclusion_tags/thank_you_for_your_support.html', takes_context = True)
 def thank_you_for_your_support(context):
     return {}
