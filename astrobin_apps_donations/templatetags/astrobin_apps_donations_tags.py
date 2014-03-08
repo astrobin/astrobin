@@ -132,6 +132,48 @@ def donation_form_selected(context, name):
 
     return ''
 
+@register.simple_tag
+def user_donation_subscription(user):
+    if user.is_authenticated():
+        try:
+            us = UserSubscription.objects.get(
+                Q(user = user) &
+                Q(
+                    Q(subscription__name = 'AstroBin Donor Coffee Monthly') |
+                    Q(subscription__name = 'AstroBin Donor Snack Monthly') |
+                    Q(subscription__name = 'AstroBin Donor Pizza Monthly') |
+                    Q(subscription__name = 'AstroBin Donor Movie Monthly') |
+                    Q(subscription__name = 'AstroBin Donor Dinner Monthly') |
+
+                    Q(subscription__name = 'AstroBin Donor Coffee Yearly') |
+                    Q(subscription__name = 'AstroBin Donor Snack Yearly') |
+                    Q(subscription__name = 'AstroBin Donor Pizza Yearly') |
+                    Q(subscription__name = 'AstroBin Donor Movie Yearly') |
+                    Q(subscription__name = 'AstroBin Donor Dinner Yearly')
+                ))
+        except UserSubscription.DoesNotExist:
+            return None
+
+        return us.subscription
+
+    return None
+
+
+@register.simple_tag
+def user_donation_subscription_name(user):
+    us = user_donation_subscription(user)
+    if us:
+        return us.name
+    return ''
+
+
+@register.simple_tag
+def user_donation_subscription_id(user):
+    us = user_donation_subscription(user)
+    if us:
+        return us.id
+    return 0
+
 
 @register.inclusion_tag('astrobin_apps_donations/inclusion_tags/thank_you_for_your_support.html', takes_context = True)
 def thank_you_for_your_support(context):
