@@ -89,6 +89,7 @@ LANGUAGE_CHOICES = (
     ('el', _("Greek")),
     ('ru', _("Russian")),
     ('ar', _("Arabic")),
+    ('ja', _("Japanese")),
 )
 
 LANGUAGES = {
@@ -106,6 +107,7 @@ LANGUAGES = {
     'el': _("Greek"),
     'ru': _("Russian"),
     'ar': _("Arabic"),
+    'ja': _("Japanese"),
 }
 
 SUBJECT_LABELS = {
