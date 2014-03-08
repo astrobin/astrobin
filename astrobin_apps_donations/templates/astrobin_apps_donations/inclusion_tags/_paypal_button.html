@@ -1,4 +1,5 @@
 {% load i18n %}
+{% load astrobin_apps_donations_tags %}
 
 <form action="https://www.paypal.com/cgi-bin/webscr" method="post" target="_top" class="form-inline form-donate">
     <input type="hidden" name="cmd" value="_xclick-subscriptions">
@@ -17,24 +18,31 @@
     <input type="hidden" name="item_name" value="{{monthly_pizza_sub.name}}"/>
     <input type="hidden" name="item_number" value="{{monthly_pizza_sub.id}}"/>
 
-    <label for="os0">
-        {% trans "What is AstroBin worth to you?" %}
-    </label>
+    {% if request.user|is_donor %}
+        <input type="hidden" name="modify" value="1" />
+    {% endif %}
+
+    {% if not request.user|is_donor %}
+        <label for="os0">
+            {% trans "What is AstroBin worth to you?" %}
+        </label>
+    {% endif %}
+
     <select name="os0">
         <optgroup label="{% trans "Monthly contributions" %}">
-            <option id="coffee_monthly" value="A coffee, once a month">&nbsp;&nbsp;{% blocktrans with 2.50|floatformat:2 as amount %}${{amount}}/month{% endblocktrans %}: {% trans "A coffee" %}</option>
-            <option id="snack_monthly" value="A snack, once a month">&nbsp;&nbsp;{% blocktrans with 3.50|floatformat:2 as amount %}${{amount}}/month{% endblocktrans %}: {% trans "A snack" %}</option>
-            <option id="pizza_monthly" value="A pizza, once a month" selected="selected">&nbsp;&nbsp;{% blocktrans with 6.00|floatformat:2 as amount %}${{amount}}/month{% endblocktrans %}: {% trans "A pizza" %}</option>
-            <option id="movie_monthly" value="A movie night for one, once a month">&nbsp;{% blocktrans with 10.00|floatformat:2 as amount %}${{amount}}/month{% endblocktrans %}: {% trans "A movie night for one" %}</option>
-            <option id="dinner_monthly" value="A frugal dinner out for one, once a month">&nbsp;{% blocktrans with 25.00|floatformat:2 as amount %}${{amount}}/month{% endblocktrans %}: {% trans "A frugal dinner out for one" %}</option>
+            <option id="coffee_monthly" value="A coffee, once a month" {% donation_form_selected "AstroBin Donor Coffee Monthly" %}>&nbsp;&nbsp;{% blocktrans with 2.50|floatformat:2 as amount %}${{amount}}/month{% endblocktrans %}: {% trans "A coffee" %}</option>
+            <option id="snack_monthly" value="A snack, once a month" {% donation_form_selected "AstroBin Donor Snack Monthly" %}>&nbsp;&nbsp;{% blocktrans with 3.50|floatformat:2 as amount %}${{amount}}/month{% endblocktrans %}: {% trans "A snack" %}</option>
+            <option id="pizza_monthly" value="A pizza, once a month" {% donation_form_selected "AstroBin Donor Pizza Monthly" %}>&nbsp;&nbsp;{% blocktrans with 6.00|floatformat:2 as amount %}${{amount}}/month{% endblocktrans %}: {% trans "A pizza" %}</option>
+            <option id="movie_monthly" value="A movie night for one, once a month" {% donation_form_selected "AstroBin Donor Movie Monthly" %}>&nbsp;{% blocktrans with 10.00|floatformat:2 as amount %}${{amount}}/month{% endblocktrans %}: {% trans "A movie night for one" %}</option>
+            <option id="dinner_monthly" value="A frugal dinner out for one, once a month" {% donation_form_selected "AstroBin Donor Dinner Monthly" %}>&nbsp;{% blocktrans with 25.00|floatformat:2 as amount %}${{amount}}/month{% endblocktrans %}: {% trans "A frugal dinner out for one" %}</option>
         </optgroup>
 
         <optgroup label="{% trans "Yearly contributions (cheaper!)" %}">
-            <option id="coffee_yearly" value="A coffee, once a month (with yearly payments)">&nbsp;{% blocktrans with 24.00|floatformat:2 as amount %}${{amount}}/year{% endblocktrans %}: {% trans "A coffee" %}</option>
-            <option id="snack_yearly" value="A snack, once a month (with yearly payments)">&nbsp;{% blocktrans with 34.00|floatformat:2 as amount %}${{amount}}/year{% endblocktrans %}: {% trans "A snack" %}</option>
-            <option id="pizza_yearly" value="A pizza, once a month (with yearly payments)">&nbsp;{% blocktrans with 60.00|floatformat:2 as amount %}${{amount}}/year{% endblocktrans %}: {% trans "A pizza" %}</option>
-            <option id="movie_yearly" value="A movie night for one, once a month (with yearly payments)">{% blocktrans with 100.00|floatformat:2 as amount %}${{amount}}/year{% endblocktrans %}: {% trans "A movie night for one" %}</option>
-            <option id="dinner_yearly" value="A frugal dinner out for one, once a month (with yearly payments)">{% blocktrans with 250.00|floatformat:2 as amount %}${{amount}}/year{% endblocktrans %}: {% trans "A frugal dinner out for one" %}</option>
+            <option id="coffee_yearly" value="A coffee, once a month (with yearly payments)" {% donation_form_selected "AstroBin Donor Coffee Yearly" %}>&nbsp;{% blocktrans with 24.00|floatformat:2 as amount %}${{amount}}/year{% endblocktrans %}: {% trans "A coffee" %}</option>
+            <option id="snack_yearly" value="A snack, once a month (with yearly payments)" {% donation_form_selected "AstroBin Donor Snack Yearly" %}>&nbsp;{% blocktrans with 34.00|floatformat:2 as amount %}${{amount}}/year{% endblocktrans %}: {% trans "A snack" %}</option>
+            <option id="pizza_yearly" value="A pizza, once a month (with yearly payments)" {% donation_form_selected "AstroBin Donor Pizza Yearly" %}>&nbsp;{% blocktrans with 60.00|floatformat:2 as amount %}${{amount}}/year{% endblocktrans %}: {% trans "A pizza" %}</option>
+            <option id="movie_yearly" value="A movie night for one, once a month (with yearly payments)" {% donation_form_selected "AstroBin Donor Movie Yearly" %}>{% blocktrans with 100.00|floatformat:2 as amount %}${{amount}}/year{% endblocktrans %}: {% trans "A movie night for one" %}</option>
+            <option id="dinner_yearly" value="A frugal dinner out for one, once a month (with yearly payments)" {% donation_form_selected "AstroBin Donor Dinner Yearly" %}>{% blocktrans with 250.00|floatformat:2 as amount %}${{amount}}/year{% endblocktrans %}: {% trans "A frugal dinner out for one" %}</option>
         </optgroup>
     </select>
 
@@ -100,6 +108,10 @@
 
     <input type="hidden" name="option_index" value="k">
 </form>
+
+{% if request.user|is_donor %}
+    <p><strong>{% trans "IMPORTANT" %}</strong>: <i>{% trans "Please note: if you are already a donor, the Subscribe button will update your existing subscription, not create a new one." %}</i></p>
+{% endif %}
 
 <script type="text/javascript">
     $(document).ready(function() {
