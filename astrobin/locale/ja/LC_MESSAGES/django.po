@@ -8,7 +8,7 @@ msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2014-02-12 07:30+0000\n"
-"PO-Revision-Date: 2014-02-27 11:03+0000\n"
+"PO-Revision-Date: 2014-03-01 09:46+0000\n"
 "Last-Translator: ohmishonin <kasuzen@gmail.com>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
 "Language: ja\n"
@@ -17,7 +17,7 @@ msgstr ""
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=(n != 1);\n"
 "X-Generator: Pootle 2.5.0\n"
-"X-POOTLE-MTIME: 1393499028.546951\n"
+"X-POOTLE-MTIME: 1393667198.732839\n"
 
 #: fields.py:10
 msgid "United Kingdom"
@@ -1054,7 +1054,7 @@ msgstr "この画像に著作権表示を望むのであれば、テキストを
 
 #: forms.py:131 forms.py:367 models.py:752
 msgid "Imaging telescopes or lenses"
-msgstr "撮像した望遠鏡もしくはレンズ"
+msgstr "望遠鏡／レンズ"
 
 #: forms.py:132 models.py:753
 msgid "Guiding telescopes or lenses"
@@ -1066,7 +1066,7 @@ msgstr "赤道儀"
 
 #: forms.py:134 forms.py:368 models.py:755
 msgid "Imaging cameras"
-msgstr "撮像したカメラ"
+msgstr "カメラ"
 
 #: forms.py:135 models.py:756
 msgid "Guiding cameras"
@@ -1346,7 +1346,7 @@ msgstr "本文"
 
 #: locale_extras.py:7
 msgid "uploaded a new image"
-msgstr "新しい画像をアップロードした"
+msgstr "が新しい画像をアップロードしました"
 
 #: locale_extras.py:8
 msgid "uploaded a new revision of"
@@ -1354,19 +1354,19 @@ msgstr "修正版をアップロードした"
 
 #: locale_extras.py:9
 msgid "commented on image"
-msgstr "イメージにコメントされた"
+msgstr "が画像にコメントしました"
 
 #: locale_extras.py:10
 msgid "commented on gear item"
-msgstr "機材にコメントされた"
+msgstr "が機材にコメントしました"
 
 #: locale_extras.py:11
 msgid "bookmarked"
-msgstr "ブックマークされた"
+msgstr "がブックマークしました"
 
 #: locale_extras.py:12
 msgid "likes"
-msgstr "Likeされた"
+msgstr "がLikeしました"
 
 #: locale_extras.py:13
 msgid "has written a review on"
@@ -2164,7 +2164,7 @@ msgstr "本名"
 
 #: models.py:1529
 msgid "If present, your real name will be used throughout the website."
-msgstr "もし記入をするのであれば、あなたの本名をAstroBin全体で使われます。"
+msgstr "記入した場合、本名がAstroBin全体で使われます。"
 
 #: models.py:1543
 msgid "Job"
@@ -2185,7 +2185,7 @@ msgstr "タイムゾーン"
 #: models.py:1562
 msgid ""
 "By selecting this, you will see all the dates on AstroBin in your timezone."
-msgstr "それ選択した場合には、AstroBinでは、全てそのタイムゾーンでの日付になります。"
+msgstr "これを選択した場合には、AstroBinでは選択したタイムゾーンで日付が表示されます。"
 
 #: models.py:1567
 msgid "About you"
@@ -2525,7 +2525,7 @@ msgstr "日付"
 
 #: views.py:641 templates/image/detail/image_card.html:52
 msgid "Frames"
-msgstr "フレーム数（コマ数）"
+msgstr "撮影フレーム"
 
 #: views.py:647 templates/wall.html:35
 #: templates/inclusion_tags/search_image_list.html:36
@@ -2602,7 +2602,7 @@ msgstr "日付未指定"
 
 #: views.py:1618 views.py:1679
 msgid "No imaging telescopes or lenses, or no imaging cameras specified"
-msgstr "撮影した望遠鏡かレンズ、カメラが未指定"
+msgstr "望遠鏡／レンズ／カメラが未指定"
 
 #: views.py:1619
 msgid "Gear images"
@@ -2677,7 +2677,7 @@ msgstr "デフォルトのフロントページを変更しました。"
 
 #: management/__init__.py:15
 msgid "You have a new follower"
-msgstr "新しいフォロアーが加わりました"
+msgstr "新しいフォロワーが加わりました"
 
 #: management/__init__.py:21
 msgid "New image from a user you follow"
@@ -2689,7 +2689,7 @@ msgstr "画像があなたの注意をひきました"
 
 #: management/__init__.py:33
 msgid "New image revision from a user you follow"
-msgstr "あなたのフォロアーが修正版を投稿しました"
+msgstr "あなたのフォロワーが修正版を投稿しました"
 
 #: management/__init__.py:39
 msgid "Your image was plate-solved"
@@ -3293,7 +3293,7 @@ msgstr "このサイトとは？"
 #: templates/base/alerts.html:13 templates/index/root.html:74
 #: templates/index/root.html.py:297
 msgid "Hey!"
-msgstr "ハーイ！"
+msgstr "はじめまして!"
 
 #: templates/help.html:12 templates/index/root.html:76
 msgid ""
@@ -3302,8 +3302,8 @@ msgid ""
 "numerous Astrophotography forums, I have found that the Internet is lacking "
 "a centralized place where astrophotographers can share their work."
 msgstr ""
-"あなたは天体写真家ですか？自分のハードな制作の成果を他人に共有することは好きですか？天体写真家として、数多くの天体についての掲示板への投稿者として、私は"
-"インターネットでは天体写真家が作業を共有し、集まれる場所が無いことを発見してしまった。"
+"あなたは天体写真家ですか？頑張った成果を他人に共有することは好きですか？私も天体写真家で数多くの天体についての掲示板への投稿をしているのですが、私はイン"
+"ターネットの中では天体写真家が作業を共有し、集まれる場所が無いことを発見してしまったのです。"
 
 #: templates/help.html:14
 msgid "Well, this is finally over!"
@@ -3315,8 +3315,8 @@ msgid ""
 "ground up by an astrophotographer, and it provides means to people who want "
 "to share their astrophotographs."
 msgstr ""
-"<em>AstroBin</em>はそのギャップを埋めます。そして、天体写真家によってゼロからWebサイトを構築して、天体写真を共有したい人々に、その手"
-"段を提供します。"
+"<em>AstroBin</em>はそのギャップを埋めます。天体写真家によってゼロからWebサイトを構築し、天体写真を共有したい人々に、その方法を提供し"
+"ます。"
 
 #: templates/help.html:18
 msgid "So how is this different from any other image sharing websites?"
@@ -3351,7 +3351,8 @@ msgid ""
 "million names!"
 msgstr ""
 "<em>AstroBin</em>では、天体の題材を自分のページに持つ事ができます。そこでは最高の画像を見る事ができるし、描画や図でトレンドや楽しい統計"
-"情報を見せてくれます。月や緯度で主催した最も人気のある題材を表示するページもあります！"
+"情報を見せてくれます。月や緯度で主催した最も人気のある題材を表示するページもあります！<em>AstroBin</em>はSIMBADと連携していて、そ"
+"れは500万以上の天体や1500万以下の名前を含んでいます。"
 
 #: templates/help.html:29
 msgid ""
@@ -3534,7 +3535,7 @@ msgstr "AstroBinインデックス"
 #: templates/leaderboard.html:30 templates/base/user_links_entries.html:125
 #: templates/user/profile-subnav.html:85
 msgid "Followers"
-msgstr "フォロアー"
+msgstr "フォロワー"
 
 #: templates/leaderboard.html:40
 msgid "Total integration"
@@ -3594,7 +3595,7 @@ msgstr "連絡先"
 #: templates/image/detail/modals/upload_revision.html:17
 #: templates/index/root.html:151
 msgid "Upload"
-msgstr "アップロード"
+msgstr "Upload"
 
 #: templates/maintenance_base.html:231
 #: templates/base/user_links_entries.html:140
@@ -3658,7 +3659,7 @@ msgstr "小売り情報"
 
 #: templates/maintenance_base.html:322 templates/profile-edit-menu.html:54
 msgid "Preferences"
-msgstr "リファレンス"
+msgstr "設定"
 
 #: templates/maintenance_base.html:328 templates/profile-edit-menu.html:60
 msgid "Avatar"
@@ -3746,8 +3747,8 @@ msgid ""
 "upload your astrophotography images. Made by an astrophotographer, for the "
 "astrophotographers."
 msgstr ""
-"AstroBinは天体写真家を特にターゲットとした画像ホスティングサイトです。それは天体画像をアップロードする最初で最後の場所です。天体写真家のために天"
-"体写真家によって作られました。"
+"AstroBinは天体写真家を特にターゲットにした画像ホスティングサイトです。あなたにとって、天体画像をアップロードする最初で最後の場所になるになるでし"
+"ょう。天体写真家のために、天体写真家によって作られています。"
 
 #: templates/maintenance_base.html:519 templates/tos.html:4
 #: templates/tos.html.py:9 templates/base/footer.html:20
@@ -4224,7 +4225,7 @@ msgstr "アバター画像"
 
 #: templates/base/footer.html:34
 msgid "The images on this websites are copyright of their respective owners."
-msgstr "このWebサイトの画像はそれぞれの所有者の著作物である。"
+msgstr "このWebサイトの画像の著作権はその所有者に帰属しています。"
 
 #: templates/base/site_links.html:111
 msgid "AstroBin Raw Data"
@@ -4656,8 +4657,8 @@ msgid ""
 "international community: using English is preferred. PS: <strong>%(user)s</"
 "strong>'s preferred language is <strong>%(lang)s</strong>."
 msgstr ""
-"<strong>ここにコメントを残しますが</strong>、AstroBinは国際的なコミュニティであるので英語であるほうがよいことを覚えておいてくだ"
-"さい。PS <strong>%(user)s</strong>の選んでいる言語は<strong>%(lang)s</strong>です。"
+"<strong>コメントを残す場合</strong>、AstroBinは国際的なコミュニティだということを覚えていてください。英語を使うのをオススメしま"
+"す。PS: <strong>%(user)s</strong>は<strong>%(lang)s</strong>を使っています。"
 
 #: templates/image/detail/commercial.html:6
 msgid "Made possible by"
@@ -4669,7 +4670,7 @@ msgstr "ヒストグラム"
 
 #: templates/image/detail/image_card.html:78
 msgid "RA center"
-msgstr "赤経の中央"
+msgstr "RA center"
 
 #: templates/image/detail/image_card.html:78
 #: templates/image/detail/image_card.html:79
@@ -4680,7 +4681,7 @@ msgstr "度"
 
 #: templates/image/detail/image_card.html:79
 msgid "DEC center"
-msgstr "赤緯の中央"
+msgstr "DEC center"
 
 #: templates/image/detail/image_card.html:81
 msgid "Pixel scale"
@@ -4688,15 +4689,15 @@ msgstr "ピクセルスケール"
 
 #: templates/image/detail/image_card.html:81
 msgid "arcsec/pixel"
-msgstr "秒度/ピクセル"
+msgstr "秒/pixel"
 
 #: templates/image/detail/image_card.html:83
 msgid "Orientation"
-msgstr "向き"
+msgstr "方位"
 
 #: templates/image/detail/image_card.html:84
 msgid "Field radius"
-msgstr "フィールド径"
+msgstr "視野半径"
 
 #: templates/image/detail/image_title.html:33
 msgid "Contains"
@@ -5142,10 +5143,9 @@ msgid ""
 "\"_blank\" href=\"http://www.creativecommons.org/\">Creative Commons "
 "website</a>."
 msgstr ""
-"もしあなたが望むのであれば、あなたのコンテンツをクリエイティブコモンズライセンスに関係させることができ、確かな環境化であなたの作品を使う権利を人々に認め"
-"ることができます。詳しく知るためには、<a target=\"_blank\" "
-"href=\"http://www.creativecommons.org/\">Creative Commons "
-"website</a>に訪問してください。"
+"あなたのコンテンツにクリエイティブ・コモンズ・ライセンスを付与することができ、あなたの作品を確実な環境で使う権利を多くの人々に提供することができます。詳"
+"しく知るには、<a target=\"_blank\" href=\"http://www.creativecommons.org/\">Creative "
+"Commons website</a>を閲覧してください。"
 
 #: templates/image/edit/license.html:15
 #, python-format
@@ -5274,7 +5274,7 @@ msgstr "入会日"
 
 #: templates/index/root.html:23
 msgid "The perfect home for your astrophotography."
-msgstr "あなたの天体写真に最適な場所です。"
+msgstr "天体写真に最適なサービスです。"
 
 #: templates/index/root.html:25
 #, python-format
@@ -5283,9 +5283,7 @@ msgid ""
 "astrophotographers. It comes packed with features that benefit the "
 "astrophotography community greatly! See the <a href=\"%(help_url)s\">help "
 "page.</a> for more information."
-msgstr ""
-"AstroBinは天体写真かに特化して開発された画像ホスティングサービスです。天体写真コミュニティが発展するためになる特徴をもっています。もっとたくさん"
-"の情報をみるには<a href=\"%(help_url)s\">ヘルプページ</a>をみてください。"
+msgstr "天体写真にはパーフェクトな場所です。"
 
 #: templates/index/root.html:32
 msgid "Unlimited uploads, unlimited size."
@@ -5297,12 +5295,14 @@ msgid ""
 "compression. On AstroBin you can (and should!) upload full size images. And "
 "you have unlimited space for free."
 msgstr ""
-"天体写真画像はファイルを圧縮することでロストを防ぐべき科学的価値があります。AstroBinではフルサイズの画像をアップロードできます。そして無料で無制"
-"限のスペースを使う事ができます。"
+"天体写真画像はファイル科学的価値があるので、ファイルを圧縮してデータをロストすべきではないです。AstroBinではフルサイズの画像をアップロードできま"
+"す。そしてそれを無制限のスペースを無料で使う事ができます。"
 
 #: templates/index/root.html:40
 msgid "Have your data neatly plotted."
-msgstr "データは綺麗に描画されます。"
+msgstr ""
+"データがすべて。AstroBinは、データをちゃんと整理した状態でキープするツールを提供しています。AstroBinによって、あなたは生産性をアップした"
+"り、いつも使う機材についての見識を深めることができます。"
 
 #: templates/index/root.html:41
 msgid ""
@@ -5310,18 +5310,18 @@ msgid ""
 "neat and organized. And with our plots, you can get insights on your "
 "productivity and on the gear you use the most."
 msgstr ""
-"データがすべてです。そしてAstroBinは、あなたのデータを綺麗に整理された状態で保持しつづけるためのツールを提供します。また、我々の描画によって、生"
-"産性や、いつも使う機材についての洞察を得ることができます。"
+"データだけがすべてです。AstroBinは、データを綺麗に整理された状態でキープしつづけるツールを提供します。また、サイトでの表現により、生産性をアップ"
+"したり、よく使用する機材についての知見を得ることができます。"
 
 #: templates/index/root.html:54
 msgid "FIT and DSLR camera raw files"
-msgstr "FITもしくはデジタルカメラのRawファイル"
+msgstr "FITやデジタルカメラのRawファイル"
 
 #: templates/index/root.html:60
 msgid ""
 "AstroBin offers the storage of FIT and DSLR camera raw files too, for "
 "archival and sharing purposes!"
-msgstr "AstroBinはFITやデジタルカメラのRawファイルの保管や共有の目的のために、ストレージを提供します。"
+msgstr "AstroBinはFITファイルやデジタルカメラのRawファイルの保管や共有のために、ストレージを提供します。"
 
 #: templates/index/root.html:64
 #, python-format
@@ -5331,9 +5331,9 @@ msgid ""
 "your files organized, and allow you to share them with other members. <a "
 "href=\"%(rawdata_url)s\">Want to know more?</a>"
 msgstr ""
-"<strong>AstroBin Raw Data</strong>はあなたの全てのFITやデジタルカメラのRawファイルの安全なストレージとしてのぷら"
-"っとであり、500GB以上も用意されています。あなたのファイルを整理して自動的に保管されます。<a href=\"%"
-"(rawdata_url)s\">もっと知りたいですか？</a>"
+"<strong>AstroBin Raw Data</strong>はFITファイルやデジタルカメラのRawファイルの安全なストレージとしてのプラットフ"
+"ォームとして500GB以上も用意されています。あなたのファイルは整理されて自動的に保管されます。<a href=\"%"
+"(rawdata_url)s\">詳しくはこちらへ</a>"
 
 #: templates/index/root.html:166
 msgid "Your activity stream"
@@ -5349,23 +5349,23 @@ msgstr "最新画像"
 
 #: templates/index/root.html:181 templates/index/root.html.py:241
 msgid "Recent images from people you follow"
-msgstr "あなたがフォローする人々の最新の画像"
+msgstr "フォローしたユーザーの最新画像"
 
 #: templates/index/root.html:186 templates/index/root.html.py:252
 msgid "Recently liked"
-msgstr "最新のLileされた画像一覧"
+msgstr "Likeされた最新画像"
 
 #: templates/index/root.html:191 templates/index/root.html.py:263
 msgid "Recently bookmarked"
-msgstr "最新のブックマークされた画像一覧"
+msgstr "ブックマークされた最新画像"
 
 #: templates/index/root.html:196 templates/index/root.html.py:274
 msgid "Recent images with link to TIFF/FITS"
-msgstr "最新のTIFF/FITSにリンクされた画像一覧"
+msgstr "TIFF/FITSにリンクされている最新画像"
 
 #: templates/index/root.html:206
 msgid "Personal"
-msgstr "個人"
+msgstr "パーソナル"
 
 #: templates/index/root.html:217
 msgid "Global"
@@ -5382,11 +5382,11 @@ msgstr "現在のフロントページをデフォルトとする"
 #: templates/index/root.html:300
 msgid ""
 "To make your personal stream more interesting, you should follow some people!"
-msgstr "あなた個人のストリームをもっと楽しくするために、人々をフォローしましょう!"
+msgstr "パーソナルストリームをもっと楽しくするために、沢山のユーザーをフォローしよう!"
 
 #: templates/index/root.html:329
 msgid "Do you want your product here?"
-msgstr "ここであなたの製品が欲しいですか？"
+msgstr "これらの製品が欲しいですか?"
 
 #: templates/location/edit.html:5 templates/location/edit.html.py:14
 msgid "Edit your location"
@@ -5720,7 +5720,7 @@ msgstr "%(user)sがあなたのコメントに返信しました。以下のURL�
 #, python-format
 msgid ""
 "<a href=\"%(url)s\"><strong>%(user)s</strong> replied to your comment.</a>"
-msgstr "<a href=\"%(url)s\"><strong>%(url)s</strong>があなたのコメントに返信しました。</a>"
+msgstr "<a href=\"%(url)s\"><strong>%(user)s</strong>があなたのコメントに返信しました。</a>"
 
 #: templates/notification/new_comment_reply/short.txt:2
 #, python-format
@@ -5744,7 +5744,7 @@ msgstr "<a href=\"%(object_url)s\"><strong>%(object)s</strong>はあなたをフ
 
 #: templates/notification/new_follower/short.txt:2
 msgid "You have a new follower!"
-msgstr "あなたに新しいフォロアーがいます!"
+msgstr "新しいフォロワーが加わりました!"
 
 #: templates/notification/new_gear_discussion/full.txt:2
 #, python-format
@@ -5959,9 +5959,7 @@ msgstr ""
 #: templates/notification/rawdata_posted_image_to_private_folder/short.txt:2
 #, python-format
 msgid "New processed image in private shared folder: %(folder_name)s"
-msgstr ""
-"<a href=\"%(folder_url)s\"><strong>%(user_name)s</strong>は非公開共有フォルダ<strong>\"%"
-"(folder_name)s\"</strong>に新しい処理画像を追加しました。</a>"
+msgstr "非公開領域に新しい処理画像が追加:  %(folder_name)s"
 
 #: templates/notification/rawdata_posted_image_to_public_pool/full.txt:2
 #, python-format
@@ -6374,30 +6372,30 @@ msgstr "%(username)sのブックマーク"
 #: templates/user/followers.html:7
 #, python-format
 msgid "%(user)s's followers"
-msgstr "%(user)sのフォロアー"
+msgstr "%(user)sのフォロワー"
 
 #: templates/user/followers.html:13
 msgid "Your followers"
-msgstr "あなたのフォロアー"
+msgstr "あなたのフォロワー"
 
 #: templates/user/followers.html:15
 #, python-format
 msgid "%(username)s's followers"
-msgstr "%(username)sのフォロアー"
+msgstr "%(username)sのフォロワー"
 
 #: templates/user/following.html:7
 #, python-format
 msgid "%(user)s's followed users"
-msgstr "%(user)sのフォロアー"
+msgstr "%(user)sのフォロワー"
 
 #: templates/user/following.html:13
 msgid "Your followed users"
-msgstr "あなのフォロアー"
+msgstr "あなたのフォロワー"
 
 #: templates/user/following.html:15
 #, python-format
 msgid "%(username)s's followed users"
-msgstr "%(username)sのフォロアー"
+msgstr "%(username)sのフォロワー"
 
 #: templates/user/not_found.html:4 templates/user/not_found.html.py:7
 msgid "User not found:"
@@ -6428,7 +6426,7 @@ msgstr "総粗出時間を時間に対してプロットした。"
 msgid ""
 "Total integration hours, plotted against time and arranged by imaging "
 "telescopes and lenses, and imaging cameras."
-msgstr "総露出時間は時間に対してプロットされ、撮像した望遠鏡やレンズ、撮像したカメラによって配置されている。"
+msgstr "総露出時間は時間に対してプロットされ、望遠鏡やレンズ、カメラによって配置されている。"
 
 #: templates/user/plots.html:53
 msgid "Combined view count for all the user's images, plotted against time."
@@ -6486,8 +6484,8 @@ msgid ""
 "in some data. Imaging telescopes, imaging cameras and subjects are the bare "
 "minimum. Dates of acquisitions are very important too."
 msgstr ""
-"もし、あなたの画像をアルバムに分類したいのであれば、あなたはいくつかのデータを本当に埋める必要があります。撮影望遠鏡、撮影カメラ、主題は最低限必要です。"
-"撮影日もとても重要です。"
+"もし、あなたの画像をアルバムに分類したいのであれば、あなたはいくつかのデータを本当に埋める必要があります。望遠鏡、カメラ、主題は最低限必要です。撮影日も"
+"とても重要です。"
 
 #: templates/user/profile.html:78
 msgid "Tools"
@@ -6706,7 +6704,7 @@ msgstr "あなたのデフォルトの画像ライセンスを設定"
 msgid ""
 "You can set a default type of license for everything you upload into "
 "AstroBin. Change your default here."
-msgstr "あなたはAstroBinにアップロードする全ての画像にデフォルトのライセンス形式を設定することができます。"
+msgstr "AstroBinにアップロードする全ての画像にデフォルトのライセンス形式を設定することができます。"
 
 #: templates/user/profile/edit/locations.html:6
 msgid "Edit your locations"
@@ -6730,7 +6728,7 @@ msgstr "あなたのサイトの設定を編集"
 msgid ""
 "Select your language, and which e-mail notification you would like to "
 "receive:"
-msgstr "あなたの言語を選択し、あなたが受け取りたい言語でメール通知されます。"
+msgstr "言語を選択してください。選択した言語でメール通知されます。"
 
 #: templates/user/profile/edit/retailer.html:6
 msgid "Edit your retailer information"
