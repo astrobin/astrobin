@@ -15,8 +15,14 @@
     <input type="hidden" name="bn" value="PP-SubscriptionsBF:btn_subscribe_LG.gif:NonHosted">
     <input type="hidden" name="notify_url" value="{{base_url}}/subscriptions/paypal/">
     <input type="hidden" name="custom" value="{{request.user.id}}"/>
-    <input type="hidden" name="item_name" value="{{monthly_pizza_sub.name}}"/>
-    <input type="hidden" name="item_number" value="{{monthly_pizza_sub.id}}"/>
+
+    {% if not request.user|is_donor %}
+        <input type="hidden" name="item_name" value="{{monthly_pizza_sub.name}}"/>
+        <input type="hidden" name="item_number" value="{{monthly_pizza_sub.id}}"/>
+    {% else %}
+        <input type="hidden" name="item_name" value="{% user_donation_subscription_name request.user %}"/>
+        <input type="hidden" name="item_number" value="{% user_donation_subscription_id request.user %}"/>
+    {% endif %}
 
     {% if request.user|is_donor %}
         <input type="hidden" name="modify" value="1" />
