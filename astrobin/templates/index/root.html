@@ -15,37 +15,45 @@
 {% block content %}
 <div id="index">
     {% if not request.user.is_authenticated %}
-        <div id="why-astrobin" class="carousel slide">
-            <div class="carousel-inner">
-                <div class="active item">
-                    <img src="{{STATIC_URL}}images/M81_astrojoe.jpg" />
-                    <div class="carousel-caption">
-                        <h4>{% blocktrans %}The perfect home for your astrophotography.{% endblocktrans %}</h4>
-                        {% url help as help_url %}
-                        <p>{% blocktrans %}AstroBin is an image hosting service made specifically for astrophotographers. It comes packed with features that benefit the astrophotography community greatly! See the <a href="{{help_url}}">help page.</a> for more information.{% endblocktrans %}</p>
-                    </div>
-                </div>
+        <div class="row">
+            <div class="span9">
+                <div id="why-astrobin" class="carousel slide">
+                    <div class="carousel-inner">
+                        <div class="active item">
+                            <img src="{{STATIC_URL}}images/M81_astrojoe.jpg" />
+                            <div class="carousel-caption">
+                                <h4>{% blocktrans %}The perfect home for your astrophotography.{% endblocktrans %}</h4>
+                                {% url help as help_url %}
+                                <p>{% blocktrans %}AstroBin is an image hosting service made specifically for astrophotographers. It comes packed with features that benefit the astrophotography community greatly! See the <a href="{{help_url}}">help page.</a> for more information.{% endblocktrans %}</p>
+                            </div>
+                        </div>
 
-                <div class="item">
-                    <img src="{{STATIC_URL}}images/M42_astrojoe.jpg" />
-                    <div class="carousel-caption">
-                        <h4>{% blocktrans %}Unlimited uploads, unlimited size.{% endblocktrans %}</h4>
-                        <p>{% blocktrans %}Astrophotography images have scientific value that shouldn't be lost in file compression. On AstroBin you can (and should!) upload full size images. And you have unlimited space for free.{% endblocktrans %}</p>
-                    </div>
-                </div>
+                        <div class="item">
+                            <img src="{{STATIC_URL}}images/M42_astrojoe.jpg" />
+                            <div class="carousel-caption">
+                                <h4>{% blocktrans %}Unlimited uploads, unlimited size.{% endblocktrans %}</h4>
+                                <p>{% blocktrans %}Astrophotography images have scientific value that shouldn't be lost in file compression. On AstroBin you can (and should!) upload full size images. And you have unlimited space for free.{% endblocktrans %}</p>
+                            </div>
+                        </div>
 
-                <div class="item">
-                    <img src="{{STATIC_URL}}images/M45_astrojoe.jpg" />
-                    <div class="carousel-caption">
-                        <h4>{% blocktrans %}Have your data neatly plotted.{% endblocktrans %}</h4>
-                        <p>{% blocktrans %}Data is everything, and AstroBin will give you the tools to keep your data neat and organized. And with our plots, you can get insights on your productivity and on the gear you use the most.{% endblocktrans %}</p>
-                    </div>
-                </div>
-            </div> <!-- carousel-inner -->
+                        <div class="item">
+                            <img src="{{STATIC_URL}}images/M45_astrojoe.jpg" />
+                            <div class="carousel-caption">
+                                <h4>{% blocktrans %}Have your data neatly plotted.{% endblocktrans %}</h4>
+                                <p>{% blocktrans %}Data is everything, and AstroBin will give you the tools to keep your data neat and organized. And with our plots, you can get insights on your productivity and on the gear you use the most.{% endblocktrans %}</p>
+                            </div>
+                        </div>
+                    </div> <!-- carousel-inner -->
 
-            <a class="carousel-control left" href="#why-astrobin" data-slide="prev">&lsaquo;</a>
-            <a class="carousel-control right" href="#why-astrobin" data-slide="next">&rsaquo;</a>
-        </div> <!-- carousel -->
+                    <a class="carousel-control left" href="#why-astrobin" data-slide="prev">&lsaquo;</a>
+                    <a class="carousel-control right" href="#why-astrobin" data-slide="next">&rsaquo;</a>
+                </div> <!-- carousel -->
+            </div> <!-- carousel's span -->
+
+            <div class="span3 visible-desktop" style="padding-top: 12px;">
+                {% include 'index/ad.html' %}
+            </div>
+        </div> <!-- carousel's and ad's row -->
 
         <div class="row section">
             <div class="span6">
