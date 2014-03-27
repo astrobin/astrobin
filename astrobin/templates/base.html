@@ -69,6 +69,23 @@
         {% if ADS_ENABLED %}
             {% dfp_footer %}
         {% endif %}
+
+        <!-- used to figure out how many users use ad blocking software -->
+        <script type="text/javascript">
+            document.write('<div id="adsense" style="visibility: hidden;">Test ad.</div>');
+            $(document).ready(checkAds());
+
+            /* Adblock Check */
+            function checkAds() {
+                var ad = document.getElementById('adsense');
+                if(!ad || ad.innerHTML.length == 0 || ad.clientHeight === 0) {
+                    document.write("<script>_gaq.push(['_setCustomVar', 5, 'Adblock','Blocked',2]);<\/sc" + "ript>");
+                } else {
+                    document.write("<script>_gaq.push(['_setCustomVar', 5, 'Adblock','UnBlocked',2]);<\/sc" + "ript>");
+                }
+            }
+            /* End Adblock Check */
+        </script>
     </body>
 </html>
 
