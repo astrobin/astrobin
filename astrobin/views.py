@@ -1170,6 +1170,20 @@ def image_edit_revision_make_final(request, id):
 
 @login_required
 @require_GET
+def image_edit_plate_solve(request, image_id, revision_id):
+    if revision_id is None:
+        i = Image.all_objects.get(pk = image_id)
+    else:
+        i = ImageRevision.objects.get(pk = revision_id)
+
+    if i.solution:
+        i.solution.delete()
+
+    return HttpResponseRedirect(i.get_absolute_url())
+
+
+@login_required
+@require_GET
 def image_edit_license(request, id):
     image = get_object_or_404(Image, pk=id)
     if request.user != image.user and not request.user.is_superuser:
