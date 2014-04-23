@@ -42,7 +42,23 @@
             </a>
         </li>
         {% endif %} <!-- not is_final -->
+
+        {% if is_revision and revision_image.solution or image.solution %}
+        <li>
+            {% if is_revision %}
+                <a href="{% url image_edit_plate_solve image.id revision_image.id %}">
+            {% else %}
+                <a href="{% url image_edit_plate_solve image.id %}">
+            {% endif %}
+
+                <i class="icon-location-arrow"></i>
+                {% trans "Attempt to plate-solve again" %}
+            </a>
+        </li>
+        {% endif %}
+
         <li class="divider"></li>
+
         <li>
             <a href="{% url image_edit_license image.id %}">
                 <i class="icon-legal"></i>
