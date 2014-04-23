@@ -81,25 +81,26 @@ def donor_badge(user, size = 'large'):
 @register.filter
 def is_donor(user):
     if user.is_authenticated():
-        try:
-            us = UserSubscription.objects.get(
-                Q(user = user) &
-                Q(
-                    Q(subscription__name = 'AstroBin Donor Coffee Monthly') |
-                    Q(subscription__name = 'AstroBin Donor Snack Monthly') |
-                    Q(subscription__name = 'AstroBin Donor Pizza Monthly') |
-                    Q(subscription__name = 'AstroBin Donor Movie Monthly') |
-                    Q(subscription__name = 'AstroBin Donor Dinner Monthly') |
+        us = UserSubscription.objects.filter(
+            Q(user = user) &
+            Q(
+                Q(subscription__name = 'AstroBin Donor Coffee Monthly') |
+                Q(subscription__name = 'AstroBin Donor Snack Monthly') |
+                Q(subscription__name = 'AstroBin Donor Pizza Monthly') |
+                Q(subscription__name = 'AstroBin Donor Movie Monthly') |
+                Q(subscription__name = 'AstroBin Donor Dinner Monthly') |
 
-                    Q(subscription__name = 'AstroBin Donor Coffee Yearly') |
-                    Q(subscription__name = 'AstroBin Donor Snack Yearly') |
-                    Q(subscription__name = 'AstroBin Donor Pizza Yearly') |
-                    Q(subscription__name = 'AstroBin Donor Movie Yearly') |
-                    Q(subscription__name = 'AstroBin Donor Dinner Yearly')
-                ))
-        except UserSubscription.DoesNotExist:
+                Q(subscription__name = 'AstroBin Donor Coffee Yearly') |
+                Q(subscription__name = 'AstroBin Donor Snack Yearly') |
+                Q(subscription__name = 'AstroBin Donor Pizza Yearly') |
+                Q(subscription__name = 'AstroBin Donor Movie Yearly') |
+                Q(subscription__name = 'AstroBin Donor Dinner Yearly')
+            ))
+
+        if us.count() == 0:
             return False
 
+        us = us[0]
         return us.valid()
 
     return False
@@ -108,12 +109,13 @@ def is_donor(user):
 @register.filter
 def has_donation_subscription(user, name):
     if user.is_authenticated():
-        try:
-            us = UserSubscription.objects.get(
-                Q(user = user) & Q(subscription__name = name))
-        except UserSubscription.DoesNotExist:
+        us = UserSubscription.objects.filter(
+            Q(user = user) & Q(subscription__name = name))
+
+        if us.count() == 0:
             return False
 
+        us = us[0]
         return us.valid()
 
     return False
