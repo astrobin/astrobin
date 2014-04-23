@@ -96,7 +96,7 @@ def astrobin_image(
             image.w = w
             image.h = h
             image.save()
-        except IOError:
+        except (IOError, ValueError):
             w = size[0]
             h = size[1] if size[1] > 0 else w
             response_dict['status'] = 'error'
@@ -124,7 +124,19 @@ def astrobin_image(
     field = image.get_thumbnail_field(revision)
     animated = False
     if field.name.lower().endswith('.gif') and alias in ('regular', 'hd', 'real'):
-        gif = PILImage.open(field.file)
+        try:
+            gif = PILImage.open(field.file)
+        except IOError:
+            return {
+                'status': 'failure',
+                'image': '',
+                'alias': alias,
+                'revision': revision,
+                'size_x': size[0],
+                'size_y': size[1],
+                'capty_cache_key': 'astrobin_image_no_image',
+            }
+
         try:
             gif.seek(1)
         except EOFError:
