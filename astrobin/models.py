@@ -719,6 +719,7 @@ class Image(HasSolutionMixin, models.Model):
         upload_to = image_upload_path,
         height_field = 'h',
         width_field = 'w',
+        max_length = 256,
         null = True,
     )
 
@@ -1194,6 +1195,7 @@ class ImageRevision(HasSolutionMixin, models.Model):
     image_file = models.ImageField(
         upload_to = image_upload_path,
         null = True,
+        max_length = 256,
     )
 
     uploaded = models.DateTimeField(editable=False, auto_now_add=True)
