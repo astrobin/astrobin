@@ -787,6 +787,9 @@ body.full {
         }
         .btn-navbar {
             margin-right: 16px;
+            position: absolute;
+            top: 12px;
+            left: 40px;
 
             .text {
                 color: @strong-text-color;
@@ -952,11 +955,23 @@ body.full {
     .site-nav.nav-collapse,
     .user-nav.nav-collapse {
         overflow: hidden;
+        z-index: 1021;
 
         .nav > li > a, .dropdown-menu a {
             font-weight: normal;
             color: #bbb !important;
         }
+    }
+
+    .site-nav.nav-collapse {
+        position: absolute;
+        top: 50px;
+        left: 45px;
+        background: #333;
+    }
+
+    .user-nav .dropdown-menu {
+        z-index: 1021;
     }
 }
 

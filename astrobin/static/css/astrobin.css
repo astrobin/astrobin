@@ -657,6 +657,9 @@ body.full {
   }
   .navbar .btn-navbar {
     margin-right: 16px;
+    position: absolute;
+    top: 12px;
+    left: 40px;
   }
   .navbar .btn-navbar .text {
     color: #fcfcfc;
@@ -817,6 +820,7 @@ body.full {
   .site-nav.nav-collapse,
   .user-nav.nav-collapse {
     overflow: hidden;
+    z-index: 1021;
   }
   .site-nav.nav-collapse .nav > li > a,
   .user-nav.nav-collapse .nav > li > a,
@@ -824,6 +828,15 @@ body.full {
   .user-nav.nav-collapse .dropdown-menu a {
     font-weight: normal;
     color: #bbb !important;
+  }
+  .site-nav.nav-collapse {
+    position: absolute;
+    top: 50px;
+    left: 45px;
+    background: #333;
+  }
+  .user-nav .dropdown-menu {
+    z-index: 1021;
   }
 }
 /* Subnav */
