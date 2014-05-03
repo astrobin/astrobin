@@ -27,12 +27,12 @@ class Solver(object):
             return self.MISSING
 
         sub_status = self._backend().sub_status(submission)
-        status = sub_status.get('status')
+        status = sub_status.get('status', '')
         if status == 'fail':
             return self.FAILED
 
         if 'user_images' in sub_status and not sub_status.get('user_images'):
-            return self.MISSING
+            return self.PENDING
 
         jobs = sub_status.get('jobs', [])
         if not jobs:
