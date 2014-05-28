@@ -3,25 +3,26 @@
 # This file is distributed under the same license as the PACKAGE package.
 # FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
 #
-#, fuzzy
 msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2014-02-12 07:34+0000\n"
-"PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
-"Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
+"POT-Creation-Date: 2014-04-23 12:11+0000\n"
+"PO-Revision-Date: 2014-03-27 20:38+0000\n"
+"Last-Translator: Tomáš <fun2mas@gmail.com>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
-"Language: \n"
+"Language: sk\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"Plural-Forms: nplurals=3; plural=(n==1) ? 0 : (n>=2 && n<=4) ? 1 : 2\n"
+"Plural-Forms: nplurals=3; plural=(n==1) ? 0 : (n>=2 && n<=4) ? 1 : 2;\n"
+"X-Generator: Pootle 2.5.0\n"
+"X-POOTLE-MTIME: 1395952711.276867\n"
 
 #: templates/astrobin_apps_donations/cancel.html:5
 #: templates/astrobin_apps_donations/cancel.html:10
 msgid "Your recurring donation has been canceled"
-msgstr ""
+msgstr "Váš opakovaný dar bol zrušený"
 
 #: templates/astrobin_apps_donations/cancel.html:13
 msgid ""
@@ -29,25 +30,34 @@ msgid ""
 "AstroBin with its ever increasing hosting costs, and served an incentive for "
 "us to continue to improve it."
 msgstr ""
+"Sme veľmi vďační za Vašu podporu. Váš príspevok pomohol službe AstroBin s "
+"jej rastúcimi nákladmi za hostovanie a motivoval nás pokračovať v jej "
+"zlepšovaní."
 
 #: templates/astrobin_apps_donations/cancel.html:17
 msgid "From now on, you will again see ads on this website."
-msgstr ""
+msgstr "Od teraz opäť uvidíte reklamy na tejto web stránke."
 
 #: templates/astrobin_apps_donations/cancel.html:23
 #: templates/astrobin_apps_donations/success.html:23
 msgid "Whishing you clear skies and excellent seeing!"
-msgstr ""
+msgstr "Želáme Vám jasnú oblohu a vynikajúci seeing!"
 
 #: templates/astrobin_apps_donations/cancel.html:28
 #: templates/astrobin_apps_donations/success.html:28
 msgid "Founder of AstroBin"
-msgstr ""
+msgstr "Zakladateľ AstroBin."
+
+#: templates/astrobin_apps_donations/edit.html:5
+#: templates/astrobin_apps_donations/edit.html:8
+#, fuzzy
+msgid "Edit your recurring donation settings"
+msgstr "Váš opakovaný dar bol zrušený"
 
 #: templates/astrobin_apps_donations/success.html:5
 #: templates/astrobin_apps_donations/success.html:10
 msgid "Thank you for your donation!"
-msgstr ""
+msgstr "Ďakujeme za Váš dar!"
 
 #: templates/astrobin_apps_donations/success.html:13
 msgid ""
@@ -55,66 +65,81 @@ msgid ""
 "with its ever increasing hosting costs, and will serve an incentive for us "
 "to continue to improve it."
 msgstr ""
+"Sme veľmi vďační za Vašu podporu! Váš príspevok pomôže službe AstroBin s jej "
+"rastúcimi nákladmi za hostovanie a bude nás motivovať pokračovať v jej "
+"zlepšovaní."
 
 #: templates/astrobin_apps_donations/success.html:17
 msgid ""
 "In a few minutes, once your PayPal transaction is processed, we will stop "
 "showing you ads on this website."
 msgstr ""
+"O niekoľko minút, po spracovaní Vašej PayPal transakcie, Vám zastavíme "
+"zobrazovanie reklám na tejtto web stránke."
 
-#: templates/astrobin_apps_donations/inclusion_tags/_paypal_button.html:21
+#: templates/astrobin_apps_donations/inclusion_tags/_paypal_button.html:33
 msgid "What is AstroBin worth to you?"
 msgstr ""
 
-#: templates/astrobin_apps_donations/inclusion_tags/_paypal_button.html:24
+#: templates/astrobin_apps_donations/inclusion_tags/_paypal_button.html:38
 msgid "Monthly contributions"
-msgstr ""
+msgstr "Mesačné príspevky"
 
-#: templates/astrobin_apps_donations/inclusion_tags/_paypal_button.html:25
-#: templates/astrobin_apps_donations/inclusion_tags/_paypal_button.html:26
-#: templates/astrobin_apps_donations/inclusion_tags/_paypal_button.html:27
-#: templates/astrobin_apps_donations/inclusion_tags/_paypal_button.html:28
-#: templates/astrobin_apps_donations/inclusion_tags/_paypal_button.html:29
+#: templates/astrobin_apps_donations/inclusion_tags/_paypal_button.html:39
+#: templates/astrobin_apps_donations/inclusion_tags/_paypal_button.html:40
+#: templates/astrobin_apps_donations/inclusion_tags/_paypal_button.html:41
+#: templates/astrobin_apps_donations/inclusion_tags/_paypal_button.html:42
+#: templates/astrobin_apps_donations/inclusion_tags/_paypal_button.html:43
 #, python-format
 msgid "$%(amount)s/month"
-msgstr ""
+msgstr "$%(amount)/mesiac"
 
-#: templates/astrobin_apps_donations/inclusion_tags/_paypal_button.html:25
-#: templates/astrobin_apps_donations/inclusion_tags/_paypal_button.html:33
+#: templates/astrobin_apps_donations/inclusion_tags/_paypal_button.html:39
+#: templates/astrobin_apps_donations/inclusion_tags/_paypal_button.html:47
 msgid "A coffee"
-msgstr ""
+msgstr "káva"
 
-#: templates/astrobin_apps_donations/inclusion_tags/_paypal_button.html:26
-#: templates/astrobin_apps_donations/inclusion_tags/_paypal_button.html:34
+#: templates/astrobin_apps_donations/inclusion_tags/_paypal_button.html:40
+#: templates/astrobin_apps_donations/inclusion_tags/_paypal_button.html:48
 msgid "A snack"
-msgstr ""
+msgstr "občerstvenie"
 
-#: templates/astrobin_apps_donations/inclusion_tags/_paypal_button.html:27
-#: templates/astrobin_apps_donations/inclusion_tags/_paypal_button.html:35
+#: templates/astrobin_apps_donations/inclusion_tags/_paypal_button.html:41
+#: templates/astrobin_apps_donations/inclusion_tags/_paypal_button.html:49
 msgid "A pizza"
-msgstr ""
+msgstr "pizza"
 
-#: templates/astrobin_apps_donations/inclusion_tags/_paypal_button.html:28
-#: templates/astrobin_apps_donations/inclusion_tags/_paypal_button.html:36
+#: templates/astrobin_apps_donations/inclusion_tags/_paypal_button.html:42
+#: templates/astrobin_apps_donations/inclusion_tags/_paypal_button.html:50
 msgid "A movie night for one"
-msgstr ""
+msgstr "filmový večer pre jednu osobu"
 
-#: templates/astrobin_apps_donations/inclusion_tags/_paypal_button.html:29
-#: templates/astrobin_apps_donations/inclusion_tags/_paypal_button.html:37
+#: templates/astrobin_apps_donations/inclusion_tags/_paypal_button.html:43
+#: templates/astrobin_apps_donations/inclusion_tags/_paypal_button.html:51
 msgid "A frugal dinner out for one"
 msgstr ""
 
-#: templates/astrobin_apps_donations/inclusion_tags/_paypal_button.html:32
+#: templates/astrobin_apps_donations/inclusion_tags/_paypal_button.html:46
 msgid "Yearly contributions (cheaper!)"
-msgstr ""
+msgstr "Ročné príspevky (lacnejšie!)"
 
-#: templates/astrobin_apps_donations/inclusion_tags/_paypal_button.html:33
-#: templates/astrobin_apps_donations/inclusion_tags/_paypal_button.html:34
-#: templates/astrobin_apps_donations/inclusion_tags/_paypal_button.html:35
-#: templates/astrobin_apps_donations/inclusion_tags/_paypal_button.html:36
-#: templates/astrobin_apps_donations/inclusion_tags/_paypal_button.html:37
+#: templates/astrobin_apps_donations/inclusion_tags/_paypal_button.html:47
+#: templates/astrobin_apps_donations/inclusion_tags/_paypal_button.html:48
+#: templates/astrobin_apps_donations/inclusion_tags/_paypal_button.html:49
+#: templates/astrobin_apps_donations/inclusion_tags/_paypal_button.html:50
+#: templates/astrobin_apps_donations/inclusion_tags/_paypal_button.html:51
 #, python-format
 msgid "$%(amount)s/year"
+msgstr "$%(amount)/ročne"
+
+#: templates/astrobin_apps_donations/inclusion_tags/_paypal_button.html:119
+msgid "IMPORTANT"
+msgstr ""
+
+#: templates/astrobin_apps_donations/inclusion_tags/_paypal_button.html:119
+msgid ""
+"Please note: if you are already a donor, the Subscribe button will update "
+"your existing subscription, not create a new one."
 msgstr ""
 
 #: templates/astrobin_apps_donations/inclusion_tags/cancel_modal.html:8
