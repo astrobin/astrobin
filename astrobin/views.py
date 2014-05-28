@@ -1826,11 +1826,16 @@ def user_page_bookmarks(request, username):
             .order_by('-created_on')
         ]
 
-    return render_to_response('user/bookmarks.html',
+    template_name = 'user/bookmarks.html'
+    if request.is_ajax():
+        template_name = 'inclusion_tags/image_list_entries.html'
+
+    return render_to_response(template_name,
         {
             'user': user,
-            'bookmarks': images,
+            'image_list': images,
             'private_message_form': PrivateMessageForm(),
+            'alias': 'gallery',
         },
         context_instance = RequestContext(request)
     )
