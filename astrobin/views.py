@@ -541,6 +541,11 @@ def image_detail(request, id, r):
                 # how many gear items can an image have?
                 break
 
+    makes_list = ','.join(
+        filter(None, reduce(
+            lambda x,y: x+y,
+            [list(x.values_list('make', flat = True)) for x in [y[1] for y in gear_list]])))
+
     deep_sky_acquisitions = DeepSky_Acquisition.objects.filter(image=image)
     ssa = None
     image_type = None
@@ -757,6 +762,7 @@ def image_detail(request, id, r):
             content_type__model = 'image',
             object_id = image.id).count(),
         'gear_list': gear_list,
+        'makes_list': makes_list,
         'gear_list_has_commercial': gear_list_has_commercial,
         'gear_list_has_paid_commercial': gear_list_has_paid_commercial,
         'image_type': image_type,
