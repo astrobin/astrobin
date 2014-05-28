@@ -3,43 +3,46 @@
 # This file is distributed under the same license as the PACKAGE package.
 # FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
 #
-#, fuzzy
 msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2014-02-12 07:34+0000\n"
-"PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
-"Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
+"POT-Creation-Date: 2014-04-23 12:11+0000\n"
+"PO-Revision-Date: 2014-03-27 18:05+0000\n"
+"Last-Translator: Tomáš <fun2mas@gmail.com>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
-"Language: \n"
+"Language: sk\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"Plural-Forms: nplurals=3; plural=(n==1) ? 0 : (n>=2 && n<=4) ? 1 : 2\n"
+"Plural-Forms: nplurals=3; plural=(n==1) ? 0 : (n>=2 && n<=4) ? 1 : 2;\n"
+"X-Generator: Pootle 2.5.0\n"
+"X-POOTLE-MTIME: 1395943502.529201\n"
 
 #: templates/astrobin_apps_platesolving/inclusion_tags/platesolving_machinery.html:10
 msgid "Getting plate-solving status, please wait..."
-msgstr ""
+msgstr "Zisťovanie stavu astrometrie snímky, čakajte prosím..."
 
 #: templates/astrobin_apps_platesolving/inclusion_tags/platesolving_machinery.html:28
 msgid "Plate-solving process starting, please do not leave this page..."
-msgstr ""
+msgstr "Spustený prosce astrometrie snímky, prosím neopúšťajte stránku..."
 
 #: templates/astrobin_apps_platesolving/inclusion_tags/platesolving_machinery.html:29
 msgid "Plate-solving started in the background. You may leave this page."
-msgstr ""
+msgstr "Astrometria sputená na pozadí. Môžete opustiť stránku."
 
 #: templates/astrobin_apps_platesolving/inclusion_tags/platesolving_machinery.html:30
 msgid "Plate-solving almost ready, please do not leave this page..."
-msgstr ""
+msgstr "Astrometria je takmer ukončená, neopúšťajte prosím stránku..."
 
 #: templates/astrobin_apps_platesolving/inclusion_tags/platesolving_machinery.html:31
 msgid "This image could not be plate-solved."
-msgstr ""
+msgstr "Tento obrázok sa nepodarilo astrometricky vyhodnotiť."
 
 #: templates/astrobin_apps_platesolving/inclusion_tags/platesolving_machinery.html:32
 msgid ""
 "This image has been successfully plate-solved. Please refresh the page to "
 "see the new data."
 msgstr ""
+"Tento obrázok sa podailo úspešne astrometricky vyhodnotiť. Načítajte prosím "
+"stránku na zobrazenie nových údajov."
