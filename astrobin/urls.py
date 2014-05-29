@@ -67,6 +67,8 @@ urlpatterns = patterns('',
     url(r'^(?P<id>\d+)/(?:(?P<r>\w+)/)?rawthumb/(?P<alias>\w+)/(?:get.jpg)?$', views.image_rawthumb, name='image_rawthumb'),
     url(r'^full/(?P<id>\d+)/(?:(?P<r>\w+)/)?$', views.image_full, name='image_full'),
 
+    url(r'^iotd/choose/(?:(?P<id>\d+)/)?$', views.iotd_choose, name='iotd_choose'),
+
     url(r'^upload/$', views.image_upload, name='image_upload'),
     url(r'^upload/process$', views.image_upload_process, name='image_upload_process'),
     url(r'^upload/revision/process/$', views.image_revision_upload_process, name='image_revision_upload_process'),

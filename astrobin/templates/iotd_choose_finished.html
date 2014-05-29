@@ -1,0 +1,18 @@
+{% extends 'base.html' %}
+
+{% load i18n %}
+
+{% block title %}{% trans "Thanks!" %}{% endblock %}
+
+{% block content %}
+        <h1>
+            {% trans "Thanks!" %}
+        </h1>
+
+        <p>
+            {% blocktrans %}
+                The 'Image of the day' was selected. Thank you for your help!
+            {% endblocktrans %}
+        </p>
+{% endblock %}
+

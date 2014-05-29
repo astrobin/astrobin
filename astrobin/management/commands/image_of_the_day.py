@@ -6,7 +6,7 @@ from django.db.models import Q
 from toggleproperties.models import ToggleProperty
 
 from astrobin.models import Image, ImageOfTheDay
-from astrobin.image_utils import make_image_of_the_day, make_runnerup
+from astrobin.image_utils import make_image_of_the_day, make_runnerup, candidate_images_for_iotd
 
 from datetime import date, datetime, timedelta
 
@@ -49,21 +49,6 @@ class Command(BaseCommand):
                                                     Q(is_wip = False))
             start = start - timedelta(1)
 
-        sorted_images = sorted(candidate_images, cmp = compare_images)
-
-        print "IOTD: %d - %s (%d)" % (
-            sorted_images[0].id, sorted_images[0].title.encode('utf-8'),
-            calculate_score(sorted_images[0]))
-
-        print "Runner up 1: %d - %s (%d)" % (
-            sorted_images[1].id, sorted_images[1].title.encode('utf-8'),
-            calculate_score(sorted_images[1]))
-
-        print "Runner up 2: %d - %s (%d)" % (
-            sorted_images[2].id, sorted_images[2].title.encode('utf-8'),
-            calculate_score(sorted_images[2]))
-
-        iotd = make_image_of_the_day(sorted_images[0])
-        make_runnerup(sorted_images[1], iotd, 1)
-        make_runnerup(sorted_images[2], iotd, 2)
+        sorted_images = sorted(candidate_images, cmp = compare_images)[:25]
+        candidate_images_for_iotd(sorted_images)
 

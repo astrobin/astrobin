@@ -12,6 +12,12 @@ import tempfile
 import StringIO
 from datetime import datetime
 
+def candidate_images_for_iotd(images):
+    from astrobin.models import ImageOfTheDayCandidate
+
+    for position, i in enumerate(images):
+        c = ImageOfTheDayCandidate.objects.create(image = i, position = position)
+
 
 def make_image_of_the_day(image):
     from astrobin.models import Image, ImageRevision, ImageOfTheDay
