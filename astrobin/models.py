@@ -1930,6 +1930,24 @@ class ImageOfTheDay(models.Model):
         return u"%s as an Image of the Day" % self.image.title
 
 
+class ImageOfTheDayCandidate(models.Model):
+    image = models.ForeignKey(
+        Image,
+        related_name = 'image_of_the_day_candidate')
+
+    date = models.DateField(
+        auto_now_add = True)
+
+    position = models.PositiveIntegerField()
+
+    class Meta:
+        ordering = ['-date', 'position']
+        app_label = 'astrobin'
+
+    def __unicode__(self):
+        return u"%s as an Image of the Day Candidate" % self.image.title
+
+
 class GlobalStat(models.Model):
     date = models.DateField(
         editable = False,

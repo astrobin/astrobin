@@ -1,0 +1,49 @@
+{% extends 'base.html' %}
+
+{% load i18n %}
+{% load astrobin_apps_images_tags %}
+{% load tags %}
+
+{% block title %}{% trans "Choose today's 'Image of the day'" %}{% endblock %}
+
+{% block content %}
+    {% if not iotd_already_exists %}
+        <h1>
+            <span class="iotd-choose-date">{% now "SHORT_DATE_FORMAT" %}</span>
+            {% trans "Choose today's 'Image of the day'" %}
+        </h1>
+
+        {% for candidate in candidate_list %}
+            <div class="row section iotd-choose">
+                <div class="span8">
+                    {% astrobin_image candidate.image 'regular' %}
+                </div>
+
+                <div class="span4">
+                    <div class="subtle-container">
+                        <div class="header">
+                            <h4>
+                                "{{candidate.image.title|escape}}"
+                                <span class="by">{% trans "by" %}</span>
+                                <a href="{% url user_page candidate.image.user %}">
+                                    {{candidate.image.user.userprofile}}
+                                </a>
+                            </h4>
+                        </div>
+
+                        <a
+                            href="{% url iotd_choose candidate.image.id %}"
+                            class="btn btn-large btn-block btn-primary">
+                            &larr; {% trans "Choose" %}
+                        </a>
+
+                    </div>
+                </div>
+            </div>
+        {% empty %}
+            <p>
+                {% trans "There are no candidates for 'Image of the day' yet, today. Please try again later." %}
+            </p>
+        {% endfor %}
+    {% endif %}
+{% endblock %}

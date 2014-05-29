@@ -1,6 +1,6 @@
 from django.http import HttpResponse
 from django.http import HttpResponseRedirect
-from django.http import HttpResponseForbidden
+from django.http import HttpResponseForbidden, HttpResponseNotAllowed
 from django.http import Http404
 from django.shortcuts import render_to_response
 from django.shortcuts import get_object_or_404
@@ -455,6 +455,70 @@ def iotd_archive(request):
         template_object_name = 'iotd',
         paginate_by = 30,
     )
+
+
+@login_required
+def iotd_choose(request, id):
+    if not request.user.groups.filter(name='IOTD_Staff'):
+        return HttpResponseForbidden()
+
+    context = {
+    }
+
+    today = date.today()
+    tomorrow = today + timedelta(1)
+    candidates = ImageOfTheDayCandidate.objects.filter(date__range = (today, tomorrow))
+
+    try:
+        iotd = ImageOfTheDay.objects.get(date__range = (today, tomorrow))
+        context['iotd_already_exists'] = True
+        messages.error(
+            request,
+            _("Today's 'Image of the day' was already choosen. Come back tomorrow!"))
+    except ImageOfTheDay.DoesNotExist:
+        pass
+
+    if request.method == 'GET':
+        if id is None:
+            return object_list(
+                request,
+                queryset = candidates,
+                template_name = 'iotd_choose.html',
+                template_object_name = 'candidate',
+                extra_context = context,
+            )
+        else:
+            context['image'] = Image.objects.get(id = id)
+            return render_to_response(
+                'iotd_choose_confirm.html',
+                context,
+                context_instance = RequestContext(request))
+
+    elif request.method == 'POST':
+        if id is None:
+            return HttpResponseNotAllowed(['POST'])
+
+        from image_utils import make_image_of_the_day, make_runnerup
+        image = Image.objects.get(id = id)
+
+        iotd = make_image_of_the_day(image)
+        position = ImageOfTheDayCandidate.objects.get(
+            image = image,
+            date__range = (today, tomorrow)).position
+        if position == 0:
+            make_runnerup(candidates[1].image, iotd, 1)
+            make_runnerup(candidates[2].image, iotd, 2)
+        elif position == 1:
+            make_runnerup(candidates[0].image, iotd, 1)
+            make_runnerup(candidates[2].image, iotd, 2)
+        else:
+            make_runnerup(candidates[0].image, iotd, 1)
+            make_runnerup(candidates[1].image, iotd, 2)
+
+        return render_to_response(
+            'iotd_choose_finished.html',
+            {},
+            context_instance = RequestContext(request))
 
 
 @require_GET

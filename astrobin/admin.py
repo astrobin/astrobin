@@ -194,6 +194,15 @@ class ImageOfTheDayAdmin(admin.ModelAdmin):
     ordering = ('-date',)
 
 
+class ImageOfTheDayCandidateAdmin(admin.ModelAdmin):
+    list_display = (
+        'image',
+        'date',
+        'position',
+    )
+    ordering = ('-date', 'position')
+
+
 admin.site.register(Gear, GearAdmin)
 admin.site.register(GearUserInfo)
 admin.site.register(GearAssistedMerge, GearAssistedMergeAdmin)
@@ -218,6 +227,7 @@ admin.site.register(Location)
 admin.site.register(AppApiKeyRequest, AppApiRequestAdmin)
 admin.site.register(App, AppAdmin)
 admin.site.register(ImageOfTheDay, ImageOfTheDayAdmin)
+admin.site.register(ImageOfTheDayCandidate, ImageOfTheDayCandidateAdmin)
 admin.site.register(GlobalStat)
 
 ###############################################################################

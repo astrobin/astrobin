@@ -208,6 +208,17 @@
                     {% trans "My settings" %}
                 </a>
             </li>
+
+            {% if is_iotd_staff %}
+                <li class="divider"></li>
+                <li>
+                    <a href="{% url iotd_choose %}">
+                        <i clasS="icon-legal"></i>
+                        {% trans "Choose Image Of The Day" %}
+                    </a>
+                </li>
+            {% endif %}
+
             <li class="divider"></li>
             <li>
                 <a href="{% url auth_logout %}">

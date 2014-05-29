@@ -2805,6 +2805,18 @@ form.avatar-change label.control-label {
   -webkit-border-radius: 12px;
   border-radius: 12px;
 }
+.iotd-choose-date {
+  background-color: #cc4b2e;
+  padding: 4px 8px;
+  font-size: 16px;
+  -moz-border-radius: 6px;
+  -webkit-border-radius: 6px;
+  border-radius: 6px;
+  vertical-align: 7px;
+}
+.iotd-choose .by {
+  color: #aaa;
+}
 .btn-upload {
   padding: 31.5px 24px;
 }
