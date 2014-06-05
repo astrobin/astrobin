@@ -1646,7 +1646,7 @@ def user_page(request, username):
     qs = Image.objects.filter(user = user)
 
     if 'staging' in request.GET:
-        if request.user != user:
+        if request.user != user and not request.user.is_superuser:
             return HttpResponseForbidden()
         qs = Image.wip.filter(user = user)
         section = 'staging'
