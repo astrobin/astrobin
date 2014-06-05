@@ -7,8 +7,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2014-04-23 12:11+0000\n"
-"PO-Revision-Date: 2014-01-28 09:48+0000\n"
+"POT-Creation-Date: 2014-05-29 10:53+0000\n"
+"PO-Revision-Date: 2014-04-27 07:26+0000\n"
 "Last-Translator: naavis <svnaavis@gmail.com>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
 "Language: fi\n"
@@ -17,7 +17,7 @@ msgstr ""
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=(n != 1);\n"
 "X-Generator: Pootle 2.5.0\n"
-"X-POOTLE-MTIME: 1390902539.702788\n"
+"X-POOTLE-MTIME: 1398583574.55754\n"
 
 #: templates/astrobin_apps_donations/cancel.html:5
 #: templates/astrobin_apps_donations/cancel.html:10
@@ -50,9 +50,8 @@ msgstr "AstroBinin perustaja"
 
 #: templates/astrobin_apps_donations/edit.html:5
 #: templates/astrobin_apps_donations/edit.html:8
-#, fuzzy
 msgid "Edit your recurring donation settings"
-msgstr "Peruuta toistuva lahjoituksesi"
+msgstr "Muokkaa toistuvan lahjoituksen asetuksia"
 
 #: templates/astrobin_apps_donations/success.html:5
 #: templates/astrobin_apps_donations/success.html:10
@@ -134,13 +133,16 @@ msgstr "$%(amount)s/vuosi"
 
 #: templates/astrobin_apps_donations/inclusion_tags/_paypal_button.html:119
 msgid "IMPORTANT"
-msgstr ""
+msgstr "TÄRKEÄÄ"
 
 #: templates/astrobin_apps_donations/inclusion_tags/_paypal_button.html:119
+#, fuzzy
 msgid ""
 "Please note: if you are already a donor, the Subscribe button will update "
 "your existing subscription, not create a new one."
 msgstr ""
+"Huom: jos olet jo lahjoittaja, Sitoudu lahjoittamaan -nappi päivittää "
+"olemassaolevaa lahjoitussopimustasi, eikä luo uutta."
 
 #: templates/astrobin_apps_donations/inclusion_tags/cancel_modal.html:8
 #: templates/astrobin_apps_donations/inclusion_tags/cancel_modal.html:24
