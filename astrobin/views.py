@@ -987,9 +987,9 @@ def image_upload(request):
         'has_inact_sub': has_inact_sub,
         'is_over_limit': is_over_limit,
 
-        'byte_limit': user_byte_limit(request.user) if has_sub else 0,
-        'used_percent': user_used_percent(request.user) if has_sub else 100,
-        'progress_class': user_progress_class(request.user) if has_sub else '',
+        'byte_limit': user_byte_limit(request.user) if has_act_sub else 0,
+        'used_percent': user_used_percent(request.user) if has_act_sub else 100,
+        'progress_class': user_progress_class(request.user) if has_act_sub else '',
         'supported_raw_formats': supported_raw_formats(),
     }
 
