@@ -41,7 +41,25 @@ def user_get_subscription(user):
     if not user.is_authenticated():
         raise UserSubscription.DoesNotExist
 
-    return UserSubscription.objects.get(user = user, subscription__name__in = SUBSCRIPTION_NAMES)
+    try:
+        return UserSubscription.objects.get(user = user, subscription__name__in = SUBSCRIPTION_NAMES)
+    except UserSubscription.MultipleObjectsReturned:
+        return UserSubscription.objects.filter(user = user, subscription__name__in = SUBSCRIPTION_NAMES)[0]
+
+
+def user_get_active_subscription(user):
+    if not user.is_authenticated():
+        raise UserSubscription.DoesNotExist
+
+    try:
+        us = UserSubscription.objects.get(user = user, subscription__name__in = SUBSCRIPTION_NAMES, active = True, cancelled = False)
+    except UserSubscription.MultipleObjectsReturned:
+        us = UserSubscription.objects.filter(user = user, subscription__name__in = SUBSCRIPTION_NAMES, active = True, cancelled = False)[0]
+
+    if us.expired():
+        return None
+
+    return us
 
 
 def user_has_subscription(user):
@@ -55,11 +73,14 @@ def user_has_subscription(user):
 
 def user_has_active_subscription(user):
     try:
-        us = user_get_subscription(user)
+        us = user_get_active_subscription(user)
     except UserSubscription.DoesNotExist:
         return False
 
-    return us.active and not us.cancelled and not us.expired()
+    if us:
+        return us.active and not us.cancelled and not us.expired()
+
+    False
 
 def user_has_inactive_subscription(user):
     try:
@@ -91,7 +112,7 @@ def subscription_byte_limit(subscription):
 
 def user_byte_limit(user):
     try:
-        us = user_get_subscription(user)
+        us = user_get_active_subscription(user)
     except UserSubscription.DoesNotExist:
         return 0
 
