@@ -198,7 +198,7 @@ Edit /etc/postgresql/9.1/main/pg_hba.conf and set 127.0.01 from 'md5' to 'trust'
 ./scripts/syncdb.sh
 ./manage.py migrate threaded_messages
 
-(When asked, do create super user astrobin:***REMOVED*** <astrobin@astrobin.com>)
+(When asked, do create super user astrobin:s3cr3t <astrobin@astrobin.com>)
 
 
 # Use nginx config
@@ -217,7 +217,7 @@ To the top:
 # Configure rabbitmq:
 # ===================
 
-sudo rabbitmqctl add_user astrobin ***REMOVED***
+sudo rabbitmqctl add_user astrobin s3cr3t
 sudo rabbitmqctl add_vhost astrobin
 sudo rabbitmqctl set_permissions -p astrobin astrobin ".*" ".*" ".*"
 
