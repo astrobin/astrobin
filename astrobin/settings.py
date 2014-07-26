@@ -503,7 +503,7 @@ LOGGING = {
         'logfile': {
             'level':'DEBUG',
             'class':'logging.handlers.RotatingFileHandler',
-            'filename': "logs/astrobin.txt",
+            'filename': "/var/www/astrobin/logs/astrobin.txt",
             'maxBytes': 50000,
             'backupCount': 2,
             'formatter': 'standard',

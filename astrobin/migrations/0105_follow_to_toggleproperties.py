@@ -7,37 +7,40 @@ from django.db import models
 class Migration(DataMigration):
 
     def forwards(self, orm):
-        user_ct = orm['contenttypes.contenttype'].objects.get(app_label = 'auth', model = 'user')
-        gear_ct = orm['contenttypes.contenttype'].objects.get(app_label = 'astrobin', model = 'gear')
-        subj_ct = orm['contenttypes.contenttype'].objects.get(app_label = 'astrobin', model = 'subject')
+        try:
+            user_ct = orm['contenttypes.contenttype'].objects.get(app_label = 'auth', model = 'user')
+            gear_ct = orm['contenttypes.contenttype'].objects.get(app_label = 'astrobin', model = 'gear')
+            subj_ct = orm['contenttypes.contenttype'].objects.get(app_label = 'astrobin', model = 'subject')
 
-        for u in orm['auth.user'].objects.all():
-            for i in u.userprofile.follows.all():
-                orm['toggleproperties.toggleproperty'].objects.get_or_create(
-                    property_type = "follow",
-                    user = u,
-                    content_type = user_ct,
-                    object_id = i.user.pk
-                )
-                u.userprofile.follows.remove(i)
+            for u in orm['auth.user'].objects.all():
+                for i in u.userprofile.follows.all():
+                    orm['toggleproperties.toggleproperty'].objects.get_or_create(
+                        property_type = "follow",
+                        user = u,
+                        content_type = user_ct,
+                        object_id = i.user.pk
+                    )
+                    u.userprofile.follows.remove(i)
 
-            for i in u.userprofile.follows_gear.all():
-                orm['toggleproperties.toggleproperty'].objects.get_or_create(
-                    property_type = "follow",
-                    user = u,
-                    content_type = gear_ct,
-                    object_id = i.pk
-                )
-                u.userprofile.follows_gear.remove(i)
+                for i in u.userprofile.follows_gear.all():
+                    orm['toggleproperties.toggleproperty'].objects.get_or_create(
+                        property_type = "follow",
+                        user = u,
+                        content_type = gear_ct,
+                        object_id = i.pk
+                    )
+                    u.userprofile.follows_gear.remove(i)
 
-            for i in u.userprofile.follows_subjects.all():
-                orm['toggleproperties.toggleproperty'].objects.get_or_create(
-                    property_type = "follow",
-                    user = u,
-                    content_type = gear_ct,
-                    object_id = i.pk
-                )
-                u.userprofile.follows_subjects.remove(i)
+                for i in u.userprofile.follows_subjects.all():
+                    orm['toggleproperties.toggleproperty'].objects.get_or_create(
+                        property_type = "follow",
+                        user = u,
+                        content_type = gear_ct,
+                        object_id = i.pk
+                    )
+                    u.userprofile.follows_subjects.remove(i)
+        except orm['contenttypes.contenttype'].DoesNotExist:
+            pass
 
 
     def backwards(self, orm):
