@@ -104,6 +104,7 @@
 
         {% cache 3600 index_iotd request.LANGUAGE_CODE %}
         {% with image_of_the_day as iotd %}
+        {% if iotd %}
             <div class="row section">
                 <div class="span10">
                     <div class="image-of-the-day">
@@ -161,6 +162,7 @@
                     </a>
                 </div>
             </div>
+        {% endif %}
         {% endwith %}
         {% endcache %}
 
