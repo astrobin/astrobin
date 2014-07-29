@@ -28,5 +28,10 @@ Init the environment:
 . /venv/astrobin/dev/bin/activate
 ```
 
-Start AstroBin: `/var/www/astrobin/scripts/run.sh`
-Visit http://localhost:8082/
+Start AstroBin:
+
+```bash
+/var/www/astrobin/manage.py runserver 0.0.0.0:8082
+```
+
+Visit http://127.0.0.1:8082/
