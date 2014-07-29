@@ -34,10 +34,11 @@ Create a superuser:
 /var/www/astrobin/manage.py createsuperuser
 ```
 
-Run a dummy mail server:
+Run a dummy mail servers (for both debug and non-debug modes):
 
 ```bash
 sudo python -m smtpd -n -c DebuggingServer localhost:25 &
+python -m smtpd -n -c DebuggingServer localhost:1025 &
 ```
 
 Start AstroBin:
