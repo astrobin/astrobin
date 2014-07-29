@@ -7,14 +7,14 @@ mkdir -p /opt/solr
 mkdir -p /venv
 mkdir -p /var/www/astrobin/logs
 
-groupadd astrobin
+groupadd -g 2000 astrobin
 
 if ! id -u astrobin >/dev/null 2>&1; then
-    useradd -MN -s /dev/null -g astrobin astrobin
+    useradd -MN -s /dev/null -g astrobin -u 2000 astrobin
 fi
 
 if ! id -u solr >/dev/null 2>&1; then
-    useradd -MN -s /dev/null -g astrobin solr
+    useradd -MN -s /dev/null -g astrobin -u 2001 solr
 fi
 
 chown -R astrobin:astrobin /venv

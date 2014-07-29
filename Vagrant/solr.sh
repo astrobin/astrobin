@@ -9,9 +9,11 @@ if [ ! -f $SOLR_ARCHIVE ]; then
     tar xvfz $SOLR_ARCHIVE -C $SOLR_DIR
 fi
 
+sudo -u solr chmod g+w $SOLR_SCHEMA
+
 sudo -u astrobin /bin/bash - <<"EOF"
 . /venv/astrobin/dev/bin/activate
 . /var/www/astrobin/env/dev
 
-/var/www/astrobin/manage.py build_solr_schema > $SOLR_SCHEMA
+/var/www/astrobin/manage.py build_solr_schema > /opt/solr/solr-4.4.0/example/solr/collection1/conf/schema.xml
 EOF

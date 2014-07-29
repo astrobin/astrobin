@@ -9,7 +9,7 @@ Vagrant::configure("2") do |config|
     v.cpus = 2
   end
 
-  config.vm.synced_folder ".", "/var/www/astrobin"
+  config.vm.synced_folder ".", "/var/www/astrobin", mount_options:["uid=2000,gid=2000"]
   config.vm.network "forwarded_port", guest: 80, host: 8080
   config.vm.network "forwarded_port", guest: 8082, host: 8082
 
