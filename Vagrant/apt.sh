@@ -26,5 +26,11 @@ apt-get -y install \
     rabbitmq-server \
     python-pyside libpyside-dev \
     libqjson-dev libraw-dev \
-    shiboken libshiboken-dev
+    shiboken libshiboken-dev \
+    libjpeg62 libjpeg62-dev \
+    libfreetype6 libfreetype6-dev \
+    zlib1g-dev
 
+ln -s /usr/lib/x86_64-linux-gnu/libjpeg.so /usr/lib/libjpeg.so
+ln -s /usr/lib/x86_64-linux-gnu/libfreetype.so /usr/lib/libfreeype.so
+ln -s /usr/lib/x86_64-linux-gnu/libz.so /usr/lib/libz.so
