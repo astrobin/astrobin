@@ -35,6 +35,8 @@ class ImageRevisionResource(ModelResource):
     url_regular = fields.CharField()
     url_hd = fields.CharField()
     url_real = fields.CharField()
+    url_duckduckgo = fields.CharField()
+    url_duckduckgo_small = fields.CharField()
 
     is_solved = fields.BooleanField()
 
@@ -51,6 +53,8 @@ class ImageRevisionResource(ModelResource):
             'url_regular',
             'url_hd',
             'url_real',
+            'url_duckduckgo',
+            'url_duckduckgo_small',
 
             'is_final',
             'is_solved',
@@ -73,6 +77,12 @@ class ImageRevisionResource(ModelResource):
     def dehydrate_url_real(self, bundle):
         return '%s/%d/%s/rawthumb/real/' % (settings.ASTROBIN_BASE_URL, bundle.obj.image.id, bundle.obj.label)
 
+    def dehydrate_url_duckduckgo(self, bundle):
+        return '%s/%d/%s/rawthumb/duckduckgo/' % (settings.ASTROBIN_BASE_URL, bundle.obj.image.id, bundle.obj.label)
+
+    def dehydrate_url_duckduckgo_small(self, bundle):
+        return '%s/%d/%s/rawthumb/duckduckgo_small/' % (settings.ASTROBIN_BASE_URL, bundle.obj.image.id, bundle.obj.label)
+
     def dehydrate_is_solved(self, bundle):
         return bundle.obj.solution != None
 
@@ -94,6 +104,8 @@ class ImageResource(ModelResource):
     url_regular = fields.CharField()
     url_hd = fields.CharField()
     url_real = fields.CharField()
+    url_duckduckgo = fields.CharField()
+    url_duckduckgo_small = fields.CharField()
 
     is_solved = fields.BooleanField()
 
@@ -109,6 +121,8 @@ class ImageResource(ModelResource):
             'url_regular',
             'url_hd',
             'url_real',
+            'url_duckduckgo',
+            'url_duckduckgo_small',
 
             'uploaded',
             'description',
@@ -150,6 +164,12 @@ class ImageResource(ModelResource):
 
     def dehydrate_url_real(self, bundle):
         return '%s/%d/0/rawthumb/real/' % (settings.ASTROBIN_BASE_URL, bundle.obj.id)
+
+    def dehydrate_url_duckduckgo(self, bundle):
+        return '%s/%d/0/rawthumb/duckduckgo/' % (settings.ASTROBIN_BASE_URL, bundle.obj.id)
+
+    def dehydrate_url_duckduckgo_small(self, bundle):
+        return '%s/%d/0/rawthumb/duckduckgo_small/' % (settings.ASTROBIN_BASE_URL, bundle.obj.id)
 
     def dehydrate_is_solved(self, bundle):
         return bundle.obj.solution != None

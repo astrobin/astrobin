@@ -577,6 +577,10 @@ THUMBNAIL_ALIASES = {
         # Activity stream
         'act_target': {'size': (226, 62), 'crop': 'smart', 'quality': 80},
         'act_object': {'size': (226, 226), 'crop': 'smart', 'quality': 80},
+
+        # Duckduckgo
+        'duckduckgo': {'size': (250, 200), 'crop': 'smart', 'quality': 80},
+        'duckduckgo_small': {'size': (113, 90), 'crop': 'smart', 'quality': 80},
     },
 }
 THUMBNAIL_QUALITY = 100
