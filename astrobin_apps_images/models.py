@@ -29,6 +29,9 @@ class ThumbnailGroup(models.Model):
     iotd             = models.CharField(max_length = 512, null = True, blank = True)
     act_target       = models.CharField(max_length = 512, null = True, blank = True)
     act_object       = models.CharField(max_length = 512, null = True, blank = True)
+    duckduckgo       = models.CharField(max_length = 512, null = True, blank = True)
+    duckduckgo_small = models.CharField(max_length = 512, null = True, blank = True)
+
 
     def __unicode__(self):
         return "Thumbnails for image %s" % self.image.title
