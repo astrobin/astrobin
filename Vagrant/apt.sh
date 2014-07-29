@@ -29,8 +29,13 @@ apt-get -y install \
     shiboken libshiboken-dev \
     libjpeg62 libjpeg62-dev \
     libfreetype6 libfreetype6-dev \
-    zlib1g-dev
+    zlib1g-dev \
+    default-jre
 
-ln -s /usr/lib/x86_64-linux-gnu/libjpeg.so /usr/lib/libjpeg.so
-ln -s /usr/lib/x86_64-linux-gnu/libfreetype.so /usr/lib/libfreeype.so
-ln -s /usr/lib/x86_64-linux-gnu/libz.so /usr/lib/libz.so
+rm -rf /usr/lib/libjpeg.so
+rm -rf /usr/lib/libfreetype.so
+rm -rf /usr/lib/libz.so
+
+ln -s /usr/lib/x86_64-linux-gnu/libjpeg.so /usr/lib/
+ln -s /usr/lib/x86_64-linux-gnu/libfreetype.so /usr/lib/
+ln -s /usr/lib/x86_64-linux-gnu/libz.so /usr/lib/
