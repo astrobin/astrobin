@@ -7,4 +7,5 @@
 # Initialize db
 /var/www/astrobin/manage.py syncdb --noinput
 /var/www/astrobin/manage.py migrate
+/var/www/astrobin/manage.py sync_translation_fields --noinput
 /var/www/astrobin/manage.py collectstatic --noinput
