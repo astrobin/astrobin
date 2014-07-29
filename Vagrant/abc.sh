@@ -1,8 +1,8 @@
 #!/bin/bash
 
-cd /var/www/astrobin/submodules/astrobin/cfitsio
+cd /var/www/astrobin/submodules/abc/cfitsio
 ./configure
-makea -j4
+make -j4
 
 cd ..
 qmake
