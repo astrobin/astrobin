@@ -28,6 +28,12 @@ Init the environment:
 . /venv/astrobin/dev/bin/activate
 ```
 
+Create a superuser:
+
+```bash
+/var/www/astrobin/manage.py createsuperuser
+```
+
 Start AstroBin:
 
 ```bash
