@@ -7,27 +7,29 @@ from django.db import models
 class Migration(DataMigration):
 
     def forwards(self, orm):
-        image_ct = orm['contenttypes.contenttype'].objects.get(app_label = 'astrobin', model = 'image')
+        try:
+            image_ct = orm['contenttypes.contenttype'].objects.get(app_label = 'astrobin', model = 'image')
 
-        for fave in orm['astrobin.favorite'].objects.all():
-            tp = orm['toggleproperties.toggleproperty'].objects.filter(
-                property_type = "bookmark",
-                user = fave.user,
-                content_type = image_ct,
-                object_id = fave.image.id)
-
-            if not tp:
-                user = orm['auth.user'].objects.get(id = fave.user.id)
-                tp = orm['toggleproperties.toggleproperty'](
+            for fave in orm['astrobin.favorite'].objects.all():
+                tp = orm['toggleproperties.toggleproperty'].objects.filter(
                     property_type = "bookmark",
-                    user = user,
+                    user = fave.user,
                     content_type = image_ct,
                     object_id = fave.image.id)
-                tp.save()
 
-                # Force timestamp thanks to update()
-                orm['toggleproperties.toggleproperty'].objects.filter(pk = tp.pk).update(created_on = fave.created)
+                if not tp:
+                    user = orm['auth.user'].objects.get(id = fave.user.id)
+                    tp = orm['toggleproperties.toggleproperty'](
+                        property_type = "bookmark",
+                        user = user,
+                        content_type = image_ct,
+                        object_id = fave.image.id)
+                    tp.save()
 
+                    # Force timestamp thanks to update()
+                    orm['toggleproperties.toggleproperty'].objects.filter(pk = tp.pk).update(created_on = fave.created)
+        except orm['contenttypes.contenttype'].DoesNotExist:
+            pass
 
     def backwards(self, orm):
         raise RuntimeError("Cannot run this migration backwards.")

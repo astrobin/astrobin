@@ -3,9 +3,8 @@ Coffin==0.3.6
 Django==1.4.2
 Jinja2==2.6
 Markdown==2.1.1
-PIL==1.1.7
 Paste==1.7.5.1
-Pillow==1.7.7
+Pillow==2.5.1
 PyYAML==3.10
 South==0.7.3
 Unidecode==0.04.9
@@ -14,7 +13,6 @@ akismet==0.2.0
 amqplib==1.0.2
 anyjson==0.3.1
 argparse==1.2.1
-askbot==0.7.43
 beautifulsoup4==4.1.3
 boto==2.9.8
 ccy==0.5.1
@@ -40,7 +38,7 @@ django-kombu==0.9.2
 django-maintenancemode==0.10
 django-memcached==0.1.2
 django-model-utils==1.0.0
-django-modeltranslation==0.3.3
+django-modeltranslation==0.7.3
 -e git+https://github.com/wadevries/django-notification.git#egg=django-notification
 django-openid-provider==0.4
 django-pagination==1.0.7
@@ -59,7 +57,7 @@ django-tinymce==1.5.1b2
 django-uni-form==0.9.0
 django-xmlrpc==0.1.3
 djangorestframework==2.1.13
-egenix-mx-base==3.2.6
+egenix-mx-base
 fanstatic==0.11.4
 flickrapi==1.4.2
 gunicorn==18.0
@@ -92,7 +90,7 @@ python-openid==2.2.5
 pytz==2011n
 setproctitle==1.1.3
 simplejson==2.3.2
-six==1.2.0
+six
 slimit==0.7.4
 sphinx-me==0.1.2
 termcolor==1.1.0
@@ -103,9 +101,10 @@ django-registration==1.0
 -e git+https://github.com/siovene/django-endless-pagination.git@725bde91db6da2be0663652b0df4501ba72306e7#egg=django-endless-pagination
 -e git+https://github.com/siovene/easy-thumbnails#egg=easy_thumbnails
 django-mptt==0.5
-PySide==1.2.1
+PySide
 django-avatar==2.0
 -e git+https://siovene@bitbucket.org/siovene/django-toggle-properties.git#egg=toggleproperties
 -e git+https://github.com/rassie/django-persistent-messages.git#egg=django-persistent-messages
 privatebeta
 -e git+https://github.com/siovene/django-dfp.git#egg=django-dfp
+-e git+https://github.com/siovene/snakecheese.git#egg=django-contrib-requestprovider&subdirectory=gadjolib

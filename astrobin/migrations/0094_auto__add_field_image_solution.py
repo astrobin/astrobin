@@ -6,14 +6,16 @@ from django.db import models
 
 class Migration(SchemaMigration):
 
+    depends_on = (
+        ('astrobin_apps_platesolving', '0001_initial'),
+    )
+
     def forwards(self, orm):
-        
         # Adding field 'Image.solution'
         db.add_column('astrobin_image', 'solution', self.gf('django.db.models.fields.related.OneToOneField')(to=orm['astrobin_apps_platesolving.Solution'], unique=True, null=True), keep_default=False)
 
 
     def backwards(self, orm):
-        
         # Deleting field 'Image.solution'
         db.delete_column('astrobin_image', 'solution_id')
 
