@@ -5,7 +5,6 @@ mkdir -p /webserver
 mkdir -p /rawdata/files
 mkdir -p /opt/solr
 mkdir -p /venv
-mkdir -p /var/www/astrobin/logs
 
 groupadd -g 2000 astrobin
 
