@@ -1,8 +1,11 @@
 #!/bin/sh
 
+mkdir -p ~/logs
+chgrp astrobin ~/logs
+chmod g+w ~/logs
+
 sudo -u astrobin /bin/bash - <<"EOF"
 # Initialize the environment
-mkdir ~/logs
 . /venv/astrobin/dev/bin/activate
 . /var/www/astrobin/env/dev
 
