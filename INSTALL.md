@@ -21,6 +21,13 @@ See VAGRANT.md.
 # Run it
 
 Enter the Vagrant box: `vagrant ssh`.
+
+Become the user 'astrobin':
+
+```bash
+sudo -u astrobin /bin/bash
+```
+
 Init the environment:
 
 ```bash
