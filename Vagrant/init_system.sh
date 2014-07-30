@@ -26,3 +26,4 @@ chown -R astrobin:astrobin /webserver
 chown -R astrobin:astrobin /rawdata
 chown -R solr:astrobin /opt/solr
 
+chmod g+w /venv
