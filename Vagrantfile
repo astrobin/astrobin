@@ -22,5 +22,5 @@ Vagrant::configure("2") do |config|
   config.vm.provision "shell", path: "./Vagrant/abc.sh"
   config.vm.provision "shell", path: "./Vagrant/init_astrobin.sh", privileged: false
   config.vm.provision "shell", path: "./Vagrant/init_db.sh", privileged: false
-  config.vm.provision "shell", path: "./Vagrant/solr.sh"
+  config.vm.provision "shell", path: "./Vagrant/solr.sh", privileged: false
 end

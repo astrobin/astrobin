@@ -1,6 +1,7 @@
 #!/bin/sh
 
 # Init virtualenv
+sudo -u astrobin /bin/bash - <<"EOF"
 virtualenv --no-site-packages /venv/astrobin/dev
 . /venv/astrobin/dev/bin/activate
 
@@ -20,5 +21,4 @@ done
 
 # TODO: No idea why...
 (cd /venv/astrobin/dev/src/django-contrib-requestprovider/gadjolib/; python setup.py install)
-
-
+EOF
