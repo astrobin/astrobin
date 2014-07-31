@@ -175,7 +175,7 @@ class ImageResource(ModelResource):
         return bundle.obj.solution != None
 
     def dehydrate_subjects(self, bundle):
-        subjects = bundle.obj.objects_in_field
+        subjects = bundle.obj.solution.objects_in_field
         if subjects:
             subjects = subjects.split(',')
         else:
@@ -197,6 +197,24 @@ class ImageResource(ModelResource):
     def dehydrate_imaging_cameras(self, bundle):
         cameras = bundle.obj.imaging_cameras.all()
         return [unicode(x) for x in cameras]
+
+    def build_filters(self, filters = None):
+        subjects = None
+        if filters is None:
+            filters = {}
+
+        if 'subjects' in filters:
+            subjects = filters['subjects']
+            del filters['subjects']
+
+        orm_filters = super(ImageResource, self).build_filters(filters)
+
+        if subjects:
+            from astrobin_apps_platesolving.models import Solution
+            qs = Solution.objects.filter(objects_in_field__icontains = subjects)
+            orm_filters['pk__in'] = [i.pk for i in qs]
+
+        return orm_filters
 
 
 class ImageOfTheDayResource(ModelResource):
