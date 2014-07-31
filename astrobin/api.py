@@ -202,6 +202,8 @@ class ImageResource(ModelResource):
 
     def build_filters(self, filters = None):
         subjects = None
+        ids = None
+
         if filters is None:
             filters = {}
 
@@ -209,12 +211,19 @@ class ImageResource(ModelResource):
             subjects = filters['subjects']
             del filters['subjects']
 
+        if 'ids' in filters:
+            ids = filters['ids']
+            del filters['ids']
+
         orm_filters = super(ImageResource, self).build_filters(filters)
 
         if subjects:
             from astrobin_apps_platesolving.models import Solution
             qs = Solution.objects.filter(objects_in_field__icontains = subjects)
             orm_filters['pk__in'] = [i.pk for i in qs]
+
+        if ids:
+            orm_filters['pk__in'] = ids.split(',')
 
         return orm_filters
 
