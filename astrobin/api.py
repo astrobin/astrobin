@@ -175,20 +175,22 @@ class ImageResource(ModelResource):
         return bundle.obj.solution != None
 
     def dehydrate_subjects(self, bundle):
-        subjects = bundle.obj.solution.objects_in_field
-        if subjects:
-            subjects = subjects.split(',')
-        else:
-            subjects = []
+        if bundle.obj.solution:
+            subjects = bundle.obj.solution.objects_in_field
+            if subjects:
+                subjects = subjects.split(',')
+            else:
+                subjects = []
 
-        ssms = bundle.obj.solar_system_main_subject
+            ssms = bundle.obj.solar_system_main_subject
 
-        ret = subjects
+            ret = subjects
 
-        if ssms:
-            ret.append(SOLAR_SYSTEM_SUBJECT_CHOICES[ssms][1])
+            if ssms:
+                ret.append(SOLAR_SYSTEM_SUBJECT_CHOICES[ssms][1])
 
-        return ret
+            return ret
+        return []
 
     def dehydrate_imaging_telescopes(self, bundle):
         telescopes = bundle.obj.imaging_telescopes.all()
