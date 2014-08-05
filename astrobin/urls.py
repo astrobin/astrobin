@@ -140,6 +140,7 @@ urlpatterns = patterns('',
     url(r'^commercial/products/retailed/merge/(?P<from_id>\d+)/(?P<to_id>\d+)/$', views.retailed_products_merge, name='retailedgg_products_merge'),
     url(r'^commercial/products/retailed/edit/(?P<id>\d+)/$', views.retailed_products_edit, name='retailed_products_edit'),
 
+    url(r'^users/(?P<username>[\w.@+-]+)/ban/$', views.user_ban, name='user_ban'),
     url(r'^users/(?P<username>[\w.@+-]+)/bookmarks/$', views.user_page_bookmarks, name='user_page_bookmarks'),
     url(r'^users/(?P<username>[\w.@+-]+)/following/$', views.user_page_following, name='user_page_following'),
     url(r'^users/(?P<username>[\w.@+-]+)/followers/$', views.user_page_followers, name='user_page_followers'),

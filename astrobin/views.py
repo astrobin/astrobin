@@ -1878,6 +1878,22 @@ def user_page_commercial_products(request, username):
     )
 
 
+@user_passes_test(lambda u: u.is_superuser)
+def user_ban(request, username):
+    user = get_object_or_404(User, username = username)
+
+    if request.method == 'POST':
+        user.delete()
+
+    return render_to_response(
+        'user/ban.html',
+        {
+            'user': user,
+            'deleted': request.method == 'POST',
+        },
+        context_instance = RequestContext(request))
+
+
 @require_GET
 def user_page_bookmarks(request, username):
     user = get_object_or_404(User, username = username)

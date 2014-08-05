@@ -1,0 +1,31 @@
+{% extends 'base.html' %}
+
+{% load i18n %}
+
+{% block title %}
+    {% if not deleted %}
+        {% trans "Are you sure you want to ban this user?" %}
+    {% else %}
+        {% trans "User banned" %}
+    {% endif %}
+{% endblock %}
+
+{% block content %}
+    {% if not deleted %}
+        <h1>{% trans "Are you sure you want to ban this user?" %}</h1>
+        <p>
+            {% blocktrans with username=user.profile %}User <strong>{{user}}</strong> will be deleted, with all their images, messages, comments, and so on.{% endblocktrans %}
+        </p>
+
+        <form method="post" action=".">
+            {% csrf_token %}
+            <input type="submit" value="Confirm ban" class="btn btn-primary" />
+        </form>
+    {% else %}
+        <h1>{% trans "User banned" %}</h1>
+        <p>
+            {% trans "The user was banned." %}
+            {% trans "Thank you!" %}
+        </p>
+    {% endif %}
+{% endblock %}
