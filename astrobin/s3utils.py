@@ -27,6 +27,9 @@ class OverwritingFileSystemStorage(FileSystemStorage):
 
         return name
 
+    def generate_local_name(self, name):
+        return name
+
     def _save(self, name, content):
         """
         We're going to delete the file before we save it.

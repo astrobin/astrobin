@@ -900,7 +900,7 @@ class Image(HasSolutionMixin, models.Model):
         from django.core.files.base import File, ContentFile
         from easy_thumbnails.exceptions import InvalidImageFormatError
         from easy_thumbnails.files import get_thumbnailer
-        from astrobin.s3utils import OverwritingFileSystemStorage
+        from astrobin.s3utils import CachedS3BotoStorage, OverwritingFileSystemStorage
 
         revision_label = thumbnail_settings.get('revision_label', 'final')
 
@@ -920,7 +920,7 @@ class Image(HasSolutionMixin, models.Model):
         local_path = None
         name = field.name
 
-        if hasattr(field.storage, 'generate_local_name'):
+        if isinstance(field.storage._wrapped, CachedS3BotoStorage):
             name_hash = field.storage.generate_local_name(name)
 
             log.debug("Image %s: starting with name = %s, local path = %s" % (self.id, name, local_path))
