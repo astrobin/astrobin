@@ -29,6 +29,11 @@ sudo python -m smtpd -n -c DebuggingServer localhost:25 &
 python -m smtpd -n -c DebuggingServer localhost:1025 &
 ```
 
+Start supervisord:
+
+```bash
+sudo /etc/init.d/supervisor start
+```
 
 Become the user 'astrobin':
 
