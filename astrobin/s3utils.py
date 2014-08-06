@@ -74,5 +74,5 @@ else:
 
 class S3PipelineStorage(PipelineMixin, S3BotoStorage):
     pass
-StaticRootS3BotoStorage = lambda: S3PipelineStorage(location='www/static')
+StaticRootS3BotoStorage = lambda: S3PipelineStorage(location='static')
 
