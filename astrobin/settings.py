@@ -108,7 +108,7 @@ STATIC_ROOT = MEDIA_ROOT + 'static/'
 STATIC_URL = MEDIA_URL + 'static/'
 
 IMAGES_URL = MEDIA_URL + 'images/'
-IMAGE_CACHE_DIRECTORY = MEDIA_ROOT + 'www/imagecache/'
+IMAGE_CACHE_DIRECTORY = MEDIA_ROOT + 'imagecache/'
 UPLOADS_DIRECTORY = MEDIA_ROOT + 'images/'
 
 # URL that handles the media served from MEDIA_ROOT. Make sure to use a
