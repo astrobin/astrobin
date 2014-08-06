@@ -22,6 +22,14 @@ See VAGRANT.md.
 
 Enter the Vagrant box: `vagrant ssh`.
 
+Run a dummy mail servers (for both debug and non-debug modes):
+
+```bash
+sudo python -m smtpd -n -c DebuggingServer localhost:25 &
+python -m smtpd -n -c DebuggingServer localhost:1025 &
+```
+
+
 Become the user 'astrobin':
 
 ```bash
@@ -39,13 +47,6 @@ Create a superuser:
 
 ```bash
 /var/www/astrobin/manage.py createsuperuser
-```
-
-Run a dummy mail servers (for both debug and non-debug modes):
-
-```bash
-sudo python -m smtpd -n -c DebuggingServer localhost:25 &
-python -m smtpd -n -c DebuggingServer localhost:1025 &
 ```
 
 Start AstroBin:
