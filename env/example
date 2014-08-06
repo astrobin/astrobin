@@ -18,6 +18,7 @@ export ASTROBIN_DJANGO_SECRET_KEY='***REMOVED***'
 # free for development purposes, because the first GB is always free.
 #
 # IMPORTANT: You only need this if you are using Amazon S3.
+export ASTROBIN_AWS_S3_ENABLED="false"
 export ASTROBIN_AWS_ACCESS_KEY_ID='***REMOVED***'
 export ASTROBIN_AWS_SECRET_ACCESS_KEY='***REMOVED***'
 
