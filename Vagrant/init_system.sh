@@ -1,7 +1,7 @@
 #!/bin/sh
 
 # Create directories
-mkdir -p /webserver
+mkdir -p /var/www/media
 mkdir -p /rawdata/files
 mkdir -p /opt/solr
 mkdir -p /venv
@@ -21,11 +21,11 @@ if id -u vagrant >/dev/null 2>&1; then
 fi
 
 chown -R astrobin:astrobin /venv
-chown -R astrobin:astrobin /webserver
+chown -R astrobin:astrobin /var/www/media
 chown -R astrobin:astrobin /rawdata
 chown -R solr:astrobin /opt/solr
 
 chmod g+w /venv
-chmod g+w /webserver
+chmod g+w /var/www/media
 chmod g+w /rawdata
 chmod g+w /opt/solr

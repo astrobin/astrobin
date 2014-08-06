@@ -63,7 +63,10 @@ class CachedS3BotoStorage(S3BotoStorage):
 
         return name
 
-ImageStorage = lambda: CachedS3BotoStorage(location='images')
+if settings.AWS_S3_ENABLED:
+    ImageStorage = lambda: CachedS3BotoStorage(location='images')
+else:
+    ImageStorage = lambda: OverwritingFileSystemStorage(location=settings.UPLOADS_DIRECTORY)
 
 
 class S3PipelineStorage(PipelineMixin, S3BotoStorage):

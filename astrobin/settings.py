@@ -7,7 +7,6 @@ local_path = lambda path: os.path.join(os.path.dirname(__file__), path)
 
 DEBUG = False
 CACHE = not DEBUG
-LOCAL_STATIC_STORAGE = True
 TEMPLATE_DEBUG = DEBUG
 MAINTENANCE_MODE = False
 READONLY_MODE = False
@@ -15,6 +14,8 @@ MEDIA_VERSION = '75'
 LONGPOLL_ENABLED = False
 ADS_ENABLED = True
 DONATIONS_ENABLED = True
+AWS_S3_ENABLED = True
+LOCAL_STATIC_STORAGE = not AWS_S3_ENABLED
 
 ADMINS = (
     ('Salvatore Iovene', 'salvatore@astrobin.com'),
@@ -52,8 +53,6 @@ ASTROBIN_BASE_URL = 'http://www.astrobin.com'
 ASTROBIN_SHORT_BASE_URL = 'http://astrob.in'
 
 ASTROBIN_BASE_PATH = os.path.dirname(__file__)
-IMAGE_CACHE_DIRECTORY = '/webserver/www/imagecache/'
-UPLOADS_DIRECTORY = IMAGE_CACHE_DIRECTORY
 
 # Local time zone for this installation. Choices can be found here:
 # http://en.wikipedia.org/wiki/List_of_tz_zones_by_name
@@ -99,48 +98,49 @@ SECRET_KEY = '4a*^ggw_5#w%tdf0q)=zozrw!avlts-h&&(--wy9x&p*c1l10G'
 
 # Django storages
 DEFAULT_FILE_STORAGE = 'astrobin.s3utils.ImageStorage'
-AWS_ACCESS_KEY_ID = os.environ['ASTROBIN_AWS_ACCESS_KEY_ID']
-AWS_SECRET_ACCESS_KEY = os.environ['ASTROBIN_AWS_SECRET_ACCESS_KEY']
-AWS_STORAGE_BUCKET_NAME = os.environ['ASTROBIN_AWS_STORAGE_BUCKET_NAME']
-AWS_STORAGE_BUCKET_CNAME = AWS_STORAGE_BUCKET_NAME
-AWS_S3_SECURE_URLS = False
-AWS_QUERYSTRING_AUTH = False
-
-from S3 import CallingFormat
-AWS_CALLING_FORMAT = CallingFormat.SUBDOMAIN
-
-# see http://developer.yahoo.com/performance/rules.html#expires
-AWS_HEADERS = {
-    'Expires': 'Fri, 9 May 2081 13:25:00 GMT+2'
-}
-
-S3_URL = 's3.amazonaws.com'
-IMAGES_URL = os.environ['ASTROBIN_IMAGES_URL']
-CDN_URL = os.environ['ASTROBIN_CDN_URL']
-
-STATIC_ROOT = '/webserver/www/sitestatic'
-if LOCAL_STATIC_STORAGE:
-    STATIC_URL = '/sitestatic/'
-else:
-    STATIC_URL = CDN_URL + 'www/static/'
 
 # Absolute path to the directory that holds media.
 # Example: "/home/media/media.lawrence.com/"
-MEDIA_ROOT = '/webserver/www/sitestatic/'
+MEDIA_ROOT = '/var/www/media/'
+MEDIA_URL = '/media/'
+
+STATIC_ROOT = MEDIA_ROOT + 'static/'
+STATIC_URL = MEDIA_URL + 'static/'
+
+IMAGES_URL = MEDIA_URL + 'images/'
+IMAGE_CACHE_DIRECTORY = MEDIA_ROOT + 'www/imagecache/'
+UPLOADS_DIRECTORY = MEDIA_ROOT + 'images/'
 
 # URL that handles the media served from MEDIA_ROOT. Make sure to use a
 # trailing slash if there is a path component (optional in other cases).
 # Examples: "http://media.lawrence.com", "http://example.com/media/"
-if LOCAL_STATIC_STORAGE:
-    MEDIA_URL = '/media/'
-else:
-    MEDIA_URL = CDN_URL
 
 # URL prefix for admin media -- CSS, JavaScript and images. Make sure to use a
 # trailing slash.
 # Examples: "http://foo.com/media/", "/media/".
 ADMIN_MEDIA_PREFIX = STATIC_URL + '/admin/'
 
+if AWS_S3_ENABLED:
+    S3_URL = 's3.amazonaws.com'
+    IMAGES_URL = os.environ['ASTROBIN_IMAGES_URL']
+
+    MEDIA_URL = os.environ['ASTROBIN_CDN_URL']
+    STATIC_URL = MEDIA_URL + 'static/'
+
+    AWS_ACCESS_KEY_ID = os.environ['ASTROBIN_AWS_ACCESS_KEY_ID']
+    AWS_SECRET_ACCESS_KEY = os.environ['ASTROBIN_AWS_SECRET_ACCESS_KEY']
+    AWS_STORAGE_BUCKET_NAME = os.environ['ASTROBIN_AWS_STORAGE_BUCKET_NAME']
+    AWS_STORAGE_BUCKET_CNAME = AWS_STORAGE_BUCKET_NAME
+    AWS_S3_SECURE_URLS = False
+    AWS_QUERYSTRING_AUTH = False
+
+    from S3 import CallingFormat
+    AWS_CALLING_FORMAT = CallingFormat.SUBDOMAIN
+
+    # see http://developer.yahoo.com/performance/rules.html#expires
+    AWS_HEADERS = {
+        'Expires': 'Fri, 9 May 2081 13:25:00 GMT+2'
+    }
 
 # List of callables that know how to import templates from various sources.
 TEMPLATE_LOADERS = (

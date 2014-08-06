@@ -919,63 +919,68 @@ class Image(HasSolutionMixin, models.Model):
 
         local_path = None
         name = field.name
-        name_hash = field.storage.generate_local_name(name)
 
-        log.debug("Image %s: starting with name = %s, local path = %s" % (self.id, name, local_path))
+        if hasattr(field.storage, 'generate_local_name'):
+            name_hash = field.storage.generate_local_name(name)
 
-        # Try to generate the thumbnail starting from the file cache locally.
-        if local_path is None:
-            local_path = field.storage.local_storage.path(name_hash)
+            log.debug("Image %s: starting with name = %s, local path = %s" % (self.id, name, local_path))
 
-        try:
-            log.debug("Image %s: trying local path %s" % (self.id, local_path))
-            size = os.path.getsize(local_path)
-            if size == 0:
-                log.debug("Image %s: size 0 in local path %s" % (self.id, local_path))
-                raise IOError("Empty file")
-
-            with open(local_path):
-                thumbnailer = get_thumbnailer(
-                    OverwritingFileSystemStorage(location = settings.IMAGE_CACHE_DIRECTORY),
-                    name_hash)
-                log.debug("Image %d: got thumbnail from local file %s." % (self.id, name_hash))
-        except (OSError, IOError, UnicodeEncodeError) as e:
-            log.debug("Image %d: unable to get thumbnail from local file: %s" % (self.id, repr(e)))
-            # If things go awry, fallback to getting the file from the remote
-            # storage. But download it locally first if it doesn't exist, so
-            # it can be used again later.
-            log.debug("Image %d: getting remote file..." % self.id)
-
-            # First try to get the file via URL, because that might hit the CloudFlare cache.
-            url = settings.IMAGES_URL + field.name
-            log.debug("Image %d: trying URL %s..." % (self.id, url))
-            headers = { 'User-Agent': 'Mozilla/5.0' }
-            req = urllib2.Request(url, None, headers)
+            # Try to generate the thumbnail starting from the file cache locally.
+            if local_path is None:
+                local_path = field.storage.local_storage.path(name_hash)
 
             try:
-                remote_file = ContentFile(urllib2.urlopen(req).read())
-            except (urllib2.HTTPError, urllib2.URLError):
-                remote_file = None
+                log.debug("Image %s: trying local path %s" % (self.id, local_path))
+                size = os.path.getsize(local_path)
+                if size == 0:
+                    log.debug("Image %s: size 0 in local path %s" % (self.id, local_path))
+                    raise IOError("Empty file")
 
-            # If that didn't work, we'll get the file rebularly via django-storages.
-            if remote_file is None:
-                log.debug("Image %d: getting via URL didn't work. Falling back to django-storages..." % self.id)
+                with open(local_path):
+                    thumbnailer = get_thumbnailer(
+                        OverwritingFileSystemStorage(location = settings.IMAGE_CACHE_DIRECTORY),
+                        name_hash)
+                    log.debug("Image %d: got thumbnail from local file %s." % (self.id, name_hash))
+            except (OSError, IOError, UnicodeEncodeError) as e:
+                log.debug("Image %d: unable to get thumbnail from local file: %s" % (self.id, repr(e)))
+                # If things go awry, fallback to getting the file from the remote
+                # storage. But download it locally first if it doesn't exist, so
+                # it can be used again later.
+                log.debug("Image %d: getting remote file..." % self.id)
+
+                # First try to get the file via URL, because that might hit the CloudFlare cache.
+                url = settings.IMAGES_URL + field.name
+                log.debug("Image %d: trying URL %s..." % (self.id, url))
+                headers = { 'User-Agent': 'Mozilla/5.0' }
+                req = urllib2.Request(url, None, headers)
+
                 try:
-                    remote_file = field.storage._open(name)
-                except IOError:
-                    # The remote file doesn't exist?
-                    log.error("Image %d: the remote file doesn't exist?" % self.id)
-                    return None
+                    remote_file = ContentFile(urllib2.urlopen(req).read())
+                except (urllib2.HTTPError, urllib2.URLError):
+                    remote_file = None
 
-            try:
-                local_file = field.storage.local_storage._save(name_hash, remote_file)
-                thumbnailer = get_thumbnailer(
-                    OverwritingFileSystemStorage(location = settings.IMAGE_CACHE_DIRECTORY),
-                    name_hash)
-                log.debug("Image %d: saved local file %s." % (self.id, name_hash))
-            except (OSError, UnicodeEncodeError):
-                log.error("Image %d: unable to save the local file." % self.id)
-                pass
+                # If that didn't work, we'll get the file rebularly via django-storages.
+                if remote_file is None:
+                    log.debug("Image %d: getting via URL didn't work. Falling back to django-storages..." % self.id)
+                    try:
+                        remote_file = field.storage._open(name)
+                    except IOError:
+                        # The remote file doesn't exist?
+                        log.error("Image %d: the remote file doesn't exist?" % self.id)
+                        return None
+
+                try:
+                    local_file = field.storage.local_storage._save(name_hash, remote_file)
+                    thumbnailer = get_thumbnailer(
+                        OverwritingFileSystemStorage(location = settings.IMAGE_CACHE_DIRECTORY),
+                        name_hash)
+                    log.debug("Image %d: saved local file %s." % (self.id, name_hash))
+                except (OSError, UnicodeEncodeError):
+                    log.error("Image %d: unable to save the local file." % self.id)
+                    pass
+        else:
+            thumbnailer = get_thumbnailer(OverwritingFileSystemStorage(
+                location = settings.UPLOADS_DIRECTORY), name)
 
         if self.watermark and 'watermark' in options:
             options['watermark_text'] = self.watermark_text

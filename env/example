@@ -11,22 +11,28 @@ export ASTROBIN_DATABASE_PASSWORD='***REMOVED***'
 #
 export ASTROBIN_DJANGO_SECRET_KEY='***REMOVED***'
 
-# At the moment, AstroBin only works with Amazon AWS for the storage of the
-# images. In the future this will be optional, and a local storage might be
-# used instead.
+# Optionally, AstroBin can use Amazon S3 to store images and static files.
+# To enable that, set the AWS_S3_ENABLED variable to True in
+# astrobin/settings.py.
 # Amazon AWS is free for the first year, and even after that, it will stay
 # free for development purposes, because the first GB is always free.
+#
+# IMPORTANT: You only need this if you are using Amazon S3.
 export ASTROBIN_AWS_ACCESS_KEY_ID='***REMOVED***'
 export ASTROBIN_AWS_SECRET_ACCESS_KEY='***REMOVED***'
 
 # Remember to create an Amazon AWS bucket with the name below, using the
 # Amazon S3 Console.
+#
+# IMPORTANT: You only need this if you are using Amazon S3.
 export ASTROBIN_AWS_STORAGE_BUCKET_NAME='cdn.astrobin.com'
 
 # The URLs below are dependant on the bucket name that you chose above. For
 # development purposes, you probably won't use a fully qualified domain name,
 # so your _IMAGES_URL and _CDN_URL will resemble something like:
 # http://my_bucket.s3.amazonaws.com/...
+#
+# IMPORTANT: You only need these if you are using Amazon S3.
 export ASTROBIN_IMAGES_URL='http://cdn.astrobin.com/images/'
 export ASTROBIN_CDN_URL='http://cdn.astrobin.com/'
 
