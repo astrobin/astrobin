@@ -920,7 +920,7 @@ class Image(HasSolutionMixin, models.Model):
         local_path = None
         name = field.name
 
-        if isinstance(field.storage._wrapped, CachedS3BotoStorage):
+        if settings.AWS_S3_ENABLED:
             name_hash = field.storage.generate_local_name(name)
 
             log.debug("Image %s: starting with name = %s, local path = %s" % (self.id, name, local_path))
