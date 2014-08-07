@@ -125,7 +125,6 @@ if AWS_S3_ENABLED:
     IMAGES_URL = os.environ['ASTROBIN_IMAGES_URL']
 
     MEDIA_URL = os.environ['ASTROBIN_CDN_URL']
-    STATIC_URL = MEDIA_URL + 'static/'
 
     AWS_ACCESS_KEY_ID = os.environ['ASTROBIN_AWS_ACCESS_KEY_ID']
     AWS_SECRET_ACCESS_KEY = os.environ['ASTROBIN_AWS_SECRET_ACCESS_KEY']
@@ -141,6 +140,9 @@ if AWS_S3_ENABLED:
     AWS_HEADERS = {
         'Expires': 'Fri, 9 May 2081 13:25:00 GMT+2'
     }
+
+if LOCAL_STATIC_STORAGE:
+    STATIC_URL = '/media/static/'
 
 # List of callables that know how to import templates from various sources.
 TEMPLATE_LOADERS = (
