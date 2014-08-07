@@ -15,7 +15,7 @@ LONGPOLL_ENABLED = False
 ADS_ENABLED = True
 DONATIONS_ENABLED = True
 AWS_S3_ENABLED = os.environ['ASTROBIN_AWS_S3_ENABLED'] == "true"
-LOCAL_STATIC_STORAGE = not AWS_S3_ENABLED
+LOCAL_STATIC_STORAGE = os.environ['ASTROBIN_LOCAL_STATIC_STORAGE'] == "true"
 
 ADMINS = (
     ('Salvatore Iovene', 'salvatore@astrobin.com'),

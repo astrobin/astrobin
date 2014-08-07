@@ -21,6 +21,7 @@ export ASTROBIN_DJANGO_SECRET_KEY='***REMOVED***'
 #
 # IMPORTANT: You only need this if you are using Amazon S3.
 export ASTROBIN_AWS_S3_ENABLED="false"
+export ASTROBIN_LOCAL_STATIC_STORAGE="true"
 export ASTROBIN_AWS_ACCESS_KEY_ID='***REMOVED***'
 export ASTROBIN_AWS_SECRET_ACCESS_KEY='***REMOVED***'
 
