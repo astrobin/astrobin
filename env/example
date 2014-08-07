@@ -8,7 +8,9 @@ export ASTROBIN_DATABASE_USER='astrobin'
 # For development purposes, you can set this to whatever you want.
 export ASTROBIN_DATABASE_PASSWORD='***REMOVED***'
 
-#
+# https://docs.djangoproject.com/en/1.4/ref/settings/#std:setting-SECRET_KEY
+# You can generate one here:
+# http://www.miniwebtool.com/django-secret-key-generator/
 export ASTROBIN_DJANGO_SECRET_KEY='***REMOVED***'
 
 # Optionally, AstroBin can use Amazon S3 to store images and static files.
