@@ -94,7 +94,7 @@ USE_L10N = True
 SITE_ID = 1
 
 # Make this unique, and don't share it with anybody.
-SECRET_KEY = '4a*^ggw_5#w%tdf0q)=zozrw!avlts-h&&(--wy9x&p*c1l10G'
+SECRET_KEY = os.environ['ASTROBIN_DJANGO_SECRET_KEY']
 
 # Django storages
 DEFAULT_FILE_STORAGE = 'astrobin.s3utils.ImageStorage'
