@@ -146,6 +146,7 @@ EOF
     function postgres_priv {
         sudo -u postgres psql <<"EOF"
         alter user astrobin with encrypted password 's3cr3t';
+        alter user astrobin createdb;
         grant all privileges on database astrobin to astrobin;
 EOF
     }
