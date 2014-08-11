@@ -171,7 +171,7 @@ class TemporaryArchive(models.Model):
     )
 
     file = models.FileField(
-        storage = FileSystemStorage(location = '/webserver/www'),
+        storage = FileSystemStorage(location = '/var/www'),
         upload_to = temporary_download_upload_path,
     )
 
