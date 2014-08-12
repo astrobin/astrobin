@@ -212,18 +212,6 @@ INSTALLED_APPS = (
     'django.contrib.markup',
     'django.contrib.staticfiles',
 
-    # AstroBin apps
-    'common',
-    'nested_comments',
-    'astrobin',
-    'rawdata',
-    'astrobin_apps_images',
-    'astrobin_apps_platesolving',
-    'astrobin_apps_users',
-    'astrobin_apps_donations',
-
-    'toggleproperties',
-
     # Third party apps
     'registration',
     'haystack',
@@ -260,6 +248,17 @@ INSTALLED_APPS = (
     'easy_thumbnails',
     'endless_pagination',
     'dfp', # For Google DFP
+
+    # AstroBin apps
+    'astrobin',
+    'common',
+    'nested_comments',
+    'rawdata',
+    'astrobin_apps_images',
+    'astrobin_apps_platesolving',
+    'astrobin_apps_users',
+    'astrobin_apps_donations',
+    'toggleproperties',
 )
 
 LOGIN_REDIRECT_URL = '/'
