@@ -20,6 +20,7 @@ function init_system {
     # Create directories
     astrobin_log " - Creating directories..."
     mkdir -p /var/www/media
+    mkdir -p /var/www/tmpzips
     mkdir -p /rawdata/files
     mkdir -p /opt/solr
     mkdir -p /venv
@@ -44,6 +45,7 @@ function init_system {
     astrobin_log " - Setting ownerships..."
     chown -R astrobin:astrobin /venv
     chown -R astrobin:astrobin /var/www/media
+    chown -R astrobin:astrobin /var/www/tmpzips
     chown -R astrobin:astrobin /rawdata
     chown -R solr:astrobin /opt/solr
     chown -R astrobin:astrobin /var/log/astrobin
