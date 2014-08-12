@@ -97,6 +97,8 @@ def subscription_byte_limit(subscription):
     # Used in the unit tests
     if subscription.group.name == 'rawdata-empty':
         return 0
+    if subscription.group.name == 'rawdata-test':
+        return 5*GB
 
     if subscription.group.name == 'rawdata-meteor':
         return 5*GB

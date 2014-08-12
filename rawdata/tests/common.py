@@ -22,12 +22,68 @@ def max_id(Klass):
 
 
 def setup_data(testcase):
+    # Groups
+    Group.objects.create(name = "Producers")
+    Group.objects.create(name = "Retailers")
+    Group.objects.create(name = "Paying")
+
+    Group.objects.create(name = "affiliate-1")
+    Group.objects.create(name = "affiliate-10")
+    Group.objects.create(name = "affiliate-50")
+    Group.objects.create(name = "affiliate-100")
+    Group.objects.create(name = "affiliate-inf")
+    Group.objects.create(name = "retailer-affiliate-1")
+    Group.objects.create(name = "retailer-affiliate-10")
+    Group.objects.create(name = "retailer-affiliate-50")
+    Group.objects.create(name = "retailer-affiliate-100")
+    Group.objects.create(name = "retailer-affiliate-inf")
+
+    Group.objects.create(name = "everyone")
+
+    rawdata_meteor_group = Group.objects.create(name = "rawdata-meteor")
+    rawdata_luna_group = Group.objects.create(name = "rawdata-luna")
+    rawdata_sol_group = Group.objects.create(name = "rawdata-sol")
+    rawdata_galaxia_group = Group.objects.create(name = "rawdata-galaxia")
+
+    donor_coffee_monthly_group = Group.objects.create(name = "astrobin-donor-coffee-monthly")
+    donor_snack_monthly_group = Group.objects.create(name = "astrobin-donor-snack-monthly")
+    donor_pizza_monthly_group = Group.objects.create(name = "astrobin-donor-pizza-monthly")
+    donor_movie_monthly_group = Group.objects.create(name = "astrobin-donor-movie-monthly")
+    donor_dinner_monthly_group = Group.objects.create(name = "astrobin-donor-dinner-monthly")
+
+    donor_coffee_yearly_group = Group.objects.create(name = "astrobin-donor-coffee-yearly")
+    donor_snack_yearly_group = Group.objects.create(name = "astrobin-donor-snack-yearly")
+    donor_pizza_yearly_group = Group.objects.create(name = "astrobin-donor-pizza-yearly")
+    donor_movie_yearly_group = Group.objects.create(name = "astrobin-donor-movie-yearly")
+    donor_dinner_yearly_group = Group.objects.create(name = "astrobin-donor-dinner-yearly")
+
+    Group.objects.create(name = "IOTD_Staff")
+
+    # Subscriptions
+    Subscription.objects.create(name = "Meteor", description = "5 GB", price = 2.95, recurrence_period = 1, recurrence_unit = "M", group = rawdata_meteor_group, trial_period = 7, trial_unit = "D")
+    Subscription.objects.create(name = "Luna", description = "100 GB", price = 9.95, recurrence_period = 1, recurrence_unit = "M", group = rawdata_luna_group, trial_period = 7, trial_unit = "D")
+    Subscription.objects.create(name = "Sol", description = "250 GB", price = 19.95, recurrence_period = 1, recurrence_unit = "M", group = rawdata_sol_group, trial_period = 7, trial_unit = "D")
+    Subscription.objects.create(name = "Galaxia", description = "500 GB", price = 49.95, recurrence_period = 1, recurrence_unit = "M", group = rawdata_galaxia_group, trial_period = 7, trial_unit = "D")
+
+    Subscription.objects.create(name = "AstroBin Donor Coffee Monthly", description = "", price = 2.50, recurrence_period = 1, recurrence_unit = "M", group = donor_coffee_monthly_group, trial_period = 0, trial_unit = "D")
+    Subscription.objects.create(name = "AstroBin Donor Snack Monthly", description = "", price = 3.50, recurrence_period = 1, recurrence_unit = "M", group = donor_snack_monthly_group, trial_period = 0, trial_unit = "D")
+    Subscription.objects.create(name = "AstroBin Donor Pizza Monthly", description = "", price = 6.00, recurrence_period = 1, recurrence_unit = "M", group = donor_pizza_monthly_group, trial_period = 0, trial_unit = "D")
+    Subscription.objects.create(name = "AstroBin Donor Movie Monthly", description = "", price = 10.00, recurrence_period = 1, recurrence_unit = "M", group = donor_movie_monthly_group, trial_period = 0, trial_unit = "D")
+    Subscription.objects.create(name = "AstroBin Donor Dinner Monthly", description = "", price = 25.00, recurrence_period = 1, recurrence_unit = "M", group = donor_dinner_monthly_group, trial_period = 0, trial_unit = "D")
+
+    Subscription.objects.create(name = "AstroBin Donor Coffee Yearly", description = "", price = 24.00, recurrence_period = 1, recurrence_unit = "Y", group = donor_coffee_yearly_group, trial_period = 0, trial_unit = "D")
+    Subscription.objects.create(name = "AstroBin Donor Snack Yearly", description = "", price = 34.00, recurrence_period = 1, recurrence_unit = "Y", group = donor_snack_yearly_group, trial_period = 0, trial_unit = "D")
+    Subscription.objects.create(name = "AstroBin Donor Pizza Yearly", description = "", price = 60.00, recurrence_period = 1, recurrence_unit = "Y", group = donor_pizza_yearly_group, trial_period = 0, trial_unit = "D")
+    Subscription.objects.create(name = "AstroBin Donor Movie Yearly", description = "", price = 100.00, recurrence_period = 1, recurrence_unit = "Y", group = donor_movie_yearly_group, trial_period = 0, trial_unit = "D")
+    Subscription.objects.create(name = "AstroBin Donor Dinner Yearly", description = "", price = 250.00, recurrence_period = 1, recurrence_unit = "Y", group = donor_dinner_yearly_group, trial_period = 0, trial_unit = "D")
+
+
     testcase.unsubscribed_user = User.objects.create_user('username_unsub', 'fake0@email.tld', 'passw0rd')
     testcase.subscribed_user = User.objects.create_user('username_sub', 'fake1@email.tld', 'passw0rd')
     testcase.subscribed_user_2 = User.objects.create_user('username_sub_2', 'fake2@email.tld', 'passw0rd')
     testcase.subscribed_user_3 = User.objects.create_user('username_sub_3', 'fake3@email.tld', 'passw0rd')
 
-    testcase.group = Group.objects.create(name = 'rawdata-meteor')
+    testcase.group = Group.objects.create(name = 'rawdata-test')
     testcase.group.user_set.add(testcase.subscribed_user, testcase.subscribed_user_2)
 
     testcase.group_empty = Group.objects.create(name = 'rawdata-empty')
