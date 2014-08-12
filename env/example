@@ -56,3 +56,6 @@ export ASTROBIN_CELERY_RESULT_DBURI='psql://${ASTROBIN_DATABASE_USER}:${ASTROBIN
 # AstroBin uses Astormetry.net to plate-solve images. You can create an
 # account there and get a key for free.
 export ASTROMETRY_NET_API_KEY='***REMOVED***'
+
+# The location of the rawdata files
+export ASTROBIN_RAWDATA_ROOT='/rawdata/files'
