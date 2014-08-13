@@ -40,6 +40,7 @@ def setup_data(testcase):
 
     Group.objects.create(name = "everyone")
 
+    rawdata_atom_group = Group.objects.create(name = "rawdata-atom")
     rawdata_meteor_group = Group.objects.create(name = "rawdata-meteor")
     rawdata_luna_group = Group.objects.create(name = "rawdata-luna")
     rawdata_sol_group = Group.objects.create(name = "rawdata-sol")
@@ -60,6 +61,7 @@ def setup_data(testcase):
     Group.objects.create(name = "IOTD_Staff")
 
     # Subscriptions
+    Subscription.objects.create(name = "Atom", description = "512 MB", price = 0, recurrence_period = 100, recurrence_unit = "Y", group = rawdata_atom_group, trial_period = 0, trial_unit = "D")
     Subscription.objects.create(name = "Meteor", description = "5 GB", price = 2.95, recurrence_period = 1, recurrence_unit = "M", group = rawdata_meteor_group, trial_period = 7, trial_unit = "D")
     Subscription.objects.create(name = "Luna", description = "100 GB", price = 9.95, recurrence_period = 1, recurrence_unit = "M", group = rawdata_luna_group, trial_period = 7, trial_unit = "D")
     Subscription.objects.create(name = "Sol", description = "250 GB", price = 19.95, recurrence_period = 1, recurrence_unit = "M", group = rawdata_sol_group, trial_period = 7, trial_unit = "D")

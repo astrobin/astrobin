@@ -4,6 +4,7 @@ from .models import RawImage
 
 
 SUBSCRIPTION_NAMES = (
+    'Atom',
     'Meteor',
     'Luna',
     'Sol',
@@ -83,6 +84,10 @@ def user_has_active_subscription(user):
     False
 
 def user_has_inactive_subscription(user):
+    active = user_has_active_subscription(user)
+    if active:
+        return False
+
     try:
         us = user_get_subscription(user)
     except UserSubscription.DoesNotExist:
@@ -100,6 +105,8 @@ def subscription_byte_limit(subscription):
     if subscription.group.name == 'rawdata-test':
         return 5*GB
 
+    if subscription.group.name == 'rawdata-atom':
+        return 0.5*GB
     if subscription.group.name == 'rawdata-meteor':
         return 5*GB
     if subscription.group.name == 'rawdata-luna':

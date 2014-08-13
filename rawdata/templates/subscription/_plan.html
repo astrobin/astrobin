@@ -6,20 +6,29 @@
     </a>
 
     <h1>{{object.name}}<small>{{object.description}}</small></h1>
-    <h2>$ {{object.price}} USD / {% trans "month" %}
-        <small>
-            {% blocktrans with object.price_per_day|floatformat:"2" as daily_price %}That's only $ {{daily_price}} USD per day!{% endblocktrans %}
-        </small>
-    </h2>
 
-    <p>
-        {% if object.trial_period %}
-        <em>{% blocktrans with object.trial_period as free_days %}Free for {{free_days}} days.{% endblocktrans %}</em>
-        {% endif %}
+    {% if object.name == "Atom" %}
+        <h2>{% trans "FREE!" %}
+            <small>{% trans "That's right, this plan is free." %}</small>
+        </h2>
 
-        <br/>
-        <em>{% trans "You can cancel at any time." %}</em>
-    </p>
+        <p><!-- padding... --><br/><br/></p>
+    {% else %}
+        <h2>$ {{object.price}} USD / {% trans "month" %}
+            <small>
+                {% blocktrans with object.price_per_day|floatformat:"2" as daily_price %}That's only $ {{daily_price}} USD per day!{% endblocktrans %}
+            </small>
+        </h2>
+
+        <p>
+            {% if object.trial_period %}
+            <em>{% blocktrans with object.trial_period as free_days %}Free for {{free_days}} days.{% endblocktrans %}</em>
+            {% endif %}
+
+            <br/>
+            <em>{% trans "You can cancel at any time." %}</em>
+        </p>
+    {% endif %}
 </div>
 
 

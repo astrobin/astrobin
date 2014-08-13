@@ -31,8 +31,8 @@
             {% endcomment %}
 
 
-            {% if object.name == 'Meteor' or object.name == 'Luna' or object.name == 'Sol' or object.name == 'Galaxia' %}
-                <div class="span3 plan">
+            {% if object.name == 'Atom' or object.name == 'Meteor' or object.name == 'Luna' or object.name == 'Sol' or object.name == 'Galaxia' %}
+                <div class="plan">
                     {% include 'subscription/_plan.html' %}
                     <a class="btn btn-large btn-primary" href="{% url subscription_detail object.id %}">
                         {% trans "Manage" %}
@@ -46,7 +46,15 @@
         More hardcoded things, but well...
     {% endcomment %}
     <div class="row">
-        <div class="span3">
+        <div class="plan">
+            <div class="subtle-container plan-description">
+                <p>
+                {% blocktrans %}This plan is free! Choose it to share a small amount of data with other users.{% endblocktrans %}
+                </p>
+            </div>
+        </div>
+
+        <div class="plan">
             <div class="subtle-container plan-description">
                 <p>
                 {% blocktrans %} Choose this plan if you want to keep your expenses to a minimum, but still want the possibity to share your FIT and digital camera raw files with your friends. You can also participate to public data pools and contribute to the deepest deep sky images ever created, and you will always know that you support AstroBin.{% endblocktrans %}
@@ -54,7 +62,7 @@
             </div>
         </div>
 
-        <div class="span3">
+        <div class="plan">
             <div class="subtle-container plan-description">
                 <p>
                 {% blocktrans %}Choose this plan if you have started out in the recent year or two, or you don't want to share and backup your calibration files. Enjoy a lot of room for a convenient price.{% endblocktrans %}
@@ -62,7 +70,7 @@
             </div>
         </div>
 
-        <div class="span3">
+        <div class="plan">
             <div class="subtle-container plan-description">
                 <p>
                 {% blocktrans %}Choose this plan if you have several years worth of data. You will probably have enough room for all your calibration files, and will enjoy the full potential of the platform.{% endblocktrans %}
@@ -70,7 +78,7 @@
             </div>
         </div>
 
-        <div class="span3">
+        <div class="plan">
             <div class="subtle-container plan-description">
                 <p>
                 {% blocktrans %}Choose this plan if you have a massive amount of raw data that you want to share and backup securely online.{% endblocktrans %}
