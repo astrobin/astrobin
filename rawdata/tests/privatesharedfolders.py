@@ -16,7 +16,7 @@ from .common import *
 class PrivateSharedFolderTest(TestCase):
     def setUp(self):
         setup_data(self)
-       
+
     def tearDown(self):
         teardown_data(self)
 
@@ -34,11 +34,8 @@ class PrivateSharedFolderTest(TestCase):
 
     def test_list_unsub(self):
         self.client.login(username = 'username_unsub', password = 'passw0rd')
-        response = self.client.get(reverse('rawdata.privatesharedfolder_list'), follow = True)
-        self.assertRedirects(
-            response,
-            reverse('rawdata.restricted') + '?' + urlencode({'next': '/rawdata/privatesharedfolders/'}),
-            status_code = 302, target_status_code = 200)
+        response = self.client.get(reverse('rawdata.privatesharedfolder_list'))
+        self.assertEqual(response.status_code, 200)
         self.client.logout()
 
     def test_list_sub(self):
@@ -67,7 +64,7 @@ class PrivateSharedFolderTest(TestCase):
             'http://testserver/accounts/login/?next=/rawdata/privatesharedfolders/%d/' % folder.id,
             status_code = 302, target_status_code = 200)
 
-    def test_detail_unsub(self):
+    def test_detail_unsub_uninvited(self):
         folder = PrivateSharedFolder(
             name = "test folder",
             description = "test description",
@@ -76,23 +73,48 @@ class PrivateSharedFolderTest(TestCase):
 
         self.client.login(username = 'username_unsub', password = 'passw0rd')
         response = self.client.get(
-            reverse('rawdata.privatesharedfolder_detail', args = (folder.id,)),
-            follow = True)
-
-        self.assertRedirects(
-            response,
-            reverse('rawdata.restricted') + '?' + urlencode({'next': '/rawdata/privatesharedfolders/%d/' % folder.id}),
-            status_code = 302, target_status_code = 200)
+            reverse('rawdata.privatesharedfolder_detail', args = (folder.id,)))
+        self.assertEqual(response.status_code, 404)
         self.client.logout()
 
-    def test_detail_sub(self):
+    def test_detail_unsub_invited(self):
         folder = PrivateSharedFolder(
             name = "test folder",
             description = "test description",
             creator = self.subscribed_user)
         folder.save()
 
-        self.client.login(username = 'username_sub', password = 'passw0rd')
+        folder.users.add(self.unsubscribed_user)
+
+        self.client.login(username = 'username_unsub', password = 'passw0rd')
+        response = self.client.get(
+            reverse('rawdata.privatesharedfolder_detail', args = (folder.id,)))
+        self.assertEqual(response.status_code, 200)
+        self.client.logout()
+
+    def test_detail_sub_uninvited(self):
+        folder = PrivateSharedFolder(
+            name = "test folder",
+            description = "test description",
+            creator = self.subscribed_user)
+        folder.save()
+
+        self.client.login(username = 'username_sub_2', password = 'passw0rd')
+        response = self.client.get(
+            reverse('rawdata.privatesharedfolder_detail', args = (folder.id,)))
+        self.assertEqual(response.status_code, 404)
+        self.client.logout()
+
+    def test_detail_sub_invited(self):
+        folder = PrivateSharedFolder(
+            name = "test folder",
+            description = "test description",
+            creator = self.subscribed_user)
+        folder.save()
+
+        folder.users.add(self.subscribed_user_2)
+
+        self.client.login(username = 'username_sub_2', password = 'passw0rd')
 
         response = self.client.get(
             reverse('rawdata.privatesharedfolder_detail', args = (folder.id,)),
@@ -859,7 +881,7 @@ class PrivateSharedFolderTest(TestCase):
             'http://testserver/accounts/login/?next=/rawdata/privatesharedfolders/%d/download/' % folder.id,
             status_code = 302, target_status_code = 200)
 
-    def test_download_unsub(self):
+    def test_download_unsub_uninvited(self):
         rawimage_id = upload_file(self)
 
         folder = PrivateSharedFolder(
@@ -871,10 +893,28 @@ class PrivateSharedFolderTest(TestCase):
         folder.images.add(rawimage_id)
 
         self.client.login(username = 'username_unsub', password = 'passw0rd')
+        response = self.client.get(reverse('rawdata.privatesharedfolder_download', args = (folder.id,)))
+        self.assertEqual(response.status_code, 404)
+        self.client.logout()
+
+    def test_download_unsub_invited(self):
+        rawimage_id = upload_file(self)
+
+        folder = PrivateSharedFolder(
+            name = "test folder",
+            description = "test description",
+            creator = self.subscribed_user)
+        folder.save()
+
+        folder.users.add(self.unsubscribed_user)
+        folder.images.add(rawimage_id)
+
+        self.client.login(username = 'username_unsub', password = 'passw0rd')
         response = self.client.get(reverse('rawdata.privatesharedfolder_download', args = (folder.id,)), follow = True)
+        newid = max_id(TemporaryArchive)
         self.assertRedirects(
             response,
-            reverse('rawdata.restricted') + '?' + urlencode({'next': '/rawdata/privatesharedfolders/%d/download/' % folder.id}),
+            reverse('rawdata.temporary_archive_detail', args = (newid,)),
             status_code = 302, target_status_code = 200)
         self.client.logout()
 

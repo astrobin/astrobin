@@ -172,6 +172,8 @@
             </li>
             <li class="divider"></li>
 
+            <li class="nav-header">{% trans "Raw data" %}</li>
+
             {% if has_rawdata_subscription %}
             <li>
                 <a href="{% url rawdata.library %}">
@@ -179,6 +181,7 @@
                     {% trans "Raw data library" %}
                 </a>
             </li>
+            {% endif %}
 
             <li>
                 <a href="{% url rawdata.privatesharedfolder_list %}">
@@ -187,7 +190,6 @@
                 </a>
             </li>
             <li class="divider"></li>
-            {% endif %}
 
             <li>
                 <a href="{% url messages_inbox %}">

@@ -20,7 +20,11 @@ def push_notification(recipients, notice_type, data):
     except:
         pass
 
-    request = get_request()
+    try:
+        request = get_request()
+    except IndexError:
+        # This may happen during test cases
+        return
 
     for r in recipients:
         language = r.userprofile.language
