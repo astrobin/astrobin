@@ -1,5 +1,7 @@
 {% extends 'base.html' %}
+
 {% load i18n %}
+{% load url from future %}
 
 {% block title %}{% trans "AstroBin Raw Data" %} - {% trans "Subscription plan" %}: {{object.name}}{% endblock %}
 
@@ -33,10 +35,16 @@
                     <div class="well">
                         {% blocktrans %}Here you can deactivate your free Raw Data Atom subscription.{% endblocktrans %}
                     </div>
-                    <form action="{% url rawdata.atom_deactivate %}" method="post">
+                    <form action="{% url 'rawdata.atom_deactivate' %}" method="post">
                         {% csrf_token %}
                         <input type="submit" class="btn btn-primary btn-large btn-block" value="{% trans "Deactivate" %}"/>
                     </form>
+
+                    <div id="go-to-library" style="text-align: center">
+                        <a href="{% url 'rawdata.library' %}">
+                            {% trans "Go to your Raw Data Library." %}
+                        </a>
+                    </div>
                 {% else %}
                     {% blocktrans %}You may <a href="{{cancel_url}}">cancel via PayPal</a> if you wish.{% endblocktrans %}
                 {% endif %}
@@ -46,7 +54,7 @@
                     <div class="well">
                         {% blocktrans %}Here you can activate your free Raw Data Atom subscription.{% endblocktrans %}
                     </div>
-                    <form action="{% url rawdata.atom_activate %}" method="post">
+                    <form action="{% url 'rawdata.atom_activate' %}" method="post">
                         {% csrf_token %}
                         <input type="submit" class="btn btn-primary btn-large btn-block" value="{% trans "Activate" %}"/>
                     </form>
@@ -87,7 +95,7 @@
                     <div class="well">
                         {% blocktrans %}Here you can activate your free Raw Data Atom subscription.{% endblocktrans %}
                     </div>
-                    <form action="{% url rawdata.atom_activate %}" method="post">
+                    <form action="{% url 'rawdata.atom_activate' %}" method="post">
                         {% csrf_token %}
                         <input type="submit" class="btn btn-primary btn-large btn-block" value="{% trans "Activate" %}"/>
                     </form>
