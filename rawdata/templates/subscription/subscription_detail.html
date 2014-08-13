@@ -95,6 +95,10 @@
                     <div class="well">
                         {% blocktrans %}Here you can activate your free Raw Data Atom subscription.{% endblocktrans %}
                     </div>
+                    <div class="alert alert-alert">
+                        {% trans "Careful! If you have already a paid Raw Data subscription, your available space will be reduced!" %}
+                    </div>
+
                     <form action="{% url 'rawdata.atom_activate' %}" method="post">
                         {% csrf_token %}
                         <input type="submit" class="btn btn-primary btn-large btn-block" value="{% trans "Activate" %}"/>
