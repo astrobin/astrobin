@@ -271,3 +271,4 @@ class ImageOfTheDayResource(ModelResource):
             'runnerup_2',
             'date',
         ]
+        allowed_methods = ['get']
