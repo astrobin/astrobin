@@ -41,10 +41,13 @@ Create a superuser:
 ./manage.py createsuperuser
 ```
 
-Start AstroBin:
+At this point, AstroBin is already running via `gunicorn` on port 8082, so
+you can visit http://127.0.0.1:8082/ from your host.
+However, you may also want to run a debugging session on the command line,
+like this:
 
 ```bash
-./manage.py runserver 0.0.0.0:8082
+./manage.py runserver 0.0.0.0:8083
 ```
 
-Visit http://127.0.0.1:8082/
+And then visit http://127.0.0.1:8083/ from your host.
