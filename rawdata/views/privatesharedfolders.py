@@ -151,7 +151,7 @@ class PrivateSharedFolderRemoveUserView(RestrictToSubscriberMixin, RestrictToCre
         return HttpResponse({}, **response_kwargs)
 
 
-class PrivateSharedFolderDetailView(RestrictToSubscriberMixin, RestrictToInviteeMixin, DetailView):
+class PrivateSharedFolderDetailView(RestrictToInviteeMixin, DetailView):
     model = PrivateSharedFolder
 
     def get_context_data(self, **kwargs):
@@ -171,7 +171,7 @@ class PrivateSharedFolderDetailView(RestrictToSubscriberMixin, RestrictToInvitee
         return context
 
 
-class PrivateSharedFolderDownloadView(RestrictToSubscriberMixin, RestrictToInviteeMixin, base.View):
+class PrivateSharedFolderDownloadView(RestrictToInviteeMixin, base.View):
     def get(self, request, *args, **kwargs):
         folder = get_object_or_404(PrivateSharedFolder, pk = kwargs.pop('pk'))
         if folder.archive and path.exists(folder.archive.file.path):
@@ -183,7 +183,7 @@ class PrivateSharedFolderDownloadView(RestrictToSubscriberMixin, RestrictToInvit
         return response
 
 
-class PrivateSharedFolderListView(RestrictToSubscriberMixin, ListView):
+class PrivateSharedFolderListView(ListView):
     model = PrivateSharedFolder
 
     def get_queryset(self):

@@ -10,6 +10,7 @@ from .views.rawimage import *
 from .views.temporaryarchive import *
 from .views.publicdatapools import *
 from .views.privatesharedfolders import *
+from .views.atom import *
 
 signal_handlers.install()
 
@@ -44,5 +45,6 @@ urlpatterns = patterns('',
     url(r'^privatesharedfolders/(?P<pk>\d+)/delete/$', login_required(PrivateSharedFolderDeleteView.as_view()), name = 'rawdata.privatesharedfolder_delete'),
     url(r'^privatesharedfolders/(?P<pk>\d+)/update/$', login_required(PrivateSharedFolderUpdateView.as_view()), name = 'rawdata.privatesharedfolder_update'),
 
-    url(r'^uploader/$', TemplateView.as_view(template_name = 'rawdata/uploader.html'), name = 'rawdata.uploader'),
+    url(r'^atom/activate/$', atom_activate, name = "rawdata.atom_activate"),
+    url(r'^atom/deactivate/$', atom_deactivate, name = "rawdata.atom_deactivate"),
 )

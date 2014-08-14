@@ -1,5 +1,7 @@
 {% extends 'base.html' %}
+
 {% load i18n %}
+{% load url from future %}
 
 {% block title %}{% trans "AstroBin Raw Data" %} - {% trans "Subscription plan" %}: {{object.name}}{% endblock %}
 
@@ -17,7 +19,7 @@
 
         <div class="span8">
         {% if usersubscription %}
-            {% if usersubscription.cancelled  %}
+            {% if usersubscription.cancelled %}
                 <div class="alert alert-info">
                     {% trans "Your subscription to this plan is cancelled." %}
                 </div>
@@ -26,16 +28,45 @@
             {% if usersubscription.active %}
                 <div class="alert alert-info">
                     {% trans "You are subscribed to this plan." %}
-                    {% blocktrans %}You may <a href="{{cancel_url}}">cancel via PayPal</a> if you wish.{% endblocktrans %}
-                </div>
-            {% else %}
-                <div class="well">
-                    {% blocktrans %}Subscribe with a secure payment provided by PayPal:{% endblocktrans %}
                 </div>
 
-                <div style="test-align:center">
-                    {{form.render}}
-                </div>
+                {% if usersubscription.subscription.name == "Atom" %}
+                    {% comment %} Free subscription {% endcomment %}
+                    <div class="well">
+                        {% blocktrans %}Here you can deactivate your free Raw Data Atom subscription.{% endblocktrans %}
+                    </div>
+                    <form action="{% url 'rawdata.atom_deactivate' %}" method="post">
+                        {% csrf_token %}
+                        <input type="submit" class="btn btn-primary btn-large btn-block" value="{% trans "Deactivate" %}"/>
+                    </form>
+
+                    <div id="go-to-library" style="text-align: center">
+                        <a href="{% url 'rawdata.library' %}">
+                            {% trans "Go to your Raw Data Library." %}
+                        </a>
+                    </div>
+                {% else %}
+                    {% blocktrans %}You may <a href="{{cancel_url}}">cancel via PayPal</a> if you wish.{% endblocktrans %}
+                {% endif %}
+            {% else %}
+
+                {% if usersubscription.subscription.name == "Atom" %}
+                    <div class="well">
+                        {% blocktrans %}Here you can activate your free Raw Data Atom subscription.{% endblocktrans %}
+                    </div>
+                    <form action="{% url 'rawdata.atom_activate' %}" method="post">
+                        {% csrf_token %}
+                        <input type="submit" class="btn btn-primary btn-large btn-block" value="{% trans "Activate" %}"/>
+                    </form>
+                {% else %}
+                    <div class="well">
+                        {% blocktrans %}Subscribe with a secure payment provided by PayPal:{% endblocktrans %}
+                    </div>
+
+                    <div style="test-align:center">
+                        {{form.render}}
+                    </div>
+                {% endif %}
             {% endif %}
         {% else %}
             {% if change_denied_reasons %}
@@ -51,21 +82,38 @@
                     </ul>
                 </div>
             {% else %}
-                <div class="well">
-                    {% blocktrans %}Subscribe with a secure payment provided by PayPal:{% endblocktrans %}
-                </div>
+                {% if form %}
+                    <div class="well">
+                        {% blocktrans %}Subscribe with a secure payment provided by PayPal:{% endblocktrans %}
+                    </div>
 
-                <div style="text-align: center">
-                    {{form.render}}
-                </div>
+                    <div style="text-align: center">
+                        {{form.render}}
+                    </div>
+                {% else %}
+                    {% comment %} Free subscription {% endcomment %}
+                    <div class="well">
+                        {% blocktrans %}Here you can activate your free Raw Data Atom subscription.{% endblocktrans %}
+                    </div>
+                    <div class="alert alert-alert">
+                        {% trans "Careful! If you have already a paid Raw Data subscription, your available space will be reduced!" %}
+                    </div>
+
+                    <form action="{% url 'rawdata.atom_activate' %}" method="post">
+                        {% csrf_token %}
+                        <input type="submit" class="btn btn-primary btn-large btn-block" value="{% trans "Activate" %}"/>
+                    </form>
+                {% endif %}
             {% endif %}
         {% endif %}
 
+        {% if form %}
         <div class="thankyou">
             {% blocktrans %}Thank you for supporting AstroBin!{% endblocktrans %}
             {% url subscription_list as plans_url %}
             <small>{% blocktrans %}Return to the <a href="{{plans_url}}">plans page</a>.{% endblocktrans %}</small>
         </div>
+        {% endif %}
     </div>
 </div>
 

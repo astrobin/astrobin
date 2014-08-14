@@ -10,7 +10,7 @@ CACHE = not DEBUG
 TEMPLATE_DEBUG = DEBUG
 MAINTENANCE_MODE = False
 READONLY_MODE = False
-MEDIA_VERSION = '77'
+MEDIA_VERSION = '78'
 LONGPOLL_ENABLED = False
 ADS_ENABLED = True
 DONATIONS_ENABLED = True
@@ -183,7 +183,7 @@ TEMPLATE_DIRS = (
     # Put strings here, like "/home/html/django_templates" or "C:/www/django/templates".
     # Always use forward slashes, even on Windows.
     # Don't forget to use absolute paths, not relative paths.
-    local_path('/templates'),
+    local_path('templates'),
 )
 
 TEMPLATE_CONTEXT_PROCESSORS = (

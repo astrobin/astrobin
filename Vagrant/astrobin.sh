@@ -89,7 +89,8 @@ function apt {
         libjpeg62 libjpeg62-dev \
         libfreetype6 libfreetype6-dev \
         zlib1g-dev \
-        default-jre && \
+        default-jre \
+        node-less && \
 
     astrobin_log " - Setting up symboling links..." && \
     rm -rf /usr/lib/libjpeg.so && \

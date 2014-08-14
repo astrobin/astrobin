@@ -22,7 +22,7 @@
                 {% blocktrans %}A <strong>private shared folder</strong> is a way for subscribers to the <a href="{{rawdata_url}}">AstoBin Raw Data Platform</a> to share raw data, like FIT and digital camera raw files, with other users, to collaborate on processing, get or provide technical help.{% endblocktrans %}
             </p>
             <p>
-                {% blocktrans %}The <a href="{{rawdata_url}}">Raw Data Platform</a> is primarily a way to securely back up your raw files, and keep them neatly and effortlessly organized, but being part of it also means that you support AstroBin and can perhaps contribute your raw files to scientic discoveries.{% endblocktrans %}
+                {% blocktrans %}The <a href="{{rawdata_url}}">Raw Data Platform</a> is primarily a way to securely back up your raw files, and keep them neatly and effortlessly organized, but being part of it also means that you support AstroBin and can perhaps contribute your raw files to scientific discoveries.{% endblocktrans %}
             </p>
         </div>
     </div>
@@ -71,8 +71,12 @@
         </table>
     {% else %}
         <div class="alert alert-error">
-            {% url rawdata.library as library_url %}
-            <p>{% blocktrans %}You don't have access to any private shared folders. If you want to create one, go to <a href="{{library_url}}">your Raw Data Library</a>, select some files or <strong>smart folders</strong> and use the <strong>Share</strong> button to share them.{% endblocktrans %}</p>
+            {% if has_rawdata_subscription %}
+                {% url rawdata.library as library_url %}
+                <p>{% blocktrans %}You don't have access to any private shared folders. If you want to create one, go to <a href="{{library_url}}">your Raw Data Library</a>, select some files or <strong>smart folders</strong> and use the <strong>Share</strong> button to share them.{% endblocktrans %}</p>
+            {% else %}
+                <p>{% blocktrans %}You don't have access to any private shared folders. You don't have a Raw Data subscription, so you may not create shared folder, but you may still be invited by subscribers.{% endblocktrans %}</p>
+            {% endif %}
         </div>
     {% endif %}
 {% endblock %}
