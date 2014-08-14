@@ -35,11 +35,12 @@ from rawdata.views.helppages import (
 
 
 from tastypie.api import Api
-from astrobin.api import ImageResource, ImageRevisionResource,\
+from astrobin.api import LocationResource, ImageResource, ImageRevisionResource,\
                          ImageOfTheDayResource
 
 # These are the old API, not djangorestframework
 v1_api = Api(api_name = 'v1')
+v1_api.register(LocationResource())
 v1_api.register(ImageResource())
 v1_api.register(ImageRevisionResource())
 v1_api.register(ImageOfTheDayResource())

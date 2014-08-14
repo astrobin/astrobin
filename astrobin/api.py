@@ -5,7 +5,7 @@ from tastypie.resources import ModelResource, ALL, ALL_WITH_RELATIONS
 from tastypie import fields
 from tastypie.authentication import Authentication
 
-from astrobin.models import Image, ImageRevision, ImageOfTheDay, App
+from astrobin.models import Location, Image, ImageRevision, ImageOfTheDay, App
 from astrobin.models import SOLAR_SYSTEM_SUBJECT_CHOICES
 
 
@@ -26,6 +26,28 @@ class AppAuthentication(Authentication):
             return False
 
         return True
+
+
+class LocationResource(ModelResource):
+    """
+    name = fields.CharField()
+    city = fields.CharField()
+    state = fields.CharField()
+    country = fields.CharField()
+    altitude = fields.IntegerField()
+    """
+
+    class Meta:
+        authentication = AppAuthentication()
+        queryset = Location.objects.all()
+        fields = [
+            'name',
+            'city',
+            'state',
+            'country',
+            'altitude',
+        ]
+        allowed_methods = ['get']
 
 
 class ImageRevisionResource(ModelResource):
@@ -99,6 +121,8 @@ class ImageResource(ModelResource):
     uploaded = fields.DateField('uploaded')
     updated = fields.DateField('updated')
 
+    locations = fields.ToManyField(LocationResource, 'locations')
+
     url_thumb = fields.CharField()
     url_gallery = fields.CharField()
     url_regular = fields.CharField()
@@ -115,6 +139,9 @@ class ImageResource(ModelResource):
         fields = [
             'id',
             'title',
+            'w',
+            'h',
+            'locations',
 
             'url_thumb',
             'url_gallery',
@@ -147,6 +174,8 @@ class ImageResource(ModelResource):
             'uploaded': ALL,
             'imaging_telescopes': ALL,
             'imaging_cameras': ALL,
+            'w': ALL,
+            'h': ALL,
         }
         ordering = ['uploaded']
 
