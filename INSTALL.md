@@ -26,6 +26,7 @@ Start supervisord:
 
 ```bash
 sudo /etc/init.d/supervisor start
+sudo supervisorctl update
 ```
 
 Become the user 'astrobin':
