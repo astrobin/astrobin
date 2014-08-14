@@ -178,9 +178,12 @@ function abc {
         ./configure && make -j4
     ) && \
 
+    # Force out of source build because symbolic links would cause trouble
+    # in case of Windows hosts.
     (
-        cd /var/www/astrobin/submodules/abc; \
-        qmake && make -j4 && make install
+        mkdir -p /tmp/libabc_build; \
+        cd /tmp/libabc_build; \
+        qmake /var/www/astrobin/submodules/abc && make -j4 && make install
     )
 }
 
