@@ -31,7 +31,7 @@ function init_system {
 
     astrobin_log " - Adding users..."
     if ! id -u astrobin >/dev/null 2>&1; then
-        useradd -MN -s /dev/null -g astrobin -u 2000 astrobin
+        useradd -m -s /bin/bash -g astrobin -u 2000 astrobin
     fi
 
     if ! id -u solr >/dev/null 2>&1; then
@@ -55,6 +55,10 @@ function init_system {
     chmod g+w /rawdata
     chmod g+w /opt/solr
     chmod g+w /var/log/astrobin
+
+    astrobin_log " - Customizing vagrant's home directory..."
+    echo "nc -z 127.0.0.1 25 || sudo python -m smtpd -n -c DebuggingServer localhost:25 &" >> /home/vagrant/.bashrc
+    echo "nc -z 127.0.0.1 1025 || python -m smtpd -n -c DebuggingServer localhost:1025 &" >> /home/vagrant/.bashrc
 }
 
 function apt {
@@ -66,6 +70,7 @@ function apt {
     # Install packages
     astrobin_log " - Installing new packages..." && \
     apt-get -y install \
+        figlet cowsay \
         pkg-config \
         nginx \
         memcached \
@@ -189,6 +194,7 @@ function abc {
 }
 
 function astrobin {
+    customizing_log=$(astrobin_log " - Customizing astrobin's home directory...")
     syndb_log=$(astrobin_log " - Syncing database...")
     migrate_log=$(astrobin_log " - Migrating database...")
     trans_log=$(astrobin_log " - Syncing translation fields...")
@@ -198,6 +204,14 @@ function astrobin {
     # Initialize the environment
     . /venv/astrobin/dev/bin/activate
     . /var/www/astrobin/env/dev
+
+    # Automatically activating the environment upon login
+    $customizing_log && \
+    echo "source /venv/astrobin/dev/bin/activate" >> /home/astrobin/.profile && \
+    echo "source /var/www/astrobin/env/dev" >> /home/astrobin/.profile && \
+    echo "cd /var/www/astrobin" >> /home/astrobin/.profile && \
+    echo "figlet WELCOME TO ASTROBIN" >> /home/astrobin/.bashrc && \
+    echo "cowsay You can run a development server with: ./manage.py runserver 0.0.0.0:8082, and remember to read ./INSTALL.md\!" >> /home/astrobin/.bashrc && \
 
     # Initialize db
     $sync_db_log && \
