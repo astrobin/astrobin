@@ -358,7 +358,7 @@ STATICFILES_FINDERS = (
     'django.contrib.staticfiles.finders.FileSystemFinder',
     'django.contrib.staticfiles.finders.AppDirectoriesFinder',
 )
-STATICFILES_DIRS = (local_path('static/'),)
+STATICFILES_DIRS = (local_path('astrobin/static/'),)
 
 PIPELINE_CSS_COMPRESSOR = 'pipeline.compressors.cssmin.CssminCompressor'
 PIPELINE_JS_COMPRESSOR = 'pipeline.compressors.jsmin.SlimItCompressor'
