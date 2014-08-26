@@ -795,6 +795,23 @@ def image_detail(request, id, r):
     bookmarked_this = image.toggleproperties.filter(property_type = "bookmark")
 
 
+    ##############
+    # NAVIGATION #
+    ##############
+    try:
+        # Only lookup public images!
+        image_next = Image.objects.filter(user = image.user, pk__gt = image.pk).order_by('pk')[0:1]
+        image_prev = Image.objects.filter(user = image.user, pk__lt = image.pk).order_by('-pk')[0:1]
+    except Image.DoesNotExist:
+        image_next = None
+        image_prev = None
+
+    if image_next:
+        image_next = image_next[0]
+    if image_prev:
+        image_prev = image_prev[0]
+
+
     #################
     # RESPONSE DICT #
     #################
@@ -859,7 +876,9 @@ def image_detail(request, id, r):
             Q(creator = request.user) |
             Q(users = request.user)).count() > 0 if request.user.is_authenticated() else False,
 
-        'iotd_date': image.iotd_date()
+        'iotd_date': image.iotd_date(),
+        'image_next': image_next,
+        'image_prev': image_prev,
     }.items())
 
     return object_detail(

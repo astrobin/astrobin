@@ -3600,3 +3600,10 @@ img.flickr-photo-to-import-selected {
 .tooltip-inner {
   max-width: none;
 }
+.image-navigation {
+  font-size: 18px;
+}
+.image-navigation.disabled a {
+  color: #D56D62 !important;
+  pointer: none;
+}
