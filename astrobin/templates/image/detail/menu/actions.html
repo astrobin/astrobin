@@ -125,15 +125,6 @@
         </li>
         {% endif %} <!-- owner or superuser -->
 
-        {% if request.user.is_superuser %}
-        <li>
-            <a data-toggle="modal" href="#flag-thumbnails-modal">
-                <i class="icon-flag"></i>
-                {% trans "Flag malfunctionig thumbnails" %}
-            </a>
-        </li>
-        {% endif %}
-
         <li class="divider"></li>
         <li>
             <a href="{% url bring_to_attention image.id %}">

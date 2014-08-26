@@ -9,6 +9,13 @@
     </a>
     <ul class="dropdown-menu">
         <li>
+            <a data-toggle="modal" href="#flag-thumbnails-modal">
+                <i class="icon-flag"></i>
+                {% trans "Flag malfunctionig thumbnails" %}
+            </a>
+        </li>
+
+        <li>
             <a href="{% url user_ban image.user %}">
                 <i class="icon-ban-circle"></i>
                 {% trans "Ban user" %}
