@@ -1,0 +1,33 @@
+{% load i18n %}
+
+{% if not image.is_wip %}
+    <li class="image-navigation pull-right{% if not image_next %} disabled{% endif %}">
+        <a
+            {% if image_next %}
+                href="{% url image_detail image_next.pk %}"
+                rel="tooltip"
+                data-placement="bottom"
+                title="{{image_next.title|escape|default:_("(no title)")}}"
+            {% else %}
+                href="#"
+            {% endif %}
+        >
+            <i class="icon-chevron-right"></i>
+        </a>
+     </li>
+
+    <li class="image-navigation pull-right{% if not image_prev %} disabled{% endif %}">
+        <a
+            {% if image_prev %}
+                href="{% url image_detail image_prev.pk %}"
+                rel="tooltip"
+                data-placement="bottom"
+                title="{{image_prev.title|escape|default:_("(no title)")}}"
+            {% else %}
+                href="#"
+            {% endif %}
+        >
+            <i class="icon-chevron-left"></i>
+        </a>
+     </li>
+ {% endif %}

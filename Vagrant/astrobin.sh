@@ -1,13 +1,20 @@
 #!/bin/bash
 
 function astrobin_log {
-    echo $1 >&3
+    echo -e " - $1" >&3
 }
 
-function abort {
-    astrobin_log "SOMETHING WENT WRONG!"
-    astrobin_log "Please check vagrant.log for more details."
+function astrobin_err {
+    local COLOR="tput setaf 1; tput setab 3; tput bold"
+    local COLOR_RST="tput sgr 0"
+
+    astrobin_log "$(${COLOR})ERROR: $1$(${COLOR_RST})"
     exit 1
+}
+
+
+function abort {
+    astrobin_err "SOMETHING WENT WRONG! Please check vagrant.log for more details."
 }
 
 function begin {
@@ -16,9 +23,60 @@ function begin {
     astrobin_log "#################################################################"
 }
 
+function check {
+    local ROOT="/var/www/astrobin"
+    local EXAMPLE="${ROOT}/env/example"
+    local DEV="${ROOT}/env/dev"
+    local GUNICORN="${ROOT}/conf/supervisord/gunicorn.conf"
+    local CELERY="${ROOT}/conf/supervisord/celeryd_default.conf"
+
+    # Check env/dev
+    if [ ! -f $DEV ]; then
+        astrobin_err "You need to copy env/example to env/dev and configure the needed variables."
+    fi
+
+    local VARS=(
+        ASTROBIN_DATABASE_HOST
+        ASTROBIN_DATABASE_NAME
+        ASTROBIN_DATABASE_USER
+        ASTROBIN_DATABASE_PASSWORD
+        ASTROBIN_DJANGO_SECRET_KEY
+        ASTROBIN_AWS_S3_ENABLED
+        ASTROBIN_LOCAL_STATIC_STORAGE
+        ASTROBIN_AWS_ACCESS_KEY_ID
+        ASTROBIN_AWS_SECRET_ACCESS_KEY
+        ASTROBIN_AWS_STORAGE_BUCKET_NAME
+        ASTROBIN_IMAGES_URL
+        ASTROBIN_CDN_URL
+        ASTROBIN_FLICKR_API_KEY
+        ASTROBIN_FLICKR_SECRET
+        ASTROBIN_HAYSTACK_SOLR_URL
+        ASTROBIN_BROKER_USER
+        ASTROBIN_BROKER_PASSWORD
+        ASTROBIN_CELERY_RESULT_DBURI
+        ASTROMETRY_NET_API_KEY
+        ASTROBIN_RAWDATA_ROOT
+    )
+
+    local FILES=(
+        ${DEV}
+        ${GUNICORN}
+        ${CELERY}
+    )
+
+    for FILE in ${FILES[@]}; do
+        for VAR in ${VARS[@]}; do
+            astrobin_log "Checking ${FILE} for ${VAR}..."
+            if ! grep -q "${VAR}" ${FILE}; then
+                astrobin_err "The environment variable ${VAR} is not defined in ${FILE}"
+            fi
+        done
+    done
+}
+
 function init_system {
     # Create directories
-    astrobin_log " - Creating directories..."
+    astrobin_log "Creating directories..."
     mkdir -p /var/www/media
     mkdir -p /var/www/tmpzips
     mkdir -p /rawdata/files
@@ -26,10 +84,10 @@ function init_system {
     mkdir -p /venv
     mkdir -p /var/log/astrobin
 
-    astrobin_log " - Creating groups..."
+    astrobin_log "Creating groups..."
     groupadd -g 2000 astrobin
 
-    astrobin_log " - Adding users..."
+    astrobin_log "Adding users..."
     if ! id -u astrobin >/dev/null 2>&1; then
         useradd -m -s /bin/bash -g astrobin -u 2000 astrobin
     fi
@@ -42,7 +100,7 @@ function init_system {
         usermod -G astrobin vagrant
     fi
 
-    astrobin_log " - Setting ownerships..."
+    astrobin_log "Setting ownerships..."
     chown -R astrobin:astrobin /venv
     chown -R astrobin:astrobin /var/www/media
     chown -R astrobin:astrobin /var/www/tmpzips
@@ -56,19 +114,19 @@ function init_system {
     chmod g+w /opt/solr
     chmod g+w /var/log/astrobin
 
-    astrobin_log " - Customizing vagrant's home directory..."
+    astrobin_log "Customizing vagrant's home directory..."
     echo "nc -z 127.0.0.1 25 || sudo python -m smtpd -n -c DebuggingServer localhost:25 &" >> /home/vagrant/.bashrc
     echo "nc -z 127.0.0.1 1025 || python -m smtpd -n -c DebuggingServer localhost:1025 &" >> /home/vagrant/.bashrc
 }
 
 function apt {
     # Init
-    astrobin_log " - Upgrading packages..."
+    astrobin_log "Upgrading packages..."
     apt-get update && apt-get -y upgrade && \
 
 
     # Install packages
-    astrobin_log " - Installing new packages..." && \
+    astrobin_log "Installing new packages..." && \
     apt-get -y install \
         figlet cowsay \
         pkg-config \
@@ -97,7 +155,7 @@ function apt {
         default-jre \
         node-less && \
 
-    astrobin_log " - Setting up symboling links..." && \
+    astrobin_log "Setting up symboling links..." && \
     rm -rf /usr/lib/libjpeg.so && \
     rm -rf /usr/lib/libfreetype.so && \
     rm -rf /usr/lib/libz.so && \
@@ -108,9 +166,9 @@ function apt {
 }
 
 function pip {
-    venv_log=$(astrobin_log " - Setting up virtualenv...")
-    req_log=$(astrobin_log " - Installing python requirements...")
-    sub_log=$(astrobin_log " - Installing submodules...")
+    venv_log=$(astrobin_log "Setting up virtualenv...")
+    req_log=$(astrobin_log "Installing python requirements...")
+    sub_log=$(astrobin_log "Installing submodules...")
 
     sudo -u astrobin /bin/bash - <<"EOF"
     $venv_log
@@ -140,11 +198,11 @@ EOF
 
 function postgres {
     # Setup postgresql
-    astrobin_log " - Copying postgres conf file..."
+    astrobin_log "Copying postgres conf file..."
     cp /var/www/astrobin/conf/pg_hba.conf /etc/postgresql/9.3/main/
 
     function postgres_db {
-        astrobin_log " - Setting up database..."
+        astrobin_log "Setting up database..."
         sudo -u postgres /bin/sh <<"EOF"
         psql postgres -tAc "SELECT 1 FROM pg_roles WHERE rolname='astrobin'" | grep -q 1 || createuser astrobin
         psql -lqt | cut -d \| -f 1 | grep -w astrobin || createdb astrobin
@@ -163,20 +221,20 @@ EOF
 }
 
 function rabbitmq {
-    astrobin_log " - Setting up rabbitmq..."
+    astrobin_log "Setting up rabbitmq..."
     rabbitmqctl add_user astrobin s3cr3t
     rabbitmqctl add_vhost astrobin
     rabbitmqctl set_permissions -p astrobin astrobin ".*" ".*" ".*"
 }
 
 function supervisor {
-    astrobin_log " - Setting up supervisor..."
+    astrobin_log "Setting up supervisor..."
     cp /var/www/astrobin/conf/supervisord/* /etc/supervisor/conf.d/
     mkdir -p /var/log/{celery,gunicorn,nginx,solr}
 }
 
 function abc {
-    astrobin_log " - Setting up 'abc'..."
+    astrobin_log "Setting up 'abc'..."
     . /venv/astrobin/dev/bin/activate
 
     (
@@ -194,11 +252,11 @@ function abc {
 }
 
 function astrobin {
-    customizing_log=$(astrobin_log " - Customizing astrobin's home directory...")
-    syndb_log=$(astrobin_log " - Syncing database...")
-    migrate_log=$(astrobin_log " - Migrating database...")
-    trans_log=$(astrobin_log " - Syncing translation fields...")
-    static_log=$(astrobin_log " - Collecting static files...")
+    customizing_log=$(astrobin_log "Customizing astrobin's home directory...")
+    syndb_log=$(astrobin_log "Syncing database...")
+    migrate_log=$(astrobin_log "Migrating database...")
+    trans_log=$(astrobin_log "Syncing translation fields...")
+    static_log=$(astrobin_log "Collecting static files...")
 
     sudo -u astrobin /bin/bash - <<"EOF"
     # Initialize the environment
@@ -229,14 +287,14 @@ EOF
 }
 
 function solr {
-    astrobin_log " - Setting up solr..."
+    astrobin_log "Setting up solr..."
 
     local return_value=0
 
-    dl_log=$(astrobin_log " - Downloading solr...")
-    tar_log=$(astrobin_log " - Extracting solr...")
-    schema_log=$(astrobin_log " - Building solr schema...")
-    cust_log=$(astrobin_log " - Customizing solr schema...")
+    dl_log=$(astrobin_log "Downloading solr...")
+    tar_log=$(astrobin_log "Extracting solr...")
+    schema_log=$(astrobin_log "Building solr schema...")
+    cust_log=$(astrobin_log "Customizing solr schema...")
 
     if [ ! -f /opt/solr/solr.tgz ]; then
         sudo -u solr /bin/bash - <<"EOF"
@@ -279,13 +337,12 @@ function end {
 
 
 if [ "$1" != "1" ]; then
-    echo " - Running in quiet mode..."
     exec 3>&1 &>/vagrant/vagrant.log
 else
-    echo " - Running in verbose mode..."
     exec 3>&1
 fi
 
+check
 
 (
     begin && \
