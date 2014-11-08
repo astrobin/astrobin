@@ -42,7 +42,7 @@ django-modeltranslation==0.7.3
 -e git+https://github.com/wadevries/django-notification.git#egg=django-notification
 django-openid-provider==0.4
 django-pagination==1.0.7
--e git+https://github.com/spookylukey/django-paypal.git#egg=django-paypal
+-e git+https://github.com/spookylukey/django-paypal.git@f9a263b8ef4dd08c13075eae504bd3184a465100#egg=django-paypal
 django-picklefield==0.3.0
 django-pipeline==1.3.15
 django-recaptcha-works==0.3.4
