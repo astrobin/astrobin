@@ -248,6 +248,7 @@ INSTALLED_APPS = (
     'easy_thumbnails',
     'endless_pagination',
     'dfp', # For Google DFP
+    'django_user_agents',
 
     # AstroBin apps
     'astrobin',

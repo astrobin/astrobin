@@ -1,7 +1,7 @@
 {% load i18n %}
 
 {% if request.user.is_superuser %}
-<li class="dropdown">
+<li class="dropdown hidden-phone">
     <a class="dropdown-toggle" data-toggle="dropdown" href="#">
         <i class="icon-legal icon-white"></i>
         {% trans "Admin" %}

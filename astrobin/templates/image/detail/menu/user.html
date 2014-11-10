@@ -2,7 +2,7 @@
 {% load i18n %}
 
 {% if request.user != image.user %}
-<li class="dropdown">
+<li class="dropdown hidden-phone">
     <a class="dropdown-toggle" data-toggle="dropdown" href="#">
         <i class="icon-user icon-white"></i>
         {% trans "User" %}

@@ -1776,10 +1776,10 @@ class Location(models.Model):
     )
 
     def __unicode__(self):
-        if self.state:
-            return '%s, %s (%s), %s' % (self.name, self.city, self.state, get_country_name(self.country))
-        else:
-            return '%s, %s, %s' % (self.name, self.city, get_country_name(self.country))
+        return ', '.join(filter(None, [
+            self.name, self.city, self.state,
+            unicode(get_country_name(self.country))
+        ]))
 
     class Meta:
         app_label = 'astrobin'

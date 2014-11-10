@@ -85,6 +85,9 @@ def user_scores(request):
 
 def common_variables(request):
     from rawdata.utils import user_has_active_subscription
+    from django_user_agents.utils import get_and_set_user_agent
+
+    get_and_set_user_agent(request)
 
     d = {
         #'random_gear_item': Gear.objects.filter(moderator_fixed = None).order_by('?')[:1].get(),
