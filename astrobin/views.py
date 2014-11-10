@@ -706,7 +706,6 @@ def image_detail(request, id, r):
         deep_sky_data = (
             (_('Resolution'), '%dx%d' % (image.w, image.h) if (image.w and image.h) else None),
             (_('Dates'), sorted(dsa_data['dates'])),
-            (_('Locations'), u', '.join([x.name for x in image.locations.all()])),
             (_('Frames'),
                 ('\n' if len(frames_list) > 1 else '') +
                 u'\n'.join("%s %s" % (
@@ -775,6 +774,7 @@ def image_detail(request, id, r):
         (6, 'cc/cc-by-nd.png',    LICENSE_CHOICES[6][1]),
     )
 
+    locations = u'; '.join(['%s' % (x) for x in image.locations.all()])
 
 
     ######################
@@ -862,6 +862,7 @@ def image_detail(request, id, r):
         'subject_type': [x[1] for x in Image.SUBJECT_TYPE_CHOICES if x[0] == image.subject_type][0] if image.subject_type else 0,
         'license_icon': licenses[image.license][1],
         'license_title': licenses[image.license][2],
+	'locations': locations,
         # Because of a regression introduced at
         # revision e1dad12babe5, now we have to
         # implement this ugly hack.
