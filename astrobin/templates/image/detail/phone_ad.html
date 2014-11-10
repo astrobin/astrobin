@@ -1,0 +1,22 @@
+{% load astrobin_apps_donations_tags %}
+{% load i18n %}
+{% load dfp_tags %}
+
+{% if ADS_ENABLED and not request.user|is_donor %}
+    <div class="subtle-container advertisement">
+        <div class="header">
+            <h4><i class="icon-bullhorn"></i></h4>
+
+            {% if request.user.is_authenticated and DONATIONS_ENABLED %}
+                <a class="remove" data-toggle="modal" href="#remove-ads-modal">
+                    <i class="icon-remove"></i>
+                </a>
+            {% endif %}
+        </div>
+
+        {% if request.user_agent.is_mobile %}
+            {% dfp_tag '47890729/image-page-phone-iphone' 220 60 brands=makes_list display="phone" %}
+        {% endif %}
+    </div>
+{% endif %}
+

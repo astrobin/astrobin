@@ -15,7 +15,17 @@
             {% endif %}
         </div>
 
-        {% dfp_tag '47890729/image-page' 300 250 brands=makes_list %}
+        {% if request.user_agent.is_tablet %}
+            {% dfp_tag '47890729/image-page-tablet-sized' 228 250 brands=makes_list display="tablet" %}
+            <br />
+            {% dfp_tag '47890729/image-page-tablet-sized' 228 250 brands=makes_list display="tablet" %}
+        {% endif %}
+
+        {% if request.user_agent.is_pc %}
+            {% dfp_tag '47890729/image-page' 300 250 brands=makes_list display="desktop" %}
+            <br />
+            {% dfp_tag '47890729/image-page' 300 250 brands=makes_list display="desktop" %}
+        {% endif %}
     </div>
 {% endif %}
 

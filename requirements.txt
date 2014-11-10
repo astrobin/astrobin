@@ -108,3 +108,6 @@ django-avatar==2.0
 privatebeta
 -e git+https://github.com/siovene/django-dfp.git#egg=django-dfp
 -e git+https://github.com/siovene/snakecheese.git#egg=django-contrib-requestprovider&subdirectory=gadjolib
+ua-parser==0.3.5
+user-agents==0.3.0
+django-user-agents==0.3.0

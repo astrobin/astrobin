@@ -8,6 +8,10 @@
 {% block title %}{{image.title}} ({{image.user.userprofile}}){% endblock %}
 
 {% block content %}
+    <div class="visible-phone">
+        {% include 'image/detail/phone_ad.html' %}
+    </div>
+
     {% include 'image/detail/wip_banner.html' %}
     {% include 'image/detail/menu/root.html' %}
 
@@ -25,7 +29,11 @@
         <div class="span4"> <!-- right pane -->
             {% include 'image/detail/info.html' %}
             {% include 'image/detail/like.html' %}
-            {% include 'image/detail/ad.html' %}
+
+            <div class="hidden-phone">
+                {% include 'image/detail/ad.html' %}
+            </div>
+
             {% include 'image/detail/revisions.html' %}
             {% include 'image/detail/skyplot.html' %}
             {% include 'image/detail/histogram.html' %}
