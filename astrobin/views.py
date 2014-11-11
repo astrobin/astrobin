@@ -774,7 +774,7 @@ def image_detail(request, id, r):
         (6, 'cc/cc-by-nd.png',    LICENSE_CHOICES[6][1]),
     )
 
-    locations = u'; '.join(['%s' % (x) for x in image.locations.all()])
+    locations = '; '.join([u'%s' % (x) for x in image.locations.all()])
 
 
     ######################
