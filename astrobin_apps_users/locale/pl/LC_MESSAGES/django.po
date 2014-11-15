@@ -7,9 +7,9 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2014-05-29 10:52+0000\n"
-"PO-Revision-Date: 2013-11-11 20:24+0000\n"
-"Last-Translator: scyth <scyth1@gmail.com>\n"
+"POT-Creation-Date: 2014-11-14 08:17+0000\n"
+"PO-Revision-Date: 2014-06-11 19:21+0000\n"
+"Last-Translator: jcbo <jcbo@wp.pl>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
 "Language: pl\n"
 "MIME-Version: 1.0\n"
@@ -18,7 +18,7 @@ msgstr ""
 "Plural-Forms: nplurals=3; plural=(n==1 ? 0 : n%10>=2 && n%10<=4 && (n%100<10 "
 "|| n%100>=20) ? 1 : 2);\n"
 "X-Generator: Pootle 2.5.0\n"
-"X-POOTLE-MTIME: 1384201492.466029\n"
+"X-POOTLE-MTIME: 1402514482.193716\n"
 
 #: templates/astrobin_apps_users/inclusion_tags/astrobin_user.html:47
 #: templates/astrobin_apps_users/inclusion_tags/astrobin_user.html:78
@@ -35,13 +35,13 @@ msgstr "Obserwujący"
 #: templates/astrobin_apps_users/inclusion_tags/astrobin_user.html:49
 #: templates/astrobin_apps_users/inclusion_tags/user_list.html:9
 msgid "Following"
-msgstr ""
+msgstr "Obserwuję"
 
 #: templates/astrobin_apps_users/inclusion_tags/astrobin_user.html:110
 #, python-format
 msgid "%(images_number)s image"
 msgid_plural "%(images_number)s images"
-msgstr[0] ""
+msgstr[0] "%(liczba zdjęć)"
 msgstr[1] ""
 msgstr[2] ""
 
@@ -49,15 +49,15 @@ msgstr[2] ""
 #, python-format
 msgid "%(followers_number)s follower"
 msgid_plural "%(followers_number)s followers"
-msgstr[0] ""
+msgstr[0] "%(liczba obserwujących)"
 msgstr[1] ""
 msgstr[2] ""
 
 #: templates/astrobin_apps_users/inclusion_tags/user_list.html:6
 msgid "User"
-msgstr ""
+msgstr "Użytkownik"
 
 #: templates/astrobin_apps_users/inclusion_tags/user_list_entries.html:23
 #: templates/astrobin_apps_users/inclusion_tags/user_list_entries.html:27
 msgid "No users."
-msgstr ""
+msgstr "Brak użytkownika"

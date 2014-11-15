@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2014-05-29 10:52+0000\n"
+"POT-Creation-Date: 2014-11-14 08:16+0000\n"
 "PO-Revision-Date: 2014-02-03 08:50+0000\n"
 "Last-Translator: sypai <sypai@mail.ru>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -185,7 +185,7 @@ msgstr "Общее хранилище данных"
 #: templates/rawdata/_browser_js.html:80 templates/rawdata/_images.html:44
 #: templates/rawdata/privatesharedfolder_detail.html:46
 #: templates/rawdata/privatesharedfolder_detail.html:184
-#: templates/rawdata/privatesharedfolder_list.html:92
+#: templates/rawdata/privatesharedfolder_list.html:96
 msgid "Delete"
 msgstr "Удалить"
 
@@ -222,8 +222,8 @@ msgstr "Обзор скриншотов"
 #: templates/subscription/subscription_cancel.html:8
 #: templates/subscription/subscription_change_done.html:4
 #: templates/subscription/subscription_change_done.html:8
-#: templates/subscription/subscription_detail.html:4
-#: templates/subscription/subscription_detail.html:8
+#: templates/subscription/subscription_detail.html:6
+#: templates/subscription/subscription_detail.html:10
 #: templates/subscription/subscription_done.html:4
 #: templates/subscription/subscription_done.html:8
 #: templates/subscription/subscription_list.html:4
@@ -610,17 +610,17 @@ msgstr ""
 "обработать эти данные."
 
 #: templates/rawdata/privatesharedfolder_detail.html:175
-#: templates/rawdata/privatesharedfolder_list.html:84
+#: templates/rawdata/privatesharedfolder_list.html:88
 msgid "Delete folder"
 msgstr "Удалить каталог"
 
 #: templates/rawdata/privatesharedfolder_detail.html:178
-#: templates/rawdata/privatesharedfolder_list.html:87
+#: templates/rawdata/privatesharedfolder_list.html:91
 msgid "Are you sure you want to delete this shared folder?"
 msgstr "Вы действительно хотите удалить этот каталог для обмена?"
 
 #: templates/rawdata/privatesharedfolder_detail.html:179
-#: templates/rawdata/privatesharedfolder_list.html:88
+#: templates/rawdata/privatesharedfolder_list.html:92
 msgid ""
 "Don't worry, no files will be deleted from your raw data account, nor from "
 "the accounts of other people who may have contributed to this shared folder."
@@ -633,7 +633,7 @@ msgstr ""
 #: templates/rawdata/privatesharedfolder_detail.html:202
 #: templates/rawdata/privatesharedfolder_detail.html:221
 #: templates/rawdata/privatesharedfolder_form.html:99
-#: templates/rawdata/privatesharedfolder_list.html:91
+#: templates/rawdata/privatesharedfolder_list.html:95
 #: templates/rawdata/publicdatapool_detail.html:154
 #: templates/rawdata/publicdatapool_form.html:99
 msgid "Cancel"
@@ -745,14 +745,12 @@ msgstr ""
 "постобработки, получать или предоставлять техническую помощь в этом."
 
 #: templates/rawdata/privatesharedfolder_list.html:25
-#: templates/rawdata/publicdatapool_list.html:25
-#: templates/rawdata/restricted.html:28
-#, python-format
+#, fuzzy, python-format
 msgid ""
 "The <a href=\"%(rawdata_url)s\">Raw Data Platform</a> is primarily a way to "
 "securely back up your raw files, and keep them neatly and effortlessly "
 "organized, but being part of it also means that you support AstroBin and can "
-"perhaps contribute your raw files to scientic discoveries."
+"perhaps contribute your raw files to scientific discoveries."
 msgstr ""
 "<a href=\"%(rawdata_url)s\">Платформа Raw Data</a> это, в первую очередь "
 "способ безопасно восстановить ваши исходники RAW, аккуратно хранить и легко "
@@ -783,7 +781,7 @@ msgstr "Рабочии версии изображений"
 msgid "Last updated"
 msgstr "Последнее обновление"
 
-#: templates/rawdata/privatesharedfolder_list.html:75
+#: templates/rawdata/privatesharedfolder_list.html:76
 #, python-format
 msgid ""
 "You don't have access to any private shared folders. If you want to create "
@@ -796,12 +794,19 @@ msgstr ""
 "данных</a>, выберите несколько файлов или <strong>«умных» каталогов</strong> "
 "и используйте кнопку <strong>Поделиться</strong> для создания."
 
-#: templates/rawdata/privatesharedfolder_list.html:101
+#: templates/rawdata/privatesharedfolder_list.html:78
+msgid ""
+"You don't have access to any private shared folders. You don't have a Raw "
+"Data subscription, so you may not create shared folder, but you may still be "
+"invited by subscribers."
+msgstr ""
+
+#: templates/rawdata/privatesharedfolder_list.html:105
 #: templates/rawdata/publicdatapool_list.html:66
 msgid "Follow"
 msgstr "Подписаться"
 
-#: templates/rawdata/privatesharedfolder_list.html:101
+#: templates/rawdata/privatesharedfolder_list.html:105
 #: templates/rawdata/publicdatapool_list.html:66
 msgid "Unfollow"
 msgstr "Отписаться"
@@ -917,6 +922,20 @@ msgstr ""
 "сигнала, часто содержащие сотни часов сигнала, в изображениях сверхглубокого "
 "космоса."
 
+#: templates/rawdata/publicdatapool_list.html:25
+#: templates/rawdata/restricted.html:25
+#, python-format
+msgid ""
+"The <a href=\"%(rawdata_url)s\">Raw Data Platform</a> is primarily a way to "
+"securely back up your raw files, and keep them neatly and effortlessly "
+"organized, but being part of it also means that you support AstroBin and can "
+"perhaps contribute your raw files to scientic discoveries."
+msgstr ""
+"<a href=\"%(rawdata_url)s\">Платформа Raw Data</a> это, в первую очередь "
+"способ безопасно восстановить ваши исходники RAW, аккуратно хранить и легко "
+"организовать их, но также это означает, что вы поддерживаете AstroBin и, "
+"возможно, способствуете научным открытиям."
+
 #: templates/rawdata/restricted.html:4 templates/rawdata/restricted.html:9
 msgid "Restricted content"
 msgstr "Содержимое с ограниченным доступом"
@@ -930,20 +949,7 @@ msgstr ""
 "Страница, на которую вы пытаетесь войти, доступна подписчикам <a href="
 "\"%(rawdata_url)s\">Платформы Raw Data</a> AstroBin."
 
-#: templates/rawdata/restricted.html:25
-#, python-format
-msgid ""
-"Probably, you are here because you weve invited to contribute to a "
-"<strong>Private Shared Folder</strong>, a collection of raw data that users "
-"can contribute to. <strong>Private Shared Folders</strong> are part of "
-"Astrobin's <a href=\"%(rawdata_url)s\">Raw Data Platform</a>."
-msgstr ""
-"Возможно, вы сюда попали потому, что были приглашены в <strong>Личный "
-"Каталог Обмена</strong>, коллекцию RAW-данных общей для многих участников. "
-"<strong>Личный Каталог Обмена</strong> это часть Astrbin-ской <a href="
-"\"%(rawdata_url)s\">Платформы Raw Data</a>."
-
-#: templates/rawdata/restricted.html:34
+#: templates/rawdata/restricted.html:31
 msgid "Find out more!"
 msgstr "Узнайте больше!"
 
@@ -995,87 +1001,29 @@ msgstr "Ещё не готово к скачиванию"
 msgid "Please refresh this page in a few seconds."
 msgstr "Пожалуйста, обновите эту страницу через несколько секунд."
 
-#: templates/rawdata/uploader.html:4 templates/rawdata/uploader.html.py:8
-msgid "AstroBin Raw Data Uploader"
-msgstr "Загрузчик AstroBin Raw Data"
-
-#: templates/rawdata/uploader.html:10
-msgid "A desktop client"
-msgstr "Клиент для рабочего стола"
-
-#: templates/rawdata/uploader.html:19
-msgid ""
-"The <strong>AstroBin Raw Data Uploader</strong>\n"
-"                is a desktop program compatible with Windows XP, Windows 7, "
-"and\n"
-"                reasonably recent Linux distributions."
+#: templates/subscription/_plan.html:11
+msgid "FREE!"
 msgstr ""
-"<strong>Загрузчик AstroBin Raw Data</strong>\n"
-"                это программа для вашего компьютера, совместимая с Windows "
-"XP, Windows 7, и\n"
-"                актуальных дистрибутивов Linux."
 
-#: templates/rawdata/uploader.html:24
-msgid ""
-"It's a program that works in the background\n"
-"                and quietly uploads your raw data files to AstroBin, "
-"finding\n"
-"                them in the root directory that you can specify in the\n"
-"                settings."
+#: templates/subscription/_plan.html:12
+msgid "That's right, this plan is free."
 msgstr ""
-"Эта программа, работающая в фоновом режиме\n"
-"                и незаметно закачивающая ваши исходники RAW в AstroBin, "
-"отыскивая\n"
-"                размещая их в корневой директории, указать которую вы "
-"можете\n"
-"                в настройках."
 
-#: templates/rawdata/uploader.html:30
-msgid ""
-"With <strong>AstroBin Raw Data Uploader</strong>\n"
-"                you don't need to upload your raw data files manually, so "
-"you\n"
-"                can just install it, set it up, and then forget about it! "
-"You\n"
-"                will just know that your data is being safely backed up on\n"
-"                <strong>AstroBin Raw Data</strong>."
-msgstr ""
-"С <strong>Загрузчиком AstroBin Raw Data</strong>\n"
-"                вам не надо вручную закачивать ваши исходники, так что\n"
-"                вы можете только установить его, настроить и «забыть» о  "
-"нём! Вы\n"
-"                можете быть уверенными, что ваши данные в безопасности на\n"
-"                <strong>AstroBin Raw Data</strong>."
-
-#: templates/rawdata/uploader.html:43
-msgid "Download for:"
-msgstr "Закачать:"
-
-#: templates/rawdata/uploader.html:62 templates/rawdata/uploader.html.py:67
-#: templates/rawdata/uploader.html:77
-msgid "Download for"
-msgstr "Закачать"
-
-#: templates/rawdata/uploader.html:63 templates/rawdata/uploader.html.py:68
-#: templates/rawdata/uploader.html:78
-msgid "Coming soon"
-msgstr "Скоро"
-
-#: templates/subscription/_plan.html:9
+#: templates/subscription/_plan.html:17
 msgid "month"
 msgstr "месяц"
 
-#: templates/subscription/_plan.html:11
+#: templates/subscription/_plan.html:19
 #, python-format
 msgid "That's only $ %(daily_price)s USD per day!"
 msgstr "Это всего %(daily_price)s $ в день!"
 
-#: templates/subscription/_plan.html:17
+#: templates/subscription/_plan.html:25
 #, python-format
 msgid "Free for %(free_days)s days."
 msgstr "Бесплатно в течение %(free_days)s дней."
 
-#: templates/subscription/_plan.html:21
+#: templates/subscription/_plan.html:29
 msgid "You can cancel at any time."
 msgstr "Вы можете отменить в любой момент."
 
@@ -1093,7 +1041,7 @@ msgstr ""
 
 #: templates/subscription/subscription_cancel.html:16
 #: templates/subscription/subscription_change_done.html:16
-#: templates/subscription/subscription_detail.html:67
+#: templates/subscription/subscription_detail.html:116
 #, python-format
 msgid "Return to the <a href=\"%(plans_url)s\">plans page</a>."
 msgstr "Вернитесь на <a href=\"%(plans_url)s\">страницу планов</a>."
@@ -1109,39 +1057,68 @@ msgid ""
 msgstr "Ваш запрос о смене подписки был успешно обработан."
 
 # Проект?
-#: templates/subscription/subscription_detail.html:4
-#: templates/subscription/subscription_detail.html:8
+#: templates/subscription/subscription_detail.html:6
+#: templates/subscription/subscription_detail.html:10
 msgid "Subscription plan"
 msgstr "План подписки"
 
 # Проект?
-#: templates/subscription/subscription_detail.html:22
+#: templates/subscription/subscription_detail.html:24
 msgid "Your subscription to this plan is cancelled."
 msgstr "Ваша подписка на этот план отменена."
 
 # Проект?
-#: templates/subscription/subscription_detail.html:28
+#: templates/subscription/subscription_detail.html:30
 msgid "You are subscribed to this plan."
 msgstr "Вы подписаны на этот план."
 
-#: templates/subscription/subscription_detail.html:29
+#: templates/subscription/subscription_detail.html:37
+msgid "Here you can deactivate your free Raw Data Atom subscription."
+msgstr ""
+
+#: templates/subscription/subscription_detail.html:41
+msgid "Deactivate"
+msgstr ""
+
+#: templates/subscription/subscription_detail.html:46
+#, fuzzy
+msgid "Go to your Raw Data Library."
+msgstr "Ваша библиотека RAW данных"
+
+#: templates/subscription/subscription_detail.html:50
 #, python-format
 msgid "You may <a href=\"%(cancel_url)s\">cancel via PayPal</a> if you wish."
 msgstr ""
 "Вы можете <a href=\"%(cancel_url)s\">отменить через PayPal</a> если желаете."
 
-#: templates/subscription/subscription_detail.html:33
-#: templates/subscription/subscription_detail.html:55
+#: templates/subscription/subscription_detail.html:56
+#: templates/subscription/subscription_detail.html:98
+msgid "Here you can activate your free Raw Data Atom subscription."
+msgstr ""
+
+#: templates/subscription/subscription_detail.html:60
+#: templates/subscription/subscription_detail.html:106
+msgid "Activate"
+msgstr ""
+
+#: templates/subscription/subscription_detail.html:64
+#: templates/subscription/subscription_detail.html:88
 msgid "Subscribe with a secure payment provided by PayPal:"
 msgstr "Подпишитесь с безопасной оплатой через PayPal:"
 
-#: templates/subscription/subscription_detail.html:45
+#: templates/subscription/subscription_detail.html:77
 msgid "You cannot switch to this plan."
 msgstr "Вы не можете переключить этот план."
 
-#: templates/subscription/subscription_detail.html:65
+#: templates/subscription/subscription_detail.html:101
+msgid ""
+"Careful! If you have already a paid Raw Data subscription, your available "
+"space will be reduced!"
+msgstr ""
+
+#: templates/subscription/subscription_detail.html:114
 #: templates/subscription/subscription_done.html:21
-#: templates/subscription/subscription_list.html:86
+#: templates/subscription/subscription_list.html:94
 msgid "Thank you for supporting AstroBin!"
 msgstr "Спасибо за поддержку AstroBin!"
 
@@ -1193,6 +1170,12 @@ msgstr "Управление"
 
 #: templates/subscription/subscription_list.html:54
 msgid ""
+"This plan is free! Choose it to share a small amount of data with other "
+"users."
+msgstr ""
+
+#: templates/subscription/subscription_list.html:62
+msgid ""
 " Choose this plan if you want to keep your expenses to a minimum, but still "
 "want the possibity to share your FIT and digital camera raw files with your "
 "friends. You can also participate to public data pools and contribute to the "
@@ -1205,7 +1188,7 @@ msgstr ""
 "создании самых лучших совместных изображений глубокого космоса, и вы всегда "
 "можете быть уверены, что вы поддерживаете AstroBin."
 
-#: templates/subscription/subscription_list.html:62
+#: templates/subscription/subscription_list.html:70
 msgid ""
 "Choose this plan if you have started out in the recent year or two, or you "
 "don't want to share and backup your calibration files. Enjoy a lot of room "
@@ -1215,7 +1198,7 @@ msgstr ""
 "делиться и иметь возможность восстанавливать свои калибровочные файлы. "
 "Довольствуйтесь большим пространством при удобной цене."
 
-#: templates/subscription/subscription_list.html:70
+#: templates/subscription/subscription_list.html:78
 msgid ""
 "Choose this plan if you have several years worth of data. You will probably "
 "have enough room for all your calibration files, and will enjoy the full "
@@ -1225,7 +1208,7 @@ msgstr ""
 "достаточным местом для всех ваших калибровочных файлов и насладитесь полным "
 "функционалом платформы."
 
-#: templates/subscription/subscription_list.html:78
+#: templates/subscription/subscription_list.html:86
 msgid ""
 "Choose this plan if you have a massive amount of raw data that you want to "
 "share and backup securely online."
@@ -1233,7 +1216,7 @@ msgstr ""
 "Выберите этот план, если у вас массивный объём RAW-данных, которым вы хотите "
 "делиться и иметь возможность восстановить онлайн."
 
-#: templates/subscription/subscription_list.html:89
+#: templates/subscription/subscription_list.html:97
 msgid ""
 "PS: are you interested in larger plans? <a href=\"/contact/\">Let us know!</"
 "a>"
@@ -1252,6 +1235,75 @@ msgstr "Ваш личный каталог обмена удалён."
 #: views/publicdatapools.py:99
 msgid "Your image has been added to the pool."
 msgstr "Ваше изображение добавлено в хранилище."
+
+#~ msgid ""
+#~ "Probably, you are here because you weve invited to contribute to a "
+#~ "<strong>Private Shared Folder</strong>, a collection of raw data that "
+#~ "users can contribute to. <strong>Private Shared Folders</strong> are part "
+#~ "of Astrobin's <a href=\"%(rawdata_url)s\">Raw Data Platform</a>."
+#~ msgstr ""
+#~ "Возможно, вы сюда попали потому, что были приглашены в <strong>Личный "
+#~ "Каталог Обмена</strong>, коллекцию RAW-данных общей для многих "
+#~ "участников. <strong>Личный Каталог Обмена</strong> это часть Astrbin-ской "
+#~ "<a href=\"%(rawdata_url)s\">Платформы Raw Data</a>."
+
+#~ msgid "AstroBin Raw Data Uploader"
+#~ msgstr "Загрузчик AstroBin Raw Data"
+
+#~ msgid "A desktop client"
+#~ msgstr "Клиент для рабочего стола"
+
+#~ msgid ""
+#~ "The <strong>AstroBin Raw Data Uploader</strong>\n"
+#~ "                is a desktop program compatible with Windows XP, Windows "
+#~ "7, and\n"
+#~ "                reasonably recent Linux distributions."
+#~ msgstr ""
+#~ "<strong>Загрузчик AstroBin Raw Data</strong>\n"
+#~ "                это программа для вашего компьютера, совместимая с "
+#~ "Windows XP, Windows 7, и\n"
+#~ "                актуальных дистрибутивов Linux."
+
+#~ msgid ""
+#~ "It's a program that works in the background\n"
+#~ "                and quietly uploads your raw data files to AstroBin, "
+#~ "finding\n"
+#~ "                them in the root directory that you can specify in the\n"
+#~ "                settings."
+#~ msgstr ""
+#~ "Эта программа, работающая в фоновом режиме\n"
+#~ "                и незаметно закачивающая ваши исходники RAW в AstroBin, "
+#~ "отыскивая\n"
+#~ "                размещая их в корневой директории, указать которую вы "
+#~ "можете\n"
+#~ "                в настройках."
+
+#~ msgid ""
+#~ "With <strong>AstroBin Raw Data Uploader</strong>\n"
+#~ "                you don't need to upload your raw data files manually, so "
+#~ "you\n"
+#~ "                can just install it, set it up, and then forget about it! "
+#~ "You\n"
+#~ "                will just know that your data is being safely backed up "
+#~ "on\n"
+#~ "                <strong>AstroBin Raw Data</strong>."
+#~ msgstr ""
+#~ "С <strong>Загрузчиком AstroBin Raw Data</strong>\n"
+#~ "                вам не надо вручную закачивать ваши исходники, так что\n"
+#~ "                вы можете только установить его, настроить и «забыть» о  "
+#~ "нём! Вы\n"
+#~ "                можете быть уверенными, что ваши данные в безопасности "
+#~ "на\n"
+#~ "                <strong>AstroBin Raw Data</strong>."
+
+#~ msgid "Download for:"
+#~ msgstr "Закачать:"
+
+#~ msgid "Download for"
+#~ msgstr "Закачать"
+
+#~ msgid "Coming soon"
+#~ msgstr "Скоро"
 
 #~ msgid "File type is not supported"
 #~ msgstr "Тип файла не поддерживается"
