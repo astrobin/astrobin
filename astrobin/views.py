@@ -1791,6 +1791,7 @@ def user_page(request, username):
                     (Q(subject_type = 100) | Q(subject_type = 200)) &
                     (Q(objects_in_field = None)) &
                     (Q(solar_system_main_subject = None)))
+                qs = [x for x in qs if x.solution.objects_in_field == None]
 
             elif active == 'GEAR':
                 qs = qs.filter(
