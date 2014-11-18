@@ -72,7 +72,7 @@
                         <li>
                             {% if real %}
                                 <a href="{% get_image_url image revision_label 'full' %}{% if mod %}{% query_string "mod=mod" "real" %}{% endif %}" title="{% blocktrans %}Fit to window{% endblocktrans %}">
-                                    <span class="icon-fullscreen"></span>
+                                    <span class="icon-resize-full"></span>
                                 </a>
                             {% else %}
                                 <a href="{% get_image_url image revision_label 'full' %}{% query_string "mod=mod,real=''" "" %}" title="{% blocktrans %}Full resolution{% endblocktrans %}">
