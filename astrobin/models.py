@@ -1776,7 +1776,7 @@ class Location(models.Model):
     )
 
     def __unicode__(self):
-        return ', '.join(filter(None, [
+        return u', '.join(filter(None, [
             self.name, self.city, self.state,
             unicode(get_country_name(self.country))
         ]))

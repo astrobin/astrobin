@@ -5,7 +5,7 @@ from django.utils.translation import ugettext_lazy as _
 
 local_path = lambda path: os.path.join(os.path.dirname(__file__), path)
 
-DEBUG = True
+DEBUG = False
 CACHE = not DEBUG
 TEMPLATE_DEBUG = DEBUG
 MAINTENANCE_MODE = False

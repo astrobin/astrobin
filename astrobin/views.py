@@ -774,7 +774,7 @@ def image_detail(request, id, r):
         (6, 'cc/cc-by-nd.png',    LICENSE_CHOICES[6][1]),
     )
 
-    locations = u'; '.join(['%s' % (x) for x in image.locations.all()])
+    locations = '; '.join([u'%s' % (x) for x in image.locations.all()])
 
 
     ######################
@@ -1791,6 +1791,7 @@ def user_page(request, username):
                     (Q(subject_type = 100) | Q(subject_type = 200)) &
                     (Q(objects_in_field = None)) &
                     (Q(solar_system_main_subject = None)))
+                qs = [x for x in qs if x.solution.objects_in_field == None]
 
             elif active == 'GEAR':
                 qs = qs.filter(

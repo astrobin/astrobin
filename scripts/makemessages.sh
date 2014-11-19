@@ -5,7 +5,7 @@ langs="ar ca cs de el en es fa fi fr hu it ja nl pl pt-BR pt ro ru sk sq sr tr z
 for app in $apps; do
     echo "Processing app: $app"
     for lang in $langs; do
-        (cd $app; django-admin.py makemessages -l $lang -e html,txt,py -i *zinnia*)
+        (cd $app; ../manage.py makemessages -l $lang -e html,txt,py -i *zinnia*)
     done
 done
 

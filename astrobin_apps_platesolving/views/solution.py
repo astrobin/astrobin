@@ -36,7 +36,10 @@ class SolveView(base.View):
 
             try:
                 thumb_url = target.thumbnail('regular')
-                url = thumb_url.split('://')[1]
+                if "://" in thumb_url:
+                    url = thumb_url.split('://')[1]
+                else:
+                    url = request.get_host() + thumb_url
                 url = 'http://' + urllib2.quote(url.encode('utf-8'))
                 headers = { 'User-Agent' : 'Mozilla/5.0' }
                 req = urllib2.Request(url, None, headers)
