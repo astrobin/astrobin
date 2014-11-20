@@ -130,6 +130,9 @@ class Solver(AbstractPlateSolvingBackend):
         args = {'apikey': apikey}
 
         result = self.send_request('login', args)
+        if result is None:
+            raise RequestError('no result after login')
+
         session = result.get('session')
 
         if not session:
