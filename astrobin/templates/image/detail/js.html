@@ -32,14 +32,27 @@ $(document).ready(function() {
         var thumbnail_url = '{{SHARE_PATH}}/{{image.id}}/{{revision_label}}/rawthumb/' + thumbnail_alias + '/get.jpg';
 
         /* Make link url */
+        var qs = '';
+        if (image_mode == 1)
+           qs += "{% query_string "mod='inverted'" "" %}";
+
         var sharing_url = '{{SHARE_PATH}}';
         if (image_size == 0) { /* regular */
-            sharing_url += "{% get_image_url image revision_label %}"
+            sharing_url += "{% get_image_url image revision_label %}";
         } else if (image_size == 1) { /* full */
-            sharing_url += "{% get_image_url image revision_label 'full' %}"
+            sharing_url += "{% get_image_url image revision_label 'full' %}";
+        } else if (image_size == 2) { /* real */
+            if(qs.length > 0)
+                qs += "&real=";
+            else
+                qs = "{% query_string "mod=mod,real=''" ""%}";
+
+            sharing_url += "{% get_image_url image revision_label 'full' %}";
         }
-        if (image_mode == 1)
-            sharing_url += "{% query_string "mod='inverted'" "" %}"
+
+        sharing_url += qs;
+        sharing_url = sharing_url.replace(/&amp;/g, '&');
+
 
         /* Make text */
         var text = "{{image.title|escape}}";
