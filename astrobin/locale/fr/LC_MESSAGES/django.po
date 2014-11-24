@@ -6,7 +6,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: AstroBin 1.0\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2014-11-14 08:13+0000\n"
+"POT-Creation-Date: 2014-11-24 13:42+0000\n"
 "PO-Revision-Date: 2014-06-01 17:42+0000\n"
 "Last-Translator: Tannhauser <tannhauser@sfr.fr>\n"
 "Language-Team: Français <LL@li.org>\n"
@@ -1067,7 +1067,7 @@ msgstr "Instruments ou objectifs"
 msgid "Guiding telescopes or lenses"
 msgstr "Instruments de guidage"
 
-#: forms.py:133 forms.py:227 models.py:757 models.py:1616 views.py:2282
+#: forms.py:133 forms.py:227 models.py:757 models.py:1616 views.py:2283
 msgid "Mounts"
 msgstr "Montures"
 
@@ -1079,19 +1079,19 @@ msgstr "Imageurs"
 msgid "Guiding cameras"
 msgstr "Caméras de guidage"
 
-#: forms.py:136 forms.py:229 models.py:760 models.py:1618 views.py:2283
+#: forms.py:136 forms.py:229 models.py:760 models.py:1618 views.py:2284
 msgid "Focal reducers"
 msgstr "Réducteurs/correcteurs de focale"
 
-#: forms.py:137 forms.py:230 models.py:761 models.py:1619 views.py:2284
+#: forms.py:137 forms.py:230 models.py:761 models.py:1619 views.py:2285
 msgid "Software"
 msgstr "Logiciels"
 
-#: forms.py:138 forms.py:231 models.py:762 models.py:1620 views.py:2285
+#: forms.py:138 forms.py:231 models.py:762 models.py:1620 views.py:2286
 msgid "Filters"
 msgstr "Filtres"
 
-#: forms.py:139 forms.py:232 models.py:763 models.py:1621 views.py:2286
+#: forms.py:139 forms.py:232 models.py:763 models.py:1621 views.py:2287
 msgid "Accessories"
 msgstr "Accessoires"
 
@@ -1124,11 +1124,11 @@ msgstr ""
 "en une seule fois, vous ne pourrez pas ajouter des sessions d'acquisition "
 "distinctes pour chaque filtre."
 
-#: forms.py:226 models.py:1615 views.py:2280
+#: forms.py:226 models.py:1615 views.py:2281
 msgid "Telescopes and lenses"
 msgstr "Instruments et objectifs"
 
-#: forms.py:228 models.py:1617 views.py:2281
+#: forms.py:228 models.py:1617 views.py:2282
 msgid "Cameras"
 msgstr "Imageurs"
 
@@ -1401,6 +1401,30 @@ msgstr "a ajouté de nouvelles données à une collaboration publique"
 #: locale_extras.py:16
 msgid "added a new processed image to public data pool"
 msgstr "a ajouté une nouvelle image traitée à une collaboration publique"
+
+#: locale_extras.py:17
+msgid "Remove from bookmarks"
+msgstr "Supprimer des favoris"
+
+#: locale_extras.py:18
+msgid "Bookmark"
+msgstr "Favori"
+
+#: locale_extras.py:19
+msgid "Unlike"
+msgstr "N'aime pas"
+
+#: locale_extras.py:20 templates/image/detail/like.html:10
+msgid "Like"
+msgstr "J'aime"
+
+#: locale_extras.py:21
+msgid "Stop following"
+msgstr "Supprimer l'abonnement"
+
+#: locale_extras.py:22
+msgid "Follow"
+msgstr "S'abonner"
 
 #: models.py:68
 msgid "None (All rights reserved)"
@@ -2573,7 +2597,7 @@ msgstr "Images"
 msgid "Integration"
 msgstr "Intégration"
 
-#: views.py:715 views.py:1841 views.py:1842 templates/search/search.html:307
+#: views.py:715 views.py:1842 views.py:1843 templates/search/search.html:307
 msgid "hours"
 msgstr "Heures"
 
@@ -2598,13 +2622,13 @@ msgid ""
 "Thanks for reporting the problem. All thumbnails will be generated again."
 msgstr "Merci de nous signaler ce problème. Les miniatures seront régénérées."
 
-#: views.py:1027 views.py:2726
+#: views.py:1027 views.py:2727
 msgid ""
 "Invalid image or no image provided. Allowed formats are JPG, PNG and GIF."
 msgstr ""
 "Image non valide ou manquante. Les formats autorisés sont JPG, PNG et GIF."
 
-#: views.py:1031 views.py:2737 templates/user/profile/flickr_import.html:10
+#: views.py:1031 views.py:2738 templates/user/profile/flickr_import.html:10
 msgid ""
 "AstroBin is currently in read-only mode, because of server maintenance. "
 "Please try again soon!"
@@ -2612,7 +2636,7 @@ msgstr ""
 "AstroBin est actuellement en mode \"lecture seule\", en raison d'une "
 "maintenance serveur. Merci de réessayer plus tard!"
 
-#: views.py:1054 views.py:2757
+#: views.py:1054 views.py:2758
 msgid ""
 "You uploaded an Indexed PNG file. AstroBin will need to lower the color "
 "count to 256 in order to work with it."
@@ -2620,9 +2644,9 @@ msgstr ""
 "Vous avez chargé une image PNG indexée. AstroBin doit réduire la palette à "
 "256 couleurs pour l'afficher."
 
-#: views.py:1320 views.py:1403 views.py:1487 views.py:1513 views.py:2182
-#: views.py:2195 views.py:2216 views.py:2253 views.py:2343 views.py:2405
-#: views.py:2616 views.py:3838 views.py:4008
+#: views.py:1320 views.py:1403 views.py:1487 views.py:1513 views.py:2183
+#: views.py:2196 views.py:2217 views.py:2254 views.py:2344 views.py:2406
+#: views.py:2617 views.py:3839 views.py:4009
 #: templates/user/profile/edit/gear.html:168
 #: templates/user/profile/edit/gear.html:243
 msgid "Form saved. Thank you!"
@@ -2668,36 +2692,36 @@ msgstr "Aucun objet spécifié"
 msgid "No acquisition details specified"
 msgstr "Aucun détail d'acquisition spécifié"
 
-#: views.py:1813 views.py:3215 templatetags/tags.py:77
+#: views.py:1814 views.py:3216 templatetags/tags.py:77
 msgid "minutes"
 msgstr "minutes"
 
-#: views.py:1814 views.py:3216 templatetags/tags.py:78
+#: views.py:1815 views.py:3217 templatetags/tags.py:78
 msgid "seconds ago"
 msgstr "il y a quelques secondes"
 
-#: views.py:1816 views.py:3218 templatetags/tags.py:79
+#: views.py:1817 views.py:3219 templatetags/tags.py:79
 #, python-format
 msgid "%s ago"
 msgstr "il y a %s"
 
-#: views.py:1839 templates/popover/user.html:19
+#: views.py:1840 templates/popover/user.html:19
 msgid "Member since"
 msgstr "Membre depuis"
 
-#: views.py:1840
+#: views.py:1841
 msgid "Last login"
 msgstr "Dernière connexion"
 
-#: views.py:1841
+#: views.py:1842
 msgid "Total integration time"
 msgstr "Temps d'intégration total"
 
-#: views.py:1842
+#: views.py:1843
 msgid "Average integration time"
 msgstr "Temps d'intégration moyen"
 
-#: views.py:2333
+#: views.py:2334
 msgid ""
 "There was one or more errors processing the form. You may need to scroll "
 "down to see them."
@@ -2705,19 +2729,19 @@ msgstr ""
 "Un ou plusieurs champs n'ont pas été renseignés. Il peut être nécessaire de "
 "faire défiler la page pour les vérifier tous."
 
-#: views.py:2780
+#: views.py:2781
 msgid "Image uploaded. Thank you!"
 msgstr "Image chargée. Merci!"
 
-#: views.py:3082 templatetags/tags.py:237
+#: views.py:3083 templatetags/tags.py:237
 msgid "no alias"
 msgstr "aucun alias"
 
-#: views.py:3798 views.py:3991
+#: views.py:3799 views.py:3992
 msgid "You can't merge a product to itself."
 msgstr "Vous ne pouvez pas fusionner un produit avec lui-même."
 
-#: views.py:4029
+#: views.py:4030
 msgid "Default front page section changed."
 msgstr "L"
 
@@ -4588,7 +4612,7 @@ msgstr ""
 "problème, donner votre avis ou apporter vos suggestions, ou tout simplement "
 "pour entrer en relation !"
 
-#: templates/contact_form/contact.html:17 templates/image/detail/js.html:90
+#: templates/contact_form/contact.html:17 templates/image/detail/js.html:103
 #: templates/image/detail/modals/send_to_datapool.html:35
 #: templates/image/detail/modals/send_to_sharedfolder.html:47
 #: templates/messages/compose.html:14 templates/messages/modal_compose.html:13
@@ -4883,7 +4907,7 @@ msgstr "Utilisateurs"
 msgid "just now"
 msgstr "à l'instant"
 
-#: templates/image/full.html:13 templates/image/full.html.py:86
+#: templates/image/full.html:13 templates/image/full.html.py:78
 msgid "Full resolution"
 msgstr "Pleine résolution"
 
@@ -4892,20 +4916,11 @@ msgstr "Pleine résolution"
 msgid "by <a href=\"%(the_url)s\">%(user)s</a>"
 msgstr "par <a href=\"%(the_url)s\">%(user)s</a>"
 
-#: templates/image/full.html:68 templates/image/detail/menu/view.html:8
-#: templates/user/profile-subnav.html:11
-#: templates/user/profile/commercial/products.html:76
-#: templates/user/profile/commercial/products.html:158
-#: templates/user/profile/commercial/products.html:479
-#: templates/user/profile/commercial/products.html:806
-msgid "View"
-msgstr "Affichage"
-
-#: templates/image/full.html:75 templates/image/detail/image_card.html:10
+#: templates/image/full.html:68 templates/image/detail/image_card.html:10
 msgid "Technical card"
 msgstr "Carte technique"
 
-#: templates/image/full.html:82
+#: templates/image/full.html:74
 msgid "Fit to window"
 msgstr "Ajuster à la fenêtre"
 
@@ -5019,7 +5034,7 @@ msgstr "Rayon du champ"
 msgid "Contains"
 msgstr "Contient"
 
-#: templates/image/detail/js.html:88 templates/user/profile-js.html:11
+#: templates/image/detail/js.html:101 templates/user/profile-js.html:11
 #, python-format
 msgid "Send %(username)s a message"
 msgstr "Envoyer un message à %(username)s"
@@ -5157,9 +5172,18 @@ msgstr "Voir le profil"
 msgid "Send private message"
 msgstr "Envoyer un message privé"
 
+#: templates/image/detail/menu/view.html:8
+#: templates/user/profile-subnav.html:11
+#: templates/user/profile/commercial/products.html:76
+#: templates/user/profile/commercial/products.html:158
+#: templates/user/profile/commercial/products.html:479
+#: templates/user/profile/commercial/products.html:806
+msgid "View"
+msgstr "Affichage"
+
 #: templates/image/detail/menu/view.html:16
 #: templates/image/detail/menu/view.html:70
-#: templates/image/detail/modals/share.html:48
+#: templates/image/detail/modals/share.html:49
 msgid "Inverted monochrome"
 msgstr "Négatif en noir et blanc"
 
@@ -5175,7 +5199,7 @@ msgstr "Annoté"
 
 #: templates/image/detail/menu/view.html:40
 #: templates/image/detail/menu/view.html:64
-#: templates/image/detail/modals/share.html:47
+#: templates/image/detail/modals/share.html:48
 msgid "Normal"
 msgstr "Normal"
 
@@ -5357,11 +5381,16 @@ msgstr "Normale"
 msgid "Full"
 msgstr "Full"
 
-#: templates/image/detail/modals/share.html:39
+#: templates/image/detail/modals/share.html:36
+#, fuzzy
+msgid "Real"
+msgstr "Vrai nom"
+
+#: templates/image/detail/modals/share.html:40
 msgid "Copy this"
 msgstr "Copier le lien"
 
-#: templates/image/detail/modals/share.html:45
+#: templates/image/detail/modals/share.html:46
 msgid "Image mode"
 msgstr "Type de l'image"
 
@@ -7226,24 +7255,6 @@ msgstr ""
 msgid "Edit your retailer information"
 msgstr "Modifier les informations du distributeur"
 
-#~ msgid "Remove from bookmarks"
-#~ msgstr "Supprimer des favoris"
-
-#~ msgid "Bookmark"
-#~ msgstr "Favori"
-
-#~ msgid "Unlike"
-#~ msgstr "N'aime pas"
-
-#~ msgid "Like"
-#~ msgstr "J'aime"
-
-#~ msgid "Stop following"
-#~ msgstr "Supprimer l'abonnement"
-
-#~ msgid "Follow"
-#~ msgstr "S'abonner"
-
 #~ msgid "or download the desktop client for easier uploads!"
 #~ msgstr "ou téléchargez le gestionnaire de publication!"
 
@@ -7255,8 +7266,8 @@ msgstr "Modifier les informations du distributeur"
 #~ "processed image to the public data pool: <strong>\"%(pool_name)s.\"</a>"
 #~ msgstr ""
 #~ "<a href=\"%(pool_url)s\"><strong>%(user_name)s</strong> a ajouté une "
-#~ "nouvelle image traitée à la collaboration publique: <strong>\"%(pool_name)"
-#~ "s.\"</a>"
+#~ "nouvelle image traitée à la collaboration publique: <strong>"
+#~ "\"%(pool_name)s.\"</a>"
 
 #~ msgid ""
 #~ "<a href=\"%(folder_url)s\">You are invited you to the private shared "
@@ -7872,13 +7883,13 @@ msgstr "Modifier les informations du distributeur"
 #~ "Votre image de %(messier_object)s est à présent affichée dans le Marathon "
 #~ "Messier. Félicitations!\n"
 #~ "\n"
-#~ "Voici votre image qui a été sélectionnée: http://astrobin.com%(image_url)"
-#~ "s\n"
+#~ "Voici votre image qui a été sélectionnée: http://astrobin.com"
+#~ "%(image_url)s\n"
 #~ "\n"
 #~ "Le Marathon Messier est une liste d'objets Messier illustrée par des "
 #~ "images d'AstroBin, chacune nominée par les utilisateurs..\n"
-#~ "Votre image est désormais la plus nominée pour l'objet %(messier_object)"
-#~ "s.\n"
+#~ "Votre image est désormais la plus nominée pour l'objet "
+#~ "%(messier_object)s.\n"
 #~ "\n"
 #~ "Vous pouvez visiter le Marathon Messier ici: http://astrobin.com/explore/"
 #~ "messier/"
