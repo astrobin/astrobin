@@ -63,33 +63,24 @@
                         </li>
                     </ul>
                     <ul class="nav pull-right">
-                        <li class="dropdown">
-                            <a href="#" class="dropdown-toggle" data-toggle="dropdown">
-                                {% trans "View" %}
-                                <span class="caret"></span>
+                        {% with request.GET.mod as mod %}
+                        <li>
+                            <a href="{% get_image_url image revision_label %}{% if mod %}{% query_string "mod=mod" "" %}{% endif %}" title="{% blocktrans %}Technical card{% endblocktrans %}">
+                                <span class="icon-list-alt"><span>
                             </a>
-                            {% with request.GET.mod as mod %}
-                                <ul class="dropdown-menu">
-                                    <li>
-                                        <a href="{% get_image_url image revision_label %}{% if mod %}{% query_string "mod=mod" "" %}{% endif %}">
-                                            {% blocktrans %}Technical card{% endblocktrans %}
-                                        </a>
-                                    </li>
-
-                                    <li>
-                                        {% if real %}
-                                            <a href="{% get_image_url image revision_label 'full' %}{% if mod %}{% query_string "mod=mod" "real" %}{% endif %}">
-                                                {% blocktrans %}Fit to window{% endblocktrans %}
-                                            </a>
-                                        {% else %}
-                                                <a href="{% get_image_url image revision_label 'full' %}{% query_string "mod=mod,real=''" "" %}">
-                                                {% blocktrans %}Full resolution{% endblocktrans %}
-                                            </a>
-                                        {% endif %}
-                                    </li>
-                                </ul>
-                            {% endwith %}
                         </li>
+                        <li>
+                            {% if real %}
+                                <a href="{% get_image_url image revision_label 'full' %}{% if mod %}{% query_string "mod=mod" "real" %}{% endif %}" title="{% blocktrans %}Fit to window{% endblocktrans %}">
+                                    <span class="icon-resize-full"></span>
+                                </a>
+                            {% else %}
+                                <a href="{% get_image_url image revision_label 'full' %}{% query_string "mod=mod,real=''" "" %}" title="{% blocktrans %}Full resolution{% endblocktrans %}">
+                                    <span class="icon-fullscreen"></span>
+                                </a>
+                            {% endif %}
+                        </li>
+                        {% endwith %}
                     </ul>
                 </div>
             </div>
