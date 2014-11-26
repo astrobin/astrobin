@@ -2,7 +2,7 @@ import os
 
 from django.conf import settings
 
-from PIL import Image, ImageOps, ImageDraw, ImageEnhance, ImageFont
+from PIL import Image, ImageOps, ImageDraw, ImageEnhance, ImageFont, ImageFilter
 
 
 def rounded_corners(image, rounded = False, **kwargs):
@@ -36,7 +36,9 @@ def watermark(image, watermark = False, **kwargs):
 
         if text:
             watermark_image = Image.new('RGBA', image.size)
+            watermark_image_shadow = Image.new('RGBA', image.size)
             draw = ImageDraw.Draw(watermark_image, 'RGBA')
+            draw_shadow = ImageDraw.Draw(watermark_image_shadow, 'RGBA')
             fontsize = 1
             ttf = os.path.join(settings.STATIC_ROOT, 'fonts/arial.ttf')
 
@@ -74,13 +76,27 @@ def watermark(image, watermark = False, **kwargs):
                 pos = (image.size[0] * .98 - font.getsize(text)[0],
                        image.size[1] * .98 - font.getsize(text)[1])
 
+            # Draw shadow text
+            shadowcolor = 0x000000
+            x = pos[0] + 1
+            y = pos[1]
+            draw_shadow.text((x,y), text, font=font, fill=(255,0,0,255))
+            watermark_image_shadow = watermark_image_shadow.filter(ImageFilter.BLUR)
+
+            # Draw text
             draw.text(pos, text, font=font)
+
+            # Opacity
             mask = watermark_image.convert('L').point(lambda x: min(x, opacity))
             watermark_image.putalpha(mask)
+
+            mask_shadow = watermark_image_shadow.convert('L').point(lambda x: min(x, opacity))
+            watermark_image_shadow.putalpha(mask_shadow) 
+
+            image.paste(watermark_image_shadow, None, watermark_image_shadow)
             image.paste(watermark_image, None, watermark_image)
 
     return image
-
 
 # RGB Hitogram
 # This script will create a histogram image based on the RGB content of
