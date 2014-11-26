@@ -1135,15 +1135,21 @@ class Image(HasSolutionMixin, models.Model):
                 field.storage.delete(filename2)
                 log.debug("Image %d: deleted remote file %s" % (self.id, filename2))
 
-            # Then we delete the local file cache
-            field.storage.local_storage.delete(local_filename)
-            log.debug("Image %d: deleted local file %s" % (self.id, local_filename))
+                # Then delete local static storage image
+                filenameLocal = os.path.join(field.storage.location, local_filename)
+                field.storage.delete(filenameLocal)
+                log.debug("Image %d: deleted remote file %s" % (self.id, filenameLocal))
 
-            try:
-                os.remove(os.path.join(field.storage.local_storage.location, local_filename))
-                log.debug("Image %d: removed local cache %s" % (self.id, local_filename))
-            except OSError:
-                log.debug("Image %d: locally cached file not found." % self.id)
+            # Then we delete the local file cache
+            if settings.AWS_S3_ENABLED:
+                field.storage.local_storage.delete(local_filename)
+                log.debug("Image %d: deleted local file %s" % (self.id, local_filename))
+
+                try:
+                    os.remove(os.path.join(field.storage.local_storage.location, local_filename))
+                    log.debug("Image %d: removed local cache %s" % (self.id, local_filename))
+                except OSError:
+                    log.debug("Image %d: locally cached file not found." % self.id)
 
         # Then we remove the database entries
         try:
