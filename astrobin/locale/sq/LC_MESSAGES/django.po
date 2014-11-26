@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: AstroBin 1.4\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2014-11-14 08:15+0000\n"
+"POT-Creation-Date: 2014-11-24 13:48+0000\n"
 "PO-Revision-Date: 2014-02-17 07:03+0000\n"
 "Last-Translator: tedlin <aywolin@gmail.com>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -1069,7 +1069,7 @@ msgstr "Teleskope fotografik ose lentet"
 msgid "Guiding telescopes or lenses"
 msgstr "Teleskopi ndjekes ose lentet"
 
-#: forms.py:133 forms.py:227 models.py:757 models.py:1616 views.py:2282
+#: forms.py:133 forms.py:227 models.py:757 models.py:1616 views.py:2283
 msgid "Mounts"
 msgstr "Montatura"
 
@@ -1081,19 +1081,19 @@ msgstr "Kamera fotografike"
 msgid "Guiding cameras"
 msgstr "Kamera per Ndjekje"
 
-#: forms.py:136 forms.py:229 models.py:760 models.py:1618 views.py:2283
+#: forms.py:136 forms.py:229 models.py:760 models.py:1618 views.py:2284
 msgid "Focal reducers"
 msgstr "Reduktori fokales"
 
-#: forms.py:137 forms.py:230 models.py:761 models.py:1619 views.py:2284
+#: forms.py:137 forms.py:230 models.py:761 models.py:1619 views.py:2285
 msgid "Software"
 msgstr "Programi"
 
-#: forms.py:138 forms.py:231 models.py:762 models.py:1620 views.py:2285
+#: forms.py:138 forms.py:231 models.py:762 models.py:1620 views.py:2286
 msgid "Filters"
 msgstr "Filtra"
 
-#: forms.py:139 forms.py:232 models.py:763 models.py:1621 views.py:2286
+#: forms.py:139 forms.py:232 models.py:763 models.py:1621 views.py:2287
 msgid "Accessories"
 msgstr "Paisje"
 
@@ -1126,11 +1126,11 @@ msgstr ""
 "LRGB ne nje kuti,nuk do mundni ti ndani filmimet e bera ne menyren qe i keni "
 "bere."
 
-#: forms.py:226 models.py:1615 views.py:2280
+#: forms.py:226 models.py:1615 views.py:2281
 msgid "Telescopes and lenses"
 msgstr "Teleskope dhe lente"
 
-#: forms.py:228 models.py:1617 views.py:2281
+#: forms.py:228 models.py:1617 views.py:2282
 msgid "Cameras"
 msgstr "Kamerat"
 
@@ -1402,6 +1402,31 @@ msgstr ""
 #: locale_extras.py:16
 msgid "added a new processed image to public data pool"
 msgstr ""
+
+#: locale_extras.py:17
+#, fuzzy
+msgid "Remove from bookmarks"
+msgstr "Shikoni astrofotot e juaja"
+
+#: locale_extras.py:18
+msgid "Bookmark"
+msgstr ""
+
+#: locale_extras.py:19
+msgid "Unlike"
+msgstr ""
+
+#: locale_extras.py:20 templates/image/detail/like.html:10
+msgid "Like"
+msgstr ""
+
+#: locale_extras.py:21
+msgid "Stop following"
+msgstr "Ndalo ndjekjen"
+
+#: locale_extras.py:22
+msgid "Follow"
+msgstr "Ndiq"
 
 #: models.py:68
 msgid "None (All rights reserved)"
@@ -2561,7 +2586,7 @@ msgstr "Fotot"
 msgid "Integration"
 msgstr "Integrimi"
 
-#: views.py:715 views.py:1841 views.py:1842 templates/search/search.html:307
+#: views.py:715 views.py:1842 views.py:1843 templates/search/search.html:307
 msgid "hours"
 msgstr "oret"
 
@@ -2586,26 +2611,26 @@ msgid ""
 "Thanks for reporting the problem. All thumbnails will be generated again."
 msgstr ""
 
-#: views.py:1027 views.py:2726
+#: views.py:1027 views.py:2727
 msgid ""
 "Invalid image or no image provided. Allowed formats are JPG, PNG and GIF."
 msgstr "Fotografi jo e vlefshme. Formatet e lejuara jane JPG, PNG dhe GIF."
 
-#: views.py:1031 views.py:2737 templates/user/profile/flickr_import.html:10
+#: views.py:1031 views.py:2738 templates/user/profile/flickr_import.html:10
 msgid ""
 "AstroBin is currently in read-only mode, because of server maintenance. "
 "Please try again soon!"
 msgstr ""
 
-#: views.py:1054 views.py:2757
+#: views.py:1054 views.py:2758
 msgid ""
 "You uploaded an Indexed PNG file. AstroBin will need to lower the color "
 "count to 256 in order to work with it."
 msgstr ""
 
-#: views.py:1320 views.py:1403 views.py:1487 views.py:1513 views.py:2182
-#: views.py:2195 views.py:2216 views.py:2253 views.py:2343 views.py:2405
-#: views.py:2616 views.py:3838 views.py:4008
+#: views.py:1320 views.py:1403 views.py:1487 views.py:1513 views.py:2183
+#: views.py:2196 views.py:2217 views.py:2254 views.py:2344 views.py:2406
+#: views.py:2617 views.py:3839 views.py:4009
 #: templates/user/profile/edit/gear.html:168
 #: templates/user/profile/edit/gear.html:243
 msgid "Form saved. Thank you!"
@@ -2654,56 +2679,56 @@ msgstr "Asnje subjekt i specifikuar"
 msgid "No acquisition details specified"
 msgstr "Asnje detaj filmimi i specifikuar"
 
-#: views.py:1813 views.py:3215 templatetags/tags.py:77
+#: views.py:1814 views.py:3216 templatetags/tags.py:77
 msgid "minutes"
 msgstr "minuta"
 
-#: views.py:1814 views.py:3216 templatetags/tags.py:78
+#: views.py:1815 views.py:3217 templatetags/tags.py:78
 msgid "seconds ago"
 msgstr "sekonda më parë"
 
-#: views.py:1816 views.py:3218 templatetags/tags.py:79
+#: views.py:1817 views.py:3219 templatetags/tags.py:79
 #, python-format
 msgid "%s ago"
 msgstr "%s më parë"
 
-#: views.py:1839 templates/popover/user.html:19
+#: views.py:1840 templates/popover/user.html:19
 msgid "Member since"
 msgstr "Anëtar që"
 
-#: views.py:1840
+#: views.py:1841
 msgid "Last login"
 msgstr "Hyrja e fundit"
 
-#: views.py:1841
+#: views.py:1842
 msgid "Total integration time"
 msgstr "Koha totale e integrimit fotografik"
 
-#: views.py:1842
+#: views.py:1843
 msgid "Average integration time"
 msgstr "Koha mesatare e integrimit fotografik"
 
-#: views.py:2333
+#: views.py:2334
 msgid ""
 "There was one or more errors processing the form. You may need to scroll "
 "down to see them."
 msgstr ""
 
-#: views.py:2780
+#: views.py:2781
 #, fuzzy
 msgid "Image uploaded. Thank you!"
 msgstr "Forma u shpetua. Faleminderit!"
 
-#: views.py:3082 templatetags/tags.py:237
+#: views.py:3083 templatetags/tags.py:237
 #, fuzzy
 msgid "no alias"
 msgstr "Somali"
 
-#: views.py:3798 views.py:3991
+#: views.py:3799 views.py:3992
 msgid "You can't merge a product to itself."
 msgstr ""
 
-#: views.py:4029
+#: views.py:4030
 msgid "Default front page section changed."
 msgstr ""
 
@@ -4515,7 +4540,7 @@ msgid ""
 "give some feedback or suggestions, or simply want to get in touch!"
 msgstr ""
 
-#: templates/contact_form/contact.html:17 templates/image/detail/js.html:90
+#: templates/contact_form/contact.html:17 templates/image/detail/js.html:103
 #: templates/image/detail/modals/send_to_datapool.html:35
 #: templates/image/detail/modals/send_to_sharedfolder.html:47
 #: templates/messages/compose.html:14 templates/messages/modal_compose.html:13
@@ -4759,7 +4784,7 @@ msgstr ""
 msgid "just now"
 msgstr "menjehere"
 
-#: templates/image/full.html:13 templates/image/full.html.py:86
+#: templates/image/full.html:13 templates/image/full.html.py:78
 #, fuzzy
 msgid "Full resolution"
 msgstr "Shiko me risolucion te plote"
@@ -4769,20 +4794,11 @@ msgstr "Shiko me risolucion te plote"
 msgid "by <a href=\"%(the_url)s\">%(user)s</a>"
 msgstr "nga <a href=\"%(the_url)s\">%(user)s</a>"
 
-#: templates/image/full.html:68 templates/image/detail/menu/view.html:8
-#: templates/user/profile-subnav.html:11
-#: templates/user/profile/commercial/products.html:76
-#: templates/user/profile/commercial/products.html:158
-#: templates/user/profile/commercial/products.html:479
-#: templates/user/profile/commercial/products.html:806
-msgid "View"
-msgstr "Shiko"
-
-#: templates/image/full.html:75 templates/image/detail/image_card.html:10
+#: templates/image/full.html:68 templates/image/detail/image_card.html:10
 msgid "Technical card"
 msgstr "Skeda teknike"
 
-#: templates/image/full.html:82
+#: templates/image/full.html:74
 #, fuzzy
 msgid "Fit to window"
 msgstr "Pershtat fotot sipas gjeresise se dritares"
@@ -4897,7 +4913,7 @@ msgstr "Gjerësia fushës"
 msgid "Contains"
 msgstr "Permban"
 
-#: templates/image/detail/js.html:88 templates/user/profile-js.html:11
+#: templates/image/detail/js.html:101 templates/user/profile-js.html:11
 #, python-format
 msgid "Send %(username)s a message"
 msgstr "Dergo nje mesazh tek %(username)s"
@@ -5037,9 +5053,18 @@ msgstr "Shiko profilin"
 msgid "Send private message"
 msgstr "Dergo mesazh privat"
 
+#: templates/image/detail/menu/view.html:8
+#: templates/user/profile-subnav.html:11
+#: templates/user/profile/commercial/products.html:76
+#: templates/user/profile/commercial/products.html:158
+#: templates/user/profile/commercial/products.html:479
+#: templates/user/profile/commercial/products.html:806
+msgid "View"
+msgstr "Shiko"
+
 #: templates/image/detail/menu/view.html:16
 #: templates/image/detail/menu/view.html:70
-#: templates/image/detail/modals/share.html:48
+#: templates/image/detail/modals/share.html:49
 msgid "Inverted monochrome"
 msgstr "Ktheje ne bardh e zi"
 
@@ -5056,7 +5081,7 @@ msgstr "E komentuar"
 
 #: templates/image/detail/menu/view.html:40
 #: templates/image/detail/menu/view.html:64
-#: templates/image/detail/modals/share.html:47
+#: templates/image/detail/modals/share.html:48
 msgid "Normal"
 msgstr "Normal"
 
@@ -5222,12 +5247,16 @@ msgstr "Normale"
 msgid "Full"
 msgstr ""
 
-#: templates/image/detail/modals/share.html:39
+#: templates/image/detail/modals/share.html:36
+msgid "Real"
+msgstr ""
+
+#: templates/image/detail/modals/share.html:40
 #, fuzzy
 msgid "Copy this"
 msgstr "Kopjo"
 
-#: templates/image/detail/modals/share.html:45
+#: templates/image/detail/modals/share.html:46
 #, fuzzy
 msgid "Image mode"
 msgstr "Fotografi te ngarkuara"
@@ -7035,16 +7064,6 @@ msgid "Edit your retailer information"
 msgstr "Modifko informacionet baze personale"
 
 #, fuzzy
-#~ msgid "Remove from bookmarks"
-#~ msgstr "Shikoni astrofotot e juaja"
-
-#~ msgid "Stop following"
-#~ msgstr "Ndalo ndjekjen"
-
-#~ msgid "Follow"
-#~ msgstr "Ndiq"
-
-#, fuzzy
 #~ msgid ""
 #~ "<a href=\"%(pool_url)s\"><strong>%(user_name)s</strong> has added a new "
 #~ "processed image to the public data pool: <strong>\"%(pool_name)s.\"</a>"
@@ -7056,8 +7075,8 @@ msgstr "Modifko informacionet baze personale"
 #~ "<a href=\"%(folder_url)s\">You are invited you to the private shared "
 #~ "folder: <strong>\"%(folder_name)s.\"</a>"
 #~ msgstr ""
-#~ "<a href=\"%(object_url)s\">Juve keni ndaluar se ndjekuri<strong>%(object)"
-#~ "s</strong>.</a>"
+#~ "<a href=\"%(object_url)s\">Juve keni ndaluar se ndjekuri<strong>"
+#~ "%(object)s</strong>.</a>"
 
 #~ msgid "Step 2 of 5: watermark"
 #~ msgstr "Hapi 2/5: watermark"
@@ -7745,8 +7764,8 @@ msgstr "Modifko informacionet baze personale"
 #~ "You should insert data for the location you have created: <strong>"
 #~ "%(location)s</strong>"
 #~ msgstr ""
-#~ "Ju duhet te shtoni te dhenat e lokacionit qe krijuat: <strong>%(location)"
-#~ "s</strong>"
+#~ "Ju duhet te shtoni te dhenat e lokacionit qe krijuat: <strong>"
+#~ "%(location)s</strong>"
 
 #~ msgid "You have no requests."
 #~ msgstr "Juve skeni asnje kerkese."

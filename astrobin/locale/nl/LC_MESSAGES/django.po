@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: AstroBin 1.4\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2014-11-14 08:13+0000\n"
+"POT-Creation-Date: 2014-11-24 13:44+0000\n"
 "PO-Revision-Date: 2014-02-03 16:36+0000\n"
 "Last-Translator: Koen_Dierckens <koen.dierckens@pandora.be>\n"
 "Language-Team: Dutch <LL@li.org>\n"
@@ -1065,7 +1065,7 @@ msgstr "Telescopen en/of lenzen die je gebruikt om te fotograferen"
 msgid "Guiding telescopes or lenses"
 msgstr "Volgtelescopen en/of lenzen"
 
-#: forms.py:133 forms.py:227 models.py:757 models.py:1616 views.py:2282
+#: forms.py:133 forms.py:227 models.py:757 models.py:1616 views.py:2283
 msgid "Mounts"
 msgstr "Monteringen"
 
@@ -1077,19 +1077,19 @@ msgstr "Hoofdcamera's"
 msgid "Guiding cameras"
 msgstr "Volgcamera's"
 
-#: forms.py:136 forms.py:229 models.py:760 models.py:1618 views.py:2283
+#: forms.py:136 forms.py:229 models.py:760 models.py:1618 views.py:2284
 msgid "Focal reducers"
 msgstr "Focal Reducers"
 
-#: forms.py:137 forms.py:230 models.py:761 models.py:1619 views.py:2284
+#: forms.py:137 forms.py:230 models.py:761 models.py:1619 views.py:2285
 msgid "Software"
 msgstr "Software"
 
-#: forms.py:138 forms.py:231 models.py:762 models.py:1620 views.py:2285
+#: forms.py:138 forms.py:231 models.py:762 models.py:1620 views.py:2286
 msgid "Filters"
 msgstr "Filters"
 
-#: forms.py:139 forms.py:232 models.py:763 models.py:1621 views.py:2286
+#: forms.py:139 forms.py:232 models.py:763 models.py:1621 views.py:2287
 msgid "Accessories"
 msgstr "Accessoires"
 
@@ -1121,11 +1121,11 @@ msgstr ""
 "Tip: voer je filters afzonderlijk in! Als je bv. \"LRGB\" in één keer "
 "invoert, dan kan je geen sessies van de afzonderlijke filters toevoegen."
 
-#: forms.py:226 models.py:1615 views.py:2280
+#: forms.py:226 models.py:1615 views.py:2281
 msgid "Telescopes and lenses"
 msgstr "Telescopen en lenzen"
 
-#: forms.py:228 models.py:1617 views.py:2281
+#: forms.py:228 models.py:1617 views.py:2282
 msgid "Cameras"
 msgstr "Camera's"
 
@@ -1398,6 +1398,30 @@ msgstr "voegde nieuwe data toe aan een publieke gegevensbank"
 #: locale_extras.py:16
 msgid "added a new processed image to public data pool"
 msgstr "voegde een nieuwe bewerkte foto toe aan een publieke gegevensbank"
+
+#: locale_extras.py:17
+msgid "Remove from bookmarks"
+msgstr "Verwijder van favorieten"
+
+#: locale_extras.py:18
+msgid "Bookmark"
+msgstr "Bladwijzer"
+
+#: locale_extras.py:19
+msgid "Unlike"
+msgstr "Niet leuk vinden"
+
+#: locale_extras.py:20 templates/image/detail/like.html:10
+msgid "Like"
+msgstr "Leuk vinden"
+
+#: locale_extras.py:21
+msgid "Stop following"
+msgstr "Stop het volgen"
+
+#: locale_extras.py:22
+msgid "Follow"
+msgstr "Volgen"
 
 #: models.py:68
 msgid "None (All rights reserved)"
@@ -2568,7 +2592,7 @@ msgstr "Sub-beelden"
 msgid "Integration"
 msgstr "Integratie"
 
-#: views.py:715 views.py:1841 views.py:1842 templates/search/search.html:307
+#: views.py:715 views.py:1842 views.py:1843 templates/search/search.html:307
 msgid "hours"
 msgstr "uren"
 
@@ -2595,14 +2619,14 @@ msgstr ""
 "Bedankt om het probleem te rapporteren. Alle voorbeeldfoto's zullen opnieuw "
 "worden gegenereerd."
 
-#: views.py:1027 views.py:2726
+#: views.py:1027 views.py:2727
 msgid ""
 "Invalid image or no image provided. Allowed formats are JPG, PNG and GIF."
 msgstr ""
 "Ongeldige foto of geen beeld aangeduid. Ondersteunde formaten zijn JPG, PNG "
 "en GIF."
 
-#: views.py:1031 views.py:2737 templates/user/profile/flickr_import.html:10
+#: views.py:1031 views.py:2738 templates/user/profile/flickr_import.html:10
 msgid ""
 "AstroBin is currently in read-only mode, because of server maintenance. "
 "Please try again soon!"
@@ -2610,7 +2634,7 @@ msgstr ""
 "AstroBin is momenteel in alleen-lezen modus (read-only) vanwege onderhoud "
 "aan de server. Gelieve straks opnieuw te proberen!"
 
-#: views.py:1054 views.py:2757
+#: views.py:1054 views.py:2758
 msgid ""
 "You uploaded an Indexed PNG file. AstroBin will need to lower the color "
 "count to 256 in order to work with it."
@@ -2618,9 +2642,9 @@ msgstr ""
 "Je hebt een geindexeerd PNG bestand upgeload. AstroBin moet het aantal "
 "kleuren terugbrengen naar 256 om dit bestand te kunnen gebruiken."
 
-#: views.py:1320 views.py:1403 views.py:1487 views.py:1513 views.py:2182
-#: views.py:2195 views.py:2216 views.py:2253 views.py:2343 views.py:2405
-#: views.py:2616 views.py:3838 views.py:4008
+#: views.py:1320 views.py:1403 views.py:1487 views.py:1513 views.py:2183
+#: views.py:2196 views.py:2217 views.py:2254 views.py:2344 views.py:2406
+#: views.py:2617 views.py:3839 views.py:4009
 #: templates/user/profile/edit/gear.html:168
 #: templates/user/profile/edit/gear.html:243
 msgid "Form saved. Thank you!"
@@ -2667,36 +2691,36 @@ msgid "No acquisition details specified"
 msgstr ""
 "Geen details ingevoerd omtrent de manier van het verkrijgen van het beeld"
 
-#: views.py:1813 views.py:3215 templatetags/tags.py:77
+#: views.py:1814 views.py:3216 templatetags/tags.py:77
 msgid "minutes"
 msgstr "minuten"
 
-#: views.py:1814 views.py:3216 templatetags/tags.py:78
+#: views.py:1815 views.py:3217 templatetags/tags.py:78
 msgid "seconds ago"
 msgstr "seconden geleden"
 
-#: views.py:1816 views.py:3218 templatetags/tags.py:79
+#: views.py:1817 views.py:3219 templatetags/tags.py:79
 #, python-format
 msgid "%s ago"
 msgstr "%s geleden"
 
-#: views.py:1839 templates/popover/user.html:19
+#: views.py:1840 templates/popover/user.html:19
 msgid "Member since"
 msgstr "Lid sinds"
 
-#: views.py:1840
+#: views.py:1841
 msgid "Last login"
 msgstr "Laatste login"
 
-#: views.py:1841
+#: views.py:1842
 msgid "Total integration time"
 msgstr "Totale integratietijd"
 
-#: views.py:1842
+#: views.py:1843
 msgid "Average integration time"
 msgstr "Gemiddelde integratietijd"
 
-#: views.py:2333
+#: views.py:2334
 msgid ""
 "There was one or more errors processing the form. You may need to scroll "
 "down to see them."
@@ -2704,19 +2728,19 @@ msgstr ""
 "Er trad minstens één fout op bij het verwerken van het formulier. Het is "
 "mogelijk dat je naar beneden moet scrollen om ze te zien."
 
-#: views.py:2780
+#: views.py:2781
 msgid "Image uploaded. Thank you!"
 msgstr "De foto is opgeslagen. Hartelijk dank!"
 
-#: views.py:3082 templatetags/tags.py:237
+#: views.py:3083 templatetags/tags.py:237
 msgid "no alias"
 msgstr "geen alias"
 
-#: views.py:3798 views.py:3991
+#: views.py:3799 views.py:3992
 msgid "You can't merge a product to itself."
 msgstr "Je kan een produkt niet met zichzelf samenvoegen."
 
-#: views.py:4029
+#: views.py:4030
 msgid "Default front page section changed."
 msgstr "Het standaard beginpagina deel is gewijzigd."
 
@@ -4594,7 +4618,7 @@ msgstr ""
 "probleem, voor feedback of suggesties, of gewoon om te vertellen wat je "
 "kwijt wil!"
 
-#: templates/contact_form/contact.html:17 templates/image/detail/js.html:90
+#: templates/contact_form/contact.html:17 templates/image/detail/js.html:103
 #: templates/image/detail/modals/send_to_datapool.html:35
 #: templates/image/detail/modals/send_to_sharedfolder.html:47
 #: templates/messages/compose.html:14 templates/messages/modal_compose.html:13
@@ -4885,7 +4909,7 @@ msgstr "Eigenaars"
 msgid "just now"
 msgstr "momenteel"
 
-#: templates/image/full.html:13 templates/image/full.html.py:86
+#: templates/image/full.html:13 templates/image/full.html.py:78
 msgid "Full resolution"
 msgstr "Originele resolutie"
 
@@ -4894,20 +4918,11 @@ msgstr "Originele resolutie"
 msgid "by <a href=\"%(the_url)s\">%(user)s</a>"
 msgstr "door <a href=\"%(the_url)s\">%(user)s</a>"
 
-#: templates/image/full.html:68 templates/image/detail/menu/view.html:8
-#: templates/user/profile-subnav.html:11
-#: templates/user/profile/commercial/products.html:76
-#: templates/user/profile/commercial/products.html:158
-#: templates/user/profile/commercial/products.html:479
-#: templates/user/profile/commercial/products.html:806
-msgid "View"
-msgstr "Bekijken"
-
-#: templates/image/full.html:75 templates/image/detail/image_card.html:10
+#: templates/image/full.html:68 templates/image/detail/image_card.html:10
 msgid "Technical card"
 msgstr "Technische fiche"
 
-#: templates/image/full.html:82
+#: templates/image/full.html:74
 msgid "Fit to window"
 msgstr "Pas aan het venster aan"
 
@@ -5020,7 +5035,7 @@ msgstr "Breedte beeldveld"
 msgid "Contains"
 msgstr "Bevat"
 
-#: templates/image/detail/js.html:88 templates/user/profile-js.html:11
+#: templates/image/detail/js.html:101 templates/user/profile-js.html:11
 #, python-format
 msgid "Send %(username)s a message"
 msgstr "Zend %(username)s een bericht"
@@ -5159,9 +5174,18 @@ msgstr "Bekijk profiel"
 msgid "Send private message"
 msgstr "Stuur privébericht"
 
+#: templates/image/detail/menu/view.html:8
+#: templates/user/profile-subnav.html:11
+#: templates/user/profile/commercial/products.html:76
+#: templates/user/profile/commercial/products.html:158
+#: templates/user/profile/commercial/products.html:479
+#: templates/user/profile/commercial/products.html:806
+msgid "View"
+msgstr "Bekijken"
+
 #: templates/image/detail/menu/view.html:16
 #: templates/image/detail/menu/view.html:70
-#: templates/image/detail/modals/share.html:48
+#: templates/image/detail/modals/share.html:49
 msgid "Inverted monochrome"
 msgstr "Negatief zwart-wit"
 
@@ -5177,7 +5201,7 @@ msgstr "Geannoteerd"
 
 #: templates/image/detail/menu/view.html:40
 #: templates/image/detail/menu/view.html:64
-#: templates/image/detail/modals/share.html:47
+#: templates/image/detail/modals/share.html:48
 msgid "Normal"
 msgstr "Normaal"
 
@@ -5359,11 +5383,16 @@ msgstr "Normaal"
 msgid "Full"
 msgstr "Volledig"
 
-#: templates/image/detail/modals/share.html:39
+#: templates/image/detail/modals/share.html:36
+#, fuzzy
+msgid "Real"
+msgstr "Echte naam"
+
+#: templates/image/detail/modals/share.html:40
 msgid "Copy this"
 msgstr "Kopieer dit"
 
-#: templates/image/detail/modals/share.html:45
+#: templates/image/detail/modals/share.html:46
 msgid "Image mode"
 msgstr "Beeldmodus"
 
@@ -7227,24 +7256,6 @@ msgstr "Kies je taal en welke berichtgeving je via e-mail wil ontvangen:"
 msgid "Edit your retailer information"
 msgstr "Wijzig je informatie als distributeur"
 
-#~ msgid "Remove from bookmarks"
-#~ msgstr "Verwijder van favorieten"
-
-#~ msgid "Bookmark"
-#~ msgstr "Bladwijzer"
-
-#~ msgid "Unlike"
-#~ msgstr "Niet leuk vinden"
-
-#~ msgid "Like"
-#~ msgstr "Leuk vinden"
-
-#~ msgid "Stop following"
-#~ msgstr "Stop het volgen"
-
-#~ msgid "Follow"
-#~ msgstr "Volgen"
-
 #~ msgid "or download the desktop client for easier uploads!"
 #~ msgstr "of download de desktop client om makkelijker up te loaden!"
 
@@ -7869,8 +7880,8 @@ msgstr "Wijzig je informatie als distributeur"
 #~ "De Messier Marathon is een lijst van Messier objecten onder de vorm van "
 #~ "AstroBin foto's, die uitgekozen worden aan de hand van nominaties door de "
 #~ "AstroBin community.\n"
-#~ "Jouw foto is momenteel de meest genomineerde versie voor %(messier_object)"
-#~ "s.\n"
+#~ "Jouw foto is momenteel de meest genomineerde versie voor "
+#~ "%(messier_object)s.\n"
 #~ "\n"
 #~ "Je kan de Messier Marathon hier vinden: http://astrobin.com/explore/"
 #~ "messier/"

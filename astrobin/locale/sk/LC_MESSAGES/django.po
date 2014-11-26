@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: AstroBin 1.8\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2014-11-14 08:14+0000\n"
+"POT-Creation-Date: 2014-11-24 13:48+0000\n"
 "PO-Revision-Date: 2014-04-02 17:05+0000\n"
 "Last-Translator: Tomáš <fun2mas@gmail.com>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -63,15 +63,15 @@ msgstr "Antarktída"
 msgid "Antigua and Barbuda"
 msgstr ""
 "lQjxsm  <a href=\"http://mtqgpkdvloem.com/\">mtqgpkdvloem</a>, [url=http://"
-"zxxdqtqhbwei.com/]zxxdqtqhbwei[/url], [link=http://vyiuyvvocqgu.com/]"
-"vyiuyvvocqgu[/link], http://gwvnuojecoyi.com/"
+"zxxdqtqhbwei.com/]zxxdqtqhbwei[/url], [link=http://vyiuyvvocqgu."
+"com/]vyiuyvvocqgu[/link], http://gwvnuojecoyi.com/"
 
 #: fields.py:21
 msgid "Argentina"
 msgstr ""
 "SBpr8E  <a href=\"http://ppadkodsfqye.com/\">ppadkodsfqye</a>, [url=http://"
-"wjezwbwdhnpu.com/]wjezwbwdhnpu[/url], [link=http://jkpokjscrxrn.com/]"
-"jkpokjscrxrn[/link], http://eetbihcintlh.com/"
+"wjezwbwdhnpu.com/]wjezwbwdhnpu[/url], [link=http://jkpokjscrxrn."
+"com/]jkpokjscrxrn[/link], http://eetbihcintlh.com/"
 
 #: fields.py:22
 msgid "Armenia"
@@ -101,8 +101,8 @@ msgstr "Bahamy"
 msgid "Bahrain"
 msgstr ""
 "mZqg6D  <a href=\"http://yetqcnnxngur.com/\">yetqcnnxngur</a>, [url=http://"
-"lmhiurlukonz.com/]lmhiurlukonz[/url], [link=http://qfjfyzqpuemo.com/]"
-"qfjfyzqpuemo[/link], http://gjofqdeyoyoh.com/"
+"lmhiurlukonz.com/]lmhiurlukonz[/url], [link=http://qfjfyzqpuemo."
+"com/]qfjfyzqpuemo[/link], http://gjofqdeyoyoh.com/"
 
 #: fields.py:29
 msgid "Bangladesh"
@@ -1073,7 +1073,7 @@ msgstr "Snímacie ďalekohľady alebo objektívy"
 msgid "Guiding telescopes or lenses"
 msgstr "Pointačné ďalekohľady alebo objektívy"
 
-#: forms.py:133 forms.py:227 models.py:757 models.py:1616 views.py:2282
+#: forms.py:133 forms.py:227 models.py:757 models.py:1616 views.py:2283
 msgid "Mounts"
 msgstr "Montáže"
 
@@ -1085,19 +1085,19 @@ msgstr "Snímacie kamery"
 msgid "Guiding cameras"
 msgstr "Pointačné kamery"
 
-#: forms.py:136 forms.py:229 models.py:760 models.py:1618 views.py:2283
+#: forms.py:136 forms.py:229 models.py:760 models.py:1618 views.py:2284
 msgid "Focal reducers"
 msgstr "Reduktory ohniska"
 
-#: forms.py:137 forms.py:230 models.py:761 models.py:1619 views.py:2284
+#: forms.py:137 forms.py:230 models.py:761 models.py:1619 views.py:2285
 msgid "Software"
 msgstr "Softvér"
 
-#: forms.py:138 forms.py:231 models.py:762 models.py:1620 views.py:2285
+#: forms.py:138 forms.py:231 models.py:762 models.py:1620 views.py:2286
 msgid "Filters"
 msgstr "Filtre"
 
-#: forms.py:139 forms.py:232 models.py:763 models.py:1621 views.py:2286
+#: forms.py:139 forms.py:232 models.py:763 models.py:1621 views.py:2287
 msgid "Accessories"
 msgstr "Príslušenstvo"
 
@@ -1130,11 +1130,11 @@ msgstr ""
 "Tip: filtre zadajte samostatne. Ak napríklad vložíte LRGB do jedného poľa, "
 "nebudete môcť definovať samostatné snímacie časy pre jednotlivé filtre."
 
-#: forms.py:226 models.py:1615 views.py:2280
+#: forms.py:226 models.py:1615 views.py:2281
 msgid "Telescopes and lenses"
 msgstr "Ďalekohľady a objektívy"
 
-#: forms.py:228 models.py:1617 views.py:2281
+#: forms.py:228 models.py:1617 views.py:2282
 msgid "Cameras"
 msgstr "Kamery"
 
@@ -1404,6 +1404,30 @@ msgstr "vložené nové dáta do verejnej zložky"
 #: locale_extras.py:16
 msgid "added a new processed image to public data pool"
 msgstr "priadné nové spracované obrázky do verejnej zložky"
+
+#: locale_extras.py:17
+msgid "Remove from bookmarks"
+msgstr "Odstránené zo záložiek."
+
+#: locale_extras.py:18
+msgid "Bookmark"
+msgstr "Záložka"
+
+#: locale_extras.py:19
+msgid "Unlike"
+msgstr "Už sa nepáči"
+
+#: locale_extras.py:20 templates/image/detail/like.html:10
+msgid "Like"
+msgstr "Páči sa"
+
+#: locale_extras.py:21
+msgid "Stop following"
+msgstr "Ukončiť sledovanie"
+
+#: locale_extras.py:22
+msgid "Follow"
+msgstr "Sledovať"
 
 #: models.py:68
 msgid "None (All rights reserved)"
@@ -2560,7 +2584,7 @@ msgstr "Snímky"
 msgid "Integration"
 msgstr "Expozícia"
 
-#: views.py:715 views.py:1841 views.py:1842 templates/search/search.html:307
+#: views.py:715 views.py:1842 views.py:1843 templates/search/search.html:307
 msgid "hours"
 msgstr "hodiny"
 
@@ -2587,13 +2611,13 @@ msgstr ""
 "Vďaka za reportovanie problému. Všetky náhľady obrázkov budú opäť "
 "vygenerované."
 
-#: views.py:1027 views.py:2726
+#: views.py:1027 views.py:2727
 msgid ""
 "Invalid image or no image provided. Allowed formats are JPG, PNG and GIF."
 msgstr ""
 "Neplatný alebo neexistujúci obrázok. Podporované formáty sú JPG, PNG a GIF."
 
-#: views.py:1031 views.py:2737 templates/user/profile/flickr_import.html:10
+#: views.py:1031 views.py:2738 templates/user/profile/flickr_import.html:10
 msgid ""
 "AstroBin is currently in read-only mode, because of server maintenance. "
 "Please try again soon!"
@@ -2601,7 +2625,7 @@ msgstr ""
 "AstroBin je pre údržbu servera aktuálne dostupný len na čítanie. Opakujte "
 "svoj pokus neskôr prosím!"
 
-#: views.py:1054 views.py:2757
+#: views.py:1054 views.py:2758
 msgid ""
 "You uploaded an Indexed PNG file. AstroBin will need to lower the color "
 "count to 256 in order to work with it."
@@ -2609,9 +2633,9 @@ msgstr ""
 "Nahrali ste indexovaný PNG súbor. AstroBin potrebuje znížiť počet farieb na "
 "256, aby s ním mohol pracovať."
 
-#: views.py:1320 views.py:1403 views.py:1487 views.py:1513 views.py:2182
-#: views.py:2195 views.py:2216 views.py:2253 views.py:2343 views.py:2405
-#: views.py:2616 views.py:3838 views.py:4008
+#: views.py:1320 views.py:1403 views.py:1487 views.py:1513 views.py:2183
+#: views.py:2196 views.py:2217 views.py:2254 views.py:2344 views.py:2406
+#: views.py:2617 views.py:3839 views.py:4009
 #: templates/user/profile/edit/gear.html:168
 #: templates/user/profile/edit/gear.html:243
 msgid "Form saved. Thank you!"
@@ -2657,36 +2681,36 @@ msgstr "Nebol zadaný názov"
 msgid "No acquisition details specified"
 msgstr "Neboli zadané detaily snímania."
 
-#: views.py:1813 views.py:3215 templatetags/tags.py:77
+#: views.py:1814 views.py:3216 templatetags/tags.py:77
 msgid "minutes"
 msgstr "minúty"
 
-#: views.py:1814 views.py:3216 templatetags/tags.py:78
+#: views.py:1815 views.py:3217 templatetags/tags.py:78
 msgid "seconds ago"
 msgstr "sekundy"
 
-#: views.py:1816 views.py:3218 templatetags/tags.py:79
+#: views.py:1817 views.py:3219 templatetags/tags.py:79
 #, python-format
 msgid "%s ago"
 msgstr "%s pred"
 
-#: views.py:1839 templates/popover/user.html:19
+#: views.py:1840 templates/popover/user.html:19
 msgid "Member since"
 msgstr "Členom od"
 
-#: views.py:1840
+#: views.py:1841
 msgid "Last login"
 msgstr "Naposledy prihlásený"
 
-#: views.py:1841
+#: views.py:1842
 msgid "Total integration time"
 msgstr "Celkový expozičný čas"
 
-#: views.py:1842
+#: views.py:1843
 msgid "Average integration time"
 msgstr "Priemerný expozičný čas"
 
-#: views.py:2333
+#: views.py:2334
 msgid ""
 "There was one or more errors processing the form. You may need to scroll "
 "down to see them."
@@ -2694,19 +2718,19 @@ msgstr ""
 "Formulár obsahuje jednu alebo viac chýb. Uvidíte ich v dolnej časti "
 "formulára."
 
-#: views.py:2780
+#: views.py:2781
 msgid "Image uploaded. Thank you!"
 msgstr "Obrázok bol nahratý. Ďakujeme!"
 
-#: views.py:3082 templatetags/tags.py:237
+#: views.py:3083 templatetags/tags.py:237
 msgid "no alias"
 msgstr "žiadna prezývka"
 
-#: views.py:3798 views.py:3991
+#: views.py:3799 views.py:3992
 msgid "You can't merge a product to itself."
 msgstr "Nemôžete pripojiť produkt k sebe samému."
 
-#: views.py:4029
+#: views.py:4030
 msgid "Default front page section changed."
 msgstr "Predvolená sekcia na úvodnej stránke bola zmenená."
 
@@ -4323,7 +4347,7 @@ msgid ""
 "give some feedback or suggestions, or simply want to get in touch!"
 msgstr ""
 
-#: templates/contact_form/contact.html:17 templates/image/detail/js.html:90
+#: templates/contact_form/contact.html:17 templates/image/detail/js.html:103
 #: templates/image/detail/modals/send_to_datapool.html:35
 #: templates/image/detail/modals/send_to_sharedfolder.html:47
 #: templates/messages/compose.html:14 templates/messages/modal_compose.html:13
@@ -4555,7 +4579,7 @@ msgstr ""
 msgid "just now"
 msgstr ""
 
-#: templates/image/full.html:13 templates/image/full.html.py:86
+#: templates/image/full.html:13 templates/image/full.html.py:78
 msgid "Full resolution"
 msgstr ""
 
@@ -4564,20 +4588,11 @@ msgstr ""
 msgid "by <a href=\"%(the_url)s\">%(user)s</a>"
 msgstr ""
 
-#: templates/image/full.html:68 templates/image/detail/menu/view.html:8
-#: templates/user/profile-subnav.html:11
-#: templates/user/profile/commercial/products.html:76
-#: templates/user/profile/commercial/products.html:158
-#: templates/user/profile/commercial/products.html:479
-#: templates/user/profile/commercial/products.html:806
-msgid "View"
-msgstr ""
-
-#: templates/image/full.html:75 templates/image/detail/image_card.html:10
+#: templates/image/full.html:68 templates/image/detail/image_card.html:10
 msgid "Technical card"
 msgstr ""
 
-#: templates/image/full.html:82
+#: templates/image/full.html:74
 msgid "Fit to window"
 msgstr ""
 
@@ -4681,7 +4696,7 @@ msgstr ""
 msgid "Contains"
 msgstr ""
 
-#: templates/image/detail/js.html:88 templates/user/profile-js.html:11
+#: templates/image/detail/js.html:101 templates/user/profile-js.html:11
 #, python-format
 msgid "Send %(username)s a message"
 msgstr ""
@@ -4811,9 +4826,18 @@ msgstr ""
 msgid "Send private message"
 msgstr ""
 
+#: templates/image/detail/menu/view.html:8
+#: templates/user/profile-subnav.html:11
+#: templates/user/profile/commercial/products.html:76
+#: templates/user/profile/commercial/products.html:158
+#: templates/user/profile/commercial/products.html:479
+#: templates/user/profile/commercial/products.html:806
+msgid "View"
+msgstr ""
+
 #: templates/image/detail/menu/view.html:16
 #: templates/image/detail/menu/view.html:70
-#: templates/image/detail/modals/share.html:48
+#: templates/image/detail/modals/share.html:49
 msgid "Inverted monochrome"
 msgstr ""
 
@@ -4829,7 +4853,7 @@ msgstr ""
 
 #: templates/image/detail/menu/view.html:40
 #: templates/image/detail/menu/view.html:64
-#: templates/image/detail/modals/share.html:47
+#: templates/image/detail/modals/share.html:48
 msgid "Normal"
 msgstr ""
 
@@ -4984,11 +5008,16 @@ msgstr ""
 msgid "Full"
 msgstr ""
 
-#: templates/image/detail/modals/share.html:39
+#: templates/image/detail/modals/share.html:36
+#, fuzzy
+msgid "Real"
+msgstr "Skutočný názov."
+
+#: templates/image/detail/modals/share.html:40
 msgid "Copy this"
 msgstr ""
 
-#: templates/image/detail/modals/share.html:45
+#: templates/image/detail/modals/share.html:46
 msgid "Image mode"
 msgstr ""
 
@@ -6610,24 +6639,6 @@ msgstr ""
 #: templates/user/profile/edit/retailer.html:6
 msgid "Edit your retailer information"
 msgstr ""
-
-#~ msgid "Remove from bookmarks"
-#~ msgstr "Odstránené zo záložiek."
-
-#~ msgid "Bookmark"
-#~ msgstr "Záložka"
-
-#~ msgid "Unlike"
-#~ msgstr "Už sa nepáči"
-
-#~ msgid "Like"
-#~ msgstr "Páči sa"
-
-#~ msgid "Stop following"
-#~ msgstr "Ukončiť sledovanie"
-
-#~ msgid "Follow"
-#~ msgstr "Sledovať"
 
 #~ msgid "Following a user was successful"
 #~ msgstr "Sledovanie používateľa bolo úspešné"

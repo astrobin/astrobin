@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2014-11-14 08:11+0000\n"
+"POT-Creation-Date: 2014-11-24 13:38+0000\n"
 "PO-Revision-Date: 2014-02-05 12:48+0000\n"
 "Last-Translator: Omar <thekingosm168@hotmail.com>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -1065,7 +1065,7 @@ msgstr "تلسكوب أو عدسة التصوير"
 msgid "Guiding telescopes or lenses"
 msgstr "تلسكوب أو عدسة الإرشاد"
 
-#: forms.py:133 forms.py:227 models.py:757 models.py:1616 views.py:2282
+#: forms.py:133 forms.py:227 models.py:757 models.py:1616 views.py:2283
 msgid "Mounts"
 msgstr "المحور المُستخدم"
 
@@ -1077,19 +1077,19 @@ msgstr "كاميرا التصوير"
 msgid "Guiding cameras"
 msgstr "كاميرا الارشاد"
 
-#: forms.py:136 forms.py:229 models.py:760 models.py:1618 views.py:2283
+#: forms.py:136 forms.py:229 models.py:760 models.py:1618 views.py:2284
 msgid "Focal reducers"
 msgstr "مختزل البعد البؤري"
 
-#: forms.py:137 forms.py:230 models.py:761 models.py:1619 views.py:2284
+#: forms.py:137 forms.py:230 models.py:761 models.py:1619 views.py:2285
 msgid "Software"
 msgstr "البرمجيات"
 
-#: forms.py:138 forms.py:231 models.py:762 models.py:1620 views.py:2285
+#: forms.py:138 forms.py:231 models.py:762 models.py:1620 views.py:2286
 msgid "Filters"
 msgstr "مرشّحات"
 
-#: forms.py:139 forms.py:232 models.py:763 models.py:1621 views.py:2286
+#: forms.py:139 forms.py:232 models.py:763 models.py:1621 views.py:2287
 msgid "Accessories"
 msgstr "الملحقات"
 
@@ -1122,11 +1122,11 @@ msgstr ""
 "تلميح: اكتب مرشحاتك كل علي حدة ! إذا وضعت ، علي سبيل المثال ، مرشحات LRGB في "
 "حقل واحد ، لن تستطيع اضافة بيانات التقاط منفصلة لكل منهم."
 
-#: forms.py:226 models.py:1615 views.py:2280
+#: forms.py:226 models.py:1615 views.py:2281
 msgid "Telescopes and lenses"
 msgstr "التلسكوبات و الكاميرات"
 
-#: forms.py:228 models.py:1617 views.py:2281
+#: forms.py:228 models.py:1617 views.py:2282
 msgid "Cameras"
 msgstr "الكاميرات"
 
@@ -1395,6 +1395,30 @@ msgstr "أضافَ بيانات جديدة إلي مساحة بيانات عام
 #: locale_extras.py:16
 msgid "added a new processed image to public data pool"
 msgstr "أضافَ صورة معالَجة جديدة ألي مساحة بيانات عامة"
+
+#: locale_extras.py:17
+msgid "Remove from bookmarks"
+msgstr "حذف من الصور المفضلة"
+
+#: locale_extras.py:18
+msgid "Bookmark"
+msgstr "صورة مفضلة"
+
+#: locale_extras.py:19
+msgid "Unlike"
+msgstr "لا يعجبني"
+
+#: locale_extras.py:20 templates/image/detail/like.html:10
+msgid "Like"
+msgstr "أعجبني"
+
+#: locale_extras.py:21
+msgid "Stop following"
+msgstr "أوقف المتابعة"
+
+#: locale_extras.py:22
+msgid "Follow"
+msgstr "اتبع"
 
 #: models.py:68
 msgid "None (All rights reserved)"
@@ -2548,7 +2572,7 @@ msgstr "الإطارات"
 msgid "Integration"
 msgstr "مدة تعريض الضوء"
 
-#: views.py:715 views.py:1841 views.py:1842 templates/search/search.html:307
+#: views.py:715 views.py:1842 views.py:1843 templates/search/search.html:307
 msgid "hours"
 msgstr "ساعة/ساعات"
 
@@ -2574,20 +2598,20 @@ msgid ""
 "Thanks for reporting the problem. All thumbnails will be generated again."
 msgstr "شكرا للتبليغ عن المشكلة. كل الصورة المصغرة يمكن انشائها مرة أخرى."
 
-#: views.py:1027 views.py:2726
+#: views.py:1027 views.py:2727
 msgid ""
 "Invalid image or no image provided. Allowed formats are JPG, PNG and GIF."
 msgstr ""
 "صورة غير صالحة أو لا توجد صورة. الامتدادات المسموح بها هي JPG و PNG و GIF."
 
-#: views.py:1031 views.py:2737 templates/user/profile/flickr_import.html:10
+#: views.py:1031 views.py:2738 templates/user/profile/flickr_import.html:10
 msgid ""
 "AstroBin is currently in read-only mode, because of server maintenance. "
 "Please try again soon!"
 msgstr ""
 "Astrobin حاليا في وضع القراءة فقط لوجود صيانة للخادم. من فضلك حاول لاحقاً!"
 
-#: views.py:1054 views.py:2757
+#: views.py:1054 views.py:2758
 msgid ""
 "You uploaded an Indexed PNG file. AstroBin will need to lower the color "
 "count to 256 in order to work with it."
@@ -2595,9 +2619,9 @@ msgstr ""
 "تم تحميل ملفPNG مُهمش. Astrobin سيحتاج لتقليل عدد الألوان إلي 256 لون لكي "
 "يستطيع العمل معه."
 
-#: views.py:1320 views.py:1403 views.py:1487 views.py:1513 views.py:2182
-#: views.py:2195 views.py:2216 views.py:2253 views.py:2343 views.py:2405
-#: views.py:2616 views.py:3838 views.py:4008
+#: views.py:1320 views.py:1403 views.py:1487 views.py:1513 views.py:2183
+#: views.py:2196 views.py:2217 views.py:2254 views.py:2344 views.py:2406
+#: views.py:2617 views.py:3839 views.py:4009
 #: templates/user/profile/edit/gear.html:168
 #: templates/user/profile/edit/gear.html:243
 msgid "Form saved. Thank you!"
@@ -2643,55 +2667,55 @@ msgstr "لا يوجد موضوع محدد للصورة"
 msgid "No acquisition details specified"
 msgstr "تفاصيل التقاط الصورة غير محددة"
 
-#: views.py:1813 views.py:3215 templatetags/tags.py:77
+#: views.py:1814 views.py:3216 templatetags/tags.py:77
 msgid "minutes"
 msgstr "دقائق"
 
-#: views.py:1814 views.py:3216 templatetags/tags.py:78
+#: views.py:1815 views.py:3217 templatetags/tags.py:78
 msgid "seconds ago"
 msgstr "ثواني مَضَت"
 
-#: views.py:1816 views.py:3218 templatetags/tags.py:79
+#: views.py:1817 views.py:3219 templatetags/tags.py:79
 #, python-format
 msgid "%s ago"
 msgstr "منذ %s"
 
-#: views.py:1839 templates/popover/user.html:19
+#: views.py:1840 templates/popover/user.html:19
 msgid "Member since"
 msgstr "عضو منذ"
 
-#: views.py:1840
+#: views.py:1841
 msgid "Last login"
 msgstr "آخر تسجيل دخول"
 
-#: views.py:1841
+#: views.py:1842
 msgid "Total integration time"
 msgstr "مدة تعريض الضوء الكلية"
 
-#: views.py:1842
+#: views.py:1843
 msgid "Average integration time"
 msgstr "متوسط مدة تعريض الضوء"
 
-#: views.py:2333
+#: views.py:2334
 msgid ""
 "There was one or more errors processing the form. You may need to scroll "
 "down to see them."
 msgstr ""
 "حدث خطأ أو أكثر أثناء معالجة التنسيق. قد تحتاج إلي االنظر في الأسفل كي تراهم."
 
-#: views.py:2780
+#: views.py:2781
 msgid "Image uploaded. Thank you!"
 msgstr "تم تحميل الصورة. شكرا لك!"
 
-#: views.py:3082 templatetags/tags.py:237
+#: views.py:3083 templatetags/tags.py:237
 msgid "no alias"
 msgstr "لا يوجد اسم مستعار"
 
-#: views.py:3798 views.py:3991
+#: views.py:3799 views.py:3992
 msgid "You can't merge a product to itself."
 msgstr "لايمكن ضمّ المنتَج إلي نفسه."
 
-#: views.py:4029
+#: views.py:4030
 msgid "Default front page section changed."
 msgstr "تم تغيير القسم الفتراضي للصفحة الرئيسية."
 
@@ -4464,7 +4488,7 @@ msgstr ""
 "من فضلك قم بمراسلتنا إذا احتجت إلي أي مساعدة ، أو إذا أردت التبليغ عن مشكلة "
 "ما أو تعطنا بعض آراء أو مقترحاتك أو كنت تريد التواصل فقط!"
 
-#: templates/contact_form/contact.html:17 templates/image/detail/js.html:90
+#: templates/contact_form/contact.html:17 templates/image/detail/js.html:103
 #: templates/image/detail/modals/send_to_datapool.html:35
 #: templates/image/detail/modals/send_to_sharedfolder.html:47
 #: templates/messages/compose.html:14 templates/messages/modal_compose.html:13
@@ -4725,7 +4749,7 @@ msgstr "المالكون"
 msgid "just now"
 msgstr "حالاً"
 
-#: templates/image/full.html:13 templates/image/full.html.py:86
+#: templates/image/full.html:13 templates/image/full.html.py:78
 msgid "Full resolution"
 msgstr "دقة كاملة"
 
@@ -4734,20 +4758,11 @@ msgstr "دقة كاملة"
 msgid "by <a href=\"%(the_url)s\">%(user)s</a>"
 msgstr "عن طريق <a href=\"%(the_url)s\">%(user)s</a>"
 
-#: templates/image/full.html:68 templates/image/detail/menu/view.html:8
-#: templates/user/profile-subnav.html:11
-#: templates/user/profile/commercial/products.html:76
-#: templates/user/profile/commercial/products.html:158
-#: templates/user/profile/commercial/products.html:479
-#: templates/user/profile/commercial/products.html:806
-msgid "View"
-msgstr "عرض"
-
-#: templates/image/full.html:75 templates/image/detail/image_card.html:10
+#: templates/image/full.html:68 templates/image/detail/image_card.html:10
 msgid "Technical card"
 msgstr "البيانات التقنية"
 
-#: templates/image/full.html:82
+#: templates/image/full.html:74
 msgid "Fit to window"
 msgstr "ملاءمة للإطار"
 
@@ -4858,7 +4873,7 @@ msgstr "نصف قطر المجال"
 msgid "Contains"
 msgstr "يحتوي على"
 
-#: templates/image/detail/js.html:88 templates/user/profile-js.html:11
+#: templates/image/detail/js.html:101 templates/user/profile-js.html:11
 #, python-format
 msgid "Send %(username)s a message"
 msgstr "ارسل إلي %(username)s رسالة"
@@ -4995,9 +5010,18 @@ msgstr "عرض الملف التعريفي"
 msgid "Send private message"
 msgstr "ارسال رسالة خاصة"
 
+#: templates/image/detail/menu/view.html:8
+#: templates/user/profile-subnav.html:11
+#: templates/user/profile/commercial/products.html:76
+#: templates/user/profile/commercial/products.html:158
+#: templates/user/profile/commercial/products.html:479
+#: templates/user/profile/commercial/products.html:806
+msgid "View"
+msgstr "عرض"
+
 #: templates/image/detail/menu/view.html:16
 #: templates/image/detail/menu/view.html:70
-#: templates/image/detail/modals/share.html:48
+#: templates/image/detail/modals/share.html:49
 msgid "Inverted monochrome"
 msgstr "صورة أحادية سالبة"
 
@@ -5013,7 +5037,7 @@ msgstr "مشروحة"
 
 #: templates/image/detail/menu/view.html:40
 #: templates/image/detail/menu/view.html:64
-#: templates/image/detail/modals/share.html:47
+#: templates/image/detail/modals/share.html:48
 msgid "Normal"
 msgstr "عادية"
 
@@ -5189,11 +5213,16 @@ msgstr "عادية"
 msgid "Full"
 msgstr "كاملة"
 
-#: templates/image/detail/modals/share.html:39
+#: templates/image/detail/modals/share.html:36
+#, fuzzy
+msgid "Real"
+msgstr "الاسم الحقيقي"
+
+#: templates/image/detail/modals/share.html:40
 msgid "Copy this"
 msgstr "انسخ هذا"
 
-#: templates/image/detail/modals/share.html:45
+#: templates/image/detail/modals/share.html:46
 msgid "Image mode"
 msgstr "نوع الصورة"
 
@@ -6972,24 +7001,6 @@ msgstr "قم باختيار لغتك ، و أيّ إشعارات بريد إلك
 #: templates/user/profile/edit/retailer.html:6
 msgid "Edit your retailer information"
 msgstr "تعديل معلومات متاجرك"
-
-#~ msgid "Remove from bookmarks"
-#~ msgstr "حذف من الصور المفضلة"
-
-#~ msgid "Bookmark"
-#~ msgstr "صورة مفضلة"
-
-#~ msgid "Unlike"
-#~ msgstr "لا يعجبني"
-
-#~ msgid "Like"
-#~ msgstr "أعجبني"
-
-#~ msgid "Stop following"
-#~ msgstr "أوقف المتابعة"
-
-#~ msgid "Follow"
-#~ msgstr "اتبع"
 
 #~ msgid "or download the desktop client for easier uploads!"
 #~ msgstr "أو قم بتنزيل مساعد لسطح المكتب لرفع الصور بطريقة أسهل."

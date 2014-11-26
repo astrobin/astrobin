@@ -14,4 +14,10 @@ LOCALE_EXTRAS = (
     _("created a new public data pool"),
     _("added new data to public data pool"),
     _("added a new processed image to public data pool"),
+    _("Remove from bookmarks"),
+    _("Bookmark").
+    _("Unlike"),
+    _("Like"),
+    _("Stop following"),
+    _("Follow"),
 )

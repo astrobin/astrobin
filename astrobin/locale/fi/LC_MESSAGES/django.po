@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: 0.9\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2014-11-14 08:12+0000\n"
+"POT-Creation-Date: 2014-11-24 13:42+0000\n"
 "PO-Revision-Date: 2014-04-27 07:27+0000\n"
 "Last-Translator: naavis <svnaavis@gmail.com>\n"
 "Language-Team: Finnish <tanja@iovene.com>\n"
@@ -1062,7 +1062,7 @@ msgstr "Kuvauskaukoputket"
 msgid "Guiding telescopes or lenses"
 msgstr "Seurantakaukoputket"
 
-#: forms.py:133 forms.py:227 models.py:757 models.py:1616 views.py:2282
+#: forms.py:133 forms.py:227 models.py:757 models.py:1616 views.py:2283
 msgid "Mounts"
 msgstr "Jalustat"
 
@@ -1074,19 +1074,19 @@ msgstr "Kuvauskamerat"
 msgid "Guiding cameras"
 msgstr "Seurantakamerat"
 
-#: forms.py:136 forms.py:229 models.py:760 models.py:1618 views.py:2283
+#: forms.py:136 forms.py:229 models.py:760 models.py:1618 views.py:2284
 msgid "Focal reducers"
 msgstr "Polttovälin lyhentäjät"
 
-#: forms.py:137 forms.py:230 models.py:761 models.py:1619 views.py:2284
+#: forms.py:137 forms.py:230 models.py:761 models.py:1619 views.py:2285
 msgid "Software"
 msgstr "Ohjelmistot"
 
-#: forms.py:138 forms.py:231 models.py:762 models.py:1620 views.py:2285
+#: forms.py:138 forms.py:231 models.py:762 models.py:1620 views.py:2286
 msgid "Filters"
 msgstr "Suodattimet"
 
-#: forms.py:139 forms.py:232 models.py:763 models.py:1621 views.py:2286
+#: forms.py:139 forms.py:232 models.py:763 models.py:1621 views.py:2287
 msgid "Accessories"
 msgstr "Oheislaitteet"
 
@@ -1119,11 +1119,11 @@ msgstr ""
 "Vihje: Syötä kaikki suodattimesi erikseen! Jos syötät esim. LRGB, et voi "
 "lisätä erillisiä valotusaikoja ja/tai sessioita niille."
 
-#: forms.py:226 models.py:1615 views.py:2280
+#: forms.py:226 models.py:1615 views.py:2281
 msgid "Telescopes and lenses"
 msgstr "Kaukoputket ja linssit"
 
-#: forms.py:228 models.py:1617 views.py:2281
+#: forms.py:228 models.py:1617 views.py:2282
 msgid "Cameras"
 msgstr "Kamerat"
 
@@ -1390,6 +1390,30 @@ msgstr ""
 #: locale_extras.py:16
 msgid "added a new processed image to public data pool"
 msgstr ""
+
+#: locale_extras.py:17
+msgid "Remove from bookmarks"
+msgstr "Poista kirjanmerkeistä"
+
+#: locale_extras.py:18
+msgid "Bookmark"
+msgstr "Kirjanmerkki"
+
+#: locale_extras.py:19
+msgid "Unlike"
+msgstr "Poista tykkäys"
+
+#: locale_extras.py:20 templates/image/detail/like.html:10
+msgid "Like"
+msgstr "Tykkää"
+
+#: locale_extras.py:21
+msgid "Stop following"
+msgstr "Lopeta seuraaminen"
+
+#: locale_extras.py:22
+msgid "Follow"
+msgstr "Seuraa"
 
 #: models.py:68
 msgid "None (All rights reserved)"
@@ -2543,7 +2567,7 @@ msgstr "Ruutuja"
 msgid "Integration"
 msgstr "Valotusaika"
 
-#: views.py:715 views.py:1841 views.py:1842 templates/search/search.html:307
+#: views.py:715 views.py:1842 views.py:1843 templates/search/search.html:307
 msgid "hours"
 msgstr "tuntia"
 
@@ -2569,13 +2593,13 @@ msgid ""
 msgstr ""
 "Kiitos kun raportoit ongelman. Kaikki esikatselukuvat generoidaan uudestaan."
 
-#: views.py:1027 views.py:2726
+#: views.py:1027 views.py:2727
 msgid ""
 "Invalid image or no image provided. Allowed formats are JPG, PNG and GIF."
 msgstr ""
 "Virheellinen kuva tai ei kuvaa. Sallitut formaatit ovat JPG, PNG ja GIF."
 
-#: views.py:1031 views.py:2737 templates/user/profile/flickr_import.html:10
+#: views.py:1031 views.py:2738 templates/user/profile/flickr_import.html:10
 msgid ""
 "AstroBin is currently in read-only mode, because of server maintenance. "
 "Please try again soon!"
@@ -2583,7 +2607,7 @@ msgstr ""
 "AstroBin on tällä hetkellä ainoastaan lukumoodissa palvelinhuollon vuoksi. "
 "Ole hyvä, ja kokeile myöhemmin uudestaan!"
 
-#: views.py:1054 views.py:2757
+#: views.py:1054 views.py:2758
 msgid ""
 "You uploaded an Indexed PNG file. AstroBin will need to lower the color "
 "count to 256 in order to work with it."
@@ -2591,9 +2615,9 @@ msgstr ""
 "Olet lähettänyt indeksoidun PNG-tiedoston. AstroBinin on pakko pienentää "
 "värien määrää 256 kappaleeseen, jotta kuva toimisi."
 
-#: views.py:1320 views.py:1403 views.py:1487 views.py:1513 views.py:2182
-#: views.py:2195 views.py:2216 views.py:2253 views.py:2343 views.py:2405
-#: views.py:2616 views.py:3838 views.py:4008
+#: views.py:1320 views.py:1403 views.py:1487 views.py:1513 views.py:2183
+#: views.py:2196 views.py:2217 views.py:2254 views.py:2344 views.py:2406
+#: views.py:2617 views.py:3839 views.py:4009
 #: templates/user/profile/edit/gear.html:168
 #: templates/user/profile/edit/gear.html:243
 msgid "Form saved. Thank you!"
@@ -2639,36 +2663,36 @@ msgstr "Kohteita ei määritetty"
 msgid "No acquisition details specified"
 msgstr "Kuvaustietoja ei määritelty"
 
-#: views.py:1813 views.py:3215 templatetags/tags.py:77
+#: views.py:1814 views.py:3216 templatetags/tags.py:77
 msgid "minutes"
 msgstr "minuuttia"
 
-#: views.py:1814 views.py:3216 templatetags/tags.py:78
+#: views.py:1815 views.py:3217 templatetags/tags.py:78
 msgid "seconds ago"
 msgstr "sekunteja sitten"
 
-#: views.py:1816 views.py:3218 templatetags/tags.py:79
+#: views.py:1817 views.py:3219 templatetags/tags.py:79
 #, python-format
 msgid "%s ago"
 msgstr "%s sitten"
 
-#: views.py:1839 templates/popover/user.html:19
+#: views.py:1840 templates/popover/user.html:19
 msgid "Member since"
 msgstr "Liittynyt"
 
-#: views.py:1840
+#: views.py:1841
 msgid "Last login"
 msgstr "Viimeksi kirjautunut"
 
-#: views.py:1841
+#: views.py:1842
 msgid "Total integration time"
 msgstr "Kokonaisvalotusaika"
 
-#: views.py:1842
+#: views.py:1843
 msgid "Average integration time"
 msgstr "Keskimääräinen valotusaika"
 
-#: views.py:2333
+#: views.py:2334
 msgid ""
 "There was one or more errors processing the form. You may need to scroll "
 "down to see them."
@@ -2676,19 +2700,19 @@ msgstr ""
 "Lomakkeen käsittelyssä tapahtui yksi tai useampi virhe. Rullaa alaspäin "
 "nähdäksesi virheet."
 
-#: views.py:2780
+#: views.py:2781
 msgid "Image uploaded. Thank you!"
 msgstr "Tallennettu. Kiitos!"
 
-#: views.py:3082 templatetags/tags.py:237
+#: views.py:3083 templatetags/tags.py:237
 msgid "no alias"
 msgstr "Ei lempinimeä"
 
-#: views.py:3798 views.py:3991
+#: views.py:3799 views.py:3992
 msgid "You can't merge a product to itself."
 msgstr "Et voi yhdistää tuotetta itseensä."
 
-#: views.py:4029
+#: views.py:4030
 msgid "Default front page section changed."
 msgstr ""
 
@@ -4491,7 +4515,7 @@ msgstr ""
 "Ota meihin yhteyttä jos tarvitset apua, tai haluat ilmoittaa ongelmasta, "
 "antaa palautetta tai ehdotuksia, tai jos sinulla on mitä tahansa muuta asiaa!"
 
-#: templates/contact_form/contact.html:17 templates/image/detail/js.html:90
+#: templates/contact_form/contact.html:17 templates/image/detail/js.html:103
 #: templates/image/detail/modals/send_to_datapool.html:35
 #: templates/image/detail/modals/send_to_sharedfolder.html:47
 #: templates/messages/compose.html:14 templates/messages/modal_compose.html:13
@@ -4769,7 +4793,7 @@ msgstr "Omistajat"
 msgid "just now"
 msgstr "juuri äsken"
 
-#: templates/image/full.html:13 templates/image/full.html.py:86
+#: templates/image/full.html:13 templates/image/full.html.py:78
 msgid "Full resolution"
 msgstr "Katso täydessä koossa"
 
@@ -4778,20 +4802,11 @@ msgstr "Katso täydessä koossa"
 msgid "by <a href=\"%(the_url)s\">%(user)s</a>"
 msgstr "käyttäjältä <a href=\"%(the_url)s\">%(user)s</a>"
 
-#: templates/image/full.html:68 templates/image/detail/menu/view.html:8
-#: templates/user/profile-subnav.html:11
-#: templates/user/profile/commercial/products.html:76
-#: templates/user/profile/commercial/products.html:158
-#: templates/user/profile/commercial/products.html:479
-#: templates/user/profile/commercial/products.html:806
-msgid "View"
-msgstr "Katsele"
-
-#: templates/image/full.html:75 templates/image/detail/image_card.html:10
+#: templates/image/full.html:68 templates/image/detail/image_card.html:10
 msgid "Technical card"
 msgstr "Tekniset tiedot"
 
-#: templates/image/full.html:82
+#: templates/image/full.html:74
 msgid "Fit to window"
 msgstr "Sovita kuva ikkunaan"
 
@@ -4904,7 +4919,7 @@ msgstr "Kentän leveys"
 msgid "Contains"
 msgstr "Sisältää"
 
-#: templates/image/detail/js.html:88 templates/user/profile-js.html:11
+#: templates/image/detail/js.html:101 templates/user/profile-js.html:11
 #, python-format
 msgid "Send %(username)s a message"
 msgstr "Lähetä viesti käyttäjälle %(username)s"
@@ -5042,9 +5057,18 @@ msgstr "Katsele profiilia"
 msgid "Send private message"
 msgstr "Lähetä yksityisviesti"
 
+#: templates/image/detail/menu/view.html:8
+#: templates/user/profile-subnav.html:11
+#: templates/user/profile/commercial/products.html:76
+#: templates/user/profile/commercial/products.html:158
+#: templates/user/profile/commercial/products.html:479
+#: templates/user/profile/commercial/products.html:806
+msgid "View"
+msgstr "Katsele"
+
 #: templates/image/detail/menu/view.html:16
 #: templates/image/detail/menu/view.html:70
-#: templates/image/detail/modals/share.html:48
+#: templates/image/detail/modals/share.html:49
 msgid "Inverted monochrome"
 msgstr "Negatiivinen mustavalkokuva"
 
@@ -5060,7 +5084,7 @@ msgstr "Merkitty"
 
 #: templates/image/detail/menu/view.html:40
 #: templates/image/detail/menu/view.html:64
-#: templates/image/detail/modals/share.html:47
+#: templates/image/detail/modals/share.html:48
 msgid "Normal"
 msgstr "Normaali"
 
@@ -5227,11 +5251,16 @@ msgstr "Normaali"
 msgid "Full"
 msgstr "Täysi"
 
-#: templates/image/detail/modals/share.html:39
+#: templates/image/detail/modals/share.html:36
+#, fuzzy
+msgid "Real"
+msgstr "Oikea nimi"
+
+#: templates/image/detail/modals/share.html:40
 msgid "Copy this"
 msgstr "Kopioi"
 
-#: templates/image/detail/modals/share.html:45
+#: templates/image/detail/modals/share.html:46
 msgid "Image mode"
 msgstr "Kuvan tila"
 
@@ -7047,24 +7076,6 @@ msgstr "Valitse kieli sekä mitä ilmoituksia haluat vastaanottaa sähköpostiis
 msgid "Edit your retailer information"
 msgstr "Muokkaa perustietojasi"
 
-#~ msgid "Remove from bookmarks"
-#~ msgstr "Poista kirjanmerkeistä"
-
-#~ msgid "Bookmark"
-#~ msgstr "Kirjanmerkki"
-
-#~ msgid "Unlike"
-#~ msgstr "Poista tykkäys"
-
-#~ msgid "Like"
-#~ msgstr "Tykkää"
-
-#~ msgid "Stop following"
-#~ msgstr "Lopeta seuraaminen"
-
-#~ msgid "Follow"
-#~ msgstr "Seuraa"
-
 #, fuzzy
 #~ msgid ""
 #~ "<a href=\"%(pool_url)s\"><strong>%(user_name)s</strong> has added a new "
@@ -7329,8 +7340,8 @@ msgstr "Muokkaa perustietojasi"
 #~ "Press <em>Continue</em> to nominate this image for <strong>M "
 #~ "%(messier_object)s</strong>."
 #~ msgstr ""
-#~ "Paina <em>Jatka</em> ehdottaaksesi tätä kuvaa <strong>M %(messier_object)"
-#~ "s</strong>:lle."
+#~ "Paina <em>Jatka</em> ehdottaaksesi tätä kuvaa <strong>M "
+#~ "%(messier_object)s</strong>:lle."
 
 #~ msgid ""
 #~ "Sorry, but it doesn't look like this image contains a Messier object. If "
