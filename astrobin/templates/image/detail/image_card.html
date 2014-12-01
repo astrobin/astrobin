@@ -84,7 +84,9 @@
                         <p><strong>{% trans "Field radius" %}</strong>: {{instance_to_platesolve.solution.radius}} {% trans "degrees" %}</p>
                     {% endif %}
 
-                    <p><strong>{% trans "Locations" %}</strong>: {{locations}}</p>
+                    {% if locations %}
+                        <p><strong>{% trans "Locations" %}</strong>: {{locations}}</p>
+                    {% endif %}
                 </div> <!-- acquisition-inner -->
             </div> <!-- acquisition -->
         </div> <!-- image-detail-inner -->
