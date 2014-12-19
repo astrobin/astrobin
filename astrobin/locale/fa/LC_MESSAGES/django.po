@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: AstroBin 1.9\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2014-11-24 13:41+0000\n"
+"POT-Creation-Date: 2014-12-03 03:33+0000\n"
 "PO-Revision-Date: 2013-03-07 18:03+0100\n"
 "Last-Translator: iman <iman_ab2013@yahoo.com>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -1018,7 +1018,7 @@ msgstr ""
 "اینجا قرار دهید. متاسفانه AsroBin نمی تواند در این زمان برای ذخیره آنها کاری "
 "انجام دهد، پس آنها را در فضای شخصی خودتان قرار دهید."
 
-#: forms.py:62 models.py:2013 models.py:2095 templates/gear/page.html:197
+#: forms.py:62 models.py:2019 models.py:2101 templates/gear/page.html:197
 #: templates/image/detail/image_title.html:14
 msgid "Link"
 msgstr "لینک"
@@ -1029,7 +1029,7 @@ msgstr "لینک به TIFF/FITS"
 
 #: forms.py:64 models.py:695 templates/maintenance_base.html:310
 #: templates/profile-edit-menu.html:36
-#: templates/image/detail/image_card.html:87
+#: templates/image/detail/image_card.html:88
 msgid "Locations"
 msgstr "محل"
 
@@ -1063,7 +1063,7 @@ msgstr " تلسکوپ یا عدسی (لنز) برای تصویربرداری"
 msgid "Guiding telescopes or lenses"
 msgstr " تلسکوپ و لنز راهنما (مسیریاب)"
 
-#: forms.py:133 forms.py:227 models.py:757 models.py:1616 views.py:2283
+#: forms.py:133 forms.py:227 models.py:757 models.py:1622 views.py:2283
 msgid "Mounts"
 msgstr "پایه ها"
 
@@ -1075,19 +1075,19 @@ msgstr "دوربین های عکس برداری"
 msgid "Guiding cameras"
 msgstr "دوربین های راهنما (مسیریاب)"
 
-#: forms.py:136 forms.py:229 models.py:760 models.py:1618 views.py:2284
+#: forms.py:136 forms.py:229 models.py:760 models.py:1624 views.py:2284
 msgid "Focal reducers"
 msgstr "کاهنده کانون"
 
-#: forms.py:137 forms.py:230 models.py:761 models.py:1619 views.py:2285
+#: forms.py:137 forms.py:230 models.py:761 models.py:1625 views.py:2285
 msgid "Software"
 msgstr "نرم افزار"
 
-#: forms.py:138 forms.py:231 models.py:762 models.py:1620 views.py:2286
+#: forms.py:138 forms.py:231 models.py:762 models.py:1626 views.py:2286
 msgid "Filters"
 msgstr "فیلترها"
 
-#: forms.py:139 forms.py:232 models.py:763 models.py:1621 views.py:2287
+#: forms.py:139 forms.py:232 models.py:763 models.py:1627 views.py:2287
 msgid "Accessories"
 msgstr "لوازم"
 
@@ -1095,7 +1095,7 @@ msgstr "لوازم"
 msgid "If you have a personal website, put the address here."
 msgstr "اگر وبسایت شحصی دارید، آدرس آن را اینجا وارد کنید."
 
-#: forms.py:171 models.py:1545
+#: forms.py:171 models.py:1551
 msgid "Website"
 msgstr "وبسایت"
 
@@ -1117,11 +1117,11 @@ msgstr ""
 "نکته: فیلترهایتان را جدا جدا وارد کنید. برای مثال اگرLRGB را در یک باکس قرار "
 "دادید، نمی توانید برای آنها acquisition sessions جداگانه وارد کنید."
 
-#: forms.py:226 models.py:1615 views.py:2281
+#: forms.py:226 models.py:1621 views.py:2281
 msgid "Telescopes and lenses"
 msgstr "تلسکوپها و عدسی ها"
 
-#: forms.py:228 models.py:1617 views.py:2282
+#: forms.py:228 models.py:1623 views.py:2282
 msgid "Cameras"
 msgstr "دوربین ها"
 
@@ -1252,7 +1252,7 @@ msgstr "طول جغرافیایی (دقیقه قوس)"
 msgid "Longitude (seconds)"
 msgstr "طول جغرافیایی (ثانیه قوس)"
 
-#: forms.py:566 forms.py:611 forms.py:652 models.py:1259 models.py:1472
+#: forms.py:566 forms.py:611 forms.py:652 models.py:1265 models.py:1478
 #: templates/image/detail/image_card.html:46
 msgid "Date"
 msgstr "تاریخ"
@@ -1291,7 +1291,7 @@ msgstr "ساخت"
 msgid "The make, brand, producer or developer of this product."
 msgstr "ساخت، نوع برند، تولید کننده یا توزیع کننده این محصول."
 
-#: forms.py:898 forms.py:959 models.py:197 models.py:1711 models.py:1850
+#: forms.py:898 forms.py:959 models.py:197 models.py:1717 models.py:1856
 #: templates/gear/fix.html:32 templates/gear/fix.html.py:33
 #: templates/gear/fix.html:34 templates/gear/fix.html.py:42
 #: templates/gear/fix.html:47 templates/gear/fix.html.py:52
@@ -1737,7 +1737,7 @@ msgstr "شکاف (سوراخ)"
 msgid "(in mm)"
 msgstr "بر حسب میلی متر"
 
-#: models.py:446 models.py:1411 templates/image/detail/image_card.html:58
+#: models.py:446 models.py:1417 templates/image/detail/image_card.html:58
 #: templates/popover/gear_telescope.html:19
 msgid "Focal length"
 msgstr "فاصله کانونی"
@@ -1942,7 +1942,7 @@ msgid ""
 "Drag items from the right side to the left side, or click on the plus sign."
 msgstr "آیتم ها را از راست به چپ بکشید یا روی علامت بعلاوه کلیک کنید."
 
-#: models.py:702 models.py:1858 models.py:2102 templates/gear/page.html:47
+#: models.py:702 models.py:1864 models.py:2108 templates/gear/page.html:47
 #: templates/image/detail/image_description.html:7
 msgid "Description"
 msgstr "توصیف"
@@ -1966,131 +1966,131 @@ msgstr "محل"
 msgid "(no title)"
 msgstr "بدون عنوان"
 
-#: models.py:1260
+#: models.py:1266
 msgid "Please use the following format: yyyy-mm-dd."
 msgstr "لطفا از این فرمت استفاده کنید:  yyyy-mm-dd"
 
-#: models.py:1265 models.py:1471 models.py:2078
+#: models.py:1271 models.py:1477 models.py:2084
 msgid "Image"
 msgstr "تصویر"
 
-#: models.py:1284
+#: models.py:1290
 msgid "1 - Excellent dark-site sky (BLACK)"
 msgstr "1. آسمان تاریک بسیار خوب (BLACK)"
 
-#: models.py:1285
+#: models.py:1291
 msgid "2 - Typical truly dark site (GRAY)"
 msgstr "2. تقریبا تاریک (خاکستری(GRAY))"
 
-#: models.py:1286
+#: models.py:1292
 msgid "3 - Rural sky (BLUE)"
 msgstr "3. آسمان حاشیه و روستایی (آبی (BLUE))"
 
-#: models.py:1287
+#: models.py:1293
 msgid "4 - Rural/suburban transition (GREEN/YELLOW)"
 msgstr "4. بین اطراف شهری و روستایی (سبز و زرد (GREEN/YELLOW))"
 
-#: models.py:1288
+#: models.py:1294
 msgid "5 - Suburban sky (ORANGE)"
 msgstr "5. آسمان اطراف شهری (نارنجی(ORANGE))"
 
-#: models.py:1289
+#: models.py:1295
 msgid "6 - Bright suburban sky (RED)"
 msgstr "6. آسمان روشن اطراف شهری (قرمز(RED))"
 
-#: models.py:1290
+#: models.py:1296
 msgid "7 - Suburban/urban transition or Full Moon (RED)"
 msgstr "7. اطراف شهری و شهری یا ماه کامل (قرمز(RED))"
 
-#: models.py:1291
+#: models.py:1297
 msgid "8 - City sky (WHITE)"
 msgstr "8. آسمان شهری (سفید (WHITE))"
 
-#: models.py:1292
+#: models.py:1298
 msgid "9 - Inner city sky (WHITE)"
 msgstr "9. آسمان درونی شهری (سفید (WHITE))"
 
-#: models.py:1296
+#: models.py:1302
 msgid "Synthetic channel"
 msgstr "کانال مصنوعی"
 
-#: models.py:1301
+#: models.py:1307
 msgid "Filter"
 msgstr "فیلتر"
 
-#: models.py:1307
+#: models.py:1313
 msgid "Binning"
 msgstr "مقدار درونی"
 
-#: models.py:1310
+#: models.py:1316
 msgid "Number"
 msgstr "تعداد"
 
-#: models.py:1312
+#: models.py:1318
 msgid "The number of sub-frames."
 msgstr "تعداد زیر فریم ها "
 
-#: models.py:1315
+#: models.py:1321
 msgid "Duration"
 msgstr "مدت زمانی"
 
-#: models.py:1317
+#: models.py:1323
 msgid "Duration of each sub-frame, in seconds."
 msgstr "مدت زمانی هر زیر فریم بر حسب ثانیه"
 
-#: models.py:1320
+#: models.py:1326
 msgid "ISO"
 msgstr "ISO"
 
-#: models.py:1324
+#: models.py:1330
 msgid "Gain"
 msgstr "بهره"
 
-#: models.py:1329
+#: models.py:1335
 msgid "Sensor cooling"
 msgstr "سیستم خنک کننده سنسور"
 
-#: models.py:1331
+#: models.py:1337
 msgid "The temperature of the chip. E.g.: -20."
 msgstr "دمای چیپ: مثلا 20-"
 
-#: models.py:1334 views.py:716
+#: models.py:1340 views.py:716
 msgid "Darks"
 msgstr "تیره ها"
 
-#: models.py:1336
+#: models.py:1342
 msgid "The number of dark frames."
 msgstr "تعداد فریم های تیره"
 
-#: models.py:1339 views.py:717
+#: models.py:1345 views.py:717
 msgid "Flats"
 msgstr "صاف ها"
 
-#: models.py:1341
+#: models.py:1347
 msgid "The number of flat frames."
 msgstr "تعداد فریم های صاف"
 
-#: models.py:1344 views.py:718
+#: models.py:1350 views.py:718
 msgid "Flat darks"
 msgstr "تیره های صاف"
 
-#: models.py:1346
+#: models.py:1352
 msgid "The number of dark flat frames."
 msgstr "تعداد فریم های تیره و صاف"
 
-#: models.py:1349 views.py:719
+#: models.py:1355 views.py:719
 msgid "Bias"
 msgstr "خطا"
 
-#: models.py:1351
+#: models.py:1357
 msgid "The number of bias/offset frames."
 msgstr "تعداد فریم های bias/offset"
 
-#: models.py:1354 views.py:722
+#: models.py:1360 views.py:722
 msgid "Bortle Dark-Sky Scale"
 msgstr "آسمان تاریک در مقیاس Bortle"
 
-#: models.py:1358
+#: models.py:1364
 msgid ""
 "Quality of the sky according to <a href=\"http://en.wikipedia.org/wiki/"
 "Bortle_Dark-Sky_Scale\" target=\"_blank\">the Bortle Scale</a>."
@@ -2098,165 +2098,165 @@ msgstr ""
 "کیفیت آسمان طبق (http://en.wikipedia.org/wiki/Bortle_Dark-Sky_Scale_blank) "
 "مقیاس Bortle."
 
-#: models.py:1362
+#: models.py:1368
 msgid "Mean mag/arcsec^2"
 msgstr "Mean mag/arcsec^2 (مقدار متوسط قدر بر مجذور عکس sec)"
 
-#: models.py:1363
+#: models.py:1369
 msgid "As measured with your Sky Quality Meter."
 msgstr "به عنوان اندازه گیری با  Sky Quality Meter خود."
 
-#: models.py:1368 views.py:724
+#: models.py:1374 views.py:724
 msgid "Mean FWHM"
 msgstr "متوسط FWHM"
 
-#: models.py:1373 views.py:725
+#: models.py:1379 views.py:725
 msgid "Temperature"
 msgstr "دما"
 
-#: models.py:1376
+#: models.py:1382
 msgid "Ambient temperature (in Centigrade degrees)."
 msgstr "دمای محیط (درجه سانتیگراد)"
 
-#: models.py:1397
+#: models.py:1403
 msgid "Number of frames"
 msgstr "تعداد فریم ها"
 
-#: models.py:1398
+#: models.py:1404
 msgid "The total number of frames you have stacked."
 msgstr "تعداد کل فریم هایی که stack کرده اید."
 
-#: models.py:1402 templates/image/detail/image_card.html:55
+#: models.py:1408 templates/image/detail/image_card.html:55
 msgid "FPS"
 msgstr "FPS"
 
-#: models.py:1403
+#: models.py:1409
 msgid "Frames per second."
 msgstr "فریم بر ثانیه"
 
-#: models.py:1412
+#: models.py:1418
 msgid ""
 "The focal length of the whole optical train, including barlow lenses or "
 "other components."
 msgstr "فاصله کانونی کل مسیر اپتیکی شامل عدسی ها و سایر موارد."
 
-#: models.py:1418 templates/image/detail/image_card.html:61
+#: models.py:1424 templates/image/detail/image_card.html:61
 msgid "CMI"
 msgstr "CMI"
 
-#: models.py:1419
+#: models.py:1425
 msgid "Latitude of the first Central Meridian."
 msgstr "عرض جغرافیایی از اولین مرکزی مریدین."
 
-#: models.py:1427 templates/image/detail/image_card.html:64
+#: models.py:1433 templates/image/detail/image_card.html:64
 msgid "CMII"
 msgstr "CMII"
 
-#: models.py:1428
+#: models.py:1434
 msgid "Latitude of the second Central Meridian."
 msgstr "عرض جغرافیایی از دومین مرکزی مریدین."
 
-#: models.py:1436 templates/image/detail/image_card.html:67
+#: models.py:1442 templates/image/detail/image_card.html:67
 msgid "CMIII"
 msgstr "CMIII"
 
-#: models.py:1437
+#: models.py:1443
 msgid "Latitude of the third Central Meridian."
 msgstr "عرض جغرافیایی از سومین مرکزی مریدین."
 
-#: models.py:1445 templates/image/detail/image_card.html:70
+#: models.py:1451 templates/image/detail/image_card.html:70
 msgid "Seeing"
 msgstr "مشاهده"
 
-#: models.py:1446
+#: models.py:1452
 msgid "Your estimation of the seeing, on a scale from 1 to 5."
 msgstr "تخمین شما از مشاهده در مقیاسی از 1 تا 5."
 
-#: models.py:1452 templates/image/detail/image_card.html:73
+#: models.py:1458 templates/image/detail/image_card.html:73
 msgid "Transparency"
 msgstr "شفافیت"
 
-#: models.py:1453
+#: models.py:1459
 msgid "Your estimation of the transparency, on a scale from 1 to 10."
 msgstr "تخمین شما از شفافیت در مقیاسی از 1 تا 10."
 
-#: models.py:1459 templates/image/detail/image_card.html:49
+#: models.py:1465 templates/image/detail/image_card.html:49
 msgid "Time"
 msgstr "زمان"
 
-#: models.py:1460
+#: models.py:1466
 msgid "Please use the following format: hh:mm."
 msgstr "لطفا از فرمت روبرو استفاده کنید: hh:mm."
 
-#: models.py:1491
+#: models.py:1497
 msgid "Request from"
 msgstr "درخواست از"
 
-#: models.py:1503
+#: models.py:1509
 msgid "Additional information"
 msgstr "اطلاعات بیشتر"
 
-#: models.py:1504
+#: models.py:1510
 msgid "TIFF/FITS"
 msgstr "TIFF/FITS"
 
-#: models.py:1505
+#: models.py:1511
 msgid "Higher resolution"
 msgstr "رزولوشن بیشتر"
 
-#: models.py:1537
+#: models.py:1543
 #, fuzzy
 msgid "Real name"
 msgstr "نام صحیح"
 
-#: models.py:1538
+#: models.py:1544
 msgid "If present, your real name will be used throughout the website."
 msgstr ""
 
-#: models.py:1552
+#: models.py:1558
 msgid "Job"
 msgstr "شغل"
 
-#: models.py:1559
+#: models.py:1565
 msgid "Hobbies"
 msgstr "سرگرمی ها"
 
-#: models.py:1563
+#: models.py:1569
 msgid "Do you have any hobbies other than astrophotography?"
 msgstr "آیا تفریح دیگری به جز عکاسی نجومی دارید؟"
 
-#: models.py:1570
+#: models.py:1576
 msgid "Timezone"
 msgstr "منطقه زمانی"
 
-#: models.py:1571
+#: models.py:1577
 msgid ""
 "By selecting this, you will see all the dates on AstroBin in your timezone."
 msgstr ""
 "با انتخاب این مورد، تمام تاریخ های AstroBin را در منطقه زمانی خودتان خواهید "
 "دید."
 
-#: models.py:1576
+#: models.py:1582
 msgid "About you"
 msgstr "درباره شما"
 
-#: models.py:1577
+#: models.py:1583
 msgid "Write something about yourself. HTML tags are allowed."
 msgstr "چیزی درباره خودتان بنویسید. برچسب HTML مجاز است."
 
-#: models.py:1585
+#: models.py:1591
 msgid "Company name"
 msgstr "نام شرکت"
 
-#: models.py:1586
+#: models.py:1592
 msgid "The name of the company you represent on AstroBin."
 msgstr "نام شرکتی که شما در AstroBin نماینده اش هستید."
 
-#: models.py:1592
+#: models.py:1598
 msgid "Company description"
 msgstr "توضیحات راجع به شرکت"
 
-#: models.py:1593
+#: models.py:1599
 #, fuzzy
 msgid ""
 "A short description of the company you represent on AstroBin. You can use "
@@ -2265,153 +2265,153 @@ msgstr ""
 "توضیحاتی راجع به شرکتی که شما در AstroBin نماینده اش هستید. می توانید  از "
 "این فرمت <a href=\"/faq/#10\"></a> استفاده کنید."
 
-#: models.py:1601
+#: models.py:1607
 msgid "Company website"
 msgstr "وبسایت شرکت"
 
-#: models.py:1602
+#: models.py:1608
 msgid "The website of the company you represent on AstroBin."
 msgstr "وبسایت شرکتی که شما در AstroBin نماینده اش هستید."
 
-#: models.py:1606
+#: models.py:1612
 msgid "Country of operation"
 msgstr "کشورعملیات"
 
-#: models.py:1631 templates/maintenance_base.html:316
+#: models.py:1637 templates/maintenance_base.html:316
 #: templates/profile-edit-menu.html:42
 msgid "Default license"
 msgstr "مدرک پیش فرض"
 
-#: models.py:1633
+#: models.py:1639
 msgid ""
 "The license you select here is automatically applied to all your new images."
 msgstr ""
 "مجوزی که شما اینجا انتخاب کنید، به تمام تصاویر جدید خودکاراعمال می شود."
 
-#: models.py:1666
+#: models.py:1672
 msgid "Language"
 msgstr "زبان"
 
-#: models.py:1712
+#: models.py:1718
 msgid "A descriptive name, e.g. 'Home observatory' or 'Mount Whitney'."
 msgstr "نام توصیفی. مثلا:  'Home observatory' یا 'Mount Whitney'"
 
-#: models.py:1718
+#: models.py:1724
 msgid "City"
 msgstr "شهر"
 
-#: models.py:1719
+#: models.py:1725
 msgid "If this location is not in a city, use the name of the closest city."
 msgstr "اگر این محل، یک شهر نیست، از نام نزدیکترین شهر استفاده کنید."
 
-#: models.py:1725
+#: models.py:1731
 msgid "State or province"
 msgstr "ایالت یا استان"
 
-#: models.py:1730
+#: models.py:1736
 msgid "Country"
 msgstr "کشور"
 
-#: models.py:1747
+#: models.py:1753
 msgid "North"
 msgstr "شمال"
 
-#: models.py:1747
+#: models.py:1753
 msgid "South"
 msgstr "جنوب"
 
-#: models.py:1748
+#: models.py:1754
 msgid "North or south"
 msgstr "شمال یا جنوب"
 
-#: models.py:1763
+#: models.py:1769
 msgid "East"
 msgstr "شرق"
 
-#: models.py:1763
+#: models.py:1769
 msgid "West"
 msgstr "غرب"
 
-#: models.py:1764
+#: models.py:1770
 msgid "East or West"
 msgstr "شرق یا غرب"
 
-#: models.py:1768
+#: models.py:1774
 msgid "Altitude"
 msgstr "ارتفاع"
 
-#: models.py:1769
+#: models.py:1775
 msgid "In meters."
 msgstr "به متر"
 
-#: models.py:1851
+#: models.py:1857
 msgid "The name of the website or app that wishes to use the APIs."
 msgstr "نام وبسایت یا app که APIs را استفاده می کند."
 
-#: models.py:1859
+#: models.py:1865
 msgid ""
 "Please explain the purpose of your application, and how you intend to use "
 "the API."
 msgstr ""
 "لطفا دلیل کاربردتان و اینکه چطور قصد دارید از APIs استفاده کنید را شرح دهید."
 
-#: models.py:1990
+#: models.py:1996
 msgid "AUD - Australian dollars"
 msgstr "AUD، دلار استرالیایی"
 
-#: models.py:1991
+#: models.py:1997
 msgid "CAD - Canadian dollars"
 msgstr "CAD، دلار کانادا"
 
-#: models.py:1992
+#: models.py:1998
 msgid "CHF - Swiss francs"
 msgstr "CHF، فرانک سوییس"
 
-#: models.py:1993
+#: models.py:1999
 msgid "EUR - Euros"
 msgstr "EUR، یورو"
 
-#: models.py:1994
+#: models.py:2000
 msgid "GPB - Pound stelings"
 msgstr "GPB، پوند استرلینگ"
 
-#: models.py:1995
+#: models.py:2001
 msgid "PLN - Polish zloty"
 msgstr "PLN، زولتی لهستان"
 
-#: models.py:1996
+#: models.py:2002
 msgid "SEK - Swedish krona"
 msgstr "SEK، کرون سوئد"
 
-#: models.py:1997
+#: models.py:2003
 msgid "USD - American dollars"
 msgstr "USD، دلار آمریکا"
 
-#: models.py:2003 models.py:2053
+#: models.py:2009 models.py:2059
 msgid "Producer"
 msgstr "تولید کننده"
 
-#: models.py:2014 models.py:2096
+#: models.py:2020 models.py:2102
 msgid "The link to this product's page on your website."
 msgstr "لینکی از صفحه این تولید کننده یا خودتان."
 
-#: models.py:2022
+#: models.py:2028
 msgid "Price"
 msgstr "قیمت"
 
-#: models.py:2030
+#: models.py:2036
 msgid "Currency"
 msgstr "پول"
 
-#: models.py:2046
+#: models.py:2052
 msgid "Retailed gear items"
 msgstr "اقلام خرده فروشی، دنده"
 
-#: models.py:2062
+#: models.py:2068
 msgid "Proper make"
 msgstr "تولیدی صحیح"
 
-#: models.py:2063
+#: models.py:2069
 msgid ""
 "Sometimes, product make/brand/producer/developer names are not written "
 "properly by the users. Write here the proper make/brand/producer/developer "
@@ -2421,11 +2421,11 @@ msgstr ""
 "کاربر نوشته نمی شود. اینجا نام صحیح  تولیدی، تولید کننده، مارک محصول و "
 "نمایندگی پخش را بنویسید."
 
-#: models.py:2070
+#: models.py:2076
 msgid "Proper name"
 msgstr "نام صحیح"
 
-#: models.py:2071
+#: models.py:2077
 msgid ""
 "Sometimes, product names are not written properly by the users. Write here "
 "the proper product name, not including the make/brand/producer/developer "
@@ -2437,7 +2437,7 @@ msgstr ""
 "نیست. توصیه می شود تا حد امکان، اقلام را گروه کنید. بنابراین نام کلی از "
 "محصول خود را استفاده کنید. "
 
-#: models.py:2079
+#: models.py:2085
 msgid ""
 "The official, commercial image for this product. Upload an image via the "
 "regular uploading interface, set its subject type to \"Gear\", and then "
@@ -2448,16 +2448,16 @@ msgstr ""
 "کنید. نوع موضوع را \"Gear\" تنظیم کنید و سپس آن را از این لیست انتخاب کنید. "
 "اگر چندین ویرایش را آپلود کنید، آن ها در صفحه اقتصادی ظاهر خواهند شد."
 
-#: models.py:2087
+#: models.py:2093
 msgid "Tagline"
 msgstr "Tagline"
 
-#: models.py:2088
+#: models.py:2094
 msgid ""
 "A memorable phrase that will sum up this product, for marketing purposes."
 msgstr "جمله ای به یاد ماندنی که برای فروش این تصویر کمک کند."
 
-#: models.py:2103
+#: models.py:2109
 #, fuzzy
 msgid ""
 "Here you can write the full commercial description of your product. You can "
@@ -2466,7 +2466,7 @@ msgstr ""
 "اینجا می توانید توضیح کاملی از این محصول بنویسید. می توانید از قوانین فرمت "
 "استفاده کنید."
 
-#: models.py:2122
+#: models.py:2128
 msgid "Commercial gear items"
 msgstr "اقلام اقتصادی، دنده"
 
@@ -4454,7 +4454,7 @@ msgid "OK"
 msgstr ""
 
 #: templates/base/user_links_entries.html:255
-msgid "No, tranks"
+msgid "No, thanks"
 msgstr ""
 
 #: templates/commercial/products/edit.html:7
