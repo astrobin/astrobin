@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2014-11-24 13:44+0000\n"
+"POT-Creation-Date: 2014-12-03 03:34+0000\n"
 "PO-Revision-Date: 2014-10-01 08:12+0000\n"
 "Last-Translator: ohmishonin <kasuzen@gmail.com>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -1021,7 +1021,7 @@ msgstr ""
 "用できない場合には、あなたの個人的なネット上の場所にそれを配置する必要があり"
 "ます。"
 
-#: forms.py:62 models.py:2013 models.py:2095 templates/gear/page.html:197
+#: forms.py:62 models.py:2019 models.py:2101 templates/gear/page.html:197
 #: templates/image/detail/image_title.html:14
 msgid "Link"
 msgstr "リンク"
@@ -1032,7 +1032,7 @@ msgstr "TIFF/FITSへのリンク"
 
 #: forms.py:64 models.py:695 templates/maintenance_base.html:310
 #: templates/profile-edit-menu.html:36
-#: templates/image/detail/image_card.html:87
+#: templates/image/detail/image_card.html:88
 msgid "Locations"
 msgstr "場所"
 
@@ -1066,7 +1066,7 @@ msgstr "望遠鏡／レンズ"
 msgid "Guiding telescopes or lenses"
 msgstr "ガイド鏡またはレンズ"
 
-#: forms.py:133 forms.py:227 models.py:757 models.py:1616 views.py:2283
+#: forms.py:133 forms.py:227 models.py:757 models.py:1622 views.py:2283
 msgid "Mounts"
 msgstr "赤道儀"
 
@@ -1078,19 +1078,19 @@ msgstr "カメラ"
 msgid "Guiding cameras"
 msgstr "ガイド用カメラ"
 
-#: forms.py:136 forms.py:229 models.py:760 models.py:1618 views.py:2284
+#: forms.py:136 forms.py:229 models.py:760 models.py:1624 views.py:2284
 msgid "Focal reducers"
 msgstr "レデューサー"
 
-#: forms.py:137 forms.py:230 models.py:761 models.py:1619 views.py:2285
+#: forms.py:137 forms.py:230 models.py:761 models.py:1625 views.py:2285
 msgid "Software"
 msgstr "ソフトウェア"
 
-#: forms.py:138 forms.py:231 models.py:762 models.py:1620 views.py:2286
+#: forms.py:138 forms.py:231 models.py:762 models.py:1626 views.py:2286
 msgid "Filters"
 msgstr "フィルター"
 
-#: forms.py:139 forms.py:232 models.py:763 models.py:1621 views.py:2287
+#: forms.py:139 forms.py:232 models.py:763 models.py:1627 views.py:2287
 msgid "Accessories"
 msgstr "アクセサリ"
 
@@ -1098,7 +1098,7 @@ msgstr "アクセサリ"
 msgid "If you have a personal website, put the address here."
 msgstr "あなたが個人サイトを持っているのであれば、そのURLを記入してください。"
 
-#: forms.py:171 models.py:1545
+#: forms.py:171 models.py:1551
 msgid "Website"
 msgstr "ウェブサイト"
 
@@ -1125,11 +1125,11 @@ msgstr ""
 "の場合には、あとでフィルターを追加することはできませんので、ここで個別にフィ"
 "ルターを記入してください。"
 
-#: forms.py:226 models.py:1615 views.py:2281
+#: forms.py:226 models.py:1621 views.py:2281
 msgid "Telescopes and lenses"
 msgstr "望遠鏡とレンズ"
 
-#: forms.py:228 models.py:1617 views.py:2282
+#: forms.py:228 models.py:1623 views.py:2282
 msgid "Cameras"
 msgstr "カメラ"
 
@@ -1261,7 +1261,7 @@ msgstr "経度 (分)"
 msgid "Longitude (seconds)"
 msgstr "経度 (秒)"
 
-#: forms.py:566 forms.py:611 forms.py:652 models.py:1259 models.py:1472
+#: forms.py:566 forms.py:611 forms.py:652 models.py:1265 models.py:1478
 #: templates/image/detail/image_card.html:46
 msgid "Date"
 msgstr "日付"
@@ -1300,7 +1300,7 @@ msgstr "製造者"
 msgid "The make, brand, producer or developer of this product."
 msgstr "この製品の製造者名やブランド名、開発者の名前。"
 
-#: forms.py:898 forms.py:959 models.py:197 models.py:1711 models.py:1850
+#: forms.py:898 forms.py:959 models.py:197 models.py:1717 models.py:1856
 #: templates/gear/fix.html:32 templates/gear/fix.html.py:33
 #: templates/gear/fix.html:34 templates/gear/fix.html.py:42
 #: templates/gear/fix.html:47 templates/gear/fix.html.py:52
@@ -1745,7 +1745,7 @@ msgstr "絞り値"
 msgid "(in mm)"
 msgstr "mm"
 
-#: models.py:446 models.py:1411 templates/image/detail/image_card.html:58
+#: models.py:446 models.py:1417 templates/image/detail/image_card.html:58
 #: templates/popover/gear_telescope.html:19
 msgid "Focal length"
 msgstr "焦点距離"
@@ -1949,7 +1949,7 @@ msgid ""
 "Drag items from the right side to the left side, or click on the plus sign."
 msgstr "右側から左側にツマミをドラッグするか、＋ボタンをクリックしてください。"
 
-#: models.py:702 models.py:1858 models.py:2102 templates/gear/page.html:47
+#: models.py:702 models.py:1864 models.py:2108 templates/gear/page.html:47
 #: templates/image/detail/image_description.html:7
 msgid "Description"
 msgstr "説明"
@@ -1973,131 +1973,131 @@ msgstr "位置"
 msgid "(no title)"
 msgstr "(無題)"
 
-#: models.py:1260
+#: models.py:1266
 msgid "Please use the following format: yyyy-mm-dd."
 msgstr "yyyy-mm-ddの形式を使用してください。"
 
-#: models.py:1265 models.py:1471 models.py:2078
+#: models.py:1271 models.py:1477 models.py:2084
 msgid "Image"
 msgstr "画像"
 
-#: models.py:1284
+#: models.py:1290
 msgid "1 - Excellent dark-site sky (BLACK)"
 msgstr "1 - 特に暗い場所の空 (真っ黒)"
 
-#: models.py:1285
+#: models.py:1291
 msgid "2 - Typical truly dark site (GRAY)"
 msgstr "2 - 暗い夜空 (グレー)"
 
-#: models.py:1286
+#: models.py:1292
 msgid "3 - Rural sky (BLUE)"
 msgstr "3 - 青みがかった背景 (ブルー)"
 
-#: models.py:1287
+#: models.py:1293
 msgid "4 - Rural/suburban transition (GREEN/YELLOW)"
 msgstr "4 - 農村／郊外の夜空 (グリーン／イエロー)"
 
-#: models.py:1288
+#: models.py:1294
 msgid "5 - Suburban sky (ORANGE)"
 msgstr "5 - 郊外の夜空 (オレンジ)"
 
-#: models.py:1289
+#: models.py:1295
 msgid "6 - Bright suburban sky (RED)"
 msgstr "6 - 明るい郊外の夜空 (赤)"
 
-#: models.py:1290
+#: models.py:1296
 msgid "7 - Suburban/urban transition or Full Moon (RED)"
 msgstr "7 - 郊外／都市化／満月の夜空 (赤)"
 
-#: models.py:1291
+#: models.py:1297
 msgid "8 - City sky (WHITE)"
 msgstr "8 - 都市の夜空 (白)"
 
-#: models.py:1292
+#: models.py:1298
 msgid "9 - Inner city sky (WHITE)"
 msgstr "9 - 都心の夜空 (白)"
 
-#: models.py:1296
+#: models.py:1302
 msgid "Synthetic channel"
 msgstr "合成チャネル"
 
-#: models.py:1301
+#: models.py:1307
 msgid "Filter"
 msgstr "フィルター"
 
-#: models.py:1307
+#: models.py:1313
 msgid "Binning"
 msgstr "ビニング"
 
-#: models.py:1310
+#: models.py:1316
 msgid "Number"
 msgstr "数"
 
-#: models.py:1312
+#: models.py:1318
 msgid "The number of sub-frames."
 msgstr "撮影枚数"
 
-#: models.py:1315
+#: models.py:1321
 msgid "Duration"
 msgstr "露出時間"
 
-#: models.py:1317
+#: models.py:1323
 msgid "Duration of each sub-frame, in seconds."
 msgstr "それぞれの撮影フレームの露出秒。"
 
-#: models.py:1320
+#: models.py:1326
 msgid "ISO"
 msgstr "ISO"
 
-#: models.py:1324
+#: models.py:1330
 msgid "Gain"
 msgstr "ゲイン"
 
-#: models.py:1329
+#: models.py:1335
 msgid "Sensor cooling"
 msgstr "冷却センサー"
 
-#: models.py:1331
+#: models.py:1337
 msgid "The temperature of the chip. E.g.: -20."
 msgstr "センサーチップ温度（例えば-20）。"
 
-#: models.py:1334 views.py:716
+#: models.py:1340 views.py:716
 msgid "Darks"
 msgstr "ダーク"
 
-#: models.py:1336
+#: models.py:1342
 msgid "The number of dark frames."
 msgstr "ダークフレームの枚数。"
 
-#: models.py:1339 views.py:717
+#: models.py:1345 views.py:717
 msgid "Flats"
 msgstr "フラット"
 
-#: models.py:1341
+#: models.py:1347
 msgid "The number of flat frames."
 msgstr "フラットフレームの枚数。"
 
-#: models.py:1344 views.py:718
+#: models.py:1350 views.py:718
 msgid "Flat darks"
 msgstr "フラットダーク"
 
-#: models.py:1346
+#: models.py:1352
 msgid "The number of dark flat frames."
 msgstr "フラットダーク撮影の枚数。"
 
-#: models.py:1349 views.py:719
+#: models.py:1355 views.py:719
 msgid "Bias"
 msgstr "バイアス"
 
-#: models.py:1351
+#: models.py:1357
 msgid "The number of bias/offset frames."
 msgstr "バイアス撮影の枚数。"
 
-#: models.py:1354 views.py:722
+#: models.py:1360 views.py:722
 msgid "Bortle Dark-Sky Scale"
 msgstr "ボートルのダークスカイ指数"
 
-#: models.py:1358
+#: models.py:1364
 msgid ""
 "Quality of the sky according to <a href=\"http://en.wikipedia.org/wiki/"
 "Bortle_Dark-Sky_Scale\" target=\"_blank\">the Bortle Scale</a>."
@@ -2105,164 +2105,164 @@ msgstr ""
 "<a href=\"http://en.wikipedia.org/wiki/Bortle_Dark-Sky_Scale\" target="
 "\"_blank\">ボートルのダークスカイ指数</a> に従った夜空のクオリティ。"
 
-#: models.py:1362
+#: models.py:1368
 msgid "Mean mag/arcsec^2"
 msgstr "平均 mag/arcsec^2"
 
-#: models.py:1363
+#: models.py:1369
 msgid "As measured with your Sky Quality Meter."
 msgstr "あなたのSky Quality Meter（SQM）の測定値。"
 
-#: models.py:1368 views.py:724
+#: models.py:1374 views.py:724
 msgid "Mean FWHM"
 msgstr "平均FWHM"
 
-#: models.py:1373 views.py:725
+#: models.py:1379 views.py:725
 msgid "Temperature"
 msgstr "気温"
 
-#: models.py:1376
+#: models.py:1382
 msgid "Ambient temperature (in Centigrade degrees)."
 msgstr "周囲の気温 (摂氏)。"
 
-#: models.py:1397
+#: models.py:1403
 msgid "Number of frames"
 msgstr "撮影枚数（撮影フレーム数）"
 
-#: models.py:1398
+#: models.py:1404
 msgid "The total number of frames you have stacked."
 msgstr "スタック（コンポジット）に利用した全撮影枚数（撮影フレーム数）。"
 
-#: models.py:1402 templates/image/detail/image_card.html:55
+#: models.py:1408 templates/image/detail/image_card.html:55
 msgid "FPS"
 msgstr "FPS"
 
-#: models.py:1403
+#: models.py:1409
 msgid "Frames per second."
 msgstr "フレーム数/秒"
 
-#: models.py:1412
+#: models.py:1418
 msgid ""
 "The focal length of the whole optical train, including barlow lenses or "
 "other components."
 msgstr "バーローレンズやその他のコンポーネントを含む全光学系の焦点距離。"
 
-#: models.py:1418 templates/image/detail/image_card.html:61
+#: models.py:1424 templates/image/detail/image_card.html:61
 msgid "CMI"
 msgstr "CMI"
 
-#: models.py:1419
+#: models.py:1425
 msgid "Latitude of the first Central Meridian."
 msgstr "本初子午線の経度。"
 
-#: models.py:1427 templates/image/detail/image_card.html:64
+#: models.py:1433 templates/image/detail/image_card.html:64
 msgid "CMII"
 msgstr "CMII"
 
-#: models.py:1428
+#: models.py:1434
 msgid "Latitude of the second Central Meridian."
 msgstr "第2子午線の経度。"
 
-#: models.py:1436 templates/image/detail/image_card.html:67
+#: models.py:1442 templates/image/detail/image_card.html:67
 msgid "CMIII"
 msgstr "CMIII"
 
-#: models.py:1437
+#: models.py:1443
 msgid "Latitude of the third Central Meridian."
 msgstr "第3子午線の経度。"
 
-#: models.py:1445 templates/image/detail/image_card.html:70
+#: models.py:1451 templates/image/detail/image_card.html:70
 msgid "Seeing"
 msgstr "シーイング"
 
-#: models.py:1446
+#: models.py:1452
 msgid "Your estimation of the seeing, on a scale from 1 to 5."
 msgstr "あなたが見積もったシーイング（1〜5の間の整数を記入）。"
 
-#: models.py:1452 templates/image/detail/image_card.html:73
+#: models.py:1458 templates/image/detail/image_card.html:73
 msgid "Transparency"
 msgstr "透明度"
 
-#: models.py:1453
+#: models.py:1459
 msgid "Your estimation of the transparency, on a scale from 1 to 10."
 msgstr "あなたが見積もった透明度（1〜10の間の整数を記入）。"
 
-#: models.py:1459 templates/image/detail/image_card.html:49
+#: models.py:1465 templates/image/detail/image_card.html:49
 msgid "Time"
 msgstr "時刻"
 
-#: models.py:1460
+#: models.py:1466
 msgid "Please use the following format: hh:mm."
 msgstr "hh:mmの形式を使ってください。"
 
-#: models.py:1491
+#: models.py:1497
 msgid "Request from"
 msgstr "からの依頼"
 
-#: models.py:1503
+#: models.py:1509
 msgid "Additional information"
 msgstr "補足情報"
 
-#: models.py:1504
+#: models.py:1510
 msgid "TIFF/FITS"
 msgstr "TIFF/FITS"
 
-#: models.py:1505
+#: models.py:1511
 msgid "Higher resolution"
 msgstr "高解像度"
 
-#: models.py:1537
+#: models.py:1543
 msgid "Real name"
 msgstr "本名"
 
-#: models.py:1538
+#: models.py:1544
 msgid "If present, your real name will be used throughout the website."
 msgstr "記入した場合、本名がAstroBin全体で使われます。"
 
-#: models.py:1552
+#: models.py:1558
 msgid "Job"
 msgstr "仕事"
 
-#: models.py:1559
+#: models.py:1565
 msgid "Hobbies"
 msgstr "趣味"
 
-#: models.py:1563
+#: models.py:1569
 msgid "Do you have any hobbies other than astrophotography?"
 msgstr "天体写真以外の趣味はありますか?"
 
-#: models.py:1570
+#: models.py:1576
 msgid "Timezone"
 msgstr "タイムゾーン"
 
-#: models.py:1571
+#: models.py:1577
 msgid ""
 "By selecting this, you will see all the dates on AstroBin in your timezone."
 msgstr ""
 "これを選択した場合には、AstroBinでは選択したタイムゾーンで日付が表示されま"
 "す。"
 
-#: models.py:1576
+#: models.py:1582
 msgid "About you"
 msgstr "あなたについて"
 
-#: models.py:1577
+#: models.py:1583
 msgid "Write something about yourself. HTML tags are allowed."
 msgstr "あなた自身について何かかいてください。HTMLタグが利用できます。"
 
-#: models.py:1585
+#: models.py:1591
 msgid "Company name"
 msgstr "会社名"
 
-#: models.py:1586
+#: models.py:1592
 msgid "The name of the company you represent on AstroBin."
 msgstr "AstroBinで表示するあなたの会社名。"
 
-#: models.py:1592
+#: models.py:1598
 msgid "Company description"
 msgstr "会社概要"
 
-#: models.py:1593
+#: models.py:1599
 msgid ""
 "A short description of the company you represent on AstroBin. You can use "
 "some <a href=\"/faq/#comments\">formatting rules</a>."
@@ -2270,89 +2270,89 @@ msgstr ""
 "AstroBinでのあなたが表示する会社の概要。<a href=\"/faq/#comments\">フォーマッ"
 "トルール</a>を利用してください。"
 
-#: models.py:1601
+#: models.py:1607
 msgid "Company website"
 msgstr "会社のWebサイトのURL"
 
-#: models.py:1602
+#: models.py:1608
 msgid "The website of the company you represent on AstroBin."
 msgstr "AstroBin上であなたが表示する会社のWebサイトURL。"
 
-#: models.py:1606
+#: models.py:1612
 msgid "Country of operation"
 msgstr "利用している国"
 
-#: models.py:1631 templates/maintenance_base.html:316
+#: models.py:1637 templates/maintenance_base.html:316
 #: templates/profile-edit-menu.html:42
 msgid "Default license"
 msgstr "デフォルトのライセンス"
 
-#: models.py:1633
+#: models.py:1639
 msgid ""
 "The license you select here is automatically applied to all your new images."
 msgstr "全ての新しい画像に、選択したライセンスを自動的に適用します。"
 
-#: models.py:1666
+#: models.py:1672
 msgid "Language"
 msgstr "言語"
 
-#: models.py:1712
+#: models.py:1718
 msgid "A descriptive name, e.g. 'Home observatory' or 'Mount Whitney'."
 msgstr "別名（ベランダ撮影や光が丘など）。"
 
-#: models.py:1718
+#: models.py:1724
 msgid "City"
 msgstr "市区町村"
 
-#: models.py:1719
+#: models.py:1725
 msgid "If this location is not in a city, use the name of the closest city."
 msgstr "この場所に地名が無い場合、最も近隣の町の名前を使ってください。"
 
-#: models.py:1725
+#: models.py:1731
 msgid "State or province"
 msgstr "都道府県"
 
-#: models.py:1730
+#: models.py:1736
 msgid "Country"
 msgstr "国名"
 
-#: models.py:1747
+#: models.py:1753
 msgid "North"
 msgstr "北緯"
 
-#: models.py:1747
+#: models.py:1753
 msgid "South"
 msgstr "南緯"
 
-#: models.py:1748
+#: models.py:1754
 msgid "North or south"
 msgstr "北緯もしくは南緯"
 
-#: models.py:1763
+#: models.py:1769
 msgid "East"
 msgstr "東経"
 
-#: models.py:1763
+#: models.py:1769
 msgid "West"
 msgstr "西経"
 
-#: models.py:1764
+#: models.py:1770
 msgid "East or West"
 msgstr "東経もしくは西経"
 
-#: models.py:1768
+#: models.py:1774
 msgid "Altitude"
 msgstr "高度"
 
-#: models.py:1769
+#: models.py:1775
 msgid "In meters."
 msgstr "メートル。"
 
-#: models.py:1851
+#: models.py:1857
 msgid "The name of the website or app that wishes to use the APIs."
 msgstr "ウエブサイトの名前もしくはAPIを利用するアプリケーションの名前"
 
-#: models.py:1859
+#: models.py:1865
 msgid ""
 "Please explain the purpose of your application, and how you intend to use "
 "the API."
@@ -2360,63 +2360,63 @@ msgstr ""
 "あなたのアプリケーションの目的と、そのAPIをどのように使おうとしているのかを説"
 "明してください。"
 
-#: models.py:1990
+#: models.py:1996
 msgid "AUD - Australian dollars"
 msgstr "AUD - オーストラリアドル"
 
-#: models.py:1991
+#: models.py:1997
 msgid "CAD - Canadian dollars"
 msgstr "CAD - カナダ・ドル"
 
-#: models.py:1992
+#: models.py:1998
 msgid "CHF - Swiss francs"
 msgstr "CHF - スイス・フラン"
 
-#: models.py:1993
+#: models.py:1999
 msgid "EUR - Euros"
 msgstr "EUR - ユーロ"
 
-#: models.py:1994
+#: models.py:2000
 msgid "GPB - Pound stelings"
 msgstr "GPB - イギリス・ポンド"
 
-#: models.py:1995
+#: models.py:2001
 msgid "PLN - Polish zloty"
 msgstr "PLN - ポーランド・ズウォティ"
 
-#: models.py:1996
+#: models.py:2002
 msgid "SEK - Swedish krona"
 msgstr "SEK - スエーデン・コルナ"
 
-#: models.py:1997
+#: models.py:2003
 msgid "USD - American dollars"
 msgstr "USD - アメリカ・ドル"
 
-#: models.py:2003 models.py:2053
+#: models.py:2009 models.py:2059
 msgid "Producer"
 msgstr "製作者"
 
-#: models.py:2014 models.py:2096
+#: models.py:2020 models.py:2102
 msgid "The link to this product's page on your website."
 msgstr "あなたのWebサイトでの、このプロダクトのリンク先URLを記入してください。"
 
-#: models.py:2022
+#: models.py:2028
 msgid "Price"
 msgstr "価格"
 
-#: models.py:2030
+#: models.py:2036
 msgid "Currency"
 msgstr "通貨"
 
-#: models.py:2046
+#: models.py:2052
 msgid "Retailed gear items"
 msgstr "販売機材"
 
-#: models.py:2062
+#: models.py:2068
 msgid "Proper make"
 msgstr "正式な製品"
 
-#: models.py:2063
+#: models.py:2069
 msgid ""
 "Sometimes, product make/brand/producer/developer names are not written "
 "properly by the users. Write here the proper make/brand/producer/developer "
@@ -2425,11 +2425,11 @@ msgstr ""
 "時々、メーカー名やブランド名、製作者名、開発者名をユーザーが正確に記載してい"
 "ないことがあります。正確にブランド名、製作者名、開発者名を記入してください。"
 
-#: models.py:2070
+#: models.py:2076
 msgid "Proper name"
 msgstr "正式名称"
 
-#: models.py:2071
+#: models.py:2077
 msgid ""
 "Sometimes, product names are not written properly by the users. Write here "
 "the proper product name, not including the make/brand/producer/developer "
@@ -2441,7 +2441,7 @@ msgstr ""
 "け多くの製品をグループ化し、製品の一般的な名称を使ってもらおうと試みていま"
 "す。"
 
-#: models.py:2079
+#: models.py:2085
 msgid ""
 "The official, commercial image for this product. Upload an image via the "
 "regular uploading interface, set its subject type to \"Gear\", and then "
@@ -2452,17 +2452,17 @@ msgstr ""
 "新の画像を取得し、選択リストから題材を\"機材\"を設定します。複数のバージョン"
 "をアップロードする場合は、商用ページにそれらが表示されます。"
 
-#: models.py:2087
+#: models.py:2093
 msgid "Tagline"
 msgstr "タグライン"
 
-#: models.py:2088
+#: models.py:2094
 msgid ""
 "A memorable phrase that will sum up this product, for marketing purposes."
 msgstr ""
 "販売目的のために製品についていた記憶にのこるフレーズ（キャッチコピー）。"
 
-#: models.py:2103
+#: models.py:2109
 msgid ""
 "Here you can write the full commercial description of your product. You can "
 "use some <a href=\"/faq/#comments\">formatting rules</a>."
@@ -2470,7 +2470,7 @@ msgstr ""
 "ここには、あなたの製品の商業的な説明を記載することができます。それには、<a "
 "href=\"/faq/#comments\">フォーマットルール</a>を利用することが可能です。"
 
-#: models.py:2122
+#: models.py:2128
 msgid "Commercial gear items"
 msgstr "商業的な機材"
 
@@ -4489,7 +4489,8 @@ msgid "OK"
 msgstr "OK"
 
 #: templates/base/user_links_entries.html:255
-msgid "No, tranks"
+#, fuzzy
+msgid "No, thanks"
 msgstr "No, tranks"
 
 #: templates/commercial/products/edit.html:7
