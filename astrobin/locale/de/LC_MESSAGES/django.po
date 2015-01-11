@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: AstroBin 1.4\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2014-12-03 03:32+0000\n"
+"POT-Creation-Date: 2015-01-11 03:10+0000\n"
 "PO-Revision-Date: 2014-11-15 06:55+0000\n"
 "Last-Translator: Salvatore <salvatore@iovene.com>\n"
 "Language-Team: German <LL@li.org>\n"
@@ -4581,7 +4581,7 @@ msgstr ""
 "Wenn du Hilfe brauchst, ein Problem melden, Feedback oder Vorschläge geben "
 "oder einfach nur \"Hallo\" sagen willst, dann schreib uns!"
 
-#: templates/contact_form/contact.html:17 templates/image/detail/js.html:103
+#: templates/contact_form/contact.html:17 templates/image/detail/js.html:105
 #: templates/image/detail/modals/send_to_datapool.html:35
 #: templates/image/detail/modals/send_to_sharedfolder.html:47
 #: templates/messages/compose.html:14 templates/messages/modal_compose.html:13
@@ -4997,7 +4997,7 @@ msgstr "Feldgrösse"
 msgid "Contains"
 msgstr "Beinhaltet"
 
-#: templates/image/detail/js.html:101 templates/user/profile-js.html:11
+#: templates/image/detail/js.html:103 templates/user/profile-js.html:11
 #, python-format
 msgid "Send %(username)s a message"
 msgstr "%(username)s eine Nachricht senden"
@@ -5829,7 +5829,7 @@ msgid "Here are your notifications"
 msgstr "Hier sind Deine Benachrichtigungen"
 
 #: templates/notification/email_body.txt:3
-#, python-format
+#, fuzzy, python-format
 msgid ""
 "Hi! You have a new notification on AstroBin:\n"
 "\n"
@@ -5839,6 +5839,8 @@ msgid ""
 "\n"
 "If you don't want to receive emails anymore, edit your preferences by going "
 "to http://astrobin.com%(pref_url)s.\n"
+"\n"
+"PLEASE DO NOT REPLY TO THIS EMAIL\n"
 "\n"
 "Clear skies,\n"
 "AstroBin.\n"
@@ -6574,6 +6576,11 @@ msgid "Link is valid for %(expiration_days)s days."
 msgstr "Dieser Link ist für %(expiration_days)s Tage gültig."
 
 #: templates/registration/activation_email.txt:9
+#: templates/registration/password_reset_email.html:6
+msgid "PLEASE DO NOT REPLY TO THIS EMAIL"
+msgstr ""
+
+#: templates/registration/activation_email.txt:11
 msgid ""
 "Sincerely,\n"
 "the AstroBin staff."
