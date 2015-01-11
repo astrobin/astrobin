@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: AstroBin 1.9\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2014-12-03 03:37+0000\n"
+"POT-Creation-Date: 2015-01-11 03:13+0000\n"
 "PO-Revision-Date: 2012-11-25 18:36+0100\n"
 "Last-Translator: strugar <strugar@gmail.com>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -4544,7 +4544,7 @@ msgstr ""
 "prijavite problem, pošaljete povratnu informaciju ili sugestije, ili prosto "
 "želite da stupite u kontakt."
 
-#: templates/contact_form/contact.html:17 templates/image/detail/js.html:103
+#: templates/contact_form/contact.html:17 templates/image/detail/js.html:105
 #: templates/image/detail/modals/send_to_datapool.html:35
 #: templates/image/detail/modals/send_to_sharedfolder.html:47
 #: templates/messages/compose.html:14 templates/messages/modal_compose.html:13
@@ -4896,7 +4896,7 @@ msgstr ""
 msgid "Contains"
 msgstr ""
 
-#: templates/image/detail/js.html:101 templates/user/profile-js.html:11
+#: templates/image/detail/js.html:103 templates/user/profile-js.html:11
 #, python-format
 msgid "Send %(username)s a message"
 msgstr ""
@@ -5679,6 +5679,8 @@ msgid ""
 "If you don't want to receive emails anymore, edit your preferences by going "
 "to http://astrobin.com%(pref_url)s.\n"
 "\n"
+"PLEASE DO NOT REPLY TO THIS EMAIL\n"
+"\n"
 "Clear skies,\n"
 "AstroBin.\n"
 msgstr ""
@@ -6285,6 +6287,11 @@ msgid "Link is valid for %(expiration_days)s days."
 msgstr ""
 
 #: templates/registration/activation_email.txt:9
+#: templates/registration/password_reset_email.html:6
+msgid "PLEASE DO NOT REPLY TO THIS EMAIL"
+msgstr ""
+
+#: templates/registration/activation_email.txt:11
 msgid ""
 "Sincerely,\n"
 "the AstroBin staff."
