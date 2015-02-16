@@ -21,7 +21,7 @@ http://docs.vagrantup.com/v2/installation/index.html
 Then create a trusty64 box:
 
 ```bash
-vagrant box add astrobin https://vagrantcloud.com/ubuntu/trusty64/version/1/provider/virtualbox.box
+vagrant box add astrobin https://vagrantcloud.com/ubuntu/boxes/trusty64/versions/14.04/providers/virtualbox.box
 ```
 
 Go to the directory that holds the AstroBin code and start the valgrant box:
