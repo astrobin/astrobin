@@ -8,7 +8,7 @@ msgstr ""
 "Project-Id-Version: AstroBin 1.0\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2015-01-11 03:11+0000\n"
-"PO-Revision-Date: 2014-05-29 11:01+0000\n"
+"PO-Revision-Date: 2015-01-11 07:34+0000\n"
 "Last-Translator: Salvatore <salvatore@iovene.com>\n"
 "Language-Team: Salvatore Iovene <salvatore@iovene.com>\n"
 "Language: it\n"
@@ -17,7 +17,7 @@ msgstr ""
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=(n != 1);\n"
 "X-Generator: Pootle 2.5.0\n"
-"X-POOTLE-MTIME: 1401361302.58903\n"
+"X-POOTLE-MTIME: 1420961650.158288\n"
 
 #: fields.py:10
 msgid "United Kingdom"
@@ -4492,7 +4492,7 @@ msgstr ""
 
 #: templates/base/site_links.html:33
 msgid "Source code"
-msgstr ""
+msgstr "Codice sorgente"
 
 #: templates/base/site_links.html:118
 msgid "AstroBin Raw Data"
@@ -4507,9 +4507,8 @@ msgid "Please select your language from the options above."
 msgstr "Seleziona la tua lingua tra le scelte qua sopra."
 
 #: templates/base/user_links_entries.html:176
-#, fuzzy
 msgid "Raw data"
-msgstr "Libreria dati grezzi"
+msgstr "Dati grezzi"
 
 #: templates/base/user_links_entries.html:182
 #: templates/user/profile-subnav.html:35
@@ -4534,7 +4533,6 @@ msgid "OK"
 msgstr "OK"
 
 #: templates/base/user_links_entries.html:255
-#, fuzzy
 msgid "No, thanks"
 msgstr "No, grazie"
 
@@ -5109,7 +5107,7 @@ msgstr "Porta all'attenzione di un utente"
 
 #: templates/image/detail/menu/admin.html:7
 msgid "Admin"
-msgstr ""
+msgstr "Amministrazione"
 
 #: templates/image/detail/menu/admin.html:14
 #: templates/image/detail/modals/flag_thumbnails.html:7
@@ -5118,7 +5116,7 @@ msgstr "Segnala problema con le miniature"
 
 #: templates/image/detail/menu/admin.html:21
 msgid "Ban user"
-msgstr ""
+msgstr "Banna utente"
 
 #: templates/image/detail/menu/share.html:6
 #: templates/image/detail/modals/share.html:7
@@ -5345,9 +5343,8 @@ msgid "Full"
 msgstr "Piena risoluzione"
 
 #: templates/image/detail/modals/share.html:36
-#, fuzzy
 msgid "Real"
-msgstr "Nome e cognome"
+msgstr "Reale"
 
 #: templates/image/detail/modals/share.html:40
 msgid "Copy this"
@@ -5850,7 +5847,7 @@ msgid "Here are your notifications"
 msgstr "Ecco le tue notifiche"
 
 #: templates/notification/email_body.txt:3
-#, fuzzy, python-format
+#, python-format
 msgid ""
 "Hi! You have a new notification on AstroBin:\n"
 "\n"
@@ -5872,8 +5869,10 @@ msgstr ""
 "\n"
 "Per vedere tutte le tue notifiche, vai su %(notices_url)s.\n"
 "\n"
-"Se non vuoi più ricevere email, modifica le opzioni andando su http://"
-"astrobin.com%(pref_url)s.\n"
+"NON RISPONDERE A QUESTA EMAIL\n"
+"\n"
+"Se non vuoi più ricevere email, modifica le opzioni andando su "
+"http://astrobin.com%(pref_url)s.\n"
 "\n"
 "Cieli sereni,\n"
 "AstroBin.\n"
@@ -6616,7 +6615,7 @@ msgstr "Il link è valido per %(expiration_days)s giorni."
 #: templates/registration/activation_email.txt:9
 #: templates/registration/password_reset_email.html:6
 msgid "PLEASE DO NOT REPLY TO THIS EMAIL"
-msgstr ""
+msgstr "NON RISPONDERE A QUESTA EMAIL"
 
 #: templates/registration/activation_email.txt:11
 msgid ""
@@ -6804,12 +6803,11 @@ msgstr "Richiedi una API Key"
 
 #: templates/user/ban.html:7 templates/user/ban.html.py:15
 msgid "Are you sure you want to ban this user?"
-msgstr ""
+msgstr "Sei sicuro di voler bannare questo utente?"
 
 #: templates/user/ban.html:9 templates/user/ban.html.py:25
-#, fuzzy
 msgid "User banned"
-msgstr "Scheda utente"
+msgstr "Utente bannato"
 
 #: templates/user/ban.html:17
 #, python-format
@@ -6817,15 +6815,16 @@ msgid ""
 "User <strong>%(user)s</strong> will be deleted, with all their images, "
 "messages, comments, and so on."
 msgstr ""
+"L'utente <strong>%(user)s</strong> sarà cancellato, con tutte le sue foto, "
+"messaggi, commenti, e così via."
 
 #: templates/user/ban.html:27
 msgid "The user was banned."
-msgstr ""
+msgstr "L'utente è stato bannato."
 
 #: templates/user/ban.html:28
-#, fuzzy
 msgid "Thank you!"
-msgstr "Ringraziamenti"
+msgstr "Grazie!"
 
 #: templates/user/bookmarks.html:5
 #, python-format
