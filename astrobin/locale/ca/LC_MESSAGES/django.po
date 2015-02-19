@@ -8,15 +8,16 @@ msgstr ""
 "Project-Id-Version: AstroBin 1.8\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2015-01-11 03:09+0000\n"
-"PO-Revision-Date: 2013-01-20 01:02+0100\n"
-"Last-Translator: Bufot <bufote@hotmail.com>\n"
+"PO-Revision-Date: 2015-01-20 21:53+0000\n"
+"Last-Translator: jordi <jordi.inyigo@gmail.com>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
 "Language: ca\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=(n != 1);\n"
-"X-Generator: Pootle 2.1.6\n"
+"X-Generator: Pootle 2.5.0\n"
+"X-POOTLE-MTIME: 1421790823.87303\n"
 
 #: fields.py:10
 msgid "United Kingdom"
@@ -1176,9 +1177,8 @@ msgid "Express value in mm"
 msgstr "Escriu el valor en mm"
 
 #: forms.py:320 forms.py:325
-#, fuzzy
 msgid "Express value in &mu;m"
-msgstr "Escriu el valor en mm"
+msgstr "Escriu el valor en &mu;m"
 
 #: forms.py:332 forms.py:337 forms.py:565 forms.py:610 forms.py:651
 msgid "Please use the following format: yyyy-mm-dd"
@@ -1347,9 +1347,8 @@ msgstr ""
 "ja has reclamat abans."
 
 #: forms.py:989
-#, fuzzy
 msgid "You have already claimed this product."
-msgstr "Ja has nominat aquesta imatge"
+msgstr "Ja ha reclamat aquest producte."
 
 #: locale_extras.py:4
 msgid "Recipient"
@@ -1505,16 +1504,15 @@ msgstr "Grec"
 
 #: models.py:90 models.py:108
 msgid "Russian"
-msgstr ""
+msgstr "Rus"
 
 #: models.py:91 models.py:109
 msgid "Arabic"
-msgstr ""
+msgstr "Àrab"
 
 #: models.py:92 models.py:110
-#, fuzzy
 msgid "Japanese"
-msgstr "Japó"
+msgstr "Japonès"
 
 #: models.py:114
 msgid "Pulsars"
@@ -1930,13 +1928,12 @@ msgid "Subject type"
 msgstr "Tema"
 
 #: models.py:680
-#, fuzzy
 msgid "Objects in field"
-msgstr "No s'ha trobat l'objecte"
+msgstr "Objectes dins de camp"
 
 #: models.py:681
 msgid "Use a <strong>comma</strong> to separate the values."
-msgstr ""
+msgstr "Fes servir<strong>comes</strong> per a separar els valors."
 
 #: models.py:687
 msgid ""
@@ -2216,9 +2213,8 @@ msgid "Higher resolution"
 msgstr "Resolució màxima"
 
 #: models.py:1543
-#, fuzzy
 msgid "Real name"
-msgstr "Denominació correcta"
+msgstr "Nom real"
 
 #: models.py:1544
 msgid "If present, your real name will be used throughout the website."
@@ -2273,7 +2269,7 @@ msgid ""
 "some <a href=\"/faq/#comments\">formatting rules</a>."
 msgstr ""
 "Descripció curta de l'empresa la qual representes a AstroBin. Pots fer "
-"servir algunes <a href=\"/faq/#10\">marques de format</a> "
+"servir algunes <a href=\"/faq/#comments\">regles de format</a>."
 
 #: models.py:1607
 msgid "Company website"
@@ -2377,7 +2373,7 @@ msgstr "CAD - Dòlars canadencs"
 
 #: models.py:1998
 msgid "CHF - Swiss francs"
-msgstr ""
+msgstr "CHF - Francs suïssos"
 
 #: models.py:1999
 msgid "EUR - Euros"
@@ -2385,20 +2381,19 @@ msgstr "EUR - Euros"
 
 #: models.py:2000
 msgid "GPB - Pound stelings"
-msgstr ""
+msgstr "GPB - Lliures esterlines"
 
 #: models.py:2001
 msgid "PLN - Polish zloty"
-msgstr ""
+msgstr "PLN - Zlotys polonesos"
 
 #: models.py:2002
 msgid "SEK - Swedish krona"
-msgstr ""
+msgstr "SEK - Corona sueca"
 
 #: models.py:2003
-#, fuzzy
 msgid "USD - American dollars"
-msgstr "Samoa"
+msgstr "USD - Dòlars americans"
 
 #: models.py:2009 models.py:2059
 msgid "Producer"
@@ -2469,7 +2464,7 @@ msgstr "Lema"
 #: models.py:2094
 msgid ""
 "A memorable phrase that will sum up this product, for marketing purposes."
-msgstr ""
+msgstr "Una frase memorable per a resumir aquest producte, per màrqueting."
 
 #: models.py:2109
 #, fuzzy
@@ -2478,7 +2473,7 @@ msgid ""
 "use some <a href=\"/faq/#comments\">formatting rules</a>."
 msgstr ""
 "Descripció curta de l'empresa la qual representes a AstroBin. Pots fer "
-"servir algunes <a href=\"/faq/#10\">marques de format</a> "
+"servir algunes <a href=\"/faq/#comments\">regles de format</a> "
 
 #: models.py:2128
 msgid "Commercial gear items"
@@ -2566,7 +2561,7 @@ msgstr "Nombre d'imatges per tema"
 
 #: views.py:477
 msgid "Today's 'Image of the day' was already choosen. Come back tomorrow!"
-msgstr ""
+msgstr "La \"imatge del dia\" ja s'ha escollit. Torna demà!"
 
 #: views.py:707
 msgid "Resolution"

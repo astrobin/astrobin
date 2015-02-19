@@ -8,7 +8,7 @@ msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2015-01-11 03:14+0000\n"
-"PO-Revision-Date: 2013-03-14 20:06+0100\n"
+"PO-Revision-Date: 2015-01-18 15:10+0000\n"
 "Last-Translator: Tannhauser <tannhauser@sfr.fr>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
 "Language: fr\n"
@@ -16,7 +16,8 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=(n > 1);\n"
-"X-Generator: Pootle 2.1.6\n"
+"X-Generator: Pootle 2.5.0\n"
+"X-POOTLE-MTIME: 1421593843.394709\n"
 
 #: folders.py:82 models.py:215 models.py:283
 #: templates/rawdata/privatesharedfolder_detail.html:84
@@ -752,16 +753,16 @@ msgstr ""
 "traitement, de recevoir ou fournir une aide technique."
 
 #: templates/rawdata/privatesharedfolder_list.html:25
-#, fuzzy, python-format
+#, python-format
 msgid ""
 "The <a href=\"%(rawdata_url)s\">Raw Data Platform</a> is primarily a way to "
 "securely back up your raw files, and keep them neatly and effortlessly "
 "organized, but being part of it also means that you support AstroBin and can "
 "perhaps contribute your raw files to scientific discoveries."
 msgstr ""
-"Un <a href=\"%(rawdata_url)s\">Compte Raw</a> est principalement un outil "
-"pour stocker en toute sécurité vos fichiers bruts, les organiser avec soin "
-"et sans efforts. Mais ce faisant, cela signifie également que vous supportez "
+"Un <a href=\"%(rawdata_url)s\">Compte Raw</a> est principalement un outil pour "
+"stocker en toute sécurité vos fichiers bruts, les organiser avec soin et "
+"facilité. Mais ce faisant, cela signifie également que vous supportez "
 "AstroBin et que, peut-être, vos fichiers bruts contribueront à des "
 "découvertes scientifiques."
 
@@ -808,6 +809,10 @@ msgid ""
 "Data subscription, so you may not create shared folder, but you may still be "
 "invited by subscribers."
 msgstr ""
+"Vous n'avez accès à aucune collaboration privée. Vous n'êtes pas titulaire "
+"d'un Compte Raw, et ne pouvez pas donc pas créer une collaboration privée. "
+"Toutefois, vous pouvez être invité par un titulaire de Compte Raw à une "
+"collaboration privée."
 
 #: templates/rawdata/privatesharedfolder_list.html:105
 #: templates/rawdata/publicdatapool_list.html:66
@@ -1015,11 +1020,11 @@ msgstr "Veuillez actualiser cette page dans quelques secondes."
 
 #: templates/subscription/_plan.html:11
 msgid "FREE!"
-msgstr ""
+msgstr "GRATUIT!"
 
 #: templates/subscription/_plan.html:12
 msgid "That's right, this plan is free."
-msgstr ""
+msgstr "Vous avez bien lu, ce forfait est gratuit."
 
 #: templates/subscription/_plan.html:17
 msgid "month"
@@ -1083,16 +1088,15 @@ msgstr "Vous êtes abonné à ce forfait."
 
 #: templates/subscription/subscription_detail.html:37
 msgid "Here you can deactivate your free Raw Data Atom subscription."
-msgstr ""
+msgstr "Vous pouvez ici désactiver votre abonnement au Compte Raw Atom."
 
 #: templates/subscription/subscription_detail.html:41
 msgid "Deactivate"
-msgstr ""
+msgstr "Désactiver"
 
 #: templates/subscription/subscription_detail.html:46
-#, fuzzy
 msgid "Go to your Raw Data Library."
-msgstr "Votre bibliothèque de fichiers bruts"
+msgstr "Vers votre Bibliothèque Compte Raw"
 
 #: templates/subscription/subscription_detail.html:50
 #, python-format
@@ -1104,12 +1108,12 @@ msgstr ""
 #: templates/subscription/subscription_detail.html:56
 #: templates/subscription/subscription_detail.html:98
 msgid "Here you can activate your free Raw Data Atom subscription."
-msgstr ""
+msgstr "Vous pouvez ici activer votre abonnement gratuit au Compte Raw Atom."
 
 #: templates/subscription/subscription_detail.html:60
 #: templates/subscription/subscription_detail.html:106
 msgid "Activate"
-msgstr ""
+msgstr "Activer"
 
 #: templates/subscription/subscription_detail.html:64
 #: templates/subscription/subscription_detail.html:88
@@ -1125,6 +1129,8 @@ msgid ""
 "Careful! If you have already a paid Raw Data subscription, your available "
 "space will be reduced!"
 msgstr ""
+"Attention! Si vous êtes déjà titulaire d'un Compte Raw payant, votre espace "
+"de stockage actuel sera réduit!"
 
 #: templates/subscription/subscription_detail.html:114
 #: templates/subscription/subscription_done.html:21
@@ -1185,6 +1191,8 @@ msgid ""
 "This plan is free! Choose it to share a small amount of data with other "
 "users."
 msgstr ""
+"Ce forfait est gratuit! Optez pour ce dernier si vous désirez seulement "
+"partager une petite quantité de données avec les autres utilisateurs."
 
 #: templates/subscription/subscription_list.html:62
 msgid ""
