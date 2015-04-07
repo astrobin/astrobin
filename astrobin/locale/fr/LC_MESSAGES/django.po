@@ -6,8 +6,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: AstroBin 1.0\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2015-01-11 03:11+0000\n"
-"PO-Revision-Date: 2014-06-01 17:42+0000\n"
+"POT-Creation-Date: 2015-02-19 11:15+0000\n"
+"PO-Revision-Date: 2015-03-06 15:18+0000\n"
 "Last-Translator: Tannhauser <tannhauser@sfr.fr>\n"
 "Language-Team: Français <LL@li.org>\n"
 "Language: fr\n"
@@ -17,7 +17,7 @@ msgstr ""
 "Plural-Forms: nplurals=2; plural=(n > 1);\n"
 "X-Generator: Pootle 2.5.0\n"
 "X-Poedit-Bookmarks: -1,319,-1,-1,-1,-1,-1,-1,-1,-1\n"
-"X-POOTLE-MTIME: 1401644537.698712\n"
+"X-POOTLE-MTIME: 1425655092.601199\n"
 
 #: fields.py:10
 msgid "United Kingdom"
@@ -4511,7 +4511,7 @@ msgstr ""
 
 #: templates/base/site_links.html:33
 msgid "Source code"
-msgstr ""
+msgstr "Code source"
 
 #: templates/base/site_links.html:118
 msgid "AstroBin Raw Data"
@@ -4526,9 +4526,8 @@ msgid "Please select your language from the options above."
 msgstr "Sélectionnez s'il vous plaît votre langue dans les options ci-dessus."
 
 #: templates/base/user_links_entries.html:176
-#, fuzzy
 msgid "Raw data"
-msgstr "Bibliothèque fichiers bruts"
+msgstr "Fichiers bruts"
 
 #: templates/base/user_links_entries.html:182
 #: templates/user/profile-subnav.html:35
@@ -4553,7 +4552,6 @@ msgid "OK"
 msgstr "OK"
 
 #: templates/base/user_links_entries.html:255
-#, fuzzy
 msgid "No, thanks"
 msgstr "Non, merci"
 
@@ -5148,7 +5146,7 @@ msgstr "Recommander"
 
 #: templates/image/detail/menu/admin.html:7
 msgid "Admin"
-msgstr ""
+msgstr "Admin"
 
 #: templates/image/detail/menu/admin.html:14
 #: templates/image/detail/modals/flag_thumbnails.html:7
@@ -5157,7 +5155,7 @@ msgstr "Signalez les miniatures défaillantes"
 
 #: templates/image/detail/menu/admin.html:21
 msgid "Ban user"
-msgstr ""
+msgstr "Bannir utilisateur"
 
 #: templates/image/detail/menu/share.html:6
 #: templates/image/detail/modals/share.html:7
@@ -5383,9 +5381,8 @@ msgid "Full"
 msgstr "Full"
 
 #: templates/image/detail/modals/share.html:36
-#, fuzzy
 msgid "Real"
-msgstr "Vrai nom"
+msgstr "Réelle"
 
 #: templates/image/detail/modals/share.html:40
 msgid "Copy this"
@@ -5890,7 +5887,7 @@ msgid "Here are your notifications"
 msgstr "Voici vos notifications"
 
 #: templates/notification/email_body.txt:3
-#, fuzzy, python-format
+#, python-format
 msgid ""
 "Hi! You have a new notification on AstroBin:\n"
 "\n"
@@ -5914,6 +5911,8 @@ msgstr ""
 "\n"
 "Si vous ne voulez plus recevoir d'e-mails, modifiez vos préférences en vous "
 "rendant sur http://astrobin.com%(pref_url)s.\n"
+"\n"
+"MERCI DE NE PAS RÉPONDRE À CET E-MAIL\n"
 "\n"
 "Bon ciel,\n"
 "AstroBin.\n"
@@ -6650,7 +6649,7 @@ msgstr "Ce lien est valide pendant %(expiration_days)s jours."
 #: templates/registration/activation_email.txt:9
 #: templates/registration/password_reset_email.html:6
 msgid "PLEASE DO NOT REPLY TO THIS EMAIL"
-msgstr ""
+msgstr "MERCI DE NE PAS RÉPONDRE À CET E-MAIL"
 
 #: templates/registration/activation_email.txt:11
 msgid ""
@@ -6839,12 +6838,11 @@ msgstr "Demander une clé API"
 
 #: templates/user/ban.html:7 templates/user/ban.html.py:15
 msgid "Are you sure you want to ban this user?"
-msgstr ""
+msgstr "Êtes-vous sûr(e) de vouloir bannir cette utilisateur?"
 
 #: templates/user/ban.html:9 templates/user/ban.html.py:25
-#, fuzzy
 msgid "User banned"
-msgstr "Utilisateur inconnu:"
+msgstr "Utilisateur banni"
 
 #: templates/user/ban.html:17
 #, python-format
@@ -6852,15 +6850,16 @@ msgid ""
 "User <strong>%(user)s</strong> will be deleted, with all their images, "
 "messages, comments, and so on."
 msgstr ""
+"L'utilisateur <strong>%(user)s</strong> sera supprimé, ainsi que toutes ses "
+"images, messages, commentaires et autres contributions."
 
 #: templates/user/ban.html:27
 msgid "The user was banned."
-msgstr ""
+msgstr "L'utilisateur a été banni."
 
 #: templates/user/ban.html:28
-#, fuzzy
 msgid "Thank you!"
-msgstr "Remerciements à"
+msgstr "Merci!"
 
 #: templates/user/bookmarks.html:5
 #, python-format
@@ -7274,8 +7273,8 @@ msgstr "Modifier les informations du distributeur"
 #~ "processed image to the public data pool: <strong>\"%(pool_name)s.\"</a>"
 #~ msgstr ""
 #~ "<a href=\"%(pool_url)s\"><strong>%(user_name)s</strong> a ajouté une "
-#~ "nouvelle image traitée à la collaboration publique: <strong>"
-#~ "\"%(pool_name)s.\"</a>"
+#~ "nouvelle image traitée à la collaboration publique: <strong>\"%(pool_name)"
+#~ "s.\"</a>"
 
 #~ msgid ""
 #~ "<a href=\"%(folder_url)s\">You are invited you to the private shared "
@@ -7891,13 +7890,13 @@ msgstr "Modifier les informations du distributeur"
 #~ "Votre image de %(messier_object)s est à présent affichée dans le Marathon "
 #~ "Messier. Félicitations!\n"
 #~ "\n"
-#~ "Voici votre image qui a été sélectionnée: http://astrobin.com"
-#~ "%(image_url)s\n"
+#~ "Voici votre image qui a été sélectionnée: http://astrobin.com%(image_url)"
+#~ "s\n"
 #~ "\n"
 #~ "Le Marathon Messier est une liste d'objets Messier illustrée par des "
 #~ "images d'AstroBin, chacune nominée par les utilisateurs..\n"
-#~ "Votre image est désormais la plus nominée pour l'objet "
-#~ "%(messier_object)s.\n"
+#~ "Votre image est désormais la plus nominée pour l'objet %(messier_object)"
+#~ "s.\n"
 #~ "\n"
 #~ "Vous pouvez visiter le Marathon Messier ici: http://astrobin.com/explore/"
 #~ "messier/"

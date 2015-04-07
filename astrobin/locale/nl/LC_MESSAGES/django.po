@@ -7,8 +7,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: AstroBin 1.4\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2015-01-11 03:11+0000\n"
-"PO-Revision-Date: 2014-02-03 16:36+0000\n"
+"POT-Creation-Date: 2015-02-19 11:15+0000\n"
+"PO-Revision-Date: 2015-03-01 15:35+0000\n"
 "Last-Translator: Koen_Dierckens <koen.dierckens@pandora.be>\n"
 "Language-Team: Dutch <LL@li.org>\n"
 "Language: nl\n"
@@ -17,7 +17,7 @@ msgstr ""
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=(n != 1);\n"
 "X-Generator: Pootle 2.5.0\n"
-"X-POOTLE-MTIME: 1391445387.68854\n"
+"X-POOTLE-MTIME: 1425224145.781993\n"
 
 #: fields.py:10
 msgid "United Kingdom"
@@ -1509,9 +1509,8 @@ msgid "Arabic"
 msgstr "Arabisch"
 
 #: models.py:92 models.py:110
-#, fuzzy
 msgid "Japanese"
-msgstr "Japan"
+msgstr "Japans"
 
 #: models.py:114
 msgid "Pulsars"
@@ -2571,7 +2570,7 @@ msgstr "Aantal beelden volgens type onderwerp"
 
 #: views.py:477
 msgid "Today's 'Image of the day' was already choosen. Come back tomorrow!"
-msgstr ""
+msgstr "De huidige \"Foto van de dag\" is reeds verkozen. Kom morgen terug!"
 
 #: views.py:707
 msgid "Resolution"
@@ -3711,20 +3710,20 @@ msgid "Runners-up"
 msgstr "Plaatsvervangers"
 
 #: templates/iotd_choose.html:7 templates/iotd_choose.html.py:13
-#, fuzzy
 msgid "Choose today's 'Image of the day'"
-msgstr "Archief van \"Foto van de dag\"-winnaars"
+msgstr "Kies de 'Foto van de dag'"
 
 #: templates/iotd_choose.html:37
-#, fuzzy
 msgid "Choose"
-msgstr "Kies bestand"
+msgstr "Kiezen"
 
 #: templates/iotd_choose.html:45
 msgid ""
 "There are no candidates for 'Image of the day' yet, today. Please try again "
 "later."
 msgstr ""
+"Vandaag zijn er nog geen kandidaat-beelden voor de 'Foto van de dag'. Kom "
+"later eens terugkijken."
 
 #: templates/iotd_choose_confirm.html:7 templates/iotd_choose_confirm.html:13
 #: templates/user/profile/commercial/products.html:287
@@ -3736,15 +3735,15 @@ msgstr "Ben je zeker?"
 
 #: templates/iotd_choose_confirm.html:35
 msgid "This image will be selected as today's 'Image of the day'."
-msgstr ""
+msgstr "Deze foto zal geselecteerd worden als 'Foto van de dag'"
 
 #: templates/iotd_choose_confirm.html:36
 msgid "This operation cannot be undone."
-msgstr ""
+msgstr "Deze actie kan niet ongedaan worden gemaakt."
 
 #: templates/iotd_choose_confirm.html:44
 msgid "Yes, I'm sure"
-msgstr ""
+msgstr "Ja, ik ben zeker"
 
 #: templates/iotd_choose_finished.html:5 templates/iotd_choose_finished.html:9
 #: templates/contact_form/contact_completed.html:4
@@ -3759,6 +3758,8 @@ msgid ""
 "help!\n"
 "            "
 msgstr ""
+"\n"
+"De 'Foto van de dag' werd geselecteerd. Bedankt voor je hulp!\n"
 
 #: templates/leaderboard.html:7 templates/leaderboard.html.py:11
 #: templates/maintenance_base.html:147 templates/base/site_links.html:85
@@ -4516,7 +4517,7 @@ msgstr ""
 
 #: templates/base/site_links.html:33
 msgid "Source code"
-msgstr ""
+msgstr "Broncode"
 
 #: templates/base/site_links.html:118
 msgid "AstroBin Raw Data"
@@ -4531,9 +4532,8 @@ msgid "Please select your language from the options above."
 msgstr "Gelieve uw taal te kiezen uit bovenstaande opties."
 
 #: templates/base/user_links_entries.html:176
-#, fuzzy
 msgid "Raw data"
-msgstr "Raw data verzameling"
+msgstr "Ruwe data"
 
 #: templates/base/user_links_entries.html:182
 #: templates/user/profile-subnav.html:35
@@ -4545,9 +4545,8 @@ msgid "Private shared folders"
 msgstr "Gedeelde privéfolders"
 
 #: templates/base/user_links_entries.html:220
-#, fuzzy
 msgid "Choose Image Of The Day"
-msgstr "Foto van de dag"
+msgstr "Kies de Foto van de dag"
 
 #: templates/base/user_links_entries.html:244
 msgid "Would you like to start using your real name on AstroBin?"
@@ -4559,7 +4558,6 @@ msgid "OK"
 msgstr "OK"
 
 #: templates/base/user_links_entries.html:255
-#, fuzzy
 msgid "No, thanks"
 msgstr "Nee, dank je"
 
@@ -5098,7 +5096,6 @@ msgid "Mark this revision as final"
 msgstr "Markeer deze revisie als finale versie"
 
 #: templates/image/detail/menu/actions.html:55
-#, fuzzy
 msgid "Attempt to plate-solve again"
 msgstr "Nieuwe poging plate-solving"
 
@@ -5150,7 +5147,7 @@ msgstr "Aan een gebruiker aanbevelen"
 
 #: templates/image/detail/menu/admin.html:7
 msgid "Admin"
-msgstr ""
+msgstr "Admin (Beheerder)"
 
 #: templates/image/detail/menu/admin.html:14
 #: templates/image/detail/modals/flag_thumbnails.html:7
@@ -5159,7 +5156,7 @@ msgstr "Signaleer niet werkende voorbeeldfoto's"
 
 #: templates/image/detail/menu/admin.html:21
 msgid "Ban user"
-msgstr ""
+msgstr "Gebruiker uitsluiten"
 
 #: templates/image/detail/menu/share.html:6
 #: templates/image/detail/modals/share.html:7
@@ -5385,9 +5382,8 @@ msgid "Full"
 msgstr "Volledig"
 
 #: templates/image/detail/modals/share.html:36
-#, fuzzy
 msgid "Real"
-msgstr "Echte naam"
+msgstr "Echt"
 
 #: templates/image/detail/modals/share.html:40
 msgid "Copy this"
@@ -5893,7 +5889,7 @@ msgid "Here are your notifications"
 msgstr "Hier zijn je kennisgevingen"
 
 #: templates/notification/email_body.txt:3
-#, fuzzy, python-format
+#, python-format
 msgid ""
 "Hi! You have a new notification on AstroBin:\n"
 "\n"
@@ -5917,6 +5913,8 @@ msgstr ""
 "\n"
 "Als je geen mails meer wenst te ontvangen dan kan je je voorkeuren wijzigen "
 "op http://astrobin.com%(pref_url)s.\n"
+"\n"
+"GELIEVE NIET OP DEZE MAIL TE ANTWOORDEN\n"
 "\n"
 "Clear skies - Nog vele onbewolkte nachten,\n"
 "AstroBin.\n"
@@ -6653,7 +6651,7 @@ msgstr "Deze link is geldig gedurende %(expiration_days)s dagen."
 #: templates/registration/activation_email.txt:9
 #: templates/registration/password_reset_email.html:6
 msgid "PLEASE DO NOT REPLY TO THIS EMAIL"
-msgstr ""
+msgstr "GELIEVE NIET OP DEZE MAIL TE ANTWOORDEN"
 
 #: templates/registration/activation_email.txt:11
 msgid ""
@@ -6842,12 +6840,11 @@ msgstr "Aanvraag van een API Key"
 
 #: templates/user/ban.html:7 templates/user/ban.html.py:15
 msgid "Are you sure you want to ban this user?"
-msgstr ""
+msgstr "Ben je zeker dat je deze gebruiker wil uitsluiten?"
 
 #: templates/user/ban.html:9 templates/user/ban.html.py:25
-#, fuzzy
 msgid "User banned"
-msgstr "Gebruiker niet gevonden:"
+msgstr "Gebruiker is uitgesloten"
 
 #: templates/user/ban.html:17
 #, python-format
@@ -6855,15 +6852,16 @@ msgid ""
 "User <strong>%(user)s</strong> will be deleted, with all their images, "
 "messages, comments, and so on."
 msgstr ""
+"Gebruiker <strong>%(user)s</strong> zal worden gewist samen met al diens "
+"foto's, berichten, commentaren en dergelijke."
 
 #: templates/user/ban.html:27
 msgid "The user was banned."
-msgstr ""
+msgstr "De gebruiker werd uitgesloten."
 
 #: templates/user/ban.html:28
-#, fuzzy
 msgid "Thank you!"
-msgstr "Met dank aan"
+msgstr "Dank u!"
 
 #: templates/user/bookmarks.html:5
 #, python-format
@@ -7888,8 +7886,8 @@ msgstr "Wijzig je informatie als distributeur"
 #~ "De Messier Marathon is een lijst van Messier objecten onder de vorm van "
 #~ "AstroBin foto's, die uitgekozen worden aan de hand van nominaties door de "
 #~ "AstroBin community.\n"
-#~ "Jouw foto is momenteel de meest genomineerde versie voor "
-#~ "%(messier_object)s.\n"
+#~ "Jouw foto is momenteel de meest genomineerde versie voor %(messier_object)"
+#~ "s.\n"
 #~ "\n"
 #~ "Je kan de Messier Marathon hier vinden: http://astrobin.com/explore/"
 #~ "messier/"

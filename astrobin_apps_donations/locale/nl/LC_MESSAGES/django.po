@@ -7,8 +7,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2015-01-11 03:17+0000\n"
-"PO-Revision-Date: 2014-02-03 16:32+0000\n"
+"POT-Creation-Date: 2015-02-19 11:20+0000\n"
+"PO-Revision-Date: 2015-03-01 15:26+0000\n"
 "Last-Translator: Koen_Dierckens <koen.dierckens@pandora.be>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
 "Language: nl\n"
@@ -17,7 +17,7 @@ msgstr ""
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=(n != 1);\n"
 "X-Generator: Pootle 2.5.0\n"
-"X-POOTLE-MTIME: 1391445141.18560\n"
+"X-POOTLE-MTIME: 1425223590.310961\n"
 
 #: templates/astrobin_apps_donations/cancel.html:5
 #: templates/astrobin_apps_donations/cancel.html:10
@@ -50,9 +50,8 @@ msgstr "Stichter van AstroBin"
 
 #: templates/astrobin_apps_donations/edit.html:5
 #: templates/astrobin_apps_donations/edit.html:8
-#, fuzzy
 msgid "Edit your recurring donation settings"
-msgstr "Uw recurrente donatie annuleren"
+msgstr "Uw recurrente donatie aanpassen"
 
 #: templates/astrobin_apps_donations/success.html:5
 #: templates/astrobin_apps_donations/success.html:10
@@ -134,13 +133,15 @@ msgstr "$%(amount)s/jaar"
 
 #: templates/astrobin_apps_donations/inclusion_tags/_paypal_button.html:119
 msgid "IMPORTANT"
-msgstr ""
+msgstr "BELANGRIJK"
 
 #: templates/astrobin_apps_donations/inclusion_tags/_paypal_button.html:119
 msgid ""
 "Please note: if you are already a donor, the Subscribe button will update "
 "your existing subscription, not create a new one."
 msgstr ""
+"Noot: als je al donateur bent dan zal de Abonneren-knop je bestaande "
+"abonnement aanpassen. Er wordt dus geen nieuw abonnement aangemaakt."
 
 #: templates/astrobin_apps_donations/inclusion_tags/cancel_modal.html:8
 #: templates/astrobin_apps_donations/inclusion_tags/cancel_modal.html:24
