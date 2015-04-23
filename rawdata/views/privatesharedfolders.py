@@ -110,7 +110,7 @@ class PrivateSharedFolderRemoveDataView(RestrictToSubscriberMixin, RestrictToInv
         return HttpResponse({}, **response_kwargs)
 
 
-class PrivateSharedFolderAddImageView(RestrictToSubscriberMixin, RestrictToInviteeMixin, base.View):
+class PrivateSharedFolderAddImageView(RestrictToInviteeMixin, base.View):
     def post(self, request, *args, **kwargs):
         folder = get_object_or_404(PrivateSharedFolder, pk = kwargs.get('pk'))
         image = get_object_or_404(Image, pk = request.POST.get('image'))

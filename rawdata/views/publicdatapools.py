@@ -91,7 +91,7 @@ class PublicDataPoolRemoveDataView(RestrictToSubscriberMixin, base.View):
         return HttpResponse({}, **response_kwargs)
 
 
-class PublicDataPoolAddImageView(RestrictToSubscriberMixin, base.View):
+class PublicDataPoolAddImageView(base.View):
     def post(self, request, *args, **kwargs):
         pool = get_object_or_404(PublicDataPool, pk = kwargs.get('pk'))
         image = get_object_or_404(Image, pk = request.POST.get('image'))
