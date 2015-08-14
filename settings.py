@@ -135,7 +135,7 @@ if AWS_S3_ENABLED:
 
     # see http://developer.yahoo.com/performance/rules.html#expires
     AWS_HEADERS = {
-        'Expires': 'Fri, 9 May 2081 13:25:00 GMT+2'
+        'Expires': 'Wed, 31 Dec 2036 23:59:59 GMT'
     }
 
 if LOCAL_STATIC_STORAGE:
