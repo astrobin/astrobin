@@ -1,6 +1,12 @@
 # Do not modify the next line
 export DJANGO_SETTINGS_MODULE="settings"
 
+export ASTROBIN_EMAIL_HOST_USER=''
+export ASTROBIN_EMAIL_HOST_PASSWORD=''
+export ASTROBIN_EMAIL_HOST='127.0.0.1'
+export ASTROBIN_EMAIL_PORT='1025'
+export ASTROBIN_EMAIL_USE_TLS='false'
+
 export ASTROBIN_DATABASE_HOST='127.0.0.1'
 export ASTROBIN_DATABASE_NAME='astrobin'
 export ASTROBIN_DATABASE_USER='astrobin'

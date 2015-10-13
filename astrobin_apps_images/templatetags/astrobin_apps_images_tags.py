@@ -101,7 +101,7 @@ def astrobin_image(
             h = size[1] if size[1] > 0 else w
             response_dict['status'] = 'error'
             response_dict['error_message'] = _("Data corruption. Please upload this image again. Sorry!")
-        except zlib.error:
+        except (TypeError, zlib.error):
             w = size[0]
             h = size[1] if size[1] > 0 else w
 

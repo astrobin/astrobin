@@ -91,7 +91,9 @@ $(document).ready(function() {
         textarea.val(content);
     });
 
-    {% get_hit_count_javascript for image %}
+    {% ifnotequal request.user image.user %} 
+        {% get_hit_count_javascript for image %}
+    {% endifnotequal %}
 
     astrobin_common.init(
         '{{image.user.username}}',

@@ -6,6 +6,8 @@ http://{{ site.domain }}{% url registration_activate activation_key %}
 
 {% blocktrans %}Link is valid for {{ expiration_days }} days.{% endblocktrans %}
 
+{% blocktrans %}PLEASE DO NOT REPLY TO THIS EMAIL{% endblocktrans %}
+
 {% blocktrans %}Sincerely,
 the AstroBin staff.{% endblocktrans %}
 

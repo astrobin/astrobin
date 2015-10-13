@@ -248,8 +248,27 @@ class ImageResource(ModelResource):
 
         if subjects:
             from astrobin_apps_platesolving.models import Solution
-            qs = Solution.objects.filter(objects_in_field__icontains = subjects)
-            orm_filters['pk__in'] = [i.pk for i in qs]
+
+            def fix_catalog(name):
+                capitalize = ('ngc', 'm', 'b', 'ic', 'ugc', 'pgc',)
+                if name.lower() in [x.lower() for x in capitalize]:
+                    return name.upper() + ' '
+                remove = ('name',)
+                if name.lower() in [x.lower() for x in remove]:
+                    return ''
+                return name + ' '
+
+            def fix_name(name):
+                import re
+                fix = re.compile('^(?P<catalog>M|NGC)(?P<name>\d+)', re.IGNORECASE)
+                m = fix.match(name)
+                if m:
+                    return '%s%s' % (fix_catalog(m.group('catalog')), m.group('name'))
+                return name
+
+            r = r"\y{0}\y".format(fix_name(subjects))
+            qs = Solution.objects.filter(objects_in_field__iregex = r)
+            orm_filters['pk__in'] = [i.object_id for i in qs]
 
         if ids:
             orm_filters['pk__in'] = ids.split(',')

@@ -7,8 +7,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2014-11-24 13:53+0000\n"
-"PO-Revision-Date: 2013-02-26 14:22+0100\n"
+"POT-Creation-Date: 2015-02-19 11:18+0000\n"
+"PO-Revision-Date: 2015-01-11 07:38+0000\n"
 "Last-Translator: Salvatore <salvatore@iovene.com>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
 "Language: it\n"
@@ -16,7 +16,8 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=(n != 1);\n"
-"X-Generator: Pootle 2.1.6\n"
+"X-Generator: Pootle 2.5.0\n"
+"X-POOTLE-MTIME: 1420961919.260667\n"
 
 #: folders.py:82 models.py:215 models.py:283
 #: templates/rawdata/privatesharedfolder_detail.html:84
@@ -739,7 +740,7 @@ msgstr ""
 "per collaborare all'elaborazione, dare o ricevere supporto tecnico."
 
 #: templates/rawdata/privatesharedfolder_list.html:25
-#, fuzzy, python-format
+#, python-format
 msgid ""
 "The <a href=\"%(rawdata_url)s\">Raw Data Platform</a> is primarily a way to "
 "securely back up your raw files, and keep them neatly and effortlessly "
@@ -794,6 +795,9 @@ msgid ""
 "Data subscription, so you may not create shared folder, but you may still be "
 "invited by subscribers."
 msgstr ""
+"Non hai accesso a nessuna cartella condivisa privata. Non hai un abbonamento "
+"Dati Grezzi, quindi non puoi creare cartelle condivise, ma puoi comunque "
+"essere invitato da altri abbonati."
 
 #: templates/rawdata/privatesharedfolder_list.html:105
 #: templates/rawdata/publicdatapool_list.html:66
@@ -996,11 +1000,11 @@ msgstr "Ricarica questa pagina tra qualche secondo."
 
 #: templates/subscription/_plan.html:11
 msgid "FREE!"
-msgstr ""
+msgstr "GRATIS!"
 
 #: templates/subscription/_plan.html:12
 msgid "That's right, this plan is free."
-msgstr ""
+msgstr "Corretto, questo piano è gratis."
 
 #: templates/subscription/_plan.html:17
 msgid "month"
@@ -1066,16 +1070,15 @@ msgstr "Seo iscritto a questa offerta."
 
 #: templates/subscription/subscription_detail.html:37
 msgid "Here you can deactivate your free Raw Data Atom subscription."
-msgstr ""
+msgstr "Qui puoi disattivare il tuo abbonamento Dati Grezzi Atom gratuito."
 
 #: templates/subscription/subscription_detail.html:41
 msgid "Deactivate"
-msgstr ""
+msgstr "Disattiva"
 
 #: templates/subscription/subscription_detail.html:46
-#, fuzzy
 msgid "Go to your Raw Data Library."
-msgstr "La tua libreria di dati grezzi"
+msgstr "Vai alla tua libreria di Dati Grezzi."
 
 #: templates/subscription/subscription_detail.html:50
 #, python-format
@@ -1085,12 +1088,12 @@ msgstr "Puoi <a href=\"%(cancel_url)s\">annullare via PayPal</a> se vuoi."
 #: templates/subscription/subscription_detail.html:56
 #: templates/subscription/subscription_detail.html:98
 msgid "Here you can activate your free Raw Data Atom subscription."
-msgstr ""
+msgstr "Qui puoi attivare il tuo abbonamento Dati Grezzi Atom gratuito."
 
 #: templates/subscription/subscription_detail.html:60
 #: templates/subscription/subscription_detail.html:106
 msgid "Activate"
-msgstr ""
+msgstr "Attiva"
 
 #: templates/subscription/subscription_detail.html:64
 #: templates/subscription/subscription_detail.html:88
@@ -1106,6 +1109,8 @@ msgid ""
 "Careful! If you have already a paid Raw Data subscription, your available "
 "space will be reduced!"
 msgstr ""
+"Attenzione! Se hai già un abbonamento a pagamento a Dati Grezzi, il tuo "
+"spazio disponibile sarà ridotto!"
 
 #: templates/subscription/subscription_detail.html:114
 #: templates/subscription/subscription_done.html:21
@@ -1165,6 +1170,8 @@ msgid ""
 "This plan is free! Choose it to share a small amount of data with other "
 "users."
 msgstr ""
+"Questo piano è gratuito! Sceglilo per condividire una piccola quantità di "
+"dati con altri utenti."
 
 #: templates/subscription/subscription_list.html:62
 msgid ""
