@@ -186,6 +186,7 @@ function pip {
 
     # Install submodules
     $sub_log
+    (cd /var/www/astrobin/ && git submodule init && git submodule update)
     for d in /var/www/astrobin/submodules/*; do
         (
             cd $d;
