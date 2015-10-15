@@ -114,7 +114,7 @@ def _prepare_views(obj, content_type):
     views = 0
     try:
         views = HitCount.objects.get(object_pk = obj.pk, content_type__name = content_type).hits
-    except HitCount.DoesNotExist:
+    except: 
         pass
 
     return views
