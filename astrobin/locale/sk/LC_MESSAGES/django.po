@@ -8,8 +8,8 @@ msgstr ""
 "Project-Id-Version: AstroBin 1.8\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2015-02-19 11:16+0000\n"
-"PO-Revision-Date: 2014-04-02 17:05+0000\n"
-"Last-Translator: Tomáš <fun2mas@gmail.com>\n"
+"PO-Revision-Date: 2015-04-27 16:17+0000\n"
+"Last-Translator: Martin <martin.balogm@gmail.com>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
 "Language: sk\n"
 "MIME-Version: 1.0\n"
@@ -17,7 +17,7 @@ msgstr ""
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=3; plural=(n==1) ? 0 : (n>=2 && n<=4) ? 1 : 2;\n"
 "X-Generator: Pootle 2.5.0\n"
-"X-POOTLE-MTIME: 1396458325.797585\n"
+"X-POOTLE-MTIME: 1430151429.877849\n"
 
 #: fields.py:10
 msgid "United Kingdom"
@@ -1045,7 +1045,7 @@ msgstr "Miesta"
 
 #: forms.py:77
 msgid "This field is required."
-msgstr "Toto pole je povinné."
+msgstr "Pole je povinné"
 
 #: forms.py:90
 msgid "Opacity"
@@ -1511,12 +1511,11 @@ msgstr "Rusky"
 
 #: models.py:91 models.py:109
 msgid "Arabic"
-msgstr "Arabsky"
+msgstr "Arabčina"
 
 #: models.py:92 models.py:110
-#, fuzzy
 msgid "Japanese"
-msgstr "Japonsko"
+msgstr "Japončina"
 
 #: models.py:114
 msgid "Pulsars"
@@ -1932,7 +1931,6 @@ msgid "Subject type"
 msgstr "Typ"
 
 #: models.py:680
-#, fuzzy
 msgid "Objects in field"
 msgstr "Objekty v poli"
 
@@ -2434,7 +2432,7 @@ msgstr ""
 
 #: models.py:2076
 msgid "Proper name"
-msgstr "Presný názov"
+msgstr "Názov"
 
 #: models.py:2077
 msgid ""
@@ -2563,7 +2561,7 @@ msgstr "Počet obrázkov podľa typu objektu"
 
 #: views.py:477
 msgid "Today's 'Image of the day' was already choosen. Come back tomorrow!"
-msgstr ""
+msgstr "Dnešný \"Obrázok dňa\" bol už vybratý. Vráťte sa zajtra! "
 
 #: views.py:707
 msgid "Resolution"
@@ -2884,7 +2882,6 @@ msgstr "Zatiaľ tu nie je aktivita."
 #: templates/affiliates.html:8 templates/affiliates.html.py:11
 #: templates/maintenance_base.html:188 templates/base/site_links.html:134
 #: templates/index/root.html:334
-#, fuzzy
 msgid "Affiliates"
 msgstr "Pobočky"
 
@@ -2902,6 +2899,9 @@ msgid ""
 "strong> and a <strong>secret</strong> if you want to access AstroBin's data "
 "in your own app or website."
 msgstr ""
+"Ďakujeme za Váš záujem používať API služby AstroBin! Potrebujete "
+"<strong>kľúč</strong> a <strong>tajomstvo</strong> ak chcete pristupovať k "
+"údajom AstroBin vo Vašej vlastnej aplikácii alebo web stránke."
 
 #: templates/app_api_key_request.html:11
 msgid "After you submit a request, you will receive a reply within 24 hours."
@@ -2989,9 +2989,8 @@ msgstr ""
 "Videl som prekrásne obrázky na tejto stránke. Moje nie sú hodné odoslania!"
 
 #: templates/faq.html:16 templates/faq.html.py:71
-#, fuzzy
 msgid "What's the deal with the Staging Area and the Public Area?"
-msgstr "Čo sa deje s pracovnou plochou a s verejným priestorom?"
+msgstr "Čo znamená dočasná a verejná zóna?"
 
 #: templates/faq.html:17 templates/faq.html.py:81
 msgid "Why was AstroBin created?"
@@ -3010,7 +3009,6 @@ msgid "How is the AstroBin index calculated?"
 msgstr "Ako sa počíta index AstroBin?"
 
 #: templates/faq.html:21 templates/faq.html.py:131
-#, fuzzy
 msgid "I received some Likes, why is my AstroBin index not updated?"
 msgstr "Získal som nejaké Lajky. Prečo sa mi neaktualizoval index AstroBin?"
 
@@ -3063,6 +3061,9 @@ msgid ""
 "severe hardware failure, it can be redeployed to a different server in a "
 "matter of 15 minutes."
 msgstr ""
+"Skutočná webstránka je v skutočnosti uložená na virtuálnom serveri, takže v "
+"prípade vážnej hardvérovej poruchy môže byť presunutá na iný server v "
+"priebehu 15 minút. "
 
 #: templates/faq.html:56
 msgid ""
@@ -3070,6 +3071,9 @@ msgid ""
 "Machine) is backed up daily. In case of severe data loss, the website will "
 "be quickly restored to a snapshot that's never older than 24 hours."
 msgstr ""
+"Posledne, AstroBin databáza (vlastne celý virtuálny server) je zálohovaná "
+"denne. V prípade vážnej straty dát bude webstránka rýchlo obnovená do stavu "
+"nie staršieho ako 24 hodín. "
 
 #: templates/faq.html:59
 msgid ""
@@ -3078,6 +3082,10 @@ msgid ""
 "responsibility in the event of loss, however unlikely it is. Always keep a "
 "copy of your image on your computer."
 msgstr ""
+"Napriek všetkému by ste si mali byť vedomí toho, že AstroBin nie je "
+"zálohovacia služba, aj keď sú vaše dáta v našich rukách v bezpečí. Nemôžeme "
+"byť legálne zodpovední v prípade straty, akokoľvek nepravdepodobnej. Vždy "
+"ukladajte kópiu vašich súborov na vašom počítači. "
 
 #: templates/faq.html:66
 msgid ""
@@ -3087,6 +3095,11 @@ msgid ""
 "minute picture of M31 you took last night between the clouds <em>belongs</"
 "em> here! Don't be shy and post it!"
 msgstr ""
+"Nezmysel. AstroBin <strong>nebol</strong>vytvorený pre prezentáciu "
+"nádherných fotografií ale pre umožnenie každému prispieť do rozsiahleho a "
+"neustále rastúceho úsilia centralizácie a indexácie dôležitých údajov. Tá "
+"30-minútová fotografia M31-ky, ktorú si spravil minulú noc pomedzi oblaky "
+"<em>patrí</em>sem! Nehanbi sa a uverejni ju!"
 
 #: templates/faq.html:73
 msgid ""
@@ -3098,6 +3111,12 @@ msgid ""
 "want. The image will be visible only to the intended recipients, and won't "
 "appear on your profile or AstroBin's home page."
 msgstr ""
+"Na AstroBine máte dve zóny pre fotografie. Do pracovnej zóny môžete nahrávať "
+"fotografie, ktoré chcete rýchlo zdieľať na fórach, sociálnych sieťach alebo "
+"mailových zoznamoch. Dni škálovania a kompresie obrázkov pre potreby fór sú "
+"za nami! Jednoducho nahrajte fotografiu do pracovnej zóny a pošlite "
+"komukoľvek link. Fotografia bude dostupná len určeným príjemcom a nezobrazí "
+"sa na vašom profile alebo domovskej stránke AstroBin."
 
 #: templates/faq.html:76
 msgid ""
@@ -3107,6 +3126,10 @@ msgid ""
 "Remember that you can also move images back and forth from one Area to the "
 "other as many times as you want!"
 msgstr ""
+"Na druhej strane verejná zóna je pre vaše finálne produkty. Po tom ako "
+"obdržíte ohlasy na vašom obľúbenom fóre, môžete presunúť fotografiu z "
+"pracovnej zóny do verejnej zóny a zobrazí sa na vašom profile. Fotografie "
+"môžete presúvať medzi zónami tam a naspäť neobmedzene. "
 
 #: templates/faq.html:83
 msgid ""
@@ -3116,6 +3139,10 @@ msgid ""
 "to Internet Forums, often with little or no data, or to general purpose "
 "image hosting websites, invariably with no data attached."
 msgstr ""
+"AstroBin sa zrodil z túžby skončiť niečo, čo sa dialo príliš dlho: mrhanie "
+"skvelého materiálu v mori chaosu, akým internet dokáže byť. Fantastické "
+"astrofotografie boli roky nahrávané na internetové fóra alebo na stránky "
+"všeobecnej fotografie s málo alebo žiadnymi dátami. "
 
 #: templates/faq.html:86
 msgid ""
@@ -3123,6 +3150,8 @@ msgid ""
 "reduced to nothing more than a bunch of pixel in the giant wasteland of the "
 "Internet."
 msgstr ""
+"Taká fotografia bola videná ľuďmi, zabudnutá a zredukovaná na súbor pixelov "
+"plávajúcich v mori internetu. "
 
 #: templates/faq.html:89
 msgid ""
@@ -3131,6 +3160,9 @@ msgid ""
 "over the world, so that their precious data would serve a purpose, and have "
 "a meaning forever."
 msgstr ""
+"Toto by sa nemalo stávať. AstroBin je odpoveďou: úsilie skladovať, zbierať, "
+"indexovať a kategorizovať výsledky astrofotografov z celého sveta. Ich "
+"vzácne dátu budú slúžiť účelu a budú navždy niečo znamenať. "
 
 #: templates/faq.html:96
 msgid ""
@@ -3140,6 +3172,11 @@ msgid ""
 "become possible: you could simply upload an image of a galaxy, and AstroBin "
 "could compare it to pictures of the same galaxy taken previously."
 msgstr ""
+"<em>AstroBin</em> ešte len začína a môžeme skutočne povedať, že jediným "
+"limitom je obloha! Uvažujeme nad množstvom nápadov. Tak ako používateľská "
+"základňa, rovnako rastie aj objem dát. Veci ako zautomatizované hľadanie "
+"supernov sa stáva možným - jednoducho nahráte fotografiu galaxie a AstroBin "
+"ju môže porovnať s ostatnými, odfotenými v minulosti. "
 
 #: templates/faq.html:99
 msgid ""
@@ -3147,55 +3184,60 @@ msgid ""
 "equipment, your location, and comparing what you have imaged to what users "
 "similar to you have, AstroBin could suggest your next challenge!"
 msgstr ""
+"AstroBin by vám tiež mohol navrhnúť objekty fotografovania. Poznajúc vaše "
+"vybavenie, vašu lokalitu a porovnaním vašich výsledkov s používateľmi s "
+"podobným vybavením, AstroBin by vám mohol navrhnúť ďalšiu výzvu!"
 
 #: templates/faq.html:102
 msgid ""
 "Thanks to the input from the community, more ideas are flowing in and the "
 "list get bigger and bigger."
-msgstr ""
+msgstr "Z komunity k nám plynú ďalšie nápady a ich zoznam sa rýchlo zväčšuje. "
 
 #: templates/faq.html:109
 msgid ""
 "AstroBin uses the Markdown syntax. Please use the following reference table:"
-msgstr ""
+msgstr "AstroBin používa Markdown syntax. Prosím, použite nasledujúcu tabuľku: "
 
 #: templates/faq.html:112
 msgid "You type:"
-msgstr ""
+msgstr "Napíšete"
 
 #: templates/faq.html:112
 msgid "You see:"
-msgstr ""
+msgstr "Vidíte:"
 
 #: templates/faq.html:113
 msgid "italics"
-msgstr ""
+msgstr "kurzíva"
 
 #: templates/faq.html:114
 msgid "bold"
-msgstr ""
+msgstr "tučné"
 
 #: templates/faq.html:116
 msgid "(TAB or 4 spaces)"
-msgstr ""
+msgstr "(TAB alebo 4 medzery)"
 
 #: templates/faq.html:116
 msgid "preformatted text"
-msgstr ""
+msgstr "predformátovaný text"
 
 #: templates/faq.html:117
 msgid "quoted text"
-msgstr ""
+msgstr "citovaný text"
 
 #: templates/faq.html:118
 msgid "escape the formatting syntax"
-msgstr ""
+msgstr "vyjsť von z formátovacej syntaxe"
 
 #: templates/faq.html:125
 msgid ""
 "The AstroBin index is a function of the number of Likes and the number of "
 "images posted by a user."
 msgstr ""
+"Index AstroBin je funkcia počtu lajkov a počtu fotografii nahratých "
+"používateľom. "
 
 #: templates/faq.html:133
 msgid ""
@@ -3203,6 +3245,9 @@ msgid ""
 "every 24 hours. The same applies for the search index, the Big Wall, and "
 "some other user data."
 msgstr ""
+"AstroBin index je aktualizovaný každých 24 hodín kvôli jeho výpočtovej "
+"náročnosti. To isté platí pre index pre hľadanie, veľkú nástenku a niektoré "
+"ďalšie používateľské dáta. "
 
 #: templates/faq.html:140
 msgid ""

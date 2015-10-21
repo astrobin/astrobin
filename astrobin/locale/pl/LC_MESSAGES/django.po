@@ -8,8 +8,8 @@ msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2015-02-19 11:15+0000\n"
-"PO-Revision-Date: 2013-11-12 17:01+0000\n"
-"Last-Translator: scyth <scyth1@gmail.com>\n"
+"PO-Revision-Date: 2015-10-20 20:41+0000\n"
+"Last-Translator: Lukasz83 <lukasz.sujka83@gmail.com>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
 "Language: pl\n"
 "MIME-Version: 1.0\n"
@@ -18,7 +18,7 @@ msgstr ""
 "Plural-Forms: nplurals=3; plural=(n==1 ? 0 : n%10>=2 && n%10<=4 && (n%100<10 "
 "|| n%100>=20) ? 1 : 2);\n"
 "X-Generator: Pootle 2.5.0\n"
-"X-POOTLE-MTIME: 1384275716.769191\n"
+"X-POOTLE-MTIME: 1445373683.179892\n"
 
 #: fields.py:10
 msgid "United Kingdom"
@@ -1074,7 +1074,7 @@ msgstr "Kamery główne"
 
 #: forms.py:135 models.py:759
 msgid "Guiding cameras"
-msgstr "Kamery prowadzące"
+msgstr "Kamera guidująca, prowadząca"
 
 #: forms.py:136 forms.py:229 models.py:760 models.py:1624 views.py:2284
 msgid "Focal reducers"
@@ -1105,8 +1105,8 @@ msgid ""
 "All the telescopes and lenses you own, including the ones you use for "
 "guiding, go here."
 msgstr ""
-"Wpisz tu wszystkie teleskopy i obiektywy, których używasz - także te, "
-"których używasz do prowadzenia/śledzenia."
+"Wprowadź nazwy teleskopów i obiektywów które posiadasz, włączając te, które "
+"używasz to guidingu."
 
 #: forms.py:204
 msgid "Your DSLRs, CCDs, planetary cameras and guiding cameras go here."
@@ -1361,7 +1361,6 @@ msgid "Body"
 msgstr "Treść"
 
 #: locale_extras.py:7
-#, fuzzy
 msgid "uploaded a new image"
 msgstr "Opublikuj nowe zdjęcie"
 
@@ -1379,11 +1378,11 @@ msgstr "skomentuj sprzęt"
 
 #: locale_extras.py:11
 msgid "bookmarked"
-msgstr ""
+msgstr "W zakładkach"
 
 #: locale_extras.py:12
 msgid "likes"
-msgstr ""
+msgstr "polubienia"
 
 #: locale_extras.py:13
 msgid "has written a review on"
@@ -1391,32 +1390,31 @@ msgstr "napisał recenzję o"
 
 #: locale_extras.py:14
 msgid "created a new public data pool"
-msgstr ""
+msgstr "Utworzono nowy zestaw danych publicznych"
 
 #: locale_extras.py:15
 msgid "added new data to public data pool"
-msgstr ""
+msgstr "Dodano nowy materiał do zestawu danych publicznych"
 
 #: locale_extras.py:16
 msgid "added a new processed image to public data pool"
-msgstr ""
+msgstr "Dodano nowy obrobiony obraz do zestawu danych publicznych"
 
 #: locale_extras.py:17
-#, fuzzy
 msgid "Remove from bookmarks"
-msgstr "Usuń z ulubionych"
+msgstr "Usuń z zakładek"
 
 #: locale_extras.py:18
 msgid "Bookmark"
-msgstr ""
+msgstr "Zakładka"
 
 #: locale_extras.py:19
 msgid "Unlike"
-msgstr ""
+msgstr "Przestań lubić"
 
 #: locale_extras.py:20 templates/image/detail/like.html:10
 msgid "Like"
-msgstr ""
+msgstr "Lubię to !"
 
 #: locale_extras.py:21
 msgid "Stop following"
@@ -1504,16 +1502,15 @@ msgstr "Grecki"
 
 #: models.py:90 models.py:108
 msgid "Russian"
-msgstr ""
+msgstr "Rosyjski"
 
 #: models.py:91 models.py:109
 msgid "Arabic"
-msgstr ""
+msgstr "Arabski"
 
 #: models.py:92 models.py:110
-#, fuzzy
 msgid "Japanese"
-msgstr "Japonia"
+msgstr "Japoński"
 
 #: models.py:114
 msgid "Pulsars"
@@ -1928,9 +1925,8 @@ msgid "Subject type"
 msgstr "Typ obiektu"
 
 #: models.py:680
-#, fuzzy
 msgid "Objects in field"
-msgstr "Obiekt nie znaleziony"
+msgstr "Obiekt w polu"
 
 #: models.py:681
 msgid "Use a <strong>comma</strong> to separate the values."
@@ -2213,13 +2209,12 @@ msgid "Higher resolution"
 msgstr "Wyższa rozdzielczość"
 
 #: models.py:1543
-#, fuzzy
 msgid "Real name"
-msgstr "Poprawna nazwa"
+msgstr "Imię i nazwisko"
 
 #: models.py:1544
 msgid "If present, your real name will be used throughout the website."
-msgstr ""
+msgstr "Jeśli imię i nazwisko jest dostępne będzie używane przy Twoim profilu"
 
 #: models.py:1558
 msgid "Job"
@@ -2265,13 +2260,12 @@ msgid "Company description"
 msgstr "Opis firmy"
 
 #: models.py:1599
-#, fuzzy
 msgid ""
 "A short description of the company you represent on AstroBin. You can use "
 "some <a href=\"/faq/#comments\">formatting rules</a>."
 msgstr ""
-"Krótki opis firmy, którą reprezentujesz na AstroBin. Możesz używać <a href="
-"\"/faq/#10\">formatowania tekstu</a>."
+"Krótki opis firmy, którą reprezentujesz na AstroBin. Możesz używać <a "
+"href=\"/faq/#comments\">formatowania tekstu</a>."
 
 #: models.py:1607
 msgid "Company website"
@@ -2468,13 +2462,12 @@ msgstr ""
 "marketingowych."
 
 #: models.py:2109
-#, fuzzy
 msgid ""
 "Here you can write the full commercial description of your product. You can "
 "use some <a href=\"/faq/#comments\">formatting rules</a>."
 msgstr ""
-"Tutaj możesz dodać pełny opis produktu. Możesz używać <a href=\"/faq/"
-"#10\">formatowania tekstu</a>."
+"Tutaj możesz dodać pełny opis produktu. Możesz używać <a "
+"href=\"/faq/#comments\">formatowania tekstu</a>."
 
 #: models.py:2128
 msgid "Commercial gear items"
@@ -2562,7 +2555,7 @@ msgstr "Liczba zdjęć według typu obiektu"
 
 #: views.py:477
 msgid "Today's 'Image of the day' was already choosen. Come back tomorrow!"
-msgstr ""
+msgstr "'Zdjęcie dnia' zostało już wybrane. Proszę wróć tu jutro!"
 
 #: views.py:707
 msgid "Resolution"
@@ -2607,6 +2600,8 @@ msgstr "Średni SQM"
 msgid ""
 "Thanks for reporting the problem. All thumbnails will be generated again."
 msgstr ""
+"Dziękujemy za raport o problemie. Wszystkie miniaturki będę wygenerowane "
+"jeszcze raz."
 
 #: views.py:1027 views.py:2727
 msgid ""
@@ -2628,6 +2623,8 @@ msgid ""
 "You uploaded an Indexed PNG file. AstroBin will need to lower the color "
 "count to 256 in order to work with it."
 msgstr ""
+"Wczytałeś zaindeksowany plik PNG. AstroBin musi obniżyć paletę kolorów do "
+"256 aby pracować z plikiem"
 
 #: views.py:1320 views.py:1403 views.py:1487 views.py:1513 views.py:2183
 #: views.py:2196 views.py:2217 views.py:2254 views.py:2344 views.py:2406
@@ -2642,13 +2639,12 @@ msgid "Fill in one session, before adding more."
 msgstr "Wypełnij jedną sesję zanim dodasz kolejną."
 
 #: views.py:1526 views.py:1597
-#, fuzzy
 msgid "Image deleted."
 msgstr "Twój obraz został usunięty"
 
 #: views.py:1544
 msgid "Revision deleted."
-msgstr ""
+msgstr "Wybrana wersja zdjęcia została usunięta."
 
 #: views.py:1700
 msgid "No date specified"
@@ -2716,9 +2712,8 @@ msgstr ""
 "przewinąć stronę w dół aby je zobaczyć."
 
 #: views.py:2781
-#, fuzzy
 msgid "Image uploaded. Thank you!"
-msgstr "Zapisane!. Dziękujemy!"
+msgstr "Zapisane! Dziękujemy!"
 
 #: views.py:3083 templatetags/tags.py:237
 msgid "no alias"
@@ -2730,7 +2725,7 @@ msgstr "Nie możesz połączyć produktu z nim samym."
 
 #: views.py:4030
 msgid "Default front page section changed."
-msgstr ""
+msgstr "Czcionka została zmieniona"
 
 #: management/__init__.py:15
 msgid "You have a new follower"
@@ -2770,14 +2765,12 @@ msgid "There was a reply to your comment"
 msgstr "Otrzymałeś odpowiedź na swój komentarz"
 
 #: management/__init__.py:69
-#, fuzzy
 msgid "Your image was bookmarked"
 msgstr "Twoje zdjęcie zostało dodane do ulubionych"
 
 #: management/__init__.py:75
-#, fuzzy
 msgid "Your image was liked"
-msgstr "Twój obraz został usunięty"
+msgstr "Twój obraz został polubiony"
 
 #: management/__init__.py:81
 msgid "New image with some gear you follow"
@@ -2801,12 +2794,11 @@ msgstr "Nowa recenzja sprzętu, który posiadasz"
 
 #: management/__init__.py:111
 msgid "New data posted to public pool"
-msgstr ""
+msgstr "Nowy materiał dodano do danych publicznych"
 
 #: management/__init__.py:117
-#, fuzzy
 msgid "New image posted to public data pool"
-msgstr "Nowe zdjęcie obiektu, który obserwujesz"
+msgstr "Nowe zdjęcie dodano do zestawu publicznego"
 
 #: management/__init__.py:123
 msgid "New data posted to shared private folder"
@@ -2834,11 +2826,11 @@ msgstr ""
 
 #: templates/500.html:11
 msgid "Fatal error"
-msgstr ""
+msgstr "Błąd krytyczny "
 
 #: templates/500.html:13
 msgid "Nothing to worry about, it's not your fault."
-msgstr ""
+msgstr "Nie martw się, to nie Twoja wina."
 
 #: templates/500.html:18
 msgid ""
@@ -2846,16 +2838,17 @@ msgid ""
 "details, so we will try to fix the problem as soon as possible. Sorry about "
 "the inconvenience! "
 msgstr ""
+"Stało się coś nieoczekiwanego. Otrzymaliśmy email z raportem technicznym i "
+"spróbujemy naprawić problem tak szybko jak to możliwe. Przepraszamy za "
+"niedogodności !"
 
 #: templates/500.html:21
-#, fuzzy
 msgid "Go back to the hom page."
 msgstr "Wróć do strony głównej."
 
 #: templates/503.html:4
-#, fuzzy
 msgid "AstroBin in temporarily unavailable"
-msgstr "AstroBin jest tymczasowo niedostępne."
+msgstr "AstroBin jest tymczasowo niedostępny."
 
 #: templates/503.html:7
 msgid "AstroBin is temporarily unavailable"
@@ -3008,15 +3001,17 @@ msgstr "W jaki sposób mogę formatować moje komentarze?"
 
 #: templates/faq.html:20 templates/faq.html.py:123
 msgid "How is the AstroBin index calculated?"
-msgstr ""
+msgstr "Jak jest liczony Indeks AstroBin"
 
 #: templates/faq.html:21 templates/faq.html.py:131
 msgid "I received some Likes, why is my AstroBin index not updated?"
 msgstr ""
+"Otrzymałem kilka polubień, dlaczego mój Indeks AstroBin nie został "
+"zaktualizowany?"
 
 #: templates/faq.html:22 templates/faq.html.py:138
 msgid "How is the Image of the Day selected?"
-msgstr ""
+msgstr "Jak jest wybierane 'Zdjęcie Dnia' ?"
 
 #: templates/faq.html:25
 msgid "... and their answers!"
@@ -3252,6 +3247,8 @@ msgid ""
 "The AstroBin index is a function of the number of Likes and the number of "
 "images posted by a user."
 msgstr ""
+"Indeks AstroBin jest liczony na podstawie ilości opublikowanych zdjęć i "
+"ilości polubień"
 
 #: templates/faq.html:133
 msgid ""
@@ -3259,6 +3256,9 @@ msgid ""
 "every 24 hours. The same applies for the search index, the Big Wall, and "
 "some other user data."
 msgstr ""
+"W celu ograniczenia kosztów Indeks AstroBin jest aktualizowany co 24 "
+"godziny. To samo dotyczy wyszukiwarki, Ściany Zdjęć i niektórych danych "
+"użytkowników"
 
 #: templates/faq.html:140
 msgid ""
@@ -3266,6 +3266,9 @@ msgid ""
 "days. The image with most Likes in that period is selected as Image of the "
 "Day."
 msgstr ""
+"Każdej nocy specjalny algorytm przegląda zdjęcia wczytane w ciągu ostatnich "
+"7 dni. Zdjęcie z największą liczbą polubień w tym okresie jest wybierane "
+"jako 'Zdjęcie Dnia'"
 
 #: templates/faq.html:146
 msgid ""
@@ -3635,13 +3638,13 @@ msgid ""
 "the world."
 msgstr ""
 "Jak już pewnie się zorientowałeś, <em>AstroBin</em> to o wiele więcej niż "
-"galeria zdjęć. <em>AstroBin</em> jest serwisem, na który społeczność "
-"astrofotografów czekała przez długi czas. Przez lata widziałem wspaniałe "
-"zdjęcia rozproszone po Internecie: w galeriach, na forach, na stronach "
-"prywatnych, czy nawet w tymczasowych lokalizacjach. Wiele z tych zdjęć "
-"zawiera dane, które są zbyt cenne aby zniknęły w morzu chaosu. <em>AstroBin</"
-"em> przychodzi na ratunek i zapewnia zarówno dom jak i centralny hub dla "
-"astrofotografów z całego świata."
+"galeria zdjęć. AstroBin jest serwisem, na który społeczność astrofotografów "
+"czekała przez długi czas. Przez lata widziałem wspaniałe zdjęcia rozproszone "
+"po Internecie: w galeriach, na forach, na stronach prywatnych, czy nawet w "
+"tymczasowych lokalizacjach. Wiele z tych zdjęć zawiera dane, które są zbyt "
+"cenne aby zniknęły w morzu chaosu. <em>AstroBin</em> przychodzi na ratunek i "
+"zapewnia zarówno dom jak i centralny hub dla astrofotografów z całego "
+"świata."
 
 #: templates/help.html:81
 msgid "So, what are you waiting for?"
@@ -3652,9 +3655,8 @@ msgid "Sign up now!"
 msgstr "Załóz konto teraz!"
 
 #: templates/iotd_archive.html:7 templates/iotd_archive.html.py:13
-#, fuzzy
 msgid "Archive of 'Image of the day' winners"
-msgstr "Zdjęcie dnia"
+msgstr "Archiwum 'Zdjęcia Dnia'"
 
 #: templates/iotd_archive.html:23 templates/iotd_choose.html:27
 #: templates/iotd_choose_confirm.html:26 templates/actstream/action.html:87
@@ -3666,15 +3668,13 @@ msgstr "przez"
 
 #: templates/iotd_archive.html:32 templates/index/root.html:138
 msgid "Runners-up"
-msgstr ""
+msgstr "Pretendenci"
 
 #: templates/iotd_choose.html:7 templates/iotd_choose.html.py:13
-#, fuzzy
 msgid "Choose today's 'Image of the day'"
-msgstr "Zdjęcie dnia"
+msgstr "Wybierz dzisiejsze 'Zdjęcie dnia'"
 
 #: templates/iotd_choose.html:37
-#, fuzzy
 msgid "Choose"
 msgstr "Zaznacz plik"
 
@@ -3682,7 +3682,7 @@ msgstr "Zaznacz plik"
 msgid ""
 "There are no candidates for 'Image of the day' yet, today. Please try again "
 "later."
-msgstr ""
+msgstr "Nie ma kandydatów do 'Zdjęcia Dnia'. Proszę spróbować później."
 
 #: templates/iotd_choose_confirm.html:7 templates/iotd_choose_confirm.html:13
 #: templates/user/profile/commercial/products.html:287
@@ -3694,15 +3694,15 @@ msgstr "Czy jesteś pewny?"
 
 #: templates/iotd_choose_confirm.html:35
 msgid "This image will be selected as today's 'Image of the day'."
-msgstr ""
+msgstr "To zdjęcie będzie wybrane jako 'Zdjęcie Dnia'"
 
 #: templates/iotd_choose_confirm.html:36
 msgid "This operation cannot be undone."
-msgstr ""
+msgstr "To działanie nie może być cofnięte"
 
 #: templates/iotd_choose_confirm.html:44
 msgid "Yes, I'm sure"
-msgstr ""
+msgstr "Tak,  na pewno."
 
 #: templates/iotd_choose_finished.html:5 templates/iotd_choose_finished.html:9
 #: templates/contact_form/contact_completed.html:4
@@ -3717,6 +3717,8 @@ msgid ""
 "help!\n"
 "            "
 msgstr ""
+"\n"
+"'Zdjęcie Dnia' zostało wybrane. Dziękujemy za Twoją pomoc! \n"
 
 #: templates/leaderboard.html:7 templates/leaderboard.html.py:11
 #: templates/maintenance_base.html:147 templates/base/site_links.html:85
@@ -3737,9 +3739,8 @@ msgstr "Indeks AstroBin"
 
 #: templates/leaderboard.html:30 templates/base/user_links_entries.html:130
 #: templates/user/profile-subnav.html:85
-#, fuzzy
 msgid "Followers"
-msgstr "Obserwowane"
+msgstr "Obserwujący"
 
 #: templates/leaderboard.html:40
 msgid "Total integration"
@@ -3772,7 +3773,7 @@ msgstr "Zdjęcie dnia"
 
 #: templates/maintenance_base.html:125 templates/base/site_links.html:63
 msgid "Public data pools"
-msgstr ""
+msgstr "Dane publiczne"
 
 #: templates/maintenance_base.html:134 templates/base/site_links.html:70
 msgid "Advanced search"
@@ -3824,7 +3825,7 @@ msgstr "Galeria"
 #: templates/inclusion_tags/search_image_list.html:97
 #: templates/user/profile-subnav.html:42
 msgid "Bookmarks"
-msgstr ""
+msgstr "Zakładki"
 
 #: templates/maintenance_base.html:257
 #: templates/base/user_links_entries.html:171
@@ -4353,25 +4354,29 @@ msgid ""
 "to safely store all your raw files, and have them neatily organized for "
 "future reference!"
 msgstr ""
+"Spójrz na  <a href=\"%(rawdata_url)s\">AstroBin Raw Data</a> jeśli chcesz "
+"bezpiecznie przechowywać swoje surowe pliki i mieć je dobrze zorganizowane "
+"jako przyszłą referencję."
 
 #: templates/upload.html:268
 msgid "Raw files"
-msgstr ""
+msgstr "Surowe pliki"
 
 #: templates/upload.html:305
 msgid "Upload started, please wait..."
-msgstr ""
+msgstr "Ładowanie rozpoczęte, proszę czekać..."
 
 #: templates/upload.html:351
 msgid ""
 "One ore more files were ignored because they did not look like FIT or "
 "digital camera raw files."
 msgstr ""
+"Jeden lub kilka plików zostało pominiętych ponieważ nie wyglądały ja dane "
+"FIT lub dane RAW z aparatu cyfrowego"
 
 #: templates/upload.html:384
-#, fuzzy
 msgid "Upload complete!"
-msgstr "Czas publikacji"
+msgstr "Plik załadowany!"
 
 #: templates/wall.html:16
 msgid "Sort by"
@@ -4386,9 +4391,8 @@ msgid "Acquired"
 msgstr "Wykonane"
 
 #: templates/wall.html:42
-#, fuzzy
 msgid "Number of likes"
-msgstr "Liczba klatek"
+msgstr "Liczba polubień"
 
 #: templates/wall.html:54 templates/gear/page.html:252
 #: templates/inclusion_tags/search_image_list.html:53
@@ -4462,7 +4466,6 @@ msgid "Avatar image"
 msgstr "Avatar"
 
 #: templates/base/footer.html:34
-#, fuzzy
 msgid "The images on this websites are copyright of their respective owners."
 msgstr ""
 "Prawa autorskie do AstroBin (Copyright &copy; 2010-2012) posiada Salvatore "
@@ -4471,7 +4474,7 @@ msgstr ""
 
 #: templates/base/site_links.html:33
 msgid "Source code"
-msgstr ""
+msgstr "Kod źródłowy"
 
 #: templates/base/site_links.html:118
 msgid "AstroBin Raw Data"
@@ -4486,7 +4489,6 @@ msgid "Please select your language from the options above."
 msgstr "Wybierz język z powyższych opcji do wyboru."
 
 #: templates/base/user_links_entries.html:176
-#, fuzzy
 msgid "Raw data"
 msgstr "Biblioteka surowych danych"
 
@@ -4500,22 +4502,22 @@ msgid "Private shared folders"
 msgstr "Prywatne współdzielone foldery"
 
 #: templates/base/user_links_entries.html:220
-#, fuzzy
 msgid "Choose Image Of The Day"
-msgstr "Zdjęcie dnia"
+msgstr "Wybierz 'Zdjęcie Dnia'"
 
 #: templates/base/user_links_entries.html:244
 msgid "Would you like to start using your real name on AstroBin?"
 msgstr ""
+"Czy chcesz używać swojego imienia i nazwiska zamiast nicka na AstroBin ?"
 
 #: templates/base/user_links_entries.html:249
 #: templates/image/detail/modals/send_to_sharedfolder.html:49
 msgid "OK"
-msgstr ""
+msgstr "OK"
 
 #: templates/base/user_links_entries.html:255
 msgid "No, thanks"
-msgstr ""
+msgstr "Nie, dziękuję"
 
 #: templates/commercial/products/edit.html:7
 #: templates/commercial/products/edit.html:10
@@ -4967,9 +4969,8 @@ msgid "Orientation"
 msgstr "Orientacja"
 
 #: templates/image/detail/image_card.html:84
-#, fuzzy
 msgid "Field radius"
-msgstr "Szerokość"
+msgstr "Szerokość pola"
 
 #: templates/image/detail/image_title.html:33
 msgid "Contains"
@@ -4991,7 +4992,7 @@ msgstr "Wersja początkowa"
 
 #: templates/image/detail/skyplot.html:5 templates/image/detail/skyplot.html:7
 msgid "Sky plot"
-msgstr ""
+msgstr "Mapa nieba"
 
 #: templates/image/detail/wip_banner.html:9
 #, python-format
@@ -5004,13 +5005,14 @@ msgid ""
 "revisions, <a href=\"%(promote_url)s\">promote it</a> to the <a href="
 "\"%(profile_url)s\">Public Area</a>."
 msgstr ""
-"Prace nad tym zdjęciem z <a href=\"%(profile_url)s?staging\">Przechowalni</"
-"a> trwają. To oznacza, że nikt nie może zobaczyć tego zdjęcia, chyba że "
-"podasz bezpośredni odnośnik, który możesz znaleźć w menu <em>Udostępnij</"
-"em>. Tego odnośnika możesz użyć np na forum internetowym żeby uzyskać "
-"komentarze innych użytkowników. Kiedy prace nad zdjęciem zostaną ukończone, "
-"być może po opublikowaniu kolejnych wersji, <a href=\"%(promote_url)s"
-"\">promuj</a> zdjęcie do <a href=\"%(profile_url)s\">Publicznej Galerii</a>."
+"<strong>Prace </strong>nad tym zdjęciem z <a href=\"%"
+"(profile_url)s?staging\">Przechowalni</a> trwają. To oznacza, że nikt nie "
+"może zobaczyć tego zdjęcia, chyba że podasz bezpośredni odnośnik, który "
+"możesz znaleźć w menu <em>Udostępnij</em>. Tego odnośnika możesz użyć np na "
+"forum internetowym żeby uzyskać komentarze innych użytkowników. Kiedy prace "
+"nad zdjęciem zostaną ukończone, być może po opublikowaniu kolejnych wersji, "
+"<a href=\"%(promote_url)s\">promuj</a> zdjęcie do <a href=\"%"
+"(profile_url)s\">Publicznej Galerii</a>."
 
 #: templates/image/detail/menu/actions.html:7 templates/messages/inbox.html:30
 #: templates/user/profile/commercial/products.html:43
@@ -5036,7 +5038,6 @@ msgid "Mark this revision as final"
 msgstr "Oznacz tą wersję jako ostateczną"
 
 #: templates/image/detail/menu/actions.html:55
-#, fuzzy
 msgid "Attempt to plate-solve again"
 msgstr "Ponownie rozpocznij automatyczną fotoastrometię"
 
@@ -5059,15 +5060,13 @@ msgstr "Przesuń do przechowalni"
 
 #: templates/image/detail/menu/actions.html:94
 #: templates/image/detail/modals/send_to_datapool.html:7
-#, fuzzy
 msgid "Send to public data pool"
 msgstr "Przenieś do galerii publicznej"
 
 #: templates/image/detail/menu/actions.html:101
 #: templates/image/detail/modals/send_to_sharedfolder.html:7
-#, fuzzy
 msgid "Send to private shared folder"
-msgstr "Wyślij prywatną wiadomość"
+msgstr "Wyślij do prywatne folderu współdzielonego"
 
 #: templates/image/detail/menu/actions.html:111
 msgid "Delete original image"
@@ -5090,16 +5089,16 @@ msgstr "Powiadom użytkowników"
 
 #: templates/image/detail/menu/admin.html:7
 msgid "Admin"
-msgstr ""
+msgstr "Administrator"
 
 #: templates/image/detail/menu/admin.html:14
 #: templates/image/detail/modals/flag_thumbnails.html:7
 msgid "Flag malfunctioning thumbnails"
-msgstr ""
+msgstr "Zgłoś nieaktywne miniaturki"
 
 #: templates/image/detail/menu/admin.html:21
 msgid "Ban user"
-msgstr ""
+msgstr "Zablokuj użytkownika"
 
 #: templates/image/detail/menu/share.html:6
 #: templates/image/detail/modals/share.html:7
@@ -5148,17 +5147,16 @@ msgstr "Zwykły"
 
 #: templates/image/detail/modals/bookmarked_this.html:8
 msgid "The following people bookmarked this image"
-msgstr ""
+msgstr "Następujące osoby oznaczyły to zdjęcie w ulubionych"
 
 #: templates/image/detail/modals/bookmarked_this.html:11
 #: templates/image/detail/modals/like_this.html:11
-#, fuzzy
 msgid "Loading"
 msgstr "Ładowanie..."
 
 #: templates/image/detail/modals/cant_like.html:8
 msgid "Sorry"
-msgstr ""
+msgstr "Przepraszamy"
 
 #: templates/image/detail/modals/cant_like.html:12
 #, python-format
@@ -5166,17 +5164,22 @@ msgid ""
 "We're really sorry, but liking an image requires an AstroBin index of "
 "<strong>%(min_index_to_like)s</strong> or greater."
 msgstr ""
+"Bardzo na przykro, ale aby polubić zdjęcie musisz mieć Indeks AstroBin na "
+"poziomie  <strong>%(min_index_to_like)s</strong> lub większym"
 
 #: templates/image/detail/modals/cant_like.html:16
 msgid ""
 "Such limitation improves the website as a whole by discouraging people from "
 "creating fake accounts to like their own images. Thank you for understanding!"
 msgstr ""
+"Takie ograniczenie chroni przed nieodpowiedzialnymi użytkownikami którzy "
+"zakładają fałszywe konta tylko po to aby zagłosować na swoje własne zdjęcie. "
+"Dziękujemy za zrozumienie."
 
 #: templates/image/detail/modals/cant_like.html:20
 #, python-format
 msgid "Currently, your AstroBin index is <strong>%(index)s</strong>."
-msgstr ""
+msgstr "Obecnie Twój Indeks AstroBin wynosi <strong>%(index)s</strong>."
 
 #: templates/image/detail/modals/delete.html:6
 msgid "Delete image and all its revisions?"
@@ -5220,20 +5223,25 @@ msgid ""
 "This will trigger the regeneration of all thumbnails for this image and all "
 "its revisions."
 msgstr ""
+"To wyzwoli odświeżenie wszystkich miniaturek da tego zdjęcia i wszystkich "
+"jego wersji"
 
 #: templates/image/detail/modals/like_this.html:8
 msgid "The following people like this image"
-msgstr ""
+msgstr "Następujące osoby lubią to zdjęcie"
 
 #: templates/image/detail/modals/send_to_datapool.html:11
 msgid ""
 "If this image is the result of your processing of a public data pool, you "
 "can send it the pool so it's displayed there."
 msgstr ""
+"Jeśli to zdjęcie jest wynikiem obróbki danych publicznych, możesz je wysłać "
+"do zbioru aby było wyświetlane tutaj"
 
 #: templates/image/detail/modals/send_to_datapool.html:16
 msgid "Use this form to select an existing <strong>public data pool</strong>."
 msgstr ""
+"Użyj tej formatki aby wybrać istniejący <strong>public data pool</strong>."
 
 #: templates/image/detail/modals/send_to_datapool.html:28
 #: templates/image/detail/modals/send_to_sharedfolder.html:39
@@ -5242,6 +5250,8 @@ msgid ""
 "You need a <a href=\"%(rawdata_url)s\">Raw Data</a> subscription to perform "
 "this action."
 msgstr ""
+"Potrzebujesz <a href=\"%(rawdata_url)s\">Raw Data</a> subskrypcji do "
+"uruchomienia tego działania"
 
 #: templates/image/detail/modals/send_to_datapool.html:29
 #: templates/image/detail/modals/send_to_sharedfolder.html:40
@@ -5252,22 +5262,30 @@ msgid ""
 "organized, but being part of it also means that you support AstroBin and can "
 "perhaps contribute your raw files to scientic discoveries."
 msgstr ""
+" <a href=\"%(rawdata_url)s\">Raw Data Platform</a> jest głównym sposobem "
+"zabezpieczenia twoich surowych danych i utrzymania ich w porządku. Ale "
+"akceptujesz również, że dane te mogą wesprzeć Astrobin i być użyte w celach "
+"naukowych."
 
 #: templates/image/detail/modals/send_to_sharedfolder.html:11
 msgid ""
 "If this image is the result of your processing of a private shared folder, "
 "you can send it the folder so it's displayed there."
 msgstr ""
+"Jeżeli to zdjęcie jest wynikiem obróbki z prywatnego katalogu "
+"współdzielonego, możesz wysłać ten folder aby był wyświetlany tutaj"
 
 #: templates/image/detail/modals/send_to_sharedfolder.html:17
 msgid ""
 "Use this form to select a <strong>private shared folder</strong> you have "
 "created or have been invited to."
 msgstr ""
+"Użyj tej formatki aby wybrać <strong>private shared folder</strong> który "
+"stworzyłeś lub zostałeś zaproszony"
 
 #: templates/image/detail/modals/send_to_sharedfolder.html:29
 msgid "You don't have access to any shared private folders."
-msgstr ""
+msgstr "Nie masz dostępu do żadnych współdzielonych folderów prywatnych"
 
 #: templates/image/detail/modals/share.html:15
 msgid "Sharing mode"
@@ -5306,9 +5324,8 @@ msgid "Full"
 msgstr "Pełny"
 
 #: templates/image/detail/modals/share.html:36
-#, fuzzy
 msgid "Real"
-msgstr "Poprawna nazwa"
+msgstr "Prawdziwa"
 
 #: templates/image/detail/modals/share.html:40
 msgid "Copy this"
@@ -5576,7 +5593,7 @@ msgstr ""
 #: templates/inclusion_tags/search_image_list.html:93
 #: templates/search/search.html:37
 msgid "Likes"
-msgstr ""
+msgstr "Polubienia"
 
 #: templates/inclusion_tags/search_image_list.html:66
 msgid ""
@@ -5663,47 +5680,40 @@ msgstr ""
 "użytkownikom.  <a href=\"%(rawdata_url)s\">Chcesz wiedzieć więcej?</a>"
 
 #: templates/index/root.html:176
-#, fuzzy
 msgid "Your activity stream"
-msgstr "Najnowsze aktualizacje"
+msgstr "Najnowsze aktualizacje wśród Twojej społeczności"
 
 #: templates/index/root.html:181
-#, fuzzy
 msgid "Global activity stream"
-msgstr "Najnowsze aktualizacje"
+msgstr "Najnowsze aktualizacje społeczności AstroBin"
 
 #: templates/index/root.html:186
-#, fuzzy
 msgid "Recently uploaded"
-msgstr "opublikowane"
+msgstr "Ostatnio opublikowane"
 
 #: templates/index/root.html:191 templates/index/root.html.py:251
-#, fuzzy
 msgid "Recent images from people you follow"
-msgstr "Nowe zdjęcie opublikowane przez użytkownika, którego obserwujesz"
+msgstr "Nowe zdjęcie opublikowane przez użytkowników, których obserwujesz"
 
 #: templates/index/root.html:196 templates/index/root.html.py:262
-#, fuzzy
 msgid "Recently liked"
-msgstr "opublikowane"
+msgstr "Ostatnio polubione"
 
 #: templates/index/root.html:201 templates/index/root.html.py:273
-#, fuzzy
 msgid "Recently bookmarked"
-msgstr "opublikowane"
+msgstr "Ostatnio dodane do zakładek"
 
 #: templates/index/root.html:206 templates/index/root.html.py:284
-#, fuzzy
 msgid "Recent images with link to TIFF/FITS"
 msgstr "Link do TIFF/FITS"
 
 #: templates/index/root.html:216
 msgid "Personal"
-msgstr ""
+msgstr "Osobiste"
 
 #: templates/index/root.html:227
 msgid "Global"
-msgstr ""
+msgstr "Ogólne"
 
 #: templates/index/root.html:240
 msgid "Recent images"
@@ -5711,15 +5721,16 @@ msgstr "Najnowsze zdjęcia"
 
 #: templates/index/root.html:295
 msgid "Set current front page section as default"
-msgstr ""
+msgstr "Ustaw obecną stronę jako domyślną"
 
 #: templates/index/root.html:310
 msgid ""
 "To make your personal stream more interesting, you should follow some people!"
 msgstr ""
+"Aby uczynić swój profil bardziej atrakcyjnym powinieneś ustawić innych "
+"użytkowników jako obserwowanych!"
 
 #: templates/index/root.html:339
-#, fuzzy
 msgid "Do you want your product here?"
 msgstr "Dodaj Twoje pliki tutaj"
 
@@ -5756,7 +5767,7 @@ msgstr "Wiadomości"
 
 #: templates/messages/inbox.html:26
 msgid "Participants"
-msgstr ""
+msgstr "Uczestnicy"
 
 #: templates/messages/inbox.html:27
 msgid "Date and time"
@@ -5813,7 +5824,7 @@ msgid "Here are your notifications"
 msgstr "Twoje powiadomienia"
 
 #: templates/notification/email_body.txt:3
-#, fuzzy, python-format
+#, python-format
 msgid ""
 "Hi! You have a new notification on AstroBin:\n"
 "\n"
@@ -5837,6 +5848,8 @@ msgstr ""
 "\n"
 "Jeśli nie chcesz otrzymywać więcej emaili, edytuj swoje ustawienia tutaj "
 "http://astrobin.com%(pref_url)s.\n"
+"\n"
+"PROSZĘ NIE ODPOWIADAĆ NA TEGO EMAILA\n"
 "\n"
 "Czystego nieba,\n"
 "AstroBin.\n"
@@ -6028,13 +6041,13 @@ msgid "AstroBin has publushed a new blog entry: %(object)s"
 msgstr "AstroBin opublikował nowy wpis na blogu: %(object)s"
 
 #: templates/notification/new_bookmark/full.txt:2
-#, fuzzy, python-format
+#, python-format
 msgid "%(user)s has added your image to their bookmarks: %(url)s"
 msgstr "%(user)s dodał Twoje zdjęcie do ulubionych: %(url)s"
 
 #: templates/notification/new_bookmark/notice.html:2
 #: templates/notification/new_bookmark/short.html:2
-#, fuzzy, python-format
+#, python-format
 msgid ""
 "<a href=\"%(url)s\"><strong>%(user)s</strong> has added your image to their "
 "bookmarks!</a>"
@@ -6043,7 +6056,7 @@ msgstr ""
 "ulubionych!</a>"
 
 #: templates/notification/new_bookmark/short.txt:2
-#, fuzzy, python-format
+#, python-format
 msgid "%(user)s has added yout image to their bookmarks: %(url)s"
 msgstr "%(user)s dodał Twoje zdjęcie do ulubionych: %(url)s"
 
@@ -6263,13 +6276,13 @@ msgstr "Nowa wersja opublikowana przez %(originator)s"
 
 #: templates/notification/new_like/full.txt:2
 #: templates/notification/new_like/short.txt:2
-#, fuzzy, python-format
+#, python-format
 msgid "%(user)s likes your image: %(url)s"
 msgstr "%(user)s dodał Twoje zdjęcie do ulubionych: %(url)s"
 
 #: templates/notification/new_like/notice.html:2
 #: templates/notification/new_like/short.html:2
-#, fuzzy, python-format
+#, python-format
 msgid "<a href=\"%(url)s\"><strong>%(user)s</strong> likes your image!</a>"
 msgstr ""
 "<a href=\"%(url)s\"><strong>%(user)s</strong> skomentował Twoje zdjęcie!</a>"
@@ -6284,145 +6297,152 @@ msgid ""
 "\n"
 "Visit the folder at the following url: %(folder_url)s"
 msgstr ""
+"Zostałeś zaproszony do prywatnego folderu: \"%(folder_name)s\".\n"
+"\n"
+"Masz teraz dostęp do danych w tym folderze i możesz również zaprosić inne "
+"osoby.\n"
+"\n"
+"Folder jest dostępny pod adresem: %(folder_url)s"
 
 #: templates/notification/rawdata_invited_to_private_folder/notice.html:2
 #: templates/notification/rawdata_invited_to_private_folder/short.html:2
-#, fuzzy, python-format
+#, python-format
 msgid ""
 "<a href=\"%(folder_url)s\">You are invited you to the private shared folder: "
 "<strong>\"%(folder_name)s.\"</strong></a>"
 msgstr ""
-"<a href=\"%(object_url)s\">Przestałeś obserwować <strong>%(object)s</strong>."
-"</a>"
+"<a href=\"%(folder_url)s\">Zostałeś zaproszony do współdzielenia prywatnego "
+"folderu  <strong>\"%(folder_name)s.\"</strong></a>"
 
 #: templates/notification/rawdata_invited_to_private_folder/short.txt:2
 #, python-format
 msgid "You are invited you to the private shared folder: %(folder_name)s"
 msgstr ""
+"Zostałeś zaproszony do prywatnego folderu współdzielonego: %(folder_name)s"
 
 #: templates/notification/rawdata_posted_image_to_private_folder/full.txt:2
-#, fuzzy, python-format
+#, python-format
 msgid ""
 "%(user_name)s has added a new processed image to the private shared folder: "
 "\"%(folder_name)s\". Check it out at the following url: %(folder_url)s"
 msgstr ""
-"%(originator)s opublikował nową wersję zdjęcia! Możesz ją zobaczyć tu: "
-"%(object_url)s"
+"%(user_name)s dodał nową wersję zdjęcia do prywatnego folderu "
+"współdzielonego: \"%(folder_name)s\". Możesz ją zobaczyć tu: %(folder_url)s"
 
 #: templates/notification/rawdata_posted_image_to_private_folder/notice.html:2
-#, fuzzy, python-format
+#, python-format
 msgid ""
 "<a href=\"%(folder_url)s\"><strong>%(user_name)s</strong> has added a new "
 "processed image to the private shared folder: <strong>\"%(folder_name)s.\"</"
 "strong></a>"
 msgstr ""
-"<a href=\"%(url)s\"><strong>%(user)s</strong> rozpoczął dyskusję na temat "
-"sprzętu, który posiadasz!</a>"
+"<a href=\"%(folder_url)s\"><strong>%(user_name)s</strong> dodał nowe zdjęcie "
+"do współdzielonego folderu prywatnego: <strong>\"%"
+"(folder_name)s.\"</strong></a>"
 
 #: templates/notification/rawdata_posted_image_to_private_folder/short.html:2
-#, fuzzy, python-format
+#, python-format
 msgid ""
 "<a href=\"%(folder_url)s\"><strong>%(user_name)s</strong> has added a new "
 "processed image to the private shared folder: <strong>\"%(folder_name)s.\"</"
 "a>"
 msgstr ""
-"<a href=\"%(url)s\"><strong>%(user)s</strong> dodał Twoje zdjęcie do "
-"ulubionych!</a>"
+"<a href=\"%(folder_url)s\"><strong>%(user_name)s</strong> dodał nowe zdjęcie "
+"do współdzielonego folderu prywatnego: <strong>\"%(folder_name)s.\"</a>"
 
 #: templates/notification/rawdata_posted_image_to_private_folder/short.txt:2
 #, python-format
 msgid "New processed image in private shared folder: %(folder_name)s"
-msgstr ""
+msgstr "Nowe zdjęcie we współdzielonym folderze prywatnym: %(folder_name)s"
 
 #: templates/notification/rawdata_posted_image_to_public_pool/full.txt:2
-#, fuzzy, python-format
+#, python-format
 msgid ""
 "%(user_name)s has added a new processed image to the public data pool: "
 "\"%(pool_name)s\". Check it out at the following url: %(pool_url)s"
 msgstr ""
-"%(originator)s opublikował nową wersję zdjęcia! Możesz ją zobaczyć tu: "
-"%(object_url)s"
+"%(user_name)s opublikował nową wersję zdjęcia w zbiorze danych publicznych \""
+"%(pool_name)s\"! Możesz ją zobaczyć tu: %(pool_url)s"
 
 #: templates/notification/rawdata_posted_image_to_public_pool/notice.html:2
 #: templates/notification/rawdata_posted_image_to_public_pool/short.html:2
-#, fuzzy, python-format
+#, python-format
 msgid ""
 "<a href=\"%(pool_url)s\"><strong>%(user_name)s</strong> has added a new "
 "processed image to the public data pool: <strong>\"%(pool_name)s.\"</"
 "strong></a>"
 msgstr ""
-"<a href=\"%(url)s\"><strong>%(user)s</strong> rozpoczął dyskusję na temat "
-"sprzętu, który posiadasz!</a>"
+"<a href=\"%(pool_url)s\"><strong>%(user_name)s</strong> dodał nowe zdjęcie do "
+"pakietu danych publicznych <strong>\"%(pool_name)s.\"</strong></a>"
 
 #: templates/notification/rawdata_posted_image_to_public_pool/short.txt:2
 #, python-format
 msgid "New processed image in public data pool: %(pool_name)s"
-msgstr ""
+msgstr "Nowe zdjęcie w pakiecie danych publicznych: : %(pool_name)s"
 
 #: templates/notification/rawdata_posted_to_pool/full.txt:2
-#, fuzzy, python-format
+#, python-format
 msgid ""
 "%(user_name)s has added new data to the public pool: \"%(pool_name)s\". "
 "Check it out at the following url: %(pool_url)s"
 msgstr ""
-"%(user)s odpowiedział na Twój komentarz! Odpowiedź możesz zobaczyć tu: "
-"%(url)s"
+"%(user_name)s dodał nowe dane do zbioru danych publicznych: \"%(pool_name)s\". "
+"Sprawdź tutaj: %(pool_url)s"
 
 #: templates/notification/rawdata_posted_to_pool/notice.html:2
-#, fuzzy, python-format
+#, python-format
 msgid ""
 "<a href=\"%(pool_url)s\"><strong>%(user_name)s</strong> has added new data "
 "to the public pool: <strong>\"%(pool_name)s.\"</strong></a>"
 msgstr ""
-"<a href=\"%(url)s\"><strong>%(user)s</strong> rozpoczął dyskusję na temat "
-"sprzętu, który posiadasz!</a>"
+"<a href=\"%(pool_url)s\"><strong>%(user_name)s</strong> dodał nowe dane do "
+"zbioru danych publicznych: <strong>\"%(pool_name)s.\"</strong></a>"
 
 #: templates/notification/rawdata_posted_to_pool/short.html:2
-#, fuzzy, python-format
+#, python-format
 msgid ""
 "<a href=\"%(pool_url)s\"><strong>%(user_name)s</strong> has added new data "
 "to the public pool: <strong>\"%(pool_name)s.\"</a>"
 msgstr ""
-"<a href=\"%(url)s\"><strong>%(user)s</strong> rozpoczął dyskusję na temat "
-"sprzętu, który posiadasz!</a>"
+"<a href=\"%(pool_url)s\"><strong>%(user_name)s</strong> dodał nowe dane do "
+"zbioru danych publicznych: <strong>\"%(pool_name)s.\"</a>"
 
 #: templates/notification/rawdata_posted_to_pool/short.txt:2
 #, python-format
 msgid "New data in public pool: %(pool_name)s"
-msgstr ""
+msgstr "Nowe dane w zbiorze danych publicznych: %(pool_name)s"
 
 #: templates/notification/rawdata_posted_to_private_folder/full.txt:2
-#, fuzzy, python-format
+#, python-format
 msgid ""
 "%(user_name)s has added new data to the private shared folder: "
 "\"%(folder_name)s\". Check it out at the following url: %(folder_url)s"
 msgstr ""
-"AstroBin opublikował nowy wpis na blogu: \"%(object)s\".\n"
-"\n"
-"Możesz go przeczytać tutaj: %(object_url)s"
+"%(user_name)s dodał nowe dane do prywatnego folderu współdzielonego: \"%"
+"(folder_name)s\". Sprawdź tutaj: %(folder_url)s"
 
 #: templates/notification/rawdata_posted_to_private_folder/notice.html:2
-#, fuzzy, python-format
+#, python-format
 msgid ""
 "<a href=\"%(folder_url)s\"><strong>%(user_name)s</strong> has added new data "
 "to the private shared folder: <strong>\"%(folder_name)s.\"</strong></a>"
 msgstr ""
-"<a href=\"%(url)s\"><strong>%(user)s</strong> dodał Twoje zdjęcie do "
-"ulubionych!</a>"
+"<a href=\"%(folder_url)s\"><strong>%(user_name)s</strong> dodał nowe dane do "
+"prywatnego folderu współdzielonego: <strong>\"%(folder_name)s.\"</strong></a>"
 
 #: templates/notification/rawdata_posted_to_private_folder/short.html:2
-#, fuzzy, python-format
+#, python-format
 msgid ""
 "<a href=\"%(folder_url)s\"><strong>%(user_name)s</strong> has added new data "
 "to the private shared folder: <strong>\"%(folder_name)s.\"</a>"
 msgstr ""
-"<a href=\"%(url)s\"><strong>%(user)s</strong> dodał Twoje zdjęcie do "
-"ulubionych!</a>"
+"<a href=\"%(folder_url)s\"><strong>%(user_name)s</strong> dodał nowe dane do "
+"prywatnego folderu współdzielonego <strong>\"%(folder_name)s.\"</a>"
 
 #: templates/notification/rawdata_posted_to_private_folder/short.txt:2
 #, python-format
 msgid "New data in private shared folder: %(folder_name)s"
-msgstr ""
+msgstr "Nowe dane w folderze: %(folder_name)s"
 
 #: templates/notification/received_email/full.txt:2
 msgid ""
@@ -6551,6 +6571,8 @@ msgid ""
 "Hi,\n"
 "please use the following link to activate your AstroBin account:"
 msgstr ""
+"Witaj,\n"
+"Użyj poniższego linka aktywacyjnego aby aktywować swoje konto:"
 
 #: templates/registration/activation_email.txt:7
 #, python-format
@@ -6560,13 +6582,15 @@ msgstr "Link będzie aktywny przez %(expiration_days)s dni"
 #: templates/registration/activation_email.txt:9
 #: templates/registration/password_reset_email.html:6
 msgid "PLEASE DO NOT REPLY TO THIS EMAIL"
-msgstr ""
+msgstr "PROSZĘ NIE ODPOWIADAĆ NA TEN E-MAIL"
 
 #: templates/registration/activation_email.txt:11
 msgid ""
 "Sincerely,\n"
 "the AstroBin staff."
 msgstr ""
+"Z poważaniem,\n"
+"Zespół AstroBin"
 
 #: templates/registration/activation_email_subject.txt:1
 msgid "Account activation on"
@@ -6628,24 +6652,27 @@ msgstr "Resetuj hasło do %(site_name)s"
 #: templates/registration/registration_complete.html:4
 #: templates/registration/registration_complete.html:8
 msgid "Registration completed"
-msgstr ""
+msgstr "Rejestracja ukończona"
 
 #: templates/registration/registration_complete.html:9
-#, fuzzy
 msgid "You are now registered"
-msgstr "Brak powiadomień"
+msgstr "Jesteś zarejestrowany!"
 
 #: templates/registration/registration_complete.html:14
 msgid ""
 "To confirm your e-mail address, we have sent you an e-mail with an "
 "activation link."
 msgstr ""
+"Aby potwierdzić swój adres e-mail, wysłaliśmy Ci maila z linkiem "
+"aktywacyjnym."
 
 #: templates/registration/registration_complete.html:18
 msgid ""
 "If you don't receive the e-mail within a few minutes, remember to check your "
 "spam folder."
 msgstr ""
+"Jeśli nie otrzymasz tego maila w ciągu kilku minut, sprawdź swój folder ze "
+"spamem"
 
 #: templates/registration/registration_form.html:5
 #: templates/registration/registration_form.html:8
@@ -6742,12 +6769,11 @@ msgstr "Zaaplikuj o klucz API."
 
 #: templates/user/ban.html:7 templates/user/ban.html.py:15
 msgid "Are you sure you want to ban this user?"
-msgstr ""
+msgstr "Czy na pewno chcesz zbanować tego użytkownika?"
 
 #: templates/user/ban.html:9 templates/user/ban.html.py:25
-#, fuzzy
 msgid "User banned"
-msgstr "Użytkownik nie znaleziony:"
+msgstr "Użytkownik zbanowany"
 
 #: templates/user/ban.html:17
 #, python-format
@@ -6755,58 +6781,58 @@ msgid ""
 "User <strong>%(user)s</strong> will be deleted, with all their images, "
 "messages, comments, and so on."
 msgstr ""
+"Użytkownik <strong>%(user)s</strong> będzie usunięty wraz ze wszystkimi "
+"obrazami, wiadomościami, komentarzami, itd..."
 
 #: templates/user/ban.html:27
 msgid "The user was banned."
-msgstr ""
+msgstr "Użytkownik został zbanowany."
 
 #: templates/user/ban.html:28
-#, fuzzy
 msgid "Thank you!"
-msgstr "Podziękowania"
+msgstr "Dziękujemy"
 
 #: templates/user/bookmarks.html:5
-#, fuzzy, python-format
+#, python-format
 msgid "%(user)s's bookmarks"
-msgstr "wykresy użytkownika %(user)s"
+msgstr "Zakładki użytkownika %(user)s"
 
 #: templates/user/bookmarks.html:11
 msgid "Your bookmarks"
-msgstr ""
+msgstr "Twoje zakładki"
 
 #: templates/user/bookmarks.html:13
-#, fuzzy, python-format
+#, python-format
 msgid "%(username)s's bookmarks"
-msgstr "Przeglądaj zdjęcia użytkownika %(username)s:"
+msgstr "Zakładki użytkownika %(username)s"
 
 #: templates/user/followers.html:7
-#, fuzzy, python-format
+#, python-format
 msgid "%(user)s's followers"
-msgstr "galeria użytkownika %(user)s"
+msgstr "osoby obserwujące użytkownika %(user)s"
 
 #: templates/user/followers.html:13
-#, fuzzy
 msgid "Your followers"
-msgstr "Masz nowego obserwatora"
+msgstr "Twoi obserwatorzy"
 
 #: templates/user/followers.html:15
-#, fuzzy, python-format
+#, python-format
 msgid "%(username)s's followers"
-msgstr "Przeglądaj ulubione zdjęcia użytkownika %(username)s:"
+msgstr "Obserwatorzy użytkownika %(username)s"
 
 #: templates/user/following.html:7
-#, fuzzy, python-format
+#, python-format
 msgid "%(user)s's followed users"
-msgstr "galeria użytkownika %(user)s"
+msgstr "%(user)s obserwuje następujących użytkowników"
 
 #: templates/user/following.html:13
 msgid "Your followed users"
-msgstr ""
+msgstr "Obserwujesz"
 
 #: templates/user/following.html:15
-#, fuzzy, python-format
+#, python-format
 msgid "%(username)s's followed users"
-msgstr "Przeglądaj ulubione zdjęcia użytkownika %(username)s:"
+msgstr "obserwowani przez %(username)s "
 
 #: templates/user/not_found.html:4 templates/user/not_found.html.py:7
 msgid "User not found:"
@@ -6858,9 +6884,8 @@ msgid "Staging Area"
 msgstr "Przechowalnia"
 
 #: templates/user/profile-subnav.html:79
-#, fuzzy
 msgid "Following"
-msgstr "Śledź"
+msgstr "Obserwujesz"
 
 #: templates/user/profile-subnav.html:121
 msgid "Acquisition time"
@@ -6916,7 +6941,7 @@ msgid ""
 "Please note: when importing from Flickr, automatic watermarking of the "
 "images it not supported."
 msgstr ""
-"Uwaga: w przypadku pobrania zdjęć z Flickr'a, automatyczne dodawanie znaków "
+"Uwaga: w przypadku pobrania zdjęć z Flickr'a automatyczne dodawanie znaków "
 "wodnych nie działa."
 
 #: templates/user/profile/flickr_import.html:20
@@ -6935,7 +6960,7 @@ msgstr "Zaloguj do Flickr"
 msgid ""
 "Unfortunately you need to enable Javascript to be able to import photos from "
 "Flickr at this time."
-msgstr "Niestety musisz włączyć Javascript, aby importować zdjęcia z Flickr'a."
+msgstr "Niestety musisz włączyć Javascript, żeby importować zdjęcia z Flickr'a."
 
 #: templates/user/profile/flickr_import.html:81
 msgid "Click to select the photos you want to import"
@@ -7139,9 +7164,9 @@ msgid ""
 "Use the form below to add a new location. After you add one, a new empty "
 "form will be created at the bottom, in case you want to add more."
 msgstr ""
-"Użyj formularza poniżej aby dodać nową lokalizację. Po utworzeniu nowej "
-"lokalizacji będziesz mógł dodać kolejną wykorzystując dodatkowy pusty "
-"formularz poniżej."
+"Użyj formularza poniżej, aby dodać nową lokalizację. Po utworzeniu "
+"lokalizacji dodatkowy pusty formularz pojawi się poniżej, abyś mógł dodać "
+"kolejną."
 
 #: templates/user/profile/edit/locations.html:14
 msgid "AstroBin will not share your location details with other users."

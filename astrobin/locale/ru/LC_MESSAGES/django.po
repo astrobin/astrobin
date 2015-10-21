@@ -8,8 +8,8 @@ msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2015-02-19 11:16+0000\n"
-"PO-Revision-Date: 2015-04-06 17:30+0000\n"
-"Last-Translator: sypai <sypai@mail.ru>\n"
+"PO-Revision-Date: 2015-08-24 17:56+0000\n"
+"Last-Translator: csve <csve00@gmail.com>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
 "Language: ru\n"
 "MIME-Version: 1.0\n"
@@ -18,7 +18,7 @@ msgstr ""
 "Plural-Forms: nplurals=3; plural=(n%10==1 && n%100!=11 ? 0 : n%10>=2 && n%"
 "10<=4 && (n%100<10 || n%100>=20) ? 1 : 2);\n"
 "X-Generator: Pootle 2.5.0\n"
-"X-POOTLE-MTIME: 1428341430.72238\n"
+"X-POOTLE-MTIME: 1440438990.173928\n"
 
 #: fields.py:10
 msgid "United Kingdom"
@@ -1517,9 +1517,8 @@ msgid "Arabic"
 msgstr "Арабский"
 
 #: models.py:92 models.py:110
-#, fuzzy
 msgid "Japanese"
-msgstr "Япония"
+msgstr "Японский"
 
 #: models.py:114
 msgid "Pulsars"
@@ -2572,7 +2571,7 @@ msgstr "Количество изображений по типу объекта
 
 #: views.py:477
 msgid "Today's 'Image of the day' was already choosen. Come back tomorrow!"
-msgstr ""
+msgstr "Сегодняшнее \"Изображение Дня\" уже выбрано. Заходите завтра."
 
 #: views.py:707
 msgid "Resolution"
@@ -3730,11 +3729,11 @@ msgstr ""
 
 #: templates/iotd_choose_confirm.html:36
 msgid "This operation cannot be undone."
-msgstr ""
+msgstr "Это действие не может быть отменено."
 
 #: templates/iotd_choose_confirm.html:44
 msgid "Yes, I'm sure"
-msgstr ""
+msgstr "Да, я уверен"
 
 #: templates/iotd_choose_finished.html:5 templates/iotd_choose_finished.html:9
 #: templates/contact_form/contact_completed.html:4
@@ -4502,7 +4501,7 @@ msgstr ""
 
 #: templates/base/site_links.html:33
 msgid "Source code"
-msgstr ""
+msgstr "Исходный код"
 
 #: templates/base/site_links.html:118
 msgid "AstroBin Raw Data"
@@ -5120,7 +5119,7 @@ msgstr "Обратить внимание других"
 
 #: templates/image/detail/menu/admin.html:7
 msgid "Admin"
-msgstr ""
+msgstr "Администратор"
 
 #: templates/image/detail/menu/admin.html:14
 #: templates/image/detail/modals/flag_thumbnails.html:7
@@ -5129,7 +5128,7 @@ msgstr "Отметить повреждённые миниатюры"
 
 #: templates/image/detail/menu/admin.html:21
 msgid "Ban user"
-msgstr ""
+msgstr "Заблокировать пользователя"
 
 #: templates/image/detail/menu/share.html:6
 #: templates/image/detail/modals/share.html:7
@@ -6610,7 +6609,7 @@ msgstr "Ссылка рабочая в течение %(expiration_days)s дне
 #: templates/registration/activation_email.txt:9
 #: templates/registration/password_reset_email.html:6
 msgid "PLEASE DO NOT REPLY TO THIS EMAIL"
-msgstr ""
+msgstr "Пожалуйста, не отвечайте на это письмо"
 
 #: templates/registration/activation_email.txt:11
 msgid ""
@@ -6797,7 +6796,7 @@ msgstr "Запрос API-ключа"
 
 #: templates/user/ban.html:7 templates/user/ban.html.py:15
 msgid "Are you sure you want to ban this user?"
-msgstr ""
+msgstr "Вы действительно хотите заблокировать этого пользователя?"
 
 #: templates/user/ban.html:9 templates/user/ban.html.py:25
 #, fuzzy
@@ -6813,7 +6812,7 @@ msgstr ""
 
 #: templates/user/ban.html:27
 msgid "The user was banned."
-msgstr ""
+msgstr "Пользователь заблокирован"
 
 #: templates/user/ban.html:28
 #, fuzzy

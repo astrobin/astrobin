@@ -8,8 +8,8 @@ msgstr ""
 "Project-Id-Version: AstroBin 1.4\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2015-02-19 11:14+0000\n"
-"PO-Revision-Date: 2014-11-15 06:55+0000\n"
-"Last-Translator: Salvatore <salvatore@iovene.com>\n"
+"PO-Revision-Date: 2015-04-13 13:24+0000\n"
+"Last-Translator: Matariki <denisulmer@posteo.de>\n"
 "Language-Team: German <LL@li.org>\n"
 "Language: de\n"
 "MIME-Version: 1.0\n"
@@ -17,7 +17,7 @@ msgstr ""
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=(n != 1);\n"
 "X-Generator: Pootle 2.5.0\n"
-"X-POOTLE-MTIME: 1416034531.370324\n"
+"X-POOTLE-MTIME: 1428931491.947330\n"
 
 #: fields.py:10
 msgid "United Kingdom"
@@ -1359,9 +1359,8 @@ msgid "Body"
 msgstr "Inhalt"
 
 #: locale_extras.py:7
-#, fuzzy
 msgid "uploaded a new image"
-msgstr "Bild hochladen"
+msgstr "Neues Bild hochladen"
 
 #  Markuzio Eine neue Version hochgeladen: ngc7380 
 #: locale_extras.py:8
@@ -1378,12 +1377,10 @@ msgid "commented on gear item"
 msgstr "Ausrüstung kommentieren"
 
 #: locale_extras.py:11
-#, fuzzy
 msgid "bookmarked"
 msgstr "Lesezeichen gesetzt"
 
 #: locale_extras.py:12
-#, fuzzy
 msgid "likes"
 msgstr "mag"
 
@@ -1421,7 +1418,7 @@ msgstr "mag"
 
 #: locale_extras.py:20 templates/image/detail/like.html:10
 msgid "Like"
-msgstr ""
+msgstr "Gefällt mir"
 
 #: locale_extras.py:21
 msgid "Stop following"
@@ -1518,11 +1515,11 @@ msgstr "Griechisch"
 
 #: models.py:90 models.py:108
 msgid "Russian"
-msgstr ""
+msgstr "Russisch"
 
 #: models.py:91 models.py:109
 msgid "Arabic"
-msgstr ""
+msgstr "Arabisch"
 
 #: models.py:92 models.py:110
 #, fuzzy
@@ -2582,6 +2579,7 @@ msgstr "Anzahl Bilder nach Objekttyp"
 #: views.py:477
 msgid "Today's 'Image of the day' was already choosen. Come back tomorrow!"
 msgstr ""
+"Das heutige 'Bild des Tages' wurde bereits ausgewählt. Komm morgen wieder!"
 
 #: views.py:707
 msgid "Resolution"
@@ -2626,6 +2624,8 @@ msgstr "Durchschnittlicher SQM"
 msgid ""
 "Thanks for reporting the problem. All thumbnails will be generated again."
 msgstr ""
+"Danke, dass du dieses Problem gemeldet hast. Alle Miniaturansichten werden "
+"erneut generiert. "
 
 #: views.py:1027 views.py:2727
 msgid ""
@@ -2645,6 +2645,8 @@ msgid ""
 "You uploaded an Indexed PNG file. AstroBin will need to lower the color "
 "count to 256 in order to work with it."
 msgstr ""
+"Du hast eine indizierte PNG-Datei hochgeladen. Die Anzahl der Farben wird "
+"auf 256 verringert, damit AstroBin damit arbeiten kann."
 
 #: views.py:1320 views.py:1403 views.py:1487 views.py:1513 views.py:2183
 #: views.py:2196 views.py:2217 views.py:2254 views.py:2344 views.py:2406
