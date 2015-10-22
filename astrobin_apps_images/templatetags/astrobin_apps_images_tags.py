@@ -88,7 +88,11 @@ def astrobin_image(
     # Old images might not have a size in the database, let's fix it.
     image_revision = image
     if revision not in [0, '0', 'final']:
-        image_revision = image.revisions.get(label = revision)
+        try:
+            image_revision = image.revisions.get(label = revision)
+        except ImageRevision.DoesNotExist:
+            # Image revision was deleted
+            pass
 
     w = image_revision.w
     h = image_revision.h
