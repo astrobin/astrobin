@@ -74,7 +74,7 @@ LANGUAGES = (
     ('nl', gettext('Dutch')),
     ('tr', gettext('Turkish')),
     ('sq', gettext('Albanian')),
-    #('pl', gettext('Polish')),
+    ('pl', gettext('Polish')),
     ('pt-BR', gettext('Brazilian Portuguese')),
     ('el', gettext('Greek')),
     ('ru', gettext('Russian')),
