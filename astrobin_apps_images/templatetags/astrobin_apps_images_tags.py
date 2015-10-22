@@ -14,7 +14,7 @@ from django.utils.translation import ugettext as _
 
 # AstroBin
 from astrobin.models import CommercialGear, Gear
-from astrobin.models import Image
+from astrobin.models import Image, ImageRevision
 
 # Third party
 from haystack.query import SearchQuerySet
@@ -85,17 +85,21 @@ def astrobin_image(
             'capty_cache_key': 'astrobin_image_no_image',
         }
 
-    w = image.w
-    h = image.h
+    # Old images might not have a size in the database, let's fix it.
+    image_revision = image
+    if revision not in [0, '0', 'final']:
+        image_revision = image.revisions.get(label = revision)
+
+    w = image_revision.w
+    h = image_revision.h
 
     if w == 0 or h == 0:
-        # Old images might not have a size in the database, let's fix it.
         try:
             from django.core.files.images import get_image_dimensions
-            (w, h) = get_image_dimensions(image.image_file.file)
-            image.w = w
-            image.h = h
-            image.save()
+            (w, h) = get_image_dimensions(image_revision.image_file.file)
+            image_revision.w = w
+            image_revision.h = h
+            image_revision.save()
         except (IOError, ValueError):
             w = size[0]
             h = size[1] if size[1] > 0 else w

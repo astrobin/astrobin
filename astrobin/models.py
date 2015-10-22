@@ -1205,6 +1205,8 @@ class ImageRevision(HasSolutionMixin, models.Model):
 
     image_file = models.ImageField(
         upload_to = image_upload_path,
+        height_field = 'h',
+        width_field = 'w',
         null = True,
         max_length = 256,
     )
