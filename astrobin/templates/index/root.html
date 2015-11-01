@@ -16,7 +16,7 @@
 <div id="index">
     {% if not request.user.is_authenticated %}
         <div class="row">
-            <div class="span9">
+            <div class="span12">
                 <div id="why-astrobin" class="carousel slide">
                     <div class="carousel-inner">
                         <div class="active item">
@@ -49,48 +49,9 @@
                     <a class="carousel-control right" href="#why-astrobin" data-slide="next">&rsaquo;</a>
                 </div> <!-- carousel -->
             </div> <!-- carousel's span -->
-
-            <div class="span3 visible-desktop" style="padding-top: 12px;">
-                {% include 'index/ad.html' %}
-            </div>
         </div> <!-- carousel's and ad's row -->
 
         <div class="row section">
-            <div class="span6">
-                <div class="subtle-container">
-                    <div class="header">
-                        <h4>{% trans "FIT and DSLR camera raw files" %}</h4>
-                    </div>
-                    <a class="pull-left" href="{% url rawdata.help1 %}">
-                        <img src="{{STATIC_URL}}rawdata/images/astrobin-rawdata-plan-galaxia.png"/>
-                    </a>
-                    <p>
-                        {% blocktrans %}AstroBin offers the storage of FIT and DSLR camera raw files too, for archival and sharing purposes!{% endblocktrans %}
-                    </p>
-                    <p>
-                        {% url rawdata.help1 as rawdata_url %}
-                        {% blocktrans %}<strong>AstroBin Raw Data</strong> is a platform for the secure storage of all your FIT and DLSR raw files, up to 500 GB! It will automatically keep your files organized, and allow you to share them with other members. <a href="{{rawdata_url}}">Want to know more?</a>{% endblocktrans %}
-                    </p>
-                </div>
-            </div> <!-- span -->
-
-            <div class="span6">
-                <div class="subtle-container">
-                    <div class="header">
-                        <h4>{% trans "What is this site?" %}</h4>
-                    </div>
-                    <h4>{% trans "Hey!" %}</h4>
-                    <p>
-                    {% blocktrans %}Are you an astrophotographer? Do you like to share the outcome of your hard work with others? As an astrophotographer myself, and a subscriber to numerous Astrophotography forums, I have found that the Internet is lacking a centralized place where astrophotographers can share their work.{% endblocktrans %}
-                    </p>
-                    <p>
-                    {% blocktrans %}<em>AstroBin</em> comes to fill the gap. It's a website built from the ground up by an astrophotographer, and it provides means to people who want to share their astrophotographs.{% endblocktrans %}
-                    </p>
-                </div>
-            </div>
-        </div> <!-- row -->
-
-        <div class="row">
             <div class="span12">
                 <div id="recent-images" class="endless">
                     <ul class="thumbnails astrobin-thumbnails">
