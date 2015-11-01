@@ -8,7 +8,7 @@ msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2015-02-19 11:15+0000\n"
-"PO-Revision-Date: 2015-10-20 20:41+0000\n"
+"PO-Revision-Date: 2015-10-26 13:20+0000\n"
 "Last-Translator: Lukasz83 <lukasz.sujka83@gmail.com>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
 "Language: pl\n"
@@ -18,7 +18,7 @@ msgstr ""
 "Plural-Forms: nplurals=3; plural=(n==1 ? 0 : n%10>=2 && n%10<=4 && (n%100<10 "
 "|| n%100>=20) ? 1 : 2);\n"
 "X-Generator: Pootle 2.5.0\n"
-"X-POOTLE-MTIME: 1445373683.179892\n"
+"X-POOTLE-MTIME: 1445865626.192497\n"
 
 #: fields.py:10
 msgid "United Kingdom"
@@ -1362,7 +1362,7 @@ msgstr "Treść"
 
 #: locale_extras.py:7
 msgid "uploaded a new image"
-msgstr "Opublikuj nowe zdjęcie"
+msgstr "opublikował nowe zdjęcie"
 
 #: locale_extras.py:8
 msgid "uploaded a new revision of"
@@ -2942,7 +2942,7 @@ msgstr "Eksploruj"
 #: templates/wall.html:7 templates/wall.html.py:167
 #: templates/base/site_links.html:48
 msgid "The Big Wall"
-msgstr "Ściana"
+msgstr "Ściana Zdjęć"
 
 #: templates/explore_choose.html:11
 msgid ""
@@ -3800,7 +3800,7 @@ msgstr "Kontakt"
 #: templates/image/detail/modals/upload_revision.html:17
 #: templates/index/root.html:160
 msgid "Upload"
-msgstr "Ładuj"
+msgstr "Prześlij zdjęcie"
 
 #: templates/maintenance_base.html:231
 #: templates/base/user_links_entries.html:145
@@ -5661,7 +5661,7 @@ msgid ""
 "AstroBin offers the storage of FIT and DSLR camera raw files too, for "
 "archival and sharing purposes!"
 msgstr ""
-"AstroBino oferuje również przestrzeń do przechowywania surowych danych w "
+"AstroBin oferuje również przestrzeń do przechowywania surowych danych w "
 "formacie FITS oraz z aparatów DSLR. Dane mogą być przechowywane w celu "
 "archiwizacji lub udostępniania!"
 
@@ -6043,7 +6043,7 @@ msgstr "AstroBin opublikował nowy wpis na blogu: %(object)s"
 #: templates/notification/new_bookmark/full.txt:2
 #, python-format
 msgid "%(user)s has added your image to their bookmarks: %(url)s"
-msgstr "%(user)s dodał Twoje zdjęcie do ulubionych: %(url)s"
+msgstr "%(user)s dodał Twoje zdjęcie do zakładek: %(url)s"
 
 #: templates/notification/new_bookmark/notice.html:2
 #: templates/notification/new_bookmark/short.html:2
@@ -6278,7 +6278,7 @@ msgstr "Nowa wersja opublikowana przez %(originator)s"
 #: templates/notification/new_like/short.txt:2
 #, python-format
 msgid "%(user)s likes your image: %(url)s"
-msgstr "%(user)s dodał Twoje zdjęcie do ulubionych: %(url)s"
+msgstr "%(user)s polubił Twoje zdjęcie: %(url)s"
 
 #: templates/notification/new_like/notice.html:2
 #: templates/notification/new_like/short.html:2
