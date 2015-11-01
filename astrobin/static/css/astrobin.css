@@ -3408,20 +3408,24 @@ table#private-shared-folders tr:hover a.delete-folder {
   font-style: italic;
 }
 #profile-details {
-  margin-top: 8px;
-  padding: 6px;
+  margin: 0;
+  padding: 6px 6px 0 6px;
   overflow: hidden;
-  -moz-border-radius: 12px;
-  -webkit-border-radius: 12px;
-  border-radius: 12px;
-  background: #232323;
+  -moz-border-radius: 0 0 12px 12px;
+  -webkit-border-radius: 0 0 12px 12px;
+  border-radius: 0 0 12px 12px;
+  background: rgba(0, 0, 0, 0.65);
+  position: absolute;
+  bottom: 12px;
+  width: 182px;
 }
 #profile-details ul {
   list-style: none;
   margin: 0;
 }
 #profile-details ul li {
-  display: inline;
+  display: inline-block;
+  width: 57px;
 }
 #profile-details ul li > a {
   float: left;
@@ -3430,7 +3434,6 @@ table#private-shared-folders tr:hover a.delete-folder {
   padding: 4px 8px;
   font-size: 8px;
   text-align: center;
-  border-right: 1px solid #262626;
 }
 #profile-details ul li > a:hover,
 #profile-details ul li > a:hover strong {
@@ -3491,6 +3494,9 @@ ul.astrobin-users {
 ul.astrobin-users li {
   float: left;
   padding: 2px;
+}
+.user-card {
+  position: relative;
 }
 .user-card .stats {
   margin-top: 12px;
