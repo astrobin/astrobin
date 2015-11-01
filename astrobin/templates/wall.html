@@ -167,7 +167,9 @@
     </div> <!-- subnav -->
 
     {% if ADS_ENABLED and not request.user|is_donor %}
-        {% dfp_tag '47890729/leaderboard' 940 130 brands='' %}
+        <div class="visible-desktop">
+            {% dfp_tag '47890729/leaderboard' 940 130 brands='' %}
+        </div>
     {% endif %}
 
     <h1>{% trans "The Big Wall" %}</h1>
