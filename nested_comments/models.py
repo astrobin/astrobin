@@ -2,6 +2,7 @@
 from django.contrib.auth.models import User
 from django.contrib.contenttypes import generic
 from django.contrib.contenttypes.models import ContentType
+from django.core.exceptions import ValidationError
 from django.db import models
 
 
@@ -56,6 +57,12 @@ class NestedComment(models.Model):
         if self.deleted == False:
             self.deleted = True;
             self.save();
+
+    def clean(self, *args, **kwargs):
+        obj = self.content_type.get_object_for_this_type(pk = self.object_id)
+        if hasattr(obj, 'allow_comments') and obj.allow_comments is False:
+            raise ValidationError('Comments are closed')
+        return super(NestedComment).clean(args, kwargs)
 
     class Meta:
         app_label = 'nested_comments'

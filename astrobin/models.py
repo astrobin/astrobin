@@ -781,6 +781,11 @@ class Image(HasSolutionMixin, models.Model):
         default = True
     )
 
+    allow_comments = models.BooleanField(
+        verbose_name = _("Allow comments"),
+        default = True,
+    )
+
     class Meta:
         app_label = 'astrobin'
         ordering = ('-uploaded', '-id')
