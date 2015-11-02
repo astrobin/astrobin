@@ -62,7 +62,6 @@ class NestedComment(models.Model):
         obj = self.content_type.get_object_for_this_type(pk = self.object_id)
         if hasattr(obj, 'allow_comments') and obj.allow_comments is False:
             raise ValidationError('Comments are closed')
-        return super(NestedComment).clean(args, kwargs)
 
     class Meta:
         app_label = 'nested_comments'
