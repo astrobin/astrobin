@@ -8,7 +8,7 @@ msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2015-02-19 11:15+0000\n"
-"PO-Revision-Date: 2015-10-26 13:20+0000\n"
+"PO-Revision-Date: 2015-11-05 21:32+0000\n"
 "Last-Translator: Lukasz83 <lukasz.sujka83@gmail.com>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
 "Language: pl\n"
@@ -18,7 +18,7 @@ msgstr ""
 "Plural-Forms: nplurals=3; plural=(n==1 ? 0 : n%10>=2 && n%10<=4 && (n%100<10 "
 "|| n%100>=20) ? 1 : 2);\n"
 "X-Generator: Pootle 2.5.0\n"
-"X-POOTLE-MTIME: 1445865626.192497\n"
+"X-POOTLE-MTIME: 1446759137.289745\n"
 
 #: fields.py:10
 msgid "United Kingdom"
@@ -1378,11 +1378,11 @@ msgstr "skomentuj sprzęt"
 
 #: locale_extras.py:11
 msgid "bookmarked"
-msgstr "W zakładkach"
+msgstr "dodał do ulubionych"
 
 #: locale_extras.py:12
 msgid "likes"
-msgstr "polubienia"
+msgstr "lubi"
 
 #: locale_extras.py:13
 msgid "has written a review on"
@@ -3664,7 +3664,7 @@ msgstr "Archiwum 'Zdjęcia Dnia'"
 #: templates/actstream/action.html:117 templates/gear/page.html:15
 #: templates/index/root.html:121
 msgid "by"
-msgstr "przez"
+msgstr "od"
 
 #: templates/iotd_archive.html:32 templates/index/root.html:138
 msgid "Runners-up"

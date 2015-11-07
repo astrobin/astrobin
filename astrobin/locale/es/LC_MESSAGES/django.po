@@ -7,8 +7,8 @@ msgstr ""
 "Project-Id-Version: AstroBin 1.0\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2015-02-19 11:14+0000\n"
-"PO-Revision-Date: 2014-01-31 01:47+0000\n"
-"Last-Translator: Omar <thekingosm168@hotmail.com>\n"
+"PO-Revision-Date: 2015-11-05 20:57+0000\n"
+"Last-Translator: joseamirandavelez <joseamirandavelez@gmail.com>\n"
 "Language-Team: Pepe Chambó <jjchambo@hotmail.com>\n"
 "Language: es\n"
 "MIME-Version: 1.0\n"
@@ -16,7 +16,7 @@ msgstr ""
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=(n != 1);\n"
 "X-Generator: Pootle 2.5.0\n"
-"X-POOTLE-MTIME: 1391132854.34558\n"
+"X-POOTLE-MTIME: 1446757051.29217\n"
 
 #: fields.py:10
 msgid "United Kingdom"
@@ -1501,16 +1501,15 @@ msgstr "Griego"
 
 #: models.py:90 models.py:108
 msgid "Russian"
-msgstr ""
+msgstr "Ruso"
 
 #: models.py:91 models.py:109
 msgid "Arabic"
-msgstr ""
+msgstr "Árabe"
 
 #: models.py:92 models.py:110
-#, fuzzy
 msgid "Japanese"
-msgstr "Japón"
+msgstr "Japonés"
 
 #: models.py:114
 msgid "Pulsars"
@@ -2565,7 +2564,7 @@ msgstr "Número de imágenes por tipo de objeto"
 
 #: views.py:477
 msgid "Today's 'Image of the day' was already choosen. Come back tomorrow!"
-msgstr ""
+msgstr "La \"Imagen del día\" de hoy ya ha sido seleccionada. ¡Regresa mañana!"
 
 #: views.py:707
 msgid "Resolution"
@@ -3696,20 +3695,21 @@ msgid "Runners-up"
 msgstr "Subcampeones"
 
 #: templates/iotd_choose.html:7 templates/iotd_choose.html.py:13
-#, fuzzy
 msgid "Choose today's 'Image of the day'"
-msgstr "Archivo de ganadores de la Imagen del día"
+msgstr "Escoge la \"Imagen del día\" de hoy"
 
 #: templates/iotd_choose.html:37
 #, fuzzy
 msgid "Choose"
-msgstr "Examinar"
+msgstr "Escoger"
 
 #: templates/iotd_choose.html:45
 msgid ""
 "There are no candidates for 'Image of the day' yet, today. Please try again "
 "later."
 msgstr ""
+"Todavía no hay candidatos para la \"Imagen del día\" de hoy. Por favor trate "
+"más tarde. "
 
 #: templates/iotd_choose_confirm.html:7 templates/iotd_choose_confirm.html:13
 #: templates/user/profile/commercial/products.html:287
@@ -3721,15 +3721,15 @@ msgstr "¿Estás seguro?"
 
 #: templates/iotd_choose_confirm.html:35
 msgid "This image will be selected as today's 'Image of the day'."
-msgstr ""
+msgstr "Esta imagen será seleccionada como la \"Imagen del día\" de hoy."
 
 #: templates/iotd_choose_confirm.html:36
 msgid "This operation cannot be undone."
-msgstr ""
+msgstr "Esta acción no se puede deshacer."
 
 #: templates/iotd_choose_confirm.html:44
 msgid "Yes, I'm sure"
-msgstr ""
+msgstr "Sí, estoy seguro"
 
 #: templates/iotd_choose_finished.html:5 templates/iotd_choose_finished.html:9
 #: templates/contact_form/contact_completed.html:4
@@ -3738,12 +3738,13 @@ msgid "Thanks!"
 msgstr "¡Gracias!"
 
 #: templates/iotd_choose_finished.html:13
+#, fuzzy
 msgid ""
 "\n"
 "                The 'Image of the day' was selected. Thank you for your "
 "help!\n"
 "            "
-msgstr ""
+msgstr "La \"Imagen del día\" fue seleccionada. ¡Gracias por su ayuda!"
 
 #: templates/leaderboard.html:7 templates/leaderboard.html.py:11
 #: templates/maintenance_base.html:147 templates/base/site_links.html:85
@@ -4497,7 +4498,7 @@ msgstr ""
 
 #: templates/base/site_links.html:33
 msgid "Source code"
-msgstr ""
+msgstr "Código fuente"
 
 #: templates/base/site_links.html:118
 msgid "AstroBin Raw Data"
@@ -4514,7 +4515,7 @@ msgstr "Por favor, selecciona tu idioma de entre las opciones mostradas."
 #: templates/base/user_links_entries.html:176
 #, fuzzy
 msgid "Raw data"
-msgstr "Biblioteca de datos Raw"
+msgstr "Datos en crudo"
 
 #: templates/base/user_links_entries.html:182
 #: templates/user/profile-subnav.html:35
@@ -4528,7 +4529,7 @@ msgstr "Carpetas privadas compartidas"
 #: templates/base/user_links_entries.html:220
 #, fuzzy
 msgid "Choose Image Of The Day"
-msgstr "Imagen del día"
+msgstr "Escoger la Imagen del Día"
 
 #: templates/base/user_links_entries.html:244
 msgid "Would you like to start using your real name on AstroBin?"
@@ -5120,17 +5121,17 @@ msgstr "Enviar a un usuario"
 
 #: templates/image/detail/menu/admin.html:7
 msgid "Admin"
-msgstr ""
+msgstr "Administrador"
 
 #: templates/image/detail/menu/admin.html:14
 #: templates/image/detail/modals/flag_thumbnails.html:7
 #, fuzzy
 msgid "Flag malfunctioning thumbnails"
-msgstr "seña las miniaturas no funcionadas"
+msgstr "Marcar las miniaturas que no funcionan"
 
 #: templates/image/detail/menu/admin.html:21
 msgid "Ban user"
-msgstr ""
+msgstr "Expulsar usuario"
 
 #: templates/image/detail/menu/share.html:6
 #: templates/image/detail/modals/share.html:7
@@ -6830,7 +6831,7 @@ msgstr ""
 #: templates/user/ban.html:28
 #, fuzzy
 msgid "Thank you!"
-msgstr "Agradecimientos"
+msgstr "¡Gracias!"
 
 #: templates/user/bookmarks.html:5
 #, python-format

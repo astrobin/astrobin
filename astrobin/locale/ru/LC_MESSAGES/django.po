@@ -8,7 +8,7 @@ msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2015-02-19 11:16+0000\n"
-"PO-Revision-Date: 2015-08-24 17:56+0000\n"
+"PO-Revision-Date: 2015-11-06 17:23+0000\n"
 "Last-Translator: csve <csve00@gmail.com>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
 "Language: ru\n"
@@ -18,7 +18,7 @@ msgstr ""
 "Plural-Forms: nplurals=3; plural=(n%10==1 && n%100!=11 ? 0 : n%10>=2 && n%"
 "10<=4 && (n%100<10 || n%100>=20) ? 1 : 2);\n"
 "X-Generator: Pootle 2.5.0\n"
-"X-POOTLE-MTIME: 1440438990.173928\n"
+"X-POOTLE-MTIME: 1446830602.519781\n"
 
 #: fields.py:10
 msgid "United Kingdom"
@@ -3700,20 +3700,18 @@ msgid "Runners-up"
 msgstr "Догоняющие"
 
 #: templates/iotd_choose.html:7 templates/iotd_choose.html.py:13
-#, fuzzy
 msgid "Choose today's 'Image of the day'"
-msgstr "Архив победителей «Изображение Дня»"
+msgstr "Выбрать сегодняшнее «Изображение Дня»"
 
 #: templates/iotd_choose.html:37
-#, fuzzy
 msgid "Choose"
-msgstr "Выбрать файл"
+msgstr "Выбрать"
 
 #: templates/iotd_choose.html:45
 msgid ""
 "There are no candidates for 'Image of the day' yet, today. Please try again "
 "later."
-msgstr ""
+msgstr "Номинантов на \"Изображение Дня\" пока нет. Попробуйте зайти позже."
 
 #: templates/iotd_choose_confirm.html:7 templates/iotd_choose_confirm.html:13
 #: templates/user/profile/commercial/products.html:287
@@ -3725,11 +3723,11 @@ msgstr "Вы уверены?"
 
 #: templates/iotd_choose_confirm.html:35
 msgid "This image will be selected as today's 'Image of the day'."
-msgstr ""
+msgstr "Эта работа будет выбрана сегодняшним \"Изображением Дня\"."
 
 #: templates/iotd_choose_confirm.html:36
 msgid "This operation cannot be undone."
-msgstr "Это действие не может быть отменено."
+msgstr "Эта работа будет выбрана сегодняшним \"Изображением Дня\"."
 
 #: templates/iotd_choose_confirm.html:44
 msgid "Yes, I'm sure"
@@ -3748,6 +3746,8 @@ msgid ""
 "help!\n"
 "            "
 msgstr ""
+"\n"
+"\"Изображение Дня\" выбрано. Спасибо за вашу помощь.\n"
 
 #: templates/leaderboard.html:7 templates/leaderboard.html.py:11
 #: templates/maintenance_base.html:147 templates/base/site_links.html:85
@@ -4516,9 +4516,8 @@ msgid "Please select your language from the options above."
 msgstr "Пожалуйста выберите ваш язык из списка выше."
 
 #: templates/base/user_links_entries.html:176
-#, fuzzy
 msgid "Raw data"
-msgstr "библиотека RAW данных"
+msgstr "RAW(сырые) данные"
 
 #: templates/base/user_links_entries.html:182
 #: templates/user/profile-subnav.html:35
@@ -4530,9 +4529,8 @@ msgid "Private shared folders"
 msgstr "Личные каталоги обмена"
 
 #: templates/base/user_links_entries.html:220
-#, fuzzy
 msgid "Choose Image Of The Day"
-msgstr "Изображение дня"
+msgstr "Выбрать \"Изображение Дня\""
 
 #: templates/base/user_links_entries.html:244
 msgid "Would you like to start using your real name on AstroBin?"
@@ -4544,7 +4542,6 @@ msgid "OK"
 msgstr "OK"
 
 #: templates/base/user_links_entries.html:255
-#, fuzzy
 msgid "No, thanks"
 msgstr "Нет, спасибо"
 
@@ -5069,7 +5066,7 @@ msgstr "Отметить эту версию как финальную"
 
 #: templates/image/detail/menu/actions.html:55
 msgid "Attempt to plate-solve again"
-msgstr ""
+msgstr "Попытаться определить координаты снова"
 
 #: templates/image/detail/menu/actions.html:65
 msgid "Change license"
@@ -5355,11 +5352,12 @@ msgstr "Полный"
 #: templates/image/detail/modals/share.html:36
 #, fuzzy
 msgid "Real"
-msgstr "Настоящее имя"
+msgstr "Настоящее"
 
 #: templates/image/detail/modals/share.html:40
+#, fuzzy
 msgid "Copy this"
-msgstr "Копировать это"
+msgstr "Настоящее"
 
 #: templates/image/detail/modals/share.html:46
 msgid "Image mode"
@@ -5857,7 +5855,7 @@ msgid "Here are your notifications"
 msgstr "Здесь ваши уведомления"
 
 #: templates/notification/email_body.txt:3
-#, fuzzy, python-format
+#, python-format
 msgid ""
 "Hi! You have a new notification on AstroBin:\n"
 "\n"
@@ -5879,8 +5877,10 @@ msgstr ""
 "\n"
 "Чтобы увидеть все ваши уведомления, перейдите по ссылке %(notices_url)s.\n"
 "\n"
-"Если вы не хотите больше получать электрописьма, поправьте ваши настройки по "
-"адресу  http://astrobin.com%(pref_url)s.\n"
+"Если вы не хотите больше получать письма, поправьте ваши настройки по адресу "
+" http://astrobin.com%(pref_url)s.\n"
+"\n"
+"Пожалуйста, не отвечайте на это письмо\n"
 "\n"
 "Чистого неба,\n"
 "AstroBin.\n"
@@ -6799,9 +6799,8 @@ msgid "Are you sure you want to ban this user?"
 msgstr "Вы действительно хотите заблокировать этого пользователя?"
 
 #: templates/user/ban.html:9 templates/user/ban.html.py:25
-#, fuzzy
 msgid "User banned"
-msgstr "Пользователь не найден:"
+msgstr "Пользователь забанен"
 
 #: templates/user/ban.html:17
 #, python-format
@@ -6809,15 +6808,16 @@ msgid ""
 "User <strong>%(user)s</strong> will be deleted, with all their images, "
 "messages, comments, and so on."
 msgstr ""
+"Пользователь <strong>%(user)s</strong> будет удален со всеми своими "
+"изображениями, сообщениями и остальным."
 
 #: templates/user/ban.html:27
 msgid "The user was banned."
 msgstr "Пользователь заблокирован"
 
 #: templates/user/ban.html:28
-#, fuzzy
 msgid "Thank you!"
-msgstr "Благодарности:"
+msgstr "Спасибо!"
 
 #: templates/user/bookmarks.html:5
 #, python-format
