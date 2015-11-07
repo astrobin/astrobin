@@ -8,7 +8,7 @@ msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2015-11-07 19:06+0000\n"
-"PO-Revision-Date: 2015-11-05 21:32+0000\n"
+"PO-Revision-Date: 2015-11-07 19:49+0000\n"
 "Last-Translator: Lukasz83 <lukasz.sujka83@gmail.com>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
 "Language: pl\n"
@@ -18,7 +18,7 @@ msgstr ""
 "Plural-Forms: nplurals=3; plural=(n==1 ? 0 : n%10>=2 && n%10<=4 && (n%100<10 "
 "|| n%100>=20) ? 1 : 2);\n"
 "X-Generator: Pootle 2.5.0\n"
-"X-POOTLE-MTIME: 1446759137.289745\n"
+"X-POOTLE-MTIME: 1446925783.603478\n"
 
 #: fields.py:10
 msgid "United Kingdom"
@@ -1963,9 +1963,8 @@ msgid "Position"
 msgstr "Pozycja"
 
 #: models.py:785
-#, fuzzy
 msgid "Allow comments"
-msgstr "Komentarze"
+msgstr "Zezwól na komentarze"
 
 #: models.py:798 templates/image/full.html:56
 #: templates/image/detail/image_title.html:7
@@ -4936,7 +4935,7 @@ msgstr ""
 
 #: templates/image/detail/comments.html:20
 msgid "Comments are closed."
-msgstr ""
+msgstr "Komentarze są wyłączone"
 
 #: templates/image/detail/commercial.html:6
 msgid "Made possible by"
@@ -6893,9 +6892,8 @@ msgstr "Edytuj profil"
 #: templates/user/profile/delete.html:6 templates/user/profile/delete.html:11
 #: templates/user/profile/delete.html:18
 #: templates/user/profile/edit/basic.html:18
-#, fuzzy
 msgid "Delete account"
-msgstr "Usuń konwersację"
+msgstr "Usuń konto"
 
 #: templates/user/profile/delete.html:14
 msgid ""
@@ -6903,10 +6901,13 @@ msgid ""
 "and immediate. All traces of your activity on AstroBin will be erased "
 "forever!"
 msgstr ""
+"Czy jesteś pewien, że chcesz usunąć swoje konto? Ta operacja jest "
+"nieodwracalna i natychmiastowa. Wszelkie ślady Twojej aktywności na AstroBin "
+"zostaną usunięte na zawsze!"
 
 #: templates/user/profile/delete.html:21
 msgid "Your account was deleted. Thanks for using AstroBin until now!"
-msgstr ""
+msgstr "Twoje konto zostało usunięte. Dziękujemy za korzystanie z AstroBin!"
 
 #: templates/user/profile/flickr_import.html:14
 msgid ""
