@@ -1,0 +1,25 @@
+{% extends 'base.html' %}
+{% load i18n %}
+{% load tags %}
+{% load bootstrap_toolkit %}
+
+{% block title %}AstroBin - {% trans "Delete account" %}{% endblock %}
+{% block content %}
+    <div class="row">
+        {% include 'profile-edit-menu.html' %}
+        <div class="span9">
+            <h1>{% trans "Delete account" %}</h1>
+            {% if request.method == 'GET' %}
+                <p>
+                    {% trans "Are you sure you want to delete your account? This operation is irreversible and immediate. All traces of your activity on AstroBin will be erased forever!" %}
+                </p>
+
+                <form action="." method="post">{% csrf_token %}
+                    <input type="submit" value="{% trans 'Delete account' %}" class="btn btn-danger" />
+                </form>
+            {% else %}
+                <p>{% blocktrans %}Your account was deleted. Thanks for using AstroBin until now!{% endblocktrans %}</p>
+            {% endif %}
+        </div> <!-- span9 -->
+    </div> <!-- row -->
+{% endblock %}

@@ -14,6 +14,7 @@
                     <input class="btn btn-primary" type="submit" value="{% trans "Save" %}" />
                     {% comment %}We should use {% url password_change %} or something.{% endcomment %}
                     <a class="btn" href="/accounts/password/change/">{% trans "Change your password" %}</a>
+                    <a class="btn btn-danger" href="{% url profile_delete %}">{% trans "Delete account" %}</a>
                 </div>
             </form>
         </div> <!-- span12 -->

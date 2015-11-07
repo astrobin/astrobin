@@ -118,6 +118,7 @@ urlpatterns = patterns('',
     url(r'^flickr_auth_callback/$', views.flickr_auth_callback, name='flickr_auth_callback'),
     url(r'^profile/edit/preferences/$', views.user_profile_edit_preferences, name='profile_edit_preferences'),
     url(r'^profile/save/preferences/$', views.user_profile_save_preferences, name='profile_save_preferences'),
+    url(r'^profile/delete/$', views.user_profile_delete, name='profile_delete'),
 
     url(r'^autocomplete/(?P<what>\w+)/$', lookups.autocomplete, name='autocomplete'),
     url(r'^autocomplete_user/(?P<what>\w+)/$', lookups.autocomplete_user, name='autocomplete_user'),

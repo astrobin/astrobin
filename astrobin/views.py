@@ -15,6 +15,7 @@ from django.conf import settings
 from django.contrib.contenttypes.models import ContentType
 from django.template import RequestContext
 from django.views.decorators.http import require_http_methods, require_GET, require_POST
+from django.contrib import auth
 from django.contrib.auth.decorators import login_required, user_passes_test
 from django.contrib.auth.models import User
 from django.contrib import messages
@@ -2616,6 +2617,17 @@ def user_profile_save_preferences(request):
 
     messages.success(request, _("Form saved. Thank you!"))
     return HttpResponseRedirect("/profile/edit/preferences/");
+
+
+@login_required
+def user_profile_delete(request):
+    if request.method == 'POST':
+
+        request.user.delete()
+        auth.logout(request)
+
+    return render_to_response('user/profile/delete.html',
+        {}, context_instance = RequestContext(request))
 
 
 @login_required
