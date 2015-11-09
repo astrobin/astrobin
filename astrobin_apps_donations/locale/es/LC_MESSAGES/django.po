@@ -7,9 +7,9 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2015-02-19 11:20+0000\n"
-"PO-Revision-Date: 2014-01-29 01:37+0000\n"
-"Last-Translator: Bufot <bufote@hotmail.com>\n"
+"POT-Creation-Date: 2015-11-07 19:11+0000\n"
+"PO-Revision-Date: 2015-11-05 20:45+0000\n"
+"Last-Translator: joseamirandavelez <joseamirandavelez@gmail.com>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
 "Language: es\n"
 "MIME-Version: 1.0\n"
@@ -17,7 +17,7 @@ msgstr ""
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=(n != 1);\n"
 "X-Generator: Pootle 2.5.0\n"
-"X-POOTLE-MTIME: 1390959471.695130\n"
+"X-POOTLE-MTIME: 1446756355.431480\n"
 
 #: templates/astrobin_apps_donations/cancel.html:5
 #: templates/astrobin_apps_donations/cancel.html:10
@@ -50,9 +50,8 @@ msgstr "Fundador de AstroBin"
 
 #: templates/astrobin_apps_donations/edit.html:5
 #: templates/astrobin_apps_donations/edit.html:8
-#, fuzzy
 msgid "Edit your recurring donation settings"
-msgstr "Cancelar tu donación recurrente"
+msgstr "Editar los parámetros de donación recurrente"
 
 #: templates/astrobin_apps_donations/success.html:5
 #: templates/astrobin_apps_donations/success.html:10
@@ -134,13 +133,15 @@ msgstr "$%(amount)s/year"
 
 #: templates/astrobin_apps_donations/inclusion_tags/_paypal_button.html:119
 msgid "IMPORTANT"
-msgstr ""
+msgstr "IMPORTANTE"
 
 #: templates/astrobin_apps_donations/inclusion_tags/_paypal_button.html:119
 msgid ""
 "Please note: if you are already a donor, the Subscribe button will update "
 "your existing subscription, not create a new one."
 msgstr ""
+"Nota importante: Si ya eres un donante, el botón de Subscribirse se "
+"actualizará con tu suscripción existente, no creará una nueva."
 
 #: templates/astrobin_apps_donations/inclusion_tags/cancel_modal.html:8
 #: templates/astrobin_apps_donations/inclusion_tags/cancel_modal.html:24
