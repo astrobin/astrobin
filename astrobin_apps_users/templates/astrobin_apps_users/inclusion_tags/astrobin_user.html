@@ -50,11 +50,11 @@
                 </ul>
             </div>
             {% endcache %}
-
-            {% if request.user == user and user|is_donor %}
-                {% thank_you_for_your_support %}
-            {% endif %}
         </div>
+
+        {% if request.user == user and user|is_donor %}
+            {% thank_you_for_your_support %}
+        {% endif %}
     {% endif %}
 
     {% if layout == 'inline' or layout == 'inline-mini' %}
