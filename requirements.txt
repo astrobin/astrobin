@@ -62,7 +62,7 @@ django-reviews==0.1.0
 django-robots==0.8.1
 django-staticfiles==1.2.1
 django-storages==1.1.4
-django-subscription==0.1
+-e git+https://github.com/siovene/django-subscription.git@2f49337a9da7387db84d4eb5068b35aa944544a6#egg=django-subscription
 django-tagging==0.3.1
 django-tastypie==0.9.11
 django-threaded-messages==0.1.19
