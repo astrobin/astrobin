@@ -25,13 +25,7 @@
 
     <div class="row">
         {% for object in object_list %}
-            {% comment %}
-                These are hardcoded here because there are other subscription plans not
-                pertaining Raw Data.
-            {% endcomment %}
-
-
-            {% if object.name == 'Atom' or object.name == 'Meteor' or object.name == 'Luna' or object.name == 'Sol' or object.name == 'Galaxia' %}
+            {% if object.category == 'rawdata' %}
                 <div class="plan">
                     {% include 'subscription/_plan.html' %}
                     <a class="btn btn-large btn-primary" href="{% url subscription_detail object.id %}">
@@ -42,9 +36,6 @@
         {% endfor %}
     </div>
 
-    {% comment %}
-        More hardcoded things, but well...
-    {% endcomment %}
     <div class="row">
         <div class="plan">
             <div class="subtle-container plan-description">
