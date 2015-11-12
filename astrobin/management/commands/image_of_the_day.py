@@ -9,6 +9,7 @@ from astrobin.models import Image, ImageOfTheDay
 from astrobin.image_utils import make_image_of_the_day, make_runnerup, candidate_images_for_iotd
 
 from datetime import date, datetime, timedelta
+from random import shuffle
 
 
 def calculate_score(image):
@@ -32,23 +33,41 @@ def compare_images(a, b):
 
 
 class Command(BaseCommand):
-    help = "Calculates and saves the image of the day."
+    help = "Selects candidates for the Image of the Day."
 
     def handle(self, *args, **options):
-        coolest_image = None
-        yesterday = date.today() - timedelta(1)
-        start = yesterday - timedelta(7)
+        liked_images = []
+        random_images = []
 
-        candidate_images = []
-        while not candidate_images:
-            candidate_images = Image.objects.filter(Q(uploaded__gte = start) &
-                                                    Q(uploaded__lte = yesterday) &
-                                                    Q(subject_type__lt = 500) &
-                                                    Q(w__gte = settings.THUMBNAIL_ALIASES['']['iotd']['size'][0]) &
-                                                    Q(h__gte = settings.THUMBNAIL_ALIASES['']['iotd']['size'][1]) &
-                                                    Q(is_wip = False))
+        start = date.today() - timedelta(8) # A week before yesterday
+        end = date.today() - timedelta(1)   # Yesterday
+
+        query = {
+            'start': Q(uploaded__gte = start),
+            'end'  : Q(uploaded__lte = end),
+            'type' : Q(subject_type__lt = 500),
+            'w'    : Q(w__gte = settings.THUMBNAIL_ALIASES['']['iotd']['size'][0]),
+            'h'    : Q(h__gte = settings.THUMBNAIL_ALIASES['']['iotd']['size'][1]),
+            'wip'  : Q(is_wip = False),
+        }
+
+        # First let's get some of the most liked images during the past 7 days.
+        while not liked_images:
+            liked_images = list(Image.objects.filter(reduce(lambda x, y: x & y, query.values())))
             start = start - timedelta(1)
+            query['start'] = Q(uploaded__gte = start)
+        liked_images = sorted(liked_images, cmp = compare_images)[:25]
 
-        sorted_images = sorted(candidate_images, cmp = compare_images)[:25]
-        candidate_images_for_iotd(sorted_images)
+        # Then let's get some random ones too.
+        start = date.today() - timedelta(8)
+        query['start'] = Q(uploaded__gte = start)
+        while not random_images:
+            random_images = list(Image.objects.filter(reduce(lambda x, y: x & y, query.values())).order_by('?')[:25])
+            start = start - timedelta(1)
+            query['start'] = Q(uploaded__gte = start)
 
+        # Now remove duplicates and shuffle everything
+        candidates = list(set(liked_images + random_images))
+        shuffle(candidates)
+
+        candidate_images_for_iotd(candidates)

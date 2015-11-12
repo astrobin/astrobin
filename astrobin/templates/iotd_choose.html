@@ -13,31 +13,19 @@
             {% trans "Choose today's 'Image of the day'" %}
         </h1>
 
+        <p class="well">
+            {% blocktrans %}Here is a selection of images uploaded during the past 7 days. About half of them are images that received lots of likes, and the other half were selected randomly. The images are anonymized as to not bias the selection.{% endblocktrans %}
+        </p>
+
         {% for candidate in candidate_list %}
             <div class="row section iotd-choose">
-                <div class="span8">
-                    {% astrobin_image candidate.image 'regular' %}
-                </div>
-
-                <div class="span4">
-                    <div class="subtle-container">
-                        <div class="header">
-                            <h4>
-                                "{{candidate.image.title|escape}}"
-                                <span class="by">{% trans "by" %}</span>
-                                <a href="{% url user_page candidate.image.user %}">
-                                    {{candidate.image.user.userprofile}}
-                                </a>
-                            </h4>
-                        </div>
-
-                        <a
-                            href="{% url iotd_choose candidate.image.id %}"
-                            class="btn btn-large btn-block btn-primary">
-                            &larr; {% trans "Choose" %}
-                        </a>
-
-                    </div>
+                <div class="span12">
+                    {% astrobin_image candidate.image 'iotd_candidate' 'final' '' False %}
+                    <a
+                        href="{% url iotd_choose candidate.image.id %}"
+                        class="btn btn-large btn-block btn-primary">
+                        &uarr; {% trans "Choose" %}
+                    </a>
                 </div>
             </div>
         {% empty %}

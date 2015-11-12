@@ -10,7 +10,7 @@ CACHE = not DEBUG
 TEMPLATE_DEBUG = DEBUG
 MAINTENANCE_MODE = False
 READONLY_MODE = False
-MEDIA_VERSION = '81'
+MEDIA_VERSION = '82'
 LONGPOLL_ENABLED = False
 ADS_ENABLED = True
 DONATIONS_ENABLED = True
@@ -572,6 +572,7 @@ THUMBNAIL_ALIASES = {
 
         # IOTD
         'iotd': {'size': (780, 180), 'crop': 'smart', 'watermark': True},
+        'iotd_candidate': {'size': (960, 0), 'crop': 'smart', 'watermark': False},
 
         # Activity stream
         'act_target': {'size': (226, 62), 'crop': 'smart', 'quality': 80},

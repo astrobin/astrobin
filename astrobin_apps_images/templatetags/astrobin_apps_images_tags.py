@@ -58,7 +58,7 @@ def gallery_thumbnail_inverted(image, revision_label):
 # actual thumbnail.
 def astrobin_image(
     context, image, alias,
-    revision = 'final', url_size = 'regular'):
+    revision = 'final', url_size = 'regular', link = True):
 
     response_dict = {
         'provide_size': True,
@@ -212,6 +212,7 @@ def astrobin_image(
         'animated'      : animated,
         'get_thumb_url' : get_thumb_url,
         'thumb_url'     : thumb_url,
+        'link'          : link,
     }.items())
 
 

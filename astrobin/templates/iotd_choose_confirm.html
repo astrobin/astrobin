@@ -14,36 +14,22 @@
         </h1>
 
         <div class="row section iotd-choose">
-            <div class="span8">
-                {% astrobin_image image 'regular' %}
-            </div>
+            <div class="span12">
+                {% astrobin_image image 'iotd_candidate' 'final' '' False %}
 
-            <div class="span4">
-                <div class="subtle-container">
-                    <div class="header">
-                        <h4>
-                            "{{image.title|escape}}"
-                            <span class="by">{% trans "by" %}</span>
-                            <a href="{% url user_page image.user %}">
-                                {{image.user.userprofile}}
-                            </a>
-                        </h4>
-                    </div>
-
-                    <div class="alert alert-warning">
-                        <i class="icon-warning-sign"></i>
-                        {% trans "This image will be selected as today's 'Image of the day'." %}
-                        {% trans "This operation cannot be undone." %}
-                    </div>
-
-                    <form method='POST' action="{% url iotd_choose image.id %}">
-                        {% csrf_token %}
-                        <input
-                            type="submit"
-                            class="btn btn-large btn-block btn-primary"
-                            value="{% trans "Yes, I'm sure" %}"/>
-                    </form>
+                <div class="alert alert-warning">
+                    <i class="icon-warning-sign"></i>
+                    {% trans "This image will be selected as today's 'Image of the day'." %}
+                    {% trans "This operation cannot be undone." %}
                 </div>
+
+                <form method='POST' action="{% url iotd_choose image.id %}">
+                    {% csrf_token %}
+                    <input
+                        type="submit"
+                        class="btn btn-large btn-block btn-primary"
+                        value="{% trans "Yes, I'm sure" %}"/>
+                </form>
             </div>
         </div>
     {% endif %}

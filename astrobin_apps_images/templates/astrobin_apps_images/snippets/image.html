@@ -18,7 +18,9 @@
         {% random_id %}
 
         {% if alias != 'histogram' %}
+            {% if link %}
             <a href="{{url}}{% if mod %}{% query_string "mod=mod" "" %}{% endif %}">
+            {% endif %}
 
                 {% if badges %}
                     <ul class="badges">
@@ -69,7 +71,7 @@
                  data-get-thumb-url="{{get_thumb_url}}"
                  alt="{{image.title|escape}}, {{image.user.userprofile}}" />
 
-        {% if alias != 'histogram' %}
+        {% if alias != 'histogram' and link == True %}
         </a>
         {% endif %}
 
@@ -78,13 +80,23 @@
             {% cache 43200 astrobin_image_capty capty_cache_key %}
                 <div class="capty-caption-content">
                     <div class="link-overlay" style="width:{{size_x}}px; height:{{size_y}}px">
+                        {% if link %}
                         <a href="{{url}}{% if mod %}{% query_string "mod=mod" "" %}{% endif %}">
                             &nbsp;
                         </a>
+                        {% endif %}
                     </div>
 
-                    <a href="{{url}}{% if mod %}{% query_string "mod=mod" "" %}{% endif %}">{{image.title|escape|default:_("(no title)")}}</a>,
-                    {{image.user.userprofile}}
+                    {% if link %}
+                    <a href="{{url}}{% if mod %}{% query_string "mod=mod" "" %}{% endif %}">
+                    {% endif %}
+
+                        {{image.title|escape|default:_("(no title)")}}
+
+                    {% if link %}
+                    </a>
+                    {% endif %}
+                    , {{image.user.userprofile}}
 
                     {% if alias == 'gallery' %}
                         <table class="table table-condensed">
