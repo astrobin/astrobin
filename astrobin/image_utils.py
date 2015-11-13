@@ -16,6 +16,9 @@ def candidate_images_for_iotd(images):
     from astrobin.models import ImageOfTheDayCandidate
 
     for position, i in enumerate(images):
+        # Generate the thumbnail so that images are not slow to load when they
+        # are presented for selection.
+        i.thumbnail('iotd_candidate')
         c = ImageOfTheDayCandidate.objects.create(image = i, position = position)
 
 
