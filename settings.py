@@ -625,3 +625,18 @@ PYBB_DEFAULT_TITLE = "AstroBin Forum"
 PYBB_PERMISSION_HANDLER = "astrobin.permissions.PyBBMPermissions"
 PYBB_ATTACHMENT_ENABLE = False
 PYBB_PROFILE_RELATED_NAME = 'userprofile'
+PYBB_SMILES_PREFIX = 'emoticons/'
+PYBB_SMILES = {
+    '&gt;_&lt;': 'mad.png',
+    ':.(': 'sad.png',
+    'o_O': 'smartass.png',
+    '8)': 'sunglasses.png',
+    ':D': 'grin.png',
+    ':(': 'sad.png',
+    ':O': 'surprised.png',
+    '-_-': 'sorry.png',
+    ':)': 'smile.png',
+    ':P': 'tongue.png',
+    ';)': 'blink.png',
+    '<3': 'love.png',
+}

@@ -17,6 +17,11 @@
     {% if form.slug %} {% include "pybb/form_field.html" with field=form.slug %} {% endif %}
     {% if form.login %} {% include "pybb/form_field.html" with field=form.login %}  {% endif %}
     {% if form.body %} {% include "pybb/form_field.html" with field=form.body %}  {% endif %}
+    <div id='emoticons'>
+      {% for smile, url in form.available_smiles.items %}
+        <a href='#' title='{{ smile|safe }}'><img src='{{ STATIC_URL }}{{ form.smiles_prefix }}{{ url }}'></a>
+      {% endfor %}
+    </div>
 
     {% if request.user|pybb_may_create_poll and form.poll_type %}
       {% include "pybb/poll_edit_form.html" %}
@@ -70,6 +75,7 @@
             $('#emoticons a').click(function() {
                 emoticon = $(this).attr("title");
                 $.markItUp( { replaceWith:emoticon } );
+                return false;
             });
         }
     });
