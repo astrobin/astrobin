@@ -1685,9 +1685,42 @@ class UserProfile(models.Model):
         editable = False,
     )
 
+    # PYBBM proxy fields
+    @property
+    def time_zone(self):
+        return self.timezone
+
+    # PYBBM fields
+    signature = models.TextField(
+        _('Signature'),
+        blank=True,
+        max_length=1024)
+
+    signature_html = models.TextField(
+        _('Signature HTML Version'),
+        blank=True,
+        max_length=1024 + 30)
+
+    show_signatures = models.BooleanField(
+        _('Show signatures'),
+        blank=True,
+        default=True)
+
+    post_count = models.IntegerField(
+        _('Post count'),
+        blank=True,
+        default=0)
+
+    autosubscribe = models.BooleanField(
+        _('Automatically subscribe'),
+        help_text=_('Automatically subscribe to topics that you answer'),
+        default=True)
+
+    def get_display_name(self):
+        return self.real_name if self.real_name else self.user.__unicode__()
 
     def __unicode__(self):
-        return self.real_name if self.real_name else self.user.__unicode__()
+        return self.get_display_name()
 
     def get_absolute_url(self):
         return '/users/%s' % self.user.username
