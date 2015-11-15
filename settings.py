@@ -165,6 +165,7 @@ MIDDLEWARE_CLASSES = [
     'maintenancemode.middleware.MaintenanceModeMiddleware',
     'gadjo.requestprovider.middleware.RequestProvider',
 #    'pipeline.middleware.MinifyHTMLMiddleware', Enable after dealing with the blank spaces everywhere
+    'pybb.middleware.PybbMiddleware',
 ]
 
 if DEBUG:
@@ -197,6 +198,7 @@ TEMPLATE_CONTEXT_PROCESSORS = (
     'django.core.context_processors.media',
     'django.core.context_processors.static',
     'zinnia.context_processors.version',
+    'pybb.context_processors.processor',
 )
 
 INSTALLED_APPS = (
@@ -246,6 +248,7 @@ INSTALLED_APPS = (
     'endless_pagination',
     'dfp', # For Google DFP
     'django_user_agents',
+    'pybb', # Forum
 
     # AstroBin apps
     'astrobin',
@@ -614,5 +617,10 @@ TOGGLEPROPERTIES = {
 
 SOUTH_MIGRATION_MODULES = {
     'easy_thumbnails': 'easy_thumbnails.south_migrations',
+    'pybb': 'pybb.south_migrations',
 }
 
+
+PYBB_DEFAULT_TITLE = "AstroBin Forum"
+PYBB_PERMISSION_HANDLER = "astrobin.permissions.PyBBMPermissions"
+PYBB_ATTACHMENT_ENABLE = False
