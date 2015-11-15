@@ -1688,7 +1688,8 @@ class UserProfile(models.Model):
     # PYBBM proxy fields
     @property
     def time_zone(self):
-        return self.timezone
+        import pytz
+        return pytz.timezone(self.timezone).utcoffset(datetime.now()).seconds / 3600
 
     # PYBBM fields
     signature = models.TextField(
