@@ -10,13 +10,13 @@
                 <th class="forum-name">
                     {% trans "Forum" %}
                 </th>
-                <th class="forum-topic-count">
+                <th class="forum-topic-count hidden-phone">
                     {% trans "Topics" %}
                 </th>
-                <th class="forum-post-count">
+                <th class="forum-post-count hidden-phone">
                     {% trans "Posts" %}
                 </th>
-                <th class="forum-last-post">
+                <th class="forum-last-post hidden-phone">
                     {% trans "Last posts" %}
                 </th>
             </tr>
@@ -33,13 +33,13 @@
                         {{ forum.description|safe }}
                     </div>
                 </td>
-                <td class="forum-topic-count">
+                <td class="forum-topic-count hidden-phone">
                     {{ forum.topic_count }}
                 </td>
-                <td class="forum-post-count">
+                <td class="forum-post-count hidden-phone">
                     {{ forum.post_count }}
                 </td>
-                <td class="forum-last-post">
+                <td class="forum-last-post hidden-phone">
                     {% include "pybb/forum_last_update_info.html" %}
                 </td>
             </tr>

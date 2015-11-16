@@ -11,6 +11,12 @@
     <th colspan="2">
         <a class="permalink" href="{{ post.get_absolute_url }}">#</a>
         <span class="updated">{% pybb_time post.created %}</span>
+        <span class="visible-phone">
+            , {% trans "by" %}
+            <a href="{% url 'user_page' post.user.username %}">
+                {{post.user.userprofile}}
+            </a>
+        </span>
 
         <span class="post-controls pull-right">
             {% if user.is_moderator or post|pybb_posted_by:user %}
@@ -34,7 +40,7 @@
     </thead>
     <tbody>
     <tr class="post-row">
-        <td class="post-info">
+        <td class="post-info hidden-phone">
             {% include "pybb/avatar.html" with user=post.user %}
             <div style="display:none" class="post-username">{{post.user.userprofile}}</div>
 
