@@ -31,7 +31,7 @@
             </td>
             <td class="topic-author">
                 <a href="{% url user_page topic.user.username %}">
-                    {{user.userprofile}}
+                    {{topic.user.userprofile}}
                 </a>
             </td>
             <td class="topic-name{% if topic.unread %} topic-unread{% endif %}">
