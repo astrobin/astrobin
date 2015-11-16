@@ -3611,6 +3611,9 @@ img.flickr-photo-to-import-selected {
   pointer: none;
 }
 /* --- Topic/Forum table --- */
+.category-table .forum-name {
+  width: 60%;
+}
 .forum-description {
   margin: 5px;
   font-size: 11px;
@@ -3619,20 +3622,15 @@ img.flickr-photo-to-import-selected {
 .topic-row {
   width: 100%;
 }
-.forum-name,
-.topic-name {
-  width: 40%;
-}
 .forum-topic-count,
 .forum-post-count,
 .topic-post-count,
 .topic-view-count {
-  width: 16%;
-  text-align: center;
+  text-align: center !important;
 }
 .forum-last-post,
 .topic-last-post {
-  width: 20%;
+  text-align: right !important;
 }
 .first-unread-post-link,
 .first-unread-post-link:hover {
@@ -3686,7 +3684,7 @@ img.flickr-photo-to-import-selected {
 .state-indicator {
   display: block;
   float: left;
-  background-color: #777;
+  background-color: #ccc;
   height: 10px;
   width: 10px;
   -webkit-border-top-right-radius: 5px;
