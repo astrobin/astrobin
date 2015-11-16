@@ -3727,14 +3727,14 @@ img.flickr-photo-to-import-selected {
 }
 #mark-all-as-read,
 .post-related,
-.controls {
+.topic .controls {
   padding-top: 12px;
   margin-top: 8px;
   border-top: 1px solid #393939;
 }
 #mark-all-as-read a,
 .post-related a,
-.controls a,
+.topic .controls a,
 .post-control a {
   padding: 4px 12px;
   margin-right: 4px;
