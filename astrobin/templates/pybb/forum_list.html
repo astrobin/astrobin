@@ -24,7 +24,7 @@
         <tbody>
         {% for forum in forum_list|pybb_forum_unread:user %}
             <tr class="forum-row">
-                <td class="forum-status">
+                <td class="forum-status {% if forum.unread %} forum-unread{% endif %}">
                     <div class="state-indicator"></div>
                 </td>
                 <td class="forum-name {% if forum.unread %} forum-unread{% endif %}">

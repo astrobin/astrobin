@@ -26,7 +26,7 @@
     <tbody>
     {% for topic in topic_list|pybb_topic_unread:user %}
         <tr class="topic-row {% if topic.sticky %} sticky {% endif %} {% cycle "odd" "even" %} {% if topic.on_moderation %} on-moderation {% endif %}">
-            <td class="topic-state">
+            <td class="topic-state{% if topic.unread %} topic-unread{% endif %}">
                 <div class="state-indicator"></div>
             </td>
             <td class="topic-author hidden-phone">
