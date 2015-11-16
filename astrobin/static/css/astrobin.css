@@ -3783,7 +3783,7 @@ img.flickr-photo-to-import-selected {
   color: red;
 }
 .markItUp {
-  width: auto;
+  width: auto !important;
   min-width: 400px;
 }
 .markItUpHeader {
