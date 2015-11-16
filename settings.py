@@ -639,5 +639,5 @@ PYBB_SMILES = {
     ':)': 'smile.png',
     ':P': 'tongue.png',
     ';)': 'blink.png',
-    '<3': 'love.png',
+    '&lt;3': 'love.png',
 }
