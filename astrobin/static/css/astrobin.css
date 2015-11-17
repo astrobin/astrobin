@@ -3638,12 +3638,27 @@ img.flickr-photo-to-import-selected {
   text-decoration: none;
 }
 .post {
-  margin: 24px 0 5px 0;
+  margin: 0 0 4px 0;
 }
-.post-header {
-  padding: 3px 0 3px 20px;
+.post-header th {
+  position: relative;
+  padding: 0 20px !important;
+  height: 60px;
+}
+.post-header img {
+  position: absolute;
+  top: 0;
+  right: 0;
+}
+.post-header .post-author {
+  font-size: 20px;
+  line-height: 20px;
+  font-weight: bold;
+}
+.post-header .post-updated {
+  color: #999;
   font-size: 11px;
-  background-color: #333;
+  font-weight: normal;
 }
 .post tbody tr:hover td {
   background-color: inherit;
@@ -3756,6 +3771,9 @@ img.flickr-photo-to-import-selected {
 .topic-state,
 .forum-status {
   width: 20px;
+}
+table.post th.post-avatar {
+  width: 80px;
 }
 .post-form {
   margin-top: 40px;

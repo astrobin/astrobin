@@ -1,5 +1,6 @@
 {% load url from future %}
 {% load i18n pybb_tags %}
+{% load avatar_tags %}
 
 {% pybb_get_profile user=post.user as post_user_profile %}
 {% pybb_get_profile user=user as user_profile %}
@@ -8,48 +9,22 @@
 <table class="table table-bordered post {% if post.on_moderation %}on-moderation{% endif %}" id="post-{{ post.id }}">
     <thead class="post-header">
     <tr>
-    <th colspan="2">
-        <a class="permalink" href="{{ post.get_absolute_url }}">#</a>
-        <span class="updated">
+    <th>
+        {% avatar post.user 60 %}
+        <div class="post-author">
+            <a href="{% url 'user_page' post.user.username %}">
+                {{post.user.userprofile}}
+            </a>
+        </div>
+        <div class="post-updated">
+            <a class="permalink" href="{{ post.get_absolute_url }}">#</a>
             {% pybb_time post.created %}
-            <span class="visible-phone">
-                , {% trans "by" %}
-                <a href="{% url 'user_page' post.user.username %}">
-                    {{post.user.userprofile}}
-                </a>
-            </span>
-
-            <span class="post-controls pull-right">
-                {% if user.is_moderator or post|pybb_posted_by:user %}
-                    <a href="{% url 'pybb:edit_post' pk=post.id %}">{% trans "Edit" %}</a>
-                {% endif %}
-                {% if user.is_moderator %}
-                    <a onclick="pybb_delete_post('{% url 'pybb:delete_post' post.id %}',
-                            'post-{{ post.id }}', '{% trans 'Delete post?' %}'); return false;"
-                       href="{% url 'pybb:delete_post' post.id %}">{% trans "Delete" %}</a>
-                    {% if post.on_moderation %}
-                        <a href="{% url 'pybb:moderate_post' pk=post.id %}">{% trans "Approve post" %}</a>
-                    {% endif %}
-                {% endif %}
-
-                {% if perms.pybb.change_post and user.is_staff %}
-                    <a href="{% url 'admin:pybb_post_change' post.id %}">{% trans 'Admin' %}</a>
-                {% endif %}
-            </div>
         </div>
     </th>
     </tr>
     </thead>
     <tbody>
     <tr class="post-row">
-        <td class="post-info hidden-phone">
-            {% include "pybb/avatar.html" with user=post.user %}
-            <div style="display:none" class="post-username">{{post.user.userprofile}}</div>
-
-            {% if user.is_superuser %}
-                <div class="post-extra-info">{{ post.user_ip }}</div>
-            {% endif %}
-        </td>
         <td class="post-content">
             {{ post.body_html|safe }}
 
@@ -69,11 +44,22 @@
                     <a href="{% url 'pybb:add_post' topic.id %}?quote_id={{ post.id }}" class="quote-link">{% trans "quote" %}</a>
                     <a href="#" class="quote-selected-link">{% trans "quote selected" %}</a>
                 {% endif %}
-                <div class='attachments'>
-                    {% for attachment in post.attachments.all %}
-                        <a href="{{ attachment.file.url }}"><img src="{{ STATIC_URL }}pybb/img/attachment.png"> {{ attachment.size_display }}</a>
-                    {% endfor %}
-                </div>
+
+                {% if user.is_moderator or post|pybb_posted_by:user %}
+                    <a href="{% url 'pybb:edit_post' pk=post.id %}">{% trans "Edit" %}</a>
+                {% endif %}
+                {% if user.is_moderator %}
+                    <a onclick="pybb_delete_post('{% url 'pybb:delete_post' post.id %}',
+                            'post-{{ post.id }}', '{% trans 'Delete post?' %}'); return false;"
+                       href="{% url 'pybb:delete_post' post.id %}">{% trans "Delete" %}</a>
+                    {% if post.on_moderation %}
+                        <a href="{% url 'pybb:moderate_post' pk=post.id %}">{% trans "Approve post" %}</a>
+                    {% endif %}
+                {% endif %}
+
+                {% if perms.pybb.change_post and user.is_staff %}
+                    <a href="{% url 'admin:pybb_post_change' post.id %}">{% trans 'Admin' %}</a>
+                {% endif %}
             </div>
         </td>
     </tr>
