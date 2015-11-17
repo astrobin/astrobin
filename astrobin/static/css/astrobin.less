@@ -3910,7 +3910,7 @@ img.flickr-photo-to-import-selected {
     margin-top: 24px;
 }
 
-#mark-all-as-read, .post-related, .topic .controls {
+#mark-all-as-read, .post-related, .topic .controls, .forum .controls {
     padding-top: 12px;
     margin-top: 8px;
     border-top: 1px solid #393939;
@@ -3928,6 +3928,10 @@ img.flickr-photo-to-import-selected {
         border: 1px solid darken(@link-color, 15%);
         .rounded-corners;
     }
+}
+
+.topic-state, .forum-status {
+    width: 20px;
 }
 
 .post-form {
@@ -3950,6 +3954,11 @@ img.flickr-photo-to-import-selected {
 
 .breadcrumb li { color: @background-color; }
 .field-errors { color: red; }
+
+.markItUp {
+    width: auto !important;
+    min-width: 400px;
+}
 
 .markItUpHeader {
     background: #dcdcdc;

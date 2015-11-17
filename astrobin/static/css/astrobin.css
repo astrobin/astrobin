@@ -3731,7 +3731,8 @@ img.flickr-photo-to-import-selected {
 }
 #mark-all-as-read,
 .post-related,
-.topic .controls {
+.topic .controls,
+.forum .controls {
   padding-top: 12px;
   margin-top: 8px;
   border-top: 1px solid #393939;
@@ -3751,6 +3752,10 @@ img.flickr-photo-to-import-selected {
   -moz-border-radius: 6px;
   -webkit-border-radius: 6px;
   border-radius: 6px;
+}
+.topic-state,
+.forum-status {
+  width: 20px;
 }
 .post-form {
   margin-top: 40px;
@@ -3781,6 +3786,10 @@ img.flickr-photo-to-import-selected {
 }
 .field-errors {
   color: red;
+}
+.markItUp {
+  width: auto !important;
+  min-width: 400px;
 }
 .markItUpHeader {
   background: #dcdcdc;

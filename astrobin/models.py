@@ -1689,6 +1689,10 @@ class UserProfile(models.Model):
     @property
     def time_zone(self):
         import pytz
+
+        if self.timezone is None:
+            return 0
+
         return pytz.timezone(self.timezone).utcoffset(datetime.now()).seconds / 3600
 
     # PYBBM fields
