@@ -3662,6 +3662,10 @@ img.flickr-photo-to-import-selected {
 .post-content {
   padding: 18px !important;
 }
+.post-content ul,
+.post-content ol {
+  list-style: initial;
+}
 .post-signature {
   color: #CCC;
   margin-top: 15px;
