@@ -984,6 +984,13 @@ li.astrobin-thumbnail img {
 .pagination a {
   border-color: #505050;
 }
+.pagination ul > .disabled > span,
+.pagination ul > .disabled > a,
+.pagination ul > .disabled > a:hover,
+.pagination ul > .disabled > a:focus {
+  color: #c8c8c8;
+  background-color: #eaeaea;
+}
 .table {
   margin-bottom: 0;
 }
