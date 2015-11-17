@@ -6,7 +6,7 @@ from django.db.models import Q
 from toggleproperties.models import ToggleProperty
 
 from astrobin.models import Image, ImageOfTheDay
-from astrobin.image_utils import make_image_of_the_day, make_runnerup, candidate_images_for_iotd
+from astrobin.image_utils import candidate_images_for_iotd
 
 from datetime import date, datetime, timedelta
 from random import shuffle
