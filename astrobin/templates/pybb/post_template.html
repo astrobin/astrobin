@@ -6,7 +6,7 @@
 {% pybb_get_profile user=user as user_profile %}
 
 <a name="post-{{ post.id }}"></a> {# may be remove this string? #}
-<table class="table table-bordered post {% if post.on_moderation %}on-moderation{% endif %}" id="post-{{ post.id }}">
+<table class="table post {% if post.on_moderation %}on-moderation{% endif %}" id="post-{{ post.id }}">
     <thead class="post-header">
     <tr>
     <th>
@@ -41,24 +41,24 @@
 
             <div class="post-related">
                 {% if user|pybb_may_create_post:post.topic %}
-                    <a href="{% url 'pybb:add_post' topic.id %}?quote_id={{ post.id }}" class="quote-link">{% trans "quote" %}</a>
-                    <a href="#" class="quote-selected-link">{% trans "quote selected" %}</a>
+                    <a href="{% url 'pybb:add_post' topic.id %}?quote_id={{ post.id }}" class="btn btn-mini quote-link">{% trans "quote" %}</a>
+                    <a href="#" class="btn btn-mini quote-selected-link">{% trans "quote selected" %}</a>
                 {% endif %}
 
                 {% if user.is_moderator or post|pybb_posted_by:user %}
-                    <a href="{% url 'pybb:edit_post' pk=post.id %}">{% trans "Edit" %}</a>
+                    <a class="btn btn-mini btn-primary" href="{% url 'pybb:edit_post' pk=post.id %}">{% trans "Edit" %}</a>
                 {% endif %}
                 {% if user.is_moderator %}
-                    <a onclick="pybb_delete_post('{% url 'pybb:delete_post' post.id %}',
+                    <a class="btn btn-mini btn-danger" onclick="pybb_delete_post('{% url 'pybb:delete_post' post.id %}',
                             'post-{{ post.id }}', '{% trans 'Delete post?' %}'); return false;"
                        href="{% url 'pybb:delete_post' post.id %}">{% trans "Delete" %}</a>
                     {% if post.on_moderation %}
-                        <a href="{% url 'pybb:moderate_post' pk=post.id %}">{% trans "Approve post" %}</a>
+                        <a class="btn btn-mini btn-danger" href="{% url 'pybb:moderate_post' pk=post.id %}">{% trans "Approve post" %}</a>
                     {% endif %}
                 {% endif %}
 
                 {% if perms.pybb.change_post and user.is_staff %}
-                    <a href="{% url 'admin:pybb_post_change' post.id %}">{% trans 'Admin' %}</a>
+                    <a class="btn btn-mini btn-danger" href="{% url 'admin:pybb_post_change' post.id %}">{% trans 'Admin' %}</a>
                 {% endif %}
             </div>
         </td>
