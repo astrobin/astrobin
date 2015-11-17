@@ -6,30 +6,10 @@ from django.db.models import Q
 from toggleproperties.models import ToggleProperty
 
 from astrobin.models import Image, ImageOfTheDay
-from astrobin.image_utils import candidate_images_for_iotd
+from astrobin.image_utils import compare_images, candidate_images_for_iotd
 
 from datetime import date, datetime, timedelta
 from random import shuffle
-
-
-def calculate_score(image):
-    try:
-        iotd = ImageOfTheDay.objects.get(image = image)
-        return -1
-    except ImageOfTheDay.DoesNotExist:
-        return ToggleProperty.objects.toggleproperties_for_object("like", image).count()
-
-
-def compare_images(a, b):
-    score_a = calculate_score(a)
-    score_b = calculate_score(b)
-
-    if score_a > score_b:
-        return -1
-    if score_a < score_b:
-        return 1
-
-    return 0
 
 
 class Command(BaseCommand):

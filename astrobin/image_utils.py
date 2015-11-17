@@ -1,6 +1,7 @@
 from django.conf import settings
 
-from astrobin.storage import save_to_bucket
+from astrobin.models import ImageOfTheDay
+from toggleproperties.models import ToggleProperty
 
 from PIL import Image as PILImage
 from PIL import ImageOps
@@ -11,6 +12,30 @@ import urllib2
 import tempfile
 import StringIO
 from datetime import datetime
+
+
+def compare_images(a, b):
+    def calculate_score(image):
+        try:
+            iotd = ImageOfTheDay.objects.get(image = image)
+            return -1
+        except ImageOfTheDay.DoesNotExist:
+            return image.likes()
+
+    score_a = calculate_score(a)
+    score_b = calculate_score(b)
+
+    if score_a > score_b:
+        return -1
+    if score_a < score_b:
+        return 1
+
+    return 0
+
+
+def compare_iotd_candidates(a, b):
+    return compare_images(a.image, b.image)
+
 
 def candidate_images_for_iotd(images):
     from astrobin.models import ImageOfTheDayCandidate
