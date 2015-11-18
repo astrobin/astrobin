@@ -7,7 +7,7 @@ msgstr ""
 "Project-Id-Version: AstroBin 1.0\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2015-11-07 19:05+0000\n"
-"PO-Revision-Date: 2015-03-06 15:18+0000\n"
+"PO-Revision-Date: 2015-11-12 20:32+0000\n"
 "Last-Translator: Tannhauser <tannhauser@sfr.fr>\n"
 "Language-Team: Français <LL@li.org>\n"
 "Language: fr\n"
@@ -17,7 +17,7 @@ msgstr ""
 "Plural-Forms: nplurals=2; plural=(n > 1);\n"
 "X-Generator: Pootle 2.5.0\n"
 "X-Poedit-Bookmarks: -1,319,-1,-1,-1,-1,-1,-1,-1,-1\n"
-"X-POOTLE-MTIME: 1425655092.601199\n"
+"X-POOTLE-MTIME: 1447360379.930101\n"
 
 #: fields.py:10
 msgid "United Kingdom"
@@ -1979,9 +1979,8 @@ msgid "Position"
 msgstr "Position"
 
 #: models.py:785
-#, fuzzy
 msgid "Allow comments"
-msgstr "Commentaires"
+msgstr "Autoriser les commentaires"
 
 #: models.py:798 templates/image/full.html:56
 #: templates/image/detail/image_title.html:7
@@ -3723,7 +3722,7 @@ msgstr ""
 #: templates/user/profile/commercial/products.html:357
 #: templates/user/profile/commercial/products.html:361
 msgid "Are you sure?"
-msgstr "Etes-vous certain?"
+msgstr "Êtes-vous sûr(e)?"
 
 #: templates/iotd_choose_confirm.html:35
 msgid "This image will be selected as today's 'Image of the day'."
@@ -4994,7 +4993,7 @@ msgstr ""
 
 #: templates/image/detail/comments.html:20
 msgid "Comments are closed."
-msgstr ""
+msgstr "Les commentaires sont désactivés."
 
 #: templates/image/detail/commercial.html:6
 msgid "Made possible by"
@@ -5254,7 +5253,7 @@ msgid ""
 "revisions will be deleted too. Are you sure?"
 msgstr ""
 "Cette image sera définitivement supprimée et ne pourra plus être récupérée. "
-"Toutes les versions ultérieures seront également effacées. Etes-vous sûr?"
+"Toutes les versions ultérieures seront également effacées. Êtes-vous sûr(e)?"
 
 #: templates/image/detail/modals/delete.html:23
 msgid "Delete this revision?"
@@ -5266,7 +5265,7 @@ msgid ""
 "sure?"
 msgstr ""
 "Cette version sera définitivement supprimée et ne pourra plus être "
-"récupérée. Etes-vous sûr?"
+"récupérée. Êtes-vous sûr(e)?"
 
 #: templates/image/detail/modals/delete.html:40
 msgid "Delete original image?"
@@ -5278,7 +5277,7 @@ msgid ""
 "will not be deleted. Are you sure?"
 msgstr ""
 "Cette image sera définitivement supprimée et ne pourra plus être récupérée. "
-"Les versions ultérieures ne seront pas effacées. Etes-vous sûr?"
+"Les versions ultérieures ne seront pas effacées. Êtes-vous sûr(e)?"
 
 #: templates/image/detail/modals/flag_thumbnails.html:11
 msgid ""
@@ -6964,9 +6963,8 @@ msgstr "Modifier le profil"
 #: templates/user/profile/delete.html:6 templates/user/profile/delete.html:11
 #: templates/user/profile/delete.html:18
 #: templates/user/profile/edit/basic.html:18
-#, fuzzy
 msgid "Delete account"
-msgstr "Supprimer la discussion"
+msgstr "Supprimer le compte"
 
 #: templates/user/profile/delete.html:14
 msgid ""
@@ -6974,10 +6972,14 @@ msgid ""
 "and immediate. All traces of your activity on AstroBin will be erased "
 "forever!"
 msgstr ""
+"Êtes-vous certain(e) de vouloir supprimer votre compte AstroBin? Cette "
+"opération est immédiate et irréversible. Toutes traces de votre activité sur "
+"AstroBin seront effacées à jamais!"
 
 #: templates/user/profile/delete.html:21
 msgid "Your account was deleted. Thanks for using AstroBin until now!"
 msgstr ""
+"Votre compte a été supprimé. Merci d'avoir utilisé AstroBin jusqu'à présent!"
 
 #: templates/user/profile/flickr_import.html:14
 msgid ""

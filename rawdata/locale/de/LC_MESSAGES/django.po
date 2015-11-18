@@ -3,20 +3,21 @@
 # This file is distributed under the same license as the PACKAGE package.
 # FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
 #
-#, fuzzy
 msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2015-11-07 19:08+0000\n"
-"PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
-"Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
+"PO-Revision-Date: 2015-11-12 18:58+0000\n"
+"Last-Translator: Christian <info@christian-wiederer.de>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
-"Language: \n"
+"Language: de\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=(n != 1);\n"
+"X-Generator: Pootle 2.5.0\n"
+"X-POOTLE-MTIME: 1447354690.299438\n"
 
 #: folders.py:82 models.py:215 models.py:283
 #: templates/rawdata/privatesharedfolder_detail.html:84
@@ -41,61 +42,63 @@ msgstr ""
 #: folders.py:141 templates/rawdata/_folder_dropdown.html:21
 #: templates/rawdata/library.html:81 templates/rawdata/rawimage_detail.html:18
 msgid "Acquisition date"
-msgstr ""
+msgstr "Aufnahme Datum"
 
 #: folders.py:166 templates/rawdata/_folder_dropdown.html:35
 #: templates/rawdata/library.html:89 templates/rawdata/rawimage_detail.html:19
 msgid "Camera"
-msgstr ""
+msgstr "Kamera"
 
 #: folders.py:190 templates/rawdata/_folder_dropdown.html:42
 #: templates/rawdata/library.html:97
 msgid "Telescope or lens"
-msgstr ""
+msgstr "Teleskop oder Objektiv"
 
 #: folders.py:214 templates/rawdata/_folder_dropdown.html:49
 #: templates/rawdata/library.html:105
 msgid "Filter"
-msgstr ""
+msgstr "Filter"
 
 #: folders.py:238 templates/rawdata/_folder_dropdown.html:56
 #: templates/rawdata/library.html:113
 msgid "Subject"
-msgstr ""
+msgstr "Betreff"
 
 #: folders.py:262 templates/rawdata/_folder_dropdown.html:63
 #: templates/rawdata/library.html:121
 #: templates/rawdata/rawimage_detail.html:20
 msgid "Temperature"
-msgstr ""
+msgstr "Temperatur"
 
 #: forms.py:86
 msgid "Users"
-msgstr ""
+msgstr "Benutzer"
 
 #: forms.py:87
 msgid "A list of users you want to invite. Use a comma to separate them."
 msgstr ""
+"Eine Liste der Benutzer, die Sie einladen möchte. Mit \",\" kannst du diese "
+"trennen."
 
 #: models.py:44 templatetags/rawdata_tags.py:15
 msgid "Unknown"
-msgstr ""
+msgstr "Unbekannt"
 
 #: models.py:45
 msgid "Light"
-msgstr ""
+msgstr "Licht"
 
 #: models.py:46
 msgid "Offset/Bias"
-msgstr ""
+msgstr "Offset/Bias"
 
 #: models.py:47
 msgid "Dark"
-msgstr ""
+msgstr "Dunkel"
 
 #: models.py:48
 msgid "Flat"
-msgstr ""
+msgstr "Flat"
 
 #: models.py:216
 msgid ""
@@ -121,13 +124,15 @@ msgstr ""
 
 #: models.py:289
 msgid "Describe the goals of this folder."
-msgstr ""
+msgstr "Beschreibe das Ziel des Ordners"
 
 #: serializers.py:38
 msgid ""
 "You don't have any free space on AstroBin Rawdata. Consider upgrading your "
 "account."
 msgstr ""
+"Du hast keinen freien AstroBin Rawdata Speicher. Du kannst deinen Speicher "
+"erweitern."
 
 #: signal_handlers.py:18
 msgid ""
@@ -137,43 +142,45 @@ msgstr ""
 
 #: templates/rawdata/_browser_js.html:20 templates/rawdata/_images.html:14
 msgid "Select all"
-msgstr ""
+msgstr "Alles auswählen"
 
 #: templates/rawdata/_browser_js.html:40
 msgid "Reset selection"
-msgstr ""
+msgstr "Auswahl löschen"
 
 #: templates/rawdata/_browser_js.html:50 templates/rawdata/_images.html:41
 #: templates/rawdata/privatesharedfolder_detail.html:142
 #: templates/rawdata/publicdatapool_detail.html:111
 #: templates/rawdata/temporaryarchive_detail.html:24
 msgid "Download"
-msgstr ""
+msgstr "Herunterladen"
 
 #: templates/rawdata/_browser_js.html:56 templates/rawdata/library.html:150
+#, fuzzy
 msgid "Preprocess"
-msgstr ""
+msgstr "Vorverarbeitung"
 
 #: templates/rawdata/_browser_js.html:63
 msgid "Share"
-msgstr ""
+msgstr "Freigabe"
 
 #: templates/rawdata/_browser_js.html:70
 #: templates/rawdata/privatesharedfolder_detail.html:8
 msgid "Private shared folder"
-msgstr ""
+msgstr "Privaten Ordner freigeben"
 
 #: templates/rawdata/_browser_js.html:74
 #: templates/rawdata/publicdatapool_detail.html:8
+#, fuzzy
 msgid "Public data pool"
-msgstr ""
+msgstr "Öffentliche Daten"
 
 #: templates/rawdata/_browser_js.html:80 templates/rawdata/_images.html:44
 #: templates/rawdata/privatesharedfolder_detail.html:46
 #: templates/rawdata/privatesharedfolder_detail.html:184
 #: templates/rawdata/privatesharedfolder_list.html:96
 msgid "Delete"
-msgstr ""
+msgstr "Löschen"
 
 #: templates/rawdata/_folder_dropdown.html:7
 #: templates/rawdata/library.html:129
@@ -191,11 +198,11 @@ msgstr ""
 #: templates/rawdata/publicdatapool_form.html:22
 #: templates/rawdata/rawimage_detail.html:17
 msgid "Uploaded"
-msgstr ""
+msgstr "Hochgeladen"
 
 #: templates/rawdata/_screenshot_tour.html:3
 msgid "Screenshot tour"
-msgstr ""
+msgstr "Screenshot tour"
 
 #: templates/rawdata/help_01.html:4 templates/rawdata/help_01.html.py:8
 #: templates/rawdata/help_01.html:32 templates/rawdata/help_02.html:4
@@ -215,16 +222,16 @@ msgstr ""
 #: templates/subscription/subscription_list.html:4
 #: templates/subscription/subscription_list.html:8
 msgid "AstroBin Raw Data"
-msgstr ""
+msgstr "AstroBin Raw Data"
 
 #: templates/rawdata/help_01.html:9 templates/rawdata/help_02.html:9
 #: templates/rawdata/help_03.html:9
 msgid "To safely store and organize your raw files."
-msgstr ""
+msgstr "Zum sicheren Speichern und Organisieren deiner Raw Daten."
 
 #: templates/rawdata/help_01.html:19
 msgid "What is AstroBin Raw Data?"
-msgstr ""
+msgstr "Was ist AstroBin Raw Data?"
 
 #: templates/rawdata/help_01.html:20
 msgid ""
@@ -236,6 +243,7 @@ msgstr ""
 #: templates/rawdata/help_01.html:22
 msgid "What if we told you now you can do the same with your raw files?"
 msgstr ""
+"Was würdest du tun, wenn du das gleiche auch mit Raw-Dateien tun kannst?"
 
 #: templates/rawdata/help_01.html:24
 msgid ""
@@ -293,31 +301,31 @@ msgstr ""
 
 #: templates/rawdata/help_02.html:27
 msgid "By type"
-msgstr ""
+msgstr "Nach Typ"
 
 #: templates/rawdata/help_02.html:28
 msgid "By acquisition date"
-msgstr ""
+msgstr "Nach Aufnahme Datum"
 
 #: templates/rawdata/help_02.html:29
 msgid "By upload date"
-msgstr ""
+msgstr "Nach Upload Datum"
 
 #: templates/rawdata/help_02.html:30
 msgid "By subject"
-msgstr ""
+msgstr "Nach Thema"
 
 #: templates/rawdata/help_02.html:31
 msgid "By filter"
-msgstr ""
+msgstr "Nach Filter"
 
 #: templates/rawdata/help_02.html:32
 msgid "By acquisition telescope or lens"
-msgstr ""
+msgstr "Nach Teleskop oder Objektiv"
 
 #: templates/rawdata/help_02.html:33
 msgid "By temperature"
-msgstr ""
+msgstr "Nach Temperatur"
 
 #: templates/rawdata/help_02.html:36
 msgid ""
@@ -337,7 +345,7 @@ msgstr ""
 
 #: templates/rawdata/help_02.html:52 templates/rawdata/help_03.html:39
 msgid "Previous page"
-msgstr ""
+msgstr "Vorherige Seite"
 
 #: templates/rawdata/help_03.html:19
 msgid "Sharing is loving."
@@ -365,7 +373,7 @@ msgstr ""
 
 #: templates/rawdata/help_03.html:25
 msgid "Do some science."
-msgstr ""
+msgstr "Tue etwas wissenschaftliches"
 
 #: templates/rawdata/help_03.html:26
 msgid ""
@@ -378,7 +386,7 @@ msgstr ""
 
 #: templates/rawdata/library.html:6 templates/rawdata/library.html.py:18
 msgid "Your raw data library"
-msgstr ""
+msgstr "Deine Raw-Daten Bibliothek "
 
 #: templates/rawdata/library.html:20
 #, python-format
@@ -391,7 +399,7 @@ msgstr ""
 
 #: templates/rawdata/library.html:37
 msgid "Upload"
-msgstr ""
+msgstr "Hochladen"
 
 #: templates/rawdata/library.html:44 templates/rawdata/restricted.html:18
 msgid "Error!"
@@ -405,7 +413,7 @@ msgstr ""
 
 #: templates/rawdata/library.html:51
 msgid "Warning!"
-msgstr ""
+msgstr "Achtung!"
 
 #: templates/rawdata/library.html:52
 #, python-format
@@ -415,7 +423,7 @@ msgstr ""
 
 #: templates/rawdata/library.html:59
 msgid "All files"
-msgstr ""
+msgstr "Alle Dateien"
 
 #: templates/rawdata/library.html:139
 msgid "There doesn't seem to be anything here."
@@ -430,7 +438,7 @@ msgstr ""
 
 #: templates/rawdata/library.html:156
 msgid "Coming soon!"
-msgstr ""
+msgstr "Bald verfügbar."
 
 #: templates/rawdata/library.html:161
 msgid ""
@@ -464,12 +472,14 @@ msgstr ""
 #: templates/rawdata/privatesharedfolder_form.html:128
 #: templates/rawdata/publicdatapool_form.html:128
 msgid "Success!"
-msgstr ""
+msgstr "Erfolgreich!"
 
 #: templates/rawdata/privatesharedfolder_detail.html:16
 msgid ""
 "The users you selected have been invited. They will receive a notification."
 msgstr ""
+"Deine ausgewählten Benutzer wurden eingeladen. Sie erhalten eine "
+"Benachrichtigung."
 
 #: templates/rawdata/privatesharedfolder_detail.html:25
 #: templates/rawdata/publicdatapool_detail.html:17
@@ -480,12 +490,12 @@ msgstr ""
 #: templates/rawdata/privatesharedfolder_detail.html:210
 #: templates/rawdata/privatesharedfolder_detail.html:222
 msgid "Invite"
-msgstr ""
+msgstr "Einladen"
 
 #: templates/rawdata/privatesharedfolder_detail.html:39
 #: templates/rawdata/publicdatapool_detail.html:24
 msgid "Edit"
-msgstr ""
+msgstr "Bearbeiten"
 
 #: templates/rawdata/privatesharedfolder_detail.html:59
 #, python-format
@@ -501,7 +511,7 @@ msgstr ""
 #: templates/rawdata/privatesharedfolder_detail.html:85
 #: templates/rawdata/publicdatapool_detail.html:63
 msgid "User"
-msgstr ""
+msgstr "Benutzer"
 
 #: templates/rawdata/privatesharedfolder_detail.html:86
 #: templates/rawdata/privatesharedfolder_form.html:21
@@ -509,7 +519,7 @@ msgstr ""
 #: templates/rawdata/publicdatapool_form.html:21
 #: templates/rawdata/rawimage_detail.html:16
 msgid "Size"
-msgstr ""
+msgstr "Größe"
 
 #: templates/rawdata/privatesharedfolder_detail.html:111
 msgid "Remove from this folder"
@@ -540,7 +550,7 @@ msgstr ""
 #: templates/rawdata/privatesharedfolder_detail.html:175
 #: templates/rawdata/privatesharedfolder_list.html:88
 msgid "Delete folder"
-msgstr ""
+msgstr "Ordner löschen"
 
 #: templates/rawdata/privatesharedfolder_detail.html:178
 #: templates/rawdata/privatesharedfolder_list.html:91
@@ -562,16 +572,16 @@ msgstr ""
 #: templates/rawdata/publicdatapool_detail.html:154
 #: templates/rawdata/publicdatapool_form.html:99
 msgid "Cancel"
-msgstr ""
+msgstr "Abbrechen"
 
 #: templates/rawdata/privatesharedfolder_detail.html:192
 msgid "Edit folder"
-msgstr ""
+msgstr "Ordner bearbeiten"
 
 #: templates/rawdata/privatesharedfolder_detail.html:203
 #: templates/rawdata/publicdatapool_detail.html:155
 msgid "Save"
-msgstr ""
+msgstr "Speichern"
 
 #: templates/rawdata/privatesharedfolder_detail.html:213
 msgid ""
@@ -616,7 +626,7 @@ msgstr ""
 #: templates/rawdata/privatesharedfolder_form.html:63
 #: templates/rawdata/publicdatapool_form.html:63
 msgid "Loading..."
-msgstr ""
+msgstr "Laden …"
 
 #: templates/rawdata/privatesharedfolder_form.html:73
 msgid ""
@@ -632,7 +642,7 @@ msgstr ""
 #: templates/rawdata/privatesharedfolder_form.html:100
 #: templates/rawdata/publicdatapool_form.html:100
 msgid "Create"
-msgstr ""
+msgstr "Erstellen"
 
 #: templates/rawdata/privatesharedfolder_list.html:5
 #: templates/rawdata/privatesharedfolder_list.html:11

@@ -8,8 +8,8 @@ msgstr ""
 "Project-Id-Version: AstroBin 1.8\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2015-11-07 19:03+0000\n"
-"PO-Revision-Date: 2015-01-20 21:53+0000\n"
-"Last-Translator: jordi <jordi.inyigo@gmail.com>\n"
+"PO-Revision-Date: 2015-11-10 11:53+0000\n"
+"Last-Translator: Xavier <bufote@hotmail.com>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
 "Language: ca\n"
 "MIME-Version: 1.0\n"
@@ -17,7 +17,7 @@ msgstr ""
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=(n != 1);\n"
 "X-Generator: Pootle 2.5.0\n"
-"X-POOTLE-MTIME: 1421790823.87303\n"
+"X-POOTLE-MTIME: 1447156409.147099\n"
 
 #: fields.py:10
 msgid "United Kingdom"
@@ -1966,9 +1966,8 @@ msgid "Position"
 msgstr "Posició"
 
 #: models.py:785
-#, fuzzy
 msgid "Allow comments"
-msgstr "Comentaris"
+msgstr "Permet comentaris"
 
 #: models.py:798 templates/image/full.html:56
 #: templates/image/detail/image_title.html:7
@@ -2268,7 +2267,6 @@ msgid "Company description"
 msgstr "Descripció de l'empresa"
 
 #: models.py:1606
-#, fuzzy
 msgid ""
 "A short description of the company you represent on AstroBin. You can use "
 "some <a href=\"/faq/#comments\">formatting rules</a>."
@@ -2472,13 +2470,12 @@ msgid ""
 msgstr "Una frase memorable per a resumir aquest producte, per màrqueting."
 
 #: models.py:2116
-#, fuzzy
 msgid ""
 "Here you can write the full commercial description of your product. You can "
 "use some <a href=\"/faq/#comments\">formatting rules</a>."
 msgstr ""
-"Descripció curta de l'empresa la qual representes a AstroBin. Pots fer "
-"servir algunes <a href=\"/faq/#comments\">regles de format</a> "
+"Descripció complerta del teu producte. Pots fer servir algunes <a "
+"href=\"/faq/#comments\">regles de format</a> "
 
 #: models.py:2135
 msgid "Commercial gear items"
@@ -2611,6 +2608,7 @@ msgstr "SQM mitjà"
 msgid ""
 "Thanks for reporting the problem. All thumbnails will be generated again."
 msgstr ""
+"Gràcies per informar del problema. Totes les miniatures seràn regenerades."
 
 #: views.py:1028 views.py:2739
 msgid ""
@@ -2631,6 +2629,8 @@ msgid ""
 "You uploaded an Indexed PNG file. AstroBin will need to lower the color "
 "count to 256 in order to work with it."
 msgstr ""
+"Has pujat un arxiu PNG indexat. Caldrá que Astrobin redueixi el nombre de "
+"colors a 256 per poder treballar amb ell."
 
 #: views.py:1321 views.py:1404 views.py:1488 views.py:1514 views.py:2184
 #: views.py:2197 views.py:2218 views.py:2255 views.py:2345 views.py:2407
@@ -2645,9 +2645,8 @@ msgid "Fill in one session, before adding more."
 msgstr "Completar una sessió abans d'afegir-ne més"
 
 #: views.py:1527 views.py:1598
-#, fuzzy
 msgid "Image deleted."
-msgstr "La teva imatge s'ha esborrat"
+msgstr "Imatge esborrada."
 
 #: views.py:1545
 msgid "Revision deleted."
@@ -2719,9 +2718,8 @@ msgstr ""
 "la pàgina al final per veure-ls."
 
 #: views.py:2793
-#, fuzzy
 msgid "Image uploaded. Thank you!"
-msgstr "Formulari desat. Gràcies!"
+msgstr "Imatge pujada. Gràcies!"
 
 #: views.py:3095 templatetags/tags.py:237
 msgid "no alias"
@@ -2733,7 +2731,7 @@ msgstr "No pots annexar un producte en ell mateix."
 
 #: views.py:4042
 msgid "Default front page section changed."
-msgstr ""
+msgstr "S'ha canviat la secció principal de la pàgina."
 
 #: management/__init__.py:15
 msgid "You have a new follower"
@@ -2772,7 +2770,6 @@ msgid "There was a reply to your comment"
 msgstr "Hi ha resposta a un dels teus comentaris"
 
 #: management/__init__.py:69
-#, fuzzy
 msgid "Your image was bookmarked"
 msgstr "Han marcat una de les teves imatges com a favorita"
 
@@ -2855,7 +2852,6 @@ msgid "Go back to the hom page."
 msgstr "Ves a la pàgina d'inici."
 
 #: templates/503.html:4
-#, fuzzy
 msgid "AstroBin in temporarily unavailable"
 msgstr "Astrobin no està disponible temporalment"
 
@@ -2899,7 +2895,6 @@ msgid "Request an API key"
 msgstr "Sol·licitar una clau API"
 
 #: templates/app_api_key_request.html:10
-#, fuzzy
 msgid ""
 "Thanks for your interest in using AstroBin's APIs! You need a <strong>key</"
 "strong> and a <strong>secret</strong> if you want to access AstroBin's data "
@@ -3668,25 +3663,22 @@ msgid "by"
 msgstr "per"
 
 #: templates/iotd_archive.html:32 templates/index/root.html:99
-#, fuzzy
 msgid "Runners-up"
-msgstr "Subcampions"
+msgstr "Sotscampions"
 
 #: templates/iotd_choose.html:7 templates/iotd_choose.html.py:13
-#, fuzzy
 msgid "Choose today's 'Image of the day'"
-msgstr "Arxiu de guanyadors de la Imatge del dia"
+msgstr "Tria la \"Imatge del dia\" d'avui"
 
 #: templates/iotd_choose.html:37
-#, fuzzy
 msgid "Choose"
-msgstr "Triar arxiu"
+msgstr "Escolliu"
 
 #: templates/iotd_choose.html:45
 msgid ""
 "There are no candidates for 'Image of the day' yet, today. Please try again "
 "later."
-msgstr ""
+msgstr "Encara no hi ha candidats a la \"Imatge del dia\" d'avui. Prova més tard."
 
 #: templates/iotd_choose_confirm.html:7 templates/iotd_choose_confirm.html:13
 #: templates/user/profile/commercial/products.html:287
@@ -3694,15 +3686,15 @@ msgstr ""
 #: templates/user/profile/commercial/products.html:357
 #: templates/user/profile/commercial/products.html:361
 msgid "Are you sure?"
-msgstr ""
+msgstr "N'estàs segur?"
 
 #: templates/iotd_choose_confirm.html:35
 msgid "This image will be selected as today's 'Image of the day'."
-msgstr ""
+msgstr "Aquesta imatge serà seleccionada com la \"Imatge del dia\"."
 
 #: templates/iotd_choose_confirm.html:36
 msgid "This operation cannot be undone."
-msgstr ""
+msgstr "Aquesta acció no es pot desfer."
 
 #: templates/iotd_choose_confirm.html:44
 msgid "Yes, I'm sure"
@@ -4045,10 +4037,14 @@ msgid ""
 "<strong>terribly</strong> dated, as a system, for today's Internet "
 "standards. Here's a series of flaws that AstroBin Questions fixes:"
 msgstr ""
+"Els fòrums estan bé per mantenir discussions entretingudes, però son "
+"<strong>terriblement</strong> obsolets pels estandards actuals d'Internet. "
+"Us mostrem alguns defectes que el Consultori d'Astrobin (Astrobin Questions) "
+"corregeix:"
 
 #: templates/questions.html:33
 msgid "Every post is flat"
-msgstr ""
+msgstr "Cada missatge es planell"
 
 #: templates/questions.html:35
 msgid ""
@@ -4056,10 +4052,12 @@ msgid ""
 "the same post, because the only way to do it is by quoting somebody. Very "
 "soon this becomes a mess."
 msgstr ""
+"És complicat mantenir diverses converses al mateix temps en un fil, nomès es "
+"pot fer citant algú. Això es converteix en un desgavell."
 
 #: templates/questions.html:40
 msgid "Every post has the same visibility"
-msgstr ""
+msgstr "Tots els missatges tenen la mateixa visibilitat"
 
 #: templates/questions.html:42
 msgid ""
@@ -4071,10 +4069,16 @@ msgid ""
 "replies might be objectively wrong, and this will worsen the quality of the "
 "community."
 msgstr ""
+"Si escrius un missatge preguntant si has de fer servir un filtre solar "
+"durant un eclipse, i jo responc <em>\"No cal, no et preocupis\"</em> nomès es "
+"pot invalidar la meva resposta si altres persones responen explicant perquè "
+"es incorrecta. Això no garanteix que algú ho provi i perdi un ull. Es un "
+"exemple extrem: El que vull dir es que algunes respostes poden ser "
+"objectivament incorrectes i això empitjora la qualitat de la comunitat. "
 
 #: templates/questions.html:47
 msgid "Every user has the same importance"
-msgstr ""
+msgstr "Tots els usuaris tenen la mateixa importància"
 
 #: templates/questions.html:49
 msgid ""
@@ -4083,10 +4087,14 @@ msgid ""
 "this doesn't matter. My posts or post replies will look the same. This "
 "worsens the quality of the community."
 msgstr ""
+"Tant fa si sóc un desconegut que acaba de fer la seva primera foto o un "
+"astrofotògraf semiprofessional amb 20 anys d'experiència, als fòrums això no "
+"te rellevància: els meus missatges tindran el mateix aspecte. Això "
+"empitjora la qualitat de la comunitat."
 
 #: templates/questions.html:54
 msgid "Everything is static"
-msgstr ""
+msgstr "Tot es estàtic"
 
 #: templates/questions.html:56
 msgid ""
@@ -4094,6 +4102,10 @@ msgid ""
 "and can't ask my question well, nobody can rephrase it. If I make a lot of "
 "typos, nobody can fix them. This is undesirable."
 msgstr ""
+"Si escric com un nen de set anys ningú ho pot esmenar. Si no m'expresso "
+"correctament i no faig les preguntes de forma adequada ningú les pot "
+"reformular. Si escric amb errades ortogràfiques no es poden corregir. Tot "
+"això no es recomanable."
 
 #: templates/questions.html:62
 msgid ""
@@ -4145,7 +4157,7 @@ msgstr ""
 
 #: templates/stats.html:17
 msgid "Total integration hours in the last 12 months"
-msgstr ""
+msgstr "Total d'hores integrades als darrers 12 messos"
 
 #: templates/stats.html:20 templates/stats.html.py:34 templates/stats.html:50
 #: templates/stats.html.py:70 templates/stats.html:90
@@ -4155,7 +4167,7 @@ msgstr ""
 #: templates/user/plots.html.py:69
 #: templates/user/profile/commercial/products.html:214
 msgid "Please wait: the plot is loading..."
-msgstr ""
+msgstr "Espereu mentre s'està carregant la gràfica."
 
 #: templates/stats.html:21 templates/stats.html.py:35 templates/stats.html:51
 #: templates/stats.html.py:71 templates/stats.html:91
@@ -4165,29 +4177,31 @@ msgstr ""
 #: templates/user/plots.html.py:70
 #: templates/user/profile/commercial/products.html:215
 msgid "Loading..."
-msgstr ""
+msgstr "S'està carregant..."
 
 #: templates/stats.html:45
 msgid "Global distribution of camera types"
-msgstr ""
+msgstr "Distribució global de tipus de càmera"
 
 #: templates/stats.html:65
 msgid "Global distribution of telescope types"
-msgstr ""
+msgstr "Distribució global de tipus de telescopi"
 
 #: templates/stats.html:87
 msgid "CCD vs DLSR: the global trend"
-msgstr ""
+msgstr "CCD vs DSLR: tendència global"
 
 #: templates/stats.html:99
 msgid "Global trend of telescope types"
-msgstr ""
+msgstr "Tendència global dels tipus de telescopi"
 
 #: templates/tos.html:11
 msgid ""
 "The following Terms are only available in English. It is your responsibility "
 "to comprehend them."
 msgstr ""
+"Les següents Condicions nomès estan disponibles en Anglés. Comprendre-les es "
+"la teva responsabilitat."
 
 #: templates/upload.html:16
 msgid "Upload as a work in progress"
