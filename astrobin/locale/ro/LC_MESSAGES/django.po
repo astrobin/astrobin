@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: AstroBin 1.9\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2015-11-07 19:06+0000\n"
+"POT-Creation-Date: 2015-11-18 20:34+0000\n"
 "PO-Revision-Date: 2013-11-11 19:27+0000\n"
 "Last-Translator: gamangabriel <gamangabriel@gmail.com>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -1022,7 +1022,7 @@ msgstr ""
 "fișiere în acest moment, așa că va trebui să le găzduieşti în spaţiul tău "
 "personal."
 
-#: forms.py:62 models.py:2026 models.py:2108 templates/gear/page.html:197
+#: forms.py:62 models.py:2064 models.py:2146 templates/gear/page.html:197
 #: templates/image/detail/image_title.html:14
 msgid "Link"
 msgstr "Legătură"
@@ -1031,7 +1031,7 @@ msgstr "Legătură"
 msgid "Link to TIFF/FITS"
 msgstr "Legătură către TIFF/FITS"
 
-#: forms.py:64 models.py:695 templates/maintenance_base.html:310
+#: forms.py:64 models.py:695 templates/maintenance_base.html:311
 #: templates/profile-edit-menu.html:36
 #: templates/image/detail/image_card.html:88
 msgid "Locations"
@@ -1069,7 +1069,7 @@ msgstr "Telescoape de imagistica si lentile"
 msgid "Guiding telescopes or lenses"
 msgstr "Telescoape de ghidare sau lentile"
 
-#: forms.py:133 forms.py:227 models.py:757 models.py:1629 views.py:2284
+#: forms.py:133 forms.py:227 models.py:757 models.py:1629 views.py:2288
 msgid "Mounts"
 msgstr "Monturi"
 
@@ -1081,19 +1081,19 @@ msgstr "Camere de imagistică"
 msgid "Guiding cameras"
 msgstr "Camere de ghidaj"
 
-#: forms.py:136 forms.py:229 models.py:760 models.py:1631 views.py:2285
+#: forms.py:136 forms.py:229 models.py:760 models.py:1631 views.py:2289
 msgid "Focal reducers"
 msgstr "Reductoare de focală"
 
-#: forms.py:137 forms.py:230 models.py:761 models.py:1632 views.py:2286
+#: forms.py:137 forms.py:230 models.py:761 models.py:1632 views.py:2290
 msgid "Software"
 msgstr "Soft"
 
-#: forms.py:138 forms.py:231 models.py:762 models.py:1633 views.py:2287
+#: forms.py:138 forms.py:231 models.py:762 models.py:1633 views.py:2291
 msgid "Filters"
 msgstr "Filtre"
 
-#: forms.py:139 forms.py:232 models.py:763 models.py:1634 views.py:2288
+#: forms.py:139 forms.py:232 models.py:763 models.py:1634 views.py:2292
 msgid "Accessories"
 msgstr "Accesorii"
 
@@ -1128,11 +1128,11 @@ msgstr ""
 "într-o singură cutie, nu veți fi în măsură să adăugaţi sesiuni separate de "
 "achiziție pentru ele."
 
-#: forms.py:226 models.py:1628 views.py:2282
+#: forms.py:226 models.py:1628 views.py:2286
 msgid "Telescopes and lenses"
 msgstr "Telescoape si lentile"
 
-#: forms.py:228 models.py:1630 views.py:2283
+#: forms.py:228 models.py:1630 views.py:2287
 msgid "Cameras"
 msgstr "Camere"
 
@@ -1158,8 +1158,8 @@ msgstr "Toate"
 msgid "Images"
 msgstr "Imagini"
 
-#: forms.py:277 models.py:651 views.py:1753
-#: templates/maintenance_base.html:304 templates/profile-edit-menu.html:30
+#: forms.py:277 models.py:651 views.py:1755
+#: templates/maintenance_base.html:305 templates/profile-edit-menu.html:30
 #: templates/wall.html:131 templates/inclusion_tags/search_image_list.html:13
 #: templates/user/profile-subnav.html:130
 msgid "Gear"
@@ -1304,7 +1304,7 @@ msgstr "Marcă"
 msgid "The make, brand, producer or developer of this product."
 msgstr "Marca, brandul, producătorul sau dezvoltatorul acestui produs."
 
-#: forms.py:898 forms.py:959 models.py:197 models.py:1724 models.py:1863
+#: forms.py:898 forms.py:959 models.py:197 models.py:1762 models.py:1901
 #: templates/gear/fix.html:32 templates/gear/fix.html.py:33
 #: templates/gear/fix.html:34 templates/gear/fix.html.py:42
 #: templates/gear/fix.html:47 templates/gear/fix.html.py:52
@@ -1462,7 +1462,7 @@ msgstr "Atribuire - Distribuire în condiții identice Creative Commons"
 msgid "Attribution-NoDerivs Creative Commons"
 msgstr "Atribuire-NoDerivs Creative Commons"
 
-#: models.py:78 models.py:96 views.py:789
+#: models.py:78 models.py:96 views.py:791
 msgid "English"
 msgstr "Engleză"
 
@@ -1591,7 +1591,7 @@ msgstr "Planetă minoră"
 msgid "Comet"
 msgstr "Cometă"
 
-#: models.py:151 models.py:588 models.py:652 views.py:1754
+#: models.py:151 models.py:588 models.py:652 views.py:1756
 #: templates/wall.html:143 templates/image/edit/acquisition.html:84
 msgid "Other"
 msgstr "Altul"
@@ -1922,11 +1922,11 @@ msgstr "Obiect Deep-Sky"
 msgid "Solar system body or event"
 msgstr "Corp sau eveniment  din sistemul solar "
 
-#: models.py:649 views.py:1751 templates/wall.html:119
+#: models.py:649 views.py:1753 templates/wall.html:119
 msgid "Extremely wide field"
 msgstr "Câmp extrem de larg"
 
-#: models.py:650 views.py:1752 templates/wall.html:125
+#: models.py:650 views.py:1754 templates/wall.html:125
 msgid "Star trails"
 msgstr "Trasee stelare"
 
@@ -1963,7 +1963,7 @@ msgstr ""
 "Trageți elementele din partea dreaptă spre partea stângă, sau faceți clic pe "
 "semnul plus."
 
-#: models.py:702 models.py:1871 models.py:2115 templates/gear/page.html:47
+#: models.py:702 models.py:1909 models.py:2153 templates/gear/page.html:47
 #: templates/image/detail/image_description.html:7
 msgid "Description"
 msgstr "Descriere"
@@ -1996,7 +1996,7 @@ msgstr "(fără titlu)"
 msgid "Please use the following format: yyyy-mm-dd."
 msgstr "Vă rugăm să folosiți următorul format: aaaa-ll-zz."
 
-#: models.py:1278 models.py:1484 models.py:2091
+#: models.py:1278 models.py:1484 models.py:2129
 msgid "Image"
 msgstr "Imagine"
 
@@ -2080,7 +2080,7 @@ msgstr "Răcirea senzorului"
 msgid "The temperature of the chip. E.g.: -20."
 msgstr "Temperatura cipului. Ex: -20."
 
-#: models.py:1347 views.py:717
+#: models.py:1347 views.py:719
 msgid "Darks"
 msgstr "Întunecate"
 
@@ -2088,7 +2088,7 @@ msgstr "Întunecate"
 msgid "The number of dark frames."
 msgstr "Numărul de cadre întunecate."
 
-#: models.py:1352 views.py:718
+#: models.py:1352 views.py:720
 msgid "Flats"
 msgstr "Plate"
 
@@ -2096,7 +2096,7 @@ msgstr "Plate"
 msgid "The number of flat frames."
 msgstr "Numărul de cadre plate."
 
-#: models.py:1357 views.py:719
+#: models.py:1357 views.py:721
 msgid "Flat darks"
 msgstr "întunecate - plate"
 
@@ -2104,7 +2104,7 @@ msgstr "întunecate - plate"
 msgid "The number of dark flat frames."
 msgstr "Numărul de cadre întunecate plate."
 
-#: models.py:1362 views.py:720
+#: models.py:1362 views.py:722
 msgid "Bias"
 msgstr ""
 
@@ -2112,7 +2112,7 @@ msgstr ""
 msgid "The number of bias/offset frames."
 msgstr "Numărul de cadre înclinate/compensate. "
 
-#: models.py:1367 views.py:723
+#: models.py:1367 views.py:725
 msgid "Bortle Dark-Sky Scale"
 msgstr "Scara Bortle Cer-Intunecat"
 
@@ -2132,11 +2132,11 @@ msgstr "Adică mag/arcsec^2"
 msgid "As measured with your Sky Quality Meter."
 msgstr "Măsurată cu al tău Contor de Calitate al Cerului (Sky Quality Meter)."
 
-#: models.py:1381 views.py:725
+#: models.py:1381 views.py:727
 msgid "Mean FWHM"
 msgstr "Adică FWHM"
 
-#: models.py:1386 views.py:726
+#: models.py:1386 views.py:728
 msgid "Temperature"
 msgstr "Temperatura"
 
@@ -2306,7 +2306,7 @@ msgstr "Site-ul web al companiei pe care o reprezentaţi pe Astrobin."
 msgid "Country of operation"
 msgstr "Ţara de funcţionare"
 
-#: models.py:1644 templates/maintenance_base.html:316
+#: models.py:1644 templates/maintenance_base.html:317
 #: templates/profile-edit-menu.html:42
 msgid "Default license"
 msgstr "Licenţa implicită"
@@ -2321,66 +2321,91 @@ msgstr ""
 msgid "Language"
 msgstr "Limbă"
 
-#: models.py:1725
+#: models.py:1700
+#, fuzzy
+msgid "Signature"
+msgstr "Saturn"
+
+#: models.py:1705
+msgid "Signature HTML Version"
+msgstr ""
+
+#: models.py:1710
+msgid "Show signatures"
+msgstr ""
+
+#: models.py:1715
+msgid "Post count"
+msgstr ""
+
+#: models.py:1720
+msgid "Automatically subscribe"
+msgstr ""
+
+#: models.py:1721
+msgid "Automatically subscribe to topics that you answer"
+msgstr ""
+
+#: models.py:1763
 msgid "A descriptive name, e.g. 'Home observatory' or 'Mount Whitney'."
 msgstr ""
 "Un nume descriptiv, ex. ''Observatorul de acasă'' sau ''Muntele Whitney''."
 
-#: models.py:1731
+#: models.py:1769
 msgid "City"
 msgstr "Oraș"
 
-#: models.py:1732
+#: models.py:1770
 msgid "If this location is not in a city, use the name of the closest city."
 msgstr ""
 "Dacă această locație nu este într-un oraș, folosiți numele celui mai "
 "apropiat oraș."
 
-#: models.py:1738
+#: models.py:1776
 msgid "State or province"
 msgstr "Stat sau provincie"
 
-#: models.py:1743
+#: models.py:1781
 msgid "Country"
 msgstr "Țară"
 
-#: models.py:1760
+#: models.py:1798
 msgid "North"
 msgstr "Nord"
 
-#: models.py:1760
+#: models.py:1798
 msgid "South"
 msgstr "Sud"
 
-#: models.py:1761
+#: models.py:1799
 msgid "North or south"
 msgstr "Nord sau sud"
 
-#: models.py:1776
+#: models.py:1814
 msgid "East"
 msgstr "Est"
 
-#: models.py:1776
+#: models.py:1814
 msgid "West"
 msgstr "Vest"
 
-#: models.py:1777
+#: models.py:1815
 msgid "East or West"
 msgstr "Est sau vest"
 
-#: models.py:1781
+#: models.py:1819
 msgid "Altitude"
 msgstr "Altitudine"
 
-#: models.py:1782
+#: models.py:1820
 msgid "In meters."
 msgstr "În metri."
 
-#: models.py:1864
+#: models.py:1902
 msgid "The name of the website or app that wishes to use the APIs."
 msgstr "Numele site-ului sau aplicatiei care dorește să utilizeze API-uri."
 
-#: models.py:1872
+#: models.py:1910
 msgid ""
 "Please explain the purpose of your application, and how you intend to use "
 "the API."
@@ -2388,63 +2413,63 @@ msgstr ""
 "Vă rugăm să explicați scopul cererii dumneavoastră, și modul în care "
 "intenționați să utilizați API."
 
-#: models.py:2003
+#: models.py:2041
 msgid "AUD - Australian dollars"
 msgstr "AUD - Dolari australieni"
 
-#: models.py:2004
+#: models.py:2042
 msgid "CAD - Canadian dollars"
 msgstr "CAD - Dolari canadieni"
 
-#: models.py:2005
+#: models.py:2043
 msgid "CHF - Swiss francs"
 msgstr "CHF - Franci elvețieni"
 
-#: models.py:2006
+#: models.py:2044
 msgid "EUR - Euros"
 msgstr "EUR - Euro"
 
-#: models.py:2007
+#: models.py:2045
 msgid "GPB - Pound stelings"
 msgstr "GPB - Lire sterline"
 
-#: models.py:2008
+#: models.py:2046
 msgid "PLN - Polish zloty"
 msgstr "PLN - Zlot polonez"
 
-#: models.py:2009
+#: models.py:2047
 msgid "SEK - Swedish krona"
 msgstr "SEK - Coroana suedeză"
 
-#: models.py:2010
+#: models.py:2048
 msgid "USD - American dollars"
 msgstr "USD - Dolari americani"
 
-#: models.py:2016 models.py:2066
+#: models.py:2054 models.py:2104
 msgid "Producer"
 msgstr "Producător"
 
-#: models.py:2027 models.py:2109
+#: models.py:2065 models.py:2147
 msgid "The link to this product's page on your website."
 msgstr "Link către pagina acestui produs pe site-ul tau."
 
-#: models.py:2035
+#: models.py:2073
 msgid "Price"
 msgstr "Preț"
 
-#: models.py:2043
+#: models.py:2081
 msgid "Currency"
 msgstr "Valută"
 
-#: models.py:2059
+#: models.py:2097
 msgid "Retailed gear items"
 msgstr "Articole de echipament vândute "
 
-#: models.py:2075
+#: models.py:2113
 msgid "Proper make"
 msgstr "Marca adecvată"
 
-#: models.py:2076
+#: models.py:2114
 msgid ""
 "Sometimes, product make/brand/producer/developer names are not written "
 "properly by the users. Write here the proper make/brand/producer/developer "
@@ -2454,11 +2479,11 @@ msgstr ""
 "în mod corespunzător de către utilizatori. Scrieţi aici marca/producătorul/"
 "numele dezvoltatorului corespunzător. "
 
-#: models.py:2083
+#: models.py:2121
 msgid "Proper name"
 msgstr "Nume adecvat"
 
-#: models.py:2084
+#: models.py:2122
 msgid ""
 "Sometimes, product names are not written properly by the users. Write here "
 "the proper product name, not including the make/brand/producer/developer "
@@ -2471,7 +2496,7 @@ msgstr ""
 "gruparea a cat mai multor elemente posibile, asa incat incercati sa folositi "
 "o versiune generica a numelui produselor dumneavoastra.."
 
-#: models.py:2092
+#: models.py:2130
 msgid ""
 "The official, commercial image for this product. Upload an image via the "
 "regular uploading interface, set its subject type to \"Gear\", and then "
@@ -2483,18 +2508,18 @@ msgstr ""
 "aceaasta lista. Daca incarcati diverse versiuni revizuite acestea vor aparea "
 "deasemeni in pagina comercial."
 
-#: models.py:2100
+#: models.py:2138
 msgid "Tagline"
 msgstr "Sloganul"
 
-#: models.py:2101
+#: models.py:2139
 msgid ""
 "A memorable phrase that will sum up this product, for marketing purposes."
 msgstr ""
 "O fraza memorabila care va insuma insusirile acestui produs, in sensul "
 "marketingului."
 
-#: models.py:2116
+#: models.py:2154
 #, fuzzy
 msgid ""
 "Here you can write the full commercial description of your product. You can "
@@ -2504,7 +2529,7 @@ msgstr ""
 "dumneavoastra. Puteti utiliza reguli de formatare de tip <a href=\"/faq/"
 "\"10\">."
 
-#: models.py:2135
+#: models.py:2173
 msgid "Commercial gear items"
 msgstr "elemente comerciale pentru echipament"
 
@@ -2594,58 +2619,58 @@ msgstr "Numarul imaginilor calculat pe tipuri de subiect"
 msgid "Today's 'Image of the day' was already choosen. Come back tomorrow!"
 msgstr ""
 
-#: views.py:708
+#: views.py:710
 msgid "Resolution"
 msgstr "Rezoluție"
 
-#: views.py:709 views.py:856
+#: views.py:711 views.py:858
 msgid "Dates"
 msgstr "Date"
 
-#: views.py:710 templates/image/detail/image_card.html:52
+#: views.py:712 templates/image/detail/image_card.html:52
 msgid "Frames"
 msgstr "Cadre"
 
-#: views.py:716 templates/wall.html:37
+#: views.py:718 templates/wall.html:37
 #: templates/inclusion_tags/search_image_list.html:36
 #: templates/inclusion_tags/search_image_list.html:89
 #: templates/search/search.html:43 templates/search/search.html.py:306
 msgid "Integration"
 msgstr "Integrare"
 
-#: views.py:716 views.py:1843 views.py:1844 templates/search/search.html:307
+#: views.py:718 views.py:1846 views.py:1847 templates/search/search.html:307
 msgid "hours"
 msgstr "ore"
 
-#: views.py:721
+#: views.py:723
 msgid "Avg. Moon age"
 msgstr "\"varsta\" medie a Lunei  (numarul de zile trecute de la Luna noua)"
 
-#: views.py:721
+#: views.py:723
 msgid "days"
 msgstr "zile"
 
-#: views.py:722 templates/search/search.html:313
+#: views.py:724 templates/search/search.html:313
 msgid "Avg. Moon phase"
 msgstr "aprecierea medie a fazei Lunei"
 
-#: views.py:724
+#: views.py:726
 msgid "Mean SQM"
 msgstr ""
 
-#: views.py:902
+#: views.py:904
 msgid ""
 "Thanks for reporting the problem. All thumbnails will be generated again."
 msgstr ""
 
-#: views.py:1028 views.py:2739
+#: views.py:1030 views.py:2743
 msgid ""
 "Invalid image or no image provided. Allowed formats are JPG, PNG and GIF."
 msgstr ""
 "Imagine nevalidata sau nici o imagine furnizata. Formatele permise sunt JPG, "
 "PNG si GIF."
 
-#: views.py:1032 views.py:2750 templates/user/profile/flickr_import.html:10
+#: views.py:1034 views.py:2754 templates/user/profile/flickr_import.html:10
 msgid ""
 "AstroBin is currently in read-only mode, because of server maintenance. "
 "Please try again soon!"
@@ -2653,94 +2678,99 @@ msgstr ""
 "Astrobin este in modul curent si exclusiv de citire, din motive de "
 "intretinere a serverului. Va rog sa reveniti in curand !"
 
-#: views.py:1055 views.py:2770
+#: views.py:1057 views.py:2774
 msgid ""
 "You uploaded an Indexed PNG file. AstroBin will need to lower the color "
 "count to 256 in order to work with it."
 msgstr ""
 
-#: views.py:1321 views.py:1404 views.py:1488 views.py:1514 views.py:2184
-#: views.py:2197 views.py:2218 views.py:2255 views.py:2345 views.py:2407
-#: views.py:2618 views.py:3851 views.py:4021
+#: views.py:1323 views.py:1406 views.py:1490 views.py:1516 views.py:2188
+#: views.py:2201 views.py:2222 views.py:2259 views.py:2349 views.py:2411
+#: views.py:2622 views.py:3849 views.py:4019
 #: templates/user/profile/edit/gear.html:168
 #: templates/user/profile/edit/gear.html:243
 msgid "Form saved. Thank you!"
 msgstr "Formă salvată. Mulțumesc!"
 
-#: views.py:1456
+#: views.py:1458
 msgid "Fill in one session, before adding more."
 msgstr "Completati o sesiune inainte de a mai adauga ceva."
 
-#: views.py:1527 views.py:1598
+#: views.py:1529 views.py:1600
 #, fuzzy
 msgid "Image deleted."
 msgstr "Imaginea dumneavoastra a fost stearsa"
 
-#: views.py:1545
+#: views.py:1547
 #, fuzzy
 msgid "Revision deleted."
 msgstr "Înregistrare încheiată"
 
-#: views.py:1701
+#: views.py:1703
 msgid "No date specified"
 msgstr "Nici o dată specificată"
 
-#: views.py:1723 views.py:1784
+#: views.py:1725 views.py:1786
 msgid "No imaging telescopes or lenses, or no imaging cameras specified"
 msgstr ""
 "Nu s-a specificat nici un telescop, lentila sau camera pentru producerea "
 "imaginii."
 
-#: views.py:1724
+#: views.py:1726
 msgid "Gear images"
 msgstr "Imagini cu echipamentul"
 
-#: views.py:1749 templates/image/edit/acquisition.html:81
+#: views.py:1751 templates/image/edit/acquisition.html:81
 msgid "Deep sky"
 msgstr "Deep sky"
 
-#: views.py:1750 templates/image/edit/acquisition.html:78
+#: views.py:1752 templates/image/edit/acquisition.html:78
 msgid "Solar system"
 msgstr "Sistemul solar"
 
-#: views.py:1783
+#: views.py:1785
 msgid "No subjects specified"
 msgstr "Nu sunt subiecte specificate"
 
-#: views.py:1785
+#: views.py:1787
 msgid "No acquisition details specified"
 msgstr "N-ati specificat detaliile de achizitie"
 
-#: views.py:1815 views.py:3228 templatetags/tags.py:77
+#: views.py:1818 views.py:3226 templatetags/tags.py:77
 msgid "minutes"
 msgstr "minute"
 
-#: views.py:1816 views.py:3229 templatetags/tags.py:78
+#: views.py:1819 views.py:3227 templatetags/tags.py:78
 msgid "seconds ago"
 msgstr "secunde in urmă"
 
-#: views.py:1818 views.py:3231 templatetags/tags.py:79
+#: views.py:1821 views.py:3229 templatetags/tags.py:79
 #, python-format
 msgid "%s ago"
 msgstr "%s in urmă"
 
-#: views.py:1841 templates/popover/user.html:19
+#: views.py:1844 templates/popover/user.html:19
 msgid "Member since"
 msgstr "Membru incepand din"
 
-#: views.py:1842
+#: views.py:1845
 msgid "Last login"
 msgstr "Ultima logare"
 
-#: views.py:1843
+#: views.py:1846
 msgid "Total integration time"
 msgstr "Timp total de integrare"
 
-#: views.py:1844
+#: views.py:1847
 msgid "Average integration time"
 msgstr "Timpul mediu de integrare"
 
-#: views.py:2335
+#: views.py:1848
+#, fuzzy
+msgid "Forum posts"
+msgstr "Forumuri"
+
+#: views.py:2339
 msgid ""
 "There was one or more errors processing the form. You may need to scroll "
 "down to see them."
@@ -2748,20 +2778,20 @@ msgstr ""
 "Au fost una sau mai multe erori de procesare a formularului. Ar putea fi "
 "necesar să derulați în jos pentru a le vedea. "
 
-#: views.py:2793
+#: views.py:2797
 #, fuzzy
 msgid "Image uploaded. Thank you!"
 msgstr "Formă salvată. Mulțumesc!"
 
-#: views.py:3095 templatetags/tags.py:237
+#: views.py:3093 templatetags/tags.py:237
 msgid "no alias"
 msgstr "nici o asociere"
 
-#: views.py:3811 views.py:4004
+#: views.py:3809 views.py:4002
 msgid "You can't merge a product to itself."
 msgstr "nu puteti alipi o imagine, ei insasi."
 
-#: views.py:4042
+#: views.py:4040
 msgid "Default front page section changed."
 msgstr ""
 
@@ -2915,8 +2945,8 @@ msgid "There is no activity yet."
 msgstr "Inca nu exista activitate."
 
 #: templates/affiliates.html:8 templates/affiliates.html.py:11
-#: templates/maintenance_base.html:188 templates/base/site_links.html:134
-#: templates/index/root.html:295
+#: templates/maintenance_base.html:189 templates/base/site_links.html:123
+#: templates/index/root.html:317
 msgid "Affiliates"
 msgstr "Afiliere"
 
@@ -2973,13 +3003,13 @@ msgstr ""
 "utilizarea  API-urilor AstroBin."
 
 #: templates/explore_choose.html:5 templates/explore_choose.html.py:8
-#: templates/maintenance_base.html:103 templates/base/site_links.html:41
+#: templates/maintenance_base.html:104 templates/base/site_links.html:36
 msgid "Explore"
 msgstr "Explorează"
 
-#: templates/explore_choose.html:10 templates/maintenance_base.html:110
+#: templates/explore_choose.html:10 templates/maintenance_base.html:111
 #: templates/wall.html:9 templates/wall.html.py:175
-#: templates/base/site_links.html:48
+#: templates/base/site_links.html:43
 msgid "The Big Wall"
 msgstr "Marele Perete"
 
@@ -2991,9 +3021,9 @@ msgstr ""
 "Cel mai bun mod de a vedea ce este nou pe Astrobin: un mare zid cu 100 "
 "imagini pe pagina, pe care le puteti sorta si filtra dupa cum va plac. "
 
-#: templates/faq.html:4 templates/maintenance_base.html:167
-#: templates/maintenance_base.html:518 templates/base/footer.html:19
-#: templates/base/site_links.html:106
+#: templates/faq.html:4 templates/maintenance_base.html:168
+#: templates/maintenance_base.html:519 templates/base/footer.html:20
+#: templates/base/site_links.html:101
 msgid "FAQ"
 msgstr ""
 
@@ -3240,7 +3270,7 @@ msgid ""
 msgstr ""
 
 #: templates/guidelines.html:4 templates/guidelines.html.py:9
-#: templates/maintenance_base.html:520 templates/base/footer.html:21
+#: templates/maintenance_base.html:521 templates/base/footer.html:22
 msgid "Guidelines"
 msgstr "Orientări"
 
@@ -3337,19 +3367,19 @@ msgid ""
 "you feel is wrong."
 msgstr ""
 
-#: templates/help.html:4 templates/maintenance_base.html:154
-#: templates/maintenance_base.html:517 templates/base/footer.html:18
-#: templates/base/site_links.html:93
+#: templates/help.html:4 templates/maintenance_base.html:155
+#: templates/maintenance_base.html:518 templates/base/footer.html:19
+#: templates/base/site_links.html:88
 msgid "Help"
 msgstr "Ajutor"
 
-#: templates/help.html:8 templates/maintenance_base.html:161
-#: templates/base/site_links.html:100
+#: templates/help.html:8 templates/maintenance_base.html:162
+#: templates/base/site_links.html:95
 msgid "What is this site?"
 msgstr "Ce este acest site?"
 
-#: templates/help.html:10 templates/maintenance_base.html:465
-#: templates/base/alerts.html:13 templates/index/root.html:268
+#: templates/help.html:10 templates/maintenance_base.html:466
+#: templates/base/alerts.html:13 templates/index/root.html:269
 msgid "Hey!"
 msgstr "Hei!"
 
@@ -3530,15 +3560,14 @@ msgstr "Înregistrează-te acum!"
 msgid "Archive of 'Image of the day' winners"
 msgstr "Imaginea zilei"
 
-#: templates/iotd_archive.html:23 templates/iotd_choose.html:27
-#: templates/iotd_choose_confirm.html:26 templates/actstream/action.html:87
+#: templates/iotd_archive.html:23 templates/actstream/action.html:87
 #: templates/actstream/action.html.py:94 templates/actstream/action.html:110
 #: templates/actstream/action.html:117 templates/gear/page.html:15
-#: templates/index/root.html:82
+#: templates/index/root.html:83
 msgid "by"
 msgstr "de"
 
-#: templates/iotd_archive.html:32 templates/index/root.html:99
+#: templates/iotd_archive.html:32 templates/index/root.html:100
 msgid "Runners-up"
 msgstr ""
 
@@ -3547,12 +3576,19 @@ msgstr ""
 msgid "Choose today's 'Image of the day'"
 msgstr "Imaginea zilei"
 
-#: templates/iotd_choose.html:37
+#: templates/iotd_choose.html:17
+msgid ""
+"Here is a selection of images uploaded during the past 7 days. About half of "
+"them are images that received lots of likes, and the other half were "
+"selected randomly. The images are anonymized as to not bias the selection."
+msgstr ""
+
+#: templates/iotd_choose.html:27
 #, fuzzy
 msgid "Choose"
 msgstr "Alege fişier"
 
-#: templates/iotd_choose.html:45
+#: templates/iotd_choose.html:33
 msgid ""
 "There are no candidates for 'Image of the day' yet, today. Please try again "
 "later."
@@ -3566,15 +3602,15 @@ msgstr ""
 msgid "Are you sure?"
 msgstr "Sunteţi sigur?"
 
-#: templates/iotd_choose_confirm.html:35
+#: templates/iotd_choose_confirm.html:22
 msgid "This image will be selected as today's 'Image of the day'."
 msgstr ""
 
-#: templates/iotd_choose_confirm.html:36
+#: templates/iotd_choose_confirm.html:23
 msgid "This operation cannot be undone."
 msgstr ""
 
-#: templates/iotd_choose_confirm.html:44
+#: templates/iotd_choose_confirm.html:31
 msgid "Yes, I'm sure"
 msgstr ""
 
@@ -3593,11 +3629,11 @@ msgid ""
 msgstr ""
 
 #: templates/leaderboard.html:7 templates/leaderboard.html.py:11
-#: templates/maintenance_base.html:147 templates/base/site_links.html:85
+#: templates/maintenance_base.html:148 templates/base/site_links.html:80
 msgid "Leaderboard"
 msgstr "Grupul de lideri"
 
-#: templates/leaderboard.html:21 templates/maintenance_base.html:209
+#: templates/leaderboard.html:21 templates/maintenance_base.html:210
 #: templates/image/detail/menu/user.html:8
 #: templates/inclusion_tags/image_list.html:11
 #: templates/inclusion_tags/search_image_list.html:122
@@ -3619,14 +3655,14 @@ msgstr "Urmarite"
 msgid "Total integration"
 msgstr "Integrare totala"
 
-#: templates/maintenance_base.html:81 templates/maintenance_base.html:513
+#: templates/maintenance_base.html:81 templates/maintenance_base.html:514
 #: templates/base/footer.html:14
 msgid "Site links"
 msgstr "Linkuri site"
 
-#: templates/maintenance_base.html:85 templates/maintenance_base.html:515
-#: templates/maintenance_base.html:544 templates/base/footer.html:16
-#: templates/base/footer.html.py:44
+#: templates/maintenance_base.html:85 templates/maintenance_base.html:516
+#: templates/maintenance_base.html:545 templates/base/footer.html:16
+#: templates/base/footer.html.py:45
 msgid "Home"
 msgstr "Acasă"
 
@@ -3634,65 +3670,70 @@ msgstr "Acasă"
 msgid "Community"
 msgstr "Comunitatea"
 
-#: templates/maintenance_base.html:92 templates/maintenance_base.html:516
+#: templates/maintenance_base.html:92 templates/maintenance_base.html:517
 #: templates/base/footer.html:17 templates/base/site_links.html:22
 msgid "Blog"
 msgstr "Blog"
 
-#: templates/maintenance_base.html:116 templates/base/site_links.html:54
-#: templates/image/detail/iotd_banner.html:10 templates/index/root.html:74
+#: templates/maintenance_base.html:97 templates/base/footer.html:18
+#: templates/base/site_links.html:23
+#, fuzzy
+msgid "Forum"
+msgstr "Forumuri"
+
+#: templates/maintenance_base.html:117 templates/base/site_links.html:49
+#: templates/image/detail/iotd_banner.html:10 templates/index/root.html:75
 msgid "Image of the day"
 msgstr "Imaginea zilei"
 
-#: templates/maintenance_base.html:125 templates/base/site_links.html:63
+#: templates/maintenance_base.html:126 templates/base/site_links.html:58
 msgid "Public data pools"
 msgstr ""
 
-#: templates/maintenance_base.html:134 templates/base/site_links.html:70
+#: templates/maintenance_base.html:135 templates/base/site_links.html:65
 msgid "Advanced search"
 msgstr "Căutare avansată"
 
-#: templates/maintenance_base.html:141 templates/stats.html:7
-#: templates/base/site_links.html:78 templates/user/profile.html:61
+#: templates/maintenance_base.html:142 templates/stats.html:7
+#: templates/base/site_links.html:73 templates/user/profile.html:61
 msgid "Stats"
 msgstr "Statistici"
 
-#: templates/maintenance_base.html:173 templates/questions.html:4
-#: templates/questions.html.py:7 templates/base/site_links.html:112
+#: templates/maintenance_base.html:174
 msgid "AstroBin Questions"
 msgstr "AstroBin Intrebari"
 
-#: templates/maintenance_base.html:197 templates/base/site_links.html:143
+#: templates/maintenance_base.html:198 templates/base/site_links.html:132
 #: templates/contact_form/contact.html:5 templates/contact_form/contact.html:8
 msgid "Contact"
 msgstr "Contact"
 
-#: templates/maintenance_base.html:228 templates/upload.html:7
+#: templates/maintenance_base.html:229 templates/upload.html:7
 #: templates/upload.html.py:20 templates/upload.html:36
 #: templates/avatar/change.html:38 templates/base/user_links_entries.html:139
 #: templates/image/detail/modals/upload_revision.html:17
-#: templates/index/root.html:121
+#: templates/index/root.html:122
 msgid "Upload"
 msgstr "Încărcați"
 
-#: templates/maintenance_base.html:231
+#: templates/maintenance_base.html:232
 #: templates/base/user_links_entries.html:142
 msgid "My places"
 msgstr ""
 
-#: templates/maintenance_base.html:237 templates/wall.html:137
+#: templates/maintenance_base.html:238 templates/wall.html:137
 #: templates/base/user_links_entries.html:148
 #: templates/user/profile-subnav.html:20
 msgid "Commercial products"
 msgstr "Produse comerciale"
 
-#: templates/maintenance_base.html:245
+#: templates/maintenance_base.html:246
 #: templates/base/user_links_entries.html:156 templates/popover/user.html:30
 #: templates/user/profile-subnav.html:28
 msgid "Gallery"
 msgstr "Galerie"
 
-#: templates/maintenance_base.html:251 templates/wall.html:50
+#: templates/maintenance_base.html:252 templates/wall.html:50
 #: templates/base/user_links_entries.html:162
 #: templates/inclusion_tags/search_image_list.html:44
 #: templates/inclusion_tags/search_image_list.html:97
@@ -3700,100 +3741,100 @@ msgstr "Galerie"
 msgid "Bookmarks"
 msgstr ""
 
-#: templates/maintenance_base.html:257
+#: templates/maintenance_base.html:258
 #: templates/base/user_links_entries.html:168
 #: templates/user/profile-subnav.html:48
 #: templates/user/profile/commercial/products.html:209
 msgid "Plots"
 msgstr ""
 
-#: templates/maintenance_base.html:265
+#: templates/maintenance_base.html:266
 #: templates/base/user_links_entries.html:195 templates/messages/inbox.html:9
 msgid "My messages"
 msgstr "Mesajele mele"
 
-#: templates/maintenance_base.html:271
+#: templates/maintenance_base.html:272
 #: templates/base/user_links_entries.html:201
 #: templates/user/profile-subnav.html:70
 msgid "API Keys"
 msgstr "Chei API"
 
-#: templates/maintenance_base.html:275
+#: templates/maintenance_base.html:276
 #: templates/base/user_links_entries.html:208
 msgid "My settings"
 msgstr "Setările mele"
 
-#: templates/maintenance_base.html:279 templates/profile-edit-menu.html:8
+#: templates/maintenance_base.html:280 templates/profile-edit-menu.html:8
 msgid "Basic information"
 msgstr "Informații de bază"
 
-#: templates/maintenance_base.html:287 templates/profile-edit-menu.html:15
+#: templates/maintenance_base.html:288 templates/profile-edit-menu.html:15
 msgid "Commercial information"
 msgstr "Informații comerciale"
 
-#: templates/maintenance_base.html:296 templates/profile-edit-menu.html:23
+#: templates/maintenance_base.html:297 templates/profile-edit-menu.html:23
 msgid "Retailer information"
 msgstr ""
 
-#: templates/maintenance_base.html:322 templates/profile-edit-menu.html:54
+#: templates/maintenance_base.html:323 templates/profile-edit-menu.html:54
 msgid "Preferences"
 msgstr "Preferințe"
 
-#: templates/maintenance_base.html:328 templates/profile-edit-menu.html:60
+#: templates/maintenance_base.html:329 templates/profile-edit-menu.html:60
 msgid "Avatar"
 msgstr "Avatar"
 
-#: templates/maintenance_base.html:335
+#: templates/maintenance_base.html:336
 #: templates/base/user_links_entries.html:226 templates/user/profile.html:107
 #: templates/user/profile.html.py:110
 msgid "Logout"
 msgstr "Delogare"
 
-#: templates/maintenance_base.html:348 templates/maintenance_base.html:349
+#: templates/maintenance_base.html:349 templates/maintenance_base.html:350
 #: templates/base/user_links_entries.html:111
 msgid "Notifications"
 msgstr "Notificări"
 
-#: templates/maintenance_base.html:360
+#: templates/maintenance_base.html:361
 #: templates/base/user_links_entries.html:270
 msgid "Have an invite? Login!"
 msgstr ""
 
-#: templates/maintenance_base.html:362
+#: templates/maintenance_base.html:363
 #: templates/base/user_links_entries.html:272
 #: templates/registration/activation_complete.html:7
 msgid "Login"
 msgstr "Autentificare"
 
-#: templates/maintenance_base.html:368
+#: templates/maintenance_base.html:369
 #: templates/base/user_links_entries.html:278
 #: templates/registration/login.html:15
 msgid "Register"
 msgstr "Inregistare"
 
-#: templates/maintenance_base.html:380 templates/base/search_form.html:8
+#: templates/maintenance_base.html:381 templates/base/search_form.html:8
 msgid "Quick search"
 msgstr "Căutare rapidă"
 
-#: templates/maintenance_base.html:466 templates/base/alerts.html:14
+#: templates/maintenance_base.html:467 templates/base/alerts.html:14
 msgid "Success!"
 msgstr "Succes!"
 
-#: templates/maintenance_base.html:467 templates/maintenance_base.html:479
-#: templates/maintenance_base.html:491 templates/upload.html:55
+#: templates/maintenance_base.html:468 templates/maintenance_base.html:480
+#: templates/maintenance_base.html:492 templates/upload.html:55
 #: templates/upload.html.py:157 templates/upload.html:350
 #: templates/base/alerts.html:15 templates/base/alerts.html.py:28
 #: templates/base/alerts.html:40
 msgid "Warning!"
 msgstr "Avertizare!"
 
-#: templates/maintenance_base.html:468 templates/upload.html:76
+#: templates/maintenance_base.html:469 templates/upload.html:76
 #: templates/base/alerts.html:16
 #: templates/image/detail/modals/send_to_sharedfolder.html:25
 msgid "Error!"
 msgstr "Eroare!"
 
-#: templates/maintenance_base.html:481 templates/base/alerts.html:30
+#: templates/maintenance_base.html:482 templates/base/alerts.html:30
 #, python-format
 msgid ""
 "As a producer and/or a retailer on AstroBin, it's very important that you "
@@ -3801,18 +3842,18 @@ msgid ""
 "to do it now."
 msgstr ""
 
-#: templates/maintenance_base.html:493 templates/base/alerts.html:42
+#: templates/maintenance_base.html:494 templates/base/alerts.html:42
 #, python-format
 msgid ""
 "As a retailer on AstroBin, it's very important that you fill in your country "
 "of operation! Click <a href=\"%(the_url)s\">here</a> to do it now."
 msgstr ""
 
-#: templates/maintenance_base.html:507 templates/base/footer.html:8
+#: templates/maintenance_base.html:508 templates/base/footer.html:8
 msgid "About"
 msgstr "Despre"
 
-#: templates/maintenance_base.html:509 templates/base/footer.html:10
+#: templates/maintenance_base.html:510 templates/base/footer.html:10
 msgid ""
 "AstroBin is an image hosting website specifically targeted to "
 "astrophotographers: it's the first and the last place where you need to "
@@ -3823,46 +3864,46 @@ msgstr ""
 "ultimul loc unde va puteti incarca astrofotografiile. Facute de un "
 "astrofotograf pentru astrofotografi.  "
 
-#: templates/maintenance_base.html:519 templates/tos.html:4
-#: templates/tos.html.py:9 templates/base/footer.html:20
+#: templates/maintenance_base.html:520 templates/tos.html:4
+#: templates/tos.html.py:9 templates/base/footer.html:21
 msgid "Terms of Service"
 msgstr "Termeni şi condiţii de utilizare"
 
-#: templates/maintenance_base.html:524 templates/base/footer.html:25
+#: templates/maintenance_base.html:525 templates/base/footer.html:26
 msgid "Thanks to"
 msgstr "Datorită"
 
-#: templates/maintenance_base.html:526 templates/base/footer.html:27
+#: templates/maintenance_base.html:527 templates/base/footer.html:28
 msgid "The localization team"
 msgstr ""
 
-#: templates/maintenance_base.html:531 templates/base/footer.html:32
+#: templates/maintenance_base.html:532 templates/base/footer.html:33
 msgid "Copyright"
 msgstr "Drept de autor"
 
-#: templates/maintenance_base.html:533
+#: templates/maintenance_base.html:534
 msgid ""
 "AstroBin is Copyright &copy; 2010-2012 Salvatore Iovene, All Rights "
 "Reserved. The images on this websites are copyright of their respective "
 "owners."
 msgstr ""
 
-#: templates/maintenance_base.html:548 templates/base/footer.html:48
+#: templates/maintenance_base.html:549 templates/base/footer.html:49
 msgid "Back to top"
 msgstr "Inapoi in sus"
 
-#: templates/maintenance_base.html:591 templates/base/js.html:33
+#: templates/maintenance_base.html:592 templates/base/js.html:33
 #: templates/image/edit/acquisition.html:69 templates/image/edit/basic.html:74
 #: templates/image/edit/gear.html:48 templates/messages/compose.html:16
 #: templates/openid_provider/decide.html:16
 msgid "Cancel"
 msgstr "Anulează"
 
-#: templates/maintenance_base.html:621 templates/base/js.html:82
+#: templates/maintenance_base.html:622 templates/base/js.html:82
 msgid "No file selected"
 msgstr "Nici un fişier selectat"
 
-#: templates/maintenance_base.html:622 templates/base/js.html:83
+#: templates/maintenance_base.html:623 templates/base/js.html:83
 msgid "Choose file"
 msgstr "Alege fişier"
 
@@ -3881,124 +3922,6 @@ msgstr "urmatorul"
 #: templates/profile-edit-menu.html:48
 msgid "Import from Flickr"
 msgstr "Importa din Flickr"
-
-#: templates/questions.html:19
-msgid ""
-"As of today, the most common form in which astronomy communities exist is "
-"that of the forum. A 20+ years old concept, that doesn't scale well with "
-"massive amount of information, does a terrible job at organizing such "
-"information (in fact it barely tries), and presents a series of flaws, that "
-"will be explained below."
-msgstr ""
-
-#: templates/questions.html:22
-msgid "What is AstroBin Questions?"
-msgstr "Ce este Întrebări AstroBin?"
-
-#: templates/questions.html:24
-msgid ""
-"It's a Questions &amp; Answers site focused on the quality of the content. "
-"The allowed subjects of discussion are Astrophotography and Astronomy."
-msgstr ""
-
-#: templates/questions.html:27
-msgid "What's wrong with forums?"
-msgstr ""
-
-#: templates/questions.html:29
-msgid ""
-"Forums are great for the recreational discussion, but they are "
-"<strong>terribly</strong> dated, as a system, for today's Internet "
-"standards. Here's a series of flaws that AstroBin Questions fixes:"
-msgstr ""
-
-#: templates/questions.html:33
-msgid "Every post is flat"
-msgstr ""
-
-#: templates/questions.html:35
-msgid ""
-"It's very difficult to engage in several conversations at the same time in "
-"the same post, because the only way to do it is by quoting somebody. Very "
-"soon this becomes a mess."
-msgstr ""
-
-#: templates/questions.html:40
-msgid "Every post has the same visibility"
-msgstr ""
-
-#: templates/questions.html:42
-msgid ""
-"If you post a message asking whether you should use a Solar Filter when "
-"observing an eclipse, and I answer <em>\"No, don't worry,\"</em> the only "
-"way to invalidate that answer is that other people reply and explain why "
-"that's wrong. This doesn't guarantee that somebody will not go on and lose "
-"an eye. This is an extreme example: what I'm trying to say is that some post "
-"replies might be objectively wrong, and this will worsen the quality of the "
-"community."
-msgstr ""
-
-#: templates/questions.html:47
-msgid "Every user has the same importance"
-msgstr ""
-
-#: templates/questions.html:49
-msgid ""
-"Whether I'm Mr. Nobody, that just took his first astrophotograph last night, "
-"or a semi-professional astrophotographer with 20 years experience, on forums "
-"this doesn't matter. My posts or post replies will look the same. This "
-"worsens the quality of the community."
-msgstr ""
-
-#: templates/questions.html:54
-msgid "Everything is static"
-msgstr ""
-
-#: templates/questions.html:56
-msgid ""
-"If I write like a 7-year-old, nobody can fix it. If I suck at communicating "
-"and can't ask my question well, nobody can rephrase it. If I make a lot of "
-"typos, nobody can fix them. This is undesirable."
-msgstr ""
-
-#: templates/questions.html:62
-msgid ""
-"AstroBin Questions addresses all these issues with a community driven, "
-"highly interactive, wiki-capable website that <strong>you</strong> moderate, "
-"thanks to a system based on <em>karma points</em>."
-msgstr ""
-
-#: templates/questions.html:66
-msgid ""
-"Please join, and you can learn and teach about Astrophotography and "
-"Astronomy!"
-msgstr ""
-
-#: templates/questions.html:69
-msgid "Here's some more reading material to get you started"
-msgstr ""
-
-#: templates/questions.html:73
-msgid "Frequently Asked Questions about AstroBin Questions"
-msgstr ""
-
-#: templates/questions.html:78
-msgid "AstroBin Questions' help page"
-msgstr ""
-
-#: templates/questions.html:83
-msgid "An extension of this page, as a question on AstroBin Questions"
-msgstr ""
-
-#: templates/questions.html:90
-msgid "Go to AstroBin Questions!"
-msgstr "Mergi la Întrebări AstroBin! "
-
-#: templates/questions.html:94
-msgid ""
-"PS: AstroBin Questions is only available in English, right now, but more "
-"languages will come soon."
-msgstr ""
 
 #: templates/stats.html:11
 #, python-format
@@ -4205,7 +4128,7 @@ msgstr "Număr de cadre"
 #: templates/wall.html:56 templates/gear/page.html:252
 #: templates/inclusion_tags/search_image_list.html:53
 #: templates/inclusion_tags/search_image_list.html:106
-#: templates/search/search.html:49
+#: templates/pybb/topic_list.html:23 templates/search/search.html:49
 #: templates/user/profile/commercial/products.html:211
 msgid "Views"
 msgstr "Vizionari"
@@ -4273,16 +4196,16 @@ msgstr "Incarcati o noua imagine"
 msgid "Avatar image"
 msgstr "Imagine de avatar"
 
-#: templates/base/footer.html:34
+#: templates/base/footer.html:35
 #, fuzzy
 msgid "The images on this websites are copyright of their respective owners."
 msgstr "Imaginea a fost adusa in atentia utilizatorilor selectati ."
 
-#: templates/base/site_links.html:33
+#: templates/base/site_links.html:28
 msgid "Source code"
 msgstr ""
 
-#: templates/base/site_links.html:118
+#: templates/base/site_links.html:107
 msgid "AstroBin Raw Data"
 msgstr "Astrobin date de tip Raw  "
 
@@ -4854,6 +4777,7 @@ msgstr "Sterge imaginea originala"
 #: templates/image/detail/modals/delete.html:14
 #: templates/image/detail/modals/delete.html:31
 #: templates/image/detail/modals/delete.html:48
+#: templates/pybb/post_template.html:54
 msgid "Delete"
 msgstr "Sterge"
 
@@ -4866,6 +4790,7 @@ msgid "Bring to a user's attention"
 msgstr "Aduceti in atentia unui utilizator"
 
 #: templates/image/detail/menu/admin.html:7
+#: templates/pybb/post_template.html:61 templates/pybb/topic.html:68
 msgid "Admin"
 msgstr ""
 
@@ -5262,6 +5187,7 @@ msgid "Remove"
 msgstr "Inlaturati"
 
 #: templates/inclusion_tags/list_gear.html:21
+#: templates/pybb/post_template.html:49
 #: templates/user/profile/commercial/products.html:79
 #: templates/user/profile/commercial/products.html:161
 #: templates/user/profile/commercial/products.html:482
@@ -5330,11 +5256,11 @@ msgstr ""
 msgid "Date joined"
 msgstr "Data cand a intrat"
 
-#: templates/index/root.html:25
+#: templates/index/root.html:26
 msgid "The perfect home for your astrophotography."
 msgstr "Casa perfectă pentru astrofotografia ta."
 
-#: templates/index/root.html:27
+#: templates/index/root.html:28
 #, python-format
 msgid ""
 "AstroBin is an image hosting service made specifically for "
@@ -5343,22 +5269,22 @@ msgid ""
 "page.</a> for more information."
 msgstr ""
 
-#: templates/index/root.html:34
+#: templates/index/root.html:35
 msgid "Unlimited uploads, unlimited size."
 msgstr "Incarcari nelimitate, marime nemilitata."
 
-#: templates/index/root.html:35
+#: templates/index/root.html:36
 msgid ""
 "Astrophotography images have scientific value that shouldn't be lost in file "
 "compression. On AstroBin you can (and should!) upload full size images. And "
 "you have unlimited space for free."
 msgstr ""
 
-#: templates/index/root.html:42
+#: templates/index/root.html:43
 msgid "Have your data neatly plotted."
 msgstr ""
 
-#: templates/index/root.html:43
+#: templates/index/root.html:44
 msgid ""
 "Data is everything, and AstroBin will give you the tools to keep your data "
 "neat and organized. And with our plots, you can get insights on your "
@@ -5368,63 +5294,67 @@ msgstr ""
 "menține datele dvs. îngrijite și organizate.Si cu parcelele noastre puteți "
 "obține intuiții asupra productivitati cu echipamentul din dotare."
 
-#: templates/index/root.html:137
+#: templates/index/root.html:138
 #, fuzzy
 msgid "Your activity stream"
 msgstr "Stream de activitate"
 
-#: templates/index/root.html:142
+#: templates/index/root.html:143
 #, fuzzy
 msgid "Global activity stream"
 msgstr "Stream de activitate"
 
-#: templates/index/root.html:147
+#: templates/index/root.html:148
 #, fuzzy
 msgid "Recently uploaded"
 msgstr "Recent favorite"
 
-#: templates/index/root.html:152 templates/index/root.html.py:212
+#: templates/index/root.html:153 templates/index/root.html.py:213
 #, fuzzy
 msgid "Recent images from people you follow"
 msgstr "O noua imagine de la utilizatorul urmarit."
 
-#: templates/index/root.html:157 templates/index/root.html.py:223
+#: templates/index/root.html:158 templates/index/root.html.py:224
 #, fuzzy
 msgid "Recently liked"
 msgstr "Recent favorite"
 
-#: templates/index/root.html:162 templates/index/root.html.py:234
+#: templates/index/root.html:163 templates/index/root.html.py:235
 #, fuzzy
 msgid "Recently bookmarked"
 msgstr "Recent favorite"
 
-#: templates/index/root.html:167 templates/index/root.html.py:245
+#: templates/index/root.html:168 templates/index/root.html.py:246
 #, fuzzy
 msgid "Recent images with link to TIFF/FITS"
 msgstr "Legătură către TIFF/FITS"
 
-#: templates/index/root.html:177
+#: templates/index/root.html:178
 msgid "Personal"
 msgstr ""
 
-#: templates/index/root.html:188
+#: templates/index/root.html:189
 msgid "Global"
 msgstr ""
 
-#: templates/index/root.html:201
+#: templates/index/root.html:202
 msgid "Recent images"
 msgstr "Imagini recente"
 
-#: templates/index/root.html:256
+#: templates/index/root.html:257
 msgid "Set current front page section as default"
 msgstr ""
 
-#: templates/index/root.html:271
+#: templates/index/root.html:272
 msgid ""
 "To make your personal stream more interesting, you should follow some people!"
 msgstr ""
 
-#: templates/index/root.html:300
+#: templates/index/root.html:296
+msgid "Latest from the forums"
+msgstr ""
+
+#: templates/index/root.html:322
 msgid "Do you want your product here?"
 msgstr ""
 
@@ -6153,6 +6083,137 @@ msgstr ""
 "<a href=\"%(login_url)s\">logare</a>, sau ne poţi lăsa adresa ta de e-mail "
 "şi noi te vom notifica când site-ul web este disponibil!"
 
+#: templates/pybb/forum_list.html:9
+msgid "Hidden"
+msgstr ""
+
+#: templates/pybb/forum_list.html:28
+msgid "No forums created"
+msgstr ""
+
+#: templates/pybb/forum_list.html:29
+msgid "Add forum now"
+msgstr ""
+
+#: templates/pybb/index.html:25
+msgid "Topics"
+msgstr ""
+
+#: templates/pybb/index.html:28 templates/pybb/topic.html:28
+#: templates/pybb/topic.html.py:48 templates/pybb/topic_list.html:20
+msgid "Posts"
+msgstr ""
+
+#: templates/pybb/index.html:31
+#, fuzzy
+msgid "Last posts"
+msgstr "Est sau vest"
+
+#: templates/pybb/index.html:38
+msgid "Forum categories are not created"
+msgstr ""
+
+#: templates/pybb/index.html:39
+msgid "Add a category now"
+msgstr ""
+
+#: templates/pybb/index.html:44 templates/pybb/latest_topics.html:7
+#: templates/pybb/latest_topics.html:10
+msgid "Last updates in topics"
+msgstr ""
+
+#: templates/pybb/index.html:47
+msgid "Mark all forums as read"
+msgstr ""
+
+#: templates/pybb/latest_topics.html:32
+msgid "Mark all topics as read"
+msgstr ""
+
+#: templates/pybb/post_template.html:39
+#, fuzzy
+msgid "Edited"
+msgstr "Editare"
+
+#: templates/pybb/post_template.html:44
+#, fuzzy
+msgid "quote"
+msgstr "text citat"
+
+#: templates/pybb/post_template.html:45
+#, fuzzy
+msgid "quote selected"
+msgstr "# selectat"
+
+#: templates/pybb/post_template.html:53
+#, fuzzy
+msgid "Delete post?"
+msgstr "Stergeti conversatia"
+
+#: templates/pybb/post_template.html:56
+msgid "Approve post"
+msgstr ""
+
+#: templates/pybb/topic.html:57
+msgid "Unstick topic"
+msgstr ""
+
+#: templates/pybb/topic.html:59
+msgid "Stick topic"
+msgstr ""
+
+#: templates/pybb/topic.html:63
+msgid "Open topic"
+msgstr ""
+
+#: templates/pybb/topic.html:65
+#, fuzzy
+msgid "Close topic"
+msgstr "Închis"
+
+#: templates/pybb/topic.html:76
+msgid "Unsubscribe"
+msgstr ""
+
+#: templates/pybb/topic.html:78
+msgid "Subscribe"
+msgstr ""
+
+#: templates/pybb/topic.html:94
+msgid "Subscribers"
+msgstr ""
+
+#: templates/pybb/topic_list.html:13
+msgid "Topic"
+msgstr ""
+
+#: templates/pybb/topic_list.html:17
+msgid "Author"
+msgstr ""
+
+#: templates/pybb/topic_list.html:26
+#, fuzzy
+msgid "Last post"
+msgstr "Est sau vest"
+
+#: templates/pybb/topic_list.html:38
+msgid "Go to first unread post"
+msgstr ""
+
+#: templates/pybb/topic_list.html:39
+msgid "Sticky"
+msgstr ""
+
+#: templates/pybb/topic_list.html:40
+#, fuzzy
+msgid "Closed"
+msgstr "Închis"
+
+#: templates/pybb/topic_list.html:44
+#, fuzzy
+msgid "pages"
+msgstr "Imagini"
+
 #: templates/registration/activate.html:4
 #: templates/registration/activate.html:9
 msgid "Account successfully activated"
@@ -6811,6 +6872,12 @@ msgstr "Selectaţi limba dvs. şi ce notificare prin e-mail doriţi să primiţi
 #: templates/user/profile/edit/retailer.html:6
 msgid "Edit your retailer information"
 msgstr "Editează informaţiile vânzătorului tău"
+
+#~ msgid "What is AstroBin Questions?"
+#~ msgstr "Ce este Întrebări AstroBin?"
+
+#~ msgid "Go to AstroBin Questions!"
+#~ msgstr "Mergi la Întrebări AstroBin! "
 
 #, fuzzy
 #~ msgid ""

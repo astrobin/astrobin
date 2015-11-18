@@ -7,8 +7,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: AstroBin 1.0\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2015-11-07 19:05+0000\n"
-"PO-Revision-Date: 2015-11-07 19:40+0000\n"
+"POT-Creation-Date: 2015-11-18 20:32+0000\n"
+"PO-Revision-Date: 2015-11-18 21:07+0000\n"
 "Last-Translator: Salvatore <salvatore@iovene.com>\n"
 "Language-Team: Salvatore Iovene <salvatore@iovene.com>\n"
 "Language: it\n"
@@ -17,7 +17,7 @@ msgstr ""
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=(n != 1);\n"
 "X-Generator: Pootle 2.5.0\n"
-"X-POOTLE-MTIME: 1446925246.700865\n"
+"X-POOTLE-MTIME: 1447880856.882733\n"
 
 #: fields.py:10
 msgid "United Kingdom"
@@ -1021,7 +1021,7 @@ msgstr ""
 "questi file, al momento, quindi dovrai caricarli su qualche tuo spazio "
 "privato."
 
-#: forms.py:62 models.py:2026 models.py:2108 templates/gear/page.html:197
+#: forms.py:62 models.py:2064 models.py:2146 templates/gear/page.html:197
 #: templates/image/detail/image_title.html:14
 msgid "Link"
 msgstr "Link"
@@ -1030,7 +1030,7 @@ msgstr "Link"
 msgid "Link to TIFF/FITS"
 msgstr "Link al TIFF/FITS"
 
-#: forms.py:64 models.py:695 templates/maintenance_base.html:310
+#: forms.py:64 models.py:695 templates/maintenance_base.html:311
 #: templates/profile-edit-menu.html:36
 #: templates/image/detail/image_card.html:88
 msgid "Locations"
@@ -1067,7 +1067,7 @@ msgstr "Telescopi o obiettivi di acquisizione"
 msgid "Guiding telescopes or lenses"
 msgstr "Telescopi o obiettivi di guida"
 
-#: forms.py:133 forms.py:227 models.py:757 models.py:1629 views.py:2284
+#: forms.py:133 forms.py:227 models.py:757 models.py:1629 views.py:2288
 msgid "Mounts"
 msgstr "Montature"
 
@@ -1079,19 +1079,19 @@ msgstr "Camere di acquisizione"
 msgid "Guiding cameras"
 msgstr "Camere di guida"
 
-#: forms.py:136 forms.py:229 models.py:760 models.py:1631 views.py:2285
+#: forms.py:136 forms.py:229 models.py:760 models.py:1631 views.py:2289
 msgid "Focal reducers"
 msgstr "Riduttori di focale"
 
-#: forms.py:137 forms.py:230 models.py:761 models.py:1632 views.py:2286
+#: forms.py:137 forms.py:230 models.py:761 models.py:1632 views.py:2290
 msgid "Software"
 msgstr "Software"
 
-#: forms.py:138 forms.py:231 models.py:762 models.py:1633 views.py:2287
+#: forms.py:138 forms.py:231 models.py:762 models.py:1633 views.py:2291
 msgid "Filters"
 msgstr "Filtri"
 
-#: forms.py:139 forms.py:232 models.py:763 models.py:1634 views.py:2288
+#: forms.py:139 forms.py:232 models.py:763 models.py:1634 views.py:2292
 msgid "Accessories"
 msgstr "Accessori"
 
@@ -1124,11 +1124,11 @@ msgstr ""
 "assieme, ad esempio LRGB insieme, non potrai aggiungere sessioni di "
 "acquisizione separate per ogni filtro."
 
-#: forms.py:226 models.py:1628 views.py:2282
+#: forms.py:226 models.py:1628 views.py:2286
 msgid "Telescopes and lenses"
 msgstr "Telescopi ed obiettivi"
 
-#: forms.py:228 models.py:1630 views.py:2283
+#: forms.py:228 models.py:1630 views.py:2287
 msgid "Cameras"
 msgstr "Camere"
 
@@ -1154,8 +1154,8 @@ msgstr "Tutti"
 msgid "Images"
 msgstr "Immagini"
 
-#: forms.py:277 models.py:651 views.py:1753
-#: templates/maintenance_base.html:304 templates/profile-edit-menu.html:30
+#: forms.py:277 models.py:651 views.py:1755
+#: templates/maintenance_base.html:305 templates/profile-edit-menu.html:30
 #: templates/wall.html:131 templates/inclusion_tags/search_image_list.html:13
 #: templates/user/profile-subnav.html:130
 msgid "Gear"
@@ -1299,7 +1299,7 @@ msgid "The make, brand, producer or developer of this product."
 msgstr ""
 "La marca, il marchio, il produttore o lo sviluppatore di questo prodotto."
 
-#: forms.py:898 forms.py:959 models.py:197 models.py:1724 models.py:1863
+#: forms.py:898 forms.py:959 models.py:197 models.py:1762 models.py:1901
 #: templates/gear/fix.html:32 templates/gear/fix.html.py:33
 #: templates/gear/fix.html:34 templates/gear/fix.html.py:42
 #: templates/gear/fix.html:47 templates/gear/fix.html.py:52
@@ -1455,7 +1455,7 @@ msgstr "Attribuzione-Condividi CreativeCommons"
 msgid "Attribution-NoDerivs Creative Commons"
 msgstr "Attribuzione-NoOpereDerivate Creative Commons"
 
-#: models.py:78 models.py:96 views.py:789
+#: models.py:78 models.py:96 views.py:791
 msgid "English"
 msgstr "Inglese"
 
@@ -1583,7 +1583,7 @@ msgstr "Pianeta minore"
 msgid "Comet"
 msgstr "Cometa"
 
-#: models.py:151 models.py:588 models.py:652 views.py:1754
+#: models.py:151 models.py:588 models.py:652 views.py:1756
 #: templates/wall.html:143 templates/image/edit/acquisition.html:84
 msgid "Other"
 msgstr "Altro"
@@ -1914,11 +1914,11 @@ msgstr "Oggetto del cielo profondo"
 msgid "Solar system body or event"
 msgstr "Corpo o evento del sistema solare"
 
-#: models.py:649 views.py:1751 templates/wall.html:119
+#: models.py:649 views.py:1753 templates/wall.html:119
 msgid "Extremely wide field"
 msgstr "Campo molto esteso"
 
-#: models.py:650 views.py:1752 templates/wall.html:125
+#: models.py:650 views.py:1754 templates/wall.html:125
 msgid "Star trails"
 msgstr "Tracce stellari"
 
@@ -1954,7 +1954,7 @@ msgstr ""
 "Trascina gli elementi da lato destro a quello sinistro, oppure clicca sul "
 "segno più."
 
-#: models.py:702 models.py:1871 models.py:2115 templates/gear/page.html:47
+#: models.py:702 models.py:1909 models.py:2153 templates/gear/page.html:47
 #: templates/image/detail/image_description.html:7
 msgid "Description"
 msgstr "Descrizione"
@@ -1986,7 +1986,7 @@ msgstr "(senza titolo)"
 msgid "Please use the following format: yyyy-mm-dd."
 msgstr "Usa il seguente formato: aaaa-mm-gg."
 
-#: models.py:1278 models.py:1484 models.py:2091
+#: models.py:1278 models.py:1484 models.py:2129
 msgid "Image"
 msgstr "Immagine"
 
@@ -2070,7 +2070,7 @@ msgstr "Temperatura sensore"
 msgid "The temperature of the chip. E.g.: -20."
 msgstr "Temperatura del sensore. Esempio: -20."
 
-#: models.py:1347 views.py:717
+#: models.py:1347 views.py:719
 msgid "Darks"
 msgstr "Dark"
 
@@ -2078,7 +2078,7 @@ msgstr "Dark"
 msgid "The number of dark frames."
 msgstr "Numero di dark."
 
-#: models.py:1352 views.py:718
+#: models.py:1352 views.py:720
 msgid "Flats"
 msgstr "Flat"
 
@@ -2086,7 +2086,7 @@ msgstr "Flat"
 msgid "The number of flat frames."
 msgstr "Numero di flat."
 
-#: models.py:1357 views.py:719
+#: models.py:1357 views.py:721
 msgid "Flat darks"
 msgstr "Dark dei flat"
 
@@ -2094,7 +2094,7 @@ msgstr "Dark dei flat"
 msgid "The number of dark flat frames."
 msgstr "Numero di dark dei flat."
 
-#: models.py:1362 views.py:720
+#: models.py:1362 views.py:722
 msgid "Bias"
 msgstr "Bias"
 
@@ -2102,7 +2102,7 @@ msgstr "Bias"
 msgid "The number of bias/offset frames."
 msgstr "Numero di frame bias/offset."
 
-#: models.py:1367 views.py:723
+#: models.py:1367 views.py:725
 msgid "Bortle Dark-Sky Scale"
 msgstr "Scala del Cielo Scuro Bortle"
 
@@ -2122,11 +2122,11 @@ msgstr "Mag/arcsec^2 media"
 msgid "As measured with your Sky Quality Meter."
 msgstr "Come misurato dal tuo Sky Quality Meter."
 
-#: models.py:1381 views.py:725
+#: models.py:1381 views.py:727
 msgid "Mean FWHM"
 msgstr "FWHM medio"
 
-#: models.py:1386 views.py:726
+#: models.py:1386 views.py:728
 msgid "Temperature"
 msgstr "Temperatura"
 
@@ -2292,7 +2292,7 @@ msgstr "Il sito web dell'azienda che rappresenti su AstroBin."
 msgid "Country of operation"
 msgstr "Paese in cui si opera"
 
-#: models.py:1644 templates/maintenance_base.html:316
+#: models.py:1644 templates/maintenance_base.html:317
 #: templates/profile-edit-menu.html:42
 msgid "Default license"
 msgstr "Licenza predefinita"
@@ -2307,65 +2307,89 @@ msgstr ""
 msgid "Language"
 msgstr "Lingua"
 
-#: models.py:1725
+#: models.py:1700
+msgid "Signature"
+msgstr "Firma"
+
+#: models.py:1705
+msgid "Signature HTML Version"
+msgstr "Firma versione HTML"
+
+#: models.py:1710
+msgid "Show signatures"
+msgstr "Mostra firme"
+
+#: models.py:1715
+msgid "Post count"
+msgstr "Numero di post"
+
+#: models.py:1720
+msgid "Automatically subscribe"
+msgstr "Sottoscrivi automaticamente"
+
+#: models.py:1721
+msgid "Automatically subscribe to topics that you answer"
+msgstr "Sottoscrivi automaticamente ai topic a cui rispondi"
+
+#: models.py:1763
 msgid "A descriptive name, e.g. 'Home observatory' or 'Mount Whitney'."
 msgstr ""
 "Un nome descrittivo, ad esempio 'Osservatorio a casa' o 'Monte Bianco'."
 
-#: models.py:1731
+#: models.py:1769
 msgid "City"
 msgstr "Città"
 
-#: models.py:1732
+#: models.py:1770
 msgid "If this location is not in a city, use the name of the closest city."
 msgstr ""
 "Se questo luogo non è in una città, usa il nome della città più vicina."
 
-#: models.py:1738
+#: models.py:1776
 msgid "State or province"
 msgstr "Stato o provincia"
 
-#: models.py:1743
+#: models.py:1781
 msgid "Country"
 msgstr "Paese"
 
-#: models.py:1760
+#: models.py:1798
 msgid "North"
 msgstr "Nord"
 
-#: models.py:1760
+#: models.py:1798
 msgid "South"
 msgstr "Sud"
 
-#: models.py:1761
+#: models.py:1799
 msgid "North or south"
 msgstr "Nord o sud"
 
-#: models.py:1776
+#: models.py:1814
 msgid "East"
 msgstr "Est"
 
-#: models.py:1776
+#: models.py:1814
 msgid "West"
 msgstr "Ovest"
 
-#: models.py:1777
+#: models.py:1815
 msgid "East or West"
 msgstr "Est o ovest"
 
-#: models.py:1781
+#: models.py:1819
 msgid "Altitude"
 msgstr "Altitudine"
 
-#: models.py:1782
+#: models.py:1820
 msgid "In meters."
 msgstr "In metri."
 
-#: models.py:1864
+#: models.py:1902
 msgid "The name of the website or app that wishes to use the APIs."
 msgstr "Il nome del sito o app che desidera usare le API."
 
-#: models.py:1872
+#: models.py:1910
 msgid ""
 "Please explain the purpose of your application, and how you intend to use "
 "the API."
@@ -2373,63 +2397,63 @@ msgstr ""
 "Per favore spiega lo scopo della tua applicazione, e come intendi usare le "
 "API."
 
-#: models.py:2003
+#: models.py:2041
 msgid "AUD - Australian dollars"
 msgstr "AUD - Dollari australiani"
 
-#: models.py:2004
+#: models.py:2042
 msgid "CAD - Canadian dollars"
 msgstr "CAD - Dollari canadesi"
 
-#: models.py:2005
+#: models.py:2043
 msgid "CHF - Swiss francs"
 msgstr "CHF - Franchi svizzeri"
 
-#: models.py:2006
+#: models.py:2044
 msgid "EUR - Euros"
 msgstr "EUR - Euro"
 
-#: models.py:2007
+#: models.py:2045
 msgid "GPB - Pound stelings"
 msgstr "GPB - Sterline"
 
-#: models.py:2008
+#: models.py:2046
 msgid "PLN - Polish zloty"
 msgstr "PLN - Zloty polacchi"
 
-#: models.py:2009
+#: models.py:2047
 msgid "SEK - Swedish krona"
 msgstr "SEK - Corone svedesi"
 
-#: models.py:2010
+#: models.py:2048
 msgid "USD - American dollars"
 msgstr "USD - Dollari americani"
 
-#: models.py:2016 models.py:2066
+#: models.py:2054 models.py:2104
 msgid "Producer"
 msgstr "Produttore"
 
-#: models.py:2027 models.py:2109
+#: models.py:2065 models.py:2147
 msgid "The link to this product's page on your website."
 msgstr "Il link alla pagina di questo prodotto sul tuo sito web"
 
-#: models.py:2035
+#: models.py:2073
 msgid "Price"
 msgstr "Prezzo"
 
-#: models.py:2043
+#: models.py:2081
 msgid "Currency"
 msgstr "Valuta"
 
-#: models.py:2059
+#: models.py:2097
 msgid "Retailed gear items"
 msgstr "Strumenti in vendita"
 
-#: models.py:2075
+#: models.py:2113
 msgid "Proper make"
 msgstr "Marca corretta"
 
-#: models.py:2076
+#: models.py:2114
 msgid ""
 "Sometimes, product make/brand/producer/developer names are not written "
 "properly by the users. Write here the proper make/brand/producer/developer "
@@ -2439,11 +2463,11 @@ msgstr ""
 "produttore/sviluppatore di un prodotto. Scrivi qui la marca/marchio/"
 "produttore/sviluppatore corretta."
 
-#: models.py:2083
+#: models.py:2121
 msgid "Proper name"
 msgstr "Nome corretto"
 
-#: models.py:2084
+#: models.py:2122
 msgid ""
 "Sometimes, product names are not written properly by the users. Write here "
 "the proper product name, not including the make/brand/producer/developer "
@@ -2456,7 +2480,7 @@ msgstr ""
 "maggior parte di prodotti possibile, quindi cerca di usare una versione "
 "generica del nome del tuo prodotto."
 
-#: models.py:2092
+#: models.py:2130
 msgid ""
 "The official, commercial image for this product. Upload an image via the "
 "regular uploading interface, set its subject type to \"Gear\", and then "
@@ -2468,17 +2492,17 @@ msgstr ""
 "come \"Strumentazione\", e poi sceglila in questa lista. Se carichi versioni "
 "multiple, anche esse appariranno nella pagina commerciale."
 
-#: models.py:2100
+#: models.py:2138
 msgid "Tagline"
 msgstr "Slogan"
 
-#: models.py:2101
+#: models.py:2139
 msgid ""
 "A memorable phrase that will sum up this product, for marketing purposes."
 msgstr ""
 "Una frase memorabile che riassume questo prodotto, per scopi di marketing."
 
-#: models.py:2116
+#: models.py:2154
 msgid ""
 "Here you can write the full commercial description of your product. You can "
 "use some <a href=\"/faq/#comments\">formatting rules</a>."
@@ -2486,7 +2510,7 @@ msgstr ""
 "Qui puoi scrivere la descrizione commerciale del tuo prodotto. Puoi usare "
 "alcune <a href=\"/faq/#comments\">regole di formattazione</a>."
 
-#: models.py:2135
+#: models.py:2173
 msgid "Commercial gear items"
 msgstr "Strumenti commerciali"
 
@@ -2574,60 +2598,60 @@ msgstr "Numero di immagini per tipo di soggetto"
 msgid "Today's 'Image of the day' was already choosen. Come back tomorrow!"
 msgstr "La 'Foto del giorno' di oggi è stata già scelta. Torna domani!"
 
-#: views.py:708
+#: views.py:710
 msgid "Resolution"
 msgstr "Risoluzione"
 
-#: views.py:709 views.py:856
+#: views.py:711 views.py:858
 msgid "Dates"
 msgstr "Date"
 
-#: views.py:710 templates/image/detail/image_card.html:52
+#: views.py:712 templates/image/detail/image_card.html:52
 msgid "Frames"
 msgstr "Pose"
 
-#: views.py:716 templates/wall.html:37
+#: views.py:718 templates/wall.html:37
 #: templates/inclusion_tags/search_image_list.html:36
 #: templates/inclusion_tags/search_image_list.html:89
 #: templates/search/search.html:43 templates/search/search.html.py:306
 msgid "Integration"
 msgstr "Integrazione"
 
-#: views.py:716 views.py:1843 views.py:1844 templates/search/search.html:307
+#: views.py:718 views.py:1846 views.py:1847 templates/search/search.html:307
 msgid "hours"
 msgstr "ore"
 
-#: views.py:721
+#: views.py:723
 msgid "Avg. Moon age"
 msgstr "Giorno lunare medio"
 
-#: views.py:721
+#: views.py:723
 msgid "days"
 msgstr "giorni"
 
-#: views.py:722 templates/search/search.html:313
+#: views.py:724 templates/search/search.html:313
 msgid "Avg. Moon phase"
 msgstr "Fase lunare media"
 
-#: views.py:724
+#: views.py:726
 msgid "Mean SQM"
 msgstr "SQM medio"
 
-#: views.py:902
+#: views.py:904
 msgid ""
 "Thanks for reporting the problem. All thumbnails will be generated again."
 msgstr ""
 "Grazie per aver riportato il problema. Le miniature saranno generate di "
 "nuovo."
 
-#: views.py:1028 views.py:2739
+#: views.py:1030 views.py:2743
 msgid ""
 "Invalid image or no image provided. Allowed formats are JPG, PNG and GIF."
 msgstr ""
 "Immagine non valida o nessuna immagine. I formati accettati sono JPG, PNG e "
 "GIF."
 
-#: views.py:1032 views.py:2750 templates/user/profile/flickr_import.html:10
+#: views.py:1034 views.py:2754 templates/user/profile/flickr_import.html:10
 msgid ""
 "AstroBin is currently in read-only mode, because of server maintenance. "
 "Please try again soon!"
@@ -2635,7 +2659,7 @@ msgstr ""
 "AstroBin è al momento in modalità a sola lettura, per manutenzione al "
 "server. Riprova tra poco!"
 
-#: views.py:1055 views.py:2770
+#: views.py:1057 views.py:2774
 msgid ""
 "You uploaded an Indexed PNG file. AstroBin will need to lower the color "
 "count to 256 in order to work with it."
@@ -2643,85 +2667,89 @@ msgstr ""
 "Hai caricato un file PNG in modalità Indexed. AstroBin dovrà abbassare il "
 "numero di colori a 256 per poterci lavorare."
 
-#: views.py:1321 views.py:1404 views.py:1488 views.py:1514 views.py:2184
-#: views.py:2197 views.py:2218 views.py:2255 views.py:2345 views.py:2407
-#: views.py:2618 views.py:3851 views.py:4021
+#: views.py:1323 views.py:1406 views.py:1490 views.py:1516 views.py:2188
+#: views.py:2201 views.py:2222 views.py:2259 views.py:2349 views.py:2411
+#: views.py:2622 views.py:3849 views.py:4019
 #: templates/user/profile/edit/gear.html:168
 #: templates/user/profile/edit/gear.html:243
 msgid "Form saved. Thank you!"
 msgstr "Salvato. Grazie!"
 
-#: views.py:1456
+#: views.py:1458
 msgid "Fill in one session, before adding more."
 msgstr "Compila una sessione, prima di aggiungerne altre."
 
-#: views.py:1527 views.py:1598
+#: views.py:1529 views.py:1600
 msgid "Image deleted."
 msgstr "Immagine cancellata."
 
-#: views.py:1545
+#: views.py:1547
 msgid "Revision deleted."
 msgstr "Versione cancellata."
 
-#: views.py:1701
+#: views.py:1703
 msgid "No date specified"
 msgstr "Nessuna data specificata"
 
-#: views.py:1723 views.py:1784
+#: views.py:1725 views.py:1786
 msgid "No imaging telescopes or lenses, or no imaging cameras specified"
 msgstr ""
 "Nessun telescopio o lente, o nessuna camera di acquisizione specificata"
 
-#: views.py:1724
+#: views.py:1726
 msgid "Gear images"
 msgstr "Immagini della strumentazione"
 
-#: views.py:1749 templates/image/edit/acquisition.html:81
+#: views.py:1751 templates/image/edit/acquisition.html:81
 msgid "Deep sky"
 msgstr "Profondo cielo"
 
-#: views.py:1750 templates/image/edit/acquisition.html:78
+#: views.py:1752 templates/image/edit/acquisition.html:78
 msgid "Solar system"
 msgstr "Sistema solare"
 
-#: views.py:1783
+#: views.py:1785
 msgid "No subjects specified"
 msgstr "Nessun soggetto specificato"
 
-#: views.py:1785
+#: views.py:1787
 msgid "No acquisition details specified"
 msgstr "Nessun dettaglio di acquisizione specificato"
 
-#: views.py:1815 views.py:3228 templatetags/tags.py:77
+#: views.py:1818 views.py:3226 templatetags/tags.py:77
 msgid "minutes"
 msgstr "minuti"
 
-#: views.py:1816 views.py:3229 templatetags/tags.py:78
+#: views.py:1819 views.py:3227 templatetags/tags.py:78
 msgid "seconds ago"
 msgstr "secondi fa"
 
-#: views.py:1818 views.py:3231 templatetags/tags.py:79
+#: views.py:1821 views.py:3229 templatetags/tags.py:79
 #, python-format
 msgid "%s ago"
 msgstr "%s fa"
 
-#: views.py:1841 templates/popover/user.html:19
+#: views.py:1844 templates/popover/user.html:19
 msgid "Member since"
 msgstr "Utente da"
 
-#: views.py:1842
+#: views.py:1845
 msgid "Last login"
 msgstr "Ultimo login"
 
-#: views.py:1843
+#: views.py:1846
 msgid "Total integration time"
 msgstr "Integrazione totale"
 
-#: views.py:1844
+#: views.py:1847
 msgid "Average integration time"
 msgstr "Integrazione media"
 
-#: views.py:2335
+#: views.py:1848
+msgid "Forum posts"
+msgstr "Messaggi nel forum"
+
+#: views.py:2339
 msgid ""
 "There was one or more errors processing the form. You may need to scroll "
 "down to see them."
@@ -2729,19 +2757,19 @@ msgstr ""
 "Uno o più errori sono occorsi nel processare il modulo. Potresti dover "
 "scorrere la pagina in basso per vederli."
 
-#: views.py:2793
+#: views.py:2797
 msgid "Image uploaded. Thank you!"
 msgstr "Immagine caricata. Grazie!"
 
-#: views.py:3095 templatetags/tags.py:237
+#: views.py:3093 templatetags/tags.py:237
 msgid "no alias"
 msgstr "nessun alias"
 
-#: views.py:3811 views.py:4004
+#: views.py:3809 views.py:4002
 msgid "You can't merge a product to itself."
 msgstr "Non puoi unire un prodotto a se stesso."
 
-#: views.py:4042
+#: views.py:4040
 msgid "Default front page section changed."
 msgstr "La sezione prefefinita della pagina iniziale è stata cambiata."
 
@@ -2893,8 +2921,8 @@ msgid "There is no activity yet."
 msgstr "Nessuna attività."
 
 #: templates/affiliates.html:8 templates/affiliates.html.py:11
-#: templates/maintenance_base.html:188 templates/base/site_links.html:134
-#: templates/index/root.html:295
+#: templates/maintenance_base.html:189 templates/base/site_links.html:123
+#: templates/index/root.html:317
 msgid "Affiliates"
 msgstr "Affiliati"
 
@@ -2952,13 +2980,13 @@ msgstr ""
 "le API di AstroBin!"
 
 #: templates/explore_choose.html:5 templates/explore_choose.html.py:8
-#: templates/maintenance_base.html:103 templates/base/site_links.html:41
+#: templates/maintenance_base.html:104 templates/base/site_links.html:36
 msgid "Explore"
 msgstr "Esplora"
 
-#: templates/explore_choose.html:10 templates/maintenance_base.html:110
+#: templates/explore_choose.html:10 templates/maintenance_base.html:111
 #: templates/wall.html:9 templates/wall.html.py:175
-#: templates/base/site_links.html:48
+#: templates/base/site_links.html:43
 msgid "The Big Wall"
 msgstr "Il Grande Muro"
 
@@ -2970,9 +2998,9 @@ msgstr ""
 "Il modo migliore per vedere cosa c'è di nuovo su AstroBin: un grande muro "
 "con 100 immagini per pagina, che puoi ordinare e filtrare a tuo piacere."
 
-#: templates/faq.html:4 templates/maintenance_base.html:167
-#: templates/maintenance_base.html:518 templates/base/footer.html:19
-#: templates/base/site_links.html:106
+#: templates/faq.html:4 templates/maintenance_base.html:168
+#: templates/maintenance_base.html:519 templates/base/footer.html:20
+#: templates/base/site_links.html:101
 msgid "FAQ"
 msgstr "FAQ"
 
@@ -3296,7 +3324,7 @@ msgid ""
 msgstr "Hai una domanda che qui non c'è? <a href=\"/contact/\">Contattaci</a>!"
 
 #: templates/guidelines.html:4 templates/guidelines.html.py:9
-#: templates/maintenance_base.html:520 templates/base/footer.html:21
+#: templates/maintenance_base.html:521 templates/base/footer.html:22
 msgid "Guidelines"
 msgstr "Linee guida"
 
@@ -3420,19 +3448,19 @@ msgstr ""
 "modo ed usa senso comune\". Se non ti senti di accettarle, facci sapere cosa "
 "pensi non vada bene."
 
-#: templates/help.html:4 templates/maintenance_base.html:154
-#: templates/maintenance_base.html:517 templates/base/footer.html:18
-#: templates/base/site_links.html:93
+#: templates/help.html:4 templates/maintenance_base.html:155
+#: templates/maintenance_base.html:518 templates/base/footer.html:19
+#: templates/base/site_links.html:88
 msgid "Help"
 msgstr "Aiuto"
 
-#: templates/help.html:8 templates/maintenance_base.html:161
-#: templates/base/site_links.html:100
+#: templates/help.html:8 templates/maintenance_base.html:162
+#: templates/base/site_links.html:95
 msgid "What is this site?"
 msgstr "Che cos'è questo sito?"
 
-#: templates/help.html:10 templates/maintenance_base.html:465
-#: templates/base/alerts.html:13 templates/index/root.html:268
+#: templates/help.html:10 templates/maintenance_base.html:466
+#: templates/base/alerts.html:13 templates/index/root.html:269
 msgid "Hey!"
 msgstr "Ehi!"
 
@@ -3682,15 +3710,14 @@ msgstr "Registrati adesso!"
 msgid "Archive of 'Image of the day' winners"
 msgstr "Archivio delle foto del giorno"
 
-#: templates/iotd_archive.html:23 templates/iotd_choose.html:27
-#: templates/iotd_choose_confirm.html:26 templates/actstream/action.html:87
+#: templates/iotd_archive.html:23 templates/actstream/action.html:87
 #: templates/actstream/action.html.py:94 templates/actstream/action.html:110
 #: templates/actstream/action.html:117 templates/gear/page.html:15
-#: templates/index/root.html:82
+#: templates/index/root.html:83
 msgid "by"
 msgstr "da"
 
-#: templates/iotd_archive.html:32 templates/index/root.html:99
+#: templates/iotd_archive.html:32 templates/index/root.html:100
 msgid "Runners-up"
 msgstr "Piazzati"
 
@@ -3698,11 +3725,22 @@ msgstr "Piazzati"
 msgid "Choose today's 'Image of the day'"
 msgstr "Scegli la 'Foto del giorno' di oggi"
 
-#: templates/iotd_choose.html:37
+#: templates/iotd_choose.html:17
+msgid ""
+"Here is a selection of images uploaded during the past 7 days. About half of "
+"them are images that received lots of likes, and the other half were "
+"selected randomly. The images are anonymized as to not bias the selection."
+msgstr ""
+"Ecco una selezione di immagini caricate negli ultimi 7 giorni. Circa la metà "
+"di esse sono immagini che hanno ricevuto molti \"Mi piace\", e l'altra metà è "
+"stata selezionata a caso. Le immagini sono anonimizzate per non influenzare "
+"la selezione."
+
+#: templates/iotd_choose.html:27
 msgid "Choose"
 msgstr "Scegli"
 
-#: templates/iotd_choose.html:45
+#: templates/iotd_choose.html:33
 msgid ""
 "There are no candidates for 'Image of the day' yet, today. Please try again "
 "later."
@@ -3718,15 +3756,15 @@ msgstr ""
 msgid "Are you sure?"
 msgstr "Sei sicuro?"
 
-#: templates/iotd_choose_confirm.html:35
+#: templates/iotd_choose_confirm.html:22
 msgid "This image will be selected as today's 'Image of the day'."
 msgstr "Questa immagine sarà selezionata come 'Foto del giorno' per oggi."
 
-#: templates/iotd_choose_confirm.html:36
+#: templates/iotd_choose_confirm.html:23
 msgid "This operation cannot be undone."
 msgstr "Questa azione non può essere annullata."
 
-#: templates/iotd_choose_confirm.html:44
+#: templates/iotd_choose_confirm.html:31
 msgid "Yes, I'm sure"
 msgstr "Sì, sono sicuro"
 
@@ -3745,11 +3783,11 @@ msgid ""
 msgstr "La 'Foto del giorno' è stata selezionata. Grazie per l'aiuto!"
 
 #: templates/leaderboard.html:7 templates/leaderboard.html.py:11
-#: templates/maintenance_base.html:147 templates/base/site_links.html:85
+#: templates/maintenance_base.html:148 templates/base/site_links.html:80
 msgid "Leaderboard"
 msgstr "Classifica"
 
-#: templates/leaderboard.html:21 templates/maintenance_base.html:209
+#: templates/leaderboard.html:21 templates/maintenance_base.html:210
 #: templates/image/detail/menu/user.html:8
 #: templates/inclusion_tags/image_list.html:11
 #: templates/inclusion_tags/search_image_list.html:122
@@ -3770,14 +3808,14 @@ msgstr "Follower"
 msgid "Total integration"
 msgstr "Integrazione totale"
 
-#: templates/maintenance_base.html:81 templates/maintenance_base.html:513
+#: templates/maintenance_base.html:81 templates/maintenance_base.html:514
 #: templates/base/footer.html:14
 msgid "Site links"
 msgstr "Link del sito"
 
-#: templates/maintenance_base.html:85 templates/maintenance_base.html:515
-#: templates/maintenance_base.html:544 templates/base/footer.html:16
-#: templates/base/footer.html.py:44
+#: templates/maintenance_base.html:85 templates/maintenance_base.html:516
+#: templates/maintenance_base.html:545 templates/base/footer.html:16
+#: templates/base/footer.html.py:45
 msgid "Home"
 msgstr "Home"
 
@@ -3785,65 +3823,69 @@ msgstr "Home"
 msgid "Community"
 msgstr "Community"
 
-#: templates/maintenance_base.html:92 templates/maintenance_base.html:516
+#: templates/maintenance_base.html:92 templates/maintenance_base.html:517
 #: templates/base/footer.html:17 templates/base/site_links.html:22
 msgid "Blog"
 msgstr "Blog in English"
 
-#: templates/maintenance_base.html:116 templates/base/site_links.html:54
-#: templates/image/detail/iotd_banner.html:10 templates/index/root.html:74
+#: templates/maintenance_base.html:97 templates/base/footer.html:18
+#: templates/base/site_links.html:23
+msgid "Forum"
+msgstr "Forum"
+
+#: templates/maintenance_base.html:117 templates/base/site_links.html:49
+#: templates/image/detail/iotd_banner.html:10 templates/index/root.html:75
 msgid "Image of the day"
 msgstr "Foto del giorno"
 
-#: templates/maintenance_base.html:125 templates/base/site_links.html:63
+#: templates/maintenance_base.html:126 templates/base/site_links.html:58
 msgid "Public data pools"
 msgstr "Gruppi di dati pubblici"
 
-#: templates/maintenance_base.html:134 templates/base/site_links.html:70
+#: templates/maintenance_base.html:135 templates/base/site_links.html:65
 msgid "Advanced search"
 msgstr "Ricerca avanzata"
 
-#: templates/maintenance_base.html:141 templates/stats.html:7
-#: templates/base/site_links.html:78 templates/user/profile.html:61
+#: templates/maintenance_base.html:142 templates/stats.html:7
+#: templates/base/site_links.html:73 templates/user/profile.html:61
 msgid "Stats"
 msgstr "Statistiche"
 
-#: templates/maintenance_base.html:173 templates/questions.html:4
-#: templates/questions.html.py:7 templates/base/site_links.html:112
+#: templates/maintenance_base.html:174
 msgid "AstroBin Questions"
 msgstr "AstroBin Domande"
 
-#: templates/maintenance_base.html:197 templates/base/site_links.html:143
+#: templates/maintenance_base.html:198 templates/base/site_links.html:132
 #: templates/contact_form/contact.html:5 templates/contact_form/contact.html:8
 msgid "Contact"
 msgstr "Contattaci"
 
-#: templates/maintenance_base.html:228 templates/upload.html:7
+#: templates/maintenance_base.html:229 templates/upload.html:7
 #: templates/upload.html.py:20 templates/upload.html:36
 #: templates/avatar/change.html:38 templates/base/user_links_entries.html:139
 #: templates/image/detail/modals/upload_revision.html:17
-#: templates/index/root.html:121
+#: templates/index/root.html:122
 msgid "Upload"
 msgstr "Carica"
 
-#: templates/maintenance_base.html:231
+#: templates/maintenance_base.html:232
 #: templates/base/user_links_entries.html:142
 msgid "My places"
 msgstr "I miei posti"
 
-#: templates/maintenance_base.html:237 templates/wall.html:137
+#: templates/maintenance_base.html:238 templates/wall.html:137
 #: templates/base/user_links_entries.html:148
 #: templates/user/profile-subnav.html:20
 msgid "Commercial products"
 msgstr "Prodotti commerciali"
 
-#: templates/maintenance_base.html:245
+#: templates/maintenance_base.html:246
 #: templates/base/user_links_entries.html:156 templates/popover/user.html:30
 #: templates/user/profile-subnav.html:28
 msgid "Gallery"
 msgstr "Galleria"
 
-#: templates/maintenance_base.html:251 templates/wall.html:50
+#: templates/maintenance_base.html:252 templates/wall.html:50
 #: templates/base/user_links_entries.html:162
 #: templates/inclusion_tags/search_image_list.html:44
 #: templates/inclusion_tags/search_image_list.html:97
@@ -3851,100 +3893,100 @@ msgstr "Galleria"
 msgid "Bookmarks"
 msgstr "Segnalibri"
 
-#: templates/maintenance_base.html:257
+#: templates/maintenance_base.html:258
 #: templates/base/user_links_entries.html:168
 #: templates/user/profile-subnav.html:48
 #: templates/user/profile/commercial/products.html:209
 msgid "Plots"
 msgstr "Grafici"
 
-#: templates/maintenance_base.html:265
+#: templates/maintenance_base.html:266
 #: templates/base/user_links_entries.html:195 templates/messages/inbox.html:9
 msgid "My messages"
 msgstr "La mia posta"
 
-#: templates/maintenance_base.html:271
+#: templates/maintenance_base.html:272
 #: templates/base/user_links_entries.html:201
 #: templates/user/profile-subnav.html:70
 msgid "API Keys"
 msgstr "API Keys"
 
-#: templates/maintenance_base.html:275
+#: templates/maintenance_base.html:276
 #: templates/base/user_links_entries.html:208
 msgid "My settings"
 msgstr "I mei settaggi"
 
-#: templates/maintenance_base.html:279 templates/profile-edit-menu.html:8
+#: templates/maintenance_base.html:280 templates/profile-edit-menu.html:8
 msgid "Basic information"
 msgstr "Informazioni di base"
 
-#: templates/maintenance_base.html:287 templates/profile-edit-menu.html:15
+#: templates/maintenance_base.html:288 templates/profile-edit-menu.html:15
 msgid "Commercial information"
 msgstr "Informazioni commerciali"
 
-#: templates/maintenance_base.html:296 templates/profile-edit-menu.html:23
+#: templates/maintenance_base.html:297 templates/profile-edit-menu.html:23
 msgid "Retailer information"
 msgstr "Informazioni venditore"
 
-#: templates/maintenance_base.html:322 templates/profile-edit-menu.html:54
+#: templates/maintenance_base.html:323 templates/profile-edit-menu.html:54
 msgid "Preferences"
 msgstr "Opzioni"
 
-#: templates/maintenance_base.html:328 templates/profile-edit-menu.html:60
+#: templates/maintenance_base.html:329 templates/profile-edit-menu.html:60
 msgid "Avatar"
 msgstr "Avatar"
 
-#: templates/maintenance_base.html:335
+#: templates/maintenance_base.html:336
 #: templates/base/user_links_entries.html:226 templates/user/profile.html:107
 #: templates/user/profile.html.py:110
 msgid "Logout"
 msgstr "Logout"
 
-#: templates/maintenance_base.html:348 templates/maintenance_base.html:349
+#: templates/maintenance_base.html:349 templates/maintenance_base.html:350
 #: templates/base/user_links_entries.html:111
 msgid "Notifications"
 msgstr "Notifiche"
 
-#: templates/maintenance_base.html:360
+#: templates/maintenance_base.html:361
 #: templates/base/user_links_entries.html:270
 msgid "Have an invite? Login!"
 msgstr "Hai un invito? Fai il login!"
 
-#: templates/maintenance_base.html:362
+#: templates/maintenance_base.html:363
 #: templates/base/user_links_entries.html:272
 #: templates/registration/activation_complete.html:7
 msgid "Login"
 msgstr "Login"
 
-#: templates/maintenance_base.html:368
+#: templates/maintenance_base.html:369
 #: templates/base/user_links_entries.html:278
 #: templates/registration/login.html:15
 msgid "Register"
 msgstr "Registrati"
 
-#: templates/maintenance_base.html:380 templates/base/search_form.html:8
+#: templates/maintenance_base.html:381 templates/base/search_form.html:8
 msgid "Quick search"
 msgstr "Ricerca veloce"
 
-#: templates/maintenance_base.html:466 templates/base/alerts.html:14
+#: templates/maintenance_base.html:467 templates/base/alerts.html:14
 msgid "Success!"
 msgstr "Successo!"
 
-#: templates/maintenance_base.html:467 templates/maintenance_base.html:479
-#: templates/maintenance_base.html:491 templates/upload.html:55
+#: templates/maintenance_base.html:468 templates/maintenance_base.html:480
+#: templates/maintenance_base.html:492 templates/upload.html:55
 #: templates/upload.html.py:157 templates/upload.html:350
 #: templates/base/alerts.html:15 templates/base/alerts.html.py:28
 #: templates/base/alerts.html:40
 msgid "Warning!"
 msgstr "Attenzione!"
 
-#: templates/maintenance_base.html:468 templates/upload.html:76
+#: templates/maintenance_base.html:469 templates/upload.html:76
 #: templates/base/alerts.html:16
 #: templates/image/detail/modals/send_to_sharedfolder.html:25
 msgid "Error!"
 msgstr "Errore!"
 
-#: templates/maintenance_base.html:481 templates/base/alerts.html:30
+#: templates/maintenance_base.html:482 templates/base/alerts.html:30
 #, python-format
 msgid ""
 "As a producer and/or a retailer on AstroBin, it's very important that you "
@@ -3955,7 +3997,7 @@ msgstr ""
 "inserisca tutti i dettagli della tua azienda! Clicca <a href=\"%(the_url)s"
 "\">qui</a>  per farlo adesso."
 
-#: templates/maintenance_base.html:493 templates/base/alerts.html:42
+#: templates/maintenance_base.html:494 templates/base/alerts.html:42
 #, python-format
 msgid ""
 "As a retailer on AstroBin, it's very important that you fill in your country "
@@ -3964,11 +4006,11 @@ msgstr ""
 "In quanto negoziante su AstroBin, è molto importante che tu inserisca il  "
 "Paese in cui operi. Clicca <a href=\"%(the_url)s\">qui</a> per farlo adesso."
 
-#: templates/maintenance_base.html:507 templates/base/footer.html:8
+#: templates/maintenance_base.html:508 templates/base/footer.html:8
 msgid "About"
 msgstr "Informazioni"
 
-#: templates/maintenance_base.html:509 templates/base/footer.html:10
+#: templates/maintenance_base.html:510 templates/base/footer.html:10
 msgid ""
 "AstroBin is an image hosting website specifically targeted to "
 "astrophotographers: it's the first and the last place where you need to "
@@ -3979,24 +4021,24 @@ msgstr ""
 "astrofotografi: è il posto finale dove caricare le proprie immagini. Fatto "
 "da un astrofotografo, per gli astrofotografi."
 
-#: templates/maintenance_base.html:519 templates/tos.html:4
-#: templates/tos.html.py:9 templates/base/footer.html:20
+#: templates/maintenance_base.html:520 templates/tos.html:4
+#: templates/tos.html.py:9 templates/base/footer.html:21
 msgid "Terms of Service"
 msgstr "Condizioni d'uso"
 
-#: templates/maintenance_base.html:524 templates/base/footer.html:25
+#: templates/maintenance_base.html:525 templates/base/footer.html:26
 msgid "Thanks to"
 msgstr "Ringraziamenti"
 
-#: templates/maintenance_base.html:526 templates/base/footer.html:27
+#: templates/maintenance_base.html:527 templates/base/footer.html:28
 msgid "The localization team"
 msgstr "Il team di localizzazione"
 
-#: templates/maintenance_base.html:531 templates/base/footer.html:32
+#: templates/maintenance_base.html:532 templates/base/footer.html:33
 msgid "Copyright"
 msgstr "Copyright"
 
-#: templates/maintenance_base.html:533
+#: templates/maintenance_base.html:534
 msgid ""
 "AstroBin is Copyright &copy; 2010-2012 Salvatore Iovene, All Rights "
 "Reserved. The images on this websites are copyright of their respective "
@@ -4006,22 +4048,22 @@ msgstr ""
 "Riservati. Le immagini su questo sito sono copyright dei loro rispettivi "
 "proprietari."
 
-#: templates/maintenance_base.html:548 templates/base/footer.html:48
+#: templates/maintenance_base.html:549 templates/base/footer.html:49
 msgid "Back to top"
 msgstr "Torna su"
 
-#: templates/maintenance_base.html:591 templates/base/js.html:33
+#: templates/maintenance_base.html:592 templates/base/js.html:33
 #: templates/image/edit/acquisition.html:69 templates/image/edit/basic.html:74
 #: templates/image/edit/gear.html:48 templates/messages/compose.html:16
 #: templates/openid_provider/decide.html:16
 msgid "Cancel"
 msgstr "Annulla"
 
-#: templates/maintenance_base.html:621 templates/base/js.html:82
+#: templates/maintenance_base.html:622 templates/base/js.html:82
 msgid "No file selected"
 msgstr "Nessun file"
 
-#: templates/maintenance_base.html:622 templates/base/js.html:83
+#: templates/maintenance_base.html:623 templates/base/js.html:83
 msgid "Choose file"
 msgstr "Scegli file"
 
@@ -4040,159 +4082,6 @@ msgstr "successive"
 #: templates/profile-edit-menu.html:48
 msgid "Import from Flickr"
 msgstr "Importa da Flickr"
-
-#: templates/questions.html:19
-msgid ""
-"As of today, the most common form in which astronomy communities exist is "
-"that of the forum. A 20+ years old concept, that doesn't scale well with "
-"massive amount of information, does a terrible job at organizing such "
-"information (in fact it barely tries), and presents a series of flaws, that "
-"will be explained below."
-msgstr ""
-"Al giorno d'oggi, la modalità più comune in cui si presentano le community "
-"di astronomia è quella del forum. Un concetto vecchio più di 20 anni, che "
-"non si presta bene a contenere grosse quantità di informazione, e fa un "
-"pessimo lavoro ad organizzare detta informazione (infatti a malapena ci "
-"prova), e presenta una serie difetti che verranno spiegati di seguito."
-
-#: templates/questions.html:22
-msgid "What is AstroBin Questions?"
-msgstr "Che cos'è AstroBin Domande?"
-
-#: templates/questions.html:24
-msgid ""
-"It's a Questions &amp; Answers site focused on the quality of the content. "
-"The allowed subjects of discussion are Astrophotography and Astronomy."
-msgstr ""
-"È un sito di Domande &amp; Risposte che si concentra sulla qualità dei "
-"contenuti. Gli argomenti di discussione permessi sono l'Astrofotografia e "
-"l'Astronomia."
-
-#: templates/questions.html:27
-msgid "What's wrong with forums?"
-msgstr "Cosa c'è che non va con i forum?"
-
-#: templates/questions.html:29
-msgid ""
-"Forums are great for the recreational discussion, but they are "
-"<strong>terribly</strong> dated, as a system, for today's Internet "
-"standards. Here's a series of flaws that AstroBin Questions fixes:"
-msgstr ""
-"I forum vanno benissimo per le discussioni ricreative, ma sono "
-"<strong>terribilmente</strong> antichi, come sistema, per gli standard "
-"odierni. Ecco una serie di difetti a cui AstroBin Domande rimedia:"
-
-#: templates/questions.html:33
-msgid "Every post is flat"
-msgstr "Ogni messaggio è piatto"
-
-#: templates/questions.html:35
-msgid ""
-"It's very difficult to engage in several conversations at the same time in "
-"the same post, because the only way to do it is by quoting somebody. Very "
-"soon this becomes a mess."
-msgstr ""
-"È molto difficile districarsi tra più conversazioni allo stesso tempo, nello "
-"stesso thread, perché l'unico modo per fare cioè è quello di quotare "
-"qualcuno. E questo rende il thread molto confuso."
-
-#: templates/questions.html:40
-msgid "Every post has the same visibility"
-msgstr "Ogni messaggio ha la stessa visibilità"
-
-#: templates/questions.html:42
-msgid ""
-"If you post a message asking whether you should use a Solar Filter when "
-"observing an eclipse, and I answer <em>\"No, don't worry,\"</em> the only "
-"way to invalidate that answer is that other people reply and explain why "
-"that's wrong. This doesn't guarantee that somebody will not go on and lose "
-"an eye. This is an extreme example: what I'm trying to say is that some post "
-"replies might be objectively wrong, and this will worsen the quality of the "
-"community."
-msgstr ""
-"Se poni una domanda chiedendo se bisogna usare un filtro solare per "
-"osservare un'eclisse, ed io rispondo <em>\"No, vai tranquillo,\"</em> "
-"l'unico modo per invalidare tale risposta è che qualcun altro risponda e "
-"spieghi perché è errata. Questo non garantisce che qualcuno non ci perderà "
-"un occhio. Questo è un esempio estremo: quello che sto cercando di dire è "
-"che alcune risposte possono essere oggettivamente errate, e questo peggiora "
-"la qualità della community."
-
-#: templates/questions.html:47
-msgid "Every user has the same importance"
-msgstr "Ogni utente ha la stessa importanza"
-
-#: templates/questions.html:49
-msgid ""
-"Whether I'm Mr. Nobody, that just took his first astrophotograph last night, "
-"or a semi-professional astrophotographer with 20 years experience, on forums "
-"this doesn't matter. My posts or post replies will look the same. This "
-"worsens the quality of the community."
-msgstr ""
-"Che io sia un Sig. Nessuno, che ha appena scattato la sua prima astrofoto la "
-"scorsa notte, oppure un astrofotografo semi-professionista con 20 anni di "
-"esperienza, sui forum non fa differenza. I miei messaggi, o risposte, "
-"apprarianno gli stessi. Questo peggiora la qualità della community."
-
-#: templates/questions.html:54
-msgid "Everything is static"
-msgstr "Tutto è statico"
-
-#: templates/questions.html:56
-msgid ""
-"If I write like a 7-year-old, nobody can fix it. If I suck at communicating "
-"and can't ask my question well, nobody can rephrase it. If I make a lot of "
-"typos, nobody can fix them. This is undesirable."
-msgstr ""
-"Se scrivo come un bambino di 7 anni, nessuno può correggerlo. Se non sono "
-"bravo a comunicare e non so porre bene la mia domanda, nessuno può "
-"migliorarla. Se faccio tanti errori di grammatica, nessuno può correggerli. "
-"Questo non è desiderabile."
-
-#: templates/questions.html:62
-msgid ""
-"AstroBin Questions addresses all these issues with a community driven, "
-"highly interactive, wiki-capable website that <strong>you</strong> moderate, "
-"thanks to a system based on <em>karma points</em>."
-msgstr ""
-"AstroBin Domande rimedia a tutti questi problemi con un sito orientato alla "
-"community, altamente interattivo, con caratteristiche da wiki, che "
-"<strong>tu</strong> moderi, grazie ad un sistema basato su <em>punti di "
-"karma</em>."
-
-#: templates/questions.html:66
-msgid ""
-"Please join, and you can learn and teach about Astrophotography and "
-"Astronomy!"
-msgstr "Iscriviti, e puoi imparare ed insegnare Astrofotografia ed Astronomia!"
-
-#: templates/questions.html:69
-msgid "Here's some more reading material to get you started"
-msgstr "Ecco un po' di letture consigliate per iniziare"
-
-#: templates/questions.html:73
-msgid "Frequently Asked Questions about AstroBin Questions"
-msgstr "Domande frequenti riguardo AstroBin Domande"
-
-#: templates/questions.html:78
-msgid "AstroBin Questions' help page"
-msgstr "La pagina di aiuto di AstroBin Domande"
-
-#: templates/questions.html:83
-msgid "An extension of this page, as a question on AstroBin Questions"
-msgstr "Un'estensione a questa pagina, posta come domanda su AstroBin Domande"
-
-#: templates/questions.html:90
-msgid "Go to AstroBin Questions!"
-msgstr "Vai a AstroBin Domande!"
-
-#: templates/questions.html:94
-msgid ""
-"PS: AstroBin Questions is only available in English, right now, but more "
-"languages will come soon."
-msgstr ""
-"PS: AstroBin Domande al momento è solo disponibile in Inglese, ma altre "
-"lingue arriveranno presto."
 
 #: templates/stats.html:11
 #, python-format
@@ -4418,7 +4307,7 @@ msgstr "Numero di Mi piace"
 #: templates/wall.html:56 templates/gear/page.html:252
 #: templates/inclusion_tags/search_image_list.html:53
 #: templates/inclusion_tags/search_image_list.html:106
-#: templates/search/search.html:49
+#: templates/pybb/topic_list.html:23 templates/search/search.html:49
 #: templates/user/profile/commercial/products.html:211
 msgid "Views"
 msgstr "Visite"
@@ -4486,16 +4375,16 @@ msgstr "Carica una nuova immagine"
 msgid "Avatar image"
 msgstr "Immagine avatar"
 
-#: templates/base/footer.html:34
+#: templates/base/footer.html:35
 msgid "The images on this websites are copyright of their respective owners."
 msgstr ""
 "Le immagini su questo sito sono copyright dei loro rispettivi proprietari."
 
-#: templates/base/site_links.html:33
+#: templates/base/site_links.html:28
 msgid "Source code"
 msgstr "Codice sorgente"
 
-#: templates/base/site_links.html:118
+#: templates/base/site_links.html:107
 msgid "AstroBin Raw Data"
 msgstr "AstroBin Dati Grezzi"
 
@@ -5099,6 +4988,7 @@ msgstr "Cancella l'immagine originale"
 #: templates/image/detail/modals/delete.html:14
 #: templates/image/detail/modals/delete.html:31
 #: templates/image/detail/modals/delete.html:48
+#: templates/pybb/post_template.html:54
 msgid "Delete"
 msgstr "Cancella"
 
@@ -5111,6 +5001,7 @@ msgid "Bring to a user's attention"
 msgstr "Porta all'attenzione di un utente"
 
 #: templates/image/detail/menu/admin.html:7
+#: templates/pybb/post_template.html:61 templates/pybb/topic.html:68
 msgid "Admin"
 msgstr "Amministrazione"
 
@@ -5542,6 +5433,7 @@ msgid "Remove"
 msgstr "Rimuovi"
 
 #: templates/inclusion_tags/list_gear.html:21
+#: templates/pybb/post_template.html:49
 #: templates/user/profile/commercial/products.html:79
 #: templates/user/profile/commercial/products.html:161
 #: templates/user/profile/commercial/products.html:482
@@ -5613,11 +5505,11 @@ msgstr ""
 msgid "Date joined"
 msgstr "Data di iscrizione"
 
-#: templates/index/root.html:25
+#: templates/index/root.html:26
 msgid "The perfect home for your astrophotography."
 msgstr "Lo spazio migliore per la tua astrofotografia."
 
-#: templates/index/root.html:27
+#: templates/index/root.html:28
 #, python-format
 msgid ""
 "AstroBin is an image hosting service made specifically for "
@@ -5630,11 +5522,11 @@ msgstr ""
 "alla comunità dell'Astrofotografia! Vai alla <a href=\"%(help_url)s\">pagina "
 "di aiuto</a> per saperne di più."
 
-#: templates/index/root.html:34
+#: templates/index/root.html:35
 msgid "Unlimited uploads, unlimited size."
 msgstr "Upload infiniti, dimensione infinita."
 
-#: templates/index/root.html:35
+#: templates/index/root.html:36
 msgid ""
 "Astrophotography images have scientific value that shouldn't be lost in file "
 "compression. On AstroBin you can (and should!) upload full size images. And "
@@ -5644,11 +5536,11 @@ msgstr ""
 "con la compressione dei file. Su AstroBin puoi (e dovresti!) caricare le "
 "immagini a piena risoluzione. Ed hai spazio illimitato e gratis."
 
-#: templates/index/root.html:42
+#: templates/index/root.html:43
 msgid "Have your data neatly plotted."
 msgstr "I tuoi dati sistematicamente tracciati."
 
-#: templates/index/root.html:43
+#: templates/index/root.html:44
 msgid ""
 "Data is everything, and AstroBin will give you the tools to keep your data "
 "neat and organized. And with our plots, you can get insights on your "
@@ -5658,57 +5550,61 @@ msgstr ""
 "dati bene organizzati. E con i nostri grafici, puoi analizzare la tua "
 "produttività e gli strumenti che usi di più."
 
-#: templates/index/root.html:137
+#: templates/index/root.html:138
 msgid "Your activity stream"
 msgstr "Il tuo stream di attività"
 
-#: templates/index/root.html:142
+#: templates/index/root.html:143
 msgid "Global activity stream"
 msgstr "Stream di attività globale"
 
-#: templates/index/root.html:147
+#: templates/index/root.html:148
 msgid "Recently uploaded"
 msgstr "Caricate di recente"
 
-#: templates/index/root.html:152 templates/index/root.html.py:212
+#: templates/index/root.html:153 templates/index/root.html.py:213
 msgid "Recent images from people you follow"
 msgstr "Immagini recenti dagli utenti che segui"
 
-#: templates/index/root.html:157 templates/index/root.html.py:223
+#: templates/index/root.html:158 templates/index/root.html.py:224
 msgid "Recently liked"
 msgstr "Piaciute di recente"
 
-#: templates/index/root.html:162 templates/index/root.html.py:234
+#: templates/index/root.html:163 templates/index/root.html.py:235
 msgid "Recently bookmarked"
 msgstr "Aggiunte ai segnalibri di recente"
 
-#: templates/index/root.html:167 templates/index/root.html.py:245
+#: templates/index/root.html:168 templates/index/root.html.py:246
 msgid "Recent images with link to TIFF/FITS"
 msgstr "Immagini recenti con link al TIFF/FITS"
 
-#: templates/index/root.html:177
+#: templates/index/root.html:178
 msgid "Personal"
 msgstr "Personale"
 
-#: templates/index/root.html:188
+#: templates/index/root.html:189
 msgid "Global"
 msgstr "Globale"
 
-#: templates/index/root.html:201
+#: templates/index/root.html:202
 msgid "Recent images"
 msgstr "Immagini recenti"
 
-#: templates/index/root.html:256
+#: templates/index/root.html:257
 msgid "Set current front page section as default"
 msgstr "Imposta questa sezione della pagina iniziale come predefinita"
 
-#: templates/index/root.html:271
+#: templates/index/root.html:272
 msgid ""
 "To make your personal stream more interesting, you should follow some people!"
 msgstr ""
 "Per rendere il tuo stream più interessante, dovresti seguire qualche utente!"
 
-#: templates/index/root.html:300
+#: templates/index/root.html:296
+msgid "Latest from the forums"
+msgstr "Ultime dal forum"
+
+#: templates/index/root.html:322
 msgid "Do you want your product here?"
 msgstr "Vuoi il tuo prodotto qui?"
 
@@ -6534,6 +6430,132 @@ msgstr ""
 "\"%(login_url)s\">effettuare il login</a>, altrimenti puoi lasciarci il tuo "
 "indirizzo email e sarai notificato non appena il sito è aperto!"
 
+#: templates/pybb/forum_list.html:9
+msgid "Hidden"
+msgstr "Nascosto"
+
+#: templates/pybb/forum_list.html:28
+msgid "No forums created"
+msgstr "Nessun forum creato"
+
+#: templates/pybb/forum_list.html:29
+msgid "Add forum now"
+msgstr "Aggiungi forum"
+
+#: templates/pybb/index.html:25
+msgid "Topics"
+msgstr "Argomenti"
+
+#: templates/pybb/index.html:28 templates/pybb/topic.html:28
+#: templates/pybb/topic.html.py:48 templates/pybb/topic_list.html:20
+msgid "Posts"
+msgstr "Messaggi"
+
+#: templates/pybb/index.html:31
+msgid "Last posts"
+msgstr "Ultimi messaggi"
+
+#: templates/pybb/index.html:38
+msgid "Forum categories are not created"
+msgstr "Le categorie di forum non sono state create"
+
+#: templates/pybb/index.html:39
+msgid "Add a category now"
+msgstr "Aggiungi una categoria"
+
+#: templates/pybb/index.html:44 templates/pybb/latest_topics.html:7
+#: templates/pybb/latest_topics.html:10
+msgid "Last updates in topics"
+msgstr "Ultimi aggiornamenti degli argomenti"
+
+#: templates/pybb/index.html:47
+msgid "Mark all forums as read"
+msgstr "Segna tutti i forum come letti"
+
+#: templates/pybb/latest_topics.html:32
+msgid "Mark all topics as read"
+msgstr "Segna tutti gli argomenti come letti"
+
+#: templates/pybb/post_template.html:39
+msgid "Edited"
+msgstr "Modificato"
+
+#: templates/pybb/post_template.html:44
+msgid "quote"
+msgstr "quota"
+
+#: templates/pybb/post_template.html:45
+msgid "quote selected"
+msgstr "quota selezione"
+
+#: templates/pybb/post_template.html:53
+msgid "Delete post?"
+msgstr "Cancellare il messaggio?"
+
+#: templates/pybb/post_template.html:56
+msgid "Approve post"
+msgstr "Approva il messaggio"
+
+#: templates/pybb/topic.html:57
+msgid "Unstick topic"
+msgstr "Rimuovi l'argomento dal \"In evidenza\""
+
+#: templates/pybb/topic.html:59
+msgid "Stick topic"
+msgstr "Metti argomento in evidenza"
+
+#: templates/pybb/topic.html:63
+msgid "Open topic"
+msgstr "Apri argomento"
+
+#: templates/pybb/topic.html:65
+#, fuzzy
+msgid "Close topic"
+msgstr "Chiudi"
+
+#: templates/pybb/topic.html:76
+msgid "Unsubscribe"
+msgstr ""
+
+#: templates/pybb/topic.html:78
+msgid "Subscribe"
+msgstr ""
+
+#: templates/pybb/topic.html:94
+msgid "Subscribers"
+msgstr ""
+
+#: templates/pybb/topic_list.html:13
+msgid "Topic"
+msgstr ""
+
+#: templates/pybb/topic_list.html:17
+msgid "Author"
+msgstr ""
+
+#: templates/pybb/topic_list.html:26
+#, fuzzy
+msgid "Last post"
+msgstr "Est o ovest"
+
+#: templates/pybb/topic_list.html:38
+msgid "Go to first unread post"
+msgstr ""
+
+#: templates/pybb/topic_list.html:39
+msgid "Sticky"
+msgstr ""
+
+#: templates/pybb/topic_list.html:40
+#, fuzzy
+msgid "Closed"
+msgstr "Chiudi"
+
+#: templates/pybb/topic_list.html:44
+#, fuzzy
+msgid "pages"
+msgstr "Immagini"
+
 #: templates/registration/activate.html:4
 #: templates/registration/activate.html:9
 msgid "Account successfully activated"
@@ -7202,6 +7224,139 @@ msgstr ""
 #: templates/user/profile/edit/retailer.html:6
 msgid "Edit your retailer information"
 msgstr "Modifica le tue informazioni di negoziante"
+
+#~ msgid ""
+#~ "As of today, the most common form in which astronomy communities exist is "
+#~ "that of the forum. A 20+ years old concept, that doesn't scale well with "
+#~ "massive amount of information, does a terrible job at organizing such "
+#~ "information (in fact it barely tries), and presents a series of flaws, "
+#~ "that will be explained below."
+#~ msgstr ""
+#~ "Al giorno d'oggi, la modalità più comune in cui si presentano le "
+#~ "community di astronomia è quella del forum. Un concetto vecchio più di 20 "
+#~ "anni, che non si presta bene a contenere grosse quantità di informazione, "
+#~ "e fa un pessimo lavoro ad organizzare detta informazione (infatti a "
+#~ "malapena ci prova), e presenta una serie difetti che verranno spiegati di "
+#~ "seguito."
+
+#~ msgid "What is AstroBin Questions?"
+#~ msgstr "Che cos'è AstroBin Domande?"
+
+#~ msgid ""
+#~ "It's a Questions &amp; Answers site focused on the quality of the "
+#~ "content. The allowed subjects of discussion are Astrophotography and "
+#~ "Astronomy."
+#~ msgstr ""
+#~ "È un sito di Domande &amp; Risposte che si concentra sulla qualità dei "
+#~ "contenuti. Gli argomenti di discussione permessi sono l'Astrofotografia e "
+#~ "l'Astronomia."
+
+#~ msgid ""
+#~ "Forums are great for the recreational discussion, but they are "
+#~ "<strong>terribly</strong> dated, as a system, for today's Internet "
+#~ "standards. Here's a series of flaws that AstroBin Questions fixes:"
+#~ msgstr ""
+#~ "I forum vanno benissimo per le discussioni ricreative, ma sono "
+#~ "<strong>terribilmente</strong> antichi, come sistema, per gli standard "
+#~ "odierni. Ecco una serie di difetti a cui AstroBin Domande rimedia:"
+
+#~ msgid "Every post is flat"
+#~ msgstr "Ogni messaggio è piatto"
+
+#~ msgid ""
+#~ "It's very difficult to engage in several conversations at the same time "
+#~ "in the same post, because the only way to do it is by quoting somebody. "
+#~ "Very soon this becomes a mess."
+#~ msgstr ""
+#~ "È molto difficile districarsi tra più conversazioni allo stesso tempo, "
+#~ "nello stesso thread, perché l'unico modo per fare cioè è quello di "
+#~ "quotare qualcuno. E questo rende il thread molto confuso."
+
+#~ msgid "Every post has the same visibility"
+#~ msgstr "Ogni messaggio ha la stessa visibilità"
+
+#~ msgid ""
+#~ "If you post a message asking whether you should use a Solar Filter when "
+#~ "observing an eclipse, and I answer <em>\"No, don't worry,\"</em> the only "
+#~ "way to invalidate that answer is that other people reply and explain why "
+#~ "that's wrong. This doesn't guarantee that somebody will not go on and "
+#~ "lose an eye. This is an extreme example: what I'm trying to say is that "
+#~ "some post replies might be objectively wrong, and this will worsen the "
+#~ "quality of the community."
+#~ msgstr ""
+#~ "Se poni una domanda chiedendo se bisogna usare un filtro solare per "
+#~ "osservare un'eclisse, ed io rispondo <em>\"No, vai tranquillo,\"</em> "
+#~ "l'unico modo per invalidare tale risposta è che qualcun altro risponda e "
+#~ "spieghi perché è errata. Questo non garantisce che qualcuno non ci "
+#~ "perderà un occhio. Questo è un esempio estremo: quello che sto cercando "
+#~ "di dire è che alcune risposte possono essere oggettivamente errate, e "
+#~ "questo peggiora la qualità della community."
+
+#~ msgid "Every user has the same importance"
+#~ msgstr "Ogni utente ha la stessa importanza"
+
+#~ msgid ""
+#~ "Whether I'm Mr. Nobody, that just took his first astrophotograph last "
+#~ "night, or a semi-professional astrophotographer with 20 years experience, "
+#~ "on forums this doesn't matter. My posts or post replies will look the "
+#~ "same. This worsens the quality of the community."
+#~ msgstr ""
+#~ "Che io sia un Sig. Nessuno, che ha appena scattato la sua prima astrofoto "
+#~ "la scorsa notte, oppure un astrofotografo semi-professionista con 20 anni "
+#~ "di esperienza, sui forum non fa differenza. I miei messaggi, o risposte, "
+#~ "apprarianno gli stessi. Questo peggiora la qualità della community."
+
+#~ msgid "Everything is static"
+#~ msgstr "Tutto è statico"
+
+#~ msgid ""
+#~ "If I write like a 7-year-old, nobody can fix it. If I suck at "
+#~ "communicating and can't ask my question well, nobody can rephrase it. If "
+#~ "I make a lot of typos, nobody can fix them. This is undesirable."
+#~ msgstr ""
+#~ "Se scrivo come un bambino di 7 anni, nessuno può correggerlo. Se non sono "
+#~ "bravo a comunicare e non so porre bene la mia domanda, nessuno può "
+#~ "migliorarla. Se faccio tanti errori di grammatica, nessuno può "
+#~ "correggerli. Questo non è desiderabile."
+
+#~ msgid ""
+#~ "AstroBin Questions addresses all these issues with a community driven, "
+#~ "highly interactive, wiki-capable website that <strong>you</strong> "
+#~ "moderate, thanks to a system based on <em>karma points</em>."
+#~ msgstr ""
+#~ "AstroBin Domande rimedia a tutti questi problemi con un sito orientato "
+#~ "alla community, altamente interattivo, con caratteristiche da wiki, che "
+#~ "<strong>tu</strong> moderi, grazie ad un sistema basato su <em>punti di "
+#~ "karma</em>."
+
+#~ msgid ""
+#~ "Please join, and you can learn and teach about Astrophotography and "
+#~ "Astronomy!"
+#~ msgstr ""
+#~ "Iscriviti, e puoi imparare ed insegnare Astrofotografia ed Astronomia!"
+
+#~ msgid "Here's some more reading material to get you started"
+#~ msgstr "Ecco un po' di letture consigliate per iniziare"
+
+#~ msgid "Frequently Asked Questions about AstroBin Questions"
+#~ msgstr "Domande frequenti riguardo AstroBin Domande"
+
+#~ msgid "AstroBin Questions' help page"
+#~ msgstr "La pagina di aiuto di AstroBin Domande"
+
+#~ msgid "An extension of this page, as a question on AstroBin Questions"
+#~ msgstr ""
+#~ "Un'estensione a questa pagina, posta come domanda su AstroBin Domande"
+
+#~ msgid "Go to AstroBin Questions!"
+#~ msgstr "Vai a AstroBin Domande!"
+
+#~ msgid ""
+#~ "PS: AstroBin Questions is only available in English, right now, but more "
+#~ "languages will come soon."
+#~ msgstr ""
+#~ "PS: AstroBin Domande al momento è solo disponibile in Inglese, ma altre "
+#~ "lingue arriveranno presto."
 
 #~ msgid ""
 #~ "You need a <a href=\"%(rawdata_url)s\">Raw Data</a> subscription to "
@@ -8785,10 +8940,6 @@ msgstr "Modifica le tue informazioni di negoziante"
 #~ msgid_plural "Please correct following errors."
 #~ msgstr[0] "Non stai più seguendo"
 #~ msgstr[1] "Non stai più seguendo"
-
-#, fuzzy
-#~ msgid "Post"
-#~ msgstr "Caricata da"
 
 #, fuzzy
 #~ msgid "in"
