@@ -3688,6 +3688,23 @@ img.flickr-photo-to-import-selected {
 .post-content ol {
   list-style: initial;
 }
+.post-content blockquote {
+  background-color: #222;
+  padding: 10px 20px 10px 60px;
+  border: 1px solid #555;
+  position: relative;
+  min-height: 34px;
+}
+.post-content blockquote:before {
+  display: block;
+  content: "\201C";
+  font-size: 120px;
+  position: absolute;
+  left: 4px;
+  top: 50px;
+  color: #444;
+  font-family: Georgia;
+}
 .post-signature {
   color: #CCC;
   margin-top: 15px;
