@@ -9,6 +9,7 @@
 {% load common_tags %}
 {% load cache %}
 {% load tags %}
+{% load pybb_tags %}
 
 {% block title %}AstroBin{% endblock %}
 
@@ -290,6 +291,27 @@
 
             <div class="span3 visible-desktop">
                 {% include 'index/ad.html' %}
+
+                <div class="subtle-container simple-container">
+                    <div class="header"><h4><i class="icon-comments"></i>{% trans "Latest from the forums" %}<h4></div>
+                    {% cache 600 latest_forum_topics %}
+                        {% pybb_get_latest_topics cnt=30 as topics %}
+                        <table class="table table-condensed topic-list">
+                        <tbody>
+                        {% for topic in topics %}
+                        <tr class="topic-row">
+                            <td class="topic-state{% if topic.unread %} topic-unread{% endif %}">
+                                <div class="state-indicator"></div>
+                            </td>
+                            <td class="topic-name{% if topic.unread %} topic-unread{% endif %}">
+                                <a href="{{topic.get_absolute_url}}">{{topic.name|truncatewords:10}}</a>
+                            </td>
+                        </tr>
+                        {% endfor %}
+                        </tbody>
+                        </table>
+                    {% endcache %}
+                </div>
 
                 <div class="subtle-container simple-container">
                     <div class="header"><h4><i class="icon-suitcase"></i>{% trans "Affiliates" %}<h4></div>
