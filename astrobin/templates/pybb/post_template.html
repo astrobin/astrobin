@@ -41,8 +41,8 @@
 
             <div class="post-related">
                 {% if user|pybb_may_create_post:post.topic %}
-                    <a href="{% url 'pybb:add_post' topic.id %}?quote_id={{ post.id }}" class="btn btn-mini quote-link">{% trans "quote" %}</a>
-                    <a href="#" class="btn btn-mini quote-selected-link">{% trans "quote selected" %}</a>
+                    <a href="{% url 'pybb:add_post' topic.id %}?quote_id={{ post.id }}" class="btn btn-mini bb-quote-link">{% trans "quote" %}</a>
+                    <a href="#" class="btn btn-mini bb-quote-selected-link">{% trans "quote selected" %}</a>
                 {% endif %}
 
                 {% if user.is_moderator or post|pybb_posted_by:user %}

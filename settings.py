@@ -10,7 +10,7 @@ CACHE = not DEBUG
 TEMPLATE_DEBUG = DEBUG
 MAINTENANCE_MODE = False
 READONLY_MODE = False
-MEDIA_VERSION = '97'
+MEDIA_VERSION = '98'
 LONGPOLL_ENABLED = False
 ADS_ENABLED = True
 DONATIONS_ENABLED = True
@@ -375,6 +375,8 @@ PIPELINE_CSS = {
             'css/token-input.css',
             'css/jquery.multiselect.css',
             'css/jquery.qtip.css',
+
+            'wysibb/theme/default/wbbtheme.css',
 
             'astrobin_apps_images/css/jquery.capty.css',
             'astrobin_apps_donations/css/astrobin_apps_donations.css',

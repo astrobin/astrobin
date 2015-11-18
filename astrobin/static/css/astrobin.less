@@ -3987,6 +3987,9 @@ table.post th.post-avatar {
 
 .post-form {
     margin-top: 40px;
+    li {
+        list-style: initial;
+    }
 
     input, textarea, select { width: 98%; }
     input[type="submit"] { width: auto;}
@@ -4014,4 +4017,44 @@ pre {
 
 .post-form #emoticons {
     margin-top: 8px;
+}
+
+.wysibb {
+    color: #ddd;
+    background: #404040 !important;
+    border: 1px solid #282828 !important;
+    .rounded-corners(4px);
+
+    .wysibb-toolbar, .wysibb-toolbar-container {
+        border-bottom-color: #555 !important;
+        border-right-color: #555 !important;
+    }
+
+    .wysibb-toolbar-container:hover,
+    .wysibb-toolbar-container .wysibb-toolbar-btn:hover,
+    .wysibb-toolbar-container .wysibb-toolbar-btn .btn-text:hover {
+        color: #333;
+    }
+
+    .wysibb-text-editor {
+        padding: 8px;
+    }
+}
+
+.wbb-button {
+    background: @link-color !important;
+    border-color: darken(@link-color, 10%) !important;
+
+    &:hover {
+        background: darken(@link-color, 5%) !important;
+    }
+}
+
+#wbbmodal label, #wbbmodal .div-modal-text {
+    color: #666;
+}
+
+.wysibb .wysibb-toolbar .wysibb-toolbar-container .wysibb-toolbar-btn .fonticon {
+    color: #ddd;
+    text-shadow: 0 1px 0 black;
 }
