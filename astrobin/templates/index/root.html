@@ -304,7 +304,7 @@
                                 <div class="state-indicator"></div>
                             </td>
                             <td class="topic-name{% if topic.unread %} topic-unread{% endif %}">
-                                <a href="{{topic.get_absolute_url}}">{{topic.name|truncatewords:10}}</a>
+                                <a href="{{topic.get_absolute_url}}?first-unread=1">{{topic.name|truncatewords:10}}</a>
                             </td>
                         </tr>
                         {% endfor %}
