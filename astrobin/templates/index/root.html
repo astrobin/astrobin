@@ -295,7 +295,7 @@
                 <div class="subtle-container simple-container">
                     <div class="header"><h4><i class="icon-comments"></i>{% trans "Latest from the forums" %}<h4></div>
                     {% cache 600 latest_forum_topics %}
-                        {% pybb_get_latest_topics cnt=30 as topics %}
+                        {% pybb_get_latest_topics cnt=15 as topics %}
                         <table class="table table-condensed topic-list">
                         <tbody>
                         {% for topic in topics %}
