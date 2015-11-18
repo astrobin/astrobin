@@ -1809,6 +1809,7 @@ def user_page(request, username):
 
     # Calculate some stats
     from django.template.defaultfilters import timesince
+    from pybb.models import Post
 
     member_since = None
     date_time = user.date_joined.replace(tzinfo = None)
@@ -1844,6 +1845,7 @@ def user_page(request, username):
         (_('Last login'), last_login),
         (_('Total integration time'), "%.1f %s" % (integration, _("hours"))),
         (_('Average integration time'), "%.1f %s" % (avg_integration, _("hours"))),
+        (_('Forum posts'), "%d" % Post.objects.filter(user = user).count()),
     )
 
 
