@@ -3649,6 +3649,7 @@ th.forum-name {
   position: relative;
   padding: 0 20px !important;
   height: 60px;
+  vertical-align: middle !important;
 }
 .post-header img {
   position: absolute;
@@ -3832,7 +3833,7 @@ table.post th.post-avatar {
 .topic h1,
 .forum h1,
 .category h1 {
-  margin: 42px 0 8px 0;
+  margin: 24px 0 8px 0;
   font-size: 24px;
 }
 .post-content .updated-message {
