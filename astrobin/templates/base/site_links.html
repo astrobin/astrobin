@@ -20,12 +20,7 @@
             </a>
             <ul class="dropdown-menu">
                 <li><a href="/blog/"><i class="icon-pencil"></i> {% trans "Blog" %}</a></li>
-                <li class="divider"></li>
-                <li>
-                    <a href="http://questions.astrobin.com/" target="_blank">
-                        <img src="{{STATIC_URL}}icons/flags/16/United-Kingdom.png" alt="AstroBin Questions"/> AstroBin Questions
-                    </a>
-                </li>
+                <li><a href="/forum/"><i class="icon-comments"></i> {% trans "Forum" %}</a></li>
                 <li class="divider"></li>
                 <li>
                     <a href="https://bitbucket.org/siovene/astrobin/overview" target="_blank">
@@ -104,12 +99,6 @@
                     <a href="{% url faq %}">
                         <i class="icon-question-sign"></i>
                         {% trans "FAQ" %}
-                    </a>
-                </li>
-                <li>
-                    <a href="{% url help_questions %}">
-                        <i class="icon-question-sign"></i>
-                        {% trans "AstroBin Questions" %}
                     </a>
                 </li>
                 <li>
