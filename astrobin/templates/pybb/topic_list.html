@@ -7,7 +7,11 @@
                 &nbsp;
             </th>
             <th class="topic-name">
-                {% trans "Topic" %}
+                {% if forum %}
+                    {{forum.name}}
+                {% else %}
+                    {% trans "Topic" %}
+                {% endif %}
             </th>
             <th class="topic-author hidden-phone">
                 {% trans "Author" %}

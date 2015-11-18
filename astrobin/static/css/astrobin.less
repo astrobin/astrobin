@@ -1173,16 +1173,16 @@ li.astrobin-thumbnail {
     }
 }
 
-.table caption + thead tr:first-child th,
-.table caption + thead tr:first-child td,
-.table colgroup + thead tr:first-child th,
-.table colgroup + thead tr:first-child td,
-.table thead:first-child tr:first-child th,
-.table thead:first-child tr:first-child td {
+.table caption + tr:first-child th,
+.table caption + tr:first-child td,
+.table colgroup + tr:first-child th,
+.table colgroup + tr:first-child td,
+.table :first-child tr:first-child th,
+.table :first-child tr:first-child td {
     border-top: 1px solid @link-color;
     border-bottom: 1px solid @link-color;
 }
-.table thead th {
+.table th {
     vertical-align: middle;
     a, button {
         font-weight: normal;
@@ -1191,7 +1191,7 @@ li.astrobin-thumbnail {
 .table th, .table td {
     border-color: #363636;
 }
-.table thead tr th, .table thead tr td {
+.table tr th {
     border-top: 1px solid @link-color;
     border-bottom: 1px solid @link-color;
     background-color: #272727;
@@ -3796,7 +3796,9 @@ img.flickr-photo-to-import-selected {
 }
 
 /* --- Topic/Forum table --- */
-.category-table .forum-name { width: 60%; }
+th.forum-name {
+    font-size: 18px;
+}
 
 .forum-description {
     margin: 5px;
@@ -4016,7 +4018,7 @@ table.post th.post-avatar {
 }
 
 .topic h1, .forum h1, .category h1 {
-    margin: 42px 0 8px 0;
+    margin: 24px 0 8px 0;
     font-size: 24px;
 }
 

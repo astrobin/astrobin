@@ -1,0 +1,51 @@
+{% extends 'pybb/base.html' %}
+
+{% load url from future %}
+
+{% load i18n %}
+
+{% block title %}{{ PYBB_DEFAULT_TITLE }}{% endblock title %}
+
+{% block breadcrumb %}
+    {% include "pybb/breadcrumb.html" %}
+{% endblock %}
+
+{% block content %}
+    {% if categories %}
+        <table class="table {% if category %}category-table{% elif parent_forum %}child-forums-table{% endif %}">
+        {% for category in categories %}
+            <tr class="forum-row head-row">
+                <th class="forum-status">
+                    &nbsp;
+                </th>
+                <th class="forum-name">
+                    {{category.name}}
+                </th>
+                <th class="forum-topic-count hidden-phone">
+                    {% trans "Topics" %}
+                </th>
+                <th class="forum-post-count hidden-phone">
+                    {% trans "Posts" %}
+                </th>
+                <th class="forum-last-post hidden-phone">
+                    {% trans "Last posts" %}
+                </th>
+            </tr>
+            {% include 'pybb/forum_list.html' with forum_list=category.forums_accessed category=category parent_forum='' %}
+        {% endfor %}
+        </table>
+    {% else %}
+        <h2>{% trans "Forum categories are not created" %}</h2>
+        <a href="{% url 'admin:pybb_category_add' %}">{% trans "Add a category now" %}</a>
+    {% endif %}
+    {% if user.is_authenticated %}
+        <div id='mark-all-as-read'>
+            <a href='{% url 'pybb:topic_latest' %}'>
+                {% trans "Last updates in topics" %}
+            </a>
+            <a href='{% url 'pybb:mark_all_as_read' %}'>
+                {% trans "Mark all forums as read" %}
+            </a>
+        </div>
+    {% endif %}
+{% endblock content %}
