@@ -623,7 +623,7 @@ SOUTH_MIGRATION_MODULES = {
 }
 
 
-PYBB_DEFAULT_TITLE = "AstroBin Forum"
+PYBB_DEFAULT_TITLE = "AstroBin Forum (beta)"
 PYBB_NICE_URL = True
 PYBB_PERMISSION_HANDLER = "astrobin.permissions.PyBBMPermissions"
 PYBB_ATTACHMENT_ENABLE = False
