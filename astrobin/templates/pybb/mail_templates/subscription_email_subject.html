@@ -1,2 +1,2 @@
 {% load i18n %}
-{% blocktrans with topic=post.topic.name|truncatewords:10 %}New reply to a topic you subscribe to: "{{topic}}"{% endblocktrans %}
+{% trans "New reply to a forum topic you subscribe to" %}: {{post.topic.name|truncatewords:10}}

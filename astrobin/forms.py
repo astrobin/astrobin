@@ -235,7 +235,7 @@ class UserProfileEditGearForm(forms.Form):
 class UserProfileEditPreferencesForm(forms.ModelForm):
     class Meta:
         model = UserProfile
-        fields = ['language',]
+        fields = ['language', 'receive_forum_emails',]
 
     def __init__(self, user=None, **kwargs):
         super(UserProfileEditPreferencesForm, self).__init__(**kwargs)

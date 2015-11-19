@@ -1721,6 +1721,13 @@ class UserProfile(models.Model):
         help_text=_('Automatically subscribe to topics that you answer'),
         default=True)
 
+    @property
+    def receive_emails(self):
+        return self.receive_forum_emails
+    receive_forum_emails = models.BooleanField(
+        _('New reply to a forum topic you subscribe to'),
+        default=True)
+
     def get_display_name(self):
         return self.real_name if self.real_name else self.user.__unicode__()
 
