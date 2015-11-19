@@ -8,17 +8,17 @@ msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2015-11-19 13:40+0000\n"
-"PO-Revision-Date: 2015-11-19 11:46+0000\n"
+"PO-Revision-Date: 2015-11-19 14:27+0000\n"
 "Last-Translator: csve <csve00@gmail.com>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
 "Language: ru\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"Plural-Forms: nplurals=3; plural=(n%10==1 && n%100!=11 ? 0 : n%10>=2 && n"
-"%10<=4 && (n%100<10 || n%100>=20) ? 1 : 2);\n"
+"Plural-Forms: nplurals=3; plural=(n%10==1 && n%100!=11 ? 0 : n%10>=2 && n%"
+"10<=4 && (n%100<10 || n%100>=20) ? 1 : 2);\n"
 "X-Generator: Pootle 2.5.0\n"
-"X-POOTLE-MTIME: 1447933613.228309\n"
+"X-POOTLE-MTIME: 1447943227.556218\n"
 
 #: fields.py:10
 msgid "United Kingdom"
@@ -6546,7 +6546,7 @@ msgstr "страницы"
 #: templates/pybb/mail_templates/subscription_email_subject.html:2
 #, python-format
 msgid "New reply to a topic you subscribe to: \"%(topic)s\""
-msgstr ""
+msgstr "Новый ответ в теме, на которую вы подписаны: \"%(topic)s\""
 
 #: templates/registration/activate.html:4
 #: templates/registration/activate.html:9
