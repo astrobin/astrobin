@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2015-11-18 20:32+0000\n"
+"POT-Creation-Date: 2015-11-19 13:38+0000\n"
 "PO-Revision-Date: 2013-04-29 08:29+0100\n"
 "Last-Translator: kelemenlajos <kelemenlajos@gmail.com>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -5957,6 +5957,11 @@ msgstr ""
 
 #: templates/pybb/topic_list.html:44
 msgid "pages"
+msgstr ""
+
+#: templates/pybb/mail_templates/subscription_email_subject.html:2
+#, python-format
+msgid "New reply to a topic you subscribe to: \"%(topic)s\""
 msgstr ""
 
 #: templates/registration/activate.html:4

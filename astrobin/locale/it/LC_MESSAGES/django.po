@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: AstroBin 1.0\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2015-11-18 20:32+0000\n"
+"POT-Creation-Date: 2015-11-19 13:38+0000\n"
 "PO-Revision-Date: 2015-11-18 21:07+0000\n"
 "Last-Translator: Salvatore <salvatore@iovene.com>\n"
 "Language-Team: Salvatore Iovene <salvatore@iovene.com>\n"
@@ -3732,9 +3732,9 @@ msgid ""
 "selected randomly. The images are anonymized as to not bias the selection."
 msgstr ""
 "Ecco una selezione di immagini caricate negli ultimi 7 giorni. Circa la metà "
-"di esse sono immagini che hanno ricevuto molti \"Mi piace\", e l'altra metà è "
-"stata selezionata a caso. Le immagini sono anonimizzate per non influenzare "
-"la selezione."
+"di esse sono immagini che hanno ricevuto molti \"Mi piace\", e l'altra metà "
+"è stata selezionata a caso. Le immagini sono anonimizzate per non "
+"influenzare la selezione."
 
 #: templates/iotd_choose.html:27
 msgid "Choose"
@@ -6555,6 +6555,11 @@ msgstr "Chiudi"
 #, fuzzy
 msgid "pages"
 msgstr "Immagini"
+
+#: templates/pybb/mail_templates/subscription_email_subject.html:2
+#, python-format
+msgid "New reply to a topic you subscribe to: \"%(topic)s\""
+msgstr ""
 
 #: templates/registration/activate.html:4
 #: templates/registration/activate.html:9

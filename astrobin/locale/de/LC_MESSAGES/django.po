@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: AstroBin 1.4\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2015-11-18 20:30+0000\n"
+"POT-Creation-Date: 2015-11-19 13:36+0000\n"
 "PO-Revision-Date: 2015-11-12 17:40+0000\n"
 "Last-Translator: Christian <info@christian-wiederer.de>\n"
 "Language-Team: German <LL@li.org>\n"
@@ -6602,6 +6602,11 @@ msgstr "Schließen"
 #, fuzzy
 msgid "pages"
 msgstr "Bilder"
+
+#: templates/pybb/mail_templates/subscription_email_subject.html:2
+#, python-format
+msgid "New reply to a topic you subscribe to: \"%(topic)s\""
+msgstr ""
 
 # "Account" würde auch im Deutschen gehen, oder nicht?
 #: templates/registration/activate.html:4
