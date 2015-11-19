@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: AstroBin 1.9\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2015-11-19 13:41+0000\n"
+"POT-Creation-Date: 2015-11-19 20:48+0000\n"
 "PO-Revision-Date: 2014-04-28 13:58+0000\n"
 "Last-Translator: ecloud <yecloud@me.com>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -1017,7 +1017,7 @@ msgstr ""
 "如果想分享您的TIFF或FITS图像文件，请在这里输入该文件链接。遗憾的是，AstroBin"
 "不能提供保存这些文件，所以您将不得不托管它们到您的个人空间。"
 
-#: forms.py:62 models.py:2064 models.py:2146 templates/gear/page.html:197
+#: forms.py:62 models.py:2071 models.py:2153 templates/gear/page.html:197
 #: templates/image/detail/image_title.html:14
 msgid "Link"
 msgstr "链接"
@@ -1287,7 +1287,7 @@ msgstr "制造"
 msgid "The make, brand, producer or developer of this product."
 msgstr "该产品的制造商，品牌，生产商或者开发商"
 
-#: forms.py:898 forms.py:959 models.py:197 models.py:1762 models.py:1901
+#: forms.py:898 forms.py:959 models.py:197 models.py:1769 models.py:1908
 #: templates/gear/fix.html:32 templates/gear/fix.html.py:33
 #: templates/gear/fix.html:34 templates/gear/fix.html.py:42
 #: templates/gear/fix.html:47 templates/gear/fix.html.py:52
@@ -1933,7 +1933,7 @@ msgid ""
 "Drag items from the right side to the left side, or click on the plus sign."
 msgstr "将这个项目从右边拖到左边，或者点击“+”号"
 
-#: models.py:702 models.py:1909 models.py:2153 templates/gear/page.html:47
+#: models.py:702 models.py:1916 models.py:2160 templates/gear/page.html:47
 #: templates/image/detail/image_description.html:7
 msgid "Description"
 msgstr "描述"
@@ -1965,7 +1965,7 @@ msgstr "（没有标题）"
 msgid "Please use the following format: yyyy-mm-dd."
 msgstr "请使用yyyy-mm-dd的日期格式"
 
-#: models.py:1278 models.py:1484 models.py:2129
+#: models.py:1278 models.py:1484 models.py:2136
 msgid "Image"
 msgstr "图像"
 
@@ -2303,136 +2303,141 @@ msgstr ""
 msgid "Automatically subscribe to topics that you answer"
 msgstr ""
 
-#: models.py:1763
+#: models.py:1728
+#: templates/pybb/mail_templates/subscription_email_subject.html:2
+msgid "New reply to a forum topic you subscribe to"
+msgstr ""
+
+#: models.py:1770
 msgid "A descriptive name, e.g. 'Home observatory' or 'Mount Whitney'."
 msgstr ""
 
-#: models.py:1769
+#: models.py:1776
 msgid "City"
 msgstr "城市"
 
-#: models.py:1770
+#: models.py:1777
 msgid "If this location is not in a city, use the name of the closest city."
 msgstr "如果位置不在城市里，请用最近的城市"
 
-#: models.py:1776
+#: models.py:1783
 msgid "State or province"
 msgstr "省或直辖市"
 
-#: models.py:1781
+#: models.py:1788
 msgid "Country"
 msgstr "国家"
 
-#: models.py:1798
+#: models.py:1805
 msgid "North"
 msgstr "北方"
 
-#: models.py:1798
+#: models.py:1805
 msgid "South"
 msgstr "南方"
 
-#: models.py:1799
+#: models.py:1806
 msgid "North or south"
 msgstr "北或南"
 
-#: models.py:1814
+#: models.py:1821
 msgid "East"
 msgstr "东方"
 
-#: models.py:1814
+#: models.py:1821
 msgid "West"
 msgstr "西方"
 
-#: models.py:1815
+#: models.py:1822
 msgid "East or West"
 msgstr "东或西"
 
-#: models.py:1819
+#: models.py:1826
 msgid "Altitude"
 msgstr "海拔"
 
-#: models.py:1820
+#: models.py:1827
 msgid "In meters."
 msgstr "单位米"
 
-#: models.py:1902
+#: models.py:1909
 msgid "The name of the website or app that wishes to use the APIs."
 msgstr "想要使用API函数的网站或者应用的名字"
 
-#: models.py:1910
+#: models.py:1917
 msgid ""
 "Please explain the purpose of your application, and how you intend to use "
 "the API."
 msgstr "请解释一下您的应用的目的，或者您打算怎样使用API"
 
-#: models.py:2041
+#: models.py:2048
 msgid "AUD - Australian dollars"
 msgstr "AUD-澳元"
 
-#: models.py:2042
+#: models.py:2049
 msgid "CAD - Canadian dollars"
 msgstr "CAD-加拿大元"
 
-#: models.py:2043
+#: models.py:2050
 msgid "CHF - Swiss francs"
 msgstr "CHF-瑞士法郎"
 
-#: models.py:2044
+#: models.py:2051
 msgid "EUR - Euros"
 msgstr "EUR-欧元"
 
-#: models.py:2045
+#: models.py:2052
 msgid "GPB - Pound stelings"
 msgstr "GPB-英镑"
 
-#: models.py:2046
+#: models.py:2053
 msgid "PLN - Polish zloty"
 msgstr ""
 
-#: models.py:2047
+#: models.py:2054
 msgid "SEK - Swedish krona"
 msgstr ""
 
-#: models.py:2048
+#: models.py:2055
 msgid "USD - American dollars"
 msgstr "USD-美元"
 
-#: models.py:2054 models.py:2104
+#: models.py:2061 models.py:2111
 msgid "Producer"
 msgstr "制作程序"
 
-#: models.py:2065 models.py:2147
+#: models.py:2072 models.py:2154
 msgid "The link to this product's page on your website."
 msgstr ""
 
-#: models.py:2073
+#: models.py:2080
 msgid "Price"
 msgstr "价格"
 
-#: models.py:2081
+#: models.py:2088
 msgid "Currency"
 msgstr "货币"
 
-#: models.py:2097
+#: models.py:2104
 msgid "Retailed gear items"
 msgstr ""
 
-#: models.py:2113
+#: models.py:2120
 msgid "Proper make"
 msgstr ""
 
-#: models.py:2114
+#: models.py:2121
 msgid ""
 "Sometimes, product make/brand/producer/developer names are not written "
 "properly by the users. Write here the proper make/brand/producer/developer "
 "name."
 msgstr ""
 
-#: models.py:2121
+#: models.py:2128
 msgid "Proper name"
 msgstr ""
 
-#: models.py:2122
+#: models.py:2129
 msgid ""
 "Sometimes, product names are not written properly by the users. Write here "
 "the proper product name, not including the make/brand/producer/developer "
@@ -2440,7 +2445,7 @@ msgid ""
 "so try to use a generic version of your product's name."
 msgstr ""
 
-#: models.py:2130
+#: models.py:2137
 msgid ""
 "The official, commercial image for this product. Upload an image via the "
 "regular uploading interface, set its subject type to \"Gear\", and then "
@@ -2448,22 +2453,22 @@ msgid ""
 "appear in the commercial page."
 msgstr ""
 
-#: models.py:2138
+#: models.py:2145
 msgid "Tagline"
 msgstr ""
 
-#: models.py:2139
+#: models.py:2146
 msgid ""
 "A memorable phrase that will sum up this product, for marketing purposes."
 msgstr ""
 
-#: models.py:2154
+#: models.py:2161
 msgid ""
 "Here you can write the full commercial description of your product. You can "
 "use some <a href=\"/faq/#comments\">formatting rules</a>."
 msgstr ""
 
-#: models.py:2173
+#: models.py:2180
 msgid "Commercial gear items"
 msgstr ""
 
@@ -5981,11 +5986,6 @@ msgstr ""
 #, fuzzy
 msgid "pages"
 msgstr "图片"
-
-#: templates/pybb/mail_templates/subscription_email_subject.html:2
-#, python-format
-msgid "New reply to a topic you subscribe to: \"%(topic)s\""
-msgstr ""
 
 #: templates/registration/activate.html:4
 #: templates/registration/activate.html:9

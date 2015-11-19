@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: 0.9\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2015-11-19 13:38+0000\n"
+"POT-Creation-Date: 2015-11-19 20:44+0000\n"
 "PO-Revision-Date: 2014-04-27 07:27+0000\n"
 "Last-Translator: naavis <svnaavis@gmail.com>\n"
 "Language-Team: Finnish <tanja@iovene.com>\n"
@@ -1018,7 +1018,7 @@ msgstr ""
 "tähän. Valitettavasti AstroBin ei tarjoa levytilaa näiden jakamiseen "
 "toistaiseksi, joten joudut jakamaan ne omalla kotisivutilallasi."
 
-#: forms.py:62 models.py:2064 models.py:2146 templates/gear/page.html:197
+#: forms.py:62 models.py:2071 models.py:2153 templates/gear/page.html:197
 #: templates/image/detail/image_title.html:14
 msgid "Link"
 msgstr "Linkki"
@@ -1293,7 +1293,7 @@ msgstr "Merkki"
 msgid "The make, brand, producer or developer of this product."
 msgstr "Tuotteen valmistaja tai merkki."
 
-#: forms.py:898 forms.py:959 models.py:197 models.py:1762 models.py:1901
+#: forms.py:898 forms.py:959 models.py:197 models.py:1769 models.py:1908
 #: templates/gear/fix.html:32 templates/gear/fix.html.py:33
 #: templates/gear/fix.html:34 templates/gear/fix.html.py:42
 #: templates/gear/fix.html:47 templates/gear/fix.html.py:52
@@ -1937,7 +1937,7 @@ msgid ""
 "Drag items from the right side to the left side, or click on the plus sign."
 msgstr "Raahaa oikeasta reunasta vasempaan tai klikkaa plus-merkkiä."
 
-#: models.py:702 models.py:1909 models.py:2153 templates/gear/page.html:47
+#: models.py:702 models.py:1916 models.py:2160 templates/gear/page.html:47
 #: templates/image/detail/image_description.html:7
 msgid "Description"
 msgstr "Kuvaus"
@@ -1970,7 +1970,7 @@ msgstr "(ei otsikkoa)"
 msgid "Please use the following format: yyyy-mm-dd."
 msgstr "Käytä seuraavaa muotoa: vvvv-kk-pp."
 
-#: models.py:1278 models.py:1484 models.py:2129
+#: models.py:1278 models.py:1484 models.py:2136
 msgid "Image"
 msgstr "Kuva"
 
@@ -2315,127 +2315,132 @@ msgstr ""
 msgid "Automatically subscribe to topics that you answer"
 msgstr ""
 
-#: models.py:1763
+#: models.py:1728
+#: templates/pybb/mail_templates/subscription_email_subject.html:2
+msgid "New reply to a forum topic you subscribe to"
+msgstr ""
+
+#: models.py:1770
 msgid "A descriptive name, e.g. 'Home observatory' or 'Mount Whitney'."
 msgstr "Kuvaava nimi, esim. \"Takapihaobservatorio\" tai \"Mount Whitney\"."
 
-#: models.py:1769
+#: models.py:1776
 msgid "City"
 msgstr "Kaupunki"
 
-#: models.py:1770
+#: models.py:1777
 msgid "If this location is not in a city, use the name of the closest city."
 msgstr "Jos paikkakunta ei ole kaupunki, syötä lähimmän kaupungin nimi."
 
-#: models.py:1776
+#: models.py:1783
 msgid "State or province"
 msgstr "Lääni, osavaltio tai provinssi"
 
-#: models.py:1781
+#: models.py:1788
 msgid "Country"
 msgstr "Valtio"
 
-#: models.py:1798
+#: models.py:1805
 msgid "North"
 msgstr "Pohjoinen"
 
-#: models.py:1798
+#: models.py:1805
 msgid "South"
 msgstr "Etelä"
 
-#: models.py:1799
+#: models.py:1806
 msgid "North or south"
 msgstr "DeutschPohjois tai etelä"
 
-#: models.py:1814
+#: models.py:1821
 msgid "East"
 msgstr "Itä"
 
-#: models.py:1814
+#: models.py:1821
 msgid "West"
 msgstr "Länsi"
 
-#: models.py:1815
+#: models.py:1822
 msgid "East or West"
 msgstr "Itä tai länsi"
 
-#: models.py:1819
+#: models.py:1826
 msgid "Altitude"
 msgstr "Korkeus"
 
-#: models.py:1820
+#: models.py:1827
 msgid "In meters."
 msgstr "Metreissä."
 
-#: models.py:1902
+#: models.py:1909
 msgid "The name of the website or app that wishes to use the APIs."
 msgstr "Rajapinnan käyttöä toivovan sivuston tai ohjelman nimi."
 
-#: models.py:1910
+#: models.py:1917
 msgid ""
 "Please explain the purpose of your application, and how you intend to use "
 "the API."
 msgstr ""
 "Selitä ohjelman tarkoitus, ja miten aiot hyödyntää AstroBinin rajapintoja."
 
-#: models.py:2041
+#: models.py:2048
 msgid "AUD - Australian dollars"
 msgstr "AUD - Australian dollari"
 
-#: models.py:2042
+#: models.py:2049
 msgid "CAD - Canadian dollars"
 msgstr "CAD - Kanadan dollari"
 
-#: models.py:2043
+#: models.py:2050
 msgid "CHF - Swiss francs"
 msgstr "CHF - Sveitsin frangi"
 
-#: models.py:2044
+#: models.py:2051
 msgid "EUR - Euros"
 msgstr "EUR - Euro"
 
-#: models.py:2045
+#: models.py:2052
 msgid "GPB - Pound stelings"
 msgstr "GBP - Englannin punta"
 
-#: models.py:2046
+#: models.py:2053
 msgid "PLN - Polish zloty"
 msgstr "PLN - Puolan zloty"
 
-#: models.py:2047
+#: models.py:2054
 msgid "SEK - Swedish krona"
 msgstr "SEK - Ruotsin kruunu"
 
-#: models.py:2048
+#: models.py:2055
 msgid "USD - American dollars"
 msgstr "USD - Amerikan dollari"
 
-#: models.py:2054 models.py:2104
+#: models.py:2061 models.py:2111
 msgid "Producer"
 msgstr "Valmistaja"
 
-#: models.py:2065 models.py:2147
+#: models.py:2072 models.py:2154
 msgid "The link to this product's page on your website."
 msgstr "Linkki tämän tuotteen sivuun sivustollasi."
 
-#: models.py:2073
+#: models.py:2080
 msgid "Price"
 msgstr "Hinta"
 
-#: models.py:2081
+#: models.py:2088
 msgid "Currency"
 msgstr "Valuutta"
 
-#: models.py:2097
+#: models.py:2104
 #, fuzzy
 msgid "Retailed gear items"
 msgstr "kommentoi laitetta"
 
-#: models.py:2113
+#: models.py:2120
 msgid "Proper make"
 msgstr ""
 
-#: models.py:2114
+#: models.py:2121
 msgid ""
 "Sometimes, product make/brand/producer/developer names are not written "
 "properly by the users. Write here the proper make/brand/producer/developer "
@@ -2444,11 +2449,11 @@ msgstr ""
 "Joskus käyttäjät eivät kirjoita tuotteiden mallia/merkkiä/valmistaja/"
 "kehittäjää oikein. Kirjoita tähän oikea malli/merkki/valmistaja/kehittäjä."
 
-#: models.py:2121
+#: models.py:2128
 msgid "Proper name"
 msgstr ""
 
-#: models.py:2122
+#: models.py:2129
 msgid ""
 "Sometimes, product names are not written properly by the users. Write here "
 "the proper product name, not including the make/brand/producer/developer "
@@ -2461,7 +2466,7 @@ msgstr ""
 "tuoteversiota voidaan niputtaa yhteen, joten pyri käyttämään mahdollisimman "
 "geneeristä versiota tuotenimestä."
 
-#: models.py:2130
+#: models.py:2137
 msgid ""
 "The official, commercial image for this product. Upload an image via the "
 "regular uploading interface, set its subject type to \"Gear\", and then "
@@ -2473,16 +2478,16 @@ msgstr ""
 "valitse kuva listasta. Jos lataat kuvasta useita versioita, ne kaikki "
 "näkyvät tuotteen sivulla."
 
-#: models.py:2138
+#: models.py:2145
 msgid "Tagline"
 msgstr ""
 
-#: models.py:2139
+#: models.py:2146
 msgid ""
 "A memorable phrase that will sum up this product, for marketing purposes."
 msgstr "Helposti muistettava yhteenveto tuotteesta markkinointitarkoituksiin."
 
-#: models.py:2154
+#: models.py:2161
 msgid ""
 "Here you can write the full commercial description of your product. You can "
 "use some <a href=\"/faq/#comments\">formatting rules</a>."
@@ -2490,7 +2495,7 @@ msgstr ""
 "Tähän voit kirjoittaa täyden kuvauksen tuotteestasi. Voit käyttää joitakin "
 "<a href=\"/faq/#comments\">muotoiluja</a>."
 
-#: models.py:2173
+#: models.py:2180
 msgid "Commercial gear items"
 msgstr "Kaupalliset laitteet"
 
@@ -6456,11 +6461,6 @@ msgstr "Sulje"
 #, fuzzy
 msgid "pages"
 msgstr "Kuvia"
-
-#: templates/pybb/mail_templates/subscription_email_subject.html:2
-#, python-format
-msgid "New reply to a topic you subscribe to: \"%(topic)s\""
-msgstr ""
 
 #: templates/registration/activate.html:4
 #: templates/registration/activate.html:9
