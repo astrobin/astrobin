@@ -7,8 +7,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2015-11-18 20:36+0000\n"
-"PO-Revision-Date: 2015-11-06 17:13+0000\n"
+"POT-Creation-Date: 2015-11-19 13:42+0000\n"
+"PO-Revision-Date: 2015-11-19 11:41+0000\n"
 "Last-Translator: csve <csve00@gmail.com>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
 "Language: ru\n"
@@ -18,7 +18,7 @@ msgstr ""
 "Plural-Forms: nplurals=3; plural=(n%10==1 && n%100!=11 ? 0 : n%10>=2 && n"
 "%10<=4 && (n%100<10 || n%100>=20) ? 1 : 2);\n"
 "X-Generator: Pootle 2.5.0\n"
-"X-POOTLE-MTIME: 1446830015.318154\n"
+"X-POOTLE-MTIME: 1447933267.196554\n"
 
 #: folders.py:82 models.py:215 models.py:283
 #: templates/rawdata/privatesharedfolder_detail.html:84
@@ -270,13 +270,14 @@ msgstr ""
 "библиотеке дарков? Может вы просто хотите иметь возможность создавать "
 "резервные копии ваших RAW-файлов в надежном месте?"
 
+# Тут была опечатка
 #: templates/rawdata/help_01.html:26
 msgid ""
 "<strong>AstroBin Raw Data</strong> is the answer! For a very modest price, "
 "you can store your whole <strong>raw data library</strong> online, where it "
 "will be securely accessible only by you."
 msgstr ""
-"<strong>AstroBin Raw Data</strong> ваше решение! За скромную цены, вы можете "
+"<strong>AstroBin Raw Data</strong> ваше решение! За скромную цену, вы можете "
 "приобрести целую <strong>библиотеку raw-данных</strong> онлайн, где всё "
 "будет в безопасности и доступно только вам."
 

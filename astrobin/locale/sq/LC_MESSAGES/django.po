@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: AstroBin 1.4\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2015-11-18 20:34+0000\n"
+"POT-Creation-Date: 2015-11-19 13:40+0000\n"
 "PO-Revision-Date: 2015-01-20 21:30+0000\n"
 "Last-Translator: jordi <jordi.inyigo@gmail.com>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -6450,6 +6450,11 @@ msgstr ""
 #, fuzzy
 msgid "pages"
 msgstr "Foto"
+
+#: templates/pybb/mail_templates/subscription_email_subject.html:2
+#, python-format
+msgid "New reply to a topic you subscribe to: \"%(topic)s\""
+msgstr ""
 
 #: templates/registration/activate.html:4
 #: templates/registration/activate.html:9

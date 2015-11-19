@@ -7,8 +7,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: AstroBin 1.0\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2015-11-18 20:32+0000\n"
-"PO-Revision-Date: 2015-11-18 21:07+0000\n"
+"POT-Creation-Date: 2015-11-19 13:38+0000\n"
+"PO-Revision-Date: 2015-11-19 13:48+0000\n"
 "Last-Translator: Salvatore <salvatore@iovene.com>\n"
 "Language-Team: Salvatore Iovene <salvatore@iovene.com>\n"
 "Language: it\n"
@@ -17,7 +17,7 @@ msgstr ""
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=(n != 1);\n"
 "X-Generator: Pootle 2.5.0\n"
-"X-POOTLE-MTIME: 1447880856.882733\n"
+"X-POOTLE-MTIME: 1447940922.935774\n"
 
 #: fields.py:10
 msgid "United Kingdom"
@@ -3732,9 +3732,9 @@ msgid ""
 "selected randomly. The images are anonymized as to not bias the selection."
 msgstr ""
 "Ecco una selezione di immagini caricate negli ultimi 7 giorni. Circa la metà "
-"di esse sono immagini che hanno ricevuto molti \"Mi piace\", e l'altra metà è "
-"stata selezionata a caso. Le immagini sono anonimizzate per non influenzare "
-"la selezione."
+"di esse sono immagini che hanno ricevuto molti \"Mi piace\", e l'altra metà "
+"è stata selezionata a caso. Le immagini sono anonimizzate per non "
+"influenzare la selezione."
 
 #: templates/iotd_choose.html:27
 msgid "Choose"
@@ -6509,52 +6509,53 @@ msgid "Open topic"
 msgstr "Apri argomento"
 
 #: templates/pybb/topic.html:65
-#, fuzzy
 msgid "Close topic"
-msgstr "Chiudi"
+msgstr "Chiudi argomento"
 
 #: templates/pybb/topic.html:76
 msgid "Unsubscribe"
-msgstr ""
+msgstr "Annulla sottoscrizione"
 
 #: templates/pybb/topic.html:78
 msgid "Subscribe"
-msgstr ""
+msgstr "Sottoscrivi"
 
 #: templates/pybb/topic.html:94
 msgid "Subscribers"
-msgstr ""
+msgstr "Sottoscritti"
 
 #: templates/pybb/topic_list.html:13
 msgid "Topic"
-msgstr ""
+msgstr "Argomento"
 
 #: templates/pybb/topic_list.html:17
 msgid "Author"
-msgstr ""
+msgstr "Autore"
 
 #: templates/pybb/topic_list.html:26
-#, fuzzy
 msgid "Last post"
-msgstr "Est o ovest"
+msgstr "Ultimo post"
 
 #: templates/pybb/topic_list.html:38
 msgid "Go to first unread post"
-msgstr ""
+msgstr "Vai al primo messaggio non letto"
 
 #: templates/pybb/topic_list.html:39
 msgid "Sticky"
-msgstr ""
+msgstr "In evidenza"
 
 #: templates/pybb/topic_list.html:40
-#, fuzzy
 msgid "Closed"
-msgstr "Chiudi"
+msgstr "Chiuso"
 
 #: templates/pybb/topic_list.html:44
-#, fuzzy
 msgid "pages"
-msgstr "Immagini"
+msgstr "pagine"
+
+#: templates/pybb/mail_templates/subscription_email_subject.html:2
+#, python-format
+msgid "New reply to a topic you subscribe to: \"%(topic)s\""
+msgstr "Nuova risposta ad un argomento che segui: \"%(topic)s\""
 
 #: templates/registration/activate.html:4
 #: templates/registration/activate.html:9

@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: AstroBin 1.0\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2015-11-18 20:31+0000\n"
+"POT-Creation-Date: 2015-11-19 13:37+0000\n"
 "PO-Revision-Date: 2012-01-03 07:36-0500\n"
 "Last-Translator: Salvatore Iovene <salvatore@iovene.com>\n"
 "Language-Team: Salvatore Iovene <salvatore@iovene.com>\n"
@@ -5957,6 +5957,11 @@ msgstr ""
 
 #: templates/pybb/topic_list.html:44
 msgid "pages"
+msgstr ""
+
+#: templates/pybb/mail_templates/subscription_email_subject.html:2
+#, python-format
+msgid "New reply to a topic you subscribe to: \"%(topic)s\""
 msgstr ""
 
 #: templates/registration/activate.html:4

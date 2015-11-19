@@ -7,8 +7,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2015-11-18 20:34+0000\n"
-"PO-Revision-Date: 2015-11-12 14:11+0000\n"
+"POT-Creation-Date: 2015-11-19 13:40+0000\n"
+"PO-Revision-Date: 2015-11-19 11:46+0000\n"
 "Last-Translator: csve <csve00@gmail.com>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
 "Language: ru\n"
@@ -18,7 +18,7 @@ msgstr ""
 "Plural-Forms: nplurals=3; plural=(n%10==1 && n%100!=11 ? 0 : n%10>=2 && n"
 "%10<=4 && (n%100<10 || n%100>=20) ? 1 : 2);\n"
 "X-Generator: Pootle 2.5.0\n"
-"X-POOTLE-MTIME: 1447337499.596480\n"
+"X-POOTLE-MTIME: 1447933613.228309\n"
 
 #: fields.py:10
 msgid "United Kingdom"
@@ -2312,29 +2312,28 @@ msgid "Language"
 msgstr "Язык"
 
 #: models.py:1700
-#, fuzzy
 msgid "Signature"
-msgstr "Сатурн"
+msgstr "Сигнатура"
 
 #: models.py:1705
 msgid "Signature HTML Version"
-msgstr ""
+msgstr "Сигнатура версии HTML"
 
 #: models.py:1710
 msgid "Show signatures"
-msgstr ""
+msgstr "Показать сигнатуры"
 
 #: models.py:1715
 msgid "Post count"
-msgstr ""
+msgstr "Количество сообщений"
 
 #: models.py:1720
 msgid "Automatically subscribe"
-msgstr ""
+msgstr "Автоматическая подписка"
 
 #: models.py:1721
 msgid "Automatically subscribe to topics that you answer"
-msgstr ""
+msgstr "Подписываться автоматом на темы с вашими ответами"
 
 #: models.py:1763
 msgid "A descriptive name, e.g. 'Home observatory' or 'Mount Whitney'."
@@ -2750,9 +2749,8 @@ msgid "Average integration time"
 msgstr "Среднее накопление сигнала"
 
 #: views.py:1848
-#, fuzzy
 msgid "Forum posts"
-msgstr "Форумы"
+msgstr "Сообщения на форуме"
 
 #: views.py:2339
 msgid ""
@@ -3741,6 +3739,9 @@ msgid ""
 "them are images that received lots of likes, and the other half were "
 "selected randomly. The images are anonymized as to not bias the selection."
 msgstr ""
+"Это отборный изображения, размещенные за последние 7 дней. Около половины из "
+"них набрали множество лайков, остальная часть была выбрана случайным "
+"образом. Изображения анонимны для избежания влияния имени автора на выбор."
 
 #: templates/iotd_choose.html:27
 msgid "Choose"
@@ -3836,9 +3837,8 @@ msgstr "Дневник"
 
 #: templates/maintenance_base.html:97 templates/base/footer.html:18
 #: templates/base/site_links.html:23
-#, fuzzy
 msgid "Forum"
-msgstr "Форумы"
+msgstr "Форум"
 
 #: templates/maintenance_base.html:117 templates/base/site_links.html:49
 #: templates/image/detail/iotd_banner.html:10 templates/index/root.html:75
@@ -4406,7 +4406,7 @@ msgstr "Пожалуйста выберите ваш язык из списка 
 
 #: templates/base/user_links_entries.html:173
 msgid "Raw data"
-msgstr "RAW(сырые) данные"
+msgstr "RAW данные"
 
 #: templates/base/user_links_entries.html:179
 #: templates/user/profile-subnav.html:35
@@ -5608,9 +5608,8 @@ msgstr ""
 "людей!"
 
 #: templates/index/root.html:296
-#, fuzzy
 msgid "Latest from the forums"
-msgstr "А что плохого в форумах?"
+msgstr "Новейшее на форуме"
 
 #: templates/index/root.html:322
 msgid "Do you want your product here?"
@@ -6424,134 +6423,130 @@ msgstr ""
 
 #: templates/pybb/forum_list.html:9
 msgid "Hidden"
-msgstr ""
+msgstr "Скрытое"
 
 #: templates/pybb/forum_list.html:28
 msgid "No forums created"
-msgstr ""
+msgstr "Форумы не созданы"
 
 #: templates/pybb/forum_list.html:29
 msgid "Add forum now"
-msgstr ""
+msgstr "Добавить форум сейчас"
 
 #: templates/pybb/index.html:25
 msgid "Topics"
-msgstr ""
+msgstr "Темы"
 
 #: templates/pybb/index.html:28 templates/pybb/topic.html:28
 #: templates/pybb/topic.html.py:48 templates/pybb/topic_list.html:20
 msgid "Posts"
-msgstr ""
+msgstr "Сообщения"
 
 #: templates/pybb/index.html:31
-#, fuzzy
 msgid "Last posts"
-msgstr "Восток или Запад"
+msgstr "Последние сообщения"
 
 #: templates/pybb/index.html:38
 msgid "Forum categories are not created"
-msgstr ""
+msgstr "Категории форума не созданы"
 
 #: templates/pybb/index.html:39
 msgid "Add a category now"
-msgstr ""
+msgstr "Добавить категорию сейчас"
 
 #: templates/pybb/index.html:44 templates/pybb/latest_topics.html:7
 #: templates/pybb/latest_topics.html:10
 msgid "Last updates in topics"
-msgstr ""
+msgstr "Последние обновления в темах"
 
 #: templates/pybb/index.html:47
 msgid "Mark all forums as read"
-msgstr ""
+msgstr "Отметить все форумы прочитанными"
 
 #: templates/pybb/latest_topics.html:32
 msgid "Mark all topics as read"
-msgstr ""
+msgstr "Отметить все темы прочитанными"
 
 #: templates/pybb/post_template.html:39
-#, fuzzy
 msgid "Edited"
-msgstr "Править"
+msgstr "Отредактировано"
 
 #: templates/pybb/post_template.html:44
-#, fuzzy
 msgid "quote"
-msgstr "цитируемый текст"
+msgstr "Цитата"
 
 #: templates/pybb/post_template.html:45
-#, fuzzy
 msgid "quote selected"
-msgstr "# выбрано"
+msgstr "цитата выбрана"
 
 #: templates/pybb/post_template.html:53
-#, fuzzy
 msgid "Delete post?"
-msgstr "Удалить аккаунт"
+msgstr "Удалить сообщение?"
 
 #: templates/pybb/post_template.html:56
 msgid "Approve post"
-msgstr ""
+msgstr "Подтвердить сообщение"
 
 #: templates/pybb/topic.html:57
 msgid "Unstick topic"
-msgstr ""
+msgstr "Открепить тему"
 
 #: templates/pybb/topic.html:59
 msgid "Stick topic"
-msgstr ""
+msgstr "Прикрепить тему"
 
 #: templates/pybb/topic.html:63
 msgid "Open topic"
-msgstr ""
+msgstr "Создать тему"
 
 #: templates/pybb/topic.html:65
-#, fuzzy
 msgid "Close topic"
-msgstr "Закрыть"
+msgstr "Закрыть тему"
 
 #: templates/pybb/topic.html:76
 msgid "Unsubscribe"
-msgstr ""
+msgstr "Отписаться"
 
 #: templates/pybb/topic.html:78
 msgid "Subscribe"
-msgstr ""
+msgstr "Подписаться"
 
 #: templates/pybb/topic.html:94
 msgid "Subscribers"
-msgstr ""
+msgstr "Подписчики"
 
 #: templates/pybb/topic_list.html:13
 msgid "Topic"
-msgstr ""
+msgstr "Темы"
 
 #: templates/pybb/topic_list.html:17
 msgid "Author"
-msgstr ""
+msgstr "Автор"
 
 #: templates/pybb/topic_list.html:26
-#, fuzzy
 msgid "Last post"
-msgstr "Восток или Запад"
+msgstr "Последнее сообщение"
 
 #: templates/pybb/topic_list.html:38
 msgid "Go to first unread post"
-msgstr ""
+msgstr "Перейти к первому непрочитанному сообщению"
 
 #: templates/pybb/topic_list.html:39
 msgid "Sticky"
-msgstr ""
+msgstr "Прикрепленный"
 
 #: templates/pybb/topic_list.html:40
-#, fuzzy
 msgid "Closed"
-msgstr "Закрыть"
+msgstr "Закрыто"
 
 #: templates/pybb/topic_list.html:44
-#, fuzzy
 msgid "pages"
-msgstr "Изображения"
+msgstr "страницы"
+
+#: templates/pybb/mail_templates/subscription_email_subject.html:2
+#, python-format
+msgid "New reply to a topic you subscribe to: \"%(topic)s\""
+msgstr ""
 
 #: templates/registration/activate.html:4
 #: templates/registration/activate.html:9

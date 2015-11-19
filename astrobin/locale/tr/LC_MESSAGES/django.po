@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: 1.4\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2015-11-18 20:35+0000\n"
+"POT-Creation-Date: 2015-11-19 13:41+0000\n"
 "PO-Revision-Date: 2012-07-19 18:56+0100\n"
 "Last-Translator: bilgebay <bilgebay@gmail.com>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -6461,6 +6461,11 @@ msgstr ""
 #, fuzzy
 msgid "pages"
 msgstr "Resim sayısı"
+
+#: templates/pybb/mail_templates/subscription_email_subject.html:2
+#, python-format
+msgid "New reply to a topic you subscribe to: \"%(topic)s\""
+msgstr ""
 
 #: templates/registration/activate.html:4
 #: templates/registration/activate.html:9
