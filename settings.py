@@ -624,6 +624,7 @@ SOUTH_MIGRATION_MODULES = {
 
 
 PYBB_DEFAULT_TITLE = "AstroBin Forum (beta)"
+PYBB_DEFAULT_FROM_EMAIL = "AstroBin Forum <noreply@astrobin.com>"
 PYBB_NICE_URL = True
 PYBB_PERMISSION_HANDLER = "astrobin.permissions.PyBBMPermissions"
 PYBB_ATTACHMENT_ENABLE = False
