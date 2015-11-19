@@ -76,9 +76,9 @@
             var selectedText = getSelectedText();
             if (selectedText != '') {
                 var username = '';
-                if ($(this).closest('.post-row').length == 1 &&
-                    $(this).closest('.post-row').find('.post-username').length == 1) {
-                    username = $.trim($(this).closest('.post').find('.post-username').text());
+                if ($(this).closest('.post').length == 1 &&
+                    $(this).closest('.post').find('.post-author a').length == 1) {
+                    username = $.trim($(this).closest('.post').find('.post-author a').text());
                 }
                 if (textarea.bbcode() != "")
                     textarea.insertAtCursor('\n');
