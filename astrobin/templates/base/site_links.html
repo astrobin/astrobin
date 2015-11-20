@@ -22,6 +22,9 @@
             <ul class="dropdown-menu">
                 <li><a href="{% url 'pybb:index' %}"><i class="icon-comments"></i> {% trans "Home" %}</a></li>
                 <li><a href="{% url 'pybb:topic_latest' %}"><i class="icon-sort-by-attributes-alt"></i> {% trans "Latest topics" %}</a></li>
+                {% if request.user.is_authenticated %}
+                <li><a href="{% url 'pybb:topic_subscribed' %}"><i class="icon-eye-open"></i> {% trans "Subscribed topics" %}</a></li>
+                {% endif %}
             </ul>
         </li>
 
