@@ -8,7 +8,7 @@ msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2015-11-19 20:47+0000\n"
-"PO-Revision-Date: 2015-11-19 21:06+0000\n"
+"PO-Revision-Date: 2015-11-20 05:03+0000\n"
 "Last-Translator: csve <csve00@gmail.com>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
 "Language: ru\n"
@@ -18,7 +18,7 @@ msgstr ""
 "Plural-Forms: nplurals=3; plural=(n%10==1 && n%100!=11 ? 0 : n%10>=2 && n%"
 "10<=4 && (n%100<10 || n%100>=20) ? 1 : 2);\n"
 "X-Generator: Pootle 2.5.0\n"
-"X-POOTLE-MTIME: 1447967179.821394\n"
+"X-POOTLE-MTIME: 1447995797.712713\n"
 
 #: fields.py:10
 msgid "United Kingdom"
@@ -4413,10 +4413,11 @@ msgstr "Пожалуйста выберите ваш язык из списка 
 msgid "Raw data"
 msgstr "RAW данные"
 
+# Строка из меню пользователя, там все пункты с большой буквы
 #: templates/base/user_links_entries.html:179
 #: templates/user/profile-subnav.html:35
 msgid "Raw data library"
-msgstr "библиотека RAW данных"
+msgstr "Библиотека RAW данных"
 
 #: templates/base/user_links_entries.html:187
 msgid "Private shared folders"
@@ -5614,7 +5615,7 @@ msgstr ""
 
 #: templates/index/root.html:296
 msgid "Latest from the forums"
-msgstr "Новейшее на форуме"
+msgstr "Новое на форуме"
 
 #: templates/index/root.html:322
 msgid "Do you want your product here?"
