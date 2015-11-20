@@ -7,8 +7,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: AstroBin 1.0\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2015-11-20 07:09+0000\n"
-"PO-Revision-Date: 2015-11-20 07:41+0000\n"
+"POT-Creation-Date: 2015-11-20 13:31+0000\n"
+"PO-Revision-Date: 2015-11-20 19:57+0000\n"
 "Last-Translator: Salvatore <salvatore@iovene.com>\n"
 "Language-Team: Salvatore Iovene <salvatore@iovene.com>\n"
 "Language: it\n"
@@ -17,7 +17,7 @@ msgstr ""
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=(n != 1);\n"
 "X-Generator: Pootle 2.5.0\n"
-"X-POOTLE-MTIME: 1448005318.706937\n"
+"X-POOTLE-MTIME: 1448049426.775036\n"
 
 #: fields.py:10
 msgid "United Kingdom"
@@ -1030,7 +1030,7 @@ msgstr "Link"
 msgid "Link to TIFF/FITS"
 msgstr "Link al TIFF/FITS"
 
-#: forms.py:64 models.py:695 templates/maintenance_base.html:301
+#: forms.py:64 models.py:695 templates/maintenance_base.html:304
 #: templates/profile-edit-menu.html:36
 #: templates/image/detail/image_card.html:88
 msgid "Locations"
@@ -1155,7 +1155,7 @@ msgid "Images"
 msgstr "Immagini"
 
 #: forms.py:277 models.py:651 views.py:1755
-#: templates/maintenance_base.html:295 templates/profile-edit-menu.html:30
+#: templates/maintenance_base.html:298 templates/profile-edit-menu.html:30
 #: templates/wall.html:131 templates/inclusion_tags/search_image_list.html:13
 #: templates/user/profile-subnav.html:130
 msgid "Gear"
@@ -2292,7 +2292,7 @@ msgstr "Il sito web dell'azienda che rappresenti su AstroBin."
 msgid "Country of operation"
 msgstr "Paese in cui si opera"
 
-#: models.py:1644 templates/maintenance_base.html:307
+#: models.py:1644 templates/maintenance_base.html:310
 #: templates/profile-edit-menu.html:42
 msgid "Default license"
 msgstr "Licenza predefinita"
@@ -2926,7 +2926,7 @@ msgid "There is no activity yet."
 msgstr "Nessuna attività."
 
 #: templates/affiliates.html:8 templates/affiliates.html.py:11
-#: templates/maintenance_base.html:179 templates/base/site_links.html:117
+#: templates/maintenance_base.html:182 templates/base/site_links.html:120
 #: templates/index/root.html:317
 msgid "Affiliates"
 msgstr "Affiliati"
@@ -2985,13 +2985,13 @@ msgstr ""
 "le API di AstroBin!"
 
 #: templates/explore_choose.html:5 templates/explore_choose.html.py:8
-#: templates/maintenance_base.html:100 templates/base/site_links.html:30
+#: templates/maintenance_base.html:103 templates/base/site_links.html:33
 msgid "Explore"
 msgstr "Esplora"
 
-#: templates/explore_choose.html:10 templates/maintenance_base.html:107
+#: templates/explore_choose.html:10 templates/maintenance_base.html:110
 #: templates/wall.html:9 templates/wall.html.py:175
-#: templates/base/site_links.html:37
+#: templates/base/site_links.html:40
 msgid "The Big Wall"
 msgstr "Il Grande Muro"
 
@@ -3003,9 +3003,9 @@ msgstr ""
 "Il modo migliore per vedere cosa c'è di nuovo su AstroBin: un grande muro "
 "con 100 immagini per pagina, che puoi ordinare e filtrare a tuo piacere."
 
-#: templates/faq.html:4 templates/maintenance_base.html:164
-#: templates/maintenance_base.html:510 templates/base/footer.html:21
-#: templates/base/site_links.html:95
+#: templates/faq.html:4 templates/maintenance_base.html:167
+#: templates/maintenance_base.html:513 templates/base/footer.html:21
+#: templates/base/site_links.html:98
 msgid "FAQ"
 msgstr "FAQ"
 
@@ -3329,7 +3329,7 @@ msgid ""
 msgstr "Hai una domanda che qui non c'è? <a href=\"/contact/\">Contattaci</a>!"
 
 #: templates/guidelines.html:4 templates/guidelines.html.py:9
-#: templates/maintenance_base.html:512 templates/base/footer.html:23
+#: templates/maintenance_base.html:515 templates/base/footer.html:23
 msgid "Guidelines"
 msgstr "Linee guida"
 
@@ -3453,18 +3453,18 @@ msgstr ""
 "modo ed usa senso comune\". Se non ti senti di accettarle, facci sapere cosa "
 "pensi non vada bene."
 
-#: templates/help.html:4 templates/maintenance_base.html:151
-#: templates/maintenance_base.html:509 templates/base/footer.html:20
-#: templates/base/site_links.html:82
+#: templates/help.html:4 templates/maintenance_base.html:154
+#: templates/maintenance_base.html:512 templates/base/footer.html:20
+#: templates/base/site_links.html:85
 msgid "Help"
 msgstr "Aiuto"
 
-#: templates/help.html:8 templates/maintenance_base.html:158
-#: templates/base/site_links.html:89
+#: templates/help.html:8 templates/maintenance_base.html:161
+#: templates/base/site_links.html:92
 msgid "What is this site?"
 msgstr "Che cos'è questo sito?"
 
-#: templates/help.html:10 templates/maintenance_base.html:456
+#: templates/help.html:10 templates/maintenance_base.html:459
 #: templates/base/alerts.html:13 templates/index/root.html:269
 msgid "Hey!"
 msgstr "Ehi!"
@@ -3788,11 +3788,11 @@ msgid ""
 msgstr "La 'Foto del giorno' è stata selezionata. Grazie per l'aiuto!"
 
 #: templates/leaderboard.html:7 templates/leaderboard.html.py:11
-#: templates/maintenance_base.html:144 templates/base/site_links.html:74
+#: templates/maintenance_base.html:147 templates/base/site_links.html:77
 msgid "Leaderboard"
 msgstr "Classifica"
 
-#: templates/leaderboard.html:21 templates/maintenance_base.html:200
+#: templates/leaderboard.html:21 templates/maintenance_base.html:203
 #: templates/image/detail/menu/user.html:8
 #: templates/inclusion_tags/image_list.html:11
 #: templates/inclusion_tags/search_image_list.html:122
@@ -3813,19 +3813,19 @@ msgstr "Follower"
 msgid "Total integration"
 msgstr "Integrazione totale"
 
-#: templates/maintenance_base.html:82 templates/maintenance_base.html:504
+#: templates/maintenance_base.html:82 templates/maintenance_base.html:507
 #: templates/base/footer.html:15
 msgid "Site links"
 msgstr "Link del sito"
 
 #: templates/maintenance_base.html:86 templates/maintenance_base.html.py:93
-#: templates/maintenance_base.html:506 templates/maintenance_base.html:540
+#: templates/maintenance_base.html:509 templates/maintenance_base.html:543
 #: templates/base/footer.html:17 templates/base/footer.html.py:52
 #: templates/base/site_links.html:23
 msgid "Home"
 msgstr "Home"
 
-#: templates/maintenance_base.html:89 templates/maintenance_base.html:508
+#: templates/maintenance_base.html:89 templates/maintenance_base.html:511
 #: templates/base/footer.html:19 templates/base/site_links.html:19
 msgid "Forum"
 msgstr "Forum"
@@ -3834,30 +3834,34 @@ msgstr "Forum"
 msgid "Latest topics"
 msgstr "Ultimi argomenti"
 
-#: templates/maintenance_base.html:113 templates/base/site_links.html:43
+#: templates/maintenance_base.html:96 templates/base/site_links.html:26
+msgid "Subscribed topics"
+msgstr "Argomenti sottoscritti"
+
+#: templates/maintenance_base.html:116 templates/base/site_links.html:46
 #: templates/image/detail/iotd_banner.html:10 templates/index/root.html:75
 msgid "Image of the day"
 msgstr "Foto del giorno"
 
-#: templates/maintenance_base.html:122 templates/base/site_links.html:52
+#: templates/maintenance_base.html:125 templates/base/site_links.html:55
 msgid "Public data pools"
 msgstr "Gruppi di dati pubblici"
 
-#: templates/maintenance_base.html:131 templates/base/site_links.html:59
+#: templates/maintenance_base.html:134 templates/base/site_links.html:62
 msgid "Advanced search"
 msgstr "Ricerca avanzata"
 
-#: templates/maintenance_base.html:138 templates/stats.html:7
-#: templates/base/site_links.html:67 templates/user/profile.html:61
+#: templates/maintenance_base.html:141 templates/stats.html:7
+#: templates/base/site_links.html:70 templates/user/profile.html:61
 msgid "Stats"
 msgstr "Statistiche"
 
-#: templates/maintenance_base.html:188 templates/base/site_links.html:126
+#: templates/maintenance_base.html:191 templates/base/site_links.html:129
 #: templates/contact_form/contact.html:5 templates/contact_form/contact.html:8
 msgid "Contact"
 msgstr "Contattaci"
 
-#: templates/maintenance_base.html:219 templates/upload.html:7
+#: templates/maintenance_base.html:222 templates/upload.html:7
 #: templates/upload.html.py:20 templates/upload.html:36
 #: templates/avatar/change.html:38 templates/base/user_links_entries.html:139
 #: templates/image/detail/modals/upload_revision.html:17
@@ -3865,24 +3869,24 @@ msgstr "Contattaci"
 msgid "Upload"
 msgstr "Carica"
 
-#: templates/maintenance_base.html:222
+#: templates/maintenance_base.html:225
 #: templates/base/user_links_entries.html:142
 msgid "My places"
 msgstr "I miei posti"
 
-#: templates/maintenance_base.html:228 templates/wall.html:137
+#: templates/maintenance_base.html:231 templates/wall.html:137
 #: templates/base/user_links_entries.html:148
 #: templates/user/profile-subnav.html:20
 msgid "Commercial products"
 msgstr "Prodotti commerciali"
 
-#: templates/maintenance_base.html:236
+#: templates/maintenance_base.html:239
 #: templates/base/user_links_entries.html:156 templates/popover/user.html:30
 #: templates/user/profile-subnav.html:28
 msgid "Gallery"
 msgstr "Galleria"
 
-#: templates/maintenance_base.html:242 templates/wall.html:50
+#: templates/maintenance_base.html:245 templates/wall.html:50
 #: templates/base/user_links_entries.html:162
 #: templates/inclusion_tags/search_image_list.html:44
 #: templates/inclusion_tags/search_image_list.html:97
@@ -3890,100 +3894,100 @@ msgstr "Galleria"
 msgid "Bookmarks"
 msgstr "Segnalibri"
 
-#: templates/maintenance_base.html:248
+#: templates/maintenance_base.html:251
 #: templates/base/user_links_entries.html:168
 #: templates/user/profile-subnav.html:48
 #: templates/user/profile/commercial/products.html:209
 msgid "Plots"
 msgstr "Grafici"
 
-#: templates/maintenance_base.html:256
+#: templates/maintenance_base.html:259
 #: templates/base/user_links_entries.html:195 templates/messages/inbox.html:9
 msgid "My messages"
 msgstr "La mia posta"
 
-#: templates/maintenance_base.html:262
+#: templates/maintenance_base.html:265
 #: templates/base/user_links_entries.html:201
 #: templates/user/profile-subnav.html:70
 msgid "API Keys"
 msgstr "API Keys"
 
-#: templates/maintenance_base.html:266
+#: templates/maintenance_base.html:269
 #: templates/base/user_links_entries.html:208
 msgid "My settings"
 msgstr "I mei settaggi"
 
-#: templates/maintenance_base.html:270 templates/profile-edit-menu.html:8
+#: templates/maintenance_base.html:273 templates/profile-edit-menu.html:8
 msgid "Basic information"
 msgstr "Informazioni di base"
 
-#: templates/maintenance_base.html:278 templates/profile-edit-menu.html:15
+#: templates/maintenance_base.html:281 templates/profile-edit-menu.html:15
 msgid "Commercial information"
 msgstr "Informazioni commerciali"
 
-#: templates/maintenance_base.html:287 templates/profile-edit-menu.html:23
+#: templates/maintenance_base.html:290 templates/profile-edit-menu.html:23
 msgid "Retailer information"
 msgstr "Informazioni venditore"
 
-#: templates/maintenance_base.html:313 templates/profile-edit-menu.html:54
+#: templates/maintenance_base.html:316 templates/profile-edit-menu.html:54
 msgid "Preferences"
 msgstr "Opzioni"
 
-#: templates/maintenance_base.html:319 templates/profile-edit-menu.html:60
+#: templates/maintenance_base.html:322 templates/profile-edit-menu.html:60
 msgid "Avatar"
 msgstr "Avatar"
 
-#: templates/maintenance_base.html:326
+#: templates/maintenance_base.html:329
 #: templates/base/user_links_entries.html:226 templates/user/profile.html:107
 #: templates/user/profile.html.py:110
 msgid "Logout"
 msgstr "Logout"
 
-#: templates/maintenance_base.html:339 templates/maintenance_base.html:340
+#: templates/maintenance_base.html:342 templates/maintenance_base.html:343
 #: templates/base/user_links_entries.html:111
 msgid "Notifications"
 msgstr "Notifiche"
 
-#: templates/maintenance_base.html:351
+#: templates/maintenance_base.html:354
 #: templates/base/user_links_entries.html:270
 msgid "Have an invite? Login!"
 msgstr "Hai un invito? Fai il login!"
 
-#: templates/maintenance_base.html:353
+#: templates/maintenance_base.html:356
 #: templates/base/user_links_entries.html:272
 #: templates/registration/activation_complete.html:7
 msgid "Login"
 msgstr "Login"
 
-#: templates/maintenance_base.html:359
+#: templates/maintenance_base.html:362
 #: templates/base/user_links_entries.html:278
 #: templates/registration/login.html:15
 msgid "Register"
 msgstr "Registrati"
 
-#: templates/maintenance_base.html:371 templates/base/search_form.html:8
+#: templates/maintenance_base.html:374 templates/base/search_form.html:8
 msgid "Quick search"
 msgstr "Ricerca veloce"
 
-#: templates/maintenance_base.html:457 templates/base/alerts.html:14
+#: templates/maintenance_base.html:460 templates/base/alerts.html:14
 msgid "Success!"
 msgstr "Successo!"
 
-#: templates/maintenance_base.html:458 templates/maintenance_base.html:470
-#: templates/maintenance_base.html:482 templates/upload.html:55
+#: templates/maintenance_base.html:461 templates/maintenance_base.html:473
+#: templates/maintenance_base.html:485 templates/upload.html:55
 #: templates/upload.html.py:157 templates/upload.html:350
 #: templates/base/alerts.html:15 templates/base/alerts.html.py:28
 #: templates/base/alerts.html:40
 msgid "Warning!"
 msgstr "Attenzione!"
 
-#: templates/maintenance_base.html:459 templates/upload.html:76
+#: templates/maintenance_base.html:462 templates/upload.html:76
 #: templates/base/alerts.html:16
 #: templates/image/detail/modals/send_to_sharedfolder.html:25
 msgid "Error!"
 msgstr "Errore!"
 
-#: templates/maintenance_base.html:472 templates/base/alerts.html:30
+#: templates/maintenance_base.html:475 templates/base/alerts.html:30
 #, python-format
 msgid ""
 "As a producer and/or a retailer on AstroBin, it's very important that you "
@@ -3994,7 +3998,7 @@ msgstr ""
 "inserisca tutti i dettagli della tua azienda! Clicca <a href=\"%(the_url)s"
 "\">qui</a>  per farlo adesso."
 
-#: templates/maintenance_base.html:484 templates/base/alerts.html:42
+#: templates/maintenance_base.html:487 templates/base/alerts.html:42
 #, python-format
 msgid ""
 "As a retailer on AstroBin, it's very important that you fill in your country "
@@ -4003,11 +4007,11 @@ msgstr ""
 "In quanto negoziante su AstroBin, è molto importante che tu inserisca il  "
 "Paese in cui operi. Clicca <a href=\"%(the_url)s\">qui</a> per farlo adesso."
 
-#: templates/maintenance_base.html:498 templates/base/footer.html:9
+#: templates/maintenance_base.html:501 templates/base/footer.html:9
 msgid "About"
 msgstr "Informazioni"
 
-#: templates/maintenance_base.html:500 templates/base/footer.html:11
+#: templates/maintenance_base.html:503 templates/base/footer.html:11
 msgid ""
 "AstroBin is an image hosting website specifically targeted to "
 "astrophotographers: it's the first and the last place where you need to "
@@ -4018,32 +4022,32 @@ msgstr ""
 "astrofotografi: è il posto finale dove caricare le proprie immagini. Fatto "
 "da un astrofotografo, per gli astrofotografi."
 
-#: templates/maintenance_base.html:507 templates/base/footer.html:18
+#: templates/maintenance_base.html:510 templates/base/footer.html:18
 msgid "Blog"
 msgstr "Blog in English"
 
-#: templates/maintenance_base.html:511 templates/tos.html:4
+#: templates/maintenance_base.html:514 templates/tos.html:4
 #: templates/tos.html.py:9 templates/base/footer.html:22
 msgid "Terms of Service"
 msgstr "Condizioni d'uso"
 
-#: templates/maintenance_base.html:515 templates/base/footer.html:26
+#: templates/maintenance_base.html:518 templates/base/footer.html:26
 msgid "Source code"
 msgstr "Codice sorgente"
 
-#: templates/maintenance_base.html:521 templates/base/footer.html:33
+#: templates/maintenance_base.html:524 templates/base/footer.html:33
 msgid "Thanks to"
 msgstr "Ringraziamenti"
 
-#: templates/maintenance_base.html:523 templates/base/footer.html:35
+#: templates/maintenance_base.html:526 templates/base/footer.html:35
 msgid "The localization team"
 msgstr "Il team di localizzazione"
 
-#: templates/maintenance_base.html:528 templates/base/footer.html:40
+#: templates/maintenance_base.html:531 templates/base/footer.html:40
 msgid "Copyright"
 msgstr "Copyright"
 
-#: templates/maintenance_base.html:530
+#: templates/maintenance_base.html:533
 msgid ""
 "AstroBin is Copyright &copy; 2010-2012 Salvatore Iovene, All Rights "
 "Reserved. The images on this websites are copyright of their respective "
@@ -4053,22 +4057,22 @@ msgstr ""
 "Riservati. Le immagini su questo sito sono copyright dei loro rispettivi "
 "proprietari."
 
-#: templates/maintenance_base.html:544 templates/base/footer.html:56
+#: templates/maintenance_base.html:547 templates/base/footer.html:56
 msgid "Back to top"
 msgstr "Torna su"
 
-#: templates/maintenance_base.html:587 templates/base/js.html:33
+#: templates/maintenance_base.html:590 templates/base/js.html:33
 #: templates/image/edit/acquisition.html:69 templates/image/edit/basic.html:74
 #: templates/image/edit/gear.html:48 templates/messages/compose.html:16
 #: templates/openid_provider/decide.html:16
 msgid "Cancel"
 msgstr "Annulla"
 
-#: templates/maintenance_base.html:617 templates/base/js.html:82
+#: templates/maintenance_base.html:620 templates/base/js.html:82
 msgid "No file selected"
 msgstr "Nessun file"
 
-#: templates/maintenance_base.html:618 templates/base/js.html:83
+#: templates/maintenance_base.html:621 templates/base/js.html:83
 msgid "Choose file"
 msgstr "Scegli file"
 
@@ -4385,7 +4389,7 @@ msgid "The images on this websites are copyright of their respective owners."
 msgstr ""
 "Le immagini su questo sito sono copyright dei loro rispettivi proprietari."
 
-#: templates/base/site_links.html:101
+#: templates/base/site_links.html:104
 msgid "AstroBin Raw Data"
 msgstr "AstroBin Dati Grezzi"
 
@@ -6474,6 +6478,7 @@ msgid "Mark all forums as read"
 msgstr "Segna tutti i forum come letti"
 
 #: templates/pybb/latest_topics.html:32
+#: templates/pybb/subscribed_topics.html:32
 msgid "Mark all topics as read"
 msgstr "Segna tutti gli argomenti come letti"
 
@@ -6496,6 +6501,11 @@ msgstr "Cancellare il messaggio?"
 #: templates/pybb/post_template.html:56
 msgid "Approve post"
 msgstr "Approva il messaggio"
+
+#: templates/pybb/subscribed_topics.html:7
+#: templates/pybb/subscribed_topics.html:10
+msgid "Topics you subscribe to"
+msgstr "Argomenti sottoscritti"
 
 #: templates/pybb/topic.html:57
 msgid "Unstick topic"

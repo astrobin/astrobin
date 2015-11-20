@@ -7,8 +7,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2015-11-20 07:10+0000\n"
-"PO-Revision-Date: 2015-11-20 07:59+0000\n"
+"POT-Creation-Date: 2015-11-20 13:33+0000\n"
+"PO-Revision-Date: 2015-11-20 14:04+0000\n"
 "Last-Translator: csve <csve00@gmail.com>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
 "Language: ru\n"
@@ -18,7 +18,7 @@ msgstr ""
 "Plural-Forms: nplurals=3; plural=(n%10==1 && n%100!=11 ? 0 : n%10>=2 && n%"
 "10<=4 && (n%100<10 || n%100>=20) ? 1 : 2);\n"
 "X-Generator: Pootle 2.5.0\n"
-"X-POOTLE-MTIME: 1448006349.571084\n"
+"X-POOTLE-MTIME: 1448028293.956405\n"
 
 #: fields.py:10
 msgid "United Kingdom"
@@ -1030,7 +1030,7 @@ msgstr "Ссылка"
 msgid "Link to TIFF/FITS"
 msgstr "Ссылка на TIFF/FITS"
 
-#: forms.py:64 models.py:695 templates/maintenance_base.html:301
+#: forms.py:64 models.py:695 templates/maintenance_base.html:304
 #: templates/profile-edit-menu.html:36
 #: templates/image/detail/image_card.html:88
 msgid "Locations"
@@ -1157,7 +1157,7 @@ msgid "Images"
 msgstr "Изображения"
 
 #: forms.py:277 models.py:651 views.py:1755
-#: templates/maintenance_base.html:295 templates/profile-edit-menu.html:30
+#: templates/maintenance_base.html:298 templates/profile-edit-menu.html:30
 #: templates/wall.html:131 templates/inclusion_tags/search_image_list.html:13
 #: templates/user/profile-subnav.html:130
 msgid "Gear"
@@ -2295,7 +2295,7 @@ msgstr "Веб-сайт организации, которую вы предст
 msgid "Country of operation"
 msgstr "Страна ведения деятельности"
 
-#: models.py:1644 templates/maintenance_base.html:307
+#: models.py:1644 templates/maintenance_base.html:310
 #: templates/profile-edit-menu.html:42
 msgid "Default license"
 msgstr "Лицензия по-умолчанию"
@@ -2930,7 +2930,7 @@ msgid "There is no activity yet."
 msgstr "Пока нет никакой активности."
 
 #: templates/affiliates.html:8 templates/affiliates.html.py:11
-#: templates/maintenance_base.html:179 templates/base/site_links.html:117
+#: templates/maintenance_base.html:182 templates/base/site_links.html:120
 #: templates/index/root.html:317
 msgid "Affiliates"
 msgstr "Партнёрство"
@@ -2989,13 +2989,13 @@ msgstr ""
 "AstroBin!"
 
 #: templates/explore_choose.html:5 templates/explore_choose.html.py:8
-#: templates/maintenance_base.html:100 templates/base/site_links.html:30
+#: templates/maintenance_base.html:103 templates/base/site_links.html:33
 msgid "Explore"
 msgstr "Обзор"
 
-#: templates/explore_choose.html:10 templates/maintenance_base.html:107
+#: templates/explore_choose.html:10 templates/maintenance_base.html:110
 #: templates/wall.html:9 templates/wall.html.py:175
-#: templates/base/site_links.html:37
+#: templates/base/site_links.html:40
 msgid "The Big Wall"
 msgstr "Большая Стена"
 
@@ -3007,9 +3007,9 @@ msgstr ""
 "Лучший способ узнавать о новом на AstroBin: большая стена из 100 изображений "
 "на страницу, которую вы можете сортировать и фильтровать как вам нравится."
 
-#: templates/faq.html:4 templates/maintenance_base.html:164
-#: templates/maintenance_base.html:510 templates/base/footer.html:21
-#: templates/base/site_links.html:95
+#: templates/faq.html:4 templates/maintenance_base.html:167
+#: templates/maintenance_base.html:513 templates/base/footer.html:21
+#: templates/base/site_links.html:98
 msgid "FAQ"
 msgstr "FAQ"
 
@@ -3339,7 +3339,7 @@ msgstr ""
 "\">свяжитесь с нами</a>!"
 
 #: templates/guidelines.html:4 templates/guidelines.html.py:9
-#: templates/maintenance_base.html:512 templates/base/footer.html:23
+#: templates/maintenance_base.html:515 templates/base/footer.html:23
 msgid "Guidelines"
 msgstr "Правила"
 
@@ -3463,18 +3463,18 @@ msgstr ""
 "чувствуете, что вы не сможете соблюдать их, пожалуйста, сообщите нам, что "
 "вам не нравится в них."
 
-#: templates/help.html:4 templates/maintenance_base.html:151
-#: templates/maintenance_base.html:509 templates/base/footer.html:20
-#: templates/base/site_links.html:82
+#: templates/help.html:4 templates/maintenance_base.html:154
+#: templates/maintenance_base.html:512 templates/base/footer.html:20
+#: templates/base/site_links.html:85
 msgid "Help"
 msgstr "Справка"
 
-#: templates/help.html:8 templates/maintenance_base.html:158
-#: templates/base/site_links.html:89
+#: templates/help.html:8 templates/maintenance_base.html:161
+#: templates/base/site_links.html:92
 msgid "What is this site?"
 msgstr "Что это за сайт?"
 
-#: templates/help.html:10 templates/maintenance_base.html:456
+#: templates/help.html:10 templates/maintenance_base.html:459
 #: templates/base/alerts.html:13 templates/index/root.html:269
 msgid "Hey!"
 msgstr "Привет!"
@@ -3795,11 +3795,11 @@ msgstr ""
 "\"Изображение Дня\" выбрано. Спасибо за вашу помощь.\n"
 
 #: templates/leaderboard.html:7 templates/leaderboard.html.py:11
-#: templates/maintenance_base.html:144 templates/base/site_links.html:74
+#: templates/maintenance_base.html:147 templates/base/site_links.html:77
 msgid "Leaderboard"
 msgstr "Рейтинговая таблица"
 
-#: templates/leaderboard.html:21 templates/maintenance_base.html:200
+#: templates/leaderboard.html:21 templates/maintenance_base.html:203
 #: templates/image/detail/menu/user.html:8
 #: templates/inclusion_tags/image_list.html:11
 #: templates/inclusion_tags/search_image_list.html:122
@@ -3820,19 +3820,19 @@ msgstr "Подписчики"
 msgid "Total integration"
 msgstr "Общее накопление"
 
-#: templates/maintenance_base.html:82 templates/maintenance_base.html:504
+#: templates/maintenance_base.html:82 templates/maintenance_base.html:507
 #: templates/base/footer.html:15
 msgid "Site links"
 msgstr "Ссылки по сайту"
 
 #: templates/maintenance_base.html:86 templates/maintenance_base.html.py:93
-#: templates/maintenance_base.html:506 templates/maintenance_base.html:540
+#: templates/maintenance_base.html:509 templates/maintenance_base.html:543
 #: templates/base/footer.html:17 templates/base/footer.html.py:52
 #: templates/base/site_links.html:23
 msgid "Home"
 msgstr "На главную"
 
-#: templates/maintenance_base.html:89 templates/maintenance_base.html:508
+#: templates/maintenance_base.html:89 templates/maintenance_base.html:511
 #: templates/base/footer.html:19 templates/base/site_links.html:19
 msgid "Forum"
 msgstr "Форум"
@@ -3841,30 +3841,34 @@ msgstr "Форум"
 msgid "Latest topics"
 msgstr "Последние обновления в темах"
 
-#: templates/maintenance_base.html:113 templates/base/site_links.html:43
+#: templates/maintenance_base.html:96 templates/base/site_links.html:26
+msgid "Subscribed topics"
+msgstr "Отслеживаемые темы"
+
+#: templates/maintenance_base.html:116 templates/base/site_links.html:46
 #: templates/image/detail/iotd_banner.html:10 templates/index/root.html:75
 msgid "Image of the day"
 msgstr "Изображение дня"
 
-#: templates/maintenance_base.html:122 templates/base/site_links.html:52
+#: templates/maintenance_base.html:125 templates/base/site_links.html:55
 msgid "Public data pools"
 msgstr "Общее хранилище данных"
 
-#: templates/maintenance_base.html:131 templates/base/site_links.html:59
+#: templates/maintenance_base.html:134 templates/base/site_links.html:62
 msgid "Advanced search"
 msgstr "Расширенный поиск"
 
-#: templates/maintenance_base.html:138 templates/stats.html:7
-#: templates/base/site_links.html:67 templates/user/profile.html:61
+#: templates/maintenance_base.html:141 templates/stats.html:7
+#: templates/base/site_links.html:70 templates/user/profile.html:61
 msgid "Stats"
 msgstr "Статистика"
 
-#: templates/maintenance_base.html:188 templates/base/site_links.html:126
+#: templates/maintenance_base.html:191 templates/base/site_links.html:129
 #: templates/contact_form/contact.html:5 templates/contact_form/contact.html:8
 msgid "Contact"
 msgstr "Контакты"
 
-#: templates/maintenance_base.html:219 templates/upload.html:7
+#: templates/maintenance_base.html:222 templates/upload.html:7
 #: templates/upload.html.py:20 templates/upload.html:36
 #: templates/avatar/change.html:38 templates/base/user_links_entries.html:139
 #: templates/image/detail/modals/upload_revision.html:17
@@ -3872,24 +3876,24 @@ msgstr "Контакты"
 msgid "Upload"
 msgstr "Закачать"
 
-#: templates/maintenance_base.html:222
+#: templates/maintenance_base.html:225
 #: templates/base/user_links_entries.html:142
 msgid "My places"
 msgstr "Мои места"
 
-#: templates/maintenance_base.html:228 templates/wall.html:137
+#: templates/maintenance_base.html:231 templates/wall.html:137
 #: templates/base/user_links_entries.html:148
 #: templates/user/profile-subnav.html:20
 msgid "Commercial products"
 msgstr "Рекламные продукты"
 
-#: templates/maintenance_base.html:236
+#: templates/maintenance_base.html:239
 #: templates/base/user_links_entries.html:156 templates/popover/user.html:30
 #: templates/user/profile-subnav.html:28
 msgid "Gallery"
 msgstr "Галерея"
 
-#: templates/maintenance_base.html:242 templates/wall.html:50
+#: templates/maintenance_base.html:245 templates/wall.html:50
 #: templates/base/user_links_entries.html:162
 #: templates/inclusion_tags/search_image_list.html:44
 #: templates/inclusion_tags/search_image_list.html:97
@@ -3897,100 +3901,100 @@ msgstr "Галерея"
 msgid "Bookmarks"
 msgstr "Закладки"
 
-#: templates/maintenance_base.html:248
+#: templates/maintenance_base.html:251
 #: templates/base/user_links_entries.html:168
 #: templates/user/profile-subnav.html:48
 #: templates/user/profile/commercial/products.html:209
 msgid "Plots"
 msgstr "Графики"
 
-#: templates/maintenance_base.html:256
+#: templates/maintenance_base.html:259
 #: templates/base/user_links_entries.html:195 templates/messages/inbox.html:9
 msgid "My messages"
 msgstr "Мои сообщения"
 
-#: templates/maintenance_base.html:262
+#: templates/maintenance_base.html:265
 #: templates/base/user_links_entries.html:201
 #: templates/user/profile-subnav.html:70
 msgid "API Keys"
 msgstr "API-ключи"
 
-#: templates/maintenance_base.html:266
+#: templates/maintenance_base.html:269
 #: templates/base/user_links_entries.html:208
 msgid "My settings"
 msgstr "Мои настройки"
 
-#: templates/maintenance_base.html:270 templates/profile-edit-menu.html:8
+#: templates/maintenance_base.html:273 templates/profile-edit-menu.html:8
 msgid "Basic information"
 msgstr "Основная информация"
 
-#: templates/maintenance_base.html:278 templates/profile-edit-menu.html:15
+#: templates/maintenance_base.html:281 templates/profile-edit-menu.html:15
 msgid "Commercial information"
 msgstr "Рекламная информация"
 
-#: templates/maintenance_base.html:287 templates/profile-edit-menu.html:23
+#: templates/maintenance_base.html:290 templates/profile-edit-menu.html:23
 msgid "Retailer information"
 msgstr "Информация о продавце"
 
-#: templates/maintenance_base.html:313 templates/profile-edit-menu.html:54
+#: templates/maintenance_base.html:316 templates/profile-edit-menu.html:54
 msgid "Preferences"
 msgstr "Настройки"
 
-#: templates/maintenance_base.html:319 templates/profile-edit-menu.html:60
+#: templates/maintenance_base.html:322 templates/profile-edit-menu.html:60
 msgid "Avatar"
 msgstr "Аватар"
 
-#: templates/maintenance_base.html:326
+#: templates/maintenance_base.html:329
 #: templates/base/user_links_entries.html:226 templates/user/profile.html:107
 #: templates/user/profile.html.py:110
 msgid "Logout"
 msgstr "Выйти"
 
-#: templates/maintenance_base.html:339 templates/maintenance_base.html:340
+#: templates/maintenance_base.html:342 templates/maintenance_base.html:343
 #: templates/base/user_links_entries.html:111
 msgid "Notifications"
 msgstr "Уведомления"
 
-#: templates/maintenance_base.html:351
+#: templates/maintenance_base.html:354
 #: templates/base/user_links_entries.html:270
 msgid "Have an invite? Login!"
 msgstr "Есть приглашение? Заходите!"
 
-#: templates/maintenance_base.html:353
+#: templates/maintenance_base.html:356
 #: templates/base/user_links_entries.html:272
 #: templates/registration/activation_complete.html:7
 msgid "Login"
 msgstr "Войти"
 
-#: templates/maintenance_base.html:359
+#: templates/maintenance_base.html:362
 #: templates/base/user_links_entries.html:278
 #: templates/registration/login.html:15
 msgid "Register"
 msgstr "Регистрация"
 
-#: templates/maintenance_base.html:371 templates/base/search_form.html:8
+#: templates/maintenance_base.html:374 templates/base/search_form.html:8
 msgid "Quick search"
 msgstr "Быстрый поиск"
 
-#: templates/maintenance_base.html:457 templates/base/alerts.html:14
+#: templates/maintenance_base.html:460 templates/base/alerts.html:14
 msgid "Success!"
 msgstr "Успешно!"
 
-#: templates/maintenance_base.html:458 templates/maintenance_base.html:470
-#: templates/maintenance_base.html:482 templates/upload.html:55
+#: templates/maintenance_base.html:461 templates/maintenance_base.html:473
+#: templates/maintenance_base.html:485 templates/upload.html:55
 #: templates/upload.html.py:157 templates/upload.html:350
 #: templates/base/alerts.html:15 templates/base/alerts.html.py:28
 #: templates/base/alerts.html:40
 msgid "Warning!"
 msgstr "Внимание!"
 
-#: templates/maintenance_base.html:459 templates/upload.html:76
+#: templates/maintenance_base.html:462 templates/upload.html:76
 #: templates/base/alerts.html:16
 #: templates/image/detail/modals/send_to_sharedfolder.html:25
 msgid "Error!"
 msgstr "Ошибка!"
 
-#: templates/maintenance_base.html:472 templates/base/alerts.html:30
+#: templates/maintenance_base.html:475 templates/base/alerts.html:30
 #, python-format
 msgid ""
 "As a producer and/or a retailer on AstroBin, it's very important that you "
@@ -4001,7 +4005,7 @@ msgstr ""
 "все детали о вашей организации! Щёлкните <a href=\"%(the_url)s\">здесь</a> "
 "чтобы сделать это."
 
-#: templates/maintenance_base.html:484 templates/base/alerts.html:42
+#: templates/maintenance_base.html:487 templates/base/alerts.html:42
 #, python-format
 msgid ""
 "As a retailer on AstroBin, it's very important that you fill in your country "
@@ -4010,11 +4014,11 @@ msgstr ""
 "Как продавец на AstroBin, очень важно чтобы вы указали страну вашей "
 "деятельности! Щёлкните <a href=\"%(the_url)s\">здесь</a> чтобы сделать это."
 
-#: templates/maintenance_base.html:498 templates/base/footer.html:9
+#: templates/maintenance_base.html:501 templates/base/footer.html:9
 msgid "About"
 msgstr "Описание"
 
-#: templates/maintenance_base.html:500 templates/base/footer.html:11
+#: templates/maintenance_base.html:503 templates/base/footer.html:11
 msgid ""
 "AstroBin is an image hosting website specifically targeted to "
 "astrophotographers: it's the first and the last place where you need to "
@@ -4025,32 +4029,32 @@ msgstr ""
 "единственное достойное место для закачки ваших астрофото. Сделано "
 "астрофотографом для астрофотографов."
 
-#: templates/maintenance_base.html:507 templates/base/footer.html:18
+#: templates/maintenance_base.html:510 templates/base/footer.html:18
 msgid "Blog"
 msgstr "Дневник"
 
-#: templates/maintenance_base.html:511 templates/tos.html:4
+#: templates/maintenance_base.html:514 templates/tos.html:4
 #: templates/tos.html.py:9 templates/base/footer.html:22
 msgid "Terms of Service"
 msgstr "Условия предоставления услуг"
 
-#: templates/maintenance_base.html:515 templates/base/footer.html:26
+#: templates/maintenance_base.html:518 templates/base/footer.html:26
 msgid "Source code"
 msgstr "Исходный код"
 
-#: templates/maintenance_base.html:521 templates/base/footer.html:33
+#: templates/maintenance_base.html:524 templates/base/footer.html:33
 msgid "Thanks to"
 msgstr "Благодарности:"
 
-#: templates/maintenance_base.html:523 templates/base/footer.html:35
+#: templates/maintenance_base.html:526 templates/base/footer.html:35
 msgid "The localization team"
 msgstr "Команда локализации"
 
-#: templates/maintenance_base.html:528 templates/base/footer.html:40
+#: templates/maintenance_base.html:531 templates/base/footer.html:40
 msgid "Copyright"
 msgstr "Авторское право"
 
-#: templates/maintenance_base.html:530
+#: templates/maintenance_base.html:533
 msgid ""
 "AstroBin is Copyright &copy; 2010-2012 Salvatore Iovene, All Rights "
 "Reserved. The images on this websites are copyright of their respective "
@@ -4059,22 +4063,22 @@ msgstr ""
 "Авторские права AstroBin &copy; 2010-2012 Salvatore Iovene, Все Права "
 "Защищены. Изображения на этом сайте принадлежат их уважаемым владельцам."
 
-#: templates/maintenance_base.html:544 templates/base/footer.html:56
+#: templates/maintenance_base.html:547 templates/base/footer.html:56
 msgid "Back to top"
 msgstr "Обратно наверх"
 
-#: templates/maintenance_base.html:587 templates/base/js.html:33
+#: templates/maintenance_base.html:590 templates/base/js.html:33
 #: templates/image/edit/acquisition.html:69 templates/image/edit/basic.html:74
 #: templates/image/edit/gear.html:48 templates/messages/compose.html:16
 #: templates/openid_provider/decide.html:16
 msgid "Cancel"
 msgstr "Отмена"
 
-#: templates/maintenance_base.html:617 templates/base/js.html:82
+#: templates/maintenance_base.html:620 templates/base/js.html:82
 msgid "No file selected"
 msgstr "Не выбран файл"
 
-#: templates/maintenance_base.html:618 templates/base/js.html:83
+#: templates/maintenance_base.html:621 templates/base/js.html:83
 msgid "Choose file"
 msgstr "Выбрать файл"
 
@@ -4393,7 +4397,7 @@ msgstr ""
 "Изображения с этого веб-сайта защищены авторским правом их уважаемых "
 "владельцев."
 
-#: templates/base/site_links.html:101
+#: templates/base/site_links.html:104
 msgid "AstroBin Raw Data"
 msgstr "AstroBin Raw Data"
 
@@ -6466,6 +6470,7 @@ msgid "Mark all forums as read"
 msgstr "Отметить все форумы прочитанными"
 
 #: templates/pybb/latest_topics.html:32
+#: templates/pybb/subscribed_topics.html:32
 msgid "Mark all topics as read"
 msgstr "Отметить все темы прочитанными"
 
@@ -6488,6 +6493,11 @@ msgstr "Удалить сообщение?"
 #: templates/pybb/post_template.html:56
 msgid "Approve post"
 msgstr "Подтвердить сообщение"
+
+#: templates/pybb/subscribed_topics.html:7
+#: templates/pybb/subscribed_topics.html:10
+msgid "Topics you subscribe to"
+msgstr "Темы, на которые вы подписаны"
 
 #: templates/pybb/topic.html:57
 msgid "Unstick topic"
