@@ -6,7 +6,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: AstroBin 1.0\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2015-11-19 13:38+0000\n"
+"POT-Creation-Date: 2015-11-19 20:45+0000\n"
 "PO-Revision-Date: 2015-11-12 20:32+0000\n"
 "Last-Translator: Tannhauser <tannhauser@sfr.fr>\n"
 "Language-Team: Français <LL@li.org>\n"
@@ -1020,7 +1020,7 @@ msgstr ""
 "ici. Malheureusement, AstroBin ne peut pas (encore) héberger ce type de "
 "fichier, vous devez donc les stocker sur un espace privé."
 
-#: forms.py:62 models.py:2064 models.py:2146 templates/gear/page.html:197
+#: forms.py:62 models.py:2071 models.py:2153 templates/gear/page.html:197
 #: templates/image/detail/image_title.html:14
 msgid "Link"
 msgstr "Lien"
@@ -1300,7 +1300,7 @@ msgstr "Fabricant"
 msgid "The make, brand, producer or developer of this product."
 msgstr "Le fabricant, la marque, ou le développeur du produit."
 
-#: forms.py:898 forms.py:959 models.py:197 models.py:1762 models.py:1901
+#: forms.py:898 forms.py:959 models.py:197 models.py:1769 models.py:1908
 #: templates/gear/fix.html:32 templates/gear/fix.html.py:33
 #: templates/gear/fix.html:34 templates/gear/fix.html.py:42
 #: templates/gear/fix.html:47 templates/gear/fix.html.py:52
@@ -1961,7 +1961,7 @@ msgstr ""
 "Pour choisir le matériel utilisé pour cette image, glissez-le depuis la "
 "partie droite vers la partie gauche, ou cliquez sur le signe \"plus\"."
 
-#: models.py:702 models.py:1909 models.py:2153 templates/gear/page.html:47
+#: models.py:702 models.py:1916 models.py:2160 templates/gear/page.html:47
 #: templates/image/detail/image_description.html:7
 msgid "Description"
 msgstr "Description"
@@ -1993,7 +1993,7 @@ msgstr "(sans titre)"
 msgid "Please use the following format: yyyy-mm-dd."
 msgstr "Utilisez le format suivant: aaaa-mm-jj."
 
-#: models.py:1278 models.py:1484 models.py:2129
+#: models.py:1278 models.py:1484 models.py:2136
 msgid "Image"
 msgstr "Image"
 
@@ -2340,67 +2340,72 @@ msgstr ""
 msgid "Automatically subscribe to topics that you answer"
 msgstr ""
 
-#: models.py:1763
+#: models.py:1728
+#: templates/pybb/mail_templates/subscription_email_subject.html:2
+msgid "New reply to a forum topic you subscribe to"
+msgstr ""
+
+#: models.py:1770
 msgid "A descriptive name, e.g. 'Home observatory' or 'Mount Whitney'."
 msgstr ""
 "Un nom descriptif, p. ex. \"Observatoire personnel\" ou \"Plateau de Calern"
 "\"."
 
-#: models.py:1769
+#: models.py:1776
 msgid "City"
 msgstr "Ville"
 
-#: models.py:1770
+#: models.py:1777
 msgid "If this location is not in a city, use the name of the closest city."
 msgstr ""
 "Si ce lieu n'est pas situé dans une ville, utilisez le nom de la ville la "
 "plus proche."
 
-#: models.py:1776
+#: models.py:1783
 msgid "State or province"
 msgstr "Région ou département"
 
-#: models.py:1781
+#: models.py:1788
 msgid "Country"
 msgstr "Pays"
 
-#: models.py:1798
+#: models.py:1805
 msgid "North"
 msgstr "Nord"
 
-#: models.py:1798
+#: models.py:1805
 msgid "South"
 msgstr "Sud"
 
-#: models.py:1799
+#: models.py:1806
 msgid "North or south"
 msgstr "Nord ou Sud"
 
-#: models.py:1814
+#: models.py:1821
 msgid "East"
 msgstr "Est"
 
-#: models.py:1814
+#: models.py:1821
 msgid "West"
 msgstr "Ouest"
 
-#: models.py:1815
+#: models.py:1822
 msgid "East or West"
 msgstr "Est ou Ouest"
 
-#: models.py:1819
+#: models.py:1826
 msgid "Altitude"
 msgstr "Altitude"
 
-#: models.py:1820
+#: models.py:1827
 msgid "In meters."
 msgstr "En mètres."
 
-#: models.py:1902
+#: models.py:1909
 msgid "The name of the website or app that wishes to use the APIs."
 msgstr "Le nom du site web ou de l'application qui souhaite utiliser les API."
 
-#: models.py:1910
+#: models.py:1917
 msgid ""
 "Please explain the purpose of your application, and how you intend to use "
 "the API."
@@ -2408,63 +2413,63 @@ msgstr ""
 "Veuillez expliquer l'objet de votre application et de quelle manière vous "
 "comptez utiliser l'API."
 
-#: models.py:2041
+#: models.py:2048
 msgid "AUD - Australian dollars"
 msgstr "AUD - Dollars australiens"
 
-#: models.py:2042
+#: models.py:2049
 msgid "CAD - Canadian dollars"
 msgstr "CAD - Dollars canadiens"
 
-#: models.py:2043
+#: models.py:2050
 msgid "CHF - Swiss francs"
 msgstr "CHF - Francs suisses"
 
-#: models.py:2044
+#: models.py:2051
 msgid "EUR - Euros"
 msgstr "EUR - Euros"
 
-#: models.py:2045
+#: models.py:2052
 msgid "GPB - Pound stelings"
 msgstr "GPB - Livre Sterling"
 
-#: models.py:2046
+#: models.py:2053
 msgid "PLN - Polish zloty"
 msgstr "PLN - Zloty polonais"
 
-#: models.py:2047
+#: models.py:2054
 msgid "SEK - Swedish krona"
 msgstr "SEK - Couronne suédoise"
 
-#: models.py:2048
+#: models.py:2055
 msgid "USD - American dollars"
 msgstr "USD - Dollars américains"
 
-#: models.py:2054 models.py:2104
+#: models.py:2061 models.py:2111
 msgid "Producer"
 msgstr "Fabricant"
 
-#: models.py:2065 models.py:2147
+#: models.py:2072 models.py:2154
 msgid "The link to this product's page on your website."
 msgstr "Lien vers cet article sur votre site internet."
 
-#: models.py:2073
+#: models.py:2080
 msgid "Price"
 msgstr "Prix"
 
-#: models.py:2081
+#: models.py:2088
 msgid "Currency"
 msgstr "Devise"
 
-#: models.py:2097
+#: models.py:2104
 msgid "Retailed gear items"
 msgstr "Matériel à la vente"
 
-#: models.py:2113
+#: models.py:2120
 msgid "Proper make"
 msgstr "Marque correcte"
 
-#: models.py:2114
+#: models.py:2121
 msgid ""
 "Sometimes, product make/brand/producer/developer names are not written "
 "properly by the users. Write here the proper make/brand/producer/developer "
@@ -2474,11 +2479,11 @@ msgstr ""
 "de la marque/type/fabriquant/développeur de cet article. Indiquez ici la "
 "dénomination correcte."
 
-#: models.py:2121
+#: models.py:2128
 msgid "Proper name"
 msgstr "Dénomination correcte"
 
-#: models.py:2122
+#: models.py:2129
 msgid ""
 "Sometimes, product names are not written properly by the users. Write here "
 "the proper product name, not including the make/brand/producer/developer "
@@ -2490,7 +2495,7 @@ msgstr ""
 "type/fabriquant/développeur. <br/> Il est recommandé de grouper un maximum "
 "d'articles, utilisez donc la dénomination générique de votre produit."
 
-#: models.py:2130
+#: models.py:2137
 msgid ""
 "The official, commercial image for this product. Upload an image via the "
 "regular uploading interface, set its subject type to \"Gear\", and then "
@@ -2502,16 +2507,16 @@ msgstr ""
 "choisissez-le dans la liste. Si vous chargez plusieurs versions, elles "
 "apparaîtront également sur la page commerciale."
 
-#: models.py:2138
+#: models.py:2145
 msgid "Tagline"
 msgstr "Slogan"
 
-#: models.py:2139
+#: models.py:2146
 msgid ""
 "A memorable phrase that will sum up this product, for marketing purposes."
 msgstr "Une formule marquante pour résumer cet article, à but marketing."
 
-#: models.py:2154
+#: models.py:2161
 msgid ""
 "Here you can write the full commercial description of your product. You can "
 "use some <a href=\"/faq/#comments\">formatting rules</a>."
@@ -2519,7 +2524,7 @@ msgstr ""
 "Rédigez ici la description commerciale complète de votre produit. Vous "
 "pouvez utiliser des <a href=\"/faq/#10\">règles de formatage</a>."
 
-#: models.py:2173
+#: models.py:2180
 msgid "Commercial gear items"
 msgstr "Matériel commercial"
 
@@ -6589,11 +6594,6 @@ msgstr "Fermer"
 #, fuzzy
 msgid "pages"
 msgstr "Images"
-
-#: templates/pybb/mail_templates/subscription_email_subject.html:2
-#, python-format
-msgid "New reply to a topic you subscribe to: \"%(topic)s\""
-msgstr ""
 
 #: templates/registration/activate.html:4
 #: templates/registration/activate.html:9

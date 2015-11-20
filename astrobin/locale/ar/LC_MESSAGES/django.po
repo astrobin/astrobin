@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2015-11-19 13:35+0000\n"
+"POT-Creation-Date: 2015-11-19 20:42+0000\n"
 "PO-Revision-Date: 2014-02-05 12:48+0000\n"
 "Last-Translator: Omar <thekingosm168@hotmail.com>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -1021,7 +1021,7 @@ msgstr ""
 "Astrobin لايمكن أن يعرض تخزين هذه الملفات حاليا؛لذلك يجب أن تستضيفهم علي "
 "الموقع الخاص بك."
 
-#: forms.py:62 models.py:2064 models.py:2146 templates/gear/page.html:197
+#: forms.py:62 models.py:2071 models.py:2153 templates/gear/page.html:197
 #: templates/image/detail/image_title.html:14
 msgid "Link"
 msgstr "رابط"
@@ -1296,7 +1296,7 @@ msgstr "المُصَنّع"
 msgid "The make, brand, producer or developer of this product."
 msgstr "المُصَنّع أو العلامة التجارية أو المُنتِج أو المُطوّر لهذا المُنتَج."
 
-#: forms.py:898 forms.py:959 models.py:197 models.py:1762 models.py:1901
+#: forms.py:898 forms.py:959 models.py:197 models.py:1769 models.py:1908
 #: templates/gear/fix.html:32 templates/gear/fix.html.py:33
 #: templates/gear/fix.html:34 templates/gear/fix.html.py:42
 #: templates/gear/fix.html:47 templates/gear/fix.html.py:52
@@ -1944,7 +1944,7 @@ msgstr ""
 "اسحب البنود التي تريدها من الجانب الأيمن إلي الجانب الأيسر ، أو اضغط علي "
 "علامة الزائد."
 
-#: models.py:702 models.py:1909 models.py:2153 templates/gear/page.html:47
+#: models.py:702 models.py:1916 models.py:2160 templates/gear/page.html:47
 #: templates/image/detail/image_description.html:7
 msgid "Description"
 msgstr "الوصف"
@@ -1977,7 +1977,7 @@ msgstr "(بدون عناوين)"
 msgid "Please use the following format: yyyy-mm-dd."
 msgstr "من فضلك استخدم هذا الترتيب: سنة-شهر-يوم."
 
-#: models.py:1278 models.py:1484 models.py:2129
+#: models.py:1278 models.py:1484 models.py:2136
 msgid "Image"
 msgstr "الصورة"
 
@@ -2323,125 +2323,130 @@ msgstr ""
 msgid "Automatically subscribe to topics that you answer"
 msgstr ""
 
-#: models.py:1763
+#: models.py:1728
+#: templates/pybb/mail_templates/subscription_email_subject.html:2
+msgid "New reply to a forum topic you subscribe to"
+msgstr ""
+
+#: models.py:1770
 msgid "A descriptive name, e.g. 'Home observatory' or 'Mount Whitney'."
 msgstr "اسم وصفي، علي سبيل المثال 'مرصد في المنزل' أو 'جبل سانت كاترين'."
 
-#: models.py:1769
+#: models.py:1776
 msgid "City"
 msgstr "المدينة"
 
-#: models.py:1770
+#: models.py:1777
 msgid "If this location is not in a city, use the name of the closest city."
 msgstr "إذا لم يكن موقعك في مدينة ، استخدم اسم أٌقرب مدينة لك."
 
-#: models.py:1776
+#: models.py:1783
 msgid "State or province"
 msgstr "المحافظة"
 
-#: models.py:1781
+#: models.py:1788
 msgid "Country"
 msgstr "الدولة"
 
-#: models.py:1798
+#: models.py:1805
 msgid "North"
 msgstr "الشمال"
 
-#: models.py:1798
+#: models.py:1805
 msgid "South"
 msgstr "الجنوب"
 
-#: models.py:1799
+#: models.py:1806
 msgid "North or south"
 msgstr "الشمال أو الجنوب"
 
-#: models.py:1814
+#: models.py:1821
 msgid "East"
 msgstr "الشرق"
 
-#: models.py:1814
+#: models.py:1821
 msgid "West"
 msgstr "غرب"
 
-#: models.py:1815
+#: models.py:1822
 msgid "East or West"
 msgstr "شرق أو غرب"
 
-#: models.py:1819
+#: models.py:1826
 msgid "Altitude"
 msgstr "الارتفاع"
 
-#: models.py:1820
+#: models.py:1827
 msgid "In meters."
 msgstr "بالمتر."
 
-#: models.py:1902
+#: models.py:1909
 msgid "The name of the website or app that wishes to use the APIs."
 msgstr "اسم موقع الويب أو التطبيق الّذي تريد استخدامه كـ API."
 
-#: models.py:1910
+#: models.py:1917
 msgid ""
 "Please explain the purpose of your application, and how you intend to use "
 "the API."
 msgstr "من فضلك اشرح الغرض من تطبيقك ، وكيف تنوي استخدام الـ API."
 
-#: models.py:2041
+#: models.py:2048
 msgid "AUD - Australian dollars"
 msgstr "دولار أسترالي"
 
-#: models.py:2042
+#: models.py:2049
 msgid "CAD - Canadian dollars"
 msgstr "دولار كندي"
 
-#: models.py:2043
+#: models.py:2050
 msgid "CHF - Swiss francs"
 msgstr "فرنك سويسري"
 
-#: models.py:2044
+#: models.py:2051
 msgid "EUR - Euros"
 msgstr "يورو"
 
-#: models.py:2045
+#: models.py:2052
 msgid "GPB - Pound stelings"
 msgstr "جنيه إسترليني"
 
-#: models.py:2046
+#: models.py:2053
 msgid "PLN - Polish zloty"
 msgstr "زلوتي بولندي"
 
-#: models.py:2047
+#: models.py:2054
 msgid "SEK - Swedish krona"
 msgstr "كورونا سويدي"
 
-#: models.py:2048
+#: models.py:2055
 msgid "USD - American dollars"
 msgstr "دولار أمريكي"
 
-#: models.py:2054 models.py:2104
+#: models.py:2061 models.py:2111
 msgid "Producer"
 msgstr "المُنتِج"
 
-#: models.py:2065 models.py:2147
+#: models.py:2072 models.py:2154
 msgid "The link to this product's page on your website."
 msgstr "رابط هذا المُنتَج علي موقع الويب الخاص بك."
 
-#: models.py:2073
+#: models.py:2080
 msgid "Price"
 msgstr "السعر"
 
-#: models.py:2081
+#: models.py:2088
 msgid "Currency"
 msgstr "العملة"
 
-#: models.py:2097
+#: models.py:2104
 msgid "Retailed gear items"
 msgstr "الأجهزة المعروضة للبيع"
 
-#: models.py:2113
+#: models.py:2120
 msgid "Proper make"
 msgstr "المُصَنّع الصحيح"
 
-#: models.py:2114
+#: models.py:2121
 msgid ""
 "Sometimes, product make/brand/producer/developer names are not written "
 "properly by the users. Write here the proper make/brand/producer/developer "
@@ -2451,11 +2456,11 @@ msgstr ""
 "المُنتِج أو المطور بطريقة صحيحة. اكتب هنا الاسم الصحيح للمُصَنّع أو العلامة "
 "التجارية أو المُنتِج أو المطور."
 
-#: models.py:2121
+#: models.py:2128
 msgid "Proper name"
 msgstr "اسم الفئة"
 
-#: models.py:2122
+#: models.py:2129
 msgid ""
 "Sometimes, product names are not written properly by the users. Write here "
 "the proper product name, not including the make/brand/producer/developer "
@@ -2467,7 +2472,7 @@ msgstr ""
 "تحاول وضع عدد أكبر من الأجهزة في مجموعات ، لذلك حاول استخدام الاسم الشائع "
 "للمُنتَج الّذي تملكه."
 
-#: models.py:2130
+#: models.py:2137
 msgid ""
 "The official, commercial image for this product. Upload an image via the "
 "regular uploading interface, set its subject type to \"Gear\", and then "
@@ -2478,16 +2483,16 @@ msgstr ""
 "العادية و حدد نوع الصورة \"جهاز\" ، ثم اخترها من هذه القائمة. إذا قمت برفع "
 "العديد من المراجعات ستظهر المراجعات في الصفحة التجارية."
 
-#: models.py:2138
+#: models.py:2145
 msgid "Tagline"
 msgstr "الشعار"
 
-#: models.py:2139
+#: models.py:2146
 msgid ""
 "A memorable phrase that will sum up this product, for marketing purposes."
 msgstr "جملة يمكن تذكُّرها تلخِّص هذا المنتج ، لأغراض التسويق."
 
-#: models.py:2154
+#: models.py:2161
 msgid ""
 "Here you can write the full commercial description of your product. You can "
 "use some <a href=\"/faq/#comments\">formatting rules</a>."
@@ -2495,7 +2500,7 @@ msgstr ""
 "يمكنك كتابة الوصف التجاري الكامل للمُنتج الخاص بك هنا. يمكنك استخدام بعض <a "
 "href=\"/faq/#comments\">قواعد التنسيق</a>."
 
-#: models.py:2173
+#: models.py:2180
 msgid "Commercial gear items"
 msgstr "الأجهزة التجارية"
 
@@ -6367,11 +6372,6 @@ msgstr "إغلاق"
 #, fuzzy
 msgid "pages"
 msgstr "الصور"
-
-#: templates/pybb/mail_templates/subscription_email_subject.html:2
-#, python-format
-msgid "New reply to a topic you subscribe to: \"%(topic)s\""
-msgstr ""
 
 #: templates/registration/activate.html:4
 #: templates/registration/activate.html:9

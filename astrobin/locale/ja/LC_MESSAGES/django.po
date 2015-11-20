@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2015-11-19 13:38+0000\n"
+"POT-Creation-Date: 2015-11-19 20:45+0000\n"
 "PO-Revision-Date: 2014-10-01 08:12+0000\n"
 "Last-Translator: ohmishonin <kasuzen@gmail.com>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -1021,7 +1021,7 @@ msgstr ""
 "用できない場合には、あなたの個人的なネット上の場所にそれを配置する必要があり"
 "ます。"
 
-#: forms.py:62 models.py:2064 models.py:2146 templates/gear/page.html:197
+#: forms.py:62 models.py:2071 models.py:2153 templates/gear/page.html:197
 #: templates/image/detail/image_title.html:14
 msgid "Link"
 msgstr "リンク"
@@ -1300,7 +1300,7 @@ msgstr "製造者"
 msgid "The make, brand, producer or developer of this product."
 msgstr "この製品の製造者名やブランド名、開発者の名前。"
 
-#: forms.py:898 forms.py:959 models.py:197 models.py:1762 models.py:1901
+#: forms.py:898 forms.py:959 models.py:197 models.py:1769 models.py:1908
 #: templates/gear/fix.html:32 templates/gear/fix.html.py:33
 #: templates/gear/fix.html:34 templates/gear/fix.html.py:42
 #: templates/gear/fix.html:47 templates/gear/fix.html.py:52
@@ -1949,7 +1949,7 @@ msgid ""
 "Drag items from the right side to the left side, or click on the plus sign."
 msgstr "右側から左側にツマミをドラッグするか、＋ボタンをクリックしてください。"
 
-#: models.py:702 models.py:1909 models.py:2153 templates/gear/page.html:47
+#: models.py:702 models.py:1916 models.py:2160 templates/gear/page.html:47
 #: templates/image/detail/image_description.html:7
 msgid "Description"
 msgstr "説明"
@@ -1982,7 +1982,7 @@ msgstr "(無題)"
 msgid "Please use the following format: yyyy-mm-dd."
 msgstr "yyyy-mm-ddの形式を使用してください。"
 
-#: models.py:1278 models.py:1484 models.py:2129
+#: models.py:1278 models.py:1484 models.py:2136
 msgid "Image"
 msgstr "画像"
 
@@ -2326,63 +2326,68 @@ msgstr ""
 msgid "Automatically subscribe to topics that you answer"
 msgstr ""
 
-#: models.py:1763
+#: models.py:1728
+#: templates/pybb/mail_templates/subscription_email_subject.html:2
+msgid "New reply to a forum topic you subscribe to"
+msgstr ""
+
+#: models.py:1770
 msgid "A descriptive name, e.g. 'Home observatory' or 'Mount Whitney'."
 msgstr "別名（ベランダ撮影や光が丘など）。"
 
-#: models.py:1769
+#: models.py:1776
 msgid "City"
 msgstr "市区町村"
 
-#: models.py:1770
+#: models.py:1777
 msgid "If this location is not in a city, use the name of the closest city."
 msgstr "この場所に地名が無い場合、最も近隣の町の名前を使ってください。"
 
-#: models.py:1776
+#: models.py:1783
 msgid "State or province"
 msgstr "都道府県"
 
-#: models.py:1781
+#: models.py:1788
 msgid "Country"
 msgstr "国名"
 
-#: models.py:1798
+#: models.py:1805
 msgid "North"
 msgstr "北緯"
 
-#: models.py:1798
+#: models.py:1805
 msgid "South"
 msgstr "南緯"
 
-#: models.py:1799
+#: models.py:1806
 msgid "North or south"
 msgstr "北緯もしくは南緯"
 
-#: models.py:1814
+#: models.py:1821
 msgid "East"
 msgstr "東経"
 
-#: models.py:1814
+#: models.py:1821
 msgid "West"
 msgstr "西経"
 
-#: models.py:1815
+#: models.py:1822
 msgid "East or West"
 msgstr "東経もしくは西経"
 
-#: models.py:1819
+#: models.py:1826
 msgid "Altitude"
 msgstr "高度"
 
-#: models.py:1820
+#: models.py:1827
 msgid "In meters."
 msgstr "メートル。"
 
-#: models.py:1902
+#: models.py:1909
 msgid "The name of the website or app that wishes to use the APIs."
 msgstr "ウエブサイトの名前もしくはAPIを利用するアプリケーションの名前"
 
-#: models.py:1910
+#: models.py:1917
 msgid ""
 "Please explain the purpose of your application, and how you intend to use "
 "the API."
@@ -2390,63 +2395,63 @@ msgstr ""
 "あなたのアプリケーションの目的と、そのAPIをどのように使おうとしているのかを説"
 "明してください。"
 
-#: models.py:2041
+#: models.py:2048
 msgid "AUD - Australian dollars"
 msgstr "AUD - オーストラリアドル"
 
-#: models.py:2042
+#: models.py:2049
 msgid "CAD - Canadian dollars"
 msgstr "CAD - カナダ・ドル"
 
-#: models.py:2043
+#: models.py:2050
 msgid "CHF - Swiss francs"
 msgstr "CHF - スイス・フラン"
 
-#: models.py:2044
+#: models.py:2051
 msgid "EUR - Euros"
 msgstr "EUR - ユーロ"
 
-#: models.py:2045
+#: models.py:2052
 msgid "GPB - Pound stelings"
 msgstr "GPB - イギリス・ポンド"
 
-#: models.py:2046
+#: models.py:2053
 msgid "PLN - Polish zloty"
 msgstr "PLN - ポーランド・ズウォティ"
 
-#: models.py:2047
+#: models.py:2054
 msgid "SEK - Swedish krona"
 msgstr "SEK - スエーデン・コルナ"
 
-#: models.py:2048
+#: models.py:2055
 msgid "USD - American dollars"
 msgstr "USD - アメリカ・ドル"
 
-#: models.py:2054 models.py:2104
+#: models.py:2061 models.py:2111
 msgid "Producer"
 msgstr "製作者"
 
-#: models.py:2065 models.py:2147
+#: models.py:2072 models.py:2154
 msgid "The link to this product's page on your website."
 msgstr "あなたのWebサイトでの、このプロダクトのリンク先URLを記入してください。"
 
-#: models.py:2073
+#: models.py:2080
 msgid "Price"
 msgstr "価格"
 
-#: models.py:2081
+#: models.py:2088
 msgid "Currency"
 msgstr "通貨"
 
-#: models.py:2097
+#: models.py:2104
 msgid "Retailed gear items"
 msgstr "販売機材"
 
-#: models.py:2113
+#: models.py:2120
 msgid "Proper make"
 msgstr "正式な製品"
 
-#: models.py:2114
+#: models.py:2121
 msgid ""
 "Sometimes, product make/brand/producer/developer names are not written "
 "properly by the users. Write here the proper make/brand/producer/developer "
@@ -2455,11 +2460,11 @@ msgstr ""
 "時々、メーカー名やブランド名、製作者名、開発者名をユーザーが正確に記載してい"
 "ないことがあります。正確にブランド名、製作者名、開発者名を記入してください。"
 
-#: models.py:2121
+#: models.py:2128
 msgid "Proper name"
 msgstr "正式名称"
 
-#: models.py:2122
+#: models.py:2129
 msgid ""
 "Sometimes, product names are not written properly by the users. Write here "
 "the proper product name, not including the make/brand/producer/developer "
@@ -2471,7 +2476,7 @@ msgstr ""
 "け多くの製品をグループ化し、製品の一般的な名称を使ってもらおうと試みていま"
 "す。"
 
-#: models.py:2130
+#: models.py:2137
 msgid ""
 "The official, commercial image for this product. Upload an image via the "
 "regular uploading interface, set its subject type to \"Gear\", and then "
@@ -2482,17 +2487,17 @@ msgstr ""
 "新の画像を取得し、選択リストから題材を\"機材\"を設定します。複数のバージョン"
 "をアップロードする場合は、商用ページにそれらが表示されます。"
 
-#: models.py:2138
+#: models.py:2145
 msgid "Tagline"
 msgstr "タグライン"
 
-#: models.py:2139
+#: models.py:2146
 msgid ""
 "A memorable phrase that will sum up this product, for marketing purposes."
 msgstr ""
 "販売目的のために製品についていた記憶にのこるフレーズ（キャッチコピー）。"
 
-#: models.py:2154
+#: models.py:2161
 msgid ""
 "Here you can write the full commercial description of your product. You can "
 "use some <a href=\"/faq/#comments\">formatting rules</a>."
@@ -2500,7 +2505,7 @@ msgstr ""
 "ここには、あなたの製品の商業的な説明を記載することができます。それには、<a "
 "href=\"/faq/#comments\">フォーマットルール</a>を利用することが可能です。"
 
-#: models.py:2173
+#: models.py:2180
 msgid "Commercial gear items"
 msgstr "商業的な機材"
 
@@ -6493,11 +6498,6 @@ msgstr "閉じる"
 #, fuzzy
 msgid "pages"
 msgstr "画像"
-
-#: templates/pybb/mail_templates/subscription_email_subject.html:2
-#, python-format
-msgid "New reply to a topic you subscribe to: \"%(topic)s\""
-msgstr ""
 
 #: templates/registration/activate.html:4
 #: templates/registration/activate.html:9

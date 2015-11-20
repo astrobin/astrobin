@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: AstroBin 1.4\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2015-11-19 13:39+0000\n"
+"POT-Creation-Date: 2015-11-19 20:46+0000\n"
 "PO-Revision-Date: 2015-03-01 15:35+0000\n"
 "Last-Translator: Koen_Dierckens <koen.dierckens@pandora.be>\n"
 "Language-Team: Dutch <LL@li.org>\n"
@@ -1020,7 +1020,7 @@ msgstr ""
 "bestand. Spijtig genoeg kan AstroBin dit type van beelden momenteel niet "
 "opslaan en dien je ze op een persoonlijke webspace te hosten."
 
-#: forms.py:62 models.py:2064 models.py:2146 templates/gear/page.html:197
+#: forms.py:62 models.py:2071 models.py:2153 templates/gear/page.html:197
 #: templates/image/detail/image_title.html:14
 msgid "Link"
 msgstr "Link"
@@ -1297,7 +1297,7 @@ msgstr "Merk"
 msgid "The make, brand, producer or developer of this product."
 msgstr "Het merk, de fabrikant, de producent of ontwikkelaar van dit produkt."
 
-#: forms.py:898 forms.py:959 models.py:197 models.py:1762 models.py:1901
+#: forms.py:898 forms.py:959 models.py:197 models.py:1769 models.py:1908
 #: templates/gear/fix.html:32 templates/gear/fix.html.py:33
 #: templates/gear/fix.html:34 templates/gear/fix.html.py:42
 #: templates/gear/fix.html:47 templates/gear/fix.html.py:52
@@ -1952,7 +1952,7 @@ msgid ""
 "Drag items from the right side to the left side, or click on the plus sign."
 msgstr "Sleep objecten van rechts naar links of klik op het plusteken."
 
-#: models.py:702 models.py:1909 models.py:2153 templates/gear/page.html:47
+#: models.py:702 models.py:1916 models.py:2160 templates/gear/page.html:47
 #: templates/image/detail/image_description.html:7
 msgid "Description"
 msgstr "Beschrijving"
@@ -1985,7 +1985,7 @@ msgstr "(geen titel)"
 msgid "Please use the following format: yyyy-mm-dd."
 msgstr "Gebruik het volgen de ISO formaat : yyyy-mm-dd."
 
-#: models.py:1278 models.py:1484 models.py:2129
+#: models.py:1278 models.py:1484 models.py:2136
 msgid "Image"
 msgstr "Beeld"
 
@@ -2335,66 +2335,71 @@ msgstr ""
 msgid "Automatically subscribe to topics that you answer"
 msgstr ""
 
-#: models.py:1763
+#: models.py:1728
+#: templates/pybb/mail_templates/subscription_email_subject.html:2
+msgid "New reply to a forum topic you subscribe to"
+msgstr ""
+
+#: models.py:1770
 msgid "A descriptive name, e.g. 'Home observatory' or 'Mount Whitney'."
 msgstr ""
 "Een goed omschrijvende naam, zoals \"Observatorium thuis\" of \"Mont Blanc\"."
 
-#: models.py:1769
+#: models.py:1776
 msgid "City"
 msgstr "Stad"
 
-#: models.py:1770
+#: models.py:1777
 msgid "If this location is not in a city, use the name of the closest city."
 msgstr ""
 "Als deze plaats niet in een stad is gelegen, gebruik dan de naam van de "
 "dichtstbijzijnde."
 
-#: models.py:1776
+#: models.py:1783
 msgid "State or province"
 msgstr "Staat of provincie"
 
-#: models.py:1781
+#: models.py:1788
 msgid "Country"
 msgstr "Land"
 
-#: models.py:1798
+#: models.py:1805
 msgid "North"
 msgstr "Noord"
 
-#: models.py:1798
+#: models.py:1805
 msgid "South"
 msgstr "Zuid"
 
-#: models.py:1799
+#: models.py:1806
 msgid "North or south"
 msgstr "Noord of zuid"
 
-#: models.py:1814
+#: models.py:1821
 msgid "East"
 msgstr "Oost"
 
-#: models.py:1814
+#: models.py:1821
 msgid "West"
 msgstr "West"
 
-#: models.py:1815
+#: models.py:1822
 msgid "East or West"
 msgstr "Oost of west"
 
-#: models.py:1819
+#: models.py:1826
 msgid "Altitude"
 msgstr "Hoogte"
 
-#: models.py:1820
+#: models.py:1827
 msgid "In meters."
 msgstr "In meter."
 
-#: models.py:1902
+#: models.py:1909
 msgid "The name of the website or app that wishes to use the APIs."
 msgstr "De naam van de website of app die de API's wenst te gebruiken."
 
-#: models.py:1910
+#: models.py:1917
 msgid ""
 "Please explain the purpose of your application, and how you intend to use "
 "the API."
@@ -2402,63 +2407,63 @@ msgstr ""
 "Gelieve het doel van je toepassing te verduidelijken en hoe je de API gaat "
 "gebruiken."
 
-#: models.py:2041
+#: models.py:2048
 msgid "AUD - Australian dollars"
 msgstr "AUD - Australische dollar"
 
-#: models.py:2042
+#: models.py:2049
 msgid "CAD - Canadian dollars"
 msgstr "CAD - Canadese dollar"
 
-#: models.py:2043
+#: models.py:2050
 msgid "CHF - Swiss francs"
 msgstr "CHF - Zwitserse frank"
 
-#: models.py:2044
+#: models.py:2051
 msgid "EUR - Euros"
 msgstr "EUR - Euro"
 
-#: models.py:2045
+#: models.py:2052
 msgid "GPB - Pound stelings"
 msgstr "GBP - Britse pond"
 
-#: models.py:2046
+#: models.py:2053
 msgid "PLN - Polish zloty"
 msgstr "PLN - Poolse zloty"
 
-#: models.py:2047
+#: models.py:2054
 msgid "SEK - Swedish krona"
 msgstr "SEK - Zweedse kroon"
 
-#: models.py:2048
+#: models.py:2055
 msgid "USD - American dollars"
 msgstr "USD - Amerikaanse dollar"
 
-#: models.py:2054 models.py:2104
+#: models.py:2061 models.py:2111
 msgid "Producer"
 msgstr "Producent"
 
-#: models.py:2065 models.py:2147
+#: models.py:2072 models.py:2154
 msgid "The link to this product's page on your website."
 msgstr "De link van dit produkt op je website."
 
-#: models.py:2073
+#: models.py:2080
 msgid "Price"
 msgstr "Prijs"
 
-#: models.py:2081
+#: models.py:2088
 msgid "Currency"
 msgstr "Munteenheid"
 
-#: models.py:2097
+#: models.py:2104
 msgid "Retailed gear items"
 msgstr "Verkocht produkt"
 
-#: models.py:2113
+#: models.py:2120
 msgid "Proper make"
 msgstr "Correct merk"
 
-#: models.py:2114
+#: models.py:2121
 msgid ""
 "Sometimes, product make/brand/producer/developer names are not written "
 "properly by the users. Write here the proper make/brand/producer/developer "
@@ -2467,11 +2472,11 @@ msgstr ""
 "Soms wordt het merk/type/producent/ontwikkelaar van het produkt niet correct "
 "gespeld door de gebruikers. Schrijf hier de juiste manier."
 
-#: models.py:2121
+#: models.py:2128
 msgid "Proper name"
 msgstr "Correcte naam"
 
-#: models.py:2122
+#: models.py:2129
 msgid ""
 "Sometimes, product names are not written properly by the users. Write here "
 "the proper product name, not including the make/brand/producer/developer "
@@ -2483,7 +2488,7 @@ msgstr ""
 "ontwikkelaar. <br/>Het is aanbevolen dat je zoveel mogelijk artikelen "
 "groepeert, dus tracht een generieke versie van je produktnaam te gebruiken."
 
-#: models.py:2130
+#: models.py:2137
 msgid ""
 "The official, commercial image for this product. Upload an image via the "
 "regular uploading interface, set its subject type to \"Gear\", and then "
@@ -2495,17 +2500,17 @@ msgstr ""
 "lijst. Als je verschillende revisies uploadt dan zullen deze ook verschijnen "
 "op de commerciële pagina."
 
-#: models.py:2138
+#: models.py:2145
 msgid "Tagline"
 msgstr "Slagzin"
 
-#: models.py:2139
+#: models.py:2146
 msgid ""
 "A memorable phrase that will sum up this product, for marketing purposes."
 msgstr ""
 "Een catchy zin die je produkt goed omschrijft. Voor marketing doeleinden."
 
-#: models.py:2154
+#: models.py:2161
 msgid ""
 "Here you can write the full commercial description of your product. You can "
 "use some <a href=\"/faq/#comments\">formatting rules</a>."
@@ -2514,7 +2519,7 @@ msgstr ""
 "neerschrijven. Je kunt enkele <a href=\"/faq/#comments"
 "\">formatteringsregels</a> gebruiken."
 
-#: models.py:2173
+#: models.py:2180
 msgid "Commercial gear items"
 msgstr "Commercieel materiaal"
 
@@ -6593,11 +6598,6 @@ msgstr "Sluiten"
 #, fuzzy
 msgid "pages"
 msgstr "# Foto's"
-
-#: templates/pybb/mail_templates/subscription_email_subject.html:2
-#, python-format
-msgid "New reply to a topic you subscribe to: \"%(topic)s\""
-msgstr ""
 
 #: templates/registration/activate.html:4
 #: templates/registration/activate.html:9
