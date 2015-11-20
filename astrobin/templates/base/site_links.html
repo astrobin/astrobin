@@ -1,5 +1,6 @@
 {% load i18n %}
 {% load tags %}
+{% load url from future %}
 
 <button class="btn btn-navbar" data-toggle="collapse" data-target=".site-nav">
     <span class="icon-bar"></span>
@@ -7,27 +8,20 @@
     <span class="icon-bar"></span>
 </button>
 
-<a class="brand" href="{% url index %}">
+<a class="brand" href="{% url 'index' %}">
     <img src="{{STATIC_URL}}images/astrobin-logo-small.png" alt="AstroBin" />
 </a>
 
 <div class="site-nav nav-collapse collapse pull-left">
     <ul class="nav">
-        <li class="dropdown {% current request "^/blog/" %}">
+        <li class="dropdown {% current request "^/forum/" %}">
             <a href="#" class="dropdown-toggle" data-toggle="dropdown">
-                {% trans "Community" %}
+                {% trans "Forum" %} (beta)
                 <i class="icon-caret-down"></i>
             </a>
             <ul class="dropdown-menu">
-                <li><a href="/blog/"><i class="icon-pencil"></i> {% trans "Blog" %}</a></li>
-                <li><a href="/forum/"><i class="icon-comments"></i> {% trans "Forum" %} (beta)</a></li>
-                <li class="divider"></li>
-                <li>
-                    <a href="https://bitbucket.org/siovene/astrobin/overview" target="_blank">
-                        <i class="icon-code-fork"></i>
-                        {% trans "Source code" %}
-                    </a>
-                </li>
+                <li><a href="{% url 'pybb:index' %}"><i class="icon-comments"></i> {% trans "Home" %}</a></li>
+                <li><a href="{% url 'pybb:topic_latest' %}"><i class="icon-sort-by-attributes-alt"></i> {% trans "Latest topics" %}</a></li>
             </ul>
         </li>
 
@@ -38,13 +32,13 @@
             </a>
             <ul class="dropdown-menu">
                 <li>
-                    <a href="{% url wall %}">
+                    <a href="{% url 'wall' %}">
                         <i class="icon-th"></i>
                         {% trans "The Big Wall" %}
                     </a>
                 </li>
                 <li>
-                    <a href="{% url iotd_archive %}">
+                    <a href="{% url 'iotd_archive' %}">
                         <i class="icon-trophy"></i>
                         {% trans "Image of the day" %}
                     </a>
@@ -53,14 +47,14 @@
                 <li class="divider"></li>
 
                 <li>
-                    <a href="{% url rawdata.publicdatapool_list %}">
+                    <a href="{% url 'rawdata.publicdatapool_list' %}">
                         <i class="icon-book"></i>
                         {% trans "Public data pools" %}
                     </a>
                 </li>
 
                 <li>
-                    <a href="{% url haystack_search %}">
+                    <a href="{% url 'haystack_search' %}">
                         <i class="icon-search"></i>
                         {% trans "Advanced search" %}
                     </a>
@@ -68,14 +62,14 @@
                 <li class="divider"></li>
                 {% if request.user.is_superuser %}
                 <li>
-                    <a href="{% url stats %}">
+                    <a href="{% url 'stats' %}">
                         <i class="icon-bar-chart"></i>
                         {% trans "Stats" %}
                     </a>
                 </li>
                 {% endif %}
                 <li>
-                    <a href="{% url leaderboard %}">
+                    <a href="{% url 'leaderboard' %}">
                         <i class="icon-list-ol"></i>
                         {% trans "Leaderboard" %}
                     </a>
@@ -90,19 +84,19 @@
             </a>
             <ul class="dropdown-menu">
                 <li>
-                    <a href="{% url help %}">
+                    <a href="{% url 'help' %}">
                         <i class="icon-info-sign"></i>
                         {% trans "What is this site?" %}
                     </a>
                 </li>
                 <li>
-                    <a href="{% url faq %}">
+                    <a href="{% url 'faq' %}">
                         <i class="icon-question-sign"></i>
                         {% trans "FAQ" %}
                     </a>
                 </li>
                 <li>
-                    <a href="{% url rawdata.help1 %}">
+                    <a href="{% url 'rawdata.help1' %}">
                         <i class="icon-book"></i>
                         {% trans "AstroBin Raw Data" %}
                     </a>
@@ -112,13 +106,13 @@
                 <li class="divider"></li>
 
                 <li>
-                    <a href="{% url api %}">
+                    <a href="{% url 'api' %}">
                         <i class="icon-key"></i>
                         API (beta)
                     </a>
                 </li>
                 <li>
-                    <a href="{% url affiliates %}">
+                    <a href="{% url 'affiliates' %}">
                         <i class="icon-group"></i>
                         {% trans "Affiliates" %}
                     </a>

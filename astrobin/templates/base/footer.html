@@ -1,4 +1,5 @@
 {% load i18n %}
+{% load url from future %}
 
 <footer>
     {% block footer %}
@@ -13,13 +14,19 @@
             <div class="span3">
                 <h3>{% trans "Site links" %}</h3>
                 <ul>
-                    <li><a href="{% url index %}">{% trans "Home" %}</a></li>
+                    <li><a href="{% url 'index' %}">{% trans "Home" %}</a></li>
                     <li><a href="/blog/">{% trans "Blog" %}</a></li>
-                    <li><a href="/forum/">{% trans "Forum" %} (beta)</a></li>
-                    <li><a href="{% url help %}">{% trans "Help" %}</a></li>
-                    <li><a href="{% url faq %}">{% trans "FAQ" %}</a></li>
-                    <li><a href="{% url tos %}">{% trans "Terms of Service" %}</a></li>
-                    <li><a href="{% url guidelines %}">{% trans "Guidelines" %}</a></li>
+                    <li><a href="{% url 'pybb:index' %}">{% trans "Forum" %} (beta)</a></li>
+                    <li><a href="{% url 'help' %}">{% trans "Help" %}</a></li>
+                    <li><a href="{% url 'faq' %}">{% trans "FAQ" %}</a></li>
+                    <li><a href="{% url 'tos' %}">{% trans "Terms of Service" %}</a></li>
+                    <li><a href="{% url 'guidelines' %}">{% trans "Guidelines" %}</a></li>
+                    <li>
+                        <a href="https://bitbucket.org/siovene/astrobin/overview" target="_blank">
+                            {% trans "Source code" %}
+                        </a>
+                    </li>
+
                 </ul>
             </div>
             <div class="span3">
@@ -42,7 +49,7 @@
                 <p>&copy; 2010-{% now "Y" %} <a href="/users/siovene/">Salvatore Iovene</a></p>
             </div>
             <div class="span4">
-                <a href="{% url index %}">{% trans "Home" %}</a> /
+                <a href="{% url 'index' %}">{% trans "Home" %}</a> /
                 <a href="http://facebook.com/astrobin" target="_blank">Facebook</a> /
                 <a href="https://plus.google.com/u/0/b/105764284631954214838/" target="_blank">Google+</a> /
                 <a href="http://twitter.com/astrobin_com" target="_blank">Twitter</a> /

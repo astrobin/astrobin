@@ -3,6 +3,7 @@
 {% load inbox %}
 {% load compressed %}
 {% load common_tags %}
+{% load url from future %}
 
 <!DOCTYPE html>
 <html lang="{% if request.user.is_authenticated and user_language %}{{user_language}}{% else %}en{% endif %}">
@@ -81,23 +82,18 @@
                     </a>
                     <div class="site-nav nav-collapse collapse pull-left">
                         <ul class="nav">
-                            <li><a href="{% url index %}">{% trans "Home" %}</a></li>
-                            <li class="dropdown">
+                            <li><a href="{% url 'index' %}">{% trans "Home" %}</a></li>
+                            <li class="dropdown {% current request "^/forum/" %}">
                                 <a href="#" class="dropdown-toggle" data-toggle="dropdown">
-                                    {% trans "Community" %}
-                                    <b class="caret"></b>
+                                    {% trans "Forum" %} (beta)
+                                    <i class="icon-caret-down"></i>
                                 </a>
                                 <ul class="dropdown-menu">
-                                    <li><a href="/blog/"><i class="icon-pencil"></i> {% trans "Blog" %}</a></li>
-                                    <li class="divider">
-                                    <li>
-                                        <a href="/forum/" target="_blank">
-                                            <i class="icon-comments"></i>
-                                            {% trans "Forum" %} (beta)
-                                        </a>
-                                    </li>
+                                    <li><a href="{% url 'pybb:index' %}"><i class="icon-comments"></i> {% trans "Home" %}</a></li>
+                                    <li><a href="{% url 'pybb:topic_latest' %}"><i class="icon-sort-by-attributes-alt"></i> {% trans "Latest topics" %}</a></li>
                                 </ul>
                             </li>
+
                             <li class="dropdown">
                                 <a href="#" class="dropdown-toggle" data-toggle="dropdown">
                                     {% trans "Explore" %}
@@ -105,13 +101,13 @@
                                 </a>
                                 <ul class="dropdown-menu">
                                     <li>
-                                        <a href="{% url wall %}">
+                                        <a href="{% url 'wall' %}">
                                             <i class="icon-th"></i>
                                             {% trans "The Big Wall" %}
                                         </a>
                                     </li>
                                     <li>
-                                        <a href="{% url iotd_archive %}">
+                                        <a href="{% url 'iotd_archive' %}">
                                             <i class="icon-trophy"></i>
                                             {% trans "Image of the day" %}
                                         </a>
@@ -120,7 +116,7 @@
                                     <li class="divider"></li>
 
                                     <li>
-                                        <a href="{% url rawdata.publicdatapool_list %}">
+                                        <a href="{% url 'rawdata.publicdatapool_list' %}">
                                             <i class="icon-book"></i>
                                             {% trans "Public data pools" %}
                                         </a>
@@ -129,20 +125,20 @@
 
                                     <li class="divider"></li>
                                     <li>
-                                        <a href="{% url haystack_search %}">
+                                        <a href="{% url 'haystack_search' %}">
                                             <i class="icon-search"></i>
                                             {% trans "Advanced search" %}
                                         </a>
                                     </li>
                                     <li class="divider"></li>
                                     <li>
-                                        <a href="{% url stats %}">
+                                        <a href="{% url 'stats' %}">
                                             <i class="icon-bar-chart"></i>
                                             {% trans "Stats" %}
                                         </a>
                                     </li>
                                     <li>
-                                        <a href="{% url leaderboard %}">
+                                        <a href="{% url 'leaderboard' %}">
                                             <i class="icon-list-ol"></i>
                                             {% trans "Leaderboard" %}
                                         </a>
@@ -156,34 +152,28 @@
                                 </a>
                                 <ul class="dropdown-menu">
                                     <li>
-                                        <a href="{% url help %}">
+                                        <a href="{% url 'help' %}">
                                             <i class="icon-info-sign"></i>
                                             {% trans "What is this site?" %}
                                         </a>
                                     </li>
                                     <li>
-                                        <a href="{% url faq %}">
+                                        <a href="{% url 'faq' %}">
                                             <i class="icon-question-sign"></i>
                                             {% trans "FAQ" %}
-                                        </a>
-                                    </li>
-                                    <li>
-                                        <a href="{% url help_questions %}">
-                                            <i class="icon-question-sign"></i>
-                                            {% trans "AstroBin Questions" %}
                                         </a>
                                     </li>
 
                                     <li class="divider"></li>
 
                                     <li>
-                                        <a href="{% url api %}">
+                                        <a href="{% url 'api' %}">
                                             <i class="icon-key"></i>
                                             API (beta)
                                         </a>
                                     </li>
                                     <li>
-                                        <a href="{% url affiliates %}">
+                                        <a href="{% url 'affiliates' %}">
                                             <i class="icon-group"></i>
                                             {% trans "Affiliates" %}
                                         </a>
@@ -214,7 +204,7 @@
                             {% if request.user.is_authenticated %}
                             <li class="dropdown">
                                 <div class="btn-group">
-                                    <a href="{% url user_page request.user %}" class="btn btn-primary">
+                                    <a href="{% url 'user_page' request.user %}" class="btn btn-primary">
                                         <i class="icon-user icon-white"></i>
                                         {{request.user|truncatechars:"12"}}
                                     </a>
@@ -223,7 +213,7 @@
                                     </a>
                                     <ul class="dropdown-menu">
                                         <li>
-                                            <a href="{% url image_upload %}">
+                                            <a href="{% url 'image_upload' %}">
                                                 <i class="icon-upload-alt"></i>
                                                 {% trans "Upload" %}
                                             </a>
@@ -232,7 +222,7 @@
 
                                         {% if is_producer or is_retailer %}
                                             <li>
-                                                <a href="{% url user_page_commercial_products request.user %}">
+                                                <a href="{% url 'user_page_commercial_products' request.user %}">
                                                     <i class="icon-barcode"></i>
                                                     {% trans "Commercial products" %}
                                                 </a>
@@ -240,19 +230,19 @@
                                         {% endif %}
 
                                         <li>
-                                            <a href="{% url user_page request.user %}">
+                                            <a href="{% url 'user_page' request.user %}">
                                                 <i class="icon-picture"></i>
                                                 {% trans "Gallery" %}
                                             </a>
                                         </li>
                                         <li>
-                                            <a href="{% url user_page_bookmarks request.user %}">
+                                            <a href="{% url 'user_page_bookmarks' request.user %}">
                                                 <i class="icon-bookmark"></i>
                                                 {% trans "Bookmarks" %}
                                             </a>
                                         </li>
                                         <li>
-                                            <a href="{% url user_page_plots request.user %}">
+                                            <a href="{% url 'user_page_plots' request.user %}">
                                                 <i class="icon-bar-chart"></i>
                                                 {% trans "Plots" %}
                                             </a>
@@ -260,13 +250,13 @@
                                         <li class="divider"></li>
 
                                         <li>
-                                            <a href="{% url messages_inbox %}">
+                                            <a href="{% url 'messages_inbox' %}">
                                                 <i class="icon-inbox"></i>
                                                 {% trans "My messages" %}
                                             </a>
                                         </li>
                                         <li>
-                                            <a href="{% url user_page_api_keys request.user %}">
+                                            <a href="{% url 'user_page_api_keys' request.user %}">
                                                 <i class="icon-key"></i>
                                                 {% trans "API Keys" %}
                                             </a>
@@ -274,7 +264,7 @@
 
                                         <li class="nav-header">{% trans "My settings" %}</li>
                                         <li>
-                                            <a href="{% url profile_edit_basic %}">
+                                            <a href="{% url 'profile_edit_basic' %}">
                                                 <i class="icon-edit"></i>
                                                 {% trans "Basic information" %}
                                             </a>
@@ -282,7 +272,7 @@
 
                                         {% if is_producer or is_retailer %}
                                         <li>
-                                            <a href="{% url profile_edit_commercial %}">
+                                            <a href="{% url 'profile_edit_commercial' %}">
                                                 <i class="icon-briefcase"></i>
                                                 {% trans "Commercial information" %}
                                             </a>
@@ -291,7 +281,7 @@
 
                                         {% if is_retailer %}
                                         <li>
-                                            <a href="{% url profile_edit_retailer %}">
+                                            <a href="{% url 'profile_edit_retailer' %}">
                                                 <i class="icon-truck"></i>
                                                 {% trans "Retailer information" %}
                                             </a>
@@ -299,38 +289,38 @@
                                         {% endif %}
 
                                         <li>
-                                            <a href="{% url profile_edit_gear %}">
+                                            <a href="{% url 'profile_edit_gear' %}">
                                                 <i class="icon-cog"></i>
                                                 {% trans "Gear" %}
                                             </a>
                                         </li>
                                         <li>
-                                            <a href="{% url profile_edit_locations %}">
+                                            <a href="{% url 'profile_edit_locations' %}">
                                                 <i class="icon-globe"></i>
                                                 {% trans "Locations" %}
                                             </a>
                                         </li>
                                         <li>
-                                            <a href="{% url profile_edit_license %}">
+                                            <a href="{% url 'profile_edit_license' %}">
                                                 <i class="icon-legal"></i>
                                                 {% trans "Default license" %}
                                             </a>
                                         </li>
                                         <li>
-                                            <a href="{% url profile_edit_preferences %}">
+                                            <a href="{% url 'profile_edit_preferences' %}">
                                                 <i class="icon-wrench"></i>
                                                 {% trans "Preferences" %}
                                             </a>
                                         </li>
                                         <li>
-                                            <a href="{% url avatar_change %}">
+                                            <a href="{% url 'avatar_change' %}">
                                                 <i class="icon-user"></i>
                                                 {% trans "Avatar" %}
                                             </a>
                                         </li>
                                         <li class="divider"></li>
                                         <li>
-                                            <a href="{% url auth_logout %}">
+                                            <a href="{% url 'auth_logout' %}">
                                                 <i class="icon-signout"></i>
                                                 {% trans "Logout" %}
                                             </a>
@@ -355,7 +345,7 @@
 
                             {% else %} <!-- request.user.is_authenticated -->
                             <li>
-                                <a href="{% url auth_login %}{% if request.path|slice:"9" != "/accounts" %}?next={{request.path}}{% endif %}">
+                                <a href="{% url 'auth_login' %}{% if request.path|slice:"9" != "/accounts" %}?next={{request.path}}{% endif %}">
                                     {% if privatebeta_enabled %}
                                         {% trans "Have an invite? Login!" %}
                                     {% else %}
@@ -365,14 +355,14 @@
                             </li>
                             {% if not privatebeta_enabled %}
                             <li>
-                                <a href="{% url registration_register %}">{% trans "Register" %}</a>
+                                <a href="{% url 'registration_register' %}">{% trans "Register" %}</a>
                             </li>
                             {% endif %}
                         {% endif %} <!-- request.user.is_authenticated -->
                         </ul>
                     </div> <!-- user-nav -->
 
-                    <form class="navbar-search pull-right visible-desktop" id="quick-search" action="{% url haystack_search %}" method="get" >
+                    <form class="navbar-search pull-right visible-desktop" id="quick-search" action="{% url 'haystack_search' %}" method="get" >
                         <input class="tbox"
                                id="q"
                                type="text"
@@ -476,7 +466,7 @@
                     {% if not profile.company_name or not profile.company_description or not profile.company_website %}
                         <div class="alert alert-warning">
                             <h4 class="alert-heading"><i class="icon-warning-sign"></i> {% trans "Warning!" %}</h4>
-                            {% url profile_edit_commercial as the_url %}
+                            {% url 'profile_edit_commercial' as the_url %}
                             {% blocktrans %}As a producer and/or a retailer on AstroBin, it's very important that you fill in all of your company details! Click <a href="{{the_url}}">here</a> to do it now.{% endblocktrans %}
                         </div>
                     {% endif %}
@@ -488,7 +478,7 @@
                     {% if not profile.retailer_country %}
                         <div class="alert alert-warning">
                             <h4 class="alert-heading"><i class="icon-warning-sign"></i> {% trans "Warning!" %}</h4>
-                            {% url profile_edit_retailer as the_url %}
+                            {% url 'profile_edit_retailer' as the_url %}
                             {% blocktrans %}As a retailer on AstroBin, it's very important that you fill in your country of operation! Click <a href="{{the_url}}">here</a> to do it now.{% endblocktrans %}
                         </div>
                     {% endif %}
@@ -511,12 +501,18 @@
                     <div class="span3">
                         <h3>{% trans "Site links" %}</h3>
                         <ul>
-                            <li><a href="{% url index %}">{% trans "Home" %}</a></li>
+                            <li><a href="{% url 'index' %}">{% trans "Home" %}</a></li>
                             <li><a href="/blog/">{% trans "Blog" %}</a></li>
-                            <li><a href="{% url help %}">{% trans "Help" %}</a></li>
-                            <li><a href="{% url faq %}">{% trans "FAQ" %}</a></li>
-                            <li><a href="{% url tos %}">{% trans "Terms of Service" %}</a></li>
-                            <li><a href="{% url guidelines %}">{% trans "Guidelines" %}</a></li>
+                            <li><a href="{% url 'pybb:index' %}">{% trans "Forum" %} (beta)</a></li>
+                            <li><a href="{% url 'help' %}">{% trans "Help" %}</a></li>
+                            <li><a href="{% url 'faq' %}">{% trans "FAQ" %}</a></li>
+                            <li><a href="{% url 'tos' %}">{% trans "Terms of Service" %}</a></li>
+                            <li><a href="{% url 'guidelines' %}">{% trans "Guidelines" %}</a></li>
+                            <li>
+                                <a href="https://bitbucket.org/siovene/astrobin/overview" target="_blank">
+                                    {% trans "Source code" %}
+                                </a>
+                            </li>
                         </ul>
                     </div>
                     <div class="span3">
@@ -537,10 +533,9 @@
                 <div class="row bottom">
                     <div class="span8">
                         <p>&copy; 2010-2012 <a href="/users/siovene/">Salvatore Iovene</a><br/>
-                        <span style="color:#999">Hosted by <a href="http://www.aspwebhosting.com/" target="_blank">ASPwebhosting.com</a> (AstroBin user <a href="{% url user_page "Photon" %}">Photon</a>)</span></p>
                     </div>
                     <div class="span4">
-                        <a href="{% url index %}">{% trans "Home" %}</a> /
+                        <a href="{% url 'index' %}">{% trans "Home" %}</a> /
                         <a href="http://facebook.com/astrobin" target="_blank">Facebook</a> /
                         <a href="https://plus.google.com/u/0/b/105764284631954214838/" target="_blank">Google+</a> /
                         <a href="http://twitter.com/astrobin_com" target="_blank">Twitter</a> /
