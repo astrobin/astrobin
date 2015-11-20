@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2015-11-19 20:42+0000\n"
+"POT-Creation-Date: 2015-11-20 07:06+0000\n"
 "PO-Revision-Date: 2014-02-05 12:48+0000\n"
 "Last-Translator: Omar <thekingosm168@hotmail.com>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -1030,7 +1030,7 @@ msgstr "رابط"
 msgid "Link to TIFF/FITS"
 msgstr "رابط لملف TIFF/FITS"
 
-#: forms.py:64 models.py:695 templates/maintenance_base.html:311
+#: forms.py:64 models.py:695 templates/maintenance_base.html:301
 #: templates/profile-edit-menu.html:36
 #: templates/image/detail/image_card.html:88
 msgid "Locations"
@@ -1153,7 +1153,7 @@ msgid "Images"
 msgstr "الصور"
 
 #: forms.py:277 models.py:651 views.py:1755
-#: templates/maintenance_base.html:305 templates/profile-edit-menu.html:30
+#: templates/maintenance_base.html:295 templates/profile-edit-menu.html:30
 #: templates/wall.html:131 templates/inclusion_tags/search_image_list.html:13
 #: templates/user/profile-subnav.html:130
 msgid "Gear"
@@ -2284,7 +2284,7 @@ msgstr "موقع الويب للشركة التي تُمثلُها علي Astrob
 msgid "Country of operation"
 msgstr "دولة العمل"
 
-#: models.py:1644 templates/maintenance_base.html:317
+#: models.py:1644 templates/maintenance_base.html:307
 #: templates/profile-edit-menu.html:42
 msgid "Default license"
 msgstr "الرخصة الافتراضية"
@@ -2906,7 +2906,7 @@ msgid "There is no activity yet."
 msgstr "لايوجد نشاط بعد."
 
 #: templates/affiliates.html:8 templates/affiliates.html.py:11
-#: templates/maintenance_base.html:189 templates/base/site_links.html:123
+#: templates/maintenance_base.html:179 templates/base/site_links.html:117
 #: templates/index/root.html:317
 msgid "Affiliates"
 msgstr "المُنتجات"
@@ -2964,13 +2964,13 @@ msgstr ""
 "Astrobin!"
 
 #: templates/explore_choose.html:5 templates/explore_choose.html.py:8
-#: templates/maintenance_base.html:104 templates/base/site_links.html:36
+#: templates/maintenance_base.html:100 templates/base/site_links.html:30
 msgid "Explore"
 msgstr "استعراض"
 
-#: templates/explore_choose.html:10 templates/maintenance_base.html:111
+#: templates/explore_choose.html:10 templates/maintenance_base.html:107
 #: templates/wall.html:9 templates/wall.html.py:175
-#: templates/base/site_links.html:43
+#: templates/base/site_links.html:37
 msgid "The Big Wall"
 msgstr "الحائط الكبير"
 
@@ -2982,9 +2982,9 @@ msgstr ""
 "أفضل طريقة لرؤية الجديد في موقع Astrobin: حائط كبير يحتوي علي 100 صورة في "
 "الصفحة ، يمكنك ترتيبهم و ترشيحهم حسب رغبتك."
 
-#: templates/faq.html:4 templates/maintenance_base.html:168
-#: templates/maintenance_base.html:519 templates/base/footer.html:20
-#: templates/base/site_links.html:101
+#: templates/faq.html:4 templates/maintenance_base.html:164
+#: templates/maintenance_base.html:510 templates/base/footer.html:21
+#: templates/base/site_links.html:95
 msgid "FAQ"
 msgstr "الأسئلة الأكثر شيوعًا"
 
@@ -3287,7 +3287,7 @@ msgstr ""
 "معنا</a>!"
 
 #: templates/guidelines.html:4 templates/guidelines.html.py:9
-#: templates/maintenance_base.html:521 templates/base/footer.html:22
+#: templates/maintenance_base.html:512 templates/base/footer.html:23
 msgid "Guidelines"
 msgstr "خطوط الإرشاد"
 
@@ -3404,18 +3404,18 @@ msgstr ""
 "الحسّ السليم\". إذا أحسست أنه لا يمكنك الإلتزام بهذه التعليمات ، من فضلك "
 "أحطنا علماً بما تراه خاطئاً."
 
-#: templates/help.html:4 templates/maintenance_base.html:155
-#: templates/maintenance_base.html:518 templates/base/footer.html:19
-#: templates/base/site_links.html:88
+#: templates/help.html:4 templates/maintenance_base.html:151
+#: templates/maintenance_base.html:509 templates/base/footer.html:20
+#: templates/base/site_links.html:82
 msgid "Help"
 msgstr "مساعدة"
 
-#: templates/help.html:8 templates/maintenance_base.html:162
-#: templates/base/site_links.html:95
+#: templates/help.html:8 templates/maintenance_base.html:158
+#: templates/base/site_links.html:89
 msgid "What is this site?"
 msgstr "ما هذا الموقع؟"
 
-#: templates/help.html:10 templates/maintenance_base.html:466
+#: templates/help.html:10 templates/maintenance_base.html:456
 #: templates/base/alerts.html:13 templates/index/root.html:269
 msgid "Hey!"
 msgstr "أهلا و سهلاً!"
@@ -3699,11 +3699,11 @@ msgid ""
 msgstr ""
 
 #: templates/leaderboard.html:7 templates/leaderboard.html.py:11
-#: templates/maintenance_base.html:148 templates/base/site_links.html:80
+#: templates/maintenance_base.html:144 templates/base/site_links.html:74
 msgid "Leaderboard"
 msgstr "لوحة الشرف"
 
-#: templates/leaderboard.html:21 templates/maintenance_base.html:210
+#: templates/leaderboard.html:21 templates/maintenance_base.html:200
 #: templates/image/detail/menu/user.html:8
 #: templates/inclusion_tags/image_list.html:11
 #: templates/inclusion_tags/search_image_list.html:122
@@ -3724,60 +3724,52 @@ msgstr "المتابعين"
 msgid "Total integration"
 msgstr "مدة تعريض الضوء الكلية"
 
-#: templates/maintenance_base.html:81 templates/maintenance_base.html:514
-#: templates/base/footer.html:14
+#: templates/maintenance_base.html:82 templates/maintenance_base.html:504
+#: templates/base/footer.html:15
 msgid "Site links"
 msgstr "روابط الموقع"
 
-#: templates/maintenance_base.html:85 templates/maintenance_base.html:516
-#: templates/maintenance_base.html:545 templates/base/footer.html:16
-#: templates/base/footer.html.py:45
+#: templates/maintenance_base.html:86 templates/maintenance_base.html.py:93
+#: templates/maintenance_base.html:506 templates/maintenance_base.html:540
+#: templates/base/footer.html:17 templates/base/footer.html.py:52
+#: templates/base/site_links.html:23
 msgid "Home"
 msgstr "الرئيسية"
 
-#: templates/maintenance_base.html:88 templates/base/site_links.html:18
-msgid "Community"
-msgstr "المجتمع"
-
-#: templates/maintenance_base.html:92 templates/maintenance_base.html:517
-#: templates/base/footer.html:17 templates/base/site_links.html:22
-msgid "Blog"
-msgstr "المدوّنة"
-
-#: templates/maintenance_base.html:97 templates/base/footer.html:18
-#: templates/base/site_links.html:23
+#: templates/maintenance_base.html:89 templates/maintenance_base.html:508
+#: templates/base/footer.html:19 templates/base/site_links.html:19
 #, fuzzy
 msgid "Forum"
 msgstr "منتديات"
 
-#: templates/maintenance_base.html:117 templates/base/site_links.html:49
+#: templates/maintenance_base.html:94 templates/base/site_links.html:24
+msgid "Latest topics"
+msgstr ""
+
+#: templates/maintenance_base.html:113 templates/base/site_links.html:43
 #: templates/image/detail/iotd_banner.html:10 templates/index/root.html:75
 msgid "Image of the day"
 msgstr "صورة اليوم"
 
-#: templates/maintenance_base.html:126 templates/base/site_links.html:58
+#: templates/maintenance_base.html:122 templates/base/site_links.html:52
 msgid "Public data pools"
 msgstr "مساحات البيانات العامة"
 
-#: templates/maintenance_base.html:135 templates/base/site_links.html:65
+#: templates/maintenance_base.html:131 templates/base/site_links.html:59
 msgid "Advanced search"
 msgstr "بحث متقدّم"
 
-#: templates/maintenance_base.html:142 templates/stats.html:7
-#: templates/base/site_links.html:73 templates/user/profile.html:61
+#: templates/maintenance_base.html:138 templates/stats.html:7
+#: templates/base/site_links.html:67 templates/user/profile.html:61
 msgid "Stats"
 msgstr "الإحصائيّات"
 
-#: templates/maintenance_base.html:174
-msgid "AstroBin Questions"
-msgstr "أسئلة AstroBin"
-
-#: templates/maintenance_base.html:198 templates/base/site_links.html:132
+#: templates/maintenance_base.html:188 templates/base/site_links.html:126
 #: templates/contact_form/contact.html:5 templates/contact_form/contact.html:8
 msgid "Contact"
 msgstr "تواصل معنا"
 
-#: templates/maintenance_base.html:229 templates/upload.html:7
+#: templates/maintenance_base.html:219 templates/upload.html:7
 #: templates/upload.html.py:20 templates/upload.html:36
 #: templates/avatar/change.html:38 templates/base/user_links_entries.html:139
 #: templates/image/detail/modals/upload_revision.html:17
@@ -3785,24 +3777,24 @@ msgstr "تواصل معنا"
 msgid "Upload"
 msgstr "ارفع صورة"
 
-#: templates/maintenance_base.html:232
+#: templates/maintenance_base.html:222
 #: templates/base/user_links_entries.html:142
 msgid "My places"
 msgstr "صوري"
 
-#: templates/maintenance_base.html:238 templates/wall.html:137
+#: templates/maintenance_base.html:228 templates/wall.html:137
 #: templates/base/user_links_entries.html:148
 #: templates/user/profile-subnav.html:20
 msgid "Commercial products"
 msgstr "المنتجات التجارية"
 
-#: templates/maintenance_base.html:246
+#: templates/maintenance_base.html:236
 #: templates/base/user_links_entries.html:156 templates/popover/user.html:30
 #: templates/user/profile-subnav.html:28
 msgid "Gallery"
 msgstr "معرض الصور"
 
-#: templates/maintenance_base.html:252 templates/wall.html:50
+#: templates/maintenance_base.html:242 templates/wall.html:50
 #: templates/base/user_links_entries.html:162
 #: templates/inclusion_tags/search_image_list.html:44
 #: templates/inclusion_tags/search_image_list.html:97
@@ -3810,100 +3802,100 @@ msgstr "معرض الصور"
 msgid "Bookmarks"
 msgstr "الصور المفضلة"
 
-#: templates/maintenance_base.html:258
+#: templates/maintenance_base.html:248
 #: templates/base/user_links_entries.html:168
 #: templates/user/profile-subnav.html:48
 #: templates/user/profile/commercial/products.html:209
 msgid "Plots"
 msgstr "المخطّطات البيانية"
 
-#: templates/maintenance_base.html:266
+#: templates/maintenance_base.html:256
 #: templates/base/user_links_entries.html:195 templates/messages/inbox.html:9
 msgid "My messages"
 msgstr "رسائلي"
 
-#: templates/maintenance_base.html:272
+#: templates/maintenance_base.html:262
 #: templates/base/user_links_entries.html:201
 #: templates/user/profile-subnav.html:70
 msgid "API Keys"
 msgstr "مفاتيح الـ API"
 
-#: templates/maintenance_base.html:276
+#: templates/maintenance_base.html:266
 #: templates/base/user_links_entries.html:208
 msgid "My settings"
 msgstr "إعداداتي"
 
-#: templates/maintenance_base.html:280 templates/profile-edit-menu.html:8
+#: templates/maintenance_base.html:270 templates/profile-edit-menu.html:8
 msgid "Basic information"
 msgstr "المعلومات الرئيسية"
 
-#: templates/maintenance_base.html:288 templates/profile-edit-menu.html:15
+#: templates/maintenance_base.html:278 templates/profile-edit-menu.html:15
 msgid "Commercial information"
 msgstr "معلومات تجاريّة"
 
-#: templates/maintenance_base.html:297 templates/profile-edit-menu.html:23
+#: templates/maintenance_base.html:287 templates/profile-edit-menu.html:23
 msgid "Retailer information"
 msgstr "معلومات البائع"
 
-#: templates/maintenance_base.html:323 templates/profile-edit-menu.html:54
+#: templates/maintenance_base.html:313 templates/profile-edit-menu.html:54
 msgid "Preferences"
 msgstr "التفضيلات"
 
-#: templates/maintenance_base.html:329 templates/profile-edit-menu.html:60
+#: templates/maintenance_base.html:319 templates/profile-edit-menu.html:60
 msgid "Avatar"
 msgstr "الصورة الرمزية"
 
-#: templates/maintenance_base.html:336
+#: templates/maintenance_base.html:326
 #: templates/base/user_links_entries.html:226 templates/user/profile.html:107
 #: templates/user/profile.html.py:110
 msgid "Logout"
 msgstr "تسجيل الخروج"
 
-#: templates/maintenance_base.html:349 templates/maintenance_base.html:350
+#: templates/maintenance_base.html:339 templates/maintenance_base.html:340
 #: templates/base/user_links_entries.html:111
 msgid "Notifications"
 msgstr "إشعاراتك"
 
-#: templates/maintenance_base.html:361
+#: templates/maintenance_base.html:351
 #: templates/base/user_links_entries.html:270
 msgid "Have an invite? Login!"
 msgstr "هل تملك دعوة؟ سجّل دخولك!"
 
-#: templates/maintenance_base.html:363
+#: templates/maintenance_base.html:353
 #: templates/base/user_links_entries.html:272
 #: templates/registration/activation_complete.html:7
 msgid "Login"
 msgstr "تسجيل الدخول"
 
-#: templates/maintenance_base.html:369
+#: templates/maintenance_base.html:359
 #: templates/base/user_links_entries.html:278
 #: templates/registration/login.html:15
 msgid "Register"
 msgstr "تسجيل حساب"
 
-#: templates/maintenance_base.html:381 templates/base/search_form.html:8
+#: templates/maintenance_base.html:371 templates/base/search_form.html:8
 msgid "Quick search"
 msgstr "بحث سريع"
 
-#: templates/maintenance_base.html:467 templates/base/alerts.html:14
+#: templates/maintenance_base.html:457 templates/base/alerts.html:14
 msgid "Success!"
 msgstr "تمّ بنجاح!"
 
-#: templates/maintenance_base.html:468 templates/maintenance_base.html:480
-#: templates/maintenance_base.html:492 templates/upload.html:55
+#: templates/maintenance_base.html:458 templates/maintenance_base.html:470
+#: templates/maintenance_base.html:482 templates/upload.html:55
 #: templates/upload.html.py:157 templates/upload.html:350
 #: templates/base/alerts.html:15 templates/base/alerts.html.py:28
 #: templates/base/alerts.html:40
 msgid "Warning!"
 msgstr "تحذير!"
 
-#: templates/maintenance_base.html:469 templates/upload.html:76
+#: templates/maintenance_base.html:459 templates/upload.html:76
 #: templates/base/alerts.html:16
 #: templates/image/detail/modals/send_to_sharedfolder.html:25
 msgid "Error!"
 msgstr "خطأ!"
 
-#: templates/maintenance_base.html:482 templates/base/alerts.html:30
+#: templates/maintenance_base.html:472 templates/base/alerts.html:30
 #, python-format
 msgid ""
 "As a producer and/or a retailer on AstroBin, it's very important that you "
@@ -3913,7 +3905,7 @@ msgstr ""
 "كمنتج أو بائع علي AstroBin ، من المهم أن تملأ كل تفاصيل شركتك! للقيام بذلك "
 "اضغط <a href=\"%(the_url)s\">هنا</a>الآن."
 
-#: templates/maintenance_base.html:494 templates/base/alerts.html:42
+#: templates/maintenance_base.html:484 templates/base/alerts.html:42
 #, python-format
 msgid ""
 "As a retailer on AstroBin, it's very important that you fill in your country "
@@ -3922,11 +3914,11 @@ msgstr ""
 "كبائع علي AstroBin من المهم أن تكتب الدولة الّتي تعمل بها! للقيام بذلك اضغط "
 "<a href=\"%(the_url)s\">هنا</a> الآن."
 
-#: templates/maintenance_base.html:508 templates/base/footer.html:8
+#: templates/maintenance_base.html:498 templates/base/footer.html:9
 msgid "About"
 msgstr "حول الموقع"
 
-#: templates/maintenance_base.html:510 templates/base/footer.html:10
+#: templates/maintenance_base.html:500 templates/base/footer.html:11
 msgid ""
 "AstroBin is an image hosting website specifically targeted to "
 "astrophotographers: it's the first and the last place where you need to "
@@ -3934,24 +3926,32 @@ msgid ""
 "astrophotographers."
 msgstr ""
 
-#: templates/maintenance_base.html:520 templates/tos.html:4
-#: templates/tos.html.py:9 templates/base/footer.html:21
+#: templates/maintenance_base.html:507 templates/base/footer.html:18
+msgid "Blog"
+msgstr "المدوّنة"
+
+#: templates/maintenance_base.html:511 templates/tos.html:4
+#: templates/tos.html.py:9 templates/base/footer.html:22
 msgid "Terms of Service"
 msgstr "شروط الخدمة"
 
-#: templates/maintenance_base.html:525 templates/base/footer.html:26
+#: templates/maintenance_base.html:515 templates/base/footer.html:26
+msgid "Source code"
+msgstr ""
+
+#: templates/maintenance_base.html:521 templates/base/footer.html:33
 msgid "Thanks to"
 msgstr "شكر خاص لـ"
 
-#: templates/maintenance_base.html:527 templates/base/footer.html:28
+#: templates/maintenance_base.html:523 templates/base/footer.html:35
 msgid "The localization team"
 msgstr "فريق الترجمة"
 
-#: templates/maintenance_base.html:532 templates/base/footer.html:33
+#: templates/maintenance_base.html:528 templates/base/footer.html:40
 msgid "Copyright"
 msgstr "حقوق النشر"
 
-#: templates/maintenance_base.html:534
+#: templates/maintenance_base.html:530
 msgid ""
 "AstroBin is Copyright &copy; 2010-2012 Salvatore Iovene, All Rights "
 "Reserved. The images on this websites are copyright of their respective "
@@ -3960,22 +3960,22 @@ msgstr ""
 "AstroBin هو حق نشر لـ Salvatore Iovene &copy; 2010-2012 ، جميع الحقوق "
 "محفوظة. كل الصور علي هذا الموقع هي حقوق نشر لمالكيها."
 
-#: templates/maintenance_base.html:549 templates/base/footer.html:49
+#: templates/maintenance_base.html:544 templates/base/footer.html:56
 msgid "Back to top"
 msgstr "العودة لأعلي"
 
-#: templates/maintenance_base.html:592 templates/base/js.html:33
+#: templates/maintenance_base.html:587 templates/base/js.html:33
 #: templates/image/edit/acquisition.html:69 templates/image/edit/basic.html:74
 #: templates/image/edit/gear.html:48 templates/messages/compose.html:16
 #: templates/openid_provider/decide.html:16
 msgid "Cancel"
 msgstr "إلغاء"
 
-#: templates/maintenance_base.html:622 templates/base/js.html:82
+#: templates/maintenance_base.html:617 templates/base/js.html:82
 msgid "No file selected"
 msgstr "لم يُحدَّد أي ملف"
 
-#: templates/maintenance_base.html:623 templates/base/js.html:83
+#: templates/maintenance_base.html:618 templates/base/js.html:83
 msgid "Choose file"
 msgstr "اختيار ملف"
 
@@ -4282,15 +4282,11 @@ msgstr "رفع صورة جديدة"
 msgid "Avatar image"
 msgstr "الصورة الرمزية"
 
-#: templates/base/footer.html:35
+#: templates/base/footer.html:42
 msgid "The images on this websites are copyright of their respective owners."
 msgstr "حقوق نشر الصور الموجودة في هذا الموقع محفوظة لأصحابها."
 
-#: templates/base/site_links.html:28
-msgid "Source code"
-msgstr ""
-
-#: templates/base/site_links.html:107
+#: templates/base/site_links.html:101
 msgid "AstroBin Raw Data"
 msgstr "بيانات AstroBin الخام"
 
@@ -7022,6 +7018,12 @@ msgstr "قم باختيار لغتك ، و أيّ إشعارات بريد إلك
 #: templates/user/profile/edit/retailer.html:6
 msgid "Edit your retailer information"
 msgstr "تعديل معلومات متاجرك"
+
+#~ msgid "Community"
+#~ msgstr "المجتمع"
+
+#~ msgid "AstroBin Questions"
+#~ msgstr "أسئلة AstroBin"
 
 #~ msgid ""
 #~ "As of today, the most common form in which astronomy communities exist is "
