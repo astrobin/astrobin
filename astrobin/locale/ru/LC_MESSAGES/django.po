@@ -8,8 +8,8 @@ msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2015-11-20 13:33+0000\n"
-"PO-Revision-Date: 2015-11-20 14:04+0000\n"
-"Last-Translator: csve <csve00@gmail.com>\n"
+"PO-Revision-Date: 2015-11-22 15:43+0000\n"
+"Last-Translator: sypai <sypai@mail.ru>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
 "Language: ru\n"
 "MIME-Version: 1.0\n"
@@ -18,7 +18,7 @@ msgstr ""
 "Plural-Forms: nplurals=3; plural=(n%10==1 && n%100!=11 ? 0 : n%10>=2 && n%"
 "10<=4 && (n%100<10 || n%100>=20) ? 1 : 2);\n"
 "X-Generator: Pootle 2.5.0\n"
-"X-POOTLE-MTIME: 1448028293.956405\n"
+"X-POOTLE-MTIME: 1448207037.943681\n"
 
 #: fields.py:10
 msgid "United Kingdom"
@@ -4974,7 +4974,7 @@ msgstr "Сменить лицензию"
 #: templates/image/detail/menu/actions.html:71
 #: templates/image/detail/modals/upload_revision.html:7
 msgid "Upload new revision"
-msgstr "Загрузить новую версию"
+msgstr "Загрузить другую версию"
 
 #: templates/image/detail/menu/actions.html:78
 msgid "Promote to public area"
@@ -6069,7 +6069,7 @@ msgid ""
 "<a href=\"%(object_url)s\"><strong>%(originator)s</strong> has published a "
 "new image.</a>"
 msgstr ""
-"<a href=\"%(object_url)s\"><strong>%(originator)s</strong> опубликовал новое "
+"<a href=\"%(object_url)s\"><strong>%(originator)s</strong> разместил НОВОЕ "
 "изображение.</a>"
 
 #: templates/notification/new_image/short.html:2
@@ -6078,13 +6078,13 @@ msgid ""
 "<a href=\"%(object_url)s\"><strong>%(originator)s</strong> has published a "
 "new image</a>"
 msgstr ""
-"<a href=\"%(object_url)s\"><strong>%(originator)s</strong> опубликовал новое "
+"<a href=\"%(object_url)s\"><strong>%(originator)s</strong> разместил НОВОЕ "
 "изображение</a>"
 
 #: templates/notification/new_image/short.txt:2
 #, python-format
 msgid "New image by %(originator)s"
-msgstr "Новое изображение от %(originator)s"
+msgstr "НОВОЕ изображение от %(originator)s"
 
 #: templates/notification/new_image_from_gear/full.txt:2
 #, python-format
@@ -6139,8 +6139,8 @@ msgid ""
 "%(originator)s has published a new image revision! Check it out at the "
 "following url: %(object_url)s"
 msgstr ""
-"%(originator)s выложил новую версию изображения! Зацените его по адресу: "
-"%(object_url)s"
+"%(originator)s выложил новую версию изображения! Оцените её по адресу: %"
+"(object_url)s"
 
 #: templates/notification/new_image_revision/notice.html:2
 #: templates/notification/new_image_revision/short.html:2
@@ -6149,7 +6149,7 @@ msgid ""
 "<a href=\"%(object_url)s\"><strong>%(originator)s</strong> has published a "
 "new image revision.</a>"
 msgstr ""
-"<a href=\"%(object_url)s\"><strong>%(originator)s</strong> опубликовал новую "
+"<a href=\"%(object_url)s\"><strong>%(originator)s</strong> опубликовал ещё "
 "версию изображения.</a>"
 
 #: templates/notification/new_image_revision/short.txt:2
@@ -6342,7 +6342,7 @@ msgstr ""
 #: templates/notification/received_email/short.html:2
 #: templates/notification/received_email/short.txt:2
 msgid "You have received a new private message."
-msgstr "Вы получили новое личное сообщение."
+msgstr "У вас новое личное сообщение."
 
 #: templates/notification/request_fulfilled/full.txt:2
 #, python-format
