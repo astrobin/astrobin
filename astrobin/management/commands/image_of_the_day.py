@@ -46,8 +46,10 @@ class Command(BaseCommand):
             start = start - timedelta(1)
             query['start'] = Q(uploaded__gte = start)
 
-        # Now remove duplicates and shuffle everything
+        # Now remove duplicates, remove past IOTDs, and shuffle everything
         candidates = list(set(liked_images + random_images))
+        past_iotd_pks = ImageOfTheDay.objects.values_list('image__pk', flat = True)
+        candidates = [x for x in candidates if x.pk not in past_iotd_pks]
         shuffle(candidates)
 
         candidate_images_for_iotd(candidates)

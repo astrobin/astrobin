@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2015-11-19 20:45+0000\n"
+"POT-Creation-Date: 2015-11-20 13:31+0000\n"
 "PO-Revision-Date: 2014-10-01 08:12+0000\n"
 "Last-Translator: ohmishonin <kasuzen@gmail.com>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -1030,7 +1030,7 @@ msgstr "リンク"
 msgid "Link to TIFF/FITS"
 msgstr "TIFF/FITSへのリンク"
 
-#: forms.py:64 models.py:695 templates/maintenance_base.html:311
+#: forms.py:64 models.py:695 templates/maintenance_base.html:304
 #: templates/profile-edit-menu.html:36
 #: templates/image/detail/image_card.html:88
 msgid "Locations"
@@ -1157,7 +1157,7 @@ msgid "Images"
 msgstr "画像"
 
 #: forms.py:277 models.py:651 views.py:1755
-#: templates/maintenance_base.html:305 templates/profile-edit-menu.html:30
+#: templates/maintenance_base.html:298 templates/profile-edit-menu.html:30
 #: templates/wall.html:131 templates/inclusion_tags/search_image_list.html:13
 #: templates/user/profile-subnav.html:130
 msgid "Gear"
@@ -2287,7 +2287,7 @@ msgstr "AstroBin上であなたが表示する会社のWebサイトURL。"
 msgid "Country of operation"
 msgstr "利用している国"
 
-#: models.py:1644 templates/maintenance_base.html:317
+#: models.py:1644 templates/maintenance_base.html:310
 #: templates/profile-edit-menu.html:42
 msgid "Default license"
 msgstr "デフォルトのライセンス"
@@ -2914,7 +2914,7 @@ msgid "There is no activity yet."
 msgstr "アクティビティはまだありません"
 
 #: templates/affiliates.html:8 templates/affiliates.html.py:11
-#: templates/maintenance_base.html:189 templates/base/site_links.html:123
+#: templates/maintenance_base.html:182 templates/base/site_links.html:120
 #: templates/index/root.html:317
 msgid "Affiliates"
 msgstr "アフィリエイト"
@@ -2971,13 +2971,13 @@ msgstr ""
 "らってありがとう！"
 
 #: templates/explore_choose.html:5 templates/explore_choose.html.py:8
-#: templates/maintenance_base.html:104 templates/base/site_links.html:36
+#: templates/maintenance_base.html:103 templates/base/site_links.html:33
 msgid "Explore"
 msgstr "エスクプローラ"
 
-#: templates/explore_choose.html:10 templates/maintenance_base.html:111
+#: templates/explore_choose.html:10 templates/maintenance_base.html:110
 #: templates/wall.html:9 templates/wall.html.py:175
-#: templates/base/site_links.html:43
+#: templates/base/site_links.html:40
 msgid "The Big Wall"
 msgstr "ビックウォール"
 
@@ -2990,9 +2990,9 @@ msgstr ""
 "を表示し、お気に入りをみつけるためにソートしたりフィルタリングすることができ"
 "ます。"
 
-#: templates/faq.html:4 templates/maintenance_base.html:168
-#: templates/maintenance_base.html:519 templates/base/footer.html:20
-#: templates/base/site_links.html:101
+#: templates/faq.html:4 templates/maintenance_base.html:167
+#: templates/maintenance_base.html:513 templates/base/footer.html:21
+#: templates/base/site_links.html:98
 msgid "FAQ"
 msgstr "FAQ"
 
@@ -3309,7 +3309,7 @@ msgstr ""
 "ださい。"
 
 #: templates/guidelines.html:4 templates/guidelines.html.py:9
-#: templates/maintenance_base.html:521 templates/base/footer.html:22
+#: templates/maintenance_base.html:515 templates/base/footer.html:23
 msgid "Guidelines"
 msgstr "ガイドライン"
 
@@ -3430,18 +3430,18 @@ msgstr ""
 "す。あなたがそれらを遵守することができないと感じるなら、間違っていると感じる"
 "ものを我々に知らせてください。"
 
-#: templates/help.html:4 templates/maintenance_base.html:155
-#: templates/maintenance_base.html:518 templates/base/footer.html:19
-#: templates/base/site_links.html:88
+#: templates/help.html:4 templates/maintenance_base.html:154
+#: templates/maintenance_base.html:512 templates/base/footer.html:20
+#: templates/base/site_links.html:85
 msgid "Help"
 msgstr "ヘルプ"
 
-#: templates/help.html:8 templates/maintenance_base.html:162
-#: templates/base/site_links.html:95
+#: templates/help.html:8 templates/maintenance_base.html:161
+#: templates/base/site_links.html:92
 msgid "What is this site?"
 msgstr "このサイトとは？"
 
-#: templates/help.html:10 templates/maintenance_base.html:466
+#: templates/help.html:10 templates/maintenance_base.html:459
 #: templates/base/alerts.html:13 templates/index/root.html:269
 msgid "Hey!"
 msgstr "はじめまして!"
@@ -3749,11 +3749,11 @@ msgstr ""
 "Image of the dayが選ばれました。あなたの協力に感謝します。"
 
 #: templates/leaderboard.html:7 templates/leaderboard.html.py:11
-#: templates/maintenance_base.html:148 templates/base/site_links.html:80
+#: templates/maintenance_base.html:147 templates/base/site_links.html:77
 msgid "Leaderboard"
 msgstr "Leaderboard"
 
-#: templates/leaderboard.html:21 templates/maintenance_base.html:210
+#: templates/leaderboard.html:21 templates/maintenance_base.html:203
 #: templates/image/detail/menu/user.html:8
 #: templates/inclusion_tags/image_list.html:11
 #: templates/inclusion_tags/search_image_list.html:122
@@ -3774,60 +3774,56 @@ msgstr "フォロワー"
 msgid "Total integration"
 msgstr "総露出時間"
 
-#: templates/maintenance_base.html:81 templates/maintenance_base.html:514
-#: templates/base/footer.html:14
+#: templates/maintenance_base.html:82 templates/maintenance_base.html:507
+#: templates/base/footer.html:15
 msgid "Site links"
 msgstr "サイトリンク"
 
-#: templates/maintenance_base.html:85 templates/maintenance_base.html:516
-#: templates/maintenance_base.html:545 templates/base/footer.html:16
-#: templates/base/footer.html.py:45
+#: templates/maintenance_base.html:86 templates/maintenance_base.html.py:93
+#: templates/maintenance_base.html:509 templates/maintenance_base.html:543
+#: templates/base/footer.html:17 templates/base/footer.html.py:52
+#: templates/base/site_links.html:23
 msgid "Home"
 msgstr "ホーム"
 
-#: templates/maintenance_base.html:88 templates/base/site_links.html:18
-msgid "Community"
-msgstr "コミュニティ"
-
-#: templates/maintenance_base.html:92 templates/maintenance_base.html:517
-#: templates/base/footer.html:17 templates/base/site_links.html:22
-msgid "Blog"
-msgstr "ブログ"
-
-#: templates/maintenance_base.html:97 templates/base/footer.html:18
-#: templates/base/site_links.html:23
+#: templates/maintenance_base.html:89 templates/maintenance_base.html:511
+#: templates/base/footer.html:19 templates/base/site_links.html:19
 #, fuzzy
 msgid "Forum"
 msgstr "フォーラム"
 
-#: templates/maintenance_base.html:117 templates/base/site_links.html:49
+#: templates/maintenance_base.html:94 templates/base/site_links.html:24
+msgid "Latest topics"
+msgstr ""
+
+#: templates/maintenance_base.html:96 templates/base/site_links.html:26
+msgid "Subscribed topics"
+msgstr ""
+
+#: templates/maintenance_base.html:116 templates/base/site_links.html:46
 #: templates/image/detail/iotd_banner.html:10 templates/index/root.html:75
 msgid "Image of the day"
 msgstr "Image of the day"
 
-#: templates/maintenance_base.html:126 templates/base/site_links.html:58
+#: templates/maintenance_base.html:125 templates/base/site_links.html:55
 msgid "Public data pools"
 msgstr "公開データ領域"
 
-#: templates/maintenance_base.html:135 templates/base/site_links.html:65
+#: templates/maintenance_base.html:134 templates/base/site_links.html:62
 msgid "Advanced search"
 msgstr "詳細検索"
 
-#: templates/maintenance_base.html:142 templates/stats.html:7
-#: templates/base/site_links.html:73 templates/user/profile.html:61
+#: templates/maintenance_base.html:141 templates/stats.html:7
+#: templates/base/site_links.html:70 templates/user/profile.html:61
 msgid "Stats"
 msgstr "ステータス"
 
-#: templates/maintenance_base.html:174
-msgid "AstroBin Questions"
-msgstr "AstroBin Questions"
-
-#: templates/maintenance_base.html:198 templates/base/site_links.html:132
+#: templates/maintenance_base.html:191 templates/base/site_links.html:129
 #: templates/contact_form/contact.html:5 templates/contact_form/contact.html:8
 msgid "Contact"
 msgstr "連絡先"
 
-#: templates/maintenance_base.html:229 templates/upload.html:7
+#: templates/maintenance_base.html:222 templates/upload.html:7
 #: templates/upload.html.py:20 templates/upload.html:36
 #: templates/avatar/change.html:38 templates/base/user_links_entries.html:139
 #: templates/image/detail/modals/upload_revision.html:17
@@ -3835,24 +3831,24 @@ msgstr "連絡先"
 msgid "Upload"
 msgstr "Upload"
 
-#: templates/maintenance_base.html:232
+#: templates/maintenance_base.html:225
 #: templates/base/user_links_entries.html:142
 msgid "My places"
 msgstr "自分の場所"
 
-#: templates/maintenance_base.html:238 templates/wall.html:137
+#: templates/maintenance_base.html:231 templates/wall.html:137
 #: templates/base/user_links_entries.html:148
 #: templates/user/profile-subnav.html:20
 msgid "Commercial products"
 msgstr "商業的製品"
 
-#: templates/maintenance_base.html:246
+#: templates/maintenance_base.html:239
 #: templates/base/user_links_entries.html:156 templates/popover/user.html:30
 #: templates/user/profile-subnav.html:28
 msgid "Gallery"
 msgstr "ギャラリー"
 
-#: templates/maintenance_base.html:252 templates/wall.html:50
+#: templates/maintenance_base.html:245 templates/wall.html:50
 #: templates/base/user_links_entries.html:162
 #: templates/inclusion_tags/search_image_list.html:44
 #: templates/inclusion_tags/search_image_list.html:97
@@ -3860,100 +3856,100 @@ msgstr "ギャラリー"
 msgid "Bookmarks"
 msgstr "ブックマーク"
 
-#: templates/maintenance_base.html:258
+#: templates/maintenance_base.html:251
 #: templates/base/user_links_entries.html:168
 #: templates/user/profile-subnav.html:48
 #: templates/user/profile/commercial/products.html:209
 msgid "Plots"
 msgstr "分析結果"
 
-#: templates/maintenance_base.html:266
+#: templates/maintenance_base.html:259
 #: templates/base/user_links_entries.html:195 templates/messages/inbox.html:9
 msgid "My messages"
 msgstr "メッセージ"
 
-#: templates/maintenance_base.html:272
+#: templates/maintenance_base.html:265
 #: templates/base/user_links_entries.html:201
 #: templates/user/profile-subnav.html:70
 msgid "API Keys"
 msgstr "APIキー"
 
-#: templates/maintenance_base.html:276
+#: templates/maintenance_base.html:269
 #: templates/base/user_links_entries.html:208
 msgid "My settings"
 msgstr "設定"
 
-#: templates/maintenance_base.html:280 templates/profile-edit-menu.html:8
+#: templates/maintenance_base.html:273 templates/profile-edit-menu.html:8
 msgid "Basic information"
 msgstr "基本情報"
 
-#: templates/maintenance_base.html:288 templates/profile-edit-menu.html:15
+#: templates/maintenance_base.html:281 templates/profile-edit-menu.html:15
 msgid "Commercial information"
 msgstr "販売情報"
 
-#: templates/maintenance_base.html:297 templates/profile-edit-menu.html:23
+#: templates/maintenance_base.html:290 templates/profile-edit-menu.html:23
 msgid "Retailer information"
 msgstr "小売り情報"
 
-#: templates/maintenance_base.html:323 templates/profile-edit-menu.html:54
+#: templates/maintenance_base.html:316 templates/profile-edit-menu.html:54
 msgid "Preferences"
 msgstr "設定"
 
-#: templates/maintenance_base.html:329 templates/profile-edit-menu.html:60
+#: templates/maintenance_base.html:322 templates/profile-edit-menu.html:60
 msgid "Avatar"
 msgstr "アバター"
 
-#: templates/maintenance_base.html:336
+#: templates/maintenance_base.html:329
 #: templates/base/user_links_entries.html:226 templates/user/profile.html:107
 #: templates/user/profile.html.py:110
 msgid "Logout"
 msgstr "ログアウト"
 
-#: templates/maintenance_base.html:349 templates/maintenance_base.html:350
+#: templates/maintenance_base.html:342 templates/maintenance_base.html:343
 #: templates/base/user_links_entries.html:111
 msgid "Notifications"
 msgstr "通知"
 
-#: templates/maintenance_base.html:361
+#: templates/maintenance_base.html:354
 #: templates/base/user_links_entries.html:270
 msgid "Have an invite? Login!"
 msgstr "いかがでしょうか？ログインしよう！"
 
-#: templates/maintenance_base.html:363
+#: templates/maintenance_base.html:356
 #: templates/base/user_links_entries.html:272
 #: templates/registration/activation_complete.html:7
 msgid "Login"
 msgstr "ログイン"
 
-#: templates/maintenance_base.html:369
+#: templates/maintenance_base.html:362
 #: templates/base/user_links_entries.html:278
 #: templates/registration/login.html:15
 msgid "Register"
 msgstr "新規登録"
 
-#: templates/maintenance_base.html:381 templates/base/search_form.html:8
+#: templates/maintenance_base.html:374 templates/base/search_form.html:8
 msgid "Quick search"
 msgstr "クイック検索"
 
-#: templates/maintenance_base.html:467 templates/base/alerts.html:14
+#: templates/maintenance_base.html:460 templates/base/alerts.html:14
 msgid "Success!"
 msgstr "成功しました!"
 
-#: templates/maintenance_base.html:468 templates/maintenance_base.html:480
-#: templates/maintenance_base.html:492 templates/upload.html:55
+#: templates/maintenance_base.html:461 templates/maintenance_base.html:473
+#: templates/maintenance_base.html:485 templates/upload.html:55
 #: templates/upload.html.py:157 templates/upload.html:350
 #: templates/base/alerts.html:15 templates/base/alerts.html.py:28
 #: templates/base/alerts.html:40
 msgid "Warning!"
 msgstr "警告!"
 
-#: templates/maintenance_base.html:469 templates/upload.html:76
+#: templates/maintenance_base.html:462 templates/upload.html:76
 #: templates/base/alerts.html:16
 #: templates/image/detail/modals/send_to_sharedfolder.html:25
 msgid "Error!"
 msgstr "エラー!"
 
-#: templates/maintenance_base.html:482 templates/base/alerts.html:30
+#: templates/maintenance_base.html:475 templates/base/alerts.html:30
 #, python-format
 msgid ""
 "As a producer and/or a retailer on AstroBin, it's very important that you "
@@ -3964,7 +3960,7 @@ msgstr ""
 "ても大切です。いますぐ<a href=\"%(the_url)s\">ここを</a>クリックしてくださ"
 "い。"
 
-#: templates/maintenance_base.html:494 templates/base/alerts.html:42
+#: templates/maintenance_base.html:487 templates/base/alerts.html:42
 #, python-format
 msgid ""
 "As a retailer on AstroBin, it's very important that you fill in your country "
@@ -3973,11 +3969,11 @@ msgstr ""
 "AstroBinに小売業者として登録することは、あなたの国での営業にとても重要です。"
 "いますぐ<a href=\"%(the_url)s\">ここを</a>クリックしてください。"
 
-#: templates/maintenance_base.html:508 templates/base/footer.html:8
+#: templates/maintenance_base.html:501 templates/base/footer.html:9
 msgid "About"
 msgstr "AstroBinについて"
 
-#: templates/maintenance_base.html:510 templates/base/footer.html:10
+#: templates/maintenance_base.html:503 templates/base/footer.html:11
 msgid ""
 "AstroBin is an image hosting website specifically targeted to "
 "astrophotographers: it's the first and the last place where you need to "
@@ -3988,24 +3984,32 @@ msgstr ""
 "にとって、天体画像をアップロードする最初で最後の場所になるになるでしょう。天"
 "体写真家のために、天体写真家によって作られています。"
 
-#: templates/maintenance_base.html:520 templates/tos.html:4
-#: templates/tos.html.py:9 templates/base/footer.html:21
+#: templates/maintenance_base.html:510 templates/base/footer.html:18
+msgid "Blog"
+msgstr "ブログ"
+
+#: templates/maintenance_base.html:514 templates/tos.html:4
+#: templates/tos.html.py:9 templates/base/footer.html:22
 msgid "Terms of Service"
 msgstr "利用規約"
 
-#: templates/maintenance_base.html:525 templates/base/footer.html:26
+#: templates/maintenance_base.html:518 templates/base/footer.html:26
+msgid "Source code"
+msgstr ""
+
+#: templates/maintenance_base.html:524 templates/base/footer.html:33
 msgid "Thanks to"
 msgstr "Thanks to"
 
-#: templates/maintenance_base.html:527 templates/base/footer.html:28
+#: templates/maintenance_base.html:526 templates/base/footer.html:35
 msgid "The localization team"
 msgstr "ローカライズチーム"
 
-#: templates/maintenance_base.html:532 templates/base/footer.html:33
+#: templates/maintenance_base.html:531 templates/base/footer.html:40
 msgid "Copyright"
 msgstr "Copyright"
 
-#: templates/maintenance_base.html:534
+#: templates/maintenance_base.html:533
 msgid ""
 "AstroBin is Copyright &copy; 2010-2012 Salvatore Iovene, All Rights "
 "Reserved. The images on this websites are copyright of their respective "
@@ -4015,22 +4019,22 @@ msgstr ""
 "Reserved. The images on this websites are copyright of their respective "
 "owners."
 
-#: templates/maintenance_base.html:549 templates/base/footer.html:49
+#: templates/maintenance_base.html:547 templates/base/footer.html:56
 msgid "Back to top"
 msgstr "Top に戻る"
 
-#: templates/maintenance_base.html:592 templates/base/js.html:33
+#: templates/maintenance_base.html:590 templates/base/js.html:33
 #: templates/image/edit/acquisition.html:69 templates/image/edit/basic.html:74
 #: templates/image/edit/gear.html:48 templates/messages/compose.html:16
 #: templates/openid_provider/decide.html:16
 msgid "Cancel"
 msgstr "キャンセル"
 
-#: templates/maintenance_base.html:622 templates/base/js.html:82
+#: templates/maintenance_base.html:620 templates/base/js.html:82
 msgid "No file selected"
 msgstr "ファイルが選択されていません"
 
-#: templates/maintenance_base.html:623 templates/base/js.html:83
+#: templates/maintenance_base.html:621 templates/base/js.html:83
 msgid "Choose file"
 msgstr "ファイルを選択"
 
@@ -4344,15 +4348,11 @@ msgstr "新しいイメージをアップロード"
 msgid "Avatar image"
 msgstr "アバター画像"
 
-#: templates/base/footer.html:35
+#: templates/base/footer.html:42
 msgid "The images on this websites are copyright of their respective owners."
 msgstr "このWebサイトの画像の著作権はその所有者に帰属しています。"
 
-#: templates/base/site_links.html:28
-msgid "Source code"
-msgstr ""
-
-#: templates/base/site_links.html:107
+#: templates/base/site_links.html:104
 msgid "AstroBin Raw Data"
 msgstr "AstroBin Raw Data"
 
@@ -6412,6 +6412,7 @@ msgid "Mark all forums as read"
 msgstr ""
 
 #: templates/pybb/latest_topics.html:32
+#: templates/pybb/subscribed_topics.html:32
 msgid "Mark all topics as read"
 msgstr ""
 
@@ -6437,6 +6438,11 @@ msgstr "会話を削除"
 
 #: templates/pybb/post_template.html:56
 msgid "Approve post"
+msgstr ""
+
+#: templates/pybb/subscribed_topics.html:7
+#: templates/pybb/subscribed_topics.html:10
+msgid "Topics you subscribe to"
 msgstr ""
 
 #: templates/pybb/topic.html:57
@@ -7158,6 +7164,12 @@ msgstr "言語を選択してください。選択した言語でメール通知
 #: templates/user/profile/edit/retailer.html:6
 msgid "Edit your retailer information"
 msgstr "あなたの販売者情報を編集"
+
+#~ msgid "Community"
+#~ msgstr "コミュニティ"
+
+#~ msgid "AstroBin Questions"
+#~ msgstr "AstroBin Questions"
 
 #~ msgid ""
 #~ "As of today, the most common form in which astronomy communities exist is "
