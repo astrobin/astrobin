@@ -3617,6 +3617,50 @@ img.flickr-photo-to-import-selected {
   pointer: none;
 }
 /* --- Topic/Forum table --- */
+table.forums,
+table.topic-list {
+  table-layout: fixed;
+}
+table.forums th,
+table.topic-list th,
+table.forums td,
+table.topic-list td {
+  white-space: nowrap;
+  text-overflow: clip;
+  overflow: hidden;
+}
+table.forums th.forum-topic-count,
+table.topic-list th.forum-topic-count,
+table.forums td.forum-topic-count,
+table.topic-list td.forum-topic-count,
+table.forums th.forum-post-count,
+table.topic-list th.forum-post-count,
+table.forums td.forum-post-count,
+table.topic-list td.forum-post-count,
+table.forums th.topic-post-count,
+table.topic-list th.topic-post-count,
+table.forums td.topic-post-count,
+table.topic-list td.topic-post-count,
+table.forums th.topic-view-count,
+table.topic-list th.topic-view-count,
+table.forums td.topic-view-count,
+table.topic-list td.topic-view-count {
+  width: 10%;
+}
+table.forums th.forum-last-post,
+table.topic-list th.forum-last-post,
+table.forums td.forum-last-post,
+table.topic-list td.forum-last-post,
+table.forums th.topic-last-post,
+table.topic-list th.topic-last-post,
+table.forums td.topic-last-post,
+table.topic-list td.topic-last-post,
+table.forums th.topic-author,
+table.topic-list th.topic-author,
+table.forums td.topic-author,
+table.topic-list td.topic-author {
+  width: 15%;
+}
 th.forum-name {
   font-size: 18px;
 }

@@ -3797,6 +3797,24 @@ img.flickr-photo-to-import-selected {
 }
 
 /* --- Topic/Forum table --- */
+table.forums, table.topic-list {
+    table-layout: fixed;
+
+    th, td {
+        white-space: nowrap;
+        text-overflow: clip;
+        overflow: hidden;
+
+        &.forum-topic-count, &.forum-post-count, &.topic-post-count, &.topic-view-count {
+            width: 10%;
+        }
+
+        &.forum-last-post, &.topic-last-post, &.topic-author {
+            width: 15%;
+        }
+    }
+}
+
 th.forum-name {
     font-size: 18px;
 }

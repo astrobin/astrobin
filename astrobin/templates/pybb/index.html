@@ -12,7 +12,7 @@
 
 {% block content %}
     {% if categories %}
-        <table class="table {% if category %}category-table{% elif parent_forum %}child-forums-table{% endif %}">
+        <table class="forums table {% if category %}category-table{% elif parent_forum %}child-forums-table{% endif %}">
         {% for category in categories %}
             <tr class="forum-row head-row">
                 <th class="forum-status">
