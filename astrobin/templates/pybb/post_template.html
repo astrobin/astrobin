@@ -17,7 +17,7 @@
             </a>
         </div>
         <div class="post-updated">
-            <a class="permalink" href="{{ post.get_absolute_url }}">#</a>
+            <a class="permalink" href="{{ post.get_absolute_url }}">#{{forloop.counter}}</a>
             {% pybb_time post.created %}
         </div>
     </th>
