@@ -8,7 +8,7 @@ msgstr ""
 "Project-Id-Version: AstroBin 1.4\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2015-11-20 13:31+0000\n"
-"PO-Revision-Date: 2015-03-01 15:35+0000\n"
+"PO-Revision-Date: 2015-11-29 16:25+0000\n"
 "Last-Translator: Koen_Dierckens <koen.dierckens@pandora.be>\n"
 "Language-Team: Dutch <LL@li.org>\n"
 "Language: nl\n"
@@ -17,7 +17,7 @@ msgstr ""
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=(n != 1);\n"
 "X-Generator: Pootle 2.5.0\n"
-"X-POOTLE-MTIME: 1425224145.781993\n"
+"X-POOTLE-MTIME: 1448814338.605967\n"
 
 #: fields.py:10
 msgid "United Kingdom"
@@ -1970,9 +1970,8 @@ msgid "Position"
 msgstr "Positie"
 
 #: models.py:785
-#, fuzzy
 msgid "Allow comments"
-msgstr "Commentaar"
+msgstr "Commentaar toestaan"
 
 #: models.py:798 templates/image/full.html:56
 #: templates/image/detail/image_title.html:7
@@ -2311,34 +2310,33 @@ msgid "Language"
 msgstr "Taal"
 
 #: models.py:1700
-#, fuzzy
 msgid "Signature"
-msgstr "Saturnus"
+msgstr "Handtekening"
 
 #: models.py:1705
 msgid "Signature HTML Version"
-msgstr ""
+msgstr "Handtekening - HTML versie"
 
 #: models.py:1710
 msgid "Show signatures"
-msgstr ""
+msgstr "Toon handtekeningen"
 
 #: models.py:1715
 msgid "Post count"
-msgstr ""
+msgstr "Aantal berichten"
 
 #: models.py:1720
 msgid "Automatically subscribe"
-msgstr ""
+msgstr "Automatisch abonneren"
 
 #: models.py:1721
 msgid "Automatically subscribe to topics that you answer"
-msgstr ""
+msgstr "Automatisch abonneren op onderwerpen waarop je antwoordt"
 
 #: models.py:1728
 #: templates/pybb/mail_templates/subscription_email_subject.html:2
 msgid "New reply to a forum topic you subscribe to"
-msgstr ""
+msgstr "Nieuw antwoord op een forum waarop je je abonneert"
 
 #: models.py:1770
 msgid "A descriptive name, e.g. 'Home observatory' or 'Mount Whitney'."
@@ -2755,9 +2753,8 @@ msgid "Average integration time"
 msgstr "Gemiddelde integratietijd"
 
 #: views.py:1848
-#, fuzzy
 msgid "Forum posts"
-msgstr "Fora"
+msgstr "Forum berichten"
 
 #: views.py:2339
 msgid ""
@@ -3757,6 +3754,10 @@ msgid ""
 "them are images that received lots of likes, and the other half were "
 "selected randomly. The images are anonymized as to not bias the selection."
 msgstr ""
+"Hier is een selectie van beelden die de voorbije 7 dagen zijn gepost. "
+"Ongeveer de helft kreeg een groot aantal 'likes' en de andere helft werden "
+"op goed geluk uitgepikt. De foto's zijn anoniem gemaakt om een objectieve "
+"selectie te kunnen garanderen."
 
 #: templates/iotd_choose.html:27
 msgid "Choose"
@@ -3846,17 +3847,16 @@ msgstr "Home"
 
 #: templates/maintenance_base.html:89 templates/maintenance_base.html:511
 #: templates/base/footer.html:19 templates/base/site_links.html:19
-#, fuzzy
 msgid "Forum"
-msgstr "Fora"
+msgstr "Forum"
 
 #: templates/maintenance_base.html:94 templates/base/site_links.html:24
 msgid "Latest topics"
-msgstr ""
+msgstr "Laatste onderwerpen"
 
 #: templates/maintenance_base.html:96 templates/base/site_links.html:26
 msgid "Subscribed topics"
-msgstr ""
+msgstr "Geabonneerde onderwerpen"
 
 #: templates/maintenance_base.html:116 templates/base/site_links.html:46
 #: templates/image/detail/iotd_banner.html:10 templates/index/root.html:75
@@ -4884,7 +4884,7 @@ msgstr ""
 
 #: templates/image/detail/comments.html:20
 msgid "Comments are closed."
-msgstr ""
+msgstr "De commentaren zijn afgesloten"
 
 #: templates/image/detail/commercial.html:6
 msgid "Made possible by"
@@ -5644,9 +5644,8 @@ msgstr ""
 "mensen moeten volgen!"
 
 #: templates/index/root.html:296
-#, fuzzy
 msgid "Latest from the forums"
-msgstr "Wat is er mis met fora?"
+msgstr "Laatste nieuws van de fora"
 
 #: templates/index/root.html:322
 msgid "Do you want your product here?"
@@ -6470,140 +6469,131 @@ msgstr ""
 
 #: templates/pybb/forum_list.html:9
 msgid "Hidden"
-msgstr ""
+msgstr "Verborgen"
 
 #: templates/pybb/forum_list.html:28
 msgid "No forums created"
-msgstr ""
+msgstr "Geen fora aangemaakt"
 
 #: templates/pybb/forum_list.html:29
 msgid "Add forum now"
-msgstr ""
+msgstr "Nu een forum toevoegen"
 
 #: templates/pybb/index.html:25
 msgid "Topics"
-msgstr ""
+msgstr "Onderwerpen"
 
 #: templates/pybb/index.html:28 templates/pybb/topic.html:28
 #: templates/pybb/topic.html.py:48 templates/pybb/topic_list.html:20
 msgid "Posts"
-msgstr ""
+msgstr "Berichten"
 
 #: templates/pybb/index.html:31
-#, fuzzy
 msgid "Last posts"
-msgstr "Oost of west"
+msgstr "Laatste berichten"
 
 #: templates/pybb/index.html:38
 msgid "Forum categories are not created"
-msgstr ""
+msgstr "Forum categorieën zijn niet aangemaakt."
 
 #: templates/pybb/index.html:39
 msgid "Add a category now"
-msgstr ""
+msgstr "Categorie nu toevoegen"
 
 #: templates/pybb/index.html:44 templates/pybb/latest_topics.html:7
 #: templates/pybb/latest_topics.html:10
 msgid "Last updates in topics"
-msgstr ""
+msgstr "Laatste updates in de onderwerpen"
 
 #: templates/pybb/index.html:47
 msgid "Mark all forums as read"
-msgstr ""
+msgstr "Alle fora als gelezen markeren"
 
 #: templates/pybb/latest_topics.html:32
 #: templates/pybb/subscribed_topics.html:32
 msgid "Mark all topics as read"
-msgstr ""
+msgstr "Alle onderwerpen als gelezen markeren"
 
 #: templates/pybb/post_template.html:39
-#, fuzzy
 msgid "Edited"
-msgstr "Wijzigen"
+msgstr "Bewerkt"
 
 #: templates/pybb/post_template.html:44
-#, fuzzy
 msgid "quote"
-msgstr "aangehaalde tekst"
+msgstr "citaat"
 
 #: templates/pybb/post_template.html:45
-#, fuzzy
 msgid "quote selected"
-msgstr "# geselecteerd"
+msgstr "geselecteerd citaat"
 
 #: templates/pybb/post_template.html:53
-#, fuzzy
 msgid "Delete post?"
-msgstr "Conversatie verwijderen"
+msgstr "Bericht verwijderen?"
 
 #: templates/pybb/post_template.html:56
 msgid "Approve post"
-msgstr ""
+msgstr "Bericht goedkeuren"
 
 #: templates/pybb/subscribed_topics.html:7
 #: templates/pybb/subscribed_topics.html:10
 msgid "Topics you subscribe to"
-msgstr ""
+msgstr "Onderwerpen waarop je je hebt geabonneerd"
 
 #: templates/pybb/topic.html:57
 msgid "Unstick topic"
-msgstr ""
+msgstr "Onderwerp losmaken"
 
 #: templates/pybb/topic.html:59
 msgid "Stick topic"
-msgstr ""
+msgstr "Topic bewaren"
 
 #: templates/pybb/topic.html:63
 msgid "Open topic"
-msgstr ""
+msgstr "Onderwerp openen"
 
 #: templates/pybb/topic.html:65
-#, fuzzy
 msgid "Close topic"
-msgstr "Sluiten"
+msgstr "Onderwerp afsluiten"
 
 #: templates/pybb/topic.html:76
 msgid "Unsubscribe"
-msgstr ""
+msgstr "Uitschrijven"
 
 #: templates/pybb/topic.html:78
 msgid "Subscribe"
-msgstr ""
+msgstr "Abonneren"
 
 #: templates/pybb/topic.html:94
 msgid "Subscribers"
-msgstr ""
+msgstr "Abonnees"
 
 #: templates/pybb/topic_list.html:13
 msgid "Topic"
-msgstr ""
+msgstr "Onderwerp"
 
 #: templates/pybb/topic_list.html:17
 msgid "Author"
-msgstr ""
+msgstr "Auteur"
 
 #: templates/pybb/topic_list.html:26
-#, fuzzy
 msgid "Last post"
-msgstr "Oost of west"
+msgstr "Laatste bericht"
 
 #: templates/pybb/topic_list.html:38
 msgid "Go to first unread post"
-msgstr ""
+msgstr "Ga naar eerste ongelezen bericht"
 
 #: templates/pybb/topic_list.html:39
 msgid "Sticky"
-msgstr ""
+msgstr "Vastgezet"
 
 #: templates/pybb/topic_list.html:40
-#, fuzzy
 msgid "Closed"
-msgstr "Sluiten"
+msgstr "Gesloten"
 
 #: templates/pybb/topic_list.html:44
-#, fuzzy
 msgid "pages"
-msgstr "# Foto's"
+msgstr "pagina's"
 
 #: templates/registration/activate.html:4
 #: templates/registration/activate.html:9
@@ -7002,9 +6992,8 @@ msgstr "Wijzig profiel"
 #: templates/user/profile/delete.html:6 templates/user/profile/delete.html:11
 #: templates/user/profile/delete.html:18
 #: templates/user/profile/edit/basic.html:18
-#, fuzzy
 msgid "Delete account"
-msgstr "Conversatie verwijderen"
+msgstr "Account verwijderen"
 
 #: templates/user/profile/delete.html:14
 msgid ""
@@ -7012,10 +7001,13 @@ msgid ""
 "and immediate. All traces of your activity on AstroBin will be erased "
 "forever!"
 msgstr ""
+"Ben je zeker dat je je AstroBin account wil verwijderen? Dit is een actie "
+"die onmiddellijk wordt uitgevoerd en niet ongedaan kan worden gemaakt. Alle "
+"sporen van je activiteit op AstroBin worden definitief gewist!"
 
 #: templates/user/profile/delete.html:21
 msgid "Your account was deleted. Thanks for using AstroBin until now!"
-msgstr ""
+msgstr "Je account werd gewist. Bedankt om AstroBin gebruikt te hebben!"
 
 #: templates/user/profile/flickr_import.html:14
 msgid ""
