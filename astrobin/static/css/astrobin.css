@@ -1011,6 +1011,12 @@ li.astrobin-thumbnail img {
   border-bottom: 0;
   padding-bottom: 0;
 }
+.page-header p {
+  margin-top: -20px;
+  font-size: 18px;
+  color: #999;
+  font-style: italic;
+}
 .blog-entry {
   margin-bottom: 40px;
   color: #cdcdce;
@@ -3250,6 +3256,12 @@ li.revisions {
 #rawdata-eta {
   color: #888;
   font-size: smaller;
+}
+table.subscription-plans {
+  table-layout: fixed;
+}
+.subscription-plans-description-list li {
+  padding: 6px 0;
 }
 .plan {
   text-align: center;

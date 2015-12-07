@@ -307,3 +307,39 @@ def show_ads(user):
         (settings.ADS_ENABLED and not is_donor(user)) and
         (settings.PREMIUM_ENABLED and not is_premium(user) and not is_lite(user))
     )
+
+
+@register.filter
+def has_active_subscription(user, subscription_pk):
+    from subscription.models import UserSubscription
+
+    us = UserSubscription.objects.filter(
+        user = user, subscription__pk = subscription_pk,
+        active = True, cancelled = False)
+
+    if us.count() == 0:
+        return False
+
+    us = us[0]
+    if us.expired():
+        return False
+
+    return True
+
+
+@register.filter
+def has_active_subscription_in_category(user, category):
+    from subscription.models import UserSubscription
+
+    us = UserSubscription.objects.filter(
+        user = user, subscription__category = category,
+        active = True, cancelled = False)
+
+    if us.count() == 0:
+        return False
+
+    us = us[0]
+    if us.expired():
+        return False
+
+    return True

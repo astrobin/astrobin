@@ -19,11 +19,8 @@ def premium_modal(context):
         'base_url': settings.ASTROBIN_BASE_URL,
         'business': settings.SUBSCRIPTION_PAYPAL_SETTINGS['business'],
 
-        'lite_monthly_sub': Subscription.objects.get(name = 'AstroBin Lite Monthly'),
-        'premium_monthly_sub': Subscription.objects.get(name = 'AstroBin Premium Monthly'),
-
-        'lite_yearly_sub': Subscription.objects.get(name = 'AstroBin Lite Yearly'),
-        'premium_yearly_sub': Subscription.objects.get(name = 'AstroBin Premium Yearly'),
+        'lite_sub': Subscription.objects.get(name = 'AstroBin Lite'),
+        'premium_sub': Subscription.objects.get(name = 'AstroBin Premium'),
 
         'request': context['request'],
     }
@@ -35,11 +32,8 @@ def remove_ads_modal(context):
         'base_url': settings.ASTROBIN_BASE_URL,
         'business': settings.SUBSCRIPTION_PAYPAL_SETTINGS['business'],
 
-        'lite_monthly_sub': Subscription.objects.get(name = 'AstroBin Lite Monthly'),
-        'premium_monthly_sub': Subscription.objects.get(name = 'AstroBin Premium Monthly'),
-
-        'lite_yearly_sub': Subscription.objects.get(name = 'AstroBin Lite Yearly'),
-        'premium_yearly_sub': Subscription.objects.get(name = 'AstroBin Premium Yearly'),
+        'lite_sub': Subscription.objects.get(name = 'AstroBin Lite'),
+        'premium_sub': Subscription.objects.get(name = 'AstroBin Premium'),
 
         'request': context['request'],
     }
@@ -71,10 +65,8 @@ def is_premium(user):
     if user.is_authenticated():
         us = UserSubscription.objects.filter(
             Q(user = user) &
-            Q(
-                Q(subscription__name = 'AstroBin Premium Monthly') |
-                Q(subscription__name = 'AstroBin Premium Yearly')
-            ))
+            Q(subscription__name = 'AstroBin Premium')
+        )
 
         if us.count() == 0:
             return False
@@ -89,10 +81,8 @@ def is_lite(user):
     if user.is_authenticated():
         us = UserSubscription.objects.filter(
             Q(user = user) &
-            Q(
-                Q(subscription__name = 'AstroBin Lite Monthly') |
-                Q(subscription__name = 'AstroBin Lite Yearly')
-            ))
+            Q(subscription__name = 'AstroBin Lite')
+        )
 
         if us.count() == 0:
             return False
@@ -142,11 +132,8 @@ def user_premium_subscription(user):
             us = UserSubscription.objects.get(
                 Q(user = user) &
                 Q(
-                    Q(subscription__name = 'AstroBin Premium Monthly') |
-                    Q(subscription__name = 'AstroBin Lite Monthly') |
-
-                    Q(subscription__name = 'AstroBin Premium Yearly') |
-                    Q(subscription__name = 'AstroBin Lite Yearly')
+                    Q(subscription__name = 'AstroBin Premium') |
+                    Q(subscription__name = 'AstroBin Lite')
                 ))
         except UserSubscription.DoesNotExist:
             return None

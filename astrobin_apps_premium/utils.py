@@ -3,17 +3,10 @@ from django.conf import settings
 from subscription.models import UserSubscription
 
 
-LITE_SUBSCRIPTION_NAMES = (
-    'AstroBin Lite Monthly',
-    'AstroBin Lite Yearly',
+SUBSCRIPTION_NAMES = (
+    'AstroBin Lite',
+    'AstroBin Premium',
 )
-
-PREMIUM_SUBSCRIPTION_NAMES = (
-    'AstroBin Premium Monthly',
-    'AstroBin Premium Yearly',
-)
-
-SUBSCRIPTION_NAMES = LITE_SUBSCRIPTION_NAMES + PREMIUM_SUBSCRIPTION_NAMES
 
 
 def premium_get_subscription(user):
