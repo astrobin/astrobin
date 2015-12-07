@@ -3,10 +3,32 @@
 {% load i18n %}
 {% load tags %}
 {% load url from future %}
+{% load astrobin_apps_premium_tags %}
 
 {% block title %}{% trans "Upload" %}{% endblock %}
 
 {% block content %}
+    <div class="row section">
+        <div class="span10 offset1">
+            {% if premium_used_percent > -1 %}
+                <div class="progress {{premium_progress_class}}">
+                    <div class="bar" style="width:{{premium_used_percent}}%"></div>
+                </div>
+            {% endif %}
+
+            <p class="text-center">
+                {% if user|is_free %}
+                    {% blocktrans with premium_counter=user.userprofile.premium_counter max_allowed=PREMIUM_MAX_IMAGES_FREE %}You have used <strong>{{premium_counter}}</strong> images of your allowed <strong>{{max_allowed}}</strong>.{% endblocktrans %}
+                {% endif %}
+
+                {% if user|is_lite %}
+                    {% blocktrans with premium_counter=user.userprofile.premium_counter max_allowed=PREMIUM_MAX_IMAGES_LITE %}You have used <strong>{{premium_counter}}</strong> images of your allowed <strong>{{max_allowed}}</strong> for the current year.{% endblocktrans %}
+                    {% trans "Thank you for supporting AstroBin!" %}
+                {% endif %}
+            </p>
+        </div>
+    </div>
+
     {% if upload_form %}
         <div class="row section">
             <div class="span10 offset1">
