@@ -1590,6 +1590,12 @@ class UserProfile(models.Model):
         help_text = _("Write something about yourself. HTML tags are allowed."),
     )
 
+    # Counter for uploaded images.
+    premium_counter = models.PositiveIntegerField(
+        default = 0,
+        editable = False
+    )
+
     # Commercial information
     company_name = models.CharField(
         max_length = 128,
