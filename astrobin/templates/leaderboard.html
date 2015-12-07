@@ -47,9 +47,13 @@
                             <td>{{forloop.counter}}</td>
                             <td>
                                 <a rel="popover" class="user-popover"
-                                   data-load="{% url user_popover_ajax u.object.username %}"
-                                   href="{% url user_page u.object.username %}">
-                                    {{u.object.userprofile}}
+                                   data-load="{% url user_popover_ajax u.username %}"
+                                   href="{% url user_page u.username %}">
+                                    {% if u.object %}
+                                        {{u.object.userprofile}}
+                                    {% else %}
+                                        {{u.username}}
+                                    {% endif %}
                                 </a>
                             </td>
                             <td>{{u.normalized_likes|floatformat:2}}</td>
