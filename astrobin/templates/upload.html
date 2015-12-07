@@ -19,11 +19,17 @@
             <p class="text-center">
                 {% if user|is_free %}
                     {% blocktrans with premium_counter=user.userprofile.premium_counter max_allowed=PREMIUM_MAX_IMAGES_FREE %}You have used <strong>{{premium_counter}}</strong> images of your allowed <strong>{{max_allowed}}</strong>.{% endblocktrans %}
+                    <a href="{% url 'subscription_list' %}">
+                        {% trans "Would you like to upgrade?" %}
+                    </a>
                 {% endif %}
 
                 {% if user|is_lite %}
                     {% blocktrans with premium_counter=user.userprofile.premium_counter max_allowed=PREMIUM_MAX_IMAGES_LITE %}You have used <strong>{{premium_counter}}</strong> images of your allowed <strong>{{max_allowed}}</strong> for the current year.{% endblocktrans %}
                     {% trans "Thank you for supporting AstroBin!" %}
+                    <a href="{% url 'subscription_list' %}">
+                        {% trans "Would you like to upgrade?" %}
+                    </a>
                 {% endif %}
 
                 {% if user|is_premium %}
