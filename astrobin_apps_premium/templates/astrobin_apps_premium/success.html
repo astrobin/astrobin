@@ -1,0 +1,29 @@
+{% extends 'base.html' %}
+
+{% load i18n %}
+
+{% block title %}{% trans "Thank you for your subscription!" %}{% endblock %}
+
+{% block content %}
+    <div class="row">
+        <div class="span6 offset3">
+            <h1>{% trans "Thank you for your subscription!" %}</h1>
+
+            <p>
+                {% blocktrans %}In a few minutes, once your PayPal transaction is processed, your new subscription will be activated.{% endblocktrans %}
+            </p>
+
+            <hr/>
+
+            <p class="text-right">
+                {% blocktrans %}Whishing you clear skies and excellent seeing!{% endblocktrans %}
+            </p>
+
+            <p class="text-right">
+                <small>
+                    Salvatore Iovene, {% trans "Founder of AstroBin" %}
+                </small>
+            </p>
+        </div>
+    </div>
+{% endblock %}

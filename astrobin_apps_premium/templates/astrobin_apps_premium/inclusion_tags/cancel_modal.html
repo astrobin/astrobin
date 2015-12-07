@@ -1,0 +1,28 @@
+{% load astrobin_apps_donations_tags %}
+{% load i18n %}
+
+{% if request.user|is_donor %}
+    <div class="modal hide fade" id="cancel-donation-modal">
+        <div class="modal-header">
+            <a class="close" data-dismiss="modal">&times;</a>
+            <h3><i class="icon-frown"></i> {% trans "Cancel your recurring donation" %}</h3>
+        </div>
+        <div class="modal-body">
+            <p>
+                {% blocktrans %}Thank you so much for your donations so far! We, and the whole AstroBin community, really appreciate your support.{% endblocktrans %}
+            </p>
+            <p>
+                {% blocktrans %}Are you sure you want to cancel your subscription? AstroBin is a resource hungry website, and every small donation helps us with the hosting costs.{% endblocktrans %}
+            </p>
+            <p>
+                {% blocktrans %}If you really have made up your mind about it, use the button below to cancel your PayPal subscription. After the operation has been processed by PayPal, you will start seeing ads again.{% endblocktrans %}
+            </p>
+        </div>
+
+        <div class="modal-footer">
+            <a class="btn btn-primary" href="{{cancel_url}}">
+                {% trans "Cancel your recurring donation" %}
+            </a>
+        </div>
+    </div>
+{% endif %}

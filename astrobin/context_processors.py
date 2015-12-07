@@ -99,6 +99,8 @@ def common_variables(request):
         'ADS_ENABLED': settings.ADS_ENABLED,
         'DONATIONS_ENABLED': settings.DONATIONS_ENABLED,
         'PREMIUM_ENABLED': settings.PREMIUM_ENABLED,
+        'PREMIUM_MAX_IMAGES_FREE': settings.PREMIUM_MAX_IMAGES_FREE,
+        'PREMIUM_MAX_IMAGES_LITE': settings.PREMIUM_MAX_IMAGES_LITE,
     }
 
     return d
