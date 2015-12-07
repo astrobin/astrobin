@@ -12,8 +12,8 @@ from rest_framework.exceptions import PermissionDenied, UnsupportedMediaType
 from .models import RawImage
 from .utils import (
     md5_for_file,
-    supported_raw_formats,
-    user_used_percent,
+    rawdata_supported_raw_formats,
+    rawdata_user_used_percent,
 )
 
 
@@ -26,14 +26,14 @@ class RawImageSerializer(serializers.ModelSerializer):
 
         name, ext = os.path.splitext(value.name)
         stripped_ext = ext.lower().strip('.')
-        if stripped_ext not in supported_raw_formats():
+        if stripped_ext not in rawdata_supported_raw_formats():
             raise UnsupportedMediaType(stripped_ext)
 
         return attrs
 
     def validate(self, attrs):
         user = self.context['request'].user
-        if user_used_percent(user) >= 100:
+        if rawdata_user_used_percent(user) >= 100:
             raise PermissionDenied(
                 _("You don't have any free space on AstroBin Rawdata. Consider upgrading your account."))
 

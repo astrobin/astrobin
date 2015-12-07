@@ -93,18 +93,18 @@ class RawImageLibrary(RestrictToSubscriberMixin, TemplateView):
                 'label': f.get_label(),
                 'images': f.get_images(),
             }
-        
+
         return folders
 
     def get_context_data(self, **kwargs):
         total_files = RawImage.objects.filter(user = self.request.user)
 
         context = super(RawImageLibrary, self).get_context_data(**kwargs)
-        context['byte_limit'] = user_byte_limit(self.request.user)
-        context['used_bytes'] = user_used_bytes(self.request.user)
-        context['used_percent'] = user_used_percent(self.request.user)
-        context['over_limit'] = user_is_over_limit(self.request.user)
-        context['progress_class'] = user_progress_class(self.request.user)
+        context['byte_limit'] = rawdata_user_byte_limit(self.request.user)
+        context['used_bytes'] = rawdata_user_used_bytes(self.request.user)
+        context['used_percent'] = rawdata_user_used_percent(self.request.user)
+        context['over_limit'] = rawdata_user_is_over_limit(self.request.user)
+        context['progress_class'] = rawdata_user_progress_class(self.request.user)
         context['total_files'] = total_files.count()
         context['unindexed_count'] = total_files.filter(indexed = False).count()
 

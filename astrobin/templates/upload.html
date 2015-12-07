@@ -68,8 +68,8 @@
         </div>
     {% endif %} <!-- upload_form -->
 
-    {% if has_act_sub %}
-        {% if is_over_limit %}
+    {% if rawdata_has_act_sub %}
+        {% if rawdata_is_over_limit %}
             <div class="row section">
                 <div class="span10 offset1">
                     <div class="alert alert-error">
@@ -131,11 +131,11 @@
             </div>
         {% endif %}
 
-        {% if used_percent > 0 %}
+        {% if rawdata_used_percent > 0 %}
             <div class="row">
                 <div class="span10 offset1">
-                    <div class="progress {{progress_class}}">
-                        <div class="bar" style="width:{{used_percent}}%"></div>
+                    <div class="progress {{rawdata_progress_class}}">
+                        <div class="bar" style="width:{{rawdata_used_percent}}%"></div>
                     </div>
                 </div>
             </div>
@@ -148,7 +148,7 @@
         </div>
     {% endif %}
 
-    {% if has_inact_sub %}
+    {% if rawdata_has_inact_sub %}
         <div class="row">
             <div class="span10 offset1">
                 <div class="alert alert-warning">
@@ -167,7 +167,7 @@
         </div>
     {% endif %}
 
-    {% if not has_sub %}
+    {% if not rawdata_has_sub %}
         <div class="row section">
             <div class="span6 offset3">
                 <div class="well">
@@ -220,7 +220,7 @@
         $('.upload-forms .loading').hide();
         $('.upload-forms form').show();
 
-        {% if has_act_sub %}
+        {% if rawdata_has_act_sub %}
         var RawData = function() {
             this.ui = {
                 $container   : $('#rawdata-container'),
@@ -265,7 +265,7 @@
                     'X-CSRFToken'      : '{{csrf_token}}'
                 },
                 filters             : [
-                    {title : "{% trans "Raw files" %}", extensions : "{{supported_raw_formats|join:","}}"}
+                    {title : "{% trans "Raw files" %}", extensions : "{{rawdata_supported_raw_formats|join:","}}"}
                 ]
             });
 
@@ -319,7 +319,7 @@
 
                 $.each(files, function(i, file) {
                     var ext = file.name.split('.').pop();
-                    var valid = $.inArray(ext.toLowerCase(), {{supported_raw_formats|safe}}) > -1;
+                    var valid = $.inArray(ext.toLowerCase(), {{rawdata_supported_raw_formats|safe}}) > -1;
 
                     if (valid) {
                         if (validFiles == 0) {

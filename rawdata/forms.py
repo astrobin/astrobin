@@ -12,7 +12,6 @@ from .models import (
     PublicDataPool,
     PrivateSharedFolder,
 )
-from .utils import supported_raw_formats
 
 
 class PublicDataPoolForm(forms.ModelForm):
