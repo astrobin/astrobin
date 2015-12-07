@@ -297,3 +297,13 @@ def gear_type(gear):
 
     return '-'
 
+
+@register.filter
+def show_ads(user):
+    from astrobin_apps_donations.templatetags.astrobin_apps_donations_tags import is_donor
+    from astrobin_apps_premium.templatetags.astrobin_apps_premium_tags import is_premium, is_lite
+
+    return (
+        (settings.ADS_ENABLED and not is_donor(user)) and
+        (settings.PREMIUM_ENABLED and not is_premium(user) and not is_lite(user))
+    )

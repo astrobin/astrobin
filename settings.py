@@ -14,6 +14,7 @@ MEDIA_VERSION = '104'
 LONGPOLL_ENABLED = False
 ADS_ENABLED = True
 DONATIONS_ENABLED = False
+PREMIUM_ENABLED = True
 
 AWS_S3_ENABLED = os.environ['ASTROBIN_AWS_S3_ENABLED'] == "true"
 LOCAL_STATIC_STORAGE = os.environ['ASTROBIN_LOCAL_STATIC_STORAGE'] == "true"
@@ -260,6 +261,7 @@ INSTALLED_APPS = (
     'astrobin_apps_platesolving',
     'astrobin_apps_users',
     'astrobin_apps_donations',
+    'astrobin_apps_premium',
     'toggleproperties',
 )
 
