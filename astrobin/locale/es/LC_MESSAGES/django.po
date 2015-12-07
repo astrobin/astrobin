@@ -7,8 +7,8 @@ msgstr ""
 "Project-Id-Version: AstroBin 1.0\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2015-11-20 13:29+0000\n"
-"PO-Revision-Date: 2015-11-05 20:57+0000\n"
-"Last-Translator: joseamirandavelez <joseamirandavelez@gmail.com>\n"
+"PO-Revision-Date: 2015-12-01 08:49+0000\n"
+"Last-Translator: PepeChambo <jjchambo@hotmail.com>\n"
 "Language-Team: Pepe Chambó <jjchambo@hotmail.com>\n"
 "Language: es\n"
 "MIME-Version: 1.0\n"
@@ -16,7 +16,7 @@ msgstr ""
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=(n != 1);\n"
 "X-Generator: Pootle 2.5.0\n"
-"X-POOTLE-MTIME: 1446757051.29217\n"
+"X-POOTLE-MTIME: 1448959760.974689\n"
 
 #: fields.py:10
 msgid "United Kingdom"
@@ -1967,9 +1967,8 @@ msgid "Position"
 msgstr "Posición"
 
 #: models.py:785
-#, fuzzy
 msgid "Allow comments"
-msgstr "Comentarios"
+msgstr "Permitir comentarios"
 
 #: models.py:798 templates/image/full.html:56
 #: templates/image/detail/image_title.html:7
@@ -2307,27 +2306,27 @@ msgstr "Idioma"
 #: models.py:1700
 #, fuzzy
 msgid "Signature"
-msgstr "Saturno"
+msgstr "Firma"
 
 #: models.py:1705
 msgid "Signature HTML Version"
-msgstr ""
+msgstr "Firma (versión HTML)"
 
 #: models.py:1710
 msgid "Show signatures"
-msgstr ""
+msgstr "Mostrar firmas"
 
 #: models.py:1715
 msgid "Post count"
-msgstr ""
+msgstr "Contador de publicaciones"
 
 #: models.py:1720
 msgid "Automatically subscribe"
-msgstr ""
+msgstr "Suscribirse automáticamente"
 
 #: models.py:1721
 msgid "Automatically subscribe to topics that you answer"
-msgstr ""
+msgstr "Suscribirse automáticamente a los temas en los que has respondido"
 
 #: models.py:1728
 #: templates/pybb/mail_templates/subscription_email_subject.html:2
@@ -2750,7 +2749,7 @@ msgstr "Tiempo de integración medio"
 #: views.py:1848
 #, fuzzy
 msgid "Forum posts"
-msgstr "Foros"
+msgstr "Entradas del forum"
 
 #: views.py:2339
 msgid ""
@@ -3742,11 +3741,15 @@ msgid ""
 "them are images that received lots of likes, and the other half were "
 "selected randomly. The images are anonymized as to not bias the selection."
 msgstr ""
+"Aquí tienes una selección de las imágenes subidas en los últimos 7 días. La "
+"mitad de ellas son imágenes que han recibido muchos \"me gusta\", y la otra "
+"mitad han sido seleccionadas aleatoriamente. Las imágenes se han puesto sin "
+"el nombre de sus autores para evitar preferencias en la selección."
 
 #: templates/iotd_choose.html:27
 #, fuzzy
 msgid "Choose"
-msgstr "Escoger"
+msgstr "Elige"
 
 #: templates/iotd_choose.html:33
 msgid ""
@@ -3833,15 +3836,15 @@ msgstr "Inicio"
 #: templates/base/footer.html:19 templates/base/site_links.html:19
 #, fuzzy
 msgid "Forum"
-msgstr "Foros"
+msgstr "Foro"
 
 #: templates/maintenance_base.html:94 templates/base/site_links.html:24
 msgid "Latest topics"
-msgstr ""
+msgstr "Últimos temas"
 
 #: templates/maintenance_base.html:96 templates/base/site_links.html:26
 msgid "Subscribed topics"
-msgstr ""
+msgstr "Temas suscritos"
 
 #: templates/maintenance_base.html:116 templates/base/site_links.html:46
 #: templates/image/detail/iotd_banner.html:10 templates/index/root.html:75
@@ -4411,7 +4414,7 @@ msgstr "Por favor, selecciona tu idioma de entre las opciones mostradas."
 #: templates/base/user_links_entries.html:173
 #, fuzzy
 msgid "Raw data"
-msgstr "Datos en crudo"
+msgstr "Datos RAW"
 
 #: templates/base/user_links_entries.html:179
 #: templates/user/profile-subnav.html:35
@@ -5623,7 +5626,7 @@ msgstr ""
 #: templates/index/root.html:296
 #, fuzzy
 msgid "Latest from the forums"
-msgstr "¿Que está mal de los forums?"
+msgstr "Temas recientes en los foros"
 
 #: templates/index/root.html:322
 msgid "Do you want your product here?"
@@ -5739,7 +5742,7 @@ msgstr ""
 "\n"
 "%(message)s\n"
 "\n"
-"Para ver todos tus avisos, por favor ves a %(notices_url)s.\n"
+"Para ver todas tus notificaciones, por favor ve a %(notices_url)s.\n"
 "\n"
 "Si no quieres recibir más correos electrónicos, edita tus preferencias yendo "
 "a http://astrobin.com%(pref_url)s.\n"
@@ -6444,33 +6447,33 @@ msgstr ""
 
 #: templates/pybb/forum_list.html:9
 msgid "Hidden"
-msgstr ""
+msgstr "Oculto"
 
 #: templates/pybb/forum_list.html:28
 msgid "No forums created"
-msgstr ""
+msgstr "No se han creado foros"
 
 #: templates/pybb/forum_list.html:29
 msgid "Add forum now"
-msgstr ""
+msgstr "Añade un foro ahora"
 
 #: templates/pybb/index.html:25
 msgid "Topics"
-msgstr ""
+msgstr "Temas"
 
 #: templates/pybb/index.html:28 templates/pybb/topic.html:28
 #: templates/pybb/topic.html.py:48 templates/pybb/topic_list.html:20
 msgid "Posts"
-msgstr ""
+msgstr "Entradas"
 
 #: templates/pybb/index.html:31
 #, fuzzy
 msgid "Last posts"
-msgstr "Este o Oeste"
+msgstr "Últimas entradas"
 
 #: templates/pybb/index.html:38
 msgid "Forum categories are not created"
-msgstr ""
+msgstr "No se han creado categorías de foro"
 
 #: templates/pybb/index.html:39
 msgid "Add a category now"
@@ -6488,44 +6491,44 @@ msgstr ""
 #: templates/pybb/latest_topics.html:32
 #: templates/pybb/subscribed_topics.html:32
 msgid "Mark all topics as read"
-msgstr ""
+msgstr "Marcar todos los temas como leídos"
 
 #: templates/pybb/post_template.html:39
 #, fuzzy
 msgid "Edited"
-msgstr "Editar"
+msgstr "Editado"
 
 #: templates/pybb/post_template.html:44
 #, fuzzy
 msgid "quote"
-msgstr "citado"
+msgstr "citar"
 
 #: templates/pybb/post_template.html:45
 #, fuzzy
 msgid "quote selected"
-msgstr "# seleccionadas"
+msgstr "citar selección"
 
 #: templates/pybb/post_template.html:53
 #, fuzzy
 msgid "Delete post?"
-msgstr "Borrar conversación"
+msgstr "¿Borrar entrada?"
 
 #: templates/pybb/post_template.html:56
 msgid "Approve post"
-msgstr ""
+msgstr "Aprobar entrada"
 
 #: templates/pybb/subscribed_topics.html:7
 #: templates/pybb/subscribed_topics.html:10
 msgid "Topics you subscribe to"
-msgstr ""
+msgstr "Temas a los que estás suscrito"
 
 #: templates/pybb/topic.html:57
 msgid "Unstick topic"
-msgstr ""
+msgstr "Desmarcar tema"
 
 #: templates/pybb/topic.html:59
 msgid "Stick topic"
-msgstr ""
+msgstr "Marcar tema"
 
 #: templates/pybb/topic.html:63
 msgid "Open topic"
@@ -6559,25 +6562,25 @@ msgstr ""
 #: templates/pybb/topic_list.html:26
 #, fuzzy
 msgid "Last post"
-msgstr "Este o Oeste"
+msgstr "Última entrada"
 
 #: templates/pybb/topic_list.html:38
 msgid "Go to first unread post"
-msgstr ""
+msgstr "Ir a la primera entrada sin leer"
 
 #: templates/pybb/topic_list.html:39
 msgid "Sticky"
-msgstr ""
+msgstr "Marcado"
 
 #: templates/pybb/topic_list.html:40
 #, fuzzy
 msgid "Closed"
-msgstr "Cerrar"
+msgstr "Cerrado"
 
 #: templates/pybb/topic_list.html:44
 #, fuzzy
 msgid "pages"
-msgstr "Imágenes"
+msgstr "páginas"
 
 #: templates/registration/activate.html:4
 #: templates/registration/activate.html:9
@@ -6615,7 +6618,7 @@ msgstr "Enlace válido durante %(expiration_days)s días."
 #: templates/registration/activation_email.txt:9
 #: templates/registration/password_reset_email.html:6
 msgid "PLEASE DO NOT REPLY TO THIS EMAIL"
-msgstr ""
+msgstr "POR FAVOR, NO RESPONDER A ESTE CORREO"
 
 #: templates/registration/activation_email.txt:11
 msgid ""
@@ -6804,12 +6807,12 @@ msgstr "Pedir una Llave API"
 
 #: templates/user/ban.html:7 templates/user/ban.html.py:15
 msgid "Are you sure you want to ban this user?"
-msgstr ""
+msgstr "¿Estás seguro de suspender a este usuario?"
 
 #: templates/user/ban.html:9 templates/user/ban.html.py:25
 #, fuzzy
 msgid "User banned"
-msgstr "Usuario no encontrado:"
+msgstr "Usuario suspendido"
 
 #: templates/user/ban.html:17
 #, python-format
@@ -6817,6 +6820,8 @@ msgid ""
 "User <strong>%(user)s</strong> will be deleted, with all their images, "
 "messages, comments, and so on."
 msgstr ""
+"El usuario <strong>%(user)s</strong> será eliminado, junto con todas sus "
+"imágenes, mensajes, comentarios, etc."
 
 #: templates/user/ban.html:27
 msgid "The user was banned."
@@ -6988,7 +6993,7 @@ msgstr ""
 
 #: templates/user/profile/delete.html:21
 msgid "Your account was deleted. Thanks for using AstroBin until now!"
-msgstr ""
+msgstr "Tu cuenta fué eliminada. Gracias por haber usado AstroBin hasta hoy."
 
 #: templates/user/profile/flickr_import.html:14
 msgid ""
