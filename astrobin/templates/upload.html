@@ -8,6 +8,24 @@
 {% block title %}{% trans "Upload" %}{% endblock %}
 
 {% block content %}
+    <div class="page-header text-center">
+        <h1>{% trans "Image upload" %}</h1>
+    </div>
+
+    {% if premium_has_inact_sub %}
+        <div class="row">
+            <div class="span10 offset1">
+                <div class="alert alert-warning">
+                    <h4 class="alert-header">
+                        <i class="icon-warning-sign"></i>
+                        {% trans "Warning!" %}
+                    </h4>
+                    {% trans "Your Lite or Premium subscription is not active, or it has expired. If you have just subscribed, please wait for a few minutes. Thanks for your patience!" %}
+                </div>
+            </div>
+        </div>
+    {% endif %}
+
     <div class="row section">
         <div class="span10 offset1">
             {% if premium_used_percent > -1 %}
@@ -78,27 +96,13 @@
                 </div> <!-- upload-forms -->
             </div> <!-- span10 -->
         </div> <!-- row -->
-    {% else %} <!-- upload_form -->
-        <div class="upload-forms">
-            <div class="single-form">
-                <div class="container">
-                    {% url 'profile_edit_gear' as the_url %}
-                    <img src="{{STATIC_URL}}images/dim_upload.png" />
-                    <h2>{% trans "Warning!" %}</h2>
-                    <p>
-                        {% blocktrans %}Before you start uploading images, you have to add at least one telescope and one camera. Do that in <a href="{{the_url}}?initial">your profile</a>!{% endblocktrans %}
-                    </p>
-                </div>
-            </div>
-            <div class="single-form">
-                <div class="container">
-                    {% url 'profile_edit_gear' as the_url %}
-                    <img src="{{STATIC_URL}}images/dim_upload.png" />
-                </div>
-            </div>
-
-        </div>
     {% endif %} <!-- upload_form -->
+
+    <hr/>
+
+    <div class="page-header text-center">
+        <h1>{% trans "Raw data upload" %}</h1>
+    </div>
 
     {% if rawdata_has_act_sub %}
         {% if rawdata_is_over_limit %}
