@@ -26,4 +26,3 @@ def install():
     if not __installed:
         subscription.signals.change_check.connect(impossible_downgrade)
         __installed = True
- 

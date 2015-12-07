@@ -4042,4 +4042,3 @@ def set_default_frontpage_section(request, section):
 
     messages.success(request, _("Default front page section changed."))
     return HttpResponseRedirect(reverse('index'))
-

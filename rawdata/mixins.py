@@ -27,4 +27,3 @@ class RestrictToCreatorMixin(object):
             raise Http404
 
         return super(RestrictToCreatorMixin, self).dispatch(request, *args, **kwargs)
-

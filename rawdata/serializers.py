@@ -68,4 +68,3 @@ class RawImageSerializer(serializers.ModelSerializer):
             'subjectName',
             'temperature',
         )
-

@@ -2184,4 +2184,3 @@ class CommercialGear(models.Model):
         app_label = 'astrobin'
         ordering = ['created']
         verbose_name_plural = _("Commercial gear items")
-
