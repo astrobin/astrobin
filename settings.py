@@ -260,7 +260,6 @@ INSTALLED_APPS = (
     'astrobin_apps_platesolving',
     'astrobin_apps_users',
     'astrobin_apps_donations',
-    'astrobin_apps_premium',
     'toggleproperties',
 )
 
