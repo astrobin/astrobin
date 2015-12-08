@@ -1046,6 +1046,13 @@ def image_upload_process(request):
         messages.error(request, _("Invalid image or no image provided. Allowed formats are JPG, PNG and GIF."))
         return HttpResponseRedirect('/upload/')
 
+    from astrobin_apps_premium.utils import premium_used_percent
+
+    used_percent = premium_used_percent(request.user)
+    if used_percent >= 100:
+        messages.error(request, _("You have reached your image uploads limit. Please upgrade!"));
+        return HttpResponseRedirect('/upload/')
+
     if settings.READONLY_MODE:
         messages.error(request, _("AstroBin is currently in read-only mode, because of server maintenance. Please try again soon!"));
         return HttpResponseRedirect('/upload/')
