@@ -321,9 +321,9 @@ def active_subscriptions(user):
 def has_active_subscription(user, subscription_pk):
     from subscription.models import UserSubscription
 
-    us = UserSubscription.objects.filter(
+    us = UserSubscription.active_objects.filter(
         user = user, subscription__pk = subscription_pk,
-        active = True, cancelled = False)
+        cancelled = False)
 
     if us.count() == 0:
         return False
@@ -339,9 +339,9 @@ def has_active_subscription(user, subscription_pk):
 def has_active_subscription_in_category(user, category):
     from subscription.models import UserSubscription
 
-    us = UserSubscription.objects.filter(
+    us = UserSubscription.active_objects.filter(
         user = user, subscription__category = category,
-        active = True, cancelled = False)
+        cancelled = False)
 
     if us.count() == 0:
         return False
