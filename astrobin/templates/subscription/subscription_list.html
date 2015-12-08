@@ -1,9 +1,19 @@
 {% extends 'base.html' %}
 {% load i18n %}
+{% load tags %}
 
 {% block title %}{% trans "Subscription plans" %}{% endblock %}
 
 {% block content %}
+    {% if request.user|active_subscriptions %}
+    <div class="well">
+        <h2>{% trans "Your active plans" %}</h2>
+        {% with object_list=request.user|active_subscriptions subscription_category='any' %}
+            {% include 'subscription/subscription_category_list.html' %}
+        {% endwith %}
+    </div>
+    {% endif %}
+
     <div class="well">
         <h2>{% trans "AstroBin Premium subscription plans" %}</h2>
         <p>

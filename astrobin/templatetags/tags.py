@@ -310,6 +310,14 @@ def show_ads(user):
 
 
 @register.filter
+def active_subscriptions(user):
+    from subscription.models import UserSubscription
+    us = UserSubscription.active_objects.filter(user = user, cancelled = False)
+    subs = [x.subscription for x in us if not x.expired()]
+    return subs
+
+
+@register.filter
 def has_active_subscription(user, subscription_pk):
     from subscription.models import UserSubscription
 

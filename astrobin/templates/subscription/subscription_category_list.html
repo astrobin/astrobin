@@ -13,7 +13,7 @@
     </thead>
     <tbody>
         {% for object in object_list %}
-        {% if object.category == subscription_category %}
+        {% if object.category == subscription_category or subscription_category == 'any' %}
         <tr>
             <td>{{object.name}}</td>
             <td>
