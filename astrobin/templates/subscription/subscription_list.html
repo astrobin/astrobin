@@ -26,7 +26,7 @@
             AstroBin.
             {% endblocktrans %}
         </p>
-        {% with subscription_category='premium' object=object %}
+        {% with subscription_category='premium' %}
             {% include 'subscription/subscription_category_list.html' %}
         {% endwith %}
     </div>
@@ -64,7 +64,7 @@
                 </li>
             </ul>
         </p>
-        {% with subscription_category='rawdata' object=object %}
+        {% with subscription_category='rawdata' %}
             {% include 'subscription/subscription_category_list.html' %}
         {% endwith %}
     </div>
