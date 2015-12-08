@@ -39,7 +39,8 @@
             {% if usersubscription and usersubscription.active %}
                 <span class="label label-success">
                     {% trans "Subscribed" %}
-                </span>
+                </span> /
+                {% trans "Expires" %}: {{usersubscription.expires|date:"SHORT_DATE_FORMAT"}}
             {% endif %}
 
             {% if usersubscription and usersubscription.canceled %}
