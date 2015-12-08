@@ -7,7 +7,32 @@
 
 {% block content %}
     <div class="page-header">
-        <h1>{{object.name}}</h1>
+        <h1>
+            {{object.name}}
+            <small>
+                {% if object.price > 0 %}
+                    $ {{object.price}} USD /
+
+                    {% if object.recurrence_unit == 'D' %}
+                        {% trans "day" %}
+                    {% endif %}
+
+                    {% if object.recurrence_unit == 'W' %}
+                        {% trans "week" %}
+                    {% endif %}
+
+                    {% if object.recurrence_unit == 'M' %}
+                        {% trans "month" %}
+                    {% endif %}
+
+                    {% if object.recurrence_unit == 'Y' %}
+                        {% trans "year" %}
+                    {% endif %}
+                {% else %}
+                    {% trans "Free" context "At no cost" %}
+                {% endif %}
+            </small>
+        </h1>
         <p>
             {% trans "Status" %}:
 
