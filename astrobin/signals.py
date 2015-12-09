@@ -30,20 +30,24 @@ from .gear import get_correct_gear
 
 
 def image_post_save(sender, instance, created, **kwargs):
-    if created and not instance.is_wip:
-        followers = [x.user for x in ToggleProperty.objects.filter(
-            property_type = "follow",
-            content_type = ContentType.objects.get_for_model(User),
-            object_id = instance.user.pk)]
+    if created:
+        instance.user.userprofile.premium_counter += 1
+        instance.user.userprofile.save()
 
-        push_notification(followers, 'new_image',
-            {
-                'object_url': settings.ASTROBIN_BASE_URL + instance.get_absolute_url(),
-                'originator': instance.user.userprofile,
-            })
+        if not instance.is_wip:
+            followers = [x.user for x in ToggleProperty.objects.filter(
+                property_type = "follow",
+                content_type = ContentType.objects.get_for_model(User),
+                object_id = instance.user.pk)]
 
-        verb = "uploaded a new image"
-        act.send(instance.user, verb = verb, action_object = instance)
+            push_notification(followers, 'new_image',
+                {
+                    'object_url': settings.ASTROBIN_BASE_URL + instance.get_absolute_url(),
+                    'originator': instance.user.userprofile,
+                })
+
+            verb = "uploaded a new image"
+            act.send(instance.user, verb = verb, action_object = instance)
 
 
 def imagerevision_post_save(sender, instance, created, **kwargs):
