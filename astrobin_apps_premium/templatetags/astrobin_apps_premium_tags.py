@@ -63,32 +63,34 @@ def premium_badge(user, size = 'large'):
 @register.filter
 def is_premium(user):
     if user.is_authenticated():
-        us = UserSubscription.objects.filter(
-            Q(user = user) &
-            Q(subscription__name = 'AstroBin Premium')
+        us = UserSubscription.active_objects.filter(
+            user = user,
+            subscription__name = 'AstroBin Premium',
+            cancelled = False
         )
 
         if us.count() == 0:
             return False
 
         us = us[0]
-        return us.valid()
+        return us.valid() and not us.expired()
 
     return False
 
 @register.filter
 def is_lite(user):
     if user.is_authenticated():
-        us = UserSubscription.objects.filter(
-            Q(user = user) &
-            Q(subscription__name = 'AstroBin Lite')
+        us = UserSubscription.active_objects.filter(
+            user = user,
+            subscription__name = 'AstroBin Lite',
+            cancelled = False
         )
 
         if us.count() == 0:
             return False
 
         us = us[0]
-        return us.valid()
+        return us.valid() and not us.expired()
 
     return False
 
