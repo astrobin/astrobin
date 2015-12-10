@@ -74,6 +74,10 @@
                 {% if object.category == "rawdata" %}
                     {{object.description}}
                 {% endif %}
+
+                {% if object.category == "donor" %}
+                    {% trans "n/a" %}
+                {% endif %}
             </td>
             <td>
                 <a  class="btn btn-block{% if request.user|has_active_subscription:object.pk %} btn-danger{% endif %}"
