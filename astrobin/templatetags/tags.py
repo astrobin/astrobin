@@ -351,3 +351,17 @@ def has_active_subscription_in_category(user, category):
         return False
 
     return True
+
+
+@register.filter
+def has_subscription_by_name(user, name):
+    from subscription.models import UserSubscription
+    return UserSubscription.objects.filter(
+        user = user, subscription__name = name).count() > 0
+
+
+@register.filter
+def get_subscription_by_name(user, name):
+    from subscription.models import UserSubscription
+    return UserSubscription.objects.get(
+        user = user, subscription__name = name)
