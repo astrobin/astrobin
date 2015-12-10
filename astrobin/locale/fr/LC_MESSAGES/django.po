@@ -7,7 +7,7 @@ msgstr ""
 "Project-Id-Version: AstroBin 1.0\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2015-11-20 13:30+0000\n"
-"PO-Revision-Date: 2015-11-12 20:32+0000\n"
+"PO-Revision-Date: 2015-12-06 17:58+0000\n"
 "Last-Translator: Tannhauser <tannhauser@sfr.fr>\n"
 "Language-Team: Français <LL@li.org>\n"
 "Language: fr\n"
@@ -17,7 +17,7 @@ msgstr ""
 "Plural-Forms: nplurals=2; plural=(n > 1);\n"
 "X-Generator: Pootle 2.5.0\n"
 "X-Poedit-Bookmarks: -1,319,-1,-1,-1,-1,-1,-1,-1,-1\n"
-"X-POOTLE-MTIME: 1447360379.930101\n"
+"X-POOTLE-MTIME: 1449424735.809058\n"
 
 #: fields.py:10
 msgid "United Kingdom"
@@ -2316,34 +2316,35 @@ msgid "Language"
 msgstr "Langue"
 
 #: models.py:1700
-#, fuzzy
 msgid "Signature"
-msgstr "Saturne"
+msgstr "Signature"
 
 #: models.py:1705
 msgid "Signature HTML Version"
-msgstr ""
+msgstr "Signature Version HTML"
 
 #: models.py:1710
 msgid "Show signatures"
-msgstr ""
+msgstr "Afficher la signature"
 
 #: models.py:1715
 msgid "Post count"
-msgstr ""
+msgstr "Nombre de messages"
 
 #: models.py:1720
 msgid "Automatically subscribe"
-msgstr ""
+msgstr "S'abonner automatiquement"
 
 #: models.py:1721
 msgid "Automatically subscribe to topics that you answer"
-msgstr ""
+msgstr "S'abonner automatiquement aux discussions auxquelles vous participez"
 
 #: models.py:1728
 #: templates/pybb/mail_templates/subscription_email_subject.html:2
 msgid "New reply to a forum topic you subscribe to"
 msgstr ""
+"Nouveau message dans une discussion d'un forum à laquelle vous êtes "
+"abonné(e)"
 
 #: models.py:1770
 msgid "A descriptive name, e.g. 'Home observatory' or 'Mount Whitney'."
@@ -2756,9 +2757,8 @@ msgid "Average integration time"
 msgstr "Temps d'intégration moyen"
 
 #: views.py:1848
-#, fuzzy
 msgid "Forum posts"
-msgstr "Forums"
+msgstr "Messages Forum"
 
 #: views.py:2339
 msgid ""
@@ -3744,6 +3744,10 @@ msgid ""
 "them are images that received lots of likes, and the other half were "
 "selected randomly. The images are anonymized as to not bias the selection."
 msgstr ""
+"Voici une sélection d'images publiées ces 7 derniers jours.  La moitié "
+"d'entre elles sont des images ayant obtenu de nombreux \"J'aime\", et l'autre "
+"moitié est constituée d'images sélectionnées aléatoirement. Les images sont "
+"anonymes afin de ne pas biaiser le vote."
 
 #: templates/iotd_choose.html:27
 msgid "Choose"
@@ -3835,17 +3839,16 @@ msgstr "Accueil"
 
 #: templates/maintenance_base.html:89 templates/maintenance_base.html:511
 #: templates/base/footer.html:19 templates/base/site_links.html:19
-#, fuzzy
 msgid "Forum"
-msgstr "Forums"
+msgstr "Forum"
 
 #: templates/maintenance_base.html:94 templates/base/site_links.html:24
 msgid "Latest topics"
-msgstr ""
+msgstr "Discussions récentes"
 
 #: templates/maintenance_base.html:96 templates/base/site_links.html:26
 msgid "Subscribed topics"
-msgstr ""
+msgstr "Discussions suivies"
 
 #: templates/maintenance_base.html:116 templates/base/site_links.html:46
 #: templates/image/detail/iotd_banner.html:10 templates/index/root.html:75
@@ -5641,9 +5644,8 @@ msgstr ""
 "quelques utilisateurs! "
 
 #: templates/index/root.html:296
-#, fuzzy
 msgid "Latest from the forums"
-msgstr "Quels sont les inconvénients d'un forum?"
+msgstr "Récemment dans le forum"
 
 #: templates/index/root.html:322
 msgid "Do you want your product here?"
@@ -6466,140 +6468,131 @@ msgstr ""
 
 #: templates/pybb/forum_list.html:9
 msgid "Hidden"
-msgstr ""
+msgstr "Caché"
 
 #: templates/pybb/forum_list.html:28
 msgid "No forums created"
-msgstr ""
+msgstr "Aucun forum créé"
 
 #: templates/pybb/forum_list.html:29
 msgid "Add forum now"
-msgstr ""
+msgstr "Ajouter un forum"
 
 #: templates/pybb/index.html:25
 msgid "Topics"
-msgstr ""
+msgstr "Discussions"
 
 #: templates/pybb/index.html:28 templates/pybb/topic.html:28
 #: templates/pybb/topic.html.py:48 templates/pybb/topic_list.html:20
 msgid "Posts"
-msgstr ""
+msgstr "Messages"
 
 #: templates/pybb/index.html:31
-#, fuzzy
 msgid "Last posts"
-msgstr "Est ou Ouest"
+msgstr "Derniers messages"
 
 #: templates/pybb/index.html:38
 msgid "Forum categories are not created"
-msgstr ""
+msgstr "Les catégories de forum ne sont pas créées"
 
 #: templates/pybb/index.html:39
 msgid "Add a category now"
-msgstr ""
+msgstr "Ajouter une catégorie"
 
 #: templates/pybb/index.html:44 templates/pybb/latest_topics.html:7
 #: templates/pybb/latest_topics.html:10
 msgid "Last updates in topics"
-msgstr ""
+msgstr "Dernières mises à jour des discussions"
 
 #: templates/pybb/index.html:47
 msgid "Mark all forums as read"
-msgstr ""
+msgstr "Marquer tous les forums comme lus"
 
 #: templates/pybb/latest_topics.html:32
 #: templates/pybb/subscribed_topics.html:32
 msgid "Mark all topics as read"
-msgstr ""
+msgstr "Marquer toutes les discussions comme lues"
 
 #: templates/pybb/post_template.html:39
-#, fuzzy
 msgid "Edited"
-msgstr "Modifier"
+msgstr "Modifié"
 
 #: templates/pybb/post_template.html:44
-#, fuzzy
 msgid "quote"
-msgstr "citation"
+msgstr "citer"
 
 #: templates/pybb/post_template.html:45
-#, fuzzy
 msgid "quote selected"
-msgstr "# sélectionné(s)"
+msgstr "citer la sélection"
 
 #: templates/pybb/post_template.html:53
-#, fuzzy
 msgid "Delete post?"
-msgstr "Supprimer le compte"
+msgstr "Supprimer le message?"
 
 #: templates/pybb/post_template.html:56
 msgid "Approve post"
-msgstr ""
+msgstr "Approuver le message"
 
 #: templates/pybb/subscribed_topics.html:7
 #: templates/pybb/subscribed_topics.html:10
 msgid "Topics you subscribe to"
-msgstr ""
+msgstr "Discussions auxquelles vous êtes abonné(e)"
 
 #: templates/pybb/topic.html:57
 msgid "Unstick topic"
-msgstr ""
+msgstr "Ne plus promouvoir la discussion"
 
 #: templates/pybb/topic.html:59
 msgid "Stick topic"
-msgstr ""
+msgstr "Promouvoir la discussion"
 
 #: templates/pybb/topic.html:63
 msgid "Open topic"
-msgstr ""
+msgstr "Ouvrir une discussion"
 
 #: templates/pybb/topic.html:65
-#, fuzzy
 msgid "Close topic"
-msgstr "Fermer"
+msgstr "Fermer une discussion"
 
 #: templates/pybb/topic.html:76
 msgid "Unsubscribe"
-msgstr ""
+msgstr "Se désabonner"
 
 #: templates/pybb/topic.html:78
 msgid "Subscribe"
-msgstr ""
+msgstr "S'abonner"
 
 #: templates/pybb/topic.html:94
 msgid "Subscribers"
-msgstr ""
+msgstr "Abonnés"
 
 #: templates/pybb/topic_list.html:13
 msgid "Topic"
-msgstr ""
+msgstr "Discussion"
 
 #: templates/pybb/topic_list.html:17
 msgid "Author"
-msgstr ""
+msgstr "Auteur"
 
 #: templates/pybb/topic_list.html:26
-#, fuzzy
 msgid "Last post"
-msgstr "Est ou Ouest"
+msgstr "Dernier message"
 
 #: templates/pybb/topic_list.html:38
 msgid "Go to first unread post"
-msgstr ""
+msgstr "Aller au dernier message non-lu"
 
 #: templates/pybb/topic_list.html:39
 msgid "Sticky"
-msgstr ""
+msgstr "Épinglé"
 
 #: templates/pybb/topic_list.html:40
-#, fuzzy
 msgid "Closed"
-msgstr "Fermer"
+msgstr "Fermé"
 
 #: templates/pybb/topic_list.html:44
-#, fuzzy
 msgid "pages"
-msgstr "Images"
+msgstr "pages"
 
 #: templates/registration/activate.html:4
 #: templates/registration/activate.html:9
