@@ -6,6 +6,8 @@
 {% block title %}{% trans "Apply a watermark to image" %}{% endblock %}
 
 {% block content %}
+    {% include 'image/edit/menu.html' %}
+
     <h1>
         {% blocktrans %}Apply a watermark to image{% endblocktrans %}
     </h1>
@@ -20,7 +22,27 @@
         <input type="hidden" name="image_id" value="{{image.id}}" />
 
         <div class="form-actions">
-            <input class="btn btn-primary" type="submit" name="submit_next" value="{% trans "Next step: basic information" %} &rarr;" /></li>
+            <input
+                class="btn btn-primary"
+                type="submit"
+                value=
+                {% if image.title %}
+                    "{% trans "Save" %} &rarr;"
+                {% else %}
+                    "{% trans "Next step: basic information" %} &rarr;"
+                {% endif %}
+            />
+
+            {% if image.title %}
+                <a class="btn" href="{{image.get_absolute_url}}">{% trans "Cancel" %}</a>
+            {% endif %}
+
+            {% if image.title %}
+                <p class="help-block">
+                    {% trans "Warning!" %}
+                    {% trans "This operation might take several seconds." %}
+                </p>
+            {% endif %}
         </div>
     </form>
 {% endblock %}

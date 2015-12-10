@@ -1356,8 +1356,12 @@ def image_edit_save_watermark(request):
     profile.default_watermark_opacity = form.cleaned_data['watermark_opacity']
     profile.save()
 
-    if 'submit_next' in request.POST:
-        return HttpResponseRedirect(reverse('image_edit_basic', kwargs={'id': image.id}))
+    if not image.title:
+        return HttpResponseRedirect(
+            reverse('image_edit_basic', kwargs={'id': image.id}))
+
+    # Force new thumbnails
+    image.thumbnail_invalidate()
 
     return HttpResponseRedirect(image.get_absolute_url())
 

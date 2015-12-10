@@ -10,6 +10,12 @@
     <ul class="dropdown-menu">
         {% if request.user == image.user or request.user.is_superuser %}
         <li>
+            <a href="{% url image_edit_watermark image.id %}">
+                <i class="icon-tint"></i>
+                {% trans "Edit watermark" %}
+            </a>
+        </li>
+        <li>
             <a href="{% url image_edit_basic image.id %}">
                 <i class="icon-edit"></i>
                 {% trans "Edit basic information" %}
