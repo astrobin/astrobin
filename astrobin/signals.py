@@ -10,6 +10,7 @@ from django.db.models.signals import post_save
 from actstream import action as act
 from rest_framework.authtoken.models import Token
 from toggleproperties.models import ToggleProperty
+from subscription.signals import subscribed, unsubscribed
 
 # Other AstroBin apps
 from nested_comments.models import NestedComment
@@ -295,6 +296,28 @@ def solution_post_save(sender, instance, created, **kwargs):
         {'object_url': settings.ASTROBIN_BASE_URL + target.get_absolute_url()})
 
 
+def subscription_subscribed(sender, **kwargs):
+    subscription = kwargs.get("subscription")
+
+    if subscription.name == 'AstroBin Lite':
+        user = kwargs.get("user")
+        profile = user.userprofile
+        profile.premium_counter = 0
+        profile.save()
+
+
+def subscription_unsubscribed(sender, **kwargs):
+    from astrobin_apps_premium.utils import SUBSCRIPTION_NAMES
+
+    subscription = kwargs.get("subscription")
+
+    if subscription.name in SUBSCRIPTION_NAMES:
+        user = kwargs.get("user")
+        profile = user.userprofile
+        profile.premium_counter = 0
+        profile.save()
+
+
 post_save.connect(image_post_save, sender = Image)
 post_save.connect(imagerevision_post_save, sender = ImageRevision)
 post_save.connect(nested_comment_post_save, sender = NestedComment)
@@ -309,4 +332,5 @@ m2m_changed.connect(rawdata_privatesharedfolder_data_added, sender = PrivateShar
 m2m_changed.connect(rawdata_privatesharedfolder_image_added, sender = PrivateSharedFolder.processed_images.through)
 m2m_changed.connect(rawdata_privatesharedfolder_user_added, sender = PrivateSharedFolder.users.through)
 
-
+subscribed.connect(subscription_subscribed)
+unsubscribed.connect(subscription_unsubscribed)
