@@ -31,3 +31,4 @@ TMPZIPS=/var/www/tmpzips
 10 00 * * * (. $ASTROBIN_ROOT/env/production; $PYTHON $ASTROBIN_ROOT/manage.py merge_gear) 2>&1 >/dev/null
 30 00 * * * (. $ASTROBIN_ROOT/env/production; $PYTHON $ASTROBIN_ROOT/manage.py global_stats) 2>&1 >/dev/null
 00 11 * * * (. $ASTROBIN_ROOT/env/production; $PYTHON $ASTROBIN_ROOT/manage.py clean_temporary_archives) 2>&1 >/dev/null
+00 00 1 1 * (. $ASTROBIN_ROOT/env/production; $PYTHON $ASTROBIN_ROOT/manage.py reset_lite_counters) 2>&1 >/dev/null
