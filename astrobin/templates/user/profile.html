@@ -42,12 +42,15 @@
 
             {% if user|is_lite %}
                 {% blocktrans with premium_counter=user.userprofile.premium_counter max_allowed=PREMIUM_MAX_IMAGES_LITE %}You have used <strong>{{premium_counter}}</strong> images of your allowed <strong>{{max_allowed}}</strong> for the current year.{% endblocktrans %}
-                {% trans "Thank you for supporting AstroBin!" %}
+                <strong>{% trans "Thank you for supporting AstroBin!" %}</strong>
             {% endif %}
 
             {% if user|is_premium %}
-                {% trans "Thank you for supporting AstroBin!" %}
+                <strong>{% trans "Thank you for supporting AstroBin!" %}</strong>
             {% endif %}
+
+            {% url subscription_list as plans_url %}
+            {% blocktrans %}To make change, please visit <a href="{{plans_url}}">the plans page</a>.{% endblocktrans %}
         </div>
         {% endif %}
 
