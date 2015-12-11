@@ -364,6 +364,23 @@ def has_active_subscription_in_category(user, category):
 
 
 @register.filter
+def get_premium_subscription_expiration(user):
+    from subscription.models import UserSubscription
+
+    if user.is_anonymous():
+        return None
+
+    us = UserSubscription.active_objects.filter(
+        user = user, subscription__category = 'premium',
+        cancelled = False)
+
+    if us.count() == 0:
+        return None
+
+    return us[0].expires
+
+
+@register.filter
 def has_subscription_by_name(user, name):
     from subscription.models import UserSubscription
 

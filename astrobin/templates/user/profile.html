@@ -29,28 +29,42 @@
         {% if PREMIUM_ENABLED and user == request.user %}
         <div class="subtle-container simple-continer">
             <div class="header">
-                <h4>
-                    <i class="icon-dollar"></i>
+                <h4>{% trans "Subscription" %}</h4>
+            </div>
+            <p>
+                {% trans "Type" %}<br/>
+                <strong>
                     {% if user|is_free %}AstroBin Free{% endif %}
                     {% if user|is_lite %}AstroBin Lite{% endif %}
                     {% if user|is_premium %}AstroBin Premium{% endif %}
-                </h4>
-            </div>
-            {% if user|is_free %}
-                {% blocktrans with premium_counter=user.userprofile.premium_counter max_allowed=PREMIUM_MAX_IMAGES_FREE %}You have used <strong>{{premium_counter}}</strong> images of your allowed <strong>{{max_allowed}}</strong>.{% endblocktrans %}
+                </strong>
+            </p>
+
+            {% if user|is_lite or user|is_premium %}
+            <p>
+                {% trans "Expiration date" %}<br/>
+                <strong>
+                    {% with expiration=user|get_premium_subscription_expiration %}
+                        {{expiration|date:"SHORT_DATE_FORMAT"}}
+                    {% endwith %}
+                </strong>
+            </p>
             {% endif %}
 
-            {% if user|is_lite %}
-                {% blocktrans with premium_counter=user.userprofile.premium_counter max_allowed=PREMIUM_MAX_IMAGES_LITE %}You have used <strong>{{premium_counter}}</strong> images of your allowed <strong>{{max_allowed}}</strong> for the current year.{% endblocktrans %}
-                <strong>{% trans "Thank you for supporting AstroBin!" %}</strong>
+            {% if user|is_free or user|is_lite %}
+            <p>
+                {% trans "Uploads used" %}</br>
+                <strong>
+                    {{user.userprofile.premium_counter}} /
+                    {% if user|is_free %}{{PREMIUM_MAX_IMAGES_FREE}}{% endif %}
+                    {% if user|is_lite %}{{PREMIUM_MAX_IMAGES_LITE}}{% endif %}
+                </strong>
+            </p>
             {% endif %}
 
-            {% if user|is_premium %}
-                <strong>{% trans "Thank you for supporting AstroBin!" %}</strong>
+            {% if user|is_lite or user|is_premium %}
+            <p class="small"><em>{% trans "Thanks for your support!" %}</em></p>
             {% endif %}
-
-            {% url subscription_list as plans_url %}
-            {% blocktrans %}To make change, please visit <a href="{{plans_url}}">the plans page</a>.{% endblocktrans %}
         </div>
         {% endif %}
 
