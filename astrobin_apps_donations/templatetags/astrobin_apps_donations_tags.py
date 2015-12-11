@@ -177,7 +177,7 @@ def user_donation_subscription_id(user):
     return 0
 
 
-@register.inclusion_tag('astrobin_apps_donations/inclusion_tags/thank_you_for_your_support.html', takes_context = True)
-def thank_you_for_your_support(context):
+@register.inclusion_tag('astrobin_apps_donations/inclusion_tags/thank_you_for_your_donations.html', takes_context = True)
+def thank_you_for_your_donations(context):
     return {}
 

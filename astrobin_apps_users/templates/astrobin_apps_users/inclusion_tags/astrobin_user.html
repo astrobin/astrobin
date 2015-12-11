@@ -54,8 +54,8 @@
             {% endcache %}
         </div>
 
-        {% if request.user == user and user|is_donor %}
-            {% thank_you_for_your_support %}
+        {% if request.user == user and DONATIONS_ENABLED and user|is_donor %}
+            {% thank_you_for_your_donations %}
         {% endif %}
     {% endif %}
 
