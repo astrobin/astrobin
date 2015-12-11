@@ -312,6 +312,10 @@ def show_ads(user):
 @register.filter
 def active_subscriptions(user):
     from subscription.models import UserSubscription
+
+    if user.is_anonymous():
+        return []
+
     us = UserSubscription.active_objects.filter(user = user, cancelled = False)
     subs = [x.subscription for x in us if not x.expired()]
     return subs
@@ -320,6 +324,9 @@ def active_subscriptions(user):
 @register.filter
 def has_active_subscription(user, subscription_pk):
     from subscription.models import UserSubscription
+
+    if user.is_anonymous():
+        return False
 
     us = UserSubscription.active_objects.filter(
         user = user, subscription__pk = subscription_pk,
@@ -339,6 +346,9 @@ def has_active_subscription(user, subscription_pk):
 def has_active_subscription_in_category(user, category):
     from subscription.models import UserSubscription
 
+    if user.is_anonymous():
+        return False
+
     us = UserSubscription.active_objects.filter(
         user = user, subscription__category = category,
         cancelled = False)
@@ -356,6 +366,10 @@ def has_active_subscription_in_category(user, category):
 @register.filter
 def has_subscription_by_name(user, name):
     from subscription.models import UserSubscription
+
+    if user.is_anonymous():
+        return False
+
     return UserSubscription.objects.filter(
         user = user, subscription__name = name).count() > 0
 
@@ -363,5 +377,9 @@ def has_subscription_by_name(user, name):
 @register.filter
 def get_subscription_by_name(user, name):
     from subscription.models import UserSubscription
+
+    if user.is_anonymous():
+        return None
+
     return UserSubscription.objects.get(
         user = user, subscription__name = name)
