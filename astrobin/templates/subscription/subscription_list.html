@@ -7,7 +7,7 @@
 {% block content %}
     {% if request.user|active_subscriptions %}
     <div class="well">
-        <h2>{% trans "Your active plans" %}</h2>
+        <h2>{% trans "Your active subscription plans" %}</h2>
         {% with object_list=request.user|active_subscriptions subscription_category='any' %}
             {% include 'subscription/subscription_category_list.html' %}
         {% endwith %}
