@@ -34,8 +34,14 @@
             <div class="avatar" style="width: 194px; height: 194px; overflow: hidden;">
                 <a href="{% url user_page user %}">
                     {% avatar user 194 %}
-                    {% donor_badge user 'large' %}
-                    {% premium_badge user 'large' %}
+
+                    {% if DONATIONS_ENABLED %}
+                        {% donor_badge user 'large' %}
+                    {% endif %}
+
+                    {% if PREMIUM_ENABLED %}
+                        {% premium_badge user 'large' %}
+                    {% endif %}
                 </a>
 
                 {% if request.user != user %}
@@ -70,8 +76,14 @@
             <div class="avatar" style="width: 48px; height: 48px; overflow: hidden";>
                 <a href="{% url user_page user %}">
                     {% avatar user 48 %}
-                    {% donor_badge user 'small' %}
-                    {% premium_badge user 'small' %}
+
+                    {% if DONATIONS_ENABLED %}
+                        {% donor_badge user 'small' %}
+                    {% endif %}
+
+                    {% if PREMIUM_ENABLED %}
+                        {% premium_badge user 'small' %}
+                    {% endif %}
                 </a>
             </div>
 
@@ -98,8 +110,14 @@
             <div class="avatar" style="width: 48px; height: 48px; overflow: hidden";>
                 <a href="{% url user_page user %}">
                     {% avatar user 48 %}
-                    {% donor_badge user 'small' %}
-                    {% premium_badge user 'small' %}
+
+                    {% if DONATIONS_ENABLED %}
+                        {% donor_badge user 'small' %}
+                    {% endif %}
+
+                    {% if PREMIUM_ENABLED %}
+                        {% premium_badge user 'small' %}
+                    {% endif %}
                 </a>
             </div>
 
