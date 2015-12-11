@@ -306,18 +306,6 @@ def subscription_subscribed(sender, **kwargs):
         profile.save()
 
 
-def subscription_unsubscribed(sender, **kwargs):
-    from astrobin_apps_premium.utils import SUBSCRIPTION_NAMES
-
-    subscription = kwargs.get("subscription")
-
-    if subscription.name in SUBSCRIPTION_NAMES:
-        user = kwargs.get("user")
-        profile = user.userprofile
-        profile.premium_counter = 0
-        profile.save()
-
-
 post_save.connect(image_post_save, sender = Image)
 post_save.connect(imagerevision_post_save, sender = ImageRevision)
 post_save.connect(nested_comment_post_save, sender = NestedComment)
@@ -333,4 +321,3 @@ m2m_changed.connect(rawdata_privatesharedfolder_image_added, sender = PrivateSha
 m2m_changed.connect(rawdata_privatesharedfolder_user_added, sender = PrivateSharedFolder.users.through)
 
 subscribed.connect(subscription_subscribed)
-unsubscribed.connect(subscription_unsubscribed)
