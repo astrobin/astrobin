@@ -101,6 +101,7 @@ def common_variables(request):
         'PREMIUM_ENABLED': settings.PREMIUM_ENABLED,
         'PREMIUM_MAX_IMAGES_FREE': settings.PREMIUM_MAX_IMAGES_FREE,
         'PREMIUM_MAX_IMAGES_LITE': settings.PREMIUM_MAX_IMAGES_LITE,
+        'PAYPAL_TEST': settings.PAYPAL_TEST,
     }
 
     return d

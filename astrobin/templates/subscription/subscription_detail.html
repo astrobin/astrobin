@@ -147,7 +147,11 @@
                         {% blocktrans %}Subscribe with a secure payment provided by PayPal:{% endblocktrans %}
                     </h3>
 
-                    {{form.render}}
+                    {% if PAYPAL_TEST %}
+                        {{form.sandbox}}
+                    {% else %}
+                        {{form.render}}
+                    {% endif %}
             {% endif %} <!-- if atom -->
         {% endif %} <!-- if active -->
 
@@ -174,7 +178,11 @@
                         {% blocktrans %}Subscribe with a secure payment provided by PayPal:{% endblocktrans %}
                     </h3>
 
-                    {{form.render}}
+                    {% if PAYPAL_TEST %}
+                        {{form.sandbox}}
+                    {% else %}
+                        {{form.render}}
+                    {% endif %}
                 </div>
             {% else %} <!-- no form, must be atom -->
 

@@ -460,7 +460,8 @@ ACTSTREAM_SETTINGS = {
 
 }
 
-PAYPAL_TEST = False
+PAYPAL_TEST = DEBUG
+PAYPAL_DEBUG = PAYPAL_TEST
 
 if PAYPAL_TEST:
     PAYPAL_RECEIVER_EMAIL = 'salvatore.iovene+paypal+sandbox+business@gmail.com'
