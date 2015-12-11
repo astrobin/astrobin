@@ -52,7 +52,7 @@ def cancel_premium_modal(context):
     }
 
 
-@register.inclusion_tag('astrobin_apps_premium/inclusion_tags/premium.html')
+@register.inclusion_tag('astrobin_apps_premium/inclusion_tags/premium_badge.html')
 def premium_badge(user, size = 'large'):
     return {
         'user': user,

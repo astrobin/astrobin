@@ -383,6 +383,7 @@ PIPELINE_CSS = {
 
             'astrobin_apps_images/css/jquery.capty.css',
             'astrobin_apps_donations/css/astrobin_apps_donations.css',
+            'astrobin_apps_premium/css/astrobin_apps_premium.css',
 
             'css/reset.css',
             'css/bootstrap.css',

@@ -1,4 +1,5 @@
 {% load astrobin_apps_donations_tags %}
+{% load astrobin_apps_premium_tags %}
 {% load avatar_tags %}
 {% load cache %}
 {% load i18n %}
@@ -34,6 +35,7 @@
                 <a href="{% url user_page user %}">
                     {% avatar user 194 %}
                     {% donor_badge user 'large' %}
+                    {% premium_badge user 'large' %}
                 </a>
 
                 {% if request.user != user %}
@@ -69,6 +71,7 @@
                 <a href="{% url user_page user %}">
                     {% avatar user 48 %}
                     {% donor_badge user 'small' %}
+                    {% premium_badge user 'small' %}
                 </a>
             </div>
 
@@ -96,6 +99,7 @@
                 <a href="{% url user_page user %}">
                     {% avatar user 48 %}
                     {% donor_badge user 'small' %}
+                    {% premium_badge user 'small' %}
                 </a>
             </div>
 
