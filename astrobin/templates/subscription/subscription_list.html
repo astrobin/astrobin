@@ -14,6 +14,7 @@
     </div>
     {% endif %}
 
+    {% if PREMIUM_ENABLED %}
     <div class="well">
         <h2>{% trans "AstroBin Premium subscription plans" %}</h2>
         <p>
@@ -30,6 +31,7 @@
             {% include 'subscription/subscription_category_list.html' %}
         {% endwith %}
     </div>
+    {% endif %}
 
     <div class="well">
         <h2>{% trans "AstroBin Raw Data subscription plans" %}</h2>
