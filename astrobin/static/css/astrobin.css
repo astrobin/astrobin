@@ -1040,6 +1040,13 @@ li.astrobin-thumbnail img {
 .table.table-bordered {
   border-color: #292929;
 }
+.table caption {
+  font-size: 16px;
+  line-height: 32px;
+  font-weight: bold;
+  background: #303030 url('../images/darker-panel-tile.png');
+  padding: 4px 8px;
+}
 .table caption + thead tr:first-child th,
 .table caption + thead tr:first-child td,
 .table colgroup + thead tr:first-child th,
@@ -3956,4 +3963,7 @@ pre {
 .wysibb .wysibb-toolbar .wysibb-toolbar-container .wysibb-toolbar-btn .fonticon {
   color: #ddd;
   text-shadow: 0 1px 0 black;
+}
+.table.migrate-donations {
+  margin-bottom: 30px;
 }

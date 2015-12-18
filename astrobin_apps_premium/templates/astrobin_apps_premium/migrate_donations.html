@@ -1,0 +1,66 @@
+{% extends "base.html" %}
+
+{% load i18n %}
+
+
+{% block title %}
+{% trans "Migrate donations" %}
+{% endblock %}
+
+
+{% block content %}
+
+<h1>{% trans "Migrate donations" %}</h1>
+
+{% if migration_data.transactions %}
+    {% include "astrobin_apps_premium/_transactions.html" %}
+    {% include "astrobin_apps_premium/_migration_data.html" %}
+{% endif %}
+
+{% if migration_data.migration_impossible %}
+    <div class="alert alert-error">
+        <h4 class="alert-heading">
+            <i clss="icon-fire"></i>{% trans "Error!" %}
+        </h4>
+        <strong>{% trans "Sorry, but it looks like you cannot migrate your donations to a Premium membership." %}</strong>
+
+        {% if migration_data.migration_impossible_reason == "ALREADY_PREMIUM" %}
+            {% trans "You already have a paid membership." %}
+        {% endif %}
+
+        {% if migration_data.migration_impossible_reason == "NO_PAYMENTS" %}
+            {% trans "We could not find any donations from you last year." %}
+        {% endif %}
+
+        {% if migration_data.migration_impossible_reason == "PAST_EXPIRATION" %}
+            {% trans "Your donations last year were not enough to cover a Premium subscription for this year." %}
+        {% endif %}
+    </div>
+
+    <a class="btn" href="{% url subscription_list %}">
+        {% trans "View the subscription plans" %}
+    </a>
+{% else %}
+    <div class="well">
+        <p>{% trans "As you  have made donations during the last year, you may choose to transfer the amount you donated towards an AstroBin Premium membership. The membership will have an expiration date proportionate to the amount you donated." %}</p>
+        <p>{% trans "If you are feeling particularly cool and generous, you may choose to consider your past donations as a contribution to support past efforts, and pay again for a Premium plan. Up to you!" %}</p>
+    </div>
+
+    <div class="row section">
+        <div class="span12">
+            <form class="form-vertical" action="." method="post">{% csrf_token %}
+                <div class="form-actions">
+                    <input
+                        class="btn btn-primary"
+                        type="submit"
+                        value="{% trans "Migrate donations" %}"/>
+                    <a class="btn" href="{% url subscription_list %}">
+                        {% trans "No, I want to pay for Premium" %}
+                    </a>
+                </div>
+            </form>
+        </div>
+    </div>
+{% endif %}
+
+{% endblock %}
