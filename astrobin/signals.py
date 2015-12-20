@@ -10,7 +10,7 @@ from django.db.models.signals import post_save
 from actstream import action as act
 from rest_framework.authtoken.models import Token
 from toggleproperties.models import ToggleProperty
-from subscription.signals import subscribed, unsubscribed
+from subscription.signals import subscribed, paid
 
 # Other AstroBin apps
 from nested_comments.models import NestedComment
@@ -321,3 +321,4 @@ m2m_changed.connect(rawdata_privatesharedfolder_image_added, sender = PrivateSha
 m2m_changed.connect(rawdata_privatesharedfolder_user_added, sender = PrivateSharedFolder.users.through)
 
 subscribed.connect(subscription_subscribed)
+paid.connect(subscription_subscribed)
