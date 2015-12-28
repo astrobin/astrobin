@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2015-12-10 19:29+0000\n"
+"POT-Creation-Date: 2015-12-28 19:24+0000\n"
 "PO-Revision-Date: 2013-04-22 06:05+0100\n"
 "Last-Translator: jiaozi <wangjiao@foxmail.com>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -69,11 +69,11 @@ msgstr "拍摄主体"
 msgid "Temperature"
 msgstr "温度"
 
-#: forms.py:86
+#: forms.py:85
 msgid "Users"
 msgstr "用户"
 
-#: forms.py:87
+#: forms.py:86
 msgid "A list of users you want to invite. Use a comma to separate them."
 msgstr "您希望邀请的用户列表，用一个逗号来分割"
 
@@ -206,16 +206,6 @@ msgstr "屏幕截图游览"
 #: templates/rawdata/help_03.html:31 templates/rawdata/plans.html:4
 #: templates/rawdata/plans.html.py:8 templates/rawdata/restricted.html:4
 #: templates/rawdata/restricted.html:8
-#: templates/subscription/subscription_cancel.html:4
-#: templates/subscription/subscription_cancel.html:8
-#: templates/subscription/subscription_change_done.html:4
-#: templates/subscription/subscription_change_done.html:8
-#: templates/subscription/subscription_detail.html:6
-#: templates/subscription/subscription_detail.html:10
-#: templates/subscription/subscription_done.html:4
-#: templates/subscription/subscription_done.html:8
-#: templates/subscription/subscription_list.html:4
-#: templates/subscription/subscription_list.html:8
 msgid "AstroBin Raw Data"
 msgstr "AstroBin 原始数据"
 
@@ -443,7 +433,6 @@ msgid "There doesn't seem to be anything here."
 msgstr ""
 
 #: templates/rawdata/library.html:141
-#: templates/subscription/subscription_done.html:17
 #, python-format
 msgid ""
 "Head over to the <a href=\"%(upload_url)s\">upload page</a> to get started. "
@@ -882,200 +871,6 @@ msgstr ""
 msgid "Please refresh this page in a few seconds."
 msgstr ""
 
-#: templates/subscription/_plan.html:11
-msgid "FREE!"
-msgstr ""
-
-#: templates/subscription/_plan.html:12
-msgid "That's right, this plan is free."
-msgstr ""
-
-#: templates/subscription/_plan.html:17
-msgid "month"
-msgstr ""
-
-#: templates/subscription/_plan.html:19
-#, python-format
-msgid "That's only $ %(daily_price)s USD per day!"
-msgstr ""
-
-#: templates/subscription/_plan.html:25
-#, python-format
-msgid "Free for %(free_days)s days."
-msgstr ""
-
-#: templates/subscription/_plan.html:29
-msgid "You can cancel at any time."
-msgstr "你能随时随地取消"
-
-#: templates/subscription/subscription_cancel.html:8
-msgid "Subscription process cancelled"
-msgstr ""
-
-#: templates/subscription/subscription_cancel.html:12
-msgid ""
-"Your transaction with PayPal has been cancelled, so no change in your "
-"subscription has occurred."
-msgstr ""
-
-#: templates/subscription/subscription_cancel.html:16
-#: templates/subscription/subscription_change_done.html:16
-#: templates/subscription/subscription_detail.html:116
-#, python-format
-msgid "Return to the <a href=\"%(plans_url)s\">plans page</a>."
-msgstr ""
-
-#: templates/subscription/subscription_change_done.html:8
-msgid "Subscription change"
-msgstr ""
-
-#: templates/subscription/subscription_change_done.html:12
-msgid ""
-"Your request for a change in your subscription has been processed "
-"successfully."
-msgstr ""
-
-#: templates/subscription/subscription_detail.html:6
-#: templates/subscription/subscription_detail.html:10
-msgid "Subscription plan"
-msgstr ""
-
-#: templates/subscription/subscription_detail.html:24
-msgid "Your subscription to this plan is cancelled."
-msgstr ""
-
-#: templates/subscription/subscription_detail.html:30
-msgid "You are subscribed to this plan."
-msgstr "您正在提交这个计划"
-
-#: templates/subscription/subscription_detail.html:37
-msgid "Here you can deactivate your free Raw Data Atom subscription."
-msgstr ""
-
-#: templates/subscription/subscription_detail.html:41
-msgid "Deactivate"
-msgstr ""
-
-#: templates/subscription/subscription_detail.html:46
-#, fuzzy
-msgid "Go to your Raw Data Library."
-msgstr "您的原始数据库"
-
-#: templates/subscription/subscription_detail.html:50
-#, python-format
-msgid "You may <a href=\"%(cancel_url)s\">cancel via PayPal</a> if you wish."
-msgstr ""
-
-#: templates/subscription/subscription_detail.html:56
-#: templates/subscription/subscription_detail.html:98
-msgid "Here you can activate your free Raw Data Atom subscription."
-msgstr ""
-
-#: templates/subscription/subscription_detail.html:60
-#: templates/subscription/subscription_detail.html:106
-msgid "Activate"
-msgstr ""
-
-#: templates/subscription/subscription_detail.html:64
-#: templates/subscription/subscription_detail.html:88
-msgid "Subscribe with a secure payment provided by PayPal:"
-msgstr ""
-
-#: templates/subscription/subscription_detail.html:77
-msgid "You cannot switch to this plan."
-msgstr ""
-
-#: templates/subscription/subscription_detail.html:101
-msgid ""
-"Careful! If you have already a paid Raw Data subscription, your available "
-"space will be reduced!"
-msgstr ""
-
-#: templates/subscription/subscription_detail.html:114
-#: templates/subscription/subscription_done.html:21
-#: templates/subscription/subscription_list.html:94
-msgid "Thank you for supporting AstroBin!"
-msgstr "感谢您支持AstroBIN!"
-
-#: templates/subscription/subscription_done.html:8
-msgid "Subscription confirmed"
-msgstr "确认订阅"
-
-#: templates/subscription/subscription_done.html:12
-msgid ""
-"Your subscription request to AstroBin Raw Data has been received, and we are "
-"awaiting the final confirmation from PayPal. Your subscription should be "
-"active within a few minutes!"
-msgstr ""
-
-#: templates/subscription/subscription_list.html:4
-#: templates/subscription/subscription_list.html:8
-msgid "Subscription plans"
-msgstr ""
-
-#: templates/subscription/subscription_list.html:14
-msgid ""
-"<strong>AstroBin Raw Data</strong> allows you to store your raw files "
-"(<strong>FIT</strong> and <strong>digital camera raw</strong>) on AstroBin. "
-"We will keep them neatly organized, and you will have a safe backup of all "
-"your work, including calibration files."
-msgstr ""
-
-#: templates/subscription/subscription_list.html:17
-#, python-format
-msgid ""
-"Learn more by reading <a href=\"%(rawdata_url)s\">a short introduction.</a>"
-msgstr ""
-
-#: templates/subscription/subscription_list.html:23
-msgid "Here are the available plans. Choose the one that suits you best!"
-msgstr ""
-
-#: templates/subscription/subscription_list.html:39
-msgid "Manage"
-msgstr ""
-
-#: templates/subscription/subscription_list.html:54
-msgid ""
-"This plan is free! Choose it to share a small amount of data with other "
-"users."
-msgstr ""
-
-#: templates/subscription/subscription_list.html:62
-msgid ""
-" Choose this plan if you want to keep your expenses to a minimum, but still "
-"want the possibity to share your FIT and digital camera raw files with your "
-"friends. You can also participate to public data pools and contribute to the "
-"deepest deep sky images ever created, and you will always know that you "
-"support AstroBin."
-msgstr ""
-
-#: templates/subscription/subscription_list.html:70
-msgid ""
-"Choose this plan if you have started out in the recent year or two, or you "
-"don't want to share and backup your calibration files. Enjoy a lot of room "
-"for a convenient price."
-msgstr ""
-
-#: templates/subscription/subscription_list.html:78
-msgid ""
-"Choose this plan if you have several years worth of data. You will probably "
-"have enough room for all your calibration files, and will enjoy the full "
-"potential of the platform."
-msgstr ""
-
-#: templates/subscription/subscription_list.html:86
-msgid ""
-"Choose this plan if you have a massive amount of raw data that you want to "
-"share and backup securely online."
-msgstr ""
-
-#: templates/subscription/subscription_list.html:97
-msgid ""
-"PS: are you interested in larger plans? <a href=\"/contact/\">Let us know!</"
-"a>"
-msgstr ""
-
 #: views/privatesharedfolders.py:118
 msgid "Your image has been added to the private shared folder."
 msgstr "您的图片已经被添加到私人共享目录"
@@ -1087,6 +882,22 @@ msgstr "您的私人共享文件夹已经被删除"
 #: views/publicdatapools.py:99
 msgid "Your image has been added to the pool."
 msgstr ""
+
+#~ msgid "You can cancel at any time."
+#~ msgstr "你能随时随地取消"
+
+#~ msgid "You are subscribed to this plan."
+#~ msgstr "您正在提交这个计划"
+
+#, fuzzy
+#~ msgid "Go to your Raw Data Library."
+#~ msgstr "您的原始数据库"
+
+#~ msgid "Thank you for supporting AstroBin!"
+#~ msgstr "感谢您支持AstroBIN!"
+
+#~ msgid "Subscription confirmed"
+#~ msgstr "确认订阅"
 
 #, fuzzy
 #~ msgid "AstroBin Raw Data Uploader"
