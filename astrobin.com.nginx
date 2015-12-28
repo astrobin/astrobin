@@ -45,8 +45,11 @@ server {
     access_log /var/log/nginx/astrobin.com-access.log;
     error_log /var/log/nginx/astrobin.com-error.log;
 
-    ssl_certificate      /etc/nginx/server.crt;
-    ssl_certificate_key  /etc/nginx/server.key;
+    #ssl_certificate      /etc/nginx/server.crt;
+    #ssl_certificate_key  /etc/nginx/server.key;
+    ssl_certificate      /etc/ssl/localcerts/astrobin.com-ssl-bundle.crt;
+    ssl_certificate_key  /etc/ssl/localcerts/www.astrobin.com.key;
+
 
     keepalive_timeout 5;
     proxy_read_timeout 1200;
