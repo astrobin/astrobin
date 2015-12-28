@@ -8,17 +8,17 @@ msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2015-12-10 19:26+0000\n"
-"PO-Revision-Date: 2015-11-22 15:43+0000\n"
-"Last-Translator: sypai <sypai@mail.ru>\n"
+"PO-Revision-Date: 2015-12-11 09:05+0000\n"
+"Last-Translator: csve <csve00@gmail.com>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
 "Language: ru\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"Plural-Forms: nplurals=3; plural=(n%10==1 && n%100!=11 ? 0 : n%10>=2 && n"
-"%10<=4 && (n%100<10 || n%100>=20) ? 1 : 2);\n"
+"Plural-Forms: nplurals=3; plural=(n%10==1 && n%100!=11 ? 0 : n%10>=2 && n%"
+"10<=4 && (n%100<10 || n%100>=20) ? 1 : 2);\n"
 "X-Generator: Pootle 2.5.0\n"
-"X-POOTLE-MTIME: 1448207037.943681\n"
+"X-POOTLE-MTIME: 1449824725.903148\n"
 
 #: fields.py:10
 msgid "United Kingdom"
@@ -4948,9 +4948,8 @@ msgid "Actions"
 msgstr "Действия"
 
 #: templates/image/detail/menu/actions.html:15
-#, fuzzy
 msgid "Edit watermark"
-msgstr "Править элемент оборудования"
+msgstr "Править \"водяной знак\""
 
 #: templates/image/detail/menu/actions.html:21
 msgid "Edit basic information"
@@ -5398,9 +5397,8 @@ msgstr ""
 "\"%(change_default_url)s\">здесь</a>."
 
 #: templates/image/edit/menu.html:6
-#, fuzzy
 msgid "Watermark"
-msgstr "Дания"
+msgstr "\"Водяной знак\""
 
 #: templates/image/edit/menu.html:7
 msgid "Basic Information"
@@ -5446,7 +5444,7 @@ msgstr "Следующий шаг: основная информация"
 
 #: templates/image/edit/watermark.html:43
 msgid "This operation might take several seconds."
-msgstr ""
+msgstr "Эта операция может занять несколько секунд."
 
 #: templates/inclusion_tags/list_gear.html:17
 #: templates/user/profile/commercial/products.html:85
