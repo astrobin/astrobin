@@ -50,19 +50,23 @@ def premium_get_inactive_usersubscription(user):
 def premium_used_percent(user):
     s = premium_get_active_usersubscription(user)
     counter = user.userprofile.premium_counter
+    percent = 100
 
     if s is None:
         # User is on Free, or their subscription is inactive, cancelled or
         # expired.
-        return counter / float(settings.PREMIUM_MAX_IMAGES_FREE) * 100
+        percent = counter / float(settings.PREMIUM_MAX_IMAGES_FREE) * 100
 
     elif s.subscription.name == "AstroBin Lite":
-        return counter / float(settings.PREMIUM_MAX_IMAGES_LITE) * 100
+        percent = counter / float(settings.PREMIUM_MAX_IMAGES_LITE) * 100
 
     elif s.subscription.name == "AstroBin Premium":
-        return -1
+        percent = -1
 
-    return 100 # Should not happen.
+    if percent > 100:
+        percent = 100
+
+    return percent
 
 
 def premium_progress_class(p):
