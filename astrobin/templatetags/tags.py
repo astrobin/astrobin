@@ -297,3 +297,106 @@ def gear_type(gear):
 
     return '-'
 
+
+@register.filter
+def show_ads(user):
+    from astrobin_apps_donations.templatetags.astrobin_apps_donations_tags import is_donor
+    from astrobin_apps_premium.templatetags.astrobin_apps_premium_tags import is_premium, is_lite
+
+    return (
+        (settings.ADS_ENABLED and not is_donor(user)) and
+        (settings.PREMIUM_ENABLED and not is_premium(user) and not is_lite(user))
+    )
+
+
+@register.filter
+def active_subscriptions(user):
+    from subscription.models import UserSubscription
+
+    if user.is_anonymous():
+        return []
+
+    us = UserSubscription.active_objects.filter(user = user, cancelled = False)
+    subs = [x.subscription for x in us if not x.expired()]
+    return subs
+
+
+@register.filter
+def has_active_subscription(user, subscription_pk):
+    from subscription.models import UserSubscription
+
+    if user.is_anonymous():
+        return False
+
+    us = UserSubscription.active_objects.filter(
+        user = user, subscription__pk = subscription_pk,
+        cancelled = False)
+
+    if us.count() == 0:
+        return False
+
+    us = us[0]
+    if us.expired():
+        return False
+
+    return True
+
+
+@register.filter
+def has_active_subscription_in_category(user, category):
+    from subscription.models import UserSubscription
+
+    if user.is_anonymous():
+        return False
+
+    us = UserSubscription.active_objects.filter(
+        user = user, subscription__category = category,
+        cancelled = False)
+
+    if us.count() == 0:
+        return False
+
+    us = us[0]
+    if us.expired():
+        return False
+
+    return True
+
+
+@register.filter
+def get_premium_subscription_expiration(user):
+    from subscription.models import UserSubscription
+
+    if user.is_anonymous():
+        return None
+
+    us = UserSubscription.active_objects.filter(
+        user = user, subscription__category = 'premium',
+        cancelled = False)
+
+    if us.count() == 0:
+        return None
+
+    return us[0].expires
+
+
+@register.filter
+def has_subscription_by_name(user, name):
+    from subscription.models import UserSubscription
+
+    if user.is_anonymous():
+        return False
+
+    return UserSubscription.objects.filter(
+        user = user, subscription__name = name).count() > 0
+
+
+@register.filter
+def get_subscription_by_name(user, name):
+    from subscription.models import UserSubscription
+
+    if user.is_anonymous():
+        return None
+
+    return UserSubscription.objects.get(
+        user = user, subscription__name = name)

@@ -2,7 +2,7 @@
 from rest_framework import permissions
 
 # This app
-from .utils import user_has_active_subscription
+from .utils import rawdata_user_has_active_subscription
 
 
 class IsOwnerOrReadOnly(permissions.BasePermission):
@@ -16,7 +16,7 @@ class IsOwnerOrReadOnly(permissions.BasePermission):
             return True
 
         # Read permissions are allowed to any request
-        if request.method in permissions.SAFE_METHODS:            
+        if request.method in permissions.SAFE_METHODS:
             return True
 
         # Write permissions are only allowed to the owner of the snippet
@@ -28,4 +28,4 @@ class IsSubscriber(permissions.BasePermission):
         if request.method in permissions.SAFE_METHODS:
             return True
 
-        return user_has_active_subscription(request.user)
+        return rawdata_user_has_active_subscription(request.user)

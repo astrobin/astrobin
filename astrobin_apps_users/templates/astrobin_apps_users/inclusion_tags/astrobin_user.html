@@ -1,4 +1,5 @@
 {% load astrobin_apps_donations_tags %}
+{% load astrobin_apps_premium_tags %}
 {% load avatar_tags %}
 {% load cache %}
 {% load i18n %}
@@ -33,7 +34,14 @@
             <div class="avatar" style="width: 194px; height: 194px; overflow: hidden;">
                 <a href="{% url user_page user %}">
                     {% avatar user 194 %}
-                    {% donor_badge user 'large' %}
+
+                    {% if DONATIONS_ENABLED %}
+                        {% donor_badge user 'large' %}
+                    {% endif %}
+
+                    {% if PREMIUM_ENABLED %}
+                        {% premium_badge user 'large' %}
+                    {% endif %}
                 </a>
 
                 {% if request.user != user %}
@@ -52,8 +60,8 @@
             {% endcache %}
         </div>
 
-        {% if request.user == user and user|is_donor %}
-            {% thank_you_for_your_support %}
+        {% if request.user == user and DONATIONS_ENABLED and user|is_donor %}
+            {% thank_you_for_your_donations %}
         {% endif %}
     {% endif %}
 
@@ -68,7 +76,14 @@
             <div class="avatar" style="width: 48px; height: 48px; overflow: hidden";>
                 <a href="{% url user_page user %}">
                     {% avatar user 48 %}
-                    {% donor_badge user 'small' %}
+
+                    {% if DONATIONS_ENABLED %}
+                        {% donor_badge user 'small' %}
+                    {% endif %}
+
+                    {% if PREMIUM_ENABLED %}
+                        {% premium_badge user 'small' %}
+                    {% endif %}
                 </a>
             </div>
 
@@ -95,7 +110,14 @@
             <div class="avatar" style="width: 48px; height: 48px; overflow: hidden";>
                 <a href="{% url user_page user %}">
                     {% avatar user 48 %}
-                    {% donor_badge user 'small' %}
+
+                    {% if DONATIONS_ENABLED %}
+                        {% donor_badge user 'small' %}
+                    {% endif %}
+
+                    {% if PREMIUM_ENABLED %}
+                        {% premium_badge user 'small' %}
+                    {% endif %}
                 </a>
             </div>
 

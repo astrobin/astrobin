@@ -1,0 +1,13 @@
+{% extends "base.html" %}
+
+{% load i18n %}
+
+
+{% block title %}
+{% trans "Success" %}
+{% endblock %}
+
+{% block content %}
+<h1>{% trans "Success" %}</h1>
+<p>{% trans "Your migration was successful." %} {% trans "Thanks for supporting AstroBin!" %}
+{% endblock %}

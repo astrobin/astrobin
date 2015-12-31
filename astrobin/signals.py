@@ -10,6 +10,7 @@ from django.db.models.signals import post_save
 from actstream import action as act
 from rest_framework.authtoken.models import Token
 from toggleproperties.models import ToggleProperty
+from subscription.signals import subscribed, paid
 
 # Other AstroBin apps
 from nested_comments.models import NestedComment
@@ -30,20 +31,24 @@ from .gear import get_correct_gear
 
 
 def image_post_save(sender, instance, created, **kwargs):
-    if created and not instance.is_wip:
-        followers = [x.user for x in ToggleProperty.objects.filter(
-            property_type = "follow",
-            content_type = ContentType.objects.get_for_model(User),
-            object_id = instance.user.pk)]
+    if created:
+        instance.user.userprofile.premium_counter += 1
+        instance.user.userprofile.save()
 
-        push_notification(followers, 'new_image',
-            {
-                'object_url': settings.ASTROBIN_BASE_URL + instance.get_absolute_url(),
-                'originator': instance.user.userprofile,
-            })
+        if not instance.is_wip:
+            followers = [x.user for x in ToggleProperty.objects.filter(
+                property_type = "follow",
+                content_type = ContentType.objects.get_for_model(User),
+                object_id = instance.user.pk)]
 
-        verb = "uploaded a new image"
-        act.send(instance.user, verb = verb, action_object = instance)
+            push_notification(followers, 'new_image',
+                {
+                    'object_url': settings.ASTROBIN_BASE_URL + instance.get_absolute_url(),
+                    'originator': instance.user.userprofile,
+                })
+
+            verb = "uploaded a new image"
+            act.send(instance.user, verb = verb, action_object = instance)
 
 
 def imagerevision_post_save(sender, instance, created, **kwargs):
@@ -291,6 +296,16 @@ def solution_post_save(sender, instance, created, **kwargs):
         {'object_url': settings.ASTROBIN_BASE_URL + target.get_absolute_url()})
 
 
+def subscription_subscribed(sender, **kwargs):
+    subscription = kwargs.get("subscription")
+
+    if subscription.name == 'AstroBin Lite':
+        user = kwargs.get("user")
+        profile = user.userprofile
+        profile.premium_counter = 0
+        profile.save()
+
+
 post_save.connect(image_post_save, sender = Image)
 post_save.connect(imagerevision_post_save, sender = ImageRevision)
 post_save.connect(nested_comment_post_save, sender = NestedComment)
@@ -305,4 +320,5 @@ m2m_changed.connect(rawdata_privatesharedfolder_data_added, sender = PrivateShar
 m2m_changed.connect(rawdata_privatesharedfolder_image_added, sender = PrivateSharedFolder.processed_images.through)
 m2m_changed.connect(rawdata_privatesharedfolder_user_added, sender = PrivateSharedFolder.users.through)
 
-
+subscribed.connect(subscription_subscribed)
+paid.connect(subscription_subscribed)

@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2015-12-10 19:28+0000\n"
+"POT-Creation-Date: 2015-12-28 19:23+0000\n"
 "PO-Revision-Date: 2014-01-23 17:31+0000\n"
 "Last-Translator: kookoo_gr <kookoo_gr@yahoo.com>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -70,11 +70,11 @@ msgstr "Θέμα"
 msgid "Temperature"
 msgstr "Θερμοκρασία"
 
-#: forms.py:86
+#: forms.py:85
 msgid "Users"
 msgstr "Χρήστες"
 
-#: forms.py:87
+#: forms.py:86
 msgid "A list of users you want to invite. Use a comma to separate them."
 msgstr ""
 "Μια λίστα από χρήστες που θέλετε να καλέσετε. Χρησιμοποιήστε κόμμα (,) για "
@@ -216,16 +216,6 @@ msgstr "Περιήγηση στιγμιότυπων"
 #: templates/rawdata/help_03.html:31 templates/rawdata/plans.html:4
 #: templates/rawdata/plans.html.py:8 templates/rawdata/restricted.html:4
 #: templates/rawdata/restricted.html:8
-#: templates/subscription/subscription_cancel.html:4
-#: templates/subscription/subscription_cancel.html:8
-#: templates/subscription/subscription_change_done.html:4
-#: templates/subscription/subscription_change_done.html:8
-#: templates/subscription/subscription_detail.html:6
-#: templates/subscription/subscription_detail.html:10
-#: templates/subscription/subscription_done.html:4
-#: templates/subscription/subscription_done.html:8
-#: templates/subscription/subscription_list.html:4
-#: templates/subscription/subscription_list.html:8
 msgid "AstroBin Raw Data"
 msgstr "Ανεπεξέργαστα Δεδομένα του AstroBin"
 
@@ -487,7 +477,6 @@ msgid "There doesn't seem to be anything here."
 msgstr "Δεν φαίνεται να υπάρχει κάτι εδώ."
 
 #: templates/rawdata/library.html:141
-#: templates/subscription/subscription_done.html:17
 #, python-format
 msgid ""
 "Head over to the <a href=\"%(upload_url)s\">upload page</a> to get started. "
@@ -1024,232 +1013,6 @@ msgstr "Το αρχείο για κατέβασμα δεν είναι έτοιμ
 msgid "Please refresh this page in a few seconds."
 msgstr "Παρακαλώ ανανεώστε την σελίδα σε μερικά δευτερόλεπτα."
 
-#: templates/subscription/_plan.html:11
-msgid "FREE!"
-msgstr ""
-
-#: templates/subscription/_plan.html:12
-msgid "That's right, this plan is free."
-msgstr ""
-
-#: templates/subscription/_plan.html:17
-msgid "month"
-msgstr "μήνας"
-
-#: templates/subscription/_plan.html:19
-#, python-format
-msgid "That's only $ %(daily_price)s USD per day!"
-msgstr "Αυτό είναι μόνο $ %(daily_price)s USD ανά ημέρα!"
-
-#: templates/subscription/_plan.html:25
-#, python-format
-msgid "Free for %(free_days)s days."
-msgstr "Δωρεάν για %(free_days)s ημέρες."
-
-#: templates/subscription/_plan.html:29
-msgid "You can cancel at any time."
-msgstr "Μπορείτε να ακυρώσετε οποιαδήποτε στιγμή."
-
-#: templates/subscription/subscription_cancel.html:8
-msgid "Subscription process cancelled"
-msgstr "Η διαδικασία συνδρομής ακυρώθηκε"
-
-#: templates/subscription/subscription_cancel.html:12
-msgid ""
-"Your transaction with PayPal has been cancelled, so no change in your "
-"subscription has occurred."
-msgstr ""
-"Η συναλλαγή σας με το PayPal ακυρώθηκε, έτσι καμία αλλαγή στην συνδρομή σας "
-"δεν έλαβε χώρα."
-
-#: templates/subscription/subscription_cancel.html:16
-#: templates/subscription/subscription_change_done.html:16
-#: templates/subscription/subscription_detail.html:116
-#, python-format
-msgid "Return to the <a href=\"%(plans_url)s\">plans page</a>."
-msgstr "Επιστρέψτε στην <a href=\"%(plans_url)s\">σελίδα πλάνων</a>."
-
-#: templates/subscription/subscription_change_done.html:8
-msgid "Subscription change"
-msgstr "Αλλαγή συνδρομής"
-
-#: templates/subscription/subscription_change_done.html:12
-msgid ""
-"Your request for a change in your subscription has been processed "
-"successfully."
-msgstr "Η αίτηση σας για αλλαγή στην συνδρομή σας επεξεργάστηκε με επιτυχία."
-
-#: templates/subscription/subscription_detail.html:6
-#: templates/subscription/subscription_detail.html:10
-msgid "Subscription plan"
-msgstr "Πλάνο συνδρομής"
-
-#: templates/subscription/subscription_detail.html:24
-msgid "Your subscription to this plan is cancelled."
-msgstr "Η συνδρομή σας για αυτό το πλάνο ακυρώθηκε."
-
-#: templates/subscription/subscription_detail.html:30
-msgid "You are subscribed to this plan."
-msgstr "Είστε συνδρομητής σε αυτό το πλάνο."
-
-#: templates/subscription/subscription_detail.html:37
-msgid "Here you can deactivate your free Raw Data Atom subscription."
-msgstr ""
-
-#: templates/subscription/subscription_detail.html:41
-msgid "Deactivate"
-msgstr ""
-
-#: templates/subscription/subscription_detail.html:46
-#, fuzzy
-msgid "Go to your Raw Data Library."
-msgstr "Η βιβλιοθήκη των ανεπεξέργαστων δεδομένων σας"
-
-#: templates/subscription/subscription_detail.html:50
-#, python-format
-msgid "You may <a href=\"%(cancel_url)s\">cancel via PayPal</a> if you wish."
-msgstr ""
-"Μπορείτε να <a href=\"%(cancel_url)s\">ακυρώσετε μέσω PayPal</a> αν το "
-"επιθυμείτε."
-
-#: templates/subscription/subscription_detail.html:56
-#: templates/subscription/subscription_detail.html:98
-msgid "Here you can activate your free Raw Data Atom subscription."
-msgstr ""
-
-#: templates/subscription/subscription_detail.html:60
-#: templates/subscription/subscription_detail.html:106
-msgid "Activate"
-msgstr ""
-
-#: templates/subscription/subscription_detail.html:64
-#: templates/subscription/subscription_detail.html:88
-msgid "Subscribe with a secure payment provided by PayPal:"
-msgstr "Γίνετε συνδρομητής με ασφαλή πληρωμή που παρέχεται από το PayPal:"
-
-#: templates/subscription/subscription_detail.html:77
-msgid "You cannot switch to this plan."
-msgstr "Δεν μπορείτε να μεταβείτε σε αυτό το πλάνο."
-
-#: templates/subscription/subscription_detail.html:101
-msgid ""
-"Careful! If you have already a paid Raw Data subscription, your available "
-"space will be reduced!"
-msgstr ""
-
-#: templates/subscription/subscription_detail.html:114
-#: templates/subscription/subscription_done.html:21
-#: templates/subscription/subscription_list.html:94
-msgid "Thank you for supporting AstroBin!"
-msgstr "Σας ευχαριστούμε που στηρίζετε το AstroBin!"
-
-#: templates/subscription/subscription_done.html:8
-msgid "Subscription confirmed"
-msgstr "Η συνδρομή σας επικυρώθηκε"
-
-#: templates/subscription/subscription_done.html:12
-msgid ""
-"Your subscription request to AstroBin Raw Data has been received, and we are "
-"awaiting the final confirmation from PayPal. Your subscription should be "
-"active within a few minutes!"
-msgstr ""
-"Η αίτηση συνδρομή σας στα Ανεπεξέργαστα Δεδομένα του AstroBin λήφθηκε, και "
-"περιμένουμε την τελική επιβεβαίωση από το PayPal. Η συνδρομή σας θα πρέπει "
-"να είναι ενεργή σε μερικά λεπτά!"
-
-#: templates/subscription/subscription_list.html:4
-#: templates/subscription/subscription_list.html:8
-msgid "Subscription plans"
-msgstr "Πλάνα συνδρομής"
-
-#: templates/subscription/subscription_list.html:14
-msgid ""
-"<strong>AstroBin Raw Data</strong> allows you to store your raw files "
-"(<strong>FIT</strong> and <strong>digital camera raw</strong>) on AstroBin. "
-"We will keep them neatly organized, and you will have a safe backup of all "
-"your work, including calibration files."
-msgstr ""
-"Τα <strong>Ανεπεξέργαστα Δεδομένα του AstroBin</strong> σας επιτρέπουν να "
-"αποθηκεύσετε τα ανεπεξέργαστα αρχεία σας (<strong>FIT</strong> και "
-"<strong>raw αρχεία ψηφιακών καμερών</strong>) στο AstroBin. Θα τα κρατήσουμε "
-"οργανωμένα, και θα έχετε ένα ασφαλές αντίγραφο όλης της δουλειάς σας, "
-"συμπεριλαμβανομένου των αρχείων βαθμονόμησης."
-
-#: templates/subscription/subscription_list.html:17
-#, python-format
-msgid ""
-"Learn more by reading <a href=\"%(rawdata_url)s\">a short introduction.</a>"
-msgstr ""
-"Μάθετε περισσότερα διαβάζοντας <a href=\"%(rawdata_url)s\">μια σύντομη "
-"εισαγωγή.</a>"
-
-#: templates/subscription/subscription_list.html:23
-msgid "Here are the available plans. Choose the one that suits you best!"
-msgstr ""
-"Αυτά είναι τα διαθέσιμα πλάνα. Επιλέξτε αυτό που σας ταιριάζει καλύτερα!"
-
-#: templates/subscription/subscription_list.html:39
-msgid "Manage"
-msgstr "Διαχείριση"
-
-#: templates/subscription/subscription_list.html:54
-msgid ""
-"This plan is free! Choose it to share a small amount of data with other "
-"users."
-msgstr ""
-
-#: templates/subscription/subscription_list.html:62
-msgid ""
-" Choose this plan if you want to keep your expenses to a minimum, but still "
-"want the possibity to share your FIT and digital camera raw files with your "
-"friends. You can also participate to public data pools and contribute to the "
-"deepest deep sky images ever created, and you will always know that you "
-"support AstroBin."
-msgstr ""
-"Επιλέξτε αυτό το πλάνο αν θέλετε να κρατήσετε τα έξοδα σας στο ελάχιστο, "
-"αλλά θέλετε να έχετε την δυνατότητα να μοιραστείτε τα FIT αρχεία σας καθώς "
-"και τα raw αρχεία των ψηφιακών καμερών σας με τους φίλους σας. Επίσης "
-"μπορείτε να λάβετε μέρος σε δημόσιες περιοχές δεδομένων και να συνεισφέρετε "
-"στις πιο βαθιές εικόνες βαθύ ουρανού που δημιουργήθηκαν ποτέ, και θα ξέρετε "
-"ότι πάντα θα υποστηρίζετε το AstroBin."
-
-#: templates/subscription/subscription_list.html:70
-msgid ""
-"Choose this plan if you have started out in the recent year or two, or you "
-"don't want to share and backup your calibration files. Enjoy a lot of room "
-"for a convenient price."
-msgstr ""
-"Επιλέξτε αυτό το πλάνο αν έχετε αρχίσει τον τελευταίο χρόνο ή δύο χρόνια, ή "
-"δεν θέλετε να μοιραστείτε και να έχετε αντίγραφο ασφαλείας των αρχείων "
-"βαθμονόμησης. Μπορείτε να ευχαριστηθείτε πολύ χώρο σε μια καλή τιμή."
-
-#: templates/subscription/subscription_list.html:78
-msgid ""
-"Choose this plan if you have several years worth of data. You will probably "
-"have enough room for all your calibration files, and will enjoy the full "
-"potential of the platform."
-msgstr ""
-"Επιλέξτε αυτό το πλάνο αν έχετε δεδομένα αρκετών χρόνων. Πιθανών θα έχετε "
-"αρκετό χώρο για όλα τα αρχεία βαθμονόμησης, και θα ευχαριστηθείτε την πλήρη "
-"δυνατότητα της πλατφόρμας. "
-
-#: templates/subscription/subscription_list.html:86
-msgid ""
-"Choose this plan if you have a massive amount of raw data that you want to "
-"share and backup securely online."
-msgstr ""
-"Επιλέξτε αυτό το πλάνο αν έχετε μαζική ποσότητα ανεπεξέργαστων δεδομένων τα "
-"οποία θέλετε να μοιραστείτε και να δημιουργήσετε αντίγραφο ασφαλείας με "
-"ασφάλεια online."
-
-#: templates/subscription/subscription_list.html:97
-msgid ""
-"PS: are you interested in larger plans? <a href=\"/contact/\">Let us know!</"
-"a>"
-msgstr ""
-"Υ.Γ.: ενδιαφέρεστε για μεγαλύτερα πλάνα; <a href=\"/contact/\">Ενημερώστε "
-"μας!</a>"
-
 #: views/privatesharedfolders.py:118
 msgid "Your image has been added to the private shared folder."
 msgstr "Η εικόνα σας προστέθηκε στον ιδιωτικό κοινόχρηστο φάκελο."
@@ -1261,6 +1024,156 @@ msgstr "Ο ιδιωτικός κοινόχρηστος φάκελος σας δ�
 #: views/publicdatapools.py:99
 msgid "Your image has been added to the pool."
 msgstr "Η εικόνα σας έχει προστεθεί στην περιοχή"
+
+#~ msgid "month"
+#~ msgstr "μήνας"
+
+#~ msgid "That's only $ %(daily_price)s USD per day!"
+#~ msgstr "Αυτό είναι μόνο $ %(daily_price)s USD ανά ημέρα!"
+
+#~ msgid "Free for %(free_days)s days."
+#~ msgstr "Δωρεάν για %(free_days)s ημέρες."
+
+#~ msgid "You can cancel at any time."
+#~ msgstr "Μπορείτε να ακυρώσετε οποιαδήποτε στιγμή."
+
+#~ msgid "Subscription process cancelled"
+#~ msgstr "Η διαδικασία συνδρομής ακυρώθηκε"
+
+#~ msgid ""
+#~ "Your transaction with PayPal has been cancelled, so no change in your "
+#~ "subscription has occurred."
+#~ msgstr ""
+#~ "Η συναλλαγή σας με το PayPal ακυρώθηκε, έτσι καμία αλλαγή στην συνδρομή "
+#~ "σας δεν έλαβε χώρα."
+
+#~ msgid "Return to the <a href=\"%(plans_url)s\">plans page</a>."
+#~ msgstr "Επιστρέψτε στην <a href=\"%(plans_url)s\">σελίδα πλάνων</a>."
+
+#~ msgid "Subscription change"
+#~ msgstr "Αλλαγή συνδρομής"
+
+#~ msgid ""
+#~ "Your request for a change in your subscription has been processed "
+#~ "successfully."
+#~ msgstr ""
+#~ "Η αίτηση σας για αλλαγή στην συνδρομή σας επεξεργάστηκε με επιτυχία."
+
+#~ msgid "Subscription plan"
+#~ msgstr "Πλάνο συνδρομής"
+
+#~ msgid "Your subscription to this plan is cancelled."
+#~ msgstr "Η συνδρομή σας για αυτό το πλάνο ακυρώθηκε."
+
+#~ msgid "You are subscribed to this plan."
+#~ msgstr "Είστε συνδρομητής σε αυτό το πλάνο."
+
+#, fuzzy
+#~ msgid "Go to your Raw Data Library."
+#~ msgstr "Η βιβλιοθήκη των ανεπεξέργαστων δεδομένων σας"
+
+#~ msgid ""
+#~ "You may <a href=\"%(cancel_url)s\">cancel via PayPal</a> if you wish."
+#~ msgstr ""
+#~ "Μπορείτε να <a href=\"%(cancel_url)s\">ακυρώσετε μέσω PayPal</a> αν το "
+#~ "επιθυμείτε."
+
+#~ msgid "Subscribe with a secure payment provided by PayPal:"
+#~ msgstr "Γίνετε συνδρομητής με ασφαλή πληρωμή που παρέχεται από το PayPal:"
+
+#~ msgid "You cannot switch to this plan."
+#~ msgstr "Δεν μπορείτε να μεταβείτε σε αυτό το πλάνο."
+
+#~ msgid "Thank you for supporting AstroBin!"
+#~ msgstr "Σας ευχαριστούμε που στηρίζετε το AstroBin!"
+
+#~ msgid "Subscription confirmed"
+#~ msgstr "Η συνδρομή σας επικυρώθηκε"
+
+#~ msgid ""
+#~ "Your subscription request to AstroBin Raw Data has been received, and we "
+#~ "are awaiting the final confirmation from PayPal. Your subscription should "
+#~ "be active within a few minutes!"
+#~ msgstr ""
+#~ "Η αίτηση συνδρομή σας στα Ανεπεξέργαστα Δεδομένα του AstroBin λήφθηκε, "
+#~ "και περιμένουμε την τελική επιβεβαίωση από το PayPal. Η συνδρομή σας θα "
+#~ "πρέπει να είναι ενεργή σε μερικά λεπτά!"
+
+#~ msgid "Subscription plans"
+#~ msgstr "Πλάνα συνδρομής"
+
+#~ msgid ""
+#~ "<strong>AstroBin Raw Data</strong> allows you to store your raw files "
+#~ "(<strong>FIT</strong> and <strong>digital camera raw</strong>) on "
+#~ "AstroBin. We will keep them neatly organized, and you will have a safe "
+#~ "backup of all your work, including calibration files."
+#~ msgstr ""
+#~ "Τα <strong>Ανεπεξέργαστα Δεδομένα του AstroBin</strong> σας επιτρέπουν να "
+#~ "αποθηκεύσετε τα ανεπεξέργαστα αρχεία σας (<strong>FIT</strong> και "
+#~ "<strong>raw αρχεία ψηφιακών καμερών</strong>) στο AstroBin. Θα τα "
+#~ "κρατήσουμε οργανωμένα, και θα έχετε ένα ασφαλές αντίγραφο όλης της "
+#~ "δουλειάς σας, συμπεριλαμβανομένου των αρχείων βαθμονόμησης."
+
+#~ msgid ""
+#~ "Learn more by reading <a href=\"%(rawdata_url)s\">a short introduction.</"
+#~ "a>"
+#~ msgstr ""
+#~ "Μάθετε περισσότερα διαβάζοντας <a href=\"%(rawdata_url)s\">μια σύντομη "
+#~ "εισαγωγή.</a>"
+
+#~ msgid "Here are the available plans. Choose the one that suits you best!"
+#~ msgstr ""
+#~ "Αυτά είναι τα διαθέσιμα πλάνα. Επιλέξτε αυτό που σας ταιριάζει καλύτερα!"
+
+#~ msgid "Manage"
+#~ msgstr "Διαχείριση"
+
+#~ msgid ""
+#~ " Choose this plan if you want to keep your expenses to a minimum, but "
+#~ "still want the possibity to share your FIT and digital camera raw files "
+#~ "with your friends. You can also participate to public data pools and "
+#~ "contribute to the deepest deep sky images ever created, and you will "
+#~ "always know that you support AstroBin."
+#~ msgstr ""
+#~ "Επιλέξτε αυτό το πλάνο αν θέλετε να κρατήσετε τα έξοδα σας στο ελάχιστο, "
+#~ "αλλά θέλετε να έχετε την δυνατότητα να μοιραστείτε τα FIT αρχεία σας "
+#~ "καθώς και τα raw αρχεία των ψηφιακών καμερών σας με τους φίλους σας. "
+#~ "Επίσης μπορείτε να λάβετε μέρος σε δημόσιες περιοχές δεδομένων και να "
+#~ "συνεισφέρετε στις πιο βαθιές εικόνες βαθύ ουρανού που δημιουργήθηκαν "
+#~ "ποτέ, και θα ξέρετε ότι πάντα θα υποστηρίζετε το AstroBin."
+
+#~ msgid ""
+#~ "Choose this plan if you have started out in the recent year or two, or "
+#~ "you don't want to share and backup your calibration files. Enjoy a lot of "
+#~ "room for a convenient price."
+#~ msgstr ""
+#~ "Επιλέξτε αυτό το πλάνο αν έχετε αρχίσει τον τελευταίο χρόνο ή δύο χρόνια, "
+#~ "ή δεν θέλετε να μοιραστείτε και να έχετε αντίγραφο ασφαλείας των αρχείων "
+#~ "βαθμονόμησης. Μπορείτε να ευχαριστηθείτε πολύ χώρο σε μια καλή τιμή."
+
+#~ msgid ""
+#~ "Choose this plan if you have several years worth of data. You will "
+#~ "probably have enough room for all your calibration files, and will enjoy "
+#~ "the full potential of the platform."
+#~ msgstr ""
+#~ "Επιλέξτε αυτό το πλάνο αν έχετε δεδομένα αρκετών χρόνων. Πιθανών θα έχετε "
+#~ "αρκετό χώρο για όλα τα αρχεία βαθμονόμησης, και θα ευχαριστηθείτε την "
+#~ "πλήρη δυνατότητα της πλατφόρμας. "
+
+#~ msgid ""
+#~ "Choose this plan if you have a massive amount of raw data that you want "
+#~ "to share and backup securely online."
+#~ msgstr ""
+#~ "Επιλέξτε αυτό το πλάνο αν έχετε μαζική ποσότητα ανεπεξέργαστων δεδομένων "
+#~ "τα οποία θέλετε να μοιραστείτε και να δημιουργήσετε αντίγραφο ασφαλείας "
+#~ "με ασφάλεια online."
+
+#~ msgid ""
+#~ "PS: are you interested in larger plans? <a href=\"/contact/\">Let us know!"
+#~ "</a>"
+#~ msgstr ""
+#~ "Υ.Γ.: ενδιαφέρεστε για μεγαλύτερα πλάνα; <a href=\"/contact/\">Ενημερώστε "
+#~ "μας!</a>"
 
 #~ msgid ""
 #~ "Probably, you are here because you weve invited to contribute to a "

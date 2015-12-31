@@ -5,15 +5,16 @@ from django.utils.translation import ugettext_lazy as _
 
 local_path = lambda path: os.path.join(os.path.dirname(__file__), path)
 
-DEBUG = False
+DEBUG = os.environ['ASTROBIN_DEBUG'] == "true"
 CACHE = not DEBUG
 TEMPLATE_DEBUG = DEBUG
 MAINTENANCE_MODE = False
 READONLY_MODE = False
-MEDIA_VERSION = '104'
+MEDIA_VERSION = '105'
 LONGPOLL_ENABLED = False
 ADS_ENABLED = True
-DONATIONS_ENABLED = True
+DONATIONS_ENABLED = False
+PREMIUM_ENABLED = True
 
 AWS_S3_ENABLED = os.environ['ASTROBIN_AWS_S3_ENABLED'] == "true"
 LOCAL_STATIC_STORAGE = os.environ['ASTROBIN_LOCAL_STATIC_STORAGE'] == "true"
@@ -260,6 +261,7 @@ INSTALLED_APPS = (
     'astrobin_apps_platesolving',
     'astrobin_apps_users',
     'astrobin_apps_donations',
+    'astrobin_apps_premium',
     'toggleproperties',
 )
 
@@ -381,6 +383,7 @@ PIPELINE_CSS = {
 
             'astrobin_apps_images/css/jquery.capty.css',
             'astrobin_apps_donations/css/astrobin_apps_donations.css',
+            'astrobin_apps_premium/css/astrobin_apps_premium.css',
 
             'css/reset.css',
             'css/bootstrap.css',
@@ -457,7 +460,8 @@ ACTSTREAM_SETTINGS = {
 
 }
 
-PAYPAL_TEST = False
+PAYPAL_TEST = DEBUG
+PAYPAL_DEBUG = PAYPAL_TEST
 
 if PAYPAL_TEST:
     PAYPAL_RECEIVER_EMAIL = 'salvatore.iovene+paypal+sandbox+business@gmail.com'
@@ -647,3 +651,6 @@ PYBB_SMILES = {
 }
 PYBB_TOPIC_PAGE_SIZE = 25
 PYBB_FORUM_PAGE_SIZE = 50
+
+PREMIUM_MAX_IMAGES_FREE = 10
+PREMIUM_MAX_IMAGES_LITE = 12

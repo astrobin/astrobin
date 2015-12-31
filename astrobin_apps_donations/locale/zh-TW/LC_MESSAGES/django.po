@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2015-12-10 19:32+0000\n"
+"POT-Creation-Date: 2015-12-28 19:27+0000\n"
 "PO-Revision-Date: 2014-02-20 10:01+0000\n"
 "Last-Translator: mychat_aa <mychat.aa@gmail.com>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -248,10 +248,14 @@ msgstr ""
 msgid "If you donate, you will not be shown ads anymore."
 msgstr "一旦做了捐助, 您將不會再看到任何商業廣告."
 
-#: templates/astrobin_apps_donations/inclusion_tags/thank_you_for_your_support.html:4
-msgid "Thank you for your support!"
-msgstr "謝謝您的幫助!"
+#: templates/astrobin_apps_donations/inclusion_tags/thank_you_for_your_donations.html:4
+#, fuzzy
+msgid "Thank you for your donations!"
+msgstr "謝謝您的捐獻"
 
-#: templates/astrobin_apps_donations/inclusion_tags/thank_you_for_your_support.html:7
+#: templates/astrobin_apps_donations/inclusion_tags/thank_you_for_your_donations.html:7
 msgid "Want to cancel?"
 msgstr "想取消嗎?"
+
+#~ msgid "Thank you for your support!"
+#~ msgstr "謝謝您的幫助!"

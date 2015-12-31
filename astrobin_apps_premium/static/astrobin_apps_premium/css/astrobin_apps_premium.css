@@ -1,0 +1,70 @@
+select[name="os0"] {
+    font-family: Consolas,'Lucida Console','DejaVu Sans Mono', monospace;
+    font-size: 11px;
+}
+
+#premium-header-button {
+    display: inline-block;
+    padding: 4px 8px;
+    font-size 16px;
+
+    background-color: hsl(46, 100%, 52%) !important;
+    background-repeat: repeat-x;
+    filter: progid:DXImageTransform.Microsoft.gradient(startColorstr="#ffe799", endColorstr="#ffc50a");
+    background-image: -khtml-gradient(linear, left top, left bottom, from(#ffe799), to(#ffc50a));
+    background-image: -moz-linear-gradient(top, #ffe799, #ffc50a);
+    background-image: -ms-linear-gradient(top, #ffe799, #ffc50a);
+    background-image: -webkit-gradient(linear, left top, left bottom, color-stop(0%, #ffe799), color-stop(100%, #ffc50a));
+    background-image: -webkit-linear-gradient(top, #ffe799, #ffc50a);
+    background-image: -o-linear-gradient(top, #ffe799, #ffc50a);
+    background-image: linear-gradient(#ffe799, #ffc50a);
+    border-color: #ffc50a #ffc50a hsl(46, 100%, 45%);
+    color: #6B012A !important;
+    text-shadow: 0 1px 1px rgba(255, 255, 255, 0.46);
+    -webkit-font-smoothing: antialiased;
+}
+
+.badge-premium {
+    position: absolute;
+    padding: 0 !important;
+}
+
+.badge-premium-large {
+    width: 32px;
+    height: 32px;
+    top: 8px;
+    left: 8px;
+}
+
+.badge-premium-large i {
+    font-size: 20px;
+    line-height: 32px;
+    padding: 8px;
+}
+
+.badge-premium-medium {
+    width: 24px;
+    height: 24px;
+    top: 4px;
+    left: 4px;
+}
+
+.badge-premium-medium i {
+    font-size: 16px;
+    line-height: 24px;
+    padding: 5px;
+}
+
+.badge-premium-small {
+    width: 16px;
+    height: 16px;
+    top: 2px;
+    left: 2px;
+}
+
+.badge-premium-small i {
+    font-size: 12px;
+    line-height: 16px;
+    padding: 3px;
+}
+

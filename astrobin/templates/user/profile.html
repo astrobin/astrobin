@@ -1,6 +1,7 @@
 {% extends 'base.html' %}
 
 {% load astrobin_apps_donations_tags %}
+{% load astrobin_apps_premium_tags %}
 {% load astrobin_apps_users_tags %}
 {% load avatar_tags %}
 {% load common_tags %}
@@ -25,6 +26,48 @@
     <div class="span3">
         {% astrobin_user user %}
 
+        {% if PREMIUM_ENABLED and user == request.user %}
+        <div class="subtle-container simple-continer">
+            <div class="header">
+                <h4>{% trans "Subscription" %}</h4>
+            </div>
+            <p>
+                {% trans "Type" %}<br/>
+                <strong>
+                    {% if user|is_free %}AstroBin Free{% endif %}
+                    {% if user|is_lite %}AstroBin Lite{% endif %}
+                    {% if user|is_premium %}AstroBin Premium{% endif %}
+                </strong>
+            </p>
+
+            {% if user|is_lite or user|is_premium %}
+            <p>
+                {% trans "Expiration date" %}<br/>
+                <strong>
+                    {% with expiration=user|get_premium_subscription_expiration %}
+                        {{expiration|date:"SHORT_DATE_FORMAT"}}
+                    {% endwith %}
+                </strong>
+            </p>
+            {% endif %}
+
+            {% if user|is_free or user|is_lite %}
+            <p>
+                {% trans "Uploads used" %}</br>
+                <strong>
+                    {{user.userprofile.premium_counter}} /
+                    {% if user|is_free %}{{PREMIUM_MAX_IMAGES_FREE}}{% endif %}
+                    {% if user|is_lite %}{{PREMIUM_MAX_IMAGES_LITE}}{% endif %}
+                </strong>
+            </p>
+            {% endif %}
+
+            {% if user|is_lite or user|is_premium %}
+            <p class="small"><em>{% trans "Thanks for your support!" %}</em></p>
+            {% endif %}
+        </div>
+        {% endif %}
+
         {% if menu %}
             <ul class="nav nav-tabs nav-stacked">
                 {% for item in menu %}
@@ -38,7 +81,7 @@
             </ul>
         {% endif %}
 
-        {% if ADS_ENABLED and not request.user|is_donor %}
+        {% if request.user|show_ads %}
             <div class="subtle-container simple-container advertisement visible-desktop">
                 <div class="header">
                     <h4><i class="icon-bullhorn"></i></h4>

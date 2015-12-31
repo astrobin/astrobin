@@ -134,6 +134,12 @@
         </a>
         <ul class="dropdown-menu">
             <li>
+                <a href="{% url subscription_list %}">
+                    <i class="icon-asterisk"></i>
+                    {% trans "Subscription plans" %}
+                </a>
+            </li>
+            <li>
                 <a href="{% url image_upload %}">
                     <i class="icon-upload-alt"></i>
                     {% trans "Upload" %}
@@ -172,7 +178,7 @@
 
             <li class="nav-header">{% trans "Raw data" %}</li>
 
-            {% if has_rawdata_subscription %}
+            {% if rawdata_has_subscription %}
             <li>
                 <a href="{% url rawdata.library %}">
                     <i class="icon-book"></i>
@@ -279,4 +285,3 @@
 </li>
 {% endif %}
 {% endif %} <!-- request.user.is_authenticated -->
-

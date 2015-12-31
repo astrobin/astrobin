@@ -39,6 +39,9 @@ def astrobin_user(context, user, layout="standard"):
         'images': images,
         'followers': followers,
         'following': following,
+
+        'DONATIONS_ENABLED': context['DONATIONS_ENABLED'],
+        'PREMIUM_ENABLED': context['PREMIUM_ENABLED'],
     }
 
 

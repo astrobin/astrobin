@@ -1,0 +1,220 @@
+{% extends 'base.html' %}
+
+{% load i18n %}
+{% load url from future %}
+
+{% block title %}{% trans "Subscription plan" %}: {{object.name}}{% endblock %}
+
+{% block content %}
+    <div class="page-header">
+        <h1>
+            {{object.name}}
+            <small>
+                {% if object.price > 0 %}
+                    $ {{object.price}} USD /
+
+                    {% if object.recurrence_unit == 'D' %}
+                        {% trans "day" %}
+                    {% endif %}
+
+                    {% if object.recurrence_unit == 'W' %}
+                        {% trans "week" %}
+                    {% endif %}
+
+                    {% if object.recurrence_unit == 'M' %}
+                        {% trans "month" %}
+                    {% endif %}
+
+                    {% if object.recurrence_unit == 'Y' %}
+                        {% trans "year" %}
+                    {% endif %}
+                {% else %}
+                    {% trans "Free" context "At no cost" %}
+                {% endif %}
+            </small>
+        </h1>
+        <p>
+            {% trans "Status" %}:
+
+            {% if usersubscription and usersubscription.active %}
+                <span class="label label-success">
+                    {% trans "Subscribed" %}
+                </span> /
+                {% trans "Expires" %}: {{usersubscription.expires|date:"SHORT_DATE_FORMAT"}}
+            {% endif %}
+
+            {% if usersubscription and usersubscription.canceled %}
+                <span class="label label-info">
+                    {% trans "Cancelled" %}
+                </span>
+            {% endif %}
+
+            {% if usersubscription and not usersubscription.active %}
+                <span class="label label-warning">
+                    {% trans "Inactive" %}
+                </span>
+            {% endif %}
+
+            {% if not usersubscription and not change_denied_reasons %}
+                <span class="label label-warning">
+                    {% trans "Unsubscribed" %}
+                </span>
+            {% endif %}
+
+            {% if not usersubscription and change_denied_reasons %}
+                <span class="label label-warning">
+                    {% trans "Unavailable" %}
+                </span>
+            {% endif %}
+        </p>
+    </div>
+
+    <p>
+        {% if object.category == 'premium' %}
+            {% blocktrans with max_allowed=PREMIUM_MAX_IMAGES_FREE%}
+            You can use AstroBin for free up to {{max_allowed}} images. After
+            that you can upgrade to <strong>Lite</strong> if you have a limited
+            yearly output, or <strong>Premium</strong> for a limitless
+            experience.  Paying members will not see ads, and everybody,
+            including non-paying members, have access to all social features of
+            AstroBin.
+            {% endblocktrans %}
+        {% endif %}
+
+        {% if object.category == 'rawdata' %}
+            {% blocktrans %}<strong>AstroBin Raw Data</strong> allows you to store your raw files (<strong>FIT</strong> and <strong>digital camera raw</strong>) on AstroBin. We will keep them neatly organized, and you will have a safe backup of all your work, including calibration files.{% endblocktrans %}
+
+            {% url rawdata.help1 as rawdata_url %}
+            {% blocktrans %}Learn more by reading <a href="{{rawdata_url}}">a short introduction.</a>{% endblocktrans %}
+        {% endif %}
+    </p>
+
+    {% if usersubscription %}
+        {% if usersubscription.active %}
+            {% if usersubscription.subscription.name == "Atom" %}
+                {% comment %} Free subscription {% endcomment %}
+                <div class="well text-center">
+                    <p>
+                        {% blocktrans %}Here you can deactivate your free Raw Data Atom subscription.{% endblocktrans %}
+                    </p>
+
+                    <form action="{% url 'rawdata.atom_deactivate' %}" method="post">
+                        {% csrf_token %}
+                        <input type="submit" class="btn btn-primary btn-large" value="{% trans "Deactivate" %}"/>
+                    </form>
+                </div>
+
+            {% else %} <!-- not atom -->
+
+                {% if object.category == 'premium' %}
+                <div class="alert alert-warning">
+                    <h4>
+                        <i class="icon icon-warning-sign"></i>
+                        {% trans "Warning!" %}
+                    </h4>
+
+                    <p>
+                        {% trans "By cancelling, you will revert to a free plan." %}
+                        {% blocktrans with max_allowed=PREMIUM_MAX_IMAGES_FREE %}Free plans are limited to <strong>{{max_allowed}}</strong> images.{% endblocktrans %}
+                        {% blocktrans %}However, your existing images will not be deleted or deactivated in any way! Simply, you will not be able to upload any more images unless you switch to a paid plan.{% endblocktrans %}
+                    </p>
+                </div>
+                {% endif %} <!-- if premium -->
+
+                <div class="well text-center">
+                    <a class="btn btn-danger btn-large" href="{{cancel_url}}">
+                        {% trans "Cancel via PayPal" %}
+                    </a>
+                </div>
+            {% endif %} <!-- if atom -->
+
+        {% else %} <!-- not active -->
+
+            {% if usersubscription.subscription.name == "Atom" %}
+                <div class="well text-center">
+                    <p>
+                        {% blocktrans %}Here you can activate your free Raw Data Atom subscription.{% endblocktrans %}
+                    </p>
+
+                    <form action="{% url 'rawdata.atom_activate' %}" method="post">
+                        {% csrf_token %}
+                        <input type="submit" class="btn btn-primary btn-large" value="{% trans "Activate" %}"/>
+                    </form>
+                </div>
+            {% else %} <!-- not atom -->
+                <div class="well text-center">
+                    <h3>
+                        {% blocktrans %}Subscribe with a secure payment provided by PayPal:{% endblocktrans %}
+                    </h3>
+
+                    {% if PAYPAL_TEST %}
+                        {{form.sandbox}}
+                    {% else %}
+                        {{form.render}}
+                    {% endif %}
+            {% endif %} <!-- if atom -->
+        {% endif %} <!-- if active -->
+
+    {% else %} <!-- user subscription unavailable -->
+
+        {% if change_denied_reasons %}
+            <div class="alert alert-error">
+                <h4 class="alert-heading">
+                    <i class="icon-fire"></i>
+                    {% trans "You cannot switch to this plan." %}
+                </h4>
+                <ul class="unstyled">
+                    {% for reason in change_denied_reasons %}
+                        <li>{{reason}}</li>
+                    {% endfor %}
+                </ul>
+            </div>
+
+        {% else %} <!-- user usbscription unavailable and no known reason -->
+
+            {% if form %}
+                <div class="well text-center">
+                    <h3>
+                        {% blocktrans %}Subscribe with a secure payment provided by PayPal:{% endblocktrans %}
+                    </h3>
+
+                    {% if PAYPAL_TEST %}
+                        {{form.sandbox}}
+                    {% else %}
+                        {{form.render}}
+                    {% endif %}
+                </div>
+            {% else %} <!-- no form, must be atom -->
+
+                {% comment %} Free subscription {% endcomment %}
+                <div class="well text-center">
+                    <p>
+                        {% blocktrans %}Here you can activate your free Raw Data Atom subscription.{% endblocktrans %}
+                    </p>
+
+                    <p class="alert alert-alert">
+                        {% trans "Careful! If you have already a paid Raw Data subscription, your available space will be reduced!" %}
+                    </p>
+
+                    <form action="{% url 'rawdata.atom_activate' %}" method="post">
+                        {% csrf_token %}
+                        <input type="submit" class="btn btn-primary btn-large" value="{% trans "Activate" %}"/>
+                    </form>
+                </div>
+            {% endif %} <!-- if form -->
+        {% endif %} <!-- if change_denied_reasons -->
+    {% endif %}
+
+    {% if form %}
+    <div class="thankyou">
+        {% blocktrans %}Thank you for supporting AstroBin!{% endblocktrans %}
+    </div>
+    {% endif %}
+
+    <div class="text-center">
+        <a class="btn btn-mini" href="{% url 'subscription_list' %}">
+            {% trans "Back to the plans" %}
+        </a>
+    </div>
+
+{% endblock %}

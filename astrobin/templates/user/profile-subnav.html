@@ -28,7 +28,7 @@
                         {% trans "Gallery" %}
                     </a>
                 </li>
-                {% if has_rawdata_subscription %}
+                {% if rawdata_has_subscription %}
                 <li>
                     <a href="{% url 'rawdata.library' %}">
                         <i class="icon-book"></i>
@@ -148,5 +148,3 @@
         </li>
     </ul>
 </div>
-
-

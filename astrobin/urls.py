@@ -54,6 +54,7 @@ urlpatterns = patterns('',
     url(r'^rawdata/', include('rawdata.urls')),
     url(r'^platesolving/', include('astrobin_apps_platesolving.urls')),
     url(r'^donations/', include('astrobin_apps_donations.urls')),
+    url(r'^premium/', include('astrobin_apps_premium.urls')),
     url(r'^toggleproperties/', include('toggleproperties.urls')),
     url(r'^users_app/', include('astrobin_apps_users.urls')),
 

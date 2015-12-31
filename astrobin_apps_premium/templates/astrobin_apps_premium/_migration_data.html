@@ -1,0 +1,23 @@
+{% load i18n %}
+
+<table class="table migrate-donations">
+    <caption>{% trans "Your migration data" %}</caption>
+    <thead>
+        <tr>
+            <th>{% trans "Total amount donated last year" %}</th>
+            <th>{% trans "First payment" %}</th>
+            <th>{% trans "Price for Premium" %}</th>
+            <th>{% trans "Days covered" %}</th>
+            <th>{% trans "Premium expiration" %}</th>
+        </tr>
+    </thead>
+    <tbody>
+        <tr>
+            <td>$ {{migration_data.amount_donated}} USD</td>
+            <td>{{migration_data.first_payment|date:"SHORT_DATE_FORMAT"}}</td>
+            <td>$ {{migration_data.price}} USD / year</td>
+            <td>{{migration_data.days_paid}}</td>
+            <td>{{migration_data.expiration|date:"SHORT_DATE_FORMAT"}}</td>
+        </tr>
+    </tbody>
+</table>

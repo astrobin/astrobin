@@ -15,30 +15,30 @@ SUBSCRIPTION_NAMES = (
 )
 
 
-def user_used_bytes(user):
+def rawdata_user_used_bytes(user):
     sizes = RawImage.objects\
         .filter(user = user)\
         .values_list('size', flat = True)
     return sum(sizes)
 
 
-def user_used_percent(user):
-    b = user_used_bytes(user)
-    limit = user_byte_limit(user)
+def rawdata_user_used_percent(user):
+    b = rawdata_user_used_bytes(user)
+    limit = rawdata_user_byte_limit(user)
     return b * 100 / limit if limit > 0 else 100
 
 
-def user_progress_class(user):
-    p = user_used_percent(user)
+def rawdata_user_progress_class(user):
+    p = rawdata_user_used_percent(user)
     if p < 90: return 'progress-success'
     if p > 97: return 'progress-danger'
     return 'progress-warning'
 
 
-def user_is_over_limit(user):
-    return user_used_percent(user) >= 100
+def rawdata_user_is_over_limit(user):
+    return rawdata_user_used_percent(user) >= 100
 
-def user_get_subscription(user):
+def rawdata_user_get_subscription(user):
     if not user.is_authenticated():
         raise UserSubscription.DoesNotExist
 
@@ -48,7 +48,7 @@ def user_get_subscription(user):
         return UserSubscription.objects.filter(user = user, subscription__name__in = SUBSCRIPTION_NAMES)[0]
 
 
-def user_get_active_subscription(user):
+def rawdata_user_get_active_subscription(user):
     if not user.is_authenticated():
         raise UserSubscription.DoesNotExist
 
@@ -63,18 +63,18 @@ def user_get_active_subscription(user):
     return us
 
 
-def user_has_subscription(user):
+def rawdata_user_has_subscription(user):
     try:
-        user_get_subscription(user)
+        rawdata_user_get_subscription(user)
     except UserSubscription.DoesNotExist:
         return False
 
     return True
 
 
-def user_has_active_subscription(user):
+def rawdata_user_has_active_subscription(user):
     try:
-        us = user_get_active_subscription(user)
+        us = rawdata_user_get_active_subscription(user)
     except UserSubscription.DoesNotExist:
         return False
 
@@ -83,20 +83,20 @@ def user_has_active_subscription(user):
 
     False
 
-def user_has_inactive_subscription(user):
-    active = user_has_active_subscription(user)
+def rawdata_user_has_inactive_subscription(user):
+    active = rawdata_user_has_active_subscription(user)
     if active:
         return False
 
     try:
-        us = user_get_subscription(user)
+        us = rawdata_user_get_subscription(user)
     except UserSubscription.DoesNotExist:
         return False
 
     return not us.active or us.cancelled or us.expired()
 
 
-def subscription_byte_limit(subscription):
+def rawdata_subscription_byte_limit(subscription):
     GB = 1024*1024*1024
 
     # Used in the unit tests
@@ -119,15 +119,15 @@ def subscription_byte_limit(subscription):
     return 0
 
 
-def user_byte_limit(user):
+def rawdata_user_byte_limit(user):
     try:
-        us = user_get_active_subscription(user)
+        us = rawdata_user_get_active_subscription(user)
     except UserSubscription.DoesNotExist:
         return 0
 
-    return subscription_byte_limit(us.subscription)
+    return rawdata_subscription_byte_limit(us.subscription)
 
-def supported_raw_formats():
+def rawdata_supported_raw_formats():
     return [
         "fit", "fits", "fts",
 
@@ -160,4 +160,3 @@ def md5_for_file(f, block_size=2**20):
             break
         md5.update(data)
     return md5.hexdigest()
-

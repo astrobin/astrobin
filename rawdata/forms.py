@@ -12,7 +12,6 @@ from .models import (
     PublicDataPool,
     PrivateSharedFolder,
 )
-from .utils import supported_raw_formats
 
 
 class PublicDataPoolForm(forms.ModelForm):
@@ -66,9 +65,9 @@ class PrivateSharedFolder_SelectExistingForm(forms.Form):
         # Init choices here to prevent stagnation due to django caching.
         folders = PrivateSharedFolder.objects.filter(
             Q(creator = user) |
-            Q(users = user)).values_list('id', 'name') 
+            Q(users = user)).values_list('id', 'name')
         self.fields['existing_folders'].choices = folders
-            
+
 
 
 class PrivateSharedFolder_ImagesForm(forms.ModelForm):

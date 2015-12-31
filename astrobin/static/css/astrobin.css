@@ -1011,6 +1011,12 @@ li.astrobin-thumbnail img {
   border-bottom: 0;
   padding-bottom: 0;
 }
+.page-header p {
+  margin-top: -20px;
+  font-size: 12px;
+  color: #ccc;
+  font-style: italic;
+}
 .blog-entry {
   margin-bottom: 40px;
   color: #cdcdce;
@@ -1033,6 +1039,13 @@ li.astrobin-thumbnail img {
 }
 .table.table-bordered {
   border-color: #292929;
+}
+.table caption {
+  font-size: 16px;
+  line-height: 32px;
+  font-weight: bold;
+  background: #303030 url('../images/darker-panel-tile.png');
+  padding: 4px 8px;
 }
 .table caption + thead tr:first-child th,
 .table caption + thead tr:first-child td,
@@ -3251,6 +3264,12 @@ li.revisions {
   color: #888;
   font-size: smaller;
 }
+table.subscription-plans {
+  table-layout: fixed;
+}
+.subscription-plans-description-list li {
+  padding: 6px 0;
+}
 .plan {
   text-align: center;
   padding-bottom: 30px;
@@ -3454,9 +3473,11 @@ table#private-shared-folders tr:hover a.delete-folder {
 #profile-details ul li:last-child > a {
   border: none;
 }
+.progress {
+  margin-bottom: 4px;
+}
 #platesolving-status .progress {
   height: 32px;
-  margin-bottom: 4px;
   position: relative;
   background-color: #333;
   background-image: linear-gradient(to bottom, #222222, #444444);
@@ -3796,7 +3817,7 @@ th.forum-name {
 .state-indicator {
   display: block;
   float: left;
-  background-color: #ccc;
+  background-color: #555;
   height: 10px;
   width: 10px;
   -webkit-border-top-right-radius: 5px;
@@ -3942,4 +3963,7 @@ pre {
 .wysibb .wysibb-toolbar .wysibb-toolbar-container .wysibb-toolbar-btn .fonticon {
   color: #ddd;
   text-shadow: 0 1px 0 black;
+}
+.table.migrate-donations {
+  margin-bottom: 30px;
 }

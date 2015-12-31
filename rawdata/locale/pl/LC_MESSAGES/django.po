@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2015-12-10 19:29+0000\n"
+"POT-Creation-Date: 2015-12-28 19:23+0000\n"
 "PO-Revision-Date: 2015-10-20 20:37+0000\n"
 "Last-Translator: Lukasz83 <lukasz.sujka83@gmail.com>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -71,11 +71,11 @@ msgstr "Obiekt"
 msgid "Temperature"
 msgstr "Temperatura"
 
-#: forms.py:86
+#: forms.py:85
 msgid "Users"
 msgstr "Użytkownicy"
 
-#: forms.py:87
+#: forms.py:86
 msgid "A list of users you want to invite. Use a comma to separate them."
 msgstr ""
 "Lista użytkowników, których chcesz zaprosić. Użyj przecinka do oddzielania."
@@ -214,16 +214,6 @@ msgstr "Narzędzie zrzutów ekranu"
 #: templates/rawdata/help_03.html:31 templates/rawdata/plans.html:4
 #: templates/rawdata/plans.html.py:8 templates/rawdata/restricted.html:4
 #: templates/rawdata/restricted.html:8
-#: templates/subscription/subscription_cancel.html:4
-#: templates/subscription/subscription_cancel.html:8
-#: templates/subscription/subscription_change_done.html:4
-#: templates/subscription/subscription_change_done.html:8
-#: templates/subscription/subscription_detail.html:6
-#: templates/subscription/subscription_detail.html:10
-#: templates/subscription/subscription_done.html:4
-#: templates/subscription/subscription_done.html:8
-#: templates/subscription/subscription_list.html:4
-#: templates/subscription/subscription_list.html:8
 msgid "AstroBin Raw Data"
 msgstr "Surowe pliki AstroBin"
 
@@ -471,7 +461,6 @@ msgid "There doesn't seem to be anything here."
 msgstr "Wygląda na to, ze nic tu nie ma."
 
 #: templates/rawdata/library.html:141
-#: templates/subscription/subscription_done.html:17
 #, python-format
 msgid ""
 "Head over to the <a href=\"%(upload_url)s\">upload page</a> to get started. "
@@ -993,239 +982,6 @@ msgstr "Pliki do pobrania jeszcze nie są gotowe"
 msgid "Please refresh this page in a few seconds."
 msgstr "Proszę odśwież tą stronę za kilka sekund"
 
-#: templates/subscription/_plan.html:11
-msgid "FREE!"
-msgstr "WOLNY!"
-
-#: templates/subscription/_plan.html:12
-msgid "That's right, this plan is free."
-msgstr "Tak, ten plan jest wolny."
-
-#: templates/subscription/_plan.html:17
-msgid "month"
-msgstr "miesiąc"
-
-#: templates/subscription/_plan.html:19
-#, python-format
-msgid "That's only $ %(daily_price)s USD per day!"
-msgstr "To tylko $ %(daily_price)s dolarów za dzień!"
-
-#: templates/subscription/_plan.html:25
-#, python-format
-msgid "Free for %(free_days)s days."
-msgstr "Za darmo przez %(free_days)s dni."
-
-#: templates/subscription/_plan.html:29
-msgid "You can cancel at any time."
-msgstr "Możesz przerwać w dowolnym momencie"
-
-#: templates/subscription/subscription_cancel.html:8
-msgid "Subscription process cancelled"
-msgstr "Subskrypcja przerwana"
-
-#: templates/subscription/subscription_cancel.html:12
-msgid ""
-"Your transaction with PayPal has been cancelled, so no change in your "
-"subscription has occurred."
-msgstr ""
-"Twoja transakcja PayPal została anulowana, także Twoja subskrypcja "
-"pozostanie bez zmian."
-
-#: templates/subscription/subscription_cancel.html:16
-#: templates/subscription/subscription_change_done.html:16
-#: templates/subscription/subscription_detail.html:116
-#, python-format
-msgid "Return to the <a href=\"%(plans_url)s\">plans page</a>."
-msgstr "Powróć do  <a href=\"%(plans_url)s\">strony z planami</a>"
-
-#: templates/subscription/subscription_change_done.html:8
-msgid "Subscription change"
-msgstr "Zmiana subskrypcji"
-
-#: templates/subscription/subscription_change_done.html:12
-msgid ""
-"Your request for a change in your subscription has been processed "
-"successfully."
-msgstr "Twój wniosek o zmianę w subskrypcji został przetworzony prawidłowo ."
-
-#: templates/subscription/subscription_detail.html:6
-#: templates/subscription/subscription_detail.html:10
-msgid "Subscription plan"
-msgstr "Plan subskrypcji"
-
-#: templates/subscription/subscription_detail.html:24
-msgid "Your subscription to this plan is cancelled."
-msgstr "Twoja subskrypcja do tego planu została anulowana."
-
-#: templates/subscription/subscription_detail.html:30
-msgid "You are subscribed to this plan."
-msgstr "Zapisałeś się do tego planu."
-
-#: templates/subscription/subscription_detail.html:37
-msgid "Here you can deactivate your free Raw Data Atom subscription."
-msgstr "Tutaj możesz zdezaktywować swoją darmową subskrypcję Raw Data Atom."
-
-#: templates/subscription/subscription_detail.html:41
-msgid "Deactivate"
-msgstr "Dezaktywuj"
-
-#: templates/subscription/subscription_detail.html:46
-msgid "Go to your Raw Data Library."
-msgstr "Przejdź do swojej bazy surowych danych."
-
-#: templates/subscription/subscription_detail.html:50
-#, python-format
-msgid "You may <a href=\"%(cancel_url)s\">cancel via PayPal</a> if you wish."
-msgstr ""
-"Możesz <a href=\"%(cancel_url)s\">anulować przez PayPal</a> jeśli chcesz."
-
-#: templates/subscription/subscription_detail.html:56
-#: templates/subscription/subscription_detail.html:98
-msgid "Here you can activate your free Raw Data Atom subscription."
-msgstr "Tutaj możesz aktywować darmową subskrypcję Raw Data Atom."
-
-#: templates/subscription/subscription_detail.html:60
-#: templates/subscription/subscription_detail.html:106
-msgid "Activate"
-msgstr "Aktywuj"
-
-#: templates/subscription/subscription_detail.html:64
-#: templates/subscription/subscription_detail.html:88
-msgid "Subscribe with a secure payment provided by PayPal:"
-msgstr "Subskrybuj z bezpieczną płatnością świadczoną przez PayPal:"
-
-#: templates/subscription/subscription_detail.html:77
-msgid "You cannot switch to this plan."
-msgstr "Nie możesz przełączyć się na ten plan."
-
-#: templates/subscription/subscription_detail.html:101
-msgid ""
-"Careful! If you have already a paid Raw Data subscription, your available "
-"space will be reduced!"
-msgstr ""
-"Ostrożnie! Jeśli już opłaciłeś subskrypcję, Twoje dostępne miejsce zostanie "
-"zredukowane!"
-
-#: templates/subscription/subscription_detail.html:114
-#: templates/subscription/subscription_done.html:21
-#: templates/subscription/subscription_list.html:94
-msgid "Thank you for supporting AstroBin!"
-msgstr "Dziękujemy za wspieranie AstroBin!"
-
-#: templates/subscription/subscription_done.html:8
-msgid "Subscription confirmed"
-msgstr "Subskrypcja potwierdzona"
-
-#: templates/subscription/subscription_done.html:12
-msgid ""
-"Your subscription request to AstroBin Raw Data has been received, and we are "
-"awaiting the final confirmation from PayPal. Your subscription should be "
-"active within a few minutes!"
-msgstr ""
-"Otrzymaliśmy Twój wniosek o subskrypcję AstroBin Raw Data. Czekamy na "
-"potwierdzenie z PayPal. Twoja subskrypcja powinna być aktywna w ciągu kilku "
-"minut!"
-
-#: templates/subscription/subscription_list.html:4
-#: templates/subscription/subscription_list.html:8
-msgid "Subscription plans"
-msgstr "Plany subskrypcji"
-
-#: templates/subscription/subscription_list.html:14
-msgid ""
-"<strong>AstroBin Raw Data</strong> allows you to store your raw files "
-"(<strong>FIT</strong> and <strong>digital camera raw</strong>) on AstroBin. "
-"We will keep them neatly organized, and you will have a safe backup of all "
-"your work, including calibration files."
-msgstr ""
-"<strong>AstroBin Raw Data</strong>  pozwala Ci na przechowywanie surowych "
-"danych (<strong>FIT</strong> oraz <strong>RAW</strong>) w AstroBin. "
-"Utrzymamy je w porządku a Ty będziesz miał bezpieczną kopię Twojej pracy "
-"uwzględniając również klatki kalibracyjne."
-
-#: templates/subscription/subscription_list.html:17
-#, python-format
-msgid ""
-"Learn more by reading <a href=\"%(rawdata_url)s\">a short introduction.</a>"
-msgstr ""
-"Dowiedz się więcej czytając <a href=\"%(rawdata_url)s\">krótki wstęp.</a>"
-
-#: templates/subscription/subscription_list.html:23
-msgid "Here are the available plans. Choose the one that suits you best!"
-msgstr ""
-"Wybierz ten plan jeśli chcesz ograniczyć swoje wydatki do minimum, ale "
-"cięgle chcesz mieć możliwość dzielenia się plikami FIT oraz RAW z Twoimi "
-"przyjaciółmi. Możesz korzystać ze zbiorów danych publicznych i brać udział w "
-"tworzeniu najgłębszych obrazów głębokiego nieba oraz mieć świadomość, że "
-"wspierasz AstroBin."
-
-#: templates/subscription/subscription_list.html:39
-msgid "Manage"
-msgstr ""
-"Wybierz ten plan jeśli chcesz ograniczyć swoje wydatki do minimum, ale wciąż "
-"chcesz mieć możliwość dzielenia się plikami FIT i RAW ze swoimi "
-"przyjaciółmi. Możesz również korzystać ze zbiorów danych publicznych i brać "
-"udział w tworzeniu najgłębszych obrazów głębokiego nieba, mając świadomość "
-"wspierania AstroBin."
-
-#: templates/subscription/subscription_list.html:54
-msgid ""
-"This plan is free! Choose it to share a small amount of data with other "
-"users."
-msgstr ""
-"Ten plan jest za darmo! Wybierz go aby dzielić się małą ilością danych z "
-"innymi."
-
-#: templates/subscription/subscription_list.html:62
-msgid ""
-" Choose this plan if you want to keep your expenses to a minimum, but still "
-"want the possibity to share your FIT and digital camera raw files with your "
-"friends. You can also participate to public data pools and contribute to the "
-"deepest deep sky images ever created, and you will always know that you "
-"support AstroBin."
-msgstr ""
-"Wybierz ten plan jeśli chcesz ograniczyć swoje wydatki do minimum, ale wciąż "
-"chcesz mieć możliwość dzielenia się plikami FIT i RAW ze swoimi "
-"przyjaciółmi. Możesz również korzystać ze zbiorów danych publicznych i brać "
-"udział w tworzeniu najgłębszych obrazów głębokiego nieba, mając świadomość "
-"wspierania AstroBin."
-
-#: templates/subscription/subscription_list.html:70
-msgid ""
-"Choose this plan if you have started out in the recent year or two, or you "
-"don't want to share and backup your calibration files. Enjoy a lot of room "
-"for a convenient price."
-msgstr ""
-"Wybierz ten plan jeśli rozpocząłeś swoją przygodę rok lub dwa lata temu lub "
-"nie chcesz udostępniać lub zabezpieczać swoich klatek kalibracyjnych. Ciesz "
-"się dużą ilością miejsca za rozsądną cenę."
-
-#: templates/subscription/subscription_list.html:78
-msgid ""
-"Choose this plan if you have several years worth of data. You will probably "
-"have enough room for all your calibration files, and will enjoy the full "
-"potential of the platform."
-msgstr ""
-"Wybierz ten program jeśli masz już materiały z kilku lat. Będziesz miał "
-"wystarczająco dużo miejsca również na swoje klatki kalibracyjne i "
-"wykorzystasz pełen potencjał platformy."
-
-#: templates/subscription/subscription_list.html:86
-msgid ""
-"Choose this plan if you have a massive amount of raw data that you want to "
-"share and backup securely online."
-msgstr ""
-"Wybierz ten plan jeśli masz ogromną ilość surowych danych którą chcesz się "
-"dzielić oraz zabezpieczyć je przed utratą."
-
-#: templates/subscription/subscription_list.html:97
-msgid ""
-"PS: are you interested in larger plans? <a href=\"/contact/\">Let us know!</"
-"a>"
-msgstr ""
-"PS: czy jesteś zainteresowany większymi planami?  <a href=\"/contact/\">Daj "
-"nam znać !</a>"
-
 #: views/privatesharedfolders.py:118
 msgid "Your image has been added to the private shared folder."
 msgstr "Twoje zdjęcie zostało dodane do prywatnego folderu współdzielonego."
@@ -1237,6 +993,191 @@ msgstr "Twój prywatny współdzielony folder został usunięty."
 #: views/publicdatapools.py:99
 msgid "Your image has been added to the pool."
 msgstr "Twoje zdjęcie zostało dodane do zbioru."
+
+#~ msgid "FREE!"
+#~ msgstr "WOLNY!"
+
+#~ msgid "That's right, this plan is free."
+#~ msgstr "Tak, ten plan jest wolny."
+
+#~ msgid "month"
+#~ msgstr "miesiąc"
+
+#~ msgid "That's only $ %(daily_price)s USD per day!"
+#~ msgstr "To tylko $ %(daily_price)s dolarów za dzień!"
+
+#~ msgid "Free for %(free_days)s days."
+#~ msgstr "Za darmo przez %(free_days)s dni."
+
+#~ msgid "You can cancel at any time."
+#~ msgstr "Możesz przerwać w dowolnym momencie"
+
+#~ msgid "Subscription process cancelled"
+#~ msgstr "Subskrypcja przerwana"
+
+#~ msgid ""
+#~ "Your transaction with PayPal has been cancelled, so no change in your "
+#~ "subscription has occurred."
+#~ msgstr ""
+#~ "Twoja transakcja PayPal została anulowana, także Twoja subskrypcja "
+#~ "pozostanie bez zmian."
+
+#~ msgid "Return to the <a href=\"%(plans_url)s\">plans page</a>."
+#~ msgstr "Powróć do  <a href=\"%(plans_url)s\">strony z planami</a>"
+
+#~ msgid "Subscription change"
+#~ msgstr "Zmiana subskrypcji"
+
+#~ msgid ""
+#~ "Your request for a change in your subscription has been processed "
+#~ "successfully."
+#~ msgstr ""
+#~ "Twój wniosek o zmianę w subskrypcji został przetworzony prawidłowo ."
+
+#~ msgid "Subscription plan"
+#~ msgstr "Plan subskrypcji"
+
+#~ msgid "Your subscription to this plan is cancelled."
+#~ msgstr "Twoja subskrypcja do tego planu została anulowana."
+
+#~ msgid "You are subscribed to this plan."
+#~ msgstr "Zapisałeś się do tego planu."
+
+#~ msgid "Here you can deactivate your free Raw Data Atom subscription."
+#~ msgstr "Tutaj możesz zdezaktywować swoją darmową subskrypcję Raw Data Atom."
+
+#~ msgid "Deactivate"
+#~ msgstr "Dezaktywuj"
+
+#~ msgid "Go to your Raw Data Library."
+#~ msgstr "Przejdź do swojej bazy surowych danych."
+
+#~ msgid ""
+#~ "You may <a href=\"%(cancel_url)s\">cancel via PayPal</a> if you wish."
+#~ msgstr ""
+#~ "Możesz <a href=\"%(cancel_url)s\">anulować przez PayPal</a> jeśli chcesz."
+
+#~ msgid "Here you can activate your free Raw Data Atom subscription."
+#~ msgstr "Tutaj możesz aktywować darmową subskrypcję Raw Data Atom."
+
+#~ msgid "Activate"
+#~ msgstr "Aktywuj"
+
+#~ msgid "Subscribe with a secure payment provided by PayPal:"
+#~ msgstr "Subskrybuj z bezpieczną płatnością świadczoną przez PayPal:"
+
+#~ msgid "You cannot switch to this plan."
+#~ msgstr "Nie możesz przełączyć się na ten plan."
+
+#~ msgid ""
+#~ "Careful! If you have already a paid Raw Data subscription, your available "
+#~ "space will be reduced!"
+#~ msgstr ""
+#~ "Ostrożnie! Jeśli już opłaciłeś subskrypcję, Twoje dostępne miejsce "
+#~ "zostanie zredukowane!"
+
+#~ msgid "Thank you for supporting AstroBin!"
+#~ msgstr "Dziękujemy za wspieranie AstroBin!"
+
+#~ msgid "Subscription confirmed"
+#~ msgstr "Subskrypcja potwierdzona"
+
+#~ msgid ""
+#~ "Your subscription request to AstroBin Raw Data has been received, and we "
+#~ "are awaiting the final confirmation from PayPal. Your subscription should "
+#~ "be active within a few minutes!"
+#~ msgstr ""
+#~ "Otrzymaliśmy Twój wniosek o subskrypcję AstroBin Raw Data. Czekamy na "
+#~ "potwierdzenie z PayPal. Twoja subskrypcja powinna być aktywna w ciągu "
+#~ "kilku minut!"
+
+#~ msgid "Subscription plans"
+#~ msgstr "Plany subskrypcji"
+
+#~ msgid ""
+#~ "<strong>AstroBin Raw Data</strong> allows you to store your raw files "
+#~ "(<strong>FIT</strong> and <strong>digital camera raw</strong>) on "
+#~ "AstroBin. We will keep them neatly organized, and you will have a safe "
+#~ "backup of all your work, including calibration files."
+#~ msgstr ""
+#~ "<strong>AstroBin Raw Data</strong>  pozwala Ci na przechowywanie surowych "
+#~ "danych (<strong>FIT</strong> oraz <strong>RAW</strong>) w AstroBin. "
+#~ "Utrzymamy je w porządku a Ty będziesz miał bezpieczną kopię Twojej pracy "
+#~ "uwzględniając również klatki kalibracyjne."
+
+#~ msgid ""
+#~ "Learn more by reading <a href=\"%(rawdata_url)s\">a short introduction.</"
+#~ "a>"
+#~ msgstr ""
+#~ "Dowiedz się więcej czytając <a href=\"%(rawdata_url)s\">krótki wstęp.</a>"
+
+#~ msgid "Here are the available plans. Choose the one that suits you best!"
+#~ msgstr ""
+#~ "Wybierz ten plan jeśli chcesz ograniczyć swoje wydatki do minimum, ale "
+#~ "cięgle chcesz mieć możliwość dzielenia się plikami FIT oraz RAW z Twoimi "
+#~ "przyjaciółmi. Możesz korzystać ze zbiorów danych publicznych i brać "
+#~ "udział w tworzeniu najgłębszych obrazów głębokiego nieba oraz mieć "
+#~ "świadomość, że wspierasz AstroBin."
+
+#~ msgid "Manage"
+#~ msgstr ""
+#~ "Wybierz ten plan jeśli chcesz ograniczyć swoje wydatki do minimum, ale "
+#~ "wciąż chcesz mieć możliwość dzielenia się plikami FIT i RAW ze swoimi "
+#~ "przyjaciółmi. Możesz również korzystać ze zbiorów danych publicznych i "
+#~ "brać udział w tworzeniu najgłębszych obrazów głębokiego nieba, mając "
+#~ "świadomość wspierania AstroBin."
+
+#~ msgid ""
+#~ "This plan is free! Choose it to share a small amount of data with other "
+#~ "users."
+#~ msgstr ""
+#~ "Ten plan jest za darmo! Wybierz go aby dzielić się małą ilością danych z "
+#~ "innymi."
+
+#~ msgid ""
+#~ " Choose this plan if you want to keep your expenses to a minimum, but "
+#~ "still want the possibity to share your FIT and digital camera raw files "
+#~ "with your friends. You can also participate to public data pools and "
+#~ "contribute to the deepest deep sky images ever created, and you will "
+#~ "always know that you support AstroBin."
+#~ msgstr ""
+#~ "Wybierz ten plan jeśli chcesz ograniczyć swoje wydatki do minimum, ale "
+#~ "wciąż chcesz mieć możliwość dzielenia się plikami FIT i RAW ze swoimi "
+#~ "przyjaciółmi. Możesz również korzystać ze zbiorów danych publicznych i "
+#~ "brać udział w tworzeniu najgłębszych obrazów głębokiego nieba, mając "
+#~ "świadomość wspierania AstroBin."
+
+#~ msgid ""
+#~ "Choose this plan if you have started out in the recent year or two, or "
+#~ "you don't want to share and backup your calibration files. Enjoy a lot of "
+#~ "room for a convenient price."
+#~ msgstr ""
+#~ "Wybierz ten plan jeśli rozpocząłeś swoją przygodę rok lub dwa lata temu "
+#~ "lub nie chcesz udostępniać lub zabezpieczać swoich klatek kalibracyjnych. "
+#~ "Ciesz się dużą ilością miejsca za rozsądną cenę."
+
+#~ msgid ""
+#~ "Choose this plan if you have several years worth of data. You will "
+#~ "probably have enough room for all your calibration files, and will enjoy "
+#~ "the full potential of the platform."
+#~ msgstr ""
+#~ "Wybierz ten program jeśli masz już materiały z kilku lat. Będziesz miał "
+#~ "wystarczająco dużo miejsca również na swoje klatki kalibracyjne i "
+#~ "wykorzystasz pełen potencjał platformy."
+
+#~ msgid ""
+#~ "Choose this plan if you have a massive amount of raw data that you want "
+#~ "to share and backup securely online."
+#~ msgstr ""
+#~ "Wybierz ten plan jeśli masz ogromną ilość surowych danych którą chcesz "
+#~ "się dzielić oraz zabezpieczyć je przed utratą."
+
+#~ msgid ""
+#~ "PS: are you interested in larger plans? <a href=\"/contact/\">Let us know!"
+#~ "</a>"
+#~ msgstr ""
+#~ "PS: czy jesteś zainteresowany większymi planami?  <a href=\"/contact/"
+#~ "\">Daj nam znać !</a>"
 
 #, fuzzy
 #~ msgid "Download for:"

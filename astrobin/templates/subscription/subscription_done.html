@@ -1,0 +1,18 @@
+{% extends 'base.html' %}
+{% load i18n %}
+
+{% block title %}{% trans "Subscription confirmed" %}{% endblock %}
+
+{% block content %}
+    <div class="page-header">
+        <h1>{% trans "Subscription confirmed" %}</h1>
+    </div>
+
+    <div class="alert alert-success">
+        {% blocktrans %}Your request has been received, and we are awaiting the final confirmation from PayPal. Your subscription should be active within a few minutes!{% endblocktrans %}
+    </div>
+
+    <div class="thankyou">
+        {% blocktrans %}Thank you for supporting AstroBin!{% endblocktrans %}
+    </div>
+{% endblock %}

@@ -84,7 +84,7 @@ def user_scores(request):
 
 
 def common_variables(request):
-    from rawdata.utils import user_has_active_subscription
+    from rawdata.utils import rawdata_user_has_active_subscription
     from django_user_agents.utils import get_and_set_user_agent
 
     get_and_set_user_agent(request)
@@ -93,12 +93,15 @@ def common_variables(request):
         #'random_gear_item': Gear.objects.filter(moderator_fixed = None).order_by('?')[:1].get(),
         'is_producer': request.user.groups.filter(name='Producers'),
         'is_retailer': request.user.groups.filter(name='Retailers'),
-        'has_rawdata_subscription': user_has_active_subscription(request.user),
+        'rawdata_has_subscription': rawdata_user_has_active_subscription(request.user),
         'is_iotd_staff': request.user.groups.filter(name='IOTD_Staff'),
         'IMAGES_URL' : settings.IMAGES_URL,
         'ADS_ENABLED': settings.ADS_ENABLED,
         'DONATIONS_ENABLED': settings.DONATIONS_ENABLED,
+        'PREMIUM_ENABLED': settings.PREMIUM_ENABLED,
+        'PREMIUM_MAX_IMAGES_FREE': settings.PREMIUM_MAX_IMAGES_FREE,
+        'PREMIUM_MAX_IMAGES_LITE': settings.PREMIUM_MAX_IMAGES_LITE,
+        'PAYPAL_TEST': settings.PAYPAL_TEST,
     }
 
     return d
-

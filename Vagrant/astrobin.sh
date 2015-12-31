@@ -120,8 +120,12 @@ function init_system {
     chmod g+w /var/log/astrobin
 
     astrobin_log "Customizing vagrant's home directory..."
-    echo "nc -z 127.0.0.1 25 || sudo python -m smtpd -n -c DebuggingServer localhost:25 &" >> /home/vagrant/.bashrc
-    echo "nc -z 127.0.0.1 1025 || python -m smtpd -n -c DebuggingServer localhost:1025 &" >> /home/vagrant/.bashrc
+    if grep -q DebuggingServer /home/vagrant/.bashrc; then
+        astrobin_log "Debug smpt server already setup"
+    else
+        echo "nc -z 127.0.0.1 25 || sudo python -m smtpd -n -c DebuggingServer localhost:25 &" >> /home/vagrant/.bashrc
+        echo "nc -z 127.0.0.1 1025 || python -m smtpd -n -c DebuggingServer localhost:1025 &" >> /home/vagrant/.bashrc
+    fi
 }
 
 function apt {
@@ -271,11 +275,17 @@ function astrobin {
 
     # Automatically activating the environment upon login
     $customizing_log && \
-    echo "source /venv/astrobin/dev/bin/activate" >> /home/astrobin/.profile && \
-    echo "source /var/www/astrobin/env/dev" >> /home/astrobin/.profile && \
-    echo "cd /var/www/astrobin" >> /home/astrobin/.profile && \
-    echo "figlet WELCOME TO ASTROBIN" >> /home/astrobin/.bashrc && \
-    echo "cowsay You can run a development server with: ./manage.py runserver 0.0.0.0:8083, and remember to read ./INSTALL.md\!" >> /home/astrobin/.bashrc && \
+    if [ ! -f /home/astrobin/.profile.customized ]; then \
+        touch /home/astrobin/.profile.customized && \
+        echo "source /venv/astrobin/dev/bin/activate" >> /home/astrobin/.profile && \
+        echo "source /var/www/astrobin/env/dev" >> /home/astrobin/.profile && \
+        echo "cd /var/www/astrobin" >> /home/astrobin/.profile && \
+    fi && \
+    if [ ! -f /home/astrobin/.bashrc.customized ]; then \
+        touch /home/astrobin/.bashrc.customized && \
+        echo "figlet WELCOME TO ASTROBIN" >> /home/astrobin/.bashrc && \
+        echo "cowsay You can run a development server with: ./manage.py runserver 0.0.0.0:8083, and remember to read ./INSTALL.md\!" >> /home/astrobin/.bashrc && \
+    fi && \
 
     # Initialize db
     $sync_db_log && \

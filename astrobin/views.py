@@ -988,33 +988,49 @@ def image_full(request, id, r):
 @login_required
 def image_upload(request):
     from rawdata.utils import (
-        user_has_subscription,
-        user_has_active_subscription,
-        user_has_inactive_subscription,
-        user_is_over_limit,
-        user_byte_limit,
-        user_used_percent,
-        user_progress_class,
-        supported_raw_formats,
+        rawdata_user_has_subscription,
+        rawdata_user_has_active_subscription,
+        rawdata_user_has_inactive_subscription,
+        rawdata_user_is_over_limit,
+        rawdata_user_byte_limit,
+        rawdata_user_used_percent,
+        rawdata_user_progress_class,
+        rawdata_supported_raw_formats,
     )
 
-    has_sub       = user_has_subscription(request.user)
-    has_act_sub   = has_sub and user_has_active_subscription(request.user)
-    has_inact_sub = has_sub and user_has_inactive_subscription(request.user)
-    is_over_limit = has_act_sub and user_is_over_limit(request.user)
+    from astrobin_apps_premium.utils import (
+        premium_used_percent,
+        premium_progress_class,
+        premium_user_has_subscription,
+        premium_user_has_inactive_subscription,
+    )
+
+    rawdata_has_sub       = rawdata_user_has_subscription(request.user)
+    rawdata_has_act_sub   = rawdata_has_sub and rawdata_user_has_active_subscription(request.user)
+    rawdata_has_inact_sub = rawdata_has_sub and rawdata_user_has_inactive_subscription(request.user)
+    rawdata_is_over_limit = rawdata_has_act_sub and rawdata_user_is_over_limit(request.user)
+
+    tmpl_premium_used_percent = premium_used_percent(request.user)
+    tmpl_premium_progress_class = premium_progress_class(tmpl_premium_used_percent)
+    tmpl_premium_has_inact_sub = premium_user_has_subscription(request.user) and premium_user_has_inactive_subscription(request.user)
 
     response_dict = {
-        'upload_form': ImageUploadForm(),
-        'has_sub': has_sub,
-        'has_act_sub': has_act_sub,
-        'has_inact_sub': has_inact_sub,
-        'is_over_limit': is_over_limit,
+        'rawdata_has_sub': rawdata_has_sub,
+        'rawdata_has_act_sub': rawdata_has_act_sub,
+        'rawdata_has_inact_sub': rawdata_has_inact_sub,
+        'rawdata_is_over_limit': rawdata_is_over_limit,
 
-        'byte_limit': user_byte_limit(request.user) if has_act_sub else 0,
-        'used_percent': user_used_percent(request.user) if has_act_sub else 100,
-        'progress_class': user_progress_class(request.user) if has_act_sub else '',
-        'supported_raw_formats': supported_raw_formats(),
+        'rawdata_used_percent': rawdata_user_used_percent(request.user) if rawdata_has_act_sub else 100,
+        'rawdata_progress_class': rawdata_user_progress_class(request.user) if rawdata_has_act_sub else '',
+        'rawdata_supported_raw_formats': rawdata_supported_raw_formats(),
+
+        'premium_used_percent': tmpl_premium_used_percent,
+        'premium_progress_class': tmpl_premium_progress_class,
+        'premium_has_inact_sub': tmpl_premium_has_inact_sub,
     }
+
+    if tmpl_premium_used_percent < 100:
+        response_dict['upload_form'] = ImageUploadForm()
 
     return render_to_response(
         "upload.html",
@@ -1028,6 +1044,13 @@ def image_upload_process(request):
     """Process the form"""
     def upload_error():
         messages.error(request, _("Invalid image or no image provided. Allowed formats are JPG, PNG and GIF."))
+        return HttpResponseRedirect('/upload/')
+
+    from astrobin_apps_premium.utils import premium_used_percent
+
+    used_percent = premium_used_percent(request.user)
+    if used_percent >= 100:
+        messages.error(request, _("You have reached your image uploads limit. Please upgrade!"));
         return HttpResponseRedirect('/upload/')
 
     if settings.READONLY_MODE:
@@ -4043,4 +4066,3 @@ def set_default_frontpage_section(request, section):
 
     messages.success(request, _("Default front page section changed."))
     return HttpResponseRedirect(reverse('index'))
-

@@ -1590,6 +1590,12 @@ class UserProfile(models.Model):
         help_text = _("Write something about yourself. HTML tags are allowed."),
     )
 
+    # Counter for uploaded images.
+    premium_counter = models.PositiveIntegerField(
+        default = 0,
+        editable = False
+    )
+
     # Commercial information
     company_name = models.CharField(
         max_length = 128,
@@ -2178,4 +2184,3 @@ class CommercialGear(models.Model):
         app_label = 'astrobin'
         ordering = ['created']
         verbose_name_plural = _("Commercial gear items")
-

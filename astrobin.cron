@@ -20,9 +20,8 @@
 # For more information see the manual pages of crontab(5) and cron(8)
 #
 # m h  dom mon dow   command
-MAILTO=admin@astrobin.com
+MAILTO=info@astrobin.com
 ASTROBIN_ROOT=/var/www/astrobin
-ASTROBIN_QUESTIONS_ROOT=code/astrobin_questions
 PYTHON=venv/production/bin/python
 TMPZIPS=/var/www/tmpzips
 
@@ -32,7 +31,4 @@ TMPZIPS=/var/www/tmpzips
 10 00 * * * (. $ASTROBIN_ROOT/env/production; $PYTHON $ASTROBIN_ROOT/manage.py merge_gear) 2>&1 >/dev/null
 30 00 * * * (. $ASTROBIN_ROOT/env/production; $PYTHON $ASTROBIN_ROOT/manage.py global_stats) 2>&1 >/dev/null
 00 11 * * * (. $ASTROBIN_ROOT/env/production; $PYTHON $ASTROBIN_ROOT/manage.py clean_temporary_archives) 2>&1 >/dev/null
-
-00 20 * * * (. $ASTROBIN_QUESTIONS_ROOT/env/production; $PYTHON $ASTROBIN_QUESTIONS_ROOT/manage.py send_email_alerts) 2>&1 >/dev/null
-00 02 * * * (. $ASTROBIN_QUESTIONS_ROOT/env/production; $PYTHON $ASTROBIN_QUESTIONS_ROOT/manage.py send_accept_answer_reminders) 2>&1 >/dev/null
-
+00 00 1 1 * (. $ASTROBIN_ROOT/env/production; $PYTHON $ASTROBIN_ROOT/manage.py reset_lite_counters) 2>&1 >/dev/null
