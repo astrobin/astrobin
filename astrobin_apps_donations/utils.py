@@ -5,13 +5,13 @@ SUBSCRIPTION_NAMES = (
     'AstroBin Donor Snack Monthly',
     'AstroBin Donor Pizza Monthly',
     'AstroBin Donor Movie Monthly',
-    'AstorBin Donor Dinner Monthly',
+    'AstroBin Donor Dinner Monthly',
 
     'AstroBin Donor Coffee Yearly',
     'AstroBin Donor Snack Yearly',
     'AstroBin Donor Pizza Yearly',
     'AstroBin Donor Movie Yearly',
-    'AstorBin Donor Dinner Yearly',
+    'AstroBin Donor Dinner Yearly',
 )
 
 
