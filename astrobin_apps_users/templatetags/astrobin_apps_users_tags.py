@@ -61,5 +61,7 @@ def astrobin_apps_users_list(context, user_list, layout="standard"):
         'layout': layout,
         'view': request.GET.get('view', 'default'),
         'STATIC_URL': settings.STATIC_URL,
+        'DONATIONS_ENABLED': context['DONATIONS_ENABLED'],
+        'PREMIUM_ENABLED': context['PREMIUM_ENABLED'],
     }
 
