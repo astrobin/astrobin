@@ -44,7 +44,7 @@ class MigrateDonationsView(FormView):
             user = self.request.user,
             subscription__name__in = donation_utils.SUBSCRIPTION_NAMES,
             event = "subscription payment",
-            timestamp__year = date.today().year).order_by('-timestamp')
+            timestamp__year = date.today().year - 1).order_by('-timestamp')
 
         for t in transactions:
             first_payment = t.timestamp
