@@ -445,6 +445,7 @@ def wall(request):
         extra_context = response_dict)
 
 
+# TESTED PARTIALLY
 @require_GET
 def iotd_archive(request):
     """Archive of 'Images of the day'"""
