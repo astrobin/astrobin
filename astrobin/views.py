@@ -908,6 +908,7 @@ def image_flag_thumbs(request, id):
     return HttpResponseRedirect(reverse("image_detail", kwargs= {'id': id}))
 
 
+# TESTED
 @require_GET
 def image_thumb(request, id, r, alias):
     image = get_object_or_404(Image.all_objects, id = id)
