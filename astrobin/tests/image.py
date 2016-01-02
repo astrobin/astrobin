@@ -55,6 +55,27 @@ class ImageTest(TestCase):
             status_code = 302,
             target_status_code = 200)
 
-        # Test image properties
         image = Image.objects.get(pk = 1)
         self.assertEqual(image.title, u"")
+
+        # Test watermark
+        response = self.client.post(
+            reverse('image_edit_save_watermark'),
+            {
+                'image_id': 1,
+                'watermark': True,
+                'watermark_text': "Watermark test",
+                'watermark_position': 0,
+                'watermark_opacity': 100
+            },
+            follow = True)
+        image = Image.objects.get(pk = 1)
+        self.assertRedirects(
+            response,
+            reverse('image_edit_basic', kwargs = {'id': 1}),
+            status_code = 302,
+            target_status_code = 200)
+        self.assertEqual(image.watermark, True)
+        self.assertEqual(image.watermark_text, "Watermark test")
+        self.assertEqual(image.watermark_position, 0)
+        self.assertEqual(image.watermark_opacity, 100)
