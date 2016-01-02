@@ -79,3 +79,34 @@ class ImageTest(TestCase):
         self.assertEqual(image.watermark_text, "Watermark test")
         self.assertEqual(image.watermark_position, 0)
         self.assertEqual(image.watermark_opacity, 100)
+
+        # Test basic settings
+        response = self.client.post(
+            reverse('image_edit_save_basic'),
+            {
+                'image_id': 1,
+                'submit_gear': True,
+                'title': "Test title",
+                'link': "http://www.example.com",
+                'link_to_fits': "http://www.example.com/fits",
+                'subject_type': 600,
+                'solar_system_main_subject': 0,
+                'locations': [],
+                'description': "Image description",
+                'allow_comments': True
+            },
+            follow = True)
+        image = Image.objects.get(pk = 1)
+        self.assertRedirects(
+            response,
+            reverse('image_edit_gear', kwargs = {'id': 1}),
+            status_code = 302,
+            target_status_code = 200)
+        self.assertEqual(image.title, "Test title")
+        self.assertEqual(image.link, "http://www.example.com")
+        self.assertEqual(image.link_to_fits, "http://www.example.com/fits")
+        self.assertEqual(image.subject_type, 600)
+        self.assertEqual(image.solar_system_main_subject, 0)
+        self.assertEqual(image.locations.count(), 0)
+        self.assertEqual(image.description, "Image description")
+        self.assertEqual(image.allow_comments, True)
