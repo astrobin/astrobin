@@ -529,12 +529,6 @@ def iotd_choose(request, id):
 
 
 @require_GET
-def no_javascript(request):
-    return render_to_response('no_javascript.html',
-        context_instance=RequestContext(request))
-
-
-@require_GET
 def image_detail(request, id, r):
     """ Show details of an image"""
     image = get_object_or_404(
