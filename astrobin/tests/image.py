@@ -1,3 +1,6 @@
+# Python
+import time
+
 # Django
 from django.contrib.auth.models import User
 from django.core.urlresolvers import reverse
@@ -12,7 +15,8 @@ from astrobin.models import (
     FocalReducer,
     Software,
     Filter,
-    Accessory)
+    Accessory,
+    DeepSky_Acquisition)
 
 
 class ImageTest(TestCase):
@@ -181,3 +185,27 @@ class ImageTest(TestCase):
             status_code = 302,
             target_status_code = 200)
 
+        # Test simple deep sky acquisition
+        today = time.strftime('%Y-%m-%d')
+        response = self.client.post(
+            reverse('image_edit_save_acquisition'),
+            {
+                'image_id': 1,
+                'edit_type': 'deep_sky',
+                'advanced': 'false',
+                'date': today,
+                'number': 10,
+                'duration': 1200
+            },
+            follow = True)
+        self.assertRedirects(
+            response,
+            reverse('image_detail', kwargs = {'id': 1}),
+            status_code = 302,
+            target_status_code = 200)
+
+        image = Image.objects.get(pk = 1)
+        acquisition = image.acquisition_set.all()[0].deepsky_acquisition
+        self.assertEqual(acquisition.date.strftime('%Y-%m-%d'), today)
+        self.assertEqual(acquisition.number, 10)
+        self.assertEqual(acquisition.duration, 1200)

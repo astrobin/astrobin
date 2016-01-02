@@ -786,7 +786,10 @@ def image_detail(request, id, r):
 
     preferred_language = image.user.userprofile.language
     if preferred_language:
-        preferred_language = LANGUAGES[preferred_language]
+        try:
+            preferred_language = LANGUAGES[preferred_language]
+        except KeyError:
+            preferred_language = _("English")
     else:
         preferred_language = _("English")
 
