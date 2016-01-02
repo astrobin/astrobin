@@ -1,10 +1,12 @@
 # Django settings for astrobin project.
+import sys
 import os
 from django.conf import global_settings
 from django.utils.translation import ugettext_lazy as _
 
 local_path = lambda path: os.path.join(os.path.dirname(__file__), path)
 
+TESTING = len(sys.argv) > 1 and sys.argv[1] == 'test'
 DEBUG = os.environ['ASTROBIN_DEBUG'] == "true"
 CACHE = not DEBUG
 TEMPLATE_DEBUG = DEBUG
@@ -659,3 +661,10 @@ PYBB_FORUM_PAGE_SIZE = 50
 
 PREMIUM_MAX_IMAGES_FREE = 10
 PREMIUM_MAX_IMAGES_LITE = 12
+
+if TESTING:
+    DEBUG = False
+    TEMPLATE_DEBUG = False
+    CACHE = False
+    AWS_S3_ENABLED = False
+    LOCAL_STATIC_STORAGE = True
