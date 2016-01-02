@@ -372,6 +372,7 @@ def index(request, template = 'index/root.html', extra_context = None):
         context_instance = RequestContext(request))
 
 
+# TESTED
 @require_GET
 def expore_choose(request):
     return render_to_response(
