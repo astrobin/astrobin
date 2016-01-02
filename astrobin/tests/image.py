@@ -241,3 +241,19 @@ class ImageTest(TestCase):
                 'alias': 'regular'
             }))
         self.assertEqual(response.status_code, 200)
+
+    def test_image_rawthumb(self):
+        self.client.login(username = 'test', password = 'password')
+        self._do_upload('astrobin/fixtures/test.jpg')
+        image = Image.objects.all().order_by('-id')[0]
+        response = self.client.get(
+            reverse('image_rawthumb', kwargs = {
+                'id': image.id,
+                'alias': 'regular'
+            }),
+            follow = True)
+        self.assertRedirects(
+            response,
+            image.thumbnail('regular'),
+            status_code = 302,
+            target_status_code = 200)

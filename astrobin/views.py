@@ -925,6 +925,7 @@ def image_thumb(request, id, r, alias):
         }))
 
 
+# TESTED
 @require_GET
 def image_rawthumb(request, id, r, alias):
     image = get_object_or_404(Image.all_objects, id = id)
