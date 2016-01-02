@@ -11,47 +11,41 @@ class ImageTest(TestCase):
     def tearDown(self):
         self.user.delete()
 
+    def _do_upload(self, filename):
+        return self.client.post(
+            reverse('image_upload_process'),
+            {'image_file': open(filename, 'rb')},
+            follow = True)
+
+    def _assert_message(self, response, tags, content):
+        storage = response.context[0]['messages']
+        for message in storage:
+            self.assertEqual(message.tags, tags)
+            self.assertTrue(content in message.message)
+
     def test_upload(self):
         self.client.login(username = 'test', password = 'password')
 
         # Test file with invalid extension
-        f = open('astrobin/fixtures/invalid_file', 'rb')
-        response = self.client.post(
-            reverse('image_upload_process'),
-            {'image_file': f},
-            follow = True)
+        response = self._do_upload('astrobin/fixtures/invalid_file')
         self.assertRedirects(
             response,
             reverse('image_upload'),
             status_code = 302,
             target_status_code = 200)
-        storage = response.context[0]['messages']
-        for message in storage:
-            self.assertEqual(message.tags, "error unread")
-            self.assertTrue("Invalid image" in message.message)
+        self._assert_message(response, "error unread", "Invalid image")
 
         # Test file with invalid content
-        f = open('astrobin/fixtures/invalid_file.jpg', 'rb')
-        response = self.client.post(
-            reverse('image_upload_process'),
-            {'image_file': f},
-            follow = True)
+        response = self._do_upload('astrobin/fixtures/invalid_file.jpg')
         self.assertRedirects(
             response,
             reverse('image_upload'),
             status_code = 302,
             target_status_code = 200)
-        storage = response.context[0]['messages']
-        for message in storage:
-            self.assertEqual(message.tags, "error unread")
-            self.assertTrue("Invalid image" in message.message)
+        self._assert_message(response, "error unread", "Invalid image")
 
         # Test successful upload
-        f = open('astrobin/fixtures/test.jpg', 'rb')
-        response = self.client.post(
-            reverse('image_upload_process'),
-            {'image_file': f},
-            follow = True)
+        response = self._do_upload('astrobin/fixtures/test.jpg')
         self.assertRedirects(
             response,
             reverse('image_edit_watermark', kwargs = {'id': 1}),
