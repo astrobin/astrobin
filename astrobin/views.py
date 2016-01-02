@@ -528,6 +528,7 @@ def iotd_choose(request, id):
             context_instance = RequestContext(request))
 
 
+# TESTED PARTIALLY
 @require_GET
 def image_detail(request, id, r):
     """ Show details of an image"""
