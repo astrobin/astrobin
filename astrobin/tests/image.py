@@ -3,6 +3,9 @@ from django.contrib.auth.models import User
 from django.core.urlresolvers import reverse
 from django.test import TestCase
 
+# AstroBin
+from astrobin.models import Image
+
 class ImageTest(TestCase):
     def setUp(self):
         self.user = User.objects.create_user(
@@ -52,3 +55,6 @@ class ImageTest(TestCase):
             status_code = 302,
             target_status_code = 200)
 
+        # Test image properties
+        image = Image.objects.get(pk = 1)
+        self.assertEqual(image.title, u"")
