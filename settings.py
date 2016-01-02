@@ -18,8 +18,15 @@ ADS_ENABLED = True
 DONATIONS_ENABLED = False
 PREMIUM_ENABLED = True
 
-AWS_S3_ENABLED = os.environ['ASTROBIN_AWS_S3_ENABLED'] == "true"
-LOCAL_STATIC_STORAGE = os.environ['ASTROBIN_LOCAL_STATIC_STORAGE'] == "true"
+if TESTING:
+    DEBUG = False
+    TEMPLATE_DEBUG = False
+    CACHE = False
+    AWS_S3_ENABLED = False
+    LOCAL_STATIC_STORAGE = True
+else:
+    AWS_S3_ENABLED = os.environ['ASTROBIN_AWS_S3_ENABLED'] == "true"
+    LOCAL_STATIC_STORAGE = os.environ['ASTROBIN_LOCAL_STATIC_STORAGE'] == "true"
 
 ADMINS = (
     ('Salvatore Iovene', 'salvatore@astrobin.com'),
@@ -661,10 +668,3 @@ PYBB_FORUM_PAGE_SIZE = 50
 
 PREMIUM_MAX_IMAGES_FREE = 10
 PREMIUM_MAX_IMAGES_LITE = 12
-
-if TESTING:
-    DEBUG = False
-    TEMPLATE_DEBUG = False
-    CACHE = False
-    AWS_S3_ENABLED = False
-    LOCAL_STATIC_STORAGE = True
