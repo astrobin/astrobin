@@ -380,6 +380,7 @@ def expore_choose(request):
         context_instance = RequestContext(request))
 
 
+# TESTED PARTIALLY
 @require_GET
 def wall(request):
     """The Big Wall"""
