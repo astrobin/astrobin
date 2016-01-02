@@ -25,12 +25,28 @@ class ImageTest(TestCase):
             reverse('image_upload'),
             status_code = 302,
             target_status_code = 200)
-        import pdb; pdb.set_trace()
-        message = self.user.get_messages()[0]
-        self.assertEqual(message.tags, "error")
-        self.assertTrue("Invalid image" in message.message)
+        storage = response.context[0]['messages']
+        for message in storage:
+            self.assertEqual(message.tags, "error unread")
+            self.assertTrue("Invalid image" in message.message)
 
-        # Test that the image goes thru.
+        # Test file with invalid content
+        f = open('astrobin/fixtures/invalid_file.jpg', 'rb')
+        response = self.client.post(
+            reverse('image_upload_process'),
+            {'image_file': f},
+            follow = True)
+        self.assertRedirects(
+            response,
+            reverse('image_upload'),
+            status_code = 302,
+            target_status_code = 200)
+        storage = response.context[0]['messages']
+        for message in storage:
+            self.assertEqual(message.tags, "error unread")
+            self.assertTrue("Invalid image" in message.message)
+
+        # Test successful upload
         f = open('astrobin/fixtures/test.jpg', 'rb')
         response = self.client.post(
             reverse('image_upload_process'),
