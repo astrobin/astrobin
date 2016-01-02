@@ -251,6 +251,7 @@ INSTALLED_APPS = (
     'dfp', # For Google DFP
     'django_user_agents',
     'pybb', # Forum
+    'django_nose', # Test coverage
 
     # AstroBin apps
     'astrobin',
@@ -483,8 +484,11 @@ REST_FRAMEWORK = {
     )
 }
 
-# http://docs.celeryproject.org/en/latest/django/unit-testing.html
-TEST_RUNNER = 'djcelery.contrib.test_runner.CeleryTestSuiteRunner'
+#TEST_RUNNER = 'django_nose.NoseTestSuiteRunner'
+NOSE_ARGS = [
+    '--with-coverage',
+    '--cover-package=astrobin',
+]
 
 RAWDATA_ROOT = os.environ['ASTROBIN_RAWDATA_ROOT']
 
