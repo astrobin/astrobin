@@ -64,7 +64,7 @@ class MigrateDonationsView(FormView):
                 amount += t.amount
 
             if amount > 0:
-                days_paid = int(float(amount)/float(self.premium_sub.price) * 365.25)
+                days_paid = int(float(amount)/float(premium_sub.price) * 365.25)
                 expiration = (first_payment + timedelta(days_paid)).date()
 
             if us is not None:
@@ -83,7 +83,7 @@ class MigrateDonationsView(FormView):
             "transactions": transactions,
             "amount_donated": amount,
             "first_payment": first_payment,
-            "price": self.premium_sub.price,
+            "price": premium_sub.price,
             "days_paid": days_paid,
             "expiration": expiration,
         }
@@ -106,7 +106,7 @@ class MigrateDonationsView(FormView):
 
         us, created = UserSubscription.objects.get_or_create(
             user = self.request.user,
-            subscription = self.premium_sub,
+            subscription = premium_sub,
             expires = migration_data["expiration"],
             cancelled = False)
         us.fix()
