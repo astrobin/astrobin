@@ -461,6 +461,7 @@ def iotd_archive(request):
     )
 
 
+# TESTED PARTIALLY
 @login_required
 def iotd_choose(request, id):
     if not request.user.groups.filter(name='IOTD_Staff'):
