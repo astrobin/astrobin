@@ -896,6 +896,7 @@ def image_detail(request, id, r):
         extra_context = response_dict)
 
 
+# TESTED PARTIALLY
 @login_required
 @require_POST
 def image_flag_thumbs(request, id):
