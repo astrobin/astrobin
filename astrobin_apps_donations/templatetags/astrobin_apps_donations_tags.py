@@ -7,6 +7,7 @@ from django.db.models import Q
 from django.template import Library, Node
 
 # Third party
+from annoying.functions import get_object_or_None
 from subscription.models import Subscription, UserSubscription
 
 
@@ -15,21 +16,22 @@ register = Library()
 
 @register.inclusion_tag('astrobin_apps_donations/inclusion_tags/donate_modal.html', takes_context = True)
 def donate_modal(context):
+    
     return {
         'base_url': settings.ASTROBIN_BASE_URL,
         'business': settings.SUBSCRIPTION_PAYPAL_SETTINGS['business'],
 
-        'monthly_coffee_sub': Subscription.objects.get(name = 'AstroBin Donor Coffee Monthly'),
-        'monthly_snack_sub': Subscription.objects.get(name = 'AstroBin Donor Snack Monthly'),
-        'monthly_pizza_sub': Subscription.objects.get(name = 'AstroBin Donor Pizza Monthly'),
-        'monthly_movie_sub': Subscription.objects.get(name = 'AstroBin Donor Movie Monthly'),
-        'monthly_dinner_sub': Subscription.objects.get(name = 'AstroBin Donor Dinner Monthly'),
+        'monthly_coffee_sub': get_object_or_None(Subscription, name = 'AstroBin Donor Coffee Monthly'),
+        'monthly_snack_sub': get_object_or_None(Subscription, name = 'AstroBin Donor Snack Monthly'),
+        'monthly_pizza_sub': get_object_or_None(Subscription, name = 'AstroBin Donor Pizza Monthly'),
+        'monthly_movie_sub': get_object_or_None(Subscription, name = 'AstroBin Donor Movie Monthly'),
+        'monthly_dinner_sub': get_object_or_None(Subscription, name = 'AstroBin Donor Dinner Monthly'),
 
-        'yearly_coffee_sub': Subscription.objects.get(name = 'AstroBin Donor Coffee Yearly'),
-        'yearly_snack_sub': Subscription.objects.get(name = 'AstroBin Donor Snack Yearly'),
-        'yearly_pizza_sub': Subscription.objects.get(name = 'AstroBin Donor Pizza Yearly'),
-        'yearly_movie_sub': Subscription.objects.get(name = 'AstroBin Donor Movie Yearly'),
-        'yearly_dinner_sub': Subscription.objects.get(name = 'AstroBin Donor Dinner Yearly'),
+        'yearly_coffee_sub': get_object_or_None(Subscription, name = 'AstroBin Donor Coffee Yearly'),
+        'yearly_snack_sub': get_object_or_None(Subscription, name = 'AstroBin Donor Snack Yearly'),
+        'yearly_pizza_sub': get_object_or_None(Subscription, name = 'AstroBin Donor Pizza Yearly'),
+        'yearly_movie_sub': get_object_or_None(Subscription, name = 'AstroBin Donor Movie Yearly'),
+        'yearly_dinner_sub': get_object_or_None(Subscription, name = 'AstroBin Donor Dinner Yearly'),
 
         'request': context['request'],
     }
@@ -41,17 +43,17 @@ def remove_ads_modal(context):
         'base_url': settings.ASTROBIN_BASE_URL,
         'business': settings.SUBSCRIPTION_PAYPAL_SETTINGS['business'],
 
-        'monthly_coffee_sub': Subscription.objects.get(name = 'AstroBin Donor Coffee Monthly'),
-        'monthly_snack_sub': Subscription.objects.get(name = 'AstroBin Donor Snack Monthly'),
-        'monthly_pizza_sub': Subscription.objects.get(name = 'AstroBin Donor Pizza Monthly'),
-        'monthly_movie_sub': Subscription.objects.get(name = 'AstroBin Donor Movie Monthly'),
-        'monthly_dinner_sub': Subscription.objects.get(name = 'AstroBin Donor Dinner Monthly'),
+        'monthly_coffee_sub': get_object_or_None(Subscription, name = 'AstroBin Donor Coffee Monthly'),
+        'monthly_snack_sub': get_object_or_None(Subscription, name = 'AstroBin Donor Snack Monthly'),
+        'monthly_pizza_sub': get_object_or_None(Subscription, name = 'AstroBin Donor Pizza Monthly'),
+        'monthly_movie_sub': get_object_or_None(Subscription, name = 'AstroBin Donor Movie Monthly'),
+        'monthly_dinner_sub': get_object_or_None(Subscription, name = 'AstroBin Donor Dinner Monthly'),
 
-        'yearly_coffee_sub': Subscription.objects.get(name = 'AstroBin Donor Coffee Yearly'),
-        'yearly_snack_sub': Subscription.objects.get(name = 'AstroBin Donor Snack Yearly'),
-        'yearly_pizza_sub': Subscription.objects.get(name = 'AstroBin Donor Pizza Yearly'),
-        'yearly_movie_sub': Subscription.objects.get(name = 'AstroBin Donor Movie Yearly'),
-        'yearly_dinner_sub': Subscription.objects.get(name = 'AstroBin Donor Dinner Yearly'),
+        'yearly_coffee_sub': get_object_or_None(Subscription, name = 'AstroBin Donor Coffee Yearly'),
+        'yearly_snack_sub': get_object_or_None(Subscription, name = 'AstroBin Donor Snack Yearly'),
+        'yearly_pizza_sub': get_object_or_None(Subscription, name = 'AstroBin Donor Pizza Yearly'),
+        'yearly_movie_sub': get_object_or_None(Subscription, name = 'AstroBin Donor Movie Yearly'),
+        'yearly_dinner_sub': get_object_or_None(Subscription, name = 'AstroBin Donor Dinner Yearly'),
 
         'request': context['request'],
     }
