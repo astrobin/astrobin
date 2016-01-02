@@ -230,3 +230,14 @@ class ImageTest(TestCase):
             reverse('image_detail', kwargs = {'id': image.id}),
             status_code = 302,
             target_status_code = 200)
+
+    def test_image_thumb(self):
+        self.client.login(username = 'test', password = 'password')
+        self._do_upload('astrobin/fixtures/test.jpg')
+        image = Image.objects.all().order_by('-id')[0]
+        response = self.client.get(
+            reverse('image_thumb', kwargs = {
+                'id': image.id,
+                'alias': 'regular'
+            }))
+        self.assertEqual(response.status_code, 200)
