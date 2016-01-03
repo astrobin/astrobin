@@ -33,6 +33,10 @@ class ImageTest(TestCase):
             {'image_file': open(filename, 'rb')},
             follow = True)
 
+    def _get_last_image(self):
+        return Image.objects.all().order_by('-id')[0]
+
+
     def _assert_message(self, response, tags, content):
         storage = response.context[0]['messages']
         for message in storage:
@@ -215,14 +219,14 @@ class ImageTest(TestCase):
     def test_detail(self):
         self.client.login(username = 'test', password = 'password')
         self._do_upload('astrobin/fixtures/test.jpg')
-        image = Image.objects.all().order_by('-id')[0]
+        image = self._get_last_image()
         response = self.client.get(reverse('image_detail', kwargs = {'id': image.id}))
         self.assertEqual(response.status_code, 200)
 
     def test_flag_thumbs(self):
         self.client.login(username = 'test', password = 'password')
         self._do_upload('astrobin/fixtures/test.jpg')
-        image = Image.objects.all().order_by('-id')[0]
+        image = self._get_last_image()
         response = self.client.post(
             reverse('image_flag_thumbs', kwargs = {'id': image.id}))
         self.assertRedirects(
@@ -234,7 +238,7 @@ class ImageTest(TestCase):
     def test_image_thumb(self):
         self.client.login(username = 'test', password = 'password')
         self._do_upload('astrobin/fixtures/test.jpg')
-        image = Image.objects.all().order_by('-id')[0]
+        image = self._get_last_image()
         response = self.client.get(
             reverse('image_thumb', kwargs = {
                 'id': image.id,
@@ -245,7 +249,7 @@ class ImageTest(TestCase):
     def test_image_rawthumb(self):
         self.client.login(username = 'test', password = 'password')
         self._do_upload('astrobin/fixtures/test.jpg')
-        image = Image.objects.all().order_by('-id')[0]
+        image = self._get_last_image()
         response = self.client.get(
             reverse('image_rawthumb', kwargs = {
                 'id': image.id,
@@ -261,6 +265,6 @@ class ImageTest(TestCase):
     def test_full(self):
         self.client.login(username = 'test', password = 'password')
         self._do_upload('astrobin/fixtures/test.jpg')
-        image = Image.objects.all().order_by('-id')[0]
+        image = self._get_last_image()
         response = self.client.get(reverse('image_full', kwargs = {'id': image.id}))
         self.assertEqual(response.status_code, 200)
