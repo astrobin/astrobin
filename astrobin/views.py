@@ -936,6 +936,7 @@ def image_rawthumb(request, id, r, alias):
     return HttpResponseRedirect(url)
 
 
+# TESTED PARTIALLY
 @require_GET
 def image_full(request, id, r):
     image = get_object_or_404(Image.all_objects, pk=id)
