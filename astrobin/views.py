@@ -1271,6 +1271,7 @@ def image_edit_make_final(request, id):
     return HttpResponseRedirect('/%i/' % image.id)
 
 
+# TESTED
 @login_required
 @require_GET
 def image_edit_revision_make_final(request, id):

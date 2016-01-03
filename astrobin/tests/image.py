@@ -329,3 +329,41 @@ class ImageTest(TestCase):
         image = self._get_last_image()
         self.assertEqual(image.is_final, True)
         self.assertEqual(image.revisions.all()[0].is_final, False)
+
+    def test_image_edit_revision_make_final(self):
+        self.client.login(username = 'test', password = 'password')
+
+        self._do_upload('astrobin/fixtures/test.jpg')
+        image = self._get_last_image()
+
+        # Upload revision B
+        self._do_upload_revision(image, 'astrobin/fixtures/test.jpg')
+
+        # Upload revision C
+        self._do_upload_revision(image, 'astrobin/fixtures/test.jpg')
+
+        # Check that C is final
+        image = self._get_last_image()
+        c = image.revisions.order_by('-label')[0]
+        b = image.revisions.order_by('-label')[1]
+        self.assertEqual(image.is_final, False)
+        self.assertEqual(c.is_final, True)
+        self.assertEqual(b.is_final, False)
+
+        # Make B final
+        response = self.client.get(
+            reverse('image_edit_revision_make_final', kwargs = {'id': b.id}),
+            follow = True)
+        self.assertRedirects(
+            response,
+            reverse('image_detail', kwargs = {'id': 1, 'r': b.label}),
+            status_code = 302,
+            target_status_code = 200)
+
+        # Check that B is now final
+        image = self._get_last_image()
+        c = image.revisions.order_by('-label')[0]
+        b = image.revisions.order_by('-label')[1]
+        self.assertEqual(image.is_final, False)
+        self.assertEqual(c.is_final, False)
+        self.assertEqual(b.is_final, True)
