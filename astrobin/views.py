@@ -1044,6 +1044,7 @@ def image_upload(request):
         context_instance=RequestContext(request))
 
 
+# TESTED PARTIALLY
 @login_required
 @require_POST
 def image_upload_process(request):
