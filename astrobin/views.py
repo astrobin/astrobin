@@ -1253,6 +1253,7 @@ def image_edit_acquisition_reset(request, id):
                               context_instance=RequestContext(request))
 
 
+# TESTED
 @login_required
 @require_GET
 def image_edit_make_final(request, id):

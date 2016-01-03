@@ -308,3 +308,24 @@ class ImageTest(TestCase):
         self._assert_message(response, "success unread", "Image uploaded")
         image = self._get_last_image()
         self.assertEqual(image.revisions.count(), 1)
+
+    def test_image_edit_make_final(self):
+        self.client.login(username = 'test', password = 'password')
+
+        self._do_upload('astrobin/fixtures/test.jpg')
+        image = self._get_last_image()
+
+        self._do_upload_revision(image, 'astrobin/fixtures/test.jpg')
+        image = self._get_last_image()
+
+        response = self.client.get(
+            reverse('image_edit_make_final', kwargs = {'id': image.id}),
+            follow = True)
+        self.assertRedirects(
+            response,
+            reverse('image_detail', kwargs = {'id': 1}),
+            status_code = 302,
+            target_status_code = 200)
+        image = self._get_last_image()
+        self.assertEqual(image.is_final, True)
+        self.assertEqual(image.revisions.all()[0].is_final, False)
