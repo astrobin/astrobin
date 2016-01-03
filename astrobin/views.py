@@ -372,7 +372,6 @@ def index(request, template = 'index/root.html', extra_context = None):
         context_instance = RequestContext(request))
 
 
-# TESTED
 @require_GET
 def expore_choose(request):
     return render_to_response(
@@ -380,7 +379,6 @@ def expore_choose(request):
         context_instance = RequestContext(request))
 
 
-# TESTED PARTIALLY
 @require_GET
 def wall(request):
     """The Big Wall"""
@@ -445,7 +443,6 @@ def wall(request):
         extra_context = response_dict)
 
 
-# TESTED PARTIALLY
 @require_GET
 def iotd_archive(request):
     """Archive of 'Images of the day'"""
@@ -461,7 +458,6 @@ def iotd_archive(request):
     )
 
 
-# TESTED PARTIALLY
 @login_required
 def iotd_choose(request, id):
     if not request.user.groups.filter(name='IOTD_Staff'):
@@ -528,7 +524,6 @@ def iotd_choose(request, id):
             context_instance = RequestContext(request))
 
 
-# TESTED PARTIALLY
 @require_GET
 def image_detail(request, id, r):
     """ Show details of an image"""
@@ -896,7 +891,6 @@ def image_detail(request, id, r):
         extra_context = response_dict)
 
 
-# TESTED PARTIALLY
 @login_required
 @require_POST
 def image_flag_thumbs(request, id):
@@ -908,7 +902,6 @@ def image_flag_thumbs(request, id):
     return HttpResponseRedirect(reverse("image_detail", kwargs= {'id': id}))
 
 
-# TESTED
 @require_GET
 def image_thumb(request, id, r, alias):
     image = get_object_or_404(Image.all_objects, id = id)
@@ -925,7 +918,6 @@ def image_thumb(request, id, r, alias):
         }))
 
 
-# TESTED
 @require_GET
 def image_rawthumb(request, id, r, alias):
     image = get_object_or_404(Image.all_objects, id = id)
@@ -936,7 +928,6 @@ def image_rawthumb(request, id, r, alias):
     return HttpResponseRedirect(url)
 
 
-# TESTED PARTIALLY
 @require_GET
 def image_full(request, id, r):
     image = get_object_or_404(Image.all_objects, pk=id)
@@ -1044,7 +1035,6 @@ def image_upload(request):
         context_instance=RequestContext(request))
 
 
-# TESTED PARTIALLY
 @login_required
 @require_POST
 def image_upload_process(request):
@@ -1253,7 +1243,6 @@ def image_edit_acquisition_reset(request, id):
                               context_instance=RequestContext(request))
 
 
-# TESTED
 @login_required
 @require_GET
 def image_edit_make_final(request, id):
@@ -1271,7 +1260,6 @@ def image_edit_make_final(request, id):
     return HttpResponseRedirect('/%i/' % image.id)
 
 
-# TESTED
 @login_required
 @require_GET
 def image_edit_revision_make_final(request, id):
@@ -2771,7 +2759,6 @@ def bring_to_attention_complete(request, id):
         context_instance = RequestContext(request))
 
 
-# TESTED PARTIALLY
 @login_required
 @require_POST
 def image_revision_upload_process(request):
