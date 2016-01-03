@@ -2768,6 +2768,7 @@ def bring_to_attention_complete(request, id):
         context_instance = RequestContext(request))
 
 
+# TESTED PARTIALLY
 @login_required
 @require_POST
 def image_revision_upload_process(request):

@@ -33,6 +33,12 @@ class ImageTest(TestCase):
             {'image_file': open(filename, 'rb')},
             follow = True)
 
+    def _do_upload_revision(self, image, filename):
+        return self.client.post(
+            reverse('image_revision_upload_process'),
+            {'image_id': image.id, 'image_file': open(filename, 'rb')},
+            follow = True)
+
     def _get_last_image(self):
         return Image.objects.all().order_by('-id')[0]
 
@@ -268,3 +274,37 @@ class ImageTest(TestCase):
         image = self._get_last_image()
         response = self.client.get(reverse('image_full', kwargs = {'id': image.id}))
         self.assertEqual(response.status_code, 200)
+
+    def test_upload_revision(self):
+        self.client.login(username = 'test', password = 'password')
+        self._do_upload('astrobin/fixtures/test.jpg')
+        image = self._get_last_image()
+
+        # Test file with invalid extension
+        response = self._do_upload_revision(image, 'astrobin/fixtures/invalid_file')
+        self.assertRedirects(
+            response,
+            reverse('image_detail', kwargs = {'id': image.id}),
+            status_code = 302,
+            target_status_code = 200)
+        self._assert_message(response, "error unread", "Invalid image")
+
+        # Test file with invalid content
+        response = self._do_upload_revision(image, 'astrobin/fixtures/invalid_file.jpg')
+        self.assertRedirects(
+            response,
+            reverse('image_detail', kwargs = {'id': image.id}),
+            status_code = 302,
+            target_status_code = 200)
+        self._assert_message(response, "error unread", "Invalid image")
+
+        # Test successful upload
+        response = self._do_upload_revision(image, 'astrobin/fixtures/test.jpg')
+        self.assertRedirects(
+            response,
+            reverse('image_detail', kwargs = {'id': image.id, 'r': 'B'}),
+            status_code = 302,
+            target_status_code = 200)
+        self._assert_message(response, "success unread", "Image uploaded")
+        image = self._get_last_image()
+        self.assertEqual(image.revisions.count(), 1)
