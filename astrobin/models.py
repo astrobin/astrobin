@@ -255,7 +255,6 @@ class Gear(models.Model):
         unused, slave_gear_type = get_correct_gear(slave.id)
 
         if master_gear_type != slave_gear_type:
-            print "\t\tCannot merge gear items of different types."
             return
 
         # Find matching slaves in images
@@ -267,7 +266,6 @@ class Gear(models.Model):
                     try:
                         getattr(image, name).add(klass.objects.get(pk = self.pk))
                         getattr(image, name).remove(s[0])
-                        print "\t\tFixed image %d: " % image.id
                     except klass.DoesNotExist:
                         continue
 
@@ -281,7 +279,6 @@ class Gear(models.Model):
                     try:
                         getattr(owner, name).add(klass.objects.get(pk = self.pk))
                         getattr(owner, name).remove(s[0])
-                        print "\t\tFixed user %s: %d -> %d" % (owner, s[0].pk, self.pk)
                     except klass.DoesNotExist:
                         continue
 
