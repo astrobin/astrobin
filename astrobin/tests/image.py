@@ -27,6 +27,11 @@ class ImageTest(TestCase):
     def tearDown(self):
         self.user.delete()
 
+
+    ###########################################################################
+    # HELPERS                                                                 #
+    ###########################################################################
+
     def _do_upload(self, filename):
         return self.client.post(
             reverse('image_upload_process'),
@@ -49,7 +54,12 @@ class ImageTest(TestCase):
             self.assertEqual(message.tags, tags)
             self.assertTrue(content in message.message)
 
-    def test_upload(self):
+
+    ###########################################################################
+    # View tests                                                              #
+    ###########################################################################
+
+    def test_image_upload_process_view(self):
         self.client.login(username = 'test', password = 'password')
 
         # Test file with invalid extension
@@ -222,14 +232,14 @@ class ImageTest(TestCase):
 
         image.delete()
 
-    def test_detail(self):
+    def test_image_detail_view(self):
         self.client.login(username = 'test', password = 'password')
         self._do_upload('astrobin/fixtures/test.jpg')
         image = self._get_last_image()
         response = self.client.get(reverse('image_detail', kwargs = {'id': image.id}))
         self.assertEqual(response.status_code, 200)
 
-    def test_flag_thumbs(self):
+    def test_image_flag_thumbs_view(self):
         self.client.login(username = 'test', password = 'password')
         self._do_upload('astrobin/fixtures/test.jpg')
         image = self._get_last_image()
@@ -241,7 +251,7 @@ class ImageTest(TestCase):
             status_code = 302,
             target_status_code = 200)
 
-    def test_image_thumb(self):
+    def test_image_thumb_view(self):
         self.client.login(username = 'test', password = 'password')
         self._do_upload('astrobin/fixtures/test.jpg')
         image = self._get_last_image()
@@ -252,7 +262,7 @@ class ImageTest(TestCase):
             }))
         self.assertEqual(response.status_code, 200)
 
-    def test_image_rawthumb(self):
+    def test_image_rawthumb_view(self):
         self.client.login(username = 'test', password = 'password')
         self._do_upload('astrobin/fixtures/test.jpg')
         image = self._get_last_image()
@@ -268,14 +278,14 @@ class ImageTest(TestCase):
             status_code = 302,
             target_status_code = 200)
 
-    def test_full(self):
+    def test_image_full_view(self):
         self.client.login(username = 'test', password = 'password')
         self._do_upload('astrobin/fixtures/test.jpg')
         image = self._get_last_image()
         response = self.client.get(reverse('image_full', kwargs = {'id': image.id}))
         self.assertEqual(response.status_code, 200)
 
-    def test_upload_revision(self):
+    def test_image_upload_revision_process_view(self):
         self.client.login(username = 'test', password = 'password')
         self._do_upload('astrobin/fixtures/test.jpg')
         image = self._get_last_image()
@@ -309,7 +319,7 @@ class ImageTest(TestCase):
         image = self._get_last_image()
         self.assertEqual(image.revisions.count(), 1)
 
-    def test_image_edit_make_final(self):
+    def test_image_edit_make_final_view(self):
         self.client.login(username = 'test', password = 'password')
 
         self._do_upload('astrobin/fixtures/test.jpg')
@@ -330,7 +340,7 @@ class ImageTest(TestCase):
         self.assertEqual(image.is_final, True)
         self.assertEqual(image.revisions.all()[0].is_final, False)
 
-    def test_image_edit_revision_make_final(self):
+    def test_image_edit_revision_make_final_view(self):
         self.client.login(username = 'test', password = 'password')
 
         self._do_upload('astrobin/fixtures/test.jpg')

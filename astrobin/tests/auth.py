@@ -10,7 +10,7 @@ class LoginTest(TestCase):
     def tearDown(self):
         self.user.delete()
 
-    def test_login(self):
+    def test_login_view(self):
         response = self.client.post(
             '/accounts/login/',
             {
