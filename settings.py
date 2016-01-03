@@ -260,7 +260,6 @@ INSTALLED_APPS = (
     'dfp', # For Google DFP
     'django_user_agents',
     'pybb', # Forum
-    'django_nose', # Test coverage
 
     # AstroBin apps
     'astrobin',
@@ -492,12 +491,6 @@ REST_FRAMEWORK = {
         'rest_framework.authentication.SessionAuthentication', # Useful for unit tests
     )
 }
-
-#TEST_RUNNER = 'django_nose.NoseTestSuiteRunner'
-NOSE_ARGS = [
-    '--with-coverage',
-    '--cover-package=astrobin',
-]
 
 RAWDATA_ROOT = os.environ['ASTROBIN_RAWDATA_ROOT']
 
