@@ -381,13 +381,12 @@ class PublicDataPoolTest(TestCase):
         response = self.client.post(
             reverse('rawdata.publicdatapool_add_image', args = (pool.id,)),
             post_data,
-            HTTP_X_REQUESTED_WITH = 'XMLHttpRequest',
-            follow = True)
-        self.assertRedirects(
-            response,
-            reverse('rawdata.restricted') + '?' + urlencode({'next': '/rawdata/publicdatapools/%d/add-image/' % pool.id}),
-            status_code = 302, target_status_code = 200)
+            HTTP_X_REQUESTED_WITH = 'XMLHttpRequest')
+        self.assertEqual(response.status_code, 200)
         self.client.logout()
+
+        pool = PublicDataPool.objects.get(id = pool.id)
+        self.assertEqual(pool.processed_images.all().count(), 1)
 
     def test_add_image_sub(self):
         pool = PublicDataPool(
