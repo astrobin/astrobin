@@ -8,7 +8,7 @@ msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2015-12-28 19:26+0000\n"
-"PO-Revision-Date: 2013-11-01 09:00+0100\n"
+"PO-Revision-Date: 2016-01-01 11:38+0000\n"
 "Last-Translator: Niels <astrobin.com@n13l5.de>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
 "Language: de\n"
@@ -16,12 +16,12 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=(n != 1);\n"
-"X-Generator: Pootle 2.1.6\n"
+"X-Generator: Pootle 2.5.0\n"
+"X-POOTLE-MTIME: 1451648333.468895\n"
 
 #: templates/astrobin_apps_platesolving/inclusion_tags/platesolving_machinery.html:10
-#, fuzzy
 msgid "Getting plate-solving status, please wait..."
-msgstr "Status der Astrometrierung abrufen, bitte wareten..."
+msgstr "Status der Astrometrierung abrufen, bitte warten..."
 
 #: templates/astrobin_apps_platesolving/inclusion_tags/platesolving_machinery.html:28
 msgid "Plate-solving process starting, please do not leave this page..."
@@ -41,7 +41,6 @@ msgid "This image could not be plate-solved."
 msgstr "Dieses Bild kann nicht astrometriert werden,"
 
 #: templates/astrobin_apps_platesolving/inclusion_tags/platesolving_machinery.html:32
-#, fuzzy
 msgid ""
 "This image has been successfully plate-solved. Please refresh the page to "
 "see the new data."

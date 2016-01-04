@@ -8,17 +8,17 @@ msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2015-12-28 19:21+0000\n"
-"PO-Revision-Date: 2015-12-11 09:05+0000\n"
-"Last-Translator: csve <csve00@gmail.com>\n"
+"PO-Revision-Date: 2015-12-31 22:12+0000\n"
+"Last-Translator: Salvatore <salvatore@iovene.com>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
 "Language: ru\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"Plural-Forms: nplurals=3; plural=(n%10==1 && n%100!=11 ? 0 : n%10>=2 && n"
-"%10<=4 && (n%100<10 || n%100>=20) ? 1 : 2);\n"
+"Plural-Forms: nplurals=3; plural=(n%10==1 && n%100!=11 ? 0 : n%10>=2 && n%"
+"10<=4 && (n%100<10 || n%100>=20) ? 1 : 2);\n"
 "X-Generator: Pootle 2.5.0\n"
-"X-POOTLE-MTIME: 1449824725.903148\n"
+"X-POOTLE-MTIME: 1451599973.954424\n"
 
 #: fields.py:10
 msgid "United Kingdom"
@@ -2661,6 +2661,8 @@ msgstr ""
 #: views.py:1053
 msgid "You have reached your image uploads limit. Please upgrade!"
 msgstr ""
+"Вы достигли вашего лимита на загрузку изображений. Пожалуйста, улучшите "
+"статус!"
 
 #: views.py:1057 views.py:2781 templates/user/profile/flickr_import.html:10
 msgid ""
@@ -3087,17 +3089,19 @@ msgid ""
 "social activities. For unlimited storage, you will need a premium "
 "subscription."
 msgstr ""
+"Нет. Бесплатный аккаунт позволит загружать до 10 изображений, и принимать "
+"участие во всех соц-активностях.  Для безлимитного хранения вам понадобится "
+"подписка на Премиум."
 
 #: templates/faq.html:36
-#, fuzzy
 msgid ""
 "<strong>NO!</strong> If you are a premium member, on AstroBin you can upload "
 "as many images as you want, and as large as you want. In fact, full size "
 "images are encouraged!"
 msgstr ""
-"<strong>НЕТ!</strong> Вы можете закачивать на AstroBin столько изображений, "
-"сколько пожелаете, и какого угодно размера. Более того, изображения больших "
-"размеров рекомендуются!"
+"<strong>НЕТ!</strong> Если вы премиум участник, вы можете закачивать на "
+"AstroBin столько изображений, сколько пожелаете, и какого угодно размера. "
+"Более того, изображения больших размеров рекомендуются!"
 
 #: templates/faq.html:43
 msgid "AstroBin will accept JPEG, PNG and GIF. Animated GIF is supported too."
@@ -3331,7 +3335,6 @@ msgstr ""
 "некоторым другим пользовательским данным."
 
 #: templates/faq.html:140
-#, fuzzy
 msgid ""
 "Every night, an algorithm looks at the images uploaded during the previous 7 "
 "days. The 20 most liked images in that time window are presented each "
@@ -3339,8 +3342,8 @@ msgid ""
 "preference."
 msgstr ""
 "Каждую ночь, алгоритм просматривает изображения закачанные в течение "
-"предыдущих 7 дней. Изображения получившие наибольшее количество лайков в "
-"этот период попадают в Изображение Дня."
+"предыдущих 7 дней. 20 изображений, за это время получивших наибольшее "
+"количество лайков, попадают в Изображение Дня."
 
 #: templates/faq.html:146
 msgid ""
@@ -4171,18 +4174,16 @@ msgstr ""
 "их понимание на вас."
 
 #: templates/upload.html:12
-#, fuzzy
 msgid "Image upload"
-msgstr "Режим изображения"
+msgstr "Загрузка изображения"
 
 #: templates/upload.html:23
-#, fuzzy
 msgid ""
 "Your Lite or Premium subscription is not active, or it has expired. If you "
 "have just subscribed, please wait for a few minutes. Thanks for your "
 "patience!"
 msgstr ""
-"Ваша подписка на RAW-пространство неактивна или истекла. Если вы только "
+"Ваша Облегчённая или Премиум подписка неактивна или истекла. Если вы только "
 "подписались, подождите несколько минут. Спасибо за ваше терпение!"
 
 #: templates/upload.html:39
@@ -4191,10 +4192,12 @@ msgid ""
 "You have used <strong>%(premium_counter)s</strong> images of your allowed "
 "<strong>%(max_allowed)s</strong>."
 msgstr ""
+"Вы использовали <strong>%(premium_counter)s</strong> изобр. из допустимых "
+"<strong>%(max_allowed)s</strong>."
 
 #: templates/upload.html:41 templates/upload.html.py:49
 msgid "Would you like to upgrade?"
-msgstr ""
+msgstr "Желаете улучшить?"
 
 #: templates/upload.html:46
 #, python-format
@@ -4202,18 +4205,21 @@ msgid ""
 "You have used <strong>%(premium_counter)s</strong> images of your allowed "
 "<strong>%(max_allowed)s</strong> for the current year."
 msgstr ""
+"В использовали <strong>%(premium_counter)s</strong> изобр. из допустимых "
+"<strong>%(max_allowed)s</strong> в текущем году."
 
 #: templates/upload.html:47
 #: templates/subscription/subscription_detail.html:212
 #: templates/subscription/subscription_done.html:16
 #: templates/subscription/subscription_list.html:76
-#, fuzzy
 msgid "Thank you for supporting AstroBin!"
-msgstr "Следующие организации поддерживают AstroBin."
+msgstr "Спасибо за поддержку AstroBin!"
 
 #: templates/upload.html:54
 msgid "Thank you for being a premium member! Enjoy your unlimited uploads."
 msgstr ""
+"Мы благодарны за ваше желание быть Премиум участником! Наслаждайтесь "
+"безлимитными закачками."
 
 #: templates/upload.html:66
 msgid "Upload as a work in progress"
@@ -4253,17 +4259,14 @@ msgstr ""
 
 # Строка из меню пользователя, там все пункты с большой буквы
 #: templates/upload.html:104
-#, fuzzy
 msgid "Raw data upload"
-msgstr "Библиотека RAW данных"
+msgstr "Загрузка RAW Данных"
 
 #: templates/upload.html:113
 msgid ""
 "You have no more space left on your Raw Data account. Please delete some "
 "files to make room, or upgrade your account."
-msgstr ""
-"У вас больше нет места в вашем аккаунте RAW пространства. Пожалуйста, "
-"удалите лишние файлы для очистки места или обновите свой аккаунт."
+msgstr "Загрузка RAW Данных"
 
 #: templates/upload.html:123
 msgid "Use the button below to choose files"
@@ -4467,9 +4470,8 @@ msgstr "Пожалуйста выберите ваш язык из списка 
 
 #: templates/base/user_links_entries.html:139
 #: templates/subscription/subscription_list.html:5
-#, fuzzy
 msgid "Subscription plans"
-msgstr "Отслеживаемые темы"
+msgstr "Планы подписки"
 
 #: templates/base/user_links_entries.html:179
 msgid "Raw data"
@@ -5614,14 +5616,13 @@ msgid "Unlimited uploads, unlimited size."
 msgstr "Неограниченные закачки, неограниченный размер."
 
 #: templates/index/root.html:36
-#, fuzzy
 msgid ""
 "Astrophotography images have scientific value that shouldn't be lost in file "
 "compression. On AstroBin you can (and should!) upload full size images."
 msgstr ""
 "Астрофотографии имеют научную ценность, которая не должна теряться при "
-"сжатии файла. На AstroBin вы можете (и должны!) закачивать полноразмерные "
-"изображения. И вам даётся неограниченное место бесплатно."
+"сжатии файла. На AstroBin вы можете (и должны!) закачивать полно-размерные "
+"изображения. "
 
 #: templates/index/root.html:43
 msgid "Have your data neatly plotted."
@@ -6831,144 +6832,137 @@ msgstr "Выбор лицензий"
 
 #: templates/subscription/subscription_cancel.html:4
 msgid "Subscription process canceled"
-msgstr ""
+msgstr "Процесс подписки отменён"
 
 #: templates/subscription/subscription_cancel.html:8
 msgid "Subscription process cancelled"
-msgstr ""
+msgstr "Процесс подписки отменён"
 
 #: templates/subscription/subscription_cancel.html:12
 msgid ""
 "Your transaction with PayPal has been cancelled, so no change in your "
 "subscription has occurred."
 msgstr ""
+"Ваша транзакция через PayPal была отменена, так что никаких изменений в "
+"подписке не произошло."
 
 # Предлагаю RAW-данные. Самый точный перевод и имя продукта вроде тоже подходящее. Смысл не теряется.
 #: templates/subscription/subscription_cancel.html:16
 #: templates/subscription/subscription_change_done.html:16
-#, fuzzy, python-format
+#, python-format
 msgid "Return to the <a href=\"%(plans_url)s\">plans page</a>."
-msgstr "Перейти к <a href=\"%(plans_url)s\">странице планов</a> RAW-данных."
+msgstr "Вернуться к <a href=\"%(plans_url)s\">странице планов</a>."
 
 #: templates/subscription/subscription_category_list.html:7
-#, fuzzy
 msgctxt "Subscription plan name"
 msgid "Plan"
-msgstr "Планеты"
+msgstr "План"
 
 #: templates/subscription/subscription_category_list.html:9
 msgid "Trial period"
-msgstr ""
+msgstr "Пробный период"
 
 #: templates/subscription/subscription_category_list.html:11
-#, fuzzy
 msgid "Action"
-msgstr "Действия"
+msgstr "Действие"
 
 #: templates/subscription/subscription_category_list.html:24
 #: templates/subscription/subscription_detail.html:17
-#, fuzzy
 msgid "day"
-msgstr "дней"
+msgstr "день"
 
 #: templates/subscription/subscription_category_list.html:28
 #: templates/subscription/subscription_detail.html:21
 msgid "week"
-msgstr ""
+msgstr "неделя"
 
 #: templates/subscription/subscription_category_list.html:32
 #: templates/subscription/subscription_detail.html:25
 msgid "month"
-msgstr ""
+msgstr "месяц"
 
 #: templates/subscription/subscription_category_list.html:36
 #: templates/subscription/subscription_detail.html:29
 msgid "year"
-msgstr ""
+msgstr "год"
 
 #: templates/subscription/subscription_category_list.html:39
 #: templates/subscription/subscription_detail.html:32
 msgctxt "At no cost"
 msgid "Free"
-msgstr ""
+msgstr "Бесплатный"
 
 #: templates/subscription/subscription_category_list.html:51
 msgid "weeks"
-msgstr ""
+msgstr "недель"
 
 #: templates/subscription/subscription_category_list.html:55
 msgid "months"
-msgstr ""
+msgstr "месяцев"
 
 #: templates/subscription/subscription_category_list.html:59
 msgid "years"
-msgstr ""
+msgstr "лет"
 
 #: templates/subscription/subscription_category_list.html:62
 msgid "No trial"
-msgstr ""
+msgstr "Не пробный"
 
 #: templates/subscription/subscription_category_list.html:67
 #, python-format
 msgid "%(max_allowed)s images per year "
-msgstr ""
+msgstr "%(max_allowed)s изображений в год"
 
 #: templates/subscription/subscription_category_list.html:71
-#, fuzzy
 msgid "Unlimited images"
-msgstr "Соединенные Штаты Америки"
+msgstr "Неограниченные изображения"
 
 #: templates/subscription/subscription_category_list.html:79
 msgid "n/a"
-msgstr ""
+msgstr "н/д"
 
 #: templates/subscription/subscription_category_list.html:89
 msgid "Switch to"
-msgstr ""
+msgstr "Переключиться на"
 
 #: templates/subscription/subscription_change_done.html:4
 #: templates/subscription/subscription_change_done.html:8
 msgid "Subscription changed"
-msgstr ""
+msgstr "Подписка изменена"
 
 #: templates/subscription/subscription_change_done.html:12
 msgid ""
 "Your request for a change in your subscription has been processed "
 "successfully."
-msgstr ""
+msgstr "Ваш запрос на изменение подписки был успешно совершён."
 
 #: templates/subscription/subscription_detail.html:6
-#, fuzzy
 msgid "Subscription plan"
-msgstr "Описание"
+msgstr "План подписки"
 
 #: templates/subscription/subscription_detail.html:41
-#, fuzzy
 msgid "Subscribed"
-msgstr "Подписаться"
+msgstr "Подписано"
 
 #: templates/subscription/subscription_detail.html:43
 msgid "Expires"
-msgstr ""
+msgstr "Истекает"
 
 #: templates/subscription/subscription_detail.html:48
-#, fuzzy
 msgid "Cancelled"
-msgstr "Отмена"
+msgstr "Отменено"
 
 #: templates/subscription/subscription_detail.html:54
-#, fuzzy
 msgid "Inactive"
-msgstr "Активно"
+msgstr "Неактивно"
 
 #: templates/subscription/subscription_detail.html:60
-#, fuzzy
 msgid "Unsubscribed"
-msgstr "Отписаться"
+msgstr "Отменена подписка"
 
 #: templates/subscription/subscription_detail.html:66
 msgid "Unavailable"
-msgstr ""
+msgstr "Недоступно"
 
 #: templates/subscription/subscription_detail.html:74
 #, python-format
@@ -6985,6 +6979,14 @@ msgid ""
 "            members, have access to all social features of AstroBin.\n"
 "            "
 msgstr ""
+"\n"
+"Вы можете использовать на AstroBin до %(max_allowed)s изображений.\n"
+"После можете улучшиться до <strong>Облегчённый Месячный</strong> или\n"
+"<strong>Облегчённый Годовой</strong>если у вас есть ограничения в год,\n"
+"или <strong>Премиум</strong> план для безлимита.\n"
+"Оплачивающим участникам не будет показываться реклама, и всем, включая тех, "
+"кто не платит\n"
+"будет обеспечен свободный доступ к соц-активностям AstroBin.\n"
 
 #: templates/subscription/subscription_detail.html:85
 #: templates/subscription/subscription_list.html:39
@@ -6994,6 +6996,10 @@ msgid ""
 "We will keep them neatly organized, and you will have a safe backup of all "
 "your work, including calibration files."
 msgstr ""
+"<strong>AstroBin Raw Data</strong> позволяет вам хранить ваши raw файлы "
+"(<strong>FIT</strong> и <strong>цифрокамерный raw</strong>) на AstroBin. Мы "
+"будем их хранить аккуратно организовав, и вам будет доступен бекап всех "
+"ваших работ, включая калибровочные файлы."
 
 #: templates/subscription/subscription_detail.html:88
 #: templates/subscription/subscription_list.html:42
@@ -7001,24 +7007,24 @@ msgstr ""
 msgid ""
 "Learn more by reading <a href=\"%(rawdata_url)s\">a short introduction.</a>"
 msgstr ""
+"Узнайте больше, прочитав <a href=\"%(rawdata_url)s\">короткое введение.</a>"
 
 #: templates/subscription/subscription_detail.html:99
 msgid "Here you can deactivate your free Raw Data Atom subscription."
-msgstr ""
+msgstr "Здесь вы можете деактивировать свою бесплатную Raw Data Atom подписку."
 
 #: templates/subscription/subscription_detail.html:104
-#, fuzzy
 msgid "Deactivate"
-msgstr "Активно"
+msgstr "Отключить"
 
 #: templates/subscription/subscription_detail.html:118
 msgid "By cancelling, you will revert to a free plan."
-msgstr ""
+msgstr "Отменив, вы будете возвращены в бесплатный план."
 
 #: templates/subscription/subscription_detail.html:119
 #, python-format
 msgid "Free plans are limited to <strong>%(max_allowed)s</strong> images."
-msgstr ""
+msgstr "Бесплатные планы ограничены до <strong>%(max_allowed)s</strong> изобр."
 
 #: templates/subscription/subscription_detail.html:120
 msgid ""
@@ -7026,62 +7032,65 @@ msgid ""
 "Simply, you will not be able to upload any more images unless you switch to "
 "a paid plan."
 msgstr ""
+"Впрочем, ваши существующие изображения не будут удалены или деактивированы в "
+"любом случае! Просто, вы не сможете добавлять больше изображений пока не "
+"переключитесь на платный план."
 
 #: templates/subscription/subscription_detail.html:127
 msgid "Cancel via PayPal"
-msgstr ""
+msgstr "Отменено через PayPal"
 
 #: templates/subscription/subscription_detail.html:137
 #: templates/subscription/subscription_detail.html:194
 msgid "Here you can activate your free Raw Data Atom subscription."
-msgstr ""
+msgstr "Здесь вы можете активировать вашу бесплатную Raw Data Atom подписку."
 
 #: templates/subscription/subscription_detail.html:142
 #: templates/subscription/subscription_detail.html:203
-#, fuzzy
 msgid "Activate"
-msgstr "Активно"
+msgstr "Активировать"
 
 #: templates/subscription/subscription_detail.html:148
 #: templates/subscription/subscription_detail.html:179
 msgid "Subscribe with a secure payment provided by PayPal:"
-msgstr ""
+msgstr "Подпишитесь с помощью безопасной оплаты через PayPal:"
 
 #: templates/subscription/subscription_detail.html:165
-#, fuzzy
 msgid "You cannot switch to this plan."
-msgstr "Вам не разрешено просматривать эту страницу."
+msgstr "Вы не можете переключиться на этот план."
 
 #: templates/subscription/subscription_detail.html:198
 msgid ""
 "Careful! If you have already a paid Raw Data subscription, your available "
 "space will be reduced!"
 msgstr ""
+"Осторожно! Если у вас есть оплаченная подписка на Raw Data, ваше доступное "
+"место будет уменьшено."
 
 #: templates/subscription/subscription_detail.html:218
-#, fuzzy
 msgid "Back to the plans"
-msgstr "Обратно наверх"
+msgstr "Обратно к планам"
 
 #: templates/subscription/subscription_done.html:4
 #: templates/subscription/subscription_done.html:8
 msgid "Subscription confirmed"
-msgstr ""
+msgstr "Подписка подтверждена"
 
 #: templates/subscription/subscription_done.html:12
 msgid ""
 "Your request has been received, and we are awaiting the final confirmation "
 "from PayPal. Your subscription should be active within a few minutes!"
 msgstr ""
+"Ваш запрос отправлен, и мы ожидаем окончательного подтверждения от PayPal. "
+"Ваша подписка будет активирована в течение нескольких минут!"
 
 #: templates/subscription/subscription_list.html:10
 msgid "Your active subscription plans"
-msgstr ""
+msgstr "Ваши активные планы подписки"
 
 #: templates/subscription/subscription_list.html:19
-#, fuzzy
 msgid "AstroBin Premium subscription plans"
-msgstr "Вопросы AstroBin"
+msgstr "Планы AstroBin Премиум подписки"
 
 #: templates/subscription/subscription_list.html:21
 #, python-format
@@ -7098,21 +7107,30 @@ msgid ""
 "            AstroBin.\n"
 "            "
 msgstr ""
+"\n"
+"Вы можете использовать на AstroBin до %(max_allowed)s изображений.\n"
+"После можете улучшиться до <strong>Облегчённый</strong> или\n"
+"<strong>Облегчённый</strong>если у вас есть ограничения в год,\n"
+"или <strong>Премиум</strong> план для безлимита.\n"
+"Оплачивающим участникам не будет показываться реклама, и всем, включая тех, "
+"кто не платит\n"
+"будет обеспечен свободный доступ к соц-активностям AstroBin.\n"
 
 #: templates/subscription/subscription_list.html:37
-#, fuzzy
 msgid "AstroBin Raw Data subscription plans"
-msgstr "AstroBin Raw Data"
+msgstr "Планы подписки AstroBin Raw Data"
 
 #: templates/subscription/subscription_list.html:45
 msgid "Here's a short description of each plan:"
-msgstr ""
+msgstr "Вот немного описания по каждому плану:"
 
 #: templates/subscription/subscription_list.html:49
 msgid ""
 "This plan is free! Choose it to share a small amount of data with other "
 "users."
 msgstr ""
+"Это план бесплатный! Выберите его чтобы иметь возможность делиться небольшим "
+"количеством данных с другими пользователями."
 
 #: templates/subscription/subscription_list.html:53
 msgid ""
@@ -7122,6 +7140,11 @@ msgid ""
 "deepest deep sky images ever created, and you will always know that you "
 "support AstroBin."
 msgstr ""
+"Выберите этот план, если вы хотите свести свои расходы до минимума, но в "
+"тоже время хотите иметь возможность делиться своими FIT и цифрокамерными raw "
+"файлами с друзьями. Вы также сможете участвовать общем хранилище данных для "
+"вклада в снимки глубокого космоса, которые были созданы, понимая, что вы "
+"поддерживаете AstroBin."
 
 #: templates/subscription/subscription_list.html:57
 msgid ""
@@ -7129,6 +7152,9 @@ msgid ""
 "don't want to share and backup your calibration files. Enjoy a lot of room "
 "for a convenient price."
 msgstr ""
+"Выберите это план, если вы начали в последние год или два, или вы не хотите "
+"делиться и бекапить свои калибровочные файлы. Наслаждайтесь доступным местом "
+"за удобную цену."
 
 #: templates/subscription/subscription_list.html:61
 msgid ""
@@ -7136,21 +7162,25 @@ msgid ""
 "have enough room for all your calibration files, and will enjoy the full "
 "potential of the platform."
 msgstr ""
+"Выберите этот план, если у вас есть за спиной несколько лет данных. Вам "
+"должно хватить места для всех калибровочных файлов, и вы сможете насладиться "
+"полным потенциалом платформы."
 
 #: templates/subscription/subscription_list.html:65
 msgid ""
 "Choose this plan if you have a massive amount of raw data that you want to "
 "share and backup securely online."
 msgstr ""
+"Выберите этот план, если у вас массивное количество raw данных, которые вы "
+"хотите безопасно бекапить или делиться ими."
 
 #: templates/subscription/subscription_list.html:79
-#, fuzzy
 msgid ""
 "PS: are you interested in larger plans? <a href=\"/contact/\">Let us know!</"
 "a>"
 msgstr ""
-"У вас есть вопросы не затронутые здесь?! Пожалуйста, <a href=\"/contact/"
-"\">свяжитесь с нами</a>!"
+"PS: Вы заинтересованы в продвинутых планах? <a href=\"/contact/\">Дайте нам "
+"знать!</a>"
 
 #: templates/user/api_keys.html:5 templates/user/api_keys.html.py:12
 msgid "Your API Keys"
@@ -7326,23 +7356,20 @@ msgstr ""
 "<em>Поделиться</em>."
 
 #: templates/user/profile.html:32
-#, fuzzy
 msgid "Subscription"
-msgstr "Описание"
+msgstr "Подписка"
 
 #: templates/user/profile.html:45
-#, fuzzy
 msgid "Expiration date"
-msgstr "Верность данным"
+msgstr "Дата окончания"
 
 #: templates/user/profile.html:56
-#, fuzzy
 msgid "Uploads used"
-msgstr "Закачано"
+msgstr "Загрузок использовано"
 
 #: templates/user/profile.html:66
 msgid "Thanks for your support!"
-msgstr ""
+msgstr "Спасибо за вашу поддержку!"
 
 #: templates/user/profile.html:124
 msgid "These images don't have enough data. It's a shame..."

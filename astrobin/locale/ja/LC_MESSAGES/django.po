@@ -8,7 +8,7 @@ msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2015-12-28 19:19+0000\n"
-"PO-Revision-Date: 2014-10-01 08:12+0000\n"
+"PO-Revision-Date: 2015-12-30 07:03+0000\n"
 "Last-Translator: ohmishonin <kasuzen@gmail.com>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
 "Language: ja\n"
@@ -17,7 +17,7 @@ msgstr ""
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=(n != 1);\n"
 "X-Generator: Pootle 2.5.0\n"
-"X-POOTLE-MTIME: 1412151141.109985\n"
+"X-POOTLE-MTIME: 1451459004.707705\n"
 
 #: fields.py:10
 msgid "United Kingdom"
@@ -1139,9 +1139,8 @@ msgid "Users"
 msgstr "ユーザー"
 
 #: forms.py:272
-#, fuzzy
 msgid "Search type"
-msgstr "検索の種類"
+msgstr "検索タイプ"
 
 #: forms.py:274
 msgid "All"
@@ -1968,9 +1967,8 @@ msgid "Position"
 msgstr "位置"
 
 #: models.py:785
-#, fuzzy
 msgid "Allow comments"
-msgstr "コメント"
+msgstr "コメントを許可"
 
 #: models.py:798 templates/image/full.html:56
 #: templates/image/detail/image_title.html:7
@@ -2303,34 +2301,33 @@ msgid "Language"
 msgstr "言語"
 
 #: models.py:1706
-#, fuzzy
 msgid "Signature"
-msgstr "土星"
+msgstr "署名"
 
 #: models.py:1711
 msgid "Signature HTML Version"
-msgstr ""
+msgstr "HTMLバージョンの署名"
 
 #: models.py:1716
 msgid "Show signatures"
-msgstr ""
+msgstr "署名を表示する"
 
 #: models.py:1721
 msgid "Post count"
-msgstr ""
+msgstr "投稿数"
 
 #: models.py:1726
 msgid "Automatically subscribe"
-msgstr ""
+msgstr "自動承認"
 
 #: models.py:1727
 msgid "Automatically subscribe to topics that you answer"
-msgstr ""
+msgstr "問い合わせの回答を自動承認"
 
 #: models.py:1734
 #: templates/pybb/mail_templates/subscription_email_subject.html:2
 msgid "New reply to a forum topic you subscribe to"
-msgstr ""
+msgstr "承認したフォーラムトピックからの新しい返信"
 
 #: models.py:1776
 msgid "A descriptive name, e.g. 'Home observatory' or 'Mount Whitney'."
@@ -2648,7 +2645,7 @@ msgstr ""
 
 #: views.py:1053
 msgid "You have reached your image uploads limit. Please upgrade!"
-msgstr ""
+msgstr "画像アップロード容量の上限に達しましたので、アップグレードしてください。"
 
 #: views.py:1057 views.py:2781 templates/user/profile/flickr_import.html:10
 msgid ""
@@ -2744,9 +2741,8 @@ msgid "Average integration time"
 msgstr "平均露出時間"
 
 #: views.py:1875
-#, fuzzy
 msgid "Forum posts"
-msgstr "フォーラム"
+msgstr "フォーラムの投稿"
 
 #: views.py:2366
 msgid ""
@@ -3067,17 +3063,16 @@ msgid ""
 "No. A free account will let you upload up to 10 images, and partake in all "
 "social activities. For unlimited storage, you will need a premium "
 "subscription."
-msgstr ""
+msgstr "出来ません。無料アカウントでは10画像以上をアップグレードすることができません。容量を解除するために、プレミアム会員になる必要があります。"
 
 #: templates/faq.html:36
-#, fuzzy
 msgid ""
 "<strong>NO!</strong> If you are a premium member, on AstroBin you can upload "
 "as many images as you want, and as large as you want. In fact, full size "
 "images are encouraged!"
 msgstr ""
-"<strong>いいえ！</strong> あなたがアップロードする画像の枚数や容量に制限はあ"
-"りません。事実、フルサイズの画像が推奨されています。"
+"<strong>いいえ。</strong> "
+"もし、プレミアムメンバーであれば、あなたがアップロードする画像の枚数や容量に制限はありません。事実、フルサイズの画像が推奨されています。"
 
 #: templates/faq.html:43
 msgid "AstroBin will accept JPEG, PNG and GIF. Animated GIF is supported too."
@@ -3302,15 +3297,14 @@ msgstr ""
 "れます。"
 
 #: templates/faq.html:140
-#, fuzzy
 msgid ""
 "Every night, an algorithm looks at the images uploaded during the previous 7 "
 "days. The 20 most liked images in that time window are presented each "
 "morning to an appointed person that selects one according to personal "
 "preference."
 msgstr ""
-"毎晩、過去7日間にアップロードされた画像をアルゴリズムがみています。その期間に"
-"最もLike数が多かった画像がImage of the Dayに選ばれます。"
+"毎晩、過去7日間にアップロードされた画像をアルゴリズムがみています。その期間に最もLike数が多かった画像20枚が毎朝Image of the "
+"Dayに選ばれます。"
 
 #: templates/faq.html:146
 msgid ""
@@ -3713,6 +3707,8 @@ msgid ""
 "them are images that received lots of likes, and the other half were "
 "selected randomly. The images are anonymized as to not bias the selection."
 msgstr ""
+"ここには過去7日間にアップロードされた画像が表示されています。その半分がより多くの評価を得たもので、半分がランダムに選ばれたものです。画像を選ぶにあたっ"
+"ては、何のバイアスもかかっていません。"
 
 #: templates/iotd_choose.html:27
 msgid "Choose"
@@ -3800,17 +3796,16 @@ msgstr "ホーム"
 
 #: templates/maintenance_base.html:89 templates/maintenance_base.html:511
 #: templates/base/footer.html:19 templates/base/site_links.html:19
-#, fuzzy
 msgid "Forum"
 msgstr "フォーラム"
 
 #: templates/maintenance_base.html:94 templates/base/site_links.html:24
 msgid "Latest topics"
-msgstr ""
+msgstr "最後のトピックス"
 
 #: templates/maintenance_base.html:96 templates/base/site_links.html:26
 msgid "Subscribed topics"
-msgstr ""
+msgstr "トピックスを購読"
 
 #: templates/maintenance_base.html:116 templates/base/site_links.html:46
 #: templates/image/detail/iotd_banner.html:10 templates/index/root.html:75
@@ -4008,7 +4003,7 @@ msgstr "利用規約"
 
 #: templates/maintenance_base.html:518 templates/base/footer.html:26
 msgid "Source code"
-msgstr ""
+msgstr "ソースコード"
 
 #: templates/maintenance_base.html:524 templates/base/footer.html:33
 msgid "Thanks to"
@@ -4127,20 +4122,15 @@ msgstr ""
 "す。"
 
 #: templates/upload.html:12
-#, fuzzy
 msgid "Image upload"
-msgstr "画像モード"
+msgstr "画像アップロード"
 
 #: templates/upload.html:23
-#, fuzzy
 msgid ""
 "Your Lite or Premium subscription is not active, or it has expired. If you "
 "have just subscribed, please wait for a few minutes. Thanks for your "
 "patience!"
-msgstr ""
-"あなたのRawデータの申し込みが完了していないか、期限が切れています。もしあなた"
-"が経った今、申し込みをしたのであれば、数分待ってください。待ってくれてありが"
-"とう。"
+msgstr "あなたのライトもしくはプレミアム登録がアクティブでないか期限切れになっています。もし、登録したところであれば、もう少々お待ちください。"
 
 #: templates/upload.html:39
 #, python-format
@@ -4151,7 +4141,7 @@ msgstr ""
 
 #: templates/upload.html:41 templates/upload.html.py:49
 msgid "Would you like to upgrade?"
-msgstr ""
+msgstr "アップグレードしたいですか？"
 
 #: templates/upload.html:46
 #, python-format
@@ -4159,18 +4149,19 @@ msgid ""
 "You have used <strong>%(premium_counter)s</strong> images of your allowed "
 "<strong>%(max_allowed)s</strong> for the current year."
 msgstr ""
+" あなたは現在、<strong>%(max_allowed)</strong>のうち<strong>%"
+"(premium_counter)</strong> の画像を利用中です。"
 
 #: templates/upload.html:47
 #: templates/subscription/subscription_detail.html:212
 #: templates/subscription/subscription_done.html:16
 #: templates/subscription/subscription_list.html:76
-#, fuzzy
 msgid "Thank you for supporting AstroBin!"
-msgstr "以下の会社はAstoBinをサポートしています。"
+msgstr "AstoBinをサポートいただけてありがとうございます。"
 
 #: templates/upload.html:54
 msgid "Thank you for being a premium member! Enjoy your unlimited uploads."
-msgstr ""
+msgstr "プレミアムメンバーに登録してくれてありがとうございます。無制限のアップロードを楽しんでください。"
 
 #: templates/upload.html:66
 msgid "Upload as a work in progress"
@@ -4209,9 +4200,8 @@ msgstr ""
 "こともできます。"
 
 #: templates/upload.html:104
-#, fuzzy
 msgid "Raw data upload"
-msgstr "Rawデータライブラリー"
+msgstr "Rawデータのアップロード"
 
 #: templates/upload.html:113
 msgid ""
@@ -4422,14 +4412,12 @@ msgstr "上記のオプションから言語を選択してください。"
 
 #: templates/base/user_links_entries.html:139
 #: templates/subscription/subscription_list.html:5
-#, fuzzy
 msgid "Subscription plans"
-msgstr "説明"
+msgstr "登録プラン"
 
 #: templates/base/user_links_entries.html:179
-#, fuzzy
 msgid "Raw data"
-msgstr "Rawデータライブラリー"
+msgstr "Rawデータ"
 
 #: templates/base/user_links_entries.html:185
 #: templates/user/profile-subnav.html:35
@@ -4441,7 +4429,6 @@ msgid "Private shared folders"
 msgstr "非公開共有フォルダー"
 
 #: templates/base/user_links_entries.html:223
-#, fuzzy
 msgid "Choose Image Of The Day"
 msgstr "Image of the dayを選ぶ"
 
@@ -4455,9 +4442,8 @@ msgid "OK"
 msgstr "OK"
 
 #: templates/base/user_links_entries.html:258
-#, fuzzy
 msgid "No, thanks"
-msgstr "No, tranks"
+msgstr "結構です"
 
 #: templates/commercial/products/edit.html:7
 #: templates/commercial/products/edit.html:10
@@ -4874,7 +4860,7 @@ msgstr ""
 
 #: templates/image/detail/comments.html:20
 msgid "Comments are closed."
-msgstr ""
+msgstr "コメントは非表示"
 
 #: templates/image/detail/commercial.html:6
 msgid "Made possible by"
@@ -4963,9 +4949,8 @@ msgid "Actions"
 msgstr "アクション"
 
 #: templates/image/detail/menu/actions.html:15
-#, fuzzy
 msgid "Edit watermark"
-msgstr "機材を編集"
+msgstr "ウォーターマークを編集"
 
 #: templates/image/detail/menu/actions.html:21
 msgid "Edit basic information"
@@ -5038,7 +5023,7 @@ msgstr "ユーザーの注目を得る"
 #: templates/image/detail/menu/admin.html:7
 #: templates/pybb/post_template.html:61 templates/pybb/topic.html:68
 msgid "Admin"
-msgstr ""
+msgstr "管理者"
 
 #: templates/image/detail/menu/admin.html:14
 #: templates/image/detail/modals/flag_thumbnails.html:7
@@ -5047,7 +5032,7 @@ msgstr "問題のあるサムネイルにフラグを立てる"
 
 #: templates/image/detail/menu/admin.html:21
 msgid "Ban user"
-msgstr ""
+msgstr "禁止ユーザー"
 
 #: templates/image/detail/menu/share.html:6
 #: templates/image/detail/modals/share.html:7
@@ -5244,7 +5229,6 @@ msgid "Full"
 msgstr "すべて"
 
 #: templates/image/detail/modals/share.html:36
-#, fuzzy
 msgid "Real"
 msgstr "本名"
 
@@ -5411,9 +5395,8 @@ msgstr ""
 "変更できることを覚えておいてください。"
 
 #: templates/image/edit/menu.html:6
-#, fuzzy
 msgid "Watermark"
-msgstr "デンマーク"
+msgstr "ウォーターマーク"
 
 #: templates/image/edit/menu.html:7
 msgid "Basic Information"
@@ -5456,7 +5439,7 @@ msgstr "次のステップは基本情報"
 
 #: templates/image/edit/watermark.html:43
 msgid "This operation might take several seconds."
-msgstr ""
+msgstr "この操作には数秒かかります。"
 
 #: templates/inclusion_tags/list_gear.html:17
 #: templates/user/profile/commercial/products.html:85
@@ -5560,14 +5543,12 @@ msgid "Unlimited uploads, unlimited size."
 msgstr "アップロード数は無制限、容量も無制限。"
 
 #: templates/index/root.html:36
-#, fuzzy
 msgid ""
 "Astrophotography images have scientific value that shouldn't be lost in file "
 "compression. On AstroBin you can (and should!) upload full size images."
 msgstr ""
-"天体写真画像はファイル科学的価値があるので、ファイルを圧縮してデータをロスト"
-"すべきではないです。AstroBinではフルサイズの画像をアップロードできます。そし"
-"てそれを無制限のスペースを無料で使う事ができます。"
+"天体写真画像はファイル科学的価値があるので、ファイルを圧縮してデータをロストすべきではないです。AstroBinではフルサイズの画像をアップロードできま"
+"す。"
 
 #: templates/index/root.html:43
 msgid "Have your data neatly plotted."
@@ -5637,9 +5618,8 @@ msgstr ""
 "パーソナルストリームをもっと楽しくするために、沢山のユーザーをフォローしよう!"
 
 #: templates/index/root.html:296
-#, fuzzy
 msgid "Latest from the forums"
-msgstr "掲示板の良くないことは何ですか？"
+msgstr "フォーラムの最後"
 
 #: templates/index/root.html:322
 msgid "Do you want your product here?"
@@ -5733,7 +5713,7 @@ msgid "Here are your notifications"
 msgstr "あなたへの通知はこれ"
 
 #: templates/notification/email_body.txt:3
-#, fuzzy, python-format
+#, python-format
 msgid ""
 "Hi! You have a new notification on AstroBin:\n"
 "\n"
@@ -6447,15 +6427,15 @@ msgstr ""
 
 #: templates/pybb/forum_list.html:9
 msgid "Hidden"
-msgstr ""
+msgstr "隠す"
 
 #: templates/pybb/forum_list.html:28
 msgid "No forums created"
-msgstr ""
+msgstr "フォーラムは作られていません"
 
 #: templates/pybb/forum_list.html:29
 msgid "Add forum now"
-msgstr ""
+msgstr "フォーラムを追加"
 
 #: templates/pybb/index.html:25
 msgid "Topics"
@@ -6499,28 +6479,25 @@ msgid "Edited"
 msgstr "編集"
 
 #: templates/pybb/post_template.html:44
-#, fuzzy
 msgid "quote"
 msgstr "引用文"
 
 #: templates/pybb/post_template.html:45
-#, fuzzy
 msgid "quote selected"
-msgstr "# 選択済み"
+msgstr "引用を選択済み"
 
 #: templates/pybb/post_template.html:53
-#, fuzzy
 msgid "Delete post?"
-msgstr "会話を削除"
+msgstr "投稿を削除"
 
 #: templates/pybb/post_template.html:56
 msgid "Approve post"
-msgstr ""
+msgstr "投稿を許可"
 
 #: templates/pybb/subscribed_topics.html:7
 #: templates/pybb/subscribed_topics.html:10
 msgid "Topics you subscribe to"
-msgstr ""
+msgstr "トピックを登録"
 
 #: templates/pybb/topic.html:57
 msgid "Unstick topic"
@@ -6532,12 +6509,11 @@ msgstr ""
 
 #: templates/pybb/topic.html:63
 msgid "Open topic"
-msgstr ""
+msgstr "トピックを開く"
 
 #: templates/pybb/topic.html:65
-#, fuzzy
 msgid "Close topic"
-msgstr "閉じる"
+msgstr "トピックを閉じる"
 
 #: templates/pybb/topic.html:76
 #: templates/subscription/subscription_category_list.html:86
@@ -6582,7 +6558,7 @@ msgstr "閉じる"
 #: templates/pybb/topic_list.html:44
 #, fuzzy
 msgid "pages"
-msgstr "画像"
+msgstr "ページ"
 
 #: templates/registration/activate.html:4
 #: templates/registration/activate.html:9
@@ -6620,7 +6596,7 @@ msgstr "リンクは%(expiration_days)s日間有効です。"
 #: templates/registration/activation_email.txt:9
 #: templates/registration/password_reset_email.html:6
 msgid "PLEASE DO NOT REPLY TO THIS EMAIL"
-msgstr ""
+msgstr "このメールに返事をしないでください"
 
 #: templates/registration/activation_email.txt:11
 msgid ""
@@ -6782,36 +6758,34 @@ msgstr "ライセンスを選択"
 
 #: templates/subscription/subscription_cancel.html:4
 msgid "Subscription process canceled"
-msgstr ""
+msgstr "登録処理はキャンセルされました"
 
 #: templates/subscription/subscription_cancel.html:8
 msgid "Subscription process cancelled"
-msgstr ""
+msgstr "登録処理はキャンセルされました"
 
 #: templates/subscription/subscription_cancel.html:12
 msgid ""
 "Your transaction with PayPal has been cancelled, so no change in your "
 "subscription has occurred."
-msgstr ""
+msgstr "PayPalでの処理がキャンセルされたので、登録変更は実施されませんでした。"
 
 #: templates/subscription/subscription_cancel.html:16
 #: templates/subscription/subscription_change_done.html:16
-#, fuzzy, python-format
+#, python-format
 msgid "Return to the <a href=\"%(plans_url)s\">plans page</a>."
-msgstr "Rawデータの<a href=\"%(plans_url)s\">計画ページ</a>に行く"
+msgstr "<a href=\"%(plans_url)s\">計画ページ</a>に戻る"
 
 #: templates/subscription/subscription_category_list.html:7
-#, fuzzy
 msgctxt "Subscription plan name"
 msgid "Plan"
-msgstr "惑星"
+msgstr "計画"
 
 #: templates/subscription/subscription_category_list.html:9
 msgid "Trial period"
-msgstr ""
+msgstr "試用期間"
 
 #: templates/subscription/subscription_category_list.html:11
-#, fuzzy
 msgid "Action"
 msgstr "アクション"
 
@@ -6848,38 +6822,37 @@ msgstr ""
 
 #: templates/subscription/subscription_category_list.html:55
 msgid "months"
-msgstr ""
+msgstr "月"
 
 #: templates/subscription/subscription_category_list.html:59
 msgid "years"
-msgstr ""
+msgstr "年"
 
 #: templates/subscription/subscription_category_list.html:62
 msgid "No trial"
-msgstr ""
+msgstr "試用でない"
 
 #: templates/subscription/subscription_category_list.html:67
 #, python-format
 msgid "%(max_allowed)s images per year "
-msgstr ""
+msgstr "年間%(max_allowed)s画像"
 
 #: templates/subscription/subscription_category_list.html:71
-#, fuzzy
 msgid "Unlimited images"
-msgstr "アメリカ"
+msgstr "無制限"
 
 #: templates/subscription/subscription_category_list.html:79
 msgid "n/a"
-msgstr ""
+msgstr "利用不可能"
 
 #: templates/subscription/subscription_category_list.html:89
 msgid "Switch to"
-msgstr ""
+msgstr "切り替え"
 
 #: templates/subscription/subscription_change_done.html:4
 #: templates/subscription/subscription_change_done.html:8
 msgid "Subscription changed"
-msgstr ""
+msgstr "登録変更された"
 
 #: templates/subscription/subscription_change_done.html:12
 msgid ""

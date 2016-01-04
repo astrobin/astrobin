@@ -7,7 +7,7 @@ msgstr ""
 "Project-Id-Version: AstroBin 1.0\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2015-12-28 19:18+0000\n"
-"PO-Revision-Date: 2015-12-01 08:49+0000\n"
+"PO-Revision-Date: 2016-01-03 15:35+0000\n"
 "Last-Translator: PepeChambo <jjchambo@hotmail.com>\n"
 "Language-Team: Pepe Chambó <jjchambo@hotmail.com>\n"
 "Language: es\n"
@@ -16,7 +16,7 @@ msgstr ""
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=(n != 1);\n"
 "X-Generator: Pootle 2.5.0\n"
-"X-POOTLE-MTIME: 1448959760.974689\n"
+"X-POOTLE-MTIME: 1451835348.612769\n"
 
 #: fields.py:10
 msgid "United Kingdom"
@@ -28,7 +28,7 @@ msgstr "Afganistán"
 
 #: fields.py:12
 msgid "Aland Islands"
-msgstr "Alandia"
+msgstr "Islas Åland"
 
 #: fields.py:13
 msgid "Albania"
@@ -36,7 +36,7 @@ msgstr "Albania"
 
 #: fields.py:14
 msgid "Algeria"
-msgstr "Algeria"
+msgstr "Argelia"
 
 #: fields.py:15
 msgid "American Samoa"
@@ -2305,7 +2305,6 @@ msgid "Language"
 msgstr "Idioma"
 
 #: models.py:1706
-#, fuzzy
 msgid "Signature"
 msgstr "Firma"
 
@@ -2332,7 +2331,7 @@ msgstr "Suscribirse automáticamente a los temas en los que has respondido"
 #: models.py:1734
 #: templates/pybb/mail_templates/subscription_email_subject.html:2
 msgid "New reply to a forum topic you subscribe to"
-msgstr ""
+msgstr "Nueva respuesta a un tema al que estás suscrito"
 
 #: models.py:1776
 msgid "A descriptive name, e.g. 'Home observatory' or 'Mount Whitney'."
@@ -2656,6 +2655,8 @@ msgstr ""
 #: views.py:1053
 msgid "You have reached your image uploads limit. Please upgrade!"
 msgstr ""
+"Has alcanzado el límite de imágenes subidas. Por favor, sube la categoría tu "
+"cuenta."
 
 #: views.py:1057 views.py:2781 templates/user/profile/flickr_import.html:10
 msgid ""
@@ -2752,7 +2753,6 @@ msgid "Average integration time"
 msgstr "Tiempo de integración medio"
 
 #: views.py:1875
-#, fuzzy
 msgid "Forum posts"
 msgstr "Entradas del forum"
 
@@ -2817,7 +2817,6 @@ msgid "There was a reply to your comment"
 msgstr "Hay una respuesta a tu comentario"
 
 #: management/__init__.py:69
-#, fuzzy
 msgid "Your image was bookmarked"
 msgstr "Tu imagen ha sido marcada"
 
@@ -2900,9 +2899,8 @@ msgid "Go back to the hom page."
 msgstr "Volver a la página de inicio."
 
 #: templates/503.html:4
-#, fuzzy
 msgid "AstroBin in temporarily unavailable"
-msgstr "Entrada a AstroBin temporalmente no disponible"
+msgstr "AstroBin temporalmente no disponible"
 
 #: templates/503.html:7
 msgid "AstroBin is temporarily unavailable"
@@ -3079,17 +3077,19 @@ msgid ""
 "social activities. For unlimited storage, you will need a premium "
 "subscription."
 msgstr ""
+"No. Una cuenta gratuita te permitirá subir hasta 10 imágenes y participar en "
+"todas las actividades sociales. Para obtener un almacenamiento ilimitado "
+"necesitarás una suscripción premium."
 
 #: templates/faq.html:36
-#, fuzzy
 msgid ""
 "<strong>NO!</strong> If you are a premium member, on AstroBin you can upload "
 "as many images as you want, and as large as you want. In fact, full size "
 "images are encouraged!"
 msgstr ""
-"<strong>¡NO!</strong> Puedes subir a AstroBin tantas imágenes como quieras, "
-"y tan grandes como quieras. De hecho, ¡animamos a subir imágenes a tamaño "
-"completo!"
+"<strong>¡NO!</strong> Si eres un miembre premium puedes subir a AstroBin "
+"tantas imágenes y tan grandes como quieras. De hecho, ¡animamos a subir "
+"imágenes a tamaño completo!"
 
 #: templates/faq.html:43
 msgid "AstroBin will accept JPEG, PNG and GIF. Animated GIF is supported too."
@@ -3324,16 +3324,16 @@ msgstr ""
 "Muralla, y algunos otros datos del usuario."
 
 #: templates/faq.html:140
-#, fuzzy
 msgid ""
 "Every night, an algorithm looks at the images uploaded during the previous 7 "
 "days. The 20 most liked images in that time window are presented each "
 "morning to an appointed person that selects one according to personal "
 "preference."
 msgstr ""
-"Cada noche, un algorritmo revisa las imágenes subidas durante los 7 días "
-"previos. La imagen con mayor número de Me Gusta en ese periodo es "
-"seleccionada como Imagen del Dia."
+"Cada noche, un algorritmo revisa las imágenes subidas durante los últimos 7 "
+"días. Las 20 imágenes con más \"Me Gusta\" en ese periodo son presentadas cada "
+"mañana a una persona determinada, que selecciona una según su criterio "
+"personal."
 
 #: templates/faq.html:146
 msgid ""
@@ -3759,7 +3759,6 @@ msgstr ""
 "el nombre de sus autores para evitar preferencias en la selección."
 
 #: templates/iotd_choose.html:27
-#, fuzzy
 msgid "Choose"
 msgstr "Elige"
 
@@ -3798,13 +3797,12 @@ msgid "Thanks!"
 msgstr "¡Gracias!"
 
 #: templates/iotd_choose_finished.html:13
-#, fuzzy
 msgid ""
 "\n"
 "                The 'Image of the day' was selected. Thank you for your "
 "help!\n"
 "            "
-msgstr "La \"Imagen del día\" fue seleccionada. ¡Gracias por su ayuda!"
+msgstr "La \"Imagen del día\" fue seleccionada. ¡Gracias por tu ayuda!"
 
 #: templates/leaderboard.html:7 templates/leaderboard.html.py:11
 #: templates/maintenance_base.html:147 templates/base/site_links.html:77
@@ -3846,7 +3844,6 @@ msgstr "Inicio"
 
 #: templates/maintenance_base.html:89 templates/maintenance_base.html:511
 #: templates/base/footer.html:19 templates/base/site_links.html:19
-#, fuzzy
 msgid "Forum"
 msgstr "Foro"
 
@@ -4174,19 +4171,17 @@ msgstr ""
 "responsabilidad el comprenderlas."
 
 #: templates/upload.html:12
-#, fuzzy
 msgid "Image upload"
-msgstr "Imágenes subidas"
+msgstr "Subir imagen"
 
 #: templates/upload.html:23
-#, fuzzy
 msgid ""
 "Your Lite or Premium subscription is not active, or it has expired. If you "
 "have just subscribed, please wait for a few minutes. Thanks for your "
 "patience!"
 msgstr ""
-"Tu suscripción a Datos Raw no está activada o ha expirado. Si te acabas de "
-"suscribir espera unos minutos. ¡Gracias por tu paciencia!"
+"Tu suscripción Lite o Premium no está activada o ha expirado. Si te acabas "
+"de suscribir espera unos minutos. ¡Gracias por tu paciencia!"
 
 #: templates/upload.html:39
 #, python-format
@@ -4194,10 +4189,12 @@ msgid ""
 "You have used <strong>%(premium_counter)s</strong> images of your allowed "
 "<strong>%(max_allowed)s</strong>."
 msgstr ""
+"Has subido <strong>%(premium_counter)s</strong> imágenes de las <strong>%"
+"(max_allowed)s</strong> permitidas."
 
 #: templates/upload.html:41 templates/upload.html.py:49
 msgid "Would you like to upgrade?"
-msgstr ""
+msgstr "¿Te gustaría subir de categoría tu cuenta?"
 
 #: templates/upload.html:46
 #, python-format
@@ -4205,18 +4202,20 @@ msgid ""
 "You have used <strong>%(premium_counter)s</strong> images of your allowed "
 "<strong>%(max_allowed)s</strong> for the current year."
 msgstr ""
+"Has subido <strong>%(premium_counter)s</strong> imágenes de las <strong>%"
+"(max_allowed)s</strong> permitidas durante el presente año."
 
 #: templates/upload.html:47
 #: templates/subscription/subscription_detail.html:212
 #: templates/subscription/subscription_done.html:16
 #: templates/subscription/subscription_list.html:76
-#, fuzzy
 msgid "Thank you for supporting AstroBin!"
-msgstr "Las siguientes empresas soportan AstroBin."
+msgstr "¡Gracias por apoyar a AstroBin!"
 
 #: templates/upload.html:54
 msgid "Thank you for being a premium member! Enjoy your unlimited uploads."
 msgstr ""
+"¡Gracias por ser un miembro premium! Disfruta de tus imágenes ilimitadas."
 
 #: templates/upload.html:66
 msgid "Upload as a work in progress"
@@ -4255,9 +4254,8 @@ msgstr ""
 "imágenes desde Flickr</a>."
 
 #: templates/upload.html:104
-#, fuzzy
 msgid "Raw data upload"
-msgstr "Biblioteca de datos Raw"
+msgstr "Subida de datos Raw"
 
 #: templates/upload.html:113
 msgid ""
@@ -4469,12 +4467,10 @@ msgstr "Por favor, selecciona tu idioma de entre las opciones mostradas."
 
 #: templates/base/user_links_entries.html:139
 #: templates/subscription/subscription_list.html:5
-#, fuzzy
 msgid "Subscription plans"
-msgstr "Temas suscritos"
+msgstr "Planes de suscripción"
 
 #: templates/base/user_links_entries.html:179
-#, fuzzy
 msgid "Raw data"
 msgstr "Datos RAW"
 
@@ -4488,9 +4484,8 @@ msgid "Private shared folders"
 msgstr "Carpetas privadas compartidas"
 
 #: templates/base/user_links_entries.html:223
-#, fuzzy
 msgid "Choose Image Of The Day"
-msgstr "Escoger la Imagen del Día"
+msgstr "Escoge la Imagen del Día"
 
 #: templates/base/user_links_entries.html:247
 msgid "Would you like to start using your real name on AstroBin?"
@@ -4502,7 +4497,6 @@ msgid "OK"
 msgstr "Aceptar"
 
 #: templates/base/user_links_entries.html:258
-#, fuzzy
 msgid "No, thanks"
 msgstr "No, gracias"
 
@@ -4929,7 +4923,7 @@ msgstr ""
 
 #: templates/image/detail/comments.html:20
 msgid "Comments are closed."
-msgstr ""
+msgstr "Los comentarios están cerrados."
 
 #: templates/image/detail/commercial.html:6
 msgid "Made possible by"
@@ -5018,9 +5012,8 @@ msgid "Actions"
 msgstr "Acciones"
 
 #: templates/image/detail/menu/actions.html:15
-#, fuzzy
 msgid "Edit watermark"
-msgstr "Siguiente paso: marca de agua"
+msgstr "Editar marca de agua"
 
 #: templates/image/detail/menu/actions.html:21
 msgid "Edit basic information"
@@ -5040,9 +5033,8 @@ msgid "Mark this revision as final"
 msgstr "Marcar esta revisión como versión final"
 
 #: templates/image/detail/menu/actions.html:61
-#, fuzzy
 msgid "Attempt to plate-solve again"
-msgstr "Resolver el campo otra vez"
+msgstr "Intentar resolver el campo otra vez"
 
 #: templates/image/detail/menu/actions.html:71
 msgid "Change license"
@@ -5098,7 +5090,6 @@ msgstr "Administrador"
 
 #: templates/image/detail/menu/admin.html:14
 #: templates/image/detail/modals/flag_thumbnails.html:7
-#, fuzzy
 msgid "Flag malfunctioning thumbnails"
 msgstr "Marcar las miniaturas que no funcionan"
 
@@ -5306,7 +5297,6 @@ msgid "Full"
 msgstr "Completo"
 
 #: templates/image/detail/modals/share.html:36
-#, fuzzy
 msgid "Real"
 msgstr "Nombre real"
 
@@ -5473,9 +5463,8 @@ msgstr ""
 "\"%(change_default_url)s\">aquí</a>."
 
 #: templates/image/edit/menu.html:6
-#, fuzzy
 msgid "Watermark"
-msgstr "Dinamarca"
+msgstr "Marca de agua"
 
 #: templates/image/edit/menu.html:7
 msgid "Basic Information"
@@ -5518,7 +5507,7 @@ msgstr "Siguiente paso: información básica"
 
 #: templates/image/edit/watermark.html:43
 msgid "This operation might take several seconds."
-msgstr ""
+msgstr "Esta operación puede tardar unos segundos."
 
 #: templates/inclusion_tags/list_gear.html:17
 #: templates/user/profile/commercial/products.html:85
@@ -5626,13 +5615,12 @@ msgid "Unlimited uploads, unlimited size."
 msgstr "Número de subidas y tamaño, sin límites."
 
 #: templates/index/root.html:36
-#, fuzzy
 msgid ""
 "Astrophotography images have scientific value that shouldn't be lost in file "
 "compression. On AstroBin you can (and should!) upload full size images."
 msgstr ""
 "Las imágenes astrofotográficas tienen un valor científico que no debería "
-"perderse comprimiendo archivos. En AstroBin puedes (¡y debes!) subir "
+"perderse en archivos comprimidos. En AstroBin puedes (¡y debes!) subir "
 "imágenes a tamaño completo. Tienes espacio ilimitado y gratuito."
 
 #: templates/index/root.html:43
@@ -5701,7 +5689,6 @@ msgstr ""
 "usuarios!"
 
 #: templates/index/root.html:296
-#, fuzzy
 msgid "Latest from the forums"
 msgstr "Temas recientes en los foros"
 
@@ -5799,7 +5786,7 @@ msgid "Here are your notifications"
 msgstr "Aquí están tus avisos"
 
 #: templates/notification/email_body.txt:3
-#, fuzzy, python-format
+#, python-format
 msgid ""
 "Hi! You have a new notification on AstroBin:\n"
 "\n"
@@ -6544,7 +6531,6 @@ msgid "Posts"
 msgstr "Entradas"
 
 #: templates/pybb/index.html:31
-#, fuzzy
 msgid "Last posts"
 msgstr "Últimas entradas"
 
@@ -6554,16 +6540,16 @@ msgstr "No se han creado categorías de foro"
 
 #: templates/pybb/index.html:39
 msgid "Add a category now"
-msgstr ""
+msgstr "Añadir una categoría ahora"
 
 #: templates/pybb/index.html:44 templates/pybb/latest_topics.html:7
 #: templates/pybb/latest_topics.html:10
 msgid "Last updates in topics"
-msgstr ""
+msgstr "Temas con actualizaciones recientes"
 
 #: templates/pybb/index.html:47
 msgid "Mark all forums as read"
-msgstr ""
+msgstr "Marcar todos los foros como leídos"
 
 #: templates/pybb/latest_topics.html:32
 #: templates/pybb/subscribed_topics.html:32
@@ -6571,22 +6557,18 @@ msgid "Mark all topics as read"
 msgstr "Marcar todos los temas como leídos"
 
 #: templates/pybb/post_template.html:39
-#, fuzzy
 msgid "Edited"
 msgstr "Editado"
 
 #: templates/pybb/post_template.html:44
-#, fuzzy
 msgid "quote"
 msgstr "citar"
 
 #: templates/pybb/post_template.html:45
-#, fuzzy
 msgid "quote selected"
-msgstr "citar selección"
+msgstr "cita seleccionada"
 
 #: templates/pybb/post_template.html:53
-#, fuzzy
 msgid "Delete post?"
 msgstr "¿Borrar entrada?"
 
@@ -6609,37 +6591,35 @@ msgstr "Marcar tema"
 
 #: templates/pybb/topic.html:63
 msgid "Open topic"
-msgstr ""
+msgstr "Abrir un tema"
 
 #: templates/pybb/topic.html:65
-#, fuzzy
 msgid "Close topic"
-msgstr "Cerrar"
+msgstr "Cerrar tema"
 
 #: templates/pybb/topic.html:76
 #: templates/subscription/subscription_category_list.html:86
 msgid "Unsubscribe"
-msgstr ""
+msgstr "Borrar subscripción"
 
 #: templates/pybb/topic.html:78
 #: templates/subscription/subscription_category_list.html:91
 msgid "Subscribe"
-msgstr ""
+msgstr "Suscribirse"
 
 #: templates/pybb/topic.html:94
 msgid "Subscribers"
-msgstr ""
+msgstr "Suscriptores"
 
 #: templates/pybb/topic_list.html:13
 msgid "Topic"
-msgstr ""
+msgstr "Tema"
 
 #: templates/pybb/topic_list.html:17
 msgid "Author"
-msgstr ""
+msgstr "Autor"
 
 #: templates/pybb/topic_list.html:26
-#, fuzzy
 msgid "Last post"
 msgstr "Última entrada"
 
@@ -6652,12 +6632,10 @@ msgid "Sticky"
 msgstr "Marcado"
 
 #: templates/pybb/topic_list.html:40
-#, fuzzy
 msgid "Closed"
 msgstr "Cerrado"
 
 #: templates/pybb/topic_list.html:44
-#, fuzzy
 msgid "pages"
 msgstr "páginas"
 
@@ -6861,147 +6839,140 @@ msgstr "Selecciona licencias"
 
 #: templates/subscription/subscription_cancel.html:4
 msgid "Subscription process canceled"
-msgstr ""
+msgstr "Proceso de suscripción cancelado"
 
 #: templates/subscription/subscription_cancel.html:8
 msgid "Subscription process cancelled"
-msgstr ""
+msgstr "Proceso de suscripción cancelado"
 
 #: templates/subscription/subscription_cancel.html:12
 msgid ""
 "Your transaction with PayPal has been cancelled, so no change in your "
 "subscription has occurred."
 msgstr ""
+"Tu transacción de PayPal ha sido cancelada, por tanto no ha habido ningún "
+"cambio en tu suscripción."
 
 #: templates/subscription/subscription_cancel.html:16
 #: templates/subscription/subscription_change_done.html:16
-#, fuzzy, python-format
+#, python-format
 msgid "Return to the <a href=\"%(plans_url)s\">plans page</a>."
-msgstr "Ir a la <a href=\"%(plans_url)s\">Página de Planes</a> de Datos Raw."
+msgstr "Volver a la <a href=\"%(plans_url)s\">Página de Planes</a>."
 
 #: templates/subscription/subscription_category_list.html:7
-#, fuzzy
 msgctxt "Subscription plan name"
 msgid "Plan"
-msgstr "Planetas"
+msgstr "Planes"
 
 #: templates/subscription/subscription_category_list.html:9
 msgid "Trial period"
-msgstr ""
+msgstr "Periodo de prueba"
 
 #: templates/subscription/subscription_category_list.html:11
-#, fuzzy
 msgid "Action"
 msgstr "Acciones"
 
 #: templates/subscription/subscription_category_list.html:24
 #: templates/subscription/subscription_detail.html:17
-#, fuzzy
 msgid "day"
-msgstr "días"
+msgstr "día"
 
 #: templates/subscription/subscription_category_list.html:28
 #: templates/subscription/subscription_detail.html:21
 msgid "week"
-msgstr ""
+msgstr "semana"
 
 #: templates/subscription/subscription_category_list.html:32
 #: templates/subscription/subscription_detail.html:25
-#, fuzzy
 msgid "month"
-msgstr "Mes"
+msgstr "mes"
 
 #: templates/subscription/subscription_category_list.html:36
 #: templates/subscription/subscription_detail.html:29
-#, fuzzy
 msgid "year"
-msgstr "Por año"
+msgstr "año"
 
 #: templates/subscription/subscription_category_list.html:39
 #: templates/subscription/subscription_detail.html:32
 msgctxt "At no cost"
 msgid "Free"
-msgstr ""
+msgstr "Gratis"
 
 #: templates/subscription/subscription_category_list.html:51
 msgid "weeks"
-msgstr ""
+msgstr "semanas"
 
 #: templates/subscription/subscription_category_list.html:55
-#, fuzzy
 msgid "months"
-msgstr "Mes"
+msgstr "meses"
 
 #: templates/subscription/subscription_category_list.html:59
 #, fuzzy
 msgid "years"
-msgstr "Por año"
+msgstr "años"
 
 #: templates/subscription/subscription_category_list.html:62
 msgid "No trial"
-msgstr ""
+msgstr "No de prueba"
 
 #: templates/subscription/subscription_category_list.html:67
 #, python-format
 msgid "%(max_allowed)s images per year "
-msgstr ""
+msgstr "%(max_allowed)s imágenes por año "
 
 #: templates/subscription/subscription_category_list.html:71
-#, fuzzy
 msgid "Unlimited images"
-msgstr "Imágenes subidas"
+msgstr "Imágenes ilimitadas"
 
 #: templates/subscription/subscription_category_list.html:79
 msgid "n/a"
-msgstr ""
+msgstr "n/a"
 
 #: templates/subscription/subscription_category_list.html:89
 msgid "Switch to"
-msgstr ""
+msgstr "Cambiar a"
 
 #: templates/subscription/subscription_change_done.html:4
 #: templates/subscription/subscription_change_done.html:8
 msgid "Subscription changed"
-msgstr ""
+msgstr "Suscripción modificada"
 
 #: templates/subscription/subscription_change_done.html:12
 msgid ""
 "Your request for a change in your subscription has been processed "
 "successfully."
 msgstr ""
+"Tu solicitud de cambio en tu suscripción ha sido procesada "
+"satisfactoriamente."
 
 #: templates/subscription/subscription_detail.html:6
-#, fuzzy
 msgid "Subscription plan"
-msgstr "Descripción"
+msgstr "Plan de suscripción"
 
 #: templates/subscription/subscription_detail.html:41
-#, fuzzy
 msgid "Subscribed"
-msgstr "Temas suscritos"
+msgstr "Suscrito"
 
 #: templates/subscription/subscription_detail.html:43
 msgid "Expires"
-msgstr ""
+msgstr "Caducidad"
 
 #: templates/subscription/subscription_detail.html:48
-#, fuzzy
 msgid "Cancelled"
-msgstr "Cancelar"
+msgstr "Cancelada"
 
 #: templates/subscription/subscription_detail.html:54
-#, fuzzy
 msgid "Inactive"
-msgstr "Activada"
+msgstr "Inactiva"
 
 #: templates/subscription/subscription_detail.html:60
 #, fuzzy
 msgid "Unsubscribed"
-msgstr "Temas suscritos"
+msgstr "No suscrito"
 
 #: templates/subscription/subscription_detail.html:66
 msgid "Unavailable"
-msgstr ""
+msgstr "No disponible"
 
 #: templates/subscription/subscription_detail.html:74
 #, python-format
@@ -7018,6 +6989,16 @@ msgid ""
 "            members, have access to all social features of AstroBin.\n"
 "            "
 msgstr ""
+"\n"
+"Puedes usar AstroBin para subir gratuitamente hasta %(max_allowed)s "
+"imágenes.\n"
+"Después de esto puedes mejorar tu cuenta a  <strong>Mensual Lite</strong> o\n"
+"<strong>Anual Lite</strong> si tienes una producción anual de imágenes "
+"reducida,\n"
+"o a un plan <strong>Premium</strong> para una experiencia sin límites.\n"
+"Los miembros de pago no verán publicidad. Todos, incluidos los miembros con\n"
+"cuentas gratuitas, tienen acceso a todas las características sociales de "
+"AstroBin.\n"
 
 #: templates/subscription/subscription_detail.html:85
 #: templates/subscription/subscription_list.html:39
@@ -7052,6 +7033,8 @@ msgstr ""
 #, python-format
 msgid "Free plans are limited to <strong>%(max_allowed)s</strong> images."
 msgstr ""
+"Los planes gratuitos están limitados a <strong>%(max_allowed)s</strong> "
+"imágenes."
 
 #: templates/subscription/subscription_detail.html:120
 msgid ""
@@ -7059,62 +7042,67 @@ msgid ""
 "Simply, you will not be able to upload any more images unless you switch to "
 "a paid plan."
 msgstr ""
+"En cualquier caso, las imágenes que ya tienes no serán borradas ni "
+"desactivadas de ningún modo. Simplemente, no podrás subir más imágenes hasta "
+"que cambies a un plan de pago."
 
 #: templates/subscription/subscription_detail.html:127
 msgid "Cancel via PayPal"
-msgstr ""
+msgstr "Cancelar via PayPal"
 
 #: templates/subscription/subscription_detail.html:137
 #: templates/subscription/subscription_detail.html:194
+#, fuzzy
 msgid "Here you can activate your free Raw Data Atom subscription."
-msgstr ""
+msgstr "Aquí puedes activar tu suscripción gratuita Atom de Datos Raw."
 
 #: templates/subscription/subscription_detail.html:142
 #: templates/subscription/subscription_detail.html:203
 #, fuzzy
 msgid "Activate"
-msgstr "Activada"
+msgstr "Activar"
 
 #: templates/subscription/subscription_detail.html:148
 #: templates/subscription/subscription_detail.html:179
 msgid "Subscribe with a secure payment provided by PayPal:"
-msgstr ""
+msgstr "Suscribir mediante un pago seguro proporcionado por PayPal:"
 
 #: templates/subscription/subscription_detail.html:165
-#, fuzzy
 msgid "You cannot switch to this plan."
-msgstr "No tienes permiso para ver esta página."
+msgstr "No puedes cambiar a este plan."
 
 #: templates/subscription/subscription_detail.html:198
 msgid ""
 "Careful! If you have already a paid Raw Data subscription, your available "
 "space will be reduced!"
 msgstr ""
+"¡Cuidado! Si tienes una suscripción de pago de Datos Raw, tu espacio "
+"disponible se verá reducido!"
 
 #: templates/subscription/subscription_detail.html:218
-#, fuzzy
 msgid "Back to the plans"
-msgstr "Volver arriba"
+msgstr "Volver a los planes"
 
 #: templates/subscription/subscription_done.html:4
 #: templates/subscription/subscription_done.html:8
 msgid "Subscription confirmed"
-msgstr ""
+msgstr "Suscripción confirmada"
 
 #: templates/subscription/subscription_done.html:12
 msgid ""
 "Your request has been received, and we are awaiting the final confirmation "
 "from PayPal. Your subscription should be active within a few minutes!"
 msgstr ""
+"Tu solicitud a sido recibida, estamos esperando la confirmación final desde "
+"PayPal. Tu suscripción se activará en unos pocos minutos."
 
 #: templates/subscription/subscription_list.html:10
 msgid "Your active subscription plans"
-msgstr ""
+msgstr "Tus planes de suscripción activos"
 
 #: templates/subscription/subscription_list.html:19
-#, fuzzy
 msgid "AstroBin Premium subscription plans"
-msgstr "Consultorio AstroBin"
+msgstr "Planes de suscripción Premium de AstroBin"
 
 #: templates/subscription/subscription_list.html:21
 #, python-format
@@ -7131,21 +7119,32 @@ msgid ""
 "            AstroBin.\n"
 "            "
 msgstr ""
+"\n"
+"Puedes usar AstroBin para subir gratuitamente hasta %(max_allowed)s "
+"imágenes.\n"
+"Después de esto puedes mejorar tu cuenta a  <strong>Mensual Lite</strong> o\n"
+"<strong>Anual Lite</strong> si tienes una producción anual de imágenes "
+"reducida,\n"
+"o a un plan <strong>Premium</strong> para una experiencia sin límites.\n"
+"Los miembros de pago no verán publicidad. Todos, incluidos los miembros con\n"
+"cuentas gratuitas, tienen acceso a todas las características sociales de "
+"AstroBin.\n"
 
 #: templates/subscription/subscription_list.html:37
-#, fuzzy
 msgid "AstroBin Raw Data subscription plans"
-msgstr "Datos Raw AstroBin"
+msgstr "Planes de suscripción de Datos Raw AstroBin"
 
 #: templates/subscription/subscription_list.html:45
 msgid "Here's a short description of each plan:"
-msgstr ""
+msgstr "Aquí tienes una descripción breve de cada pla:"
 
 #: templates/subscription/subscription_list.html:49
 msgid ""
 "This plan is free! Choose it to share a small amount of data with other "
 "users."
 msgstr ""
+"¡Este plan es gratuito! Escogelo para compartir unas pocas imágenes con los "
+"demás usuarios."
 
 #: templates/subscription/subscription_list.html:53
 msgid ""
@@ -7155,6 +7154,11 @@ msgid ""
 "deepest deep sky images ever created, and you will always know that you "
 "support AstroBin."
 msgstr ""
+" Elige este plan si quieres mantener un coste mínimo, pero también para "
+"tener la posibilidad de compartir tus archivos RAW o FIT con tus amigos. "
+"También puedes participar en los directorios de datos públicos y contribuir "
+"a las imágenes más profundas jamás creadas, ... y sabrás que das soporte a "
+"AstroBin."
 
 #: templates/subscription/subscription_list.html:57
 msgid ""
@@ -7162,6 +7166,9 @@ msgid ""
 "don't want to share and backup your calibration files. Enjoy a lot of room "
 "for a convenient price."
 msgstr ""
+"Escoge este plan si te estás iniciando en la astrofotografía, o no quieres "
+"compartir y mantener copias de tus archivos de calibración. Disfruta de un "
+"montón de espacio por un precio ajustado."
 
 #: templates/subscription/subscription_list.html:61
 msgid ""
@@ -7169,21 +7176,25 @@ msgid ""
 "have enough room for all your calibration files, and will enjoy the full "
 "potential of the platform."
 msgstr ""
+"Elige este plan si dispones de varios años de datos valiosos. Seguramente "
+"dispondrás de espacio para todos tus archivos de calibración, y disfruta de "
+"todo el potencial de nuestra plataforma."
 
 #: templates/subscription/subscription_list.html:65
 msgid ""
 "Choose this plan if you have a massive amount of raw data that you want to "
 "share and backup securely online."
 msgstr ""
+"Elige este plan si tienes una cantidad masiva de datos Raw que quieras "
+"compartir o mantener guardados de manera segura y online."
 
 #: templates/subscription/subscription_list.html:79
-#, fuzzy
 msgid ""
 "PS: are you interested in larger plans? <a href=\"/contact/\">Let us know!</"
 "a>"
 msgstr ""
-"Si tienes alguna duda aquí no resuelta, ¡Por favor, <a href=\"/contact/"
-"\">contactanos</a>!"
+"PD: ¿Estás interesado en planes más potentes? <a href=\"/contact/\">¡Haznoslo "
+"saber!</a>"
 
 #: templates/user/api_keys.html:5 templates/user/api_keys.html.py:12
 msgid "Your API Keys"
@@ -7215,7 +7226,6 @@ msgid "Are you sure you want to ban this user?"
 msgstr "¿Estás seguro de suspender a este usuario?"
 
 #: templates/user/ban.html:9 templates/user/ban.html.py:25
-#, fuzzy
 msgid "User banned"
 msgstr "Usuario suspendido"
 
@@ -7230,10 +7240,9 @@ msgstr ""
 
 #: templates/user/ban.html:27
 msgid "The user was banned."
-msgstr ""
+msgstr "El usuario ha sido suspendido."
 
 #: templates/user/ban.html:28
-#, fuzzy
 msgid "Thank you!"
 msgstr "¡Gracias!"
 
@@ -7361,24 +7370,20 @@ msgstr ""
 "medio de la opción <em>Compartir</em>."
 
 #: templates/user/profile.html:32
-#, fuzzy
 msgid "Subscription"
-msgstr "Descripción"
+msgstr "Suscripción"
 
 #: templates/user/profile.html:45
-#, fuzzy
 msgid "Expiration date"
-msgstr "Dedicación a los datos"
+msgstr "Fecha de vencimiento"
 
 #: templates/user/profile.html:56
-#, fuzzy
 msgid "Uploads used"
-msgstr "Subidos"
+msgstr "Subidas usadas"
 
 #: templates/user/profile.html:66
-#, fuzzy
 msgid "Thanks for your support!"
-msgstr "Gracias por tu nominación"
+msgstr "¡Gracias por tu apoyo!"
 
 #: templates/user/profile.html:124
 msgid "These images don't have enough data. It's a shame..."
@@ -7405,9 +7410,8 @@ msgstr "Editar Perfil"
 #: templates/user/profile/delete.html:6 templates/user/profile/delete.html:11
 #: templates/user/profile/delete.html:18
 #: templates/user/profile/edit/basic.html:18
-#, fuzzy
 msgid "Delete account"
-msgstr "Borrar conversación"
+msgstr "Eliminar cuenta"
 
 #: templates/user/profile/delete.html:14
 msgid ""
@@ -7415,6 +7419,9 @@ msgid ""
 "and immediate. All traces of your activity on AstroBin will be erased "
 "forever!"
 msgstr ""
+"¿Estás seguro/a de eliminar tu cuenta? Esta operación es inmediata e "
+"irreversible. ¡Todos los rastros de tu actividad en AstroBin serán borrados "
+"para siempre!"
 
 #: templates/user/profile/delete.html:21
 msgid "Your account was deleted. Thanks for using AstroBin until now!"

@@ -8,8 +8,8 @@ msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2015-12-28 19:25+0000\n"
-"PO-Revision-Date: 2014-01-29 09:51+0000\n"
-"Last-Translator: naavis <svnaavis@gmail.com>\n"
+"PO-Revision-Date: 2015-12-30 10:21+0000\n"
+"Last-Translator: Samuli <samuli.vuorinen@iki.fi>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
 "Language: fi\n"
 "MIME-Version: 1.0\n"
@@ -17,7 +17,7 @@ msgstr ""
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=(n != 1);\n"
 "X-Generator: Pootle 2.5.0\n"
-"X-POOTLE-MTIME: 1390989061.49771\n"
+"X-POOTLE-MTIME: 1451470906.568632\n"
 
 #: templates/astrobin_apps_users/inclusion_tags/astrobin_user.html:55
 #: templates/astrobin_apps_users/inclusion_tags/astrobin_user.html:93
@@ -34,21 +34,21 @@ msgstr "Seuraajat"
 #: templates/astrobin_apps_users/inclusion_tags/astrobin_user.html:57
 #: templates/astrobin_apps_users/inclusion_tags/user_list.html:9
 msgid "Following"
-msgstr ""
+msgstr "Seuraa"
 
 #: templates/astrobin_apps_users/inclusion_tags/astrobin_user.html:132
 #, python-format
 msgid "%(images_number)s image"
 msgid_plural "%(images_number)s images"
-msgstr[0] ""
-msgstr[1] ""
+msgstr[0] "%(images_number)s kuva"
+msgstr[1] "%(images_number)s kuvaa"
 
 #: templates/astrobin_apps_users/inclusion_tags/astrobin_user.html:133
 #, python-format
 msgid "%(followers_number)s follower"
 msgid_plural "%(followers_number)s followers"
-msgstr[0] ""
-msgstr[1] ""
+msgstr[0] "%(followers_number)s seuraaja"
+msgstr[1] "%(followers_number)s seuraajaa"
 
 #: templates/astrobin_apps_users/inclusion_tags/user_list.html:6
 msgid "User"

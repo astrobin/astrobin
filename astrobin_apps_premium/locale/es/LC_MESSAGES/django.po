@@ -3,94 +3,99 @@
 # This file is distributed under the same license as the PACKAGE package.
 # FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
 #
-#, fuzzy
 msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2015-12-28 19:29+0000\n"
-"PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
-"Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
+"PO-Revision-Date: 2015-12-29 09:55+0000\n"
+"Last-Translator: PepeChambo <jjchambo@hotmail.com>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
-"Language: \n"
+"Language: es\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"Plural-Forms: nplurals=2; plural=(n != 1)\n"
+"Plural-Forms: nplurals=2; plural=(n != 1);\n"
+"X-Generator: Pootle 2.5.0\n"
+"X-POOTLE-MTIME: 1451382915.265810\n"
 
 #: templates/astrobin_apps_premium/_migration_data.html:4
 msgid "Your migration data"
-msgstr ""
+msgstr "Tus datos migrados"
 
 #: templates/astrobin_apps_premium/_migration_data.html:7
 msgid "Total amount donated last year"
-msgstr ""
+msgstr "Total donado el año pasado"
 
 #: templates/astrobin_apps_premium/_migration_data.html:8
 msgid "First payment"
-msgstr ""
+msgstr "Primer pago"
 
 #: templates/astrobin_apps_premium/_migration_data.html:9
 msgid "Price for Premium"
-msgstr ""
+msgstr "Importe Premium"
 
 #: templates/astrobin_apps_premium/_migration_data.html:10
 msgid "Days covered"
-msgstr ""
+msgstr "Plazo cubierto"
 
 #: templates/astrobin_apps_premium/_migration_data.html:11
 msgid "Premium expiration"
-msgstr ""
+msgstr "Vencimiento Premium "
 
 #: templates/astrobin_apps_premium/_transactions.html:4
 msgid "Your donations last year"
-msgstr ""
+msgstr "Tus donaciones del último año "
 
 #: templates/astrobin_apps_premium/_transactions.html:7
 msgid "Amount"
-msgstr ""
+msgstr "Importe"
 
 #: templates/astrobin_apps_premium/_transactions.html:8
 msgid "Date"
-msgstr ""
+msgstr "Fecha"
 
 #: templates/astrobin_apps_premium/_transactions.html:9
 msgid "Subscription"
-msgstr ""
+msgstr "Suscripción "
 
 #: templates/astrobin_apps_premium/migrate_donations.html:7
 #: templates/astrobin_apps_premium/migrate_donations.html:13
 #: templates/astrobin_apps_premium/migrate_donations.html:56
 msgid "Migrate donations"
-msgstr ""
+msgstr "Migrar donaciones"
 
 #: templates/astrobin_apps_premium/migrate_donations.html:23
 msgid "Error!"
-msgstr ""
+msgstr "¡Error!"
 
 #: templates/astrobin_apps_premium/migrate_donations.html:25
 msgid ""
 "Sorry, but it looks like you cannot migrate your donations to a Premium "
 "membership."
 msgstr ""
+"Disculpa, parece que no puedes migrar tus donaciones a una membresía "
+"Premium."
 
 #: templates/astrobin_apps_premium/migrate_donations.html:28
 msgid "You already have a paid membership."
-msgstr ""
+msgstr "Ya dispones de una cuenta de pago."
 
 #: templates/astrobin_apps_premium/migrate_donations.html:32
 msgid "We could not find any donations from you last year."
-msgstr ""
+msgstr "No encontramos ninguna donación tuya durante el último año."
 
 #: templates/astrobin_apps_premium/migrate_donations.html:36
 msgid ""
 "Your donations last year were not enough to cover a Premium subscription for "
 "this year."
 msgstr ""
+"Tus donaciones durante el último año no fueron suficientes para cubrir una "
+"suscripción Premium para este año."
 
 #: templates/astrobin_apps_premium/migrate_donations.html:41
 msgid "View the subscription plans"
-msgstr ""
+msgstr "Ver los planes de suscripción "
 
 #: templates/astrobin_apps_premium/migrate_donations.html:45
 msgid ""
@@ -99,6 +104,9 @@ msgid ""
 "membership will have an expiration date proportionate to the amount you "
 "donated."
 msgstr ""
+"Como hiciste donaciones durante el último año, puedes transferir la cantidad "
+"donada a una cuenta AstroBin Premium. La cuenta tendrá una fecha de "
+"vencimiento proporcional a la cantidad donada."
 
 #: templates/astrobin_apps_premium/migrate_donations.html:46
 msgid ""
@@ -106,20 +114,23 @@ msgid ""
 "consider your past donations as a contribution to support past efforts, and "
 "pay again for a Premium plan. Up to you!"
 msgstr ""
+"Si te sientes particularmente generoso, podrías considerar tus anteriores "
+"donaciones como una contribución para apoyar esfuerzos pasados, y pagar de "
+"nuevo por un plan Premium. ¡Tú decides!"
 
 #: templates/astrobin_apps_premium/migrate_donations.html:58
 msgid "No, I want to pay for Premium"
-msgstr ""
+msgstr "No, quiero pagar por una cuenta Premium "
 
 #: templates/astrobin_apps_premium/migrate_donations_success.html:7
 #: templates/astrobin_apps_premium/migrate_donations_success.html:11
 msgid "Success"
-msgstr ""
+msgstr "Realizado con éxito "
 
 #: templates/astrobin_apps_premium/migrate_donations_success.html:12
 msgid "Your migration was successful."
-msgstr ""
+msgstr "La migración se ha llevado a cabo con éxito."
 
 #: templates/astrobin_apps_premium/migrate_donations_success.html:12
 msgid "Thanks for supporting AstroBin!"
-msgstr ""
+msgstr "¡Gracias por apoyar AstroBin!"

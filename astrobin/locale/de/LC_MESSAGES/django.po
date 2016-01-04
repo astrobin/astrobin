@@ -8,8 +8,8 @@ msgstr ""
 "Project-Id-Version: AstroBin 1.4\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2015-12-28 19:17+0000\n"
-"PO-Revision-Date: 2015-11-12 17:40+0000\n"
-"Last-Translator: Christian <info@christian-wiederer.de>\n"
+"PO-Revision-Date: 2016-01-01 12:09+0000\n"
+"Last-Translator: Niels <astrobin.com@n13l5.de>\n"
 "Language-Team: German <LL@li.org>\n"
 "Language: de\n"
 "MIME-Version: 1.0\n"
@@ -17,7 +17,7 @@ msgstr ""
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=(n != 1);\n"
 "X-Generator: Pootle 2.5.0\n"
-"X-POOTLE-MTIME: 1447350054.692400\n"
+"X-POOTLE-MTIME: 1451650193.123395\n"
 
 #: fields.py:10
 msgid "United Kingdom"
@@ -97,17 +97,11 @@ msgstr "Bahrain"
 
 #: fields.py:29
 msgid "Bangladesh"
-msgstr ""
-"9q0pOd  <a href=\"http://ufhqbjzhakls.com/\">ufhqbjzhakls</a>, [url=http://"
-"yjrbuuolrtoi.com/]yjrbuuolrtoi[/url], [link=http://zdmtdbwibgsi.com/]"
-"zdmtdbwibgsi[/link], http://njanjdjgatgv.com/"
+msgstr "Bangladesch"
 
 #: fields.py:30
 msgid "Barbados"
-msgstr ""
-"gV45sF  <a href=\"http://ghouanrccukj.com/\">ghouanrccukj</a>, [url=http://"
-"phxlsnuratcl.com/]phxlsnuratcl[/url], [link=http://nljslbqponmq.com/]"
-"nljslbqponmq[/link], http://doiogqkagupb.com/"
+msgstr "Barbados"
 
 #: fields.py:31
 msgid "Belarus"
@@ -243,10 +237,7 @@ msgstr "Costa Rica"
 
 #: fields.py:64
 msgid "Cote d'Ivoire"
-msgstr ""
-"kk2HMO  <a href=\"http://zvefvbqscluz.com/\">zvefvbqscluz</a>, [url=http://"
-"jhksiblqpdwc.com/]jhksiblqpdwc[/url], [link=http://gqeoanzwpwhj.com/]"
-"gqeoanzwpwhj[/link], http://jfqijhhzurwh.com/"
+msgstr "Elfenbeinküste"
 
 #: fields.py:65
 msgid "Croatia"
@@ -714,10 +705,7 @@ msgstr "Panama"
 
 #: fields.py:181
 msgid "Papua New Guinea"
-msgstr ""
-"TRtMvl  <a href=\"http://kygzkbcuvkfi.com/\">kygzkbcuvkfi</a>, [url=http://"
-"yuhmjgwzzbyz.com/]yuhmjgwzzbyz[/url], [link=http://hylgflpmwipj.com/]"
-"hylgflpmwipj[/link], http://xlpfccmlyztq.com/"
+msgstr "Papua Neu-Guinea"
 
 #: fields.py:182
 msgid "Paraguay"
@@ -825,10 +813,7 @@ msgstr "Seychellen"
 
 #: fields.py:208
 msgid "Sierra Leone"
-msgstr ""
-"uVqkjv  <a href=\"http://phhwoswsznwp.com/\">phhwoswsznwp</a>, [url=http://"
-"kyekbzmeqdlw.com/]kyekbzmeqdlw[/url], [link=http://qtftbifiewur.com/]"
-"qtftbifiewur[/link], http://rnoxqfuwahun.com/"
+msgstr "Sierra Leone"
 
 #: fields.py:209
 msgid "Singapore"
@@ -856,10 +841,7 @@ msgstr "Südafrika"
 
 #: fields.py:215
 msgid "South Georgia and the South Sandwich Islands"
-msgstr ""
-"i0qJnP  <a href=\"http://sbslcryearas.com/\">sbslcryearas</a>, [url=http://"
-"oxednsdcvbwu.com/]oxednsdcvbwu[/url], [link=http://kskciufrjfpk.com/]"
-"kskciufrjfpk[/link], http://xeftotofqule.com/"
+msgstr "Südgeorgien und die Süd-Sandwich-Inseln"
 
 #: fields.py:216
 msgid "Spain"
@@ -1436,7 +1418,7 @@ msgstr "Gefällt mir"
 
 #: locale_extras.py:21
 msgid "Stop following"
-msgstr "Entfolgen"
+msgstr "Nicht folgen"
 
 #: locale_extras.py:22
 msgid "Follow"
@@ -1569,7 +1551,7 @@ msgstr "Sonne"
 
 #: models.py:141
 msgid "Earth's Moon"
-msgstr "Erd-Mond"
+msgstr "Mond"
 
 #: models.py:142
 msgid "Mercury"
@@ -2331,34 +2313,34 @@ msgid "Language"
 msgstr "Sprache"
 
 #: models.py:1706
-#, fuzzy
 msgid "Signature"
-msgstr "Saturn"
+msgstr "Signatur"
 
 #: models.py:1711
 msgid "Signature HTML Version"
-msgstr ""
+msgstr "Signatur (HTML Version)"
 
 #: models.py:1716
 msgid "Show signatures"
-msgstr ""
+msgstr "Signaturen anzeigen"
 
 #: models.py:1721
 msgid "Post count"
-msgstr ""
+msgstr "Anzahl der Beiträge"
 
 #: models.py:1726
+#, fuzzy
 msgid "Automatically subscribe"
-msgstr ""
+msgstr "Automatisch beitreten"
 
 #: models.py:1727
 msgid "Automatically subscribe to topics that you answer"
-msgstr ""
+msgstr "Automatisch Themen verfolgen, auf die du antwortest."
 
 #: models.py:1734
 #: templates/pybb/mail_templates/subscription_email_subject.html:2
 msgid "New reply to a forum topic you subscribe to"
-msgstr ""
+msgstr "Neue Antwort auf ein Forum Thema dem du folgst"
 
 #: models.py:1776
 msgid "A descriptive name, e.g. 'Home observatory' or 'Mount Whitney'."
@@ -2679,7 +2661,7 @@ msgstr "Kein oder falsches Bild. Erlaubte Formate sind JPG, PNG und GIF."
 
 #: views.py:1053
 msgid "You have reached your image uploads limit. Please upgrade!"
-msgstr ""
+msgstr "Du hast dein Upload Limit erreicht. Bitte erweitere deinen Account."
 
 #: views.py:1057 views.py:2781 templates/user/profile/flickr_import.html:10
 msgid ""
@@ -2690,11 +2672,12 @@ msgstr ""
 "Lesen Modus. Bitte versuche es später noch einmal!"
 
 #: views.py:1080 views.py:2801
+#, fuzzy
 msgid ""
 "You uploaded an Indexed PNG file. AstroBin will need to lower the color "
 "count to 256 in order to work with it."
 msgstr ""
-"Du hast eine indizierte PNG-Datei hochgeladen. Die Anzahl der Farben wird "
+"Du hast eine indexierte PNG-Datei hochgeladen. Die Anzahl der Farben wird "
 "auf 256 verringert, damit AstroBin damit arbeiten kann."
 
 #: views.py:1346 views.py:1433 views.py:1517 views.py:1543 views.py:2215
@@ -2775,11 +2758,11 @@ msgid "Average integration time"
 msgstr "Durchschnittliche Aufnahmedauer"
 
 #: views.py:1875
-#, fuzzy
 msgid "Forum posts"
-msgstr "Foren"
+msgstr "Forums Beitrag"
 
 #: views.py:2366
+#, fuzzy
 msgid ""
 "There was one or more errors processing the form. You may need to scroll "
 "down to see them."
@@ -2801,7 +2784,7 @@ msgstr "Du kannst kein Produkt mit sich selber zusammenfügen."
 
 #: views.py:4067
 msgid "Default front page section changed."
-msgstr ""
+msgstr "Standard Startseite geändert."
 
 #: management/__init__.py:15
 msgid "You have a new follower"
@@ -2840,14 +2823,13 @@ msgid "There was a reply to your comment"
 msgstr "Es gibt eine Antwort zu Deinem Kommentar"
 
 #: management/__init__.py:69
-#, fuzzy
 msgid "Your image was bookmarked"
 msgstr "Dein Bild wurde als Favorit markiert"
 
 #: management/__init__.py:75
 #, fuzzy
 msgid "Your image was liked"
-msgstr "Dein Bild wurde gelöscht"
+msgstr "Dein Bild wurde geliked"
 
 #: management/__init__.py:81
 msgid "New image with some gear you follow"
@@ -2876,7 +2858,7 @@ msgstr "Die neuen Daten wurden im öffentlichen Bereich publiziert."
 #: management/__init__.py:117
 #, fuzzy
 msgid "New image posted to public data pool"
-msgstr "Neues Bild eines Objektes, dem Du folgst"
+msgstr "Neues Bild im Public Data Pool"
 
 #: management/__init__.py:123
 msgid "New data posted to shared private folder"
@@ -2884,12 +2866,11 @@ msgstr "Die neuen Daten wurden im persönlichen Ordner veröffentlicht"
 
 #: management/__init__.py:129
 msgid "New image posted to shared private folder"
-msgstr ""
+msgstr "Neues Bild im privaten geteilten Ordner"
 
 #: management/__init__.py:135
-#, fuzzy
 msgid "You are invited to a shared private folder"
-msgstr "Du hast eine neue private Nachricht."
+msgstr "Du wurdest in einen privaten Ordner eingeladen."
 
 #: templates/403.html:4 templates/403.html.py:7
 msgid "You are not allowed to see this page."
@@ -2922,12 +2903,10 @@ msgstr ""
 "möglich zu lösen. Wir entschuldigen uns für die Unannehmlichkeiten ...."
 
 #: templates/500.html:21
-#, fuzzy
 msgid "Go back to the hom page."
 msgstr "Zurück zur Homepage."
 
 #: templates/503.html:4
-#, fuzzy
 msgid "AstroBin in temporarily unavailable"
 msgstr "AstroBin ist vorübergehend nicht erreichbar"
 
@@ -2972,16 +2951,15 @@ msgid "Request an API key"
 msgstr "API-Key beantragen"
 
 #: templates/app_api_key_request.html:10
-#, fuzzy
 msgid ""
 "Thanks for your interest in using AstroBin's APIs! You need a <strong>key</"
 "strong> and a <strong>secret</strong> if you want to access AstroBin's data "
 "in your own app or website."
 msgstr ""
 "Danke für Dein Interesse an den AstroBin APIs! Du benötigst einen "
-"<strong>Key</strong> sowie ein <strong>Schlüssel</strong> um die Daten von "
-"AstroBin auf auf Deiner eigenen Webseite oder in deiner eigenen App "
-"verwenden zu können."
+"<strong>Key</strong> sowie ein <strong>Secret</strong> um die Daten von "
+"AstroBin auf Deiner eigenen Webseite oder in deiner eigenen App verwenden zu "
+"können."
 
 #: templates/app_api_key_request.html:11
 msgid "After you submit a request, you will receive a reply within 24 hours."
@@ -3116,16 +3094,19 @@ msgid ""
 "social activities. For unlimited storage, you will need a premium "
 "subscription."
 msgstr ""
+"Nein. Mit einem kostenlosen Account kannst du 10 Bilder hochladen und am "
+"Sozialen Netzwerk teilnehmen. Für unbegrenzten Speicherplatz brauchst du "
+"einen Premium Account."
 
 #: templates/faq.html:36
-#, fuzzy
 msgid ""
 "<strong>NO!</strong> If you are a premium member, on AstroBin you can upload "
 "as many images as you want, and as large as you want. In fact, full size "
 "images are encouraged!"
 msgstr ""
-"<strong>NEIN!</strong> Du kannst so viele und so große Bilder hochladen, wie "
-"Du willst. Im Gegenteil, Bilder in Originalgröße sind hier erwünscht!"
+"<strong>NEIN!</strong> Als Premium Nutzer auf AsrtBin kannst so viele und so "
+"große Bilder hochladen, wie Du willst. Hier sind Bilder in Originalgröße "
+"erwünscht!"
 
 #: templates/faq.html:43
 msgid "AstroBin will accept JPEG, PNG and GIF. Animated GIF is supported too."
@@ -3364,16 +3345,15 @@ msgstr ""
 "einige andere Daten."
 
 #: templates/faq.html:140
-#, fuzzy
 msgid ""
 "Every night, an algorithm looks at the images uploaded during the previous 7 "
 "days. The 20 most liked images in that time window are presented each "
 "morning to an appointed person that selects one according to personal "
 "preference."
 msgstr ""
-"Jede Nacht ermittelt ein Algorithmus die hochgeladene Bilder der vergangenen "
-"7 Tage. Das Bild mit den meisten Likes in dieser Zeitperiode wird als Bild "
-"des Tages ausgewäjlt."
+"Jede Nacht ermittelt ein Algorithmus aus den hochgeladene Bilder der "
+"vergangenen 7 Tage die 20 Bilder mit den meisten Likes. Ein Moderator wählt "
+"daraus das Bild des Tages."
 
 #: templates/faq.html:146
 msgid ""
@@ -3752,8 +3732,8 @@ msgid ""
 "rescue to provide a home and a central hub for astrophotographers all over "
 "the world."
 msgstr ""
-"Wie Sie inzwischen sicher bemerkt haben, leistet <em> AstroBin </em> "
-"deutlich mehr als ein Bilder-Online/Hosting-Service. Es ist das, was die "
+"Wie Du inzwischen sicher bemerkt hast, leistet <em> AstroBin </em> deutlich "
+"mehr als ein Bilder-Online/Hosting-Service. Es ist das, was die "
 "Astrofotografen-Community schon seit langem braucht. Seit Jahren sieht man "
 "schon erstklassige Bilder verstreut über das Internet: Auf allgemeinen "
 "Bilder-Service-Webseiten, in Foren, auf privaten Homepages und sogar auf "
@@ -3761,20 +3741,19 @@ msgstr ""
 "Informationen, welche zu schade sind, als dass man sie im Webchaos "
 "untergehen lassen darf. <em> AstroBin </em> will diese Bilder erhalten, "
 "indem es diesen ein Zuhause bietet und für die Astrofotografen weltweit als "
-"zentrale Anlaufstelle fungiert."
+"zentrale Anlaufstelle fungiert.                "
 
 #: templates/help.html:81
 msgid "So, what are you waiting for?"
-msgstr "Worauf warten Sie noch?"
+msgstr "Worauf wartest Du noch?"
 
 #: templates/help.html:82
 msgid "Sign up now!"
 msgstr "Jetzt registrieren!"
 
 #: templates/iotd_archive.html:7 templates/iotd_archive.html.py:13
-#, fuzzy
 msgid "Archive of 'Image of the day' winners"
-msgstr "Bild des Tages"
+msgstr "Archiviere die 'Bild des Tages' Gewinner"
 
 #: templates/iotd_archive.html:23 templates/actstream/action.html:87
 #: templates/actstream/action.html.py:94 templates/actstream/action.html:110
@@ -3784,14 +3763,12 @@ msgid "by"
 msgstr "von"
 
 #: templates/iotd_archive.html:32 templates/index/root.html:100
-#, fuzzy
 msgid "Runners-up"
 msgstr "Zweitplazierte"
 
 #: templates/iotd_choose.html:7 templates/iotd_choose.html.py:13
-#, fuzzy
 msgid "Choose today's 'Image of the day'"
-msgstr "Bild des Tages"
+msgstr "Wähle das heutige \"Bild des Tages\""
 
 #: templates/iotd_choose.html:17
 msgid ""
@@ -3799,19 +3776,20 @@ msgid ""
 "them are images that received lots of likes, and the other half were "
 "selected randomly. The images are anonymized as to not bias the selection."
 msgstr ""
+"Hier ist eine Auswahl von Bildern der letzten 7 Tage. Die Hälfte sind Bilder "
+"die viele Likes haben, die andere Hälfte wurde zufällig ausgewählt. Die "
+"Bilder sind anonymisiert um die Wahl nicht zu verzerren."
 
 #: templates/iotd_choose.html:27
-#, fuzzy
 msgid "Choose"
-msgstr "Datei auswählen"
+msgstr "Wählen"
 
 #: templates/iotd_choose.html:33
-#, fuzzy
 msgid ""
 "There are no candidates for 'Image of the day' yet, today. Please try again "
 "later."
 msgstr ""
-"Es gibt jetzt noch keinen \"Bild des Tages\" Gewinner. Versuche es später "
+"Es gibt jetzt noch keinen \"Bild des Tages\" Kandidaten. Versuche es später "
 "nochmal."
 
 #: templates/iotd_choose_confirm.html:7 templates/iotd_choose_confirm.html:13
@@ -3819,17 +3797,16 @@ msgstr ""
 #: templates/user/profile/commercial/products.html:291
 #: templates/user/profile/commercial/products.html:357
 #: templates/user/profile/commercial/products.html:361
-#, fuzzy
 msgid "Are you sure?"
-msgstr "Dieses Bild wurde heute als Bild des Tages gewählt."
+msgstr "Bist du sicher?"
 
 #: templates/iotd_choose_confirm.html:22
 msgid "This image will be selected as today's 'Image of the day'."
-msgstr ""
+msgstr "Dieses Bild wird als 'Bild des Tages' ausgewählt."
 
 #: templates/iotd_choose_confirm.html:23
 msgid "This operation cannot be undone."
-msgstr ""
+msgstr "Diese Aktion kann nicht rückgängig gemacht werden."
 
 #: templates/iotd_choose_confirm.html:31
 msgid "Yes, I'm sure"
@@ -3868,9 +3845,8 @@ msgstr "AstroBin Index"
 
 #: templates/leaderboard.html:30 templates/base/user_links_entries.html:127
 #: templates/user/profile-subnav.html:85
-#, fuzzy
 msgid "Followers"
-msgstr "Gefolgt"
+msgstr "Abonnenten"
 
 #: templates/leaderboard.html:40
 msgid "Total integration"
@@ -3890,13 +3866,12 @@ msgstr "Home"
 
 #: templates/maintenance_base.html:89 templates/maintenance_base.html:511
 #: templates/base/footer.html:19 templates/base/site_links.html:19
-#, fuzzy
 msgid "Forum"
-msgstr "Foren"
+msgstr "Forum"
 
 #: templates/maintenance_base.html:94 templates/base/site_links.html:24
 msgid "Latest topics"
-msgstr ""
+msgstr "Neueste Beiträge"
 
 #: templates/maintenance_base.html:96 templates/base/site_links.html:26
 msgid "Subscribed topics"
@@ -4098,7 +4073,7 @@ msgstr "Nutzungsbedingungen"
 
 #: templates/maintenance_base.html:518 templates/base/footer.html:26
 msgid "Source code"
-msgstr ""
+msgstr "Quelltext"
 
 #: templates/maintenance_base.html:524 templates/base/footer.html:33
 msgid "Thanks to"
@@ -4227,6 +4202,9 @@ msgid ""
 "have just subscribed, please wait for a few minutes. Thanks for your "
 "patience!"
 msgstr ""
+"Deine Light oder Premium Mitgliedschaft ist nicht aktiv oder abgelaufen. "
+"Wenn du sie gerade abonniert hast warte bitte ein paar Minuten. Danke für "
+"deine Geduld!"
 
 #: templates/upload.html:39
 #, python-format
@@ -4234,10 +4212,12 @@ msgid ""
 "You have used <strong>%(premium_counter)s</strong> images of your allowed "
 "<strong>%(max_allowed)s</strong>."
 msgstr ""
+"Du hast <strong>%(premium_counter)s</strong> deiner erlaubten <strong>%"
+"(max_allowed)s</strong> bereits verbraucht."
 
 #: templates/upload.html:41 templates/upload.html.py:49
 msgid "Would you like to upgrade?"
-msgstr ""
+msgstr "Möchtest du upgraden?"
 
 #: templates/upload.html:46
 #, python-format
@@ -4245,6 +4225,8 @@ msgid ""
 "You have used <strong>%(premium_counter)s</strong> images of your allowed "
 "<strong>%(max_allowed)s</strong> for the current year."
 msgstr ""
+"Du hast <strong>%(premium_counter)s</strong> deiner erlaubten <strong>%"
+"(max_allowed)s</strong> für dieses Jahr bereits verbraucht."
 
 #: templates/upload.html:47
 #: templates/subscription/subscription_detail.html:212
@@ -4252,11 +4234,13 @@ msgstr ""
 #: templates/subscription/subscription_list.html:76
 #, fuzzy
 msgid "Thank you for supporting AstroBin!"
-msgstr "Die folgenden Firmen unterstützen AstroBin."
+msgstr "Danke, dass du AstroBin unterstützt!"
 
 #: templates/upload.html:54
 msgid "Thank you for being a premium member! Enjoy your unlimited uploads."
 msgstr ""
+"Danke, dass du ein Premium Mitglied bist! Genieße unbegrenzte Bilder "
+"uploads."
 
 #: templates/upload.html:66
 msgid "Upload as a work in progress"
@@ -4297,23 +4281,24 @@ msgstr ""
 "<a href=\"%(flickr_url)s\">Flickr importieren</a>."
 
 #: templates/upload.html:104
-#, fuzzy
 msgid "Raw data upload"
-msgstr "Daten entfernen"
+msgstr "Raw Data hochladen"
 
 #: templates/upload.html:113
 msgid ""
 "You have no more space left on your Raw Data account. Please delete some "
 "files to make room, or upgrade your account."
 msgstr ""
+"Dein Raw Data Account hat keinen freien Speicher mehr. Bitte lösche einige "
+"Dateien um Platz zu schaffen oder erweitere deinen Account."
 
 #: templates/upload.html:123
 msgid "Use the button below to choose files"
-msgstr ""
+msgstr "Nutze den Knopf unterhalb um Dateien auszuwählen"
 
 #: templates/upload.html:127
 msgid "Drop your raw data here"
-msgstr ""
+msgstr "Lege deine Rohdaten hier ab"
 
 #: templates/upload.html:129
 msgid "Accepted file types: FIT and digital camera raw files"
@@ -4340,16 +4325,15 @@ msgstr "Datei auswählen"
 
 #: templates/upload.html:156
 msgid "Reset"
-msgstr ""
+msgstr "Zurücksetzen"
 
 #: templates/upload.html:163
-#, fuzzy
 msgid "Start upload"
-msgstr "hochgeladen"
+msgstr "Upload starten"
 
 #: templates/upload.html:182 templates/upload.html.py:421
 msgid "Go to your Raw Data Library."
-msgstr ""
+msgstr "Gehe zum Raw Data Pool."
 
 #: templates/upload.html:195
 msgid ""
@@ -4360,10 +4344,9 @@ msgstr ""
 #: templates/upload.html:200
 #, fuzzy, python-format
 msgid "Go to the Raw Data <a href=\"%(plans_url)s\">plans page</a>."
-msgstr "Gehe zu den Raw Daten <a href=\"%(plans_url)s\">plans page</a>."
+msgstr "Gehe zu den Raw Daten <a href=\"%(plans_url)s\">Auswahl Seite</a>."
 
 #: templates/upload.html:210
-#, fuzzy
 msgid ""
 "Did you know that AstroBin can host your FIT and digital camera raw files "
 "too?"
@@ -4378,6 +4361,9 @@ msgid ""
 "to safely store all your raw files, and have them neatily organized for "
 "future reference!"
 msgstr ""
+"Wenn du deine RAW Files sicher speichern möchtest, sieh dir <a href=\"%"
+"(rawdata_url)s\">AstroBin Raw Data</a> an und organisiere sie ordentlich für "
+"die Zukunft."
 
 #: templates/upload.html:304
 msgid "Raw files"
@@ -4385,19 +4371,19 @@ msgstr "Raw Dateien"
 
 #: templates/upload.html:341
 msgid "Upload started, please wait..."
-msgstr ""
+msgstr "Upload gestartet, bitte warten..."
 
 #: templates/upload.html:387
 msgid ""
 "One ore more files were ignored because they did not look like FIT or "
 "digital camera raw files."
 msgstr ""
+"Mindestens eine Datei wurde ignoriert, da sie keine FIT oder Kamera RAW "
+"Datei ist."
 
 #: templates/upload.html:420
 msgid "Upload complete!"
-msgstr ""
-"Ein oder mehrere Dateien wurden ignoriert weil sie nicht nach FIT oder "
-"Digitalkamera Raw Dateien aussehen."
+msgstr "Hochladen abgeschlossen!"
 
 #: templates/wall.html:18
 msgid "Sort by"
@@ -4412,9 +4398,8 @@ msgid "Acquired"
 msgstr "Aufgenommen"
 
 #: templates/wall.html:44
-#, fuzzy
 msgid "Number of likes"
-msgstr "Anzahl der Frames"
+msgstr "Anzahl der Likes"
 
 #: templates/wall.html:56 templates/gear/page.html:252
 #: templates/inclusion_tags/search_image_list.html:53
@@ -4498,7 +4483,7 @@ msgstr ""
 #: templates/base/site_links.html:104
 #, fuzzy
 msgid "AstroBin Raw Data"
-msgstr "AstroBin ist sozial!"
+msgstr "AstroBin Raw Data"
 
 #: templates/base/user_links_entries.html:91
 msgid "Help with translations!"
@@ -4510,14 +4495,13 @@ msgstr "Bitte aus den obenstehenden Optionen die Sprache auswählen."
 
 #: templates/base/user_links_entries.html:139
 #: templates/subscription/subscription_list.html:5
-#, fuzzy
 msgid "Subscription plans"
-msgstr "Beschreibung"
+msgstr "Abonnement Optionen"
 
 #: templates/base/user_links_entries.html:179
 #, fuzzy
 msgid "Raw data"
-msgstr "Daten entfernen"
+msgstr "Rohdaten"
 
 #: templates/base/user_links_entries.html:185
 #: templates/user/profile-subnav.html:35
@@ -4976,7 +4960,7 @@ msgstr ""
 
 #: templates/image/detail/comments.html:20
 msgid "Comments are closed."
-msgstr ""
+msgstr "Keine Kommentare möglich."
 
 #: templates/image/detail/commercial.html:6
 msgid "Made possible by"
@@ -5014,9 +4998,8 @@ msgid "Orientation"
 msgstr "Ausrichtung"
 
 #: templates/image/detail/image_card.html:84
-#, fuzzy
 msgid "Field radius"
-msgstr "Feldgrösse"
+msgstr "Feldradius"
 
 #: templates/image/detail/image_title.html:33
 msgid "Contains"
@@ -5038,7 +5021,7 @@ msgstr "Original"
 
 #: templates/image/detail/skyplot.html:5 templates/image/detail/skyplot.html:7
 msgid "Sky plot"
-msgstr ""
+msgstr "Sternen Karte"
 
 #: templates/image/detail/wip_banner.html:9
 #, python-format
@@ -5066,9 +5049,8 @@ msgid "Actions"
 msgstr "Aktionen"
 
 #: templates/image/detail/menu/actions.html:15
-#, fuzzy
 msgid "Edit watermark"
-msgstr "Nächster Schritt: Wasserzeichen"
+msgstr "Wasserzeichen ändern"
 
 #: templates/image/detail/menu/actions.html:21
 msgid "Edit basic information"
@@ -5088,7 +5070,6 @@ msgid "Mark this revision as final"
 msgstr "Diese Version als \"final\" markieren"
 
 #: templates/image/detail/menu/actions.html:61
-#, fuzzy
 msgid "Attempt to plate-solve again"
 msgstr "Erneut astrometrieren"
 
@@ -5111,7 +5092,6 @@ msgstr "In den Staging-Bereich verschieben"
 
 #: templates/image/detail/menu/actions.html:100
 #: templates/image/detail/modals/send_to_datapool.html:7
-#, fuzzy
 msgid "Send to public data pool"
 msgstr "Im öffentlichen Bereich anzeigen"
 
@@ -5144,12 +5124,12 @@ msgstr "Einem anderen Benutzer empfehlen"
 #: templates/image/detail/menu/admin.html:7
 #: templates/pybb/post_template.html:61 templates/pybb/topic.html:68
 msgid "Admin"
-msgstr ""
+msgstr "Administrator"
 
 #: templates/image/detail/menu/admin.html:14
 #: templates/image/detail/modals/flag_thumbnails.html:7
 msgid "Flag malfunctioning thumbnails"
-msgstr ""
+msgstr "Defekte miniatur Bilder markieren"
 
 #: templates/image/detail/menu/admin.html:21
 msgid "Ban user"
@@ -5272,21 +5252,25 @@ msgstr ""
 msgid ""
 "This will trigger the regeneration of all thumbnails for this image and all "
 "its revisions."
-msgstr ""
+msgstr "Neu generieren aller Miniaturbilder dieses Bildes."
 
 #: templates/image/detail/modals/like_this.html:8
+#, fuzzy
 msgid "The following people like this image"
-msgstr ""
+msgstr "Folgende Persohnen liken dieses Bild."
 
 #: templates/image/detail/modals/send_to_datapool.html:11
 msgid ""
 "If this image is the result of your processing of a public data pool, you "
 "can send it the pool so it's displayed there."
 msgstr ""
+"Dieses Bild ist ein Ergebnis aus dem Public Pool Data, du kannst es im Pool "
+"anzeigen lassen."
 
 #: templates/image/detail/modals/send_to_datapool.html:15
 msgid "Use this form to select an existing <strong>public data pool</strong>."
 msgstr ""
+"Nutze diese Maske um einen <strong>Public Data Pool</strong> auszuwählen."
 
 #: templates/image/detail/modals/send_to_sharedfolder.html:11
 msgid ""
@@ -5674,7 +5658,7 @@ msgstr ""
 
 #: templates/index/root.html:43
 msgid "Have your data neatly plotted."
-msgstr "Ihre Daten werden übersichtlich dargestellt."
+msgstr "Deine Daten werden übersichtlich dargestellt."
 
 #: templates/index/root.html:44
 msgid ""

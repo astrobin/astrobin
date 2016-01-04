@@ -8,7 +8,7 @@ msgstr ""
 "Project-Id-Version: 1.4\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2015-12-28 19:22+0000\n"
-"PO-Revision-Date: 2012-07-19 18:56+0100\n"
+"PO-Revision-Date: 2015-12-29 23:52+0000\n"
 "Last-Translator: bilgebay <bilgebay@gmail.com>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
 "Language: tr\n"
@@ -16,7 +16,8 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=(n != 1);\n"
-"X-Generator: Pootle 2.1.6\n"
+"X-Generator: Pootle 2.5.0\n"
+"X-POOTLE-MTIME: 1451433131.124260\n"
 
 #: fields.py:10
 msgid "United Kingdom"
@@ -1141,7 +1142,7 @@ msgstr "Arama"
 
 #: forms.py:274
 msgid "All"
-msgstr ""
+msgstr "Hepsi"
 
 #: forms.py:275 templates/leaderboard.html:35 templates/gear/page.html:236
 #: templates/inclusion_tags/search_image_list.html:51
@@ -1274,7 +1275,7 @@ msgstr "Lütfen 1 ile 10 arasında bir değer giriniz."
 
 #: forms.py:640 forms.py:658
 msgid "The date cannot be in the future."
-msgstr ""
+msgstr "Bugun ya da onceki bir tarih girin"
 
 #: forms.py:892 forms.py:953 models.py:189 templates/gear/fix.html:32
 #: templates/gear/fix.html.py:33 templates/gear/fix.html:34
@@ -1318,7 +1319,7 @@ msgstr "Ad"
 #: templates/user/profile/commercial/products.html:485
 #: templates/user/profile/commercial/products.html:812
 msgid "Merge"
-msgstr ""
+msgstr "Birleştir"
 
 #: forms.py:904 forms.py:965
 msgid ""
@@ -1356,9 +1357,8 @@ msgid "Body"
 msgstr "Mesaj"
 
 #: locale_extras.py:7
-#, fuzzy
 msgid "uploaded a new image"
-msgstr "Yeni resim yükleyin"
+msgstr "Yeni resim yüklendi"
 
 #: locale_extras.py:8
 msgid "uploaded a new revision of"
