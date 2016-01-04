@@ -1,4 +1,4 @@
 #!/bin/bash
-coverage run ./manage.py test astrobin &&\
+coverage run ./manage.py test astrobin rawdata
 coverage report --omit="/venv/*" &&\
 coverage html --omit="/venv/*" -d cover
