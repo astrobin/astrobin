@@ -310,57 +310,47 @@ def show_ads(user):
 
 
 @register.filter
-def active_subscriptions(user):
+def valid_subscriptions(user):
     from subscription.models import UserSubscription
 
     if user.is_anonymous():
         return []
 
-    us = UserSubscription.active_objects.filter(user = user, cancelled = False)
-    subs = [x.subscription for x in us if not x.expired()]
+    us = UserSubscription.active_objects.filter(user = user)
+    subs = [x.subscription for x in us if x.valid()]
     return subs
 
 
 @register.filter
-def has_active_subscription(user, subscription_pk):
+def has_valid_subscription(user, subscription_pk):
     from subscription.models import UserSubscription
 
     if user.is_anonymous():
         return False
 
     us = UserSubscription.active_objects.filter(
-        user = user, subscription__pk = subscription_pk,
-        cancelled = False)
+        user = user, subscription__pk = subscription_pk)
 
     if us.count() == 0:
         return False
 
-    us = us[0]
-    if us.expired():
-        return False
-
-    return True
+    return us[0].valid()
 
 
 @register.filter
-def has_active_subscription_in_category(user, category):
+def has_valid_subscription_in_category(user, category):
     from subscription.models import UserSubscription
 
     if user.is_anonymous():
         return False
 
     us = UserSubscription.active_objects.filter(
-        user = user, subscription__category = category,
-        cancelled = False)
+        user = user, subscription__category = category)
 
     if us.count() == 0:
         return False
 
-    us = us[0]
-    if us.expired():
-        return False
-
-    return True
+    return us[0].valid()
 
 
 @register.filter
@@ -371,8 +361,7 @@ def get_premium_subscription_expiration(user):
         return None
 
     us = UserSubscription.active_objects.filter(
-        user = user, subscription__category = 'premium',
-        cancelled = False)
+        user = user, subscription__category = 'premium')
 
     if us.count() == 0:
         return None

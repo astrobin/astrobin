@@ -36,23 +36,17 @@
         <p>
             {% trans "Status" %}:
 
-            {% if usersubscription and usersubscription.active %}
+            {% if usersubscription and usersubscription.valid %}
                 <span class="label label-success">
                     {% trans "Subscribed" %}
-                </span> /
+                </span>
+                {% if usersubscription and usersubscription.cancelled %}
+                    <span class="label label-info">
+                        {% trans "Cancelled" %}
+                    </span>
+                {% endif %}
+
                 {% trans "Expires" %}: {{usersubscription.expires|date:"SHORT_DATE_FORMAT"}}
-            {% endif %}
-
-            {% if usersubscription and usersubscription.canceled %}
-                <span class="label label-info">
-                    {% trans "Cancelled" %}
-                </span>
-            {% endif %}
-
-            {% if usersubscription and not usersubscription.active %}
-                <span class="label label-warning">
-                    {% trans "Inactive" %}
-                </span>
             {% endif %}
 
             {% if not usersubscription and not change_denied_reasons %}
@@ -90,7 +84,7 @@
     </p>
 
     {% if usersubscription %}
-        {% if usersubscription.active %}
+        {% if usersubscription.valid %}
             {% if usersubscription.subscription.name == "Atom" %}
                 {% comment %} Free subscription {% endcomment %}
                 <div class="well text-center">
@@ -106,29 +100,42 @@
 
             {% else %} <!-- not atom -->
 
-                {% if object.category == 'premium' %}
-                <div class="alert alert-warning">
-                    <h4>
-                        <i class="icon icon-warning-sign"></i>
-                        {% trans "Warning!" %}
-                    </h4>
+                {% if usersubscription.cancelled %}
+                    <div class="alert alert-warning">
+                        <h4>
+                            <i class="icon icon-warning-sign"></i>
+                            {% trans "Warning!" %}
+                        </h4>
 
-                    <p>
-                        {% trans "By cancelling, you will revert to a free plan." %}
-                        {% blocktrans with max_allowed=PREMIUM_MAX_IMAGES_FREE %}Free plans are limited to <strong>{{max_allowed}}</strong> images.{% endblocktrans %}
-                        {% blocktrans %}However, your existing images will not be deleted or deactivated in any way! Simply, you will not be able to upload any more images unless you switch to a paid plan.{% endblocktrans %}
-                    </p>
-                </div>
-                {% endif %} <!-- if premium -->
+                        <p>
+                            {% blocktrans %}Your subscription is either cancelled or not active yet. If you want to subscribe again, please wait until your subscription is expired. If you just subscribed, please wait a few minutes while PayPal contacts our server for the final transaction confirmation. Thank you!{% endblocktrans %}
+                        </p>
+                    </div>
+                {% else %} <!-- not cancelled -->
+                    {% if object.category == 'premium' %}
+                    <div class="alert alert-warning">
+                        <h4>
+                            <i class="icon icon-warning-sign"></i>
+                            {% trans "Warning!" %}
+                        </h4>
 
-                <div class="well text-center">
-                    <a class="btn btn-danger btn-large" href="{{cancel_url}}">
-                        {% trans "Cancel via PayPal" %}
-                    </a>
-                </div>
+                        <p>
+                            {% trans "By cancelling, you will revert to a free plan." %}
+                            {% blocktrans with max_allowed=PREMIUM_MAX_IMAGES_FREE %}Free plans are limited to <strong>{{max_allowed}}</strong> images.{% endblocktrans %}
+                            {% blocktrans %}However, your existing images will not be deleted or deactivated in any way! Simply, you will not be able to upload any more images unless you switch to a paid plan.{% endblocktrans %}
+                        </p>
+                    </div>
+                    {% endif %} <!-- if premium -->
+
+                    <div class="well text-center">
+                        <a class="btn btn-danger btn-large" href="{{cancel_url}}">
+                            {% trans "Cancel via PayPal" %}
+                        </a>
+                    </div>
+                {% endif %} <!-- if cancelled -->
             {% endif %} <!-- if atom -->
 
-        {% else %} <!-- not active -->
+        {% else %} <!-- not valid -->
 
             {% if usersubscription.subscription.name == "Atom" %}
                 <div class="well text-center">
@@ -153,7 +160,7 @@
                         {{form.render}}
                     {% endif %}
             {% endif %} <!-- if atom -->
-        {% endif %} <!-- if active -->
+        {% endif %} <!-- if valid -->
 
     {% else %} <!-- user subscription unavailable -->
 

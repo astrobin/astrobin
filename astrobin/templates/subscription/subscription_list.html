@@ -5,10 +5,10 @@
 {% block title %}{% trans "Subscription plans" %}{% endblock %}
 
 {% block content %}
-    {% if request.user|active_subscriptions %}
+    {% if request.user|valid_subscriptions %}
     <div class="well">
         <h2>{% trans "Your active subscription plans" %}</h2>
-        {% with object_list=request.user|active_subscriptions subscription_category='any' %}
+        {% with object_list=request.user|valid_subscriptions subscription_category='any' %}
             {% include 'subscription/subscription_category_list.html' %}
         {% endwith %}
     </div>

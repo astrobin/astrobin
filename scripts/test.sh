@@ -1,7 +1,9 @@
 #!/bin/bash
 
 echo "Running tests..."
-coverage run ./manage.py test astrobin rawdata --noinput --failfast
+coverage run ./manage.py test \
+    astrobin astrobin_apps_premium rawdata \
+    --noinput --failfast
 if [ ${PIPESTATUS[0]} -eq 0 ]
 then
     echo -n "Generating HTML report... "

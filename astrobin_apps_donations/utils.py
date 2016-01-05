@@ -47,7 +47,7 @@ def donations_user_has_subscription(user):
     return True
 
 
-def donations_user_has_active_subscription(user):
+def donations_user_has_valid_subscription(user):
     try:
         us = donations_user_get_active_subscription(user)
     except UserSubscription.DoesNotExist:
@@ -59,7 +59,7 @@ def donations_user_has_active_subscription(user):
     False
 
 def donations_user_has_inactive_subscription(user):
-    active = donations_user_has_active_subscription(user)
+    active = donations_user_has_valid_subscription(user)
     if active:
         return False
 

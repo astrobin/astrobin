@@ -22,33 +22,30 @@ def premium_get_usersubscription(user):
     return us
 
 
-def premium_get_active_usersubscription(user):
-    us = UserSubscription.objects.filter(
+def premium_get_valid_usersubscription(user):
+    us = UserSubscription.active_objects.filter(
         user = user,
-        subscription__name__in = SUBSCRIPTION_NAMES,
-        active = True,
-        cancelled = False,
-    )
+        subscription__name__in = SUBSCRIPTION_NAMES,)
 
     if us.count() > 0:
         us = us[0]
     else:
         return None
 
-    if us.expired():
+    if not us.valid():
         return None
 
     return us
 
-def premium_get_inactive_usersubscription(user):
+def premium_get_invalid_usersubscription(user):
     us = premium_get_usersubscription(user)
-    if not us.active or us.cancelled or us.expired():
+    if not us.valid():
         return us
     return None
 
 
 def premium_used_percent(user):
-    s = premium_get_active_usersubscription(user)
+    s = premium_get_valid_usersubscription(user)
     counter = user.userprofile.premium_counter
     percent = 100
 
@@ -80,11 +77,11 @@ def premium_user_has_subscription(user):
     return us is not None
 
 
-def premium_user_has_active_subscription(user):
-    us = premium_get_active_usersubscription(user)
+def premium_user_has_valid_subscription(user):
+    us = premium_get_valid_usersubscription(user)
     return us is not None
 
 
-def premium_user_has_inactive_subscription(user):
-    us = premium_get_inactive_usersubscription(user)
+def premium_user_has_invalid_subscription(user):
+    us = premium_get_invalid_usersubscription(user)
     return us is not None

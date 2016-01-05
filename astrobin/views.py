@@ -986,8 +986,8 @@ def image_full(request, id, r):
 def image_upload(request):
     from rawdata.utils import (
         rawdata_user_has_subscription,
-        rawdata_user_has_active_subscription,
-        rawdata_user_has_inactive_subscription,
+        rawdata_user_has_valid_subscription,
+        rawdata_user_has_invalid_subscription,
         rawdata_user_is_over_limit,
         rawdata_user_byte_limit,
         rawdata_user_used_percent,
@@ -999,17 +999,17 @@ def image_upload(request):
         premium_used_percent,
         premium_progress_class,
         premium_user_has_subscription,
-        premium_user_has_inactive_subscription,
+        premium_user_has_invalid_subscription,
     )
 
     rawdata_has_sub       = rawdata_user_has_subscription(request.user)
-    rawdata_has_act_sub   = rawdata_has_sub and rawdata_user_has_active_subscription(request.user)
-    rawdata_has_inact_sub = rawdata_has_sub and rawdata_user_has_inactive_subscription(request.user)
+    rawdata_has_act_sub   = rawdata_has_sub and rawdata_user_has_valid_subscription(request.user)
+    rawdata_has_inact_sub = rawdata_has_sub and rawdata_user_has_invalid_subscription(request.user)
     rawdata_is_over_limit = rawdata_has_act_sub and rawdata_user_is_over_limit(request.user)
 
     tmpl_premium_used_percent = premium_used_percent(request.user)
     tmpl_premium_progress_class = premium_progress_class(tmpl_premium_used_percent)
-    tmpl_premium_has_inact_sub = premium_user_has_subscription(request.user) and premium_user_has_inactive_subscription(request.user)
+    tmpl_premium_has_inact_sub = premium_user_has_subscription(request.user) and premium_user_has_invalid_subscription(request.user)
 
     response_dict = {
         'rawdata_has_sub': rawdata_has_sub,

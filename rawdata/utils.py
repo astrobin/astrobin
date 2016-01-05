@@ -48,19 +48,15 @@ def rawdata_user_get_subscription(user):
         return UserSubscription.objects.filter(user = user, subscription__name__in = SUBSCRIPTION_NAMES)[0]
 
 
-def rawdata_user_get_active_subscription(user):
+def rawdata_user_get_valid_subscription(user):
     if not user.is_authenticated():
         raise UserSubscription.DoesNotExist
 
-    try:
-        us = UserSubscription.objects.get(user = user, subscription__name__in = SUBSCRIPTION_NAMES, active = True, cancelled = False)
-    except UserSubscription.MultipleObjectsReturned:
-        us = UserSubscription.objects.filter(user = user, subscription__name__in = SUBSCRIPTION_NAMES, active = True, cancelled = False)[0]
+    us = UserSubscription.active_objects.filter(user = user, subscription__name__in = SUBSCRIPTION_NAMES)
+    if us.count() == 0 or not us[0].valid():
+        raise UserSubscription.DoesNotExist
 
-    if us.expired():
-        return None
-
-    return us
+    return us[0]
 
 
 def rawdata_user_has_subscription(user):
@@ -72,20 +68,17 @@ def rawdata_user_has_subscription(user):
     return True
 
 
-def rawdata_user_has_active_subscription(user):
+def rawdata_user_has_valid_subscription(user):
     try:
-        us = rawdata_user_get_active_subscription(user)
+        us = rawdata_user_get_valid_subscription(user)
     except UserSubscription.DoesNotExist:
         return False
 
-    if us:
-        return us.active and not us.cancelled and not us.expired()
+    return True
 
-    False
-
-def rawdata_user_has_inactive_subscription(user):
-    active = rawdata_user_has_active_subscription(user)
-    if active:
+def rawdata_user_has_invalid_subscription(user):
+    valid = rawdata_user_has_valid_subscription(user)
+    if valid:
         return False
 
     try:
@@ -93,7 +86,7 @@ def rawdata_user_has_inactive_subscription(user):
     except UserSubscription.DoesNotExist:
         return False
 
-    return not us.active or us.cancelled or us.expired()
+    return not us.valid()
 
 
 def rawdata_subscription_byte_limit(subscription):
@@ -121,7 +114,7 @@ def rawdata_subscription_byte_limit(subscription):
 
 def rawdata_user_byte_limit(user):
     try:
-        us = rawdata_user_get_active_subscription(user)
+        us = rawdata_user_get_valid_subscription(user)
     except UserSubscription.DoesNotExist:
         return 0
 

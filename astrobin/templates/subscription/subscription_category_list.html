@@ -80,12 +80,12 @@
                 {% endif %}
             </td>
             <td>
-                <a  class="btn btn-block{% if request.user|has_active_subscription:object.pk %} btn-danger{% endif %}"
+                <a  class="btn btn-block{% if request.user|has_valid_subscription:object.pk %} btn-danger{% endif %}"
                     href="{% url subscription_detail object.pk %}">
-                    {% if request.user|has_active_subscription:object.pk %}
+                    {% if request.user|has_valid_subscription:object.pk %}
                         {% trans "Unsubscribe" %}
                     {% else %}
-                        {% if request.user|has_active_subscription_in_category:object.category %}
+                        {% if request.user|has_valid_subscription_in_category:object.category %}
                             {% trans "Switch to" %}
                         {% else %}
                             {% trans "Subscribe" %}
