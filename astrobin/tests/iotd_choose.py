@@ -7,7 +7,8 @@ from django.core.urlresolvers import reverse
 from django.test import TestCase
 
 # AstroBin
-from astrobin.models import Image, ImageOfTheDay
+from astrobin.models import (
+    Image, ImageOfTheDay, ImageOfTheDayCandidate)
 
 
 class IOTDChooseTest(TestCase):
@@ -61,9 +62,37 @@ class IOTDChooseTest(TestCase):
         self.client.login(username = 'test', password = 'password')
 
         image, created = Image.objects.get_or_create(user = user)
-        response = self.client.get(reverse('iotd_choose'), args = (image.pk,))
+        response = self.client.get(reverse('iotd_choose', kwargs = {'image_pk': image.pk}))
+        self.assertEqual(response.status_code, 200)
+        self.assertEqual('image' in response.context[0], True)
+
+        image.delete()
+        group.delete()
+        user.delete()
+
+    def test_iotd_choose_post(self):
+        user = User.objects.create_user('test', 'test@test.com', 'password')
+        group = Group.objects.create(name = 'IOTD_Staff')
+        user.groups.add(group)
+        self.client.login(username = 'test', password = 'password')
+
+        # No args
+        response = self.client.post(reverse('iotd_choose'))
+        self.assertEqual(response.status_code, 405)
+
+        # Arg ok but image not in candidates
+        image, created = Image.objects.get_or_create(user = user)
+        response = self.client.post(reverse('iotd_choose', kwargs = {'image_pk': image.pk}))
+        self.assertEqual(response.status_code, 403)
+
+        # All should be ok
+        candidate, created = ImageOfTheDayCandidate.objects.get_or_create(
+            image = image,
+            position = 1)
+        response = self.client.post(reverse('iotd_choose', kwargs = {'image_pk': image.pk}))
         self.assertEqual(response.status_code, 200)
 
+        candidate.delete()
         image.delete()
         group.delete()
         user.delete()

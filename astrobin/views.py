@@ -459,13 +459,11 @@ def iotd_archive(request):
 
 
 @login_required
-def iotd_choose(request, id):
+def iotd_choose(request, image_pk):
     if not request.user.groups.filter(name='IOTD_Staff'):
         return HttpResponseForbidden()
 
-    context = {
-    }
-
+    context = {}
     today = date.today()
     tomorrow = today + timedelta(1)
     candidates = ImageOfTheDayCandidate.objects.filter(date__range = (today, tomorrow))
@@ -480,7 +478,7 @@ def iotd_choose(request, id):
         pass
 
     if request.method == 'GET':
-        if id is None:
+        if image_pk is None:
             return object_list(
                 request,
                 queryset = candidates,
@@ -489,34 +487,42 @@ def iotd_choose(request, id):
                 extra_context = context,
             )
         else:
-            context['image'] = Image.objects.get(id = id)
+            context['image'] = Image.objects.get(pk = image_pk)
             return render_to_response(
                 'iotd_choose_confirm.html',
                 context,
                 context_instance = RequestContext(request))
 
     elif request.method == 'POST':
-        if id is None:
+        if image_pk is None:
             return HttpResponseNotAllowed(['POST'])
 
         from image_utils import make_image_of_the_day, make_runnerup, compare_iotd_candidates
-        image = Image.objects.get(id = id)
+        image = Image.objects.get(pk = image_pk)
 
         iotd = make_image_of_the_day(image)
         sorted_candidates = sorted(list(
             ImageOfTheDayCandidate.objects.filter(date__range = (today, tomorrow))),
             cmp = compare_iotd_candidates)
 
-        position = [x.image for x in sorted_candidates].index(image)
-        if position == 0:
-            make_runnerup(sorted_candidates[1].image, iotd, 1)
-            make_runnerup(sorted_candidates[2].image, iotd, 2)
-        elif position == 1:
-            make_runnerup(sorted_candidates[0].image, iotd, 1)
-            make_runnerup(sorted_candidates[2].image, iotd, 2)
-        else:
-            make_runnerup(sorted_candidates[0].image, iotd, 1)
-            make_runnerup(sorted_candidates[1].image, iotd, 2)
+        try:
+            position = [x.image for x in sorted_candidates].index(image)
+        except ValueError:
+            return HttpResponseForbidden()
+
+        try:
+            if position == 0:
+                make_runnerup(sorted_candidates[1].image, iotd, 1)
+                make_runnerup(sorted_candidates[2].image, iotd, 2)
+            elif position == 1:
+                make_runnerup(sorted_candidates[0].image, iotd, 1)
+                make_runnerup(sorted_candidates[2].image, iotd, 2)
+            else:
+                make_runnerup(sorted_candidates[0].image, iotd, 1)
+                make_runnerup(sorted_candidates[1].image, iotd, 2)
+        except IndexError:
+            # Runner-ups are not available, that's ok
+            pass
 
         return render_to_response(
             'iotd_choose_finished.html',
