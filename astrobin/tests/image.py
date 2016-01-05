@@ -86,30 +86,30 @@ class ImageTest(TestCase):
 
         # Test successful upload
         response = self._do_upload('astrobin/fixtures/test.jpg')
+        image = self._get_last_image()
         self.assertRedirects(
             response,
-            reverse('image_edit_watermark', kwargs = {'id': 1}),
+            reverse('image_edit_watermark', kwargs = {'id': image.pk}),
             status_code = 302,
             target_status_code = 200)
 
-        image = Image.objects.get(pk = 1)
         self.assertEqual(image.title, u"")
 
         # Test watermark
         response = self.client.post(
             reverse('image_edit_save_watermark'),
             {
-                'image_id': 1,
+                'image_id': image.pk,
                 'watermark': True,
                 'watermark_text': "Watermark test",
                 'watermark_position': 0,
                 'watermark_opacity': 100
             },
             follow = True)
-        image = Image.objects.get(pk = 1)
+        image = Image.objects.get(pk = image.pk)
         self.assertRedirects(
             response,
-            reverse('image_edit_basic', kwargs = {'id': 1}),
+            reverse('image_edit_basic', kwargs = {'id': image.pk}),
             status_code = 302,
             target_status_code = 200)
         self.assertEqual(image.watermark, True)
@@ -121,7 +121,7 @@ class ImageTest(TestCase):
         response = self.client.post(
             reverse('image_edit_save_basic'),
             {
-                'image_id': 1,
+                'image_id': image.pk,
                 'submit_gear': True,
                 'title': "Test title",
                 'link': "http://www.example.com",
@@ -133,10 +133,10 @@ class ImageTest(TestCase):
                 'allow_comments': True
             },
             follow = True)
-        image = Image.objects.get(pk = 1)
+        image = Image.objects.get(pk = image.pk)
         self.assertRedirects(
             response,
-            reverse('image_edit_gear', kwargs = {'id': 1}),
+            reverse('image_edit_gear', kwargs = {'id': image.pk}),
             status_code = 302,
             target_status_code = 200)
         self.assertEqual(image.title, "Test title")
@@ -189,7 +189,7 @@ class ImageTest(TestCase):
         response = self.client.post(
             reverse('image_edit_save_gear'),
             {
-                'image_id': 1,
+                'image_id': image.pk,
                 'submit_acquisition': True,
                 'imaging_telescopes': ','.join(["%d" % x.pk for x in imaging_telescopes]),
                 'guiding_telescopes': ','.join(["%d" % x.pk for x in guiding_telescopes]),
@@ -202,10 +202,10 @@ class ImageTest(TestCase):
                 'accessories': ','.join(["%d" % x.pk for x in accessories])
             },
             follow = True)
-        image = Image.objects.get(pk = 1)
+        image = Image.objects.get(pk = image.pk)
         self.assertRedirects(
             response,
-            reverse('image_edit_acquisition', kwargs = {'id': 1}),
+            reverse('image_edit_acquisition', kwargs = {'id': image.pk}),
             status_code = 302,
             target_status_code = 200)
 
@@ -214,7 +214,7 @@ class ImageTest(TestCase):
         response = self.client.post(
             reverse('image_edit_save_acquisition'),
             {
-                'image_id': 1,
+                'image_id': image.pk,
                 'edit_type': 'deep_sky',
                 'advanced': 'false',
                 'date': today,
@@ -224,16 +224,25 @@ class ImageTest(TestCase):
             follow = True)
         self.assertRedirects(
             response,
-            reverse('image_detail', kwargs = {'id': 1}),
+            reverse('image_detail', kwargs = {'id': image.pk}),
             status_code = 302,
             target_status_code = 200)
 
-        image = Image.objects.get(pk = 1)
+        image = Image.objects.get(pk = image.pk)
         acquisition = image.acquisition_set.all()[0].deepsky_acquisition
         self.assertEqual(acquisition.date.strftime('%Y-%m-%d'), today)
         self.assertEqual(acquisition.number, 10)
         self.assertEqual(acquisition.duration, 1200)
 
+        for i in imaging_telescopes: i.delete()
+        for i in guiding_telescopes: i.delete()
+        for i in mounts: i.delete()
+        for i in imaging_cameras: i.delete()
+        for i in guiding_cameras: i.delete()
+        for i in focal_reducers: i.delete()
+        for i in software: i.delete()
+        for i in filters: i.delete()
+        for i in accessories: i.delete()
         image.delete()
 
     def test_image_detail_view(self):
