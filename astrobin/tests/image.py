@@ -314,13 +314,18 @@ class ImageTest(TestCase):
         self.client.login(username = 'test', password = 'password')
         self._do_upload('astrobin/fixtures/test.jpg')
         image = self._get_last_image()
+        self._do_upload_revision(image, 'astrobin/fixtures/test.jpg')
+        revision = self._get_last_image_revision()
+
         response = self.client.post(
             reverse('image_flag_thumbs', kwargs = {'id': image.id}))
         self.assertRedirects(
             response,
             reverse('image_detail', kwargs = {'id': image.id}),
             status_code = 302,
-            target_status_code = 200)
+            target_status_code = 302) # target 302 due to revision redirect
+
+        revision.delete()
         image.delete()
 
     def test_image_thumb_view(self):
