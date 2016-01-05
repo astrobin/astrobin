@@ -321,6 +321,7 @@ class ImageTest(TestCase):
             reverse('image_detail', kwargs = {'id': image.id}),
             status_code = 302,
             target_status_code = 200)
+        image.delete()
 
     def test_image_thumb_view(self):
         self.client.login(username = 'test', password = 'password')
@@ -332,6 +333,7 @@ class ImageTest(TestCase):
                 'alias': 'regular'
             }))
         self.assertEqual(response.status_code, 200)
+        image.delete()
 
     def test_image_rawthumb_view(self):
         self.client.login(username = 'test', password = 'password')
@@ -348,6 +350,7 @@ class ImageTest(TestCase):
             image.thumbnail('regular'),
             status_code = 302,
             target_status_code = 200)
+        image.delete()
 
     def test_image_full_view(self):
         self.client.login(username = 'test', password = 'password')
@@ -355,6 +358,7 @@ class ImageTest(TestCase):
         image = self._get_last_image()
         response = self.client.get(reverse('image_full', kwargs = {'id': image.id}))
         self.assertEqual(response.status_code, 200)
+        image.delete()
 
     def test_image_upload_revision_process_view(self):
         self.client.login(username = 'test', password = 'password')
@@ -388,7 +392,11 @@ class ImageTest(TestCase):
             target_status_code = 200)
         self._assert_message(response, "success unread", "Image uploaded")
         image = self._get_last_image()
+        revision = self._get_last_image_revision()
         self.assertEqual(image.revisions.count(), 1)
+
+        revision.delete()
+        image.delete()
 
     def test_image_edit_make_final_view(self):
         self.client.login(username = 'test', password = 'password')
@@ -408,8 +416,12 @@ class ImageTest(TestCase):
             status_code = 302,
             target_status_code = 200)
         image = self._get_last_image()
+        revision = self._get_last_image_revision()
         self.assertEqual(image.is_final, True)
         self.assertEqual(image.revisions.all()[0].is_final, False)
+
+        revision.delete()
+        image.delete()
 
     def test_image_edit_revision_make_final_view(self):
         self.client.login(username = 'test', password = 'password')
@@ -448,3 +460,7 @@ class ImageTest(TestCase):
         self.assertEqual(image.is_final, False)
         self.assertEqual(c.is_final, False)
         self.assertEqual(b.is_final, True)
+
+        b.delete()
+        c.delete()
+        image.delete()
