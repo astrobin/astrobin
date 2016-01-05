@@ -475,7 +475,7 @@ def iotd_choose(request, id):
         context['iotd_already_exists'] = True
         messages.error(
             request,
-            _("Today's 'Image of the day' was already choosen. Come back tomorrow!"))
+            _("Today's 'Image of the day' was already chosen. Come back tomorrow!"))
     except ImageOfTheDay.DoesNotExist:
         pass
 
