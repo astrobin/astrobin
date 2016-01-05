@@ -53,3 +53,17 @@ class IOTDChooseTest(TestCase):
         image.delete()
         group.delete()
         user.delete()
+
+    def test_iotd_choose_confirm(self):
+        user = User.objects.create_user('test', 'test@test.com', 'password')
+        group = Group.objects.create(name = 'IOTD_Staff')
+        user.groups.add(group)
+        self.client.login(username = 'test', password = 'password')
+
+        image, created = Image.objects.get_or_create(user = user)
+        response = self.client.get(reverse('iotd_choose'), args = (image.pk,))
+        self.assertEqual(response.status_code, 200)
+
+        image.delete()
+        group.delete()
+        user.delete()
