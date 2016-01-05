@@ -9,6 +9,7 @@ from django.test import TestCase
 # AstroBin
 from astrobin.models import (
     Image,
+    ImageRevision,
     Telescope,
     Mount,
     Camera,
@@ -16,7 +17,8 @@ from astrobin.models import (
     Software,
     Filter,
     Accessory,
-    DeepSky_Acquisition)
+    DeepSky_Acquisition,
+    SolarSystem_Acquisition)
 
 
 class ImageTest(TestCase):
@@ -47,6 +49,8 @@ class ImageTest(TestCase):
     def _get_last_image(self):
         return Image.objects.all().order_by('-id')[0]
 
+    def _get_last_image_revision(self):
+        return ImageRevision.objects.all().order_by('-id')[0]
 
     def _assert_message(self, response, tags, content):
         storage = response.context[0]['messages']
@@ -236,8 +240,66 @@ class ImageTest(TestCase):
         self.client.login(username = 'test', password = 'password')
         self._do_upload('astrobin/fixtures/test.jpg')
         image = self._get_last_image()
+        today = time.strftime('%Y-%m-%d')
+
+        # Basic view
         response = self.client.get(reverse('image_detail', kwargs = {'id': image.id}))
         self.assertEqual(response.status_code, 200)
+
+        # Revision redirect
+        self._do_upload_revision(image, 'astrobin/fixtures/test.jpg')
+        revision = self._get_last_image_revision()
+        response = self.client.get(reverse('image_detail', kwargs = {'id': image.id}))
+        self.assertRedirects(
+            response,
+            reverse('image_detail', kwargs = {'id': image.id, 'r': revision.label}),
+            status_code = 302,
+            target_status_code = 200)
+        revision.delete()
+
+        # DSA data
+        filter, created = Filter.objects.get_or_create(name = "Test filter")
+        dsa, created = DeepSky_Acquisition.objects.get_or_create(
+            image = image,
+            date = today,
+            number = 10,
+            duration = 1200,
+            filter = filter,
+            binning = 1,
+            iso = 3200,
+            gain = 1,
+            sensor_cooling = -20,
+            darks = 10,
+            flats = 10,
+            flat_darks = 10,
+            bias = 0,
+            bortle = 1,
+            mean_sqm = 20.0,
+            mean_fwhm = 1,
+            temperature = 10)
+        response = self.client.get(reverse('image_detail', kwargs = {'id': image.id}))
+        self.assertEqual(response.status_code, 200)
+        self.assertEqual(response.context[0]['image_type'], 'deep_sky')
+        dsa.delete()
+
+        # SSA data
+        ssa, created = SolarSystem_Acquisition.objects.get_or_create(
+            image = image,
+            date = today,
+            frames = 1000,
+            fps = 60,
+            focal_length = 5000,
+            cmi = 3,
+            cmii = 3,
+            cmiii = 3,
+            seeing = 1,
+            transparency = 1)
+        response = self.client.get(reverse('image_detail', kwargs = {'id': image.id}))
+        self.assertEqual(response.status_code, 200)
+        self.assertEqual(response.context[0]['image_type'], 'solar_system')
+        ssa.delete()
+
+        image.delete()
 
     def test_image_flag_thumbs_view(self):
         self.client.login(username = 'test', password = 'password')
