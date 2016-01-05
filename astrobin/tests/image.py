@@ -363,6 +363,33 @@ class ImageTest(TestCase):
         image = self._get_last_image()
         response = self.client.get(reverse('image_full', kwargs = {'id': image.id}))
         self.assertEqual(response.status_code, 200)
+        self.assertEqual(response.context[0]['alias'], 'hd')
+
+        # Revision redirect
+        self._do_upload_revision(image, 'astrobin/fixtures/test.jpg')
+        revision = self._get_last_image_revision()
+        response = self.client.get(reverse('image_full', kwargs = {'id': image.id}))
+        self.assertRedirects(
+            response,
+            reverse('image_full', kwargs = {'id': image.id, 'r': revision.label}),
+            status_code = 302,
+            target_status_code = 200)
+        revision.delete()
+
+        # Mods
+        response = self.client.get(
+            reverse('image_full', kwargs = {'id': image.id}) + "?mod=inverted")
+        self.assertEqual(response.status_code, 200)
+        self.assertEqual(response.context[0]['mod'], 'inverted')
+        self.assertEqual(response.context[0]['alias'], 'hd_inverted')
+
+        # Real
+        response = self.client.get(
+            reverse('image_full', kwargs = {'id': image.id}) + "?real")
+        self.assertEqual(response.status_code, 200)
+        self.assertEqual(response.context[0]['alias'], 'real')
+
+
         image.delete()
 
     def test_image_upload_revision_process_view(self):
