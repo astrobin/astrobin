@@ -555,7 +555,7 @@ class PrivateSharedFolderTest(TestCase):
             creator = self.subscribed_user)
         folder.save()
 
-        image = Image.objects.create(title = "test image", user = self.subscribed_user)
+        image = Image.objects.create(title = "test image", user = self.unsubscribed_user)
 
         post_data = {'image': image.id}
         self.client.login(username = 'username_unsub', password = 'passw0rd')
@@ -564,10 +564,7 @@ class PrivateSharedFolderTest(TestCase):
             post_data,
             HTTP_X_REQUESTED_WITH = 'XMLHttpRequest',
             follow = True)
-        self.assertRedirects(
-            response,
-            reverse('rawdata.restricted') + '?' + urlencode({'next': '/rawdata/privatesharedfolders/%d/add-image/' % folder.id}),
-            status_code = 302, target_status_code = 200)
+        self.assertEqual(response.status_code, 404)
         self.client.logout()
 
     def test_add_image_sub(self):

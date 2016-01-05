@@ -26,15 +26,12 @@ def is_premium(user):
     if user.is_authenticated():
         us = UserSubscription.active_objects.filter(
             user = user,
-            subscription__name = 'AstroBin Premium',
-            cancelled = False
-        )
+            subscription__name = 'AstroBin Premium')
 
         if us.count() == 0:
             return False
 
-        us = us[0]
-        return us.valid() and not us.expired()
+        return us[0].valid()
 
     return False
 
@@ -44,15 +41,12 @@ def is_lite(user):
     if user.is_authenticated():
         us = UserSubscription.active_objects.filter(
             user = user,
-            subscription__name = 'AstroBin Lite',
-            cancelled = False
-        )
+            subscription__name = 'AstroBin Lite')
 
         if us.count() == 0:
             return False
 
-        us = us[0]
-        return us.valid() and not us.expired()
+        return us[0].valid()
 
     return False
 

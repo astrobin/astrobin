@@ -2,7 +2,7 @@
 from rest_framework import permissions
 
 # This app
-from .utils import rawdata_user_has_active_subscription
+from .utils import rawdata_user_has_valid_subscription
 
 
 class IsOwnerOrReadOnly(permissions.BasePermission):
@@ -28,4 +28,4 @@ class IsSubscriber(permissions.BasePermission):
         if request.method in permissions.SAFE_METHODS:
             return True
 
-        return rawdata_user_has_active_subscription(request.user)
+        return rawdata_user_has_valid_subscription(request.user)
