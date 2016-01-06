@@ -28,8 +28,55 @@ class ImageTest(TestCase):
         self.user2 = User.objects.create_user(
             'test2', 'test@test.com', 'password')
 
+        # Test gear
+        self.imaging_telescopes = [
+            Telescope.objects.create(
+                make = "Test make", name = "Test imaging telescope")]
+        self.guiding_telescopes = [
+            Telescope.objects.create(
+                make = "Test make", name = "Test guiding telescope")]
+        self.mounts = [
+            Mount.objects.create(
+                make = "Test make", name = "Test mount")]
+        self.imaging_cameras = [
+            Camera.objects.create(
+                make = "Test make", name = "Test imaging camera")]
+        self.guiding_cameras = [
+            Camera.objects.create(
+                make = "Test make", name = "Test guiding camera")]
+        self.focal_reducers = [
+            FocalReducer.objects.create(
+                make = "Test make", name = "Test focal reducer")]
+        self.software = [
+            Software.objects.create(
+                make = "Test make", name = "Test software")]
+        self.filters = [
+            Filter.objects.create(
+                make = "Test make", name = "Test filter")]
+        self.accessories = [
+            Accessory.objects.create(
+                make = "Test make", name = "Test accessory")]
+
+        profile = self.user.userprofile
+        profile.telescopes = self.imaging_telescopes + self.guiding_telescopes
+        profile.mounts = self.mounts
+        profile.cameras = self.imaging_cameras + self.guiding_cameras
+        profile.focal_reducers = self.focal_reducers
+        profile.software = self.software
+        profile.filters = self.filters
+        profile.accessories = self.accessories
 
     def tearDown(self):
+        for i in self.imaging_telescopes: i.delete()
+        for i in self.guiding_telescopes: i.delete()
+        for i in self.mounts: i.delete()
+        for i in self.imaging_cameras: i.delete()
+        for i in self.guiding_cameras: i.delete()
+        for i in self.focal_reducers: i.delete()
+        for i in self.software: i.delete()
+        for i in self.filters: i.delete()
+        for i in self.accessories: i.delete()
+
         self.user.delete()
         self.user2.delete()
 
@@ -211,58 +258,20 @@ class ImageTest(TestCase):
         self.assertEqual(image.description, "Image description")
         self.assertEqual(image.allow_comments, True)
 
-        # Test gear
-        imaging_telescopes = [
-            Telescope.objects.create(
-                make = "Test make", name = "Test imaging telescope")]
-        guiding_telescopes = [
-            Telescope.objects.create(
-                make = "Test make", name = "Test guiding telescope")]
-        mounts = [
-            Mount.objects.create(
-                make = "Test make", name = "Test mount")]
-        imaging_cameras = [
-            Camera.objects.create(
-                make = "Test make", name = "Test imaging camera")]
-        guiding_cameras = [
-            Camera.objects.create(
-                make = "Test make", name = "Test guiding camera")]
-        focal_reducers = [
-            FocalReducer.objects.create(
-                make = "Test make", name = "Test focal reducer")]
-        software = [
-            Software.objects.create(
-                make = "Test make", name = "Test software")]
-        filters = [
-            Filter.objects.create(
-                make = "Test make", name = "Test filter")]
-        accessories = [
-            Accessory.objects.create(
-                make = "Test make", name = "Test accessory")]
-
-        profile = self.user.userprofile
-        profile.telescopes = imaging_telescopes + guiding_telescopes
-        profile.mounts = mounts
-        profile.cameras = imaging_cameras + guiding_cameras
-        profile.focal_reducers = focal_reducers
-        profile.software = software
-        profile.filters = filters
-        profile.accessories = accessories
-
         response = self.client.post(
             reverse('image_edit_save_gear'),
             {
                 'image_id': image.pk,
                 'submit_acquisition': True,
-                'imaging_telescopes': ','.join(["%d" % x.pk for x in imaging_telescopes]),
-                'guiding_telescopes': ','.join(["%d" % x.pk for x in guiding_telescopes]),
-                'mounts': ','.join(["%d" % x.pk for x in mounts]),
-                'imaging_cameras': ','.join(["%d" % x.pk for x in imaging_cameras]),
-                'guiding_cameras': ','.join(["%d" % x.pk for x in guiding_cameras]),
-                'focal_reducers': ','.join(["%d" % x.pk for x in focal_reducers]),
-                'software': ','.join(["%d" % x.pk for x in software]),
-                'filters': ','.join(["%d" % x.pk for x in filters]),
-                'accessories': ','.join(["%d" % x.pk for x in accessories])
+                'imaging_telescopes': ','.join(["%d" % x.pk for x in self.imaging_telescopes]),
+                'guiding_telescopes': ','.join(["%d" % x.pk for x in self.guiding_telescopes]),
+                'mounts': ','.join(["%d" % x.pk for x in self.mounts]),
+                'imaging_cameras': ','.join(["%d" % x.pk for x in self.imaging_cameras]),
+                'guiding_cameras': ','.join(["%d" % x.pk for x in self.guiding_cameras]),
+                'focal_reducers': ','.join(["%d" % x.pk for x in self.focal_reducers]),
+                'software': ','.join(["%d" % x.pk for x in self.software]),
+                'filters': ','.join(["%d" % x.pk for x in self.filters]),
+                'accessories': ','.join(["%d" % x.pk for x in self.accessories])
             },
             follow = True)
         image = Image.objects.get(pk = image.pk)
@@ -297,15 +306,6 @@ class ImageTest(TestCase):
         self.assertEqual(acquisition.number, 10)
         self.assertEqual(acquisition.duration, 1200)
 
-        for i in imaging_telescopes: i.delete()
-        for i in guiding_telescopes: i.delete()
-        for i in mounts: i.delete()
-        for i in imaging_cameras: i.delete()
-        for i in guiding_cameras: i.delete()
-        for i in focal_reducers: i.delete()
-        for i in software: i.delete()
-        for i in filters: i.delete()
-        for i in accessories: i.delete()
         image.delete()
 
     def test_image_detail_view(self):
@@ -702,6 +702,100 @@ class ImageTest(TestCase):
         response = self.client.post(post_url(), {'image_id': image.pk})
         self.assertEqual(response.status_code, 200)
         self._assert_message(response, "error unread", "errors processing the form")
+        self.client.logout()
+
+        # Anonymous GET
+        response = self.client.get(get_url((image.pk,)))
+        self.assertRedirects(
+            response,
+            '/accounts/login/?next=' +
+            get_url((image.pk,)),
+            status_code = 302,
+            target_status_code = 200)
+
+        # Anonymous POST
+        response = self.client.post(
+            post_url(),
+            post_data(image),
+            follow = True)
+        self.assertRedirects(
+            response,
+            '/accounts/login/?next=' + post_url(),
+            status_code = 302,
+            target_status_code = 200)
+
+        image.delete()
+
+    def test_image_edit_gear_view(self):
+        def post_data(image):
+            return {
+                'image_id': image.pk,
+                'imaging_telescopes': ','.join(["%d" % x.pk for x in self.imaging_telescopes]),
+                'guiding_telescopes': ','.join(["%d" % x.pk for x in self.guiding_telescopes]),
+                'mounts': ','.join(["%d" % x.pk for x in self.mounts]),
+                'imaging_cameras': ','.join(["%d" % x.pk for x in self.imaging_cameras]),
+                'guiding_cameras': ','.join(["%d" % x.pk for x in self.guiding_cameras]),
+                'focal_reducers': ','.join(["%d" % x.pk for x in self.focal_reducers]),
+                'software': ','.join(["%d" % x.pk for x in self.software]),
+                'filters': ','.join(["%d" % x.pk for x in self.filters]),
+                'accessories': ','.join(["%d" % x.pk for x in self.accessories])
+            }
+
+        def get_url(args = None):
+            return reverse('image_edit_gear', args = args)
+
+        def post_url(args = None):
+            return reverse('image_edit_save_gear', args = args)
+
+        self.client.login(username = 'test', password = 'password')
+        self._do_upload('astrobin/fixtures/test.jpg')
+        image = self._get_last_image()
+        image.title = "Test title"
+        image.save()
+        self.client.logout()
+
+        # GET
+        self.client.login(username = 'test2', password = 'password')
+        response = self.client.get(get_url((image.pk,)))
+        self.assertEqual(response.status_code, 403)
+
+        # POST
+        response = self.client.post(
+            post_url(),
+            post_data(image),
+            follow = True)
+        self.assertEqual(response.status_code, 403)
+        self.client.logout()
+
+        # GET
+        self.client.login(username = 'test', password = 'password')
+        response = self.client.get(get_url((image.pk,)))
+        self.assertEqual(response.status_code, 200)
+
+        # POST
+        response = self.client.post(
+            post_url(),
+            post_data(image),
+            follow = True)
+        self.assertRedirects(
+            response,
+            reverse('image_detail', kwargs = {'id': image.pk}),
+            status_code = 302,
+            target_status_code = 200)
+        image = Image.objects.get(pk = image.pk)
+        self.assertEqual(list(image.imaging_telescopes.all()), self.imaging_telescopes)
+        self.assertEqual(list(image.guiding_telescopes.all()), self.guiding_telescopes)
+        self.assertEqual(list(image.mounts.all()), self.mounts)
+        self.assertEqual(list(image.imaging_cameras.all()), self.imaging_cameras)
+        self.assertEqual(list(image.guiding_cameras.all()), self.guiding_cameras)
+        self.assertEqual(list(image.focal_reducers.all()), self.focal_reducers)
+        self.assertEqual(list(image.software.all()), self.software)
+        self.assertEqual(list(image.filters.all()), self.filters)
+        self.assertEqual(list(image.accessories.all()), self.accessories)
+
+        # Missing image_id in post
+        response = self.client.post(post_url(), {})
+        self.assertEqual(response.status_code, 404)
         self.client.logout()
 
         # Anonymous GET

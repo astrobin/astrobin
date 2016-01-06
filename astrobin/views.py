@@ -1471,6 +1471,7 @@ def image_edit_save_gear(request):
     }
 
     if not form.is_valid():
+        messages.error(request, _("There was one or more errors processing the form. You may need to scroll down to see them."))
         return render_to_response("image/edit/gear.html",
             response_dict,
             context_instance=RequestContext(request))
