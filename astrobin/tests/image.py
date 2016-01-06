@@ -64,7 +64,7 @@ class ImageTest(TestCase):
         messages = response.context[0]['messages']
 
         if len(messages) == 0:
-            assertEqual(False, True)
+            self.assertEqual(False, True)
 
         for message in messages:
             self.assertEqual(message.tags, tags)
