@@ -616,6 +616,16 @@ class ImageTest(TestCase):
             reverse('image_detail', kwargs = {'id': image.pk}),
             status_code = 302,
             target_status_code = 200)
+
+        # Missing image_id in post
+        response = self.client.post(reverse('image_edit_save_basic'), {})
+        self.assertEqual(response.status_code, 404)
+
+        # Invalid form
+        response = self.client.post(
+            reverse('image_edit_save_basic'), {'image_id': image.pk})
+        self.assertEqual(response.status_code, 200)
+        self._assert_message(response, "error unread", "errors processing the form")
         self.client.logout()
 
         # Anonymous GET

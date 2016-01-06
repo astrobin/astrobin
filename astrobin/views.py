@@ -1382,6 +1382,7 @@ def image_edit_save_basic(request):
             'form': form,
         }
 
+        messages.error(request, _("There was one or more errors processing the form. You may need to scroll down to see them."))
         return render_to_response("image/edit/basic.html",
             response_dict,
             context_instance=RequestContext(request))
