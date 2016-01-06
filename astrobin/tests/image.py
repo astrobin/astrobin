@@ -25,9 +25,13 @@ class ImageTest(TestCase):
     def setUp(self):
         self.user = User.objects.create_user(
             'test', 'test@test.com', 'password')
+        self.user2 = User.objects.create_user(
+            'test2', 'test@test.com', 'password')
+
 
     def tearDown(self):
         self.user.delete()
+        self.user2.delete()
 
 
     ###########################################################################
@@ -550,4 +554,95 @@ class ImageTest(TestCase):
 
         b.delete()
         c.delete()
+        image.delete()
+
+    def test_image_edit_basic_view(self):
+        self.client.login(username = 'test', password = 'password')
+        self._do_upload('astrobin/fixtures/test.jpg')
+        image = self._get_last_image()
+        self.client.logout()
+
+        # GET
+        self.client.login(username = 'test2', password = 'password')
+        response = self.client.get(
+            reverse('image_edit_basic', args = (image.pk,)))
+        self.assertEqual(response.status_code, 403)
+
+        # POST
+        response = self.client.post(
+            reverse('image_edit_save_basic'),
+            {
+                'image_id': image.pk,
+                'title': "Test title",
+                'link': "http://www.example.com",
+                'link_to_fits': "http://www.example.com/fits",
+                'subject_type': 600,
+                'solar_system_main_subject': 0,
+                'locations': [],
+                'description': "Image description",
+                'allow_comments': True
+            },
+            follow = True)
+        self.assertEqual(response.status_code, 403)
+        self.client.logout()
+
+        # GET
+        self.client.login(username = 'test', password = 'password')
+        response = self.client.get(
+            reverse('image_edit_basic', args = (image.pk,)))
+        self.assertEqual(response.status_code, 200)
+
+        # POST
+        response = self.client.post(
+            reverse('image_edit_save_basic'),
+            {
+                'image_id': image.pk,
+                'title': "Test title",
+                'link': "http://www.example.com",
+                'link_to_fits': "http://www.example.com/fits",
+                'subject_type': 600,
+                'solar_system_main_subject': 0,
+                'locations': [],
+                'description': "Image description",
+                'allow_comments': True
+            },
+            follow = True)
+        self.assertRedirects(
+            response,
+            reverse('image_detail', kwargs = {'id': image.pk}),
+            status_code = 302,
+            target_status_code = 200)
+        self.client.logout()
+
+        # Anonymous GET
+        response = self.client.get(
+            reverse('image_edit_basic', args = (image.pk,)))
+        self.assertRedirects(
+            response,
+            '/accounts/login/?next=' +
+            reverse('image_edit_basic', args = (image.pk,)),
+            status_code = 302,
+            target_status_code = 200)
+
+        # Anonymous POST
+        response = self.client.post(
+            reverse('image_edit_save_basic'),
+            {
+                'image_id': image.pk,
+                'title': "Test title",
+                'link': "http://www.example.com",
+                'link_to_fits': "http://www.example.com/fits",
+                'subject_type': 600,
+                'solar_system_main_subject': 0,
+                'locations': [],
+                'description': "Image description",
+                'allow_comments': True
+            },
+            follow = True)
+        self.assertRedirects(
+            response,
+            '/accounts/login/?next=' + reverse('image_edit_save_basic'),
+            status_code = 302,
+            target_status_code = 200)
+
         image.delete()
