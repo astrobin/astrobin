@@ -8,7 +8,7 @@ msgstr ""
 "Project-Id-Version: AstroBin 1.0\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2016-01-06 06:46+0000\n"
-"PO-Revision-Date: 2015-12-28 20:23+0000\n"
+"PO-Revision-Date: 2016-01-06 07:12+0000\n"
 "Last-Translator: Salvatore <salvatore@iovene.com>\n"
 "Language-Team: Salvatore Iovene <salvatore@iovene.com>\n"
 "Language: it\n"
@@ -17,7 +17,7 @@ msgstr ""
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=(n != 1);\n"
 "X-Generator: Pootle 2.5.0\n"
-"X-POOTLE-MTIME: 1451334211.188891\n"
+"X-POOTLE-MTIME: 1452064344.422438\n"
 
 #: fields.py:10
 msgid "United Kingdom"
@@ -2327,11 +2327,11 @@ msgstr "Numero di post"
 
 #: models.py:1723
 msgid "Automatically subscribe"
-msgstr "Sottoscrivi automaticamente"
+msgstr "Abbonati automaticamente"
 
 #: models.py:1724
 msgid "Automatically subscribe to topics that you answer"
-msgstr "Sottoscrivi automaticamente ai topic a cui rispondi"
+msgstr "Abbonati automaticamente agli argomenti a cui rispondi"
 
 #: models.py:1731
 #: templates/pybb/mail_templates/subscription_email_subject.html:2
@@ -2602,56 +2602,48 @@ msgid "Number of images by subject type"
 msgstr "Numero di immagini per tipo di soggetto"
 
 #: views.py:184 views.py:612
-#, fuzzy
 msgid "Imaging telescope or lens"
 msgid_plural "Imaging telescopes or lenses"
-msgstr[0] "Telescopi o obiettivi di acquisizione"
+msgstr[0] "Telescopio o obiettivo di acquisizione"
 msgstr[1] "Telescopi o obiettivi di acquisizione"
 
 #: views.py:188 views.py:616
-#, fuzzy
 msgid "Imaging camera"
 msgid_plural "Imaging cameras"
-msgstr[0] "Camere di acquisizione"
+msgstr[0] "Camera di acquisizione"
 msgstr[1] "Camere di acquisizione"
 
 #: views.py:192 views.py:620
-#, fuzzy
 msgid "Mount"
 msgid_plural "Mounts"
-msgstr[0] "Montature"
+msgstr[0] "Montatura"
 msgstr[1] "Montature"
 
 #: views.py:196 views.py:624
-#, fuzzy
 msgid "Guiding telescope or lens"
 msgid_plural "Guiding telescopes or lenses"
-msgstr[0] "Telescopi o obiettivi di guida"
+msgstr[0] "Telescopio o obiettivio di guida"
 msgstr[1] "Telescopi o obiettivi di guida"
 
 #: views.py:200 views.py:628
-#, fuzzy
 msgid "Guiding camera"
 msgid_plural "Guiding cameras"
-msgstr[0] "Camere di guida"
+msgstr[0] "Camera di guida"
 msgstr[1] "Camere di guida"
 
 #: views.py:204 views.py:632
-#, fuzzy
 msgid "Focal reducer"
 msgid_plural "Focal reducers"
-msgstr[0] "Riduttori di focale"
+msgstr[0] "Riduttore di focale"
 msgstr[1] "Riduttori di focale"
 
 #: views.py:213 views.py:641
-#, fuzzy
 msgid "Accessory"
 msgid_plural "Accessories"
-msgstr[0] "Accessori"
+msgstr[0] "Accessorio"
 msgstr[1] "Accessori"
 
 #: views.py:501
-#, fuzzy
 msgid "Today's 'Image of the day' was already chosen. Come back tomorrow!"
 msgstr "La 'Foto del giorno' di oggi è stata già scelta. Torna domani!"
 
@@ -3133,7 +3125,7 @@ msgid ""
 msgstr ""
 "No. Un account free ti permette di caricare fino a 10 immagini, e "
 "partecipare a tutte le attività sociali. Per uno spazio di archiviazione "
-"illimitato, ti occorrerà una sottoscrizione premium."
+"illimitato, ti occorrerà un abbonamento premium."
 
 #: templates/faq.html:36
 msgid ""
@@ -3451,9 +3443,8 @@ msgid "What is forbidden"
 msgstr "Che cosa è proibito"
 
 #: templates/guidelines.html:31
-#, fuzzy
 msgid "Don't upload anything that you did not work on."
-msgstr "Non caricare niente di cui non possiedi i diritti d'autore."
+msgstr "Non caricare niente a cui non abbia lavorato tu."
 
 #: templates/guidelines.html:32
 msgid ""
@@ -3465,6 +3456,14 @@ msgid ""
 "available data from NASA and other similar agencies; post-processing a "
 "friend's data; post-processing free data made available by other users."
 msgstr ""
+"È semplice: se non hai acquisito o elaborato l'immagine, allora non "
+"caricarla. Esempi di immagini che non vanno bene: ripostare le immagini di "
+"altre persone senza contributi significativi e senza il permesso dell'autore "
+"originale; ripostare immagini da NASA (o simili) senza contributi "
+"significativi. Esempi di immagini che vanno bene: elaborazioni di dati "
+"gratuiti messi a disposizione dalla NASA o simili; elaborazioni di immagini "
+"di un amico; elaborazioni di dati gratuiti messi a disposizione da altri "
+"utenti."
 
 #: templates/guidelines.html:35
 msgid "No nudity, no explicitly sexual content, no illegal content."
@@ -3903,7 +3902,7 @@ msgstr "Ultimi argomenti"
 
 #: templates/maintenance_base.html:96 templates/base/site_links.html:26
 msgid "Subscribed topics"
-msgstr "Argomenti sottoscritti"
+msgstr "Argomenti a cui sei abbonato"
 
 #: templates/maintenance_base.html:116 templates/base/site_links.html:46
 #: templates/image/detail/iotd_banner.html:10 templates/index/root.html:75
@@ -4230,8 +4229,8 @@ msgid ""
 "have just subscribed, please wait for a few minutes. Thanks for your "
 "patience!"
 msgstr ""
-"La tua sottoscrizione Lite o Premium non è attiva, oppure è scaduta. Se ti "
-"sei appena iscritto, attendi alcuni minuti. Grazie per la tua pazienza!"
+"Il tuo abbonamento Lite o Premium non è attivo, oppure è scaduto. Se ti sei "
+"appena iscritto, attendi alcuni minuti. Grazie per la tua pazienza!"
 
 #: templates/upload.html:39
 #, python-format
@@ -4265,7 +4264,7 @@ msgstr "Grazie per il tuo supporto ad AstroBin!"
 #: templates/upload.html:54
 msgid "Thank you for being a premium member! Enjoy your unlimited uploads."
 msgstr ""
-"Grazie per avere una sottoscrizione premium! Goditi i tuoi caricamenti "
+"Grazie per avere un abbonamento premium! Goditi i tuoi caricamenti "
 "illimitati."
 
 #: templates/upload.html:66
@@ -6635,7 +6634,7 @@ msgstr "Approva il messaggio"
 #: templates/pybb/subscribed_topics.html:7
 #: templates/pybb/subscribed_topics.html:10
 msgid "Topics you subscribe to"
-msgstr "Argomenti sottoscritti"
+msgstr "Argomenti a cui sei abbonato"
 
 #: templates/pybb/topic.html:57
 msgid "Unstick topic"
@@ -6656,16 +6655,16 @@ msgstr "Chiudi argomento"
 #: templates/pybb/topic.html:76
 #: templates/subscription/subscription_category_list.html:86
 msgid "Unsubscribe"
-msgstr "Annulla sottoscrizione"
+msgstr "Annulla abbonamento"
 
 #: templates/pybb/topic.html:78
 #: templates/subscription/subscription_category_list.html:91
 msgid "Subscribe"
-msgstr "Sottoscrivi"
+msgstr "Abbonati"
 
 #: templates/pybb/topic.html:94
 msgid "Subscribers"
-msgstr "Sottoscritti"
+msgstr "Abbonati"
 
 #: templates/pybb/topic_list.html:13
 msgid "Topic"
@@ -6894,19 +6893,19 @@ msgstr "Seleziona licenze"
 
 #: templates/subscription/subscription_cancel.html:4
 msgid "Subscription process canceled"
-msgstr "Processo di sottoscrizione annullato"
+msgstr "Processo di abbonamento annullato"
 
 #: templates/subscription/subscription_cancel.html:8
 msgid "Subscription process cancelled"
-msgstr "Processo di sottoscrizione annullato"
+msgstr "Processo di abbonamento annullato"
 
 #: templates/subscription/subscription_cancel.html:12
 msgid ""
 "Your transaction with PayPal has been cancelled, so no change in your "
 "subscription has occurred."
 msgstr ""
-"La tua transazione PayPal è stata annullato, quindi non è avvenuto alcun "
-"cambiamento nella tua sottoscrizione."
+"La tua transazione PayPal è stata annullata, quindi non è avvenuto alcun "
+"cambiamento al tuo abbonamento."
 
 #: templates/subscription/subscription_cancel.html:16
 #: templates/subscription/subscription_change_done.html:16
@@ -6991,15 +6990,15 @@ msgstr "Passa a"
 #: templates/subscription/subscription_change_done.html:4
 #: templates/subscription/subscription_change_done.html:8
 msgid "Subscription changed"
-msgstr "Sottoscrizione cambiata"
+msgstr "Abbonamento cambiato"
 
 #: templates/subscription/subscription_change_done.html:12
 msgid ""
 "Your request for a change in your subscription has been processed "
 "successfully."
 msgstr ""
-"La tua richiesta di cambiamento alla tua sottoscrizione è stata processata "
-"con successo."
+"La tua richiesta di cambiamento al tuo abbonamento è stata processata con "
+"successo."
 
 #: templates/subscription/subscription_detail.html:6
 msgid "Subscription plan"
@@ -7007,7 +7006,7 @@ msgstr "Opzione di abbonamento"
 
 #: templates/subscription/subscription_detail.html:41
 msgid "Subscribed"
-msgstr "Sottoscritto"
+msgstr "Abbonato"
 
 #: templates/subscription/subscription_detail.html:45
 msgid "Cancelled"
@@ -7019,7 +7018,7 @@ msgstr "Scade"
 
 #: templates/subscription/subscription_detail.html:54
 msgid "Unsubscribed"
-msgstr "Non sottoscritto"
+msgstr "Non abbonato"
 
 #: templates/subscription/subscription_detail.html:60
 msgid "Unavailable"
@@ -7070,8 +7069,7 @@ msgstr ""
 
 #: templates/subscription/subscription_detail.html:93
 msgid "Here you can deactivate your free Raw Data Atom subscription."
-msgstr ""
-"Qui puoi disattivare la tua sottoscrizione gratuita a Dati Grezzi Atom."
+msgstr "Qui puoi disattivare il tuo abbonamento gratuito a Dati Grezzi Atom."
 
 #: templates/subscription/subscription_detail.html:98
 msgid "Deactivate"
@@ -7084,6 +7082,10 @@ msgid ""
 "subscribed, please wait a few minutes while PayPal contacts our server for "
 "the final transaction confirmation. Thank you!"
 msgstr ""
+"Il tuo abbonamento è annullato o non ancora attivo. Se vuoi abbonarti di "
+"nuovo, attendi che l'abbonamento corrente sia scaduto. Se ti sei appena "
+"abbonato, per favore attendi qualche minuto che PayPal mandi la conferma "
+"della transazione al nostro server. Grazie!"
 
 #: templates/subscription/subscription_detail.html:124
 msgid "By cancelling, you will revert to a free plan."
@@ -7102,9 +7104,9 @@ msgid ""
 "Simply, you will not be able to upload any more images unless you switch to "
 "a paid plan."
 msgstr ""
-"Ad ogni modo, le tue immagini esistenza non saranno né cancellate né "
+"Ad ogni modo, le tue immagini esistenti non saranno né cancellate né "
 "disattivate in alcun modo! Semplicemente, non potrati caricare nuove "
-"immagini a meno di passare ad una sottoscrizione a pagamento."
+"immagini a meno di passare ad un abbonamento a pagamento."
 
 #: templates/subscription/subscription_detail.html:133
 msgid "Cancel via PayPal"
@@ -7113,7 +7115,7 @@ msgstr "Annulla tramite PayPal"
 #: templates/subscription/subscription_detail.html:144
 #: templates/subscription/subscription_detail.html:201
 msgid "Here you can activate your free Raw Data Atom subscription."
-msgstr "Qui puoi attivare la tua sottoscrizione gratuita a Dati Grezzi Atom."
+msgstr "Qui puoi attivare il tuo abbonamento gratuito a Dati Grezzi Atom."
 
 #: templates/subscription/subscription_detail.html:149
 #: templates/subscription/subscription_detail.html:210
@@ -7127,15 +7129,15 @@ msgstr "Abbonati con un pagamento sicuro fornito da PayPal:"
 
 #: templates/subscription/subscription_detail.html:172
 msgid "You cannot switch to this plan."
-msgstr "Il passaggio a questa sottoscrizione non ti è possibile."
+msgstr "Il passaggio a questo abbonamento non ti è possibile."
 
 #: templates/subscription/subscription_detail.html:205
 msgid ""
 "Careful! If you have already a paid Raw Data subscription, your available "
 "space will be reduced!"
 msgstr ""
-"Attento! Se hai già una sottoscrizione a pagamento a Dati Grezzi, il tuo "
-"spazio disponibile sarà ridotto!"
+"Attento! Se hai già un abbonamento a pagamento a Dati Grezzi, il tuo spazio "
+"disponibile sarà ridotto!"
 
 #: templates/subscription/subscription_detail.html:225
 msgid "Back to the plans"
@@ -7144,7 +7146,7 @@ msgstr "Torna alle opzioni di abbonamento"
 #: templates/subscription/subscription_done.html:4
 #: templates/subscription/subscription_done.html:8
 msgid "Subscription confirmed"
-msgstr "Sottoscrizione confermata"
+msgstr "Abbonamento confermato"
 
 #: templates/subscription/subscription_done.html:12
 msgid ""
@@ -7152,11 +7154,11 @@ msgid ""
 "from PayPal. Your subscription should be active within a few minutes!"
 msgstr ""
 "La tua richiesta è stata ricevuta, e stiamo attendendo la confema finale da "
-"PayPal. La tua sottoscrizione dovrebbe essere attiva entro pochi minuti!"
+"PayPal. Il tuo abbonamento dovrebbe essere attivo entro pochi minuti!"
 
 #: templates/subscription/subscription_list.html:10
 msgid "Your active subscription plans"
-msgstr "Le tue sottoscrizioni attive"
+msgstr "I tuoi abbonamenti attivi"
 
 #: templates/subscription/subscription_list.html:19
 msgid "AstroBin Premium subscription plans"
@@ -7175,8 +7177,8 @@ msgid ""
 "This plan is free! Choose it to share a small amount of data with other "
 "users."
 msgstr ""
-"Questa sottoscrizione è gratuita! Sceglila per condividere una piccola "
-"quantità di dati con altri utenti."
+"Questo abbonamento è gratuito! Sceglilo per condividere una piccola quantità "
+"di dati con altri utenti."
 
 #: templates/subscription/subscription_list.html:53
 msgid ""
@@ -7186,7 +7188,7 @@ msgid ""
 "deepest deep sky images ever created, and you will always know that you "
 "support AstroBin."
 msgstr ""
-"Scegli questa sottoscrizione se vuoi contenere le spese, ma comunque vuoi "
+"Scegli questo abbonamento se vuoi contenere le spese, ma comunque vuoi "
 "condividere i tuoi FIT e raw DSRL con i tuoi amici. Puoi anche partecipare "
 "ad i gruppi di dati pubblici e contribuire alle più profonde immagini deep "
 "sky mai create, e saprai di supportare AstroBin."
@@ -7197,8 +7199,8 @@ msgid ""
 "don't want to share and backup your calibration files. Enjoy a lot of room "
 "for a convenient price."
 msgstr ""
-"Scegli questa sottoscrizione se hai cominciato solo negli ultimi anni, o se "
-"non vuoi condividere ed archiviare i tuoi file di calibrazione. Goditi molto "
+"Scegli questo abbonamento se hai cominciato solo negli ultimi anni, o se non "
+"vuoi condividere ed archiviare i tuoi file di calibrazione. Goditi molto "
 "spazio di archiviazione ad un prezzo conveniente."
 
 #: templates/subscription/subscription_list.html:61
@@ -7207,16 +7209,16 @@ msgid ""
 "have enough room for all your calibration files, and will enjoy the full "
 "potential of the platform."
 msgstr ""
-"Scegli questa sottoscrizione se hai molti anni di archivi. Probabilmente "
-"avrai abbastanza spazio per tutti i tuoi file di calibrazione, e potrai "
-"usufruire del potenziale completo della piattaforma."
+"Scegli questo abbonamento se hai molti anni di archivi. Probabilmente avrai "
+"abbastanza spazio per tutti i tuoi file di calibrazione, e potrai usufruire "
+"del potenziale completo della piattaforma."
 
 #: templates/subscription/subscription_list.html:65
 msgid ""
 "Choose this plan if you have a massive amount of raw data that you want to "
 "share and backup securely online."
 msgstr ""
-"Scegli questa sottoscrizione se hai una enorme mole di dati grezzi che vuoi "
+"Scegli questo abbonamento se hai una enorme mole di dati grezzi che vuoi "
 "condividere ed archiviare online con sicurezza."
 
 #: templates/subscription/subscription_list.html:79
@@ -7224,8 +7226,8 @@ msgid ""
 "PS: are you interested in larger plans? <a href=\"/contact/\">Let us know!</"
 "a>"
 msgstr ""
-"PS: interessato in sottoscrizioni più grandi? <a href=\"/contact/"
-"\">Contattaci</a>!"
+"PS: interessato in abbonamenti più grandi? <a "
+"href=\"/contact/\">Contattaci</a>!"
 
 #: templates/user/api_keys.html:5 templates/user/api_keys.html.py:12
 msgid "Your API Keys"
