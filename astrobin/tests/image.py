@@ -561,6 +561,26 @@ class ImageTest(TestCase):
         image.delete()
 
     def test_image_edit_basic_view(self):
+        def post_data(image):
+            return {
+                'image_id': image.pk,
+                'title': "Test title",
+                'link': "http://www.example.com",
+                'link_to_fits': "http://www.example.com/fits",
+                'subject_type': 600,
+                'solar_system_main_subject': 0,
+                'locations': [],
+                'description': "Image description",
+                'allow_comments': True
+            }
+
+        def get_url(args = None):
+            return reverse('image_edit_basic', args = args)
+
+        def post_url(args = None):
+            return reverse('image_edit_save_basic', args = args)
+
+
         self.client.login(username = 'test', password = 'password')
         self._do_upload('astrobin/fixtures/test.jpg')
         image = self._get_last_image()
@@ -568,49 +588,21 @@ class ImageTest(TestCase):
 
         # GET
         self.client.login(username = 'test2', password = 'password')
-        response = self.client.get(
-            reverse('image_edit_basic', args = (image.pk,)))
+        response = self.client.get(get_url((image.pk,)))
         self.assertEqual(response.status_code, 403)
 
         # POST
-        response = self.client.post(
-            reverse('image_edit_save_basic'),
-            {
-                'image_id': image.pk,
-                'title': "Test title",
-                'link': "http://www.example.com",
-                'link_to_fits': "http://www.example.com/fits",
-                'subject_type': 600,
-                'solar_system_main_subject': 0,
-                'locations': [],
-                'description': "Image description",
-                'allow_comments': True
-            },
-            follow = True)
+        response = self.client.post(post_url(), post_data(image), follow = True)
         self.assertEqual(response.status_code, 403)
         self.client.logout()
 
         # GET
         self.client.login(username = 'test', password = 'password')
-        response = self.client.get(
-            reverse('image_edit_basic', args = (image.pk,)))
+        response = self.client.get(get_url((image.pk,)))
         self.assertEqual(response.status_code, 200)
 
         # POST
-        response = self.client.post(
-            reverse('image_edit_save_basic'),
-            {
-                'image_id': image.pk,
-                'title': "Test title",
-                'link': "http://www.example.com",
-                'link_to_fits': "http://www.example.com/fits",
-                'subject_type': 600,
-                'solar_system_main_subject': 0,
-                'locations': [],
-                'description': "Image description",
-                'allow_comments': True
-            },
-            follow = True)
+        response = self.client.post(post_url(), post_data(image), follow = True)
         self.assertRedirects(
             response,
             reverse('image_detail', kwargs = {'id': image.pk}),
@@ -618,44 +610,28 @@ class ImageTest(TestCase):
             target_status_code = 200)
 
         # Missing image_id in post
-        response = self.client.post(reverse('image_edit_save_basic'), {})
+        response = self.client.post(post_url(), {})
         self.assertEqual(response.status_code, 404)
 
         # Invalid form
-        response = self.client.post(
-            reverse('image_edit_save_basic'), {'image_id': image.pk})
+        response = self.client.post(post_url(), {'image_id': image.pk})
         self.assertEqual(response.status_code, 200)
         self._assert_message(response, "error unread", "errors processing the form")
         self.client.logout()
 
         # Anonymous GET
-        response = self.client.get(
-            reverse('image_edit_basic', args = (image.pk,)))
+        response = self.client.get(get_url((image.pk,)))
         self.assertRedirects(
             response,
-            '/accounts/login/?next=' +
-            reverse('image_edit_basic', args = (image.pk,)),
+            '/accounts/login/?next=' + get_url((image.pk,)),
             status_code = 302,
             target_status_code = 200)
 
         # Anonymous POST
-        response = self.client.post(
-            reverse('image_edit_save_basic'),
-            {
-                'image_id': image.pk,
-                'title': "Test title",
-                'link': "http://www.example.com",
-                'link_to_fits': "http://www.example.com/fits",
-                'subject_type': 600,
-                'solar_system_main_subject': 0,
-                'locations': [],
-                'description': "Image description",
-                'allow_comments': True
-            },
-            follow = True)
+        response = self.client.post(post_url(), post_data(image), follow = True)
         self.assertRedirects(
             response,
-            '/accounts/login/?next=' + reverse('image_edit_save_basic'),
+            '/accounts/login/?next=' + post_url(),
             status_code = 302,
             target_status_code = 200)
 
