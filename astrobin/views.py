@@ -64,7 +64,6 @@ from image_utils import make_image_of_the_day
 from gear import *
 from utils import *
 
-import settings
 import pytz
 
 # need to translate to a non-naive timezone, even if timezone == settings.TIME_ZONE, so we can compare two dates
@@ -1120,9 +1119,6 @@ def image_upload_process(request):
 
     image_file = request.FILES["image_file"]
     ext = os.path.splitext(image_file.name)[1].lower()
-
-    if ext not in ('.jpg', '.jpeg', '.png', '.gif'):
-        return upload_error()
 
     try:
         from PIL import Image as PILImage

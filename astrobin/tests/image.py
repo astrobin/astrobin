@@ -34,10 +34,14 @@ class ImageTest(TestCase):
     # HELPERS                                                                 #
     ###########################################################################
 
-    def _do_upload(self, filename):
+    def _do_upload(self, filename, wip = False):
+        data = {'image_file': open(filename, 'rb')}
+        if wip:
+            data['wip'] = True
+
         return self.client.post(
             reverse('image_upload_process'),
-            {'image_file': open(filename, 'rb')},
+            data,
             follow = True)
 
     def _do_upload_revision(self, image, filename):
@@ -47,7 +51,7 @@ class ImageTest(TestCase):
             follow = True)
 
     def _get_last_image(self):
-        return Image.objects.all().order_by('-id')[0]
+        return Image.all_objects.all().order_by('-id')[0]
 
     def _get_last_image_revision(self):
         return ImageRevision.objects.all().order_by('-id')[0]
@@ -84,7 +88,58 @@ class ImageTest(TestCase):
             target_status_code = 200)
         self._assert_message(response, "error unread", "Invalid image")
 
-        # Test successful upload
+        # Test failure due to full use of Free membership
+        self.user.userprofile.premium_counter = 10
+        self.user.userprofile.save()
+        response = self._do_upload('astrobin/fixtures/test.jpg')
+        self.assertRedirects(
+            response,
+            reverse('image_upload'),
+            status_code = 302,
+            target_status_code = 200)
+        self._assert_message(response, "error unread", "Please upgrade")
+        self.user.userprofile.premium_counter = 0
+        self.user.userprofile.save()
+
+        # Test failure due to read-only mode
+        with self.settings(READONLY_MODE = True):
+            response = self._do_upload('astrobin/fixtures/test.jpg')
+            self.assertRedirects(
+                response,
+                reverse('image_upload'),
+                status_code = 302,
+                target_status_code = 200)
+            self._assert_message(response, "error unread", "read-only mode")
+
+        # Test missing image file
+        response = self.client.post(
+            reverse('image_upload_process'),
+            follow = True)
+        self.assertRedirects(
+            response,
+            reverse('image_upload'),
+            status_code = 302,
+            target_status_code = 200)
+        self._assert_message(response, "error unread", "Invalid image")
+
+        # Test indexed PNG
+        response = self._do_upload('astrobin/fixtures/test_indexed.png')
+        image = self._get_last_image()
+        self.assertRedirects(
+            response,
+            reverse('image_edit_watermark', kwargs = {'id': image.pk}),
+            status_code = 302,
+            target_status_code = 200)
+        self._assert_message(response, "warning unread", "Indexed PNG")
+        image.delete()
+
+        # Test WIP
+        response = self._do_upload('astrobin/fixtures/test.jpg', wip = True)
+        image = self._get_last_image()
+        self.assertEqual(image.is_wip, True)
+        image.delete()
+
+        # Test successful upload workflow
         response = self._do_upload('astrobin/fixtures/test.jpg')
         image = self._get_last_image()
         self.assertRedirects(
