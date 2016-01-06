@@ -660,3 +660,92 @@ class ImageTest(TestCase):
             target_status_code = 200)
 
         image.delete()
+
+    def test_image_edit_watermark_view(self):
+        def post_data(image):
+            return {
+                'image_id': image.pk,
+                'watermark': True,
+                'watermark_text': "Watermark test",
+                'watermark_position': 0,
+                'watermark_opacity': 100
+            }
+
+        def get_url(args = None):
+            return reverse('image_edit_watermark', args = args)
+
+        def post_url(args = None):
+            return reverse('image_edit_save_watermark', args = args)
+
+        self.client.login(username = 'test', password = 'password')
+        self._do_upload('astrobin/fixtures/test.jpg')
+        image = self._get_last_image()
+        image.title = "Test title"
+        image.save()
+        self.client.logout()
+
+        # GET
+        self.client.login(username = 'test2', password = 'password')
+        response = self.client.get(get_url((image.pk,)))
+        self.assertEqual(response.status_code, 403)
+
+        # POST
+        response = self.client.post(
+            post_url(),
+            post_data(image),
+            follow = True)
+        self.assertEqual(response.status_code, 403)
+        self.client.logout()
+
+        # GET
+        self.client.login(username = 'test', password = 'password')
+        response = self.client.get(get_url((image.pk,)))
+        self.assertEqual(response.status_code, 200)
+
+        # POST
+        response = self.client.post(
+            post_url(),
+            post_data(image),
+            follow = True)
+        self.assertRedirects(
+            response,
+            reverse('image_detail', kwargs = {'id': image.pk}),
+            status_code = 302,
+            target_status_code = 200)
+        image = Image.objects.get(pk = image.pk)
+        self.assertEqual(image.watermark, True)
+        self.assertEqual(image.watermark_text, "Watermark test")
+        self.assertEqual(image.watermark_position, 0)
+        self.assertEqual(image.watermark_opacity, 100)
+
+        # Missing image_id in post
+        response = self.client.post(post_url(), {})
+        self.assertEqual(response.status_code, 404)
+
+        # Invalid form
+        response = self.client.post(post_url(), {'image_id': image.pk})
+        self.assertEqual(response.status_code, 200)
+        self._assert_message(response, "error unread", "errors processing the form")
+        self.client.logout()
+
+        # Anonymous GET
+        response = self.client.get(get_url((image.pk,)))
+        self.assertRedirects(
+            response,
+            '/accounts/login/?next=' +
+            get_url((image.pk,)),
+            status_code = 302,
+            target_status_code = 200)
+
+        # Anonymous POST
+        response = self.client.post(
+            post_url(),
+            post_data(image),
+            follow = True)
+        self.assertRedirects(
+            response,
+            '/accounts/login/?next=' + post_url(),
+            status_code = 302,
+            target_status_code = 200)
+
+        image.delete()
