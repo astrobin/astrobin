@@ -22,6 +22,7 @@ from django.contrib import messages
 from django.db.models import Q, Count
 from django.db import IntegrityError
 from django.utils.translation import ugettext as _
+from django.utils.translation import ungettext
 from django.forms.models import formset_factory, inlineformset_factory
 from django.utils.datastructures import MultiValueDictKeyError
 from django.utils.encoding import smart_str, smart_unicode
@@ -180,15 +181,39 @@ def index(request, template = 'index/root.html', extra_context = None):
         try:
             iotd = ImageOfTheDay.objects.all()[0]
             gear_list = (
-                ('Imaging telescopes or lenses', iotd.image.imaging_telescopes.all(), 'imaging_telescopes'),
-                ('Imaging cameras'   , iotd.image.imaging_cameras.all(), 'imaging_cameras'),
-                ('Mounts'            , iotd.image.mounts.all(), 'mounts'),
-                ('Guiding telescopes or lenses', iotd.image.guiding_telescopes.all(), 'guiding_telescopes'),
-                ('Guiding cameras'   , iotd.image.guiding_cameras.all(), 'guiding_cameras'),
-                ('Focal reducers'    , iotd.image.focal_reducers.all(), 'focal_reducers'),
-                ('Software'          , iotd.image.software.all(), 'software'),
-                ('Filters'           , iotd.image.filters.all(), 'filters'),
-                ('Accessories'       , iotd.image.accessories.all(), 'accessories'),
+                (ungettext('Imaging telescope or lens', 
+                           'Imaging telescopes or lenses', 
+                           len(iotd.image.imaging_telescopes.all())), 
+                 iotd.image.imaging_telescopes.all(), 'imaging_telescopes'),
+                (ungettext('Imaging camera',
+                           'Imaging cameras',
+                           len(iotd.image.imaging_cameras.all())),
+                 iotd.image.imaging_cameras.all(), 'imaging_cameras'),
+                (ungettext('Mount',
+                           'Mounts',
+                           len(iotd.image.mounts.all())),
+                 iotd.image.mounts.all(), 'mounts'),
+                (ungettext('Guiding telescope or lens',
+                           'Guiding telescopes or lenses',
+                           len(iotd.image.guiding_telescopes.all())),
+                 iotd.image.guiding_telescopes.all(), 'guiding_telescopes'),
+                (ungettext('Guiding camera',
+                           'Guiding cameras',
+                           len(iotd.image.guiding_cameras.all())),
+                 iotd.image.guiding_cameras.all(), 'guiding_cameras'),
+                (ungettext('Focal reducer',
+                           'Focal reducers',
+                           len(iotd.image.focal_reducers.all())),
+                 iotd.image.focal_reducers.all(), 'focal_reducers'),
+                (_('Software'), iotd.image.software.all(), 'software'),
+                (ungettext('Filter',
+                           'Filters',
+                           len(iotd.image.filters.all())),
+                 iotd.image.filters.all(), 'filters'),
+                (ungettext('Accessory',
+                           'Accessories',
+                           len(iotd.image.accessories.all())),
+                 iotd.image.accessories.all(), 'accessories'),
             )
 
             response_dict['image_of_the_day'] = iotd
@@ -584,16 +609,41 @@ def image_detail(request, id, r):
     from moon import MoonPhase;
 
     gear_list = (
-        ('Imaging telescopes or lenses', image.imaging_telescopes.all(), 'imaging_telescopes'),
-        ('Imaging cameras'   , image.imaging_cameras.all(), 'imaging_cameras'),
-        ('Mounts'            , image.mounts.all(), 'mounts'),
-        ('Guiding telescopes or lenses', image.guiding_telescopes.all(), 'guiding_telescopes'),
-        ('Guiding cameras'   , image.guiding_cameras.all(), 'guiding_cameras'),
-        ('Focal reducers'    , image.focal_reducers.all(), 'focal_reducers'),
-        ('Software'          , image.software.all(), 'software'),
-        ('Filters'           , image.filters.all(), 'filters'),
-        ('Accessories'       , image.accessories.all(), 'accessories'),
+        (ungettext('Imaging telescope or lens', 
+                   'Imaging telescopes or lenses', 
+                   len(image.imaging_telescopes.all())), 
+         image.imaging_telescopes.all(), 'imaging_telescopes'),
+        (ungettext('Imaging camera',
+                   'Imaging cameras',
+                   len(image.imaging_cameras.all())),
+         image.imaging_cameras.all(), 'imaging_cameras'),
+        (ungettext('Mount',
+                   'Mounts',
+                   len(image.mounts.all())),
+         image.mounts.all(), 'mounts'),
+        (ungettext('Guiding telescope or lens',
+                   'Guiding telescopes or lenses',
+                   len(image.guiding_telescopes.all())),
+         image.guiding_telescopes.all(), 'guiding_telescopes'),
+        (ungettext('Guiding camera',
+                   'Guiding cameras',
+                   len(image.guiding_cameras.all())),
+         image.guiding_cameras.all(), 'guiding_cameras'),
+        (ungettext('Focal reducer',
+                   'Focal reducers',
+                   len(image.focal_reducers.all())),
+         image.focal_reducers.all(), 'focal_reducers'),
+        (_('Software'), image.software.all(), 'software'),
+        (ungettext('Filter',
+                   'Filters',
+                   len(image.filters.all())),
+         image.filters.all(), 'filters'),
+        (ungettext('Accessory',
+                   'Accessories',
+                   len(image.accessories.all())),
+         image.accessories.all(), 'accessories'),
     )
+
     gear_list_has_commercial = False
     gear_list_has_paid_commercial = False
     for g in gear_list:
