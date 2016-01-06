@@ -61,8 +61,12 @@ class ImageTest(TestCase):
         return ImageRevision.objects.all().order_by('-id')[0]
 
     def _assert_message(self, response, tags, content):
-        storage = response.context[0]['messages']
-        for message in storage:
+        messages = response.context[0]['messages']
+
+        if len(messages) == 0:
+            assertEqual(False, True)
+
+        for message in messages:
             self.assertEqual(message.tags, tags)
             self.assertTrue(content in message.message)
 
