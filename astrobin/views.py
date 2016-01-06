@@ -22,6 +22,7 @@ from django.contrib import messages
 from django.db.models import Q, Count
 from django.db import IntegrityError
 from django.utils.translation import ugettext as _
+from django.utils.translation import ungettext
 from django.forms.models import formset_factory, inlineformset_factory
 from django.utils.datastructures import MultiValueDictKeyError
 from django.utils.encoding import smart_str, smart_unicode
@@ -180,15 +181,39 @@ def index(request, template = 'index/root.html', extra_context = None):
         try:
             iotd = ImageOfTheDay.objects.all()[0]
             gear_list = (
-                ('Imaging telescopes or lenses', iotd.image.imaging_telescopes.all(), 'imaging_telescopes'),
-                ('Imaging cameras'   , iotd.image.imaging_cameras.all(), 'imaging_cameras'),
-                ('Mounts'            , iotd.image.mounts.all(), 'mounts'),
-                ('Guiding telescopes or lenses', iotd.image.guiding_telescopes.all(), 'guiding_telescopes'),
-                ('Guiding cameras'   , iotd.image.guiding_cameras.all(), 'guiding_cameras'),
-                ('Focal reducers'    , iotd.image.focal_reducers.all(), 'focal_reducers'),
-                ('Software'          , iotd.image.software.all(), 'software'),
-                ('Filters'           , iotd.image.filters.all(), 'filters'),
-                ('Accessories'       , iotd.image.accessories.all(), 'accessories'),
+                (ungettext('Imaging telescope or lens', 
+                           'Imaging telescopes or lenses', 
+                           len(iotd.image.imaging_telescopes.all())), 
+                 iotd.image.imaging_telescopes.all(), 'imaging_telescopes'),
+                (ungettext('Imaging camera',
+                           'Imaging cameras',
+                           len(iotd.image.imaging_cameras.all())),
+                 iotd.image.imaging_cameras.all(), 'imaging_cameras'),
+                (ungettext('Mount',
+                           'Mounts',
+                           len(iotd.image.mounts.all())),
+                 iotd.image.mounts.all(), 'mounts'),
+                (ungettext('Guiding telescope or lens',
+                           'Guiding telescopes or lenses',
+                           len(iotd.image.guiding_telescopes.all())),
+                 iotd.image.guiding_telescopes.all(), 'guiding_telescopes'),
+                (ungettext('Guiding camera',
+                           'Guiding cameras',
+                           len(iotd.image.guiding_cameras.all())),
+                 iotd.image.guiding_cameras.all(), 'guiding_cameras'),
+                (ungettext('Focal reducer',
+                           'Focal reducers',
+                           len(iotd.image.focal_reducers.all())),
+                 iotd.image.focal_reducers.all(), 'focal_reducers'),
+                (_('Software'), iotd.image.software.all(), 'software'),
+                (ungettext('Filter',
+                           'Filters',
+                           len(iotd.image.filters.all())),
+                 iotd.image.filters.all(), 'filters'),
+                (ungettext('Accessory',
+                           'Accessories',
+                           len(iotd.image.accessories.all())),
+                 iotd.image.accessories.all(), 'accessories'),
             )
 
             response_dict['image_of_the_day'] = iotd
@@ -459,13 +484,11 @@ def iotd_archive(request):
 
 
 @login_required
-def iotd_choose(request, id):
+def iotd_choose(request, image_pk):
     if not request.user.groups.filter(name='IOTD_Staff'):
         return HttpResponseForbidden()
 
-    context = {
-    }
-
+    context = {}
     today = date.today()
     tomorrow = today + timedelta(1)
     candidates = ImageOfTheDayCandidate.objects.filter(date__range = (today, tomorrow))
@@ -475,12 +498,12 @@ def iotd_choose(request, id):
         context['iotd_already_exists'] = True
         messages.error(
             request,
-            _("Today's 'Image of the day' was already choosen. Come back tomorrow!"))
+            _("Today's 'Image of the day' was already chosen. Come back tomorrow!"))
     except ImageOfTheDay.DoesNotExist:
         pass
 
     if request.method == 'GET':
-        if id is None:
+        if image_pk is None:
             return object_list(
                 request,
                 queryset = candidates,
@@ -489,34 +512,42 @@ def iotd_choose(request, id):
                 extra_context = context,
             )
         else:
-            context['image'] = Image.objects.get(id = id)
+            context['image'] = Image.objects.get(pk = image_pk)
             return render_to_response(
                 'iotd_choose_confirm.html',
                 context,
                 context_instance = RequestContext(request))
 
     elif request.method == 'POST':
-        if id is None:
+        if image_pk is None:
             return HttpResponseNotAllowed(['POST'])
 
         from image_utils import make_image_of_the_day, make_runnerup, compare_iotd_candidates
-        image = Image.objects.get(id = id)
+        image = Image.objects.get(pk = image_pk)
 
         iotd = make_image_of_the_day(image)
         sorted_candidates = sorted(list(
             ImageOfTheDayCandidate.objects.filter(date__range = (today, tomorrow))),
             cmp = compare_iotd_candidates)
 
-        position = [x.image for x in sorted_candidates].index(image)
-        if position == 0:
-            make_runnerup(sorted_candidates[1].image, iotd, 1)
-            make_runnerup(sorted_candidates[2].image, iotd, 2)
-        elif position == 1:
-            make_runnerup(sorted_candidates[0].image, iotd, 1)
-            make_runnerup(sorted_candidates[2].image, iotd, 2)
-        else:
-            make_runnerup(sorted_candidates[0].image, iotd, 1)
-            make_runnerup(sorted_candidates[1].image, iotd, 2)
+        try:
+            position = [x.image for x in sorted_candidates].index(image)
+        except ValueError:
+            return HttpResponseForbidden()
+
+        try:
+            if position == 0:
+                make_runnerup(sorted_candidates[1].image, iotd, 1)
+                make_runnerup(sorted_candidates[2].image, iotd, 2)
+            elif position == 1:
+                make_runnerup(sorted_candidates[0].image, iotd, 1)
+                make_runnerup(sorted_candidates[2].image, iotd, 2)
+            else:
+                make_runnerup(sorted_candidates[0].image, iotd, 1)
+                make_runnerup(sorted_candidates[1].image, iotd, 2)
+        except IndexError:
+            # Runner-ups are not available, that's ok
+            pass
 
         return render_to_response(
             'iotd_choose_finished.html',
@@ -578,16 +609,41 @@ def image_detail(request, id, r):
     from moon import MoonPhase;
 
     gear_list = (
-        ('Imaging telescopes or lenses', image.imaging_telescopes.all(), 'imaging_telescopes'),
-        ('Imaging cameras'   , image.imaging_cameras.all(), 'imaging_cameras'),
-        ('Mounts'            , image.mounts.all(), 'mounts'),
-        ('Guiding telescopes or lenses', image.guiding_telescopes.all(), 'guiding_telescopes'),
-        ('Guiding cameras'   , image.guiding_cameras.all(), 'guiding_cameras'),
-        ('Focal reducers'    , image.focal_reducers.all(), 'focal_reducers'),
-        ('Software'          , image.software.all(), 'software'),
-        ('Filters'           , image.filters.all(), 'filters'),
-        ('Accessories'       , image.accessories.all(), 'accessories'),
+        (ungettext('Imaging telescope or lens', 
+                   'Imaging telescopes or lenses', 
+                   len(image.imaging_telescopes.all())), 
+         image.imaging_telescopes.all(), 'imaging_telescopes'),
+        (ungettext('Imaging camera',
+                   'Imaging cameras',
+                   len(image.imaging_cameras.all())),
+         image.imaging_cameras.all(), 'imaging_cameras'),
+        (ungettext('Mount',
+                   'Mounts',
+                   len(image.mounts.all())),
+         image.mounts.all(), 'mounts'),
+        (ungettext('Guiding telescope or lens',
+                   'Guiding telescopes or lenses',
+                   len(image.guiding_telescopes.all())),
+         image.guiding_telescopes.all(), 'guiding_telescopes'),
+        (ungettext('Guiding camera',
+                   'Guiding cameras',
+                   len(image.guiding_cameras.all())),
+         image.guiding_cameras.all(), 'guiding_cameras'),
+        (ungettext('Focal reducer',
+                   'Focal reducers',
+                   len(image.focal_reducers.all())),
+         image.focal_reducers.all(), 'focal_reducers'),
+        (_('Software'), image.software.all(), 'software'),
+        (ungettext('Filter',
+                   'Filters',
+                   len(image.filters.all())),
+         image.filters.all(), 'filters'),
+        (ungettext('Accessory',
+                   'Accessories',
+                   len(image.accessories.all())),
+         image.accessories.all(), 'accessories'),
     )
+
     gear_list_has_commercial = False
     gear_list_has_paid_commercial = False
     for g in gear_list:

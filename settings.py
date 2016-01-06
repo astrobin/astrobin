@@ -552,6 +552,10 @@ if DEBUG:
         }
     }
 
+if TESTING:
+    import logging
+    logging.disable(logging.CRITICAL)
+
 THUMBNAIL_DEBUG = DEBUG
 THUMBNAIL_ALWAYS_GENERATE = THUMBNAIL_DEBUG
 THUMBNAIL_PROCESSORS = (
