@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2016-01-06 06:46+0000\n"
+"POT-Creation-Date: 2016-01-07 11:22+0000\n"
 "PO-Revision-Date: 2015-12-30 07:03+0000\n"
 "Last-Translator: ohmishonin <kasuzen@gmail.com>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -1066,7 +1066,7 @@ msgstr "望遠鏡／レンズ"
 msgid "Guiding telescopes or lenses"
 msgstr "ガイド鏡またはレンズ"
 
-#: forms.py:133 forms.py:227 models.py:754 models.py:1632 views.py:2368
+#: forms.py:133 forms.py:227 models.py:754 models.py:1632 views.py:2367
 msgid "Mounts"
 msgstr "赤道儀"
 
@@ -1078,20 +1078,20 @@ msgstr "カメラ"
 msgid "Guiding cameras"
 msgstr "ガイド用カメラ"
 
-#: forms.py:136 forms.py:229 models.py:757 models.py:1634 views.py:2369
+#: forms.py:136 forms.py:229 models.py:757 models.py:1634 views.py:2368
 msgid "Focal reducers"
 msgstr "レデューサー"
 
-#: forms.py:137 forms.py:230 models.py:758 models.py:1635 views.py:208
-#: views.py:636 views.py:2370
+#: forms.py:137 forms.py:230 models.py:758 models.py:1635 views.py:207
+#: views.py:635 views.py:2369
 msgid "Software"
 msgstr "ソフトウェア"
 
-#: forms.py:138 forms.py:231 models.py:759 models.py:1636 views.py:2371
+#: forms.py:138 forms.py:231 models.py:759 models.py:1636 views.py:2370
 msgid "Filters"
 msgstr "フィルター"
 
-#: forms.py:139 forms.py:232 models.py:760 models.py:1637 views.py:2372
+#: forms.py:139 forms.py:232 models.py:760 models.py:1637 views.py:2371
 msgid "Accessories"
 msgstr "アクセサリ"
 
@@ -1126,11 +1126,11 @@ msgstr ""
 "の場合には、あとでフィルターを追加することはできませんので、ここで個別にフィ"
 "ルターを記入してください。"
 
-#: forms.py:226 models.py:1631 views.py:2366
+#: forms.py:226 models.py:1631 views.py:2365
 msgid "Telescopes and lenses"
 msgstr "望遠鏡とレンズ"
 
-#: forms.py:228 models.py:1633 views.py:2367
+#: forms.py:228 models.py:1633 views.py:2366
 msgid "Cameras"
 msgstr "カメラ"
 
@@ -1156,7 +1156,7 @@ msgstr "すべて"
 msgid "Images"
 msgstr "画像"
 
-#: forms.py:277 models.py:648 views.py:1835
+#: forms.py:277 models.py:648 views.py:1834
 #: templates/maintenance_base.html:298 templates/profile-edit-menu.html:30
 #: templates/wall.html:131 templates/inclusion_tags/search_image_list.html:13
 #: templates/user/profile-subnav.html:130
@@ -1454,7 +1454,7 @@ msgstr "帰属-継承 Creative Commons"
 msgid "Attribution-NoDerivs Creative Commons"
 msgstr "帰属-改変禁止 Creative Commons"
 
-#: models.py:78 models.py:96 views.py:842 views.py:844
+#: models.py:78 models.py:96 views.py:841 views.py:843
 msgid "English"
 msgstr "英語"
 
@@ -1582,7 +1582,7 @@ msgstr "小惑星"
 msgid "Comet"
 msgstr "彗星"
 
-#: models.py:151 models.py:585 models.py:649 views.py:1836
+#: models.py:151 models.py:585 models.py:649 views.py:1835
 #: templates/wall.html:143 templates/image/edit/acquisition.html:84
 msgid "Other"
 msgstr "その他"
@@ -1912,11 +1912,11 @@ msgstr "遠距離天体"
 msgid "Solar system body or event"
 msgstr "太陽系内天体もしくはイベント"
 
-#: models.py:646 views.py:1833 templates/wall.html:119
+#: models.py:646 views.py:1832 templates/wall.html:119
 msgid "Extremely wide field"
 msgstr "広角"
 
-#: models.py:647 views.py:1834 templates/wall.html:125
+#: models.py:647 views.py:1833 templates/wall.html:125
 msgid "Star trails"
 msgstr "星の軌跡"
 
@@ -2026,7 +2026,7 @@ msgstr "9 - 都心の夜空 (白)"
 msgid "Synthetic channel"
 msgstr "合成チャネル"
 
-#: models.py:1311 views.py:209 views.py:637
+#: models.py:1311 views.py:208 views.py:636
 msgid "Filter"
 msgstr "フィルター"
 
@@ -2066,7 +2066,7 @@ msgstr "冷却センサー"
 msgid "The temperature of the chip. E.g.: -20."
 msgstr "センサーチップ温度（例えば-20）。"
 
-#: models.py:1344 views.py:769
+#: models.py:1344 views.py:768
 msgid "Darks"
 msgstr "ダーク"
 
@@ -2074,7 +2074,7 @@ msgstr "ダーク"
 msgid "The number of dark frames."
 msgstr "ダークフレームの枚数。"
 
-#: models.py:1349 views.py:770
+#: models.py:1349 views.py:769
 msgid "Flats"
 msgstr "フラット"
 
@@ -2082,7 +2082,7 @@ msgstr "フラット"
 msgid "The number of flat frames."
 msgstr "フラットフレームの枚数。"
 
-#: models.py:1354 views.py:771
+#: models.py:1354 views.py:770
 msgid "Flat darks"
 msgstr "フラットダーク"
 
@@ -2090,7 +2090,7 @@ msgstr "フラットダーク"
 msgid "The number of dark flat frames."
 msgstr "フラットダーク撮影の枚数。"
 
-#: models.py:1359 views.py:772
+#: models.py:1359 views.py:771
 msgid "Bias"
 msgstr "バイアス"
 
@@ -2098,7 +2098,7 @@ msgstr "バイアス"
 msgid "The number of bias/offset frames."
 msgstr "バイアス撮影の枚数。"
 
-#: models.py:1364 views.py:775
+#: models.py:1364 views.py:774
 msgid "Bortle Dark-Sky Scale"
 msgstr "ボートルのダークスカイ指数"
 
@@ -2118,11 +2118,11 @@ msgstr "平均 mag/arcsec^2"
 msgid "As measured with your Sky Quality Meter."
 msgstr "あなたのSky Quality Meter（SQM）の測定値。"
 
-#: models.py:1378 views.py:777
+#: models.py:1378 views.py:776
 msgid "Mean FWHM"
 msgstr "平均FWHM"
 
-#: models.py:1383 views.py:778
+#: models.py:1383 views.py:777
 msgid "Temperature"
 msgstr "気温"
 
@@ -2588,118 +2588,118 @@ msgstr "カタディオプトリック"
 msgid "Number of images by subject type"
 msgstr "題材ごとの画像数"
 
-#: views.py:184 views.py:612
+#: views.py:183 views.py:611
 #, fuzzy
 msgid "Imaging telescope or lens"
 msgid_plural "Imaging telescopes or lenses"
 msgstr[0] "望遠鏡／レンズ"
 msgstr[1] "望遠鏡／レンズ"
 
-#: views.py:188 views.py:616
+#: views.py:187 views.py:615
 #, fuzzy
 msgid "Imaging camera"
 msgid_plural "Imaging cameras"
 msgstr[0] "カメラ"
 msgstr[1] "カメラ"
 
-#: views.py:192 views.py:620
+#: views.py:191 views.py:619
 #, fuzzy
 msgid "Mount"
 msgid_plural "Mounts"
 msgstr[0] "赤道儀"
 msgstr[1] "赤道儀"
 
-#: views.py:196 views.py:624
+#: views.py:195 views.py:623
 #, fuzzy
 msgid "Guiding telescope or lens"
 msgid_plural "Guiding telescopes or lenses"
 msgstr[0] "ガイド鏡またはレンズ"
 msgstr[1] "ガイド鏡またはレンズ"
 
-#: views.py:200 views.py:628
+#: views.py:199 views.py:627
 #, fuzzy
 msgid "Guiding camera"
 msgid_plural "Guiding cameras"
 msgstr[0] "ガイド用カメラ"
 msgstr[1] "ガイド用カメラ"
 
-#: views.py:204 views.py:632
+#: views.py:203 views.py:631
 #, fuzzy
 msgid "Focal reducer"
 msgid_plural "Focal reducers"
 msgstr[0] "レデューサー"
 msgstr[1] "レデューサー"
 
-#: views.py:213 views.py:641
+#: views.py:212 views.py:640
 #, fuzzy
 msgid "Accessory"
 msgid_plural "Accessories"
 msgstr[0] "アクセサリ"
 msgstr[1] "アクセサリ"
 
-#: views.py:501
+#: views.py:500
 #, fuzzy
 msgid "Today's 'Image of the day' was already chosen. Come back tomorrow!"
 msgstr "本日の「Image of the day」は既に選ばれてます。明日、またきてください。"
 
-#: views.py:760
+#: views.py:759
 msgid "Resolution"
 msgstr "解像度"
 
-#: views.py:761 views.py:911
+#: views.py:760 views.py:910
 msgid "Dates"
 msgstr "日付"
 
-#: views.py:762 templates/image/detail/image_card.html:52
+#: views.py:761 templates/image/detail/image_card.html:52
 msgid "Frames"
 msgstr "撮影フレーム"
 
-#: views.py:768 templates/wall.html:37
+#: views.py:767 templates/wall.html:37
 #: templates/inclusion_tags/search_image_list.html:36
 #: templates/inclusion_tags/search_image_list.html:89
 #: templates/search/search.html:43 templates/search/search.html.py:306
 msgid "Integration"
 msgstr "総露出時間"
 
-#: views.py:768 views.py:1926 views.py:1927 templates/search/search.html:307
+#: views.py:767 views.py:1925 views.py:1926 templates/search/search.html:307
 msgid "hours"
 msgstr "時間"
 
-#: views.py:773
+#: views.py:772
 msgid "Avg. Moon age"
 msgstr "平均月齢"
 
-#: views.py:773 templates/subscription/subscription_category_list.html:47
+#: views.py:772 templates/subscription/subscription_category_list.html:47
 msgid "days"
 msgstr "日"
 
-#: views.py:774 templates/search/search.html:313
+#: views.py:773 templates/search/search.html:313
 msgid "Avg. Moon phase"
 msgstr "平均月齢"
 
-#: views.py:776
+#: views.py:775
 msgid "Mean SQM"
 msgstr "平均SQM"
 
-#: views.py:957
+#: views.py:956
 msgid ""
 "Thanks for reporting the problem. All thumbnails will be generated again."
 msgstr ""
 "問題の報告をいただき、ありがとうございました。全てのサムネイルを再生成する予"
 "定です。"
 
-#: views.py:1099 views.py:2823
+#: views.py:1098 views.py:2822
 msgid ""
 "Invalid image or no image provided. Allowed formats are JPG, PNG and GIF."
 msgstr ""
 "無効な画像もしくは画像が存在しませんでした。JPGやPNG、GIF形式が利用可能です。"
 
-#: views.py:1106
+#: views.py:1105
 msgid "You have reached your image uploads limit. Please upgrade!"
 msgstr ""
 "画像アップロード容量の上限に達しましたので、アップグレードしてください。"
 
-#: views.py:1110 views.py:2834 templates/user/profile/flickr_import.html:10
+#: views.py:1109 views.py:2833 templates/user/profile/flickr_import.html:10
 msgid ""
 "AstroBin is currently in read-only mode, because of server maintenance. "
 "Please try again soon!"
@@ -2707,7 +2707,7 @@ msgstr ""
 "現在、サーバーをメンテナンス中で、AstroBinは閲覧しかできない状態です。時間が"
 "経ってから、もう一度きてください!"
 
-#: views.py:1133 views.py:2854
+#: views.py:1129 views.py:2853
 msgid ""
 "You uploaded an Indexed PNG file. AstroBin will need to lower the color "
 "count to 256 in order to work with it."
@@ -2715,88 +2715,7 @@ msgstr ""
 "あなたはインデックスカラーPNGファイルをアップロードしましたが、それをAstroBin"
 "に取り込みためには256色以下に下げる必要があります。"
 
-#: views.py:1399 views.py:1486 views.py:1570 views.py:1596 views.py:2268
-#: views.py:2281 views.py:2302 views.py:2339 views.py:2429 views.py:2491
-#: views.py:2702 views.py:3929 views.py:4099
-#: templates/user/profile/edit/gear.html:168
-#: templates/user/profile/edit/gear.html:243
-msgid "Form saved. Thank you!"
-msgstr "フォーム内容が保存されました。Thank you!"
-
-#: views.py:1538
-msgid "Fill in one session, before adding more."
-msgstr "さらに追加するまえに、このセッションを埋めてください。"
-
-#: views.py:1609 views.py:1680
-msgid "Image deleted."
-msgstr "イメージを削除しました。"
-
-#: views.py:1627
-msgid "Revision deleted."
-msgstr "修正版を削除しました。"
-
-#: views.py:1783
-msgid "No date specified"
-msgstr "日付未指定"
-
-#: views.py:1805 views.py:1866
-msgid "No imaging telescopes or lenses, or no imaging cameras specified"
-msgstr "望遠鏡／レンズ／カメラが未指定"
-
-#: views.py:1806
-msgid "Gear images"
-msgstr "機材画像"
-
-#: views.py:1831 templates/image/edit/acquisition.html:81
-msgid "Deep sky"
-msgstr "遠距離天体"
-
-#: views.py:1832 templates/image/edit/acquisition.html:78
-msgid "Solar system"
-msgstr "太陽系"
-
-#: views.py:1865
-msgid "No subjects specified"
-msgstr "題材が未指定"
-
-#: views.py:1867
-msgid "No acquisition details specified"
-msgstr "撮影詳細が未指定"
-
-#: views.py:1898 views.py:3306 templatetags/tags.py:77
-msgid "minutes"
-msgstr "分"
-
-#: views.py:1899 views.py:3307 templatetags/tags.py:78
-msgid "seconds ago"
-msgstr "秒前"
-
-#: views.py:1901 views.py:3309 templatetags/tags.py:79
-#, python-format
-msgid "%s ago"
-msgstr "%s 前"
-
-#: views.py:1924 templates/popover/user.html:19
-msgid "Member since"
-msgstr "メンバー登録日"
-
-#: views.py:1925
-msgid "Last login"
-msgstr "最終ログイン"
-
-#: views.py:1926
-msgid "Total integration time"
-msgstr "総露出時間"
-
-#: views.py:1927
-msgid "Average integration time"
-msgstr "平均露出時間"
-
-#: views.py:1928
-msgid "Forum posts"
-msgstr "フォーラムの投稿"
-
-#: views.py:2419
+#: views.py:1385 views.py:1414 views.py:1474 views.py:2418
 msgid ""
 "There was one or more errors processing the form. You may need to scroll "
 "down to see them."
@@ -2804,19 +2723,100 @@ msgstr ""
 "フォームの処理で、いくつかのエラーが発生しました。画面をスクロールして、それ"
 "を確認してください。"
 
-#: views.py:2877
+#: views.py:1396 views.py:1485 views.py:1569 views.py:1595 views.py:2267
+#: views.py:2280 views.py:2301 views.py:2338 views.py:2428 views.py:2490
+#: views.py:2701 views.py:3928 views.py:4098
+#: templates/user/profile/edit/gear.html:168
+#: templates/user/profile/edit/gear.html:243
+msgid "Form saved. Thank you!"
+msgstr "フォーム内容が保存されました。Thank you!"
+
+#: views.py:1537
+msgid "Fill in one session, before adding more."
+msgstr "さらに追加するまえに、このセッションを埋めてください。"
+
+#: views.py:1608 views.py:1679
+msgid "Image deleted."
+msgstr "イメージを削除しました。"
+
+#: views.py:1626
+msgid "Revision deleted."
+msgstr "修正版を削除しました。"
+
+#: views.py:1782
+msgid "No date specified"
+msgstr "日付未指定"
+
+#: views.py:1804 views.py:1865
+msgid "No imaging telescopes or lenses, or no imaging cameras specified"
+msgstr "望遠鏡／レンズ／カメラが未指定"
+
+#: views.py:1805
+msgid "Gear images"
+msgstr "機材画像"
+
+#: views.py:1830 templates/image/edit/acquisition.html:81
+msgid "Deep sky"
+msgstr "遠距離天体"
+
+#: views.py:1831 templates/image/edit/acquisition.html:78
+msgid "Solar system"
+msgstr "太陽系"
+
+#: views.py:1864
+msgid "No subjects specified"
+msgstr "題材が未指定"
+
+#: views.py:1866
+msgid "No acquisition details specified"
+msgstr "撮影詳細が未指定"
+
+#: views.py:1897 views.py:3305 templatetags/tags.py:77
+msgid "minutes"
+msgstr "分"
+
+#: views.py:1898 views.py:3306 templatetags/tags.py:78
+msgid "seconds ago"
+msgstr "秒前"
+
+#: views.py:1900 views.py:3308 templatetags/tags.py:79
+#, python-format
+msgid "%s ago"
+msgstr "%s 前"
+
+#: views.py:1923 templates/popover/user.html:19
+msgid "Member since"
+msgstr "メンバー登録日"
+
+#: views.py:1924
+msgid "Last login"
+msgstr "最終ログイン"
+
+#: views.py:1925
+msgid "Total integration time"
+msgstr "総露出時間"
+
+#: views.py:1926
+msgid "Average integration time"
+msgstr "平均露出時間"
+
+#: views.py:1927
+msgid "Forum posts"
+msgstr "フォーラムの投稿"
+
+#: views.py:2876
 msgid "Image uploaded. Thank you!"
 msgstr "画像がアップロードされました。Thank you!"
 
-#: views.py:3173 templatetags/tags.py:237
+#: views.py:3172 templatetags/tags.py:237
 msgid "no alias"
 msgstr "別名なし"
 
-#: views.py:3889 views.py:4082
+#: views.py:3888 views.py:4081
 msgid "You can't merge a product to itself."
 msgstr "あなた自身で製品をマージすることはできません。"
 
-#: views.py:4120
+#: views.py:4119
 msgid "Default front page section changed."
 msgstr "デフォルトのフロントページを変更しました。"
 
@@ -6333,19 +6333,11 @@ msgstr ""
 "た。以下のURLをチェックしてください。%(pool_url)s"
 
 #: templates/notification/rawdata_posted_to_pool/notice.html:2
-#, python-format
-msgid ""
-"<a href=\"%(pool_url)s\"><strong>%(user_name)s</strong> has added new data "
-"to the public pool: <strong>\"%(pool_name)s.\"</strong></a>"
-msgstr ""
-"<a href=\"%(pool_url)s\"><strong>%(user_name)s</strong>はデータ公開領域"
-"<strong>（\"%(pool_name)s\"）</strong>に新しいデータを追加しました。</a>"
-
 #: templates/notification/rawdata_posted_to_pool/short.html:2
 #, python-format
 msgid ""
 "<a href=\"%(pool_url)s\"><strong>%(user_name)s</strong> has added new data "
-"to the public pool: <strong>\"%(pool_name)s.\"</a>"
+"to the public pool: <strong>\"%(pool_name)s.\"</strong></a>"
 msgstr ""
 "<a href=\"%(pool_url)s\"><strong>%(user_name)s</strong>はデータ公開領域"
 "<strong>（\"%(pool_name)s\"）</strong>に新しいデータを追加しました。</a>"
@@ -6365,6 +6357,7 @@ msgstr ""
 "しました。以下のURLをチェックしてください。%(folder_url)s"
 
 #: templates/notification/rawdata_posted_to_private_folder/notice.html:2
+#: templates/notification/rawdata_posted_to_private_folder/short.html:2
 #, python-format
 msgid ""
 "<a href=\"%(folder_url)s\"><strong>%(user_name)s</strong> has added new data "
@@ -6372,15 +6365,6 @@ msgid ""
 msgstr ""
 "<a href=\"%(folder_url)s\"><strong>%(user_name)s</strong>は非公開共有フォルダ"
 "<strong>（\"%(folder_name)s\"）</strong>に新しいデータを追加しました。</a>"
-
-#: templates/notification/rawdata_posted_to_private_folder/short.html:2
-#, python-format
-msgid ""
-"<a href=\"%(folder_url)s\"><strong>%(user_name)s</strong> has added new data "
-"to the private shared folder: <strong>\"%(folder_name)s.\"</a>"
-msgstr ""
-"<a href=\"%(folder_url)s\"><strong>%(user_name)s</strong>は非公開共有フォルダ"
-"<strong>\"%(folder_name)s\"</strong>に新しいデータを追加しました。</a>"
 
 #: templates/notification/rawdata_posted_to_private_folder/short.txt:2
 #, python-format
@@ -7606,6 +7590,20 @@ msgstr "言語を選択してください。選択した言語でメール通知
 #: templates/user/profile/edit/retailer.html:6
 msgid "Edit your retailer information"
 msgstr "あなたの販売者情報を編集"
+
+#~ msgid ""
+#~ "<a href=\"%(pool_url)s\"><strong>%(user_name)s</strong> has added new "
+#~ "data to the public pool: <strong>\"%(pool_name)s.\"</a>"
+#~ msgstr ""
+#~ "<a href=\"%(pool_url)s\"><strong>%(user_name)s</strong>はデータ公開領域"
+#~ "<strong>（\"%(pool_name)s\"）</strong>に新しいデータを追加しました。</a>"
+
+#~ msgid ""
+#~ "<a href=\"%(folder_url)s\"><strong>%(user_name)s</strong> has added new "
+#~ "data to the private shared folder: <strong>\"%(folder_name)s.\"</a>"
+#~ msgstr ""
+#~ "<a href=\"%(folder_url)s\"><strong>%(user_name)s</strong>は非公開共有フォ"
+#~ "ルダ<strong>\"%(folder_name)s\"</strong>に新しいデータを追加しました。</a>"
 
 #~ msgid ""
 #~ "It's simple: if you didn't take an image yourself, then don't upload it. "

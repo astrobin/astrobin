@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: 1.4\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2016-01-06 06:48+0000\n"
+"POT-Creation-Date: 2016-01-07 11:25+0000\n"
 "PO-Revision-Date: 2015-12-29 23:52+0000\n"
 "Last-Translator: bilgebay <bilgebay@gmail.com>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -1064,7 +1064,7 @@ msgstr "Fotoğraflayan teleskop ya da lensler"
 msgid "Guiding telescopes or lenses"
 msgstr "Kılavuz teleskoplar ya da lensler"
 
-#: forms.py:133 forms.py:227 models.py:754 models.py:1632 views.py:2368
+#: forms.py:133 forms.py:227 models.py:754 models.py:1632 views.py:2367
 msgid "Mounts"
 msgstr "Kundaklar"
 
@@ -1076,20 +1076,20 @@ msgstr "Fotoğraflayan Kameralar"
 msgid "Guiding cameras"
 msgstr "Rehber Kameralar"
 
-#: forms.py:136 forms.py:229 models.py:757 models.py:1634 views.py:2369
+#: forms.py:136 forms.py:229 models.py:757 models.py:1634 views.py:2368
 msgid "Focal reducers"
 msgstr "Odak düşürücüler"
 
-#: forms.py:137 forms.py:230 models.py:758 models.py:1635 views.py:208
-#: views.py:636 views.py:2370
+#: forms.py:137 forms.py:230 models.py:758 models.py:1635 views.py:207
+#: views.py:635 views.py:2369
 msgid "Software"
 msgstr "Yazılım"
 
-#: forms.py:138 forms.py:231 models.py:759 models.py:1636 views.py:2371
+#: forms.py:138 forms.py:231 models.py:759 models.py:1636 views.py:2370
 msgid "Filters"
 msgstr "Filtreler"
 
-#: forms.py:139 forms.py:232 models.py:760 models.py:1637 views.py:2372
+#: forms.py:139 forms.py:232 models.py:760 models.py:1637 views.py:2371
 msgid "Accessories"
 msgstr "Aksesuarlar"
 
@@ -1123,11 +1123,11 @@ msgstr ""
 "İpucu: Filtrelerinizi ayırarak yazın! Örneğin LRGB'lerinizi tek kutuya "
 "girerseniz, hepsi için ayrı ayrı zaman bilgisi giremezsiniz."
 
-#: forms.py:226 models.py:1631 views.py:2366
+#: forms.py:226 models.py:1631 views.py:2365
 msgid "Telescopes and lenses"
 msgstr "Teleskop ve lensler"
 
-#: forms.py:228 models.py:1633 views.py:2367
+#: forms.py:228 models.py:1633 views.py:2366
 msgid "Cameras"
 msgstr "Kameralar"
 
@@ -1154,7 +1154,7 @@ msgstr "Hepsi"
 msgid "Images"
 msgstr "Resim sayısı"
 
-#: forms.py:277 models.py:648 views.py:1835
+#: forms.py:277 models.py:648 views.py:1834
 #: templates/maintenance_base.html:298 templates/profile-edit-menu.html:30
 #: templates/wall.html:131 templates/inclusion_tags/search_image_list.html:13
 #: templates/user/profile-subnav.html:130
@@ -1450,7 +1450,7 @@ msgstr "Creative Commons: Atıf-Değiştirilebilir"
 msgid "Attribution-NoDerivs Creative Commons"
 msgstr "Creative Commons: Atıf-Değiştirilemez"
 
-#: models.py:78 models.py:96 views.py:842 views.py:844
+#: models.py:78 models.py:96 views.py:841 views.py:843
 msgid "English"
 msgstr "İngilizce"
 
@@ -1580,7 +1580,7 @@ msgstr "Küçük gezegen"
 msgid "Comet"
 msgstr "Kuyruklu Yıldız"
 
-#: models.py:151 models.py:585 models.py:649 views.py:1836
+#: models.py:151 models.py:585 models.py:649 views.py:1835
 #: templates/wall.html:143 templates/image/edit/acquisition.html:84
 msgid "Other"
 msgstr "Diğer"
@@ -1906,11 +1906,11 @@ msgstr "Derin uzay cisimleri"
 msgid "Solar system body or event"
 msgstr "Güneş sistemi nesnesi yada olayı"
 
-#: models.py:646 views.py:1833 templates/wall.html:119
+#: models.py:646 views.py:1832 templates/wall.html:119
 msgid "Extremely wide field"
 msgstr "Çok geniş alan"
 
-#: models.py:647 views.py:1834 templates/wall.html:125
+#: models.py:647 views.py:1833 templates/wall.html:125
 msgid "Star trails"
 msgstr "Yıldız izleri"
 
@@ -2024,7 +2024,7 @@ msgstr "9 - Megaşehir merkezi gökyüzü (BEYAZ)"
 msgid "Synthetic channel"
 msgstr "Yapay kanal"
 
-#: models.py:1311 views.py:209 views.py:637
+#: models.py:1311 views.py:208 views.py:636
 msgid "Filter"
 msgstr "Filtre"
 
@@ -2064,7 +2064,7 @@ msgstr "Sensör soğutma"
 msgid "The temperature of the chip. E.g.: -20."
 msgstr "Yonga sıcaklığı. Örn: -20."
 
-#: models.py:1344 views.py:769
+#: models.py:1344 views.py:768
 msgid "Darks"
 msgstr "Dark'lar"
 
@@ -2072,7 +2072,7 @@ msgstr "Dark'lar"
 msgid "The number of dark frames."
 msgstr "Dark karelerin sayısı."
 
-#: models.py:1349 views.py:770
+#: models.py:1349 views.py:769
 msgid "Flats"
 msgstr "Flat'ler"
 
@@ -2080,7 +2080,7 @@ msgstr "Flat'ler"
 msgid "The number of flat frames."
 msgstr "Flat karelerin sayısı."
 
-#: models.py:1354 views.py:771
+#: models.py:1354 views.py:770
 msgid "Flat darks"
 msgstr "Flat dark'lar"
 
@@ -2088,7 +2088,7 @@ msgstr "Flat dark'lar"
 msgid "The number of dark flat frames."
 msgstr "Dark flat karelerin sayısı."
 
-#: models.py:1359 views.py:772
+#: models.py:1359 views.py:771
 msgid "Bias"
 msgstr "Bias"
 
@@ -2096,7 +2096,7 @@ msgstr "Bias"
 msgid "The number of bias/offset frames."
 msgstr "Bias/offset karelerin sayısı"
 
-#: models.py:1364 views.py:775
+#: models.py:1364 views.py:774
 msgid "Bortle Dark-Sky Scale"
 msgstr "Bortle Karanlık-Gökyüzü Ölçeği"
 
@@ -2116,11 +2116,11 @@ msgstr "Yaklaşık mag/arcsec^2"
 msgid "As measured with your Sky Quality Meter."
 msgstr "Gökyüzü Kalitesi Ölçer'inizin ölçtüğü gibi."
 
-#: models.py:1378 views.py:777
+#: models.py:1378 views.py:776
 msgid "Mean FWHM"
 msgstr "Yaklaşık FWHM"
 
-#: models.py:1383 views.py:778
+#: models.py:1383 views.py:777
 msgid "Temperature"
 msgstr "Sıcaklık"
 
@@ -2579,231 +2579,231 @@ msgstr "Katadioptrik"
 msgid "Number of images by subject type"
 msgstr "Nesne türüne göre resim sayısı"
 
-#: views.py:184 views.py:612
+#: views.py:183 views.py:611
 #, fuzzy
 msgid "Imaging telescope or lens"
 msgid_plural "Imaging telescopes or lenses"
 msgstr[0] "Fotoğraflayan teleskop ya da lensler"
 msgstr[1] "Fotoğraflayan teleskop ya da lensler"
 
-#: views.py:188 views.py:616
+#: views.py:187 views.py:615
 #, fuzzy
 msgid "Imaging camera"
 msgid_plural "Imaging cameras"
 msgstr[0] "Fotoğraflayan Kameralar"
 msgstr[1] "Fotoğraflayan Kameralar"
 
-#: views.py:192 views.py:620
+#: views.py:191 views.py:619
 #, fuzzy
 msgid "Mount"
 msgid_plural "Mounts"
 msgstr[0] "Kundaklar"
 msgstr[1] "Kundaklar"
 
-#: views.py:196 views.py:624
+#: views.py:195 views.py:623
 #, fuzzy
 msgid "Guiding telescope or lens"
 msgid_plural "Guiding telescopes or lenses"
 msgstr[0] "Kılavuz teleskoplar ya da lensler"
 msgstr[1] "Kılavuz teleskoplar ya da lensler"
 
-#: views.py:200 views.py:628
+#: views.py:199 views.py:627
 #, fuzzy
 msgid "Guiding camera"
 msgid_plural "Guiding cameras"
 msgstr[0] "Rehber Kameralar"
 msgstr[1] "Rehber Kameralar"
 
-#: views.py:204 views.py:632
+#: views.py:203 views.py:631
 #, fuzzy
 msgid "Focal reducer"
 msgid_plural "Focal reducers"
 msgstr[0] "Odak düşürücüler"
 msgstr[1] "Odak düşürücüler"
 
-#: views.py:213 views.py:641
+#: views.py:212 views.py:640
 #, fuzzy
 msgid "Accessory"
 msgid_plural "Accessories"
 msgstr[0] "Aksesuarlar"
 msgstr[1] "Aksesuarlar"
 
-#: views.py:501
+#: views.py:500
 msgid "Today's 'Image of the day' was already chosen. Come back tomorrow!"
 msgstr ""
 
-#: views.py:760
+#: views.py:759
 msgid "Resolution"
 msgstr "Çözünürlük"
 
-#: views.py:761 views.py:911
+#: views.py:760 views.py:910
 msgid "Dates"
 msgstr "Tarihler"
 
-#: views.py:762 templates/image/detail/image_card.html:52
+#: views.py:761 templates/image/detail/image_card.html:52
 msgid "Frames"
 msgstr "Kareler"
 
-#: views.py:768 templates/wall.html:37
+#: views.py:767 templates/wall.html:37
 #: templates/inclusion_tags/search_image_list.html:36
 #: templates/inclusion_tags/search_image_list.html:89
 #: templates/search/search.html:43 templates/search/search.html.py:306
 msgid "Integration"
 msgstr "Poz Toplamı"
 
-#: views.py:768 views.py:1926 views.py:1927 templates/search/search.html:307
+#: views.py:767 views.py:1925 views.py:1926 templates/search/search.html:307
 msgid "hours"
 msgstr "saat"
 
-#: views.py:773
+#: views.py:772
 msgid "Avg. Moon age"
 msgstr "Ort. Ay günü"
 
-#: views.py:773 templates/subscription/subscription_category_list.html:47
+#: views.py:772 templates/subscription/subscription_category_list.html:47
 msgid "days"
 msgstr "gün"
 
-#: views.py:774 templates/search/search.html:313
+#: views.py:773 templates/search/search.html:313
 msgid "Avg. Moon phase"
 msgstr "Ort. Ay evresi"
 
-#: views.py:776
+#: views.py:775
 msgid "Mean SQM"
 msgstr "Ortalama SQM"
 
-#: views.py:957
+#: views.py:956
 msgid ""
 "Thanks for reporting the problem. All thumbnails will be generated again."
 msgstr ""
 
-#: views.py:1099 views.py:2823
+#: views.py:1098 views.py:2822
 msgid ""
 "Invalid image or no image provided. Allowed formats are JPG, PNG and GIF."
 msgstr ""
 "Hatalı resim dosyası ya da resim dosyası yok. JPG, PNG ve GIF formatları "
 "desteklenmektedir."
 
-#: views.py:1106
+#: views.py:1105
 msgid "You have reached your image uploads limit. Please upgrade!"
 msgstr ""
 
-#: views.py:1110 views.py:2834 templates/user/profile/flickr_import.html:10
+#: views.py:1109 views.py:2833 templates/user/profile/flickr_import.html:10
 msgid ""
 "AstroBin is currently in read-only mode, because of server maintenance. "
 "Please try again soon!"
 msgstr ""
 
-#: views.py:1133 views.py:2854
+#: views.py:1129 views.py:2853
 msgid ""
 "You uploaded an Indexed PNG file. AstroBin will need to lower the color "
 "count to 256 in order to work with it."
 msgstr ""
 
-#: views.py:1399 views.py:1486 views.py:1570 views.py:1596 views.py:2268
-#: views.py:2281 views.py:2302 views.py:2339 views.py:2429 views.py:2491
-#: views.py:2702 views.py:3929 views.py:4099
-#: templates/user/profile/edit/gear.html:168
-#: templates/user/profile/edit/gear.html:243
-msgid "Form saved. Thank you!"
-msgstr "Form kaydedildi. Teşekkürler!"
-
-#: views.py:1538
-msgid "Fill in one session, before adding more."
-msgstr "Daha fazla eklemeden önce bir oturum ile ilgili bilgileri doldurun."
-
-#: views.py:1609 views.py:1680
-#, fuzzy
-msgid "Image deleted."
-msgstr "Fotoğrafınız silindi"
-
-#: views.py:1627
-msgid "Revision deleted."
-msgstr ""
-
-#: views.py:1783
-msgid "No date specified"
-msgstr "Tarih belirtilmedi"
-
-#: views.py:1805 views.py:1866
-msgid "No imaging telescopes or lenses, or no imaging cameras specified"
-msgstr ""
-"Herhangi bir görüntüleme teleskobu ya da lensi veyahut herhangi bir "
-"görüntüleme kamerası belirtilmedi"
-
-#: views.py:1806
-msgid "Gear images"
-msgstr "Ekipman resimleri"
-
-#: views.py:1831 templates/image/edit/acquisition.html:81
-msgid "Deep sky"
-msgstr "Derin uzay"
-
-#: views.py:1832 templates/image/edit/acquisition.html:78
-msgid "Solar system"
-msgstr "Güneş sistemi"
-
-#: views.py:1865
-msgid "No subjects specified"
-msgstr "Herhangi bir obje belirtilmedi"
-
-#: views.py:1867
-msgid "No acquisition details specified"
-msgstr "Hiç bir çekim detayı belirtilmedi."
-
-#: views.py:1898 views.py:3306 templatetags/tags.py:77
-msgid "minutes"
-msgstr "dakika"
-
-#: views.py:1899 views.py:3307 templatetags/tags.py:78
-msgid "seconds ago"
-msgstr "saniye önce"
-
-#: views.py:1901 views.py:3309 templatetags/tags.py:79
-#, python-format
-msgid "%s ago"
-msgstr "%s önce"
-
-#: views.py:1924 templates/popover/user.html:19
-msgid "Member since"
-msgstr "Tarihinden beri üye"
-
-#: views.py:1925
-msgid "Last login"
-msgstr "Son giriş zamanı"
-
-#: views.py:1926
-msgid "Total integration time"
-msgstr "Poz Toplamı"
-
-#: views.py:1927
-msgid "Average integration time"
-msgstr "Ortalama poz süresi"
-
-#: views.py:1928
-#, fuzzy
-msgid "Forum posts"
-msgstr "Forumlar"
-
-#: views.py:2419
+#: views.py:1385 views.py:1414 views.py:1474 views.py:2418
 msgid ""
 "There was one or more errors processing the form. You may need to scroll "
 "down to see them."
 msgstr ""
 
-#: views.py:2877
+#: views.py:1396 views.py:1485 views.py:1569 views.py:1595 views.py:2267
+#: views.py:2280 views.py:2301 views.py:2338 views.py:2428 views.py:2490
+#: views.py:2701 views.py:3928 views.py:4098
+#: templates/user/profile/edit/gear.html:168
+#: templates/user/profile/edit/gear.html:243
+msgid "Form saved. Thank you!"
+msgstr "Form kaydedildi. Teşekkürler!"
+
+#: views.py:1537
+msgid "Fill in one session, before adding more."
+msgstr "Daha fazla eklemeden önce bir oturum ile ilgili bilgileri doldurun."
+
+#: views.py:1608 views.py:1679
+#, fuzzy
+msgid "Image deleted."
+msgstr "Fotoğrafınız silindi"
+
+#: views.py:1626
+msgid "Revision deleted."
+msgstr ""
+
+#: views.py:1782
+msgid "No date specified"
+msgstr "Tarih belirtilmedi"
+
+#: views.py:1804 views.py:1865
+msgid "No imaging telescopes or lenses, or no imaging cameras specified"
+msgstr ""
+"Herhangi bir görüntüleme teleskobu ya da lensi veyahut herhangi bir "
+"görüntüleme kamerası belirtilmedi"
+
+#: views.py:1805
+msgid "Gear images"
+msgstr "Ekipman resimleri"
+
+#: views.py:1830 templates/image/edit/acquisition.html:81
+msgid "Deep sky"
+msgstr "Derin uzay"
+
+#: views.py:1831 templates/image/edit/acquisition.html:78
+msgid "Solar system"
+msgstr "Güneş sistemi"
+
+#: views.py:1864
+msgid "No subjects specified"
+msgstr "Herhangi bir obje belirtilmedi"
+
+#: views.py:1866
+msgid "No acquisition details specified"
+msgstr "Hiç bir çekim detayı belirtilmedi."
+
+#: views.py:1897 views.py:3305 templatetags/tags.py:77
+msgid "minutes"
+msgstr "dakika"
+
+#: views.py:1898 views.py:3306 templatetags/tags.py:78
+msgid "seconds ago"
+msgstr "saniye önce"
+
+#: views.py:1900 views.py:3308 templatetags/tags.py:79
+#, python-format
+msgid "%s ago"
+msgstr "%s önce"
+
+#: views.py:1923 templates/popover/user.html:19
+msgid "Member since"
+msgstr "Tarihinden beri üye"
+
+#: views.py:1924
+msgid "Last login"
+msgstr "Son giriş zamanı"
+
+#: views.py:1925
+msgid "Total integration time"
+msgstr "Poz Toplamı"
+
+#: views.py:1926
+msgid "Average integration time"
+msgstr "Ortalama poz süresi"
+
+#: views.py:1927
+#, fuzzy
+msgid "Forum posts"
+msgstr "Forumlar"
+
+#: views.py:2876
 #, fuzzy
 msgid "Image uploaded. Thank you!"
 msgstr "Form kaydedildi. Teşekkürler!"
 
-#: views.py:3173 templatetags/tags.py:237
+#: views.py:3172 templatetags/tags.py:237
 msgid "no alias"
 msgstr "takma ad yok"
 
-#: views.py:3889 views.py:4082
+#: views.py:3888 views.py:4081
 msgid "You can't merge a product to itself."
 msgstr ""
 
-#: views.py:4120
+#: views.py:4119
 msgid "Default front page section changed."
 msgstr ""
 
@@ -6303,19 +6303,11 @@ msgstr ""
 "edebilirsiniz: %(url)s"
 
 #: templates/notification/rawdata_posted_to_pool/notice.html:2
-#, fuzzy, python-format
-msgid ""
-"<a href=\"%(pool_url)s\"><strong>%(user_name)s</strong> has added new data "
-"to the public pool: <strong>\"%(pool_name)s.\"</strong></a>"
-msgstr ""
-"<a href=\"%(url)s\"><strong>%(user)s</strong> kullanıcısı fotoğrafınızı "
-"favorilerine ekledi!</a>"
-
 #: templates/notification/rawdata_posted_to_pool/short.html:2
 #, fuzzy, python-format
 msgid ""
 "<a href=\"%(pool_url)s\"><strong>%(user_name)s</strong> has added new data "
-"to the public pool: <strong>\"%(pool_name)s.\"</a>"
+"to the public pool: <strong>\"%(pool_name)s.\"</strong></a>"
 msgstr ""
 "<a href=\"%(url)s\"><strong>%(user)s</strong> kullanıcısı fotoğrafınızı "
 "favorilerine ekledi!</a>"
@@ -6336,19 +6328,11 @@ msgstr ""
 "Şu adresten kontrol edebilirsiniz: %(object_url)s"
 
 #: templates/notification/rawdata_posted_to_private_folder/notice.html:2
-#, fuzzy, python-format
-msgid ""
-"<a href=\"%(folder_url)s\"><strong>%(user_name)s</strong> has added new data "
-"to the private shared folder: <strong>\"%(folder_name)s.\"</strong></a>"
-msgstr ""
-"<a href=\"%(url)s\"><strong>%(user)s</strong> kullanıcısı fotoğrafınızı "
-"favorilerine ekledi!</a>"
-
 #: templates/notification/rawdata_posted_to_private_folder/short.html:2
 #, fuzzy, python-format
 msgid ""
 "<a href=\"%(folder_url)s\"><strong>%(user_name)s</strong> has added new data "
-"to the private shared folder: <strong>\"%(folder_name)s.\"</a>"
+"to the private shared folder: <strong>\"%(folder_name)s.\"</strong></a>"
 msgstr ""
 "<a href=\"%(url)s\"><strong>%(user)s</strong> kullanıcısı fotoğrafınızı "
 "favorilerine ekledi!</a>"
@@ -7580,6 +7564,22 @@ msgstr "Dilinizi ve hangi e-mail bilgilendirmesini almak istediğinizi seçin:"
 #, fuzzy
 msgid "Edit your retailer information"
 msgstr "Temel bilgilerinizi düzenleyin"
+
+#, fuzzy
+#~ msgid ""
+#~ "<a href=\"%(pool_url)s\"><strong>%(user_name)s</strong> has added new "
+#~ "data to the public pool: <strong>\"%(pool_name)s.\"</a>"
+#~ msgstr ""
+#~ "<a href=\"%(url)s\"><strong>%(user)s</strong> kullanıcısı fotoğrafınızı "
+#~ "favorilerine ekledi!</a>"
+
+#, fuzzy
+#~ msgid ""
+#~ "<a href=\"%(folder_url)s\"><strong>%(user_name)s</strong> has added new "
+#~ "data to the private shared folder: <strong>\"%(folder_name)s.\"</a>"
+#~ msgstr ""
+#~ "<a href=\"%(url)s\"><strong>%(user)s</strong> kullanıcısı fotoğrafınızı "
+#~ "favorilerine ekledi!</a>"
 
 #~ msgid ""
 #~ "It's simple: if you didn't take an image yourself, then don't upload it. "

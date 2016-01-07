@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: 0.9\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2016-01-06 06:45+0000\n"
+"POT-Creation-Date: 2016-01-07 11:21+0000\n"
 "PO-Revision-Date: 2015-12-30 10:50+0000\n"
 "Last-Translator: Samuli <samuli.vuorinen@iki.fi>\n"
 "Language-Team: Finnish <tanja@iovene.com>\n"
@@ -1062,7 +1062,7 @@ msgstr "Kuvauskaukoputket"
 msgid "Guiding telescopes or lenses"
 msgstr "Seurantakaukoputket"
 
-#: forms.py:133 forms.py:227 models.py:754 models.py:1632 views.py:2368
+#: forms.py:133 forms.py:227 models.py:754 models.py:1632 views.py:2367
 msgid "Mounts"
 msgstr "Jalustat"
 
@@ -1074,20 +1074,20 @@ msgstr "Kuvauskamerat"
 msgid "Guiding cameras"
 msgstr "Seurantakamerat"
 
-#: forms.py:136 forms.py:229 models.py:757 models.py:1634 views.py:2369
+#: forms.py:136 forms.py:229 models.py:757 models.py:1634 views.py:2368
 msgid "Focal reducers"
 msgstr "Polttovälin lyhentäjät"
 
-#: forms.py:137 forms.py:230 models.py:758 models.py:1635 views.py:208
-#: views.py:636 views.py:2370
+#: forms.py:137 forms.py:230 models.py:758 models.py:1635 views.py:207
+#: views.py:635 views.py:2369
 msgid "Software"
 msgstr "Ohjelmistot"
 
-#: forms.py:138 forms.py:231 models.py:759 models.py:1636 views.py:2371
+#: forms.py:138 forms.py:231 models.py:759 models.py:1636 views.py:2370
 msgid "Filters"
 msgstr "Suodattimet"
 
-#: forms.py:139 forms.py:232 models.py:760 models.py:1637 views.py:2372
+#: forms.py:139 forms.py:232 models.py:760 models.py:1637 views.py:2371
 msgid "Accessories"
 msgstr "Oheislaitteet"
 
@@ -1120,11 +1120,11 @@ msgstr ""
 "Vihje: Syötä kaikki suodattimesi erikseen! Jos syötät esim. LRGB, et voi "
 "lisätä erillisiä valotusaikoja ja/tai sessioita niille."
 
-#: forms.py:226 models.py:1631 views.py:2366
+#: forms.py:226 models.py:1631 views.py:2365
 msgid "Telescopes and lenses"
 msgstr "Kaukoputket ja linssit"
 
-#: forms.py:228 models.py:1633 views.py:2367
+#: forms.py:228 models.py:1633 views.py:2366
 msgid "Cameras"
 msgstr "Kamerat"
 
@@ -1150,7 +1150,7 @@ msgstr "Kaikki"
 msgid "Images"
 msgstr "Kuvia"
 
-#: forms.py:277 models.py:648 views.py:1835
+#: forms.py:277 models.py:648 views.py:1834
 #: templates/maintenance_base.html:298 templates/profile-edit-menu.html:30
 #: templates/wall.html:131 templates/inclusion_tags/search_image_list.html:13
 #: templates/user/profile-subnav.html:130
@@ -1450,7 +1450,7 @@ msgstr "Nimeä-Tarttuva Creative Commons"
 msgid "Attribution-NoDerivs Creative Commons"
 msgstr "Nimeä-Ei muutoksia Creative Commons"
 
-#: models.py:78 models.py:96 views.py:842 views.py:844
+#: models.py:78 models.py:96 views.py:841 views.py:843
 msgid "English"
 msgstr "Englanti"
 
@@ -1578,7 +1578,7 @@ msgstr "Pikkuplaneetta"
 msgid "Comet"
 msgstr "Komeetta"
 
-#: models.py:151 models.py:585 models.py:649 views.py:1836
+#: models.py:151 models.py:585 models.py:649 views.py:1835
 #: templates/wall.html:143 templates/image/edit/acquisition.html:84
 msgid "Other"
 msgstr "Muu"
@@ -1906,11 +1906,11 @@ msgstr "Syvän taivaan kohde"
 msgid "Solar system body or event"
 msgstr "Aurinkokunnan kohde"
 
-#: models.py:646 views.py:1833 templates/wall.html:119
+#: models.py:646 views.py:1832 templates/wall.html:119
 msgid "Extremely wide field"
 msgstr "Erittäin laaja kuvakenttä"
 
-#: models.py:647 views.py:1834 templates/wall.html:125
+#: models.py:647 views.py:1833 templates/wall.html:125
 msgid "Star trails"
 msgstr "Tähtiviirut"
 
@@ -2020,7 +2020,7 @@ msgstr "9 - Kaupungin keskustan taivas (VALKOINEN)"
 msgid "Synthetic channel"
 msgstr "Synteettinen kanava"
 
-#: models.py:1311 views.py:209 views.py:637
+#: models.py:1311 views.py:208 views.py:636
 msgid "Filter"
 msgstr "Suodatin"
 
@@ -2060,7 +2060,7 @@ msgstr "Kennon jäähdytys"
 msgid "The temperature of the chip. E.g.: -20."
 msgstr "Kennon lämpötila, esim. -20."
 
-#: models.py:1344 views.py:769
+#: models.py:1344 views.py:768
 msgid "Darks"
 msgstr "Darkit"
 
@@ -2068,7 +2068,7 @@ msgstr "Darkit"
 msgid "The number of dark frames."
 msgstr "Dark-ruutujen lukumäärä."
 
-#: models.py:1349 views.py:770
+#: models.py:1349 views.py:769
 msgid "Flats"
 msgstr "Flatit"
 
@@ -2076,7 +2076,7 @@ msgstr "Flatit"
 msgid "The number of flat frames."
 msgstr "Flat-ruutujen lukumäärä."
 
-#: models.py:1354 views.py:771
+#: models.py:1354 views.py:770
 msgid "Flat darks"
 msgstr "Flat darkit"
 
@@ -2084,7 +2084,7 @@ msgstr "Flat darkit"
 msgid "The number of dark flat frames."
 msgstr "Dark flat -ruutujen lukumäärä."
 
-#: models.py:1359 views.py:772
+#: models.py:1359 views.py:771
 msgid "Bias"
 msgstr "Bias"
 
@@ -2092,7 +2092,7 @@ msgstr "Bias"
 msgid "The number of bias/offset frames."
 msgstr "Bias/offset-ruutujen lukumäärä."
 
-#: models.py:1364 views.py:775
+#: models.py:1364 views.py:774
 msgid "Bortle Dark-Sky Scale"
 msgstr "Bortlen asteikko"
 
@@ -2112,11 +2112,11 @@ msgstr "Keskimääräinen magnitudi/kaarisekunti^2"
 msgid "As measured with your Sky Quality Meter."
 msgstr "SQM-mittarillasi mitattuna."
 
-#: models.py:1378 views.py:777
+#: models.py:1378 views.py:776
 msgid "Mean FWHM"
 msgstr "Keskiarvo FWHM"
 
-#: models.py:1383 views.py:778
+#: models.py:1383 views.py:777
 msgid "Temperature"
 msgstr "Lämpötila"
 
@@ -2583,118 +2583,118 @@ msgstr "Katadioptrinen"
 msgid "Number of images by subject type"
 msgstr "Kuvien määrä kohdetyypeittäin"
 
-#: views.py:184 views.py:612
+#: views.py:183 views.py:611
 #, fuzzy
 msgid "Imaging telescope or lens"
 msgid_plural "Imaging telescopes or lenses"
 msgstr[0] "Kuvauskaukoputket"
 msgstr[1] "Kuvauskaukoputket"
 
-#: views.py:188 views.py:616
+#: views.py:187 views.py:615
 #, fuzzy
 msgid "Imaging camera"
 msgid_plural "Imaging cameras"
 msgstr[0] "Kuvauskamerat"
 msgstr[1] "Kuvauskamerat"
 
-#: views.py:192 views.py:620
+#: views.py:191 views.py:619
 #, fuzzy
 msgid "Mount"
 msgid_plural "Mounts"
 msgstr[0] "Jalustat"
 msgstr[1] "Jalustat"
 
-#: views.py:196 views.py:624
+#: views.py:195 views.py:623
 #, fuzzy
 msgid "Guiding telescope or lens"
 msgid_plural "Guiding telescopes or lenses"
 msgstr[0] "Seurantakaukoputket"
 msgstr[1] "Seurantakaukoputket"
 
-#: views.py:200 views.py:628
+#: views.py:199 views.py:627
 #, fuzzy
 msgid "Guiding camera"
 msgid_plural "Guiding cameras"
 msgstr[0] "Seurantakamerat"
 msgstr[1] "Seurantakamerat"
 
-#: views.py:204 views.py:632
+#: views.py:203 views.py:631
 #, fuzzy
 msgid "Focal reducer"
 msgid_plural "Focal reducers"
 msgstr[0] "Polttovälin lyhentäjät"
 msgstr[1] "Polttovälin lyhentäjät"
 
-#: views.py:213 views.py:641
+#: views.py:212 views.py:640
 #, fuzzy
 msgid "Accessory"
 msgid_plural "Accessories"
 msgstr[0] "Oheislaitteet"
 msgstr[1] "Oheislaitteet"
 
-#: views.py:501
+#: views.py:500
 #, fuzzy
 msgid "Today's 'Image of the day' was already chosen. Come back tomorrow!"
 msgstr ""
 "'Päivän kuva' tälle päivälle on jo valittu. Tervetuloa takaisin uudestaan!"
 
-#: views.py:760
+#: views.py:759
 msgid "Resolution"
 msgstr "Resoluutio"
 
-#: views.py:761 views.py:911
+#: views.py:760 views.py:910
 msgid "Dates"
 msgstr "Päivämäärät"
 
-#: views.py:762 templates/image/detail/image_card.html:52
+#: views.py:761 templates/image/detail/image_card.html:52
 msgid "Frames"
 msgstr "Ruutuja"
 
-#: views.py:768 templates/wall.html:37
+#: views.py:767 templates/wall.html:37
 #: templates/inclusion_tags/search_image_list.html:36
 #: templates/inclusion_tags/search_image_list.html:89
 #: templates/search/search.html:43 templates/search/search.html.py:306
 msgid "Integration"
 msgstr "Valotusaika"
 
-#: views.py:768 views.py:1926 views.py:1927 templates/search/search.html:307
+#: views.py:767 views.py:1925 views.py:1926 templates/search/search.html:307
 msgid "hours"
 msgstr "tuntia"
 
-#: views.py:773
+#: views.py:772
 msgid "Avg. Moon age"
 msgstr "Keskimääräinen kuun ikä"
 
-#: views.py:773 templates/subscription/subscription_category_list.html:47
+#: views.py:772 templates/subscription/subscription_category_list.html:47
 msgid "days"
 msgstr "vuorokautta"
 
-#: views.py:774 templates/search/search.html:313
+#: views.py:773 templates/search/search.html:313
 msgid "Avg. Moon phase"
 msgstr "Kuun vaiheen keskiarvo"
 
-#: views.py:776
+#: views.py:775
 msgid "Mean SQM"
 msgstr "Keskiarvo SQM"
 
-#: views.py:957
+#: views.py:956
 msgid ""
 "Thanks for reporting the problem. All thumbnails will be generated again."
 msgstr ""
 "Kiitos kun raportoit ongelman. Kaikki esikatselukuvat generoidaan uudestaan."
 
-#: views.py:1099 views.py:2823
+#: views.py:1098 views.py:2822
 msgid ""
 "Invalid image or no image provided. Allowed formats are JPG, PNG and GIF."
 msgstr ""
 "Virheellinen kuva tai ei kuvaa. Sallitut formaatit ovat JPG, PNG ja GIF."
 
-#: views.py:1106
+#: views.py:1105
 msgid "You have reached your image uploads limit. Please upgrade!"
 msgstr ""
 "Olet saavuttanut kuvien lataamismäärän ylärajan. Ole hyvä ja päivitä tilisi!"
 
-#: views.py:1110 views.py:2834 templates/user/profile/flickr_import.html:10
+#: views.py:1109 views.py:2833 templates/user/profile/flickr_import.html:10
 msgid ""
 "AstroBin is currently in read-only mode, because of server maintenance. "
 "Please try again soon!"
@@ -2702,7 +2702,7 @@ msgstr ""
 "AstroBin on tällä hetkellä ainoastaan lukumoodissa palvelinhuollon vuoksi. "
 "Ole hyvä, ja kokeile myöhemmin uudestaan!"
 
-#: views.py:1133 views.py:2854
+#: views.py:1129 views.py:2853
 msgid ""
 "You uploaded an Indexed PNG file. AstroBin will need to lower the color "
 "count to 256 in order to work with it."
@@ -2710,88 +2710,7 @@ msgstr ""
 "Olet lähettänyt indeksoidun PNG-tiedoston. AstroBinin on pakko pienentää "
 "värien määrää 256 kappaleeseen, jotta kuva toimisi."
 
-#: views.py:1399 views.py:1486 views.py:1570 views.py:1596 views.py:2268
-#: views.py:2281 views.py:2302 views.py:2339 views.py:2429 views.py:2491
-#: views.py:2702 views.py:3929 views.py:4099
-#: templates/user/profile/edit/gear.html:168
-#: templates/user/profile/edit/gear.html:243
-msgid "Form saved. Thank you!"
-msgstr "Tallennettu. Kiitos!"
-
-#: views.py:1538
-msgid "Fill in one session, before adding more."
-msgstr "Täytä tämä sessio ennen seuraavien lisäämistä."
-
-#: views.py:1609 views.py:1680
-msgid "Image deleted."
-msgstr "Kuva on poistettu."
-
-#: views.py:1627
-msgid "Revision deleted."
-msgstr "Versio poistettu."
-
-#: views.py:1783
-msgid "No date specified"
-msgstr "Päivämäärää ei annettu"
-
-#: views.py:1805 views.py:1866
-msgid "No imaging telescopes or lenses, or no imaging cameras specified"
-msgstr "Kaukoputkea, objektiivia tai kameraa ei määritetty"
-
-#: views.py:1806
-msgid "Gear images"
-msgstr "Kalustokuvia"
-
-#: views.py:1831 templates/image/edit/acquisition.html:81
-msgid "Deep sky"
-msgstr "Syvä taivas"
-
-#: views.py:1832 templates/image/edit/acquisition.html:78
-msgid "Solar system"
-msgstr "Aurinkokunta"
-
-#: views.py:1865
-msgid "No subjects specified"
-msgstr "Kohteita ei määritetty"
-
-#: views.py:1867
-msgid "No acquisition details specified"
-msgstr "Kuvaustietoja ei määritelty"
-
-#: views.py:1898 views.py:3306 templatetags/tags.py:77
-msgid "minutes"
-msgstr "minuuttia"
-
-#: views.py:1899 views.py:3307 templatetags/tags.py:78
-msgid "seconds ago"
-msgstr "sekunteja sitten"
-
-#: views.py:1901 views.py:3309 templatetags/tags.py:79
-#, python-format
-msgid "%s ago"
-msgstr "%s sitten"
-
-#: views.py:1924 templates/popover/user.html:19
-msgid "Member since"
-msgstr "Liittynyt"
-
-#: views.py:1925
-msgid "Last login"
-msgstr "Viimeksi kirjautunut"
-
-#: views.py:1926
-msgid "Total integration time"
-msgstr "Kokonaisvalotusaika"
-
-#: views.py:1927
-msgid "Average integration time"
-msgstr "Keskimääräinen valotusaika"
-
-#: views.py:1928
-msgid "Forum posts"
-msgstr "Foorumiviestit"
-
-#: views.py:2419
+#: views.py:1385 views.py:1414 views.py:1474 views.py:2418
 msgid ""
 "There was one or more errors processing the form. You may need to scroll "
 "down to see them."
@@ -2799,19 +2718,100 @@ msgstr ""
 "Lomakkeen käsittelyssä tapahtui yksi tai useampi virhe. Rullaa alaspäin "
 "nähdäksesi virheet."
 
-#: views.py:2877
+#: views.py:1396 views.py:1485 views.py:1569 views.py:1595 views.py:2267
+#: views.py:2280 views.py:2301 views.py:2338 views.py:2428 views.py:2490
+#: views.py:2701 views.py:3928 views.py:4098
+#: templates/user/profile/edit/gear.html:168
+#: templates/user/profile/edit/gear.html:243
+msgid "Form saved. Thank you!"
+msgstr "Tallennettu. Kiitos!"
+
+#: views.py:1537
+msgid "Fill in one session, before adding more."
+msgstr "Täytä tämä sessio ennen seuraavien lisäämistä."
+
+#: views.py:1608 views.py:1679
+msgid "Image deleted."
+msgstr "Kuva on poistettu."
+
+#: views.py:1626
+msgid "Revision deleted."
+msgstr "Versio poistettu."
+
+#: views.py:1782
+msgid "No date specified"
+msgstr "Päivämäärää ei annettu"
+
+#: views.py:1804 views.py:1865
+msgid "No imaging telescopes or lenses, or no imaging cameras specified"
+msgstr "Kaukoputkea, objektiivia tai kameraa ei määritetty"
+
+#: views.py:1805
+msgid "Gear images"
+msgstr "Kalustokuvia"
+
+#: views.py:1830 templates/image/edit/acquisition.html:81
+msgid "Deep sky"
+msgstr "Syvä taivas"
+
+#: views.py:1831 templates/image/edit/acquisition.html:78
+msgid "Solar system"
+msgstr "Aurinkokunta"
+
+#: views.py:1864
+msgid "No subjects specified"
+msgstr "Kohteita ei määritetty"
+
+#: views.py:1866
+msgid "No acquisition details specified"
+msgstr "Kuvaustietoja ei määritelty"
+
+#: views.py:1897 views.py:3305 templatetags/tags.py:77
+msgid "minutes"
+msgstr "minuuttia"
+
+#: views.py:1898 views.py:3306 templatetags/tags.py:78
+msgid "seconds ago"
+msgstr "sekunteja sitten"
+
+#: views.py:1900 views.py:3308 templatetags/tags.py:79
+#, python-format
+msgid "%s ago"
+msgstr "%s sitten"
+
+#: views.py:1923 templates/popover/user.html:19
+msgid "Member since"
+msgstr "Liittynyt"
+
+#: views.py:1924
+msgid "Last login"
+msgstr "Viimeksi kirjautunut"
+
+#: views.py:1925
+msgid "Total integration time"
+msgstr "Kokonaisvalotusaika"
+
+#: views.py:1926
+msgid "Average integration time"
+msgstr "Keskimääräinen valotusaika"
+
+#: views.py:1927
+msgid "Forum posts"
+msgstr "Foorumiviestit"
+
+#: views.py:2876
 msgid "Image uploaded. Thank you!"
 msgstr "Tallennettu. Kiitos!"
 
-#: views.py:3173 templatetags/tags.py:237
+#: views.py:3172 templatetags/tags.py:237
 msgid "no alias"
 msgstr "Ei lempinimeä"
 
-#: views.py:3889 views.py:4082
+#: views.py:3888 views.py:4081
 msgid "You can't merge a product to itself."
 msgstr "Et voi yhdistää tuotetta itseensä."
 
-#: views.py:4120
+#: views.py:4119
 msgid "Default front page section changed."
 msgstr "Etusivun oletusnäkymää muutettu."
 
@@ -6313,19 +6313,11 @@ msgstr ""
 "%(user)s vastasi kommenttiisi. Lue vastaus seuraavassa osoitteessa: %(url)s"
 
 #: templates/notification/rawdata_posted_to_pool/notice.html:2
-#, fuzzy, python-format
-msgid ""
-"<a href=\"%(pool_url)s\"><strong>%(user_name)s</strong> has added new data "
-"to the public pool: <strong>\"%(pool_name)s.\"</strong></a>"
-msgstr ""
-"<a href=\"%(url)s\"><strong>%(user)s</strong> merkkasi kuvasi suosikikseen!</"
-"a>"
-
 #: templates/notification/rawdata_posted_to_pool/short.html:2
 #, fuzzy, python-format
 msgid ""
 "<a href=\"%(pool_url)s\"><strong>%(user_name)s</strong> has added new data "
-"to the public pool: <strong>\"%(pool_name)s.\"</a>"
+"to the public pool: <strong>\"%(pool_name)s.\"</strong></a>"
 msgstr ""
 "<a href=\"%(url)s\"><strong>%(user)s</strong> merkkasi kuvasi suosikikseen!</"
 "a>"
@@ -6346,19 +6338,11 @@ msgstr ""
 "Lue kirjoitus osoitteessa: %(object_url)s"
 
 #: templates/notification/rawdata_posted_to_private_folder/notice.html:2
-#, fuzzy, python-format
-msgid ""
-"<a href=\"%(folder_url)s\"><strong>%(user_name)s</strong> has added new data "
-"to the private shared folder: <strong>\"%(folder_name)s.\"</strong></a>"
-msgstr ""
-"<a href=\"%(url)s\"><strong>%(user)s</strong> merkkasi kuvasi suosikikseen!</"
-"a>"
-
 #: templates/notification/rawdata_posted_to_private_folder/short.html:2
 #, fuzzy, python-format
 msgid ""
 "<a href=\"%(folder_url)s\"><strong>%(user_name)s</strong> has added new data "
-"to the private shared folder: <strong>\"%(folder_name)s.\"</a>"
+"to the private shared folder: <strong>\"%(folder_name)s.\"</strong></a>"
 msgstr ""
 "<a href=\"%(url)s\"><strong>%(user)s</strong> merkkasi kuvasi suosikikseen!</"
 "a>"
@@ -7598,6 +7582,22 @@ msgstr "Valitse kieli sekä mitä ilmoituksia haluat vastaanottaa sähköpostiis
 #, fuzzy
 msgid "Edit your retailer information"
 msgstr "Muokkaa perustietojasi"
+
+#, fuzzy
+#~ msgid ""
+#~ "<a href=\"%(pool_url)s\"><strong>%(user_name)s</strong> has added new "
+#~ "data to the public pool: <strong>\"%(pool_name)s.\"</a>"
+#~ msgstr ""
+#~ "<a href=\"%(url)s\"><strong>%(user)s</strong> merkkasi kuvasi "
+#~ "suosikikseen!</a>"
+
+#, fuzzy
+#~ msgid ""
+#~ "<a href=\"%(folder_url)s\"><strong>%(user_name)s</strong> has added new "
+#~ "data to the private shared folder: <strong>\"%(folder_name)s.\"</a>"
+#~ msgstr ""
+#~ "<a href=\"%(url)s\"><strong>%(user)s</strong> merkkasi kuvasi "
+#~ "suosikikseen!</a>"
 
 #~ msgid ""
 #~ "It's simple: if you didn't take an image yourself, then don't upload it. "

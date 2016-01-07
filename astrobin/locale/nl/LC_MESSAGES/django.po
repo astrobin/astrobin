@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: AstroBin 1.4\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2016-01-06 06:46+0000\n"
+"POT-Creation-Date: 2016-01-07 11:23+0000\n"
 "PO-Revision-Date: 2015-12-30 11:27+0000\n"
 "Last-Translator: Koen_Dierckens <koen.dierckens@pandora.be>\n"
 "Language-Team: Dutch <LL@li.org>\n"
@@ -1065,7 +1065,7 @@ msgstr "Telescopen en/of lenzen die je gebruikt om te fotograferen"
 msgid "Guiding telescopes or lenses"
 msgstr "Volgtelescopen en/of lenzen"
 
-#: forms.py:133 forms.py:227 models.py:754 models.py:1632 views.py:2368
+#: forms.py:133 forms.py:227 models.py:754 models.py:1632 views.py:2367
 msgid "Mounts"
 msgstr "Monteringen"
 
@@ -1077,20 +1077,20 @@ msgstr "Hoofdcamera's"
 msgid "Guiding cameras"
 msgstr "Volgcamera's"
 
-#: forms.py:136 forms.py:229 models.py:757 models.py:1634 views.py:2369
+#: forms.py:136 forms.py:229 models.py:757 models.py:1634 views.py:2368
 msgid "Focal reducers"
 msgstr "Focal Reducers"
 
-#: forms.py:137 forms.py:230 models.py:758 models.py:1635 views.py:208
-#: views.py:636 views.py:2370
+#: forms.py:137 forms.py:230 models.py:758 models.py:1635 views.py:207
+#: views.py:635 views.py:2369
 msgid "Software"
 msgstr "Software"
 
-#: forms.py:138 forms.py:231 models.py:759 models.py:1636 views.py:2371
+#: forms.py:138 forms.py:231 models.py:759 models.py:1636 views.py:2370
 msgid "Filters"
 msgstr "Filters"
 
-#: forms.py:139 forms.py:232 models.py:760 models.py:1637 views.py:2372
+#: forms.py:139 forms.py:232 models.py:760 models.py:1637 views.py:2371
 msgid "Accessories"
 msgstr "Accessoires"
 
@@ -1122,11 +1122,11 @@ msgstr ""
 "Tip: voer je filters afzonderlijk in! Als je bv. \"LRGB\" in één keer "
 "invoert, dan kan je geen sessies van de afzonderlijke filters toevoegen."
 
-#: forms.py:226 models.py:1631 views.py:2366
+#: forms.py:226 models.py:1631 views.py:2365
 msgid "Telescopes and lenses"
 msgstr "Telescopen en lenzen"
 
-#: forms.py:228 models.py:1633 views.py:2367
+#: forms.py:228 models.py:1633 views.py:2366
 msgid "Cameras"
 msgstr "Camera's"
 
@@ -1152,7 +1152,7 @@ msgstr "Alles"
 msgid "Images"
 msgstr "# Foto's"
 
-#: forms.py:277 models.py:648 views.py:1835
+#: forms.py:277 models.py:648 views.py:1834
 #: templates/maintenance_base.html:298 templates/profile-edit-menu.html:30
 #: templates/wall.html:131 templates/inclusion_tags/search_image_list.html:13
 #: templates/user/profile-subnav.html:130
@@ -1453,7 +1453,7 @@ msgstr "Naamsvermelding-GelijkDelen \"Creative Commons\""
 msgid "Attribution-NoDerivs Creative Commons"
 msgstr "Naamsvermelding-GeenAfgeleideWerken \"Creative Commons\""
 
-#: models.py:78 models.py:96 views.py:842 views.py:844
+#: models.py:78 models.py:96 views.py:841 views.py:843
 msgid "English"
 msgstr "Engels"
 
@@ -1581,7 +1581,7 @@ msgstr "Dwergplaneet"
 msgid "Comet"
 msgstr "Komeet"
 
-#: models.py:151 models.py:585 models.py:649 views.py:1836
+#: models.py:151 models.py:585 models.py:649 views.py:1835
 #: templates/wall.html:143 templates/image/edit/acquisition.html:84
 msgid "Other"
 msgstr "Andere"
@@ -1914,11 +1914,11 @@ msgstr "Deep-sky object"
 msgid "Solar system body or event"
 msgstr "Hemellichaam uit of gebeurtenis in het Zonnestelsel"
 
-#: models.py:646 views.py:1833 templates/wall.html:119
+#: models.py:646 views.py:1832 templates/wall.html:119
 msgid "Extremely wide field"
 msgstr "Extreem breedbeeld"
 
-#: models.py:647 views.py:1834 templates/wall.html:125
+#: models.py:647 views.py:1833 templates/wall.html:125
 msgid "Star trails"
 msgstr "Sterrensporen"
 
@@ -2032,7 +2032,7 @@ msgstr "9 - Hemel in stadscentrum (WIT)"
 msgid "Synthetic channel"
 msgstr "Synthetisch kanaal"
 
-#: models.py:1311 views.py:209 views.py:637
+#: models.py:1311 views.py:208 views.py:636
 msgid "Filter"
 msgstr "Filter"
 
@@ -2072,7 +2072,7 @@ msgstr "Sensorkoeling"
 msgid "The temperature of the chip. E.g.: -20."
 msgstr "De temperatuur van de chip, bv -20."
 
-#: models.py:1344 views.py:769
+#: models.py:1344 views.py:768
 msgid "Darks"
 msgstr "Darks"
 
@@ -2080,7 +2080,7 @@ msgstr "Darks"
 msgid "The number of dark frames."
 msgstr "Het aantal dark frames."
 
-#: models.py:1349 views.py:770
+#: models.py:1349 views.py:769
 msgid "Flats"
 msgstr "Flats"
 
@@ -2088,7 +2088,7 @@ msgstr "Flats"
 msgid "The number of flat frames."
 msgstr "Het aantal flat frames."
 
-#: models.py:1354 views.py:771
+#: models.py:1354 views.py:770
 msgid "Flat darks"
 msgstr "Flat darks"
 
@@ -2096,7 +2096,7 @@ msgstr "Flat darks"
 msgid "The number of dark flat frames."
 msgstr "Het aantal flat dark frames."
 
-#: models.py:1359 views.py:772
+#: models.py:1359 views.py:771
 msgid "Bias"
 msgstr "Bias"
 
@@ -2104,7 +2104,7 @@ msgstr "Bias"
 msgid "The number of bias/offset frames."
 msgstr "Het aantal bias/offset frames."
 
-#: models.py:1364 views.py:775
+#: models.py:1364 views.py:774
 msgid "Bortle Dark-Sky Scale"
 msgstr "Bortle donkere hemel schaal"
 
@@ -2124,11 +2124,11 @@ msgstr "Gemiddelde mag/arcsec^2"
 msgid "As measured with your Sky Quality Meter."
 msgstr "Gemeten met Sky Quality Meter."
 
-#: models.py:1378 views.py:777
+#: models.py:1378 views.py:776
 msgid "Mean FWHM"
 msgstr "Gemiddelde FWHM"
 
-#: models.py:1383 views.py:778
+#: models.py:1383 views.py:777
 msgid "Temperature"
 msgstr "Temperatuur"
 
@@ -2603,124 +2603,124 @@ msgstr "Catadioptrisch"
 msgid "Number of images by subject type"
 msgstr "Aantal beelden volgens type onderwerp"
 
-#: views.py:184 views.py:612
+#: views.py:183 views.py:611
 #, fuzzy
 msgid "Imaging telescope or lens"
 msgid_plural "Imaging telescopes or lenses"
 msgstr[0] "Telescopen en/of lenzen die je gebruikt om te fotograferen"
 msgstr[1] "Telescopen en/of lenzen die je gebruikt om te fotograferen"
 
-#: views.py:188 views.py:616
+#: views.py:187 views.py:615
 #, fuzzy
 msgid "Imaging camera"
 msgid_plural "Imaging cameras"
 msgstr[0] "Hoofdcamera's"
 msgstr[1] "Hoofdcamera's"
 
-#: views.py:192 views.py:620
+#: views.py:191 views.py:619
 #, fuzzy
 msgid "Mount"
 msgid_plural "Mounts"
 msgstr[0] "Monteringen"
 msgstr[1] "Monteringen"
 
-#: views.py:196 views.py:624
+#: views.py:195 views.py:623
 #, fuzzy
 msgid "Guiding telescope or lens"
 msgid_plural "Guiding telescopes or lenses"
 msgstr[0] "Volgtelescopen en/of lenzen"
 msgstr[1] "Volgtelescopen en/of lenzen"
 
-#: views.py:200 views.py:628
+#: views.py:199 views.py:627
 #, fuzzy
 msgid "Guiding camera"
 msgid_plural "Guiding cameras"
 msgstr[0] "Volgcamera's"
 msgstr[1] "Volgcamera's"
 
-#: views.py:204 views.py:632
+#: views.py:203 views.py:631
 #, fuzzy
 msgid "Focal reducer"
 msgid_plural "Focal reducers"
 msgstr[0] "Focal Reducers"
 msgstr[1] "Focal Reducers"
 
-#: views.py:213 views.py:641
+#: views.py:212 views.py:640
 #, fuzzy
 msgid "Accessory"
 msgid_plural "Accessories"
 msgstr[0] "Accessoires"
 msgstr[1] "Accessoires"
 
-#: views.py:501
+#: views.py:500
 #, fuzzy
 msgid "Today's 'Image of the day' was already chosen. Come back tomorrow!"
 msgstr "De huidige \"Foto van de dag\" is reeds verkozen. Kom morgen terug!"
 
-#: views.py:760
+#: views.py:759
 msgid "Resolution"
 msgstr "Resolutie"
 
-#: views.py:761 views.py:911
+#: views.py:760 views.py:910
 msgid "Dates"
 msgstr "Datums"
 
-#: views.py:762 templates/image/detail/image_card.html:52
+#: views.py:761 templates/image/detail/image_card.html:52
 msgid "Frames"
 msgstr "Sub-beelden"
 
-#: views.py:768 templates/wall.html:37
+#: views.py:767 templates/wall.html:37
 #: templates/inclusion_tags/search_image_list.html:36
 #: templates/inclusion_tags/search_image_list.html:89
 #: templates/search/search.html:43 templates/search/search.html.py:306
 msgid "Integration"
 msgstr "Integratie"
 
-#: views.py:768 views.py:1926 views.py:1927 templates/search/search.html:307
+#: views.py:767 views.py:1925 views.py:1926 templates/search/search.html:307
 msgid "hours"
 msgstr "uren"
 
-#: views.py:773
+#: views.py:772
 msgid "Avg. Moon age"
 msgstr "Gem. Maanleeftijd"
 
-#: views.py:773 templates/subscription/subscription_category_list.html:47
+#: views.py:772 templates/subscription/subscription_category_list.html:47
 msgid "days"
 msgstr "dagen"
 
-#: views.py:774 templates/search/search.html:313
+#: views.py:773 templates/search/search.html:313
 msgid "Avg. Moon phase"
 msgstr "Gem. Maanfase"
 
-#: views.py:776
+#: views.py:775
 msgid "Mean SQM"
 msgstr "Gemiddelde SQM"
 
-#: views.py:957
+#: views.py:956
 msgid ""
 "Thanks for reporting the problem. All thumbnails will be generated again."
 msgstr ""
 "Bedankt om het probleem te rapporteren. Alle voorbeeldfoto's zullen opnieuw "
 "worden gegenereerd."
 
-#: views.py:1099 views.py:2823
+#: views.py:1098 views.py:2822
 msgid ""
 "Invalid image or no image provided. Allowed formats are JPG, PNG and GIF."
 msgstr ""
 "Ongeldige foto of geen beeld aangeduid. Ondersteunde formaten zijn JPG, PNG "
 "en GIF."
 
-#: views.py:1106
+#: views.py:1105
 msgid "You have reached your image uploads limit. Please upgrade!"
 msgstr "Je hebt je upload limiet bereikt, gelieve je account te upgraden !"
 
-#: views.py:1110 views.py:2834 templates/user/profile/flickr_import.html:10
+#: views.py:1109 views.py:2833 templates/user/profile/flickr_import.html:10
 msgid ""
 "AstroBin is currently in read-only mode, because of server maintenance. "
 "Please try again soon!"
 msgstr "Je hebt je upload limiet bereikt, gelieve te upgraden !"
 
-#: views.py:1133 views.py:2854
+#: views.py:1129 views.py:2853
 msgid ""
 "You uploaded an Indexed PNG file. AstroBin will need to lower the color "
 "count to 256 in order to work with it."
@@ -2728,89 +2728,7 @@ msgstr ""
 "Je hebt een geindexeerd PNG bestand upgeload. AstroBin moet het aantal "
 "kleuren terugbrengen naar 256 om dit bestand te kunnen gebruiken."
 
-#: views.py:1399 views.py:1486 views.py:1570 views.py:1596 views.py:2268
-#: views.py:2281 views.py:2302 views.py:2339 views.py:2429 views.py:2491
-#: views.py:2702 views.py:3929 views.py:4099
-#: templates/user/profile/edit/gear.html:168
-#: templates/user/profile/edit/gear.html:243
-msgid "Form saved. Thank you!"
-msgstr "Het formulier is opgeslagen. Hartelijk dank!"
-
-#: views.py:1538
-msgid "Fill in one session, before adding more."
-msgstr "Vul één sessie in vooraleer er meerdere toe te voegen."
-
-#: views.py:1609 views.py:1680
-msgid "Image deleted."
-msgstr "Je foto werd gewist."
-
-#: views.py:1627
-msgid "Revision deleted."
-msgstr "Registratie is voltooid."
-
-#: views.py:1783
-msgid "No date specified"
-msgstr "Geen datum ingegeven"
-
-#: views.py:1805 views.py:1866
-msgid "No imaging telescopes or lenses, or no imaging cameras specified"
-msgstr "Er werden geen telescopen of lenzen ingevoerd waarmee je beelden maakt"
-
-#: views.py:1806
-msgid "Gear images"
-msgstr "Foto's van apparatuur"
-
-#: views.py:1831 templates/image/edit/acquisition.html:81
-msgid "Deep sky"
-msgstr "Deep-sky"
-
-#: views.py:1832 templates/image/edit/acquisition.html:78
-msgid "Solar system"
-msgstr "Zonnestelsel"
-
-#: views.py:1865
-msgid "No subjects specified"
-msgstr "Geen onderwerpen ingevoerd"
-
-#: views.py:1867
-msgid "No acquisition details specified"
-msgstr ""
-"Geen details ingevoerd omtrent de manier van het verkrijgen van het beeld"
-
-#: views.py:1898 views.py:3306 templatetags/tags.py:77
-msgid "minutes"
-msgstr "minuten"
-
-#: views.py:1899 views.py:3307 templatetags/tags.py:78
-msgid "seconds ago"
-msgstr "seconden geleden"
-
-#: views.py:1901 views.py:3309 templatetags/tags.py:79
-#, python-format
-msgid "%s ago"
-msgstr "%s geleden"
-
-#: views.py:1924 templates/popover/user.html:19
-msgid "Member since"
-msgstr "Lid sinds"
-
-#: views.py:1925
-msgid "Last login"
-msgstr "Laatste login"
-
-#: views.py:1926
-msgid "Total integration time"
-msgstr "Totale integratietijd"
-
-#: views.py:1927
-msgid "Average integration time"
-msgstr "Gemiddelde integratietijd"
-
-#: views.py:1928
-msgid "Forum posts"
-msgstr "Forum berichten"
-
-#: views.py:2419
+#: views.py:1385 views.py:1414 views.py:1474 views.py:2418
 msgid ""
 "There was one or more errors processing the form. You may need to scroll "
 "down to see them."
@@ -2818,19 +2736,101 @@ msgstr ""
 "Er trad minstens één fout op bij het verwerken van het formulier. Het is "
 "mogelijk dat je naar beneden moet scrollen om ze te zien."
 
-#: views.py:2877
+#: views.py:1396 views.py:1485 views.py:1569 views.py:1595 views.py:2267
+#: views.py:2280 views.py:2301 views.py:2338 views.py:2428 views.py:2490
+#: views.py:2701 views.py:3928 views.py:4098
+#: templates/user/profile/edit/gear.html:168
+#: templates/user/profile/edit/gear.html:243
+msgid "Form saved. Thank you!"
+msgstr "Het formulier is opgeslagen. Hartelijk dank!"
+
+#: views.py:1537
+msgid "Fill in one session, before adding more."
+msgstr "Vul één sessie in vooraleer er meerdere toe te voegen."
+
+#: views.py:1608 views.py:1679
+msgid "Image deleted."
+msgstr "Je foto werd gewist."
+
+#: views.py:1626
+msgid "Revision deleted."
+msgstr "Registratie is voltooid."
+
+#: views.py:1782
+msgid "No date specified"
+msgstr "Geen datum ingegeven"
+
+#: views.py:1804 views.py:1865
+msgid "No imaging telescopes or lenses, or no imaging cameras specified"
+msgstr "Er werden geen telescopen of lenzen ingevoerd waarmee je beelden maakt"
+
+#: views.py:1805
+msgid "Gear images"
+msgstr "Foto's van apparatuur"
+
+#: views.py:1830 templates/image/edit/acquisition.html:81
+msgid "Deep sky"
+msgstr "Deep-sky"
+
+#: views.py:1831 templates/image/edit/acquisition.html:78
+msgid "Solar system"
+msgstr "Zonnestelsel"
+
+#: views.py:1864
+msgid "No subjects specified"
+msgstr "Geen onderwerpen ingevoerd"
+
+#: views.py:1866
+msgid "No acquisition details specified"
+msgstr ""
+"Geen details ingevoerd omtrent de manier van het verkrijgen van het beeld"
+
+#: views.py:1897 views.py:3305 templatetags/tags.py:77
+msgid "minutes"
+msgstr "minuten"
+
+#: views.py:1898 views.py:3306 templatetags/tags.py:78
+msgid "seconds ago"
+msgstr "seconden geleden"
+
+#: views.py:1900 views.py:3308 templatetags/tags.py:79
+#, python-format
+msgid "%s ago"
+msgstr "%s geleden"
+
+#: views.py:1923 templates/popover/user.html:19
+msgid "Member since"
+msgstr "Lid sinds"
+
+#: views.py:1924
+msgid "Last login"
+msgstr "Laatste login"
+
+#: views.py:1925
+msgid "Total integration time"
+msgstr "Totale integratietijd"
+
+#: views.py:1926
+msgid "Average integration time"
+msgstr "Gemiddelde integratietijd"
+
+#: views.py:1927
+msgid "Forum posts"
+msgstr "Forum berichten"
+
+#: views.py:2876
 msgid "Image uploaded. Thank you!"
 msgstr "De foto is opgeslagen. Hartelijk dank!"
 
-#: views.py:3173 templatetags/tags.py:237
+#: views.py:3172 templatetags/tags.py:237
 msgid "no alias"
 msgstr "geen alias"
 
-#: views.py:3889 views.py:4082
+#: views.py:3888 views.py:4081
 msgid "You can't merge a product to itself."
 msgstr "Je kan een produkt niet met zichzelf samenvoegen."
 
-#: views.py:4120
+#: views.py:4119
 msgid "Default front page section changed."
 msgstr "Het standaard beginpagina deel is gewijzigd."
 
@@ -6432,6 +6432,7 @@ msgstr ""
 "\"%(pool_name)s\". Je kan ze raadplegen via volgende url: %(pool_url)s"
 
 #: templates/notification/rawdata_posted_to_pool/notice.html:2
+#: templates/notification/rawdata_posted_to_pool/short.html:2
 #, python-format
 msgid ""
 "<a href=\"%(pool_url)s\"><strong>%(user_name)s</strong> has added new data "
@@ -6440,15 +6441,6 @@ msgstr ""
 "<a href=\"%(pool_url)s\"><strong>%(user_name)s</strong> heeft nieuwe data "
 "toegevoegd aan de publieke gegevensbank: <strong>\"%(pool_name)s.\"</"
 "strong></a>"
-
-#: templates/notification/rawdata_posted_to_pool/short.html:2
-#, python-format
-msgid ""
-"<a href=\"%(pool_url)s\"><strong>%(user_name)s</strong> has added new data "
-"to the public pool: <strong>\"%(pool_name)s.\"</a>"
-msgstr ""
-"<a href=\"%(pool_url)s\"><strong>%(user_name)s</strong> heeft nieuwe data "
-"toegevoegd aan volgende publieke gegevensbank: <strong>\"%(pool_name)s.\"</a>"
 
 #: templates/notification/rawdata_posted_to_pool/short.txt:2
 #, python-format
@@ -6465,6 +6457,7 @@ msgstr ""
 "privéfolder: \"%(folder_name)s\". Je kan ze bekijken via: %(folder_url)s"
 
 #: templates/notification/rawdata_posted_to_private_folder/notice.html:2
+#: templates/notification/rawdata_posted_to_private_folder/short.html:2
 #, python-format
 msgid ""
 "<a href=\"%(folder_url)s\"><strong>%(user_name)s</strong> has added new data "
@@ -6473,16 +6466,6 @@ msgstr ""
 "<a href=\"%(folder_url)s\"><strong>%(user_name)s</strong> heeft nieuwe data "
 "toegevoegd aan volgende gedeelde privéfolder: <strong>\"%(folder_name)s.\"</"
 "strong></a>"
-
-#: templates/notification/rawdata_posted_to_private_folder/short.html:2
-#, python-format
-msgid ""
-"<a href=\"%(folder_url)s\"><strong>%(user_name)s</strong> has added new data "
-"to the private shared folder: <strong>\"%(folder_name)s.\"</a>"
-msgstr ""
-"<a href=\"%(folder_url)s\"><strong>%(user_name)s</strong> heeft nieuwe data "
-"toegevoegd aan volgende gedeelde privéfolder: <strong>\"%(folder_name)s.\"</"
-"a>"
 
 #: templates/notification/rawdata_posted_to_private_folder/short.txt:2
 #, python-format
@@ -7744,6 +7727,22 @@ msgstr "Kies je taal en welke berichtgeving je via e-mail wil ontvangen:"
 #: templates/user/profile/edit/retailer.html:6
 msgid "Edit your retailer information"
 msgstr "Wijzig je informatie als distributeur"
+
+#~ msgid ""
+#~ "<a href=\"%(pool_url)s\"><strong>%(user_name)s</strong> has added new "
+#~ "data to the public pool: <strong>\"%(pool_name)s.\"</a>"
+#~ msgstr ""
+#~ "<a href=\"%(pool_url)s\"><strong>%(user_name)s</strong> heeft nieuwe data "
+#~ "toegevoegd aan volgende publieke gegevensbank: <strong>\"%(pool_name)s."
+#~ "\"</a>"
+
+#~ msgid ""
+#~ "<a href=\"%(folder_url)s\"><strong>%(user_name)s</strong> has added new "
+#~ "data to the private shared folder: <strong>\"%(folder_name)s.\"</a>"
+#~ msgstr ""
+#~ "<a href=\"%(folder_url)s\"><strong>%(user_name)s</strong> heeft nieuwe "
+#~ "data toegevoegd aan volgende gedeelde privéfolder: <strong>"
+#~ "\"%(folder_name)s.\"</a>"
 
 #~ msgid ""
 #~ "It's simple: if you didn't take an image yourself, then don't upload it. "
