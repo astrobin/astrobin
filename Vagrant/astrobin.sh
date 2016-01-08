@@ -353,7 +353,7 @@ function end {
 
 
 if [ "$1" != "1" ]; then
-    exec 3>&1 &>/vagrant/vagrant.log
+    exec 3>&1 &>/var/www/astrobin/vagrant.log
 else
     exec 3>&1
 fi
