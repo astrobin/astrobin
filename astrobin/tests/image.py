@@ -1130,3 +1130,121 @@ class ImageTest(TestCase):
         self.assertEquals(image.license, 1)
 
         self.client.logout()
+
+    def test_image_delete_view(self):
+        def post_url(args = None):
+            return reverse('image_delete', args = args)
+
+        self.client.login(username = 'test', password = 'password')
+        self._do_upload('astrobin/fixtures/test.jpg')
+        image = self._get_last_image()
+        image.title = "Test title"
+        image.save()
+        self.client.logout()
+
+        # POST with wrong user
+        self.client.login(username = 'test2', password = 'password')
+        response = self.client.post(post_url((image.pk,)))
+        self.assertEqual(response.status_code, 403)
+        self.client.logout()
+
+        # Test for success
+        self.client.login(username = 'test', password = 'password')
+        response = self.client.post(post_url((image.pk,)))
+        self.assertRedirects(
+            response,
+            reverse('user_page', kwargs = {'username': image.user.username}),
+            status_code = 302,
+            target_status_code = 200)
+        self.assertEquals(Image.objects.filter(pk = image.pk).count(), 0)
+        self.client.logout()
+
+    def test_image_delete_revision_view(self):
+        def post_url(args = None):
+            return reverse('image_delete_revision', args = args)
+
+        self.client.login(username = 'test', password = 'password')
+        self._do_upload('astrobin/fixtures/test.jpg')
+        image = self._get_last_image()
+        self._do_upload_revision(image, 'astrobin/fixtures/test.jpg')
+        revision = self._get_last_image_revision()
+        self.client.logout()
+
+        # POST with wrong user
+        self.client.login(username = 'test2', password = 'password')
+        response = self.client.post(post_url((revision.pk,)))
+        self.assertEqual(response.status_code, 403)
+        self.client.logout()
+
+        # Test for success
+        self.client.login(username = 'test', password = 'password')
+        response = self.client.post(post_url((revision.pk,)))
+        self.assertRedirects(
+            response,
+            reverse('image_detail', kwargs = {'id': image.pk}),
+            status_code = 302,
+            target_status_code = 200)
+        self.assertEquals(ImageRevision.objects.filter(pk = revision.pk).count(), 0)
+        self.assertEquals(image.is_final, True)
+        self.client.logout()
+
+        image.delete()
+
+    def test_image_delete_original_view(self):
+        def post_url(args = None):
+            return reverse('image_delete_original', args = args)
+
+        self.client.login(username = 'test', password = 'password')
+        self._do_upload('astrobin/fixtures/test.jpg')
+        image = self._get_last_image()
+        self.client.logout()
+
+        # POST with wrong user
+        self.client.login(username = 'test2', password = 'password')
+        response = self.client.post(post_url((image.pk,)))
+        self.assertEqual(response.status_code, 403)
+        self.client.logout()
+
+        # Test when there are no revisions
+        self.client.login(username = 'test', password = 'password')
+        response = self.client.post(post_url((image.pk,)))
+        self.assertRedirects(
+            response,
+            reverse('user_page', kwargs = {'username': image.user.username}),
+            status_code = 302,
+            target_status_code = 200)
+        self.assertEquals(Image.objects.filter(pk = image.pk).count(), 0)
+
+        # Test for success when image was not final
+        self._do_upload('astrobin/fixtures/test.jpg')
+        image = self._get_last_image()
+        self._do_upload_revision(image, 'astrobin/fixtures/test.jpg')
+        revision = self._get_last_image_revision()
+        response = self.client.post(post_url((image.pk,)))
+        self.assertRedirects(
+            response,
+            reverse('image_detail', kwargs = {'id': image.pk}),
+            status_code = 302,
+            target_status_code = 200)
+        self.assertEquals(ImageRevision.objects.filter(image = image).count(), 0)
+        image.delete()
+
+        # Test for success when image was final
+        self._do_upload('astrobin/fixtures/test.jpg')
+        image = self._get_last_image()
+        self._do_upload_revision(image, 'astrobin/fixtures/test.jpg')
+        revision = self._get_last_image_revision()
+        image = Image.objects.get(pk = image.pk)
+        image.is_final = True; image.save()
+        revision.is_final = False; revision.save()
+
+        response = self.client.post(post_url((image.pk,)))
+        self.assertRedirects(
+            response,
+            reverse('image_detail', kwargs = {'id': image.pk}),
+            status_code = 302,
+            target_status_code = 200)
+        self.assertEquals(ImageRevision.objects.filter(image = image).count(), 0)
+        image.delete()
+
+        self.client.logout()
