@@ -819,3 +819,239 @@ class ImageTest(TestCase):
             target_status_code = 200)
 
         image.delete()
+
+    def test_image_edit_acquisition_view(self):
+        today = time.strftime('%Y-%m-%d')
+
+        def post_data_deep_sky_simple(image):
+            return {
+                'image_id': image.pk,
+                'edit_type': 'deep_sky',
+                'advanced': 'false',
+                'date': today,
+                'number': 10,
+                'duration': 1200,
+            }
+
+        def post_data_deep_sky_advanced(image):
+            return {
+                'deepsky_acquisition_set-TOTAL_FORMS': 1, 
+                'deepsky_acquisition_set-INITIAL_FORMS': 0,
+                'image_id': image.pk,
+                'edit_type': 'deep_sky',
+                'advanced': 'true',
+                'deepsky_acquisition_set-0-date': today,
+                'deepsky_acquisition_set-0-number': 10,
+                'deepsky_acquisition_set-0-duration': 1200,
+                'deepsky_acquisition_set-0-binning': 1,
+                'deepsky_acquisition_set-0-iso': 3200,
+                'deepsky_acquisition_set-0-gain': 1,
+                'deepsky_acquisition_set-0-sensor_cooling': -20,
+                'deepsky_acquisition_set-0-darks': 10,
+                'deepsky_acquisition_set-0-flats': 10,
+                'deepsky_acquisition_set-0-flat_darks': 10,
+                'deepsky_acquisition_set-0-bias': 0,
+                'deepsky_acquisition_set-0-bortle': 1,
+                'deepsky_acquisition_set-0-mean_sqm': 20.0,
+                'deepsky_acquisition_set-0-mean_fwhm': 1,
+                'deepsky_acquisition_set-0-temperature': 10
+            }
+
+        def post_data_solar_system(image):
+            return {
+                'image_id': image.pk,
+                'edit_type': 'solar_system',
+                'date': today,
+                'frames': 1000,
+                'fps': 100,
+                'focal_length': 5000,
+                'cmi': 1.0,
+                'cmii': 2.0,
+                'cmiii': 3.0,
+                'seeing': 1,
+                'transparency': 1,
+                'time': "00:00"
+            }
+
+        def get_url(args = None):
+            return reverse('image_edit_acquisition', args = args)
+
+        def post_url(args = None):
+            return reverse('image_edit_save_acquisition', args = args)
+
+        self.client.login(username = 'test', password = 'password')
+        self._do_upload('astrobin/fixtures/test.jpg')
+        image = self._get_last_image()
+        image.title = "Test title"
+        image.save()
+        self.client.logout()
+
+        # GET with wrong user
+        self.client.login(username = 'test2', password = 'password')
+        response = self.client.get(get_url((image.pk,)))
+        self.assertEqual(response.status_code, 403)
+
+        # POST with wrong user
+        response = self.client.post(
+            post_url(),
+            post_data_deep_sky_simple(image),
+            follow = True)
+        self.assertEqual(response.status_code, 403)
+
+        # Reset with wrong user
+        response = self.client.get(
+            reverse('image_edit_acquisition_reset', args = (image.pk,)))
+        self.assertEqual(response.status_code, 403)
+        self.client.logout()
+
+        # GET
+        self.client.login(username = 'test', password = 'password')
+        response = self.client.get(get_url((image.pk,)))
+        self.assertEqual(response.status_code, 200)
+
+        # GET with existing DSA
+        dsa, created = DeepSky_Acquisition.objects.get_or_create(
+            image = image,
+            date = today)
+        response = self.client.get(get_url((image.pk,)))
+        self.assertEqual(response.status_code, 200)
+
+        # GET with existing DSA in advanced mode
+        dsa.advanced = True
+        dsa.save()
+        response = self.client.get(get_url((image.pk,)))
+        self.assertEqual(response.status_code, 200)
+
+        # Test the add_more argument for the formset
+        response = self.client.get(get_url((image.pk,)) + "?add_more")
+        self.assertEqual(response.status_code, 200)
+        dsa.delete()
+
+        # GET with existing SSA
+        ssa, created = SolarSystem_Acquisition.objects.get_or_create(
+            image = image,
+            date = today)
+        response = self.client.get(get_url((image.pk,)))
+        self.assertEqual(response.status_code, 200)
+        ssa.delete()
+
+        # GET with edit_type in request.GET
+        response = self.client.get(get_url((image.pk,)) + "?edit_type=deep_sky")
+        self.assertEqual(response.status_code, 200)
+
+        # Reset
+        response = self.client.get(
+            reverse('image_edit_acquisition_reset', args = (image.pk,)))
+        self.assertEqual(response.status_code, 200)
+
+        # POST basic deep sky
+        response = self.client.post(
+            post_url(),
+            post_data_deep_sky_simple(image),
+            follow = True)
+        self.assertRedirects(
+            response,
+            reverse('image_detail', kwargs = {'id': image.pk}),
+            status_code = 302,
+            target_status_code = 200)
+        self.assertEquals(image.acquisition_set.count(), 1)
+        dsa = DeepSky_Acquisition.objects.filter(image = image)[0]
+        post_data = post_data_deep_sky_simple(image)
+        self.assertEqual(dsa.date.strftime("%Y-%m-%d"), post_data['date'])
+        self.assertEqual(dsa.number, post_data['number'])
+        self.assertEqual(dsa.duration, post_data['duration'])
+        dsa.delete()
+
+        # POST basic deep sky invalid form
+        post_data = post_data_deep_sky_simple(image)
+        post_data['number'] = "foo"
+        response = self.client.post(post_url(), post_data)
+        self.assertEqual(response.status_code, 200)
+        self._assert_message(response, "error unread", "errors processing the form")
+        self.assertEquals(image.acquisition_set.count(), 0)
+
+        # POST advanced deep sky
+        response = self.client.post(
+            post_url(),
+            post_data_deep_sky_advanced(image),
+            follow = True)
+        self.assertRedirects(
+            response,
+            reverse('image_detail', kwargs = {'id': image.pk}),
+            status_code = 302,
+            target_status_code = 200)
+        self.assertEquals(image.acquisition_set.count(), 1)
+        dsa = DeepSky_Acquisition.objects.filter(image = image)[0]
+        post_data = post_data_deep_sky_advanced(image)
+        self.assertEqual(dsa.date.strftime("%Y-%m-%d"), post_data['deepsky_acquisition_set-0-date'])
+        self.assertEqual(dsa.number, post_data['deepsky_acquisition_set-0-number'])
+        self.assertEqual(dsa.duration, post_data['deepsky_acquisition_set-0-duration'])
+        self.assertEqual(dsa.binning, post_data['deepsky_acquisition_set-0-binning'])
+        self.assertEqual(dsa.iso, post_data['deepsky_acquisition_set-0-iso'])
+        self.assertEqual(dsa.gain, post_data['deepsky_acquisition_set-0-gain'])
+        self.assertEqual(dsa.sensor_cooling, post_data['deepsky_acquisition_set-0-sensor_cooling'])
+        self.assertEqual(dsa.darks, post_data['deepsky_acquisition_set-0-darks'])
+        self.assertEqual(dsa.flats, post_data['deepsky_acquisition_set-0-flats'])
+        self.assertEqual(dsa.flat_darks, post_data['deepsky_acquisition_set-0-flat_darks'])
+        self.assertEqual(dsa.bias, post_data['deepsky_acquisition_set-0-bias'])
+        self.assertEqual(dsa.bortle, post_data['deepsky_acquisition_set-0-bortle'])
+        self.assertEqual(dsa.mean_sqm, post_data['deepsky_acquisition_set-0-mean_sqm'])
+        self.assertEqual(dsa.mean_fwhm, post_data['deepsky_acquisition_set-0-mean_fwhm'])
+        self.assertEqual(dsa.temperature, post_data['deepsky_acquisition_set-0-temperature'])
+        dsa.delete()
+
+        # POST advanced deep sky with "add_mode"
+        post_data = post_data_deep_sky_advanced(image)
+        post_data['add_more'] = True
+        response = self.client.post(post_url(), post_data)
+        self.assertEqual(response.status_code, 200)
+        self.assertEquals(image.acquisition_set.count(), 1)
+        image.acquisition_set.all().delete()
+
+        # POST advanced deep sky invalid form
+        post_data = post_data_deep_sky_advanced(image)
+        post_data['deepsky_acquisition_set-0-number'] = "foo"
+        response = self.client.post(post_url(), post_data)
+        self.assertEqual(response.status_code, 200)
+        self._assert_message(response, "error unread", "errors processing the form")
+        self.assertEquals(image.acquisition_set.count(), 0)
+
+        # POST with missing image_id
+        response = self.client.post(post_url(), {}, follow = True)
+        self.assertEqual(response.status_code, 404)
+
+        # POST with invalid SSA from
+        post_data = post_data_solar_system(image)
+        post_data['frames'] = "foo"
+        response = self.client.post(post_url(), post_data, follow = True)
+        self.assertEqual(response.status_code, 200)
+        self._assert_message(response, "error unread", "errors processing the form")
+        self.assertEquals(image.acquisition_set.count(), 0)
+
+        # POST with existing SSA
+        ssa, created = SolarSystem_Acquisition.objects.get_or_create(
+            image = image,
+            date = today)
+        response = self.client.post(
+            post_url(), post_data_solar_system(image), follow = True)
+        self.assertRedirects(
+            response,
+            reverse('image_detail', kwargs = {'id': image.pk}),
+            status_code = 302,
+            target_status_code = 200)
+        self.assertEquals(image.acquisition_set.count(), 1)
+        ssa = SolarSystem_Acquisition.objects.filter(image = image)[0]
+        post_data = post_data_solar_system(image)
+        self.assertEqual(ssa.date.strftime("%Y-%m-%d"), post_data['date'])
+        self.assertEqual(ssa.frames, post_data['frames'])
+        self.assertEqual(ssa.fps, post_data['fps'])
+        self.assertEqual(ssa.focal_length, post_data['focal_length'])
+        self.assertEqual(ssa.cmi, post_data['cmi'])
+        self.assertEqual(ssa.cmii, post_data['cmii'])
+        self.assertEqual(ssa.cmiii, post_data['cmiii'])
+        self.assertEqual(ssa.seeing, post_data['seeing'])
+        self.assertEqual(ssa.transparency, post_data['transparency'])
+        self.assertEqual(ssa.time, post_data['time'])
+
+        self.client.logout()
+        image.delete()

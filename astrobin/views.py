@@ -1539,6 +1539,7 @@ def image_edit_save_acquisition(request):
                         response_dict,
                         context_instance=RequestContext(request))
             else:
+                messages.error(request, _("There was one or more errors processing the form. You may need to scroll down to see them."))
                 return render_to_response('image/edit/acquisition.html',
                                           response_dict,
                                           context_instance=RequestContext(request))
@@ -1550,6 +1551,7 @@ def image_edit_save_acquisition(request):
             if deep_sky_acquisition_basic_form.is_valid():
                 deep_sky_acquisition_basic_form.save()
             else:
+                messages.error(request, _("There was one or more errors processing the form. You may need to scroll down to see them."))
                 response_dict['deep_sky_acquisition_basic_form'] = deep_sky_acquisition_basic_form
                 return render_to_response('image/edit/acquisition.html',
                                           response_dict,
@@ -1561,6 +1563,7 @@ def image_edit_save_acquisition(request):
         response_dict['ssa_form'] = form
         if not form.is_valid():
             response_dict['ssa_form'] = form
+            messages.error(request, _("There was one or more errors processing the form. You may need to scroll down to see them."))
             return render_to_response('image/edit/acquisition.html',
                                       response_dict,
                                       context_instance=RequestContext(request))
