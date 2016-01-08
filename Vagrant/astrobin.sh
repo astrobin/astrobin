@@ -286,12 +286,12 @@ function astrobin {
         touch /home/astrobin/.profile.customized && \
         echo "source /venv/astrobin/dev/bin/activate" >> /home/astrobin/.profile && \
         echo "source /var/www/astrobin/env/dev" >> /home/astrobin/.profile && \
-        echo "cd /var/www/astrobin" >> /home/astrobin/.profile && \
+        echo "cd /var/www/astrobin" >> /home/astrobin/.profile \
     fi && \
     if [ ! -f /home/astrobin/.bashrc.customized ]; then \
         touch /home/astrobin/.bashrc.customized && \
         echo "figlet WELCOME TO ASTROBIN" >> /home/astrobin/.bashrc && \
-        echo "cowsay You can run a development server with: ./manage.py runserver 0.0.0.0:8083, and remember to read ./INSTALL.md\!" >> /home/astrobin/.bashrc && \
+        echo "cowsay You can run a development server with: ./manage.py runserver 0.0.0.0:8083, and remember to read ./INSTALL.md\!" >> /home/astrobin/.bashrc \
     fi && \
 
     # Initialize db
