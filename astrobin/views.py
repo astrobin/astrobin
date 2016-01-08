@@ -1587,6 +1587,7 @@ def image_edit_save_license(request):
 
     form = ImageLicenseForm(data = request.POST, instance = image)
     if not form.is_valid():
+        messages.error(request, _("There was one or more errors processing the form. You may need to scroll down to see them."))
         return render_to_response(
             'image/edit/license.html',
             {'form': form,

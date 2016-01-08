@@ -1071,3 +1071,62 @@ class ImageTest(TestCase):
 
         self.client.logout()
         image.delete()
+
+    def test_image_edit_license_view(self):
+        def post_data(image):
+            return {
+                'image_id': image.pk,
+                'license': 1,
+            }
+
+        def get_url(args = None):
+            return reverse('image_edit_license', args = args)
+
+        def post_url(args = None):
+            return reverse('image_edit_save_license', args = args)
+
+        self.client.login(username = 'test', password = 'password')
+        self._do_upload('astrobin/fixtures/test.jpg')
+        image = self._get_last_image()
+        image.title = "Test title"
+        image.save()
+        self.client.logout()
+
+        # GET with wrong user
+        self.client.login(username = 'test2', password = 'password')
+        response = self.client.get(get_url((image.pk,)))
+        self.assertEqual(response.status_code, 403)
+
+        # POST with wrong user
+        response = self.client.post(post_url(), post_data(image))
+        self.assertEqual(response.status_code, 403)
+        self.client.logout()
+
+        # GET
+        self.client.login(username = 'test', password = 'password')
+        response = self.client.get(get_url((image.pk,)))
+        self.assertEqual(response.status_code, 200)
+
+        # POST with missing image_id
+        response = self.client.post(post_url(), {})
+        self.assertEqual(response.status_code, 404)
+
+        # POST invalid form
+        data = post_data(image)
+        data['license'] = "foo"
+        response = self.client.post(post_url(), data, follow = True)
+        self.assertEqual(response.status_code, 200)
+        self._assert_message(response, "error unread", "errors processing the form")
+
+        # POST
+        response = self.client.post(post_url(), post_data(image), follow = True)
+        self.assertRedirects(
+            response,
+            reverse('image_detail', kwargs = {'id': image.pk}),
+            status_code = 302,
+            target_status_code = 200)
+        self._assert_message(response, "success unread", "Form saved")
+        image = Image.objects.get(pk = image.pk)
+        self.assertEquals(image.license, 1)
+
+        self.client.logout()
