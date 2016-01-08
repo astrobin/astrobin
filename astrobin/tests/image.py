@@ -514,8 +514,16 @@ class ImageTest(TestCase):
         revision = self._get_last_image_revision()
         self.assertEqual(image.is_final, True)
         self.assertEqual(image.revisions.all()[0].is_final, False)
-
         revision.delete()
+        self.client.logout()
+
+        # Test with wrong user
+        self.client.login(username = 'test2', password = 'password')
+        response = self.client.get(
+            reverse('image_edit_make_final', kwargs = {'id': image.id}))
+        self.assertEqual(response.status_code, 403)
+        self.client.logout()
+
         image.delete()
 
     def test_image_edit_revision_make_final_view(self):
@@ -555,9 +563,17 @@ class ImageTest(TestCase):
         self.assertEqual(image.is_final, False)
         self.assertEqual(c.is_final, False)
         self.assertEqual(b.is_final, True)
+        c.delete()
+        self.client.logout()
+
+        # Test with wrong user
+        self.client.login(username = 'test2', password = 'password')
+        response = self.client.get(
+            reverse('image_edit_revision_make_final', kwargs = {'id': b.id}))
+        self.assertEqual(response.status_code, 403)
+        self.client.logout()
 
         b.delete()
-        c.delete()
         image.delete()
 
     def test_image_edit_basic_view(self):
