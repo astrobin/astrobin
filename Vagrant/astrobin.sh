@@ -296,6 +296,7 @@ function astrobin {
     /var/www/astrobin/manage.py sync_translation_fields --noinput
 
     /var/www/astrobin/manage.py collectstatic --noinput
+    echo "from django.contrib.sites.models import Site; Site.objects.get_or_create(name='AstroBin', domain='localhost')" | /var/www/astrobin/manage.py shell
 EOF
 }
 
