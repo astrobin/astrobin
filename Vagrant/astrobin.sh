@@ -186,7 +186,7 @@ function pip {
 
     # Install python requirements
     $req_log
-    pip install -r /var/www/astrobin/requirements.txt
+    LCALL=C pip install -r /var/www/astrobin/requirements.txt
 
     # Install submodules
     $sub_log
