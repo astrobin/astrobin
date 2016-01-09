@@ -4,6 +4,8 @@ from django.conf import settings
 from django.contrib import admin
 from django.views.generic.simple import redirect_to
 
+from hitcount.views import update_hit_count_ajax
+
 from threaded_messages.views import search as messages_search
 from threaded_messages.views import inbox as messages_inbox
 from threaded_messages.views import outbox as messages_outbox
@@ -250,7 +252,7 @@ urlpatterns = patterns('',
     url(r'^explore/wall/$', views.wall, name='wall'),
     url(r'^explore/iotd/$', views.iotd_archive, name='iotd_archive'),
 
-    url(r'^hitcount/', include('hitcount.urls', namespace='hitcount')),
+    url(r'^hitcount/$', update_hit_count_ajax, name='hitcount_update_ajax'),
 
     url(r'^get_edit_gear_form/(?P<id>\d+)/$', views.get_edit_gear_form, name='get_edit_gear_form'),
     url(r'^get_empty_edit_gear_form/(?P<gear_type>\w+)/$', views.get_empty_edit_gear_form, name='get_empty_edit_gear_form'),

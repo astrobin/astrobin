@@ -277,14 +277,10 @@
 
 {% block extra_js %}
 <script src="{{STATIC_URL}}nested_comments/js/nested_comments_app.js"></script>
-
-{% ifnotequal request.user image.user %}
-    {% insert_hit_count_js_variables for gear %}
-    <script src="{{STATIC_URL}}hitcount/hitcount-jquery.js"></script>
-{% endifnotequal %}
-
 <script type="text/javascript">
 $(document).ready(function() {
+    {% get_hit_count_javascript for gear %}
+
     var reviewFormOptions = {
         dataType: 'json',
         timeout: 30000,

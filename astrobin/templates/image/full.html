@@ -96,6 +96,7 @@
         <script type="text/javascript">
             $(document).ready(function() {
                 astrobin_common.init_ajax_csrf_token();
+                {% get_hit_count_javascript for image %}
 
                 {% if image.w > 0 %}
                 if ($(window).width() * .95 > {{image.w}}) {
@@ -104,11 +105,6 @@
                 {% endif %}
             });
         </script>
-
-        {% ifnotequal request.user image.user %}
-            {% insert_hit_count_js_variables for image %}
-            <script src="{{STATIC_URL}}hitcount/hitcount-jquery.js"></script>
-        {% endifnotequal %}
     </body>
 </html>
 
