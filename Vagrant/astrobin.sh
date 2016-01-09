@@ -175,21 +175,16 @@ function apt {
 }
 
 function pip {
-    venv_log=$(astrobin_log "Setting up virtualenv...")
-    req_log=$(astrobin_log "Installing python requirements...")
-    sub_log=$(astrobin_log "Installing submodules...")
+    astrobin_log "Installing dependencies..."
 
     sudo -u astrobin /bin/bash - <<"EOF"
-    $venv_log
     virtualenv --no-site-packages /venv/astrobin/dev
     . /venv/astrobin/dev/bin/activate
 
     # Install python requirements
-    $req_log
     LCALL=C pip install -r /var/www/astrobin/requirements.txt
 
     # Install submodules
-    $sub_log
     (cd /var/www/astrobin/ && git submodule init && git submodule update)
     for d in /var/www/astrobin/submodules/*; do
         (
@@ -305,17 +300,10 @@ function solr {
 
     local return_value=0
 
-    dl_log=$(astrobin_log "Downloading solr...")
-    tar_log=$(astrobin_log "Extracting solr...")
-    schema_log=$(astrobin_log "Building solr schema...")
-    cust_log=$(astrobin_log "Customizing solr schema...")
-
     if [ ! -f /opt/solr/solr.tgz ]; then
         sudo -u solr /bin/bash - <<"EOF"
-        $dl_log
         curl https://archive.apache.org/dist/lucene/solr/4.4.0/solr-4.4.0.tgz > /opt/solr/solr.tgz && \
 
-        $tar_log && \
         tar xvfz /opt/solr/solr.tgz -C /opt/solr && \
         chmod g+w /opt/solr/ -R
 
@@ -327,10 +315,8 @@ EOF
     . /venv/astrobin/dev/bin/activate
     . /var/www/astrobin/env/dev
 
-    $schema_log
     /var/www/astrobin/manage.py build_solr_schema > /opt/solr/solr-4.4.0/example/solr/collection1/conf/schema.xml
 
-    $cust_log
     # TODO: see https://bitbucket.org/siovene/astrobin/issue/257/migrate-to-haystack-2x
     sed -i '/EnglishPorterFilterFactory/d' /opt/solr/solr-4.4.0/example/solr/collection1/conf/schema.xml
     sed -i '/<\/fields>/i<field name="_version_" type="slong" indexed="true" stored="true" multiValued="false"\/>' /opt/solr/solr-4.4.0/example/solr/collection1/conf/schema.xml
