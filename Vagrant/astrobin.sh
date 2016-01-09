@@ -269,11 +269,7 @@ function abc {
 }
 
 function astrobin {
-    customizing_log=$(astrobin_log "Customizing astrobin's home directory...")
-    syndb_log=$(astrobin_log "Syncing database...")
-    migrate_log=$(astrobin_log "Migrating database...")
-    trans_log=$(astrobin_log "Syncing translation fields...")
-    static_log=$(astrobin_log "Collecting static files...")
+    echo "Preparing AstroBin..."
 
     sudo -u astrobin /bin/bash - <<"EOF"
     # Initialize the environment
