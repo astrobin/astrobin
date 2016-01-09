@@ -277,30 +277,24 @@ function astrobin {
     . /var/www/astrobin/env/dev
 
     # Automatically activating the environment upon login
-    $customizing_log && \
-    if [ ! -f /home/astrobin/.profile.customized ]; then \
-        touch /home/astrobin/.profile.customized && \
-        echo "source /venv/astrobin/dev/bin/activate" >> /home/astrobin/.profile && \
-        echo "source /var/www/astrobin/env/dev" >> /home/astrobin/.profile && \
-        echo "cd /var/www/astrobin" >> /home/astrobin/.profile \
-    fi && \
-    if [ ! -f /home/astrobin/.bashrc.customized ]; then \
-        touch /home/astrobin/.bashrc.customized && \
-        echo "figlet WELCOME TO ASTROBIN" >> /home/astrobin/.bashrc && \
-        echo "cowsay You can run a development server with: ./manage.py runserver 0.0.0.0:8083, and remember to read ./INSTALL.md\!" >> /home/astrobin/.bashrc \
-    fi && \
+    if [ ! -f /home/astrobin/.profile.customized ]; then
+        touch /home/astrobin/.profile.customized &&
+        echo "source /venv/astrobin/dev/bin/activate" >> /home/astrobin/.profile &&
+        echo "source /var/www/astrobin/env/dev" >> /home/astrobin/.profile &&
+        echo "cd /var/www/astrobin" >> /home/astrobin/.profile
+    fi
+
+    if [ ! -f /home/astrobin/.bashrc.customized ]; then
+        touch /home/astrobin/.bashrc.customized
+        echo "figlet WELCOME TO ASTROBIN" >> /home/astrobin/.bashrc
+        echo "cowsay You can run a development server with: ./manage.py runserver 0.0.0.0:8083, and remember to read ./INSTALL.md\!" >> /home/astrobin/.bashrc
+    fi
 
     # Initialize db
-    $sync_db_log && \
-    /var/www/astrobin/manage.py syncdb --noinput && \
+    /var/www/astrobin/manage.py syncdb --noinput
+    /var/www/astrobin/manage.py migrate
+    /var/www/astrobin/manage.py sync_translation_fields --noinput
 
-    $migrate_log && \
-    /var/www/astrobin/manage.py migrate && \
-
-    $trans_log && \
-    /var/www/astrobin/manage.py sync_translation_fields --noinput && \
-
-    $static_log && \
     /var/www/astrobin/manage.py collectstatic --noinput
 EOF
 }
