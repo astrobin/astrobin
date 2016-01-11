@@ -34,7 +34,6 @@ from nested_comments.models import NestedComment
 from model_utils.managers import InheritanceManager
 from timezones.forms import PRETTY_TIMEZONE_CHOICES
 
-from notifications import push_notification
 from fields import *
 from utils import user_is_paying
 
@@ -43,6 +42,7 @@ from reviews.models import ReviewedItem
 from actstream import action
 from toggleproperties.models import ToggleProperty
 
+from astrobin_apps_notifications.utils import push_notification
 from astrobin_apps_images.managers import ImagesManager, PublicImagesManager, WipImagesManager
 from astrobin_apps_platesolving.models import Solution
 

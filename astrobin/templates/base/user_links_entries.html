@@ -1,4 +1,5 @@
 {% load astrobin_apps_donations_tags %}
+{% load astrobin_apps_notifications_tags %}
 {% load i18n %}
 {% load tags %}
 
@@ -112,7 +113,7 @@
         <i class="icon-bell-alt"></i>
     </a>
     <ul class="dropdown-menu" id="notifications-popup">
-        {% notification_list %}
+        {% notification_list request.user %}
     </ul>
 </li> <!-- notifications -->
 

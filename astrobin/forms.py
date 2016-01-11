@@ -240,7 +240,7 @@ class UserProfileEditPreferencesForm(forms.ModelForm):
     def __init__(self, user=None, **kwargs):
         super(UserProfileEditPreferencesForm, self).__init__(**kwargs)
         for notice_type in NOTICE_TYPES:
-            if notice_type[3] == 2:
+            if notice_type[3] == 2 and notice_type[0] != 'test_notification':
                 self.fields[notice_type[0]] = forms.BooleanField(
                     label=_(notice_type[1]),
                     required=False

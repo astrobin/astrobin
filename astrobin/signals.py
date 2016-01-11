@@ -23,9 +23,9 @@ from rawdata.models import (
 
 from astrobin_apps_platesolving.models import Solution
 from astrobin_apps_platesolving.solver import Solver
+from astrobin_apps_notifications.utils import push_notification
 
 # This app
-from .notifications import push_notification
 from .models import Image, ImageRevision, Gear, UserProfile
 from .gear import get_correct_gear
 

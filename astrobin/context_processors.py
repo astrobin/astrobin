@@ -5,7 +5,6 @@ from django.db.models import Q
 from django.utils.translation import ugettext as _
 
 from haystack.query import SearchQuerySet
-from notification import models as notifications
 from toggleproperties.models import ToggleProperty
 from persistent_messages.models import Message
 
@@ -14,6 +13,7 @@ from astrobin.models import Gear
 from astrobin.models import Image
 
 from nested_comments.models import NestedComment
+from astrobin_apps_notifications.utils import get_unseen_notifications
 
 
 def privatebeta_enabled(request):
@@ -23,7 +23,8 @@ def privatebeta_enabled(request):
 def notices_count(request):
     response = {}
     if request.user.is_authenticated():
-        response['notifications_count'] = Message.objects.filter(user = request.user, read = False).count()
+        response['notifications_count'] =\
+            len(get_unseen_notifications(request.user))
 
     return response
 

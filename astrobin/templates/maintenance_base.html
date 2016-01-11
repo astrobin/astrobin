@@ -1,5 +1,6 @@
 {% load i18n %}
 {% load tags %}
+{% load astrobin_apps_notifications_tags %}
 {% load inbox %}
 {% load compressed %}
 {% load common_tags %}
@@ -342,7 +343,7 @@
                                     <img alt="{% trans "Notifications" %}" src="{{STATIC_URL}}icons/iconic/orange/notifications.gif"/>
                                 </a>
                                 <ul class="dropdown-menu" id="notifications-popup">
-                                    {% notification_list %}
+                                    {% notification_list request.user %}
                                 </ul>
                             </li> <!-- notifications -->
 

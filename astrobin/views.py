@@ -57,7 +57,7 @@ from rawdata.models import PrivateSharedFolder
 from models import *
 from forms import *
 from management import NOTICE_TYPES
-from notifications import *
+from astrobin_apps_notifications.utils import push_notification
 from notification.models import NoticeSetting, NOTICE_MEDIA_DEFAULTS
 from shortcuts import *
 from image_utils import make_image_of_the_day
@@ -2644,7 +2644,7 @@ def user_profile_edit_preferences(request):
         stored_settings[setting.notice_type.label] = setting.send
 
     for notice_type in NOTICE_TYPES:
-        if notice_type[3] == 2:
+        if notice_type[3] == 2 and notice_type[0] != 'test_notification':
             label = notice_type[0]
             value = stored_settings.get(label,
                                         notice_type[3] >= email_default)

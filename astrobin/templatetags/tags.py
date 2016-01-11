@@ -15,7 +15,9 @@ from celery.result import AsyncResult
 from astrobin.models import Request
 from astrobin.gear import *
 
+
 register = Library()
+
 
 @register.simple_tag
 def current(request, pattern):
@@ -48,18 +50,6 @@ def related_images(request, object_list, type):
             'images': images,
             'related_type': type,
            }
-
-
-@register.inclusion_tag('inclusion_tags/notification_list.html', takes_context = True)
-def notification_list(context):
-    unseen = Message.objects.filter(user = context['request'].user, read = False).order_by('-created')
-    seen   = Message.objects.filter(user = context['request'].user, read = True ).order_by('-created')[:10]
-
-    return {
-        'request': context['request'],
-        'unseen' : unseen,
-        'seen'   : seen,
-    }
 
 
 @register.filter

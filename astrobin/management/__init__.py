@@ -11,6 +11,12 @@ def _(s): return s
 # 3 - default: if value >= 2, send e-mail by default
 NOTICE_TYPES = (
     (
+        'test_notification',
+        'Test notification',
+        '',
+        2
+    ),
+    (
         'new_follower',
         _('You have a new follower'),
         '',

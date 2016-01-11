@@ -1,13 +1,13 @@
 {% extends 'base.html' %}
 
 {% load i18n %}
-{% load tags %}
+{% load astrobin_apps_notifications_tags %}
 
 {% block title %}{% trans "Here are your notifications" %}{% endblock %}
 
 {% block content %}
     <h1>{% trans "Here are your notifications" %}</h1>
     <ul>
-        {% notification_list %}
+        {% notification_list request.user %}
     </ul>
 {% endblock %}

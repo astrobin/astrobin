@@ -1,14 +1,19 @@
+# Python
 import simplejson
 import urllib2
 
+# Django
 from django.conf import settings
 from django.contrib import messages
 from django.template.loader import render_to_string
 from django.utils import translation
 
+# Third party
 from gadjo.requestprovider.signals import get_request
 from notification import models as notification
 import persistent_messages
+from persistent_messages.models import Message
+
 
 def push_notification(recipients, notice_type, data):
     current_language = translation.get_language()
@@ -30,9 +35,6 @@ def push_notification(recipients, notice_type, data):
         language = r.userprofile.language
 
         if language is not None:
-            if language == 'pl':
-                # Polish is currently broken...
-                language = 'en'
             translation.activate(language)
 
         notification_message = render_to_string(
@@ -55,3 +57,25 @@ def push_notification(recipients, notice_type, data):
 
     translation.activate(current_language)
 
+
+def get_recent_notifications(user, n = 10):
+    notifications = Message.objects.filter(user = user).order_by('-created')
+    if n > 0:
+        notifications = notifications[:n]
+    return notifications
+
+
+def get_unseen_notifications(user, n = 10):
+    notifications =\
+        Message.objects.filter(user = user, read = False).order_by('-created')
+    if n > 0:
+        notifications = notifications[:n]
+    return notifications
+
+
+def get_seen_notifications(user, n = 10):
+    notifications =\
+        Message.objects.filter(user = user, read = True).order_by('-created')
+    if n > 0:
+        notifications = notifications[:n]
+    return notifications
