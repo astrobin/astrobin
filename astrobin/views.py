@@ -1814,11 +1814,11 @@ def user_page(request, username):
             menu += [( 0, nd)]
             menu += [(-1, gi)]
 
-            if active == 0:
+            if active == '0':
                 qs = qs.filter(
                     (Q(subject_type = 100) | Q(subject_type = 200)) &
                     (Q(imaging_telescopes = None) | Q(imaging_cameras = None))).distinct()
-            elif active == -1:
+            elif active == '-1':
                 qs = qs.filter(Q(subject_type = 500)).distinct()
             else:
                 if active is None:
@@ -1846,7 +1846,7 @@ def user_page(request, username):
                 qs = qs.filter(subject_type = 100)
 
             elif active == 'SOLAR':
-                qs = qs.filter(solar_system_main_subject__gte = 0)
+                qs = qs.filter(subject_type = 200)
 
             elif active == 'WIDE':
                 qs = qs.filter(subject_type = 300)
