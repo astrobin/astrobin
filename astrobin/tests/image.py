@@ -1294,3 +1294,36 @@ class ImageTest(TestCase):
 
         self.client.logout()
         image.delete()
+
+    def test_image_demote_view(self):
+        def get_url(args = None):
+            return reverse('image_demote', args = args)
+
+        # Upload an image
+        self.client.login(username = 'test', password = 'password')
+        self._do_upload('astrobin/fixtures/test.jpg')
+        image = self._get_last_image()
+
+        # GET with wrong user
+        self.client.logout()
+        self.client.login(username = 'test2', password = 'password')
+        response = self.client.get(get_url((image.pk,)))
+        self.assertEqual(response.status_code, 403)
+        self.client.logout()
+        self.client.login(username = 'test', password = 'password')
+
+        # Test when image was not WIP
+        response = self.client.get(get_url((image.pk,)))
+        image = Image.all_objects.get(pk = image.pk)
+        self.assertEquals(image.is_wip, True)
+
+        # Test when image was WIP
+        response = self.client.get(get_url((image.pk,)))
+        image = Image.all_objects.get(pk = image.pk)
+        self.assertEquals(image.is_wip, True)
+
+        # Test that we can't get the image via the regular manager
+        self.assertEquals(Image.objects.filter(pk = image.pk).count(), 0)
+
+        self.client.logout()
+        image.delete()
