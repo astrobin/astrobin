@@ -24,6 +24,9 @@ if TESTING:
     CACHE = False
     AWS_S3_ENABLED = False
     LOCAL_STATIC_STORAGE = True
+    PASSWORD_HASHERS = (
+        'django.contrib.auth.hashers.MD5PasswordHasher',
+    )
 else:
     AWS_S3_ENABLED = os.environ['ASTROBIN_AWS_S3_ENABLED'] == "true"
     LOCAL_STATIC_STORAGE = os.environ['ASTROBIN_LOCAL_STATIC_STORAGE'] == "true"
@@ -43,17 +46,25 @@ EMAIL_PORT = os.environ['ASTROBIN_EMAIL_PORT']
 EMAIL_USE_TLS= os.environ['ASTROBIN_EMAIL_USE_TLS'] == "true"
 EMAIL_BACKEND = 'django.core.mail.backends.smtp.EmailBackend'
 
-DATABASES = {
-    'default': {
-        'ENGINE': 'django.db.backends.postgresql_psycopg2', # Add 'postgresql_psycopg2', 'postgresql', 'mysql', 'sqlite3' or 'oracle'.
-        'NAME': os.environ['ASTROBIN_DATABASE_NAME'],         # Or path to database file if using sqlite3.
-        'USER': os.environ['ASTROBIN_DATABASE_USER'],         # Not used with sqlite3.
-        'PASSWORD': os.environ['ASTROBIN_DATABASE_PASSWORD'], # Not used with sqlite3.
-        'HOST': os.environ['ASTROBIN_DATABASE_HOST'],         # Set to empty string for localhost. Not used with sqlite3.
-        'PORT': '5432',                                       # Set to empty string for default. Not used with sqlite3.
-        'OPTIONS': {'autocommit': True},
+if not TESTING:
+    DATABASES = {
+        'default': {
+            'ENGINE': 'django.db.backends.postgresql_psycopg2',
+            'NAME': os.environ['ASTROBIN_DATABASE_NAME'],
+            'USER': os.environ['ASTROBIN_DATABASE_USER'],
+            'PASSWORD': os.environ['ASTROBIN_DATABASE_PASSWORD'],
+            'HOST': os.environ['ASTROBIN_DATABASE_HOST'],
+            'PORT': '5432',
+            'OPTIONS': {'autocommit': True},
+        }
     }
-}
+else:
+    DATABASES = {
+        'default': {
+            'ENGINE': 'django.db.backends.sqlite3',
+            'NAME': 'astrobin_test_db',
+        }
+    }
 
 DEFAULT_CHARSET = 'utf-8'
 
@@ -165,8 +176,6 @@ MIDDLEWARE_CLASSES = [
     'django.middleware.common.CommonMiddleware',
     'django.contrib.sessions.middleware.SessionMiddleware',
     'django.contrib.auth.middleware.AuthenticationMiddleware',
-    'django.middleware.locale.LocaleMiddleware',
-    'django.middleware.gzip.GZipMiddleware',
     'django.middleware.csrf.CsrfViewMiddleware',
     'django.contrib.messages.middleware.MessageMiddleware',
     'pagination.middleware.PaginationMiddleware',
@@ -178,6 +187,11 @@ MIDDLEWARE_CLASSES = [
 #    'pipeline.middleware.MinifyHTMLMiddleware', Enable after dealing with the blank spaces everywhere
     'pybb.middleware.PybbMiddleware',
 ]
+if not TESTING:
+    MIDDLEWARE_CLASSES += [
+        'django.middleware.locale.LocaleMiddleware',
+        'django.middleware.gzip.GZipMiddleware',
+    ]
 
 if DEBUG:
     MIDDLEWARE_CLASSES += [

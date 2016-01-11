@@ -30,7 +30,7 @@ def notices_count(request):
 
 def user_language(request):
     d = {
-        'user_language': request.LANGUAGE_CODE,
+        'user_language': getattr(request, "LANGUAGE_CODE", "en"),
     }
     if request.user.is_authenticated():
         profile = request.user.userprofile
