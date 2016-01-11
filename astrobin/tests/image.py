@@ -3,6 +3,7 @@ import time
 
 # Django
 from django.contrib.auth.models import User
+from django.contrib.contenttypes.models import ContentType
 from django.core.urlresolvers import reverse
 from django.test import TestCase
 
@@ -19,6 +20,7 @@ from astrobin.models import (
     Accessory,
     DeepSky_Acquisition,
     SolarSystem_Acquisition)
+from astrobin_apps_notifications.utils import get_unseen_notifications
 
 
 class ImageTest(TestCase):
@@ -1248,3 +1250,47 @@ class ImageTest(TestCase):
         image.delete()
 
         self.client.logout()
+
+    def test_image_promote_view(self):
+        def get_url(args = None):
+            return reverse('image_promote', args = args)
+
+        # Upload an image
+        self.client.login(username = 'test', password = 'password')
+        self._do_upload('astrobin/fixtures/test.jpg')
+        image = self._get_last_image()
+
+        # user2 follows user
+        self.client.logout()
+        self.client.login(username = 'test2', password = 'password')
+        response = self.client.post(
+            reverse('toggleproperty_ajax_add'),
+            {
+                'property_type': 'follow',
+                'object_id': self.user.pk,
+                'content_type_id': ContentType.objects.get_for_model(User).pk,
+            }) 
+        self.assertEqual(response.status_code, 200)
+
+        # GET with wrong user
+        response = self.client.get(get_url((image.pk,)))
+        self.assertEqual(response.status_code, 403)
+        self.client.logout()
+
+        # Test when image was not WIP
+        self.client.login(username = 'test', password = 'password')
+        response = self.client.get(get_url((image.pk,)))
+        image = Image.objects.get(pk = image.pk)
+        self.assertEquals(image.is_wip, False)
+        self.assertEquals(len(get_unseen_notifications(self.user2)), 0)
+
+        # Test when image was WIP
+        image.is_wip = True
+        image.save()
+        response = self.client.get(get_url((image.pk,)))
+        image = Image.objects.get(pk = image.pk)
+        self.assertEquals(image.is_wip, False)
+        self.assertEquals(len(get_unseen_notifications(self.user2)), 1)
+
+        self.client.logout()
+        image.delete()

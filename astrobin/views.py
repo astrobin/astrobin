@@ -1684,6 +1684,7 @@ def image_delete_original(request, id):
     return HttpResponseRedirect("/%i/" % image.id);
 
 
+# TODO: should be POST
 @login_required
 @require_GET
 def image_promote(request, id):
