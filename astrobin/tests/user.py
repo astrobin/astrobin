@@ -7,7 +7,8 @@ from django.core.urlresolvers import reverse
 from django.test import TestCase
 
 # AstroBin
-from astrobin.models import Image, Acquisition, Telescope
+from astrobin.models import (
+    Image, Acquisition, Telescope, CommercialGear, RetailedGear)
 
 
 class UserTest(TestCase):
@@ -16,9 +17,15 @@ class UserTest(TestCase):
             username = "user", email = "user@example.com",
             password = "password")
 
+        self.producers = Group.objects.create(name = 'Producers')
+        self.retailers = Group.objects.create(name = 'Retailers')
+        self.payers = Group.objects.create(name = 'Paying')
 
     def tearDown(self):
         self.user.delete()
+        self.producers.delete()
+        self.retailers.delete()
+        self.payers.delete()
 
 
     def test_user_page_view(self):
@@ -290,3 +297,42 @@ class UserTest(TestCase):
         self.assertEquals(image.title in response.content, True)
 
         image.delete()
+
+    def test_user_page_commercial_products_view(self):
+        url = reverse(
+            'user_page_commercial_products', args = (self.user.username,))
+
+        # Test anonymous
+        response = self.client.get(url)
+        self.assertEquals(response.status_code, 403)
+
+        # Test non producer / non retailer
+        self.client.login(username = "user", password = "password")
+        response = self.client.get(url)
+        self.assertEquals(response.status_code, 200)
+        self.assertEquals(response.context['user_is_producer'], False)
+        self.assertEquals(response.context['user_is_retailer'], False)
+        self.assertEquals(len(response.context['commercial_gear_list']), 0)
+        self.assertEquals(len(response.context['retailed_gear_list']), 0)
+
+        # Test producer
+        self.user.groups.add(self.producers)
+        commercial_telescope = CommercialGear.objects.create(
+            producer = self.user)
+        telescope = Telescope.objects.create(
+            name = "Test producer telescope", commercial = commercial_telescope)
+        response = self.client.get(url)
+        self.assertEquals(response.status_code, 200)
+        self.assertEquals(response.context['user_is_producer'], True)
+        self.assertEquals(response.context['user_is_retailer'], False)
+        self.assertEquals(len(response.context['commercial_gear_list']), 1)
+        self.assertEquals(len(response.context['retailed_gear_list']), 0)
+        self.assertEquals('claim_commercial_gear_form' in response.context, True)
+        self.assertEquals('merge_commercial_gear_form' in response.context, True)
+        self.user.groups.remove(self.producers)
+        commercial_telescope.delete()
+        telescope.delete()
+
+        # TODO: test retailers
+
+        self.client.logout()
