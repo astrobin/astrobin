@@ -397,13 +397,6 @@ def index(request, template = 'index/root.html', extra_context = None):
 
 
 @require_GET
-def expore_choose(request):
-    return render_to_response(
-        'explore_choose.html', {},
-        context_instance = RequestContext(request))
-
-
-@require_GET
 def wall(request):
     """The Big Wall"""
     sqs = SearchQuerySet().all().models(Image)
