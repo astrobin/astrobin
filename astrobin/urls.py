@@ -44,14 +44,14 @@ v1_api.register(ImageOfTheDayResource())
 
 urlpatterns = patterns('',
     ###########################################################################
-    ### DJANGOVIEWS                                                       ###
+    ### DJANGO VIEWS                                                        ###
     ###########################################################################
 
     url(r'^admin/', include(admin.site.urls)),
     url(r'^media/(?P<path>.*)$', 'django.views.static.serve', {'document_root': settings.MEDIA_ROOT}),
 
     ###########################################################################
-    ### THIRDPARTYAPPSVIEWS                                             ###
+    ### THIRD PARTY APPS VIEWS                                              ###
     ###########################################################################
 
     url(r'^accounts/', include('registration.urls')),
@@ -160,7 +160,7 @@ urlpatterns = patterns('',
     url(r'^explore/iotd/$', views.iotd_archive, name='iotd_archive'),
 
     ###########################################################################
-    ### USER VIEWS                                                         ###
+    ### USER VIEWS                                                          ###
     ###########################################################################
 
     url(r'^me/$', views.me, name='me'),
@@ -179,7 +179,7 @@ urlpatterns = patterns('',
     url(r'^(?P<id>\d+)/stats/views/(?P<period>\w+)/$', views.stats_get_image_views_ajax, name = 'stats_image_views'),
 
     ###########################################################################
-    ### PROFILE VIEWS                                                      ###
+    ### PROFILE VIEWS                                                       ###
     ###########################################################################
 
     url(r'^profile/edit/$', views.user_profile_edit_basic, name='profile_edit_basic'),
@@ -202,7 +202,7 @@ urlpatterns = patterns('',
     url(r'^profile/delete/$', views.user_profile_delete, name='profile_delete'),
 
     ###########################################################################
-    ### AUTOCOMPLETEVIEWS                                                 ###
+    ### AUTOCOMPLETE VIEWS                                                 ###
     ###########################################################################
 
     url(r'^autocomplete/(?P<what>\w+)/$', lookups.autocomplete, name='autocomplete'),
@@ -210,7 +210,7 @@ urlpatterns = patterns('',
     url(r'^autocomplete_usernames/$', lookups.autocomplete_usernames, name='autocomplete_usernames'),
 
     ###########################################################################
-    ### AFFILIATION PLATFORMVIEWS                                         ###
+    ### AFFILIATION PLATFORM VIEWS                                          ###
     ###########################################################################
 
     url(r'^commercial/products/claim/(?P<id>\d+)/$', views.commercial_products_claim, name='commercial_products_claim'),
@@ -224,7 +224,7 @@ urlpatterns = patterns('',
     url(r'^commercial/products/retailed/edit/(?P<id>\d+)/$', views.retailed_products_edit, name='retailed_products_edit'),
 
     ###########################################################################
-    ### GEARVIEWS                                                         ###
+    ### GEAR VIEWS                                                          ###
     ###########################################################################
 
     url(r'^gear/(?P<id>\d+)/stats/views/$', views.stats_get_gear_views_ajax, name = 'stats_gear_views'),
@@ -249,7 +249,7 @@ urlpatterns = patterns('',
     url(r'^get-makes-by-type/(?P<klass>\w+)/$', views.get_makes_by_type, name='get_makes_by_type'),
 
     ###########################################################################
-    ### STATSVIEWS                                                        ###
+    ### STATS VIEWS                                                         ###
     ###########################################################################
 
     url(r'^stats/camera-types-trend/$', views.stats_camera_types_trend_ajax, name = 'stats_camera_types_trend'),
@@ -257,7 +257,7 @@ urlpatterns = patterns('',
     url(r'^stats/subject-type-trend/$', views.stats_subject_type_trend_ajax, name = 'stats_subject_type_trend'),
 
     ###########################################################################
-    ### SUBJECTVIEWS                                                      ###
+    ### SUBJECT VIEWS                                                       ###
     ###########################################################################
 
     url(r'^subject/stats/images-monthly/(?P<id>\d+)/$', views.stats_subject_images_monthly_ajax, name = 'stats_subject_images_monthly'),
@@ -270,7 +270,7 @@ urlpatterns = patterns('',
     url(r'^push_notification/$', views.push_notification, name='push_notification'),
 
     ###########################################################################
-    ### MESSAGESVIEWS                                                     ###
+    ### MESSAGES VIEWS                                                      ###
     ###########################################################################
 
     url(r'^messages/inbox/$', messages_inbox, {'template_name': 'messages/inbox.html'}, name='messages_inbox'),
