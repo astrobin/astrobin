@@ -1,42 +1,45 @@
-from django.contrib.auth.decorators import login_required
-from django.conf.urls.defaults import *
+# Django
 from django.conf import settings
+from django.conf.urls.defaults import *
 from django.contrib import admin
+from django.contrib.auth.decorators import login_required
 from django.views.generic.simple import redirect_to
 
+# Third party
 from hitcount.views import update_hit_count_ajax
-
-from threaded_messages.views import search as messages_search
-from threaded_messages.views import inbox as messages_inbox
-from threaded_messages.views import outbox as messages_outbox
-from threaded_messages.views import compose as messages_compose
-from threaded_messages.views import view as messages_view
-from threaded_messages.views import delete as messages_delete
-from threaded_messages.views import undelete as messages_undelete
-from threaded_messages.views import batch_update as messages_batch_update
-from threaded_messages.views import trash as messages_trash
-from threaded_messages.views import recipient_search as messages_recipient_search
-from threaded_messages.views import message_ajax_reply as messages_message_ajax_reply
-
+from tastypie.api import Api
 from threaded_messages.forms import ComposeForm as MessagesComposeForm
+from threaded_messages.views import batch_update as messages_batch_update
+from threaded_messages.views import compose as messages_compose
+from threaded_messages.views import delete as messages_delete
+from threaded_messages.views import inbox as messages_inbox
+from threaded_messages.views import message_ajax_reply as messages_message_ajax_reply
+from threaded_messages.views import outbox as messages_outbox
+from threaded_messages.views import recipient_search as messages_recipient_search
+from threaded_messages.views import search as messages_search
+from threaded_messages.views import trash as messages_trash
+from threaded_messages.views import undelete as messages_undelete
+from threaded_messages.views import view as messages_view
 
-admin.autodiscover()
-
-from astrobin import views
-from astrobin import lookups
-from astrobin.search import SearchView
-from astrobin.forms import AdvancedSearchForm
-
+# AstroBin apps
 from rawdata.views.helppages import (
     Help1 as RawDataHelp1,
     Help2 as RawDataHelp2,
     Help3 as RawDataHelp3,
 )
 
+# AstroBin
+from astrobin import lookups
+from astrobin import views
+from astrobin.api import (
+    ImageOfTheDayResource,
+    ImageResource,
+    ImageRevisionResource,
+    LocationResource)
+from astrobin.forms import AdvancedSearchForm
+from astrobin.search import SearchView
 
-from tastypie.api import Api
-from astrobin.api import LocationResource, ImageResource, ImageRevisionResource,\
-                         ImageOfTheDayResource
+admin.autodiscover()
 
 # These are the old API, not djangorestframework
 v1_api = Api(api_name = 'v1')
