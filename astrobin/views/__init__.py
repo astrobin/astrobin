@@ -35,6 +35,7 @@ from django.utils.translation import ugettext as _
 from django.utils.translation import ungettext
 from django.views.decorators.cache import never_cache
 from django.views.decorators.http import require_GET, require_POST
+from django.views.generic import TemplateView
 from django.views.generic.edit import FormView
 from django.views.generic.list_detail import object_detail
 from django.views.generic.list_detail import object_list
@@ -42,6 +43,7 @@ from django.views.generic.list_detail import object_list
 # Third party
 from actstream import action as act
 from actstream.models import Action
+from braces.views import LoginRequiredMixin
 from endless_pagination.decorators import page_template
 from notification.models import NoticeSetting, NOTICE_MEDIA_DEFAULTS
 from haystack.query import SearchQuerySet
@@ -3581,14 +3583,10 @@ def get_makes_by_type(request, klass):
         mimetype = 'application/javascript')
 
 
-class AppApiKeyRequestView(FormView):
+class AppApiKeyRequestView(LoginRequiredMixin, FormView):
     template_name = 'app_api_key_request.html'
     form_class = AppApiKeyRequestForm
     success_url = reverse_lazy('app_api_key_request_complete')
-
-    @method_decorator(login_required)
-    def dispatch(self, request, *args, **kwargs):
-        return super(AppApiKeyRequestView, self).dispatch(request, args, kwargs)
 
     def form_valid(self, form):
         key_request = AppApiKeyRequest(registrar = self.request.user)
@@ -3596,13 +3594,9 @@ class AppApiKeyRequestView(FormView):
         form.save()
         return super(AppApiKeyRequestView, self).form_valid(form)
 
-@require_GET
-@login_required
-def app_api_key_request_complete(request):
-    return render_to_response(
-        'app_api_key_request_complete.html',
-        {},
-        context_instance = RequestContext(request))
+
+class AppApiKeyRequestCompleteView(LoginRequiredMixin, TemplateView):
+    template_name = 'app_api_key_request_complete.html'
 
 
 @require_GET
