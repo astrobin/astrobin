@@ -29,12 +29,6 @@ NOTICE_TYPES = (
         2,
     ),
     (
-        'attention_request',
-        _('Image brought to your attention'),
-        '',
-        2,
-    ),
-    (
         'new_image_revision',
         _('New image revision from a user you follow'),
         '',

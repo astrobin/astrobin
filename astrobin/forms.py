@@ -35,6 +35,12 @@ def uniq_id_tuple(seq):
     return ret
 
 
+class ImageFlagThumbsForm(forms.ModelForm):
+    class Meta:
+        model = Image
+        fields = ()
+
+
 class ImageUploadForm(forms.ModelForm):
     class Meta:
         model = Image

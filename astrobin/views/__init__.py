@@ -952,17 +952,6 @@ def image_detail(request, id, r):
         extra_context = response_dict)
 
 
-@login_required
-@require_POST
-def image_flag_thumbs(request, id):
-    image = get_object_or_404(Image.all_objects, id = id)
-    image.thumbnail_invalidate(False)
-    for r in image.revisions.all():
-        r.thumbnail_invalidate(False)
-    messages.success(request, _("Thanks for reporting the problem. All thumbnails will be generated again."))
-    return HttpResponseRedirect(reverse("image_detail", kwargs= {'id': id}))
-
-
 @require_GET
 def image_thumb(request, id, r, alias):
     image = get_object_or_404(Image.all_objects, id = id)
@@ -2745,75 +2734,6 @@ def send_private_message(request):
 
         return ajax_success()
     return ajax_fail()
-
-
-@login_required
-@require_GET
-def bring_to_attention(request, id):
-    image = get_object_or_404(Image, id=id)
-    form = BringToAttentionForm()
-
-    response_dict = {
-        'form': form,
-        'image': image,
-    }
-    return render_to_response(
-        'image/actions/bring_to_attention.html',
-        response_dict,
-        context_instance = RequestContext(request))
-
-
-@login_required
-@require_POST
-def bring_to_attention_process(request):
-    try:
-        image_id = request.POST['image_id']
-    except MultiValueDictKeyError:
-        raise Http404
-
-    form = BringToAttentionForm(data=request.POST)
-    image = get_object_or_404(Image, id=image_id)
-
-    response_dict = {
-        'form': form,
-        'image': image,
-    }
-    if not form.is_valid():
-        return render_to_reponse(
-            'image/actions/bring_to_attention.html',
-            response_dict,
-            context_instance = RequestContext(request))
-
-    (usernames, value) = valueReader(request.POST, 'users')
-    recipients = []
-    for username in usernames:
-        try:
-            user = User.objects.get(username=username)
-            recipients.append(user)
-        except User.DoesNotExist:
-            pass
-
-    push_notification(recipients, 'attention_request',
-                      {'object':image,
-                       'object_url':settings.ASTROBIN_BASE_URL + image.get_absolute_url(),
-                       'originator':request.user.userprofile,
-                       'originator_url': request.user.get_absolute_url()})
-
-    return HttpResponseRedirect('/%d/bring-to-attention/complete/' % image.id)
-
-
-@login_required
-@require_GET
-def bring_to_attention_complete(request, id):
-    image = get_object_or_404(Image, id=id)
-
-    response_dict = {
-        'image': image,
-    }
-    return render_to_response(
-        'image/actions/bring_to_attention_complete.html',
-        response_dict,
-        context_instance = RequestContext(request))
 
 
 @login_required

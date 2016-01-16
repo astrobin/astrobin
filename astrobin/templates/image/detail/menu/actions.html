@@ -131,14 +131,6 @@
         </li>
         {% endif %} <!-- owner or superuser -->
 
-        <li class="divider"></li>
-        <li>
-            <a href="{% url bring_to_attention image.id %}">
-                <i class="icon-retweet"></i>
-                {% trans "Bring to a user's attention" %}
-            </a>
-        </li>
-
         {% if request.user == image.user or request.user.is_superuser %}
         <li class="divider"></li>
         <li>

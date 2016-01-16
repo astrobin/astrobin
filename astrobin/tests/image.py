@@ -408,6 +408,8 @@ class ImageTest(TestCase):
         image.delete()
 
     def test_image_flag_thumbs_view(self):
+        self.user.is_superuser = True
+        self.user.save()
         self.client.login(username = 'test', password = 'password')
         self._do_upload('astrobin/fixtures/test.jpg')
         image = self._get_last_image()
@@ -424,6 +426,9 @@ class ImageTest(TestCase):
 
         revision.delete()
         image.delete()
+        self.client.logout()
+        self.user.is_superuser = False
+        self.user.save()
 
     def test_image_thumb_view(self):
         self.client.login(username = 'test', password = 'password')

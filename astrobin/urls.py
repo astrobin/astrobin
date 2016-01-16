@@ -25,7 +25,9 @@ from rawdata.views.helppages import (
 # AstroBin
 from astrobin import lookups
 from astrobin import views
-from astrobin.views import api as api_views
+from astrobin.views import (
+    api as api_views,
+    image as image_views)
 from astrobin.api import (
     ImageOfTheDayResource,
     ImageResource,
@@ -105,13 +107,10 @@ urlpatterns = patterns('',
     ### IMAGE VIEWS                                                         ###
     ###########################################################################
 
-    url(r'^(?P<id>\d+)/bring-to-attention/$', views.bring_to_attention, name='bring_to_attention'),
-    url(r'^(?P<id>\d+)/bring-to-attention/complete/$', views.bring_to_attention_complete, name='bring_to_attention_complete'),
-    url(r'^(?P<id>\d+)/flagthumbs/$', views.image_flag_thumbs, name='image_flag_thumbs'),
+    url(r'^(?P<id>\d+)/flagthumbs/$', image_views.ImageFlagThumbsView.as_view(), name='image_flag_thumbs'),
     url(r'^(?P<id>\d+)/(?:(?P<r>\w+)/)?$', views.image_detail, name='image_detail'),
     url(r'^(?P<id>\d+)/(?:(?P<r>\w+)/)?rawthumb/(?P<alias>\w+)/(?:get.jpg)?$', views.image_rawthumb, name='image_rawthumb'),
     url(r'^(?P<id>\d+)/(?:(?P<r>\w+)/)?thumb/(?P<alias>\w+)/$', views.image_thumb, name='image_thumb'),
-    url(r'^bring-to-attention/process/$', views.bring_to_attention_process, name='bring_to_attention_process'),
     url(r'^full/(?P<id>\d+)/(?:(?P<r>\w+)/)?$', views.image_full, name='image_full'),
 
     ###########################################################################
