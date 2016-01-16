@@ -2,8 +2,6 @@
 from django.conf import settings
 from django.conf.urls.defaults import *
 from django.contrib import admin
-from django.contrib.auth.decorators import login_required
-from django.views.generic.simple import redirect_to
 
 # Third party
 from hitcount.views import update_hit_count_ajax
@@ -14,11 +12,7 @@ from threaded_messages.views import compose as messages_compose
 from threaded_messages.views import delete as messages_delete
 from threaded_messages.views import inbox as messages_inbox
 from threaded_messages.views import message_ajax_reply as messages_message_ajax_reply
-from threaded_messages.views import outbox as messages_outbox
 from threaded_messages.views import recipient_search as messages_recipient_search
-from threaded_messages.views import search as messages_search
-from threaded_messages.views import trash as messages_trash
-from threaded_messages.views import undelete as messages_undelete
 from threaded_messages.views import view as messages_view
 
 # AstroBin apps
