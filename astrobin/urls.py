@@ -102,12 +102,6 @@ urlpatterns = patterns('',
     url(r'^set-default-frontpage-section/(?P<section>\w+)/$', views.set_default_frontpage_section, name = 'set_default_frontpage_section'),
 
     ###########################################################################
-    ### STREAM VIEWS                                                        ###
-    ###########################################################################
-
-    url('^activities/$', views.activities, name = 'activities'),
-
-    ###########################################################################
     ### IMAGE VIEWS                                                         ###
     ###########################################################################
 

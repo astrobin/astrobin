@@ -3690,17 +3690,6 @@ def gear_review_save(request):
     return ajax_fail()
 
 
-@require_GET
-def activities(request):
-    return object_list(
-        request,
-        queryset = Action.objects.all(),
-        template_name = 'activities.html',
-        template_object_name = 'global_action',
-        paginate_by = 100,
-        extra_context = {})
-
-
 @require_POST
 @login_required
 @user_passes_test(lambda u: user_is_producer(u))
