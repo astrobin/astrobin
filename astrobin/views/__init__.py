@@ -58,15 +58,15 @@ from nested_comments.models import NestedComment
 from rawdata.forms import PublicDataPool_SelectExistingForm, PrivateSharedFolder_SelectExistingForm
 from rawdata.models import PrivateSharedFolder
 
-from models import *
-from forms import *
-from management import NOTICE_TYPES
+from astrobin.models import *
+from astrobin.forms import *
+from astrobin.management import NOTICE_TYPES
 from astrobin_apps_notifications.utils import push_notification
 from notification.models import NoticeSetting, NOTICE_MEDIA_DEFAULTS
-from shortcuts import *
-from image_utils import make_image_of_the_day
-from gear import *
-from utils import *
+from astrobin.shortcuts import *
+from astrobin.image_utils import make_image_of_the_day
+from astrobin.gear import *
+from astrobin.utils import *
 
 import pytz
 
@@ -518,7 +518,8 @@ def iotd_choose(request, image_pk):
         if image_pk is None:
             return HttpResponseNotAllowed(['POST'])
 
-        from image_utils import make_image_of_the_day, make_runnerup, compare_iotd_candidates
+        from astrobin.image_utils import (
+            make_image_of_the_day, make_runnerup, compare_iotd_candidates)
         image = Image.objects.get(pk = image_pk)
 
         iotd = make_image_of_the_day(image)
@@ -602,7 +603,7 @@ def image_detail(request, id, r):
     #############################
     # GENERATE ACQUISITION DATA #
     #############################
-    from moon import MoonPhase;
+    from astrobin.moon import MoonPhase;
 
     gear_list = (
         (ungettext('Imaging telescope or lens', 
