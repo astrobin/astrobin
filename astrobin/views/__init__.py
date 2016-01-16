@@ -1,65 +1,68 @@
-from django.http import HttpResponse
-from django.http import HttpResponseRedirect
-from django.http import HttpResponseForbidden, HttpResponseNotAllowed
-from django.http import Http404
-from django.shortcuts import render_to_response
-from django.shortcuts import get_object_or_404
-from django.template.loader import render_to_string
-from django.views.generic.list_detail import object_list
-from django.views.generic.list_detail import object_detail
-from django.views.decorators.cache import never_cache
-from django.core.urlresolvers import reverse, reverse_lazy
-from django.core.exceptions import MultipleObjectsReturned
-from django.conf import settings
-from django.contrib.contenttypes.models import ContentType
-from django.template import RequestContext
-from django.views.decorators.http import require_GET, require_POST
-from django.contrib import auth
-from django.contrib.auth.decorators import login_required, user_passes_test
-from django.contrib.auth.models import User
-from django.contrib import messages
-from django.db.models import Q
-from django.utils.translation import ugettext as _
-from django.utils.translation import ungettext
-from django.forms.models import inlineformset_factory
-from django.utils.datastructures import MultiValueDictKeyError
-from django.utils.functional import curry
-
-# CBV
-from django.utils.decorators import method_decorator
-from django.views.generic.edit import FormView
-
-from haystack.query import SearchQuerySet
-import persistent_messages
-from reviews.forms import ReviewedItemForm
-from actstream import action as act
-from actstream.models import Action
-from registration.forms import RegistrationForm
-from endless_pagination.decorators import page_template
-
-import os
-import simplejson
+# Python
+from datetime import datetime, date, timedelta
 import csv
 import flickrapi
-import urllib2
-from datetime import datetime, date, timedelta
 import operator
+import os
+import pytz
 import re
+import simplejson
+import urllib2
 
+# Django
+from django.conf import settings
+from django.contrib import auth
+from django.contrib import messages
+from django.contrib.auth.decorators import login_required, user_passes_test
+from django.contrib.auth.models import User
+from django.contrib.contenttypes.models import ContentType
+from django.core.exceptions import MultipleObjectsReturned
+from django.core.urlresolvers import reverse, reverse_lazy
+from django.db.models import Q
+from django.forms.models import inlineformset_factory
+from django.http import Http404
+from django.http import HttpResponse
+from django.http import HttpResponseForbidden, HttpResponseNotAllowed
+from django.http import HttpResponseRedirect
+from django.shortcuts import get_object_or_404
+from django.shortcuts import render_to_response
+from django.template import RequestContext
+from django.template.loader import render_to_string
+from django.utils.datastructures import MultiValueDictKeyError
+from django.utils.decorators import method_decorator
+from django.utils.functional import curry
+from django.utils.translation import ugettext as _
+from django.utils.translation import ungettext
+from django.views.decorators.cache import never_cache
+from django.views.decorators.http import require_GET, require_POST
+from django.views.generic.edit import FormView
+from django.views.generic.list_detail import object_detail
+from django.views.generic.list_detail import object_list
+
+# Third party
+from actstream import action as act
+from actstream.models import Action
+from endless_pagination.decorators import page_template
+from notification.models import NoticeSetting, NOTICE_MEDIA_DEFAULTS
+from haystack.query import SearchQuerySet
+from registration.forms import RegistrationForm
+from reviews.forms import ReviewedItemForm
+import persistent_messages
+
+# AstroBin apps
+from astrobin_apps_notifications.utils import push_notification
 from nested_comments.models import NestedComment
 from rawdata.forms import PublicDataPool_SelectExistingForm, PrivateSharedFolder_SelectExistingForm
 from rawdata.models import PrivateSharedFolder
 
-from astrobin.models import *
+# AstroBin
 from astrobin.forms import *
-from astrobin.management import NOTICE_TYPES
-from astrobin_apps_notifications.utils import push_notification
-from notification.models import NoticeSetting, NOTICE_MEDIA_DEFAULTS
-from astrobin.shortcuts import *
 from astrobin.gear import *
+from astrobin.management import NOTICE_TYPES
+from astrobin.models import *
+from astrobin.shortcuts import *
 from astrobin.utils import *
 
-import pytz
 
 # need to translate to a non-naive timezone, even if timezone == settings.TIME_ZONE, so we can compare two dates
 def to_user_timezone(date, profile):
