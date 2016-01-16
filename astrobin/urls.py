@@ -25,6 +25,7 @@ from rawdata.views.helppages import (
 # AstroBin
 from astrobin import lookups
 from astrobin import views
+from astrobin.views import api as api_views
 from astrobin.api import (
     ImageOfTheDayResource,
     ImageResource,
@@ -72,8 +73,8 @@ urlpatterns = patterns('',
     ###########################################################################
 
     url(r'^api/', include(v1_api.urls)),
-    url(r'^api/request-key/$', views.AppApiKeyRequestView.as_view(), name = 'app_api_key_request'),
-    url(r'^api/request-key/complete/$', views.AppApiKeyRequestCompleteView.as_view(), name = 'app_api_key_request_complete'),
+    url(r'^api/request-key/$', api_views.AppApiKeyRequestView.as_view(), name = 'app_api_key_request'),
+    url(r'^api/request-key/complete/$', api_views.AppApiKeyRequestCompleteView.as_view(), name = 'app_api_key_request_complete'),
     url(r'^api/v2/api-auth-token/', 'rest_framework.authtoken.views.obtain_auth_token'),
     url(r'^api/v2/api-auth/', include('rest_framework.urls', namespace='rest_framework')),
     url(r'^api/v2/common/', include('common.api_urls')),
@@ -299,7 +300,7 @@ urlpatterns = patterns('',
     url(r'^faq/', views.faq, name='faq'),
     url(r'^guidelines/', views.guidelines, name='guidelines'),
     url(r'^help/$', views.help, name='help'),
-    url(r'^help/api/$', views.api, name='api'),
+    url(r'^help/api/$', views.api_help, name='api'),
     url(r'^help/rawdata/1/$', RawDataHelp1.as_view(), name='rawdata.help1'),
     url(r'^help/rawdata/2/$', RawDataHelp2.as_view(), name='rawdata.help2'),
     url(r'^help/rawdata/3/$', RawDataHelp3.as_view(), name='rawdata.help3'),

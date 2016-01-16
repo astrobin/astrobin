@@ -2952,7 +2952,7 @@ def help(request):
 
 
 @require_GET
-def api(request):
+def api_help(request):
     return render_to_response('api.html',
         {
         },
@@ -3581,22 +3581,6 @@ def get_makes_by_type(request, klass):
     return HttpResponse(
         simplejson.dumps(ret),
         mimetype = 'application/javascript')
-
-
-class AppApiKeyRequestView(LoginRequiredMixin, FormView):
-    template_name = 'app_api_key_request.html'
-    form_class = AppApiKeyRequestForm
-    success_url = reverse_lazy('app_api_key_request_complete')
-
-    def form_valid(self, form):
-        key_request = AppApiKeyRequest(registrar = self.request.user)
-        form = self.form_class(data = self.request.POST, instance = key_request)
-        form.save()
-        return super(AppApiKeyRequestView, self).form_valid(form)
-
-
-class AppApiKeyRequestCompleteView(LoginRequiredMixin, TemplateView):
-    template_name = 'app_api_key_request_complete.html'
 
 
 @require_GET
