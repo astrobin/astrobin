@@ -9,7 +9,7 @@ from django.views.generic.list_detail import object_list
 from django.views.generic.list_detail import object_detail
 from django.views.generic.create_update import create_object
 from django.views.decorators.cache import never_cache
-from django.core.urlresolvers import reverse
+from django.core.urlresolvers import reverse, reverse_lazy
 from django.core.exceptions import MultipleObjectsReturned, ValidationError
 from django.conf import settings
 from django.contrib.contenttypes.models import ContentType
@@ -29,6 +29,10 @@ from django.utils.encoding import smart_str, smart_unicode
 from django.utils.functional import curry
 from django.utils.hashcompat import md5_constructor
 from django.utils.http import urlquote
+
+# CBV
+from django.utils.decorators import method_decorator
+from django.views.generic.edit import FormView
 
 from haystack.query import SearchQuerySet, SQ
 import persistent_messages
@@ -3602,35 +3606,20 @@ def get_makes_by_type(request, klass):
         mimetype = 'application/javascript')
 
 
-@require_GET
-@login_required
-def app_api_key_request(request):
-    form = AppApiKeyRequestForm()
+class AppApiKeyRequestView(FormView):
+    template_name = 'app_api_key_request.html'
+    form_class = AppApiKeyRequestForm
+    success_url = reverse_lazy('app_api_key_request_complete')
 
-    return render_to_response(
-        'app_api_key_request.html',
-        {
-            'form': form,
-        },
-        context_instance = RequestContext(request))
+    @method_decorator(login_required)
+    def dispatch(self, request, *args, **kwargs):
+        return super(AppApiKeyRequestView, self).dispatch(request, args, kwargs)
 
-
-@require_POST
-@login_required
-def app_api_key_request_process(request):
-    key_request = AppApiKeyRequest(registrar = request.user)
-    form = AppApiKeyRequestForm(data = request.POST, instance = key_request)
-    if not form.is_valid():
-        return render_to_response(
-            'app_api_key_request.html',
-            {
-                'form': form,
-            },
-            context_instance = RequestContext(request))
-
-    form.save()
-    return HttpResponseRedirect('/api/request-key/complete/');
-
+    def form_valid(self, form):
+        key_request = AppApiKeyRequest(registrar = self.request.user)
+        form = self.form_class(data = self.request.POST, instance = key_request)
+        form.save()
+        return super(AppApiKeyRequestView, self).form_valid(form)
 
 @require_GET
 @login_required
