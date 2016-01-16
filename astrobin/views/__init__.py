@@ -7,43 +7,36 @@ from django.shortcuts import get_object_or_404
 from django.template.loader import render_to_string
 from django.views.generic.list_detail import object_list
 from django.views.generic.list_detail import object_detail
-from django.views.generic.create_update import create_object
 from django.views.decorators.cache import never_cache
 from django.core.urlresolvers import reverse, reverse_lazy
-from django.core.exceptions import MultipleObjectsReturned, ValidationError
+from django.core.exceptions import MultipleObjectsReturned
 from django.conf import settings
 from django.contrib.contenttypes.models import ContentType
 from django.template import RequestContext
-from django.views.decorators.http import require_http_methods, require_GET, require_POST
+from django.views.decorators.http import require_GET, require_POST
 from django.contrib import auth
 from django.contrib.auth.decorators import login_required, user_passes_test
 from django.contrib.auth.models import User
 from django.contrib import messages
-from django.db.models import Q, Count
-from django.db import IntegrityError
+from django.db.models import Q
 from django.utils.translation import ugettext as _
 from django.utils.translation import ungettext
-from django.forms.models import formset_factory, inlineformset_factory
+from django.forms.models import inlineformset_factory
 from django.utils.datastructures import MultiValueDictKeyError
-from django.utils.encoding import smart_str, smart_unicode
 from django.utils.functional import curry
-from django.utils.hashcompat import md5_constructor
-from django.utils.http import urlquote
 
 # CBV
 from django.utils.decorators import method_decorator
 from django.views.generic.edit import FormView
 
-from haystack.query import SearchQuerySet, SQ
+from haystack.query import SearchQuerySet
 import persistent_messages
 from reviews.forms import ReviewedItemForm
 from actstream import action as act
 from actstream.models import Action
 from registration.forms import RegistrationForm
-from zinnia.models import Entry
 from endless_pagination.decorators import page_template
 
-from uuid import uuid4
 import os
 import simplejson
 import csv
@@ -52,7 +45,6 @@ import urllib2
 from datetime import datetime, date, timedelta
 import operator
 import re
-import unicodedata
 
 from nested_comments.models import NestedComment
 from rawdata.forms import PublicDataPool_SelectExistingForm, PrivateSharedFolder_SelectExistingForm
@@ -64,7 +56,6 @@ from astrobin.management import NOTICE_TYPES
 from astrobin_apps_notifications.utils import push_notification
 from notification.models import NoticeSetting, NOTICE_MEDIA_DEFAULTS
 from astrobin.shortcuts import *
-from astrobin.image_utils import make_image_of_the_day
 from astrobin.gear import *
 from astrobin.utils import *
 
@@ -675,7 +666,6 @@ def image_detail(request, id, r):
 
         moon_age_list = []
         moon_illuminated_list = []
-        acquisitions = []
 
         dsa_data = {
             'dates': [],
@@ -716,7 +706,6 @@ def image_detail(request, id, r):
 
                 integration_re = re.match(r'^(\d+)x(\d+)"$', current_frames)
                 current_number = int(integration_re.group(1))
-                current_duration = int(integration_re.group(2))
 
                 dsa_data['frames'][key] = {}
                 dsa_data['frames'][key]['filter_url'] = a.filter.get_absolute_url() if a.filter else '#'
@@ -1056,7 +1045,6 @@ def image_upload(request):
         rawdata_user_has_valid_subscription,
         rawdata_user_has_invalid_subscription,
         rawdata_user_is_over_limit,
-        rawdata_user_byte_limit,
         rawdata_user_used_percent,
         rawdata_user_progress_class,
         rawdata_supported_raw_formats,
@@ -1461,7 +1449,6 @@ def image_edit_save_gear(request):
         raise Http404
 
     image = Image.all_objects.get(pk=image_id)
-    profile = image.user.userprofile
     if request.user != image.user and not request.user.is_superuser:
         return HttpResponseForbidden()
 
@@ -1520,7 +1507,6 @@ def image_edit_save_acquisition(request):
     }
 
     dsa_qs = DeepSky_Acquisition.objects.filter(image=image)
-    solar_system_acquisition = None
 
     for a in SolarSystem_Acquisition.objects.filter(image=image):
         a.delete()
@@ -1704,8 +1690,6 @@ def image_promote(request, id):
     if request.user != image.user and not request.user.is_superuser:
         return HttpResponseForbidden()
 
-    profile = request.user.userprofile
-
     if image.is_wip:
         image.is_wip = False
         image.save()
@@ -1876,8 +1860,6 @@ def user_page(request, username):
         # NO DATA #
         ###########
         elif subsection == 'nodata':
-            k_list = []
-
             menu += [('SUB',  _("No subjects specified"))]
             menu += [('GEAR', _("No imaging telescopes or lenses, or no imaging cameras specified"))]
             menu += [('ACQ',  _("No acquisition details specified"))]
@@ -1909,7 +1891,6 @@ def user_page(request, username):
 
     member_since = None
     date_time = user.date_joined.replace(tzinfo = None)
-    diff = abs(date_time - datetime.today())
     span = timesince(date_time)
     if span == "0 " + _("minutes"):
         member_since = _("seconds ago")
@@ -2552,7 +2533,6 @@ def user_profile_flickr_import(request):
 
         # Hole shit, does it have to be so insane to get the info on the
         # authenticated user?
-        nsid = flickr.urls_getUserProfile().find('user').attrib['nsid']
         sets = flickr.photosets_getList().find('photosets').findall('photoset')
         template_sets = {}
         for set in sets:
@@ -3149,7 +3129,6 @@ def save_gear_details(request):
         'Accessory': 'accessories',
     }
 
-    created = False
     name = request.POST.get('name')
     filters = Q(name = name)
     if request.POST.get('make'):
@@ -3166,7 +3145,6 @@ def save_gear_details(request):
                     name = request.POST.get('name'))
         except CLASS_LOOKUP[gear_type].MultipleObjectsReturned:
             gear = CLASS_LOOKUP[gear_type].objects.filter(filters)[0]
-            created = False
 
     form = form_lookup[gear_type](data = request.POST, instance = gear)
     if not form.is_valid():
@@ -3264,9 +3242,6 @@ def save_gear_user_info(request):
 @never_cache
 def gear_popover_ajax(request, id):
     gear, gear_type = get_correct_gear(id)
-    profile = request.user.userprofile \
-              if request.user.is_authenticated() \
-              else None
     template = 'popover/gear.html'
 
     if gear_type == 'Telescope':
@@ -3308,15 +3283,11 @@ def gear_popover_ajax(request, id):
 def user_popover_ajax(request, username):
     user = get_object_or_404(User, username = username)
     template = 'popover/user.html'
-    profile = request.user.userprofile \
-              if request.user.is_authenticated() \
-              else None
 
     from django.template.defaultfilters import timesince
 
     member_since = None
     date_time = user.date_joined.replace(tzinfo = None)
-    diff = abs(date_time - datetime.today())
     span = timesince(date_time)
     span = span.split(",")[0] # just the most significant digit
     if span == "0 " + _("minutes"):
