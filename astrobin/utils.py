@@ -1,4 +1,12 @@
+# Python
+import datetime
 import sys
+
+# Django
+from django.conf import settings
+
+# Third party
+import pytz
 
 
 def unique_items(l):
@@ -45,6 +53,26 @@ def base26_decode(string, alphabet=ALPHABET):
         idx += 1
 
     return num
+
+
+# need to translate to a non-naive timezone, even if timezone ==
+# settings.TIME_ZONE, so we can compare two dates
+def to_user_timezone(date, profile):
+    timezone = profile.timezone if profile.timezone else settings.TIME_ZONE
+    return date.replace(tzinfo=pytz.timezone(settings.TIME_ZONE))\
+        .astimezone(pytz.timezone(timezone))
+
+
+def to_system_timezone(date, profile):
+    timezone = profile.timezone if profile.timezone else settings.TIME_ZONE
+    return date.replace(tzinfo=pytz.timezone(timezone))\
+        .astimezone(pytz.timezone(settings.TIME_ZONE))
+
+
+def now_timezone():
+    return datetime.now()\
+        .replace(tzinfo=pytz.timezone(settings.TIME_ZONE))\
+        .astimezone(pytz.timezone(settings.TIME_ZONE))
 
 
 #################################
