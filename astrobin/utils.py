@@ -47,6 +47,9 @@ def base26_decode(string, alphabet=ALPHABET):
     return num
 
 
+#################################
+# TODO: move to affiliation app #
+#################################
 def user_is_producer(user):
     is_producer = False
     if user:
