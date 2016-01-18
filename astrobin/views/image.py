@@ -13,7 +13,11 @@ from django.utils.translation import ungettext
 from django.views.generic import DetailView, UpdateView
 
 # Third party
-from braces.views import LoginRequiredMixin, SuperuserRequiredMixin
+from braces.views import (
+    JSONResponseMixin,
+    LoginRequiredMixin,
+    SuperuserRequiredMixin,
+)
 
 # AstroBin
 from astrobin.forms import (
@@ -61,6 +65,23 @@ class ImageFlagThumbsView(
             r.thumbnail_invalidate(False)
         messages.success(self.request, _("Thanks for reporting the problem. All thumbnails will be generated again."))
         return super(ImageFlagThumbsView, self).post(self.request, args, kwargs)
+
+
+class ImageThumbView(JSONResponseMixin, DetailView):
+    model = Image
+    pk_url_kwarg = 'id'
+
+    def get(self, request, *args, **kwargs):
+        image = self.get_object()
+        url = image.thumbnail(kwargs.pop('alias'), {
+            'revision_label': kwargs.pop('r'),
+            'animated': self.request.GET.get('animated', False),
+        })
+
+        return self.render_json_response({
+            'id': image.pk,
+            'url': url
+        })
 
 
 class ImageDetailView(DetailView):

@@ -110,7 +110,7 @@ urlpatterns = patterns('',
     url(r'^(?P<id>\d+)/flagthumbs/$', image_views.ImageFlagThumbsView.as_view(), name='image_flag_thumbs'),
     url(r'^(?P<id>\d+)/(?:(?P<r>\w+)/)?$', image_views.ImageDetailView.as_view(), name='image_detail'),
     url(r'^(?P<id>\d+)/(?:(?P<r>\w+)/)?rawthumb/(?P<alias>\w+)/(?:get.jpg)?$', views.image_rawthumb, name='image_rawthumb'),
-    url(r'^(?P<id>\d+)/(?:(?P<r>\w+)/)?thumb/(?P<alias>\w+)/$', views.image_thumb, name='image_thumb'),
+    url(r'^(?P<id>\d+)/(?:(?P<r>\w+)/)?thumb/(?P<alias>\w+)/$', image_views.ImageThumbView.as_view(), name='image_thumb'),
     url(r'^full/(?P<id>\d+)/(?:(?P<r>\w+)/)?$', views.image_full, name='image_full'),
 
     ###########################################################################

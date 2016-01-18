@@ -536,22 +536,6 @@ def iotd_choose(request, image_pk):
 
 
 @require_GET
-def image_thumb(request, id, r, alias):
-    image = get_object_or_404(Image.all_objects, id = id)
-
-    url = image.thumbnail(alias, {
-        'revision_label': r,
-        'animated': 'animated' in request.GET,
-    })
-
-    return HttpResponse(
-        simplejson.dumps({
-            'id': id,
-            'url': url,
-        }))
-
-
-@require_GET
 def image_rawthumb(request, id, r, alias):
     image = get_object_or_404(Image.all_objects, id = id)
     url = image.thumbnail(alias, {
