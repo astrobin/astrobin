@@ -536,16 +536,6 @@ def iotd_choose(request, image_pk):
 
 
 @require_GET
-def image_rawthumb(request, id, r, alias):
-    image = get_object_or_404(Image.all_objects, id = id)
-    url = image.thumbnail(alias, {
-        'revision_label': r,
-    })
-
-    return HttpResponseRedirect(url)
-
-
-@require_GET
 def image_full(request, id, r):
     image = get_object_or_404(Image.all_objects, pk=id)
 

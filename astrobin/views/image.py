@@ -84,6 +84,18 @@ class ImageThumbView(JSONResponseMixin, DetailView):
         })
 
 
+class ImageRawThumbView(DetailView):
+    model = Image
+    pk_url_kwarg = 'id'
+
+    def get(self, request, *args, **kwargs):
+        image = self.get_object()
+        alias = kwargs.pop('alias')
+        r = kwargs.pop('r')
+        url = image.thumbnail(alias, {'revision_label': r})
+        return redirect(url)
+
+
 class ImageDetailView(DetailView):
     model = Image
     pk_url_kwarg = 'id'
