@@ -535,60 +535,6 @@ def iotd_choose(request, image_pk):
             context_instance = RequestContext(request))
 
 
-@require_GET
-def image_full(request, id, r):
-    image = get_object_or_404(Image.all_objects, pk=id)
-
-    ################################
-    # REDIRECT TO CORRECT REVISION #
-    ################################
-
-    if r is None:
-        r = request.GET.get('r')
-
-    revisions = ImageRevision.objects.filter(image = image)
-
-    if r is None and not image.is_final:
-        final_revs = revisions.filter(is_final = True)
-        # We should only have one
-        if final_revs:
-            final = revisions.filter(is_final = True)[0]
-            return HttpResponseRedirect('/full/%i/%s/' % (image.id, final.label))
-
-    if r is None:
-        try:
-            r = revisions.filter(is_final = True)[0].label
-        except IndexError:
-            r = 0
-
-
-    mod = None
-    if 'mod' in request.GET and request.GET['mod'] == 'inverted':
-        mod = 'inverted'
-
-    real = 'real' in request.GET
-    if real:
-        alias = 'real'
-    else:
-        alias = 'hd'
-
-    if mod:
-        alias += "_%s" % mod
-
-    return object_detail(
-        request,
-        queryset = Image.all_objects.all(),
-        object_id = id,
-        template_name = 'image/full.html',
-        template_object_name = 'image',
-        extra_context = {
-            'real': real,
-            'alias': alias,
-            'mod': mod,
-            'revision_label': r,
-        })
-
-
 @login_required
 def image_upload(request):
     from rawdata.utils import (

@@ -489,3 +489,64 @@ class ImageDetailView(DetailView):
         })
 
         return response_dict
+
+
+class ImageFullView(DetailView):
+    model = Image
+    pk_url_kwarg = 'id'
+    template_name = 'image/full.html'
+    template_name_suffix = ''
+
+    def get_queryset(self):
+        return Image.all_objects.all()
+
+    # TODO: unify this with ImageDetailView.dispatch
+    def dispatch(self, request, *args, **kwargs):
+        # Redirect to the correct revision
+        image = Image.all_objects.get(pk = kwargs['id'])
+        self.revision_label = kwargs['r']
+
+        if self.revision_label is None:
+            # No revision specified, let's see if we need to redirect to the
+            # final.
+            if image.is_final == False:
+                final = image.revisions.filter(is_final = True)
+                if final.count() > 0:
+                    return redirect(reverse_lazy(
+                        'image_full',
+                        args = (image.pk, final[0].label,)))
+
+        if self.revision_label is None:
+            try:
+                self.revision_label = image.revisions.filter(is_final = True)[0].label
+            except IndexError:
+                self.revision_label = '0'
+
+        return super(ImageFullView, self).dispatch(request, *args, **kwargs)
+
+    # TODO: this function needs to be rewritten
+    def get_context_data(self, **kwargs):
+        context = super(ImageFullView, self).get_context_data(**kwargs)
+
+        mod = None
+        if 'mod' in self.request.GET and self.request.GET['mod'] == 'inverted':
+            mod = 'inverted'
+
+        real = 'real' in self.request.GET
+        if real:
+            alias = 'real'
+        else:
+            alias = 'hd'
+
+        if mod:
+            alias += "_%s" % mod
+
+        response_dict = context.copy()
+        response_dict.update({
+            'real': real,
+            'alias': alias,
+            'mod': mod,
+            'revision_label': self.revision_label,
+        })
+
+        return response_dict
