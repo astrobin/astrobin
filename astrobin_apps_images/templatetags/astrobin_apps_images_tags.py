@@ -180,6 +180,11 @@ def astrobin_image(
         cache_key += '_animated'
     thumb_url = cache.get(cache_key)
 
+    # If we're testing, we want to bypass the placeholder thing and force-get
+    # the thumb url.
+    if thumb_url is None and settings.TESTING:
+        thumb_url = image.thumbnail(alias, {'revision_label': revision})
+
     get_thumb_url = None
     if thumb_url is None:
         get_thumb_kwargs = {

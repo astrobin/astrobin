@@ -127,7 +127,7 @@ class ImageDetailView(DetailView):
         context = super(ImageDetailView, self).get_context_data(**kwargs)
 
         image = context['object']
-        r = self.request.GET.get('r')
+        r = self.kwargs.get('r')
 
         revision_image = None
         instance_to_platesolve = image
@@ -528,10 +528,7 @@ class ImageFullView(DetailView):
     def get_context_data(self, **kwargs):
         context = super(ImageFullView, self).get_context_data(**kwargs)
 
-        mod = None
-        if 'mod' in self.request.GET and self.request.GET['mod'] == 'inverted':
-            mod = 'inverted'
-
+        mod = self.request.GET.get('mod')
         real = 'real' in self.request.GET
         if real:
             alias = 'real'

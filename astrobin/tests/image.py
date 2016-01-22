@@ -2,6 +2,7 @@
 import time
 
 # Django
+from django.conf import settings
 from django.contrib.auth.models import Group, User
 from django.contrib.contenttypes.models import ContentType
 from django.core.urlresolvers import reverse
@@ -149,7 +150,7 @@ class ImageTest(TestCase):
         self._assert_message(response, "error unread", "Invalid image")
 
         # Test failure due to full use of Free membership
-        self.user.userprofile.premium_counter = 10
+        self.user.userprofile.premium_counter = settings.PREMIUM_MAX_IMAGES_FREE
         self.user.userprofile.save()
         response = self._do_upload('astrobin/fixtures/test.jpg')
         self.assertRedirects(
@@ -322,6 +323,7 @@ class ImageTest(TestCase):
         # Basic view
         response = self.client.get(reverse('image_detail', kwargs = {'id': image.id}))
         self.assertEqual(response.status_code, 200)
+        self.assertContains(response, image.thumbnail('regular'))
 
         # Revision redirect
         self._do_upload_revision(image, 'astrobin/fixtures/test.jpg')
@@ -332,6 +334,23 @@ class ImageTest(TestCase):
             reverse('image_detail', kwargs = {'id': image.id, 'r': revision.label}),
             status_code = 302,
             target_status_code = 200)
+
+        # Correct revision displayed
+        response = self.client.get(reverse('image_detail', kwargs = {'id': image.id, 'r': 'B'}))
+        self.assertContains(response, image.thumbnail('regular', thumbnail_settings = {'revision_label': 'B'}))
+        self.assertContains(response, image.thumbnail('thumb'))
+
+        response = self.client.get(reverse('image_detail', kwargs = {'id': image.id, 'r': '0'}))
+        self.assertContains(response, image.thumbnail('regular'))
+        self.assertContains(response, image.thumbnail('thumb', thumbnail_settings = {'revision_label': 'B'}))
+
+        # Inverted displayed
+        response = self.client.get(reverse('image_detail', kwargs = {'id': image.id, 'r': '0'}) + "?mod=inverted")
+        self.assertContains(response, image.thumbnail('regular_inverted'))
+
+        response = self.client.get(reverse('image_detail', kwargs = {'id': image.id, 'r': 'B'}) + "?mod=inverted")
+        self.assertContains(response, image.thumbnail('regular_inverted', thumbnail_settings = {'revision_label': 'B'}))
+
         revision.delete()
 
         # DSA data
@@ -466,6 +485,7 @@ class ImageTest(TestCase):
         response = self.client.get(reverse('image_full', kwargs = {'id': image.id}))
         self.assertEqual(response.status_code, 200)
         self.assertEqual(response.context[0]['alias'], 'hd')
+        self.assertContains(response, image.thumbnail('hd'))
 
         # Revision redirect
         self._do_upload_revision(image, 'astrobin/fixtures/test.jpg')
@@ -476,6 +496,14 @@ class ImageTest(TestCase):
             reverse('image_full', kwargs = {'id': image.id, 'r': revision.label}),
             status_code = 302,
             target_status_code = 200)
+
+        # Correct revision displayed
+        response = self.client.get(reverse('image_full', kwargs = {'id': image.id, 'r': 'B'}))
+        self.assertContains(response, image.thumbnail('hd', thumbnail_settings = {'revision_label': 'B'}))
+
+        response = self.client.get(reverse('image_full', kwargs = {'id': image.id, 'r': '0'}))
+        self.assertContains(response, image.thumbnail('hd'))
+
         revision.delete()
 
         # Mods
@@ -484,13 +512,14 @@ class ImageTest(TestCase):
         self.assertEqual(response.status_code, 200)
         self.assertEqual(response.context[0]['mod'], 'inverted')
         self.assertEqual(response.context[0]['alias'], 'hd_inverted')
+        self.assertContains(response, image.thumbnail('hd_inverted'))
 
         # Real
         response = self.client.get(
             reverse('image_full', kwargs = {'id': image.id}) + "?real")
         self.assertEqual(response.status_code, 200)
         self.assertEqual(response.context[0]['alias'], 'real')
-
+        self.assertContains(response, image.thumbnail('real'))
 
         image.delete()
 

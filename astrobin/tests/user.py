@@ -36,37 +36,46 @@ class UserTest(TestCase):
         self.retailers.delete()
         self.payers.delete()
 
-    def _do_upload(self, filename, wip = False):
+    def _get_last_image(self):
+        return Image.all_objects.all().order_by('-id')[0]
+
+    def _do_upload(self, filename, title, wip = False):
         data = {'image_file': open(filename, 'rb')}
         if wip:
             data['wip'] = True
 
-        return self.client.post(
+        self.client.post(
             reverse('image_upload_process'),
             data,
             follow = True)
+
+        image = self._get_last_image()
+        if title:
+            image.title = title
+            image.save()
+
+        return image
 
     def test_user_page_view(self):
         today = date.today()
 
         # Test simple access
-        image = Image.objects.create(
-            user = self.user, title = "TEST BASIC IMAGE")
+        self.client.login(username = "user", password="password")
+        image = self._do_upload('astrobin/fixtures/test.jpg', "TEST BASIC IMAGE")
         response = self.client.get(reverse('user_page', args = ('user',)))
         self.assertEquals(response.status_code, 200)
         self.assertEquals(image.title in response.content, True)
         image.delete()
 
         # Test staging when anonymous
+        self.client.logout()
         response = self.client.get(
             reverse('user_page', args = ('user',)) + '?staging')
         self.assertEquals(response.status_code, 403)
-
-        # Test staging images
         self.client.login(username = "user", password="password")
 
-        image = Image.objects.create(
-            user = self.user, title = "TEST STAGING IMAGE", is_wip = True)
+        # Test staging images
+        image = self._do_upload('astrobin/fixtures/test.jpg', "TEST STAGING IMAGE", True)
         response = self.client.get(
             reverse('user_page', args = ('user',)) + '?staging')
 
@@ -78,13 +87,12 @@ class UserTest(TestCase):
         self.assertEquals(image.title in response.content, False)
 
         image.delete()
-        self.client.logout()
 
         # Test "upload time" sorting
-        image1 = Image.objects.create(
-            user = self.user, title = "IMAGE1", uploaded = today)
-        image2 = Image.objects.create(
-            user = self.user, title = "IMAGE2", uploaded = today + timedelta(1))
+        image1 = self._do_upload('astrobin/fixtures/test.jpg', "IMAGE1")
+        image2 = self._do_upload('astrobin/fixtures/test.jpg', "IMAGE2")
+        image1.uploaded = today; image1.save()
+        image2.uploaded = today + timedelta(1); image2.save()
 
         response = self.client.get(
             reverse('user_page', args = ('user',)) + "?sub=uploaded")
@@ -96,11 +104,10 @@ class UserTest(TestCase):
         image2.delete()
 
         # Test "acquisition time" sorting
-        image1 = Image.objects.create(user = self.user, title = "IMAGE1")
-        image2 = Image.objects.create(user = self.user, title = "IMAGE2")
+        image1 = self._do_upload('astrobin/fixtures/test.jpg', "IMAGE1")
+        image2 = self._do_upload('astrobin/fixtures/test.jpg', "IMAGE2")
         acquisition1 = Acquisition.objects.create(image = image1, date = today)
         acquisition2 = Acquisition.objects.create(
-
             image = image2, date = today + timedelta(1))
         response = self.client.get(
             reverse('user_page', args = ('user',)) + "?sub=acquired")
@@ -114,12 +121,19 @@ class UserTest(TestCase):
         image2.delete()
 
         # Test "subject type" sub-section
-        image1 = Image.objects.create(user = self.user, title = "IMAGE1_DEEP", subject_type = 100)
-        image2 = Image.objects.create(user = self.user, title = "IMAGE2_SOLAR", subject_type = 200)
-        image3 = Image.objects.create(user = self.user, title = "IMAGE3_WIDE", subject_type = 300)
-        image4 = Image.objects.create(user = self.user, title = "IMAGE4_TRAILS", subject_type = 400)
-        image5 = Image.objects.create(user = self.user, title = "IMAGE5_GEAR", subject_type = 500)
-        image6 = Image.objects.create(user = self.user, title = "IMAGE6_OTHER", subject_type = 600)
+        image1 = self._do_upload('astrobin/fixtures/test.jpg', "IMAGE1_DEEP")
+        image2 = self._do_upload('astrobin/fixtures/test.jpg', "IMAGE2_SOLAR")
+        image3 = self._do_upload('astrobin/fixtures/test.jpg', "IMAGE3_WIDE")
+        image4 = self._do_upload('astrobin/fixtures/test.jpg', "IMAGE4_TRAILS")
+        image5 = self._do_upload('astrobin/fixtures/test.jpg', "IMAGE5_GEAR")
+        image6 = self._do_upload('astrobin/fixtures/test.jpg', "IMAGE6_OTHER")
+
+        image1.subject_type = 100; image1.save()
+        image2.subject_type = 200; image2.save()
+        image3.subject_type = 300; image3.save()
+        image4.subject_type = 400; image4.save()
+        image5.subject_type = 500; image5.save()
+        image6.subject_type = 600; image6.save()
 
         response = self.client.get(reverse('user_page', args = ('user',)) + "?sub=subject")
         self.assertEquals(response.status_code, 200)
@@ -192,9 +206,10 @@ class UserTest(TestCase):
         image6.delete()
 
         # Test "year" sub-section
-        image1 = Image.objects.create(user = self.user, title = "IMAGE1")
-        image2 = Image.objects.create(user = self.user, title = "IMAGE2")
-        image3 = Image.objects.create(user = self.user, title = "IMAGE3")
+        image1 = self._do_upload('astrobin/fixtures/test.jpg', "IMAGE1")
+        image2 = self._do_upload('astrobin/fixtures/test.jpg', "IMAGE2")
+        image3 = self._do_upload('astrobin/fixtures/test.jpg', "IMAGE3")
+
         acquisition1 = Acquisition.objects.create(image = image1, date = today)
         acquisition2 = Acquisition.objects.create(
             image = image2, date = today - timedelta(365))
@@ -234,10 +249,14 @@ class UserTest(TestCase):
         image3.delete()
 
         # Test "gear" sub-section
-        image1 = Image.objects.create(user = self.user, title = "IMAGE1")
-        image2 = Image.objects.create(user = self.user, title = "IMAGE2")
-        image3 = Image.objects.create(user = self.user, title = "IMAGE3", subject_type = 200)
-        image4 = Image.objects.create(user = self.user, title = "IMAGE4", subject_type = 500)
+        image1 = self._do_upload('astrobin/fixtures/test.jpg', "IMAGE1")
+        image2 = self._do_upload('astrobin/fixtures/test.jpg', "IMAGE2")
+        image3 = self._do_upload('astrobin/fixtures/test.jpg', "IMAGE3")
+        image4 = self._do_upload('astrobin/fixtures/test.jpg', "IMAGE4")
+
+        image3.subject_type = 200; image3.save()
+        image4.subject_type = 500; image4.save()
+
 
         telescope1 = Telescope.objects.create(name = "TELESCOPE1")
         telescope2 = Telescope.objects.create(name = "TELESCOPE2")
@@ -286,8 +305,7 @@ class UserTest(TestCase):
         image4.delete()
 
         # Test "no data" sub-section
-        image = Image.objects.create(user = self.user, title = "IMAGE_NODATA")
-
+        image = self._do_upload('astrobin/fixtures/test.jpg', "IMAGE_NODATA")
         image.subject_type = 100
         image.objects_in_field = None
         image.save()
@@ -315,6 +333,7 @@ class UserTest(TestCase):
         self.assertEquals(image.title in response.content, True)
 
         image.delete()
+        self.client.logout()
 
     def test_user_page_commercial_products_view(self):
         url = reverse(

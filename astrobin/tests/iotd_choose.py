@@ -43,7 +43,8 @@ class IOTDChooseTest(TestCase):
         user.groups.add(group)
         self.client.login(username = 'test', password = 'password')
 
-        image, created = Image.objects.get_or_create(user = user)
+        self.client.post(reverse('image_upload_process'), {'image_file': open('astrobin/fixtures/test.jpg', 'rb')})
+        image = Image.all_objects.all().order_by('-id')[0]
         iotd, created = ImageOfTheDay.objects.get_or_create(
             image = image, date = datetime.date.today)
 
@@ -61,7 +62,8 @@ class IOTDChooseTest(TestCase):
         user.groups.add(group)
         self.client.login(username = 'test', password = 'password')
 
-        image, created = Image.objects.get_or_create(user = user)
+        self.client.post(reverse('image_upload_process'), {'image_file': open('astrobin/fixtures/test.jpg', 'rb')})
+        image = Image.all_objects.all().order_by('-id')[0]
         response = self.client.get(reverse('iotd_choose', kwargs = {'image_pk': image.pk}))
         self.assertEqual(response.status_code, 200)
         self.assertEqual('image' in response.context[0], True)
@@ -81,7 +83,8 @@ class IOTDChooseTest(TestCase):
         self.assertEqual(response.status_code, 405)
 
         # Arg ok but image not in candidates
-        image, created = Image.objects.get_or_create(user = user)
+        self.client.post(reverse('image_upload_process'), {'image_file': open('astrobin/fixtures/test.jpg', 'rb')})
+        image = Image.all_objects.all().order_by('-id')[0]
         response = self.client.post(reverse('iotd_choose', kwargs = {'image_pk': image.pk}))
         self.assertEqual(response.status_code, 403)
 
