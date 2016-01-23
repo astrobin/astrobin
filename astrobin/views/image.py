@@ -115,7 +115,7 @@ class ImageDetailView(DetailView):
     def dispatch(self, request, *args, **kwargs):
         # Redirect to the correct revision
         try:
-            image = Image.all_objects.get(pk = kwargs['id'])
+            image = Image.all_objects.get(pk = kwargs[self.pk_url_kwarg])
         except Image.DoesNotExist:
             raise Http404
 
@@ -514,7 +514,7 @@ class ImageFullView(DetailView):
     # TODO: unify this with ImageDetailView.dispatch
     def dispatch(self, request, *args, **kwargs):
         # Redirect to the correct revision
-        image = Image.all_objects.get(pk = kwargs['id'])
+        image = Image.all_objects.get(pk = kwargs[self.pk_url_kwarg])
         self.revision_label = kwargs['r']
 
         if self.revision_label is None:
