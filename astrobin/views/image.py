@@ -5,18 +5,25 @@ import re
 from django.conf import settings
 from django.contrib.contenttypes.models import ContentType
 from django.contrib import messages
+from django.core.exceptions import PermissionDenied
 from django.core.urlresolvers import reverse_lazy
 from django.db.models import Q
+from django.http import Http404, HttpResponseRedirect
 from django.shortcuts import redirect
 from django.utils.translation import ugettext as _
 from django.utils.translation import ungettext
-from django.views.generic import DetailView, UpdateView
+from django.views.generic import (
+    DeleteView,
+    DetailView,
+    UpdateView,
+)
 
 # Third party
 from braces.views import (
     JSONResponseMixin,
     LoginRequiredMixin,
     SuperuserRequiredMixin,
+    UserPassesTestMixin,
 )
 
 # AstroBin
@@ -107,7 +114,11 @@ class ImageDetailView(DetailView):
 
     def dispatch(self, request, *args, **kwargs):
         # Redirect to the correct revision
-        image = Image.all_objects.get(pk = kwargs['id'])
+        try:
+            image = Image.all_objects.get(pk = kwargs['id'])
+        except Image.DoesNotExist:
+            raise Http404
+
         revision_label = kwargs['r']
 
         if revision_label is None:
@@ -547,3 +558,138 @@ class ImageFullView(DetailView):
         })
 
         return response_dict
+
+class ImageDeleteView(LoginRequiredMixin, DeleteView):
+    model = Image
+    pk_url_kwarg = 'id'
+
+    def get_queryset(self):
+        return Image.all_objects.all()
+
+    # I would like to use braces' UserPassesTest for this, but I can't
+    # get_object from there because the view is not dispatched yet.
+    def dispatch(self, request, *args, **kwargs):
+        try:
+            image = Image.all_objects.get(pk = kwargs[self.pk_url_kwarg])
+        except Image.DoesNotExist:
+            raise Http404
+
+        if request.user.is_authenticated() and request.user != image.user:
+            raise PermissionDenied
+
+        return super(ImageDeleteView, self).dispatch(request, *args, **kwargs)
+
+    def get_success_url(self):
+        return reverse_lazy('user_page', args = (self.request.user,))
+
+    def post(self, *args, **kwargs):
+        self.get_object().thumbnail_invalidate()
+        messages.success(self.request, _("Image deleted."))
+        return super(ImageDeleteView, self).post(args, kwargs)
+
+class ImageRevisionDeleteView(LoginRequiredMixin, DeleteView):
+    model = ImageRevision
+    pk_url_kwarg = 'id'
+
+    # I would like to use braces' UserPassesTest for this, but I can't
+    # get_object from there because the view is not dispatched yet.
+    def dispatch(self, request, *args, **kwargs):
+        try:
+            revision = ImageRevision.objects.get(pk = kwargs[self.pk_url_kwarg])
+        except ImageRevision.DoesNotExist:
+            raise Http404
+
+        if request.user.is_authenticated() and\
+           request.user != revision.image.user:
+            raise PermissionDenied
+
+        # Save this so it's accessible in get_success_url
+        self.image = revision.image
+
+        return super(ImageRevisionDeleteView, self).dispatch(request, *args, **kwargs)
+
+    def get_success_url(self):
+        return reverse_lazy('image_detail', args = (self.image.pk,))
+
+    def post(self, *args, **kwargs):
+        revision = self.get_object()
+        image = revision.image
+
+        if revision.is_final:
+            image.is_final = True
+            image.save()
+
+        revision.thumbnail_invalidate()
+        messages.success(self.request, _("Revision deleted."))
+
+        return super(ImageRevisionDeleteView, self).post(args, kwargs)
+
+class ImageDeleteOriginalView(LoginRequiredMixin, DeleteView):
+    model = Image
+    pk_url_kwarg = 'id'
+
+    def get_queryset(self):
+        return Image.all_objects.all()
+
+    # I would like to use braces' UserPassesTest for this, but I can't
+    # get_object from there because the view is not dispatched yet.
+    def dispatch(self, request, *args, **kwargs):
+        try:
+            image = Image.all_objects.get(pk = kwargs[self.pk_url_kwarg])
+        except Image.DoesNotExist:
+            raise Http404
+
+        if request.user.is_authenticated() and request.user != image.user:
+            raise PermissionDenied
+
+        return super(ImageDeleteOriginalView, self).dispatch(request, *args, **kwargs)
+
+    def get_success_url(self):
+        return reverse_lazy('image_detail', args = (self.image.pk,))
+
+    def post(self, *args, **kwargs):
+        image = self.get_object()
+        revisions = image.revisions.all()
+
+        if not revisions:
+            return ImageDeleteView.as_view()(self.request, *args, **kwargs)
+
+        final = None
+        if image.is_final:
+            final = revisions[0]
+        else:
+            for r in revisions:
+                if r.is_final:
+                    final = r
+
+        if final is None:
+            # Fallback to the most recent revision.
+            final = revisions[0]
+
+        image.thumbnail_invalidate()
+
+        image.image_file = final.image_file
+        image.updated = final.uploaded
+        image.w = final.w
+        image.h = final.h
+        image.is_final = True
+
+        if image.solution:
+            image.solution.delete()
+
+        image.save()
+
+        if final.solution:
+            # Get the solution this way, I don't know why it wouldn't work otherwise
+            content_type = ContentType.objects.get_for_model(ImageRevision)
+            solution = Solution.objects.get(content_type = content_type, object_id = final.pk)
+            solution.content_object = image
+            solution.save()
+
+        image.thumbnails.filter(revision = final.label).update(revision = '0')
+        self.image = image
+        final.delete()
+
+        messages.success(self.request, _("Revision deleted."));
+        # We do not call super, because that would delete the Image
+        return HttpResponseRedirect(self.get_success_url())

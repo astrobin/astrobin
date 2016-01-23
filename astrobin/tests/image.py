@@ -1206,9 +1206,15 @@ class ImageTest(TestCase):
         self.client.login(username = 'test', password = 'password')
         self._do_upload('astrobin/fixtures/test.jpg')
         image = self._get_last_image()
-        image.title = "Test title"
-        image.save()
         self.client.logout()
+
+        # Try with anonymous user
+        response = self.client.post(post_url((image.pk,)))
+        self.assertRedirects(
+            response,
+            '/accounts/login/?next=' + post_url((image.pk,)),
+            status_code = 302,
+            target_status_code = 200)
 
         # POST with wrong user
         self.client.login(username = 'test2', password = 'password')
@@ -1216,15 +1222,28 @@ class ImageTest(TestCase):
         self.assertEqual(response.status_code, 403)
         self.client.logout()
 
-        # Test for success
+        # Test deleting WIP image
         self.client.login(username = 'test', password = 'password')
+        image.is_wip = True
+        image.save()
         response = self.client.post(post_url((image.pk,)))
         self.assertRedirects(
             response,
             reverse('user_page', kwargs = {'username': image.user.username}),
             status_code = 302,
             target_status_code = 200)
-        self.assertEquals(Image.objects.filter(pk = image.pk).count(), 0)
+        self.assertEquals(Image.all_objects.filter(pk = image.pk).count(), 0)
+
+        # Test for success
+        self._do_upload('astrobin/fixtures/test.jpg')
+        image = self._get_last_image()
+        response = self.client.post(post_url((image.pk,)))
+        self.assertRedirects(
+            response,
+            reverse('user_page', kwargs = {'username': image.user.username}),
+            status_code = 302,
+            target_status_code = 200)
+        self.assertEquals(Image.all_objects.filter(pk = image.pk).count(), 0)
         self.client.logout()
 
     def test_image_delete_revision_view(self):
@@ -1237,6 +1256,14 @@ class ImageTest(TestCase):
         self._do_upload_revision(image, 'astrobin/fixtures/test.jpg')
         revision = self._get_last_image_revision()
         self.client.logout()
+
+        # Try with anonymous user
+        response = self.client.post(post_url((revision.pk,)))
+        self.assertRedirects(
+            response,
+            '/accounts/login/?next=' + post_url((revision.pk,)),
+            status_code = 302,
+            target_status_code = 200)
 
         # POST with wrong user
         self.client.login(username = 'test2', password = 'password')

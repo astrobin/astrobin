@@ -117,9 +117,9 @@ urlpatterns = patterns('',
     ### IMAGE EDIT VIEWS                                                    ###
     ###########################################################################
 
-    url(r'^delete/(?P<id>\d+)/$', views.image_delete, name='image_delete'),
-    url(r'^delete/original/(?P<id>\d+)/$', views.image_delete_original, name='image_delete_original'),
-    url(r'^delete/revision/(?P<id>\d+)/$', views.image_delete_revision, name='image_delete_revision'),
+    url(r'^delete/(?P<id>\d+)/$', image_views.ImageDeleteView.as_view(), name='image_delete'),
+    url(r'^delete/original/(?P<id>\d+)/$', image_views.ImageDeleteOriginalView.as_view(), name='image_delete_original'),
+    url(r'^delete/revision/(?P<id>\d+)/$', image_views.ImageRevisionDeleteView.as_view(), name='image_delete_revision'),
     url(r'^demote/(?P<id>\d+)/$', views.image_demote, name='image_demote'),
     url(r'^edit/acquisition/(?P<id>\d+)/$', views.image_edit_acquisition, name='image_edit_acquisition'),
     url(r'^edit/acquisition/reset/(?P<id>\d+)/$', views.image_edit_acquisition_reset, name='image_edit_acquisition_reset'),
