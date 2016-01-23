@@ -1099,7 +1099,7 @@ def image_edit_save_license(request):
 @login_required
 @require_GET
 def image_promote(request, id):
-    image = get_object_or_404(Image, pk=id)
+    image = get_object_or_404(Image.all_objects, pk=id)
     if request.user != image.user and not request.user.is_superuser:
         return HttpResponseForbidden()
 

@@ -788,8 +788,8 @@ class Image(HasSolutionMixin, models.Model):
         app_label = 'astrobin'
         ordering = ('-uploaded', '-id')
 
-    all_objects = ImagesManager()
     objects = PublicImagesManager()
+    all_objects = ImagesManager()
     wip = WipImagesManager()
 
     def __unicode__(self):
