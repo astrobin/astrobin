@@ -1345,7 +1345,7 @@ class ImageTest(TestCase):
         self.client.logout()
 
     def test_image_promote_view(self):
-        def get_url(args = None):
+        def post_url(args = None):
             return reverse('image_promote', args = args)
 
         # Upload an image
@@ -1366,13 +1366,13 @@ class ImageTest(TestCase):
         self.assertEqual(response.status_code, 200)
 
         # GET with wrong user
-        response = self.client.get(get_url((image.pk,)))
+        response = self.client.post(post_url((image.pk,)))
         self.assertEqual(response.status_code, 403)
         self.client.logout()
 
         # Test when image was not WIP
         self.client.login(username = 'test', password = 'password')
-        response = self.client.get(get_url((image.pk,)))
+        response = self.client.post(post_url((image.pk,)))
         image = Image.objects.get(pk = image.pk)
         self.assertEquals(image.is_wip, False)
         self.assertEquals(len(get_unseen_notifications(self.user2)), 0)
@@ -1380,7 +1380,7 @@ class ImageTest(TestCase):
         # Test when image was WIP
         image.is_wip = True
         image.save()
-        response = self.client.get(get_url((image.pk,)))
+        response = self.client.post(post_url((image.pk,)))
         image = Image.objects.get(pk = image.pk)
         self.assertEquals(image.is_wip, False)
         self.assertEquals(len(get_unseen_notifications(self.user2)), 1)

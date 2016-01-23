@@ -79,7 +79,7 @@
         </li>
         {% if image.is_wip %}
         <li>
-            <a href="{% url image_promote image.id %}{% query_string "" "plate_solving_started" %}">
+            <a href="#promote-modal" data-toggle="modal">
                 <i class="icon-unlock"></i>
                 {% trans "Promote to public area" %}
             </a>

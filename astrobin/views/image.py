@@ -5,6 +5,7 @@ import re
 from django.conf import settings
 from django.contrib.contenttypes.models import ContentType
 from django.contrib import messages
+from django.contrib.auth.models import User
 from django.core.exceptions import PermissionDenied
 from django.core.urlresolvers import reverse_lazy
 from django.db.models import Q
@@ -19,17 +20,20 @@ from django.views.generic import (
 )
 
 # Third party
+from actstream import action as act
 from braces.views import (
     JSONResponseMixin,
     LoginRequiredMixin,
     SuperuserRequiredMixin,
     UserPassesTestMixin,
 )
+from toggleproperties.models import ToggleProperty
 
 # AstroBin
 from astrobin.forms import (
     ImageDemoteForm,
     ImageFlagThumbsForm,
+    ImagePromoteForm,
     ImageRevisionUploadForm,
     PrivateMessageForm,
 )
@@ -44,6 +48,7 @@ from astrobin.models import (
 from astrobin.utils import to_user_timezone
 
 # AstroBin apps
+from astrobin_apps_notifications.utils import push_notification
 from nested_comments.models import NestedComment
 from rawdata.forms import (
     PublicDataPool_SelectExistingForm,
@@ -726,3 +731,50 @@ class ImageDemoteView(LoginRequiredMixin, UpdateView):
             messages.success(request, _("Image moved to the staging area."))
 
         return super(ImageDemoteView, self).post(request, args, kwargs)
+
+
+class ImagePromoteView(LoginRequiredMixin, UpdateView):
+    form_class = ImagePromoteForm
+    model = Image
+    pk_url_kwarg = 'id'
+    http_method_names = ('post',)
+
+    def get_queryset(self):
+        return self.model.all_objects.all()
+
+    def get_success_url(self):
+        return reverse_lazy('image_detail', args = (self.get_object().pk,))
+
+    def dispatch(self, request, *args, **kwargs):
+        try:
+            image = self.model.all_objects.get(pk = kwargs[self.pk_url_kwarg])
+        except Image.DoesNotExist:
+            raise Http404
+
+        if request.user.is_authenticated() and request.user != image.user:
+            raise PermissionDenied
+
+        return super(ImagePromoteView, self).dispatch(request, *args, **kwargs)
+
+    def post(self, request, *args, **kwargs):
+        image = self.get_object()
+        if image.is_wip:
+            image.is_wip = False
+            image.save()
+
+            followers = [
+                x.user for x in
+                ToggleProperty.objects.toggleproperties_for_object("follow", User.objects.get(pk = request.user.pk))
+            ]
+            push_notification(followers, 'new_image',
+                {
+                    'originator': request.user,
+                    'object_url': settings.ASTROBIN_BASE_URL + image.get_absolute_url()
+                })
+
+            verb = "uploaded a new image"
+            act.send(image.user, verb = verb, action_object = image)
+
+            messages.success(request, _("Image moved to the public area."))
+
+        return super(ImagePromoteView, self).post(request, args, kwargs)

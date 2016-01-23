@@ -41,6 +41,12 @@ class ImageFlagThumbsForm(forms.ModelForm):
         fields = ()
 
 
+class ImagePromoteForm(forms.ModelForm):
+    class Meta:
+        model = Image
+        fields = ()
+
+
 class ImageDemoteForm(forms.ModelForm):
     class Meta:
         model = Image

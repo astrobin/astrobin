@@ -1095,34 +1095,6 @@ def image_edit_save_license(request):
     return HttpResponseRedirect(image.get_absolute_url())
 
 
-# TODO: should be POST
-@login_required
-@require_GET
-def image_promote(request, id):
-    image = get_object_or_404(Image.all_objects, pk=id)
-    if request.user != image.user and not request.user.is_superuser:
-        return HttpResponseForbidden()
-
-    if image.is_wip:
-        image.is_wip = False
-        image.save()
-
-        followers = [
-            x.user for x in
-            ToggleProperty.objects.toggleproperties_for_object("follow", User.objects.get(pk = request.user.pk))
-        ]
-        push_notification(followers, 'new_image',
-            {
-                'originator': request.user,
-                'object_url': settings.ASTROBIN_BASE_URL + image.get_absolute_url()
-            })
-
-        verb = "uploaded a new image"
-        act.send(image.user, verb = verb, action_object = image)
-
-    return HttpResponseRedirect('/%i/' % image.id);
-
-
 @login_required
 @require_GET
 def me(request):
