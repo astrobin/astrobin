@@ -28,6 +28,7 @@ from braces.views import (
 
 # AstroBin
 from astrobin.forms import (
+    ImageDemoteForm,
     ImageFlagThumbsForm,
     ImageRevisionUploadForm,
     PrivateMessageForm,
@@ -693,3 +694,35 @@ class ImageDeleteOriginalView(LoginRequiredMixin, DeleteView):
         messages.success(self.request, _("Revision deleted."));
         # We do not call super, because that would delete the Image
         return HttpResponseRedirect(self.get_success_url())
+
+class ImageDemoteView(LoginRequiredMixin, UpdateView):
+    form_class = ImageDemoteForm
+    model = Image
+    pk_url_kwarg = 'id'
+    http_method_names = ('post',)
+
+    def get_queryset(self):
+        return self.model.all_objects.all()
+
+    def get_success_url(self):
+        return reverse_lazy('image_detail', args = (self.get_object().pk,))
+
+    def dispatch(self, request, *args, **kwargs):
+        try:
+            image = self.model.all_objects.get(pk = kwargs[self.pk_url_kwarg])
+        except Image.DoesNotExist:
+            raise Http404
+
+        if request.user.is_authenticated() and request.user != image.user:
+            raise PermissionDenied
+
+        return super(ImageDemoteView, self).dispatch(request, *args, **kwargs)
+
+    def post(self, request, *args, **kwargs):
+        image = self.get_object()
+        if not image.is_wip:
+            image.is_wip = True
+            image.save()
+            messages.success(request, _("Image moved to the staging area."))
+
+        return super(ImageDemoteView, self).post(request, args, kwargs)

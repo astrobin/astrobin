@@ -1389,7 +1389,7 @@ class ImageTest(TestCase):
         image.delete()
 
     def test_image_demote_view(self):
-        def get_url(args = None):
+        def post_url(args = None):
             return reverse('image_demote', args = args)
 
         # Upload an image
@@ -1400,18 +1400,18 @@ class ImageTest(TestCase):
         # GET with wrong user
         self.client.logout()
         self.client.login(username = 'test2', password = 'password')
-        response = self.client.get(get_url((image.pk,)))
+        response = self.client.post(post_url((image.pk,)))
         self.assertEqual(response.status_code, 403)
         self.client.logout()
         self.client.login(username = 'test', password = 'password')
 
         # Test when image was not WIP
-        response = self.client.get(get_url((image.pk,)))
+        response = self.client.post(post_url((image.pk,)))
         image = Image.all_objects.get(pk = image.pk)
         self.assertEquals(image.is_wip, True)
 
         # Test when image was WIP
-        response = self.client.get(get_url((image.pk,)))
+        response = self.client.post(post_url((image.pk,)))
         image = Image.all_objects.get(pk = image.pk)
         self.assertEquals(image.is_wip, True)
 

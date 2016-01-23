@@ -1125,20 +1125,6 @@ def image_promote(request, id):
 
 @login_required
 @require_GET
-def image_demote(request, id):
-    image = get_object_or_404(Image, pk=id)
-    if request.user != image.user and not request.user.is_superuser:
-        return HttpResponseForbidden()
-
-    if not image.is_wip:
-        image.is_wip = True
-        image.save()
-
-    return HttpResponseRedirect('/%i/' % image.id);
-
-
-@login_required
-@require_GET
 def me(request):
     return HttpResponseRedirect('/users/%s/%s' % (request.user.username, '?staging' if 'staging' in request.GET else ''))
 

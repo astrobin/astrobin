@@ -86,7 +86,7 @@
         </li>
         {% else %}
         <li>
-            <a href="{% url image_demote image.id %}{% query_string "" "plate_solving_started" %}">
+            <a href="#demote-modal" data-toggle="modal">
                 <i class="icon-lock"></i>
                 {% trans "Move to staging area" %}
             </a>
