@@ -29,12 +29,15 @@ class Command(BaseCommand):
             'w'    : Q(w__gte = settings.THUMBNAIL_ALIASES['']['iotd']['size'][0]),
             'h'    : Q(h__gte = settings.THUMBNAIL_ALIASES['']['iotd']['size'][1]),
             'wip'  : Q(is_wip = False),
+            'exclude': Q(user__userprofile__exclude_from_competitions = False),
         }
 
         # First let's get some of the most liked images during the past 7 days.
         while not liked_images:
             liked_images = list(Image.objects.filter(reduce(lambda x, y: x & y, query.values())))
             start = start - timedelta(1)
+            if (end - start).days > 7:
+                break
             query['start'] = Q(uploaded__gte = start)
         liked_images = sorted(liked_images, cmp = compare_images)[:25]
 
@@ -44,6 +47,8 @@ class Command(BaseCommand):
         while not random_images:
             random_images = list(Image.objects.filter(reduce(lambda x, y: x & y, query.values())).order_by('?')[:25])
             start = start - timedelta(1)
+            if (end - start).days > 7:
+                break
             query['start'] = Q(uploaded__gte = start)
 
         # Now remove duplicates, remove past IOTDs, and shuffle everything

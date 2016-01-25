@@ -3,12 +3,20 @@ from datetime import date, timedelta
 
 # Django
 from django.contrib.auth.models import User, Group
+from django.core.exceptions import ValidationError
+from django.core.management import call_command
 from django.core.urlresolvers import reverse
 from django.test import TestCase
 
 # AstroBin
 from astrobin.models import (
-    Image, Acquisition, Telescope, CommercialGear, RetailedGear)
+    Acquisition,
+    CommercialGear,
+    Image,
+    ImageOfTheDayCandidate,
+    RetailedGear,
+    Telescope,
+)
 
 
 class UserTest(TestCase):
@@ -27,6 +35,15 @@ class UserTest(TestCase):
         self.retailers.delete()
         self.payers.delete()
 
+    def _do_upload(self, filename, wip = False):
+        data = {'image_file': open(filename, 'rb')}
+        if wip:
+            data['wip'] = True
+
+        return self.client.post(
+            reverse('image_upload_process'),
+            data,
+            follow = True)
 
     def test_user_page_view(self):
         today = date.today()
@@ -336,3 +353,37 @@ class UserTest(TestCase):
         # TODO: test retailers
 
         self.client.logout()
+
+    def test_user_profile_exclude_from_competitions(self):
+        self.client.login(username = "user", password="password")
+        self._do_upload('astrobin/fixtures/test.jpg')
+        self.client.logout()
+
+        image = Image.all_objects.all()[0]
+
+        # Make the image elibible for IOTD
+        Image.all_objects.filter(pk = image.pk).update(
+            w = 1024, h = 1024,
+            uploaded = date.today() - timedelta(1))
+
+        # Control test
+        call_command('image_of_the_day')
+        self.assertEquals(ImageOfTheDayCandidate.objects.all().count(), 1)
+        ImageOfTheDayCandidate.objects.filter(image = image).delete()
+
+        profile = self.user.userprofile
+        profile.exclude_from_competitions = True
+        profile.save()
+        image = Image.all_objects.get(pk = image.pk)
+
+        # Check that the user's images are not eligible for IOTD
+        with self.assertRaisesMessage(ValidationError, "User is excluded from competitions"):
+            ImageOfTheDayCandidate.objects.get_or_create(image = image, position = 0)
+        call_command('image_of_the_day')
+        self.assertEquals(ImageOfTheDayCandidate.objects.all().count(), 0)
+
+        # Check Index
+        from astrobin.search_indexes import UserIndex
+        userIndex = UserIndex(User)
+        index = userIndex.prepare_normalized_likes(self.user)
+        self.assertEquals(index, -1)

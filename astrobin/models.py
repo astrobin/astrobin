@@ -19,6 +19,7 @@ except ImportError:
 from django.db import models, IntegrityError
 from django.db.models import Q
 from django.contrib.auth.models import User
+from django.core.exceptions import ValidationError
 from django.db.models.signals import post_save
 from django import forms
 from django.utils import translation
@@ -1627,6 +1628,10 @@ class UserProfile(models.Model):
     # Avatar
     avatar = models.CharField(max_length=64, editable=False, null=True, blank=True)
 
+    exclude_from_competitions = models.BooleanField(
+        default = False,
+    )
+
     # Gear
     telescopes = models.ManyToManyField(Telescope, null=True, blank=True, verbose_name=_("Telescopes and lenses"), related_name='telescopes')
     mounts = models.ManyToManyField(Mount, null=True, blank=True, verbose_name=_("Mounts"), related_name='mounts')
@@ -2005,6 +2010,12 @@ class ImageOfTheDayCandidate(models.Model):
         auto_now_add = True)
 
     position = models.PositiveIntegerField()
+
+    def save(self, *args, **kwargs):
+        if self.image.user.userprofile.exclude_from_competitions:
+            raise ValidationError, "User is excluded from competitions"
+
+        super(ImageOfTheDayCandidate, self).save(*args, **kwargs)
 
     class Meta:
         ordering = ['-date', 'position']
