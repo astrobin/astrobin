@@ -2678,7 +2678,7 @@ def user_profile_save_preferences(request):
         # save the notification settings
         email_medium = 0 # see NOTICE_MEDIA in notifications/models.py
         for notice_type in NOTICE_TYPES:
-            if notice_type[3] == 2:
+            if notice_type[3] == 2 and notice_type[0] != 'test_notification':
                 label = notice_type[0]
                 import notification
                 notice_object = notification.models.NoticeType.objects.get(label=label)
