@@ -1,6 +1,6 @@
 {% load i18n %}
 
-{% if iotd_date %}
+{% if iotd_date and not image.user.userprofile.exclude_from_competitions %}
 <div class="iotd-ribbon-container">
     <div class="iotd-ribbon">
         <div class="ribbon-stitches-top"></div>

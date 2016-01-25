@@ -13,6 +13,7 @@ from astrobin.models import (
     Acquisition,
     CommercialGear,
     Image,
+    ImageOfTheDay,
     ImageOfTheDayCandidate,
     RetailedGear,
     Telescope,
@@ -387,3 +388,20 @@ class UserTest(TestCase):
         userIndex = UserIndex(User)
         index = userIndex.prepare_normalized_likes(self.user)
         self.assertEquals(index, -1)
+
+        # Check that the IOTD banner is not visible
+        image = Image.all_objects.get(pk = image.pk)
+        iotd, created = ImageOfTheDay.objects.get_or_create(image = image)
+        ImageOfTheDay.objects.filter(pk = iotd.pk).update(
+            date = date.today() - timedelta(1))
+        response = self.client.get(reverse('image_detail', args = (image.pk,)))
+        self.assertNotContains(response, "iotd-ribbon")
+
+        # Check that the IOTD badge is not visible
+        response = self.client.get(reverse('user_page', args = (self.user.username,)))
+        self.assertNotContains(response, 'iotd-badge')
+
+        # Check that the top100 badge is not visible
+        self.assertNotContains(response, 'top100-badge')
+
+        image.delete()
