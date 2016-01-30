@@ -60,7 +60,7 @@ def push_notification(recipients, notice_type, data):
 
 def get_recent_notifications(user, n = 10):
     notifications = Message.objects.filter(user = user).order_by('-created')
-    if n > 0:
+    if n >= 0:
         notifications = notifications[:n]
     return notifications
 
@@ -68,7 +68,7 @@ def get_recent_notifications(user, n = 10):
 def get_unseen_notifications(user, n = 10):
     notifications =\
         Message.objects.filter(user = user, read = False).order_by('-created')
-    if n > 0:
+    if n >= 0:
         notifications = notifications[:n]
     return notifications
 
@@ -76,6 +76,6 @@ def get_unseen_notifications(user, n = 10):
 def get_seen_notifications(user, n = 10):
     notifications =\
         Message.objects.filter(user = user, read = True).order_by('-created')
-    if n > 0:
+    if n >= 0:
         notifications = notifications[:n]
     return notifications

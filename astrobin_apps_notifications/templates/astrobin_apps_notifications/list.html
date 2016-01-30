@@ -1,25 +1,16 @@
 {% load i18n %}
 
-{% if unseen or seen %}
-    {% for n in unseen %}
-        {% if n.is_persistent %}
-            <li class="unread">
-                {% autoescape off %}{{n.message}}{% endautoescape %}
-            </li>
-        {% endif %}
-    {% endfor %}
-
-    {% if seen %}
-        {% if unseen %}
-            <li class="divider"></li>
-        {% endif %}
-
-        {% for n in seen %}
-            {% if n.is_persistent %}
-                <li>{% autoescape off %}{{n.message}}{% endautoescape %}</li>
-            {% endif %}
-        {% endfor %}
-    {% endif %}
-{% else %}
+{% for n in unseen %}
+    <li class="unread">
+        {% autoescape off %}{{n.message}}{% endautoescape %}
+    </li>
+{% empty %}
     <li><a href="#">{% trans "You have no new notifications." %}</a></li>
-{% endif %}
+{% endfor %}
+
+    <li class="divider"></li>
+    <li>
+        <a href="{% url astrobin_apps_notifications.all %}">
+            {% trans "View all" %}
+        </a>
+    </li>

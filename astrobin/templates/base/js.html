@@ -87,25 +87,6 @@
             searchable: false,
             dividerLocation: 0.5
         });
-
-        $('.notice-container a.notifications').click(function(event) {
-            setTimeout(function() {
-                notifications_mark_seen();
-            }, 1000);
-        });
-
-        var notifications_read_timer = 0;
-        var notifications_mark_seen = function() {
-            $.ajax(
-            {
-                url: '/persistent_messages/mark_read/all/',
-                dataType: 'json',
-                success: function() {
-                    $('#notifications_count').remove();
-                    $('#notifications-popup li.unread').removeClass('unread');
-                }
-            });
-        };
     });
 </script>
 

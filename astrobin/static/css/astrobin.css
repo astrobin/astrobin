@@ -3838,11 +3838,13 @@ th.forum-name {
   margin: 3px 5px;
 }
 .topic-unread a,
-.forum-unread a {
+.forum-unread a,
+.notification-unread a {
   font-weight: bold;
 }
 .topic-unread .state-indicator,
-.forum-unread .state-indicator {
+.forum-unread .state-indicator,
+.notification-unread .state-indicator {
   background-color: #cc4b2e;
 }
 /* --- Moderation --- */
@@ -3881,7 +3883,8 @@ th.forum-name {
   border-radius: 6px;
 }
 .topic-state,
-.forum-status {
+.forum-status,
+.notification-state {
   width: 20px;
 }
 table.post th.post-avatar {

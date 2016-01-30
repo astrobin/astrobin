@@ -113,7 +113,7 @@
         <i class="icon-bell-alt"></i>
     </a>
     <ul class="dropdown-menu" id="notifications-popup">
-        {% notification_list request.user %}
+        {% notification_list request.user 10 0 %}
     </ul>
 </li> <!-- notifications -->
 

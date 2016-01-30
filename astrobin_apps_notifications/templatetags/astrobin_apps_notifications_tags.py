@@ -12,9 +12,9 @@ register = Library()
 
 
 @register.inclusion_tag('astrobin_apps_notifications/list.html')
-def notification_list(user):
-    unseen = get_unseen_notifications(user)
-    seen = get_seen_notifications(user)
+def notification_list(user, unseen_count, seen_count):
+    unseen = get_unseen_notifications(user, unseen_count)
+    seen = get_seen_notifications(user, seen_count)
 
     return {
         'unseen' : unseen,

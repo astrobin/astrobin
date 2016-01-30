@@ -11,4 +11,8 @@ urlpatterns = patterns('',
         r'test-notification/(?P<username>[\w.@+-]+)/$',
         login_required(TestNotificationView.as_view()),
         name = 'astrobin_apps_notifications.test_notification'),
+    url(
+        r'all/$',
+        login_required(NotificationListView.as_view()),
+        name = 'astrobin_apps_notifications.all'),
 )
