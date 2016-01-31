@@ -766,11 +766,27 @@ body.full {
 .navbar .nav > li > a:hover {
   color: #b74329;
 }
+.dropdown-menu > li.notification-item {
+  position: relative;
+}
+.dropdown-menu > li.notification-item a {
+  padding-right: 32px;
+}
 .dropdown-menu > li > a {
   color: #333333;
 }
 .dropdown-menu > li > a strong {
   color: #333333;
+}
+.dropdown-menu > li > a.mark-single-as-read {
+  position: absolute;
+  top: 3px;
+  right: 0;
+  padding: 0px 8px !important;
+  color: #D89D90 !important;
+}
+.dropdown-menu > li > a.mark-single-as-read:hover {
+  background: initial !important;
 }
 .navbar .nav .dropdown-toggle .icon-caret-down,
 .navbar .nav .open.dropdown .icon-caret-down {

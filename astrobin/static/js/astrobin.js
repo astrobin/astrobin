@@ -263,6 +263,38 @@ astrobin_common = {
         });
     },
 
+    mark_notification_as_read: function(notification_id) {
+        // Prevent closing
+        $('#notifications-popup').click(function(event) {
+            event.stopPropagation();
+        });
+
+        $.ajax({
+            url: '/persistent_messages/mark_read/' + notification_id + '/',
+            dataType: 'json',
+            success: function() {
+                var $list_item = $('#notifications-popup li[data-id=' + notification_id + ']'),
+                    $check_mark = $list_item.find('a.mark-single-as-read'),
+                    $tooltip = $list_item.find('.tooltip'),
+                    $count_badge = $('#notifications_count'),
+                    count;
+
+                $list_item.removeClass('unread');
+                $tooltip.remove();
+                $check_mark.remove();
+
+                if ($count_badge.length > 0) {
+                    count = parseInt($count_badge.text());
+                    if (count == 1) {
+                        $count_badge.remove();
+                    } else {
+                        $count_badge.text(count - 1);
+                    }
+                }
+            }
+        });
+    },
+
     init: function(current_username, config) {
         /* Init */
         astrobin_common.globals.current_username = current_username;

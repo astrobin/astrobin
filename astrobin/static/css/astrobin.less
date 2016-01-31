@@ -899,11 +899,31 @@ body.full {
     }
 }
 
+.dropdown-menu > li.notification-item {
+    position: relative;
+
+    a {
+        padding-right: 32px;
+    }
+}
+
 .dropdown-menu > li > a {
     color: @background-color;
 
     strong {
         color: @background-color;
+    }
+
+    &.mark-single-as-read {
+        position: absolute;
+        top: 3px;
+        right: 0;
+        padding: 0px 8px !important;
+        color: #D89D90 !important;
+
+        &:hover {
+            background: initial !important;
+        }
     }
 }
 

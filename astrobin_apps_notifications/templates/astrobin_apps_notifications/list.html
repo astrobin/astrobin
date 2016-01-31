@@ -1,8 +1,17 @@
 {% load i18n %}
 
 {% for n in unseen %}
-    <li class="unread">
+    <li class="notification-item unread" data-id="{{n.pk}}">
         {% autoescape off %}{{n.message}}{% endautoescape %}
+        <a
+            href="#"
+            onclick="astrobin_common.mark_notification_as_read({{n.pk}}); return false;"
+            rel="tooltip"
+            data-placement="right"
+            title="{% trans "Mark as read" %}"
+            class="mark-single-as-read">
+            <i class="icon icon-ok"></i>
+        </a>
     </li>
 {% empty %}
     <li><a href="#">{% trans "You have no new notifications." %}</a></li>
