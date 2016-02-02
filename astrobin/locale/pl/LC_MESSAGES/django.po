@@ -8,7 +8,7 @@ msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2016-01-07 11:23+0000\n"
-"PO-Revision-Date: 2016-01-01 11:15+0000\n"
+"PO-Revision-Date: 2016-02-01 13:25+0000\n"
 "Last-Translator: Lukasz83 <lukasz.sujka83@gmail.com>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
 "Language: pl\n"
@@ -18,7 +18,7 @@ msgstr ""
 "Plural-Forms: nplurals=3; plural=(n==1 ? 0 : n%10>=2 && n%10<=4 && (n%100<10 "
 "|| n%100>=20) ? 1 : 2);\n"
 "X-Generator: Pootle 2.5.0\n"
-"X-POOTLE-MTIME: 1451646916.948367\n"
+"X-POOTLE-MTIME: 1454333125.56491\n"
 
 #: fields.py:10
 msgid "United Kingdom"
@@ -2589,7 +2589,6 @@ msgid "Number of images by subject type"
 msgstr "Liczba zdjęć według typu obiektu"
 
 #: views.py:183 views.py:611
-#, fuzzy
 msgid "Imaging telescope or lens"
 msgid_plural "Imaging telescopes or lenses"
 msgstr[0] "Teleskop główny"
@@ -2597,7 +2596,6 @@ msgstr[1] "Teleskop główny"
 msgstr[2] "Teleskop główny"
 
 #: views.py:187 views.py:615
-#, fuzzy
 msgid "Imaging camera"
 msgid_plural "Imaging cameras"
 msgstr[0] "Kamery główne"
@@ -2605,7 +2603,6 @@ msgstr[1] "Kamery główne"
 msgstr[2] "Kamery główne"
 
 #: views.py:191 views.py:619
-#, fuzzy
 msgid "Mount"
 msgid_plural "Mounts"
 msgstr[0] "Montaże"
@@ -2613,7 +2610,6 @@ msgstr[1] "Montaże"
 msgstr[2] "Montaże"
 
 #: views.py:195 views.py:623
-#, fuzzy
 msgid "Guiding telescope or lens"
 msgid_plural "Guiding telescopes or lenses"
 msgstr[0] "Teleskop prowadzący"
@@ -2621,7 +2617,6 @@ msgstr[1] "Teleskop prowadzący"
 msgstr[2] "Teleskop prowadzący"
 
 #: views.py:199 views.py:627
-#, fuzzy
 msgid "Guiding camera"
 msgid_plural "Guiding cameras"
 msgstr[0] "Kamera guidująca, prowadząca"
@@ -2629,7 +2624,6 @@ msgstr[1] "Kamera guidująca, prowadząca"
 msgstr[2] "Kamera guidująca, prowadząca"
 
 #: views.py:203 views.py:631
-#, fuzzy
 msgid "Focal reducer"
 msgid_plural "Focal reducers"
 msgstr[0] "Reduktory ogniskowej"
@@ -2637,7 +2631,6 @@ msgstr[1] "Reduktory ogniskowej"
 msgstr[2] "Reduktory ogniskowej"
 
 #: views.py:212 views.py:640
-#, fuzzy
 msgid "Accessory"
 msgid_plural "Accessories"
 msgstr[0] "Akcesoria"
@@ -2645,7 +2638,6 @@ msgstr[1] "Akcesoria"
 msgstr[2] "Akcesoria"
 
 #: views.py:500
-#, fuzzy
 msgid "Today's 'Image of the day' was already chosen. Come back tomorrow!"
 msgstr "'Zdjęcie dnia' zostało już wybrane. Proszę wróć tu jutro!"
 
@@ -3440,7 +3432,6 @@ msgid "What is forbidden"
 msgstr "Co jest zabronione"
 
 #: templates/guidelines.html:31
-#, fuzzy
 msgid "Don't upload anything that you did not work on."
 msgstr "Nie publikuj zdjęć, do których nie posiadasz praw autorskich."
 
@@ -3454,6 +3445,14 @@ msgid ""
 "available data from NASA and other similar agencies; post-processing a "
 "friend's data; post-processing free data made available by other users."
 msgstr ""
+"To proste: jeśli nie zrobiłeś lub nie obrobiłeś zdjęcia sam, wtedy nie "
+"publikuj go na AstroBin. Nie wolno również publikować zdjęć innych osób do "
+"których nie mamy praw autorskich lub zgody właściciela oraz zdjęć NASA (lub "
+"innych agencji) jeżeli nie były one obrobione przez Ciebie. Możesz "
+"publikować zdjęcia stworzone i obrobione przez Ciebie na podstawie "
+"ogólnodostępnych surowych danych NASA lub podobnych agencji oraz zdjęcia "
+"stworzone przez Ciebie z surowych danych przyjaciół lub innych użytkowników "
+"AstroBin (tylko ogólnodostępne dane)"
 
 #: templates/guidelines.html:35
 msgid "No nudity, no explicitly sexual content, no illegal content."
@@ -6272,8 +6271,7 @@ msgstr "%(user)s polubił Twoje zdjęcie: %(url)s"
 #: templates/notification/new_like/short.html:2
 #, python-format
 msgid "<a href=\"%(url)s\"><strong>%(user)s</strong> likes your image!</a>"
-msgstr ""
-"<a href=\"%(url)s\"><strong>%(user)s</strong> skomentował Twoje zdjęcie!</a>"
+msgstr "<a href=\"%(url)s\"><strong>%(user)s</strong> lubi Twoje zdjęcie!</a>"
 
 #: templates/notification/rawdata_invited_to_private_folder/full.txt:2
 #, python-format
@@ -7035,6 +7033,10 @@ msgid ""
 "subscribed, please wait a few minutes while PayPal contacts our server for "
 "the final transaction confirmation. Thank you!"
 msgstr ""
+"Twoja subskrypcja została wyłączona lub jeszcze nie jest aktywna. Jeśli "
+"chcesz ponownie uruchomić subskrypcję poczekaj aż bieżąca wygaśnie. Jeśli "
+"przed chwilą uruchomiłeś subskrypcję poczekaj kilka minut aż otrzymamy "
+"potwierdzenie z serwisu PayPal. Dziękujemy!"
 
 #: templates/subscription/subscription_detail.html:124
 msgid "By cancelling, you will revert to a free plan."

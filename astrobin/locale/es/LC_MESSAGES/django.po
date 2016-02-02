@@ -7,7 +7,7 @@ msgstr ""
 "Project-Id-Version: AstroBin 1.0\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2016-01-07 11:21+0000\n"
-"PO-Revision-Date: 2016-01-03 15:35+0000\n"
+"PO-Revision-Date: 2016-01-20 07:24+0000\n"
 "Last-Translator: PepeChambo <jjchambo@hotmail.com>\n"
 "Language-Team: Pepe Chambó <jjchambo@hotmail.com>\n"
 "Language: es\n"
@@ -16,7 +16,7 @@ msgstr ""
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=(n != 1);\n"
 "X-Generator: Pootle 2.5.0\n"
-"X-POOTLE-MTIME: 1451835348.612769\n"
+"X-POOTLE-MTIME: 1453274654.42709\n"
 
 #: fields.py:10
 msgid "United Kingdom"
@@ -2598,56 +2598,48 @@ msgid "Number of images by subject type"
 msgstr "Número de imágenes por tipo de objeto"
 
 #: views.py:183 views.py:611
-#, fuzzy
 msgid "Imaging telescope or lens"
 msgid_plural "Imaging telescopes or lenses"
-msgstr[0] "Telescopios u objetivos"
+msgstr[0] "Telescopio u objetivo"
 msgstr[1] "Telescopios u objetivos"
 
 #: views.py:187 views.py:615
-#, fuzzy
 msgid "Imaging camera"
 msgid_plural "Imaging cameras"
-msgstr[0] "Cámaras fotográficas o CCD"
-msgstr[1] "Cámaras fotográficas o CCD"
+msgstr[0] "Cámara fotográfica"
+msgstr[1] "Cámaras fotográficas"
 
 #: views.py:191 views.py:619
-#, fuzzy
 msgid "Mount"
 msgid_plural "Mounts"
-msgstr[0] "Monturas"
+msgstr[0] "Montura"
 msgstr[1] "Monturas"
 
 #: views.py:195 views.py:623
-#, fuzzy
 msgid "Guiding telescope or lens"
 msgid_plural "Guiding telescopes or lenses"
-msgstr[0] "Telescopios u objetivos de guiado"
+msgstr[0] "Telescopio u objetivo de guiado"
 msgstr[1] "Telescopios u objetivos de guiado"
 
 #: views.py:199 views.py:627
-#, fuzzy
 msgid "Guiding camera"
 msgid_plural "Guiding cameras"
-msgstr[0] "Cámaras de guiado"
+msgstr[0] "Cámara de guiado"
 msgstr[1] "Cámaras de guiado"
 
 #: views.py:203 views.py:631
-#, fuzzy
 msgid "Focal reducer"
 msgid_plural "Focal reducers"
-msgstr[0] "Reductores de focal"
+msgstr[0] "Reductor de focal"
 msgstr[1] "Reductores de focal"
 
 #: views.py:212 views.py:640
-#, fuzzy
 msgid "Accessory"
 msgid_plural "Accessories"
-msgstr[0] "Accesorios"
+msgstr[0] "Accesorio"
 msgstr[1] "Accesorios"
 
 #: views.py:500
-#, fuzzy
 msgid "Today's 'Image of the day' was already chosen. Come back tomorrow!"
 msgstr "La \"Imagen del día\" de hoy ya ha sido seleccionada. ¡Regresa mañana!"
 
@@ -3451,7 +3443,6 @@ msgid "What is forbidden"
 msgstr "Qué está prohibido"
 
 #: templates/guidelines.html:31
-#, fuzzy
 msgid "Don't upload anything that you did not work on."
 msgstr "No subas nada de lo que no seas el titular de sus derechos de autor."
 
@@ -3465,6 +3456,13 @@ msgid ""
 "available data from NASA and other similar agencies; post-processing a "
 "friend's data; post-processing free data made available by other users."
 msgstr ""
+"Esto es así de simple: No subas imágenes que no hayas obtenido o procesado "
+"por ti mismo. Otras que no deberías incluir: publicar imágenes de otros "
+"autores sin modificaciones significativas y/o sin el consentimiento de sus "
+"autores; publicar imágenes de la NASA (u otras agencias) sin modificaciones "
+"significativas. Imágenes que sí podrías incluir: procesados de datos libres "
+"de la NASA u otras agencias similares; procesados de datos de amigos o "
+"puestos a disposición por otros usuarios, siempre con su consentimiento."
 
 #: templates/guidelines.html:35
 msgid "No nudity, no explicitly sexual content, no illegal content."
@@ -6945,7 +6943,6 @@ msgid "months"
 msgstr "meses"
 
 #: templates/subscription/subscription_category_list.html:59
-#, fuzzy
 msgid "years"
 msgstr "años"
 
@@ -7000,7 +6997,6 @@ msgid "Expires"
 msgstr "Caducidad"
 
 #: templates/subscription/subscription_detail.html:54
-#, fuzzy
 msgid "Unsubscribed"
 msgstr "No suscrito"
 
@@ -7043,6 +7039,10 @@ msgid ""
 "We will keep them neatly organized, and you will have a safe backup of all "
 "your work, including calibration files."
 msgstr ""
+"<strong>AstroBin Datos Raw</strong> te permite guardar tus archivos crudos "
+"(<strong>FIT</strong> y <strong> RAW de cámara digital</strong>) en "
+"AstroBin. Los mantendremos perfectamente organizados, así tendrás una copia "
+"de seguridad de todo tu trabajo incluyendo los archivos de calibración."
 
 #: templates/subscription/subscription_detail.html:82
 #: templates/subscription/subscription_list.html:42
@@ -7050,15 +7050,15 @@ msgstr ""
 msgid ""
 "Learn more by reading <a href=\"%(rawdata_url)s\">a short introduction.</a>"
 msgstr ""
+"Aprende más leyendo <a href=\"%(rawdata_url)s\">una breve introducción.</a>"
 
 #: templates/subscription/subscription_detail.html:93
 msgid "Here you can deactivate your free Raw Data Atom subscription."
-msgstr ""
+msgstr "Aquí puedes desactivar tu suscripción a Atom Datos Raw."
 
 #: templates/subscription/subscription_detail.html:98
-#, fuzzy
 msgid "Deactivate"
-msgstr "Activada"
+msgstr "Desactivar"
 
 #: templates/subscription/subscription_detail.html:112
 msgid ""
@@ -7067,10 +7067,14 @@ msgid ""
 "subscribed, please wait a few minutes while PayPal contacts our server for "
 "the final transaction confirmation. Thank you!"
 msgstr ""
+"Tu suscripción está cancelada o no está activa aún. Si quieres suscribirte "
+"otra vez, por favor espera hasta que tu suscripción haya finalizado. Si te "
+"acabas de suscribir, espera unos minutos mientras PayPal contacta con "
+"nuestro servidor para confirmar la transacción. ¡Gracias!"
 
 #: templates/subscription/subscription_detail.html:124
 msgid "By cancelling, you will revert to a free plan."
-msgstr ""
+msgstr "Al cancelar, regresaras a un plan gratuito."
 
 #: templates/subscription/subscription_detail.html:125
 #, python-format
@@ -7095,13 +7099,11 @@ msgstr "Cancelar via PayPal"
 
 #: templates/subscription/subscription_detail.html:144
 #: templates/subscription/subscription_detail.html:201
-#, fuzzy
 msgid "Here you can activate your free Raw Data Atom subscription."
-msgstr "Aquí puedes activar tu suscripción gratuita Atom de Datos Raw."
+msgstr "Aquí puedes activar tu suscripción gratuita a Atom Datos Raw."
 
 #: templates/subscription/subscription_detail.html:149
 #: templates/subscription/subscription_detail.html:210
-#, fuzzy
 msgid "Activate"
 msgstr "Activar"
 
