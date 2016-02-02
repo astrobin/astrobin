@@ -46,7 +46,7 @@ class NotificationsTest(TestCase):
         self.client.logout()
         self.client.login(username = 'user2', password = 'password')
 
-        response = notification_list(self.user2)
+        response = notification_list(self.user2, -1, -1)
         self.assertEquals(len(response['unseen']), 1)
         self.assertEquals(response['unseen'][0], get_unseen_notifications(self.user2)[0])
         self.assertEquals(len(response['seen']), 0)
