@@ -2,10 +2,13 @@
 import time
 
 # Django
-from django.contrib.auth.models import User
+from django.contrib.auth.models import Group, User
 from django.contrib.contenttypes.models import ContentType
 from django.core.urlresolvers import reverse
 from django.test import TestCase
+
+# Third party
+from subscription.models import Subscription, UserSubscription
 
 # AstroBin
 from astrobin.models import (
@@ -372,6 +375,35 @@ class ImageTest(TestCase):
         self.assertEqual(response.status_code, 200)
         self.assertEqual(response.context[0]['image_type'], 'solar_system')
         ssa.delete()
+
+        # Test whether the Like button is active: image owner can't like
+        response = self.client.get(reverse('image_detail', kwargs = {'id': image.id}))
+        self.assertEqual(response.context[0]['user_can_like'], False)
+
+        # Test whether the Like button is active: index 0 can't like
+        self.client.logout()
+        self.client.login(username = 'test2', password = 'password')
+        response = self.client.get(reverse('image_detail', kwargs = {'id': image.id}))
+        self.assertEqual(response.context[0]['user_can_like'], False)
+
+        # Test whether the Like button is active: index 0 but Premium can like
+        g, created = Group.objects.get_or_create(name = "premium")
+        s, created = Subscription.objects.get_or_create(
+            name = "AstroBin Premium",
+            price = 1,
+            group = g,
+            category = "premium")
+        us, created = UserSubscription.objects.get_or_create(
+            user = self.user2,
+            subscription = s)
+        us.subscribe()
+        response = self.client.get(reverse('image_detail', kwargs = {'id': image.id}))
+        self.assertEqual(response.context[0]['user_can_like'], True)
+
+        us.unsubscribe()
+        us.delete()
+        s.delete()
+        g.delete()
 
         image.delete()
 

@@ -867,6 +867,19 @@ def image_detail(request, id, r):
         image_prev = image_prev[0]
 
 
+    ########
+    # LIKE #
+    ########
+    from astrobin.context_processors import user_scores
+    from astrobin_apps_premium.templatetags.astrobin_apps_premium_tags import is_free
+    user_scores_index = user_scores(request)['user_scores_index']
+    min_index_to_like = 1.00
+    user_can_like = (
+        request.user != image.user and
+        (user_scores_index < 0 or user_scores_index >= min_index_to_like) or
+        not is_free(request.user))
+
+
     #################
     # RESPONSE DICT #
     #################
@@ -889,8 +902,9 @@ def image_detail(request, id, r):
 
         'image_ct': ContentType.objects.get_for_model(Image),
         'like_this': like_this,
+        'user_can_like': user_can_like,
         'bookmarked_this': bookmarked_this,
-        'min_index_to_like': 1.00,
+        'min_index_to_like': min_index_to_like,
 
         'comments_number': NestedComment.objects.filter(
             deleted = False,
