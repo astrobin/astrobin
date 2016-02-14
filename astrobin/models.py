@@ -1009,7 +1009,8 @@ class Image(HasSolutionMixin, models.Model):
             field,
             alias)
 
-        return cache_key
+        from hashlib import sha256
+        return sha256(cache_key).hexdigest()
 
 
     def thumbnail(self, alias, thumbnail_settings = {}):
