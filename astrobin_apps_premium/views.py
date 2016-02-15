@@ -55,7 +55,7 @@ class MigrateDonationsView(FormView):
 
             transactions = Transaction.objects.filter(
                 user = self.request.user,
-                subscription__name__in = donation_utils.SUBSCRIPTION_NAMES,
+                subscription__name__in = list(donation_utils.SUBSCRIPTION_NAMES) + ['AstroBin Donor'],
                 event = "subscription payment",
                 timestamp__year = date.today().year - 1).order_by('-timestamp')
 
