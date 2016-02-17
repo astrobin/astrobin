@@ -23,3 +23,12 @@
             {% trans "View all" %}
         </a>
     </li>
+    {% if unseen %}
+     <li>
+        <a
+            href="#"
+            onclick="astrobin_common.mark_all_notifications_as_read(); return false;">
+            {% trans "Mark all as read" %}
+        </a>
+    </li>
+    {% endif %}
