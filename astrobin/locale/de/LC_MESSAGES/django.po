@@ -8,7 +8,7 @@ msgstr ""
 "Project-Id-Version: AstroBin 1.4\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2016-01-07 11:20+0000\n"
-"PO-Revision-Date: 2016-01-04 22:36+0000\n"
+"PO-Revision-Date: 2016-02-07 22:29+0000\n"
 "Last-Translator: Niels <astrobin.com@n13l5.de>\n"
 "Language-Team: German <LL@li.org>\n"
 "Language: de\n"
@@ -17,7 +17,7 @@ msgstr ""
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=(n != 1);\n"
 "X-Generator: Pootle 2.5.0\n"
-"X-POOTLE-MTIME: 1451946998.261985\n"
+"X-POOTLE-MTIME: 1454884177.116022\n"
 
 #: fields.py:10
 msgid "United Kingdom"
@@ -2605,56 +2605,48 @@ msgid "Number of images by subject type"
 msgstr "Anzahl Bilder nach Objekttyp"
 
 #: views.py:183 views.py:611
-#, fuzzy
 msgid "Imaging telescope or lens"
 msgid_plural "Imaging telescopes or lenses"
-msgstr[0] "Teleskop oder Objektiv (Aufnahme)"
+msgstr[0] "Aufnahmeteleskop oder -objektiv"
 msgstr[1] "Teleskop oder Objektiv (Aufnahme)"
 
 #: views.py:187 views.py:615
-#, fuzzy
 msgid "Imaging camera"
 msgid_plural "Imaging cameras"
 msgstr[0] "Aufnahmekamera"
 msgstr[1] "Aufnahmekamera"
 
 #: views.py:191 views.py:619
-#, fuzzy
 msgid "Mount"
 msgid_plural "Mounts"
 msgstr[0] "Montierung"
-msgstr[1] "Montierung"
+msgstr[1] "Montierungen"
 
 #: views.py:195 views.py:623
-#, fuzzy
 msgid "Guiding telescope or lens"
 msgid_plural "Guiding telescopes or lenses"
-msgstr[0] "Teleskop oder Objektiv (Nachführung)"
-msgstr[1] "Teleskop oder Objektiv (Nachführung)"
+msgstr[0] "Guidingteleskop oder -objektiv"
+msgstr[1] "Guidingteleskope oder -objektive"
 
 #: views.py:199 views.py:627
-#, fuzzy
 msgid "Guiding camera"
 msgid_plural "Guiding cameras"
 msgstr[0] "Nachführkamera"
-msgstr[1] "Nachführkamera"
+msgstr[1] "Nachführkameras"
 
 #: views.py:203 views.py:631
-#, fuzzy
 msgid "Focal reducer"
 msgid_plural "Focal reducers"
 msgstr[0] "Brennweitenreduzierung"
-msgstr[1] "Brennweitenreduzierung"
+msgstr[1] "Brennweitenreduzierungen"
 
 #: views.py:212 views.py:640
-#, fuzzy
 msgid "Accessory"
 msgid_plural "Accessories"
 msgstr[0] "Zubehör"
 msgstr[1] "Zubehör"
 
 #: views.py:500
-#, fuzzy
 msgid "Today's 'Image of the day' was already chosen. Come back tomorrow!"
 msgstr ""
 "Das heutige 'Bild des Tages' wurde bereits ausgewählt. Komm morgen wieder!"
@@ -2723,7 +2715,6 @@ msgstr ""
 "Lesen Modus. Bitte versuche es später noch einmal!"
 
 #: views.py:1129 views.py:2853
-#, fuzzy
 msgid ""
 "You uploaded an Indexed PNG file. AstroBin will need to lower the color "
 "count to 256 in order to work with it."
@@ -2732,13 +2723,12 @@ msgstr ""
 "auf 256 verringert, damit AstroBin damit arbeiten kann."
 
 #: views.py:1385 views.py:1414 views.py:1474 views.py:2418
-#, fuzzy
 msgid ""
 "There was one or more errors processing the form. You may need to scroll "
 "down to see them."
 msgstr ""
-"Es sind ein oder mehrer Fehler bei der Bearbeitung des Formulars "
-"aufgetreten. Möglicherweise musst du nach unten scrollen, um diese zu sehen."
+"Es sind Fehler bei der Bearbeitung des Formulars aufgetreten. Möglicherweise "
+"musst du nach unten scrollen, um diese zu sehen."
 
 #: views.py:1396 views.py:1485 views.py:1569 views.py:1595 views.py:2267
 #: views.py:2280 views.py:2301 views.py:2338 views.py:2428 views.py:2490
@@ -2878,7 +2868,6 @@ msgid "Your image was bookmarked"
 msgstr "Dein Bild wurde als Favorit markiert"
 
 #: management/__init__.py:75
-#, fuzzy
 msgid "Your image was liked"
 msgstr "Dein Bild wurde geliked"
 
@@ -2907,7 +2896,6 @@ msgid "New data posted to public pool"
 msgstr "Die neuen Daten wurden im öffentlichen Bereich publiziert."
 
 #: management/__init__.py:117
-#, fuzzy
 msgid "New image posted to public data pool"
 msgstr "Neues Bild im Public Data Pool"
 
@@ -3471,7 +3459,6 @@ msgid "What is forbidden"
 msgstr "Was verboten ist"
 
 #: templates/guidelines.html:31
-#, fuzzy
 msgid "Don't upload anything that you did not work on."
 msgstr "Lade keine Bilder hoch, deren Rechte nicht bei Dir liegen."
 
