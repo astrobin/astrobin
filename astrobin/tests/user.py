@@ -39,7 +39,7 @@ class UserTest(TestCase):
     def _get_last_image(self):
         return Image.all_objects.all().order_by('-id')[0]
 
-    def _do_upload(self, filename, title, wip = False):
+    def _do_upload(self, filename, title = "TEST IMAGE", wip = False):
         data = {'image_file': open(filename, 'rb')}
         if wip:
             data['wip'] = True
