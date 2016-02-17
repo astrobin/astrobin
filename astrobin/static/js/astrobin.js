@@ -295,6 +295,26 @@ astrobin_common = {
         });
     },
 
+    mark_all_notifications_as_read: function() {
+        // Prevent closing
+        $('#notifications-popup').click(function(event) {
+            event.stopPropagation();
+        });
+
+        $.ajax({
+            url: '/persistent_messages/mark_read/all/',
+            dataType: 'json',
+            success: function() {
+                $('#notifications-popup li').removeClass('unread');
+                $('#notifications-popup li a.mark-single-as-read').remove();
+                $('#notifications-popup li .tooltip').remove();
+                $('#notifications_count').remove();
+
+            }
+        });
+    },
+
+
     init: function(current_username, config) {
         /* Init */
         astrobin_common.globals.current_username = current_username;
