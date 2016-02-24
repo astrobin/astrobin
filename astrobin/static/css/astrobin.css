@@ -1975,6 +1975,8 @@ div.capty-target .capty-caption-content .link-overlay a {
 .subtle-container .header h4 {
   margin: 0;
   display: inline;
+  text-overflow: clip;
+  white-space: nowrap;
 }
 .subtle-container .header h4 i {
   margin-right: 8px;
@@ -3556,6 +3558,7 @@ ul.astrobin-users li {
 .user-card-inline {
   margin: 0 11px 11px 0;
   width: 194px;
+  height: 230px;
 }
 .astrobin-users.user-list-mini li {
   float: none;
