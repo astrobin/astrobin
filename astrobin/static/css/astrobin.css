@@ -772,6 +772,15 @@ body.full {
 .dropdown-menu > li.notification-item a {
   padding-right: 32px;
 }
+.dropdown-menu > li.mark-all-as-read-container {
+  position: relative;
+}
+.dropdown-menu > li.mark-all-as-read-container .mark-all-as-read-spinner {
+  position: absolute;
+  top: 2px;
+  right: 6px;
+  display: none;
+}
 .dropdown-menu > li > a {
   color: #333333;
 }

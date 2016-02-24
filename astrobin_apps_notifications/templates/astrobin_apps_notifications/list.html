@@ -1,4 +1,5 @@
 {% load i18n %}
+{% load static %}
 
 {% for n in unseen %}
     <li class="notification-item unread" data-id="{{n.pk}}">
@@ -24,11 +25,14 @@
         </a>
     </li>
     {% if unseen %}
-     <li>
+     <li class="mark-all-as-read-container">
         <a
             href="#"
             onclick="astrobin_common.mark_all_notifications_as_read(); return false;">
             {% trans "Mark all as read" %}
         </a>
+        <span class="mark-all-as-read-spinner">
+            <img src="{% get_static_prefix %}images/ajax-loader-highlight-bg.gif" alt=""/>
+        </span>
     </li>
     {% endif %}

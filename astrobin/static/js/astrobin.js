@@ -301,15 +301,18 @@ astrobin_common = {
             event.stopPropagation();
         });
 
+        $('#notifications-popup .mark-all-as-read-spinner').show();
+
         $.ajax({
             url: '/persistent_messages/mark_read/all/',
             dataType: 'json',
+            timeout: 5000,
             success: function() {
                 $('#notifications-popup li').removeClass('unread');
                 $('#notifications-popup li a.mark-single-as-read').remove();
                 $('#notifications-popup li .tooltip').remove();
                 $('#notifications_count').remove();
-
+                $('#notifications-popup .mark-all-as-read-spinner').hide();
             }
         });
     },
