@@ -3468,7 +3468,6 @@ table#private-shared-folders tr:hover a.delete-folder {
   background: rgba(0, 0, 0, 0.65);
   position: absolute;
   bottom: 12px;
-  width: 182px;
 }
 #profile-details ul {
   list-style: none;
@@ -3555,54 +3554,36 @@ ul.astrobin-users li {
   margin-top: 12px;
 }
 .user-card-inline {
-  margin: 0 32px 32px 0;
+  margin: 0 11px 11px 0;
+  width: 194px;
 }
-.user-card-inline .avatar {
-  float: left;
-}
-.user-card-inline #profile-details {
-  float: left;
-  margin-top: 0;
-  margin-left: 16px;
-}
-.user-card-inline #profile-details li {
-  padding: 0;
-}
-.user-card-inline #profile-details li a {
-  padding-top: 0;
-  padding-bottom: 0;
-}
-.user-card-inline #profile-details li .property-follow {
-  float: left;
-  margin: 4px 8px 0 12px;
-}
-.astrobin-users.user-list li {
+.astrobin-users.user-list-mini li {
   float: none;
   width: 100%;
   overflow: hidden;
   padding: 10px 0;
   border-bottom: 1px solid #404040;
 }
-.astrobin-users.user-list li .user-list-item {
+.astrobin-users.user-list-mini li .user-list-item {
   position: relative;
 }
-.astrobin-users.user-list li .user-list-item .avatar {
+.astrobin-users.user-list-mini li .user-list-item .avatar {
   float: left;
   margin-right: 16px;
 }
-.astrobin-users.user-list li .user-list-item .name {
+.astrobin-users.user-list-mini li .user-list-item .name {
   font-weight: bold;
 }
-.astrobin-users.user-list li .user-list-item .info {
+.astrobin-users.user-list-mini li .user-list-item .info {
   color: #777;
   font-size: 90%;
 }
-.astrobin-users.user-list li .user-list-item .follow {
+.astrobin-users.user-list-mini li .user-list-item .follow {
   position: absolute;
   right: 4px;
   top: 10px;
 }
-.astrobin-users.user-list li:last-child {
+.astrobin-users.user-list-mini li:last-child {
   border-bottom: none;
 }
 #upload-revision-form .spinner {
