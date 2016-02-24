@@ -16,8 +16,6 @@ class TogglePropertyUsersAjaxView(base.View):
         object_id = kwargs.pop('object_id')
         content_type = ContentType.objects.get_for_id(kwargs.pop('content_type_id'))
 
-        print property_type, object_id, content_type
-
         users = [x.user for x in ToggleProperty.objects.filter(
             property_type = property_type,
             object_id = object_id,
