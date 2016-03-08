@@ -107,8 +107,9 @@ class MigrateDonationsView(FormView):
         us, created = UserSubscription.objects.get_or_create(
             user = self.request.user,
             subscription = premium_sub,
+            active = True,
             expires = migration_data["expiration"],
-            cancelled = False)
+            cancelled = True)
         us.fix()
 
         return super(MigrateDonationsView, self).form_valid(form)
