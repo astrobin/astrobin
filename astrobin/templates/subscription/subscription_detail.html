@@ -128,8 +128,9 @@
                     {% endif %} <!-- if premium -->
 
                     <div class="well text-center">
-                        <a class="btn btn-danger btn-large" href="{{cancel_url}}">
-                            {% trans "Cancel via PayPal" %}
+                        <a href="{{cancel_url}}">
+                            <img src="https://www.paypalobjects.com/en_US/i/btn/btn_unsubscribe_LG.gif"
+                            alt="{% trans "Cacel via PayPal" %}"/>
                         </a>
                     </div>
                 {% endif %} <!-- if cancelled -->

@@ -62,9 +62,9 @@ def remove_ads_modal(context):
 @register.inclusion_tag('astrobin_apps_donations/inclusion_tags/cancel_modal.html', takes_context = True)
 def cancel_donation_modal(context):
     if settings.PAYPAL_TEST:
-        cancel_url = 'https://www.sandbox.paypal.com/cgi-bin/webscr?cmd=_subscr-find&alias=%s' % urllib.quote(settings.PAYPAL_RECEIVER_EMAIL)
+        cancel_url = 'https://www.sandbox.paypal.com/cgi-bin/webscr?cmd=_subscr-find&alias=%s' % settings.PAYPAL_MERCHANT_ID
     else:
-        cancel_url = 'https://www.paypal.com/cgi-bin/webscr?cmd=_subscr-find&alias=%s' % urllib.quote(settings.PAYPAL_RECEIVER_EMAIL)
+        cancel_url = 'https://www.paypal.com/cgi-bin/webscr?cmd=_subscr-find&alias=%s' % settings.PAYPAL_MERCHANT_ID
 
     return {
         'request': context['request'],

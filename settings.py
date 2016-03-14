@@ -492,6 +492,9 @@ if PAYPAL_TEST:
 else:
     PAYPAL_RECEIVER_EMAIL = 'salvatore.iovene@gmail.com'
 
+# Used for the "Cancel subscription" link
+PAYPAL_MERCHANT_ID = os.environ['ASTROBIN_PAYPAL_MERCHANT_ID']
+
 SUBSCRIPTION_GRACE_PERIOD = 7
 SUBSCRIPTION_PAYPAL_SETTINGS = {
     "business": PAYPAL_RECEIVER_EMAIL,
