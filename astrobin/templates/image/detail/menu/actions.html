@@ -138,6 +138,16 @@
                 {% trans "Bring to a user's attention" %}
             </a>
         </li>
+
+        {% if request.user == image.user or request.user.is_superuser %}
+        <li class="divider"></li>
+        <li>
+            <a data-toggle="modal" href="#flag-thumbnails-modal">
+                <i class="icon-flag"></i>
+                {% trans "Flag malfunctioning thumbnails" %}
+            </a>
+        </li>
+        {% endif %}
      </ul>
  </li> <!-- actions -->
 
