@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2016-01-07 11:27+0000\n"
+"POT-Creation-Date: 2016-04-05 10:37+0100\n"
 "PO-Revision-Date: 2014-01-23 17:23+0000\n"
 "Last-Translator: kookoo_gr <kookoo_gr@yahoo.com>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -20,13 +20,13 @@ msgstr ""
 "X-POOTLE-MTIME: 1390497784.130323\n"
 
 #: templates/astrobin_apps_users/inclusion_tags/astrobin_user.html:55
-#: templates/astrobin_apps_users/inclusion_tags/astrobin_user.html:93
+#: templates/astrobin_apps_users/inclusion_tags/astrobin_user.html:99
 #: templates/astrobin_apps_users/inclusion_tags/user_list.html:7
 msgid "Images"
 msgstr "Εικόνες"
 
 #: templates/astrobin_apps_users/inclusion_tags/astrobin_user.html:56
-#: templates/astrobin_apps_users/inclusion_tags/astrobin_user.html:96
+#: templates/astrobin_apps_users/inclusion_tags/astrobin_user.html:102
 #: templates/astrobin_apps_users/inclusion_tags/user_list.html:8
 msgid "Followers"
 msgstr "Θαυμαστές"
@@ -36,14 +36,14 @@ msgstr "Θαυμαστές"
 msgid "Following"
 msgstr "Ακολουθείτε"
 
-#: templates/astrobin_apps_users/inclusion_tags/astrobin_user.html:132
+#: templates/astrobin_apps_users/inclusion_tags/astrobin_user.html:138
 #, python-format
 msgid "%(images_number)s image"
 msgid_plural "%(images_number)s images"
 msgstr[0] "%(images_number)s εικόνα"
 msgstr[1] "%(images_number)s εικόνες"
 
-#: templates/astrobin_apps_users/inclusion_tags/astrobin_user.html:133
+#: templates/astrobin_apps_users/inclusion_tags/astrobin_user.html:139
 #, python-format
 msgid "%(followers_number)s follower"
 msgid_plural "%(followers_number)s followers"

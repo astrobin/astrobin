@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2016-01-07 11:27+0000\n"
+"POT-Creation-Date: 2016-04-05 10:37+0100\n"
 "PO-Revision-Date: 2014-03-27 17:56+0000\n"
 "Last-Translator: Tomáš <fun2mas@gmail.com>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -20,13 +20,13 @@ msgstr ""
 "X-POOTLE-MTIME: 1395942987.575020\n"
 
 #: templates/astrobin_apps_users/inclusion_tags/astrobin_user.html:55
-#: templates/astrobin_apps_users/inclusion_tags/astrobin_user.html:93
+#: templates/astrobin_apps_users/inclusion_tags/astrobin_user.html:99
 #: templates/astrobin_apps_users/inclusion_tags/user_list.html:7
 msgid "Images"
 msgstr "Obrázky"
 
 #: templates/astrobin_apps_users/inclusion_tags/astrobin_user.html:56
-#: templates/astrobin_apps_users/inclusion_tags/astrobin_user.html:96
+#: templates/astrobin_apps_users/inclusion_tags/astrobin_user.html:102
 #: templates/astrobin_apps_users/inclusion_tags/user_list.html:8
 msgid "Followers"
 msgstr "Prívrženci"
@@ -36,7 +36,7 @@ msgstr "Prívrženci"
 msgid "Following"
 msgstr "Nasledujúce"
 
-#: templates/astrobin_apps_users/inclusion_tags/astrobin_user.html:132
+#: templates/astrobin_apps_users/inclusion_tags/astrobin_user.html:138
 #, python-format
 msgid "%(images_number)s image"
 msgid_plural "%(images_number)s images"
@@ -44,7 +44,7 @@ msgstr[0] "%(images_number) obrázkov"
 msgstr[1] "%(images_number) obrázok"
 msgstr[2] "%(images_number) obrázky"
 
-#: templates/astrobin_apps_users/inclusion_tags/astrobin_user.html:133
+#: templates/astrobin_apps_users/inclusion_tags/astrobin_user.html:139
 #, python-format
 msgid "%(followers_number)s follower"
 msgid_plural "%(followers_number)s followers"

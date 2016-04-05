@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2016-01-07 11:24+0000\n"
+"POT-Creation-Date: 2016-04-05 10:32+0100\n"
 "PO-Revision-Date: 2016-03-29 20:30+0000\n"
 "Last-Translator: csve <csve00@gmail.com>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -15,8 +15,8 @@ msgstr ""
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"Plural-Forms: nplurals=3; plural=(n%10==1 && n%100!=11 ? 0 : n%10>=2 && n%"
-"10<=4 && (n%100<10 || n%100>=20) ? 1 : 2);\n"
+"Plural-Forms: nplurals=3; plural=(n%10==1 && n%100!=11 ? 0 : n%10>=2 && n"
+"%10<=4 && (n%100<10 || n%100>=20) ? 1 : 2);\n"
 "X-Generator: Pootle 2.5.0\n"
 "X-POOTLE-MTIME: 1459283417.61002\n"
 
@@ -1021,7 +1021,7 @@ msgstr ""
 "здесь ссылку на файл. К сожалению, AstroBin пока не может предложить "
 "хранение таких файлов, поэтому вам потребуется размещать их у себя."
 
-#: forms.py:62 models.py:2074 models.py:2156 templates/gear/page.html:197
+#: forms.py:62 models.py:2086 models.py:2168 templates/gear/page.html:197
 #: templates/image/detail/image_title.html:14
 msgid "Link"
 msgstr "Ссылка"
@@ -1030,7 +1030,7 @@ msgstr "Ссылка"
 msgid "Link to TIFF/FITS"
 msgstr "Ссылка на TIFF/FITS"
 
-#: forms.py:64 models.py:692 templates/maintenance_base.html:304
+#: forms.py:64 models.py:693 templates/maintenance_base.html:305
 #: templates/profile-edit-menu.html:36
 #: templates/image/detail/image_card.html:88
 msgid "Locations"
@@ -1059,40 +1059,40 @@ msgid "If you want to watermark this image, you must specify some text."
 msgstr ""
 "Если вы хотите поставить на изображение водяной знак, укажите его текст."
 
-#: forms.py:131 forms.py:367 models.py:752
+#: forms.py:131 forms.py:367 models.py:753
 msgid "Imaging telescopes or lenses"
 msgstr "Телескоп/объектив съёмки"
 
-#: forms.py:132 models.py:753
+#: forms.py:132 models.py:754
 msgid "Guiding telescopes or lenses"
 msgstr "Гиды телескоп/объектив"
 
-#: forms.py:133 forms.py:227 models.py:754 models.py:1632 views.py:2367
+#: forms.py:133 forms.py:227 models.py:755 models.py:1638 views.py:2386
 msgid "Mounts"
 msgstr "Монтировка"
 
-#: forms.py:134 forms.py:368 models.py:755
+#: forms.py:134 forms.py:368 models.py:756
 msgid "Imaging cameras"
 msgstr "Камеры для съемки"
 
-#: forms.py:135 models.py:756
+#: forms.py:135 models.py:757
 msgid "Guiding cameras"
 msgstr "Камера гида"
 
-#: forms.py:136 forms.py:229 models.py:757 models.py:1634 views.py:2368
+#: forms.py:136 forms.py:229 models.py:758 models.py:1640 views.py:2387
 msgid "Focal reducers"
 msgstr "Редукторы фокуса"
 
-#: forms.py:137 forms.py:230 models.py:758 models.py:1635 views.py:207
-#: views.py:635 views.py:2369
+#: forms.py:137 forms.py:230 models.py:759 models.py:1641 views.py:207
+#: views.py:635 views.py:2388
 msgid "Software"
 msgstr "Программы"
 
-#: forms.py:138 forms.py:231 models.py:759 models.py:1636 views.py:2370
+#: forms.py:138 forms.py:231 models.py:760 models.py:1642 views.py:2389
 msgid "Filters"
 msgstr "Фильтры"
 
-#: forms.py:139 forms.py:232 models.py:760 models.py:1637 views.py:2371
+#: forms.py:139 forms.py:232 models.py:761 models.py:1643 views.py:2390
 msgid "Accessories"
 msgstr "Принадлежности"
 
@@ -1100,7 +1100,7 @@ msgstr "Принадлежности"
 msgid "If you have a personal website, put the address here."
 msgstr "Если у вас есть личный веб-сайт, напишите здесь его адрес."
 
-#: forms.py:171 models.py:1555
+#: forms.py:171 models.py:1557
 msgid "Website"
 msgstr "Веб-сайт"
 
@@ -1127,11 +1127,11 @@ msgstr ""
 "например, набор LRGB-фильтров в одном поле, вы не сможете потом добавить "
 "отдельные серии снимков для них."
 
-#: forms.py:226 models.py:1631 views.py:2365
+#: forms.py:226 models.py:1637 views.py:2384
 msgid "Telescopes and lenses"
 msgstr "Телескопы и объективы"
 
-#: forms.py:228 models.py:1633 views.py:2366
+#: forms.py:228 models.py:1639 views.py:2385
 msgid "Cameras"
 msgstr "Камеры"
 
@@ -1157,8 +1157,8 @@ msgstr "Все"
 msgid "Images"
 msgstr "Изображения"
 
-#: forms.py:277 models.py:648 views.py:1834
-#: templates/maintenance_base.html:298 templates/profile-edit-menu.html:30
+#: forms.py:277 models.py:649 views.py:1853
+#: templates/maintenance_base.html:299 templates/profile-edit-menu.html:30
 #: templates/wall.html:131 templates/inclusion_tags/search_image_list.html:13
 #: templates/user/profile-subnav.html:130
 msgid "Gear"
@@ -1192,7 +1192,7 @@ msgstr "Пожалуйста, используйте формат ГГГГ-ММ-
 msgid "Express value in hours"
 msgstr "Введите значение в часах"
 
-#: forms.py:357 models.py:773 templates/image/detail/info.html:27
+#: forms.py:357 models.py:774 templates/image/detail/info.html:27
 #: templates/image/detail/info.html:28 templates/search/search.html:239
 msgid "License"
 msgstr "Лицензия"
@@ -1204,7 +1204,7 @@ msgstr ""
 "Поиск по астрономическим объектам, телескопам или объективам, камерам, "
 "фильтрам..."
 
-#: forms.py:366 models.py:683
+#: forms.py:366 models.py:684
 msgid "Main solar system subject"
 msgstr "Объект солнечной системы"
 
@@ -1264,7 +1264,7 @@ msgstr "Долгота (минуты)"
 msgid "Longitude (seconds)"
 msgstr "Долгота (секунды)"
 
-#: forms.py:566 forms.py:611 forms.py:652 models.py:1269 models.py:1482
+#: forms.py:566 forms.py:611 forms.py:652 models.py:1271 models.py:1484
 #: templates/image/detail/image_card.html:46
 msgid "Date"
 msgstr "Дата"
@@ -1281,7 +1281,7 @@ msgstr "Введите значение от 1 до 10."
 msgid "The date cannot be in the future."
 msgstr "Дата не может быть в будущем."
 
-#: forms.py:892 forms.py:953 models.py:189 templates/gear/fix.html:32
+#: forms.py:892 forms.py:953 models.py:190 templates/gear/fix.html:32
 #: templates/gear/fix.html.py:33 templates/gear/fix.html:34
 #: templates/gear/fix.html.py:42 templates/gear/fix.html:47
 #: templates/gear/fix.html.py:52 templates/gear/fix.html:57
@@ -1299,11 +1299,11 @@ msgstr "Дата не может быть в будущем."
 msgid "Make"
 msgstr "Изготовлено"
 
-#: forms.py:893 forms.py:954 models.py:190
+#: forms.py:893 forms.py:954 models.py:191
 msgid "The make, brand, producer or developer of this product."
 msgstr "Изготовитель, марка, производитель или разработчик данного продукта."
 
-#: forms.py:898 forms.py:959 models.py:197 models.py:1772 models.py:1911
+#: forms.py:898 forms.py:959 models.py:198 models.py:1778 models.py:1917
 #: templates/gear/fix.html:32 templates/gear/fix.html.py:33
 #: templates/gear/fix.html:34 templates/gear/fix.html.py:42
 #: templates/gear/fix.html:47 templates/gear/fix.html.py:52
@@ -1429,200 +1429,200 @@ msgstr "Отменить подписку"
 msgid "Follow"
 msgstr "Подписаться"
 
-#: models.py:68
+#: models.py:69
 msgid "None (All rights reserved)"
 msgstr "Нет (Все права защищены)"
 
-#: models.py:69
+#: models.py:70
 msgid "Attribution-NonCommercial-ShareAlike Creative Commons"
 msgstr ""
 "С указанием авторства — Некоммерческая — С сохранением условий от Creative "
 "Commons"
 
-#: models.py:70
+#: models.py:71
 msgid "Attribution-NonCommercial Creative Commons"
 msgstr "С указанием авторства — Некоммерческая от Creative Commons"
 
-#: models.py:71
+#: models.py:72
 msgid "Attribution-NonCommercial-NoDerivs Creative Commons"
 msgstr ""
 "С указанием авторства — Некоммерческая — Без производных работ от Creative "
 "Commons"
 
-#: models.py:72
+#: models.py:73
 msgid "Attribution Creative Commons"
 msgstr "С указанием авторства от Creative Commons"
 
-#: models.py:73
+#: models.py:74
 msgid "Attribution-ShareAlike Creative Commons"
 msgstr "С указанием авторства — С сохранением условий от Creative Commons"
 
-#: models.py:74
+#: models.py:75
 msgid "Attribution-NoDerivs Creative Commons"
 msgstr "С указанием авторства — Без производных работ от Creative Commons"
 
-#: models.py:78 models.py:96 views.py:841 views.py:843
+#: models.py:79 models.py:97 views.py:841 views.py:843
 msgid "English"
 msgstr "Английский"
 
-#: models.py:79 models.py:97
+#: models.py:80 models.py:98
 msgid "Italian"
 msgstr "Итальянский"
 
-#: models.py:80 models.py:98
+#: models.py:81 models.py:99
 msgid "Spanish"
 msgstr "Испанский"
 
-#: models.py:81 models.py:99
+#: models.py:82 models.py:100
 msgid "French"
 msgstr "Французский"
 
-#: models.py:82 models.py:100
+#: models.py:83 models.py:101
 msgid "Finnish"
 msgstr "Финский"
 
-#: models.py:83 models.py:101
+#: models.py:84 models.py:102
 msgid "German"
 msgstr "Немецкий"
 
-#: models.py:84 models.py:102
+#: models.py:85 models.py:103
 msgid "Dutch"
 msgstr "Голландский"
 
-#: models.py:85 models.py:103
+#: models.py:86 models.py:104
 msgid "Turkish"
 msgstr "Турецкий"
 
-#: models.py:86 models.py:104
+#: models.py:87 models.py:105
 msgid "Albanian"
 msgstr "Албанский"
 
-#: models.py:87 models.py:105
+#: models.py:88 models.py:106
 msgid "Polish"
 msgstr "Польский"
 
-#: models.py:88 models.py:106
+#: models.py:89 models.py:107
 msgid "Brazilian Portuguese"
 msgstr "Португальский (Бразилия)"
 
-#: models.py:89 models.py:107
+#: models.py:90 models.py:108
 msgid "Greek"
 msgstr "Греческий"
 
-#: models.py:90 models.py:108
+#: models.py:91 models.py:109
 msgid "Russian"
 msgstr "Русский"
 
-#: models.py:91 models.py:109
+#: models.py:92 models.py:110
 msgid "Arabic"
 msgstr "Арабский"
 
-#: models.py:92 models.py:110
+#: models.py:93 models.py:111
 msgid "Japanese"
 msgstr "Японский"
 
-#: models.py:114
+#: models.py:115
 msgid "Pulsars"
 msgstr "Пульсары"
 
-#: models.py:115
+#: models.py:116
 msgid "Globular clusters"
 msgstr "Шаровые скопления"
 
-#: models.py:116
+#: models.py:117
 msgid "Open clusters"
 msgstr "Рассеянные скопления"
 
-#: models.py:117
+#: models.py:118
 msgid "Nebulae"
 msgstr "Туманности"
 
-#: models.py:118
+#: models.py:119
 msgid "Planetary nebulae"
 msgstr "Планетарные туманности"
 
-#: models.py:119
+#: models.py:120
 msgid "Galaxies"
 msgstr "Галактики"
 
-#: models.py:140 templates/wall.html:92
+#: models.py:141 templates/wall.html:92
 msgid "Sun"
 msgstr "Солнце"
 
-#: models.py:141
+#: models.py:142
 msgid "Earth's Moon"
 msgstr "Луна (Земли)"
 
-#: models.py:142
+#: models.py:143
 msgid "Mercury"
 msgstr "Меркурий"
 
-#: models.py:143
+#: models.py:144
 msgid "Venus"
 msgstr "Венера"
 
-#: models.py:144
+#: models.py:145
 msgid "Mars"
 msgstr "Марс"
 
-#: models.py:145
+#: models.py:146
 msgid "Jupiter"
 msgstr "Юпитер"
 
-#: models.py:146
+#: models.py:147
 msgid "Saturn"
 msgstr "Сатурн"
 
-#: models.py:147
+#: models.py:148
 msgid "Uranus"
 msgstr "Уран"
 
-#: models.py:148
+#: models.py:149
 msgid "Neptune"
 msgstr "Нептун"
 
-#: models.py:149
+#: models.py:150
 msgid "Minor planet"
 msgstr "Малая планета"
 
-#: models.py:150
+#: models.py:151
 msgid "Comet"
 msgstr "Комета"
 
-#: models.py:151 models.py:585 models.py:649 views.py:1835
+#: models.py:152 models.py:586 models.py:650 views.py:1854
 #: templates/wall.html:143 templates/image/edit/acquisition.html:84
 msgid "Other"
 msgstr "Иное"
 
-#: models.py:155
+#: models.py:156
 msgid "Center"
 msgstr "Центр"
 
-#: models.py:156
+#: models.py:157
 msgid "Top left"
 msgstr "Вверху слева"
 
-#: models.py:157
+#: models.py:158
 msgid "Top center"
 msgstr "Вверху по центру"
 
-#: models.py:158
+#: models.py:159
 msgid "Top right"
 msgstr "Вверху справа"
 
-#: models.py:159
+#: models.py:160
 msgid "Bottom left"
 msgstr "Внизу слева"
 
-#: models.py:160
+#: models.py:161
 msgid "Bottom center"
 msgstr "Внизу по центру"
 
-#: models.py:161
+#: models.py:162
 msgid "Bottom right"
 msgstr "Внизу справа"
 
-#: models.py:198
+#: models.py:199
 msgid ""
 "Just the name of this product, without any properties or personal "
 "customizations. Try to use the international name, in English language, if "
@@ -1632,132 +1632,132 @@ msgstr ""
 "Желательно использовать международное название, на английском, если "
 "возможно. Это название будет видимо всем пользователям AstroBin."
 
-#: models.py:358
+#: models.py:359
 msgid "Alias"
 msgstr "Сокращение"
 
-#: models.py:359
+#: models.py:360
 msgid ""
 "A descriptive name, alias or nickname for your own copy of this product."
 msgstr ""
 "Значимое имя, псевдоним или прозвище вашего экземпляра данного продукта."
 
-#: models.py:366
+#: models.py:367
 msgid "Comment"
 msgstr "Комментарий"
 
-#: models.py:367
+#: models.py:368
 msgid ""
 "Information, description or comment about your own copy of this product."
 msgstr ""
 "Информация, описание или комментарий к вашему экземпляру данного продукта."
 
-#: models.py:406
+#: models.py:407
 msgid "Refractor: achromatic"
 msgstr "Рефрактор-ахромат"
 
-#: models.py:407
+#: models.py:408
 msgid "Refractor: semi-apochromatic"
 msgstr "Рефрактор-полуапохромат"
 
-#: models.py:408
+#: models.py:409
 msgid "Refractor: apochromatic"
 msgstr "Рефрактор-апохромат"
 
-#: models.py:409
+#: models.py:410
 msgid "Refractor: non-achromatic Galilean"
 msgstr "Рефрактор Галилея"
 
-#: models.py:410
+#: models.py:411
 msgid "Refractor: non-achromatic Keplerian"
 msgstr "Рефрактор Кеплера"
 
-#: models.py:411
+#: models.py:412
 msgid "Refractor: superachromat"
 msgstr "Рефрактор-суперахромат"
 
-#: models.py:413
+#: models.py:414
 msgid "Reflector: Dall-Kirkham"
 msgstr "Рефлектор Долла-Киркхема"
 
-#: models.py:414
+#: models.py:415
 msgid "Reflector: Nasmyth"
 msgstr "Рефлектор Несмита"
 
-#: models.py:415
+#: models.py:416
 msgid "Reflector: Ritchey Chretien"
 msgstr "Рефлектор Ричи-Кретьена"
 
-#: models.py:416
+#: models.py:417
 msgid "Reflector: Gregorian"
 msgstr "Рефлектор Грегори"
 
-#: models.py:417
+#: models.py:418
 msgid "Reflector: Herschellian"
 msgstr "Рефлектор Гершеля"
 
-#: models.py:418
+#: models.py:419
 msgid "Reflector: Newtonian"
 msgstr "Рефлектор Ньютона"
 
-#: models.py:420
+#: models.py:421
 msgid "Catadioptric: Argunov-Cassegrain"
 msgstr "Катадиоптрик Аргунова-Кассегрена"
 
-#: models.py:421
+#: models.py:422
 msgid "Catadioptric: Klevtsov-Cassegrain"
 msgstr "Катадиоптрик Клевцова-Кассегрена"
 
-#: models.py:422
+#: models.py:423
 msgid "Catadioptric: Lurie-Houghton"
 msgstr "Катадиоптрик Лурье-Хогтона"
 
-#: models.py:423
+#: models.py:424
 msgid "Catadioptric: Maksutov"
 msgstr "Катадиоптрик Максутова"
 
-#: models.py:424
+#: models.py:425
 msgid "Catadioptric: Maksutov-Cassegrain"
 msgstr "Катадиоптрик Максутова-Кассегрена"
 
-#: models.py:425
+#: models.py:426
 msgid "Catadioptric: modified Dall-Kirkham"
 msgstr "Катадиоптрик модифицированный Долла-Киркхема"
 
-#: models.py:426
+#: models.py:427
 msgid "Catadioptric: Schmidt camera"
 msgstr "Катадиоптрик камера Шмидта"
 
-#: models.py:427
+#: models.py:428
 msgid "Catadioptric: Schmidt-Cassegrain"
 msgstr "Катадиоптрик Шмидта-Кассегрена"
 
-#: models.py:428
+#: models.py:429
 msgid "Catadioptric: ACF Schmidt-Cassegrain"
 msgstr "Катадиоптрик Шмидта-Кассегрена свободный от комы (ACF)"
 
-#: models.py:429 stats.py:596
+#: models.py:430 stats.py:596
 msgid "Camera lens"
 msgstr "Фотообъектив"
 
-#: models.py:430
+#: models.py:431
 msgid "Binoculars"
 msgstr "Бинокли"
 
-#: models.py:434 templates/popover/gear_telescope.html:18
+#: models.py:435 templates/popover/gear_telescope.html:18
 msgid "Aperture"
 msgstr "Апертура"
 
-#: models.py:435 models.py:444 models.py:514 models.py:523
+#: models.py:436 models.py:445 models.py:515 models.py:524
 msgid "(in mm)"
 msgstr "(в мм)"
 
-#: models.py:443 models.py:1421 templates/image/detail/image_card.html:58
+#: models.py:444 models.py:1423 templates/image/detail/image_card.html:58
 #: templates/popover/gear_telescope.html:19
 msgid "Focal length"
 msgstr "Фокусное расстояние"
 
-#: models.py:452 models.py:531 models.py:557 models.py:590
+#: models.py:453 models.py:532 models.py:558 models.py:591
 #: templates/gear/page.html:208 templates/popover/gear_camera.html:16
 #: templates/popover/gear_filter.html:16
 #: templates/popover/gear_software.html:16
@@ -1766,185 +1766,185 @@ msgstr "Фокусное расстояние"
 msgid "Type"
 msgstr "Тип"
 
-#: models.py:460 models.py:539 templates/search/search.html:322
+#: models.py:461 models.py:540 templates/search/search.html:322
 msgid "mm"
 msgstr "мм"
 
-#: models.py:468 templates/popover/gear_mount.html:17
+#: models.py:469 templates/popover/gear_mount.html:17
 msgid "Max. payload"
 msgstr "Макс. полезная нагрузка"
 
-#: models.py:469
+#: models.py:470
 msgid "(in kg)"
 msgstr "(в кг)"
 
-#: models.py:477 templates/popover/gear_mount.html:18
+#: models.py:478 templates/popover/gear_mount.html:18
 msgid "Periodic error"
 msgstr "Периодическая ошибка"
 
-#: models.py:478
+#: models.py:479
 msgid "(peak to peak, in arcseconds)"
 msgstr "(от пика до пика, в угл. сек)"
 
-#: models.py:487
+#: models.py:488
 msgid "kg"
 msgstr "кг"
 
-#: models.py:495
+#: models.py:496
 msgid "CCD"
 msgstr "ПЗС"
 
-#: models.py:496
+#: models.py:497
 msgid "DSLR"
 msgstr "Цифровая зеркальная камера"
 
-#: models.py:497
+#: models.py:498
 msgid "Guider/Planetary"
 msgstr "Гидирующая/планетная камера"
 
-#: models.py:498
+#: models.py:499
 msgid "Film"
 msgstr "Плёночная"
 
-#: models.py:499
+#: models.py:500
 msgid "Compact"
 msgstr "Компактная"
 
-#: models.py:500
+#: models.py:501
 msgid "Video camera"
 msgstr "Видеокамера"
 
-#: models.py:504 templates/popover/gear_camera.html:18
+#: models.py:505 templates/popover/gear_camera.html:18
 #: templates/search/search.html:329
 msgid "Pixel size"
 msgstr "Размер пикселя"
 
-#: models.py:505
+#: models.py:506
 msgid "(in &mu;m)"
 msgstr "(в мкм)"
 
-#: models.py:513 templates/popover/gear_camera.html:19
+#: models.py:514 templates/popover/gear_camera.html:19
 msgid "Sensor width"
 msgstr "Ширина сенсора"
 
-#: models.py:522 templates/popover/gear_camera.html:20
+#: models.py:523 templates/popover/gear_camera.html:20
 msgid "Sensor height"
 msgstr "Высота сенсора"
 
-#: models.py:539 templates/search/search.html:330
+#: models.py:540 templates/search/search.html:330
 msgid "&mu;m"
 msgstr "мкм"
 
-#: models.py:552
+#: models.py:553
 msgid "Open source or freeware"
 msgstr "С открытым исходным кодом или бесплатное"
 
-#: models.py:553
+#: models.py:554
 msgid "Paid"
 msgstr "Платное"
 
-#: models.py:569
+#: models.py:570
 msgid "Clear or color"
 msgstr "Чистый или цветной"
 
-#: models.py:571
+#: models.py:572
 msgid "Broadband: H-Alpha"
 msgstr "Широкополосный: H-альфа"
 
-#: models.py:572
+#: models.py:573
 msgid "Broadband: H-Beta"
 msgstr "Широкополосный: H-бета"
 
-#: models.py:573
+#: models.py:574
 msgid "Broadband: S-II"
 msgstr "Широкополосный: S-II"
 
-#: models.py:574
+#: models.py:575
 msgid "Broadband: O-III"
 msgstr "Широкополосный: O-III"
 
-#: models.py:575
+#: models.py:576
 msgid "Broadband: N-II"
 msgstr "Широкополосный: N-II"
 
-#: models.py:577
+#: models.py:578
 msgid "Narrowband: H-Alpha"
 msgstr "Узкополосный: H-альфа"
 
-#: models.py:578
+#: models.py:579
 msgid "Narrowband: H-Beta"
 msgstr "Узкополосный: H-бета"
 
-#: models.py:579
+#: models.py:580
 msgid "Narrowband: S-II"
 msgstr "Узкополосный: S-II"
 
-#: models.py:580
+#: models.py:581
 msgid "Narrowband: O-III"
 msgstr "Узкополосный: O-III"
 
-#: models.py:581
+#: models.py:582
 msgid "Narrowband: N-II"
 msgstr "Узкополосный: N-II"
 
-#: models.py:583
+#: models.py:584
 msgid "Light pollution suppression"
 msgstr "Для подавления засветки"
 
-#: models.py:584
+#: models.py:585
 msgid "Planetary"
 msgstr "Планетный"
 
-#: models.py:586
+#: models.py:587
 msgid "UHC: Ultra High Contrast"
 msgstr "UHC"
 
-#: models.py:597 templates/popover/gear_filter.html:18
+#: models.py:598 templates/popover/gear_filter.html:18
 msgid "Bandwidth"
 msgstr "Ширина полосы пропускания"
 
-#: models.py:598
+#: models.py:599
 msgid "(in nm)"
 msgstr "(в нм)"
 
-#: models.py:607
+#: models.py:608
 msgid "nm"
 msgstr "нм"
 
-#: models.py:644
+#: models.py:645
 msgid "Deep sky object"
 msgstr "Объекты глубокого космоса"
 
-#: models.py:645
+#: models.py:646
 msgid "Solar system body or event"
 msgstr "Объект или явление в Солнечной системе"
 
-#: models.py:646 views.py:1832 templates/wall.html:119
+#: models.py:647 views.py:1851 templates/wall.html:119
 msgid "Extremely wide field"
 msgstr "Широкое поле"
 
-#: models.py:647 views.py:1833 templates/wall.html:125
+#: models.py:648 views.py:1852 templates/wall.html:125
 msgid "Star trails"
 msgstr "Треки звезд"
 
-#: models.py:666 templates/inclusion_tags/image_list.html:12
+#: models.py:667 templates/inclusion_tags/image_list.html:12
 #: templates/inclusion_tags/search_image_list.html:123
 msgid "Title"
 msgstr "Заголовок"
 
-#: models.py:670 templates/user/profile-subnav.html:124
+#: models.py:671 templates/user/profile-subnav.html:124
 msgid "Subject type"
 msgstr "Тип объекта"
 
-#: models.py:677
+#: models.py:678
 msgid "Objects in field"
 msgstr "Объекты в поле"
 
-#: models.py:678
+#: models.py:679
 msgid "Use a <strong>comma</strong> to separate the values."
 msgstr "Используйте <strong> запятые </strong>, чтобы разделять значения"
 
-#: models.py:684
+#: models.py:685
 msgid ""
 "If the main subject of your image is a body in the solar system, please "
 "select which (or which type) it is."
@@ -1952,164 +1952,164 @@ msgstr ""
 "Если главный объект на вашем изображении - тело Солнечной системы, "
 "пожалуйста, укажите какой (или какого типа)."
 
-#: models.py:693
+#: models.py:694
 msgid ""
 "Drag items from the right side to the left side, or click on the plus sign."
 msgstr "Перетащите элементы из правой части в левую или нажмите на знак плюса."
 
-#: models.py:699 models.py:1919 models.py:2163 templates/gear/page.html:47
+#: models.py:700 models.py:1925 models.py:2175 templates/gear/page.html:47
 #: templates/image/detail/image_description.html:7
 msgid "Description"
 msgstr "Описание"
 
-#: models.py:700
+#: models.py:701
 msgid "HTML tags are allowed."
 msgstr "Допускаются HTML-теги."
 
-#: models.py:738
+#: models.py:739
 msgid "Apply watermark to image"
 msgstr "Разместить водяной знак на изображении"
 
-#: models.py:742 templates/leaderboard.html:20
+#: models.py:743 templates/leaderboard.html:20
 msgid "Position"
 msgstr "Расположение"
 
-#: models.py:782
+#: models.py:783
 msgid "Allow comments"
 msgstr "Разрешить комментарии"
 
-#: models.py:795 templates/image/full.html:56
+#: models.py:796 templates/image/full.html:56
 #: templates/image/detail/image_title.html:7
 #: templates/image/detail/menu/navigation.html:10
 #: templates/image/detail/menu/navigation.html:25
 msgid "(no title)"
 msgstr "(без заголовка)"
 
-#: models.py:1270
+#: models.py:1272
 msgid "Please use the following format: yyyy-mm-dd."
 msgstr "Пожалуйста, используйте формат: гггг-мм-дд."
 
-#: models.py:1275 models.py:1481 models.py:2139
+#: models.py:1277 models.py:1483 models.py:2151
 msgid "Image"
 msgstr "Изображение"
 
-#: models.py:1294
+#: models.py:1296
 msgid "1 - Excellent dark-site sky (BLACK)"
 msgstr "1 - Превосходное тёмное небо (чёрная зона)"
 
-#: models.py:1295
+#: models.py:1297
 msgid "2 - Typical truly dark site (GRAY)"
 msgstr "2 - Типичное по-настоящему тёмное небо (серая зона)"
 
-#: models.py:1296
+#: models.py:1298
 msgid "3 - Rural sky (BLUE)"
 msgstr "3 - Деревенское небо (синяя зона)"
 
-#: models.py:1297
+#: models.py:1299
 msgid "4 - Rural/suburban transition (GREEN/YELLOW)"
 msgstr "4 - Деревенско/пригородное (зелёная/жёлтая зона)"
 
-#: models.py:1298
+#: models.py:1300
 msgid "5 - Suburban sky (ORANGE)"
 msgstr "5 - Пригородное небо (оранжевая зона)"
 
-#: models.py:1299
+#: models.py:1301
 msgid "6 - Bright suburban sky (RED)"
 msgstr "6 - Яркое пригородное небо (красная зона)"
 
-#: models.py:1300
+#: models.py:1302
 msgid "7 - Suburban/urban transition or Full Moon (RED)"
 msgstr "7 - Пригородно/городское или полнолуние (красная зона)"
 
-#: models.py:1301
+#: models.py:1303
 msgid "8 - City sky (WHITE)"
 msgstr "8 - Городское небо (белая зона)"
 
-#: models.py:1302
+#: models.py:1304
 msgid "9 - Inner city sky (WHITE)"
 msgstr "9 - Центр города (белая зона)"
 
-#: models.py:1306
+#: models.py:1308
 msgid "Synthetic channel"
 msgstr "Синтезированный канал"
 
-#: models.py:1311 views.py:208 views.py:636
+#: models.py:1313 views.py:208 views.py:636
 msgid "Filter"
 msgstr "Фильтр"
 
-#: models.py:1317
+#: models.py:1319
 msgid "Binning"
 msgstr "Бинниг"
 
-#: models.py:1320
+#: models.py:1322
 msgid "Number"
 msgstr "Количество"
 
-#: models.py:1322
+#: models.py:1324
 msgid "The number of sub-frames."
 msgstr "Количество исходных кадров."
 
-#: models.py:1325
+#: models.py:1327
 msgid "Duration"
 msgstr "Продолжительность"
 
-#: models.py:1327
+#: models.py:1329
 msgid "Duration of each sub-frame, in seconds."
 msgstr "Продолжительность съемки каждого исходного кадра, в секундах."
 
-#: models.py:1330
+#: models.py:1332
 msgid "ISO"
 msgstr "ISO"
 
-#: models.py:1334
+#: models.py:1336
 msgid "Gain"
 msgstr "Усиление"
 
-#: models.py:1339
+#: models.py:1341
 msgid "Sensor cooling"
 msgstr "Охлаждение сенсора"
 
-#: models.py:1341
+#: models.py:1343
 msgid "The temperature of the chip. E.g.: -20."
 msgstr "Температура сенсора. Например: -20."
 
-#: models.py:1344 views.py:768
+#: models.py:1346 views.py:768
 msgid "Darks"
 msgstr "Темновые кадры"
 
-#: models.py:1346
+#: models.py:1348
 msgid "The number of dark frames."
 msgstr "Количество темновых кадров."
 
-#: models.py:1349 views.py:769
+#: models.py:1351 views.py:769
 msgid "Flats"
 msgstr "Кадры плоского поля"
 
-#: models.py:1351
+#: models.py:1353
 msgid "The number of flat frames."
 msgstr "Количество кадров плоского поля."
 
-#: models.py:1354 views.py:770
+#: models.py:1356 views.py:770
 msgid "Flat darks"
 msgstr "Темновые кадры для кадров плоского поля"
 
-#: models.py:1356
+#: models.py:1358
 msgid "The number of dark flat frames."
 msgstr "Количество темновых кадров для кадров плоского поля."
 
-#: models.py:1359 views.py:771
+#: models.py:1361 views.py:771
 msgid "Bias"
 msgstr "Кадры смещения"
 
-#: models.py:1361
+#: models.py:1363
 msgid "The number of bias/offset frames."
 msgstr "Количество кадров смещения."
 
-#: models.py:1364 views.py:774
+#: models.py:1366 views.py:774
 msgid "Bortle Dark-Sky Scale"
 msgstr "Шкала Бортля для оценки темноты неба"
 
-#: models.py:1368
+#: models.py:1370
 msgid ""
 "Quality of the sky according to <a href=\"http://en.wikipedia.org/wiki/"
 "Bortle_Dark-Sky_Scale\" target=\"_blank\">the Bortle Scale</a>."
@@ -2117,43 +2117,43 @@ msgstr ""
 "Качество неба по <a href=\"http://en.wikipedia.org/wiki/Bortle_Dark-Sky_Scale"
 "\" target=\"_blank\">шкале Бортля</a>."
 
-#: models.py:1372
+#: models.py:1374
 msgid "Mean mag/arcsec^2"
 msgstr "Средняя звездная величина на угл. сек^2"
 
-#: models.py:1373
+#: models.py:1375
 msgid "As measured with your Sky Quality Meter."
 msgstr "Измеренная с помощью Sky Quality Meter."
 
-#: models.py:1378 views.py:776
+#: models.py:1380 views.py:776
 msgid "Mean FWHM"
 msgstr "Среднее FWHM"
 
-#: models.py:1383 views.py:777
+#: models.py:1385 views.py:777
 msgid "Temperature"
 msgstr "Температура"
 
-#: models.py:1386
+#: models.py:1388
 msgid "Ambient temperature (in Centigrade degrees)."
 msgstr "Температура окружающей среды (в °С)."
 
-#: models.py:1407
+#: models.py:1409
 msgid "Number of frames"
 msgstr "Количество кадров"
 
-#: models.py:1408
+#: models.py:1410
 msgid "The total number of frames you have stacked."
 msgstr "Общее количество кадров, сложенных в стек."
 
-#: models.py:1412 templates/image/detail/image_card.html:55
+#: models.py:1414 templates/image/detail/image_card.html:55
 msgid "FPS"
 msgstr "к/сек"
 
-#: models.py:1413
+#: models.py:1415
 msgid "Frames per second."
 msgstr "Кадров в секунду."
 
-#: models.py:1422
+#: models.py:1424
 msgid ""
 "The focal length of the whole optical train, including barlow lenses or "
 "other components."
@@ -2161,122 +2161,122 @@ msgstr ""
 "Эквивалентное фокусное расстояние всей оптической системы, включая линзы "
 "Барлоу и другие компоненты."
 
-#: models.py:1428 templates/image/detail/image_card.html:61
+#: models.py:1430 templates/image/detail/image_card.html:61
 msgid "CMI"
 msgstr "CMI"
 
-#: models.py:1429
+#: models.py:1431
 msgid "Latitude of the first Central Meridian."
 msgstr "Широта первого Центрального Меридиана"
 
-#: models.py:1437 templates/image/detail/image_card.html:64
+#: models.py:1439 templates/image/detail/image_card.html:64
 msgid "CMII"
 msgstr "CMII"
 
-#: models.py:1438
+#: models.py:1440
 msgid "Latitude of the second Central Meridian."
 msgstr "Широта второго Главного Меридиана"
 
-#: models.py:1446 templates/image/detail/image_card.html:67
+#: models.py:1448 templates/image/detail/image_card.html:67
 msgid "CMIII"
 msgstr "CMIII"
 
-#: models.py:1447
+#: models.py:1449
 msgid "Latitude of the third Central Meridian."
 msgstr "Широта третьего Главного Меридиана."
 
-#: models.py:1455 templates/image/detail/image_card.html:70
+#: models.py:1457 templates/image/detail/image_card.html:70
 msgid "Seeing"
 msgstr "Сиинг"
 
-#: models.py:1456
+#: models.py:1458
 msgid "Your estimation of the seeing, on a scale from 1 to 5."
 msgstr "Оцените сиинг по шкале от 1 до 5."
 
-#: models.py:1462 templates/image/detail/image_card.html:73
+#: models.py:1464 templates/image/detail/image_card.html:73
 msgid "Transparency"
 msgstr "Прозрачность"
 
-#: models.py:1463
+#: models.py:1465
 msgid "Your estimation of the transparency, on a scale from 1 to 10."
 msgstr "Ваша оценка прозрачности по шкале от 1 до 10."
 
-#: models.py:1469 templates/image/detail/image_card.html:49
+#: models.py:1471 templates/image/detail/image_card.html:49
 msgid "Time"
 msgstr "Время"
 
-#: models.py:1470
+#: models.py:1472
 msgid "Please use the following format: hh:mm."
 msgstr "Пожалуйста, используйте следующий формат: чч:мм."
 
-#: models.py:1501
+#: models.py:1503
 msgid "Request from"
 msgstr "Запрос от"
 
-#: models.py:1513
+#: models.py:1515
 msgid "Additional information"
 msgstr "Дополнительная информация"
 
-#: models.py:1514
+#: models.py:1516
 msgid "TIFF/FITS"
 msgstr "TIFF/FITS"
 
-#: models.py:1515
+#: models.py:1517
 msgid "Higher resolution"
 msgstr "Наивысшее разрешение"
 
-#: models.py:1547
+#: models.py:1549
 msgid "Real name"
 msgstr "Настоящее имя"
 
-#: models.py:1548
+#: models.py:1550
 msgid "If present, your real name will be used throughout the website."
 msgstr ""
 "Если присутствует, то ваше настоящее имя будет использоваться на сайте везде."
 
-#: models.py:1562
+#: models.py:1564
 msgid "Job"
 msgstr "Работа"
 
-#: models.py:1569
+#: models.py:1571
 msgid "Hobbies"
 msgstr "Увлечения"
 
-#: models.py:1573
+#: models.py:1575
 msgid "Do you have any hobbies other than astrophotography?"
 msgstr "Есть ли у вас другие увлечения, кроме астрофотографии?"
 
-#: models.py:1580
+#: models.py:1582
 msgid "Timezone"
 msgstr "Часовой пояс"
 
-#: models.py:1581
+#: models.py:1583
 msgid ""
 "By selecting this, you will see all the dates on AstroBin in your timezone."
 msgstr ""
 "Выбрав это, вы будете видеть все даты на AstroBin в вашем часовом поясе."
 
-#: models.py:1586
+#: models.py:1588
 msgid "About you"
 msgstr "О себе"
 
-#: models.py:1587
+#: models.py:1589
 msgid "Write something about yourself. HTML tags are allowed."
 msgstr "Напишите что-нибудь о себе. Разрешаются HTML-теги."
 
-#: models.py:1601
+#: models.py:1603
 msgid "Company name"
 msgstr "Название организации"
 
-#: models.py:1602
+#: models.py:1604
 msgid "The name of the company you represent on AstroBin."
 msgstr "Название организации, которую вы представляете в AstroBin."
 
-#: models.py:1608
+#: models.py:1610
 msgid "Company description"
 msgstr "Описание организации"
 
-#: models.py:1609
+#: models.py:1611
 msgid ""
 "A short description of the company you represent on AstroBin. You can use "
 "some <a href=\"/faq/#comments\">formatting rules</a>."
@@ -2285,121 +2285,121 @@ msgstr ""
 "можете использовать некоторые <a href=\"/faq/#comments\">правила "
 "форматирования</a>."
 
-#: models.py:1617
+#: models.py:1619
 msgid "Company website"
 msgstr "Веб-сайт организации"
 
-#: models.py:1618
+#: models.py:1620
 msgid "The website of the company you represent on AstroBin."
 msgstr "Веб-сайт организации, которую вы представляете на AstroBin."
 
-#: models.py:1622
+#: models.py:1624
 msgid "Country of operation"
 msgstr "Страна ведения деятельности"
 
-#: models.py:1647 templates/maintenance_base.html:310
+#: models.py:1653 templates/maintenance_base.html:311
 #: templates/profile-edit-menu.html:42
 msgid "Default license"
 msgstr "Лицензия по-умолчанию"
 
-#: models.py:1649
+#: models.py:1655
 msgid ""
 "The license you select here is automatically applied to all your new images."
 msgstr ""
 "Выбранная вами лицензия автоматически распространяется на все ваши "
 "изображения."
 
-#: models.py:1682
+#: models.py:1688
 msgid "Language"
 msgstr "Язык"
 
-#: models.py:1703
+#: models.py:1709
 msgid "Signature"
 msgstr "Сигнатура"
 
-#: models.py:1708
+#: models.py:1714
 msgid "Signature HTML Version"
 msgstr "Сигнатура версии HTML"
 
-#: models.py:1713
+#: models.py:1719
 msgid "Show signatures"
 msgstr "Показать сигнатуры"
 
-#: models.py:1718
+#: models.py:1724
 msgid "Post count"
 msgstr "Количество сообщений"
 
-#: models.py:1723
+#: models.py:1729
 msgid "Automatically subscribe"
 msgstr "Автоматическая подписка"
 
-#: models.py:1724
+#: models.py:1730
 msgid "Automatically subscribe to topics that you answer"
 msgstr "Подписываться автоматом на темы с вашими ответами"
 
-#: models.py:1731
+#: models.py:1737
 #: templates/pybb/mail_templates/subscription_email_subject.html:2
 msgid "New reply to a forum topic you subscribe to"
 msgstr "Новый ответ в теме, на которую вы подписаны"
 
-#: models.py:1773
+#: models.py:1779
 msgid "A descriptive name, e.g. 'Home observatory' or 'Mount Whitney'."
 msgstr ""
 "Наглядное название, например. «Домашная обсерватория» или «Гора Казбек»."
 
-#: models.py:1779
+#: models.py:1785
 msgid "City"
 msgstr "Город"
 
-#: models.py:1780
+#: models.py:1786
 msgid "If this location is not in a city, use the name of the closest city."
 msgstr "Если местоположение не город, то укажите название ближайшего города."
 
-#: models.py:1786
+#: models.py:1792
 msgid "State or province"
 msgstr "Область или регион"
 
-#: models.py:1791
+#: models.py:1797
 msgid "Country"
 msgstr "Страна"
 
-#: models.py:1808
+#: models.py:1814
 msgid "North"
 msgstr "Север"
 
-#: models.py:1808
+#: models.py:1814
 msgid "South"
 msgstr "Юг"
 
-#: models.py:1809
+#: models.py:1815
 msgid "North or south"
 msgstr "Север или юг"
 
-#: models.py:1824
+#: models.py:1830
 msgid "East"
 msgstr "Восток"
 
-#: models.py:1824
+#: models.py:1830
 msgid "West"
 msgstr "Запад"
 
-#: models.py:1825
+#: models.py:1831
 msgid "East or West"
 msgstr "Восток или Запад"
 
-#: models.py:1829
+#: models.py:1835
 msgid "Altitude"
 msgstr "Высота"
 
-#: models.py:1830
+#: models.py:1836
 msgid "In meters."
 msgstr "В метрах."
 
-#: models.py:1912
+#: models.py:1918
 msgid "The name of the website or app that wishes to use the APIs."
 msgstr "Название веб-сайта или приложения, в котором хочется применять API."
 
-#: models.py:1920
+#: models.py:1926
 msgid ""
 "Please explain the purpose of your application, and how you intend to use "
 "the API."
@@ -2407,63 +2407,63 @@ msgstr ""
 "Пожалуйста, объясните назначение вашего приложения и то, как вы собираетесь "
 "использовать API."
 
-#: models.py:2051
+#: models.py:2063
 msgid "AUD - Australian dollars"
 msgstr "AUD - Австралийский доллар"
 
-#: models.py:2052
+#: models.py:2064
 msgid "CAD - Canadian dollars"
 msgstr "CAD - Канадский доллар"
 
-#: models.py:2053
+#: models.py:2065
 msgid "CHF - Swiss francs"
 msgstr "CHF - Швейцарский франк"
 
-#: models.py:2054
+#: models.py:2066
 msgid "EUR - Euros"
 msgstr "EUR - Евро"
 
-#: models.py:2055
+#: models.py:2067
 msgid "GPB - Pound stelings"
 msgstr "GPB - Фунт стерлингов"
 
-#: models.py:2056
+#: models.py:2068
 msgid "PLN - Polish zloty"
 msgstr "PLN - Польский злотый"
 
-#: models.py:2057
+#: models.py:2069
 msgid "SEK - Swedish krona"
 msgstr "SEK - Шведская крона"
 
-#: models.py:2058
+#: models.py:2070
 msgid "USD - American dollars"
 msgstr "USD - Американский доллар"
 
-#: models.py:2064 models.py:2114
+#: models.py:2076 models.py:2126
 msgid "Producer"
 msgstr "Производитель"
 
-#: models.py:2075 models.py:2157
+#: models.py:2087 models.py:2169
 msgid "The link to this product's page on your website."
 msgstr "Ссылка на страницу этого продукта на вашем веб-сайте."
 
-#: models.py:2083 templates/subscription/subscription_category_list.html:8
+#: models.py:2095 templates/subscription/subscription_category_list.html:8
 msgid "Price"
 msgstr "Стоимость"
 
-#: models.py:2091
+#: models.py:2103
 msgid "Currency"
 msgstr "Валюта"
 
-#: models.py:2107
+#: models.py:2119
 msgid "Retailed gear items"
 msgstr "Элементы оборудования в розницу"
 
-#: models.py:2123
+#: models.py:2135
 msgid "Proper make"
 msgstr "Правильное место изготовления"
 
-#: models.py:2124
+#: models.py:2136
 msgid ""
 "Sometimes, product make/brand/producer/developer names are not written "
 "properly by the users. Write here the proper make/brand/producer/developer "
@@ -2473,11 +2473,11 @@ msgstr ""
 "пользователями пишется неверно. Напишите правильное название места "
 "изготовления/марку/производителя/разработчика."
 
-#: models.py:2131
+#: models.py:2143
 msgid "Proper name"
 msgstr "Правильное название"
 
-#: models.py:2132
+#: models.py:2144
 msgid ""
 "Sometimes, product names are not written properly by the users. Write here "
 "the proper product name, not including the make/brand/producer/developer "
@@ -2490,7 +2490,7 @@ msgstr ""
 "сгруппировать так много продуктов, как сможете, поэтому постарайтесь "
 "использовать общую версию имени вашего продукта."
 
-#: models.py:2140
+#: models.py:2152
 msgid ""
 "The official, commercial image for this product. Upload an image via the "
 "regular uploading interface, set its subject type to \"Gear\", and then "
@@ -2502,17 +2502,17 @@ msgstr ""
 "«Оборудование», и затем выберите его из списка. Если вы закачиваете "
 "несколько версий, они так же отобразятся на рекламной странице."
 
-#: models.py:2148
+#: models.py:2160
 msgid "Tagline"
 msgstr "Слоган"
 
-#: models.py:2149
+#: models.py:2161
 msgid ""
 "A memorable phrase that will sum up this product, for marketing purposes."
 msgstr ""
 "Запоминающаяся фраза, которая подчеркивает продукт, в целях маркетинга."
 
-#: models.py:2164
+#: models.py:2176
 msgid ""
 "Here you can write the full commercial description of your product. You can "
 "use some <a href=\"/faq/#comments\">formatting rules</a>."
@@ -2520,7 +2520,7 @@ msgstr ""
 "Здесь вы можете дать подробное описание вашего продукта. Вы можете "
 "использовать некоторые <a href=\"/faq/#comments\">правила форматирования</a>."
 
-#: models.py:2183
+#: models.py:2195
 msgid "Commercial gear items"
 msgstr "Рекламные элементы оборудования"
 
@@ -2661,7 +2661,7 @@ msgstr "Сегодняшнее \"Изображение Дня\" уже выбр
 msgid "Resolution"
 msgstr "Разрешение"
 
-#: views.py:760 views.py:910
+#: views.py:760 views.py:924
 msgid "Dates"
 msgstr "Даты"
 
@@ -2676,7 +2676,7 @@ msgstr "Кадры"
 msgid "Integration"
 msgstr "Накопление"
 
-#: views.py:767 views.py:1925 views.py:1926 templates/search/search.html:307
+#: views.py:767 views.py:1944 views.py:1945 templates/search/search.html:307
 msgid "hours"
 msgstr "часы"
 
@@ -2696,25 +2696,25 @@ msgstr "Средн. Фаза Луны"
 msgid "Mean SQM"
 msgstr "Средний SQM"
 
-#: views.py:956
+#: views.py:970
 msgid ""
 "Thanks for reporting the problem. All thumbnails will be generated again."
 msgstr ""
 "Спасибо за указание на проблему. Все эскизы будут заново сгенерированы."
 
-#: views.py:1098 views.py:2822
+#: views.py:1112 views.py:2841
 msgid ""
 "Invalid image or no image provided. Allowed formats are JPG, PNG and GIF."
 msgstr ""
 "Не изображение или повреждено. Допустимы только форматы JPG, PNG и GIF."
 
-#: views.py:1105
+#: views.py:1119
 msgid "You have reached your image uploads limit. Please upgrade!"
 msgstr ""
 "Вы достигли вашего лимита на загрузку изображений. Пожалуйста, улучшите "
 "статус!"
 
-#: views.py:1109 views.py:2833 templates/user/profile/flickr_import.html:10
+#: views.py:1123 views.py:2852 templates/user/profile/flickr_import.html:10
 msgid ""
 "AstroBin is currently in read-only mode, because of server maintenance. "
 "Please try again soon!"
@@ -2722,7 +2722,7 @@ msgstr ""
 "AstroBin на данный момент в режиме только-чтение, из-за проблем с "
 "оборудованием сервера. Попробуйте ещё раз попозже!"
 
-#: views.py:1129 views.py:2853
+#: views.py:1143 views.py:2872
 msgid ""
 "You uploaded an Indexed PNG file. AstroBin will need to lower the color "
 "count to 256 in order to work with it."
@@ -2730,7 +2730,8 @@ msgstr ""
 "Вы загрузили индексированный PNG-файл. AstroBin вынужден уменьшить "
 "количество цветов до 256 для работы с ним."
 
-#: views.py:1385 views.py:1414 views.py:1474 views.py:2418
+#: views.py:1399 views.py:1428 views.py:1488 views.py:1556 views.py:1568
+#: views.py:1580 views.py:1604 views.py:2437
 msgid ""
 "There was one or more errors processing the form. You may need to scroll "
 "down to see them."
@@ -2738,187 +2739,187 @@ msgstr ""
 "При обработке формы произошла одна или несколько ошибок. Прокрутите страницу "
 "вниз, чтобы увидеть их."
 
-#: views.py:1396 views.py:1485 views.py:1569 views.py:1595 views.py:2267
-#: views.py:2280 views.py:2301 views.py:2338 views.py:2428 views.py:2490
-#: views.py:2701 views.py:3928 views.py:4098
+#: views.py:1410 views.py:1499 views.py:1586 views.py:1613 views.py:2286
+#: views.py:2299 views.py:2320 views.py:2357 views.py:2447 views.py:2509
+#: views.py:2720 views.py:3947 views.py:4117
 #: templates/user/profile/edit/gear.html:168
 #: templates/user/profile/edit/gear.html:243
 msgid "Form saved. Thank you!"
 msgstr "Форма сохранена. Спасибо!"
 
-#: views.py:1537
+#: views.py:1551
 msgid "Fill in one session, before adding more."
 msgstr "Закончите одну, прежде чем добавлять очередную."
 
-#: views.py:1608 views.py:1679
+#: views.py:1626 views.py:1697
 msgid "Image deleted."
 msgstr "Изображение удалено."
 
-#: views.py:1626
+#: views.py:1644
 msgid "Revision deleted."
 msgstr "Версия удалена."
 
-#: views.py:1782
+#: views.py:1801
 msgid "No date specified"
 msgstr "Дата не указана."
 
-#: views.py:1804 views.py:1865
+#: views.py:1823 views.py:1884
 msgid "No imaging telescopes or lenses, or no imaging cameras specified"
 msgstr ""
 "Не указан телескоп или объектив для съёмки, а также не указана камера для "
 "съёмки."
 
-#: views.py:1805
+#: views.py:1824
 msgid "Gear images"
 msgstr "Изображения оборудования"
 
-#: views.py:1830 templates/image/edit/acquisition.html:81
+#: views.py:1849 templates/image/edit/acquisition.html:81
 msgid "Deep sky"
 msgstr "Глубокий космос"
 
-#: views.py:1831 templates/image/edit/acquisition.html:78
+#: views.py:1850 templates/image/edit/acquisition.html:78
 msgid "Solar system"
 msgstr "Солнечная система"
 
-#: views.py:1864
+#: views.py:1883
 msgid "No subjects specified"
 msgstr "Не указана тема"
 
-#: views.py:1866
+#: views.py:1885
 msgid "No acquisition details specified"
 msgstr "Не указаны данные съёмки"
 
-#: views.py:1897 views.py:3305 templatetags/tags.py:77
+#: views.py:1916 views.py:3324 templatetags/tags.py:67
 msgid "minutes"
 msgstr "минут"
 
-#: views.py:1898 views.py:3306 templatetags/tags.py:78
+#: views.py:1917 views.py:3325 templatetags/tags.py:68
 msgid "seconds ago"
 msgstr "секунд назад"
 
-#: views.py:1900 views.py:3308 templatetags/tags.py:79
+#: views.py:1919 views.py:3327 templatetags/tags.py:69
 #, python-format
 msgid "%s ago"
 msgstr "%s назад"
 
-#: views.py:1923 templates/popover/user.html:19
+#: views.py:1942 templates/popover/user.html:19
 msgid "Member since"
 msgstr "Давность регистрации"
 
-#: views.py:1924
+#: views.py:1943
 msgid "Last login"
 msgstr "Последнее посещение"
 
 # накопления сигнала
-#: views.py:1925
+#: views.py:1944
 msgid "Total integration time"
 msgstr "Накоплено сигнала всего"
 
-#: views.py:1926
+#: views.py:1945
 msgid "Average integration time"
 msgstr "Среднее накопление сигнала"
 
-#: views.py:1927
+#: views.py:1946
 msgid "Forum posts"
 msgstr "Сообщения на форуме"
 
-#: views.py:2876
+#: views.py:2895
 msgid "Image uploaded. Thank you!"
 msgstr "Изображение загружено. Спасибо!"
 
-#: views.py:3172 templatetags/tags.py:237
+#: views.py:3191 templatetags/tags.py:227
 msgid "no alias"
 msgstr "нет описания"
 
-#: views.py:3888 views.py:4081
+#: views.py:3907 views.py:4100
 msgid "You can't merge a product to itself."
 msgstr "Вы можете присоединить продукт к себе."
 
-#: views.py:4119
+#: views.py:4138
 msgid "Default front page section changed."
 msgstr "Главная страница раздела по-умолчанию изменена."
 
-#: management/__init__.py:15
+#: management/__init__.py:21
 msgid "You have a new follower"
 msgstr "На вас подписался пользователь"
 
-#: management/__init__.py:21
+#: management/__init__.py:27
 msgid "New image from a user you follow"
 msgstr "Новое изображение от пользователя, на которого вы подписаны"
 
-#: management/__init__.py:27
+#: management/__init__.py:33
 msgid "Image brought to your attention"
 msgstr "Поступили изображения заслуживающие внимания"
 
-#: management/__init__.py:33
+#: management/__init__.py:39
 msgid "New image revision from a user you follow"
 msgstr "Новая версия изображения от пользователя, на которого вы подписаны"
 
-#: management/__init__.py:39
+#: management/__init__.py:45
 msgid "Your image was plate-solved"
 msgstr "Ваше изображение обработано по координатам"
 
-#: management/__init__.py:45
+#: management/__init__.py:51
 msgid "Your image could not be plate-solved"
 msgstr "Ваше изображение не может быть обработано по координатам"
 
-#: management/__init__.py:51
+#: management/__init__.py:57
 msgid "AstroBin has published a new blog entry"
 msgstr "AstroBin опубликовал новую запись в дневнике"
 
-#: management/__init__.py:57
+#: management/__init__.py:63
 msgid "Your image received a new comment"
 msgstr "Ваше изображение прокомментировано"
 
-#: management/__init__.py:63
+#: management/__init__.py:69
 msgid "There was a reply to your comment"
 msgstr "Есть ответ на ваш комментарий"
 
-#: management/__init__.py:69
+#: management/__init__.py:75
 msgid "Your image was bookmarked"
 msgstr "Ваше изображение добавлено в закладки"
 
-#: management/__init__.py:75
+#: management/__init__.py:81
 msgid "Your image was liked"
 msgstr "Ваше изображение понравилось"
 
-#: management/__init__.py:81
+#: management/__init__.py:87
 msgid "New image with some gear you follow"
 msgstr "Новое изображение к оборудованию, которое вы отслеживаете"
 
-#: management/__init__.py:87
+#: management/__init__.py:93
 msgid "New image of a subject you follow"
 msgstr "Новое изображение к объекту, который вы отслеживаете"
 
-#: management/__init__.py:93
+#: management/__init__.py:99
 msgid "Your API Key request has been approved"
 msgstr "Ваш запрос на API-ключ был одобрен"
 
-#: management/__init__.py:99
+#: management/__init__.py:105
 msgid "New discussion about a gear item you own"
 msgstr "Новое обсуждение элемента оборудования, которое у вас есть"
 
-#: management/__init__.py:105
+#: management/__init__.py:111
 msgid "New review of a gear item you own"
 msgstr "Новый обзор на элемент оборудования, которое у вас есть"
 
-#: management/__init__.py:111
+#: management/__init__.py:117
 msgid "New data posted to public pool"
 msgstr "Обновления опубликованы в общем хранилище"
 
-#: management/__init__.py:117
+#: management/__init__.py:123
 msgid "New image posted to public data pool"
 msgstr "Новое изображение опубликовано в общем хранилище"
 
-#: management/__init__.py:123
+#: management/__init__.py:129
 msgid "New data posted to shared private folder"
 msgstr "Новые данные опубликованы в общий приватный каталог"
 
-#: management/__init__.py:129
+#: management/__init__.py:135
 msgid "New image posted to shared private folder"
 msgstr "Новое изображение опубликовано в личном каталоге обмена"
 
-#: management/__init__.py:135
+#: management/__init__.py:141
 msgid "You are invited to a shared private folder"
 msgstr "Вас приглашают в личный каталог обмена"
 
@@ -2953,7 +2954,8 @@ msgstr ""
 "Сожалеем за это неудобство!"
 
 #: templates/500.html:21
-msgid "Go back to the hom page."
+#, fuzzy
+msgid "Go back to the home page."
 msgstr "Перейти на домашнюю страницу."
 
 #: templates/503.html:4
@@ -2987,7 +2989,7 @@ msgid "There is no activity yet."
 msgstr "Пока нет никакой активности."
 
 #: templates/affiliates.html:8 templates/affiliates.html.py:11
-#: templates/maintenance_base.html:182 templates/base/site_links.html:120
+#: templates/maintenance_base.html:183 templates/base/site_links.html:120
 #: templates/index/root.html:317
 msgid "Affiliates"
 msgstr "Партнёрство"
@@ -3046,11 +3048,11 @@ msgstr ""
 "AstroBin!"
 
 #: templates/explore_choose.html:5 templates/explore_choose.html.py:8
-#: templates/maintenance_base.html:103 templates/base/site_links.html:33
+#: templates/maintenance_base.html:104 templates/base/site_links.html:33
 msgid "Explore"
 msgstr "Обзор"
 
-#: templates/explore_choose.html:10 templates/maintenance_base.html:110
+#: templates/explore_choose.html:10 templates/maintenance_base.html:111
 #: templates/wall.html:9 templates/wall.html.py:175
 #: templates/base/site_links.html:40
 msgid "The Big Wall"
@@ -3064,8 +3066,8 @@ msgstr ""
 "Лучший способ узнавать о новом на AstroBin: большая стена из 100 изображений "
 "на страницу, которую вы можете сортировать и фильтровать как вам нравится."
 
-#: templates/faq.html:4 templates/maintenance_base.html:167
-#: templates/maintenance_base.html:513 templates/base/footer.html:21
+#: templates/faq.html:4 templates/maintenance_base.html:168
+#: templates/maintenance_base.html:514 templates/base/footer.html:21
 #: templates/base/site_links.html:98
 msgid "FAQ"
 msgstr "FAQ"
@@ -3404,7 +3406,7 @@ msgstr ""
 "\">свяжитесь с нами</a>!"
 
 #: templates/guidelines.html:4 templates/guidelines.html.py:9
-#: templates/maintenance_base.html:515 templates/base/footer.html:23
+#: templates/maintenance_base.html:516 templates/base/footer.html:23
 msgid "Guidelines"
 msgstr "Правила"
 
@@ -3536,18 +3538,18 @@ msgstr ""
 "чувствуете, что вы не сможете соблюдать их, пожалуйста, сообщите нам, что "
 "вам не нравится в них."
 
-#: templates/help.html:4 templates/maintenance_base.html:154
-#: templates/maintenance_base.html:512 templates/base/footer.html:20
+#: templates/help.html:4 templates/maintenance_base.html:155
+#: templates/maintenance_base.html:513 templates/base/footer.html:20
 #: templates/base/site_links.html:85
 msgid "Help"
 msgstr "Справка"
 
-#: templates/help.html:8 templates/maintenance_base.html:161
+#: templates/help.html:8 templates/maintenance_base.html:162
 #: templates/base/site_links.html:92
 msgid "What is this site?"
 msgstr "Что это за сайт?"
 
-#: templates/help.html:10 templates/maintenance_base.html:459
+#: templates/help.html:10 templates/maintenance_base.html:460
 #: templates/base/alerts.html:13 templates/index/root.html:269
 msgid "Hey!"
 msgstr "Привет!"
@@ -3868,11 +3870,11 @@ msgstr ""
 "\"Изображение Дня\" выбрано. Спасибо за вашу помощь.\n"
 
 #: templates/leaderboard.html:7 templates/leaderboard.html.py:11
-#: templates/maintenance_base.html:147 templates/base/site_links.html:77
+#: templates/maintenance_base.html:148 templates/base/site_links.html:77
 msgid "Leaderboard"
 msgstr "Рейтинговая таблица"
 
-#: templates/leaderboard.html:21 templates/maintenance_base.html:203
+#: templates/leaderboard.html:21 templates/maintenance_base.html:204
 #: templates/image/detail/menu/user.html:8
 #: templates/inclusion_tags/image_list.html:11
 #: templates/inclusion_tags/search_image_list.html:122
@@ -3880,11 +3882,11 @@ msgstr "Рейтинговая таблица"
 msgid "User"
 msgstr "Пользователь"
 
-#: templates/leaderboard.html:25 templates/base/user_links_entries.html:124
+#: templates/leaderboard.html:25 templates/base/user_links_entries.html:126
 msgid "AstroBin index"
 msgstr "Индекс AstroBin"
 
-#: templates/leaderboard.html:30 templates/base/user_links_entries.html:127
+#: templates/leaderboard.html:30 templates/base/user_links_entries.html:130
 #: templates/user/profile-subnav.html:85
 msgid "Followers"
 msgstr "Подписчики"
@@ -3893,168 +3895,168 @@ msgstr "Подписчики"
 msgid "Total integration"
 msgstr "Общее накопление"
 
-#: templates/maintenance_base.html:82 templates/maintenance_base.html:507
+#: templates/maintenance_base.html:83 templates/maintenance_base.html:508
 #: templates/base/footer.html:15
 msgid "Site links"
 msgstr "Ссылки по сайту"
 
-#: templates/maintenance_base.html:86 templates/maintenance_base.html.py:93
-#: templates/maintenance_base.html:509 templates/maintenance_base.html:543
+#: templates/maintenance_base.html:87 templates/maintenance_base.html.py:94
+#: templates/maintenance_base.html:510 templates/maintenance_base.html:544
 #: templates/base/footer.html:17 templates/base/footer.html.py:52
 #: templates/base/site_links.html:23
 msgid "Home"
 msgstr "На главную"
 
-#: templates/maintenance_base.html:89 templates/maintenance_base.html:511
+#: templates/maintenance_base.html:90 templates/maintenance_base.html:512
 #: templates/base/footer.html:19 templates/base/site_links.html:19
 msgid "Forum"
 msgstr "Форум"
 
-#: templates/maintenance_base.html:94 templates/base/site_links.html:24
+#: templates/maintenance_base.html:95 templates/base/site_links.html:24
 msgid "Latest topics"
 msgstr "Последние обновления в темах"
 
-#: templates/maintenance_base.html:96 templates/base/site_links.html:26
+#: templates/maintenance_base.html:97 templates/base/site_links.html:26
 msgid "Subscribed topics"
 msgstr "Отслеживаемые темы"
 
-#: templates/maintenance_base.html:116 templates/base/site_links.html:46
+#: templates/maintenance_base.html:117 templates/base/site_links.html:46
 #: templates/image/detail/iotd_banner.html:10 templates/index/root.html:75
 msgid "Image of the day"
 msgstr "Изображение дня"
 
-#: templates/maintenance_base.html:125 templates/base/site_links.html:55
+#: templates/maintenance_base.html:126 templates/base/site_links.html:55
 msgid "Public data pools"
 msgstr "Общее хранилище данных"
 
-#: templates/maintenance_base.html:134 templates/base/site_links.html:62
+#: templates/maintenance_base.html:135 templates/base/site_links.html:62
 msgid "Advanced search"
 msgstr "Расширенный поиск"
 
-#: templates/maintenance_base.html:141 templates/stats.html:7
+#: templates/maintenance_base.html:142 templates/stats.html:7
 #: templates/base/site_links.html:70 templates/user/profile.html:104
 msgid "Stats"
 msgstr "Статистика"
 
-#: templates/maintenance_base.html:191 templates/base/site_links.html:129
+#: templates/maintenance_base.html:192 templates/base/site_links.html:129
 #: templates/contact_form/contact.html:5 templates/contact_form/contact.html:8
 msgid "Contact"
 msgstr "Контакты"
 
-#: templates/maintenance_base.html:222 templates/upload.html:8
+#: templates/maintenance_base.html:223 templates/upload.html:8
 #: templates/upload.html.py:70 templates/upload.html:86
-#: templates/avatar/change.html:38 templates/base/user_links_entries.html:145
+#: templates/avatar/change.html:38 templates/base/user_links_entries.html:148
 #: templates/image/detail/modals/upload_revision.html:17
 #: templates/index/root.html:122
 msgid "Upload"
 msgstr "Закачать"
 
-#: templates/maintenance_base.html:225
-#: templates/base/user_links_entries.html:148
+#: templates/maintenance_base.html:226
+#: templates/base/user_links_entries.html:151
 msgid "My places"
 msgstr "Мои места"
 
-#: templates/maintenance_base.html:231 templates/wall.html:137
-#: templates/base/user_links_entries.html:154
+#: templates/maintenance_base.html:232 templates/wall.html:137
+#: templates/base/user_links_entries.html:157
 #: templates/user/profile-subnav.html:20
 msgid "Commercial products"
 msgstr "Рекламные продукты"
 
-#: templates/maintenance_base.html:239
-#: templates/base/user_links_entries.html:162 templates/popover/user.html:30
+#: templates/maintenance_base.html:240
+#: templates/base/user_links_entries.html:165 templates/popover/user.html:30
 #: templates/user/profile-subnav.html:28
 msgid "Gallery"
 msgstr "Галерея"
 
-#: templates/maintenance_base.html:245 templates/wall.html:50
-#: templates/base/user_links_entries.html:168
+#: templates/maintenance_base.html:246 templates/wall.html:50
+#: templates/base/user_links_entries.html:171
 #: templates/inclusion_tags/search_image_list.html:44
 #: templates/inclusion_tags/search_image_list.html:97
 #: templates/user/profile-subnav.html:42
 msgid "Bookmarks"
 msgstr "Закладки"
 
-#: templates/maintenance_base.html:251
-#: templates/base/user_links_entries.html:174
+#: templates/maintenance_base.html:252
+#: templates/base/user_links_entries.html:177
 #: templates/user/profile-subnav.html:48
 #: templates/user/profile/commercial/products.html:209
 msgid "Plots"
 msgstr "Графики"
 
-#: templates/maintenance_base.html:259
-#: templates/base/user_links_entries.html:201 templates/messages/inbox.html:9
+#: templates/maintenance_base.html:260
+#: templates/base/user_links_entries.html:204 templates/messages/inbox.html:9
 msgid "My messages"
 msgstr "Мои сообщения"
 
-#: templates/maintenance_base.html:265
-#: templates/base/user_links_entries.html:207
+#: templates/maintenance_base.html:266
+#: templates/base/user_links_entries.html:210
 #: templates/user/profile-subnav.html:70
 msgid "API Keys"
 msgstr "API-ключи"
 
-#: templates/maintenance_base.html:269
-#: templates/base/user_links_entries.html:214
+#: templates/maintenance_base.html:270
+#: templates/base/user_links_entries.html:217
 msgid "My settings"
 msgstr "Мои настройки"
 
-#: templates/maintenance_base.html:273 templates/profile-edit-menu.html:8
+#: templates/maintenance_base.html:274 templates/profile-edit-menu.html:8
 msgid "Basic information"
 msgstr "Основная информация"
 
-#: templates/maintenance_base.html:281 templates/profile-edit-menu.html:15
+#: templates/maintenance_base.html:282 templates/profile-edit-menu.html:15
 msgid "Commercial information"
 msgstr "Рекламная информация"
 
-#: templates/maintenance_base.html:290 templates/profile-edit-menu.html:23
+#: templates/maintenance_base.html:291 templates/profile-edit-menu.html:23
 msgid "Retailer information"
 msgstr "Информация о продавце"
 
-#: templates/maintenance_base.html:316 templates/profile-edit-menu.html:54
+#: templates/maintenance_base.html:317 templates/profile-edit-menu.html:54
 msgid "Preferences"
 msgstr "Настройки"
 
-#: templates/maintenance_base.html:322 templates/profile-edit-menu.html:60
+#: templates/maintenance_base.html:323 templates/profile-edit-menu.html:60
 msgid "Avatar"
 msgstr "Аватар"
 
-#: templates/maintenance_base.html:329
-#: templates/base/user_links_entries.html:232 templates/user/profile.html:150
+#: templates/maintenance_base.html:330
+#: templates/base/user_links_entries.html:235 templates/user/profile.html:150
 #: templates/user/profile.html.py:153
 msgid "Logout"
 msgstr "Выйти"
 
-#: templates/maintenance_base.html:342 templates/maintenance_base.html:343
-#: templates/base/user_links_entries.html:111
+#: templates/maintenance_base.html:343 templates/maintenance_base.html:344
+#: templates/base/user_links_entries.html:112
 msgid "Notifications"
 msgstr "Уведомления"
 
-#: templates/maintenance_base.html:354
-#: templates/base/user_links_entries.html:276
+#: templates/maintenance_base.html:355
+#: templates/base/user_links_entries.html:279
 msgid "Have an invite? Login!"
 msgstr "Есть приглашение? Заходите!"
 
-#: templates/maintenance_base.html:356
-#: templates/base/user_links_entries.html:278
+#: templates/maintenance_base.html:357
+#: templates/base/user_links_entries.html:281
 #: templates/registration/activation_complete.html:7
 msgid "Login"
 msgstr "Войти"
 
-#: templates/maintenance_base.html:362
-#: templates/base/user_links_entries.html:284
+#: templates/maintenance_base.html:363
+#: templates/base/user_links_entries.html:287
 #: templates/registration/login.html:15
 msgid "Register"
 msgstr "Регистрация"
 
-#: templates/maintenance_base.html:374 templates/base/search_form.html:8
+#: templates/maintenance_base.html:375 templates/base/search_form.html:8
 msgid "Quick search"
 msgstr "Быстрый поиск"
 
-#: templates/maintenance_base.html:460 templates/base/alerts.html:14
+#: templates/maintenance_base.html:461 templates/base/alerts.html:14
 msgid "Success!"
 msgstr "Успешно!"
 
-#: templates/maintenance_base.html:461 templates/maintenance_base.html:473
-#: templates/maintenance_base.html:485 templates/upload.html:21
+#: templates/maintenance_base.html:462 templates/maintenance_base.html:474
+#: templates/maintenance_base.html:486 templates/upload.html:21
 #: templates/upload.html.py:193 templates/upload.html:386
 #: templates/base/alerts.html:15 templates/base/alerts.html.py:28
 #: templates/base/alerts.html:40 templates/image/edit/watermark.html:42
@@ -4063,13 +4065,13 @@ msgstr "Успешно!"
 msgid "Warning!"
 msgstr "Внимание!"
 
-#: templates/maintenance_base.html:462 templates/upload.html:112
+#: templates/maintenance_base.html:463 templates/upload.html:112
 #: templates/base/alerts.html:16
 #: templates/image/detail/modals/send_to_sharedfolder.html:25
 msgid "Error!"
 msgstr "Ошибка!"
 
-#: templates/maintenance_base.html:475 templates/base/alerts.html:30
+#: templates/maintenance_base.html:476 templates/base/alerts.html:30
 #, python-format
 msgid ""
 "As a producer and/or a retailer on AstroBin, it's very important that you "
@@ -4080,7 +4082,7 @@ msgstr ""
 "все детали о вашей организации! Щёлкните <a href=\"%(the_url)s\">здесь</a> "
 "чтобы сделать это."
 
-#: templates/maintenance_base.html:487 templates/base/alerts.html:42
+#: templates/maintenance_base.html:488 templates/base/alerts.html:42
 #, python-format
 msgid ""
 "As a retailer on AstroBin, it's very important that you fill in your country "
@@ -4089,11 +4091,11 @@ msgstr ""
 "Как продавец на AstroBin, очень важно чтобы вы указали страну вашей "
 "деятельности! Щёлкните <a href=\"%(the_url)s\">здесь</a> чтобы сделать это."
 
-#: templates/maintenance_base.html:501 templates/base/footer.html:9
+#: templates/maintenance_base.html:502 templates/base/footer.html:9
 msgid "About"
 msgstr "Описание"
 
-#: templates/maintenance_base.html:503 templates/base/footer.html:11
+#: templates/maintenance_base.html:504 templates/base/footer.html:11
 msgid ""
 "AstroBin is an image hosting website specifically targeted to "
 "astrophotographers: it's the first and the last place where you need to "
@@ -4104,32 +4106,32 @@ msgstr ""
 "единственное достойное место для закачки ваших астрофото. Сделано "
 "астрофотографом для астрофотографов."
 
-#: templates/maintenance_base.html:510 templates/base/footer.html:18
+#: templates/maintenance_base.html:511 templates/base/footer.html:18
 msgid "Blog"
 msgstr "Дневник"
 
-#: templates/maintenance_base.html:514 templates/tos.html:4
+#: templates/maintenance_base.html:515 templates/tos.html:4
 #: templates/tos.html.py:9 templates/base/footer.html:22
 msgid "Terms of Service"
 msgstr "Условия предоставления услуг"
 
-#: templates/maintenance_base.html:518 templates/base/footer.html:26
+#: templates/maintenance_base.html:519 templates/base/footer.html:26
 msgid "Source code"
 msgstr "Исходный код"
 
-#: templates/maintenance_base.html:524 templates/base/footer.html:33
+#: templates/maintenance_base.html:525 templates/base/footer.html:33
 msgid "Thanks to"
 msgstr "Благодарности:"
 
-#: templates/maintenance_base.html:526 templates/base/footer.html:35
+#: templates/maintenance_base.html:527 templates/base/footer.html:35
 msgid "The localization team"
 msgstr "Команда локализации"
 
-#: templates/maintenance_base.html:531 templates/base/footer.html:40
+#: templates/maintenance_base.html:532 templates/base/footer.html:40
 msgid "Copyright"
 msgstr "Авторское право"
 
-#: templates/maintenance_base.html:533
+#: templates/maintenance_base.html:534
 msgid ""
 "AstroBin is Copyright &copy; 2010-2012 Salvatore Iovene, All Rights "
 "Reserved. The images on this websites are copyright of their respective "
@@ -4138,22 +4140,22 @@ msgstr ""
 "Авторские права AstroBin &copy; 2010-2012 Salvatore Iovene, Все Права "
 "Защищены. Изображения на этом сайте принадлежат их уважаемым владельцам."
 
-#: templates/maintenance_base.html:547 templates/base/footer.html:56
+#: templates/maintenance_base.html:548 templates/base/footer.html:56
 msgid "Back to top"
 msgstr "Обратно наверх"
 
-#: templates/maintenance_base.html:590 templates/base/js.html:33
+#: templates/maintenance_base.html:591 templates/base/js.html:33
 #: templates/image/edit/acquisition.html:69 templates/image/edit/basic.html:74
 #: templates/image/edit/gear.html:48 templates/image/edit/watermark.html:37
 #: templates/messages/compose.html:16 templates/openid_provider/decide.html:16
 msgid "Cancel"
 msgstr "Отмена"
 
-#: templates/maintenance_base.html:620 templates/base/js.html:82
+#: templates/maintenance_base.html:621 templates/base/js.html:82
 msgid "No file selected"
 msgstr "Не выбран файл"
 
-#: templates/maintenance_base.html:621 templates/base/js.html:83
+#: templates/maintenance_base.html:622 templates/base/js.html:83
 msgid "Choose file"
 msgstr "Выбрать файл"
 
@@ -4268,7 +4270,7 @@ msgstr ""
 "<strong>%(max_allowed)s</strong> в текущем году."
 
 #: templates/upload.html:47
-#: templates/subscription/subscription_detail.html:219
+#: templates/subscription/subscription_detail.html:221
 #: templates/subscription/subscription_done.html:16
 #: templates/subscription/subscription_list.html:76
 msgid "Thank you for supporting AstroBin!"
@@ -4519,47 +4521,47 @@ msgstr ""
 msgid "AstroBin Raw Data"
 msgstr "AstroBin Raw Data"
 
-#: templates/base/user_links_entries.html:91
+#: templates/base/user_links_entries.html:92
 msgid "Help with translations!"
 msgstr "Помощь в переводе!"
 
-#: templates/base/user_links_entries.html:99
+#: templates/base/user_links_entries.html:100
 msgid "Please select your language from the options above."
 msgstr "Пожалуйста выберите ваш язык из списка выше."
 
-#: templates/base/user_links_entries.html:139
+#: templates/base/user_links_entries.html:142
 #: templates/subscription/subscription_list.html:5
 msgid "Subscription plans"
 msgstr "Планы подписки"
 
-#: templates/base/user_links_entries.html:179
+#: templates/base/user_links_entries.html:182
 msgid "Raw data"
 msgstr "RAW данные"
 
 # Строка из меню пользователя, там все пункты с большой буквы
-#: templates/base/user_links_entries.html:185
+#: templates/base/user_links_entries.html:188
 #: templates/user/profile-subnav.html:35
 msgid "Raw data library"
 msgstr "Библиотека RAW данных"
 
-#: templates/base/user_links_entries.html:193
+#: templates/base/user_links_entries.html:196
 msgid "Private shared folders"
 msgstr "Личные каталоги обмена"
 
-#: templates/base/user_links_entries.html:223
+#: templates/base/user_links_entries.html:226
 msgid "Choose Image Of The Day"
 msgstr "Выбрать \"Изображение Дня\""
 
-#: templates/base/user_links_entries.html:247
+#: templates/base/user_links_entries.html:250
 msgid "Would you like to start using your real name on AstroBin?"
 msgstr "Хотите начать использовать своё настоящее имя на AstroBin?"
 
-#: templates/base/user_links_entries.html:252
+#: templates/base/user_links_entries.html:255
 #: templates/image/detail/modals/send_to_sharedfolder.html:36
 msgid "OK"
 msgstr "OK"
 
-#: templates/base/user_links_entries.html:258
+#: templates/base/user_links_entries.html:261
 msgid "No, thanks"
 msgstr "Нет, спасибо"
 
@@ -4894,7 +4896,7 @@ msgstr "Свойства"
 msgid "Owners"
 msgstr "Владельцы"
 
-#: templates/gear/page.html:321
+#: templates/gear/page.html:317
 msgid "just now"
 msgstr "только сейчас"
 
@@ -5142,17 +5144,17 @@ msgstr "Удалить эту версию"
 msgid "Bring to a user's attention"
 msgstr "Обратить внимание других"
 
+#: templates/image/detail/menu/actions.html:147
+#: templates/image/detail/modals/flag_thumbnails.html:7
+msgid "Flag malfunctioning thumbnails"
+msgstr "Отметить повреждённые миниатюры"
+
 #: templates/image/detail/menu/admin.html:7
 #: templates/pybb/post_template.html:61 templates/pybb/topic.html:68
 msgid "Admin"
 msgstr "Администратор"
 
 #: templates/image/detail/menu/admin.html:14
-#: templates/image/detail/modals/flag_thumbnails.html:7
-msgid "Flag malfunctioning thumbnails"
-msgstr "Отметить повреждённые миниатюры"
-
-#: templates/image/detail/menu/admin.html:21
 msgid "Ban user"
 msgstr "Заблокировать пользователя"
 
@@ -5200,6 +5202,16 @@ msgstr "Пояснения"
 #: templates/image/detail/modals/share.html:48
 msgid "Normal"
 msgstr "Обычный"
+
+#: templates/image/detail/menu/view.html:80
+#, fuzzy
+msgid "Large size"
+msgstr "Размер изображения"
+
+#: templates/image/detail/menu/view.html:86
+#, fuzzy
+msgid "Full size"
+msgstr "Размер пикселя"
 
 #: templates/image/detail/modals/bookmarked_this.html:8
 msgid "The following people bookmarked this image"
@@ -5621,10 +5633,6 @@ msgstr "Показать все сообщения"
 msgid "No images"
 msgstr "Нет изображений"
 
-#: templates/inclusion_tags/notification_list.html:24
-msgid "You have no new notifications."
-msgstr "У вас нет новых уведомлений."
-
 #: templates/inclusion_tags/search_image_list.html:9
 msgid ""
 "This search found results of multiple types. If you want, you can refine "
@@ -5839,10 +5847,6 @@ msgstr "Отправка..."
 #: templates/messages/view.html:86
 msgid "Error. Try again!"
 msgstr "Ошибка. Попробуйте ещё!"
-
-#: templates/notification/all.html:6 templates/notification/all.html.py:9
-msgid "Here are your notifications"
-msgstr "Здесь ваши уведомления"
 
 #: templates/notification/email_body.txt:3
 #, python-format
@@ -6059,6 +6063,7 @@ msgid "AstroBin has publushed a new blog entry: %(object)s"
 msgstr "AstroBin опубликовал новую запись в дневнике: %(object)s"
 
 #: templates/notification/new_bookmark/full.txt:2
+#: templates/notification/new_bookmark/short.txt:2
 #, python-format
 msgid "%(user)s has added your image to their bookmarks: %(url)s"
 msgstr "%(user)s добавил ваше изображение в свои закладки: %(url)s"
@@ -6072,11 +6077,6 @@ msgid ""
 msgstr ""
 "<a href=\"%(url)s\"><strong>%(user)s</strong>добавил ваше изображение в свои "
 "закладки!</a>"
-
-#: templates/notification/new_bookmark/short.txt:2
-#, python-format
-msgid "%(user)s has added yout image to their bookmarks: %(url)s"
-msgstr "%(user)s добавил ваше изображение себе в закладки: %(url)s"
 
 #: templates/notification/new_comment/full.txt:2
 #, python-format
@@ -7088,30 +7088,31 @@ msgstr ""
 "любом случае! Просто, вы не сможете добавлять больше изображений пока не "
 "переключитесь на платный план."
 
-#: templates/subscription/subscription_detail.html:133
-msgid "Cancel via PayPal"
+#: templates/subscription/subscription_detail.html:134
+#, fuzzy
+msgid "Cacel via PayPal"
 msgstr "Отменено через PayPal"
 
-#: templates/subscription/subscription_detail.html:144
-#: templates/subscription/subscription_detail.html:201
+#: templates/subscription/subscription_detail.html:145
+#: templates/subscription/subscription_detail.html:203
 msgid "Here you can activate your free Raw Data Atom subscription."
 msgstr "Здесь вы можете активировать вашу бесплатную Raw Data Atom подписку."
 
-#: templates/subscription/subscription_detail.html:149
-#: templates/subscription/subscription_detail.html:210
+#: templates/subscription/subscription_detail.html:150
+#: templates/subscription/subscription_detail.html:212
 msgid "Activate"
 msgstr "Активировать"
 
-#: templates/subscription/subscription_detail.html:155
-#: templates/subscription/subscription_detail.html:186
+#: templates/subscription/subscription_detail.html:156
+#: templates/subscription/subscription_detail.html:188
 msgid "Subscribe with a secure payment provided by PayPal:"
 msgstr "Подпишитесь с помощью безопасной оплаты через PayPal:"
 
-#: templates/subscription/subscription_detail.html:172
+#: templates/subscription/subscription_detail.html:174
 msgid "You cannot switch to this plan."
 msgstr "Вы не можете переключиться на этот план."
 
-#: templates/subscription/subscription_detail.html:205
+#: templates/subscription/subscription_detail.html:207
 msgid ""
 "Careful! If you have already a paid Raw Data subscription, your available "
 "space will be reduced!"
@@ -7119,7 +7120,7 @@ msgstr ""
 "Осторожно! Если у вас есть оплаченная подписка на Raw Data, ваше доступное "
 "место будет уменьшено."
 
-#: templates/subscription/subscription_detail.html:225
+#: templates/subscription/subscription_detail.html:227
 msgid "Back to the plans"
 msgstr "Обратно к планам"
 
@@ -7693,6 +7694,15 @@ msgstr ""
 #: templates/user/profile/edit/retailer.html:6
 msgid "Edit your retailer information"
 msgstr "Редактировать информацию вашего продавца"
+
+#~ msgid "You have no new notifications."
+#~ msgstr "У вас нет новых уведомлений."
+
+#~ msgid "Here are your notifications"
+#~ msgstr "Здесь ваши уведомления"
+
+#~ msgid "%(user)s has added yout image to their bookmarks: %(url)s"
+#~ msgstr "%(user)s добавил ваше изображение себе в закладки: %(url)s"
 
 #~ msgid ""
 #~ "<a href=\"%(pool_url)s\"><strong>%(user_name)s</strong> has added new "
