@@ -7,8 +7,8 @@ msgstr ""
 "Project-Id-Version: AstroBin 1.0\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2016-01-07 11:22+0000\n"
-"PO-Revision-Date: 2015-12-31 21:29+0000\n"
-"Last-Translator: Tannhauser <tannhauser@sfr.fr>\n"
+"PO-Revision-Date: 2016-02-19 19:28+0000\n"
+"Last-Translator: OrionRider <orionrider@telenet.be>\n"
 "Language-Team: Français <LL@li.org>\n"
 "Language: fr\n"
 "MIME-Version: 1.0\n"
@@ -17,7 +17,7 @@ msgstr ""
 "Plural-Forms: nplurals=2; plural=(n > 1);\n"
 "X-Generator: Pootle 2.5.0\n"
 "X-Poedit-Bookmarks: -1,319,-1,-1,-1,-1,-1,-1,-1,-1\n"
-"X-POOTLE-MTIME: 1451597349.388370\n"
+"X-POOTLE-MTIME: 1455910123.252012\n"
 
 #: fields.py:10
 msgid "United Kingdom"
@@ -2611,56 +2611,48 @@ msgid "Number of images by subject type"
 msgstr "Nombre d'images par type d'objet"
 
 #: views.py:183 views.py:611
-#, fuzzy
 msgid "Imaging telescope or lens"
 msgid_plural "Imaging telescopes or lenses"
-msgstr[0] "Instruments ou objectifs"
+msgstr[0] "Instrument ou objectif"
 msgstr[1] "Instruments ou objectifs"
 
 #: views.py:187 views.py:615
-#, fuzzy
 msgid "Imaging camera"
 msgid_plural "Imaging cameras"
 msgstr[0] "Imageurs"
 msgstr[1] "Imageurs"
 
 #: views.py:191 views.py:619
-#, fuzzy
 msgid "Mount"
 msgid_plural "Mounts"
-msgstr[0] "Montures"
+msgstr[0] "Monture"
 msgstr[1] "Montures"
 
 #: views.py:195 views.py:623
-#, fuzzy
 msgid "Guiding telescope or lens"
 msgid_plural "Guiding telescopes or lenses"
-msgstr[0] "Instruments de guidage"
+msgstr[0] "Instrument de guidage"
 msgstr[1] "Instruments de guidage"
 
 #: views.py:199 views.py:627
-#, fuzzy
 msgid "Guiding camera"
 msgid_plural "Guiding cameras"
-msgstr[0] "Caméras de guidage"
+msgstr[0] "Caméra de guidage"
 msgstr[1] "Caméras de guidage"
 
 #: views.py:203 views.py:631
-#, fuzzy
 msgid "Focal reducer"
 msgid_plural "Focal reducers"
-msgstr[0] "Réducteurs/correcteurs de focale"
+msgstr[0] "Réducteur/correcteur de focale"
 msgstr[1] "Réducteurs/correcteurs de focale"
 
 #: views.py:212 views.py:640
-#, fuzzy
 msgid "Accessory"
 msgid_plural "Accessories"
 msgstr[0] "Accessoires"
 msgstr[1] "Accessoires"
 
 #: views.py:500
-#, fuzzy
 msgid "Today's 'Image of the day' was already chosen. Come back tomorrow!"
 msgstr "\"L'image du jour\" a déjà été désignée. Revenez demain!"
 
@@ -3457,9 +3449,8 @@ msgid "What is forbidden"
 msgstr "Ce qui est proscrit"
 
 #: templates/guidelines.html:31
-#, fuzzy
 msgid "Don't upload anything that you did not work on."
-msgstr "Ne rien publier dont vous ne déteniez les droits d'auteur."
+msgstr "Ne publiez rien dont vous ne détenez pas les droits d'auteur."
 
 #: templates/guidelines.html:32
 msgid ""
@@ -3471,6 +3462,15 @@ msgid ""
 "available data from NASA and other similar agencies; post-processing a "
 "friend's data; post-processing free data made available by other users."
 msgstr ""
+"C'est simple: si vous n'avez pas capturé ou traité les images vous-même, ne "
+"les publiez pas. Les actions suivantes sont incorrectes: poster des images "
+"d'autrui qui ne sont pas modifiées significativement et/ou sans le "
+"consentement de l'auteur; publier des images d'une agence officielle (Nasa, "
+"Esa, Jaxa,...) sans modifications significatives. Ce qui est correct en "
+"revanche c'est: traiter des images du domaine public issues de la Nasa ou "
+"d'autres agences; traiter des images capturées par un ami; traiter des "
+"images en téléchargement libre mises à disposition par d'autres "
+"photographes."
 
 #: templates/guidelines.html:35
 msgid "No nudity, no explicitly sexual content, no illegal content."
@@ -7097,6 +7097,10 @@ msgid ""
 "subscribed, please wait a few minutes while PayPal contacts our server for "
 "the final transaction confirmation. Thank you!"
 msgstr ""
+"Votre abonnement est annulé ou pas encore actif. Si vous désirez vous "
+"abonner à nouveau, merci d'attendre l'expiration de votre abonnement en "
+"cours. Si vous venez de vous abonner, attendez quelques minutes afin que la "
+"transaction PayPal soit confirmée. Merci!"
 
 #: templates/subscription/subscription_detail.html:124
 msgid "By cancelling, you will revert to a free plan."
