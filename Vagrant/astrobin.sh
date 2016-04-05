@@ -156,6 +156,7 @@ function apt {
         python-virtualenv \
         supervisor \
         rabbitmq-server \
+        gettext \
         python-pyside libpyside-dev \
         libqjson-dev libraw-dev \
         shiboken libshiboken-dev \
