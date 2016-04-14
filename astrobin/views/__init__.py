@@ -643,22 +643,6 @@ def image_upload_process(request):
 
 @login_required
 @require_GET
-def image_edit_basic(request, id):
-    image = get_object_or_404(Image, pk=id)
-    if request.user != image.user and not request.user.is_superuser:
-        return HttpResponseForbidden()
-
-    form = ImageEditBasicForm(user = image.user, instance = image)
-
-    return render_to_response('image/edit/basic.html',
-        {'image':image,
-         'form':form,
-        },
-        context_instance=RequestContext(request))
-
-
-@login_required
-@require_GET
 def image_edit_watermark(request, id):
     image = get_object_or_404(Image, pk=id)
     if request.user != image.user:
@@ -857,41 +841,6 @@ def image_edit_license(request, id):
         {'form': form,
          'image': image},
         context_instance = RequestContext(request))
-
-
-@login_required
-@require_POST
-def image_edit_save_basic(request):
-    try:
-        image_id = request.POST['image_id']
-    except MultiValueDictKeyError:
-        raise Http404
-
-
-    image = Image.all_objects.get(pk=image_id)
-    form = ImageEditBasicForm(user = image.user, data=request.POST, instance=image)
-    if request.user != image.user and not request.user.is_superuser:
-        return HttpResponseForbidden()
-
-    if not form.is_valid():
-        response_dict = {
-            'image': image,
-            'form': form,
-        }
-
-        messages.error(request, _("There was one or more errors processing the form. You may need to scroll down to see them."))
-        return render_to_response("image/edit/basic.html",
-            response_dict,
-            context_instance=RequestContext(request))
-
-    form.save()
-
-
-    if 'submit_gear' in request.POST:
-        return HttpResponseRedirect(reverse('image_edit_gear', kwargs={'id': image.id}))
-    else:
-        messages.success(request, _("Form saved. Thank you!"))
-        return HttpResponseRedirect(image.get_absolute_url())
 
 
 @login_required

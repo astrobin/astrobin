@@ -32,6 +32,7 @@ from toggleproperties.models import ToggleProperty
 # AstroBin
 from astrobin.forms import (
     ImageDemoteForm,
+    ImageEditBasicForm,
     ImageFlagThumbsForm,
     ImagePromoteForm,
     ImageRevisionUploadForm,
@@ -778,3 +779,47 @@ class ImagePromoteView(LoginRequiredMixin, UpdateView):
             messages.success(request, _("Image moved to the public area."))
 
         return super(ImagePromoteView, self).post(request, args, kwargs)
+
+
+class ImageEditBaseView(LoginRequiredMixin, UpdateView):
+    model = Image
+    pk_url_kwarg = 'id'
+    template_name_suffix = ''
+
+    def get_queryset(self):
+        return self.model.all_objects.all()
+
+    def get_success_url(self):
+        return reverse_lazy('image_detail', args = (self.get_object().pk,))
+
+    def dispatch(self, request, *args, **kwargs):
+        try:
+            image = self.model.all_objects.get(pk = kwargs[self.pk_url_kwarg])
+        except Image.DoesNotExist:
+            raise Http404
+
+        if request.user.is_authenticated() and request.user != image.user:
+            raise PermissionDenied
+
+        return super(ImageEditBaseView, self).dispatch(request, *args, **kwargs)
+
+    def form_valid(self, form):
+        messages.success(self.request, _("Form saved. Thank you!"))
+        return super(ImageEditBaseView, self).form_valid(form)
+
+    def form_invalid(self, form):
+        messages.error(self.request, _(
+            "There was one or more errors processing the form. " +
+            "You may need to scroll down to see them."))
+        return super(ImageEditBaseView, self).form_valid(form)
+
+
+class ImageEditBasicView(ImageEditBaseView):
+    form_class = ImageEditBasicForm
+    template_name = 'image/edit/basic.html'
+
+    def get_success_url(self):
+        image = self.get_object()
+        if 'submit_gear' in self.request.POST:
+            return reverse_lazy('image_edit_gear', kwargs = {'id': image.pk})
+        return reverse_lazy('image_detail', kwargs = {'id': image.pk})

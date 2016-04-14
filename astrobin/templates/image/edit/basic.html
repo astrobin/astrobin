@@ -13,7 +13,7 @@
         {% blocktrans %}Edit your image: basic information{% endblocktrans %}
     </h1>
 
-    <form class="form-horizontal" id="basic" action="{% url image_edit_save_basic %}" method="post">{% csrf_token %}
+    <form class="form-horizontal" id="basic" action="." method="post">{% csrf_token %}
         <div id="js_form" style="display:none">
             {{form|as_bootstrap}}
         </div>

@@ -75,14 +75,13 @@ class ImageEditBasicForm(forms.ModelForm):
         error_messages = {'invalid': "The address must start with http:// or https://."},
     )
 
-    def __init__(self, user=None, **kwargs):
+    def __init__(self, **kwargs):
         super(ImageEditBasicForm, self).__init__(**kwargs)
         self.fields['link'].label = _("Link")
         self.fields['link_to_fits'].label = _("Link to TIFF/FITS")
         self.fields['locations'].label = _("Locations")
 
-        profile = user.userprofile
-        locations = Location.objects.filter(user = profile)
+        locations = Location.objects.filter(user = self.instance.user.userprofile)
         self.fields['locations'].queryset = locations
         self.fields['locations'].required = False
 

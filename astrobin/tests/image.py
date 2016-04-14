@@ -235,9 +235,8 @@ class ImageTest(TestCase):
 
         # Test basic settings
         response = self.client.post(
-            reverse('image_edit_save_basic'),
+            reverse('image_edit_basic', args = (image.pk,)),
             {
-                'image_id': image.pk,
                 'submit_gear': True,
                 'title': "Test title",
                 'link': "http://www.example.com",
@@ -647,7 +646,6 @@ class ImageTest(TestCase):
     def test_image_edit_basic_view(self):
         def post_data(image):
             return {
-                'image_id': image.pk,
                 'title': "Test title",
                 'link': "http://www.example.com",
                 'link_to_fits': "http://www.example.com/fits",
@@ -661,10 +659,6 @@ class ImageTest(TestCase):
         def get_url(args = None):
             return reverse('image_edit_basic', args = args)
 
-        def post_url(args = None):
-            return reverse('image_edit_save_basic', args = args)
-
-
         self.client.login(username = 'test', password = 'password')
         self._do_upload('astrobin/fixtures/test.jpg')
         image = self._get_last_image()
@@ -676,7 +670,7 @@ class ImageTest(TestCase):
         self.assertEqual(response.status_code, 403)
 
         # POST
-        response = self.client.post(post_url(), post_data(image), follow = True)
+        response = self.client.post(get_url((image.pk,)), post_data(image), follow = True)
         self.assertEqual(response.status_code, 403)
         self.client.logout()
 
@@ -686,21 +680,18 @@ class ImageTest(TestCase):
         self.assertEqual(response.status_code, 200)
 
         # POST
-        response = self.client.post(post_url(), post_data(image), follow = True)
+        response = self.client.post(get_url((image.pk,)), post_data(image), follow = True)
         self.assertRedirects(
             response,
             reverse('image_detail', kwargs = {'id': image.pk}),
             status_code = 302,
             target_status_code = 200)
 
-        # Missing image_id in post
-        response = self.client.post(post_url(), {})
-        self.assertEqual(response.status_code, 404)
-
         # Invalid form
-        response = self.client.post(post_url(), {'image_id': image.pk})
-        self.assertEqual(response.status_code, 200)
-        self._assert_message(response, "error unread", "errors processing the form")
+        with self.assertRaisesMessage(
+                ValueError,
+                "The Image could not be changed because the data didn't validate."):
+            response = self.client.post(get_url((image.pk,)), {})
         self.client.logout()
 
         # Anonymous GET
@@ -712,10 +703,10 @@ class ImageTest(TestCase):
             target_status_code = 200)
 
         # Anonymous POST
-        response = self.client.post(post_url(), post_data(image), follow = True)
+        response = self.client.post(get_url((image.pk,)), post_data(image), follow = True)
         self.assertRedirects(
             response,
-            '/accounts/login/?next=' + post_url(),
+            '/accounts/login/?next=' + get_url((image.pk,)),
             status_code = 302,
             target_status_code = 200)
 
