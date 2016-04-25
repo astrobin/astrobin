@@ -90,7 +90,7 @@ class ImageThumbView(JSONResponseMixin, DetailView):
         image = self.get_object()
         url = image.thumbnail(kwargs.pop('alias'), {
             'revision_label': kwargs.pop('r'),
-            'animated': self.request.GET.get('animated', False),
+            'animated': 'animated' in self.request.GET,
         })
 
         return self.render_json_response({
@@ -108,7 +108,10 @@ class ImageRawThumbView(DetailView):
         image = self.get_object()
         alias = kwargs.pop('alias')
         r = kwargs.pop('r')
-        url = image.thumbnail(alias, {'revision_label': r})
+        url = image.thumbnail(alias, {
+            'revision_label': r,
+            'animated': 'animated' in self.request.GET,
+        })
         return redirect(url)
 
 
