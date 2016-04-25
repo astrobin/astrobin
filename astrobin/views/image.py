@@ -553,7 +553,7 @@ class ImageFullView(DetailView):
         else:
             alias = 'hd'
 
-        if mod:
+        if mod and mod != 'None':
             alias += "_%s" % mod
 
         response_dict = context.copy()
