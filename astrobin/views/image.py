@@ -555,7 +555,7 @@ class ImageFullView(DetailView):
         else:
             alias = 'hd'
 
-        if mod and mod.lower() != 'none':
+        if mod in settings.AVAILABLE_IMAGE_MODS:
             alias += "_%s" % mod
 
         response_dict = context.copy()

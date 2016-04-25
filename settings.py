@@ -589,6 +589,7 @@ THUMBNAIL_PROCESSORS = (
     'astrobin.thumbnail_processors.watermark',
     'astrobin.thumbnail_processors.histogram',
 )
+AVAILABLE_IMAGE_MODS = ('inverted',)
 THUMBNAIL_ALIASES = {
     '': {
         # Main image thumbnails
