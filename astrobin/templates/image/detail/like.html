@@ -1,7 +1,7 @@
 {% load i18n %}
 {% load toggleproperty_tags %}
 
-{% if request.user != image.user %}
+{% if request.user.is_authenticated and request.user != image.user %}
     {% if not user_can_like %}
         <span class="toggleproperty-add-remove property-like">
             <a class="btn btn-primary disabled" data-toggle="modal" href="#cant-like">
@@ -16,3 +16,13 @@
     {% endif %}
 {% endif %}
 
+{% if not request.user.is_authenticated %}
+    <span class="toggleproperty-add-remove property-like">
+        <a class="btn btn-primary" href="{% url auth_login %}?next={{request.path}}">
+            <i class="icon-thumbs-up"></i>
+            <span class="toggleproperties-label">
+                {% trans "Like" %}
+            </span>
+        </a>
+    </span>
+{% endif %}
