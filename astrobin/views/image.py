@@ -50,6 +50,7 @@ from astrobin.utils import to_user_timezone
 
 # AstroBin apps
 from astrobin_apps_notifications.utils import push_notification
+from astrobin_apps_platesolving.models import Solution
 from nested_comments.models import NestedComment
 from rawdata.forms import (
     PublicDataPool_SelectExistingForm,
