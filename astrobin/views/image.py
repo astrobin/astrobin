@@ -83,6 +83,7 @@ class ImageFlagThumbsView(
 
 class ImageThumbView(JSONResponseMixin, DetailView):
     model = Image
+    queryset = Image.all_objects.all()
     pk_url_kwarg = 'id'
 
     def get(self, request, *args, **kwargs):
@@ -100,6 +101,7 @@ class ImageThumbView(JSONResponseMixin, DetailView):
 
 class ImageRawThumbView(DetailView):
     model = Image
+    queryset = Image.all_objects.all()
     pk_url_kwarg = 'id'
 
     def get(self, request, *args, **kwargs):
