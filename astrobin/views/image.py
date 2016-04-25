@@ -10,6 +10,7 @@ from django.core.exceptions import PermissionDenied
 from django.core.urlresolvers import reverse_lazy
 from django.db.models import Q
 from django.http import Http404, HttpResponseRedirect
+from django.shortcuts import get_object_or_404
 from django.shortcuts import redirect
 from django.utils.translation import ugettext as _
 from django.utils.translation import ungettext
@@ -127,11 +128,7 @@ class ImageDetailView(DetailView):
 
     def dispatch(self, request, *args, **kwargs):
         # Redirect to the correct revision
-        try:
-            image = Image.all_objects.get(pk = kwargs[self.pk_url_kwarg])
-        except Image.DoesNotExist:
-            raise Http404
-
+        image = get_object_or_404(Image.all_objects, pk = kwargs[self.pk_url_kwarg])
         revision_label = kwargs['r']
 
         if revision_label is None:
@@ -527,7 +524,7 @@ class ImageFullView(DetailView):
     # TODO: unify this with ImageDetailView.dispatch
     def dispatch(self, request, *args, **kwargs):
         # Redirect to the correct revision
-        image = Image.all_objects.get(pk = kwargs[self.pk_url_kwarg])
+        image = get_object_or_404(Image.all_objects, pk = kwargs[self.pk_url_kwarg])
         self.revision_label = kwargs['r']
 
         if self.revision_label is None:
