@@ -1451,7 +1451,7 @@ def user_page_api_keys(request, username):
 def user_profile_stats_get_integration_hours_ajax(request, username, period = 'monthly', since = 0):
     user = User.objects.get(username = username)
 
-    import stats as _s
+    import astrobin.stats as _s
     (label, data, options) = _s.integration_hours(user, period, int(since))
     response_dict = {
         'flot_label': label,
@@ -1466,7 +1466,7 @@ def user_profile_stats_get_integration_hours_ajax(request, username, period = 'm
 def user_profile_stats_get_integration_hours_by_gear_ajax(request, username, period = 'monthly'):
     user = User.objects.get(username = username)
 
-    import stats as _s
+    import astrobin.stats as _s
     (data, options) = _s.integration_hours_by_gear(user, period)
     response_dict = {
         'flot_data': data,
@@ -1480,7 +1480,7 @@ def user_profile_stats_get_integration_hours_by_gear_ajax(request, username, per
 def user_profile_stats_get_uploaded_images_ajax(request, username, period = 'monthly'):
     user = User.objects.get(username = username)
 
-    import stats as _s
+    import astrobin.stats as _s
     (label, data, options) = _s.uploaded_images(user, period)
     response_dict = {
         'flot_label': label,
@@ -1495,7 +1495,7 @@ def user_profile_stats_get_uploaded_images_ajax(request, username, period = 'mon
 def user_profile_stats_get_views_ajax(request, username, period = 'monthly'):
     user = User.objects.get(username = username)
 
-    import stats as _s
+    import astrobin.stats as _s
     (label, data, options) = _s.views(user, period)
     response_dict = {
         'flot_label': label,
@@ -1508,7 +1508,7 @@ def user_profile_stats_get_views_ajax(request, username, period = 'monthly'):
 
 @require_GET
 def stats_get_image_views_ajax(request, id, period = 'monthly'):
-    import stats as _s
+    import astrobin.stats as _s
 
     (label, data, options) = _s.image_views(id, period)
 
@@ -1523,7 +1523,7 @@ def stats_get_image_views_ajax(request, id, period = 'monthly'):
 
 @require_GET
 def stats_get_gear_views_ajax(request, id, period = 'monthly'):
-    import stats as _s
+    import astrobin.stats as _s
 
     (label, data, options) = _s.gear_views(id, period)
 
@@ -1538,7 +1538,7 @@ def stats_get_gear_views_ajax(request, id, period = 'monthly'):
 
 @require_GET
 def stats_get_affiliated_gear_views_ajax(request, username, period = 'monthly'):
-    import stats as _s
+    import astrobin.stats as _s
 
     (label, data, options) = _s.affiliated_gear_views(username, period)
 
@@ -2624,7 +2624,7 @@ def gear_page(request, id, slug):
 
 @require_GET
 def stats_subject_images_monthly_ajax(request, id):
-    import stats as _s
+    import astrobin.stats as _s
 
     (label, data, options) = _s.subject_images_monthly(id)
 
@@ -2639,7 +2639,7 @@ def stats_subject_images_monthly_ajax(request, id):
 
 @require_GET
 def stats_subject_integration_monthly_ajax(request, id):
-    import stats as _s
+    import astrobin.stats as _s
 
     (label, data, options) = _s.subject_integration_monthly(id)
 
@@ -2654,7 +2654,7 @@ def stats_subject_integration_monthly_ajax(request, id):
 
 @require_GET
 def stats_subject_total_images_ajax(request, id):
-    import stats as _s
+    import astrobin.stats as _s
 
     (label, data, options) = _s.subject_total_images(id)
 
@@ -2669,7 +2669,7 @@ def stats_subject_total_images_ajax(request, id):
 
 @require_GET
 def stats_subject_camera_types_ajax(request, id):
-    import stats as _s
+    import astrobin.stats as _s
 
     (label, data, options) = _s.subject_camera_types(id, request.LANGUAGE_CODE)
 
@@ -2684,7 +2684,7 @@ def stats_subject_camera_types_ajax(request, id):
 
 @require_GET
 def stats_subject_telescope_types_ajax(request, id):
-    import stats as _s
+    import astrobin.stats as _s
 
     (label, data, options) = _s.subject_telescope_types(id, request.LANGUAGE_CODE)
 
@@ -2699,7 +2699,7 @@ def stats_subject_telescope_types_ajax(request, id):
 
 @require_GET
 def stats_camera_types_trend_ajax(request):
-    import stats as _s
+    import astrobin.stats as _s
 
     (data, options) = _s.camera_types_trend()
 
@@ -2713,7 +2713,7 @@ def stats_camera_types_trend_ajax(request):
 
 @require_GET
 def stats_telescope_types_trend_ajax(request):
-    import stats as _s
+    import astrobin.stats as _s
 
     (data, options) = _s.telescope_types_trend()
 
@@ -2727,7 +2727,7 @@ def stats_telescope_types_trend_ajax(request):
 
 @require_GET
 def stats_subject_type_trend_ajax(request):
-    import stats as _s
+    import astrobin.stats as _s
 
     (data, options) = _s.subject_type_trend()
 
@@ -2741,7 +2741,7 @@ def stats_subject_type_trend_ajax(request):
 
 @require_GET
 def stats_gear_total_images_ajax(request, id):
-    import stats as _s
+    import astrobin.stats as _s
 
     (label, data, options) = _s.gear_total_images(id)
 
