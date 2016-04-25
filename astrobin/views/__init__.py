@@ -2590,7 +2590,7 @@ def gear_page(request, id, slug):
         'Accessory': 'accessories',
     }
 
-    from gear import CLASS_LOOKUP
+    from astrobin.gear import CLASS_LOOKUP
 
     all_images = Image.by_gear(gear, gear_type).filter(is_wip = False)
 
