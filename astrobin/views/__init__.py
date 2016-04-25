@@ -644,7 +644,7 @@ def image_upload_process(request):
 @login_required
 @require_GET
 def image_edit_watermark(request, id):
-    image = get_object_or_404(Image, pk=id)
+    image = get_object_or_404(Image.all_objects, pk=id)
     if request.user != image.user:
         return HttpResponseForbidden()
 
@@ -671,7 +671,7 @@ def image_edit_watermark(request, id):
 @login_required
 @require_GET
 def image_edit_gear(request, id):
-    image = Image.all_objects.get(pk=id)
+    image = get_object_or_404(Image.all_objects, pk=id)
     profile = image.user.userprofile
     if request.user != image.user and not request.user.is_superuser:
         return HttpResponseForbidden()
@@ -696,7 +696,7 @@ def image_edit_gear(request, id):
 @login_required
 @require_GET
 def image_edit_acquisition(request, id):
-    image = get_object_or_404(Image, pk=id)
+    image = get_object_or_404(Image.all_objects, pk=id)
     if request.user != image.user and not request.user.is_superuser:
         return HttpResponseForbidden()
 
@@ -760,7 +760,7 @@ def image_edit_acquisition(request, id):
 @login_required
 @require_GET
 def image_edit_acquisition_reset(request, id):
-    image = get_object_or_404(Image, pk=id)
+    image = get_object_or_404(Image.all_objects, pk=id)
     if request.user != image.user and not request.user.is_superuser:
         return HttpResponseForbidden()
 
@@ -779,7 +779,7 @@ def image_edit_acquisition_reset(request, id):
 @login_required
 @require_GET
 def image_edit_make_final(request, id):
-    image = get_object_or_404(Image, pk=id)
+    image = get_object_or_404(Image.all_objects, pk=id)
     if request.user != image.user and not request.user.is_superuser:
         return HttpResponseForbidden()
 
@@ -831,7 +831,7 @@ def image_edit_plate_solve(request, image_id, revision_id):
 @login_required
 @require_GET
 def image_edit_license(request, id):
-    image = get_object_or_404(Image, pk=id)
+    image = get_object_or_404(Image.all_objects, pk=id)
     if request.user != image.user and not request.user.is_superuser:
         return HttpResponseForbidden()
 
@@ -851,7 +851,7 @@ def image_edit_save_watermark(request):
     except MultiValueDictKeyError:
         raise Http404
 
-    image = get_object_or_404(Image, pk=image_id)
+    image = get_object_or_404(Image.all_objects, pk=image_id)
     if request.user != image.user:
         return HttpResponseForbidden()
 
@@ -894,7 +894,7 @@ def image_edit_save_gear(request):
     except MultiValueDictKeyError:
         raise Http404
 
-    image = Image.all_objects.get(pk=image_id)
+    image = get_object_or_404(Image.all_objects, pk=image_id)
     if request.user != image.user and not request.user.is_superuser:
         return HttpResponseForbidden()
 
@@ -939,7 +939,7 @@ def image_edit_save_acquisition(request):
     except MultiValueDictKeyError:
         raise Http404
 
-    image = Image.all_objects.get(pk=image_id)
+    image = get_object_or_404(Image.all_objects, pk=image_id)
     if request.user != image.user and not request.user.is_superuser:
         return HttpResponseForbidden()
 
@@ -1025,7 +1025,7 @@ def image_edit_save_license(request):
     except MultiValueDictKeyError:
         raise Http404
 
-    image = get_object_or_404(Image, pk=image_id)
+    image = get_object_or_404(Image.all_objects, pk=image_id)
     if request.user != image.user and not request.user.is_superuser:
         return HttpResponseForbidden()
 
