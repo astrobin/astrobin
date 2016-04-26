@@ -2347,7 +2347,7 @@ def save_gear_details(request):
     else:
         gear_type = request.POST.get('gear_type')
 
-    from gear import CLASS_LOOKUP
+    from astrobin.gear import CLASS_LOOKUP
 
     form_lookup = {
         'Telescope': TelescopeEditNewForm,
@@ -2782,7 +2782,7 @@ def gear_by_make(request, make):
         'gear': []
     }
 
-    from gear import CLASS_LOOKUP
+    from astrobin.gear import CLASS_LOOKUP
 
     try:
         autorename = GearMakeAutoRename.objects.get(rename_from = make)
@@ -2820,7 +2820,7 @@ def get_makes_by_type(request, klass):
         'makes': []
     }
 
-    from gear import CLASS_LOOKUP
+    from astrobin.gear import CLASS_LOOKUP
     from utils import unique_items
 
     ret['makes'] = unique_items([x.get_make() for x in CLASS_LOOKUP[klass].objects.exclude(make = '').exclude(make = None)])
