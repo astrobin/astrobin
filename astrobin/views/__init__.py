@@ -2821,7 +2821,7 @@ def get_makes_by_type(request, klass):
     }
 
     from astrobin.gear import CLASS_LOOKUP
-    from utils import unique_items
+    from astrobin.utils import unique_items
 
     ret['makes'] = unique_items([x.get_make() for x in CLASS_LOOKUP[klass].objects.exclude(make = '').exclude(make = None)])
     return HttpResponse(
