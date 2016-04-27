@@ -814,7 +814,7 @@ class ImageEditBaseView(LoginRequiredMixin, UpdateView):
         messages.error(self.request, _(
             "There was one or more errors processing the form. " +
             "You may need to scroll down to see them."))
-        return super(ImageEditBaseView, self).form_valid(form)
+        return super(ImageEditBaseView, self).form_invalid(form)
 
 
 class ImageEditBasicView(ImageEditBaseView):
