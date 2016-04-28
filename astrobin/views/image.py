@@ -61,7 +61,7 @@ from rawdata.models import PrivateSharedFolder
 
 
 class ImageFlagThumbsView(
-        LoginRequiredMixin, SuperuserRequiredMixin, UpdateView):
+        LoginRequiredMixin, UpdateView):
     form_class = ImageFlagThumbsForm
     model = Image
     pk_url_kwarg = 'id'
