@@ -8,7 +8,7 @@ msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2016-04-05 10:41+0100\n"
-"PO-Revision-Date: 2014-03-27 20:38+0000\n"
+"PO-Revision-Date: 2016-04-14 06:28+0000\n"
 "Last-Translator: Tomáš <fun2mas@gmail.com>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
 "Language: sk\n"
@@ -17,7 +17,7 @@ msgstr ""
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=3; plural=(n==1) ? 0 : (n>=2 && n<=4) ? 1 : 2;\n"
 "X-Generator: Pootle 2.5.0\n"
-"X-POOTLE-MTIME: 1395952711.276867\n"
+"X-POOTLE-MTIME: 1460615303.676975\n"
 
 #: templates/astrobin_apps_donations/cancel.html:5
 #: templates/astrobin_apps_donations/cancel.html:10
@@ -50,9 +50,8 @@ msgstr "Zakladateľ AstroBin."
 
 #: templates/astrobin_apps_donations/edit.html:5
 #: templates/astrobin_apps_donations/edit.html:8
-#, fuzzy
 msgid "Edit your recurring donation settings"
-msgstr "Váš opakovaný dar bol zrušený"
+msgstr "Upraviť nastavenia Vašich opakovaných darov"
 
 #: templates/astrobin_apps_donations/success.html:5
 #: templates/astrobin_apps_donations/success.html:10
@@ -79,7 +78,7 @@ msgstr ""
 
 #: templates/astrobin_apps_donations/inclusion_tags/_paypal_button.html:33
 msgid "What is AstroBin worth to you?"
-msgstr ""
+msgstr "Čo si ceníte na AstroBin?"
 
 #: templates/astrobin_apps_donations/inclusion_tags/_paypal_button.html:38
 msgid "Monthly contributions"
@@ -117,7 +116,7 @@ msgstr "filmový večer pre jednu osobu"
 #: templates/astrobin_apps_donations/inclusion_tags/_paypal_button.html:43
 #: templates/astrobin_apps_donations/inclusion_tags/_paypal_button.html:51
 msgid "A frugal dinner out for one"
-msgstr ""
+msgstr "Skromná večera pre jedného"
 
 #: templates/astrobin_apps_donations/inclusion_tags/_paypal_button.html:46
 msgid "Yearly contributions (cheaper!)"
@@ -134,30 +133,36 @@ msgstr "$%(amount)/ročne"
 
 #: templates/astrobin_apps_donations/inclusion_tags/_paypal_button.html:119
 msgid "IMPORTANT"
-msgstr ""
+msgstr "DÔLEŽITÉ"
 
 #: templates/astrobin_apps_donations/inclusion_tags/_paypal_button.html:119
 msgid ""
 "Please note: if you are already a donor, the Subscribe button will update "
 "your existing subscription, not create a new one."
 msgstr ""
+"Poznámka: ak už ste darcom, tlačidlom Prihlásiť nevytvoríte nové, ale "
+"aktualizujete existujúce predplatné."
 
 #: templates/astrobin_apps_donations/inclusion_tags/cancel_modal.html:8
 #: templates/astrobin_apps_donations/inclusion_tags/cancel_modal.html:24
 msgid "Cancel your recurring donation"
-msgstr ""
+msgstr "Zrušiť Vaše opakujúce sa dary"
 
 #: templates/astrobin_apps_donations/inclusion_tags/cancel_modal.html:12
 msgid ""
 "Thank you so much for your donations so far! We, and the whole AstroBin "
 "community, really appreciate your support."
 msgstr ""
+"Ďakujeme Vám veľmi pekne sa Vaše dary. My a celá komunita AstroBin si naozaj "
+"vážime Vašu podporu."
 
 #: templates/astrobin_apps_donations/inclusion_tags/cancel_modal.html:15
 msgid ""
 "Are you sure you want to cancel your subscription? AstroBin is a resource "
 "hungry website, and every small donation helps us with the hosting costs."
 msgstr ""
+"Ste si istí, že chcete zrušiť predplatné? AstroBin je stránka s  nákladnou "
+"prevádzkou a každý malý dar nám pomáha znižovať prevádzkové náklady."
 
 #: templates/astrobin_apps_donations/inclusion_tags/cancel_modal.html:18
 msgid ""
