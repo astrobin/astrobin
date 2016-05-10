@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: AstroBin 1.9\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2016-04-05 10:32+0100\n"
+"POT-Creation-Date: 2016-05-10 20:12+0100\n"
 "PO-Revision-Date: 2013-11-11 19:27+0000\n"
 "Last-Translator: gamangabriel <gamangabriel@gmail.com>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -1004,14 +1004,14 @@ msgstr "Zambia"
 msgid "Zimbabwe"
 msgstr "Zimbabwe"
 
-#: forms.py:50
+#: forms.py:68
 msgid ""
 "If you're hosting a copy of this image on your website, put the address here."
 msgstr ""
 "Daca detineti o copie a acestei imagini pe site-ul dumneavoastra, mentionati "
 "adresa aici."
 
-#: forms.py:56
+#: forms.py:74
 msgid ""
 "If you want to share the TIFF or FITS file of your image, put a link to the "
 "file here. Unfortunately, AstroBin cannot offer to store these files at the "
@@ -1022,30 +1022,30 @@ msgstr ""
 "fișiere în acest moment, așa că va trebui să le găzduieşti în spaţiul tău "
 "personal."
 
-#: forms.py:62 models.py:2086 models.py:2168 templates/gear/page.html:197
+#: forms.py:80 models.py:2086 models.py:2168 templates/gear/page.html:197
 #: templates/image/detail/image_title.html:14
 msgid "Link"
 msgstr "Legătură"
 
-#: forms.py:63 templates/image/detail/image_title.html:22
+#: forms.py:81 templates/image/detail/image_title.html:22
 msgid "Link to TIFF/FITS"
 msgstr "Legătură către TIFF/FITS"
 
-#: forms.py:64 models.py:693 templates/maintenance_base.html:305
+#: forms.py:82 models.py:693 templates/maintenance_base.html:305
 #: templates/profile-edit-menu.html:36
 #: templates/image/detail/image_card.html:88
 msgid "Locations"
 msgstr "Locații"
 
-#: forms.py:77
+#: forms.py:94
 msgid "This field is required."
 msgstr "Acest câmp este obligatoriu."
 
-#: forms.py:90
+#: forms.py:107
 msgid "Opacity"
 msgstr "Opacitate"
 
-#: forms.py:91
+#: forms.py:108
 msgid ""
 "0 means invisible; 100 means completely opaque. Recommended values are: 10 "
 "if the watermark will appear on the dark sky background, 50 if on some "
@@ -1055,58 +1055,62 @@ msgstr ""
 "10 dacă eticheta va apărea pe un fundal de cer negru, 50 dacă va apărea pe "
 "un obiect luminos."
 
-#: forms.py:104
+#: forms.py:121
 msgid "If you want to watermark this image, you must specify some text."
 msgstr ""
 "Dacă doriţi să etichetaţi (watermark) această imagine, trebuie să "
 "specificaţi un text."
 
-#: forms.py:131 forms.py:367 models.py:753
+#: forms.py:148 forms.py:384 models.py:753
 msgid "Imaging telescopes or lenses"
 msgstr "Telescoape de imagistica si lentile"
 
-#: forms.py:132 models.py:754
+#: forms.py:149 models.py:754
 msgid "Guiding telescopes or lenses"
 msgstr "Telescoape de ghidare sau lentile"
 
-#: forms.py:133 forms.py:227 models.py:755 models.py:1638 views.py:2386
+#: forms.py:150 forms.py:244 models.py:755 models.py:1638
+#: views/__init__.py:1685
 msgid "Mounts"
 msgstr "Monturi"
 
-#: forms.py:134 forms.py:368 models.py:756
+#: forms.py:151 forms.py:385 models.py:756
 msgid "Imaging cameras"
 msgstr "Camere de imagistică"
 
-#: forms.py:135 models.py:757
+#: forms.py:152 models.py:757
 msgid "Guiding cameras"
 msgstr "Camere de ghidaj"
 
-#: forms.py:136 forms.py:229 models.py:758 models.py:1640 views.py:2387
+#: forms.py:153 forms.py:246 models.py:758 models.py:1640
+#: views/__init__.py:1686
 msgid "Focal reducers"
 msgstr "Reductoare de focală"
 
-#: forms.py:137 forms.py:230 models.py:759 models.py:1641 views.py:207
-#: views.py:635 views.py:2388
+#: forms.py:154 forms.py:247 models.py:759 models.py:1641
+#: views/__init__.py:194 views/__init__.py:1687 views/image.py:194
 msgid "Software"
 msgstr "Soft"
 
-#: forms.py:138 forms.py:231 models.py:760 models.py:1642 views.py:2389
+#: forms.py:155 forms.py:248 models.py:760 models.py:1642
+#: views/__init__.py:1688
 msgid "Filters"
 msgstr "Filtre"
 
-#: forms.py:139 forms.py:232 models.py:761 models.py:1643 views.py:2390
+#: forms.py:156 forms.py:249 models.py:761 models.py:1643
+#: views/__init__.py:1689
 msgid "Accessories"
 msgstr "Accesorii"
 
-#: forms.py:161
+#: forms.py:178
 msgid "If you have a personal website, put the address here."
 msgstr "Dacă deţineţi un site web personal, puneţi adresa aici."
 
-#: forms.py:171 models.py:1557
+#: forms.py:188 models.py:1557
 msgid "Website"
 msgstr "Site web"
 
-#: forms.py:195
+#: forms.py:212
 msgid ""
 "All the telescopes and lenses you own, including the ones you use for "
 "guiding, go here."
@@ -1114,13 +1118,13 @@ msgstr ""
 "Toate telescoapele şi lentilele pe care le deţineţi, incluzându-le şi pe "
 "cele folosite pentru ghidaj, merg aici."
 
-#: forms.py:204
+#: forms.py:221
 msgid "Your DSLRs, CCDs, planetary cameras and guiding cameras go here."
 msgstr ""
 "DSLR-urile tale, CCD-urile, camerele planetare si camerele de ghidaj merg "
 "aici."
 
-#: forms.py:217
+#: forms.py:234
 msgid ""
 "Hint: enter your filters separately! If you enter, for instance, LRGB in one "
 "box, you won't be able to add separate acquisition sessions for them."
@@ -1129,28 +1133,28 @@ msgstr ""
 "într-o singură cutie, nu veți fi în măsură să adăugaţi sesiuni separate de "
 "achiziție pentru ele."
 
-#: forms.py:226 models.py:1637 views.py:2384
+#: forms.py:243 models.py:1637 views/__init__.py:1683
 msgid "Telescopes and lenses"
 msgstr "Telescoape si lentile"
 
-#: forms.py:228 models.py:1639 views.py:2385
+#: forms.py:245 models.py:1639 views/__init__.py:1684
 msgid "Cameras"
 msgstr "Camere"
 
-#: forms.py:260 forms.py:276
+#: forms.py:277 forms.py:293
 #: templates/inclusion_tags/search_image_list.html:64
 msgid "Users"
 msgstr "Utilizatori"
 
-#: forms.py:272
+#: forms.py:289
 msgid "Search type"
 msgstr "Tipul căutării"
 
-#: forms.py:274
+#: forms.py:291
 msgid "All"
 msgstr "Toate"
 
-#: forms.py:275 templates/leaderboard.html:35 templates/gear/page.html:236
+#: forms.py:292 templates/leaderboard.html:35 templates/gear/page.html:236
 #: templates/inclusion_tags/search_image_list.html:51
 #: templates/inclusion_tags/search_image_list.html:104
 #: templates/popover/user.html:15
@@ -1159,131 +1163,131 @@ msgstr "Toate"
 msgid "Images"
 msgstr "Imagini"
 
-#: forms.py:277 models.py:649 views.py:1853
-#: templates/maintenance_base.html:299 templates/profile-edit-menu.html:30
-#: templates/wall.html:131 templates/inclusion_tags/search_image_list.html:13
-#: templates/user/profile-subnav.html:130
+#: forms.py:294 models.py:649 templates/maintenance_base.html:299
+#: templates/profile-edit-menu.html:30 templates/wall.html:131
+#: templates/inclusion_tags/search_image_list.html:13
+#: templates/user/profile-subnav.html:130 views/__init__.py:1155
 msgid "Gear"
 msgstr "Echipament"
 
-#: forms.py:289
+#: forms.py:306
 msgid "Telescope type"
 msgstr "Tipul telescopului"
 
-#: forms.py:290 forms.py:296
+#: forms.py:307 forms.py:313
 msgid "Any"
 msgstr "Orice"
 
-#: forms.py:295
+#: forms.py:312
 msgid "Camera type"
 msgstr "Tipul camerei"
 
-#: forms.py:309 forms.py:314
+#: forms.py:326 forms.py:331
 msgid "Express value in mm"
 msgstr "Valoare exprimată în mm"
 
-#: forms.py:320 forms.py:325
+#: forms.py:337 forms.py:342
 msgid "Express value in &mu;m"
 msgstr "Valoare exprimată în &mu;m"
 
-#: forms.py:332 forms.py:337 forms.py:565 forms.py:610 forms.py:651
+#: forms.py:349 forms.py:354 forms.py:582 forms.py:627 forms.py:668
 msgid "Please use the following format: yyyy-mm-dd"
 msgstr "Vă rugăm să utilizaţi formatul următor: yyyy-mm-dd"
 
-#: forms.py:341 forms.py:345
+#: forms.py:358 forms.py:362
 msgid "Express value in hours"
 msgstr "Valoare exprimată în ore"
 
-#: forms.py:357 models.py:774 templates/image/detail/info.html:27
+#: forms.py:374 models.py:774 templates/image/detail/info.html:27
 #: templates/image/detail/info.html:28 templates/search/search.html:239
 msgid "License"
 msgstr "Licență"
 
-#: forms.py:364
+#: forms.py:381
 msgid ""
 "Search for astronomical objects, telescopes or lenses, cameras, filters..."
 msgstr ""
 "Căutați obiecte astronomice, telescoape sau lentile, aparate de fotografiat, "
 "filtre ..."
 
-#: forms.py:366 models.py:684
+#: forms.py:383 models.py:684
 msgid "Main solar system subject"
 msgstr "Obiect principal din sistemul solar"
 
-#: forms.py:369
+#: forms.py:386
 msgid "Min. telescope aperture"
 msgstr "Apertura minimă a telescopului"
 
-#: forms.py:370
+#: forms.py:387
 msgid "Max. telescope aperture"
 msgstr "Apertura maximă a telescopului"
 
-#: forms.py:371
+#: forms.py:388
 msgid "Acquired after"
 msgstr "Achiziționat după"
 
-#: forms.py:372
+#: forms.py:389
 msgid "Acquired before"
 msgstr "Achiziționat înainte de"
 
-#: forms.py:373
+#: forms.py:390
 msgid "Min. integration"
 msgstr "Integrare minimă"
 
-#: forms.py:374
+#: forms.py:391
 msgid "Max. integration"
 msgstr "Integrare maximă"
 
-#: forms.py:375
+#: forms.py:392
 msgid "Min. Moon phase %"
 msgstr "Faza minimă a Lunii %"
 
-#: forms.py:376
+#: forms.py:393
 msgid "Max. Moon phase %"
 msgstr "Faza maximă a Lunii %"
 
-#: forms.py:515
+#: forms.py:532
 msgid "Latitude (degrees)"
 msgstr "Latitudine (grade)"
 
-#: forms.py:520
+#: forms.py:537
 msgid "Latitude (minutes)"
 msgstr "Latitudine (minute)"
 
-#: forms.py:526
+#: forms.py:543
 msgid "Latitude (seconds)"
 msgstr "Latitudine (secunde)"
 
-#: forms.py:533
+#: forms.py:550
 msgid "Longitude (degrees)"
 msgstr "Longitudine (grade)"
 
-#: forms.py:538
+#: forms.py:555
 msgid "Longitude (minutes)"
 msgstr "Longitudine (minute)"
 
-#: forms.py:544
+#: forms.py:561
 msgid "Longitude (seconds)"
 msgstr "Longitudine (secunde)"
 
-#: forms.py:566 forms.py:611 forms.py:652 models.py:1271 models.py:1484
+#: forms.py:583 forms.py:628 forms.py:669 models.py:1271 models.py:1484
 #: templates/image/detail/image_card.html:46
 msgid "Date"
 msgstr "Data"
 
-#: forms.py:572
+#: forms.py:589
 msgid "Please enter a value between 1 and 5."
 msgstr "Vă rugăm să introduceți o valoare între 1 și 5."
 
-#: forms.py:579
+#: forms.py:596
 msgid "Please enter a value between 1 and 10."
 msgstr "Vă rugăm să introduceți o valoare între 1 și 10."
 
-#: forms.py:640 forms.py:658
+#: forms.py:657 forms.py:675
 msgid "The date cannot be in the future."
 msgstr "Data nu poate fi în viitor."
 
-#: forms.py:892 forms.py:953 models.py:190 templates/gear/fix.html:32
+#: forms.py:909 forms.py:970 models.py:190 templates/gear/fix.html:32
 #: templates/gear/fix.html.py:33 templates/gear/fix.html:34
 #: templates/gear/fix.html.py:42 templates/gear/fix.html:47
 #: templates/gear/fix.html.py:52 templates/gear/fix.html:57
@@ -1301,11 +1305,11 @@ msgstr "Data nu poate fi în viitor."
 msgid "Make"
 msgstr "Marcă"
 
-#: forms.py:893 forms.py:954 models.py:191
+#: forms.py:910 forms.py:971 models.py:191
 msgid "The make, brand, producer or developer of this product."
 msgstr "Marca, brandul, producătorul sau dezvoltatorul acestui produs."
 
-#: forms.py:898 forms.py:959 models.py:198 models.py:1778 models.py:1917
+#: forms.py:915 forms.py:976 models.py:198 models.py:1778 models.py:1917
 #: templates/gear/fix.html:32 templates/gear/fix.html.py:33
 #: templates/gear/fix.html:34 templates/gear/fix.html.py:42
 #: templates/gear/fix.html:47 templates/gear/fix.html.py:52
@@ -1317,7 +1321,7 @@ msgstr "Marca, brandul, producătorul sau dezvoltatorul acestui produs."
 msgid "Name"
 msgstr "Nume"
 
-#: forms.py:903 forms.py:928 forms.py:964 forms.py:999
+#: forms.py:920 forms.py:945 forms.py:981 forms.py:1016
 #: templates/user/profile/commercial/products.html:82
 #: templates/user/profile/commercial/products.html:164
 #: templates/user/profile/commercial/products.html:280
@@ -1327,7 +1331,7 @@ msgstr "Nume"
 msgid "Merge"
 msgstr "Imbina"
 
-#: forms.py:904 forms.py:965
+#: forms.py:921 forms.py:982
 msgid ""
 "Use this field to mark that the item you are claiming really is the same "
 "product (or a variation thereof) of something you have claimed before."
@@ -1335,7 +1339,7 @@ msgstr ""
 "Utilizaţi acest câmp pentru a marca faptul că pretindeţi cu adevărat că este "
 "acelaşi produs (sau o variaţie a acestuia) a ceva ce ai pretins înainte."
 
-#: forms.py:918 forms.py:981
+#: forms.py:935 forms.py:998
 #, python-format
 msgid ""
 "You can't create more than %d claims. Consider upgrading your affiliation!"
@@ -1343,7 +1347,7 @@ msgstr ""
 "Nu puteti crea mai mult de %d cereri. Luați în considerare modernizarea "
 "afilierei!"
 
-#: forms.py:929 forms.py:1000
+#: forms.py:946 forms.py:1017
 msgid ""
 "Use this field to mark that the item you are merging really is the same "
 "product (or a variation thereof) of something you have claimed before."
@@ -1352,7 +1356,7 @@ msgstr ""
 "este într-adevăr acelasi produs (sau o variantă a acestuia) a ceva ce ati "
 "sustinut inainte."
 
-#: forms.py:989
+#: forms.py:1006
 msgid "You have already claimed this product."
 msgstr "Ați susținut deja acest produs."
 
@@ -1423,6 +1427,7 @@ msgid "Unlike"
 msgstr ""
 
 #: locale_extras.py:20 templates/image/detail/like.html:10
+#: templates/image/detail/like.html:24
 msgid "Like"
 msgstr "Îmi place"
 
@@ -1463,7 +1468,7 @@ msgstr "Atribuire - Distribuire în condiții identice Creative Commons"
 msgid "Attribution-NoDerivs Creative Commons"
 msgstr "Atribuire-NoDerivs Creative Commons"
 
-#: models.py:79 models.py:97 views.py:841 views.py:843
+#: models.py:79 models.py:97 views/image.py:398 views/image.py:400
 msgid "English"
 msgstr "Engleză"
 
@@ -1592,8 +1597,8 @@ msgstr "Planetă minoră"
 msgid "Comet"
 msgstr "Cometă"
 
-#: models.py:152 models.py:586 models.py:650 views.py:1854
-#: templates/wall.html:143 templates/image/edit/acquisition.html:84
+#: models.py:152 models.py:586 models.py:650 templates/wall.html:143
+#: templates/image/edit/acquisition.html:84 views/__init__.py:1156
 msgid "Other"
 msgstr "Altul"
 
@@ -1924,11 +1929,11 @@ msgstr "Obiect Deep-Sky"
 msgid "Solar system body or event"
 msgstr "Corp sau eveniment  din sistemul solar "
 
-#: models.py:647 views.py:1851 templates/wall.html:119
+#: models.py:647 templates/wall.html:119 views/__init__.py:1153
 msgid "Extremely wide field"
 msgstr "Câmp extrem de larg"
 
-#: models.py:648 views.py:1852 templates/wall.html:125
+#: models.py:648 templates/wall.html:125 views/__init__.py:1154
 msgid "Star trails"
 msgstr "Trasee stelare"
 
@@ -2042,7 +2047,7 @@ msgstr "9 - Cer din interiorul oraşului (ALB)"
 msgid "Synthetic channel"
 msgstr "Canal sintetic"
 
-#: models.py:1313 views.py:208 views.py:636
+#: models.py:1313 views/__init__.py:195 views/image.py:195
 msgid "Filter"
 msgstr "Filtru"
 
@@ -2082,7 +2087,7 @@ msgstr "Răcirea senzorului"
 msgid "The temperature of the chip. E.g.: -20."
 msgstr "Temperatura cipului. Ex: -20."
 
-#: models.py:1346 views.py:768
+#: models.py:1346 views/image.py:325
 msgid "Darks"
 msgstr "Întunecate"
 
@@ -2090,7 +2095,7 @@ msgstr "Întunecate"
 msgid "The number of dark frames."
 msgstr "Numărul de cadre întunecate."
 
-#: models.py:1351 views.py:769
+#: models.py:1351 views/image.py:326
 msgid "Flats"
 msgstr "Plate"
 
@@ -2098,7 +2103,7 @@ msgstr "Plate"
 msgid "The number of flat frames."
 msgstr "Numărul de cadre plate."
 
-#: models.py:1356 views.py:770
+#: models.py:1356 views/image.py:327
 msgid "Flat darks"
 msgstr "întunecate - plate"
 
@@ -2106,7 +2111,7 @@ msgstr "întunecate - plate"
 msgid "The number of dark flat frames."
 msgstr "Numărul de cadre întunecate plate."
 
-#: models.py:1361 views.py:771
+#: models.py:1361 views/image.py:328
 msgid "Bias"
 msgstr ""
 
@@ -2114,7 +2119,7 @@ msgstr ""
 msgid "The number of bias/offset frames."
 msgstr "Numărul de cadre înclinate/compensate. "
 
-#: models.py:1366 views.py:774
+#: models.py:1366 views/image.py:331
 msgid "Bortle Dark-Sky Scale"
 msgstr "Scara Bortle Cer-Intunecat"
 
@@ -2134,11 +2139,11 @@ msgstr "Adică mag/arcsec^2"
 msgid "As measured with your Sky Quality Meter."
 msgstr "Măsurată cu al tău Contor de Calitate al Cerului (Sky Quality Meter)."
 
-#: models.py:1380 views.py:776
+#: models.py:1380 views/image.py:333
 msgid "Mean FWHM"
 msgstr "Adică FWHM"
 
-#: models.py:1385 views.py:777
+#: models.py:1385 views/image.py:334
 msgid "Temperature"
 msgstr "Temperatura"
 
@@ -2540,7 +2545,7 @@ msgstr ""
 msgid "Commercial gear items"
 msgstr "elemente comerciale pentru echipament"
 
-#: search.py:50 templates/image/actions/bring_to_attention.html:32
+#: search.py:50
 msgid "No results. Sorry."
 msgstr "Niciun rezultat. Scuze."
 
@@ -2622,247 +2627,6 @@ msgstr "Catadioptric"
 msgid "Number of images by subject type"
 msgstr "Numarul imaginilor calculat pe tipuri de subiect"
 
-#: views.py:183 views.py:611
-#, fuzzy
-msgid "Imaging telescope or lens"
-msgid_plural "Imaging telescopes or lenses"
-msgstr[0] "Telescoape de imagistica si lentile"
-msgstr[1] "Telescoape de imagistica si lentile"
-msgstr[2] "Telescoape de imagistica si lentile"
-
-#: views.py:187 views.py:615
-#, fuzzy
-msgid "Imaging camera"
-msgid_plural "Imaging cameras"
-msgstr[0] "Camere de imagistică"
-msgstr[1] "Camere de imagistică"
-msgstr[2] "Camere de imagistică"
-
-#: views.py:191 views.py:619
-#, fuzzy
-msgid "Mount"
-msgid_plural "Mounts"
-msgstr[0] "Monturi"
-msgstr[1] "Monturi"
-msgstr[2] "Monturi"
-
-#: views.py:195 views.py:623
-#, fuzzy
-msgid "Guiding telescope or lens"
-msgid_plural "Guiding telescopes or lenses"
-msgstr[0] "Telescoape de ghidare sau lentile"
-msgstr[1] "Telescoape de ghidare sau lentile"
-msgstr[2] "Telescoape de ghidare sau lentile"
-
-#: views.py:199 views.py:627
-#, fuzzy
-msgid "Guiding camera"
-msgid_plural "Guiding cameras"
-msgstr[0] "Camere de ghidaj"
-msgstr[1] "Camere de ghidaj"
-msgstr[2] "Camere de ghidaj"
-
-#: views.py:203 views.py:631
-#, fuzzy
-msgid "Focal reducer"
-msgid_plural "Focal reducers"
-msgstr[0] "Reductoare de focală"
-msgstr[1] "Reductoare de focală"
-msgstr[2] "Reductoare de focală"
-
-#: views.py:212 views.py:640
-#, fuzzy
-msgid "Accessory"
-msgid_plural "Accessories"
-msgstr[0] "Accesorii"
-msgstr[1] "Accesorii"
-msgstr[2] "Accesorii"
-
-#: views.py:500
-msgid "Today's 'Image of the day' was already chosen. Come back tomorrow!"
-msgstr ""
-
-#: views.py:759
-msgid "Resolution"
-msgstr "Rezoluție"
-
-#: views.py:760 views.py:924
-msgid "Dates"
-msgstr "Date"
-
-#: views.py:761 templates/image/detail/image_card.html:52
-msgid "Frames"
-msgstr "Cadre"
-
-#: views.py:767 templates/wall.html:37
-#: templates/inclusion_tags/search_image_list.html:36
-#: templates/inclusion_tags/search_image_list.html:89
-#: templates/search/search.html:43 templates/search/search.html.py:306
-msgid "Integration"
-msgstr "Integrare"
-
-#: views.py:767 views.py:1944 views.py:1945 templates/search/search.html:307
-msgid "hours"
-msgstr "ore"
-
-#: views.py:772
-msgid "Avg. Moon age"
-msgstr "\"varsta\" medie a Lunei  (numarul de zile trecute de la Luna noua)"
-
-#: views.py:772 templates/subscription/subscription_category_list.html:47
-msgid "days"
-msgstr "zile"
-
-#: views.py:773 templates/search/search.html:313
-msgid "Avg. Moon phase"
-msgstr "aprecierea medie a fazei Lunei"
-
-#: views.py:775
-msgid "Mean SQM"
-msgstr ""
-
-#: views.py:970
-msgid ""
-"Thanks for reporting the problem. All thumbnails will be generated again."
-msgstr ""
-
-#: views.py:1112 views.py:2841
-msgid ""
-"Invalid image or no image provided. Allowed formats are JPG, PNG and GIF."
-msgstr ""
-"Imagine nevalidata sau nici o imagine furnizata. Formatele permise sunt JPG, "
-"PNG si GIF."
-
-#: views.py:1119
-msgid "You have reached your image uploads limit. Please upgrade!"
-msgstr ""
-
-#: views.py:1123 views.py:2852 templates/user/profile/flickr_import.html:10
-msgid ""
-"AstroBin is currently in read-only mode, because of server maintenance. "
-"Please try again soon!"
-msgstr ""
-"Astrobin este in modul curent si exclusiv de citire, din motive de "
-"intretinere a serverului. Va rog sa reveniti in curand !"
-
-#: views.py:1143 views.py:2872
-msgid ""
-"You uploaded an Indexed PNG file. AstroBin will need to lower the color "
-"count to 256 in order to work with it."
-msgstr ""
-
-#: views.py:1399 views.py:1428 views.py:1488 views.py:1556 views.py:1568
-#: views.py:1580 views.py:1604 views.py:2437
-msgid ""
-"There was one or more errors processing the form. You may need to scroll "
-"down to see them."
-msgstr ""
-"Au fost una sau mai multe erori de procesare a formularului. Ar putea fi "
-"necesar să derulați în jos pentru a le vedea. "
-
-#: views.py:1410 views.py:1499 views.py:1586 views.py:1613 views.py:2286
-#: views.py:2299 views.py:2320 views.py:2357 views.py:2447 views.py:2509
-#: views.py:2720 views.py:3947 views.py:4117
-#: templates/user/profile/edit/gear.html:168
-#: templates/user/profile/edit/gear.html:243
-msgid "Form saved. Thank you!"
-msgstr "Formă salvată. Mulțumesc!"
-
-#: views.py:1551
-msgid "Fill in one session, before adding more."
-msgstr "Completati o sesiune inainte de a mai adauga ceva."
-
-#: views.py:1626 views.py:1697
-#, fuzzy
-msgid "Image deleted."
-msgstr "Imaginea dumneavoastra a fost stearsa"
-
-#: views.py:1644
-#, fuzzy
-msgid "Revision deleted."
-msgstr "Înregistrare încheiată"
-
-#: views.py:1801
-msgid "No date specified"
-msgstr "Nici o dată specificată"
-
-#: views.py:1823 views.py:1884
-msgid "No imaging telescopes or lenses, or no imaging cameras specified"
-msgstr ""
-"Nu s-a specificat nici un telescop, lentila sau camera pentru producerea "
-"imaginii."
-
-#: views.py:1824
-msgid "Gear images"
-msgstr "Imagini cu echipamentul"
-
-#: views.py:1849 templates/image/edit/acquisition.html:81
-msgid "Deep sky"
-msgstr "Deep sky"
-
-#: views.py:1850 templates/image/edit/acquisition.html:78
-msgid "Solar system"
-msgstr "Sistemul solar"
-
-#: views.py:1883
-msgid "No subjects specified"
-msgstr "Nu sunt subiecte specificate"
-
-#: views.py:1885
-msgid "No acquisition details specified"
-msgstr "N-ati specificat detaliile de achizitie"
-
-#: views.py:1916 views.py:3324 templatetags/tags.py:67
-msgid "minutes"
-msgstr "minute"
-
-#: views.py:1917 views.py:3325 templatetags/tags.py:68
-msgid "seconds ago"
-msgstr "secunde in urmă"
-
-#: views.py:1919 views.py:3327 templatetags/tags.py:69
-#, python-format
-msgid "%s ago"
-msgstr "%s in urmă"
-
-#: views.py:1942 templates/popover/user.html:19
-msgid "Member since"
-msgstr "Membru incepand din"
-
-#: views.py:1943
-msgid "Last login"
-msgstr "Ultima logare"
-
-#: views.py:1944
-msgid "Total integration time"
-msgstr "Timp total de integrare"
-
-#: views.py:1945
-msgid "Average integration time"
-msgstr "Timpul mediu de integrare"
-
-#: views.py:1946
-#, fuzzy
-msgid "Forum posts"
-msgstr "Forumuri"
-
-#: views.py:2895
-#, fuzzy
-msgid "Image uploaded. Thank you!"
-msgstr "Formă salvată. Mulțumesc!"
-
-#: views.py:3191 templatetags/tags.py:227
-msgid "no alias"
-msgstr "nici o asociere"
-
-#: views.py:3907 views.py:4100
-msgid "You can't merge a product to itself."
-msgstr "nu puteti alipi o imagine, ei insasi."
-
-#: views.py:4138
-msgid "Default front page section changed."
-msgstr ""
-
 #: management/__init__.py:21
 msgid "You have a new follower"
 msgstr "Ai un nou urmăritor"
@@ -2872,81 +2636,77 @@ msgid "New image from a user you follow"
 msgstr "O noua imagine de la utilizatorul urmarit."
 
 #: management/__init__.py:33
-msgid "Image brought to your attention"
-msgstr "Imagine adusa in atentia dvs."
-
-#: management/__init__.py:39
 msgid "New image revision from a user you follow"
 msgstr "O noua imagine revizuita de la un utilizator pe care il urmariti"
 
-#: management/__init__.py:45
+#: management/__init__.py:39
 msgid "Your image was plate-solved"
 msgstr ""
 
-#: management/__init__.py:51
+#: management/__init__.py:45
 msgid "Your image could not be plate-solved"
 msgstr ""
 
-#: management/__init__.py:57
+#: management/__init__.py:51
 msgid "AstroBin has published a new blog entry"
 msgstr "Astrobin a publicat o noua intrare pe blog"
 
-#: management/__init__.py:63
+#: management/__init__.py:57
 msgid "Your image received a new comment"
 msgstr "Imaginea ta a primit un comentariu nou"
 
-#: management/__init__.py:69
+#: management/__init__.py:63
 msgid "There was a reply to your comment"
 msgstr "A aparut un raspuns la comentariul tau."
 
-#: management/__init__.py:75
+#: management/__init__.py:69
 #, fuzzy
 msgid "Your image was bookmarked"
 msgstr "Imaginea ta a fost favorita de cineva."
 
-#: management/__init__.py:81
+#: management/__init__.py:75
 #, fuzzy
 msgid "Your image was liked"
 msgstr "Imaginea dumneavoastra a fost stearsa"
 
-#: management/__init__.py:87
+#: management/__init__.py:81
 msgid "New image with some gear you follow"
 msgstr "Imagine noua cu ceva echipament pe care tu il urmaresti."
 
-#: management/__init__.py:93
+#: management/__init__.py:87
 msgid "New image of a subject you follow"
 msgstr "O noua imagine cu subiectul pe care il urmaresti"
 
-#: management/__init__.py:99
+#: management/__init__.py:93
 msgid "Your API Key request has been approved"
 msgstr "Cheile API pe care le-ai solicitat au fost aprobate."
 
-#: management/__init__.py:105
+#: management/__init__.py:99
 msgid "New discussion about a gear item you own"
 msgstr "O noua discutie despre echipamentele pe care le detineti"
 
-#: management/__init__.py:111
+#: management/__init__.py:105
 msgid "New review of a gear item you own"
 msgstr "Un nou review al echipamentului pe care il detineti"
 
-#: management/__init__.py:117
+#: management/__init__.py:111
 msgid "New data posted to public pool"
 msgstr "O noua data publicata in zona publica"
 
-#: management/__init__.py:123
+#: management/__init__.py:117
 #, fuzzy
 msgid "New image posted to public data pool"
 msgstr "O noua imagine cu subiectul pe care il urmaresti"
 
-#: management/__init__.py:129
+#: management/__init__.py:123
 msgid "New data posted to shared private folder"
 msgstr "O noua data postata in zona privata a folderului de interschimb"
 
-#: management/__init__.py:135
+#: management/__init__.py:129
 msgid "New image posted to shared private folder"
 msgstr "O noua imagine postata zona privata a folderului de interschimb"
 
-#: management/__init__.py:141
+#: management/__init__.py:135
 msgid "You are invited to a shared private folder"
 msgstr "Sunteti invitat la a vizita un folder cu statut privat."
 
@@ -4246,6 +4006,13 @@ msgstr "Incarcate"
 msgid "Acquired"
 msgstr "Capturate"
 
+#: templates/wall.html:37 templates/inclusion_tags/search_image_list.html:36
+#: templates/inclusion_tags/search_image_list.html:89
+#: templates/search/search.html:43 templates/search/search.html.py:306
+#: views/image.py:324
+msgid "Integration"
+msgstr "Integrare"
+
 #: templates/wall.html:44
 #, fuzzy
 msgid "Number of likes"
@@ -4702,45 +4469,6 @@ msgstr "Carte tehnică"
 msgid "Fit to window"
 msgstr "Potriviti in fereastra"
 
-#: templates/image/actions/bring_to_attention.html:5
-#: templates/image/actions/bring_to_attention.html:8
-msgid "Bring image to attention"
-msgstr "Aduceti imaginea in atentie"
-
-#: templates/image/actions/bring_to_attention.html:10
-msgid ""
-"By choosing some users and clicking the button below, you will send them a "
-"notification prompting them to checkout this image."
-msgstr ""
-"Alegand unii utilizatori si apasand butonul de mai jos, le vei trimite o "
-"notificare sa verifice aceasta imagine."
-
-#: templates/image/actions/bring_to_attention.html:16
-#: templates/image/detail/modals/flag_thumbnails.html:15
-msgid "Continue"
-msgstr "Continuati"
-
-#: templates/image/actions/bring_to_attention.html:17
-#: templates/image/actions/request_additional_information_complete.html:11
-#: templates/image/edit/acquisition.html:23
-#: templates/image/edit/acquisition.html:54
-#: templates/image/edit/license.html:23
-msgid "Return to image"
-msgstr "Intoarcere la imagine"
-
-#: templates/image/actions/bring_to_attention.html:33
-msgid "Click on a user below!"
-msgstr "Faceți clic pe un utilizator de mai jos!"
-
-#: templates/image/actions/bring_to_attention_complete.html:4
-#: templates/image/actions/bring_to_attention_complete.html:7
-msgid "Done!"
-msgstr "Realizat !"
-
-#: templates/image/actions/bring_to_attention_complete.html:9
-msgid "The image was brought to the attention of the selected users."
-msgstr "Imaginea a fost adusa in atentia utilizatorilor selectati ."
-
 #: templates/image/actions/request_additional_information_complete.html:5
 msgid "Additional information requested"
 msgstr "Este nevoie de informatii suplimentare."
@@ -4752,6 +4480,13 @@ msgid ""
 "the image soon. Remember that you can also <a href=\"%(message_url)s\">send "
 "them a message</a>. "
 msgstr ""
+
+#: templates/image/actions/request_additional_information_complete.html:11
+#: templates/image/edit/acquisition.html:23
+#: templates/image/edit/acquisition.html:54
+#: templates/image/edit/license.html:23
+msgid "Return to image"
+msgstr "Intoarcere la imagine"
 
 #: templates/image/detail/comments.html:8
 #, python-format
@@ -4775,6 +4510,10 @@ msgstr "A fost posibil datorita"
 #: templates/image/detail/histogram.html:6
 msgid "Histogram"
 msgstr "Histograma"
+
+#: templates/image/detail/image_card.html:52 views/image.py:318
+msgid "Frames"
+msgstr "Cadre"
 
 #: templates/image/detail/image_card.html:78
 msgid "RA center"
@@ -4830,7 +4569,7 @@ msgstr "Original"
 msgid "Sky plot"
 msgstr ""
 
-#: templates/image/detail/wip_banner.html:9
+#: templates/image/detail/wip_banner.html:7
 #, python-format
 msgid ""
 "This image is a <strong>work in progress</strong> from your <a href="
@@ -4838,76 +4577,78 @@ msgid ""
 "unless you give them one of the links you can find in the <em>Share</em> "
 "menu below. Use that link to post this image to Internet forums and get "
 "feedback on it. When you are satisfied, perhaps after uploading some "
-"revisions, <a href=\"%(promote_url)s\">promote it</a> to the <a href="
-"\"%(profile_url)s\">Public Area</a>."
+"revisions, <a href=\"#promote-modal\" data-toggle=\"modal\">promote it</a> "
+"to the <a href=\"%(profile_url)s\">Public Area</a>."
 msgstr ""
 
-#: templates/image/detail/menu/actions.html:7 templates/messages/inbox.html:30
+#: templates/image/detail/menu/actions.html:9 templates/messages/inbox.html:30
 #: templates/user/profile/commercial/products.html:43
 #: templates/user/profile/commercial/products.html:125
 msgid "Actions"
 msgstr "Actiuni"
 
-#: templates/image/detail/menu/actions.html:15
+#: templates/image/detail/menu/actions.html:17
 #, fuzzy
 msgid "Edit watermark"
 msgstr "Pasul urmator: eticheta ( watermark)"
 
-#: templates/image/detail/menu/actions.html:21
+#: templates/image/detail/menu/actions.html:23
 msgid "Edit basic information"
 msgstr "Editeaza informatiile de baza"
 
-#: templates/image/detail/menu/actions.html:28
+#: templates/image/detail/menu/actions.html:30
 msgid "Edit gear used"
 msgstr "Editeaza echipamentul utilizat"
 
-#: templates/image/detail/menu/actions.html:34
+#: templates/image/detail/menu/actions.html:36
 #: templates/image/edit/gear.html:47
 msgid "Edit acquisition details"
 msgstr "Editeaza detaliile de achzitie"
 
-#: templates/image/detail/menu/actions.html:47
+#: templates/image/detail/menu/actions.html:49
 msgid "Mark this revision as final"
 msgstr "Marcheaza aceasta revizie ca finala"
 
-#: templates/image/detail/menu/actions.html:61
+#: templates/image/detail/menu/actions.html:63
 msgid "Attempt to plate-solve again"
 msgstr ""
 
-#: templates/image/detail/menu/actions.html:71
+#: templates/image/detail/menu/actions.html:73
 msgid "Change license"
 msgstr "Schimba licenta"
 
-#: templates/image/detail/menu/actions.html:77
+#: templates/image/detail/menu/actions.html:79
 #: templates/image/detail/modals/upload_revision.html:7
 msgid "Upload new revision"
 msgstr "Incarca versiune noua"
 
-#: templates/image/detail/menu/actions.html:84
+#: templates/image/detail/menu/actions.html:86
+#: templates/image/detail/modals/promote.html:7
 msgid "Promote to public area"
 msgstr "Promovare in zona publica"
 
-#: templates/image/detail/menu/actions.html:91
+#: templates/image/detail/menu/actions.html:93
+#: templates/image/detail/modals/demote.html:7
 msgid "Move to staging area"
 msgstr "Mutati in zona de asteptare"
 
-#: templates/image/detail/menu/actions.html:100
+#: templates/image/detail/menu/actions.html:102
 #: templates/image/detail/modals/send_to_datapool.html:7
 #, fuzzy
 msgid "Send to public data pool"
 msgstr "Promovare in zona publica"
 
-#: templates/image/detail/menu/actions.html:107
+#: templates/image/detail/menu/actions.html:109
 #: templates/image/detail/modals/send_to_sharedfolder.html:7
 #, fuzzy
 msgid "Send to private shared folder"
 msgstr "Trimite mesaj privat"
 
-#: templates/image/detail/menu/actions.html:117
+#: templates/image/detail/menu/actions.html:119
 msgid "Delete original image"
 msgstr "Sterge imaginea originala"
 
-#: templates/image/detail/menu/actions.html:122
+#: templates/image/detail/menu/actions.html:124
 #: templates/image/detail/modals/delete.html:14
 #: templates/image/detail/modals/delete.html:31
 #: templates/image/detail/modals/delete.html:48
@@ -4915,16 +4656,12 @@ msgstr "Sterge imaginea originala"
 msgid "Delete"
 msgstr "Sterge"
 
-#: templates/image/detail/menu/actions.html:128
+#: templates/image/detail/menu/actions.html:130
 msgid "Delete this revision"
 msgstr "Sterge aceasta revizie"
 
-#: templates/image/detail/menu/actions.html:138
-msgid "Bring to a user's attention"
-msgstr "Aduceti in atentia unui utilizator"
-
-#: templates/image/detail/menu/actions.html:147
-#: templates/image/detail/modals/flag_thumbnails.html:7
+#: templates/image/detail/menu/actions.html:141
+#: templates/image/detail/modals/flag_thumbnails.html:6
 msgid "Flag malfunctioning thumbnails"
 msgstr ""
 
@@ -5060,7 +4797,19 @@ msgstr ""
 "Aceasta imagine va fi stearsa definitiv si nu va putea fi recuperata. "
 "Reviziile sale nu vor fi sterse. Sunteti sigur ?"
 
-#: templates/image/detail/modals/flag_thumbnails.html:11
+#: templates/image/detail/modals/demote.html:11
+msgid ""
+"This will move this image to your staging area, making it unlisted. The "
+"image will be accessible by anyone with a direct link."
+msgstr ""
+
+#: templates/image/detail/modals/demote.html:15
+#: templates/image/detail/modals/flag_thumbnails.html:14
+#: templates/image/detail/modals/promote.html:15
+msgid "Continue"
+msgstr "Continuati"
+
+#: templates/image/detail/modals/flag_thumbnails.html:10
 msgid ""
 "This will trigger the regeneration of all thumbnails for this image and all "
 "its revisions."
@@ -5068,6 +4817,12 @@ msgstr ""
 
 #: templates/image/detail/modals/like_this.html:8
 msgid "The following people like this image"
+msgstr ""
+
+#: templates/image/detail/modals/promote.html:11
+msgid ""
+"This will move this image to your public area, making it listed and "
+"notifying your followers."
 msgstr ""
 
 #: templates/image/detail/modals/send_to_datapool.html:11
@@ -5201,6 +4956,14 @@ msgstr ""
 #: templates/image/edit/acquisition.html:74
 msgid "What kind of image is this?"
 msgstr "Ce fel de imagine este aceasta ?"
+
+#: templates/image/edit/acquisition.html:78 views/__init__.py:1152
+msgid "Solar system"
+msgstr "Sistemul solar"
+
+#: templates/image/edit/acquisition.html:81 views/__init__.py:1151
+msgid "Deep sky"
+msgstr "Deep sky"
 
 #: templates/image/edit/basic.html:7 templates/image/edit/basic.html.py:13
 msgid "Edit your image: basic information"
@@ -5653,30 +5416,6 @@ msgstr ""
 #: templates/notification/api_key_request_approved/short.txt:2
 msgid "API Key request approved"
 msgstr "Cheia API solicitata a fost aprobata"
-
-#: templates/notification/attention_request/full.txt:2
-#, python-format
-msgid ""
-"%(originator)s would like to bring the following image to your attention: "
-"%(object_url)s"
-msgstr ""
-"%(originator)s doreste sa aduca urmatoarea imagine in atentia ta: "
-"%(object_url)s"
-
-#: templates/notification/attention_request/notice.html:2
-#: templates/notification/attention_request/short.html:1
-#, python-format
-msgid ""
-"<a href=\"%(object_url)s\"><strong>%(originator)s</strong> wants to bring an "
-"image to your attention.</a>"
-msgstr ""
-"<a href=\"%(object_url)s\"><strong>%(originator)s</strong> doreste sa aduca "
-"o imagine in atentia ta.</a>"
-
-#: templates/notification/attention_request/short.txt:2
-#, python-format
-msgid "%(originator)s wants to bring an image to your attention"
-msgstr "%(originator)s doreste sa aduca o imagine in atentia ta"
 
 #: templates/notification/follow_success/notice.html:2
 #: templates/notification/follow_success/short.html:2
@@ -6188,6 +5927,10 @@ msgstr "Ascensia Dreapta (RA)"
 msgid "Dec"
 msgstr "Declinatia"
 
+#: templates/popover/user.html:19 views/__init__.py:1241
+msgid "Member since"
+msgstr "Membru incepand din"
+
 #: templates/privatebeta/invite.html:4 templates/privatebeta/invite.html:13
 msgid "AstroBin is currently in closed beta"
 msgstr "AstroBin este în prezent în versiune beta închisă"
@@ -6510,6 +6253,15 @@ msgstr "Criteriu de baza"
 msgid "Please input some search terms!"
 msgstr "Va rog, introduceti termeni de cautare"
 
+#: templates/search/search.html:307 views/__init__.py:1243
+#: views/__init__.py:1244 views/image.py:324
+msgid "hours"
+msgstr "ore"
+
+#: templates/search/search.html:313 views/image.py:330
+msgid "Avg. Moon phase"
+msgstr "aprecierea medie a fazei Lunei"
+
 #: templates/search/search.html:321
 msgid "Telescope's aperture"
 msgstr "Apertura telescopului"
@@ -6600,6 +6352,11 @@ msgstr ""
 msgctxt "At no cost"
 msgid "Free"
 msgstr ""
+
+#: templates/subscription/subscription_category_list.html:47
+#: views/image.py:329
+msgid "days"
+msgstr "zile"
 
 #: templates/subscription/subscription_category_list.html:51
 msgid "weeks"
@@ -7075,6 +6832,15 @@ msgstr ""
 msgid "Your account was deleted. Thanks for using AstroBin until now!"
 msgstr ""
 
+#: templates/user/profile/flickr_import.html:10 views/__init__.py:606
+#: views/__init__.py:2081
+msgid ""
+"AstroBin is currently in read-only mode, because of server maintenance. "
+"Please try again soon!"
+msgstr ""
+"Astrobin este in modul curent si exclusiv de citire, din motive de "
+"intretinere a serverului. Va rog sa reveniti in curand !"
+
 #: templates/user/profile/flickr_import.html:14
 msgid ""
 "Please note: when importing from Flickr, automatic watermarking of the "
@@ -7286,6 +7052,15 @@ msgstr ""
 msgid "Add gear item"
 msgstr "Adaugă echipament utilizat"
 
+#: templates/user/profile/edit/gear.html:168
+#: templates/user/profile/edit/gear.html:243 views/__init__.py:930
+#: views/__init__.py:1016 views/__init__.py:1043 views/__init__.py:1585
+#: views/__init__.py:1598 views/__init__.py:1619 views/__init__.py:1656
+#: views/__init__.py:1746 views/__init__.py:1808 views/__init__.py:2018
+#: views/__init__.py:3117 views/__init__.py:3287 views/image.py:810
+msgid "Form saved. Thank you!"
+msgstr "Formă salvată. Mulțumesc!"
+
 #: templates/user/profile/edit/license.html:6
 msgid "Set your default image license"
 msgstr "Setează imaginea standard de licenţă."
@@ -7328,6 +7103,256 @@ msgstr "Selectaţi limba dvs. şi ce notificare prin e-mail doriţi să primiţi
 #: templates/user/profile/edit/retailer.html:6
 msgid "Edit your retailer information"
 msgstr "Editează informaţiile vânzătorului tău"
+
+#: templatetags/tags.py:67 views/__init__.py:1215 views/__init__.py:2544
+msgid "minutes"
+msgstr "minute"
+
+#: templatetags/tags.py:68 views/__init__.py:1216 views/__init__.py:2545
+msgid "seconds ago"
+msgstr "secunde in urmă"
+
+#: templatetags/tags.py:69 views/__init__.py:1218 views/__init__.py:2547
+#, python-format
+msgid "%s ago"
+msgstr "%s in urmă"
+
+#: templatetags/tags.py:227 views/__init__.py:2418
+msgid "no alias"
+msgstr "nici o asociere"
+
+#: views/__init__.py:170 views/image.py:170
+#, fuzzy
+msgid "Imaging telescope or lens"
+msgid_plural "Imaging telescopes or lenses"
+msgstr[0] "Telescoape de imagistica si lentile"
+msgstr[1] "Telescoape de imagistica si lentile"
+msgstr[2] "Telescoape de imagistica si lentile"
+
+#: views/__init__.py:174 views/image.py:174
+#, fuzzy
+msgid "Imaging camera"
+msgid_plural "Imaging cameras"
+msgstr[0] "Camere de imagistică"
+msgstr[1] "Camere de imagistică"
+msgstr[2] "Camere de imagistică"
+
+#: views/__init__.py:178 views/image.py:178
+#, fuzzy
+msgid "Mount"
+msgid_plural "Mounts"
+msgstr[0] "Monturi"
+msgstr[1] "Monturi"
+msgstr[2] "Monturi"
+
+#: views/__init__.py:182 views/image.py:182
+#, fuzzy
+msgid "Guiding telescope or lens"
+msgid_plural "Guiding telescopes or lenses"
+msgstr[0] "Telescoape de ghidare sau lentile"
+msgstr[1] "Telescoape de ghidare sau lentile"
+msgstr[2] "Telescoape de ghidare sau lentile"
+
+#: views/__init__.py:186 views/image.py:186
+#, fuzzy
+msgid "Guiding camera"
+msgid_plural "Guiding cameras"
+msgstr[0] "Camere de ghidaj"
+msgstr[1] "Camere de ghidaj"
+msgstr[2] "Camere de ghidaj"
+
+#: views/__init__.py:190 views/image.py:190
+#, fuzzy
+msgid "Focal reducer"
+msgid_plural "Focal reducers"
+msgstr[0] "Reductoare de focală"
+msgstr[1] "Reductoare de focală"
+msgstr[2] "Reductoare de focală"
+
+#: views/__init__.py:199 views/image.py:199
+#, fuzzy
+msgid "Accessory"
+msgid_plural "Accessories"
+msgstr[0] "Accesorii"
+msgstr[1] "Accesorii"
+msgstr[2] "Accesorii"
+
+#: views/__init__.py:480
+msgid "Today's 'Image of the day' was already chosen. Come back tomorrow!"
+msgstr ""
+
+#: views/__init__.py:595 views/__init__.py:2070
+msgid ""
+"Invalid image or no image provided. Allowed formats are JPG, PNG and GIF."
+msgstr ""
+"Imagine nevalidata sau nici o imagine furnizata. Formatele permise sunt JPG, "
+"PNG si GIF."
+
+#: views/__init__.py:602
+msgid "You have reached your image uploads limit. Please upgrade!"
+msgstr ""
+
+#: views/__init__.py:626 views/__init__.py:2101
+msgid ""
+"You uploaded an Indexed PNG file. AstroBin will need to lower the color "
+"count to 256 in order to work with it."
+msgstr ""
+
+#: views/__init__.py:860 views/__init__.py:919 views/__init__.py:986
+#: views/__init__.py:998 views/__init__.py:1010 views/__init__.py:1034
+#: views/__init__.py:1736
+msgid ""
+"There was one or more errors processing the form. You may need to scroll "
+"down to see them."
+msgstr ""
+"Au fost una sau mai multe erori de procesare a formularului. Ar putea fi "
+"necesar să derulați în jos pentru a le vedea. "
+
+#: views/__init__.py:981
+msgid "Fill in one session, before adding more."
+msgstr "Completati o sesiune inainte de a mai adauga ceva."
+
+#: views/__init__.py:1103
+msgid "No date specified"
+msgstr "Nici o dată specificată"
+
+#: views/__init__.py:1125 views/__init__.py:1184
+msgid "No imaging telescopes or lenses, or no imaging cameras specified"
+msgstr ""
+"Nu s-a specificat nici un telescop, lentila sau camera pentru producerea "
+"imaginii."
+
+#: views/__init__.py:1126
+msgid "Gear images"
+msgstr "Imagini cu echipamentul"
+
+#: views/__init__.py:1183
+msgid "No subjects specified"
+msgstr "Nu sunt subiecte specificate"
+
+#: views/__init__.py:1185
+msgid "No acquisition details specified"
+msgstr "N-ati specificat detaliile de achizitie"
+
+#: views/__init__.py:1242
+msgid "Last login"
+msgstr "Ultima logare"
+
+#: views/__init__.py:1243
+msgid "Total integration time"
+msgstr "Timp total de integrare"
+
+#: views/__init__.py:1244
+msgid "Average integration time"
+msgstr "Timpul mediu de integrare"
+
+#: views/__init__.py:1245
+#, fuzzy
+msgid "Forum posts"
+msgstr "Forumuri"
+
+#: views/__init__.py:2124
+#, fuzzy
+msgid "Image uploaded. Thank you!"
+msgstr "Formă salvată. Mulțumesc!"
+
+#: views/__init__.py:3077 views/__init__.py:3270
+msgid "You can't merge a product to itself."
+msgstr "nu puteti alipi o imagine, ei insasi."
+
+#: views/__init__.py:3308
+msgid "Default front page section changed."
+msgstr ""
+
+#: views/image.py:82
+msgid ""
+"Thanks for reporting the problem. All thumbnails will be generated again."
+msgstr ""
+
+#: views/image.py:316
+msgid "Resolution"
+msgstr "Rezoluție"
+
+#: views/image.py:317 views/image.py:482
+msgid "Dates"
+msgstr "Date"
+
+#: views/image.py:329
+msgid "Avg. Moon age"
+msgstr "\"varsta\" medie a Lunei  (numarul de zile trecute de la Luna noua)"
+
+#: views/image.py:332
+msgid "Mean SQM"
+msgstr ""
+
+#: views/image.py:597
+#, fuzzy
+msgid "Image deleted."
+msgstr "Imaginea dumneavoastra a fost stearsa"
+
+#: views/image.py:633 views/image.py:703
+#, fuzzy
+msgid "Revision deleted."
+msgstr "Înregistrare încheiată"
+
+#: views/image.py:735
+#, fuzzy
+msgid "Image moved to the staging area."
+msgstr "Mutati in zona de asteptare"
+
+#: views/image.py:782
+#, fuzzy
+msgid "Image moved to the public area."
+msgstr "Promovare in zona publica"
+
+#: views/image.py:815
+#, fuzzy
+msgid "There was one or more errors processing the form. "
+msgstr ""
+"Au fost una sau mai multe erori de procesare a formularului. Ar putea fi "
+"necesar să derulați în jos pentru a le vedea. "
+
+#~ msgid "Image brought to your attention"
+#~ msgstr "Imagine adusa in atentia dvs."
+
+#~ msgid "Bring image to attention"
+#~ msgstr "Aduceti imaginea in atentie"
+
+#~ msgid ""
+#~ "By choosing some users and clicking the button below, you will send them "
+#~ "a notification prompting them to checkout this image."
+#~ msgstr ""
+#~ "Alegand unii utilizatori si apasand butonul de mai jos, le vei trimite o "
+#~ "notificare sa verifice aceasta imagine."
+
+#~ msgid "Click on a user below!"
+#~ msgstr "Faceți clic pe un utilizator de mai jos!"
+
+#~ msgid "Done!"
+#~ msgstr "Realizat !"
+
+#~ msgid "The image was brought to the attention of the selected users."
+#~ msgstr "Imaginea a fost adusa in atentia utilizatorilor selectati ."
+
+#~ msgid "Bring to a user's attention"
+#~ msgstr "Aduceti in atentia unui utilizator"
+
+#~ msgid ""
+#~ "%(originator)s would like to bring the following image to your attention: "
+#~ "%(object_url)s"
+#~ msgstr ""
+#~ "%(originator)s doreste sa aduca urmatoarea imagine in atentia ta: "
+#~ "%(object_url)s"
+
+#~ msgid ""
+#~ "<a href=\"%(object_url)s\"><strong>%(originator)s</strong> wants to bring "
+#~ "an image to your attention.</a>"
+#~ msgstr ""
+#~ "<a href=\"%(object_url)s\"><strong>%(originator)s</strong> doreste sa "
+#~ "aduca o imagine in atentia ta.</a>"
+
+#~ msgid "%(originator)s wants to bring an image to your attention"
+#~ msgstr "%(originator)s doreste sa aduca o imagine in atentia ta"
 
 #~ msgid "You have no new notifications."
 #~ msgstr "Nu aveti notificari noi."

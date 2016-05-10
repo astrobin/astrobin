@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2016-04-05 10:30+0100\n"
+"POT-Creation-Date: 2016-05-10 20:07+0100\n"
 "PO-Revision-Date: 2014-01-24 09:40+0000\n"
 "Last-Translator: kookoo_gr <kookoo_gr@yahoo.com>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -1004,12 +1004,12 @@ msgstr "Ζάμπια"
 msgid "Zimbabwe"
 msgstr "Ζιμπάμπουε"
 
-#: forms.py:50
+#: forms.py:68
 msgid ""
 "If you're hosting a copy of this image on your website, put the address here."
 msgstr "Εάν η εικόνα βρίσκεται στην ιστοσελίδα σας εισάγετε την διεύθυνση εδώ."
 
-#: forms.py:56
+#: forms.py:74
 msgid ""
 "If you want to share the TIFF or FITS file of your image, put a link to the "
 "file here. Unfortunately, AstroBin cannot offer to store these files at the "
@@ -1020,30 +1020,30 @@ msgstr ""
 "αποθηκεύσει τέτοιου είδους αρχεία αυτή την στιγμή, οπότε θα πρέπει να "
 "βρίσκονται αποθηκευμένα σε εξωτερικό ιστότοπο."
 
-#: forms.py:62 models.py:2086 models.py:2168 templates/gear/page.html:197
+#: forms.py:80 models.py:2086 models.py:2168 templates/gear/page.html:197
 #: templates/image/detail/image_title.html:14
 msgid "Link"
 msgstr "Σύνδεσμος"
 
-#: forms.py:63 templates/image/detail/image_title.html:22
+#: forms.py:81 templates/image/detail/image_title.html:22
 msgid "Link to TIFF/FITS"
 msgstr "Σύνδεσμος για TIFF/FITS"
 
-#: forms.py:64 models.py:693 templates/maintenance_base.html:305
+#: forms.py:82 models.py:693 templates/maintenance_base.html:305
 #: templates/profile-edit-menu.html:36
 #: templates/image/detail/image_card.html:88
 msgid "Locations"
 msgstr "Τοποθεσίες"
 
-#: forms.py:77
+#: forms.py:94
 msgid "This field is required."
 msgstr "Αυτό το πεδίο είναι προαπαιτούμενο"
 
-#: forms.py:90
+#: forms.py:107
 msgid "Opacity"
 msgstr "Αδιαφάνεια"
 
-#: forms.py:91
+#: forms.py:108
 msgid ""
 "0 means invisible; 100 means completely opaque. Recommended values are: 10 "
 "if the watermark will appear on the dark sky background, 50 if on some "
@@ -1053,58 +1053,62 @@ msgstr ""
 "υδατογράφημα θα εμφανίζεται σε φόντο σκοτεινού ουρανού, 50 αν εμφανίζεται σε "
 "κάποιο φωτεινό αντικείμενο."
 
-#: forms.py:104
+#: forms.py:121
 msgid "If you want to watermark this image, you must specify some text."
 msgstr ""
 "Εάν θέλετε να υδατογραφήσετε την εικόνα θα πρέπει να καθορίσετε κάποιο "
 "κείμενο."
 
-#: forms.py:131 forms.py:367 models.py:753
+#: forms.py:148 forms.py:384 models.py:753
 msgid "Imaging telescopes or lenses"
 msgstr "Τηλεσκόπια απεικόνισης ή φακοί"
 
-#: forms.py:132 models.py:754
+#: forms.py:149 models.py:754
 msgid "Guiding telescopes or lenses"
 msgstr "Οδηγητικά τηλεσκόπια ή φακοί"
 
-#: forms.py:133 forms.py:227 models.py:755 models.py:1638 views.py:2386
+#: forms.py:150 forms.py:244 models.py:755 models.py:1638
+#: views/__init__.py:1685
 msgid "Mounts"
 msgstr "Στηρίξεις"
 
-#: forms.py:134 forms.py:368 models.py:756
+#: forms.py:151 forms.py:385 models.py:756
 msgid "Imaging cameras"
 msgstr "Κάμερες απεικόνισης"
 
-#: forms.py:135 models.py:757
+#: forms.py:152 models.py:757
 msgid "Guiding cameras"
 msgstr "Οδηγητικές κάμερες"
 
-#: forms.py:136 forms.py:229 models.py:758 models.py:1640 views.py:2387
+#: forms.py:153 forms.py:246 models.py:758 models.py:1640
+#: views/__init__.py:1686
 msgid "Focal reducers"
 msgstr "Μειωτές εστιακού λόγου"
 
-#: forms.py:137 forms.py:230 models.py:759 models.py:1641 views.py:207
-#: views.py:635 views.py:2388
+#: forms.py:154 forms.py:247 models.py:759 models.py:1641
+#: views/__init__.py:194 views/__init__.py:1687 views/image.py:194
 msgid "Software"
 msgstr "Λογισμικό"
 
-#: forms.py:138 forms.py:231 models.py:760 models.py:1642 views.py:2389
+#: forms.py:155 forms.py:248 models.py:760 models.py:1642
+#: views/__init__.py:1688
 msgid "Filters"
 msgstr "Φίλτρα"
 
-#: forms.py:139 forms.py:232 models.py:761 models.py:1643 views.py:2390
+#: forms.py:156 forms.py:249 models.py:761 models.py:1643
+#: views/__init__.py:1689
 msgid "Accessories"
 msgstr "Λοιπός εξοπλισμός"
 
-#: forms.py:161
+#: forms.py:178
 msgid "If you have a personal website, put the address here."
 msgstr "Εάν έχετε προσωπική ιστοσελίδα, εισάγετε την διεύθυνση εδώ."
 
-#: forms.py:171 models.py:1557
+#: forms.py:188 models.py:1557
 msgid "Website"
 msgstr "Ιστότοπος"
 
-#: forms.py:195
+#: forms.py:212
 msgid ""
 "All the telescopes and lenses you own, including the ones you use for "
 "guiding, go here."
@@ -1112,12 +1116,12 @@ msgstr ""
 "Όλα τα τηλεσκόπια και φακοί στην κατοχή σας, συμπεριλαμβανομένων των "
 "οδηγητικών, εισάγονται εδώ."
 
-#: forms.py:204
+#: forms.py:221
 msgid "Your DSLRs, CCDs, planetary cameras and guiding cameras go here."
 msgstr ""
 "Οι DSLR, CCD, πλανητικές κάμερες και οδηγητικές κάμερες σας, εισάγονται εδώ."
 
-#: forms.py:217
+#: forms.py:234
 msgid ""
 "Hint: enter your filters separately! If you enter, for instance, LRGB in one "
 "box, you won't be able to add separate acquisition sessions for them."
@@ -1126,28 +1130,28 @@ msgstr ""
 "LRGB σε ένα κουτί δεν θα μπορείτε να προσθέσετε ξεχωριστές λήψεις για το "
 "καθένα."
 
-#: forms.py:226 models.py:1637 views.py:2384
+#: forms.py:243 models.py:1637 views/__init__.py:1683
 msgid "Telescopes and lenses"
 msgstr "Τηλεσκόπια και φακοί"
 
-#: forms.py:228 models.py:1639 views.py:2385
+#: forms.py:245 models.py:1639 views/__init__.py:1684
 msgid "Cameras"
 msgstr "Κάμερες"
 
-#: forms.py:260 forms.py:276
+#: forms.py:277 forms.py:293
 #: templates/inclusion_tags/search_image_list.html:64
 msgid "Users"
 msgstr "Χρήστες"
 
-#: forms.py:272
+#: forms.py:289
 msgid "Search type"
 msgstr "Τύπος αναζήτησης"
 
-#: forms.py:274
+#: forms.py:291
 msgid "All"
 msgstr "Όλα"
 
-#: forms.py:275 templates/leaderboard.html:35 templates/gear/page.html:236
+#: forms.py:292 templates/leaderboard.html:35 templates/gear/page.html:236
 #: templates/inclusion_tags/search_image_list.html:51
 #: templates/inclusion_tags/search_image_list.html:104
 #: templates/popover/user.html:15
@@ -1156,131 +1160,131 @@ msgstr "Όλα"
 msgid "Images"
 msgstr "Εικόνες"
 
-#: forms.py:277 models.py:649 views.py:1853
-#: templates/maintenance_base.html:299 templates/profile-edit-menu.html:30
-#: templates/wall.html:131 templates/inclusion_tags/search_image_list.html:13
-#: templates/user/profile-subnav.html:130
+#: forms.py:294 models.py:649 templates/maintenance_base.html:299
+#: templates/profile-edit-menu.html:30 templates/wall.html:131
+#: templates/inclusion_tags/search_image_list.html:13
+#: templates/user/profile-subnav.html:130 views/__init__.py:1155
 msgid "Gear"
 msgstr "Εξοπλισμός"
 
-#: forms.py:289
+#: forms.py:306
 msgid "Telescope type"
 msgstr "Τύπος τηλεσκοπίου"
 
-#: forms.py:290 forms.py:296
+#: forms.py:307 forms.py:313
 msgid "Any"
 msgstr "Όλα"
 
-#: forms.py:295
+#: forms.py:312
 msgid "Camera type"
 msgstr "Τύπος κάμερας"
 
-#: forms.py:309 forms.py:314
+#: forms.py:326 forms.py:331
 msgid "Express value in mm"
 msgstr "Εκφράστε την τιμή σε mm"
 
-#: forms.py:320 forms.py:325
+#: forms.py:337 forms.py:342
 msgid "Express value in &mu;m"
 msgstr "Εκφράστε την τιμή σε &mu;m"
 
-#: forms.py:332 forms.py:337 forms.py:565 forms.py:610 forms.py:651
+#: forms.py:349 forms.py:354 forms.py:582 forms.py:627 forms.py:668
 msgid "Please use the following format: yyyy-mm-dd"
 msgstr "Παρακαλώ χρησιμοποιήστε την εξής μορφή: εεεε-μμ-ηη (έτος-μήνας-ημέρα)"
 
-#: forms.py:341 forms.py:345
+#: forms.py:358 forms.py:362
 msgid "Express value in hours"
 msgstr "Εκφράστε την τιμή σε ώρες"
 
-#: forms.py:357 models.py:774 templates/image/detail/info.html:27
+#: forms.py:374 models.py:774 templates/image/detail/info.html:27
 #: templates/image/detail/info.html:28 templates/search/search.html:239
 msgid "License"
 msgstr "Άδεια χρήσης"
 
-#: forms.py:364
+#: forms.py:381
 msgid ""
 "Search for astronomical objects, telescopes or lenses, cameras, filters..."
 msgstr ""
 "Αναζήτηση για αστρονομικά αντικείμενα, τηλεσκόπια ή φακούς, κάμερες, "
 "φίλτρα..."
 
-#: forms.py:366 models.py:684
+#: forms.py:383 models.py:684
 msgid "Main solar system subject"
 msgstr "Κύριο αντικείμενο ηλιακού συστήματος"
 
-#: forms.py:369
+#: forms.py:386
 msgid "Min. telescope aperture"
 msgstr "Ελάχιστη διάμετρος τηλεσκοπίου"
 
-#: forms.py:370
+#: forms.py:387
 msgid "Max. telescope aperture"
 msgstr "Μέγιστη διάμετρος τηλεσκοπίου"
 
-#: forms.py:371
+#: forms.py:388
 msgid "Acquired after"
 msgstr "Λήψη μετά από"
 
-#: forms.py:372
+#: forms.py:389
 msgid "Acquired before"
 msgstr "Λήψη πριν από"
 
-#: forms.py:373
+#: forms.py:390
 msgid "Min. integration"
 msgstr "Ελάχιστη ολοκλήρωση"
 
-#: forms.py:374
+#: forms.py:391
 msgid "Max. integration"
 msgstr "Μέγιστη ολοκλήρωση"
 
-#: forms.py:375
+#: forms.py:392
 msgid "Min. Moon phase %"
 msgstr "Ελάχιστη φάση Σεληνης %"
 
-#: forms.py:376
+#: forms.py:393
 msgid "Max. Moon phase %"
 msgstr "Μέγιστη φάση Σελήνης %"
 
-#: forms.py:515
+#: forms.py:532
 msgid "Latitude (degrees)"
 msgstr "Γεωγραφικό πλάτος (μοίρες)"
 
-#: forms.py:520
+#: forms.py:537
 msgid "Latitude (minutes)"
 msgstr "Γεωγραφικό πλάτος (λεπτά)"
 
-#: forms.py:526
+#: forms.py:543
 msgid "Latitude (seconds)"
 msgstr "Γεωγραφικό πλάτος (δευτερόλεπτα)"
 
-#: forms.py:533
+#: forms.py:550
 msgid "Longitude (degrees)"
 msgstr "Γεωγραφικό μήκος (μοίρες)"
 
-#: forms.py:538
+#: forms.py:555
 msgid "Longitude (minutes)"
 msgstr "Γεωγραφικό μήκος (λεπτά)"
 
-#: forms.py:544
+#: forms.py:561
 msgid "Longitude (seconds)"
 msgstr "Γεωγραφικό μήκος (δευτερόλεπτα)"
 
-#: forms.py:566 forms.py:611 forms.py:652 models.py:1271 models.py:1484
+#: forms.py:583 forms.py:628 forms.py:669 models.py:1271 models.py:1484
 #: templates/image/detail/image_card.html:46
 msgid "Date"
 msgstr "Ημερομηνία"
 
-#: forms.py:572
+#: forms.py:589
 msgid "Please enter a value between 1 and 5."
 msgstr "Παρακαλώ εισάγετε μία τιμή από 1 εώς 5."
 
-#: forms.py:579
+#: forms.py:596
 msgid "Please enter a value between 1 and 10."
 msgstr "Παρακαλώ εισάγετε μία τιμή από 1 εώς 10."
 
-#: forms.py:640 forms.py:658
+#: forms.py:657 forms.py:675
 msgid "The date cannot be in the future."
 msgstr "Η ημερομηνία δεν μπορεί να είναι μελλοντική."
 
-#: forms.py:892 forms.py:953 models.py:190 templates/gear/fix.html:32
+#: forms.py:909 forms.py:970 models.py:190 templates/gear/fix.html:32
 #: templates/gear/fix.html.py:33 templates/gear/fix.html:34
 #: templates/gear/fix.html.py:42 templates/gear/fix.html:47
 #: templates/gear/fix.html.py:52 templates/gear/fix.html:57
@@ -1298,11 +1302,11 @@ msgstr "Η ημερομηνία δεν μπορεί να είναι μελλον
 msgid "Make"
 msgstr "Μάρκα"
 
-#: forms.py:893 forms.py:954 models.py:191
+#: forms.py:910 forms.py:971 models.py:191
 msgid "The make, brand, producer or developer of this product."
 msgstr "Η κατασκευή, μάρκα, παραγωγός ή προγραμματιστής του προϊόντος."
 
-#: forms.py:898 forms.py:959 models.py:198 models.py:1778 models.py:1917
+#: forms.py:915 forms.py:976 models.py:198 models.py:1778 models.py:1917
 #: templates/gear/fix.html:32 templates/gear/fix.html.py:33
 #: templates/gear/fix.html:34 templates/gear/fix.html.py:42
 #: templates/gear/fix.html:47 templates/gear/fix.html.py:52
@@ -1314,7 +1318,7 @@ msgstr "Η κατασκευή, μάρκα, παραγωγός ή προγραμ�
 msgid "Name"
 msgstr "Όνομα"
 
-#: forms.py:903 forms.py:928 forms.py:964 forms.py:999
+#: forms.py:920 forms.py:945 forms.py:981 forms.py:1016
 #: templates/user/profile/commercial/products.html:82
 #: templates/user/profile/commercial/products.html:164
 #: templates/user/profile/commercial/products.html:280
@@ -1324,7 +1328,7 @@ msgstr "Όνομα"
 msgid "Merge"
 msgstr "Συγχώνευση"
 
-#: forms.py:904 forms.py:965
+#: forms.py:921 forms.py:982
 msgid ""
 "Use this field to mark that the item you are claiming really is the same "
 "product (or a variation thereof) of something you have claimed before."
@@ -1333,7 +1337,7 @@ msgstr ""
 "διεκδικείτε είναι το ίδιο προϊόν (ή ως εκ τούτου μια παραλλαγή) ενός "
 "αντικειμένου που διεκδικήσατε παλαιότερα."
 
-#: forms.py:918 forms.py:981
+#: forms.py:935 forms.py:998
 #, python-format
 msgid ""
 "You can't create more than %d claims. Consider upgrading your affiliation!"
@@ -1341,7 +1345,7 @@ msgstr ""
 "Δεν μπορείτε να δημιουργήσετε %d διεκδικήσεις. Σκεφτείτε να αναβαθμίσετε τον "
 "εμπορικό λογαριασμό σας!"
 
-#: forms.py:929 forms.py:1000
+#: forms.py:946 forms.py:1017
 msgid ""
 "Use this field to mark that the item you are merging really is the same "
 "product (or a variation thereof) of something you have claimed before."
@@ -1350,7 +1354,7 @@ msgstr ""
 "συγχωνεύετε είναι το ίδιο προϊον (ή ως εκ τούτου μια παραλλαγή) με κάποιο "
 "που έχετε διεκδικήσει παλαιότερα."
 
-#: forms.py:989
+#: forms.py:1006
 msgid "You have already claimed this product."
 msgstr "Έχετε ήδη διεκδικήσει αυτό το προϊόν."
 
@@ -1419,6 +1423,7 @@ msgid "Unlike"
 msgstr "Δεν μου αρέσει"
 
 #: locale_extras.py:20 templates/image/detail/like.html:10
+#: templates/image/detail/like.html:24
 msgid "Like"
 msgstr "Μου αρέσει"
 
@@ -1458,7 +1463,7 @@ msgstr "Αναφορά Δημιουργού - Παρόμοια διανομή CC
 msgid "Attribution-NoDerivs Creative Commons"
 msgstr "Αναφορά Δημιουργού - Όχι παράγωγα έργα CC"
 
-#: models.py:79 models.py:97 views.py:841 views.py:843
+#: models.py:79 models.py:97 views/image.py:398 views/image.py:400
 msgid "English"
 msgstr "Αγγλικά"
 
@@ -1587,8 +1592,8 @@ msgstr "Μικρός πλανήτης"
 msgid "Comet"
 msgstr "Κομήτης"
 
-#: models.py:152 models.py:586 models.py:650 views.py:1854
-#: templates/wall.html:143 templates/image/edit/acquisition.html:84
+#: models.py:152 models.py:586 models.py:650 templates/wall.html:143
+#: templates/image/edit/acquisition.html:84 views/__init__.py:1156
 msgid "Other"
 msgstr "Άλλο"
 
@@ -1920,11 +1925,11 @@ msgstr "Αντικείμενο βαθύ ουρανού"
 msgid "Solar system body or event"
 msgstr "Σώμα ηλιακού συστήματος ή γεγονός"
 
-#: models.py:647 views.py:1851 templates/wall.html:119
+#: models.py:647 templates/wall.html:119 views/__init__.py:1153
 msgid "Extremely wide field"
 msgstr "Ακραίο ευρύ πεδίο"
 
-#: models.py:648 views.py:1852 templates/wall.html:125
+#: models.py:648 templates/wall.html:125 views/__init__.py:1154
 msgid "Star trails"
 msgstr "Αστρικά ίχνη"
 
@@ -2037,7 +2042,7 @@ msgstr "9 - Ουρανός κέντρου πόλης (ΑΣΠΡΟ)"
 msgid "Synthetic channel"
 msgstr "Συνθετικό κανάλι"
 
-#: models.py:1313 views.py:208 views.py:636
+#: models.py:1313 views/__init__.py:195 views/image.py:195
 msgid "Filter"
 msgstr "Φίλτρο"
 
@@ -2077,7 +2082,7 @@ msgstr "Ψύξη αισθητήρα"
 msgid "The temperature of the chip. E.g.: -20."
 msgstr "Η θερμοκρασία του αισθητήρα. Π.χ. : -20."
 
-#: models.py:1346 views.py:768
+#: models.py:1346 views/image.py:325
 msgid "Darks"
 msgstr "Darks"
 
@@ -2085,7 +2090,7 @@ msgstr "Darks"
 msgid "The number of dark frames."
 msgstr "Ο αριθμός των dark καρέ."
 
-#: models.py:1351 views.py:769
+#: models.py:1351 views/image.py:326
 msgid "Flats"
 msgstr "Flats"
 
@@ -2093,7 +2098,7 @@ msgstr "Flats"
 msgid "The number of flat frames."
 msgstr "Ο αριθμός των flat καρέ."
 
-#: models.py:1356 views.py:770
+#: models.py:1356 views/image.py:327
 msgid "Flat darks"
 msgstr "Flat darks"
 
@@ -2101,7 +2106,7 @@ msgstr "Flat darks"
 msgid "The number of dark flat frames."
 msgstr "Ο αριθμός των dark flat καρέ."
 
-#: models.py:1361 views.py:771
+#: models.py:1361 views/image.py:328
 msgid "Bias"
 msgstr "Bias"
 
@@ -2109,7 +2114,7 @@ msgstr "Bias"
 msgid "The number of bias/offset frames."
 msgstr "Ο αριθμός των bias/offset καρέ."
 
-#: models.py:1366 views.py:774
+#: models.py:1366 views/image.py:331
 msgid "Bortle Dark-Sky Scale"
 msgstr "Κλίμακα Bortle σκοτεινού ουρανού"
 
@@ -2129,11 +2134,11 @@ msgstr "Μέσο mag/arcsec^2"
 msgid "As measured with your Sky Quality Meter."
 msgstr "Όπως μετρήθηκε με τον μετρητή ποιότητας ουρανού."
 
-#: models.py:1380 views.py:776
+#: models.py:1380 views/image.py:333
 msgid "Mean FWHM"
 msgstr "Μέσο FWHM"
 
-#: models.py:1385 views.py:777
+#: models.py:1385 views/image.py:334
 msgid "Temperature"
 msgstr "Θερμοκρασία"
 
@@ -2539,7 +2544,7 @@ msgstr ""
 msgid "Commercial gear items"
 msgstr "Εμπορικά αντικείμενα εξοπλισμού"
 
-#: search.py:50 templates/image/actions/bring_to_attention.html:32
+#: search.py:50
 msgid "No results. Sorry."
 msgstr "Λυπάμαι, κανένα αποτέλεσμα."
 
@@ -2619,239 +2624,6 @@ msgstr "Καταδιοπτρικό"
 msgid "Number of images by subject type"
 msgstr "Αριθμός εικόνων ανά τύπο αντικειμένου"
 
-#: views.py:183 views.py:611
-#, fuzzy
-msgid "Imaging telescope or lens"
-msgid_plural "Imaging telescopes or lenses"
-msgstr[0] "Τηλεσκόπια απεικόνισης ή φακοί"
-msgstr[1] "Τηλεσκόπια απεικόνισης ή φακοί"
-
-#: views.py:187 views.py:615
-#, fuzzy
-msgid "Imaging camera"
-msgid_plural "Imaging cameras"
-msgstr[0] "Κάμερες απεικόνισης"
-msgstr[1] "Κάμερες απεικόνισης"
-
-#: views.py:191 views.py:619
-#, fuzzy
-msgid "Mount"
-msgid_plural "Mounts"
-msgstr[0] "Στηρίξεις"
-msgstr[1] "Στηρίξεις"
-
-#: views.py:195 views.py:623
-#, fuzzy
-msgid "Guiding telescope or lens"
-msgid_plural "Guiding telescopes or lenses"
-msgstr[0] "Οδηγητικά τηλεσκόπια ή φακοί"
-msgstr[1] "Οδηγητικά τηλεσκόπια ή φακοί"
-
-#: views.py:199 views.py:627
-#, fuzzy
-msgid "Guiding camera"
-msgid_plural "Guiding cameras"
-msgstr[0] "Οδηγητικές κάμερες"
-msgstr[1] "Οδηγητικές κάμερες"
-
-#: views.py:203 views.py:631
-#, fuzzy
-msgid "Focal reducer"
-msgid_plural "Focal reducers"
-msgstr[0] "Μειωτές εστιακού λόγου"
-msgstr[1] "Μειωτές εστιακού λόγου"
-
-#: views.py:212 views.py:640
-#, fuzzy
-msgid "Accessory"
-msgid_plural "Accessories"
-msgstr[0] "Λοιπός εξοπλισμός"
-msgstr[1] "Λοιπός εξοπλισμός"
-
-#: views.py:500
-msgid "Today's 'Image of the day' was already chosen. Come back tomorrow!"
-msgstr ""
-
-#: views.py:759
-msgid "Resolution"
-msgstr "Ανάλυση"
-
-#: views.py:760 views.py:924
-msgid "Dates"
-msgstr "Ημερομηνίες"
-
-#: views.py:761 templates/image/detail/image_card.html:52
-msgid "Frames"
-msgstr "Καρέ"
-
-#: views.py:767 templates/wall.html:37
-#: templates/inclusion_tags/search_image_list.html:36
-#: templates/inclusion_tags/search_image_list.html:89
-#: templates/search/search.html:43 templates/search/search.html.py:306
-msgid "Integration"
-msgstr "Ολοκλήρωση"
-
-#: views.py:767 views.py:1944 views.py:1945 templates/search/search.html:307
-msgid "hours"
-msgstr "ώρες"
-
-#: views.py:772
-msgid "Avg. Moon age"
-msgstr "Μέση ηλικία Σελήνης"
-
-#: views.py:772 templates/subscription/subscription_category_list.html:47
-msgid "days"
-msgstr "ημέρες"
-
-#: views.py:773 templates/search/search.html:313
-msgid "Avg. Moon phase"
-msgstr "Μέση φάση Σελήνης"
-
-#: views.py:775
-msgid "Mean SQM"
-msgstr "Μέσο SQM"
-
-#: views.py:970
-msgid ""
-"Thanks for reporting the problem. All thumbnails will be generated again."
-msgstr ""
-"Σας ευχαριστούμε για την αναφορά του προβλήματος. Όλες οι μικρογραφίες θα "
-"δημιουργηθούν ξανά."
-
-#: views.py:1112 views.py:2841
-msgid ""
-"Invalid image or no image provided. Allowed formats are JPG, PNG and GIF."
-msgstr ""
-"Ανύπαρκτη εικόνα ή δεν έγινε παροχή εικόνας. Επιτρεπόμενες επεκτάσεις : JPG, "
-"PNG και GIF."
-
-#: views.py:1119
-msgid "You have reached your image uploads limit. Please upgrade!"
-msgstr ""
-
-#: views.py:1123 views.py:2852 templates/user/profile/flickr_import.html:10
-msgid ""
-"AstroBin is currently in read-only mode, because of server maintenance. "
-"Please try again soon!"
-msgstr ""
-"Το AstroBin είναι σε κατάσταση ανάγνωσης, λόγω συντήρησης του server. "
-"Παρακαλώ δοκιμάστε αργότερα!"
-
-#: views.py:1143 views.py:2872
-msgid ""
-"You uploaded an Indexed PNG file. AstroBin will need to lower the color "
-"count to 256 in order to work with it."
-msgstr ""
-"Ανεβάσατε ένα αρχείο Indexed PNG. Το AstroBin θα χρειαστεί να χαμηλώσει την "
-"αναλύση χρώματος στα 256 για να μπορέσει να το επεξεργαστεί."
-
-#: views.py:1399 views.py:1428 views.py:1488 views.py:1556 views.py:1568
-#: views.py:1580 views.py:1604 views.py:2437
-msgid ""
-"There was one or more errors processing the form. You may need to scroll "
-"down to see them."
-msgstr ""
-"Υπήρξε ένα ή περισσότερα σφάλματα στην επεξεργασία της φόρμας. Μπορεί να "
-"χρειαστεί να κατεβείτε πιο κάτω στην σελίδα για να τα δείτε."
-
-#: views.py:1410 views.py:1499 views.py:1586 views.py:1613 views.py:2286
-#: views.py:2299 views.py:2320 views.py:2357 views.py:2447 views.py:2509
-#: views.py:2720 views.py:3947 views.py:4117
-#: templates/user/profile/edit/gear.html:168
-#: templates/user/profile/edit/gear.html:243
-msgid "Form saved. Thank you!"
-msgstr "Η φόρμα σώθηκε. Ευχαριστούμε!"
-
-#: views.py:1551
-msgid "Fill in one session, before adding more."
-msgstr "Εισάγετε μια συνεδρίαση, προτού προσθέσετε άλλη."
-
-#: views.py:1626 views.py:1697
-msgid "Image deleted."
-msgstr "Η εικόνα διαγράφηκε"
-
-#: views.py:1644
-msgid "Revision deleted."
-msgstr "Η αναθεώρηση διαγράφτηκε."
-
-#: views.py:1801
-msgid "No date specified"
-msgstr "Δεν καθορίστηκε ημερομηνία"
-
-#: views.py:1823 views.py:1884
-msgid "No imaging telescopes or lenses, or no imaging cameras specified"
-msgstr "Δεν έχουν οριστεί, τηλεσκόπια, φακοί ή κάμερες απεικόνισης"
-
-#: views.py:1824
-msgid "Gear images"
-msgstr "Εικόνες εξοπλισμού"
-
-#: views.py:1849 templates/image/edit/acquisition.html:81
-msgid "Deep sky"
-msgstr "Βαθύ ουρανού"
-
-#: views.py:1850 templates/image/edit/acquisition.html:78
-msgid "Solar system"
-msgstr "Ηλιακό σύστημα"
-
-#: views.py:1883
-msgid "No subjects specified"
-msgstr "Δεν έχουν οριστεί θέματα"
-
-#: views.py:1885
-msgid "No acquisition details specified"
-msgstr "Δεν έχουν οριστεί λεπτομέρειες λήψης"
-
-#: views.py:1916 views.py:3324 templatetags/tags.py:67
-msgid "minutes"
-msgstr "λεπτά"
-
-#: views.py:1917 views.py:3325 templatetags/tags.py:68
-msgid "seconds ago"
-msgstr "δευτερόλεπτα πριν"
-
-#: views.py:1919 views.py:3327 templatetags/tags.py:69
-#, python-format
-msgid "%s ago"
-msgstr "%s πριν"
-
-#: views.py:1942 templates/popover/user.html:19
-msgid "Member since"
-msgstr "Μέλος από τις"
-
-#: views.py:1943
-msgid "Last login"
-msgstr "Τελευταία σύνδεση"
-
-#: views.py:1944
-msgid "Total integration time"
-msgstr "Συνολικός χρόνος ολοκλήρωσης"
-
-#: views.py:1945
-msgid "Average integration time"
-msgstr "Μέσος χρόνος ολοκλήρωσης"
-
-#: views.py:1946
-#, fuzzy
-msgid "Forum posts"
-msgstr "Forums"
-
-#: views.py:2895
-msgid "Image uploaded. Thank you!"
-msgstr "Η εικόνα φορτώθηκε. Ευχαριστούμε!"
-
-#: views.py:3191 templatetags/tags.py:227
-msgid "no alias"
-msgstr "δεν υπάρχει ψευδώνυμο"
-
-#: views.py:3907 views.py:4100
-msgid "You can't merge a product to itself."
-msgstr "Δεν μπορείτε να συγχωνεύσετε ένα προϊόν με τον ευατό του."
-
-#: views.py:4138
-msgid "Default front page section changed."
-msgstr "Έγινε αλλαγή στο τμήμα της αρχικής σελίδας."
-
 #: management/__init__.py:21
 msgid "You have a new follower"
 msgstr "Έχετε νέο άτομο που σας ακολουθεί"
@@ -2861,78 +2633,74 @@ msgid "New image from a user you follow"
 msgstr "Νέα εικόνα από χρήστη που ακολουθείτε"
 
 #: management/__init__.py:33
-msgid "Image brought to your attention"
-msgstr "Εικόνα που χρειάζεται την προσοχή σας"
-
-#: management/__init__.py:39
 msgid "New image revision from a user you follow"
 msgstr "Νέα έκδοση εικόνας από χρήστη που ακολουθείτε"
 
-#: management/__init__.py:45
+#: management/__init__.py:39
 msgid "Your image was plate-solved"
 msgstr "Η εικόνα σας αναλύθηκε"
 
-#: management/__init__.py:51
+#: management/__init__.py:45
 msgid "Your image could not be plate-solved"
 msgstr "Η εικόνα σας δεν μπόρεσε να αναλυθεί"
 
-#: management/__init__.py:57
+#: management/__init__.py:51
 msgid "AstroBin has published a new blog entry"
 msgstr "Το AstroBin δημοσίευσε μία καινούρια καταχώρηση στο blog"
 
-#: management/__init__.py:63
+#: management/__init__.py:57
 msgid "Your image received a new comment"
 msgstr "Η εικόνα σας έλαβε ένα νέο σχόλιο"
 
-#: management/__init__.py:69
+#: management/__init__.py:63
 msgid "There was a reply to your comment"
 msgstr "Υπήρξε απάντηση στο σχόλιο σας"
 
-#: management/__init__.py:75
+#: management/__init__.py:69
 msgid "Your image was bookmarked"
 msgstr "Η εικόνα σας προστέθηκε στα αγαπημένα"
 
-#: management/__init__.py:81
+#: management/__init__.py:75
 msgid "Your image was liked"
 msgstr "Η εικόνα σας άρεσε"
 
-#: management/__init__.py:87
+#: management/__init__.py:81
 msgid "New image with some gear you follow"
 msgstr "Νέα εικόνα με εξοπλισμό που ακολουθείτε"
 
-#: management/__init__.py:93
+#: management/__init__.py:87
 msgid "New image of a subject you follow"
 msgstr "Νέα εικόνα ενός θέματος που ακολουθείτε"
 
-#: management/__init__.py:99
+#: management/__init__.py:93
 msgid "Your API Key request has been approved"
 msgstr "Το ΑΡΙ Κλειδί σας, έχει εγκριθεί"
 
-#: management/__init__.py:105
+#: management/__init__.py:99
 msgid "New discussion about a gear item you own"
 msgstr "Νέα συζήτηση σχετικά με εξοπλισμό που έχετε"
 
-#: management/__init__.py:111
+#: management/__init__.py:105
 msgid "New review of a gear item you own"
 msgstr "Νέα κριτική εξοπλισμού που έχετε"
 
-#: management/__init__.py:117
+#: management/__init__.py:111
 msgid "New data posted to public pool"
 msgstr "Νέα δεδομένα αναρτήθηκαν στην κοινόχρηστη περιοχή"
 
-#: management/__init__.py:123
+#: management/__init__.py:117
 msgid "New image posted to public data pool"
 msgstr "Νέα εικόνα αναρτήθηκε στην κοινόχρηστη περιοχή δεδομένων"
 
-#: management/__init__.py:129
+#: management/__init__.py:123
 msgid "New data posted to shared private folder"
 msgstr "Νέα δεδομένα αναρτήθηκαν στο προσωπικό κοινόχρηστο φάκελο"
 
-#: management/__init__.py:135
+#: management/__init__.py:129
 msgid "New image posted to shared private folder"
 msgstr "Νέα εικόνα αναρτήθηκε στο προσωπικό κοινόχρηστο φάκελο"
 
-#: management/__init__.py:141
+#: management/__init__.py:135
 msgid "You are invited to a shared private folder"
 msgstr "Έχετε πρόσκληση σε ένα προσωπικό κοινόχρηστο φάκελο"
 
@@ -4458,6 +4226,13 @@ msgstr "Ανέβηκε"
 msgid "Acquired"
 msgstr "Λήφθηκε"
 
+#: templates/wall.html:37 templates/inclusion_tags/search_image_list.html:36
+#: templates/inclusion_tags/search_image_list.html:89
+#: templates/search/search.html:43 templates/search/search.html.py:306
+#: views/image.py:324
+msgid "Integration"
+msgstr "Ολοκλήρωση"
+
 #: templates/wall.html:44
 msgid "Number of likes"
 msgstr "Αριθμός προτιμήσεων"
@@ -4950,45 +4725,6 @@ msgstr "Τεχνική κάρτα"
 msgid "Fit to window"
 msgstr "Περιορισμός στο παράθυρο"
 
-#: templates/image/actions/bring_to_attention.html:5
-#: templates/image/actions/bring_to_attention.html:8
-msgid "Bring image to attention"
-msgstr "Φέρε την εικόνα στην προσοχή"
-
-#: templates/image/actions/bring_to_attention.html:10
-msgid ""
-"By choosing some users and clicking the button below, you will send them a "
-"notification prompting them to checkout this image."
-msgstr ""
-"Με την επιλογή ορισμένων χρηστών και κάνοντας κλικ στο παρακάτω κουμπί, θα "
-"τους στείλετε μια ειδοποίηση για να δούν αυτή την εικόνα."
-
-#: templates/image/actions/bring_to_attention.html:16
-#: templates/image/detail/modals/flag_thumbnails.html:15
-msgid "Continue"
-msgstr "Συνέχεια"
-
-#: templates/image/actions/bring_to_attention.html:17
-#: templates/image/actions/request_additional_information_complete.html:11
-#: templates/image/edit/acquisition.html:23
-#: templates/image/edit/acquisition.html:54
-#: templates/image/edit/license.html:23
-msgid "Return to image"
-msgstr "Επιστροφή στην εικόνα"
-
-#: templates/image/actions/bring_to_attention.html:33
-msgid "Click on a user below!"
-msgstr "Κάντε κλικ σε εναν από τους παρακάτω χρήστες!"
-
-#: templates/image/actions/bring_to_attention_complete.html:4
-#: templates/image/actions/bring_to_attention_complete.html:7
-msgid "Done!"
-msgstr "Τέλος!"
-
-#: templates/image/actions/bring_to_attention_complete.html:9
-msgid "The image was brought to the attention of the selected users."
-msgstr "Η εικόνα αυτή ήρθε στην προσοχή των επιλεγμένων χρηστών."
-
 #: templates/image/actions/request_additional_information_complete.html:5
 msgid "Additional information requested"
 msgstr "Χρειάζονται περισσότερες πληροφορίες"
@@ -5003,6 +4739,13 @@ msgstr ""
 "Ο/Η <strong>%(username)s</strong> έχει ειδοποιηθεί. Ελπίζουμε πως θα "
 "ενημερώσει την εικόνα του/της σύντομα. Να θυμάστε ότι μπορείτε επίσης να <a "
 "href=\"%(message_url)s\">του/της στείλετε μήνυμα</a>."
+
+#: templates/image/actions/request_additional_information_complete.html:11
+#: templates/image/edit/acquisition.html:23
+#: templates/image/edit/acquisition.html:54
+#: templates/image/edit/license.html:23
+msgid "Return to image"
+msgstr "Επιστροφή στην εικόνα"
 
 #: templates/image/detail/comments.html:8
 #, python-format
@@ -5027,6 +4770,10 @@ msgstr "Έγινε δυνατό από"
 #: templates/image/detail/histogram.html:6
 msgid "Histogram"
 msgstr "Ιστόγραμμα"
+
+#: templates/image/detail/image_card.html:52 views/image.py:318
+msgid "Frames"
+msgstr "Καρέ"
 
 #: templates/image/detail/image_card.html:78
 msgid "RA center"
@@ -5081,16 +4828,16 @@ msgstr "Αρχική"
 msgid "Sky plot"
 msgstr "Διάγραμμα ουρανού"
 
-#: templates/image/detail/wip_banner.html:9
-#, python-format
+#: templates/image/detail/wip_banner.html:7
+#, fuzzy, python-format
 msgid ""
 "This image is a <strong>work in progress</strong> from your <a href="
 "\"%(profile_url)s?staging\">Staging Area</a>. This means nobody can see it "
 "unless you give them one of the links you can find in the <em>Share</em> "
 "menu below. Use that link to post this image to Internet forums and get "
 "feedback on it. When you are satisfied, perhaps after uploading some "
-"revisions, <a href=\"%(promote_url)s\">promote it</a> to the <a href="
-"\"%(profile_url)s\">Public Area</a>."
+"revisions, <a href=\"#promote-modal\" data-toggle=\"modal\">promote it</a> "
+"to the <a href=\"%(profile_url)s\">Public Area</a>."
 msgstr ""
 "Αυτή η εικόνα είναι <strong>δουλειά σε εξέλιξη</strong> από την <a href="
 "\"%(profile_url)s?staging\">Περιοχή Επεξεργασίας</a> σας. Αυτό σημαίνει πως "
@@ -5101,71 +4848,73 @@ msgstr ""
 "ανεβάσετε μερικές αναθεωρήσεις, να την <a href=\"%(promote_url)s"
 "\">προωθήσετε</a> στην <a href=\"%(profile_url)s\">Περιοχή Προβολής</a>."
 
-#: templates/image/detail/menu/actions.html:7 templates/messages/inbox.html:30
+#: templates/image/detail/menu/actions.html:9 templates/messages/inbox.html:30
 #: templates/user/profile/commercial/products.html:43
 #: templates/user/profile/commercial/products.html:125
 msgid "Actions"
 msgstr "Ενέργειες"
 
-#: templates/image/detail/menu/actions.html:15
+#: templates/image/detail/menu/actions.html:17
 #, fuzzy
 msgid "Edit watermark"
 msgstr "Επόμενο βήμα: υδατογράφημα"
 
-#: templates/image/detail/menu/actions.html:21
+#: templates/image/detail/menu/actions.html:23
 msgid "Edit basic information"
 msgstr "Επεξεργασία βασικών πληροφοριών"
 
-#: templates/image/detail/menu/actions.html:28
+#: templates/image/detail/menu/actions.html:30
 msgid "Edit gear used"
 msgstr "Επεξεργασία εξοπλισμού που χρησιμοποιήθηκε"
 
-#: templates/image/detail/menu/actions.html:34
+#: templates/image/detail/menu/actions.html:36
 #: templates/image/edit/gear.html:47
 msgid "Edit acquisition details"
 msgstr "Επεξεργασία λεπτομερειών λήψης"
 
-#: templates/image/detail/menu/actions.html:47
+#: templates/image/detail/menu/actions.html:49
 msgid "Mark this revision as final"
 msgstr "Σημείωση αυτής της έκδοσης σαν τελική"
 
-#: templates/image/detail/menu/actions.html:61
+#: templates/image/detail/menu/actions.html:63
 #, fuzzy
 msgid "Attempt to plate-solve again"
 msgstr "Να γίνει ανάλυση ξανά"
 
-#: templates/image/detail/menu/actions.html:71
+#: templates/image/detail/menu/actions.html:73
 msgid "Change license"
 msgstr "Αλλαγή άδειας χρήσης"
 
-#: templates/image/detail/menu/actions.html:77
+#: templates/image/detail/menu/actions.html:79
 #: templates/image/detail/modals/upload_revision.html:7
 msgid "Upload new revision"
 msgstr "Ανέβασμα νέας έκδοσης"
 
-#: templates/image/detail/menu/actions.html:84
+#: templates/image/detail/menu/actions.html:86
+#: templates/image/detail/modals/promote.html:7
 msgid "Promote to public area"
 msgstr "Προώθηση στην περιοχή προβολής"
 
-#: templates/image/detail/menu/actions.html:91
+#: templates/image/detail/menu/actions.html:93
+#: templates/image/detail/modals/demote.html:7
 msgid "Move to staging area"
 msgstr "Προώθηση στην περιοχή επεξεργασίας"
 
-#: templates/image/detail/menu/actions.html:100
+#: templates/image/detail/menu/actions.html:102
 #: templates/image/detail/modals/send_to_datapool.html:7
 msgid "Send to public data pool"
 msgstr "Προώθηση στην κοινόχρηστη περιοχή δεδομένων"
 
-#: templates/image/detail/menu/actions.html:107
+#: templates/image/detail/menu/actions.html:109
 #: templates/image/detail/modals/send_to_sharedfolder.html:7
 msgid "Send to private shared folder"
 msgstr "Αποστολή στον κοινόχρηστο προσωπικό φάκελο"
 
-#: templates/image/detail/menu/actions.html:117
+#: templates/image/detail/menu/actions.html:119
 msgid "Delete original image"
 msgstr "Διαγραφή αρχικής εικόνας"
 
-#: templates/image/detail/menu/actions.html:122
+#: templates/image/detail/menu/actions.html:124
 #: templates/image/detail/modals/delete.html:14
 #: templates/image/detail/modals/delete.html:31
 #: templates/image/detail/modals/delete.html:48
@@ -5173,16 +4922,12 @@ msgstr "Διαγραφή αρχικής εικόνας"
 msgid "Delete"
 msgstr "Διαγραφή"
 
-#: templates/image/detail/menu/actions.html:128
+#: templates/image/detail/menu/actions.html:130
 msgid "Delete this revision"
 msgstr "Διαγραφή αυτής της έκδοσης"
 
-#: templates/image/detail/menu/actions.html:138
-msgid "Bring to a user's attention"
-msgstr "Προκάλεσε την προσοχή ενός χρήστη"
-
-#: templates/image/detail/menu/actions.html:147
-#: templates/image/detail/modals/flag_thumbnails.html:7
+#: templates/image/detail/menu/actions.html:141
+#: templates/image/detail/modals/flag_thumbnails.html:6
 msgid "Flag malfunctioning thumbnails"
 msgstr "Επισήμανση μικρογραφιών με βλάβη"
 
@@ -5323,7 +5068,19 @@ msgstr ""
 "Αυτή η εικόνα θα διαγραφεί μόνιμα και δεν θα μπορεί να ανακτηθεί. Οι "
 "εκδόσεις της δεν θα διαγραφούν. Είστε σίγουροι;"
 
-#: templates/image/detail/modals/flag_thumbnails.html:11
+#: templates/image/detail/modals/demote.html:11
+msgid ""
+"This will move this image to your staging area, making it unlisted. The "
+"image will be accessible by anyone with a direct link."
+msgstr ""
+
+#: templates/image/detail/modals/demote.html:15
+#: templates/image/detail/modals/flag_thumbnails.html:14
+#: templates/image/detail/modals/promote.html:15
+msgid "Continue"
+msgstr "Συνέχεια"
+
+#: templates/image/detail/modals/flag_thumbnails.html:10
 msgid ""
 "This will trigger the regeneration of all thumbnails for this image and all "
 "its revisions."
@@ -5334,6 +5091,12 @@ msgstr ""
 #: templates/image/detail/modals/like_this.html:8
 msgid "The following people like this image"
 msgstr "Στα ακόλουθα άτομα αρέσει αυτή η εικόνα"
+
+#: templates/image/detail/modals/promote.html:11
+msgid ""
+"This will move this image to your public area, making it listed and "
+"notifying your followers."
+msgstr ""
 
 #: templates/image/detail/modals/send_to_datapool.html:11
 msgid ""
@@ -5489,6 +5252,14 @@ msgstr ""
 #: templates/image/edit/acquisition.html:74
 msgid "What kind of image is this?"
 msgstr "Τι είδους εικόνα είναι;"
+
+#: templates/image/edit/acquisition.html:78 views/__init__.py:1152
+msgid "Solar system"
+msgstr "Ηλιακό σύστημα"
+
+#: templates/image/edit/acquisition.html:81 views/__init__.py:1151
+msgid "Deep sky"
+msgstr "Βαθύ ουρανού"
 
 #: templates/image/edit/basic.html:7 templates/image/edit/basic.html.py:13
 msgid "Edit your image: basic information"
@@ -5965,30 +5736,6 @@ msgstr ""
 #: templates/notification/api_key_request_approved/short.txt:2
 msgid "API Key request approved"
 msgstr "Έγκριση Κλειδιού ΑΡΙ"
-
-#: templates/notification/attention_request/full.txt:2
-#, python-format
-msgid ""
-"%(originator)s would like to bring the following image to your attention: "
-"%(object_url)s"
-msgstr ""
-"Ο/Η %(originator)s θα ήθελε να προσέξετε αυτή την ακόλουθη εικόνα: "
-"%(object_url)s"
-
-#: templates/notification/attention_request/notice.html:2
-#: templates/notification/attention_request/short.html:1
-#, python-format
-msgid ""
-"<a href=\"%(object_url)s\"><strong>%(originator)s</strong> wants to bring an "
-"image to your attention.</a>"
-msgstr ""
-"Ο/Η <a href=\"%(object_url)s\"><strong>%(originator)s</strong> θέλει να "
-"προσέξετε μια εικόνα.</a>"
-
-#: templates/notification/attention_request/short.txt:2
-#, python-format
-msgid "%(originator)s wants to bring an image to your attention"
-msgstr "Ο/Η %(originator)s θέλει να προσέξετε μια εικόνα"
 
 #: templates/notification/follow_success/notice.html:2
 #: templates/notification/follow_success/short.html:2
@@ -6582,6 +6329,10 @@ msgstr "RA (ορθή αναφορά)"
 msgid "Dec"
 msgstr "Dec (απόκλιση)"
 
+#: templates/popover/user.html:19 views/__init__.py:1241
+msgid "Member since"
+msgstr "Μέλος από τις"
+
 #: templates/privatebeta/invite.html:4 templates/privatebeta/invite.html:13
 msgid "AstroBin is currently in closed beta"
 msgstr "Το AstroBin αυτή τη στιγμή βρίσκεται σε φάση κλειστής δοκιμής Beta"
@@ -6909,6 +6660,15 @@ msgstr "Βασικά κριτήρια"
 msgid "Please input some search terms!"
 msgstr "Παρακαλώ εισάγετε κάποιους όρους αναζήτησης!"
 
+#: templates/search/search.html:307 views/__init__.py:1243
+#: views/__init__.py:1244 views/image.py:324
+msgid "hours"
+msgstr "ώρες"
+
+#: templates/search/search.html:313 views/image.py:330
+msgid "Avg. Moon phase"
+msgstr "Μέση φάση Σελήνης"
+
 #: templates/search/search.html:321
 msgid "Telescope's aperture"
 msgstr "Διάμετρος τηλεσκοπίου"
@@ -7002,6 +6762,11 @@ msgstr ""
 msgctxt "At no cost"
 msgid "Free"
 msgstr ""
+
+#: templates/subscription/subscription_category_list.html:47
+#: views/image.py:329
+msgid "days"
+msgstr "ημέρες"
 
 #: templates/subscription/subscription_category_list.html:51
 msgid "weeks"
@@ -7486,6 +7251,15 @@ msgstr ""
 msgid "Your account was deleted. Thanks for using AstroBin until now!"
 msgstr ""
 
+#: templates/user/profile/flickr_import.html:10 views/__init__.py:606
+#: views/__init__.py:2081
+msgid ""
+"AstroBin is currently in read-only mode, because of server maintenance. "
+"Please try again soon!"
+msgstr ""
+"Το AstroBin είναι σε κατάσταση ανάγνωσης, λόγω συντήρησης του server. "
+"Παρακαλώ δοκιμάστε αργότερα!"
+
 #: templates/user/profile/flickr_import.html:14
 msgid ""
 "Please note: when importing from Flickr, automatic watermarking of the "
@@ -7698,6 +7472,15 @@ msgstr ""
 msgid "Add gear item"
 msgstr "Προσθήκη αντικειμένου εξοπλισμού"
 
+#: templates/user/profile/edit/gear.html:168
+#: templates/user/profile/edit/gear.html:243 views/__init__.py:930
+#: views/__init__.py:1016 views/__init__.py:1043 views/__init__.py:1585
+#: views/__init__.py:1598 views/__init__.py:1619 views/__init__.py:1656
+#: views/__init__.py:1746 views/__init__.py:1808 views/__init__.py:2018
+#: views/__init__.py:3117 views/__init__.py:3287 views/image.py:810
+msgid "Form saved. Thank you!"
+msgstr "Η φόρμα σώθηκε. Ευχαριστούμε!"
+
 #: templates/user/profile/edit/license.html:6
 msgid "Set your default image license"
 msgstr "Καθορίστε την τυπική σας άδεια χρήσης για την εικόνα"
@@ -7744,6 +7527,248 @@ msgstr ""
 #: templates/user/profile/edit/retailer.html:6
 msgid "Edit your retailer information"
 msgstr "Επεξεργασία των πληροφοριών σας λιανικής πωλήσεως"
+
+#: templatetags/tags.py:67 views/__init__.py:1215 views/__init__.py:2544
+msgid "minutes"
+msgstr "λεπτά"
+
+#: templatetags/tags.py:68 views/__init__.py:1216 views/__init__.py:2545
+msgid "seconds ago"
+msgstr "δευτερόλεπτα πριν"
+
+#: templatetags/tags.py:69 views/__init__.py:1218 views/__init__.py:2547
+#, python-format
+msgid "%s ago"
+msgstr "%s πριν"
+
+#: templatetags/tags.py:227 views/__init__.py:2418
+msgid "no alias"
+msgstr "δεν υπάρχει ψευδώνυμο"
+
+#: views/__init__.py:170 views/image.py:170
+#, fuzzy
+msgid "Imaging telescope or lens"
+msgid_plural "Imaging telescopes or lenses"
+msgstr[0] "Τηλεσκόπια απεικόνισης ή φακοί"
+msgstr[1] "Τηλεσκόπια απεικόνισης ή φακοί"
+
+#: views/__init__.py:174 views/image.py:174
+#, fuzzy
+msgid "Imaging camera"
+msgid_plural "Imaging cameras"
+msgstr[0] "Κάμερες απεικόνισης"
+msgstr[1] "Κάμερες απεικόνισης"
+
+#: views/__init__.py:178 views/image.py:178
+#, fuzzy
+msgid "Mount"
+msgid_plural "Mounts"
+msgstr[0] "Στηρίξεις"
+msgstr[1] "Στηρίξεις"
+
+#: views/__init__.py:182 views/image.py:182
+#, fuzzy
+msgid "Guiding telescope or lens"
+msgid_plural "Guiding telescopes or lenses"
+msgstr[0] "Οδηγητικά τηλεσκόπια ή φακοί"
+msgstr[1] "Οδηγητικά τηλεσκόπια ή φακοί"
+
+#: views/__init__.py:186 views/image.py:186
+#, fuzzy
+msgid "Guiding camera"
+msgid_plural "Guiding cameras"
+msgstr[0] "Οδηγητικές κάμερες"
+msgstr[1] "Οδηγητικές κάμερες"
+
+#: views/__init__.py:190 views/image.py:190
+#, fuzzy
+msgid "Focal reducer"
+msgid_plural "Focal reducers"
+msgstr[0] "Μειωτές εστιακού λόγου"
+msgstr[1] "Μειωτές εστιακού λόγου"
+
+#: views/__init__.py:199 views/image.py:199
+#, fuzzy
+msgid "Accessory"
+msgid_plural "Accessories"
+msgstr[0] "Λοιπός εξοπλισμός"
+msgstr[1] "Λοιπός εξοπλισμός"
+
+#: views/__init__.py:480
+msgid "Today's 'Image of the day' was already chosen. Come back tomorrow!"
+msgstr ""
+
+#: views/__init__.py:595 views/__init__.py:2070
+msgid ""
+"Invalid image or no image provided. Allowed formats are JPG, PNG and GIF."
+msgstr ""
+"Ανύπαρκτη εικόνα ή δεν έγινε παροχή εικόνας. Επιτρεπόμενες επεκτάσεις : JPG, "
+"PNG και GIF."
+
+#: views/__init__.py:602
+msgid "You have reached your image uploads limit. Please upgrade!"
+msgstr ""
+
+#: views/__init__.py:626 views/__init__.py:2101
+msgid ""
+"You uploaded an Indexed PNG file. AstroBin will need to lower the color "
+"count to 256 in order to work with it."
+msgstr ""
+"Ανεβάσατε ένα αρχείο Indexed PNG. Το AstroBin θα χρειαστεί να χαμηλώσει την "
+"αναλύση χρώματος στα 256 για να μπορέσει να το επεξεργαστεί."
+
+#: views/__init__.py:860 views/__init__.py:919 views/__init__.py:986
+#: views/__init__.py:998 views/__init__.py:1010 views/__init__.py:1034
+#: views/__init__.py:1736
+msgid ""
+"There was one or more errors processing the form. You may need to scroll "
+"down to see them."
+msgstr ""
+"Υπήρξε ένα ή περισσότερα σφάλματα στην επεξεργασία της φόρμας. Μπορεί να "
+"χρειαστεί να κατεβείτε πιο κάτω στην σελίδα για να τα δείτε."
+
+#: views/__init__.py:981
+msgid "Fill in one session, before adding more."
+msgstr "Εισάγετε μια συνεδρίαση, προτού προσθέσετε άλλη."
+
+#: views/__init__.py:1103
+msgid "No date specified"
+msgstr "Δεν καθορίστηκε ημερομηνία"
+
+#: views/__init__.py:1125 views/__init__.py:1184
+msgid "No imaging telescopes or lenses, or no imaging cameras specified"
+msgstr "Δεν έχουν οριστεί, τηλεσκόπια, φακοί ή κάμερες απεικόνισης"
+
+#: views/__init__.py:1126
+msgid "Gear images"
+msgstr "Εικόνες εξοπλισμού"
+
+#: views/__init__.py:1183
+msgid "No subjects specified"
+msgstr "Δεν έχουν οριστεί θέματα"
+
+#: views/__init__.py:1185
+msgid "No acquisition details specified"
+msgstr "Δεν έχουν οριστεί λεπτομέρειες λήψης"
+
+#: views/__init__.py:1242
+msgid "Last login"
+msgstr "Τελευταία σύνδεση"
+
+#: views/__init__.py:1243
+msgid "Total integration time"
+msgstr "Συνολικός χρόνος ολοκλήρωσης"
+
+#: views/__init__.py:1244
+msgid "Average integration time"
+msgstr "Μέσος χρόνος ολοκλήρωσης"
+
+#: views/__init__.py:1245
+#, fuzzy
+msgid "Forum posts"
+msgstr "Forums"
+
+#: views/__init__.py:2124
+msgid "Image uploaded. Thank you!"
+msgstr "Η εικόνα φορτώθηκε. Ευχαριστούμε!"
+
+#: views/__init__.py:3077 views/__init__.py:3270
+msgid "You can't merge a product to itself."
+msgstr "Δεν μπορείτε να συγχωνεύσετε ένα προϊόν με τον ευατό του."
+
+#: views/__init__.py:3308
+msgid "Default front page section changed."
+msgstr "Έγινε αλλαγή στο τμήμα της αρχικής σελίδας."
+
+#: views/image.py:82
+msgid ""
+"Thanks for reporting the problem. All thumbnails will be generated again."
+msgstr ""
+"Σας ευχαριστούμε για την αναφορά του προβλήματος. Όλες οι μικρογραφίες θα "
+"δημιουργηθούν ξανά."
+
+#: views/image.py:316
+msgid "Resolution"
+msgstr "Ανάλυση"
+
+#: views/image.py:317 views/image.py:482
+msgid "Dates"
+msgstr "Ημερομηνίες"
+
+#: views/image.py:329
+msgid "Avg. Moon age"
+msgstr "Μέση ηλικία Σελήνης"
+
+#: views/image.py:332
+msgid "Mean SQM"
+msgstr "Μέσο SQM"
+
+#: views/image.py:597
+msgid "Image deleted."
+msgstr "Η εικόνα διαγράφηκε"
+
+#: views/image.py:633 views/image.py:703
+msgid "Revision deleted."
+msgstr "Η αναθεώρηση διαγράφτηκε."
+
+#: views/image.py:735
+#, fuzzy
+msgid "Image moved to the staging area."
+msgstr "Προώθηση στην περιοχή επεξεργασίας"
+
+#: views/image.py:782
+#, fuzzy
+msgid "Image moved to the public area."
+msgstr "Προώθηση στην περιοχή προβολής"
+
+#: views/image.py:815
+#, fuzzy
+msgid "There was one or more errors processing the form. "
+msgstr ""
+"Υπήρξε ένα ή περισσότερα σφάλματα στην επεξεργασία της φόρμας. Μπορεί να "
+"χρειαστεί να κατεβείτε πιο κάτω στην σελίδα για να τα δείτε."
+
+#~ msgid "Image brought to your attention"
+#~ msgstr "Εικόνα που χρειάζεται την προσοχή σας"
+
+#~ msgid "Bring image to attention"
+#~ msgstr "Φέρε την εικόνα στην προσοχή"
+
+#~ msgid ""
+#~ "By choosing some users and clicking the button below, you will send them "
+#~ "a notification prompting them to checkout this image."
+#~ msgstr ""
+#~ "Με την επιλογή ορισμένων χρηστών και κάνοντας κλικ στο παρακάτω κουμπί, "
+#~ "θα τους στείλετε μια ειδοποίηση για να δούν αυτή την εικόνα."
+
+#~ msgid "Click on a user below!"
+#~ msgstr "Κάντε κλικ σε εναν από τους παρακάτω χρήστες!"
+
+#~ msgid "Done!"
+#~ msgstr "Τέλος!"
+
+#~ msgid "The image was brought to the attention of the selected users."
+#~ msgstr "Η εικόνα αυτή ήρθε στην προσοχή των επιλεγμένων χρηστών."
+
+#~ msgid "Bring to a user's attention"
+#~ msgstr "Προκάλεσε την προσοχή ενός χρήστη"
+
+#~ msgid ""
+#~ "%(originator)s would like to bring the following image to your attention: "
+#~ "%(object_url)s"
+#~ msgstr ""
+#~ "Ο/Η %(originator)s θα ήθελε να προσέξετε αυτή την ακόλουθη εικόνα: "
+#~ "%(object_url)s"
+
+#~ msgid ""
+#~ "<a href=\"%(object_url)s\"><strong>%(originator)s</strong> wants to bring "
+#~ "an image to your attention.</a>"
+#~ msgstr ""
+#~ "Ο/Η <a href=\"%(object_url)s\"><strong>%(originator)s</strong> θέλει να "
+#~ "προσέξετε μια εικόνα.</a>"
+
+#~ msgid "%(originator)s wants to bring an image to your attention"
+#~ msgstr "Ο/Η %(originator)s θέλει να προσέξετε μια εικόνα"
 
 #~ msgid "You have no new notifications."
 #~ msgstr "Δεν έχετε ειδοποιήσεις"
@@ -8560,8 +8585,8 @@ msgstr "Επεξεργασία των πληροφοριών σας λιανικ
 #~ "Η εικόνα σας του %(messier_object)s εμφανίζεται στον Μαραθώνιο Messier. "
 #~ "Συγχαρητήρια!\n"
 #~ "\n"
-#~ "Αυτή είναι η εικόνα σας που παρουσιάζεται: http://astrobin.com"
-#~ "%(image_url)s\n"
+#~ "Αυτή είναι η εικόνα σας που παρουσιάζεται: http://astrobin.com%(image_url)"
+#~ "s\n"
 #~ "\n"
 #~ "Ο μαραθώνιος Messier είναι μια λίστα από εικόνες των αντικειμένων Messier "
 #~ "που παρουσιάζονται στο AstroBin και έχουν επιλεχθεί από τους χρήστες μέσω "

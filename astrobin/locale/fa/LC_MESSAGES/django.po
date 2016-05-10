@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: AstroBin 1.9\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2016-04-05 10:31+0100\n"
+"POT-Creation-Date: 2016-05-10 20:08+0100\n"
 "PO-Revision-Date: 2016-04-21 21:29+0000\n"
 "Last-Translator: mhkhk <mhkhk_co@yahoo.com>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -1003,13 +1003,13 @@ msgstr "زامبیا"
 msgid "Zimbabwe"
 msgstr "زیمبابوه"
 
-#: forms.py:50
+#: forms.py:68
 msgid ""
 "If you're hosting a copy of this image on your website, put the address here."
 msgstr ""
 "اگر شما یک کپی از این تصویر را در وبسایتتان دارید، آدرس را اینجا وارد کنید."
 
-#: forms.py:56
+#: forms.py:74
 msgid ""
 "If you want to share the TIFF or FITS file of your image, put a link to the "
 "file here. Unfortunately, AstroBin cannot offer to store these files at the "
@@ -1019,30 +1019,30 @@ msgstr ""
 "اینجا قرار دهید. متاسفانه AsroBin نمی تواند در این زمان برای ذخیره آنها کاری "
 "انجام دهد، پس آنها را در فضای شخصی خودتان قرار دهید."
 
-#: forms.py:62 models.py:2086 models.py:2168 templates/gear/page.html:197
+#: forms.py:80 models.py:2086 models.py:2168 templates/gear/page.html:197
 #: templates/image/detail/image_title.html:14
 msgid "Link"
 msgstr "لینک"
 
-#: forms.py:63 templates/image/detail/image_title.html:22
+#: forms.py:81 templates/image/detail/image_title.html:22
 msgid "Link to TIFF/FITS"
 msgstr "لینک به TIFF/FITS"
 
-#: forms.py:64 models.py:693 templates/maintenance_base.html:305
+#: forms.py:82 models.py:693 templates/maintenance_base.html:305
 #: templates/profile-edit-menu.html:36
 #: templates/image/detail/image_card.html:88
 msgid "Locations"
 msgstr "محل"
 
-#: forms.py:77
+#: forms.py:94
 msgid "This field is required."
 msgstr "این قسمت نیاز می باشد."
 
-#: forms.py:90
+#: forms.py:107
 msgid "Opacity"
 msgstr "کدر و تار بودن"
 
-#: forms.py:91
+#: forms.py:108
 msgid ""
 "0 means invisible; 100 means completely opaque. Recommended values are: 10 "
 "if the watermark will appear on the dark sky background, 50 if on some "
@@ -1051,67 +1051,71 @@ msgstr ""
 "0 به این معنی است که دیده نمی شود و100 یعنی کاملا تار. مقادیر پیشنهادی: 10 "
 "برای زمانی که فریم در پس زمینه آسمان تاریک می باشد و 50 برای اجسام نورانی."
 
-#: forms.py:104
+#: forms.py:121
 msgid "If you want to watermark this image, you must specify some text."
 msgstr ""
 "اگر می خواهید این تصویر را چارچوب کار قرار دهید، باید متنی را مشخص کنید."
 
-#: forms.py:131 forms.py:367 models.py:753
+#: forms.py:148 forms.py:384 models.py:753
 msgid "Imaging telescopes or lenses"
 msgstr " تلسکوپ یا عدسی (لنز) برای تصویربرداری"
 
-#: forms.py:132 models.py:754
+#: forms.py:149 models.py:754
 msgid "Guiding telescopes or lenses"
 msgstr " تلسکوپ و لنز راهنما (مسیریاب)"
 
-#: forms.py:133 forms.py:227 models.py:755 models.py:1638 views.py:2386
+#: forms.py:150 forms.py:244 models.py:755 models.py:1638
+#: views/__init__.py:1685
 msgid "Mounts"
 msgstr "پایه ها"
 
-#: forms.py:134 forms.py:368 models.py:756
+#: forms.py:151 forms.py:385 models.py:756
 msgid "Imaging cameras"
 msgstr "دوربین های عکس برداری"
 
-#: forms.py:135 models.py:757
+#: forms.py:152 models.py:757
 msgid "Guiding cameras"
 msgstr "دوربین های راهنما (مسیریاب)"
 
-#: forms.py:136 forms.py:229 models.py:758 models.py:1640 views.py:2387
+#: forms.py:153 forms.py:246 models.py:758 models.py:1640
+#: views/__init__.py:1686
 msgid "Focal reducers"
 msgstr "کاهنده کانون"
 
-#: forms.py:137 forms.py:230 models.py:759 models.py:1641 views.py:207
-#: views.py:635 views.py:2388
+#: forms.py:154 forms.py:247 models.py:759 models.py:1641
+#: views/__init__.py:194 views/__init__.py:1687 views/image.py:194
 msgid "Software"
 msgstr "نرم افزار"
 
-#: forms.py:138 forms.py:231 models.py:760 models.py:1642 views.py:2389
+#: forms.py:155 forms.py:248 models.py:760 models.py:1642
+#: views/__init__.py:1688
 msgid "Filters"
 msgstr "فیلترها"
 
-#: forms.py:139 forms.py:232 models.py:761 models.py:1643 views.py:2390
+#: forms.py:156 forms.py:249 models.py:761 models.py:1643
+#: views/__init__.py:1689
 msgid "Accessories"
 msgstr "لوازم"
 
-#: forms.py:161
+#: forms.py:178
 msgid "If you have a personal website, put the address here."
 msgstr "اگر وبسایت شحصی دارید، آدرس آن را اینجا وارد کنید."
 
-#: forms.py:171 models.py:1557
+#: forms.py:188 models.py:1557
 msgid "Website"
 msgstr "وبسایت"
 
-#: forms.py:195
+#: forms.py:212
 msgid ""
 "All the telescopes and lenses you own, including the ones you use for "
 "guiding, go here."
 msgstr "همه تلسکوپها و عدسی هایی که دارید، شامل مسیریابها، اینجا می روند."
 
-#: forms.py:204
+#: forms.py:221
 msgid "Your DSLRs, CCDs, planetary cameras and guiding cameras go here."
 msgstr "DSLRs, CCDs شما، دوربین های سیاره ای و مسیریاب، اینجا می روند."
 
-#: forms.py:217
+#: forms.py:234
 msgid ""
 "Hint: enter your filters separately! If you enter, for instance, LRGB in one "
 "box, you won't be able to add separate acquisition sessions for them."
@@ -1119,28 +1123,28 @@ msgstr ""
 "نکته: فیلترهایتان را جدا جدا وارد کنید. برای مثال اگرLRGB را در یک باکس قرار "
 "دادید، نمی توانید برای آنها acquisition sessions جداگانه وارد کنید."
 
-#: forms.py:226 models.py:1637 views.py:2384
+#: forms.py:243 models.py:1637 views/__init__.py:1683
 msgid "Telescopes and lenses"
 msgstr "تلسکوپها و عدسی ها"
 
-#: forms.py:228 models.py:1639 views.py:2385
+#: forms.py:245 models.py:1639 views/__init__.py:1684
 msgid "Cameras"
 msgstr "دوربین ها"
 
-#: forms.py:260 forms.py:276
+#: forms.py:277 forms.py:293
 #: templates/inclusion_tags/search_image_list.html:64
 msgid "Users"
 msgstr "کاربران"
 
-#: forms.py:272
+#: forms.py:289
 msgid "Search type"
 msgstr "نوع جستجو"
 
-#: forms.py:274
+#: forms.py:291
 msgid "All"
 msgstr "همه"
 
-#: forms.py:275 templates/leaderboard.html:35 templates/gear/page.html:236
+#: forms.py:292 templates/leaderboard.html:35 templates/gear/page.html:236
 #: templates/inclusion_tags/search_image_list.html:51
 #: templates/inclusion_tags/search_image_list.html:104
 #: templates/popover/user.html:15
@@ -1149,129 +1153,129 @@ msgstr "همه"
 msgid "Images"
 msgstr "تصاویر"
 
-#: forms.py:277 models.py:649 views.py:1853
-#: templates/maintenance_base.html:299 templates/profile-edit-menu.html:30
-#: templates/wall.html:131 templates/inclusion_tags/search_image_list.html:13
-#: templates/user/profile-subnav.html:130
+#: forms.py:294 models.py:649 templates/maintenance_base.html:299
+#: templates/profile-edit-menu.html:30 templates/wall.html:131
+#: templates/inclusion_tags/search_image_list.html:13
+#: templates/user/profile-subnav.html:130 views/__init__.py:1155
 msgid "Gear"
 msgstr "دنده"
 
-#: forms.py:289
+#: forms.py:306
 msgid "Telescope type"
 msgstr "نوع تلسکوپ"
 
-#: forms.py:290 forms.py:296
+#: forms.py:307 forms.py:313
 msgid "Any"
 msgstr "هر چیز دیگر"
 
-#: forms.py:295
+#: forms.py:312
 msgid "Camera type"
 msgstr "نوع دوربین"
 
-#: forms.py:309 forms.py:314
+#: forms.py:326 forms.py:331
 msgid "Express value in mm"
 msgstr "مقدار Express به میلی متر"
 
-#: forms.py:320 forms.py:325
+#: forms.py:337 forms.py:342
 msgid "Express value in &mu;m"
 msgstr "مقدار Express به میکرون"
 
-#: forms.py:332 forms.py:337 forms.py:565 forms.py:610 forms.py:651
+#: forms.py:349 forms.py:354 forms.py:582 forms.py:627 forms.py:668
 msgid "Please use the following format: yyyy-mm-dd"
 msgstr "لطفا از این فرمت استفاده کنید:  yyyy-mm-dd"
 
-#: forms.py:341 forms.py:345
+#: forms.py:358 forms.py:362
 msgid "Express value in hours"
 msgstr "مقدار Express به ساعت "
 
-#: forms.py:357 models.py:774 templates/image/detail/info.html:27
+#: forms.py:374 models.py:774 templates/image/detail/info.html:27
 #: templates/image/detail/info.html:28 templates/search/search.html:239
 msgid "License"
 msgstr "مجوز"
 
-#: forms.py:364
+#: forms.py:381
 msgid ""
 "Search for astronomical objects, telescopes or lenses, cameras, filters..."
 msgstr "اجسام نجومی، تلسکوپها و عدسی ها، دوربین ها و فیلترها را جستجو کنید"
 
-#: forms.py:366 models.py:684
+#: forms.py:383 models.py:684
 msgid "Main solar system subject"
 msgstr "جسم اصلی منظومه شمسی"
 
-#: forms.py:369
+#: forms.py:386
 msgid "Min. telescope aperture"
 msgstr "کمترین مقدار برای سوراخ تلسکوپ"
 
-#: forms.py:370
+#: forms.py:387
 msgid "Max. telescope aperture"
 msgstr "بیشترین مقدار برای سوراخ تلسکوپ"
 
-#: forms.py:371
+#: forms.py:388
 msgid "Acquired after"
 msgstr "بعد گرفته شد"
 
-#: forms.py:372
+#: forms.py:389
 msgid "Acquired before"
 msgstr "قبلا گرفته شد"
 
-#: forms.py:373
+#: forms.py:390
 msgid "Min. integration"
 msgstr "حداقل ادغام"
 
-#: forms.py:374
+#: forms.py:391
 msgid "Max. integration"
 msgstr "حداکثر ادغام"
 
-#: forms.py:375
+#: forms.py:392
 msgid "Min. Moon phase %"
 msgstr "حداقل درصد هلال ماه"
 
-#: forms.py:376
+#: forms.py:393
 msgid "Max. Moon phase %"
 msgstr "حداکثر درصد هلال ماه"
 
-#: forms.py:515
+#: forms.py:532
 msgid "Latitude (degrees)"
 msgstr "عرض جغرافیایی (درجه)"
 
-#: forms.py:520
+#: forms.py:537
 msgid "Latitude (minutes)"
 msgstr "عرض جغرافیایی (دقیقه قوس)"
 
-#: forms.py:526
+#: forms.py:543
 msgid "Latitude (seconds)"
 msgstr "عرض جغرافیایی (ثانیه قوس)"
 
-#: forms.py:533
+#: forms.py:550
 msgid "Longitude (degrees)"
 msgstr "طول جغرافیایی (درجه)"
 
-#: forms.py:538
+#: forms.py:555
 msgid "Longitude (minutes)"
 msgstr "طول جغرافیایی (دقیقه قوس)"
 
-#: forms.py:544
+#: forms.py:561
 msgid "Longitude (seconds)"
 msgstr "طول جغرافیایی (ثانیه قوس)"
 
-#: forms.py:566 forms.py:611 forms.py:652 models.py:1271 models.py:1484
+#: forms.py:583 forms.py:628 forms.py:669 models.py:1271 models.py:1484
 #: templates/image/detail/image_card.html:46
 msgid "Date"
 msgstr "تاریخ"
 
-#: forms.py:572
+#: forms.py:589
 msgid "Please enter a value between 1 and 5."
 msgstr "لطفا یک مقدار بین 1 و5 انتخاب کنید."
 
-#: forms.py:579
+#: forms.py:596
 msgid "Please enter a value between 1 and 10."
 msgstr "لطفا یک مقدار بین 1 و10 انتخاب کنید."
 
-#: forms.py:640 forms.py:658
+#: forms.py:657 forms.py:675
 msgid "The date cannot be in the future."
 msgstr "تاریخ نمی تواند مربوط به آینده باشد."
 
-#: forms.py:892 forms.py:953 models.py:190 templates/gear/fix.html:32
+#: forms.py:909 forms.py:970 models.py:190 templates/gear/fix.html:32
 #: templates/gear/fix.html.py:33 templates/gear/fix.html:34
 #: templates/gear/fix.html.py:42 templates/gear/fix.html:47
 #: templates/gear/fix.html.py:52 templates/gear/fix.html:57
@@ -1289,11 +1293,11 @@ msgstr "تاریخ نمی تواند مربوط به آینده باشد."
 msgid "Make"
 msgstr "ساخت"
 
-#: forms.py:893 forms.py:954 models.py:191
+#: forms.py:910 forms.py:971 models.py:191
 msgid "The make, brand, producer or developer of this product."
 msgstr "ساخت، نوع برند، تولید کننده یا توزیع کننده این محصول."
 
-#: forms.py:898 forms.py:959 models.py:198 models.py:1778 models.py:1917
+#: forms.py:915 forms.py:976 models.py:198 models.py:1778 models.py:1917
 #: templates/gear/fix.html:32 templates/gear/fix.html.py:33
 #: templates/gear/fix.html:34 templates/gear/fix.html.py:42
 #: templates/gear/fix.html:47 templates/gear/fix.html.py:52
@@ -1305,7 +1309,7 @@ msgstr "ساخت، نوع برند، تولید کننده یا توزیع کن�
 msgid "Name"
 msgstr "نام"
 
-#: forms.py:903 forms.py:928 forms.py:964 forms.py:999
+#: forms.py:920 forms.py:945 forms.py:981 forms.py:1016
 #: templates/user/profile/commercial/products.html:82
 #: templates/user/profile/commercial/products.html:164
 #: templates/user/profile/commercial/products.html:280
@@ -1315,7 +1319,7 @@ msgstr "نام"
 msgid "Merge"
 msgstr "ادغام"
 
-#: forms.py:904 forms.py:965
+#: forms.py:921 forms.py:982
 msgid ""
 "Use this field to mark that the item you are claiming really is the same "
 "product (or a variation thereof) of something you have claimed before."
@@ -1323,7 +1327,7 @@ msgstr ""
 "با انتخاب این فیلد، آیتمی را که ادعا کرده اید همان محصول (یا نوع تغییر "
 "یافته) است، مشخص کنید."
 
-#: forms.py:918 forms.py:981
+#: forms.py:935 forms.py:998
 #, python-format
 msgid ""
 "You can't create more than %d claims. Consider upgrading your affiliation!"
@@ -1331,7 +1335,7 @@ msgstr ""
 "نمی توانید بیشتر از  %d ادعا کنید. ارتقاء سمت و وابسته به جایی بودن خود را "
 "در نظر بگیرید."
 
-#: forms.py:929 forms.py:1000
+#: forms.py:946 forms.py:1017
 msgid ""
 "Use this field to mark that the item you are merging really is the same "
 "product (or a variation thereof) of something you have claimed before."
@@ -1339,7 +1343,7 @@ msgstr ""
 "با انتخاب این فیلد، آیتمی را که در حال ادغام به منزله همان محصول (یا نوع "
 "تغییر یافته) بودن است را مشخص کنید."
 
-#: forms.py:989
+#: forms.py:1006
 msgid "You have already claimed this product."
 msgstr "تاکنون این محصول را ادعا کرده اید"
 
@@ -1409,6 +1413,7 @@ msgid "Unlike"
 msgstr "متفاوت"
 
 #: locale_extras.py:20 templates/image/detail/like.html:10
+#: templates/image/detail/like.html:24
 msgid "Like"
 msgstr "شبیه"
 
@@ -1448,7 +1453,7 @@ msgstr "مردم مجاز و با سهم یکسان"
 msgid "Attribution-NoDerivs Creative Commons"
 msgstr "مردم مجاز و غیر وابسته"
 
-#: models.py:79 models.py:97 views.py:841 views.py:843
+#: models.py:79 models.py:97 views/image.py:398 views/image.py:400
 msgid "English"
 msgstr "انگلیسی"
 
@@ -1576,8 +1581,8 @@ msgstr "سیاره کوچک"
 msgid "Comet"
 msgstr "ستاره دنباله دار"
 
-#: models.py:152 models.py:586 models.py:650 views.py:1854
-#: templates/wall.html:143 templates/image/edit/acquisition.html:84
+#: models.py:152 models.py:586 models.py:650 templates/wall.html:143
+#: templates/image/edit/acquisition.html:84 views/__init__.py:1156
 msgid "Other"
 msgstr "دیگر"
 
@@ -1904,11 +1909,11 @@ msgstr "شیء در عمق آسمان"
 msgid "Solar system body or event"
 msgstr "جسم یا اتفاقی در منظومه شمسی"
 
-#: models.py:647 views.py:1851 templates/wall.html:119
+#: models.py:647 templates/wall.html:119 views/__init__.py:1153
 msgid "Extremely wide field"
 msgstr "فیلد بسیار پهن"
 
-#: models.py:648 views.py:1852 templates/wall.html:125
+#: models.py:648 templates/wall.html:125 views/__init__.py:1154
 msgid "Star trails"
 msgstr "رد ستاره"
 
@@ -2019,7 +2024,7 @@ msgstr "9. آسمان درونی شهری (سفید (WHITE))"
 msgid "Synthetic channel"
 msgstr "کانال مصنوعی"
 
-#: models.py:1313 views.py:208 views.py:636
+#: models.py:1313 views/__init__.py:195 views/image.py:195
 msgid "Filter"
 msgstr "فیلتر"
 
@@ -2059,7 +2064,7 @@ msgstr "سیستم خنک کننده سنسور"
 msgid "The temperature of the chip. E.g.: -20."
 msgstr "دمای چیپ: مثلا 20-"
 
-#: models.py:1346 views.py:768
+#: models.py:1346 views/image.py:325
 msgid "Darks"
 msgstr "تیره ها"
 
@@ -2067,7 +2072,7 @@ msgstr "تیره ها"
 msgid "The number of dark frames."
 msgstr "تعداد فریم های تیره"
 
-#: models.py:1351 views.py:769
+#: models.py:1351 views/image.py:326
 msgid "Flats"
 msgstr "صاف ها"
 
@@ -2075,7 +2080,7 @@ msgstr "صاف ها"
 msgid "The number of flat frames."
 msgstr "تعداد فریم های صاف"
 
-#: models.py:1356 views.py:770
+#: models.py:1356 views/image.py:327
 msgid "Flat darks"
 msgstr "تیره های صاف"
 
@@ -2083,7 +2088,7 @@ msgstr "تیره های صاف"
 msgid "The number of dark flat frames."
 msgstr "تعداد فریم های تیره و صاف"
 
-#: models.py:1361 views.py:771
+#: models.py:1361 views/image.py:328
 msgid "Bias"
 msgstr "خطا"
 
@@ -2091,7 +2096,7 @@ msgstr "خطا"
 msgid "The number of bias/offset frames."
 msgstr "تعداد فریم های bias/offset"
 
-#: models.py:1366 views.py:774
+#: models.py:1366 views/image.py:331
 msgid "Bortle Dark-Sky Scale"
 msgstr "آسمان تاریک در مقیاس Bortle"
 
@@ -2111,11 +2116,11 @@ msgstr "Mean mag/arcsec^2 (مقدار متوسط قدر بر مجذور عکس s
 msgid "As measured with your Sky Quality Meter."
 msgstr "به عنوان اندازه گیری با  Sky Quality Meter خود."
 
-#: models.py:1380 views.py:776
+#: models.py:1380 views/image.py:333
 msgid "Mean FWHM"
 msgstr "متوسط FWHM"
 
-#: models.py:1385 views.py:777
+#: models.py:1385 views/image.py:334
 msgid "Temperature"
 msgstr "دما"
 
@@ -2505,7 +2510,7 @@ msgstr ""
 msgid "Commercial gear items"
 msgstr "اقلام اقتصادی، دنده"
 
-#: search.py:50 templates/image/actions/bring_to_attention.html:32
+#: search.py:50
 msgid "No results. Sorry."
 msgstr "هیچ نتیجه ای. متأسفم."
 
@@ -2585,230 +2590,6 @@ msgstr "کاتادیوپتریک"
 msgid "Number of images by subject type"
 msgstr "تعداد تصاویر بر اساس نوع موضوع"
 
-#: views.py:183 views.py:611
-#, fuzzy
-msgid "Imaging telescope or lens"
-msgid_plural "Imaging telescopes or lenses"
-msgstr[0] " تلسکوپ یا عدسی (لنز) برای تصویربرداری"
-
-#: views.py:187 views.py:615
-#, fuzzy
-msgid "Imaging camera"
-msgid_plural "Imaging cameras"
-msgstr[0] "دوربین های عکس برداری"
-
-#: views.py:191 views.py:619
-#, fuzzy
-msgid "Mount"
-msgid_plural "Mounts"
-msgstr[0] "پایه ها"
-
-#: views.py:195 views.py:623
-#, fuzzy
-msgid "Guiding telescope or lens"
-msgid_plural "Guiding telescopes or lenses"
-msgstr[0] " تلسکوپ و لنز راهنما (مسیریاب)"
-
-#: views.py:199 views.py:627
-#, fuzzy
-msgid "Guiding camera"
-msgid_plural "Guiding cameras"
-msgstr[0] "دوربین های راهنما (مسیریاب)"
-
-#: views.py:203 views.py:631
-#, fuzzy
-msgid "Focal reducer"
-msgid_plural "Focal reducers"
-msgstr[0] "کاهنده کانون"
-
-#: views.py:212 views.py:640
-#, fuzzy
-msgid "Accessory"
-msgid_plural "Accessories"
-msgstr[0] "لوازم"
-
-#: views.py:500
-msgid "Today's 'Image of the day' was already chosen. Come back tomorrow!"
-msgstr ""
-
-#: views.py:759
-msgid "Resolution"
-msgstr "رزولوشن"
-
-#: views.py:760 views.py:924
-msgid "Dates"
-msgstr "تاریخ"
-
-#: views.py:761 templates/image/detail/image_card.html:52
-msgid "Frames"
-msgstr "فریم ها"
-
-#: views.py:767 templates/wall.html:37
-#: templates/inclusion_tags/search_image_list.html:36
-#: templates/inclusion_tags/search_image_list.html:89
-#: templates/search/search.html:43 templates/search/search.html.py:306
-msgid "Integration"
-msgstr "ادغام"
-
-#: views.py:767 views.py:1944 views.py:1945 templates/search/search.html:307
-msgid "hours"
-msgstr "ساعات"
-
-#: views.py:772
-msgid "Avg. Moon age"
-msgstr "میانگین سن ماه"
-
-#: views.py:772 templates/subscription/subscription_category_list.html:47
-msgid "days"
-msgstr "روزها"
-
-#: views.py:773 templates/search/search.html:313
-msgid "Avg. Moon phase"
-msgstr "میانگین فاز ماه"
-
-#: views.py:775
-msgid "Mean SQM"
-msgstr "SQM متوسط"
-
-#: views.py:970
-msgid ""
-"Thanks for reporting the problem. All thumbnails will be generated again."
-msgstr ""
-
-#: views.py:1112 views.py:2841
-msgid ""
-"Invalid image or no image provided. Allowed formats are JPG, PNG and GIF."
-msgstr ""
-"تصویر نامعتبر یا اینکه تصویری آماده نشده است. فرمتهای مجاز JPG ،PNG ،GIF می "
-"باشند."
-
-#: views.py:1119
-msgid "You have reached your image uploads limit. Please upgrade!"
-msgstr ""
-
-#: views.py:1123 views.py:2852 templates/user/profile/flickr_import.html:10
-msgid ""
-"AstroBin is currently in read-only mode, because of server maintenance. "
-"Please try again soon!"
-msgstr ""
-"AstroBin به خاطر حفاظت سرور اکنون در مد read-only است.لطفا بعدا سعی کنید. "
-
-#: views.py:1143 views.py:2872
-msgid ""
-"You uploaded an Indexed PNG file. AstroBin will need to lower the color "
-"count to 256 in order to work with it."
-msgstr ""
-
-#: views.py:1399 views.py:1428 views.py:1488 views.py:1556 views.py:1568
-#: views.py:1580 views.py:1604 views.py:2437
-msgid ""
-"There was one or more errors processing the form. You may need to scroll "
-"down to see them."
-msgstr ""
-"یک یا چند مشکل در پردازش فایل وجود دارد.  برای مشاهده آنها می توانید به "
-"پایین بروید."
-
-#: views.py:1410 views.py:1499 views.py:1586 views.py:1613 views.py:2286
-#: views.py:2299 views.py:2320 views.py:2357 views.py:2447 views.py:2509
-#: views.py:2720 views.py:3947 views.py:4117
-#: templates/user/profile/edit/gear.html:168
-#: templates/user/profile/edit/gear.html:243
-msgid "Form saved. Thank you!"
-msgstr "فرم ذخیره شد. با تشکر."
-
-#: views.py:1551
-msgid "Fill in one session, before adding more."
-msgstr "یک جلسه را انتخاب کنید قبل از اینکه چیز بیشتری اضافه کنید."
-
-#: views.py:1626 views.py:1697
-#, fuzzy
-msgid "Image deleted."
-msgstr "تصویر شما حذف شد."
-
-#: views.py:1644
-msgid "Revision deleted."
-msgstr ""
-
-#: views.py:1801
-msgid "No date specified"
-msgstr "تاریخی مشخص نشده است."
-
-#: views.py:1823 views.py:1884
-msgid "No imaging telescopes or lenses, or no imaging cameras specified"
-msgstr ""
-"هیچ تلسکوپ یا لنز تصویر برداری و همچنین دوربین تصویر برداری مشخص نشده است."
-
-#: views.py:1824
-msgid "Gear images"
-msgstr "تصاویر دنده (Gear)"
-
-#: views.py:1849 templates/image/edit/acquisition.html:81
-msgid "Deep sky"
-msgstr "اعماق آسمان"
-
-#: views.py:1850 templates/image/edit/acquisition.html:78
-msgid "Solar system"
-msgstr "منظومه شمسی"
-
-#: views.py:1883
-msgid "No subjects specified"
-msgstr "هیچ موضوعی مشخص نشده است. "
-
-#: views.py:1885
-msgid "No acquisition details specified"
-msgstr "هیچ جزئیات کسب شده ای مشخص نشده است."
-
-#: views.py:1916 views.py:3324 templatetags/tags.py:67
-msgid "minutes"
-msgstr "دقیقه ها"
-
-#: views.py:1917 views.py:3325 templatetags/tags.py:68
-msgid "seconds ago"
-msgstr "ثانیه های قبل"
-
-#: views.py:1919 views.py:3327 templatetags/tags.py:69
-#, python-format
-msgid "%s ago"
-msgstr "%s قبل"
-
-#: views.py:1942 templates/popover/user.html:19
-msgid "Member since"
-msgstr "عضو از"
-
-#: views.py:1943
-msgid "Last login"
-msgstr "آخرین login"
-
-#: views.py:1944
-msgid "Total integration time"
-msgstr "کل زمان ادغام"
-
-#: views.py:1945
-msgid "Average integration time"
-msgstr "متوسط زمان ادغام"
-
-#: views.py:1946
-#, fuzzy
-msgid "Forum posts"
-msgstr "فروم ها"
-
-#: views.py:2895
-#, fuzzy
-msgid "Image uploaded. Thank you!"
-msgstr "فرم ذخیره شد. با تشکر."
-
-#: views.py:3191 templatetags/tags.py:227
-msgid "no alias"
-msgstr "هیچ نام مستعاری"
-
-#: views.py:3907 views.py:4100
-msgid "You can't merge a product to itself."
-msgstr "نمی توانید محصولی را با خودش یکی کنید."
-
-#: views.py:4138
-msgid "Default front page section changed."
-msgstr ""
-
 #: management/__init__.py:21
 msgid "You have a new follower"
 msgstr "دنبال کننده جدیدی دارید."
@@ -2818,81 +2599,77 @@ msgid "New image from a user you follow"
 msgstr "تصویر جدید از کاربری که دنبال می کردید."
 
 #: management/__init__.py:33
-msgid "Image brought to your attention"
-msgstr "تصویری که توجهتان را جلب کرده است. "
-
-#: management/__init__.py:39
 msgid "New image revision from a user you follow"
 msgstr "ویرایش تصویر جدید از کاربری که دنبال می کردید."
 
-#: management/__init__.py:45
+#: management/__init__.py:39
 msgid "Your image was plate-solved"
 msgstr "تصویر شما plate-solved شد."
 
-#: management/__init__.py:51
+#: management/__init__.py:45
 msgid "Your image could not be plate-solved"
 msgstr "تصویر شما نمی تواند plate-solved شود."
 
-#: management/__init__.py:57
+#: management/__init__.py:51
 msgid "AstroBin has published a new blog entry"
 msgstr "AstroBin یک blog entry (وبلاگ) جدید منتشر کرده است."
 
-#: management/__init__.py:63
+#: management/__init__.py:57
 msgid "Your image received a new comment"
 msgstr "تصویر شما کامنت جدیدی دارد."
 
-#: management/__init__.py:69
+#: management/__init__.py:63
 msgid "There was a reply to your comment"
 msgstr "برای کامنتتان، پاسخی وجود دارد."
 
-#: management/__init__.py:75
+#: management/__init__.py:69
 #, fuzzy
 msgid "Your image was bookmarked"
 msgstr "تصویر شما پسندیده شده است."
 
-#: management/__init__.py:81
+#: management/__init__.py:75
 #, fuzzy
 msgid "Your image was liked"
 msgstr "تصویر شما حذف شد."
 
-#: management/__init__.py:87
+#: management/__init__.py:81
 msgid "New image with some gear you follow"
 msgstr "تصویر جدید با ابزاری که دنبال می کنید."
 
-#: management/__init__.py:93
+#: management/__init__.py:87
 msgid "New image of a subject you follow"
 msgstr "تصویر جدید از موضوعی که دنبال می کنید."
 
-#: management/__init__.py:99
+#: management/__init__.py:93
 msgid "Your API Key request has been approved"
 msgstr "درخواست API Key شما تایید شده است."
 
-#: management/__init__.py:105
+#: management/__init__.py:99
 msgid "New discussion about a gear item you own"
 msgstr "بحث جدیدی راجع به ابزاری (دنده، gear) که دارید."
 
-#: management/__init__.py:111
+#: management/__init__.py:105
 msgid "New review of a gear item you own"
 msgstr "مرور جدیدی راجع به ابزاری (دنده، gear) که دارید."
 
-#: management/__init__.py:117
+#: management/__init__.py:111
 msgid "New data posted to public pool"
 msgstr ""
 
-#: management/__init__.py:123
+#: management/__init__.py:117
 #, fuzzy
 msgid "New image posted to public data pool"
 msgstr "تصویر جدید از موضوعی که دنبال می کنید."
 
-#: management/__init__.py:129
+#: management/__init__.py:123
 msgid "New data posted to shared private folder"
 msgstr ""
 
-#: management/__init__.py:135
+#: management/__init__.py:129
 msgid "New image posted to shared private folder"
 msgstr ""
 
-#: management/__init__.py:141
+#: management/__init__.py:135
 #, fuzzy
 msgid "You are invited to a shared private folder"
 msgstr "شما یک پیام خصوصی دریافت کرده اید."
@@ -4327,6 +4104,13 @@ msgstr "آپلود"
 msgid "Acquired"
 msgstr "کسب شده"
 
+#: templates/wall.html:37 templates/inclusion_tags/search_image_list.html:36
+#: templates/inclusion_tags/search_image_list.html:89
+#: templates/search/search.html:43 templates/search/search.html.py:306
+#: views/image.py:324
+msgid "Integration"
+msgstr "ادغام"
+
 #: templates/wall.html:44
 #, fuzzy
 msgid "Number of likes"
@@ -4809,45 +4593,6 @@ msgstr "کارت فنی"
 msgid "Fit to window"
 msgstr "برای پنجره، سازگار شود."
 
-#: templates/image/actions/bring_to_attention.html:5
-#: templates/image/actions/bring_to_attention.html:8
-msgid "Bring image to attention"
-msgstr "تصویر را مورد توجه قرا بده."
-
-#: templates/image/actions/bring_to_attention.html:10
-msgid ""
-"By choosing some users and clicking the button below, you will send them a "
-"notification prompting them to checkout this image."
-msgstr ""
-"با انتخاب برخی از کاربران و کلیک کردن بر روی دکمه زیر، شما به آنها در مورد "
-"چک کردن این تصویراطلاع می دهید."
-
-#: templates/image/actions/bring_to_attention.html:16
-#: templates/image/detail/modals/flag_thumbnails.html:15
-msgid "Continue"
-msgstr "ادامه"
-
-#: templates/image/actions/bring_to_attention.html:17
-#: templates/image/actions/request_additional_information_complete.html:11
-#: templates/image/edit/acquisition.html:23
-#: templates/image/edit/acquisition.html:54
-#: templates/image/edit/license.html:23
-msgid "Return to image"
-msgstr "بازگشت به تصویر"
-
-#: templates/image/actions/bring_to_attention.html:33
-msgid "Click on a user below!"
-msgstr "کلیک بر روی یک کاربر در زیر!"
-
-#: templates/image/actions/bring_to_attention_complete.html:4
-#: templates/image/actions/bring_to_attention_complete.html:7
-msgid "Done!"
-msgstr "انجام شد!"
-
-#: templates/image/actions/bring_to_attention_complete.html:9
-msgid "The image was brought to the attention of the selected users."
-msgstr "این تصویر مورد توجه کاربران انتخاب شده قرار گرفته است."
-
 #: templates/image/actions/request_additional_information_complete.html:5
 msgid "Additional information requested"
 msgstr "اطلاعات اضافی درخواست شده است."
@@ -4861,6 +4606,13 @@ msgid ""
 msgstr ""
 "به (کاربر) اطلاع رسانی شد. امیدوارم آنها تصویر را به زودی به روز رسانی کنند. "
 "به یاد داشته باشید که شما همچنین می توانید به آنها پیغام نیز بفرستید."
+
+#: templates/image/actions/request_additional_information_complete.html:11
+#: templates/image/edit/acquisition.html:23
+#: templates/image/edit/acquisition.html:54
+#: templates/image/edit/license.html:23
+msgid "Return to image"
+msgstr "بازگشت به تصویر"
 
 #: templates/image/detail/comments.html:8
 #, python-format
@@ -4883,6 +4635,10 @@ msgstr "امکان ساخته شدن توسط:"
 #: templates/image/detail/histogram.html:6
 msgid "Histogram"
 msgstr "هیستوگرام"
+
+#: templates/image/detail/image_card.html:52 views/image.py:318
+msgid "Frames"
+msgstr "فریم ها"
 
 #: templates/image/detail/image_card.html:78
 msgid "RA center"
@@ -4938,16 +4694,16 @@ msgstr "اصلی"
 msgid "Sky plot"
 msgstr ""
 
-#: templates/image/detail/wip_banner.html:9
-#, python-format
+#: templates/image/detail/wip_banner.html:7
+#, fuzzy, python-format
 msgid ""
 "This image is a <strong>work in progress</strong> from your <a href="
 "\"%(profile_url)s?staging\">Staging Area</a>. This means nobody can see it "
 "unless you give them one of the links you can find in the <em>Share</em> "
 "menu below. Use that link to post this image to Internet forums and get "
 "feedback on it. When you are satisfied, perhaps after uploading some "
-"revisions, <a href=\"%(promote_url)s\">promote it</a> to the <a href="
-"\"%(profile_url)s\">Public Area</a>."
+"revisions, <a href=\"#promote-modal\" data-toggle=\"modal\">promote it</a> "
+"to the <a href=\"%(profile_url)s\">Public Area</a>."
 msgstr ""
 "این تصویر در وضعیت work in progress می باشد که از Staging Area هدایت شده "
 "است. این بدین معنی است که هیچ کس نمی تواند آن را ببیند مگراینکه شما به آنها "
@@ -4955,73 +4711,75 @@ msgstr ""
 "اینک برای ارسال به فروم ها و دادن فیدبک استفاده کنید. اگر رضایت داشتید شاید "
 "بعد از آپلود چند نظر، از Public Area آنها را promote it کنید."
 
-#: templates/image/detail/menu/actions.html:7 templates/messages/inbox.html:30
+#: templates/image/detail/menu/actions.html:9 templates/messages/inbox.html:30
 #: templates/user/profile/commercial/products.html:43
 #: templates/user/profile/commercial/products.html:125
 msgid "Actions"
 msgstr "فعالیت ها"
 
-#: templates/image/detail/menu/actions.html:15
+#: templates/image/detail/menu/actions.html:17
 #, fuzzy
 msgid "Edit watermark"
 msgstr "مرحله بعد: watermark"
 
-#: templates/image/detail/menu/actions.html:21
+#: templates/image/detail/menu/actions.html:23
 msgid "Edit basic information"
 msgstr "اطلاعات پایه را ویرایش کنید"
 
-#: templates/image/detail/menu/actions.html:28
+#: templates/image/detail/menu/actions.html:30
 msgid "Edit gear used"
 msgstr "دنده (gear) در حال استفاده را ویرایش کنید."
 
-#: templates/image/detail/menu/actions.html:34
+#: templates/image/detail/menu/actions.html:36
 #: templates/image/edit/gear.html:47
 msgid "Edit acquisition details"
 msgstr "ویرایش اطلاعات کسب شده."
 
-#: templates/image/detail/menu/actions.html:47
+#: templates/image/detail/menu/actions.html:49
 msgid "Mark this revision as final"
 msgstr "این تجدید نظر(بررسی) را به عنوان نهایی، مارک کنید."
 
-#: templates/image/detail/menu/actions.html:61
+#: templates/image/detail/menu/actions.html:63
 #, fuzzy
 msgid "Attempt to plate-solve again"
 msgstr " دوباره Plate-solve"
 
-#: templates/image/detail/menu/actions.html:71
+#: templates/image/detail/menu/actions.html:73
 msgid "Change license"
 msgstr "تغییر مجوز"
 
-#: templates/image/detail/menu/actions.html:77
+#: templates/image/detail/menu/actions.html:79
 #: templates/image/detail/modals/upload_revision.html:7
 msgid "Upload new revision"
 msgstr "آپلود بررسی جدید"
 
-#: templates/image/detail/menu/actions.html:84
+#: templates/image/detail/menu/actions.html:86
+#: templates/image/detail/modals/promote.html:7
 msgid "Promote to public area"
 msgstr "ارتقای این مطلب به فضای عمومی"
 
-#: templates/image/detail/menu/actions.html:91
+#: templates/image/detail/menu/actions.html:93
+#: templates/image/detail/modals/demote.html:7
 msgid "Move to staging area"
 msgstr "انتقال به منطقه عملیاتی (staging area)"
 
-#: templates/image/detail/menu/actions.html:100
+#: templates/image/detail/menu/actions.html:102
 #: templates/image/detail/modals/send_to_datapool.html:7
 #, fuzzy
 msgid "Send to public data pool"
 msgstr "ارتقای این مطلب به فضای عمومی"
 
-#: templates/image/detail/menu/actions.html:107
+#: templates/image/detail/menu/actions.html:109
 #: templates/image/detail/modals/send_to_sharedfolder.html:7
 #, fuzzy
 msgid "Send to private shared folder"
 msgstr "پیغام خصوصی بفرست."
 
-#: templates/image/detail/menu/actions.html:117
+#: templates/image/detail/menu/actions.html:119
 msgid "Delete original image"
 msgstr "حذف تصویر اصلی"
 
-#: templates/image/detail/menu/actions.html:122
+#: templates/image/detail/menu/actions.html:124
 #: templates/image/detail/modals/delete.html:14
 #: templates/image/detail/modals/delete.html:31
 #: templates/image/detail/modals/delete.html:48
@@ -5029,16 +4787,12 @@ msgstr "حذف تصویر اصلی"
 msgid "Delete"
 msgstr "حذف"
 
-#: templates/image/detail/menu/actions.html:128
+#: templates/image/detail/menu/actions.html:130
 msgid "Delete this revision"
 msgstr "حذف این بررسی"
 
-#: templates/image/detail/menu/actions.html:138
-msgid "Bring to a user's attention"
-msgstr "مورد توجه کاربر قرارش بده."
-
-#: templates/image/detail/menu/actions.html:147
-#: templates/image/detail/modals/flag_thumbnails.html:7
+#: templates/image/detail/menu/actions.html:141
+#: templates/image/detail/modals/flag_thumbnails.html:6
 msgid "Flag malfunctioning thumbnails"
 msgstr ""
 
@@ -5174,7 +4928,19 @@ msgstr ""
 "این تصویر برای همیشه حذف خواهد شد و نمی تواند بازیافت شود. ولی تجدید نظر آن "
 "حذف نخواهد شد. آیا مطمئن هستید؟"
 
-#: templates/image/detail/modals/flag_thumbnails.html:11
+#: templates/image/detail/modals/demote.html:11
+msgid ""
+"This will move this image to your staging area, making it unlisted. The "
+"image will be accessible by anyone with a direct link."
+msgstr ""
+
+#: templates/image/detail/modals/demote.html:15
+#: templates/image/detail/modals/flag_thumbnails.html:14
+#: templates/image/detail/modals/promote.html:15
+msgid "Continue"
+msgstr "ادامه"
+
+#: templates/image/detail/modals/flag_thumbnails.html:10
 msgid ""
 "This will trigger the regeneration of all thumbnails for this image and all "
 "its revisions."
@@ -5182,6 +4948,12 @@ msgstr ""
 
 #: templates/image/detail/modals/like_this.html:8
 msgid "The following people like this image"
+msgstr ""
+
+#: templates/image/detail/modals/promote.html:11
+msgid ""
+"This will move this image to your public area, making it listed and "
+"notifying your followers."
 msgstr ""
 
 #: templates/image/detail/modals/send_to_datapool.html:11
@@ -5327,6 +5099,14 @@ msgstr ""
 #: templates/image/edit/acquisition.html:74
 msgid "What kind of image is this?"
 msgstr "چه نوع تصویری است؟"
+
+#: templates/image/edit/acquisition.html:78 views/__init__.py:1152
+msgid "Solar system"
+msgstr "منظومه شمسی"
+
+#: templates/image/edit/acquisition.html:81 views/__init__.py:1151
+msgid "Deep sky"
+msgstr "اعماق آسمان"
 
 #: templates/image/edit/basic.html:7 templates/image/edit/basic.html.py:13
 msgid "Edit your image: basic information"
@@ -5786,26 +5566,6 @@ msgstr "درخواست شما برای یک کلید API مورد تایید ق�
 #: templates/notification/api_key_request_approved/short.txt:2
 msgid "API Key request approved"
 msgstr "درخواست کلید API مورد تایید قرار گرفته است."
-
-#: templates/notification/attention_request/full.txt:2
-#, python-format
-msgid ""
-"%(originator)s would like to bring the following image to your attention: "
-"%(object_url)s"
-msgstr "(موسس) میل دارد یک تصویر را مورد توجه شما قرار دهد: (object_url)"
-
-#: templates/notification/attention_request/notice.html:2
-#: templates/notification/attention_request/short.html:1
-#, python-format
-msgid ""
-"<a href=\"%(object_url)s\"><strong>%(originator)s</strong> wants to bring an "
-"image to your attention.</a>"
-msgstr "(موسس) میل دارد یک تصویر را مورد توجه شما قرار دهد."
-
-#: templates/notification/attention_request/short.txt:2
-#, python-format
-msgid "%(originator)s wants to bring an image to your attention"
-msgstr "(موسس) میل دارد تصویر زیر را مورد توجه شما قرار دهد."
 
 #: templates/notification/follow_success/notice.html:2
 #: templates/notification/follow_success/short.html:2
@@ -6332,6 +6092,10 @@ msgstr "RA"
 msgid "Dec"
 msgstr "Dec"
 
+#: templates/popover/user.html:19 views/__init__.py:1241
+msgid "Member since"
+msgstr "عضو از"
+
 #: templates/privatebeta/invite.html:4 templates/privatebeta/invite.html:13
 msgid "AstroBin is currently in closed beta"
 msgstr "AstroBin در حال حاضر در نسخه بتای بسته می باشد."
@@ -6648,6 +6412,15 @@ msgstr "معیارهای اساسی"
 msgid "Please input some search terms!"
 msgstr "لطفا برخی از شرایط جستجو را وارد کنید!"
 
+#: templates/search/search.html:307 views/__init__.py:1243
+#: views/__init__.py:1244 views/image.py:324
+msgid "hours"
+msgstr "ساعات"
+
+#: templates/search/search.html:313 views/image.py:330
+msgid "Avg. Moon phase"
+msgstr "میانگین فاز ماه"
+
 #: templates/search/search.html:321
 msgid "Telescope's aperture"
 msgstr "دیافراگم تلسکوپ"
@@ -6738,6 +6511,11 @@ msgstr ""
 msgctxt "At no cost"
 msgid "Free"
 msgstr ""
+
+#: templates/subscription/subscription_category_list.html:47
+#: views/image.py:329
+msgid "days"
+msgstr "روزها"
 
 #: templates/subscription/subscription_category_list.html:51
 msgid "weeks"
@@ -7215,6 +6993,14 @@ msgstr ""
 msgid "Your account was deleted. Thanks for using AstroBin until now!"
 msgstr ""
 
+#: templates/user/profile/flickr_import.html:10 views/__init__.py:606
+#: views/__init__.py:2081
+msgid ""
+"AstroBin is currently in read-only mode, because of server maintenance. "
+"Please try again soon!"
+msgstr ""
+"AstroBin به خاطر حفاظت سرور اکنون در مد read-only است.لطفا بعدا سعی کنید. "
+
 #: templates/user/profile/flickr_import.html:14
 msgid ""
 "Please note: when importing from Flickr, automatic watermarking of the "
@@ -7423,6 +7209,15 @@ msgstr ""
 msgid "Add gear item"
 msgstr "اضافه کردن آیتم دنده (gear)"
 
+#: templates/user/profile/edit/gear.html:168
+#: templates/user/profile/edit/gear.html:243 views/__init__.py:930
+#: views/__init__.py:1016 views/__init__.py:1043 views/__init__.py:1585
+#: views/__init__.py:1598 views/__init__.py:1619 views/__init__.py:1656
+#: views/__init__.py:1746 views/__init__.py:1808 views/__init__.py:2018
+#: views/__init__.py:3117 views/__init__.py:3287 views/image.py:810
+msgid "Form saved. Thank you!"
+msgstr "فرم ذخیره شد. با تشکر."
+
 #: templates/user/profile/edit/license.html:6
 msgid "Set your default image license"
 msgstr "مجوز تصویر خود را به طور پیش فرض تنظیم نمایید"
@@ -7466,6 +7261,236 @@ msgstr ""
 #: templates/user/profile/edit/retailer.html:6
 msgid "Edit your retailer information"
 msgstr "ویرایش اطلاعات خرده فروشی شما"
+
+#: templatetags/tags.py:67 views/__init__.py:1215 views/__init__.py:2544
+msgid "minutes"
+msgstr "دقیقه ها"
+
+#: templatetags/tags.py:68 views/__init__.py:1216 views/__init__.py:2545
+msgid "seconds ago"
+msgstr "ثانیه های قبل"
+
+#: templatetags/tags.py:69 views/__init__.py:1218 views/__init__.py:2547
+#, python-format
+msgid "%s ago"
+msgstr "%s قبل"
+
+#: templatetags/tags.py:227 views/__init__.py:2418
+msgid "no alias"
+msgstr "هیچ نام مستعاری"
+
+#: views/__init__.py:170 views/image.py:170
+#, fuzzy
+msgid "Imaging telescope or lens"
+msgid_plural "Imaging telescopes or lenses"
+msgstr[0] " تلسکوپ یا عدسی (لنز) برای تصویربرداری"
+
+#: views/__init__.py:174 views/image.py:174
+#, fuzzy
+msgid "Imaging camera"
+msgid_plural "Imaging cameras"
+msgstr[0] "دوربین های عکس برداری"
+
+#: views/__init__.py:178 views/image.py:178
+#, fuzzy
+msgid "Mount"
+msgid_plural "Mounts"
+msgstr[0] "پایه ها"
+
+#: views/__init__.py:182 views/image.py:182
+#, fuzzy
+msgid "Guiding telescope or lens"
+msgid_plural "Guiding telescopes or lenses"
+msgstr[0] " تلسکوپ و لنز راهنما (مسیریاب)"
+
+#: views/__init__.py:186 views/image.py:186
+#, fuzzy
+msgid "Guiding camera"
+msgid_plural "Guiding cameras"
+msgstr[0] "دوربین های راهنما (مسیریاب)"
+
+#: views/__init__.py:190 views/image.py:190
+#, fuzzy
+msgid "Focal reducer"
+msgid_plural "Focal reducers"
+msgstr[0] "کاهنده کانون"
+
+#: views/__init__.py:199 views/image.py:199
+#, fuzzy
+msgid "Accessory"
+msgid_plural "Accessories"
+msgstr[0] "لوازم"
+
+#: views/__init__.py:480
+msgid "Today's 'Image of the day' was already chosen. Come back tomorrow!"
+msgstr ""
+
+#: views/__init__.py:595 views/__init__.py:2070
+msgid ""
+"Invalid image or no image provided. Allowed formats are JPG, PNG and GIF."
+msgstr ""
+"تصویر نامعتبر یا اینکه تصویری آماده نشده است. فرمتهای مجاز JPG ،PNG ،GIF می "
+"باشند."
+
+#: views/__init__.py:602
+msgid "You have reached your image uploads limit. Please upgrade!"
+msgstr ""
+
+#: views/__init__.py:626 views/__init__.py:2101
+msgid ""
+"You uploaded an Indexed PNG file. AstroBin will need to lower the color "
+"count to 256 in order to work with it."
+msgstr ""
+
+#: views/__init__.py:860 views/__init__.py:919 views/__init__.py:986
+#: views/__init__.py:998 views/__init__.py:1010 views/__init__.py:1034
+#: views/__init__.py:1736
+msgid ""
+"There was one or more errors processing the form. You may need to scroll "
+"down to see them."
+msgstr ""
+"یک یا چند مشکل در پردازش فایل وجود دارد.  برای مشاهده آنها می توانید به "
+"پایین بروید."
+
+#: views/__init__.py:981
+msgid "Fill in one session, before adding more."
+msgstr "یک جلسه را انتخاب کنید قبل از اینکه چیز بیشتری اضافه کنید."
+
+#: views/__init__.py:1103
+msgid "No date specified"
+msgstr "تاریخی مشخص نشده است."
+
+#: views/__init__.py:1125 views/__init__.py:1184
+msgid "No imaging telescopes or lenses, or no imaging cameras specified"
+msgstr ""
+"هیچ تلسکوپ یا لنز تصویر برداری و همچنین دوربین تصویر برداری مشخص نشده است."
+
+#: views/__init__.py:1126
+msgid "Gear images"
+msgstr "تصاویر دنده (Gear)"
+
+#: views/__init__.py:1183
+msgid "No subjects specified"
+msgstr "هیچ موضوعی مشخص نشده است. "
+
+#: views/__init__.py:1185
+msgid "No acquisition details specified"
+msgstr "هیچ جزئیات کسب شده ای مشخص نشده است."
+
+#: views/__init__.py:1242
+msgid "Last login"
+msgstr "آخرین login"
+
+#: views/__init__.py:1243
+msgid "Total integration time"
+msgstr "کل زمان ادغام"
+
+#: views/__init__.py:1244
+msgid "Average integration time"
+msgstr "متوسط زمان ادغام"
+
+#: views/__init__.py:1245
+#, fuzzy
+msgid "Forum posts"
+msgstr "فروم ها"
+
+#: views/__init__.py:2124
+#, fuzzy
+msgid "Image uploaded. Thank you!"
+msgstr "فرم ذخیره شد. با تشکر."
+
+#: views/__init__.py:3077 views/__init__.py:3270
+msgid "You can't merge a product to itself."
+msgstr "نمی توانید محصولی را با خودش یکی کنید."
+
+#: views/__init__.py:3308
+msgid "Default front page section changed."
+msgstr ""
+
+#: views/image.py:82
+msgid ""
+"Thanks for reporting the problem. All thumbnails will be generated again."
+msgstr ""
+
+#: views/image.py:316
+msgid "Resolution"
+msgstr "رزولوشن"
+
+#: views/image.py:317 views/image.py:482
+msgid "Dates"
+msgstr "تاریخ"
+
+#: views/image.py:329
+msgid "Avg. Moon age"
+msgstr "میانگین سن ماه"
+
+#: views/image.py:332
+msgid "Mean SQM"
+msgstr "SQM متوسط"
+
+#: views/image.py:597
+#, fuzzy
+msgid "Image deleted."
+msgstr "تصویر شما حذف شد."
+
+#: views/image.py:633 views/image.py:703
+msgid "Revision deleted."
+msgstr ""
+
+#: views/image.py:735
+#, fuzzy
+msgid "Image moved to the staging area."
+msgstr "انتقال به منطقه عملیاتی (staging area)"
+
+#: views/image.py:782
+#, fuzzy
+msgid "Image moved to the public area."
+msgstr "ارتقای این مطلب به فضای عمومی"
+
+#: views/image.py:815
+#, fuzzy
+msgid "There was one or more errors processing the form. "
+msgstr ""
+"یک یا چند مشکل در پردازش فایل وجود دارد.  برای مشاهده آنها می توانید به "
+"پایین بروید."
+
+#~ msgid "Image brought to your attention"
+#~ msgstr "تصویری که توجهتان را جلب کرده است. "
+
+#~ msgid "Bring image to attention"
+#~ msgstr "تصویر را مورد توجه قرا بده."
+
+#~ msgid ""
+#~ "By choosing some users and clicking the button below, you will send them "
+#~ "a notification prompting them to checkout this image."
+#~ msgstr ""
+#~ "با انتخاب برخی از کاربران و کلیک کردن بر روی دکمه زیر، شما به آنها در "
+#~ "مورد چک کردن این تصویراطلاع می دهید."
+
+#~ msgid "Click on a user below!"
+#~ msgstr "کلیک بر روی یک کاربر در زیر!"
+
+#~ msgid "Done!"
+#~ msgstr "انجام شد!"
+
+#~ msgid "The image was brought to the attention of the selected users."
+#~ msgstr "این تصویر مورد توجه کاربران انتخاب شده قرار گرفته است."
+
+#~ msgid "Bring to a user's attention"
+#~ msgstr "مورد توجه کاربر قرارش بده."
+
+#~ msgid ""
+#~ "%(originator)s would like to bring the following image to your attention: "
+#~ "%(object_url)s"
+#~ msgstr "(موسس) میل دارد یک تصویر را مورد توجه شما قرار دهد: (object_url)"
+
+#~ msgid ""
+#~ "<a href=\"%(object_url)s\"><strong>%(originator)s</strong> wants to bring "
+#~ "an image to your attention.</a>"
+#~ msgstr "(موسس) میل دارد یک تصویر را مورد توجه شما قرار دهد."
+
+#~ msgid "%(originator)s wants to bring an image to your attention"
+#~ msgstr "(موسس) میل دارد تصویر زیر را مورد توجه شما قرار دهد."
 
 #~ msgid "You have no new notifications."
 #~ msgstr "شما هیچ اطلاعیه جدیدی ندارید."

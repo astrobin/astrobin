@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2016-04-05 10:32+0100\n"
+"POT-Creation-Date: 2016-05-10 20:11+0100\n"
 "PO-Revision-Date: 2016-02-01 13:25+0000\n"
 "Last-Translator: Lukasz83 <lukasz.sujka83@gmail.com>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -1004,12 +1004,12 @@ msgstr "Zambia"
 msgid "Zimbabwe"
 msgstr "Zimbabwe"
 
-#: forms.py:50
+#: forms.py:68
 msgid ""
 "If you're hosting a copy of this image on your website, put the address here."
 msgstr "Jeśli hostujesz to zdjęcie na swojej stronie, wpisz tutaj jej adres."
 
-#: forms.py:56
+#: forms.py:74
 msgid ""
 "If you want to share the TIFF or FITS file of your image, put a link to the "
 "file here. Unfortunately, AstroBin cannot offer to store these files at the "
@@ -1019,30 +1019,30 @@ msgstr ""
 "umieść link ze zdjęciem w tym pliku. Niestety, Astrobin nie oferuje "
 "przechowywania plików, więc trzeba je przechowywać we własnym zakresie."
 
-#: forms.py:62 models.py:2086 models.py:2168 templates/gear/page.html:197
+#: forms.py:80 models.py:2086 models.py:2168 templates/gear/page.html:197
 #: templates/image/detail/image_title.html:14
 msgid "Link"
 msgstr "Link"
 
-#: forms.py:63 templates/image/detail/image_title.html:22
+#: forms.py:81 templates/image/detail/image_title.html:22
 msgid "Link to TIFF/FITS"
 msgstr "Link do TIFF/FITS"
 
-#: forms.py:64 models.py:693 templates/maintenance_base.html:305
+#: forms.py:82 models.py:693 templates/maintenance_base.html:305
 #: templates/profile-edit-menu.html:36
 #: templates/image/detail/image_card.html:88
 msgid "Locations"
 msgstr "Lokalizacje"
 
-#: forms.py:77
+#: forms.py:94
 msgid "This field is required."
 msgstr "To pole jest wymagane."
 
-#: forms.py:90
+#: forms.py:107
 msgid "Opacity"
 msgstr "Stopień pokrycia"
 
-#: forms.py:91
+#: forms.py:108
 msgid ""
 "0 means invisible; 100 means completely opaque. Recommended values are: 10 "
 "if the watermark will appear on the dark sky background, 50 if on some "
@@ -1052,56 +1052,60 @@ msgstr ""
 "10 jeżeli znak wodny ma pojawić się na tle ciemnego nieba, 50 jeżeli znak "
 "wodny umieszczony jest na jasnym obiekcie."
 
-#: forms.py:104
+#: forms.py:121
 msgid "If you want to watermark this image, you must specify some text."
 msgstr "Jeśli chcesz wstawić znak wodny, wpisz tekst znaku."
 
-#: forms.py:131 forms.py:367 models.py:753
+#: forms.py:148 forms.py:384 models.py:753
 msgid "Imaging telescopes or lenses"
 msgstr "Teleskop główny"
 
-#: forms.py:132 models.py:754
+#: forms.py:149 models.py:754
 msgid "Guiding telescopes or lenses"
 msgstr "Teleskop prowadzący"
 
-#: forms.py:133 forms.py:227 models.py:755 models.py:1638 views.py:2386
+#: forms.py:150 forms.py:244 models.py:755 models.py:1638
+#: views/__init__.py:1685
 msgid "Mounts"
 msgstr "Montaże"
 
-#: forms.py:134 forms.py:368 models.py:756
+#: forms.py:151 forms.py:385 models.py:756
 msgid "Imaging cameras"
 msgstr "Kamery główne"
 
-#: forms.py:135 models.py:757
+#: forms.py:152 models.py:757
 msgid "Guiding cameras"
 msgstr "Kamera guidująca, prowadząca"
 
-#: forms.py:136 forms.py:229 models.py:758 models.py:1640 views.py:2387
+#: forms.py:153 forms.py:246 models.py:758 models.py:1640
+#: views/__init__.py:1686
 msgid "Focal reducers"
 msgstr "Reduktory ogniskowej"
 
-#: forms.py:137 forms.py:230 models.py:759 models.py:1641 views.py:207
-#: views.py:635 views.py:2388
+#: forms.py:154 forms.py:247 models.py:759 models.py:1641
+#: views/__init__.py:194 views/__init__.py:1687 views/image.py:194
 msgid "Software"
 msgstr "Oprogramowanie"
 
-#: forms.py:138 forms.py:231 models.py:760 models.py:1642 views.py:2389
+#: forms.py:155 forms.py:248 models.py:760 models.py:1642
+#: views/__init__.py:1688
 msgid "Filters"
 msgstr "Filtry"
 
-#: forms.py:139 forms.py:232 models.py:761 models.py:1643 views.py:2390
+#: forms.py:156 forms.py:249 models.py:761 models.py:1643
+#: views/__init__.py:1689
 msgid "Accessories"
 msgstr "Akcesoria"
 
-#: forms.py:161
+#: forms.py:178
 msgid "If you have a personal website, put the address here."
 msgstr "Jeśli posiadasz własną stronę internetową, wprowadź adres."
 
-#: forms.py:171 models.py:1557
+#: forms.py:188 models.py:1557
 msgid "Website"
 msgstr "Strona internetowa"
 
-#: forms.py:195
+#: forms.py:212
 msgid ""
 "All the telescopes and lenses you own, including the ones you use for "
 "guiding, go here."
@@ -1109,12 +1113,12 @@ msgstr ""
 "Wprowadź nazwy teleskopów i obiektywów które posiadasz, włączając te, które "
 "używasz to guidingu."
 
-#: forms.py:204
+#: forms.py:221
 msgid "Your DSLRs, CCDs, planetary cameras and guiding cameras go here."
 msgstr ""
 "Wprowadź nazwy twoich urządzeń rejestrujących (DSLR, CCD, Kamery planetarne)"
 
-#: forms.py:217
+#: forms.py:234
 msgid ""
 "Hint: enter your filters separately! If you enter, for instance, LRGB in one "
 "box, you won't be able to add separate acquisition sessions for them."
@@ -1123,28 +1127,28 @@ msgstr ""
 "nie będziesz miał możliwości określenia czasu naświetlania dla każdego "
 "filtra osobno."
 
-#: forms.py:226 models.py:1637 views.py:2384
+#: forms.py:243 models.py:1637 views/__init__.py:1683
 msgid "Telescopes and lenses"
 msgstr "Teleskopy i obiektywy"
 
-#: forms.py:228 models.py:1639 views.py:2385
+#: forms.py:245 models.py:1639 views/__init__.py:1684
 msgid "Cameras"
 msgstr "Kamery"
 
-#: forms.py:260 forms.py:276
+#: forms.py:277 forms.py:293
 #: templates/inclusion_tags/search_image_list.html:64
 msgid "Users"
 msgstr "Użytkownicy"
 
-#: forms.py:272
+#: forms.py:289
 msgid "Search type"
 msgstr "Typ wyszukiwania"
 
-#: forms.py:274
+#: forms.py:291
 msgid "All"
 msgstr "Wszystkie"
 
-#: forms.py:275 templates/leaderboard.html:35 templates/gear/page.html:236
+#: forms.py:292 templates/leaderboard.html:35 templates/gear/page.html:236
 #: templates/inclusion_tags/search_image_list.html:51
 #: templates/inclusion_tags/search_image_list.html:104
 #: templates/popover/user.html:15
@@ -1153,130 +1157,130 @@ msgstr "Wszystkie"
 msgid "Images"
 msgstr "Zdjęcia"
 
-#: forms.py:277 models.py:649 views.py:1853
-#: templates/maintenance_base.html:299 templates/profile-edit-menu.html:30
-#: templates/wall.html:131 templates/inclusion_tags/search_image_list.html:13
-#: templates/user/profile-subnav.html:130
+#: forms.py:294 models.py:649 templates/maintenance_base.html:299
+#: templates/profile-edit-menu.html:30 templates/wall.html:131
+#: templates/inclusion_tags/search_image_list.html:13
+#: templates/user/profile-subnav.html:130 views/__init__.py:1155
 msgid "Gear"
 msgstr "Sprzęt"
 
-#: forms.py:289
+#: forms.py:306
 msgid "Telescope type"
 msgstr "Typ teleskopu"
 
-#: forms.py:290 forms.py:296
+#: forms.py:307 forms.py:313
 msgid "Any"
 msgstr "Jakikolwiek"
 
-#: forms.py:295
+#: forms.py:312
 msgid "Camera type"
 msgstr "Typ kamery"
 
-#: forms.py:309 forms.py:314
+#: forms.py:326 forms.py:331
 msgid "Express value in mm"
 msgstr "Wyraź wartość w mm"
 
-#: forms.py:320 forms.py:325
+#: forms.py:337 forms.py:342
 msgid "Express value in &mu;m"
 msgstr "Wyraź wartość w &mu;m"
 
-#: forms.py:332 forms.py:337 forms.py:565 forms.py:610 forms.py:651
+#: forms.py:349 forms.py:354 forms.py:582 forms.py:627 forms.py:668
 msgid "Please use the following format: yyyy-mm-dd"
 msgstr "Proszę użyj następującego formatu: yyyy-mm-dd"
 
-#: forms.py:341 forms.py:345
+#: forms.py:358 forms.py:362
 msgid "Express value in hours"
 msgstr "Wyraź wartość w godzinach"
 
-#: forms.py:357 models.py:774 templates/image/detail/info.html:27
+#: forms.py:374 models.py:774 templates/image/detail/info.html:27
 #: templates/image/detail/info.html:28 templates/search/search.html:239
 msgid "License"
 msgstr "Licencja"
 
-#: forms.py:364
+#: forms.py:381
 msgid ""
 "Search for astronomical objects, telescopes or lenses, cameras, filters..."
 msgstr ""
 "Wyszukaj obiekty astronomiczne, teleskopy, obiektywy, kamery, filtry..."
 
-#: forms.py:366 models.py:684
+#: forms.py:383 models.py:684
 msgid "Main solar system subject"
 msgstr "Główny obiekt układu słonecznego"
 
-#: forms.py:369
+#: forms.py:386
 msgid "Min. telescope aperture"
 msgstr "Minimalna apertura teleskopu"
 
-#: forms.py:370
+#: forms.py:387
 msgid "Max. telescope aperture"
 msgstr "Maksymalna apertura teleskopu"
 
-#: forms.py:371
+#: forms.py:388
 msgid "Acquired after"
 msgstr "Wykonane po"
 
-#: forms.py:372
+#: forms.py:389
 msgid "Acquired before"
 msgstr "Wykonane przed"
 
-#: forms.py:373
+#: forms.py:390
 msgid "Min. integration"
 msgstr "Minimalny czas naświetlania"
 
-#: forms.py:374
+#: forms.py:391
 msgid "Max. integration"
 msgstr "Maksymalny czas naświetlania"
 
-#: forms.py:375
+#: forms.py:392
 msgid "Min. Moon phase %"
 msgstr "Minimalna faza Księżyca [%]"
 
-#: forms.py:376
+#: forms.py:393
 msgid "Max. Moon phase %"
 msgstr "Maksymalna faza Księżyca [%]"
 
-#: forms.py:515
+#: forms.py:532
 msgid "Latitude (degrees)"
 msgstr "Szerokość geograficzna (w stopniach)"
 
-#: forms.py:520
+#: forms.py:537
 msgid "Latitude (minutes)"
 msgstr "Szerokość geograficzna (w minutach)"
 
-#: forms.py:526
+#: forms.py:543
 msgid "Latitude (seconds)"
 msgstr "Szerokość geograficzna (w sekundach)"
 
-#: forms.py:533
+#: forms.py:550
 msgid "Longitude (degrees)"
 msgstr "Długość geograficzna (w stopniach)"
 
-#: forms.py:538
+#: forms.py:555
 msgid "Longitude (minutes)"
 msgstr "Długość geograficzna (w minutach)"
 
-#: forms.py:544
+#: forms.py:561
 msgid "Longitude (seconds)"
 msgstr "Długość geograficzna (w sekundach)"
 
-#: forms.py:566 forms.py:611 forms.py:652 models.py:1271 models.py:1484
+#: forms.py:583 forms.py:628 forms.py:669 models.py:1271 models.py:1484
 #: templates/image/detail/image_card.html:46
 msgid "Date"
 msgstr "Data"
 
-#: forms.py:572
+#: forms.py:589
 msgid "Please enter a value between 1 and 5."
 msgstr "Wprowadź wartość pomiędzy 1 i 5."
 
-#: forms.py:579
+#: forms.py:596
 msgid "Please enter a value between 1 and 10."
 msgstr "Wprowadź wartość pomiędzy 1 i 10"
 
-#: forms.py:640 forms.py:658
+#: forms.py:657 forms.py:675
 msgid "The date cannot be in the future."
 msgstr "Nie można użyć przyszłej daty"
 
-#: forms.py:892 forms.py:953 models.py:190 templates/gear/fix.html:32
+#: forms.py:909 forms.py:970 models.py:190 templates/gear/fix.html:32
 #: templates/gear/fix.html.py:33 templates/gear/fix.html:34
 #: templates/gear/fix.html.py:42 templates/gear/fix.html:47
 #: templates/gear/fix.html.py:52 templates/gear/fix.html:57
@@ -1294,11 +1298,11 @@ msgstr "Nie można użyć przyszłej daty"
 msgid "Make"
 msgstr "Marka"
 
-#: forms.py:893 forms.py:954 models.py:191
+#: forms.py:910 forms.py:971 models.py:191
 msgid "The make, brand, producer or developer of this product."
 msgstr "Marka, nazwa, producent tego produktu"
 
-#: forms.py:898 forms.py:959 models.py:198 models.py:1778 models.py:1917
+#: forms.py:915 forms.py:976 models.py:198 models.py:1778 models.py:1917
 #: templates/gear/fix.html:32 templates/gear/fix.html.py:33
 #: templates/gear/fix.html:34 templates/gear/fix.html.py:42
 #: templates/gear/fix.html:47 templates/gear/fix.html.py:52
@@ -1310,7 +1314,7 @@ msgstr "Marka, nazwa, producent tego produktu"
 msgid "Name"
 msgstr "Nazwa"
 
-#: forms.py:903 forms.py:928 forms.py:964 forms.py:999
+#: forms.py:920 forms.py:945 forms.py:981 forms.py:1016
 #: templates/user/profile/commercial/products.html:82
 #: templates/user/profile/commercial/products.html:164
 #: templates/user/profile/commercial/products.html:280
@@ -1320,7 +1324,7 @@ msgstr "Nazwa"
 msgid "Merge"
 msgstr "Połącz"
 
-#: forms.py:904 forms.py:965
+#: forms.py:921 forms.py:982
 msgid ""
 "Use this field to mark that the item you are claiming really is the same "
 "product (or a variation thereof) of something you have claimed before."
@@ -1329,14 +1333,14 @@ msgstr ""
 "jest tym samym produkten (lub jego wariantem), do którego rościłeś sobie "
 "prawo wcześniej."
 
-#: forms.py:918 forms.py:981
+#: forms.py:935 forms.py:998
 #, python-format
 msgid ""
 "You can't create more than %d claims. Consider upgrading your affiliation!"
 msgstr ""
 "Nie możesz utworzyć więcej niż %d roszczeń. Rozważ zakup wyższego pakietu!"
 
-#: forms.py:929 forms.py:1000
+#: forms.py:946 forms.py:1017
 msgid ""
 "Use this field to mark that the item you are merging really is the same "
 "product (or a variation thereof) of something you have claimed before."
@@ -1345,7 +1349,7 @@ msgstr ""
 "faktycznie tym samym produktem (lub jego wariantem), do którego rościłeś "
 "sobie prawo wcześniej."
 
-#: forms.py:989
+#: forms.py:1006
 msgid "You have already claimed this product."
 msgstr "Prawo do tego produktu rościłeś już wcześniej."
 
@@ -1414,6 +1418,7 @@ msgid "Unlike"
 msgstr "Przestań lubić"
 
 #: locale_extras.py:20 templates/image/detail/like.html:10
+#: templates/image/detail/like.html:24
 msgid "Like"
 msgstr "Lubię to !"
 
@@ -1453,7 +1458,7 @@ msgstr "Uznanie autorstwa-Na tych samych warunkach"
 msgid "Attribution-NoDerivs Creative Commons"
 msgstr "Uznanie autorstwa-Bez utworów zależnych"
 
-#: models.py:79 models.py:97 views.py:841 views.py:843
+#: models.py:79 models.py:97 views/image.py:398 views/image.py:400
 msgid "English"
 msgstr "Angielski"
 
@@ -1581,8 +1586,8 @@ msgstr "Planetoida"
 msgid "Comet"
 msgstr "Kometa"
 
-#: models.py:152 models.py:586 models.py:650 views.py:1854
-#: templates/wall.html:143 templates/image/edit/acquisition.html:84
+#: models.py:152 models.py:586 models.py:650 templates/wall.html:143
+#: templates/image/edit/acquisition.html:84 views/__init__.py:1156
 msgid "Other"
 msgstr "Inny"
 
@@ -1909,11 +1914,11 @@ msgstr "Obiekt głębokiego nieba."
 msgid "Solar system body or event"
 msgstr "Obiekt lub wydarzenie Układu Słonecznego"
 
-#: models.py:647 views.py:1851 templates/wall.html:119
+#: models.py:647 templates/wall.html:119 views/__init__.py:1153
 msgid "Extremely wide field"
 msgstr "Bardzo szerokie pole"
 
-#: models.py:648 views.py:1852 templates/wall.html:125
+#: models.py:648 templates/wall.html:125 views/__init__.py:1154
 msgid "Star trails"
 msgstr "Ślady gwiazd"
 
@@ -2024,7 +2029,7 @@ msgstr "9 - Centrum miasta (BIAŁE)"
 msgid "Synthetic channel"
 msgstr "Kanał syntetyczny"
 
-#: models.py:1313 views.py:208 views.py:636
+#: models.py:1313 views/__init__.py:195 views/image.py:195
 msgid "Filter"
 msgstr "Filtr"
 
@@ -2064,7 +2069,7 @@ msgstr "Chłodzenie sensora"
 msgid "The temperature of the chip. E.g.: -20."
 msgstr "Temperatura sensora, np. -20"
 
-#: models.py:1346 views.py:768
+#: models.py:1346 views/image.py:325
 msgid "Darks"
 msgstr "Darki"
 
@@ -2072,7 +2077,7 @@ msgstr "Darki"
 msgid "The number of dark frames."
 msgstr "Liczba użytych darków"
 
-#: models.py:1351 views.py:769
+#: models.py:1351 views/image.py:326
 msgid "Flats"
 msgstr "Flaty"
 
@@ -2080,7 +2085,7 @@ msgstr "Flaty"
 msgid "The number of flat frames."
 msgstr "Liczba użytych flatów"
 
-#: models.py:1356 views.py:770
+#: models.py:1356 views/image.py:327
 msgid "Flat darks"
 msgstr "Darki do flatów"
 
@@ -2088,7 +2093,7 @@ msgstr "Darki do flatów"
 msgid "The number of dark flat frames."
 msgstr "Liczba użytych darków do flatów"
 
-#: models.py:1361 views.py:771
+#: models.py:1361 views/image.py:328
 msgid "Bias"
 msgstr "Bias"
 
@@ -2096,7 +2101,7 @@ msgstr "Bias"
 msgid "The number of bias/offset frames."
 msgstr "Liczba użytych klatek bias/offset"
 
-#: models.py:1366 views.py:774
+#: models.py:1366 views/image.py:331
 msgid "Bortle Dark-Sky Scale"
 msgstr "Skala jasności nieba Bortle'a"
 
@@ -2116,11 +2121,11 @@ msgstr "Średnie mag/arcsec^2"
 msgid "As measured with your Sky Quality Meter."
 msgstr "Jak zmierzone przy pomocy Miernika Jakości Nieba"
 
-#: models.py:1380 views.py:776
+#: models.py:1380 views/image.py:333
 msgid "Mean FWHM"
 msgstr "Średnie FWHM"
 
-#: models.py:1385 views.py:777
+#: models.py:1385 views/image.py:334
 msgid "Temperature"
 msgstr "Temperatura"
 
@@ -2508,7 +2513,7 @@ msgstr ""
 msgid "Commercial gear items"
 msgstr "Sprzęt komercyjny"
 
-#: search.py:50 templates/image/actions/bring_to_attention.html:32
+#: search.py:50
 msgid "No results. Sorry."
 msgstr "Nie znaleziono."
 
@@ -2588,238 +2593,6 @@ msgstr "Katadioptryk"
 msgid "Number of images by subject type"
 msgstr "Liczba zdjęć według typu obiektu"
 
-#: views.py:183 views.py:611
-msgid "Imaging telescope or lens"
-msgid_plural "Imaging telescopes or lenses"
-msgstr[0] "Teleskop główny"
-msgstr[1] "Teleskop główny"
-msgstr[2] "Teleskop główny"
-
-#: views.py:187 views.py:615
-msgid "Imaging camera"
-msgid_plural "Imaging cameras"
-msgstr[0] "Kamery główne"
-msgstr[1] "Kamery główne"
-msgstr[2] "Kamery główne"
-
-#: views.py:191 views.py:619
-msgid "Mount"
-msgid_plural "Mounts"
-msgstr[0] "Montaże"
-msgstr[1] "Montaże"
-msgstr[2] "Montaże"
-
-#: views.py:195 views.py:623
-msgid "Guiding telescope or lens"
-msgid_plural "Guiding telescopes or lenses"
-msgstr[0] "Teleskop prowadzący"
-msgstr[1] "Teleskop prowadzący"
-msgstr[2] "Teleskop prowadzący"
-
-#: views.py:199 views.py:627
-msgid "Guiding camera"
-msgid_plural "Guiding cameras"
-msgstr[0] "Kamera guidująca, prowadząca"
-msgstr[1] "Kamera guidująca, prowadząca"
-msgstr[2] "Kamera guidująca, prowadząca"
-
-#: views.py:203 views.py:631
-msgid "Focal reducer"
-msgid_plural "Focal reducers"
-msgstr[0] "Reduktory ogniskowej"
-msgstr[1] "Reduktory ogniskowej"
-msgstr[2] "Reduktory ogniskowej"
-
-#: views.py:212 views.py:640
-msgid "Accessory"
-msgid_plural "Accessories"
-msgstr[0] "Akcesoria"
-msgstr[1] "Akcesoria"
-msgstr[2] "Akcesoria"
-
-#: views.py:500
-msgid "Today's 'Image of the day' was already chosen. Come back tomorrow!"
-msgstr "'Zdjęcie dnia' zostało już wybrane. Proszę wróć tu jutro!"
-
-#: views.py:759
-msgid "Resolution"
-msgstr "Rozdzielczość"
-
-#: views.py:760 views.py:924
-msgid "Dates"
-msgstr "Daty"
-
-#: views.py:761 templates/image/detail/image_card.html:52
-msgid "Frames"
-msgstr "Klatki"
-
-#: views.py:767 templates/wall.html:37
-#: templates/inclusion_tags/search_image_list.html:36
-#: templates/inclusion_tags/search_image_list.html:89
-#: templates/search/search.html:43 templates/search/search.html.py:306
-msgid "Integration"
-msgstr "Naświetlanie"
-
-#: views.py:767 views.py:1944 views.py:1945 templates/search/search.html:307
-msgid "hours"
-msgstr "godzin"
-
-#: views.py:772
-msgid "Avg. Moon age"
-msgstr "Średni wiek Księżyca (po nowiu)"
-
-#: views.py:772 templates/subscription/subscription_category_list.html:47
-msgid "days"
-msgstr "dni"
-
-#: views.py:773 templates/search/search.html:313
-msgid "Avg. Moon phase"
-msgstr "Średnia faza Księżyca"
-
-#: views.py:775
-msgid "Mean SQM"
-msgstr "Średni SQM"
-
-#: views.py:970
-msgid ""
-"Thanks for reporting the problem. All thumbnails will be generated again."
-msgstr ""
-"Dziękujemy za raport o problemie. Wszystkie miniaturki będę wygenerowane "
-"jeszcze raz."
-
-#: views.py:1112 views.py:2841
-msgid ""
-"Invalid image or no image provided. Allowed formats are JPG, PNG and GIF."
-msgstr ""
-"Zdjęcie w nieprawidłowym formacie lub brak danych. Dozwolone formaty: JPG, "
-"PNG lub GIF"
-
-#: views.py:1119
-msgid "You have reached your image uploads limit. Please upgrade!"
-msgstr "Osiągnąłeś limit zdjęć. Ulepsz konto do Premium!"
-
-#: views.py:1123 views.py:2852 templates/user/profile/flickr_import.html:10
-msgid ""
-"AstroBin is currently in read-only mode, because of server maintenance. "
-"Please try again soon!"
-msgstr ""
-"AstroBin jest w tej chwili w trybie odczytu z powodu prac utrzymaniowych. "
-"Spróbuj ponownie późnej!"
-
-#: views.py:1143 views.py:2872
-msgid ""
-"You uploaded an Indexed PNG file. AstroBin will need to lower the color "
-"count to 256 in order to work with it."
-msgstr ""
-"Wczytałeś zaindeksowany plik PNG. AstroBin musi obniżyć paletę kolorów do "
-"256 aby pracować z plikiem"
-
-#: views.py:1399 views.py:1428 views.py:1488 views.py:1556 views.py:1568
-#: views.py:1580 views.py:1604 views.py:2437
-msgid ""
-"There was one or more errors processing the form. You may need to scroll "
-"down to see them."
-msgstr ""
-"W przetwarzaniu formularza wystąpiły błędy. Być może będziesz musiał "
-"przewinąć stronę w dół aby je zobaczyć."
-
-#: views.py:1410 views.py:1499 views.py:1586 views.py:1613 views.py:2286
-#: views.py:2299 views.py:2320 views.py:2357 views.py:2447 views.py:2509
-#: views.py:2720 views.py:3947 views.py:4117
-#: templates/user/profile/edit/gear.html:168
-#: templates/user/profile/edit/gear.html:243
-msgid "Form saved. Thank you!"
-msgstr "Zapisane!. Dziękujemy!"
-
-#: views.py:1551
-msgid "Fill in one session, before adding more."
-msgstr "Wypełnij jedną sesję zanim dodasz kolejną."
-
-#: views.py:1626 views.py:1697
-msgid "Image deleted."
-msgstr "Twój obraz został usunięty"
-
-#: views.py:1644
-msgid "Revision deleted."
-msgstr "Wybrana wersja zdjęcia została usunięta."
-
-#: views.py:1801
-msgid "No date specified"
-msgstr "Data nieokreślona"
-
-#: views.py:1823 views.py:1884
-msgid "No imaging telescopes or lenses, or no imaging cameras specified"
-msgstr "Brak zdefiniowanych teleskopów, obiektywów lub kamer."
-
-#: views.py:1824
-msgid "Gear images"
-msgstr "Zdjęcia sprzętu"
-
-#: views.py:1849 templates/image/edit/acquisition.html:81
-msgid "Deep sky"
-msgstr "Obiekty głębokiego nieba"
-
-#: views.py:1850 templates/image/edit/acquisition.html:78
-msgid "Solar system"
-msgstr "Układ Słoneczny"
-
-#: views.py:1883
-msgid "No subjects specified"
-msgstr "Nie podano żadnych obiektów"
-
-#: views.py:1885
-msgid "No acquisition details specified"
-msgstr "Brak szczegółów naświetlania"
-
-#: views.py:1916 views.py:3324 templatetags/tags.py:67
-msgid "minutes"
-msgstr "minut"
-
-#: views.py:1917 views.py:3325 templatetags/tags.py:68
-msgid "seconds ago"
-msgstr "sekund temu."
-
-#: views.py:1919 views.py:3327 templatetags/tags.py:69
-#, python-format
-msgid "%s ago"
-msgstr "%s temu"
-
-#: views.py:1942 templates/popover/user.html:19
-msgid "Member since"
-msgstr "Członek od"
-
-#: views.py:1943
-msgid "Last login"
-msgstr "Ostatnie logowanie"
-
-#: views.py:1944
-msgid "Total integration time"
-msgstr "Sumaryczny czas naświetlania"
-
-#: views.py:1945
-msgid "Average integration time"
-msgstr "Średni czas naświetlania"
-
-#: views.py:1946
-msgid "Forum posts"
-msgstr "Posty na froum"
-
-#: views.py:2895
-msgid "Image uploaded. Thank you!"
-msgstr "Zapisane! Dziękujemy!"
-
-#: views.py:3191 templatetags/tags.py:227
-msgid "no alias"
-msgstr "brak innej nazwy"
-
-#: views.py:3907 views.py:4100
-msgid "You can't merge a product to itself."
-msgstr "Nie możesz połączyć produktu z nim samym."
-
-#: views.py:4138
-msgid "Default front page section changed."
-msgstr "Czcionka została zmieniona"
-
 #: management/__init__.py:21
 msgid "You have a new follower"
 msgstr "Masz nowego obserwatora"
@@ -2829,79 +2602,75 @@ msgid "New image from a user you follow"
 msgstr "Nowe zdjęcie opublikowane przez użytkownika, którego obserwujesz"
 
 #: management/__init__.py:33
-msgid "Image brought to your attention"
-msgstr "Powiadomienie o zdjęciu"
-
-#: management/__init__.py:39
 msgid "New image revision from a user you follow"
 msgstr ""
 "Nowa wersja zdjęcia opublikowana przez użytkownika, którego obserwujesz"
 
-#: management/__init__.py:45
+#: management/__init__.py:39
 msgid "Your image was plate-solved"
 msgstr "Fotoastrometria się powiodła."
 
-#: management/__init__.py:51
+#: management/__init__.py:45
 msgid "Your image could not be plate-solved"
 msgstr "Fotoastrometria się nie powiodła"
 
-#: management/__init__.py:57
+#: management/__init__.py:51
 msgid "AstroBin has published a new blog entry"
 msgstr "AstroBin opublikowało nowy wpis na swoim blogu"
 
-#: management/__init__.py:63
+#: management/__init__.py:57
 msgid "Your image received a new comment"
 msgstr "Twoje zdjęcie otrzymało nowy komentarz"
 
-#: management/__init__.py:69
+#: management/__init__.py:63
 msgid "There was a reply to your comment"
 msgstr "Otrzymałeś odpowiedź na swój komentarz"
 
-#: management/__init__.py:75
+#: management/__init__.py:69
 msgid "Your image was bookmarked"
 msgstr "Twoje zdjęcie zostało dodane do ulubionych"
 
-#: management/__init__.py:81
+#: management/__init__.py:75
 msgid "Your image was liked"
 msgstr "Twój obraz został polubiony"
 
-#: management/__init__.py:87
+#: management/__init__.py:81
 msgid "New image with some gear you follow"
 msgstr "Nowe zdjęcie wykonane za pomocą sprzętu, który obserwujesz"
 
-#: management/__init__.py:93
+#: management/__init__.py:87
 msgid "New image of a subject you follow"
 msgstr "Nowe zdjęcie obiektu, który obserwujesz"
 
-#: management/__init__.py:99
+#: management/__init__.py:93
 msgid "Your API Key request has been approved"
 msgstr "Twoja aplikacja o klucz do API została zaakceptowana."
 
-#: management/__init__.py:105
+#: management/__init__.py:99
 msgid "New discussion about a gear item you own"
 msgstr "Nowa dyskusja na temat sprzętu, który posiadasz"
 
-#: management/__init__.py:111
+#: management/__init__.py:105
 msgid "New review of a gear item you own"
 msgstr "Nowa recenzja sprzętu, który posiadasz"
 
-#: management/__init__.py:117
+#: management/__init__.py:111
 msgid "New data posted to public pool"
 msgstr "Nowy materiał dodano do danych publicznych"
 
-#: management/__init__.py:123
+#: management/__init__.py:117
 msgid "New image posted to public data pool"
 msgstr "Nowe zdjęcie dodano do zestawu publicznego"
 
-#: management/__init__.py:129
+#: management/__init__.py:123
 msgid "New data posted to shared private folder"
 msgstr "Nowe dane opublikowane we współdzielonym prywatnym folderze"
 
-#: management/__init__.py:135
+#: management/__init__.py:129
 msgid "New image posted to shared private folder"
 msgstr "Nowe zdjęcie opublikowane we współdzielonym prywatnym folderze"
 
-#: management/__init__.py:141
+#: management/__init__.py:135
 msgid "You are invited to a shared private folder"
 msgstr "Zostałeś zaproszony do prywatnego współdzielonego folderu"
 
@@ -4407,6 +4176,13 @@ msgstr "Opublikowane"
 msgid "Acquired"
 msgstr "Wykonane"
 
+#: templates/wall.html:37 templates/inclusion_tags/search_image_list.html:36
+#: templates/inclusion_tags/search_image_list.html:89
+#: templates/search/search.html:43 templates/search/search.html.py:306
+#: views/image.py:324
+msgid "Integration"
+msgstr "Naświetlanie"
+
 #: templates/wall.html:44
 msgid "Number of likes"
 msgstr "Liczba polubień"
@@ -4886,45 +4662,6 @@ msgstr "Dane techniczne"
 msgid "Fit to window"
 msgstr "Dopasuj do szerokości ekranu"
 
-#: templates/image/actions/bring_to_attention.html:5
-#: templates/image/actions/bring_to_attention.html:8
-msgid "Bring image to attention"
-msgstr "Powiadom o zdjęciu"
-
-#: templates/image/actions/bring_to_attention.html:10
-msgid ""
-"By choosing some users and clicking the button below, you will send them a "
-"notification prompting them to checkout this image."
-msgstr ""
-"Wybierając użytkowników i klikając w guzik poniżej prześlesz wybranym "
-"użytkownikom wiadomość w celu zwrócenia uwagi na to zdjęcie."
-
-#: templates/image/actions/bring_to_attention.html:16
-#: templates/image/detail/modals/flag_thumbnails.html:15
-msgid "Continue"
-msgstr "Kontynuuj"
-
-#: templates/image/actions/bring_to_attention.html:17
-#: templates/image/actions/request_additional_information_complete.html:11
-#: templates/image/edit/acquisition.html:23
-#: templates/image/edit/acquisition.html:54
-#: templates/image/edit/license.html:23
-msgid "Return to image"
-msgstr "Powrót do zdjęcia"
-
-#: templates/image/actions/bring_to_attention.html:33
-msgid "Click on a user below!"
-msgstr "Kliknij na użytkownika poniżej!"
-
-#: templates/image/actions/bring_to_attention_complete.html:4
-#: templates/image/actions/bring_to_attention_complete.html:7
-msgid "Done!"
-msgstr "Gotowe!"
-
-#: templates/image/actions/bring_to_attention_complete.html:9
-msgid "The image was brought to the attention of the selected users."
-msgstr "Powiadomienie o zdjęciu zostało wysłane do wybranych użytkowników."
-
 #: templates/image/actions/request_additional_information_complete.html:5
 msgid "Additional information requested"
 msgstr "Zostałeś poproszony o dodatkowe informacje"
@@ -4939,6 +4676,13 @@ msgstr ""
 "Użytkownik <strong>%(username)s</strong> został powiadomiony o Twojej "
 "prośbie. Prawdopodobnie niedługo uzupełni brakujące dane. Zawsze możesz "
 "wysłać mu <a href=\"%(message_url)s\">prywatną wiadomość</a>."
+
+#: templates/image/actions/request_additional_information_complete.html:11
+#: templates/image/edit/acquisition.html:23
+#: templates/image/edit/acquisition.html:54
+#: templates/image/edit/license.html:23
+msgid "Return to image"
+msgstr "Powrót do zdjęcia"
 
 #: templates/image/detail/comments.html:8
 #, python-format
@@ -4963,6 +4707,10 @@ msgstr "Możliwe dzięki"
 #: templates/image/detail/histogram.html:6
 msgid "Histogram"
 msgstr "Histogram"
+
+#: templates/image/detail/image_card.html:52 views/image.py:318
+msgid "Frames"
+msgstr "Klatki"
 
 #: templates/image/detail/image_card.html:78
 msgid "RA center"
@@ -5017,16 +4765,16 @@ msgstr "Wersja początkowa"
 msgid "Sky plot"
 msgstr "Mapa nieba"
 
-#: templates/image/detail/wip_banner.html:9
-#, python-format
+#: templates/image/detail/wip_banner.html:7
+#, fuzzy, python-format
 msgid ""
 "This image is a <strong>work in progress</strong> from your <a href="
 "\"%(profile_url)s?staging\">Staging Area</a>. This means nobody can see it "
 "unless you give them one of the links you can find in the <em>Share</em> "
 "menu below. Use that link to post this image to Internet forums and get "
 "feedback on it. When you are satisfied, perhaps after uploading some "
-"revisions, <a href=\"%(promote_url)s\">promote it</a> to the <a href="
-"\"%(profile_url)s\">Public Area</a>."
+"revisions, <a href=\"#promote-modal\" data-toggle=\"modal\">promote it</a> "
+"to the <a href=\"%(profile_url)s\">Public Area</a>."
 msgstr ""
 "<strong>Prace </strong>nad tym zdjęciem z <a href=\"%(profile_url)s?staging"
 "\">Przechowalni</a> trwają. To oznacza, że nikt nie może zobaczyć tego "
@@ -5037,69 +4785,71 @@ msgstr ""
 "\"%(promote_url)s\">promuj</a> zdjęcie do <a href=\"%(profile_url)s"
 "\">Publicznej Galerii</a>."
 
-#: templates/image/detail/menu/actions.html:7 templates/messages/inbox.html:30
+#: templates/image/detail/menu/actions.html:9 templates/messages/inbox.html:30
 #: templates/user/profile/commercial/products.html:43
 #: templates/user/profile/commercial/products.html:125
 msgid "Actions"
 msgstr "Akcje"
 
-#: templates/image/detail/menu/actions.html:15
+#: templates/image/detail/menu/actions.html:17
 msgid "Edit watermark"
 msgstr "Edytuj znak wodny"
 
-#: templates/image/detail/menu/actions.html:21
+#: templates/image/detail/menu/actions.html:23
 msgid "Edit basic information"
 msgstr "Edytuj podstawowe informacje"
 
-#: templates/image/detail/menu/actions.html:28
+#: templates/image/detail/menu/actions.html:30
 msgid "Edit gear used"
 msgstr "Edytuj informacje o użytym sprzęcie"
 
-#: templates/image/detail/menu/actions.html:34
+#: templates/image/detail/menu/actions.html:36
 #: templates/image/edit/gear.html:47
 msgid "Edit acquisition details"
 msgstr "Edytuj dane ekspozycji"
 
-#: templates/image/detail/menu/actions.html:47
+#: templates/image/detail/menu/actions.html:49
 msgid "Mark this revision as final"
 msgstr "Oznacz tą wersję jako ostateczną"
 
-#: templates/image/detail/menu/actions.html:61
+#: templates/image/detail/menu/actions.html:63
 msgid "Attempt to plate-solve again"
 msgstr "Ponownie rozpocznij automatyczną fotoastrometię"
 
-#: templates/image/detail/menu/actions.html:71
+#: templates/image/detail/menu/actions.html:73
 msgid "Change license"
 msgstr "Zmień licencję"
 
-#: templates/image/detail/menu/actions.html:77
+#: templates/image/detail/menu/actions.html:79
 #: templates/image/detail/modals/upload_revision.html:7
 msgid "Upload new revision"
 msgstr "Załaduj nową wersję"
 
-#: templates/image/detail/menu/actions.html:84
+#: templates/image/detail/menu/actions.html:86
+#: templates/image/detail/modals/promote.html:7
 msgid "Promote to public area"
 msgstr "Przenieś do galerii publicznej"
 
-#: templates/image/detail/menu/actions.html:91
+#: templates/image/detail/menu/actions.html:93
+#: templates/image/detail/modals/demote.html:7
 msgid "Move to staging area"
 msgstr "Przesuń do przechowalni"
 
-#: templates/image/detail/menu/actions.html:100
+#: templates/image/detail/menu/actions.html:102
 #: templates/image/detail/modals/send_to_datapool.html:7
 msgid "Send to public data pool"
 msgstr "Przenieś do galerii publicznej"
 
-#: templates/image/detail/menu/actions.html:107
+#: templates/image/detail/menu/actions.html:109
 #: templates/image/detail/modals/send_to_sharedfolder.html:7
 msgid "Send to private shared folder"
 msgstr "Wyślij do prywatne folderu współdzielonego"
 
-#: templates/image/detail/menu/actions.html:117
+#: templates/image/detail/menu/actions.html:119
 msgid "Delete original image"
 msgstr "Usuń pierwowzór"
 
-#: templates/image/detail/menu/actions.html:122
+#: templates/image/detail/menu/actions.html:124
 #: templates/image/detail/modals/delete.html:14
 #: templates/image/detail/modals/delete.html:31
 #: templates/image/detail/modals/delete.html:48
@@ -5107,16 +4857,12 @@ msgstr "Usuń pierwowzór"
 msgid "Delete"
 msgstr "Usuń"
 
-#: templates/image/detail/menu/actions.html:128
+#: templates/image/detail/menu/actions.html:130
 msgid "Delete this revision"
 msgstr "Usuń tą wersję"
 
-#: templates/image/detail/menu/actions.html:138
-msgid "Bring to a user's attention"
-msgstr "Powiadom użytkowników"
-
-#: templates/image/detail/menu/actions.html:147
-#: templates/image/detail/modals/flag_thumbnails.html:7
+#: templates/image/detail/menu/actions.html:141
+#: templates/image/detail/modals/flag_thumbnails.html:6
 msgid "Flag malfunctioning thumbnails"
 msgstr "Zgłoś nieaktywne miniaturki"
 
@@ -5257,7 +5003,19 @@ msgstr ""
 "Zdjecie zostanie całkowicie usunięte i nie będzie go można przywrócić. "
 "Wszystkie pozostałe wersje również zostaną usunięte. Czy jesteś pewny?"
 
-#: templates/image/detail/modals/flag_thumbnails.html:11
+#: templates/image/detail/modals/demote.html:11
+msgid ""
+"This will move this image to your staging area, making it unlisted. The "
+"image will be accessible by anyone with a direct link."
+msgstr ""
+
+#: templates/image/detail/modals/demote.html:15
+#: templates/image/detail/modals/flag_thumbnails.html:14
+#: templates/image/detail/modals/promote.html:15
+msgid "Continue"
+msgstr "Kontynuuj"
+
+#: templates/image/detail/modals/flag_thumbnails.html:10
 msgid ""
 "This will trigger the regeneration of all thumbnails for this image and all "
 "its revisions."
@@ -5268,6 +5026,12 @@ msgstr ""
 #: templates/image/detail/modals/like_this.html:8
 msgid "The following people like this image"
 msgstr "Następujące osoby lubią to zdjęcie"
+
+#: templates/image/detail/modals/promote.html:11
+msgid ""
+"This will move this image to your public area, making it listed and "
+"notifying your followers."
+msgstr ""
 
 #: templates/image/detail/modals/send_to_datapool.html:11
 msgid ""
@@ -5417,6 +5181,14 @@ msgstr ""
 #: templates/image/edit/acquisition.html:74
 msgid "What kind of image is this?"
 msgstr "Jakie obiekty zawiera to zdjęcie?"
+
+#: templates/image/edit/acquisition.html:78 views/__init__.py:1152
+msgid "Solar system"
+msgstr "Układ Słoneczny"
+
+#: templates/image/edit/acquisition.html:81 views/__init__.py:1151
+msgid "Deep sky"
+msgstr "Obiekty głębokiego nieba"
 
 #: templates/image/edit/basic.html:7 templates/image/edit/basic.html.py:13
 msgid "Edit your image: basic information"
@@ -5883,30 +5655,6 @@ msgstr ""
 #: templates/notification/api_key_request_approved/short.txt:2
 msgid "API Key request approved"
 msgstr "Aplikacja o klucz API została zaakceptowana"
-
-#: templates/notification/attention_request/full.txt:2
-#, python-format
-msgid ""
-"%(originator)s would like to bring the following image to your attention: "
-"%(object_url)s"
-msgstr ""
-"Użytkownik %(originator)s chciałby zwrócić Twoją uwagę na następujące "
-"zdjęcie: %(object_url)s"
-
-#: templates/notification/attention_request/notice.html:2
-#: templates/notification/attention_request/short.html:1
-#, python-format
-msgid ""
-"<a href=\"%(object_url)s\"><strong>%(originator)s</strong> wants to bring an "
-"image to your attention.</a>"
-msgstr ""
-"Użytkownik <a href=\"%(object_url)s\"><strong>%(originator)s</strong> "
-"chciałby zwrócić Twoją uwagę na zdjęcie.</a>"
-
-#: templates/notification/attention_request/short.txt:2
-#, python-format
-msgid "%(originator)s wants to bring an image to your attention"
-msgstr "Użytkownik %(originator)s chciałby zwrócić Twoją uwagę na zdjęcie"
 
 #: templates/notification/follow_success/notice.html:2
 #: templates/notification/follow_success/short.html:2
@@ -6496,6 +6244,10 @@ msgstr "RA"
 msgid "Dec"
 msgstr "DEC"
 
+#: templates/popover/user.html:19 views/__init__.py:1241
+msgid "Member since"
+msgstr "Członek od"
+
 #: templates/privatebeta/invite.html:4 templates/privatebeta/invite.html:13
 msgid "AstroBin is currently in closed beta"
 msgstr "AstroBin znajduje się w fazie zamkniętych beta testów."
@@ -6813,6 +6565,15 @@ msgstr "Podstawowe kryteria"
 msgid "Please input some search terms!"
 msgstr "Wprowadź kryteria wyszukiwania!"
 
+#: templates/search/search.html:307 views/__init__.py:1243
+#: views/__init__.py:1244 views/image.py:324
+msgid "hours"
+msgstr "godzin"
+
+#: templates/search/search.html:313 views/image.py:330
+msgid "Avg. Moon phase"
+msgstr "Średnia faza Księżyca"
+
 #: templates/search/search.html:321
 msgid "Telescope's aperture"
 msgstr "Apertura teleskopu"
@@ -6902,6 +6663,11 @@ msgstr "rok"
 msgctxt "At no cost"
 msgid "Free"
 msgstr "Za darmo"
+
+#: templates/subscription/subscription_category_list.html:47
+#: views/image.py:329
+msgid "days"
+msgstr "dni"
 
 #: templates/subscription/subscription_category_list.html:51
 msgid "weeks"
@@ -7411,6 +7177,15 @@ msgstr ""
 msgid "Your account was deleted. Thanks for using AstroBin until now!"
 msgstr "Twoje konto zostało usunięte. Dziękujemy za korzystanie z AstroBin!"
 
+#: templates/user/profile/flickr_import.html:10 views/__init__.py:606
+#: views/__init__.py:2081
+msgid ""
+"AstroBin is currently in read-only mode, because of server maintenance. "
+"Please try again soon!"
+msgstr ""
+"AstroBin jest w tej chwili w trybie odczytu z powodu prac utrzymaniowych. "
+"Spróbuj ponownie późnej!"
+
 #: templates/user/profile/flickr_import.html:14
 msgid ""
 "Please note: when importing from Flickr, automatic watermarking of the "
@@ -7619,6 +7394,15 @@ msgstr "Te informacje odnoszą się do Twojego egzemplarza sprzętu."
 msgid "Add gear item"
 msgstr "Dodaj sprzęt"
 
+#: templates/user/profile/edit/gear.html:168
+#: templates/user/profile/edit/gear.html:243 views/__init__.py:930
+#: views/__init__.py:1016 views/__init__.py:1043 views/__init__.py:1585
+#: views/__init__.py:1598 views/__init__.py:1619 views/__init__.py:1656
+#: views/__init__.py:1746 views/__init__.py:1808 views/__init__.py:2018
+#: views/__init__.py:3117 views/__init__.py:3287 views/image.py:810
+msgid "Form saved. Thank you!"
+msgstr "Zapisane!. Dziękujemy!"
+
 #: templates/user/profile/edit/license.html:6
 msgid "Set your default image license"
 msgstr "Ustaw domyślną licencję"
@@ -7661,6 +7445,247 @@ msgstr "Wybierz język oraz które powiadomienie e-mail chciałbyś/abyś otrzym
 #: templates/user/profile/edit/retailer.html:6
 msgid "Edit your retailer information"
 msgstr "Edytuj swoje informacje handlowe"
+
+#: templatetags/tags.py:67 views/__init__.py:1215 views/__init__.py:2544
+msgid "minutes"
+msgstr "minut"
+
+#: templatetags/tags.py:68 views/__init__.py:1216 views/__init__.py:2545
+msgid "seconds ago"
+msgstr "sekund temu."
+
+#: templatetags/tags.py:69 views/__init__.py:1218 views/__init__.py:2547
+#, python-format
+msgid "%s ago"
+msgstr "%s temu"
+
+#: templatetags/tags.py:227 views/__init__.py:2418
+msgid "no alias"
+msgstr "brak innej nazwy"
+
+#: views/__init__.py:170 views/image.py:170
+msgid "Imaging telescope or lens"
+msgid_plural "Imaging telescopes or lenses"
+msgstr[0] "Teleskop główny"
+msgstr[1] "Teleskop główny"
+msgstr[2] "Teleskop główny"
+
+#: views/__init__.py:174 views/image.py:174
+msgid "Imaging camera"
+msgid_plural "Imaging cameras"
+msgstr[0] "Kamery główne"
+msgstr[1] "Kamery główne"
+msgstr[2] "Kamery główne"
+
+#: views/__init__.py:178 views/image.py:178
+msgid "Mount"
+msgid_plural "Mounts"
+msgstr[0] "Montaże"
+msgstr[1] "Montaże"
+msgstr[2] "Montaże"
+
+#: views/__init__.py:182 views/image.py:182
+msgid "Guiding telescope or lens"
+msgid_plural "Guiding telescopes or lenses"
+msgstr[0] "Teleskop prowadzący"
+msgstr[1] "Teleskop prowadzący"
+msgstr[2] "Teleskop prowadzący"
+
+#: views/__init__.py:186 views/image.py:186
+msgid "Guiding camera"
+msgid_plural "Guiding cameras"
+msgstr[0] "Kamera guidująca, prowadząca"
+msgstr[1] "Kamera guidująca, prowadząca"
+msgstr[2] "Kamera guidująca, prowadząca"
+
+#: views/__init__.py:190 views/image.py:190
+msgid "Focal reducer"
+msgid_plural "Focal reducers"
+msgstr[0] "Reduktory ogniskowej"
+msgstr[1] "Reduktory ogniskowej"
+msgstr[2] "Reduktory ogniskowej"
+
+#: views/__init__.py:199 views/image.py:199
+msgid "Accessory"
+msgid_plural "Accessories"
+msgstr[0] "Akcesoria"
+msgstr[1] "Akcesoria"
+msgstr[2] "Akcesoria"
+
+#: views/__init__.py:480
+msgid "Today's 'Image of the day' was already chosen. Come back tomorrow!"
+msgstr "'Zdjęcie dnia' zostało już wybrane. Proszę wróć tu jutro!"
+
+#: views/__init__.py:595 views/__init__.py:2070
+msgid ""
+"Invalid image or no image provided. Allowed formats are JPG, PNG and GIF."
+msgstr ""
+"Zdjęcie w nieprawidłowym formacie lub brak danych. Dozwolone formaty: JPG, "
+"PNG lub GIF"
+
+#: views/__init__.py:602
+msgid "You have reached your image uploads limit. Please upgrade!"
+msgstr "Osiągnąłeś limit zdjęć. Ulepsz konto do Premium!"
+
+#: views/__init__.py:626 views/__init__.py:2101
+msgid ""
+"You uploaded an Indexed PNG file. AstroBin will need to lower the color "
+"count to 256 in order to work with it."
+msgstr ""
+"Wczytałeś zaindeksowany plik PNG. AstroBin musi obniżyć paletę kolorów do "
+"256 aby pracować z plikiem"
+
+#: views/__init__.py:860 views/__init__.py:919 views/__init__.py:986
+#: views/__init__.py:998 views/__init__.py:1010 views/__init__.py:1034
+#: views/__init__.py:1736
+msgid ""
+"There was one or more errors processing the form. You may need to scroll "
+"down to see them."
+msgstr ""
+"W przetwarzaniu formularza wystąpiły błędy. Być może będziesz musiał "
+"przewinąć stronę w dół aby je zobaczyć."
+
+#: views/__init__.py:981
+msgid "Fill in one session, before adding more."
+msgstr "Wypełnij jedną sesję zanim dodasz kolejną."
+
+#: views/__init__.py:1103
+msgid "No date specified"
+msgstr "Data nieokreślona"
+
+#: views/__init__.py:1125 views/__init__.py:1184
+msgid "No imaging telescopes or lenses, or no imaging cameras specified"
+msgstr "Brak zdefiniowanych teleskopów, obiektywów lub kamer."
+
+#: views/__init__.py:1126
+msgid "Gear images"
+msgstr "Zdjęcia sprzętu"
+
+#: views/__init__.py:1183
+msgid "No subjects specified"
+msgstr "Nie podano żadnych obiektów"
+
+#: views/__init__.py:1185
+msgid "No acquisition details specified"
+msgstr "Brak szczegółów naświetlania"
+
+#: views/__init__.py:1242
+msgid "Last login"
+msgstr "Ostatnie logowanie"
+
+#: views/__init__.py:1243
+msgid "Total integration time"
+msgstr "Sumaryczny czas naświetlania"
+
+#: views/__init__.py:1244
+msgid "Average integration time"
+msgstr "Średni czas naświetlania"
+
+#: views/__init__.py:1245
+msgid "Forum posts"
+msgstr "Posty na froum"
+
+#: views/__init__.py:2124
+msgid "Image uploaded. Thank you!"
+msgstr "Zapisane! Dziękujemy!"
+
+#: views/__init__.py:3077 views/__init__.py:3270
+msgid "You can't merge a product to itself."
+msgstr "Nie możesz połączyć produktu z nim samym."
+
+#: views/__init__.py:3308
+msgid "Default front page section changed."
+msgstr "Czcionka została zmieniona"
+
+#: views/image.py:82
+msgid ""
+"Thanks for reporting the problem. All thumbnails will be generated again."
+msgstr ""
+"Dziękujemy za raport o problemie. Wszystkie miniaturki będę wygenerowane "
+"jeszcze raz."
+
+#: views/image.py:316
+msgid "Resolution"
+msgstr "Rozdzielczość"
+
+#: views/image.py:317 views/image.py:482
+msgid "Dates"
+msgstr "Daty"
+
+#: views/image.py:329
+msgid "Avg. Moon age"
+msgstr "Średni wiek Księżyca (po nowiu)"
+
+#: views/image.py:332
+msgid "Mean SQM"
+msgstr "Średni SQM"
+
+#: views/image.py:597
+msgid "Image deleted."
+msgstr "Twój obraz został usunięty"
+
+#: views/image.py:633 views/image.py:703
+msgid "Revision deleted."
+msgstr "Wybrana wersja zdjęcia została usunięta."
+
+#: views/image.py:735
+#, fuzzy
+msgid "Image moved to the staging area."
+msgstr "Przesuń do przechowalni"
+
+#: views/image.py:782
+#, fuzzy
+msgid "Image moved to the public area."
+msgstr "Przenieś do galerii publicznej"
+
+#: views/image.py:815
+#, fuzzy
+msgid "There was one or more errors processing the form. "
+msgstr ""
+"W przetwarzaniu formularza wystąpiły błędy. Być może będziesz musiał "
+"przewinąć stronę w dół aby je zobaczyć."
+
+#~ msgid "Image brought to your attention"
+#~ msgstr "Powiadomienie o zdjęciu"
+
+#~ msgid "Bring image to attention"
+#~ msgstr "Powiadom o zdjęciu"
+
+#~ msgid ""
+#~ "By choosing some users and clicking the button below, you will send them "
+#~ "a notification prompting them to checkout this image."
+#~ msgstr ""
+#~ "Wybierając użytkowników i klikając w guzik poniżej prześlesz wybranym "
+#~ "użytkownikom wiadomość w celu zwrócenia uwagi na to zdjęcie."
+
+#~ msgid "Click on a user below!"
+#~ msgstr "Kliknij na użytkownika poniżej!"
+
+#~ msgid "Done!"
+#~ msgstr "Gotowe!"
+
+#~ msgid "The image was brought to the attention of the selected users."
+#~ msgstr "Powiadomienie o zdjęciu zostało wysłane do wybranych użytkowników."
+
+#~ msgid "Bring to a user's attention"
+#~ msgstr "Powiadom użytkowników"
+
+#~ msgid ""
+#~ "%(originator)s would like to bring the following image to your attention: "
+#~ "%(object_url)s"
+#~ msgstr ""
+#~ "Użytkownik %(originator)s chciałby zwrócić Twoją uwagę na następujące "
+#~ "zdjęcie: %(object_url)s"
+
+#~ msgid ""
+#~ "<a href=\"%(object_url)s\"><strong>%(originator)s</strong> wants to bring "
+#~ "an image to your attention.</a>"
+#~ msgstr ""
+#~ "Użytkownik <a href=\"%(object_url)s\"><strong>%(originator)s</strong> "
+#~ "chciałby zwrócić Twoją uwagę na zdjęcie.</a>"
+
+#~ msgid "%(originator)s wants to bring an image to your attention"
+#~ msgstr "Użytkownik %(originator)s chciałby zwrócić Twoją uwagę na zdjęcie"
 
 #~ msgid "You have no new notifications."
 #~ msgstr "Nie masz żadnych nowych powiadomień."
@@ -8437,8 +8462,8 @@ msgstr "Edytuj swoje informacje handlowe"
 #~ "You can find the Messier Marathon here: http://astrobin.com/explore/"
 #~ "messier/"
 #~ msgstr ""
-#~ "Gratulacje! Użytkownik %(user)s nominował Twoje zdjęcie "
-#~ "%(messier_object)s do Maratonu Messiera\n"
+#~ "Gratulacje! Użytkownik %(user)s nominował Twoje zdjęcie %(messier_object)"
+#~ "s do Maratonu Messiera\n"
 #~ "\n"
 #~ "Oto zdjęcie, które zostało nominowane: http://astrobin.com%(image_url)s\n"
 #~ "\n"
