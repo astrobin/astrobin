@@ -8,7 +8,7 @@ msgstr ""
 "Project-Id-Version: AstroBin 1.0\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2016-05-10 20:09+0100\n"
-"PO-Revision-Date: 2016-01-06 07:12+0000\n"
+"PO-Revision-Date: 2016-05-10 19:40+0000\n"
 "Last-Translator: Salvatore <salvatore@iovene.com>\n"
 "Language-Team: Salvatore Iovene <salvatore@iovene.com>\n"
 "Language: it\n"
@@ -17,7 +17,7 @@ msgstr ""
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=(n != 1);\n"
 "X-Generator: Pootle 2.5.0\n"
-"X-POOTLE-MTIME: 1452064344.422438\n"
+"X-POOTLE-MTIME: 1462909216.963778\n"
 
 #: fields.py:10
 msgid "United Kingdom"
@@ -2717,7 +2717,6 @@ msgstr ""
 "possibile. Spiacenti per il disagio!"
 
 #: templates/500.html:21
-#, fuzzy
 msgid "Go back to the home page."
 msgstr "Torna alla home."
 
@@ -4786,7 +4785,7 @@ msgid "Sky plot"
 msgstr "Mappa stellare"
 
 #: templates/image/detail/wip_banner.html:7
-#, fuzzy, python-format
+#, python-format
 msgid ""
 "This image is a <strong>work in progress</strong> from your <a href="
 "\"%(profile_url)s?staging\">Staging Area</a>. This means nobody can see it "
@@ -4796,14 +4795,14 @@ msgid ""
 "revisions, <a href=\"#promote-modal\" data-toggle=\"modal\">promote it</a> "
 "to the <a href=\"%(profile_url)s\">Public Area</a>."
 msgstr ""
-"Quest'immagine è un <strong>lavoro in corso</strong> nella tua <a href="
-"\"%(profile_url)s?staging\">Area di Lavoro</a>. Questo vuol dire che nessuno "
-"può vederla, a meno che tu gli dia uno dei link che puoi trovare nel menù "
+"Quest'immagine è un <strong>lavoro in corso</strong> nella tua <a href=\"%"
+"(profile_url)s?staging\">Area di Lavoro</a>. Questo vuol dire che nessuno può "
+"vederla, a meno che tu gli dia uno dei link che puoi trovare nel menù "
 "<em>Condividi</em> qui sotto. Usa quel link per pubblicare questa immagine "
 "sul tuo forum preferito e ricevere critiche e consigli. Quando sei "
-"soddisfatto, magari dopo aver caricato qualche nuova versione, <a href="
-"\"%(promote_url)s\">promuovila</a> nell'<a href=\"%(profile_url)s\">Area "
-"Pubblica</a>."
+"soddisfatto, magari dopo aver caricato qualche nuova versione, <a href"
+"=\"#promote-modal\" data-toggle=\"modal\">promuovila</a> nell'<a href=\"%"
+"(profile_url)s\">Area Pubblica</a>."
 
 #: templates/image/detail/menu/actions.html:9 templates/messages/inbox.html:30
 #: templates/user/profile/commercial/products.html:43
@@ -4941,14 +4940,12 @@ msgid "Normal"
 msgstr "Normale"
 
 #: templates/image/detail/menu/view.html:80
-#, fuzzy
 msgid "Large size"
-msgstr "Dimensione immagine"
+msgstr "Dimensione grande"
 
 #: templates/image/detail/menu/view.html:86
-#, fuzzy
 msgid "Full size"
-msgstr "Dimensione piena:"
+msgstr "Dimensione intera"
 
 #: templates/image/detail/modals/bookmarked_this.html:8
 msgid "The following people bookmarked this image"
@@ -5027,6 +5024,8 @@ msgid ""
 "This will move this image to your staging area, making it unlisted. The "
 "image will be accessible by anyone with a direct link."
 msgstr ""
+"Questa azione sposterà questa immagine nella tua area di lavoro, rendendola "
+"non listata. L'immagine sarà accessibile da chi ha il link diretto ad essa."
 
 #: templates/image/detail/modals/demote.html:15
 #: templates/image/detail/modals/flag_thumbnails.html:14
@@ -5051,6 +5050,8 @@ msgid ""
 "This will move this image to your public area, making it listed and "
 "notifying your followers."
 msgstr ""
+"Questa azione muoverà la tua immagine nell'area pubblica, rendendola listata "
+"e mandando una notifica ai tuoi follower."
 
 #: templates/image/detail/modals/send_to_datapool.html:11
 msgid ""
@@ -6864,7 +6865,6 @@ msgstr ""
 "immagini a meno di passare ad un abbonamento a pagamento."
 
 #: templates/subscription/subscription_detail.html:134
-#, fuzzy
 msgid "Cacel via PayPal"
 msgstr "Annulla tramite PayPal"
 
@@ -7668,21 +7668,16 @@ msgid "Revision deleted."
 msgstr "Versione cancellata."
 
 #: views/image.py:735
-#, fuzzy
 msgid "Image moved to the staging area."
-msgstr "Sposta nell'area di lavoro"
+msgstr "Immagine spostata nell'area di lavoro."
 
 #: views/image.py:782
-#, fuzzy
 msgid "Image moved to the public area."
-msgstr "Promuovi nell'area pubblica"
+msgstr "Immagine spostata nell'area pubblica."
 
 #: views/image.py:815
-#, fuzzy
 msgid "There was one or more errors processing the form. "
-msgstr ""
-"Uno o più errori sono occorsi nel processare il modulo. Potresti dover "
-"scorrere la pagina in basso per vederli."
+msgstr "Uno o più errori sono occorsi nel processare il modulo. "
 
 #~ msgid "Image brought to your attention"
 #~ msgstr "Immagine portata alla tua attenzione"
