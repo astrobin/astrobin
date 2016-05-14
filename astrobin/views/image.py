@@ -68,6 +68,8 @@ class ImageFlagThumbsView(
     http_method_names = ('post',)
 
     def get_queryset(self):
+        if self.request.user.is_superuser:
+            return Image.all_objects.all()
         return Image.all_objects.filter(user = self.request.user)
 
     def get_success_url(self):
