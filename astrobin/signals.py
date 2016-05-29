@@ -37,7 +37,7 @@ def image_post_save(sender, instance, created, **kwargs):
     if created:
         user_scores_index = instance.user.userprofile.get_scores()['user_scores_index']
         if user_scores_index >= 1.00:
-            instance.moderated_when = datetime.date.now()
+            instance.moderated_when = datetime.date.today()
             instance.moderator_decision = 1
             instance.save()
 
