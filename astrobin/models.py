@@ -1788,7 +1788,7 @@ class UserProfile(models.Model):
             'user_scores_followers': 0,
         }
 
-        cache_key = "astrobin_user_score_%s" % self 
+        cache_key = "astrobin_user_score_%s" % self.user.username
         scores = cache.get(cache_key)
 
         if not scores:
