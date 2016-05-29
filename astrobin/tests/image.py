@@ -1411,3 +1411,28 @@ class ImageTest(TestCase):
 
         self.client.logout()
         image.delete()
+
+    def test_image_moderation(self):
+        self.client.login(username = 'test', password = 'password')
+        self._do_upload('astrobin/fixtures/test.jpg')
+        image = self._get_last_image()
+        image.title = "TEST IMAGE"
+        image.save()
+
+        # As the test user does not have a high enough AstroBin Index, the
+        # iamge should be in the moderation queue.
+        self.assertEquals(image.moderator_decision, 0)
+        self.assertEquals(image.moderated_when, None)
+        self.assertEquals(image.moderated_by, None)
+
+        # The image should not appear on the front page when logged out
+        self.client.logout()
+        response = self.client.get(reverse('index'))
+        self.assertEquals(image.title in response.content, False)
+
+        # Nor when logged in
+        self.client.login(username = 'test', password = 'password')
+        response = self.client.get(reverse('index'))
+        self.assertEquals(image.title in response.content, False)
+
+        # TODO: test image promotion

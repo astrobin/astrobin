@@ -1,3 +1,6 @@
+# Python
+import datetime
+
 # Django
 from django.conf import settings
 from django.contrib.auth.models import User
@@ -32,6 +35,12 @@ from .gear import get_correct_gear
 
 def image_post_save(sender, instance, created, **kwargs):
     if created:
+        user_scores_index = instance.user.userprofile.get_scores()['user_scores_index']
+        if user_scores_index >= 1.00:
+            instance.moderated_when = datetime.date.now()
+            instance.moderator_decision = 1
+            instance.save()
+
         instance.user.userprofile.premium_counter += 1
         instance.user.userprofile.save()
 
@@ -47,8 +56,9 @@ def image_post_save(sender, instance, created, **kwargs):
                     'originator': instance.user.userprofile,
                 })
 
-            verb = "uploaded a new image"
-            act.send(instance.user, verb = verb, action_object = instance)
+            if instance.moderator_decision == 1:
+                verb = "uploaded a new image"
+                act.send(instance.user, verb = verb, action_object = instance)
 
 
 def imagerevision_post_save(sender, instance, created, **kwargs):

@@ -4,7 +4,6 @@ from django.contrib.auth.models import User
 from django.db.models import Q
 from django.utils.translation import ugettext as _
 
-from haystack.query import SearchQuerySet
 from toggleproperties.models import ToggleProperty
 from persistent_messages.models import Message
 
@@ -59,27 +58,7 @@ def user_scores(request):
     }
 
     if request.user.is_authenticated():
-        cache_key = "astrobin_user_score_%s" % request.user
-        scores = cache.get(cache_key)
-        user = User.objects.get(pk = request.user.pk) # The lazy object in the request won't do
-
-        if not scores:
-            try:
-                user_search_result =\
-                    SearchQuerySet().models(User).filter(django_id = request.user.pk)[0]
-            except IndexError:
-                return {
-                    'user_scores_index': 0,
-                    'user_scores_followers': 0
-                }
-
-            index = user_search_result.normalized_likes
-            followers = user_search_result.followers
-
-            scores = {}
-            scores['user_scores_index'] = index
-            scores['user_scores_followers'] = followers
-            cache.set(cache_key, scores, 43200)
+        scores = request.user.userprofile.get_scores()
 
     return scores
 
@@ -91,6 +70,9 @@ def common_variables(request):
     get_and_set_user_agent(request)
 
     d = {
+        'True': True,
+        'False': False,
+
         #'random_gear_item': Gear.objects.filter(moderator_fixed = None).order_by('?')[:1].get(),
         'is_producer': request.user.groups.filter(name='Producers'),
         'is_retailer': request.user.groups.filter(name='Retailers'),

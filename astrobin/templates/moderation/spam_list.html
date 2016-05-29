@@ -1,0 +1,90 @@
+{% extends 'base.html' %}
+
+{% load i18n %}
+{% load astrobin_apps_images_tags %}
+
+{% block title %}{% trans "Spam images" %}{% endblock %}
+
+{% block content %}
+    <h1>{% trans "Spam images" %}</h1>
+
+    {% if image_list %}
+        <p class="well">
+            {% blocktrans %}Please click on the images that you want to mark as NOT SPAM, then click on the Approve button below to approve them.{% endblocktrans %}
+        </p>
+
+        <ul class="astrobin-thumbnails">
+            {% for image in image_list %}
+                <li class="thumbnail astrobin-thumbnail spam-thumbnail">
+                    <a href="#">
+                        {% astrobin_image image 'gallery' 'final' 'regular' False False %}
+                        <div class="ham-thumbnail-overlay hide">
+                            <span>
+                                OK
+                            </span>
+                        </div>
+                    </a>
+                </li>
+            {% endfor %}
+        </ul>
+
+        <hr/>
+        <div class="text-right">
+            <span class="loading hide"><img src="{{STATIC_URL}}images/ajax-loader.gif" alt=""/></span>
+            <a href="#" id="approve-button" class="btn btn-primary">
+                {% trans "Approve" %} &rarr;
+            </a>
+        </div>
+    {% else %}
+        <div class="alert alert-success">
+            {% trans "There are no images in the spam list." %}
+        </div>
+    {% endif %}
+{% endblock %}
+
+{% block extra_js %}
+    <script type="text/javascript">
+        $(document).ready(function() {
+            $('.astrobin-thumbnail a').click(function(e) {
+                var $ham;
+
+                e.preventDefault();
+
+                $(this).closest('li.astrobin-thumbnail').toggleClass('spam-thumbnail');
+
+                $ham = $(this).find('.ham-thumbnail-overlay');
+                if ($ham.css('visibility') == 'hidden') {
+                    $ham.css('visibility', 'visible');
+                } else {
+                    $ham.css('visibility', 'hidden');
+                }
+
+            });
+
+            $('#approve-button').click(function(e) {
+                var $btn, ham_ids;
+
+                e.preventDefault();
+
+                $btn = $(this);
+                $btn.addClass('disabled');
+                $btn.siblings('.loading').removeClass('hide');
+
+                ham_ids = $('.astrobin-thumbnail:not(.spam-thumbnail) img').map(function() {
+                    return $(this).data('id');
+                }).get();
+
+                $.ajax({
+                    url: '{% url image_moderation_mark_as_ham %}',
+                    type: 'POST',
+                    cache: false,
+                    timeout: 10000,
+                    data: {ids: ham_ids},
+                    dataType: 'json'
+                }).done(function() {
+                    location.reload();
+                });
+            });
+        });
+    </script>
+{% endblock %}

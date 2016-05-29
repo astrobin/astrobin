@@ -784,6 +784,28 @@ class Image(HasSolutionMixin, models.Model):
         default = True,
     )
 
+    # 0 = undecided
+    # 1 = approved
+    # 2 = rejected
+    moderator_decision = models.PositiveIntegerField(
+        editable = False,
+        default = 1,
+    )
+
+    moderated_when = models.DateTimeField(
+        editable = False,
+        null = True,
+        auto_now_add = False,
+        default = None,
+    )
+
+    moderated_by = models.ForeignKey(
+        User,
+        editable = False,
+        null = True,
+        related_name = 'images_moderated',
+    )
+
     class Meta:
         app_label = 'astrobin'
         ordering = ('-uploaded', '-id')
@@ -1164,7 +1186,6 @@ class Image(HasSolutionMixin, models.Model):
 
     def thumbnail_invalidate(self, delete_remote = True):
         return self.thumbnail_invalidate_real(self.image_file, '0', delete_remote)
-
 
     @staticmethod
     def by_gear(gear, gear_type = None):
@@ -1757,6 +1778,39 @@ class UserProfile(models.Model):
             'Accessory': 'accessories',
         }
         getattr(self, resolve[gear_type]).remove(gear)
+
+    def get_scores(self):
+        from django.core.cache import cache
+        from haystack.query import SearchQuerySet
+
+        scores = {
+            'user_scores_index': 0,
+            'user_scores_followers': 0,
+        }
+
+        cache_key = "astrobin_user_score_%s" % self 
+        scores = cache.get(cache_key)
+
+        if not scores:
+            try:
+                user_search_result =\
+                    SearchQuerySet().models(User).filter(django_id = self.pk)[0]
+            except IndexError:
+                return {
+                    'user_scores_index': 0,
+                    'user_scores_followers': 0
+                }
+
+            index = user_search_result.normalized_likes
+            followers = user_search_result.followers
+
+            scores = {}
+            scores['user_scores_index'] = index
+            scores['user_scores_followers'] = followers
+            cache.set(cache_key, scores, 43200)
+
+        return scores
+
 
     class Meta:
         app_label = 'astrobin'

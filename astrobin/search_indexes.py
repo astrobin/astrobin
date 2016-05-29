@@ -533,7 +533,7 @@ class ImageIndex(SearchIndex):
     username = CharField(model_attr = 'user__username')
 
     def index_queryset(self):
-        return Image.objects.all()
+        return Image.objects.filter(moderator_decision = 1)
 
     def get_model(self):
         return Image
