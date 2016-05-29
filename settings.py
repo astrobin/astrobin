@@ -683,6 +683,12 @@ PYBB_SMILES = {
 PYBB_TOPIC_PAGE_SIZE = 25
 PYBB_FORUM_PAGE_SIZE = 50
 
+def pybb_premoderation(user, post):
+    index = user.userprofile.get_scores()['user_scores_index']
+    return index >= 1.00
+
+PYBB_PREMODERATION = pybb_premoderation
+
 if TESTING:
     PREMIUM_MAX_IMAGES_FREE = 1000
     PREMIUM_MAX_IMAGES_LITE = 1200
