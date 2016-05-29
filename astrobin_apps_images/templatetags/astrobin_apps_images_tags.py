@@ -58,7 +58,7 @@ def gallery_thumbnail_inverted(image, revision_label):
 # actual thumbnail.
 def astrobin_image(
     context, image, alias,
-    revision = 'final', url_size = 'regular', link = True):
+    revision = 'final', url_size = 'regular', link = True, tooltip = True):
 
     response_dict = {
         'provide_size': True,
@@ -154,10 +154,10 @@ def astrobin_image(
 
     url = get_image_url(image, revision, url_size)
 
-    show_tooltip = alias in (
+    show_tooltip = tooltip and (alias in (
         'gallery', 'gallery_inverted',
         'thumb',
-    )
+    ))
 
 
     ##########

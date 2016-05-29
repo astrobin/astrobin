@@ -1032,6 +1032,49 @@ li.astrobin-thumbnail img {
   -webkit-border-radius: 12px;
   border-radius: 12px;
 }
+li.astrobin-thumbnail.spam-thumbnail {
+  border: 1px solid red;
+  -moz-border-radius: 20px;
+  -webkit-border-radius: 20px;
+  border-radius: 20px;
+}
+li.astrobin-thumbnail.ham-thumbnail {
+  border: 1px solid green;
+  -moz-border-radius: 20px;
+  -webkit-border-radius: 20px;
+  border-radius: 20px;
+}
+li.astrobin-thumbnail .spam-thumbnail-overlay,
+li.astrobin-thumbnail .ham-thumbnail-overlay {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  -moz-border-radius: 20px;
+  -webkit-border-radius: 20px;
+  border-radius: 20px;
+  background-color: rgba(255, 0, 0, 0.5);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  visibility: hidden;
+}
+li.astrobin-thumbnail .spam-thumbnail-overlay span,
+li.astrobin-thumbnail .ham-thumbnail-overlay span {
+  color: white;
+  font-size: 30px;
+  font-weight: bold;
+  text-shadow: 0 2px 2px black;
+  -webkit-transform: rotate(-45deg);
+  -moz-transform: rotate(-45deg);
+  -o-transform: rotate(-45deg);
+  -ms-transform: rotate(-45deg);
+  transform: rotate(-45deg);
+}
+li.astrobin-thumbnail .ham-thumbnail-overlay {
+  background-color: rgba(0, 255, 0, 0.5);
+}
 .page-header {
   border-bottom: 0;
   padding-bottom: 0;

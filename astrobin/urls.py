@@ -27,7 +27,8 @@ from astrobin import lookups
 from astrobin import views
 from astrobin.views import (
     api as api_views,
-    image as image_views)
+    image as image_views,
+    moderation as moderation_views)
 from astrobin.api import (
     ImageOfTheDayResource,
     ImageResource,
@@ -283,6 +284,22 @@ urlpatterns = patterns('',
     ###########################################################################
 
     url(r'^iotd/choose/(?:(?P<image_pk>\d+)/)?$', views.iotd_choose, name='iotd_choose'),
+
+    ###########################################################################
+    ### MODERATION VIEWS                                                    ###
+    ###########################################################################
+
+    url(r'^moderate/images/$', moderation_views.ImageModerationListView.as_view(),
+            name='image_moderation'),
+    url(r'^moderate/images/spam/$',
+            moderation_views.ImageModerationSpamListView.as_view(),
+            name='image_moderation_view_spam'),
+    url(r'^moderate/images/mark-as-spam/$',
+            moderation_views.ImageModerationMarkAsSpamView.as_view(),
+            name='image_moderation_mark_as_spam'),
+    url(r'^moderate/images/mark-as-ham/$',
+            moderation_views.ImageModerationMarkAsHamView.as_view(),
+            name='image_moderation_mark_as_ham'),
 
     ###########################################################################
     ### PAGES VIEWS                                                         ###

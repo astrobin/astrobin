@@ -143,7 +143,10 @@ def index(request, template = 'index/root.html', extra_context = None):
     image_rev_ct = ContentType.objects.get_for_model(ImageRevision)
     user_ct = ContentType.objects.get_for_model(User)
 
-    recent_images = Image.objects.exclude(Q(title = None) | Q(title = ''))
+    recent_images = Image.objects\
+        .exclude(title = None)\
+        .exclude(title = '')\
+        .filter(moderator_decision = 0)
 
     response_dict = {
         'registration_form': RegistrationForm(),

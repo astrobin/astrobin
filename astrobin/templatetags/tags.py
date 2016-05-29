@@ -379,3 +379,10 @@ def get_subscription_by_name(user, name):
 
     return UserSubscription.objects.get(
         user = user, subscription__name = name)
+
+@register.filter
+def is_content_moderator(user):
+    if not user.is_authenticated():
+        return False
+
+    return user.groups.filter(name='Content moderators').count() > 0

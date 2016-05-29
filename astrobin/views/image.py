@@ -429,9 +429,10 @@ class ImageDetailView(DetailView):
         ########
         # LIKE #
         ########
-        from astrobin.context_processors import user_scores
         from astrobin_apps_premium.templatetags.astrobin_apps_premium_tags import is_free
-        user_scores_index = user_scores(self.request)['user_scores_index']
+        user_scores_index = 0
+        if self.request.user.is_authenticated():
+            user_scores_index = self.request.user.userprofile.get_scores()['user_scores_index']
         min_index_to_like = 1.00
         user_can_like = (
             self.request.user != image.user and

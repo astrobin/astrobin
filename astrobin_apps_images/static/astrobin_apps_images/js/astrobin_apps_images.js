@@ -19,7 +19,7 @@ $(document).ready(function() {
                     success: function(data, status, request) {
                         var $img = $('img.astrobin-image[data-id=' + data.id + '][data-alias=' + alias + '][data-revision=' + revision +']');
 
-                        if (alias == 'thumb' || alias == 'gallery') {
+                        if ($img.hasClass('capty')) {
                             $img.load(function() {
                                 $img.capty({animation: 'slide', speed: 200, height: $img.height()});
                                 $img.closest('.capty-wrapper').find('.capty-target').show();
