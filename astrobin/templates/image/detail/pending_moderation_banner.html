@@ -1,0 +1,11 @@
+{% load i18n %}
+
+{% if request.user == image.user and image.moderator_decision == 0 %}
+    <div class="alert alert-warning">
+        <p>
+        <strong><i class="icon icon-warning-sign"></i></strong>
+        {% blocktrans %}This image is pending moderation and is currently not visible on the front page or search results.{% endblocktrans %}
+        </p>
+    </div>
+{% endif %}
+

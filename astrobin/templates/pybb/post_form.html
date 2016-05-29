@@ -1,5 +1,6 @@
 {% load url from future %}
 {% load i18n pybb_tags %}
+
 <form class="post-form" action="
     {% if forum %}
         {% url 'pybb:add_topic' forum.pk %}
@@ -30,6 +31,17 @@
     <p class="submit">{% include "pybb/_button_submit.html" %}</p>
   </fieldset>
 </form>
+
+{% if user_scores_index < 1 %}
+    <div class="alert alert-warning">
+        <p>
+        <strong><i class="icon icon-warning-sign"></i></strong>
+        {% blocktrans %}Please note: this post will be published only after moderation.{% endblocktrans %}
+        </p>
+    </div>
+{% endif %}
+
+
 
 {% block extra_js %}
     <script src="{{STATIC_URL}}/wysibb/jquery.wysibb.min.js"></script>
