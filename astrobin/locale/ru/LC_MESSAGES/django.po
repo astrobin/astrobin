@@ -8,17 +8,17 @@ msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2016-05-10 20:12+0100\n"
-"PO-Revision-Date: 2016-04-11 20:29+0000\n"
+"PO-Revision-Date: 2016-05-11 13:47+0000\n"
 "Last-Translator: csve <csve00@gmail.com>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
 "Language: ru\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"Plural-Forms: nplurals=3; plural=(n%10==1 && n%100!=11 ? 0 : n%10>=2 && n"
-"%10<=4 && (n%100<10 || n%100>=20) ? 1 : 2);\n"
+"Plural-Forms: nplurals=3; plural=(n%10==1 && n%100!=11 ? 0 : n%10>=2 && n%"
+"10<=4 && (n%100<10 || n%100>=20) ? 1 : 2);\n"
 "X-Generator: Pootle 2.5.0\n"
-"X-POOTLE-MTIME: 1460406584.632165\n"
+"X-POOTLE-MTIME: 1462974459.70759\n"
 
 #: fields.py:10
 msgid "United Kingdom"
@@ -4792,7 +4792,7 @@ msgid "Sky plot"
 msgstr "Положение на небе"
 
 #: templates/image/detail/wip_banner.html:7
-#, fuzzy, python-format
+#, python-format
 msgid ""
 "This image is a <strong>work in progress</strong> from your <a href="
 "\"%(profile_url)s?staging\">Staging Area</a>. This means nobody can see it "
@@ -4802,13 +4802,13 @@ msgid ""
 "revisions, <a href=\"#promote-modal\" data-toggle=\"modal\">promote it</a> "
 "to the <a href=\"%(profile_url)s\">Public Area</a>."
 msgstr ""
-"Это изображение в <strong>рабочем состоянии</strong> из вашей <a href="
-"\"%(profile_url)s?staging\">Staging Area</a>. Это значит, что никто не "
-"сможет увидеть его, до тех пор, пока вы не дадите ссылку, которую можно "
-"получить в меню <em>Поделиться</em>. Используйте эту ссылку для публикации "
-"на Интернет-форумах и получайте отзывы на неё. Когда вам надоест это, вы "
-"возможно закачаете другие версии, <a href=\"%(promote_url)s\">добавите их</"
-"a> в <a href=\"%(profile_url)s\">Public Area</a>."
+"Это изображение <strong>в работе</strong> из вашей <a href=\"%"
+"(profile_url)s?staging\">Staging Area</a>. Это значит, что никто не сможет "
+"увидеть его до тех пор, пока вы не дадите ссылку, которую можно получить в "
+"меню <em>Поделиться</em>. Используйте эту ссылку для публикации на "
+"Интернет-форумах и получения отзывыов. Когда работа будет окончена, возможно "
+"после закачки нескольких версий, <a href=\"%(promote_url)s\">перенесите "
+"ее</a> в <a href=\"%(profile_url)s\">Public Area</a>."
 
 #: templates/image/detail/menu/actions.html:9 templates/messages/inbox.html:30
 #: templates/user/profile/commercial/products.html:43
@@ -5029,6 +5029,9 @@ msgid ""
 "This will move this image to your staging area, making it unlisted. The "
 "image will be accessible by anyone with a direct link."
 msgstr ""
+"Это действие перенесет изображение в вашу Staging Area и скроет его из "
+"вашего списка работ. Изображение останется доступным для всех по прямой "
+"ссылке."
 
 #: templates/image/detail/modals/demote.html:15
 #: templates/image/detail/modals/flag_thumbnails.html:14
@@ -5053,6 +5056,8 @@ msgid ""
 "This will move this image to your public area, making it listed and "
 "notifying your followers."
 msgstr ""
+"Это действие перенесет изображение в вашу Public Area, добавит его к списку "
+"ваших работ и уведомит ваших подписчиков."
 
 #: templates/image/detail/modals/send_to_datapool.html:11
 msgid ""
@@ -7659,21 +7664,16 @@ msgid "Revision deleted."
 msgstr "Версия удалена."
 
 #: views/image.py:735
-#, fuzzy
 msgid "Image moved to the staging area."
-msgstr "Переместить в Staging Area"
+msgstr "Изображение перемещено в Staging Area."
 
 #: views/image.py:782
-#, fuzzy
 msgid "Image moved to the public area."
-msgstr "Перенести в Public Area"
+msgstr "Изображение перемещено в Public Area."
 
 #: views/image.py:815
-#, fuzzy
 msgid "There was one or more errors processing the form. "
-msgstr ""
-"При обработке формы произошла одна или несколько ошибок. Прокрутите страницу "
-"вниз, чтобы увидеть их."
+msgstr "При обработке формы произошла одна или несколько ошибок."
 
 #~ msgid "Image brought to your attention"
 #~ msgstr "Поступили изображения заслуживающие внимания"
