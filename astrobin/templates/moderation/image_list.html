@@ -17,7 +17,7 @@
                 <li class="thumbnail astrobin-thumbnail">
                     <a href="#">
                         {% astrobin_image image 'gallery' 'final' 'regular' False False %}
-                        <div class="spam-thumbnail hide">
+                        <div class="spam-thumbnail-overlay hide">
                             <span>
                                 SPAM
                             </span>
@@ -51,7 +51,7 @@
 
                 $(this).find('img').toggleClass('spam');
 
-                $spam = $(this).find('.spam-thumbnail');
+                $spam = $(this).find('.spam-thumbnail-overlay');
                 if ($spam.css('visibility') == 'hidden') {
                     $spam.css('visibility', 'visible');
                 } else {
