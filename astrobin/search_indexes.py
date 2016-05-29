@@ -363,9 +363,6 @@ class UserIndex(SearchIndex):
             import math
             return average(values) * math.log(len(values)+1, 10)
 
-        if obj.userprofile.exclude_from_competitions:
-            return -1
-
         avg = self.prepare_average_likes(obj)
         norm = []
 

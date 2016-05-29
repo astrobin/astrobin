@@ -436,7 +436,7 @@ class ImageDetailView(DetailView):
         min_index_to_like = 1.00
         user_can_like = (
             self.request.user != image.user and
-            (user_scores_index < 0 or user_scores_index >= min_index_to_like) or
+            user_scores_index >= min_index_to_like or
             not is_free(self.request.user))
 
 
