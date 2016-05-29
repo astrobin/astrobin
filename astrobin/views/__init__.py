@@ -146,7 +146,7 @@ def index(request, template = 'index/root.html', extra_context = None):
     recent_images = Image.objects\
         .exclude(title = None)\
         .exclude(title = '')\
-        .filter(moderator_decision = 0)
+        .filter(moderator_decision = 1)
 
     response_dict = {
         'registration_form': RegistrationForm(),
