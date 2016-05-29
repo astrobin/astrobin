@@ -789,7 +789,7 @@ class Image(HasSolutionMixin, models.Model):
     # 2 = rejected
     moderator_decision = models.PositiveIntegerField(
         editable = False,
-        default = 1,
+        default = 0,
     )
 
     moderated_when = models.DateTimeField(
