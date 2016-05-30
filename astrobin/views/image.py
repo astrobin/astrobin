@@ -97,7 +97,7 @@ class ImageThumbView(JSONResponseMixin, DetailView):
             r = '0'
 
         url = image.thumbnail(kwargs.pop('alias'), {
-            'revision_label': r
+            'revision_label': r,
             'animated': 'animated' in self.request.GET,
         })
 
