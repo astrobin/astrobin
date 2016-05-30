@@ -92,8 +92,12 @@ class ImageThumbView(JSONResponseMixin, DetailView):
 
     def get(self, request, *args, **kwargs):
         image = self.get_object()
+        r = kwargs.pop('r')
+        if r is None:
+            r = '0'
+
         url = image.thumbnail(kwargs.pop('alias'), {
-            'revision_label': kwargs.pop('r'),
+            'revision_label': r
             'animated': 'animated' in self.request.GET,
         })
 
@@ -112,6 +116,8 @@ class ImageRawThumbView(DetailView):
         image = self.get_object()
         alias = kwargs.pop('alias')
         r = kwargs.pop('r')
+        if r is None:
+            r = '0'
         url = image.thumbnail(alias, {
             'revision_label': r,
             'animated': 'animated' in self.request.GET,
@@ -151,11 +157,13 @@ class ImageDetailView(DetailView):
 
         image = context['object']
         r = self.kwargs.get('r')
+        if r is None:
+            r = '0'
 
         revision_image = None
         instance_to_platesolve = image
         is_revision = False
-        if r != 0:
+        if r != '0':
             try:
                 revision_image = ImageRevision.objects.filter(image = image, label = r)[0]
                 instance_to_platesolve = revision_image
