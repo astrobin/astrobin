@@ -1794,7 +1794,7 @@ class UserProfile(models.Model):
         if not scores:
             try:
                 user_search_result =\
-                    SearchQuerySet().models(User).filter(django_id = self.pk)[0]
+                    SearchQuerySet().models(User).filter(django_id = self.user.pk)[0]
             except IndexError:
                 return {
                     'user_scores_index': 0,
