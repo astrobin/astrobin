@@ -2048,6 +2048,12 @@ class ImageOfTheDay(models.Model):
         on_delete = models.SET_NULL,
     )
 
+    chosen_by = models.ForeignKey(
+        User,
+        related_name = "iotds_chosen",
+        null = True,
+    )
+
     class Meta:
         ordering = ['-date']
         app_label = 'astrobin'

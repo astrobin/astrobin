@@ -11,6 +11,15 @@
                 <span class="date">
                     {{iotd_date|date:"SHORT_DATE_FORMAT"}}
                 </span>
+                {% if image.image_of_the_day.all.0.chosen_by %}
+                <span class="chosen-by">
+                    --
+                    {% trans "chosen by" %}
+                    <a href="{% url user_page image.image_of_the_day.all.0.chosen_by %}">
+                        {{image.image_of_the_day.all.0.chosen_by.userprofile}}
+                    </a>
+                </span>
+                {% endif %}
             </h1>
         </strong>
         <div class="ribbon-stitches-bottom"></div>

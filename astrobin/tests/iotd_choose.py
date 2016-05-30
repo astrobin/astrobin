@@ -94,7 +94,11 @@ class IOTDChooseTest(TestCase):
             position = 1)
         response = self.client.post(reverse('iotd_choose', kwargs = {'image_pk': image.pk}))
         self.assertEqual(response.status_code, 200)
+        iotd = ImageOfTheDay.objects.all()[0]
+        self.assertEqual(iotd.image, image)
+        self.assertEqual(iotd.chosen_by, user)
 
+        iotd.delete()
         candidate.delete()
         image.delete()
         group.delete()

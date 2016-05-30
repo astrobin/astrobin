@@ -2713,6 +2713,11 @@ form.avatar-change label.control-label {
 .iotd-ribbon h1 .date {
   color: #fff;
 }
+.iotd-ribbon h1 .chosen-by {
+  font-weight: normal;
+  font-style: italics;
+  font-size: 70%;
+}
 .iotd-ribbon:after {
   content: '';
   position: absolute;

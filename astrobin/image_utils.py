@@ -47,7 +47,7 @@ def candidate_images_for_iotd(images):
         c = ImageOfTheDayCandidate.objects.create(image = i, position = position)
 
 
-def make_image_of_the_day(image):
+def make_image_of_the_day(image, user):
     from astrobin.models import Image, ImageRevision, ImageOfTheDay
 
     today = datetime.now().date()
@@ -57,6 +57,7 @@ def make_image_of_the_day(image):
     except ImageOfTheDay.DoesNotExist:
         iotd = ImageOfTheDay(image = image)
 
+    iotd.chosen_by = user
     iotd.save()
     return iotd
 

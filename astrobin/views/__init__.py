@@ -508,7 +508,7 @@ def iotd_choose(request, image_pk):
             make_image_of_the_day, make_runnerup, compare_iotd_candidates)
         image = Image.objects.get(pk = image_pk)
 
-        iotd = make_image_of_the_day(image)
+        iotd = make_image_of_the_day(image, request.user)
         sorted_candidates = sorted(list(
             ImageOfTheDayCandidate.objects.filter(date__range = (today, tomorrow))),
             cmp = compare_iotd_candidates)
