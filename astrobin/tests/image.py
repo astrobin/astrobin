@@ -339,6 +339,10 @@ class ImageTest(TestCase):
         self.assertContains(response, image.thumbnail('regular', thumbnail_settings = {'revision_label': 'B'}))
         self.assertContains(response, image.thumbnail('thumb'))
 
+        # Correct revision displayed in gallery
+        response = self.client.get(reverse('user_page', kwargs = {'username': 'test'}))
+        self.assertContains(response, image.thumbnail('thumb', thumbnail_settings = {'revision_label': 'B'}))
+
         response = self.client.get(reverse('image_detail', kwargs = {'id': image.id, 'r': '0'}))
         self.assertContains(response, image.thumbnail('regular'))
         self.assertContains(response, image.thumbnail('thumb', thumbnail_settings = {'revision_label': 'B'}))
