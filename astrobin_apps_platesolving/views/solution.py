@@ -28,7 +28,10 @@ class SolveView(base.View):
         content_type_id = kwargs.pop('content_type_id')
 
         content_type = ContentType.objects.get_for_id(content_type_id)
-        target = get_object_or_404(content_type.model_class(), pk = object_id)
+        manager = content_type.model_class()
+        if hasattr(manager, 'all_objects'):
+            manager = manager.all_objects
+        target = get_object_or_404(manager, pk = object_id)
         solution, created = Solution.objects.get_or_create(object_id = object_id, content_type = content_type)
 
         if solution.submission_id is None:
