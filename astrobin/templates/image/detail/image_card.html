@@ -74,14 +74,24 @@
                         {% endif %}
                     {% endif %}
 
-                    {% if instance_to_platesolve.solution and instance_to_platesolve.solution.ra %}
-                        <p><strong>{% trans "RA center" %}</strong>: {{instance_to_platesolve.solution.ra}} {% trans "degrees" %}</p>
-                        <p><strong>{% trans "DEC center" %}</strong>: {{instance_to_platesolve.solution.dec}} {% trans "degrees" %}</p>
-                        {% if instance_to_platesolve.solution.pixscale and instance_to_platesolve.solution.pixscale != 0 %}
-                            <p><strong>{% trans "Pixel scale" %}</strong>: {{instance_to_platesolve.solution.pixscale}} {% trans "arcsec/pixel" %}</p>
+                    {% if instance_to_platesolve.solution %}
+                        <p>
+                            <strong>Astrometry.net job</strong>:
+                            <a href="http://nova.astrometry.net/status/{{instance_to_platesolve.solution.submission_id}}"
+                               target="_blank">
+                                {{instance_to_platesolve.solution.submission_id}}
+                            </a>
+                        </p>
+
+                        {% if instance_to_platesolve.solution.ra %}
+                            <p><strong>{% trans "RA center" %}</strong>: {{instance_to_platesolve.solution.ra}} {% trans "degrees" %}</p>
+                            <p><strong>{% trans "DEC center" %}</strong>: {{instance_to_platesolve.solution.dec}} {% trans "degrees" %}</p>
+                            {% if instance_to_platesolve.solution.pixscale and instance_to_platesolve.solution.pixscale != 0 %}
+                                <p><strong>{% trans "Pixel scale" %}</strong>: {{instance_to_platesolve.solution.pixscale}} {% trans "arcsec/pixel" %}</p>
+                            {% endif %}
+                            <p><strong>{% trans "Orientation" %}</strong>: {{instance_to_platesolve.solution.orientation}} {% trans "degrees" %}</p>
+                            <p><strong>{% trans "Field radius" %}</strong>: {{instance_to_platesolve.solution.radius}} {% trans "degrees" %}</p>
                         {% endif %}
-                        <p><strong>{% trans "Orientation" %}</strong>: {{instance_to_platesolve.solution.orientation}} {% trans "degrees" %}</p>
-                        <p><strong>{% trans "Field radius" %}</strong>: {{instance_to_platesolve.solution.radius}} {% trans "degrees" %}</p>
                     {% endif %}
 
                     {% if locations %}
