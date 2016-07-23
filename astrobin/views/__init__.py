@@ -1196,6 +1196,10 @@ def user_page(request, username):
                     (Q(objects_in_field = None)) &
                     (Q(solar_system_main_subject = None)))
                 qs = [x for x in qs if (x.solution is None or x.solution.objects_in_field is None)]
+                for i in qs:
+                    for r in i.revisions.all():
+                        if r.solution and r.solution.objects_in_field:
+                            qs.remove(i)
 
             elif active == 'GEAR':
                 qs = qs.filter(
