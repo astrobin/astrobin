@@ -27,6 +27,8 @@ from rawdata.models import (
 from astrobin_apps_platesolving.models import Solution
 from astrobin_apps_platesolving.solver import Solver
 from astrobin_apps_notifications.utils import push_notification
+from astrobin_apps_premium.templatetags.astrobin_apps_premium_tags import (
+    is_lite, is_premium)
 
 # This app
 from .models import Image, ImageRevision, Gear, UserProfile
@@ -36,7 +38,7 @@ from .gear import get_correct_gear
 def image_post_save(sender, instance, created, **kwargs):
     if created:
         user_scores_index = instance.user.userprofile.get_scores()['user_scores_index']
-        if user_scores_index >= 1.00:
+        if user_scores_index >= 1.00 or is_lite(instance.user) or is_premium(instance.user):
             instance.moderated_when = datetime.date.today()
             instance.moderator_decision = 1
             instance.save()
