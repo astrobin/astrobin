@@ -1199,7 +1199,8 @@ def user_page(request, username):
                 for i in qs:
                     for r in i.revisions.all():
                         if r.solution and r.solution.objects_in_field:
-                            qs.remove(i)
+                            if i in qs:
+                                qs.remove(i)
 
             elif active == 'GEAR':
                 qs = qs.filter(
