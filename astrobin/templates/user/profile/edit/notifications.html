@@ -3,12 +3,12 @@
 {% load tags %}
 {% load bootstrap_toolkit %}
 
-{% block title %}AstroBin - {% trans "Edit your site preferences" %}{% endblock %}
+{% block title %}AstroBin - {% trans "Edit your e-mail notification preferences" %}{% endblock %}
 {% block content %}
     <div class="row">
         {% include 'profile-edit-menu.html' %}
         <div class="span9">
-            <form class="form-horizontal" method="post" action="{% url profile_save_preferences %}">{% csrf_token %}
+            <form class="form-horizontal" method="post" action="{% url profile_save_notifications %}">{% csrf_token %}
                 {{form|as_bootstrap}}
 
                 <div class="form-actions">

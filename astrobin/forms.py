@@ -252,10 +252,16 @@ class UserProfileEditGearForm(forms.Form):
 class UserProfileEditPreferencesForm(forms.ModelForm):
     class Meta:
         model = UserProfile
-        fields = ['language', 'receive_forum_emails', 'exclude_from_competitions',]
+        fields = ['language', 'exclude_from_competitions',]
+
+
+class UserProfileEditNotificationsForm(forms.ModelForm):
+    class Meta:
+        model = UserProfile
+        fields = ['receive_forum_emails']
 
     def __init__(self, user=None, **kwargs):
-        super(UserProfileEditPreferencesForm, self).__init__(**kwargs)
+        super(UserProfileEditNotificationsForm, self).__init__(**kwargs)
         for notice_type in NOTICE_TYPES:
             if notice_type[3] == 2 and notice_type[0] != 'test_notification':
                 self.fields[notice_type[0]] = forms.BooleanField(
