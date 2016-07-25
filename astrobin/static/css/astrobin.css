@@ -797,6 +797,9 @@ body.full {
 .dropdown-menu > li > a.mark-single-as-read:hover {
   background: initial !important;
 }
+.dropdown-menu > li > a.danger {
+  color: red !important;
+}
 .navbar .nav .dropdown-toggle .icon-caret-down,
 .navbar .nav .open.dropdown .icon-caret-down {
   font-size: 10px;
