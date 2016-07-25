@@ -164,6 +164,7 @@ def toggleproperty_post_save(sender, instance, created, **kwargs):
                     [instance.content_object.user], 'new_' + instance.property_type,
                     {
                         'url': settings.ASTROBIN_BASE_URL + instance.content_object.get_absolute_url(),
+                        'title': instance.content_object.title,
                         'user': instance.user.userprofile,
                     })
 

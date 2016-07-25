@@ -1,2 +1,2 @@
 {% load i18n %}
-{% blocktrans %}{{user}} likes your image: {{url}}{% endblocktrans %}
+{% blocktrans %}{{user}} likes your image: {{title}}{% endblocktrans %}
