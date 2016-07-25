@@ -1065,7 +1065,15 @@ def user_page(request, username):
         viewer_profile = request.user.userprofile
 
     section = 'public'
-    subsection = request.GET.get('sub', 'uploaded')
+    subsection = request.GET.get('sub')
+    if subsection is None:
+        subsection = profile.default_gallery_sorting
+        if subsection == 1: subsection = 'acquired'
+        elif subsection == 2: subsection = 'subject'
+        elif subsection == 3: subsection = 'year'
+        elif subsection == 4: subsection = 'gear'
+        else: subsection = 'uploaded'
+
     active = request.GET.get('active')
     menu = []
 

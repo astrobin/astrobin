@@ -1668,6 +1668,18 @@ class UserProfile(models.Model):
         editable = False,
         default = 'personal')
 
+    default_gallery_sorting = models.SmallIntegerField(
+        choices = (
+            (0, _("Upload time")),
+            (1, _("Acquisition time")),
+            (2, _("Subject type")),
+            (3, _("Year")),
+            (4, _("Gear"))),
+        default = 0,
+        null = False,
+        verbose_name = _("Default gallery sorting"),
+    )
+
     default_license = models.IntegerField(
         choices = LICENSE_CHOICES,
         default = 0,

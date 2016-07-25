@@ -252,7 +252,11 @@ class UserProfileEditGearForm(forms.Form):
 class UserProfileEditPreferencesForm(forms.ModelForm):
     class Meta:
         model = UserProfile
-        fields = ['language', 'exclude_from_competitions',]
+        fields = [
+            'language',
+            'default_gallery_sorting',
+            'exclude_from_competitions',
+        ]
 
 
 class UserProfileEditNotificationsForm(forms.ModelForm):
