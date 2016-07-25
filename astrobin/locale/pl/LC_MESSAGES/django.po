@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2016-05-29 19:48+0100\n"
+"POT-Creation-Date: 2016-07-25 16:14+0100\n"
 "PO-Revision-Date: 2016-02-01 13:25+0000\n"
 "Last-Translator: Lukasz83 <lukasz.sujka83@gmail.com>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -1019,7 +1019,7 @@ msgstr ""
 "umieść link ze zdjęciem w tym pliku. Niestety, Astrobin nie oferuje "
 "przechowywania plików, więc trzeba je przechowywać we własnym zakresie."
 
-#: forms.py:80 models.py:2140 models.py:2222 templates/gear/page.html:197
+#: forms.py:80 models.py:2146 models.py:2228 templates/gear/page.html:197
 #: templates/image/detail/image_title.html:14
 msgid "Link"
 msgstr "Link"
@@ -1030,7 +1030,7 @@ msgstr "Link do TIFF/FITS"
 
 #: forms.py:82 models.py:693 templates/maintenance_base.html:305
 #: templates/profile-edit-menu.html:36
-#: templates/image/detail/image_card.html:88
+#: templates/image/detail/image_card.html:98
 msgid "Locations"
 msgstr "Lokalizacje"
 
@@ -1065,7 +1065,7 @@ msgid "Guiding telescopes or lenses"
 msgstr "Teleskop prowadzący"
 
 #: forms.py:150 forms.py:244 models.py:755 models.py:1659
-#: views/__init__.py:1688
+#: views/__init__.py:1693
 msgid "Mounts"
 msgstr "Montaże"
 
@@ -1078,22 +1078,22 @@ msgid "Guiding cameras"
 msgstr "Kamera guidująca, prowadząca"
 
 #: forms.py:153 forms.py:246 models.py:758 models.py:1661
-#: views/__init__.py:1689
+#: views/__init__.py:1694
 msgid "Focal reducers"
 msgstr "Reduktory ogniskowej"
 
 #: forms.py:154 forms.py:247 models.py:759 models.py:1662
-#: views/__init__.py:197 views/__init__.py:1690 views/image.py:196
+#: views/__init__.py:197 views/__init__.py:1695 views/image.py:201
 msgid "Software"
 msgstr "Oprogramowanie"
 
 #: forms.py:155 forms.py:248 models.py:760 models.py:1663
-#: views/__init__.py:1691
+#: views/__init__.py:1696
 msgid "Filters"
 msgstr "Filtry"
 
 #: forms.py:156 forms.py:249 models.py:761 models.py:1664
-#: views/__init__.py:1692
+#: views/__init__.py:1697
 msgid "Accessories"
 msgstr "Akcesoria"
 
@@ -1127,11 +1127,11 @@ msgstr ""
 "nie będziesz miał możliwości określenia czasu naświetlania dla każdego "
 "filtra osobno."
 
-#: forms.py:243 models.py:1658 views/__init__.py:1686
+#: forms.py:243 models.py:1658 views/__init__.py:1691
 msgid "Telescopes and lenses"
 msgstr "Teleskopy i obiektywy"
 
-#: forms.py:245 models.py:1660 views/__init__.py:1687
+#: forms.py:245 models.py:1660 views/__init__.py:1692
 msgid "Cameras"
 msgstr "Kamery"
 
@@ -1458,7 +1458,7 @@ msgstr "Uznanie autorstwa-Na tych samych warunkach"
 msgid "Attribution-NoDerivs Creative Commons"
 msgstr "Uznanie autorstwa-Bez utworów zależnych"
 
-#: models.py:79 models.py:97 views/image.py:400 views/image.py:402
+#: models.py:79 models.py:97 views/image.py:405 views/image.py:407
 msgid "English"
 msgstr "Angielski"
 
@@ -1952,7 +1952,7 @@ msgid ""
 "Drag items from the right side to the left side, or click on the plus sign."
 msgstr "Przeciągnij elementy z prawej na lewą stronę lub kliknij w plus."
 
-#: models.py:700 models.py:1979 models.py:2229 templates/gear/page.html:47
+#: models.py:700 models.py:1979 models.py:2235 templates/gear/page.html:47
 #: templates/image/detail/image_description.html:7
 msgid "Description"
 msgstr "Opis"
@@ -1984,7 +1984,7 @@ msgstr "(brak tytułu)"
 msgid "Please use the following format: yyyy-mm-dd."
 msgstr "Użyj następującego formatu: yyyy-mm-dd."
 
-#: models.py:1298 models.py:1504 models.py:2205
+#: models.py:1298 models.py:1504 models.py:2211
 msgid "Image"
 msgstr "Zdjęcie"
 
@@ -2029,7 +2029,7 @@ msgstr "9 - Centrum miasta (BIAŁE)"
 msgid "Synthetic channel"
 msgstr "Kanał syntetyczny"
 
-#: models.py:1334 views/__init__.py:198 views/image.py:197
+#: models.py:1334 views/__init__.py:198 views/image.py:202
 msgid "Filter"
 msgstr "Filtr"
 
@@ -2069,7 +2069,7 @@ msgstr "Chłodzenie sensora"
 msgid "The temperature of the chip. E.g.: -20."
 msgstr "Temperatura sensora, np. -20"
 
-#: models.py:1367 views/image.py:327
+#: models.py:1367 views/image.py:332
 msgid "Darks"
 msgstr "Darki"
 
@@ -2077,7 +2077,7 @@ msgstr "Darki"
 msgid "The number of dark frames."
 msgstr "Liczba użytych darków"
 
-#: models.py:1372 views/image.py:328
+#: models.py:1372 views/image.py:333
 msgid "Flats"
 msgstr "Flaty"
 
@@ -2085,7 +2085,7 @@ msgstr "Flaty"
 msgid "The number of flat frames."
 msgstr "Liczba użytych flatów"
 
-#: models.py:1377 views/image.py:329
+#: models.py:1377 views/image.py:334
 msgid "Flat darks"
 msgstr "Darki do flatów"
 
@@ -2093,7 +2093,7 @@ msgstr "Darki do flatów"
 msgid "The number of dark flat frames."
 msgstr "Liczba użytych darków do flatów"
 
-#: models.py:1382 views/image.py:330
+#: models.py:1382 views/image.py:335
 msgid "Bias"
 msgstr "Bias"
 
@@ -2101,7 +2101,7 @@ msgstr "Bias"
 msgid "The number of bias/offset frames."
 msgstr "Liczba użytych klatek bias/offset"
 
-#: models.py:1387 views/image.py:333
+#: models.py:1387 views/image.py:338
 msgid "Bortle Dark-Sky Scale"
 msgstr "Skala jasności nieba Bortle'a"
 
@@ -2121,11 +2121,11 @@ msgstr "Średnie mag/arcsec^2"
 msgid "As measured with your Sky Quality Meter."
 msgstr "Jak zmierzone przy pomocy Miernika Jakości Nieba"
 
-#: models.py:1401 views/image.py:335
+#: models.py:1401 views/image.py:340
 msgid "Mean FWHM"
 msgstr "Średnie FWHM"
 
-#: models.py:1406 views/image.py:336
+#: models.py:1406 views/image.py:341
 msgid "Temperature"
 msgstr "Temperatura"
 
@@ -2398,63 +2398,63 @@ msgid ""
 "the API."
 msgstr "Proszę opisać powód i sposób, w jaki API będzie wykorzystywane."
 
-#: models.py:2117
+#: models.py:2123
 msgid "AUD - Australian dollars"
 msgstr "AUD - Dolary australijskie"
 
-#: models.py:2118
+#: models.py:2124
 msgid "CAD - Canadian dollars"
 msgstr "CAD - Dolary kanadyjskie"
 
-#: models.py:2119
+#: models.py:2125
 msgid "CHF - Swiss francs"
 msgstr "CHF - Franki szwajcarskie"
 
-#: models.py:2120
+#: models.py:2126
 msgid "EUR - Euros"
 msgstr "EUR - Euro"
 
-#: models.py:2121
+#: models.py:2127
 msgid "GPB - Pound stelings"
 msgstr "GBP - Funt szterling"
 
-#: models.py:2122
+#: models.py:2128
 msgid "PLN - Polish zloty"
 msgstr "PLN - Polski złoty"
 
-#: models.py:2123
+#: models.py:2129
 msgid "SEK - Swedish krona"
 msgstr "SEK - Korona szwedzka"
 
-#: models.py:2124
+#: models.py:2130
 msgid "USD - American dollars"
 msgstr "USD - Dolary amerykańskie"
 
-#: models.py:2130 models.py:2180
+#: models.py:2136 models.py:2186
 msgid "Producer"
 msgstr "Producent"
 
-#: models.py:2141 models.py:2223
+#: models.py:2147 models.py:2229
 msgid "The link to this product's page on your website."
 msgstr "Odnośnik to produktu na Twojej stronie."
 
-#: models.py:2149 templates/subscription/subscription_category_list.html:8
+#: models.py:2155 templates/subscription/subscription_category_list.html:8
 msgid "Price"
 msgstr "Cena"
 
-#: models.py:2157
+#: models.py:2163
 msgid "Currency"
 msgstr "Waluta"
 
-#: models.py:2173
+#: models.py:2179
 msgid "Retailed gear items"
 msgstr "Powiązany sprzęt"
 
-#: models.py:2189
+#: models.py:2195
 msgid "Proper make"
 msgstr "Właściwa marka"
 
-#: models.py:2190
+#: models.py:2196
 msgid ""
 "Sometimes, product make/brand/producer/developer names are not written "
 "properly by the users. Write here the proper make/brand/producer/developer "
@@ -2463,11 +2463,11 @@ msgstr ""
 "Czasami marka/producent/nazwa produktu nie są poprawnie wpisywane przez "
 "użytkowników. Wpisz poprawną markę/producenta/nazwę."
 
-#: models.py:2197
+#: models.py:2203
 msgid "Proper name"
 msgstr "Poprawna nazwa"
 
-#: models.py:2198
+#: models.py:2204
 msgid ""
 "Sometimes, product names are not written properly by the users. Write here "
 "the proper product name, not including the make/brand/producer/developer "
@@ -2479,7 +2479,7 @@ msgstr ""
 ">Zaleca się grupowanie wielu produktów tej samej marki, więc wpisz nazwę "
 "generyczną, bez numeru wersji produktu."
 
-#: models.py:2206
+#: models.py:2212
 msgid ""
 "The official, commercial image for this product. Upload an image via the "
 "regular uploading interface, set its subject type to \"Gear\", and then "
@@ -2490,18 +2490,18 @@ msgstr ""
 "inny obraz, wybierz typ - \"Sprzęt', a później wybierz zdjęcie z listy. "
 "Jeżeli dodasz wiele wersji, wszystkie będą dostępne na stronie produktu."
 
-#: models.py:2214
+#: models.py:2220
 msgid "Tagline"
 msgstr "Slogan reklamowy"
 
-#: models.py:2215
+#: models.py:2221
 msgid ""
 "A memorable phrase that will sum up this product, for marketing purposes."
 msgstr ""
 "Łatwe do zapamiętania zdanie, które podsumowuje ten produkt - dla celów "
 "marketingowych."
 
-#: models.py:2230
+#: models.py:2236
 msgid ""
 "Here you can write the full commercial description of your product. You can "
 "use some <a href=\"/faq/#comments\">formatting rules</a>."
@@ -2509,7 +2509,7 @@ msgstr ""
 "Tutaj możesz dodać pełny opis produktu. Możesz używać <a href=\"/faq/"
 "#comments\">formatowania tekstu</a>."
 
-#: models.py:2249
+#: models.py:2255
 msgid "Commercial gear items"
 msgstr "Sprzęt komercyjny"
 
@@ -4179,7 +4179,7 @@ msgstr "Wykonane"
 #: templates/wall.html:37 templates/inclusion_tags/search_image_list.html:36
 #: templates/inclusion_tags/search_image_list.html:89
 #: templates/search/search.html:43 templates/search/search.html.py:306
-#: views/image.py:326
+#: views/image.py:331
 msgid "Integration"
 msgstr "Naświetlanie"
 
@@ -4727,44 +4727,48 @@ msgstr "Możliwe dzięki"
 msgid "Histogram"
 msgstr "Histogram"
 
-#: templates/image/detail/image_card.html:52 views/image.py:320
+#: templates/image/detail/image_card.html:52 views/image.py:325
 msgid "Frames"
 msgstr "Klatki"
 
-#: templates/image/detail/image_card.html:78
+#: templates/image/detail/image_card.html:87
 msgid "RA center"
 msgstr "Środek RA"
 
-#: templates/image/detail/image_card.html:78
-#: templates/image/detail/image_card.html:79
-#: templates/image/detail/image_card.html:83
-#: templates/image/detail/image_card.html:84
+#: templates/image/detail/image_card.html:87
+#: templates/image/detail/image_card.html:88
+#: templates/image/detail/image_card.html:92
+#: templates/image/detail/image_card.html:93
 msgid "degrees"
 msgstr "stopni"
 
-#: templates/image/detail/image_card.html:79
+#: templates/image/detail/image_card.html:88
 msgid "DEC center"
 msgstr "Środek DEC"
 
-#: templates/image/detail/image_card.html:81
+#: templates/image/detail/image_card.html:90
 msgid "Pixel scale"
 msgstr "Wielkość piksela"
 
-#: templates/image/detail/image_card.html:81
+#: templates/image/detail/image_card.html:90
 msgid "arcsec/pixel"
 msgstr "arcsec/piksel"
 
-#: templates/image/detail/image_card.html:83
+#: templates/image/detail/image_card.html:92
 msgid "Orientation"
 msgstr "Orientacja"
 
-#: templates/image/detail/image_card.html:84
+#: templates/image/detail/image_card.html:93
 msgid "Field radius"
 msgstr "Szerokość pola"
 
 #: templates/image/detail/image_title.html:33
 msgid "Contains"
 msgstr "Zawiera"
+
+#: templates/image/detail/iotd_banner.html:17
+msgid "chosen by"
+msgstr ""
 
 #: templates/image/detail/js.html:103 templates/user/profile-js.html:11
 #, python-format
@@ -6072,7 +6076,6 @@ msgid "New image revision by %(originator)s"
 msgstr "Nowa wersja opublikowana przez %(originator)s"
 
 #: templates/notification/new_like/full.txt:2
-#: templates/notification/new_like/short.txt:2
 #, python-format
 msgid "%(user)s likes your image: %(url)s"
 msgstr "%(user)s polubił Twoje zdjęcie: %(url)s"
@@ -6082,6 +6085,11 @@ msgstr "%(user)s polubił Twoje zdjęcie: %(url)s"
 #, python-format
 msgid "<a href=\"%(url)s\"><strong>%(user)s</strong> likes your image!</a>"
 msgstr "<a href=\"%(url)s\"><strong>%(user)s</strong> lubi Twoje zdjęcie!</a>"
+
+#: templates/notification/new_like/short.txt:2
+#, fuzzy, python-format
+msgid "%(user)s likes your image: %(title)s"
+msgstr "%(user)s polubił Twoje zdjęcie: %(url)s"
 
 #: templates/notification/rawdata_invited_to_private_folder/full.txt:2
 #, python-format
@@ -6306,7 +6314,7 @@ msgstr "RA"
 msgid "Dec"
 msgstr "DEC"
 
-#: templates/popover/user.html:19 views/__init__.py:1244
+#: templates/popover/user.html:19 views/__init__.py:1249
 msgid "Member since"
 msgstr "Członek od"
 
@@ -6631,12 +6639,12 @@ msgstr "Podstawowe kryteria"
 msgid "Please input some search terms!"
 msgstr "Wprowadź kryteria wyszukiwania!"
 
-#: templates/search/search.html:307 views/__init__.py:1246
-#: views/__init__.py:1247 views/image.py:326
+#: templates/search/search.html:307 views/__init__.py:1251
+#: views/__init__.py:1252 views/image.py:331
 msgid "hours"
 msgstr "godzin"
 
-#: templates/search/search.html:313 views/image.py:332
+#: templates/search/search.html:313 views/image.py:337
 msgid "Avg. Moon phase"
 msgstr "Średnia faza Księżyca"
 
@@ -6731,7 +6739,7 @@ msgid "Free"
 msgstr "Za darmo"
 
 #: templates/subscription/subscription_category_list.html:47
-#: views/image.py:331
+#: views/image.py:336
 msgid "days"
 msgstr "dni"
 
@@ -7244,7 +7252,7 @@ msgid "Your account was deleted. Thanks for using AstroBin until now!"
 msgstr "Twoje konto zostało usunięte. Dziękujemy za korzystanie z AstroBin!"
 
 #: templates/user/profile/flickr_import.html:10 views/__init__.py:609
-#: views/__init__.py:2084
+#: views/__init__.py:2089
 msgid ""
 "AstroBin is currently in read-only mode, because of server maintenance. "
 "Please try again soon!"
@@ -7462,10 +7470,10 @@ msgstr "Dodaj sprzęt"
 
 #: templates/user/profile/edit/gear.html:168
 #: templates/user/profile/edit/gear.html:243 views/__init__.py:933
-#: views/__init__.py:1019 views/__init__.py:1046 views/__init__.py:1588
-#: views/__init__.py:1601 views/__init__.py:1622 views/__init__.py:1659
-#: views/__init__.py:1749 views/__init__.py:1811 views/__init__.py:2021
-#: views/__init__.py:3120 views/__init__.py:3290 views/image.py:813
+#: views/__init__.py:1019 views/__init__.py:1046 views/__init__.py:1593
+#: views/__init__.py:1606 views/__init__.py:1627 views/__init__.py:1664
+#: views/__init__.py:1754 views/__init__.py:1816 views/__init__.py:2026
+#: views/__init__.py:3125 views/__init__.py:3295 views/image.py:818
 msgid "Form saved. Thank you!"
 msgstr "Zapisane!. Dziękujemy!"
 
@@ -7512,66 +7520,66 @@ msgstr "Wybierz język oraz które powiadomienie e-mail chciałbyś/abyś otrzym
 msgid "Edit your retailer information"
 msgstr "Edytuj swoje informacje handlowe"
 
-#: templatetags/tags.py:67 views/__init__.py:1218 views/__init__.py:2547
+#: templatetags/tags.py:67 views/__init__.py:1223 views/__init__.py:2552
 msgid "minutes"
 msgstr "minut"
 
-#: templatetags/tags.py:68 views/__init__.py:1219 views/__init__.py:2548
+#: templatetags/tags.py:68 views/__init__.py:1224 views/__init__.py:2553
 msgid "seconds ago"
 msgstr "sekund temu."
 
-#: templatetags/tags.py:69 views/__init__.py:1221 views/__init__.py:2550
+#: templatetags/tags.py:69 views/__init__.py:1226 views/__init__.py:2555
 #, python-format
 msgid "%s ago"
 msgstr "%s temu"
 
-#: templatetags/tags.py:227 views/__init__.py:2421
+#: templatetags/tags.py:227 views/__init__.py:2426
 msgid "no alias"
 msgstr "brak innej nazwy"
 
-#: views/__init__.py:173 views/image.py:172
+#: views/__init__.py:173 views/image.py:177
 msgid "Imaging telescope or lens"
 msgid_plural "Imaging telescopes or lenses"
 msgstr[0] "Teleskop główny"
 msgstr[1] "Teleskop główny"
 msgstr[2] "Teleskop główny"
 
-#: views/__init__.py:177 views/image.py:176
+#: views/__init__.py:177 views/image.py:181
 msgid "Imaging camera"
 msgid_plural "Imaging cameras"
 msgstr[0] "Kamery główne"
 msgstr[1] "Kamery główne"
 msgstr[2] "Kamery główne"
 
-#: views/__init__.py:181 views/image.py:180
+#: views/__init__.py:181 views/image.py:185
 msgid "Mount"
 msgid_plural "Mounts"
 msgstr[0] "Montaże"
 msgstr[1] "Montaże"
 msgstr[2] "Montaże"
 
-#: views/__init__.py:185 views/image.py:184
+#: views/__init__.py:185 views/image.py:189
 msgid "Guiding telescope or lens"
 msgid_plural "Guiding telescopes or lenses"
 msgstr[0] "Teleskop prowadzący"
 msgstr[1] "Teleskop prowadzący"
 msgstr[2] "Teleskop prowadzący"
 
-#: views/__init__.py:189 views/image.py:188
+#: views/__init__.py:189 views/image.py:193
 msgid "Guiding camera"
 msgid_plural "Guiding cameras"
 msgstr[0] "Kamera guidująca, prowadząca"
 msgstr[1] "Kamera guidująca, prowadząca"
 msgstr[2] "Kamera guidująca, prowadząca"
 
-#: views/__init__.py:193 views/image.py:192
+#: views/__init__.py:193 views/image.py:197
 msgid "Focal reducer"
 msgid_plural "Focal reducers"
 msgstr[0] "Reduktory ogniskowej"
 msgstr[1] "Reduktory ogniskowej"
 msgstr[2] "Reduktory ogniskowej"
 
-#: views/__init__.py:202 views/image.py:201
+#: views/__init__.py:202 views/image.py:206
 msgid "Accessory"
 msgid_plural "Accessories"
 msgstr[0] "Akcesoria"
@@ -7582,7 +7590,7 @@ msgstr[2] "Akcesoria"
 msgid "Today's 'Image of the day' was already chosen. Come back tomorrow!"
 msgstr "'Zdjęcie dnia' zostało już wybrane. Proszę wróć tu jutro!"
 
-#: views/__init__.py:598 views/__init__.py:2073
+#: views/__init__.py:598 views/__init__.py:2078
 msgid ""
 "Invalid image or no image provided. Allowed formats are JPG, PNG and GIF."
 msgstr ""
@@ -7593,7 +7601,7 @@ msgstr ""
 msgid "You have reached your image uploads limit. Please upgrade!"
 msgstr "Osiągnąłeś limit zdjęć. Ulepsz konto do Premium!"
 
-#: views/__init__.py:629 views/__init__.py:2104
+#: views/__init__.py:629 views/__init__.py:2109
 msgid ""
 "You uploaded an Indexed PNG file. AstroBin will need to lower the color "
 "count to 256 in order to work with it."
@@ -7603,7 +7611,7 @@ msgstr ""
 
 #: views/__init__.py:863 views/__init__.py:922 views/__init__.py:989
 #: views/__init__.py:1001 views/__init__.py:1013 views/__init__.py:1037
-#: views/__init__.py:1739
+#: views/__init__.py:1744
 msgid ""
 "There was one or more errors processing the form. You may need to scroll "
 "down to see them."
@@ -7635,31 +7643,31 @@ msgstr "Nie podano żadnych obiektów"
 msgid "No acquisition details specified"
 msgstr "Brak szczegółów naświetlania"
 
-#: views/__init__.py:1245
+#: views/__init__.py:1250
 msgid "Last login"
 msgstr "Ostatnie logowanie"
 
-#: views/__init__.py:1246
+#: views/__init__.py:1251
 msgid "Total integration time"
 msgstr "Sumaryczny czas naświetlania"
 
-#: views/__init__.py:1247
+#: views/__init__.py:1252
 msgid "Average integration time"
 msgstr "Średni czas naświetlania"
 
-#: views/__init__.py:1248
+#: views/__init__.py:1253
 msgid "Forum posts"
 msgstr "Posty na froum"
 
-#: views/__init__.py:2127
+#: views/__init__.py:2132
 msgid "Image uploaded. Thank you!"
 msgstr "Zapisane! Dziękujemy!"
 
-#: views/__init__.py:3080 views/__init__.py:3273
+#: views/__init__.py:3085 views/__init__.py:3278
 msgid "You can't merge a product to itself."
 msgstr "Nie możesz połączyć produktu z nim samym."
 
-#: views/__init__.py:3311
+#: views/__init__.py:3316
 msgid "Default front page section changed."
 msgstr "Czcionka została zmieniona"
 
@@ -7670,41 +7678,41 @@ msgstr ""
 "Dziękujemy za raport o problemie. Wszystkie miniaturki będę wygenerowane "
 "jeszcze raz."
 
-#: views/image.py:318
+#: views/image.py:323
 msgid "Resolution"
 msgstr "Rozdzielczość"
 
-#: views/image.py:319 views/image.py:485
+#: views/image.py:324 views/image.py:490
 msgid "Dates"
 msgstr "Daty"
 
-#: views/image.py:331
+#: views/image.py:336
 msgid "Avg. Moon age"
 msgstr "Średni wiek Księżyca (po nowiu)"
 
-#: views/image.py:334
+#: views/image.py:339
 msgid "Mean SQM"
 msgstr "Średni SQM"
 
-#: views/image.py:600
+#: views/image.py:605
 msgid "Image deleted."
 msgstr "Twój obraz został usunięty"
 
-#: views/image.py:636 views/image.py:706
+#: views/image.py:641 views/image.py:711
 msgid "Revision deleted."
 msgstr "Wybrana wersja zdjęcia została usunięta."
 
-#: views/image.py:738
+#: views/image.py:743
 #, fuzzy
 msgid "Image moved to the staging area."
 msgstr "Przesuń do przechowalni"
 
-#: views/image.py:785
+#: views/image.py:790
 #, fuzzy
 msgid "Image moved to the public area."
 msgstr "Przenieś do galerii publicznej"
 
-#: views/image.py:818
+#: views/image.py:823
 #, fuzzy
 msgid "There was one or more errors processing the form. "
 msgstr ""
