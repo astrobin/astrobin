@@ -341,7 +341,7 @@ class ImageTest(TestCase):
 
         # Correct revision displayed in gallery
         response = self.client.get(reverse('user_page', kwargs = {'username': 'test'}))
-        self.assertContains(response, image.thumbnail('thumb', thumbnail_settings = {'revision_label': 'B'}))
+        self.assertContains(response, image.thumbnail('gallery', thumbnail_settings = {'revision_label': 'B'}))
 
         response = self.client.get(reverse('image_detail', kwargs = {'id': image.id, 'r': '0'}))
         self.assertContains(response, image.thumbnail('regular'))
@@ -692,10 +692,8 @@ class ImageTest(TestCase):
             target_status_code = 200)
 
         # Invalid form
-        with self.assertRaisesMessage(
-                ValueError,
-                "The Image could not be changed because the data didn't validate."):
-            response = self.client.post(get_url((image.pk,)), {})
+        response = self.client.post(get_url((image.pk,)), {})
+        self.assertContains(response, "This field is required");
         self.client.logout()
 
         # Anonymous GET

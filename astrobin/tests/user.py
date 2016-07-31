@@ -406,7 +406,7 @@ class UserTest(TestCase):
         from astrobin.search_indexes import UserIndex
         userIndex = UserIndex(User)
         index = userIndex.prepare_normalized_likes(self.user)
-        self.assertEquals(index, -1)
+        self.assertEquals(index, 0.0)
 
         # Check that the IOTD banner is not visible
         image = Image.all_objects.get(pk = image.pk)
