@@ -4,11 +4,11 @@
 <script type="text/javascript">
 $(document).ready(function() {
     astrobin_common.init(
-        '{{user.username}}',
+        '{{requested_user.username}}',
         {
             message_action: {
                 dialog: {
-                    title : "{% blocktrans with user.username as username %}Send {{username}} a message{% endblocktrans %}",
+                    title : "{% blocktrans with requested_user.username as username %}Send {{username}} a message{% endblocktrans %}",
                     body  : "",
                     button: "{% trans "Send" %} &rarr;"
                 },

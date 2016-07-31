@@ -6,7 +6,7 @@
 {% block title %}AstroBin - {% trans "Delete account" %}{% endblock %}
 {% block content %}
     <div class="row">
-        {% include 'profile-edit-menu.html' %}
+        {% include 'user/profile/edit/navigation.html' %}
         <div class="span9">
             <h1>{% trans "Delete account" %}</h1>
             {% if request.method == 'GET' %}

@@ -1,0 +1,41 @@
+{% extends 'base.html' %}
+
+{% load i18n %}
+{% load astrobin_apps_donations_tags %}
+
+{% block title %}{% blocktrans with user=requested_user.userprofile %}{{user}}'s gallery{% endblocktrans %}{% endblock %}
+
+
+{% block content %}
+    {% include 'user/profile/navigation.html' %}
+
+    <div class="row">
+        {% if not form %}
+            <div class="span3">
+                {% include 'user/profile/meta.html' %}
+            </div>
+        {% endif %}
+
+        {% if not form %}
+        <div class="span9">
+        {% else %}
+        <div class="span12">
+        {% endif %}
+            {% block collections_content %}{% endblock %}
+        </div>
+    </div> <!-- row -->
+{% endblock %}
+
+{% block modals %}
+    {% if request.user == user and user|is_donor %}
+        {% cancel_donation_modal %}
+    {% endif %}
+
+    {% if ADS_ENABLED and not request.user|is_donor %}
+        {% remove_ads_modal %}
+    {% endif %}
+{% endblock %}
+
+{% block extra_js %}
+    {% include 'user/profile/js.html' %}
+{% endblock %}

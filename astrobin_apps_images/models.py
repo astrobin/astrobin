@@ -23,6 +23,7 @@ class ThumbnailGroup(models.Model):
     regular_inverted = models.CharField(max_length = 512, null = True, blank = True)
     gallery          = models.CharField(max_length = 512, null = True, blank = True)
     gallery_inverted = models.CharField(max_length = 512, null = True, blank = True)
+    collection       = models.CharField(max_length = 512, null = True, blank = True)
     thumb            = models.CharField(max_length = 512, null = True, blank = True)
     revision         = models.CharField(max_length = 512, null = True, blank = True)
     histogram        = models.CharField(max_length = 512, null = True, blank = True)

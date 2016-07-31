@@ -1,0 +1,25 @@
+{% load i18n %}
+
+<div class="modal hide fade" id="delete-modal">
+    <div class="modal-header">
+        <a class="close" data-dismiss="modal">&times;</a>
+        <h3>{% trans "Delete collection?" %}</h3>
+    </div>
+    <div class="modal-body">
+        <div class="well">
+            {% trans "The collection will be permanently deleted and cannot be recovered. The images it contains, though, are not going to be deleted. Are you sure?" %}
+        </div>
+
+        <form
+            class="form-inline"
+            {% if collection %}
+                action="{% url user_collections_delete requested_user collection.pk %}"
+            {% else %}
+                action="#"
+            {% endif %}
+            method="post">{% csrf_token %}
+            <input class="btn btn-primary" type="submit" value="{% trans "Delete" %}"/>
+        </form>
+    </div>
+</div>
+

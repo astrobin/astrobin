@@ -4198,3 +4198,102 @@ pre {
 .table.migrate-donations {
     margin-bottom: 30px;
 }
+
+.collections {
+    margin: 0;
+
+    >.collection {
+        width: 170px;
+        height: 170px;
+        margin-bottom: 50px;
+        padding: 2px;
+        float: left;
+        position: relative;
+
+        >.collection-image {
+            background: url('../images/collection-frame.png');
+            width: 100%;
+            height: 100%;
+            font-size: 100px;
+            line-height: 150px;
+            font-weight: bold;
+            text-align: center;
+            text-shadow: 1px 1px 1px black;
+
+            &.empty {
+                background: url('../images/collection-frame-empty.png');
+            }
+
+            >a {
+                color: #ddd;
+                display: block;
+
+                &:hover {
+                    color: @link-color;
+                }
+
+                >.astrobin-image-container {
+                    position: absolute;
+                    top: 0;
+                    left: 25px;
+                }
+            }
+        }
+
+        >.collection-tools {
+            visibility: hidden;
+            position: absolute;
+            left: 25px;
+            bottom: 25px;
+            width: 123px;
+            background-color: rgba(255,255,255,0.1);
+            border-top: 1px solid #555;
+            text-align: center;
+            text-shadow: 1px 1px 1px #222;
+            font-size: 15px;
+
+            a {
+                display: inline-block;
+                padding: 5px;
+            }
+        }
+
+        &:hover >.collection-tools {
+            visibility: visible;
+        }
+
+        >.collection-name {
+            font-weight: bold;
+            text-align: center;
+            max-height: 40px;
+            overflow: hidden;
+
+            a {
+                color: #ddd;
+
+                &:hover {
+                    color: @link-color;
+                }
+            }
+        }
+    }
+}
+
+.collection-detail {
+    h1 {
+        text-align: center;
+        border-bottom: 1px solid #555;
+        padding-bottom: 10px;
+    }
+
+    .thumbnails {
+        margin-top: 40px;
+    }
+}
+
+.collection-add-remove-form .ui-multiselect {
+    ul.available, ul.selected {
+        background: (@light-panel-color) url('../images/light-panel-tile.png');
+        min-height: 300px;
+    }
+} 

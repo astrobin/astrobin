@@ -29,9 +29,17 @@ def current(request, pattern):
 @register.simple_tag
 def in_gallery(request):
     import re
-    if re.search('/users/[\w.@+-]+/$', request.path):
+    if re.search('/users/[\w.@+-]+/(?:collections.*)?$', request.path):
         return 'visible'
     return 'hidden'
+
+@register.simple_tag
+def in_collection(request):
+    import re
+    if re.search('/users/[\w.@+-]+/collections/(\d+)/$', request.path):
+        return 'visible'
+    return 'hidden'
+
 
 @register.inclusion_tag('inclusion_tags/related_images.html')
 def related_images(request, object_list, type):

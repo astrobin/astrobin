@@ -12,7 +12,7 @@
                 <span class="caret"></span>
             </a>
             <ul class="dropdown-menu">
-                {% ifequal request.user user %}
+                {% ifequal request.user requested_user %}
                     {% if is_producer or is_retailer %}
                         <li>
                             <a href="{% url 'user_page_commercial_products' request.user %}">
@@ -23,7 +23,7 @@
                     {% endif %}
                 {% endifequal %}
                 <li>
-                    <a href="{% url 'user_page' user %}{% query_string "public=" "sub,active" %}">
+                    <a href="{% url 'user_page' requested_user %}{% query_string "public=" "sub,active" %}">
                         <i class="icon-picture"></i>
                         {% trans "Gallery" %}
                     </a>
@@ -37,35 +37,35 @@
                 </li>
                 {% endif %}
                 <li>
-                    <a href="{% url 'user_page_bookmarks' user %}">
+                    <a href="{% url 'user_page_bookmarks' requested_user %}">
                         <i class="icon-bookmark"></i>
                         {% trans "Bookmarks" %}
                     </a>
                 </li>
                 <li>
-                    <a href="{% url 'user_page_plots' user %}">
+                    <a href="{% url 'user_page_plots' requested_user %}">
                         <i class="icon-bar-chart"></i>
                         {% trans "Plots" %}
                     </a>
                 </li>
 
-                {% ifequal user request.user %}
+                {% ifequal requested_user request.user %}
                 <li class="divider"></li>
                 <li>
-                    <a href="{% query_string "" "sub,active,staging" %}">
+                    <a href="{% url 'user_page' requested_user %}{% query_string "" "sub,active,staging" %}">
                         <i class="icon-bullhorn"></i>
                         {% trans "Public Area" %}
                     </a>
                 </li>
                 <li>
-                    <a href="{% query_string "staging=" "sub,public,active" %}">
+                    <a href="{% url 'user_page' requested_user %}{% query_string "sub=uploaded,staging=" "public,active" %}">
                         <i class="icon-lock"></i>
                         {% trans "Staging Area" %}
                     </a>
                 </li>
                 <li class="divider"></li>
                 <li>
-                    <a href="{% url 'user_page_api_keys' user %}">
+                    <a href="{% url 'user_page_api_keys' requested_user %}">
                         <i class="icon-key"></i>
                         {% trans "API Keys" %}
                     </a>
@@ -74,13 +74,13 @@
 
                 <li class="divider"></li>
                 <li>
-                    <a href="{% url 'user_page_following' user %}">
+                    <a href="{% url 'user_page_following' requested_user %}">
                         <i class="icon-eye-open"></i>
                         {% trans "Following" %}
                     </a>
 
                 <li>
-                    <a href="{% url 'user_page_followers' user %}">
+                    <a href="{% url 'user_page_followers' requested_user %}">
                         <i class="icon-eye-open"></i>
                         {% trans "Followers" %}
                     </a>
@@ -88,7 +88,7 @@
             </ul>
         </li>
 
-        {% if request.user != user and request.user.is_authenticated %}
+        {% if request.user != requested_user and request.user.is_authenticated %}
         <li class="dropdown">
             <a class="dropdown-toggle" data-toggle="dropdown" href="#">
                 <i class="icon-user icon-white"></i>
@@ -97,7 +97,7 @@
             </a>
             <ul class="dropdown-menu">
                 <li>
-                    <a class="send-private-message" href="{% url 'messages_compose_to' user %}{% query_string "next=request.path" "" %}">
+                    <a class="send-private-message" href="{% url 'messages_compose_to' requested_user %}{% query_string "next=request.path" "" %}">
                         <i class="icon-envelope"></i>
                         {% trans "Send private message" %}
                     </a>
@@ -113,29 +113,53 @@
                 <span class="caret"></span>
             </a>
             <ul class="dropdown-menu">
-                <li><a href="{% query_string "public=,sub=uploaded" "staging,active" %}">
+                <li><a href="{% url 'user_collections_list' requested_user %}">
+                    <i class="icon-folder-open-alt"></i>
+                    {% trans "Collections" %}</a></li>
+                <li><a href="{% url 'user_page' requested_user %}{% query_string "public=,sub=uploaded" "staging,active" %}">
                     <i class="icon-upload-alt"></i>
                     {% trans "Upload time" %}</a></li>
-                <li><a href="{% query_string "public=,sub=acquired" "staging,active" %}">
+                <li><a href="{% url 'user_page' requested_user %}{% query_string "public=,sub=acquired" "staging,active" %}">
                     <i class="icon-time"></i>
                     {% trans "Acquisition time" %}</a></li>
-                <li><a href="{% query_string "public=,sub=subject" "staging,active" %}">
+                <li><a href="{% url 'user_page' requested_user %}{% query_string "public=,sub=subject" "staging,active" %}">
                     <i class="icon-tags"></i>
                     {% trans "Subject type" %}</a></li>
-                <li><a href="{% query_string "public=,sub=year" "staging,active" %}">
+                <li><a href="{% url 'user_page' requested_user %}{% query_string "public=,sub=year" "staging,active" %}">
                     <i class="icon-calendar"></i>
                     {% trans "Year" %}</a></li>
-                <li><a href="{% query_string "public=,sub=gear" "staging,active" %}">
+                <li><a href="{% url 'user_page' requested_user %}{% query_string "public=,sub=gear" "staging,active" %}">
                     <i class="icon-cog"></i>
                     {% trans "Gear" %}</a></li>
                 <li class="divider"></li>
-                <li><a href="{% query_string "public=,sub=nodata" "staging,active" %}">
+                <li><a href="{% url 'user_page' requested_user %}{% query_string "public=,sub=nodata" "staging,active" %}">
                     <i class="icon-warning-sign"></i>
                     {% trans "Lacking data" %}</a></li>
             </ul>
         </li>
 
-        <li class="pull-right">
+        {% if collection %}
+            <li class="dropdown">
+                <a class="dropdown-toggle" data-toggle="dropdown" href="#">
+                    <i class="icon-wrench"></i>
+                    {% trans "Collection tools" %}
+                    <span class="caret"></span>
+                </a>
+                <ul class="dropdown-menu">
+                    <li><a href="{% url 'user_collections_add_remove_images' requested_user collection.pk %}" data-toggle="modal">
+                        <i class="icon-edit"></i>
+                        {% trans "Add/remove images" %}</a></li>
+                    <li><a href="{% url 'user_collections_update' requested_user collection.pk %}?next={{request.path}}">
+                        <i class="icon-edit"></i>
+                        {% trans "Edit" %}</a></li>
+                    <li><a class="danger" href="#delete-modal" data-toggle="modal">
+                        <i class="icon-trash"></i>
+                        {% trans "Delete" %}</a></li>
+                </ul>
+            </li>
+        {% endif %}
+
+        <li class="pull-right" style="visibility: {% in_gallery request %}">
             {% ifequal request.GET.view 'list' %}
                 <a href="{% query_string "" "view" %}">
                     <i class="icon-th"></i>

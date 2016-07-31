@@ -1,0 +1,99 @@
+{% load astrobin_apps_premium_tags %}
+{% load astrobin_apps_users_tags %}
+{% load common_tags %}
+{% load dfp_tags %}
+{% load tags %}
+
+{% load i18n %}
+
+{% astrobin_user requested_user %}
+
+{% if PREMIUM_ENABLED and requested_user == request.user %}
+<div class="subtle-container simple-continer">
+    <div class="header">
+        <h4>{% trans "Subscription" %}</h4>
+    </div>
+    <p>
+        {% trans "Type" %}<br/>
+        <strong>
+            {% if requested_user|is_free %}AstroBin Free{% endif %}
+            {% if requested_user|is_lite %}AstroBin Lite{% endif %}
+            {% if requested_user|is_premium %}AstroBin Premium{% endif %}
+        </strong>
+    </p>
+
+    {% if requested_user|is_lite or requested_user|is_premium %}
+    <p>
+        {% trans "Expiration date" %}<br/>
+        <strong>
+            {% with expiration=requested_user|get_premium_subscription_expiration %}
+                {{expiration|date:"SHORT_DATE_FORMAT"}}
+            {% endwith %}
+        </strong>
+    </p>
+    {% endif %}
+
+    {% if requested_user|is_free or requested_user|is_lite %}
+    <p>
+        {% trans "Uploads used" %}</br>
+        <strong>
+            {{requested_user.userprofile.premium_counter}} /
+            {% if requested_user|is_free %}{{PREMIUM_MAX_IMAGES_FREE}}{% endif %}
+            {% if requested_user|is_lite %}{{PREMIUM_MAX_IMAGES_LITE}}{% endif %}
+        </strong>
+    </p>
+    {% endif %}
+
+    {% if requested_user|is_lite or requested_user|is_premium %}
+    <p class="small"><em>{% trans "Thanks for your support!" %}</em></p>
+    {% endif %}
+</div>
+{% endif %}
+
+{% if menu %}
+    <ul class="nav nav-tabs nav-stacked">
+        {% for item in menu %}
+            <li{% if item.0 == active %} class="active"{% endif %}>
+                <a href="{% url user_page requested_user %}{% query_string "active=item.0" "" %}">
+                    {{item.1}}
+                    <i class="icon-chevron-right"></i>
+                </a>
+            </li>
+        {% endfor %}
+    </ul>
+{% endif %}
+
+{% if request.user|show_ads %}
+    <div class="subtle-container simple-container advertisement visible-desktop">
+        <div class="header">
+            <h4><i class="icon-bullhorn"></i></h4>
+
+            {% if request.user.is_authenticated and DONATIONS_ENABLED %}
+                <a class="remove" data-toggle="modal" href="#remove-ads-modal">
+                    <i class="icon-remove"></i>
+                </a>
+            {% endif %}
+        </div>
+
+        {% dfp_tag '47890729/user-page' 220 600 brands='' %}
+    </div>
+{% endif %}
+
+{% if stats %}
+<div class="subtle-container">
+    <div class="header">
+        <h4>
+            {% trans "Stats" %}
+        </h4>
+    </div>
+
+    {% for i in stats %}
+        {% if i.1 %}
+            <p>
+                {{i.0}}<br/>
+                <strong>{{i.1}}</strong>
+            </p>
+        {% endif %}
+    {% endfor %}
+</div>
+{% endif %}

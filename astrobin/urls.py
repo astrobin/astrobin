@@ -28,12 +28,14 @@ from astrobin import views
 from astrobin.views import (
     api as api_views,
     image as image_views,
-    moderation as moderation_views)
+    moderation as moderation_views,
+    collections as collections_views)
 from astrobin.api import (
     ImageOfTheDayResource,
     ImageResource,
     ImageRevisionResource,
-    LocationResource)
+    LocationResource,
+    CollectionResource)
 from astrobin.forms import AdvancedSearchForm
 from astrobin.search import SearchView
 
@@ -45,6 +47,7 @@ v1_api.register(LocationResource())
 v1_api.register(ImageResource())
 v1_api.register(ImageRevisionResource())
 v1_api.register(ImageOfTheDayResource())
+v1_api.register(CollectionResource())
 
 urlpatterns = patterns('',
     ###########################################################################
@@ -160,6 +163,12 @@ urlpatterns = patterns('',
     url(r'^(?P<id>\d+)/stats/views/(?P<period>\w+)/$', views.stats_get_image_views_ajax, name = 'stats_image_views'),
     url(r'^me/$', views.me, name='me'),
     url(r'^users/(?P<username>[\w.@+-]+)/$', views.user_page, name='user_page'),
+    url(r'^users/(?P<username>[\w.@+-]+)/collections/$', collections_views.UserCollectionsList.as_view(), name='user_collections_list'),
+    url(r'^users/(?P<username>[\w.@+-]+)/collections/create/$', collections_views.UserCollectionsCreate.as_view(), name='user_collections_create'),
+    url(r'^users/(?P<username>[\w.@+-]+)/collections/(?P<collection_pk>\d+)/$', collections_views.UserCollectionsDetail.as_view(), name='user_collections_detail'),
+    url(r'^users/(?P<username>[\w.@+-]+)/collections/(?P<collection_pk>\d+)/update/$', collections_views.UserCollectionsUpdate.as_view(), name='user_collections_update'),
+    url(r'^users/(?P<username>[\w.@+-]+)/collections/(?P<collection_pk>\d+)/add-remove-images/$', collections_views.UserCollectionsAddRemoveImages.as_view(), name='user_collections_add_remove_images'),
+    url(r'^users/(?P<username>[\w.@+-]+)/collections/(?P<collection_pk>\d+)/delete/$', collections_views.UserCollectionsDelete.as_view(), name='user_collections_delete'),
     url(r'^users/(?P<username>[\w.@+-]+)/apikeys/$', views.user_page_api_keys, name='user_page_api_keys'),
     url(r'^users/(?P<username>[\w.@+-]+)/ban/$', views.user_ban, name='user_ban'),
     url(r'^users/(?P<username>[\w.@+-]+)/bookmarks/$', views.user_page_bookmarks, name='user_page_bookmarks'),

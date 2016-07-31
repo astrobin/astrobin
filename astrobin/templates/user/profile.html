@@ -1,167 +1,73 @@
 {% extends 'base.html' %}
 
 {% load astrobin_apps_donations_tags %}
-{% load astrobin_apps_premium_tags %}
-{% load astrobin_apps_users_tags %}
 {% load avatar_tags %}
-{% load common_tags %}
 {% load i18n %}
 {% load tags %}
 {% load toggleproperty_tags %}
-{% load dfp_tags %}
 
-{% block title %}{% blocktrans with user=user.userprofile %}{{user}}'s gallery{% endblocktrans %}{% endblock %}
+{% block title %}{% blocktrans with user=requested_user.userprofile %}{{user}}'s gallery{% endblocktrans %}{% endblock %}
 
 {% block content %}
-<a name="page_anchor"></a>
-{% include 'user/profile-subnav.html' %}
+    <a name="page_anchor"></a>
 
-{% if user == request.user and section == 'staging' %}
-<div class="well">
-    {% blocktrans %}These are your "work in progress" images: only you can see this list. You can show people individual images by sharing them using the <em>Share</em> menu.{% endblocktrans %}
-</div>
-{% endif %}
+    {% include 'user/profile/navigation.html' %}
 
-<div class="row">
-    <div class="span3">
-        {% astrobin_user user %}
-
-        {% if PREMIUM_ENABLED and user == request.user %}
-        <div class="subtle-container simple-continer">
-            <div class="header">
-                <h4>{% trans "Subscription" %}</h4>
-            </div>
-            <p>
-                {% trans "Type" %}<br/>
-                <strong>
-                    {% if user|is_free %}AstroBin Free{% endif %}
-                    {% if user|is_lite %}AstroBin Lite{% endif %}
-                    {% if user|is_premium %}AstroBin Premium{% endif %}
-                </strong>
-            </p>
-
-            {% if user|is_lite or user|is_premium %}
-            <p>
-                {% trans "Expiration date" %}<br/>
-                <strong>
-                    {% with expiration=user|get_premium_subscription_expiration %}
-                        {{expiration|date:"SHORT_DATE_FORMAT"}}
-                    {% endwith %}
-                </strong>
-            </p>
-            {% endif %}
-
-            {% if user|is_free or user|is_lite %}
-            <p>
-                {% trans "Uploads used" %}</br>
-                <strong>
-                    {{user.userprofile.premium_counter}} /
-                    {% if user|is_free %}{{PREMIUM_MAX_IMAGES_FREE}}{% endif %}
-                    {% if user|is_lite %}{{PREMIUM_MAX_IMAGES_LITE}}{% endif %}
-                </strong>
-            </p>
-            {% endif %}
-
-            {% if user|is_lite or user|is_premium %}
-            <p class="small"><em>{% trans "Thanks for your support!" %}</em></p>
-            {% endif %}
-        </div>
-        {% endif %}
-
-        {% if menu %}
-            <ul class="nav nav-tabs nav-stacked">
-                {% for item in menu %}
-                    <li{% if item.0 == active %} class="active"{% endif %}>
-                        <a href="{% url user_page user %}{% query_string "active=item.0" "" %}">
-                            {{item.1}}
-                            <i class="icon-chevron-right"></i>
-                        </a>
-                    </li>
-                {% endfor %}
-            </ul>
-        {% endif %}
-
-        {% if request.user|show_ads %}
-            <div class="subtle-container simple-container advertisement visible-desktop">
-                <div class="header">
-                    <h4><i class="icon-bullhorn"></i></h4>
-
-                    {% if request.user.is_authenticated and DONATIONS_ENABLED %}
-                        <a class="remove" data-toggle="modal" href="#remove-ads-modal">
-                            <i class="icon-remove"></i>
-                        </a>
-                    {% endif %}
-                </div>
-
-                {% dfp_tag '47890729/user-page' 220 600 brands='' %}
-            </div>
-        {% endif %}
-
-        {% if stats %}
-        <div class="subtle-container">
-            <div class="header">
-                <h4>
-                    {% trans "Stats" %}
-                </h4>
-            </div>
-
-            {% for i in stats %}
-                {% if i.1 %}
-                    <p>
-                        {{i.0}}<br/>
-                        <strong>{{i.1}}</strong>
-                    </p>
-                {% endif %}
-            {% endfor %}
-        </div>
-        {% endif %}
-
+    {% if requested_user == request.user and section == 'staging' %}
+    <div class="well">
+        {% blocktrans %}These are your "work in progress" images: only you can see this list. You can show people individual images by sharing them using the <em>Share</em> menu.{% endblocktrans %}
     </div>
+    {% endif %}
 
-    <div class="span9"> <!-- images -->
-        {% if subsection == 'nodata' %}
-        <div class="well">
-            {% blocktrans %}These images don't have enough data. It's a shame...{% endblocktrans %}
-            {% if request.user = user %}
-                {% blocktrans %}If you want your images to be categorized in albums, you should really fill in some data. Imaging telescopes, imaging cameras and subjects are the bare minimum. Dates of acquisitions are very important too.{% endblocktrans %}
-            {% endif %}
+    <div class="row">
+        <div class="span3">
+            {% include 'user/profile/meta.html' %}
         </div>
-        {% endif %}
 
-        {% image_list image_list %}
-    </div> <!-- images -->
-</div> <!-- row -->
+        <div class="span9"> <!-- images -->
+            {% if subsection == 'nodata' %}
+            <div class="well">
+                {% blocktrans %}These images don't have enough data. It's a shame...{% endblocktrans %}
+                {% if request.user = requested_user %}
+                    {% blocktrans %}If you want your images to be categorized in albums, you should really fill in some data. Imaging telescopes, imaging cameras and subjects are the bare minimum. Dates of acquisitions are very important too.{% endblocktrans %}
+                {% endif %}
+            </div>
+            {% endif %}
 
-{% if request.user == user %}
-<noscript>
-<div class="tools-box clear">
-    <h2>{% trans "Tools" %}</h2>
-    <ul>
-        <li>
-            <a href="{% url profile_edit_basic %}">
-                <img src="{{STATIC_URL}}icons/iconic/orange/edit_profile.png" alt="{% trans "Edit profile" %}"/>
-            </a>
-            <a href="{% url profile_edit_basic %}">
-                {% trans "Edit profile" %}
-            </a>
-        </li>
-        <li>
-            <a href="{% url auth_logout %}">
-                <img src="{{STATIC_URL}}icons/iconic/orange/logout.png" alt="{% trans "Logout" %}"/>
-            </a>
-            <a href="{% url auth_logout %}">
-                {% trans "Logout" %}
-            </a>
-        </li>
-    </ul>
-</div>
-</noscript>
-{% endif %}
-</div> <!-- profile -->
+            {% image_list image_list %}
+        </div> <!-- images -->
+    </div> <!-- row -->
+
+    {% if request.user == requested_user %}
+    <noscript>
+    <div class="tools-box clear">
+        <h2>{% trans "Tools" %}</h2>
+        <ul>
+            <li>
+                <a href="{% url profile_edit_basic %}">
+                    <img src="{{STATIC_URL}}icons/iconic/orange/edit_profile.png" alt="{% trans "Edit profile" %}"/>
+                </a>
+                <a href="{% url profile_edit_basic %}">
+                    {% trans "Edit profile" %}
+                </a>
+            </li>
+            <li>
+                <a href="{% url auth_logout %}">
+                    <img src="{{STATIC_URL}}icons/iconic/orange/logout.png" alt="{% trans "Logout" %}"/>
+                </a>
+                <a href="{% url auth_logout %}">
+                    {% trans "Logout" %}
+                </a>
+            </li>
+        </ul>
+    </div>
+    </noscript>
+    {% endif %}
+    </div> <!-- profile -->
 {% endblock %}
 
 {% block modals %}
-    {% if request.user == user and user|is_donor %}
+    {% if request.user == requested_user and requested_user|is_donor %}
         {% cancel_donation_modal %}
     {% endif %}
 
@@ -171,5 +77,5 @@
 {% endblock %}
 
 {% block extra_js %}
-    {% include 'user/profile-js.html' %}
+    {% include 'user/profile/js.html' %}
 {% endblock %}

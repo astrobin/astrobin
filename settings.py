@@ -12,7 +12,7 @@ CACHE = not DEBUG
 TEMPLATE_DEBUG = DEBUG
 MAINTENANCE_MODE = False
 READONLY_MODE = False
-MEDIA_VERSION = '114'
+MEDIA_VERSION = '115'
 LONGPOLL_ENABLED = False
 ADS_ENABLED = True
 DONATIONS_ENABLED = False
@@ -605,6 +605,7 @@ THUMBNAIL_ALIASES = {
 
         'gallery': {'size': (130, 130), 'crop': 'smart', 'rounded': True, 'quality': 80},
         'gallery_inverted': {'size': (130, 130), 'crop': 'smart', 'rounded': True, 'quality': 80, 'invert': True},
+        'collection': {'size': (123, 123), 'crop': 'smart', 'quality': 60},
         'thumb': {'size': (80, 80), 'crop': True, 'rounded': 'smart', 'quality': 60},
 
         # Tricks

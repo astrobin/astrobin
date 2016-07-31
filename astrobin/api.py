@@ -5,7 +5,7 @@ from tastypie.resources import ModelResource, ALL, ALL_WITH_RELATIONS
 from tastypie import fields
 from tastypie.authentication import Authentication
 
-from astrobin.models import Location, Image, ImageRevision, ImageOfTheDay, App
+from astrobin.models import Location, Image, ImageRevision, ImageOfTheDay, App, Collection
 from astrobin.models import SOLAR_SYSTEM_SUBJECT_CHOICES
 
 
@@ -291,3 +291,23 @@ class ImageOfTheDayResource(ModelResource):
             'date',
         ]
         allowed_methods = ['get']
+
+
+class CollectionResource(ModelResource):
+    date_created = fields.DateField('date_created')
+    date_updated = fields.DateField('date_updated')
+    user = fields.CharField('user__username')
+    name = fields.CharField('name')
+    description = fields.CharField('description')
+    images = fields.ToManyField(ImageResource, 'images')
+
+    class Meta:
+        authentication = AppAuthentication()
+        allowed_methods = ['get']
+        queryset = Collection.objects.all()
+        filtering = {
+            'name': ALL,
+            'description': ALL,
+            'user': ALL_WITH_RELATIONS,
+        }
+        ordering = ['-date_created']

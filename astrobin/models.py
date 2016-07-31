@@ -1285,6 +1285,53 @@ class ImageRevision(HasSolutionMixin, models.Model):
         return self.image.thumbnail_invalidate_real(self.image_file, self.label, delete_remote)
 
 
+class Collection(models.Model):
+    date_created = models.DateField(
+        null = False,
+        blank = False,
+        auto_now_add = True,
+        editable = False,
+    )
+
+    date_updated = models.DateField(
+        null = False,
+        blank = False,
+        auto_now = True,
+        editable = False,
+    )
+
+    user = models.ForeignKey(User)
+
+    name = models.CharField(
+        max_length = 256,
+        null = False,
+        blank = False,
+        verbose_name = _("Name"),
+    )
+
+    description = models.TextField(
+        null = True,
+        blank = True,
+        verbose_name = _("Description"),
+    )
+
+    images = models.ManyToManyField(
+        Image,
+        null = True,
+        blank = True,
+        verbose_name = _("Images"),
+        related_name = 'collections',
+    )
+
+    class Meta:
+        app_label = 'astrobin'
+        unique_together = ('user', 'name')
+        ordering = ['name']
+
+    def __unincode__(self):
+        return "%s, a collectio by %s" % (self.name, self.user.username)
+
+
 class Acquisition(models.Model):
     date = models.DateField(
         null = True,
@@ -1674,7 +1721,9 @@ class UserProfile(models.Model):
             (1, _("Acquisition time")),
             (2, _("Subject type")),
             (3, _("Year")),
-            (4, _("Gear"))),
+            (4, _("Gear")),
+            (5, _("Collections")),
+        ),
         default = 0,
         null = False,
         verbose_name = _("Default gallery sorting"),

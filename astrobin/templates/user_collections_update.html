@@ -1,0 +1,39 @@
+{% extends 'user_collections_base.html' %}
+
+{% load i18n %}
+{% load bootstrap_toolkit %}
+{% load url from future %}
+
+{% block title %}
+    {% trans "Edit collection" %}
+{% endblock %}
+
+{% block collections_content %}
+    <h1>
+        {{collection.name}}
+        <small>{% trans "Edit collection" %}</small>
+    </h1>
+
+    <form class="form-horizontal" action="{{request.path}}?next={{request.GET.next}}" method="post">
+        {% csrf_token %}
+        {{form|as_bootstrap}}
+        <div class="form-actions">
+            <input type="hidden" name="collection_pk" value="{{collection.pk}}"/>
+            <input class="btn btn-primary" type="submit" value="{% trans "Save" %}"/>
+            <a
+                class="btn"
+                href="
+                {% if request.GET.next %}
+                    {{request.GET.next}}
+                {% else %}
+                    {% url 'user_collections_list' requested_user %}
+                {% endif %}">
+                {% trans "Cancel" %}
+            </a>
+        </div>
+    </form>
+{% endblock %}
+
+{% block modals %}
+    {% include 'user_collections_delete_modal.html' %}
+{% endblock %}

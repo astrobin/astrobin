@@ -1,0 +1,24 @@
+{% extends 'user_collections_base.html' %}
+
+{% load i18n %}
+{% load bootstrap_toolkit %}
+{% load url from future %}
+
+{% block title %}
+    {% trans "Create new collection" %}
+{% endblock %}
+
+{% block collections_content %}
+    <h1>{% trans "Create new collection" %}</h1>
+
+    <form class="form-horizontal" action="." method="post">
+        {% csrf_token %}
+        {{form|as_bootstrap}}
+        <div class="form-actions">
+            <input class="btn btn-primary" type="submit" value="{% trans "Create new collection" %}"/>
+            <a class="btn" href="{% url 'user_collections_list' requested_user %}">
+                {% trans "Cancel" %}
+            </a>
+        </div>
+    </form>
+{% endblock %}

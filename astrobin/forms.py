@@ -1039,3 +1039,19 @@ class RetailedGearForm(forms.ModelForm):
 
     class Meta:
         model = RetailedGear
+
+
+class CollectionEditForm(forms.ModelForm):
+    error_css_class = 'error'
+
+    class Meta:
+        model = Collection
+        fields = ('name', 'description',) 
+
+
+class CollectionAddRemoveImagesForm(forms.ModelForm):
+    error_css_class = 'error'
+
+    class Meta:
+        model = Collection
+        fields = ('images',)

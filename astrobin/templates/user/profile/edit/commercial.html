@@ -6,7 +6,7 @@
 {% block title %}AstroBin - {% trans "Edit your commercial information" %}{% endblock %}
 {% block content %}
     <div class="row">
-        {% include 'profile-edit-menu.html' %}
+        {% include 'user/profile/edit/navigation.html' %}
         <div class="span9">
             <form class="form-horizontal" method="post" action="{% url profile_edit_commercial %}">{% csrf_token %}
                 {{form|as_bootstrap}}

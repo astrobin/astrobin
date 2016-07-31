@@ -1,0 +1,36 @@
+{% extends 'user_collections_base.html' %}
+
+{% load i18n %}
+{% load bootstrap_toolkit %}
+{% load url from future %}
+
+{% block title %}
+    {% trans "Add/remove images" %}
+{% endblock %}
+
+{% block collections_content %}
+    <h1>
+        {{collection.name}}
+        <small>{% trans "Add/remove images" %}</small>
+    </h1>
+
+    <form class="form-horizontal collection-add-remove-form" action="." method="post">
+        {% csrf_token %}
+        {{form|as_bootstrap}}
+        <div class="form-actions">
+            <input type="hidden" name="collection_pk" value="{{collection.pk}}"/>
+            <input class="btn btn-primary" type="submit" value="{% trans "Save" %}"/>
+            <a class="btn" href="{% url 'user_collections_detail' requested_user collection.pk %}">
+                {% trans "Cancel" %}
+            </a>
+        </div>
+    </form>
+{% endblock %}
+
+{% block extra_js %}
+    <script type="text/javascript">
+        $(document).ready(function() {
+            $('.ui-multiselect').show();
+        });
+    </script>
+{% endblock %}

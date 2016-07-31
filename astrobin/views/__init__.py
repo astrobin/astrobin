@@ -1072,7 +1072,11 @@ def user_page(request, username):
         elif subsection == 2: subsection = 'subject'
         elif subsection == 3: subsection = 'year'
         elif subsection == 4: subsection = 'gear'
+        elif subsection == 5: subsection = 'collections'
         else: subsection = 'uploaded'
+
+    if subsection == 'collections':
+        return HttpResponseRedirect(reverse('user_collections_list', args = (username,)))
 
     active = request.GET.get('active')
     menu = []
@@ -1268,7 +1272,7 @@ def user_page(request, username):
         'image_list': qs,
         'sort': request.GET.get('sort'),
         'view': request.GET.get('view', 'default'),
-        'user':user,
+        'requested_user':user,
         'profile':profile,
         'private_message_form': PrivateMessageForm(),
         'section':section,

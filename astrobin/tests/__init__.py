@@ -8,3 +8,4 @@ from .gear import *
 from .subscriptions import *
 from .user import *
 from .api import *
+from .collection import *

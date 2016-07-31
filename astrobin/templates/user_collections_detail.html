@@ -1,0 +1,35 @@
+{% extends 'user_collections_base.html' %}
+
+{% load i18n %}
+{% load tags %}
+{% load url from future %}
+
+{% block title %}
+    {{collection.name}}
+{% endblock %}
+
+{% block collections_content %}
+    <div class="collection-detail">
+        <h1>{{collection.name}}</h1>
+        {% if collection.description %}
+            <p>{{collection.description}}</p>
+        {% endif %}
+
+        {% if collection.images.count > 0 %}
+            {% image_list collection.images.all %}
+        {% else %}
+            <p class="alert alert-warning">
+                {% trans "This collection contains no images." %}
+                {% ifequal requested_user request.user %}
+                    <a href="{% url 'user_collections_add_remove_images' requested_user collection.pk %}">
+                        {% trans "Would you like to add some images?" %}
+                    </a>
+                {% endifequal %}
+            </p>
+        {% endif %}
+    </div>
+{% endblock %}
+
+{% block modals %}
+    {% include 'user_collections_delete_modal.html' %}
+{% endblock %}
