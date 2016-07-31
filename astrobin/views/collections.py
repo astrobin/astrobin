@@ -126,5 +126,16 @@ class UserCollectionsDelete(
 
 class UserCollectionsDetail(UserCollectionsBase, DetailView):
     pk_url_kwarg = 'collection_pk'
-    template_name = 'user_collections_detail.html'
     context_object_name = 'collection'
+
+    def get_context_data(self, **kwargs):
+        context = super(UserCollectionsDetail, self).get_context_data(**kwargs)
+        context['image_list'] = self.object.images.all()
+        context['alias'] = 'gallery'
+        return context
+
+
+    def get_template_names(self):
+        if self.request.is_ajax():
+            return 'inclusion_tags/image_list_entries.html'
+        return 'user_collections_detail.html'
