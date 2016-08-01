@@ -15,7 +15,8 @@ from django.views.generic import UpdateView
 from django.views.generic.base import View
 
 # AstroBin
-from astrobin.forms import CollectionEditForm
+from astrobin.forms import CollectionCreateForm
+from astrobin.forms import CollectionUpdateForm
 from astrobin.forms import CollectionAddRemoveImagesForm
 from astrobin.models import Collection
 from astrobin.models import Image
@@ -79,17 +80,22 @@ class UserCollectionsBaseEdit(LoginRequiredMixin, UserCollectionsBase, View):
 
 class UserCollectionsCreate(
         UserCollectionsBaseEdit, RedirectToCollectionListMixin, CreateView):
-    form_class = CollectionEditForm
+    form_class = CollectionCreateForm
     template_name = 'user_collections_create.html'
 
 
 class UserCollectionsUpdate(
         RedirectToCollectionListMixin, EnsureCollectionOwnerMixin,
         UserCollectionsBaseEdit, UpdateView):
-    form_class = CollectionEditForm
+    form_class = CollectionUpdateForm
     template_name = 'user_collections_update.html'
     pk_url_kwarg = 'collection_pk'
     context_object_name = 'collection'
+
+    def get_form(self, form_class):
+        form = super(UserCollectionsUpdate, self).get_form(form_class)
+        form.fields['cover'].queryset = Collection.objects.get(pk = self.kwargs['collection_pk']).images.all()
+        return form
 
     def get_success_url(self):
         url = self.request.GET.get('next')

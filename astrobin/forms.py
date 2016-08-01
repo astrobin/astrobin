@@ -1041,12 +1041,20 @@ class RetailedGearForm(forms.ModelForm):
         model = RetailedGear
 
 
-class CollectionEditForm(forms.ModelForm):
+class CollectionCreateForm(forms.ModelForm):
     error_css_class = 'error'
 
     class Meta:
         model = Collection
         fields = ('name', 'description',) 
+
+
+class CollectionUpdateForm(forms.ModelForm):
+    error_css_class = 'error'
+
+    class Meta:
+        model = Collection
+        fields = ('name', 'description', 'cover',) 
 
 
 class CollectionAddRemoveImagesForm(forms.ModelForm):

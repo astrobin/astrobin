@@ -1323,6 +1323,13 @@ class Collection(models.Model):
         related_name = 'collections',
     )
 
+    cover = models.ForeignKey(
+        Image,
+        null = True,
+        blank = True,
+        verbose_name = _("Cover image"),
+    )
+
     class Meta:
         app_label = 'astrobin'
         unique_together = ('user', 'name')

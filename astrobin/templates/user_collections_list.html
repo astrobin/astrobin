@@ -16,7 +16,11 @@
                         <div class="collection-image {% if collection.images.count == 0 %}empty{% endif %}">
                             {% if collection.images.count > 0 %}
                                 <a href="{% url 'user_collections_detail' requested_user collection.pk %}">
-                                    {% astrobin_image collection.images.all.0  'collection' 'final' 'regular' False False %}
+                                    {% if collection.cover %}
+                                        {% astrobin_image collection.cover 'collection' 'final' 'regular' False False %}
+                                    {% else %}
+                                        {% astrobin_image collection.images.all.0  'collection' 'final' 'regular' False False %}
+                                    {% endif %}
                                 </a>
                             {% endif %}
                         </div>
