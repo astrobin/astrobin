@@ -1,36 +1,102 @@
 {% extends 'user_collections_base.html' %}
 
 {% load i18n %}
-{% load bootstrap_toolkit %}
 {% load url from future %}
+{% load astrobin_apps_images_tags %}
 
 {% block title %}
     {% trans "Add/remove images" %}
 {% endblock %}
 
 {% block collections_content %}
-    <h1>
-        {{collection.name}}
-        <small>{% trans "Add/remove images" %}</small>
-    </h1>
+    <div class="collection-add-remove-images">
+        <h1>
+            {{collection.name}}
+            <small>{% trans "Add/remove images" %}</small>
+        </h1>
+        <p class="well">
+            {% trans "Click on the images to include them in this collection (and click again to exclude them). Then click on the Save button down below." %}
+        </p>
 
-    <form class="form-horizontal collection-add-remove-form" action="." method="post">
-        {% csrf_token %}
-        {{form|as_bootstrap}}
-        <div class="form-actions">
-            <input type="hidden" name="collection_pk" value="{{collection.pk}}"/>
-            <input class="btn btn-primary" type="submit" value="{% trans "Save" %}"/>
-            <a class="btn" href="{% url 'user_collections_detail' requested_user collection.pk %}">
-                {% trans "Cancel" %}
+        <ul class="astrobin-thumbnails">
+            {% for image in images %}
+                <li class="thumbnail astrobin-thumbnail">
+                    <a href="#">
+                        {% astrobin_image image 'gallery' 'final' 'regular' False False %}
+                        <div
+                            {% if image.pk in images_pk_in_collection %}
+                                class="added-thumbnail-overlay added" style="visibility:visible"
+                            {% else %}
+                                class="added-thumbnail-overlay" style="visibility:hidden"
+                            {% endif %}">
+
+                            <span>
+                                &#x2714;
+                            </span>
+                        </div>
+                    </a>
+                </li>
+            {% endfor %}
+        </ul>
+
+        <hr/>
+        <div class="text-right">
+            <span class="loading hide"><img src="{{STATIC_URL}}images/ajax-loader.gif" alt=""/></span>
+            <a href="#" id="save-button" class="btn btn-primary">
+                {% trans "Save" %} &rarr;
             </a>
         </div>
-    </form>
+    </div>
+
 {% endblock %}
 
 {% block extra_js %}
     <script type="text/javascript">
         $(document).ready(function() {
-            $('.ui-multiselect').show();
+            $('.astrobin-thumbnail a').click(function(e) {
+                var $spam;
+
+                e.preventDefault();
+
+                $(this).find('.added-thumbnail-overlay').toggleClass('added');
+
+                $added = $(this).find('.added-thumbnail-overlay');
+                if ($added.css('visibility') == 'hidden') {
+                    $added.css('visibility', 'visible');
+                } else {
+                    $added.css('visibility', 'hidden');
+                }
+            });
+
+            $('#save-button').click(function(e) {
+                var $btn, added_ids;
+
+                e.preventDefault();
+
+                $btn = $(this);
+                $btn.addClass('disabled');
+                $btn.siblings('.loading').removeClass('hide');
+
+                added_ids = $('.astrobin-thumbnails .added')
+                    .siblings('.astrobin-image-container')
+                    .find('img')
+                    .map(function()
+                {
+                    return $(this).data('id');
+                }).get();
+
+                console.log(added_ids);
+                $.ajax({
+                    url: '{% url 'user_collections_add_remove_images' requested_user collection.pk %}',
+                    type: 'POST',
+                    cache: false,
+                    timeout: 10000,
+                    data: {images: added_ids},
+                    dataType: 'json'
+                }).done(function() {
+                    location = "{% url 'user_collections_detail' requested_user collection.pk %}";
+                });
+            });
         });
     </script>
 {% endblock %}

@@ -4105,8 +4105,19 @@ pre {
 .collection-detail .thumbnails {
   margin-top: 40px;
 }
-.collection-add-remove-form .ui-multiselect ul.available,
-.collection-add-remove-form .ui-multiselect ul.selected {
-  background: #393939 url('../images/light-panel-tile.png');
-  min-height: 300px;
+.collection-add-remove-images .astrobin-image-container {
+  padding: 9px;
+}
+.collection-add-remove-images .added-thumbnail-overlay {
+  position: absolute;
+  left: 11px;
+  bottom: 11px;
+  font-size: 20px;
+  text-align: center;
+  width: 130px;
+  background: rgba(0, 255, 0, 0.4);
+  height: 32px;
+  line-height: 32px;
+  border-radius: 0 0 20px 20px;
+  color: white;
 }
