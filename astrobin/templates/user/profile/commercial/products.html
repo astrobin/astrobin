@@ -7,7 +7,7 @@
 {% block title %}AstroBin - {% blocktrans with user=user %}{{user}}'s commercial products{% endblocktrans %}{% endblock %}
 
 {% block content %}
-    {% include 'user/profile-subnav.html' %}
+    {% include 'user/profile/navigation.html' %}
     <h1>
         {% ifequal user request.user %}
             {% blocktrans %}Your commercial products{% endblocktrans %}
@@ -370,7 +370,7 @@
 {% endifequal %} <!-- user == request.user -->
 
 {% block extra_js %}
-    {% include 'user/profile-js.html' %}
+    {% include 'user/profile/js.html' %}
 
     <script type="text/javascript">
         astrobin_common.setup_gear_popovers();

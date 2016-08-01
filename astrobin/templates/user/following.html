@@ -7,7 +7,7 @@
 {% block title %}{% blocktrans with user=user %}{{user}}'s followed users{% endblocktrans %}{% endblock %}
 
 {% block content %}
-    {% include 'user/profile-subnav.html' %}
+    {% include 'user/profile/navigation.html' %}
     <h1>
         {% ifequal user request.user %}
             {% blocktrans %}Your followed users{% endblocktrans %}
@@ -20,6 +20,6 @@
 {% endblock %}
 
 {% block extra_js %}
-    {% include 'user/profile-js.html' %}
+    {% include 'user/profile/js.html' %}
 {% endblock %}
 

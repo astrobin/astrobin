@@ -6,7 +6,7 @@
 
 {% block content %}
     <a name="page_anchor"></a>
-    {% include 'user/profile-subnav.html' %}
+    {% include 'user/profile/navigation.html' %}
 
     <h1>{% blocktrans with user.username as user %}{{user}}'s plots{% endblocktrans %}</h1>
 
@@ -76,7 +76,7 @@
 {% endblock %}
 
 {% block extra_js %}
-{% include 'user/profile-js.html' %}
+{% include 'user/profile/js.html' %}
 
 <script type="text/javascript">
 $(document).ready(function() {

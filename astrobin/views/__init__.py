@@ -1390,7 +1390,7 @@ def user_page_following(request, username, extra_context = None):
         {
             'request_user': User.objects.get(pk = request.user.pk) if request.user.is_authenticated() else None,
             'layout': 'inline',
-            'user': user,
+            'requested_user': user,
             'user_list': followed_users,
             'view': request.GET.get('view', 'default'),
             'STATIC_URL': settings.STATIC_URL,
@@ -1422,7 +1422,7 @@ def user_page_followers(request, username, extra_context = None):
         {
             'request_user': User.objects.get(pk = request.user.pk) if request.user.is_authenticated() else None,
             'layout': 'inline',
-            'user': user,
+            'requested_user': user,
             'user_list': followers,
             'view': request.GET.get('view', 'default'),
             'STATIC_URL': settings.STATIC_URL,

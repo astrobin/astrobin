@@ -5,7 +5,7 @@
 {% block title %}{% blocktrans with user=user %}{{user}}'s bookmarks{% endblocktrans %}{% endblock %}
 
 {% block content %}
-    {% include 'user/profile-subnav.html' %}
+    {% include 'user/profile/navigation.html' %}
     <h1>
         {% ifequal user request.user %}
             {% blocktrans %}Your bookmarks{% endblocktrans %}
@@ -18,5 +18,5 @@
 {% endblock %}
 
 {% block extra_js %}
-    {% include 'user/profile-js.html' %}
+    {% include 'user/profile/js.html' %}
 {% endblock %}
