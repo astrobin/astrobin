@@ -166,4 +166,3 @@ class CollectionTest(TestCase):
         image.delete()
         image2.delete()
         collection.delete()
-
