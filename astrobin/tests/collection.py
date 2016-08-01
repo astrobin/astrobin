@@ -156,8 +156,9 @@ class CollectionTest(TestCase):
         self.client.post(
             reverse('user_collections_add_remove_images', args = (self.user.username, collection.pk)),
             {
-                'images': [image.pk, image2.pk],
+                'images[]': [image.pk, image2.pk],
             },
+            HTTP_X_REQUESTED_WITH = 'XMLHttpRequest',
             follow = True)
 
         self.assertEqual(collection.images.count(), 2)
