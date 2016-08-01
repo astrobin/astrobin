@@ -25,17 +25,19 @@
                                 {{collection.name}}
                             </a>
                         </div>
-                        <div class="collection-tools">
-                            <a href="{% url 'user_collections_update' requested_user.username collection.pk %}">
-                                <i class="icon icon-edit"></i>
-                            </a>
-                            <a href="{% url 'user_collections_add_remove_images' requested_user.username collection.pk %}">
-                                <i class="icon icon-plus"></i>
-                            </a>
-                            <a href="#" class="delete-modal-toggle" data-collection-pk="{{collection.pk}}">
-                                <i class="icon icon-trash"></i>
-                            </a>
-                        </div>
+                        {% ifequal requested_user request.user %}
+                            <div class="collection-tools">
+                                <a href="{% url 'user_collections_update' requested_user.username collection.pk %}">
+                                    <i class="icon icon-edit"></i>
+                                </a>
+                                <a href="{% url 'user_collections_add_remove_images' requested_user.username collection.pk %}">
+                                    <i class="icon icon-plus"></i>
+                                </a>
+                                <a href="#" class="delete-modal-toggle" data-collection-pk="{{collection.pk}}">
+                                    <i class="icon icon-trash"></i>
+                                </a>
+                            </div>
+                        {% endifequal %}
                     </div>
                 {% endif %}
             {% endfor %}
