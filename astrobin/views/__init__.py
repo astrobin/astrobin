@@ -1302,7 +1302,7 @@ def user_page_commercial_products(request, username):
     profile = user.userprofile
 
     response_dict = {
-        'user': user,
+        'requested_user': user,
         'profile': profile,
         'user_is_producer': user_is_producer(user),
         'user_is_retailer': user_is_retailer(user),
