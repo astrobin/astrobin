@@ -138,7 +138,7 @@
             </ul>
         </li>
 
-        {% if collection %}
+        {% if collection and requested_user == request.user %}
             <li class="dropdown">
                 <a class="dropdown-toggle" data-toggle="dropdown" href="#">
                     <i class="icon-wrench"></i>
