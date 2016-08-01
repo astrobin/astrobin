@@ -92,20 +92,41 @@ class CollectionTest(TestCase):
 
     def test_collection_update_view(self):
         self.client.login(username = 'test', password = 'password')
-        self._do_upload('astrobin/fixtures/test.jpg')
         self._create_collection(self.user, 'test_collection', 'test_description')
-        image = self._get_last_image()
         collection = self._get_last_collection()
+
+        self._do_upload('astrobin/fixtures/test.jpg')
+        image1 = self._get_last_image()
+        self._do_upload('astrobin/fixtures/test.jpg')
+        image2 = self._get_last_image()
+
+        collection.images.add(image1)
+        collection.images.add(image2)
+
+        # Test that image2 is the cover (latest uploaded)
+        response = self.client.get(
+            reverse('user_collections_list', args = (self.user.username,))
+        )
+        self.assertContains(response, image2.thumbnail('collection'))
+
         response = self.client.post(
             reverse('user_collections_update', args = (self.user.username, collection.pk)),
             {
                 'name': 'edited_name',
                 'description': 'edited_description',
+                'cover': image1.pk,
             },
             follow = True
         )
         self.assertContains(response, "edited_name")
-        image.delete()
+
+        response = self.client.get(
+            reverse('user_collections_list', args = (self.user.username,))
+        )
+        self.assertContains(response, image1.thumbnail('collection'))
+
+        image1.delete()
+        image2.delete()
         collection.delete()
 
     def test_collection_delete_view(self):
@@ -135,8 +156,9 @@ class CollectionTest(TestCase):
         self.client.post(
             reverse('user_collections_add_remove_images', args = (self.user.username, collection.pk)),
             {
-                'images': [image.pk, image2.pk],
+                'images[]': [image.pk, image2.pk],
             },
+            HTTP_X_REQUESTED_WITH = 'XMLHttpRequest',
             follow = True)
 
         self.assertEqual(collection.images.count(), 2)
@@ -144,4 +166,3 @@ class CollectionTest(TestCase):
         image.delete()
         image2.delete()
         collection.delete()
-
