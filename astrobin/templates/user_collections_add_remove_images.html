@@ -54,9 +54,11 @@
 
                 e.preventDefault();
 
-                $(this).find('.added-thumbnail-overlay').toggleClass('added');
-
                 $added = $(this).find('.added-thumbnail-overlay');
+                if ($added.length == 0)
+                    $added = $(this).parent('.astrobin-image-container').siblings('.added-thumbnail-overlay')
+
+                $added.toggleClass('added');
                 if ($added.css('visibility') == 'hidden') {
                     $added.css('visibility', 'visible');
                 } else {
