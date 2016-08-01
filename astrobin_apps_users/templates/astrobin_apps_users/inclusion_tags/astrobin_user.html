@@ -7,144 +7,127 @@
 
 {% get_current_language as LANGUAGE_CODE %}
 
-{% if view == 'list' %}
-    <tr>
-        {% cache 300 astrobin_user user.username view layout LANGUAGE_CODE %}
-        <td><a href="{% url user_page user %}">{{user.userprofile}}</a></td>
-        <td><a href="{% url user_page user %}?sub=uploaded">{{images}}</a></td>
-        <td><a href="{% url user_page_followers user %}">{{followers}}</a></td>
-        <td><a href="{% url user_page_following user %}">{{following}}</a></td>
-        {% endcache %}
+{% if layout == 'standard' %}
+    <div class="subtle-container user-card">
+        <div class="header">
+            <h4>
+                {{user.userprofile}}
+            </h4>
+        </div>
 
-        {% if request_user %}
-            <td class="pull-right">{% add_remove_toggleproperty "follow" user request_user %}</td>
-        {% endif %}
-    </tr>
-{% endif %}
+        <div class="avatar" style="width: 194px; height: 194px; overflow: hidden;">
+            <a href="{% url user_page user %}">
+                {% avatar user 194 %}
 
-{% if view == 'default' %}
-    {% if layout == 'standard' %}
-        <div class="subtle-container user-card">
-            <div class="header">
-                <h4>
-                    {{user.userprofile}}
-                </h4>
-            </div>
-
-            <div class="avatar" style="width: 194px; height: 194px; overflow: hidden;">
-                <a href="{% url user_page user %}">
-                    {% avatar user 194 %}
-
-                    {% if DONATIONS_ENABLED %}
-                        {% donor_badge user 'large' %}
-                    {% endif %}
-
-                    {% if PREMIUM_ENABLED %}
-                        {% premium_badge user 'large' %}
-                    {% endif %}
-                </a>
-
-                {% if request.user != user %}
-                    {% add_remove_toggleproperty "follow" user request_user %}
+                {% if DONATIONS_ENABLED %}
+                    {% donor_badge user 'large' %}
                 {% endif %}
-            </div>
 
-            {% cache 300 astrobin_user user.username view layout LANGUAGE_CODE %}
-            <div id="profile-details">
-                <ul>
-                    <li><a href="{% url user_page user %}?sub=uploaded"><strong>{{images}}</strong> {% trans "Images" %}</a></li>
-                    <li><a href="{% url user_page_followers user %}"><strong>{{followers}}</strong> {% trans "Followers" %}</a></li>
-                    <li><a href="{% url user_page_following user %}"><strong>{{following}}</strong> {% trans "Following" %}</a></li>
-                </ul>
-            </div>
-            {% endcache %}
-        </div>
-
-        {% if request.user == user and DONATIONS_ENABLED and user|is_donor %}
-            {% thank_you_for_your_donations %}
-        {% endif %}
-    {% endif %}
-
-    {% if layout == 'inline' or layout == 'inline-mini' %}
-        <div class="subtle-container user-card user-card-inline">
-            <div class="header">
-                <h4>
-                    {{user.userprofile}}
-                </h4>
-            </div>
-
-            <div class="avatar">
-                <a href="{% url user_page user %}">
-                    {% if layout == 'inline' %}
-                        {% avatar user 194 %}
-                    {% endif %}
-                    {% if layout == 'inline-mini' %}
-                        {% avatar user 48 %}
-                    {% endif %}
-
-
-                    {% if DONATIONS_ENABLED %}
-                        {% donor_badge user 'small' %}
-                    {% endif %}
-
-                    {% if PREMIUM_ENABLED %}
-                        {% premium_badge user 'small' %}
-                    {% endif %}
-                </a>
-            </div>
-
-            <div id="profile-details">
-                <ul>
-                    {% cache 300 astrobin_user user.username view layout LANGUAGE_CODE %}
-                    <li><a href="{% url user_page user %}?sub=uploaded"><strong>{{images}}</strong> {% trans "Images" %}</a></li>
-
-                    {% if layout != 'inline-mini' %}
-                        <li><a href="{% url user_page_followers user %}"><strong>{{followers}}</strong> {% trans "Followers" %}</a></li>
-                    {% endif %}
-                    {% endcache %}
-
-                    {% if request.user != user %}
-                        <li>{% add_remove_toggleproperty "follow" user request_user %}</li>
-                    {% endif %}
-                </ul>
-            </div>
-        </div>
-    {% endif %}
-
-    {% if layout == 'list' %}
-        <div class="user-list-item">
-            <div class="avatar" style="width: 48px; height: 48px; overflow: hidden";>
-                <a href="{% url user_page user %}">
-                    {% avatar user 48 %}
-
-                    {% if DONATIONS_ENABLED %}
-                        {% donor_badge user 'small' %}
-                    {% endif %}
-
-                    {% if PREMIUM_ENABLED %}
-                        {% premium_badge user 'small' %}
-                    {% endif %}
-                </a>
-            </div>
-
-            <div class="name">
-                <a href="{% url user_page user %}">
-                    {{user.userprofile}}
-                </a>
-            </div>
-
-            {% cache 300 astrobin_user user.username view layout LANGUAGE_CODE %}
-            <div class="info">
-                {% blocktrans count counter=images with images as images_number %}{{images_number}} image{% plural %}{{images_number}} images{% endblocktrans %},
-                {% blocktrans count counter=followers with followers as followers_number %}{{followers_number}} follower{% plural %}{{followers_number}} followers{% endblocktrans %}
-            </div>
-            {% endcache %}
+                {% if PREMIUM_ENABLED %}
+                    {% premium_badge user 'large' %}
+                {% endif %}
+            </a>
 
             {% if request.user != user %}
-                <div class="follow">
-                    {% add_remove_toggleproperty "follow" user request_user %}
-                </div>
+                {% add_remove_toggleproperty "follow" user request_user %}
             {% endif %}
         </div>
+
+        {% cache 300 astrobin_user user.username view layout LANGUAGE_CODE %}
+        <div id="profile-details">
+            <ul>
+                <li><a href="{% url user_page user %}?sub=uploaded"><strong>{{images}}</strong> {% trans "Images" %}</a></li>
+                <li><a href="{% url user_page_followers user %}"><strong>{{followers}}</strong> {% trans "Followers" %}</a></li>
+                <li><a href="{% url user_page_following user %}"><strong>{{following}}</strong> {% trans "Following" %}</a></li>
+            </ul>
+        </div>
+        {% endcache %}
+    </div>
+
+    {% if request.user == user and DONATIONS_ENABLED and user|is_donor %}
+        {% thank_you_for_your_donations %}
     {% endif %}
+{% endif %}
+
+{% if layout == 'inline' or layout == 'inline-mini' %}
+    <div class="subtle-container user-card user-card-inline">
+        <div class="header">
+            <h4>
+                {{user.userprofile}}
+            </h4>
+        </div>
+
+        <div class="avatar">
+            <a href="{% url user_page user %}">
+                {% if layout == 'inline' %}
+                    {% avatar user 194 %}
+                {% endif %}
+                {% if layout == 'inline-mini' %}
+                    {% avatar user 48 %}
+                {% endif %}
+
+
+                {% if DONATIONS_ENABLED %}
+                    {% donor_badge user 'small' %}
+                {% endif %}
+
+                {% if PREMIUM_ENABLED %}
+                    {% premium_badge user 'small' %}
+                {% endif %}
+            </a>
+        </div>
+
+        <div id="profile-details">
+            <ul>
+                {% cache 300 astrobin_user user.username view layout LANGUAGE_CODE %}
+                <li><a href="{% url user_page user %}?sub=uploaded"><strong>{{images}}</strong> {% trans "Images" %}</a></li>
+
+                {% if layout != 'inline-mini' %}
+                    <li><a href="{% url user_page_followers user %}"><strong>{{followers}}</strong> {% trans "Followers" %}</a></li>
+                {% endif %}
+                {% endcache %}
+
+                {% if request.user != user %}
+                    <li>{% add_remove_toggleproperty "follow" user request_user %}</li>
+                {% endif %}
+            </ul>
+        </div>
+    </div>
+{% endif %}
+
+{% if layout == 'list' %}
+    <div class="user-list-item">
+        <div class="avatar" style="width: 48px; height: 48px; overflow: hidden";>
+            <a href="{% url user_page user %}">
+                {% avatar user 48 %}
+
+                {% if DONATIONS_ENABLED %}
+                    {% donor_badge user 'small' %}
+                {% endif %}
+
+                {% if PREMIUM_ENABLED %}
+                    {% premium_badge user 'small' %}
+                {% endif %}
+            </a>
+        </div>
+
+        <div class="name">
+            <a href="{% url user_page user %}">
+                {{user.userprofile}}
+            </a>
+        </div>
+
+        {% cache 300 astrobin_user user.username view layout LANGUAGE_CODE %}
+        <div class="info">
+            {% blocktrans count counter=images with images as images_number %}{{images_number}} image{% plural %}{{images_number}} images{% endblocktrans %},
+            {% blocktrans count counter=followers with followers as followers_number %}{{followers_number}} follower{% plural %}{{followers_number}} followers{% endblocktrans %}
+        </div>
+        {% endcache %}
+
+        {% if request.user != user %}
+            <div class="follow">
+                {% add_remove_toggleproperty "follow" user request_user %}
+            </div>
+        {% endif %}
+    </div>
 {% endif %}
