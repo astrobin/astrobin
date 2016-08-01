@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2016-07-31 16:42+0100\n"
+"POT-Creation-Date: 2016-08-01 11:30+0100\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -18,31 +18,31 @@ msgstr ""
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=(n != 1)\n"
 
-#: templates/astrobin_apps_users/inclusion_tags/astrobin_user.html:55
-#: templates/astrobin_apps_users/inclusion_tags/astrobin_user.html:99
+#: templates/astrobin_apps_users/inclusion_tags/astrobin_user.html:39
+#: templates/astrobin_apps_users/inclusion_tags/astrobin_user.html:83
 #: templates/astrobin_apps_users/inclusion_tags/user_list.html:7
 msgid "Images"
 msgstr ""
 
-#: templates/astrobin_apps_users/inclusion_tags/astrobin_user.html:56
-#: templates/astrobin_apps_users/inclusion_tags/astrobin_user.html:102
+#: templates/astrobin_apps_users/inclusion_tags/astrobin_user.html:40
+#: templates/astrobin_apps_users/inclusion_tags/astrobin_user.html:86
 #: templates/astrobin_apps_users/inclusion_tags/user_list.html:8
 msgid "Followers"
 msgstr ""
 
-#: templates/astrobin_apps_users/inclusion_tags/astrobin_user.html:57
+#: templates/astrobin_apps_users/inclusion_tags/astrobin_user.html:41
 #: templates/astrobin_apps_users/inclusion_tags/user_list.html:9
 msgid "Following"
 msgstr ""
 
-#: templates/astrobin_apps_users/inclusion_tags/astrobin_user.html:138
+#: templates/astrobin_apps_users/inclusion_tags/astrobin_user.html:122
 #, python-format
 msgid "%(images_number)s image"
 msgid_plural "%(images_number)s images"
 msgstr[0] ""
 msgstr[1] ""
 
-#: templates/astrobin_apps_users/inclusion_tags/astrobin_user.html:139
+#: templates/astrobin_apps_users/inclusion_tags/astrobin_user.html:123
 #, python-format
 msgid "%(followers_number)s follower"
 msgid_plural "%(followers_number)s followers"

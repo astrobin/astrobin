@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2016-07-31 16:38+0100\n"
+"POT-Creation-Date: 2016-08-01 11:25+0100\n"
 "PO-Revision-Date: 2016-05-11 13:47+0000\n"
 "Last-Translator: csve <csve00@gmail.com>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -1021,7 +1021,7 @@ msgstr ""
 "здесь ссылку на файл. К сожалению, AstroBin пока не может предложить "
 "хранение таких файлов, поэтому вам потребуется размещать их у себя."
 
-#: forms.py:80 models.py:2207 models.py:2289 templates/gear/page.html:197
+#: forms.py:80 models.py:2214 models.py:2296 templates/gear/page.html:197
 #: templates/image/detail/image_title.html:14
 msgid "Link"
 msgstr "Ссылка"
@@ -1067,7 +1067,7 @@ msgstr "Телескоп/объектив съёмки"
 msgid "Guiding telescopes or lenses"
 msgstr "Гиды телескоп/объектив"
 
-#: forms.py:150 forms.py:244 models.py:755 models.py:1706
+#: forms.py:150 forms.py:244 models.py:755 models.py:1713
 #: views/__init__.py:1705
 msgid "Mounts"
 msgstr "Монтировка"
@@ -1080,22 +1080,22 @@ msgstr "Камеры для съемки"
 msgid "Guiding cameras"
 msgstr "Камера гида"
 
-#: forms.py:153 forms.py:246 models.py:758 models.py:1708
+#: forms.py:153 forms.py:246 models.py:758 models.py:1715
 #: views/__init__.py:1706
 msgid "Focal reducers"
 msgstr "Редукторы фокуса"
 
-#: forms.py:154 forms.py:247 models.py:759 models.py:1709
+#: forms.py:154 forms.py:247 models.py:759 models.py:1716
 #: views/__init__.py:197 views/__init__.py:1707 views/image.py:201
 msgid "Software"
 msgstr "Программы"
 
-#: forms.py:155 forms.py:248 models.py:760 models.py:1710
+#: forms.py:155 forms.py:248 models.py:760 models.py:1717
 #: views/__init__.py:1708
 msgid "Filters"
 msgstr "Фильтры"
 
-#: forms.py:156 forms.py:249 models.py:761 models.py:1711
+#: forms.py:156 forms.py:249 models.py:761 models.py:1718
 #: views/__init__.py:1709
 msgid "Accessories"
 msgstr "Принадлежности"
@@ -1104,7 +1104,7 @@ msgstr "Принадлежности"
 msgid "If you have a personal website, put the address here."
 msgstr "Если у вас есть личный веб-сайт, напишите здесь его адрес."
 
-#: forms.py:188 models.py:1625
+#: forms.py:188 models.py:1632
 msgid "Website"
 msgstr "Веб-сайт"
 
@@ -1131,11 +1131,11 @@ msgstr ""
 "например, набор LRGB-фильтров в одном поле, вы не сможете потом добавить "
 "отдельные серии снимков для них."
 
-#: forms.py:243 models.py:1705 views/__init__.py:1703
+#: forms.py:243 models.py:1712 views/__init__.py:1703
 msgid "Telescopes and lenses"
 msgstr "Телескопы и объективы"
 
-#: forms.py:245 models.py:1707 views/__init__.py:1704
+#: forms.py:245 models.py:1714 views/__init__.py:1704
 msgid "Cameras"
 msgstr "Камеры"
 
@@ -1162,7 +1162,7 @@ msgstr "Все"
 msgid "Images"
 msgstr "Изображения"
 
-#: forms.py:304 models.py:649 models.py:1724
+#: forms.py:304 models.py:649 models.py:1731
 #: templates/maintenance_base.html:299 templates/wall.html:131
 #: templates/inclusion_tags/search_image_list.html:13
 #: templates/user/profile/navigation.html:133
@@ -1270,7 +1270,7 @@ msgstr "Долгота (минуты)"
 msgid "Longitude (seconds)"
 msgstr "Долгота (секунды)"
 
-#: forms.py:593 forms.py:638 forms.py:679 models.py:1339 models.py:1552
+#: forms.py:593 forms.py:638 forms.py:679 models.py:1346 models.py:1559
 #: templates/image/detail/image_card.html:46
 msgid "Date"
 msgstr "Дата"
@@ -1309,8 +1309,8 @@ msgstr "Изготовлено"
 msgid "The make, brand, producer or developer of this product."
 msgstr "Изготовитель, марка, производитель или разработчик данного продукта."
 
-#: forms.py:925 forms.py:986 models.py:198 models.py:1309 models.py:1893
-#: models.py:2032 templates/gear/fix.html:32 templates/gear/fix.html.py:33
+#: forms.py:925 forms.py:986 models.py:198 models.py:1309 models.py:1900
+#: models.py:2039 templates/gear/fix.html:32 templates/gear/fix.html.py:33
 #: templates/gear/fix.html:34 templates/gear/fix.html.py:42
 #: templates/gear/fix.html:47 templates/gear/fix.html.py:52
 #: templates/gear/fix.html:57 templates/gear/fix.html.py:62
@@ -1759,7 +1759,7 @@ msgstr "Апертура"
 msgid "(in mm)"
 msgstr "(в мм)"
 
-#: models.py:444 models.py:1491 templates/image/detail/image_card.html:58
+#: models.py:444 models.py:1498 templates/image/detail/image_card.html:58
 #: templates/popover/gear_telescope.html:19
 msgid "Focal length"
 msgstr "Фокусное расстояние"
@@ -1939,7 +1939,7 @@ msgstr "Треки звезд"
 msgid "Title"
 msgstr "Заголовок"
 
-#: models.py:671 models.py:1722 templates/user/profile/navigation.html:127
+#: models.py:671 models.py:1729 templates/user/profile/navigation.html:127
 msgid "Subject type"
 msgstr "Тип объекта"
 
@@ -1964,7 +1964,7 @@ msgid ""
 "Drag items from the right side to the left side, or click on the plus sign."
 msgstr "Перетащите элементы из правой части в левую или нажмите на знак плюса."
 
-#: models.py:700 models.py:1315 models.py:2040 models.py:2296
+#: models.py:700 models.py:1315 models.py:2047 models.py:2303
 #: templates/gear/page.html:47 templates/image/detail/image_description.html:7
 msgid "Description"
 msgstr "Описание"
@@ -1992,131 +1992,136 @@ msgstr "Разрешить комментарии"
 msgid "(no title)"
 msgstr "(без заголовка)"
 
-#: models.py:1340
+#: models.py:1330
+#, fuzzy
+msgid "Cover image"
+msgstr "Изображения оборудования"
+
+#: models.py:1347
 msgid "Please use the following format: yyyy-mm-dd."
 msgstr "Пожалуйста, используйте формат: гггг-мм-дд."
 
-#: models.py:1345 models.py:1551 models.py:2272
+#: models.py:1352 models.py:1558 models.py:2279
 msgid "Image"
 msgstr "Изображение"
 
-#: models.py:1364
+#: models.py:1371
 msgid "1 - Excellent dark-site sky (BLACK)"
 msgstr "1 - Превосходное тёмное небо (чёрная зона)"
 
-#: models.py:1365
+#: models.py:1372
 msgid "2 - Typical truly dark site (GRAY)"
 msgstr "2 - Типичное по-настоящему тёмное небо (серая зона)"
 
-#: models.py:1366
+#: models.py:1373
 msgid "3 - Rural sky (BLUE)"
 msgstr "3 - Деревенское небо (синяя зона)"
 
-#: models.py:1367
+#: models.py:1374
 msgid "4 - Rural/suburban transition (GREEN/YELLOW)"
 msgstr "4 - Деревенско/пригородное (зелёная/жёлтая зона)"
 
-#: models.py:1368
+#: models.py:1375
 msgid "5 - Suburban sky (ORANGE)"
 msgstr "5 - Пригородное небо (оранжевая зона)"
 
-#: models.py:1369
+#: models.py:1376
 msgid "6 - Bright suburban sky (RED)"
 msgstr "6 - Яркое пригородное небо (красная зона)"
 
-#: models.py:1370
+#: models.py:1377
 msgid "7 - Suburban/urban transition or Full Moon (RED)"
 msgstr "7 - Пригородно/городское или полнолуние (красная зона)"
 
-#: models.py:1371
+#: models.py:1378
 msgid "8 - City sky (WHITE)"
 msgstr "8 - Городское небо (белая зона)"
 
-#: models.py:1372
+#: models.py:1379
 msgid "9 - Inner city sky (WHITE)"
 msgstr "9 - Центр города (белая зона)"
 
-#: models.py:1376
+#: models.py:1383
 msgid "Synthetic channel"
 msgstr "Синтезированный канал"
 
-#: models.py:1381 views/__init__.py:198 views/image.py:202
+#: models.py:1388 views/__init__.py:198 views/image.py:202
 msgid "Filter"
 msgstr "Фильтр"
 
-#: models.py:1387
+#: models.py:1394
 msgid "Binning"
 msgstr "Бинниг"
 
-#: models.py:1390
+#: models.py:1397
 msgid "Number"
 msgstr "Количество"
 
-#: models.py:1392
+#: models.py:1399
 msgid "The number of sub-frames."
 msgstr "Количество исходных кадров."
 
-#: models.py:1395
+#: models.py:1402
 msgid "Duration"
 msgstr "Продолжительность"
 
-#: models.py:1397
+#: models.py:1404
 msgid "Duration of each sub-frame, in seconds."
 msgstr "Продолжительность съемки каждого исходного кадра, в секундах."
 
-#: models.py:1400
+#: models.py:1407
 msgid "ISO"
 msgstr "ISO"
 
-#: models.py:1404
+#: models.py:1411
 msgid "Gain"
 msgstr "Усиление"
 
-#: models.py:1409
+#: models.py:1416
 msgid "Sensor cooling"
 msgstr "Охлаждение сенсора"
 
-#: models.py:1411
+#: models.py:1418
 msgid "The temperature of the chip. E.g.: -20."
 msgstr "Температура сенсора. Например: -20."
 
-#: models.py:1414 views/image.py:332
+#: models.py:1421 views/image.py:332
 msgid "Darks"
 msgstr "Темновые кадры"
 
-#: models.py:1416
+#: models.py:1423
 msgid "The number of dark frames."
 msgstr "Количество темновых кадров."
 
-#: models.py:1419 views/image.py:333
+#: models.py:1426 views/image.py:333
 msgid "Flats"
 msgstr "Кадры плоского поля"
 
-#: models.py:1421
+#: models.py:1428
 msgid "The number of flat frames."
 msgstr "Количество кадров плоского поля."
 
-#: models.py:1424 views/image.py:334
+#: models.py:1431 views/image.py:334
 msgid "Flat darks"
 msgstr "Темновые кадры для кадров плоского поля"
 
-#: models.py:1426
+#: models.py:1433
 msgid "The number of dark flat frames."
 msgstr "Количество темновых кадров для кадров плоского поля."
 
-#: models.py:1429 views/image.py:335
+#: models.py:1436 views/image.py:335
 msgid "Bias"
 msgstr "Кадры смещения"
 
-#: models.py:1431
+#: models.py:1438
 msgid "The number of bias/offset frames."
 msgstr "Количество кадров смещения."
 
-#: models.py:1434 views/image.py:338
+#: models.py:1441 views/image.py:338
 msgid "Bortle Dark-Sky Scale"
 msgstr "Шкала Бортля для оценки темноты неба"
 
-#: models.py:1438
+#: models.py:1445
 msgid ""
 "Quality of the sky according to <a href=\"http://en.wikipedia.org/wiki/"
 "Bortle_Dark-Sky_Scale\" target=\"_blank\">the Bortle Scale</a>."
@@ -2124,43 +2129,43 @@ msgstr ""
 "Качество неба по <a href=\"http://en.wikipedia.org/wiki/Bortle_Dark-Sky_Scale"
 "\" target=\"_blank\">шкале Бортля</a>."
 
-#: models.py:1442
+#: models.py:1449
 msgid "Mean mag/arcsec^2"
 msgstr "Средняя звездная величина на угл. сек^2"
 
-#: models.py:1443
+#: models.py:1450
 msgid "As measured with your Sky Quality Meter."
 msgstr "Измеренная с помощью Sky Quality Meter."
 
-#: models.py:1448 views/image.py:340
+#: models.py:1455 views/image.py:340
 msgid "Mean FWHM"
 msgstr "Среднее FWHM"
 
-#: models.py:1453 views/image.py:341
+#: models.py:1460 views/image.py:341
 msgid "Temperature"
 msgstr "Температура"
 
-#: models.py:1456
+#: models.py:1463
 msgid "Ambient temperature (in Centigrade degrees)."
 msgstr "Температура окружающей среды (в °С)."
 
-#: models.py:1477
+#: models.py:1484
 msgid "Number of frames"
 msgstr "Количество кадров"
 
-#: models.py:1478
+#: models.py:1485
 msgid "The total number of frames you have stacked."
 msgstr "Общее количество кадров, сложенных в стек."
 
-#: models.py:1482 templates/image/detail/image_card.html:55
+#: models.py:1489 templates/image/detail/image_card.html:55
 msgid "FPS"
 msgstr "к/сек"
 
-#: models.py:1483
+#: models.py:1490
 msgid "Frames per second."
 msgstr "Кадров в секунду."
 
-#: models.py:1492
+#: models.py:1499
 msgid ""
 "The focal length of the whole optical train, including barlow lenses or "
 "other components."
@@ -2168,122 +2173,122 @@ msgstr ""
 "Эквивалентное фокусное расстояние всей оптической системы, включая линзы "
 "Барлоу и другие компоненты."
 
-#: models.py:1498 templates/image/detail/image_card.html:61
+#: models.py:1505 templates/image/detail/image_card.html:61
 msgid "CMI"
 msgstr "CMI"
 
-#: models.py:1499
+#: models.py:1506
 msgid "Latitude of the first Central Meridian."
 msgstr "Широта первого Центрального Меридиана"
 
-#: models.py:1507 templates/image/detail/image_card.html:64
+#: models.py:1514 templates/image/detail/image_card.html:64
 msgid "CMII"
 msgstr "CMII"
 
-#: models.py:1508
+#: models.py:1515
 msgid "Latitude of the second Central Meridian."
 msgstr "Широта второго Главного Меридиана"
 
-#: models.py:1516 templates/image/detail/image_card.html:67
+#: models.py:1523 templates/image/detail/image_card.html:67
 msgid "CMIII"
 msgstr "CMIII"
 
-#: models.py:1517
+#: models.py:1524
 msgid "Latitude of the third Central Meridian."
 msgstr "Широта третьего Главного Меридиана."
 
-#: models.py:1525 templates/image/detail/image_card.html:70
+#: models.py:1532 templates/image/detail/image_card.html:70
 msgid "Seeing"
 msgstr "Сиинг"
 
-#: models.py:1526
+#: models.py:1533
 msgid "Your estimation of the seeing, on a scale from 1 to 5."
 msgstr "Оцените сиинг по шкале от 1 до 5."
 
-#: models.py:1532 templates/image/detail/image_card.html:73
+#: models.py:1539 templates/image/detail/image_card.html:73
 msgid "Transparency"
 msgstr "Прозрачность"
 
-#: models.py:1533
+#: models.py:1540
 msgid "Your estimation of the transparency, on a scale from 1 to 10."
 msgstr "Ваша оценка прозрачности по шкале от 1 до 10."
 
-#: models.py:1539 templates/image/detail/image_card.html:49
+#: models.py:1546 templates/image/detail/image_card.html:49
 msgid "Time"
 msgstr "Время"
 
-#: models.py:1540
+#: models.py:1547
 msgid "Please use the following format: hh:mm."
 msgstr "Пожалуйста, используйте следующий формат: чч:мм."
 
-#: models.py:1571
+#: models.py:1578
 msgid "Request from"
 msgstr "Запрос от"
 
-#: models.py:1583
+#: models.py:1590
 msgid "Additional information"
 msgstr "Дополнительная информация"
 
-#: models.py:1584
+#: models.py:1591
 msgid "TIFF/FITS"
 msgstr "TIFF/FITS"
 
-#: models.py:1585
+#: models.py:1592
 msgid "Higher resolution"
 msgstr "Наивысшее разрешение"
 
-#: models.py:1617
+#: models.py:1624
 msgid "Real name"
 msgstr "Настоящее имя"
 
-#: models.py:1618
+#: models.py:1625
 msgid "If present, your real name will be used throughout the website."
 msgstr ""
 "Если присутствует, то ваше настоящее имя будет использоваться на сайте везде."
 
-#: models.py:1632
+#: models.py:1639
 msgid "Job"
 msgstr "Работа"
 
-#: models.py:1639
+#: models.py:1646
 msgid "Hobbies"
 msgstr "Увлечения"
 
-#: models.py:1643
+#: models.py:1650
 msgid "Do you have any hobbies other than astrophotography?"
 msgstr "Есть ли у вас другие увлечения, кроме астрофотографии?"
 
-#: models.py:1650
+#: models.py:1657
 msgid "Timezone"
 msgstr "Часовой пояс"
 
-#: models.py:1651
+#: models.py:1658
 msgid ""
 "By selecting this, you will see all the dates on AstroBin in your timezone."
 msgstr ""
 "Выбрав это, вы будете видеть все даты на AstroBin в вашем часовом поясе."
 
-#: models.py:1656
+#: models.py:1663
 msgid "About you"
 msgstr "О себе"
 
-#: models.py:1657
+#: models.py:1664
 msgid "Write something about yourself. HTML tags are allowed."
 msgstr "Напишите что-нибудь о себе. Разрешаются HTML-теги."
 
-#: models.py:1671
+#: models.py:1678
 msgid "Company name"
 msgstr "Название организации"
 
-#: models.py:1672
+#: models.py:1679
 msgid "The name of the company you represent on AstroBin."
 msgstr "Название организации, которую вы представляете в AstroBin."
 
-#: models.py:1678
+#: models.py:1685
 msgid "Company description"
 msgstr "Описание организации"
 
-#: models.py:1679
+#: models.py:1686
 msgid ""
 "A short description of the company you represent on AstroBin. You can use "
 "some <a href=\"/faq/#comments\">formatting rules</a>."
@@ -2292,143 +2297,143 @@ msgstr ""
 "можете использовать некоторые <a href=\"/faq/#comments\">правила "
 "форматирования</a>."
 
-#: models.py:1687
+#: models.py:1694
 msgid "Company website"
 msgstr "Веб-сайт организации"
 
-#: models.py:1688
+#: models.py:1695
 msgid "The website of the company you represent on AstroBin."
 msgstr "Веб-сайт организации, которую вы представляете на AstroBin."
 
-#: models.py:1692
+#: models.py:1699
 msgid "Country of operation"
 msgstr "Страна ведения деятельности"
 
-#: models.py:1720 templates/search/search.html:31
+#: models.py:1727 templates/search/search.html:31
 #: templates/user/profile/navigation.html:121
 msgid "Upload time"
 msgstr "Время закачки"
 
-#: models.py:1721 templates/user/profile/navigation.html:124
+#: models.py:1728 templates/user/profile/navigation.html:124
 msgid "Acquisition time"
 msgstr "Время получения"
 
-#: models.py:1723 templates/user/profile/navigation.html:130
+#: models.py:1730 templates/user/profile/navigation.html:130
 msgid "Year"
 msgstr "Год"
 
-#: models.py:1725 templates/user/profile/navigation.html:118
+#: models.py:1732 templates/user/profile/navigation.html:118
 #, fuzzy
 msgid "Collections"
 msgstr "Местоположения"
 
-#: models.py:1729
+#: models.py:1736
 msgid "Default gallery sorting"
 msgstr ""
 
-#: models.py:1735 templates/maintenance_base.html:311
+#: models.py:1742 templates/maintenance_base.html:311
 #: templates/user/profile/edit/navigation.html:42
 msgid "Default license"
 msgstr "Лицензия по-умолчанию"
 
-#: models.py:1737
+#: models.py:1744
 msgid ""
 "The license you select here is automatically applied to all your new images."
 msgstr ""
 "Выбранная вами лицензия автоматически распространяется на все ваши "
 "изображения."
 
-#: models.py:1770
+#: models.py:1777
 msgid "Language"
 msgstr "Язык"
 
-#: models.py:1791
+#: models.py:1798
 msgid "Signature"
 msgstr "Сигнатура"
 
-#: models.py:1796
+#: models.py:1803
 msgid "Signature HTML Version"
 msgstr "Сигнатура версии HTML"
 
-#: models.py:1801
+#: models.py:1808
 msgid "Show signatures"
 msgstr "Показать сигнатуры"
 
-#: models.py:1806
+#: models.py:1813
 msgid "Post count"
 msgstr "Количество сообщений"
 
-#: models.py:1811
+#: models.py:1818
 msgid "Automatically subscribe"
 msgstr "Автоматическая подписка"
 
-#: models.py:1812
+#: models.py:1819
 msgid "Automatically subscribe to topics that you answer"
 msgstr "Подписываться автоматом на темы с вашими ответами"
 
-#: models.py:1819
+#: models.py:1826
 #: templates/pybb/mail_templates/subscription_email_subject.html:2
 msgid "New reply to a forum topic you subscribe to"
 msgstr "Новый ответ в теме, на которую вы подписаны"
 
-#: models.py:1894
+#: models.py:1901
 msgid "A descriptive name, e.g. 'Home observatory' or 'Mount Whitney'."
 msgstr ""
 "Наглядное название, например. «Домашная обсерватория» или «Гора Казбек»."
 
-#: models.py:1900
+#: models.py:1907
 msgid "City"
 msgstr "Город"
 
-#: models.py:1901
+#: models.py:1908
 msgid "If this location is not in a city, use the name of the closest city."
 msgstr "Если местоположение не город, то укажите название ближайшего города."
 
-#: models.py:1907
+#: models.py:1914
 msgid "State or province"
 msgstr "Область или регион"
 
-#: models.py:1912
+#: models.py:1919
 msgid "Country"
 msgstr "Страна"
 
-#: models.py:1929
+#: models.py:1936
 msgid "North"
 msgstr "Север"
 
-#: models.py:1929
+#: models.py:1936
 msgid "South"
 msgstr "Юг"
 
-#: models.py:1930
+#: models.py:1937
 msgid "North or south"
 msgstr "Север или юг"
 
-#: models.py:1945
+#: models.py:1952
 msgid "East"
 msgstr "Восток"
 
-#: models.py:1945
+#: models.py:1952
 msgid "West"
 msgstr "Запад"
 
-#: models.py:1946
+#: models.py:1953
 msgid "East or West"
 msgstr "Восток или Запад"
 
-#: models.py:1950
+#: models.py:1957
 msgid "Altitude"
 msgstr "Высота"
 
-#: models.py:1951
+#: models.py:1958
 msgid "In meters."
 msgstr "В метрах."
 
-#: models.py:2033
+#: models.py:2040
 msgid "The name of the website or app that wishes to use the APIs."
 msgstr "Название веб-сайта или приложения, в котором хочется применять API."
 
-#: models.py:2041
+#: models.py:2048
 msgid ""
 "Please explain the purpose of your application, and how you intend to use "
 "the API."
@@ -2436,63 +2441,63 @@ msgstr ""
 "Пожалуйста, объясните назначение вашего приложения и то, как вы собираетесь "
 "использовать API."
 
-#: models.py:2184
+#: models.py:2191
 msgid "AUD - Australian dollars"
 msgstr "AUD - Австралийский доллар"
 
-#: models.py:2185
+#: models.py:2192
 msgid "CAD - Canadian dollars"
 msgstr "CAD - Канадский доллар"
 
-#: models.py:2186
+#: models.py:2193
 msgid "CHF - Swiss francs"
 msgstr "CHF - Швейцарский франк"
 
-#: models.py:2187
+#: models.py:2194
 msgid "EUR - Euros"
 msgstr "EUR - Евро"
 
-#: models.py:2188
+#: models.py:2195
 msgid "GPB - Pound stelings"
 msgstr "GPB - Фунт стерлингов"
 
-#: models.py:2189
+#: models.py:2196
 msgid "PLN - Polish zloty"
 msgstr "PLN - Польский злотый"
 
-#: models.py:2190
+#: models.py:2197
 msgid "SEK - Swedish krona"
 msgstr "SEK - Шведская крона"
 
-#: models.py:2191
+#: models.py:2198
 msgid "USD - American dollars"
 msgstr "USD - Американский доллар"
 
-#: models.py:2197 models.py:2247
+#: models.py:2204 models.py:2254
 msgid "Producer"
 msgstr "Производитель"
 
-#: models.py:2208 models.py:2290
+#: models.py:2215 models.py:2297
 msgid "The link to this product's page on your website."
 msgstr "Ссылка на страницу этого продукта на вашем веб-сайте."
 
-#: models.py:2216 templates/subscription/subscription_category_list.html:8
+#: models.py:2223 templates/subscription/subscription_category_list.html:8
 msgid "Price"
 msgstr "Стоимость"
 
-#: models.py:2224
+#: models.py:2231
 msgid "Currency"
 msgstr "Валюта"
 
-#: models.py:2240
+#: models.py:2247
 msgid "Retailed gear items"
 msgstr "Элементы оборудования в розницу"
 
-#: models.py:2256
+#: models.py:2263
 msgid "Proper make"
 msgstr "Правильное место изготовления"
 
-#: models.py:2257
+#: models.py:2264
 msgid ""
 "Sometimes, product make/brand/producer/developer names are not written "
 "properly by the users. Write here the proper make/brand/producer/developer "
@@ -2502,11 +2507,11 @@ msgstr ""
 "пользователями пишется неверно. Напишите правильное название места "
 "изготовления/марку/производителя/разработчика."
 
-#: models.py:2264
+#: models.py:2271
 msgid "Proper name"
 msgstr "Правильное название"
 
-#: models.py:2265
+#: models.py:2272
 msgid ""
 "Sometimes, product names are not written properly by the users. Write here "
 "the proper product name, not including the make/brand/producer/developer "
@@ -2519,7 +2524,7 @@ msgstr ""
 "сгруппировать так много продуктов, как сможете, поэтому постарайтесь "
 "использовать общую версию имени вашего продукта."
 
-#: models.py:2273
+#: models.py:2280
 msgid ""
 "The official, commercial image for this product. Upload an image via the "
 "regular uploading interface, set its subject type to \"Gear\", and then "
@@ -2531,17 +2536,17 @@ msgstr ""
 "«Оборудование», и затем выберите его из списка. Если вы закачиваете "
 "несколько версий, они так же отобразятся на рекламной странице."
 
-#: models.py:2281
+#: models.py:2288
 msgid "Tagline"
 msgstr "Слоган"
 
-#: models.py:2282
+#: models.py:2289
 msgid ""
 "A memorable phrase that will sum up this product, for marketing purposes."
 msgstr ""
 "Запоминающаяся фраза, которая подчеркивает продукт, в целях маркетинга."
 
-#: models.py:2297
+#: models.py:2304
 msgid ""
 "Here you can write the full commercial description of your product. You can "
 "use some <a href=\"/faq/#comments\">formatting rules</a>."
@@ -2549,7 +2554,7 @@ msgstr ""
 "Здесь вы можете дать подробное описание вашего продукта. Вы можете "
 "использовать некоторые <a href=\"/faq/#comments\">правила форматирования</a>."
 
-#: models.py:2316
+#: models.py:2323
 msgid "Commercial gear items"
 msgstr "Рекламные элементы оборудования"
 
@@ -3940,7 +3945,6 @@ msgid "Back to top"
 msgstr "Обратно наверх"
 
 #: templates/maintenance_base.html:591
-#: templates/user_collections_add_remove_images.html:24
 #: templates/user_collections_create.html:20
 #: templates/user_collections_update.html:31 templates/base/js.html:33
 #: templates/image/edit/acquisition.html:69 templates/image/edit/basic.html:74
@@ -4219,13 +4223,19 @@ msgid "Upload complete!"
 msgstr "Закачка завершена!"
 
 #: templates/user_collections_add_remove_images.html:8
-#: templates/user_collections_add_remove_images.html:14
+#: templates/user_collections_add_remove_images.html:15
 #: templates/user/profile/navigation.html:151
 #, fuzzy
 msgid "Add/remove images"
 msgstr "Некоторые изображения"
 
-#: templates/user_collections_add_remove_images.html:22
+#: templates/user_collections_add_remove_images.html:18
+msgid ""
+"Click on the images to include them in this collection (and click again to "
+"exclude them). Then click on the Save button down below."
+msgstr ""
+
+#: templates/user_collections_add_remove_images.html:43
 #: templates/user_collections_update.html:22
 #: templates/commercial/products/edit.html:15
 #: templates/commercial/products/retailed/edit.html:15
@@ -4264,7 +4274,7 @@ msgstr "%(user)s's галерея"
 #: templates/user_collections_create.html:8
 #: templates/user_collections_create.html:12
 #: templates/user_collections_create.html:18
-#: templates/user_collections_list.html:49
+#: templates/user_collections_list.html:58
 msgid "Create new collection"
 msgstr ""
 
@@ -4301,16 +4311,16 @@ msgstr ""
 msgid "Would you like to add some images?"
 msgstr "Желаете улучшить?"
 
-#: templates/user_collections_list.html:59
+#: templates/user_collections_list.html:68
 #, fuzzy
 msgid "You do not have any collections."
 msgstr "У вас нет новых уведомлений."
 
-#: templates/user_collections_list.html:61
+#: templates/user_collections_list.html:70
 msgid "Do you want to create a collection now?"
 msgstr ""
 
-#: templates/user_collections_list.html:68
+#: templates/user_collections_list.html:77
 msgid "This user does not have any collections."
 msgstr ""
 
@@ -7799,9 +7809,19 @@ msgstr "Вы можете присоединить продукт к себе."
 msgid "Default front page section changed."
 msgstr "Главная страница раздела по-умолчанию изменена."
 
-#: views/collections.py:74
+#: views/collections.py:77
 msgid "You already have a collection with that name"
 msgstr ""
+
+#: views/collections.py:107 views/collections.py:135
+#, fuzzy
+msgid "Collection updated!"
+msgstr "Местоположения"
+
+#: views/collections.py:156
+#, fuzzy
+msgid "Collection deleted!"
+msgstr "Версия удалена."
 
 #: views/image.py:84
 msgid ""
