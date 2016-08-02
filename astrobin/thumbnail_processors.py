@@ -30,6 +30,7 @@ def watermark(image, watermark = False, **kwargs):
         try:
             text = kwargs['watermark_text']
             position = kwargs['watermark_position']
+            size = kwargs['watermark_size']
             opacity = kwargs['watermark_opacity']
         except KeyError:
             return image
@@ -43,6 +44,10 @@ def watermark(image, watermark = False, **kwargs):
             ttf = os.path.join(settings.STATIC_ROOT, 'fonts/arial.ttf')
 
             img_fraction = 0.33
+            if size == 'S':
+                img_fraction = 0.25
+            elif size == 'L':
+                img_fraction = 0.5
 
             font = ImageFont.truetype(ttf, fontsize)
             while font.getsize(text)[0] < img_fraction*image.size[0]:

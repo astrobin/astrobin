@@ -152,6 +152,12 @@ SOLAR_SYSTEM_SUBJECT_CHOICES = (
     (11, _("Other")),
 )
 
+WATERMARK_SIZE_CHOICES = (
+    ('S', _("Small")),
+    ('M', _("Medium")),
+    ('L', _("Large")),
+)
+
 WATERMARK_POSITION_CHOICES = (
     (0, _("Center")),
     (1, _("Top left")),
@@ -745,6 +751,14 @@ class Image(HasSolutionMixin, models.Model):
         choices = WATERMARK_POSITION_CHOICES,
     )
 
+    watermark_size = models.CharField(
+        max_length = 1,
+        choices = WATERMARK_SIZE_CHOICES,
+        default = 'M',
+        verbose_name = _("Size"),
+        help_text = _("The final font size will depend on how long your watermark is."),
+    )
+
     watermark_opacity = models.IntegerField(
         default = 10,
     )
@@ -1010,6 +1024,7 @@ class Image(HasSolutionMixin, models.Model):
         if self.watermark and 'watermark' in options:
             options['watermark_text'] = self.watermark_text
             options['watermark_position'] = self.watermark_position
+            options['watermark_size'] = self.watermark_size
             options['watermark_opacity'] = self.watermark_opacity
 
         try:
@@ -1135,6 +1150,7 @@ class Image(HasSolutionMixin, models.Model):
             if self.watermark and 'watermark' in options:
                 options['watermark_text'] = self.watermark_text
                 options['watermark_position'] = self.watermark_position
+                options['watermark_size'] = self.watermark_size
                 options['watermark_opacity'] = self.watermark_opacity
 
             # First we delete it from the cache
@@ -1755,6 +1771,13 @@ class UserProfile(models.Model):
 
     default_watermark = models.BooleanField(
         default = False,
+        editable = False,
+    )
+
+    default_watermark_size = models.CharField(
+        max_length = 1,
+        default = 'M',
+        choices = WATERMARK_SIZE_CHOICES,
         editable = False,
     )
 

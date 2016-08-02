@@ -659,6 +659,7 @@ def image_edit_watermark(request, id):
     image.watermark = profile.default_watermark
     image.watermark_text = profile.default_watermark_text
     image.watermark_position = profile.default_watermark_position
+    image.watermark_size = profile.default_watermark_size
     image.watermark_opacity = profile.default_watermark_opacity
 
     form = ImageEditWatermarkForm(instance = image)
@@ -876,6 +877,7 @@ def image_edit_save_watermark(request):
     profile.default_watermark = form.cleaned_data['watermark']
     profile.default_watermark_text = form.cleaned_data['watermark_text']
     profile.default_watermark_position = form.cleaned_data['watermark_position']
+    profile.default_watermark_size = form.cleaned_data['watermark_size']
     profile.default_watermark_opacity = form.cleaned_data['watermark_opacity']
     profile.save()
 

@@ -219,6 +219,7 @@ class ImageTest(TestCase):
                 'watermark': True,
                 'watermark_text': "Watermark test",
                 'watermark_position': 0,
+                'watermark_size': 'S',
                 'watermark_opacity': 100
             },
             follow = True)
@@ -231,6 +232,7 @@ class ImageTest(TestCase):
         self.assertEqual(image.watermark, True)
         self.assertEqual(image.watermark_text, "Watermark test")
         self.assertEqual(image.watermark_position, 0)
+        self.assertEqual(image.watermark_size, 'S')
         self.assertEqual(image.watermark_opacity, 100)
 
         # Test basic settings
@@ -721,6 +723,7 @@ class ImageTest(TestCase):
                 'watermark': True,
                 'watermark_text': "Watermark test",
                 'watermark_position': 0,
+                'watermark_size': 'S',
                 'watermark_opacity': 100
             }
 
@@ -769,6 +772,7 @@ class ImageTest(TestCase):
         self.assertEqual(image.watermark, True)
         self.assertEqual(image.watermark_text, "Watermark test")
         self.assertEqual(image.watermark_position, 0)
+        self.assertEqual(image.watermark_size, 'S')
         self.assertEqual(image.watermark_opacity, 100)
 
         # Missing image_id in post

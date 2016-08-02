@@ -124,7 +124,7 @@ class ImageEditWatermarkForm(forms.ModelForm):
 
     class Meta:
         model = Image
-        fields = ('watermark', 'watermark_text', 'watermark_position', 'watermark_opacity',)
+        fields = ('watermark', 'watermark_text', 'watermark_position', 'watermark_size', 'watermark_opacity',)
 
 
 class ImageEditGearForm(forms.ModelForm):
