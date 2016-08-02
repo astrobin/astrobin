@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: 0.9\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2016-08-01 11:22+0100\n"
+"POT-Creation-Date: 2016-08-02 12:46+0100\n"
 "PO-Revision-Date: 2015-12-30 10:50+0000\n"
 "Last-Translator: Samuli <samuli.vuorinen@iki.fi>\n"
 "Language-Team: Finnish <tanja@iovene.com>\n"
@@ -3533,14 +3533,14 @@ msgstr "Rekisteröidy nyt!"
 msgid "Archive of 'Image of the day' winners"
 msgstr "Menneet Päivän kuvat"
 
-#: templates/iotd_archive.html:23 templates/actstream/action.html:87
-#: templates/actstream/action.html.py:94 templates/actstream/action.html:110
-#: templates/actstream/action.html:117 templates/gear/page.html:15
-#: templates/index/root.html:83
+#: templates/iotd_archive.html:25 templates/iotd_detail.html:32
+#: templates/actstream/action.html:87 templates/actstream/action.html.py:94
+#: templates/actstream/action.html:110 templates/actstream/action.html:117
+#: templates/gear/page.html:15 templates/index/root.html:83
 msgid "by"
 msgstr "käyttäjältä"
 
-#: templates/iotd_archive.html:32 templates/index/root.html:100
+#: templates/iotd_archive.html:34 templates/index/root.html:100
 msgid "Runners-up"
 msgstr "Muita huippukuvia"
 
@@ -3605,6 +3605,20 @@ msgstr ""
 "\n"
 "                Päivän kuva on valittu. Kiitos avustasi!\n"
 "            "
+
+#: templates/iotd_detail.html:7 templates/iotd_detail.html.py:13
+#, fuzzy
+msgid "Image of the Day"
+msgstr "Päivän kuva"
+
+#: templates/iotd_detail.html:18 templates/image/detail/iotd_banner.html:19
+msgid "chosen by"
+msgstr ""
+
+#: templates/iotd_detail.html:44
+msgctxt "images"
+msgid "Chosen from the following candidates"
+msgstr ""
 
 #: templates/leaderboard.html:7 templates/leaderboard.html.py:11
 #: templates/maintenance_base.html:148 templates/base/site_links.html:90
@@ -4844,10 +4858,6 @@ msgstr "Kentän leveys"
 #: templates/image/detail/image_title.html:33
 msgid "Contains"
 msgstr "Sisältää"
-
-#: templates/image/detail/iotd_banner.html:17
-msgid "chosen by"
-msgstr ""
 
 #: templates/image/detail/js.html:103 templates/user/profile/js.html:11
 #, python-format

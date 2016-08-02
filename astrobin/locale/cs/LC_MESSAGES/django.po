@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: AstroBin 1.9\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2016-08-01 11:21+0100\n"
+"POT-Creation-Date: 2016-08-02 12:44+0100\n"
 "PO-Revision-Date: 2015-10-16 09:15+0000\n"
 "Last-Translator: VojtechKudela <vojtiik@gmail.com>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -3342,14 +3342,14 @@ msgstr ""
 msgid "Archive of 'Image of the day' winners"
 msgstr ""
 
-#: templates/iotd_archive.html:23 templates/actstream/action.html:87
-#: templates/actstream/action.html.py:94 templates/actstream/action.html:110
-#: templates/actstream/action.html:117 templates/gear/page.html:15
-#: templates/index/root.html:83
+#: templates/iotd_archive.html:25 templates/iotd_detail.html:32
+#: templates/actstream/action.html:87 templates/actstream/action.html.py:94
+#: templates/actstream/action.html:110 templates/actstream/action.html:117
+#: templates/gear/page.html:15 templates/index/root.html:83
 msgid "by"
 msgstr ""
 
-#: templates/iotd_archive.html:32 templates/index/root.html:100
+#: templates/iotd_archive.html:34 templates/index/root.html:100
 msgid "Runners-up"
 msgstr ""
 
@@ -3406,6 +3406,19 @@ msgid ""
 "                The 'Image of the day' was selected. Thank you for your "
 "help!\n"
 "            "
+msgstr ""
+
+#: templates/iotd_detail.html:7 templates/iotd_detail.html.py:13
+msgid "Image of the Day"
+msgstr ""
+
+#: templates/iotd_detail.html:18 templates/image/detail/iotd_banner.html:19
+msgid "chosen by"
+msgstr ""
+
+#: templates/iotd_detail.html:44
+msgctxt "images"
+msgid "Chosen from the following candidates"
 msgstr ""
 
 #: templates/leaderboard.html:7 templates/leaderboard.html.py:11
@@ -4541,10 +4554,6 @@ msgstr ""
 
 #: templates/image/detail/image_title.html:33
 msgid "Contains"
-msgstr ""
-
-#: templates/image/detail/iotd_banner.html:17
-msgid "chosen by"
 msgstr ""
 
 #: templates/image/detail/js.html:103 templates/user/profile/js.html:11

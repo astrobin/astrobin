@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2016-08-01 11:23+0100\n"
+"POT-Creation-Date: 2016-08-02 12:47+0100\n"
 "PO-Revision-Date: 2015-12-30 07:03+0000\n"
 "Last-Translator: ohmishonin <kasuzen@gmail.com>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -3542,14 +3542,14 @@ msgstr "いますぐ登録しよう！"
 msgid "Archive of 'Image of the day' winners"
 msgstr "Image of the dayの受賞者たちのアーカイブ"
 
-#: templates/iotd_archive.html:23 templates/actstream/action.html:87
-#: templates/actstream/action.html.py:94 templates/actstream/action.html:110
-#: templates/actstream/action.html:117 templates/gear/page.html:15
-#: templates/index/root.html:83
+#: templates/iotd_archive.html:25 templates/iotd_detail.html:32
+#: templates/actstream/action.html:87 templates/actstream/action.html.py:94
+#: templates/actstream/action.html:110 templates/actstream/action.html:117
+#: templates/gear/page.html:15 templates/index/root.html:83
 msgid "by"
 msgstr "by"
 
-#: templates/iotd_archive.html:32 templates/index/root.html:100
+#: templates/iotd_archive.html:34 templates/index/root.html:100
 msgid "Runners-up"
 msgstr "Runners-up"
 
@@ -3612,6 +3612,20 @@ msgid ""
 msgstr ""
 "\n"
 "Image of the dayが選ばれました。あなたの協力に感謝します。"
+
+#: templates/iotd_detail.html:7 templates/iotd_detail.html.py:13
+#, fuzzy
+msgid "Image of the Day"
+msgstr "Image of the day"
+
+#: templates/iotd_detail.html:18 templates/image/detail/iotd_banner.html:19
+msgid "chosen by"
+msgstr ""
+
+#: templates/iotd_detail.html:44
+msgctxt "images"
+msgid "Chosen from the following candidates"
+msgstr ""
 
 #: templates/leaderboard.html:7 templates/leaderboard.html.py:11
 #: templates/maintenance_base.html:148 templates/base/site_links.html:90
@@ -4848,10 +4862,6 @@ msgstr "視野半径"
 #: templates/image/detail/image_title.html:33
 msgid "Contains"
 msgstr "説明"
-
-#: templates/image/detail/iotd_banner.html:17
-msgid "chosen by"
-msgstr ""
 
 #: templates/image/detail/js.html:103 templates/user/profile/js.html:11
 #, python-format
