@@ -167,7 +167,6 @@ class UserCollectionsDetail(UserCollectionsBase, DetailView):
         context['alias'] = 'gallery'
         return context
 
-
     def get_template_names(self):
         if self.request.is_ajax():
             return 'inclusion_tags/image_list_entries.html'

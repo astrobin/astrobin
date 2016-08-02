@@ -29,7 +29,8 @@ from astrobin.views import (
     api as api_views,
     image as image_views,
     moderation as moderation_views,
-    collections as collections_views)
+    collections as collections_views,
+    iotd as iotd_views)
 from astrobin.api import (
     ImageOfTheDayResource,
     ImageResource,
@@ -295,6 +296,7 @@ urlpatterns = patterns('',
     ###########################################################################
 
     url(r'^iotd/choose/(?:(?P<image_pk>\d+)/)?$', views.iotd_choose, name='iotd_choose'),
+    url(r'^iotd/detail/(?:(?P<iotd_pk>\d+)/)?$', iotd_views.IotdDetailView.as_view(), name='iotd_detail'),
 
     ###########################################################################
     ### MODERATION VIEWS                                                    ###
