@@ -19,7 +19,9 @@
                     <div class="data">
                         <h3>{{iotd.image.title|escape}}</h3>
                         <p>
-                            {{iotd.date|date:"SHORT_DATE_FORMAT"}},
+                            <a href="{% url iotd_detail iotd.pk %}">
+                                {{iotd.date|date:"SHORT_DATE_FORMAT"}}
+                            </a>,
                             {% trans "by" %}
                             <a href="{% url user_page iotd.image.user %}">
                                 {{iotd.image.user.userprofile}}

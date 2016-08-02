@@ -9,7 +9,9 @@
                 <i class="icon-trophy"></i>
                 {% trans "Image of the day" %}
                 <span class="date">
-                    {{iotd_date|date:"SHORT_DATE_FORMAT"}}
+                    <a href="{% url iotd_detail image.image_of_the_day.all.0.pk %}">
+                        {{iotd_date|date:"SHORT_DATE_FORMAT"}}
+                    </a>
                 </span>
                 {% if image.image_of_the_day.all.0.chosen_by %}
                 <span class="chosen-by">
