@@ -20,7 +20,7 @@ class ImageModerationListView(
         LoginRequiredMixin, ListView, GroupRequiredMixin):
     group_required = "Content moderators"
     model = Image
-    queryset = Image.objects.filter(moderator_decision = 0)
+    queryset = Image.all_objects.filter(moderator_decision = 0)
     template_name = "moderation/image_list.html"
 
 
@@ -28,7 +28,7 @@ class ImageModerationSpamListView(
         LoginRequiredMixin, ListView, GroupRequiredMixin):
     group_required = "Content moderators"
     model = Image
-    queryset = Image.objects.filter(moderator_decision = 2)
+    queryset = Image.all_objects.filter(moderator_decision = 2)
     template_name = "moderation/spam_list.html"
 
 
@@ -39,7 +39,7 @@ class ImageModerationMarkAsSpamView(
 
     def post(self, request, *args, **kwargs):
         ids = request.POST.getlist('ids[]')
-        Image.objects.filter(pk__in = ids).update(
+        Image.all_objects.filter(pk__in = ids).update(
             moderator_decision = 2,
             moderated_when = datetime.date.today(),
             moderated_by = request.user)
@@ -56,10 +56,26 @@ class ImageModerationMarkAsHamView(
 
     def post(self, request, *args, **kwargs):
         ids = request.POST.getlist('ids[]')
-        Image.objects.filter(pk__in = ids).update(
+        Image.all_objects.filter(pk__in = ids).update(
             moderator_decision = 1,
             moderated_when = datetime.date.today(),
             moderated_by = request.user)
+
+        return self.render_json_response({
+            'status': 'OK',
+        })
+
+
+class ImageModerationBanAllView(
+        LoginRequiredMixin, GroupRequiredMixin, JSONResponseMixin, View):
+    group_required = "Content moderators"
+    methods = "post"
+
+    def post(self, request, *args, **kwargs):
+        import pdb; pdb.set_trace()
+        images = Image.all_objects.filter(moderator_decision = 2)
+        for i in images:
+            i.user.delete()
 
         return self.render_json_response({
             'status': 'OK',

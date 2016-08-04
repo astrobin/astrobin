@@ -312,6 +312,9 @@ urlpatterns = patterns('',
     url(r'^moderate/images/mark-as-ham/$',
             moderation_views.ImageModerationMarkAsHamView.as_view(),
             name='image_moderation_mark_as_ham'),
+    url(r'^moderate/images/ban-all/$',
+            moderation_views.ImageModerationBanAllView.as_view(),
+            name='image_moderation_ban_all'),
 
     ###########################################################################
     ### PAGES VIEWS                                                         ###
