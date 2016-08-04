@@ -32,8 +32,10 @@ from toggleproperties.models import ToggleProperty
 
 # AstroBin
 from astrobin.forms import (
+    CopyGearForm,
     ImageDemoteForm,
     ImageEditBasicForm,
+    ImageEditGearForm,
     ImageFlagThumbsForm,
     ImagePromoteForm,
     ImageRevisionUploadForm,
@@ -796,6 +798,7 @@ class ImageEditBaseView(LoginRequiredMixin, UpdateView):
     model = Image
     pk_url_kwarg = 'id'
     template_name_suffix = ''
+    context_object_name = 'image'
 
     def get_queryset(self):
         return self.model.all_objects.all()
@@ -834,3 +837,32 @@ class ImageEditBasicView(ImageEditBaseView):
         if 'submit_gear' in self.request.POST:
             return reverse_lazy('image_edit_gear', kwargs = {'id': image.pk})
         return reverse_lazy('image_detail', kwargs = {'id': image.pk})
+
+
+class ImageEditGearView(ImageEditBaseView):
+    form_class = ImageEditGearForm
+    template_name = 'image/edit/gear.html'
+
+    def get_context_data(self, **kwargs):
+        context = super(ImageEditGearView, self).get_context_data(**kwargs)
+
+        user = self.get_object().user
+        profile = user.userprofile
+
+        context['no_gear'] = not(profile.telescopes and profile.cameras)
+        context['copy_gear_form'] = CopyGearForm(user)
+        return context
+
+    def get_success_url(self):
+        image = self.get_object()
+        if 'submit_acquisition' in self.request.POST:
+            return reverse_lazy('image_edit_acquisition', kwargs = {'id': image.pk})
+        return reverse_lazy('image_detail', kwargs = {'id': image.pk})
+
+    def get_form(self, form_class):
+        image = self.get_object()
+        if self.request.method == 'POST':
+            return form_class(
+                user = image.user, instance = image, data = self.request.POST)
+        else:
+            return form_class(user = image.user, instance = image)

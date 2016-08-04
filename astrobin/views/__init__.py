@@ -674,31 +674,6 @@ def image_edit_watermark(request, id):
 
 @login_required
 @require_GET
-def image_edit_gear(request, id):
-    image = get_object_or_404(Image.all_objects, pk=id)
-    profile = image.user.userprofile
-    if request.user != image.user and not request.user.is_superuser:
-        return HttpResponseForbidden()
-
-    no_gear = True
-    if profile.telescopes and profile.cameras:
-        no_gear = False
-
-    form = ImageEditGearForm(user=image.user, instance=image)
-    response_dict = {
-        'form': form,
-        'image':image,
-        'no_gear':no_gear,
-        'copy_gear_form': CopyGearForm(request.user),
-    }
-
-    return render_to_response('image/edit/gear.html',
-                              response_dict,
-                              context_instance=RequestContext(request))
-
-
-@login_required
-@require_GET
 def image_edit_acquisition(request, id):
     image = get_object_or_404(Image.all_objects, pk=id)
     if request.user != image.user and not request.user.is_superuser:
@@ -888,51 +863,6 @@ def image_edit_save_watermark(request):
     # Force new thumbnails
     image.thumbnail_invalidate()
 
-    return HttpResponseRedirect(image.get_absolute_url())
-
-
-@login_required
-@require_POST
-def image_edit_save_gear(request):
-    try:
-        image_id = request.POST['image_id']
-    except MultiValueDictKeyError:
-        raise Http404
-
-    image = get_object_or_404(Image.all_objects, pk=image_id)
-    if request.user != image.user and not request.user.is_superuser:
-        return HttpResponseForbidden()
-
-    image.imaging_telescopes.clear()
-    image.guiding_telescopes.clear()
-    image.mounts.clear()
-    image.imaging_cameras.clear()
-    image.guiding_cameras.clear()
-    image.focal_reducers.clear()
-    image.filters.clear()
-    image.software.clear()
-    image.accessories.clear()
-
-    form = ImageEditGearForm(data=request.POST,
-                             user=image.user,
-                             instance=image)
-    response_dict = {
-        'image': image,
-    }
-
-    if not form.is_valid():
-        messages.error(request, _("There was one or more errors processing the form. You may need to scroll down to see them."))
-        return render_to_response("image/edit/gear.html",
-            response_dict,
-            context_instance=RequestContext(request))
-    form.save()
-
-    response_dict['image'] = image
-
-    if 'submit_acquisition' in request.POST:
-        return HttpResponseRedirect(reverse('image_edit_acquisition', kwargs={'id': image.id}))
-
-    messages.success(request, _("Form saved. Thank you!"))
     return HttpResponseRedirect(image.get_absolute_url())
 
 

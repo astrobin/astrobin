@@ -266,7 +266,7 @@ class ImageTest(TestCase):
         self.assertEqual(image.allow_comments, True)
 
         response = self.client.post(
-            reverse('image_edit_save_gear'),
+            reverse('image_edit_gear', args = (image.pk,)),
             {
                 'image_id': image.pk,
                 'submit_acquisition': True,
@@ -825,9 +825,6 @@ class ImageTest(TestCase):
         def get_url(args = None):
             return reverse('image_edit_gear', args = args)
 
-        def post_url(args = None):
-            return reverse('image_edit_save_gear', args = args)
-
         self.client.login(username = 'test', password = 'password')
         self._do_upload('astrobin/fixtures/test.jpg')
         image = self._get_last_image()
@@ -842,7 +839,7 @@ class ImageTest(TestCase):
 
         # POST
         response = self.client.post(
-            post_url(),
+            get_url((image.pk,)),
             post_data(image),
             follow = True)
         self.assertEqual(response.status_code, 403)
@@ -855,14 +852,11 @@ class ImageTest(TestCase):
 
         # POST
         response = self.client.post(
-            post_url(),
+            get_url((image.pk,)),
             post_data(image),
             follow = True)
-        self.assertRedirects(
-            response,
-            reverse('image_detail', kwargs = {'id': image.pk}),
-            status_code = 302,
-            target_status_code = 200)
+        self.assertEqual(response.status_code, 200)
+        self._assert_message(response, "success unread", "Form saved")
         image = Image.objects.get(pk = image.pk)
         self.assertEqual(list(image.imaging_telescopes.all()), self.imaging_telescopes)
         self.assertEqual(list(image.guiding_telescopes.all()), self.guiding_telescopes)
@@ -874,9 +868,9 @@ class ImageTest(TestCase):
         self.assertEqual(list(image.filters.all()), self.filters)
         self.assertEqual(list(image.accessories.all()), self.accessories)
 
-        # Missing image_id in post
-        response = self.client.post(post_url(), {})
-        self.assertEqual(response.status_code, 404)
+        # No data
+        response = self.client.post(get_url((image.pk,)), {}, follow = True)
+        self.assertRedirects(response, reverse('image_detail', args = (image.pk,)))
         self.client.logout()
 
         # Anonymous GET
@@ -890,12 +884,12 @@ class ImageTest(TestCase):
 
         # Anonymous POST
         response = self.client.post(
-            post_url(),
+            get_url((image.pk,)),
             post_data(image),
             follow = True)
         self.assertRedirects(
             response,
-            '/accounts/login/?next=' + post_url(),
+            '/accounts/login/?next=' + get_url((image.pk,)),
             status_code = 302,
             target_status_code = 200)
 
