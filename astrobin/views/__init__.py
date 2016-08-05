@@ -1287,7 +1287,7 @@ def user_page_bookmarks(request, username):
 
     return render_to_response(template_name,
         {
-            'user': user,
+            'requested_user': user,
             'image_list': images,
             'private_message_form': PrivateMessageForm(),
             'alias': 'gallery',
@@ -1373,7 +1373,7 @@ def user_page_plots(request, username):
     return render_to_response(
         'user/plots.html',
         {
-            'user':user,
+            'requested_user':user,
             'profile':profile,
         },
         context_instance = RequestContext(request))

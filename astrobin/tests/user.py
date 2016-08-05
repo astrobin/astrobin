@@ -424,3 +424,15 @@ class UserTest(TestCase):
         self.assertNotContains(response, 'top100-badge')
 
         image.delete()
+
+    def test_bookmarks(self):
+        self.client.login(username = "user", password = "password")
+        response = self.client.get(reverse("user_page_bookmarks", args = (self.user.username,)))
+        self.assertEqual(response.status_code, 200)
+        self.client.logout()
+
+    def test_plots(self):
+        self.client.login(username = "user", password = "password")
+        response = self.client.get(reverse("user_page_plots", args = (self.user.username,)))
+        self.assertEqual(response.status_code, 200)
+        self.client.logout()
