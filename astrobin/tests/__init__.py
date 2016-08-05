@@ -9,3 +9,4 @@ from .subscriptions import *
 from .user import *
 from .api import *
 from .collection import *
+from .home import *

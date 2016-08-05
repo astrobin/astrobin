@@ -3583,6 +3583,16 @@ table#private-shared-folders tr:hover a.delete-folder {
 a.index-section-link {
   padding: 0 1px;
 }
+form.index-section-form {
+  margin: 0;
+  float: right;
+}
+form.index-section-form input {
+  background: none;
+  border: 0;
+  color: #cc4b2e;
+  width: 18px;
+}
 .horizontal-separator {
   padding: 0 8px;
   color: #404040;

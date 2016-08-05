@@ -3283,13 +3283,3 @@ def retailed_products_edit(request, id):
             'gear': Gear.objects.filter(retailed = product)[0],
         },
         context_instance = RequestContext(request))
-
-
-@login_required
-def set_default_frontpage_section(request, section):
-    profile = request.user.userprofile
-    profile.default_frontpage_section = section
-    profile.save()
-
-    messages.success(request, _("Default front page section changed."))
-    return HttpResponseRedirect(reverse('index'))
