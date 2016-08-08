@@ -185,3 +185,13 @@ class RawImageTest(TestCase):
         self.assertEqual(response.status_code, 404)
         self.assertEqual(RawImage.objects.filter(id = rawimage_id).count(), 1)
         self.client.logout()
+
+     #########################################################################
+    ###########################################################################
+    ### L I B R A R Y                                                       ###
+     #########################################################################
+
+    def test_library(self):
+        self.client.login(username = 'username_sub', password = 'passw0rd')
+        response = self.client.get(reverse('rawdata.library'))
+        self.assertEqual(response.status_code, 200)

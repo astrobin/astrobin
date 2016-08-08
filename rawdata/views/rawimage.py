@@ -107,6 +107,7 @@ class RawImageLibrary(RestrictToSubscriberMixin, TemplateView):
         context['progress_class'] = rawdata_user_progress_class(self.request.user)
         context['total_files'] = total_files.count()
         context['unindexed_count'] = total_files.filter(indexed = False).count()
+        context['requested_user'] = self.request.user
 
         for filtering in (
             'type',
