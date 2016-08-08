@@ -1392,7 +1392,7 @@ def user_page_api_keys(request, username):
     return render_to_response(
         'user/api_keys.html',
         {
-            'user': user,
+            'requested_user': user,
             'profile': profile,
             'api_keys': keys,
         },
