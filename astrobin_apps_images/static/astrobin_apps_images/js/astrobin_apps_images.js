@@ -3,7 +3,7 @@ $(document).ready(function() {
     window.loadAstroBinImages = function(fragment) {
         $(fragment).find('img.astrobin-image[data-loaded=false]').each(function(index) {
             var $img = $(this);
-            var random_timeout = Math.floor((Math.random()*0)+100);
+            var random_timeout = Math.floor(Math.random() * 100) + 100; // 100-200 ms
 
             setTimeout(function() {
                 var id = $img.attr('data-id');
