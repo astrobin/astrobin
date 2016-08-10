@@ -77,7 +77,6 @@
 
         {% if alias == 'thumb' or alias == 'gallery' %}
             <div id="capty-target-{{image.id}}-{{randomid}}" class="capty-target">
-            {% cache 43200 astrobin_image_capty capty_cache_key %}
                 <div class="capty-caption-content">
                     <div class="link-overlay" style="width:{{size_x}}px; height:{{size_y}}px">
                         {% if link %}
@@ -99,6 +98,7 @@
                     , {{image.user.userprofile}}
 
                     {% if alias == 'gallery' %}
+                        {% cache 43200 astrobin_image_capty capty_cache_key %}
                         <table class="table table-condensed">
                             <tr>
                                 <th><i class="icon-calendar"></i></th>
@@ -122,9 +122,9 @@
                                 </tr>
                             {% endif %}
                         </table>
+                        {% endcache %}
                     {% endif %}
                 </div>
-            {% endcache %}
             </div>
         {% endif %}
     </div>
