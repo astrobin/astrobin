@@ -9,7 +9,7 @@
 {% block content %}
     {% include 'user/profile/navigation.html' %}
     <h1>
-        {% ifequal user request.user %}
+        {% ifequal requested_user request.user %}
             {% blocktrans %}Your followers{% endblocktrans %}
         {% else %}
             {% blocktrans with user.username as username %}{{username}}'s followers{% endblocktrans %}
