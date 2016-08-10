@@ -12,7 +12,7 @@
         {% ifequal requested_user request.user %}
             {% blocktrans %}Your followed users{% endblocktrans %}
         {% else %}
-            {% blocktrans with user.username as username %}{{username}}'s followed users{% endblocktrans %}
+            {% blocktrans with requested_user.username as username %}{{username}}'s followed users{% endblocktrans %}
         {% endifequal %}
     </h1>
 
