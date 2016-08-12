@@ -123,6 +123,7 @@ urlpatterns = patterns('',
     url(r'^rawdata/', include('rawdata.urls')),
     url(r'^toggleproperties/', include('toggleproperties.urls')),
     url(r'^users_app/', include('astrobin_apps_users.urls')),
+    url(r'^groups/', include('astrobin_apps_groups.urls')),
 
     ###########################################################################
     ### HOME VIEWS                                                          ###
