@@ -30,8 +30,8 @@ $(document).ready(function() {
                         success: function(data, status, request) {
                             var $img =
                                 $('img.astrobin-image[data-id=' + data.id +
-                                '][data-alias=' + alias +
-                                '][data-revision=' + revision +
+                                '][data-alias=' + data.alias +
+                                '][data-revision=' + data.revision +
                                 ']');
 
                             if (capty) {
