@@ -34,7 +34,7 @@ $(document).ready(function() {
                                 '][data-revision=' + data.revision +
                                 ']');
 
-                            if (capty) {
+                            if (data.capty) {
                                 $img.load(function() {
                                     captify($img);
                                 });

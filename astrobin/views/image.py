@@ -109,6 +109,7 @@ class ImageThumbView(JSONResponseMixin, DetailView):
             'id': image.pk,
             'alias': alias,
             'revision': r,
+            'capty': alias in ('gallery', 'gallery_inverted', 'thumb'),
             'url': url
         })
 
