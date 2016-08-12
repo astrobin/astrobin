@@ -5,6 +5,24 @@
 
 <div class="subnav subnav-fixed">
     <ul class="nav nav-pills">
+        {% if request.user.is_superuser %}
+            <li class="dropdown hidden-phone">
+                <a class="dropdown-toggle" data-toggle="dropdown" href="#">
+                    <i class="icon-legal icon-white"></i>
+                    {% trans "Admin" %}
+                    <span class="caret"></span>
+                </a>
+                <ul class="dropdown-menu">
+                    <li>
+                        <a href="{% url 'user_ban' requested_user %}">
+                            <i class="icon-ban-circle"></i>
+                            {% trans "Ban user" %}
+                        </a>
+                    </li>
+                 </ul>
+             </li> <!-- admin -->
+        {% endif %}
+
         <li class="dropdown">
             <a class="dropdown-toggle" data-toggle="dropdown" href="#">
                 <i class="icon-eye-open icon-white"></i>
