@@ -1,0 +1,20 @@
+{% extends 'base.html' %}
+
+{% load i18n %}
+{% load bootstrap_toolkit %}
+{% load url from future %}
+
+{% block title %}
+    {% trans "Create new group" %}
+{% endblock %}
+
+{% block content %}
+    <h1>{% trans "Create new group" %}</h1>
+
+    <form class="form-horizontal" action="." method="post">{% csrf_token %}
+        {{form|as_bootstrap}}
+        <div class="form-actions">
+            <input class="btn btn-primary" type="submit" value="{% trans "Create new group" %}"/>
+        </div>
+    </form>
+{% endblock %}

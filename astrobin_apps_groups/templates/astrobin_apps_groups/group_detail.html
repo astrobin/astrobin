@@ -1,0 +1,18 @@
+{% extends 'base.html' %}
+
+{% load i18n %}
+
+{% block title %}{{object.name}}{% endblock %}
+
+{% block content %}
+    <h1>
+        {{object.name}}
+        <small>
+            {% if object.public %}
+                {% trans "A public group" %}
+            {% else %}
+                {% trans "A private group" %}
+            {% endif %}
+        </small>
+    </h1>
+{% endblock %}
