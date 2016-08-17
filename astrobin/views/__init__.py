@@ -35,8 +35,6 @@ from django.utils.translation import ugettext as _
 from django.utils.translation import ungettext
 from django.views.decorators.cache import never_cache
 from django.views.decorators.http import require_GET, require_POST
-from django.views.generic import TemplateView
-from django.views.generic.edit import FormView
 from django.views.generic.list_detail import object_detail
 from django.views.generic.list_detail import object_list
 
