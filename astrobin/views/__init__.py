@@ -35,7 +35,6 @@ from django.utils.translation import ugettext as _
 from django.utils.translation import ungettext
 from django.views.decorators.cache import never_cache
 from django.views.decorators.http import require_GET, require_POST
-from django.views.generic.list_detail import object_detail
 from django.views.generic.list_detail import object_list
 
 # Third party
@@ -2580,30 +2579,29 @@ def gear_page(request, id, slug):
 
     show_commercial = (gear.commercial and gear.commercial.is_paid()) or (gear.commercial and gear.commercial.producer == request.user)
 
-    return object_detail(
-        request,
-        queryset = Gear.objects.all(),
-        object_id = id,
-        template_name = 'gear/page.html',
-        template_object_name = 'gear',
-        extra_context = {
-            'examples': all_images[:28],
-            'review_form': ReviewedItemForm(instance = ReviewedItem(content_type = ContentType.objects.get_for_model(Gear), content_object = gear)),
-            'reviews': ReviewedItem.objects.filter(gear = gear),
-            'content_type': ContentType.objects.get_for_model(Gear),
-            'owners_count': UserProfile.objects.filter(**{user_attr_lookup[gear_type]: gear}).count(),
-            'images_count': all_images.count(),
-            'attributes': [
-                (_(CLASS_LOOKUP[gear_type]._meta.get_field(k[0]).verbose_name),
-                 getattr(gear, k[0]),
-                 k[1]) for k in gear.attributes()],
+    response_dict = {
+        'gear': gear,
+        'examples': all_images[:28],
+        'review_form': ReviewedItemForm(instance = ReviewedItem(content_type = ContentType.objects.get_for_model(Gear), content_object = gear)),
+        'reviews': ReviewedItem.objects.filter(gear = gear),
+        'content_type': ContentType.objects.get_for_model(Gear),
+        'owners_count': UserProfile.objects.filter(**{user_attr_lookup[gear_type]: gear}).count(),
+        'images_count': all_images.count(),
+        'attributes': [
+            (_(CLASS_LOOKUP[gear_type]._meta.get_field(k[0]).verbose_name),
+             getattr(gear, k[0]),
+             k[1]) for k in gear.attributes()],
 
-            'show_tagline': show_commercial and gear.commercial.tagline,
-            'show_link': show_commercial and gear.commercial.link,
-            'show_image': show_commercial and gear.commercial.image,
-            'show_other_images': show_commercial and gear.commercial.image and gear.commercial.image.revisions.all(),
-            'show_description': show_commercial and gear.commercial.description,
-        })
+        'show_tagline': show_commercial and gear.commercial.tagline,
+        'show_link': show_commercial and gear.commercial.link,
+        'show_image': show_commercial and gear.commercial.image,
+        'show_other_images': show_commercial and gear.commercial.image and gear.commercial.image.revisions.all(),
+        'show_description': show_commercial and gear.commercial.description,
+    }
+
+    return render_to_response('gear/page.html',
+        response_dict,
+        context_instance = RequestContext(request))
 
 
 @require_GET

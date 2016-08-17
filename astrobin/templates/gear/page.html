@@ -12,7 +12,9 @@
     <div class="gear-page">
         <div class="page-header">
             <h1>{{gear.get_name}}
-                <small>{% trans "by" %} {{gear.get_make}}</small>
+                {% if gear.get_make %}
+                    <small>{% trans "by" %} {{gear.get_make}}</small>
+                {% endif %}
             </h1>
             {% if show_tagline %}
                 <h4>{{gear.commercial.tagline}}</h4>

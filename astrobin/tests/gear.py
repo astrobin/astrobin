@@ -1,5 +1,6 @@
 # Django
 from django.contrib.auth.models import User
+from django.core.urlresolvers import reverse
 from django.test import TestCase
 
 # AstroBin
@@ -143,3 +144,15 @@ class GearTest(TestCase):
         g1.delete()
         i.delete()
         u.delete()
+
+
+    ###########################################################################
+    # VIEW TESTS                                                              #
+    ###########################################################################
+
+    def test_gear_page_view(self):
+        g, created = Telescope.objects.get_or_create(name = "Test telescope")
+        response = self.client.get(reverse('gear_page', kwargs = {'id': g.pk}))
+        self.assertEqual(response.status_code, 200)
+        self.assertContains(response, "<h1>Test telescope</h1>", html = True)
+
