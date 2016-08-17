@@ -9,7 +9,7 @@
   <p>{% blocktrans %}The following site has requested verification of your account:{% endblocktrans %}
   <a class="btn btn-mini" target="_blank" href="{{trust_root}}">{{ trust_root|escape }}</a></p>
 
-  <form class="form-horizontal" method="post" action="{% url openid-provider-decide %}">{% csrf_token %}
+  <form class="form-horizontal" method="post" action="{% url 'openid-provider-decide' %}">{% csrf_token %}
     <input type="hidden" name="decide_page" value="True" />
     <div class="actions">
       <input class="btn btn-primary" type="submit" value="{% trans "Verify" %}" name="allow" />

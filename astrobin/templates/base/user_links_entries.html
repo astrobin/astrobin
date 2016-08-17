@@ -9,77 +9,77 @@
     </a>
     <ul class="dropdown-menu">
         <li>
-            <a href="{% url set_language "en" %}" title="English">
+            <a href="{% url 'set_language' "en" %}" title="English">
                 <img src="{{STATIC_URL}}icons/flags/16/United-Kingdom.png" alt="English"/> English
             </a>
         </li>
         <li>
-            <a href="{% url set_language "it" %}" title="Italiano">
+            <a href="{% url 'set_language' "it" %}" title="Italiano">
                 <img src="{{STATIC_URL}}icons/flags/16/Italy.png" alt="Italiano"/> Italiano
             </a>
         </li>
         <li>
-            <a href="{% url set_language "es" %}" title="Español">
+            <a href="{% url 'set_language' "es" %}" title="Español">
                 <img src="{{STATIC_URL}}icons/flags/16/Spain.png" alt="Español"/> Español
             </a>
         </li>
         <li>
-            <a href="{% url set_language "fr" %}" title="Français">
+            <a href="{% url 'set_language' "fr" %}" title="Français">
                 <img src="{{STATIC_URL}}icons/flags/16/France.png" alt="Français"/> Français
             </a>
         </li>
         <li>
-            <a href="{% url set_language "fi" %}" title="Suomi">
+            <a href="{% url 'set_language' "fi" %}" title="Suomi">
                 <img src="{{STATIC_URL}}icons/flags/16/Finland.png" alt="Suomi"/> Suomi
             </a>
         </li>
         <li>
-            <a href="{% url set_language "de" %}" title="Deutsch">
+            <a href="{% url 'set_language' "de" %}" title="Deutsch">
                 <img src="{{STATIC_URL}}icons/flags/16/Germany.png" alt="Deutsch"/> Deutsch
             </a>
         </li>
         <li>
-            <a href="{% url set_language "nl" %}" title="Nederlands">
+            <a href="{% url 'set_language' "nl" %}" title="Nederlands">
                 <img src="{{STATIC_URL}}icons/flags/16/Netherlands.png" alt="Nederlands"/> Nederlands
             </a>
         </li>
         <li>
-            <a href="{% url set_language "tr" %}" title="Türk">
+            <a href="{% url 'set_language' "tr" %}" title="Türk">
                 <img src="{{STATIC_URL}}icons/flags/16/Turkey.png" alt="Türk"/> Türk
             </a>
         </li>
         <li>
-            <a href="{% url set_language "sq" %}" title="Shqipe">
+            <a href="{% url 'set_language' "sq" %}" title="Shqipe">
                 <img src="{{STATIC_URL}}icons/flags/16/Albania.png" alt="Shqipe"/> Shqipe
             </a>
         </li>
         <li>
-            <a href="{% url set_language "pl" %}" title="Polski">
+            <a href="{% url 'set_language' "pl" %}" title="Polski">
                 <img src="{{STATIC_URL}}icons/flags/16/Poland.png" alt="Polski"/> Polski
             </a>
         </li>
         <li>
-            <a href="{% url set_language "pt-BR" %}" title="Português brasileiro">
+            <a href="{% url 'set_language' "pt-BR" %}" title="Português brasileiro">
                 <img src="{{STATIC_URL}}icons/flags/16/Brazil.png" alt="Português brasileiro"/> Português brasileiro
             </a>
         </li>
         <li>
-            <a href="{% url set_language "el" %}" title="Ελληνικά">
+            <a href="{% url 'set_language' "el" %}" title="Ελληνικά">
                 <img src="{{STATIC_URL}}icons/flags/16/Greece.png" alt="Ελληνικά"/> Ελληνικά
             </a>
         </li>
         <li>
-            <a href="{% url set_language "ru" %}" title="Русский">
+            <a href="{% url 'set_language' "ru" %}" title="Русский">
                 <img src="{{STATIC_URL}}icons/flags/16/Russia.png" alt="Русский"/> Русский
             </a>
         </li>
         <li>
-            <a href="{% url set_language "ar" %}" title="العربية">
+            <a href="{% url 'set_language' "ar" %}" title="العربية">
                 <img src="{{STATIC_URL}}icons/flags/16/Saudi-Arabia.png" alt="العربية"/> العربية
             </a>
         </li>
         <li>
-            <a href="{% url set_language "ja" %}" title="日本語">
+            <a href="{% url 'set_language' "ja" %}" title="日本語">
                 <img src="{{STATIC_URL}}icons/flags/16/Japan.png" alt="日本語"/> 日本語
             </a>
         </li>
@@ -119,7 +119,7 @@
 
 <li class="dropdown">
     <div class="btn-group">
-        <a href="{% url user_page request.user %}" class="btn btn-primary">
+        <a href="{% url 'user_page' request.user.username %}" class="btn btn-primary">
             {{userprofile|truncatechars:"20"}}
             <span id="navbar-user-scores">
                 {% if not request.user.userprofile.exclude_from_competitions %}
@@ -137,13 +137,13 @@
         </a>
         <ul class="dropdown-menu">
             <li>
-                <a href="{% url subscription_list %}">
+                <a href="{% url 'subscription_list' %}">
                     <i class="icon-asterisk"></i>
                     {% trans "Subscription plans" %}
                 </a>
             </li>
             <li>
-                <a href="{% url image_upload %}">
+                <a href="{% url 'image_upload' %}">
                     <i class="icon-upload-alt"></i>
                     {% trans "Upload" %}
                 </a>
@@ -152,7 +152,7 @@
 
             {% if is_producer or is_retailer %}
                 <li>
-                    <a href="{% url user_page_commercial_products request.user %}">
+                    <a href="{% url 'user_page_commercial_products' request.user.username %}">
                         <i class="icon-barcode"></i>
                         {% trans "Commercial products" %}
                     </a>
@@ -160,19 +160,19 @@
             {% endif %}
 
             <li>
-                <a href="{% url user_page request.user %}">
+                <a href="{% url 'user_page' request.user.username %}">
                     <i class="icon-picture"></i>
                     {% trans "Gallery" %}
                 </a>
             </li>
             <li>
-                <a href="{% url user_page_bookmarks request.user %}">
+                <a href="{% url 'user_page_bookmarks' request.user.username %}">
                     <i class="icon-bookmark"></i>
                     {% trans "Bookmarks" %}
                 </a>
             </li>
             <li>
-                <a href="{% url user_page_plots request.user %}">
+                <a href="{% url 'user_page_plots' request.user.username %}">
                     <i class="icon-bar-chart"></i>
                     {% trans "Plots" %}
                 </a>
@@ -183,7 +183,7 @@
 
             {% if rawdata_has_subscription %}
             <li>
-                <a href="{% url rawdata.library %}">
+                <a href="{% url 'rawdata.library' %}">
                     <i class="icon-book"></i>
                     {% trans "Raw data library" %}
                 </a>
@@ -191,7 +191,7 @@
             {% endif %}
 
             <li>
-                <a href="{% url rawdata.privatesharedfolder_list %}">
+                <a href="{% url 'rawdata.privatesharedfolder_list' %}">
                     <i class="icon-lock"></i>
                     {% trans "Private shared folders" %}
                 </a>
@@ -199,20 +199,20 @@
             <li class="divider"></li>
 
             <li>
-                <a href="{% url messages_inbox %}">
+                <a href="{% url 'messages_inbox' %}">
                     <i class="icon-inbox"></i>
                     {% trans "My messages" %}
                 </a>
             </li>
             <li>
-                <a href="{% url user_page_api_keys request.user %}">
+                <a href="{% url 'user_page_api_keys' request.user.username %}">
                     <i class="icon-key"></i>
                     {% trans "API Keys" %}
                 </a>
             </li>
 
             <li>
-                <a href="{% url profile_edit_basic %}">
+                <a href="{% url 'profile_edit_basic' %}">
                     <i class="icon-edit"></i>
                     {% trans "My settings" %}
                 </a>
@@ -221,7 +221,7 @@
             {% if is_iotd_staff %}
                 <li class="divider"></li>
                 <li>
-                    <a href="{% url iotd_choose %}">
+                    <a href="{% url 'iotd_choose' %}">
                         <i clasS="icon-legal"></i>
                         {% trans "Choose Image Of The Day" %}
                     </a>
@@ -231,7 +231,7 @@
             {% if request.user|is_content_moderator %}
                 <li class="divider"></li>
                 <li>
-                    <a href="{% url image_moderation %}">
+                    <a href="{% url 'image_moderation' %}">
                         <i clasS="icon-legal"></i>
                         {% trans "Content moderation" %}
                     </a>
@@ -240,7 +240,7 @@
 
             <li class="divider"></li>
             <li>
-                <a href="{% url auth_logout %}">
+                <a href="{% url 'auth_logout' %}">
                     <i class="icon-signout"></i>
                     {% trans "Logout" %}
                 </a>
@@ -258,10 +258,10 @@
     <div id="realname-prompt">
         <div class="bubble">
             {% blocktrans %}Would you like to start using your real name on AstroBin?{% endblocktrans %}
-            <form method="POST" action="{% url profile_seen_realname %}">{% csrf_token %}
+            <form method="POST" action="{% url 'profile_seen_realname' %}">{% csrf_token %}
                 <a
                     class="btn btn-mini btn-primary"
-                    href="{% url profile_edit_basic %}?hl=rn">
+                    href="{% url 'profile_edit_basic' %}?hl=rn">
                     {% trans "OK" %}
                 </a>
 
@@ -284,7 +284,7 @@
 
 {% else %} <!-- request.user.is_authenticated -->
 <li class="{% current request "^/accounts/login/" %}">
-    <a href="{% url auth_login %}{% if request.path|slice:"9" != "/accounts" %}?next={{request.path}}{% endif %}">
+    <a href="{% url 'auth_login' %}{% if request.path|slice:"9" != "/accounts" %}?next={{request.path}}{% endif %}">
         {% if privatebeta_enabled %}
             {% trans "Have an invite? Login!" %}
         {% else %}
@@ -294,7 +294,7 @@
 </li>
 {% if not privatebeta_enabled %}
 <li class="{% current request "^/accounts/register/" %}">
-    <a href="{% url registration_register %}">{% trans "Register" %}</a>
+    <a href="{% url 'registration_register' %}">{% trans "Register" %}</a>
 </li>
 {% endif %}
 {% endif %} <!-- request.user.is_authenticated -->

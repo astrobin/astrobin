@@ -72,13 +72,13 @@
                     {% for review in reviews %}
                         <div id="r{{review.id}}" class="review">
                             <div class="avatar">
-                                <a href="{% url user_page review.user %}">
+                                <a href="{% url 'user_page' review.user %}">
                                     {% avatar review.user 48 %}
                                 </a>
                             </div>
 
                             <div class="meta">
-                                <a class="author" href="{% url user_page review.user %}">
+                                <a class="author" href="{% url 'user_page' review.user %}">
                                     {{review.user}}
                                 </a>
                                 {{review.date_added|ago}}
@@ -108,7 +108,7 @@
                             {% endif %}
                         </p>
 
-                        <form class="form-vertical review-form" method="post" action="{% url gear_review_save %}">{% csrf_token %}
+                        <form class="form-vertical review-form" method="post" action="{% url 'gear_review_save' %}">{% csrf_token %}
                             {{review_form|as_bootstrap}}
                             <input type="hidden" name="gear_id" value="{{gear.id}}" />
                             <input type="submit" class="btn btn-mini btn-primary" value="{% trans "Submit" %} &rarr;" />
@@ -303,10 +303,10 @@ $(document).ready(function() {
                 var $container = $('<div/>').addClass('review');
 
                 var $avatar = $('<div/>').addClass('avatar');
-                var $avatar_link = $('<a/>').attr('href', '{% url user_page request.user %}');
+                var $avatar_link = $('<a/>').attr('href', '{% url 'user_page' request.user %}');
 
                 var $meta = $('<div/>').addClass('meta');
-                var $author = $('<a/>').attr('href', '{% url user_page request.user %}').text('{{request.user}}');
+                var $author = $('<a/>').attr('href', '{% url 'user_page' request.user %}').text('{{request.user}}');
 
                 var $content = $('<div/>').addClass('content');
                 var $score = $('<div/>').addClass('score');
@@ -338,13 +338,13 @@ $(document).ready(function() {
     astrobin_stats.init();
     astrobin_stats.plot(
         '#stats_total_images',
-        "{% url stats_gear_total_images gear.id %}",
+        "{% url 'stats_gear_total_images' gear.id %}",
         30000);
     astrobin_stats.enableTooltips("#stats_total_images");
 
     astrobin_stats.plot(
         '#stats_gear_views',
-        "{% url stats_gear_views gear.id %}",
+        "{% url 'stats_gear_views' gear.id %}",
         30000);
     astrobin_stats.enableTooltips("#stats_gear_views");
 

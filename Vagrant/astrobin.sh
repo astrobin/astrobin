@@ -37,6 +37,7 @@ function check {
 
     local VARS=(
         ASTROBIN_DEBUG
+        ASTROBIN_HOST
         ASTROBIN_EMAIL_HOST_USER
         ASTROBIN_EMAIL_HOST_PASSWORD
         ASTROBIN_EMAIL_HOST

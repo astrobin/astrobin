@@ -130,8 +130,8 @@ def object_list(request, queryset, paginate_by=None, page=None,
             'has_next': page_obj.has_next(),
             'has_previous': page_obj.has_previous(),
             'page': page_obj.number,
-            'next': page_obj.next_page_number(),
-            'previous': page_obj.previous_page_number(),
+            'next': page_obj.next_page_number() if page_obj.has_next() else None,
+            'previous': page_obj.previous_page_number() if page_obj.has_previous() else None,
             'first_on_page': page_obj.start_index(),
             'last_on_page': page_obj.end_index(),
             'pages': paginator.num_pages,
@@ -2607,14 +2607,15 @@ def gear_page(request, id, slug):
     from astrobin.gear import CLASS_LOOKUP
 
     all_images = Image.by_gear(gear, gear_type).filter(is_wip = False)
-
     show_commercial = (gear.commercial and gear.commercial.is_paid()) or (gear.commercial and gear.commercial.producer == request.user)
+    content_type = ContentType.objects.get(app_label = 'astrobin', model = 'gear')
+    reviews = ReviewedItem.objects.filter(object_id = id, content_type = content_type)
 
     response_dict = {
         'gear': gear,
         'examples': all_images[:28],
         'review_form': ReviewedItemForm(instance = ReviewedItem(content_type = ContentType.objects.get_for_model(Gear), content_object = gear)),
-        'reviews': ReviewedItem.objects.filter(gear = gear),
+        'reviews': reviews,
         'content_type': ContentType.objects.get_for_model(Gear),
         'owners_count': UserProfile.objects.filter(**{user_attr_lookup[gear_type]: gear}).count(),
         'images_count': all_images.count(),

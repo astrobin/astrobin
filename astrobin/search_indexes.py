@@ -10,7 +10,6 @@ from django.db.models import Q
 
 # Third party apps
 from haystack.indexes import *
-from haystack import site
 from hitcount.models import HitCount
 from toggleproperties.models import ToggleProperty
 
@@ -163,7 +162,7 @@ def _prepare_comments(obj):
         deleted = False).count()
 
 
-class GearIndex(SearchIndex):
+class GearIndex(SearchIndex, Indexable):
     model_weight = IntegerField()
 
     text = CharField(document=True, use_template=True)
@@ -188,8 +187,8 @@ class GearIndex(SearchIndex):
     producers = MultiValueField()
     retailers = MultiValueField()
 
-    def index_queryset(self):
-        return Gear.objects\
+    def index_queryset(self, using = None):
+        return self.get_model().objects\
             .exclude(commercial = None)\
             .filter(commercial__producer__groups__name = 'Paying')
 
@@ -263,7 +262,7 @@ class GearIndex(SearchIndex):
         return ["%s" % x.retailer.userprofile.company_name for x in retailers]
 
 
-class UserIndex(SearchIndex):
+class UserIndex(SearchIndex, Indexable):
     model_weight = IntegerField()
 
     text = CharField(document=True, use_template=True)
@@ -315,8 +314,8 @@ class UserIndex(SearchIndex):
 
     username = CharField(model_attr = 'username')
 
-    def index_queryset(self):
-        return User.objects.all()
+    def index_queryset(self, using = None):
+        return self.get_model().objects.all()
 
     def get_model(self):
         return User
@@ -481,7 +480,7 @@ class UserIndex(SearchIndex):
         return NestedComment.objects.filter(author = obj, deleted = False).count()
 
 
-class ImageIndex(SearchIndex):
+class ImageIndex(SearchIndex, Indexable):
     model_weight = IntegerField()
 
     text = CharField(document=True, use_template=True)
@@ -529,8 +528,8 @@ class ImageIndex(SearchIndex):
 
     username = CharField(model_attr = 'user__username')
 
-    def index_queryset(self):
-        return Image.objects.filter(moderator_decision = 1)
+    def index_queryset(self, using = None):
+        return self.get_model().objects.filter(moderator_decision = 1)
 
     def get_model(self):
         return Image
@@ -624,8 +623,3 @@ class ImageIndex(SearchIndex):
     def prepare_is_commercial(self, obj):
         commercial_gear = CommercialGear.objects.filter(image = obj)
         return commercial_gear.count() > 0
-
-
-site.register(Gear, GearIndex)
-site.register(User, UserIndex)
-site.register(Image, ImageIndex)

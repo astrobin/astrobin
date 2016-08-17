@@ -1,5 +1,5 @@
 # Django
-from django.conf.urls.defaults import *
+from django.conf.urls import patterns, url, include
 from django.views.generic import *
 
 # This app

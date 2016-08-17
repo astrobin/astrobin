@@ -1,1 +1,92 @@
-base.html
+{% load astrobin_apps_donations_tags %}
+{% load compressed %}
+{% load dfp_tags %}
+
+<!DOCTYPE html>
+<html lang="{% if request.user.is_authenticated and user_language %}{{user_language}}{% else %}en{% endif %}">
+    <head>
+        <title>{% block title %}{% endblock %} | AstroBin</title>
+
+        {% include "base/meta.html" %}
+        {% include "base/favicon.html" %}
+        {% include "base/ie8html5.html" %}
+
+        <link rel="stylesheet" href="//ajax.googleapis.com/ajax/libs/jqueryui/1.10.3/themes/ui-darkness/jquery-ui.min.css"/>
+        <link rel="stylesheet" href="//cdn.jsdelivr.net/jquery.tokeninput/1.6.0/styles/token-input.css"/>
+        <link rel="stylesheet" href="//cdn.jsdelivr.net/jquery.multiselect/1.13/jquery.multiselect.css"/>
+        <link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/qtip2/2.1.1/basic/jquery.qtip.min.css"/>
+        <link rel="stylesheet" href="//cdn.jsdelivr.net/lightbox/0.5/css/jquery.lightbox-0.5.css"/>
+
+
+        {% compressed_css 'screen' %}
+
+        {% include "base/ie6.html" %}
+
+        {% block extra_css %}{% endblock %}
+        {% block extra_head %}{% endblock %}
+
+        {% comment %}Alternative spelling.{% endcomment %}
+        {% block extrahead %}{% endblock %}
+
+        {% include "base/noscript.html" %}
+        {% include "base/ga.html" %}
+
+        <script src="//ajax.googleapis.com/ajax/libs/jquery/1.8.3/jquery.min.js"></script>
+    </head>
+
+    <body data-offset="55">
+
+        <div class="navbar navbar-fixed-top">
+            <div class="navbar-inner">
+                <div class="container">
+
+                    {% include "base/site_links.html" %}
+                    {% include "base/user_links.html" %}
+                    {% include "base/search_form.html" %}
+
+                </div>
+            </div>
+        </div>
+
+        <div id="top" class="container astrobin-container">
+            {% include "base/alerts.html" %}
+
+            {% block breadcrumb %}{% endblock %}
+            {% block content %}{% endblock %}
+        </div> <!-- container -->
+
+        {% include "base/footer.html" %}
+
+        {% if DONATIONS_ENABLED and not request.user|is_donor %}
+            {% donate_modal %}
+        {% endif %}
+        {% block modals %}{% endblock %}
+
+        {% include "base/scripts.html" %}
+        {% include "base/js.html" %}
+
+        {% block extra_js %}{% endblock %}
+
+        {% if ADS_ENABLED %}
+            {% dfp_footer %}
+        {% endif %}
+
+        <!-- used to figure out how many users use ad blocking software -->
+        <script type="text/javascript">
+            document.write('<div id="adsense" style="visibility: hidden;">Test ad.</div>');
+            $(document).ready(checkAds());
+
+            /* Adblock Check */
+            function checkAds() {
+                var ad = document.getElementById('adsense');
+                if(!ad || ad.innerHTML.length == 0 || ad.clientHeight === 0) {
+                    document.write("<script>_gaq.push(['_setCustomVar', 5, 'Adblock','Blocked',2]);<\/sc" + "ript>");
+                } else {
+                    document.write("<script>_gaq.push(['_setCustomVar', 5, 'Adblock','UnBlocked',2]);<\/sc" + "ript>");
+                }
+            }
+            /* End Adblock Check */
+        </script>
+    </body>
+</html>
+

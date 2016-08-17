@@ -12,9 +12,6 @@ import operator
 import unicodedata
 
 class SearchView(SearchView):
-    def __name__(self):
-        return 'SearchView'
-
     def get_results(self):
         q = self.request.GET.get('q')
         try:

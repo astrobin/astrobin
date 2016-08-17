@@ -21,22 +21,22 @@
                             <th>{% trans "User" %}</th>
 
                             <th>
-                                <a href="{% url leaderboard %}{% query_string "sort='likes'" "" %}">
+                                <a href="{% url 'leaderboard' %}{% query_string "sort='likes'" "" %}">
                                     {% trans "AstroBin index" %} <i class="icon-sort"></i>
                                 </a>
                             </th>
                             <th>
-                                <a href="{% url leaderboard %}{% query_string "sort='followers'" "" %}">
+                                <a href="{% url 'leaderboard' %}{% query_string "sort='followers'" "" %}">
                                     {% trans "Followers" %} <i class="icon-sort"></i>
                                 </a>
                             </th>
                             <th>
-                                <a href="{% url leaderboard %}{% query_string "sort='images'" "" %}">
+                                <a href="{% url 'leaderboard' %}{% query_string "sort='images'" "" %}">
                                     {% trans "Images" %} <i class="icon-sort"></i>
                                 </a>
                             </th>
                             <th>
-                                <a href="{% url leaderboard %}{% query_string "sort='integration'" "" %}">
+                                <a href="{% url 'leaderboard' %}{% query_string "sort='integration'" "" %}">
                                     {% trans "Total integration" %} <i class="icon-sort"></i>
                                 </a>
                             </th>
@@ -47,8 +47,8 @@
                             <td>{{forloop.counter}}</td>
                             <td>
                                 <a rel="popover" class="user-popover"
-                                   data-load="{% url user_popover_ajax u.username %}"
-                                   href="{% url user_page u.username %}">
+                                   data-load="{% url 'user_popover_ajax' u.username %}"
+                                   href="{% url 'user_page' u.username %}">
                                     {% if u.object %}
                                         {{u.object.userprofile}}
                                     {% else %}

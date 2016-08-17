@@ -56,7 +56,7 @@
                 {% endwith %}
             </td>
             <td class="topic-author hidden-phone">
-                <a href="{% url user_page topic.user.username %}">
+                <a href="{% url 'user_page' topic.user.username %}">
                     {{topic.user.userprofile}}
                 </a>
             </td>

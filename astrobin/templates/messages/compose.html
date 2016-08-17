@@ -51,7 +51,7 @@
                 parameters['prePopulate'] = [{id:recipient, name:recipient}];
             }
 
-            $("#id_recipient").tokenInput("{% url recipient_search %}?format=json", parameters);
+            $("#id_recipient").tokenInput("{% url 'recipient_search' %}?format=json", parameters);
         });
     </script>
 {% endblock %}

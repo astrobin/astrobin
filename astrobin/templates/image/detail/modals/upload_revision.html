@@ -11,7 +11,7 @@
             {% blocktrans %}Did you improve the post-processing of your image? Upload the new revision!{% endblocktrans %}
         </div>
 
-        <form id="upload-revision-form" class="form-inline" action="{% url image_revision_upload_process %}" method="post" enctype="multipart/form-data">{% csrf_token %}
+        <form id="upload-revision-form" class="form-inline" action="{% url 'image_revision_upload_process' %}" method="post" enctype="multipart/form-data">{% csrf_token %}
             {{upload_revision_form.image_file}}
             <input type="hidden" name="image_id" value="{{image.id}}"/>
             <input class="btn btn-primary" type="submit" value="{% trans "Upload" %}"/>

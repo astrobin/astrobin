@@ -17,7 +17,7 @@
         var $modal = $(this);
 
         $.ajax({
-            url: '{% url astrobin_apps_users.toggleproperty_users_ajax "like" image.id image_ct.id %}',
+            url: '{% url 'astrobin_apps_users.toggleproperty_users_ajax' "like" image.id image_ct.id %}',
             timeout: 0,
             success: function(data, textStatus, jqXHR) {
                 $modal.find('.modal-body').html(data);

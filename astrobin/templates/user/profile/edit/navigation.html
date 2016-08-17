@@ -4,14 +4,14 @@
 <div class="span3">
     <ul class="nav nav-pills nav-stacked">
         <li class="{% current request '^/profile/(edit|save)/basic/$' %}">
-            <a href="{% url profile_edit_basic %}">
+            <a href="{% url 'profile_edit_basic' %}">
                 <i class="icon-edit"></i> {% trans "Basic information" %}
                 <i class="icon-chevron-right"></i>
             </a>
         </li>
         {% if is_producer or is_retailer %}
         <li class="{% current request '^/profile/(edit|save)/commercial/$' %}">
-            <a href="{% url profile_edit_commercial %}">
+            <a href="{% url 'profile_edit_commercial' %}">
                 <i class="icon-briefcase"></i> {% trans "Commercial information" %}
                 <i class="icon-chevron-right"></i>
             </a>
@@ -19,50 +19,50 @@
         {% endif %}
         {% if is_retailer %}
         <li class="{% current request '^/profile/edit/retailer/$' %}">
-            <a href="{% url profile_edit_retailer %}">
+            <a href="{% url 'profile_edit_retailer' %}">
                 <i class="icon-truck"></i> {% trans "Retailer information" %}
                 <i class="icon-chevron-right"></i>
             </a>
         </li>
         {% endif %}
         <li class="{% current request '^/profile/(edit|save)/gear/$' %}">
-            <a href="{% url profile_edit_gear %}">
+            <a href="{% url 'profile_edit_gear' %}">
                 <i class="icon-cog"></i> {% trans "Gear" %}
                 <i class="icon-chevron-right"></i>
             </a>
         </li>
         <li class="{% current request '^/profile/(edit|save)/locations/$' %}">
-            <a href="{% url profile_edit_locations %}">
+            <a href="{% url 'profile_edit_locations' %}">
                 <i class="icon-globe"></i> {% trans "Locations" %}
                 <i class="icon-chevron-right"></i>
             </a>
         </li>
         <li class="{% current request '^/profile/(edit|save)/license/$' %}">
-            <a href="{% url profile_edit_license %}">
+            <a href="{% url 'profile_edit_license' %}">
                 <i class="icon-legal"></i> {% trans "Default license" %}
                 <i class="icon-chevron-right"></i>
             </a>
         </li>
         <li class="last {% current request '^/profile/edit/flickr/$' %}">
-            <a href="{% url profile_flickr_import %}">
+            <a href="{% url 'profile_flickr_import' %}">
                 <i class="icon-download-alt"></i> {% trans "Import from Flickr" %}
                 <i class="icon-chevron-right"></i>
             </a>
         </li>
         <li class="{% current request '^/profile/(edit|save)/preferences/$' %}">
-            <a href="{% url profile_edit_preferences %}">
+            <a href="{% url 'profile_edit_preferences' %}">
                 <i class="icon-wrench"></i> {% trans "Preferences" %}
                 <i class="icon-chevron-right"></i>
             </a>
         </li>
         <li class="{% current request '^/profile/(edit|save)/notifications/$' %}">
-            <a href="{% url profile_edit_notifications %}">
+            <a href="{% url 'profile_edit_notifications' %}">
                 <i class="icon-envelope"></i> {% trans "Notifications" %}
                 <i class="icon-chevron-right"></i>
             </a>
         </li>
         <li class="{% current request '^/avatar/' %}">
-            <a href="{% url avatar_change %}">
+            <a href="{% url 'avatar_change' %}">
                 <i class="icon-user"></i> {% trans "Avatar" %}
                 <i class="icon-chevron-right"></i>
             </a>

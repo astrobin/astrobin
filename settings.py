@@ -9,6 +9,7 @@ local_path = lambda path: os.path.join(os.path.dirname(__file__), path)
 TESTING = len(sys.argv) > 1 and sys.argv[1] == 'test'
 DEBUG = os.environ['ASTROBIN_DEBUG'] == "true"
 CACHE = not DEBUG
+ALLOWED_HOSTS = ['*']
 TEMPLATE_DEBUG = DEBUG
 MAINTENANCE_MODE = False
 READONLY_MODE = False
@@ -222,7 +223,6 @@ TEMPLATE_CONTEXT_PROCESSORS = (
     'django.core.context_processors.i18n',
     'django.core.context_processors.media',
     'django.core.context_processors.static',
-    'zinnia.context_processors.version',
     'pybb.context_processors.processor',
 )
 
@@ -233,7 +233,6 @@ INSTALLED_APPS = (
     'django.contrib.contenttypes',
     'django.contrib.sessions',
     'django.contrib.sites',
-    'django.contrib.markup',
     'django.contrib.staticfiles',
 
     # Third party apps
@@ -249,7 +248,6 @@ INSTALLED_APPS = (
     'django.contrib.comments',
     'tagging',
     'mptt',
-    'zinnia',
     'tinymce',
     'hitcount',
     'pagination',
@@ -274,6 +272,7 @@ INSTALLED_APPS = (
     'dfp', # For Google DFP
     'django_user_agents',
     'pybb', # Forum
+    'markup_deprecated',
 
     # AstroBin apps
     'astrobin',
@@ -312,11 +311,19 @@ else:
 
 JOHNNY_MIDDLEWARE_KEY_PREFIX='jc_astrobin'
 
-HAYSTACK_SITECONF = 'astrobin.search_sites'
-HAYSTACK_SEARCH_ENGINE = 'solr'
-HAYSTACK_SOLR_URL = os.environ['ASTROBIN_HAYSTACK_SOLR_URL']
 HAYSTACK_DEFAULT_OPERATOR = 'AND'
 HAYSTACK_SEARCH_RESULTS_PER_PAGE = 70
+HAYSTACK_CONNECTIONS = {
+    'default': {
+        'ENGINE': 'haystack.backends.solr_backend.SolrEngine',
+        'URL': os.environ['ASTROBIN_HAYSTACK_SOLR_URL'],
+        'EXCLUDED_INDEXES': [
+            'threaded_messages.search_indexes.Thread',
+            'threaded_messages.search_indexes.ThreadIndex',
+        ],
+    },
+}
+
 
 #INTERNAL_IPS = ('88.115.221.254',) # for django-debug-toolbar: add own local IP to enable
 if DEBUG:

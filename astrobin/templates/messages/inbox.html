@@ -15,7 +15,7 @@
             <h1>{% trans "Messages" %}</h1>
 
             <div class="well">
-                <a class="btn" href="{% url messages_compose %}{% query_string "next=request.path" "" %}">
+                <a class="btn" href="{% url 'messages_compose' %}{% query_string "next=request.path" "" %}">
                    {% trans "Compose message" %}
                 </a>
             </div>

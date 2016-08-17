@@ -1,6 +1,6 @@
 # Django
 from django.conf import settings
-from django.conf.urls.defaults import *
+from django.conf.urls import patterns, url, include
 from django.contrib import admin
 
 # Third party
@@ -67,7 +67,6 @@ urlpatterns = patterns('',
     url(r'^accounts/', include('registration.urls')),
     url(r'^activity/', include('actstream.urls')),
     url(r'^avatar/', include('avatar.urls')),
-    url(r'^blog/', include('zinnia.urls')),
     url(r'^comments/', include('django.contrib.comments.urls')),
     url(r'^contact/', include("contact_form.urls", namespace="contact_form")),
     url(r'^forum/', include('pybb.urls', namespace='pybb')),

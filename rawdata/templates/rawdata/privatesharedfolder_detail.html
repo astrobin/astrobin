@@ -54,7 +54,7 @@
     <div class="page-header">
         <h1><span id="folder-name">{{object}}</span>
             <small>
-            {% url user_page object.creator as user_url %}
+            {% url 'user_page' object.creator as user_url %}
             {% blocktrans with object.creator as user and size|filesizeformat as size and object.images.all|length as image_count %}A private shared folder created by <a href="{{user_url}}">{{user}}</a>, with {{size}} in {{image_count}} images.{% endblocktrans %}
             </small>
         </h1>
@@ -94,7 +94,7 @@
                             <td class="filename" rel="tooltip" title="{{image.original_filename}}">
                                 {{image.original_filename|truncatechars:40}}
                             </td>
-                            <td><a href="{% url user_page image.user %}">{{image.user}}</td>
+                            <td><a href="{% url 'user_page' image.user %}">{{image.user}}</td>
                             <td>{{image.size|filesizeformat}}</td>
                             <td>
                                 <abbr class="timeago" title="{{image.uploaded|date:'Y-m-d\TH:i:s'}}">
@@ -136,7 +136,7 @@
 
             <div class="download-with-icon">
                 <div class="data" style="padding-top: 0">
-                    <a class="btn btn-primary btn-large" href="{% url rawdata.privatesharedfolder_download object.pk %}">
+                    <a class="btn btn-primary btn-large" href="{% url 'rawdata.privatesharedfolder_download' object.pk %}">
                         <i class="icon-download-alt"></i>
                         {% trans "Download" %}
                     </a>
@@ -192,7 +192,7 @@
         </div>
         <div class="modal-body">
             <form id="edit-folder" class="form-horizontal" method="post"
-                  action="{% url rawdata.privatesharedfolder_update object.id %}">
+                  action="{% url 'rawdata.privatesharedfolder_update' object.id %}">
                 {{update_form|as_bootstrap}}
             </form>
         </div>
@@ -211,7 +211,7 @@
         <div class="modal-body">
             <p>{% blocktrans %}Invite users to this share private folders. Invitees will be able to add raw data and processed images, and invite more users.{% endblocktrans %}
             <form id="invite" class="form-horizontal" method="post"
-                  action="{% url rawdata.privatesharedfolder_add_users object.id %}">
+                  action="{% url 'rawdata.privatesharedfolder_add_users' object.id %}">
                 {{users_form|as_bootstrap}}
             </form>
         </div>

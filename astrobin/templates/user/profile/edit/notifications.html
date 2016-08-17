@@ -8,7 +8,7 @@
     <div class="row">
         {% include 'user/profile/edit/navigation.html' %}
         <div class="span9">
-            <form class="form-horizontal" method="post" action="{% url profile_save_notifications %}">{% csrf_token %}
+            <form class="form-horizontal" method="post" action="{% url 'profile_save_notifications' %}">{% csrf_token %}
                 {{form|as_bootstrap}}
 
                 <div class="form-actions">

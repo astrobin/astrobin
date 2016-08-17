@@ -21,7 +21,7 @@
             {% for image in image_list %}
                 <tr>
                     <td>
-                        <a href="{% url user_page image.user %} ">{{image.user.userprofile}}</a>
+                        <a href="{% url 'user_page' image.user %} ">{{image.user.userprofile}}</a>
                     </td>
 
                     <td>

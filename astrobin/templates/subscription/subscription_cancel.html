@@ -12,6 +12,6 @@
         {% blocktrans %}Your transaction with PayPal has been cancelled, so no change in your subscription has occurred.{% endblocktrans %}
     </div>
 
-    {% url subscription_list as plans_url %}
+    {% url 'subscription_list' as plans_url %}
     {% blocktrans %}Return to the <a href="{{plans_url}}">plans page</a>.{% endblocktrans %}
 {% endblock %}

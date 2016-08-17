@@ -78,7 +78,7 @@
                 }).get();
 
                 $.ajax({
-                    url: '{% url image_moderation_mark_as_spam %}',
+                    url: '{% url 'image_moderation_mark_as_spam' %}',
                     type: 'POST',
                     cache: false,
                     timeout: 10000,
@@ -86,7 +86,7 @@
                     dataType: 'json'
                 }).done(function() {
                     $.ajax({
-                        url: '{% url image_moderation_mark_as_ham %}',
+                        url: '{% url 'image_moderation_mark_as_ham' %}',
                         type: 'POST',
                         cache: false,
                         timeout: 10000,

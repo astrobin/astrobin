@@ -304,7 +304,10 @@ class Gear(models.Model):
         ).update(object_id = self.id)
 
         # Find matching gear reviews and move them to the master
-        reviews = ReviewedItem.objects.filter(gear = slave).update(object_id = self.id)
+        reviews = ReviewedItem.objects.filter(
+            content_type = ContentType.objects.get(app_label = 'astrobin', model = 'gear'),
+            object_id = slave.id
+        ).update(object_id = self.id)
 
         # Fetch slave's master if this hard-merge's master doesn't have a soft-merge master
         if not self.master:
@@ -1396,7 +1399,8 @@ class DeepSky_Acquisition(Acquisition):
     )
 
     is_synthetic = models.BooleanField(
-        _("Synthetic channel"))
+        _("Synthetic channel"),
+        default = False)
 
     filter = models.ForeignKey(
         Filter,
@@ -2195,7 +2199,6 @@ class GlobalStat(models.Model):
             self.users, self.images, self.integration)
 
 
-from reviews.models import ReviewedItem
 def reviewed_item_post_save(sender, instance, created, **kwargs):
     verb = "has written a review on"
     if created:

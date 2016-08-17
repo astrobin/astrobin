@@ -70,7 +70,7 @@
                 }).get();
 
                 return $.ajax({
-                    url: '{% url image_moderation_mark_as_ham %}',
+                    url: '{% url 'image_moderation_mark_as_ham' %}',
                     type: 'POST',
                     cache: false,
                     timeout: 10000,
@@ -81,7 +81,7 @@
 
             function ban_all() {
                 return $.ajax({
-                    url: '{% url image_moderation_ban_all %}',
+                    url: '{% url 'image_moderation_ban_all' %}',
                     type: 'POST',
                     cache: false,
                     timeout: 60000,

@@ -20,7 +20,7 @@
                 <div class="business-card-inner">
                     <div class="header">
                         <i class="icon-cog icon-white"></i>
-                        <a href="{% url gear_page search_result.object.id search_result.object.slug %}">
+                        <a href="{% url 'gear_page' search_result.object.id search_result.object.slug %}">
                             {% if search_result.object.make %}{{search_result.object.make}}{% endif %}
                             {{search_result.object.name}}
                         </a>
@@ -74,12 +74,12 @@
                 <div class="business-card-inner">
                     <div class="header">
                         <i class="icon-user icon-white"></i>
-                        <a href="{% url user_page search_result.object.username %}">
+                        <a href="{% url 'user_page' search_result.object.username %}">
                             {{search_result.object.userprofile}}
                         </a>
                     </div>
                     <div class="avatar">
-                        <a href="{% url user_page search_result.object.username %}">
+                        <a href="{% url 'user_page' search_result.object.username %}">
                             {% avatar search_result.object 83 %}
                         </a>
                     </div>
@@ -133,7 +133,7 @@
                 {% if search_result.object and search_result.object.id %}
                     <tr>
                         <td>
-                            <a href="{% url user_page search_result.object.user %} ">{{search_result.object.user.userprofile}}</a>
+                            <a href="{% url 'user_page' search_result.object.user %} ">{{search_result.object.user.userprofile}}</a>
                         </td>
 
                         <td>

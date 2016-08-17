@@ -15,7 +15,7 @@
             <div class="subtle-container">
                 <h2>Step 1 &rarr;</h2>
                 <p>
-                    Get your <a href="{% url app_api_key_request %}">API Key</a> <strong>for free!</strong>
+                    Get your <a href="{% url 'app_api_key_request' %}">API Key</a> <strong>for free!</strong>
                 </p>
             </div>
         </div>
@@ -82,7 +82,7 @@
             <h2>How to get started.</h2>
             <p>
                 The first thing you will need is an <strong>API Key</strong>. Please use the
-                <a href="{% url app_api_key_request %}">API Key request form</a> to get one.
+                <a href="{% url 'app_api_key_request' %}">API Key request form</a> to get one.
             </p>
 
             <h2>How to display images.</h2>
@@ -106,7 +106,7 @@
                 one's API Key.
             </p>
             <p>
-                Please read the API section in the <a href="{% url tos %}">Terms of Service</a>.
+                Please read the API section in the <a href="{% url 'tos' %}">Terms of Service</a>.
             </p>
         </div>
     </div>

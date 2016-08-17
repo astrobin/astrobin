@@ -12,26 +12,26 @@
     <ul class="dropdown-menu">
         {% if request.user == image.user or request.user.is_superuser %}
         <li>
-            <a href="{% url image_edit_watermark image.id %}">
+            <a href="{% url 'image_edit_watermark' image.id %}">
                 <i class="icon-tint"></i>
                 {% trans "Edit watermark" %}
             </a>
         </li>
         <li>
-            <a href="{% url image_edit_basic image.id %}">
+            <a href="{% url 'image_edit_basic' image.id %}">
                 <i class="icon-edit"></i>
                 {% trans "Edit basic information" %}
             </a>
         </li>
         {% if image.subject_type < 500 %}
             <li>
-                <a href="{% url image_edit_gear image.id %}">
+                <a href="{% url 'image_edit_gear' image.id %}">
                     <i class="icon-cog"></i>
                     {% trans "Edit gear used" %}
                 </a>
             </li>
             <li>
-                <a href="{% url image_edit_acquisition image.id %}">
+                <a href="{% url 'image_edit_acquisition' image.id %}">
                     <i class="icon-time"></i>
                     {% trans "Edit acquisition details" %}
                 </a>
@@ -39,7 +39,7 @@
         {% endif %}
 
         <li>
-            <a href="{% url image_edit_license image.id %}">
+            <a href="{% url 'image_edit_license' image.id %}">
                 <i class="icon-legal"></i>
                 {% trans "Change license" %}
             </a>
@@ -57,9 +57,9 @@
         {% if not is_final %}
         <li>
             {% if is_revision %}
-                <a href="{% url image_edit_revision_make_final revision_image.id %}">
+                <a href="{% url 'image_edit_revision_make_final' revision_image.id %}">
             {% else %}
-                <a href="{% url image_edit_make_final image.id %}">
+                <a href="{% url 'image_edit_make_final' image.id %}">
             {% endif %}
 
                 <i class="icon-ok"></i>
@@ -73,9 +73,9 @@
         {% if is_revision and revision_image.solution or image.solution %}
         <li>
             {% if is_revision %}
-                <a href="{% url image_edit_plate_solve image.id revision_image.id %}">
+                <a href="{% url 'image_edit_plate_solve' image.id revision_image.id %}">
             {% else %}
-                <a href="{% url image_edit_plate_solve image.id %}">
+                <a href="{% url 'image_edit_plate_solve' image.id %}">
             {% endif %}
 
                 <i class="icon-location-arrow"></i>

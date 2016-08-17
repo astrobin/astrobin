@@ -23,7 +23,7 @@
                     {% trans "This operation cannot be undone." %}
                 </div>
 
-                <form method='POST' action="{% url iotd_choose image.id %}">
+                <form method='POST' action="{% url 'iotd_choose' image.id %}">
                     {% csrf_token %}
                     <input
                         type="submit"

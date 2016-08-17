@@ -13,7 +13,7 @@
         <form
             class="form-inline"
             {% if collection %}
-                action="{% url user_collections_delete requested_user collection.pk %}"
+                action="{% url 'user_collections_delete' requested_user.username collection.pk %}"
             {% else %}
                 action="#"
             {% endif %}

@@ -16,7 +16,7 @@
         </div>
 
         <div class="avatar" style="width: 194px; height: 194px; overflow: hidden;">
-            <a href="{% url user_page user %}">
+            <a href="{% url 'user_page' user.username %}">
                 {% avatar user 194 %}
 
                 {% if DONATIONS_ENABLED %}
@@ -36,9 +36,9 @@
         {% cache 300 astrobin_user user.username view layout LANGUAGE_CODE %}
         <div id="profile-details">
             <ul>
-                <li><a href="{% url user_page user %}?sub=uploaded"><strong>{{images}}</strong> {% trans "Images" %}</a></li>
-                <li><a href="{% url user_page_followers user %}"><strong>{{followers}}</strong> {% trans "Followers" %}</a></li>
-                <li><a href="{% url user_page_following user %}"><strong>{{following}}</strong> {% trans "Following" %}</a></li>
+                <li><a href="{% url 'user_page' user.username %}?sub=uploaded"><strong>{{images}}</strong> {% trans "Images" %}</a></li>
+                <li><a href="{% url 'user_page_followers' user.username %}"><strong>{{followers}}</strong> {% trans "Followers" %}</a></li>
+                <li><a href="{% url 'user_page_following' user.username %}"><strong>{{following}}</strong> {% trans "Following" %}</a></li>
             </ul>
         </div>
         {% endcache %}
@@ -58,7 +58,7 @@
         </div>
 
         <div class="avatar">
-            <a href="{% url user_page user %}">
+            <a href="{% url 'user_page' user.username %}">
                 {% if layout == 'inline' %}
                     {% avatar user 194 %}
                 {% endif %}
@@ -80,10 +80,10 @@
         <div id="profile-details">
             <ul>
                 {% cache 300 astrobin_user user.username view layout LANGUAGE_CODE %}
-                <li><a href="{% url user_page user %}?sub=uploaded"><strong>{{images}}</strong> {% trans "Images" %}</a></li>
+                <li><a href="{% url 'user_page' user.username %}?sub=uploaded"><strong>{{images}}</strong> {% trans "Images" %}</a></li>
 
                 {% if layout != 'inline-mini' %}
-                    <li><a href="{% url user_page_followers user %}"><strong>{{followers}}</strong> {% trans "Followers" %}</a></li>
+                    <li><a href="{% url 'user_page_followers' user.username %}"><strong>{{followers}}</strong> {% trans "Followers" %}</a></li>
                 {% endif %}
                 {% endcache %}
 
@@ -98,7 +98,7 @@
 {% if layout == 'list' %}
     <div class="user-list-item">
         <div class="avatar" style="width: 48px; height: 48px; overflow: hidden";>
-            <a href="{% url user_page user %}">
+            <a href="{% url 'user_page' user.username %}">
                 {% avatar user 48 %}
 
                 {% if DONATIONS_ENABLED %}
@@ -112,7 +112,7 @@
         </div>
 
         <div class="name">
-            <a href="{% url user_page user %}">
+            <a href="{% url 'user_page' user.username %}">
                 {{user.userprofile}}
             </a>
         </div>

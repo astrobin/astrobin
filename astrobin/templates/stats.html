@@ -116,18 +116,18 @@ $(document).ready(function() {
         '#stats_integration_hours',
         {% if 's_ihp' in request.GET %}
             {% if request.GET.s_ihp == 'monthly' %}
-                "{% url stats_integration_hours 'astrobin' 'monthly' 365 %}",
+                "{% url 'stats_integration_hours' 'astrobin' 'monthly' 365 %}",
             {% else %}
-                "{% url stats_integration_hours 'astrobin' 'daily' 30 %}",
+                "{% url 'stats_integration_hours' 'astrobin' 'daily' 30 %}",
             {% endif %}
         {% else %}
-        "{% url stats_integration_hours 'astrobin' 'monthly' 365 %}",
+        "{% url 'stats_integration_hours' 'astrobin' 'monthly' 365 %}",
         {% endif %}
         5000);
     astrobin_stats.enableTooltips("#stats_integration_hours");
 
     $.ajax({
-        url: "{% url stats_subject_type_trend %}",
+        url: "{% url 'stats_subject_type_trend' %}",
         method: 'GET',
         dataType: 'json',
         timeout: 5000,
@@ -141,7 +141,7 @@ $(document).ready(function() {
 
     astrobin_stats.plot_pie(
         '#stats_camera_types',
-        "{% url stats_subject_camera_types 0 %}",
+        "{% url 'stats_subject_camera_types' 0 %}",
         30000);
     $('#stats_camera_types').bind('plothover', function(event, pos, obj) {
         if (!obj) return;
@@ -151,7 +151,7 @@ $(document).ready(function() {
 
     astrobin_stats.plot_pie(
         '#stats_telescope_types',
-        "{% url stats_subject_telescope_types 0 %}",
+        "{% url 'stats_subject_telescope_types' 0 %}",
         30000);
     $('#stats_telescope_types').bind('plothover', function(event, pos, obj) {
         if (!obj) return;
@@ -160,7 +160,7 @@ $(document).ready(function() {
     });
 
     $.ajax({
-        url: "{% url stats_camera_types_trend %}",
+        url: "{% url 'stats_camera_types_trend' %}",
         method: 'GET',
         dataType: 'json',
         timeout: 60000,
@@ -173,7 +173,7 @@ $(document).ready(function() {
     astrobin_stats.enableTooltips("#stats_camera_types_trend");
 
     $.ajax({
-        url: "{% url stats_telescope_types_trend %}",
+        url: "{% url 'stats_telescope_types_trend' %}",
         method: 'GET',
         dataType: 'json',
         timeout: 60000,

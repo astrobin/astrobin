@@ -85,14 +85,14 @@
 
                 console.log(added_ids);
                 $.ajax({
-                    url: '{% url 'user_collections_add_remove_images' requested_user collection.pk %}',
+                    url: '{% url 'user_collections_add_remove_images' requested_user.username collection.pk %}',
                     type: 'POST',
                     cache: false,
                     timeout: 10000,
                     data: {images: added_ids},
                     dataType: 'json'
                 }).done(function() {
-                    location = "{% url 'user_collections_detail' requested_user collection.pk %}";
+                    location = "{% url 'user_collections_detail' requested_user.username collection.pk %}";
                 });
             });
         });

@@ -18,7 +18,7 @@
 
 {% if not request.user.is_authenticated %}
     <span class="toggleproperty-add-remove property-like">
-        <a class="btn btn-primary" href="{% url auth_login %}?next={{request.path}}">
+        <a class="btn btn-primary" href="{% url 'auth_login' %}?next={{request.path}}">
             <i class="icon-thumbs-up"></i>
             <span class="toggleproperties-label">
                 {% trans "Like" %}

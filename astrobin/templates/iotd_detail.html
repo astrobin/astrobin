@@ -16,7 +16,7 @@
                     {% if iotd.chosen_by %}
                         --
                         {% trans "chosen by" %}
-                        <a href="{% url user_page iotd.chosen_by %}">
+                        <a href="{% url 'user_page' iotd.chosen_by %}">
                             {{iotd.chosen_by.userprofile}}
                         </a>
                     {% endif %}
@@ -30,7 +30,7 @@
                     <h3>{{iotd.image.title|escape}}</h3>
                     <p>
                         {% trans "by" %}
-                        <a href="{% url user_page iotd.image.user %}">
+                        <a href="{% url 'user_page' iotd.image.user %}">
                             {{iotd.image.user.userprofile}}
                         </a>
                     </p>

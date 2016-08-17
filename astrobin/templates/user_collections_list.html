@@ -2,7 +2,6 @@
 
 {% load bootstrap_toolkit %}
 {% load i18n %}
-{% load url from future %}
 
 {% load astrobin_apps_images_tags %}
 
@@ -15,7 +14,7 @@
                     <div class="collection">
                         <div class="collection-image {% if collection.images.count == 0 %}empty{% endif %}">
                             {% if collection.images.count > 0 %}
-                                <a href="{% url 'user_collections_detail' requested_user collection.pk %}">
+                                <a href="{% url 'user_collections_detail' requested_user.username collection.pk %}">
                                     {% if collection.cover %}
                                         {% astrobin_image collection.cover 'collection' 'final' 'regular' False False %}
                                     {% else %}
@@ -25,7 +24,7 @@
                             {% endif %}
                         </div>
                         <div class="collection-name">
-                            <a href="{% url 'user_collections_detail' requested_user collection.pk %}">
+                            <a href="{% url 'user_collections_detail' requested_user.username collection.pk %}">
                                 {{collection.name}}
                             </a>
                         </div>
@@ -90,7 +89,7 @@
                 var $modal = $('#delete-modal'),
                     $form = $modal.find('form'),
                     collection_pk = $(this).data('collection-pk'),
-                    url = '/users/{{requested_user}}/collections/' + collection_pk + '/delete/';
+                    url = '/users/{{requested_user.username}}/collections/' + collection_pk + '/delete/';
 
                 $form.attr('action', url);
                 $modal.modal('show');

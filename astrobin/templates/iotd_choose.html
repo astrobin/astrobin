@@ -22,7 +22,7 @@
                 <div class="span12">
                     {% astrobin_image candidate.image 'iotd_candidate' 'final' '' False %}
                     <a
-                        href="{% url iotd_choose candidate.image.id %}"
+                        href="{% url 'iotd_choose' candidate.image.id %}"
                         class="btn btn-large btn-block btn-primary">
                         &uarr; {% trans "Choose" %}
                     </a>

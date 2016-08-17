@@ -11,7 +11,7 @@
     {% blocktrans %}After you submit a request, you will receive a reply within 24 hours.{% endblocktrans %}
     </div>
     <div class="alert alert-warning">
-        {% url tos as tos_url %}
+        {% url 'tos' as tos_url %}
         {% blocktrans %}Please make sure you have read the section about APIs in the <a href="{{tos_url}}">Terms of Service</a>.{% endblocktrans %}
     </div>
     <form class="form-horizontal" action="." method="post">{% csrf_token %}

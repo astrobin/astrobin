@@ -8,7 +8,7 @@
 
 <div class="subtle-container avatar-block">
     <div class="avatar">
-        <a href="{% url user_page image.user %}">
+        <a href="{% url 'user_page' image.user %}">
             {% avatar image.user 106 %}
             {% donor_badge user 'medium' %}
         </a>
@@ -18,7 +18,7 @@
             class="username-link"
             rel="tooltip"
             title="{{image.user.userprofile}}"
-            href="{% url user_page image.user %}">{{image.user.userprofile|truncatechars:20}}</a>
+            href="{% url 'user_page' image.user %}">{{image.user.userprofile|truncatechars:20}}</a>
 
         <div class="data">
             <img class="license"

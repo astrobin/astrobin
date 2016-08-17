@@ -100,14 +100,14 @@
                     {% blocktrans %}Remaining:{% endblocktrans %} {{remaining}}
                 </p>
             </div>
-            <form class="form-vertical" method="post" action="{% url gear_fix_save %}">{% csrf_token %}
+            <form class="form-vertical" method="post" action="{% url 'gear_fix_save' %}">{% csrf_token %}
                 {{form|as_bootstrap}}
                 <input type="hidden" name="gear_id" value="{{gear.id}}" />
                 <div class="form-actions">
                     <input type="submit" class="btn btn-primary" name="fix" value="{% trans "Fix" %}" />
                     <input type="submit" class="btn btn-primary" name="good" value="{% trans "Mark as good" %}" />
-                    <a class="btn" href="{% url gear_fix next_gear.id %}">{% trans "Skip" %}</a>
-                    <a class="btn" href="{% url gear_fix_thanks %}">{% trans "Enough for now" %}</a>
+                    <a class="btn" href="{% url 'gear_fix' next_gear.id %}">{% trans "Skip" %}</a>
+                    <a class="btn" href="{% url 'gear_fix_thanks' %}">{% trans "Enough for now" %}</a>
                 </div>
             </form>
         </div>

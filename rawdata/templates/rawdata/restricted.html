@@ -10,7 +10,7 @@
         </h1>
     </div>
 
-    {% url rawdata.help1 as rawdata_url %}
+    {% url 'rawdata.help1' as rawdata_url %}
     <div class="alert alert-error">
         <button class="close" data-dismiss="alert">&times;</button>
         <h4 class="alert-heading">
@@ -28,7 +28,7 @@
     <div class="pagination pagination-centered">
         <ul>
             <li>
-                <a href="{% url rawdata.help1 %}">{% trans "Find out more!" %}</a>
+                <a href="{% url 'rawdata.help1' %}">{% trans "Find out more!" %}</a>
             </li>
         </ul>
     </div>

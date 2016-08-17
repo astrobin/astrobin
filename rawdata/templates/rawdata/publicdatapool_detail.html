@@ -32,7 +32,7 @@
     <div class="page-header">
         <h1><span id="pool-name">{{object}}</spa>
             <small>
-            {% url user_page object.creator as user_url %}
+            {% url 'user_page' object.creator as user_url %}
             {% blocktrans with object.creator as user and size|filesizeformat as size and object.images.all|length as image_count %}A public data pool created by <a href="{{user_url}}">{{user}}</a>, with {{size}} in {{image_count}} images.{% endblocktrans %}
             </small>
         </h1>
@@ -72,7 +72,7 @@
                             <td class="filename" rel="tooltip" title="{{image.original_filename}}">
                                 {{image.original_filename|truncatechars:40}}
                             </td>
-                            <td><a href="{% url user_page image.user %}">{{image.user}}</td>
+                            <td><a href="{% url 'user_page' image.user %}">{{image.user}}</td>
                             <td>{{image.size|filesizeformat}}</td>
                             <td>
                                 <abbr class="timeago" title="{{image.uploaded|date:'Y-m-d\TH:i:s'}}">
@@ -98,14 +98,14 @@
 
         <div class="span6">
             <p>
-            {% url user_page object.creator as user_url %}
-            {% url rawdata.help1 as rawdata_url %}
+            {% url 'user_page' object.creator as user_url %}
+            {% url 'rawdata.help1' as rawdata_url %}
             {% blocktrans with object.creator as user and size|filesizeformat as size and object.images.all|length as image_count and object.created|date:"DATE_FORMAT" as date %}This public data pool was created on {{date}} by <a href="{{user_url}}">{{user}}</a>. It consists of {{size}} in {{image_count}} images. You can contribute by donating your raw files, if you are subscribed to <a href="{{rawdata_url}}">AstroBin Raw Data</a>, or you can download the available data and try to process it!{% endblocktrans %}
             </p>
 
             <div class="download-with-icon">
                 <div class="data" style="padding-top: 0">
-                    <a class="btn btn-primary btn-large" href="{% url rawdata.publicdatapool_download object.pk %}">
+                    <a class="btn btn-primary btn-large" href="{% url 'rawdata.publicdatapool_download' object.pk %}">
                         <i class="icon-download-alt"></i>
                         {% trans "Download" %}
                     </a>
@@ -144,7 +144,7 @@
         </div>
         <div class="modal-body">
             <form class="form-horizontal" method="post"
-                  action="{% url rawdata.publicdatapool_update object.id %}">
+                  action="{% url 'rawdata.publicdatapool_update' object.id %}">
                 {{update_form|as_bootstrap}}
             </form>
         </div>

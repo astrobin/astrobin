@@ -2,7 +2,7 @@
 
 <div class="message">
     <div class="avatar">
-        <a href="{% url user_page message.sender %}">
+        <a href="{% url 'user_page' message.sender %}">
             {% avatar message.sender 32 %}
         </a>
     </div>

@@ -44,18 +44,18 @@
         <h2>{% trans "Tools" %}</h2>
         <ul>
             <li>
-                <a href="{% url profile_edit_basic %}">
+                <a href="{% url 'profile_edit_basic' %}">
                     <img src="{{STATIC_URL}}icons/iconic/orange/edit_profile.png" alt="{% trans "Edit profile" %}"/>
                 </a>
-                <a href="{% url profile_edit_basic %}">
+                <a href="{% url 'profile_edit_basic' %}">
                     {% trans "Edit profile" %}
                 </a>
             </li>
             <li>
-                <a href="{% url auth_logout %}">
+                <a href="{% url 'auth_logout' %}">
                     <img src="{{STATIC_URL}}icons/iconic/orange/logout.png" alt="{% trans "Logout" %}"/>
                 </a>
-                <a href="{% url auth_logout %}">
+                <a href="{% url 'auth_logout' %}">
                     {% trans "Logout" %}
                 </a>
             </li>

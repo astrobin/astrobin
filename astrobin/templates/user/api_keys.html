@@ -35,7 +35,7 @@
                 </table>
             {% else %}
                 <p>
-                    {% url api as api_docs_url %}
+                    {% url 'api' as api_docs_url %}
                     {% blocktrans %}You don't have any API Keys. Please read the <a href="{{api_docs_url}}">API documentation</a>.{% endblocktrans %}
             {% endif %}
         </div>
@@ -43,7 +43,7 @@
 
     <div class="row">
         <div class="span12">
-            <a class="btn btn-primary" href="{% url app_api_key_request %}">
+            <a class="btn btn-primary" href="{% url 'app_api_key_request' %}">
                 {% trans "Request an API Key" %} &rarr;
             </a>
         </div>

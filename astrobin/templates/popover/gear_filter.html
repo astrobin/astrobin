@@ -22,7 +22,7 @@
                 {% add_remove_toggleproperty "follow" gear request.user %}
 		    {% endif %}
 		    <a class="btn btn-mini btn-primary" href="/search/?q={% gear_name_iriencoded gear %}{% search_form_query %}">{% trans "Find images" %}</a>
-		    <a class="btn btn-mini" href="{% url gear_page gear.id gear.slug %}">{% trans "View page" %}</a>
+		    <a class="btn btn-mini" href="{% url 'gear_page' gear.id gear.slug %}">{% trans "View page" %}</a>
 		</div>
 	</div>
 </div>

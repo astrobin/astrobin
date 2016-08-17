@@ -24,7 +24,7 @@
                             <img src="{{STATIC_URL}}images/M81_astrojoe.jpg" />
                             <div class="carousel-caption">
                                 <h4>{% blocktrans %}The perfect home for your astrophotography.{% endblocktrans %}</h4>
-                                {% url help as help_url %}
+                                {% url 'help' as help_url %}
                                 <p>{% blocktrans %}AstroBin is an image hosting service made specifically for astrophotographers. It comes packed with features that benefit the astrophotography community greatly! See the <a href="{{help_url}}">help page.</a> for more information.{% endblocktrans %}</p>
                             </div>
                         </div>
@@ -80,15 +80,15 @@
                         <div class="info visible-desktop">
                             <h3>{{iotd.image.title|truncatechars:"60"}}</h3>
                             <span class="by">
-                                {% trans "by" %} <a rel="popover" class="user-popover" data-load="{% url user_popover_ajax iotd.image.user %}"
-                                      href="{% url user_page iotd.image.user %}">{{iotd.image.user.userprofile}}</a>
+                                {% trans "by" %} <a rel="popover" class="user-popover" data-load="{% url 'user_popover_ajax' iotd.image.user %}"
+                                      href="{% url 'user_page' iotd.image.user %}">{{iotd.image.user.userprofile}}</a>
                             </span>
                             {% for i in gear_list %}
                                 {% if i.1 %}
                                 <p>
                                     <strong>{% trans i.0 %}:</strong>
                                     {% for g in i.1 %}
-                                        <a rel="popover" class="gear-popover" data-load="{% url gear_popover_ajax g.id %}" href="{% url gear_page g.id g.slug %}">{{g}}</a>{% if not forloop.last %},&nbsp;{% endif %}
+                                        <a rel="popover" class="gear-popover" data-load="{% url 'gear_popover_ajax' g.id %}" href="{% url 'gear_page' g.id g.slug %}">{{g}}</a>{% if not forloop.last %},&nbsp;{% endif %}
                                     {% endfor %}
                                 </p>
                                 {% endif %}
@@ -116,7 +116,7 @@
                 </div>
 
                 <div class="span2 visible-desktop">
-                    <a class="btn btn-primary btn-upload" href="{% url image_upload %}">
+                    <a class="btn btn-primary btn-upload" href="{% url 'image_upload' %}">
                         <div style="font-size: 92px;"><i class="icon-upload-alt icon-white"></i></div>
                         <span class="text">
                             {% trans "Upload" %}
@@ -172,7 +172,7 @@
                         <span class="pull-right">
 
                             {% if section != 'personal' %}
-                                <a href="{% url index %}{% query_string "s=personal" "" %}"
+                                <a href="{% url 'index' %}{% query_string "s=personal" "" %}"
                                    class="index-section-link"
                                    rel="tooltip"
                                    title="{% trans "Personal" %}">
@@ -183,7 +183,7 @@
                             {% endif %}
 
                             {% if section != 'global' %}
-                                <a href="{% url index %}{% query_string "s=global" "" %}"
+                                <a href="{% url 'index' %}{% query_string "s=global" "" %}"
                                    class="index-section-link"
                                    rel="tooltip"
                                    title="{% trans "Global" %}">
@@ -196,7 +196,7 @@
                             <span class="horizontal-separator">/</span>
 
                             {% if section != 'images' %}
-                                <a href="{% url index %}{% query_string "s=images" "" %}"
+                                <a href="{% url 'index' %}{% query_string "s=images" "" %}"
                                    class="index-section-link"
                                    rel="tooltip"
                                    title="{% trans "Recent images" %}">
@@ -207,7 +207,7 @@
                             {% endif %}
 
                             {% if section != 'followed' %}
-                                <a href="{% url index %}{% query_string "s=followed" "" %}"
+                                <a href="{% url 'index' %}{% query_string "s=followed" "" %}"
                                    class="index-section-link"
                                    rel="tooltip"
                                    title="{% trans "Recent images from people you follow" %}">
@@ -218,7 +218,7 @@
                             {% endif %}
 
                             {% if section != 'liked' %}
-                                <a href="{% url index %}{% query_string "s=liked" "" %}"
+                                <a href="{% url 'index' %}{% query_string "s=liked" "" %}"
                                    class="index-section-link"
                                    rel="tooltip"
                                    title="{% trans "Recently liked" %}">
@@ -229,7 +229,7 @@
                             {% endif %}
 
                             {% if section != 'bookmarked' %}
-                                <a href="{% url index %}{% query_string "s=bookmarked" "" %}"
+                                <a href="{% url 'index' %}{% query_string "s=bookmarked" "" %}"
                                    class="index-section-link"
                                    rel="tooltip"
                                    title="{% trans "Recently bookmarked" %}">
@@ -240,7 +240,7 @@
                             {% endif %}
 
                             {% if section != 'fits' %}
-                                <a href="{% url index %}{% query_string "s=fits" "" %}"
+                                <a href="{% url 'index' %}{% query_string "s=fits" "" %}"
                                    class="index-section-link"
                                    rel="tooltip"
                                    title="{% trans "Recent images with link to TIFF/FITS" %}">
@@ -252,7 +252,7 @@
 
                             {% if request.user.userprofile.default_frontpage_section != section %}
                                 <span class="horizontal-separator">/</span>
-                                <form class="index-section-form" method="post" action="{% url set_default_frontpage_section section %}">{% csrf_token %}
+                                <form class="index-section-form" method="post" action="{% url 'set_default_frontpage_section' section %}">{% csrf_token %}
                                     <input type="submit"
                                         rel="tooltip"
                                         title="{% trans "Set current front page section as default" %}"

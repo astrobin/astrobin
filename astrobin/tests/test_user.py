@@ -404,7 +404,7 @@ class UserTest(TestCase):
 
         # Check Index
         from astrobin.search_indexes import UserIndex
-        userIndex = UserIndex(User)
+        userIndex = UserIndex()
         index = userIndex.prepare_normalized_likes(self.user)
         self.assertEquals(index, 0.0)
 

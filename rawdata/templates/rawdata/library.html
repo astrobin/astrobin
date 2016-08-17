@@ -29,10 +29,10 @@
         </div>
 
         <div class="span2">
-            <a class="btn btn-large btn-primary btn-header" href="{% url subscription_list %}">
+            <a class="btn btn-large btn-primary btn-header" href="{% url 'subscription_list' %}">
                 <i class="icon-book"></i> {% trans "Manage plans" %}
             </a>
-            <a class="btn btn-large btn-primary btn-header" href="{% url image_upload %}">
+            <a class="btn btn-large btn-primary btn-header" href="{% url 'image_upload' %}">
                 <i class="icon-upload-alt"></i> {% trans "Upload" %}
             </a>
         </div>
@@ -136,7 +136,7 @@
     {% else %}
         <p>
             {% blocktrans %}There doesn't seem to be anything here.{% endblocktrans %}
-            {% url image_upload as upload_url %}
+            {% url 'image_upload' as upload_url %}
             {% blocktrans %}Head over to the <a href="{{upload_url}}">upload page</a> to get started. {% endblocktrans %}
         </p>
     {% endif %}

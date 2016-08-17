@@ -7,7 +7,7 @@
 {% block content %}
     <h1>{% trans "Register with AstroBin" %}</h1>
     <div class="well">
-        {% url tos as tos_url %}
+        {% url 'tos' as tos_url %}
         {% blocktrans %}By registering with AstroBin, you agree to our <a href="{{tos_url}}">terms of service</a>.{% endblocktrans %}
     </div>
 

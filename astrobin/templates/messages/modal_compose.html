@@ -4,7 +4,7 @@
 <link rel="stylesheet" type="text/css" media="screen" href="{{STATIC_URL}}css/token-input.css"/>
 <link rel="stylesheet" type="text/css" media="screen" href="{{STATIC_URL}}css/astrobin.css"/>
 <div class="facebox-box">
-<form id="message-modal-form" action="{% url messages_compose %}" method="post" class="uniForm">{% csrf_token %}
+<form id="message-modal-form" action="{% url 'messages_compose' %}" method="post" class="uniForm">{% csrf_token %}
     <fieldset class="inlineLabels">
         <input type="hidden" name="attachment_id" id="attachment_id" />
         {{ form|as_uni_form }}
@@ -47,7 +47,7 @@
             parameters["prePopulate"] = [{id:recipient, name:recipient}];
         }
 
-        $("#id_recipient").tokenInput("{% url recipient_search %}?format=json", parameters);
+        $("#id_recipient").tokenInput("{% url 'recipient_search' %}?format=json", parameters);
 
         $('#message-modal-form').ajaxForm({
             //target: "target",

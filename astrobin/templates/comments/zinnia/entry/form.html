@@ -3,7 +3,7 @@
 
 <form class="form-horizontal" action="{% comment_form_target %}" method="post">{% csrf_token %}
     {{form|as_bootstrap}}
-    <input type="hidden" name="next" value="{% url zinnia_discussion_success %}"/>
+    <input type="hidden" name="next" value="{% url 'zinnia_discussion_success' %}"/>
     <div class="form-actions">
       <input class="btn btn-primary" type="submit" name="submit" value="{% trans "Post" %}" />
     </div>

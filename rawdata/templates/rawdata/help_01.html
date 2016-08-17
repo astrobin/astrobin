@@ -30,14 +30,14 @@
 
         <div class="span4" style="padding-top: 80px; text-align: center;">
             <img src="{{STATIC_URL}}rawdata/images/astrobin-rawdata-plan-meteor.png" alt="{% trans "AstroBin Raw Data" %}" />
-            <a class="btn btn-primary btn-large" href="{% url subscription_list %}">{% trans "Sign up now!" %}</a>
+            <a class="btn btn-primary btn-large" href="{% url 'subscription_list' %}">{% trans "Sign up now!" %}</a>
         </div>
     </div>
 
     <div class="pagination pagination-centered">
         <ul>
             <li>
-                <a href="{% url rawdata.help2 %}">{% trans "Next page" %}</a>
+                <a href="{% url 'rawdata.help2' %}">{% trans "Next page" %}</a>
             </li>
         </ul>
     </div>

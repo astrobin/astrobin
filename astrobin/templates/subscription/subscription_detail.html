@@ -78,7 +78,7 @@
         {% if object.category == 'rawdata' %}
             {% blocktrans %}<strong>AstroBin Raw Data</strong> allows you to store your raw files (<strong>FIT</strong> and <strong>digital camera raw</strong>) on AstroBin. We will keep them neatly organized, and you will have a safe backup of all your work, including calibration files.{% endblocktrans %}
 
-            {% url rawdata.help1 as rawdata_url %}
+            {% url 'rawdata.help1' as rawdata_url %}
             {% blocktrans %}Learn more by reading <a href="{{rawdata_url}}">a short introduction.</a>{% endblocktrans %}
         {% endif %}
     </p>

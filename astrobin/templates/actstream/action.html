@@ -68,7 +68,7 @@
             </div>
 
             {% if action.actor.get_absolute_url %}
-                <a rel="popover" class="user-popover" data-load="{% url user_popover_ajax action.actor %}"
+                <a rel="popover" class="user-popover" data-load="{% url 'user_popover_ajax' action.actor %}"
                    href="{{action.actor.get_absolute_url}}">{{action.actor.userprofile}}</a>
             {% else %}
                 <a href="{{action.actor_url}}">{{action.actor.userprofile}}</a>

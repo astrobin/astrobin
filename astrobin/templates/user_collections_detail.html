@@ -21,7 +21,7 @@
             <p class="alert alert-warning">
                 {% trans "This collection contains no images." %}
                 {% ifequal requested_user request.user %}
-                    <a href="{% url 'user_collections_add_remove_images' requested_user collection.pk %}">
+                    <a href="{% url 'user_collections_add_remove_images' requested_user.username collection.pk %}">
                         {% trans "Would you like to add some images?" %}
                     </a>
                 {% endifequal %}
