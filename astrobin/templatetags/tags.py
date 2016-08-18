@@ -101,24 +101,15 @@ register.inclusion_tag('inclusion_tags/image_list.html', takes_context=True)(ima
 def search_image_list(context, object_list, paginate = True):
     adjacent_pages = 3
 
-    try:
-        paginator = context['paginator']
-        page = int(context['page'])
-        pages = int(context['pages'])
-        page_obj = context['page_obj']
-        next = context['next']
-        previous = context['previous']
-        has_next = context['has_next']
-        has_previous = context['has_previous']
-    except KeyError:
-        paginator = context['paginator']
-        page_obj = context['page_obj']
-        page = page_obj.number
-        pages = paginator.num_pages
-        next = page_obj.next_page_number
-        previous = page_obj.previous_page_number
-        has_next = page_obj.has_next
-        has_previous = page_obj.has_previous
+    paginator = context['paginator']
+
+    page = paginator.count
+    pages = paginator.num_pages
+    page_obj = paginator.page(pages)
+    next = page_obj.next_page_number()
+    previous = page_obj.previous_page_number()
+    has_next = page_obj.has_next()
+    has_previous = page_obj.has_previous()
 
     user_list  = [x for x in object_list if x != None and x.verbose_name == 'User']
     gear_list  = [x for x in object_list if x != None and x.verbose_name == 'Gear']
