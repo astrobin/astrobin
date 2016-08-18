@@ -2,30 +2,17 @@
 {% load common_tags %}
 {% load tags %}
 
-{% if has_previous or has_next %}
+{% if page_obj.has_previous or page_obj.has_next %}
 <div class="pagination pagination-centered">
     <ul>
-       {% if has_previous %}
+       {% if page_obj.has_previous %}
           <li>
-            <a href="{% query_string "page=previous" "" %}#page_anchor">&laquo; {% trans "previous" %}</a>
+            <a href="{% query_string "page=page_obj.previous_page_number" "" %}#page_anchor">&laquo; {% trans "previous" %}</a>
           </li>
        {% endif %}
 
-       {% if show_first %}
-          <li><a href="{% query_string "page=1" "" %}#page_anchor">1</a></li>
-          <li classs="ellipsis disabled"><a href="#">...</a></li>
-       {% endif %}
-       {% for linkpage in page_numbers %}
-             <li{% ifequal linkpage page %} class="active"{% endifequal %}>
-                <a href="{% query_string "page=linkpage" "" %}#page_anchor">{{ linkpage }}</a>
-             </li>
-       {% endfor %}
-       {% if show_last %}
-          <li class="ellipsis disabled"><a href="#">...</a></li>
-          <li class="page"><a href="{% query_string "page=last" "" %}#page_anchor">{{ pages }}</a></li>
-       {% endif %}
-       {% if has_next %}
-          <li><a href="{% query_string "page=next" "" %}#page_anchor">{% trans "next" %} &raquo;</a></li>
+       {% if page_obj.has_next %}
+          <li><a href="{% query_string "page=page_obj.next_page_number" "" %}#page_anchor">{% trans "next" %} &raquo;</a></li>
        {% endif %}
     </ul>
 </div>
