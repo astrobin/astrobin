@@ -31,7 +31,8 @@ from astrobin.views import (
     moderation as moderation_views,
     collections as collections_views,
     iotd as iotd_views,
-    home as home_views)
+    home as home_views,
+    wall as wall_views,)
 from astrobin.api import (
     ImageOfTheDayResource,
     ImageResource,
@@ -155,7 +156,7 @@ urlpatterns = patterns('',
     ###########################################################################
 
     url(r'^explore/iotd/$', views.iotd_archive, name='iotd_archive'),
-    url(r'^explore/wall/$', views.wall, name='wall'),
+    url(r'^explore/wall/$', wall_views.WallView.as_view(), name='wall'),
 
     ###########################################################################
     ### USER VIEWS                                                          ###

@@ -20,7 +20,7 @@
                 </a>
                 <ul class="dropdown-menu">
                     <li>
-                        <a href="{% query_string "" "sort" %}">
+                        <a href="{% query_string "sort=-uploaded" "" %}">
                             <span class="bg-icon{% if sort == '-uploaded' %} icon-ok{% endif %}"></span>
                             {% trans "Uploaded" %}
                         </a>

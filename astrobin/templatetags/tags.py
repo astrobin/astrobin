@@ -110,9 +110,9 @@ def search_image_list(context, object_list, paginate = True):
         previous = context['previous']
         has_next = context['has_next']
         has_previous = context['has_previous']
-    except:
+    except KeyError:
         paginator = context['paginator']
-        page_obj = context['page']
+        page_obj = context['page_obj']
         page = page_obj.number
         pages = paginator.num_pages
         next = page_obj.next_page_number
