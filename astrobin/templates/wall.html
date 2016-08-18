@@ -4,7 +4,6 @@
 {% load astrobin_apps_donations_tags %}
 {% load common_tags %}
 {% load tags %}
-{% load dfp_tags %}
 
 {% block title %}{% trans "The Big Wall" %}{% endblock %}
 
@@ -165,12 +164,6 @@
             </li>
         </ul> <!-- nav -->
     </div> <!-- subnav -->
-
-    {% if ADS_ENABLED and not request.user|is_donor %}
-        <div class="visible-desktop">
-            {% dfp_tag '47890729/leaderboard' 940 130 brands='' %}
-        </div>
-    {% endif %}
 
     <h1>{% trans "The Big Wall" %}</h1>
     {% search_image_list object_list %}
