@@ -576,6 +576,10 @@ if DEBUG:
             },
         }
     }
+else:
+    LOGGING = {
+        'version': 1,
+    }
 
 if TESTING:
     import logging
