@@ -67,7 +67,7 @@ django-request-provider==1.0.0
 django-robots==0.8.1
 django-staticfiles==1.2.1
 django-storages==1.1.4
--e git+https://github.com/siovene/django-subscription.git#egg=django-subscription
+-e git+https://github.com/siovene/django-subscription.git@53b5813#egg=django-subscription
 django-tagging==0.3.1
 django-tastypie==0.9.15
 -e git+http://github.com/philippWassibauer/django-threaded-messages.git@387b6b766e8c55e1a354041e2688d076b2cbb260#egg=django_threaded_messages-master
