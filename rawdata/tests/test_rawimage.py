@@ -11,7 +11,7 @@ from django.utils.http import urlencode
 from rawdata.models import RawImage, TemporaryArchive
 
 # Tests
-from .common import *
+from .test_common import *
 
 
 class RawImageTest(TestCase):

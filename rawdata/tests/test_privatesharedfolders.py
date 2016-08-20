@@ -10,7 +10,7 @@ from astrobin.models import Image
 from rawdata.models import PrivateSharedFolder, TemporaryArchive
 
 # Tests
-from .common import *
+from .test_common import *
 
 
 class PrivateSharedFolderTest(TestCase):
