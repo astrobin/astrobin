@@ -72,7 +72,7 @@ class GroupsTest(TestCase):
         }, follow = True)
         self.assertEqual(response.status_code, 200)
         self._assertMessage(response, "success unread", "Your new group was created successfully")
-        group = Group.objects.all().order_by('pk')[1]
+        group = Group.objects.all().order_by('-pk')[0]
         self.assertEqual(group.creator, self.user1)
         self.assertEqual(group.owner, self.user1)
         self.assertEqual(group.name, 'Test create group')
@@ -177,5 +177,43 @@ class GroupsTest(TestCase):
         self.group.members.remove(self.user1)
         self.group.public = True
         self.group.save()
+
+        self.client.logout()
+
+    def test_group_invite_view(self):
+        url = reverse('group_invite', kwargs = {'pk': self.group.pk})
+        detail_url = reverse('group_detail', kwargs = {'pk': self.group.pk})
+
+        # Login required
+        response = self.client.get(url)
+        self.assertEqual(response.status_code, 302)
+
+        # Owner required
+        self.client.login(username = 'user2', password = 'password')
+        response = self.client.get(url)
+        self.assertEqual(response.status_code, 403)
+        self.client.logout()
+
+        self.client.login(username = 'user1', password = 'password')
+
+        # Group does not exist
+        response = self.client.post(reverse('group_invite', kwargs = {'pk': 999}), follow = True)
+        self.assertEqual(response.status_code, 404)
+
+        # Invited user does not exist
+        response = self.client.post(url, {
+            'users[]': [999],
+        }, follow = True)
+        self.assertEqual(response.status_code, 200)
+        self.group = Group.objects.get(pk = self.group.pk)
+        self.assertEqual(self.group.invited_users.count(), 0)
+
+        # Invitation successful
+        response = self.client.post(url, {
+            'users[]': [self.user2.pk,],
+        })
+        self.assertRedirects(response, detail_url, status_code = 302, target_status_code = 200)
+        self.group = Group.objects.get(pk = self.group.pk)
+        self.assertEqual(self.group.invited_users.count(), 1)
 
         self.client.logout()

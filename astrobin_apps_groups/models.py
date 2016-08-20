@@ -44,7 +44,6 @@ class Group(models.Model):
         User,
         null = False,
         blank = False,
-        editable = False,
         related_name = 'owned_group_set',
     )
 
@@ -85,7 +84,6 @@ class Group(models.Model):
         User,
         null = True,
         blank = True,
-        editable = False,
         related_name = 'joined_group_set',
     )
 
@@ -93,7 +91,6 @@ class Group(models.Model):
         User,
         null = True,
         blank = True,
-        editable = False,
         related_name = 'invited_group_set',
     )
 
@@ -101,7 +98,6 @@ class Group(models.Model):
         Image,
         null = True,
         blank = True,
-        editable = False,
         related_name = 'part_of_group_set',
     )
 

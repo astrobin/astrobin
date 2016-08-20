@@ -37,6 +37,15 @@ class RestrictToGroupOwnerMixin(View):
         return super(RestrictToGroupOwnerMixin, self).dispatch(request, *args, **kwargs)
 
 
+class RedirectToGroupDetailMixin(View):
+    def get_success_url(self):
+        try:
+            group = getattr(self, 'object')
+        except AttributeError:
+            group = self.get_object()
+        return reverse('group_detail', kwargs = {'pk': group.pk})
+
+
 # Views
 
 class PublicGroupListView(ListView):
@@ -49,7 +58,7 @@ class GroupDetailView(RestrictPrivateGroupToMembersMixin, DetailView):
     template_name = 'astrobin_apps_groups/group_detail.html'
 
 
-class GroupCreateView(LoginRequiredMixin, CreateView):
+class GroupCreateView(LoginRequiredMixin, RedirectToGroupDetailMixin, CreateView):
     form_class = GroupCreateForm
     template_name = 'astrobin_apps_groups/group_create.html'
 
@@ -60,11 +69,8 @@ class GroupCreateView(LoginRequiredMixin, CreateView):
         messages.success(self.request, _("Your new group was created successfully"))
         return super(GroupCreateView, self).form_valid(form)
 
-    def get_success_url(self):
-        return reverse('group_detail', kwargs = {'pk': self.object.pk})
 
-
-class GroupUpdateView(LoginRequiredMixin, RestrictToGroupOwnerMixin, UpdateView):
+class GroupUpdateView(LoginRequiredMixin, RestrictToGroupOwnerMixin, RedirectToGroupDetailMixin, UpdateView):
     form_class = GroupUpdateForm
     model = Group
     template_name = 'astrobin_apps_groups/group_update.html'
@@ -73,17 +79,10 @@ class GroupUpdateView(LoginRequiredMixin, RestrictToGroupOwnerMixin, UpdateView)
         messages.success(self.request, _("Form saved"))
         return super(GroupUpdateView, self).form_valid(form)
 
-    def get_success_url(self):
-        return reverse('group_detail', kwargs = {'pk': self.object.pk})
 
-
-class GroupJoinView(LoginRequiredMixin, UpdateView):
+class GroupJoinView(LoginRequiredMixin, RedirectToGroupDetailMixin, UpdateView):
     http_method_names = ['post',]
     model = Group
-
-    def get_success_url(self):
-        group = self.get_object()
-        return reverse('group_detail', kwargs = {'pk': group.pk})
 
     def post(self, request, *args, **kwargs):
         group = self.get_object()
@@ -98,3 +97,21 @@ class GroupJoinView(LoginRequiredMixin, UpdateView):
             return redirect(self.get_success_url())
 
         return HttpResponseForbidden()
+
+
+class GroupInviteView(LoginRequiredMixin, RestrictToGroupOwnerMixin, RedirectToGroupDetailMixin, UpdateView):
+    form_class = GroupInviteForm
+    model = Group
+    template_name = 'astrobin_apps_group/group_invite.html'
+
+    def post(self, request, *args, **kwargs):
+        group = self.get_object()
+        for pk in request.POST.getlist('users[]'):
+            try:
+                user = User.objects.get(pk = pk)
+            except User.DoesNotExist:
+                continue
+
+            group.invited_users.add(user)
+
+        return redirect(self.get_success_url())
