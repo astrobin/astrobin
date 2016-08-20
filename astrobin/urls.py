@@ -2,6 +2,7 @@
 from django.conf import settings
 from django.conf.urls import patterns, url, include
 from django.contrib import admin
+from django.contrib.auth import views as auth_views
 
 # Third party
 from hitcount.views import update_hit_count_ajax
@@ -64,7 +65,28 @@ urlpatterns = patterns('',
     ### THIRD PARTY APPS VIEWS                                              ###
     ###########################################################################
 
-    url(r'^accounts/', include('registration.urls')),
+    #override the default urls
+    url(r'^accounts/password/change/$',
+          auth_views.password_change,
+          name='password_change'),
+    url(r'^accounts/password/change/done/$',
+          auth_views.password_change_done,
+          name='password_change_done'),
+    url(r'^accounts/password/reset/$',
+          auth_views.password_reset,
+          name='password_reset'),
+    url(r'^accounts/password/reset/done/$',
+          auth_views.password_reset_done,
+          name='password_reset_done'),
+    url(r'^accounts/password/reset/complete/$',
+          auth_views.password_reset_complete,
+          name='password_reset_complete'),
+    url(r'^accounts/password/reset/confirm/(?P<uidb64>[0-9A-Za-z]+)-(?P<token>.+)/$',
+          auth_views.password_reset_confirm,
+          name='password_reset_confirm'),
+    #and now add the registration urls
+    url(r'^accounts/', include('registration.backends.default.urls')),
+
     url(r'^activity/', include('actstream.urls')),
     url(r'^avatar/', include('avatar.urls')),
     url(r'^comments/', include('django.contrib.comments.urls')),
