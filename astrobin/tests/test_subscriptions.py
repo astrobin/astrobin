@@ -48,3 +48,19 @@ class SubscriptionsTest(TestCase):
         g.delete()
         u.delete()
 
+
+    def test_subscription_list_view(self):
+        g, created = Group.objects.get_or_create(name = "Test group")
+        s, created = Subscription.objects.get_or_create(
+            name = "Test subscription",
+            price = 1,
+            group = g,
+            category = "premium")
+
+        response = self.client.get(reverse('subscription_list'))
+        self.assertEqual(response.status_code, 200)
+        self.assertContains(response, "<td>Test subscription</td>", html = True)
+
+        s.delete()
+        g.delete()
+
