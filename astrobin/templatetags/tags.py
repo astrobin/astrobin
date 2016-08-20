@@ -61,11 +61,6 @@ def related_images(request, object_list, type):
 
 
 @register.filter
-def append_slash(value):
-    return value.replace('\n', '\\\n')
-
-
-@register.filter
 def ago(date_time):
     date_time = date_time.replace(tzinfo = None)
     diff = abs(date_time - datetime.today())
