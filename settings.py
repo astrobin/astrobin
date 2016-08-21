@@ -273,6 +273,7 @@ INSTALLED_APPS = (
     'django_user_agents',
     'pybb', # Forum
     'markup_deprecated',
+    'sanitizer',
 
     # AstroBin apps
     'astrobin',
@@ -707,3 +708,6 @@ if TESTING:
 else:
     PREMIUM_MAX_IMAGES_FREE = 10
     PREMIUM_MAX_IMAGES_LITE = 12
+
+SANITIZER_ALLOWED_TAGS = ['b', 'i', 'strong', 'em', 'a']
+SANITIZER_ALLOWED_ATTRIBUTES = ['href']

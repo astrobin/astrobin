@@ -1,11 +1,12 @@
 {% load i18n %}
+{% load sanitizer %}
 
 {% if image.description %}
 <div class="image-description row">
     <div class="span8">
         <div class="subtle-container">
             <div class="header"><h4><i class="icon-align-left"></i> {% trans "Description" %}</h4></div>
-            {{image.description|safe|linebreaks}}
+            {{image.description|strip_html|safe|linebreaks}}
         </div>
     </div>
 </div>
