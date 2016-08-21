@@ -46,7 +46,7 @@ django-filter==0.5.4
 django-followit==0.0.3
 django-haystack==2.2.1
 django-hitcount==0.2.1
-django-html-sanitizer==0.1.5
+-e git+https://github.com/ui/django-html_sanitizer.git@63311131630471ef2315f1ddbbd18354159d24c1#egg=django-html_sanitizer
 django-keyedcache==1.4-6
 django-kombu==0.9.2
 django-maintenancemode==0.10
