@@ -3682,7 +3682,8 @@ msgid ""
 "                The 'Image of the day' was selected. Thank you for your "
 "help!\n"
 "            "
-msgstr "La \"Imagen del día\" fue seleccionada. ¡Gracias por tu ayuda!"
+msgstr "\nLa \"Imagen del día\" fue seleccionada. ¡Gracias por tu ayud\n"
+"            "
 
 #: templates/iotd_detail.html:7 templates/iotd_detail.html.py:13
 #, fuzzy
@@ -7028,6 +7029,7 @@ msgstr ""
 "Los miembros de pago no verán publicidad. Todos, incluidos los miembros con\n"
 "cuentas gratuitas, tienen acceso a todas las características sociales de "
 "AstroBin.\n"
+"            "
 
 #: templates/subscription/subscription_detail.html:79
 #: templates/subscription/subscription_list.html:39

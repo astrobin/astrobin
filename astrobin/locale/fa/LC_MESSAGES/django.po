@@ -8,8 +8,8 @@ msgstr ""
 "Project-Id-Version: AstroBin 1.9\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2016-08-22 08:14+0100\n"
-"PO-Revision-Date: 2016-04-21 21:29+0000\n"
-"Last-Translator: mhkhk <mhkhk_co@yahoo.com>\n"
+"PO-Revision-Date: 2016-08-22 08:16+0000\n"
+"Last-Translator: Salvatore <salvatore@iovene.com>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
 "Language: fa\n"
 "MIME-Version: 1.0\n"
@@ -17,7 +17,7 @@ msgstr ""
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=1; plural=0;\n"
 "X-Generator: Pootle 2.5.0\n"
-"X-POOTLE-MTIME: 1461274190.644130\n"
+"X-POOTLE-MTIME: 1471853783.708746\n"
 
 #: fields.py:10
 msgid "United Kingdom"
@@ -1948,7 +1948,7 @@ msgstr "شیئ پیدا نشد."
 
 #: models.py:688
 msgid "Use a <strong>comma</strong> to separate the values."
-msgstr "از یک کاما برای تفکیک مقادیر استفاده کنید."
+msgstr ""
 
 #: models.py:694
 msgid ""
@@ -2136,8 +2136,6 @@ msgid ""
 "Quality of the sky according to <a href=\"http://en.wikipedia.org/wiki/"
 "Bortle_Dark-Sky_Scale\" target=\"_blank\">the Bortle Scale</a>."
 msgstr ""
-"کیفیت آسمان طبق (http://en.wikipedia.org/wiki/Bortle_Dark-Sky_Scale_blank) "
-"مقیاس Bortle."
 
 #: models.py:1469
 msgid "Mean mag/arcsec^2"
@@ -2298,13 +2296,10 @@ msgid "Company description"
 msgstr "توضیحات راجع به شرکت"
 
 #: models.py:1706
-#, fuzzy
 msgid ""
 "A short description of the company you represent on AstroBin. You can use "
 "some <a href=\"/faq/#comments\">formatting rules</a>."
 msgstr ""
-"توضیحاتی راجع به شرکتی که شما در AstroBin نماینده اش هستید. می توانید  از "
-"این فرمت <a href=\"/faq/#10\"></a> استفاده کنید."
 
 #: models.py:1714
 msgid "Company website"
@@ -2525,10 +2520,6 @@ msgid ""
 "name.<br/>It is recommended that you try to group as many items as possible, "
 "so try to use a generic version of your product's name."
 msgstr ""
-"گاهی اوقات نام محصول به درستی به وسیله کاربر نوشته نمی شود. اینجا نام صحیح "
-"آن را بنویسید و نیازی به نام تولیدی، تولید کننده، مارک محصول و نمایندگی پخش "
-"نیست. توصیه می شود تا حد امکان، اقلام را گروه کنید. بنابراین نام کلی از "
-"محصول خود را استفاده کنید. "
 
 #: models.py:2306
 msgid ""
@@ -2551,13 +2542,10 @@ msgid ""
 msgstr "جمله ای به یاد ماندنی که برای فروش این تصویر کمک کند."
 
 #: models.py:2330
-#, fuzzy
 msgid ""
 "Here you can write the full commercial description of your product. You can "
 "use some <a href=\"/faq/#comments\">formatting rules</a>."
 msgstr ""
-"اینجا می توانید توضیح کاملی از این محصول بنویسید. می توانید از قوانین فرمت "
-"استفاده کنید."
 
 #: models.py:2349
 msgid "Commercial gear items"
@@ -3007,10 +2995,6 @@ msgid ""
 "minute picture of M31 you took last night between the clouds <em>belongs</"
 "em> here! Don't be shy and post it!"
 msgstr ""
-"منطقی نیست. AstroBin ساخته نشده که عکس های زیبا نشان دهد بلکه فرصتی است برای "
-"همگان به منظور کمک به تلاش های وسیع و در حال رشد و تمرکزاطلاعات مهم. 30 "
-"دقیقه تصویر ازM31 که شب گذشته  میان ابرهایش گرفته اید، می تواند اینجا باشد. "
-"خجالت نکشید و آن را پست کنید."
 
 #: templates/faq.html:73
 msgid ""
@@ -3081,11 +3065,6 @@ msgid ""
 "become possible: you could simply upload an image of a galaxy, and AstroBin "
 "could compare it to pictures of the same galaxy taken previously."
 msgstr ""
-"AstroBin به تازگی شروع به کار کرده است و می توان گفت که آسمان محدود است. "
-"ایده های بسیاری وجود دارد که با رشد کاربر، تبدیل به داده می شوند. اتفاقا "
-"چیزهایی مثل جستجوی ابر نو اختر نیز ممکن می شود. شما به راحتی می توانید "
-"تصویری از یک کهکشان آپلود کنید و AstroBin می تواند ن را با سایر تصاویر از "
-"همان کهکشان مقایسه کند."
 
 #: templates/faq.html:99
 msgid ""
@@ -3169,7 +3148,7 @@ msgstr ""
 msgid ""
 "Do you have a question not covered here! Please <a href=\"/contact/"
 "\">contact us</a>!"
-msgstr "آیا سوالی دارید که اینجا ننوشته شده باشد؟ لطفا با ما تماس بگیرید."
+msgstr ""
 
 #: templates/guidelines.html:4 templates/guidelines.html.py:9
 #: templates/maintenance_base.html:516 templates/base/footer.html:23
@@ -3326,9 +3305,6 @@ msgid ""
 "ground up by an astrophotographer, and it provides means to people who want "
 "to share their astrophotographs."
 msgstr ""
-"AstroBin برای پر کردن فاصله ها آمده است. این وبسایتی است که بوسیله عکاس "
-"نجومی از ابتدا ساخته شده است و برای این منظور می باشد تا سایر عکاسان نجومی "
-"کارهایشان را با بقیه تقسیم کنند. "
 
 #: templates/help.html:18
 msgid "So how is this different from any other image sharing websites?"
@@ -3339,8 +3315,6 @@ msgid ""
 "<em>AstroBin</em> provides a number of features that are tailored "
 "specificlly to astrophotography. Here's a quick run down of the main ones:"
 msgstr ""
-"AstroBin تعدادی ویژگی دارد که مختص عکاسی نجومی است. در اینجا با چند نمونه "
-"آشنا می شویم:"
 
 #: templates/help.html:23
 msgid "Dedication to data"
@@ -3352,9 +3326,6 @@ msgid ""
 "done with it. <em>AstroBin</em>, instead, has a user interface specifically "
 "designed to enable you to input all the technical data of your image."
 msgstr ""
-"برای یک سایت عکس هدف عمده این است که شما تصویرتان را آپلود می کنید و تمام. "
-"AstroBin در عوض، محیطی برای شما دارد که می توانید تمام مشخصات مرتبط با "
-"تصویرتان را قرار دهید."
 
 #: templates/help.html:26
 msgid ""
@@ -3365,10 +3336,6 @@ msgid ""
 "Astronomical Database, which contains over 5 million objects under over 15 "
 "million names!"
 msgstr ""
-"AstroBin با استفاده از یک پایگاه داده گسترده ورودی خود را خودکارتکمیل می "
-"کند. هر چیزی از تلسکوپ، CCDs و فیلترهای مربوط به شیئی خاص، وقتی شما نام آن "
-"را وارد می کنید در اختیار قرار می گیرد. AstroBin به دیتابیس SIMBAD وصل می "
-"شود که شامل 5 میلیون شیئ و 15 میلیون نام است."
 
 #: templates/help.html:29
 msgid ""
@@ -3377,8 +3344,6 @@ msgid ""
 "interesting statistics. There is also a page that shows the most popular "
 "subjects organized by month and latitude!"
 msgstr ""
-"در AstroBin، اشیائ نجومی صفحه خودشان را دارند و شما می توانید بهترین تصاویر "
-"از آنها را با گرافها و جداول مربوط به علاقمندی به آنها، ببینید. "
 
 #: templates/help.html:33
 msgid "Data is strongly interconnected"
@@ -3392,10 +3357,6 @@ msgid ""
 "certain filter. How about all the images between 6 and 8 hours of "
 "integration? Or with a certain Moon phase? You can do that!"
 msgstr ""
-"شما می خواهید بدانید تصویر بعدی چطور به نظر می رسد؟ با AstroBin شما می "
-"توانید همه عکسهای مربوط به یک جسم را که با نوع خاصی از تلسکوپ، CCD، فیلتر "
-"خاص و دروبین گرفته شده است را جستجو کنید. نظرتان راجع به عکس هایی با 6 تا 8 "
-"ساعت از ادغام یا فاز خاصی از ماه چیست؟ شما می توانید این کارها را کنید."
 
 #: templates/help.html:38
 msgid ""
@@ -3430,9 +3391,6 @@ msgid ""
 "everything is visible at a glance in the Technical Card. Even the Moon age "
 "at the time of the acquisition is displayed."
 msgstr ""
-"هر تصویر در AstroBin، شرحی از تمام جزئیات تکنیکی برای گرفتنش داراست. تلسکوپ، "
-"دوربین، فیلترها و هر چیز دیگر در یک نگاه در Technical Card مشخص است. حتی سن "
-"ماه در زمان گرفتن عکس نیز درج می شود. "
 
 #: templates/help.html:51
 msgid "More than just an image"
@@ -3447,11 +3405,6 @@ msgid ""
 "annotated version will appear on the site. <em>AstroBin</em> will know what "
 "are the astronomical objects in your image without you telling!"
 msgstr ""
-"AstroBin چیزی بیشتر از فقط میزبانی از عکس شما را داراست. وقتی عکسی یا داده "
-"ای را آپلود می کنید، به رنگ معکوس در می آید تا جزئیات آن مثلا ابرهای اطراف "
-"آن یا بازوهای کهکشانی، بهتر مشخص شود. تصاویر همچنین plate solved می شوند و "
-"یک نسخه مشروح روی سایت قرار می گیرد. AstroBin بدون اینکه شما بگویید، می فهمد "
-"چه عکسی آپلود شده است!"
 
 #: templates/help.html:57
 msgid "Protection from theft with automatic watermarking"
@@ -3462,8 +3415,6 @@ msgid ""
 "<em>AstroBin</em>'s upload wizard will offer you to watermark your image "
 "with the text of your choosing. All it takes is a click!"
 msgstr ""
-"AstroBin's upload wizard، به شما امکان watermark کردن عکس هایتان را با متن "
-"یا هر چیز انتخاب شما می دهد. برای این کار فقط یک کلیک لازم است."
 
 #: templates/help.html:63
 msgid "AstroBin supports multiple image revisions"
@@ -3477,10 +3428,6 @@ msgid ""
 "intuitively! Now it's going to be really easy to tell whether your "
 "processing has improved."
 msgstr ""
-"نگویید که تا به حال برای پرداخت یک عکس بعد از چاپ آن اقدام نکرده اید. "
-"AstroBin، پذیرای این کار است و به شما اجازه می دهد به آسانی چندین ویرایش و "
-"قالب متفاوت از یک عکس را منتشر کنید. بنبراین خیلی آسان است که گفته شود: آیا "
-"پرداخت کردن و ویرایش شما پیشرفت کرده است یا نه."
 
 #: templates/help.html:69
 msgid "AstroBin is social!"
@@ -3491,8 +3438,6 @@ msgid ""
 "On <em>AstroBin</em> you can message other astrophotographer, follow them "
 "and be notified when they post new images, or perform requests for more data."
 msgstr ""
-"با AstroBin، می توانید به سایر عکاسان پیغام بفرستید یا وقتی عکس جدیدی را "
-"قرار دادند، دنبال کنید یا اینکه درخواست داده بیشتر کنید."
 
 #: templates/help.html:74
 msgid ""
@@ -3515,11 +3460,6 @@ msgid ""
 "rescue to provide a home and a central hub for astrophotographers all over "
 "the world."
 msgstr ""
-"از آنجایی که بدون شک متوجه شده اید، AstroBin چیزی بیشتر از یک صفحه میزبان "
-"عکس است. این همان چیزی است که جامعه عکاسی نجومی مدتها دنبالش بود. برای سال "
-"ها، من تصاویر نابی را کاملا گمنام در اینترنت، فروم، وب های شخصی و موقتی می "
-"دیدم. خیلی از آنها دارای داده هایی در حال گم شدن بودند. AstroBin آمده است تا "
-"مرکزی برای میزبانی آنها و تمام عکاسان نجومی سراسر دنیا باشد."
 
 #: templates/help.html:81
 msgid "So, what are you waiting for?"
@@ -3937,8 +3877,6 @@ msgid ""
 "strong> images, reaching <strong>%(total_integration)s</strong> hours of "
 "integration time."
 msgstr ""
-"%(total_users)s: آپلود کاربران. %(total_images)s: تصاویر، در دسترس بودن. "
-"%(total_integration)s: ساعات یکپارچه سازی تصاویر"
 
 #: templates/stats.html:17
 msgid "Total integration hours in the last 12 months"
@@ -4046,8 +3984,6 @@ msgid ""
 "It's perfect for works in progress that you want to share on Internet "
 "forums. Read more in the <a href=\"%(faq_url)s#6\">FAQ</a>."
 msgstr ""
-"از این دکمه برای آپلود تصویر بر روی Staging Area استفاده کنید. این کار مناسب "
-"کارهای در حال انجام است که شما می خواهید روی فروم ها به اشتراک بگذارید."
 
 #: templates/upload.html:82
 msgid "Upload as a finished image"
@@ -4061,9 +3997,6 @@ msgid ""
 "on the home page. You can <a href=\"%(flickr_url)s\">import from Flickr</a> "
 "too."
 msgstr ""
-"از این دکمه برای آپلود تصویر بر روی Public Area استفاده کنید. بر روی "
-"پروفایلتان و اینجا در صفحه اصلی می توانید آن را ببینید. می توانید از Flickr "
-"نیز تصویر وارد کنید."
 
 #: templates/upload.html:104
 #, fuzzy
@@ -4207,7 +4140,7 @@ msgstr "ذخیره"
 #: templates/user_collections_base.html:6 templates/user/profile.html:9
 #, python-format
 msgid "%(user)s's gallery"
-msgstr "گالری (کاربر)"
+msgstr ""
 
 #: templates/user_collections_create.html:8
 #: templates/user_collections_create.html:12
@@ -4705,7 +4638,7 @@ msgstr ""
 msgid ""
 "Please <a href=\"/accounts/login/\">login</a> or <a href=\"/accounts/"
 "register/\">register</a> to write a review."
-msgstr "لطفا login یا ثبت نام کنید تا بتوانید یک بررسی و مرور بنویسید."
+msgstr ""
 
 #: templates/gear/page.html:124
 msgid ""
@@ -4722,7 +4655,7 @@ msgstr ""
 msgid ""
 "Please <a href=\"/accounts/login/\">login</a> or <a href=\"/accounts/"
 "register/\">register</a> to leave a comment."
-msgstr "لطفا برای دادن نظر، یا login کنید یا ثبت نام نمایید."
+msgstr ""
 
 #: templates/gear/page.html:146
 msgid "Buy it here"
@@ -4749,7 +4682,7 @@ msgstr "رزولوشن کامل"
 #: templates/image/full.html:60
 #, python-format
 msgid "by <a href=\"%(the_url)s\">%(user)s</a>"
-msgstr "بوسیله (کاربر)"
+msgstr ""
 
 #: templates/image/full.html:68 templates/image/detail/image_card.html:10
 msgid "Technical card"
@@ -4770,8 +4703,6 @@ msgid ""
 "the image soon. Remember that you can also <a href=\"%(message_url)s\">send "
 "them a message</a>. "
 msgstr ""
-"به (کاربر) اطلاع رسانی شد. امیدوارم آنها تصویر را به زودی به روز رسانی کنند. "
-"به یاد داشته باشید که شما همچنین می توانید به آنها پیغام نیز بفرستید."
 
 #: templates/image/actions/request_additional_information_complete.html:11
 #: templates/image/edit/acquisition.html:23
@@ -4787,8 +4718,6 @@ msgid ""
 "international community: using English is preferred. PS: <strong>%(user)s</"
 "strong>'s preferred language is <strong>%(lang)s</strong>."
 msgstr ""
-"یک نظر اینجا بگذارید و توجه کنید که AstroBin یک جامعه بین المللی است. پس از "
-"انگلیسی استفاده کنید. PS: درصد کاربرانی که از زبان انگلیسی استفاده کرده اند."
 
 #: templates/image/detail/comments.html:20
 msgid "Comments are closed."
@@ -4845,7 +4774,7 @@ msgstr "محتوا"
 #: templates/image/detail/js.html:103 templates/user/profile/js.html:11
 #, python-format
 msgid "Send %(username)s a message"
-msgstr "به (کاربر) پیغام بفرست."
+msgstr ""
 
 #: templates/image/detail/pending_moderation_banner.html:7
 msgid ""
@@ -4867,7 +4796,7 @@ msgid "Sky plot"
 msgstr ""
 
 #: templates/image/detail/wip_banner.html:7
-#, fuzzy, python-format
+#, python-format
 msgid ""
 "This image is a <strong>work in progress</strong> from your <a href="
 "\"%(profile_url)s?staging\">Staging Area</a>. This means nobody can see it "
@@ -4877,11 +4806,6 @@ msgid ""
 "revisions, <a href=\"#promote-modal\" data-toggle=\"modal\">promote it</a> "
 "to the <a href=\"%(profile_url)s\">Public Area</a>."
 msgstr ""
-"این تصویر در وضعیت work in progress می باشد که از Staging Area هدایت شده "
-"است. این بدین معنی است که هیچ کس نمی تواند آن را ببیند مگراینکه شما به آنها "
-"یکی از لینکهایی که می توانید از منوی Share در پایین پیدا کنید، بدهید. از آن "
-"اینک برای ارسال به فروم ها و دادن فیدبک استفاده کنید. اگر رضایت داشتید شاید "
-"بعد از آپلود چند نظر، از Public Area آنها را promote it کنید."
 
 #: templates/image/detail/menu/actions.html:9 templates/messages/inbox.html:30
 #: templates/user/profile/commercial/products.html:43
@@ -5229,11 +5153,6 @@ msgid ""
 "strong> to finish, or on <strong>Add more</strong> to add more acquisition "
 "sessions."
 msgstr ""
-"شما می توانید بسیاری از جلسات گرفتن عکس را همانطور که می خواهید که می خواهید "
-"وارد کنید. اغلب برای تصاویر گرفته شده در چند شب متوالی بکار ببرید. جلسه ی "
-"گرفتن، در درجه اول توسط یک تاریخ و یک فیلتر تعریف شده است. داده تان را وارد "
-"کنید و سپس برای اتمام آن یا افزودن تعداد بیشتری از جلسات گرفتن عکس، کلید "
-"Save را بزنید."
 
 #: templates/image/edit/acquisition.html:32
 #, python-format
@@ -5241,8 +5160,6 @@ msgid ""
 "Is this too much data for you to handle? Go to the <a class=\"button\" href="
 "\"%(basic_form_url)s?edit_type=deep_sky&advanced=false\">basic form</a>."
 msgstr ""
-"این تعداد داده برای شما به منظور کار کردن، بسیار زیاد است. به basic form "
-"بروید."
 
 #: templates/image/edit/acquisition.html:38
 msgid "Acquisition session"
@@ -5264,9 +5181,6 @@ msgid ""
 "filter, go to the <a class=\"button\" href=\"%(advanced_form_url)s?"
 "edit_type=deep_sky&advanced=true\">advanced form</a>."
 msgstr ""
-"با استفاده از این فرم شما می توانید جزئیات بیشتری در مورد چگونگی گرفتن تصویر "
-"خود وارد کنید. اگر می خواهید در پر کردن جزئیات برای هر فیلتر، دقیق تر باشید، "
-"به advanced form بروید."
 
 #: templates/image/edit/acquisition.html:74
 msgid "What kind of image is this?"
@@ -5298,8 +5212,6 @@ msgid ""
 "Can't see anything here? Perhaps you should first add some gear in your <a "
 "href=\"%(the_url)s\">profile</a>!"
 msgstr ""
-"نمی توانید چیزی را در اینجا ببینید؟ شاید باراول باید برخی از چرخ دنده ها را "
-"در پروفایلتان اضافه نمایید."
 
 #: templates/image/edit/gear.html:20
 msgid ""
@@ -5349,10 +5261,6 @@ msgid ""
 "\"_blank\" href=\"http://www.creativecommons.org/\">Creative Commons "
 "website</a>."
 msgstr ""
-"شما می توانید با یک مجوز Creative Commons، اگر می خواهید، مطالب خود را با "
-"اعطای حق استفاده از کار خود تحت شرایط خاص با بقیه به اشتراک بگذارید. برای "
-"کسب اطلاعات بیشتر در مورد چگونگی گزینه ها، لطفا از سایت Creative Commons "
-"دیدن فرمایید."
 
 #: templates/image/edit/license.html:15
 #, python-format
@@ -5360,7 +5268,6 @@ msgid ""
 "Remember that you can change your default license <a href="
 "\"%(change_default_url)s\">here</a>."
 msgstr ""
-"به یاد داشته باشید که شما می توانید مجوز پیش فرض خود را در اینجا تغییر دهید."
 
 #: templates/image/edit/menu.html:6
 #, fuzzy
@@ -5471,9 +5378,6 @@ msgid ""
 "your search using the <strong>Search type</strong> field in the "
 "<strong>Basic criteria</strong> box."
 msgstr ""
-"نتایج بدست آمده از این جستجو، حاصل تلفیق انواع مختلف است. اگر بخواهید، می "
-"توانید جستجوی خود را با استفاده ازمیدان Search type در جعبه Basic criteria، "
-"اصلاح نمایید."
 
 #: templates/inclusion_tags/search_image_list.html:40
 #: templates/inclusion_tags/search_image_list.html:93
@@ -5510,9 +5414,6 @@ msgid ""
 "astrophotography community greatly! See the <a href=\"%(help_url)s\">help "
 "page.</a> for more information."
 msgstr ""
-"AstroBin یک سرویس میزبانی به خصوص برای عکاسان نجومی است و شامل اقلامی که "
-"برای جامعه عکاسان نجوم نفع دارد، می باشد. به help page برای اطلاعات بیشتر "
-"بروید."
 
 #: templates/index/root.html:35
 msgid "Unlimited uploads, unlimited size."
@@ -5674,7 +5575,7 @@ msgstr "پیغام ارسال شد"
 #: templates/messages/view.html:12
 #, python-format
 msgid "A conversation between <a href=\"%(sender_url)s\">you</a> and"
-msgstr "یک بحث بین شما و "
+msgstr ""
 
 #: templates/messages/view.html:20
 msgid "Delete conversation"
@@ -5737,7 +5638,7 @@ msgid "There are no images in the spam list."
 msgstr "هیچ نظری وجود ندارد."
 
 #: templates/notification/email_body.txt:3
-#, fuzzy, python-format
+#, python-format
 msgid ""
 "Hi! You have a new notification on AstroBin:\n"
 "\n"
@@ -5753,10 +5654,6 @@ msgid ""
 "Clear skies,\n"
 "AstroBin.\n"
 msgstr ""
-"سلام! شما یک اطلاع رسانی جدید در AstroBin دارید. (پیغام). برای دیدن تمام "
-"اعلانهای خود، لطفا به (notices_url) بروید. اگر شما متمایل به دریافت ایمیل "
-"دیگری نمی باشید، تنظیمات خود را با رفتن به (http://astrobin.com (pref_url)، "
-"ویرایش نمایید. آسمان های صاف. AstroBin."
 
 #: templates/notification/api_key_request_approved/full.txt:3
 #, python-format
@@ -5772,10 +5669,6 @@ msgid ""
 "    \n"
 "    Thank you for using AstroBin's APIs!"
 msgstr ""
-"درخواست شما برای یک کلید API مورد تایید قرار گرفته است. کلید شما: (کلید). "
-"رمز شما: (رمز). لطفا مستندات API را در (api_docs_url) بخوانید. شما می توانید "
-"کلید API خود را در فایل (api_keys_url) نقد کنید. با تشکر از شما برای استفاده "
-"از رابط های برنامه کاربردی (AstroBin (APIs!"
 
 #: templates/notification/api_key_request_approved/notice.html:2
 #: templates/notification/api_key_request_approved/short.html:2
@@ -5783,7 +5676,7 @@ msgstr ""
 msgid ""
 "<a href=\"%(api_keys_url)s\">Your request for an API Key has been approved!</"
 "a>"
-msgstr "درخواست شما برای یک کلید API مورد تایید قرار گرفته است."
+msgstr ""
 
 #: templates/notification/api_key_request_approved/short.txt:2
 msgid "API Key request approved"
@@ -5795,7 +5688,7 @@ msgstr "درخواست کلید API مورد تایید قرار گرفته اس
 msgid ""
 "<a href=\"%(object_url)s\">You are now following <strong>%(object)s</strong>."
 "</a>"
-msgstr "شما حالا (شیئ) را دنبال می کنید."
+msgstr ""
 
 #: templates/notification/image_deleted/full.html:2
 #: templates/notification/image_deleted/full.txt:2
@@ -5808,13 +5701,13 @@ msgstr "تصویر شما حذف شده است."
 #: templates/notification/image_not_solved/full.txt:2
 #, python-format
 msgid "Your image at %(object_url)s could not be plate-solved."
-msgstr "تصویر شما در (object_url) نمی تواند plate-solved شود."
+msgstr ""
 
 #: templates/notification/image_not_solved/notice.html:2
 #: templates/notification/image_not_solved/short.html:2
 #, python-format
 msgid "<a href=\"%(object_url)s\">Your image could not be plate-solved.</a>"
-msgstr "تصویر شما نمی تواند plate-solved شود."
+msgstr ""
 
 #: templates/notification/image_not_solved/short.txt:2
 msgid "Your image could not be plate-solved."
@@ -5824,19 +5717,19 @@ msgstr "تصویر شما نمی تواند plate-solved شود."
 #: templates/notification/image_ready/short.html:2
 #, python-format
 msgid "<a href=\"%(object_url)s\">Your image has been processed.</a>"
-msgstr "تصویر شما پردازش شده است."
+msgstr ""
 
 #: templates/notification/image_solved/full.txt:2
 #, python-format
 msgid "Your image at %(object_url)s was plate-solved."
-msgstr "تصویر شما در (object_url) توانست plate-solved شود."
+msgstr ""
 
 #: templates/notification/image_solved/notice.html:2
 #: templates/notification/image_solved/short.html:2
 #, python-format
 msgid ""
 "<a href=\"%(object_url)s\">Your image has been successfully plate-solved.</a>"
-msgstr "تصویر شما توانست با موفقیت plate-solved شود."
+msgstr ""
 
 #: templates/notification/image_solved/short.txt:2
 msgid "Your image has been successfully plate-solved."
@@ -5854,9 +5747,6 @@ msgid ""
 "\n"
 "Thank you!"
 msgstr ""
-"شما (عدد) تصاویر با اطلاعات ناکافی دارید. AstroBin متکی بر داده ها به عنوان "
-"یک خدمت بزرگ برای شما و هر کاربر دیگر است. لطفا داده های خود را برای "
-"تصاویرتان، در URL زیر را پر کنید: (URL). با تشکر از شما!"
 
 #: templates/notification/lacking_data_reminder/notice.html:2
 #: templates/notification/lacking_data_reminder/short.html:2
@@ -5864,12 +5754,12 @@ msgstr ""
 msgid ""
 "<a href=\"%(url)s\">You have <strong>%(number)s</strong> images with "
 "insufficient data!</a>"
-msgstr "شما (عدد) تصاویر با اطلاعات ناکافی دارید."
+msgstr ""
 
 #: templates/notification/lacking_data_reminder/short.txt:2
 #, python-format
 msgid "You have %(number)s images with insufficient data!"
-msgstr "شما (عدد) تصاویر با اطلاعات ناکافی دارید."
+msgstr ""
 
 #: templates/notification/new_blog_entry/full.txt:2
 #, python-format
@@ -5878,8 +5768,6 @@ msgid ""
 "\n"
 "Check it out at the following url: %(object_url)s"
 msgstr ""
-"AstroBin یک وبلاگ جدید منتشر کرده است: \"(شیء)\". در آدرس زیر می توانید آن "
-"را چک کنید: (object_url)"
 
 #: templates/notification/new_blog_entry/notice.html:2
 #: templates/notification/new_blog_entry/short.html:2
@@ -5887,64 +5775,62 @@ msgstr ""
 msgid ""
 "<a href=\"%(object_url)s\">AstroBin has published a new blog entry: "
 "\"%(object)s\"</a>"
-msgstr "AstroBin یک وبلاگ جدید منتشر کرده است: \"(شیء)\"."
+msgstr ""
 
 #: templates/notification/new_blog_entry/short.txt:2
 #, python-format
 msgid "AstroBin has publushed a new blog entry: %(object)s"
-msgstr "AstroBin یک وبلاگ جدید منتشر کرده است: \"(شیء)\"."
+msgstr ""
 
 #: templates/notification/new_bookmark/full.txt:2
 #: templates/notification/new_bookmark/short.txt:2
-#, fuzzy, python-format
+#, python-format
 msgid "%(user)s has added your image to their bookmarks: %(url)s"
-msgstr "(کاربر) تصویر شما را به عنوان یک مورد دلخواه مارک کرده است: (URL)"
+msgstr ""
 
 #: templates/notification/new_bookmark/notice.html:2
 #: templates/notification/new_bookmark/short.html:2
-#, fuzzy, python-format
+#, python-format
 msgid ""
 "<a href=\"%(url)s\"><strong>%(user)s</strong> has added your image to their "
 "bookmarks!</a>"
-msgstr "(کاربر) تصویر شما را به عنوان یک مورد دلخواه مارک کرده است."
+msgstr ""
 
 #: templates/notification/new_comment/full.txt:2
 #, python-format
 msgid ""
 "%(user)s commented on your image! Check it out at the following url: %(url)s"
 msgstr ""
-"(کاربر) روی تصویرشما، نظر داده اند! در آدرس زیر می توانید آن را چک کنید: "
-"(URL)"
 
 #: templates/notification/new_comment/notice.html:2
 #: templates/notification/new_comment/short.html:2
 #, python-format
 msgid ""
 "<a href=\"%(url)s\"><strong>%(user)s</strong> commented on your image!</a>"
-msgstr "(کاربر) روی تصویرشما، نظر داده اند!"
+msgstr ""
 
 #: templates/notification/new_comment/short.txt:2
 #, python-format
 msgid "%(user)s commented on your image!"
-msgstr "(کاربر) روی تصویرشما، نظر داده اند!"
+msgstr ""
 
 #: templates/notification/new_comment_reply/full.txt:2
 #, python-format
 msgid ""
 "%(user)s replied to your comment. Check it out at the following url: %(url)s"
-msgstr "(کاربر) به نظر شما پاسخ داد. در آدرس زیر آن را چک کنید: (URL)"
+msgstr ""
 
 #: templates/notification/new_comment_reply/notice.html:2
 #: templates/notification/new_comment_reply/short.html:2
 #, python-format
 msgid ""
 "<a href=\"%(url)s\"><strong>%(user)s</strong> replied to your comment.</a>"
-msgstr "(کاربر) به نظر شما پاسخ داد."
+msgstr ""
 
 #: templates/notification/new_comment_reply/short.txt:2
 #, python-format
 msgid "%(user)s replied to your comment."
-msgstr "(کاربر) به نظر شما پاسخ داد."
+msgstr ""
 
 #: templates/notification/new_follower/full.txt:2
 #, python-format
@@ -5952,8 +5838,6 @@ msgid ""
 "User %(object)s is now following you. They will be notified when you publish "
 "new images."
 msgstr ""
-"کاربر(شیء) در حال حاضر شما را دنبال می کند. به آنها هر زمان که شما تصاویر "
-"جدیدی منتشر کنید، اطلاع داده خواهد شد."
 
 #: templates/notification/new_follower/notice.html:2
 #: templates/notification/new_follower/short.html:2
@@ -5961,7 +5845,7 @@ msgstr ""
 msgid ""
 "<a href=\"%(object_url)s\"><strong>%(object)s</strong> is now following you."
 "</a>"
-msgstr "(شیء) در حال حاضر شما را دنبال می کند."
+msgstr ""
 
 #: templates/notification/new_follower/short.txt:2
 msgid "You have a new follower!"
@@ -5973,8 +5857,6 @@ msgid ""
 "%(user)s started a new discussion about a gear item you own! Read it at "
 "following url: %(url)s"
 msgstr ""
-"(کاربر) یک بحث جدید در مورد آیتم دنده (gear) ی که شما دارید، آغازکرده است! "
-"در آدرس زیرآن رابخوانید: (URL)"
 
 #: templates/notification/new_gear_discussion/notice.html:2
 #: templates/notification/new_gear_discussion/short.html:2
@@ -5983,13 +5865,11 @@ msgid ""
 "<a href=\"%(url)s\"><strong>%(user)s</strong> started a new discussion about "
 "a gear item you own!</a>"
 msgstr ""
-"(کاربر) یک بحث جدید در مورد آیتم دنده (gear) ی که شما دارید، آغازکرده است!"
 
 #: templates/notification/new_gear_discussion/short.txt:2
 #, python-format
 msgid "%(user)s started a new discussion about a gear item you own!"
 msgstr ""
-"(کاربر) یک بحث جدید در مورد آیتم دنده (gear) ی که شما دارید، آغازکرده است!"
 
 #: templates/notification/new_gear_review/full.txt:2
 #, python-format
@@ -5997,8 +5877,6 @@ msgid ""
 "%(user)s wrote a review of a gear item you own! Read it at following url: "
 "%(url)s"
 msgstr ""
-"(کاربر) یک بررسی از آیتم های دنده (gear) شما نوشته است! درآدرس زیرآن را "
-"بخوانید: (URL)"
 
 #: templates/notification/new_gear_review/notice.html:2
 #: templates/notification/new_gear_review/short.html:2
@@ -6006,12 +5884,12 @@ msgstr ""
 msgid ""
 "<a href=\"%(url)s\"><strong>%(user)s</strong> wrote a review of a gear item "
 "you own!</a>"
-msgstr "(کاربر) یک بررسی از آیتم های دنده (gear) شما نوشته است!"
+msgstr ""
 
 #: templates/notification/new_gear_review/short.txt:2
 #, python-format
 msgid "%(user)s wrote a review of a gear item you own!"
-msgstr "(کاربر) یک بررسی از آیتم های دنده (gear) شما نوشته است!"
+msgstr ""
 
 #: templates/notification/new_image/full.txt:2
 #, python-format
@@ -6019,26 +5897,25 @@ msgid ""
 "%(originator)s has published a new image! Check it out at the following url: "
 "%(object_url)s"
 msgstr ""
-"(موسس) یک تصویر جدید منتشر کرده است! در آدرس زیر آن را چک کنید: (object_url)"
 
 #: templates/notification/new_image/notice.html:2
 #, python-format
 msgid ""
 "<a href=\"%(object_url)s\"><strong>%(originator)s</strong> has published a "
 "new image.</a>"
-msgstr "(موسس) یک تصویر جدید منتشر کرده است!"
+msgstr ""
 
 #: templates/notification/new_image/short.html:2
 #, python-format
 msgid ""
 "<a href=\"%(object_url)s\"><strong>%(originator)s</strong> has published a "
 "new image</a>"
-msgstr "(موسس) یک تصویر جدید منتشر کرده است!"
+msgstr ""
 
 #: templates/notification/new_image/short.txt:2
 #, python-format
 msgid "New image by %(originator)s"
-msgstr "عکس های جدید از (موسس)"
+msgstr ""
 
 #: templates/notification/new_image_from_gear/full.txt:2
 #, python-format
@@ -6046,8 +5923,6 @@ msgid ""
 "New image taken with a gear item you follow: <strong>%(gear)s</strong>. "
 "Check it out at the following url: %(object_url)s"
 msgstr ""
-"تصویری جدید از آیتم دنده (gear)ی که شما دنبال می کنید، گرفته شده است: "
-"(دنده). در آدرس زیرآن را چک کنید: (object_url)"
 
 #: templates/notification/new_image_from_gear/notice.html:2
 #: templates/notification/new_image_from_gear/short.html:2
@@ -6055,12 +5930,12 @@ msgstr ""
 msgid ""
 "<a href=\"%(object_url)s\">New image taken with a <strong>%(gear)s</strong>."
 "</a>"
-msgstr "تصویر جدید با یک (دنده، gear) گرفته شده است."
+msgstr ""
 
 #: templates/notification/new_image_from_gear/short.txt:2
 #, python-format
 msgid "New image taken with a %(gear)s"
-msgstr "تصویر جدید با یک (دنده، gear) گرفته شده است."
+msgstr ""
 
 #: templates/notification/new_image_of_subject/full.txt:2
 #, python-format
@@ -6068,20 +5943,18 @@ msgid ""
 "New image of a subject you follow: <strong>%(subject)s</strong>. Check it "
 "out at the following url: %(object_url)s"
 msgstr ""
-"تصویر جدید از موضوعی که دنبال می کنید (موضوع). در آدرس زیرآن را چک کنید: "
-"(object_url)"
 
 #: templates/notification/new_image_of_subject/notice.html:2
 #: templates/notification/new_image_of_subject/short.html:2
 #, python-format
 msgid ""
 "<a href=\"%(object_url)s\">New image of <strong>%(subject)s</strong>.</a>"
-msgstr "تصویر جدید از (موضوع)."
+msgstr ""
 
 #: templates/notification/new_image_of_subject/short.txt:2
 #, python-format
 msgid "New image of %(subject)s"
-msgstr "تصویر جدید از (موضوع)."
+msgstr ""
 
 #: templates/notification/new_image_revision/full.txt:2
 #, python-format
@@ -6089,8 +5962,6 @@ msgid ""
 "%(originator)s has published a new image revision! Check it out at the "
 "following url: %(object_url)s"
 msgstr ""
-"(موسس) یک تجدید نظر جدید از تصویر منتشر کرده است! در آدرس زیر آن را چک کنید: "
-"(object_url)"
 
 #: templates/notification/new_image_revision/notice.html:2
 #: templates/notification/new_image_revision/short.html:2
@@ -6098,28 +5969,28 @@ msgstr ""
 msgid ""
 "<a href=\"%(object_url)s\"><strong>%(originator)s</strong> has published a "
 "new image revision.</a>"
-msgstr "(موسس) یک تجدید نظر جدید از تصویر منتشر کرده است."
+msgstr ""
 
 #: templates/notification/new_image_revision/short.txt:2
 #, python-format
 msgid "New image revision by %(originator)s"
-msgstr "یک تجدید نظر جدید از تصویر بوسیله (موسس)"
+msgstr ""
 
 #: templates/notification/new_like/full.txt:2
-#, fuzzy, python-format
+#, python-format
 msgid "%(user)s likes your image: %(url)s"
-msgstr "(کاربر) تصویر شما را به عنوان یک مورد دلخواه مارک کرده است: (URL)"
+msgstr ""
 
 #: templates/notification/new_like/notice.html:2
 #: templates/notification/new_like/short.html:2
-#, fuzzy, python-format
+#, python-format
 msgid "<a href=\"%(url)s\"><strong>%(user)s</strong> likes your image!</a>"
-msgstr "(کاربر) روی تصویرشما، نظر داده اند!"
+msgstr ""
 
 #: templates/notification/new_like/short.txt:2
-#, fuzzy, python-format
+#, python-format
 msgid "%(user)s likes your image: %(title)s"
-msgstr "(کاربر) تصویر شما را به عنوان یک مورد دلخواه مارک کرده است: (URL)"
+msgstr ""
 
 #: templates/notification/rawdata_invited_to_private_folder/full.txt:2
 #, python-format
@@ -6134,11 +6005,11 @@ msgstr ""
 
 #: templates/notification/rawdata_invited_to_private_folder/notice.html:2
 #: templates/notification/rawdata_invited_to_private_folder/short.html:2
-#, fuzzy, python-format
+#, python-format
 msgid ""
 "<a href=\"%(folder_url)s\">You are invited you to the private shared folder: "
 "<strong>\"%(folder_name)s.\"</strong></a>"
-msgstr "شما دنبال کردن (شیء) را متوقف کرده اید."
+msgstr ""
 
 #: templates/notification/rawdata_invited_to_private_folder/short.txt:2
 #, python-format
@@ -6146,30 +6017,27 @@ msgid "You are invited you to the private shared folder: %(folder_name)s"
 msgstr ""
 
 #: templates/notification/rawdata_posted_image_to_private_folder/full.txt:2
-#, fuzzy, python-format
+#, python-format
 msgid ""
 "%(user_name)s has added a new processed image to the private shared folder: "
 "\"%(folder_name)s\". Check it out at the following url: %(folder_url)s"
 msgstr ""
-"(موسس) یک تجدید نظر جدید از تصویر منتشر کرده است! در آدرس زیر آن را چک کنید: "
-"(object_url)"
 
 #: templates/notification/rawdata_posted_image_to_private_folder/notice.html:2
-#, fuzzy, python-format
+#, python-format
 msgid ""
 "<a href=\"%(folder_url)s\"><strong>%(user_name)s</strong> has added a new "
 "processed image to the private shared folder: <strong>\"%(folder_name)s.\"</"
 "strong></a>"
 msgstr ""
-"(کاربر) یک بحث جدید در مورد آیتم دنده (gear) ی که شما دارید، آغازکرده است!"
 
 #: templates/notification/rawdata_posted_image_to_private_folder/short.html:2
-#, fuzzy, python-format
+#, python-format
 msgid ""
 "<a href=\"%(folder_url)s\"><strong>%(user_name)s</strong> has added a new "
 "processed image to the private shared folder: <strong>\"%(folder_name)s.\"</"
 "a>"
-msgstr "(کاربر) تصویر شما را به عنوان یک مورد دلخواه مارک کرده است."
+msgstr ""
 
 #: templates/notification/rawdata_posted_image_to_private_folder/short.txt:2
 #, python-format
@@ -6177,23 +6045,20 @@ msgid "New processed image in private shared folder: %(folder_name)s"
 msgstr ""
 
 #: templates/notification/rawdata_posted_image_to_public_pool/full.txt:2
-#, fuzzy, python-format
+#, python-format
 msgid ""
 "%(user_name)s has added a new processed image to the public data pool: "
 "\"%(pool_name)s\". Check it out at the following url: %(pool_url)s"
 msgstr ""
-"(موسس) یک تجدید نظر جدید از تصویر منتشر کرده است! در آدرس زیر آن را چک کنید: "
-"(object_url)"
 
 #: templates/notification/rawdata_posted_image_to_public_pool/notice.html:2
 #: templates/notification/rawdata_posted_image_to_public_pool/short.html:2
-#, fuzzy, python-format
+#, python-format
 msgid ""
 "<a href=\"%(pool_url)s\"><strong>%(user_name)s</strong> has added a new "
 "processed image to the public data pool: <strong>\"%(pool_name)s.\"</"
 "strong></a>"
 msgstr ""
-"(کاربر) یک بحث جدید در مورد آیتم دنده (gear) ی که شما دارید، آغازکرده است!"
 
 #: templates/notification/rawdata_posted_image_to_public_pool/short.txt:2
 #, python-format
@@ -6201,20 +6066,19 @@ msgid "New processed image in public data pool: %(pool_name)s"
 msgstr ""
 
 #: templates/notification/rawdata_posted_to_pool/full.txt:2
-#, fuzzy, python-format
+#, python-format
 msgid ""
 "%(user_name)s has added new data to the public pool: \"%(pool_name)s\". "
 "Check it out at the following url: %(pool_url)s"
-msgstr "(کاربر) به نظر شما پاسخ داد. در آدرس زیر آن را چک کنید: (URL)"
+msgstr ""
 
 #: templates/notification/rawdata_posted_to_pool/notice.html:2
 #: templates/notification/rawdata_posted_to_pool/short.html:2
-#, fuzzy, python-format
+#, python-format
 msgid ""
 "<a href=\"%(pool_url)s\"><strong>%(user_name)s</strong> has added new data "
 "to the public pool: <strong>\"%(pool_name)s.\"</strong></a>"
 msgstr ""
-"(کاربر) یک بحث جدید در مورد آیتم دنده (gear) ی که شما دارید، آغازکرده است!"
 
 #: templates/notification/rawdata_posted_to_pool/short.txt:2
 #, python-format
@@ -6222,21 +6086,19 @@ msgid "New data in public pool: %(pool_name)s"
 msgstr ""
 
 #: templates/notification/rawdata_posted_to_private_folder/full.txt:2
-#, fuzzy, python-format
+#, python-format
 msgid ""
 "%(user_name)s has added new data to the private shared folder: "
 "\"%(folder_name)s\". Check it out at the following url: %(folder_url)s"
 msgstr ""
-"AstroBin یک وبلاگ جدید منتشر کرده است: \"(شیء)\". در آدرس زیر می توانید آن "
-"را چک کنید: (object_url)"
 
 #: templates/notification/rawdata_posted_to_private_folder/notice.html:2
 #: templates/notification/rawdata_posted_to_private_folder/short.html:2
-#, fuzzy, python-format
+#, python-format
 msgid ""
 "<a href=\"%(folder_url)s\"><strong>%(user_name)s</strong> has added new data "
 "to the private shared folder: <strong>\"%(folder_name)s.\"</strong></a>"
-msgstr "(کاربر) تصویر شما را به عنوان یک مورد دلخواه مارک کرده است."
+msgstr ""
 
 #: templates/notification/rawdata_posted_to_private_folder/short.txt:2
 #, python-format
@@ -6250,8 +6112,6 @@ msgid ""
 "\n"
 "http://astrobin.com/messages/inbox/"
 msgstr ""
-"شما یک پیام خصوصی در AstroBin دریافت کرده اید! ادامه مطلب را در لینک زیر "
-"بخوانید: /http://astrobin.com/messages/inbox"
 
 #: templates/notification/received_email/notice.html:2
 #: templates/notification/received_email/short.html:2
@@ -6265,7 +6125,6 @@ msgid ""
 "%(originator)s has fulfilled your request! Check it out at the following "
 "url: %(object_url)s"
 msgstr ""
-"(موسس) درخواست شما را انجام داده است! در آدرس زیرآن را چک کنید: (object_url)"
 
 #: templates/notification/request_fulfilled/notice.html:2
 #: templates/notification/request_fulfilled/short.html:2
@@ -6273,12 +6132,12 @@ msgstr ""
 msgid ""
 "<a href=\"%(object_url)s\"><strong>%(originator)s</strong> has fulfilled "
 "your request</a>"
-msgstr "(موسس) درخواست شما را انجام داده است"
+msgstr ""
 
 #: templates/notification/request_fulfilled/short.txt:2
 #, python-format
 msgid "%(originator)s has fulfilled your request."
-msgstr "(موسس) درخواست شما را انجام داده است."
+msgstr ""
 
 #: templates/notification/unfollow_success/notice.html:2
 #: templates/notification/unfollow_success/short.html:2
@@ -6286,7 +6145,7 @@ msgstr "(موسس) درخواست شما را انجام داده است."
 msgid ""
 "<a href=\"%(object_url)s\">You have stopped following <strong>%(object)s</"
 "strong>.</a>"
-msgstr "شما دنبال کردن (شیء) را متوقف کرده اید."
+msgstr ""
 
 #: templates/openid_provider/decide.html:4
 #: templates/openid_provider/decide.html:7
@@ -6337,9 +6196,6 @@ msgid ""
 "href=\"%(login_url)s\">login</a>, otherwise you can leave us your email "
 "address and we will notify you when the website is up!"
 msgstr ""
-"و به زودی برای همه باز می شود. اگر شما دعوت شده اید، می توانید (login) شوید، "
-"در غیر این صورت شما می توانید آدرس ایمیل خود را به ما داده و ما شما را "
-"هنگامی که وب سایت به کار افتاد، مطلع خواهیم کرد!"
 
 #: templates/pybb/forum_list.html:9
 msgid "Hidden"
@@ -6513,7 +6369,7 @@ msgstr ""
 #: templates/registration/activation_email.txt:7
 #, python-format
 msgid "Link is valid for %(expiration_days)s days."
-msgstr "لینک تا (expiration_days) روز معتبر است."
+msgstr ""
 
 #: templates/registration/activation_email.txt:9
 #: templates/registration/password_reset_email.html:6
@@ -6581,7 +6437,7 @@ msgstr "ایمیل به همراه دستورالعمل تنظیم مجدد رم
 #: templates/registration/password_reset_email.html:2
 #, python-format
 msgid "Reset password at %(site_name)s"
-msgstr "تنظیم مجدد رمز ورود در (SITE_NAME)"
+msgstr ""
 
 #: templates/registration/registration_complete.html:4
 #: templates/registration/registration_complete.html:8
@@ -6615,7 +6471,7 @@ msgstr "ثبت نام با AstroBin"
 msgid ""
 "By registering with AstroBin, you agree to our <a href=\"%(tos_url)s\">terms "
 "of service</a>."
-msgstr "با ثبت نام با AstroBin، شما با terms of service موافقت نموده اید."
+msgstr ""
 
 #: templates/search/search.html:7 templates/search/search.html.py:108
 #: templates/search/search.html:253
@@ -6996,11 +6852,10 @@ msgid ""
 msgstr ""
 
 #: templates/subscription/subscription_list.html:79
-#, fuzzy
 msgid ""
 "PS: are you interested in larger plans? <a href=\"/contact/\">Let us know!</"
 "a>"
-msgstr "آیا سوالی دارید که اینجا ننوشته شده باشد؟ لطفا با ما تماس بگیرید."
+msgstr ""
 
 #: templates/user/api_keys.html:5 templates/user/api_keys.html.py:12
 msgid "Your API Keys"
@@ -7019,7 +6874,7 @@ msgstr "فعال"
 msgid ""
 "You don't have any API Keys. Please read the <a href=\"%(api_docs_url)s"
 "\">API documentation</a>."
-msgstr "شما هیچ کلید API ندارید. لطفا مستندات API را بخوانید."
+msgstr ""
 
 #: templates/user/api_keys.html:47
 msgid "Request an API Key"
@@ -7051,23 +6906,23 @@ msgid "Thank you!"
 msgstr "با تشکر از"
 
 #: templates/user/bookmarks.html:5
-#, fuzzy, python-format
+#, python-format
 msgid "%(user)s's bookmarks"
-msgstr "نقشه های (کاربر)"
+msgstr ""
 
 #: templates/user/bookmarks.html:11
 msgid "Your bookmarks"
 msgstr ""
 
 #: templates/user/bookmarks.html:13
-#, fuzzy, python-format
+#, python-format
 msgid "%(username)s's bookmarks"
-msgstr "مشاهده عکس های (نام کاربری):"
+msgstr ""
 
 #: templates/user/followers.html:7
-#, fuzzy, python-format
+#, python-format
 msgid "%(user)s's followers"
-msgstr "گالری (کاربر)"
+msgstr ""
 
 #: templates/user/followers.html:13
 #, fuzzy
@@ -7075,23 +6930,23 @@ msgid "Your followers"
 msgstr "دنبال کننده جدیدی دارید."
 
 #: templates/user/followers.html:15
-#, fuzzy, python-format
+#, python-format
 msgid "%(username)s's followers"
-msgstr "نمایش علاقه مندی های (نام کاربری)"
+msgstr ""
 
 #: templates/user/following.html:7
-#, fuzzy, python-format
+#, python-format
 msgid "%(user)s's followed users"
-msgstr "گالری (کاربر)"
+msgstr ""
 
 #: templates/user/following.html:13
 msgid "Your followed users"
 msgstr ""
 
 #: templates/user/following.html:15
-#, fuzzy, python-format
+#, python-format
 msgid "%(username)s's followed users"
-msgstr "نمایش علاقه مندی های (نام کاربری)"
+msgstr ""
 
 #: templates/user/not_found.html:4 templates/user/not_found.html.py:7
 msgid "User not found:"
@@ -7100,7 +6955,7 @@ msgstr "کاربر یافت نشد:"
 #: templates/user/plots.html:5 templates/user/plots.html.py:11
 #, python-format
 msgid "%(user)s's plots"
-msgstr "نقشه های (کاربر)"
+msgstr ""
 
 #: templates/user/plots.html:16
 #, python-format
@@ -7110,9 +6965,6 @@ msgid ""
 "make sure by checking whether you have images which lack data <a href="
 "\"%(user_page)s?public&sub=nodata\">here</a>."
 msgstr ""
-"هی (کاربر)!فقط می خواستم به شما بگویم که شما می توانید این نقسه ها را مفیدتر "
-"بسازید اگرتمام اطلاعات را به تصاویر خوداضافه نمایید. لطفا با چک کردن این که "
-"تصاویر فاقد چه داده ای هستند، مطمئن شوید."
 
 #: templates/user/plots.html:24
 msgid "Total integration hours, plotted against time."
@@ -7140,9 +6992,6 @@ msgid ""
 "can show people individual images by sharing them using the <em>Share</em> "
 "menu."
 msgstr ""
-"این هم  تصاویر\"کار در حال پیشرفت است\": شما تنها می توانید این لیست را "
-"مشاهده کنید. شما می توانید این تصاویررا با به اشتراک گذاری آنها با استفاده "
-"از منوShare به بقیه نشان دهید."
 
 #: templates/user/profile.html:30
 msgid "These images don't have enough data. It's a shame..."
@@ -7245,8 +7094,6 @@ msgid ""
 "Done! Go to <a href=\\\"/me\\\">your profile</a> to see the new pictures "
 "(and keep an eye on your notifications)!"
 msgstr ""
-"انجام شد! برای دیدن تصاویر جدید به مشخصات خود بروید (و به اطلاعیه های خود "
-"دقت کنید)!"
 
 #: templates/user/profile/meta.html:14
 #, fuzzy
@@ -7293,7 +7140,7 @@ msgstr ""
 #: templates/user/profile/commercial/products.html:15
 #, python-format
 msgid "%(user)s's commercial products"
-msgstr "محصولات تجاری (کاربر)"
+msgstr ""
 
 #: templates/user/profile/commercial/products.html:13
 msgid "Your commercial products"
@@ -7323,7 +7170,7 @@ msgstr "شما هیچکدام از محصولات تجاری را ادعا نک�
 #: templates/user/profile/commercial/products.html:97
 #, python-format
 msgid "%(user)s hasn't claimed any commercial products yet."
-msgstr "(کاربر) هیچکدام از محصولات تجاری را ادعا نکرده است."
+msgstr ""
 
 #: templates/user/profile/commercial/products.html:114
 msgid "As retailer"
@@ -7336,7 +7183,7 @@ msgstr "شما هیچکدام از محصولات خرده فروشی را اد�
 #: templates/user/profile/commercial/products.html:179
 #, python-format
 msgid "%(user)s hasn't claimed any retailed products yet."
-msgstr "(کاربر) هیچکدام از محصولات خرده فروشی را ادعا نکرده است."
+msgstr ""
 
 #: templates/user/profile/commercial/products.html:196
 msgid "Claim as producer"

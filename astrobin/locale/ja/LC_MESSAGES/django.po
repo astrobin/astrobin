@@ -8,8 +8,8 @@ msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2016-08-22 08:15+0100\n"
-"PO-Revision-Date: 2015-12-30 07:03+0000\n"
-"Last-Translator: ohmishonin <kasuzen@gmail.com>\n"
+"PO-Revision-Date: 2016-08-22 08:21+0000\n"
+"Last-Translator: Salvatore <salvatore@iovene.com>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
 "Language: ja\n"
 "MIME-Version: 1.0\n"
@@ -17,7 +17,7 @@ msgstr ""
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=(n != 1);\n"
 "X-Generator: Pootle 2.5.0\n"
-"X-POOTLE-MTIME: 1451459004.707705\n"
+"X-POOTLE-MTIME: 1471854081.213158\n"
 
 #: fields.py:10
 msgid "United Kingdom"
@@ -3635,7 +3635,8 @@ msgid ""
 "            "
 msgstr ""
 "\n"
-"Image of the dayが選ばれました。あなたの協力に感謝します。"
+"Image of the dayが選ばれました。あなたの協力に感謝します。\n"
+"            "
 
 #: templates/iotd_detail.html:7 templates/iotd_detail.html.py:13
 #, fuzzy
@@ -4053,8 +4054,8 @@ msgid ""
 "You have used <strong>%(premium_counter)s</strong> images of your allowed "
 "<strong>%(max_allowed)s</strong> for the current year."
 msgstr ""
-" あなたは現在、<strong>%(max_allowed)</strong>のうち<strong>"
-"%(premium_counter)</strong> の画像を利用中です。"
+" あなたは現在、<strong>%(max_allowed)s</strong>のうち<strong>%"
+"(premium_counter)s</strong> の画像を利用中です。"
 
 #: templates/upload.html:47
 #: templates/subscription/subscription_detail.html:221
@@ -4909,7 +4910,7 @@ msgid "Sky plot"
 msgstr "星図"
 
 #: templates/image/detail/wip_banner.html:7
-#, fuzzy, python-format
+#, python-format
 msgid ""
 "This image is a <strong>work in progress</strong> from your <a href="
 "\"%(profile_url)s?staging\">Staging Area</a>. This means nobody can see it "
@@ -4919,13 +4920,6 @@ msgid ""
 "revisions, <a href=\"#promote-modal\" data-toggle=\"modal\">promote it</a> "
 "to the <a href=\"%(profile_url)s\">Public Area</a>."
 msgstr ""
-"この画像は、あなたの<a href=\"%(profile_url)s?staging\">ステージング領域</a>"
-"で<strong>作業進行中</strong>です。これは、あなたが下の<em>共有</em>メニュー"
-"にあるリンクのどれかをクリックしない限り、誰もそれを見る事ができないことを意"
-"味します。インターネット掲示板に画像を投稿するためのリンクや、それにフィード"
-"バックをもらったりすることに使えます。何回かの修正をしたあとで、あなたが満足"
-"したタイミングに<a href=\"%(profile_url)s\">公開エリア</a>で、それを<a href="
-"\"%(promote_url)s\">宣伝する</a>ことができます。"
 
 #: templates/image/detail/menu/actions.html:9 templates/messages/inbox.html:30
 #: templates/user/profile/commercial/products.html:43
@@ -5557,7 +5551,7 @@ msgid ""
 "astrophotographers. It comes packed with features that benefit the "
 "astrophotography community greatly! See the <a href=\"%(help_url)s\">help "
 "page.</a> for more information."
-msgstr "天体写真にとって完璧なサービスです。"
+msgstr ""
 
 #: templates/index/root.html:35
 msgid "Unlimited uploads, unlimited size."
@@ -5791,16 +5785,6 @@ msgid ""
 "Clear skies,\n"
 "AstroBin.\n"
 msgstr ""
-"こんにちは。 AstroBinで新しい通知がありました。:\n"
-"\n"
-"%(message)s\n"
-"\n"
-"すべての通知をみるために、%(notices_url)s.\n"
-"へいってください。\n"
-"もしメールが届く事を望まないのであれば、http://astrobin.com%(pref_url)s.\n"
-"に行って、あなたの設定を編集してください。\n"
-"Clear skies,\n"
-"AstroBin.\n"
 
 #: templates/notification/api_key_request_approved/full.txt:3
 #, python-format
@@ -6205,9 +6189,9 @@ msgstr ""
 "</a>"
 
 #: templates/notification/new_like/short.txt:2
-#, fuzzy, python-format
+#, python-format
 msgid "%(user)s likes your image: %(title)s"
-msgstr "%(user)sは、あなたの画像（%(url)s）にLikeした"
+msgstr ""
 
 #: templates/notification/rawdata_invited_to_private_folder/full.txt:2
 #, python-format
@@ -6267,8 +6251,8 @@ msgid ""
 "processed image to the private shared folder: <strong>\"%(folder_name)s.\"</"
 "a>"
 msgstr ""
-"<a href=\"%(folder_url)s\"><strong>%(user_name)s</strong>は非公開共有フォルダ"
-"<strong>\"%(folder_name)s\"</strong>に新しい処理画像を追加しました。</a>"
+"<a href=\"%(folder_url)s\"><strong>%(user_name)s</strong>は非公開共有フォルダ<strong>\"%"
+"(folder_name)s\"に新しい処理画像を追加しました。</a>"
 
 #: templates/notification/rawdata_posted_image_to_private_folder/short.txt:2
 #, python-format
@@ -7635,53 +7619,46 @@ msgid "no alias"
 msgstr "別名なし"
 
 #: views/__init__.py:265 views/image.py:185
-#, fuzzy
 msgid "Imaging telescope or lens"
 msgid_plural "Imaging telescopes or lenses"
-msgstr[0] "望遠鏡／レンズ"
-msgstr[1] "望遠鏡／レンズ"
+msgstr[0] ""
+msgstr[1] ""
 
 #: views/__init__.py:269 views/image.py:189
-#, fuzzy
 msgid "Imaging camera"
 msgid_plural "Imaging cameras"
-msgstr[0] "カメラ"
-msgstr[1] "カメラ"
+msgstr[0] ""
+msgstr[1] ""
 
 #: views/__init__.py:273 views/image.py:193
-#, fuzzy
 msgid "Mount"
 msgid_plural "Mounts"
-msgstr[0] "赤道儀"
-msgstr[1] "赤道儀"
+msgstr[0] ""
+msgstr[1] ""
 
 #: views/__init__.py:277 views/image.py:197
-#, fuzzy
 msgid "Guiding telescope or lens"
 msgid_plural "Guiding telescopes or lenses"
-msgstr[0] "ガイド鏡またはレンズ"
-msgstr[1] "ガイド鏡またはレンズ"
+msgstr[0] ""
+msgstr[1] ""
 
 #: views/__init__.py:281 views/image.py:201
-#, fuzzy
 msgid "Guiding camera"
 msgid_plural "Guiding cameras"
-msgstr[0] "ガイド用カメラ"
-msgstr[1] "ガイド用カメラ"
+msgstr[0] ""
+msgstr[1] ""
 
 #: views/__init__.py:285 views/image.py:205
-#, fuzzy
 msgid "Focal reducer"
 msgid_plural "Focal reducers"
-msgstr[0] "レデューサー"
-msgstr[1] "レデューサー"
+msgstr[0] ""
+msgstr[1] ""
 
 #: views/__init__.py:294 views/image.py:214
-#, fuzzy
 msgid "Accessory"
 msgid_plural "Accessories"
-msgstr[0] "アクセサリ"
-msgstr[1] "アクセサリ"
+msgstr[0] ""
+msgstr[1] ""
 
 #: views/__init__.py:511
 #, fuzzy

@@ -3686,6 +3686,7 @@ msgid ""
 msgstr ""
 "\n"
 "\"Изображение Дня\" выбрано. Спасибо за вашу помощь.\n"
+"            "
 
 #: templates/iotd_detail.html:7 templates/iotd_detail.html.py:13
 #, fuzzy
@@ -4975,13 +4976,6 @@ msgid ""
 "revisions, <a href=\"#promote-modal\" data-toggle=\"modal\">promote it</a> "
 "to the <a href=\"%(profile_url)s\">Public Area</a>."
 msgstr ""
-"Это изображение <strong>в работе</strong> из вашей <a href=\"%(profile_url)s?"
-"staging\">Staging Area</a>. Это значит, что никто не сможет увидеть его до "
-"тех пор, пока вы не дадите ссылку, которую можно получить в меню "
-"<em>Поделиться</em>. Используйте эту ссылку для публикации на Интернет-"
-"форумах и получения отзывыов. Когда работа будет окончена, возможно после "
-"закачки нескольких версий, <a href=\"%(promote_url)s\">перенесите ее</a> в "
-"<a href=\"%(profile_url)s\">Public Area</a>."
 
 #: templates/image/detail/menu/actions.html:9 templates/messages/inbox.html:30
 #: templates/user/profile/commercial/products.html:43
@@ -7020,6 +7014,7 @@ msgstr ""
 "Оплачивающим участникам не будет показываться реклама, и всем, включая тех, "
 "кто не платит\n"
 "будет обеспечен свободный доступ к соц-активностям AstroBin.\n"
+"            "
 
 #: templates/subscription/subscription_detail.html:79
 #: templates/subscription/subscription_list.html:39

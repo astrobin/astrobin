@@ -40,17 +40,15 @@ msgstr "Nasledujúce"
 #, python-format
 msgid "%(images_number)s image"
 msgid_plural "%(images_number)s images"
-msgstr[0] "%(images_number) obrázkov"
-msgstr[1] "%(images_number) obrázok"
-msgstr[2] "%(images_number) obrázky"
+msgstr[0] "%(images_number)s obrázkov"
+msgstr[1] "%(images_number)s obrázok"
+msgstr[2] "%(images_number)s obrázky"
 
 #: templates/astrobin_apps_users/inclusion_tags/astrobin_user.html:123
 #, python-format
 msgid "%(followers_number)s follower"
 msgid_plural "%(followers_number)s followers"
 msgstr[0] ""
-"%(followers_number) nasledovateľov%(followers_number) nasledovateľ"
-"%(followers_number) nasledovatelia"
 msgstr[1] ""
 msgstr[2] ""
 

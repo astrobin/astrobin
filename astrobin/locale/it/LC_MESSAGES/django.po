@@ -3678,7 +3678,7 @@ msgid ""
 "                The 'Image of the day' was selected. Thank you for your "
 "help!\n"
 "            "
-msgstr "La 'Foto del giorno' è stata selezionata. Grazie per l'aiuto!"
+msgstr "\nLa 'Foto del giorno' è stata selezionata. Grazie per l'aiuto\n!"
 
 #: templates/iotd_detail.html:7 templates/iotd_detail.html.py:13
 msgid "Image of the Day"
@@ -7011,11 +7011,13 @@ msgid ""
 "            AstroBin.\n"
 "            "
 msgstr ""
+"\n"
 "Puoi usare AstroBin gratuitamento fino a %(max_allowed)s immagini. Dopodiché "
 "puoi passare a <strong>Lite </strong> se hai una produzione annuale "
 "limitata, oppure <storng>Premium</strong> per un'esperienza senza limiti. "
 "Gli utenti paganti non vedranno pubblicità, e tutti, compresi gli utenti non-"
-"paganti, hanno accesso a tutte le funzionalità sociali di AstroBin."
+"paganti, hanno accesso a tutte le funzionalità sociali di AstroBin.\n"
+"            "
 
 #: templates/subscription/subscription_detail.html:79
 #: templates/subscription/subscription_list.html:39
@@ -7150,12 +7152,14 @@ msgid ""
 "            AstroBin.\n"
 "            "
 msgstr ""
+"\n"
 "Puoi usare AstroBin gratuitamento fino a %(max_allowed)s caricamenti. "
 "Dopodiché puoi passare a <strong>Lite </strong> se hai una produzione "
 "annuale limitata, oppure <storng>Premium</strong> per un'esperienza senza "
 "limiti. Gli utenti paganti non vedranno pubblicità, e tutti, compresi gli "
 "utenti non-paganti, hanno accesso a tutte le funzionalità sociali di "
 "AstroBin."
+"            "
 
 #: templates/subscription/subscription_list.html:37
 msgid "AstroBin Raw Data subscription plans"

@@ -40,15 +40,15 @@ msgstr "追蹤"
 #, python-format
 msgid "%(images_number)s image"
 msgid_plural "%(images_number)s images"
-msgstr[0] "%(images_number) 張影像"
-msgstr[1] "%(images_number) 張影像"
+msgstr[0] "%(images_number)s 張影像"
+msgstr[1] "%(images_number)s 張影像"
 
 #: templates/astrobin_apps_users/inclusion_tags/astrobin_user.html:123
 #, python-format
 msgid "%(followers_number)s follower"
 msgid_plural "%(followers_number)s followers"
-msgstr[0] "%(followers_number) 位粉絲"
-msgstr[1] "%(followers_number) 位粉絲"
+msgstr[0] "%(followers_number)s 位粉絲"
+msgstr[1] "%(followers_number)s 位粉絲"
 
 #: templates/astrobin_apps_users/inclusion_tags/user_list.html:6
 msgid "User"
