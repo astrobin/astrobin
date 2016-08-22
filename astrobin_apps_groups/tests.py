@@ -48,6 +48,17 @@ class GroupsTest(TestCase):
     def test_public_group_list_view(self):
         response = self.client.get(reverse('public_group_list'))
         self.assertEqual(response.status_code, 200)
+        self.assertContains(response, '<h1>Public groups</h1>', html = True)
+        self.assertContains(response, 'Test group')
+
+        self.group.public = False
+        self.group.save()
+
+        response = self.client.get(reverse('public_group_list'))
+        self.assertNotContains(response, 'Test group')
+
+        self.group.public = True
+        self.group.save()
 
     def test_group_detail_view(self):
         response = self.client.get(reverse('group_detail', kwargs = {'pk': self.group.pk}))

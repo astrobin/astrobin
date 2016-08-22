@@ -49,7 +49,7 @@ class RedirectToGroupDetailMixin(View):
 # Views
 
 class PublicGroupListView(ListView):
-    model = Group
+    queryset = Group.objects.filter(public = True)
     template_name = 'astrobin_apps_groups/public_group_list.html'
 
 
