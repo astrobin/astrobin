@@ -3531,6 +3531,8 @@ table#private-shared-folders tr:hover a.delete-folder {
 }
 #profile-details {
   margin: 0;
+  width: 182px;
+  height: 49px;
   padding: 6px 6px 0 6px;
   overflow: hidden;
   -moz-border-radius: 0 0 20px 20px;
@@ -3546,7 +3548,7 @@ table#private-shared-folders tr:hover a.delete-folder {
 }
 #profile-details ul li {
   display: inline-block;
-  width: 57px;
+  width: 56px;
 }
 #profile-details ul li > a {
   float: left;
