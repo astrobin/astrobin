@@ -3,6 +3,9 @@ from django.contrib.auth.models import User
 from django.core.urlresolvers import reverse
 from django.test import TestCase
 
+# Third party
+from beautifulsoupselect import BeautifulSoupSelect as BSS
+
 # This app
 from astrobin_apps_groups.models import Group
 
@@ -36,6 +39,11 @@ class GroupsTest(TestCase):
         self.user1.delete()
         self.user2.delete()
         self.group.delete()
+
+    def test_misc_ui_elements(self):
+        response = self.client.get(reverse('index'))
+        bss = BSS(response.content)
+        self.assertEqual(len(bss('.explore-menu-groups')), 1)
 
     def test_public_group_list_view(self):
         response = self.client.get(reverse('public_group_list'))

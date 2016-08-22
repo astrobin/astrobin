@@ -15,7 +15,7 @@
 <div class="site-nav nav-collapse collapse pull-left">
     <ul class="nav">
         {% if request.user|is_content_moderator %}
-        <li class="dropdown">
+        <li class="dropdown moderate-menu">
             <a href="#" class="dropdown-toggle" data-toggle="dropdown">
                 {% trans "Moderate" %}
                 <i class="icon-caret-down"></i>
@@ -27,7 +27,7 @@
         </li>
         {% endif %}
 
-        <li class="dropdown {% current request "^/forum/" %}">
+        <li class="dropdown forum-menu {% current request "^/forum/" %}">
             <a href="#" class="dropdown-toggle" data-toggle="dropdown">
                 {% trans "Forum" %}
                 <i class="icon-caret-down"></i>
@@ -41,19 +41,19 @@
             </ul>
         </li>
 
-        <li class="dropdown {% current request "^/explore/|^/search/|^/stats/|^/leaderboard/" %}">
+        <li class="dropdown explore-menu {% current request "^/explore/|^/search/|^/stats/|^/leaderboard/" %}">
             <a href="#" class="dropdown-toggle" data-toggle="dropdown">
                 {% trans "Explore" %}
                 <i class="icon-caret-down"></i>
             </a>
             <ul class="dropdown-menu">
-                <li>
+                <li class="exlore-menu-wall">
                     <a href="{% url 'wall' %}">
                         <i class="icon-th"></i>
                         {% trans "The Big Wall" %}
                     </a>
                 </li>
-                <li>
+                <li class="explore-menu-iotd">
                     <a href="{% url 'iotd_archive' %}">
                         <i class="icon-trophy"></i>
                         {% trans "Image of the day" %}
@@ -62,29 +62,39 @@
 
                 <li class="divider"></li>
 
-                <li>
+                <li class="explore-menu-groups">
+                    <a href="{% url 'public_group_list' %}">
+                        <i class="icon-group"></i>
+                        {% trans "Public groups" %}
+                    </a>
+                </li>
+
+                <li class="explore-menu-pools">
                     <a href="{% url 'rawdata.publicdatapool_list' %}">
                         <i class="icon-book"></i>
                         {% trans "Public data pools" %}
                     </a>
                 </li>
 
-                <li>
+                <li class="explore-menu-search">
                     <a href="{% url 'haystack_search' %}">
                         <i class="icon-search"></i>
                         {% trans "Advanced search" %}
                     </a>
                 </li>
+
                 <li class="divider"></li>
+
                 {% if request.user.is_superuser %}
-                <li>
+                <li class="explore-menu-stats">
                     <a href="{% url 'stats' %}">
                         <i class="icon-bar-chart"></i>
                         {% trans "Stats" %}
                     </a>
                 </li>
                 {% endif %}
-                <li>
+
+                <li class="explore-menu-leaderboard">
                     <a href="{% url 'leaderboard' %}">
                         <i class="icon-list-ol"></i>
                         {% trans "Leaderboard" %}
@@ -93,7 +103,7 @@
             </ul>
         </li>
 
-        <li class="dropdown {% current request "^/help/|^/faq/" %}">
+        <li class="dropdown help-menu {% current request "^/help/|^/faq/" %}">
             <a href="#" class="dropdown-toggle" data-toggle="dropdown">
                 {% trans "Help" %}
                 <i class="icon-caret-down"></i>
