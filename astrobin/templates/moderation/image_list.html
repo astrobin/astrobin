@@ -6,39 +6,44 @@
 {% block title %}{% trans "Image modetation" %}{% endblock %}
 
 {% block content %}
-    <h1>{% trans "Image moderation" %}</h1>
+    <div class="image-moderation">
+        <h1>{% trans "Image moderation" %}</h1>
 
-    {% if image_list %}
-        <p class="well">
-            {% blocktrans %}Please click on the images that you want to mark as SPAM, then click on the Approve button below to approve all the others.{% endblocktrans %}
-        </p>
-        <ul class="astrobin-thumbnails">
-            {% for image in image_list %}
-                <li class="thumbnail astrobin-thumbnail">
-                    <a href="#">
-                        {% astrobin_image image 'gallery' 'final' 'regular' False False %}
-                        <div class="spam-thumbnail-overlay hide">
-                            <span>
-                                SPAM
-                            </span>
-                        </div>
-                    </a>
-                </li>
-            {% endfor %}
-        </ul>
+        {% if image_list %}
+            <p class="well">
+                {% blocktrans %}Please click on the images that you want to mark as SPAM, then click on the Approve button below to approve all the others.{% endblocktrans %}
+            </p>
+            <ul class="astrobin-thumbnails">
+                {% for image in image_list %}
+                    <li class="thumbnail astrobin-thumbnail top-title">
+                        <a href="#">
+                            {% astrobin_image image 'gallery' 'final' 'regular' False False %}
+                            <div class="image-title">
+                                {{image.title|escape|default:_("(no title)")}}
+                            </div>
+                            <div class="spam-thumbnail-overlay hide">
+                                <span>
+                                    SPAM
+                                </span>
+                            </div>
+                        </a>
+                    </li>
+                {% endfor %}
+            </ul>
 
-        <hr/>
-        <div class="text-right">
-            <span class="loading hide"><img src="{{STATIC_URL}}images/ajax-loader.gif" alt=""/></span>
-            <a href="#" id="approve-button" class="btn btn-primary">
-                {% trans "Approve" %} &rarr;
-            </a>
-        </div>
-    {% else %}
-        <div class="alert alert-success">
-            {% trans "The moderation queue is empty, hooray! Come back later." %}
-        </div>
-    {% endif %}
+            <hr/>
+            <div class="text-right">
+                <span class="loading hide"><img src="{{STATIC_URL}}images/ajax-loader.gif" alt=""/></span>
+                <a href="#" id="approve-button" class="btn btn-primary">
+                    {% trans "Approve" %} &rarr;
+                </a>
+            </div>
+        {% else %}
+            <div class="alert alert-success">
+                {% trans "The moderation queue is empty, hooray! Come back later." %}
+            </div>
+        {% endif %}
+    </div>
 {% endblock %}
 
 {% block extra_js %}

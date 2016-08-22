@@ -20,9 +20,12 @@
 
         <ul class="astrobin-thumbnails">
             {% for image in images %}
-                <li class="thumbnail astrobin-thumbnail">
+                <li class="thumbnail astrobin-thumbnail top-title">
                     <a href="#">
                         {% astrobin_image image 'gallery' 'final' 'regular' False False %}
+                        <div class="image-title">
+                            {{image.title|escape|default:_("(no title)")}}
+                        </div>
                         <div
                             {% if image.pk in images_pk_in_collection %}
                                 class="added-thumbnail-overlay added" style="visibility:visible"
