@@ -1,0 +1,51 @@
+{% extends 'base.html' %}
+
+{% load i18n %}
+
+{% block title %}{% trans "Public groups" %}{% endblock %}
+
+{% block content %}
+    <div class="subnav subnav-fixed">
+        <ul class="nav nav-pills">
+            <li class="dropdown">
+                <a class="dropdown-toggle" data-toggle="dropdown" href="#">
+                    <i class="icon-bolt icon-white"></i>
+                    {% trans "Actions" %}
+                    <b class="caret"></b>
+                </a>
+                <ul class="dropdown-menu">
+                    <li>
+                        <a href="{% url 'group_create' %}">
+                            <i class="icon-plus-sign"></i>
+                            {% trans "Create new group" %}
+                        </a>
+                    </li>
+                </ul>
+            </li>
+        </ul> <!-- nav -->
+    </div> <!-- subnav -->
+
+
+    <h1>{% trans "Public groups" %}</h1>
+
+    {% if object_list %}
+        <table class="table">
+            <thead>
+                <th>{% trans "Name" %}</th>
+                <th>{% trans "Members" %}</th>
+                <th>{% trans "Images" %}</th>
+            </thead>
+            <tbody>
+                {% for group in object_list %}
+                    <tr>
+                        <td><a href="{% url 'group_detail' group.pk %}">{{group.name}}</a></td>
+                        <td>{{group.members.count}}</td>
+                        <td>{{group.images.count}}</td>
+                    </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+    {% else %}
+        <p>{% trans "No groups available." %}</p>
+    {% endif %}
+{% endblock %}
