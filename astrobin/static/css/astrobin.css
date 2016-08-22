@@ -1031,9 +1031,9 @@ li.astrobin-thumbnail {
   display: inline-block;
 }
 li.astrobin-thumbnail img {
-  -moz-border-radius: 12px;
-  -webkit-border-radius: 12px;
-  border-radius: 12px;
+  -moz-border-radius: 20px;
+  -webkit-border-radius: 20px;
+  border-radius: 20px;
 }
 li.astrobin-thumbnail.spam-thumbnail {
   border: 1px solid red;
@@ -1482,9 +1482,9 @@ x:default {
 div.capty-caption {
   background-color: black;
   padding: 0;
-  -moz-border-radius: 12px;
-  -webkit-border-radius: 12px;
-  border-radius: 12px;
+  -moz-border-radius: 20px;
+  -webkit-border-radius: 20px;
+  border-radius: 20px;
   z-index: 3;
 }
 div.capty-target {
@@ -1596,9 +1596,9 @@ div.capty-target .capty-caption-content .link-overlay a {
   -webkit-box-shadow: inset rgba(255, 255, 255, 0.1) 0 1px 2px;
   -moz-box-shadow: inset rgba(255, 255, 255, 0.1) 0 1px 2px;
   box-shadow: inset rgba(255, 255, 255, 0.1) 0 1px 2px;
-  -moz-border-radius: 12px;
-  -webkit-border-radius: 12px;
-  border-radius: 12px;
+  -moz-border-radius: 20px;
+  -webkit-border-radius: 20px;
+  border-radius: 20px;
   overflow: hidden;
 }
 .upload-forms .upload-form {
@@ -1738,9 +1738,9 @@ div.capty-target .capty-caption-content .link-overlay a {
   float: left;
 }
 .avatar-block .avatar img {
-  -moz-border-radius: 12px;
-  -webkit-border-radius: 12px;
-  border-radius: 12px;
+  -moz-border-radius: 20px;
+  -webkit-border-radius: 20px;
+  border-radius: 20px;
 }
 .avatar-block .username {
   font-size: 1.5em;
@@ -1782,9 +1782,9 @@ div.capty-target .capty-caption-content .link-overlay a {
   position: relative;
 }
 .avatar img {
-  -moz-border-radius: 12px;
-  -webkit-border-radius: 12px;
-  border-radius: 12px;
+  -moz-border-radius: 20px;
+  -webkit-border-radius: 20px;
+  border-radius: 20px;
 }
 .avatar .property-follow {
   position: absolute;
@@ -2923,9 +2923,9 @@ form.avatar-change label.control-label {
   -webkit-box-shadow: rgba(0, 0, 0, 0.8) 0 1px 5px;
   -moz-box-shadow: rgba(0, 0, 0, 0.8) 0 1px 5px;
   box-shadow: rgba(0, 0, 0, 0.8) 0 1px 5px;
-  -moz-border-radius: 12px;
-  -webkit-border-radius: 12px;
-  border-radius: 12px;
+  -moz-border-radius: 20px;
+  -webkit-border-radius: 20px;
+  border-radius: 20px;
 }
 .iotd-choose {
   margin-bottom: 50px !important;
@@ -3195,9 +3195,9 @@ li.revisions {
   filter: "progid:DXImageTransform.Microsoft.gradient(GradientType=0,startColorstr='#4c000000', endColorstr='#4c000000')";
   text-align: center;
   font-weight: bold;
-  -moz-border-radius: 0 0 12px 12px;
-  -webkit-border-radius: 0 0 12px 12px;
-  border-radius: 0 0 12px 12px;
+  -moz-border-radius: 0 0 20px 20px;
+  -webkit-border-radius: 0 0 20px 20px;
+  border-radius: 0 0 20px 20px;
 }
 .revision .label.active {
   background: white;
@@ -3533,9 +3533,9 @@ table#private-shared-folders tr:hover a.delete-folder {
   margin: 0;
   padding: 6px 6px 0 6px;
   overflow: hidden;
-  -moz-border-radius: 0 0 12px 12px;
-  -webkit-border-radius: 0 0 12px 12px;
-  border-radius: 0 0 12px 12px;
+  -moz-border-radius: 0 0 20px 20px;
+  -webkit-border-radius: 0 0 20px 20px;
+  border-radius: 0 0 20px 20px;
   background: rgba(0, 0, 0, 0.65);
   position: absolute;
   bottom: 12px;
