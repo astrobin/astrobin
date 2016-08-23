@@ -34,8 +34,19 @@
             <tbody>
                 {% for user in object.invited_users.all %}
                     <tr>
-                        <td><a href="{% url 'user_page' user.username %}">{{user.userprofile}}</a></td>
-                        <td><button class="btn btn-mini">&times;</button></td>
+                        <td>
+                            <a href="{% url 'user_page' user.username %}">
+                                {{user.userprofile}}
+                            </a>
+                        </td>
+                        <td>
+                            <button
+                                class="revoke-invitation btn btn-mini"
+                                data-user="{{user.username}}"
+                                data-url="{% url 'group_revoke_invitation' object.pk %}">
+                                &times;
+                            </button>
+                        </td>
                     </tr>
                 {% endfor %}
             </tbody>
@@ -112,14 +123,40 @@
                                     '<td>' +
                                         '<a href="' + users[i].url + '">' + users[i].display_name + '</a>' +
                                     '</td>' +
-                                    '<td><button class="btn btn-mini">&times;</button></td>' +
-                                '</tr>');
+                                    '<td>' +
+                                        '<button ' +
+                                            'class="revoke-invitation btn btn-mini" ' +
+                                            'data-user="' + users[i].username + '" ' +
+                                            'data-url="' + users[i].revoke_url + '">' +
+                                            '&times;' +
+                                         '</button>' +
+                                     '</td>' +
+                                '</tr>')
                             $table.find('tbody').append($row);
                         }
 
                         $btn.prop('disabled', false);
                     });
                 }
+            });
+
+            $("button.revoke-invitation").live('click', function(e) {
+                e.preventDefault();
+
+                var $button = $(this),
+                    user = $button.data('user'),
+                    $row = $button.parents('tr');
+
+                $.ajax({
+                    url: $button.data('url'),
+                    type: 'POST',
+                    cache: false,
+                    timeout: 10000,
+                    data: {'user': user},
+                    dataType: 'json'
+                }).done(function(data) {
+                    $row.remove();
+                });
             });
         });
     </script>

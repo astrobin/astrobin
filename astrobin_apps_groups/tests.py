@@ -249,3 +249,48 @@ class GroupsTest(TestCase):
         self.assertEqual(self.group.invited_users.count(), 1)
 
         self.client.logout()
+
+    def test_group_revoke_invitation_view(self):
+        url = reverse('group_revoke_invitation', kwargs = {'pk': self.group.pk})
+
+        # Login required
+        response = self.client.get(url)
+        self.assertEqual(response.status_code, 302)
+
+        # Owner required
+        self.client.login(username = 'user2', password = 'password')
+        response = self.client.post(url, follow = True)
+        self.assertEqual(response.status_code, 403)
+        self.client.logout()
+
+        self.client.login(username = 'user1', password = 'password')
+
+        # GET not allowed
+        response = self.client.get(url)
+        self.assertEqual(response.status_code, 405)
+
+        # Group does not exist
+        response = self.client.post(reverse('group_revoke_invitation', kwargs = {'pk': 999}), follow = True)
+        self.assertEqual(response.status_code, 404)
+
+        # User does not exist
+        response = self.client.post(url,
+            {
+                'user': "invalid",
+            },
+            HTTP_X_REQUESTED_WITH = 'XMLHttpRequest',
+            follow = True)
+        self.assertEqual(response.status_code, 404)
+
+        # Success
+        self.group.invited_users.add(self.user2)
+        response = self.client.post(url,
+            {
+                'user': "user2",
+            },
+            HTTP_X_REQUESTED_WITH = 'XMLHttpRequest',
+            follow = True)
+        self.assertEqual(response.status_code, 200)
+        self.assertEqual(self.group.invited_users.count(), 0)
+
+        self.client.logout()
