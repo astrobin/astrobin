@@ -25,35 +25,35 @@
     </form>
 
     <h2>{% trans "Invited users" %}</h2>
-    {% if object.invited_users.all %}
-        <table class="table invited-users">
-            <thead>
-                <th>Name</th>
-                <th>Revoke?</th>
-            </thead>
-            <tbody>
-                {% for user in object.invited_users.all %}
-                    <tr>
-                        <td>
-                            <a href="{% url 'user_page' user.username %}">
-                                {{user.userprofile}}
-                            </a>
-                        </td>
-                        <td>
-                            <button
-                                class="revoke-invitation btn btn-mini"
-                                data-user="{{user.username}}"
-                                data-url="{% url 'group_revoke_invitation' object.pk %}">
-                                &times;
-                            </button>
-                        </td>
-                    </tr>
-                {% endfor %}
-            </tbody>
-        </table>
-    {% else %}
-        {% trans "This group has no active invitations." %}
-    {% endif %}
+    <table class="table invited-users">
+        <thead>
+            <th>Name</th>
+            <th>Revoke?</th>
+        </thead>
+        <tbody>
+            {% for user in object.invited_users.all %}
+                <tr>
+                    <td>
+                        <a href="{% url 'user_page' user.username %}">
+                            {{user.userprofile}}
+                        </a>
+                    </td>
+                    <td>
+                        <button
+                            class="revoke-invitation btn btn-mini"
+                            data-user="{{user.username}}"
+                            data-url="{% url 'group_revoke_invitation' object.pk %}">
+                            &times;
+                        </button>
+                    </td>
+                </tr>
+            {% empty %}
+                <tr>
+                    <td class="empty-table" colspan="2">{% trans "This group has no active invitations." %}</td>
+                </tr>
+            {% endfor %}
+        </tbody>
+    </table>
 
     <h2>{% trans "Members" %}</h2>
     {% if object.members.all %}
@@ -110,8 +110,7 @@
                     }).done(function(data) {
                         var $table, $row, i, users;
 
-                        $form.find('.token-input-token').remove();
-                        $input.val('');
+                        $input.tokenInput("clear");
 
                         $table = $('table.invited-users');
                         users = data.invited_users
@@ -145,7 +144,8 @@
 
                 var $button = $(this),
                     user = $button.data('user'),
-                    $row = $button.parents('tr');
+                    $row = $button.parents('tr'),
+                    $table = $row.parents('table');
 
                 $.ajax({
                     url: $button.data('url'),
@@ -156,6 +156,15 @@
                     dataType: 'json'
                 }).done(function(data) {
                     $row.remove();
+                    if ($table.find('tbody tr').length === 0) {
+                        $table.find('tbody').append(
+                                $('<tr>' +
+                                       '<td class="empty-table" colspan="2">' +
+                                            '{% trans "This group has no active invitations." %}' +
+                                       '</td>' +
+                                  '</tr>')
+                        );
+                    }
                 });
             });
         });
