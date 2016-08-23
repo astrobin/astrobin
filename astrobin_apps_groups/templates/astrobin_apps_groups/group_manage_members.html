@@ -1,0 +1,125 @@
+{% extends 'base.html' %}
+
+{% load bootstrap_toolkit %}
+{% load i18n %}
+{% load astrobin_apps_groups_tags %}
+
+{% block title %}{{object.name}}{% endblock %}
+
+{% block content %}
+    <h1>
+        {{object.name}}
+        <small>
+            {% trans "Manage members" %}
+        </small>
+    </h1>
+
+    <form id="invite-form" class="form-horizontal" method="post" action="{% url 'group_invite' object.pk %}">
+        {% csrf_token %}
+        {{form|as_bootstrap}}
+        <div class="form-actions">
+            <button class="btn btn-primary">
+                {% trans "Invite users" %}
+            </button>
+        </div>
+    </form>
+
+    <h2>{% trans "Invited users" %}</h2>
+    {% if object.invited_users.all %}
+        <table class="table invited-users">
+            <thead>
+                <th>Name</th>
+                <th>Revoke?</th>
+            </thead>
+            <tbody>
+                {% for user in object.invited_users.all %}
+                    <tr>
+                        <td><a href="{% url 'user_page' user.username %}">{{user.userprofile}}</a></td>
+                        <td><button class="btn btn-mini">&times;</button></td>
+                    </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+    {% else %}
+        {% trans "This group has no active invitations." %}
+    {% endif %}
+
+    <h2>{% trans "Members" %}</h2>
+    {% if object.members.all %}
+    {% else %}
+        {% trans "This group has no members." %}
+    {% endif %}
+{% endblock %}
+
+{% block extra_js %}
+    <script type="text/javascript">
+        $(document).ready(function() {
+            var parameters = {
+                classes: {
+                    tokenList: "token-input-list",
+                    token: "token-input-token btn btn-primary",
+                    tokenDelete: "token-input-delete-token",
+                    selectedToken: "token-input-selected-token",
+                    highlightedToken: "token-input-highlighted-token",
+                    dropdown: "token-input-dropdown",
+                    dropdownItem: "token-input-dropdown-item",
+                    dropdownItem2: "token-input-dropdown-item2",
+                    selectedDropdownItem: "token-input-selected-dropdown-item",
+                    inputToken: "token-input-input-token"
+                },
+                hintText: "{% trans "Type in a search term" %}",
+                noResultsText: "{% trans "No results" %}",
+                searchingText: "{% trans "Searching" %}...",
+                queryParam: "term"
+            };
+
+            $("#id_invite_users").tokenInput(
+                "{% url 'astrobin_apps_users.user_search_ajax' %}?format=json",
+                parameters);
+
+            $("#invite-form button").click(function(e) {
+                e.preventDefault();
+
+                var $btn = $(this),
+                    $form = $(this).parents('form'),
+                    $input = $form.find('input#id_invite_users'),
+                    users = $input.val();
+
+                if (users !== "") {
+                    $btn.prop('disabled', true);
+
+                    $.ajax({
+                        url: $form.attr('action'),
+                        type: 'POST',
+                        cache: false,
+                        timeout: 10000,
+                        data: {'users[]': users.split(',')},
+                        dataType: 'json'
+                    }).done(function(data) {
+                        var $table, $row, i, users;
+
+                        $form.find('.token-input-token').remove();
+                        $input.val('');
+
+                        $table = $('table.invited-users');
+                        users = data.invited_users
+
+                        $table.find('tbody tr').remove();
+                        for (i = 0; i < users.length; i++) {
+                            $row = $(
+                                '<tr>' +
+                                    '<td>' +
+                                        '<a href="' + users[i].url + '">' + users[i].display_name + '</a>' +
+                                    '</td>' +
+                                    '<td><button class="btn btn-mini">&times;</button></td>' +
+                                '</tr>');
+                            $table.find('tbody').append($row);
+                        }
+
+                        $btn.prop('disabled', false);
+                    });
+                }
+            });
+        });
+    </script>
+{% endblock %}

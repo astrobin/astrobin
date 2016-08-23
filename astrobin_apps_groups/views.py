@@ -12,6 +12,7 @@ from django.shortcuts import redirect
 from django.utils.translation import ugettext as _
 
 # Third party
+from braces.views import JSONResponseMixin
 from braces.views import LoginRequiredMixin
 
 # This app
@@ -99,10 +100,18 @@ class GroupJoinView(LoginRequiredMixin, RedirectToGroupDetailMixin, UpdateView):
         return HttpResponseForbidden()
 
 
-class GroupInviteView(LoginRequiredMixin, RestrictToGroupOwnerMixin, RedirectToGroupDetailMixin, UpdateView):
+class GroupManageMembersView(LoginRequiredMixin, RestrictToGroupOwnerMixin, RedirectToGroupDetailMixin, UpdateView):
     form_class = GroupInviteForm
     model = Group
-    template_name = 'astrobin_apps_group/group_invite.html'
+    template_name = 'astrobin_apps_groups/group_manage_members.html'
+
+
+class GroupInviteView(
+        JSONResponseMixin, LoginRequiredMixin, RestrictToGroupOwnerMixin,
+        RedirectToGroupDetailMixin, UpdateView):
+    form_class = GroupInviteForm
+    model = Group
+    template_name = 'astrobin_apps_groups/group_invite.html'
 
     def post(self, request, *args, **kwargs):
         group = self.get_object()
@@ -113,5 +122,14 @@ class GroupInviteView(LoginRequiredMixin, RestrictToGroupOwnerMixin, RedirectToG
                 continue
 
             group.invited_users.add(user)
+
+        if request.is_ajax():
+            return self.render_json_response({
+                'invited_users': [{
+                    'id': x.id,
+                    'name': x.userprofile.get_display_name(),
+                    'url': reverse('user_page', args = (x.username,)),
+                } for x in group.invited_users.all()]
+            })
 
         return redirect(self.get_success_url())

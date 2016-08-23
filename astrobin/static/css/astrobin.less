@@ -1337,6 +1337,9 @@ li.astrobin-thumbnail {
         margin-right: @spacer-medium;
     }
 }
+table tr th:last-child, table tr td:last-child {
+    text-align: right;
+}
 .table tbody tr:hover td, .table tbody tr:hover th {
     .gradient(#343434, #353535, #333);
 }
@@ -2477,19 +2480,33 @@ ul.token-input-list {
     background-color: #404040;
     border: 1px solid #282828;
     width: 610px;
+
     li.token-input-token {
-        padding: @spacer-medium;
-        margin: @spacer-small*.5 0;
-        width: 590px;
-        color: @strong-text-color;
+        display: inline-block;
+        font-weight: initial;
+        color: white;
+        text-shadow: 1px 1px 0 black;
+
+        span {
+            padding-left: @spacer-medium;
+            color: #eee;
+            font-weight: bold;
+        }
     }
+
     li.token-input-input-token {
         border: none;
+
         input, textarea {
-            width: 590px;
             margin: @spacer-small 0;
             background: none;
         }
+    }
+
+    input, input:focus {
+        background: none;
+        border: none;
+        box-shadow: none;
     }
 }
 
@@ -2497,14 +2514,17 @@ div.token-input-dropdown {
     z-index: 9999;
     background-color: @strong-text-color;
     color: @background-color;
+
     li.token-input-selected-dropdown-item {
         color: @text-color;
     }
+
     li.token-input-dropdown-item,
     li.token-input-dropdown-item2 {
         color: @background-color;
         background-color: @link-color;
     }
+
     p {
         color: @text-color;
     }
@@ -3964,6 +3984,10 @@ table.forums, table.topic-list {
         &.forum-last-post, &.topic-last-post, &.topic-author {
             width: 15%;
         }
+    }
+
+    .topic-name {
+        text-align: left !important;
     }
 }
 

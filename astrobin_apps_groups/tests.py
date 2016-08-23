@@ -5,6 +5,7 @@ from django.test import TestCase
 
 # Third party
 from beautifulsoupselect import BeautifulSoupSelect as BSS
+import simplejson as json
 
 # This app
 from astrobin_apps_groups.models import Group
@@ -220,9 +221,12 @@ class GroupsTest(TestCase):
         self.assertEqual(response.status_code, 404)
 
         # Invited user does not exist
-        response = self.client.post(url, {
-            'users[]': [999],
-        }, follow = True)
+        response = self.client.post(url,
+            {
+                'users[]': [999],
+            },
+            HTTP_X_REQUESTED_WITH = 'XMLHttpRequest',
+            follow = True)
         self.assertEqual(response.status_code, 200)
         self.group = Group.objects.get(pk = self.group.pk)
         self.assertEqual(self.group.invited_users.count(), 0)
@@ -230,9 +234,18 @@ class GroupsTest(TestCase):
         # Invitation successful
         response = self.client.post(url, {
             'users[]': [self.user2.pk,],
-        })
+        },)
         self.assertRedirects(response, detail_url, status_code = 302, target_status_code = 200)
         self.group = Group.objects.get(pk = self.group.pk)
+        self.assertEqual(self.group.invited_users.count(), 1)
+        self.group.invited_users.clear()
+
+        # AJAX invitation successful
+        response = self.client.post(url, {
+            'users[]': [self.user2.pk,],
+        }, HTTP_X_REQUESTED_WITH = 'XMLHttpRequest')
+        self.group = Group.objects.get(pk = self.group.pk)
+        self.assertEqual(json.loads(response.content)['invited_users'][0]['id'], self.user2.pk)
         self.assertEqual(self.group.invited_users.count(), 1)
 
         self.client.logout()

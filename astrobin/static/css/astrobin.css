@@ -1188,6 +1188,10 @@ li.astrobin-thumbnail.top-title .image-title {
 .table tr th span {
   margin-right: 8px;
 }
+table tr th:last-child,
+table tr td:last-child {
+  text-align: right;
+}
 .table tbody tr:hover td,
 .table tbody tr:hover th {
   background: #343434;
@@ -2337,19 +2341,29 @@ ul.token-input-list {
   width: 610px;
 }
 ul.token-input-list li.token-input-token {
-  padding: 8px;
-  margin: 2px 0;
-  width: 590px;
-  color: #fcfcfc;
+  display: inline-block;
+  font-weight: initial;
+  color: white;
+  text-shadow: 1px 1px 0 black;
+}
+ul.token-input-list li.token-input-token span {
+  padding-left: 8px;
+  color: #eee;
+  font-weight: bold;
 }
 ul.token-input-list li.token-input-input-token {
   border: none;
 }
 ul.token-input-list li.token-input-input-token input,
 ul.token-input-list li.token-input-input-token textarea {
-  width: 590px;
   margin: 4px 0;
   background: none;
+}
+ul.token-input-list input,
+ul.token-input-list input:focus {
+  background: none;
+  border: none;
+  box-shadow: none;
 }
 div.token-input-dropdown {
   z-index: 9999;
@@ -3799,6 +3813,10 @@ table.topic-list th.topic-author,
 table.forums td.topic-author,
 table.topic-list td.topic-author {
   width: 15%;
+}
+table.forums .topic-name,
+table.topic-list .topic-name {
+  text-align: left !important;
 }
 th.forum-name {
   font-size: 18px;

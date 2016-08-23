@@ -1,10 +1,33 @@
 {% extends 'base.html' %}
 
 {% load i18n %}
+{% load astrobin_apps_groups_tags %}
 
 {% block title %}{{object.name}}{% endblock %}
 
 {% block content %}
+    <div class="subnav subnav-fixed">
+        <ul class="nav nav-pills">
+            <li class="dropdown">
+                <a class="dropdown-toggle" data-toggle="dropdown" href="#">
+                    <i class="icon-bolt icon-white"></i>
+                    {% trans "Actions" %}
+                    <b class="caret"></b>
+                </a>
+                <ul class="dropdown-menu">
+                    {% ifequal request.user object.owner %}
+                    <li>
+                        <a href="{% url 'group_manage_members' object.pk %}">
+                            <i class="icon-group"></i>
+                            {% trans "Manage members" %}
+                        </a>
+                    </li>
+                    {% endifequal %}
+                </ul>
+            </li>
+        </ul> <!-- nav -->
+    </div> <!-- subnav -->
+
     <h1>
         {{object.name}}
         <small>

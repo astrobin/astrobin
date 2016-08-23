@@ -27,6 +27,10 @@ urlpatterns = patterns('',
         GroupJoinView.as_view(),
         name = 'group_join'),
     url(
+        r'^(?P<pk>\d+)/manage-members/$',
+        GroupManageMembersView.as_view(),
+        name = 'group_manage_members'),
+    url(
         r'^(?P<pk>\d+)/invite/$',
         GroupInviteView.as_view(),
         name = 'group_invite'),
