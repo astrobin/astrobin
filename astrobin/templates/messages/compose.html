@@ -51,10 +51,12 @@
             if (recipients !== undefined) {
                 parameters['prePopulate'] = [];
                 for (var i = 0; i < recipients.length; i++) {
-                    parameters['prePopulate'].push({
-                        id: recipients[i],
-                        name: recipients[i]
-                    });
+                    if (recipients[i] !== "") {
+                        parameters['prePopulate'].push({
+                            id: recipients[i],
+                            name: recipients[i]
+                        });
+                    }
                 }
             }
 
