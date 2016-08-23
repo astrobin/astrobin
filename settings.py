@@ -710,4 +710,4 @@ else:
     PREMIUM_MAX_IMAGES_LITE = 12
 
 SANITIZER_ALLOWED_TAGS = ['b', 'i', 'strong', 'em', 'a']
-SANITIZER_ALLOWED_ATTRIBUTES = ['href']
+SANITIZER_ALLOWED_ATTRIBUTES = ['href', 'target']
