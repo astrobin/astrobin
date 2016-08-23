@@ -127,7 +127,8 @@ class GroupInviteView(
             return self.render_json_response({
                 'invited_users': [{
                     'id': x.id,
-                    'name': x.userprofile.get_display_name(),
+                    'username': x.username,
+                    'display_name': x.userprofile.get_display_name(),
                     'url': reverse('user_page', args = (x.username,)),
                 } for x in group.invited_users.all()]
             })
