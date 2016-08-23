@@ -216,6 +216,10 @@ class GroupsTest(TestCase):
 
         self.client.login(username = 'user1', password = 'password')
 
+        # GET not allowed
+        response = self.client.get(url)
+        self.assertEqual(response.status_code, 405)
+
         # Group does not exist
         response = self.client.post(reverse('group_invite', kwargs = {'pk': 999}), follow = True)
         self.assertEqual(response.status_code, 404)

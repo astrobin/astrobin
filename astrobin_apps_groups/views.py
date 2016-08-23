@@ -112,6 +112,7 @@ class GroupInviteView(
     form_class = GroupInviteForm
     model = Group
     template_name = 'astrobin_apps_groups/group_invite.html'
+    http_method_names = ['post']
 
     def post(self, request, *args, **kwargs):
         group = self.get_object()
