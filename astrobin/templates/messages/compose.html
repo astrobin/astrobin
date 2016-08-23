@@ -26,8 +26,9 @@
             $('input#id_subject').val("{{request.GET.subject}}");
             {% endif %}
 
-            var recipient =  $("#id_recipient").val();
+            var recipients = $("#id_recipient").val().split(',');
             $("#id_recipient").val("");
+
             var parameters = {
                 classes: {
                     tokenList: "token-input-list",
@@ -47,8 +48,14 @@
                 queryParam: "term"
             };
 
-            if (recipient) {
-                parameters['prePopulate'] = [{id:recipient, name:recipient}];
+            if (recipients !== undefined) {
+                parameters['prePopulate'] = [];
+                for (var i = 0; i < recipients.length; i++) {
+                    parameters['prePopulate'].push({
+                        id: recipients[i],
+                        name: recipients[i]
+                    });
+                }
             }
 
             $("#id_recipient").tokenInput("{% url 'recipient_search' %}?format=json", parameters);

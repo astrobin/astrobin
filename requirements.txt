@@ -72,7 +72,7 @@ django-storages==1.1.4
 -e git+https://github.com/siovene/django-subscription.git@53b5813#egg=django-subscription
 django-tagging==0.3.1
 django-tastypie==0.9.15
--e git+http://github.com/philippWassibauer/django-threaded-messages.git@387b6b766e8c55e1a354041e2688d076b2cbb260#egg=django_threaded_messages-master
+-e git+http://github.com/siovene/django-threaded-messages.git@e8ec4b9cf36300674d3a27fabdd40b8f6f207791#egg=django_threaded_messages
 django-threaded-multihost==1.4-1
 django-timezones==0.1.4
 django-tinymce==2.0.6
