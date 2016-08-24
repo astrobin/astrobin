@@ -80,6 +80,13 @@ class Group(models.Model):
         help_text = _("Moderated groups have a moderation queue for posted images and join requests."),
     )
 
+    moderators = models.ManyToManyField(
+        User,
+        null = True,
+        blank = True,
+        related_name = 'moderated_group_set',
+    )
+
     members = models.ManyToManyField(
         User,
         null = True,
@@ -92,6 +99,13 @@ class Group(models.Model):
         null = True,
         blank = True,
         related_name = 'invited_group_set',
+    )
+
+    join_requests = models.ManyToManyField(
+        User,
+        null = True,
+        blank = True,
+        related_name = 'join_requested_group_set',
     )
 
     images = models.ManyToManyField(

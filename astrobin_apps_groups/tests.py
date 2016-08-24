@@ -21,9 +21,13 @@ class GroupsTest(TestCase):
         if len(messages) == 0:
             self.assertEqual(False, True)
 
+        found = False
         for message in messages:
-            self.assertEqual(message.tags, tags)
-            self.assertTrue(content in message.message)
+            if message.tags == tags and message.message == content:
+                found = True
+
+        self.assertEqual(found, True)
+
 
     def setUp(self):
         self.user1 = User.objects.create_user('user1', 'user1@test.com', 'password')
@@ -100,6 +104,7 @@ class GroupsTest(TestCase):
         self.assertEqual(group.category, 101)
         self.assertEqual(group.public, True)
         self.assertEqual(group.moderated, True)
+        self.assertTrue(group.owner in group.moderators.all())
 
         group.delete()
         self.client.logout()
@@ -166,6 +171,22 @@ class GroupsTest(TestCase):
         response = self.client.post(url, follow = True)
         self.assertEqual(response.status_code, 403)
         self.group.public = True; self.group.save()
+
+        # Public group, but moderated
+        self.client.logout()
+        self.client.login(username = 'user2', password = 'password')
+        self.group.moderated = True; self.group.save()
+        self.group.moderators.add(self.group.owner);
+        response = self.client.post(url, follow = True)
+        self.assertEqual(response.status_code, 200)
+        self._assertMessage(response, "warning unread", "This is a moderated group, and your join request will be reviewed by a moderator")
+        self.assertTrue(len(get_unseen_notifications(self.user1)) > 0)
+        self.assertIn("requested to join the group", get_unseen_notifications(self.user1)[0].message)
+        self.assertTrue(self.user2 in self.group.join_requests.all())
+        self.group.moderated = False; self.group.save()
+        self.group.moderators.clear()
+        self.client.logout()
+        self.client.login(username = 'user1', password = 'password')
 
         # Join successful
         response = self.client.post(url, follow = True)

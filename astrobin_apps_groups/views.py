@@ -70,6 +70,9 @@ class GroupCreateView(LoginRequiredMixin, RedirectToGroupDetailMixin, CreateView
         group = form.save(commit = False)
         group.creator = self.request.user
         group.owner = self.request.user
+        if group.moderated:
+            group.save() # Need to save before I can have a m2m
+            group.moderators.add(group.owner)
         messages.success(self.request, _("Your new group was created successfully"))
         return super(GroupCreateView, self).form_valid(form)
 
@@ -96,8 +99,18 @@ class GroupJoinView(LoginRequiredMixin, RedirectToGroupDetailMixin, UpdateView):
             return redirect(self.get_success_url())
 
         if group.public or request.user in group.invited_users.all():
-            group.members.add(request.user)
-            messages.success(request, _("You have joined the group"))
+            if group.moderated:
+                group.join_requests.add(request.user)
+                messages.warning(request, _("This is a moderated group, and your join request will be reviewed by a moderator"))
+                push_notification(group.moderators.all(), 'new_group_join_request',
+                    {
+                        'requester': request.user.userprofile.get_display_name(),
+                        'group_name': group.name,
+                        'url': reverse('group_manage_members', args = (group.pk,)),
+                    })
+            else:
+                group.members.add(request.user)
+                messages.success(request, _("You have joined the group"))
             return redirect(self.get_success_url())
 
         return HttpResponseForbidden()

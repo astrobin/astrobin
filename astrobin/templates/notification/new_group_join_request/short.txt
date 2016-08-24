@@ -1,0 +1,2 @@
+{% load i18n %}
+{% blocktrans %}{{requester}} requested to join the group: "{{group_name}}"{% endblocktrans %}
