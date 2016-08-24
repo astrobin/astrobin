@@ -668,6 +668,7 @@ TOGGLEPROPERTIES = {
 SOUTH_MIGRATION_MODULES = {
     'easy_thumbnails': 'easy_thumbnails.south_migrations',
     'pybb': 'pybb.south_migrations',
+    'djcelery': 'djcelery.south_migrations',
 }
 SOUTH_TESTS_MIGRATE = False
 
