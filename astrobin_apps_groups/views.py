@@ -15,6 +15,9 @@ from django.utils.translation import ugettext as _
 from braces.views import JSONResponseMixin
 from braces.views import LoginRequiredMixin
 
+# AstroBin
+from astrobin_apps_notifications.utils import push_notification
+
 # This app
 from astrobin_apps_groups.forms import *
 from astrobin_apps_groups.models import *
@@ -123,6 +126,13 @@ class GroupInviteView(
                 continue
 
             group.invited_users.add(user)
+            push_notification([user], 'new_group_invitation',
+                {
+                    'inviter': request.user.userprofile.get_display_name(),
+                    'inviter_page': reverse('user_page', args = (request.user.username,)),
+                    'group_name': group.name,
+                    'group_page': reverse('group_detail', args = (group.pk,)),
+                })
 
         if request.is_ajax():
             return self.render_json_response({

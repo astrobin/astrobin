@@ -242,6 +242,7 @@ class GroupsTest(TestCase):
         self.assertRedirects(response, detail_url, status_code = 302, target_status_code = 200)
         self.group = Group.objects.get(pk = self.group.pk)
         self.assertEqual(self.group.invited_users.count(), 1)
+        self.assertEqual(len(get_unseen_notifications(self.user2)), 1)
         self.group.invited_users.clear()
 
         # AJAX invitation successful
@@ -251,6 +252,7 @@ class GroupsTest(TestCase):
         self.group = Group.objects.get(pk = self.group.pk)
         self.assertEqual(json.loads(response.content)['invited_users'][0]['id'], self.user2.pk)
         self.assertEqual(self.group.invited_users.count(), 1)
+        self.assertEqual(len(get_unseen_notifications(self.user2)), 2)
 
         self.client.logout()
 

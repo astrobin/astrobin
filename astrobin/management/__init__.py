@@ -136,6 +136,12 @@ NOTICE_TYPES = (
         '',
         2,
     ),
+    (
+        'new_group_invitation',
+        _("You are invited to a group"),
+        '',
+        2,
+    ),
 )
 
 
