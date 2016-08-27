@@ -986,6 +986,14 @@ body.full {
 .dropdown-menu .active > a:hover {
   background-color: #CC4B2E;
 }
+li [class^="icon-"],
+.nav li [class^="icon-"],
+li [class*=" icon-"],
+.nav li [class*=" icon-"] {
+  display: inline-block;
+  width: 1.25em;
+  text-align: center;
+}
 .nav li.disabled {
   pointer-events: none;
 }
