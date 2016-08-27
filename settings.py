@@ -172,7 +172,12 @@ TEMPLATE_LOADERS = (
     )),
 )
 
-MIDDLEWARE_CLASSES = [
+MIDDLEWARE_CLASSES = []
+if DEBUG:
+    MIDDLEWARE_CLASSES += [
+        'debug_toolbar.middleware.DebugToolbarMiddleware',
+    ]
+MIDDLEWARE_CLASSES += [
     'django.middleware.http.ConditionalGetMiddleware',
     'django.middleware.common.CommonMiddleware',
     'django.contrib.sessions.middleware.SessionMiddleware',
@@ -188,15 +193,10 @@ MIDDLEWARE_CLASSES = [
 #    'pipeline.middleware.MinifyHTMLMiddleware', Enable after dealing with the blank spaces everywhere
     'pybb.middleware.PybbMiddleware',
 ]
-if not TESTING:
+if not TESTING and not DEBUG:
     MIDDLEWARE_CLASSES += [
         'django.middleware.locale.LocaleMiddleware',
         'django.middleware.gzip.GZipMiddleware',
-    ]
-
-if DEBUG:
-    MIDDLEWARE_CLASSES += [
-        'debug_toolbar.middleware.DebugToolbarMiddleware',
     ]
 
 SESSION_ENGINE = "django.contrib.sessions.backends.cached_db"
@@ -328,7 +328,10 @@ HAYSTACK_CONNECTIONS = {
 
 #INTERNAL_IPS = ('88.115.221.254',) # for django-debug-toolbar: add own local IP to enable
 if DEBUG:
-    INTERNAL_IPS = ('127.0.0.1',)
+    INTERNAL_IPS = ('127.0.0.2', '10.0.0.2',)
+    DEBUG_TOOLBAR_CONFIG = {
+        "SHOW_TOOLBAR_CALLBACK" : 'astrobin.debug_toolbar.show_debug_toolbar',
+    }
 
 MESSAGE_STORAGE = 'persistent_messages.storage.PersistentMessageStorage'
 

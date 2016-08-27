@@ -38,7 +38,7 @@ django-celery==3.1.17
 django-compressor==1.1.2
 django-contact-form-gv==0.4.3
 django-countries==1.0.5
-django-debug-toolbar==1.0
+django-debug-toolbar==1.3.2
 django-dfp==0.3.1
 django-ember==0.1
 -e git+https://github.com/siovene/django-endless-pagination.git@c7dd35b560cd83feee11e0241f428d3fc48005d2#egg=django_endless_pagination-master
@@ -126,7 +126,7 @@ simplejson==2.3.2
 six==1.10.0
 slimit==0.7.4
 sphinx-me==0.1.2
-sqlparse==0.2.1
+sqlparse==0.1.19
 termcolor==1.1.0
 -e git+https://bitbucket.org/siovene/django-toggle-properties.git#egg=toggleproperties
 tornado==2.1.1
