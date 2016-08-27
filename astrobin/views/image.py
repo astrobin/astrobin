@@ -600,7 +600,7 @@ class ImageDeleteView(LoginRequiredMixin, DeleteView):
         except Image.DoesNotExist:
             raise Http404
 
-        if request.user.is_authenticated() and request.user != image.user:
+        if request.user.is_authenticated() and request.user != image.user and not request.user.is_superuser:
             raise PermissionDenied
 
         return super(ImageDeleteView, self).dispatch(request, *args, **kwargs)
