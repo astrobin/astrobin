@@ -8,6 +8,10 @@ local_path = lambda path: os.path.join(os.path.dirname(__file__), path)
 
 TESTING = len(sys.argv) > 1 and sys.argv[1] == 'test'
 DEBUG = os.environ['ASTROBIN_DEBUG'] == "true"
+try:
+    DEBUG_TOOLBAR = DEBUG and os.environ['ASTROBIN_DEBUG_TOOLBAR'] == 'true'
+except KeyError:
+    DEBUG_TOOLBAR = False
 CACHE = not DEBUG
 ALLOWED_HOSTS = ['*']
 TEMPLATE_DEBUG = DEBUG
@@ -173,7 +177,7 @@ TEMPLATE_LOADERS = (
 )
 
 MIDDLEWARE_CLASSES = []
-if DEBUG:
+if DEBUG_TOOLBAR:
     MIDDLEWARE_CLASSES += [
         'debug_toolbar.middleware.DebugToolbarMiddleware',
     ]
@@ -327,7 +331,7 @@ HAYSTACK_CONNECTIONS = {
 
 
 #INTERNAL_IPS = ('88.115.221.254',) # for django-debug-toolbar: add own local IP to enable
-if DEBUG:
+if DEBUG_TOOLBAR:
     INTERNAL_IPS = ('127.0.0.2', '10.0.0.2',)
     DEBUG_TOOLBAR_CONFIG = {
         "SHOW_TOOLBAR_CALLBACK" : 'astrobin.debug_toolbar.show_debug_toolbar',
