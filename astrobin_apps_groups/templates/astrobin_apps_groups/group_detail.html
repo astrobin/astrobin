@@ -2,6 +2,7 @@
 
 {% load avatar_tags %}
 {% load i18n %}
+{% load tags %}
 
 {% block title %}{{object.name}}{% endblock %}
 
@@ -61,8 +62,8 @@
         <div class="header">
             <h4>
                 <i class="icon-group"></i>
-                {% blocktrans with amount=object.members.all.count|add:1 count counter=object.members.all.count|add:1 %}{{amount}} member{% plural %}{{amount}} members{% endblocktrans %}
-                {% if object.members.all.count > 129 %}
+                {% blocktrans with amount=members.count|add:1 count counter=members.count|add:1 %}{{amount}} member{% plural %}{{amount}} members{% endblocktrans %}
+                {% if members.count > 129 %}
                     <a  href="#"> <!-- TODO -->
                         {% trans "View all" %}
                     </a>
@@ -77,7 +78,7 @@
                 </a>
             </li>
 
-            {% for member in object.members.all|slice:":129" %}
+            {% for member in members.all|slice:":129" %}
                 <li>
                     <a href="{% url 'user_page' member.username %}">
                         {% avatar member 36 %}
@@ -86,4 +87,6 @@
             {% endfor %}
         </ul>
     </div>
+
+    {% image_list image_list %}
 {% endblock %}

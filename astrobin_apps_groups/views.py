@@ -59,7 +59,28 @@ class PublicGroupListView(ListView):
 
 class GroupDetailView(RestrictPrivateGroupToMembersMixin, DetailView):
     model = Group
-    template_name = 'astrobin_apps_groups/group_detail.html'
+
+    def get_template_names(self):
+        if self.request.is_ajax():
+            return 'inclusion_tags/image_list_entries.html'
+        return 'astrobin_apps_groups/group_detail.html'
+
+    def get_context_data(self, **kwargs):
+        context = super(GroupDetailView, self).get_context_data(**kwargs)
+        group = self.get_object()
+
+        # Prefer members with avatars
+        context['members'] = group.members.all().order_by('avatar')
+
+        # Images
+        if group.autosubmission:
+            context['image_list'] = Image.objects.filter(user__in = group.members.all())
+        else:
+            context['image_list'] = group.images.all()
+
+        context['alias'] = 'gallery'
+
+        return context
 
 
 class GroupCreateView(LoginRequiredMixin, RedirectToGroupDetailMixin, CreateView):
