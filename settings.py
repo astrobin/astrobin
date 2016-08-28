@@ -676,7 +676,7 @@ SOUTH_MIGRATION_MODULES = {
 SOUTH_TESTS_MIGRATE = False
 
 
-PYBB_DEFAULT_TITLE = "AstroBin Forum (beta)"
+PYBB_DEFAULT_TITLE = "AstroBin Forum"
 PYBB_DEFAULT_FROM_EMAIL = "AstroBin Forum <noreply@astrobin.com>"
 PYBB_NICE_URL = True
 PYBB_PERMISSION_HANDLER = "astrobin.permissions.PyBBMPermissions"
