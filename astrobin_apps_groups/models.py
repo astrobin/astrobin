@@ -80,6 +80,12 @@ class Group(models.Model):
         help_text = _("Moderated groups have a moderation queue for posted images and join requests."),
     )
 
+    autosubmission = models.BooleanField(
+        default = True,
+        verbose_name = _("Automatic submission"),
+        help_text = _("Groups with automatic submissions always contain all public images from all members. Groups without automatic submission only contain images that are explicitly submitted to it."),
+    )
+
     moderators = models.ManyToManyField(
         User,
         null = True,

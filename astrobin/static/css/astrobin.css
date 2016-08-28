@@ -4189,3 +4189,24 @@ pre {
 .image-moderation .astrobin-image-container {
   padding: 9px;
 }
+.group-members-container {
+  padding: 0;
+}
+.group-members-container .header {
+  margin: 0;
+}
+.group-members-container .header a {
+  float: right;
+  font-size: 14px;
+  font-style: italics;
+  font-family: initial;
+}
+.group-members-container ul {
+  margin: 0 0 0 1px;
+}
+.group-members-container ul li {
+  float: left;
+  width: 36px;
+  height: 36px;
+  overflow: hidden;
+}

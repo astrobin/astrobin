@@ -9,13 +9,13 @@ from astrobin_apps_groups.models import *
 class GroupCreateForm(forms.ModelForm):
     class Meta:
         model = Group
-        fields = ['name', 'description', 'category', 'public', 'moderated']
+        fields = ['name', 'description', 'category', 'public', 'moderated', 'autosubmission',]
 
 
 class GroupUpdateForm(forms.ModelForm):
     class Meta:
         model = Group
-        fields = ['name', 'description', 'category', 'public', 'moderated']
+        fields = ['name', 'description', 'category', 'public', 'moderated', 'autosubmission',]
 
 
 class GroupInviteForm(forms.ModelForm):
