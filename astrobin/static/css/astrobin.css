@@ -4210,3 +4210,36 @@ pre {
   height: 36px;
   overflow: hidden;
 }
+.group-header {
+  margin-bottom: 24px;
+}
+.group-header h1 {
+  margin-bottom: 2px;
+}
+.group-header h1 small {
+  color: #999;
+}
+.group-header .group-info-container {
+  text-align: right;
+  padding-top: 20px;
+}
+.group-header .group-info-container .group-info {
+  padding: 8px 12px;
+  background: #303030 url('../images/darker-panel-tile.png');
+  display: inline-block;
+  -moz-border-radius: 6px;
+  -webkit-border-radius: 6px;
+  border-radius: 6px;
+}
+.group-header .group-info-container .group-info i {
+  padding: 0 4px;
+}
+.group-header .group-info-container .group-info i:first-child {
+  padding-left: 0;
+}
+.group-header .group-info-container .group-info i:last-child {
+  padding-right: 0;
+}
+.group-header .group-info-container .group-info .icon-inactive {
+  color: #606060;
+}

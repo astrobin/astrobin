@@ -28,16 +28,34 @@
         </ul> <!-- nav -->
     </div> <!-- subnav -->
 
-    <h1>
-        {{object.name}}
-        <small>
-            {% if object.public %}
-                {% trans "A public group" %}
-            {% else %}
-                {% trans "A private group" %}
-            {% endif %}
-        </small>
-    </h1>
+    <div class="row group-header">
+        <div class="span10">
+            <h1>{{object.name}}</h1>
+            {% url 'user_page' object.owner.username as owner_url %}
+            <small>{% blocktrans with date_created=object.date_created|date:"SHORT_DATE_FORMAT" owner=object.owner.userprofile %}A group created on {{date_created}}, owned by <a href="{{owner_url}}">{{owner}}</a>{% endblocktrans %}
+        </div>
+        <div class="span2 group-info-container">
+            <div class="group-info">
+                {% if object.public %}
+                    <i class="icon-unlock" rel="tooltip" title="{% trans "This group is public" %}"></i>
+                {% else %}
+                    <i class="icon-lock icon-inactive" rel="tooltip" title="{% trans "This group is private" %}"></i>
+                {% endif %}
+
+                {% if object.moderated %}
+                    <i class="icon-legal" rel="tooltip" title="{% trans "This group is moderated" %}"></i>
+                {% else %}
+                    <i class="icon-legal icon-inactive" rel="tooltip" title="{% trans "This group is not moderated" %}"></i>
+                {% endif %}
+
+                {% if object.autosubmission %}
+                    <i class="icon-upload-alt" rel="tooltip" title="{% trans "This group has automatic submission" %}"></i>
+                {% else %}
+                    <i class="icon-upload-alt icon-inactive" rel="tooltip" title="{% trans "This group does not have automatic submission" %}"></i>
+                {% endif %}
+            </div>
+        </div>
+    </div>
 
     <div class="subtle-container group-members-container">
         <div class="header">
