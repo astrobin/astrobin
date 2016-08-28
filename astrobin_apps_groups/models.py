@@ -114,12 +114,22 @@ class Group(models.Model):
         related_name = 'join_requested_group_set',
     )
 
-    images = models.ManyToManyField(
+    _images = models.ManyToManyField(
         Image,
         null = True,
         blank = True,
         related_name = 'part_of_group_set',
     )
+
+    @property
+    def images(self):
+        if self.autosubmission:
+            return Image.objects.filter(user__in = self.members.all())
+        return self._images
+
+    @images.setter
+    def images(self, value):
+        self._images = value
 
     def __unicode__(self):
         return self.name

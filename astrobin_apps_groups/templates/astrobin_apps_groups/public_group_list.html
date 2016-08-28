@@ -38,9 +38,9 @@
             <tbody>
                 {% for group in object_list %}
                     <tr>
-                        <td><a href="{% url 'group_detail' group.pk %}">{{group.name}}</a></td>
-                        <td>{{group.members.count}}</td>
-                        <td>{{group.images.count}}</td>
+                        <td class="group-name"><a href="{% url 'group_detail' group.pk %}">{{group.name}}</a></td>
+                        <td class="group-members">{{group.members.count}}</td>
+                        <td class="group-images">{{group.images.count}}</td>
                     </tr>
                 {% endfor %}
             </tbody>

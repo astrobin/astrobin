@@ -11,6 +11,7 @@ import simplejson as json
 from astrobin_apps_groups.models import Group
 
 # Other AstroBin apps
+from astrobin.models import Image
 from astrobin_apps_notifications.utils import get_unseen_notifications
 
 
@@ -38,6 +39,8 @@ class GroupsTest(TestCase):
             name = 'Test group',
             category = 101,
             public = True,
+            moderated = False,
+            autosubmission = True
         )
 
     def tearDown(self):
@@ -54,14 +57,31 @@ class GroupsTest(TestCase):
         response = self.client.get(reverse('public_group_list'))
         self.assertEqual(response.status_code, 200)
         self.assertContains(response, '<h1>Public groups</h1>', html = True)
-        self.assertContains(response, 'Test group')
+        self.assertContains(response, '<td class="group-name"><a href="' + reverse('group_detail', args = (self.group.pk,)) + '">Test group</a></td>', html = True)
+        self.assertContains(response, '<td class="group-members">0</td>', html = True)
+        self.assertContains(response, '<td class="group-images">0</td>', html = True)
 
+        # Add a member
+        self.group.members.add(self.user2)
+        response = self.client.get(reverse('public_group_list'))
+        self.assertEqual(response.status_code, 200)
+        self.assertContains(response, '<td class="group-members">1</td>', html = True)
+        self.assertContains(response, '<td class="group-images">0</td>', html = True)
+
+        # Add an image for the one member
+        image = Image.objects.create(title = 'Test image', user = self.user2)
+        response = self.client.get(reverse('public_group_list'))
+        self.assertEqual(response.status_code, 200)
+        self.assertContains(response, '<td class="group-members">1</td>', html = True)
+        self.assertContains(response, '<td class="group-images">1</td>', html = True)
+
+        # Private groups are not visible here
         self.group.public = False
         self.group.save()
-
         response = self.client.get(reverse('public_group_list'))
         self.assertNotContains(response, 'Test group')
 
+        self.group.members.clear()
         self.group.public = True
         self.group.save()
 

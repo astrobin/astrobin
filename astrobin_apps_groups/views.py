@@ -73,11 +73,7 @@ class GroupDetailView(RestrictPrivateGroupToMembersMixin, DetailView):
         context['members'] = group.members.all().order_by('avatar')
 
         # Images
-        if group.autosubmission:
-            context['image_list'] = Image.objects.filter(user__in = group.members.all())
-        else:
-            context['image_list'] = group.images.all()
-
+        context['image_list'] = group.images.all()
         context['alias'] = 'gallery'
 
         return context
