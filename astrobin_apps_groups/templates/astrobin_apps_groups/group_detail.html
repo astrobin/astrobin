@@ -3,6 +3,7 @@
 {% load avatar_tags %}
 {% load i18n %}
 {% load tags %}
+{% load pybb_tags %}
 
 {% block title %}{{object.name}}{% endblock %}
 
@@ -72,5 +73,11 @@
         </div>
     </div>
 
+    <h2>{% trans "Group forum" %}</h2>
+    {% with topic_list=object.forum.topics.all|slice:":10" forum=object.forum %}
+        {% include 'pybb/topic_list.html' %}
+    {% endwith %}
+
+    <h2>{% trans "Images" %}</h2>
     {% image_list image_list %}
 {% endblock %}

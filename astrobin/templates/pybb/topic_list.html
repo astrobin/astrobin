@@ -70,6 +70,12 @@
                 {% include "pybb/topic_last_message_info.html" %}
             </td>
         </tr>
+    {% empty %}
+        <tr>
+            <td colspan="6" class="empty-table">
+                {% trans "This forum does not have any topics." %}
+            </td>
+        </tr>
     {% endfor %}
     </tbody>
 </table>
