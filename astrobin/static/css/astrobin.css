@@ -4189,36 +4189,15 @@ pre {
 .image-moderation .astrobin-image-container {
   padding: 9px;
 }
-.group-members-container {
-  padding: 0;
-  margin-bottom: 30px;
-}
-.group-members-container .header {
-  margin: 0;
-}
-.group-members-container .header a {
-  float: right;
-  font-size: 14px;
-  font-style: italics;
-  font-family: initial;
-}
-.group-members-container ul {
-  margin: 0 0 0 1px;
-}
-.group-members-container ul li {
-  float: left;
-  width: 36px;
-  height: 36px;
-  overflow: hidden;
-}
 .group-header {
   margin-bottom: 24px;
 }
 .group-header h1 {
   margin-bottom: 2px;
 }
-.group-header h1 small {
-  color: #999;
+.group-header .subtitle {
+  color: #909090;
+  font-size: 13px;
 }
 .group-header .group-info-container {
   text-align: right;
@@ -4232,13 +4211,19 @@ pre {
   -webkit-border-radius: 6px;
   border-radius: 6px;
 }
-.group-header .group-info-container .group-info i {
+.group-header .group-info-container .group-info i,
+.group-header .group-info-container .group-info span,
+.group-header .group-info-container .group-info a {
   padding: 0 4px;
 }
-.group-header .group-info-container .group-info i:first-child {
+.group-header .group-info-container .group-info i:first-child,
+.group-header .group-info-container .group-info span,
+.group-header .group-info-container .group-info a {
   padding-left: 0;
 }
-.group-header .group-info-container .group-info i:last-child {
+.group-header .group-info-container .group-info i:last-child,
+.group-header .group-info-container .group-info span,
+.group-header .group-info-container .group-info a {
   padding-right: 0;
 }
 .group-header .group-info-container .group-info .icon-inactive {

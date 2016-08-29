@@ -30,12 +30,14 @@
     </div> <!-- subnav -->
 
     <div class="row group-header">
-        <div class="span10">
+        <div class="span9">
             <h1>{{object.name}}</h1>
             {% url 'user_page' object.owner.username as owner_url %}
-            <small>{% blocktrans with date_created=object.date_created|date:"SHORT_DATE_FORMAT" owner=object.owner.userprofile %}A group created on {{date_created}}, owned by <a href="{{owner_url}}">{{owner}}</a>{% endblocktrans %}
+            <div class="subtitle">
+                {% blocktrans with date_created=object.date_created|date:"SHORT_DATE_FORMAT" owner=object.owner.userprofile %}A group created on {{date_created}}, owned by <a href="{{owner_url}}">{{owner}}</a>{% endblocktrans %}
+            </div>
         </div>
-        <div class="span2 group-info-container">
+        <div class="span3 group-info-container">
             <div class="group-info">
                 {% if object.public %}
                     <i class="icon-unlock" rel="tooltip" title="{% trans "This group is public" %}"></i>
@@ -55,37 +57,19 @@
                     <i class="icon-upload-alt icon-inactive" rel="tooltip" title="{% trans "This group does not have automatic submission" %}"></i>
                 {% endif %}
             </div>
-        </div>
-    </div>
 
-    <div class="subtle-container group-members-container">
-        <div class="header">
-            <h4>
-                <i class="icon-group"></i>
-                {% blocktrans with amount=members.count|add:1 count counter=members.count|add:1 %}{{amount}} member{% plural %}{{amount}} members{% endblocktrans %}
-                {% if members.count > 129 %}
-                    <a  href="#"> <!-- TODO -->
-                        {% trans "View all" %}
-                    </a>
-                {% endif %}
-            </h4>
-        </div>
-
-        <ul>
-            <li>
-                <a href="{% url 'user_page' object.owner.username %}">
-                    {% avatar object.owner 36 %}
+            <div class="group-info">
+                <a class="group-info-members" href="#" rel="tooltip" title="{% trans "Members" %}"> <!-- TODO -->
+                    {{object.members.count}}
                 </a>
-            </li>
+            </div>
 
-            {% for member in members.all|slice:":129" %}
-                <li>
-                    <a href="{% url 'user_page' member.username %}">
-                        {% avatar member 36 %}
-                    </a>
-                </li>
-            {% endfor %}
-        </ul>
+            <div class="group-info">
+                <span class="group-info-images" rel="tooltip" title="{% trans "Images" %}">
+                    {{object.images.count}}
+                </span>
+            </div>
+        </div>
     </div>
 
     {% image_list image_list %}

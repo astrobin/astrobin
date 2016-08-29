@@ -4404,42 +4404,16 @@ pre {
     }
 }
 
-.group-members-container {
-    padding: 0;
-    margin-bottom: 30px;
-
-    .header {
-        margin: 0;
-
-        a {
-            float: right;
-            font-size: 14px;
-            font-style: italics;
-            font-family: initial;
-        }
-    }
-
-    ul {
-        margin: 0 0 0 1px;
-
-        li {
-            float: left;
-            width: 36px;
-            height: 36px;
-            overflow: hidden;
-        }
-    }
-}
-
 .group-header {
     margin-bottom: 24px;
 
     h1 {
         margin-bottom: 2px;
+    }
 
-        small {
-            color: #999;
-        }
+    .subtitle {
+        color: #909090;
+        font-size: 13px;
     }
 
     .group-info-container {
@@ -4452,15 +4426,15 @@ pre {
             display: inline-block;
             .rounded-corners();
 
-            i {
+            i, span, a {
                 padding: 0 4px;
             }
 
-            i:first-child {
+            i:first-child, span, a {
                 padding-left: 0;
             }
 
-            i:last-child {
+            i:last-child, span, a {
                 padding-right: 0;
             }
 

@@ -69,9 +69,6 @@ class GroupDetailView(RestrictPrivateGroupToMembersMixin, DetailView):
         context = super(GroupDetailView, self).get_context_data(**kwargs)
         group = self.get_object()
 
-        # Prefer members with avatars
-        context['members'] = group.members.all().order_by('avatar')
-
         # Images
         context['image_list'] = group.images.all()
         context['alias'] = 'gallery'
