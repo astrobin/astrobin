@@ -125,6 +125,7 @@ class GroupsTest(TestCase):
         self.assertEqual(group.public, True)
         self.assertEqual(group.moderated, True)
         self.assertTrue(group.owner in group.moderators.all())
+        self.assertTrue(group.forum != None)
 
         group.delete()
         self.client.logout()

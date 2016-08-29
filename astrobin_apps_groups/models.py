@@ -3,6 +3,9 @@ from django.contrib.auth.models import User
 from django.db import models
 from django.utils.translation import ugettext_lazy as _
 
+# Third party
+from pybb.models import Forum, Category
+
 # AstroBin
 from astrobin.models import Image
 
@@ -121,6 +124,14 @@ class Group(models.Model):
         related_name = 'part_of_group_set',
     )
 
+    forum = models.ForeignKey(
+        Forum,
+        null = True,
+        blank = True,
+        editable = False,
+        related_name = 'group',
+    )
+
     @property
     def images(self):
         if self.autosubmission:
@@ -130,6 +141,20 @@ class Group(models.Model):
     @images.setter
     def images(self, value):
         self._images = value
+
+    def save(self, *args, **kwargs):
+        if self.pk is None:
+            category, created = Category.objects.get_or_create(
+                name = 'Group forums',
+                slug = 'group-forums',
+            )
+
+            self.forum, created = Forum.objects.get_or_create(
+                category = category,
+                name = self.name,
+            )
+
+        super(Group, self).save(*args, **kwargs)
 
     def __unicode__(self):
         return self.name

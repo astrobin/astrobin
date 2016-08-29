@@ -33,24 +33,26 @@
     {% if categories %}
         <table class="forums table {% if category %}category-table{% elif parent_forum %}child-forums-table{% endif %}">
         {% for category in categories %}
-            <tr class="forum-row head-row">
-                <th class="forum-status">
-                    &nbsp;
-                </th>
-                <th class="forum-name">
-                    {{category.name}}
-                </th>
-                <th class="forum-topic-count hidden-phone">
-                    {% trans "Topics" %}
-                </th>
-                <th class="forum-post-count hidden-phone">
-                    {% trans "Posts" %}
-                </th>
-                <th class="forum-last-post hidden-phone">
-                    {% trans "Last posts" %}
-                </th>
-            </tr>
-            {% include 'pybb/forum_list.html' with forum_list=category.forums_accessed category=category parent_forum='' %}
+            {% if category.slug != 'group-forums' %}
+                <tr class="forum-row head-row">
+                    <th class="forum-status">
+                        &nbsp;
+                    </th>
+                    <th class="forum-name">
+                        {{category.name}}
+                    </th>
+                    <th class="forum-topic-count hidden-phone">
+                        {% trans "Topics" %}
+                    </th>
+                    <th class="forum-post-count hidden-phone">
+                        {% trans "Posts" %}
+                    </th>
+                    <th class="forum-last-post hidden-phone">
+                        {% trans "Last posts" %}
+                    </th>
+                </tr>
+                {% include 'pybb/forum_list.html' with forum_list=category.forums_accessed category=category parent_forum='' %}
+            {% endif %}
         {% endfor %}
         </table>
     {% else %}
