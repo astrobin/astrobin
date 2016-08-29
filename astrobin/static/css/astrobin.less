@@ -1259,6 +1259,10 @@ li.astrobin-thumbnail {
     }
 }
 
+.pagination {
+    text-align: center;
+}
+
 .pagination a {
     border-color: #505050;
 }
@@ -4132,30 +4136,6 @@ th.forum-name {
     font-size: @base-font-size - 2;
 }
 
-#mark-all-as-read, #controls {
-    margin-top: 24px;
-}
-
-#mark-all-as-read, .topic .controls, .forum .controls {
-    padding-top: 12px;
-    margin-top: 8px;
-    border-top: 1px solid #393939;
-}
-
-#mark-all-as-read, .topic .controls, .post-control {
-    a {
-        padding: 4px 12px;
-        margin-right: 4px;
-        font-size: 10px;
-        text-transform: uppercase;
-        font-style: italic;
-        color: lighten(@link-color, 50%);
-        background: darken(@link-color, 5%);
-        border: 1px solid darken(@link-color, 15%);
-        .rounded-corners;
-    }
-}
-
 .topic-state, .forum-status, .notification-state {
     width: 20px;
 }
@@ -4186,7 +4166,28 @@ table.post th.post-avatar {
     margin-top: 20px;
 }
 
-.breadcrumb li { color: @background-color; }
+.breadcrumb {
+    position: relative;
+    background-color: #272727;
+    margin-top: 12px;
+
+    li {
+        text-shadow: none;
+    }
+
+    .pagination {
+        position: absolute;
+        margin: 0;
+        top: 4px;
+        right: 4px;
+
+        a, .disabled a {
+            border: none;
+            background: #333333 url('../images/dark-panel-tile.png');
+        }
+    }
+}
+
 .field-errors { color: red; }
 
 pre {

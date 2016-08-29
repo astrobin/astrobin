@@ -1118,6 +1118,9 @@ li.astrobin-thumbnail.top-title .image-title {
 .blog-entry strong {
   color: #fff;
 }
+.pagination {
+  text-align: center;
+}
 .pagination a {
   border-color: #505050;
 }
@@ -3954,32 +3957,6 @@ th.forum-name {
   padding: 3px 0 3px 10px;
   font-size: 11px;
 }
-#mark-all-as-read,
-#controls {
-  margin-top: 24px;
-}
-#mark-all-as-read,
-.topic .controls,
-.forum .controls {
-  padding-top: 12px;
-  margin-top: 8px;
-  border-top: 1px solid #393939;
-}
-#mark-all-as-read a,
-.topic .controls a,
-.post-control a {
-  padding: 4px 12px;
-  margin-right: 4px;
-  font-size: 10px;
-  text-transform: uppercase;
-  font-style: italic;
-  color: #fefcfb;
-  background: #b74329;
-  border: 1px solid #8e3420;
-  -moz-border-radius: 6px;
-  -webkit-border-radius: 6px;
-  border-radius: 6px;
-}
 .topic-state,
 .forum-status,
 .notification-state {
@@ -4016,8 +3993,24 @@ table.post th.post-avatar {
   font-size: x-small;
   margin-top: 20px;
 }
+.breadcrumb {
+  position: relative;
+  background-color: #272727;
+  margin-top: 12px;
+}
 .breadcrumb li {
-  color: #333333;
+  text-shadow: none;
+}
+.breadcrumb .pagination {
+  position: absolute;
+  margin: 0;
+  top: 4px;
+  right: 4px;
+}
+.breadcrumb .pagination a,
+.breadcrumb .pagination .disabled a {
+  border: none;
+  background: #333333 url('../images/dark-panel-tile.png');
 }
 .field-errors {
   color: red;

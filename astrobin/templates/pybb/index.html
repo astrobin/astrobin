@@ -11,6 +11,25 @@
 {% endblock %}
 
 {% block content %}
+    {% if user.is_authenticated %}
+        <div class="subnav subnav-fixed">
+            <ul class="nav nav-pills">
+                <li>
+                    <a href='{% url 'pybb:topic_latest' %}'>
+                        <i class="icon-time icon-white"></i>
+                        {% trans "Latest topics" %}
+                    </a>
+                </li>
+                <li>
+                    <a href='{% url 'pybb:mark_all_as_read' %}'>
+                        <i class="icon-check icon-white"></i>
+                        {% trans "Mark all as read" %}
+                    </a>
+                </li>
+            </ul>
+        </div>
+    {% endif %}
+
     {% if categories %}
         <table class="forums table {% if category %}category-table{% elif parent_forum %}child-forums-table{% endif %}">
         {% for category in categories %}
@@ -38,14 +57,5 @@
         <h2>{% trans "Forum categories are not created" %}</h2>
         <a href="{% url 'admin:pybb_category_add' %}">{% trans "Add a category now" %}</a>
     {% endif %}
-    {% if user.is_authenticated %}
-        <div id='mark-all-as-read'>
-            <a href='{% url 'pybb:topic_latest' %}'>
-                {% trans "Last updates in topics" %}
-            </a>
-            <a href='{% url 'pybb:mark_all_as_read' %}'>
-                {% trans "Mark all forums as read" %}
-            </a>
-        </div>
-    {% endif %}
+
 {% endblock content %}

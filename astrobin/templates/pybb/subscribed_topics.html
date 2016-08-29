@@ -13,6 +13,20 @@
 {% endblock %}
 
 {% block content %}
+    {% if user.is_authenticated %}
+        <div class="subnav subnav-fixed">
+            <ul class="nav nav-pills">
+                <li>
+                    <a href='{% url 'pybb:mark_all_as_read' %}'>
+                        <i class="icon-check icon-white"></i>
+                        {% trans "Mark all as read" %}
+                    </a>
+                </li>
+            </ul>
+        </div>
+    {% endif %}
+
+
     <div class="forum">
         {% if forum.headline %}
             <div class="forum-headline alert alert-block">
@@ -20,18 +34,7 @@
             </div>
         {% endif %}
 
-        {% include "pybb/pagination.html" %}
-
         {% include "pybb/topic_list.html" %}
-
         {% include "pybb/pagination.html" %}
-
-        {% if user.is_authenticated %}
-            <div id='mark-all-as-read'>
-                <a href='{% url 'pybb:mark_all_as_read' %}'>
-                    {% trans "Mark all topics as read" %}
-                </a>
-            </div>
-        {% endif %}
     </div>
 {% endblock content %}
