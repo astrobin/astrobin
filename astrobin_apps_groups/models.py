@@ -124,7 +124,7 @@ class Group(models.Model):
         related_name = 'part_of_group_set',
     )
 
-    forum = models.ForeignKey(
+    forum = models.OneToOneField(
         Forum,
         null = True,
         blank = True,

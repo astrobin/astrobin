@@ -19,6 +19,15 @@
                         {% trans "New topic" %}
                     </a>
                 </li>
+
+                {% if forum.category.slug == 'group-forums' %}
+                    <li>
+                        <a href="{% url 'group_detail' forum.group.pk %}">
+                            <i class="icon-arrow-left icon-white"></i>
+                            {% trans "Back to group" %}
+                        </a>
+                    </li>
+                {% endif %}
             </ul>
         </div>
     {% endif %}
