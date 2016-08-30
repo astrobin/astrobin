@@ -20,6 +20,10 @@
             <button class="btn btn-primary">
                 {% trans "Invite users" %}
             </button>
+            <a class="btn" href="{% url 'group_detail' object.pk %}">
+                {% trans "Back to group" %}
+            </a>
+
         </div>
     </form>
 
