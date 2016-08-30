@@ -4199,6 +4199,9 @@ pre {
   color: #909090;
   font-size: 13px;
 }
+.group-header .subtitle strong {
+  color: white;
+}
 .group-header .group-info-container {
   text-align: right;
   padding-top: 20px;
@@ -4228,4 +4231,13 @@ pre {
 }
 .group-header .group-info-container .group-info .icon-inactive {
   color: #606060;
+}
+.group-forum h2 small strong {
+  color: white;
+}
+.group-forum .group-forum-buttons {
+  margin-top: 8px;
+  text-align: center;
+  padding-top: 8px;
+  border-top: 1px solid #393939;
 }

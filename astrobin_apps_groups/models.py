@@ -62,6 +62,7 @@ class Group(models.Model):
         null = True,
         blank = True,
         verbose_name = _("Description"),
+        help_text = _("Some HTML tags are allowed: <b>, <i>, <a>"),
     )
 
     category = models.PositiveSmallIntegerField(
@@ -141,6 +142,12 @@ class Group(models.Model):
     @images.setter
     def images(self, value):
         self._images = value
+
+    def category_humanized(self):
+        for cat in self.GROUP_CATEGORY_CHOICES:
+            if self.category == cat[0]:
+                return cat[1]
+        return ""
 
     def save(self, *args, **kwargs):
         if self.pk is None:

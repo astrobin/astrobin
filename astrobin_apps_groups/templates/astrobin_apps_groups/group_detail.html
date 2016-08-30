@@ -4,6 +4,7 @@
 {% load i18n %}
 {% load tags %}
 {% load pybb_tags %}
+{% load sanitizer %}
 
 {% block title %}{{object.name}}{% endblock %}
 
@@ -35,7 +36,7 @@
             <h1>{{object.name}}</h1>
             {% url 'user_page' object.owner.username as owner_url %}
             <div class="subtitle">
-                {% blocktrans with date_created=object.date_created|date:"SHORT_DATE_FORMAT" owner=object.owner.userprofile %}A group created on {{date_created}}, owned by <a href="{{owner_url}}">{{owner}}</a>{% endblocktrans %}
+                {% blocktrans with date_created=object.date_created|date:"SHORT_DATE_FORMAT" owner=object.owner.userprofile category=object.category_humanized %}A group created on {{date_created}}, owned by <a href="{{owner_url}}">{{owner}}</a>, categorized as <strong>{{category}}</strong>.{% endblocktrans %}
             </div>
         </div>
         <div class="span3 group-info-container">
@@ -73,11 +74,28 @@
         </div>
     </div>
 
-    <h2>{% trans "Group forum" %}</h2>
-    {% with topic_list=object.forum.topics.all|slice:":10" forum=object.forum %}
-        {% include 'pybb/topic_list.html' %}
-    {% endwith %}
+    <div class="group-description">
+        {{object.description|strip_html|safe|linebreaks}}
+    </div>
 
-    <h2>{% trans "Images" %}</h2>
-    {% image_list image_list %}
+    <div class="group-forum">
+        <h2>
+            {% trans "Group forum" %}
+            <small>
+                {% blocktrans with post_count=object.forum.post_count topic_count=object.forum.topic_count %}<strong>{{post_count}}</strong> posts in <strong>{{topic_count}}</strong> topics{% endblocktrans %}
+            </small>
+        </h2>
+        {% with topic_list=object.forum.topics.all|slice:":10" forum=object.forum %}
+            {% include 'pybb/topic_list.html' %}
+        {% endwith %}
+        <div class="group-forum-buttons">
+            <a class="btn btn-primary" href="{% url 'pybb:forum' object.forum.id %}">{% trans "View all" %}</a>
+            <a class="btn btn-primary" href="{% url 'pybb:add_topic' object.forum.id %}">{% trans "New topic" %}</a>
+        </div>
+    </div>
+
+    <div class="group-images">
+        <h2>{% trans "Images" %}</h2>
+        {% image_list image_list %}
+    </div>
 {% endblock %}
