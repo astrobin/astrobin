@@ -20,6 +20,13 @@
                 <ul class="dropdown-menu">
                     {% ifequal request.user object.owner %}
                     <li>
+                        <a href="{% url 'group_update' object.pk %}">
+                            <i class="icon-edit"></i>
+                            {% trans "Edit group" %}
+                        </a>
+                    </li>
+
+                    <li>
                         <a href="{% url 'group_manage_members' object.pk %}">
                             <i class="icon-group"></i>
                             {% trans "Manage members" %}
