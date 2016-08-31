@@ -92,7 +92,7 @@
                 {% blocktrans with post_count=object.forum.post_count topic_count=object.forum.topic_count %}<strong>{{post_count}}</strong> posts in <strong>{{topic_count}}</strong> topics{% endblocktrans %}
             </small>
         </h2>
-        {% with topic_list=object.forum.topics.all|slice:":10" forum=object.forum %}
+        {% with topic_list=object.forum.topics.all|slice:":5" forum=object.forum %}
             {% include 'pybb/topic_list.html' %}
         {% endwith %}
         <div class="group-forum-buttons">
