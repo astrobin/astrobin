@@ -44,6 +44,9 @@
             <a href="#" id="save-button" class="btn btn-primary">
                 {% trans "Save" %} &rarr;
             </a>
+            <a href="{% url 'group_detail' object.pk %}" class="btn">
+                {% trans "Cancel" %}
+            </a>
         </div>
     </div>
 {% endblock %}
