@@ -1,0 +1,101 @@
+{% extends 'base.html' %}
+
+{% load i18n %}
+{% load astrobin_apps_images_tags %}
+
+{% block title %}
+    {% trans "Add/remove images" %}
+{% endblock %}
+
+{% block content %}
+    <div class="group-add-remove-images">
+        <h1>
+            {{object.name}}
+            <small>{% trans "Add/remove images" %}</small>
+        </h1>
+        <p class="well">
+            {% trans "Click on the images to include them in this group (and click again to exclude them). Then click on the Save button down below." %}
+        </p>
+
+        <ul class="astrobin-thumbnails">
+            {% for image in images %}
+                <li class="thumbnail astrobin-thumbnail top-title">
+                    <a href="#">
+                        {% astrobin_image image 'gallery' 'final' 'regular' False False %}
+                        <div class="image-title">
+                            {{image.title|escape|default:_("(no title)")}}
+                        </div>
+                        <div
+                            {% if image.pk in images_pk_in_group %}
+                                class="added-thumbnail-overlay added" style="visibility:visible"
+                            {% else %}
+                                class="added-thumbnail-overlay" style="visibility:hidden"
+                            {% endif %}>
+                            <span>&#x2714;</span>
+                        </div>
+                    </a>
+                </li>
+            {% endfor %}
+        </ul>
+
+        <hr/>
+        <div class="text-right">
+            <span class="loading hide"><img src="{{STATIC_URL}}images/ajax-loader.gif" alt=""/></span>
+            <a href="#" id="save-button" class="btn btn-primary">
+                {% trans "Save" %} &rarr;
+            </a>
+        </div>
+    </div>
+{% endblock %}
+
+{% block extra_js %}
+    <script type="text/javascript">
+        $(document).ready(function() {
+            $('.astrobin-thumbnail a').click(function(e) {
+                var $spam;
+
+                e.preventDefault();
+
+                $added = $(this).find('.added-thumbnail-overlay');
+                if ($added.length == 0)
+                    $added = $(this).parent('.astrobin-image-container').siblings('.added-thumbnail-overlay')
+
+                $added.toggleClass('added');
+                if ($added.css('visibility') == 'hidden') {
+                    $added.css('visibility', 'visible');
+                } else {
+                    $added.css('visibility', 'hidden');
+                }
+            });
+
+            $('#save-button').click(function(e) {
+                var $btn, added_ids;
+
+                e.preventDefault();
+
+                $btn = $(this);
+                $btn.addClass('disabled');
+                $btn.siblings('.loading').removeClass('hide');
+
+                added_ids = $('.astrobin-thumbnails .added')
+                    .siblings('.astrobin-image-container')
+                    .find('img')
+                    .map(function()
+                {
+                    return $(this).data('id');
+                }).get();
+
+                $.ajax({
+                    url: '{% url 'group_add_remove_images' object.pk %}',
+                    type: 'POST',
+                    cache: false,
+                    timeout: 10000,
+                    data: {images: added_ids},
+                    dataType: 'json'
+                }).done(function() {
+                    location = "{% url 'group_detail' object.pk %}";
+                });
+            });
+        });
+    </script>
+{% endblock %}

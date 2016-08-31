@@ -38,4 +38,8 @@ urlpatterns = patterns('',
         r'^(?P<pk>\d+)/revoke-invitation/$',
         GroupRevokeInvitationView.as_view(),
         name = 'group_revoke_invitation'),
+    url(
+        r'^(?P<pk>\d+)/add-remove-images/$',
+        GroupAddRemoveImages.as_view(),
+        name = 'group_add_remove_images'),
 )

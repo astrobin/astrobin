@@ -41,6 +41,22 @@ class RestrictToGroupOwnerMixin(View):
         return super(RestrictToGroupOwnerMixin, self).dispatch(request, *args, **kwargs)
 
 
+class RestrictToGroupMembersMixin(View):
+    def dispatch(self, request, *args, **kwargs):
+        group = get_object_or_404(Group, pk = kwargs['pk'])
+        if request.user not in group.members.all():
+            return HttpResponseForbidden()
+        return super(RestrictToGroupMembersMixin, self).dispatch(request, *args, **kwargs)
+
+
+class RestrictToNonAutosubmissionGroupsMixin(View):
+    def dispatch(self, request, *args, **kwargs):
+        group = get_object_or_404(Group, pk = kwargs['pk'])
+        if group.autosubmission:
+            return HttpResponseForbidden()
+        return super(RestrictToNonAutosubmissionGroupsMixin, self).dispatch(request, *args, **kwargs)
+
+
 class RedirectToGroupDetailMixin(View):
     def get_success_url(self):
         try:
@@ -72,6 +88,9 @@ class GroupDetailView(RestrictPrivateGroupToMembersMixin, DetailView):
         # Images
         context['image_list'] = group.images.all()
         context['alias'] = 'gallery'
+
+        # Misc
+        context['user_is_member'] = self.request.user in group.members.all()
 
         return context
 
@@ -198,3 +217,39 @@ class GroupRevokeInvitationView(
             })
 
         return redirect(self.get_success_url())
+
+
+class GroupAddRemoveImages(
+        JSONResponseMixin, LoginRequiredMixin, RestrictToGroupMembersMixin,
+        RestrictToNonAutosubmissionGroupsMixin, UpdateView):
+    model = Group
+    template_name = 'astrobin_apps_groups/group_add_remove_images.html'
+
+    def get_context_data(self, **kwargs):
+        context = super(GroupAddRemoveImages, self).get_context_data(**kwargs)
+        group = self.get_object()
+        context['images'] = Image.objects.filter(user = self.request.user)
+        context['images_pk_in_group'] = [x.pk for x in group.images.filter(user = self.request.user)]
+        return context
+
+    def get_success_url(self):
+        return reverse('group_detail', kwargs = {'pk': self.kwargs['pk']})
+
+    def post(self, request, *args, **kwargs):
+        if request.is_ajax():
+            group = self.get_object()
+            group.images.remove(*Image.all_objects.filter(user = request.user))
+            for pk in request.POST.getlist('images[]'):
+                image = Image.objects.get(pk = pk)
+                if (image.user == request.user):
+                    group.images.add(image)
+                else:
+                    message.error(request, _("You cannot add images that are not yours!"))
+                    return super(GroupAddRemoveImages, self).post(request, *args, **kwargs)
+
+            messages.success(request, _("Group updated with your selection of images."))
+
+            return self.render_json_response({
+                'images': ','.join([str(x.pk) for x in group.images.filter(user = request.user)]),
+            })
+        return super(GroupAddRemoveImages, self).post(request, *args, **kwargs)

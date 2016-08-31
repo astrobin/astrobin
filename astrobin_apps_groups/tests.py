@@ -81,6 +81,7 @@ class GroupsTest(TestCase):
         response = self.client.get(reverse('public_group_list'))
         self.assertNotContains(response, 'Test group')
 
+        image.delete()
         self.group.members.clear()
         self.group.public = True
         self.group.save()
@@ -341,4 +342,61 @@ class GroupsTest(TestCase):
         self.assertEqual(response.status_code, 200)
         self.assertEqual(self.group.invited_users.count(), 0)
 
+        self.client.logout()
+
+    def test_group_add_remove_images_view(self):
+        url = reverse('group_add_remove_images', kwargs = {'pk': self.group.pk})
+
+        # Login required
+        response = self.client.get(url)
+        self.assertEqual(response.status_code, 302)
+
+        self.client.login(username = 'user1', password = 'password')
+
+        # Member required
+        response = self.client.post(url, follow = True)
+        self.assertEqual(response.status_code, 403)
+
+        self.group.members.add(self.user1)
+
+        # Group does not exist
+        response = self.client.post(reverse('group_add_remove_images', kwargs = {'pk': 999}), follow = True)
+        self.assertEqual(response.status_code, 404)
+
+        image = Image.objects.create(title = 'Test image', user = self.user1)
+
+        # Cannot add/remove on autosubmission groups
+        response = self.client.post(url,
+            {
+                'images[]': "%d" % image.pk,
+            },
+            HTTP_X_REQUESTED_WITH = 'XMLHttpRequest',
+            follow = True)
+        self.assertEqual(response.status_code, 403)
+
+        self.group.autosubmission = False
+        self.group.save()
+
+        # Successfully add
+        response = self.client.post(url,
+            {
+                'images[]': "%d" % image.pk,
+            },
+            HTTP_X_REQUESTED_WITH = 'XMLHttpRequest',
+            follow = True)
+        self.assertEqual(response.status_code, 200)
+        self.assertEqual(self.group.images.count(), 1)
+
+        # Successfully remove
+        response = self.client.post(url,
+            {},
+            HTTP_X_REQUESTED_WITH = 'XMLHttpRequest',
+            follow = True)
+        self.assertEqual(response.status_code, 200)
+        self.assertEqual(self.group.images.count(), 0)
+
+        # Clean up
+        image.delete()
+        self.group.members.remove(self.user1)
+        self.group.autosubmission = True
         self.client.logout()

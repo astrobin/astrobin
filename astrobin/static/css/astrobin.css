@@ -4170,10 +4170,12 @@ pre {
 .collection-detail .thumbnails {
   margin-top: 40px;
 }
-.collection-add-remove-images .astrobin-image-container {
+.collection-add-remove-images .astrobin-image-container,
+.group-add-remove-images .astrobin-image-container {
   padding: 9px;
 }
-.collection-add-remove-images .added-thumbnail-overlay {
+.collection-add-remove-images .added-thumbnail-overlay,
+.group-add-remove-images .added-thumbnail-overlay {
   position: absolute;
   left: 11px;
   bottom: 11px;
