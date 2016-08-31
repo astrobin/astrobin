@@ -1,6 +1,7 @@
 # Django
 from django.contrib.auth.models import User
 from django.db import models
+from django.utils import html
 from django.utils.translation import ugettext_lazy as _
 
 # Third party
@@ -62,7 +63,7 @@ class Group(models.Model):
         null = True,
         blank = True,
         verbose_name = _("Description"),
-        help_text = _("Some HTML tags are allowed: <b>, <i>, <a>"),
+        help_text = html.escape(_("Some HTML tags are allowed: <b>, <i>, <a>")),
     )
 
     category = models.PositiveSmallIntegerField(
