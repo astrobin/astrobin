@@ -15,6 +15,7 @@
         {{form|as_bootstrap}}
         <div class="form-actions">
             <input class="btn btn-primary" type="submit" value="{% trans "Create new group" %}"/>
+            <a class="btn" href="{% url 'public_group_list' %}">{% trans "Cancel" %}</a>
         </div>
     </form>
 {% endblock %}
