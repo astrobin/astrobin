@@ -1192,6 +1192,10 @@ table tr th:last-child,
 table tr td:last-child {
   text-align: right;
 }
+table tr th:only-child,
+table tr td:only-child {
+  text-align: inherit !important;
+}
 table td.empty-table {
   text-align: left !important;
 }
