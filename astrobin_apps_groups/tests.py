@@ -245,6 +245,44 @@ class GroupsTest(TestCase):
 
         self.client.logout()
 
+    def test_group_leave_view(self):
+        url = reverse('group_leave', kwargs = {'pk': self.group.pk})
+
+        # Login required
+        response = self.client.post(url)
+        self.assertEqual(response.status_code, 302)
+
+        self.client.login(username = 'user1', password = 'password')
+        self.group.members.add(self.user1)
+
+        # GET not allowed
+        response = self.client.get(url)
+        self.assertEqual(response.status_code, 405)
+
+        # Group does not exist
+        response = self.client.post(reverse('group_leave', kwargs = {'pk': 999}), follow = True)
+        self.assertEqual(response.status_code, 404)
+
+        # Private group
+        self.group.public = False; self.group.save()
+        response = self.client.post(url, follow = True)
+        self.assertRedirects(response, reverse('public_group_list'))
+        self._assertMessage(response, "success unread", "You have left the group")
+        self.group.public = True; self.group.save()
+        self.group.members.add(self.user1)
+
+        # Public group
+        response = self.client.post(url, follow = True)
+        self.assertRedirects(response, reverse('group_detail', kwargs = {'pk': self.group.pk}))
+        self._assertMessage(response, "success unread", "You have left the group")
+        self.group.public = True; self.group.save()
+
+        # Second attempt results in error 403
+        response = self.client.post(url, follow = True)
+        self.assertEqual(response.status_code, 403)
+
+        self.client.logout()
+
     def test_group_invite_view(self):
         url = reverse('group_invite', kwargs = {'pk': self.group.pk})
         detail_url = reverse('group_detail', kwargs = {'pk': self.group.pk})

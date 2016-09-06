@@ -27,6 +27,10 @@ urlpatterns = patterns('',
         GroupJoinView.as_view(),
         name = 'group_join'),
     url(
+        r'^(?P<pk>\d+)/leave/$',
+        GroupLeaveView.as_view(),
+        name = 'group_leave'),
+    url(
         r'^(?P<pk>\d+)/manage-members/$',
         GroupManageMembersView.as_view(),
         name = 'group_manage_members'),

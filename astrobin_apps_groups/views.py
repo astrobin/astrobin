@@ -150,6 +150,26 @@ class GroupJoinView(LoginRequiredMixin, RedirectToGroupDetailMixin, UpdateView):
         return HttpResponseForbidden()
 
 
+class GroupLeaveView(
+        LoginRequiredMixin, RedirectToGroupDetailMixin,
+        RestrictToGroupMembersMixin, UpdateView):
+    http_method_names = ['post',]
+    model = Group
+
+    def post(self, request, *args, **kwargs):
+        group = self.get_object()
+
+        if request.user not in group.members.all():
+            return HttpResponseForbidden()
+
+        group.members.remove(request.user)
+        messages.success(request, _("You have left the group"))
+
+        if group.public:
+            return redirect(self.get_success_url())
+        return redirect(reverse('public_group_list'))
+
+
 class GroupManageMembersView(LoginRequiredMixin, RestrictToGroupOwnerMixin, RedirectToGroupDetailMixin, UpdateView):
     form_class = GroupInviteForm
     model = Group
