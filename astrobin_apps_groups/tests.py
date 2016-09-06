@@ -263,9 +263,18 @@ class GroupsTest(TestCase):
         response = self.client.post(reverse('group_leave', kwargs = {'pk': 999}), follow = True)
         self.assertEqual(response.status_code, 404)
 
+        # Upload an image
+        self.client.post(
+            reverse('image_upload_process'),
+            { 'image_file': open('astrobin/fixtures/test.jpg', 'rb') },
+            follow = True)
+        image = Image.objects.all().order_by('-pk')[0]
+
         # Private group
         self.group.public = False; self.group.save()
         response = self.client.post(url, follow = True)
+        self.assertFalse(self.user1 in self.group.members.all())
+        self.assertFalse(image in self.group.images)
         self.assertRedirects(response, reverse('public_group_list'))
         self._assertMessage(response, "success unread", "You have left the group")
         self.group.public = True; self.group.save()
@@ -273,14 +282,25 @@ class GroupsTest(TestCase):
 
         # Public group
         response = self.client.post(url, follow = True)
+        self.assertFalse(self.user1 in self.group.members.all())
+        self.assertFalse(image in self.group.images)
         self.assertRedirects(response, reverse('group_detail', kwargs = {'pk': self.group.pk}))
         self._assertMessage(response, "success unread", "You have left the group")
-        self.group.public = True; self.group.save()
+        self.group.members.add(self.user1)
+
+        # Try with non-autosub group, to test for image removal
+        self.group.autosubmission = False; self.group.save()
+        self.group.images.add(image)
+        response = self.client.post(url, follow = True)
+        self.assertFalse(self.user1 in self.group.members.all())
+        self.assertFalse(image in self.group.images.all())
+        self.group.autosubmission = True; self.group.save()
 
         # Second attempt results in error 403
         response = self.client.post(url, follow = True)
         self.assertEqual(response.status_code, 403)
 
+        image.delete()
         self.client.logout()
 
     def test_group_invite_view(self):

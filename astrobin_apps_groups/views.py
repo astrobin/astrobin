@@ -163,6 +163,8 @@ class GroupLeaveView(
             return HttpResponseForbidden()
 
         group.members.remove(request.user)
+        if not group.autosubmission:
+            group.images.remove(*Image.objects.filter(user = request.user))
         messages.success(request, _("You have left the group"))
 
         if group.public:
