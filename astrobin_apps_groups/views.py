@@ -143,6 +143,7 @@ class GroupJoinView(LoginRequiredMixin, RedirectToGroupDetailMixin, UpdateView):
                     })
             else:
                 group.members.add(request.user)
+                group.invited_users.remove(request.user)
                 messages.success(request, _("You have joined the group"))
             return redirect(self.get_success_url())
 

@@ -211,10 +211,12 @@ class GroupsTest(TestCase):
         self.client.login(username = 'user1', password = 'password')
 
         # Join successful
+        self.group.invited_users.add(self.user1)
         response = self.client.post(url, follow = True)
         self.assertEqual(response.status_code, 200)
         self._assertMessage(response, "success unread", "You have joined the group")
         self.assertTrue(self.user1 in self.group.members.all())
+        self.assertFalse(self.user1 in self.group.invited_users.all())
 
         # Second attempt results in error "already joined"
         response = self.client.post(url, follow = True)
