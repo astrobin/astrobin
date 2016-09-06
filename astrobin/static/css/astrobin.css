@@ -4238,6 +4238,9 @@ pre {
 .group-header .group-info-container .group-info .icon-inactive {
   color: #606060;
 }
+.group-header .group-info-container .group-actions {
+  display: inline-block;
+}
 .group-forum h2 small strong {
   color: white;
 }

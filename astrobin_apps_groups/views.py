@@ -91,6 +91,7 @@ class GroupDetailView(RestrictPrivateGroupToMembersMixin, DetailView):
 
         # Misc
         context['user_is_member'] = self.request.user in group.members.all()
+        context['user_is_invited'] = self.request.user in group.invited_users.all()
 
         return context
 

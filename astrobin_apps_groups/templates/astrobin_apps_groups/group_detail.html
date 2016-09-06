@@ -36,7 +36,6 @@
             </li>
             {% endif %} {# owner or superuser #}
 
-            {% if user_is_member %}
             <li class="dropdown">
                 <a class="dropdown-toggle" data-toggle="dropdown" href="#">
                     <i class="icon-legal icon-white"></i>
@@ -44,7 +43,23 @@
                     <b class="caret"></b>
                 </a>
                 <ul class="dropdown-menu">
-                    {% if not object.autosubmission %}
+                    {% if user_is_member %}
+                        <li>
+                            <a href="#leave-modal" data-toggle="modal" class="danger">
+                                <i class="icon icon-signout"></i>
+                                {% trans "Leave group" %}
+                            </a>
+                        </li>
+                    {% else %}
+                        <li>
+                            <a href="#join-modal" data-toggle="modal">
+                                <i class="icon icon-signin"></i>
+                                {% trans "Join group" %}
+                            </a>
+                        </li>
+                    {% endif %}
+
+                    {% if user_is_member and not object.autosubmission %}
                     <li>
                         <a href="{% url 'group_add_remove_images' object.pk %}">
                             <i class="icon-plus-sign"></i>
@@ -54,7 +69,6 @@
                     {% endif %}
                 </ul>
             </li>
-            {% endif %} {# member #}
         </ul> <!-- nav -->
     </div> <!-- subnav -->
 
@@ -98,6 +112,28 @@
                     {{object.images.count}}
                 </span>
             </div>
+
+            <div class="group-actions">
+                {% if user_is_member %}
+                    <a  href="#leave-modal"
+                        data-toggle="modal"
+                        class="btn btn-danger"
+                        rel="tooltip"
+                        title="{% trans "Leave group" %}" >
+
+                        <i class="icon icon-signout"></i>
+                    </a>
+                {% else %}
+                    <a  href="#join-modal"
+                        data-toggle="modal"
+                        class="btn btn-primary"
+                        rel="tooltip"
+                        title="{% trans "Join group" %}" >
+
+                        <i class="icon icon-signin"></i>
+                    </a>
+                {% endif %}
+            </div>
         </div>
     </div>
 
@@ -124,5 +160,59 @@
     <div class="group-images">
         <h2>{% trans "Images" %}</h2>
         {% image_list image_list %}
+    </div>
+{% endblock %}
+
+{% block modals %}
+    <div class="modal hide fade" id="join-modal">
+        <div class="modal-header">
+            <a class="close" data-dismiss="modal">&times;</a>
+            <h3>{% trans "Join group?" %}</h3>
+        </div>
+        <div class="modal-body">
+            <div class="well">
+                <p>
+                    {% if group.public %}
+                        {% trans "This is a public group: all content, including the members list, is available to non-members." %}
+                    {% else %}
+                        {% trans "This is a private group: only members have access to its contents." %}
+                    {% endif %}
+                </p>
+                <p>
+                    {% if group.moderated %}
+                        {% trans "This is a moderated group, all content is reviews by moderators." %}
+                    {% else %}
+                        {% trans "This is a non-moderated group." %}
+                    {% endif %}
+                </p>
+                <p>
+                    {% if group.autosubmission %}
+                        {% trans "This is an automatic submission group: all of your images will instantly appear here without any need for action." %}
+                    {% else %}
+                        {% trans "This is a non-automatic submission group: you will pick and choose which images you want to submit." %}
+                    {% endif %}
+                </p>
+            </div>
+
+            <form class="form-inline" action="{% url 'group_join' group.pk %}" method="post">{% csrf_token %}
+                <input class="btn btn-primary" type="submit" value="{% trans "Join group" %}"/>
+            </form>
+        </div>
+    </div>
+
+    <div class="modal hide fade" id="leave-modal">
+        <div class="modal-header">
+            <a class="close" data-dismiss="modal">&times;</a>
+            <h3>{% trans "Leave group?" %}</h3>
+        </div>
+        <div class="modal-body">
+            <div class="well">
+            {% trans "By leaving this group, your image submissions will no longer be visible to group members, while your forum posts will remain. Are you sure?" %}
+            </div>
+
+            <form class="form-inline" action="{% url 'group_leave' group.pk %}" method="post">{% csrf_token %}
+                <input class="btn btn-primary" type="submit" value="{% trans "Leave group" %}"/>
+            </form>
+        </div>
     </div>
 {% endblock %}
