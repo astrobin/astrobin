@@ -50,9 +50,6 @@ import persistent_messages
 
 # AstroBin apps
 from astrobin_apps_notifications.utils import push_notification
-from nested_comments.models import NestedComment
-from rawdata.forms import PublicDataPool_SelectExistingForm, PrivateSharedFolder_SelectExistingForm
-from rawdata.models import PrivateSharedFolder
 
 # AstroBin
 from astrobin.forms import *
