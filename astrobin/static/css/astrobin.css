@@ -1201,15 +1201,16 @@ table td.empty-table {
 }
 .table tbody tr:hover td,
 .table tbody tr:hover th {
-  background: #343434;
-  background: -webkit-gradient(linear, left bottom, left top, color-stop(0, #353535), color-stop(1, #333333));
-  background: -ms-linear-gradient(bottom, #353535, #333333);
-  background: -moz-linear-gradient(center bottom, #353535 0%, #333333 100%);
+  background-color: rgba(0, 0, 0, 0.1);
 }
 .table tbody tr.active td,
 .table tbody tr.active th .table tbody tr.active:hover td,
 .table tbody tr.active:hover th {
   background: #404040 url(../images/background-tile.png);
+}
+.table-striped tbody > tr:nth-child(odd) > td,
+.table-striped tbody > tr:nth-child(odd) > th {
+  background-color: rgba(0, 0, 0, 0.075);
 }
 h1,
 h2,
@@ -4240,6 +4241,9 @@ pre {
 }
 .group-header .group-info-container .group-actions {
   display: inline-block;
+}
+.group-header .group-info-container .group-actions a {
+  margin-bottom: 2px;
 }
 .group-forum h2 small strong {
   color: white;

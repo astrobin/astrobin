@@ -480,7 +480,12 @@ class GroupsTest(TestCase):
         response = self.client.post(reverse('group_add_image', kwargs = {'pk': 999}), follow = True)
         self.assertEqual(response.status_code, 404)
 
-        image = Image.objects.create(title = 'Test image', user = self.user1)
+        # Upload an image
+        self.client.post(
+            reverse('image_upload_process'),
+            { 'image_file': open('astrobin/fixtures/test.jpg', 'rb') },
+            follow = True)
+        image = Image.objects.all().order_by('-pk')[0]
 
         # Cannot add/remove on autosubmission groups
         response = self.client.post(url,
@@ -511,6 +516,14 @@ class GroupsTest(TestCase):
             follow = True)
         self.assertEqual(response.status_code, 200)
         self.assertEqual(self.group.images.count(), 1)
+
+        response = self.client.get(reverse('image_detail', args = (image.pk,)))
+        self.assertContains(
+            response,
+            '<tr><td><a href="%s">%s</a></td></tr>' % (
+                reverse('group_detail', args = (self.group.pk,)),
+                self.group.name),
+            html = True)
 
         # Clean up
         image.delete()

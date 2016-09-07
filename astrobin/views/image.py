@@ -53,6 +53,7 @@ from astrobin.utils import to_user_timezone
 
 # AstroBin apps
 from astrobin_apps_groups.forms import GroupSelectForm
+from astrobin_apps_groups.models import Group
 from astrobin_apps_notifications.utils import push_notification
 from astrobin_apps_platesolving.models import Solution
 from nested_comments.models import NestedComment
@@ -516,6 +517,7 @@ class ImageDetailView(DetailView):
             'content_type': ContentType.objects.get(app_label = 'astrobin', model = 'image'),
             'preferred_language': preferred_language,
             'select_group_form': GroupSelectForm(user = self.request.user) if self.request.user.is_authenticated() else None,
+            'in_public_groups': Group.objects.filter(Q(public = True, autosubmission = False, _images = image) | Q(public = True, autosubmission = False, members = image.user)).distinct(),
             'select_datapool_form': PublicDataPool_SelectExistingForm(),
             'select_sharedfolder_form': PrivateSharedFolder_SelectExistingForm(user = self.request.user) if self.request.user.is_authenticated() else None,
             'has_sharedfolders': PrivateSharedFolder.objects.filter(

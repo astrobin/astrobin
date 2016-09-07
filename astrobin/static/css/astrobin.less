@@ -1347,11 +1347,14 @@ table td.empty-table {
     text-align: left !important;
 }
 .table tbody tr:hover td, .table tbody tr:hover th {
-    .gradient(#343434, #353535, #333);
+    background-color: rgba(0,0,0,0.1);
 }
 .table tbody tr.active td, .table tbody tr.active th
 .table tbody tr.active:hover td, .table tbody tr.active:hover th {
     background: #404040 url(../images/background-tile.png);
+}
+.table-striped tbody > tr:nth-child(odd) > td, .table-striped tbody > tr:nth-child(odd) > th {
+    background-color: rgba(0,0,0,0.075);
 }
 
 h1, h2, h3, h4, h5, h6 {
