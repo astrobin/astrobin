@@ -43,14 +43,7 @@
                     <b class="caret"></b>
                 </a>
                 <ul class="dropdown-menu">
-                    {% if user_is_member %}
-                        <li>
-                            <a href="#leave-modal" data-toggle="modal" class="danger">
-                                <i class="icon icon-signout"></i>
-                                {% trans "Leave group" %}
-                            </a>
-                        </li>
-                    {% else %}
+                    {% if not user_is_member %}
                         <li>
                             <a href="#join-modal" data-toggle="modal">
                                 <i class="icon icon-signin"></i>
@@ -66,6 +59,15 @@
                             {% trans "Add/remove images" %}
                         </a>
                     </li>
+                    {% endif %}
+
+                    {% if user_is_member %}
+                        <li>
+                            <a href="#leave-modal" data-toggle="modal" class="danger">
+                                <i class="icon icon-signout"></i>
+                                {% trans "Leave group" %}
+                            </a>
+                        </li>
                     {% endif %}
                 </ul>
             </li>
