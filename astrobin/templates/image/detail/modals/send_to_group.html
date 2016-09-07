@@ -1,0 +1,21 @@
+{% load bootstrap_toolkit %}
+{% load i18n %}
+
+<div class="modal hide fade" id="send-to-group-modal">
+    <div class="modal-header">
+        <a class="close" data-dismiss="modal">&times;</a>
+        <h3>{% trans "Send to group" %}</h3>
+    </div>
+    <div class="modal-body">
+        <p>
+            {% blocktrans %}Use this form to select one of your groups. The list includes all public and private non-autosubmission groups of which you are the owner or a member.{% endblocktrans %}
+        </p>
+        <form class="form-inline" id="select-group">
+            {{select_group_form|as_bootstrap}}
+        </form>
+    </div>
+    <div class="modal-footer">
+        <button id="send-to-group" class="btn btn-primary">{% trans "Send" %}</button>
+    </div>
+</div>
+

@@ -119,6 +119,22 @@ $(document).ready(function() {
         $(this).siblings('.spinner').show();
     });
 
+    $('button#send-to-group').click(function(e) {
+        var selected = $('form#select-group select option:selected').val();
+
+        $.ajax({
+            type: 'post',
+            dataType: 'json',
+            data: {'image': {{image.id}}},
+            url: '/groups/' + selected + '/add-image/',
+            success: function() {
+                window.location.href = '/groups/' + selected + '/';
+            }
+        });
+
+        e.preventDefault();
+    });
+
     $('button#send-to-datapool').click(function(e) {
         var selected = $('form#select-datapool select option:selected').val();
 

@@ -46,4 +46,8 @@ urlpatterns = patterns('',
         r'^(?P<pk>\d+)/add-remove-images/$',
         GroupAddRemoveImages.as_view(),
         name = 'group_add_remove_images'),
+    url(
+        r'^(?P<pk>\d+)/add-image/$',
+        GroupAddImage.as_view(),
+        name = 'group_add_image'),
 )

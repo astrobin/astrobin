@@ -52,6 +52,7 @@ from astrobin.models import (
 from astrobin.utils import to_user_timezone
 
 # AstroBin apps
+from astrobin_apps_groups.forms import GroupSelectForm
 from astrobin_apps_notifications.utils import push_notification
 from astrobin_apps_platesolving.models import Solution
 from nested_comments.models import NestedComment
@@ -514,6 +515,7 @@ class ImageDetailView(DetailView):
             'solar_system_main_subject': SOLAR_SYSTEM_SUBJECT_CHOICES[image.solar_system_main_subject][1] if image.solar_system_main_subject is not None else None,
             'content_type': ContentType.objects.get(app_label = 'astrobin', model = 'image'),
             'preferred_language': preferred_language,
+            'select_group_form': GroupSelectForm(user = self.request.user) if self.request.user.is_authenticated() else None,
             'select_datapool_form': PublicDataPool_SelectExistingForm(),
             'select_sharedfolder_form': PrivateSharedFolder_SelectExistingForm(user = self.request.user) if self.request.user.is_authenticated() else None,
             'has_sharedfolders': PrivateSharedFolder.objects.filter(
