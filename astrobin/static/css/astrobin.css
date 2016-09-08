@@ -644,7 +644,8 @@ body.full .navbar .nav.pull-right > li > a.btn {
 body.full .navbar .nav.pull-right > li > a.btn.btn-primary {
   color: white;
 }
-body.full .navbar .nav.pull-right > li > a.btn:hover {
+body.full .navbar .nav.pull-right > li > a.btn:hover,
+body.full .navbar .nav.pull-right > li > a.btn:focus {
   background-position: initial;
 }
 #navbar-user-scores {
