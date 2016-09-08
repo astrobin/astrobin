@@ -633,7 +633,19 @@ body {
   padding-top: 55px;
 }
 body.full {
-  padding-top: 0;
+  padding-top: 55px;
+}
+body.full .navbar .nav.pull-right > li > a.btn {
+  color: black;
+  padding: 6px;
+  margin-left: 6px;
+  text-shadow: none;
+}
+body.full .navbar .nav.pull-right > li > a.btn.btn-primary {
+  color: white;
+}
+body.full .navbar .nav.pull-right > li > a.btn:hover {
+  background-position: initial;
 }
 #navbar-user-scores {
   font-size: 66%;

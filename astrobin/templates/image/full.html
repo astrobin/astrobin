@@ -43,9 +43,9 @@
     </head>
 
     <body class="full">
-        <div class="navbar" id="top">
+        <div class="navbar navbar-fixed-top" id="top">
             <div class="navbar-inner">
-                <div class="container">
+                <div class="container-fluid">
                     <a class="brand" href="{% url 'index' %}">
                         <img src="{{STATIC_URL}}images/astrobin-logo-small.png" alt="AstroBin" />
                     </a>
@@ -65,20 +65,23 @@
                     <ul class="nav pull-right">
                         {% with request.GET.mod as mod %}
                         <li>
-                            <a href="{% get_image_url image revision_label %}{% if mod %}{% query_string "mod=mod" "" %}{% endif %}" title="{% blocktrans %}Technical card{% endblocktrans %}">
-                                <span class="icon-list-alt"><span>
-                            </a>
-                        </li>
-                        <li>
                             {% if real %}
-                                <a href="{% get_image_url image revision_label 'full' %}{% if mod %}{% query_string "mod=mod" "real" %}{% endif %}" title="{% blocktrans %}Fit to window{% endblocktrans %}">
-                                    <span class="icon-resize-full"></span>
+                                <a class="btn btn-primary navbar-btn" href="{% get_image_url image revision_label 'full' %}{% if mod %}{% query_string "mod=mod" "real" %}{% endif %}">
+                                    <i class="icon-resize-full"></i>
+                                    {% trans "Fit to window" %}
                                 </a>
                             {% else %}
-                                <a href="{% get_image_url image revision_label 'full' %}{% query_string "mod=mod,real=''" "" %}" title="{% blocktrans %}Full resolution{% endblocktrans %}">
-                                    <span class="icon-fullscreen"></span>
+                                <a class="btn btn-primary navbar-btn" href="{% get_image_url image revision_label 'full' %}{% query_string "mod=mod,real=''" "" %}">
+                                    <i class="icon-fullscreen"></i>
+                                    {% trans "Full resolution" %}
                                 </a>
                             {% endif %}
+                        </li>
+                        <li>
+                            <a class="btn navbar-btn" href="{% get_image_url image revision_label %}{% if mod %}{% query_string "mod=mod" "" %}{% endif %}">
+                                <i class="icon-list-alt"></i>
+                                {% trans "Technical card" %}
+                            </a>
                         </li>
                         {% endwith %}
                     </ul>

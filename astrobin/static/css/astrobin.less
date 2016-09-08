@@ -757,8 +757,24 @@ body {
     background: @light-panel-color url('../images/background-tile.png');
     padding-top: 55px;
 }
+
 body.full {
-    padding-top: 0;
+    padding-top: 55px;
+
+    .navbar .nav.pull-right > li > a.btn {
+        color: black;
+        padding: 6px;
+        margin-left: 6px;
+        text-shadow: none;
+
+        &.btn-primary {
+            color: white;
+        }
+
+        &:hover, &:focus {
+            background-position: initial;
+        }
+    }
 }
 
 #navbar-user-scores {
