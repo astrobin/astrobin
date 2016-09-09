@@ -19,6 +19,9 @@ class Group(models.Model):
         (31, _("Friends or partners")),
         (41, _("Geographical area")),
         (51, _("Ad-hoc collaboration")),
+        (61, _("Specific to an imaging technique")),
+        (71, _("Specific to an astrophotography target")),
+        (81, _("Specific to certain equipment")),
         (101, _("Other")),
     )
 
