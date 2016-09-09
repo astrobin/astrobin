@@ -821,6 +821,7 @@ class Image(HasSolutionMixin, models.Model):
         editable = False,
         null = True,
         related_name = 'images_moderated',
+        on_delete = models.SET_NULL,
     )
 
     class Meta:
@@ -1347,6 +1348,7 @@ class Collection(models.Model):
         null = True,
         blank = True,
         verbose_name = _("Cover image"),
+        on_delete = models.SET_NULL,
     )
 
     class Meta:
@@ -1405,7 +1407,8 @@ class DeepSky_Acquisition(Acquisition):
     filter = models.ForeignKey(
         Filter,
         null=True, blank=True,
-        verbose_name=_("Filter"))
+        verbose_name=_("Filter"),
+        on_delete = models.SET_NULL)
 
     binning = models.IntegerField(
         null=True, blank=True,
@@ -2147,6 +2150,7 @@ class ImageOfTheDay(models.Model):
         User,
         related_name = "iotds_chosen",
         null = True,
+        on_delete = models.SET_NULL,
     )
 
     class Meta:
@@ -2305,6 +2309,7 @@ class CommercialGear(models.Model):
         verbose_name = _("Image"),
         help_text = _("The official, commercial image for this product. Upload an image via the regular uploading interface, set its subject type to \"Gear\", and then choose it from this list. If you upload several revisions, they will also appear in the commercial page."),
         related_name = 'featured_gear',
+        on_delete = models.SET_NULL,
     )
 
     tagline = models.CharField(

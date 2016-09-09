@@ -6,6 +6,10 @@ from django.core.exceptions import ValidationError
 from django.db import models
 
 
+def get_sentinel_user():
+    return User.objects.get_or_create(username='deleted')[0]
+
+
 class NestedComment(models.Model):
     content_type = models.ForeignKey(
         ContentType,
@@ -20,6 +24,7 @@ class NestedComment(models.Model):
 
     author = models.ForeignKey(
         User,
+        on_delete = models.SET(get_sentinel_user),
     )
 
     text = models.TextField()
