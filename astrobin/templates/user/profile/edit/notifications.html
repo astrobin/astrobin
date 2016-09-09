@@ -8,6 +8,10 @@
     <div class="row">
         {% include 'user/profile/edit/navigation.html' %}
         <div class="span9">
+            <p class="well">
+                {% trans "Select which notifications you would like to receive via e-mail. Please note that all notifications are always delivered on-site via the notifications menu, in all cases." %}
+            </p>
+
             <form class="form-horizontal" method="post" action="{% url 'profile_save_notifications' %}">{% csrf_token %}
                 {{form|as_bootstrap}}
 
