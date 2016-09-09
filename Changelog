@@ -1,0 +1,24 @@
+2016-09-09 Salvatore Iovene <salvatore@iovene.com>
+ * v1.12
+ * Improve testing performance and add more tests
+ * Migrate many views to CVB
+ * Split notifications to separate app and improve UI
+ * Add "exclude me from competitions" setting
+ * Add menu entries to view full and real image
+ * Fix user list UI
+ * Allow users to regenerate thumbnails via "Flag thumbnail" action
+ * Reorg urls.py
+ * Add image moderation to prevent spam
+ * Expose which admin chose the IOTD, and what the contestants were
+ * Show astrometry.net job id in the image's technical card
+ * Fix long standing issue with thumbnails not updating properly
+ * Fix issue with images wrongly tagged as "Lacking data"
+ * Add "Collections" feature
+ * Add option to choose watermark font size
+ * Fix issue with capty overlays being loaded twice
+ * Remove dependency from deprecated FBV
+ * Upgrade dependencies, most notably Django 1.6 and Haystack 2
+ * Prevent Free members from mass-importing from Flickr
+ * Fix menu icon alignment
+ * ... many more bug fixes and small enhancements
+
