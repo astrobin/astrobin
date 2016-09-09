@@ -75,6 +75,11 @@ class GroupsTest(TestCase):
         self.assertContains(response, '<td class="group-members">1</td>', html = True)
         self.assertContains(response, '<td class="group-images">1</td>', html = True)
 
+        # Test that WIP images don't work
+        image.is_wip = True; image.save()
+        response = self.client.get(reverse('public_group_list'))
+        self.assertContains(response, '<td class="group-images">0</td>', html = True)
+
         # Private groups are not visible here
         self.group.public = False
         self.group.save()
@@ -87,15 +92,39 @@ class GroupsTest(TestCase):
         self.group.save()
 
     def test_group_detail_view(self):
+        # Everything okay when it's empty
         response = self.client.get(reverse('group_detail', kwargs = {'pk': self.group.pk}))
         self.assertEqual(response.status_code, 200)
+        self.assertContains(response, '<li>No images.</li>', html = True)
 
+        # Test that images are rendered
+        self.client.login(username = 'user1', password = 'password')
+        self.client.post(
+            reverse('image_upload_process'),
+            { 'image_file': open('astrobin/fixtures/test.jpg', 'rb') },
+            follow = True)
+        self.client.logout()
+        image = Image.objects.all().order_by('-pk')[0]
+        self.group.members.add(self.user1)
+        response = self.client.get(reverse('group_detail', kwargs = {'pk': self.group.pk}))
+        self.assertEqual(response.status_code, 200)
+        self.assertContains(response, image.thumbnail('gallery'))
+
+        # Test that WIP images are not rendered here
+        image.is_wip = True; image.save()
+        response = self.client.get(reverse('group_detail', kwargs = {'pk': self.group.pk}))
+        self.assertEqual(response.status_code, 200)
+        self.assertContains(response, '<li>No images.</li>', html = True)
+
+        # Test that the group is not accessible if it's private
         self.group.public = False
         self.group.save()
         response = self.client.get(reverse('group_detail', kwargs = {'pk': self.group.pk}))
         self.assertEqual(response.status_code, 403)
 
         # Restore previous state
+        image.delete()
+        self.group.members.remove(self.user1)
         self.group.public = True
         self.group.save()
 
