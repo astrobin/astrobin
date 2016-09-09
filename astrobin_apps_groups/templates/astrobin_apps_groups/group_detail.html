@@ -32,6 +32,13 @@
                             {% trans "Manage members" %}
                         </a>
                     </li>
+
+                    <li>
+                        <a href="#delete-modal" data-toggle="modal" class="danger">
+                            <i class="icon-trash"></i>
+                            {% trans "Delete group" %}
+                        </a>
+                    </li>
                 </ul>
             </li>
             {% endif %} {# owner or superuser #}
@@ -166,6 +173,22 @@
 {% endblock %}
 
 {% block modals %}
+    <div class="modal hide fade" id="delete-modal">
+        <div class="modal-header">
+            <a class="close" data-dismiss="modal">&times;</a>
+            <h3>{% trans "Delete group?" %}</h3>
+        </div>
+        <div class="modal-body">
+            <div class="alert alert-danger">
+                {% trans "Careful! Do you really want to delete this group? This operation cannot be undone!" %}
+            </div>
+
+            <form class="form-inline" action="{% url 'group_delete' group.pk %}" method="post">{% csrf_token %}
+                <input class="btn btn-danger" type="submit" value="{% trans "Delete group" %}"/>
+            </form>
+        </div>
+    </div>
+
     <div class="modal hide fade" id="join-modal">
         <div class="modal-header">
             <a class="close" data-dismiss="modal">&times;</a>

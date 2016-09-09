@@ -23,6 +23,10 @@ urlpatterns = patterns('',
         GroupUpdateView.as_view(),
         name = 'group_update'),
     url(
+        r'^(?P<pk>\d+)/delete/$',
+        GroupDeleteView.as_view(),
+        name = 'group_delete'),
+    url(
         r'^(?P<pk>\d+)/join/$',
         GroupJoinView.as_view(),
         name = 'group_join'),

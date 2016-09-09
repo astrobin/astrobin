@@ -1,0 +1,22 @@
+{% extends 'base.html' %}
+
+{% load i18n %}
+{% load url from future %}
+
+{% block title %}
+    {% trans "Delete group?" %}
+{% endblock %}
+
+{% block content %}
+    <h1>{% trans "Delete group?" %}</h1>
+
+    <div class="alert alert-danger">
+        {% trans "Careful! Do you really want to delete this group? This operation cannot be undone!" %}
+    </div>
+
+    <form class="form-horizontal" action="." method="post">{% csrf_token %}
+        <div class="form-actions">
+            <input class="btn btn-primary" type="submit" value="{% trans "Delete group" %}"/>
+        </div>
+    </form>
+{% endblock %}

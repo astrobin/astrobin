@@ -200,6 +200,43 @@ class GroupsTest(TestCase):
 
         self.client.logout()
 
+    def test_group_delete_view(self):
+        group = Group.objects.create(
+            creator = self.user1,
+            owner = self.user1,
+            name = 'Delete me',
+            category = 101,
+            public = True,
+            moderated = False,
+            autosubmission = True
+        )
+
+        url = reverse('group_delete', kwargs = {'pk': group.pk})
+
+        # Login required
+        response = self.client.post(url)
+        self.assertEqual(response.status_code, 302)
+
+        # Owner required
+        self.client.login(username = 'user2', password = 'password')
+        response = self.client.post(url)
+        self.assertEqual(response.status_code, 403)
+        self.client.logout()
+
+        # Login the owner now
+        self.client.login(username = 'user1', password = 'password')
+
+        # Group does not exist
+        response = self.client.post(reverse('group_delete', kwargs = {'pk': 999}), follow = True)
+        self.assertEqual(response.status_code, 404)
+
+        # Success
+        response = self.client.post(url)
+        self.assertRedirects(response, reverse('public_group_list'))
+        self.assertEqual(Group.objects.filter(name = 'Delete me').count(), 0)
+
+        self.client.logout()
+
     def test_group_join_view(self):
         url = reverse('group_join', kwargs = {'pk': self.group.pk})
 

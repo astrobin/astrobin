@@ -3,10 +3,11 @@ from django.contrib import messages
 from django.http import HttpResponseForbidden
 from django.views.generic import CreateView
 from django.views.generic import DetailView
+from django.views.generic import DeleteView
 from django.views.generic import ListView
 from django.views.generic import UpdateView
 from django.views.generic.base import View
-from django.core.urlresolvers import reverse
+from django.core.urlresolvers import reverse, reverse_lazy
 from django.shortcuts import get_object_or_404
 from django.shortcuts import redirect
 from django.utils.translation import ugettext as _
@@ -118,6 +119,15 @@ class GroupUpdateView(LoginRequiredMixin, RestrictToGroupOwnerMixin, RedirectToG
 
     def form_valid(self, form):
         messages.success(self.request, _("Form saved"))
+        return super(GroupUpdateView, self).form_valid(form)
+
+
+class GroupDeleteView(LoginRequiredMixin, RestrictToGroupOwnerMixin, DeleteView):
+    model = Group
+    success_url = reverse_lazy('public_group_list')
+
+    def form_valid(self, form):
+        messages.success(self.request, _("Group deleted"))
         return super(GroupUpdateView, self).form_valid(form)
 
 
