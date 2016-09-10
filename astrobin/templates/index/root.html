@@ -298,7 +298,7 @@
                     {% pybb_get_latest_topics cnt=15 as topics %}
                     <table class="table table-condensed topic-list">
                     <tbody>
-                    {% for topic in topics %}
+                    {% for topic in topics|pybb_topic_unread:request.user %}
                     <tr class="topic-row">
                         <td class="topic-state{% if topic.unread %} topic-unread{% endif %}">
                             <div class="state-indicator"></div>
