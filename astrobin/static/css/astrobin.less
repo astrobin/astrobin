@@ -1362,6 +1362,20 @@ h1, h2, h3, h4, h5, h6 {
     margin-bottom: @spacer-xxlarge;
     font-family: @headers_font;
 }
+h1:not(:first-of-type) {
+    margin-top: 60px;
+}
+h1 + .subtitle {
+    font-size: 13px;
+    font-style: italic;
+    color: #666;
+    margin-top: -22px;
+    margin-bottom: 28px;
+
+    strong {
+        color: white;
+    }
+}
 h2 {
     margin-top: @spacer-xxlarge;
 }
@@ -4413,19 +4427,6 @@ pre {
 .group-header {
     margin-bottom: 24px;
 
-    h1 {
-        margin-bottom: 2px;
-    }
-
-    .subtitle {
-        color: #909090;
-        font-size: 13px;
-
-        strong {
-            color: white;
-        }
-    }
-
     .group-info-container {
         text-align: right;
         padding-top: 20px;
@@ -4469,4 +4470,28 @@ pre {
     text-align: center;
     padding-top: 8px;
     border-top: 1px solid #393939;
+}
+
+table.group-list {
+    th, td {
+        white-space: nowrap;
+    }
+
+    td.group-membership {
+        text-align: center;
+
+        .icon {
+            text-align: center;
+            color: #ccc;
+        }
+    }
+
+    td.group-name {
+        width: 100%;
+        white-space: initial;
+    }
+
+    td.group-members, td.group-images, td.group-forum-posts {
+        text-align: center;
+    }
 }

@@ -69,9 +69,18 @@ class RedirectToGroupDetailMixin(View):
 
 # Views
 
-class PublicGroupListView(ListView):
-    queryset = Group.objects.filter(public = True)
-    template_name = 'astrobin_apps_groups/public_group_list.html'
+class GroupListView(ListView):
+    model = Group
+    template_name = 'astrobin_apps_groups/group_list.html'
+
+    def get_context_data(self, **kwargs):
+        context = super(GroupListView, self).get_context_data(**kwargs)
+        context['private_groups'] = self.get_queryset().filter(public = False).filter(
+            Q(owner = self.request.user) |
+            Q(members = self.request.user) |
+            Q(invited_users = self.request.user)) if self.request.user.is_authenticated() else None
+        context['public_groups'] = self.get_queryset().filter(public = True)
+        return context
 
 
 class GroupDetailView(RestrictPrivateGroupToMembersMixin, DetailView):
@@ -124,7 +133,7 @@ class GroupUpdateView(LoginRequiredMixin, RestrictToGroupOwnerMixin, RedirectToG
 
 class GroupDeleteView(LoginRequiredMixin, RestrictToGroupOwnerMixin, DeleteView):
     model = Group
-    success_url = reverse_lazy('public_group_list')
+    success_url = reverse_lazy('group_list')
 
     def form_valid(self, form):
         messages.success(self.request, _("Group deleted"))
@@ -180,7 +189,7 @@ class GroupLeaveView(
 
         if group.public:
             return redirect(self.get_success_url())
-        return redirect(reverse('public_group_list'))
+        return redirect(reverse('group_list'))
 
 
 class GroupManageMembersView(LoginRequiredMixin, RestrictToGroupOwnerMixin, RedirectToGroupDetailMixin, UpdateView):

@@ -54,8 +54,8 @@ class GroupsTest(TestCase):
         bss = BSS(response.content)
         self.assertEqual(len(bss('.explore-menu-groups')), 1)
 
-    def test_public_group_list_view(self):
-        response = self.client.get(reverse('public_group_list'))
+    def test_group_list_view(self):
+        response = self.client.get(reverse('group_list'))
         self.assertEqual(response.status_code, 200)
         self.assertContains(response, '<h1>Public groups</h1>', html = True)
         self.assertContains(response, '<td class="group-name"><a href="' + reverse('group_detail', args = (self.group.pk,)) + '">Test group</a></td>', html = True)
@@ -64,27 +64,27 @@ class GroupsTest(TestCase):
 
         # Add a member
         self.group.members.add(self.user2)
-        response = self.client.get(reverse('public_group_list'))
+        response = self.client.get(reverse('group_list'))
         self.assertEqual(response.status_code, 200)
         self.assertContains(response, '<td class="group-members">1</td>', html = True)
         self.assertContains(response, '<td class="group-images">0</td>', html = True)
 
         # Add an image for the one member
         image = Image.objects.create(title = 'Test image', user = self.user2)
-        response = self.client.get(reverse('public_group_list'))
+        response = self.client.get(reverse('group_list'))
         self.assertEqual(response.status_code, 200)
         self.assertContains(response, '<td class="group-members">1</td>', html = True)
         self.assertContains(response, '<td class="group-images">1</td>', html = True)
 
         # Test that WIP images don't work
         image.is_wip = True; image.save()
-        response = self.client.get(reverse('public_group_list'))
+        response = self.client.get(reverse('group_list'))
         self.assertContains(response, '<td class="group-images">0</td>', html = True)
 
-        # Private groups are not visible here
+        # Private groups that do not pertain this user are not visible here
         self.group.public = False
         self.group.save()
-        response = self.client.get(reverse('public_group_list'))
+        response = self.client.get(reverse('group_list'))
         self.assertNotContains(response, 'Test group')
 
         image.delete()
@@ -242,7 +242,7 @@ class GroupsTest(TestCase):
         # Success
         self.assertEqual(Forum.objects.filter(category__slug = 'group-forums', name = 'Delete me').count(), 1)
         response = self.client.post(url)
-        self.assertRedirects(response, reverse('public_group_list'))
+        self.assertRedirects(response, reverse('group_list'))
         self.assertEqual(Group.objects.filter(name = 'Delete me').count(), 0)
         self.assertEqual(Forum.objects.filter(category__slug = 'group-forums', name = 'Delete me').count(), 0)
 
@@ -352,7 +352,7 @@ class GroupsTest(TestCase):
         response = self.client.post(url, follow = True)
         self.assertFalse(self.user1 in self.group.members.all())
         self.assertFalse(image in self.group.images)
-        self.assertRedirects(response, reverse('public_group_list'))
+        self.assertRedirects(response, reverse('group_list'))
         self._assertMessage(response, "success unread", "You have left the group")
         self.group.public = True; self.group.save()
         self.group.members.add(self.user1)

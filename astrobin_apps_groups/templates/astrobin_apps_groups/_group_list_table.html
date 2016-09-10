@@ -1,0 +1,36 @@
+{% load i18n %}
+
+<table class="table group-list">
+    <thead>
+        <th class="group-membership"></th>
+        <th class="group-name">{% trans "Name" %}</th>
+        <th class="group-category">{% trans "Category" %}</th>
+        <th class="group-members">{% trans "Members" %}</th>
+        <th class="group-images">{% trans "Images" %}</th>
+        <th class="group-forum-posts">{% trans "Forum posts" %}</th>
+    </thead>
+    <tbody>
+        {% for group in groups %}
+            <tr>
+                <td class="group-membership">
+                    {% if request.user == group.owner %}
+                        <i class="icon icon-fixed-width icon-certificate" rel="tooltip" title="{% trans "Owner" %}"></i>
+                    {% endif %}
+
+                    {% if request.user != group.owner and request.user in group.members.all %}
+                        <i class="icon icon-fixed-width icon-user" rel="tooltip" title="{% trans "Member" %}"></i>
+                    {% endif %}
+
+                    {% if request.user != group.owner and request.user not in group.members.all and request.user in group.invited_users.all %}
+                        <i class="icon icon-fixed-width icon-question" rel="tooltip" title="{% trans "Invited" %}"></i>
+                    {% endif %}
+                </td>
+                <td class="group-name"><a href="{% url 'group_detail' group.pk %}">{{group.name}}</a></td>
+                <td class="group-category">{{group.category_humanized}}</td>
+                <td class="group-members">{{group.members.count}}</td>
+                <td class="group-images">{{group.images.count}}</td>
+                <td class="group-forum-posts">{{group.forum.post_count}}</td>
+            </tr>
+        {% endfor %}
+    </tbody>
+</table>

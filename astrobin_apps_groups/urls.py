@@ -8,8 +8,8 @@ from astrobin_apps_groups.views import *
 urlpatterns = patterns('',
     url(
         r'^$',
-        PublicGroupListView.as_view(),
-        name = 'public_group_list'),
+        GroupListView.as_view(),
+        name = 'group_list'),
     url(
         r'^create/$',
         GroupCreateView.as_view(),

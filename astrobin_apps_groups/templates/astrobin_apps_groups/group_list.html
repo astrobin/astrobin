@@ -1,0 +1,48 @@
+{% extends 'base.html' %}
+
+{% load i18n %}
+
+{% block title %}{% trans "Public groups" %}{% endblock %}
+
+{% block content %}
+    <div class="subnav subnav-fixed">
+        <ul class="nav nav-pills">
+            <li class="dropdown">
+                <a class="dropdown-toggle" data-toggle="dropdown" href="#">
+                    <i class="icon-bolt icon-white"></i>
+                    {% trans "Actions" %}
+                    <b class="caret"></b>
+                </a>
+                <ul class="dropdown-menu">
+                    <li>
+                        <a href="{% url 'group_create' %}">
+                            <i class="icon-plus-sign"></i>
+                            {% trans "Create new group" %}
+                        </a>
+                    </li>
+                </ul>
+            </li>
+        </ul> <!-- nav -->
+    </div> <!-- subnav -->
+
+
+    {% if private_groups %}
+        <h1>{% trans "Your private groups" %}</h1>
+        <div class="subtitle">{% trans "You own, or are a member of, or were invited to, these private groups." %}</div>
+        {% with private_groups as groups %}
+            {% include 'astrobin_apps_groups/_group_list_table.html' %}
+        {% endwith %}
+    {% endif %}
+
+    {% if public_groups %}
+        <h1>{% trans "Public groups" %}</h1>
+        <div class="subtitle">{% trans "Open to the whole community." %}</div>
+        {% with public_groups as groups %}
+            {% include 'astrobin_apps_groups/_group_list_table.html' %}
+        {% endwith %}
+    {% endif %}
+
+    {% if not object_list %}
+        <p>{% trans "No groups available." %}</p>
+    {% endif %}
+{% endblock %}

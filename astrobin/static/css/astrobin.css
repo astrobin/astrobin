@@ -1222,6 +1222,19 @@ h6 {
   margin-bottom: 28px;
   font-family: Georgia, Times, serif;
 }
+h1:not(:first-of-type) {
+  margin-top: 60px;
+}
+h1 + .subtitle {
+  font-size: 13px;
+  font-style: italic;
+  color: #666;
+  margin-top: -22px;
+  margin-bottom: 28px;
+}
+h1 + .subtitle strong {
+  color: white;
+}
 h2 {
   margin-top: 28px;
 }
@@ -4199,16 +4212,6 @@ pre {
 .group-header {
   margin-bottom: 24px;
 }
-.group-header h1 {
-  margin-bottom: 2px;
-}
-.group-header .subtitle {
-  color: #909090;
-  font-size: 13px;
-}
-.group-header .subtitle strong {
-  color: white;
-}
 .group-header .group-info-container {
   text-align: right;
   padding-top: 20px;
@@ -4253,4 +4256,24 @@ pre {
   text-align: center;
   padding-top: 8px;
   border-top: 1px solid #393939;
+}
+table.group-list th,
+table.group-list td {
+  white-space: nowrap;
+}
+table.group-list td.group-membership {
+  text-align: center;
+}
+table.group-list td.group-membership .icon {
+  text-align: center;
+  color: #ccc;
+}
+table.group-list td.group-name {
+  width: 100%;
+  white-space: initial;
+}
+table.group-list td.group-members,
+table.group-list td.group-images,
+table.group-list td.group-forum-posts {
+  text-align: center;
 }
