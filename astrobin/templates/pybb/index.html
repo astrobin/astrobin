@@ -30,6 +30,12 @@
         </div>
     {% endif %}
 
+    {% if category and category.slug == 'group-forums' %}
+        <div class="alert alert-warning">
+            {% trans "Group forums are only accessible from the group pages." %}
+        </div>
+    {% endif %}
+
     {% if categories %}
         <table class="forums table {% if category %}category-table{% elif parent_forum %}child-forums-table{% endif %}">
         {% for category in categories %}
