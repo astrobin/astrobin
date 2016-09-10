@@ -180,7 +180,7 @@
         </div>
         <div class="modal-body">
             <div class="alert alert-danger">
-                {% trans "Careful! Do you really want to delete this group? This operation cannot be undone!" %}
+                {% trans "Careful! Do you really want to delete this group? This operation cannot be undone and the group's forum and all its topics will be irreversibly deleted!" %}
             </div>
 
             <form class="form-inline" action="{% url 'group_delete' group.pk %}" method="post">{% csrf_token %}

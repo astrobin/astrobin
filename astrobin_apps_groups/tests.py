@@ -6,6 +6,7 @@ from django.test import TestCase
 # Third party
 from beautifulsoupselect import BeautifulSoupSelect as BSS
 import simplejson as json
+from pybb.models import Forum
 
 # This app
 from astrobin_apps_groups.models import Group
@@ -231,9 +232,11 @@ class GroupsTest(TestCase):
         self.assertEqual(response.status_code, 404)
 
         # Success
+        self.assertEqual(Forum.objects.filter(category__slug = 'group-forums', name = 'Delete me').count(), 1)
         response = self.client.post(url)
         self.assertRedirects(response, reverse('public_group_list'))
         self.assertEqual(Group.objects.filter(name = 'Delete me').count(), 0)
+        self.assertEqual(Forum.objects.filter(category__slug = 'group-forums', name = 'Delete me').count(), 0)
 
         self.client.logout()
 
