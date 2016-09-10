@@ -98,7 +98,7 @@ class GroupsTest(TestCase):
         self.assertEqual(response.status_code, 200)
         self.assertContains(response, '<li>No images.</li>', html = True)
 
-        # Test that images are rendered
+        # Test that images are rendered and members can access
         self.client.login(username = 'user1', password = 'password')
         self.client.post(
             reverse('image_upload_process'),
@@ -122,6 +122,14 @@ class GroupsTest(TestCase):
         self.group.save()
         response = self.client.get(reverse('group_detail', kwargs = {'pk': self.group.pk}))
         self.assertEqual(response.status_code, 403)
+
+        # However, invitees can access
+        self.client.login(username = 'user2', password = 'password')
+        self.group.members.remove(self.user1)
+        self.group.invited_users.add(self.user2)
+        response = self.client.get(reverse('group_detail', kwargs = {'pk': self.group.pk}))
+        self.assertEqual(response.status_code, 200)
+        self.client.logout()
 
         # Restore previous state
         image.delete()

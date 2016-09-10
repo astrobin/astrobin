@@ -29,7 +29,7 @@ from astrobin_apps_groups.models import *
 class RestrictPrivateGroupToMembersMixin(View):
     def dispatch(self, request, *args, **kwargs):
         group = get_object_or_404(Group, pk = kwargs['pk'])
-        if not (group.public or request.user == group.owner or request.user in group.members.all()):
+        if not (group.public or request.user == group.owner or request.user in group.members.all() or request.user in group.invited_users.all()):
             return HttpResponseForbidden()
         return super(RestrictPrivateGroupToMembersMixin, self).dispatch(request, *args, **kwargs)
 
