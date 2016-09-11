@@ -55,10 +55,7 @@ class GroupSelectForm(forms.Form):
     def __init__(self, user, **kwargs):
         super(GroupSelectForm, self).__init__(**kwargs)
         self.fields['groups'].choices = Group.objects\
-            .filter(autosubmission = False)\
-            .filter(
-                Q(owner = user) |
-                Q(members = user))\
+            .filter(autosubmission = False, members = user)\
             .distinct()\
             .values_list('id', 'name')
 
