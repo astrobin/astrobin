@@ -265,6 +265,9 @@ class GroupsTest(TestCase):
         response = self.client.post(reverse('group_join', kwargs = {'pk': 999}), follow = True)
         self.assertEqual(response.status_code, 404)
 
+        self.client.logout()
+        self.client.login(username = 'user2', password = 'password')
+
         # Private group, uninvited user
         self.group.public = False; self.group.save()
         response = self.client.post(url, follow = True)
@@ -272,8 +275,6 @@ class GroupsTest(TestCase):
         self.group.public = True; self.group.save()
 
         # Public group, but moderated
-        self.client.logout()
-        self.client.login(username = 'user2', password = 'password')
         self.group.moderated = True; self.group.save()
         self.group.moderators.add(self.group.owner);
         response = self.client.post(url, follow = True)
@@ -284,39 +285,35 @@ class GroupsTest(TestCase):
         self.assertTrue(self.user2 in self.group.join_requests.all())
         self.group.moderated = False; self.group.save()
         self.group.moderators.clear()
-        self.client.logout()
-        self.client.login(username = 'user1', password = 'password')
 
         # Join successful
-        self.group.invited_users.add(self.user1)
         response = self.client.post(url, follow = True)
         self.assertEqual(response.status_code, 200)
         self._assertMessage(response, "success unread", "You have joined the group")
-        self.assertTrue(self.user1 in self.group.members.all())
-        self.assertFalse(self.user1 in self.group.invited_users.all())
+        self.assertTrue(self.user2 in self.group.members.all())
 
         # Second attempt results in error "already joined"
         response = self.client.post(url, follow = True)
         self.assertEqual(response.status_code, 200)
         self._assertMessage(response, "error unread", "You already were a member of this group")
-        self.group.members.remove(self.user1)
+        self.group.members.remove(self.user2)
 
         # If the group is not public, only invited members can join
         self.group.public = False; self.group.save()
-
         response = self.client.post(url, follow = True)
         self.assertEqual(response.status_code, 403)
 
-        self.group.invited_users.add(self.user1)
-
+        self.group.invited_users.add(self.user2)
         response = self.client.post(url, follow = True)
         self.assertEqual(response.status_code, 200)
         self._assertMessage(response, "success unread", "You have joined the group")
-        self.assertTrue(self.user1 in self.group.members.all())
+        self.assertTrue(self.user2 in self.group.members.all())
+        self.assertFalse(self.user2 in self.group.invited_users.all())
 
         # Restore group state
-        self.group.invited_users.remove(self.user1)
-        self.group.members.remove(self.user1)
+        self.group.invited_users.clear()
+        self.group.members.clear()
+        self.group.join_requests.clear()
         self.group.public = True
         self.group.save()
 

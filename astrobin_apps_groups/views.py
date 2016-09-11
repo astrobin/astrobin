@@ -147,12 +147,18 @@ class GroupJoinView(LoginRequiredMixin, RedirectToGroupDetailMixin, UpdateView):
     def post(self, request, *args, **kwargs):
         group = self.get_object()
 
+        def doAdd(user, group):
+            group.members.add(user)
+            group.invited_users.remove(user)
+            group.join_requests.remove(user)
+            messages.success(request, _("You have joined the group"))
+
         if request.user in group.members.all():
             messages.error(request, _("You already were a member of this group"))
             return redirect(self.get_success_url())
 
-        if group.public or request.user in group.invited_users.all():
-            if group.moderated:
+        if group.public:
+            if group.moderated and request.user != group.owner:
                 group.join_requests.add(request.user)
                 messages.warning(request, _("This is a moderated group, and your join request will be reviewed by a moderator"))
                 push_notification(group.moderators.all(), 'new_group_join_request',
@@ -161,11 +167,14 @@ class GroupJoinView(LoginRequiredMixin, RedirectToGroupDetailMixin, UpdateView):
                         'group_name': group.name,
                         'url': reverse('group_manage_members', args = (group.pk,)),
                     })
+                return redirect(self.get_success_url())
             else:
-                group.members.add(request.user)
-                group.invited_users.remove(request.user)
-                messages.success(request, _("You have joined the group"))
-            return redirect(self.get_success_url())
+                doAdd(request.user, group)
+                return redirect(self.get_success_url())
+        else:
+            if request.user in group.invited_users.all() or request.user == group.owner:
+                doAdd(request.user, group)
+                return redirect(self.get_success_url())
 
         return HttpResponseForbidden()
 
