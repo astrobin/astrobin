@@ -62,6 +62,24 @@
 
     <h2>{% trans "Members" %}</h2>
     {% if object.members.all %}
+        <table class="table table-striped members">
+            <thead>
+                <tr>
+                    <th>{% trans "Name" %}</th>
+                </tr>
+            </thead>
+            <tbody>
+                {% for user in object.members.all %}
+                    <tr>
+                        <td>
+                            <a href="{% url 'user_page' user.username %}">
+                                {{user.userprofile}}
+                            </a>
+                        </td>
+                    </tr>
+                {% endfor %}
+            </tbody>
+        </table>
     {% else %}
         {% trans "This group has no members." %}
     {% endif %}
