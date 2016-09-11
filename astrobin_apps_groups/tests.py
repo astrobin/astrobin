@@ -166,8 +166,22 @@ class GroupsTest(TestCase):
         self.assertTrue(group.owner in group.members.all())
         self.assertTrue(group.owner in group.moderators.all())
         self.assertTrue(group.forum != None)
-
         group.delete()
+
+        # Test the autosubmission/category combo
+        response = self.client.post(url, {
+            'name': 'Test create group',
+            'description': 'Description',
+            'category': 101,
+            'autosubmission': True,
+        }, follow = True)
+        self.assertEqual(response.status_code, 200)
+        self.assertFormError(response, 'form', 'category',
+            "Only the following category support autosubmission: " \
+            "Professional network, Club or association, " \
+            "Internet commmunity, Friends or partners, Geographical area"
+        )
+
         self.client.logout()
 
     def test_group_update_view(self):

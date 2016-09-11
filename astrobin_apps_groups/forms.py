@@ -6,17 +6,33 @@ from django.utils.translation import ugettext as _
 # This app
 from astrobin_apps_groups.models import *
 
+class GroupUpdateBaseForm(forms.ModelForm):
+    def clean(self):
+        cleaned_data = super(GroupUpdateBaseForm, self).clean()
+        category = cleaned_data.get("category")
+        autosubmission = cleaned_data.get("autosubmission")
 
-class GroupCreateForm(forms.ModelForm):
+        if autosubmission and category not in (1, 11, 21, 31, 41):
+            msg = "Only the following category support autosubmission: " \
+                  "Professional network, Club or association, " \
+                  "Internet commmunity, Friends or partners, Geographical area"
+
+            self._errors['category'] = self.error_class([msg])
+            del cleaned_data['category']
+
+        return cleaned_data
+
     class Meta:
         model = Group
         fields = ['name', 'description', 'category', 'public', 'moderated', 'autosubmission',]
 
 
-class GroupUpdateForm(forms.ModelForm):
-    class Meta:
-        model = Group
-        fields = ['name', 'description', 'category', 'public', 'moderated', 'autosubmission',]
+class GroupCreateForm(GroupUpdateBaseForm):
+    pass
+
+
+class GroupUpdateForm(GroupUpdateBaseForm):
+    pass
 
 
 class GroupInviteForm(forms.ModelForm):
