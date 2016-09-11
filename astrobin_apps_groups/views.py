@@ -114,10 +114,13 @@ class GroupCreateView(LoginRequiredMixin, RedirectToGroupDetailMixin, CreateView
         group = form.save(commit = False)
         group.creator = self.request.user
         group.owner = self.request.user
+
+        group.save() # Need to save before I can have a m2m
+        group.members.add(group.owner)
         if group.moderated:
-            group.save() # Need to save before I can have a m2m
             group.moderators.add(group.owner)
         messages.success(self.request, _("Your new group was created successfully"))
+
         return super(GroupCreateView, self).form_valid(form)
 
 

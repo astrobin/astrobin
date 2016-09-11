@@ -163,6 +163,7 @@ class GroupsTest(TestCase):
         self.assertEqual(group.category, 101)
         self.assertEqual(group.public, True)
         self.assertEqual(group.moderated, True)
+        self.assertTrue(group.owner in group.members.all())
         self.assertTrue(group.owner in group.moderators.all())
         self.assertTrue(group.forum != None)
 
