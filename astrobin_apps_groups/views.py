@@ -86,7 +86,7 @@ class GroupListView(ListView):
         context['private_groups'] = self.get_queryset().filter(public = False).filter(
             Q(owner = self.request.user) |
             Q(members = self.request.user) |
-            Q(invited_users = self.request.user)) if self.request.user.is_authenticated() else None
+            Q(invited_users = self.request.user)).distinct() if self.request.user.is_authenticated() else None
         context['public_groups'] = self.get_queryset().filter(public = True)
         return context
 
