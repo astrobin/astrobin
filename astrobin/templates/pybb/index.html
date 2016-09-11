@@ -32,33 +32,31 @@
 
     {% if category and category.slug == 'group-forums' %}
         <div class="alert alert-warning">
-            {% trans "Group forums are only accessible from the group pages." %}
+            {% trans "These are the forums in the groups you have access to." %}
         </div>
     {% endif %}
 
     {% if categories %}
         <table class="forums table {% if category %}category-table{% elif parent_forum %}child-forums-table{% endif %}">
         {% for category in categories %}
-            {% if category.slug != 'group-forums' %}
-                <tr class="forum-row head-row">
-                    <th class="forum-status">
-                        &nbsp;
-                    </th>
-                    <th class="forum-name">
-                        {{category.name}}
-                    </th>
-                    <th class="forum-topic-count hidden-phone">
-                        {% trans "Topics" %}
-                    </th>
-                    <th class="forum-post-count hidden-phone">
-                        {% trans "Posts" %}
-                    </th>
-                    <th class="forum-last-post hidden-phone">
-                        {% trans "Last posts" %}
-                    </th>
-                </tr>
-                {% include 'pybb/forum_list.html' with forum_list=category.forums_accessed category=category parent_forum='' %}
-            {% endif %}
+            <tr class="forum-row head-row">
+                <th class="forum-status">
+                    &nbsp;
+                </th>
+                <th class="forum-name">
+                    {{category.name}}
+                </th>
+                <th class="forum-topic-count hidden-phone">
+                    {% trans "Topics" %}
+                </th>
+                <th class="forum-post-count hidden-phone">
+                    {% trans "Posts" %}
+                </th>
+                <th class="forum-last-post hidden-phone">
+                    {% trans "Last posts" %}
+                </th>
+            </tr>
+            {% include 'pybb/forum_list.html' with forum_list=category.forums_accessed category=category parent_forum='' %}
         {% endfor %}
         </table>
     {% else %}

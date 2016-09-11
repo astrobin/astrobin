@@ -22,12 +22,20 @@
         </td>
     </tr>
 {% empty %}
-    {% if category %}
+    {% if category and category.slug != 'group-forums' %}
     <tr>
-        <td>
-            {% trans "No forums created" %} - 
-            <a href="{% url 'admin:pybb_forum_add' %}">{% trans "Add forum now" %}</a>
+        <td colspan="5">
+            {% trans "No forums created" %}
         </td>
     </tr>
     {%  endif %}
+
+    {% if category and category.slug == 'group-forums' %}
+    <tr>
+        <td colspan="5">
+            {% trans "You are not a member of any groups" %}
+        </td>
+    </tr>
+    {%  endif %}
+
 {% endfor %}
