@@ -58,6 +58,14 @@ class RestrictToNonAutosubmissionGroupsMixin(View):
         return super(RestrictToNonAutosubmissionGroupsMixin, self).dispatch(request, *args, **kwargs)
 
 
+class RestrictToModeratedGroupsMixin(View):
+    def dispatch(self, request, *args, **kwargs):
+        group = get_object_or_404(Group, pk = kwargs['pk'])
+        if not group.moderated:
+            return HttpResponseForbidden()
+        return super(RestrictToModeratedGroupsMixin, self).dispatch(request, *args, **kwargs)
+
+
 class RedirectToGroupDetailMixin(View):
     def get_success_url(self):
         try:
@@ -332,6 +340,83 @@ class GroupAddImage(
 
             return self.render_json_response({
                 'image': image.pk,
+            })
+
+        # Only AJAX allowed
+        return HttpResponseForbidden()
+
+
+class GroupAddModerator(
+        JSONResponseMixin, LoginRequiredMixin, RestrictToGroupOwnerMixin,
+        RestrictToModeratedGroupsMixin, UpdateView):
+    model = Group
+
+    def get_success_url(self):
+        return reverse('group_detail', kwargs = {'pk': self.kwargs['pk']})
+
+    def post(self, request, *args, **kwargs):
+        if request.is_ajax():
+            group = self.get_object()
+            user = User.objects.get(pk = self.request.POST.get('user'))
+            if user not in group.members.all():
+                return HttpResponseForbidden()
+            group.moderators.add(user)
+            return self.render_json_response({
+                'moderators': [{
+                    'pk': x.pk,
+                    'url': reverse('user_page', args = (x.username,)),
+                    'display_name': x.userprofile.get_display_name(),
+                    'remove_url': reverse('group_remove_moderator', args = (group.pk,)),
+                } for x in group.moderators.all()]
+            })
+
+        # Only AJAX allowed
+        return HttpResponseForbidden()
+
+
+class GroupRemoveModerator(
+        JSONResponseMixin, LoginRequiredMixin, RestrictToGroupOwnerMixin,
+        RestrictToModeratedGroupsMixin, UpdateView):
+    model = Group
+
+    def get_success_url(self):
+        return reverse('group_detail', kwargs = {'pk': self.kwargs['pk']})
+
+    def post(self, request, *args, **kwargs):
+        if request.is_ajax():
+            group = self.get_object()
+            user = User.objects.get(pk = self.request.POST.get('user'))
+            if user not in group.moderators.all():
+                return HttpResponseForbidden()
+            group.moderators.remove(user)
+            return self.render_json_response({
+                'moderator': {
+                    'pk': user.pk,
+                    'add_url': reverse('group_add_moderator', args = (group.pk,)),
+                },
+            })
+
+        # Only AJAX allowed
+        return HttpResponseForbidden()
+
+
+class GroupRemoveMember(
+        JSONResponseMixin, LoginRequiredMixin, RestrictToGroupOwnerMixin,
+        UpdateView):
+    model = Group
+
+    def get_success_url(self):
+        return reverse('group_detail', kwargs = {'pk': self.kwargs['pk']})
+
+    def post(self, request, *args, **kwargs):
+        if request.is_ajax():
+            group = self.get_object()
+            user = User.objects.get(pk = self.request.POST.get('user'))
+            if user not in group.members.all():
+                return HttpResponseForbidden()
+            group.members.remove(user)
+            return self.render_json_response({
+                'member': user.pk,
             })
 
         # Only AJAX allowed

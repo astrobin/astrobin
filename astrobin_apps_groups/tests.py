@@ -619,3 +619,164 @@ class GroupsTest(TestCase):
         self.group.members.remove(self.user1)
         self.group.autosubmission = True
         self.client.logout()
+
+    def test_group_remove_member_view(self):
+        url = reverse('group_remove_member', kwargs = {'pk': self.group.pk})
+
+        # Login required
+        response = self.client.get(url)
+        self.assertEqual(response.status_code, 302)
+
+        # Owner required
+        self.client.login(username = 'user2', password = 'password')
+        response = self.client.post(url,
+            {
+                'user': "%d" % self.user1.pk,
+            },
+            HTTP_X_REQUESTED_WITH = 'XMLHttpRequest',
+            follow = True)
+        self.assertEqual(response.status_code, 403)
+        self.client.logout()
+        self.client.login(username = 'user1', password = 'password')
+
+        # Group does not exist
+        response = self.client.post(reverse('group_remove_member', kwargs = {'pk': 999}), follow = True)
+        self.assertEqual(response.status_code, 404)
+
+        # Only AJAX allowed
+        response = self.client.post(url,
+            {
+                'user': "%d" % self.user1.pk,
+            },
+            follow = True)
+        self.assertEqual(response.status_code, 403)
+
+        # User must be member
+        response = self.client.post(url,
+            {
+                'user': "%d" % self.user1.pk,
+            },
+            HTTP_X_REQUESTED_WITH = 'XMLHttpRequest',
+            follow = True)
+        self.assertEqual(response.status_code, 403)
+
+        # Successfully remove
+        self.group.members.add(self.user2)
+        response = self.client.post(url,
+            {
+                'user': "%d" % self.user2.pk,
+            },
+            HTTP_X_REQUESTED_WITH = 'XMLHttpRequest',
+            follow = True)
+        self.assertEqual(response.status_code, 200)
+        self.assertEqual(self.group.members.count(), 0)
+
+        # Clean up
+        self.client.logout()
+
+    def test_group_add_moderator_view(self):
+        url = reverse('group_add_moderator', kwargs = {'pk': self.group.pk})
+
+        # Login required
+        response = self.client.get(url)
+        self.assertEqual(response.status_code, 302)
+
+        self.client.login(username = 'user1', password = 'password')
+
+        # Member required
+        response = self.client.post(url, follow = True)
+        self.assertEqual(response.status_code, 403)
+
+        self.group.members.add(self.user1)
+
+        # Group does not exist
+        response = self.client.post(reverse('group_add_moderator', kwargs = {'pk': 999}), follow = True)
+        self.assertEqual(response.status_code, 404)
+
+        # Only AJAX allowed
+        response = self.client.post(url,
+            {
+                'user': "%d" % self.user1.pk,
+            },
+            follow = True)
+        self.assertEqual(response.status_code, 403)
+
+        # Group is not moderated
+        self.group.moderated = False; self.group.save()
+        response = self.client.post(url,
+            {
+                'user': "%d" % self.user1.pk,
+            },
+            HTTP_X_REQUESTED_WITH = 'XMLHttpRequest',
+            follow = True)
+        self.assertEqual(response.status_code, 403)
+        self.group.moderated = True; self.group.save()
+
+        # Successfully add
+        response = self.client.post(url,
+            {
+                'user': "%d" % self.user1.pk,
+            },
+            HTTP_X_REQUESTED_WITH = 'XMLHttpRequest',
+            follow = True)
+        self.assertEqual(response.status_code, 200)
+        self.assertEqual(self.group.moderators.count(), 1)
+
+        # Clean up
+        self.group.moderators.clear()
+        self.client.logout()
+
+    def test_group_remove_moderator_view(self):
+        url = reverse('group_remove_moderator', kwargs = {'pk': self.group.pk})
+
+        # Login required
+        response = self.client.get(url)
+        self.assertEqual(response.status_code, 302)
+
+        self.client.login(username = 'user1', password = 'password')
+
+        # Group does not exist
+        response = self.client.post(reverse('group_remove_moderator', kwargs = {'pk': 999}), follow = True)
+        self.assertEqual(response.status_code, 404)
+
+        # Only AJAX allowed
+        response = self.client.post(url,
+            {
+                'user': "%d" % self.user1.pk,
+            },
+            follow = True)
+        self.assertEqual(response.status_code, 403)
+
+        # Group is not moderated
+        self.group.moderated = False; self.group.save()
+        response = self.client.post(url,
+            {
+                'user': "%d" % self.user1.pk,
+            },
+            HTTP_X_REQUESTED_WITH = 'XMLHttpRequest',
+            follow = True)
+        self.assertEqual(response.status_code, 403)
+        self.group.moderated = True; self.group.save()
+
+        # User must be moderator
+        response = self.client.post(url,
+            {
+                'user': "%d" % self.user1.pk,
+            },
+            HTTP_X_REQUESTED_WITH = 'XMLHttpRequest',
+            follow = True)
+        self.assertEqual(response.status_code, 403)
+
+        # Successfully remove
+        self.group.moderators.add(self.user1)
+        response = self.client.post(url,
+            {
+                'user': "%d" % self.user1.pk,
+            },
+            HTTP_X_REQUESTED_WITH = 'XMLHttpRequest',
+            follow = True)
+        self.assertEqual(response.status_code, 200)
+        self.assertEqual(self.group.moderators.count(), 0)
+
+        # Clean up
+        self.client.logout()

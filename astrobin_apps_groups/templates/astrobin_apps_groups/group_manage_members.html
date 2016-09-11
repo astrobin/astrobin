@@ -44,12 +44,15 @@
                         </a>
                     </td>
                     <td>
-                        <button
+                        <a
+                            href="#"
                             class="revoke-invitation btn btn-mini"
+                            rel="tooltip"
+                            title="{% trans "Revoke invitation" %}"
                             data-user="{{user.username}}"
                             data-url="{% url 'group_revoke_invitation' object.pk %}">
-                            &times;
-                        </button>
+                            <i class="icon icon-trash"></i>
+                        </a>
                     </td>
                 </tr>
             {% empty %}
@@ -60,20 +63,80 @@
         </tbody>
     </table>
 
+    {% if object.moderated %}
+        <h2>{% trans "Moderators" %}</h2>
+        <table class="table table-striped moderators">
+            <thead>
+                <tr>
+                    <th>{% trans "Name" %}</th>
+                    <th>{% trans "Actions" %}</th>
+                </tr>
+            </thead>
+            <tbody>
+                {% for user in object.moderators.all %}
+                    <tr>
+                        <td>
+                            <a href="{% url 'user_page' user.username %}">
+                                {{user.userprofile}}
+                            </a>
+                        </td>
+                        <td>
+                            <a
+                               href="#"
+                               class="btn btn-mini remove-moderator"
+                               rel="tooltip"
+                               title="{% trans "Remove moderator status" %}"
+                               data-user="{{user.pk}}"
+                               data-url="{% url 'group_remove_moderator' object.pk %}">
+                                <i class="icon icon-trash"></i>
+                            </a>
+                        </td>
+                    </tr>
+                {% empty %}
+                    <tr><td colspan="2" class="empty-table">{% trans "This group has no moderators." %}</td></tr>
+                {% endfor %}
+            </tbody>
+        </table>
+    {% endif %}
+
     <h2>{% trans "Members" %}</h2>
     {% if object.members.all %}
         <table class="table table-striped members">
             <thead>
                 <tr>
                     <th>{% trans "Name" %}</th>
+                    <th>{% trans "Actions" %}</th>
                 </tr>
             </thead>
             <tbody>
                 {% for user in object.members.all %}
-                    <tr>
+                <tr data-user="{{user.pk}}">
                         <td>
                             <a href="{% url 'user_page' user.username %}">
                                 {{user.userprofile}}
+                            </a>
+                        </td>
+                        <td>
+                            {% if object.moderated and not user in object.moderators.all %}
+                                <a
+                                   href="#"
+                                   class="btn btn-mini add-moderator"
+                                   rel="tooltip"
+                                   title="{% trans "Make moderator" %}"
+                                   data-user="{{user.pk}}"
+                                   data-url="{% url 'group_add_moderator' object.pk %}">
+                                    <i class="icon icon-legal"></i>
+                                </a>
+                            {% endif %}
+
+                            <a
+                               href="#"
+                               class="btn btn-mini remove-member"
+                               rel="tooltip"
+                               title="{% trans "Remove member" %}"
+                               data-user="{{user.pk}}"
+                               data-url="{% url 'group_remove_member' object.pk %}">
+                                <i class="icon icon-trash"></i>
                             </a>
                         </td>
                     </tr>
@@ -146,14 +209,18 @@
                                         '<a href="' + users[i].url + '">' + users[i].display_name + '</a>' +
                                     '</td>' +
                                     '<td>' +
-                                        '<button ' +
+                                        '<a ' +
+                                            'href="#"' +
+                                            'rel="tooltip" ' +
+                                            'title="{% trans "Revoke invitation" %}" ' +
                                             'class="revoke-invitation btn btn-mini" ' +
                                             'data-user="' + users[i].username + '" ' +
                                             'data-url="' + users[i].revoke_url + '">' +
-                                            '&times;' +
-                                         '</button>' +
+                                             '<i class="icon icon-trash"></i>' +
+                                         '</a>' +
                                      '</td>' +
                                 '</tr>')
+                            $row.find('[rel=tooltip]').tooltip();
                             $table.find('tbody').append($row);
                         }
 
@@ -162,7 +229,7 @@
                 }
             });
 
-            $("button.revoke-invitation").live('click', function(e) {
+            $("a.revoke-invitation").live('click', function(e) {
                 e.preventDefault();
 
                 var $button = $(this),
@@ -184,6 +251,130 @@
                                 $('<tr>' +
                                        '<td class="empty-table" colspan="2">' +
                                             '{% trans "This group has no active invitations." %}' +
+                                       '</td>' +
+                                  '</tr>')
+                        );
+                    }
+                });
+            });
+
+            {% if object.moderated %}
+                $("a.add-moderator").live('click', function(e) {
+                    e.preventDefault();
+
+                    var $button = $(this),
+                        user = $button.data('user'),
+                        $mods_table = $('table.moderators');
+
+                    $.ajax({
+                        url: $button.data('url'),
+                        type: 'POST',
+                        cache: false,
+                        timeout: 10000,
+                        data: {'user': user},
+                        dataType: 'json'
+                    }).done(function(data) {
+                        $mods_table.find('tbody tr').remove();
+                        for (var i = 0; i < data.moderators.length; i++) {
+                            var user = data.moderators[i];
+                            var $row = $(
+                                '<tr>' +
+                                    '<td>' +
+                                        '<a href="' + user.url + '">' + user.display_name + '</a>' +
+                                    '</td>' +
+                                    '<td>' +
+                                        '<a ' +
+                                           'href="#"' +
+                                           'class="btn btn-mini remove-moderator"' +
+                                           'rel="tooltip"' +
+                                           'title="{% trans "Remove moderator status" %}"' +
+                                           'data-user="' + user.pk + '"' +
+                                           'data-url="' + user.remove_url + '">' +
+                                             '<i class="icon icon-trash"></i>' +
+                                        '</a>' +
+                                    '</td>' +
+                                '</tr>');
+                            $row.find('[rel=tooltip]').tooltip();
+                            $mods_table.find('tbody').append($row);
+                            $button.siblings('.tooltip').remove();
+                            $button.remove();
+                        }
+                    });
+                });
+
+                $("a.remove-moderator").live('click', function(e) {
+                    e.preventDefault();
+
+                    var $button = $(this),
+                        user = $button.data('user'),
+                        $row = $button.parents('tr'),
+                        $table = $row.parents('table');
+
+                    $.ajax({
+                        url: $button.data('url'),
+                        type: 'POST',
+                        cache: false,
+                        timeout: 10000,
+                        data: {'user': user},
+                        dataType: 'json'
+                    }).done(function(data) {
+                        $row.remove();
+                        if ($table.find('tbody tr').length === 0) {
+                            $table.find('tbody').append(
+                                    $('<tr>' +
+                                           '<td class="empty-table" colspan="2">' +
+                                                '{% trans "This group has no moderators." %}' +
+                                           '</td>' +
+                                      '</tr>')
+                            );
+                        }
+
+                        $('table.members tbody tr').each(function() {
+                            var $row = $(this),
+                                user_pk = $row.data('user'),
+                                $button;
+
+                            if (user_pk === data.moderator.pk) {
+                                $button = $(
+                                    '<a ' +
+                                       'href="#"' +
+                                       'class="btn btn-mini add-moderator"' +
+                                       'rel="tooltip"' +
+                                       'title="{% trans "Make moderator" %}"' +
+                                       'data-user="' + data.moderator.pk + '"' +
+                                       'data-url="' + data.moderator.add_url + '">' +
+                                         '<i class="icon icon-legal"></i>' +
+                                    '</a>');
+                                $button.tooltip();
+                                $row.find('td:nth-child(2)').prepend($button);
+                            }
+                        });
+                    });
+                });
+            {% endif %}
+
+            $("a.remove-member").live('click', function(e) {
+                e.preventDefault();
+
+                var $button = $(this),
+                    user = $button.data('user'),
+                    $row = $button.parents('tr'),
+                    $table = $row.parents('table');
+
+                $.ajax({
+                    url: $button.data('url'),
+                    type: 'POST',
+                    cache: false,
+                    timeout: 10000,
+                    data: {'user': user},
+                    dataType: 'json'
+                }).done(function(data) {
+                    $row.remove();
+                    if ($table.find('tbody tr').length === 0) {
+                        $table.find('tbody').append(
+                                $('<tr>' +
+                                       '<td class="empty-table" colspan="2">' +
+                                            '{% trans "This group has no members." %}' +
                                        '</td>' +
                                   '</tr>')
                         );
