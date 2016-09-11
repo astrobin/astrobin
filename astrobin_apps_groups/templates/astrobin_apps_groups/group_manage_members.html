@@ -28,10 +28,12 @@
     </form>
 
     <h2>{% trans "Invited users" %}</h2>
-    <table class="table invited-users">
+    <table class="table table-striped invited-users">
         <thead>
-            <th>Name</th>
-            <th>Revoke?</th>
+            <tr>
+                <th>{% trans "Name" %}</th>
+                <th>{% trans "Revoke?" %}</th>
+            </tr>
         </thead>
         <tbody>
             {% for user in object.invited_users.all %}
