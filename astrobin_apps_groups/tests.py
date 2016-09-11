@@ -780,3 +780,38 @@ class GroupsTest(TestCase):
 
         # Clean up
         self.client.logout()
+
+    def test_group_members_list_view(self):
+        url = reverse('group_members_list', kwargs = {'pk': self.group.pk})
+
+        # Login required
+        response = self.client.get(url)
+        self.assertEqual(response.status_code, 302)
+
+        # Group does not exist
+        self.client.login(username = 'user2', password = 'password')
+        response = self.client.post(reverse('group_remove_moderator', kwargs = {'pk': 999}), follow = True)
+        self.assertEqual(response.status_code, 404)
+        self.client.logout()
+
+        # User must be member if the group is private
+        self.client.login(username = 'user2', password = 'password')
+        self.group.public = False; self.group.save()
+        response = self.client.get(url)
+        self.assertEqual(response.status_code, 403)
+        self.group.public = True; self.group.save()
+        self.client.logout()
+
+        # Members list is empty
+        self.client.login(username = 'user1', password = 'password')
+        response = self.client.get(url)
+        self.assertEqual(response.status_code, 200)
+        self.assertContains(response, "This group has no members")
+        self.client.logout()
+
+        # Members are renered in table
+        self.client.login(username = 'user1', password = 'password')
+        self.group.members.add(self.user2)
+        response = self.client.get(url)
+        self.assertContains(response, self.user2.username)
+        self.client.logout()

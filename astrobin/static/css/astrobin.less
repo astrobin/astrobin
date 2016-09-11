@@ -1297,6 +1297,20 @@ li.astrobin-thumbnail {
     &.table-bordered {
         border-color: #292929;
     }
+
+    .pagination {
+        td {
+            padding-top: 60px;
+            background-color: transparent !important;
+        }
+
+        a, span {
+            padding: 10px 20px;
+            background-color: #242424;
+            border: 1px solid #404040;
+            .rounded-corners(3px);
+        }
+    }
 }
 
 .table caption {
@@ -4472,7 +4486,7 @@ pre {
     border-top: 1px solid #393939;
 }
 
-table.group-list {
+table.group-list, table.group-member-list {
     th, td {
         white-space: nowrap;
     }
@@ -4486,12 +4500,14 @@ table.group-list {
         }
     }
 
-    td.group-name {
+    td.group-name, td.member-name {
         width: 100%;
         white-space: initial;
     }
 
-    td.group-members, td.group-images, td.group-forum-posts {
+    td.group-members, td.group-images, td.group-forum-posts,
+    td.member-images-count, td.member-posts-count {
         text-align: center;
     }
 }
+

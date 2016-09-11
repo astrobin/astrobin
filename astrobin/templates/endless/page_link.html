@@ -1,0 +1,5 @@
+<a href="{{ page.path }}"
+    {% if querystring_key != 'page' %}
+    rel="{{ querystring_key }}{% if add_nofollow %} nofollow{% endif %}"
+    {% endif %}
+    class="endless_page_link">{{ page.label|safe }}</a>

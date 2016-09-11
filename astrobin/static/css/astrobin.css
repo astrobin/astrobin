@@ -1150,6 +1150,19 @@ li.astrobin-thumbnail.top-title .image-title {
 .table.table-bordered {
   border-color: #292929;
 }
+.table .pagination td {
+  padding-top: 60px;
+  background-color: transparent !important;
+}
+.table .pagination a,
+.table .pagination span {
+  padding: 10px 20px;
+  background-color: #242424;
+  border: 1px solid #404040;
+  -moz-border-radius: 3px;
+  -webkit-border-radius: 3px;
+  border-radius: 3px;
+}
 .table caption {
   font-size: 16px;
   line-height: 32px;
@@ -4258,22 +4271,36 @@ pre {
   border-top: 1px solid #393939;
 }
 table.group-list th,
-table.group-list td {
+table.group-member-list th,
+table.group-list td,
+table.group-member-list td {
   white-space: nowrap;
 }
-table.group-list td.group-membership {
+table.group-list td.group-membership,
+table.group-member-list td.group-membership {
   text-align: center;
 }
-table.group-list td.group-membership .icon {
+table.group-list td.group-membership .icon,
+table.group-member-list td.group-membership .icon {
   text-align: center;
   color: #ccc;
 }
-table.group-list td.group-name {
+table.group-list td.group-name,
+table.group-member-list td.group-name,
+table.group-list td.member-name,
+table.group-member-list td.member-name {
   width: 100%;
   white-space: initial;
 }
 table.group-list td.group-members,
+table.group-member-list td.group-members,
 table.group-list td.group-images,
-table.group-list td.group-forum-posts {
+table.group-member-list td.group-images,
+table.group-list td.group-forum-posts,
+table.group-member-list td.group-forum-posts,
+table.group-list td.member-images-count,
+table.group-member-list td.member-images-count,
+table.group-list td.member-posts-count,
+table.group-member-list td.member-posts-count {
   text-align: center;
 }

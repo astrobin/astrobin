@@ -421,3 +421,8 @@ class GroupRemoveMember(
 
         # Only AJAX allowed
         return HttpResponseForbidden()
+
+
+class GroupMembersListView(LoginRequiredMixin, RestrictPrivateGroupToMembersMixin, DetailView):
+    model = Group
+    template_name = 'astrobin_apps_groups/group_members_list.html'

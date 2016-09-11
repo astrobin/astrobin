@@ -1,0 +1,47 @@
+{% extends 'base.html' %}
+
+{% load i18n %}
+{% load astrobin_apps_users_tags %}
+{% load endless %}
+
+{% block title %}{{object.name}}: {% trans "members list" %}{% endblock %}
+
+{% block content %}
+    <div class="subnav subnav-fixed">
+        <ul class="nav nav-pills">
+            <li>
+                <a href="{% url 'group_detail' object.pk %}">
+                    <i class="icon icon-arrow-left"></i>
+                    {% trans "Back to group" %}
+                </a>
+            </li>
+        </ul> <!-- nav -->
+    </div> <!-- subnav -->
+
+    <h1>{{object.name}}</h1>
+    {% url 'user_page' object.owner.username as owner_url %}
+    <div class="subtitle">{% trans "Full list of the group members" %}</div>
+
+    <table class="table table-striped group-member-list">
+        <thead>
+            <tr>
+                <th class="member-name">{% trans "Name" %}</th>
+                <th class="member-images-count">{% trans "Images in group" %}</th>
+                <th class="member-posts-count">{% trans "Forum posts in group" %}</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% include 'astrobin_apps_groups/group_members_list_entries.html' %}
+        </tbody>
+    </table>
+{% endblock %}
+
+{% block extra_js %}
+    <script src="{{STATIC_URL}}endless_pagination/js/endless-pagination.js"></script>
+    <script>
+        $.ajaxSetup({
+            timeout: 30000
+        });
+        $('table.group-members-list').endlessPaginate();
+    </script>
+{% endblock %}

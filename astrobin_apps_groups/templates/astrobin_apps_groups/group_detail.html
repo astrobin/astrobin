@@ -82,14 +82,14 @@
     </div> <!-- subnav -->
 
     <div class="row group-header">
-        <div class="span9">
+        <div class="span8">
             <h1>{{object.name}}</h1>
             {% url 'user_page' object.owner.username as owner_url %}
             <div class="subtitle">
                 {% blocktrans with date_created=object.date_created|date:"SHORT_DATE_FORMAT" owner=object.owner.userprofile category=object.category_humanized %}A group created on {{date_created}}, owned by <a href="{{owner_url}}">{{owner}}</a>, categorized as <strong>{{category}}</strong>.{% endblocktrans %}
             </div>
         </div>
-        <div class="span3 group-info-container">
+        <div class="span4 group-info-container">
             <div class="group-info">
                 {% if object.public %}
                     <i class="icon-unlock" rel="tooltip" title="{% trans "This group is public" %}"></i>
@@ -111,7 +111,11 @@
             </div>
 
             <div class="group-info">
-                <a class="group-info-members" href="#" rel="tooltip" title="{% trans "Members" %}"> <!-- TODO -->
+                <a
+                    href="{% url 'group_members_list' object.pk %}"
+                    class="group-info-members"
+                    rel="tooltip"
+                    title="{% trans "Members" %}">
                     {{object.members.count}}
                 </a>
             </div>

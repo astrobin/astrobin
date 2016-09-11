@@ -16,8 +16,8 @@
 
 {% if view == 'default' %}
 <ul class="astrobin-users user-list {% if layout == 'list' %}user-list-mini{% endif %}">
-        {% include 'astrobin_apps_users/inclusion_tags/user_list_entries.html' %}
-        {% include 'astrobin_apps_users/inclusion_tags/endless_pagination_js.html' %}
-    </ul>
+    {% include 'astrobin_apps_users/inclusion_tags/user_list_entries.html' %}
+    {% include 'astrobin_apps_users/inclusion_tags/endless_pagination_js.html' %}
+</ul>
 {% endif %}
 

@@ -66,4 +66,8 @@ urlpatterns = patterns('',
         r'^(?P<pk>\d+)/remove-member/$',
         GroupRemoveMember.as_view(),
         name = 'group_remove_member'),
+    url(
+        r'^(?P<pk>\d+)/members-list/$',
+        GroupMembersListView.as_view(),
+        name = 'group_members_list'),
 )
