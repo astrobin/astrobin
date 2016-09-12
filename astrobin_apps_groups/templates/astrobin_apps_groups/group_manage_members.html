@@ -6,6 +6,17 @@
 {% block title %}{{object.name}}{% endblock %}
 
 {% block content %}
+    <div class="subnav subnav-fixed">
+        <ul class="nav nav-pills">
+            <li>
+                <a href="{% url 'group_detail' object.pk %}">
+                    <i class="icon icon-arrow-left"></i>
+                    {% trans "Back to group" %}
+                </a>
+            </li>
+        </ul> <!-- nav -->
+    </div> <!-- subnav -->
+
     <h1>
         {{object.name}}
         <small>
@@ -20,10 +31,6 @@
             <button class="btn btn-primary">
                 {% trans "Invite users" %}
             </button>
-            <a class="btn" href="{% url 'group_detail' object.pk %}">
-                {% trans "Back to group" %}
-            </a>
-
         </div>
     </form>
 
