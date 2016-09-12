@@ -6,6 +6,7 @@
 {% pybb_get_profile user=user as user_profile %}
 
 <a name="post-{{ post.id }}"></a> {# may be remove this string? #}
+
 <table class="table post {% if post.on_moderation %}on-moderation{% endif %}" id="post-{{ post.id }}">
     <thead class="post-header">
     <tr>
@@ -24,6 +25,13 @@
     </tr>
     </thead>
     <tbody>
+    {% if post.on_moderation %}
+    <tr class="alert alert-warning">
+        <td>
+            {% trans "Warning: this post awaits moderation and is not yet visible to everybody" %}
+        </td>
+    </tr>
+    {% endif %}
     <tr class="post-row">
         <td class="post-content">
             {{ post.body_html|safe }}

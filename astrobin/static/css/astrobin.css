@@ -4015,7 +4015,10 @@ th.forum-name {
 }
 /* --- Moderation --- */
 .on-moderation {
-  background: #ffcccc;
+  background: #d65454;
+}
+.on-moderation .post-content {
+  color: black;
 }
 /* --- Mini pagination --- */
 .mini-pagination {
