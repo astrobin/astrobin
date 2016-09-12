@@ -16,6 +16,7 @@ from django.utils.translation import ugettext as _
 # Third party
 from braces.views import JSONResponseMixin
 from braces.views import LoginRequiredMixin
+from pybb.permissions import perms
 
 # AstroBin
 from astrobin_apps_notifications.utils import push_notification
@@ -142,6 +143,11 @@ class GroupDetailView(RestrictPrivateGroupToMembersMixin, DetailView):
         context['user_is_member'] = self.request.user in group.members.all()
         context['user_is_invited'] = self.request.user in group.invited_users.all()
         context['user_is_moderator'] = self.request.user in group.moderators.all()
+
+        # Forum
+        topics = group.forum.topics.order_by('-sticky', '-updated', '-id').select_related()
+        topics = perms.filter_topics(self.request.user, topics)
+        context['topics'] = topics[:5]
 
         return context
 
