@@ -720,7 +720,8 @@ class GroupsTest(TestCase):
             HTTP_X_REQUESTED_WITH = 'XMLHttpRequest',
             follow = True)
         self.assertEqual(response.status_code, 200)
-        self.assertEqual(self.group.moderators.count(), 1)
+        self.assertTrue(self.user1 in self.group.moderators.all())
+        self.assertTrue(self.user1 in self.group.forum.moderators.all())
 
         # Clean up
         self.group.moderators.clear()
@@ -776,7 +777,8 @@ class GroupsTest(TestCase):
             HTTP_X_REQUESTED_WITH = 'XMLHttpRequest',
             follow = True)
         self.assertEqual(response.status_code, 200)
-        self.assertEqual(self.group.moderators.count(), 0)
+        self.assertFalse(self.user1 in self.group.moderators.all())
+        self.assertFalse(self.user1 in self.group.forum.moderators.all())
 
         # Clean up
         self.client.logout()

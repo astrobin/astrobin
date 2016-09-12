@@ -399,6 +399,7 @@ class GroupAddModerator(
             if user not in group.members.all():
                 return HttpResponseForbidden()
             group.moderators.add(user)
+            group.forum.moderators.add(user)
             return self.render_json_response({
                 'moderators': [{
                     'pk': x.pk,
@@ -427,6 +428,7 @@ class GroupRemoveModerator(
             if user not in group.moderators.all():
                 return HttpResponseForbidden()
             group.moderators.remove(user)
+            group.forum.moderators.remove(user)
             return self.render_json_response({
                 'moderator': {
                     'pk': user.pk,
