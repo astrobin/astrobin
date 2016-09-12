@@ -208,7 +208,7 @@ class GroupJoinView(LoginRequiredMixin, RedirectToGroupDetailMixin, UpdateView):
                     {
                         'requester': request.user.userprofile.get_display_name(),
                         'group_name': group.name,
-                        'url': reverse('group_manage_members', args = (group.pk,)),
+                        'url': reverse('group_moderate_join_requests', args = (group.pk,)),
                     })
                 return redirect(self.get_success_url())
             else:
