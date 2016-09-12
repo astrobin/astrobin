@@ -10,27 +10,27 @@
 {% endblock %}
 
 {% block content %}
-    {% if user|pybb_may_create_topic:forum %}
-        <div class="subnav subnav-fixed">
-            <ul class="nav nav-pills">
-                {% if forum.category.slug == 'group-forums' %}
-                    <li>
-                        <a href="{% url 'group_detail' forum.group.pk %}">
-                            <i class="icon-arrow-left icon-white"></i>
-                            {% trans "Back to group" %}
-                        </a>
-                    </li>
-                {% endif %}
+    <div class="subnav subnav-fixed">
+        <ul class="nav nav-pills">
+            {% if forum.category.slug == 'group-forums' %}
+                <li>
+                    <a href="{% url 'group_detail' forum.group.pk %}">
+                        <i class="icon-arrow-left icon-white"></i>
+                        {% trans "Back to group" %}
+                    </a>
+                </li>
+            {% endif %}
 
+            {% if user|pybb_may_create_topic:forum %}
                 <li>
                     <a href="{% url 'pybb:add_topic' forum.id %}">
                         <i class="icon-plus icon-white"></i>
                         {% trans "New topic" %}
                     </a>
                 </li>
-            </ul>
-        </div>
-    {% endif %}
+            {% endif %}
+        </ul>
+    </div>
 
     <div class="forum">
         {% if forum.headline %}

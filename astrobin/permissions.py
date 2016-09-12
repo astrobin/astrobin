@@ -1,5 +1,12 @@
+# Django
 from django.db.models import Q
+
+# Third party apps
 from pybb.permissions import DefaultPermissionHandler
+
+# AstroBin apps
+from astrobin_apps_groups.models import Group
+
 
 class CustomForumPermissions(DefaultPermissionHandler):
     # Disable forum polls
@@ -10,14 +17,17 @@ class CustomForumPermissions(DefaultPermissionHandler):
     def may_view_forum(self, user, forum):
         may = super(CustomForumPermissions, self).may_view_forum(user, forum)
 
-        if forum.group is not None:
-            if user.is_authenticated():
-                return may and (
-                    forum.group.public or \
-                    user == forum.group.owner or \
-                    user in forum.group.members.all())
-            else:
-                return may and forum.group.public
+        try:
+            if forum.group is not None:
+                if user.is_authenticated():
+                    return may and (
+                        forum.group.public or \
+                        user == forum.group.owner or \
+                        user in forum.group.members.all())
+                else:
+                    return may and forum.group.public
+        except Group.DoesNotExist:
+            pass
 
         return may
 
@@ -41,6 +51,7 @@ class CustomForumPermissions(DefaultPermissionHandler):
         may = super(CustomForumPermissions, self).may_view_topic(user, topic)
         return may and self.may_view_forum(user, topic.forum)
 
+
     def filter_topics(self, user, qs):
         f = super(CustomForumPermissions, self).filter_topics(user, qs)
 
@@ -54,3 +65,22 @@ class CustomForumPermissions(DefaultPermissionHandler):
             f = f.filter(forum__group__public = True)
 
         return f
+
+
+    def may_create_topic(self, user, forum):
+        may = super(CustomForumPermissions, self).may_create_topic(user, forum)
+
+        try:
+            if forum.group is not None:
+                return may and (
+                    user == forum.group.owner or
+                    user in forum.group.members.all())
+        except Group.DoesNotExist:
+            pass
+
+        return may
+
+
+    def may_create_post(self, user, topic):
+        may = super(CustomForumPermissions, self).may_create_topic(user, topic)
+        return may and self.may_create_topic(user, topic.forum)
