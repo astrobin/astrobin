@@ -30,9 +30,9 @@ class CustomForumPermissions(DefaultPermissionHandler):
                 Q(group = None) |
                 Q(group__public = True) |
                 Q(group__owner = user) |
-                Q(group__members = user))
+                Q(group__members = user)).distinct()
         else:
-            f = f.filter(public = True)
+            f = f.filter(group__public = True)
 
         return f
 
@@ -49,7 +49,7 @@ class CustomForumPermissions(DefaultPermissionHandler):
                 Q(forum__group = None) |
                 Q(forum__group__public = True) |
                 Q(forum__group__owner = user) |
-                Q(forum__group__members = user))
+                Q(forum__group__members = user)).distinct()
         else:
             f = f.filter(forum__group__public = True)
 
