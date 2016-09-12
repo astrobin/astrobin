@@ -3852,6 +3852,10 @@ table.forums .topic-name,
 table.topic-list .topic-name {
   text-align: left !important;
 }
+table.forums .on-moderation a,
+table.topic-list .on-moderation a {
+  color: white;
+}
 th.forum-name {
   font-size: 18px;
 }

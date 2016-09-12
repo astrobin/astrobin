@@ -299,7 +299,7 @@
                     <table class="table table-condensed topic-list">
                     <tbody>
                     {% for topic in topics|pybb_topic_unread:request.user %}
-                    <tr class="topic-row">
+                    <tr class="topic-row{% if topic.on_moderation %} on-moderation{% endif %}">
                         <td class="topic-state{% if topic.unread %} topic-unread{% endif %}">
                             <div class="state-indicator"></div>
                         </td>
