@@ -1,5 +1,6 @@
 # Django
 from django.contrib import messages
+from django.db.models import Count
 from django.http import HttpResponseForbidden
 from django.views.generic import CreateView
 from django.views.generic import DetailView
@@ -91,13 +92,35 @@ class GroupListView(ListView):
 
     def get_context_data(self, **kwargs):
         context = super(GroupListView, self).get_context_data(**kwargs)
-        context['private_groups'] = self.get_queryset().filter(public = False).filter(
-            Q(owner = self.request.user) |
-            Q(members = self.request.user) |
-            Q(invited_users = self.request.user)).distinct() if self.request.user.is_authenticated() else None
-        context['public_groups'] = self.get_queryset().filter(public = True)
-        return context
 
+        sort = self.request.GET.get('sort', 'created')
+        sort = {
+            'name': 'name',
+            'category': 'category',
+            'created': 'date_created',
+            'members': '-num_members',
+            'posts': '-forum__post_count',
+        }[sort]
+
+        if self.request.user.is_authenticated():
+            context['private_groups'] = \
+                self.get_queryset()\
+                    .filter(public = False)\
+                    .filter(
+                        Q(owner = self.request.user) |
+                        Q(members = self.request.user) |
+                        Q(invited_users = self.request.user))\
+                    .annotate(num_members = Count('members'))\
+                    .order_by(sort)\
+                    .distinct()
+
+        context['public_groups'] = \
+            self.get_queryset()\
+                .filter(public = True)\
+                .annotate(num_members = Count('members'))\
+                .order_by(sort)
+
+        return context
 
 class GroupDetailView(RestrictPrivateGroupToMembersMixin, DetailView):
     model = Group

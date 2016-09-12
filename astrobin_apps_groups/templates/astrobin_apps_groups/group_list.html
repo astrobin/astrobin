@@ -22,6 +22,50 @@
                     </li>
                 </ul>
             </li>
+
+            <li class="dropdown">
+                <a class="dropdown-toggle" data-toggle="dropdown" href="#">
+                    <i class="icon-bolt icon-sort-by-attributes-alt"></i>
+                    {% trans "Sort" %}
+                    <b class="caret"></b>
+                </a>
+                <ul class="dropdown-menu">
+                    <li>
+                        <a href="{% url 'group_list' %}?sort=name">
+                            <i class="icon icon-sort-by-alphabet"></i>
+                            {% trans "Name" %}
+                        </a>
+                    </li>
+
+                    <li>
+                        <a href="{% url 'group_list' %}?sort=category">
+                            <i class="icon icon-folder-open-alt"></i>
+                            {% trans "Calendar" %}
+                        </a>
+                    </li>
+
+                    <li>
+                        <a href="{% url 'group_list' %}?sort=created">
+                            <i class="icon icon-calendar"></i>
+                            {% trans "Date created" %}
+                        </a>
+                    </li>
+
+                    <li>
+                        <a href="{% url 'group_list' %}?sort=members">
+                            <i class="icon icon-user"></i>
+                            {% trans "Members" %}
+                        </a>
+                    </li>
+
+                    <li>
+                        <a href="{% url 'group_list' %}?sort=posts">
+                            <i class="icon icon-comments-alt"></i>
+                            {% trans "Forum posts" %}
+                        </a>
+                    </li>
+                </ul>
+            </li>
         </ul> <!-- nav -->
     </div> <!-- subnav -->
 
