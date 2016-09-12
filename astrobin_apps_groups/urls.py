@@ -70,4 +70,16 @@ urlpatterns = patterns('',
         r'^(?P<pk>\d+)/members-list/$',
         GroupMembersListView.as_view(),
         name = 'group_members_list'),
+    url(
+        r'^(?P<pk>\d+)/moderate-join-requests/$',
+        GroupModerateJoinRequestsView.as_view(),
+        name = 'group_moderate_join_requests'),
+    url(
+        r'^(?P<pk>\d+)/moderate-join-requests/approve/$',
+        GroupApproveJoinRequestView.as_view(),
+        name = 'group_approve_join_request'),
+    url(
+        r'^(?P<pk>\d+)/moderate-join-requests/reject/$',
+        GroupRejectJoinRequestView.as_view(),
+        name = 'group_reject_join_request'),
 )

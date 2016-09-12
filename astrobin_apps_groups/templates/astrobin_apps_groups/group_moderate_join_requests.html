@@ -1,0 +1,105 @@
+{% extends 'base.html' %}
+
+{% load bootstrap_toolkit %}
+{% load i18n %}
+
+{% block title %}{{object.name}}: {% trans "Moderate join requests" %}{% endblock %}
+
+{% block content %}
+    <div class="subnav subnav-fixed">
+        <ul class="nav nav-pills">
+            <li>
+                <a href="{% url 'group_detail' object.pk %}">
+                    <i class="icon icon-arrow-left"></i>
+                    {% trans "Back to group" %}
+                </a>
+            </li>
+        </ul> <!-- nav -->
+    </div> <!-- subnav -->
+
+    <h1>
+        {{object.name}}
+        <small>
+            {% trans "Moderate join requests" %}
+        </small>
+    </h1>
+
+    <table class="table table-striped requestinig-users">
+        <thead>
+            <tr>
+                <th class="user">{% trans "Name" %}</th>
+                <th class="actions"></th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for user in object.join_requests.all %}
+                <tr>
+                    <td class="user">
+                        <a href="{% url 'user_page' user.username %}">
+                            {{user.userprofile}}
+                        </a>
+                    </td>
+                    <td class="actions">
+                        <a
+                            href="#"
+                            class="handle-request btn"
+                            data-user="{{user.pk}}"
+                            data-url="{% url 'group_approve_join_request' object.pk %}">
+                            <i class="icon icon-thumbs-up"></i>
+                            {% trans "Approve" %}
+                        </a>
+
+                        <a
+                            href="#"
+                            class="handle-request btn"
+                            data-user="{{user.pk}}"
+                            data-url="{% url 'group_reject_join_request' object.pk %}">
+                            <i class="icon icon-thumbs-down"></i>
+                            {% trans "Reject" %}
+                        </a>
+
+                    </td>
+                </tr>
+            {% empty %}
+                <tr>
+                    <td class="empty-table" colspan="2">{% trans "This group has no join requests." %}</td>
+                </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+{% endblock %}
+
+{% block extra_js %}
+    <script type="text/javascript">
+        $(document).ready(function() {
+            $("a.handle-request").live('click', function(e) {
+                e.preventDefault();
+
+                var $button = $(this),
+                    user = $button.data('user'),
+                    $row = $button.parents('tr'),
+                    $table = $row.parents('table');
+
+                $.ajax({
+                    url: $button.data('url'),
+                    type: 'POST',
+                    cache: false,
+                    timeout: 10000,
+                    data: {'user': user},
+                    dataType: 'json'
+                }).done(function(data) {
+                    $row.remove();
+                    if ($table.find('tbody tr').length === 0) {
+                        $table.find('tbody').append(
+                                $('<tr>' +
+                                       '<td class="empty-table" colspan="2">' +
+                                            '{% trans "This group has no join requests." %}' +
+                                       '</td>' +
+                                  '</tr>')
+                        );
+                    }
+                });
+            });
+        });
+    </script>
+{% endblock %}

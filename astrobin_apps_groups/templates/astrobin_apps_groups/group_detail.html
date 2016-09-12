@@ -76,6 +76,25 @@
                             </a>
                         </li>
                     {% endif %}
+
+                    {% if group.moderated and user_is_moderator %}
+                        <li class="divider"></li>
+                        <li>
+                            <a href="{% url 'group_moderate_join_requests' object.pk %}">
+                                <i class="icon icon-user"></i>
+                                {% trans "Moderate join requests" %}
+                            </a>
+                        </li>
+
+                        {% if not group.autosubmission %}
+                            <li>
+                                <a href="#">
+                                    <i class="icon icon-image"></i>
+                                    {% trans "Moderate image submissions" %}
+                                </a>
+                            </li>
+                        {% endif %}
+                    {% endif %}
                 </ul>
             </li>
         </ul> <!-- nav -->
@@ -118,6 +137,27 @@
                     title="{% trans "Members" %}">
                     {{object.members.count}}
                 </a>
+                {% if request.user == group.owner %}
+                    /
+                    <a
+                        href="{% url 'group_manage_members' object.pk %}"
+                        class="group-info-invited"
+                        rel="tooltip"
+                        title="{% trans "Invited users" %}">
+                        {{object.invited_users.count}}
+                    </a>
+                {% endif %}
+                {% if group.moderated and user_is_moderator %}
+                    /
+                    <a
+                        href="{% url 'group_moderate_join_requests' object.pk %}"
+                        class="group-info-join-requests"
+                        rel="tooltip"
+                        title="{% trans "Join requests" %}">
+                        {{object.join_requests.count}}
+                    </a>
+                {% endif %}
+
             </div>
 
             <div class="group-info">

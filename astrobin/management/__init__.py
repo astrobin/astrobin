@@ -142,6 +142,24 @@ NOTICE_TYPES = (
         '',
         2,
     ),
+    (
+        'new_group_join_request',
+        _("A user requested to join a group you moderate"),
+        '',
+        2,
+    ),
+    (
+        'group_join_request_approved',
+        _("A group moderator approved your request to join"),
+        '',
+        2,
+    ),
+    (
+        'group_join_request_rejected',
+        _("A group moderator rejected your request to join"),
+        '',
+        2,
+    ),
 )
 
 

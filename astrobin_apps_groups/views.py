@@ -66,6 +66,14 @@ class RestrictToModeratedGroupsMixin(View):
         return super(RestrictToModeratedGroupsMixin, self).dispatch(request, *args, **kwargs)
 
 
+class RestrictToGroupModeratorsMixin(View):
+    def dispatch(self, request, *args, **kwargs):
+        group = get_object_or_404(Group, pk = kwargs['pk'])
+        if request.user not in group.moderators.all():
+            return HttpResponseForbidden()
+        return super(RestrictToGroupModeratorsMixin, self).dispatch(request, *args, **kwargs)
+
+
 class RedirectToGroupDetailMixin(View):
     def get_success_url(self):
         try:
@@ -110,6 +118,7 @@ class GroupDetailView(RestrictPrivateGroupToMembersMixin, DetailView):
         # Misc
         context['user_is_member'] = self.request.user in group.members.all()
         context['user_is_invited'] = self.request.user in group.invited_users.all()
+        context['user_is_moderator'] = self.request.user in group.moderators.all()
 
         return context
 
@@ -426,3 +435,66 @@ class GroupRemoveMember(
 class GroupMembersListView(LoginRequiredMixin, RestrictPrivateGroupToMembersMixin, DetailView):
     model = Group
     template_name = 'astrobin_apps_groups/group_members_list.html'
+
+
+class GroupModerateJoinRequestsView(LoginRequiredMixin, RestrictToModeratedGroupsMixin,
+        RestrictToGroupModeratorsMixin, DetailView):
+    model = Group
+    template_name = 'astrobin_apps_groups/group_moderate_join_requests.html'
+
+
+class GroupApproveJoinRequestView(JSONResponseMixin, LoginRequiredMixin,
+        RestrictToModeratedGroupsMixin, RestrictToGroupModeratorsMixin,
+        UpdateView):
+    model = Group
+
+    def post(self, request, *args, **kwargs):
+        if request.is_ajax():
+            group = self.get_object()
+            user = User.objects.get(pk = self.request.POST.get('user'))
+
+            if user not in group.join_requests.all():
+                return HttpResponseForbidden()
+
+            group.join_requests.remove(user)
+            group.members.add(user)
+            push_notification([user], 'group_join_request_approved',
+                {
+                    'group_name': group.name,
+                    'url': reverse('group_detail', args = (group.pk,)),
+                })
+
+            return self.render_json_response({
+                'member': user.pk,
+            })
+
+        # Only AJAX allowed
+        return HttpResponseForbidden()
+
+
+class GroupRejectJoinRequestView(JSONResponseMixin, LoginRequiredMixin,
+        RestrictToModeratedGroupsMixin, RestrictToGroupModeratorsMixin,
+        UpdateView):
+    model = Group
+
+    def post(self, request, *args, **kwargs):
+        if request.is_ajax():
+            group = self.get_object()
+            user = User.objects.get(pk = self.request.POST.get('user'))
+
+            if user not in group.join_requests.all():
+                return HttpResponseForbidden()
+
+            group.join_requests.remove(user)
+            push_notification([user], 'group_join_request_rejected',
+                {
+                    'group_name': group.name,
+                    'url': reverse('group_detail', args = (group.pk,)),
+                })
+
+            return self.render_json_response({
+                'member': user.pk,
+            })
+
+        # Only AJAX allowed
+        return HttpResponseForbidden()

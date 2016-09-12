@@ -809,9 +809,141 @@ class GroupsTest(TestCase):
         self.assertContains(response, "This group has no members")
         self.client.logout()
 
-        # Members are renered in table
+        # Members are rendered in table
         self.client.login(username = 'user1', password = 'password')
         self.group.members.add(self.user2)
         response = self.client.get(url)
         self.assertContains(response, self.user2.username)
         self.client.logout()
+
+    def test_group_moderate_join_requests_view(self):
+        url = reverse('group_moderate_join_requests', kwargs = {'pk': self.group.pk})
+
+        # Login required
+        response = self.client.get(url)
+        self.assertEqual(response.status_code, 302)
+
+        # Group does not exist
+        self.client.login(username = 'user2', password = 'password')
+        response = self.client.get(reverse('group_moderate_join_requests', kwargs = {'pk': 999}), follow = True)
+        self.assertEqual(response.status_code, 404)
+        self.client.logout()
+
+        # Moderator required
+        self.client.login(username = 'user2', password = 'password')
+        response = self.client.post(url, follow = True)
+        self.assertEqual(response.status_code, 403)
+        self.client.logout()
+
+        # Group must be moderated
+        self.client.login(username = 'user1', password = 'password')
+        self.group.moderated = False; self.group.save()
+        response = self.client.get(url, follow = True)
+        self.assertEqual(response.status_code, 403)
+        self.group.moderated = True; self.group.save()
+        self.client.logout()
+
+        # Request list is empty
+        self.client.login(username = 'user1', password = 'password')
+        self.group.moderators.add(self.user1)
+        response = self.client.get(url)
+        self.assertEqual(response.status_code, 200)
+        self.assertContains(response, "This group has no join requests")
+        self.client.logout()
+
+        # Requests are rendered in table
+        self.client.login(username = 'user1', password = 'password')
+        self.group.join_requests.add(self.user2)
+        response = self.client.get(url)
+        self.assertContains(response, self.user2.username)
+        self.client.logout()
+
+    def test_group_approve_join_request_view(self):
+        url = reverse('group_approve_join_request', kwargs = {'pk': self.group.pk})
+
+        # Login required
+        response = self.client.get(url)
+        self.assertEqual(response.status_code, 302)
+
+        # Group does not exist
+        self.client.login(username = 'user2', password = 'password')
+        response = self.client.get(reverse('group_approve_join_request', kwargs = {'pk': 999}), follow = True)
+        self.assertEqual(response.status_code, 404)
+
+        # Moderator required
+        response = self.client.post(url, follow = True)
+        self.assertEqual(response.status_code, 403)
+        self.client.logout()
+        self.group.moderators.add(self.user1)
+
+        # Group must be moderated
+        self.client.login(username = 'user1', password = 'password')
+        self.group.moderated = False; self.group.save()
+        response = self.client.post(url, follow = True)
+        self.assertEqual(response.status_code, 403)
+        self.group.moderated = True; self.group.save()
+
+        # User must be in the join requests list
+        self.client.login(username = 'user1', password = 'password')
+        response = self.client.post(url, {'user': self.user2.pk}, HTTP_X_REQUESTED_WITH = 'XMLHttpRequest', follow = True)
+        self.assertEqual(response.status_code, 403)
+
+        self.group.join_requests.add(self.user2)
+
+        # Request must be AJAX
+        response = self.client.post(url, {'user': self.user2.pk}, follow = True)
+        self.assertEqual(response.status_code, 403)
+
+        # Success
+        response = self.client.post(url, {'user': self.user2.pk}, HTTP_X_REQUESTED_WITH = 'XMLHttpRequest', follow = True)
+        self.assertEqual(response.status_code, 200)
+        self.assertTrue(self.user2 in self.group.members.all())
+        self.assertFalse(self.user2 in self.group.join_requests.all())
+        self.assertTrue(len(get_unseen_notifications(self.user2)) > 0)
+        self.assertIn("APPROVED", get_unseen_notifications(self.user2)[0].message)
+
+    def test_group_reject_join_request_view(self):
+        url = reverse('group_reject_join_request', kwargs = {'pk': self.group.pk})
+
+        # Login required
+        response = self.client.get(url)
+        self.assertEqual(response.status_code, 302)
+
+        # Group does not exist
+        self.client.login(username = 'user2', password = 'password')
+        response = self.client.get(reverse('group_reject_join_request', kwargs = {'pk': 999}), follow = True)
+        self.assertEqual(response.status_code, 404)
+
+        # Moderator required
+        response = self.client.post(url, follow = True)
+        self.assertEqual(response.status_code, 403)
+        self.client.logout()
+        self.group.moderators.add(self.user1)
+
+        # Group must be moderated
+        self.client.login(username = 'user1', password = 'password')
+        self.group.moderated = False; self.group.save()
+        response = self.client.post(url, follow = True)
+        self.assertEqual(response.status_code, 403)
+        self.group.moderated = True; self.group.save()
+
+        # User must be in the join requests list
+        self.client.login(username = 'user1', password = 'password')
+        response = self.client.post(url, {'user': self.user2.pk}, HTTP_X_REQUESTED_WITH = 'XMLHttpRequest', follow = True)
+        self.assertEqual(response.status_code, 403)
+
+        self.group.join_requests.add(self.user2)
+
+        # Request must be AJAX
+        response = self.client.post(url, {'user': self.user2.pk}, follow = True)
+        self.assertEqual(response.status_code, 403)
+
+        # Success
+        response = self.client.post(url, {'user': self.user2.pk}, HTTP_X_REQUESTED_WITH = 'XMLHttpRequest', follow = True)
+        self.assertEqual(response.status_code, 200)
+        self.assertFalse(self.user2 in self.group.members.all())
+        self.assertFalse(self.user2 in self.group.join_requests.all())
+        self.assertTrue(len(get_unseen_notifications(self.user2)) > 0)
+        self.assertIn("REJECTED", get_unseen_notifications(self.user2)[0].message)
+
+
