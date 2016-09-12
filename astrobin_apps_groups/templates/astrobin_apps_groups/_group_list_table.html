@@ -17,12 +17,20 @@
                         <i class="icon icon-fixed-width icon-certificate" rel="tooltip" title="{% trans "Owner" %}"></i>
                     {% endif %}
 
-                    {% if request.user != group.owner and request.user in group.members.all %}
+                    {% if request.user != group.owner and request.user in group.moderators.all %}
+                        <i class="icon icon-fixed-width icon-legal" rel="tooltip" title="{% trans "Moderator" %}"></i>
+                    {% endif %}
+
+                    {% if request.user != group.owner and request.user not in group.moderators.all and request.user in group.members.all %}
                         <i class="icon icon-fixed-width icon-user" rel="tooltip" title="{% trans "Member" %}"></i>
                     {% endif %}
 
                     {% if request.user != group.owner and request.user not in group.members.all and request.user in group.invited_users.all %}
-                        <i class="icon icon-fixed-width icon-question" rel="tooltip" title="{% trans "Invited" %}"></i>
+                        <i class="icon icon-fixed-width icon-exclamation" rel="tooltip" title="{% trans "Invited" %}"></i>
+                    {% endif %}
+
+                    {% if request.user != group.owner and request.user not in group.members.all and request.user in group.join_requests.all %}
+                        <i class="icon icon-fixed-width icon-question" rel="tooltip" title="{% trans "Join request pending approval" %}"></i>
                     {% endif %}
                 </td>
                 <td class="group-name"><a href="{% url 'group_detail' group.pk %}">{{group.name}}</a></td>
