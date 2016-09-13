@@ -100,6 +100,7 @@ class GroupListView(ListView):
             'category': 'category',
             'created': 'date_created',
             'members': '-num_members',
+            'images': '-num_images',
             'posts': '-forum__post_count',
         }[sort]
 
@@ -112,6 +113,7 @@ class GroupListView(ListView):
                         Q(members = self.request.user) |
                         Q(invited_users = self.request.user))\
                     .annotate(num_members = Count('members'))\
+                    .annotate(num_images = Count('images'))\
                     .order_by(sort)\
                     .distinct()
 
@@ -119,6 +121,7 @@ class GroupListView(ListView):
             self.get_queryset()\
                 .filter(public = True)\
                 .annotate(num_members = Count('members'))\
+                .annotate(num_images = Count('images'))\
                 .order_by(sort)
 
         return context

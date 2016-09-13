@@ -59,6 +59,13 @@
                     </li>
 
                     <li>
+                        <a href="{% url 'group_list' %}?sort=images">
+                            <i class="icon icon-image"></i>
+                            {% trans "Images" %}
+                        </a>
+                    </li>
+
+                    <li>
                         <a href="{% url 'group_list' %}?sort=posts">
                             <i class="icon icon-comments-alt"></i>
                             {% trans "Forum posts" %}
