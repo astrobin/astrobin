@@ -122,7 +122,7 @@ class Group(models.Model):
         related_name = 'join_requested_group_set',
     )
 
-    _images = models.ManyToManyField(
+    images = models.ManyToManyField(
         Image,
         null = True,
         blank = True,
@@ -136,16 +136,6 @@ class Group(models.Model):
         editable = False,
         related_name = 'group',
     )
-
-    @property
-    def images(self):
-        if self.autosubmission:
-            return Image.objects.filter(user__in = self.members.all())
-        return self._images
-
-    @images.setter
-    def images(self, value):
-        self._images = value
 
     def category_humanized(self):
         for cat in self.GROUP_CATEGORY_CHOICES:

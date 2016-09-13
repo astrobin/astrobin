@@ -363,7 +363,7 @@ class GroupsTest(TestCase):
         self.group.public = False; self.group.save()
         response = self.client.post(url, follow = True)
         self.assertFalse(self.user1 in self.group.members.all())
-        self.assertFalse(image in self.group.images)
+        self.assertFalse(image in self.group.images.all())
         self.assertRedirects(response, reverse('group_list'))
         self._assertMessage(response, "success unread", "You have left the group")
         self.group.public = True; self.group.save()
@@ -372,7 +372,7 @@ class GroupsTest(TestCase):
         # Public group
         response = self.client.post(url, follow = True)
         self.assertFalse(self.user1 in self.group.members.all())
-        self.assertFalse(image in self.group.images)
+        self.assertFalse(image in self.group.images.all())
         self.assertRedirects(response, reverse('group_detail', kwargs = {'pk': self.group.pk}))
         self._assertMessage(response, "success unread", "You have left the group")
         self.group.members.add(self.user1)
@@ -948,4 +948,61 @@ class GroupsTest(TestCase):
         self.assertTrue(len(get_unseen_notifications(self.user2)) > 0)
         self.assertIn("REJECTED", get_unseen_notifications(self.user2)[0].message)
 
+    def test_group_autosubmission_sync(self):
+        def _upload():
+            self.client.login(username = 'user2', password = 'password')
+            self.client.post(
+                reverse('image_upload_process'),
+                { 'image_file': open('astrobin/fixtures/test.jpg', 'rb') },
+                follow = True)
+            self.client.logout()
+            return Image.all_objects.all().order_by('-pk')[0]
 
+        group = Group.objects.create(
+            name = 'AS sync test group',
+            category = 11,
+            creator = self.user1,
+            owner = self.user1,
+            autosubmission = True)
+        self.assertEqual(group.members.count(), 0)
+        self.assertEqual(group.images.count(), 0)
+
+        # When a member is added to a group, his images are too
+        image = _upload()
+        group.members.add(self.user2)
+        self.assertTrue(image in group.images.all())
+
+        # When an image is deleted, it goes awat from the group
+        image.delete()
+        self.assertFalse(image in group.images.all())
+
+        # WIP images are NOT added
+        image = _upload()
+        self.assertTrue(image in group.images.all())
+        image.is_wip = True; image.save()
+        self.assertFalse(image in group.images.all())
+
+        # When a member leaves a group, their images are gone
+        image.is_wip = False; image.save()
+        self.assertTrue(image in group.images.all())
+        group.members.remove(self.user2)
+        self.assertFalse(image in group.images.all())
+
+        # When a group changes from autosubmission to non-autosubmission, images are unaffected
+        group.members.add(self.user2)
+        self.assertTrue(image in group.images.all())
+        group.autosubmission = False; group.save()
+        self.assertTrue(image in group.images.all())
+
+        # When a group changes from non-autosubmission to autosubmission, image set is regenerated
+        image2 = _upload()
+        self.assertTrue(image in group.images.all())
+        self.assertFalse(image2 in group.images.all())
+        group.autosubmission = True; group.save()
+        self.assertTrue(image in group.images.all())
+        self.assertTrue(image2 in group.images.all())
+
+        # Clean up
+        image.delete()
+        image2.delete()
+        group.delete()
