@@ -22,17 +22,17 @@ class GroupUpdateBaseForm(forms.ModelForm):
 
         return cleaned_data
 
+
+class GroupCreateForm(GroupUpdateBaseForm):
     class Meta:
         model = Group
         fields = ['name', 'description', 'category', 'public', 'moderated', 'autosubmission',]
 
 
-class GroupCreateForm(GroupUpdateBaseForm):
-    pass
-
-
 class GroupUpdateForm(GroupUpdateBaseForm):
-    pass
+    class Meta:
+        model = Group
+        fields = ['name', 'description', 'category', 'public', 'moderated',]
 
 
 class GroupInviteForm(forms.ModelForm):

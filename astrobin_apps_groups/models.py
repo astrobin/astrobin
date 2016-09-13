@@ -91,7 +91,7 @@ class Group(models.Model):
     autosubmission = models.BooleanField(
         default = True,
         verbose_name = _("Automatic submission"),
-        help_text = _("Groups with automatic submissions always contain all public images from all members. Groups without automatic submission only contain images that are explicitly submitted to it."),
+        help_text = _("Groups with automatic submissions always contain all public images from all members. Groups without automatic submission only contain images that are explicitly submitted to it. WARNING: THIS FIELD CANNOT BE CHANGED AFTER THE GROUP IS CREATED."),
     )
 
     moderators = models.ManyToManyField(
