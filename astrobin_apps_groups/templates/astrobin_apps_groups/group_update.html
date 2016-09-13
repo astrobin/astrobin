@@ -9,6 +9,17 @@
 {% endblock %}
 
 {% block content %}
+    <div class="subnav subnav-fixed">
+        <ul class="nav nav-pills">
+            <li>
+                <a href="{% url 'group_detail' object.pk %}">
+                    <i class="icon icon-arrow-left"></i>
+                    {% trans "Back to group" %}
+                </a>
+            </li>
+        </ul> <!-- nav -->
+    </div> <!-- subnav -->
+
     <h1>{% trans "Edit group" %}</h1>
 
     <form class="form-horizontal" action="." method="post">{% csrf_token %}
