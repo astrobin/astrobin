@@ -220,6 +220,7 @@ class GroupsTest(TestCase):
         self.assertEqual(self.group.category, 1)
         self.assertEqual(self.group.public, False)
         self.assertEqual(self.group.moderated, True)
+        self.assertEqual(self.group.forum.name, self.group.name)
 
         # Restore previous group data
         self.group.name = 'Test group'

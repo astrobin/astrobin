@@ -28,6 +28,12 @@ def group_pre_save(sender, instance, **kwargs):
             images = Image.all_objects.filter(user__in = instance.members.all())
             for image in images:
                 instance.images.add(image)
+
+        # Group was renamed
+        if group.name != instance.name:
+            group.forum.name = instance.name
+            group.forum.save()
+
 pre_save.connect(group_pre_save, sender = Group)
 
 
