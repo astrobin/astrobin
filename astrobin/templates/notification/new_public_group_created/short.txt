@@ -1,0 +1,2 @@
+{% load i18n %}
+{% blocktrans %}{{creator}} created a new public group: "{{group_name}}"{% endblocktrans %}

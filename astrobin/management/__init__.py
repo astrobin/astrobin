@@ -160,6 +160,12 @@ NOTICE_TYPES = (
         '',
         2,
     ),
+    (
+        'new_public_group_created',
+        _("A user you follow created a new public group"),
+        '',
+        2,
+    ),
 )
 
 

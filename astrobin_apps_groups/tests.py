@@ -14,6 +14,7 @@ from astrobin_apps_groups.models import Group
 # Other AstroBin apps
 from astrobin.models import Image
 from astrobin_apps_notifications.utils import get_unseen_notifications
+from toggleproperties.models import ToggleProperty
 
 
 class GroupsTest(TestCase):
@@ -142,6 +143,9 @@ class GroupsTest(TestCase):
         response = self.client.get(url)
         self.assertEqual(response.status_code, 302)
 
+        # Add user2 to user1's followes to check notification
+        ToggleProperty.objects.create_toggleproperty("follow", self.user1, self.user2)
+
         self.client.login(username = 'user1', password = 'password')
         response = self.client.get(url)
         self.assertEqual(response.status_code, 200)
@@ -166,6 +170,9 @@ class GroupsTest(TestCase):
         self.assertTrue(group.owner in group.members.all())
         self.assertTrue(group.owner in group.moderators.all())
         self.assertTrue(group.forum != None)
+        self.assertTrue(len(get_unseen_notifications(self.user2)) > 0)
+        self.assertIn("created a new public group", get_unseen_notifications(self.user2)[0].message)
+
         group.delete()
 
         # Test the autosubmission/category combo

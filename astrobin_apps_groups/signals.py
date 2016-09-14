@@ -1,4 +1,6 @@
 # Django
+from django.core.urlresolvers import reverse, reverse_lazy
+from django.contrib.auth.models import User
 from django.db.models.signals import (
     m2m_changed, post_delete, pre_save, post_save)
 
@@ -7,6 +9,8 @@ from pybb.models import Forum
 
 # AstroBin
 from astrobin.models import Image
+from astrobin_apps_notifications.utils import push_notification
+from toggleproperties.models import ToggleProperty
 
 # This app
 from astrobin_apps_groups.models import Group
@@ -27,10 +31,22 @@ pre_save.connect(group_pre_save, sender = Group)
 
 
 def group_post_save(sender, instance, created, **kwargs):
-    if created:
-        instance.members.add(instance.owner)
+    if created and instance.creator is not None:
+        instance.members.add(instance.creator)
         if instance.moderated:
-            instance.moderators.add(instance.owner)
+            instance.moderators.add(instance.creator)
+
+        followers = [
+            x.user for x in
+            ToggleProperty.objects.toggleproperties_for_object(
+                "follow", User.objects.get(pk = instance.creator.pk))
+        ]
+        push_notification(followers, 'new_public_group_created',
+            {
+                'creator': instance.creator.userprofile.get_display_name(),
+                'group_name': instance.name,
+                'url': reverse('group_detail', args = (instance.pk,)),
+            })
 post_save.connect(group_post_save, sender = Group)
 
 
