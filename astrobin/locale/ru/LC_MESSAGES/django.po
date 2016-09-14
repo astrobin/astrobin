@@ -8,17 +8,17 @@ msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2016-08-22 08:17+0100\n"
-"PO-Revision-Date: 2016-05-11 13:47+0000\n"
-"Last-Translator: csve <csve00@gmail.com>\n"
+"PO-Revision-Date: 2016-09-11 12:21+0000\n"
+"Last-Translator: sidewinder <r.zavadich@gmail.com>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
 "Language: ru\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"Plural-Forms: nplurals=3; plural=(n%10==1 && n%100!=11 ? 0 : n%10>=2 && n"
-"%10<=4 && (n%100<10 || n%100>=20) ? 1 : 2);\n"
+"Plural-Forms: nplurals=3; plural=(n%10==1 && n%100!=11 ? 0 : n%10>=2 && n%"
+"10<=4 && (n%100<10 || n%100>=20) ? 1 : 2);\n"
 "X-Generator: Pootle 2.5.0\n"
-"X-POOTLE-MTIME: 1462974459.70759\n"
+"X-POOTLE-MTIME: 1473596492.811827\n"
 
 #: fields.py:10
 msgid "United Kingdom"
@@ -106,7 +106,7 @@ msgstr "Барбадос"
 
 #: fields.py:31
 msgid "Belarus"
-msgstr "Белоруссия"
+msgstr "Беларусь"
 
 #: fields.py:32
 msgid "Belgium"
@@ -1604,16 +1604,15 @@ msgstr "Иное"
 
 #: models.py:156
 msgid "Small"
-msgstr ""
+msgstr "Маленький"
 
 #: models.py:157
 msgid "Medium"
-msgstr ""
+msgstr "Средний"
 
 #: models.py:158
-#, fuzzy
 msgid "Large"
-msgstr "Большой размер"
+msgstr "Большой"
 
 #: models.py:162
 msgid "Center"
@@ -2002,7 +2001,7 @@ msgstr "Размер"
 
 #: models.py:762
 msgid "The final font size will depend on how long your watermark is."
-msgstr ""
+msgstr "Финальный размер шрифта будет зависеть от длины надписи."
 
 #: models.py:800
 msgid "Allow comments"
@@ -2017,9 +2016,8 @@ msgid "(no title)"
 msgstr "(без заголовка)"
 
 #: models.py:1349
-#, fuzzy
 msgid "Cover image"
-msgstr "Изображения оборудования"
+msgstr "Изображение обложки"
 
 #: models.py:1366
 msgid "Please use the following format: yyyy-mm-dd."
@@ -2347,13 +2345,12 @@ msgid "Year"
 msgstr "Год"
 
 #: models.py:1752 templates/user/profile/navigation.html:136
-#, fuzzy
 msgid "Collections"
-msgstr "Местоположения"
+msgstr "Коллекции"
 
 #: models.py:1756
 msgid "Default gallery sorting"
-msgstr ""
+msgstr "Сортировка галереи по умолчанию"
 
 #: models.py:1762 templates/maintenance_base.html:311
 #: templates/user/profile/edit/navigation.html:42
@@ -3689,18 +3686,17 @@ msgstr ""
 "            "
 
 #: templates/iotd_detail.html:7 templates/iotd_detail.html.py:13
-#, fuzzy
 msgid "Image of the Day"
-msgstr "Изображение дня"
+msgstr "Изображение Дня"
 
 #: templates/iotd_detail.html:18 templates/image/detail/iotd_banner.html:19
 msgid "chosen by"
-msgstr ""
+msgstr "выбрано"
 
 #: templates/iotd_detail.html:44
 msgctxt "images"
 msgid "Chosen from the following candidates"
-msgstr ""
+msgstr "Выбрано из следующих кандидатов"
 
 #: templates/leaderboard.html:7 templates/leaderboard.html.py:11
 #: templates/maintenance_base.html:148 templates/base/site_links.html:90
@@ -4261,15 +4257,16 @@ msgstr "Закачка завершена!"
 #: templates/user_collections_add_remove_images.html:8
 #: templates/user_collections_add_remove_images.html:15
 #: templates/user/profile/navigation.html:169
-#, fuzzy
 msgid "Add/remove images"
-msgstr "Некоторые изображения"
+msgstr "Добавление/удаление изображений"
 
 #: templates/user_collections_add_remove_images.html:18
 msgid ""
 "Click on the images to include them in this collection (and click again to "
 "exclude them). Then click on the Save button down below."
 msgstr ""
+"Нажмите на изображения, чтобы включить их в эту коллекцию (повторное нажатие "
+"исключает из коллекции). Затем нажмите кнопку Сохранить ниже."
 
 #: templates/user_collections_add_remove_images.html:46
 #: templates/user_collections_update.html:22
@@ -4312,21 +4309,19 @@ msgstr "%(user)s's галерея"
 #: templates/user_collections_create.html:18
 #: templates/user_collections_list.html:57
 msgid "Create new collection"
-msgstr ""
+msgstr "Создать новую коллекцию"
 
 #: templates/user_collections_delete_modal.html:6
-#, fuzzy
 msgid "Delete collection?"
-msgstr "Удалить разговор"
+msgstr "Удалить коллекцию?"
 
 #: templates/user_collections_delete_modal.html:10
-#, fuzzy
 msgid ""
 "The collection will be permanently deleted and cannot be recovered. The "
 "images it contains, though, are not going to be deleted. Are you sure?"
 msgstr ""
-"Это изображение будет полностью удалено и невосстановимо. Его версии не "
-"будут удалены. Вы уверены?"
+"Эта коллекция будет навсегда удалена, и восстановить ее будет невозможно. "
+"Изображения, входящие в коллекцию, удалены НЕ будут. Вы уверены?"
 
 #: templates/user_collections_delete_modal.html:21
 #: templates/image/detail/menu/actions.html:128
@@ -4340,31 +4335,28 @@ msgstr "Удалить"
 
 #: templates/user_collections_detail.html:22
 msgid "This collection contains no images."
-msgstr ""
+msgstr "Эта коллекция не содержит изображений."
 
 #: templates/user_collections_detail.html:25
-#, fuzzy
 msgid "Would you like to add some images?"
-msgstr "Желаете улучшить?"
+msgstr "Желаете добавить изображений?"
 
 #: templates/user_collections_list.html:67
-#, fuzzy
 msgid "You do not have any collections."
-msgstr "У вас нет новых уведомлений."
+msgstr "У вас нет ни одной коллекции."
 
 #: templates/user_collections_list.html:69
 msgid "Do you want to create a collection now?"
-msgstr ""
+msgstr "Вы хотите создать коллекцию сейчас?"
 
 #: templates/user_collections_list.html:76
 msgid "This user does not have any collections."
-msgstr ""
+msgstr "У этого пользователя нет ни одной коллекции."
 
 #: templates/user_collections_update.html:8
 #: templates/user_collections_update.html:14
-#, fuzzy
 msgid "Edit collection"
-msgstr "Править ваше местоположение"
+msgstr "Править коллекцию"
 
 #: templates/wall.html:17
 msgid "Sort by"
@@ -4468,17 +4460,15 @@ msgstr ""
 
 #: templates/base/site_links.html:20
 msgid "Moderate"
-msgstr ""
+msgstr "Модерировать"
 
 #: templates/base/site_links.html:24 templates/moderation/image_list.html:10
-#, fuzzy
 msgid "Image moderation"
-msgstr "Режим изображения"
+msgstr "Модерация изображения"
 
 #: templates/base/site_links.html:25
-#, fuzzy
 msgid "View spam list"
-msgstr "Подробнее"
+msgstr "Просмотр спам листа"
 
 #: templates/base/site_links.html:117
 msgid "AstroBin Raw Data"
@@ -4516,9 +4506,8 @@ msgid "Choose Image Of The Day"
 msgstr "Выбрать \"Изображение Дня\""
 
 #: templates/base/user_links_entries.html:236
-#, fuzzy
 msgid "Content moderation"
-msgstr "Страна ведения деятельности"
+msgstr "Модерация контента"
 
 #: templates/base/user_links_entries.html:260
 msgid "Would you like to start using your real name on AstroBin?"
@@ -4951,6 +4940,8 @@ msgid ""
 "This image is pending moderation and is currently not visible on the front "
 "page or search results."
 msgstr ""
+"Это изображение ожидает модерации и пока не отображается на главной странице "
+"результатов поиска."
 
 #: templates/image/detail/revisions.html:12
 #: templates/image/detail/revisions.html:33
@@ -4976,6 +4967,14 @@ msgid ""
 "revisions, <a href=\"#promote-modal\" data-toggle=\"modal\">promote it</a> "
 "to the <a href=\"%(profile_url)s\">Public Area</a>."
 msgstr ""
+"Это изображение <strong>в работе</strong> из вашей<a href=\"%"
+"(profile_url)s?staging\">Staging Area</a>. Это означает, что никто не сможет "
+"увидеть его пока вы не дадите на него прямую ссылку с помощью функции "
+"<em>Поделиться</em>. Используйте эту ссылку, чтобы публиковать изображения "
+"на форумах и получать отзывы. Когда вас все устроит, возможно, после "
+"загрузки нескольких версий, <a href=\"#promote-modal\" data-"
+"toggle=\"modal\">переместите его</a> в <a href=\"%(profile_url)s\">Public "
+"Area</a>."
 
 #: templates/image/detail/menu/actions.html:9 templates/messages/inbox.html:30
 #: templates/user/profile/commercial/products.html:43
@@ -5038,18 +5037,16 @@ msgid "Send to private shared folder"
 msgstr "Отправить в личный каталог обмена"
 
 #: templates/image/detail/menu/actions.html:126
-#, fuzzy
 msgid "Delete image and all revisions"
-msgstr "Удалить изображение и все его версии?"
+msgstr "Удалить изображение и все его версии"
 
 #: templates/image/detail/menu/actions.html:135
 msgid "Delete original image"
 msgstr "Удалить оригинальное изображение"
 
 #: templates/image/detail/menu/actions.html:142
-#, fuzzy
 msgid "Delete this revision only"
-msgstr "Удалить эту версию"
+msgstr "Удалить только эту версию"
 
 #: templates/image/detail/menu/actions.html:154
 #: templates/image/detail/modals/flag_thumbnails.html:6
@@ -5601,9 +5598,8 @@ msgid "Date joined"
 msgstr "Дата присоединения"
 
 #: templates/index/root.html:14
-#, fuzzy
 msgid "Home of Astrophotography"
-msgstr "Править ваше астрофотографическое оборудование"
+msgstr "Уголок Астрофотографии"
 
 #: templates/index/root.html:26
 msgid "The perfect home for your astrophotography."
@@ -5793,49 +5789,48 @@ msgid "Error. Try again!"
 msgstr "Ошибка. Попробуйте ещё!"
 
 #: templates/moderation/image_list.html:6
-#, fuzzy
 msgid "Image modetation"
-msgstr "Режим изображения"
+msgstr "Модерация изображения"
 
 #: templates/moderation/image_list.html:14
 msgid ""
 "Please click on the images that you want to mark as SPAM, then click on the "
 "Approve button below to approve all the others."
 msgstr ""
+"Пожалуйста, нажмите на изображения, которые вы считаете спамом, затем "
+"нажмите кнопку Подтвердить чтобы принять все остальные."
 
 #: templates/moderation/image_list.html:38
-#, fuzzy
 msgid "Approve"
-msgstr "Подтвердить сообщение"
+msgstr "Подтвердить"
 
 #: templates/moderation/image_list.html:43
 msgid "The moderation queue is empty, hooray! Come back later."
-msgstr ""
+msgstr "Ура! Очередь на модерацию пуста. Возвращайтесь позже."
 
 #: templates/moderation/spam_list.html:6 templates/moderation/spam_list.html:9
-#, fuzzy
 msgid "Spam images"
-msgstr "Некоторые изображения"
+msgstr "Спам изображения"
 
 #: templates/moderation/spam_list.html:13
 msgid ""
 "Please click on the images that you want to mark as NOT SPAM, then click on "
 "the Approve button below to approve them."
 msgstr ""
+"Пожалуйста, нажмите на изображения, которые вы считаете НЕ спамом, затем "
+"нажмите кнопку Подтвердить чтобы принять их."
 
 #: templates/moderation/spam_list.html:35
-#, fuzzy
 msgid "Approve selected"
-msgstr "цитата выбрана"
+msgstr "Подтвердить выбранное"
 
 #: templates/moderation/spam_list.html:38
 msgid "Approve selected and ban the rest"
-msgstr ""
+msgstr "Подтвердить выбранные и забанить остальные"
 
 #: templates/moderation/spam_list.html:43
-#, fuzzy
 msgid "There are no images in the spam list."
-msgstr "Ещё нет обзоров."
+msgstr "В спам листе пока нет изображений."
 
 #: templates/notification/email_body.txt:3
 #, python-format
@@ -6271,7 +6266,7 @@ msgstr ""
 "<a href=\"%(url)s\"><strong>%(user)s</strong> нравится ваше изображение!</a>"
 
 #: templates/notification/new_like/short.txt:2
-#, fuzzy, python-format
+#, python-format
 msgid "%(user)s likes your image: %(title)s"
 msgstr "%(user)s нравится ваше изображение: %(url)s"
 
@@ -6569,7 +6564,7 @@ msgstr "Отметить все темы прочитанными"
 
 #: templates/pybb/post_form.html:39
 msgid "Please note: this post will be published only after moderation."
-msgstr ""
+msgstr "Обратите внимание: этот пост будет опубликован только после модерации."
 
 #: templates/pybb/post_template.html:39
 msgid "Edited"
@@ -7133,7 +7128,7 @@ msgid "AstroBin Premium subscription plans"
 msgstr "Планы AstroBin Премиум подписки"
 
 #: templates/subscription/subscription_list.html:21
-#, fuzzy, python-format
+#, python-format
 msgid ""
 "\n"
 "            You can use AstroBin for free up to %(max_allowed)s uploads. "
@@ -7148,13 +7143,12 @@ msgid ""
 "            "
 msgstr ""
 "\n"
-"Вы можете использовать на AstroBin до %(max_allowed)s изображений.\n"
-"После можете улучшиться до <strong>Облегчённый</strong> или\n"
-"<strong>Облегчённый</strong>если у вас есть ограничения в год,\n"
-"или <strong>Премиум</strong> план для безлимита.\n"
-"Оплачивающим участникам не будет показываться реклама, и всем, включая тех, "
-"кто не платит\n"
-"будет обеспечен свободный доступ к соц-активностям AstroBin.\n"
+"Вы можете использовать AstroBin бесплатно, загружая до %(max_allowed)s\n"
+"изображений. Позже вы сможете перейти на тарифы <strong>Lite</strong>\n"
+"с годовым ограничением числа изображений, или <strong>Premium</strong>\n"
+"с неограниченным числом изображений. Платные пользователи\n"
+"не будут видеть рекламу, и всем, включая бесплатных пользователей,\n"
+"будут доступны социальные функции AstroBin.\n"
 
 #: templates/subscription/subscription_list.html:37
 msgid "AstroBin Raw Data subscription plans"
@@ -7447,7 +7441,7 @@ msgstr ""
 
 #: templates/user/profile/flickr_import.html:56
 msgid "Sorry, but importing from Flickr is reserved to AstroBin Premium users."
-msgstr ""
+msgstr "Извините, но импорт из Flickr доступен только Premium пользователям."
 
 #: templates/user/profile/flickr_import.html:96
 msgid "Click to select the photos you want to import"
@@ -7507,7 +7501,7 @@ msgstr "Недостаток данных"
 
 #: templates/user/profile/navigation.html:163
 msgid "Collection tools"
-msgstr ""
+msgstr "Инструменты коллекций"
 
 #: templates/user/profile/commercial/products.html:7
 #: templates/user/profile/commercial/products.html:15
@@ -7709,9 +7703,8 @@ msgid "Import from Flickr"
 msgstr "Импортировать из Flickr"
 
 #: templates/user/profile/edit/notifications.html:6
-#, fuzzy
 msgid "Edit your e-mail notification preferences"
-msgstr "Редактируйте настройки вашего сайта"
+msgstr "Редактировать ваши настройки уведомлений по e-mail"
 
 #: templates/user/profile/edit/preferences.html:6
 msgid "Edit your site preferences"
@@ -7873,17 +7866,15 @@ msgstr "Вы можете присоединить продукт к себе."
 
 #: views/collections.py:77
 msgid "You already have a collection with that name"
-msgstr ""
+msgstr "У вас уже есть коллекция с таким названием"
 
 #: views/collections.py:107 views/collections.py:135
-#, fuzzy
 msgid "Collection updated!"
-msgstr "Местоположения"
+msgstr "Коллекция обновлена!"
 
 #: views/collections.py:156
-#, fuzzy
 msgid "Collection deleted!"
-msgstr "Версия удалена."
+msgstr "Коллекция удалена!"
 
 #: views/home.py:22
 msgid "Default front page section changed."
