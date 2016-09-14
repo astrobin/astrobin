@@ -1,0 +1,2 @@
+{% load i18n %}
+{% blocktrans %}{{user}} submitted one or more images to the group: "{{group_name}}"{% endblocktrans %}

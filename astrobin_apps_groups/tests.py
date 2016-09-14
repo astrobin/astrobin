@@ -537,6 +537,7 @@ class GroupsTest(TestCase):
         self.group.save()
 
         # Successfully add
+        self.group.members.add(self.user2)
         response = self.client.post(url,
             {
                 'images[]': "%d" % image.pk,
@@ -545,6 +546,9 @@ class GroupsTest(TestCase):
             follow = True)
         self.assertEqual(response.status_code, 200)
         self.assertEqual(self.group.images.count(), 1)
+        self.assertTrue(len(get_unseen_notifications(self.user2)) > 0)
+        self.assertIn("submitted one or more images to the group", get_unseen_notifications(self.user2)[0].message)
+        self.group.members.remove(self.user2)
 
         # Successfully remove
         response = self.client.post(url,
@@ -585,6 +589,8 @@ class GroupsTest(TestCase):
             { 'image_file': open('astrobin/fixtures/test.jpg', 'rb') },
             follow = True)
         image = Image.objects.all().order_by('-pk')[0]
+        # Removing it as the group was autosubmission at this point
+        self.group.images.remove(image)
 
         # Cannot add/remove on autosubmission groups
         response = self.client.post(url,
@@ -607,6 +613,8 @@ class GroupsTest(TestCase):
         self.assertEqual(response.status_code, 403)
 
         # Successfully add
+        self.group.members.add(self.user2)
+        self.assertEqual(self.group.images.count(), 0)
         response = self.client.post(url,
             {
                 'image': "%d" % image.pk,
@@ -615,6 +623,9 @@ class GroupsTest(TestCase):
             follow = True)
         self.assertEqual(response.status_code, 200)
         self.assertEqual(self.group.images.count(), 1)
+        self.assertTrue(len(get_unseen_notifications(self.user2)) > 0)
+        self.assertIn("submitted one or more images to the group", get_unseen_notifications(self.user2)[0].message)
+        self.group.members.remove(self.user2)
 
         response = self.client.get(reverse('image_detail', args = (image.pk,)))
         self.assertContains(

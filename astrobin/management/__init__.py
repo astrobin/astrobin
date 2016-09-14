@@ -166,6 +166,12 @@ NOTICE_TYPES = (
         '',
         2,
     ),
+    (
+        'new_images_submitted_to_group',
+        _("A user submitted one or more images to a group of which you are a member"),
+        '',
+        2,
+    ),
 )
 
 
