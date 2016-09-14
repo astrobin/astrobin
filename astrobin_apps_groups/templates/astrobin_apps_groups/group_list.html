@@ -78,19 +78,45 @@
 
 
     {% if private_groups %}
-        <h1>{% trans "Your private groups" %}</h1>
-        <div class="subtitle">{% trans "You own, or are a member of, or were invited to, these private groups." %}</div>
-        {% with private_groups as groups %}
-            {% include 'astrobin_apps_groups/_group_list_table.html' %}
-        {% endwith %}
+        <div class="group-list">
+            <div class="row header">
+                <div class="span9">
+                    <h1>{% trans "Your private groups" %}</h1>
+                    <div class="subtitle">{% trans "You own, or are a member of, or were invited to, these private groups." %}</div>
+                </div>
+                <div class="span3 text-right">
+                    <a href="{% url 'group_create' %}" class="btn btn-primary btn-large create-group">
+                        <i class="icon icon-plus-sign"></i>
+                        {% trans "Create private group" context "group" %}
+                    </a>
+                </div>
+            </div>
+
+            {% with private_groups as groups %}
+                {% include 'astrobin_apps_groups/_group_list_table.html' %}
+            {% endwith %}
+        </div>
     {% endif %}
 
     {% if public_groups %}
-        <h1>{% trans "Public groups" %}</h1>
-        <div class="subtitle">{% trans "Open to the whole community." %}</div>
-        {% with public_groups as groups %}
-            {% include 'astrobin_apps_groups/_group_list_table.html' %}
-        {% endwith %}
+        <div class="group-list">
+            <div class="row">
+                <div class="span9">
+                    <h1>{% trans "Public groups" %}</h1>
+                    <div class="subtitle">{% trans "Open to the whole community." %}</div>
+                </div>
+                <div class="span3 text-right">
+                    <a href="{% url 'group_create' %}?public=True" class="btn btn-primary btn-large create-group">
+                        <i class="icon icon-plus-sign"></i>
+                        {% trans "Create public group" context "group" %}
+                    </a>
+                </div>
+            </div>
+
+            {% with public_groups as groups %}
+                {% include 'astrobin_apps_groups/_group_list_table.html' %}
+            {% endwith %}
+        </div>
     {% endif %}
 
     {% if not object_list %}

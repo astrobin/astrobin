@@ -159,6 +159,14 @@ class GroupCreateView(LoginRequiredMixin, RedirectToGroupDetailMixin, CreateView
     form_class = GroupCreateForm
     template_name = 'astrobin_apps_groups/group_create.html'
 
+    def get_initial(self):
+        if 'public' in self.request.GET:
+            return {
+                'public': self.request.GET.get('public')
+            };
+
+        return super(GroupCreateView, self).get_initial()
+
     def form_valid(self, form):
         group = form.save(commit = False)
         group.creator = self.request.user

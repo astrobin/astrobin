@@ -4278,6 +4278,12 @@ pre {
   padding-top: 8px;
   border-top: 1px solid #393939;
 }
+div.group-list {
+  margin-bottom: 60px;
+}
+div.group-list a.create-group {
+  margin-top: 14px;
+}
 table.group-list th,
 table.group-member-list th,
 table.group-list td,
