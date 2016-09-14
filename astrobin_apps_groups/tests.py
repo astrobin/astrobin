@@ -59,21 +59,21 @@ class GroupsTest(TestCase):
         self.assertEqual(response.status_code, 200)
         self.assertContains(response, '<h1>Public groups</h1>', html = True)
         self.assertContains(response, '<td class="group-name"><a href="' + reverse('group_detail', args = (self.group.pk,)) + '">Test group</a></td>', html = True)
-        self.assertContains(response, '<td class="group-members">0</td>', html = True)
+        self.assertContains(response, '<td class="group-members">1</td>', html = True)
         self.assertContains(response, '<td class="group-images">0</td>', html = True)
 
         # Add a member
         self.group.members.add(self.user2)
         response = self.client.get(reverse('group_list'))
         self.assertEqual(response.status_code, 200)
-        self.assertContains(response, '<td class="group-members">1</td>', html = True)
+        self.assertContains(response, '<td class="group-members">2</td>', html = True)
         self.assertContains(response, '<td class="group-images">0</td>', html = True)
 
         # Add an image for the one member
         image = Image.objects.create(title = 'Test image', user = self.user2)
         response = self.client.get(reverse('group_list'))
         self.assertEqual(response.status_code, 200)
-        self.assertContains(response, '<td class="group-members">1</td>', html = True)
+        self.assertContains(response, '<td class="group-members">2</td>', html = True)
         self.assertContains(response, '<td class="group-images">1</td>', html = True)
 
         # Test that WIP images don't work
@@ -654,7 +654,7 @@ class GroupsTest(TestCase):
         # User must be member
         response = self.client.post(url,
             {
-                'user': "%d" % self.user1.pk,
+                'user': "%d" % self.user2.pk,
             },
             HTTP_X_REQUESTED_WITH = 'XMLHttpRequest',
             follow = True)
@@ -669,7 +669,7 @@ class GroupsTest(TestCase):
             HTTP_X_REQUESTED_WITH = 'XMLHttpRequest',
             follow = True)
         self.assertEqual(response.status_code, 200)
-        self.assertEqual(self.group.members.count(), 0)
+        self.assertEqual(self.group.members.count(), 1) # Just user1 left
 
         # Clean up
         self.client.logout()
@@ -804,19 +804,22 @@ class GroupsTest(TestCase):
         self.group.public = True; self.group.save()
         self.client.logout()
 
-        # Members list is empty
-        self.client.login(username = 'user1', password = 'password')
-        response = self.client.get(url)
-        self.assertEqual(response.status_code, 200)
-        self.assertContains(response, "This group has no members")
-        self.client.logout()
-
         # Members are rendered in table
         self.client.login(username = 'user1', password = 'password')
         self.group.members.add(self.user2)
         response = self.client.get(url)
         self.assertContains(response, self.user2.username)
         self.client.logout()
+
+        # Members list is empty
+        self.group.members.clear()
+        self.client.login(username = 'user1', password = 'password')
+        response = self.client.get(url)
+        self.assertEqual(response.status_code, 200)
+        self.assertContains(response, "This group has no members")
+        self.client.logout()
+
+        self.group.members.add(self.user1)
 
     def test_group_moderate_join_requests_view(self):
         url = reverse('group_moderate_join_requests', kwargs = {'pk': self.group.pk})
@@ -964,7 +967,7 @@ class GroupsTest(TestCase):
             creator = self.user1,
             owner = self.user1,
             autosubmission = True)
-        self.assertEqual(group.members.count(), 0)
+        self.assertEqual(group.members.count(), 1)
         self.assertEqual(group.images.count(), 0)
 
         # When a member is added to a group, his images are too

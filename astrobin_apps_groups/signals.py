@@ -11,16 +11,6 @@ from astrobin.models import Image
 # This app
 from astrobin_apps_groups.models import Group
 
-
-def group_post_delete(sender, instance, **kwargs):
-    try:
-        instance.forum.delete()
-    except Forum.DoesNotExist:
-        pass
-post_delete.connect(group_post_delete, sender = Group)
-
-
-# Keep images in sync when group is autosubmission
 def group_pre_save(sender, instance, **kwargs):
     try:
         group = sender.objects.get(pk = instance.pk)
@@ -34,6 +24,14 @@ def group_pre_save(sender, instance, **kwargs):
             for image in images:
                 instance.images.add(image)
 pre_save.connect(group_pre_save, sender = Group)
+
+
+def group_post_save(sender, instance, created, **kwargs):
+    if created:
+        instance.members.add(instance.owner)
+        if instance.moderated:
+            instance.moderators.add(instance.owner)
+post_save.connect(group_post_save, sender = Group)
 
 
 def group_members_changed(sender, instance, **kwargs):
@@ -50,6 +48,14 @@ def group_members_changed(sender, instance, **kwargs):
     elif action == 'post_clear':
         instance.images.clear()
 m2m_changed.connect(group_members_changed, sender = Group.members.through)
+
+
+def group_post_delete(sender, instance, **kwargs):
+    try:
+        instance.forum.delete()
+    except Forum.DoesNotExist:
+        pass
+post_delete.connect(group_post_delete, sender = Group)
 
 
 def image_post_save(sender, instance, created, **kwargs):
