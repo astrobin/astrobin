@@ -1,5 +1,6 @@
 # Django
 from django.contrib.auth.models import User
+from django.core.urlresolvers import reverse
 from django.db import models
 from django.utils import html
 from django.utils.translation import ugettext_lazy as _
@@ -156,6 +157,9 @@ class Group(models.Model):
             )
 
         super(Group, self).save(*args, **kwargs)
+
+    def get_absolute_url(self):
+        return reverse('group_detail', kwargs = {'pk': self.pk})
 
     def __unicode__(self):
         return self.name

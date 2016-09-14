@@ -14,6 +14,9 @@ LOCALE_EXTRAS = (
     _("created a new public data pool"),
     _("added new data to public data pool"),
     _("added a new processed image to public data pool"),
+    _("created a new public group"),
+    _("joined the public group"),
+    _("submitted one or more images to the public group"),
     _("Remove from bookmarks"),
     _("Bookmark").
     _("Unlike"),

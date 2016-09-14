@@ -3076,7 +3076,6 @@ form.avatar-change label.control-label {
 .blog-stream-entries .entry {
   padding: 8px 0;
   position: relative;
-  min-height: 160px;
 }
 .activity-actions .action .action-inner,
 .blog-stream-entries .action .action-inner,
@@ -3093,6 +3092,7 @@ form.avatar-change label.control-label {
   -moz-border-radius: 3px;
   -webkit-border-radius: 3px;
   border-radius: 3px;
+  min-height: 64px;
 }
 .activity-actions .action .action-inner img.astrobin-image,
 .blog-stream-entries .action .action-inner img.astrobin-image,

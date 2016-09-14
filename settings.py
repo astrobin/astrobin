@@ -496,6 +496,7 @@ ACTSTREAM_SETTINGS = {
         'nested_comments.nestedcomment',
         'reviews.revieweditem',
         'toggleproperties.toggleproperty',
+        'astrobin_apps_groups.group',
     ),
 
 }

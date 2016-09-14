@@ -3225,7 +3225,6 @@ form.avatar-change label.control-label {display: none;}
     .action, .entry {
         padding: @spacer-medium 0;
         position: relative;
-        min-height: 160px;
 
         .action-inner {
             position: relative;
@@ -3235,6 +3234,7 @@ form.avatar-change label.control-label {display: none;}
             border: 1px solid #191919;
             .box-shadow-subtle;
             .rounded-corners(3px);
+            min-height: 64px; // because of the avatar
 
             img.astrobin-image {
                 border: 1px solid #282828;

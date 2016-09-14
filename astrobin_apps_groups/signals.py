@@ -5,6 +5,7 @@ from django.db.models.signals import (
     m2m_changed, post_delete, pre_save, post_save)
 
 # Third party
+from actstream import action as act
 from pybb.models import Forum
 
 # AstroBin
@@ -47,6 +48,11 @@ def group_post_save(sender, instance, created, **kwargs):
                 'group_name': instance.name,
                 'url': reverse('group_detail', args = (instance.pk,)),
             })
+
+        act.send(
+            instance.creator,
+            verb = "created a new public group",
+            action_object = instance)
 post_save.connect(group_post_save, sender = Group)
 
 
@@ -67,6 +73,12 @@ def group_members_changed(sender, instance, **kwargs):
                         'group_name': instance.name,
                         'url': reverse('group_detail', args = (instance.pk,)),
                     })
+
+                act.send(
+                    user,
+                    verb = "joined the public group",
+                    action_object = instance)
+
         if instance.autosubmission:
             images = Image.all_objects.filter(user__pk__in = kwargs['pk_set'])
             for image in images:
@@ -95,6 +107,13 @@ def group_images_changed(sender, instance, **kwargs):
                     'group_name': instance.name,
                     'url': reverse('group_detail', args = (instance.pk,)),
                 })
+
+            if instance.public:
+                act.send(
+                    user,
+                    verb = "submitted one or more images to the public group",
+                    target = instance)
+
 m2m_changed.connect(group_images_changed, sender = Group.images.through)
 
 def group_post_delete(sender, instance, **kwargs):
