@@ -522,7 +522,19 @@ class GroupsTest(TestCase):
         response = self.client.post(reverse('group_add_remove_images', kwargs = {'pk': 999}), follow = True)
         self.assertEqual(response.status_code, 404)
 
-        image = Image.objects.create(title = 'Test image', user = self.user1)
+        # Upload an image
+        self.client.post(
+            reverse('image_upload_process'),
+            { 'image_file': open('astrobin/fixtures/test.jpg', 'rb') },
+            follow = True)
+        image = Image.objects.all().order_by('-pk')[0]
+
+        # Upload another
+        self.client.post(
+            reverse('image_upload_process'),
+            { 'image_file': open('astrobin/fixtures/test.jpg', 'rb') },
+            follow = True)
+        image2 = Image.objects.all().order_by('-pk')[0]
 
         # Cannot add/remove on autosubmission groups
         response = self.client.post(url,
@@ -540,15 +552,15 @@ class GroupsTest(TestCase):
         self.group.members.add(self.user2)
         response = self.client.post(url,
             {
-                'images[]': "%d" % image.pk,
+                'images[]': [image.pk, image2.pk],
             },
             HTTP_X_REQUESTED_WITH = 'XMLHttpRequest',
             follow = True)
         self.assertEqual(response.status_code, 200)
-        self.assertEqual(self.group.images.count(), 1)
+        self.assertEqual(self.group.images.count(), 2)
         for notification in get_unseen_notifications(self.user1):
             self.assertNotIn("submitted on or more images to the group", notification.message)
-        self.assertTrue(len(get_unseen_notifications(self.user2)) > 0)
+        self.assertTrue(len(get_unseen_notifications(self.user2)) == 1)
         self.assertIn("submitted one or more images to the group", get_unseen_notifications(self.user2)[0].message)
         self.group.members.remove(self.user2)
 

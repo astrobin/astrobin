@@ -344,19 +344,18 @@ class GroupAddRemoveImages(
         if request.is_ajax():
             group = self.get_object()
             group.images.remove(*Image.all_objects.filter(user = request.user))
-            for pk in request.POST.getlist('images[]'):
-                image = Image.objects.get(pk = pk)
-                if (image.user == request.user):
-                    group.images.add(image)
+            images = Image.objects.filter(pk__in = request.POST.getlist('images[]'))
+            if images:
+                if images[0].user == request.user:
+                    group.images.add(*images)
+                    messages.success(request, _("Group updated with your selection of images."))
                 else:
-                    message.error(request, _("You cannot add images that are not yours!"))
+                    messages.error(request, _("You cannot add images that are not yours!"))
                     return super(GroupAddRemoveImages, self).post(request, *args, **kwargs)
 
-            messages.success(request, _("Group updated with your selection of images."))
-
-            return self.render_json_response({
-                'images': ','.join([str(x.pk) for x in group.images.filter(user = request.user)]),
-            })
+                return self.render_json_response({
+                    'images': ','.join([str(x.pk) for x in group.images.filter(user = request.user)]),
+                })
         return super(GroupAddRemoveImages, self).post(request, *args, **kwargs)
 
 
