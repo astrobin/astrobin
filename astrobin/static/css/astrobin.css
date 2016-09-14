@@ -4230,9 +4230,6 @@ pre {
 .image-moderation .astrobin-image-container {
   padding: 9px;
 }
-.group-header {
-  margin-bottom: 24px;
-}
 .group-header .group-info-container {
   text-align: right;
   padding-top: 20px;
@@ -4268,6 +4265,9 @@ pre {
 }
 .group-header .group-info-container .group-actions a {
   margin-bottom: 2px;
+}
+.group-description {
+  color: #ddd;
 }
 .group-forum h2 small strong {
   color: white;
