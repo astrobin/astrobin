@@ -143,7 +143,7 @@ class GroupsTest(TestCase):
         response = self.client.get(url)
         self.assertEqual(response.status_code, 302)
 
-        # Add user2 to user1's followes to check notification
+        # Add user2 to user1's followers to check notification
         ToggleProperty.objects.create_toggleproperty("follow", self.user1, self.user2)
 
         self.client.login(username = 'user1', password = 'password')
