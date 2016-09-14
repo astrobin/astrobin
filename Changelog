@@ -1,3 +1,12 @@
+2016-09-14 Salvatore Iovene <salvatore@iovene.com>
+ * v1.14
+ * Add 'groups' feauture (fixes: #78)
+ * Improve readability of form help text (fixes: #349)
+ * Improve readability of forum posts needing moderation (fixes: #348)
+ * Fix 'unread' status of forum posts in home page panel (fixes: #342)
+ * Prevent rare (although possible) data loss (fixes: #340)
+ * Make it clear that notification settings refer to emails (fixes: #337)
+
 2016-09-09 Salvatore Iovene <salvatore@iovene.com>
  * v1.13
  * Improve testing performance and add more tests
