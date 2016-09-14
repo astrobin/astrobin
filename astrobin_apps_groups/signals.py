@@ -53,10 +53,24 @@ post_save.connect(group_post_save, sender = Group)
 def group_members_changed(sender, instance, **kwargs):
     action = kwargs['action']
 
-    if action == 'post_add' and instance.autosubmission:
-        images = Image.all_objects.filter(user__pk__in = kwargs['pk_set'])
-        for image in images:
-            instance.images.add(image)
+    if action == 'post_add':
+        if instance.public:
+            for pk in kwargs['pk_set']:
+                user = User.objects.get(pk = pk)
+                followers = [
+                    x.user for x in
+                    ToggleProperty.objects.toggleproperties_for_object("follow", user)
+                ]
+                push_notification(followers, 'user_joined_public_group',
+                    {
+                        'user': user.userprofile.get_display_name(),
+                        'group_name': instance.name,
+                        'url': reverse('group_detail', args = (instance.pk,)),
+                    })
+        if instance.autosubmission:
+            images = Image.all_objects.filter(user__pk__in = kwargs['pk_set'])
+            for image in images:
+                instance.images.add(image)
     elif action == 'post_remove':
         images = Image.all_objects.filter(user__pk__in = kwargs['pk_set'])
         for image in images:

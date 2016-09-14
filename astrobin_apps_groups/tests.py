@@ -309,10 +309,13 @@ class GroupsTest(TestCase):
         self.group.moderators.clear()
 
         # Join successful
+        ToggleProperty.objects.create_toggleproperty("follow", self.user2, self.user1)
         response = self.client.post(url, follow = True)
         self.assertEqual(response.status_code, 200)
         self._assertMessage(response, "success unread", "You have joined the group")
         self.assertTrue(self.user2 in self.group.members.all())
+        self.assertTrue(len(get_unseen_notifications(self.user1)) > 0)
+        self.assertIn("joined the public group", get_unseen_notifications(self.user1)[0].message)
 
         # Second attempt results in error "already joined"
         response = self.client.post(url, follow = True)
@@ -907,12 +910,16 @@ class GroupsTest(TestCase):
         self.assertEqual(response.status_code, 403)
 
         # Success
+        ToggleProperty.objects.create_toggleproperty("follow", self.user2, self.user1)
         response = self.client.post(url, {'user': self.user2.pk}, HTTP_X_REQUESTED_WITH = 'XMLHttpRequest', follow = True)
         self.assertEqual(response.status_code, 200)
         self.assertTrue(self.user2 in self.group.members.all())
         self.assertFalse(self.user2 in self.group.join_requests.all())
         self.assertTrue(len(get_unseen_notifications(self.user2)) > 0)
         self.assertIn("APPROVED", get_unseen_notifications(self.user2)[0].message)
+        self.assertTrue(len(get_unseen_notifications(self.user1)) > 0)
+        self.assertIn("joined the public group", get_unseen_notifications(self.user1)[0].message)
+
 
     def test_group_reject_join_request_view(self):
         url = reverse('group_reject_join_request', kwargs = {'pk': self.group.pk})
