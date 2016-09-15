@@ -559,10 +559,6 @@ class GroupsTest(TestCase):
             follow = True)
         self.assertEqual(response.status_code, 200)
         self.assertEqual(self.group.images.count(), 2)
-        for notification in get_unseen_notifications(self.user1):
-            self.assertNotIn("submitted on or more images to the group", notification.message)
-        self.assertTrue(len(get_unseen_notifications(self.user2)) == 1)
-        self.assertIn("submitted one or more images to the group", get_unseen_notifications(self.user2)[0].message)
         self.group.members.remove(self.user2)
 
         # Successfully remove
@@ -638,10 +634,6 @@ class GroupsTest(TestCase):
             follow = True)
         self.assertEqual(response.status_code, 200)
         self.assertEqual(self.group.images.count(), 1)
-        for notification in get_unseen_notifications(self.user1):
-            self.assertNotIn("submitted on or more images to the group", notification.message)
-        self.assertTrue(len(get_unseen_notifications(self.user2)) > 0)
-        self.assertIn("submitted one or more images to the group", get_unseen_notifications(self.user2)[0].message)
         self.group.members.remove(self.user2)
 
         response = self.client.get(reverse('image_detail', args = (image.pk,)))

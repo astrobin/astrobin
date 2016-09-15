@@ -97,31 +97,6 @@ def group_members_changed(sender, instance, **kwargs):
         instance.images.clear()
 m2m_changed.connect(group_members_changed, sender = Group.members.through)
 
-
-def group_images_changed(sender, instance, **kwargs):
-    action = kwargs['action']
-
-    if action == 'post_add' and instance.autosubmission == False:
-        user = None
-        for pk in kwargs['pk_set']:
-            user = Image.objects.get(pk = pk).user
-            break # one is enough
-        if user:
-            push_notification(instance.members.exclude(pk = user.pk), 'new_images_submitted_to_group',
-                {
-                    'user': user.userprofile.get_display_name(),
-                    'group_name': instance.name,
-                    'url': reverse('group_detail', args = (instance.pk,)),
-                })
-
-            if instance.public:
-                act.send(
-                    user,
-                    verb = "submitted one or more images to the public group",
-                    target = instance)
-
-m2m_changed.connect(group_images_changed, sender = Group.images.through)
-
 def group_post_delete(sender, instance, **kwargs):
     try:
         instance.forum.delete()

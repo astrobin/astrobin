@@ -165,13 +165,7 @@ NOTICE_TYPES = (
         _("A user you follow created a new public group"),
         '',
         2,
-    ),
-    (
-        'new_images_submitted_to_group',
-        _("A user submitted images to a group you joined"),
-        '',
-        2,
-    ),
+    )
 )
 
 
