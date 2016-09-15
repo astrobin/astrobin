@@ -94,11 +94,12 @@ class GroupListView(ListView):
     def get_context_data(self, **kwargs):
         context = super(GroupListView, self).get_context_data(**kwargs)
 
-        sort = self.request.GET.get('sort', 'created')
+        sort = self.request.GET.get('sort', 'activity')
         sort = {
             'name': 'name',
             'category': 'category',
-            'created': 'date_created',
+            'created': '-date_created',
+            'activity': '-date_updated',
             'members': '-num_members',
             'images': '-num_images',
             'posts': '-forum__post_count',

@@ -45,6 +45,14 @@
                     </li>
 
                     <li>
+                        <a href="{% url 'group_list' %}?sort=activity">
+                            <i class="icon icon-bolt"></i>
+                            {% trans "Last activity" %}
+                        </a>
+                    </li>
+
+
+                    <li>
                         <a href="{% url 'group_list' %}?sort=created">
                             <i class="icon icon-calendar"></i>
                             {% trans "Date created" %}

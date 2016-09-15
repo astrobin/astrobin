@@ -6,7 +6,7 @@ from django.db.models.signals import (
 
 # Third party
 from actstream import action as act
-from pybb.models import Forum
+from pybb.models import Forum, Post
 
 # AstroBin
 from astrobin.models import Image
@@ -66,6 +66,7 @@ def group_members_changed(sender, instance, **kwargs):
     action = kwargs['action']
 
     if action == 'post_add':
+        instance.save() # trigger date_updated update
         if instance.public:
             for pk in kwargs['pk_set']:
                 user = User.objects.get(pk = pk)
@@ -97,13 +98,17 @@ def group_members_changed(sender, instance, **kwargs):
         instance.images.clear()
 m2m_changed.connect(group_members_changed, sender = Group.members.through)
 
+def group_images_changed(sender, instance, **kwargs):
+    if kwargs['action'] == 'post_add':
+        instance.save() # trigger date_updated update
+m2m_changed.connect(group_images_changed, sender = Group.images.through)
+
 def group_post_delete(sender, instance, **kwargs):
     try:
         instance.forum.delete()
     except Forum.DoesNotExist:
         pass
 post_delete.connect(group_post_delete, sender = Group)
-
 
 def image_post_save(sender, instance, created, **kwargs):
     groups = instance.user.joined_group_set.filter(autosubmission = True)
@@ -115,3 +120,8 @@ def image_post_save(sender, instance, created, **kwargs):
         for group in groups:
             group.images.add(instance)
 post_save.connect(image_post_save, sender = Image)
+
+def forum_post_post_save(sender, instance, created, **kwargs):
+    if created and instance.topic.forum.group is not None:
+        instance.topic.forum.group.save() # trigger date_updated update
+post_save.connect(forum_post_post_save, sender = Post)

@@ -358,3 +358,9 @@ def is_content_moderator(user):
         return False
 
     return user.groups.filter(name='Content moderators').count() > 0
+
+
+@register.filter
+def to_user_timezone(value, user):
+    from astrobin.utils import to_user_timezone as tut
+    return tut(value, user.userprofile)

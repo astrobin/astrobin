@@ -26,14 +26,14 @@ class Group(models.Model):
         (101, _("Other")),
     )
 
-    date_created = models.DateField(
+    date_created = models.DateTimeField(
         null = False,
         blank = False,
         auto_now_add = True,
         editable = False,
     )
 
-    date_updated = models.DateField(
+    date_updated = models.DateTimeField(
         null = False,
         blank = False,
         auto_now = True,
@@ -166,4 +166,4 @@ class Group(models.Model):
 
     class Meta:
         app_label = 'astrobin_apps_groups'
-        ordering = ['-date_created']
+        ordering = ['date_updated']

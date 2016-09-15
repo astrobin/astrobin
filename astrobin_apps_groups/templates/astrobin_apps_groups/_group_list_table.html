@@ -1,3 +1,4 @@
+{% load tags %}
 {% load i18n %}
 
 <table class="table group-list">
@@ -5,6 +6,7 @@
         <th class="group-membership"></th>
         <th class="group-name">{% trans "Name" %}</th>
         <th class="group-category">{% trans "Category" %}</th>
+        <th class="group-last-activity">{% trans "Last activity" %}</th>
         <th class="group-members">{% trans "Members" %}</th>
         <th class="group-images">{% trans "Images" %}</th>
         <th class="group-forum-posts">{% trans "Forum posts" %}</th>
@@ -35,6 +37,7 @@
                 </td>
                 <td class="group-name"><a href="{% url 'group_detail' group.pk %}">{{group.name}}</a></td>
                 <td class="group-category">{{group.category_humanized}}</td>
+                <td class="group-last-activity"><abbr class="timeago" title="{{group.date_updated|to_user_timezone:request.user|date:'Y-m-d\TH:i:s'}}"></td>
                 <td class="group-members">{{group.members.count}}</td>
                 <td class="group-images">{{group.images.count}}</td>
                 <td class="group-forum-posts">{{group.forum.post_count}}</td>
