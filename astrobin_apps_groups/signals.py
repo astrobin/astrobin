@@ -107,7 +107,7 @@ def group_images_changed(sender, instance, **kwargs):
             user = Image.objects.get(pk = pk).user
             break # one is enough
         if user:
-            push_notification(instance.members.exclude(pk = pk), 'new_images_submitted_to_group',
+            push_notification(instance.members.exclude(pk = user.pk), 'new_images_submitted_to_group',
                 {
                     'user': user.userprofile.get_display_name(),
                     'group_name': instance.name,
