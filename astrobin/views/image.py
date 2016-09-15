@@ -517,7 +517,7 @@ class ImageDetailView(DetailView):
             'content_type': ContentType.objects.get(app_label = 'astrobin', model = 'image'),
             'preferred_language': preferred_language,
             'select_group_form': GroupSelectForm(user = self.request.user) if self.request.user.is_authenticated() else None,
-            'in_public_groups': Group.objects.filter(Q(public = True, autosubmission = False, images = image) | Q(public = True, autosubmission = False, members = image.user)).distinct(),
+            'in_public_groups': Group.objects.filter(Q(public = True, images = image)),
             'select_datapool_form': PublicDataPool_SelectExistingForm(),
             'select_sharedfolder_form': PrivateSharedFolder_SelectExistingForm(user = self.request.user) if self.request.user.is_authenticated() else None,
             'has_sharedfolders': PrivateSharedFolder.objects.filter(
