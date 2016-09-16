@@ -627,7 +627,7 @@ def image_upload_process(request):
 
     used_percent = premium_used_percent(request.user)
     if used_percent >= 100:
-        messages.error(request, _("You have reached your image uploads limit. Please upgrade!"));
+        messages.error(request, _("You have reached your image count limit. Please upgrade!"));
         return HttpResponseRedirect('/upload/')
 
     if settings.READONLY_MODE:

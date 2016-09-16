@@ -7,12 +7,13 @@ from django.contrib.auth.models import User
 from django.contrib.contenttypes.models import ContentType
 from django.core.urlresolvers import reverse as reverse_url
 from django.db.models.signals import m2m_changed
-from django.db.models.signals import post_save
+from django.db.models.signals import post_save, pre_delete
 
 # Third party apps
 from actstream import action as act
 from rest_framework.authtoken.models import Token
 from toggleproperties.models import ToggleProperty
+from subscription.models import UserSubscription
 from subscription.signals import subscribed, paid
 
 # Other AstroBin apps
@@ -28,7 +29,7 @@ from astrobin_apps_platesolving.models import Solution
 from astrobin_apps_platesolving.solver import Solver
 from astrobin_apps_notifications.utils import push_notification
 from astrobin_apps_premium.templatetags.astrobin_apps_premium_tags import (
-    is_lite, is_premium)
+    is_free, is_lite, is_premium)
 
 # This app
 from .models import Image, ImageRevision, Gear, UserProfile
@@ -61,6 +62,25 @@ def image_post_save(sender, instance, created, **kwargs):
             if instance.moderator_decision == 1:
                 verb = "uploaded a new image"
                 act.send(instance.user, verb = verb, action_object = instance)
+
+
+def image_pre_delete(sender, instance, **kwargs):
+    def decrease_counter(user):
+        user.userprofile.premium_counter -= 1
+        user.userprofile.save()
+
+    if is_free(instance.user):
+        decrease_counter(instance.user)
+
+    if is_lite(instance.user):
+        usersub = UserSubscription.active_objects.get(
+            user = instance.user,
+            subscription__name = 'AstroBin Lite')
+
+        usersub_created = usersub.expires - datetime.timedelta(365) # leap years be damned
+        dt = instance.uploaded.date() - usersub_created
+        if dt.days >= 0:
+            decrease_counter(instance.user)
 
 
 def imagerevision_post_save(sender, instance, created, **kwargs):
@@ -335,3 +355,5 @@ m2m_changed.connect(rawdata_privatesharedfolder_user_added, sender = PrivateShar
 
 subscribed.connect(subscription_subscribed)
 paid.connect(subscription_subscribed)
+
+pre_delete.connect(image_pre_delete, sender = Image)
