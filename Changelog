@@ -1,3 +1,26 @@
+2016-09-16 Salvatore Iovene <salvatore@iovene.com>
+ * v1.15.0
+ * Make Free and Lite more generous by counting images rather than uploads
+ (fixes: #344)
+ * Add URLs in Group notifications (fixes: #363 and #370)
+ * Add schema migration for previous change to some on_delete properties
+ (fixes: #369)
+ * Fix infinite recursion error when adding images to autosubmission Groups
+ (fixes: #368)
+ * Fix server crash when anonymous users visits Groups page (fixes: #367)
+ * Make image info box display upload date, rather than update date (fixes:
+ #346)
+ * Improve UI of thumbnail overlays (fixes: #351)
+ * Remove extra pagination from forum topics (fixes: #350)
+ * Fix broken group sorting by images and members (fixes: #364)
+ * Default group sorting by last activity, and add table column (fixes: #356)
+ * Remove orphan notification templates
+ * Fix wrong groups being shown in "In these groups" panel (fixes: #358)
+ * Fix logical error in post viewing permissions (fixes: #362)
+ * Remove too frequent notification "Submitted images to group" (fixes: #361)
+ * Keep group and group forum names in sync (fixes: #354)
+ * Update Russian localization
+
 2016-09-14 Salvatore Iovene <salvatore@iovene.com>
  * v1.14
  * Add 'groups' feauture (fixes: #78)
