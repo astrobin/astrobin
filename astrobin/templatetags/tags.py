@@ -363,4 +363,6 @@ def is_content_moderator(user):
 @register.filter
 def to_user_timezone(value, user):
     from astrobin.utils import to_user_timezone as tut
-    return tut(value, user.userprofile)
+    if user.is_authenticated():
+        return tut(value, user.userprofile)
+    return value
