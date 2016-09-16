@@ -113,16 +113,16 @@ class GroupListView(ListView):
                         Q(owner = self.request.user) |
                         Q(members = self.request.user) |
                         Q(invited_users = self.request.user))\
-                    .annotate(num_members = Count('members'))\
-                    .annotate(num_images = Count('images'))\
-                    .order_by(sort)\
-                    .distinct()
+                    .distinct()\
+                    .annotate(num_members = Count('members', distinct = True))\
+                    .annotate(num_images = Count('images', distinct = True))\
+                    .order_by(sort)
 
         context['public_groups'] = \
             self.get_queryset()\
                 .filter(public = True)\
-                .annotate(num_members = Count('members'))\
-                .annotate(num_images = Count('images'))\
+                .annotate(num_members = Count('members', distinct = True))\
+                .annotate(num_images = Count('images', distinct = True))\
                 .order_by(sort)
 
         return context
