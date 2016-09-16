@@ -124,6 +124,6 @@ def image_post_save(sender, instance, created, **kwargs):
 post_save.connect(image_post_save, sender = Image)
 
 def forum_post_post_save(sender, instance, created, **kwargs):
-    if created and instance.topic.forum.group is not None:
+    if created and hasattr(instance.topic.forum, "group"):
         instance.topic.forum.group.save() # trigger date_updated update
 post_save.connect(forum_post_post_save, sender = Post)
