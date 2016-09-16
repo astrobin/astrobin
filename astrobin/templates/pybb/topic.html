@@ -64,9 +64,6 @@
 
     <div class="topic">
         <h1>{{ topic.name }}</h1>
-        {% with _('Posts') as label %}
-            {% include "pybb/pagination.html" %}
-        {% endwith %}
 
         {% if topic.poll_type %}
             {% include 'pybb/poll.html' %}
