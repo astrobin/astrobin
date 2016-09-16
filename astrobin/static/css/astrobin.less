@@ -1684,7 +1684,7 @@ div.capty-target {
     display: none;
 
     .capty-caption-content {
-        padding: 8px;
+        padding: 12px 8px;
 
         font-size: @base-font-size * 0.65;
         color: #ddd;
@@ -1693,6 +1693,24 @@ div.capty-target {
         a {
             color: @link-color;
             font-size: 90%;
+        }
+
+        .table {
+            margin-top: 8px;
+            th, td {
+                text-align: left !important;
+                background: none;
+                border-top: none;
+                border-right: none;
+                border-left: none;
+                border-bottom: 1px solid #363636;
+            }
+            th {
+                color: white;
+            }
+            td {
+                color: #ddd;
+            }
         }
 
         .table-condensed th, .table-condensed td {

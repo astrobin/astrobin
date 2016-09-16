@@ -1554,7 +1554,7 @@ div.capty-target {
   display: none;
 }
 div.capty-target .capty-caption-content {
-  padding: 8px;
+  padding: 12px 8px;
   font-size: 8.450000000000001px;
   color: #ddd;
   text-shadow: 1px 1px 1px black;
@@ -1562,6 +1562,24 @@ div.capty-target .capty-caption-content {
 div.capty-target .capty-caption-content a {
   color: #cc4b2e;
   font-size: 90%;
+}
+div.capty-target .capty-caption-content .table {
+  margin-top: 8px;
+}
+div.capty-target .capty-caption-content .table th,
+div.capty-target .capty-caption-content .table td {
+  text-align: left !important;
+  background: none;
+  border-top: none;
+  border-right: none;
+  border-left: none;
+  border-bottom: 1px solid #363636;
+}
+div.capty-target .capty-caption-content .table th {
+  color: white;
+}
+div.capty-target .capty-caption-content .table td {
+  color: #ddd;
 }
 div.capty-target .capty-caption-content .table-condensed th,
 div.capty-target .capty-caption-content .table-condensed td {
