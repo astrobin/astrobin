@@ -1,4 +1,5 @@
 # Django
+from django.conf import settings
 from django.contrib import messages
 from django.db.models import Count
 from django.http import HttpResponseForbidden
@@ -221,7 +222,7 @@ class GroupJoinView(LoginRequiredMixin, RedirectToGroupDetailMixin, UpdateView):
                     {
                         'requester': request.user.userprofile.get_display_name(),
                         'group_name': group.name,
-                        'url': reverse('group_moderate_join_requests', args = (group.pk,)),
+                        'url': settings.ASTROBIN_BASE_URL + reverse('group_moderate_join_requests', args = (group.pk,)),
                     })
                 return redirect(self.get_success_url())
             else:
@@ -283,7 +284,7 @@ class GroupInviteView(
                     'inviter': request.user.userprofile.get_display_name(),
                     'inviter_page': reverse('user_page', args = (request.user.username,)),
                     'group_name': group.name,
-                    'group_page': reverse('group_detail', args = (group.pk,)),
+                    'group_page': settings.ASTROBIN_BASE_URL + reverse('group_detail', args = (group.pk,)),
                 })
 
         if request.is_ajax():
@@ -496,7 +497,7 @@ class GroupApproveJoinRequestView(JSONResponseMixin, LoginRequiredMixin,
             push_notification([user], 'group_join_request_approved',
                 {
                     'group_name': group.name,
-                    'url': reverse('group_detail', args = (group.pk,)),
+                    'url': settings.ASTROBIN_BASE_URL + reverse('group_detail', args = (group.pk,)),
                 })
 
             return self.render_json_response({
@@ -524,7 +525,7 @@ class GroupRejectJoinRequestView(JSONResponseMixin, LoginRequiredMixin,
             push_notification([user], 'group_join_request_rejected',
                 {
                     'group_name': group.name,
-                    'url': reverse('group_detail', args = (group.pk,)),
+                    'url': settings.ASTROBIN_BASE_URL + reverse('group_detail', args = (group.pk,)),
                 })
 
             return self.render_json_response({

@@ -1,4 +1,5 @@
 # Django
+from django.conf import settings
 from django.core.urlresolvers import reverse, reverse_lazy
 from django.contrib.auth.models import User
 from django.db.models.signals import (
@@ -52,7 +53,7 @@ def group_post_save(sender, instance, created, **kwargs):
             {
                 'creator': instance.creator.userprofile.get_display_name(),
                 'group_name': instance.name,
-                'url': reverse('group_detail', args = (instance.pk,)),
+                'url': settings.ASTROBIN_BASE_URL + reverse('group_detail', args = (instance.pk,)),
             })
 
         act.send(
@@ -78,7 +79,7 @@ def group_members_changed(sender, instance, **kwargs):
                     {
                         'user': user.userprofile.get_display_name(),
                         'group_name': instance.name,
-                        'url': reverse('group_detail', args = (instance.pk,)),
+                        'url': settings.ASTROBIN_BASE_URL + reverse('group_detail', args = (instance.pk,)),
                     })
 
                 act.send(
