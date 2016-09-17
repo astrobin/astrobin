@@ -138,6 +138,14 @@ class Group(models.Model):
         related_name = 'group',
     )
 
+    @property
+    def members_count(self):
+        return self.members.count()
+
+    @property
+    def images_count(self):
+        return self.images.count()
+
     def category_humanized(self):
         for cat in self.GROUP_CATEGORY_CHOICES:
             if self.category == cat[0]:

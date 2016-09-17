@@ -96,15 +96,16 @@ class GroupListView(ListView):
         context = super(GroupListView, self).get_context_data(**kwargs)
 
         sort = self.request.GET.get('sort', 'activity')
-        sort = {
-            'name': 'name',
-            'category': 'category',
-            'created': '-date_created',
-            'activity': '-date_updated',
-            'members': '-num_members',
-            'images': '-num_images',
-            'posts': '-forum__post_count',
-        }[sort]
+        try:
+            sort = {
+                'name': 'name',
+                'category': 'category',
+                'created': '-date_created',
+                'activity': '-date_updated',
+                'posts': '-forum__post_count',
+            }[sort]
+        except KeyError:
+            pass
 
         if self.request.user.is_authenticated():
             context['private_groups'] = \
@@ -115,16 +116,10 @@ class GroupListView(ListView):
                         Q(members = self.request.user) |
                         Q(invited_users = self.request.user))\
                     .distinct()\
-                    .annotate(num_members = Count('members', distinct = True))\
-                    .annotate(num_images = Count('images', distinct = True))\
                     .order_by(sort)
 
         context['public_groups'] = \
-            self.get_queryset()\
-                .filter(public = True)\
-                .annotate(num_members = Count('members', distinct = True))\
-                .annotate(num_images = Count('images', distinct = True))\
-                .order_by(sort)
+            self.get_queryset().filter(public = True).order_by(sort)
 
         return context
 
