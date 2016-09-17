@@ -4347,3 +4347,13 @@ table.group-member-list td.member-posts-count {
 table.notifications td {
   text-align: left !important;
 }
+ol.faq li,
+.row.help li,
+ol.faq p,
+.row.help p {
+  margin-bottom: 28px;
+}
+ol.faq h4,
+.row.help h4 {
+  margin-bottom: 4px;
+}
