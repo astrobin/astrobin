@@ -8,16 +8,17 @@
 {% get_current_language as LANGUAGE_CODE %}
 
 {% if layout == 'standard' %}
-    <div class="subtle-container user-card">
+    <div class="subtle-container user-card hidden-phone">
         <div class="header">
             <h4>
                 {{user.userprofile}}
             </h4>
         </div>
 
-        <div class="avatar" style="width: 194px; height: 194px; overflow: hidden;">
+        <div class="avatar">
             <a href="{% url 'user_page' user.username %}">
-                {% avatar user 194 %}
+                <span class="visible-desktop">{% avatar user 194 %}</span>
+                <span class="visible-tablet">{% avatar user 140 %}</span>
 
                 {% if DONATIONS_ENABLED %}
                     {% donor_badge user 'large' %}
@@ -29,19 +30,21 @@
             </a>
 
             {% if request.user != user %}
-                {% add_remove_toggleproperty "follow" user request_user %}
+                <div class="visible-desktop">
+                    {% add_remove_toggleproperty "follow" user request_user %}
+                </div>
             {% endif %}
         </div>
 
-        {% cache 300 astrobin_user user.username view layout LANGUAGE_CODE %}
-        <div id="profile-details">
+        <div id="profile-details" class="visible-desktop">
+            {% cache 300 astrobin_user user.username view layout LANGUAGE_CODE %}
             <ul>
                 <li><a href="{% url 'user_page' user.username %}?sub=uploaded"><strong>{{images}}</strong> {% trans "Images" %}</a></li>
                 <li><a href="{% url 'user_page_followers' user.username %}"><strong>{{followers}}</strong> {% trans "Followers" %}</a></li>
                 <li><a href="{% url 'user_page_following' user.username %}"><strong>{{following}}</strong> {% trans "Following" %}</a></li>
             </ul>
+            {% endcache %}
         </div>
-        {% endcache %}
     </div>
 
     {% if request.user == user and DONATIONS_ENABLED and user|is_donor %}

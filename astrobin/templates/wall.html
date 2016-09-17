@@ -14,7 +14,7 @@
             <li class="dropdown">
                 <a class="dropdown-toggle" data-toggle="dropdown" href="#">
                     <i class="icon-sort icon-white"></i>
-                    {% trans "Sort by" %}
+                    <span class="hidden-phone">{% trans "Sort by" %}</span>
                     <b class="caret"></b>
                 </a>
                 <ul class="dropdown-menu">
@@ -66,7 +66,7 @@
             <li class="dropdown">
                 <a class="dropdown-toggle" data-toggle="dropdown" href="#">
                     <i class="icon-filter icon-white"></i>
-                    {% trans "Filter by" %}
+                    <span class="hidden-phone">{% trans "Filter by" %}</span>
                     <b class="caret"></b>
                 </a>
                 <ul class="dropdown-menu">
@@ -151,7 +151,7 @@
                 </ul>
             </li>
 
-            <li class="pull-right">
+            <li class="pull-right hidden-phone">
                 {% ifequal request.GET.view 'list' %}
                     <a href="{% query_string "" "view" %}">
                         <i class="icon-th"></i>

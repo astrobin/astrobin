@@ -20,14 +20,13 @@
                 </a>
             </div>
 
-            <table class="table">
+            <table class="table table-striped">
                 <tr>
                     <th>{% trans "Status" %}</th>
                     <th>{% trans "Participants" %}</th>
-                    <th>{% trans "Date and time" %}</th>
+                    <th class="hidden-phone">{% trans "Date and time" %}</th>
                     <th>{% trans "Subject" %}</th>
-                    <th>{% trans "Excerpt" %}</th>
-                    <th>{% trans "Actions" %}</th>
+                    <th class="hidden-phone">{% trans "Excerpt" %}</th>
                 </tr>
                 {% for message in thread_list %}
                     <tr>
@@ -37,14 +36,9 @@
                                 <a href="{{ participant.user.get_absolute_url }}">{{participant.user.userprofile }}</a>{% if not forloop.last %},{% endif %}
                             {% endfor %}
                         </td>
-                        <td>{{message.thread.latest_msg.sent_at|date:"SHORT_DATETIME_FORMAT"}}</td>
-                        <td>{{message.thread.subject|truncchar:25}}</td>
-                        <td>{{message.thread.latest_msg.body|truncchar:35}}</td>
-                        <td>
-                            <a href="{{message.thread.get_absolute_url}}">{% trans "Read all" %}</a>
-                            |
-                            <a href="{{message.thread.get_absolute_url}}#reply">{% trans "Reply" %}</a>
-                        </td>
+                        <td class="hidden-phone">{{message.thread.latest_msg.sent_at|date:"SHORT_DATETIME_FORMAT"}}</td>
+                        <td><a href="{{message.thread.get_absolute_url}}">{{message.thread.subject|truncchar:25}}</a></td>
+                        <td class="hidden-phone">{{message.thread.latest_msg.body|truncchar:35}}</td>
                     </tr>
                 {% empty %}
                     <tr>

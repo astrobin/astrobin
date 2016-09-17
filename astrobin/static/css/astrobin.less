@@ -800,6 +800,20 @@ body.full {
         padding-top: 0;
     }
 
+    h1 {
+        font-size: 20px;
+        line-height: 22px;
+
+        small {
+            font-size: 18px;
+        }
+    }
+
+    h2 {
+        font-size: 18px;
+        line-height: 19px;
+    }
+
     .navbar {
         .nav {
             margin: 5px;
@@ -811,7 +825,7 @@ body.full {
             margin-right: 16px;
             position: absolute;
             top: 12px;
-            left: 40px;
+            left: 10px;
 
             .text {
                 color: @strong-text-color;
@@ -921,6 +935,10 @@ body.full {
     }
 }
 
+.dropdown-backdrop {
+    position: static;
+}
+
 .dropdown-menu > li.notification-item {
     position: relative;
 
@@ -1023,7 +1041,7 @@ body.full {
     .site-nav.nav-collapse {
         position: absolute;
         top: 50px;
-        left: 45px;
+        left: 10px;
         background: #333;
     }
 
@@ -3716,7 +3734,6 @@ table.rawdata-browser {
 .download-with-icon {
     text-align: center;
     margin: 40px auto;
-    width: 450px;
 
     .image {
         float: left;
@@ -3908,6 +3925,19 @@ ul.astrobin-users {
 
 .user-card {
     position: relative;
+
+    .avatar {
+        width: 194px;
+        height: 194px;
+        overflow: hidden;
+    }
+
+    @media screen and (max-width: 979px) {
+        .avatar {
+            width: 140px;
+            height: 140px;
+        }
+    }
 }
 
 .user-card .stats {
@@ -4033,10 +4063,7 @@ img.flickr-photo-to-import-selected {
 
 /* --- Topic/Forum table --- */
 table.forums, table.topic-list {
-    table-layout: fixed;
-
     th, td {
-        white-space: nowrap;
         text-overflow: clip;
         overflow: hidden;
 

@@ -668,6 +668,17 @@ body.full .navbar .nav.pull-right > li > a.btn:focus {
   body {
     padding-top: 0;
   }
+  h1 {
+    font-size: 20px;
+    line-height: 22px;
+  }
+  h1 small {
+    font-size: 18px;
+  }
+  h2 {
+    font-size: 18px;
+    line-height: 19px;
+  }
   .navbar .nav {
     margin: 5px;
   }
@@ -678,7 +689,7 @@ body.full .navbar .nav.pull-right > li > a.btn:focus {
     margin-right: 16px;
     position: absolute;
     top: 12px;
-    left: 40px;
+    left: 10px;
   }
   .navbar .btn-navbar .text {
     color: #fcfcfc;
@@ -785,6 +796,9 @@ body.full .navbar .nav.pull-right > li > a.btn:focus {
 .navbar .nav > li > a:hover {
   color: #b74329;
 }
+.dropdown-backdrop {
+  position: static;
+}
 .dropdown-menu > li.notification-item {
   position: relative;
 }
@@ -879,7 +893,7 @@ body.full .navbar .nav.pull-right > li > a.btn:focus {
   .site-nav.nav-collapse {
     position: absolute;
     top: 50px;
-    left: 45px;
+    left: 10px;
     background: #333;
   }
   .user-nav .dropdown-menu {
@@ -3572,7 +3586,6 @@ table.rawdata-browser td.counter {
 .download-with-icon {
   text-align: center;
   margin: 40px auto;
-  width: 450px;
 }
 .download-with-icon .image {
   float: left;
@@ -3732,6 +3745,17 @@ ul.astrobin-users li {
 .user-card {
   position: relative;
 }
+.user-card .avatar {
+  width: 194px;
+  height: 194px;
+  overflow: hidden;
+}
+@media screen and (max-width: 979px) {
+  .user-card .avatar {
+    width: 140px;
+    height: 140px;
+  }
+}
 .user-card .stats {
   margin-top: 12px;
 }
@@ -3831,15 +3855,10 @@ img.flickr-photo-to-import-selected {
   pointer: none;
 }
 /* --- Topic/Forum table --- */
-table.forums,
-table.topic-list {
-  table-layout: fixed;
-}
 table.forums th,
 table.topic-list th,
 table.forums td,
 table.topic-list td {
-  white-space: nowrap;
   text-overflow: clip;
   overflow: hidden;
 }

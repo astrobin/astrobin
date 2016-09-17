@@ -11,7 +11,9 @@
     <thead class="post-header">
     <tr>
     <th>
-        {% avatar post.user 60 %}
+        <div class="hidden-phone">
+            {% avatar post.user 60 %}
+        </div>
         <div class="post-author">
             <a href="{% url 'user_page' post.user.username %}">
                 {{post.user.userprofile}}

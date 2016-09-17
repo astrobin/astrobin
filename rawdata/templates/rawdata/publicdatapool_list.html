@@ -27,28 +27,28 @@
         </div>
     </div>
 
-    <table class="table">
+    <table class="table table-striped">
         <thead>
             <th>{% trans "Name" %}</th>
-            <th>{% trans "Description" %}</th>
-            <th>{% trans "Owner" %}</th>
-            <th>{% trans "Raw images" %}</th>
-            <th>{% trans "Processed images" %}</th>
-            <th>{% trans "Last updated" %}</th>
+            <th class="hidden-phone">{% trans "Description" %}</th>
+            <th class="hidden-phone">{% trans "Owner" %}</th>
+            <th class="hidden-phone">{% trans "Raw images" %}</th>
+            <th class="hidden-phone">{% trans "Processed images" %}</th>
+            <th class="hidden-phone">{% trans "Last updated" %}</th>
         </thead>
         <tbody>
             {% for object in object_list %}
                 <tr>
                     <td><a href="{% url 'rawdata.publicdatapool_detail' object.pk %}">{{object.name}}</a></td>
-                    <td>{{object.description|truncatewords:"10"}}</td>
-                    <td>
+                    <td class="hidden-phone">{{object.description|truncatewords:"10"}}</td>
+                    <td class="hidden-phone">
                         <a rel="popover" class="user-popover"
                            data-load="{% url 'user_popover_ajax' object.creator %}"
                            href="{% url 'user_page' object.creator %}">{{object.creator}}</a>
                     </td>
-                    <td>{{object.images.all|length}}</td>
-                    <td>{{object.processed_images.all|length}}</td>
-                    <td>
+                    <td class="hidden-phone">{{object.images.all|length}}</td>
+                    <td class="hidden-phone">{{object.processed_images.all|length}}</td>
+                    <td class="hidden-phone">
                         <abbr class="timeago" title="{{object.updated|date:'Y-m-d\TH:i:s'}}">
                             {{object.updated|date}}
                         </abbr>

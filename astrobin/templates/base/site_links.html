@@ -8,12 +8,16 @@
     <span class="icon-bar"></span>
 </button>
 
-<a class="brand" href="{% url 'index' %}">
+<a class="brand visible-desktop" href="{% url 'index' %}">
     <img src="{{STATIC_URL}}images/astrobin-logo-small.png" alt="AstroBin" />
 </a>
 
 <div class="site-nav nav-collapse collapse pull-left">
     <ul class="nav">
+        <li class="home-menu visible-phone">
+            <a href="/">{% trans "Home" %}</a>
+        </li>
+
         {% if request.user|is_content_moderator %}
         <li class="dropdown moderate-menu">
             <a href="#" class="dropdown-toggle" data-toggle="dropdown">
@@ -154,6 +158,18 @@
                 </li>
             </ul>
         </li>
+
+        {% if request.user.is_authenticated %}
+            <li class="dropdown user-menu visible-phone">
+                <a href="#" class="dropdown-toggle" data-toggle="dropdown">
+                    {% trans "User" %}
+                    <i class="icon-caret-down"></i>
+                </a>
+                <ul class="dropdown-menu">
+                    {% include "base/user_links_entries.html" %}
+                </ul>
+            </li>
+        {% endif %}
     </ul>
 </div> <!-- nav-collapse -->
 

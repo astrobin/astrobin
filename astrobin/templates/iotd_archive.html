@@ -16,7 +16,7 @@
                 <div class="iotd-archive-image">
                     {% astrobin_image iotd.image 'iotd' %}
 
-                    <div class="data">
+                    <div class="data hidden-phone">
                         <h3>{{iotd.image.title|escape}}</h3>
                         <p>
                             <a href="{% url 'iotd_detail' iotd.pk %}">
@@ -30,7 +30,7 @@
                     </div>
 
                     {% if iotd.runnerup_1 or iotd.runnerup_2 %}
-                    <div class="runner-ups">
+                    <div class="runner-ups visible-desktop">
                         <h3>{% trans "Runners-up" %}:</h3>
                         {% if iotd.runnerup_1 %}
                             <div class="runner-up">

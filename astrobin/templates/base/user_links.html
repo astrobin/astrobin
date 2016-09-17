@@ -1,9 +1,198 @@
 {% load i18n %}
 {% load tags %}
+{% load astrobin_apps_donations_tags %}
+{% load astrobin_apps_notifications_tags %}
 
-<div class="user-nav pull-right">
-    <ul class="nav pull-right">
-        {% include "base/user_links_entries.html" %}
-    </ul>
-</div> <!-- user-nav -->
+{% if request.user.is_authenticated %}
+    <div class="user-nav pull-right hidden-phone">
+        <ul class="nav">
 
+            <li class="dropdown">
+                <a href="#" class="dropdown-toggle" data-toggle="dropdown">
+                    <i class="icon-globe"></i>
+                </a>
+                <ul class="dropdown-menu">
+                    <li>
+                        <a href="{% url 'set_language' "en" %}" title="English">
+                            <img src="{{STATIC_URL}}icons/flags/16/United-Kingdom.png" alt="English"/> English
+                        </a>
+                    </li>
+                    <li>
+                        <a href="{% url 'set_language' "it" %}" title="Italiano">
+                            <img src="{{STATIC_URL}}icons/flags/16/Italy.png" alt="Italiano"/> Italiano
+                        </a>
+                    </li>
+                    <li>
+                        <a href="{% url 'set_language' "es" %}" title="Español">
+                            <img src="{{STATIC_URL}}icons/flags/16/Spain.png" alt="Español"/> Español
+                        </a>
+                    </li>
+                    <li>
+                        <a href="{% url 'set_language' "fr" %}" title="Français">
+                            <img src="{{STATIC_URL}}icons/flags/16/France.png" alt="Français"/> Français
+                        </a>
+                    </li>
+                    <li>
+                        <a href="{% url 'set_language' "fi" %}" title="Suomi">
+                            <img src="{{STATIC_URL}}icons/flags/16/Finland.png" alt="Suomi"/> Suomi
+                        </a>
+                    </li>
+                    <li>
+                        <a href="{% url 'set_language' "de" %}" title="Deutsch">
+                            <img src="{{STATIC_URL}}icons/flags/16/Germany.png" alt="Deutsch"/> Deutsch
+                        </a>
+                    </li>
+                    <li>
+                        <a href="{% url 'set_language' "nl" %}" title="Nederlands">
+                            <img src="{{STATIC_URL}}icons/flags/16/Netherlands.png" alt="Nederlands"/> Nederlands
+                        </a>
+                    </li>
+                    <li>
+                        <a href="{% url 'set_language' "tr" %}" title="Türk">
+                            <img src="{{STATIC_URL}}icons/flags/16/Turkey.png" alt="Türk"/> Türk
+                        </a>
+                    </li>
+                    <li>
+                        <a href="{% url 'set_language' "sq" %}" title="Shqipe">
+                            <img src="{{STATIC_URL}}icons/flags/16/Albania.png" alt="Shqipe"/> Shqipe
+                        </a>
+                    </li>
+                    <li>
+                        <a href="{% url 'set_language' "pl" %}" title="Polski">
+                            <img src="{{STATIC_URL}}icons/flags/16/Poland.png" alt="Polski"/> Polski
+                        </a>
+                    </li>
+                    <li>
+                        <a href="{% url 'set_language' "pt-BR" %}" title="Português brasileiro">
+                            <img src="{{STATIC_URL}}icons/flags/16/Brazil.png" alt="Português brasileiro"/> Português brasileiro
+                        </a>
+                    </li>
+                    <li>
+                        <a href="{% url 'set_language' "el" %}" title="Ελληνικά">
+                            <img src="{{STATIC_URL}}icons/flags/16/Greece.png" alt="Ελληνικά"/> Ελληνικά
+                        </a>
+                    </li>
+                    <li>
+                        <a href="{% url 'set_language' "ru" %}" title="Русский">
+                            <img src="{{STATIC_URL}}icons/flags/16/Russia.png" alt="Русский"/> Русский
+                        </a>
+                    </li>
+                    <li>
+                        <a href="{% url 'set_language' "ar" %}" title="العربية">
+                            <img src="{{STATIC_URL}}icons/flags/16/Saudi-Arabia.png" alt="العربية"/> العربية
+                        </a>
+                    </li>
+                    <li>
+                        <a href="{% url 'set_language' "ja" %}" title="日本語">
+                            <img src="{{STATIC_URL}}icons/flags/16/Japan.png" alt="日本語"/> 日本語
+                        </a>
+                    </li>
+
+                    <li class="divider"></li>
+
+                    <li>
+                        <a href="http://translate.astrobin.com/" target="_blank">
+                            <i class="icon-tasks"></i>
+                            {% trans "Help with translations!" %}
+                        </a>
+                    </li>
+                </ul>
+
+                {% if request.user.is_authenticated and not user_language %}
+                <div id="language-prompt">
+                    <div class="bubble">
+                        {% blocktrans %}Please select your language from the options above.{% endblocktrans %}
+                    </div>
+                </div>
+                {% endif %}
+            </li> <!-- languages -->
+
+            <li class="dropdown notice-container hidden-phone">
+                {% if notifications_count > 0 %}
+                    <span id="notifications_count" class="notice-count">{{notifications_count}}</span>
+                {% endif %}
+                <a class="dropdown notifications" data-toggle="dropdown" title="{% trans "Notifications" %}" href="#">
+                    <i class="icon-bell-alt"></i>
+                </a>
+                <ul class="dropdown-menu" id="notifications-popup">
+                    {% notification_list request.user 10 0 %}
+                </ul>
+            </li> <!-- notifications -->
+
+            <li class="dropdown">
+                <div class="btn-group">
+                    <a href="{% url 'user_page' request.user.username %}" class="btn btn-primary">
+                        <span class="visible-phone"><i class="icon icon-user"></i></span>
+                        <span class="hidden-phone">{{userprofile|truncatechars:"20"}}</span>
+                        <span id="navbar-user-scores">
+                            {% if not request.user.userprofile.exclude_from_competitions %}
+                            <span id="astrobin-index" rel="tooltip" data-placement="bottom" title="{% trans "AstroBin index" %}">
+                                  {{user_scores_index|floatformat:2}}
+                            </span> &bull;
+                            {% endif %}
+                            <span rel="tooltip" data-placement="bottom" title="{% trans "Followers" %}">
+                                {{user_scores_followers}}
+                            </span>
+                        </span>
+                    </a>
+                    <a href="#" class="btn btn-primary dropdown-toggle user-dropdown" data-toggle="dropdown">
+                        <i class="icon-caret-down"></i>
+                    </a>
+                    <ul class="dropdown-menu">
+                        {% include "base/user_links_entries.html" %}
+                    </ul>
+                </div> <!-- btn-group -->
+
+                {% if DONATIONS_ENABLED and not request.user|is_donor %}
+                    <a id="donate-header-button" data-toggle="modal" href="#donate-modal" class="btn btn-success">
+                        <i class="icon-gift"></i>
+                    </a>
+                {% endif %}
+
+                {% if request.user.is_authenticated and not userprofile.real_name and request.path != "/profile/edit/basic/" and not userprofile.seen_realname %}
+                    <div id="realname-prompt">
+                        <div class="bubble">
+                            {% blocktrans %}Would you like to start using your real name on AstroBin?{% endblocktrans %}
+                            <form method="POST" action="{% url 'profile_seen_realname' %}">{% csrf_token %}
+                                <a
+                                    class="btn btn-mini btn-primary"
+                                    href="{% url 'profile_edit_basic' %}?hl=rn">
+                                    {% trans "OK" %}
+                                </a>
+
+                                <input
+                                    type="submit"
+                                    class="btn btn-mini btn-secondary navbar-popup-input"
+                                    value="{% trans "No, thanks" %}" />
+
+                                <input
+                                    type="hidden"
+                                    name="next"
+                                    value="{{request.path}}" />
+                            </form>
+                        </div>
+                    </div>
+                {% endif %}
+            </li> <!-- user menu -->
+        </ul>
+    </div> <!-- user-nav -->
+{% else %} <!-- request.user.is_authenticated -->
+    <div class="user-nav pull-right">
+        <ul class="nav">
+            <li class="{% current request "^/accounts/login/" %}">
+                <a href="{% url 'auth_login' %}{% if request.path|slice:"9" != "/accounts" %}?next={{request.path}}{% endif %}">
+                    {% if privatebeta_enabled %}
+                        {% trans "Have an invite? Login!" %}
+                    {% else %}
+                        {% trans "Login" %}
+                    {% endif %}
+                </a>
+            </li>
+            {% if not privatebeta_enabled %}
+                <li class="{% current request "^/accounts/register/" %}">
+                    <a href="{% url 'registration_register' %}">{% trans "Register" %}</a>
+                </li>
+            {% endif %}
+        </ul>
+    </div>
+{% endif %} <!-- request.user.is_authenticated -->

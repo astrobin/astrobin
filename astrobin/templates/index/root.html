@@ -46,8 +46,8 @@
                         </div>
                     </div> <!-- carousel-inner -->
 
-                    <a class="carousel-control left" href="#why-astrobin" data-slide="prev">&lsaquo;</a>
-                    <a class="carousel-control right" href="#why-astrobin" data-slide="next">&rsaquo;</a>
+                    <a class="carousel-control left hidden-phone" href="#why-astrobin" data-slide="prev">&lsaquo;</a>
+                    <a class="carousel-control right hidden-phone" href="#why-astrobin" data-slide="next">&rsaquo;</a>
                 </div> <!-- carousel -->
             </div> <!-- carousel's span -->
         </div> <!-- carousel's and ad's row -->
@@ -96,8 +96,8 @@
                         </div>
 
                         {% if iotd.runnerup_1 or iotd.runnerup_2 %}
-                        <div class="runner-ups">
-                            <h3 class="visible-desktop">{% trans "Runners-up" %}:</h3>
+                        <div class="runner-ups visible-desktop">
+                            <h3>{% trans "Runners-up" %}:</h3>
                             {% if iotd.runnerup_1 %}
                                 <div class="runner-up">
                                     {% astrobin_image iotd.runnerup_1 'thumb' %}
@@ -135,37 +135,37 @@
                         <h4>
                             {% ifequal section 'personal' %}
                                 <i class="icon-group"></i>
-                                {% trans "Your activity stream" %}
+                                <span class="hidden-phone">{% trans "Your activity stream" %}</span>
                             {% endifequal %}
 
                             {% ifequal section 'global' %}
                                 <i class="icon-globe"></i>
-                                {% trans "Global activity stream" %}
+                                <span class="hidden-phone">{% trans "Global activity stream" %}</span>
                             {% endifequal %}
 
                             {% ifequal section 'images' %}
                                 <i class="icon-time"></i>
-                                {% trans "Recently uploaded" %}
+                                <span class="hidden-phone">{% trans "Recently uploaded" %}</span>
                             {% endifequal %}
 
                             {% ifequal section 'followed' %}
                                 <i class="icon-eye-open"></i>
-                                {% trans "Recent images from people you follow" %}
+                                <span class="hidden-phone">{% trans "Recent images from people you follow" %}</span>
                             {% endifequal %}
 
                             {% ifequal section 'liked' %}
                                 <i class="icon-thumbs-up"></i>
-                                {% trans "Recently liked" %}
+                                <span class="hidden-phone">{% trans "Recently liked" %}</span>
                             {% endifequal %}
 
                             {% ifequal section 'bookmarked' %}
                                 <i class="icon-bookmark"></i>
-                                {% trans "Recently bookmarked" %}
+                                <span class="hidden-phone">{% trans "Recently bookmarked" %}</span>
                             {% endifequal %}
 
                             {% ifequal section 'fits' %}
                                 <i class="icon-archive"></i>
-                                {% trans "Recent images with link to TIFF/FITS" %}
+                                <span class="hidden-phone">{% trans "Recent images with link to TIFF/FITS" %}</span>
                             {% endifequal %}
                         </h4>
 

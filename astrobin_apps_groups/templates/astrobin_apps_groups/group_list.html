@@ -10,7 +10,7 @@
             <li class="dropdown">
                 <a class="dropdown-toggle" data-toggle="dropdown" href="#">
                     <i class="icon-bolt icon-white"></i>
-                    {% trans "Actions" %}
+                    <span class="hidden-phone">{% trans "Actions" %}</span>
                     <b class="caret"></b>
                 </a>
                 <ul class="dropdown-menu">
@@ -23,7 +23,7 @@
                 </ul>
             </li>
 
-            <li class="dropdown">
+            <li class="dropdown hidden-phone">
                 <a class="dropdown-toggle" data-toggle="dropdown" href="#">
                     <i class="icon-bolt icon-sort-by-attributes-alt"></i>
                     {% trans "Sort" %}
@@ -78,7 +78,7 @@
                     <h1>{% trans "Your private groups" %}</h1>
                     <div class="subtitle">{% trans "You own, or are a member of, or were invited to, these private groups." %}</div>
                 </div>
-                <div class="span3 text-right">
+                <div class="span3 text-right hidden-phone">
                     <a href="{% url 'group_create' %}" class="btn btn-primary btn-large create-group">
                         <i class="icon icon-plus-sign"></i>
                         {% trans "Create private group" context "group" %}
@@ -99,7 +99,7 @@
                     <h1>{% trans "Public groups" %}</h1>
                     <div class="subtitle">{% trans "Open to the whole community." %}</div>
                 </div>
-                <div class="span3 text-right">
+                <div class="span3 text-right hidden-phone">
                     <a href="{% url 'group_create' %}?public=True" class="btn btn-primary btn-large create-group">
                         <i class="icon icon-plus-sign"></i>
                         {% trans "Create public group" context "group" %}
