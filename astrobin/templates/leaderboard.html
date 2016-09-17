@@ -14,7 +14,7 @@
     <div class="row">
         <div class="span12">
             <div class="leaderboard">
-                <table class="table">
+                <table class="table striped">
                     <thead>
                         <tr>
                             <th>{% trans "Position" %}</th>
@@ -25,17 +25,17 @@
                                     {% trans "AstroBin index" %} <i class="icon-sort"></i>
                                 </a>
                             </th>
-                            <th>
+                            <th class="hidden-phone">
                                 <a href="{% url 'leaderboard' %}{% query_string "sort='followers'" "" %}">
                                     {% trans "Followers" %} <i class="icon-sort"></i>
                                 </a>
                             </th>
-                            <th>
+                            <th class="hidden-phone">
                                 <a href="{% url 'leaderboard' %}{% query_string "sort='images'" "" %}">
                                     {% trans "Images" %} <i class="icon-sort"></i>
                                 </a>
                             </th>
-                            <th>
+                            <th class="hidden-phone">
                                 <a href="{% url 'leaderboard' %}{% query_string "sort='integration'" "" %}">
                                     {% trans "Total integration" %} <i class="icon-sort"></i>
                                 </a>
@@ -57,9 +57,9 @@
                                 </a>
                             </td>
                             <td>{{u.normalized_likes|floatformat:2}}</td>
-                            <td>{{u.followers}}</td>
-                            <td>{{u.images}}</td>
-                            <td>{{u.integration|floatformat:2}}</td>
+                            <td class="hidden-phone">{{u.followers}}</td>
+                            <td class="hidden-phone">{{u.images}}</td>
+                            <td class="hidden-phone">{{u.integration|floatformat:2}}</td>
                         </tr>
                     {% endfor %}
                 </table>
