@@ -24,7 +24,7 @@
 @light-panel-color: @background-color * @hilight-factor;
 @light-panel-border-color: @background-color / @strong-hilight-factor;
 
-@base-font-size: 13px;
+@base-font-size: 14px;
 @spacer-small: 4px;
 @spacer-xsmall: @spacer-small * .5;
 @spacer-medium: @spacer-small * 2;
@@ -37,6 +37,7 @@
 @regular_font: Helvetica, Arial, sans-serif;
 
 strong, .strong {
+    color: @strong-text-color;
     font-weight: bold;
 }
 
@@ -525,7 +526,7 @@ div.button {
 }
 
 div.button span {
-  margin-left: 13px;
+  margin-left: @base-font-size;
   height: 22px;
   padding-top: 8px;
   font-weight: bold;
@@ -752,6 +753,11 @@ div.uploader input {
 /* ----------------------------------------------
    HTML ELEMENTS
 ------------------------------------------------- */
+
+html, body {
+    color: @text-color;
+    font-size: @base-font-size;
+}
 
 body {
     background: @light-panel-color url('../images/background-tile.png');
@@ -1058,7 +1064,7 @@ body.full {
 
 .subnav .nav > .active > a,
 .subnav .nav > .active > a:hover {
-  padding-left: 13px;
+  padding-left: @base-font-size;
   kwebkit-box-shadow: inset 0 3px 5px rgba(0,0,0,.05);
      -moz-box-shadow: inset 0 3px 5px rgba(0,0,0,.05);
           box-shadow: inset 0 3px 5px rgba(0,0,0,.05);
@@ -1332,6 +1338,7 @@ li.astrobin-thumbnail {
     border-bottom: 1px solid @link-color;
 }
 .table th {
+    color: @strong-text-color;
     vertical-align: middle;
     a, button {
         font-weight: normal;
@@ -1375,12 +1382,13 @@ h1, h2, h3, h4, h5, h6 {
     margin-top: @spacer-xlarge;
     margin-bottom: @spacer-xxlarge;
     font-family: @headers_font;
+    color: @strong-text-color;
 }
 h1:not(:first-of-type) {
     margin-top: 60px;
 }
 h1 + .subtitle {
-    font-size: 13px;
+    font-size: @base-font-size;
     font-style: italic;
     color: #666;
     margin-top: -22px;
@@ -1455,7 +1463,7 @@ footer .bottom {
 }
 footer p, footer a, footer li {
     font-size: 11px;
-    line-height: 13px;
+    line-height: @base-font-size;
 }
 footer ul {
     margin-left: 0px;
@@ -2858,7 +2866,7 @@ a.button {
         color: white;
         cursor: pointer;
         display: inline;
-        font-size: 13px;
+        font-size: @base-font-size;
         font-weight: normal;
         height: 28px;
         letter-spacing: normal;
@@ -3230,7 +3238,7 @@ form.avatar-change label.control-label {display: none;}
         padding: 8px 12px;
 
         h4 {
-            font-size: 13px;
+            font-size: @base-font-size;
         }
     }
 
@@ -3641,7 +3649,7 @@ table.subscription-plans {
 
     small {
         display: block;
-        font-size: 13px;
+        font-size: @base-font-size;
         color: #eee;
         padding-top: 10px;
         font-weight: normal;
