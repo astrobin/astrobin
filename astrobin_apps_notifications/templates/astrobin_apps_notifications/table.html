@@ -1,0 +1,29 @@
+{% load i18n %}
+
+<table class="table table-condensed table-striped notifications-modal">
+    <tbody>
+        {% for n in unseen %}
+            {% include "astrobin_apps_notifications/_table_rows.html" %}
+        {% endfor %}
+
+        {% if unseen and seen %}
+            <tr class="divider">
+                <td colspan="3">
+                    ...
+                </td>
+            </tr>
+        {% endif %}
+
+        {% for n in seen %}
+            {% include "astrobin_apps_notifications/_table_rows.html" %}
+        {% endfor %}
+
+        {% if not unseen and not seen %}
+            <tr>
+                <td colspan="3">
+                    {% trans "You have no new notifications." %}
+                </td>
+            </tr>
+        {% endif %}
+    </tbody>
+</table>

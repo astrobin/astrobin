@@ -2,36 +2,41 @@
 
 {% load i18n %}
 {% load pagination_tags %}
+{% load astrobin_apps_notifications_tags %}
 
-{% block titlej%}{% trans "Notifications" %}{% endblock %}
+{% block title %}{% trans "Notifications" %}{% endblock %}
 
 {% block content %}
     {% autopaginate notification_list 25 %}
         <h1>{% trans "Notifications" %}</h1>
-        <table class="table table-condensed notifications">
+
+        <table class="table table-striped notifications">
             {% for n in notification_list %}
-            <tr{% if not n.read %} class="notification-unread"{% endif %}>
+                <tr class="notification-item {% if n.read %}notification-read{% else %}notification-unread{% endif %}">
                     <td class="notification-state">
                         <div class="state-indicator">
                     </td>
-                    <td>
+                    <td class="notification-content">
                         {% autoescape off %}{{n.message}}{% endautoescape %}
                     </td>
                 </tr>
             {% empty %}
                 <tr>
-                    <td>
+                    <td colspan="2">
                         {% trans "You have no notifications." %}
                     </td>
                 </tr>
             {% endfor %}
         </table>
 
-        <div id="mark-all-as-read">
-            <a href="{% url 'message_mark_all_read' %}">
-                {% trans "Mark all as read" %}
-            </a>
-        </div>
+        {% if request.user|has_unseen_notifications %}
+            <div class="form-actions">
+                <a class="btn btn-danger"
+                   href="{% url 'message_mark_all_read' %}">
+                    {% trans "Mark all as read" %}
+                </a>
+            </div>
+        {% endif %}
 
         <div class="pagination pagination-centered">
             {% paginate %}

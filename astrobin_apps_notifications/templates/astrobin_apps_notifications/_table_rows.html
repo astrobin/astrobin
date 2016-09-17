@@ -1,0 +1,26 @@
+{% load i18n %}
+
+<tr
+    class="notification-item{% if n.read %} notification-read{% else %} notification-unread{% endif %}"
+    data-id="{{n.pk}}">
+
+    <td class="notification-state">
+        <div class="state-indicator">
+    </td>
+
+    <td class="notification-content">
+        {% autoescape off %}{{n.message}}{% endautoescape %}
+    </td>
+
+    <td class="notification-mark-as-read">
+        {% if not n.read %}
+            <a
+                href="#"
+                onclick="astrobin_common.mark_notification_as_read({{n.pk}}); return false;">
+                <i class="icon icon-ok"></i>
+            </a>
+        {% endif %}
+    </td>
+
+</tr>
+

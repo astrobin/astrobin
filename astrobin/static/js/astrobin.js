@@ -264,23 +264,17 @@ astrobin_common = {
     },
 
     mark_notification_as_read: function(notification_id) {
-        // Prevent closing
-        $('#notifications-popup').click(function(event) {
-            event.stopPropagation();
-        });
-
         $.ajax({
             url: '/persistent_messages/mark_read/' + notification_id + '/',
             dataType: 'json',
             success: function() {
-                var $list_item = $('#notifications-popup li[data-id=' + notification_id + ']'),
-                    $check_mark = $list_item.find('a.mark-single-as-read'),
-                    $tooltip = $list_item.find('.tooltip'),
+                var $row = $('#notifications-modal tr[data-id=' + notification_id + ']'),
+                    $check_mark = $row.find('td.notification-mark-as-read a'),
                     $count_badge = $('#notifications_count'),
                     count;
 
-                $list_item.removeClass('unread');
-                $tooltip.remove();
+                $row.removeClass('notification-unread');
+                $row.addClass('notification-read');
                 $check_mark.remove();
 
                 if ($count_badge.length > 0) {

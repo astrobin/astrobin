@@ -799,12 +799,6 @@ body.full .navbar .nav.pull-right > li > a.btn:focus {
 .dropdown-backdrop {
   position: static;
 }
-.dropdown-menu > li.notification-item {
-  position: relative;
-}
-.dropdown-menu > li.notification-item a {
-  padding-right: 32px;
-}
 .dropdown-menu > li.mark-all-as-read-container {
   position: relative;
 }
@@ -819,16 +813,6 @@ body.full .navbar .nav.pull-right > li > a.btn:focus {
 }
 .dropdown-menu > li > a strong {
   color: #333333;
-}
-.dropdown-menu > li > a.mark-single-as-read {
-  position: absolute;
-  top: 3px;
-  right: 0;
-  padding: 0px 8px !important;
-  color: #D89D90 !important;
-}
-.dropdown-menu > li > a.mark-single-as-read:hover {
-  background: initial !important;
 }
 .dropdown-menu > li > a.danger {
   color: red !important;
@@ -1045,6 +1029,9 @@ li [class*=" icon-"],
 .btn-success .caret,
 .btn-inverse .caret {
   margin-left: 5px;
+}
+.btn-danger {
+  background: red;
 }
 .astrobin-container {
   position: relative;
@@ -1285,9 +1272,7 @@ textarea:focus {
   margin-top: 8px;
   color: #866158;
 }
-.form-horizontal .form-actions,
-.form-vertical .form-actions,
-.form-inline .form-actions {
+.form-actions {
   background: #333333 url('../images/dark-panel-tile.png');
   border-color: #393939;
 }
@@ -2338,7 +2323,7 @@ div.capty-target .capty-caption-content .link-overlay a {
 .notice-count {
   position: absolute;
   top: 5px;
-  left: 20px;
+  right: 0;
   font-size: 75%;
   font-weight: bold;
   line-height: 75%;
@@ -3257,6 +3242,9 @@ form.avatar-change label.control-label {
     width: auto;
   }
 }
+.notice-container {
+  position: relative;
+}
 .notice-container .unread {
   background-color: #FADDD6;
 }
@@ -4057,13 +4045,11 @@ th.forum-name {
   margin: 3px 5px;
 }
 .topic-unread a,
-.forum-unread a,
-.notification-unread a {
+.forum-unread a {
   font-weight: bold;
 }
 .topic-unread .state-indicator,
-.forum-unread .state-indicator,
-.notification-unread .state-indicator {
+.forum-unread .state-indicator {
   background-color: #cc4b2e;
 }
 /* --- Moderation --- */
@@ -4368,6 +4354,42 @@ table.group-member-list td.member-posts-count {
 }
 table.notifications td {
   text-align: left !important;
+}
+.notification-unread .state-indicator {
+  background-color: #cc4b2e;
+}
+.notification-read {
+  background-color: rgba(0, 0, 0, 0.2);
+  color: #666;
+}
+.notification-read strong {
+  color: #ccc;
+}
+.notification-item a {
+  color: #b8b8b8;
+}
+table.notifications-modal {
+  font-size: 13px;
+  table-layout: fixed;
+}
+table.notifications-modal td {
+  white-space: nowrap;
+  text-overflow: clip;
+  overflow: hidden;
+}
+table.notifications-modal td.notification-content {
+  width: 100%;
+}
+table.notifications-modal td.notification-mark-as-read {
+  width: 12px;
+}
+table.notifications-modal td.notification-mark-as-read a {
+  color: #cc4b2e;
+}
+table.notifications-modal tr.divider td {
+  font-size: 24px;
+  text-align: center !important;
+  padding-bottom: 18px;
 }
 ol.faq li,
 .row.help li,

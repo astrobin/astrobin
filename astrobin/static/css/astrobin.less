@@ -939,14 +939,6 @@ body.full {
     position: static;
 }
 
-.dropdown-menu > li.notification-item {
-    position: relative;
-
-    a {
-        padding-right: 32px;
-    }
-}
-
 .dropdown-menu > li.mark-all-as-read-container {
     position: relative;
 
@@ -963,18 +955,6 @@ body.full {
 
     strong {
         color: @background-color;
-    }
-
-    &.mark-single-as-read {
-        position: absolute;
-        top: 3px;
-        right: 0;
-        padding: 0px 8px !important;
-        color: #D89D90 !important;
-
-        &:hover {
-            background: initial !important;
-        }
     }
 
     &.danger {
@@ -1432,7 +1412,7 @@ input:focus, textarea:focus {
     margin-top: @spacer-medium;
     color: #866158;
 }
-.form-horizontal .form-actions, .form-vertical .form-actions, .form-inline .form-actions {
+.form-actions {
     background: #333 url('../images/dark-panel-tile.png');
     border-color: #393939;
 }
@@ -2492,7 +2472,7 @@ div.capty-target {
 .notice-count {
     position: absolute;
     top: 5px;
-    left: 20px;
+    right: 3px;
     font-size: 75%;
     font-weight: bold;
     line-height: 75%;
@@ -3371,6 +3351,7 @@ form.avatar-change label.control-label {display: none;}
 }
 
 .notice-container {
+    position: relative;
     .unread {
         background-color: #FADDD6;
     }
@@ -4253,7 +4234,7 @@ th.forum-name {
     margin: 3px 5px;
 }
 
-.topic-unread, .forum-unread, .notification-unread {
+.topic-unread, .forum-unread {
     a {
         font-weight: bold;
     }
@@ -4586,6 +4567,49 @@ table.group-list, table.group-member-list {
 
 table.notifications td {
     text-align: left !important;
+}
+
+.notification-unread .state-indicator {
+    background-color: @link-color;
+}
+.notification-read {
+    background-color: rgba(0,0,0,0.2);
+    color: #666;
+
+    strong {
+        color: #ccc;
+    }
+}
+.notification-item a {
+    color: @text-color;
+}
+
+table.notifications-modal {
+    font-size: 13px;
+    table-layout: fixed;
+
+    td {
+        white-space: nowrap;
+        text-overflow: clip;
+        overflow: hidden;
+    }
+
+    td.notification-content {
+        width: 100%;
+    }
+
+    td.notification-mark-as-read {
+        width: 12px;
+        a {
+            color: @link-color;
+        }
+    }
+
+    tr.divider td {
+        font-size: 24px;
+        text-align: center !important;
+        padding-bottom: 18px;
+    }
 }
 
 ol.faq, .row.help {

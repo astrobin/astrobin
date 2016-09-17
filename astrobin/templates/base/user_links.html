@@ -1,13 +1,13 @@
 {% load i18n %}
 {% load tags %}
 {% load astrobin_apps_donations_tags %}
-{% load astrobin_apps_notifications_tags %}
 
 {% if request.user.is_authenticated %}
-    <div class="user-nav pull-right hidden-phone">
+    <div class="user-nav pull-right">
         <ul class="nav">
 
-            <li class="dropdown">
+            <!-- languages -->
+            <li class="dropdown hidden-phone">
                 <a href="#" class="dropdown-toggle" data-toggle="dropdown">
                     <i class="icon-globe"></i>
                 </a>
@@ -107,19 +107,30 @@
                 {% endif %}
             </li> <!-- languages -->
 
-            <li class="dropdown notice-container hidden-phone">
+            <li class="notice-container">
                 {% if notifications_count > 0 %}
-                    <span id="notifications_count" class="notice-count">{{notifications_count}}</span>
+                    <span id="notifications_count" class="notice-count">
+                        {{notifications_count}}
+                    </span>
                 {% endif %}
-                <a class="dropdown notifications" data-toggle="dropdown" title="{% trans "Notifications" %}" href="#">
+
+                <a
+                    class="notifications hidden-phone"
+                    title="{% trans "Notifications" %}"
+                    data-toggle="modal"
+                    href="#notifications-modal">
                     <i class="icon-bell-alt"></i>
                 </a>
-                <ul class="dropdown-menu" id="notifications-popup">
-                    {% notification_list request.user 10 0 %}
-                </ul>
-            </li> <!-- notifications -->
 
-            <li class="dropdown">
+                <a
+                    class="notifications visible-phone"
+                    title="{% trans "Notifications" %}"
+                    href="{% url 'astrobin_apps_notifications.all' %}">
+                    <i class="icon-bell-alt"></i>
+                </a>
+            </li>
+
+            <li class="dropdown hidden-phone">
                 <div class="btn-group">
                     <a href="{% url 'user_page' request.user.username %}" class="btn btn-primary">
                         <span class="visible-phone"><i class="icon icon-user"></i></span>

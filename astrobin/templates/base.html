@@ -60,6 +60,11 @@
         {% if DONATIONS_ENABLED and not request.user|is_donor %}
             {% donate_modal %}
         {% endif %}
+
+        {% block base_modals %}
+            {% include "base/modals.html" %}
+        {% endblock %}
+
         {% block modals %}{% endblock %}
 
         {% include "base/scripts.html" %}
