@@ -3104,7 +3104,7 @@ form.avatar-change label.control-label {
   padding: 8px 12px;
 }
 .simple-container .header h4 {
-  font-size: 14px;
+  font-size: 13px;
 }
 .simple-container #personal-stream,
 .simple-container #global-stream {
@@ -3855,12 +3855,15 @@ img.flickr-photo-to-import-selected {
   pointer: none;
 }
 /* --- Topic/Forum table --- */
-table.forums th,
-table.topic-list th,
-table.forums td,
-table.topic-list td {
-  text-overflow: clip;
-  overflow: hidden;
+@media screen and (min-width: 980px) {
+  table.forums th,
+  table.topic-list th,
+  table.forums td,
+  table.topic-list td {
+    white-space: nowrap;
+    text-overflow: clip;
+    overflow: hidden;
+  }
 }
 table.forums th.forum-topic-count,
 table.topic-list th.forum-topic-count,

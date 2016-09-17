@@ -3256,7 +3256,7 @@ form.avatar-change label.control-label {display: none;}
         padding: 8px 12px;
 
         h4 {
-            font-size: @base-font-size;
+            font-size: 13px;
         }
     }
 
@@ -4064,8 +4064,11 @@ img.flickr-photo-to-import-selected {
 /* --- Topic/Forum table --- */
 table.forums, table.topic-list {
     th, td {
-        text-overflow: clip;
-        overflow: hidden;
+        @media screen and (min-width: 980px) {
+            white-space: nowrap;
+            text-overflow: clip;
+            overflow: hidden;
+        }
 
         &.forum-topic-count, &.forum-post-count, &.topic-post-count, &.topic-view-count {
             width: 10%;
