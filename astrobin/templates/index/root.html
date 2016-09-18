@@ -77,7 +77,7 @@
 
                         {% astrobin_image iotd.image 'iotd' %}
 
-                        <div class="info visible-desktop">
+                        <div class="info hidden-phone hidden-tablet">
                             <h3>{{iotd.image.title|truncatechars:"60"}}</h3>
                             <span class="by">
                                 {% trans "by" %} <a rel="popover" class="user-popover" data-load="{% url 'user_popover_ajax' iotd.image.user %}"
@@ -96,7 +96,7 @@
                         </div>
 
                         {% if iotd.runnerup_1 or iotd.runnerup_2 %}
-                        <div class="runner-ups visible-desktop">
+                        <div class="runner-ups hidden-phone hidden-tablet">
                             <h3>{% trans "Runners-up" %}:</h3>
                             {% if iotd.runnerup_1 %}
                                 <div class="runner-up">
@@ -114,7 +114,7 @@
                     </div>
                 </div>
 
-                <div class="span2 visible-desktop">
+                <div class="span2 hidden-phone hidden-tablet">
                     <a class="btn btn-primary btn-upload" href="{% url 'image_upload' %}">
                         <div style="font-size: 92px;"><i class="icon-upload-alt icon-white"></i></div>
                         <span class="text">
@@ -289,7 +289,7 @@
                 </div> <!-- activity stream container -->
             </div> <!-- span -->
 
-            <div class="span3 visible-desktop">
+            <div class="span3 hidden-phone hidden-tablet">
                 {% include 'index/ad.html' %}
 
                 <div class="subtle-container simple-container">

@@ -17,7 +17,7 @@
 
         <div class="avatar">
             <a href="{% url 'user_page' user.username %}">
-                <span class="visible-desktop">{% avatar user 194 %}</span>
+                <span class="hidden-phone hidden-tablet">{% avatar user 194 %}</span>
                 <span class="visible-tablet">{% avatar user 140 %}</span>
 
                 {% if DONATIONS_ENABLED %}
@@ -30,13 +30,13 @@
             </a>
 
             {% if request.user != user %}
-                <div class="visible-desktop">
+                <div class="hidden-phone hidden-tablet">
                     {% add_remove_toggleproperty "follow" user request_user %}
                 </div>
             {% endif %}
         </div>
 
-        <div id="profile-details" class="visible-desktop">
+        <div id="profile-details" class="hidden-phone hidden-tablet">
             {% cache 300 astrobin_user user.username view layout LANGUAGE_CODE %}
             <ul>
                 <li><a href="{% url 'user_page' user.username %}?sub=uploaded"><strong>{{images}}</strong> {% trans "Images" %}</a></li>

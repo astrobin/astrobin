@@ -1,6 +1,6 @@
 {% load i18n %}
 
-<form class="navbar-search pull-left visible-desktop" id="quick-search" action="{% url 'haystack_search' %}" method="get" >
+<form class="navbar-search pull-left hidden-phone hidden-tablet" id="quick-search" action="{% url 'haystack_search' %}" method="get" >
     <input class="tbox"
            id="q"
            type="text"

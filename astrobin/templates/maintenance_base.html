@@ -335,7 +335,7 @@
 
                             <li class="divider-vertical"></li>
 
-                            <li class="dropdown notice-container visible-desktop">
+                            <li class="dropdown notice-container hidden-phone hidden-tablet">
                                 {% if notifications_count > 0 %}
                                     <span id="notifications_count" class="notice-count">{{notifications_count}}</span>
                                 {% endif %}
@@ -366,7 +366,7 @@
                         </ul>
                     </div> <!-- user-nav -->
 
-                    <form class="navbar-search pull-right visible-desktop" id="quick-search" action="{% url 'haystack_search' %}" method="get" >
+                    <form class="navbar-search pull-right hidden-phone hidden-tablet" id="quick-search" action="{% url 'haystack_search' %}" method="get" >
                         <input class="tbox"
                                id="q"
                                type="text"
