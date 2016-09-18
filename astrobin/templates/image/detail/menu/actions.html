@@ -1,7 +1,7 @@
 {% load common_tags %}
 {% load i18n %}
 
-{% if request.user.is_authenticated %}
+{% ifequal request.user image.user %}
 
 <li class="dropdown">
     <a class="dropdown-toggle" data-toggle="dropdown" href="#">
@@ -166,4 +166,4 @@
      </ul>
  </li> <!-- actions -->
 
-{% endif %} <!-- user is authenticated -->
+{% endifequal %} <!-- user is owner -->
