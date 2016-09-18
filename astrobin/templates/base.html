@@ -48,7 +48,7 @@
             </div>
         </div>
 
-        <div id="top" class="container astrobin-container">
+        <div id="top" class="container astrobin-container {% block container_extra_classes %}{% endblock %}">
             {% include "base/alerts.html" %}
 
             {% block breadcrumb %}{% endblock %}

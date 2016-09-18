@@ -7,6 +7,7 @@
 {% load sanitizer %}
 
 {% block title %}{{object.name}}{% endblock %}
+{% block container_extra_classes %}has-subnav{% endblock %}
 
 {% block content %}
     <div class="subnav subnav-fixed">
@@ -99,8 +100,8 @@
                 {% blocktrans with date_created=object.date_created|date:"SHORT_DATE_FORMAT" owner=object.owner.userprofile category=object.category_humanized %}A group created on {{date_created}}, owned by <a href="{{owner_url}}">{{owner}}</a>, categorized as <strong>{{category}}</strong>.{% endblocktrans %}
             </div>
         </div>
-        <div class="span4 group-info-container hidden-phone">
-            <div class="group-info">
+        <div class="span4 group-info-container">
+            <div class="group-info visible-desktop">
                 {% if object.public %}
                     <i class="icon-unlock" rel="tooltip" title="{% trans "This group is public" %}"></i>
                 {% else %}
@@ -120,7 +121,7 @@
                 {% endif %}
             </div>
 
-            <div class="group-info">
+            <div class="group-info hidden-phone">
                 <a
                     href="{% url 'group_members_list' object.pk %}"
                     class="group-info-members"
@@ -151,13 +152,13 @@
 
             </div>
 
-            <div class="group-info">
+            <div class="group-info hidden-phone">
                 <span class="group-info-images" rel="tooltip" title="{% trans "Images" %}">
                     {{object.images.count}}
                 </span>
             </div>
 
-            <div class="group-actions">
+            <div class="group-actions hidden-phone">
                 {% if user_is_member %}
                     <a  href="#leave-modal"
                         data-toggle="modal"

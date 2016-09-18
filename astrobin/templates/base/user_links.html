@@ -185,6 +185,12 @@
                     </div>
                 {% endif %}
             </li> <!-- user menu -->
+
+            <li class="visible-phone">
+                <a href="{% url 'user_page' request.user.username %}">
+                    <i class="icon-user"></i>
+                </a>
+            </li>
         </ul>
     </div> <!-- user-nav -->
 {% else %} <!-- request.user.is_authenticated -->

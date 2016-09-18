@@ -636,10 +636,16 @@ body {
 }
 body {
   background: #393939 url('../images/background-tile.png');
-  padding-top: 55px;
 }
-body.full {
-  padding-top: 55px;
+@media screen and (min-width: 980px) {
+  body {
+    padding-top: 55px;
+  }
+}
+@media screen and (min-width: 980px) {
+  body.full {
+    padding-top: 55px;
+  }
 }
 body.full .navbar .nav.pull-right > li > a.btn {
   color: black;
@@ -663,44 +669,6 @@ body.full .navbar .nav.pull-right > li > a.btn:focus {
 }
 #navbar-user-scores span {
   border-bottom: 1px dotted #D99560;
-}
-@media screen and (max-width: 979px) {
-  body {
-    padding-top: 0;
-  }
-  h1 {
-    font-size: 20px;
-    line-height: 22px;
-  }
-  h1 small {
-    font-size: 18px;
-  }
-  h2 {
-    font-size: 18px;
-    line-height: 19px;
-  }
-  .navbar .nav {
-    margin: 5px;
-  }
-  .navbar input {
-    width: 100%;
-  }
-  .navbar .btn-navbar {
-    margin-right: 16px;
-    position: absolute;
-    top: 12px;
-    left: 10px;
-  }
-  .navbar .btn-navbar .text {
-    color: #fcfcfc;
-    text-shadow: none;
-    position: absolute;
-    top: 4px;
-    left: 34px;
-  }
-  .navbar .btn-navbar:last-child {
-    margin-bottom: 10px;
-  }
 }
 .modal {
   background: #2e2e2e url('../images/dark-panel-tile.png');
@@ -749,11 +717,6 @@ body.full .navbar .nav.pull-right > li > a.btn:focus {
 }
 .navbar-fixed-top .container {
   max-height: 40px;
-}
-@media screen and (max-width: 979px) {
-  .navbar-fixed-top .container {
-    max-height: inherit;
-  }
 }
 .nav-pills.nav-stacked .icon-chevron-right,
 .nav-tabs.nav-stacked .icon-chevron-right {
@@ -860,29 +823,6 @@ body.full .navbar .nav.pull-right > li > a.btn:focus {
 /* Fixes dropdowns on IE */
 .user-nav .user-dropdown {
   min-height: 19px;
-}
-@media screen and (max-width: 979px) {
-  .site-nav.nav-collapse,
-  .user-nav.nav-collapse {
-    overflow: hidden;
-    z-index: 1021;
-  }
-  .site-nav.nav-collapse .nav > li > a,
-  .user-nav.nav-collapse .nav > li > a,
-  .site-nav.nav-collapse .dropdown-menu a,
-  .user-nav.nav-collapse .dropdown-menu a {
-    font-weight: normal;
-    color: #bbb !important;
-  }
-  .site-nav.nav-collapse {
-    position: absolute;
-    top: 50px;
-    left: 10px;
-    background: #333;
-  }
-  .user-nav .dropdown-menu {
-    z-index: 1021;
-  }
 }
 /* Subnav */
 .subnav {
@@ -1029,9 +969,6 @@ li [class*=" icon-"],
 .btn-success .caret,
 .btn-inverse .caret {
   margin-left: 5px;
-}
-.btn-danger {
-  background: red;
 }
 .astrobin-container {
   position: relative;
@@ -2323,7 +2260,7 @@ div.capty-target .capty-caption-content .link-overlay a {
 .notice-count {
   position: absolute;
   top: 5px;
-  right: 0;
+  right: 3px;
   font-size: 75%;
   font-weight: bold;
   line-height: 75%;
@@ -3737,12 +3674,6 @@ ul.astrobin-users li {
   width: 194px;
   height: 194px;
   overflow: hidden;
-}
-@media screen and (max-width: 979px) {
-  .user-card .avatar {
-    width: 140px;
-    height: 140px;
-  }
 }
 .user-card .stats {
   margin-top: 12px;

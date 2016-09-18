@@ -3,6 +3,8 @@
 
 {% block title %}{{ forum.name }}{% endblock title %}
 
+{% block container_extra_classes %}has-subnav{% endblock %}
+
 {% block breadcrumb %}
     {% with forum as object %}
         {% include "pybb/breadcrumb.html" %}
@@ -16,7 +18,7 @@
                 <li>
                     <a href="{% url 'group_detail' forum.group.pk %}">
                         <i class="icon-arrow-left icon-white"></i>
-                        {% trans "Back to group" %}
+                        <span class="hidden-phone">{% trans "Back to group" %}</span>
                     </a>
                 </li>
             {% endif %}

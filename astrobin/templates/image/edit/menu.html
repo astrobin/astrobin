@@ -3,9 +3,32 @@
 
 <div class="subnav subnav-fixed">
     <ul class="nav nav-pills">
-        <li class="{% current request '^/edit(/save)?/watermark/' %}"><a href="{% url 'image_edit_watermark' image.id %}"><i class="icon-tint"></i> {% trans "Watermark" %}</a></li>
-        <li class="{% current request '^/edit(/save)?/basic/' %}"><a href="{% url 'image_edit_basic' image.id %}"><i class="icon-edit"></i> {% trans "Basic Information" %}</a></li>
-        <li class="{% current request '^/edit(/save)?/gear/' %}"><a href="{% url 'image_edit_gear' image.id %}"><i class="icon-cog"></i> {% trans "Gear used" %}</a></li>
-        <li class="{% current request '^/edit(/save)?/acquisition/' %}"><a href="{% url 'image_edit_acquisition' image.id %}"><i class="icon-time"></i> {% trans "Acquisition details" %}</a></li>
+        <li class="{% current request '^/edit(/save)?/watermark/' %}">
+            <a href="{% url 'image_edit_watermark' image.id %}">
+                <i class="icon-tint"></i>
+                <span class="hidden-phone">{% trans "Watermark" %}</span>
+            </a>
+        </li>
+
+        <li class="{% current request '^/edit(/save)?/basic/' %}">
+            <a href="{% url 'image_edit_basic' image.id %}">
+                <i class="icon-edit"></i>
+                <span class="hidden-phone">{% trans "Basic Information" %}</span>
+            </a>
+        </li>
+
+        <li class="{% current request '^/edit(/save)?/gear/' %}">
+            <a href="{% url 'image_edit_gear' image.id %}">
+                <i class="icon-cog"></i>
+                <span class="hidden-phone">{% trans "Gear used" %}</span>
+            </a>
+        </li>
+
+        <li class="{% current request '^/edit(/save)?/acquisition/' %}">
+            <a href="{% url 'image_edit_acquisition' image.id %}">
+                <i class="icon-time"></i>
+                <span class="hidden-phone">{% trans "Acquisition details" %}</span>
+            </a>
+        </li>
     </ul>
 </div>

@@ -5,6 +5,7 @@
 {% load common_tags %}
 
 {% block title %}AstroBin - {% blocktrans %}Public data pool{% endblocktrans %} - {{object}}{% endblock %}
+{% block container_extra_classes %}has-subnav{% endblock %}
 
 {% block content %}
     {% ifequal object.creator request.user %}

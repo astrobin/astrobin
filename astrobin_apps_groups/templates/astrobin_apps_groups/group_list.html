@@ -3,6 +3,7 @@
 {% load i18n %}
 
 {% block title %}{% trans "Groups" %}{% endblock %}
+{% block container_extra_classes %}has-subnav{% endblock %}
 
 {% block content %}
     <div class="subnav subnav-fixed">
@@ -23,7 +24,7 @@
                 </ul>
             </li>
 
-            <li class="dropdown hidden-phone">
+            <li class="dropdown visible-desktop">
                 <a class="dropdown-toggle" data-toggle="dropdown" href="#">
                     <i class="icon-bolt icon-sort-by-attributes-alt"></i>
                     {% trans "Sort" %}
@@ -69,7 +70,6 @@
             </li>
         </ul> <!-- nav -->
     </div> <!-- subnav -->
-
 
     {% if private_groups %}
         <div class="group-list">

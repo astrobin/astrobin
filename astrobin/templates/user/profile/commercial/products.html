@@ -5,6 +5,7 @@
 {% load bootstrap_toolkit %}
 
 {% block title %}AstroBin - {% blocktrans with user=user %}{{user}}'s commercial products{% endblocktrans %}{% endblock %}
+{% block container_extra_classes %}has-subnav{% endblock %}
 
 {% block content %}
     {% include 'user/profile/navigation.html' %}

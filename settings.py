@@ -17,7 +17,7 @@ ALLOWED_HOSTS = ['*']
 TEMPLATE_DEBUG = DEBUG
 MAINTENANCE_MODE = False
 READONLY_MODE = False
-MEDIA_VERSION = '137'
+MEDIA_VERSION = '138'
 LONGPOLL_ENABLED = False
 ADS_ENABLED = True
 DONATIONS_ENABLED = False
@@ -429,6 +429,7 @@ PIPELINE_CSS = {
             'css/bootstrap.css',
             'css/bootstrap-responsive.css',
             'css/astrobin.css',
+            'css/astrobin-mobile.css',
         ),
         'output_filename': 'css/astrobin_pipeline_screen_v' + MEDIA_VERSION + '.css',
         'extra_content':  {

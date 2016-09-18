@@ -6,6 +6,8 @@
 
 {% block title %}{{ topic }}{% endblock %}
 
+{% block container_extra_classes %}has-subnav{% endblock %}
+
 {% block extra_head %}
     {{ block.super }}
     {{ form.media.css }}
@@ -28,7 +30,7 @@
             <div class="subnav subnav-fixed">
                 <ul class="nav nav-pills">
                     {% if user.is_moderator %}
-                        <li>
+                        <li class="hidden-phone">
                             {% if topic.sticky %}
                                 <a href="{% url 'pybb:unstick_topic' topic.id %}">{% trans "Unstick topic" %}</a>
                             {% else %}
@@ -36,25 +38,35 @@
                             {% endif %}
                         </li>
 
-                        <li>
+                        <li class="hidden-phone">
                             {% if topic.closed %}
                                 <a href="{% url 'pybb:open_topic' topic.id %}">{% trans "Open topic" %}</a>
                             {% else %}
                                 <a href="{% url 'pybb:close_topic' topic.id %}">{% trans "Close topic" %}</a>
                             {% endif %}
-                        </li>
+                        </li class="hidden-phone">
 
                         {% if perms.pybb.change_topic and user.is_staff %}
-                            <li>
+                            <li class="hidden-phone">
                                 <a href="{% url 'admin:pybb_topic_change' topic.id %}">{% trans 'Admin' %}</a>
                             </li>
                         {% endif %}
                     {% endif %} {# moderator #}
 
                     {% if user.is_subscribed %}
-                        <li><a href="{% url 'pybb:delete_subscription' topic.id %}?from_topic">{% trans "Unsubscribe" %}</a></li>
+                        <li>
+                            <a href="{% url 'pybb:delete_subscription' topic.id %}?from_topic">
+                                <i class="icon-eye-close"></i>
+                                {% trans "Unsubscribe" %}
+                            </a>
+                        </li>
                     {% elif user|pybb_may_subscribe_topic:topic %}
-                        <li><a href="{% url 'pybb:add_subscription' topic.id %}">{% trans "Subscribe" %}</a></li>
+                        <li>
+                            <a href="{% url 'pybb:add_subscription' topic.id %}">
+                                <i class="icon-eye-open"></i>
+                                {% trans "Subscribe" %}
+                            </a>
+                        </li>
                     {% endif %}
                 </ul>
             </div>

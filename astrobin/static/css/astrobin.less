@@ -761,11 +761,15 @@ html, body {
 
 body {
     background: @light-panel-color url('../images/background-tile.png');
-    padding-top: 55px;
+    @media screen and (min-width: 980px) {
+        padding-top: 55px;
+    }
 }
 
 body.full {
-    padding-top: 55px;
+    @media screen and (min-width: 980px) {
+        padding-top: 55px;
+    }
 
     .navbar .nav.pull-right > li > a.btn {
         color: black;
@@ -792,52 +796,6 @@ body.full {
 
     span {
         border-bottom: 1px dotted #D99560;
-    }
-}
-
-@media screen and (max-width: 979px) {
-    body {
-        padding-top: 0;
-    }
-
-    h1 {
-        font-size: 20px;
-        line-height: 22px;
-
-        small {
-            font-size: 18px;
-        }
-    }
-
-    h2 {
-        font-size: 18px;
-        line-height: 19px;
-    }
-
-    .navbar {
-        .nav {
-            margin: 5px;
-        }
-        input {
-            width: 100%;
-        }
-        .btn-navbar {
-            margin-right: 16px;
-            position: absolute;
-            top: 12px;
-            left: 10px;
-
-            .text {
-                color: @strong-text-color;
-                text-shadow: none;
-                position: absolute;
-                top: 4px;
-                left: 34px;
-            }
-            &:last-child {
-                margin-bottom: 10px;
-            }
-        }
     }
 }
 
@@ -889,12 +847,6 @@ body.full {
 
 .navbar-fixed-top .container {
     max-height: 40px;
-}
-
-@media screen and (max-width: 979px) {
-    .navbar-fixed-top .container {
-        max-height: inherit;
-    }
 }
 
 .nav-pills.nav-stacked, .nav-tabs.nav-stacked {
@@ -1004,30 +956,6 @@ body.full {
 
 .user-nav .user-dropdown {
     min-height: 19px;
-}
-
-@media screen and (max-width: 979px) {
-    .site-nav.nav-collapse,
-    .user-nav.nav-collapse {
-        overflow: hidden;
-        z-index: 1021;
-
-        .nav > li > a, .dropdown-menu a {
-            font-weight: normal;
-            color: #bbb !important;
-        }
-    }
-
-    .site-nav.nav-collapse {
-        position: absolute;
-        top: 50px;
-        left: 10px;
-        background: #333;
-    }
-
-    .user-nav .dropdown-menu {
-        z-index: 1021;
-    }
 }
 
 
@@ -3911,13 +3839,6 @@ ul.astrobin-users {
         width: 194px;
         height: 194px;
         overflow: hidden;
-    }
-
-    @media screen and (max-width: 979px) {
-        .avatar {
-            width: 140px;
-            height: 140px;
-        }
     }
 }
 

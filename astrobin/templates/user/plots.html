@@ -3,6 +3,7 @@
 {% load tags %}
 
 {% block title %}{% blocktrans with user=requested_user %}{{user}}'s plots{% endblocktrans %}{% endblock %}
+{% block container_extra_classes %}has-subnav{% endblock %}
 
 {% block content %}
     <a name="page_anchor"></a>

@@ -10,46 +10,45 @@
 
 {% block content %}
     {% autopaginate thread_list 25 %}
-    <div class="row">
-        <div class="span12">
-            <h1>{% trans "Messages" %}</h1>
 
-            <div class="well">
-                <a class="btn" href="{% url 'messages_compose' %}{% query_string "next=request.path" "" %}">
-                   {% trans "Compose message" %}
-                </a>
-            </div>
+    <h1>{% trans "Messages" %}</h1>
 
-            <table class="table table-striped">
-                <tr>
-                    <th>{% trans "Status" %}</th>
-                    <th>{% trans "Participants" %}</th>
-                    <th class="hidden-phone">{% trans "Date and time" %}</th>
-                    <th>{% trans "Subject" %}</th>
-                    <th class="hidden-phone">{% trans "Excerpt" %}</th>
-                </tr>
-                {% for message in thread_list %}
-                    <tr>
-                        <td>{% if message.new %}<strong>{% trans "New!" %}</strong>{% endif %}</td>
-                        <td>
-                            {% for participant in message.others %}
-                                <a href="{{ participant.user.get_absolute_url }}">{{participant.user.userprofile }}</a>{% if not forloop.last %},{% endif %}
-                            {% endfor %}
-                        </td>
-                        <td class="hidden-phone">{{message.thread.latest_msg.sent_at|date:"SHORT_DATETIME_FORMAT"}}</td>
-                        <td><a href="{{message.thread.get_absolute_url}}">{{message.thread.subject|truncchar:25}}</a></td>
-                        <td class="hidden-phone">{{message.thread.latest_msg.body|truncchar:35}}</td>
-                    </tr>
-                {% empty %}
-                    <tr>
-                        <td colspan="6">
-                            {% trans "No messages" %}
-                        </td>
-                    </tr>
-                {% endfor %}
-            </table>
-        </div>
+    <table class="table table-striped">
+        <tr>
+            <th>{% trans "Status" %}</th>
+            <th>{% trans "Participants" %}</th>
+            <th class="hidden-phone">{% trans "Date and time" %}</th>
+            <th>{% trans "Subject" %}</th>
+            <th class="hidden-phone">{% trans "Excerpt" %}</th>
+        </tr>
+        {% for message in thread_list %}
+            <tr>
+                <td>{% if message.new %}<strong>{% trans "New!" %}</strong>{% endif %}</td>
+                <td>
+                    {% for participant in message.others %}
+                        <a href="{{ participant.user.get_absolute_url }}">{{participant.user.userprofile }}</a>{% if not forloop.last %},{% endif %}
+                    {% endfor %}
+                </td>
+                <td class="hidden-phone">{{message.thread.latest_msg.sent_at|date:"SHORT_DATETIME_FORMAT"}}</td>
+                <td><a href="{{message.thread.get_absolute_url}}">{{message.thread.subject|truncchar:25}}</a></td>
+                <td class="hidden-phone">{{message.thread.latest_msg.body|truncchar:35}}</td>
+            </tr>
+        {% empty %}
+            <tr>
+                <td colspan="6">
+                    {% trans "No messages" %}
+                </td>
+            </tr>
+        {% endfor %}
+    </table>
+
+    <div class="form-actions">
+        <a class="btn btn-primary btn-block-mobile" href="{% url 'messages_compose' %}{% query_string "next=request.path" "" %}">
+            <i class="icon-pencil"></i>
+            {% trans "Compose message" %}
+        </a>
     </div>
+
     <div class="pagination pagination-centered">
         {% paginate %}
     </div>

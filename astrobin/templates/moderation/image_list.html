@@ -31,12 +31,11 @@
                 {% endfor %}
             </ul>
 
-            <hr/>
-            <div class="text-right">
-                <span class="loading hide"><img src="{{STATIC_URL}}images/ajax-loader.gif" alt=""/></span>
-                <a href="#" id="approve-button" class="btn btn-primary">
+            <div class="form-actions">
+                <a href="#" id="approve-button" class="btn btn-primary btn-block-mobile">
                     {% trans "Approve" %} &rarr;
                 </a>
+                <span class="loading hide"><img src="{{STATIC_URL}}images/ajax-loader.gif" alt=""/></span>
             </div>
         {% else %}
             <div class="alert alert-success">

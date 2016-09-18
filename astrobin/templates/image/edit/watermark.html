@@ -4,6 +4,7 @@
 {% load bootstrap_toolkit %}
 
 {% block title %}{% trans "Apply a watermark to image" %}{% endblock %}
+{% block container_extra_classes %}has-subnav{% endblock %}
 
 {% block content %}
     {% include 'image/edit/menu.html' %}
@@ -23,7 +24,7 @@
 
         <div class="form-actions">
             <input
-                class="btn btn-primary"
+                class="btn btn-primary btn-block-mobile"
                 type="submit"
                 value=
                 {% if image.title %}
@@ -34,7 +35,7 @@
             />
 
             {% if image.title %}
-                <a class="btn" href="{{image.get_absolute_url}}">{% trans "Cancel" %}</a>
+                <a class="btn btn-block-mobile" href="{{image.get_absolute_url}}">{% trans "Cancel" %}</a>
             {% endif %}
 
             {% if image.title %}

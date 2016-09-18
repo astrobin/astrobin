@@ -6,6 +6,7 @@
 {% include 'image/detail/custom_ga.html' %}
 
 {% block title %}{{image.title}} ({{image.user.userprofile}}){% endblock %}
+{% block container_extra_classes %}has-subnav{% endblock %}
 
 {% block content %}
     <div class="visible-phone">

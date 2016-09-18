@@ -6,6 +6,8 @@
 
 {% block title %}{% trans "Latest topics" %}{% endblock title %}
 
+{% block container_extra_classes %}has-subnav{% endblock %}
+
 {% block breadcrumb %}
     {% with extra_crumb=_("Latest topics") %}
         {% include "pybb/breadcrumb.html" %}
@@ -19,7 +21,7 @@
                 <li>
                     <a href='{% url 'pybb:mark_all_as_read' %}'>
                         <i class="icon-check icon-white"></i>
-                        {% trans "Mark all as read" %}
+                        <span class="hidden-phone">{% trans "Mark all as read" %}</span>
                     </a>
                 </li>
             </ul>

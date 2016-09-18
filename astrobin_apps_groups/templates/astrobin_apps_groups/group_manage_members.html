@@ -4,6 +4,7 @@
 {% load i18n %}
 
 {% block title %}{{object.name}}: {% trans "Manage members" %}{% endblock %}
+{% block container_extra_classes %}has-subnav{% endblock %}
 
 {% block content %}
     <div class="subnav subnav-fixed">

@@ -4,6 +4,7 @@
 {% load bootstrap_toolkit %}
 
 {% block title %}{% trans "Edit your image: acquisition details" %}{% endblock %}
+{% block container_extra_classes %}has-subnav{% endblock %}
 
 {% block content %}
     {% include 'image/edit/menu.html' %}
@@ -18,9 +19,9 @@
             <input type="hidden" name="image_id" value="{{image.id}}" />
             <input type="hidden" name="edit_type" value="solar_system" />
             <div class="form-actions">
-                <input class="btn btn-primary" type="submit" value="{% trans "Save" %} &rarr;" />
-                <a class="btn btn-danger" href="{% url 'image_edit_acquisition_reset' image.id %}">{% trans "Remove data" %}</a>
-                <a class="btn" href="{{image.get_absolute_url}}">{% trans "Return to image" %}</a>
+                <input class="btn btn-primary btn-block-mobile" type="submit" value="{% trans "Save" %} &rarr;" />
+                <a class="btn btn-danger btn-block-mobile" href="{% url 'image_edit_acquisition_reset' image.id %}">{% trans "Remove data" %}</a>
+                <a class="btn btn-block-mobile" href="{{image.get_absolute_url}}">{% trans "Cancel" %}</a>
             </div>
         </form>
     {% else %}
@@ -48,10 +49,10 @@
             <input type="hidden" name="advanced" value="true"/>
 
             <div class="form-actions">
-                <input class="btn btn-primary" type="submit" value="{% trans "Save" %} &rarr;" />
-                <input class="btn btn-primary" type="submit" value="{% trans "Add more" %}" name="add_more" />
-                <a class="btn btn-danger" href="{% url 'image_edit_acquisition_reset' image.id %}">{% trans "Remove data" %}</a>
-                <a class="btn" href="{{image.get_absolute_url}}">{% trans "Return to image" %}</a>
+                <input class="btn btn-primary btn-block-mobile" type="submit" value="{% trans "Save" %} &rarr;" />
+                <input class="btn btn-primary btn-block-mobile" type="submit" value="{% trans "Add more" %}" name="add_more" />
+                <a class="btn btn-block-mobile btn-danger" href="{% url 'image_edit_acquisition_reset' image.id %}">{% trans "Remove data" %}</a>
+                <a class="btn btn-block-mobile" href="{{image.get_absolute_url}}">{% trans "Cancel" %}</a>
             </div>
         </form>
         {% else %}
@@ -64,9 +65,9 @@
             <input type="hidden" name="edit_type" value="deep_sky" />
             <input type="hidden" name="advanced" value="false"/>
             <div class="form-actions">
-                <input class="btn btn-primary" type="submit" value="{% trans "Save" %} &rarr;" />
-                <a class="btn btn-danger" href="{% url 'image_edit_acquisition_reset' image.id %}">{% trans "Remove data" %}</a>
-                <a class="btn" href="{{image.get_absolute_url}}">{% trans "Cancel" %}</a>
+                <input class="btn btn-primary btn-block-mobile" type="submit" value="{% trans "Save" %} &rarr;" />
+                <a class="btn btn-danger btn-block-mobile" href="{% url 'image_edit_acquisition_reset' image.id %}">{% trans "Remove data" %}</a>
+                <a class="btn btn-block-mobile" href="{{image.get_absolute_url}}">{% trans "Cancel" %}</a>
             </div>
         </form>
         {% endif %}
@@ -74,13 +75,13 @@
         <div class="well">{% trans "What kind of image is this?" %}</div>
         <form class="form-horizontal">{% csrf_token %}
             <div class="form-actions">
-                <a class="btn btn-primary" href="{% url 'image_edit_acquisition' image.id %}?edit_type=solar_system">
+                <a class="btn btn-primary btn-block-mobile" href="{% url 'image_edit_acquisition' image.id %}?edit_type=solar_system">
                     {% trans "Solar system" %}
                 </a>
-                <a class="btn btn-primary" href="{% url 'image_edit_acquisition' image.id %}?edit_type=deep_sky">
+                <a class="btn btn-primary btn-block-mobile" href="{% url 'image_edit_acquisition' image.id %}?edit_type=deep_sky">
                     {% trans "Deep sky" %}
                 </a>
-                <a class="btn" href="{{image.get_absolute_url}}">
+                <a class="btn btn-block-mobile" href="{{image.get_absolute_url}}">
                     {% trans "Other" %}
                 </a>
             </div>

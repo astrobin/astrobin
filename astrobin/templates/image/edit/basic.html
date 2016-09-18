@@ -5,6 +5,7 @@
 
 
 {% block title %}{% trans "Edit your image: basic information" %}{% endblock %}
+{% block container_extra_classes %}has-subnav{% endblock %}
 
 {% block content %}
     {% include 'image/edit/menu.html' %}
@@ -65,13 +66,13 @@
         {% endif %}
 
         <div class="form-actions">
-            <input class="btn btn-primary" type="submit" name="submit_save" value="{% trans "Save" %} &rarr;" />
+            <input class="btn btn-primary btn-block-mobile" type="submit" name="submit_save" value="{% trans "Save" %} &rarr;" />
 
             {% if image.subject_type < 500 %}
-            <input class="btn btn-primary" type="submit" name="submit_gear" value="{% trans "Next step: gear used" %} &rarr;" />
+            <input class="btn btn-primary btn-block-mobile" type="submit" name="submit_gear" value="{% trans "Next step: gear used" %} &rarr;" />
             {% endif %}
 
-            <a class="btn" href="{{image.get_absolute_url}}">{% trans "Cancel" %}</a>
+            <a class="btn btn-block-mobile" href="{{image.get_absolute_url}}">{% trans "Cancel" %}</a>
         </div>
     </form>
 {% endblock %}

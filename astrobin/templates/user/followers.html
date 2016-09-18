@@ -5,6 +5,7 @@
 {% load tags %}
 
 {% block title %}{% blocktrans with user=user %}{{user}}'s followers{% endblocktrans %}{% endblock %}
+{% block container_extra_classes %}has-subnav{% endblock %}
 
 {% block content %}
     {% include 'user/profile/navigation.html' %}

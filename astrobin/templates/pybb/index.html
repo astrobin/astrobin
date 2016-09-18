@@ -6,6 +6,8 @@
 
 {% block title %}{{ PYBB_DEFAULT_TITLE }}{% endblock title %}
 
+{% block container_extra_classes %}has-subnav{% endblock %}
+
 {% block breadcrumb %}
     {% include "pybb/breadcrumb.html" %}
 {% endblock %}
@@ -17,13 +19,13 @@
                 <li>
                     <a href='{% url 'pybb:topic_latest' %}'>
                         <i class="icon-time icon-white"></i>
-                        {% trans "Latest topics" %}
+                        <span class="hidden-phone">{% trans "Latest topics" %}</span>
                     </a>
                 </li>
                 <li>
                     <a href='{% url 'pybb:mark_all_as_read' %}'>
                         <i class="icon-check icon-white"></i>
-                        {% trans "Mark all as read" %}
+                        <span class="hidden-phone">{% trans "Mark all as read" %}</span>
                     </a>
                 </li>
             </ul>
@@ -52,7 +54,7 @@
                 <th class="forum-post-count hidden-phone">
                     {% trans "Posts" %}
                 </th>
-                <th class="forum-last-post hidden-phone">
+                <th class="forum-last-post visible-desktop">
                     {% trans "Last posts" %}
                 </th>
             </tr>
