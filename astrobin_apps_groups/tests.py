@@ -60,27 +60,27 @@ class GroupsTest(TestCase):
         self.assertEqual(response.status_code, 200)
         self.assertContains(response, '<h1>Public groups</h1>', html = True)
         self.assertContains(response, '<td class="group-name"><a href="' + reverse('group_detail', args = (self.group.pk,)) + '">Test group</a></td>', html = True)
-        self.assertContains(response, '<td class="group-members">1</td>', html = True)
-        self.assertContains(response, '<td class="group-images">0</td>', html = True)
+        self.assertContains(response, '<td class="group-members hidden-phone">1</td>', html = True)
+        self.assertContains(response, '<td class="group-images hidden-phone">0</td>', html = True)
 
         # Add a member
         self.group.members.add(self.user2)
         response = self.client.get(reverse('group_list'))
         self.assertEqual(response.status_code, 200)
-        self.assertContains(response, '<td class="group-members">2</td>', html = True)
-        self.assertContains(response, '<td class="group-images">0</td>', html = True)
+        self.assertContains(response, '<td class="group-members hidden-phone">2</td>', html = True)
+        self.assertContains(response, '<td class="group-images hidden-phone">0</td>', html = True)
 
         # Add an image for the one member
         image = Image.objects.create(title = 'Test image', user = self.user2)
         response = self.client.get(reverse('group_list'))
         self.assertEqual(response.status_code, 200)
-        self.assertContains(response, '<td class="group-members">2</td>', html = True)
-        self.assertContains(response, '<td class="group-images">1</td>', html = True)
+        self.assertContains(response, '<td class="group-members hidden-phone">2</td>', html = True)
+        self.assertContains(response, '<td class="group-images hidden-phone">1</td>', html = True)
 
         # Test that WIP images don't work
         image.is_wip = True; image.save()
         response = self.client.get(reverse('group_list'))
-        self.assertContains(response, '<td class="group-images">0</td>', html = True)
+        self.assertContains(response, '<td class="group-images hidden-phone">0</td>', html = True)
 
         # Private groups that do not pertain this user are not visible here
         self.group.public = False
