@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2016-09-14 21:18+0100\n"
+"POT-Creation-Date: 2016-09-17 10:33+0100\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -67,7 +67,7 @@ msgstr ""
 msgid "Other"
 msgstr ""
 
-#: models.py:63 templates/astrobin_apps_groups/_group_list_table.html:6
+#: models.py:63 templates/astrobin_apps_groups/_group_list_table.html:7
 #: templates/astrobin_apps_groups/group_list.html:36
 #: templates/astrobin_apps_groups/group_manage_members.html:41
 #: templates/astrobin_apps_groups/group_manage_members.html:78
@@ -85,7 +85,7 @@ msgstr ""
 msgid "Some HTML tags are allowed: <b>, <i>, <a>"
 msgstr ""
 
-#: models.py:77 templates/astrobin_apps_groups/_group_list_table.html:7
+#: models.py:77 templates/astrobin_apps_groups/_group_list_table.html:8
 #: templates/astrobin_apps_groups/group_list.html:43
 msgid "Category"
 msgstr ""
@@ -120,84 +120,87 @@ msgid ""
 "GROUP IS CREATED."
 msgstr ""
 
-#: views.py:175
+#: views.py:172
 msgid "Your new group was created successfully"
 msgstr ""
 
-#: views.py:185
+#: views.py:182
 msgid "Form saved"
 msgstr ""
 
-#: views.py:194
+#: views.py:191
 msgid "Group deleted"
 msgstr ""
 
-#: views.py:209
+#: views.py:206
 msgid "You have joined the group"
 msgstr ""
 
-#: views.py:212
+#: views.py:209
 msgid "You already were a member of this group"
 msgstr ""
 
-#: views.py:218
+#: views.py:215
 msgid ""
 "This is a moderated group, and your join request will be reviewed by a "
 "moderator"
 msgstr ""
 
-#: views.py:250
+#: views.py:247
 msgid "You have left the group"
 msgstr ""
 
-#: views.py:352 views.py:378
-msgid "You cannot add images that are not yours!"
-msgstr ""
-
-#: views.py:355
+#: views.py:348
 msgid "Group updated with your selection of images."
 msgstr ""
 
-#: views.py:381
+#: views.py:350 views.py:374
+msgid "You cannot add images that are not yours!"
+msgstr ""
+
+#: views.py:377
 msgid "Your image was added to the group."
 msgstr ""
 
-#: templates/astrobin_apps_groups/_group_list_table.html:8
+#: templates/astrobin_apps_groups/_group_list_table.html:9
+#: templates/astrobin_apps_groups/group_list.html:50
+msgid "Last activity"
+msgstr ""
+
+#: templates/astrobin_apps_groups/_group_list_table.html:10
 #: templates/astrobin_apps_groups/group_detail.html:128
-#: templates/astrobin_apps_groups/group_list.html:57
 #: templates/astrobin_apps_groups/group_manage_members.html:109
 msgid "Members"
 msgstr ""
 
-#: templates/astrobin_apps_groups/_group_list_table.html:9
+#: templates/astrobin_apps_groups/_group_list_table.html:11
 #: templates/astrobin_apps_groups/group_detail.html:155
 #: templates/astrobin_apps_groups/group_detail.html:207
-#: templates/astrobin_apps_groups/group_list.html:64
 msgid "Images"
 msgstr ""
 
-#: templates/astrobin_apps_groups/_group_list_table.html:10
-#: templates/astrobin_apps_groups/group_list.html:71
+#: templates/astrobin_apps_groups/_group_list_table.html:12
+#: templates/astrobin_apps_groups/group_list.html:65
 msgid "Forum posts"
 msgstr ""
 
-#: templates/astrobin_apps_groups/_group_list_table.html:17
+#: templates/astrobin_apps_groups/_group_list_table.html:19
 msgid "Owner"
 msgstr ""
 
-#: templates/astrobin_apps_groups/_group_list_table.html:21
+#: templates/astrobin_apps_groups/_group_list_table.html:23
 msgid "Moderator"
 msgstr ""
 
-#: templates/astrobin_apps_groups/_group_list_table.html:25
+#: templates/astrobin_apps_groups/_group_list_table.html:27
 msgid "Member"
 msgstr ""
 
-#: templates/astrobin_apps_groups/_group_list_table.html:29
+#: templates/astrobin_apps_groups/_group_list_table.html:31
 msgid "Invited"
 msgstr ""
 
-#: templates/astrobin_apps_groups/_group_list_table.html:33
+#: templates/astrobin_apps_groups/_group_list_table.html:35
 msgid "Join request pending approval"
 msgstr ""
 
@@ -416,37 +419,37 @@ msgstr ""
 msgid "Sort"
 msgstr ""
 
-#: templates/astrobin_apps_groups/group_list.html:50
+#: templates/astrobin_apps_groups/group_list.html:58
 msgid "Date created"
 msgstr ""
 
-#: templates/astrobin_apps_groups/group_list.html:84
+#: templates/astrobin_apps_groups/group_list.html:78
 msgid "Your private groups"
 msgstr ""
 
-#: templates/astrobin_apps_groups/group_list.html:85
+#: templates/astrobin_apps_groups/group_list.html:79
 msgid "You own, or are a member of, or were invited to, these private groups."
 msgstr ""
 
-#: templates/astrobin_apps_groups/group_list.html:90
+#: templates/astrobin_apps_groups/group_list.html:84
 msgctxt "group"
 msgid "Create private group"
 msgstr ""
 
-#: templates/astrobin_apps_groups/group_list.html:105
+#: templates/astrobin_apps_groups/group_list.html:99
 msgid "Public groups"
 msgstr ""
 
-#: templates/astrobin_apps_groups/group_list.html:106
+#: templates/astrobin_apps_groups/group_list.html:100
 msgid "Open to the whole community."
 msgstr ""
 
-#: templates/astrobin_apps_groups/group_list.html:111
+#: templates/astrobin_apps_groups/group_list.html:105
 msgctxt "group"
 msgid "Create public group"
 msgstr ""
 
-#: templates/astrobin_apps_groups/group_list.html:123
+#: templates/astrobin_apps_groups/group_list.html:117
 msgid "No groups available."
 msgstr ""
 

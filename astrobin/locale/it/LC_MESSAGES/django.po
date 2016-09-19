@@ -7,8 +7,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: AstroBin 1.0\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2016-09-14 21:12+0100\n"
-"PO-Revision-Date: 2016-08-22 07:40+0000\n"
+"POT-Creation-Date: 2016-09-17 10:27+0100\n"
+"PO-Revision-Date: 2016-09-19 10:36+0000\n"
 "Last-Translator: Salvatore <salvatore@iovene.com>\n"
 "Language-Team: Salvatore Iovene <salvatore@iovene.com>\n"
 "Language: it\n"
@@ -17,7 +17,7 @@ msgstr ""
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=(n != 1);\n"
 "X-Generator: Pootle 2.5.0\n"
-"X-POOTLE-MTIME: 1471851641.991819\n"
+"X-POOTLE-MTIME: 1474281362.600200\n"
 
 #: fields.py:10
 msgid "United Kingdom"
@@ -1411,40 +1411,35 @@ msgstr ""
 "ha aggiunto una nuova immagine processata ad un gruppo di dati pubblici"
 
 #: locale_extras.py:17
-#, fuzzy
 msgid "created a new public group"
-msgstr "ha creato un nuovo gruppo di dati pubblici"
+msgstr "ha creato un nuovo gruppo pubblico"
 
 #: locale_extras.py:18
 msgid "joined the public group"
-msgstr ""
+msgstr "si è aggiunto al gruppo pubblico"
 
-#: locale_extras.py:19
-msgid "submitted one or more images to the public group"
-msgstr ""
-
-#: locale_extras.py:20 settings.py:657
+#: locale_extras.py:19 settings.py:657
 msgid "Remove from bookmarks"
 msgstr "Rimuovi dai segnalibri"
 
-#: locale_extras.py:21 settings.py:658
+#: locale_extras.py:20 settings.py:658
 msgid "Bookmark"
 msgstr "Segnalibri"
 
-#: locale_extras.py:22 settings.py:663 settings.py:665
+#: locale_extras.py:21 settings.py:663 settings.py:665
 msgid "Unlike"
 msgstr "Non mi piace più"
 
-#: locale_extras.py:23 settings.py:664 settings.py:666
+#: locale_extras.py:22 settings.py:664 settings.py:666
 #: templates/image/detail/like.html:10 templates/image/detail/like.html:24
 msgid "Like"
 msgstr "Mi piace"
 
-#: locale_extras.py:24 settings.py:671
+#: locale_extras.py:23 settings.py:671
 msgid "Stop following"
 msgstr "Smetti di seguire"
 
-#: locale_extras.py:25 settings.py:672
+#: locale_extras.py:24 settings.py:672
 msgid "Follow"
 msgstr "Segui"
 
@@ -2751,31 +2746,26 @@ msgid "You are invited to a shared private folder"
 msgstr "Sei invitato ad una cartella condivisa privata"
 
 #: management/__init__.py:141
-#, fuzzy
 msgid "You are invited to a group"
-msgstr "Sei invitato ad una cartella condivisa privata"
+msgstr "Sei invitato ad un gruppo"
 
 #: management/__init__.py:147
 msgid "A user requested to join a group you moderate"
-msgstr ""
+msgstr "Un utente a richiesto di essere aggiunto ad un gruppo che moderi"
 
 #: management/__init__.py:153
 msgid "A group moderator approved your request to join"
 msgstr ""
+"Un moderatore di gruppo ha approvate la tua richiesta di essere aggiunto"
 
 #: management/__init__.py:159
 msgid "A group moderator rejected your request to join"
 msgstr ""
+"Un moderatore di gruppo ha declinato la tua richiesta di essere aggiunto"
 
 #: management/__init__.py:165
-#, fuzzy
 msgid "A user you follow created a new public group"
-msgstr ""
-"Un utente che segui ha caricato una nuova revisione di una sua immagine"
-
-#: management/__init__.py:171
-msgid "A user submitted images to a group you joined"
-msgstr ""
+msgstr "Un utente che segui ha creato un nuovo gruppo pubblico"
 
 #: templates/403.html:4 templates/403.html.py:7
 msgid "You are not allowed to see this page."
@@ -3934,8 +3924,8 @@ msgstr "Successo!"
 #: templates/upload.html.py:193 templates/upload.html:386
 #: templates/base/alerts.html:15 templates/base/alerts.html.py:28
 #: templates/base/alerts.html:40 templates/image/edit/watermark.html:42
-#: templates/subscription/subscription_detail.html:108
-#: templates/subscription/subscription_detail.html:120
+#: templates/subscription/subscription_detail.html:133
+#: templates/subscription/subscription_detail.html:145
 #: templates/user/profile/flickr_import.html:55
 msgid "Warning!"
 msgstr "Attenzione!"
@@ -4139,23 +4129,23 @@ msgstr "Vuoi fare l'upgrade?"
 #, python-format
 msgid ""
 "You have used <strong>%(premium_counter)s</strong> images of your allowed "
-"<strong>%(max_allowed)s</strong> for the current year."
+"<strong>%(max_allowed)s</strong> for the current subscription period."
 msgstr ""
-"Hai usato <strong>%(premium_counter)s</strong> immagini delle <strong>"
-"%(max_allowed)s</strong> che ti sono concesse per quest'anno."
+"Hai usato <strong>%(premium_counter)s</strong> immagini delle <strong>%"
+"(max_allowed)s</strong> che ti sono concesse per questo periodo di "
+"abbonamento."
 
 #: templates/upload.html:47
-#: templates/subscription/subscription_detail.html:221
+#: templates/subscription/subscription_detail.html:246
 #: templates/subscription/subscription_done.html:16
-#: templates/subscription/subscription_list.html:76
+#: templates/subscription/subscription_list.html:99
 msgid "Thank you for supporting AstroBin!"
 msgstr "Grazie per il tuo supporto ad AstroBin!"
 
 #: templates/upload.html:54
-msgid "Thank you for being a premium member! Enjoy your unlimited uploads."
+msgid "Thank you for being a premium member! Enjoy your unlimited images."
 msgstr ""
-"Grazie per avere un abbonamento premium! Goditi i tuoi caricamenti "
-"illimitati."
+"Grazie per avere un abbonamento premium! Goditi le tue immagini illimitate."
 
 #: templates/upload.html:66
 msgid "Upload as a work in progress"
@@ -4511,7 +4501,7 @@ msgstr "Vedi lista di spam"
 
 #: templates/base/site_links.html:68
 msgid "Groups"
-msgstr ""
+msgstr "Gruppi"
 
 #: templates/base/site_links.html:127
 msgid "AstroBin Raw Data"
@@ -4932,7 +4922,7 @@ msgstr "Reso possibile da"
 
 #: templates/image/detail/groups.html:6
 msgid "In these public groups"
-msgstr ""
+msgstr "In questi gruppi pubblici"
 
 #: templates/image/detail/histogram.html:6
 msgid "Histogram"
@@ -5076,7 +5066,7 @@ msgstr "Sposta nell'area di lavoro"
 #: templates/image/detail/menu/actions.html:109
 #: templates/image/detail/modals/send_to_group.html:8
 msgid "Send to group"
-msgstr ""
+msgstr "Aggiungi ad un gruppo"
 
 #: templates/image/detail/menu/actions.html:117
 #: templates/image/detail/modals/send_to_datapool.html:7
@@ -5294,12 +5284,18 @@ msgid ""
 "Sorry, you cannot send images from your Staging Area to a group. You need to "
 "first promote this image to your Public Area, if you want to do that."
 msgstr ""
+"Spiacenti, non puoi aggiungere immagini dalla tua Area di Lavoro ad un "
+"gruppo. Devi prima promuovere questa immagine alla tua Area Pubblica, se "
+"vuoi farlo."
 
 #: templates/image/detail/modals/send_to_group.html:18
 msgid ""
 "Use this form to select one of your groups. The list includes all public and "
 "private non-autosubmission groups of which you are the owner or a member."
 msgstr ""
+"Usa questo modulo per selezionare uno dei tuoi gruppi. La lista include "
+"tutti i gruppi pubblici, ed i gruppi private senza aggiunta automatica dei "
+"quali sei membro o proprietario."
 
 #: templates/image/detail/modals/send_to_sharedfolder.html:11
 msgid ""
@@ -5978,12 +5974,25 @@ msgstr ""
 "</a>"
 
 #: templates/notification/group_join_request_approved/full.txt:2
+#, python-format
+msgid ""
+"Your request to join the group \"%(group_name)s\" has been APPROVED.\n"
+"\n"
+"Visit the group here: %(url)s"
+msgstr ""
+"La tua richiesta di essere aggiunto al gruppo \"%(group_name)s\" è stata "
+"APPROVATA.\n"
+"\n"
+"Visita il gruppo qui: %(url)s"
+
 #: templates/notification/group_join_request_approved/notice.html:3
 #: templates/notification/group_join_request_approved/short.html:3
 #: templates/notification/group_join_request_approved/short.txt:2
 #, python-format
 msgid "Your request to join the group \"%(group_name)s\" has been APPROVED"
 msgstr ""
+"La tua richiesta di essere aggiunto al gruppo \"%(group_name)s è stata "
+"APPROVATA"
 
 #: templates/notification/group_join_request_rejected/full.txt:2
 #: templates/notification/group_join_request_rejected/notice.html:3
@@ -5992,6 +6001,8 @@ msgstr ""
 #, python-format
 msgid "Your request to join the group \"%(group_name)s\" has been REJECTED"
 msgstr ""
+"La tua richiesta di essere aggiunto al gruppo \"%(group_name)s è stata "
+"DECLINATA"
 
 #: templates/notification/image_deleted/full.html:2
 #: templates/notification/image_deleted/full.txt:2
@@ -6240,10 +6251,15 @@ msgid "%(user)s wrote a review of a gear item you own!"
 msgstr "%(user)s ha scritto una recensione per uno strumento che possiedi!"
 
 #: templates/notification/new_group_invitation/full.txt:2
-#: templates/notification/new_group_invitation/short.txt:2
 #, python-format
-msgid "%(inviter)s invited you to join the group: \"%(group_name)s\""
+msgid ""
+"%(inviter)s invited you to join the group: \"%(group_name)s\"\n"
+"\n"
+"Visit the group here: %(group_page)s"
 msgstr ""
+"%(inviter)s ti ha invitato al gruppo: \"%(group_name)s\"\n"
+"\n"
+"Visita il gruppo qui: %(group_page)s"
 
 #: templates/notification/new_group_invitation/notice.html:3
 #: templates/notification/new_group_invitation/short.html:3
@@ -6251,23 +6267,39 @@ msgstr ""
 msgid ""
 "<strong>%(inviter)s</strong> invited you to join the group: \"%(group_name)s"
 "\""
-msgstr ""
+msgstr "<strong>%(inviter)s</strong> ti ha invitato al gruppo: \"%(group_name)s\""
+
+#: templates/notification/new_group_invitation/short.txt:2
+#, python-format
+msgid "%(inviter)s invited you to join the group: \"%(group_name)s\""
+msgstr "%(inviter)s ti ha invitato al gruppo: \"%(group_name)s\""
 
 #: templates/notification/new_group_join_request/full.txt:2
-#: templates/notification/new_group_join_request/short.txt:2
 #, python-format
-msgid "%(requester)s requested to join the group: \"%(group_name)s\""
+msgid ""
+"%(requester)s requested to join the group: \"%(group_name)s\".\n"
+"\n"
+"Visit the group here: %(url)s"
 msgstr ""
+"%(requester)s ha richiesto di essere aggiunto al gruppo: \"%(group_name)s\".\n"
+"\n"
+"Visita il gruppo qui: %(url)s"
 
 #: templates/notification/new_group_join_request/notice.html:3
 #: templates/notification/new_group_join_request/short.html:3
-#, fuzzy, python-format
+#, python-format
 msgid ""
 "<strong>%(requester)s</strong> requested to join the group: \"%(group_name)s"
 "\""
 msgstr ""
-"<strong>%(username)s</strong> ha richiesto di vedere il file TIFF o FITS "
-"della tua immagine."
+"<strong>%(requester)s</strong> ha richiesto di essere aggiunto al gruppo: \"%"
+"(group_name)s\""
+
+#: templates/notification/new_group_join_request/short.txt:2
+#, python-format
+msgid "%(requester)s requested to join the group: \"%(group_name)s\""
+msgstr ""
+"%(requester)s ha richiesto di essere aggiunto al gruppo: \"%(group_name)s\""
 
 #: templates/notification/new_image/full.txt:2
 #, python-format
@@ -6372,24 +6404,6 @@ msgstr ""
 msgid "New image revision by %(originator)s"
 msgstr "Nuova revisione d'immagine da %(originator)s"
 
-#: templates/notification/new_images_submitted_to_group/full.txt:2
-#, python-format
-msgid "%(user)s submitted one or more images to the group: \"%(group_name)s\""
-msgstr ""
-
-#: templates/notification/new_images_submitted_to_group/notice.html:3
-#: templates/notification/new_images_submitted_to_group/short.html:3
-#, python-format
-msgid ""
-"<strong>%(user)s</strong> submitted one or more images to the group: "
-"\"%(group_name)s\""
-msgstr ""
-
-#: templates/notification/new_images_submitted_to_group/short.txt:2
-#, python-format
-msgid "%(user)s submitted one or more images to the group: \"%(group_name)s\""
-msgstr ""
-
 #: templates/notification/new_like/full.txt:2
 #, python-format
 msgid "%(user)s likes your image: %(url)s"
@@ -6410,7 +6424,7 @@ msgstr "A %(user)s piace la tua immagine: %(title)s"
 #: templates/notification/new_public_group_created/full.txt:2
 #, python-format
 msgid "%(creator)s created a new public group: \"%(group_name)s\""
-msgstr ""
+msgstr "%(creator)s ha creato un nuovo gruppo pubblico: \"%(group_name)s\""
 
 #: templates/notification/new_public_group_created/notice.html:3
 #: templates/notification/new_public_group_created/short.html:3
@@ -6418,11 +6432,13 @@ msgstr ""
 msgid ""
 "<strong>%(creator)s</strong> created a new public group: \"%(group_name)s\""
 msgstr ""
+"<strong>%(creator)s</strong> ha creato un nuovo gruppo pubblico: \"%"
+"(group_name)s\""
 
 #: templates/notification/new_public_group_created/short.txt:2
 #, python-format
 msgid "%(creator)s created a new public group: \"%(group_name)s\""
-msgstr ""
+msgstr "%(creator)s ha creato un nuovo gruppo pubblico: \"%(group_name)s\""
 
 #: templates/notification/rawdata_invited_to_private_folder/full.txt:2
 #, python-format
@@ -6624,18 +6640,19 @@ msgstr ""
 #: templates/notification/user_joined_public_group/full.txt:2
 #, python-format
 msgid "%(user)s joined the public group: \"%(group_name)s\""
-msgstr ""
+msgstr "%(user)s si è aggiunto al gruppo pubblico: \"%(group_name)s\""
 
 #: templates/notification/user_joined_public_group/notice.html:3
 #: templates/notification/user_joined_public_group/short.html:3
 #, python-format
 msgid "<strong>%(user)s</strong> joined the public group: \"%(group_name)s\""
 msgstr ""
+"<strong>%(user)s</strong> si è aggiunto al gruppo pubblico: \"%(group_name)s\""
 
 #: templates/notification/user_joined_public_group/short.txt:2
 #, python-format
 msgid "%(user)s joined the public group: \"%(group_name)s\""
-msgstr ""
+msgstr "%(user)s si è aggiunto al gruppo pubblico: \"%(group_name)s\""
 
 #: templates/openid_provider/decide.html:4
 #: templates/openid_provider/decide.html:7
@@ -6691,12 +6708,10 @@ msgstr ""
 "indirizzo email e sarai notificato non appena il sito è aperto!"
 
 #: templates/pybb/forum.html:19
-#, fuzzy
 msgid "Back to group"
-msgstr "Torna su"
+msgstr "Torna al gruppo"
 
 #: templates/pybb/forum.html:28
-#, fuzzy
 msgid "New topic"
 msgstr "Apri argomento"
 
@@ -6710,25 +6725,23 @@ msgstr "Nessun forum creato"
 
 #: templates/pybb/forum_list.html:36
 msgid "You are not a member of any groups"
-msgstr ""
+msgstr "Non sei membro di alcun gruppo"
 
 #: templates/pybb/index.html:26 templates/pybb/latest_topics.html:22
 #: templates/pybb/subscribed_topics.html:22
-#, fuzzy
 msgid "Mark all as read"
-msgstr "Segna tutti i forum come letti"
+msgstr "Segna tutti come letti"
 
 #: templates/pybb/index.html:35
-#, fuzzy
 msgid "These are the forums in the groups you have access to."
-msgstr "Queste sono le immagini che hai aggiunto ai preferiti."
+msgstr "Questi sono i forum dei gruppi a cui hai accesso."
 
 #: templates/pybb/index.html:50
 msgid "Topics"
 msgstr "Argomenti"
 
-#: templates/pybb/index.html:53 templates/pybb/topic.html:67
-#: templates/pybb/topic.html.py:87 templates/pybb/topic_list.html:20
+#: templates/pybb/index.html:53 templates/pybb/topic.html:84
+#: templates/pybb/topic_list.html:20
 msgid "Posts"
 msgstr "Messaggi"
 
@@ -6752,6 +6765,8 @@ msgstr "Nota bene: questo post sarà pubblicato solo dopo la moderazione."
 msgid ""
 "Warning: this post awaits moderation and is not yet visible to everybody"
 msgstr ""
+"Attenzione: questo messaggio attende la moderazione e non è ancora visibile "
+"a tutti."
 
 #: templates/pybb/post_template.html:47
 msgid "Edited"
@@ -6804,7 +6819,7 @@ msgstr "Annulla abbonamento"
 msgid "Subscribe"
 msgstr "Abbonati"
 
-#: templates/pybb/topic.html:101
+#: templates/pybb/topic.html:98
 msgid "Subscribers"
 msgstr "Abbonati"
 
@@ -6837,9 +6852,8 @@ msgid "pages"
 msgstr "pagine"
 
 #: templates/pybb/topic_list.html:76
-#, fuzzy
 msgid "This forum does not have any topics."
-msgstr "Questo utente non ha alcuna cartella."
+msgstr "Questo forum non ha alcun argomento."
 
 #: templates/registration/activate.html:4
 #: templates/registration/activate.html:9
@@ -7181,7 +7195,8 @@ msgstr "Non abbonato"
 msgid "Unavailable"
 msgstr "Non disponibile"
 
-#: templates/subscription/subscription_detail.html:68
+#: templates/subscription/subscription_detail.html:69
+#: templates/subscription/subscription_list.html:21
 #, python-format
 msgid ""
 "\n"
@@ -7204,8 +7219,50 @@ msgstr ""
 "paganti, hanno accesso a tutte le funzionalità sociali di AstroBin.\n"
 "            "
 
-#: templates/subscription/subscription_detail.html:79
-#: templates/subscription/subscription_list.html:39
+#: templates/subscription/subscription_detail.html:80
+#: templates/subscription/subscription_list.html:32
+#, python-format
+msgid ""
+"\n"
+"            As a user of <strong>AstroBin Free</strong>, you may have up to\n"
+"            %(max_allowed)s images at the same time. You can delete some "
+"images\n"
+"            to make room for new ones, if you want. For instance you can\n"
+"            maintain a window of your latest %(max_allowed)s images, or "
+"your\n"
+"            best ones.\n"
+"            "
+msgstr ""
+"Da utente di <strong>AstroBin Free</strong>, puoi avere fino a %"
+"(max_allowed)s immagini contemporaneamente. Puoi cancellarne alcune per fare "
+"spazio ad altre, se vuoi. Ad esempio puoi mantenere una selezione delle tue "
+"ultime %(max_allowed)s foto, oppure le tue migliori."
+
+#: templates/subscription/subscription_detail.html:90
+#: templates/subscription/subscription_list.html:42
+#, python-format
+msgid ""
+"\n"
+"            As a user of <strong>AstroBin Lite</strong>, instead, you may "
+"have\n"
+"            up to %(max_allowed)s images at the same time, per each year of\n"
+"            your membership. You may replace images uploaded within the "
+"current\n"
+"            subsciption period while images uploaded prior to that can only "
+"be\n"
+"            deleted. Every year that you renew your membership, you get\n"
+"            %(max_allowed)s new image credits.\n"
+"            "
+msgstr ""
+"Da utente di <strong>AstroBin Lite</strong>, invece, puoi avere fino a %"
+"(max_allowed)s immagini contemporaneamente, per ogni anno del tuo "
+"abbonamento. Puoi sostituire le immagini caricate durante il periodo di "
+"abbonamento corrente, ma immagini caricate precedentemente possono solo "
+"essere cancellate. Per ogni anno che rinnovi il tuo abbonamento, ti vengono "
+"accreditate %(max_allowed)s nuove immagini."
+
+#: templates/subscription/subscription_detail.html:103
+#: templates/subscription/subscription_list.html:62
 msgid ""
 "<strong>AstroBin Raw Data</strong> allows you to store your raw files "
 "(<strong>FIT</strong> and <strong>digital camera raw</strong>) on AstroBin. "
@@ -7217,23 +7274,23 @@ msgstr ""
 "terremo organizzati per bene, ed avrai un backup sicuro di tutti i tuoi "
 "lavori, compresi i file di calibrazione."
 
-#: templates/subscription/subscription_detail.html:82
-#: templates/subscription/subscription_list.html:42
+#: templates/subscription/subscription_detail.html:106
+#: templates/subscription/subscription_list.html:65
 #, python-format
 msgid ""
 "Learn more by reading <a href=\"%(rawdata_url)s\">a short introduction.</a>"
 msgstr ""
 "Leggi di più in <a href=\"%(rawdata_url)s\">questa breve introduzione.</a>"
 
-#: templates/subscription/subscription_detail.html:93
+#: templates/subscription/subscription_detail.html:118
 msgid "Here you can deactivate your free Raw Data Atom subscription."
 msgstr "Qui puoi disattivare il tuo abbonamento gratuito a Dati Grezzi Atom."
 
-#: templates/subscription/subscription_detail.html:98
+#: templates/subscription/subscription_detail.html:123
 msgid "Deactivate"
 msgstr "Disattiva"
 
-#: templates/subscription/subscription_detail.html:112
+#: templates/subscription/subscription_detail.html:137
 msgid ""
 "Your subscription is either cancelled or not active yet. If you want to "
 "subscribe again, please wait until your subscription is expired. If you just "
@@ -7245,18 +7302,18 @@ msgstr ""
 "abbonato, per favore attendi qualche minuto che PayPal mandi la conferma "
 "della transazione al nostro server. Grazie!"
 
-#: templates/subscription/subscription_detail.html:124
+#: templates/subscription/subscription_detail.html:149
 msgid "By cancelling, you will revert to a free plan."
 msgstr "Annullanod, passerai ad un'opzione di abbonamento gratuita."
 
-#: templates/subscription/subscription_detail.html:125
+#: templates/subscription/subscription_detail.html:150
 #, python-format
 msgid "Free plans are limited to <strong>%(max_allowed)s</strong> images."
 msgstr ""
 "Gli account gratuiti sono limitati a <strong>%(max_allowed)s</strong> "
 "immagini."
 
-#: templates/subscription/subscription_detail.html:126
+#: templates/subscription/subscription_detail.html:151
 msgid ""
 "However, your existing images will not be deleted or deactivated in any way! "
 "Simply, you will not be able to upload any more images unless you switch to "
@@ -7266,30 +7323,30 @@ msgstr ""
 "disattivate in alcun modo! Semplicemente, non potrati caricare nuove "
 "immagini a meno di passare ad un abbonamento a pagamento."
 
-#: templates/subscription/subscription_detail.html:134
+#: templates/subscription/subscription_detail.html:159
 msgid "Cacel via PayPal"
 msgstr "Annulla tramite PayPal"
 
-#: templates/subscription/subscription_detail.html:145
-#: templates/subscription/subscription_detail.html:203
+#: templates/subscription/subscription_detail.html:170
+#: templates/subscription/subscription_detail.html:228
 msgid "Here you can activate your free Raw Data Atom subscription."
 msgstr "Qui puoi attivare il tuo abbonamento gratuito a Dati Grezzi Atom."
 
-#: templates/subscription/subscription_detail.html:150
-#: templates/subscription/subscription_detail.html:212
+#: templates/subscription/subscription_detail.html:175
+#: templates/subscription/subscription_detail.html:237
 msgid "Activate"
 msgstr "Attiva"
 
-#: templates/subscription/subscription_detail.html:156
-#: templates/subscription/subscription_detail.html:188
+#: templates/subscription/subscription_detail.html:181
+#: templates/subscription/subscription_detail.html:213
 msgid "Subscribe with a secure payment provided by PayPal:"
 msgstr "Abbonati con un pagamento sicuro fornito da PayPal:"
 
-#: templates/subscription/subscription_detail.html:174
+#: templates/subscription/subscription_detail.html:199
 msgid "You cannot switch to this plan."
 msgstr "Il passaggio a questo abbonamento non ti è possibile."
 
-#: templates/subscription/subscription_detail.html:207
+#: templates/subscription/subscription_detail.html:232
 msgid ""
 "Careful! If you have already a paid Raw Data subscription, your available "
 "space will be reduced!"
@@ -7297,7 +7354,7 @@ msgstr ""
 "Attento! Se hai già un abbonamento a pagamento a Dati Grezzi, il tuo spazio "
 "disponibile sarà ridotto!"
 
-#: templates/subscription/subscription_detail.html:227
+#: templates/subscription/subscription_detail.html:252
 msgid "Back to the plans"
 msgstr "Torna alle opzioni di abbonamento"
 
@@ -7322,38 +7379,15 @@ msgstr "I tuoi abbonamenti attivi"
 msgid "AstroBin Premium subscription plans"
 msgstr "Opzioni di abbonamento ad AstroBin Premium"
 
-#: templates/subscription/subscription_list.html:21
-#, python-format
-msgid ""
-"\n"
-"            You can use AstroBin for free up to %(max_allowed)s uploads. "
-"After\n"
-"            that you can upgrade to <strong>Lite</strong> if you have a "
-"limited\n"
-"            yearly output, or <strong>Premium</strong> for a limitless\n"
-"            experience.  Paying members will not see ads, and everybody,\n"
-"            including non-paying members, have access to all social features "
-"of\n"
-"            AstroBin.\n"
-"            "
-msgstr ""
-"\n"
-"Puoi usare AstroBin gratuitamento fino a %(max_allowed)s caricamenti. "
-"Dopodiché puoi passare a <strong>Lite </strong> se hai una produzione "
-"annuale limitata, oppure <storng>Premium</strong> per un'esperienza senza "
-"limiti. Gli utenti paganti non vedranno pubblicità, e tutti, compresi gli "
-"utenti non-paganti, hanno accesso a tutte le funzionalità sociali di "
-"AstroBin.            "
-
-#: templates/subscription/subscription_list.html:37
+#: templates/subscription/subscription_list.html:60
 msgid "AstroBin Raw Data subscription plans"
 msgstr "Opzioni di abbonamento ad AstroBin Dati Grezzi"
 
-#: templates/subscription/subscription_list.html:45
+#: templates/subscription/subscription_list.html:68
 msgid "Here's a short description of each plan:"
 msgstr "Ecco una breve descrizione di ogni opzione di abbonamento:"
 
-#: templates/subscription/subscription_list.html:49
+#: templates/subscription/subscription_list.html:72
 msgid ""
 "This plan is free! Choose it to share a small amount of data with other "
 "users."
@@ -7361,7 +7395,7 @@ msgstr ""
 "Questo abbonamento è gratuito! Sceglilo per condividere una piccola quantità "
 "di dati con altri utenti."
 
-#: templates/subscription/subscription_list.html:53
+#: templates/subscription/subscription_list.html:76
 msgid ""
 " Choose this plan if you want to keep your expenses to a minimum, but still "
 "want the possibity to share your FIT and digital camera raw files with your "
@@ -7374,7 +7408,7 @@ msgstr ""
 "ad i gruppi di dati pubblici e contribuire alle più profonde immagini deep "
 "sky mai create, e saprai di supportare AstroBin."
 
-#: templates/subscription/subscription_list.html:57
+#: templates/subscription/subscription_list.html:80
 msgid ""
 "Choose this plan if you have started out in the recent year or two, or you "
 "don't want to share and backup your calibration files. Enjoy a lot of room "
@@ -7384,7 +7418,7 @@ msgstr ""
 "vuoi condividere ed archiviare i tuoi file di calibrazione. Goditi molto "
 "spazio di archiviazione ad un prezzo conveniente."
 
-#: templates/subscription/subscription_list.html:61
+#: templates/subscription/subscription_list.html:84
 msgid ""
 "Choose this plan if you have several years worth of data. You will probably "
 "have enough room for all your calibration files, and will enjoy the full "
@@ -7394,7 +7428,7 @@ msgstr ""
 "abbastanza spazio per tutti i tuoi file di calibrazione, e potrai usufruire "
 "del potenziale completo della piattaforma."
 
-#: templates/subscription/subscription_list.html:65
+#: templates/subscription/subscription_list.html:88
 msgid ""
 "Choose this plan if you have a massive amount of raw data that you want to "
 "share and backup securely online."
@@ -7402,7 +7436,7 @@ msgstr ""
 "Scegli questo abbonamento se hai una enorme mole di dati grezzi che vuoi "
 "condividere ed archiviare online con sicurezza."
 
-#: templates/subscription/subscription_list.html:79
+#: templates/subscription/subscription_list.html:102
 msgid ""
 "PS: are you interested in larger plans? <a href=\"/contact/\">Let us know!</"
 "a>"
@@ -7679,8 +7713,8 @@ msgid "Expiration date"
 msgstr "Data di scadenza"
 
 #: templates/user/profile/meta.html:38
-msgid "Uploads used"
-msgstr "Caricamenti usati"
+msgid "Images used"
+msgstr "Immagini usate"
 
 #: templates/user/profile/meta.html:48
 msgid "Thanks for your support!"
@@ -7903,9 +7937,8 @@ msgid "AstroBin will not share your location details with other users."
 msgstr "AstroBin non condividerà i dettagli dei tuoi luoghi con altri utenti."
 
 #: templates/user/profile/edit/navigation.html:60
-#, fuzzy
 msgid "E-mail notifications"
-msgstr "Mostra tutte le notifiche"
+msgstr "Notifiche e-mail"
 
 #: templates/user/profile/edit/notifications.html:6
 msgid "Edit your e-mail notification preferences"
@@ -7917,6 +7950,9 @@ msgid ""
 "that all notifications are always delivered on-site via the notifications "
 "menu, in all cases."
 msgstr ""
+"Seleziona quali notifiche vuoi ricevere via e-mail. Nota bene: tutte le "
+"notifiche sono sempre inviate sul sito tramite il menu delle notifiche, in "
+"ogni caso."
 
 #: templates/user/profile/edit/preferences.html:6
 msgid "Edit your site preferences"
@@ -7997,8 +8033,8 @@ msgstr ""
 "GIF."
 
 #: views/__init__.py:630
-msgid "You have reached your image uploads limit. Please upgrade!"
-msgstr "Hai raggiunto il limite di upload immagini. Considera l'upgrade!"
+msgid "You have reached your image count limit. Please upgrade!"
+msgstr "Hai raggiunto il limite di immagini. Considera l'upgrade!"
 
 #: views/__init__.py:654 views/__init__.py:2112
 msgid ""
@@ -8124,6 +8160,30 @@ msgstr "Immagine spostata nell'area pubblica."
 #: views/image.py:836
 msgid "There was one or more errors processing the form. "
 msgstr "Uno o più errori sono occorsi nel processare il modulo. "
+
+#~ msgid ""
+#~ "\n"
+#~ "            You can use AstroBin for free up to %(max_allowed)s uploads. "
+#~ "After\n"
+#~ "            that you can upgrade to <strong>Lite</strong> if you have a "
+#~ "limited\n"
+#~ "            yearly output, or <strong>Premium</strong> for a limitless\n"
+#~ "            experience.  Paying members will not see ads, and everybody,\n"
+#~ "            including non-paying members, have access to all social "
+#~ "features of\n"
+#~ "            AstroBin.\n"
+#~ "            "
+#~ msgstr ""
+#~ "\n"
+#~ "Puoi usare AstroBin gratuitamento fino a %(max_allowed)s caricamenti. "
+#~ "Dopodiché puoi passare a <strong>Lite </strong> se hai una produzione "
+#~ "annuale limitata, oppure <storng>Premium</strong> per un'esperienza senza "
+#~ "limiti. Gli utenti paganti non vedranno pubblicità, e tutti, compresi gli "
+#~ "utenti non-paganti, hanno accesso a tutte le funzionalità sociali di "
+#~ "AstroBin.            "
+
+#~ msgid "Uploads used"
+#~ msgstr "Caricamenti usati"
 
 #~ msgid "Add forum now"
 #~ msgstr "Aggiungi forum"
