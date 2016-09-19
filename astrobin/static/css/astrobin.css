@@ -1,3 +1,4 @@
+@import 'https://fonts.googleapis.com/css?family=Noto+Sans:400,400i,700|Noto+Serif&subset=latin-ext';
 /*---------------------------------------------------
     LESS Elements 0.6
   ---------------------------------------------------
@@ -404,7 +405,6 @@ div.button span {
   height: 22px;
   padding-top: 8px;
   font-weight: bold;
-  font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
   font-size: 14px;
   letter-spacing: 1px;
   text-transform: uppercase;
@@ -419,7 +419,6 @@ div.selector {
 }
 div.selector select {
   min-width: 190px;
-  font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
   font-size: 14px;
 }
 div.selector span {
@@ -632,6 +631,7 @@ div.uploader input {
 html,
 body {
   color: #b8b8b8;
+  font-family: "Noto Sans", Helvetica, Arial, sans-serif;
   font-size: 14px;
 }
 body {
@@ -822,7 +822,7 @@ body.full .navbar .nav.pull-right > li > a.btn:focus {
 }
 /* Fixes dropdowns on IE */
 .user-nav .user-dropdown {
-  min-height: 19px;
+  min-height: 20px;
 }
 /* Subnav */
 .subnav {
@@ -1178,7 +1178,7 @@ h5,
 h6 {
   margin-top: 16px;
   margin-bottom: 28px;
-  font-family: Georgia, Times, serif;
+  font-family: "Noto Serif", Georgia, Times, serif;
   color: #fcfcfc;
 }
 h1:not(:first-of-type) {
