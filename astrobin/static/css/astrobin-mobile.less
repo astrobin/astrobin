@@ -1,6 +1,30 @@
+@font-face {
+    font-family: LeagueGothicRegular;
+    src: url("../fonts/LeagueGothic-Regular.otf") format("opentype");
+}
+
 @media screen and (max-width: 979px) {
     html, body {
         font-size: 16px;
+    }
+
+    .brand-mobile {
+        font: 40px "LeagueGothicRegular";
+        text-transform: uppercase;
+        width: 75%;
+        position: absolute;
+        top: 10px;
+        left: 50%;
+        margin-left: -37.5%;
+        color: #222;
+        text-shadow: 0 -1px 0 #000, 0 1px 0 #333;
+        text-align: center;
+
+        &:hover, &:focus, &:active {
+            color: #ddd;
+            text-shadow: none;
+            top: 11px;
+        }
     }
 
     .astrobin-container {
@@ -20,10 +44,10 @@
             width: 100%;
         }
         .btn-navbar {
-            margin-right: 16px;
+            margin: 0;
             position: absolute;
-            top: 12px;
-            left: 10px;
+            top: 20px;
+            left: 12px;
 
             .text {
                 text-shadow: none;
