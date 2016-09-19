@@ -142,7 +142,7 @@ textarea.uniform:focus {
 }
 input[readonly],
 input:focus[readonly] {
-  color: #939393;
+  color: #a1a1a1;
   background: #292929;
 }
 /* SPRITES */
@@ -630,7 +630,7 @@ div.uploader input {
 ------------------------------------------------- */
 html,
 body {
-  color: #b8b8b8;
+  color: #c9c9c9;
   font-family: "Noto Sans", Helvetica, Arial, sans-serif;
   font-size: 14px;
 }
@@ -701,7 +701,7 @@ body.full .navbar .nav.pull-right > li > a.btn:focus {
 }
 .modal .modal-body small {
   font-size: 87.5%;
-  color: #929292;
+  color: #a3a3a3;
 }
 .modal .modal-footer {
   background: #303030 url('../images/darker-panel-tile.png');
@@ -1292,7 +1292,7 @@ ul.as-selections li.as-selection-item a.as-edit {
 }
 ul.as-selections li.as-selection-item a.as-close:hover,
 ul.as-selections li.as-selection-item a.as-edit:hover {
-  background-color: #b8b8b8;
+  background-color: #c9c9c9;
 }
 ul.as-selections li.as-selection-item.need-data {
   text-shadow: #333333 0 -1px 1px;
@@ -1332,9 +1332,9 @@ ul.as-list {
   padding: 8px 4px;
   width: 610px;
   z-index: 3;
-  background: #b8b8b8;
-  background: -moz-linear-gradient(top, #fcfcfc, #b8b8b8);
-  background: -webkit-gradient(linear, 0% 0%, 0% 100%, from(#fcfcfc), to(#b8b8b8));
+  background: #c9c9c9;
+  background: -moz-linear-gradient(top, #fcfcfc, #c9c9c9);
+  background: -webkit-gradient(linear, 0% 0%, 0% 100%, from(#fcfcfc), to(#c9c9c9));
   color: #333333;
   -webkit-box-shadow: rgba(0, 0, 0, 0.3) 0 2px 4px;
   -moz-box-shadow: rgba(0, 0, 0, 0.3) 0 2px 4px;
@@ -1370,7 +1370,7 @@ li.as-result-item.active {
 }
 li.as-result-item em {
   font-style: normal;
-  background: #b8b8b8;
+  background: #c9c9c9;
   padding: 0 2px;
   color: #333333;
 }
@@ -1451,7 +1451,7 @@ x:default {
 .tabs .ui-state-active a,
 .tabs .ui-state-active a:link,
 .tabs .ui-state-active a:visited {
-  color: #b8b8b8;
+  color: #c9c9c9;
 }
 .tabs ul {
   list-style-type: none;
@@ -1568,7 +1568,7 @@ div.capty-target .capty-caption-content .link-overlay a {
   border-color: #474747;
 }
 .ui-multiselect .ui-widget-header {
-  color: #b8b8b8;
+  color: #c9c9c9;
   background: #454545;
 }
 .ui-multiselect input.search {
@@ -1778,7 +1778,7 @@ div.capty-target .capty-caption-content .link-overlay a {
 .avatar-block .username .data {
   display: block;
   font-size: 60%;
-  color: #9f9f9f;
+  color: #b0b0b0;
   margin-top: 4px;
   margin-bottom: 8px;
 }
@@ -1789,7 +1789,7 @@ div.capty-target .capty-caption-content .link-overlay a {
 .avatar-block .username .bookmarks,
 .avatar-block .username .likes {
   font-size: 85%;
-  color: #929292;
+  color: #a3a3a3;
   margin-right: 8px;
 }
 .avatar-block .username .views .number,
@@ -1800,7 +1800,7 @@ div.capty-target .capty-caption-content .link-overlay a {
 }
 .avatar-block .username .likes a,
 .avatar-block .username .bookmarks a {
-  color: #929292;
+  color: #a3a3a3;
   border-bottom: 1px dotted #646464;
 }
 .avatar {
@@ -1865,7 +1865,7 @@ div.capty-target .capty-caption-content .link-overlay a {
 .reviews small,
 .comments small {
   font-size: 87.5%;
-  color: #929292;
+  color: #a3a3a3;
 }
 .comment,
 .review {
@@ -1945,7 +1945,7 @@ div.capty-target .capty-caption-content .link-overlay a {
 }
 .comment .content blockquote p,
 .review .content blockquote p {
-  color: #b8b8b8;
+  color: #c9c9c9;
 }
 .comment .content blockquote br,
 .review .content blockquote br {
@@ -1953,7 +1953,7 @@ div.capty-target .capty-caption-content .link-overlay a {
 }
 .comment .content.deleted p,
 .review .content.deleted p {
-  color: #a4a4a4;
+  color: #b3b3b3;
   font-style: italic;
 }
 .comment .preview,
@@ -2122,7 +2122,7 @@ div.capty-target .capty-caption-content .link-overlay a {
   margin-left: 0;
   width: 100%;
   font-size: 80%;
-  color: #929292;
+  color: #a3a3a3;
 }
 .advanced-search-box form label {
   float: none;
@@ -2133,7 +2133,7 @@ div.capty-target .capty-caption-content .link-overlay a {
 }
 .advanced-search-box form ul li label {
   height: auto;
-  color: #b8b8b8;
+  color: #c9c9c9;
   font-weight: normal;
   padding-top: 0;
   font-size: 100%;
@@ -2300,7 +2300,7 @@ div.capty-target .capty-caption-content .link-overlay a {
   display: inline;
 }
 .message .date {
-  color: #a4a4a4;
+  color: #b3b3b3;
 }
 .message .sender {
   padding: 4px;
@@ -2368,7 +2368,7 @@ div.token-input-dropdown {
   color: #333333;
 }
 div.token-input-dropdown li.token-input-selected-dropdown-item {
-  color: #b8b8b8;
+  color: #c9c9c9;
 }
 div.token-input-dropdown li.token-input-dropdown-item,
 div.token-input-dropdown li.token-input-dropdown-item2 {
@@ -2376,7 +2376,7 @@ div.token-input-dropdown li.token-input-dropdown-item2 {
   background-color: #cc4b2e;
 }
 div.token-input-dropdown p {
-  color: #b8b8b8;
+  color: #c9c9c9;
 }
 .plot {
   text-align: center;
@@ -2412,7 +2412,7 @@ div.token-input-dropdown p {
   margin-right: 12px;
 }
 .full-title .subtitle {
-  color: #9f9f9f;
+  color: #b0b0b0;
   font-size: 75%;
   font-style: italic;
   margin-top: 4px;
@@ -2470,11 +2470,11 @@ form.copy #clip-container .clip-status {
   padding: 0 6px;
   background: #222;
   border: 1px solid #111;
-  color: #b8b8b8;
+  color: #c9c9c9;
   font-size: 80%;
 }
 .stButton .chicklets {
-  color: #b8b8b8;
+  color: #c9c9c9;
 }
 p.small {
   font-size: 87.5%;
@@ -2491,7 +2491,7 @@ p.small {
   -webkit-box-shadow: rgba(0, 0, 0, 0.3) 0 2px 4px;
   -moz-box-shadow: rgba(0, 0, 0, 0.3) 0 2px 4px;
   box-shadow: rgba(0, 0, 0, 0.3) 0 2px 4px;
-  color: #b8b8b8;
+  color: #c9c9c9;
 }
 .ui-tooltip-default .ui-tooltip-titlebar h3,
 .ui-tooltip-default .ui-tooltip-content h3 {
@@ -3121,7 +3121,7 @@ form.avatar-change label.control-label {
 .blog-stream-entries .action .content p,
 .activity-actions .entry .content p,
 .blog-stream-entries .entry .content p {
-  color: #b3b3b3;
+  color: #c4c4c4;
 }
 .activity-actions .action .content p a:link,
 .blog-stream-entries .action .content p a:link,
@@ -3162,7 +3162,7 @@ form.avatar-change label.control-label {
 .blog-stream-entries .action .content .when,
 .activity-actions .entry .content .when,
 .blog-stream-entries .entry .content .when {
-  color: #525252;
+  color: #636363;
   font-size: 75%;
   font-style: italic;
 }
@@ -3893,7 +3893,6 @@ th.forum-name {
 }
 .post-content {
   padding: 18px !important;
-  color: #ddd;
 }
 .post-content ul,
 .post-content ol {
@@ -4297,7 +4296,7 @@ table.notifications td {
   color: #ccc;
 }
 .notification-item a {
-  color: #b8b8b8;
+  color: #c9c9c9;
 }
 table.notifications-modal {
   font-size: 13px;
