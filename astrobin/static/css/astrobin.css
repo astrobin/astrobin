@@ -4298,6 +4298,14 @@ table.group-list td.member-posts-count,
 table.group-member-list td.member-posts-count {
   text-align: center;
 }
+/* Unfortunately last-of-type doesn't work. */
+form#group-update-form .control-group:nth-child(8) {
+  display: none;
+}
+form#group-update-form .control-group:nth-child(8) label,
+form#group-update-form .control-group:nth-child(8) select {
+  color: red;
+}
 table.notifications td {
   text-align: left !important;
 }

@@ -24,10 +24,29 @@
 
     <h1>{% trans "Edit group" %}</h1>
 
-    <form class="form-horizontal" action="." method="post">{% csrf_token %}
+    <form id="group-update-form" class="form-horizontal" action="." method="post">{% csrf_token %}
         {{form|as_bootstrap}}
         <div class="form-actions">
             <input class="btn btn-primary btn-block-mobile" type="submit" value="{% trans "Save" %}"/>
         </div>
     </form>
+{% endblock %}
+
+{% block extra_js %}
+    {{block.super}}
+
+    {% if object.images.count > 0 and object.autosubmission %}
+        <script type="text/javascript">
+            $(document).ready(function() {
+                $('input#id_autosubmission').change(function() {
+                    var $control_group = $('form#group-update-form select#id_autosubmission_deactivation_strategy').closest('.control-group');
+                    if (!$(this).is(':checked')) {
+                        $control_group.show();
+                    } else {
+                        $control_group.hide();
+                    }
+                });
+            });
+        </script>
+    {% endif %}
 {% endblock %}

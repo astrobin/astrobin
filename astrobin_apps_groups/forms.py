@@ -30,9 +30,21 @@ class GroupCreateForm(GroupUpdateBaseForm):
 
 
 class GroupUpdateForm(GroupUpdateBaseForm):
+    autosubmission_deactivation_strategy = forms.ChoiceField(
+        label = _("Autosubmission deactivation strategy"),
+        choices = (
+            ('keep', _("Keep all images currently auto-submitted")),
+            ('delete', _("Remove all images and start over")),
+        ),
+        help_text = _("When changing your group from autosubmission to non-autosubmission, you need to think of what to do with the images currently in the group."),
+        required = False,
+    )
+
     class Meta:
         model = Group
-        fields = ['name', 'description', 'category', 'public', 'moderated',]
+        fields = [
+            'name', 'description', 'category', 'public', 'moderated',
+            'autosubmission', 'autosubmission_deactivation_strategy',]
 
 
 class GroupInviteForm(forms.ModelForm):

@@ -205,12 +205,21 @@ class GroupsTest(TestCase):
         response = self.client.get(url)
         self.assertEqual(response.status_code, 200)
 
+        # Upload an image
+        self.client.post(
+            reverse('image_upload_process'),
+            { 'image_file': open('astrobin/fixtures/test.jpg', 'rb') },
+            follow = True)
+        self.assertEqual(self.group.images.count(), 1)
+
         response = self.client.post(url, {
             'name': 'Updated group name',
             'description': 'Updated group description',
             'category': 1,
             'public': False,
             'moderated': True,
+            'autosubmission': False,
+            'autosubmission_deactivation_strategy': 'delete',
         }, follow = True)
         self._assertMessage(response, "success unread", "Form saved")
         self.group = Group.objects.get(pk = self.group.pk)
@@ -221,6 +230,7 @@ class GroupsTest(TestCase):
         self.assertEqual(self.group.public, False)
         self.assertEqual(self.group.moderated, True)
         self.assertEqual(self.group.forum.name, self.group.name)
+        self.assertEqual(self.group.images.count(), 0)
 
         # Restore previous group data
         self.group.name = 'Test group'

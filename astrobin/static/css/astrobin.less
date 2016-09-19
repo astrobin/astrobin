@@ -4500,6 +4500,15 @@ table.group-list, table.group-member-list {
     }
 }
 
+/* Unfortunately last-of-type doesn't work. */
+form#group-update-form .control-group:nth-child(8) {
+    display: none;
+
+    label, select {
+        color: red;
+    }
+}
+
 table.notifications td {
     text-align: left !important;
 }
@@ -4551,3 +4560,5 @@ ol.faq, .row.help {
     li, p { margin-bottom: @spacer-xxlarge; }
     h4 { margin-bottom: @spacer-small; }
 }
+
+
