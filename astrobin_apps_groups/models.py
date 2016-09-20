@@ -67,7 +67,7 @@ class Group(models.Model):
         null = True,
         blank = True,
         verbose_name = _("Description"),
-        help_text = html.escape(_("Some HTML tags are allowed: <b>, <i>, <a>")),
+        help_text = _("HTML tags are allowed."),
     )
 
     category = models.PositiveSmallIntegerField(
