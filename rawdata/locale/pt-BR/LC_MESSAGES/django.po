@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2016-09-17 10:30+0100\n"
+"POT-Creation-Date: 2016-09-20 20:56+0100\n"
 "PO-Revision-Date: 2013-04-09 02:26+0100\n"
 "Last-Translator: GlaucoH <glauco.hass@ig.com.br>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -19,17 +19,17 @@ msgstr ""
 "X-Generator: Pootle 2.1.6\n"
 
 #: folders.py:82 models.py:215 models.py:283
-#: templates/rawdata/privatesharedfolder_detail.html:84
+#: templates/rawdata/privatesharedfolder_detail.html:85
 #: templates/rawdata/privatesharedfolder_form.html:20
 #: templates/rawdata/privatesharedfolder_list.html:37
-#: templates/rawdata/publicdatapool_detail.html:62
+#: templates/rawdata/publicdatapool_detail.html:63
 #: templates/rawdata/publicdatapool_form.html:20
 #: templates/rawdata/publicdatapool_list.html:32
 msgid "Name"
 msgstr "Nome"
 
 #: folders.py:92 templates/rawdata/_folder_dropdown.html:14
-#: templates/rawdata/_images.html:18 templates/rawdata/library.html:65
+#: templates/rawdata/_images.html:18 templates/rawdata/library.html:66
 #: templates/rawdata/rawimage_detail.html:15
 msgid "Type"
 msgstr "Tipo"
@@ -39,32 +39,32 @@ msgid "Upload date"
 msgstr "Data de envio"
 
 #: folders.py:141 templates/rawdata/_folder_dropdown.html:21
-#: templates/rawdata/library.html:81 templates/rawdata/rawimage_detail.html:18
+#: templates/rawdata/library.html:82 templates/rawdata/rawimage_detail.html:18
 msgid "Acquisition date"
 msgstr "Data de captura"
 
 #: folders.py:166 templates/rawdata/_folder_dropdown.html:35
-#: templates/rawdata/library.html:89 templates/rawdata/rawimage_detail.html:19
+#: templates/rawdata/library.html:90 templates/rawdata/rawimage_detail.html:19
 msgid "Camera"
 msgstr "Câmera"
 
 #: folders.py:190 templates/rawdata/_folder_dropdown.html:42
-#: templates/rawdata/library.html:97
+#: templates/rawdata/library.html:98
 msgid "Telescope or lens"
 msgstr "Telescópio ou lente"
 
 #: folders.py:214 templates/rawdata/_folder_dropdown.html:49
-#: templates/rawdata/library.html:105
+#: templates/rawdata/library.html:106
 msgid "Filter"
 msgstr "Filtro"
 
 #: folders.py:238 templates/rawdata/_folder_dropdown.html:56
-#: templates/rawdata/library.html:113
+#: templates/rawdata/library.html:114
 msgid "Subject"
 msgstr "Contém"
 
 #: folders.py:262 templates/rawdata/_folder_dropdown.html:63
-#: templates/rawdata/library.html:121
+#: templates/rawdata/library.html:122
 #: templates/rawdata/rawimage_detail.html:20
 msgid "Temperature"
 msgstr "Temperatura"
@@ -153,13 +153,13 @@ msgid "Reset selection"
 msgstr "Desfazer seleção"
 
 #: templates/rawdata/_browser_js.html:50 templates/rawdata/_images.html:41
-#: templates/rawdata/privatesharedfolder_detail.html:142
-#: templates/rawdata/publicdatapool_detail.html:111
+#: templates/rawdata/privatesharedfolder_detail.html:143
+#: templates/rawdata/publicdatapool_detail.html:112
 #: templates/rawdata/temporaryarchive_detail.html:24
 msgid "Download"
 msgstr "Download"
 
-#: templates/rawdata/_browser_js.html:56 templates/rawdata/library.html:150
+#: templates/rawdata/_browser_js.html:56 templates/rawdata/library.html:151
 msgid "Preprocess"
 msgstr "Pré processamento"
 
@@ -178,14 +178,14 @@ msgid "Public data pool"
 msgstr ""
 
 #: templates/rawdata/_browser_js.html:80 templates/rawdata/_images.html:44
-#: templates/rawdata/privatesharedfolder_detail.html:46
-#: templates/rawdata/privatesharedfolder_detail.html:184
+#: templates/rawdata/privatesharedfolder_detail.html:47
+#: templates/rawdata/privatesharedfolder_detail.html:185
 #: templates/rawdata/privatesharedfolder_list.html:96
 msgid "Delete"
 msgstr "Excluir"
 
 #: templates/rawdata/_folder_dropdown.html:7
-#: templates/rawdata/library.html:129
+#: templates/rawdata/library.html:130
 msgid "Smart folders"
 msgstr ""
 
@@ -193,10 +193,10 @@ msgstr ""
 msgid "Files"
 msgstr "Arquivos"
 
-#: templates/rawdata/_images.html:19 templates/rawdata/library.html:73
-#: templates/rawdata/privatesharedfolder_detail.html:87
+#: templates/rawdata/_images.html:19 templates/rawdata/library.html:74
+#: templates/rawdata/privatesharedfolder_detail.html:88
 #: templates/rawdata/privatesharedfolder_form.html:22
-#: templates/rawdata/publicdatapool_detail.html:65
+#: templates/rawdata/publicdatapool_detail.html:66
 #: templates/rawdata/publicdatapool_form.html:22
 #: templates/rawdata/rawimage_detail.html:17
 msgid "Uploaded"
@@ -412,28 +412,28 @@ msgstr ""
 "tenha a peça que falta para importantes avanços científicos nas áreas de "
 "Novas, Supernovas, asteroides, cometas, estrelas variáveis e mais!"
 
-#: templates/rawdata/library.html:6 templates/rawdata/library.html.py:18
+#: templates/rawdata/library.html:6 templates/rawdata/library.html.py:19
 msgid "Your raw data library"
 msgstr "Sua biblioteca RAW"
 
-#: templates/rawdata/library.html:20
+#: templates/rawdata/library.html:21
 #, python-format
 msgid "You have used %(used)s of your %(limit)s."
 msgstr "Você já usou %(used)s do seu limite de %(limit)s."
 
-#: templates/rawdata/library.html:34
+#: templates/rawdata/library.html:35
 msgid "Manage plans"
 msgstr "Gerenciar planos"
 
-#: templates/rawdata/library.html:37
+#: templates/rawdata/library.html:38
 msgid "Upload"
 msgstr "Enviar"
 
-#: templates/rawdata/library.html:44 templates/rawdata/restricted.html:18
+#: templates/rawdata/library.html:45 templates/rawdata/restricted.html:18
 msgid "Error!"
 msgstr "Erro!"
 
-#: templates/rawdata/library.html:45
+#: templates/rawdata/library.html:46
 msgid ""
 "You have no more space left on your Raw Data account. Please delete some "
 "files to make room, or upgrade your account."
@@ -441,11 +441,11 @@ msgstr ""
 "Você não possui mais espaço na sua conta Raw Data. Exclua alguns arquivos, "
 "por favor, ou troque o plano da sua conta."
 
-#: templates/rawdata/library.html:51
+#: templates/rawdata/library.html:52
 msgid "Warning!"
 msgstr "Cuidado!"
 
-#: templates/rawdata/library.html:52
+#: templates/rawdata/library.html:53
 #, python-format
 msgid ""
 "AstroBin is still working to index %(number)s of your %(total)s raw files."
@@ -453,26 +453,26 @@ msgstr ""
 "AstroBin ainda está trabalhando para indexar %(number)s do seu total de "
 "%(total)s arquivos RAW."
 
-#: templates/rawdata/library.html:59
+#: templates/rawdata/library.html:60
 msgid "All files"
 msgstr "Todos os arquivos"
 
-#: templates/rawdata/library.html:139
+#: templates/rawdata/library.html:140
 msgid "There doesn't seem to be anything here."
 msgstr "Parece que não há nada aqui."
 
-#: templates/rawdata/library.html:141
+#: templates/rawdata/library.html:142
 #, python-format
 msgid ""
 "Head over to the <a href=\"%(upload_url)s\">upload page</a> to get started. "
 msgstr ""
 "Vá para a <a href=\"%(upload_url)s\">página de envios</a> para começar."
 
-#: templates/rawdata/library.html:156
+#: templates/rawdata/library.html:157
 msgid "Coming soon!"
 msgstr "Em breve!"
 
-#: templates/rawdata/library.html:161
+#: templates/rawdata/library.html:162
 msgid ""
 "<strong>AstroBin Raw Data</strong> will soon allow you to automatically "
 "preprocess your data with a single click!"
@@ -480,7 +480,7 @@ msgstr ""
 "Com um único clique, o <strong>AstroBin Raw Data</strong> logo começará o "
 "pré processamento dos seus dados!"
 
-#: templates/rawdata/library.html:164
+#: templates/rawdata/library.html:165
 msgid ""
 "We are working on algorithms that will automatically scan your library for "
 "calibration files, and identify the best matches for dark, offset and flat "
@@ -496,11 +496,11 @@ msgstr ""
 "fornecerá o arquivo final para baixar, pronto para receber o pós "
 "processamento no seu programa favorito."
 
-#: templates/rawdata/library.html:167
+#: templates/rawdata/library.html:168
 msgid "We will let you know when this feature is available!"
 msgstr "Nós avisaremos quando esta novidade estiver disponível."
 
-#: templates/rawdata/library.html:171
+#: templates/rawdata/library.html:172
 msgid "OK"
 msgstr "OK"
 
@@ -508,77 +508,77 @@ msgstr "OK"
 msgid "Plans"
 msgstr "Planos"
 
-#: templates/rawdata/privatesharedfolder_detail.html:14
+#: templates/rawdata/privatesharedfolder_detail.html:15
 #: templates/rawdata/privatesharedfolder_form.html:128
 #: templates/rawdata/publicdatapool_form.html:128
 msgid "Success!"
 msgstr "Sucesso!"
 
-#: templates/rawdata/privatesharedfolder_detail.html:16
+#: templates/rawdata/privatesharedfolder_detail.html:17
 msgid ""
 "The users you selected have been invited. They will receive a notification."
 msgstr "Os usuários que você escolheu serão notificados do seu convite."
 
-#: templates/rawdata/privatesharedfolder_detail.html:25
-#: templates/rawdata/publicdatapool_detail.html:17
+#: templates/rawdata/privatesharedfolder_detail.html:26
+#: templates/rawdata/publicdatapool_detail.html:18
 msgid "Actions"
 msgstr "Ações"
 
-#: templates/rawdata/privatesharedfolder_detail.html:32
-#: templates/rawdata/privatesharedfolder_detail.html:210
-#: templates/rawdata/privatesharedfolder_detail.html:222
+#: templates/rawdata/privatesharedfolder_detail.html:33
+#: templates/rawdata/privatesharedfolder_detail.html:211
+#: templates/rawdata/privatesharedfolder_detail.html:223
 msgid "Invite"
 msgstr "Convidar"
 
-#: templates/rawdata/privatesharedfolder_detail.html:39
-#: templates/rawdata/publicdatapool_detail.html:24
+#: templates/rawdata/privatesharedfolder_detail.html:40
+#: templates/rawdata/publicdatapool_detail.html:25
 msgid "Edit"
 msgstr "Editar"
 
-#: templates/rawdata/privatesharedfolder_detail.html:59
+#: templates/rawdata/privatesharedfolder_detail.html:60
 #, python-format
 msgid ""
 "A private shared folder created by <a href=\"%(user_url)s\">%(user)s</a>, "
 "with %(size)s in %(image_count)s images."
 msgstr ""
 
-#: templates/rawdata/privatesharedfolder_detail.html:71
+#: templates/rawdata/privatesharedfolder_detail.html:72
 msgid "Processing submissions for this folder"
 msgstr "Processar os arquivos enviados para esta pasta"
 
-#: templates/rawdata/privatesharedfolder_detail.html:85
-#: templates/rawdata/publicdatapool_detail.html:63
+#: templates/rawdata/privatesharedfolder_detail.html:86
+#: templates/rawdata/publicdatapool_detail.html:64
 msgid "User"
 msgstr "Usuário"
 
-#: templates/rawdata/privatesharedfolder_detail.html:86
+#: templates/rawdata/privatesharedfolder_detail.html:87
 #: templates/rawdata/privatesharedfolder_form.html:21
-#: templates/rawdata/publicdatapool_detail.html:64
+#: templates/rawdata/publicdatapool_detail.html:65
 #: templates/rawdata/publicdatapool_form.html:21
 #: templates/rawdata/rawimage_detail.html:16
 msgid "Size"
 msgstr "Tamanho"
 
-#: templates/rawdata/privatesharedfolder_detail.html:111
+#: templates/rawdata/privatesharedfolder_detail.html:112
 msgid "Remove from this folder"
 msgstr "Remover desta pasta"
 
-#: templates/rawdata/privatesharedfolder_detail.html:125
+#: templates/rawdata/privatesharedfolder_detail.html:126
 msgid "Shared with the following users"
 msgstr "Compartilhar com os seguintes usuários"
 
-#: templates/rawdata/privatesharedfolder_detail.html:145
-#: templates/rawdata/publicdatapool_detail.html:114
+#: templates/rawdata/privatesharedfolder_detail.html:146
+#: templates/rawdata/publicdatapool_detail.html:115
 msgid "Size before zip compression"
 msgstr "Tamanho antes de compactar com zip"
 
-#: templates/rawdata/privatesharedfolder_detail.html:154
-#: templates/rawdata/publicdatapool_detail.html:123
+#: templates/rawdata/privatesharedfolder_detail.html:155
+#: templates/rawdata/publicdatapool_detail.html:124
 msgid "Comments"
 msgstr "Comentários"
 
-#: templates/rawdata/privatesharedfolder_detail.html:158
-#: templates/rawdata/publicdatapool_detail.html:127
+#: templates/rawdata/privatesharedfolder_detail.html:159
+#: templates/rawdata/publicdatapool_detail.html:128
 msgid ""
 "You can use this space to discuss this public data pool and exchange "
 "information and tips with other contributors or people who want to process "
@@ -588,17 +588,17 @@ msgstr ""
 "trocar informações e dicas com os outros colaboradores ou pessoas que "
 "queiram processar os dados."
 
-#: templates/rawdata/privatesharedfolder_detail.html:175
+#: templates/rawdata/privatesharedfolder_detail.html:176
 #: templates/rawdata/privatesharedfolder_list.html:88
 msgid "Delete folder"
 msgstr "Excluir pasta"
 
-#: templates/rawdata/privatesharedfolder_detail.html:178
+#: templates/rawdata/privatesharedfolder_detail.html:179
 #: templates/rawdata/privatesharedfolder_list.html:91
 msgid "Are you sure you want to delete this shared folder?"
 msgstr "Tem certeza que deseja excluir esta pasta compartilhada?"
 
-#: templates/rawdata/privatesharedfolder_detail.html:179
+#: templates/rawdata/privatesharedfolder_detail.html:180
 #: templates/rawdata/privatesharedfolder_list.html:92
 msgid ""
 "Don't worry, no files will be deleted from your raw data account, nor from "
@@ -607,26 +607,26 @@ msgstr ""
 "Não se preocupe, nenhum arquivo será excluído da sua conta ou da conta dos "
 "outros colaboradores desta pasta."
 
-#: templates/rawdata/privatesharedfolder_detail.html:182
-#: templates/rawdata/privatesharedfolder_detail.html:202
-#: templates/rawdata/privatesharedfolder_detail.html:221
+#: templates/rawdata/privatesharedfolder_detail.html:183
+#: templates/rawdata/privatesharedfolder_detail.html:203
+#: templates/rawdata/privatesharedfolder_detail.html:222
 #: templates/rawdata/privatesharedfolder_form.html:99
 #: templates/rawdata/privatesharedfolder_list.html:95
-#: templates/rawdata/publicdatapool_detail.html:154
+#: templates/rawdata/publicdatapool_detail.html:155
 #: templates/rawdata/publicdatapool_form.html:99
 msgid "Cancel"
 msgstr "Cancelar"
 
-#: templates/rawdata/privatesharedfolder_detail.html:192
+#: templates/rawdata/privatesharedfolder_detail.html:193
 msgid "Edit folder"
 msgstr "Editar pasta"
 
-#: templates/rawdata/privatesharedfolder_detail.html:203
-#: templates/rawdata/publicdatapool_detail.html:155
+#: templates/rawdata/privatesharedfolder_detail.html:204
+#: templates/rawdata/publicdatapool_detail.html:156
 msgid "Save"
 msgstr "Salvar"
 
-#: templates/rawdata/privatesharedfolder_detail.html:213
+#: templates/rawdata/privatesharedfolder_detail.html:214
 msgid ""
 "Invite users to this share private folders. Invitees will be able to add raw "
 "data and processed images, and invite more users."
@@ -770,22 +770,22 @@ msgstr "Seguir"
 msgid "Unfollow"
 msgstr "Deixar de seguir"
 
-#: templates/rawdata/publicdatapool_detail.html:37
+#: templates/rawdata/publicdatapool_detail.html:38
 #, python-format
 msgid ""
 "A public data pool created by <a href=\"%(user_url)s\">%(user)s</a>, with "
 "%(size)s in %(image_count)s images."
 msgstr ""
 
-#: templates/rawdata/publicdatapool_detail.html:49
+#: templates/rawdata/publicdatapool_detail.html:50
 msgid "Processing submissions for this pool"
 msgstr "Processando os envios para este trabalho"
 
-#: templates/rawdata/publicdatapool_detail.html:89
+#: templates/rawdata/publicdatapool_detail.html:90
 msgid "Remove from this pool"
 msgstr "Remover deste trabalho"
 
-#: templates/rawdata/publicdatapool_detail.html:104
+#: templates/rawdata/publicdatapool_detail.html:105
 #, python-format
 msgid ""
 "This public data pool was created on %(date)s by <a href=\"%(user_url)s\">"
@@ -795,7 +795,7 @@ msgid ""
 "data and try to process it!"
 msgstr ""
 
-#: templates/rawdata/publicdatapool_detail.html:144
+#: templates/rawdata/publicdatapool_detail.html:145
 msgid "Edit public data pool"
 msgstr ""
 

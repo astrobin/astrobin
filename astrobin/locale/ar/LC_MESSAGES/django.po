@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2016-09-17 10:24+0100\n"
+"POT-Creation-Date: 2016-09-20 20:50+0100\n"
 "PO-Revision-Date: 2014-02-05 12:48+0000\n"
 "Last-Translator: Omar <thekingosm168@hotmail.com>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -1021,7 +1021,7 @@ msgstr ""
 "Astrobin لايمكن أن يعرض تخزين هذه الملفات حاليا؛لذلك يجب أن تستضيفهم علي "
 "الموقع الخاص بك."
 
-#: forms.py:80 models.py:2244 models.py:2327 templates/gear/page.html:199
+#: forms.py:80 models.py:2233 models.py:2316 templates/gear/page.html:199
 #: templates/image/detail/image_title.html:14
 msgid "Link"
 msgstr "رابط"
@@ -1030,7 +1030,7 @@ msgstr "رابط"
 msgid "Link to TIFF/FITS"
 msgstr "رابط لملف TIFF/FITS"
 
-#: forms.py:82 models.py:702 templates/maintenance_base.html:305
+#: forms.py:82 models.py:702 templates/maintenance_base.html:306
 #: templates/image/detail/image_card.html:98
 #: templates/user/profile/edit/navigation.html:36
 msgid "Locations"
@@ -1065,7 +1065,7 @@ msgstr "تلسكوب أو عدسة التصوير"
 msgid "Guiding telescopes or lenses"
 msgstr "تلسكوب أو عدسة الإرشاد"
 
-#: forms.py:150 forms.py:244 models.py:772 models.py:1736
+#: forms.py:150 forms.py:244 models.py:772 models.py:1725
 #: views/__init__.py:1662
 msgid "Mounts"
 msgstr "المحور المُستخدم"
@@ -1078,22 +1078,22 @@ msgstr "كاميرا التصوير"
 msgid "Guiding cameras"
 msgstr "كاميرا الارشاد"
 
-#: forms.py:153 forms.py:246 models.py:775 models.py:1738
+#: forms.py:153 forms.py:246 models.py:775 models.py:1727
 #: views/__init__.py:1663
 msgid "Focal reducers"
 msgstr "مختزل البعد البؤري"
 
-#: forms.py:154 forms.py:247 models.py:776 models.py:1739
+#: forms.py:154 forms.py:247 models.py:776 models.py:1728
 #: views/__init__.py:286 views/__init__.py:1664 views/image.py:211
 msgid "Software"
 msgstr "البرمجيات"
 
-#: forms.py:155 forms.py:248 models.py:777 models.py:1740
+#: forms.py:155 forms.py:248 models.py:777 models.py:1729
 #: views/__init__.py:1665
 msgid "Filters"
 msgstr "مرشّحات"
 
-#: forms.py:156 forms.py:249 models.py:778 models.py:1741
+#: forms.py:156 forms.py:249 models.py:778 models.py:1730
 #: views/__init__.py:1666
 msgid "Accessories"
 msgstr "الملحقات"
@@ -1102,7 +1102,7 @@ msgstr "الملحقات"
 msgid "If you have a personal website, put the address here."
 msgstr "إذا كنت تملك موقع شخصي ؛ ضع عنوانه هنا."
 
-#: forms.py:188 models.py:1655
+#: forms.py:188 models.py:1644
 msgid "Website"
 msgstr "موقع الويب"
 
@@ -1127,11 +1127,11 @@ msgstr ""
 "تلميح: اكتب مرشحاتك كل علي حدة ! إذا وضعت ، علي سبيل المثال ، مرشحات LRGB في "
 "حقل واحد ، لن تستطيع اضافة بيانات التقاط منفصلة لكل منهم."
 
-#: forms.py:243 models.py:1735 views/__init__.py:1660
+#: forms.py:243 models.py:1724 views/__init__.py:1660
 msgid "Telescopes and lenses"
 msgstr "التلسكوبات و الكاميرات"
 
-#: forms.py:245 models.py:1737 views/__init__.py:1661
+#: forms.py:245 models.py:1726 views/__init__.py:1661
 msgid "Cameras"
 msgstr "الكاميرات"
 
@@ -1153,13 +1153,13 @@ msgstr "الكلّ"
 #: templates/inclusion_tags/search_image_list.html:51
 #: templates/inclusion_tags/search_image_list.html:104
 #: templates/popover/user.html:15
-#: templates/user/profile/commercial/products.html:41
-#: templates/user/profile/commercial/products.html:123
+#: templates/user/profile/commercial/products.html:42
+#: templates/user/profile/commercial/products.html:124
 msgid "Images"
 msgstr "الصور"
 
-#: forms.py:304 models.py:658 models.py:1754
-#: templates/maintenance_base.html:299 templates/wall.html:130
+#: forms.py:304 models.py:658 models.py:1743
+#: templates/maintenance_base.html:300 templates/wall.html:132
 #: templates/inclusion_tags/search_image_list.html:13
 #: templates/user/profile/navigation.html:151
 #: templates/user/profile/edit/navigation.html:30 views/__init__.py:1127
@@ -1194,8 +1194,8 @@ msgstr "من فضلك اتبع هذا الترتيب : سنة-شهر-يوم"
 msgid "Express value in hours"
 msgstr "اكتب القيمة بالساعة"
 
-#: forms.py:384 models.py:791 templates/image/detail/info.html:27
-#: templates/image/detail/info.html:28 templates/search/search.html:239
+#: forms.py:384 models.py:791 templates/image/detail/info.html:31
+#: templates/image/detail/info.html:32 templates/search/search.html:239
 msgid "License"
 msgstr "الرخصة"
 
@@ -1264,7 +1264,7 @@ msgstr "خط الطول (الدقائق)"
 msgid "Longitude (seconds)"
 msgstr "خط الطول (الثواني)"
 
-#: forms.py:593 forms.py:638 forms.py:679 models.py:1367 models.py:1582
+#: forms.py:593 forms.py:638 forms.py:679 models.py:1367
 #: templates/image/detail/image_card.html:46
 msgid "Date"
 msgstr "التاريخ"
@@ -1294,8 +1294,8 @@ msgstr "التاريخ لا يمكن أن يكون في المستقبل."
 #: templates/popover/gear_mount.html:16
 #: templates/popover/gear_software.html:17
 #: templates/popover/gear_telescope.html:17
-#: templates/user/profile/commercial/products.html:38
-#: templates/user/profile/commercial/products.html:120
+#: templates/user/profile/commercial/products.html:39
+#: templates/user/profile/commercial/products.html:121
 msgid "Make"
 msgstr "المُصَنّع"
 
@@ -1303,25 +1303,25 @@ msgstr "المُصَنّع"
 msgid "The make, brand, producer or developer of this product."
 msgstr "المُصَنّع أو العلامة التجارية أو المُنتِج أو المُطوّر لهذا المُنتَج."
 
-#: forms.py:925 forms.py:986 models.py:204 models.py:1329 models.py:1930
-#: models.py:2069 templates/gear/fix.html:32 templates/gear/fix.html.py:33
+#: forms.py:925 forms.py:986 models.py:204 models.py:1329 models.py:1919
+#: models.py:2058 templates/gear/fix.html:32 templates/gear/fix.html.py:33
 #: templates/gear/fix.html:34 templates/gear/fix.html.py:42
 #: templates/gear/fix.html:47 templates/gear/fix.html.py:52
 #: templates/gear/fix.html:57 templates/gear/fix.html.py:62
 #: templates/gear/fix.html:67 templates/gear/fix.html.py:72
-#: templates/gear/fix.html:77 templates/user/api_keys.html:16
-#: templates/user/profile/commercial/products.html:39
-#: templates/user/profile/commercial/products.html:121
+#: templates/gear/fix.html:77 templates/user/api_keys.html:15
+#: templates/user/profile/commercial/products.html:40
+#: templates/user/profile/commercial/products.html:122
 msgid "Name"
 msgstr "الاسم"
 
 #: forms.py:930 forms.py:955 forms.py:991 forms.py:1026
-#: templates/user/profile/commercial/products.html:82
-#: templates/user/profile/commercial/products.html:164
-#: templates/user/profile/commercial/products.html:280
-#: templates/user/profile/commercial/products.html:350
-#: templates/user/profile/commercial/products.html:485
-#: templates/user/profile/commercial/products.html:812
+#: templates/user/profile/commercial/products.html:83
+#: templates/user/profile/commercial/products.html:165
+#: templates/user/profile/commercial/products.html:281
+#: templates/user/profile/commercial/products.html:351
+#: templates/user/profile/commercial/products.html:486
+#: templates/user/profile/commercial/products.html:813
 msgid "Merge"
 msgstr "دمج"
 
@@ -1355,7 +1355,7 @@ msgstr "لقد قمت بادّعاء هذا المنتج من قبل."
 msgid "Recipient"
 msgstr "المستقبِل"
 
-#: locale_extras.py:5 templates/messages/inbox.html:28
+#: locale_extras.py:5 templates/messages/inbox.html:21
 msgid "Subject"
 msgstr "الموضوع"
 
@@ -1412,28 +1412,28 @@ msgstr "أنشأ مساحة بيانات عامة جديد"
 msgid "joined the public group"
 msgstr ""
 
-#: locale_extras.py:19 settings.py:657
+#: locale_extras.py:19 settings.py:658
 msgid "Remove from bookmarks"
 msgstr "حذف من الصور المفضلة"
 
-#: locale_extras.py:20 settings.py:658
+#: locale_extras.py:20 settings.py:659
 msgid "Bookmark"
 msgstr "صورة مفضلة"
 
-#: locale_extras.py:21 settings.py:663 settings.py:665
+#: locale_extras.py:21 settings.py:664 settings.py:666
 msgid "Unlike"
 msgstr "لا يعجبني"
 
-#: locale_extras.py:22 settings.py:664 settings.py:666
+#: locale_extras.py:22 settings.py:665 settings.py:667
 #: templates/image/detail/like.html:10 templates/image/detail/like.html:24
 msgid "Like"
 msgstr "أعجبني"
 
-#: locale_extras.py:23 settings.py:671
+#: locale_extras.py:23 settings.py:672
 msgid "Stop following"
 msgstr "أوقف المتابعة"
 
-#: locale_extras.py:24 settings.py:672
+#: locale_extras.py:24 settings.py:673
 msgid "Follow"
 msgstr "اتبع"
 
@@ -1551,7 +1551,7 @@ msgstr "سُدم كوكبية"
 msgid "Galaxies"
 msgstr "مجرات"
 
-#: models.py:141 templates/wall.html:91
+#: models.py:141 templates/wall.html:93
 msgid "Sun"
 msgstr "الشمس"
 
@@ -1595,8 +1595,8 @@ msgstr "كويكب"
 msgid "Comet"
 msgstr "مذنَّب"
 
-#: models.py:152 models.py:595 models.py:659 templates/wall.html:142
-#: templates/image/edit/acquisition.html:84 views/__init__.py:1128
+#: models.py:152 models.py:595 models.py:659 templates/wall.html:144
+#: templates/image/edit/acquisition.html:85 views/__init__.py:1128
 msgid "Other"
 msgstr "أخرى"
 
@@ -1936,11 +1936,11 @@ msgstr "أجرام الفضاء العميق"
 msgid "Solar system body or event"
 msgstr "جسم أو حَدَث في المجموعة الشمسية"
 
-#: models.py:656 templates/wall.html:118 views/__init__.py:1125
+#: models.py:656 templates/wall.html:120 views/__init__.py:1125
 msgid "Extremely wide field"
 msgstr "واسع المجال جداًَ"
 
-#: models.py:657 templates/wall.html:124 views/__init__.py:1126
+#: models.py:657 templates/wall.html:126 views/__init__.py:1126
 msgid "Star trails"
 msgstr "العنوان"
 
@@ -1949,7 +1949,7 @@ msgstr "العنوان"
 msgid "Title"
 msgstr "العنوان"
 
-#: models.py:680 models.py:1752 templates/user/profile/navigation.html:145
+#: models.py:680 models.py:1741 templates/user/profile/navigation.html:145
 msgid "Subject type"
 msgstr "نوع الجرم"
 
@@ -1976,7 +1976,7 @@ msgstr ""
 "اسحب البنود التي تريدها من الجانب الأيمن إلي الجانب الأيسر ، أو اضغط علي "
 "علامة الزائد."
 
-#: models.py:709 models.py:1335 models.py:2077 models.py:2334
+#: models.py:709 models.py:1335 models.py:2066 models.py:2323
 #: templates/gear/page.html:49 templates/image/detail/image_description.html:8
 msgid "Description"
 msgstr "الوصف"
@@ -2008,7 +2008,7 @@ msgid "Allow comments"
 msgstr "التعليقات"
 
 #: models.py:836 templates/user_collections_add_remove_images.html:27
-#: templates/image/full.html:56 templates/image/detail/image_title.html:7
+#: templates/image/full.html:55 templates/image/detail/image_title.html:7
 #: templates/image/detail/menu/navigation.html:10
 #: templates/image/detail/menu/navigation.html:25
 #: templates/moderation/image_list.html:22
@@ -2024,7 +2024,7 @@ msgstr "الصور المُلتقطة بالجهاز"
 msgid "Please use the following format: yyyy-mm-dd."
 msgstr "من فضلك استخدم هذا الترتيب: سنة-شهر-يوم."
 
-#: models.py:1373 models.py:1581 models.py:2309
+#: models.py:1373 models.py:2298
 msgid "Image"
 msgstr "الصورة"
 
@@ -2245,73 +2245,73 @@ msgstr "الوقت"
 msgid "Please use the following format: hh:mm."
 msgstr "من فضلك استخدم هذا الترتيب: ساعات:دقائق."
 
-#: models.py:1601
+#: models.py:1590
 msgid "Request from"
 msgstr "طلب من"
 
-#: models.py:1613
+#: models.py:1602
 msgid "Additional information"
 msgstr "معلومات إضافية"
 
-#: models.py:1614
+#: models.py:1603
 msgid "TIFF/FITS"
 msgstr "TIFF/FITS"
 
-#: models.py:1615
+#: models.py:1604
 msgid "Higher resolution"
 msgstr "دقة عالية"
 
-#: models.py:1647
+#: models.py:1636
 msgid "Real name"
 msgstr "الاسم الحقيقي"
 
-#: models.py:1648
+#: models.py:1637
 msgid "If present, your real name will be used throughout the website."
 msgstr "سيتم استخدام اسمك الحقيقي -إن وُجد- في الموقع."
 
-#: models.py:1662
+#: models.py:1651
 msgid "Job"
 msgstr "المهنة"
 
-#: models.py:1669
+#: models.py:1658
 msgid "Hobbies"
 msgstr "الهوايات"
 
-#: models.py:1673
+#: models.py:1662
 msgid "Do you have any hobbies other than astrophotography?"
 msgstr "هل تملك هوايات أخرى بجانب التصوير الفلكي؟"
 
-#: models.py:1680
+#: models.py:1669
 msgid "Timezone"
 msgstr "المنطقة الزمنية"
 
-#: models.py:1681
+#: models.py:1670
 msgid ""
 "By selecting this, you will see all the dates on AstroBin in your timezone."
 msgstr ""
 "باختيار هذا؛سوف تري كل التواريخ علي موقع Astrobin تبعاَ لمنطقتك الزمنية."
 
-#: models.py:1686
+#: models.py:1675
 msgid "About you"
 msgstr "نبذة عن نفسك"
 
-#: models.py:1687
+#: models.py:1676
 msgid "Write something about yourself. HTML tags are allowed."
 msgstr "اكتب شيئاً عن نفسك ، مسموح باستخدام HTML tags."
 
-#: models.py:1701
+#: models.py:1690
 msgid "Company name"
 msgstr "اسم الشركة"
 
-#: models.py:1702
+#: models.py:1691
 msgid "The name of the company you represent on AstroBin."
 msgstr "اسم الشركة الّتي تمثلها علي Astrobin."
 
-#: models.py:1708
+#: models.py:1697
 msgid "Company description"
 msgstr "وصف الشركة"
 
-#: models.py:1709
+#: models.py:1698
 msgid ""
 "A short description of the company you represent on AstroBin. You can use "
 "some <a href=\"/faq/#comments\">formatting rules</a>."
@@ -2319,203 +2319,203 @@ msgstr ""
 "وصف صغير للشركة الّتي تُمثلها علي AstroBin. يمكنك استخدام بعض <a href=\"/faq/"
 "#comments\">قواعد التنسيق</a>."
 
-#: models.py:1717
+#: models.py:1706
 msgid "Company website"
 msgstr "موقع الويب للشركة"
 
-#: models.py:1718
+#: models.py:1707
 msgid "The website of the company you represent on AstroBin."
 msgstr "موقع الويب للشركة التي تُمثلُها علي Astrobin."
 
-#: models.py:1722
+#: models.py:1711
 msgid "Country of operation"
 msgstr "دولة العمل"
 
-#: models.py:1750 templates/search/search.html:31
+#: models.py:1739 templates/search/search.html:31
 #: templates/user/profile/navigation.html:139
 msgid "Upload time"
 msgstr "وقت الرفع"
 
-#: models.py:1751 templates/user/profile/navigation.html:142
+#: models.py:1740 templates/user/profile/navigation.html:142
 msgid "Acquisition time"
 msgstr "توقيت الالتقاط"
 
-#: models.py:1753 templates/user/profile/navigation.html:148
+#: models.py:1742 templates/user/profile/navigation.html:148
 msgid "Year"
 msgstr "السّنة"
 
-#: models.py:1755 templates/user/profile/navigation.html:136
+#: models.py:1744 templates/user/profile/navigation.html:136
 #, fuzzy
 msgid "Collections"
 msgstr "المواقع"
 
-#: models.py:1759
+#: models.py:1748
 msgid "Default gallery sorting"
 msgstr ""
 
-#: models.py:1765 templates/maintenance_base.html:311
+#: models.py:1754 templates/maintenance_base.html:312
 #: templates/user/profile/edit/navigation.html:42
 msgid "Default license"
 msgstr "الرخصة الافتراضية"
 
-#: models.py:1767
+#: models.py:1756
 msgid ""
 "The license you select here is automatically applied to all your new images."
 msgstr "الرخصة الّتي تختارُها هنا سوف يتم تطبيقها علي جميع صورك الجديدة."
 
-#: models.py:1807
+#: models.py:1796
 msgid "Language"
 msgstr "اللّغة"
 
-#: models.py:1828
+#: models.py:1817
 #, fuzzy
 msgid "Signature"
 msgstr "زحل"
 
-#: models.py:1833
+#: models.py:1822
 msgid "Signature HTML Version"
 msgstr ""
 
-#: models.py:1838
+#: models.py:1827
 msgid "Show signatures"
 msgstr ""
 
-#: models.py:1843
+#: models.py:1832
 msgid "Post count"
 msgstr ""
 
-#: models.py:1848
+#: models.py:1837
 msgid "Automatically subscribe"
 msgstr ""
 
-#: models.py:1849
+#: models.py:1838
 msgid "Automatically subscribe to topics that you answer"
 msgstr ""
 
-#: models.py:1856
+#: models.py:1845
 #: templates/pybb/mail_templates/subscription_email_subject.html:2
 msgid "New reply to a forum topic you subscribe to"
 msgstr ""
 
-#: models.py:1931
+#: models.py:1920
 msgid "A descriptive name, e.g. 'Home observatory' or 'Mount Whitney'."
 msgstr "اسم وصفي، علي سبيل المثال 'مرصد في المنزل' أو 'جبل سانت كاترين'."
 
-#: models.py:1937
+#: models.py:1926
 msgid "City"
 msgstr "المدينة"
 
-#: models.py:1938
+#: models.py:1927
 msgid "If this location is not in a city, use the name of the closest city."
 msgstr "إذا لم يكن موقعك في مدينة ، استخدم اسم أٌقرب مدينة لك."
 
-#: models.py:1944
+#: models.py:1933
 msgid "State or province"
 msgstr "المحافظة"
 
-#: models.py:1949
+#: models.py:1938
 msgid "Country"
 msgstr "الدولة"
 
-#: models.py:1966
+#: models.py:1955
 msgid "North"
 msgstr "الشمال"
 
-#: models.py:1966
+#: models.py:1955
 msgid "South"
 msgstr "الجنوب"
 
-#: models.py:1967
+#: models.py:1956
 msgid "North or south"
 msgstr "الشمال أو الجنوب"
 
-#: models.py:1982
+#: models.py:1971
 msgid "East"
 msgstr "الشرق"
 
-#: models.py:1982
+#: models.py:1971
 msgid "West"
 msgstr "غرب"
 
-#: models.py:1983
+#: models.py:1972
 msgid "East or West"
 msgstr "شرق أو غرب"
 
-#: models.py:1987
+#: models.py:1976
 msgid "Altitude"
 msgstr "الارتفاع"
 
-#: models.py:1988
+#: models.py:1977
 msgid "In meters."
 msgstr "بالمتر."
 
-#: models.py:2070
+#: models.py:2059
 msgid "The name of the website or app that wishes to use the APIs."
 msgstr "اسم موقع الويب أو التطبيق الّذي تريد استخدامه كـ API."
 
-#: models.py:2078
+#: models.py:2067
 msgid ""
 "Please explain the purpose of your application, and how you intend to use "
 "the API."
 msgstr "من فضلك اشرح الغرض من تطبيقك ، وكيف تنوي استخدام الـ API."
 
-#: models.py:2221
+#: models.py:2210
 msgid "AUD - Australian dollars"
 msgstr "دولار أسترالي"
 
-#: models.py:2222
+#: models.py:2211
 msgid "CAD - Canadian dollars"
 msgstr "دولار كندي"
 
-#: models.py:2223
+#: models.py:2212
 msgid "CHF - Swiss francs"
 msgstr "فرنك سويسري"
 
-#: models.py:2224
+#: models.py:2213
 msgid "EUR - Euros"
 msgstr "يورو"
 
-#: models.py:2225
+#: models.py:2214
 msgid "GPB - Pound stelings"
 msgstr "جنيه إسترليني"
 
-#: models.py:2226
+#: models.py:2215
 msgid "PLN - Polish zloty"
 msgstr "زلوتي بولندي"
 
-#: models.py:2227
+#: models.py:2216
 msgid "SEK - Swedish krona"
 msgstr "كورونا سويدي"
 
-#: models.py:2228
+#: models.py:2217
 msgid "USD - American dollars"
 msgstr "دولار أمريكي"
 
-#: models.py:2234 models.py:2284
+#: models.py:2223 models.py:2273
 msgid "Producer"
 msgstr "المُنتِج"
 
-#: models.py:2245 models.py:2328
+#: models.py:2234 models.py:2317
 msgid "The link to this product's page on your website."
 msgstr "رابط هذا المُنتَج علي موقع الويب الخاص بك."
 
-#: models.py:2253 templates/subscription/subscription_category_list.html:8
+#: models.py:2242 templates/subscription/subscription_category_list.html:8
 msgid "Price"
 msgstr "السعر"
 
-#: models.py:2261
+#: models.py:2250
 msgid "Currency"
 msgstr "العملة"
 
-#: models.py:2277
+#: models.py:2266
 msgid "Retailed gear items"
 msgstr "الأجهزة المعروضة للبيع"
 
-#: models.py:2293
+#: models.py:2282
 msgid "Proper make"
 msgstr "المُصَنّع الصحيح"
 
-#: models.py:2294
+#: models.py:2283
 msgid ""
 "Sometimes, product make/brand/producer/developer names are not written "
 "properly by the users. Write here the proper make/brand/producer/developer "
@@ -2525,11 +2525,11 @@ msgstr ""
 "المُنتِج أو المطور بطريقة صحيحة. اكتب هنا الاسم الصحيح للمُصَنّع أو العلامة "
 "التجارية أو المُنتِج أو المطور."
 
-#: models.py:2301
+#: models.py:2290
 msgid "Proper name"
 msgstr "اسم الفئة"
 
-#: models.py:2302
+#: models.py:2291
 msgid ""
 "Sometimes, product names are not written properly by the users. Write here "
 "the proper product name, not including the make/brand/producer/developer "
@@ -2541,7 +2541,7 @@ msgstr ""
 "تحاول وضع عدد أكبر من الأجهزة في مجموعات ، لذلك حاول استخدام الاسم الشائع "
 "للمُنتَج الّذي تملكه."
 
-#: models.py:2310
+#: models.py:2299
 msgid ""
 "The official, commercial image for this product. Upload an image via the "
 "regular uploading interface, set its subject type to \"Gear\", and then "
@@ -2552,16 +2552,16 @@ msgstr ""
 "العادية و حدد نوع الصورة \"جهاز\" ، ثم اخترها من هذه القائمة. إذا قمت برفع "
 "العديد من المراجعات ستظهر المراجعات في الصفحة التجارية."
 
-#: models.py:2319
+#: models.py:2308
 msgid "Tagline"
 msgstr "الشعار"
 
-#: models.py:2320
+#: models.py:2309
 msgid ""
 "A memorable phrase that will sum up this product, for marketing purposes."
 msgstr "جملة يمكن تذكُّرها تلخِّص هذا المنتج ، لأغراض التسويق."
 
-#: models.py:2335
+#: models.py:2324
 msgid ""
 "Here you can write the full commercial description of your product. You can "
 "use some <a href=\"/faq/#comments\">formatting rules</a>."
@@ -2569,7 +2569,7 @@ msgstr ""
 "يمكنك كتابة الوصف التجاري الكامل للمُنتج الخاص بك هنا. يمكنك استخدام بعض <a "
 "href=\"/faq/#comments\">قواعد التنسيق</a>."
 
-#: models.py:2354
+#: models.py:2343
 msgid "Commercial gear items"
 msgstr "الأجهزة التجارية"
 
@@ -2818,8 +2818,8 @@ msgid "There is no activity yet."
 msgstr "لايوجد نشاط بعد."
 
 #: templates/affiliates.html:8 templates/affiliates.html.py:11
-#: templates/maintenance_base.html:183 templates/base/site_links.html:143
-#: templates/index/root.html:316
+#: templates/maintenance_base.html:184 templates/base/site_links.html:151
+#: templates/index/root.html:315
 msgid "Affiliates"
 msgstr "المُنتجات"
 
@@ -2876,13 +2876,13 @@ msgstr ""
 "Astrobin!"
 
 #: templates/explore_choose.html:5 templates/explore_choose.html.py:8
-#: templates/maintenance_base.html:104 templates/base/site_links.html:46
+#: templates/maintenance_base.html:105 templates/base/site_links.html:54
 msgid "Explore"
 msgstr "استعراض"
 
-#: templates/explore_choose.html:10 templates/maintenance_base.html:111
-#: templates/wall.html:8 templates/wall.html.py:168
-#: templates/base/site_links.html:53
+#: templates/explore_choose.html:10 templates/maintenance_base.html:112
+#: templates/wall.html:8 templates/wall.html.py:170
+#: templates/base/site_links.html:61
 msgid "The Big Wall"
 msgstr "الحائط الكبير"
 
@@ -2894,9 +2894,9 @@ msgstr ""
 "أفضل طريقة لرؤية الجديد في موقع Astrobin: حائط كبير يحتوي علي 100 صورة في "
 "الصفحة ، يمكنك ترتيبهم و ترشيحهم حسب رغبتك."
 
-#: templates/faq.html:4 templates/maintenance_base.html:168
-#: templates/maintenance_base.html:514 templates/base/footer.html:21
-#: templates/base/site_links.html:121
+#: templates/faq.html:4 templates/maintenance_base.html:169
+#: templates/maintenance_base.html:515 templates/base/footer.html:21
+#: templates/base/site_links.html:129
 msgid "FAQ"
 msgstr "الأسئلة الأكثر شيوعًا"
 
@@ -3206,7 +3206,7 @@ msgstr ""
 "معنا</a>!"
 
 #: templates/guidelines.html:4 templates/guidelines.html.py:9
-#: templates/maintenance_base.html:516 templates/base/footer.html:23
+#: templates/maintenance_base.html:517 templates/base/footer.html:23
 msgid "Guidelines"
 msgstr "خطوط الإرشاد"
 
@@ -3325,19 +3325,19 @@ msgstr ""
 "الحسّ السليم\". إذا أحسست أنه لا يمكنك الإلتزام بهذه التعليمات ، من فضلك "
 "أحطنا علماً بما تراه خاطئاً."
 
-#: templates/help.html:4 templates/maintenance_base.html:155
-#: templates/maintenance_base.html:513 templates/base/footer.html:20
-#: templates/base/site_links.html:108
+#: templates/help.html:4 templates/maintenance_base.html:156
+#: templates/maintenance_base.html:514 templates/base/footer.html:20
+#: templates/base/site_links.html:116
 msgid "Help"
 msgstr "مساعدة"
 
-#: templates/help.html:8 templates/maintenance_base.html:162
-#: templates/base/site_links.html:115
+#: templates/help.html:8 templates/maintenance_base.html:163
+#: templates/base/site_links.html:123
 msgid "What is this site?"
 msgstr "ما هذا الموقع؟"
 
-#: templates/help.html:10 templates/maintenance_base.html:460
-#: templates/base/alerts.html:13 templates/index/root.html:270
+#: templates/help.html:10 templates/maintenance_base.html:461
+#: templates/base/alerts.html:13 templates/index/root.html:269
 msgid "Hey!"
 msgstr "أهلا و سهلاً!"
 
@@ -3586,10 +3586,10 @@ msgid ""
 msgstr ""
 
 #: templates/iotd_choose_confirm.html:7 templates/iotd_choose_confirm.html:13
-#: templates/user/profile/commercial/products.html:287
-#: templates/user/profile/commercial/products.html:291
-#: templates/user/profile/commercial/products.html:357
-#: templates/user/profile/commercial/products.html:361
+#: templates/user/profile/commercial/products.html:288
+#: templates/user/profile/commercial/products.html:292
+#: templates/user/profile/commercial/products.html:358
+#: templates/user/profile/commercial/products.html:362
 msgid "Are you sure?"
 msgstr "هل أنت متأكد؟"
 
@@ -3634,23 +3634,23 @@ msgid "Chosen from the following candidates"
 msgstr ""
 
 #: templates/leaderboard.html:7 templates/leaderboard.html.py:11
-#: templates/maintenance_base.html:148 templates/base/site_links.html:100
+#: templates/maintenance_base.html:149 templates/base/site_links.html:108
 msgid "Leaderboard"
 msgstr "لوحة الشرف"
 
-#: templates/leaderboard.html:21 templates/maintenance_base.html:204
-#: templates/image/detail/menu/user.html:8
+#: templates/leaderboard.html:21 templates/maintenance_base.html:205
+#: templates/base/site_links.html:169 templates/image/detail/menu/user.html:8
 #: templates/inclusion_tags/image_list.html:11
 #: templates/inclusion_tags/search_image_list.html:122
 #: templates/user/profile/navigation.html:113
 msgid "User"
 msgstr "المستخدم"
 
-#: templates/leaderboard.html:25 templates/base/user_links_entries.html:126
+#: templates/leaderboard.html:25 templates/base/user_links.html:140
 msgid "AstroBin index"
 msgstr "مؤشر AstroBin"
 
-#: templates/leaderboard.html:30 templates/base/user_links_entries.html:130
+#: templates/leaderboard.html:30 templates/base/user_links.html:144
 #: templates/user/profile/navigation.html:103
 msgid "Followers"
 msgstr "المتابعين"
@@ -3659,192 +3659,191 @@ msgstr "المتابعين"
 msgid "Total integration"
 msgstr "مدة تعريض الضوء الكلية"
 
-#: templates/maintenance_base.html:83 templates/maintenance_base.html:508
+#: templates/maintenance_base.html:84 templates/maintenance_base.html:509
 #: templates/base/footer.html:15
 msgid "Site links"
 msgstr "روابط الموقع"
 
-#: templates/maintenance_base.html:87 templates/maintenance_base.html.py:94
-#: templates/maintenance_base.html:510 templates/maintenance_base.html:544
+#: templates/maintenance_base.html:88 templates/maintenance_base.html.py:95
+#: templates/maintenance_base.html:511 templates/maintenance_base.html:545
 #: templates/base/footer.html:17 templates/base/footer.html.py:52
-#: templates/base/site_links.html:36 templates/pybb/breadcrumb.html:4
+#: templates/base/site_links.html:22 templates/base/site_links.html.py:44
+#: templates/pybb/breadcrumb.html:4
 msgid "Home"
 msgstr "الرئيسية"
 
-#: templates/maintenance_base.html:90 templates/maintenance_base.html:512
-#: templates/base/footer.html:19 templates/base/site_links.html:32
+#: templates/maintenance_base.html:91 templates/maintenance_base.html:513
+#: templates/base/footer.html:19 templates/base/site_links.html:40
 #, fuzzy
 msgid "Forum"
 msgstr "منتديات"
 
-#: templates/maintenance_base.html:95 templates/base/site_links.html:37
-#: templates/pybb/index.html:20 templates/pybb/latest_topics.html:7
-#: templates/pybb/latest_topics.html:10
+#: templates/maintenance_base.html:96 templates/base/site_links.html:45
+#: templates/pybb/index.html:22 templates/pybb/latest_topics.html:7
+#: templates/pybb/latest_topics.html:12
 msgid "Latest topics"
 msgstr ""
 
-#: templates/maintenance_base.html:97 templates/base/site_links.html:39
+#: templates/maintenance_base.html:98 templates/base/site_links.html:47
 msgid "Subscribed topics"
 msgstr ""
 
-#: templates/maintenance_base.html:117 templates/base/site_links.html:59
+#: templates/maintenance_base.html:118 templates/base/site_links.html:67
 #: templates/image/detail/iotd_banner.html:10 templates/index/root.html:75
 msgid "Image of the day"
 msgstr "صورة اليوم"
 
-#: templates/maintenance_base.html:126 templates/base/site_links.html:75
+#: templates/maintenance_base.html:127 templates/base/site_links.html:83
 msgid "Public data pools"
 msgstr "مساحات البيانات العامة"
 
-#: templates/maintenance_base.html:135 templates/base/site_links.html:82
+#: templates/maintenance_base.html:136 templates/base/site_links.html:90
 msgid "Advanced search"
 msgstr "بحث متقدّم"
 
-#: templates/maintenance_base.html:142 templates/stats.html:7
-#: templates/base/site_links.html:92 templates/user/profile/meta.html:86
+#: templates/maintenance_base.html:143 templates/stats.html:7
+#: templates/base/site_links.html:100 templates/user/profile/meta.html:86
 msgid "Stats"
 msgstr "الإحصائيّات"
 
-#: templates/maintenance_base.html:192 templates/base/site_links.html:152
+#: templates/maintenance_base.html:193 templates/base/site_links.html:160
 #: templates/contact_form/contact.html:5 templates/contact_form/contact.html:8
 msgid "Contact"
 msgstr "تواصل معنا"
 
-#: templates/maintenance_base.html:223 templates/upload.html:8
+#: templates/maintenance_base.html:224 templates/upload.html:8
 #: templates/upload.html.py:70 templates/upload.html:86
-#: templates/avatar/change.html:38 templates/base/user_links_entries.html:148
+#: templates/avatar/change.html:38 templates/base/user_links_entries.html:14
 #: templates/image/detail/modals/upload_revision.html:17
-#: templates/index/root.html:122
+#: templates/index/root.html:121
 msgid "Upload"
 msgstr "ارفع صورة"
 
-#: templates/maintenance_base.html:226
-#: templates/base/user_links_entries.html:151
+#: templates/maintenance_base.html:227
+#: templates/base/user_links_entries.html:17
 msgid "My places"
 msgstr "صوري"
 
-#: templates/maintenance_base.html:232 templates/wall.html:136
-#: templates/base/user_links_entries.html:157
+#: templates/maintenance_base.html:233 templates/wall.html:138
+#: templates/base/user_links_entries.html:23
 #: templates/user/profile/navigation.html:38
 msgid "Commercial products"
 msgstr "المنتجات التجارية"
 
-#: templates/maintenance_base.html:240
-#: templates/base/user_links_entries.html:165 templates/popover/user.html:30
+#: templates/maintenance_base.html:241
+#: templates/base/user_links_entries.html:31 templates/popover/user.html:30
 #: templates/user/profile/navigation.html:46
 msgid "Gallery"
 msgstr "معرض الصور"
 
-#: templates/maintenance_base.html:246 templates/wall.html:49
-#: templates/base/user_links_entries.html:171
+#: templates/maintenance_base.html:247 templates/wall.html:51
+#: templates/base/user_links_entries.html:38
 #: templates/inclusion_tags/search_image_list.html:44
 #: templates/inclusion_tags/search_image_list.html:97
 #: templates/user/profile/navigation.html:60
 msgid "Bookmarks"
 msgstr "الصور المفضلة"
 
-#: templates/maintenance_base.html:252
-#: templates/base/user_links_entries.html:177
+#: templates/maintenance_base.html:253
+#: templates/base/user_links_entries.html:45
 #: templates/user/profile/navigation.html:66
-#: templates/user/profile/commercial/products.html:209
+#: templates/user/profile/commercial/products.html:210
 msgid "Plots"
 msgstr "المخطّطات البيانية"
 
-#: templates/maintenance_base.html:260
-#: templates/base/user_links_entries.html:204 templates/messages/inbox.html:9
+#: templates/maintenance_base.html:261
+#: templates/base/user_links_entries.html:74 templates/messages/inbox.html:9
 msgid "My messages"
 msgstr "رسائلي"
 
-#: templates/maintenance_base.html:266
-#: templates/base/user_links_entries.html:210
+#: templates/maintenance_base.html:267
+#: templates/base/user_links_entries.html:81
 #: templates/user/profile/navigation.html:88
 msgid "API Keys"
 msgstr "مفاتيح الـ API"
 
-#: templates/maintenance_base.html:270
-#: templates/base/user_links_entries.html:217
+#: templates/maintenance_base.html:271
+#: templates/base/user_links_entries.html:88
 msgid "My settings"
 msgstr "إعداداتي"
 
-#: templates/maintenance_base.html:274
+#: templates/maintenance_base.html:275
 #: templates/user/profile/edit/navigation.html:8
 msgid "Basic information"
 msgstr "المعلومات الرئيسية"
 
-#: templates/maintenance_base.html:282
+#: templates/maintenance_base.html:283
 #: templates/user/profile/edit/navigation.html:15
 msgid "Commercial information"
 msgstr "معلومات تجاريّة"
 
-#: templates/maintenance_base.html:291
+#: templates/maintenance_base.html:292
 #: templates/user/profile/edit/navigation.html:23
 msgid "Retailer information"
 msgstr "معلومات البائع"
 
-#: templates/maintenance_base.html:317
+#: templates/maintenance_base.html:318
 #: templates/user/profile/edit/navigation.html:54
 msgid "Preferences"
 msgstr "التفضيلات"
 
-#: templates/maintenance_base.html:323
+#: templates/maintenance_base.html:324
 #: templates/user/profile/edit/navigation.html:66
 msgid "Avatar"
 msgstr "الصورة الرمزية"
 
-#: templates/maintenance_base.html:330
-#: templates/base/user_links_entries.html:245 templates/user/profile.html:56
-#: templates/user/profile.html.py:59
+#: templates/maintenance_base.html:331
+#: templates/base/user_links_entries.html:117 templates/user/profile.html:57
+#: templates/user/profile.html.py:60
 msgid "Logout"
 msgstr "تسجيل الخروج"
 
-#: templates/maintenance_base.html:343 templates/maintenance_base.html:344
-#: templates/base/user_links_entries.html:112
+#: templates/maintenance_base.html:344 templates/maintenance_base.html:345
+#: templates/base/modals.html:8 templates/base/user_links.html:119
+#: templates/base/user_links.html.py:127
 msgid "Notifications"
 msgstr "إشعاراتك"
 
-#: templates/maintenance_base.html:355
-#: templates/base/user_links_entries.html:289
+#: templates/maintenance_base.html:356 templates/base/user_links.html:202
 msgid "Have an invite? Login!"
 msgstr "هل تملك دعوة؟ سجّل دخولك!"
 
-#: templates/maintenance_base.html:357
-#: templates/base/user_links_entries.html:291
+#: templates/maintenance_base.html:358 templates/base/user_links.html:204
 #: templates/registration/activation_complete.html:7
 msgid "Login"
 msgstr "تسجيل الدخول"
 
-#: templates/maintenance_base.html:363
-#: templates/base/user_links_entries.html:297
+#: templates/maintenance_base.html:364 templates/base/user_links.html:210
 #: templates/registration/login.html:15
 msgid "Register"
 msgstr "تسجيل حساب"
 
-#: templates/maintenance_base.html:375 templates/base/search_form.html:8
+#: templates/maintenance_base.html:376 templates/base/search_form.html:8
 msgid "Quick search"
 msgstr "بحث سريع"
 
-#: templates/maintenance_base.html:461 templates/base/alerts.html:14
+#: templates/maintenance_base.html:462 templates/base/alerts.html:14
 msgid "Success!"
 msgstr "تمّ بنجاح!"
 
-#: templates/maintenance_base.html:462 templates/maintenance_base.html:474
-#: templates/maintenance_base.html:486 templates/upload.html:21
+#: templates/maintenance_base.html:463 templates/maintenance_base.html:475
+#: templates/maintenance_base.html:487 templates/upload.html:21
 #: templates/upload.html.py:193 templates/upload.html:386
 #: templates/base/alerts.html:15 templates/base/alerts.html.py:28
-#: templates/base/alerts.html:40 templates/image/edit/watermark.html:42
+#: templates/base/alerts.html:40 templates/image/edit/watermark.html:43
 #: templates/subscription/subscription_detail.html:133
 #: templates/subscription/subscription_detail.html:145
 #: templates/user/profile/flickr_import.html:55
 msgid "Warning!"
 msgstr "تحذير!"
 
-#: templates/maintenance_base.html:463 templates/upload.html:112
+#: templates/maintenance_base.html:464 templates/upload.html:112
 #: templates/base/alerts.html:16
 #: templates/image/detail/modals/send_to_sharedfolder.html:25
 msgid "Error!"
 msgstr "خطأ!"
 
-#: templates/maintenance_base.html:476 templates/base/alerts.html:30
+#: templates/maintenance_base.html:477 templates/base/alerts.html:30
 #, python-format
 msgid ""
 "As a producer and/or a retailer on AstroBin, it's very important that you "
@@ -3854,7 +3853,7 @@ msgstr ""
 "كمنتج أو بائع علي AstroBin ، من المهم أن تملأ كل تفاصيل شركتك! للقيام بذلك "
 "اضغط <a href=\"%(the_url)s\">هنا</a>الآن."
 
-#: templates/maintenance_base.html:488 templates/base/alerts.html:42
+#: templates/maintenance_base.html:489 templates/base/alerts.html:42
 #, python-format
 msgid ""
 "As a retailer on AstroBin, it's very important that you fill in your country "
@@ -3863,11 +3862,11 @@ msgstr ""
 "كبائع علي AstroBin من المهم أن تكتب الدولة الّتي تعمل بها! للقيام بذلك اضغط "
 "<a href=\"%(the_url)s\">هنا</a> الآن."
 
-#: templates/maintenance_base.html:502 templates/base/footer.html:9
+#: templates/maintenance_base.html:503 templates/base/footer.html:9
 msgid "About"
 msgstr "حول الموقع"
 
-#: templates/maintenance_base.html:504 templates/base/footer.html:11
+#: templates/maintenance_base.html:505 templates/base/footer.html:11
 msgid ""
 "AstroBin is an image hosting website specifically targeted to "
 "astrophotographers: it's the first and the last place where you need to "
@@ -3875,32 +3874,32 @@ msgid ""
 "astrophotographers."
 msgstr ""
 
-#: templates/maintenance_base.html:511 templates/base/footer.html:18
+#: templates/maintenance_base.html:512 templates/base/footer.html:18
 msgid "Blog"
 msgstr "المدوّنة"
 
-#: templates/maintenance_base.html:515 templates/tos.html:4
+#: templates/maintenance_base.html:516 templates/tos.html:4
 #: templates/tos.html.py:9 templates/base/footer.html:22
 msgid "Terms of Service"
 msgstr "شروط الخدمة"
 
-#: templates/maintenance_base.html:519 templates/base/footer.html:26
+#: templates/maintenance_base.html:520 templates/base/footer.html:26
 msgid "Source code"
 msgstr ""
 
-#: templates/maintenance_base.html:525 templates/base/footer.html:33
+#: templates/maintenance_base.html:526 templates/base/footer.html:33
 msgid "Thanks to"
 msgstr "شكر خاص لـ"
 
-#: templates/maintenance_base.html:527 templates/base/footer.html:35
+#: templates/maintenance_base.html:528 templates/base/footer.html:35
 msgid "The localization team"
 msgstr "فريق الترجمة"
 
-#: templates/maintenance_base.html:532 templates/base/footer.html:40
+#: templates/maintenance_base.html:533 templates/base/footer.html:40
 msgid "Copyright"
 msgstr "حقوق النشر"
 
-#: templates/maintenance_base.html:534
+#: templates/maintenance_base.html:535
 msgid ""
 "AstroBin is Copyright &copy; 2010-2012 Salvatore Iovene, All Rights "
 "Reserved. The images on this websites are copyright of their respective "
@@ -3909,24 +3908,27 @@ msgstr ""
 "AstroBin هو حق نشر لـ Salvatore Iovene &copy; 2010-2012 ، جميع الحقوق "
 "محفوظة. كل الصور علي هذا الموقع هي حقوق نشر لمالكيها."
 
-#: templates/maintenance_base.html:548 templates/base/footer.html:56
+#: templates/maintenance_base.html:549 templates/base/footer.html:56
 msgid "Back to top"
 msgstr "العودة لأعلي"
 
-#: templates/maintenance_base.html:591
+#: templates/maintenance_base.html:592
 #: templates/user_collections_create.html:20
 #: templates/user_collections_update.html:31 templates/base/js.html:33
-#: templates/image/edit/acquisition.html:69 templates/image/edit/basic.html:74
-#: templates/image/edit/gear.html:48 templates/image/edit/watermark.html:37
-#: templates/messages/compose.html:16 templates/openid_provider/decide.html:16
+#: templates/image/edit/acquisition.html:24
+#: templates/image/edit/acquisition.html:55
+#: templates/image/edit/acquisition.html:70 templates/image/edit/basic.html:75
+#: templates/image/edit/gear.html:49 templates/image/edit/license.html:24
+#: templates/image/edit/watermark.html:38 templates/messages/compose.html:16
+#: templates/openid_provider/decide.html:16
 msgid "Cancel"
 msgstr "إلغاء"
 
-#: templates/maintenance_base.html:621 templates/base/js.html:69
+#: templates/maintenance_base.html:622 templates/base/js.html:69
 msgid "No file selected"
 msgstr "لم يُحدَّد أي ملف"
 
-#: templates/maintenance_base.html:622 templates/base/js.html:70
+#: templates/maintenance_base.html:623 templates/base/js.html:70
 msgid "Choose file"
 msgstr "اختيار ملف"
 
@@ -3960,20 +3962,20 @@ msgstr "مدة تعريض الضوء الكلية في آخر 12 شهر"
 #: templates/stats.html:20 templates/stats.html.py:34 templates/stats.html:50
 #: templates/stats.html.py:70 templates/stats.html:90
 #: templates/stats.html.py:102 templates/gear/page.html:258
-#: templates/gear/page.html.py:270 templates/user/plots.html:27
-#: templates/user/plots.html.py:40 templates/user/plots.html:56
-#: templates/user/plots.html.py:69
-#: templates/user/profile/commercial/products.html:214
+#: templates/gear/page.html.py:270 templates/user/plots.html:28
+#: templates/user/plots.html.py:41 templates/user/plots.html:57
+#: templates/user/plots.html.py:70
+#: templates/user/profile/commercial/products.html:215
 msgid "Please wait: the plot is loading..."
 msgstr "من فضلك انتظر قليلا: يتم تحميل المخططات البيانية..."
 
 #: templates/stats.html:21 templates/stats.html.py:35 templates/stats.html:51
 #: templates/stats.html.py:71 templates/stats.html:91
 #: templates/stats.html.py:103 templates/gear/page.html:259
-#: templates/gear/page.html.py:271 templates/user/plots.html:28
-#: templates/user/plots.html.py:41 templates/user/plots.html:57
-#: templates/user/plots.html.py:70
-#: templates/user/profile/commercial/products.html:215
+#: templates/gear/page.html.py:271 templates/user/plots.html:29
+#: templates/user/plots.html.py:42 templates/user/plots.html:58
+#: templates/user/plots.html.py:71
+#: templates/user/profile/commercial/products.html:216
 msgid "Loading..."
 msgstr "تحميل..."
 
@@ -4109,7 +4111,7 @@ msgstr "نوع الملفات المسموح بها: FIT و الصور الخا�
 msgid "Filename"
 msgstr "اسم الملف"
 
-#: templates/upload.html:135 templates/messages/inbox.html:25
+#: templates/upload.html:135 templates/messages/inbox.html:18
 #: templates/subscription/subscription_detail.html:37
 msgid "Status"
 msgstr "الحالة"
@@ -4198,11 +4200,11 @@ msgstr ""
 #: templates/user_collections_update.html:22
 #: templates/commercial/products/edit.html:15
 #: templates/commercial/products/retailed/edit.html:15
-#: templates/image/edit/acquisition.html:21
-#: templates/image/edit/acquisition.html:51
-#: templates/image/edit/acquisition.html:67 templates/image/edit/basic.html:68
-#: templates/image/edit/gear.html:46 templates/image/edit/license.html:22
-#: templates/image/edit/watermark.html:30 templates/location/edit.html:20
+#: templates/image/edit/acquisition.html:22
+#: templates/image/edit/acquisition.html:52
+#: templates/image/edit/acquisition.html:68 templates/image/edit/basic.html:69
+#: templates/image/edit/gear.html:47 templates/image/edit/license.html:23
+#: templates/image/edit/watermark.html:31 templates/location/edit.html:20
 #: templates/user/profile/edit/basic.html:14
 #: templates/user/profile/edit/commercial.html:14
 #: templates/user/profile/edit/gear.html:39
@@ -4256,7 +4258,7 @@ msgstr ""
 #: templates/image/detail/modals/delete.html:14
 #: templates/image/detail/modals/delete.html:31
 #: templates/image/detail/modals/delete.html:48
-#: templates/pybb/post_template.html:62
+#: templates/pybb/post_template.html:64
 #: templates/user/profile/navigation.html:175
 msgid "Delete"
 msgstr "حذف"
@@ -4289,69 +4291,69 @@ msgstr ""
 msgid "Edit collection"
 msgstr "تعديل موقعك"
 
-#: templates/wall.html:17
+#: templates/wall.html:19
 msgid "Sort by"
 msgstr "ترتيب بحسب"
 
-#: templates/wall.html:24
+#: templates/wall.html:26
 msgid "Uploaded"
 msgstr "تم رفعُها"
 
-#: templates/wall.html:30
+#: templates/wall.html:32
 msgid "Acquired"
 msgstr "تم التقاطُها"
 
-#: templates/wall.html:36 templates/inclusion_tags/search_image_list.html:36
+#: templates/wall.html:38 templates/inclusion_tags/search_image_list.html:36
 #: templates/inclusion_tags/search_image_list.html:89
 #: templates/search/search.html:43 templates/search/search.html.py:306
 #: views/image.py:341
 msgid "Integration"
 msgstr "مدة تعريض الضوء"
 
-#: templates/wall.html:43
+#: templates/wall.html:45
 msgid "Number of likes"
 msgstr "عدد الإعجابات"
 
-#: templates/wall.html:55 templates/gear/page.html:254
+#: templates/wall.html:57 templates/gear/page.html:254
 #: templates/inclusion_tags/search_image_list.html:53
 #: templates/inclusion_tags/search_image_list.html:106
 #: templates/pybb/topic_list.html:23 templates/search/search.html:49
-#: templates/user/profile/commercial/products.html:211
+#: templates/user/profile/commercial/products.html:212
 msgid "Views"
 msgstr "عدد المشاهدات"
 
-#: templates/wall.html:61 templates/gear/page.html:120
+#: templates/wall.html:63 templates/gear/page.html:120
 #: templates/gear/page.html.py:246 templates/image/detail/comments.html:4
 #: templates/inclusion_tags/search_image_list.html:52
 #: templates/inclusion_tags/search_image_list.html:105
 msgid "Comments"
 msgstr "التعليقات"
 
-#: templates/wall.html:69
+#: templates/wall.html:71
 msgid "Filter by"
 msgstr "التصفية حسب"
 
-#: templates/wall.html:76
+#: templates/wall.html:78
 msgid "All deep sky objects"
 msgstr "كل أجرام السماء العميقة"
 
-#: templates/wall.html:82
+#: templates/wall.html:84
 msgid "All Solar System objects"
 msgstr "كل أجرام المجموعة الشمسية"
 
-#: templates/wall.html:97
+#: templates/wall.html:99
 msgid "Moon"
 msgstr "القمر"
 
-#: templates/wall.html:103
+#: templates/wall.html:105
 msgid "Planets"
 msgstr "الكواكب"
 
-#: templates/wall.html:109
+#: templates/wall.html:111
 msgid "Comets"
 msgstr "المذنّبات"
 
-#: templates/wall.html:149
+#: templates/wall.html:151
 msgid "Remove filter"
 msgstr "احذف المرشّح"
 
@@ -4387,80 +4389,92 @@ msgstr "الصورة الرمزية"
 msgid "The images on this websites are copyright of their respective owners."
 msgstr "حقوق نشر الصور الموجودة في هذا الموقع محفوظة لأصحابها."
 
-#: templates/base/site_links.html:20
+#: templates/base/modals.html:17
+#, fuzzy
+msgid "View all"
+msgstr "عرض الصفحة"
+
+#: templates/base/modals.html:23 templates/pybb/index.html:28
+#: templates/pybb/latest_topics.html:24
+#: templates/pybb/subscribed_topics.html:24
+#, fuzzy
+msgid "Mark all as read"
+msgstr "صحيح"
+
+#: templates/base/site_links.html:28
 msgid "Moderate"
 msgstr ""
 
-#: templates/base/site_links.html:24 templates/moderation/image_list.html:10
+#: templates/base/site_links.html:32 templates/moderation/image_list.html:10
 #, fuzzy
 msgid "Image moderation"
 msgstr "نوع الصورة"
 
-#: templates/base/site_links.html:25
+#: templates/base/site_links.html:33
 #, fuzzy
 msgid "View spam list"
 msgstr "عرض الصفحة"
 
-#: templates/base/site_links.html:68
+#: templates/base/site_links.html:76
 msgid "Groups"
 msgstr ""
 
-#: templates/base/site_links.html:127
+#: templates/base/site_links.html:135
 msgid "AstroBin Raw Data"
 msgstr "بيانات AstroBin الخام"
 
-#: templates/base/user_links_entries.html:92
+#: templates/base/user_links.html:96
 msgid "Help with translations!"
 msgstr "المساعدة في الترجمة!"
 
-#: templates/base/user_links_entries.html:100
+#: templates/base/user_links.html:104
 msgid "Please select your language from the options above."
 msgstr "من فضلك اختر لغتك من الخيارات بالأعلي."
 
-#: templates/base/user_links_entries.html:142
-#: templates/subscription/subscription_list.html:5
-#, fuzzy
-msgid "Subscription plans"
-msgstr "الوصف"
-
-#: templates/base/user_links_entries.html:182
-#, fuzzy
-msgid "Raw data"
-msgstr "مكتبة البيانات الخام (raw)"
-
-#: templates/base/user_links_entries.html:188
-#: templates/user/profile/navigation.html:53
-msgid "Raw data library"
-msgstr "مكتبة البيانات الخام (raw)"
-
-#: templates/base/user_links_entries.html:196
-msgid "Private shared folders"
-msgstr "المجلدات الخاصة المشتركة"
-
-#: templates/base/user_links_entries.html:226
-#, fuzzy
-msgid "Choose Image Of The Day"
-msgstr "صورة اليوم"
-
-#: templates/base/user_links_entries.html:236
-#, fuzzy
-msgid "Content moderation"
-msgstr "دولة العمل"
-
-#: templates/base/user_links_entries.html:260
+#: templates/base/user_links.html:166
 msgid "Would you like to start using your real name on AstroBin?"
 msgstr "هل تريد أن تبدأ باستخدام اسمك الحقيقي علي AstroBin؟"
 
-#: templates/base/user_links_entries.html:265
+#: templates/base/user_links.html:171
 #: templates/image/detail/modals/send_to_group.html:29
 #: templates/image/detail/modals/send_to_sharedfolder.html:36
 msgid "OK"
 msgstr "موافق"
 
-#: templates/base/user_links_entries.html:271
+#: templates/base/user_links.html:177
 #, fuzzy
 msgid "No, thanks"
 msgstr "لا ، شكراً"
+
+#: templates/base/user_links_entries.html:7
+#: templates/subscription/subscription_list.html:5
+#, fuzzy
+msgid "Subscription plans"
+msgstr "الوصف"
+
+#: templates/base/user_links_entries.html:51
+#, fuzzy
+msgid "Raw data"
+msgstr "مكتبة البيانات الخام (raw)"
+
+#: templates/base/user_links_entries.html:57
+#: templates/user/profile/navigation.html:53
+msgid "Raw data library"
+msgstr "مكتبة البيانات الخام (raw)"
+
+#: templates/base/user_links_entries.html:65
+msgid "Private shared folders"
+msgstr "المجلدات الخاصة المشتركة"
+
+#: templates/base/user_links_entries.html:97
+#, fuzzy
+msgid "Choose Image Of The Day"
+msgstr "صورة اليوم"
+
+#: templates/base/user_links_entries.html:107
+#, fuzzy
+msgid "Content moderation"
+msgstr "دولة العمل"
 
 #: templates/commercial/products/edit.html:7
 #: templates/commercial/products/edit.html:10
@@ -4743,8 +4757,8 @@ msgid "Properties"
 msgstr "خصائص"
 
 #: templates/gear/page.html:234
-#: templates/user/profile/commercial/products.html:40
-#: templates/user/profile/commercial/products.html:122
+#: templates/user/profile/commercial/products.html:41
+#: templates/user/profile/commercial/products.html:123
 msgid "Owners"
 msgstr "المالكون"
 
@@ -4752,20 +4766,20 @@ msgstr "المالكون"
 msgid "just now"
 msgstr "حالاً"
 
-#: templates/image/full.html:13 templates/image/full.html.py:76
+#: templates/image/full.html:13 templates/image/full.html.py:75
 msgid "Full resolution"
 msgstr "دقة كاملة"
 
-#: templates/image/full.html:60
+#: templates/image/full.html:59
 #, python-format
 msgid "by <a href=\"%(the_url)s\">%(user)s</a>"
 msgstr "عن طريق <a href=\"%(the_url)s\">%(user)s</a>"
 
-#: templates/image/full.html:71
+#: templates/image/full.html:70
 msgid "Fit to window"
 msgstr "ملاءمة للإطار"
 
-#: templates/image/full.html:83 templates/image/detail/image_card.html:10
+#: templates/image/full.html:82 templates/image/detail/image_card.html:10
 msgid "Technical card"
 msgstr "البيانات التقنية"
 
@@ -4784,9 +4798,6 @@ msgstr ""
 "تذكر أنه يمكنك أيضاً <a href=\"%(message_url)s\">إرسال رساله لهم</a>. "
 
 #: templates/image/actions/request_additional_information_complete.html:11
-#: templates/image/edit/acquisition.html:23
-#: templates/image/edit/acquisition.html:54
-#: templates/image/edit/license.html:23
 msgid "Return to image"
 msgstr "العودة إلي الصورة"
 
@@ -4856,6 +4867,10 @@ msgstr "نصف قطر المجال"
 msgid "Contains"
 msgstr "يحتوي على"
 
+#: templates/image/detail/info.html:12 templates/pybb/topic_list.html:17
+msgid "Author"
+msgstr ""
+
 #: templates/image/detail/js.html:103 templates/user/profile/js.html:11
 #, python-format
 msgid "Send %(username)s a message"
@@ -4899,9 +4914,9 @@ msgstr ""
 "\"%(promote_url)s\">ترقيتها</a> إلي <a href=\"%(profile_url)s\">المساحة "
 "العامة</a>."
 
-#: templates/image/detail/menu/actions.html:9 templates/messages/inbox.html:30
-#: templates/user/profile/commercial/products.html:43
-#: templates/user/profile/commercial/products.html:125
+#: templates/image/detail/menu/actions.html:9
+#: templates/user/profile/commercial/products.html:44
+#: templates/user/profile/commercial/products.html:126
 msgid "Actions"
 msgstr "نشاطات"
 
@@ -4919,7 +4934,7 @@ msgid "Edit gear used"
 msgstr "تعديل الأجهزة المُستخدَمة"
 
 #: templates/image/detail/menu/actions.html:36
-#: templates/image/edit/gear.html:47
+#: templates/image/edit/gear.html:48
 msgid "Edit acquisition details"
 msgstr "تعديل تفاصيل الالتقاط"
 
@@ -4985,7 +5000,7 @@ msgid "Flag malfunctioning thumbnails"
 msgstr "تعليم الصور المصغرة غير الصالحة"
 
 #: templates/image/detail/menu/admin.html:7
-#: templates/pybb/post_template.html:69 templates/pybb/topic.html:49
+#: templates/pybb/post_template.html:71 templates/pybb/topic.html:51
 #: templates/user/profile/navigation.html:12
 msgid "Admin"
 msgstr ""
@@ -5011,10 +5026,10 @@ msgstr "ارسال رسالة خاصة"
 
 #: templates/image/detail/menu/view.html:8
 #: templates/user/profile/navigation.html:29
-#: templates/user/profile/commercial/products.html:76
-#: templates/user/profile/commercial/products.html:158
-#: templates/user/profile/commercial/products.html:479
-#: templates/user/profile/commercial/products.html:806
+#: templates/user/profile/commercial/products.html:77
+#: templates/user/profile/commercial/products.html:159
+#: templates/user/profile/commercial/products.html:480
+#: templates/user/profile/commercial/products.html:807
 msgid "View"
 msgstr "عرض"
 
@@ -5208,7 +5223,7 @@ msgstr "منتديات"
 msgid "Thumbnail"
 msgstr "صورة مصغرة"
 
-#: templates/image/detail/modals/share.html:25 templates/user/api_keys.html:30
+#: templates/image/detail/modals/share.html:25 templates/user/api_keys.html:29
 msgid "Yes"
 msgstr "نعم"
 
@@ -5247,17 +5262,17 @@ msgid ""
 msgstr "هل تمكنت من تحسين معالجة صورتك؟ ارفع المراجعة الجديدة!"
 
 #: templates/image/edit/acquisition.html:6
-#: templates/image/edit/acquisition.html:12
+#: templates/image/edit/acquisition.html:13
 msgid "Edit your image: acquisition details"
 msgstr "تحرير صورتك: تفاصيل الالتقاط"
 
-#: templates/image/edit/acquisition.html:22
-#: templates/image/edit/acquisition.html:53
-#: templates/image/edit/acquisition.html:68
+#: templates/image/edit/acquisition.html:23
+#: templates/image/edit/acquisition.html:54
+#: templates/image/edit/acquisition.html:69
 msgid "Remove data"
 msgstr "حذف البيانات"
 
-#: templates/image/edit/acquisition.html:30
+#: templates/image/edit/acquisition.html:31
 msgid ""
 "You can insert as many acquisition sessions as you want, as often images are "
 "taken across several nights. An acquisition session is defined primarily by "
@@ -5270,7 +5285,7 @@ msgstr ""
 "كل بياناتك ثم اضغط علي <strong>حفظ</strong> للإنتهاء. أو علي <strong>إضافة "
 "المزيد</strong> لإضافة المزيد من جلسات التصوير."
 
-#: templates/image/edit/acquisition.html:32
+#: templates/image/edit/acquisition.html:33
 #, python-format
 msgid ""
 "Is this too much data for you to handle? Go to the <a class=\"button\" href="
@@ -5280,19 +5295,19 @@ msgstr ""
 "\"%(basic_form_url)s?edit_type=deep_sky&advanced=false\">الاستمارة الرئيسية</"
 "a>."
 
-#: templates/image/edit/acquisition.html:38
+#: templates/image/edit/acquisition.html:39
 msgid "Acquisition session"
 msgstr "جلسة الالتقاط"
 
-#: templates/image/edit/acquisition.html:38
+#: templates/image/edit/acquisition.html:39
 msgid "(scroll down for more)"
 msgstr "(للمزيد انزل إلي الأسفل)"
 
-#: templates/image/edit/acquisition.html:52
+#: templates/image/edit/acquisition.html:53
 msgid "Add more"
 msgstr "إضافة أكثر"
 
-#: templates/image/edit/acquisition.html:59
+#: templates/image/edit/acquisition.html:60
 #, python-format
 msgid ""
 "With this form you can input the basic details for the acquisition of your "
@@ -5305,31 +5320,31 @@ msgstr ""
 "\"button\" href=\"%(advanced_form_url)s?edit_type=deep_sky&advanced=true"
 "\">الاستمارة المتطورة</a>."
 
-#: templates/image/edit/acquisition.html:74
+#: templates/image/edit/acquisition.html:75
 msgid "What kind of image is this?"
 msgstr "ما نوع هذه الصورة؟"
 
-#: templates/image/edit/acquisition.html:78 views/__init__.py:1124
+#: templates/image/edit/acquisition.html:79 views/__init__.py:1124
 msgid "Solar system"
 msgstr "المجموعة الشمسية"
 
-#: templates/image/edit/acquisition.html:81 views/__init__.py:1123
+#: templates/image/edit/acquisition.html:82 views/__init__.py:1123
 msgid "Deep sky"
 msgstr "السماء العميقة"
 
-#: templates/image/edit/basic.html:7 templates/image/edit/basic.html.py:13
+#: templates/image/edit/basic.html:7 templates/image/edit/basic.html.py:14
 msgid "Edit your image: basic information"
 msgstr "تحرير صورتك: المعلومات الأساسية"
 
-#: templates/image/edit/basic.html:71
+#: templates/image/edit/basic.html:72
 msgid "Next step: gear used"
 msgstr "الخطوة التالية: الأجهزة المُستخدمة"
 
-#: templates/image/edit/gear.html:6 templates/image/edit/gear.html.py:12
+#: templates/image/edit/gear.html:6 templates/image/edit/gear.html.py:13
 msgid "Edit your image: gear used"
 msgstr "تحرير صورتك: الأجهزة المُستخدمة"
 
-#: templates/image/edit/gear.html:18
+#: templates/image/edit/gear.html:19
 #, python-format
 msgid ""
 "Can't see anything here? Perhaps you should first add some gear in your <a "
@@ -5338,7 +5353,7 @@ msgstr ""
 "لا يمكنك رؤية أي أجهزة هنا؟ ربما ينبغي لك أن تضيف بعض الأجهزة في <a href="
 "\"%(the_url)s\">صفحتك الشخصية</a>!"
 
-#: templates/image/edit/gear.html:20
+#: templates/image/edit/gear.html:21
 msgid ""
 "To choose the gear used for this image, drag items from the right side to "
 "left side, or click the plus sign."
@@ -5346,20 +5361,20 @@ msgstr ""
 "لاختيار الأجهزة المُستخدمة في هذه الصورة ، اسحب العناصر من الجهة اليمني إلي "
 "الجهة اليسري ، أو اضغط علي علامة زائد."
 
-#: templates/image/edit/gear.html:26
+#: templates/image/edit/gear.html:27
 msgid ""
 "Use this button to import the gear settings from another image of yours."
 msgstr "استخدم هذا الزر لاستيراد إعدادات الأجهزة من صورة أخري لك."
 
-#: templates/image/edit/gear.html:26
+#: templates/image/edit/gear.html:27
 msgid "Copy from another image"
 msgstr "نسخ من صورة أخرى"
 
-#: templates/image/edit/gear.html:57
+#: templates/image/edit/gear.html:58
 msgid "Copy gear"
 msgstr "نسخ الأجهزة"
 
-#: templates/image/edit/gear.html:61
+#: templates/image/edit/gear.html:62
 msgid ""
 "Copying the gear from another image will populate the gear selection form "
 "for you, but you will still need to save it in the end."
@@ -5367,15 +5382,15 @@ msgstr ""
 "نسخ الأجهزة من صورة أخرى سيقوم بملء تنسيق الأجهزة لك ، لكن لازلت تحتاج إلي "
 "حفظ ذلك في النهاية."
 
-#: templates/image/edit/gear.html:65
+#: templates/image/edit/gear.html:66
 msgid "Copy"
 msgstr "نسخ"
 
-#: templates/image/edit/license.html:6 templates/image/edit/license.html:9
+#: templates/image/edit/license.html:6 templates/image/edit/license.html:10
 msgid "Change the license for this image"
 msgstr "تغيير رخصة هذه الصورة"
 
-#: templates/image/edit/license.html:12
+#: templates/image/edit/license.html:13
 #: templates/user/profile/edit/license.html:12
 msgid ""
 "You can associate a Creative Commons license with your content if you wish, "
@@ -5385,7 +5400,7 @@ msgid ""
 "website</a>."
 msgstr ""
 
-#: templates/image/edit/license.html:15
+#: templates/image/edit/license.html:16
 #, python-format
 msgid ""
 "Remember that you can change your default license <a href="
@@ -5394,29 +5409,29 @@ msgstr ""
 "تذكر أنه يمكنك تغيير رخصتك الافتراضية<a href=\"%(change_default_url)s\">هنا</"
 "a>."
 
-#: templates/image/edit/menu.html:6
+#: templates/image/edit/menu.html:9
 #, fuzzy
 msgid "Watermark"
 msgstr "الدنمارك"
 
-#: templates/image/edit/menu.html:7
+#: templates/image/edit/menu.html:16
 msgid "Basic Information"
 msgstr "المعلومات الرئيسية"
 
-#: templates/image/edit/menu.html:8 templates/search/search.html:114
+#: templates/image/edit/menu.html:23 templates/search/search.html:114
 msgid "Gear used"
 msgstr "الأجهزة المُستَخدمة"
 
-#: templates/image/edit/menu.html:9 templates/search/search.html:177
+#: templates/image/edit/menu.html:30 templates/search/search.html:177
 msgid "Acquisition details"
 msgstr "تفاصيل الالتقاط"
 
 #: templates/image/edit/watermark.html:6
-#: templates/image/edit/watermark.html:12
+#: templates/image/edit/watermark.html:13
 msgid "Apply a watermark to image"
 msgstr "إضافة علامة مائية إلي الصورة"
 
-#: templates/image/edit/watermark.html:16
+#: templates/image/edit/watermark.html:17
 msgid ""
 "AstroBin can protect your images from theft by applying a watermark to them. "
 "Be careful with your settings though: once a watermark has been applied, it "
@@ -5430,37 +5445,37 @@ msgstr ""
 "لهذه الصورة ، لضمان حمايتها). إذا كانت العلامة المائية لا تعجبك نتيجةً "
 "لإعدادات خاطئة ، خيارك الوحيد هو حذف الصورة و البدء من جديد."
 
-#: templates/image/edit/watermark.html:17
+#: templates/image/edit/watermark.html:18
 msgid "Please note: animated GIFs cannot be watermarked at this time."
 msgstr ""
 "يرجي الملاحظة أنه لا يمكن وضع علامة مائية علي صور GIF المتحركة في هذا الوقت."
 
-#: templates/image/edit/watermark.html:32
+#: templates/image/edit/watermark.html:33
 msgid "Next step: basic information"
 msgstr "الخطوة التالية: المعلومات الأساسية"
 
-#: templates/image/edit/watermark.html:43
+#: templates/image/edit/watermark.html:44
 msgid "This operation might take several seconds."
 msgstr ""
 
 #: templates/inclusion_tags/list_gear.html:17
-#: templates/user/profile/commercial/products.html:85
-#: templates/user/profile/commercial/products.html:167
-#: templates/user/profile/commercial/products.html:262
-#: templates/user/profile/commercial/products.html:332
-#: templates/user/profile/commercial/products.html:488
-#: templates/user/profile/commercial/products.html:815
+#: templates/user/profile/commercial/products.html:86
+#: templates/user/profile/commercial/products.html:168
+#: templates/user/profile/commercial/products.html:263
+#: templates/user/profile/commercial/products.html:333
+#: templates/user/profile/commercial/products.html:489
+#: templates/user/profile/commercial/products.html:816
 #: templates/user/profile/edit/gear.html:361
 msgid "Remove"
 msgstr "حذف"
 
 #: templates/inclusion_tags/list_gear.html:21
-#: templates/pybb/post_template.html:57
+#: templates/pybb/post_template.html:59
 #: templates/user/profile/navigation.html:172
-#: templates/user/profile/commercial/products.html:79
-#: templates/user/profile/commercial/products.html:161
-#: templates/user/profile/commercial/products.html:482
-#: templates/user/profile/commercial/products.html:809
+#: templates/user/profile/commercial/products.html:80
+#: templates/user/profile/commercial/products.html:162
+#: templates/user/profile/commercial/products.html:483
+#: templates/user/profile/commercial/products.html:810
 #: templates/user/profile/edit/gear.html:364
 msgid "Edit"
 msgstr "تحرير"
@@ -5570,62 +5585,62 @@ msgstr ""
 "دقيقة و منظمة. و باستخدام مخططاتنا البيانية ، يمكنك الحصول علي معلومات أكثر "
 "عن إنتاجك و الأجهزة الّتي تستخدمها أكثر."
 
-#: templates/index/root.html:138
+#: templates/index/root.html:137
 msgid "Your activity stream"
 msgstr "تيّار النشاط الخاص بك"
 
-#: templates/index/root.html:143
+#: templates/index/root.html:142
 msgid "Global activity stream"
 msgstr "تيّار النشاط العام"
 
-#: templates/index/root.html:148
+#: templates/index/root.html:147
 msgid "Recently uploaded"
 msgstr "تم رفعها حديثاً"
 
-#: templates/index/root.html:153 templates/index/root.html.py:213
+#: templates/index/root.html:152 templates/index/root.html.py:212
 msgid "Recent images from people you follow"
 msgstr "الصور الحديثة من الأشخاص الذين تتابعهم"
 
-#: templates/index/root.html:158 templates/index/root.html.py:224
+#: templates/index/root.html:157 templates/index/root.html.py:223
 msgid "Recently liked"
 msgstr "مُعجب بها حديثاً"
 
-#: templates/index/root.html:163 templates/index/root.html.py:235
+#: templates/index/root.html:162 templates/index/root.html.py:234
 msgid "Recently bookmarked"
 msgstr "أضيفت إلي الصور المفضلة حديثأً"
 
-#: templates/index/root.html:168 templates/index/root.html.py:246
+#: templates/index/root.html:167 templates/index/root.html.py:245
 msgid "Recent images with link to TIFF/FITS"
 msgstr "الصور الحديثة مع رابط لملفات TIFF/FITS"
 
-#: templates/index/root.html:178
+#: templates/index/root.html:177
 msgid "Personal"
 msgstr "شخصي"
 
-#: templates/index/root.html:189
+#: templates/index/root.html:188
 msgid "Global"
 msgstr "عام"
 
-#: templates/index/root.html:202
+#: templates/index/root.html:201
 msgid "Recent images"
 msgstr "الصور الحديثة"
 
-#: templates/index/root.html:258
+#: templates/index/root.html:257
 msgid "Set current front page section as default"
 msgstr "اضبط هذه الصفحة لتكون افتراضية"
 
-#: templates/index/root.html:273
+#: templates/index/root.html:272
 msgid ""
 "To make your personal stream more interesting, you should follow some people!"
 msgstr ""
 "لكي تجعل تيّار البيانات الخاص بك أكثر امتاعا ، يجب أن تتابع بعض الأشخاص!"
 
-#: templates/index/root.html:297
+#: templates/index/root.html:296
 #, fuzzy
 msgid "Latest from the forums"
 msgstr "ما هو الخطأ في المنتديات؟"
 
-#: templates/index/root.html:321
+#: templates/index/root.html:320
 msgid "Do you want your product here?"
 msgstr "هل تريد المُنتج الخاص بك هنا؟"
 
@@ -5640,7 +5655,7 @@ msgstr ""
 "إصلاح ذلك."
 
 #: templates/messages/compose.html:6 templates/messages/compose.html.py:9
-#: templates/messages/inbox.html:19
+#: templates/messages/inbox.html:48
 msgid "Compose message"
 msgstr "إنشاء رسالة"
 
@@ -5656,36 +5671,27 @@ msgstr "لا توجد نتائج"
 msgid "Searching"
 msgstr "جاري البحث"
 
-#: templates/messages/inbox.html:15
+#: templates/messages/inbox.html:14
 msgid "Messages"
 msgstr "الرسائل"
 
-#: templates/messages/inbox.html:26
+#: templates/messages/inbox.html:19
 msgid "Participants"
 msgstr "المشاركون"
 
-#: templates/messages/inbox.html:27
+#: templates/messages/inbox.html:20
 msgid "Date and time"
 msgstr "التاريخ والوقت"
 
-#: templates/messages/inbox.html:29
+#: templates/messages/inbox.html:22
 msgid "Excerpt"
 msgstr ""
 
-#: templates/messages/inbox.html:34
+#: templates/messages/inbox.html:26
 msgid "New!"
 msgstr "جديد!"
 
-#: templates/messages/inbox.html:44
-msgid "Read all"
-msgstr "قراءة الكلّ"
-
-#: templates/messages/inbox.html:46 templates/messages/view.html:42
-#: templates/messages/view.html.py:77
-msgid "Reply"
-msgstr "رد"
-
-#: templates/messages/inbox.html:52
+#: templates/messages/inbox.html:39
 msgid "No messages"
 msgstr "لا توجد رسائل"
 
@@ -5706,6 +5712,10 @@ msgstr "حذف المحادثة"
 msgid "or return to messages"
 msgstr "أو ارجع إلي الرسائل"
 
+#: templates/messages/view.html:42 templates/messages/view.html.py:77
+msgid "Reply"
+msgstr "رد"
+
 #: templates/messages/view.html:64
 msgid "Sending..."
 msgstr "جاري الإرسال..."
@@ -5725,11 +5735,11 @@ msgid ""
 "Approve button below to approve all the others."
 msgstr ""
 
-#: templates/moderation/image_list.html:38
+#: templates/moderation/image_list.html:36
 msgid "Approve"
 msgstr ""
 
-#: templates/moderation/image_list.html:43
+#: templates/moderation/image_list.html:42
 msgid "The moderation queue is empty, hooray! Come back later."
 msgstr ""
 
@@ -5744,16 +5754,16 @@ msgid ""
 "the Approve button below to approve them."
 msgstr ""
 
-#: templates/moderation/spam_list.html:35
+#: templates/moderation/spam_list.html:33
 #, fuzzy
 msgid "Approve selected"
 msgstr "# تم اختيارها"
 
-#: templates/moderation/spam_list.html:38
+#: templates/moderation/spam_list.html:36
 msgid "Approve selected and ban the rest"
 msgstr ""
 
-#: templates/moderation/spam_list.html:43
+#: templates/moderation/spam_list.html:42
 #, fuzzy
 msgid "There are no images in the spam list."
 msgstr "لا توجد آراء نقدية حتي الآن."
@@ -6496,12 +6506,12 @@ msgstr ""
 "\">الدخول</a> و إلّا يمكنك ترك عنوان بريدك الإلكتروني لنا و سوف يتم إشعارك "
 "عندما يتم فتح الموقع!"
 
-#: templates/pybb/forum.html:19
+#: templates/pybb/forum.html:21
 #, fuzzy
 msgid "Back to group"
 msgstr "العودة لأعلي"
 
-#: templates/pybb/forum.html:28
+#: templates/pybb/forum.html:30
 #, fuzzy
 msgid "New topic"
 msgstr "إغلاق"
@@ -6518,35 +6528,29 @@ msgstr ""
 msgid "You are not a member of any groups"
 msgstr ""
 
-#: templates/pybb/index.html:26 templates/pybb/latest_topics.html:22
-#: templates/pybb/subscribed_topics.html:22
-#, fuzzy
-msgid "Mark all as read"
-msgstr "صحيح"
-
-#: templates/pybb/index.html:35
+#: templates/pybb/index.html:37
 msgid "These are the forums in the groups you have access to."
 msgstr ""
 
-#: templates/pybb/index.html:50
+#: templates/pybb/index.html:52
 msgid "Topics"
 msgstr ""
 
-#: templates/pybb/index.html:53 templates/pybb/topic.html:84
+#: templates/pybb/index.html:55 templates/pybb/topic.html:96
 #: templates/pybb/topic_list.html:20
 msgid "Posts"
 msgstr ""
 
-#: templates/pybb/index.html:56
+#: templates/pybb/index.html:58
 #, fuzzy
 msgid "Last posts"
 msgstr "شرق أو غرب"
 
-#: templates/pybb/index.html:63
+#: templates/pybb/index.html:65
 msgid "Forum categories are not created"
 msgstr ""
 
-#: templates/pybb/index.html:64
+#: templates/pybb/index.html:66
 msgid "Add a category now"
 msgstr ""
 
@@ -6554,68 +6558,68 @@ msgstr ""
 msgid "Please note: this post will be published only after moderation."
 msgstr ""
 
-#: templates/pybb/post_template.html:31
+#: templates/pybb/post_template.html:33
 msgid ""
 "Warning: this post awaits moderation and is not yet visible to everybody"
 msgstr ""
 
-#: templates/pybb/post_template.html:47
+#: templates/pybb/post_template.html:49
 #, fuzzy
 msgid "Edited"
 msgstr "تحرير"
 
-#: templates/pybb/post_template.html:52
+#: templates/pybb/post_template.html:54
 #, fuzzy
 msgid "quote"
 msgstr "نص مُقتبس"
 
-#: templates/pybb/post_template.html:53
+#: templates/pybb/post_template.html:55
 #, fuzzy
 msgid "quote selected"
 msgstr "# تم اختيارها"
 
-#: templates/pybb/post_template.html:61
+#: templates/pybb/post_template.html:63
 #, fuzzy
 msgid "Delete post?"
 msgstr "حذف المحادثة"
 
-#: templates/pybb/post_template.html:64
+#: templates/pybb/post_template.html:66
 msgid "Approve post"
 msgstr ""
 
 #: templates/pybb/subscribed_topics.html:7
-#: templates/pybb/subscribed_topics.html:10
+#: templates/pybb/subscribed_topics.html:12
 msgid "Topics you subscribe to"
 msgstr ""
 
-#: templates/pybb/topic.html:33
+#: templates/pybb/topic.html:35
 msgid "Unstick topic"
 msgstr ""
 
-#: templates/pybb/topic.html:35
+#: templates/pybb/topic.html:37
 msgid "Stick topic"
 msgstr ""
 
-#: templates/pybb/topic.html:41
+#: templates/pybb/topic.html:43
 msgid "Open topic"
 msgstr ""
 
-#: templates/pybb/topic.html:43
+#: templates/pybb/topic.html:45
 #, fuzzy
 msgid "Close topic"
 msgstr "إغلاق"
 
-#: templates/pybb/topic.html:55
+#: templates/pybb/topic.html:60
 #: templates/subscription/subscription_category_list.html:86
 msgid "Unsubscribe"
 msgstr ""
 
-#: templates/pybb/topic.html:57
+#: templates/pybb/topic.html:67
 #: templates/subscription/subscription_category_list.html:91
 msgid "Subscribe"
 msgstr ""
 
-#: templates/pybb/topic.html:98
+#: templates/pybb/topic.html:110
 msgid "Subscribers"
 msgstr ""
 
@@ -6623,18 +6627,10 @@ msgstr ""
 msgid "Topic"
 msgstr ""
 
-#: templates/pybb/topic_list.html:17
-msgid "Author"
-msgstr ""
-
 #: templates/pybb/topic_list.html:26
 #, fuzzy
 msgid "Last post"
 msgstr "شرق أو غرب"
-
-#: templates/pybb/topic_list.html:37
-msgid "Go to first unread post"
-msgstr ""
 
 #: templates/pybb/topic_list.html:39
 msgid "Sticky"
@@ -6650,7 +6646,7 @@ msgstr "إغلاق"
 msgid "pages"
 msgstr "الصور"
 
-#: templates/pybb/topic_list.html:76
+#: templates/pybb/topic_list.html:77
 #, fuzzy
 msgid "This forum does not have any topics."
 msgstr "لا توجد لديك إشعارات جديدة."
@@ -7197,19 +7193,19 @@ msgstr ""
 "هل عندك أسئلة لم يتم الإجابة عنها هنا! من فضلك <a href=\"/contact/\">تواصل "
 "معنا</a>!"
 
-#: templates/user/api_keys.html:5 templates/user/api_keys.html.py:12
+#: templates/user/api_keys.html:5 templates/user/api_keys.html.py:11
 msgid "Your API Keys"
 msgstr "مفاتيح الـ API الخاصة بك"
 
-#: templates/user/api_keys.html:19
+#: templates/user/api_keys.html:18
 msgid "Created on"
 msgstr "أنشئ في"
 
-#: templates/user/api_keys.html:20
+#: templates/user/api_keys.html:19
 msgid "Active"
 msgstr "مُفعَّل"
 
-#: templates/user/api_keys.html:39
+#: templates/user/api_keys.html:38
 #, python-format
 msgid ""
 "You don't have any API Keys. Please read the <a href=\"%(api_docs_url)s"
@@ -7218,7 +7214,7 @@ msgstr ""
 "لا توجد لديك أي مفاتيح API. من فضلك اقرأ <a href=\"%(api_docs_url)s\">API "
 "documentation</a>."
 
-#: templates/user/api_keys.html:47
+#: templates/user/api_keys.html:43
 msgid "Request an API Key"
 msgstr "طلب مفتاح API"
 
@@ -7252,11 +7248,11 @@ msgstr "شكر خاص لـ"
 msgid "%(user)s's bookmarks"
 msgstr "صور %(user)s المفضلة"
 
-#: templates/user/bookmarks.html:11
+#: templates/user/bookmarks.html:12
 msgid "Your bookmarks"
 msgstr "صورك المفضلة"
 
-#: templates/user/bookmarks.html:13
+#: templates/user/bookmarks.html:14
 #, python-format
 msgid "%(username)s's bookmarks"
 msgstr "صور %(username)s المفضلة"
@@ -7266,11 +7262,11 @@ msgstr "صور %(username)s المفضلة"
 msgid "%(user)s's followers"
 msgstr "متابعي %(user)s"
 
-#: templates/user/followers.html:13
+#: templates/user/followers.html:14
 msgid "Your followers"
 msgstr "المتابعين لك"
 
-#: templates/user/followers.html:15
+#: templates/user/followers.html:16
 #, python-format
 msgid "%(username)s's followers"
 msgstr "متابعي %(username)s"
@@ -7280,11 +7276,11 @@ msgstr "متابعي %(username)s"
 msgid "%(user)s's followed users"
 msgstr "المستخدمين الّذين يتابعهم %(user)s"
 
-#: templates/user/following.html:13
+#: templates/user/following.html:14
 msgid "Your followed users"
 msgstr "المستخدمين الّذين تتابعهم"
 
-#: templates/user/following.html:15
+#: templates/user/following.html:16
 #, python-format
 msgid "%(username)s's followed users"
 msgstr "المستخدمين الّذين يتابعهم %(username)s"
@@ -7293,12 +7289,12 @@ msgstr "المستخدمين الّذين يتابعهم %(username)s"
 msgid "User not found:"
 msgstr "لم يتم العثور علي المستخدم:"
 
-#: templates/user/plots.html:5 templates/user/plots.html.py:11
+#: templates/user/plots.html:5 templates/user/plots.html.py:12
 #, python-format
 msgid "%(user)s's plots"
 msgstr "مخططات %(user)s"
 
-#: templates/user/plots.html:16
+#: templates/user/plots.html:17
 #, python-format
 msgid ""
 "Hey <strong>%(user)s</strong>! I just wanted to let you know that you could "
@@ -7311,11 +7307,11 @@ msgstr ""
 "من مراجعة إذا كان عندك صور ينقصها بعض البيانات <a href=\"%(user_page)s?"
 "public&sub=nodata\">هنا</a>."
 
-#: templates/user/plots.html:24
+#: templates/user/plots.html:25
 msgid "Total integration hours, plotted against time."
 msgstr "مدة تعريض الضوء الكلية ، مقابل الوقت."
 
-#: templates/user/plots.html:37
+#: templates/user/plots.html:38
 msgid ""
 "Total integration hours, plotted against time and arranged by imaging "
 "telescopes and lenses, and imaging cameras."
@@ -7323,15 +7319,15 @@ msgstr ""
 "مدة تعريض الضوء الكلية ، مقابل الوقت و مرتبة حسب آلة التصوير و التلسكوب أو "
 "العدسة المستخدمة في التصوير."
 
-#: templates/user/plots.html:53
+#: templates/user/plots.html:54
 msgid "Combined view count for all the user's images, plotted against time."
 msgstr "العدد الكلّي للمشاهدات لكل صور المستخدم ، مقابل الوقت."
 
-#: templates/user/plots.html:66
+#: templates/user/plots.html:67
 msgid "Image uploads, plotted against time."
 msgstr "الصور الّتي تم رفعها ، مقابل الوقت."
 
-#: templates/user/profile.html:18
+#: templates/user/profile.html:19
 msgid ""
 "These are your \"work in progress\" images: only you can see this list. You "
 "can show people individual images by sharing them using the <em>Share</em> "
@@ -7340,11 +7336,11 @@ msgstr ""
 "هذه هي صور \"الأعمال غير المكتملة\": أنت الوحيد الّذي يمكنه رؤية هذه القائمة. "
 "يمكنك عرض صور منفصلة للآخرين عن طريق مشاركتهم باستخدام قائمة <em>مشاركة</em>."
 
-#: templates/user/profile.html:30
+#: templates/user/profile.html:31
 msgid "These images don't have enough data. It's a shame..."
 msgstr "هذه الصور لا تحتوي علي بيانات كافية. هذا مُخجل..."
 
-#: templates/user/profile.html:32
+#: templates/user/profile.html:33
 msgid ""
 "If you want your images to be categorized in albums, you should really fill "
 "in some data. Imaging telescopes, imaging cameras and subjects are the bare "
@@ -7353,11 +7349,11 @@ msgstr ""
 "إذا أردت تصنيف صورك في ألبومات ، ينبغي لك أن تملأ بعض البيانات. تلسكوبات "
 "التصوير و آلات التصوير و الأجرام هم الحد الأدني. تواريخ الالتقاط مهمة أيضاً."
 
-#: templates/user/profile.html:44
+#: templates/user/profile.html:45
 msgid "Tools"
 msgstr "الأدوات"
 
-#: templates/user/profile.html:48 templates/user/profile.html.py:51
+#: templates/user/profile.html:49 templates/user/profile.html.py:52
 msgid "Edit profile"
 msgstr "تعديل الملف التعريفي"
 
@@ -7487,82 +7483,82 @@ msgid "Collection tools"
 msgstr ""
 
 #: templates/user/profile/commercial/products.html:7
-#: templates/user/profile/commercial/products.html:15
+#: templates/user/profile/commercial/products.html:16
 #, python-format
 msgid "%(user)s's commercial products"
 msgstr "المنتجات التجارية الخاصة بالمستخدم %(user)s"
 
-#: templates/user/profile/commercial/products.html:13
+#: templates/user/profile/commercial/products.html:14
 msgid "Your commercial products"
 msgstr "المنتجات التجارية الخاصة"
 
-#: templates/user/profile/commercial/products.html:22
+#: templates/user/profile/commercial/products.html:23
 msgid ""
 "Please remember that you are only allowed to claim items that you really "
 "produce and/or retail."
 msgstr "من فضلك تذكر أنه يُسمح لك بإدعاء المنتجات الّتي تنتجها و/أو تبيعها فقط."
 
-#: templates/user/profile/commercial/products.html:32
+#: templates/user/profile/commercial/products.html:33
 msgid "As producer"
 msgstr "كمُنتِج"
 
-#: templates/user/profile/commercial/products.html:37
-#: templates/user/profile/commercial/products.html:119
+#: templates/user/profile/commercial/products.html:38
+#: templates/user/profile/commercial/products.html:120
 msgid "Gear IDs"
 msgstr "رقم أو كود الجهاز"
 
-#: templates/user/profile/commercial/products.html:95
+#: templates/user/profile/commercial/products.html:96
 msgid "You haven't claimed any commercial products yet."
 msgstr ""
 
-#: templates/user/profile/commercial/products.html:97
+#: templates/user/profile/commercial/products.html:98
 #, python-format
 msgid "%(user)s hasn't claimed any commercial products yet."
 msgstr ""
 
-#: templates/user/profile/commercial/products.html:114
+#: templates/user/profile/commercial/products.html:115
 msgid "As retailer"
 msgstr "كبائع"
 
-#: templates/user/profile/commercial/products.html:177
+#: templates/user/profile/commercial/products.html:178
 msgid "You haven't claimed any retailed products yet."
 msgstr "لم تقم بعد بادّعاء أي منتجات للبيع."
 
-#: templates/user/profile/commercial/products.html:179
+#: templates/user/profile/commercial/products.html:180
 #, python-format
 msgid "%(user)s hasn't claimed any retailed products yet."
 msgstr "%(user)s لم يقم بعد بادّعاء أي منتجات للبيع."
 
-#: templates/user/profile/commercial/products.html:196
+#: templates/user/profile/commercial/products.html:197
 msgid "Claim as producer"
 msgstr "الادّعاء كمُنتِج"
 
-#: templates/user/profile/commercial/products.html:202
+#: templates/user/profile/commercial/products.html:203
 msgid "Claim as retailer"
 msgstr "الادّعاء كبائع"
 
-#: templates/user/profile/commercial/products.html:230
+#: templates/user/profile/commercial/products.html:231
 msgid "Claim commercial product"
 msgstr "ادّعاء منتج تجاري"
 
-#: templates/user/profile/commercial/products.html:238
-#: templates/user/profile/commercial/products.html:312
-#: templates/user/profile/commercial/products.html:412
-#: templates/user/profile/commercial/products.html:739
+#: templates/user/profile/commercial/products.html:239
+#: templates/user/profile/commercial/products.html:313
+#: templates/user/profile/commercial/products.html:413
+#: templates/user/profile/commercial/products.html:740
 msgid "Claim"
 msgstr "إدعاء مُنتج"
 
-#: templates/user/profile/commercial/products.html:247
-#: templates/user/profile/commercial/products.html:321
+#: templates/user/profile/commercial/products.html:248
+#: templates/user/profile/commercial/products.html:322
 msgid "Select items to remove"
 msgstr "قم بتحديد عناصر لحذفها"
 
-#: templates/user/profile/commercial/products.html:251
+#: templates/user/profile/commercial/products.html:252
 msgid "Be careful if you try to remove all of these!"
 msgstr "كن حذراً إذا أردت حذف كل هذا!"
 
-#: templates/user/profile/commercial/products.html:252
-#: templates/user/profile/commercial/products.html:290
+#: templates/user/profile/commercial/products.html:253
+#: templates/user/profile/commercial/products.html:291
 msgid ""
 "All the properties, including the commercial description, of this claim will "
 "be deleted and cannot be recovered!"
@@ -7570,22 +7566,22 @@ msgstr ""
 "سيتم حذف كل خصائص هذه المُنتج متضمنة الوصف التجاري أيضاً ، ولا يُمكن استعادتها "
 "بعد ذلك!"
 
-#: templates/user/profile/commercial/products.html:269
-#: templates/user/profile/commercial/products.html:339
+#: templates/user/profile/commercial/products.html:270
+#: templates/user/profile/commercial/products.html:340
 msgid "Select the product you want to merge to"
 msgstr "حدّد المٌنتَج الّذي تريد الضمّ إليه"
 
-#: templates/user/profile/commercial/products.html:304
+#: templates/user/profile/commercial/products.html:305
 msgid "Claim retailed product"
 msgstr "ادّعاء هذا المُنتَج"
 
-#: templates/user/profile/commercial/products.html:360
+#: templates/user/profile/commercial/products.html:361
 msgid ""
 "All the properties of this claim will be deleted and cannot be recovered!"
 msgstr "ستم حذف كل خصائص هذا المُنتَج و لا يمكن استعادتها بعد ذلك!"
 
-#: templates/user/profile/commercial/products.html:417
-#: templates/user/profile/commercial/products.html:744
+#: templates/user/profile/commercial/products.html:418
+#: templates/user/profile/commercial/products.html:745
 msgid "Please wait..."
 msgstr "انتظر من فضلك..."
 
@@ -7936,6 +7932,9 @@ msgstr "ترقية إلي المساحة العامة"
 msgid "There was one or more errors processing the form. "
 msgstr ""
 "حدث خطأ أو أكثر أثناء معالجة التنسيق. قد تحتاج إلي االنظر في الأسفل كي تراهم."
+
+#~ msgid "Read all"
+#~ msgstr "قراءة الكلّ"
 
 #, fuzzy
 #~ msgid "Uploads used"

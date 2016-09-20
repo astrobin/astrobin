@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2016-09-17 10:33+0100\n"
+"POT-Creation-Date: 2016-09-20 20:59+0100\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -19,11 +19,29 @@ msgstr ""
 "Plural-Forms: nplurals=3; plural=(n%10==1 && n%100!=11 ? 0 : n%10>=2 && n"
 "%10<=4 && (n%100<10 || n%100>=20) ? 1 : 2);\n"
 
-#: forms.py:40 templates/astrobin_apps_groups/group_manage_members.html:32
+#: forms.py:34
+msgid "Autosubmission deactivation strategy"
+msgstr ""
+
+#: forms.py:36
+msgid "Keep all images currently auto-submitted"
+msgstr ""
+
+#: forms.py:37
+msgid "Remove all images and start over"
+msgstr ""
+
+#: forms.py:39
+msgid ""
+"When changing your group from autosubmission to non-autosubmission, you need "
+"to think of what to do with the images currently in the group."
+msgstr ""
+
+#: forms.py:52 templates/astrobin_apps_groups/group_manage_members.html:33
 msgid "Invite users"
 msgstr ""
 
-#: forms.py:41
+#: forms.py:53
 msgid "Users will receive a notification and will be able to join the group"
 msgstr ""
 
@@ -68,10 +86,10 @@ msgid "Other"
 msgstr ""
 
 #: models.py:63 templates/astrobin_apps_groups/_group_list_table.html:7
-#: templates/astrobin_apps_groups/group_list.html:36
-#: templates/astrobin_apps_groups/group_manage_members.html:41
-#: templates/astrobin_apps_groups/group_manage_members.html:78
-#: templates/astrobin_apps_groups/group_manage_members.html:114
+#: templates/astrobin_apps_groups/group_list.html:37
+#: templates/astrobin_apps_groups/group_manage_members.html:42
+#: templates/astrobin_apps_groups/group_manage_members.html:79
+#: templates/astrobin_apps_groups/group_manage_members.html:115
 #: templates/astrobin_apps_groups/group_members_list.html:28
 #: templates/astrobin_apps_groups/group_moderate_join_requests.html:30
 msgid "Name"
@@ -82,11 +100,11 @@ msgid "Description"
 msgstr ""
 
 #: models.py:70
-msgid "Some HTML tags are allowed: <b>, <i>, <a>"
+msgid "HTML tags are allowed."
 msgstr ""
 
 #: models.py:77 templates/astrobin_apps_groups/_group_list_table.html:8
-#: templates/astrobin_apps_groups/group_list.html:43
+#: templates/astrobin_apps_groups/group_list.html:44
 msgid "Category"
 msgstr ""
 
@@ -116,71 +134,70 @@ msgstr ""
 msgid ""
 "Groups with automatic submissions always contain all public images from all "
 "members. Groups without automatic submission only contain images that are "
-"explicitly submitted to it. WARNING: THIS FIELD CANNOT BE CHANGED AFTER THE "
-"GROUP IS CREATED."
+"explicitly submitted to it."
 msgstr ""
 
 #: views.py:172
 msgid "Your new group was created successfully"
 msgstr ""
 
-#: views.py:182
+#: views.py:188
 msgid "Form saved"
 msgstr ""
 
-#: views.py:191
+#: views.py:197
 msgid "Group deleted"
 msgstr ""
 
-#: views.py:206
+#: views.py:212
 msgid "You have joined the group"
 msgstr ""
 
-#: views.py:209
+#: views.py:215
 msgid "You already were a member of this group"
 msgstr ""
 
-#: views.py:215
+#: views.py:221
 msgid ""
 "This is a moderated group, and your join request will be reviewed by a "
 "moderator"
 msgstr ""
 
-#: views.py:247
+#: views.py:253
 msgid "You have left the group"
 msgstr ""
 
-#: views.py:348
+#: views.py:354
 msgid "Group updated with your selection of images."
 msgstr ""
 
-#: views.py:350 views.py:374
+#: views.py:356 views.py:380
 msgid "You cannot add images that are not yours!"
 msgstr ""
 
-#: views.py:377
+#: views.py:383
 msgid "Your image was added to the group."
 msgstr ""
 
 #: templates/astrobin_apps_groups/_group_list_table.html:9
-#: templates/astrobin_apps_groups/group_list.html:50
+#: templates/astrobin_apps_groups/group_list.html:51
 msgid "Last activity"
 msgstr ""
 
 #: templates/astrobin_apps_groups/_group_list_table.html:10
-#: templates/astrobin_apps_groups/group_detail.html:128
-#: templates/astrobin_apps_groups/group_manage_members.html:109
+#: templates/astrobin_apps_groups/group_detail.html:129
+#: templates/astrobin_apps_groups/group_manage_members.html:110
 msgid "Members"
 msgstr ""
 
 #: templates/astrobin_apps_groups/_group_list_table.html:11
-#: templates/astrobin_apps_groups/group_detail.html:155
-#: templates/astrobin_apps_groups/group_detail.html:207
+#: templates/astrobin_apps_groups/group_detail.html:156
+#: templates/astrobin_apps_groups/group_detail.html:208
 msgid "Images"
 msgstr ""
 
 #: templates/astrobin_apps_groups/_group_list_table.html:12
-#: templates/astrobin_apps_groups/group_list.html:65
+#: templates/astrobin_apps_groups/group_list.html:66
 msgid "Forum posts"
 msgstr ""
 
@@ -206,7 +223,7 @@ msgstr ""
 
 #: templates/astrobin_apps_groups/group_add_remove_images.html:7
 #: templates/astrobin_apps_groups/group_add_remove_images.html:14
-#: templates/astrobin_apps_groups/group_detail.html:66
+#: templates/astrobin_apps_groups/group_detail.html:67
 msgid "Add/remove images"
 msgstr ""
 
@@ -221,7 +238,7 @@ msgid "(no title)"
 msgstr ""
 
 #: templates/astrobin_apps_groups/group_add_remove_images.html:45
-#: templates/astrobin_apps_groups/group_update.html:28
+#: templates/astrobin_apps_groups/group_update.html:30
 msgid "Save"
 msgstr ""
 
@@ -232,7 +249,7 @@ msgstr ""
 
 #: templates/astrobin_apps_groups/group_confirm_delete.html:7
 #: templates/astrobin_apps_groups/group_confirm_delete.html:11
-#: templates/astrobin_apps_groups/group_detail.html:216
+#: templates/astrobin_apps_groups/group_detail.html:217
 msgid "Delete group?"
 msgstr ""
 
@@ -243,15 +260,15 @@ msgid ""
 msgstr ""
 
 #: templates/astrobin_apps_groups/group_confirm_delete.html:19
-#: templates/astrobin_apps_groups/group_detail.html:39
-#: templates/astrobin_apps_groups/group_detail.html:224
+#: templates/astrobin_apps_groups/group_detail.html:40
+#: templates/astrobin_apps_groups/group_detail.html:225
 msgid "Delete group"
 msgstr ""
 
 #: templates/astrobin_apps_groups/group_create.html:8
 #: templates/astrobin_apps_groups/group_create.html:23
 #: templates/astrobin_apps_groups/group_create.html:28
-#: templates/astrobin_apps_groups/group_list.html:20
+#: templates/astrobin_apps_groups/group_list.html:21
 msgid "Create new group"
 msgstr ""
 
@@ -259,153 +276,153 @@ msgstr ""
 msgid "Back to list"
 msgstr ""
 
-#: templates/astrobin_apps_groups/group_detail.html:18
+#: templates/astrobin_apps_groups/group_detail.html:19
 msgid "Admin"
 msgstr ""
 
-#: templates/astrobin_apps_groups/group_detail.html:25
+#: templates/astrobin_apps_groups/group_detail.html:26
 #: templates/astrobin_apps_groups/group_update.html:8
-#: templates/astrobin_apps_groups/group_update.html:23
+#: templates/astrobin_apps_groups/group_update.html:25
 msgid "Edit group"
 msgstr ""
 
-#: templates/astrobin_apps_groups/group_detail.html:32
+#: templates/astrobin_apps_groups/group_detail.html:33
 #: templates/astrobin_apps_groups/group_manage_members.html:6
-#: templates/astrobin_apps_groups/group_manage_members.html:23
+#: templates/astrobin_apps_groups/group_manage_members.html:24
 msgid "Manage members"
 msgstr ""
 
-#: templates/astrobin_apps_groups/group_detail.html:49
-#: templates/astrobin_apps_groups/group_list.html:13
-#: templates/astrobin_apps_groups/group_manage_members.html:79
-#: templates/astrobin_apps_groups/group_manage_members.html:115
+#: templates/astrobin_apps_groups/group_detail.html:50
+#: templates/astrobin_apps_groups/group_list.html:14
+#: templates/astrobin_apps_groups/group_manage_members.html:80
+#: templates/astrobin_apps_groups/group_manage_members.html:116
 msgid "Actions"
 msgstr ""
 
-#: templates/astrobin_apps_groups/group_detail.html:57
-#: templates/astrobin_apps_groups/group_detail.html:175
-#: templates/astrobin_apps_groups/group_detail.html:260
+#: templates/astrobin_apps_groups/group_detail.html:58
+#: templates/astrobin_apps_groups/group_detail.html:176
+#: templates/astrobin_apps_groups/group_detail.html:261
 msgid "Join group"
 msgstr ""
 
-#: templates/astrobin_apps_groups/group_detail.html:75
-#: templates/astrobin_apps_groups/group_detail.html:166
-#: templates/astrobin_apps_groups/group_detail.html:276
+#: templates/astrobin_apps_groups/group_detail.html:76
+#: templates/astrobin_apps_groups/group_detail.html:167
+#: templates/astrobin_apps_groups/group_detail.html:277
 msgid "Leave group"
 msgstr ""
 
-#: templates/astrobin_apps_groups/group_detail.html:85
+#: templates/astrobin_apps_groups/group_detail.html:86
 #: templates/astrobin_apps_groups/group_moderate_join_requests.html:6
 #: templates/astrobin_apps_groups/group_moderate_join_requests.html:23
 msgid "Moderate join requests"
 msgstr ""
 
-#: templates/astrobin_apps_groups/group_detail.html:99
+#: templates/astrobin_apps_groups/group_detail.html:100
 #, python-format
 msgid ""
 "A group created on %(date_created)s, owned by <a href=\"%(owner_url)s\">"
 "%(owner)s</a>, categorized as <strong>%(category)s</strong>."
 msgstr ""
 
-#: templates/astrobin_apps_groups/group_detail.html:105
+#: templates/astrobin_apps_groups/group_detail.html:106
 msgid "This group is public"
 msgstr ""
 
-#: templates/astrobin_apps_groups/group_detail.html:107
+#: templates/astrobin_apps_groups/group_detail.html:108
 msgid "This group is private"
 msgstr ""
 
-#: templates/astrobin_apps_groups/group_detail.html:111
+#: templates/astrobin_apps_groups/group_detail.html:112
 msgid "This group is moderated"
 msgstr ""
 
-#: templates/astrobin_apps_groups/group_detail.html:113
+#: templates/astrobin_apps_groups/group_detail.html:114
 msgid "This group is not moderated"
 msgstr ""
 
-#: templates/astrobin_apps_groups/group_detail.html:117
+#: templates/astrobin_apps_groups/group_detail.html:118
 msgid "This group has automatic submission"
 msgstr ""
 
-#: templates/astrobin_apps_groups/group_detail.html:119
+#: templates/astrobin_apps_groups/group_detail.html:120
 msgid "This group does not have automatic submission"
 msgstr ""
 
-#: templates/astrobin_apps_groups/group_detail.html:137
-#: templates/astrobin_apps_groups/group_manage_members.html:37
+#: templates/astrobin_apps_groups/group_detail.html:138
+#: templates/astrobin_apps_groups/group_manage_members.html:38
 msgid "Invited users"
 msgstr ""
 
-#: templates/astrobin_apps_groups/group_detail.html:147
+#: templates/astrobin_apps_groups/group_detail.html:148
 msgid "Join requests"
 msgstr ""
 
-#: templates/astrobin_apps_groups/group_detail.html:190
+#: templates/astrobin_apps_groups/group_detail.html:191
 msgid "Group forum"
 msgstr ""
 
-#: templates/astrobin_apps_groups/group_detail.html:192
+#: templates/astrobin_apps_groups/group_detail.html:193
 #, python-format
 msgid ""
 "<strong>%(post_count)s</strong> posts in <strong>%(topic_count)s</strong> "
 "topics"
 msgstr ""
 
-#: templates/astrobin_apps_groups/group_detail.html:199
+#: templates/astrobin_apps_groups/group_detail.html:200
 msgid "View all"
 msgstr ""
 
-#: templates/astrobin_apps_groups/group_detail.html:201
+#: templates/astrobin_apps_groups/group_detail.html:202
 msgid "New topic"
 msgstr ""
 
-#: templates/astrobin_apps_groups/group_detail.html:220
+#: templates/astrobin_apps_groups/group_detail.html:221
 msgid ""
 "Careful! Do you really want to delete this group? This operation cannot be "
 "undone and the group's forum and all its topics will be irreversibly deleted!"
 msgstr ""
 
-#: templates/astrobin_apps_groups/group_detail.html:232
+#: templates/astrobin_apps_groups/group_detail.html:233
 msgid "Join group?"
 msgstr ""
 
-#: templates/astrobin_apps_groups/group_detail.html:238
+#: templates/astrobin_apps_groups/group_detail.html:239
 msgid ""
 "This is a public group: all content, including the members list, is "
 "available to non-members."
 msgstr ""
 
-#: templates/astrobin_apps_groups/group_detail.html:240
+#: templates/astrobin_apps_groups/group_detail.html:241
 msgid "This is a private group: only members have access to its contents."
 msgstr ""
 
-#: templates/astrobin_apps_groups/group_detail.html:245
+#: templates/astrobin_apps_groups/group_detail.html:246
 msgid ""
 "This is a moderated group, join requests, images and forum posts might go "
 "through a moderation queue."
 msgstr ""
 
-#: templates/astrobin_apps_groups/group_detail.html:247
+#: templates/astrobin_apps_groups/group_detail.html:248
 msgid "This is a non-moderated group."
 msgstr ""
 
-#: templates/astrobin_apps_groups/group_detail.html:252
+#: templates/astrobin_apps_groups/group_detail.html:253
 msgid ""
 "This is an automatic submission group: all of your images will instantly "
 "appear here without any need for action."
 msgstr ""
 
-#: templates/astrobin_apps_groups/group_detail.html:254
+#: templates/astrobin_apps_groups/group_detail.html:255
 msgid ""
 "This is a non-automatic submission group: you will pick and choose which "
 "images you want to submit."
 msgstr ""
 
-#: templates/astrobin_apps_groups/group_detail.html:268
+#: templates/astrobin_apps_groups/group_detail.html:269
 msgid "Leave group?"
 msgstr ""
 
-#: templates/astrobin_apps_groups/group_detail.html:272
+#: templates/astrobin_apps_groups/group_detail.html:273
 msgid ""
 "By leaving this group, your image submissions will no longer be visible to "
 "group members, while your forum posts will remain. Are you sure?"
@@ -415,11 +432,11 @@ msgstr ""
 msgid "Groups"
 msgstr ""
 
-#: templates/astrobin_apps_groups/group_list.html:29
+#: templates/astrobin_apps_groups/group_list.html:30
 msgid "Sort"
 msgstr ""
 
-#: templates/astrobin_apps_groups/group_list.html:58
+#: templates/astrobin_apps_groups/group_list.html:59
 msgid "Date created"
 msgstr ""
 
@@ -453,65 +470,65 @@ msgstr ""
 msgid "No groups available."
 msgstr ""
 
-#: templates/astrobin_apps_groups/group_manage_members.html:14
+#: templates/astrobin_apps_groups/group_manage_members.html:15
 #: templates/astrobin_apps_groups/group_members_list.html:15
 #: templates/astrobin_apps_groups/group_moderate_join_requests.html:14
-#: templates/astrobin_apps_groups/group_update.html:17
+#: templates/astrobin_apps_groups/group_update.html:19
 msgid "Back to group"
 msgstr ""
 
-#: templates/astrobin_apps_groups/group_manage_members.html:42
+#: templates/astrobin_apps_groups/group_manage_members.html:43
 msgid "Revoke?"
 msgstr ""
 
-#: templates/astrobin_apps_groups/group_manage_members.html:58
-#: templates/astrobin_apps_groups/group_manage_members.html:222
+#: templates/astrobin_apps_groups/group_manage_members.html:59
+#: templates/astrobin_apps_groups/group_manage_members.html:223
 msgid "Revoke invitation"
 msgstr ""
 
-#: templates/astrobin_apps_groups/group_manage_members.html:67
-#: templates/astrobin_apps_groups/group_manage_members.html:260
+#: templates/astrobin_apps_groups/group_manage_members.html:68
+#: templates/astrobin_apps_groups/group_manage_members.html:261
 msgid "This group has no active invitations."
 msgstr ""
 
-#: templates/astrobin_apps_groups/group_manage_members.html:74
+#: templates/astrobin_apps_groups/group_manage_members.html:75
 msgid "Moderators"
 msgstr ""
 
-#: templates/astrobin_apps_groups/group_manage_members.html:95
-#: templates/astrobin_apps_groups/group_manage_members.html:297
+#: templates/astrobin_apps_groups/group_manage_members.html:96
+#: templates/astrobin_apps_groups/group_manage_members.html:298
 msgid "Remove moderator status"
 msgstr ""
 
-#: templates/astrobin_apps_groups/group_manage_members.html:103
-#: templates/astrobin_apps_groups/group_manage_members.html:333
+#: templates/astrobin_apps_groups/group_manage_members.html:104
+#: templates/astrobin_apps_groups/group_manage_members.html:334
 msgid "This group has no moderators."
 msgstr ""
 
-#: templates/astrobin_apps_groups/group_manage_members.html:132
-#: templates/astrobin_apps_groups/group_manage_members.html:350
+#: templates/astrobin_apps_groups/group_manage_members.html:133
+#: templates/astrobin_apps_groups/group_manage_members.html:351
 msgid "Make moderator"
 msgstr ""
 
-#: templates/astrobin_apps_groups/group_manage_members.html:143
+#: templates/astrobin_apps_groups/group_manage_members.html:144
 msgid "Remove member"
 msgstr ""
 
-#: templates/astrobin_apps_groups/group_manage_members.html:154
-#: templates/astrobin_apps_groups/group_manage_members.html:384
+#: templates/astrobin_apps_groups/group_manage_members.html:155
+#: templates/astrobin_apps_groups/group_manage_members.html:385
 #: templates/astrobin_apps_groups/group_members_list_entries.html:20
 msgid "This group has no members."
 msgstr ""
 
-#: templates/astrobin_apps_groups/group_manage_members.html:174
+#: templates/astrobin_apps_groups/group_manage_members.html:175
 msgid "Type in a search term"
 msgstr ""
 
-#: templates/astrobin_apps_groups/group_manage_members.html:175
+#: templates/astrobin_apps_groups/group_manage_members.html:176
 msgid "No results"
 msgstr ""
 
-#: templates/astrobin_apps_groups/group_manage_members.html:176
+#: templates/astrobin_apps_groups/group_manage_members.html:177
 msgid "Searching"
 msgstr ""
 
