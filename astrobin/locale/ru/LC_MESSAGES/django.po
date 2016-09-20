@@ -8,17 +8,17 @@ msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2016-09-17 10:28+0100\n"
-"PO-Revision-Date: 2016-09-11 12:21+0000\n"
-"Last-Translator: sidewinder <r.zavadich@gmail.com>\n"
+"PO-Revision-Date: 2016-09-19 19:57+0000\n"
+"Last-Translator: csve <csve00@gmail.com>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
 "Language: ru\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"Plural-Forms: nplurals=3; plural=(n%10==1 && n%100!=11 ? 0 : n%10>=2 && n"
-"%10<=4 && (n%100<10 || n%100>=20) ? 1 : 2);\n"
+"Plural-Forms: nplurals=3; plural=(n%10==1 && n%100!=11 ? 0 : n%10>=2 && n%"
+"10<=4 && (n%100<10 || n%100>=20) ? 1 : 2);\n"
 "X-Generator: Pootle 2.5.0\n"
-"X-POOTLE-MTIME: 1473596492.811827\n"
+"X-POOTLE-MTIME: 1474315033.601748\n"
 
 #: fields.py:10
 msgid "United Kingdom"
@@ -1412,13 +1412,12 @@ msgid "added a new processed image to public data pool"
 msgstr "добавил новое обработанное изображение в общее хранилище"
 
 #: locale_extras.py:17
-#, fuzzy
 msgid "created a new public group"
-msgstr "создал новое общее хранилище данных"
+msgstr "вступил в открытую группу"
 
 #: locale_extras.py:18
 msgid "joined the public group"
-msgstr ""
+msgstr "вступил в открытую группу"
 
 #: locale_extras.py:19 settings.py:657
 msgid "Remove from bookmarks"
@@ -2749,25 +2748,25 @@ msgid "You are invited to a shared private folder"
 msgstr "Вас приглашают в личный каталог обмена"
 
 #: management/__init__.py:141
-#, fuzzy
 msgid "You are invited to a group"
-msgstr "Вас приглашают в личный каталог обмена"
+msgstr "Вас приглашают в группу"
 
 #: management/__init__.py:147
 msgid "A user requested to join a group you moderate"
 msgstr ""
+"Пользователь запросил разрешение вступить в группу, которую вы модерируете"
 
 #: management/__init__.py:153
 msgid "A group moderator approved your request to join"
-msgstr ""
+msgstr "Модератор группы одобрил ваш запрос на вступление"
 
 #: management/__init__.py:159
 msgid "A group moderator rejected your request to join"
-msgstr ""
+msgstr "Модератор группы отклонил ваш запрос на вступление"
 
 #: management/__init__.py:165
 msgid "A user you follow created a new public group"
-msgstr ""
+msgstr "Пользователь, на которого вы подписаны, создал новую открытую группу"
 
 #: templates/403.html:4 templates/403.html.py:7
 msgid "You are not allowed to see this page."
@@ -4127,13 +4126,13 @@ msgid "Would you like to upgrade?"
 msgstr "Желаете улучшить?"
 
 #: templates/upload.html:46
-#, fuzzy, python-format
+#, python-format
 msgid ""
 "You have used <strong>%(premium_counter)s</strong> images of your allowed "
 "<strong>%(max_allowed)s</strong> for the current subscription period."
 msgstr ""
-"В использовали <strong>%(premium_counter)s</strong> изобр. из допустимых "
-"<strong>%(max_allowed)s</strong> в текущем году."
+"Вы использовали <strong>%(premium_counter)s</strong> изображений из "
+"допустимых <strong>%(max_allowed)s</strong> в текущем периоде подписки."
 
 #: templates/upload.html:47
 #: templates/subscription/subscription_detail.html:246
@@ -4143,11 +4142,10 @@ msgid "Thank you for supporting AstroBin!"
 msgstr "Спасибо за поддержку AstroBin!"
 
 #: templates/upload.html:54
-#, fuzzy
 msgid "Thank you for being a premium member! Enjoy your unlimited images."
 msgstr ""
-"Мы благодарны за ваше желание быть Премиум участником! Наслаждайтесь "
-"безлимитными закачками."
+"Мы благодарны за покупку Премиум аккаунта! Наслаждайтесь безлимитными "
+"закачками изображений."
 
 #: templates/upload.html:66
 msgid "Upload as a work in progress"
@@ -4504,7 +4502,7 @@ msgstr "Просмотр спам листа"
 
 #: templates/base/site_links.html:68
 msgid "Groups"
-msgstr ""
+msgstr "Группы"
 
 #: templates/base/site_links.html:127
 msgid "AstroBin Raw Data"
@@ -4927,7 +4925,7 @@ msgstr "Сделано с помощью"
 
 #: templates/image/detail/groups.html:6
 msgid "In these public groups"
-msgstr ""
+msgstr "В этих открытых группах"
 
 #: templates/image/detail/histogram.html:6
 msgid "Histogram"
@@ -5070,7 +5068,7 @@ msgstr "Переместить в Staging Area"
 #: templates/image/detail/menu/actions.html:109
 #: templates/image/detail/modals/send_to_group.html:8
 msgid "Send to group"
-msgstr ""
+msgstr "Отправить в группу"
 
 #: templates/image/detail/menu/actions.html:117
 #: templates/image/detail/modals/send_to_datapool.html:7
@@ -5288,12 +5286,17 @@ msgid ""
 "Sorry, you cannot send images from your Staging Area to a group. You need to "
 "first promote this image to your Public Area, if you want to do that."
 msgstr ""
+"Извините, но отправить изображение из Staging Area в группу невозможно. "
+"Сначала вы должны перенести его в Public Area."
 
 #: templates/image/detail/modals/send_to_group.html:18
 msgid ""
 "Use this form to select one of your groups. The list includes all public and "
 "private non-autosubmission groups of which you are the owner or a member."
 msgstr ""
+"Используйте эту форму, чтобы выбрать одну из ваших групп. Список содержит "
+"все открытые и закрытые группы без автодобавления в которых вы являетесь "
+"владельцем или участником."
 
 #: templates/image/detail/modals/send_to_sharedfolder.html:11
 msgid ""
@@ -5975,13 +5978,16 @@ msgid ""
 "\n"
 "Visit the group here: %(url)s"
 msgstr ""
+"Ваш запрос вступления в группу \"%(group_name)s\" ОДОБРЕН.\n"
+"\n"
+"Посетите группу по ссылке: %(url)s"
 
 #: templates/notification/group_join_request_approved/notice.html:3
 #: templates/notification/group_join_request_approved/short.html:3
 #: templates/notification/group_join_request_approved/short.txt:2
 #, python-format
 msgid "Your request to join the group \"%(group_name)s\" has been APPROVED"
-msgstr ""
+msgstr "Ваш запрос вступления в группу \"%(group_name)s\" ОДОБРЕН"
 
 #: templates/notification/group_join_request_rejected/full.txt:2
 #: templates/notification/group_join_request_rejected/notice.html:3
@@ -5989,7 +5995,7 @@ msgstr ""
 #: templates/notification/group_join_request_rejected/short.txt:2
 #, python-format
 msgid "Your request to join the group \"%(group_name)s\" has been REJECTED"
-msgstr ""
+msgstr "Ваш запрос вступления в группу \"%(group_name)s\" ОТКЛОНЕН"
 
 #: templates/notification/image_deleted/full.html:2
 #: templates/notification/image_deleted/full.txt:2
@@ -6238,6 +6244,9 @@ msgid ""
 "\n"
 "Visit the group here: %(group_page)s"
 msgstr ""
+"%(inviter)s пригласил вас вступить в группу: \"%(group_name)s\"\n"
+"\n"
+"Посетите группу по ссылке: %(group_page)s"
 
 #: templates/notification/new_group_invitation/notice.html:3
 #: templates/notification/new_group_invitation/short.html:3
@@ -6246,11 +6255,13 @@ msgid ""
 "<strong>%(inviter)s</strong> invited you to join the group: \"%(group_name)s"
 "\""
 msgstr ""
+"<strong>%(inviter)s</strong> пригласил вас вступить в группу: \"%"
+"(group_name)s\""
 
 #: templates/notification/new_group_invitation/short.txt:2
 #, python-format
 msgid "%(inviter)s invited you to join the group: \"%(group_name)s\""
-msgstr ""
+msgstr "%(inviter)s пригласил вас вступить в группу: \"%(group_name)s\""
 
 #: templates/notification/new_group_join_request/full.txt:2
 #, python-format
@@ -6677,7 +6688,6 @@ msgid "Back to group"
 msgstr "Обратно наверх"
 
 #: templates/pybb/forum.html:28
-#, fuzzy
 msgid "New topic"
 msgstr "Создать тему"
 
@@ -6691,13 +6701,12 @@ msgstr "Форумы не созданы"
 
 #: templates/pybb/forum_list.html:36
 msgid "You are not a member of any groups"
-msgstr ""
+msgstr "Вы не являетесь участником ни одной группы"
 
 #: templates/pybb/index.html:26 templates/pybb/latest_topics.html:22
 #: templates/pybb/subscribed_topics.html:22
-#, fuzzy
 msgid "Mark all as read"
-msgstr "Отметить все форумы прочитанными"
+msgstr "Отметить все прочитанным"
 
 #: templates/pybb/index.html:35
 msgid "These are the forums in the groups you have access to."
