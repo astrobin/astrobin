@@ -1,5 +1,7 @@
 #!/bin/bash
 
+SUDO='sudo -E'
+
 function astrobin_log {
     echo -e " - $1" >&3
 }
@@ -63,6 +65,7 @@ function check {
         ASTROBIN_CELERY_RESULT_DBURI
         ASTROMETRY_NET_API_KEY
         ASTROBIN_RAWDATA_ROOT
+        ASTROBIN_PAYPAL_MERCHANT_ID
     )
 
     local FILES=(
@@ -125,20 +128,27 @@ function init_system {
     if grep -q DebuggingServer /home/vagrant/.bashrc; then
         astrobin_log "Debug smpt server already setup"
     else
-        echo "nc -z 127.0.0.1 25 || sudo python -m smtpd -n -c DebuggingServer localhost:25 &" >> /home/vagrant/.bashrc
+        echo "nc -z 127.0.0.1 25 || $SUDO python -m smtpd -n -c DebuggingServer localhost:25 &" >> /home/vagrant/.bashrc
         echo "nc -z 127.0.0.1 1025 || python -m smtpd -n -c DebuggingServer localhost:1025 &" >> /home/vagrant/.bashrc
     fi
+
+    astrobin_log "Setting locale..."
+    $SUDO locale-gen "en_US.UTF-8"
+    $SUDO dpkg-reconfigure locales
 }
 
 function apt {
     # Init
-    astrobin_log "Upgrading packages..."
-    apt-get update && apt-get -y upgrade && \
+    astrobin_log "Updating package manager..."
+    $SUDO apt-get update && \
+
+    astrobin_log "Upgrading packags..." && \
+    $SUDO apt-get -y --force-yes upgrade && \
 
 
     # Install packages
     astrobin_log "Installing new packages..." && \
-    apt-get -y install \
+    $SUDO apt-get -y install \
         figlet cowsay \
         pkg-config \
         nginx \
@@ -153,7 +163,6 @@ function apt {
         cmake \
         qt4-qmake \
         libqt4-dev \
-        sudo \
         python-virtualenv \
         supervisor \
         rabbitmq-server \
@@ -168,24 +177,24 @@ function apt {
         node-less && \
 
     astrobin_log "Setting up symboling links..." && \
-    rm -rf /usr/lib/libjpeg.so && \
-    rm -rf /usr/lib/libfreetype.so && \
-    rm -rf /usr/lib/libz.so && \
+    $SUDO rm -rf /usr/lib/libjpeg.so && \
+    $SUDO rm -rf /usr/lib/libfreetype.so && \
+    $SUDO rm -rf /usr/lib/libz.so && \
 
-    ln -s /usr/lib/x86_64-linux-gnu/libjpeg.so /usr/lib/ && \
-    ln -s /usr/lib/x86_64-linux-gnu/libfreetype.so /usr/lib/ && \
-    ln -s /usr/lib/x86_64-linux-gnu/libz.so /usr/lib/
+    $SUDO ln -s /usr/lib/x86_64-linux-gnu/libjpeg.so /usr/lib/ && \
+    $SUDO ln -s /usr/lib/x86_64-linux-gnu/libfreetype.so /usr/lib/ && \
+    $SUDO ln -s /usr/lib/x86_64-linux-gnu/libz.so /usr/lib/
 }
 
 function pip {
     astrobin_log "Installing dependencies..."
 
-    sudo -u astrobin /bin/bash - <<"EOF"
+    $SUDO -u astrobin /bin/bash - <<"EOF"
     virtualenv --no-site-packages /venv/astrobin/dev
     . /venv/astrobin/dev/bin/activate
 
     # Install python requirements
-    LCALL=C pip install -r /var/www/astrobin/requirements.txt
+    LCALL=C pip install --no-deps -r /var/www/astrobin/requirements.txt
 
     # Install submodules
     (cd /var/www/astrobin/ && git submodule init && git submodule update)
@@ -213,19 +222,22 @@ EOF
 
 function postgres {
     # Setup postgresql
+    astrobin_log "Creating postgres cluster..."
+    $SUDO pg_createcluster 9.3 main --start
+
     astrobin_log "Copying postgres conf file..."
-    cp /var/www/astrobin/conf/pg_hba.conf /etc/postgresql/9.3/main/
+    $SUDO cp /var/www/astrobin/conf/pg_hba.conf /etc/postgresql/9.3/main/
 
     function postgres_db {
         astrobin_log "Setting up database..."
-        sudo -u postgres /bin/sh <<"EOF"
+        $SUDO -u postgres /bin/sh <<"EOF"
         psql postgres -tAc "SELECT 1 FROM pg_roles WHERE rolname='astrobin'" | grep -q 1 || createuser astrobin
         psql -lqt | cut -d \| -f 1 | grep -w astrobin || createdb astrobin
 EOF
     }
 
     function postgres_priv {
-        sudo -u postgres psql <<"EOF"
+        $SUDO -u postgres psql <<"EOF"
         alter user astrobin with encrypted password 's3cr3t';
         alter user astrobin createdb;
         grant all privileges on database astrobin to astrobin;
@@ -237,15 +249,15 @@ EOF
 
 function rabbitmq {
     astrobin_log "Setting up rabbitmq..."
-    rabbitmqctl add_user astrobin s3cr3t
-    rabbitmqctl add_vhost astrobin
-    rabbitmqctl set_permissions -p astrobin astrobin ".*" ".*" ".*"
+    $SUDO rabbitmqctl add_user astrobin s3cr3t
+    $SUDO rabbitmqctl add_vhost astrobin
+    $SUDO rabbitmqctl set_permissions -p astrobin astrobin ".*" ".*" ".*"
 }
 
 function supervisor {
     astrobin_log "Setting up supervisor..."
-    cp /var/www/astrobin/conf/supervisord/* /etc/supervisor/conf.d/
-    mkdir -p /var/log/{celery,gunicorn,nginx,solr}
+    $SUDO cp /var/www/astrobin/conf/supervisord/* /etc/supervisor/conf.d/
+    $SUDO mkdir -p /var/log/{celery,gunicorn,nginx,solr}
 }
 
 function abc {
@@ -262,14 +274,14 @@ function abc {
     (
         mkdir -p /tmp/libabc_build; \
         cd /tmp/libabc_build; \
-        qmake /var/www/astrobin/submodules/abc && make -j4 && make install
+        qmake /var/www/astrobin/submodules/abc && make -j $SUDO make install
     )
 }
 
 function astrobin {
     echo "Preparing AstroBin..."
 
-    sudo -u astrobin /bin/bash - <<"EOF"
+    $SUDO -u astrobin /bin/bash - <<"EOF"
     # Initialize the environment
     . /venv/astrobin/dev/bin/activate
     . /var/www/astrobin/env/dev
@@ -303,8 +315,10 @@ function solr {
 
     local return_value=0
 
+    $SUDO mkdir -p /opt/solr
+    $SUDO chown solr:astrobin /opt/solr
     if [ ! -f /opt/solr/solr.tgz ]; then
-        sudo -u solr /bin/bash - <<"EOF"
+        $SUDO -u solr /bin/bash - <<"EOF"
         curl https://archive.apache.org/dist/lucene/solr/4.4.0/solr-4.4.0.tgz > /opt/solr/solr.tgz && \
 
         tar xvfz /opt/solr/solr.tgz -C /opt/solr && \
@@ -314,7 +328,7 @@ function solr {
 EOF
     fi
 
-    sudo -u astrobin /bin/bash - <<"EOF"
+    $SUDO -u astrobin /bin/bash - <<"EOF"
     . /venv/astrobin/dev/bin/activate
     . /var/www/astrobin/env/dev
 
