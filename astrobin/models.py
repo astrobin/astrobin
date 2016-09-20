@@ -1577,17 +1577,6 @@ class SolarSystem_Acquisition(Acquisition):
         app_label = 'astrobin'
 
 
-class ABPOD(models.Model):
-    image = models.ForeignKey(Image, unique=True, verbose_name=_("Image"))
-    date = models.DateTimeField(_("Date"))
-
-    def __unicode__(self):
-        return self.image.title
-
-    class Meta:
-        app_label = 'astrobin'
-
-
 class Request(models.Model):
     from_user = models.ForeignKey(User, editable=False, related_name='requester')
     to_user   = models.ForeignKey(User, editable=False, related_name='requestee')
