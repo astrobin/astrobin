@@ -192,9 +192,11 @@
                 </a>
             </li>
 
-            <li id="astrobin-index-mobile-header" class="visible-phone">
-                {{user_scores_index|floatformat:2}}
-            </li>
+            {% if not request.user.userprofile.exclude_from_competitions %}
+                <li id="astrobin-index-mobile-header" class="visible-phone">
+                    {{user_scores_index|floatformat:2}}
+                </li>
+            {% endif %}
         </ul>
     </div> <!-- user-nav -->
 {% else %} <!-- request.user.is_authenticated -->
