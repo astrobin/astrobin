@@ -191,6 +191,10 @@
                     <i class="icon-user"></i>
                 </a>
             </li>
+
+            <li id="astrobin-index-mobile-header" class="visible-phone">
+                {{user_scores_index|floatformat:2}}
+            </li>
         </ul>
     </div> <!-- user-nav -->
 {% else %} <!-- request.user.is_authenticated -->
