@@ -72,7 +72,6 @@ class ImageModerationBanAllView(
     methods = "post"
 
     def post(self, request, *args, **kwargs):
-        import pdb; pdb.set_trace()
         images = Image.all_objects.filter(moderator_decision = 2)
         for i in images:
             i.user.delete()
