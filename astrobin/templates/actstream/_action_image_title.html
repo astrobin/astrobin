@@ -1,0 +1,10 @@
+{% if image.title %}
+    <div class="title hidden-phone hidden-tablet">
+        <div class="inner">
+            {{image.title}}, 
+            <a href="{% url 'user_page' image.user.username %}">
+                {{image.user.userprofile}}
+            </a>
+        </div>
+    </div>
+{% endif %}

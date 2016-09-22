@@ -1,0 +1,9 @@
+{% load astrobin_apps_premium_tags %}
+{% load avatar_tags %}
+
+<div class="avatar">
+    <a href="{% url 'user_page' user.username %}">
+        {% avatar user 64 %}
+    </a>
+    {% premium_badge user 'small' %}
+</div>

@@ -3,6 +3,9 @@ from django.contrib.auth.models import User
 from django.core.urlresolvers import reverse
 from django.test import TestCase
 
+# Test stuff
+from astrobin.tests.common import *
+
 
 class HomeTest(TestCase):
     def setUp(self):
@@ -11,33 +14,32 @@ class HomeTest(TestCase):
     def tearDown(self):
         self.user.delete()
 
-    def test_default_section_view(self):
-        def url(section):
-            return reverse('set_default_frontpage_section', args = (section,))
-
+    def test_global_stream(self):
+        url = reverse('index') + '?s=global'
         self.client.login(username = 'test', password = 'password')
 
-        response = self.client.get(reverse('index'))
-        self.assertContains(response, '<h4><i class="icon-group"></i><span class="hidden-phone">Your activity stream</span></h4>', html = True)
+        # Uploading an image shows up in the stream
+        response, image = test_utils_upload_image(self)
+        test_utils_approve_image(image)
+        response = self.client.get(url)
+        self.assertContains(response, 'VERB_UPLOADED_IMAGE.%d.%d' % (self.user.pk, image.pk))
 
-        response = self.client.post(url('global'), follow = True)
-        self.assertContains(response, '<h4><i class="icon-globe"></i><span class="hidden-phone">Global activity stream</span></h4>', html = True)
+        # Uploading another image shows up in the stream too
+        response, image2 = test_utils_upload_image(self)
+        test_utils_approve_image(image2)
+        response = self.client.get(url)
+        self.assertContains(response, 'VERB_UPLOADED_IMAGE.%d.%d' % (self.user.pk, image2.pk))
 
-        response = self.client.post(url('images'), follow = True)
-        self.assertContains(response, '<h4><i class="icon-time"></i><span class="hidden-phone">Recently uploaded</span></h4>', html = True)
+        # Uploading a revision removes the action about the image upload
+        response, revision = test_utils_upload_revision(self, image)
+        response = self.client.get(url)
+        self.assertNotContains(response, 'VERB_UPLOADED_IMAGE.%d.%d' % (self.user.pk, image.pk))
+        # Still contains action for image2 tho
+        self.assertContains(response, 'VERB_UPLOADED_IMAGE.%d.%d' % (self.user.pk, image2.pk))
+        self.assertContains(response, 'VERB_UPLOADED_REVISION.%d.%d' % (self.user.pk, revision.pk))
 
-        response = self.client.post(url('followed'), follow = True)
-        self.assertContains(response, '<h4><i class="icon-eye-open"></i><span class="hidden-phone">Recent images from people you follow</span></h4>', html = True)
-
-        # Following two are unsupported with sqlite
-
-        #response = self.client.post(url('liked'), follow = True)
-        #self.assertContains(response, '<h4><i class="icon-thumbs-up"></i><span class="hidden-phone">Recently liked</span></h4>', html = True)
-
-        #response = self.client.post(url('bookmarked'), follow = True)
-        #self.assertContains(response, '<h4><i class="icon-bookmark"></i><span class="hidden-phone">Recently bookmarked</span></h4>', html = True)
-
-        response = self.client.post(url('fits'), follow = True)
-        self.assertContains(response, '<h4><i class="icon-archive"></i><span class="hidden-phone">Recent images with link to TIFF/FITS</span></h4>', html = True)
-
-        self.client.logout()
+        # Uploading another revision removes the previous revisions' stream actions
+        response, revision2 = test_utils_upload_revision(self, image)
+        response = self.client.get(url)
+        self.assertNotContains(response, 'VERB_UPLOADED_REVISION.%d.%d' % (self.user.pk, revision.pk))
+        self.assertContains(response, 'VERB_UPLOADED_REVISION.%d.%d' % (self.user.pk, revision2.pk))

@@ -19,6 +19,11 @@ from astrobin.gear import *
 register = Library()
 
 
+@register.filter
+def startswith(x, y):
+    return x.startswith(y)
+
+
 @register.simple_tag
 def current(request, pattern):
     import re

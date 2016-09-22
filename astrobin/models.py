@@ -892,16 +892,53 @@ class Image(HasSolutionMixin, models.Model):
     def likes(self):
         return ToggleProperty.objects.toggleproperties_for_object("like", self).count()
 
+    def liked_by(self):
+        user_pks = ToggleProperty.objects\
+            .toggleproperties_for_object("like", self)\
+            .select_related('user')\
+            .values_list('user', flat = True)
+        return User.objects.filter(pk__in = user_pks)
+
     def bookmarks(self):
         return ToggleProperty.objects.toggleproperties_for_object("bookmark", self).count()
 
-    def commentsNumber(self):
+    def bookmarked_by(self):
+        user_pks = ToggleProperty.objects\
+            .toggleproperties_for_object("bookmark", self)\
+            .select_related('user')\
+            .values_list('user', flat = True)
+        return User.objects.filter(pk__in = user_pks)
+
+    def comments(self):
         from nested_comments.models import NestedComment
         return NestedComment.objects.filter(
             deleted = False,
             content_type__app_label = 'astrobin',
             content_type__model = 'image',
             object_id = self.id).count()
+
+    def comments_by_distinct_users(self):
+        from nested_comments.models import NestedComment
+        user_pks = NestedComment.objects.filter(
+            deleted = False,
+            content_type__app_label = 'astrobin',
+            content_type__model = 'image',
+            object_id = self.id)\
+                .select_related('author')\
+                .values_list('author', flat = True)\
+                .distinct()
+        return len(user_pks)
+
+    def commented_by(self):
+        from nested_comments.models import NestedComment
+        user_pks = NestedComment.objects.filter(
+            deleted = False,
+            content_type__app_label = 'astrobin',
+            content_type__model = 'image',
+            object_id = self.id)\
+                .select_related('author')\
+                .values_list('author', flat = True)
+        return User.objects.filter(pk__in = user_pks)
 
     def get_thumbnail_field(self, revision_label):
         # We default to the original upload
@@ -1730,9 +1767,17 @@ class UserProfile(models.Model):
     accessories = models.ManyToManyField(Accessory, null=True, blank=True, verbose_name=_("Accessories"), related_name='accessories')
 
     default_frontpage_section = models.CharField(
+        choices = (
+            ('global', _("Global stream")),
+            ('personal', _("Personal stream")),
+            ('recent', _("All uploaded images")),
+            ('followed', _("All images uploaded by people you follow")),
+        ),
+        default = 'global',
         max_length = 16,
-        editable = False,
-        default = 'personal')
+        null = False,
+        verbose_name = _("Default front page view"),
+    )
 
     default_gallery_sorting = models.SmallIntegerField(
         choices = (

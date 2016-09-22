@@ -32,8 +32,8 @@ from astrobin.views import (
     moderation as moderation_views,
     collections as collections_views,
     iotd as iotd_views,
-    home as home_views,
-    wall as wall_views,)
+    wall as wall_views,
+)
 from astrobin.api import (
     ImageOfTheDayResource,
     ImageResource,
@@ -130,7 +130,6 @@ urlpatterns = patterns('',
     ###########################################################################
 
     url(r'^$', views.index, name='index'),
-    url(r'^set-default-frontpage-section/(?P<section>\w+)/$', home_views.HomeSetDefaultSectionView.as_view(), name = 'set_default_frontpage_section'),
 
     ###########################################################################
     ### IMAGE VIEWS                                                         ###

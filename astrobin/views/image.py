@@ -449,7 +449,7 @@ class ImageDetailView(DetailView):
         if self.request.user.is_authenticated():
             user_scores_index = self.request.user.userprofile.get_scores()['user_scores_index']
         min_index_to_like = 1.00
-        user_can_like = (
+        user_can_like = self.request.user.is_superuser or (
             self.request.user != image.user and
             user_scores_index >= min_index_to_like or
             not is_free(self.request.user))
@@ -796,8 +796,7 @@ class ImagePromoteView(LoginRequiredMixin, UpdateView):
                     'object_url': settings.ASTROBIN_BASE_URL + image.get_absolute_url()
                 })
 
-            verb = "uploaded a new image"
-            act.send(image.user, verb = verb, action_object = image)
+            act.send(image.user, verb = 'VERB_UPLOADED_IMAGE', action_object = image)
 
             messages.success(request, _("Image moved to the public area."))
 

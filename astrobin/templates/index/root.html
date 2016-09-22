@@ -65,263 +65,111 @@
     {% else %}<!-- authenticated -->
 
         {% cache 3600 index_iotd request.LANGUAGE_CODE %}
-        {% with image_of_the_day as iotd %}
-        {% if iotd %}
-            <div class="row section">
-                <div class="span10">
+            {% with image_of_the_day as iotd %}
+                {% if iotd %}
                     <div class="image-of-the-day">
-                        <h2 class="hidden-phone">
-                            <i class="icon-trophy"></i>
-                            {% trans "Image of the day" %}!
-                        </h2>
+                        <div class="header">
+                            <h2>
+                                <i class="icon-trophy"></i>
+                                {% trans "Image of the day" %}
+                                <span class="title">
+                                    {{iotd.image.title|truncatechars:50}},
+                                    <a href="{% url 'user_page' iotd.image.user %}">
+                                        {{iotd.image.user.userprofile}}
+                                    </a>
+                                </span>
+                            </h2>
+                        </div>
 
                         {% astrobin_image iotd.image 'iotd' %}
-
-                        <div class="info hidden-phone hidden-tablet">
-                            <h3>{{iotd.image.title|truncatechars:"60"}}</h3>
-                            <span class="by">
-                                {% trans "by" %} <a rel="popover" class="user-popover" data-load="{% url 'user_popover_ajax' iotd.image.user %}"
-                                      href="{% url 'user_page' iotd.image.user %}">{{iotd.image.user.userprofile}}</a>
-                            </span>
-                            {% for i in gear_list %}
-                                {% if i.1 %}
-                                <p>
-                                    <strong>{% trans i.0 %}:</strong>
-                                    {% for g in i.1 %}
-                                        <a rel="popover" class="gear-popover" data-load="{% url 'gear_popover_ajax' g.id %}" href="{% url 'gear_page' g.id g.slug %}">{{g}}</a>{% if not forloop.last %},&nbsp;{% endif %}
-                                    {% endfor %}
-                                </p>
-                                {% endif %}
-                            {% endfor %}
-                        </div>
-
-                        {% if iotd.runnerup_1 or iotd.runnerup_2 %}
-                        <div class="runner-ups hidden-phone hidden-tablet">
-                            <h3>{% trans "Runners-up" %}:</h3>
-                            {% if iotd.runnerup_1 %}
-                                <div class="runner-up">
-                                    {% astrobin_image iotd.runnerup_1 'thumb' %}
-                                </div>
-                            {% endif %}
-
-                            {% if iotd.runnerup_2 %}
-                                <div class="runner-up">
-                                    {% astrobin_image iotd.runnerup_2 'thumb' %}
-                                </div>
-                            {% endif %}
-                        </div>
-                        {% endif %}
                     </div>
-                </div>
-
-                <div class="span2 hidden-phone hidden-tablet">
-                    <a class="btn btn-primary btn-upload" href="{% url 'image_upload' %}">
-                        <div style="font-size: 92px;"><i class="icon-upload-alt icon-white"></i></div>
-                        <span class="text">
-                            {% trans "Upload" %}
-                        </span>
-                    </a>
-                </div>
-            </div>
-        {% endif %}
-        {% endwith %}
+                {% endif %} <!-- iotd -->
+            {% endwith %}
         {% endcache %}
 
-        <div class="row">
-            <div class="span9"> <!-- activity stream -->
-                <div class="subtle-container simple-container">
-                    <div class="header">
-                        <h4>
-                            {% ifequal section 'personal' %}
-                                <i class="icon-group"></i>
-                                <span class="hidden-phone">{% trans "Your activity stream" %}</span>
-                            {% endifequal %}
 
-                            {% ifequal section 'global' %}
-                                <i class="icon-globe"></i>
-                                <span class="hidden-phone">{% trans "Global activity stream" %}</span>
-                            {% endifequal %}
-
-                            {% ifequal section 'images' %}
-                                <i class="icon-time"></i>
-                                <span class="hidden-phone">{% trans "Recently uploaded" %}</span>
-                            {% endifequal %}
-
-                            {% ifequal section 'followed' %}
-                                <i class="icon-eye-open"></i>
-                                <span class="hidden-phone">{% trans "Recent images from people you follow" %}</span>
-                            {% endifequal %}
-
-                            {% ifequal section 'liked' %}
-                                <i class="icon-thumbs-up"></i>
-                                <span class="hidden-phone">{% trans "Recently liked" %}</span>
-                            {% endifequal %}
-
-                            {% ifequal section 'bookmarked' %}
-                                <i class="icon-bookmark"></i>
-                                <span class="hidden-phone">{% trans "Recently bookmarked" %}</span>
-                            {% endifequal %}
-
-                            {% ifequal section 'fits' %}
-                                <i class="icon-archive"></i>
-                                <span class="hidden-phone">{% trans "Recent images with link to TIFF/FITS" %}</span>
-                            {% endifequal %}
-                        </h4>
-
-                        <span class="pull-right">
-
-                            {% if section != 'personal' %}
-                                <a href="{% url 'index' %}{% query_string "s=personal" "" %}"
-                                   class="index-section-link"
-                                   rel="tooltip"
-                                   title="{% trans "Personal" %}">
-                            {% endif %}
-                                <i class="icon-group"></i>
-                            {% if section != 'personal' %}
-                                </a>
-                            {% endif %}
-
-                            {% if section != 'global' %}
-                                <a href="{% url 'index' %}{% query_string "s=global" "" %}"
-                                   class="index-section-link"
-                                   rel="tooltip"
-                                   title="{% trans "Global" %}">
-                            {% endif %}
-                                <i class="icon-globe"></i>
-                            {% if section != 'global' %}
-                                </a>
-                            {% endif %}
-
-                            <span class="horizontal-separator">/</span>
-
-                            {% if section != 'images' %}
-                                <a href="{% url 'index' %}{% query_string "s=images" "" %}"
-                                   class="index-section-link"
-                                   rel="tooltip"
-                                   title="{% trans "Recent images" %}">
-                            {% endif %}
-                                <i class="icon-time"></i>
-                            {% if section != 'images' %}
-                                </a>
-                            {% endif %}
-
-                            {% if section != 'followed' %}
-                                <a href="{% url 'index' %}{% query_string "s=followed" "" %}"
-                                   class="index-section-link"
-                                   rel="tooltip"
-                                   title="{% trans "Recent images from people you follow" %}">
-                            {% endif %}
-                                <i class="icon-plus-sign"></i>
-                            {% if section != 'followed' %}
-                                </a>
-                            {% endif %}
-
-                            {% if section != 'liked' %}
-                                <a href="{% url 'index' %}{% query_string "s=liked" "" %}"
-                                   class="index-section-link"
-                                   rel="tooltip"
-                                   title="{% trans "Recently liked" %}">
-                            {% endif %}
-                                <i class="icon-thumbs-up"></i>
-                            {% if section != 'liked' %}
-                                </a>
-                            {% endif %}
-
-                            {% if section != 'bookmarked' %}
-                                <a href="{% url 'index' %}{% query_string "s=bookmarked" "" %}"
-                                   class="index-section-link"
-                                   rel="tooltip"
-                                   title="{% trans "Recently bookmarked" %}">
-                            {% endif %}
-                                <i class="icon-bookmark"></i>
-                            {% if section != 'bookmarked' %}
-                                </a>
-                            {% endif %}
-
-                            {% if section != 'fits' %}
-                                <a href="{% url 'index' %}{% query_string "s=fits" "" %}"
-                                   class="index-section-link"
-                                   rel="tooltip"
-                                   title="{% trans "Recent images with link to TIFF/FITS" %}">
-                            {% endif %}
-                                <i class="icon-archive"></i>
-                            {% if section != 'fits' %}
-                                </a>
-                            {% endif %}
-
-                            {% if request.user.userprofile.default_frontpage_section != section %}
-                                <span class="horizontal-separator">/</span>
-                                <form class="index-section-form" method="post" action="{% url 'set_default_frontpage_section' section %}">{% csrf_token %}
-                                    <input type="submit"
-                                        rel="tooltip"
-                                        title="{% trans "Set current front page section as default" %}"
-                                        value="&#10003;"/>
-                                </form>
-                            {% endif %}
-                        </span>
+        <div class="subtle-container simple-container">
+            <div class="header">
+                <h4>
+                    {% trans "Latest from the forums" %}
+                    <div class="actions">
+                        <a href="{% url 'pybb:topic_latest' %}">
+                            {% trans "More" %}
+                        </a>
                     </div>
+                </h4>
+            </div>
+            {% pybb_get_latest_topics cnt=5 as topic_list %}
+            <table class="table table-striped topic-list index-recent-topics">
+                <tbody>
+                    {% for topic in topic_list|pybb_topic_unread:request.user %}
+                        <tr class="topic-row{% if topic.on_moderation %} on-moderation{% endif %}">
+                            <td class="topic-state{% if topic.unread %} topic-unread{% endif %}">
+                                <div class="state-indicator"></div>
+                            </td>
+                            <td class="topic-name{% if topic.unread %} topic-unread{% endif %}">
+                                <a href="{{topic.get_absolute_url}}?first-unread=1">{{topic.name|truncatewords:10}}</a>
+                            </td>
+                            <td class="topic-author hidden-phone hidden-tablet">
+                                <a href="{% url 'user_page' topic.user.username %}">
+                                    {{topic.user.userprofile}}
+                                </a>
+                            </td>
+                            <td class="topic-last-post hidden-phone hidden-tablet">
+                                {% if topic.updated %}
+                                    {% pybb_time topic.updated %}
+                                {% endif %}
+                            </td>
+                        </tr>
+                    {% endfor %}
+                </tbody>
+            </table>
+        </div>
 
-                    <div class="activity-actions">
-                        {% if section == 'personal' or section == 'global' %}
-                            {% if section == 'personal' and not has_followed_users %}
-                                <div class="alert alert-info">
-                                    <h4 class="alert-heading">
-                                        <i class="icon-info-sign"></i> {% trans "Hey!" %}
-                                    </h4>
+        <div class="subtle-container simple-container">
+            <div class="header">
+                <h4>
+                    {% if section == 'global' %}
+                        {% trans "Global stream" %}
+                    {% endif %}
 
-                                    {% blocktrans %}To make your personal stream more interesting, you should follow some people!{% endblocktrans %}
-                                </div>
-                            {% endif %}
+                    {% if section == 'personal' %}
+                        {% trans "Personal stream" %}
+                    {% endif %}
 
-                            <div class="js-masonry endless" data-masonry-options='{"itemSelector":".action"}'>
-                                {% include 'index/stream_page.html' %}
-                            </div>
-                        {% endif %}
+                    {% if section == 'recent' %}
+                        {% trans "Recent images" %}
+                    {% endif %}
 
-                        {% if section == 'images' or section == 'followed' or section == 'liked' or section == 'bookmarked' or section == 'fits'%}
-                            <div id="recent-images-loggedin" class="endless">
-                                <ul class="thumbnails astrobin-thumbnails">
-                                    {% include 'index/recent_images_page.html' %}
-                                </ul>
-                            </div>
-                        {% endif %}
+                    {% if section == 'followed' %}
+                        {% trans "Recent from your followed users" %}
+                    {% endif %}
+
+                    <div class="actions">
+                        <a href="{% url 'profile_edit_preferences' %}">
+                            <i class="icon-cog"></i>
+                        </a>
+                    </div>
+                </h4>
+            </div>
+
+            {% if section == 'global' or section == 'personal' %}
+                <div class="activity-actions">
+                    <div class="endless">
+                        {% include 'index/stream_page.html' %}
                     </div> <!-- endless -->
                 </div> <!-- activity stream container -->
-            </div> <!-- span -->
-
-            <div class="span3 hidden-phone hidden-tablet">
-                {% include 'index/ad.html' %}
-
-                <div class="subtle-container simple-container">
-                    <div class="header"><h4><i class="icon-comments"></i>{% trans "Latest from the forums" %}<h4></div>
-                    {% pybb_get_latest_topics cnt=15 as topics %}
-                    <table class="table table-condensed topic-list">
-                    <tbody>
-                    {% for topic in topics|pybb_topic_unread:request.user %}
-                    <tr class="topic-row{% if topic.on_moderation %} on-moderation{% endif %}">
-                        <td class="topic-state{% if topic.unread %} topic-unread{% endif %}">
-                            <div class="state-indicator"></div>
-                        </td>
-                        <td class="topic-name{% if topic.unread %} topic-unread{% endif %}">
-                            <a href="{{topic.get_absolute_url}}?first-unread=1">{{topic.name|truncatewords:10}}</a>
-                        </td>
-                    </tr>
-                    {% endfor %}
-                    </tbody>
-                    </table>
-                </div>
-
-                <div class="subtle-container simple-container">
-                    <div class="header"><h4><i class="icon-suitcase"></i>{% trans "Affiliates" %}<h4></div>
-                    <div id="commercial-products">
-                        {% cache 3600 index_recent_commercial_gear request.LANGUAGE_CODE %}
-                            {% image_list recent_commercial_gear 'thumb' %}
-                        {% endcache %}
-                        <a class="your-product-here" href="/contact/">{% trans "Do you want your product here?" %}</a>
+            {% else %}
+                <div class="recent-images">
+                    <div class="endless">
+                        <ul class="thumbnails astrobin-thumbnails">
+                            {% include 'index/recent_images_page.html' %}
+                        </ul>
                     </div>
                 </div>
-            </div>
-        </div> <!-- row -->
+            {% endif %}
+        </div>
+
     {% endif %} {# authenticated #}
 </div>
 {% endblock %}
@@ -336,28 +184,13 @@
     <script src="{{STATIC_URL}}endless_pagination/js/endless-pagination.js"></script>
     <script type="text/javascript">
         $(document).ready(function() {
-            var layoutMasonry = function() {
-                var masonry = $('.endless').data('masonry');
-                if (masonry !== undefined) {
-                    masonry.reloadItems();
-                    masonry.layout();
-                }
-            };
-
             $('.endless').endlessPaginate({
                 paginateOnScroll: true,
                 paginateOnScrollMargin: 300,
                 onCompleted: function(context, fragment) {
-                    setTimeout(function() {
-                        layoutMasonry();
-                    }, 250);
                     window.loadAstroBinImages(fragment);
                 }
             });
-
-            setTimeout(function() {
-                layoutMasonry();
-            }, 500);
 
             astrobin_common.setup_gear_popovers();
             astrobin_common.setup_user_popovers();

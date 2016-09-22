@@ -1,155 +1,294 @@
-{% load astrobin_apps_donations_tags %}
+{% load astrobin_apps_premium_tags %}
 {% load astrobin_apps_images_tags %}
 {% load avatar_tags %}
-{% load cache %}
 {% load i18n %}
+{% load tags %}
 
-{% if action.action_object_content_type.model == 'image' and action.action_object.is_wip %}
-    <!-- Skipping WIP image. -->
-{% else %}
+{% if action.verb|startswith:"VERB_" %}
 
-{% get_current_language as LANGUAGE_CODE %}
-{% cache 604800 action action.id LANGUAGE_CODE %}
-<div class="action">
-    <div class="action-inner">
-        {% if action.actor.get_absolute_url %}
-            <div class="avatar">
-                <a href="{{action.actor.get_absolute_url}}">{% avatar action.actor 64 %}</a>
-                {% donor_badge action.actor 'small' %}
-            </div>
-        {% endif %}
+<div class="action"
+     id="{{action.verb}}.{{action.actor.pk}}.{{action.action_object.pk}}{% if action.target %}.{{action.target.pk}}{% endif %}">
 
-        <div class="action-type">
-            {% if action.verb == 'uploaded a new image' or action.verb == 'uploaded a new revision of' %}
-                <i class="icon-plus"></i>
-            {% endif %}
-
-            {% if action.verb == 'commented on image' or actoin.verb == 'commented on gear' %}
-                <i class="icon-comment"></i>
-            {% endif %}
-
-            {% if action.verb == 'bookmarked' %}
-                <i class="icon-bookmark"></i>
-            {% endif %}
-
-            {% if action.verb == 'likes' %}
-                <i class="icon-thumbs-up"></i>
-            {% endif %}
-        </div>
-
-        <div class="content">
-            <div class="object">
-                {% ifequal action.action_object_content_type.model 'imagerevision' %}
-                    <div class="image">
-                        {% astrobin_image action.action_object.image 'act_object' action.action_object.label %}
-                        </a>
+    {% if action.verb == 'VERB_UPLOADED_IMAGE' %}
+        {% with image=action.action_object user=action.actor %}
+            {% include 'actstream/_action_avatar.html' %}
+            <div class="action-object">
+                <div class="verb">
+                    <div class="verb-inner">
+                        {% url 'user_page' user.username as user_page %}
+                        {% blocktrans with user_page as user_page and user.userprofile as user and image.title as title %}
+                            <a href="{{user_page}}">{{user}}</a> uploaded a new image.
+                        {% endblocktrans %}
                     </div>
-                {% else %}
-                    {% if action.target_content_type.model == 'image' %}
-                        <div class="image">
-                            {% astrobin_image action.target 'act_target' %}
-                        </div>
-                    {% endif %}
-
-                    {% if action.target_content_type.model == 'imagerevision' %}
-                        <div class="image">
-                            {% astrobin_image action.target.image 'act_target' action.target.label %}
-                        </div>
-                    {% endif %}
-
-                {% endifequal %}
-
-                {% ifequal action.action_object_content_type.model 'image' %}
-                    <div class="image">
-                        {% astrobin_image action.action_object 'act_object' %}
-                    </div>
-                {% endifequal %}
-
+                </div>
+                {% astrobin_image image 'regular' %}
+                {% include 'actstream/_action_image_title.html' %}
             </div>
+        {% endwith %}
+    {% endif %}
 
-            {% if action.actor.get_absolute_url %}
-                <a rel="popover" class="user-popover" data-load="{% url 'user_popover_ajax' action.actor %}"
-                   href="{{action.actor.get_absolute_url}}">{{action.actor.userprofile}}</a>
-            {% else %}
-                <a href="{{action.actor_url}}">{{action.actor.userprofile}}</a>
-            {% endif %}
+    {% if action.verb == 'VERB_UPLOADED_REVISION' %}
+        {% with revision=action.action_object image=action.action_object.image user=action.actor %}
+            {% include 'actstream/_action_avatar.html' %}
+            <div class="action-object">
+                <div class="verb">
+                    <div class="verb-inner">
+                        {% url 'user_page' user.username as user_page %}
+                        {% blocktrans with user_page as user_page and user.userprofile as user and image.title as title %}
+                            <a href="{{user_page}}">{{user}}</a> uploaded a new image revision.
+                        {% endblocktrans %}
+                    </div>
+                </div>
+                {% astrobin_image image 'act_object' revision.label %}
+                {% include 'actstream/_action_image_title.html' %}
+            </div>
+        {% endwith %}
+    {% endif %}
 
-            {% trans action.verb %}:
-
-            {% if action.target %}
-                {% if action.target.get_absolute_url %}
-                    <a href="{{action.target.get_absolute_url}}">{{action.target}}</a>
-                {% else %}
-                    <a href="{{action.target_url}}">{{action.target}}</a>
-                {% endif %}
-
-                {% if action.target_content_type.model == 'image' and action.target.user != action.actor %}
-                    {% trans "by" %}
-                    <a href="{{action.target.user.get_absolute_url}}">
-                        {{action.target.user.userprofile}}
-                    </a>
-                {% endif %}
-
-                {% if action.target_content_type.model == 'imagerevision' and action.target.image.user != action.actor %}
-                    {% trans "by" %}
-                    <a href="{{action.target.image.user.get_absolute_url}}">
-                        {{action.target.image.user.userprofile}}
-                    </a>
-                {% endif %}
-
-            {% else %}
-
-                {% if action.action_object %}
-                    {% if action.action_object.get_absolute_url %}
-                        <a href="{{action.action_object.get_absolute_url}}">{{action.action_object}}</a>
-                    {% else %}
-                        <a href="{{action.action_object_url}}">{{action.action_object}}</a>
-                    {% endif %}
-
-                    {% if action.action_object_content_type.model == 'image' and action.action_object.user != action.actor %}
-                        {% trans "by" %}
-                        <a href="{{action.action_object.user.get_absolute_url}}">
-                            {{action.action_object.user.userprofile}}
-                        </a>
-                    {% endif %}
-
-                    {% if action.action_object_content_type.model == 'imagerevision' and action.action_object.image.user != action.actor %}
-                        {% trans "by" %}
-                        <a href="{{action.action_object.image.user.get_absolute_url}}">
-                            {{action.action_object.image.user.userprofile}}
-                        </a>
-                    {% endif %}
-                {% endif %}
-
-            {% endif %}
-
-            {% if action.action_object %}
-                <div class="object">
-                    {% ifequal action.action_object_content_type.model 'nestedcomment' %}
-                        <div class="comment">
-                            <p>
-                                {{action.action_object.text}}
-                                <a href="{{action.action_object.get_absolute_url}}"><i class="icon-link"></i></a>
-                            </p>
-                        </div>
-                    {% endifequal %}
-
-                    {% ifequal action.action_object_content_type.model 'revieweditem' %}
-                        <div class="comment">
-                            <p>
-                                {{action.action_object.content}}
-                                <a href="{{action.action_object.get_absolute_url}}"><i class="icon-link"></i></a>
-                            </p>
-                        </div>
-                    {% endifequal %}
+    {% if action.verb == 'VERB_LIKED_IMAGE' %}
+        {% with image=action.action_object user=action.actor %}
+            {% include 'actstream/_action_avatar.html' %}
+            {% if image.likes > 1 %}
+                <div class="other-avatars">
+                    {% for other in image.liked_by|slice:":14" %}
+                        {% if other != user %}
+                            <a href="{% url 'user_page' other.username %}">
+                                {% avatar other 24 %}
+                            </a>
+                        {% endif %}
+                    {% endfor %}
                 </div>
             {% endif %}
-
-            <div class="when">
-                {{action.timestamp|timesince}} {% trans "ago" %}
+            <div class="action-object">
+                <div class="verb">
+                    <div class="verb-inner">
+                        {% url 'user_page' user.username as user_page %}
+                        {% if image.likes > 1 %}
+                            {% blocktrans with user_page as user_page and user.userprofile as user and image.title as title and image.likes|add:"-1" as count %}
+                                <a href="{{user_page}}">{{user}}</a> and {{count}} others like this image.
+                            {% endblocktrans %}
+                        {% else %}
+                            {% blocktrans with user_page as user_page and user.userprofile as user and image.title as title %}
+                                <a href="{{user_page}}">{{user}}</a> likes this image.
+                            {% endblocktrans %}
+                        {% endif %}
+                    </div>
+                </div>
+                {% astrobin_image image 'regular' %}
+                {% include 'actstream/_action_image_title.html' %}
             </div>
-        </div>
-    </div>
+        {% endwith %}
+    {% endif %}
+
+    {% if action.verb == 'VERB_BOOKMARKED_IMAGE' %}
+        {% with image=action.action_object user=action.actor %}
+            {% include 'actstream/_action_avatar.html' %}
+            {% if image.bookmarks > 1 %}
+                <div class="other-avatars">
+                    {% for other in image.bookmarked_by|slice:":14" %}
+                        {% if other != user %}
+                            <a href="{% url 'user_page' other.username %}">
+                                {% avatar other 24 %}
+                            </a>
+                        {% endif %}
+                    {% endfor %}
+                </div>
+            {% endif %}
+            <div class="action-object">
+                <div class="verb">
+                    <div class="verb-inner">
+                        {% url 'user_page' user.username as user_page %}
+                        {% if image.bookmarks > 1 %}
+                            {% blocktrans with user_page as user_page and user.userprofile as user and image.title as title and image.bookmarks|add:"-1" as count %}
+                                <a href="{{user_page}}">{{user}}</a> and {{count}} others bookmarked this image.
+                            {% endblocktrans %}
+                        {% else %}
+                            {% blocktrans with user_page as user_page and user.userprofile as user and image.title as title %}
+                                <a href="{{user_page}}">{{user}}</a> bookmarked this image.
+                            {% endblocktrans %}
+                        {% endif %}
+                    </div>
+                </div>
+                {% astrobin_image image 'regular' %}
+                {% include 'actstream/_action_image_title.html' %}
+            </div>
+        {% endwith %}
+    {% endif %}
+
+    {% if action.verb == 'VERB_COMMENTED_IMAGE' %}
+        {% with comment=action.action_object distinct_commenters=action.target.comments_by_distinct_users image=action.target user=action.actor %}
+            {% include 'actstream/_action_avatar.html' %}
+            {% if distinct_commenters > 1 %}
+                <div class="other-avatars">
+                    {% for other in image.commented_by|slice:":14" %}
+                        {% if other != user %}
+                            <a href="{% url 'user_page' other.username %}">
+                                {% avatar other 24 %}
+                            </a>
+                        {% endif %}
+                    {% endfor %}
+                </div>
+            {% endif %}
+            <div class="action-object">
+                <div class="verb">
+                    <div class="verb-inner">
+                        {% url 'user_page' user.username as user_page %}
+                        {% if distinct_commenters > 1 %}
+                            {% blocktrans with user_page as user_page and user.userprofile as user and image.title as title and distinct_commenters|add:"-1" as count %}
+                                <a href="{{user_page}}">{{user}}</a> and {{count}} others commented this image.
+                            {% endblocktrans %}
+                        {% else %}
+                            {% blocktrans with user_page as user_page and user.userprofile as user and image.title as title %}
+                                <a href="{{user_page}}">{{user}}</a> commented this image.
+                            {% endblocktrans %}
+                        {% endif %}
+                    </div>
+                </div>
+                {% astrobin_image image 'regular' %}
+                <div class="title-and-description hidden-phone hidden-tablet">
+                    <div class="inner">
+                        <div class="title">
+                            {{image.title}}, 
+                            <a href="{% url 'user_page' image.user.username %}">
+                                {{image.user.userprofile}}
+                            </a>
+                        </div>
+                        <div class="description">
+                            "{{comment.text}}"
+                        </div>
+                    </div>
+                </div>
+            </div>
+        {% endwith %}
+    {% endif %}
+
+    {% if action.verb == 'VERB_CREATED_DATA_POOL' %}
+        {% with pool=action.action_object user=action.actor %}
+            {% include 'actstream/_action_avatar.html' %}
+            <div class="action-object">
+                <div class="verb">
+                    <div class="verb-inner">
+                        {% url 'user_page' user.username as user_page %}
+                        {% blocktrans with user_page as user_page and user.userprofile as user and image.title as title %}
+                            <a href="{{user_page}}">{{user}}</a> created a new public data pool.
+                        {% endblocktrans %}
+                    </div>
+                </div>
+                <a href="{% url 'rawdata.publicdatapool_detail' pool.pk %}">
+                    <img src="{{STATIC_URL}}/images/actstream-rawdata-action.png" alt="RawData action" />
+                </a>
+                <div class="title-and-description hidden-phone hidden-tablet">
+                    <div class="inner">
+                        <div class="title">{{pool.name}}</div>
+                        <div class="description">{{pool.description}}</div>
+                    </div>
+                </div>
+            </div>
+        {% endwith %}
+    {% endif %}
+
+    {% if action.verb == 'VERB_ADDED_DATA_TO_DATA_POOL' %}
+        {% with pool=action.target user=action.actor %}
+            {% include 'actstream/_action_avatar.html' %}
+            <div class="action-object">
+                <div class="verb">
+                    <div class="verb-inner">
+                        {% url 'user_page' user.username as user_page %}
+                        {% blocktrans with user_page as user_page and user.userprofile as user and image.title as title %}
+                            <a href="{{user_page}}">{{user}}</a> added data to a data pool.
+                        {% endblocktrans %}
+                    </div>
+                </div>
+                <a href="{% url 'rawdata.publicdatapool_detail' pool.pk %}">
+                    <img src="{{STATIC_URL}}/images/actstream-rawdata-action.png" alt="RawData action" />
+                </a>
+                <div class="title-and-description hidden-phone hidden-tablet">
+                    <div class="inner">
+                        <div class="title">{{pool.name}}</div>
+                        <div class="description">{{pool.description}}</div>
+                    </div>
+                </div>
+            </div>
+        {% endwith %}
+    {% endif %}
+
+    {% if action.verb == 'VERB_ADDED_IMAGE_TO_DATA_POOL' %}
+        {% with pool=action.target image=action.action_object user=action.actor %}
+            {% include 'actstream/_action_avatar.html' %}
+            <div class="action-object">
+                <div class="verb">
+                    <div class="verb-inner">
+                        {% url 'user_page' user.username as user_page %}
+                        {% blocktrans with user_page as user_page and user.userprofile as user and image.title as title %}
+                            <a href="{{user_page}}">{{user}}</a> added a processed image to a data pool.
+                        {% endblocktrans %}
+                    </div>
+                </div>
+                {% astrobin_image image 'regular' %}
+                <div class="title-and-description hidden-phone hidden-tablet">
+                    <div class="inner">
+                        <div class="title">
+                            <a href="{% url 'rawdata.publicdatapool_detail' pool.pk %}">
+                                {{pool.name}}
+                            </a>
+                        </div>
+                        <div class="description">{{image.title}}</div>
+                    </div>
+                </div>
+            </div>
+        {% endwith %}
+    {% endif %}
+
+    {% if action.verb == 'VERB_CREATED_PUBLIC_GROUP' %}
+        {% with group=action.action_object user=action.actor %}
+            {% include 'actstream/_action_avatar.html' %}
+            <div class="action-object">
+                <div class="verb">
+                    <div class="verb-inner">
+                        {% url 'user_page' user.username as user_page %}
+                        {% blocktrans with user_page as user_page and user.userprofile as user and image.title as title %}
+                            <a href="{{user_page}}">{{user}}</a> created a new public group.
+                        {% endblocktrans %}
+                    </div>
+                </div>
+                <a href="{% url 'group_detail' group.pk %}">
+                    <img src="{{STATIC_URL}}/images/actstream-group-action.png" alt="Group action" />
+                </a>
+                <div class="title-and-description hidden-phone hidden-tablet">
+                    <div class="inner">
+                        <div class="title">{{group.name}}</div>
+                        <div class="description">{{group.description}}</div>
+                    </div>
+                </div>
+            </div>
+        {% endwith %}
+    {% endif %}
+
+    {% if action.verb == 'VERB_JOINED_GROUP' %}
+        {% with group=action.action_object user=action.actor %}
+            {% include 'actstream/_action_avatar.html' %}
+            <div class="action-object">
+                <div class="verb">
+                    <div class="verb-inner">
+                        {% url 'user_page' user.username as user_page %}
+                        {% blocktrans with user_page as user_page and user.userprofile as user and image.title as title %}
+                            <a href="{{user_page}}">{{user}}</a> joined a group.
+                        {% endblocktrans %}
+                    </div>
+                </div>
+                <a href="{% url 'group_detail' group.pk %}">
+                    <img src="{{STATIC_URL}}/images/actstream-group-action.png" alt="Group action" />
+                </a>
+                <div class="title-and-description hidden-phone hidden-tablet">
+                    <div class="inner">
+                        <div class="title">{{group.name}}</div>
+                        <div class="description">{{group.description}}</div>
+                    </div>
+                </div>
+            </div>
+        {% endwith %}
+    {% endif %}
+
 </div>
-{% endcache %}
-{% endif %}
+
+{% endif %} {# action strts with VERB_ #}

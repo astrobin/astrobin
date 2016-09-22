@@ -82,6 +82,49 @@
     width: 140px;
     height: 140px;
   }
+  .group-list td.group-members,
+  .group-list th.group-members,
+  .group-list td.group-images,
+  .group-list th.group-images,
+  .group-list td.group-forum-posts,
+  .group-list th.group-forum-posts,
+  .group-list td.member-images-count,
+  .group-list th.member-images-count,
+  .group-list td.member-posts-count,
+  .group-list th.member-posts-count {
+    width: 15%;
+  }
+  .image-of-the-day .header h2 {
+    font-size: 20px;
+  }
+  .image-of-the-day .header .title {
+    display: none;
+  }
+  .activity-actions {
+    text-align: center;
+  }
+  .activity-actions .action {
+    text-align: left;
+  }
+  .activity-actions .action .avatar {
+    float: none;
+    position: absolute;
+    top: 4px;
+    left: 4px;
+    z-index: 1;
+  }
+  .activity-actions .action .action-object {
+    float: none;
+    width: 100%;
+  }
+  .activity-actions .action .action-object .verb {
+    top: initial;
+    bottom: 0;
+    width: 100%;
+  }
+  .activity-actions .action .action-object .verb .verb-inner {
+    padding-left: 12px;
+  }
 }
 @media screen and (max-width: 767px) {
   body,
@@ -184,5 +227,25 @@
   }
   .group-description {
     padding: 0 12px;
+  }
+  .image-of-the-day {
+    margin: 0;
+  }
+  .image-of-the-day .header {
+    border-radius: 0;
+    position: initial;
+  }
+  .image-of-the-day .header h2 {
+    font-size: 14px;
+    padding: 0;
+  }
+  .image-of-the-day .header .title {
+    display: none;
+  }
+  .image-of-the-day .astrobin-image-container img {
+    border-radius: 0;
+  }
+  .subtle-container {
+    padding: 0;
   }
 }

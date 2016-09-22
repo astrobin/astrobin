@@ -17,7 +17,7 @@ ALLOWED_HOSTS = ['*']
 TEMPLATE_DEBUG = DEBUG
 MAINTENANCE_MODE = False
 READONLY_MODE = False
-MEDIA_VERSION = '150'
+MEDIA_VERSION = '151'
 LONGPOLL_ENABLED = False
 ADS_ENABLED = True
 DONATIONS_ENABLED = False
@@ -243,7 +243,6 @@ INSTALLED_APPS = (
     'registration',
     'haystack',
     'notification',
-    'debug_toolbar',
     'persistent_messages',
     'djcelery',
     'gunicorn',
@@ -293,6 +292,8 @@ INSTALLED_APPS = (
     'astrobin_apps_groups',
     'toggleproperties',
 )
+if DEBUG_TOOLBAR:
+    INSTALLED_APPS += ['debug_toolbar',]
 
 LOGIN_REDIRECT_URL = '/'
 ACCOUNT_ACTIVATION_DAYS = 7
@@ -471,7 +472,6 @@ PIPELINE_JS = {
             'js/jquery.stickytableheaders.js',
             'js/jquery.timeago.js',
             'js/respond.src.js',
-            'js/masonry.js',
             'js/dfp.gpt.logger.override.js',
             'js/bootstrap.js',
             'js/astrobin.js',
@@ -494,6 +494,7 @@ ACTSTREAM_SETTINGS = {
         'astrobin.image',
         'astrobin.imagerevision',
         'rawdata.PublicDataPool',
+        'rawdata.RawImage',
         'nested_comments.nestedcomment',
         'reviews.revieweditem',
         'toggleproperties.toggleproperty',
@@ -634,12 +635,11 @@ THUMBNAIL_ALIASES = {
         'histogram': {'size': (274, 120), 'histogram': True},
 
         # IOTD
-        'iotd': {'size': (780, 180), 'crop': 'smart', 'watermark': True},
+        'iotd': {'size': (1000, 380), 'crop': 'smart', 'watermark': True},
         'iotd_candidate': {'size': (960, 0), 'crop': 'smart', 'watermark': False},
 
         # Activity stream
-        'act_target': {'size': (226, 62), 'crop': 'smart', 'quality': 80},
-        'act_object': {'size': (226, 226), 'crop': 'smart', 'quality': 80},
+        'act_object': {'size': (460, 320), 'crop': 'smart', 'quality': 80},
 
         # Duckduckgo
         'duckduckgo': {'size': (250, 200), 'crop': 'smart', 'quality': 80},

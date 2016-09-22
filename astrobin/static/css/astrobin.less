@@ -2977,68 +2977,41 @@ form.avatar-change label.control-label {display: none;}
 
 .image-of-the-day {
     position: relative;
+    margin: -33px -29px 20px -29px;
 
-    h2 {
-        z-index: 1;
-        position: absolute;
-        border: 0;
-        margin: 0;
-        padding: @spacer-small @spacer-medium;
-        background-color: #111;
-        background-color: rgba(0,0,0,0.3);
-        .rounded-corners;
-        top: -10px;
-        left: -16px;
-        -webkit-transform: rotate(-8deg);
-        -moz-transform: rotate(-8deg);
-        -o-transform: rotate(-8deg);
-        -ms-transform: rotate(-8deg);
-        transform: rotate(-8deg);
-
-        -ms-filter: "progid:DXImageTransform.Microsoft.Matrix(M11=0.99026807, M12=0.13917310, M21=-0.13917310, M22=0.99026807,sizingMethod='auto expand')";
-        filter: "progid:DXImageTransform.Microsoft.Matrix(M11=0.99026807, M12=0.13917310, M21=-0.13917310, M22=0.99026807,sizingMethod='auto expand')";
-
-    }
-    img {
-        .rounded-corners(20px);
-        .box-shadow;
-    }
-    .info {
+    .header {
         position: absolute;
         top: 0;
-        right: 0;
-        .rounded-corners-right;
-        background-color: rgba(0,0,0,0.3);
-        padding: @spacer-large;
-        max-width: 260px;
-        height: 158px;
-        overflow: hidden;
-        .opacity(0.05);
+        left: 0;
+        z-index: 1;
+        background-color: #111;
+        background-color: rgba(0,0,0,0.6);
+        width: 100%;
+        .rounded-corners-top;
 
-        -webkit-transition: opacity 0.5s ease;
-        -moz-transition: opacity 0.5s ease;
-        -o-transition: opacity 0.5s ease;
-        -ms-transition: opacity 0.5s ease;
-        transition: opacity 0.5s ease;
+        h2 {
+            font-size: 24px;
+            margin: 0;
+            padding: 15px;
+        }
 
-        h3 {
-            font-size: 0.8em;
-            line-height: 1em;
-            margin: 0;
-        }
-        .by {
-            font-size: 0.7em;
-        }
-        p {
-            font-size: 0.8em;
-            line-height: 1.4em;
-            margin: 0;
+        .title {
+            font-family: 'Noto Sans', sans-serif;
+            font-weight: normal;
+            font-style: italic;
+            font-size: 16px;
+            color: @text-color;
+            float: right;
+
+            a {
+                color: @link-color;
+            }
         }
     }
 
-    &:hover {
-        .info {
-            .opacity(1);
+    .astrobin-image-container {
+        img {
+            .rounded-corners-top;
         }
     }
 }
@@ -3156,125 +3129,134 @@ form.avatar-change label.control-label {display: none;}
     border: 0;
     .rounded-corners(0);
     .no-box-shadow;
+    padding: 0;
 
     .header {
         border: 0;
         background: #202020;
         .rounded-corners(6px);
         margin: 0 0 12px 0;
-        padding: 8px 12px;
+        padding: 14px;
 
         h4 {
-            font-size: 13px;
+            .actions {
+                float: right;
+                font-weight: normal;
+                font-family: @regular_font;
+                font-size: 14px;
+            }
         }
-    }
-
-    #personal-stream, #global-stream {
-        overflow: hidden;
     }
 }
 
-.activity-actions, .blog-stream-entries {
-    .action, .entry {
-        padding: @spacer-medium 0;
+.index-recent-topics {
+    margin-bottom: 20px;
+}
+
+.activity-actions {
+    .action {
         position: relative;
+        margin-bottom: @spacer-large;
+        overflow: hidden;
+        zoom: 1;
+        display: inline-block;
+        width: 460px;
+        height: 320px;
 
-        .action-inner {
-            position: relative;
-            padding: 8px;
-            margin: 8px;
-            background: #303030 url('../images/darker-panel-tile.png');
-            border: 1px solid #191919;
-            .box-shadow-subtle;
-            .rounded-corners(3px);
-            min-height: 64px; // because of the avatar
-
-            img.astrobin-image {
-                border: 1px solid #282828;
-            }
-        }
-
-        &:last-child {
-            border-bottom: 0;
+        &:nth-child(odd) {
+            margin-right: 16px;
         }
 
         .avatar {
-            float: left;
             max-width: 64px;
-            overflow: hidden;
-        }
-
-        .action-type {
             position: absolute;
-            top: 84px;
-            left: 24px;
-            font-size: 32px;
-            .text-shadow-subtle;
+            top: 6px;
+            left: 6px;
+            z-index: 2;
+            .box-shadow;
+            .rounded-corners(20px);
+        }
 
-            i.icon-plus {
-                color: #FFFF9F;
-            }
+        .other-avatars {
+            position: absolute;
+            top: 76px;
+            left: 12.5px;
+            width: 52px;
+            z-index: 2;
+            text-align: center;
 
-            i.icon-thumbs-up {
-                color: firebrick;
-            }
-
-            i.icon-bookmark {
-                color: #ff000;
-            }
-
-            i.icon-comment-alt {
-                color: lightblue;
+            img {
+                .box-shadow;
+                .rounded-corners(12px);
+                display: inline-block;
+                margin-bottom: 4px;
             }
         }
 
-        .content {
-            font-size: 90%;
-            padding-left: 74px;
+        .action-object {
+            .verb {
+                position: absolute;
+                top: 0;
+                z-index: 1;
+                background-color: rgba(0,0,0,0.85);
+                width: 100%;
+                height: 42px;
 
-            p {
-                color: darken(@text-color, 2%);
-
-                a:link, a:visited {
-                    color: darken(@link-color, 2%);
+                .verb-inner {
+                    padding: 12px 12px 12px 78px;
+                    white-space: nowrap;
+                    overflow: hidden;
+                    text-overflow: ellipsis;
                 }
             }
 
-            .object > .comment {
-                margin: 0;
-                padding-top: @spacer-small;
-                padding-left: 0;
-                border: 0;
+            .title, .title-and-description {
+                position: absolute;
+                bottom: 0;
+                z-index: 1;
+                background-color: rgba(0,0,0,0.75);
+                width: 100%;
+                max-height: 68px;
+                font-size: 14px;
+                font-weight: bold;
+                color: @strong-text-color;
 
-                a > i.icon-link {
-                    color: lighten(@link-color, 15%);
-                    font-size: 80%;
+                .inner {
+                    padding: 12px;
+                    white-space: nowrap;
+                    overflow: hidden;
+                    text-overflow: ellipsis;
                 }
             }
 
-            .object > .image img {
-                .rounded-corners;
-                margin-bottom: @spacer-medium;
+            .title-and-description {
+                max-height: 108px;
+
+                .inner {
+                    white-space: normal;
+
+                    .title {
+                        white-space: nowrap;
+                        overflow: hidden;
+                        text-overflow: ellispis;
+                        margin-bottom: 4px;
+                        position: initial;
+                        background: none;
+                    }
+
+                    .description {
+                        font-size: 12px;
+                        font-weight: normal;
+                        font-style: italic;
+                        color: @text-color;
+                    }
+                }
             }
 
-            .when {
-                color: darken(@text-color, 40%);
-                font-size: 75%;
-                font-style: italic;
+            .astrobin-image-container {
+                a { display: block; }
+                img { width: 100%; }
             }
-        }
-    }
-
-    .action {
-        float: left;
-        width: 50%;
-        padding: 0;
-    }
-
-    @media screen and (max-width: 500px) {
-        .action {
-            float: none;
-            width: auto;
         }
     }
 }

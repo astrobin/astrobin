@@ -223,7 +223,7 @@ def jsonDump(all):
 # VIEWS
 
 @page_template('index/stream_page.html', key = 'stream_page')
-@page_template('index/recent_images_page.html',   key = 'recent_images_page')
+@page_template('index/recent_images_page.html', key = 'recent_images_page')
 def index(request, template = 'index/root.html', extra_context = None):
     """Main page"""
     from django.core.cache import cache
@@ -238,12 +238,10 @@ def index(request, template = 'index/root.html', extra_context = None):
         .filter(moderator_decision = 1)
 
     response_dict = {
-        'registration_form': RegistrationForm(),
         'recent_images': recent_images,
-        'recent_images_alias': 'thumb',
-        'recent_images_batch_size': 55,
+        'recent_images_alias': 'gallery',
+        'recent_images_batch_size': 70,
     }
-
 
     profile = None
     if request.user.is_authenticated():
@@ -254,8 +252,7 @@ def index(request, template = 'index/root.html', extra_context = None):
             section = profile.default_frontpage_section
         response_dict['section'] = section
 
-        response_dict['recent_images_batch_size'] = 64
-
+        # IOTD
         try:
             iotd = ImageOfTheDay.objects.all()[0]
             gear_list = (
@@ -299,10 +296,6 @@ def index(request, template = 'index/root.html', extra_context = None):
         except IndexError:
             # The is no IOTD
             pass
-
-        response_dict['recent_commercial_gear'] =\
-            [x for x in Image.objects.exclude(featured_gear = None) if x.featured_gear.all()[0].is_paid()]
-
 
         if section == 'global':
             ##################
@@ -420,52 +413,6 @@ def index(request, template = 'index/root.html', extra_context = None):
                 user = request.user)]
 
             response_dict['recent_images'] = recent_images.filter(user__in = followed)
-
-        elif section == 'liked':
-            response_dict['recent_images'] = \
-                Image.objects.raw(
-                    "DROP TABLE IF EXISTS recently_liked_to_show;" +
-                    "CREATE TEMPORARY TABLE recently_liked_to_show ( object_id INT PRIMARY KEY, created TIMESTAMP);" +
-                    "INSERT INTO recently_liked_to_show " +
-                        "SELECT object_id::int, MAX(created_on) AS max_created_on " +
-                        "FROM toggleproperties_toggleproperty " +
-                        "WHERE property_type = 'like' " +
-                        "AND content_type_id = " + str(image_ct.id) + " " +
-                        "GROUP BY object_id " +
-                        "ORDER BY max_created_on DESC " +
-                        "LIMIT 320;" +
-                    "SELECT astrobin_image.* " +
-                    "FROM astrobin_image " +
-                    "JOIN recently_liked_to_show ON id = object_id " +
-                    "WHERE astrobin_image.is_wip = false " +
-                    "ORDER BY recently_liked_to_show.created DESC;"
-                )
-
-        elif section == 'bookmarked':
-            image_ct = ContentType.objects.get(app_label = 'astrobin', model = 'image')
-            response_dict['recent_images'] = \
-                Image.objects.raw(
-                    "DROP TABLE IF EXISTS recently_bookmarked_to_show;" +
-                    "CREATE TEMPORARY TABLE recently_bookmarked_to_show ( object_id INT PRIMARY KEY, created TIMESTAMP) ON COMMIT DROP;" +
-                    "INSERT INTO recently_bookmarked_to_show " +
-                        "SELECT object_id::int, MAX(created_on) AS max_created_on " +
-                        "FROM toggleproperties_toggleproperty " +
-                        "WHERE property_type = 'bookmark' " +
-                        "AND content_type_id = " + str(image_ct.id) + " " +
-                        "GROUP BY object_id " +
-                        "ORDER BY max_created_on DESC " +
-                        "LIMIT 320;" +
-                    "SELECT astrobin_image.* " +
-                    "FROM astrobin_image " +
-                    "JOIN recently_bookmarked_to_show ON id = object_id " +
-                    "WHERE astrobin_image.is_wip = false " +
-                    "ORDER BY recently_bookmarked_to_show.created DESC;"
-                )
-
-        elif section == 'fits':
-            response_dict['recent_images'] = recent_images.exclude(
-                Q(link_to_fits = None) |
-                Q(link_to_fits = ''))
 
     if extra_context is not None:
         response_dict.update(extra_context)

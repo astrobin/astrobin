@@ -101,6 +101,50 @@
             }
         }
     }
+
+    .image-of-the-day {
+        .header {
+            h2 {
+                font-size: 20px;
+            }
+
+            .title {
+                display: none;
+            }
+        }
+    }
+
+    .activity-actions {
+        text-align: center;
+
+        .action {
+            text-align: left;
+
+            .avatar {
+                float: none;
+                position: absolute;
+                top: 4px;
+                left: 4px;
+                z-index: 1;
+            }
+
+            .action-object {
+                float: none;
+                width: 100%;
+
+                .verb {
+                    top: initial;
+                    bottom: 0;
+                    width: 100%;
+
+                    .verb-inner {
+                        padding-left: 12px;
+                    }
+                }
+            }
+        }
+    }
+
 }
 
 
@@ -223,5 +267,33 @@
 
     .group-description {
         padding: 0 12px;
+    }
+
+    .image-of-the-day {
+        margin: 0;
+
+        .header {
+            border-radius: 0;
+            position: initial;
+
+            h2 {
+                font-size: 14px;
+                padding: 0;
+            }
+
+            .title {
+                display: none;
+            }
+        }
+
+        .astrobin-image-container {
+            img {
+                border-radius: 0;
+            }
+        }
+    }
+
+    .subtle-container {
+        padding: 0;
     }
 }

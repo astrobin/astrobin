@@ -254,6 +254,7 @@ class UserProfileEditPreferencesForm(forms.ModelForm):
         model = UserProfile
         fields = [
             'language',
+            'default_frontpage_section',
             'default_gallery_sorting',
             'exclude_from_competitions',
         ]
