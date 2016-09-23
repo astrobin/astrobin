@@ -81,28 +81,29 @@
             <table class="table table-striped rawdata-browser hidden-phone">
                 <thead>
                     <tr>
-                        <th colspan="2">{% trans "Name" %}</th>
-                        <th>{% trans "User" %}</th>
-                        <th>{% trans "Size" %}</th>
-                        <th>{% trans "Uploaded" %}</th>
-                        <th>&nbsp;</th>
+                        <th class="rawdata-browser-counter"></th>
+                        <th class="rawdata-browser-name">{% trans "Name" %}</th>
+                        <th class="rawdata-browser-user">{% trans "User" %}</th>
+                        <th class="rawdata-browser-size">{% trans "Size" %}</th>
+                        <th class="rawdata-browser-uploaded">{% trans "Uploaded" %}</th>
+                        <th class="rawdata-browser-action"></th>
                     </tr>
                 </thead>
                 <tbody>
                     {% for image in object.images.all %}
                         <tr id="{{image.id}}" class="rawfile">
-                            <td class="counter">{{forloop.counter}}</td>
-                            <td class="filename" rel="tooltip" title="{{image.original_filename}}">
+                            <td class="rawdata-browser-counter">{{forloop.counter}}</td>
+                            <td class="rawdata-browser-name">
                                 {{image.original_filename|truncatechars:40}}
                             </td>
-                            <td><a href="{% url 'user_page' image.user %}">{{image.user}}</td>
-                            <td>{{image.size|filesizeformat}}</td>
-                            <td>
+                            <td class="rawdata-browser-name"><a href="{% url 'user_page' image.user %}">{{image.user}}</td>
+                            <td class="rawdata-browser-size">{{image.size|filesizeformat}}</td>
+                            <td class="rawdata-browser-uploaded">
                                 <abbr class="timeago" title="{{image.uploaded|date:'Y-m-d\TH:i:s'}}">
                                     {{image.uploaded|date}}
                                 </abbr>
                             </td>
-                            <td>
+                            <td class="rawdata-browser-action">
                                 {% ifequal request.user image.user %}
                                     <a href="#"
                                        class="remove-rawimage"

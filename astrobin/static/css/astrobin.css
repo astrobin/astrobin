@@ -1088,6 +1088,7 @@ li.astrobin-thumbnail.top-title .image-title {
   background-color: #eaeaea;
 }
 .table {
+  table-layout: fixed;
   margin-bottom: 0;
 }
 .table.table-bordered {
@@ -1520,6 +1521,7 @@ div.capty-target .capty-caption-content .table td {
 }
 div.capty-target .capty-caption-content .table th {
   color: white;
+  width: 16px;
 }
 div.capty-target .capty-caption-content .table td {
   color: #ddd;
@@ -3466,6 +3468,9 @@ table.subscription-plans {
   width: 110px;
   margin-top: 6px;
 }
+table.rawdata-browser {
+  font-size: 90%;
+}
 table.rawdata-browser .download-link,
 table.rawdata-browser .delete-link {
   visibility: hidden;
@@ -3474,22 +3479,69 @@ table.rawdata-browser tr:hover .download-link,
 table.rawdata-browser tr:hover .delete-link {
   visibility: visible;
 }
-table.rawdata-browser td.filename {
-  font-size: 10px;
+table.rawdata-browser tbody tr:first-child td span {
+  margin-right: 8px;
 }
-table.rawdata-browser td.actions {
-  width: 102px;
-  text-align: right;
-}
-table.rawdata-browser td.files {
-  width: 102px;
-}
-table.rawdata-browser td.icon {
-  font-size: 20px;
+table.rawdata-browser td.rawdata-browser-counter,
+table.rawdata-browser th.rawdata-browser-counter,
+table.rawdata-browser td.rawdata-browser-action,
+table.rawdata-browser th.rawdata-browser-action,
+table.rawdata-browser td.rawdata-browser-icon,
+table.rawdata-browser th.rawdata-browser-icon {
   width: 20px;
 }
-table.rawdata-browser td.counter {
-  color: #aaa;
+table.rawdata-browser td.rawdata-browser-size,
+table.rawdata-browser th.rawdata-browser-size,
+table.rawdata-browser td.rawdata-browser-type,
+table.rawdata-browser th.rawdata-browser-type,
+table.rawdata-browser td.rawdata-browser-file-count,
+table.rawdata-browser th.rawdata-browser-file-count,
+table.rawdata-browser td.rawdata-browser-user,
+table.rawdata-browser th.rawdata-browser-user,
+table.rawdata-browser td.rawdata-browser-uploaded,
+table.rawdata-browser th.rawdata-browser-uploaded {
+  width: 15%;
+}
+table.rawdata-browser td.rawdata-browser-name,
+table.rawdata-browser th.rawdata-browser-name {
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: clip;
+}
+table.rawdata-browser td.rawdata-browser-actions,
+table.rawdata-browser th.rawdata-browser-actions {
+  width: 40px;
+}
+table.rawdata-browser td.rawdata-browser-actions li,
+table.rawdata-browser th.rawdata-browser-actions li {
+  text-align: left;
+}
+table.rawdata-folder-table td.rawdata-folder-delete-action,
+table.rawdata-folder-table th.rawdata-folder-delete-action {
+  width: 20px;
+}
+table.rawdata-folder-table td.rawdata-folder-owner,
+table.rawdata-folder-table th.rawdata-folder-owner,
+table.rawdata-folder-table td.rawdata-folder-files,
+table.rawdata-folder-table th.rawdata-folder-files,
+table.rawdata-folder-table td.rawdata-folder-images,
+table.rawdata-folder-table th.rawdata-folder-images,
+table.rawdata-folder-table td.rawdata-folder-last-updated,
+table.rawdata-folder-table th.rawdata-folder-last-updated {
+  text-align: center;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  width: 10%;
+}
+table.rawdata-folder-table td.rawdata-folder-last-updated,
+table.rawdata-folder-table th.rawdata-folder-last-updated {
+  width: 15%;
+  text-align: right;
+}
+table.rawdata-folder-table td.rawdata-folder-owner,
+table.rawdata-folder-table th.rawdata-folder-owner {
+  text-align: left;
+  width: 20%;
 }
 .rawdata-browser-breadcrumb {
   display: inline-block;
@@ -3774,8 +3826,6 @@ img.flickr-photo-to-import-selected {
 }
 /* --- Topic/Forum table --- */
 @media screen and (min-width: 980px) {
-  table.forums th,
-  table.topic-list th,
   table.forums td,
   table.topic-list td {
     white-space: nowrap;
@@ -3783,36 +3833,36 @@ img.flickr-photo-to-import-selected {
     overflow: hidden;
   }
 }
-table.forums th.forum-topic-count,
-table.topic-list th.forum-topic-count,
 table.forums td.forum-topic-count,
 table.topic-list td.forum-topic-count,
-table.forums th.forum-post-count,
-table.topic-list th.forum-post-count,
+table.forums th.forum-topic-count,
+table.topic-list th.forum-topic-count,
 table.forums td.forum-post-count,
 table.topic-list td.forum-post-count,
-table.forums th.topic-post-count,
-table.topic-list th.topic-post-count,
+table.forums th.forum-post-count,
+table.topic-list th.forum-post-count,
 table.forums td.topic-post-count,
 table.topic-list td.topic-post-count,
-table.forums th.topic-view-count,
-table.topic-list th.topic-view-count,
+table.forums th.topic-post-count,
+table.topic-list th.topic-post-count,
 table.forums td.topic-view-count,
-table.topic-list td.topic-view-count {
+table.topic-list td.topic-view-count,
+table.forums th.topic-view-count,
+table.topic-list th.topic-view-count {
   width: 10%;
 }
-table.forums th.forum-last-post,
-table.topic-list th.forum-last-post,
 table.forums td.forum-last-post,
 table.topic-list td.forum-last-post,
-table.forums th.topic-last-post,
-table.topic-list th.topic-last-post,
+table.forums th.forum-last-post,
+table.topic-list th.forum-last-post,
 table.forums td.topic-last-post,
 table.topic-list td.topic-last-post,
-table.forums th.topic-author,
-table.topic-list th.topic-author,
+table.forums th.topic-last-post,
+table.topic-list th.topic-last-post,
 table.forums td.topic-author,
-table.topic-list td.topic-author {
+table.topic-list td.topic-author,
+table.forums th.topic-author,
+table.topic-list th.topic-author {
   width: 15%;
 }
 table.forums .topic-name,
@@ -4264,39 +4314,64 @@ div.group-list {
 div.group-list a.create-group {
   margin-top: 14px;
 }
-table.group-list th,
-table.group-member-list th,
 table.group-list td,
 table.group-member-list td {
   white-space: nowrap;
 }
 table.group-list td.group-membership,
-table.group-member-list td.group-membership {
+table.group-member-list td.group-membership,
+table.group-list th.group-membership,
+table.group-member-list th.group-membership {
   text-align: center;
+  width: 20px;
 }
 table.group-list td.group-membership .icon,
-table.group-member-list td.group-membership .icon {
+table.group-member-list td.group-membership .icon,
+table.group-list th.group-membership .icon,
+table.group-member-list th.group-membership .icon {
   text-align: center;
   color: #ccc;
 }
 table.group-list td.group-name,
 table.group-member-list td.group-name,
+table.group-list th.group-name,
+table.group-member-list th.group-name,
 table.group-list td.member-name,
-table.group-member-list td.member-name {
-  width: 100%;
+table.group-member-list td.member-name,
+table.group-list th.member-name,
+table.group-member-list th.member-name {
   white-space: initial;
+  overflow: hidden;
+  text-overflow: clip;
 }
 table.group-list td.group-members,
 table.group-member-list td.group-members,
+table.group-list th.group-members,
+table.group-member-list th.group-members,
 table.group-list td.group-images,
 table.group-member-list td.group-images,
+table.group-list th.group-images,
+table.group-member-list th.group-images,
 table.group-list td.group-forum-posts,
 table.group-member-list td.group-forum-posts,
+table.group-list th.group-forum-posts,
+table.group-member-list th.group-forum-posts,
 table.group-list td.member-images-count,
 table.group-member-list td.member-images-count,
+table.group-list th.member-images-count,
+table.group-member-list th.member-images-count,
 table.group-list td.member-posts-count,
-table.group-member-list td.member-posts-count {
+table.group-member-list td.member-posts-count,
+table.group-list th.member-posts-count,
+table.group-member-list th.member-posts-count {
+  width: 10%;
   text-align: center;
+}
+table.group-list td.group-last-activity,
+table.group-member-list td.group-last-activity,
+table.group-list th.group-last-activity,
+table.group-member-list th.group-last-activity {
+  width: 10%;
 }
 /* Unfortunately last-of-type doesn't work. */
 form#group-update-form .control-group:nth-child(8) {

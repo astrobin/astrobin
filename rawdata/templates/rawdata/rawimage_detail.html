@@ -11,7 +11,7 @@
 
     <div class="row">
         <div class="span6">
-            <table class="table">
+            <table class="table table-striped rawdata-files-table">
                 <tr><th>{% trans "Type" %}</th><td>{{object.image_type|humanize_rawimage_type}}</td></tr>
                 <tr><th>{% trans "Size" %}</th><td>{{object.size|filesizeformat}}</td></tr>
                 <tr><th>{% trans "Uploaded" %}</th><td>{{object.uploaded|date}}</td></tr>

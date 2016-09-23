@@ -5,18 +5,23 @@
 {% load rawdata_tags %}
 
 {% if folders %}
-    <table class="table rawdata-browser folders">
+    <table class="table table-striped rawdata-browser folders">
         <thead>
             <tr>
-                <th colspan="2">{{folders_header}}</th>
-                <th>{% trans "Files" %}</th>
-                <th>{% include 'rawdata/_folder_dropdown.html' %}</th>
+                <th class="rawdata-browser-icon"></th>
+                <th class="rawdata-browser-file">{{folders_header}}</th>
+                <th class="rawdata-browser-file-count">{% trans "Files" %}</th>
+                <th class="rawdata-browser-actions"></th>
             </tr>
         </thead>
+        <tbody>
+            <tr class="header">
+                <td colspan="4" class="rawdata-browser-actions">{% include 'rawdata/_folder_dropdown.html' %}</td>
+            </tr>
         {% for folder in folders %}
             <tr class="rawfile">
-                <td class="icon"><i class="icon-folder-close"></i></td>
-                <td class="folder-label">
+                <td class="rawdata-browser-icon"><i class="icon-folder-close"></i></td>
+                <td class="rawdata-browser-file">
                     {% ifequal folder.folder_type 'type' %}
                     <a href="{% query_string 'type=folder.type, f=none' '' %}">
                     {% endifequal %}
@@ -52,11 +57,11 @@
                         {{folder.label}}
                     </a>
                 </td>
-                <td class="files">{{folder.images|length}}</td>
-                <td class="actions">
-                </td>
+                <td class="rawdata-browser-file-count">{{folder.images|length}}</td>
+                <td class="rawdata-browser-actions"></td>
             </tr>
         {% endfor %}
+        </tbody>
     </table>
 {% endif %}
 

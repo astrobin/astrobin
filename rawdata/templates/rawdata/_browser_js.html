@@ -4,8 +4,7 @@
     $(function() {
         var $table = $('table.rawdata-browser');
         var $rows = $table.find('tr.rawfile');
-        var $header = $table.find('thead tr th:first');
-        var floating_header_selector = 'thead.tableFloatingHeader th:first';
+        var $header = $table.find('tbody tr:first td');
         var is_folder_browser = $table.hasClass('folders');
         var is_image_browser = $table.hasClass('images');
 
@@ -23,7 +22,6 @@
 
         function reset_headers() {
             reset_header($header);
-            reset_header($(floating_header_selector));
         }
 
         function selection_header($h, count) {
@@ -99,8 +97,10 @@
                     e.preventDefault();
                 });
 
+                $h.attr('colspan', 6);
+
             } else if (is_folder_browser) {
-                var params = $table.find('tr.active td.folder-label a').attr('href').split('?')[1];
+                var params = $table.find('tr.active td.rawdata-browser-file a').attr('href').split('?')[1];
 
                 $download.find('a')
                     .attr('href', '/rawdata/download/?' + params);
@@ -115,6 +115,8 @@
                     del(params);
                     e.preventDefault();
                 });
+
+                $h.attr('colspan', 4);
             }
 
             $h
@@ -128,7 +130,6 @@
 
         function selection_headers(count) {
             selection_header($header, count);
-            selection_header($(floating_header_selector), count);
         }
 
         function del(params) {

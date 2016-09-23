@@ -1223,6 +1223,7 @@ li.astrobin-thumbnail {
 }
 
 .table {
+    table-layout: fixed;
     margin-bottom: 0;
 
     &.table-bordered {
@@ -1640,6 +1641,7 @@ div.capty-target {
             }
             th {
                 color: white;
+                width: 16px;
             }
             td {
                 color: #ddd;
@@ -3588,6 +3590,8 @@ table.subscription-plans {
 }
 
 table.rawdata-browser {
+    font-size: 90%;
+
     .download-link, .delete-link {
         visibility: hidden;
     }
@@ -3597,26 +3601,61 @@ table.rawdata-browser {
         visibility: visible;
     }
 
-    td.filename {
-        font-size: 10px;
+    tbody tr:first-child td span {
+        margin-right: @spacer-medium;
     }
 
-    td.actions {
-        width: 102px;
-        text-align: right;
-    }
+    td, th {
+        &.rawdata-browser-counter, &.rawdata-browser-action,
+        &.rawdata-browser-icon {
+            width: 20px;
+        }
 
-    td.files {
-        width: 102px;
-    }
+        &.rawdata-browser-size, &.rawdata-browser-type,
+        &.rawdata-browser-file-count, &.rawdata-browser-user,
+        &.rawdata-browser-uploaded {
+            width: 15%;
+        }
 
-    td.icon {
-        font-size: 20px;
-        width: 20px;
-    }
+        &.rawdata-browser-name {
+            white-space: nowrap;
+            overflow: hidden;
+            text-overflow: clip;
+        }
 
-    td.counter {
-        color: #aaa;
+        &.rawdata-browser-actions {
+            width: 40px;
+
+            li {
+                text-align: left;
+            }
+        }
+    }
+}
+
+table.rawdata-folder-table {
+    td, th {
+        &.rawdata-folder-delete-action {
+            width: 20px;
+        }
+
+        &.rawdata-folder-owner, &.rawdata-folder-files,
+        &.rawdata-folder-images, &.rawdata-folder-last-updated {
+            text-align: center;
+            overflow: hidden;
+            text-overflow: ellipsis;
+            width: 10%;
+        }
+
+        &.rawdata-folder-last-updated {
+            width: 15%;
+            text-align: right;
+        }
+
+        &.rawdata-folder-owner {
+            text-align: left;
+            width: 20%;
+        }
     }
 }
 
@@ -3964,13 +4003,14 @@ img.flickr-photo-to-import-selected {
 
 /* --- Topic/Forum table --- */
 table.forums, table.topic-list {
-    th, td {
+    td {
         @media screen and (min-width: 980px) {
             white-space: nowrap;
             text-overflow: clip;
             overflow: hidden;
         }
-
+    }
+    td, th {
         &.forum-topic-count, &.forum-post-count, &.topic-post-count, &.topic-view-count {
             width: 10%;
         }
@@ -4476,27 +4516,36 @@ div.group-list {
 }
 
 table.group-list, table.group-member-list {
-    th, td {
+    td {
         white-space: nowrap;
     }
 
-    td.group-membership {
-        text-align: center;
-
-        .icon {
+    td, th {
+        &.group-membership {
             text-align: center;
-            color: #ccc;
+            width: 20px;
+
+            .icon {
+                text-align: center;
+                color: #ccc;
+            }
         }
-    }
 
-    td.group-name, td.member-name {
-        width: 100%;
-        white-space: initial;
-    }
+        &.group-name, &.member-name {
+            white-space: initial;
+            overflow: hidden;
+            text-overflow: clip;
+        }
 
-    td.group-members, td.group-images, td.group-forum-posts,
-    td.member-images-count, td.member-posts-count {
-        text-align: center;
+        &.group-members, &.group-images, &.group-forum-posts,
+        &.member-images-count, &.member-posts-count {
+            width: 10%;
+            text-align: center;
+        }
+
+        &.group-last-activity {
+            width: 10%;
+        }
     }
 }
 

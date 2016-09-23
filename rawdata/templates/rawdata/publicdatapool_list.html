@@ -27,28 +27,26 @@
         </div>
     </div>
 
-    <table class="table table-striped">
+    <table class="table table-striped rawdata-folder-table">
         <thead>
-            <th>{% trans "Name" %}</th>
-            <th class="hidden-phone hidden-tablet">{% trans "Description" %}</th>
-            <th class="hidden-phone">{% trans "Owner" %}</th>
-            <th class="hidden-phone">{% trans "Raw images" %}</th>
-            <th class="hidden-phone">{% trans "Processed images" %}</th>
-            <th class="hidden-phone hidden-tablet">{% trans "Last updated" %}</th>
+            <th class="rawdata-folder-name">{% trans "Name" %}</th>
+            <th class="rawdata-folder-owner hidden-phone">{% trans "Owner" %}</th>
+            <th class="rawdata-folder-files hidden-phone">{% trans "Raw images" %}</th>
+            <th class="rawdata-folder-images hidden-phone">{% trans "Processed images" %}</th>
+            <th class="rawdata-folder-last-updated hidden-phone hidden-tablet">{% trans "Last updated" %}</th>
         </thead>
         <tbody>
             {% for object in object_list %}
                 <tr>
-                    <td><a href="{% url 'rawdata.publicdatapool_detail' object.pk %}">{{object.name}}</a></td>
-                    <td class="hidden-phone hidden-tablet">{{object.description|truncatewords:"10"}}</td>
-                    <td class="hidden-phone">
+                    <td class="rawdata-folder-name"><a href="{% url 'rawdata.publicdatapool_detail' object.pk %}">{{object.name}}</a></td>
+                    <td class="rawdata-folder-owner hidden-phone">
                         <a rel="popover" class="user-popover"
                            data-load="{% url 'user_popover_ajax' object.creator %}"
                            href="{% url 'user_page' object.creator %}">{{object.creator}}</a>
                     </td>
-                    <td class="hidden-phone">{{object.images.all|length}}</td>
-                    <td class="hidden-phone">{{object.processed_images.all|length}}</td>
-                    <td class="hidden-phone hidden-tablet">
+                    <td class="rawdata-folder-files hidden-phone">{{object.images.all|length}}</td>
+                    <td class="rawdata-folder-images hidden-phone">{{object.processed_images.all|length}}</td>
+                    <td class="rawdata-folder-last-updated hidden-phone hidden-tablet">
                         <abbr class="timeago" title="{{object.updated|date:'Y-m-d\TH:i:s'}}">
                             {{object.updated|date}}
                         </abbr>
