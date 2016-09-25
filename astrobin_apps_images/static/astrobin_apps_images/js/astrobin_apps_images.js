@@ -21,7 +21,7 @@ $(document).ready(function() {
 
                 if (loaded && capty) {
                     captify($img);
-                } else if (!loaded) {
+                } else if (!loaded && url !== "") {
                     $.ajax({
                         dataType: 'json',
                         timeout: 0,
