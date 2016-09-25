@@ -16,6 +16,7 @@ except ImportError:
     import sha
     sha1 = sha.sha
 
+from django.core.cache import cache
 from django.db import models, IntegrityError
 from django.db.models import Q
 from django.contrib.auth.models import User
@@ -890,55 +891,90 @@ class Image(HasSolutionMixin, models.Model):
         return None
 
     def likes(self):
-        return ToggleProperty.objects.toggleproperties_for_object("like", self).count()
+        key = "Image.%d.likes" % self.pk
+        val = cache.get(key)
+        if val is None:
+            val = ToggleProperty.objects.toggleproperties_for_object("like", self).count()
+            cache.set(key, val, 300)
+        return val
 
     def liked_by(self):
-        user_pks = ToggleProperty.objects\
-            .toggleproperties_for_object("like", self)\
-            .select_related('user')\
-            .values_list('user', flat = True)
-        return User.objects.filter(pk__in = user_pks)
+        key = "Image.%d.liked_by" % self.pk
+        val = cache.get(key)
+        if val is None:
+            user_pks = ToggleProperty.objects\
+                .toggleproperties_for_object("like", self)\
+                .select_related('user')\
+                .values_list('user', flat = True)
+            val = User.objects.filter(pk__in = user_pks)
+            cache.set(key, val, 300)
+        return val
 
     def bookmarks(self):
-        return ToggleProperty.objects.toggleproperties_for_object("bookmark", self).count()
+        key = "Image.%d.bookmarks" % self.pk
+        val = cache.get(key)
+        if val is None:
+            val = ToggleProperty.objects.toggleproperties_for_object("bookmark", self).count()
+            cache.set(key, val, 300)
+        return val
 
     def bookmarked_by(self):
-        user_pks = ToggleProperty.objects\
-            .toggleproperties_for_object("bookmark", self)\
-            .select_related('user')\
-            .values_list('user', flat = True)
-        return User.objects.filter(pk__in = user_pks)
+        key = "Image.%d.bookmarked_by" % self.pk
+        val = cache.get(key)
+        if val is None:
+            user_pks = ToggleProperty.objects\
+                .toggleproperties_for_object("bookmark", self)\
+                .select_related('user')\
+                .values_list('user', flat = True)
+            val = User.objects.filter(pk__in = user_pks)
+            cache.set(key, val, 300)
+        return val
 
     def comments(self):
         from nested_comments.models import NestedComment
-        return NestedComment.objects.filter(
-            deleted = False,
-            content_type__app_label = 'astrobin',
-            content_type__model = 'image',
-            object_id = self.id).count()
+        key = "Image.%d.comments" % self.pk
+        val = cache.get(key)
+        if val is None:
+            val = NestedComment.objects.filter(
+                deleted = False,
+                content_type__app_label = 'astrobin',
+                content_type__model = 'image',
+                object_id = self.id).count()
+            cache.set(key, val, 300)
+        return val
 
     def comments_by_distinct_users(self):
         from nested_comments.models import NestedComment
-        user_pks = NestedComment.objects.filter(
-            deleted = False,
-            content_type__app_label = 'astrobin',
-            content_type__model = 'image',
-            object_id = self.id)\
-                .select_related('author')\
-                .values_list('author', flat = True)\
-                .distinct()
-        return len(user_pks)
+        key = "Image.%d.comments_by_distinct_users" % self.pk
+        val = cache.get(key)
+        if val is None:
+            user_pks = NestedComment.objects.filter(
+                deleted = False,
+                content_type__app_label = 'astrobin',
+                content_type__model = 'image',
+                object_id = self.id)\
+                    .select_related('author')\
+                    .values_list('author', flat = True)\
+                    .distinct()
+            val = len(user_pks)
+            cache.set(key, val, 300)
+        return val
 
     def commented_by(self):
         from nested_comments.models import NestedComment
-        user_pks = NestedComment.objects.filter(
-            deleted = False,
-            content_type__app_label = 'astrobin',
-            content_type__model = 'image',
-            object_id = self.id)\
-                .select_related('author')\
-                .values_list('author', flat = True)
-        return User.objects.filter(pk__in = user_pks)
+        key = "Image.%d.commented_by" % self.pk
+        val = cache.get(key)
+        if val is None:
+            user_pks = NestedComment.objects.filter(
+                deleted = False,
+                content_type__app_label = 'astrobin',
+                content_type__model = 'image',
+                object_id = self.id)\
+                    .select_related('author')\
+                    .values_list('author', flat = True)
+            val = User.objects.filter(pk__in = user_pks)
+            cache.set(key, val, 300)
+        return val
 
     def get_thumbnail_field(self, revision_label):
         # We default to the original upload
@@ -1092,7 +1128,6 @@ class Image(HasSolutionMixin, models.Model):
 
 
     def thumbnail(self, alias, thumbnail_settings = {}):
-        from django.core.cache import cache
         from astrobin_apps_images.models import ThumbnailGroup
 
         options = thumbnail_settings.copy()
@@ -1171,7 +1206,6 @@ class Image(HasSolutionMixin, models.Model):
 
 
     def thumbnail_invalidate_real(self, field, revision_label, delete_remote = True):
-        from django.core.cache import cache
         from easy_thumbnails.files import get_thumbnailer
 
         from astrobin.s3utils import OverwritingFileSystemStorage
@@ -1912,7 +1946,6 @@ class UserProfile(models.Model):
         getattr(self, resolve[gear_type]).remove(gear)
 
     def get_scores(self):
-        from django.core.cache import cache
         from haystack.query import SearchQuerySet
 
         scores = {
