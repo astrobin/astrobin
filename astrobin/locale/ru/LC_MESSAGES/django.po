@@ -8,17 +8,17 @@ msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2016-09-20 20:54+0100\n"
-"PO-Revision-Date: 2016-09-19 19:57+0000\n"
+"PO-Revision-Date: 2016-09-23 12:01+0000\n"
 "Last-Translator: csve <csve00@gmail.com>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
 "Language: ru\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"Plural-Forms: nplurals=3; plural=(n%10==1 && n%100!=11 ? 0 : n%10>=2 && n"
-"%10<=4 && (n%100<10 || n%100>=20) ? 1 : 2);\n"
+"Plural-Forms: nplurals=3; plural=(n%10==1 && n%100!=11 ? 0 : n%10>=2 && n%"
+"10<=4 && (n%100<10 || n%100>=20) ? 1 : 2);\n"
 "X-Generator: Pootle 2.5.0\n"
-"X-POOTLE-MTIME: 1474315033.601748\n"
+"X-POOTLE-MTIME: 1474632119.195956\n"
 
 #: fields.py:10
 msgid "United Kingdom"
@@ -4491,9 +4491,8 @@ msgstr ""
 "владельцев."
 
 #: templates/base/modals.html:17
-#, fuzzy
 msgid "View all"
-msgstr "Подробнее"
+msgstr "Смотреть все"
 
 #: templates/base/modals.html:23 templates/pybb/index.html:28
 #: templates/pybb/latest_topics.html:24
@@ -6279,6 +6278,9 @@ msgid ""
 "\n"
 "Visit the group here: %(url)s"
 msgstr ""
+"%(requester)s запросил разрешение вступить в группу: \"%(group_name)s\".\n"
+"\n"
+"Посетите группу по ссылке: %(url)s"
 
 #: templates/notification/new_group_join_request/notice.html:3
 #: templates/notification/new_group_join_request/short.html:3
@@ -6287,11 +6289,13 @@ msgid ""
 "<strong>%(requester)s</strong> requested to join the group: \"%(group_name)s"
 "\""
 msgstr ""
+"<strong>%(requester)s</strong> запросил разрешение вступить в группу: \"%"
+"(group_name)s\""
 
 #: templates/notification/new_group_join_request/short.txt:2
 #, python-format
 msgid "%(requester)s requested to join the group: \"%(group_name)s\""
-msgstr ""
+msgstr "%(requester)s запросил разрешение вступить в группу: \"%(group_name)s\""
 
 #: templates/notification/new_image/full.txt:2
 #, python-format
@@ -6416,7 +6420,7 @@ msgstr "%(user)s нравится ваше изображение: %(url)s"
 #: templates/notification/new_public_group_created/full.txt:2
 #, python-format
 msgid "%(creator)s created a new public group: \"%(group_name)s\""
-msgstr ""
+msgstr "%(creator)s создал новую открытую группу: \"%(group_name)s\""
 
 #: templates/notification/new_public_group_created/notice.html:3
 #: templates/notification/new_public_group_created/short.html:3
@@ -6424,11 +6428,12 @@ msgstr ""
 msgid ""
 "<strong>%(creator)s</strong> created a new public group: \"%(group_name)s\""
 msgstr ""
+"<strong>%(creator)s</strong> создал новую открытую группу: \"%(group_name)s\""
 
 #: templates/notification/new_public_group_created/short.txt:2
 #, python-format
 msgid "%(creator)s created a new public group: \"%(group_name)s\""
-msgstr ""
+msgstr "%(creator)s создал новую открытую группу: \"%(group_name)s\""
 
 #: templates/notification/rawdata_invited_to_private_folder/full.txt:2
 #, python-format
@@ -6625,18 +6630,18 @@ msgstr ""
 #: templates/notification/user_joined_public_group/full.txt:2
 #, python-format
 msgid "%(user)s joined the public group: \"%(group_name)s\""
-msgstr ""
+msgstr "%(user)s вступил в открытую группу: \"%(group_name)s\""
 
 #: templates/notification/user_joined_public_group/notice.html:3
 #: templates/notification/user_joined_public_group/short.html:3
 #, python-format
 msgid "<strong>%(user)s</strong> joined the public group: \"%(group_name)s\""
-msgstr ""
+msgstr "<strong>%(user)s</strong> вступил в открытую группу: \"%(group_name)s\""
 
 #: templates/notification/user_joined_public_group/short.txt:2
 #, python-format
 msgid "%(user)s joined the public group: \"%(group_name)s\""
-msgstr ""
+msgstr "%(user)s вступил в открытую группу: \"%(group_name)s\""
 
 #: templates/openid_provider/decide.html:4
 #: templates/openid_provider/decide.html:7
@@ -6692,9 +6697,8 @@ msgstr ""
 "вышлем вам уведомление о начале работы сайта!"
 
 #: templates/pybb/forum.html:21
-#, fuzzy
 msgid "Back to group"
-msgstr "Обратно наверх"
+msgstr "Назад в группу"
 
 #: templates/pybb/forum.html:30
 msgid "New topic"
@@ -6714,7 +6718,7 @@ msgstr "Вы не являетесь участником ни одной гру
 
 #: templates/pybb/index.html:37
 msgid "These are the forums in the groups you have access to."
-msgstr ""
+msgstr "Это форумы в группах, к которым у вас есть доступ."
 
 #: templates/pybb/index.html:52
 msgid "Topics"
@@ -6744,7 +6748,7 @@ msgstr "Обратите внимание: этот пост будет опуб
 #: templates/pybb/post_template.html:33
 msgid ""
 "Warning: this post awaits moderation and is not yet visible to everybody"
-msgstr ""
+msgstr "Внимание: это сообщение ждет модерации и пока не отображается"
 
 #: templates/pybb/post_template.html:49
 msgid "Edited"
@@ -6822,9 +6826,8 @@ msgid "pages"
 msgstr "страницы"
 
 #: templates/pybb/topic_list.html:77
-#, fuzzy
 msgid "This forum does not have any topics."
-msgstr "У этого пользователя нет ни одной коллекции."
+msgstr "В этом форуме нет ни одной темы."
 
 #: templates/registration/activate.html:4
 #: templates/registration/activate.html:9
@@ -7203,6 +7206,12 @@ msgid ""
 "            best ones.\n"
 "            "
 msgstr ""
+"\n"
+"Как пользователь <strong>AstroBin Free</strong>, вы можете иметь до\n"
+"%(max_allowed)s изображений одновременно. Если хотите, вы можете удалять\n"
+"некоторые изображения, чтобы освободить место для новых.\n"
+"Например, вы можете держать тут лучшие или новейшие \n"
+"%(max_allowed)s изображений.\n"
 
 #: templates/subscription/subscription_detail.html:90
 #: templates/subscription/subscription_list.html:42
@@ -7220,6 +7229,13 @@ msgid ""
 "            %(max_allowed)s new image credits.\n"
 "            "
 msgstr ""
+"\n"
+"Как пользователь <strong>AstroBin Lite</strong>, вы можете иметь\n"
+"до %(max_allowed)s изображений одновременно за каждый год\n"
+"использования тарифа. Вы можете заменять изображения, загруженные в текущем\n"
+"периоде, тогда как изображения, загруженные ранее могут быть\n"
+"только удалены. Каждый год, обновляя подписку, вы получаете\n"
+"%(max_allowed)s новых мест для изображений.\n"
 
 #: templates/subscription/subscription_detail.html:103
 #: templates/subscription/subscription_list.html:62
@@ -7668,9 +7684,8 @@ msgid "Expiration date"
 msgstr "Дата окончания"
 
 #: templates/user/profile/meta.html:38
-#, fuzzy
 msgid "Images used"
-msgstr "Размер изображения"
+msgstr "Использованные изображения"
 
 #: templates/user/profile/meta.html:48
 msgid "Thanks for your support!"
@@ -7892,9 +7907,8 @@ msgid "AstroBin will not share your location details with other users."
 msgstr "AstroBin не делится вашим местоположением с другими пользователями."
 
 #: templates/user/profile/edit/navigation.html:60
-#, fuzzy
 msgid "E-mail notifications"
-msgstr "Уведомления"
+msgstr "Уведомления по E-mail"
 
 #: templates/user/profile/edit/notifications.html:6
 msgid "Edit your e-mail notification preferences"
@@ -7906,6 +7920,9 @@ msgid ""
 "that all notifications are always delivered on-site via the notifications "
 "menu, in all cases."
 msgstr ""
+"Выберите, какие уведомления вы хотели бы получать по e-mail. Обратите "
+"внимание, что все уведомления всегда доставляются на сайте в меню "
+"уведомлений."
 
 #: templates/user/profile/edit/preferences.html:6
 msgid "Edit your site preferences"
@@ -7992,11 +8009,10 @@ msgstr ""
 "Не изображение или повреждено. Допустимы только форматы JPG, PNG и GIF."
 
 #: views/__init__.py:630
-#, fuzzy
 msgid "You have reached your image count limit. Please upgrade!"
 msgstr ""
-"Вы достигли вашего лимита на загрузку изображений. Пожалуйста, улучшите "
-"статус!"
+"Вы достигли вашего лимита на загрузку изображений. Пожалуйста, смените "
+"тариф!"
 
 #: views/__init__.py:654 views/__init__.py:2112
 msgid ""
