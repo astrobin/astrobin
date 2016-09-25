@@ -50,6 +50,7 @@ from astrobin.models import (
     SOLAR_SYSTEM_SUBJECT_CHOICES,
 )
 from astrobin.utils import to_user_timezone
+from astrobin.templatetags.tags import can_like
 
 # AstroBin apps
 from astrobin_apps_groups.forms import GroupSelectForm
@@ -441,20 +442,6 @@ class ImageDetailView(DetailView):
             image_prev = image_prev[0]
 
 
-        ########
-        # LIKE #
-        ########
-        from astrobin_apps_premium.templatetags.astrobin_apps_premium_tags import is_free
-        user_scores_index = 0
-        if self.request.user.is_authenticated():
-            user_scores_index = self.request.user.userprofile.get_scores()['user_scores_index']
-        min_index_to_like = 1.00
-        user_can_like = self.request.user.is_superuser or (
-            self.request.user != image.user and
-            user_scores_index >= min_index_to_like or
-            not is_free(self.request.user))
-
-
         #################
         # RESPONSE DICT #
         #################
@@ -478,9 +465,9 @@ class ImageDetailView(DetailView):
 
             'image_ct': ContentType.objects.get_for_model(Image),
             'like_this': like_this,
-            'user_can_like': user_can_like,
+            'user_can_like': can_like(self.request.user, image),
             'bookmarked_this': bookmarked_this,
-            'min_index_to_like': min_index_to_like,
+            'min_index_to_like': 1.00,
 
             'comments_number': NestedComment.objects.filter(
                 deleted = False,

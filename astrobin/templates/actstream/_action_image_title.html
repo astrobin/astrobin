@@ -1,7 +1,7 @@
-{% if image.title %}
+{% if image and image.title %}
     <div class="title hidden-phone hidden-tablet">
         <div class="inner">
-            {{image.title}}, 
+            {{image.title}}
             <a href="{% url 'user_page' image.user.username %}">
                 {{image.user.userprofile}}
             </a>

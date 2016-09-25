@@ -2,7 +2,7 @@
 {% load toggleproperty_tags %}
 
 {% if request.user.is_authenticated and request.user != image.user %}
-    {% if not user_can_like %}
+    {% if not request.user|can_like:image %}
         <span class="toggleproperty-add-remove property-like">
             <a class="btn btn-primary disabled" data-toggle="modal" href="#cant-like">
                 <i class="icon-thumbs-up"></i>

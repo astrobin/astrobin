@@ -1,0 +1,6 @@
+{% load tags %}
+{% load toggleproperty_tags %}
+
+{% if image and request.user|can_like:image %}
+    {% add_remove_toggleproperty "like" image request.user %}
+{% endif %}
