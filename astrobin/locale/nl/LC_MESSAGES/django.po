@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: AstroBin 1.4\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2016-09-20 20:53+0100\n"
+"POT-Creation-Date: 2016-09-25 19:06+0100\n"
 "PO-Revision-Date: 2015-12-30 11:27+0000\n"
 "Last-Translator: Koen_Dierckens <koen.dierckens@pandora.be>\n"
 "Language-Team: Dutch <LL@li.org>\n"
@@ -1020,7 +1020,7 @@ msgstr ""
 "bestand. Spijtig genoeg kan AstroBin dit type van beelden momenteel niet "
 "opslaan en dien je ze op een persoonlijke webspace te hosten."
 
-#: forms.py:80 models.py:2233 models.py:2316 templates/gear/page.html:199
+#: forms.py:80 models.py:2278 models.py:2361 templates/gear/page.html:199
 #: templates/image/detail/image_title.html:14
 msgid "Link"
 msgstr "Link"
@@ -1057,7 +1057,7 @@ msgstr ""
 msgid "If you want to watermark this image, you must specify some text."
 msgstr "Voeg tekst toe als je de foto wil markeren met een watermerk."
 
-#: forms.py:148 forms.py:394 models.py:770
+#: forms.py:148 forms.py:395 models.py:770
 msgid "Imaging telescopes or lenses"
 msgstr "Telescopen en/of lenzen die je gebruikt om te fotograferen"
 
@@ -1065,12 +1065,12 @@ msgstr "Telescopen en/of lenzen die je gebruikt om te fotograferen"
 msgid "Guiding telescopes or lenses"
 msgstr "Volgtelescopen en/of lenzen"
 
-#: forms.py:150 forms.py:244 models.py:772 models.py:1725
-#: views/__init__.py:1662
+#: forms.py:150 forms.py:244 models.py:772 models.py:1762
+#: views/__init__.py:1609
 msgid "Mounts"
 msgstr "Monteringen"
 
-#: forms.py:151 forms.py:395 models.py:773
+#: forms.py:151 forms.py:396 models.py:773
 msgid "Imaging cameras"
 msgstr "Hoofdcamera's"
 
@@ -1078,23 +1078,23 @@ msgstr "Hoofdcamera's"
 msgid "Guiding cameras"
 msgstr "Volgcamera's"
 
-#: forms.py:153 forms.py:246 models.py:775 models.py:1727
-#: views/__init__.py:1663
+#: forms.py:153 forms.py:246 models.py:775 models.py:1764
+#: views/__init__.py:1610
 msgid "Focal reducers"
 msgstr "Focal Reducers"
 
-#: forms.py:154 forms.py:247 models.py:776 models.py:1728
-#: views/__init__.py:286 views/__init__.py:1664 views/image.py:211
+#: forms.py:154 forms.py:247 models.py:776 models.py:1765
+#: views/__init__.py:283 views/__init__.py:1611 views/image.py:211
 msgid "Software"
 msgstr "Software"
 
-#: forms.py:155 forms.py:248 models.py:777 models.py:1729
-#: views/__init__.py:1665
+#: forms.py:155 forms.py:248 models.py:777 models.py:1766
+#: views/__init__.py:1612
 msgid "Filters"
 msgstr "Filters"
 
-#: forms.py:156 forms.py:249 models.py:778 models.py:1730
-#: views/__init__.py:1666
+#: forms.py:156 forms.py:249 models.py:778 models.py:1767
+#: views/__init__.py:1613
 msgid "Accessories"
 msgstr "Accessoires"
 
@@ -1102,7 +1102,7 @@ msgstr "Accessoires"
 msgid "If you have a personal website, put the address here."
 msgstr "Als je een eigen website hebt, vermeld dat dan hier."
 
-#: forms.py:188 models.py:1644
+#: forms.py:188 models.py:1681
 msgid "Website"
 msgstr "Website"
 
@@ -1126,28 +1126,28 @@ msgstr ""
 "Tip: voer je filters afzonderlijk in! Als je bv. \"LRGB\" in één keer "
 "invoert, dan kan je geen sessies van de afzonderlijke filters toevoegen."
 
-#: forms.py:243 models.py:1724 views/__init__.py:1660
+#: forms.py:243 models.py:1761 views/__init__.py:1607
 msgid "Telescopes and lenses"
 msgstr "Telescopen en lenzen"
 
-#: forms.py:245 models.py:1726 views/__init__.py:1661
+#: forms.py:245 models.py:1763 views/__init__.py:1608
 msgid "Cameras"
 msgstr "Camera's"
 
-#: forms.py:287 forms.py:303
+#: forms.py:288 forms.py:304
 #: templates/inclusion_tags/search_image_list.html:64
 msgid "Users"
 msgstr "Gebruikers"
 
-#: forms.py:299
+#: forms.py:300
 msgid "Search type"
 msgstr "Zoek categorie"
 
-#: forms.py:301
+#: forms.py:302
 msgid "All"
 msgstr "Alles"
 
-#: forms.py:302 models.py:1342 templates/leaderboard.html:35
+#: forms.py:303 models.py:1379 templates/leaderboard.html:35
 #: templates/gear/page.html:238
 #: templates/inclusion_tags/search_image_list.html:51
 #: templates/inclusion_tags/search_image_list.html:104
@@ -1157,132 +1157,132 @@ msgstr "Alles"
 msgid "Images"
 msgstr "# Foto's"
 
-#: forms.py:304 models.py:658 models.py:1743
+#: forms.py:305 models.py:658 models.py:1788
 #: templates/maintenance_base.html:300 templates/wall.html:132
 #: templates/inclusion_tags/search_image_list.html:13
 #: templates/user/profile/navigation.html:151
-#: templates/user/profile/edit/navigation.html:30 views/__init__.py:1127
+#: templates/user/profile/edit/navigation.html:30 views/__init__.py:1074
 msgid "Gear"
 msgstr "Materiaal"
 
-#: forms.py:316
+#: forms.py:317
 msgid "Telescope type"
 msgstr "Telescoop type"
 
-#: forms.py:317 forms.py:323
+#: forms.py:318 forms.py:324
 msgid "Any"
 msgstr "Een"
 
-#: forms.py:322
+#: forms.py:323
 msgid "Camera type"
 msgstr "Camera type"
 
-#: forms.py:336 forms.py:341
+#: forms.py:337 forms.py:342
 msgid "Express value in mm"
 msgstr "Waarde in mm"
 
-#: forms.py:347 forms.py:352
+#: forms.py:348 forms.py:353
 msgid "Express value in &mu;m"
 msgstr "Geef waarde in &mu;m"
 
-#: forms.py:359 forms.py:364 forms.py:592 forms.py:637 forms.py:678
+#: forms.py:360 forms.py:365 forms.py:593 forms.py:638 forms.py:679
 msgid "Please use the following format: yyyy-mm-dd"
 msgstr "Gebruik het volgende ISO formaat : yyyy-mm-dd"
 
-#: forms.py:368 forms.py:372
+#: forms.py:369 forms.py:373
 msgid "Express value in hours"
 msgstr "Uren"
 
-#: forms.py:384 models.py:791 templates/image/detail/info.html:31
+#: forms.py:385 models.py:791 templates/image/detail/info.html:31
 #: templates/image/detail/info.html:32 templates/search/search.html:239
 msgid "License"
 msgstr "Licentie"
 
-#: forms.py:391
+#: forms.py:392
 msgid ""
 "Search for astronomical objects, telescopes or lenses, cameras, filters..."
 msgstr ""
 "Zoek naar astronomische objecten, telescopen of lenzen, camera's, "
 "filters, ..."
 
-#: forms.py:393 models.py:693
+#: forms.py:394 models.py:693
 msgid "Main solar system subject"
 msgstr "Zonnestelsel object"
 
-#: forms.py:396
+#: forms.py:397
 msgid "Min. telescope aperture"
 msgstr "Min. opening telescoop"
 
-#: forms.py:397
+#: forms.py:398
 msgid "Max. telescope aperture"
 msgstr "Max. opening telescoop"
 
-#: forms.py:398
+#: forms.py:399
 msgid "Acquired after"
 msgstr "Vastgelegd na"
 
-#: forms.py:399
+#: forms.py:400
 msgid "Acquired before"
 msgstr "Vastgelegd voor"
 
-#: forms.py:400
+#: forms.py:401
 msgid "Min. integration"
 msgstr "Min. integratie"
 
-#: forms.py:401
+#: forms.py:402
 msgid "Max. integration"
 msgstr "Max. integratie"
 
-#: forms.py:402
+#: forms.py:403
 msgid "Min. Moon phase %"
 msgstr "Min. maan fase in %"
 
-#: forms.py:403
+#: forms.py:404
 msgid "Max. Moon phase %"
 msgstr "Max. maan fase in %"
 
-#: forms.py:542
+#: forms.py:543
 msgid "Latitude (degrees)"
 msgstr "Breedtegraad (graden)"
 
-#: forms.py:547
+#: forms.py:548
 msgid "Latitude (minutes)"
 msgstr "Breedtegraad (minuten)"
 
-#: forms.py:553
+#: forms.py:554
 msgid "Latitude (seconds)"
 msgstr "Breedtegraad (seconden)"
 
-#: forms.py:560
+#: forms.py:561
 msgid "Longitude (degrees)"
 msgstr "Lengtegraad (graden)"
 
-#: forms.py:565
+#: forms.py:566
 msgid "Longitude (minutes)"
 msgstr "Lengtegraad (minuten)"
 
-#: forms.py:571
+#: forms.py:572
 msgid "Longitude (seconds)"
 msgstr "Lengtegraad (seconden)"
 
-#: forms.py:593 forms.py:638 forms.py:679 models.py:1367
+#: forms.py:594 forms.py:639 forms.py:680 models.py:1404
 #: templates/image/detail/image_card.html:46
 msgid "Date"
 msgstr "Datum"
 
-#: forms.py:599
+#: forms.py:600
 msgid "Please enter a value between 1 and 5."
 msgstr "Vul een waarde in tussen 1 en 5."
 
-#: forms.py:606
+#: forms.py:607
 msgid "Please enter a value between 1 and 10."
 msgstr "Vul een waarde in tussen 1 en 10."
 
-#: forms.py:667 forms.py:685
+#: forms.py:668 forms.py:686
 msgid "The date cannot be in the future."
 msgstr "De datum kan niet in de toekomst liggen."
 
-#: forms.py:919 forms.py:980 models.py:196 templates/gear/fix.html:32
+#: forms.py:920 forms.py:981 models.py:196 templates/gear/fix.html:32
 #: templates/gear/fix.html.py:33 templates/gear/fix.html:34
 #: templates/gear/fix.html.py:42 templates/gear/fix.html:47
 #: templates/gear/fix.html.py:52 templates/gear/fix.html:57
@@ -1300,12 +1300,12 @@ msgstr "De datum kan niet in de toekomst liggen."
 msgid "Make"
 msgstr "Merk"
 
-#: forms.py:920 forms.py:981 models.py:197
+#: forms.py:921 forms.py:982 models.py:197
 msgid "The make, brand, producer or developer of this product."
 msgstr "Het merk, de fabrikant, de producent of ontwikkelaar van dit produkt."
 
-#: forms.py:925 forms.py:986 models.py:204 models.py:1329 models.py:1919
-#: models.py:2058 templates/gear/fix.html:32 templates/gear/fix.html.py:33
+#: forms.py:926 forms.py:987 models.py:204 models.py:1366 models.py:1964
+#: models.py:2103 templates/gear/fix.html:32 templates/gear/fix.html.py:33
 #: templates/gear/fix.html:34 templates/gear/fix.html.py:42
 #: templates/gear/fix.html:47 templates/gear/fix.html.py:52
 #: templates/gear/fix.html:57 templates/gear/fix.html.py:62
@@ -1316,7 +1316,7 @@ msgstr "Het merk, de fabrikant, de producent of ontwikkelaar van dit produkt."
 msgid "Name"
 msgstr "Naam"
 
-#: forms.py:930 forms.py:955 forms.py:991 forms.py:1026
+#: forms.py:931 forms.py:956 forms.py:992 forms.py:1027
 #: templates/user/profile/commercial/products.html:83
 #: templates/user/profile/commercial/products.html:165
 #: templates/user/profile/commercial/products.html:281
@@ -1326,7 +1326,7 @@ msgstr "Naam"
 msgid "Merge"
 msgstr "Samenvoegen"
 
-#: forms.py:931 forms.py:992
+#: forms.py:932 forms.py:993
 msgid ""
 "Use this field to mark that the item you are claiming really is the same "
 "product (or a variation thereof) of something you have claimed before."
@@ -1334,7 +1334,7 @@ msgstr ""
 "Gebruik dit veld om aan te geven dat het produkt dat je claimt effectief "
 "hetzelfde (of een variatie ervan) is van iets dat je eerder hebt geclaimd."
 
-#: forms.py:945 forms.py:1008
+#: forms.py:946 forms.py:1009
 #, python-format
 msgid ""
 "You can't create more than %d claims. Consider upgrading your affiliation!"
@@ -1342,7 +1342,7 @@ msgstr ""
 "Je kan niet meer dan %d claims aanmaken. Overweeg om je peterschap up te "
 "graden!"
 
-#: forms.py:956 forms.py:1027
+#: forms.py:957 forms.py:1028
 msgid ""
 "Use this field to mark that the item you are merging really is the same "
 "product (or a variation thereof) of something you have claimed before."
@@ -1350,7 +1350,7 @@ msgstr ""
 "Gebruik dit veld om aan te geven dat het produkt dat je samenvoegt effectief "
 "hetzelfde (of een variatie) is van iets dat je eerder hebt geclaimd."
 
-#: forms.py:1016
+#: forms.py:1017
 msgid "You have already claimed this product."
 msgstr "Je hebt dit produkt al geclaimd."
 
@@ -1599,7 +1599,7 @@ msgid "Comet"
 msgstr "Komeet"
 
 #: models.py:152 models.py:595 models.py:659 templates/wall.html:144
-#: templates/image/edit/acquisition.html:85 views/__init__.py:1128
+#: templates/image/edit/acquisition.html:85 views/__init__.py:1075
 msgid "Other"
 msgstr "Andere"
 
@@ -1777,7 +1777,7 @@ msgstr "Opening"
 msgid "(in mm)"
 msgstr "(in mm)"
 
-#: models.py:453 models.py:1521 templates/image/detail/image_card.html:58
+#: models.py:453 models.py:1558 templates/image/detail/image_card.html:58
 #: templates/popover/gear_telescope.html:19
 msgid "Focal length"
 msgstr "Focus afstand"
@@ -1944,11 +1944,11 @@ msgstr "Deep-sky object"
 msgid "Solar system body or event"
 msgstr "Hemellichaam uit of gebeurtenis in het Zonnestelsel"
 
-#: models.py:656 templates/wall.html:120 views/__init__.py:1125
+#: models.py:656 templates/wall.html:120 views/__init__.py:1072
 msgid "Extremely wide field"
 msgstr "Extreem breedbeeld"
 
-#: models.py:657 templates/wall.html:126 views/__init__.py:1126
+#: models.py:657 templates/wall.html:126 views/__init__.py:1073
 msgid "Star trails"
 msgstr "Sterrensporen"
 
@@ -1957,7 +1957,7 @@ msgstr "Sterrensporen"
 msgid "Title"
 msgstr "Titel"
 
-#: models.py:680 models.py:1741 templates/user/profile/navigation.html:145
+#: models.py:680 models.py:1786 templates/user/profile/navigation.html:145
 msgid "Subject type"
 msgstr "Type onderwerp"
 
@@ -1984,7 +1984,7 @@ msgid ""
 "Drag items from the right side to the left side, or click on the plus sign."
 msgstr "Sleep objecten van rechts naar links of klik op het plusteken."
 
-#: models.py:709 models.py:1335 models.py:2066 models.py:2323
+#: models.py:709 models.py:1372 models.py:2111 models.py:2368
 #: templates/gear/page.html:49 templates/image/detail/image_description.html:8
 msgid "Description"
 msgstr "Beschrijving"
@@ -2022,138 +2022,138 @@ msgstr "Commentaar toestaan"
 msgid "(no title)"
 msgstr "(geen titel)"
 
-#: models.py:1350
+#: models.py:1387
 #, fuzzy
 msgid "Cover image"
 msgstr "Geen foto's"
 
-#: models.py:1368
+#: models.py:1405
 msgid "Please use the following format: yyyy-mm-dd."
 msgstr "Gebruik het volgen de ISO formaat : yyyy-mm-dd."
 
-#: models.py:1373 models.py:2298
+#: models.py:1410 models.py:2343
 msgid "Image"
 msgstr "Beeld"
 
-#: models.py:1392
+#: models.py:1429
 msgid "1 - Excellent dark-site sky (BLACK)"
 msgstr "1 - Uitstekende donkere plaats (ZWART)"
 
-#: models.py:1393
+#: models.py:1430
 msgid "2 - Typical truly dark site (GRAY)"
 msgstr "2 - Typische goed donkere plaats (GRIJS)"
 
-#: models.py:1394
+#: models.py:1431
 msgid "3 - Rural sky (BLUE)"
 msgstr "3 - Landelijke hemel (BLAUW)"
 
-#: models.py:1395
+#: models.py:1432
 msgid "4 - Rural/suburban transition (GREEN/YELLOW)"
 msgstr "4 - Landelijke/Stedelijke overgang (GROEN/GEEL)"
 
-#: models.py:1396
+#: models.py:1433
 msgid "5 - Suburban sky (ORANGE)"
 msgstr "5 - Voorstad/Dorpshemel (ORANJE)"
 
-#: models.py:1397
+#: models.py:1434
 msgid "6 - Bright suburban sky (RED)"
 msgstr "6 - Velichte voorstad/dorpshemel (ROOD)"
 
-#: models.py:1398
+#: models.py:1435
 msgid "7 - Suburban/urban transition or Full Moon (RED)"
 msgstr ""
 "7 - Voorstad/dorpshemel met overgang naar stedelijk gebied of volle maan "
 "(ROOD)"
 
-#: models.py:1399
+#: models.py:1436
 msgid "8 - City sky (WHITE)"
 msgstr "8 - Stadshemel (WIT)"
 
-#: models.py:1400
+#: models.py:1437
 msgid "9 - Inner city sky (WHITE)"
 msgstr "9 - Hemel in stadscentrum (WIT)"
 
-#: models.py:1404
+#: models.py:1441
 msgid "Synthetic channel"
 msgstr "Synthetisch kanaal"
 
-#: models.py:1410 views/__init__.py:287 views/image.py:212
+#: models.py:1447 views/__init__.py:284 views/image.py:212
 msgid "Filter"
 msgstr "Filter"
 
-#: models.py:1417
+#: models.py:1454
 msgid "Binning"
 msgstr "Binning"
 
-#: models.py:1420
+#: models.py:1457
 msgid "Number"
 msgstr "Getal"
 
-#: models.py:1422
+#: models.py:1459
 msgid "The number of sub-frames."
 msgstr "Het aantal subframes."
 
-#: models.py:1425
+#: models.py:1462
 msgid "Duration"
 msgstr "Tijdsduur"
 
-#: models.py:1427
+#: models.py:1464
 msgid "Duration of each sub-frame, in seconds."
 msgstr "Tijdsduur van ieder subframe, in seconden."
 
-#: models.py:1430
+#: models.py:1467
 msgid "ISO"
 msgstr "ISO"
 
-#: models.py:1434
+#: models.py:1471
 msgid "Gain"
 msgstr "Versterking"
 
-#: models.py:1439
+#: models.py:1476
 msgid "Sensor cooling"
 msgstr "Sensorkoeling"
 
-#: models.py:1441
+#: models.py:1478
 msgid "The temperature of the chip. E.g.: -20."
 msgstr "De temperatuur van de chip, bv -20."
 
-#: models.py:1444 views/image.py:342
+#: models.py:1481 views/image.py:342
 msgid "Darks"
 msgstr "Darks"
 
-#: models.py:1446
+#: models.py:1483
 msgid "The number of dark frames."
 msgstr "Het aantal dark frames."
 
-#: models.py:1449 views/image.py:343
+#: models.py:1486 views/image.py:343
 msgid "Flats"
 msgstr "Flats"
 
-#: models.py:1451
+#: models.py:1488
 msgid "The number of flat frames."
 msgstr "Het aantal flat frames."
 
-#: models.py:1454 views/image.py:344
+#: models.py:1491 views/image.py:344
 msgid "Flat darks"
 msgstr "Flat darks"
 
-#: models.py:1456
+#: models.py:1493
 msgid "The number of dark flat frames."
 msgstr "Het aantal flat dark frames."
 
-#: models.py:1459 views/image.py:345
+#: models.py:1496 views/image.py:345
 msgid "Bias"
 msgstr "Bias"
 
-#: models.py:1461
+#: models.py:1498
 msgid "The number of bias/offset frames."
 msgstr "Het aantal bias/offset frames."
 
-#: models.py:1464 views/image.py:348
+#: models.py:1501 views/image.py:348
 msgid "Bortle Dark-Sky Scale"
 msgstr "Bortle donkere hemel schaal"
 
-#: models.py:1468
+#: models.py:1505
 msgid ""
 "Quality of the sky according to <a href=\"http://en.wikipedia.org/wiki/"
 "Bortle_Dark-Sky_Scale\" target=\"_blank\">the Bortle Scale</a>."
@@ -2161,43 +2161,43 @@ msgstr ""
 "Kwaliteit van de hemel volgens de <a href=\"http://en.wikipedia.org/wiki/"
 "Bortle_Dark-Sky_Scale\" target=\"_blank\">Bortle Schaal</a>."
 
-#: models.py:1472
+#: models.py:1509
 msgid "Mean mag/arcsec^2"
 msgstr "Gemiddelde mag/arcsec^2"
 
-#: models.py:1473
+#: models.py:1510
 msgid "As measured with your Sky Quality Meter."
 msgstr "Gemeten met Sky Quality Meter."
 
-#: models.py:1478 views/image.py:350
+#: models.py:1515 views/image.py:350
 msgid "Mean FWHM"
 msgstr "Gemiddelde FWHM"
 
-#: models.py:1483 views/image.py:351
+#: models.py:1520 views/image.py:351
 msgid "Temperature"
 msgstr "Temperatuur"
 
-#: models.py:1486
+#: models.py:1523
 msgid "Ambient temperature (in Centigrade degrees)."
 msgstr "Omgevingstemperatuur in graden Celsius."
 
-#: models.py:1507
+#: models.py:1544
 msgid "Number of frames"
 msgstr "Aantal frames"
 
-#: models.py:1508
+#: models.py:1545
 msgid "The total number of frames you have stacked."
 msgstr "Het totaal aantal frames in de stack."
 
-#: models.py:1512 templates/image/detail/image_card.html:55
+#: models.py:1549 templates/image/detail/image_card.html:55
 msgid "FPS"
 msgstr "FPS"
 
-#: models.py:1513
+#: models.py:1550
 msgid "Frames per second."
 msgstr "Beelden per seconde."
 
-#: models.py:1522
+#: models.py:1559
 msgid ""
 "The focal length of the whole optical train, including barlow lenses or "
 "other components."
@@ -2205,123 +2205,123 @@ msgstr ""
 "De brandpuntsafstand van de volledige optische trein, inclusief barlows en "
 "andere componenten."
 
-#: models.py:1528 templates/image/detail/image_card.html:61
+#: models.py:1565 templates/image/detail/image_card.html:61
 msgid "CMI"
 msgstr "CMI"
 
-#: models.py:1529
+#: models.py:1566
 msgid "Latitude of the first Central Meridian."
 msgstr "Breedte van de eerste Centrale Meridiaan."
 
-#: models.py:1537 templates/image/detail/image_card.html:64
+#: models.py:1574 templates/image/detail/image_card.html:64
 msgid "CMII"
 msgstr "CMII"
 
-#: models.py:1538
+#: models.py:1575
 msgid "Latitude of the second Central Meridian."
 msgstr "Breedte van de tweede Centrale Meridiaan."
 
-#: models.py:1546 templates/image/detail/image_card.html:67
+#: models.py:1583 templates/image/detail/image_card.html:67
 msgid "CMIII"
 msgstr "CMIII"
 
-#: models.py:1547
+#: models.py:1584
 msgid "Latitude of the third Central Meridian."
 msgstr "Breedte van de derde Centrale Meridiaan."
 
-#: models.py:1555 templates/image/detail/image_card.html:70
+#: models.py:1592 templates/image/detail/image_card.html:70
 msgid "Seeing"
 msgstr "Seeing"
 
-#: models.py:1556
+#: models.py:1593
 msgid "Your estimation of the seeing, on a scale from 1 to 5."
 msgstr "Schatting van de seeing, op een schaal van 1 tot 5."
 
-#: models.py:1562 templates/image/detail/image_card.html:73
+#: models.py:1599 templates/image/detail/image_card.html:73
 msgid "Transparency"
 msgstr "Transparency"
 
-#: models.py:1563
+#: models.py:1600
 msgid "Your estimation of the transparency, on a scale from 1 to 10."
 msgstr ""
 "Schatting van de doorzichtigheid van de lucht, op een schaal van 1 tot 10."
 
-#: models.py:1569 templates/image/detail/image_card.html:49
+#: models.py:1606 templates/image/detail/image_card.html:49
 msgid "Time"
 msgstr "Tijd"
 
-#: models.py:1570
+#: models.py:1607
 msgid "Please use the following format: hh:mm."
 msgstr "Gebruik hh:mm."
 
-#: models.py:1590
+#: models.py:1627
 msgid "Request from"
 msgstr "Vraag van"
 
-#: models.py:1602
+#: models.py:1639
 msgid "Additional information"
 msgstr "Extra informatie"
 
-#: models.py:1603
+#: models.py:1640
 msgid "TIFF/FITS"
 msgstr "TIFF/FITS"
 
-#: models.py:1604
+#: models.py:1641
 msgid "Higher resolution"
 msgstr "Hogere resolutie"
 
-#: models.py:1636
+#: models.py:1673
 msgid "Real name"
 msgstr "Echte naam"
 
-#: models.py:1637
+#: models.py:1674
 msgid "If present, your real name will be used throughout the website."
 msgstr ""
 "Als je hem hebt ingegeven, dan zal je echte naam op AstroBin getoond worden."
 
-#: models.py:1651
+#: models.py:1688
 msgid "Job"
 msgstr "Baan"
 
-#: models.py:1658
+#: models.py:1695
 msgid "Hobbies"
 msgstr "Hobbies"
 
-#: models.py:1662
+#: models.py:1699
 msgid "Do you have any hobbies other than astrophotography?"
 msgstr "Heb je andere hobbies dan astrofotografie?"
 
-#: models.py:1669
+#: models.py:1706
 msgid "Timezone"
 msgstr "Tijdzone"
 
-#: models.py:1670
+#: models.py:1707
 msgid ""
 "By selecting this, you will see all the dates on AstroBin in your timezone."
 msgstr ""
 "Selecteer dit om alle tijden op AstroBin naar jouw tijdzone te vertalen."
 
-#: models.py:1675
+#: models.py:1712
 msgid "About you"
 msgstr "Over jezelf"
 
-#: models.py:1676
+#: models.py:1713
 msgid "Write something about yourself. HTML tags are allowed."
 msgstr "Vertel wat over jezelf. HTML tags zijn toegestaan."
 
-#: models.py:1690
+#: models.py:1727
 msgid "Company name"
 msgstr "Bedrijfsnaam"
 
-#: models.py:1691
+#: models.py:1728
 msgid "The name of the company you represent on AstroBin."
 msgstr "De naam van het bedrijf dat je op AstroBin vertegenwoordigt."
 
-#: models.py:1697
+#: models.py:1734
 msgid "Company description"
 msgstr "Beschrijving bedrijf"
 
-#: models.py:1698
+#: models.py:1735
 msgid ""
 "A short description of the company you represent on AstroBin. You can use "
 "some <a href=\"/faq/#comments\">formatting rules</a>."
@@ -2330,143 +2330,168 @@ msgstr ""
 "Je kunt gebruik maken van enkele <a href=\"/faq/#comments"
 "\">formatteringsregels</a>."
 
-#: models.py:1706
+#: models.py:1743
 msgid "Company website"
 msgstr "Bedrijfswebsite"
 
-#: models.py:1707
+#: models.py:1744
 msgid "The website of the company you represent on AstroBin."
 msgstr "De website van het bedrijf dat je vertegenwoordigt op AstroBin."
 
-#: models.py:1711
+#: models.py:1748
 msgid "Country of operation"
 msgstr "Land van de bedrijfszetel"
 
-#: models.py:1739 templates/search/search.html:31
+#: models.py:1771 templates/index/root.html:133
+#, fuzzy
+msgid "Global stream"
+msgstr "Globale stroom van activiteiten"
+
+#: models.py:1772 templates/index/root.html:137
+#, fuzzy
+msgid "Personal stream"
+msgstr "Persoonlijk"
+
+#: models.py:1773
+#, fuzzy
+msgid "All uploaded images"
+msgstr "heeft een nieuw beeld opgeladen"
+
+#: models.py:1774
+#, fuzzy
+msgid "All images uploaded by people you follow"
+msgstr "Nieuwe foto's van gebruikers die je volgt"
+
+#: models.py:1779
+#, fuzzy
+msgid "Default front page view"
+msgstr "Het standaard beginpagina deel is gewijzigd."
+
+#: models.py:1784 templates/search/search.html:31
 #: templates/user/profile/navigation.html:139
 msgid "Upload time"
 msgstr "Datum van publicatie"
 
-#: models.py:1740 templates/user/profile/navigation.html:142
+#: models.py:1785 templates/user/profile/navigation.html:142
 msgid "Acquisition time"
 msgstr "Belichtingstijd"
 
-#: models.py:1742 templates/user/profile/navigation.html:148
+#: models.py:1787 templates/user/profile/navigation.html:148
 msgid "Year"
 msgstr "Jaar"
 
-#: models.py:1744 templates/user/profile/navigation.html:136
+#: models.py:1789 templates/user/profile/navigation.html:136
 #, fuzzy
 msgid "Collections"
 msgstr "Locaties"
 
-#: models.py:1748
+#: models.py:1793
 msgid "Default gallery sorting"
 msgstr ""
 
-#: models.py:1754 templates/maintenance_base.html:312
+#: models.py:1799 templates/maintenance_base.html:312
 #: templates/user/profile/edit/navigation.html:42
 msgid "Default license"
 msgstr "Standaard licentie"
 
-#: models.py:1756
+#: models.py:1801
 msgid ""
 "The license you select here is automatically applied to all your new images."
 msgstr "Deze licentie wordt automatisch toegepast op al je nieuwe uploads."
 
-#: models.py:1796
+#: models.py:1841
 msgid "Language"
 msgstr "Taal"
 
-#: models.py:1817
+#: models.py:1862
 msgid "Signature"
 msgstr "Handtekening"
 
-#: models.py:1822
+#: models.py:1867
 msgid "Signature HTML Version"
 msgstr "Handtekening - HTML versie"
 
-#: models.py:1827
+#: models.py:1872
 msgid "Show signatures"
 msgstr "Toon handtekeningen"
 
-#: models.py:1832
+#: models.py:1877
 msgid "Post count"
 msgstr "Aantal berichten"
 
-#: models.py:1837
+#: models.py:1882
 msgid "Automatically subscribe"
 msgstr "Automatisch abonneren"
 
-#: models.py:1838
+#: models.py:1883
 msgid "Automatically subscribe to topics that you answer"
 msgstr "Automatisch abonneren op onderwerpen waarop je antwoordt"
 
-#: models.py:1845
+#: models.py:1890
 #: templates/pybb/mail_templates/subscription_email_subject.html:2
 msgid "New reply to a forum topic you subscribe to"
 msgstr "Nieuw antwoord op een forum waarop je je abonneert"
 
-#: models.py:1920
+#: models.py:1965
 msgid "A descriptive name, e.g. 'Home observatory' or 'Mount Whitney'."
 msgstr ""
 "Een goed omschrijvende naam, zoals \"Observatorium thuis\" of \"Mont Blanc\"."
 
-#: models.py:1926
+#: models.py:1971
 msgid "City"
 msgstr "Stad"
 
-#: models.py:1927
+#: models.py:1972
 msgid "If this location is not in a city, use the name of the closest city."
 msgstr ""
 "Als deze plaats niet in een stad is gelegen, gebruik dan de naam van de "
 "dichtstbijzijnde."
 
-#: models.py:1933
+#: models.py:1978
 msgid "State or province"
 msgstr "Staat of provincie"
 
-#: models.py:1938
+#: models.py:1983
 msgid "Country"
 msgstr "Land"
 
-#: models.py:1955
+#: models.py:2000
 msgid "North"
 msgstr "Noord"
 
-#: models.py:1955
+#: models.py:2000
 msgid "South"
 msgstr "Zuid"
 
-#: models.py:1956
+#: models.py:2001
 msgid "North or south"
 msgstr "Noord of zuid"
 
-#: models.py:1971
+#: models.py:2016
 msgid "East"
 msgstr "Oost"
 
-#: models.py:1971
+#: models.py:2016
 msgid "West"
 msgstr "West"
 
-#: models.py:1972
+#: models.py:2017
 msgid "East or West"
 msgstr "Oost of west"
 
-#: models.py:1976
+#: models.py:2021
 msgid "Altitude"
 msgstr "Hoogte"
 
-#: models.py:1977
+#: models.py:2022
 msgid "In meters."
 msgstr "In meter."
 
-#: models.py:2059
+#: models.py:2104
 msgid "The name of the website or app that wishes to use the APIs."
 msgstr "De naam van de website of app die de API's wenst te gebruiken."
 
-#: models.py:2067
+#: models.py:2112
 msgid ""
 "Please explain the purpose of your application, and how you intend to use "
 "the API."
@@ -2474,63 +2499,63 @@ msgstr ""
 "Gelieve het doel van je toepassing te verduidelijken en hoe je de API gaat "
 "gebruiken."
 
-#: models.py:2210
+#: models.py:2255
 msgid "AUD - Australian dollars"
 msgstr "AUD - Australische dollar"
 
-#: models.py:2211
+#: models.py:2256
 msgid "CAD - Canadian dollars"
 msgstr "CAD - Canadese dollar"
 
-#: models.py:2212
+#: models.py:2257
 msgid "CHF - Swiss francs"
 msgstr "CHF - Zwitserse frank"
 
-#: models.py:2213
+#: models.py:2258
 msgid "EUR - Euros"
 msgstr "EUR - Euro"
 
-#: models.py:2214
+#: models.py:2259
 msgid "GPB - Pound stelings"
 msgstr "GBP - Britse pond"
 
-#: models.py:2215
+#: models.py:2260
 msgid "PLN - Polish zloty"
 msgstr "PLN - Poolse zloty"
 
-#: models.py:2216
+#: models.py:2261
 msgid "SEK - Swedish krona"
 msgstr "SEK - Zweedse kroon"
 
-#: models.py:2217
+#: models.py:2262
 msgid "USD - American dollars"
 msgstr "USD - Amerikaanse dollar"
 
-#: models.py:2223 models.py:2273
+#: models.py:2268 models.py:2318
 msgid "Producer"
 msgstr "Producent"
 
-#: models.py:2234 models.py:2317
+#: models.py:2279 models.py:2362
 msgid "The link to this product's page on your website."
 msgstr "De link van dit produkt op je website."
 
-#: models.py:2242 templates/subscription/subscription_category_list.html:8
+#: models.py:2287 templates/subscription/subscription_category_list.html:8
 msgid "Price"
 msgstr "Prijs"
 
-#: models.py:2250
+#: models.py:2295
 msgid "Currency"
 msgstr "Munteenheid"
 
-#: models.py:2266
+#: models.py:2311
 msgid "Retailed gear items"
 msgstr "Verkocht produkt"
 
-#: models.py:2282
+#: models.py:2327
 msgid "Proper make"
 msgstr "Correct merk"
 
-#: models.py:2283
+#: models.py:2328
 msgid ""
 "Sometimes, product make/brand/producer/developer names are not written "
 "properly by the users. Write here the proper make/brand/producer/developer "
@@ -2539,11 +2564,11 @@ msgstr ""
 "Soms wordt het merk/type/producent/ontwikkelaar van het produkt niet correct "
 "gespeld door de gebruikers. Schrijf hier de juiste manier."
 
-#: models.py:2290
+#: models.py:2335
 msgid "Proper name"
 msgstr "Correcte naam"
 
-#: models.py:2291
+#: models.py:2336
 msgid ""
 "Sometimes, product names are not written properly by the users. Write here "
 "the proper product name, not including the make/brand/producer/developer "
@@ -2555,7 +2580,7 @@ msgstr ""
 "ontwikkelaar. <br/>Het is aanbevolen dat je zoveel mogelijk artikelen "
 "groepeert, dus tracht een generieke versie van je produktnaam te gebruiken."
 
-#: models.py:2299
+#: models.py:2344
 msgid ""
 "The official, commercial image for this product. Upload an image via the "
 "regular uploading interface, set its subject type to \"Gear\", and then "
@@ -2567,17 +2592,17 @@ msgstr ""
 "lijst. Als je verschillende revisies uploadt dan zullen deze ook verschijnen "
 "op de commerciële pagina."
 
-#: models.py:2308
+#: models.py:2353
 msgid "Tagline"
 msgstr "Slagzin"
 
-#: models.py:2309
+#: models.py:2354
 msgid ""
 "A memorable phrase that will sum up this product, for marketing purposes."
 msgstr ""
 "Een catchy zin die je produkt goed omschrijft. Voor marketing doeleinden."
 
-#: models.py:2324
+#: models.py:2369
 msgid ""
 "Here you can write the full commercial description of your product. You can "
 "use some <a href=\"/faq/#comments\">formatting rules</a>."
@@ -2586,7 +2611,7 @@ msgstr ""
 "neerschrijven. Je kunt enkele <a href=\"/faq/#comments"
 "\">formatteringsregels</a> gebruiken."
 
-#: models.py:2343
+#: models.py:2388
 msgid "Commercial gear items"
 msgstr "Commercieel materiaal"
 
@@ -2838,7 +2863,6 @@ msgstr "Tot nu toe is er nog geen activiteit geregistreerd."
 
 #: templates/affiliates.html:8 templates/affiliates.html.py:11
 #: templates/maintenance_base.html:184 templates/base/site_links.html:151
-#: templates/index/root.html:315
 msgid "Affiliates"
 msgstr "Peterschap"
 
@@ -3397,7 +3421,7 @@ msgid "What is this site?"
 msgstr "Wat is het doel van deze site?"
 
 #: templates/help.html:10 templates/maintenance_base.html:461
-#: templates/base/alerts.html:13 templates/index/root.html:269
+#: templates/base/alerts.html:13
 msgid "Hey!"
 msgstr "Hé daar!"
 
@@ -3651,13 +3675,11 @@ msgid "Archive of 'Image of the day' winners"
 msgstr "Archief van \"Foto van de dag\"-winnaars"
 
 #: templates/iotd_archive.html:25 templates/iotd_detail.html:32
-#: templates/actstream/action.html:87 templates/actstream/action.html.py:94
-#: templates/actstream/action.html:110 templates/actstream/action.html:117
-#: templates/gear/page.html:16 templates/index/root.html:83
+#: templates/gear/page.html:16
 msgid "by"
 msgstr "door"
 
-#: templates/iotd_archive.html:34 templates/index/root.html:100
+#: templates/iotd_archive.html:34
 msgid "Runners-up"
 msgstr "Plaatsvervangers"
 
@@ -3794,7 +3816,7 @@ msgid "Subscribed topics"
 msgstr "Geabonneerde onderwerpen"
 
 #: templates/maintenance_base.html:118 templates/base/site_links.html:67
-#: templates/image/detail/iotd_banner.html:10 templates/index/root.html:75
+#: templates/image/detail/iotd_banner.html:10 templates/index/root.html:74
 msgid "Image of the day"
 msgstr "Foto van de dag"
 
@@ -3820,7 +3842,6 @@ msgstr "Contact"
 #: templates/upload.html.py:70 templates/upload.html:86
 #: templates/avatar/change.html:38 templates/base/user_links_entries.html:14
 #: templates/image/detail/modals/upload_revision.html:17
-#: templates/index/root.html:121
 msgid "Upload"
 msgstr "Uploaden"
 
@@ -3909,16 +3930,16 @@ msgstr "Uitloggen"
 msgid "Notifications"
 msgstr "Kennisgevingen"
 
-#: templates/maintenance_base.html:356 templates/base/user_links.html:202
+#: templates/maintenance_base.html:356 templates/base/user_links.html:208
 msgid "Have an invite? Login!"
 msgstr "Heb je een uitnodiging? Log in!"
 
-#: templates/maintenance_base.html:358 templates/base/user_links.html:204
+#: templates/maintenance_base.html:358 templates/base/user_links.html:210
 #: templates/registration/activation_complete.html:7
 msgid "Login"
 msgstr "Login"
 
-#: templates/maintenance_base.html:364 templates/base/user_links.html:210
+#: templates/maintenance_base.html:364 templates/base/user_links.html:216
 #: templates/registration/login.html:15
 msgid "Register"
 msgstr "Inschrijven"
@@ -4474,9 +4495,122 @@ msgstr "Kometen"
 msgid "Remove filter"
 msgstr "Verwijder filter"
 
-#: templates/actstream/action.html:149
-msgid "ago"
-msgstr "geleden"
+#: templates/actstream/action.html:19
+#, python-format
+msgid ""
+"\n"
+"                            <a href=\"%(user_page)s\">%(user)s</a> uploaded "
+"a new image.\n"
+"                        "
+msgstr ""
+
+#: templates/actstream/action.html:37
+#, python-format
+msgid ""
+"\n"
+"                            <a href=\"%(user_page)s\">%(user)s</a> uploaded "
+"a new image revision.\n"
+"                        "
+msgstr ""
+
+#: templates/actstream/action.html:67
+#, python-format
+msgid ""
+"\n"
+"                                <a href=\"%(user_page)s\">%(user)s</a> and "
+"%(count)s others like this image.\n"
+"                            "
+msgstr ""
+
+#: templates/actstream/action.html:71
+#, python-format
+msgid ""
+"\n"
+"                                <a href=\"%(user_page)s\">%(user)s</a> likes "
+"this image.\n"
+"                            "
+msgstr ""
+
+#: templates/actstream/action.html:102
+#, python-format
+msgid ""
+"\n"
+"                                <a href=\"%(user_page)s\">%(user)s</a> and "
+"%(count)s others bookmarked this image.\n"
+"                            "
+msgstr ""
+
+#: templates/actstream/action.html:106
+#, python-format
+msgid ""
+"\n"
+"                                <a href=\"%(user_page)s\">%(user)s</a> "
+"bookmarked this image.\n"
+"                            "
+msgstr ""
+
+#: templates/actstream/action.html:137
+#, python-format
+msgid ""
+"\n"
+"                                <a href=\"%(user_page)s\">%(user)s</a> and "
+"%(count)s others commented this image.\n"
+"                            "
+msgstr ""
+
+#: templates/actstream/action.html:141
+#, python-format
+msgid ""
+"\n"
+"                                <a href=\"%(user_page)s\">%(user)s</a> "
+"commented this image.\n"
+"                            "
+msgstr ""
+
+#: templates/actstream/action.html:172
+#, python-format
+msgid ""
+"\n"
+"                            <a href=\"%(user_page)s\">%(user)s</a> created a "
+"new public data pool.\n"
+"                        "
+msgstr ""
+
+#: templates/actstream/action.html:197
+#, python-format
+msgid ""
+"\n"
+"                            <a href=\"%(user_page)s\">%(user)s</a> added "
+"data to a data pool.\n"
+"                        "
+msgstr ""
+
+#: templates/actstream/action.html:222
+#, python-format
+msgid ""
+"\n"
+"                            <a href=\"%(user_page)s\">%(user)s</a> added a "
+"processed image to a data pool.\n"
+"                        "
+msgstr ""
+
+#: templates/actstream/action.html:249
+#, python-format
+msgid ""
+"\n"
+"                            <a href=\"%(user_page)s\">%(user)s</a> created a "
+"new public group.\n"
+"                        "
+msgstr ""
+
+#: templates/actstream/action.html:274
+#, python-format
+msgid ""
+"\n"
+"                            <a href=\"%(user_page)s\">%(user)s</a> joined a "
+"group.\n"
+"                        "
+msgstr ""
 
 #: templates/avatar/change.html:14
 msgid "You do not yet have an avatar. Please upload one now."
@@ -5478,11 +5612,11 @@ msgstr ""
 msgid "What kind of image is this?"
 msgstr "Wat voor type foto is dit?"
 
-#: templates/image/edit/acquisition.html:79 views/__init__.py:1124
+#: templates/image/edit/acquisition.html:79 views/__init__.py:1071
 msgid "Solar system"
 msgstr "Zonnestelsel"
 
-#: templates/image/edit/acquisition.html:82 views/__init__.py:1123
+#: templates/image/edit/acquisition.html:82 views/__init__.py:1070
 msgid "Deep sky"
 msgstr "Deep-sky"
 
@@ -5750,64 +5884,22 @@ msgstr ""
 "netjes te organiseren. De verschillende grafieken geven je inzicht op je "
 "productiviteit en op het materiaal dat je het meest regelmatig gebruikt."
 
-#: templates/index/root.html:137
-msgid "Your activity stream"
-msgstr "Je stroom van activiteiten"
-
-#: templates/index/root.html:142
-msgid "Global activity stream"
-msgstr "Globale stroom van activiteiten"
-
-#: templates/index/root.html:147
-msgid "Recently uploaded"
-msgstr "Onlangs gepubliceerd"
-
-#: templates/index/root.html:152 templates/index/root.html.py:212
-msgid "Recent images from people you follow"
-msgstr "Nieuwe foto's van gebruikers die je volgt"
-
-#: templates/index/root.html:157 templates/index/root.html.py:223
-msgid "Recently liked"
-msgstr "Onlangs geliked"
-
-#: templates/index/root.html:162 templates/index/root.html.py:234
-msgid "Recently bookmarked"
-msgstr "Recente bladwijzers"
-
-#: templates/index/root.html:167 templates/index/root.html.py:245
-msgid "Recent images with link to TIFF/FITS"
-msgstr "Recente foto's met een link naar TIFF/FITS"
-
-#: templates/index/root.html:177
-msgid "Personal"
-msgstr "Persoonlijk"
-
-#: templates/index/root.html:188
-msgid "Global"
-msgstr "Globaal"
-
-#: templates/index/root.html:201
-msgid "Recent images"
-msgstr "Recente foto's"
-
-#: templates/index/root.html:257
-msgid "Set current front page section as default"
-msgstr "Maak het huidige beginpagina deel standaard"
-
-#: templates/index/root.html:272
-msgid ""
-"To make your personal stream more interesting, you should follow some people!"
-msgstr ""
-"Om je eigen persoonlijke stroom meer interessant te maken zou je andere "
-"mensen moeten volgen!"
-
-#: templates/index/root.html:296
+#: templates/index/root.html:94
 msgid "Latest from the forums"
 msgstr "Laatste nieuws van de fora"
 
-#: templates/index/root.html:320
-msgid "Do you want your product here?"
-msgstr "Wil je hier je product plaatsen?"
+#: templates/index/root.html:97
+msgid "More"
+msgstr ""
+
+#: templates/index/root.html:141
+msgid "Recent images"
+msgstr "Recente foto's"
+
+#: templates/index/root.html:145
+#, fuzzy
+msgid "Recent from your followed users"
+msgstr "Gebruikers die je volgt"
 
 #: templates/location/edit.html:5 templates/location/edit.html.py:14
 msgid "Edit your location"
@@ -6703,7 +6795,7 @@ msgstr "RK"
 msgid "Dec"
 msgstr "Dec"
 
-#: templates/popover/user.html:19 views/__init__.py:1218
+#: templates/popover/user.html:19 views/__init__.py:1165
 msgid "Member since"
 msgstr "Lid sinds"
 
@@ -7029,8 +7121,8 @@ msgstr "Basiscriteria"
 msgid "Please input some search terms!"
 msgstr "Vul aub een zoekterm in!"
 
-#: templates/search/search.html:307 views/__init__.py:1220
-#: views/__init__.py:1221 views/image.py:341
+#: templates/search/search.html:307 views/__init__.py:1167
+#: views/__init__.py:1168 views/image.py:341
 msgid "hours"
 msgstr "uren"
 
@@ -7639,8 +7731,8 @@ msgstr "Je account werd gewist. Bedankt om AstroBin gebruikt te hebben!"
 msgid "Import from Flickr"
 msgstr "Importeren vanuit Flickr"
 
-#: templates/user/profile/flickr_import.html:14 views/__init__.py:634
-#: views/__init__.py:2092
+#: templates/user/profile/flickr_import.html:14 views/__init__.py:581
+#: views/__init__.py:2039
 msgid ""
 "AstroBin is currently in read-only mode, because of server maintenance. "
 "Please try again soon!"
@@ -7898,11 +7990,11 @@ msgid "Add gear item"
 msgstr "Toevoegen materiaal"
 
 #: templates/user/profile/edit/gear.html:168
-#: templates/user/profile/edit/gear.html:243 views/__init__.py:976
-#: views/__init__.py:1003 views/__init__.py:1562 views/__init__.py:1575
-#: views/__init__.py:1596 views/__init__.py:1633 views/__init__.py:1723
-#: views/__init__.py:1785 views/__init__.py:1987 views/__init__.py:2029
-#: views/__init__.py:3128 views/__init__.py:3298 views/image.py:831
+#: templates/user/profile/edit/gear.html:243 views/__init__.py:923
+#: views/__init__.py:950 views/__init__.py:1509 views/__init__.py:1522
+#: views/__init__.py:1543 views/__init__.py:1580 views/__init__.py:1670
+#: views/__init__.py:1732 views/__init__.py:1934 views/__init__.py:1976
+#: views/__init__.py:3075 views/__init__.py:3245 views/image.py:830
 msgid "Form saved. Thank you!"
 msgstr "Het formulier is opgeslagen. Hartelijk dank!"
 
@@ -7960,90 +8052,90 @@ msgstr "Wijzig je voorkeuren voor deze site"
 msgid "Edit your retailer information"
 msgstr "Wijzig je informatie als distributeur"
 
-#: templatetags/tags.py:70 views/__init__.py:1192 views/__init__.py:2555
+#: templatetags/tags.py:75 views/__init__.py:1139 views/__init__.py:2502
 msgid "minutes"
 msgstr "minuten"
 
-#: templatetags/tags.py:71 views/__init__.py:1193 views/__init__.py:2556
+#: templatetags/tags.py:76 views/__init__.py:1140 views/__init__.py:2503
 msgid "seconds ago"
 msgstr "seconden geleden"
 
-#: templatetags/tags.py:72 views/__init__.py:1195 views/__init__.py:2558
+#: templatetags/tags.py:77 views/__init__.py:1142 views/__init__.py:2505
 #, python-format
 msgid "%s ago"
 msgstr "%s geleden"
 
-#: templatetags/tags.py:199 views/__init__.py:2429
+#: templatetags/tags.py:204 views/__init__.py:2376
 msgid "no alias"
 msgstr "geen alias"
 
-#: views/__init__.py:262 views/image.py:187
+#: views/__init__.py:259 views/image.py:187
 #, fuzzy
 msgid "Imaging telescope or lens"
 msgid_plural "Imaging telescopes or lenses"
 msgstr[0] "Telescopen en/of lenzen die je gebruikt om te fotograferen"
 msgstr[1] "Telescopen en/of lenzen die je gebruikt om te fotograferen"
 
-#: views/__init__.py:266 views/image.py:191
+#: views/__init__.py:263 views/image.py:191
 #, fuzzy
 msgid "Imaging camera"
 msgid_plural "Imaging cameras"
 msgstr[0] "Hoofdcamera's"
 msgstr[1] "Hoofdcamera's"
 
-#: views/__init__.py:270 views/image.py:195
+#: views/__init__.py:267 views/image.py:195
 #, fuzzy
 msgid "Mount"
 msgid_plural "Mounts"
 msgstr[0] "Monteringen"
 msgstr[1] "Monteringen"
 
-#: views/__init__.py:274 views/image.py:199
+#: views/__init__.py:271 views/image.py:199
 #, fuzzy
 msgid "Guiding telescope or lens"
 msgid_plural "Guiding telescopes or lenses"
 msgstr[0] "Volgtelescopen en/of lenzen"
 msgstr[1] "Volgtelescopen en/of lenzen"
 
-#: views/__init__.py:278 views/image.py:203
+#: views/__init__.py:275 views/image.py:203
 #, fuzzy
 msgid "Guiding camera"
 msgid_plural "Guiding cameras"
 msgstr[0] "Volgcamera's"
 msgstr[1] "Volgcamera's"
 
-#: views/__init__.py:282 views/image.py:207
+#: views/__init__.py:279 views/image.py:207
 #, fuzzy
 msgid "Focal reducer"
 msgid_plural "Focal reducers"
 msgstr[0] "Focal Reducers"
 msgstr[1] "Focal Reducers"
 
-#: views/__init__.py:291 views/image.py:216
+#: views/__init__.py:288 views/image.py:216
 #, fuzzy
 msgid "Accessory"
 msgid_plural "Accessories"
 msgstr[0] "Accessoires"
 msgstr[1] "Accessoires"
 
-#: views/__init__.py:508
+#: views/__init__.py:455
 #, fuzzy
 msgid "Today's 'Image of the day' was already chosen. Come back tomorrow!"
 msgstr "De huidige \"Foto van de dag\" is reeds verkozen. Kom morgen terug!"
 
-#: views/__init__.py:623 views/__init__.py:2081
+#: views/__init__.py:570 views/__init__.py:2028
 msgid ""
 "Invalid image or no image provided. Allowed formats are JPG, PNG and GIF."
 msgstr ""
 "Ongeldige foto of geen beeld aangeduid. Ondersteunde formaten zijn JPG, PNG "
 "en GIF."
 
-#: views/__init__.py:630
+#: views/__init__.py:577
 #, fuzzy
 msgid "You have reached your image count limit. Please upgrade!"
 msgstr "Je hebt je upload limiet bereikt, gelieve je account te upgraden !"
 
-#: views/__init__.py:654 views/__init__.py:2112
+#: views/__init__.py:601 views/__init__.py:2059
 msgid ""
 "You uploaded an Indexed PNG file. AstroBin will need to lower the color "
 "count to 256 in order to work with it."
@@ -8051,8 +8143,8 @@ msgstr ""
 "Je hebt een geindexeerd PNG bestand upgeload. AstroBin moet het aantal "
 "kleuren terugbrengen naar 256 om dit bestand te kunnen gebruiken."
 
-#: views/__init__.py:864 views/__init__.py:946 views/__init__.py:958
-#: views/__init__.py:970 views/__init__.py:994 views/__init__.py:1713
+#: views/__init__.py:811 views/__init__.py:893 views/__init__.py:905
+#: views/__init__.py:917 views/__init__.py:941 views/__init__.py:1660
 msgid ""
 "There was one or more errors processing the form. You may need to scroll "
 "down to see them."
@@ -8060,52 +8152,52 @@ msgstr ""
 "Er trad minstens één fout op bij het verwerken van het formulier. Het is "
 "mogelijk dat je naar beneden moet scrollen om ze te zien."
 
-#: views/__init__.py:941
+#: views/__init__.py:888
 msgid "Fill in one session, before adding more."
 msgstr "Vul één sessie in vooraleer er meerdere toe te voegen."
 
-#: views/__init__.py:1075
+#: views/__init__.py:1022
 msgid "No date specified"
 msgstr "Geen datum ingegeven"
 
-#: views/__init__.py:1097 views/__init__.py:1156
+#: views/__init__.py:1044 views/__init__.py:1103
 msgid "No imaging telescopes or lenses, or no imaging cameras specified"
 msgstr "Er werden geen telescopen of lenzen ingevoerd waarmee je beelden maakt"
 
-#: views/__init__.py:1098
+#: views/__init__.py:1045
 msgid "Gear images"
 msgstr "Foto's van apparatuur"
 
-#: views/__init__.py:1155
+#: views/__init__.py:1102
 msgid "No subjects specified"
 msgstr "Geen onderwerpen ingevoerd"
 
-#: views/__init__.py:1157
+#: views/__init__.py:1104
 msgid "No acquisition details specified"
 msgstr ""
 "Geen details ingevoerd omtrent de manier van het verkrijgen van het beeld"
 
-#: views/__init__.py:1219
+#: views/__init__.py:1166
 msgid "Last login"
 msgstr "Laatste login"
 
-#: views/__init__.py:1220
+#: views/__init__.py:1167
 msgid "Total integration time"
 msgstr "Totale integratietijd"
 
-#: views/__init__.py:1221
+#: views/__init__.py:1168
 msgid "Average integration time"
 msgstr "Gemiddelde integratietijd"
 
-#: views/__init__.py:1222
+#: views/__init__.py:1169
 msgid "Forum posts"
 msgstr "Forum berichten"
 
-#: views/__init__.py:2135
+#: views/__init__.py:2082
 msgid "Image uploaded. Thank you!"
 msgstr "De foto is opgeslagen. Hartelijk dank!"
 
-#: views/__init__.py:3088 views/__init__.py:3281
+#: views/__init__.py:3035 views/__init__.py:3228
 msgid "You can't merge a product to itself."
 msgstr "Je kan een produkt niet met zichzelf samenvoegen."
 
@@ -8122,10 +8214,6 @@ msgstr "Locaties"
 #, fuzzy
 msgid "Collection deleted!"
 msgstr "Registratie is voltooid."
-
-#: views/home.py:22
-msgid "Default front page section changed."
-msgstr "Het standaard beginpagina deel is gewijzigd."
 
 #: views/image.py:88
 msgid ""
@@ -8163,17 +8251,51 @@ msgstr "Registratie is voltooid."
 msgid "Image moved to the staging area."
 msgstr "Plaats in Ontwikkelingszone"
 
-#: views/image.py:802
+#: views/image.py:801
 #, fuzzy
 msgid "Image moved to the public area."
 msgstr "Promoveer naar Publieke Zone"
 
-#: views/image.py:836
+#: views/image.py:835
 #, fuzzy
 msgid "There was one or more errors processing the form. "
 msgstr ""
 "Er trad minstens één fout op bij het verwerken van het formulier. Het is "
 "mogelijk dat je naar beneden moet scrollen om ze te zien."
+
+#~ msgid "ago"
+#~ msgstr "geleden"
+
+#~ msgid "Your activity stream"
+#~ msgstr "Je stroom van activiteiten"
+
+#~ msgid "Recently uploaded"
+#~ msgstr "Onlangs gepubliceerd"
+
+#~ msgid "Recently liked"
+#~ msgstr "Onlangs geliked"
+
+#~ msgid "Recently bookmarked"
+#~ msgstr "Recente bladwijzers"
+
+#~ msgid "Recent images with link to TIFF/FITS"
+#~ msgstr "Recente foto's met een link naar TIFF/FITS"
+
+#~ msgid "Global"
+#~ msgstr "Globaal"
+
+#~ msgid "Set current front page section as default"
+#~ msgstr "Maak het huidige beginpagina deel standaard"
+
+#~ msgid ""
+#~ "To make your personal stream more interesting, you should follow some "
+#~ "people!"
+#~ msgstr ""
+#~ "Om je eigen persoonlijke stroom meer interessant te maken zou je andere "
+#~ "mensen moeten volgen!"
+
+#~ msgid "Do you want your product here?"
+#~ msgstr "Wil je hier je product plaatsen?"
 
 #~ msgid "Read all"
 #~ msgstr "Alles lezen"

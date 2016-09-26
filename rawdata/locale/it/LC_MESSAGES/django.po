@@ -7,8 +7,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2016-09-20 20:56+0100\n"
-"PO-Revision-Date: 2015-01-11 07:38+0000\n"
+"POT-Creation-Date: 2016-09-25 19:08+0100\n"
+"PO-Revision-Date: 2016-09-26 14:25+0000\n"
 "Last-Translator: Salvatore <salvatore@iovene.com>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
 "Language: it\n"
@@ -17,20 +17,20 @@ msgstr ""
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=(n != 1);\n"
 "X-Generator: Pootle 2.5.0\n"
-"X-POOTLE-MTIME: 1420961919.260667\n"
+"X-POOTLE-MTIME: 1474899905.743469\n"
 
 #: folders.py:82 models.py:215 models.py:283
-#: templates/rawdata/privatesharedfolder_detail.html:85
+#: templates/rawdata/privatesharedfolder_detail.html:86
 #: templates/rawdata/privatesharedfolder_form.html:20
-#: templates/rawdata/privatesharedfolder_list.html:37
-#: templates/rawdata/publicdatapool_detail.html:63
+#: templates/rawdata/privatesharedfolder_list.html:38
+#: templates/rawdata/publicdatapool_detail.html:64
 #: templates/rawdata/publicdatapool_form.html:20
 #: templates/rawdata/publicdatapool_list.html:32
 msgid "Name"
 msgstr "Nome"
 
 #: folders.py:92 templates/rawdata/_folder_dropdown.html:14
-#: templates/rawdata/_images.html:18 templates/rawdata/library.html:66
+#: templates/rawdata/_images.html:14 templates/rawdata/library.html:66
 #: templates/rawdata/rawimage_detail.html:15
 msgid "Type"
 msgstr "Tipo"
@@ -107,8 +107,6 @@ msgstr ""
 "dell'oggetto celeste ed una lunghezza focale di riferimento, in millimetri."
 
 #: models.py:220 models.py:288
-#: templates/rawdata/privatesharedfolder_list.html:38
-#: templates/rawdata/publicdatapool_list.html:33
 msgid "Description"
 msgstr "Descrizione"
 
@@ -144,43 +142,43 @@ msgstr ""
 "Non puoi passare a questo piano perché i tuoi file non entrerebbero nello "
 "spazio a disposizione. Prima devi cancellare dei file."
 
-#: templates/rawdata/_browser_js.html:20 templates/rawdata/_images.html:14
+#: templates/rawdata/_browser_js.html:19 templates/rawdata/_images.html:24
 msgid "Select all"
 msgstr "Seleziona tutto"
 
-#: templates/rawdata/_browser_js.html:40
+#: templates/rawdata/_browser_js.html:38
 msgid "Reset selection"
 msgstr "Annulla selezione"
 
-#: templates/rawdata/_browser_js.html:50 templates/rawdata/_images.html:41
-#: templates/rawdata/privatesharedfolder_detail.html:143
-#: templates/rawdata/publicdatapool_detail.html:112
+#: templates/rawdata/_browser_js.html:48 templates/rawdata/_images.html:48
+#: templates/rawdata/privatesharedfolder_detail.html:144
+#: templates/rawdata/publicdatapool_detail.html:113
 #: templates/rawdata/temporaryarchive_detail.html:24
 msgid "Download"
 msgstr "Scarica"
 
-#: templates/rawdata/_browser_js.html:56 templates/rawdata/library.html:151
+#: templates/rawdata/_browser_js.html:54 templates/rawdata/library.html:151
 msgid "Preprocess"
 msgstr "Preprocessa"
 
-#: templates/rawdata/_browser_js.html:63
+#: templates/rawdata/_browser_js.html:61
 msgid "Share"
 msgstr "Condividi"
 
-#: templates/rawdata/_browser_js.html:70
+#: templates/rawdata/_browser_js.html:68
 #: templates/rawdata/privatesharedfolder_detail.html:8
 msgid "Private shared folder"
 msgstr "Cartella condivisa privata"
 
-#: templates/rawdata/_browser_js.html:74
+#: templates/rawdata/_browser_js.html:72
 #: templates/rawdata/publicdatapool_detail.html:8
 msgid "Public data pool"
 msgstr "Gruppo di dati pubblici"
 
-#: templates/rawdata/_browser_js.html:80 templates/rawdata/_images.html:44
+#: templates/rawdata/_browser_js.html:78 templates/rawdata/_images.html:51
 #: templates/rawdata/privatesharedfolder_detail.html:47
-#: templates/rawdata/privatesharedfolder_detail.html:185
-#: templates/rawdata/privatesharedfolder_list.html:96
+#: templates/rawdata/privatesharedfolder_detail.html:186
+#: templates/rawdata/privatesharedfolder_list.html:95
 msgid "Delete"
 msgstr "Cancella"
 
@@ -189,14 +187,18 @@ msgstr "Cancella"
 msgid "Smart folders"
 msgstr "Cartelle intelligenti"
 
-#: templates/rawdata/_folders.html:12
+#: templates/rawdata/_folders.html:13
 msgid "Files"
 msgstr "File"
 
-#: templates/rawdata/_images.html:19 templates/rawdata/library.html:74
-#: templates/rawdata/privatesharedfolder_detail.html:88
+#: templates/rawdata/_images.html:13
+msgid "Filename"
+msgstr "Nome file"
+
+#: templates/rawdata/_images.html:15 templates/rawdata/library.html:74
+#: templates/rawdata/privatesharedfolder_detail.html:89
 #: templates/rawdata/privatesharedfolder_form.html:22
-#: templates/rawdata/publicdatapool_detail.html:66
+#: templates/rawdata/publicdatapool_detail.html:67
 #: templates/rawdata/publicdatapool_form.html:22
 #: templates/rawdata/rawimage_detail.html:17
 msgid "Uploaded"
@@ -527,8 +529,8 @@ msgid "Actions"
 msgstr "Azioni"
 
 #: templates/rawdata/privatesharedfolder_detail.html:33
-#: templates/rawdata/privatesharedfolder_detail.html:211
-#: templates/rawdata/privatesharedfolder_detail.html:223
+#: templates/rawdata/privatesharedfolder_detail.html:212
+#: templates/rawdata/privatesharedfolder_detail.html:224
 msgid "Invite"
 msgstr "Invita"
 
@@ -550,39 +552,39 @@ msgstr ""
 msgid "Processing submissions for this folder"
 msgstr "Elaborazione presentate per questa cartella"
 
-#: templates/rawdata/privatesharedfolder_detail.html:86
-#: templates/rawdata/publicdatapool_detail.html:64
+#: templates/rawdata/privatesharedfolder_detail.html:87
+#: templates/rawdata/publicdatapool_detail.html:65
 msgid "User"
 msgstr "Utente"
 
-#: templates/rawdata/privatesharedfolder_detail.html:87
+#: templates/rawdata/privatesharedfolder_detail.html:88
 #: templates/rawdata/privatesharedfolder_form.html:21
-#: templates/rawdata/publicdatapool_detail.html:65
+#: templates/rawdata/publicdatapool_detail.html:66
 #: templates/rawdata/publicdatapool_form.html:21
 #: templates/rawdata/rawimage_detail.html:16
 msgid "Size"
 msgstr "Dimensione"
 
-#: templates/rawdata/privatesharedfolder_detail.html:112
+#: templates/rawdata/privatesharedfolder_detail.html:113
 msgid "Remove from this folder"
 msgstr "Rimuovi da questa cartella"
 
-#: templates/rawdata/privatesharedfolder_detail.html:126
+#: templates/rawdata/privatesharedfolder_detail.html:127
 msgid "Shared with the following users"
 msgstr "Condiviso con i seguenti utenti"
 
-#: templates/rawdata/privatesharedfolder_detail.html:146
-#: templates/rawdata/publicdatapool_detail.html:115
+#: templates/rawdata/privatesharedfolder_detail.html:147
+#: templates/rawdata/publicdatapool_detail.html:116
 msgid "Size before zip compression"
 msgstr "Dimensione prima della compressione zip"
 
-#: templates/rawdata/privatesharedfolder_detail.html:155
-#: templates/rawdata/publicdatapool_detail.html:124
+#: templates/rawdata/privatesharedfolder_detail.html:156
+#: templates/rawdata/publicdatapool_detail.html:125
 msgid "Comments"
 msgstr "Commenti"
 
-#: templates/rawdata/privatesharedfolder_detail.html:159
-#: templates/rawdata/publicdatapool_detail.html:128
+#: templates/rawdata/privatesharedfolder_detail.html:160
+#: templates/rawdata/publicdatapool_detail.html:129
 msgid ""
 "You can use this space to discuss this public data pool and exchange "
 "information and tips with other contributors or people who want to process "
@@ -592,18 +594,18 @@ msgstr ""
 "scambiare informazioni e suggerimenti con altri contributori, o utenti che "
 "vogliono elaborare i dati."
 
-#: templates/rawdata/privatesharedfolder_detail.html:176
-#: templates/rawdata/privatesharedfolder_list.html:88
+#: templates/rawdata/privatesharedfolder_detail.html:177
+#: templates/rawdata/privatesharedfolder_list.html:87
 msgid "Delete folder"
 msgstr "Cancella cartella"
 
-#: templates/rawdata/privatesharedfolder_detail.html:179
-#: templates/rawdata/privatesharedfolder_list.html:91
+#: templates/rawdata/privatesharedfolder_detail.html:180
+#: templates/rawdata/privatesharedfolder_list.html:90
 msgid "Are you sure you want to delete this shared folder?"
 msgstr "Sei sicuro di voler cancellare questa cartella condivisa?"
 
-#: templates/rawdata/privatesharedfolder_detail.html:180
-#: templates/rawdata/privatesharedfolder_list.html:92
+#: templates/rawdata/privatesharedfolder_detail.html:181
+#: templates/rawdata/privatesharedfolder_list.html:91
 msgid ""
 "Don't worry, no files will be deleted from your raw data account, nor from "
 "the accounts of other people who may have contributed to this shared folder."
@@ -612,26 +614,26 @@ msgstr ""
 "né dagli account di altri utenti che hanno contribuito a questa cartella "
 "condivisa."
 
-#: templates/rawdata/privatesharedfolder_detail.html:183
-#: templates/rawdata/privatesharedfolder_detail.html:203
-#: templates/rawdata/privatesharedfolder_detail.html:222
+#: templates/rawdata/privatesharedfolder_detail.html:184
+#: templates/rawdata/privatesharedfolder_detail.html:204
+#: templates/rawdata/privatesharedfolder_detail.html:223
 #: templates/rawdata/privatesharedfolder_form.html:99
-#: templates/rawdata/privatesharedfolder_list.html:95
-#: templates/rawdata/publicdatapool_detail.html:155
+#: templates/rawdata/privatesharedfolder_list.html:94
+#: templates/rawdata/publicdatapool_detail.html:156
 #: templates/rawdata/publicdatapool_form.html:99
 msgid "Cancel"
 msgstr "Annulla"
 
-#: templates/rawdata/privatesharedfolder_detail.html:193
+#: templates/rawdata/privatesharedfolder_detail.html:194
 msgid "Edit folder"
 msgstr "Modifica cartella"
 
-#: templates/rawdata/privatesharedfolder_detail.html:204
-#: templates/rawdata/publicdatapool_detail.html:156
+#: templates/rawdata/privatesharedfolder_detail.html:205
+#: templates/rawdata/publicdatapool_detail.html:157
 msgid "Save"
 msgstr "Salva"
 
-#: templates/rawdata/privatesharedfolder_detail.html:214
+#: templates/rawdata/privatesharedfolder_detail.html:215
 msgid ""
 "Invite users to this share private folders. Invitees will be able to add raw "
 "data and processed images, and invite more users."
@@ -746,26 +748,26 @@ msgid "You have access to the following private shared folders."
 msgstr "Hai accesso alle seguenti cartelle condivise private."
 
 #: templates/rawdata/privatesharedfolder_list.html:39
-#: templates/rawdata/publicdatapool_list.html:34
+#: templates/rawdata/publicdatapool_list.html:33
 msgid "Owner"
 msgstr "Possessore"
 
 #: templates/rawdata/privatesharedfolder_list.html:40
-#: templates/rawdata/publicdatapool_list.html:35
+#: templates/rawdata/publicdatapool_list.html:34
 msgid "Raw images"
 msgstr "Immagini grezze"
 
 #: templates/rawdata/privatesharedfolder_list.html:41
-#: templates/rawdata/publicdatapool_list.html:36
+#: templates/rawdata/publicdatapool_list.html:35
 msgid "Processed images"
 msgstr "Immagini elaborate"
 
 #: templates/rawdata/privatesharedfolder_list.html:42
-#: templates/rawdata/publicdatapool_list.html:37
+#: templates/rawdata/publicdatapool_list.html:36
 msgid "Last updated"
 msgstr "Ultimo aggiornamento"
 
-#: templates/rawdata/privatesharedfolder_list.html:76
+#: templates/rawdata/privatesharedfolder_list.html:75
 #, python-format
 msgid ""
 "You don't have access to any private shared folders. If you want to create "
@@ -778,7 +780,7 @@ msgstr ""
 "dei file o delle <strong>cartelle intelligenti</strong> ed usa il pulsante "
 "<strong>Condividi</strong> per condividerli."
 
-#: templates/rawdata/privatesharedfolder_list.html:78
+#: templates/rawdata/privatesharedfolder_list.html:77
 msgid ""
 "You don't have access to any private shared folders. You don't have a Raw "
 "Data subscription, so you may not create shared folder, but you may still be "
@@ -788,13 +790,13 @@ msgstr ""
 "Dati Grezzi, quindi non puoi creare cartelle condivise, ma puoi comunque "
 "essere invitato da altri abbonati."
 
-#: templates/rawdata/privatesharedfolder_list.html:105
-#: templates/rawdata/publicdatapool_list.html:66
+#: templates/rawdata/privatesharedfolder_list.html:104
+#: templates/rawdata/publicdatapool_list.html:64
 msgid "Follow"
 msgstr "Segui"
 
-#: templates/rawdata/privatesharedfolder_list.html:105
-#: templates/rawdata/publicdatapool_list.html:66
+#: templates/rawdata/privatesharedfolder_list.html:104
+#: templates/rawdata/publicdatapool_list.html:64
 msgid "Unfollow"
 msgstr "Smetti di seguire"
 
@@ -811,11 +813,11 @@ msgstr ""
 msgid "Processing submissions for this pool"
 msgstr "Elaborazioni presentate a questo gruppo"
 
-#: templates/rawdata/publicdatapool_detail.html:90
+#: templates/rawdata/publicdatapool_detail.html:91
 msgid "Remove from this pool"
 msgstr "Rimuovi da questo gruppo"
 
-#: templates/rawdata/publicdatapool_detail.html:105
+#: templates/rawdata/publicdatapool_detail.html:106
 #, python-format
 msgid ""
 "This public data pool was created on %(date)s by <a href=\"%(user_url)s\">"
@@ -830,7 +832,7 @@ msgstr ""
 "href=\"%(rawdata_url)s\">AstroBin Dati Grezzi</a>, oppure puoi scaricare i "
 "dati disponibili e provare ad elaborarli."
 
-#: templates/rawdata/publicdatapool_detail.html:145
+#: templates/rawdata/publicdatapool_detail.html:146
 msgid "Edit public data pool"
 msgstr "Modifica gruppo di dati pubbici"
 
