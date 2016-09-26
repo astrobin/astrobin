@@ -2068,6 +2068,10 @@ div.capty-target .capty-caption-content .link-overlay a {
 .subtle-container .header h4 i {
   margin-right: 8px;
 }
+.subtle-container .header .separator {
+  margin-right: 6px;
+  color: #999;
+}
 .subtle-container .col {
   float: left;
   width: 50%;
@@ -4344,4 +4348,10 @@ ol.faq p,
 ol.faq h4,
 .row.help h4 {
   margin-bottom: 4px;
+}
+.anchor {
+  display: block;
+  position: relative;
+  top: -55px;
+  visibility: hidden;
 }

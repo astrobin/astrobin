@@ -126,6 +126,7 @@
             </table>
         </div>
 
+        <a class="anchor" name="stream"></a>
         <div class="subtle-container simple-container">
             <div class="header">
                 <h4>
@@ -146,6 +147,40 @@
                     {% endif %}
 
                     <div class="actions">
+                        {% if section != 'global' %}
+                            <a href="?s=global#stream" title="{% trans "Global stream" %}">
+                        {% endif %}
+                                <i class="icon icon-globe"></i>
+                        {% if section != 'global' %}
+                            </a>
+                        {% endif %}
+
+                        {% if section != 'personal' %}
+                            <a href="?s=personal#stream" title="{% trans "Personal stream" %}">
+                        {% endif %}
+                                <i class="icon icon-user"></i>
+                        {% if section != 'personal' %}
+                            </a>
+                        {% endif %}
+
+                        {% if section != 'recent' %}
+                            <a href="?s=recent#stream" title="{% trans "Recent images" %}">
+                        {% endif %}
+                                <i class="icon icon-time"></i>
+                        {% if section != 'recent' %}
+                            </a>
+                        {% endif %}
+
+                        {% if section != 'followed' %}
+                            <a href="?s=followed#stream" title="{% trans "Recent from your followed users" %}">
+                        {% endif %}
+                                <i class="icon icon-plus-sign"></i>
+                        {% if section != 'followed' %}
+                            </a>
+                        {% endif %}
+
+                        <span class="separator">/</span>
+
                         <a href="{% url 'profile_edit_preferences' %}">
                             <i class="icon-cog"></i>
                         </a>
