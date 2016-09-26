@@ -6,7 +6,7 @@
 {% block container_extra_classes %}has-subnav{% endblock %}
 
 {% block content %}
-    <a name="page_anchor"></a>
+    <a class="anchor" name="page_anchor"></a>
     {% include 'user/profile/navigation.html' %}
 
     <h1>{% blocktrans with requested_user.username as user %}{{user}}'s plots{% endblocktrans %}</h1>
@@ -21,7 +21,7 @@
     <div class="row section">
         <div class="span6">
             <div class="subtle-container">
-                <a name="stats_integration_hours_anchor"></a>
+                <a class="anchor" name="stats_integration_hours_anchor"></a>
                 <div class="header">{% trans "Total integration hours, plotted against time." %}</div>
                 <div id="stats_integration_hours" class="plot" style="width:420px;height:200px;">
                     <div class="loading">
@@ -34,7 +34,7 @@
 
         <div class="span6">
             <div class="subtle-container">
-                <a name="stats_integration_hours_by_gear_anchor"></a>
+                <a class="anchor" name="stats_integration_hours_by_gear_anchor"></a>
                 <div class="header">{% trans "Total integration hours, plotted against time and arranged by imaging telescopes and lenses, and imaging cameras." %}</div>
                 <div id="stats_integration_hours_by_gear" class="plot" style="width:420px;height:200px;">
                     <div class="loading">
@@ -50,7 +50,7 @@
     <div class="row">
         <div class="span6">
             <div class="subtle-container"
-                <a name="stats_views_anchor"></a>
+                <a class="anchor" name="stats_views_anchor"></a>
                 <div class="header">{% trans "Combined view count for all the user's images, plotted against time." %}</div>
                 <div id="stats_views" class="plot" style="width:420px;height:200px;">
                     <div class="loading">
@@ -63,7 +63,7 @@
 
         <div class="span6">
             <div class="subtle-container">
-                <a name="stats_uploaded_images_anchor"></a>
+                <a class="anchor" name="stats_uploaded_images_anchor"></a>
                 <div class="header">{% trans "Image uploads, plotted against time." %}</div>
                 <div id="stats_uploaded_images" class="plot" style="width:420px;height:200px;">
                     <div class="loading">

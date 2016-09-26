@@ -5,7 +5,7 @@
 {% pybb_get_profile user=post.user as post_user_profile %}
 {% pybb_get_profile user=user as user_profile %}
 
-<a name="post-{{ post.id }}"></a> {# may be remove this string? #}
+<a class="anchor" name="post-{{ post.id }}"></a> {# may be remove this string? #}
 
 <table class="table post {% if post.on_moderation %}on-moderation{% endif %}" id="post-{{ post.id }}">
     <thead class="post-header">

@@ -36,7 +36,7 @@
 
          <div class="message-form">
             <form class="reply-form form-horizontal" method="POST" action="{% url 'message_reply' thread.pk %}">{% csrf_token %}
-               <a name="reply"></a>
+               <a class="anchor" name="reply"></a>
                {{ form|as_bootstrap }}
                <div class="form-actions">
                   <input type="submit" class="btn btn-primary" value="{% trans "Reply" %}"/>
