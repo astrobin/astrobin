@@ -1,53 +1,58 @@
-{% extends "django_messages/base.html" %}
+{% extends "base.html" %}
+
 {% load i18n %}
 {% load bootstrap_toolkit %}
 
 {% block title %}{{thread.subject}}{% endblock %}
+{% block container_extra_classes %}has-subnav{% endblock %}
 
 {% block content %}
- <div class="row">
-    <div class="span12">
-        <h2>{{ thread.subject }}</h2>
-        <p>
-            {% blocktrans with participant.user.get_absolute_url as sender_url %}A conversation between <a href="{{ sender_url }}">you</a> and{% endblocktrans %}:
-             {% for participant in participant.others %}
-                <a href="{{ participant.user.get_absolute_url }}" class="btn btn-mini btn-primary">{{ participant.user.userprofile }}</a>
-             {% endfor %}
-        </p>
 
-        <div class="well">
-            <a href="{% url 'messages_delete' thread.pk %}" class="btn btn-danger">
-               {% trans "Delete conversation" %}
-            </a>
-            <a class="btn" href="{% url 'messages_inbox' %}" class="back">
-                 {% trans "or return to messages" %}
-            </a>
-        </div>
+    <div class="subnav subnav-fixed">
+        <ul class="nav nav-pills">
+            <li>
+                <a href="{% url 'messages_inbox' %}">
+                    <i class="icon-arrow-left icon-white"></i>
+                    <span class="hidden-phone">{% trans "Back" %}</span>
+                </a>
+            </li>
+            <li>
+                <a href="{% url 'messages_delete' thread.pk %}" class="danger">
+                    <i class="icon-trash icon-white"></i>
+                    <span class="hidden-phone">{% trans "Delete conversation" %}</span>
+                </a>
+            </li>
+        </ul>
+    </div>
 
-         <div class="message-list">
-            {% for message_tuple in message_list %}
-              {% with message_tuple.0 as message %}
+    <h1>{{ thread.subject }}</h1>
+
+    <p class="well">
+        {% blocktrans with participant.user.get_absolute_url as sender_url %}A conversation between <a href="{{ sender_url }}">you</a> and{% endblocktrans %}:
+         {% for participant in participant.others %}
+            <a href="{{ participant.user.get_absolute_url }}" class="btn btn-mini btn-primary">{{ participant.user.userprofile }}</a>
+         {% endfor %}
+    </p>
+
+    <div class="message-list">
+        {% for message_tuple in message_list %}
+            {% with message_tuple.0 as message %}
                 <div class="message-container {% if message.sender = request.user %}own{% else %}other{% endif %}">
                     {% include "messages/message_list_view.html" %}
                 </div>
-              {% endwith %}
-            {% endfor %}
-         </div>
+            {% endwith %}
+        {% endfor %}
+    </div>
 
-         <div class="message-form">
-            <form class="reply-form form-horizontal" method="POST" action="{% url 'message_reply' thread.pk %}">{% csrf_token %}
-               <a class="anchor" name="reply"></a>
-               {{ form|as_bootstrap }}
-               <div class="form-actions">
-                  <input type="submit" class="btn btn-primary" value="{% trans "Reply" %}"/>
-                  <a href="{% url 'messages_inbox' %}" class="btn">
-                     {% trans "or return to messages" %}
-                  </a>
-               </div>
-            </form>
-         </div>
-    </div> <!-- span12 -->
-</div> <!-- row -->
+    <div class="message-form">
+        <form class="reply-form form-horizontal" method="POST" action="{% url 'message_reply' thread.pk %}">{% csrf_token %}
+            <a class="anchor" name="reply"></a>
+            {{ form|as_bootstrap }}
+            <div class="form-actions">
+                <input type="submit" class="btn btn-primary btn-block-mobile" value="{% trans "Reply" %}"/>
+            </div>
+        </form>
+    </div>
 {% endblock %}
 
 {% block extra_js %}
