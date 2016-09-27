@@ -230,7 +230,7 @@ TEMPLATE_CONTEXT_PROCESSORS = (
     'pybb.context_processors.processor',
 )
 
-INSTALLED_APPS = (
+INSTALLED_APPS = [
     # Django apps
     'django.contrib.admin',
     'django.contrib.auth',
@@ -291,7 +291,7 @@ INSTALLED_APPS = (
     'astrobin_apps_notifications',
     'astrobin_apps_groups',
     'toggleproperties',
-)
+]
 if DEBUG_TOOLBAR:
     INSTALLED_APPS += ['debug_toolbar',]
 
