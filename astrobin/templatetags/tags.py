@@ -378,12 +378,18 @@ def can_like(user, image):
     from astrobin_apps_premium.templatetags.astrobin_apps_premium_tags import is_free
 
     user_scores_index = 0
+    min_index_to_like = 1.00
+
     if user.is_authenticated():
         user_scores_index = user.userprofile.get_scores()['user_scores_index']
-    min_index_to_like = 1.00
-    return user.is_superuser or (
-        user != image.user and
-        user_scores_index >= min_index_to_like or
-        not is_free(user))
 
+    if user.is_superuser:
+        return True
 
+    if user == image.user:
+        return False
+
+    if is_free(user) and user_score_index < min_index_to_like:
+        return False
+
+    return True
