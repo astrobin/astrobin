@@ -22,7 +22,7 @@
         <div id="why-astrobin" class="carousel slide">
             <div class="carousel-inner">
                 <div class="active item">
-                    <img src="{{STATIC_URL}}images/M81_astrojoe.jpg" />
+                    <div class="carousel-image" style="background-image:url('{{STATIC_URL}}images/home_carousel_1.jpg')"></div>
                     <div class="carousel-caption">
                         <h4>{% blocktrans %}The perfect home for your astrophotography.{% endblocktrans %}</h4>
                         {% url 'help' as help_url %}
@@ -31,7 +31,7 @@
                 </div>
 
                 <div class="item">
-                    <img src="{{STATIC_URL}}images/M42_astrojoe.jpg" />
+                    <div class="carousel-image" style="background-image:url('{{STATIC_URL}}images/home_carousel_2.jpg')"></div>
                     <div class="carousel-caption">
                         <h4>{% blocktrans %}Unlimited uploads, unlimited size.{% endblocktrans %}</h4>
                         <p>{% blocktrans %}Astrophotography images have scientific value that shouldn't be lost in file compression. On AstroBin you can (and should!) upload full size images.{% endblocktrans %}</p>
@@ -39,7 +39,7 @@
                 </div>
 
                 <div class="item">
-                    <img src="{{STATIC_URL}}images/M45_astrojoe.jpg" />
+                    <div class="carousel-image" style="background-image:url('{{STATIC_URL}}images/home_carousel_3.jpg')"></div>
                     <div class="carousel-caption">
                         <h4>{% blocktrans %}Have your data neatly plotted.{% endblocktrans %}</h4>
                         <p>{% blocktrans %}Data is everything, and AstroBin will give you the tools to keep your data neat and organized. And with our plots, you can get insights on your productivity and on the gear you use the most.{% endblocktrans %}</p>
