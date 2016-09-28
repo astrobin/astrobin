@@ -21,7 +21,7 @@
             {% for image in images %}
                 <li class="thumbnail astrobin-thumbnail top-title">
                     <a href="#">
-                        {% astrobin_image image 'gallery' 'final' 'regular' False False %}
+                        {% astrobin_image image 'gallery' link=False tooltip=False %}
                         <div class="image-title">
                             {{image.title|escape|default:_("(no title)")}}
                         </div>

@@ -5,11 +5,10 @@
 {% lazy_paginate recent_images_batch_size recent_images using "recent_images_page" %}
 {% for image in recent_images %}
     <li class="thumbnail astrobin-thumbnail">
-        {% astrobin_image image recent_images_alias %}
+        {% astrobin_image image recent_images_alias nav_ctx='all' %}
     </li>
 {% empty %}
     <li>{% include 'inclusion_tags/no_images.html' %}</li>
 {% endfor %}
 
 {% show_more %}
-

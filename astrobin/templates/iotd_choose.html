@@ -20,7 +20,7 @@
         {% for candidate in candidate_list %}
             <div class="row section iotd-choose">
                 <div class="span12">
-                    {% astrobin_image candidate.image 'iotd_candidate' 'final' '' False %}
+                    {% astrobin_image candidate.image 'iotd_candidate' link=False %}
                     <a
                         href="{% url 'iotd_choose' candidate.image.id %}"
                         class="btn btn-large btn-block btn-primary">

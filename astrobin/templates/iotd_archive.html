@@ -14,7 +14,7 @@
 
             {% for iotd in iotd_list %}
                 <div class="iotd-archive-image">
-                    {% astrobin_image iotd.image 'iotd' %}
+                    {% astrobin_image iotd.image 'iotd' nav_ctx='iotd' %}
 
                     <div class="data hidden-phone">
                         <h3>{{iotd.image.title|escape}}</h3>

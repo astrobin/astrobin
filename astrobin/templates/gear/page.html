@@ -37,7 +37,7 @@
                         <ul class="thumbnails astrobin-thumbnails">
                         {% for r in gear.commercial.image.revisions.all %}
                             <li class="thumbnail astrobin-thumbnail revisions">
-                                {% astrobin_image gear.commercial.image 'thumb' r.label %}
+                                {% astrobin_image gear.commercial.image 'thumb' revision=r.label %}
                             </li>
                         {% endfor %}
                     </div>

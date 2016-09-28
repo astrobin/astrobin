@@ -22,6 +22,7 @@ from django.views.generic import (
 
 # Third party
 from actstream import action as act
+from actstream.models import Action
 from braces.views import (
     JSONResponseMixin,
     LoginRequiredMixin,
@@ -42,7 +43,9 @@ from astrobin.forms import (
     PrivateMessageForm,
 )
 from astrobin.models import (
+    Collection,
     Image, ImageRevision,
+    ImageOfTheDay,
     DeepSky_Acquisition,
     SolarSystem_Acquisition,
     LANGUAGES,
@@ -153,9 +156,12 @@ class ImageDetailView(DetailView):
             if image.is_final == False:
                 final = image.revisions.filter(is_final = True)
                 if final.count() > 0:
-                    return redirect(reverse_lazy(
+                    url = reverse_lazy(
                         'image_detail',
-                        args = (image.pk, final[0].label,)))
+                        args = (image.pk, final[0].label,))
+                    if 'ctx' in request.GET:
+                        url += '?ctx=%s' % request.GET.get('ctx')
+                    return redirect(url)
 
         return super(ImageDetailView, self).dispatch(request, *args, **kwargs)
 
@@ -428,10 +434,60 @@ class ImageDetailView(DetailView):
         ##############
         # NAVIGATION #
         ##############
+        image_next = None
+        image_prev = None
         try:
-            # Only lookup public images!
-            image_next = Image.objects.filter(user = image.user, pk__gt = image.pk).order_by('pk')[0:1]
-            image_prev = Image.objects.filter(user = image.user, pk__lt = image.pk).order_by('-pk')[0:1]
+            nav_ctx = self.request.GET.get('nc')
+            if nav_ctx is None:
+                nav_ctx = self.request.session.get('nav_ctx')
+            if nav_ctx is None:
+                nav_ctx = 'user'
+
+            nav_ctx_extra = self.request.GET.get('nce')
+            if nav_ctx_extra is None:
+                nav_ctx_extra = self.request.session.get('nav_ctx_extra')
+
+            # Always only lookup public images!
+            if nav_ctx == 'user':
+                image_next = Image.objects.filter(user = image.user, pk__gt = image.pk).order_by('pk')[0:1]
+                image_prev = Image.objects.filter(user = image.user, pk__lt = image.pk).order_by('-pk')[0:1]
+            elif nav_ctx == 'collection':
+                try:
+                    try:
+                        collection = image.collections.get(pk = nav_ctx_extra)
+                    except ValueError:
+                        # Maybe this image is in a single collection
+                        collection = image.collections.all()[0]
+
+                    image_next = Image.objects.filter(user = image.user, collections = collection, pk__gt = image.pk).order_by('pk')[0:1]
+                    image_prev = Image.objects.filter(user = image.user, collections = collection, pk__lt = image.pk).order_by('-pk')[0:1]
+                except Collection.DoesNotExist:
+                    # image_prev and image_next will remain None
+                    pass
+            elif nav_ctx == 'group':
+                try:
+                    group = image.part_of_group_set.get(pk = nav_ctx_extra)
+                    if group.public:
+                        image_next = Image.objects.filter(part_of_group_set = group, pk__gt = image.pk).order_by('pk')[0:1]
+                        image_prev = Image.objects.filter(part_of_group_set = group, pk__lt = image.pk).order_by('-pk')[0:1]
+                except Group.DoesNotExist:
+                    # image_prev and image_next will remain None
+                    pass
+            elif nav_ctx == 'all':
+                image_next = Image.objects.filter(pk__gt = image.pk).order_by('pk')[0:1]
+                image_prev = Image.objects.filter(pk__lt = image.pk).order_by('-pk')[0:1]
+            elif nav_ctx == 'iotd':
+                try:
+                    iotd = ImageOfTheDay.objects.get(image = image)
+                    iotd_next = ImageOfTheDay.objects.filter(pk__gt = iotd.pk).order_by('pk')[0:1]
+                    iotd_prev = ImageOfTheDay.objects.filter(pk__lt = iotd.pk).order_by('-pk')[0:1]
+
+                    if iotd_next:
+                        image_next = [iotd_next[0].image]
+                    if iotd_prev:
+                        image_prev = [iotd_prev[0].image]
+                except ImageOfTheDay.DoesNotExist:
+                    pass
         except Image.DoesNotExist:
             image_next = None
             image_prev = None
@@ -514,6 +570,8 @@ class ImageDetailView(DetailView):
             'iotd_date': image.iotd_date(),
             'image_next': image_next,
             'image_prev': image_prev,
+            'nav_ctx': nav_ctx,
+            'nav_ctx_extra': nav_ctx_extra,
         })
 
         return response_dict
@@ -540,9 +598,13 @@ class ImageFullView(DetailView):
             if image.is_final == False:
                 final = image.revisions.filter(is_final = True)
                 if final.count() > 0:
-                    return redirect(reverse_lazy(
+                    url = reverse_lazy(
                         'image_full',
-                        args = (image.pk, final[0].label,)))
+                        args = (image.pk, final[0].label,))
+                    if 'ctx' in request.GET:
+                        url += '?ctx=%s' % request.GET.get('ctx')
+                    return redirect(url)
+
 
         if self.revision_label is None:
             try:

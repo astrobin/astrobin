@@ -89,7 +89,7 @@ def get_query_string(p_list, p_dict, new_params, remove, context):
         except:
             pass
 
-    return mark_safe('?' + '&amp;'.join([k[1] if k[0] == '' else u'%s=%s' % (k[0], k[1]) for k in p_list]).replace(' ', '%20'))
+    return mark_safe('?' + '&amp;'.join([k[1] if k[0] == '' else u'%s=%s' % (k[0], k[1]) for k in p_list if k[1] is not None and k[1] != 'None']).replace(' ', '%20'))
 
 
 # Taken from lib/utils.py

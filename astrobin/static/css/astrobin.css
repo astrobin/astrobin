@@ -779,6 +779,9 @@ body.full .navbar .nav.pull-right > li > a.btn:focus {
 .dropdown-menu > li > a.danger {
   color: red !important;
 }
+.dropdown-menu > li > a.active {
+  font-weight: bold;
+}
 .navbar .nav .dropdown-toggle .icon-caret-down,
 .navbar .nav .open.dropdown .icon-caret-down {
   font-size: 10px;
@@ -888,27 +891,6 @@ body.full .navbar .nav.pull-right > li > a.btn:focus {
   -webkit-border-radius: 4px;
   -moz-border-radius: 4px;
   border-radius: 4px;
-}
-.subnav .dropdown-menu:before {
-  content: '';
-  display: inline-block;
-  border-left: 7px solid transparent;
-  border-right: 7px solid transparent;
-  border-bottom: 7px solid #ccc;
-  border-bottom-color: rgba(0, 0, 0, 0.2);
-  position: absolute;
-  top: -7px;
-  left: 9px;
-}
-.subnav .dropdown-menu:after {
-  content: '';
-  display: inline-block;
-  border-left: 6px solid transparent;
-  border-right: 6px solid transparent;
-  border-bottom: 6px solid #ffffff;
-  position: absolute;
-  top: -6px;
-  left: 10px;
 }
 /* Fixed subnav on scroll, but only for 980px and up (sorry IE!) */
 .subnav-fixed {
@@ -3720,6 +3702,9 @@ img.flickr-photo-to-import-selected {
 .image-navigation.disabled a {
   color: #D56D62 !important;
   pointer: none;
+}
+.image-navigation .dropdown-menu {
+  font-size: 14px;
 }
 /* --- Topic/Forum table --- */
 @media screen and (min-width: 980px) {

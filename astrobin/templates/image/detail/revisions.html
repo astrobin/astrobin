@@ -15,7 +15,7 @@
                 {% endif %}
 
                 <div class="image">
-                    {% astrobin_image image 'thumb' '0' %}
+                    {% astrobin_image image 'thumb' revision='0' %}
                 </div>
 
                 <div class="label{% if revision_label == '0' %} active{% endif %}">
@@ -36,7 +36,7 @@
                     {% endif %}
 
                     <div class="image">
-                        {% astrobin_image r.image 'thumb' r.label %}
+                        {% astrobin_image r.image 'thumb' revision=r.label %}
                     </div>
 
                     <div class="label{% if revision_label == r.label %} active{% endif %}">

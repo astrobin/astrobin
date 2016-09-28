@@ -86,13 +86,19 @@ def string_to_date(date):
         return datetime.now()
 
 
-def image_list(context, object_list, alias = 'gallery'):
+def image_list(context, object_list, **kwargs):
+    alias = kwargs.get('alias', 'gallery')
+    nav_ctx = kwargs.get('nav_ctx', 'all')
+    nav_ctx_extra = kwargs.get('nav_ctx_extra', None)
+
     return {
         'image_list': object_list,
         'request': context['request'],
         'alias': alias,
         'view': context['request'].GET.get('view', 'default'),
         'STATIC_URL': settings.STATIC_URL,
+        'nav_ctx': nav_ctx,
+        'nav_ctx_extra': nav_ctx_extra,
     }
 register.inclusion_tag('inclusion_tags/image_list.html', takes_context=True)(image_list)
 

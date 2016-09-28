@@ -16,7 +16,7 @@
         {% endif %}
 
         {% if collection.images.count > 0 %}
-            {% image_list collection.images.all %}
+            {% image_list collection.images.all nav_ctx='collection' nav_ctx_extra=collection.pk %}
         {% else %}
             <p class="alert alert-warning">
                 {% trans "This collection contains no images." %}

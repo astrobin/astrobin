@@ -5,7 +5,6 @@
 
 {% if status != 'error' %}
     <div class="astrobin-image-container">
-
         {% if error_message %}
             <div class="alert alert-error">
                 <h4 class="alert-heading">
@@ -19,7 +18,7 @@
 
         {% if alias != 'histogram' %}
             {% if link %}
-            <a href="{{url}}{% if mod %}{% query_string "mod=mod" "" %}{% endif %}">
+            <a href="{{url}}{% query_string "mod=mod,nc=nav_ctx,nce=nav_ctx_extra" "querystring_key,recent_images_page,public,staging,sub,s" %}">
             {% endif %}
 
                 {% if badges %}
@@ -80,14 +79,14 @@
                 <div class="capty-caption-content">
                     <div class="link-overlay" style="width:{{size_x}}px; height:{{size_y}}px">
                         {% if link %}
-                        <a href="{{url}}{% if mod %}{% query_string "mod=mod" "" %}{% endif %}">
+                        <a href="{{url}}{% query_string "mod=mod,nc=nav_ctx,nce=nav_ctx_extra" "querystring_key,recent_images_page,public,staging,sub,s" %}">
                             &nbsp;
                         </a>
                         {% endif %}
                     </div>
 
                     {% if link %}
-                    <a href="{{url}}{% if mod %}{% query_string "mod=mod" "" %}{% endif %}">
+                    <a href="{{url}}{% query_string "mod=mod,nc=nav_ctx,nce=nav_ctx_extra" "querystring_key,recent_images_page,public,staging,sub,s" %}">
                     {% endif %}
 
                         {{image.title|escape|default:_("(no title)")}}

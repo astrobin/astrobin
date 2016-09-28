@@ -56,9 +56,42 @@ def gallery_thumbnail_inverted(image, revision_label):
 
 # Renders an linked image tag with a placeholder and async loading of the
 # actual thumbnail.
-def astrobin_image(
-    context, image, alias,
-    revision = 'final', url_size = 'regular', link = True, tooltip = True):
+def astrobin_image(context, image, alias, **kwargs):
+    request = context['request']
+
+    revision = kwargs.get('revision', 'final')
+    url_size = kwargs.get('url_size', 'regular')
+    link = kwargs.get('link', True)
+    tooltip = kwargs.get('tooltip', True)
+    nav_ctx = kwargs.get('nav_ctx', None)
+    nav_ctx_extra = kwargs.get('nav_ctx_extra', None)
+
+    if nav_ctx is None:
+        nav_ctx = request.GET.get('nc')
+        if nav_ctx is not None:
+            request.session['nav_ctx'] = nav_ctx
+    if nav_ctx is None:
+        nav_ctx = context.get('nav_ctx')
+    if nav_ctx is None:
+        nav_ctx = request.session.get('nav_ctx')
+    if nav_ctx is None:
+        nav_ctx = 'user'
+
+    if nav_ctx_extra is None:
+        nav_ctx_extra = request.GET.get('nce')
+        if nav_ctx_extra is not None:
+            request.session['nav_ctx_extra'] = nav_ctx_extra
+    if nav_ctx_extra is None:
+        nav_ctx_extra = context.get('nav_ctx_extra')
+    if nav_ctx_extra is None:
+        nav_ctx_extra = request.session.get('nav_ctx_extra')
+
+    if 'nav_ctx_extra' in request.session and nav_ctx not in (
+            # Contexts that support the extra argument
+            'user',
+            'group',):
+        del request.session['nav_ctx_extra']
+        nav_ctx_extra = None
 
     response_dict = {
         'provide_size': True,
@@ -83,6 +116,8 @@ def astrobin_image(
             'size_x': size[0],
             'size_y': size[1],
             'capty_cache_key': 'astrobin_image_no_image',
+            'nav_ctx': nav_ctx,
+            'nav_ctx_extra': nav_ctx_extra,
         }
 
     # Old images might not have a size in the database, let's fix it.
@@ -143,6 +178,8 @@ def astrobin_image(
                 'size_x': size[0],
                 'size_y': size[1],
                 'capty_cache_key': 'astrobin_image_no_image',
+                'nav_ctx': nav_ctx,
+                'nav_ctx_extra': nav_ctx_extra,
             }
 
         try:
@@ -211,14 +248,19 @@ def astrobin_image(
         'real'          : alias in ('real', 'real_inverted'),
         'url'           : url,
         'show_tooltip'  : show_tooltip,
-        'request'       : context['request'],
+        'request'       : request,
         'capty_cache_key': "%d_%s_%s" % (image.id, revision, alias),
         'badges'        : badges,
         'animated'      : animated,
         'get_thumb_url' : get_thumb_url,
         'thumb_url'     : thumb_url,
         'link'          : link,
+        'nav_ctx'       : nav_ctx,
+        'nav_ctx_extra': nav_ctx_extra,
     }.items())
+register.inclusion_tag(
+    'astrobin_apps_images/snippets/image.html',
+    takes_context = True)(astrobin_image)
 
 
 @register.simple_tag(takes_context = True)
@@ -228,7 +270,4 @@ def random_id(context, size = 8, chars = string.ascii_uppercase + string.digits)
     return ''
 
 
-register.inclusion_tag(
-    'astrobin_apps_images/snippets/image.html',
-    takes_context = True)(astrobin_image)
 

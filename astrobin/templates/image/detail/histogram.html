@@ -4,7 +4,7 @@
 {% if not image.animated %}
     <div class="subtle-container hidden-phone">
         <div class="header"><h4><i class="icon-bar-chart"></i> {% trans "Histogram" %}</h4></div>
-        {% astrobin_image image 'histogram' revision_label %}
+        {% astrobin_image image 'histogram' revision=revision_label %}
     </div>
 {% endif %}
 
