@@ -88,7 +88,7 @@ def astrobin_image(context, image, alias, **kwargs):
 
     if 'nav_ctx_extra' in request.session and nav_ctx not in (
             # Contexts that support the extra argument
-            'user',
+            'collection',
             'group',):
         del request.session['nav_ctx_extra']
         nav_ctx_extra = None
