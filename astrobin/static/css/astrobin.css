@@ -963,6 +963,12 @@ li [class*=" icon-"],
   -webkit-border-radius: 6px;
   border-radius: 6px;
 }
+#index #why-astrobin {
+  margin: -33px -29px 40px -29px;
+}
+#index #why-astrobin img {
+  width: 100%;
+}
 ul.astrobin-thumbnails {
   margin-left: 0;
 }

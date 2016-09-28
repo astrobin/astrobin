@@ -241,9 +241,9 @@ def index(request, template = 'index/root.html', extra_context = None):
         'recent_images': recent_images,
         'recent_images_alias': 'gallery',
         'recent_images_batch_size': 70,
+        'section': 'recent',
     }
 
-    profile = None
     if request.user.is_authenticated():
         profile = request.user.userprofile
 
@@ -255,44 +255,7 @@ def index(request, template = 'index/root.html', extra_context = None):
         # IOTD
         try:
             iotd = ImageOfTheDay.objects.all()[0]
-            gear_list = (
-                (ungettext('Imaging telescope or lens', 
-                           'Imaging telescopes or lenses', 
-                           len(iotd.image.imaging_telescopes.all())), 
-                 iotd.image.imaging_telescopes.all(), 'imaging_telescopes'),
-                (ungettext('Imaging camera',
-                           'Imaging cameras',
-                           len(iotd.image.imaging_cameras.all())),
-                 iotd.image.imaging_cameras.all(), 'imaging_cameras'),
-                (ungettext('Mount',
-                           'Mounts',
-                           len(iotd.image.mounts.all())),
-                 iotd.image.mounts.all(), 'mounts'),
-                (ungettext('Guiding telescope or lens',
-                           'Guiding telescopes or lenses',
-                           len(iotd.image.guiding_telescopes.all())),
-                 iotd.image.guiding_telescopes.all(), 'guiding_telescopes'),
-                (ungettext('Guiding camera',
-                           'Guiding cameras',
-                           len(iotd.image.guiding_cameras.all())),
-                 iotd.image.guiding_cameras.all(), 'guiding_cameras'),
-                (ungettext('Focal reducer',
-                           'Focal reducers',
-                           len(iotd.image.focal_reducers.all())),
-                 iotd.image.focal_reducers.all(), 'focal_reducers'),
-                (_('Software'), iotd.image.software.all(), 'software'),
-                (ungettext('Filter',
-                           'Filters',
-                           len(iotd.image.filters.all())),
-                 iotd.image.filters.all(), 'filters'),
-                (ungettext('Accessory',
-                           'Accessories',
-                           len(iotd.image.accessories.all())),
-                 iotd.image.accessories.all(), 'accessories'),
-            )
-
             response_dict['image_of_the_day'] = iotd
-            response_dict['gear_list'] = gear_list
         except IndexError:
             # The is no IOTD
             pass
