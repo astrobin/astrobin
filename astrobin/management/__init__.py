@@ -137,6 +137,12 @@ NOTICE_TYPES = (
         2,
     ),
     (
+        'user_joined_public_group',
+        _("A user you follow joined a public group"),
+        '',
+        2,
+    ),
+    (
         'new_group_invitation',
         _("You are invited to a group"),
         '',
