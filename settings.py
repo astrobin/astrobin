@@ -17,7 +17,7 @@ ALLOWED_HOSTS = ['*']
 TEMPLATE_DEBUG = DEBUG
 MAINTENANCE_MODE = False
 READONLY_MODE = False
-MEDIA_VERSION = '160'
+MEDIA_VERSION = '161'
 LONGPOLL_ENABLED = False
 ADS_ENABLED = True
 DONATIONS_ENABLED = False
@@ -383,7 +383,7 @@ ASTROBIN_USER='astrobin'
 
 NOTIFICATION_LANGUAGE_MODULE = "astrobin.UserProfile"
 NOTIFICATION_BACKENDS = (
-    ("messages", "astrobin_apps_notifications.backends.PersistentMessagesBackend"),
+    ("on-site", "astrobin_apps_notifications.backends.PersistentMessagesBackend"),
     ("email", "notification.backends.email.EmailBackend"),
 )
 

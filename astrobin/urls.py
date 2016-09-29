@@ -219,14 +219,12 @@ urlpatterns = patterns('',
     url(r'^profile/edit/license/$', views.user_profile_edit_license, name='profile_edit_license'),
     url(r'^profile/edit/locations/$', views.user_profile_edit_locations, name='profile_edit_locations'),
     url(r'^profile/edit/preferences/$', views.user_profile_edit_preferences, name='profile_edit_preferences'),
-    url(r'^profile/edit/notifications/$', views.user_profile_edit_notifications, name='profile_edit_notifications'),
     url(r'^profile/edit/retailer/$', views.user_profile_edit_retailer, name='profile_edit_retailer'),
     url(r'^profile/save/basic/$', views.user_profile_save_basic, name='profile_save_basic'),
     url(r'^profile/save/gear/$', views.user_profile_save_gear, name='profile_save_gear'),
     url(r'^profile/save/license/$', views.user_profile_save_license, name='profile_save_license'),
     url(r'^profile/save/locations/$', views.user_profile_save_locations, name='profile_save_locations'),
     url(r'^profile/save/preferences/$', views.user_profile_save_preferences, name='profile_save_preferences'),
-    url(r'^profile/save/notifications/$', views.user_profile_save_notifications, name='profile_save_notifications'),
     url(r'^profile/seen/realname/$', views.user_profile_seen_realname, name='profile_seen_realname'),
 
     ###########################################################################
@@ -293,9 +291,6 @@ urlpatterns = patterns('',
     url(r'^subject/stats/integration-monthly/(?P<id>\d+)/$', views.stats_subject_integration_monthly_ajax, name = 'stats_subject_integration_monthly'),
     url(r'^subject/stats/telescope-types/(?P<id>\d+)/$', views.stats_subject_telescope_types_ajax, name = 'stats_subject_telescope_types'),
     url(r'^subject/stats/total-images/(?P<id>\d+)/$', views.stats_subject_total_images_ajax, name = 'stats_subject_total_images'),
-
-
-    url(r'^push_notification/$', views.push_notification, name='push_notification'),
 
     ###########################################################################
     ### MESSAGES VIEWS                                                      ###

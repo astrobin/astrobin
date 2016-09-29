@@ -55,12 +55,6 @@
                 <i class="icon-chevron-right"></i>
             </a>
         </li>
-        <li class="{% current request '^/profile/(edit|save)/notifications/$' %}">
-            <a href="{% url 'profile_edit_notifications' %}">
-                <i class="icon-envelope"></i> {% trans "E-mail notifications" %}
-                <i class="icon-chevron-right"></i>
-            </a>
-        </li>
         <li class="{% current request '^/avatar/' %}">
             <a href="{% url 'avatar_change' %}">
                 <i class="icon-user"></i> {% trans "Avatar" %}

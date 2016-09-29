@@ -257,22 +257,8 @@ class UserProfileEditPreferencesForm(forms.ModelForm):
             'default_frontpage_section',
             'default_gallery_sorting',
             'exclude_from_competitions',
+            'receive_forum_emails',
         ]
-
-
-class UserProfileEditNotificationsForm(forms.ModelForm):
-    class Meta:
-        model = UserProfile
-        fields = ['receive_forum_emails']
-
-    def __init__(self, user=None, **kwargs):
-        super(UserProfileEditNotificationsForm, self).__init__(**kwargs)
-        for notice_type in NOTICE_TYPES:
-            if notice_type[3] == 2 and notice_type[0] != 'test_notification':
-                self.fields[notice_type[0]] = forms.BooleanField(
-                    label=_(notice_type[1]),
-                    required=False
-                )
 
 
 class PrivateMessageForm(forms.Form):

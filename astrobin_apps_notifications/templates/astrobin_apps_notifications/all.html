@@ -29,14 +29,18 @@
             {% endfor %}
         </table>
 
-        {% if request.user|has_unseen_notifications %}
-            <div class="form-actions">
-                <a class="btn btn-danger"
+        <div class="form-actions">
+            {% if request.user|has_unseen_notifications %}
+                <a class="btn btn-block-mobile" href="{% url 'astrobin_apps_notifications.settings' %}">
+                    {% trans "Settings" %}
+                </a>
+
+                <a class="btn btn-danger btn-block-mobile"
                    href="{% url 'message_mark_all_read' %}">
                     {% trans "Mark all as read" %}
                 </a>
-            </div>
-        {% endif %}
+            {% endif %}
+        </div>
 
         <div class="pagination pagination-centered">
             {% paginate %}

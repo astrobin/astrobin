@@ -17,6 +17,10 @@
             {% trans "View all" %}
         </a>
 
+        <a class="btn" href="{% url 'astrobin_apps_notifications.settings' %}">
+            {% trans "Settings" %}
+        </a>
+
         {% if request.user|has_unseen_notifications %}
             <a class="btn btn-danger"
                href="{% url 'message_mark_all_read' %}">

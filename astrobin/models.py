@@ -1919,7 +1919,7 @@ class UserProfile(models.Model):
     def receive_emails(self):
         return self.receive_forum_emails
     receive_forum_emails = models.BooleanField(
-        _('New reply to a forum topic you subscribe to'),
+        _('Receive e-mails from subscribed forum topics'),
         default=True)
 
     def get_display_name(self):

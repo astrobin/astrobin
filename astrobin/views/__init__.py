@@ -42,7 +42,6 @@ from actstream import action as act
 from actstream.models import Action
 from braces.views import LoginRequiredMixin
 from endless_pagination.decorators import page_template
-from notification.models import NoticeSetting, NOTICE_MEDIA_DEFAULTS
 from haystack.query import SearchQuerySet
 from registration.forms import RegistrationForm
 from reviews.forms import ReviewedItemForm
@@ -1840,38 +1839,6 @@ def user_profile_edit_preferences(request):
 
 
 @login_required
-@require_GET
-def user_profile_edit_notifications(request):
-    """Edit e-mail notification preferences"""
-    profile = request.user.userprofile
-    form = UserProfileEditNotificationsForm(instance=profile)
-    response_dict = {
-        'form': form,
-    }
-
-    email_medium = 0 # see NOTICE_MEDIA in notifications/models.py
-    email_default = NOTICE_MEDIA_DEFAULTS[email_medium]
-    notice_settings = NoticeSetting.objects.filter(
-        user=request.user,
-        medium=email_medium,
-    )
-    stored_settings = {}
-    for setting in notice_settings:
-        stored_settings[setting.notice_type.label] = setting.send
-
-    for notice_type in NOTICE_TYPES:
-        if notice_type[3] == 2 and notice_type[0] != 'test_notification':
-            label = notice_type[0]
-            value = stored_settings.get(label,
-                                        notice_type[3] >= email_default)
-            form.fields[label].initial = value
-
-    return render_to_response("user/profile/edit/notifications.html",
-        response_dict,
-        context_instance=RequestContext(request))
-
-
-@login_required
 @require_POST
 def user_profile_save_preferences(request):
     """Saves the form"""
@@ -1896,48 +1863,6 @@ def user_profile_save_preferences(request):
 
     messages.success(request, _("Form saved. Thank you!"))
     return HttpResponseRedirect("/profile/edit/preferences/");
-
-
-@login_required
-@require_POST
-def user_profile_save_notifications(request):
-    """Saves the form"""
-
-    profile = request.user.userprofile
-    form = UserProfileEditNotificationsForm(data=request.POST, instance=profile)
-    response_dict = {'form': form}
-
-    if form.is_valid():
-        form.save()
-        email_medium = 0 # see NOTICE_MEDIA in notifications/models.py
-        for notice_type in NOTICE_TYPES:
-            if notice_type[3] == 2 and notice_type[0] != 'test_notification':
-                label = notice_type[0]
-                import notification
-                notice_object = notification.models.NoticeType.objects.get(label=label)
-                value = form.cleaned_data[label]
-                try:
-                    setting = NoticeSetting.objects.get(
-                        user=request.user,
-                        notice_type=notice_object,
-                        medium=email_medium
-                    )
-                    setting.send = value
-                except NoticeSetting.DoesNotExist:
-                    setting = NoticeSetting(
-                        user=request.user,
-                        notice_type=notice_object,
-                        medium=email_medium,
-                        send=value
-                    )
-                setting.save()
-    else:
-        return render_to_response("user/profile/edit/notifications.html",
-            response_dict,
-            context_instance=RequestContext(request))
-
-    messages.success(request, _("Form saved. Thank you!"))
-    return HttpResponseRedirect("/profile/edit/notifications/");
 
 
 @login_required
