@@ -1,5 +1,5 @@
 {% load i18n %}
-{% url 'profile_edit_preferences' as pref_url %}
+{% url 'astrobin_apps_notifications.settings' as pref_url %}
 {% blocktrans %}Hi! You have a new notification on AstroBin:
 
 {{ message }}
