@@ -40,7 +40,7 @@ django-compressor==1.1.2
 django-contact-form-gv==0.4.3
 django-countries==1.0.5
 django-debug-toolbar==1.3.2
-django-dfp==0.3.1
+-e https://github.com/siovene/django-dfp.git#egg=django-dfp
 django-ember==0.1
 -e git+https://github.com/siovene/django-endless-pagination.git@c7dd35b560cd83feee11e0241f428d3fc48005d2#egg=django_endless_pagination-master
 django-filter==0.5.4
