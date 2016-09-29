@@ -21,7 +21,6 @@ from django.views.generic import (
 )
 
 # Third party
-from actstream import action as act
 from actstream.models import Action
 from braces.views import (
     JSONResponseMixin,

@@ -14,6 +14,7 @@ from braces.views import (
 
 # AstroBin
 from astrobin.models import Image
+from astrobin.stories import add_story
 
 
 class ImageModerationListView(
@@ -60,6 +61,22 @@ class ImageModerationMarkAsHamView(
             moderator_decision = 1,
             moderated_when = datetime.date.today(),
             moderated_by = request.user)
+
+        for image in Image.all_objects.filter(pk__in = ids):
+            if not image.is_wip:
+                followers = [x.user for x in ToggleProperty.objects.filter(
+                    property_type = "follow",
+                    content_type = ContentType.objects.get_for_model(User),
+                    object_id = image.user.pk)]
+
+                push_notification(followers, 'new_image',
+                    {
+                        'object_url': settings.ASTROBIN_BASE_URL + image.get_absolute_url(),
+                        'originator': image.user.userprofile,
+                    })
+
+                add_story(image.user, verb = 'VERB_UPLOADED_IMAGE', action_object = image)
+
 
         return self.render_json_response({
             'status': 'OK',
