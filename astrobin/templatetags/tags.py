@@ -395,7 +395,7 @@ def can_like(user, image):
     if user == image.user:
         return False
 
-    if is_free(user) and user_score_index < min_index_to_like:
+    if is_free(user) and user_scores_index < min_index_to_like:
         return False
 
     return True
