@@ -52,6 +52,7 @@ from astrobin.models import (
     LICENSE_CHOICES,
     SOLAR_SYSTEM_SUBJECT_CHOICES,
 )
+from astrobin.stories import add_story
 from astrobin.utils import to_user_timezone
 from astrobin.templatetags.tags import can_like
 
@@ -845,7 +846,7 @@ class ImagePromoteView(LoginRequiredMixin, UpdateView):
                     'object_url': settings.ASTROBIN_BASE_URL + image.get_absolute_url()
                 })
 
-            act.send(image.user, verb = 'VERB_UPLOADED_IMAGE', action_object = image)
+            add_story(image.user, verb = 'VERB_UPLOADED_IMAGE', action_object = image)
 
             messages.success(request, _("Image moved to the public area."))
 
