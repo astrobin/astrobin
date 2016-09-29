@@ -171,6 +171,12 @@ NOTICE_TYPES = (
         _("A user you follow created a new public group"),
         '',
         2,
+    ),
+    (
+        'new_topic_in_group',
+        _("New forum topic in a group you are a member of"),
+        '',
+        2,
     )
 )
 

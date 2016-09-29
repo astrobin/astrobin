@@ -10,7 +10,7 @@ from django.db.models.signals import (
         pre_save, post_save, pre_delete, post_delete, m2m_changed)
 
 # Third party apps
-from pybb.models import Forum, Post
+from pybb.models import Forum, Topic, Post
 from rest_framework.authtoken.models import Token
 from reviews.models import ReviewedItem
 from toggleproperties.models import ToggleProperty
@@ -497,6 +497,56 @@ def group_post_delete(sender, instance, **kwargs):
     except Forum.DoesNotExist:
         pass
 post_delete.connect(group_post_delete, sender = Group)
+
+
+def forum_topic_pre_save(sender, instance, **kwargs):
+    if not hasattr(instance.forum, 'group'):
+        return
+
+    try:
+        topic = sender.objects.get(pk = instance.pk)
+    except sender.DoesNotExist:
+        pass
+    else:
+        if topic.on_moderation == True and instance.on_moderation == False:
+            # This topic is being approved
+            group = instance.forum.group
+            push_notification(
+                [x for x in group.members.all() if x != instance.user],
+                'new_topic_in_group',
+                {
+                    'user': instance.user,
+                    'url': settings.ASTROBIN_BASE_URL + instance.get_absolute_url(),
+                    'group_url': reverse_url('group_detail', kwargs = {'pk': group.pk}),
+                    'group_name': group.name,
+                    'topic_title': instance.name,
+                },
+            )
+pre_save.connect(forum_topic_pre_save, sender = Topic)
+
+
+def forum_topic_post_save(sender, instance, created, **kwargs):
+    if created and hasattr(instance.forum, 'group'):
+        group = instance.forum.group
+
+        if instance.on_moderation:
+            recipients = group.moderators.all()
+        else:
+            recipients = group.members.all()
+        recipients = [x for x in recipients if x != instance.user]
+
+        push_notification(
+            recipients,
+            'new_topic_in_group',
+            {
+                'user': instance.user,
+                'url': settings.ASTROBIN_BASE_URL + instance.get_absolute_url(),
+                'group_url': settings.ASTROBIN_BASE_URL + reverse_url('group_detail', kwargs = {'pk': group.pk}),
+                'group_name': group.name,
+                'topic_title': instance.name,
+            },
+        )
+post_save.connect(forum_topic_post_save, sender = Topic)
 
 
 def forum_post_post_save(sender, instance, created, **kwargs):
