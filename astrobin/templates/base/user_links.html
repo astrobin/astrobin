@@ -192,6 +192,12 @@
                 </a>
             </li>
 
+            <li>
+                <a href="{% trans 'upload' %}" class="upload-button" title="{% trans "Upload" %}">
+                    <i class="icon icon-upload-alt"></i>
+                </a>
+            </li>
+
             {% if not request.user.userprofile.exclude_from_competitions %}
                 <li id="astrobin-index-mobile-header" class="visible-phone">
                     {{user_scores_index|floatformat:2}}
