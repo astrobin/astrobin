@@ -21,7 +21,6 @@ from django.db import models, IntegrityError
 from django.db.models import Q
 from django.contrib.auth.models import User
 from django.core.exceptions import ValidationError
-from django.db.models.signals import post_save
 from django import forms
 from django.utils import translation
 from django.utils.translation import ugettext_lazy as _
@@ -41,7 +40,6 @@ from utils import user_is_paying
 
 from mptt.models import MPTTModel, TreeForeignKey
 from reviews.models import ReviewedItem
-from actstream import action
 from toggleproperties.models import ToggleProperty
 
 from astrobin_apps_notifications.utils import push_notification
@@ -1980,17 +1978,6 @@ class UserProfile(models.Model):
     class Meta:
         app_label = 'astrobin'
 
-def create_user_profile(sender, instance, created, **kwargs):
-    if created:
-        profile, created = UserProfile.objects.get_or_create(user=instance)
-
-def create_user_openid(sender, instance, created, **kwargs):
-    if created:
-        instance.openid_set.create(openid=instance.username)
-
-post_save.connect(create_user_profile, sender=User)
-post_save.connect(create_user_openid, sender=User)
-
 
 class Location(models.Model):
     name = models.CharField(
@@ -2268,16 +2255,6 @@ class GlobalStat(models.Model):
     def __unicode__(self):
         return u"%d users, %d images, %d hours of integration time" % (
             self.users, self.images, self.integration)
-
-
-def reviewed_item_post_save(sender, instance, created, **kwargs):
-    verb = "has written a review on"
-    if created:
-         action.send(instance.user,
-                     verb = verb,
-                     action_object = instance,
-                     target = instance.content_object)
-post_save.connect(reviewed_item_post_save, sender = ReviewedItem)
 
 
 ###############################################################################

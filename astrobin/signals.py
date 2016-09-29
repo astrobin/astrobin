@@ -12,6 +12,7 @@ from django.db.models.signals import (
 # Third party apps
 from pybb.models import Forum, Post
 from rest_framework.authtoken.models import Token
+from reviews.models import ReviewedItem
 from toggleproperties.models import ToggleProperty
 from subscription.models import UserSubscription
 from subscription.signals import subscribed, paid
@@ -36,6 +37,18 @@ from astrobin_apps_premium.templatetags.astrobin_apps_premium_tags import (
 from .models import Image, ImageRevision, Gear, UserProfile
 from .gear import get_correct_gear
 from .stories import add_story
+
+
+def create_user_profile(sender, instance, created, **kwargs):
+    if created:
+        profile, created = UserProfile.objects.get_or_create(user=instance)
+post_save.connect(create_user_profile, sender=User)
+
+
+def create_user_openid(sender, instance, created, **kwargs):
+    if created:
+        instance.openid_set.create(openid=instance.username)
+post_save.connect(create_user_openid, sender=User)
 
 
 def image_pre_save(sender, instance, **kwargs):
@@ -490,3 +503,13 @@ def forum_post_post_save(sender, instance, created, **kwargs):
     if created and hasattr(instance.topic.forum, "group"):
         instance.topic.forum.group.save() # trigger date_updated update
 post_save.connect(forum_post_post_save, sender = Post)
+
+
+def reviewed_item_post_save(sender, instance, created, **kwargs):
+    verb = "VERB_WROTE_REVIEW"
+    if created:
+         add_story(instance.user,
+                   verb = verb,
+                   action_object = instance,
+                   target = instance.content_object)
+post_save.connect(reviewed_item_post_save, sender = ReviewedItem)
