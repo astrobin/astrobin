@@ -91,11 +91,17 @@ def image_list(context, object_list, **kwargs):
     nav_ctx = kwargs.get('nav_ctx', 'all')
     nav_ctx_extra = kwargs.get('nav_ctx_extra', None)
 
+    view = kwargs.get('view')
+    if view is None and 'view' in context:
+      view = context['view']
+    if view is None:
+      view = context['request'].GET.get('view', 'default')
+
     return {
         'image_list': object_list,
         'request': context['request'],
         'alias': alias,
-        'view': context['request'].GET.get('view', 'default'),
+        'view': view,
         'STATIC_URL': settings.STATIC_URL,
         'nav_ctx': nav_ctx,
         'nav_ctx_extra': nav_ctx_extra,

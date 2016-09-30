@@ -6,7 +6,7 @@
 
 {% load i18n %}
 
-{% astrobin_user requested_user %}
+{% astrobin_user requested_user view='default'%}
 
 {% if PREMIUM_ENABLED and requested_user == request.user %}
 <div class="subtle-container simple-continer">

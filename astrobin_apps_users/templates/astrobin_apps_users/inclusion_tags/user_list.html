@@ -1,23 +1,28 @@
 {% load i18n %}
 
-{% if view == 'list' %}
-    <table class="astrobin-users table table-condensed">
-        <tr>
-            <th>{% trans "User" %}</th>
-            <th>{% trans "Images" %}</th>
-            <th>{% trans "Followers" %}</th>
-            <th>{% trans "Following" %}</th>
-            <th>&nbsp;</th>
-        </tr>
-
-        {% include 'astrobin_apps_users/inclusion_tags/user_list_entries.html' %}
-    </table>
-{% endif %}
-
 {% if view == 'default' %}
-<ul class="astrobin-users endless user-list {% if layout == 'list' %}user-list-mini{% endif %}">
+<ul class="astrobin-users user-list endless">
     {% include 'astrobin_apps_users/inclusion_tags/user_list_entries.html' %}
     {% include 'snippets/endless_pagination_js.html' %}
 </ul>
 {% endif %}
 
+{% if view == 'table' %}
+    <table class="astrobin-users table table-striped table-condensed">
+        <thead>
+            <tr>
+                <th class="user-list-avatar"></th>
+                <th class="user-list-name">{% trans "User" %}</th>
+                {% if layout == 'default' %}
+                    <th class="user-list-images">{% trans "Images" %}</th>
+                    <th class="user-list-followers">{% trans "Followers" %}</th>
+                    <th class="user-list-following">{% trans "Following" %}</th>
+                {% endif %}
+                <th class="user-list-follow-action"></th>
+            </tr>
+        </thead>
+        <tbody>
+            {% include 'astrobin_apps_users/inclusion_tags/user_list_entries.html' %}
+        </tbody>
+    </table>
+{% endif %}

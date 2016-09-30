@@ -3920,6 +3920,23 @@ ul.astrobin-users {
     }
 }
 
+.astrobin-users.table {
+    th, td {
+        &.user-list-avatar { width: 20px; }
+
+        &.user-list-images, &.user-list-followers,
+        &.user-list-following, &.user-list-follow-action {
+            width: 10%;
+        }
+
+        &.user-list-images, &.user-list-followers,
+        &.user-list-following {
+            text-align: center;
+        }
+
+    }
+}
+
 #upload-revision-form {
     .spinner {
         margin-left: 6px;

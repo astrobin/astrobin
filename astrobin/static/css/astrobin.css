@@ -3674,6 +3674,28 @@ ul.astrobin-users li {
 .astrobin-users.user-list-mini li:last-child {
   border-bottom: none;
 }
+.astrobin-users.table th.user-list-avatar,
+.astrobin-users.table td.user-list-avatar {
+  width: 20px;
+}
+.astrobin-users.table th.user-list-images,
+.astrobin-users.table td.user-list-images,
+.astrobin-users.table th.user-list-followers,
+.astrobin-users.table td.user-list-followers,
+.astrobin-users.table th.user-list-following,
+.astrobin-users.table td.user-list-following,
+.astrobin-users.table th.user-list-follow-action,
+.astrobin-users.table td.user-list-follow-action {
+  width: 10%;
+}
+.astrobin-users.table th.user-list-images,
+.astrobin-users.table td.user-list-images,
+.astrobin-users.table th.user-list-followers,
+.astrobin-users.table td.user-list-followers,
+.astrobin-users.table th.user-list-following,
+.astrobin-users.table td.user-list-following {
+  text-align: center;
+}
 #upload-revision-form .spinner {
   margin-left: 6px;
 }

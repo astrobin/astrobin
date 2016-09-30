@@ -1255,7 +1255,6 @@ def user_page_following(request, username, extra_context = None):
     return render_to_response(template_name,
         {
             'request_user': User.objects.get(pk = request.user.pk) if request.user.is_authenticated() else None,
-            'layout': 'inline',
             'requested_user': user,
             'user_list': followed_users,
             'view': request.GET.get('view', 'default'),
@@ -1287,7 +1286,6 @@ def user_page_followers(request, username, extra_context = None):
     return render_to_response(template_name,
         {
             'request_user': User.objects.get(pk = request.user.pk) if request.user.is_authenticated() else None,
-            'layout': 'inline',
             'requested_user': user,
             'user_list': followers,
             'view': request.GET.get('view', 'default'),

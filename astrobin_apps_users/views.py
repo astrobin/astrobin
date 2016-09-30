@@ -26,9 +26,9 @@ class TogglePropertyUsersAjaxView(base.View):
             content_type = content_type)]
 
         context = {
-            'layout': 'list',
             'user_list': users,
-            'view': 'default',
+            'view': 'table',
+            'layout': 'compact',
         }
 
         return render_to_response(

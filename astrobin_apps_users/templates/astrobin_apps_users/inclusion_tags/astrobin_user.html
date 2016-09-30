@@ -7,7 +7,7 @@
 
 {% get_current_language as LANGUAGE_CODE %}
 
-{% if layout == 'standard' %}
+{% if view == 'default' %}
     <div class="subtle-container user-card hidden-phone">
         <div class="header">
             <h4>
@@ -37,7 +37,7 @@
         </div>
 
         <div id="profile-details" class="hidden-phone hidden-tablet">
-            {% cache 300 astrobin_user user.username view layout LANGUAGE_CODE %}
+            {% cache 300 astrobin_user user.username view LANGUAGE_CODE %}
             <ul>
                 <li><a href="{% url 'user_page' user.username %}?sub=uploaded"><strong>{{images}}</strong> {% trans "Images" %}</a></li>
                 <li><a href="{% url 'user_page_followers' user.username %}"><strong>{{followers}}</strong> {% trans "Followers" %}</a></li>
@@ -52,85 +52,37 @@
     {% endif %}
 {% endif %}
 
-{% if layout == 'inline' or layout == 'inline-mini' %}
-    <div class="subtle-container user-card user-card-inline">
-        <div class="header">
-            <h4>
-                {{user.userprofile}}
-            </h4>
-        </div>
-
-        <div class="avatar">
-            <a href="{% url 'user_page' user.username %}">
-                {% if layout == 'inline' %}
-                    {% avatar user 194 %}
-                {% endif %}
-                {% if layout == 'inline-mini' %}
-                    {% avatar user 48 %}
-                {% endif %}
-
-
-                {% if DONATIONS_ENABLED %}
-                    {% donor_badge user 'small' %}
-                {% endif %}
-
-                {% if PREMIUM_ENABLED %}
-                    {% premium_badge user 'small' %}
-                {% endif %}
-            </a>
-        </div>
-
-        <div id="profile-details">
-            <ul>
-                {% cache 300 astrobin_user user.username view layout LANGUAGE_CODE %}
-                <li><a href="{% url 'user_page' user.username %}?sub=uploaded"><strong>{{images}}</strong> {% trans "Images" %}</a></li>
-
-                {% if layout != 'inline-mini' %}
-                    <li><a href="{% url 'user_page_followers' user.username %}"><strong>{{followers}}</strong> {% trans "Followers" %}</a></li>
-                {% endif %}
-                {% endcache %}
-
-                {% if request.user != user %}
-                    <li>{% add_remove_toggleproperty "follow" user request_user %}</li>
-                {% endif %}
-            </ul>
-        </div>
+{% if view == 'table' %}
+    <td class="user-list-avatar">
+        <a href="{% url 'user_page' user.username %}">
+            {% avatar user 20 %}
+        </a>
     </div>
-{% endif %}
 
-{% if layout == 'list' %}
-    <div class="user-list-item">
-        <div class="avatar" style="width: 48px; height: 48px; overflow: hidden";>
-            <a href="{% url 'user_page' user.username %}">
-                {% avatar user 48 %}
+    <td class="user-list-name">
+        <a href="{% url 'user_page' user.username %}">
+            {{user.userprofile}}
+        </a>
+    </td>
 
-                {% if DONATIONS_ENABLED %}
-                    {% donor_badge user 'small' %}
-                {% endif %}
+    {% if layout == 'default' %}
+        <td class="user-list-images">
+            {{images}}
+        </td>
 
-                {% if PREMIUM_ENABLED %}
-                    {% premium_badge user 'small' %}
-                {% endif %}
-            </a>
-        </div>
+        <td class="user-list-followers">
+            {{followers}}
+        </td>
 
-        <div class="name">
-            <a href="{% url 'user_page' user.username %}">
-                {{user.userprofile}}
-            </a>
-        </div>
 
-        {% cache 300 astrobin_user user.username view layout LANGUAGE_CODE %}
-        <div class="info">
-            {% blocktrans count counter=images with images as images_number %}{{images_number}} image{% plural %}{{images_number}} images{% endblocktrans %},
-            {% blocktrans count counter=followers with followers as followers_number %}{{followers_number}} follower{% plural %}{{followers_number}} followers{% endblocktrans %}
-        </div>
-        {% endcache %}
+        <td class="user-list-following">
+            {{following}}
+        </td>
+    {% endif %}
 
-        {% if request.user != user %}
-            <div class="follow">
-                {% add_remove_toggleproperty "follow" user request_user %}
-            </div>
-        {% endif %}
-    </div>
+    {% if request.user != user %}
+        <td class="user-list-follow-action">
+            {% add_remove_toggleproperty "follow" user request_user %}
+        </td>
+    {% endif %}
 {% endif %}
