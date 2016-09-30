@@ -782,6 +782,10 @@ body.full .navbar .nav.pull-right > li > a.btn:focus {
 .dropdown-menu > li > a.active {
   font-weight: bold;
 }
+.btn-group.open > .btn.dropdown-toggle {
+  padding-left: 8px;
+  padding-right: 8px;
+}
 .navbar .nav .dropdown-toggle .icon-caret-down,
 .navbar .nav .open.dropdown .icon-caret-down {
   font-size: 10px;
