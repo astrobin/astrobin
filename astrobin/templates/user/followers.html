@@ -4,7 +4,7 @@
 {% load i18n %}
 {% load tags %}
 
-{% block title %}{% blocktrans with user=user %}{{user}}'s followers{% endblocktrans %}{% endblock %}
+{% block title %}{% blocktrans with user=requested_user.userprofile %}{{user}}'s followers{% endblocktrans %}{% endblock %}
 {% block container_extra_classes %}has-subnav{% endblock %}
 
 {% block content %}
@@ -13,7 +13,7 @@
         {% ifequal requested_user request.user %}
             {% blocktrans %}Your followers{% endblocktrans %}
         {% else %}
-            {% blocktrans with requested_user.username as username %}{{username}}'s followers{% endblocktrans %}
+            {% blocktrans with requested_user.userprofile as username %}{{username}}'s followers{% endblocktrans %}
         {% endifequal %}
     </h1>
 
