@@ -8,7 +8,7 @@
             </th>
 
             {% if not forum %}
-                <th class="topic-forum">
+                <th class="topic-forum hidden-phone">
                     {% trans "Forum" %}
                 </th>
             {% endif %}
@@ -46,7 +46,7 @@
             </td>
 
             {% if not forum %}
-                <td class="topic-forum">
+                <td class="topic-forum hidden-phone">
                     <a href="{{topic.forum.get_absolute_url}}">
                         [{{topic.forum.name}}]
                     </a>
