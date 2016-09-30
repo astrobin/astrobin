@@ -1,6 +1,6 @@
 {% load i18n pybb_tags %}
 
-<table class="table table-striped topic-list">
+<table class="table table-striped table-condensed topic-list">
     <thead>
         <tr class="topic-row head-row">
             <th class="topic-state">
@@ -23,12 +23,16 @@
             <th class="topic-author hidden-phone hidden-tablet">
                 {% trans "Author" %}
             </th>
-            <th class="topic-post-count hidden-phone">
-                {% trans "Posts" %}
-            </th>
-            <th class="topic-view-count hidden-phone">
-                {% trans "Views" %}
-            </th>
+
+            {% if forum %}
+                <th class="topic-post-count hidden-phone">
+                    {% trans "Posts" %}
+                </th>
+                <th class="topic-view-count hidden-phone">
+                    {% trans "Views" %}
+                </th>
+            {% endif %}
+
             <th class="topic-last-post hidden-phone hidden-tablet">
                 {% trans "Last post" %}
             </th>
@@ -76,12 +80,16 @@
                     {{topic.user.userprofile}}
                 </a>
             </td>
-            <td class="topic-post-count hidden-phone">
-                {{ topic.post_count }}
-            </td>
-            <td class="topic-view-count hidden-phone">
-                {{ topic|pybbm_calc_topic_views }}
-            </td>
+
+            {% if forum %}
+                <td class="topic-post-count hidden-phone">
+                    {{ topic.post_count }}
+                </td>
+                <td class="topic-view-count hidden-phone">
+                    {{ topic|pybbm_calc_topic_views }}
+                </td>
+            {% endif %}
+
             <td class="topic-last-post hidden-phone hidden-tablet">
                 {% include "pybb/topic_last_message_info.html" %}
             </td>

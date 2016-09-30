@@ -3775,6 +3775,11 @@ table.forums .topic-name,
 table.topic-list .topic-name {
   text-align: left !important;
 }
+table.forums .topic-forum,
+table.topic-list .topic-forum {
+  width: 20%;
+  padding-right: 16px;
+}
 table.forums .on-moderation a,
 table.topic-list .on-moderation a {
   color: white;
