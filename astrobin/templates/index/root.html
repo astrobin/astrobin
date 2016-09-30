@@ -208,21 +208,14 @@
 {% endblock %}
 
 {% block extra_js %}
-    <script src="{{STATIC_URL}}endless_pagination/js/endless-pagination.js"></script>
     <script type="text/javascript">
         $(document).ready(function() {
-            $('.endless').endlessPaginate({
-                paginateOnScroll: true,
-                paginateOnScrollMargin: 300,
-                onCompleted: function(context, fragment) {
-                    window.loadAstroBinImages(fragment);
-                }
-            });
-
             astrobin_common.setup_gear_popovers();
             astrobin_common.setup_user_popovers();
 
             $.ajaxSetup({timeout: 0});
         });
     </script>
+
+    {% include 'snippets/endless_pagination_js.html' %}
 {% endblock %}

@@ -1,14 +1,12 @@
 <script src="{{STATIC_URL}}endless_pagination/js/endless-pagination.js"></script>
 <script>
-    $.ajaxSetup({
-        timeout: 30000
-    });
-
-    $('ul.astrobin-thumbnails').endlessPaginate({
+    $.ajaxSetup({ timeout: 10000 });
+    $('.endless').endlessPaginate({
         paginateOnScroll: true,
         paginateOnScrollMargin: 300,
         onCompleted: function(context, fragment) {
             window.loadAstroBinImages(fragment);
+            $.ajaxSetup({timeout: 0});
         }
     });
 </script>

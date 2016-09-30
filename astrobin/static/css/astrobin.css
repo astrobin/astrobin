@@ -3503,8 +3503,12 @@ table#private-shared-folders tr:hover a.delete-folder {
 #register-button a {
   font-size: 150%;
 }
+.endless_container {
+  text-align: center;
+  width: 100%;
+}
 .endless_container .endless_more {
-  display: none;
+  margin-top: 28px;
 }
 .endless_container .endless_loading {
   text-align: center;
@@ -3778,7 +3782,7 @@ table.topic-list .topic-name {
 table.forums .topic-forum,
 table.topic-list .topic-forum {
   width: 20%;
-  padding-right: 16px;
+  padding-right: 20px;
 }
 table.forums .on-moderation a,
 table.topic-list .on-moderation a {
