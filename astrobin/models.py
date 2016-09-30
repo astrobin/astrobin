@@ -19,6 +19,7 @@ except ImportError:
 from django.core.cache import cache
 from django.db import models, IntegrityError
 from django.db.models import Q
+from django.db.models.signals import post_save
 from django.contrib.auth.models import User
 from django.core.exceptions import ValidationError
 from django import forms
@@ -1977,6 +1978,17 @@ class UserProfile(models.Model):
 
     class Meta:
         app_label = 'astrobin'
+
+def create_user_profile(sender, instance, created, **kwargs):
+    if created:
+        profile, created = UserProfile.objects.get_or_create(user=instance)
+post_save.connect(create_user_profile, sender=User)
+
+
+def create_user_openid(sender, instance, created, **kwargs):
+    if created:
+        instance.openid_set.create(openid=instance.username)
+post_save.connect(create_user_openid, sender=User)
 
 
 class Location(models.Model):

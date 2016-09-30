@@ -39,18 +39,6 @@ from .gear import get_correct_gear
 from .stories import add_story
 
 
-def create_user_profile(sender, instance, created, **kwargs):
-    if created:
-        profile, created = UserProfile.objects.get_or_create(user=instance)
-post_save.connect(create_user_profile, sender=User)
-
-
-def create_user_openid(sender, instance, created, **kwargs):
-    if created:
-        instance.openid_set.create(openid=instance.username)
-post_save.connect(create_user_openid, sender=User)
-
-
 def image_pre_save(sender, instance, **kwargs):
     try:
         image = sender.objects.get(pk = instance.pk)
