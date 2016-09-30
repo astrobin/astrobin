@@ -134,6 +134,9 @@
                 <li><a href="{% url 'user_collections_list' requested_user.username %}">
                     <i class="icon-folder-open-alt"></i>
                     {% trans "Collections" %}</a></li>
+                <li><a href="{% url 'user_page' requested_user.username %}{% query_string "public=,sub=title" "staging,active" %}">
+                    <i class="icon-sort-by-alphabet"></i>
+                    {% trans "Title" %}</a></li>
                 <li><a href="{% url 'user_page' requested_user.username %}{% query_string "public=,sub=uploaded" "staging,active" %}">
                     <i class="icon-upload-alt"></i>
                     {% trans "Upload time" %}</a></li>

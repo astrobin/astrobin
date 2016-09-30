@@ -939,6 +939,7 @@ def user_page(request, username):
         elif subsection == 3: subsection = 'year'
         elif subsection == 4: subsection = 'gear'
         elif subsection == 5: subsection = 'collections'
+        elif subsection == 6: subsection = 'title'
         else: subsection = 'uploaded'
 
     if subsection == 'collections':
@@ -956,6 +957,12 @@ def user_page(request, username):
         section = 'staging'
         subsection = None
     else:
+        #########
+        # TITLE #
+        #########
+        if subsection == 'title':
+            qs = qs.order_by('title')
+
         ############
         # UPLOADED #
         ############

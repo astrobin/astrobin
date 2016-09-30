@@ -1820,6 +1820,7 @@ class UserProfile(models.Model):
             (3, _("Year")),
             (4, _("Gear")),
             (5, _("Collections")),
+            (6, _("Title")),
         ),
         default = 0,
         null = False,
