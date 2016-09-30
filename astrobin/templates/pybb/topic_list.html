@@ -6,6 +6,13 @@
             <th class="topic-state">
                 &nbsp;
             </th>
+
+            {% if not forum %}
+                <th class="topic-forum">
+                    {% trans "Forum" %}
+                </th>
+            {% endif %}
+
             <th class="topic-name">
                 {% if forum %}
                     {{forum.name}}
@@ -33,6 +40,15 @@
             <td class="topic-state{% if topic.unread %} topic-unread{% endif %}">
                 <div class="state-indicator"></div>
             </td>
+
+            {% if not forum %}
+                <td class="topic-forum">
+                    <a href="{{topic.forum.get_absolute_url}}">
+                        [{{topic.forum.name}}]
+                    </a>
+                </td>
+            {% endif %}
+
             <td class="topic-name{% if topic.unread %} topic-unread{% endif %}">
                 <a href="{{ topic.get_absolute_url }}?first-unread=1" class="first-unread-post-link">&#8680;</a>
                 <a href="{{ topic.get_absolute_url }}">{{ topic.name|truncatewords:10 }}</a>
