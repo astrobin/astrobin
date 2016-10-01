@@ -115,35 +115,40 @@
 
 {% if image_list %}
 
-{% ifequal view "list" %}
-    <table class="table table-condensed">
+{% ifequal view "table" %}
+    <table class="table table-condensed table-striped search-table">
         <thead>
             <tr>
-                <th>{% trans "User" %}</th>
-                <th>{% trans "Title" %}</th>
-                <th><i class="icon-calendar"></i></th>
-                <th><i class="icon-eye-open"></i></th>
-                <th><i class="icon-thumbs-up"></i></th>
-                <th><i class="icon-heart"></i></th>
-                <th><i class="icon-comments-alt"></i></th>
+                <th class="search-table-user">{% trans "User" %}</th>
+                <th class="search-table-title">{% trans "Title" %}</th>
+                <th class="search-table-date hidden-phone"><i class="icon-calendar"></i></th>
+                <th class="search-table-views hidden-phone"><i class="icon-eye-open"></i></th>
+                <th class="search-table-likes hidden-phone"><i class="icon-thumbs-up"></i></th>
+                <th class="search-table-bookmarks hidden-phone hidden-tablet"><i class="icon-bookmark"></i></th>
+                <th class="search-table-comments hidden-phone hidden-tablet"><i class="icon-comments-alt"></i></th>
             </tr>
         </thead>
         <tbody>
             {% for search_result in image_list %}
                 {% if search_result.object and search_result.object.id %}
                     <tr>
-                        <td>
+                        <td class="search-table-user">
                             <a href="{% url 'user_page' search_result.object.user %} ">{{search_result.object.user.userprofile}}</a>
                         </td>
 
-                        <td>
+                        <td class="search-table-title">
                             <a href="{% get_image_url search_result.object %} ">{{search_result.object.title}}</a>
                         </td>
-                        <td>{{search_result.object.uploaded|date:"SHORT_DATE_FORMAT"}}</td>
-                        <td>{% get_hit_count for search_result.object %}</td>
-                        <td>{{search_result.likes}}</td>
-                        <td>{{search_result.bookmarks}}</td>
-                        <td>{{search_result.comments}}</td>
+
+                        <td class="search-table-date hidden-phone">
+                            <abbr class="timeago" title="{{search_result.object.uploaded|date:'Y-m-d\TH:i:s'}}">
+                            </abbr>
+                        </td>
+
+                        <td class="search-table-views hidden-phone">{% get_hit_count for search_result.object %}</td>
+                        <td class="search-table-likes hidden-phone">{{search_result.likes}}</td>
+                        <td class="search-table-bookmarks hidden-phone hidden-tablet">{{search_result.bookmarks}}</td>
+                        <td class="search-table-comments hidden-phone hidden-tablet">{{search_result.comments}}</td>
                     </tr>
                 {% endif %}
             {% endfor %}

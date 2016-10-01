@@ -110,7 +110,7 @@ register.inclusion_tag('inclusion_tags/image_list.html', takes_context=True)(ima
 
 
 @register.inclusion_tag('inclusion_tags/search_image_list.html', takes_context = True)
-def search_image_list(context, object_list, paginate = True):
+def search_image_list(context, object_list, paginate = True, **kwargs):
     user_list  = [x for x in object_list if x != None and x.verbose_name == 'User']
     gear_list  = [x for x in object_list if x != None and x.verbose_name == 'Gear']
     image_list = [x for x in object_list if x != None and x.verbose_name == 'Image']
@@ -132,6 +132,10 @@ def search_image_list(context, object_list, paginate = True):
     paginator = context['paginator']
     page_obj = paginator.page(page)
 
+    view = kwargs.get('view')
+    if view is None:
+      view = context['request'].GET.get('view', 'default')
+
     return {
         'request': request,
         'STATIC_URL': settings.STATIC_URL,
@@ -147,7 +151,7 @@ def search_image_list(context, object_list, paginate = True):
         'sort': request.GET.get('sort'),
         'search_type': request.GET.get('search_type', 0),
         'multiple': multiple,
-        'view': request.GET.get('view', 'default'),
+        'view': view,
     }
 
 

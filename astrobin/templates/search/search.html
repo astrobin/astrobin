@@ -53,12 +53,12 @@
             </li>
 
             <li class="pull-right">
-                {% ifequal request.GET.view 'list' %}
+                {% ifequal request.GET.view 'table' %}
                     <a href="{% query_string "" "view" %}">
                         <i class="icon-th"></i>
                     </a>
                 {% else %}
-                    <a href="{% query_string "view=list" "" %}">
+                    <a href="{% query_string "view=table" "" %}">
                         <i class="icon-list"></i>
                     </a>
                 {% endifequal %}
