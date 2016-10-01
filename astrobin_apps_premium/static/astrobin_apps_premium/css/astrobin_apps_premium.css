@@ -39,7 +39,10 @@ select[name="os0"] {
 .badge-premium-large i {
     font-size: 14px;
     line-height: 18px;
-    padding: 8px;
+    padding: 8px 10px;
+    display: block !important;
+    width: 12px !important;
+    height: 16px !important;
 }
 
 .badge-premium-medium {
