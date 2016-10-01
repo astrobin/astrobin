@@ -1,0 +1,18 @@
+{% load i18n %}
+
+<div class="alert alert-warning">
+    <div class="alert-heading">
+        <h4>{% trans "Want to post to this topic?" %}</h4>
+    </div>
+
+    <p>
+        {% blocktrans %}This forum is part of a group. If you want to contribute to the discussion, you need to join the group.{% endblocktrans %}
+    </p>
+
+    <div class="alert-actions">
+        <a  class="btn btn-primary btn-block-mobile"
+            href="{% url 'group_detail' topic.forum.group.pk %}">
+            {% trans "View group" %}
+        </a>
+    </div>
+</div>
