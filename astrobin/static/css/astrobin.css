@@ -856,7 +856,8 @@ body.full .navbar .nav.pull-right > li > a.btn:focus {
   border-radius: 0;
   color: #fcfcfc;
 }
-.subnav .nav > li > a:hover {
+.subnav .nav > li > a:hover,
+.subnav .nav > li > a:focus {
   color: #fff;
   background: #b74329;
 }
