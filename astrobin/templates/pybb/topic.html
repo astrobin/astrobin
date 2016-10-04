@@ -103,10 +103,6 @@
             {% if not user.is_authenticated %}
                 {% include 'pybb/_need_to_login_message.html' %}
             {% endif %}
-
-            {% if topic.forum.group and topic.forum.group.public %}
-                {% include 'pybb/_need_to_join_group_message.html' %}
-            {% endif %}
         {% endif %}
 
         {% if user.is_staff %}

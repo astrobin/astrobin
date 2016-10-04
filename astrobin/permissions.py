@@ -83,6 +83,8 @@ class CustomForumPermissions(DefaultPermissionHandler):
 
         try:
             if forum.group is not None:
+                if forum.group.public:
+                    return may
                 return may and (
                     user == forum.group.owner or
                     user in forum.group.members.all())
