@@ -2,6 +2,9 @@
 import datetime
 
 # Django
+from django.conf import settings
+from django.contrib.auth.models import User
+from django.contrib.contenttypes.models import ContentType
 from django.views.generic import View
 from django.views.generic.list import ListView
 
@@ -11,10 +14,12 @@ from braces.views import (
     GroupRequiredMixin,
     JSONResponseMixin,
 )
+from toggleproperties.models import ToggleProperty
 
 # AstroBin
 from astrobin.models import Image
 from astrobin.stories import add_story
+from astrobin_apps_notifications.utils import push_notification
 
 
 class ImageModerationListView(
