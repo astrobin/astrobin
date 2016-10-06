@@ -21,7 +21,7 @@
 
     Platesolving.prototype = {
         process: function() {
-            if (this.solution_id === 0) {
+            if (this.solution_id === 0 || this.solution_status === 0) {
                 /* The platesolving has never been attempted on this resource. */
                 this.solve();
             } else {

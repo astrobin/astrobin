@@ -18,5 +18,6 @@ def platesolving_machinery(context, target):
         'object_id': target.pk,
         'content_type_id': content_type.pk,
         'solution_id': target.solution.pk if target.solution else 0,
+        'solution_status': target.solution.status,
     }
 
