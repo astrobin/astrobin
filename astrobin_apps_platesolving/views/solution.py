@@ -17,6 +17,7 @@ from rest_framework import generics
 from rest_framework import permissions
 
 # This app
+from astrobin_apps_platesolving.models import PlateSolvingSettings
 from astrobin_apps_platesolving.models import Solution
 from astrobin_apps_platesolving.serializers import SolutionSerializer
 from astrobin_apps_platesolving.solver import Solver
@@ -33,6 +34,9 @@ class SolveView(base.View):
             manager = manager.all_objects
         target = get_object_or_404(manager, pk = object_id)
         solution, created = Solution.objects.get_or_create(object_id = object_id, content_type = content_type)
+        if solution.settings is None:
+            solution.settings = PlateSolvingSettings.objects.create()
+            solution.save()
 
         if solution.submission_id is None:
             solver = Solver()
