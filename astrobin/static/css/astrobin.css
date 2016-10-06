@@ -714,6 +714,16 @@ body.full .navbar .nav.pull-right > li > a.btn:focus {
   width: auto;
   margin: 0 auto;
 }
+.modal .form-horizontal input[type="text"],
+.modal .form-horizontal input[type="number"] {
+  width: 305px;
+}
+.modal .form-horizontal select {
+  width: 319px;
+}
+.modal .form-horizontal .help-inline {
+  width: 313px;
+}
 .navbar-fixed-top .container {
   max-height: 40px;
 }
@@ -1237,6 +1247,9 @@ textarea:focus {
 }
 .form-horizontal label {
   font-weight: bold;
+}
+.form-horizontal label.checkbox {
+  padding-left: 0;
 }
 .form-inline label {
   margin-right: 8px;

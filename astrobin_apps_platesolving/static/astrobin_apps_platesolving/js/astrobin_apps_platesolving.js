@@ -108,20 +108,6 @@
             });
         },
 
-        restart: function() {
-            var self = this;
-            if (self.solution_id) {
-                $.ajax({
-                    url: self.apiURL + self.solution_id + '/',
-                    type: 'delete',
-                    timeout: 30000,
-                    success: function() {
-                        self.solve();
-                    }
-                });
-            }
-        },
-
         onStarting: function() {
             this.missingCounter = 0;
             this.$root.removeClass('hide');
@@ -134,8 +120,8 @@
 
         onStatusMissing: function() {
             var self = this;
-            if (self.missingCounter > 5)
-                self.restart();
+            if (self.missingCounter < 5)
+                self.solve();
             else
                 setTimeout(function() {
                     self.update();

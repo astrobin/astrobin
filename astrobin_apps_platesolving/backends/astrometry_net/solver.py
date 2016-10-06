@@ -161,8 +161,9 @@ class Solver(AbstractPlateSolvingBackend):
                                 ]:
             if key in kwargs:
                 val = kwargs.pop(key)
-                val = typ(val)
-                args.update({key: val})
+                if val is not None:
+                    val = typ(val)
+                    args.update({key: val})
             elif default is not None:
                 args.update({key: default})
         return args
@@ -244,11 +245,11 @@ class Solver(AbstractPlateSolvingBackend):
             return 'http://nova.astrometry.net/sky_plot/zoom1/%d' % jc_id
         return ''
 
-    def start(self, image_file):
+    def start(self, image_file, **kwargs):
         apikey = settings.ASTROMETRY_NET_API_KEY
         self.login(apikey)
 
-        upload = self.upload(image_file)
+        upload = self.upload(image_file, **kwargs)
         if upload['status'] == 'success':
             return upload['subid']
 

@@ -49,6 +49,9 @@ import persistent_messages
 
 # AstroBin apps
 from astrobin_apps_notifications.utils import push_notification
+from astrobin_apps_platesolving.forms import PlateSolvingSettingsForm
+from astrobin_apps_platesolving.models import PlateSolvingSettings
+from astrobin_apps_platesolving.solver import Solver
 
 # AstroBin
 from astrobin.forms import *
@@ -729,20 +732,6 @@ def image_edit_revision_make_final(request, id):
 
 @login_required
 @require_GET
-def image_edit_plate_solve(request, image_id, revision_id):
-    if revision_id is None:
-        i = Image.all_objects.get(pk = image_id)
-    else:
-        i = ImageRevision.objects.get(pk = revision_id)
-
-    if i.solution:
-        i.solution.delete()
-
-    return HttpResponseRedirect(i.get_absolute_url())
-
-
-@login_required
-@require_GET
 def image_edit_license(request, id):
     image = get_object_or_404(Image.all_objects, pk=id)
     if request.user != image.user and not request.user.is_superuser:
@@ -754,6 +743,68 @@ def image_edit_license(request, id):
         {'form': form,
          'image': image},
         context_instance = RequestContext(request))
+
+
+@login_required
+def image_edit_platesolving_settings(request, pk, revision_label):
+    image = get_object_or_404(Image.all_objects, pk = pk)
+    if request.user != image.user and not request.user.is_superuser:
+        return HttpResponseForbidden()
+
+    if revision_label in (None, 'None', '0'):
+        url = reverse('image_edit_platesolving_settings', args = (pk,))
+        if image.revisions.count() > 0:
+            return_url = reverse('image_detail', args = (pk, '0',))
+        else:
+            return_url = reverse('image_detail', args = (pk,))
+        solution, created = Solution.objects.get_or_create(
+            content_type = ContentType.objects.get_for_model(Image),
+            object_id = pk)
+    else:
+        url = reverse('image_edit_platesolving_settings', args = (pk, revision_label,))
+        return_url = reverse('image_detail', args = (pk, revision_label,))
+        revision = ImageRevision.objects.get(image = image, label = revision_label)
+        solution, created = Solution.objects.get_or_create(
+            content_type = ContentType.objects.get_for_model(ImageRevision),
+            object_id = revision.pk)
+
+    settings = solution.settings
+    if settings is None:
+        solution.settings = PlateSolvingSettings.objects.create()
+        solution.save()
+
+    if request.method == 'GET':
+        form = PlateSolvingSettingsForm(instance = settings)
+        return render_to_response('image/edit/platesolving_settings.html',
+            {
+                'form': form,
+                'image': image,
+                'return_url': return_url,
+            },
+            context_instance = RequestContext(request))
+
+    if request.method == 'POST':
+        form = PlateSolvingSettingsForm(instance = settings, data = request.POST)
+        if not form.is_valid():
+            messages.error(
+                request,
+                _("There was one or more errors processing the form. You may need to scroll down to see them."))
+            return render_to_response(
+                'image/edit/platesolving_settings.html',
+                {
+                    'form': form,
+                    'image': image,
+                    'return_url': return_url,
+                },
+                context_instance = RequestContext(request))
+
+        form.save()
+        solution.clear()
+
+        messages.success(
+            request,
+            _("Form saved. A new plate-solving process will start when you visit your image again."))
+        return HttpResponseRedirect(url)
 
 
 @login_required

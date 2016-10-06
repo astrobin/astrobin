@@ -52,7 +52,17 @@ class SolveView(base.View):
                 img.seek(0)
                 f = File(img)
 
-                submission = solver.solve(f)
+                if solution.settings.blind:
+                    submission = solver.solve(f)
+                else:
+                    submission = solver.solve(f,
+                        scale_units = solution.settings.scale_units,
+                        scale_lower = solution.settings.scale_min,
+                        scale_upper = solution.settings.scale_max,
+                        center_ra = solution.settings.center_ra,
+                        center_dec = solution.settings.center_dec,
+                        radius = solution.settings.radius,
+                    )
                 solution.status = Solver.PENDING
                 solution.submission_id = submission
                 solution.save()

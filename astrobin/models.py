@@ -1277,6 +1277,9 @@ class Image(HasSolutionMixin, models.Model):
     def thumbnail_invalidate(self, delete_remote = True):
         return self.thumbnail_invalidate_real(self.image_file, '0', delete_remote)
 
+    def is_platesolvable(self):
+        return self.subject_type in (100, 300)
+
     @staticmethod
     def by_gear(gear, gear_type = None):
         images = Image.objects.all()

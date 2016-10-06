@@ -842,6 +842,20 @@ body.full {
         width: auto;
         margin: 0 auto;
     }
+
+    .form-horizontal {
+        input[type="text"], input[type="number"] {
+            width: 305px;
+        }
+
+        select {
+            width: 319px;
+        }
+
+        .help-inline {
+            width: 313px;
+        }
+    }
 }
 
 .navbar-fixed-top .container {
@@ -1373,6 +1387,10 @@ input:focus, textarea:focus {
 }
 .form-horizontal label {
     font-weight: bold;
+
+    &.checkbox {
+        padding-left: 0;
+    }
 }
 
 .form-inline {

@@ -1,0 +1,73 @@
+{% extends 'base.html' %}
+
+{% load i18n %}
+{% load bootstrap_toolkit %}
+
+
+{% block title %}{% trans "Edit your image: plate-solving settings" %}{% endblock %}
+{% block container_extra_classes %}has-subnav{% endblock %}
+
+{% block content %}
+    <h1>
+        {% blocktrans %}Edit your image: plate-solving settings{% endblocktrans %}
+    </h1>
+
+    <form id="platesolving-settings" class="form-horizontal" action="." method="post">{% csrf_token %}
+        {{form|as_bootstrap}}
+
+        <div class="form-actions">
+            <input
+                class="btn btn-primary btn-block-mobile"
+                type="submit"
+                name="submit_save"
+                value="{% trans "Save" %}" />
+
+            <a class="btn btn-block-mobile" href="{{return_url}}">
+                {% trans "Back to image" %}
+            </a>
+        </div>
+    </form>
+{% endblock %}
+
+{% block extra_js %}
+    <script language="javascript">
+        $(document).ready(function() {
+            var $form = $('form#platesolving-settings'),
+                $blind = $form.find('input#id_blind');
+
+            function hide_all($form) {
+                $form.find('.control-group').each(function(index, group) {
+                    if ($(group).find('input#id_blind').length > 0) {
+                        // Skip
+                        return;
+                    }
+
+                    $(group).hide();
+                });
+            }
+
+            function show_all($form) {
+                $form.find('.control-group').each(function(index, group) {
+                    if ($(group).find('input#id_blind').length > 0) {
+                        // Skip
+                        return;
+                    }
+
+                    $(group).show();
+                });
+            }
+
+            if ($blind.is(':checked')) {
+                hide_all($form);
+            }
+
+            $blind.change(function() {
+                if ($(this).is(':checked')) {
+                    hide_all($form);
+                } else {
+                    show_all($form);
+                }
+            });
+        });
+    </script>
+{% endblock %}

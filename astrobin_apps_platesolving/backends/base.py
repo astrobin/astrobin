@@ -4,6 +4,6 @@ class AbstractPlateSolvingBackend(object):
     __metaclass__ = ABCMeta
 
     @abstractmethod
-    def start(image):
+    def start(image, **kwargs):
         pass
 

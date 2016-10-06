@@ -1,0 +1,63 @@
+{% load common_tags %}
+{% load i18n %}
+
+{% if request.user == image.user or request.user.is_superuser %}
+    <li class="dropdown">
+        <a class="dropdown-toggle" data-toggle="dropdown" href="#">
+            <i class="icon-pencil icon-white"></i>
+            <span class="hidden-phone">{% trans "Edit" %}</span>
+            <span class="caret"></span>
+        </a>
+        <ul class="dropdown-menu">
+            <li>
+                <a href="{% url 'image_edit_watermark' image.id %}">
+                    <i class="icon-tint"></i>
+                    {% trans "Watermark" %}
+                </a>
+            </li>
+
+            <li>
+                <a href="{% url 'image_edit_basic' image.id %}">
+                    <i class="icon-info"></i>
+                    {% trans "Basic information" %}
+                </a>
+            </li>
+
+            {% if image.subject_type < 500 %}
+                <li>
+                    <a href="{% url 'image_edit_gear' image.id %}">
+                        <i class="icon-cog"></i>
+                        {% trans "Gear" %}
+                    </a>
+                </li>
+
+                <li>
+                    <a href="{% url 'image_edit_acquisition' image.id %}">
+                        <i class="icon-time"></i>
+                        {% trans "Acquisition details" %}
+                    </a>
+                </li>
+            {% endif %}
+
+            {% if image.is_platesolvable %}
+            <li>
+                {% if is_revision %}
+                    <a href="{% url 'image_edit_platesolving_settings' image.pk revision_image.label %}">
+                {% else %}
+                    <a href="{% url 'image_edit_platesolving_settings' image.pk %}">
+                {% endif %}
+                    <i class="icon-location-arrow"></i>
+                    {% trans "Plate-solving settings" %}
+                </a>
+            </li>
+            {% endif %}
+
+            <li>
+                <a href="{% url 'image_edit_license' image.id %}">
+                    <i class="icon-legal"></i>
+                    {% trans "License" %}
+                </a>
+            </li>
+        </ul>
+    </li>
+{% endif %} <!-- user is owner or superuser -->

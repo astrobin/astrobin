@@ -259,3 +259,11 @@
     padding: 0;
   }
 }
+@media screen and (max-width: 375px) {
+  .modal .form-horizontal input[type="text"],
+  .modal .form-horizontal input[type="number"],
+  .modal .form-horizontal select,
+  .modal .form-horizontal .help-inline {
+    width: 95%;
+  }
+}
