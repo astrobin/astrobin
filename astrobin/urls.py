@@ -124,6 +124,7 @@ urlpatterns = patterns('',
     url(r'^toggleproperties/', include('toggleproperties.urls')),
     url(r'^users_app/', include('astrobin_apps_users.urls')),
     url(r'^groups/', include('astrobin_apps_groups.urls')),
+    url(r'^iotd/', include('astrobin_apps_iotd.urls')),
 
     ###########################################################################
     ### HOME VIEWS                                                          ###

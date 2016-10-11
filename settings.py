@@ -290,6 +290,7 @@ INSTALLED_APPS = [
     'astrobin_apps_premium',
     'astrobin_apps_notifications',
     'astrobin_apps_groups',
+    'astrobin_apps_iotd',
     'toggleproperties',
 ]
 if DEBUG_TOOLBAR:
