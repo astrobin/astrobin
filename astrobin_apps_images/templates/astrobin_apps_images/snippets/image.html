@@ -2,6 +2,7 @@
 {% load cache %}
 {% load common_tags %}
 {% load i18n %}
+{% load static %}
 
 {% if status != 'error' %}
     <div class="astrobin-image-container">
@@ -51,7 +52,15 @@
                      data-preloaded="true"
                      data-loaded="true"
                 {% else %}
-                     src="http://placehold.it/{{placehold_size}}/222/333&text={% trans "Loading" %}"
+                     {% if alias == 'gallery' %}
+                        src="{% get_static_prefix %}/images/placeholder-gallery.jpg"
+                     {% else %}
+                        {% if alias == 'story' %}
+                            src="{% get_static_prefix %}/images/placeholder-stories.jpg"
+                        {% else %}
+                            src="http://placehold.it/{{placehold_size}}/222/333&text={% trans "Loading" %}"
+                        {% endif %}
+                     {% endif %}
                      data-preloaded="false"
                      data-loaded="false"
                 {% endif %}

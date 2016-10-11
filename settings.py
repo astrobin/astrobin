@@ -17,7 +17,7 @@ ALLOWED_HOSTS = ['*']
 TEMPLATE_DEBUG = DEBUG
 MAINTENANCE_MODE = False
 READONLY_MODE = False
-MEDIA_VERSION = '175'
+MEDIA_VERSION = '176'
 LONGPOLL_ENABLED = False
 ADS_ENABLED = True
 DONATIONS_ENABLED = False
@@ -638,7 +638,7 @@ THUMBNAIL_ALIASES = {
         'iotd_candidate': {'size': (960, 0), 'crop': 'smart', 'watermark': False},
 
         # Activity stream
-        'act_object': {'size': (460, 320), 'crop': 'smart', 'quality': 80},
+        'story': {'size': (460, 320), 'crop': 'smart', 'quality': 90},
 
         # Duckduckgo
         'duckduckgo': {'size': (250, 200), 'crop': 'smart', 'quality': 80},
