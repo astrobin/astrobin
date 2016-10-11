@@ -35,37 +35,33 @@
             var $form = $('form#platesolving-settings'),
                 $blind = $form.find('input#id_blind');
 
-            function hide_all($form) {
+            function disable_all($form) {
                 $form.find('.control-group').each(function(index, group) {
                     if ($(group).find('input#id_blind').length > 0) {
                         // Skip
                         return;
                     }
 
-                    $(group).hide();
+                    $(group).find('input, select').attr('disabled', 'disabled');
                 });
             }
 
-            function show_all($form) {
+            function enable_all($form) {
                 $form.find('.control-group').each(function(index, group) {
                     if ($(group).find('input#id_blind').length > 0) {
                         // Skip
                         return;
                     }
 
-                    $(group).show();
+                    $(group).find('input, select').removeAttr('disabled');
                 });
-            }
-
-            if ($blind.is(':checked')) {
-                hide_all($form);
             }
 
             $blind.change(function() {
                 if ($(this).is(':checked')) {
-                    hide_all($form);
+                    disable_all($form);
                 } else {
-                    show_all($form);
+                    enable_all($form);
                 }
             });
         });

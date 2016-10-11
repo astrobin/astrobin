@@ -140,7 +140,17 @@ textarea.uniform:focus {
   box-shadow: rgba(0, 0, 0, 0.8) 0 1px 5px;
 }
 input[readonly],
-input:focus[readonly] {
+input:focus[readonly],
+select[readonly],
+select:focus[readonly],
+textarea[readonly],
+textarea:focus[readonly],
+input[disabled],
+input:focus[disabled],
+select[disabled],
+select:focus[disabled],
+textarea[disabled],
+textarea:focus[disabled] {
   color: #a1a1a1;
   background: #292929;
 }

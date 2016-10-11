@@ -212,7 +212,13 @@ textarea.uniform:focus {
   .box-shadow;
 }
 
-input[readonly], input:focus[readonly] {
+input[readonly], input:focus[readonly],
+select[readonly], select:focus[readonly],
+textarea[readonly], textarea:focus[readonly],
+input[disabled], input:focus[disabled],
+select[disabled], select:focus[disabled],
+textarea[disabled], textarea:focus[disabled],
+{
     color: @text-color / @strong-hilight-factor;
     background: @background-color / @strong-hilight-factor;}
 
