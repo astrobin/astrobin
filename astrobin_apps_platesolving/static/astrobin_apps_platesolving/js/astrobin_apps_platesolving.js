@@ -37,7 +37,7 @@
             $.ajax({
                 url: this.solveURL + this.object_id + '/' + this.content_type_id + '/',
                 type: 'post',
-                timeout: 30000,
+                timeout: 60000,
                 success: function(data, textStatus, jqXHR) {
                     self.solution_id = data['solution'];
 

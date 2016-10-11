@@ -239,6 +239,13 @@ class Solver(AbstractPlateSolvingBackend):
             return 'http://nova.astrometry.net/annotated_full/%d' % job_id
         return ''
 
+    def annotations(self, sub_id):
+        job_id = self.get_job_from_sub(sub_id)
+        result = None
+        if job_id:
+            result = self.send_request('jobs/%s/annotations/' % job_id)
+        return result
+
     def sky_plot_zoom1_image_url(self, sub_id):
         jc_id = self.get_job_calibration_from_sub(sub_id)
         if jc_id:

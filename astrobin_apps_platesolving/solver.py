@@ -12,9 +12,6 @@ class Solver(object):
     def _backend(self):
         module_name, backend_name = \
             settings.ASTROBIN_PLATESOLVING_BACKEND.rsplit('.', 1)
-
-        print module_name, backend_name
-
         module = import_module(module_name)
         return getattr(module, backend_name)()
 
@@ -35,20 +32,20 @@ class Solver(object):
         if status == 'fail':
             return self.FAILED
 
-        if 'user_images' in sub_status and not sub_status.get('user_images'):
+        if sub_status.get('job_calibrations', []):
+            return self.SUCCESS
+
+        if 'jobs' in sub_status or not sub_status.get('jobs', []):
             return self.PENDING
 
         jobs = sub_status.get('jobs', [])
-        if not jobs:
-            return self.PENDING
-
         job = jobs[0]
         if job is None:
             return self.PENDING
 
         job_result = self._backend().job_status(job)
         status = job_result.get('status')
-        if status == 'solving':
+        if status == 'solving' or status == 'processing':
             return self.PENDING
         elif status == 'success':
             return self.SUCCESS
@@ -60,6 +57,9 @@ class Solver(object):
 
     def annotated_image_url(self, submission):
         return self._backend().annotated_image_url(submission)
+
+    def annotations(self, submission):
+        return self._backend().annotations(submission)
 
     def sky_plot_zoom1_image_url(self, submission):
         return self._backend().sky_plot_zoom1_image_url(submission)

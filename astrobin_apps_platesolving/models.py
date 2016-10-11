@@ -117,8 +117,7 @@ class Solution(models.Model):
         blank = True,
     )
 
-    objects_in_field = models.CharField(
-        max_length = 1024,
+    objects_in_field = models.TextField(
         null = True,
         blank = True,
     )
@@ -158,6 +157,11 @@ class Solution(models.Model):
         decimal_places = 3,
     )
 
+    annotations = models.TextField(
+        null = True,
+        blank = True,
+    )
+
 
     def __unicode__(self):
         return "solution_%d" % self.id
@@ -175,6 +179,7 @@ class Solution(models.Model):
         self.pixscale = None
         self.orientation = None
         self.radius = None
+        self.annotations = None
         self.save()
 
     class Meta:
