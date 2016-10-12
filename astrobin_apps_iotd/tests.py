@@ -86,17 +86,10 @@ class IotdTest(TestCase):
         response = self.client.get(url)
         self.assertEqual(response.status_code, 405)
 
-        # Only AJAX allowed
-        response = self.client.post(url, {
-            'submitter': self.submitter.pk,
-            'image': self.image.pk,
-        })
-        self.assertEqual(response.status_code, 403)
-
         # Success
         response = self.client.post(url, {
             'submitter': self.submitter.pk,
             'image': self.image.pk,
-        }, HTTP_X_REQUESTED_WITH = 'XMLHttpRequest', follow = True)
+        }, follow = True)
         self.assertEqual(response.status_code, 200)
         self.assertEqual(IotdSubmission.objects.count(), 1)

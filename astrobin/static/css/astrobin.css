@@ -3613,12 +3613,15 @@ table#private-shared-folders tr:hover a.delete-folder {
   top: 6px;
   left: 8px;
 }
-.toggleproperty-add-remove.property-like {
+.toggleproperty-add-remove.property-like,
+.btn-iotd-submit {
   display: block;
   margin: 16px 0;
 }
 .toggleproperty-add-remove.property-like button,
-.toggleproperty-add-remove.property-like a {
+.btn-iotd-submit button,
+.toggleproperty-add-remove.property-like a,
+.btn-iotd-submit a {
   width: 100%;
   font-size: 16px;
   line-height: 48px;
