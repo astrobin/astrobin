@@ -74,6 +74,20 @@ class IotdTest(TestCase):
         self.assertEqual(submission.submitter, self.submitter)
         self.assertEqual(submission.image, self.image)
 
+        # Image cannot be submitted again
+        with self.assertRaises(ValidationError):
+            IotdSubmission.objects.create(
+                submitter = self.submitter,
+                image = self.image)
+
+        # Test max daily
+        with self.assertRaises(ValidationError):
+            image2 = Image.objects.create(user = self.submitter)
+            with self.settings(IOTD_SUBMISSION_MAX_PER_DAY = 1):
+                IotdSubmission.objects.create(
+                    submitter = self.submitter,
+                    image = image2)
+
     def test_submission_create_view(self):
         url = reverse_lazy('iotd_submission_create')
 

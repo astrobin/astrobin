@@ -727,3 +727,4 @@ SANITIZER_ALLOWED_TAGS = ['b', 'i', 'strong', 'em', 'a', 'img']
 SANITIZER_ALLOWED_ATTRIBUTES = ['href', 'target', 'src']
 
 IOTD_SUBMISSION_WINDOW_WEEKS = 52
+IOTD_SUBMISSION_MAX_PER_DAY = 5

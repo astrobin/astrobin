@@ -39,7 +39,14 @@ class IotdSubmission(models.Model):
             raise ValidationError(_(msg) % {'weeks': weeks})
 
         if not self.submitter.groups.filter(name = 'iotd_submitters').exists():
-            msg = "The submitter must be in the iotd_submitters group."
+            msg = "You are not a member of the IOTD Submitters board."
+            raise ValidationError(_(msg))
+
+        others_today = IotdSubmission.objects.filter(
+            submitter = self.submitter,
+            date__gt = datetime.now().date() - timedelta(1))
+        if others_today.count() >= settings.IOTD_SUBMISSION_MAX_PER_DAY:
+            msg = "You have already submitted the maximum allowed number of IOTD Submissions today."
             raise ValidationError(_(msg))
 
     def save(self, *args, **kwargs):

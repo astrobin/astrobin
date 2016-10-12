@@ -34,6 +34,13 @@ def iotd_submit(context, image):
         msg = "You have already made an IOTD Submission for this image"
         reason = _(msg)
 
+    if IotdSubmission.objects.filter(
+        submitter = request.user,
+        date__gt = datetime.now().date() - timedelta(1)).count() >= settings.IOTD_SUBMISSION_MAX_PER_DAY:
+        enabled = False
+        msg = "You have already submitted the maximum allowed number of IOTD Submissions today."
+        reason = _(msg)
+
     if not request.user.groups.filter(name = 'iotd_submitters').exists():
         enabled = False
         msg = "You are not a member of the IOTD Submitters board."
