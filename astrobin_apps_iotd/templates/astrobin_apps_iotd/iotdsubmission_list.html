@@ -1,0 +1,51 @@
+{% extends 'base.html' %}
+
+{% load i18n %}
+{% load astrobin_apps_iotd_tags %}
+{% load astrobin_apps_images_tags %}
+
+{% block title %}{% trans "IOTD Submission Queue" %}{% endblock %}
+
+{% block content %}
+    <h1>{% trans "IOTD Submission Queue" %}</h1>
+    <div class="subtitle">
+        {% blocktrans %}As a member of the IOTD Reviewers Board, you are able to promote images from the Submission Queue to the Review Queue. Images in the Review Queue will be shown to the AstroBin community as "Top Picks", and also be eligible to promotion to IOTD by an IOTD Judge.{% endblocktrans %}
+    </div>
+
+    <div class="iotd-promotion-queue">
+        {% for object in object_list %}
+            <div class="iotd-queue-item">
+                <a href="#" class="vote">
+                    {% astrobin_image object.image 'story' link=False tooltip=False %}
+                </a>
+
+                <div class="iotd-queue-item-actions">
+                    <a href="#">
+                        <i class="icon-zoom-in"></i>
+                    </a>
+
+                    <a href="#">
+                        <i class="icon-info"></i>
+                    </a>
+                </div>
+
+                <div class="iotd-queue-item-vote-overlay">
+                    <i class="icon-ok"></i>
+                </div>
+            </div>
+        {% empty %}
+            {% trans "This queue is currently empty." %}
+        {% endfor %}
+    </div>
+{% endblock %}
+
+{% block extra_js %}
+    <script type="text/javascript">
+        $(document).ready(function() {
+            $('.iotd-queue-item a.vote').click(function(e) {
+                e.preventDefault();
+                $(this).closest('.iotd-queue-item').toggleClass('voted');
+            });
+        });
+    </script>
+{% endblock %}

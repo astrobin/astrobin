@@ -19,6 +19,7 @@ from braces.views import (
 # This app
 from astrobin_apps_iotd.forms import *
 from astrobin_apps_iotd.models import *
+from astrobin_apps_iotd.permissions import *
 
 
 class RestrictToSubmissionSubmitterOrSuperiorMixin(View):
@@ -42,17 +43,15 @@ class IotdSubmissionCreateView(
 
     def post(self, request, *args, **kwargs):
         image = Image.objects.get(pk = request.POST.get('image'))
+        may, reason = may_submit_image(request.user, image)
 
-        if request.user == image.user:
-            messages.error(request, _("You cannot submit your own image."))
+        if may:
+            submission = IotdSubmission.objects.create(
+                submitter = request.user,
+                image = image)
+            messages.success(self.request, _("Image successfully submitted to the IOTD Submissions Queue"))
         else:
-            try:
-                submission = IotdSubmission.objects.create(
-                    submitter = request.user,
-                    image = image)
-                messages.success(self.request, _("Image successfully submitted to the IOTD Submissions Queue"))
-            except ValidationError as e:
-                messages.error(self.request, ';'.join(e.messages))
+            messages.error(request, _("You cannot submit your own image."))
 
         return redirect(reverse_lazy('image_detail', args = (image.pk,)))
 

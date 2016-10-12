@@ -64,9 +64,17 @@ class IotdTest(TestCase):
             IotdSubmission.objects.create(
                 submitter = self.submitter,
                 image = self.image)
+        self.image.is_wip = False
+        self.image.save()
+
+        # Cannot submit own image
+        with self.assertRaises(ValidationError):
+            IotdSubmission.objects.create(
+                submitter = self.submitter,
+                image = self.image)
 
         # All OK
-        self.image.is_wip = False
+        self.image.user = self.user
         self.image.save()
         submission = IotdSubmission.objects.create(
             submitter = self.submitter,
