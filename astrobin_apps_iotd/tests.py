@@ -2,6 +2,7 @@
 from datetime import datetime, timedelta
 
 # Django
+from django.conf import settings
 from django.contrib.auth.models import User, Group
 from django.core.exceptions import ValidationError
 from django.core.urlresolvers import reverse_lazy
@@ -34,7 +35,11 @@ class IotdTest(TestCase):
 
     def test_submission_model(self):
         self.image.user = self.user
-        self.image.uploaded = datetime.now() - timedelta(weeks = 4, days = 1)
+        self.image.uploaded =\
+            datetime.now() -\
+            timedelta(
+                weeks = settings.IOTD_SUBMISSION_WINDOW_WEEKS,
+                days = 1)
         self.image.save()
 
         # User must be submitter
@@ -90,6 +95,5 @@ class IotdTest(TestCase):
         response = self.client.post(url, {
             'submitter': self.submitter.pk,
             'image': self.image.pk,
-        }, follow = True)
-        self.assertEqual(response.status_code, 200)
+        })
         self.assertEqual(IotdSubmission.objects.count(), 1)
