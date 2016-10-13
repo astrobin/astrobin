@@ -1,5 +1,6 @@
 {% load i18n %}
 {% load tags %}
+{% load astrobin_apps_iotd_tags %}
 {% load url from future %}
 
 <button class="btn btn-navbar" data-toggle="collapse" data-target=".site-nav">
@@ -29,8 +30,20 @@
                 <i class="icon-caret-down"></i>
             </a>
             <ul class="dropdown-menu">
-                <li><a href="{% url 'image_moderation' %}"><i class="icon-legal"></i> {% trans "Image moderation" %}</a></li>
-                <li><a href="{% url 'image_moderation_view_spam' %}"><i class="icon-thumbs-down"></i> {% trans "View spam list" %}</a></li>
+                {% if request.user|is_image_moderator %}
+                    <li class="nav-header">{% trans "Images" %}</li>
+                    <li><a href="{% url 'image_moderation' %}">{% trans "Image queue" %}</a></li>
+                    <li><a href="{% url 'image_moderation_view_spam' %}">{% trans "Spam list" %}</a></li>
+                {% endif %}
+
+                {% if request.user|is_iotd_reviewer %}
+                    <li class="nav-header">{% trans "Image of the day" %}</li>
+                    <li>
+                        <a href="{% url 'iotd_submission_queue' %}">
+                            {% trans "Submission queue" %}
+                        </a>
+                    </li>
+                {% endif %}
             </ul>
         </li>
         {% endif %}

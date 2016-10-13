@@ -378,7 +378,15 @@ def is_content_moderator(user):
     if not user.is_authenticated():
         return False
 
-    return user.groups.filter(name='Content moderators').count() > 0
+    return user.groups.filter(name='content_moderators').count() > 0
+
+
+@register.filter
+def is_image_moderator(user):
+    if not user.is_authenticated():
+        return False
+
+    return user.groups.filter(name='image_moderators').count() > 0
 
 
 @register.filter

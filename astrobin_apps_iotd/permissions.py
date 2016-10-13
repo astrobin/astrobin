@@ -6,7 +6,6 @@ from django.conf import settings
 from django.utils.translation import ugettext_lazy as _
 
 
-
 def may_submit_image(user, image):
     if not user.groups.filter(name = 'iotd_submitters').exists():
         return False, _("You are not a member of the IOTD Submitters board.")
@@ -19,14 +18,14 @@ def may_submit_image(user, image):
 
     weeks = settings.IOTD_SUBMISSION_WINDOW_WEEKS
     if image.uploaded < datetime.now() - timedelta(weeks = weeks):
-        return False, _("You cannot submit an image that was uploaded more than %(weeks)s weeks ago.") % {
-            weeks: weeks
+        return False, _("You cannot submit an image that was uploaded more than %(max_weeks)s weeks ago.") % {
+            'max_weeks': weeks
         }
 
     # Import here to avoid circular dependency
     from astrobin_apps_iotd.models import IotdSubmission
 
-    if IotdSubmission.objects.filter(submitter = user, image = image).count() > 0:
+    if IotdSubmission.objects.filter(submitter = user, image = image).exists():
         return False, _("You have already submitted this image.")
 
     max_allowed = settings.IOTD_SUBMISSION_MAX_PER_DAY
@@ -35,7 +34,44 @@ def may_submit_image(user, image):
         date__gt = datetime.now().date() - timedelta(1)).count()
     if submitted_today >= max_allowed:
         return False, _("You have already submitted %(max_allowed)s images today.") % {
-            max_allowed: max_allowed
+            'max_allowed': max_allowed
+        }
+
+    return True, None
+
+
+def may_toggle_vote_image(user, image):
+    if not user.groups.filter(name = 'iotd_reviewers').exists():
+        return False, _("You are not a member of the IOTD Reviewers board.")
+
+    if user == image.user:
+        return False, _("You cannot vote for your own image.")
+
+    if image.is_wip:
+        return False, _("Images in the staging area cannot be voted for.")
+
+    # Import here to avoid circular dependency
+    from astrobin_apps_iotd.models import *
+
+    if not IotdSubmission.objects.filter(image = image).exists():
+        return False, _("You cannot vote for an image that has not been submitted")
+
+    if user.pk in IotdSubmission.objects.filter(image = image).values_list('submitter', flat = True):
+        return False, _("You cannot vote for your own submission")
+
+    weeks = settings.IOTD_REVIEW_WINDOW_WEEKS
+    if IotdSubmission.first_for_image(image).date < datetime.now() - timedelta(weeks = weeks):
+        return False, _("You cannot vote for an image that has been in the review queue for more than %(max_weeks)s weeks.") % {
+            'max_weeks': weeks
+        }
+
+    max_allowed = settings.IOTD_REVIEW_MAX_PER_DAY
+    reviewed_today = IotdVote.objects.filter(
+        reviewer = user,
+        date__gt = datetime.now().date() - timedelta(1)).count()
+    if reviewed_today >= max_allowed:
+        return False, _("You have already voted for %(max_allowed)s images today.") % {
+            'max_allowed': max_allowed
         }
 
     return True, None

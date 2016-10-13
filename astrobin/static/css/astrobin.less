@@ -4683,3 +4683,78 @@ table.search-table {
         }
     }
 }
+
+.iotd-queue-item {
+    float: left;
+    margin-bottom: 10px;
+    position: relative;
+
+    &:nth-child(odd) {
+        margin-right: 10px;
+    }
+
+    >.iotd-queue-item-actions {
+        visibility: hidden;
+        position: absolute;
+        top: 0;
+        right: 0;
+        margin: 10px;
+        background: rgba(0 ,0 ,0 ,0.66);
+        border: 1px solid rgba(255, 255, 255, 0.25);
+
+        a {
+            font-size: 16px;
+            padding: 8px 16px;
+            display: block;
+            text-align: center;
+            margin-bottom: 8px;
+            text-shadow: 1px 1px 1px black;
+        }
+    }
+    &:hover >.iotd-queue-item-actions {
+        visibility: visible;
+        z-index: 2;
+    }
+
+    >.iotd-queue-item-vote-overlay {
+        visibility: hidden;
+        position: absolute;
+        bottom: 0;
+        width: 100%;
+        text-align: center;
+        font-size: 20px;
+        background-color: green;
+        background-color: rgba(0,255,0,0.4);
+        color: white;
+
+        i {
+            display: block;
+            padding: 10px;
+        }
+    }
+    &.voted >.iotd-queue-item-vote-overlay {
+        visibility: visible;
+    }
+
+    >.iotd-queue-item-may-not-vote-overlay {
+        visibility: hidden;
+        position: absolute;
+        top: 0;
+        left: 0;
+    }
+    &.may-not-vote >.iotd-queue-item-may-not-vote-overlay {
+        visibility: visible;
+    }
+
+    .submissions-count {
+        position: absolute;
+        top: 10px;
+        left: 10px;
+        z-index: 1;
+
+        .badge {
+            font-size: 16px;
+            padding: 4px 8px;
+        }
+    }
+}

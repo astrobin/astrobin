@@ -24,7 +24,7 @@ from astrobin_apps_notifications.utils import push_notification
 
 class ImageModerationListView(
         LoginRequiredMixin, ListView, GroupRequiredMixin):
-    group_required = "Content moderators"
+    group_required = "image_moderators"
     model = Image
     queryset = Image.all_objects.filter(moderator_decision = 0)
     template_name = "moderation/image_list.html"
@@ -32,7 +32,7 @@ class ImageModerationListView(
 
 class ImageModerationSpamListView(
         LoginRequiredMixin, ListView, GroupRequiredMixin):
-    group_required = "Content moderators"
+    group_required = "image_moderators"
     model = Image
     queryset = Image.all_objects.filter(moderator_decision = 2)
     template_name = "moderation/spam_list.html"
@@ -40,7 +40,7 @@ class ImageModerationSpamListView(
 
 class ImageModerationMarkAsSpamView(
         LoginRequiredMixin, GroupRequiredMixin, JSONResponseMixin, View):
-    group_required = "Content moderators"
+    group_required = "image_moderators"
     methods = "post"
 
     def post(self, request, *args, **kwargs):
@@ -57,7 +57,7 @@ class ImageModerationMarkAsSpamView(
 
 class ImageModerationMarkAsHamView(
         LoginRequiredMixin, GroupRequiredMixin, JSONResponseMixin, View):
-    group_required = "Content moderators"
+    group_required = "image_moderators"
     methods = "post"
 
     def post(self, request, *args, **kwargs):
@@ -90,7 +90,7 @@ class ImageModerationMarkAsHamView(
 
 class ImageModerationBanAllView(
         LoginRequiredMixin, GroupRequiredMixin, JSONResponseMixin, View):
-    group_required = "Content moderators"
+    group_required = "image_moderators"
     methods = "post"
 
     def post(self, request, *args, **kwargs):

@@ -32,3 +32,29 @@ def iotd_submit(context, image):
 @register.filter
 def is_iotd_submitter(user):
     return user.groups.filter(name = 'iotd_submitters').exists()
+
+
+@register.filter
+def is_iotd_reviewer(user):
+    return user.groups.filter(name = 'iotd_reviewers').exists()
+
+
+@register.filter
+def may_toggle_vote(user, image):
+    may, reason = may_toggle_vote_image(user, image)
+    return may
+
+
+@register.filter
+def has_voted(user, image):
+    return IotdVote.objects.filter(image = image, reviewer = user).exists()
+
+
+@register.filter
+def is_submitted_by(image, user):
+    return IotdSubmission.objects.filter(image = image, submitter = user).exists()
+
+
+@register.filter
+def submissions_count(image):
+    return IotdSubmission.objects.filter(image = image).count()
