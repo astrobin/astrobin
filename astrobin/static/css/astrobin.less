@@ -4716,7 +4716,8 @@ table.search-table {
         z-index: 2;
     }
 
-    >.iotd-queue-item-vote-overlay {
+    >.iotd-queue-item-vote-overlay,
+    >.iotd-queue-item-elected-overlay {
         visibility: hidden;
         position: absolute;
         bottom: 0;
@@ -4728,25 +4729,31 @@ table.search-table {
         color: white;
 
         i {
-            display: block;
+            display: inline-block;
             padding: 10px;
         }
     }
-    &.voted >.iotd-queue-item-vote-overlay {
+    >.iotd-queue-item-elected-overlay {
+        background-color: rgba(255,255,0,0.4);
+    }
+    &.voted >.iotd-queue-item-vote-overlay,
+    &.elected >.iotd-queue-item-elected-overlay {
         visibility: visible;
     }
 
-    >.iotd-queue-item-may-not-vote-overlay {
+    >.iotd-queue-item-may-not-vote-overlay,
+    >.iotd-queue-item-may-not-elect-overlay {
         visibility: hidden;
         position: absolute;
         top: 0;
         left: 0;
     }
-    &.may-not-vote >.iotd-queue-item-may-not-vote-overlay {
+    &.may-not-vote >.iotd-queue-item-may-not-vote-overlay,
+    &.may-not-elect >.iotd-queue-item-may-not-elect-overlay {
         visibility: visible;
     }
 
-    .submissions-count {
+    .submissions-count, .votes-count {
         position: absolute;
         top: 10px;
         left: 10px;

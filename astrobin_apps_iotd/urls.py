@@ -22,4 +22,12 @@ urlpatterns = patterns('',
         r'^toggle-vote-ajax/(?P<pk>\d+)/$',
         IotdToggleVoteAjaxView.as_view(),
         name = 'iotd_toggle_vote_ajax'),
+    url(
+        r'^review-queue/$',
+        IotdReviewQueueView.as_view(),
+        name = 'iotd_review_queue'),
+    url(
+        r'^toggle-iotd-ajax/(?P<pk>\d+)/$',
+        IotdToggleAjaxView.as_view(),
+        name = 'iotd_toggle_ajax'),
 )

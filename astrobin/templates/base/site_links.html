@@ -36,11 +36,22 @@
                     <li><a href="{% url 'image_moderation_view_spam' %}">{% trans "Spam list" %}</a></li>
                 {% endif %}
 
-                {% if request.user|is_iotd_reviewer %}
+                {% if request.user|is_iotd_reviewer or request.user|is_iotd_judge %}
                     <li class="nav-header">{% trans "Image of the day" %}</li>
+                {% endif %}
+
+                {% if request.user|is_iotd_reviewer %}
                     <li>
                         <a href="{% url 'iotd_submission_queue' %}">
                             {% trans "Submission queue" %}
+                        </a>
+                    </li>
+                {% endif %}
+
+                {% if request.user|is_iotd_judge %}
+                    <li>
+                        <a href="{% url 'iotd_review_queue' %}">
+                            {% trans "Review queue" %}
                         </a>
                     </li>
                 {% endif %}

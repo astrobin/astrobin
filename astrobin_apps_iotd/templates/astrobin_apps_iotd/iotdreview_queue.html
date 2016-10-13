@@ -1,0 +1,87 @@
+{% extends 'base.html' %}
+
+{% load i18n %}
+{% load static %}
+{% load astrobin_apps_iotd_tags %}
+{% load astrobin_apps_images_tags %}
+
+{% block title %}{% trans "IOTD Review Queue" %}{% endblock %}
+
+{% block content %}
+    <h1>{% trans "IOTD Review Queue" %}</h1>
+    <div class="subtitle">
+        {% blocktrans %}Please select the images that you want to elect to IOTD by clicking on them.{% endblocktrans %}
+    </div>
+
+    <div class="iotd-promotion-queue">
+        {% for image in object_list %}
+            <div class="iotd-queue-item
+                       {% if request.user|may_elect:image and request.user|may_unelect:image %} may-elect{% else %}may-not-elect{% endif %}
+                       {% if image|is_iotd %} elected{% endif %}">
+                {% with submissions=image|submissions_count votes=image|votes_count %}
+                    {% if submissionsl > 1 or votes > 1 %}
+                        <div class="votes-count">
+                            <span class="badge badge-warning" rel="tooltip" title="{% trans "Number of submissions/votes for this image" %}">
+                                {{submissions}}/{{votes}}
+                            </span>
+                        </div>
+                    {% endif %}
+                {% endwith %}
+
+                <a href="#" class="elect" data-toggle-url="{% url 'iotd_toggle_ajax' image.pk %}">
+                    {% astrobin_image image 'story' link=False tooltip=False %}
+                </a>
+
+                <div class="iotd-queue-item-actions">
+                    <a href="{% url 'image_rawthumb' image.pk '0' 'hd' %}" class="fancybox">
+                        <i class="icon-zoom-in"></i>
+                    </a>
+
+                    <a href="{% url 'image_detail' image.pk %}" target="_blank">
+                        <i class="icon-link"></i>
+                    </a>
+                </div>
+
+                <div class="iotd-queue-item-elected-overlay">
+                    <i class="icon-trophy"></i>
+                    <span class="iotd-date">
+                        {{image|iotd_date_for_image|date:"SHORT_DATE_FORMAT"}}
+                    </span>
+                </div>
+
+                <div class="iotd-queue-item-may-not-elect-overlay">
+                    <img src="{% get_static_prefix %}astrobin_apps_iotd/images/iotd_may_not_vote_overlay.png" />
+                </div>
+            </div>
+        {% empty %}
+            {% trans "This queue is currently empty." %}
+        {% endfor %}
+    </div>
+{% endblock %}
+
+{% block extra_js %}
+    <script type="text/javascript">
+        $(document).ready(function() {
+            $('.fancybox').fancybox({
+                type: 'image'
+            });
+
+            $('.iotd-queue-item a.elect').click(function(e) {
+                var $item = $(this).closest('.iotd-queue-item'),
+                    url = $(this).data('toggle-url');
+
+                if (!$item.hasClass('may-not-elect')) {
+                    $.ajax({
+                        url: url,
+                        type: 'post',
+                        success: function() {
+                            $item.toggleClass('elected');
+                        }
+                    });
+                }
+
+                e.preventDefault();
+            });
+        });
+    </script>
+{% endblock %}

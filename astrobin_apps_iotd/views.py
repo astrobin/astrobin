@@ -9,6 +9,7 @@ from django.core.urlresolvers import reverse, reverse_lazy
 from django.http import HttpResponseForbidden
 from django.shortcuts import get_object_or_404, redirect
 from django.utils.translation import ugettext_lazy as _
+from django.utils.translation import ugettext
 from django.views.generic import (
     CreateView,
     DetailView,
@@ -81,7 +82,7 @@ class IotdSubmissionQueueView(
     template_name = 'astrobin_apps_iotd/iotdsubmission_queue.html'
 
     def get_queryset(self):
-        weeks = settings.IOTD_SUBMISSION_WINDOW_WEEKS
+        weeks = settings.IOTD_REVIEW_WINDOW_WEEKS
         cutoff = datetime.now() - timedelta(weeks = weeks)
         return list(set([x.image for x in self.model.objects.filter(date__gte = cutoff)]))
 
@@ -111,5 +112,79 @@ class IotdToggleVoteAjaxView(
                     'toggled': False,
                     'error': ';'.join(e.messages),
                 })
+
+        return HttpResponseForbidden()
+
+
+class IotdReviewQueueView(
+        LoginRequiredMixin, GroupRequiredMixin, ListView):
+    group_required = ['iotd_judges']
+    model = IotdVote
+    template_name = 'astrobin_apps_iotd/iotdreview_queue.html'
+
+    def get_queryset(self):
+        weeks = settings.IOTD_JUDGEMENT_WINDOW_WEEKS
+        cutoff = datetime.now() - timedelta(weeks = weeks)
+        return list(set([x.image for x in self.model.objects.filter(date__gte = cutoff)]))
+
+
+class IotdToggleAjaxView(
+        JSONResponseMixin, LoginRequiredMixin, GroupRequiredMixin, View):
+    group_required = 'iotd_judges'
+    http_method_names = ['post']
+
+    def post(self, request, *args, **kwargs):
+        if request.is_ajax():
+            image = get_object_or_404(Image, pk = kwargs.get('pk'))
+            ret = None
+
+            try:
+                # Only delete it if it's in the future and from the same
+                # judge.
+                iotd = Iotd.objects.get(image = image)
+                if iotd.date <= datetime.now().date():
+                    ret = {
+                        'iotd': iotd.pk,
+                        'date': iotd.date,
+                        'error': ugettext("You cannot unelect a past or current IOTD."),
+                    }
+                elif iotd.judge != request.user:
+                    ret = {
+                        'iotd': iotd.pk,
+                        'date': iotd.date,
+                        'error': ugettext("You cannot unelect an IOTD elected by another judge."),
+                    }
+                else:
+                    iotd.delete()
+                    ret = {}
+            except Iotd.DoesNotExist:
+                max_days = settings.IOTD_JUDGMENT_MAX_FUTURE_DAYS
+                for date in (datetime.now().date() + timedelta(n) for n in range(max_days)):
+                    try:
+                        iotd = Iotd.objects.get(date = date)
+                    except Iotd.DoesNotExist:
+                        may, reason = may_elect_iotd(request.user, image)
+                        if may:
+                            iotd = Iotd.objects.create(
+                                judge = request.user,
+                                image = image,
+                                date = date)
+                            ret = {
+                                'iotd': iotd.pk,
+                                'date': iotd.date,
+                            }
+                        else:
+                            ret = {
+                                'error': reason,
+                            }
+
+                        break
+                if not ret:
+                    ret = {
+                        'error': ugettext("All IOTD slots for the next %(days)s days are already filled.") % {
+                            'days': max_days,
+                        },
+                    }
+            return self.render_json_response(ret)
 
         return HttpResponseForbidden()

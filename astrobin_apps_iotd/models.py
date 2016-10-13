@@ -31,7 +31,7 @@ class IotdSubmission(models.Model):
 
     @classmethod
     def first_for_image(cls, image):
-        qs = IotdSubmission.objects.filter(image = image).order_by('date')
+        qs = IotdSubmission.objects.filter(image = image).order_by('-date')
         if qs:
             return qs[0]
         return None
@@ -65,6 +65,13 @@ class IotdVote(models.Model):
             self.submission.pk,
             self.submission.image.pk)
 
+    @classmethod
+    def first_for_image(cls, image):
+        qs = IotdVote.objects.filter(image = image).order_by('-date')
+        if qs:
+            return qs[0]
+        return None
+
     def clean(self):
         may, reason = may_toggle_vote_image(self.reviewer, self.image)
         if not may:
@@ -74,3 +81,26 @@ class IotdVote(models.Model):
         # Force validation on save
         self.full_clean()
         return super(IotdVote, self).save(*args, **kwargs)
+
+
+class Iotd(models.Model):
+    judge = models.ForeignKey(User, null = True, on_delete = models.SET_NULL)
+    image = models.ForeignKey(Image, unique = True)
+    date = models.DateField(unique = True)
+    created = models.DateTimeField(auto_now_add = True)
+
+    class Meta:
+        ordering = ['-date']
+
+    def __unicode__(self):
+        return "IOTD: %s" % self.image.title
+
+    def clean(self):
+        may, reason = may_elect_iotd(self.judge, self.image)
+        if not may:
+            raise ValidationError(reason)
+
+    def save(self, *args, **kwargs):
+        # Force validation on save
+        self.full_clean()
+        return super(Iotd, self).save(*args, **kwargs)

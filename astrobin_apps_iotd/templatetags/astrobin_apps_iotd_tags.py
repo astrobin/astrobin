@@ -40,8 +40,25 @@ def is_iotd_reviewer(user):
 
 
 @register.filter
+def is_iotd_judge(user):
+    return user.groups.filter(name = 'iotd_judges').exists()
+
+
+@register.filter
 def may_toggle_vote(user, image):
     may, reason = may_toggle_vote_image(user, image)
+    return may
+
+
+@register.filter
+def may_elect(user, image):
+    may, reason = may_elect_iotd(user, image)
+    return may
+
+
+@register.filter
+def may_unelect(user, image):
+    may, reason = may_unelect_iotd(user, image)
     return may
 
 
@@ -58,3 +75,22 @@ def is_submitted_by(image, user):
 @register.filter
 def submissions_count(image):
     return IotdSubmission.objects.filter(image = image).count()
+
+
+@register.filter
+def votes_count(image):
+    return IotdVote.objects.filter(image = image).count()
+
+
+@register.filter
+def is_iotd(image):
+    return Iotd.objects.filter(image = image).count()
+
+
+@register.filter
+def iotd_date_for_image(image):
+    try:
+        iotd = Iotd.objects.get(image = image)
+        return iotd.date
+    except Iotd.DoesNotExist:
+        return ""
