@@ -33,12 +33,12 @@
                 </a>
 
                 <div class="iotd-queue-item-actions">
-                    <a href="#">
+                    <a href="{% url 'image_rawthumb' image.pk '0' 'hd' %}" class="fancybox">
                         <i class="icon-zoom-in"></i>
                     </a>
 
-                    <a href="#">
-                        <i class="icon-info"></i>
+                    <a href="{% url 'image_detail' image.pk %}" target="_blank">
+                        <i class="icon-link"></i>
                     </a>
                 </div>
 
@@ -59,6 +59,10 @@
 {% block extra_js %}
     <script type="text/javascript">
         $(document).ready(function() {
+            $('.fancybox').fancybox({
+                type: 'image'
+            });
+
             $('.iotd-queue-item a.vote').click(function(e) {
                 var $item = $(this).closest('.iotd-queue-item'),
                     url = $(this).data('toggle-url');

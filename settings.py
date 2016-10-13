@@ -420,7 +420,6 @@ PIPELINE_CSS = {
             'css/jquery-ui-astrobin/jquery-ui-1.8.17.custom.css',
             'css/ui.multiselect.css',
             'css/validationEngine.jquery.css',
-            'css/facebox.css',
             'css/token-input.css',
             'css/jquery.multiselect.css',
             'css/jquery.qtip.css',
@@ -434,6 +433,9 @@ PIPELINE_CSS = {
             'css/reset.css',
             'css/bootstrap.css',
             'css/bootstrap-responsive.css',
+
+            'common/fancybox/jquery.fancybox.css',
+
             'css/astrobin.css',
             'css/astrobin-mobile.css',
         ),
@@ -450,6 +452,7 @@ PIPELINE_JS = {
         'source_filenames': (
             'common/js/handlebars-1.0.rc.1.js',
             'common/js/ember-1.0.0-pre.2.js',
+            'common/fancybox/jquery.fancybox.js/',
 
             'astrobin_apps_images/js/astrobin_apps_images.js',
             'astrobin_apps_images/js/jquery.capty.js',
@@ -465,7 +468,6 @@ PIPELINE_JS = {
             'js/jquery.blockUI.js',
             'js/jquery.tmpl.1.1.1.js',
             'js/ui.multiselect.js',
-            'js/facebox.js',
             'js/jquery.form.js',
             'js/jquery.tokeninput.js',
             'js/jquery.flot.js',
