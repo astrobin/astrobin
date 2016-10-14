@@ -882,13 +882,6 @@ class Image(HasSolutionMixin, models.Model):
 
         return url
 
-    def iotd_date(self):
-        iotd = self.image_of_the_day.all()
-        if iotd:
-            return iotd[0].date
-
-        return None
-
     def likes(self):
         key = "Image.%d.likes" % self.pk
         val = cache.get(key)

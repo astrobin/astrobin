@@ -37,7 +37,7 @@
             </li>
             {% endif %}
 
-            {% if image.iotd_date and not image.user.userprofile.exclude_from_competitions %}
+            {% if image|is_iotd and not image.user.userprofile.exclude_from_competitions %}
             <li>
                 <a{% if nav_ctx == 'iotd' %} class="active"{% endif %} href="{% query_string "nc='iotd'" "nce" %}">
                     <i class="icon-trophy"></i>

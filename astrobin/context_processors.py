@@ -77,7 +77,6 @@ def common_variables(request):
         'is_producer': request.user.groups.filter(name='Producers'),
         'is_retailer': request.user.groups.filter(name='Retailers'),
         'rawdata_has_subscription': rawdata_user_has_valid_subscription(request.user),
-        'is_iotd_staff': request.user.groups.filter(name='IOTD_Staff'),
         'IMAGES_URL' : settings.IMAGES_URL,
         'ADS_ENABLED': settings.ADS_ENABLED,
         'DONATIONS_ENABLED': settings.DONATIONS_ENABLED,

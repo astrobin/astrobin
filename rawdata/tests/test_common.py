@@ -58,8 +58,6 @@ def setup_data(testcase):
     donor_movie_yearly_group = Group.objects.create(name = "astrobin-donor-movie-yearly")
     donor_dinner_yearly_group = Group.objects.create(name = "astrobin-donor-dinner-yearly")
 
-    Group.objects.create(name = "IOTD_Staff")
-
     # Subscriptions
     Subscription.objects.create(name = "Atom", description = "512 MB", price = 0, recurrence_period = 100, recurrence_unit = "Y", group = rawdata_atom_group, trial_period = 0, trial_unit = "D")
     Subscription.objects.create(name = "Meteor", description = "5 GB", price = 2.95, recurrence_period = 1, recurrence_unit = "M", group = rawdata_meteor_group, trial_period = 7, trial_unit = "D")

@@ -578,7 +578,6 @@ class ImageDetailView(DetailView):
                 Q(creator = self.request.user) |
                 Q(users = self.request.user)).count() > 0 if self.request.user.is_authenticated() else False,
 
-            'iotd_date': image.iotd_date(),
             'image_next': image_next,
             'image_prev': image_prev,
             'nav_ctx': nav_ctx,

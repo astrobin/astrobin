@@ -204,7 +204,7 @@ def astrobin_image(context, image, alias, **kwargs):
     badges = []
 
     if alias in ('thumb', 'gallery', 'gallery_inverted', 'regular', 'regular_inverted'):
-        if image.iotd_date() and not image.user.userprofile.exclude_from_competitions:
+        if image.iotd_set.all().count() > 0 and not image.user.userprofile.exclude_from_competitions:
             badges.append('iotd')
 
         top100_ids = SearchQuerySet().models(Image).all().order_by('-likes').values_list('django_id', flat = True)[:100]
