@@ -8,6 +8,7 @@ from django.core.exceptions import ValidationError
 from django.core.urlresolvers import reverse, reverse_lazy
 from django.http import HttpResponseForbidden
 from django.shortcuts import get_object_or_404, redirect
+from django.utils import formats
 from django.utils.translation import ugettext_lazy as _
 from django.utils.translation import ugettext
 from django.views.generic import (
@@ -153,13 +154,13 @@ class IotdToggleAjaxView(
                 if iotd.date <= datetime.now().date():
                     ret = {
                         'iotd': iotd.pk,
-                        'date': iotd.date,
+                        'date': formats.date_format(iotd.date, "SHORT_DATE_FORMAT"),
                         'error': ugettext("You cannot unelect a past or current IOTD."),
                     }
                 elif iotd.judge != request.user:
                     ret = {
                         'iotd': iotd.pk,
-                        'date': iotd.date,
+                        'date': formats.date_format(iotd.date, "SHORT_DATE_FORMAT"),
                         'error': ugettext("You cannot unelect an IOTD elected by another judge."),
                     }
                 else:
@@ -179,7 +180,7 @@ class IotdToggleAjaxView(
                                 date = date)
                             ret = {
                                 'iotd': iotd.pk,
-                                'date': iotd.date,
+                                'date': formats.date_format(iotd.date, "SHORT_DATE_FORMAT"),
                             }
                         else:
                             ret = {
