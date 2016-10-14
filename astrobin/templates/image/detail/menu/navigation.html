@@ -1,5 +1,6 @@
 {% load i18n %}
 {% load common_tags %}
+{% load astrobin_apps_iotd_tags %}
 
 {% if not image.is_wip %}
     <li class="image-navigation pull-right context dropdown">
@@ -41,6 +42,15 @@
                 <a{% if nav_ctx == 'iotd' %} class="active"{% endif %} href="{% query_string "nc='iotd'" "nce" %}">
                     <i class="icon-trophy"></i>
                     {% trans "Image of the day" %}
+                </a>
+            </li>
+            {% endif %}
+
+            {% if image|votes_count %}
+            <li>
+                <a{% if nav_ctx == 'picks' %} class="active"{% endif %} href="{% query_string "nc='picks'" "nce" %}">
+                    <i class="icon-star"></i>
+                    {% trans "Top picks" %}
                 </a>
             </li>
             {% endif %}

@@ -59,7 +59,7 @@ from astrobin.templatetags.tags import can_like
 from astrobin_apps_groups.forms import GroupSelectForm
 from astrobin_apps_groups.models import Group
 from astrobin_apps_notifications.utils import push_notification
-from astrobin_apps_iotd.models import Iotd
+from astrobin_apps_iotd.models import Iotd, IotdVote
 from astrobin_apps_platesolving.models import Solution
 from nested_comments.models import NestedComment
 from rawdata.forms import (
@@ -488,6 +488,16 @@ class ImageDetailView(DetailView):
                     if iotd_prev:
                         image_prev = [iotd_prev[0].image]
                 except Iotd.DoesNotExist:
+                    pass
+            elif nav_ctx == 'picks':
+                picks = list(set([x.image for x in IotdVote.objects.all()]))
+                try:
+                    index = picks.index(image)
+                    if index > 0:
+                        image_prev = [picks[index - 1]]
+                    if index < len(picks) - 1:
+                        image_next = [picks[index + 1]]
+                except ValueError:
                     pass
         except Image.DoesNotExist:
             image_next = None

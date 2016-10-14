@@ -16,7 +16,7 @@
     <div class="top-picks">
         {% for image in object_list %}
             <div class="top-picks-item">
-                {% astrobin_image image 'story' tooltip=False %}
+                {% astrobin_image image 'story' tooltip=False nav_ctx='picks' %}
                 <div class="overlay">
                     <div class="inner">
                         <div class="image-title">{{image.title|default:_("(no title)")}}</div>
