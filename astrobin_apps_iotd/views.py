@@ -84,7 +84,12 @@ class IotdSubmissionQueueView(
     def get_queryset(self):
         weeks = settings.IOTD_REVIEW_WINDOW_WEEKS
         cutoff = datetime.now() - timedelta(weeks = weeks)
-        return list(set([x.image for x in self.model.objects.filter(date__gte = cutoff)]))
+        return list(set([
+            x.image
+            for x in self.model.objects.filter(date__gte = cutoff)
+            if not Iotd.objects.filter(
+                image = x.image,
+                date__lte = datetime.now().date()).exists()]))
 
 
 class IotdToggleVoteAjaxView(
@@ -123,7 +128,12 @@ class IotdReviewQueueView(
     def get_queryset(self):
         weeks = settings.IOTD_JUDGEMENT_WINDOW_WEEKS
         cutoff = datetime.now() - timedelta(weeks = weeks)
-        return list(set([x.image for x in self.model.objects.filter(date__gte = cutoff)]))
+        return list(set([
+            x.image
+            for x in self.model.objects.filter(date__gte = cutoff)
+            if not Iotd.objects.filter(
+                image = x.image,
+                date__lte = datetime.now().date()).exists()]))
 
 
 class IotdToggleAjaxView(

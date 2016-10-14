@@ -116,6 +116,21 @@ class IotdTest(TestCase):
                 submitter = self.submitter_1,
                 image = self.image)
 
+        # Image must not be past IOTD
+        vote = IotdVote.objects.create(
+            reviewer = self.reviewer_1,
+            image = self.image)
+        iotd = Iotd.objects.create(
+            judge = self.judge_1,
+            image = self.image,
+            date = datetime.now().date() - timedelta(1))
+        with self.assertRaisesRegexp(ValidationError, "already been an IOTD"):
+            IotdSubmission.objects.create(
+                submitter = self.submitter_2,
+                image = self.image)
+        vote.delete()
+        iotd.delete()
+
         # Test max daily
         with self.assertRaisesRegexp(ValidationError, "already submitted.*today"):
             image2 = Image.objects.create(user = self.user)
@@ -192,6 +207,17 @@ class IotdTest(TestCase):
             image = submission_1.image)
         self.assertEqual(vote.reviewer, self.reviewer_1)
         self.assertEqual(vote.image, submission_1.image)
+
+        # Image must not be past IOTD
+        iotd = Iotd.objects.create(
+            judge = self.judge_1,
+            image = self.image,
+            date = datetime.now().date() - timedelta(1))
+        with self.assertRaisesRegexp(ValidationError, "already been an IOTD"):
+            IotdVote.objects.create(
+                reviewer = self.reviewer_2,
+                image = self.image)
+        iotd.delete()
 
         # Cannot vote again for the same
         with self.assertRaisesRegexp(ValidationError, "already exists"):
@@ -301,7 +327,13 @@ class IotdTest(TestCase):
         self.assertEqual(iotd.judge, self.judge_1)
         self.assertEqual(iotd.image, self.image)
 
+        # Image must not be past IOTD
+        with self.assertRaisesRegexp(ValidationError, "already been an IOTD"):
+            IotdVote.objects.create(
+                reviewer = self.reviewer_2,
+                image = self.image)
 
+        iotd.delete()
         vote_1.delete()
         submission_1.delete()
 
@@ -370,6 +402,26 @@ class IotdTest(TestCase):
         self.submitters.user_set.remove(self.reviewer_1)
         submission_1.submitter = self.submitter_1
         submission_1.save()
+
+        # Check that current or past IOTD is not rendered
+        IotdVote.objects.create(
+            reviewer = self.reviewer_1,
+            image = self.image)
+        iotd = Iotd.objects.create(
+            judge = self.judge_1,
+            image = self.image,
+            date = datetime.now().date())
+        response = self.client.get(url)
+        self.assertNotContains(response, 'data-id="%s"' % self.image.pk)
+
+        # Future IOTD should render tho
+        Iotd.objects.filter(image = self.image).update(
+            date = datetime.now().date() + timedelta(1))
+        response = self.client.get(url)
+        self.assertContains(response, 'data-id="%s"' % self.image.pk)
+
+        submission_1.delete()
+        iotd.delete()
 
     def test_toggle_vote_ajax_view(self):
         url = reverse_lazy('iotd_toggle_vote_ajax', kwargs = {'pk': self.image.pk})
@@ -452,6 +504,24 @@ class IotdTest(TestCase):
         vote_1.reviewer = self.reviewer_1
         vote_1.save()
 
+        # Check that current or past IOTD is not rendered
+        iotd = Iotd.objects.create(
+            judge = self.judge_1,
+            image = self.image,
+            date = datetime.now().date())
+        response = self.client.get(url)
+        self.assertNotContains(response, 'data-id="%s"' % self.image.pk)
+
+        # Future IOTD should render tho
+        Iotd.objects.filter(image = self.image).update(
+            date = datetime.now().date() + timedelta(1))
+        response = self.client.get(url)
+        self.assertContains(response, 'data-id="%s"' % self.image.pk)
+
+        submission_1.delete()
+        vote_1.delete()
+        iotd.delete()
+
     def test_toggle_ajax_view(self):
         url = reverse_lazy('iotd_toggle_ajax', kwargs = {'pk': self.image.pk})
 
@@ -492,7 +562,7 @@ class IotdTest(TestCase):
         self.assertEqual(iotd.image, self.image)
         self.assertEqual(iotd.date, today)
 
-        # Cannot delete current IOTD
+        # Cannot unelect current IOTD
         response = self.client.post(url, HTTP_X_REQUESTED_WITH = 'XMLHttpRequest')
         self.assertEqual(response.status_code, 200)
         self.assertTrue('error' in json.loads(response.content))
@@ -501,10 +571,11 @@ class IotdTest(TestCase):
         self.assertTrue('iotd' in json.loads(response.content))
         self.assertEqual(Iotd.objects.count(), 1)
 
-        # Cannot delete IOTD elected by another judge
-        iotd.judge = self.judge_2
-        iotd.date = today + timedelta(1) # Make it future
-        iotd.save()
+        # Cannot unelect IOTD elected by another judge
+        Iotd.objects.filter(pk = iotd.pk).update(
+            judge = self.judge_2,
+            date = today + timedelta(1)) # Make it future
+        iotd = Iotd.objects.get(pk = iotd.pk) # sqlite won't do the .update above without this?
         response = self.client.post(url, HTTP_X_REQUESTED_WITH = 'XMLHttpRequest')
         self.assertEqual(response.status_code, 200)
         self.assertTrue('error' in json.loads(response.content))
@@ -516,7 +587,7 @@ class IotdTest(TestCase):
         # Keep future date for next test
         iotd.save()
 
-        # Delete OK
+        # Unelect OK
         response = self.client.post(url, HTTP_X_REQUESTED_WITH = 'XMLHttpRequest')
         self.assertEqual(response.status_code, 200)
         self.assertFalse('error' in json.loads(response.content))
