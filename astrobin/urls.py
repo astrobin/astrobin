@@ -28,11 +28,10 @@ from astrobin import lookups
 from astrobin import views
 from astrobin.views import (
     api as api_views,
+    explore as explore_views,
     image as image_views,
     moderation as moderation_views,
     collections as collections_views,
-    iotd as iotd_views,
-    wall as wall_views,
 )
 from astrobin.api import (
     ImageOfTheDayResource,
@@ -177,7 +176,8 @@ urlpatterns = patterns('',
     ### EXPLORE VIEWS                                                       ###
     ###########################################################################
 
-    url(r'^explore/wall/$', wall_views.WallView.as_view(), name='wall'),
+    url(r'^explore/wall/$', explore_views.WallView.as_view(), name='wall'),
+    url(r'^explore/top-picks/$', explore_views.TopPicksView.as_view(), name='top_picks'),
 
     ###########################################################################
     ### USER VIEWS                                                          ###

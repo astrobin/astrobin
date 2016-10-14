@@ -7,6 +7,9 @@ from haystack.query import SearchQuerySet
 # AstroBin
 from astrobin.models import Image
 
+# Other AstroBin apps
+from astrobin_apps_iotd.models import IotdVote
+
 
 class WallView(ListView):
     template_name = 'wall.html'
@@ -66,3 +69,12 @@ class WallView(ListView):
             context['sort'] = '-uploaded'
 
         return context
+
+
+class TopPicksView(ListView):
+    model = IotdVote
+    template_name = 'top_picks.html'
+    paginate_by = 30
+
+    def get_queryset(self):
+        return list(set([x.image for x in self.model.objects.all()]))

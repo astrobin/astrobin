@@ -1,0 +1,37 @@
+{% extends 'base.html' %}
+
+{% load i18n %}
+{% load static %}
+{% load astrobin_apps_iotd_tags %}
+{% load astrobin_apps_images_tags %}
+
+{% block title %}{% trans "Top picks" %}{% endblock %}
+
+{% block content %}
+    <h1>{% trans "Top picks" %}</h1>
+    <div class="subtitle">
+        {% blocktrans %}A collection of great images that were recently handpicked.{% endblocktrans %}
+    </div>
+
+    <div class="top-picks">
+        {% for image in object_list %}
+            <div class="top-picks-item">
+                {% astrobin_image image 'story' tooltip=False %}
+                <div class="overlay">
+                    <div class="inner">
+                        <div class="image-title">{{image.title|default:_("(no title)")}}</div>
+                        <div class="image-author">
+                            <a href="{% url 'user_page' image.user %}">
+                                {{image.user.userprofile}}
+                            </a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        {% empty %}
+            {% trans "This list is currently empty." %}
+        {% endfor %}
+    </div>
+
+    {% include 'pagination.html' %}
+{% endblock %}
