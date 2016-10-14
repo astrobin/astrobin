@@ -415,22 +415,23 @@ def group_post_save(sender, instance, created, **kwargs):
         if instance.moderated:
             instance.moderators.add(instance.creator)
 
-        followers = [
-            x.user for x in
-            ToggleProperty.objects.toggleproperties_for_object(
-                "follow", User.objects.get(pk = instance.creator.pk))
-        ]
-        push_notification(followers, 'new_public_group_created',
-            {
-                'creator': instance.creator.userprofile.get_display_name(),
-                'group_name': instance.name,
-                'url': settings.ASTROBIN_BASE_URL + reverse_url('group_detail', args = (instance.pk,)),
-            })
+        if instance.public:
+            followers = [
+                x.user for x in
+                ToggleProperty.objects.toggleproperties_for_object(
+                    "follow", User.objects.get(pk = instance.creator.pk))
+            ]
+            push_notification(followers, 'new_public_group_created',
+                {
+                    'creator': instance.creator.userprofile.get_display_name(),
+                    'group_name': instance.name,
+                    'url': settings.ASTROBIN_BASE_URL + reverse_url('group_detail', args = (instance.pk,)),
+                })
 
-        add_story(
-            instance.creator,
-            verb = 'VERB_CREATED_PUBLIC_GROUP',
-            action_object = instance)
+            add_story(
+                instance.creator,
+                verb = 'VERB_CREATED_PUBLIC_GROUP',
+                action_object = instance)
 post_save.connect(group_post_save, sender = Group)
 
 

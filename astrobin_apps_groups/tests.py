@@ -172,7 +172,20 @@ class GroupsTest(TestCase):
         self.assertTrue(group.forum != None)
         self.assertTrue(len(get_unseen_notifications(self.user2)) > 0)
         self.assertIn("created a new public group", get_unseen_notifications(self.user2)[0].message)
+        group.delete()
 
+        # Creating a private group does not trigger notifications
+        response = self.client.post(url, {
+            'name': 'Test create group',
+            'description': 'Description',
+            'category': 101,
+            'public': False,
+        }, follow = True)
+        self.assertEqual(response.status_code, 200)
+        self._assertMessage(response, "success unread", "Your new group was created successfully")
+        group = Group.objects.all().order_by('-pk')[0]
+        self.assertEqual(group.public, False)
+        self.assertEqual(len(get_unseen_notifications(self.user2)), 1) # Notitication from before
         group.delete()
 
         # Test the autosubmission/category combo
