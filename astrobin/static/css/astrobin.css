@@ -4447,6 +4447,7 @@ table.search-table td.search-table-date {
   margin: 10px;
   background: rgba(0, 0, 0, 0.66);
   border: 1px solid rgba(255, 255, 255, 0.25);
+  z-index: 2;
 }
 .iotd-queue-item > .iotd-queue-item-actions a {
   font-size: 16px;
@@ -4458,7 +4459,7 @@ table.search-table td.search-table-date {
 }
 .iotd-queue-item:hover > .iotd-queue-item-actions {
   visibility: visible;
-  z-index: 2;
+  z-index: 3;
 }
 .iotd-queue-item > .iotd-queue-item-vote-overlay,
 .iotd-queue-item > .iotd-queue-item-elected-overlay {
@@ -4471,6 +4472,7 @@ table.search-table td.search-table-date {
   background-color: green;
   background-color: rgba(0, 255, 0, 0.4);
   color: white;
+  z-index: 2;
 }
 .iotd-queue-item > .iotd-queue-item-vote-overlay i,
 .iotd-queue-item > .iotd-queue-item-elected-overlay i {
@@ -4490,6 +4492,7 @@ table.search-table td.search-table-date {
   position: absolute;
   top: 0;
   left: 0;
+  z-index: 1;
 }
 .iotd-queue-item.may-not-vote > .iotd-queue-item-may-not-vote-overlay,
 .iotd-queue-item.may-not-elect > .iotd-queue-item-may-not-elect-overlay {

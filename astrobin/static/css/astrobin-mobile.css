@@ -134,6 +134,12 @@
   .activity-actions .action .action-object .verb .verb-inner {
     padding-left: 12px;
   }
+  .iotd-queue-item .iotd-queue-item-actions {
+    visibility: visible;
+  }
+  .iotd-queue-item .iotd-queue-item-actions a {
+    padding: 16px 24px;
+  }
 }
 @media screen and (max-width: 767px) {
   body,

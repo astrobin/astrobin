@@ -4701,6 +4701,7 @@ table.search-table {
         margin: 10px;
         background: rgba(0 ,0 ,0 ,0.66);
         border: 1px solid rgba(255, 255, 255, 0.25);
+        z-index: 2;
 
         a {
             font-size: 16px;
@@ -4713,7 +4714,7 @@ table.search-table {
     }
     &:hover >.iotd-queue-item-actions {
         visibility: visible;
-        z-index: 2;
+        z-index: 3;
     }
 
     >.iotd-queue-item-vote-overlay,
@@ -4727,6 +4728,7 @@ table.search-table {
         background-color: green;
         background-color: rgba(0,255,0,0.4);
         color: white;
+        z-index: 2;
 
         i {
             display: inline-block;
@@ -4747,6 +4749,7 @@ table.search-table {
         position: absolute;
         top: 0;
         left: 0;
+        z-index: 1;
     }
     &.may-not-vote >.iotd-queue-item-may-not-vote-overlay,
     &.may-not-elect >.iotd-queue-item-may-not-elect-overlay {
