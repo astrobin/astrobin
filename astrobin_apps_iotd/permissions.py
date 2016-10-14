@@ -16,6 +16,9 @@ def may_submit_image(user, image):
     if image.is_wip:
         return False, _("Images in the staging area cannot be submitted.")
 
+    if image.user.userprofile.exclude_from_competitions:
+        return False, _("This user has chosen to be excluded from competitions.")
+
     weeks = settings.IOTD_SUBMISSION_WINDOW_WEEKS
     if image.uploaded < datetime.now() - timedelta(weeks = weeks):
         return False, _("You cannot submit an image that was uploaded more than %(max_weeks)s weeks ago.") % {
@@ -52,6 +55,9 @@ def may_toggle_vote_image(user, image):
 
     if image.is_wip:
         return False, _("Images in the staging area cannot be voted for.")
+
+    if image.user.userprofile.exclude_from_competitions:
+        return False, _("This user has chosen to be excluded from competitions.")
 
     # Import here to avoid circular dependency
     from astrobin_apps_iotd.models import IotdSubmission, IotdVote, Iotd
@@ -92,6 +98,9 @@ def may_elect_iotd(user, image):
 
     if image.is_wip:
         return False, _("Images in the staging area cannot be elected.")
+
+    if image.user.userprofile.exclude_from_competitions:
+        return False, _("This user has chosen to be excluded from competitions.")
 
     # Import here to avoid circular dependency
     from astrobin_apps_iotd.models import IotdSubmission, IotdVote, Iotd

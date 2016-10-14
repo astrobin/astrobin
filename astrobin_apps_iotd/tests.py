@@ -93,6 +93,16 @@ class IotdTest(TestCase):
         self.image.is_wip = False
         self.image.save()
 
+        # Image owner must not be excluded from competitions
+        self.image.user.userprofile.exclude_from_competitions = True
+        self.image.user.userprofile.save()
+        with self.assertRaisesRegexp(ValidationError, "excluded from competitions"):
+            IotdSubmission.objects.create(
+                submitter = self.submitter_1,
+                image = self.image)
+        self.image.user.userprofile.exclude_from_competitions = False
+        self.image.user.userprofile.save()
+
         # Cannot submit own image
         self.image.user = self.submitter_1
         self.image.save()
@@ -178,6 +188,16 @@ class IotdTest(TestCase):
                 image = submission_1.image)
         self.image.is_wip = False
         self.image.save()
+
+        # Image owner must not be excluded from competitions
+        self.image.user.userprofile.exclude_from_competitions = True
+        self.image.user.userprofile.save()
+        with self.assertRaisesRegexp(ValidationError, "excluded from competitions"):
+            IotdSubmission.objects.create(
+                submitter = self.submitter_1,
+                image = self.image)
+        self.image.user.userprofile.exclude_from_competitions = False
+        self.image.user.userprofile.save()
 
         # Cannot vote for own image
         self.image.user = self.reviewer_1
@@ -284,6 +304,16 @@ class IotdTest(TestCase):
                 image = self.image)
         self.image.is_wip = False
         self.image.save()
+
+        # Image owner must not be excluded from competitions
+        self.image.user.userprofile.exclude_from_competitions = True
+        self.image.user.userprofile.save()
+        with self.assertRaisesRegexp(ValidationError, "excluded from competitions"):
+            IotdSubmission.objects.create(
+                submitter = self.submitter_1,
+                image = self.image)
+        self.image.user.userprofile.exclude_from_competitions = False
+        self.image.user.userprofile.save()
 
         # Cannot elect own image
         self.image.user = self.judge_1
