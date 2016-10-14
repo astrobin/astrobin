@@ -19,13 +19,14 @@
                        {% if request.user|may_toggle_vote:image %} may-vote{% else %}may-not-vote{% endif %}
                        {% if request.user|has_voted:image %} voted{% endif %}">
                 {% with count=image|submissions_count %}
-                    {% if count > 1 %}
-                        <div class="submissions-count">
-                            <span class="badge badge-warning" rel="tooltip" title="{% trans "Number of submissions for this image" %}">
-                                {{count}}
-                            </span>
-                        </div>
-                    {% endif %}
+                    <div class="submissions-count">
+                        <a class="badge"
+                           href="#submitters-modal"
+                           data-toggle="modal"
+                           data-image="{{image.pk}}">
+                            {{count}}
+                        </a>
+                    </div>
                 {% endwith %}
 
                 <a href="#" class="vote" data-toggle-url="{% url 'iotd_toggle_vote_ajax' image.pk %}">
@@ -63,7 +64,18 @@
 {% endblock %}
 
 {% block modals %}
-    <div id="error-modal" class="modal hide fide">
+    <div id="submitters-modal" class="modal hide fade">
+        <div class="modal-header">
+            <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+            <h3>{% trans "Submitters" %}</h3>
+        </div>
+
+        <div class="modal-body">
+            <img src="{% get_static_prefix %}images/ajax-loader.gif" alt="{% trans "Loading" %}" />
+        </div>
+    </div>
+
+    <div id="error-modal" class="modal hide fade">
         <div class="modal-header">
             <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
             <h3>{% trans "Error" %}</h3>
@@ -81,6 +93,24 @@
         $(document).ready(function() {
             $('.fancybox').fancybox({
                 type: 'image'
+            });
+
+            $('.badge').on('click', function() {
+                var $modal = $('#submitters-modal'),
+                    pk = $(this).data('image');
+
+                $.ajax({
+                    url: '/iotd/submitters-for-image-ajax/' + pk,
+                    timeout: 0,
+                    success: function(data, textStatus, jqXHR) {
+                        $modal.find('.modal-body').html(data);
+                    }
+                });
+            });
+
+            $('#submitters-modal').on('hidden', function() {
+                $(this).find('.modal-body').html(
+                    '<img src="{% get_static_prefix %}images/ajax-loader.gif" alt="{% trans "Loading" %}" />');
             });
 
             $('.iotd-queue-item a.vote').click(function(e) {

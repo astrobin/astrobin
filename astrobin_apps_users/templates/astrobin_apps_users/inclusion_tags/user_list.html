@@ -9,18 +9,20 @@
 
 {% if view == 'table' %}
     <table class="astrobin-users table table-striped table-condensed">
-        <thead>
-            <tr>
-                <th class="user-list-avatar"></th>
-                <th class="user-list-name">{% trans "User" %}</th>
-                {% if layout == 'default' %}
-                    <th class="user-list-images">{% trans "Images" %}</th>
-                    <th class="user-list-followers">{% trans "Followers" %}</th>
-                    <th class="user-list-following">{% trans "Following" %}</th>
-                {% endif %}
-                <th class="user-list-follow-action"></th>
-            </tr>
-        </thead>
+        {% if layout != 'compact' %}
+            <thead>
+                <tr>
+                    <th class="user-list-avatar"></th>
+                    <th class="user-list-name">{% trans "User" %}</th>
+                    {% if layout == 'default' %}
+                        <th class="user-list-images">{% trans "Images" %}</th>
+                        <th class="user-list-followers">{% trans "Followers" %}</th>
+                        <th class="user-list-following">{% trans "Following" %}</th>
+                    {% endif %}
+                    <th class="user-list-follow-action"></th>
+                </tr>
+            </thead>
+        {% endif %}
         <tbody>
             {% include 'astrobin_apps_users/inclusion_tags/user_list_entries.html' %}
         </tbody>

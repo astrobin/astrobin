@@ -4509,6 +4509,15 @@ table.search-table td.search-table-date {
 .iotd-queue-item .votes-count .badge {
   font-size: 16px;
   padding: 4px 8px;
+  border: 1px solid white;
+  text-shaadow: 1px 1px 0 #757575;
+  text-decoration: underline;
+}
+.iotd-queue-item .submissions-count .badge {
+  background-color: #3092cf;
+}
+.iotd-queue-item .votes-count .badge {
+  background-color: #e2bd35;
 }
 .top-picks-item {
   display: inline-block;

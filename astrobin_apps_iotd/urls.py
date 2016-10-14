@@ -34,4 +34,12 @@ urlpatterns = patterns('',
         r'^archive/$',
         IotdArchiveView.as_view(),
         name = 'iotd_archive'),
+    url(
+        r'^submitters-for-image-ajax/(?P<pk>\d+)/$',
+        IotdSubmittersForImageAjaxView.as_view(),
+        name = 'iotd_submitters_for_image'),
+    url(
+        r'^reviewers-for-image-ajax/(?P<pk>\d+)/$',
+        IotdReviewersForImageAjaxView.as_view(),
+        name = 'iotd_reviewers_for_image'),
 )

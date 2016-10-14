@@ -7,7 +7,8 @@ from django.contrib import messages
 from django.core.exceptions import ValidationError
 from django.core.urlresolvers import reverse, reverse_lazy
 from django.http import HttpResponseForbidden
-from django.shortcuts import get_object_or_404, redirect
+from django.shortcuts import get_object_or_404, redirect, render_to_response
+from django.template import RequestContext
 from django.utils import formats
 from django.utils.translation import ugettext_lazy as _
 from django.utils.translation import ugettext
@@ -204,3 +205,43 @@ class IotdArchiveView(ListView):
     queryset = Iotd.objects.filter(date__lte = datetime.now().date())
     template_name = 'astrobin_apps_iotd/iotd_archive.html'
     paginate_by = 30 
+
+
+class IotdSubmittersForImageAjaxView(
+        LoginRequiredMixin, GroupRequiredMixin, View):
+    group_required = 'iotd_reviewers'
+
+    def get(self, request, *args, **kwargs):
+        if request.is_ajax():
+            image = get_object_or_404(Image, pk = kwargs['pk'])
+            submitters = [x.submitter for x in IotdSubmission.objects.filter(image = image)]
+
+            return render_to_response(
+                'astrobin_apps_users/inclusion_tags/user_list.html',
+                {
+                    'view': 'table',
+                    'layout': 'compact',
+                    'user_list': submitters,
+                }, context_instance = RequestContext(request))
+
+        return HttpResponseForbidden()
+
+
+class IotdReviewersForImageAjaxView(
+        LoginRequiredMixin, GroupRequiredMixin, View):
+    group_required = 'iotd_judges'
+
+    def get(self, request, *args, **kwargs):
+        if request.is_ajax():
+            image = get_object_or_404(Image, pk = kwargs['pk'])
+            reviewers = [x.reviewer for x in IotdVote.objects.filter(image = image)]
+
+            return render_to_response(
+                'astrobin_apps_users/inclusion_tags/user_list.html',
+                {
+                    'view': 'table',
+                    'layout': 'compact',
+                    'user_list': reviewers,
+                }, context_instance = RequestContext(request))
+
+        return HttpResponseForbidden()

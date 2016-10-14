@@ -80,9 +80,9 @@
         </td>
     {% endif %}
 
-    {% if request.user != user %}
-        <td class="user-list-follow-action">
+    <td class="user-list-follow-action">
+        {% if request.user != user %}
             {% add_remove_toggleproperty "follow" user request_user %}
-        </td>
-    {% endif %}
+        {% endif %}
+    </td>
 {% endif %}
