@@ -494,9 +494,9 @@ class ImageDetailView(DetailView):
                 try:
                     index = picks.index(image)
                     if index > 0:
-                        image_prev = [picks[index - 1]]
+                        image_next = [picks[index - 1]]
                     if index < len(picks) - 1:
-                        image_next = [picks[index + 1]]
+                        image_prev = [picks[index + 1]]
                 except ValueError:
                     pass
         except Image.DoesNotExist:
