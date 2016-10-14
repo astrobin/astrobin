@@ -55,22 +55,24 @@
         {% else %} {# authenticated #}
 
         {% get_iotd as iotd %}
-        <div class="image-of-the-day">
-            <div class="header">
-                <h2>
-                    <i class="icon-trophy"></i>
-                    {% trans "Image of the day" %}
-                    <span class="title">
-                        {{iotd.image.title|truncatechars:50}},
-                        <a href="{% url 'user_page' iotd.image.user %}">
-                            {{iotd.image.user.userprofile}}
-                        </a>
-                    </span>
-                </h2>
-            </div>
+        {% if iotd %}
+            <div class="image-of-the-day">
+                <div class="header">
+                    <h2>
+                        <i class="icon-trophy"></i>
+                        {% trans "Image of the day" %}
+                        <span class="title">
+                            {{iotd.image.title|truncatechars:50}},
+                            <a href="{% url 'user_page' iotd.image.user %}">
+                                {{iotd.image.user.userprofile}}
+                            </a>
+                        </span>
+                    </h2>
+                </div>
 
-            {% astrobin_image iotd.image 'iotd' nav_ctx='iotd' %}
-        </div>
+                {% astrobin_image iotd.image 'iotd' nav_ctx='iotd' %}
+            </div>
+        {% endif %}
 
         <div class="subtle-container simple-container">
             <div class="header">
