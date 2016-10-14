@@ -1,10 +1,9 @@
 # Python
-from datetime import date, timedelta
+from datetime import date, datetime, timedelta
 
 # Django
 from django.contrib.auth.models import User, Group
 from django.core.exceptions import ValidationError
-from django.core.management import call_command
 from django.core.urlresolvers import reverse
 from django.test import TestCase
 
@@ -18,6 +17,7 @@ from astrobin.models import (
     RetailedGear,
     Telescope,
 )
+from astrobin_apps_iotd.models import *
 
 
 class UserTest(TestCase):
@@ -381,26 +381,23 @@ class UserTest(TestCase):
 
         image = Image.all_objects.all()[0]
 
-        # Make the image elibible for IOTD
-        Image.all_objects.filter(pk = image.pk).update(
-            w = 1024, h = 1024,
-            uploaded = date.today() - timedelta(1))
-
-        # Control test
-        call_command('image_of_the_day')
-        self.assertEquals(ImageOfTheDayCandidate.objects.all().count(), 1)
-        ImageOfTheDayCandidate.objects.filter(image = image).delete()
+        submitter = User.objects.create_user('submitter', 'submitter_1@test.com', 'password')
+        submitters = Group.objects.create(name = 'iotd_submitters')
+        submitters.user_set.add(submitter)
+        reviewer = User.objects.create_user('reviewer', 'reviewer_1@test.com', 'password')
+        reviewers = Group.objects.create(name = 'iotd_reviewers')
+        reviewers.user_set.add(reviewer)
+        judge = User.objects.create_user('judge', 'judge_1@test.com', 'password')
+        judges = Group.objects.create(name = 'iotd_judges')
+        judges.user_set.add(judge)
+        submission = IotdSubmission.objects.create(submitter = submitter, image = image)
+        vote = IotdVote.objects.create(reviewer = reviewer, image = image)
+        iotd = Iotd.objects.create(judge = judge, image = image, date = datetime.now().date())
 
         profile = self.user.userprofile
         profile.exclude_from_competitions = True
         profile.save()
         image = Image.all_objects.get(pk = image.pk)
-
-        # Check that the user's images are not eligible for IOTD
-        with self.assertRaisesMessage(ValidationError, "User is excluded from competitions"):
-            ImageOfTheDayCandidate.objects.get_or_create(image = image, position = 0)
-        call_command('image_of_the_day')
-        self.assertEquals(ImageOfTheDayCandidate.objects.all().count(), 0)
 
         # Check Index
         from astrobin.search_indexes import UserIndex
@@ -409,10 +406,6 @@ class UserTest(TestCase):
         self.assertEquals(index, 0.0)
 
         # Check that the IOTD banner is not visible
-        image = Image.all_objects.get(pk = image.pk)
-        iotd, created = ImageOfTheDay.objects.get_or_create(image = image)
-        ImageOfTheDay.objects.filter(pk = iotd.pk).update(
-            date = date.today() - timedelta(1))
         response = self.client.get(reverse('image_detail', args = (image.pk,)))
         self.assertNotContains(response, "iotd-ribbon")
 
@@ -422,6 +415,18 @@ class UserTest(TestCase):
 
         # Check that the top100 badge is not visible
         self.assertNotContains(response, 'top100-badge')
+
+        submitter.delete()
+        reviewer.delete()
+        judge.delete()
+
+        submitters.delete()
+        reviewers.delete()
+        judges.delete()
+
+        submission.delete()
+        vote.delete()
+        iotd.delete()
 
         image.delete()
 

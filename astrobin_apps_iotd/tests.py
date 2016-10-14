@@ -520,7 +520,7 @@ class IotdTest(TestCase):
         self.assertEqual(len(bss('.astrobin-image-container')), 1)
 
         # Check for count badge
-        self.assertEqual(bss('.iotd-queue-item .badge')[0].text, '1/2')
+        self.assertEqual(bss('.iotd-queue-item .badge')[0].text, '2')
         vote_2.delete()
 
         # Check for may-not-elect class
@@ -585,7 +585,7 @@ class IotdTest(TestCase):
         self.assertEqual(response.status_code, 200)
         self.assertEqual(json.loads(response.content)['iotd'], 1)
         self.assertFalse('error' in json.loads(response.content))
-        self.assertEqual(json.loads(response.content)['date'], today.strftime('%Y-%m-%d'))
+        self.assertEqual(json.loads(response.content)['date'], today.strftime('%m/%d/%Y'))
         self.assertEqual(Iotd.objects.count(), 1)
         iotd = Iotd.objects.all()[0]
         self.assertEqual(iotd.judge, self.judge_1)
