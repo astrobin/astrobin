@@ -1,31 +1,32 @@
 {% load i18n %}
 {% load astrobin_apps_iotd_tags %}
 
-{% get_iotd as iotd %}
-{% if iotd and not image.user.userprofile.exclude_from_competitions %}
-<div class="iotd-ribbon-container">
-    <div class="iotd-ribbon">
-        <div class="ribbon-stitches-top"></div>
-        <strong class="ribbon-content">
-            <h1>
-                <i class="icon-trophy"></i>
-                {% trans "Image of the day" %}
-                <span class="date">
-                    {{iotd.date|date:"SHORT_DATE_FORMAT"}}
-                </span>
-                {% if iotd.judge %}
-                <span class="chosen-by">
-                    --
-                    {% trans "chosen by" %}
-                    <a href="{% url 'user_page' iotd.judge %}">
-                        {{iotd.judge.userprofile}}
-                    </a>
-                </span>
-                {% endif %}
-            </h1>
-        </strong>
-        <div class="ribbon-stitches-bottom"></div>
-    </div>
-</div>
+{% if image|is_iotd and not image.user.userprofile.exclude_from_competitions %}
+    {% with iotd=image.iotd_set.all.0 %}
+        <div class="iotd-ribbon-container">
+            <div class="iotd-ribbon">
+                <div class="ribbon-stitches-top"></div>
+                <strong class="ribbon-content">
+                    <h1>
+                        <i class="icon-trophy"></i>
+                        {% trans "Image of the day" %}
+                        <span class="date">
+                            {{iotd.date|date:"SHORT_DATE_FORMAT"}}
+                        </span>
+                        {% if iotd.judge %}
+                        <span class="chosen-by">
+                            --
+                            {% trans "chosen by" %}
+                            <a href="{% url 'user_page' image.judge %}">
+                                {{iotd.judge.userprofile}}
+                            </a>
+                        </span>
+                        {% endif %}
+                    </h1>
+                </strong>
+                <div class="ribbon-stitches-bottom"></div>
+            </div>
+        </div>
+    {% endwith %}
 {% endif %}
 

@@ -102,7 +102,7 @@ def votes_count(image):
 
 @register.filter
 def is_iotd(image):
-    return Iotd.objects.filter(image = image).count()
+    return Iotd.objects.filter(image = image).exists()
 
 
 @register.filter
