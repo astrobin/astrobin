@@ -197,3 +197,10 @@ class IotdToggleAjaxView(
             return self.render_json_response(ret)
 
         return HttpResponseForbidden()
+
+
+class IotdArchiveView(ListView):
+    model = Iotd
+    queryset = Iotd.objects.filter(date__lte = datetime.now().date())
+    template_name = 'astrobin_apps_iotd/iotd_archive.html'
+    paginate_by = 30 

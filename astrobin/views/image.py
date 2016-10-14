@@ -1,4 +1,5 @@
 # Python
+from datetime import datetime
 import re
 
 # Django
@@ -44,7 +45,6 @@ from astrobin.forms import (
 from astrobin.models import (
     Collection,
     Image, ImageRevision,
-    ImageOfTheDay,
     DeepSky_Acquisition,
     SolarSystem_Acquisition,
     LANGUAGES,
@@ -59,6 +59,7 @@ from astrobin.templatetags.tags import can_like
 from astrobin_apps_groups.forms import GroupSelectForm
 from astrobin_apps_groups.models import Group
 from astrobin_apps_notifications.utils import push_notification
+from astrobin_apps_iotd.models import Iotd
 from astrobin_apps_platesolving.models import Solution
 from nested_comments.models import NestedComment
 from rawdata.forms import (
@@ -478,15 +479,15 @@ class ImageDetailView(DetailView):
                 image_prev = Image.objects.filter(pk__lt = image.pk).order_by('-pk')[0:1]
             elif nav_ctx == 'iotd':
                 try:
-                    iotd = ImageOfTheDay.objects.get(image = image)
-                    iotd_next = ImageOfTheDay.objects.filter(pk__gt = iotd.pk).order_by('pk')[0:1]
-                    iotd_prev = ImageOfTheDay.objects.filter(pk__lt = iotd.pk).order_by('-pk')[0:1]
+                    iotd = Iotd.objects.get(image = image)
+                    iotd_next = Iotd.objects.filter(date__gt = iotd.date, date__lte = datetime.now().date()).order_by('date')[0:1]
+                    iotd_prev = Iotd.objects.filter(date__lt = iotd.date, date__lte = datetime.now().date()).order_by('-date')[0:1]
 
                     if iotd_next:
                         image_next = [iotd_next[0].image]
                     if iotd_prev:
                         image_prev = [iotd_prev[0].image]
-                except ImageOfTheDay.DoesNotExist:
+                except Iotd.DoesNotExist:
                     pass
         except Image.DoesNotExist:
             image_next = None

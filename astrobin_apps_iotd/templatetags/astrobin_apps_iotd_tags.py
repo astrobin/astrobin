@@ -112,3 +112,10 @@ def iotd_date_for_image(image):
         return iotd.date
     except Iotd.DoesNotExist:
         return ""
+
+@register.assignment_tag
+def get_iotd():
+    iotds = Iotd.objects.filter(date__lte = datetime.now().date()).order_by('-date')
+    if iotds:
+        return iotds[0]
+    return None

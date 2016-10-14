@@ -1,6 +1,8 @@
 {% load i18n %}
+{% load astrobin_apps_iotd_tags %}
 
-{% if iotd_date and not image.user.userprofile.exclude_from_competitions %}
+{% get_iotd as iotd %}
+{% if iotd and not image.user.userprofile.exclude_from_competitions %}
 <div class="iotd-ribbon-container">
     <div class="iotd-ribbon">
         <div class="ribbon-stitches-top"></div>
@@ -9,16 +11,14 @@
                 <i class="icon-trophy"></i>
                 {% trans "Image of the day" %}
                 <span class="date">
-                    <a href="{% url 'iotd_detail' image.image_of_the_day.all.0.pk %}">
-                        {{iotd_date|date:"SHORT_DATE_FORMAT"}}
-                    </a>
+                    {{iotd.date|date:"SHORT_DATE_FORMAT"}}
                 </span>
-                {% if image.image_of_the_day.all.0.chosen_by %}
+                {% if iotd.judge %}
                 <span class="chosen-by">
                     --
                     {% trans "chosen by" %}
-                    <a href="{% url 'user_page' image.image_of_the_day.all.0.chosen_by %}">
-                        {{image.image_of_the_day.all.0.chosen_by.userprofile}}
+                    <a href="{% url 'user_page' iotd.judge %}">
+                        {{iotd.judge.userprofile}}
                     </a>
                 </span>
                 {% endif %}

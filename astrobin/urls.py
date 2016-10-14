@@ -177,7 +177,6 @@ urlpatterns = patterns('',
     ### EXPLORE VIEWS                                                       ###
     ###########################################################################
 
-    url(r'^explore/iotd/$', views.iotd_archive, name='iotd_archive'),
     url(r'^explore/wall/$', wall_views.WallView.as_view(), name='wall'),
 
     ###########################################################################
@@ -309,12 +308,6 @@ urlpatterns = patterns('',
     url(r'^messages/view/(?P<thread_id>[\d]+)/$', messages_view, {'template_name': 'messages/view.html'}, name='messages_detail'),
     url(r'^send_private_message/$', views.send_private_message, name='send_private_message'),
 
-    ###########################################################################
-    ### IOTD VIEWS                                                          ###
-    ###########################################################################
-
-    url(r'^iotd/choose/(?:(?P<image_pk>\d+)/)?$', views.iotd_choose, name='iotd_choose'),
-    url(r'^iotd/detail/(?:(?P<iotd_pk>\d+)/)?$', iotd_views.IotdDetailView.as_view(), name='iotd_detail'),
 
     ###########################################################################
     ### MODERATION VIEWS                                                    ###

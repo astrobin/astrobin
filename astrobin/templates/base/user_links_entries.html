@@ -89,26 +89,6 @@
     </a>
 </li>
 
-{% if is_iotd_staff %}
-    <li class="divider"></li>
-    <li>
-        <a href="{% url 'iotd_choose' %}">
-            <i clasS="icon-legal"></i>
-            {% trans "Choose Image Of The Day" %}
-        </a>
-    </li>
-{% endif %}
-
-{% if request.user|is_content_moderator %}
-    <li class="divider"></li>
-    <li>
-        <a href="{% url 'image_moderation' %}">
-            <i clasS="icon-legal"></i>
-            {% trans "Content moderation" %}
-        </a>
-    </li>
-{% endif %}
-
 <li class="divider"></li>
 
 <li>

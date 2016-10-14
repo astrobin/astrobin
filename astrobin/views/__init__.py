@@ -254,14 +254,6 @@ def index(request, template = 'index/root.html', extra_context = None):
             section = profile.default_frontpage_section
         response_dict['section'] = section
 
-        # IOTD
-        try:
-            iotd = ImageOfTheDay.objects.all()[0]
-            response_dict['image_of_the_day'] = iotd
-        except IndexError:
-            # The is no IOTD
-            pass
-
         if section == 'global':
             ##################
             # GLOBAL ACTIONS #
@@ -385,94 +377,6 @@ def index(request, template = 'index/root.html', extra_context = None):
     return render_to_response(
         template, response_dict,
         context_instance = RequestContext(request))
-
-
-@require_GET
-def iotd_archive(request):
-    """Archive of 'Images of the day'"""
-
-    queryset = ImageOfTheDay.objects.all()
-
-    return object_list(
-        request,
-        queryset = queryset,
-        template_name = 'iotd_archive.html',
-        template_object_name = 'iotd',
-        paginate_by = 30,
-    )
-
-
-@login_required
-def iotd_choose(request, image_pk):
-    if not request.user.groups.filter(name='IOTD_Staff'):
-        return HttpResponseForbidden()
-
-    context = {}
-    today = date.today()
-    tomorrow = today + timedelta(1)
-    candidates = ImageOfTheDayCandidate.objects.filter(date__range = (today, tomorrow))
-
-    try:
-        iotd = ImageOfTheDay.objects.get(date__range = (today, tomorrow))
-        context['iotd_already_exists'] = True
-        messages.error(
-            request,
-            _("Today's 'Image of the day' was already chosen. Come back tomorrow!"))
-    except ImageOfTheDay.DoesNotExist:
-        pass
-
-    if request.method == 'GET':
-        if image_pk is None:
-            return object_list(
-                request,
-                queryset = candidates,
-                template_name = 'iotd_choose.html',
-                template_object_name = 'candidate',
-                extra_context = context,
-            )
-        else:
-            context['image'] = Image.objects.get(pk = image_pk)
-            return render_to_response(
-                'iotd_choose_confirm.html',
-                context,
-                context_instance = RequestContext(request))
-
-    elif request.method == 'POST':
-        if image_pk is None:
-            return HttpResponseNotAllowed(['POST'])
-
-        from astrobin.image_utils import (
-            make_image_of_the_day, make_runnerup, compare_iotd_candidates)
-        image = Image.objects.get(pk = image_pk)
-
-        iotd = make_image_of_the_day(image, request.user)
-        sorted_candidates = sorted(list(
-            ImageOfTheDayCandidate.objects.filter(date__range = (today, tomorrow))),
-            cmp = compare_iotd_candidates)
-
-        try:
-            position = [x.image for x in sorted_candidates].index(image)
-        except ValueError:
-            return HttpResponseForbidden()
-
-        try:
-            if position == 0:
-                make_runnerup(sorted_candidates[1].image, iotd, 1)
-                make_runnerup(sorted_candidates[2].image, iotd, 2)
-            elif position == 1:
-                make_runnerup(sorted_candidates[0].image, iotd, 1)
-                make_runnerup(sorted_candidates[2].image, iotd, 2)
-            else:
-                make_runnerup(sorted_candidates[0].image, iotd, 1)
-                make_runnerup(sorted_candidates[1].image, iotd, 2)
-        except IndexError:
-            # Runner-ups are not available, that's ok
-            pass
-
-        return render_to_response(
-            'iotd_choose_finished.html',
-            {},
-            context_instance = RequestContext(request))
 
 
 @login_required

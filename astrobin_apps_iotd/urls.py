@@ -30,4 +30,8 @@ urlpatterns = patterns('',
         r'^toggle-iotd-ajax/(?P<pk>\d+)/$',
         IotdToggleAjaxView.as_view(),
         name = 'iotd_toggle_ajax'),
+    url(
+        r'^archive/$',
+        IotdArchiveView.as_view(),
+        name = 'iotd_archive'),
 )
