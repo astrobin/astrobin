@@ -179,6 +179,7 @@
                 propertyToSearch: "display_name"
             };
 
+            $.ajaxSetup({ timeout: 10000 });
             $("#id_invite_users").tokenInput(
                 "{% url 'astrobin_apps_users.user_search_ajax' %}?format=json",
                 parameters);
