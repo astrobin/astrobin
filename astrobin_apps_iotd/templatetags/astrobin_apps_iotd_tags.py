@@ -51,6 +51,12 @@ def may_toggle_vote(user, image):
 
 
 @register.filter
+def may_not_toggle_vote_reason(user, image):
+    may, reason = may_toggle_vote_image(user, image)
+    return reason
+
+
+@register.filter
 def may_elect(user, image):
     may, reason = may_elect_iotd(user, image)
     return may
@@ -60,6 +66,18 @@ def may_elect(user, image):
 def may_unelect(user, image):
     may, reason = may_unelect_iotd(user, image)
     return may
+
+
+@register.filter
+def may_not_elect_reason(user, image):
+    may, reason = may_elect_iotd(user, image)
+    return reason
+
+
+@register.filter
+def may_not_unelect_reason(user, image):
+    may, reason = may_unelect_iotd(user, image)
+    return reason
 
 
 @register.filter

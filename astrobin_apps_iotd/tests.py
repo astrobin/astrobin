@@ -399,16 +399,14 @@ class IotdTest(TestCase):
         response = self.client.post(url, HTTP_X_REQUESTED_WITH = 'XMLHttpRequest')
         self.assertEqual(response.status_code, 200)
         self.assertEqual(json.loads(response.content)['vote'], 1)
-        self.assertEqual(json.loads(response.content)['toggled'], True)
-        self.assertEqual(json.loads(response.content)['error'], None)
+        self.assertFalse('error' in json.loads(response.content))
         self.assertEqual(IotdVote.objects.count(), 1)
 
         # Toggle off
         response = self.client.post(url, HTTP_X_REQUESTED_WITH = 'XMLHttpRequest')
         self.assertEqual(response.status_code, 200)
-        self.assertEqual(json.loads(response.content)['vote'], None)
-        self.assertEqual(json.loads(response.content)['toggled'], False)
-        self.assertEqual(json.loads(response.content)['error'], None)
+        self.assertFalse('vote' in json.loads(response.content))
+        self.assertFalse('error' in json.loads(response.content))
         self.assertEqual(IotdVote.objects.count(), 0)
 
     def test_review_queue_view(self):

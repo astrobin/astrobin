@@ -122,9 +122,15 @@ def may_unelect_iotd(user, image):
         return False, _("You are not a member of the IOTD Judges board.")
 
     # Import here to avoid circular dependency
-    from astrobin_apps_iotd.models import Iotd
+    from astrobin_apps_iotd.models import Iotd, IotdVote, IotdSubmission
 
-    if Iotd.objects.filter(image = image).exclude(user = user).exists():
+    if user.pk in IotdSubmission.objects.filter(image = image).values_list('submitter', flat = True):
+        return False, _("You cannot unelect your own submission.")
+
+    if user.pk in IotdVote.objects.filter(image = image).values_list('reviewer', flat = True):
+        return False, _("You cannot unelect an image you voted for.")
+
+    if Iotd.objects.filter(image = image).exclude(judge = user).exists():
         return False, _("You cannot unelect an image elected by another judge.")
 
     return True, None

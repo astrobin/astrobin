@@ -47,12 +47,32 @@
                 </div>
 
                 <div class="iotd-queue-item-may-not-vote-overlay">
-                    <img src="{% get_static_prefix %}astrobin_apps_iotd/images/iotd_may_not_vote_overlay.png" />
+                    <img
+                        src="{% get_static_prefix %}astrobin_apps_iotd/images/iotd_may_not_vote_overlay.png"
+                        rel="tooltip"
+                        {% if not request.user|may_toggle_vote:image %}
+                            title="{{request.user|may_not_toggle_vote_reason:image}}"
+                        {% endif %}
+                    />
                 </div>
             </div>
         {% empty %}
             {% trans "This queue is currently empty." %}
         {% endfor %}
+    </div>
+{% endblock %}
+
+{% block modals %}
+    <div id="error-modal" class="modal hide fide">
+        <div class="modal-header">
+            <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+            <h3>{% trans "Error" %}</h3>
+        </div>
+
+        <div class="modal-body">
+            <p class="error-message">
+            </p>
+        </div>
     </div>
 {% endblock %}
 
@@ -71,8 +91,19 @@
                     $.ajax({
                         url: url,
                         type: 'post',
-                        success: function() {
-                            $item.toggleClass('voted');
+                        success: function(response) {
+                            if ('vote' in response) {
+                                if (!$item.hasClass('voted')) {
+                                    $item.addClass('voted');
+                                }
+                            } else {
+                                $item.removeClass('voted');
+                            }
+
+                            if ('error' in response) {
+                                $('#error-modal .error-message').text(response['error']);
+                                $('#error-modal').modal('show');
+                            }
                         }
                     });
                 }

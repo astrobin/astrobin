@@ -101,15 +101,13 @@ class IotdToggleVoteAjaxView(
                     image = image)
                 if not created:
                     vote.delete()
-                return self.render_json_response({
-                    'vote': vote.pk,
-                    'toggled': created,
-                    'error': None,
-                })
+                    return self.render_json_response([])
+                else:
+                    return self.render_json_response({
+                        'vote': vote.pk,
+                    })
             except ValidationError as e:
                 return self.render_json_response({
-                    'vote': None,
-                    'toggled': False,
                     'error': ';'.join(e.messages),
                 })
 
