@@ -89,96 +89,95 @@
                     {% endif %}
                 </ul>
             </li>
-        </ul> <!-- nav -->
-    </div> <!-- subnav -->
 
-    <div class="row group-header">
-        <div class="span8">
-            <h1>{{object.name}}</h1>
-            {% url 'user_page' object.owner.username as owner_url %}
-            <div class="subtitle">
-                {% blocktrans with date_created=object.date_created|date:"SHORT_DATE_FORMAT" owner=object.owner.userprofile category=object.category_humanized %}A group created on {{date_created}}, owned by <a href="{{owner_url}}">{{owner}}</a>, categorized as <strong>{{category}}</strong>.{% endblocktrans %}
-            </div>
-        </div>
-        <div class="span4 group-info-container">
-            <div class="group-info hidden-phone hidden-tablet">
-                {% if object.public %}
-                    <i class="icon-unlock" rel="tooltip" title="{% trans "This group is public" %}"></i>
-                {% else %}
-                    <i class="icon-lock icon-inactive" rel="tooltip" title="{% trans "This group is private" %}"></i>
-                {% endif %}
+            <li class="group-info pull-right">
+                <a href="">
+                    {% if object.public %}
+                        <i class="icon-unlock" rel="tooltip" data-placement="bottom" title="{% trans "This group is public" %}"></i>
+                    {% else %}
+                        <i class="icon-lock icon-inactive" rel="tooltip" data-placement="bottom" title="{% trans "This group is private" %}"></i>
+                    {% endif %}
 
-                {% if object.moderated %}
-                    <i class="icon-legal" rel="tooltip" title="{% trans "This group is moderated" %}"></i>
-                {% else %}
-                    <i class="icon-legal icon-inactive" rel="tooltip" title="{% trans "This group is not moderated" %}"></i>
-                {% endif %}
+                    {% if object.moderated %}
+                        <i class="icon-legal" rel="tooltip" data-placement="bottom" title="{% trans "This group is moderated" %}"></i>
+                    {% else %}
+                        <i class="icon-legal icon-inactive" rel="tooltip" data-placement="bottom" title="{% trans "This group is not moderated" %}"></i>
+                    {% endif %}
 
-                {% if object.autosubmission %}
-                    <i class="icon-upload-alt" rel="tooltip" title="{% trans "This group has automatic submission" %}"></i>
-                {% else %}
-                    <i class="icon-upload-alt icon-inactive" rel="tooltip" title="{% trans "This group does not have automatic submission" %}"></i>
-                {% endif %}
-            </div>
+                    {% if object.autosubmission %}
+                        <i class="icon-upload-alt" rel="tooltip" data-placement="bottom" title="{% trans "This group has automatic submission" %}"></i>
+                    {% else %}
+                        <i class="icon-upload-alt icon-inactive" rel="tooltip" data-placement="bottom" title="{% trans "This group does not have automatic submission" %}"></i>
+                    {% endif %}
+                </a>
+            </li>
 
-            <div class="group-info hidden-phone">
+            <li class="group-info pull-right">
                 <a
                     href="{% url 'group_members_list' object.pk %}"
                     class="group-info-members"
-                    rel="tooltip"
+                    rel="tooltip" data-placement="bottom"
                     title="{% trans "Members" %}">
                     {{object.members.count}}
                 </a>
-                {% if request.user == group.owner %}
-                    /
-                    <a
-                        href="{% url 'group_manage_members' object.pk %}"
-                        class="group-info-invited"
-                        rel="tooltip"
-                        title="{% trans "Invited users" %}">
-                        {{object.invited_users.count}}
-                    </a>
-                {% endif %}
-                {% if group.moderated and user_is_moderator %}
-                    /
-                    <a
-                        href="{% url 'group_moderate_join_requests' object.pk %}"
-                        class="group-info-join-requests"
-                        rel="tooltip"
-                        title="{% trans "Join requests" %}">
-                        {{object.join_requests.count}}
-                    </a>
-                {% endif %}
+            </li>
 
-            </div>
+            {% if request.user == group.owner %}
+            <li class="group-info pull-right">
+                <a
+                    href="{% url 'group_manage_members' object.pk %}"
+                    class="group-info-invited"
+                    rel="tooltip" data-placement="bottom"
+                    title="{% trans "Invited users" %}">
+                    {{object.invited_users.count}}
+                </a>
+            </li>
+            {% endif %}
 
-            <div class="group-info hidden-phone">
-                <span class="group-info-images" rel="tooltip" title="{% trans "Images" %}">
+            {% if group.moderated and user_is_moderator %}
+            <li class="group-info pull-right">
+                <a
+                    href="{% url 'group_moderate_join_requests' object.pk %}"
+                    class="group-info-join-requests"
+                    rel="tooltip" data-placement="bottom"
+                    title="{% trans "Join requests" %}">
+                    {{object.join_requests.count}}
+                </a>
+            </li>
+            {% endif %}
+
+            <li class="group-info pull-right">
+                <a href="" class="group-info-images" rel="tooltip" data-placement="bottom" title="{% trans "Images" %}">
                     {{object.images.count}}
-                </span>
+                </a>
+            </li>
+        </ul>
+    </div> <!-- subnav -->
+
+    <div class="row group-header">
+        <div class="span10">
+            <h1>{{object.name}}</h1>
+            <div class="subtitle">
+                {% url 'user_page' object.owner.username as owner_url %}
+                {% blocktrans with date_created=object.date_created|date:"SHORT_DATE_FORMAT" owner=object.owner.userprofile category=object.category_humanized %}A group created on {{date_created}}, owned by <a href="{{owner_url}}">{{owner}}</a>, categorized as <strong>{{category}}</strong>.{% endblocktrans %}
             </div>
-
-            <div class="group-actions hidden-phone">
-                {% if user_is_member %}
-                    <a  href="#leave-modal"
-                        data-toggle="modal"
-                        class="btn btn-danger"
-                        rel="tooltip"
-                        title="{% trans "Leave group" %}" >
-
-                        <i class="icon icon-signout"></i>
-                    </a>
-                {% else %}
-                    <a  href="#join-modal"
-                        data-toggle="modal"
-                        class="btn btn-primary"
-                        rel="tooltip"
-                        title="{% trans "Join group" %}" >
-
-                        <i class="icon icon-signin"></i>
-                    </a>
-                {% endif %}
-            </div>
+        </div>
+        <div class="span2">
+            {% if user_is_member %}
+                <a  href="#leave-modal"
+                    data-toggle="modal"
+                    class="btn btn-danger btn-large btn-block">
+                    <i class="icon icon-signout"></i>
+                    {% trans "Leave" %}
+                </a>
+            {% else %}
+                <a  href="#join-modal"
+                    data-toggle="modal"
+                    class="btn btn-primary btn-large btn-block">
+                    <i class="icon icon-signin"></i>
+                    {% trans "Join" %}
+                </a>
+            {% endif %}
         </div>
     </div>
 

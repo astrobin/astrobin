@@ -4230,41 +4230,24 @@ pre {
 .image-moderation .astrobin-image-container {
   padding: 9px;
 }
-.group-header .group-info-container {
-  text-align: right;
-  padding-top: 20px;
-}
-.group-header .group-info-container .group-info {
-  padding: 8px 12px;
-  background: #303030 url('../images/darker-panel-tile.png');
-  display: inline-block;
+.subnav .group-info {
+  margin: 0;
+  margin-top: 1px;
+  margin-left: 4px;
+  padding: 0;
+  background: #b3422c;
   -moz-border-radius: 6px;
   -webkit-border-radius: 6px;
   border-radius: 6px;
 }
-.group-header .group-info-container .group-info i,
-.group-header .group-info-container .group-info span,
-.group-header .group-info-container .group-info a {
-  padding: 0 4px;
+.subnav .group-info a {
+  padding-top: 4px !important;
 }
-.group-header .group-info-container .group-info i:first-child,
-.group-header .group-info-container .group-info span,
-.group-header .group-info-container .group-info a {
-  padding-left: 0;
+.subnav .group-info a .icon-inactve {
+  color: #863423;
 }
-.group-header .group-info-container .group-info i:last-child,
-.group-header .group-info-container .group-info span,
-.group-header .group-info-container .group-info a {
-  padding-right: 0;
-}
-.group-header .group-info-container .group-info .icon-inactive {
-  color: #606060;
-}
-.group-header .group-info-container .group-actions {
-  display: inline-block;
-}
-.group-header .group-info-container .group-actions a {
-  margin-bottom: 2px;
+.group-header .btn-block {
+  margin: 16px 0;
 }
 .group-description {
   color: #ddd;
