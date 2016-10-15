@@ -112,7 +112,7 @@
                 </a>
             </li>
 
-            <li class="group-info pull-right">
+            <li class="group-info pull-right hidden-phone">
                 <a
                     href="{% url 'group_members_list' object.pk %}"
                     class="group-info-members"
@@ -123,7 +123,7 @@
             </li>
 
             {% if request.user == group.owner %}
-            <li class="group-info pull-right">
+            <li class="group-info pull-right hidden-phone">
                 <a
                     href="{% url 'group_manage_members' object.pk %}"
                     class="group-info-invited"
@@ -135,7 +135,7 @@
             {% endif %}
 
             {% if group.moderated and user_is_moderator %}
-            <li class="group-info pull-right">
+            <li class="group-info pull-right hidden-phone">
                 <a
                     href="{% url 'group_moderate_join_requests' object.pk %}"
                     class="group-info-join-requests"
@@ -146,7 +146,7 @@
             </li>
             {% endif %}
 
-            <li class="group-info pull-right">
+            <li class="group-info pull-right hidden-phone">
                 <a href="" class="group-info-images" rel="tooltip" data-placement="bottom" title="{% trans "Images" %}">
                     {{object.images.count}}
                 </a>
