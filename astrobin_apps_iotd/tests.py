@@ -15,6 +15,7 @@ import simplejson as json
 
 # AstroBin
 from astrobin.models import Image
+from astrobin_apps_groups.models import Group as AstroBinGroup
 
 # This app
 from astrobin_apps_iotd.models import *
@@ -763,3 +764,82 @@ class IotdTest(TestCase):
         iotd.delete()
         iotd2.delete()
         iotd3.delete()
+
+    def test_signals(self):
+        group_creator = User.objects.create_user('group_creator', 'group_creator@test.com', 'password')
+
+        staff_group = AstroBinGroup.objects.create(name = 'IOTD Staff', creator = group_creator, owner = group_creator, category = 101)
+        submitters_group = AstroBinGroup.objects.create(name = 'IOTD Submitters', creator = group_creator, owner = group_creator, category = 101)
+        reviewers_group = AstroBinGroup.objects.create(name = 'IOTD Reviewers', creator = group_creator, owner = group_creator, category = 101)
+        judges_group = AstroBinGroup.objects.create(name = 'IOTD Judges', creator = group_creator, owner = group_creator, category = 101)
+
+        staff_group_dj, created = Group.objects.get_or_create(name = 'iotd_staff')
+        self.assertFalse(created)
+
+        content_moderators_group_dj, created = Group.objects.get_or_create(name = 'content_moderators')
+        self.assertFalse(created)
+
+        submitters_group_dj, created = Group.objects.get_or_create(name = 'iotd_submitters')
+        self.assertFalse(created)
+
+        reviewers_group_dj, created = Group.objects.get_or_create(name = 'iotd_reviewers')
+        self.assertFalse(created)
+
+        judges_group_dj, created = Group.objects.get_or_create(name = 'iotd_judges')
+        self.assertFalse(created)
+
+        submitters_group.members.add(self.user)
+        self.assertTrue(self.user in submitters_group_dj.user_set.all())
+        self.assertTrue(self.user in staff_group_dj.user_set.all())
+        self.assertTrue(self.user in content_moderators_group_dj.user_set.all())
+        submitters_group.members.remove(self.user)
+        self.assertFalse(self.user in submitters_group_dj.user_set.all())
+        self.assertFalse(self.user in staff_group_dj.user_set.all())
+        self.assertFalse(self.user in content_moderators_group_dj.user_set.all())
+        submitters_group.members.add(self.user)
+        submitters_group.members.clear()
+        self.assertFalse(self.user in submitters_group_dj.user_set.all())
+        self.assertFalse(self.user in staff_group_dj.user_set.all())
+        self.assertFalse(self.user in content_moderators_group_dj.user_set.all())
+
+        reviewers_group.members.add(self.user)
+        self.assertTrue(self.user in reviewers_group_dj.user_set.all())
+        self.assertTrue(self.user in staff_group_dj.user_set.all())
+        self.assertTrue(self.user in content_moderators_group_dj.user_set.all())
+        reviewers_group.members.remove(self.user)
+        self.assertFalse(self.user in reviewers_group_dj.user_set.all())
+        self.assertFalse(self.user in staff_group_dj.user_set.all())
+        self.assertFalse(self.user in content_moderators_group_dj.user_set.all())
+        reviewers_group.members.add(self.user)
+        reviewers_group.members.clear()
+        self.assertFalse(self.user in reviewers_group_dj.user_set.all())
+        self.assertFalse(self.user in staff_group_dj.user_set.all())
+        self.assertFalse(self.user in content_moderators_group_dj.user_set.all())
+
+        judges_group.members.add(self.user)
+        self.assertTrue(self.user in judges_group_dj.user_set.all())
+        self.assertTrue(self.user in staff_group_dj.user_set.all())
+        self.assertTrue(self.user in content_moderators_group_dj.user_set.all())
+        judges_group.members.remove(self.user)
+        self.assertFalse(self.user in judges_group_dj.user_set.all())
+        self.assertFalse(self.user in staff_group_dj.user_set.all())
+        self.assertFalse(self.user in content_moderators_group_dj.user_set.all())
+        judges_group.members.add(self.user)
+        judges_group.members.clear()
+        self.assertFalse(self.user in judges_group_dj.user_set.all())
+        self.assertFalse(self.user in staff_group_dj.user_set.all())
+        self.assertFalse(self.user in content_moderators_group_dj.user_set.all())
+
+        # Clean up
+        group_creator.delete()
+
+        submitters_group.delete()
+        reviewers_group.delete()
+        judges_group.delete()
+        staff_group.delete()
+
+        submitters_group_dj.delete()
+        reviewers_group_dj.delete()
+        judges_group_dj.delete()
+        staff_group_dj.delete()
+        content_moderators_group_dj.delete()

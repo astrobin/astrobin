@@ -3,7 +3,7 @@ import datetime
 
 # Django
 from django.conf import settings
-from django.contrib.auth.models import User
+from django.contrib.auth.models import User, Group as DjangoGroup
 from django.contrib.contenttypes.models import ContentType
 from django.core.urlresolvers import reverse as reverse_url
 from django.db.models.signals import (
@@ -437,11 +437,28 @@ post_save.connect(group_post_save, sender = Group)
 
 def group_members_changed(sender, instance, **kwargs):
     action = kwargs['action']
+    pk_set = kwargs['pk_set']
+
+    group_sync_map = {
+        'IOTD Submitters': ['iotd_submitters', 'content_moderators', 'iotd_staff'],
+        'IOTD Reviewers': ['iotd_reviewers', 'content_moderators', 'iotd_staff'],
+        'IOTD Judges': ['iotd_judges', 'content_moderators', 'iotd_staff'],
+    }
+    if instance.name in group_sync_map.keys():
+        for django_group in group_sync_map[instance.name]:
+            DjangoGroup.objects.get_or_create(name = django_group)
+        django_groups = DjangoGroup.objects.filter(name__in = group_sync_map[instance.name])
+    try:
+        iotd_staff_group = Group.objects.get(name = 'IOTD Staff')
+    except Group.DoesNotExist:
+        iotd_staff_group = None
 
     if action == 'post_add':
+        users = User.objects.filter(pk__in = pk_set)
         instance.save() # trigger date_updated update
+
         if instance.public:
-            for pk in kwargs['pk_set']:
+            for pk in pk_set:
                 user = User.objects.get(pk = pk)
                 if user != instance.owner:
                     followers = [
@@ -461,11 +478,21 @@ def group_members_changed(sender, instance, **kwargs):
                         action_object = instance)
 
         if instance.autosubmission:
-            images = Image.all_objects.filter(user__pk__in = kwargs['pk_set'])
+            images = Image.all_objects.filter(user__pk__in = pk_set)
             for image in images:
                 instance.images.add(image)
+
+        # Sync IOTD AstroBin groups with django groups
+        if instance.name in group_sync_map.keys():
+            for django_group in django_groups:
+                django_group.user_set.add(*list(users))
+            if iotd_staff_group:
+                for user in users:
+                    iotd_staff_group.members.add(user)
+
     elif action == 'post_remove':
-        images = Image.all_objects.filter(user__pk__in = kwargs['pk_set'])
+        users = User.objects.filter(pk__in = pk_set)
+        images = Image.all_objects.filter(user__pk__in = pk_set)
         for image in images:
             instance.images.remove(image)
 
@@ -473,6 +500,24 @@ def group_members_changed(sender, instance, **kwargs):
             topics = Topic.objects.filter(forum = instance.forum)
             for topic in topics:
                 topic.subscribers.remove(*User.objects.filter(pk__in = kwargs['pk_set']))
+
+        # Sync IOTD AstroBin groups with django groups
+        if instance.name in group_sync_map.keys():
+            for django_group in django_groups:
+                django_group.user_set.remove(*list(users))
+            if iotd_staff_group:
+                for user in users:
+                    iotd_staff_group.members.remove(user)
+
+    elif action == 'pre_clear':
+        # Sync IOTD AstroBin groups with django groups
+        users = instance.members.all()
+        if instance.name in group_sync_map.keys():
+            for django_group in django_groups:
+                django_group.user_set.remove(*list(users))
+            if iotd_staff_group:
+                for user in users:
+                    iotd_staff_group.members.remove(user)
 
     elif action == 'post_clear':
         instance.images.clear()
