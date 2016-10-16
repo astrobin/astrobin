@@ -37,7 +37,9 @@
         <tbody>
         {% for message in thread_list %}
             <tr>
-                <td class="message-state{% if message.new %} message-unread{% endif %}"></td>
+                <td class="message-state{% if message.new %} message-unread{% endif %}">
+                    <div class="state-indicator"></div>
+                </td>
                 <td class="message-subject">
                     <a href="{{message.thread.get_absolute_url}}">
                         {{message.thread.subject}}

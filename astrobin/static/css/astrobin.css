@@ -4010,11 +4010,13 @@ th.forum-name {
   margin: 3px 5px;
 }
 .topic-unread a,
-.forum-unread a {
+.forum-unread a,
+.message-unread a {
   font-weight: bold;
 }
 .topic-unread .state-indicator,
-.forum-unread .state-indicator {
+.forum-unread .state-indicator,
+.message-unread .state-indicator {
   background-color: #cc4b2e;
 }
 /* --- Moderation --- */
