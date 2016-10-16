@@ -32,8 +32,18 @@
             <ul class="dropdown-menu">
                 {% if request.user|is_image_moderator %}
                     <li class="nav-header">{% trans "Images" %}</li>
-                    <li><a href="{% url 'image_moderation' %}">{% trans "Image queue" %}</a></li>
-                    <li><a href="{% url 'image_moderation_view_spam' %}">{% trans "Spam list" %}</a></li>
+                    <li>
+                        <a href="{% url 'image_moderation' %}">
+                            <i class="icon-picture"></i>
+                            {% trans "Image queue" %}
+                        </a>
+                    </li>
+                    <li>
+                        <a href="{% url 'image_moderation_view_spam' %}">
+                            <i class="icon-flag"></i>
+                            {% trans "Spam list" %}
+                        </a>
+                    </li>
                 {% endif %}
 
                 {% if request.user|is_iotd_reviewer or request.user|is_iotd_judge %}
@@ -43,6 +53,7 @@
                 {% if request.user|is_iotd_submitter %}
                     <li>
                         <a href="{% url 'iotd_submission_queue' %}">
+                            <i class="icon-upload"></i>
                             {% trans "Submission queue" %}
                         </a>
                     </li>
@@ -51,6 +62,7 @@
                 {% if request.user|is_iotd_reviewer %}
                     <li>
                         <a href="{% url 'iotd_review_queue' %}">
+                            <i class="icon-star"></i>
                             {% trans "Review queue" %}
                         </a>
                     </li>
@@ -59,6 +71,7 @@
                 {% if request.user|is_iotd_judge %}
                     <li>
                         <a href="{% url 'iotd_judgement_queue' %}">
+                            <i class="icon-legal"></i>
                             {% trans "Judgement queue" %}
                         </a>
                     </li>
