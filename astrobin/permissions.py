@@ -57,10 +57,20 @@ class CustomForumPermissions(DefaultPermissionHandler):
         if not user.is_staff and (topic.forum.hidden or topic.forum.category.hidden):
             return False  # only staff may see hidden forum / category
 
-        if topic.on_moderation:
-            return user.is_authenticated() and (user == topic.user or user in topic.forum.moderators.all())
+        may = True
+        if forum.group is not None:
+            if user.is_authenticated():
+                may = forum.group.public or \
+                    user == forum.grouop.owner or \
+                    user in forum.group.members.all()
+            else:
+                may = forum.group.public
 
-        return True
+        if topic.on_moderation:
+            if user.is_authenticated():
+                may = may and (user == topic.user or user in topic.forum.moderators.all())
+
+        return may
 
 
     def filter_topics(self, user, qs):
