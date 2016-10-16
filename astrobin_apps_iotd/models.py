@@ -37,7 +37,7 @@ class IotdSubmission(models.Model):
         return None
 
     def clean(self):
-        may, reason = may_submit_image(self.submitter, self.image)
+        may, reason = may_toggle_submission_image(self.submitter, self.image)
         if not may:
             raise ValidationError(reason)
 

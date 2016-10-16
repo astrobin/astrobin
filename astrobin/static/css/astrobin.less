@@ -4717,8 +4717,7 @@ table.search-table {
         z-index: 3;
     }
 
-    >.iotd-queue-item-vote-overlay,
-    >.iotd-queue-item-elected-overlay {
+    >.iotd-queue-item-selected-overlay {
         visibility: hidden;
         position: absolute;
         bottom: 0;
@@ -4735,24 +4734,18 @@ table.search-table {
             padding: 10px;
         }
     }
-    >.iotd-queue-item-elected-overlay {
-        background-color: rgba(255,255,0,0.4);
-    }
-    &.voted >.iotd-queue-item-vote-overlay,
-    &.elected >.iotd-queue-item-elected-overlay {
+    &.selected >.iotd-queue-item-selected-overlay {
         visibility: visible;
     }
 
-    >.iotd-queue-item-may-not-vote-overlay,
-    >.iotd-queue-item-may-not-elect-overlay {
+    >.iotd-queue-item-may-not-select-overlay {
         visibility: hidden;
         position: absolute;
         top: 0;
         left: 0;
         z-index: 1;
     }
-    &.may-not-vote >.iotd-queue-item-may-not-vote-overlay,
-    &.may-not-elect >.iotd-queue-item-may-not-elect-overlay {
+    &.may-not-select >.iotd-queue-item-may-not-select-overlay {
         visibility: visible;
     }
 
@@ -4770,11 +4763,9 @@ table.search-table {
             text-decoration: underline;
         }
     }
-
     .submissions-count .badge {
         background-color: #3092cf;
     }
-
     .votes-count .badge {
         background-color: #e2bd35;
     }

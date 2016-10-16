@@ -4461,8 +4461,7 @@ table.search-table td.search-table-date {
   visibility: visible;
   z-index: 3;
 }
-.iotd-queue-item > .iotd-queue-item-vote-overlay,
-.iotd-queue-item > .iotd-queue-item-elected-overlay {
+.iotd-queue-item > .iotd-queue-item-selected-overlay {
   visibility: hidden;
   position: absolute;
   bottom: 0;
@@ -4474,28 +4473,21 @@ table.search-table td.search-table-date {
   color: white;
   z-index: 2;
 }
-.iotd-queue-item > .iotd-queue-item-vote-overlay i,
-.iotd-queue-item > .iotd-queue-item-elected-overlay i {
+.iotd-queue-item > .iotd-queue-item-selected-overlay i {
   display: inline-block;
   padding: 10px;
 }
-.iotd-queue-item > .iotd-queue-item-elected-overlay {
-  background-color: rgba(255, 255, 0, 0.4);
-}
-.iotd-queue-item.voted > .iotd-queue-item-vote-overlay,
-.iotd-queue-item.elected > .iotd-queue-item-elected-overlay {
+.iotd-queue-item.selected > .iotd-queue-item-selected-overlay {
   visibility: visible;
 }
-.iotd-queue-item > .iotd-queue-item-may-not-vote-overlay,
-.iotd-queue-item > .iotd-queue-item-may-not-elect-overlay {
+.iotd-queue-item > .iotd-queue-item-may-not-select-overlay {
   visibility: hidden;
   position: absolute;
   top: 0;
   left: 0;
   z-index: 1;
 }
-.iotd-queue-item.may-not-vote > .iotd-queue-item-may-not-vote-overlay,
-.iotd-queue-item.may-not-elect > .iotd-queue-item-may-not-elect-overlay {
+.iotd-queue-item.may-not-select > .iotd-queue-item-may-not-select-overlay {
   visibility: visible;
 }
 .iotd-queue-item .submissions-count,

@@ -6,7 +6,7 @@ from django.conf import settings
 from django.utils.translation import ugettext_lazy as _
 
 
-def may_submit_image(user, image):
+def may_toggle_submission_image(user, image):
     if not user.groups.filter(name = 'iotd_submitters').exists():
         return False, _("You are not a member of the IOTD Submitters board.")
 

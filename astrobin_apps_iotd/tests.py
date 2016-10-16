@@ -46,7 +46,6 @@ class IotdTest(TestCase):
         self.client.logout()
         self.image = Image.objects.all()[0]
 
-
     def tearDown(self):
         self.submitters.delete()
         self.submitter_1.delete()
@@ -62,6 +61,9 @@ class IotdTest(TestCase):
 
         self.user.delete()
         self.image.delete()
+
+
+    # Models
 
     def test_submission_model(self):
         # User must be submitter
@@ -367,8 +369,65 @@ class IotdTest(TestCase):
         vote_1.delete()
         submission_1.delete()
 
-    def test_submission_create_view(self):
-        url = reverse_lazy('iotd_submission_create')
+
+    # Views
+
+    def test_submission_queue_view(self):
+        url = reverse_lazy('iotd_submission_queue')
+
+        # Login required
+        response = self.client.get(url)
+        self.assertEqual(response.status_code, 302)
+
+        # Only submitters allowed
+        self.client.login(username = 'user', password = 'password')
+        response = self.client.get(url)
+        self.assertEqual(response.status_code, 302)
+
+        self.client.login(username = 'submitter_1', password = 'password')
+        response = self.client.get(url)
+        self.assertEqual(response.status_code, 200)
+
+        # Check that images are rendered
+        response = self.client.get(url)
+        self.assertContains(response, 'data-id="%s"' % self.image.pk)
+
+        # Check for may-not-select class
+        self.image.user = self.submitter_1
+        self.image.save()
+        response = self.client.get(url)
+        bs = BS(response.content)
+        self.assertEqual(len(bs.select('.iotd-queue-item.may-not-select')), 1)
+        self.submitters.user_set.remove(self.reviewer_1)
+        self.image.user = self.user
+        self.image.save()
+
+        # Check that current or past IOTD is not rendered
+        submission = IotdSubmission.objects.create(
+            submitter = self.submitter_1,
+            image = self.image)
+        vote = IotdVote.objects.create(
+            reviewer = self.reviewer_1,
+            image = self.image)
+        iotd = Iotd.objects.create(
+            judge = self.judge_1,
+            image = self.image,
+            date = datetime.now().date())
+        response = self.client.get(url)
+        self.assertNotContains(response, 'data-id="%s"' % self.image.pk)
+
+        # Future IOTD should render tho
+        Iotd.objects.filter(image = self.image).update(
+            date = datetime.now().date() + timedelta(1))
+        response = self.client.get(url)
+        self.assertContains(response, 'data-id="%s"' % self.image.pk)
+
+        submission.delete()
+        vote.delete()
+        iotd.delete()
+
+    def test_toggle_submission_ajax_view(self):
+        url = reverse_lazy('iotd_toggle_submission_ajax', kwargs = {'pk': self.image.pk})
 
         # Login required
         response = self.client.post(url)
@@ -384,15 +443,26 @@ class IotdTest(TestCase):
         response = self.client.get(url)
         self.assertEqual(response.status_code, 405)
 
-        # Success
-        response = self.client.post(url, {
-            'submitter': self.submitter_1.pk,
-            'image': self.image.pk,
-        })
+        # Only AJAX allowed
+        response = self.client.post(url)
+        self.assertEqual(response.status_code, 403)
+
+        # All OK
+        response = self.client.post(url, HTTP_X_REQUESTED_WITH = 'XMLHttpRequest')
+        self.assertEqual(response.status_code, 200)
+        self.assertEqual(json.loads(response.content)['submission'], 1)
+        self.assertFalse('error' in json.loads(response.content))
         self.assertEqual(IotdSubmission.objects.count(), 1)
 
-    def test_submission_queue_view(self):
-        url = reverse_lazy('iotd_submission_queue')
+        # Toggle off
+        response = self.client.post(url, HTTP_X_REQUESTED_WITH = 'XMLHttpRequest')
+        self.assertEqual(response.status_code, 200)
+        self.assertFalse('submission' in json.loads(response.content))
+        self.assertFalse('error' in json.loads(response.content))
+        self.assertEqual(IotdSubmission.objects.count(), 0)
+
+    def test_review_queue_view(self):
+        url = reverse_lazy('iotd_review_queue')
 
         # Login required
         response = self.client.get(url)
@@ -422,19 +492,19 @@ class IotdTest(TestCase):
         self.assertEqual(bss('.iotd-queue-item .badge')[0].text, '2')
         submission_2.delete()
 
-        # Check for may-not-vote class
+        # Check for may-not-select class
         submission_1.submitter = self.reviewer_1
         self.submitters.user_set.add(self.reviewer_1)
         submission_1.save()
         response = self.client.get(url)
         bs = BS(response.content)
-        self.assertEqual(len(bs.select('.iotd-queue-item.may-not-vote')), 1)
+        self.assertEqual(len(bs.select('.iotd-queue-item.may-not-select')), 1)
         self.submitters.user_set.remove(self.reviewer_1)
         submission_1.submitter = self.submitter_1
         submission_1.save()
 
         # Check that current or past IOTD is not rendered
-        IotdVote.objects.create(
+        vote = IotdVote.objects.create(
             reviewer = self.reviewer_1,
             image = self.image)
         iotd = Iotd.objects.create(
@@ -451,6 +521,7 @@ class IotdTest(TestCase):
         self.assertContains(response, 'data-id="%s"' % self.image.pk)
 
         submission_1.delete()
+        vote.delete()
         iotd.delete()
 
     def test_toggle_vote_ajax_view(self):
@@ -491,8 +562,8 @@ class IotdTest(TestCase):
         self.assertFalse('error' in json.loads(response.content))
         self.assertEqual(IotdVote.objects.count(), 0)
 
-    def test_review_queue_view(self):
-        url = reverse_lazy('iotd_review_queue')
+    def test_judgement_queue_view(self):
+        url = reverse_lazy('iotd_judgement_queue')
 
         # Login required
         response = self.client.get(url)
@@ -523,13 +594,13 @@ class IotdTest(TestCase):
         self.assertEqual(bss('.iotd-queue-item .badge')[0].text, '2')
         vote_2.delete()
 
-        # Check for may-not-elect class
+        # Check for may-not-select class
         self.reviewers.user_set.add(self.judge_1)
         vote_1.reviewer = self.judge_1
         vote_1.save()
         response = self.client.get(url)
         bs = BS(response.content)
-        self.assertEqual(len(bs.select('.iotd-queue-item.may-not-elect')), 1)
+        self.assertEqual(len(bs.select('.iotd-queue-item.may-not-select')), 1)
         self.reviewers.user_set.remove(self.judge_1)
         vote_1.reviewer = self.reviewer_1
         vote_1.save()
@@ -552,8 +623,8 @@ class IotdTest(TestCase):
         vote_1.delete()
         iotd.delete()
 
-    def test_toggle_ajax_view(self):
-        url = reverse_lazy('iotd_toggle_ajax', kwargs = {'pk': self.image.pk})
+    def test_toggle_judgement_ajax_view(self):
+        url = reverse_lazy('iotd_toggle_judgement_ajax', kwargs = {'pk': self.image.pk})
 
         # Login required
         response = self.client.get(url)
@@ -638,19 +709,19 @@ class IotdTest(TestCase):
         iotd = Iotd.objects.get(pk = json.loads(response.content)['iotd'])
         self.assertEqual(iotd.date, today)
 
-        url = reverse_lazy('iotd_toggle_ajax', kwargs = {'pk': image2.pk})
+        url = reverse_lazy('iotd_toggle_judgement_ajax', kwargs = {'pk': image2.pk})
         response = self.client.post(url, HTTP_X_REQUESTED_WITH = 'XMLHttpRequest')
         iotd2 = Iotd.objects.get(pk = json.loads(response.content)['iotd'])
         self.assertEqual(iotd2.date, today + timedelta(1))
 
-        url = reverse_lazy('iotd_toggle_ajax', kwargs = {'pk': image3.pk})
+        url = reverse_lazy('iotd_toggle_judgement_ajax', kwargs = {'pk': image3.pk})
         response = self.client.post(url, HTTP_X_REQUESTED_WITH = 'XMLHttpRequest')
         iotd3 = Iotd.objects.get(pk = json.loads(response.content)['iotd'])
         self.assertEqual(iotd3.date, today + timedelta(2))
 
         # Fills a hole
         iotd2.delete()
-        url = reverse_lazy('iotd_toggle_ajax', kwargs = {'pk': image2.pk})
+        url = reverse_lazy('iotd_toggle_judgement_ajax', kwargs = {'pk': image2.pk})
         response = self.client.post(url, HTTP_X_REQUESTED_WITH = 'XMLHttpRequest')
         iotd2 = Iotd.objects.get(pk = json.loads(response.content)['iotd'])
         self.assertEqual(iotd2.date, today + timedelta(1))
@@ -660,7 +731,7 @@ class IotdTest(TestCase):
         vote4 = IotdVote.objects.create(reviewer = self.reviewer_1, image = image4)
         # Test MAX_FUTURE_DAYS cutoff
         with self.settings(IOTD_JUDGMENT_MAX_FUTURE_DAYS = 3):
-            url = reverse_lazy('iotd_toggle_ajax', kwargs = {'pk': image4.pk})
+            url = reverse_lazy('iotd_toggle_judgement_ajax', kwargs = {'pk': image4.pk})
             response = self.client.post(url, HTTP_X_REQUESTED_WITH = 'XMLHttpRequest')
             self.assertFalse('iotd' in json.loads(response.content))
             self.assertTrue("are already filled" in json.loads(response.content)['error'])
@@ -668,7 +739,7 @@ class IotdTest(TestCase):
 
         # Test max daily
         with self.settings(IOTD_JUDGEMENT_MAX_PER_DAY = 3):
-            url = reverse_lazy('iotd_toggle_ajax', kwargs = {'pk': image4.pk})
+            url = reverse_lazy('iotd_toggle_judgement_ajax', kwargs = {'pk': image4.pk})
             response = self.client.post(url, HTTP_X_REQUESTED_WITH = 'XMLHttpRequest')
             self.assertFalse('iotd' in json.loads(response.content))
             self.assertTrue("already elected" in json.loads(response.content)['error'])

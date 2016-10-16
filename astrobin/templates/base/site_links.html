@@ -40,7 +40,7 @@
                     <li class="nav-header">{% trans "Image of the day" %}</li>
                 {% endif %}
 
-                {% if request.user|is_iotd_reviewer %}
+                {% if request.user|is_iotd_submitter %}
                     <li>
                         <a href="{% url 'iotd_submission_queue' %}">
                             {% trans "Submission queue" %}
@@ -48,10 +48,18 @@
                     </li>
                 {% endif %}
 
-                {% if request.user|is_iotd_judge %}
+                {% if request.user|is_iotd_reviewer %}
                     <li>
                         <a href="{% url 'iotd_review_queue' %}">
                             {% trans "Review queue" %}
+                        </a>
+                    </li>
+                {% endif %}
+
+                {% if request.user|is_iotd_judge %}
+                    <li>
+                        <a href="{% url 'iotd_judgement_queue' %}">
+                            {% trans "Judgement queue" %}
                         </a>
                     </li>
                 {% endif %}

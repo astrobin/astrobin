@@ -33,55 +33,55 @@ from astrobin_apps_iotd.models import *
 from astrobin_apps_iotd.permissions import *
 
 
-class RestrictToSubmissionSubmitterOrSuperiorMixin(View):
-    def dispatch(self, request, *args, **kwargs):
-        submission = get_object_or_404(IotdSubmission, pk = kwargs['pk'])
-        if not (
-                request.user == submission.submitter or
-                request.user.groups.filter(name = 'iotd_reviewers').exists() or
-                request.user.groups.filter(name = 'iotd_judges').exists()):
-            return HttpResponseForbidden()
-        return super(RestrictToSubmissionSubmitterOrSuperiorMixin, self).dispatch(request, *args, **kwargs)
+class IotdSubmissionQueueView(
+        LoginRequiredMixin, GroupRequiredMixin, ListView):
+    group_required = ['iotd_submitters']
+    model = Image
+    template_name = 'astrobin_apps_iotd/iotd_submission_queue.html'
+
+    def get_queryset(self):
+        weeks = settings.IOTD_SUBMISSION_WINDOW_WEEKS
+        cutoff = datetime.now() - timedelta(weeks = weeks)
+        return list(set([
+            x
+            for x in self.model.objects.filter(uploaded__gte = cutoff)
+            if not Iotd.objects.filter(
+                image = x,
+                date__lte = datetime.now().date()).exists()]))
 
 
-class IotdSubmissionCreateView(
-        LoginRequiredMixin, GroupRequiredMixin, CreateView):
+class IotdToggleSubmissionAjaxView(
+        JSONResponseMixin, LoginRequiredMixin, GroupRequiredMixin, View):
     group_required = 'iotd_submitters'
-    form_class = IotdSubmissionCreateForm
     http_method_names = ['post']
-    template_name = 'astrobin_apps_iotd/iotdsubmission_create.html'
 
     def post(self, request, *args, **kwargs):
-        image = Image.objects.get(pk = request.POST.get('image'))
-        may, reason = may_submit_image(request.user, image)
-
-        if may:
+        if request.is_ajax():
+            image = Image.objects.get(pk = kwargs.get('pk'))
             try:
-                submission = IotdSubmission.objects.create(
+                submission, created = IotdSubmission.objects.get_or_create(
                     submitter = request.user,
                     image = image)
-                messages.success(self.request, _("Image successfully submitted to the IOTD Submissions Queue"))
+                if not created:
+                    submission.delete()
+                    return self.render_json_response([])
+                else:
+                    return self.render_json_response({
+                        'submission': submission.pk,
+                    })
             except ValidationError as e:
-                messages.error(self.request, ';'.join(e.messages))
-        else:
-            messages.error(request, reason)
+                return self.render_json_response({
+                    'error': ';'.join(e.messages),
+                })
 
-        return redirect(reverse_lazy('image_detail', args = (image.pk,)))
-
-
-class IotdSubmissionDetailView(
-        LoginRequiredMixin, GroupRequiredMixin, DetailView,
-        RestrictToSubmissionSubmitterOrSuperiorMixin):
-    model = IotdSubmission
-    group_required = [
-        'iotd_submitters', 'iotd_reviewers', 'iotd_judges']
+        return HttpResponseForbidden()
 
 
-class IotdSubmissionQueueView(
+class IotdReviewQueueView(
         LoginRequiredMixin, GroupRequiredMixin, ListView):
     group_required = ['iotd_reviewers']
     model = IotdSubmission
-    template_name = 'astrobin_apps_iotd/iotdsubmission_queue.html'
+    template_name = 'astrobin_apps_iotd/iotd_review_queue.html'
 
     def get_queryset(self):
         weeks = settings.IOTD_REVIEW_WINDOW_WEEKS
@@ -121,11 +121,11 @@ class IotdToggleVoteAjaxView(
         return HttpResponseForbidden()
 
 
-class IotdReviewQueueView(
+class IotdJudgementQueueView(
         LoginRequiredMixin, GroupRequiredMixin, ListView):
     group_required = ['iotd_judges']
     model = IotdVote
-    template_name = 'astrobin_apps_iotd/iotdreview_queue.html'
+    template_name = 'astrobin_apps_iotd/iotd_judgement_queue.html'
 
     def get_queryset(self):
         weeks = settings.IOTD_JUDGEMENT_WINDOW_WEEKS
@@ -138,7 +138,7 @@ class IotdReviewQueueView(
                 date__lte = datetime.now().date()).exists()]))
 
 
-class IotdToggleAjaxView(
+class IotdToggleJudgementAjaxView(
         JSONResponseMixin, LoginRequiredMixin, GroupRequiredMixin, View):
     group_required = 'iotd_judges'
     http_method_names = ['post']

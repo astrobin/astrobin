@@ -14,20 +14,7 @@ from astrobin_apps_iotd.permissions import *
 register = Library()
 
 
-@register.inclusion_tag(
-    'astrobin_apps_iotd/inclusion_tags/iotd_submit.html',
-    takes_context = True)
-def iotd_submit(context, image):
-    request = context['request']
-    enabled, reason = may_submit_image(request.user, image)
-
-    return {
-        'request': request,
-        'image': image,
-        'iotd_submit_enabled': enabled,
-        'iotd_submit_disabled_reason': reason,
-    }
-
+# Roles
 
 @register.filter
 def is_iotd_submitter(user):
@@ -42,6 +29,20 @@ def is_iotd_reviewer(user):
 @register.filter
 def is_iotd_judge(user):
     return user.groups.filter(name = 'iotd_judges').exists()
+
+
+# Permissions
+
+@register.filter
+def may_toggle_submission(user, image):
+    may, reason = may_toggle_submission_image(user, image)
+    return may
+
+
+@register.filter
+def may_not_toggle_submission_reason(user, image):
+    may, reason = may_toggle_submission_image(user, image)
+    return reason
 
 
 @register.filter
@@ -80,6 +81,13 @@ def may_not_unelect_reason(user, image):
     return reason
 
 
+# Statuses
+
+@register.filter
+def has_submitted(user, image):
+    return IotdSubmission.objects.filter(image = image, submitter = user).exists()
+
+
 @register.filter
 def has_voted(user, image):
     return IotdVote.objects.filter(image = image, reviewer = user).exists()
@@ -104,6 +112,8 @@ def votes_count(image):
 def is_iotd(image):
     return Iotd.objects.filter(image = image).exists()
 
+
+# Getters
 
 @register.filter
 def iotd_date_for_image(image):

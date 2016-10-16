@@ -5,19 +5,19 @@
 {% load astrobin_apps_iotd_tags %}
 {% load astrobin_apps_images_tags %}
 
-{% block title %}{% trans "IOTD Submission Queue" %}{% endblock %}
+{% block title %}{% trans "IOTD Review Queue" %}{% endblock %}
 
 {% block content %}
-    <h1>{% trans "IOTD Submission Queue" %}</h1>
+    <h1>{% trans "IOTD Review Queue" %}</h1>
     <div class="subtitle">
-        {% blocktrans %}Please select the images that you want to promote for final review by clicking on them.{% endblocktrans %}
+        {% blocktrans %}Please select the images that you want to promote for final judgement by clicking on them.{% endblocktrans %}
     </div>
 
     <div class="iotd-promotion-queue">
         {% for image in object_list %}
             <div class="iotd-queue-item
-                       {% if request.user|may_toggle_vote:image %} may-vote{% else %}may-not-vote{% endif %}
-                       {% if request.user|has_voted:image %} voted{% endif %}">
+                       {% if request.user|may_toggle_vote:image %} may-select{% else %}may-not-select{% endif %}
+                       {% if request.user|has_voted:image %} selected{% endif %}">
                 {% with count=image|submissions_count %}
                     <div class="submissions-count">
                         <a class="badge"
@@ -29,7 +29,7 @@
                     </div>
                 {% endwith %}
 
-                <a href="#" class="vote" data-toggle-url="{% url 'iotd_toggle_vote_ajax' image.pk %}">
+                <a href="#" class="select" data-toggle-url="{% url 'iotd_toggle_vote_ajax' image.pk %}">
                     {% astrobin_image image 'story' link=False tooltip=False %}
                 </a>
 
@@ -43,13 +43,13 @@
                     </a>
                 </div>
 
-                <div class="iotd-queue-item-vote-overlay">
+                <div class="iotd-queue-item-selected-overlay">
                     <i class="icon-ok"></i>
                 </div>
 
-                <div class="iotd-queue-item-may-not-vote-overlay">
+                <div class="iotd-queue-item-may-not-select-overlay">
                     <img
-                        src="{% get_static_prefix %}astrobin_apps_iotd/images/iotd_may_not_vote_overlay.png"
+                        src="{% get_static_prefix %}astrobin_apps_iotd/images/iotd_may_not_select_overlay.png"
                         rel="tooltip"
                         {% if not request.user|may_toggle_vote:image %}
                             title="{{request.user|may_not_toggle_vote_reason:image}}"
@@ -113,21 +113,21 @@
                     '<img src="{% get_static_prefix %}images/ajax-loader.gif" alt="{% trans "Loading" %}" />');
             });
 
-            $('.iotd-queue-item a.vote').click(function(e) {
+            $('.iotd-queue-item a.select').click(function(e) {
                 var $item = $(this).closest('.iotd-queue-item'),
                     url = $(this).data('toggle-url');
 
-                if (!$item.hasClass('may-not-vote')) {
+                if (!$item.hasClass('may-not-select')) {
                     $.ajax({
                         url: url,
                         type: 'post',
                         success: function(response) {
                             if ('vote' in response) {
-                                if (!$item.hasClass('voted')) {
-                                    $item.addClass('voted');
+                                if (!$item.hasClass('selected')) {
+                                    $item.addClass('selected');
                                 }
                             } else {
-                                $item.removeClass('voted');
+                                $item.removeClass('selected');
                             }
 
                             if ('error' in response) {
