@@ -468,6 +468,12 @@ def group_members_changed(sender, instance, **kwargs):
         images = Image.all_objects.filter(user__pk__in = kwargs['pk_set'])
         for image in images:
             instance.images.remove(image)
+
+        if instance.forum and not instance.public:
+            topics = Topic.objects.filter(forum = instance.forum)
+            for topic in topics:
+                topic.subscribers.remove(*User.objects.filter(pk__in = kwargs['pk_set']))
+
     elif action == 'post_clear':
         instance.images.clear()
 m2m_changed.connect(group_members_changed, sender = Group.members.through)

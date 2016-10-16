@@ -6,7 +6,7 @@ from django.test import TestCase
 # Third party
 from beautifulsoupselect import BeautifulSoupSelect as BSS
 import simplejson as json
-from pybb.models import Forum
+from pybb.models import Forum, Topic
 
 # This app
 from astrobin_apps_groups.models import Group
@@ -422,6 +422,24 @@ class GroupsTest(TestCase):
         # Second attempt results in error 403
         response = self.client.post(url, follow = True)
         self.assertEqual(response.status_code, 403)
+
+        # All forum topics should be unsubscribed, but only if the group is private
+        self.group.members.add(self.user1)
+        topic = Topic.objects.create(forum = self.group.forum, name = 'Test', user = self.user1)
+        topic.subscribers.add(self.user1)
+        response = self.client.post(url, follow = True)
+        self.assertTrue(self.user1 in topic.subscribers.all())
+        topic.delete()
+
+        self.group.public = False; self.group.save()
+        self.group.members.add(self.user1)
+        topic = Topic.objects.create(forum = self.group.forum, name = 'Test', user = self.user1)
+        topic.subscribers.add(self.user1)
+        response = self.client.post(url, follow = True)
+        self.assertFalse(self.user1 in topic.subscribers.all())
+        topic.delete()
+        self.group.public = True; self.group.save()
+
 
         image.delete()
         self.client.logout()
