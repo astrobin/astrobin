@@ -79,7 +79,7 @@ def image_post_save(sender, instance, created, **kwargs):
             push_notification(followers, 'new_image',
                 {
                     'object_url': settings.ASTROBIN_BASE_URL + instance.get_absolute_url(),
-                    'originator': instance.user.userprofile,
+                    'originator': instance.user.userprofile.get_display_name(),
                 })
 
             if instance.moderator_decision == 1:
@@ -116,7 +116,7 @@ def imagerevision_post_save(sender, instance, created, **kwargs):
         push_notification(followers, 'new_image_revision',
             {
                 'object_url': settings.ASTROBIN_BASE_URL + instance.get_absolute_url(),
-                'originator': instance.user.userprofile,
+                'originator': instance.user.userprofile.get_display_name(),
             })
 
         add_story(instance.image.user,
@@ -142,7 +142,7 @@ def nested_comment_post_save(sender, instance, created, **kwargs):
                     [obj.user], 'new_comment',
                     {
                         'url': url,
-                        'user': instance.author,
+                        'user': instance.author.userprofile.get_display_name(),
                     }
                 )
 
@@ -151,7 +151,7 @@ def nested_comment_post_save(sender, instance, created, **kwargs):
                     [instance.parent.author], 'new_comment_reply',
                     {
                         'url': url,
-                        'user': instance.author,
+                        'user': instance.author.userprofile.get_display_name(),
                     }
                 )
 
@@ -184,7 +184,7 @@ def nested_comment_post_save(sender, instance, created, **kwargs):
                 recipients, notification,
                 {
                     'url': url,
-                    'user': instance.author,
+                    'user': instance.author.userprofile.get_display_name(),
                 })
 
             add_story(instance.author,
@@ -217,7 +217,7 @@ def toggleproperty_post_save(sender, instance, created, **kwargs):
                     {
                         'url': settings.ASTROBIN_BASE_URL + instance.content_object.get_absolute_url(),
                         'title': instance.content_object.title,
-                        'user': instance.user.userprofile,
+                        'user': instance.user.userprofile.get_display_name(),
                     })
 
         elif instance.property_type == "follow":
@@ -225,7 +225,7 @@ def toggleproperty_post_save(sender, instance, created, **kwargs):
             if instance.content_type == user_ct:
                 followed_user = user_ct.get_object_for_this_type(pk = instance.object_id)
                 push_notification([followed_user], 'new_follower',
-                                  {'object': instance.user.userprofile,
+                                  {'object': instance.user.userprofile.get_display_name(),
                                    'object_url': instance.user.get_absolute_url()})
 post_save.connect(toggleproperty_post_save, sender = ToggleProperty)
 
@@ -254,7 +254,7 @@ def rawdata_publicdatapool_data_added(sender, instance, action, reverse, model, 
             users,
             'rawdata_posted_to_pool',
             {
-                'user_name': submitter.username,
+                'user_name': submitter.userprofile.get_display_name(),
                 'user_url': reverse_url('user_page', kwargs = {'username': submitter.username}),
                 'pool_name': instance.name,
                 'pool_url': reverse_url('rawdata.publicdatapool_detail', kwargs = {'pk': instance.pk}),
@@ -279,7 +279,7 @@ def rawdata_publicdatapool_image_added(sender, instance, action, reverse, model,
             users,
             'rawdata_posted_image_to_public_pool',
             {
-                'user_name': submitter.username,
+                'user_name': submitter.userprofile.get_display_name(),
                 'user_url': reverse_url('user_page', kwargs = {'username': submitter.username}),
                 'pool_name': instance.name,
                 'pool_url': reverse_url('rawdata.publicdatapool_detail', kwargs = {'pk': instance.pk}),
@@ -303,7 +303,7 @@ def rawdata_privatesharedfolder_data_added(sender, instance, action, reverse, mo
             users,
             'rawdata_posted_to_private_folder',
             {
-                'user_name': submitter.username,
+                'user_name': submitter.userprofile.get_display_name(),
                 'user_url': reverse_url('user_page', kwargs = {'username': submitter.username}),
                 'folder_name': instance.name,
                 'folder_url': reverse_url('rawdata.privatesharedfolder_detail', kwargs = {'pk': instance.pk}),
@@ -322,7 +322,7 @@ def rawdata_privatesharedfolder_image_added(sender, instance, action, reverse, m
             users,
             'rawdata_posted_image_to_private_folder',
             {
-                'user_name': submitter.username,
+                'user_name': submitter.userprofile.get_display_name(),
                 'user_url': reverse_url('user_page', kwargs = {'username': submitter.username}),
                 'folder_name': instance.name,
                 'folder_url': reverse_url('rawdata.privatesharedfolder_detail', kwargs = {'pk': instance.pk}),
@@ -510,7 +510,7 @@ def forum_topic_pre_save(sender, instance, **kwargs):
                 [x for x in group.members.all() if x != instance.user],
                 'new_topic_in_group',
                 {
-                    'user': instance.user,
+                    'user': instance.user.userprofile.get_display_name(),
                     'url': settings.ASTROBIN_BASE_URL + instance.get_absolute_url(),
                     'group_url': reverse_url('group_detail', kwargs = {'pk': group.pk}),
                     'group_name': group.name,
@@ -534,7 +534,7 @@ def forum_topic_post_save(sender, instance, created, **kwargs):
             recipients,
             'new_topic_in_group',
             {
-                'user': instance.user,
+                'user': instance.user.userprofile.get_display_name(),
                 'url': settings.ASTROBIN_BASE_URL + instance.get_absolute_url(),
                 'group_url': settings.ASTROBIN_BASE_URL + reverse_url('group_detail', kwargs = {'pk': group.pk}),
                 'group_name': group.name,

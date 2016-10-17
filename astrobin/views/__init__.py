@@ -2822,7 +2822,7 @@ def gear_review_save(request):
             recipients, notification,
             {
                 'url': url,
-                'user': review.user,
+                'user': review.user.userprofile.get_display_name(),
             }
         )
 

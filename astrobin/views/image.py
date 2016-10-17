@@ -841,7 +841,7 @@ class ImagePromoteView(LoginRequiredMixin, UpdateView):
             ]
             push_notification(followers, 'new_image',
                 {
-                    'originator': request.user.userprofile,
+                    'originator': request.user.userprofile.get_display_name(),
                     'object_url': settings.ASTROBIN_BASE_URL + image.get_absolute_url()
                 })
 

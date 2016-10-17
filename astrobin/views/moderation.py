@@ -77,7 +77,7 @@ class ImageModerationMarkAsHamView(
                 push_notification(followers, 'new_image',
                     {
                         'object_url': settings.ASTROBIN_BASE_URL + image.get_absolute_url(),
-                        'originator': image.user.userprofile,
+                        'originator': image.user.userprofile.get_display_name(),
                     })
 
                 add_story(image.user, verb = 'VERB_UPLOADED_IMAGE', action_object = image)
