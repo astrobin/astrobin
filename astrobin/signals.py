@@ -1,5 +1,6 @@
 # Python
 import datetime
+from itertools import chain
 
 # Django
 from django.conf import settings
@@ -503,20 +504,38 @@ def group_members_changed(sender, instance, **kwargs):
 
         # Sync IOTD AstroBin groups with django groups
         if instance.name in group_sync_map.keys():
-            for django_group in django_groups:
-                django_group.user_set.remove(*list(users))
-            if iotd_staff_group:
-                for user in users:
+            all_members = []
+            all_members_chain = chain([
+                x.members.all()
+                for x in Group.objects\
+                    .filter(name__in = group_sync_map.keys())\
+                    .exclude(name = instance.name)
+            ])
+            for chain_item in all_members_chain:
+                all_members += chain_item
+            for user in [x for x in users if x not in all_members]:
+                for django_group in django_groups:
+                    django_group.user_set.remove(user)
+                if iotd_staff_group:
                     iotd_staff_group.members.remove(user)
 
     elif action == 'pre_clear':
         # Sync IOTD AstroBin groups with django groups
         users = instance.members.all()
         if instance.name in group_sync_map.keys():
-            for django_group in django_groups:
-                django_group.user_set.remove(*list(users))
-            if iotd_staff_group:
-                for user in users:
+            all_members = []
+            all_members_chain = chain([
+                x.members.all()
+                for x in Group.objects\
+                    .filter(name__in = group_sync_map.keys())\
+                    .exclude(name = instance.name)
+            ])
+            for chain_item in all_members_chain:
+                all_members += chain_item
+            for user in [x for x in users if x not in all_members]:
+                for django_group in django_groups:
+                    django_group.user_set.remove(user)
+                if iotd_staff_group:
                     iotd_staff_group.members.remove(user)
 
     elif action == 'post_clear':

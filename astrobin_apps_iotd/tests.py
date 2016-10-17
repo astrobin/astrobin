@@ -5,6 +5,7 @@ from datetime import datetime, timedelta
 from django.conf import settings
 from django.contrib.auth.models import User, Group
 from django.core.exceptions import ValidationError
+from django.core.management import call_command
 from django.core.urlresolvers import reverse_lazy
 from django.test import TestCase
 
@@ -765,7 +766,7 @@ class IotdTest(TestCase):
         iotd2.delete()
         iotd3.delete()
 
-    def test_signals(self):
+    def test_group_sync(self):
         group_creator = User.objects.create_user('group_creator', 'group_creator@test.com', 'password')
 
         staff_group = AstroBinGroup.objects.create(name = 'IOTD Staff', creator = group_creator, owner = group_creator, category = 101)
@@ -792,43 +793,120 @@ class IotdTest(TestCase):
         self.assertTrue(self.user in submitters_group_dj.user_set.all())
         self.assertTrue(self.user in staff_group_dj.user_set.all())
         self.assertTrue(self.user in content_moderators_group_dj.user_set.all())
+        self.assertTrue(self.user in staff_group.members.all())
         submitters_group.members.remove(self.user)
         self.assertFalse(self.user in submitters_group_dj.user_set.all())
         self.assertFalse(self.user in staff_group_dj.user_set.all())
         self.assertFalse(self.user in content_moderators_group_dj.user_set.all())
+        self.assertFalse(self.user in staff_group.members.all())
         submitters_group.members.add(self.user)
         submitters_group.members.clear()
         self.assertFalse(self.user in submitters_group_dj.user_set.all())
         self.assertFalse(self.user in staff_group_dj.user_set.all())
         self.assertFalse(self.user in content_moderators_group_dj.user_set.all())
+        self.assertFalse(self.user in staff_group.members.all())
 
         reviewers_group.members.add(self.user)
         self.assertTrue(self.user in reviewers_group_dj.user_set.all())
         self.assertTrue(self.user in staff_group_dj.user_set.all())
         self.assertTrue(self.user in content_moderators_group_dj.user_set.all())
+        self.assertTrue(self.user in staff_group.members.all())
         reviewers_group.members.remove(self.user)
         self.assertFalse(self.user in reviewers_group_dj.user_set.all())
         self.assertFalse(self.user in staff_group_dj.user_set.all())
         self.assertFalse(self.user in content_moderators_group_dj.user_set.all())
+        self.assertFalse(self.user in staff_group.members.all())
         reviewers_group.members.add(self.user)
         reviewers_group.members.clear()
         self.assertFalse(self.user in reviewers_group_dj.user_set.all())
         self.assertFalse(self.user in staff_group_dj.user_set.all())
         self.assertFalse(self.user in content_moderators_group_dj.user_set.all())
+        self.assertFalse(self.user in staff_group.members.all())
 
         judges_group.members.add(self.user)
         self.assertTrue(self.user in judges_group_dj.user_set.all())
         self.assertTrue(self.user in staff_group_dj.user_set.all())
         self.assertTrue(self.user in content_moderators_group_dj.user_set.all())
+        self.assertTrue(self.user in staff_group.members.all())
         judges_group.members.remove(self.user)
         self.assertFalse(self.user in judges_group_dj.user_set.all())
         self.assertFalse(self.user in staff_group_dj.user_set.all())
         self.assertFalse(self.user in content_moderators_group_dj.user_set.all())
+        self.assertFalse(self.user in staff_group.members.all())
         judges_group.members.add(self.user)
         judges_group.members.clear()
         self.assertFalse(self.user in judges_group_dj.user_set.all())
         self.assertFalse(self.user in staff_group_dj.user_set.all())
         self.assertFalse(self.user in content_moderators_group_dj.user_set.all())
+        self.assertFalse(self.user in staff_group.members.all())
+
+        # Add to two groups and removing from one, user should still be in the
+        # collective groups
+        submitters_group.members.add(self.user)
+        reviewers_group.members.add(self.user)
+        reviewers_group.members.remove(self.user)
+        self.assertTrue(self.user in staff_group_dj.user_set.all())
+        self.assertTrue(self.user in content_moderators_group_dj.user_set.all())
+        self.assertTrue(self.user in staff_group.members.all())
+
+        # Same using clear
+        submitters_group.members.add(self.user)
+        reviewers_group.members.add(self.user)
+        reviewers_group.members.clear()
+        self.assertTrue(self.user in staff_group_dj.user_set.all())
+        self.assertTrue(self.user in content_moderators_group_dj.user_set.all())
+        self.assertTrue(self.user in staff_group.members.all())
+
+        # Test management command too
+
+        submitters_group.members.add(self.user)
+        submitters_group_dj.user_set.remove(self.user)
+        staff_group_dj.user_set.remove(self.user)
+        content_moderators_group_dj.user_set.remove(self.user)
+        call_command('sync_iotd_groups')
+        self.assertTrue(self.user in submitters_group_dj.user_set.all())
+        self.assertTrue(self.user in staff_group_dj.user_set.all())
+        self.assertTrue(self.user in content_moderators_group_dj.user_set.all())
+
+        submitters_group.members.remove(self.user)
+        submitters_group_dj.user_set.add(self.user)
+        call_command('sync_iotd_groups')
+        self.assertFalse(self.user in submitters_group_dj.user_set.all())
+
+        reviewers_group.members.add(self.user)
+        reviewers_group_dj.user_set.remove(self.user)
+        staff_group_dj.user_set.remove(self.user)
+        content_moderators_group_dj.user_set.remove(self.user)
+        call_command('sync_iotd_groups')
+        self.assertTrue(self.user in reviewers_group_dj.user_set.all())
+
+        reviewers_group.members.remove(self.user)
+        reviewers_group_dj.user_set.add(self.user)
+        call_command('sync_iotd_groups')
+        self.assertFalse(self.user in reviewers_group_dj.user_set.all())
+
+        judges_group.members.add(self.user)
+        judges_group_dj.user_set.remove(self.user)
+        staff_group_dj.user_set.remove(self.user)
+        content_moderators_group_dj.user_set.remove(self.user)
+        call_command('sync_iotd_groups')
+        self.assertTrue(self.user in judges_group_dj.user_set.all())
+        self.assertTrue(self.user in staff_group_dj.user_set.all())
+        self.assertTrue(self.user in content_moderators_group_dj.user_set.all())
+
+        judges_group.members.remove(self.user)
+        judges_group_dj.user_set.add(self.user)
+        call_command('sync_iotd_groups')
+        self.assertFalse(self.user in judges_group_dj.user_set.all())
+
+        # Test non removal from collective groups when a user is in another IOTD group
+        submitters_group.members.add(self.user)
+        reviewers_group.members.add(self.user)
+        reviewers_group.members.remove(self.user)
+        reviewers_group_dj.user_set.remove(self.user)
+        call_command('sync_iotd_groups')
+        self.assertTrue(self.user in staff_group_dj.user_set.all())
+        self.assertTrue(self.user in content_moderators_group_dj.user_set.all())
 
         # Clean up
         group_creator.delete()
