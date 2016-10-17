@@ -84,6 +84,7 @@ def common_variables(request):
         'PREMIUM_MAX_IMAGES_FREE': settings.PREMIUM_MAX_IMAGES_FREE,
         'PREMIUM_MAX_IMAGES_LITE': settings.PREMIUM_MAX_IMAGES_LITE,
         'PAYPAL_TEST': settings.PAYPAL_TEST,
+        'IOTD_SHOW_CHOOSING_JUDGE': settings.IOTD_SHOW_CHOOSING_JUDGE,
     }
 
     return d
