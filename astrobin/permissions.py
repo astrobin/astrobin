@@ -62,7 +62,7 @@ class CustomForumPermissions(DefaultPermissionHandler):
             if topic.forum.group is not None:
                 if user.is_authenticated():
                     may = topic.forum.group.public or \
-                        user == topic.forum.grouop.owner or \
+                        user == topic.forum.group.owner or \
                         user in topic.forum.group.members.all()
                 else:
                     may = topic.forum.group.public
