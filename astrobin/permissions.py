@@ -108,5 +108,5 @@ class CustomForumPermissions(DefaultPermissionHandler):
 
 
     def may_create_post(self, user, topic):
-        may = super(CustomForumPermissions, self).may_create_topic(user, topic)
+        may = super(CustomForumPermissions, self).may_create_post(user, topic)
         return may and self.may_create_topic(user, topic.forum)
