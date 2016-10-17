@@ -117,6 +117,16 @@ class IotdTest(TestCase):
         self.image.user = self.user
         self.image.save()
 
+        # Cannot submit an image authored by a judge
+        self.image.user = self.judge_1
+        self.image.save()
+        with self.assertRaisesRegexp(ValidationError, "a judge's image"):
+            IotdSubmission.objects.create(
+                submitter = self.submitter_1,
+                image = self.image)
+        self.image.user = self.user
+        self.image.save()
+
         # All OK
         submission = IotdSubmission.objects.create(
             submitter = self.submitter_1,
@@ -210,6 +220,16 @@ class IotdTest(TestCase):
             IotdVote.objects.create(
                 reviewer = self.reviewer_1,
                 image = submission_1.image)
+        self.image.user = self.user
+        self.image.save()
+
+        # Cannot vote for an image authored by a judge
+        self.image.user = self.judge_1
+        self.image.save()
+        with self.assertRaisesRegexp(ValidationError, "a judge's image"):
+            IotdVote.objects.create(
+                reviewer = self.reviewer_1,
+                image = self.image)
         self.image.user = self.user
         self.image.save()
 
@@ -329,6 +349,16 @@ class IotdTest(TestCase):
         self.image.user = self.user
         self.image.save()
 
+        # Cannot elect an image authored by a judge
+        self.image.user = self.judge_2
+        self.image.save()
+        with self.assertRaisesRegexp(ValidationError, "a judge's image"):
+            Iotd.objects.create(
+                judge = self.judge_1,
+                image = self.image)
+        self.image.user = self.user
+        self.image.save()
+
         # Cannot elect own submission
         self.submitters.user_set.add(self.judge_1)
         submission_1.submitter = self.judge_1
@@ -423,6 +453,14 @@ class IotdTest(TestCase):
             date = datetime.now().date() + timedelta(1))
         response = self.client.get(url)
         self.assertContains(response, 'data-id="%s"' % self.image.pk)
+
+        # Images by judges are now shown here
+        self.image.user = self.judge_1
+        self.image.save()
+        response = self.client.get(url)
+        self.assertNotContains(response, 'data-id="%s"' % self.image.pk)
+        self.image.user = self.user
+        self.image.save()
 
         submission.delete()
         vote.delete()
@@ -522,6 +560,14 @@ class IotdTest(TestCase):
         response = self.client.get(url)
         self.assertContains(response, 'data-id="%s"' % self.image.pk)
 
+        # Images by judges are now shown here
+        self.image.user = self.judge_1
+        self.image.save()
+        response = self.client.get(url)
+        self.assertNotContains(response, 'data-id="%s"' % self.image.pk)
+        self.image.user = self.user
+        self.image.save()
+
         submission_1.delete()
         vote.delete()
         iotd.delete()
@@ -620,6 +666,14 @@ class IotdTest(TestCase):
             date = datetime.now().date() + timedelta(1))
         response = self.client.get(url)
         self.assertContains(response, 'data-id="%s"' % self.image.pk)
+
+        # Images by judges are now shown here
+        self.image.user = self.judge_1
+        self.image.save()
+        response = self.client.get(url)
+        self.assertNotContains(response, 'data-id="%s"' % self.image.pk)
+        self.image.user = self.user
+        self.image.save()
 
         submission_1.delete()
         vote_1.delete()

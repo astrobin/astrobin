@@ -3,6 +3,7 @@ from datetime import datetime, timedelta
 
 # Django
 from django.conf import settings
+from django.contrib.auth.models import Group
 from django.utils.translation import ugettext_lazy as _
 
 
@@ -18,6 +19,9 @@ def may_toggle_submission_image(user, image):
 
     if image.user.userprofile.exclude_from_competitions:
         return False, _("This user has chosen to be excluded from competitions.")
+
+    if image.user in Group.objects.get(name = 'iotd_judges').user_set.all():
+        return False, _("You cannot submit a judge's image.")
 
     weeks = settings.IOTD_SUBMISSION_WINDOW_WEEKS
     if image.uploaded < datetime.now() - timedelta(weeks = weeks):
@@ -58,6 +62,9 @@ def may_toggle_vote_image(user, image):
 
     if image.user.userprofile.exclude_from_competitions:
         return False, _("This user has chosen to be excluded from competitions.")
+
+    if image.user in Group.objects.get(name = 'iotd_judges').user_set.all():
+        return False, _("You cannot vote for a judge's image.")
 
     # Import here to avoid circular dependency
     from astrobin_apps_iotd.models import IotdSubmission, IotdVote, Iotd
@@ -101,6 +108,9 @@ def may_elect_iotd(user, image):
 
     if image.user.userprofile.exclude_from_competitions:
         return False, _("This user has chosen to be excluded from competitions.")
+
+    if image.user in Group.objects.get(name = 'iotd_judges').user_set.all():
+        return False, _("You cannot elect a judge's image.")
 
     # Import here to avoid circular dependency
     from astrobin_apps_iotd.models import IotdSubmission, IotdVote, Iotd
