@@ -1,7 +1,7 @@
 # Django
 from django.conf import settings
 from django.contrib import messages
-from django.db.models import Count
+from django.db.models import Count, Q
 from django.http import HttpResponseForbidden
 from django.views.generic import CreateView
 from django.views.generic import DetailView
