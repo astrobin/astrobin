@@ -86,7 +86,7 @@ def may_toggle_vote_image(user, image):
     reviewed_today = IotdVote.objects.filter(
         reviewer = user,
         date__gt = datetime.now().date() - timedelta(1)).count()
-    toggling_on = not IotdVote.objects.filter(reviewer = user, image = user).exists()
+    toggling_on = not IotdVote.objects.filter(reviewer = user, image = image).exists()
     if reviewed_today >= max_allowed and toggling_on:
         return False, _("You have already voted for %(max_allowed)s images today.") % {
             'max_allowed': max_allowed
