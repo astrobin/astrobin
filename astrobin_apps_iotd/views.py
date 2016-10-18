@@ -44,13 +44,21 @@ class IotdSubmissionQueueView(
         weeks = settings.IOTD_SUBMISSION_WINDOW_WEEKS
         cutoff = datetime.now() - timedelta(weeks = weeks)
         judges = Group.objects.get(name = 'iotd_judges').user_set.all()
-        return sorted(list(set([
-            x
-            for x in self.model.objects.filter(uploaded__gte = cutoff)
-            if not Iotd.objects.filter(
-                image = x,
-                date__lte = datetime.now().date()).exists()
-            and not x.user in judges])), key = lambda x: x.pk, reverse = True)
+        image_groups = []
+
+        for date in (datetime.now().date() - timedelta(n) for n in range(weeks * 7)):
+            image_groups.append({
+                'date': date,
+                'images': sorted(list(set([
+                    x
+                    for x in self.model.objects.filter(
+                        uploaded__gte = date, uploaded__lt = date + timedelta(1))
+                    if not Iotd.objects.filter(
+                        image = x,
+                        date__lte = datetime.now().date()).exists()
+                    and not x.user in judges])), key = lambda x: x.pk, reverse = True)})
+
+        return image_groups
 
 
 class IotdToggleSubmissionAjaxView(

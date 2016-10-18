@@ -14,42 +14,47 @@
     </div>
 
     <div class="iotd-promotion-queue">
-        {% for image in object_list %}
-            <div class="iotd-queue-item
-                       {% if request.user|may_toggle_submission:image %} may-select{% else %}may-not-select{% endif %}
-                       {% if request.user|has_submitted:image %} selected{% endif %}">
-                <a href="#" class="select" data-toggle-url="{% url 'iotd_toggle_submission_ajax' image.pk %}">
-                    {% astrobin_image image 'story' link=False tooltip=False %}
-                </a>
-
-                <div class="iotd-queue-item-actions">
-                    <a href="{% url 'image_rawthumb' image.pk '0' 'hd' %}" class="fancybox">
-                        <i class="icon-zoom-in"></i>
+        {% for image_group in object_list %}
+            <h2>{{image_group.date}}</h2>
+            {% for image in image_group.images %}
+                <div class="iotd-queue-item
+                           {% if request.user|may_toggle_submission:image %} may-select{% else %}may-not-select{% endif %}
+                           {% if request.user|has_submitted:image %} selected{% endif %}">
+                    <a href="#" class="select" data-toggle-url="{% url 'iotd_toggle_submission_ajax' image.pk %}">
+                        {% astrobin_image image 'story' link=False tooltip=False %}
                     </a>
 
-                    <a href="{% url 'image_detail' image.pk %}" target="_blank">
-                        <i class="icon-link"></i>
-                    </a>
-                </div>
+                    <div class="iotd-queue-item-actions">
+                        <a href="{% url 'image_rawthumb' image.pk '0' 'hd' %}" class="fancybox">
+                            <i class="icon-zoom-in"></i>
+                        </a>
 
-                <div class="iotd-queue-item-loading-overlay">
-                    <i class="icon-spinner"></i>
-                </div>
+                        <a href="{% url 'image_detail' image.pk %}" target="_blank">
+                            <i class="icon-link"></i>
+                        </a>
+                    </div>
 
-                <div class="iotd-queue-item-selected-overlay">
-                    <i class="icon-ok"></i>
-                </div>
+                    <div class="iotd-queue-item-loading-overlay">
+                        <i class="icon-spinner"></i>
+                    </div>
 
-                <div class="iotd-queue-item-may-not-select-overlay">
-                    <img
-                        src="{% get_static_prefix %}astrobin_apps_iotd/images/iotd_may_not_select_overlay.png"
-                        rel="tooltip"
-                        {% if not request.user|may_toggle_submission:image %}
-                            title="{{request.user|may_not_toggle_submission_reason:image}}"
-                        {% endif %}
-                    />
+                    <div class="iotd-queue-item-selected-overlay">
+                        <i class="icon-ok"></i>
+                    </div>
+
+                    <div class="iotd-queue-item-may-not-select-overlay">
+                        <img
+                            src="{% get_static_prefix %}astrobin_apps_iotd/images/iotd_may_not_select_overlay.png"
+                            rel="tooltip"
+                            {% if not request.user|may_toggle_submission:image %}
+                                title="{{request.user|may_not_toggle_submission_reason:image}}"
+                            {% endif %}
+                        />
+                    </div>
                 </div>
-            </div>
+            {% empty %}
+                {% trans "No images uploaded on this day." %}
+            {% endfor %}
         {% empty %}
             {% trans "This queue is currently empty." %}
         {% endfor %}
