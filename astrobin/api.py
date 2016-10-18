@@ -278,8 +278,8 @@ class ImageResource(ModelResource):
 
 class ImageOfTheDayResource(ModelResource):
     image = fields.ForeignKey('astrobin.api.ImageResource', 'image')
-    runnerup_1 = fields.ForeignKey('astrobin.api.ImageResource', 'runnerup_1')
-    runnerup_2 = fields.ForeignKey('astrobin.api.ImageResource', 'runnerup_2')
+    runnerup_1 = fields.ForeignKey('astrobin.api.ImageResource', 'runnerup_1', null = True)
+    runnerup_2 = fields.ForeignKey('astrobin.api.ImageResource', 'runnerup_2', null = True)
 
     class Meta:
         authentication = AppAuthentication()
