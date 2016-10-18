@@ -4440,7 +4440,7 @@ table.search-table td.search-table-date {
   margin-bottom: 22px;
   position: relative;
 }
-.iotd-queue-item:nth-child(even) {
+.iotd-queue-item:nth-of-type(odd) {
   margin-right: 16px;
 }
 .iotd-queue-item > .iotd-queue-item-actions {
