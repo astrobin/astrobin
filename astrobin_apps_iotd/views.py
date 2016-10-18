@@ -44,13 +44,13 @@ class IotdSubmissionQueueView(
         weeks = settings.IOTD_SUBMISSION_WINDOW_WEEKS
         cutoff = datetime.now() - timedelta(weeks = weeks)
         judges = Group.objects.get(name = 'iotd_judges').user_set.all()
-        return list(set([
+        return sorted(list(set([
             x
             for x in self.model.objects.filter(uploaded__gte = cutoff)
             if not Iotd.objects.filter(
                 image = x,
                 date__lte = datetime.now().date()).exists()
-            and not x.user in judges]))
+            and not x.user in judges])), key = lambda x: x.pk, reverse = True)
 
 
 class IotdToggleSubmissionAjaxView(
@@ -90,13 +90,13 @@ class IotdReviewQueueView(
         weeks = settings.IOTD_REVIEW_WINDOW_WEEKS
         cutoff = datetime.now() - timedelta(weeks = weeks)
         judges = Group.objects.get(name = 'iotd_judges').user_set.all()
-        return list(set([
+        return sorted(list(set([
             x.image
             for x in self.model.objects.filter(date__gte = cutoff)
             if not Iotd.objects.filter(
                 image = x.image,
                 date__lte = datetime.now().date()).exists()
-            and not x.image.user in judges]))
+            and not x.image.user in judges])), key = lambda x: x.pk, reverse = True)
 
 
 class IotdToggleVoteAjaxView(
@@ -136,13 +136,13 @@ class IotdJudgementQueueView(
         weeks = settings.IOTD_JUDGEMENT_WINDOW_WEEKS
         cutoff = datetime.now() - timedelta(weeks = weeks)
         judges = Group.objects.get(name = 'iotd_judges').user_set.all()
-        return list(set([
+        return sorted(list(set([
             x.image
             for x in self.model.objects.filter(date__gte = cutoff)
             if not Iotd.objects.filter(
                 image = x.image,
                 date__lte = datetime.now().date()).exists()
-            and not x.image.user in judges]))
+            and not x.image.user in judges])), key = lambda x: x.pk, reverse = True)
 
 
 class IotdToggleJudgementAjaxView(
