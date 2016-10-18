@@ -3,6 +3,7 @@ import simplejson
 import urllib2
 
 # Django
+from django.conf import settings
 from django.contrib.contenttypes.models import ContentType
 from django.core.files import File
 from django.core.files.temp import NamedTemporaryFile
@@ -101,6 +102,18 @@ class SolutionFinalizeView(base.View):
             solution.dec         = "%.3f" % info['calibration']['dec']
             solution.orientation = "%.3f" % info['calibration']['orientation']
             solution.radius      = "%.3f" % info['calibration']['radius']
+
+            # Get the images 'w' and adjust pixscale
+            if solution.content_object:
+                w = solution.content_object.w
+                pixscale = info['calibration']['pixscale']
+                if w and pixscale:
+                    hd_w = settings.THUMBNAIL_ALIASES['']['hd']['size'][0]
+                    ratio = hd_w / float(w)
+                    corrected_scale = float(pixscale) * ratio
+                    solution.pixscale = "%.3f" %  corrected_scale
+                else:
+                    solution.pixscale = None
 
             try:
                 target = solution.content_type.get_object_for_this_type(pk = solution.object_id)
