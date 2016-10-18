@@ -1,18 +1,14 @@
-# Python
-from itertools import chain
-
-# Django
-from django.contrib.auth.models import Group as DGroup
 from django.core.management.base import BaseCommand
-
-# AstroBin
-from astrobin_apps_groups.models import Group as AGroup
 
 
 class Command(BaseCommand):
     help = "Syncs IOTD AstroBin Groups to equivalemnt contrib.auth groups"
 
     def handle(self, *args, **options):
+        from itertools import chain
+        from django.contrib.auth.models import Group as DGroup
+        from astrobin_apps_groups.models import Group as AGroup
+
         map_ = {
             # key: [[clear groups], [non clear groups], [clear agroups], [non clear agroups]]
             'IOTD Submitters': [['iotd_submitters'], ['iotd_staff', 'content_moderators'], [], ['IOTD Staff']],
