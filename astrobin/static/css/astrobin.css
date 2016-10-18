@@ -4461,6 +4461,22 @@ table.search-table td.search-table-date {
   visibility: visible;
   z-index: 3;
 }
+.iotd-queue-item > .iotd-queue-item-loading-overlay {
+  display: none;
+  position: absolute;
+  bottom: 0;
+  width: 100%;
+  text-align: center;
+  font-size: 20px;
+  background-color: orange;
+  background-color: rgba(255, 165, 0, 0.4);
+  color: white;
+  z-index: 2;
+}
+.iotd-queue-item > .iotd-queue-item-loading-overlay i {
+  display: inline-block;
+  padding: 10px;
+}
 .iotd-queue-item > .iotd-queue-item-selected-overlay {
   visibility: hidden;
   position: absolute;

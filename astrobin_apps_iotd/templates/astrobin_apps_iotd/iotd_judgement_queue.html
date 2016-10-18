@@ -43,6 +43,10 @@
                     </a>
                 </div>
 
+                <div class="iotd-queue-item-loading-overlay">
+                    <i class="icon-spinner"></i>
+                </div>
+
                 <div class="iotd-queue-item-selected-overlay">
                     <i class="icon-trophy"></i>
                     <span class="iotd-date">
@@ -123,14 +127,21 @@
                     url = $(this).data('toggle-url');
 
                 if (!$item.hasClass('may-not-select')) {
+                    $item.find('.iotd-queue-item-loading-overlay').show();
+                    if ($item.hasClass('selected')) {
+                        $item.find('.iotd-queue-item-selected-overlay').hide();
+                    }
+
                     $.ajax({
                         url: url,
                         type: 'post',
                         timeout: 5000,
                         success: function(response) {
+                            $item.find('.iotd-queue-item-loading-overlay').hide();
                             if ('iotd' in response) {
                                 if (!$item.hasClass('selected')) {
                                     $item.addClass('selected');
+                                    $item.find('.iotd-queue-item-selected-overlay').show();
                                 }
 
                                 if ('date' in response) {
