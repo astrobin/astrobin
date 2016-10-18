@@ -126,6 +126,7 @@
                     $.ajax({
                         url: url,
                         type: 'post',
+                        timeout: 5000,
                         success: function(response) {
                             if ('iotd' in response) {
                                 if (!$item.hasClass('selected')) {
