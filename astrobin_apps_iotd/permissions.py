@@ -39,7 +39,8 @@ def may_toggle_submission_image(user, image):
     submitted_today = IotdSubmission.objects.filter(
         submitter = user,
         date__gt = datetime.now().date() - timedelta(1)).count()
-    if submitted_today >= max_allowed:
+    toggling_on = not IotdSubmission.objects.filter(submitter = user, image = image).exists()
+    if submitted_today >= max_allowed and toggling_on:
         return False, _("You have already submitted %(max_allowed)s images today.") % {
             'max_allowed': max_allowed
         }
@@ -85,7 +86,8 @@ def may_toggle_vote_image(user, image):
     reviewed_today = IotdVote.objects.filter(
         reviewer = user,
         date__gt = datetime.now().date() - timedelta(1)).count()
-    if reviewed_today >= max_allowed:
+    toggling_on = not IotdVote.objects.filter(reviewer = user, image = user).exists()
+    if reviewed_today >= max_allowed and toggling_on:
         return False, _("You have already voted for %(max_allowed)s images today.") % {
             'max_allowed': max_allowed
         }
@@ -134,7 +136,8 @@ def may_elect_iotd(user, image):
     judged_today = Iotd.objects.filter(
         judge = user,
         created__gt = datetime.now().date() - timedelta(1)).count()
-    if judged_today >= max_allowed:
+    toggling_on = not Iotd.objects.filter(image = image).exists()
+    if judged_today >= max_allowed and toggling_on:
         return False, _("You have already elected %(max_allowed)s images today.") % {
             'max_allowed': max_allowed
         }

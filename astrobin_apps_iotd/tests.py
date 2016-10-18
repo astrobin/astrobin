@@ -501,6 +501,13 @@ class IotdTest(TestCase):
         self.assertFalse('error' in json.loads(response.content))
         self.assertEqual(IotdSubmission.objects.count(), 0)
 
+        # You can still toggle off if you reached your max
+        response = self.client.post(url, HTTP_X_REQUESTED_WITH = 'XMLHttpRequest')
+        self.assertEqual(IotdSubmission.objects.count(), 1)
+        with self.settings(IOTD_SUBMISSION_MAX_PER_DAY = 1):
+            response = self.client.post(url, HTTP_X_REQUESTED_WITH = 'XMLHttpRequest')
+            self.assertEqual(IotdSubmission.objects.count(), 0)
+
     def test_review_queue_view(self):
         url = reverse_lazy('iotd_review_queue')
 
@@ -609,6 +616,13 @@ class IotdTest(TestCase):
         self.assertFalse('vote' in json.loads(response.content))
         self.assertFalse('error' in json.loads(response.content))
         self.assertEqual(IotdVote.objects.count(), 0)
+
+        # You can still toggle off if you reached your max
+        response = self.client.post(url, HTTP_X_REQUESTED_WITH = 'XMLHttpRequest')
+        self.assertEqual(IotdVote.objects.count(), 1)
+        with self.settings(IOTD_REVIEW_MAX_PER_DAY = 1):
+            response = self.client.post(url, HTTP_X_REQUESTED_WITH = 'XMLHttpRequest')
+            self.assertEqual(IotdVote.objects.count(), 0)
 
     def test_judgement_queue_view(self):
         url = reverse_lazy('iotd_judgement_queue')
@@ -800,6 +814,12 @@ class IotdTest(TestCase):
             self.assertFalse('iotd' in json.loads(response.content))
             self.assertTrue("already elected" in json.loads(response.content)['error'])
             self.assertEqual(Iotd.objects.count(), 3)
+
+        # You can still toggle off if you reached your max
+        with self.settings(IOTD_JUDGEMENT_MAX_PER_DAY = 3):
+            response = self.client.post(url, HTTP_X_REQUESTED_WITH = 'XMLHttpRequest')
+            self.assertEqual(Iotd.objects.count(), 3)
+
 
         # Clean up
         image2.delete()
