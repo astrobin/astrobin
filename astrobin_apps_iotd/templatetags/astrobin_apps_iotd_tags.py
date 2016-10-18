@@ -113,6 +113,11 @@ def is_iotd(image):
     return Iotd.objects.filter(image = image).exists()
 
 
+@register.filter
+def is_current_or_past_iotd(image):
+    return Iotd.objects.filter(image = image, date__lte = datetime.now().date())
+
+
 # Getters
 
 @register.filter
