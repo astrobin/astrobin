@@ -4437,11 +4437,11 @@ table.search-table td.search-table-date {
 }
 .iotd-queue-item {
   display: inline-block;
-  margin-bottom: 10px;
+  margin-bottom: 22px;
   position: relative;
 }
-.iotd-queue-item:nth-child(odd) {
-  margin-right: 10px;
+.iotd-queue-item:nth-child(even) {
+  margin-right: 16px;
 }
 .iotd-queue-item > .iotd-queue-item-actions {
   visibility: hidden;
