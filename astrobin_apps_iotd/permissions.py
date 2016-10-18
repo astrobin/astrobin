@@ -32,9 +32,6 @@ def may_toggle_submission_image(user, image):
     # Import here to avoid circular dependency
     from astrobin_apps_iotd.models import IotdSubmission, Iotd
 
-    if IotdSubmission.objects.filter(submitter = user, image = image).exists():
-        return False, _("You have already submitted this image.")
-
     if Iotd.objects.filter(image = image, date__lte = datetime.now().date()).exists():
         return False, _("This image has already been an IOTD in the past")
 
