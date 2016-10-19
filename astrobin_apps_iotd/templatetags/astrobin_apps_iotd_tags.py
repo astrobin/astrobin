@@ -118,6 +118,21 @@ def is_current_or_past_iotd(image):
     return Iotd.objects.filter(image = image, date__lte = datetime.now().date())
 
 
+@register.filter
+def iotd_submissions_today(user):
+    return IotdSubmission.objects.filter(submitter = user, date__contains = datetime.now().date()).count()
+
+
+@register.filter
+def iotd_votes_today(user):
+    return IotdVote.objects.filter(reviewer = user, date__contains = datetime.now().date()).count()
+
+
+@register.filter
+def iotd_elections_today(user):
+    return Iotd.objects.filter(judge = user, created__contains = datetime.now().date()).count()
+
+
 # Getters
 
 @register.filter

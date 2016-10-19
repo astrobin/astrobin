@@ -8,12 +8,19 @@
 {% block title %}{% trans "IOTD Judgement Queue" %}{% endblock %}
 
 {% block content %}
-    <h1>{% trans "IOTD Judgement Queue" %}</h1>
-    <div class="subtitle">
-        {% blocktrans %}Please select the images that you want to elect to IOTD by clicking on them.{% endblocktrans %}
-    </div>
-
     <div class="iotd-promotion-queue">
+        <h1>
+            {% trans "IOTD Judgement Queue" %}
+            <div class="pull-right todays-count">
+                <span class="used">
+                    {{user|iotd_elections_today}}
+                </span> / {{MAX_ELECTIONS_PER_DAY}}
+            </div>
+        </h1>
+        <div class="subtitle">
+            {% blocktrans %}Please select the images that you want to elect to IOTD by clicking on them.{% endblocktrans %}
+        </div>
+
         {% for image in object_list %}
             <div class="iotd-queue-item
                        {% if request.user|may_elect:image and request.user|may_unelect:image %} may-select{% else %}may-not-select{% endif %}
@@ -138,6 +145,11 @@
                         timeout: 5000,
                         success: function(response) {
                             $item.find('.iotd-queue-item-loading-overlay').hide();
+
+                            if ('used_today' in response) {
+                                $('.todays-count .used').text(response['used_today']);
+                            }
+
                             if ('iotd' in response) {
                                 if (!$item.hasClass('selected')) {
                                     $item.addClass('selected');

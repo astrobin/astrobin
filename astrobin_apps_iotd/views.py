@@ -32,10 +32,23 @@ from astrobin.models import Image
 from astrobin_apps_iotd.forms import *
 from astrobin_apps_iotd.models import *
 from astrobin_apps_iotd.permissions import *
+from astrobin_apps_iotd.templatetags.astrobin_apps_iotd_tags import (
+    iotd_submissions_today,
+    iotd_votes_today,
+    iotd_elections_today)
+
+
+class IotdBaseQueueView(View):
+    def get_context_data(self, **kwargs):
+        context = super(IotdBaseQueueView, self).get_context_data(**kwargs)
+        context['MAX_SUBMISSIONS_PER_DAY'] = settings.IOTD_SUBMISSION_MAX_PER_DAY
+        context['MAX_VOTES_PER_DAY'] = settings.IOTD_REVIEW_MAX_PER_DAY
+        context['MAX_ELECTIONS_PER_DAY'] = settings.IOTD_JUDGEMENT_MAX_PER_DAY
+        return context
 
 
 class IotdSubmissionQueueView(
-        LoginRequiredMixin, GroupRequiredMixin, ListView):
+        LoginRequiredMixin, GroupRequiredMixin, IotdBaseQueueView, ListView):
     group_required = ['iotd_submitters']
     model = Image
     template_name = 'astrobin_apps_iotd/iotd_submission_queue.html'
@@ -75,10 +88,13 @@ class IotdToggleSubmissionAjaxView(
                     image = image)
                 if not created:
                     submission.delete()
-                    return self.render_json_response([])
+                    return self.render_json_response({
+                        'used_today': iotd_submissions_today(request.user),
+                    })
                 else:
                     return self.render_json_response({
                         'submission': submission.pk,
+                        'used_today': iotd_submissions_today(request.user),
                     })
             except ValidationError as e:
                 return self.render_json_response({
@@ -89,7 +105,7 @@ class IotdToggleSubmissionAjaxView(
 
 
 class IotdReviewQueueView(
-        LoginRequiredMixin, GroupRequiredMixin, ListView):
+        LoginRequiredMixin, GroupRequiredMixin, IotdBaseQueueView, ListView):
     group_required = ['iotd_reviewers']
     model = IotdSubmission
     template_name = 'astrobin_apps_iotd/iotd_review_queue.html'
@@ -121,10 +137,13 @@ class IotdToggleVoteAjaxView(
                     image = image)
                 if not created:
                     vote.delete()
-                    return self.render_json_response([])
+                    return self.render_json_response({
+                        'used_today': iotd_votes_today(request.user),
+                    })
                 else:
                     return self.render_json_response({
                         'vote': vote.pk,
+                        'used_today': iotd_votes_today(request.user),
                     })
             except ValidationError as e:
                 return self.render_json_response({
@@ -135,7 +154,7 @@ class IotdToggleVoteAjaxView(
 
 
 class IotdJudgementQueueView(
-        LoginRequiredMixin, GroupRequiredMixin, ListView):
+        LoginRequiredMixin, GroupRequiredMixin, IotdBaseQueueView, ListView):
     group_required = ['iotd_judges']
     model = IotdVote
     template_name = 'astrobin_apps_iotd/iotd_judgement_queue.html'
@@ -171,17 +190,21 @@ class IotdToggleJudgementAjaxView(
                     ret = {
                         'iotd': iotd.pk,
                         'date': formats.date_format(iotd.date, "SHORT_DATE_FORMAT"),
+                        'used_today': iotd_elections_today(request.user),
                         'error': ugettext("You cannot unelect a past or current IOTD."),
                     }
                 elif iotd.judge != request.user:
                     ret = {
                         'iotd': iotd.pk,
                         'date': formats.date_format(iotd.date, "SHORT_DATE_FORMAT"),
+                        'used_today': iotd_elections_today(request.user),
                         'error': ugettext("You cannot unelect an IOTD elected by another judge."),
                     }
                 else:
                     iotd.delete()
-                    ret = {}
+                    ret = {
+                        'used_today': iotd_elections_today(request.user),
+                    }
             except Iotd.DoesNotExist:
                 max_days = settings.IOTD_JUDGMENT_MAX_FUTURE_DAYS
                 for date in (datetime.now().date() + timedelta(n) for n in range(max_days)):
@@ -197,6 +220,7 @@ class IotdToggleJudgementAjaxView(
                             ret = {
                                 'iotd': iotd.pk,
                                 'date': formats.date_format(iotd.date, "SHORT_DATE_FORMAT"),
+                                'used_today': iotd_elections_today(request.user),
                             }
                         else:
                             ret = {

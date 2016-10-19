@@ -419,6 +419,7 @@ class IotdTest(TestCase):
         self.client.login(username = 'submitter_1', password = 'password')
         response = self.client.get(url)
         self.assertEqual(response.status_code, 200)
+        self.assertContains(response, '<span class="used">0</span>', html = True)
 
         # Check that images are rendered
         response = self.client.get(url)
@@ -491,12 +492,14 @@ class IotdTest(TestCase):
         response = self.client.post(url, HTTP_X_REQUESTED_WITH = 'XMLHttpRequest')
         self.assertEqual(response.status_code, 200)
         self.assertEqual(json.loads(response.content)['submission'], 1)
+        self.assertEqual(json.loads(response.content)['used_today'], 1)
         self.assertFalse('error' in json.loads(response.content))
         self.assertEqual(IotdSubmission.objects.count(), 1)
 
         # Toggle off
         response = self.client.post(url, HTTP_X_REQUESTED_WITH = 'XMLHttpRequest')
         self.assertEqual(response.status_code, 200)
+        self.assertEqual(json.loads(response.content)['used_today'], 0)
         self.assertFalse('submission' in json.loads(response.content))
         self.assertFalse('error' in json.loads(response.content))
         self.assertEqual(IotdSubmission.objects.count(), 0)
@@ -523,6 +526,7 @@ class IotdTest(TestCase):
         self.client.login(username = 'reviewer_1', password = 'password')
         response = self.client.get(url)
         self.assertEqual(response.status_code, 200)
+        self.assertContains(response, '<span class="used">0</span>', html = True)
 
         # Check that images are rendered
         submission_1 = IotdSubmission.objects.create(submitter = self.submitter_1, image = self.image)
@@ -607,12 +611,14 @@ class IotdTest(TestCase):
         response = self.client.post(url, HTTP_X_REQUESTED_WITH = 'XMLHttpRequest')
         self.assertEqual(response.status_code, 200)
         self.assertEqual(json.loads(response.content)['vote'], 1)
+        self.assertEqual(json.loads(response.content)['used_today'], 1)
         self.assertFalse('error' in json.loads(response.content))
         self.assertEqual(IotdVote.objects.count(), 1)
 
         # Toggle off
         response = self.client.post(url, HTTP_X_REQUESTED_WITH = 'XMLHttpRequest')
         self.assertEqual(response.status_code, 200)
+        self.assertEqual(json.loads(response.content)['used_today'], 0)
         self.assertFalse('vote' in json.loads(response.content))
         self.assertFalse('error' in json.loads(response.content))
         self.assertEqual(IotdVote.objects.count(), 0)
@@ -639,6 +645,7 @@ class IotdTest(TestCase):
         self.client.login(username = 'judge_1', password = 'password')
         response = self.client.get(url)
         self.assertEqual(response.status_code, 200)
+        self.assertContains(response, '<span class="used">0</span>', html = True)
 
         # Check that images are rendered
         submission_1 = IotdSubmission.objects.create(submitter = self.submitter_1, image = self.image)
@@ -725,6 +732,7 @@ class IotdTest(TestCase):
         response = self.client.post(url, HTTP_X_REQUESTED_WITH = 'XMLHttpRequest')
         self.assertEqual(response.status_code, 200)
         self.assertEqual(json.loads(response.content)['iotd'], 1)
+        self.assertEqual(json.loads(response.content)['used_today'], 1)
         self.assertFalse('error' in json.loads(response.content))
         self.assertEqual(json.loads(response.content)['date'], today.strftime('%m/%d/%Y'))
         self.assertEqual(Iotd.objects.count(), 1)
@@ -761,6 +769,7 @@ class IotdTest(TestCase):
         # Unelect OK
         response = self.client.post(url, HTTP_X_REQUESTED_WITH = 'XMLHttpRequest')
         self.assertEqual(response.status_code, 200)
+        self.assertEqual(json.loads(response.content)['used_today'], 0)
         self.assertFalse('error' in json.loads(response.content))
         self.assertFalse('date' in json.loads(response.content))
         self.assertFalse('iotd' in json.loads(response.content))

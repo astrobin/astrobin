@@ -8,12 +8,19 @@
 {% block title %}{% trans "IOTD Submission Queue" %}{% endblock %}
 
 {% block content %}
-    <h1>{% trans "IOTD Submission Queue" %}</h1>
-    <div class="subtitle">
-        {% blocktrans %}Please select the images that you want to propose for IOTD consideration.{% endblocktrans %}
-    </div>
-
     <div class="iotd-promotion-queue">
+        <h1>
+            {% trans "IOTD Submission Queue" %}
+            <div class="pull-right todays-count">
+                <span class="used">
+                    {{user|iotd_submissions_today}}
+                </span> / {{MAX_SUBMISSIONS_PER_DAY}}
+            </div>
+        </h1>
+        <div class="subtitle">
+            {% blocktrans %}Please select the images that you want to propose for IOTD consideration.{% endblocktrans %}
+        </div>
+
         {% for image_group in object_list %}
             <h2>{{image_group.date}}</h2>
             {% for image in image_group.images %}
@@ -98,6 +105,11 @@
                         timeout: 5000,
                         success: function(response) {
                             $item.find('.iotd-queue-item-loading-overlay').hide();
+
+                            if ('used_today' in response) {
+                                $('.todays-count .used').text(response['used_today']);
+                            }
+
                             if ('submission' in response) {
                                 if (!$item.hasClass('selected')) {
                                     $item.addClass('selected');
