@@ -206,7 +206,7 @@ class IotdToggleJudgementAjaxView(
                         'used_today': iotd_elections_today(request.user),
                     }
             except Iotd.DoesNotExist:
-                max_days = settings.IOTD_JUDGMENT_MAX_FUTURE_DAYS
+                max_days = settings.IOTD_JUDGEMENT_MAX_FUTURE_DAYS
                 for date in (datetime.now().date() + timedelta(n) for n in range(max_days)):
                     try:
                         iotd = Iotd.objects.get(date = date)

@@ -809,7 +809,7 @@ class IotdTest(TestCase):
         submission4 = IotdSubmission.objects.create(submitter = self.submitter_1, image = image4)
         vote4 = IotdVote.objects.create(reviewer = self.reviewer_1, image = image4)
         # Test MAX_FUTURE_DAYS cutoff
-        with self.settings(IOTD_JUDGMENT_MAX_FUTURE_DAYS = 3):
+        with self.settings(IOTD_JUDGEMENT_MAX_FUTURE_DAYS = 3):
             url = reverse_lazy('iotd_toggle_judgement_ajax', kwargs = {'pk': image4.pk})
             response = self.client.post(url, HTTP_X_REQUESTED_WITH = 'XMLHttpRequest')
             self.assertFalse('iotd' in json.loads(response.content))
