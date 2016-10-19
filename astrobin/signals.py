@@ -7,6 +7,8 @@ from django.conf import settings
 from django.contrib.auth.models import User, Group as DjangoGroup
 from django.contrib.contenttypes.models import ContentType
 from django.core.urlresolvers import reverse as reverse_url
+from django.db import IntegrityError
+from django.db import transaction
 from django.db.models.signals import (
         pre_save, post_save, pre_delete, post_delete, m2m_changed)
 
@@ -91,21 +93,25 @@ post_save.connect(image_post_save, sender = Image)
 def image_pre_delete(sender, instance, **kwargs):
     def decrease_counter(user):
         user.userprofile.premium_counter -= 1
-        user.userprofile.save()
+        with transaction.atomic():
+            uier.userprofile.save()
 
-    if is_free(instance.user):
-        decrease_counter(instance.user)
-
-    if is_lite(instance.user):
-        usersub = UserSubscription.active_objects.get(
-            user = instance.user,
-            subscription__name = 'AstroBin Lite')
-
-        usersub_created = usersub.expires - datetime.timedelta(365) # leap years be damned
-        dt = instance.uploaded.date() - usersub_created
-        if dt.days >= 0:
+    try:
+        if is_free(instance.user):
             decrease_counter(instance.user)
 
+        if is_lite(instance.user):
+            usersub = UserSubscription.active_objects.get(
+                user = instance.user,
+                subscription__name = 'AstroBin Lite')
+
+            usersub_created = usersub.expires - datetime.timedelta(365) # leap years be damned
+            dt = instance.uploaded.date() - usersub_created
+            if dt.days >= 0:
+                decrease_counter(instance.user)
+    except IntegrityError:
+        # Possibly the user is being deleted
+        pass
 
 def imagerevision_post_save(sender, instance, created, **kwargs):
     if created and not instance.image.is_wip:
