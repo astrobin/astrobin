@@ -94,7 +94,7 @@ def image_pre_delete(sender, instance, **kwargs):
     def decrease_counter(user):
         user.userprofile.premium_counter -= 1
         with transaction.atomic():
-            uier.userprofile.save()
+            user.userprofile.save()
 
     try:
         if is_free(instance.user):
