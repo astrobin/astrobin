@@ -4541,7 +4541,7 @@ table.search-table td.search-table-date {
   position: relative;
   margin-bottom: 10px;
 }
-.top-picks-item:nth-child(odd) {
+.top-picks-item:nth-child(even) {
   margin-right: 10px;
 }
 .top-picks-item .overlay {
