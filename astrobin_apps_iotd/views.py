@@ -54,12 +54,12 @@ class IotdSubmissionQueueView(
     template_name = 'astrobin_apps_iotd/iotd_submission_queue.html'
 
     def get_queryset(self):
-        weeks = settings.IOTD_SUBMISSION_WINDOW_WEEKS
-        cutoff = datetime.now() - timedelta(weeks = weeks)
+        days = settings.IOTD_SUBMISSION_WINDOW_DAYS
+        cutoff = datetime.now() - timedelta(days)
         judges = Group.objects.get(name = 'iotd_judges').user_set.all()
         image_groups = []
 
-        for date in (datetime.now().date() - timedelta(n) for n in range(weeks * 7)):
+        for date in (datetime.now().date() - timedelta(n) for n in range(days)):
             image_groups.append({
                 'date': date,
                 'images': sorted(list(set([
@@ -111,8 +111,8 @@ class IotdReviewQueueView(
     template_name = 'astrobin_apps_iotd/iotd_review_queue.html'
 
     def get_queryset(self):
-        weeks = settings.IOTD_REVIEW_WINDOW_WEEKS
-        cutoff = datetime.now() - timedelta(weeks = weeks)
+        days = settings.IOTD_REVIEW_WINDOW_DAYS
+        cutoff = datetime.now() - timedelta(days)
         judges = Group.objects.get(name = 'iotd_judges').user_set.all()
         return sorted(list(set([
             x.image
@@ -160,8 +160,8 @@ class IotdJudgementQueueView(
     template_name = 'astrobin_apps_iotd/iotd_judgement_queue.html'
 
     def get_queryset(self):
-        weeks = settings.IOTD_JUDGEMENT_WINDOW_WEEKS
-        cutoff = datetime.now() - timedelta(weeks = weeks)
+        days = settings.IOTD_JUDGEMENT_WINDOW_DAYS
+        cutoff = datetime.now() - timedelta(days)
         judges = Group.objects.get(name = 'iotd_judges').user_set.all()
         return sorted(list(set([
             x.image

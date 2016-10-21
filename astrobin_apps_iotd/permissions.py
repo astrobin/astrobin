@@ -23,10 +23,10 @@ def may_toggle_submission_image(user, image):
     if image.user in Group.objects.get(name = 'iotd_judges').user_set.all():
         return False, _("You cannot submit a judge's image.")
 
-    weeks = settings.IOTD_SUBMISSION_WINDOW_WEEKS
-    if image.uploaded < datetime.now() - timedelta(weeks = weeks):
-        return False, _("You cannot submit an image that was uploaded more than %(max_weeks)s weeks ago.") % {
-            'max_weeks': weeks
+    days = settings.IOTD_SUBMISSION_WINDOW_DAYS
+    if image.uploaded < datetime.now() - timedelta(days):
+        return False, _("You cannot submit an image that was uploaded more than %(max_days)s days ago.") % {
+            'max_days': days
         }
 
     # Import here to avoid circular dependency
@@ -76,10 +76,10 @@ def may_toggle_vote_image(user, image):
     if Iotd.objects.filter(image = image, date__lte = datetime.now().date()).exists():
         return False, _("This image has already been an IOTD in the past")
 
-    weeks = settings.IOTD_REVIEW_WINDOW_WEEKS
-    if IotdSubmission.first_for_image(image).date < datetime.now() - timedelta(weeks = weeks):
-        return False, _("You cannot vote for an image that has been in the submission queue for more than %(max_weeks)s weeks.") % {
-            'max_weeks': weeks
+    days = settings.IOTD_REVIEW_WINDOW_DAYS
+    if IotdSubmission.first_for_image(image).date < datetime.now() - timedelta(days):
+        return False, _("You cannot vote for an image that has been in the submission queue for more than %(max_days)s days.") % {
+            'max_days': days
         }
 
     max_allowed = settings.IOTD_REVIEW_MAX_PER_DAY
@@ -126,10 +126,10 @@ def may_elect_iotd(user, image):
     if Iotd.objects.filter(image = image, date__lte = datetime.now().date()).exists():
         return False, _("This image has already been an IOTD in the past")
 
-    weeks = settings.IOTD_JUDGEMENT_WINDOW_WEEKS
-    if IotdVote.first_for_image(image).date < datetime.now() - timedelta(weeks = weeks):
-        return False, _("You cannot elect an image that has been in the review queue for more than %(max_weeks)s weeks.") % {
-            'max_weeks': weeks
+    days = settings.IOTD_JUDGEMENT_WINDOW_DAYS
+    if IotdVote.first_for_image(image).date < datetime.now() - timedelta(days):
+        return False, _("You cannot elect an image that has been in the review queue for more than %(max_days)s days.") % {
+            'max_days': days
         }
 
     max_allowed = settings.IOTD_JUDGEMENT_MAX_PER_DAY

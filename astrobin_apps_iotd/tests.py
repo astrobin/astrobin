@@ -77,9 +77,7 @@ class IotdTest(TestCase):
         # Image must be recent enough
         self.image.uploaded =\
             datetime.now() -\
-            timedelta(
-                weeks = settings.IOTD_SUBMISSION_WINDOW_WEEKS,
-                days = 1)
+            timedelta(settings.IOTD_SUBMISSION_WINDOW_DAYS + 1)
         self.image.save()
         with self.assertRaisesRegexp(ValidationError, "uploaded more than"):
             IotdSubmission.objects.create(
@@ -183,9 +181,7 @@ class IotdTest(TestCase):
         IotdSubmission.objects.filter(pk = submission_1.pk).update(
             date = \
                 datetime.now() -\
-                timedelta(
-                    weeks = settings.IOTD_REVIEW_WINDOW_WEEKS,
-                    days = 1))
+                timedelta(settings.IOTD_REVIEW_WINDOW_DAYS + 1))
         with self.assertRaisesRegexp(ValidationError, "in the submission queue for more than"):
             IotdVote.objects.create(
                 reviewer = self.reviewer_1,
@@ -309,9 +305,7 @@ class IotdTest(TestCase):
         IotdVote.objects.filter(pk = vote_1.pk).update(
             date = \
                 datetime.now() -\
-                timedelta(
-                    weeks = settings.IOTD_JUDGEMENT_WINDOW_WEEKS,
-                    days = 1))
+                timedelta(settings.IOTD_JUDGEMENT_WINDOW_DAYS + 1))
         with self.assertRaisesRegexp(ValidationError, "in the review queue for more than"):
             Iotd.objects.create(
                 judge = self.judge_1,
@@ -788,26 +782,30 @@ class IotdTest(TestCase):
         iotd = Iotd.objects.get(pk = json.loads(response.content)['iotd'])
         self.assertEqual(iotd.date, today)
 
-        url = reverse_lazy('iotd_toggle_judgement_ajax', kwargs = {'pk': image2.pk})
-        response = self.client.post(url, HTTP_X_REQUESTED_WITH = 'XMLHttpRequest')
-        iotd2 = Iotd.objects.get(pk = json.loads(response.content)['iotd'])
-        self.assertEqual(iotd2.date, today + timedelta(1))
+        with self.settings(
+                IOTD_JUDGEMENT_MAX_PER_DAY = 4, IOTD_SUBMISSION_MAX_PER_DAY = 4,
+                IOTD_REVIEW_MAX_PER_DAY = 4):
+            url = reverse_lazy('iotd_toggle_judgement_ajax', kwargs = {'pk': image2.pk})
+            response = self.client.post(url, HTTP_X_REQUESTED_WITH = 'XMLHttpRequest')
+            iotd2 = Iotd.objects.get(pk = json.loads(response.content)['iotd'])
+            self.assertEqual(iotd2.date, today + timedelta(1))
 
-        url = reverse_lazy('iotd_toggle_judgement_ajax', kwargs = {'pk': image3.pk})
-        response = self.client.post(url, HTTP_X_REQUESTED_WITH = 'XMLHttpRequest')
-        iotd3 = Iotd.objects.get(pk = json.loads(response.content)['iotd'])
-        self.assertEqual(iotd3.date, today + timedelta(2))
+            url = reverse_lazy('iotd_toggle_judgement_ajax', kwargs = {'pk': image3.pk})
+            response = self.client.post(url, HTTP_X_REQUESTED_WITH = 'XMLHttpRequest')
+            iotd3 = Iotd.objects.get(pk = json.loads(response.content)['iotd'])
+            self.assertEqual(iotd3.date, today + timedelta(2))
 
-        # Fills a hole
-        iotd2.delete()
-        url = reverse_lazy('iotd_toggle_judgement_ajax', kwargs = {'pk': image2.pk})
-        response = self.client.post(url, HTTP_X_REQUESTED_WITH = 'XMLHttpRequest')
-        iotd2 = Iotd.objects.get(pk = json.loads(response.content)['iotd'])
-        self.assertEqual(iotd2.date, today + timedelta(1))
+            # Fills a hole
+            iotd2.delete()
+            url = reverse_lazy('iotd_toggle_judgement_ajax', kwargs = {'pk': image2.pk})
+            response = self.client.post(url, HTTP_X_REQUESTED_WITH = 'XMLHttpRequest')
+            iotd2 = Iotd.objects.get(pk = json.loads(response.content)['iotd'])
+            self.assertEqual(iotd2.date, today + timedelta(1))
 
-        image4 = Image.objects.create(user = self.user)
-        submission4 = IotdSubmission.objects.create(submitter = self.submitter_1, image = image4)
-        vote4 = IotdVote.objects.create(reviewer = self.reviewer_1, image = image4)
+            image4 = Image.objects.create(user = self.user)
+            submission4 = IotdSubmission.objects.create(submitter = self.submitter_1, image = image4)
+            vote4 = IotdVote.objects.create(reviewer = self.reviewer_1, image = image4)
+
         # Test MAX_FUTURE_DAYS cutoff
         with self.settings(IOTD_JUDGEMENT_MAX_FUTURE_DAYS = 3):
             url = reverse_lazy('iotd_toggle_judgement_ajax', kwargs = {'pk': image4.pk})
