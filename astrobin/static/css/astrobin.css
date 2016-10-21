@@ -4445,7 +4445,7 @@ table.search-table td.search-table-date {
   margin-bottom: 22px;
   position: relative;
 }
-.iotd-queue-item:nth-of-type(odd) {
+.iotd-queue-item:nth-of-type(even) {
   margin-right: 16px;
 }
 .iotd-queue-item > .iotd-queue-item-actions {
@@ -4541,7 +4541,7 @@ table.search-table td.search-table-date {
   position: relative;
   margin-bottom: 10px;
 }
-.top-picks-item:nth-child(even) {
+.top-picks-item:nth-child(odd) {
   margin-right: 10px;
 }
 .top-picks-item .overlay {
