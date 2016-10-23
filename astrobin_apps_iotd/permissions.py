@@ -142,6 +142,16 @@ def may_elect_iotd(user, image):
             'max_allowed': max_allowed
         }
 
+    max_allowed = settings.IOTD_JUDGEMENT_MAX_FUTURE_PER_JUDGE
+    scheduled = Iotd.objects.filter(
+        judge = user,
+        date__gt = datetime.now().date()).count()
+    toggling_on = not Iotd.objects.filter(image = image).exists()
+    if scheduled >= max_allowed and toggling_on:
+        return False, _("You have already scheduled %(max_allowed)s IOTDs.") % {
+            'max_allowed': max_allowed
+        }
+
     return True, None
 
 

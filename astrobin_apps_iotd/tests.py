@@ -26,13 +26,15 @@ class IotdTest(TestCase):
     def setUp(self):
         self.submitter_1 = User.objects.create_user('submitter_1', 'submitter_1@test.com', 'password')
         self.submitter_2 = User.objects.create_user('submitter_2', 'submitter_2@test.com', 'password')
+        self.submitter_3 = User.objects.create_user('submitter_3', 'submitter_3@test.com', 'password')
         self.submitters = Group.objects.create(name = 'iotd_submitters')
-        self.submitters.user_set.add(self.submitter_1, self.submitter_2)
+        self.submitters.user_set.add(self.submitter_1, self.submitter_2, self.submitter_3)
 
         self.reviewer_1 = User.objects.create_user('reviewer_1', 'reviewer_1@test.com', 'password')
         self.reviewer_2 = User.objects.create_user('reviewer_2', 'reviewer_2@test.com', 'password')
+        self.reviewer_3 = User.objects.create_user('reviewer_3', 'reviewer_3@test.com', 'password')
         self.reviewers = Group.objects.create(name = 'iotd_reviewers')
-        self.reviewers.user_set.add(self.reviewer_1, self.reviewer_2)
+        self.reviewers.user_set.add(self.reviewer_1, self.reviewer_2, self.reviewer_3)
 
         self.judge_1 = User.objects.create_user('judge_1', 'judge_1@test.com', 'password')
         self.judge_2 = User.objects.create_user('judge_2', 'judge_2@test.com', 'password')
@@ -52,10 +54,12 @@ class IotdTest(TestCase):
         self.submitters.delete()
         self.submitter_1.delete()
         self.submitter_2.delete()
+        self.submitter_3.delete()
 
         self.reviewers.delete()
         self.reviewer_1.delete()
         self.reviewer_2.delete()
+        self.reviewer_3.delete()
 
         self.judges.delete()
         self.judge_1.delete()
@@ -387,13 +391,45 @@ class IotdTest(TestCase):
 
         # Image must not be past IOTD
         with self.assertRaisesRegexp(ValidationError, "already been an IOTD"):
-            IotdVote.objects.create(
-                reviewer = self.reviewer_2,
+            Iotd.objects.create(
+                judge = self.judge_1,
                 image = self.image)
+
+        # No more than IOTD_JUDGEMENT_MAX_FUTURE_PER_JUDGE already scheduled
+        with self.settings(
+                IOTD_JUDGEMENT_MAX_PER_DAY = 3,
+                IOTD_JUDGEMENT_MAX_FUTURE_PER_JUDGE = 1):
+            image2 = Image.objects.create(user = self.user)
+            submission_2 = IotdSubmission.objects.create(
+                submitter = self.submitter_2,
+                image = image2)
+            vote_2 = IotdVote.objects.create(
+                reviewer = self.reviewer_2,
+                image = image2)
+            Iotd.objects.create(
+                judge = self.judge_1,
+                image = image2,
+                date = datetime.now().date() + timedelta(1))
+
+            image3 = Image.objects.create(user = self.user)
+            submission_3 = IotdSubmission.objects.create(
+                submitter = self.submitter_3,
+                image = image3)
+            vote_3 = IotdVote.objects.create(
+                reviewer = self.reviewer_3,
+                image = image3)
+            with self.assertRaisesRegexp(ValidationError, "already scheduled"):
+                Iotd.objects.create(
+                    judge = self.judge_1,
+                    image = image3)
 
         iotd.delete()
         vote_1.delete()
+        vote_2.delete()
+        vote_3.delete()
         submission_1.delete()
+        submission_2.delete()
+        submission_3.delete()
 
 
     # Views
@@ -827,6 +863,15 @@ class IotdTest(TestCase):
             response = self.client.post(url, HTTP_X_REQUESTED_WITH = 'XMLHttpRequest')
             self.assertEqual(Iotd.objects.count(), 3)
 
+        # No more than IOTD_JUDGEMENT_MAX_FUTURE_PER_JUDGE already scheduled
+
+        with self.settings(
+                IOTD_JUDGEMENT_MAX_PER_DAY = 4,
+                IOTD_JUDGEMENT_MAX_FUTURE_PER_JUDGE = 1):
+            response = self.client.post(url, HTTP_X_REQUESTED_WITH = 'XMLHttpRequest')
+            self.assertFalse('iotd' in json.loads(response.content))
+            self.assertTrue("already scheduled" in json.loads(response.content)['error'])
+            self.assertEqual(Iotd.objects.count(), 3)
 
         # Clean up
         image2.delete()
