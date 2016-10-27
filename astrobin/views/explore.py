@@ -44,6 +44,8 @@ class WallView(ListView):
             sqs = sqs.filter(subject_type = 300)
         elif filter == 'trails':
             sqs = sqs.filter(subject_type = 400)
+        elif filter == 'northernlights':
+            sqs = sqs.filter(subject_type = 450)
         elif filter == 'gear':
             sqs = sqs.filter(subject_type = 500)
         elif filter == 'products':

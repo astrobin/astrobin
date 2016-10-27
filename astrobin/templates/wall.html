@@ -127,6 +127,12 @@
                         </a>
                     </li>
                     <li>
+                        <a href="{% query_string "filter='northernlights'" "" %}">
+                            <span class="bg-icon{% if filter == 'northernlights' %} icon-ok{% endif %}"></span>
+                            {% trans "Northern lights" %}
+                        </a>
+                    </li>
+                    <li>
                         <a href="{% query_string "filter='gear'" "" %}">
                             <span class="bg-icon{% if filter == 'gear' %} icon-ok{% endif %}"></span>
                             {% trans "Gear" %}

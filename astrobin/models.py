@@ -655,6 +655,7 @@ class Image(HasSolutionMixin, models.Model):
         (200, _("Solar system body or event")),
         (300, _("Extremely wide field")),
         (400, _("Star trails")),
+        (450, _("Northern lights")),
         (500, _("Gear")),
         (600, _("Other")),
     )
