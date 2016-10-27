@@ -136,8 +136,15 @@ class Annotator:
         if w:
             hd_w = settings.THUMBNAIL_ALIASES['']['hd']['size'][0]
             hd_h = int(round(h * hd_w / float(w)))
+            if hd_w > w:
+                hd_w = w
+                hd_h = h
+
             thumbnail_w = settings.THUMBNAIL_ALIASES['']['regular']['size'][0]
             thumbnail_h = int(round(h * thumbnail_w / float(w)))
+            if thumbnail_w > w:
+                thumbnail_w = w
+                thumbnail_h = h
 
             base = Image\
                 .open(getFromStorage(self.solution.content_object, 'hd'))\

@@ -1,5 +1,7 @@
 # Python
+import os
 import simplejson
+import time
 import urllib2
 
 # Django
@@ -109,6 +111,8 @@ class SolutionFinalizeView(base.View):
                 pixscale = info['calibration']['pixscale']
                 if w and pixscale:
                     hd_w = settings.THUMBNAIL_ALIASES['']['hd']['size'][0]
+                    if hd_w > w:
+                        hd_w = w
                     ratio = hd_w / float(w)
                     corrected_scale = float(pixscale) * ratio
                     solution.pixscale = "%.3f" %  corrected_scale
@@ -127,8 +131,10 @@ class SolutionFinalizeView(base.View):
             solution.annotations = simplejson.dumps(annotations_obj)
             annotator = Annotator(solution)
             annotated_image = annotator.annotate()
+            filename, ext = os.path.splitext(target.image_file.name)
+            annotated_filename = "%s-%d%s" % (filename, int(time.time()), ext)
             if annotated_image:
-                solution.image_file.save(target.image_file.name, annotated_image)
+                solution.image_file.save(annotated_filename, annotated_image)
 
             # Get sky plot image
             url = solver.sky_plot_zoom1_image_url(solution.submission_id)
