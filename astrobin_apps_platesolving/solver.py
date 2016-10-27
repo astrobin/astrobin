@@ -24,18 +24,14 @@ class Solver(object):
             return self.MISSING
 
         sub_status = self._backend().sub_status(submission)
-        try:
-            status = sub_status.get('status', '')
-        except AttributeError:
-            return self.PENDING
 
-        if status == 'fail':
+        if sub_status.get('status', '') == 'fail':
             return self.FAILED
 
         if sub_status.get('job_calibrations', []):
             return self.SUCCESS
 
-        if 'jobs' in sub_status or not sub_status.get('jobs', []):
+        if 'jobs' in sub_status and not sub_status.get('jobs', []):
             return self.PENDING
 
         jobs = sub_status.get('jobs', [])
