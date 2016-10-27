@@ -8,6 +8,9 @@ from django.utils.translation import ugettext_lazy as _
 
 
 def may_toggle_submission_image(user, image):
+    if user.is_superuser:
+        return True, None
+
     if not user.groups.filter(name = 'iotd_submitters').exists():
         return False, _("You are not a member of the IOTD Submitters board.")
 
@@ -49,6 +52,9 @@ def may_toggle_submission_image(user, image):
 
 
 def may_toggle_vote_image(user, image):
+    if user.is_superuser:
+        return True, None
+
     if not user.groups.filter(name = 'iotd_reviewers').exists():
         return False, _("You are not a member of the IOTD Reviewers board.")
 
@@ -96,6 +102,9 @@ def may_toggle_vote_image(user, image):
 
 
 def may_elect_iotd(user, image):
+    if user.is_superuser:
+        return True, None
+
     if not user.groups.filter(name = 'iotd_judges').exists():
         return False, _("You are not a member of the IOTD Judges board.")
 
@@ -156,6 +165,9 @@ def may_elect_iotd(user, image):
 
 
 def may_unelect_iotd(user, image):
+    if user.is_superuser:
+        return True, None
+
     if not user.groups.filter(name = 'iotd_judges').exists():
         return False, _("You are not a member of the IOTD Judges board.")
 
