@@ -141,8 +141,11 @@
                         </td>
 
                         <td class="search-table-date hidden-phone">
-                            <abbr class="timeago" title="{{search_result.object.uploaded|date:'Y-m-d\TH:i:s'}}">
-                            </abbr>
+                            {% if search_result.object.published %}
+                                <abbr class="timeago" title="{{search_result.object.published|date:'Y-m-d\TH:i:s'}}"></abbr>
+                            {% else %}
+                                <abbr class="timeago" title="{{search_result.object.uploaded|date:'Y-m-d\TH:i:s'}}"></abbr>
+                            {% endif %}
                         </td>
 
                         <td class="search-table-views hidden-phone">{% get_hit_count for search_result.object %}</td>

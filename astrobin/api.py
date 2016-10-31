@@ -119,6 +119,7 @@ class ImageResource(ModelResource):
     imaging_cameras = fields.ListField()
 
     uploaded = fields.DateField('uploaded')
+    published = fields.DateField('published')
     updated = fields.DateField('updated')
 
     locations = fields.ToManyField(LocationResource, 'locations')
@@ -152,6 +153,7 @@ class ImageResource(ModelResource):
             'url_duckduckgo_small',
 
             'uploaded',
+            'published',
             'description',
             'h',
             'w',
@@ -172,6 +174,7 @@ class ImageResource(ModelResource):
             'is_solved': ALL,
             'user': ALL_WITH_RELATIONS,
             'uploaded': ALL,
+            'published': ALL,
             'imaging_telescopes': ALL,
             'imaging_cameras': ALL,
             'w': ALL,

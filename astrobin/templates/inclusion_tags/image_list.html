@@ -27,7 +27,13 @@
                     <td>
                         <a href="{% get_image_url image %} ">{{image.title}}</a>
                     </td>
-                    <td class="hidden-phone">{{image.uploaded|date:"SHORT_DATE_FORMAT"}}</td>
+                    <td class="hidden-phone">
+                        {% if image.published %}
+                            {{image.published|date:"SHORT_DATE_FORMAT"}}
+                        {% else %}
+                            {{image.uploaded|date:"SHORT_DATE_FORMAT"}}
+                        {% endif %}
+                    </td>
                     <td class="hidden-phone">{% get_hit_count for image %}</td>
                     <td class="hidden-phone">{{image.likes}}</td>
                     <td class="hidden-phone">{{image.bookmarks}}</td>

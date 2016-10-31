@@ -110,7 +110,11 @@
                         <table class="table table-condensed">
                             <tr>
                                 <th><i class="icon-calendar"></i></th>
-                                <td>{{image.uploaded|date:"SHORT_DATE_FORMAT"}}</td>
+                                {% if image.published %}
+                                    <td>{{image.published|date:"SHORT_DATE_FORMAT"}}</td>
+                                {% else %}
+                                    <td>{{image.uploaded|date:"SHORT_DATE_FORMAT"}}</td>
+                                {% endif %}
                             </tr>
 
                             <tr>
