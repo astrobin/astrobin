@@ -374,7 +374,14 @@ class ImageDetailView(DetailView):
         # BASIC DATA #
         ##############
 
-        uploaded_on = to_user_timezone(image.uploaded, profile) if profile else image.uploaded
+        published_on = \
+            to_user_timezone(image.uploaded, profile) \
+            if profile else image.uploaded
+        if image.published:
+            published_on = \
+                to_user_timezone(image.published, profile) \
+                if profile else image.published
+
         alias = 'regular'
         mod = self.request.GET.get('mod')
         if mod == 'inverted':
@@ -552,7 +559,7 @@ class ImageDetailView(DetailView):
             'private_message_form': PrivateMessageForm(),
             'upload_revision_form': ImageRevisionUploadForm(),
             'dates_label': _("Dates"),
-            'uploaded_on': uploaded_on,
+            'published_on': published_on,
             'show_contains': (image.subject_type == 100 and subjects) or (image.subject_type >= 200),
             'subjects_short': subjects[:subjects_limit],
             'subjects_reminder': subjects[subjects_limit:],

@@ -198,6 +198,7 @@ class ImageTest(TestCase):
         response = self._do_upload('astrobin/fixtures/test.jpg', wip = True)
         image = self._get_last_image()
         self.assertEqual(image.is_wip, True)
+        self.assertIsNone(image.published)
         image.delete()
 
         # Test successful upload workflow
@@ -210,6 +211,7 @@ class ImageTest(TestCase):
             target_status_code = 200)
 
         self.assertEqual(image.title, u"")
+        self.assertTrue((image.published - image.uploaded).total_seconds() < 1)
 
         # Test watermark
         response = self.client.post(
@@ -1376,8 +1378,25 @@ class ImageTest(TestCase):
         self.assertEquals(image.is_wip, False)
         self.assertEquals(len(get_unseen_notifications(self.user2)), 1)
 
-        self.client.logout()
         image.delete()
+
+        # Test the `published` property
+        self._do_upload('astrobin/fixtures/test.jpg', True)
+        image = self._get_last_image()
+        self.assertTrue(image.is_wip)
+        self.assertIsNone(image.published)
+        response = self.client.post(post_url((image.pk,)))
+        image = Image.objects.get(pk = image.pk)
+        self.assertIsNotNone(image.published)
+
+        published = image.published
+        image.is_wip = True; image.save()
+        image.is_wip = False; image.save()
+        self.assertTrue((published - image.uploaded).total_seconds() < 1)
+
+        image.delete()
+
+        self.client.logout()
 
     def test_image_demote_view(self):
         def post_url(args = None):

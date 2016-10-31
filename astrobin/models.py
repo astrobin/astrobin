@@ -732,6 +732,7 @@ class Image(HasSolutionMixin, models.Model):
     )
 
     uploaded = models.DateTimeField(editable=False, auto_now_add=True)
+    published = models.DateTimeField(editable=False, null=True, blank=True)
     updated = models.DateTimeField(editable=False, auto_now=True, null=True, blank=True)
 
     # For likes, bookmarks, and perhaps more.

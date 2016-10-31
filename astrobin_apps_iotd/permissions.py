@@ -27,8 +27,8 @@ def may_toggle_submission_image(user, image):
         return False, _("You cannot submit a judge's image.")
 
     days = settings.IOTD_SUBMISSION_WINDOW_DAYS
-    if image.uploaded < datetime.now() - timedelta(days):
-        return False, _("You cannot submit an image that was uploaded more than %(max_days)s days ago.") % {
+    if image.published < datetime.now() - timedelta(days):
+        return False, _("You cannot submit an image that was published more than %(max_days)s days ago.") % {
             'max_days': days
         }
 

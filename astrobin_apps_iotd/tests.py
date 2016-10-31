@@ -79,17 +79,17 @@ class IotdTest(TestCase):
                 image = self.image)
 
         # Image must be recent enough
-        self.image.uploaded =\
+        self.image.published =\
             datetime.now() -\
             timedelta(settings.IOTD_SUBMISSION_WINDOW_DAYS + 1)
         self.image.save()
-        with self.assertRaisesRegexp(ValidationError, "uploaded more than"):
+        with self.assertRaisesRegexp(ValidationError, "published more than"):
             IotdSubmission.objects.create(
                 submitter = self.submitter_1,
                 image = self.image)
 
         # Image must not be WIP
-        self.image.uploaded = datetime.now()
+        self.image.published = datetime.now()
         self.image.is_wip = True
         self.image.save()
         with self.assertRaisesRegexp(ValidationError, "staging area"):

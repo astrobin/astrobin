@@ -43,6 +43,9 @@ from .stories import add_story
 
 
 def image_pre_save(sender, instance, **kwargs):
+    if not instance.pk and not instance.is_wip:
+        instance.published = datetime.datetime.now()
+
     try:
         image = sender.objects.get(pk = instance.pk)
     except sender.DoesNotExist:
@@ -52,6 +55,9 @@ def image_pre_save(sender, instance, **kwargs):
             # This image is being approved
             if not instance.is_wip:
                 add_story(instance.user, verb = 'VERB_UPLOADED_IMAGE', action_object = instance)
+
+        if not instance.is_wip and not instance.published:
+            instance.published = datetime.datetime.now()
 pre_save.connect(image_pre_save, sender = Image)
 
 
