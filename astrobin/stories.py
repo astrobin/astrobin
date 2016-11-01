@@ -5,11 +5,17 @@ import datetime
 from django.db.models import Q
 
 # Third party
-from actstream.models import Action
-from actstream import action
+try:
+    from actstream.models import Action
+    from actstream import action
+except:
+    pass
 
 
 def add_story(actor, **kwargs):
+    if Action is None or action is None:
+        return
+
     date_from = datetime.datetime.now() - datetime.timedelta(days=7)
     verb = kwargs['verb']
 

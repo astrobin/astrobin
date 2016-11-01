@@ -64,12 +64,12 @@ class IotdSubmissionQueueView(
                 'date': date,
                 'images': sorted(list(set([
                     x
-                    for x in self.model.objects.filter(
-                        published__gte = date, published__lt = date + timedelta(1))
+                    for x in self.model.objects\
+                        .filter(published__gte = date, published__lt = date + timedelta(1))
                     if not Iotd.objects.filter(
                         image = x,
                         date__lte = datetime.now().date()).exists()
-                    and not x.user in judges])), key = lambda x: x.pk, reverse = True)})
+                    and not x.user in judges])), key = lambda x: x.published, reverse = True)})
 
         return image_groups
 
@@ -120,7 +120,7 @@ class IotdReviewQueueView(
             if not Iotd.objects.filter(
                 image = x.image,
                 date__lte = datetime.now().date()).exists()
-            and not x.image.user in judges])), key = lambda x: x.pk, reverse = True)
+            and not x.image.user in judges])), key = lambda x: x.published, reverse = True)
 
 
 class IotdToggleVoteAjaxView(
@@ -169,7 +169,7 @@ class IotdJudgementQueueView(
             if not Iotd.objects.filter(
                 image = x.image,
                 date__lte = datetime.now().date()).exists()
-            and not x.image.user in judges])), key = lambda x: x.pk, reverse = True)
+            and not x.image.user in judges])), key = lambda x: x.published, reverse = True)
 
 
 class IotdToggleJudgementAjaxView(
