@@ -1,3 +1,6 @@
+# Python
+from datetime import datetime
+
 # Django
 from django.views.generic import ListView
 
@@ -8,7 +11,7 @@ from haystack.query import SearchQuerySet
 from astrobin.models import Image
 
 # Other AstroBin apps
-from astrobin_apps_iotd.models import IotdVote
+from astrobin_apps_iotd.models import Iotd, IotdVote
 
 
 class WallView(ListView):
@@ -79,4 +82,10 @@ class TopPicksView(ListView):
     paginate_by = 30
 
     def get_queryset(self):
-        return list(set([x.image for x in self.model.objects.all()]))
+        return sorted(list(set([
+            x.image
+            for x in self.model.objects.all()
+            if not Iotd.objects.filter(
+                image = x.image,
+                date__lte = datetime.now().date()).exists()])),
+            key = lambda x: x.published, reverse = True)
