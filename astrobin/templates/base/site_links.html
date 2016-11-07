@@ -94,7 +94,7 @@
             </ul>
         </li>
 
-        <li class="dropdown explore-menu {% current request "^/explore/|^/search/|^/stats/|^/leaderboard/" %}">
+        <li class="dropdown explore-menu {% current request "^/explore/|^/search/|^/stats/|^/trending-astrophotographers/" %}">
             <a href="#" class="dropdown-toggle" data-toggle="dropdown">
                 {% trans "Explore" %}
                 <i class="icon-caret-down"></i>
@@ -153,10 +153,10 @@
                 </li>
                 {% endif %}
 
-                <li class="explore-menu-leaderboard">
-                    <a href="{% url 'leaderboard' %}">
+                <li class="explore-menu-trending-astrophotographers">
+                    <a href="{% url 'trending_astrophotographers' %}">
                         <i class="icon-list-ol"></i>
-                        {% trans "Leaderboard" %}
+                        {% trans "Trending astrophotographers" %}
                     </a>
                 </li>
             </ul>

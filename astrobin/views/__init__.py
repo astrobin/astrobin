@@ -1965,7 +1965,7 @@ def stats(request):
 
 
 @require_GET
-def leaderboard(request):
+def trending_astrophotographers(request):
     response_dict = {}
 
     if 'page' in request.GET:
@@ -1991,7 +1991,7 @@ def leaderboard(request):
     return object_list(
         request,
         queryset = queryset,
-        template_name = 'leaderboard.html',
+        template_name = 'trending_astrophotographers.html',
         template_object_name = 'user',
         extra_context = response_dict,
     )
