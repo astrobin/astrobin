@@ -370,7 +370,7 @@ class ImageTest(TestCase):
             filter = filter,
             binning = 1,
             iso = 3200,
-            gain = 1,
+            gain = 1.00,
             sensor_cooling = -20,
             darks = 10,
             flats = 10,
@@ -383,6 +383,9 @@ class ImageTest(TestCase):
         response = self.client.get(reverse('image_detail', kwargs = {'id': image.id}))
         self.assertEqual(response.status_code, 200)
         self.assertEqual(response.context[0]['image_type'], 'deep_sky')
+
+        self.assertContains(response, "(gain: 1.00)")
+
         dsa.delete()
 
         # SSA data

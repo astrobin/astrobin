@@ -288,6 +288,8 @@ class ImageDetailView(DetailView):
                         key = "filter(%s)" % a.filter.get_name()
                     if a.iso:
                         key += '-ISO(%d)' % a.iso
+                    if a.gain:
+                        key += '-gain(%.2f)' % a.gain
                     if a.sensor_cooling:
                         key += '-temp(%d)' % a.sensor_cooling
                     if a.binning:
@@ -306,6 +308,7 @@ class ImageDetailView(DetailView):
                     dsa_data['frames'][key]['filter_url'] = a.filter.get_absolute_url() if a.filter else '#'
                     dsa_data['frames'][key]['filter'] = a.filter if a.filter else ''
                     dsa_data['frames'][key]['iso'] = 'ISO%d' % a.iso if a.iso else ''
+                    dsa_data['frames'][key]['gain'] = '(gain: %.2f)' % a.gain if a.gain else ''
                     dsa_data['frames'][key]['sensor_cooling'] = '%dC' % a.sensor_cooling if a.sensor_cooling else ''
                     dsa_data['frames'][key]['binning'] = 'bin %sx%s' % (a.binning, a.binning) if a.binning else ''
                     dsa_data['frames'][key]['integration'] = '%sx%s"' % (current_number + a.number, a.duration)
@@ -344,7 +347,7 @@ class ImageDetailView(DetailView):
                     ('\n' if len(frames_list) > 1 else '') +
                     u'\n'.join("%s %s" % (
                         "<a href=\"%s\">%s</a>:" % (f[1]['filter_url'], f[1]['filter']) if f[1]['filter'] else '',
-                        "%s %s %s %s" % (f[1]['integration'], f[1]['iso'], f[1]['sensor_cooling'], f[1]['binning']),
+                        "%s %s %s %s %s" % (f[1]['integration'], f[1]['iso'], f[1]['gain'], f[1]['sensor_cooling'], f[1]['binning']),
                     ) for f in frames_list)),
                 (_('Integration'), "%.1f %s" % (dsa_data['integration'], _("hours"))),
                 (_('Darks'), '~%d' % (int(reduce(lambda x, y: int(x) + int(y), dsa_data['darks'])) / len(dsa_data['darks'])) if dsa_data['darks'] else 0),
