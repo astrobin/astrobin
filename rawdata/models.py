@@ -265,7 +265,7 @@ class PublicDataPool(models.Model):
 
     class Meta:
         app_label = 'rawdata'
-        ordering = ('-updated',)
+        ordering = ('-created',)
 
     def delete(self):
         self.active = False

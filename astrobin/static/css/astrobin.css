@@ -3474,15 +3474,15 @@ table.rawdata-folder-table td.rawdata-folder-files,
 table.rawdata-folder-table th.rawdata-folder-files,
 table.rawdata-folder-table td.rawdata-folder-images,
 table.rawdata-folder-table th.rawdata-folder-images,
-table.rawdata-folder-table td.rawdata-folder-last-updated,
-table.rawdata-folder-table th.rawdata-folder-last-updated {
+table.rawdata-folder-table td.rawdata-folder-created,
+table.rawdata-folder-table th.rawdata-folder-created {
   text-align: center;
   overflow: hidden;
   text-overflow: ellipsis;
   width: 10%;
 }
-table.rawdata-folder-table td.rawdata-folder-last-updated,
-table.rawdata-folder-table th.rawdata-folder-last-updated {
+table.rawdata-folder-table td.rawdata-folder-created,
+table.rawdata-folder-table th.rawdata-folder-created {
   width: 15%;
   text-align: right;
 }

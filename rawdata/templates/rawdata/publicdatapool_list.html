@@ -33,7 +33,7 @@
             <th class="rawdata-folder-owner hidden-phone">{% trans "Owner" %}</th>
             <th class="rawdata-folder-files hidden-phone">{% trans "Raw images" %}</th>
             <th class="rawdata-folder-images hidden-phone">{% trans "Processed images" %}</th>
-            <th class="rawdata-folder-last-updated hidden-phone hidden-tablet">{% trans "Last updated" %}</th>
+            <th class="rawdata-folder-created hidden-phone hidden-tablet">{% trans "Created" %}</th>
         </thead>
         <tbody>
             {% for object in object_list %}
@@ -46,8 +46,8 @@
                     </td>
                     <td class="rawdata-folder-files hidden-phone">{{object.images.all|length}}</td>
                     <td class="rawdata-folder-images hidden-phone">{{object.processed_images.all|length}}</td>
-                    <td class="rawdata-folder-last-updated hidden-phone hidden-tablet">
-                        <abbr class="timeago" title="{{object.updated|date:'Y-m-d\TH:i:s'}}">
+                    <td class="rawdata-folder-created hidden-phone hidden-tablet">
+                        <abbr class="timeago" title="{{object.created|date:'Y-m-d\TH:i:s'}}">
                             {{object.updated|date}}
                         </abbr>
                     </td>
