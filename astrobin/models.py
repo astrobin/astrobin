@@ -1324,6 +1324,13 @@ class ImageRevision(HasSolutionMixin, models.Model):
         max_length = 256,
     )
 
+    description = models.TextField(
+        null = True,
+        blank = True,
+        verbose_name = _("Description"),
+        help_text = _("HTML tags are allowed."),
+    )
+
     uploaded = models.DateTimeField(editable=False, auto_now_add=True)
     w = models.IntegerField(editable=False, default=0)
     h = models.IntegerField(editable=False, default=0)

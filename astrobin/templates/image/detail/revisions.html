@@ -1,33 +1,14 @@
 {% load astrobin_apps_images_tags %}
 {% load i18n %}
+{% load sanitizer %}
 
 {% if revisions %}
-<div class="subtle-container">
-    <ul class="thumbnails astrobin-thumbnails">
-        <li class="thumbnail astrobin-thumbnail revisions">
-            <div class="revision">
-                {% if image.is_final %}
-                    <div class="final">
-                        <span class="text">
-                            {% trans "Final" %}
-                        </span>
-                    </div>
-                {% endif %}
-
-                <div class="image">
-                    {% astrobin_image image 'thumb' revision='0' %}
-                </div>
-
-                <div class="label{% if revision_label == '0' %} active{% endif %}">
-                    {% trans "Original" %}
-                </div>
-            </div> <!-- .revision -->
-        </li>
-
-        {% for r in revisions %}
+    <div class="subtle-container">
+        <div class="header"><h4><i class="icon-picture"></i> {% trans "Revisions" %}</h4></div>
+        <ul class="thumbnails astrobin-thumbnails">
             <li class="thumbnail astrobin-thumbnail revisions">
                 <div class="revision">
-                    {% if r.is_final %}
+                    {% if image.is_final %}
                         <div class="final">
                             <span class="text">
                                 {% trans "Final" %}
@@ -36,18 +17,60 @@
                     {% endif %}
 
                     <div class="image">
-                        {% astrobin_image r.image 'thumb' revision=r.label %}
+                        {% astrobin_image image 'thumb' revision='0' tooltip=False %}
                     </div>
 
-                    <div class="label{% if revision_label == r.label %} active{% endif %}">
-                        {{r.label}}
+                    <div class="label{% if revision_label == '0' %} active{% endif %}">
+                        {% trans "Original" %}
                     </div>
                 </div> <!-- .revision -->
             </li>
-        {% endfor %}
-    </ul> <!-- thumbnails -->
-</div> <!-- subtle-container -->
+
+            {% for r in revisions %}
+                <li class="thumbnail astrobin-thumbnail revisions">
+                    <div class="revision">
+                        {% if r.is_final %}
+                            <div class="final">
+                                <span class="text">
+                                    {% trans "Final" %}
+                                </span>
+                            </div>
+                        {% endif %}
+
+                        {% ifequal request.user image.user %}
+                            <div class="edit">
+                                <a href="{% url 'image_edit_revision' r.pk %}">
+                                    <i class="icon-pencil"></i>
+                                </a>
+                            </div>
+                        {% endifequal %}
+
+                        <div class="image">
+                            {% astrobin_image r.image 'thumb' revision=r.label tooltip=False %}
+                        </div>
+
+                        <div class="label{% if revision_label == r.label %} active{% endif %}">
+                            {{r.label}}
+                        </div>
+                    </div> <!-- .revision -->
+                </li>
+            {% endfor %}
+        </ul> <!-- thumbnails -->
+
+        {% if revisions_with_description %}
+            {% for r in revisions_with_description %}
+                <div class="revision-description">
+                    <h3>{{r.label}}</h3>
+                    <p>
+                        {{r.description|strip_html|safe}}
+                        {% ifequal request.user image.user %}
+                            - <a href="{% url 'image_edit_revision' r.pk %}">
+                                <i class="icon-pencil"></i>
+                            </a>
+                        {% endifequal %}
+                    </p>
+                </div>
+            {% endfor %}
+        {% endif %}
+    </div> <!-- subtle-container -->
 {% endif %}
-
-
-

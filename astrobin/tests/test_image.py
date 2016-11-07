@@ -101,10 +101,14 @@ class ImageTest(TestCase):
             data,
             follow = True)
 
-    def _do_upload_revision(self, image, filename):
+    def _do_upload_revision(self, image, filename, description = None):
         return self.client.post(
             reverse('image_revision_upload_process'),
-            {'image_id': image.id, 'image_file': open(filename, 'rb')},
+            {
+                'image_id': image.id,
+                'image_file': open(filename, 'rb'),
+                'description': description,
+            },
             follow = True)
 
     def _get_last_image(self):
@@ -342,6 +346,13 @@ class ImageTest(TestCase):
         response = self.client.get(reverse('image_detail', kwargs = {'id': image.id, 'r': 'B'}))
         self.assertContains(response, image.thumbnail('regular', thumbnail_settings = {'revision_label': 'B'}))
         self.assertContains(response, image.thumbnail('thumb'))
+
+        # Revision description displayed
+        desc = "Test revision description"
+        revision.description = desc
+        revision.save()
+        response = self.client.get(reverse('image_detail', kwargs = {'id': image.id, 'r': 'B'}))
+        self.assertContains(response, desc)
 
         # Correct revision displayed in gallery
         response = self.client.get(reverse('user_page', kwargs = {'username': 'test'}))
@@ -1194,6 +1205,54 @@ class ImageTest(TestCase):
         self.assertEquals(image.license, 1)
 
         self.client.logout()
+
+    def test_image_edit_revision_view(self):
+        def post_data():
+            return {
+                'description': "Updated revision description",
+            }
+
+        def get_url(args = None):
+            return reverse('image_edit_revision', args = args)
+
+        self.client.login(username = 'test', password = 'password')
+        self._do_upload('astrobin/fixtures/test.jpg')
+        image = self._get_last_image()
+        image.title = "Test title"
+        image.save()
+        self._do_upload_revision(image, 'astrobin/fixtures/test.jpg', "Test revision description")
+        revision = self._get_last_image_revision()
+        self.client.logout()
+
+        # GET with wrong user
+        self.client.login(username = 'test2', password = 'password')
+        response = self.client.get(get_url((revision.pk,)))
+        self.assertEqual(response.status_code, 403)
+
+        # POST with wrong user
+        response = self.client.post(get_url((revision.pk,)), post_data())
+        self.assertEqual(response.status_code, 403)
+        self.client.logout()
+
+        # GET
+        self.client.login(username = 'test', password = 'password')
+        response = self.client.get(get_url((revision.pk,)))
+        self.assertEqual(response.status_code, 200)
+        self.assertContains(response, "Test revision description")
+
+        # POST
+        response = self.client.post(get_url((revision.pk,)), post_data(), follow = True)
+        self.assertRedirects(
+            response,
+            reverse('image_detail', kwargs = {'id': image.pk, 'r': revision.label}),
+            status_code = 302,
+            target_status_code = 200)
+        self._assert_message(response, "success unread", "Form saved")
+        revision = ImageRevision.objects.get(pk = revision.pk)
+        self.assertEquals(revision.description, "Updated revision description")
+
+        self.client.logout()
+
 
     def test_image_delete_view(self):
         def post_url(args = None):

@@ -724,6 +724,9 @@ body.full .navbar .nav.pull-right > li > a.btn:focus {
   width: auto;
   margin: 0 auto;
 }
+.modal .form-inline textarea {
+  width: 100%;
+}
 .modal .form-horizontal input[type="text"],
 .modal .form-horizontal input[type="number"] {
   width: 305px;
@@ -3161,14 +3164,25 @@ li.revisions {
   -webkit-border-radius: 6px;
   border-radius: 6px;
   top: -10px;
+  left: -4px;
+  -webkit-transform: rotate(-8deg);
+  -moz-transform: rotate(-8deg);
+  -o-transform: rotate(-8deg);
+  -ms-transform: rotate(-8deg);
+  transform: rotate(-8deg);
+}
+.revision .edit {
+  position: absolute;
+  top: -4px;
   right: -4px;
-  -webkit-transform: rotate(8deg);
-  -moz-transform: rotate(8deg);
-  -o-transform: rotate(8deg);
-  -ms-transform: rotate(8deg);
-  transform: rotate(8deg);
-  -ms-filter: "progid:DXImageTransform.Microsoft.Matrix(M11=0.9902680687415703, M12=-0.13917310096006588, M21=0.13917310096006588, M22=0.9902680687415703, SizingMethod='auto expand')";
-  filter: "progid:DXImageTransform.Microsoft.Matrix(M11=0.9902680687415703, M12=-0.13917310096006588, M21=0.13917310096006588, M22=0.9902680687415703, SizingMethod='auto expand')";
+  z-index: 2;
+  visibility: hidden;
+  background: rgba(0, 0, 0, 0.75);
+  padding: 4px;
+  border-radius: 14px;
+}
+.revision:hover .edit {
+  visibility: visible;
 }
 .revision .label {
   position: absolute;
@@ -3190,6 +3204,19 @@ li.revisions {
   background: white;
   background-color: rgba(255, 255, 255, 0.66);
   color: #111;
+}
+.revision-description {
+  padding: 8px;
+}
+.revision-description h3 {
+  color: #fcfcfc;
+  font-size: 16px;
+  margin: 0 0 4px 0;
+}
+.revision-description p {
+  color: #c3c3c3;
+  font-size: 13px;
+  line-height: 15px;
 }
 .gear-popover .thumbnail,
 .user-popover .thumbnail,

@@ -37,6 +37,7 @@ from astrobin.forms import (
     ImageDemoteForm,
     ImageEditBasicForm,
     ImageEditGearForm,
+    ImageEditRevisionForm,
     ImageFlagThumbsForm,
     ImagePromoteForm,
     ImageRevisionUploadForm,
@@ -532,6 +533,7 @@ class ImageDetailView(DetailView):
             'alias': alias,
             'mod': mod,
             'revisions': ImageRevision.objects.select_related('image__user__userprofile').filter(image = image),
+            'revisions_with_description': ImageRevision.objects.select_related('image__user__userprofile').filter(image = image).exclude(description = None),
             'is_revision': is_revision,
             'revision_image': revision_image,
             'revision_label': r,
@@ -944,3 +946,29 @@ class ImageEditGearView(ImageEditBaseView):
                 user = image.user, instance = image, data = self.request.POST)
         else:
             return form_class(user = image.user, instance = image)
+
+
+class ImageEditRevisionView(LoginRequiredMixin, UpdateView):
+    model = ImageRevision
+    pk_url_kwarg = 'id'
+    template_name = 'image/edit/revision.html'
+    context_object_name = 'revision'
+    form_class = ImageEditRevisionForm
+
+    def get_success_url(self):
+        return reverse_lazy('image_detail', args = (self.get_object().image.pk,))
+
+    def dispatch(self, request, *args, **kwargs):
+        try:
+            revision = self.model.objects.get(pk = kwargs[self.pk_url_kwarg])
+        except Image.DoesNotExist:
+            raise Http404
+
+        if request.user.is_authenticated() and request.user != revision.image.user and not request.user.is_superuser:
+            raise PermissionDenied
+
+        return super(ImageEditRevisionView, self).dispatch(request, *args, **kwargs)
+
+    def form_valid(self, form):
+        messages.success(self.request, _("Form saved. Thank you!"))
+        return super(ImageEditRevisionView, self).form_valid(form)

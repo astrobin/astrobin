@@ -45,6 +45,14 @@ abbr[title] {
     border-color: #555;
 }
 
+.rotate (@amount: 45deg) {
+    -webkit-transform: rotate(@amount);
+    -moz-transform: rotate(@amount);
+    -o-transform: rotate(@amount);
+    -ms-transform: rotate(@amount);
+    transform: rotate(@amount);
+}
+
 .rounded-corners (@radius: 6px) {
     -moz-border-radius: @radius;
     -webkit-border-radius: @radius;
@@ -847,6 +855,10 @@ body.full {
         display: table;
         width: auto;
         margin: 0 auto;
+
+        textarea {
+            width: 100%;
+        }
     }
 
     .form-horizontal {
@@ -1190,11 +1202,7 @@ li.astrobin-thumbnail {
             font-weight: bold;
             text-shadow: 0 2px 2px black;
 
-            -webkit-transform: rotate(-45deg);
-            -moz-transform: rotate(-45deg);
-            -o-transform: rotate(-45deg);
-            -ms-transform: rotate(-45deg);
-            transform: rotate(-45deg);
+            .rotate(-45deg);
         }
     }
 
@@ -3351,17 +3359,23 @@ li.revisions {
             background-color: rgba(0,0,0,0.6);
             .rounded-corners;
             top: -10px;
-            right: -4px;
-            -webkit-transform: rotate(8deg);
-            -moz-transform: rotate(8deg);
-            -o-transform: rotate(8deg);
-            -ms-transform: rotate(8deg);
-            transform: rotate(8deg);
-
-            -ms-filter: "progid:DXImageTransform.Microsoft.Matrix(M11=0.9902680687415703, M12=-0.13917310096006588, M21=0.13917310096006588, M22=0.9902680687415703, SizingMethod='auto expand')";
-            filter: "progid:DXImageTransform.Microsoft.Matrix(M11=0.9902680687415703, M12=-0.13917310096006588, M21=0.13917310096006588, M22=0.9902680687415703, SizingMethod='auto expand')";
-
+            left: -4px;
+            .rotate(-8deg);
         }
+    }
+
+    .edit {
+        position: absolute;
+        top: -4px;
+        right: -4px;
+        z-index: 2;
+        visibility: hidden;
+        background: rgba(0,0,0,0.75);
+        padding: 4px;
+        border-radius: 14px;
+    }
+    &:hover .edit {
+        visibility: visible;
     }
 
     .label {
@@ -3387,6 +3401,22 @@ li.revisions {
             background-color: rgba(255, 255, 255, 0.66);
             color: #111;
         }
+    }
+}
+
+.revision-description {
+    padding: 8px;
+
+    h3 {
+        color: @strong-text-color;
+        font-size: 16px;
+        margin: 0 0 4px 0;
+    }
+
+    p {
+        color: #c3c3c3;
+        font-size: 13px;
+        line-height: 15px;
     }
 }
 

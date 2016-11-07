@@ -169,6 +169,15 @@ class ImageEditGearForm(forms.ModelForm):
                  )
 
 
+class ImageEditRevisionForm(forms.ModelForm):
+    class Meta:
+        model = ImageRevision
+        fields = ('description',)
+        widgets = {
+            'description': forms.Textarea(attrs={'rows':4}),
+        }
+
+
 class UserProfileEditBasicForm(forms.ModelForm):
     error_css_class = 'error'
 
@@ -277,7 +286,10 @@ class BringToAttentionForm(forms.Form):
 class ImageRevisionUploadForm(forms.ModelForm):
     class Meta:
         model = ImageRevision
-        fields = ('image_file',)
+        fields = ('image_file', 'description',)
+        widgets = {
+            'description': forms.Textarea(attrs={'rows':4}),
+        }
 
 
 class AdvancedSearchForm(SearchForm):
