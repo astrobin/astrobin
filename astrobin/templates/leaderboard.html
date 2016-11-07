@@ -9,69 +9,130 @@
 {% block content %}
     <div class="page-header">
         <h1>{% trans "Leaderboard" %}</h1>
-    </div>
 
-    <div class="row">
-        <div class="span12">
-            <div class="leaderboard">
-                <table class="table striped">
-                    <thead>
-                        <tr>
-                            <th>{% trans "Position" %}</th>
-                            <th>{% trans "User" %}</th>
+        <div class="filter-toggle-group">
+            <div class="filter-toggle">
+                <a href="?t=6m" {% if request.GET.t == '6m' %}class="active"{%endif %}>
+                    {% trans "Last 6 months" %}
+                </a>
+            </div>
 
-                            <th>
-                                <a href="{% url 'leaderboard' %}{% query_string "sort='likes'" "" %}">
-                                    {% trans "AstroBin index" %} <i class="icon-sort"></i>
-                                </a>
-                            </th>
-                            <th class="hidden-phone">
-                                <a href="{% url 'leaderboard' %}{% query_string "sort='followers'" "" %}">
-                                    {% trans "Followers" %} <i class="icon-sort"></i>
-                                </a>
-                            </th>
-                            <th class="hidden-phone">
-                                <a href="{% url 'leaderboard' %}{% query_string "sort='images'" "" %}">
-                                    {% trans "Images" %} <i class="icon-sort"></i>
-                                </a>
-                            </th>
-                            <th class="hidden-phone">
-                                <a href="{% url 'leaderboard' %}{% query_string "sort='integration'" "" %}">
-                                    {% trans "Total integration" %} <i class="icon-sort"></i>
-                                </a>
-                            </th>
-                        </tr>
-                    </thead>
-                    {% for u in user_list|slice:":100" %}
-                        <tr>
-                            <td>{{forloop.counter}}</td>
-                            <td>
-                                <a rel="popover" class="user-popover"
-                                   data-load="{% url 'user_popover_ajax' u.username %}"
-                                   href="{% url 'user_page' u.username %}">
-                                    {% if u.object %}
-                                        {{u.object.userprofile}}
-                                    {% else %}
-                                        {{u.username}}
-                                    {% endif %}
-                                </a>
-                            </td>
-                            <td>{{u.normalized_likes|floatformat:2}}</td>
-                            <td class="hidden-phone">{{u.followers}}</td>
-                            <td class="hidden-phone">{{u.images}}</td>
-                            <td class="hidden-phone">{{u.integration|floatformat:2}}</td>
-                        </tr>
-                    {% endfor %}
-                </table>
+            <span class="separator">/</span>
+
+            <div class="filter-toggle">
+                <a href="?t=1y" {% if request.GET.t == '1y' or 't' not in request.GET %}class="active"{%endif %}>
+                    {% trans "Last year" %}
+                </a>
+            </div>
+
+            <span class="separator">/</span>
+
+            <div class="filter-toggle">
+                <a href="?t=all" {% if request.GET.t == 'all' %}class="active"{%endif %}>
+                    {% trans "All time" %}
+                </a>
             </div>
         </div>
     </div>
-{% endblock %}
 
-{% block extra_js %}
-<script type="text/javascript">
-    $(document).ready(function() {
-        astrobin_common.setup_user_popovers();
-    });
-</script>
+    <table class="leaderboard table striped">
+        <thead>
+            <tr>
+                <th class="leaderboard-position">#</th>
+                <th class="leaderboard-user">{% trans "User" %}</th>
+
+                <th class="leaderboard-index">
+                    <a href="{% url 'leaderboard' %}{% query_string "sort='likes'" "" %}">
+                        {% trans "AstroBin index" %} <i class="icon-sort"></i>
+                    </a>
+                </th>
+                <th class="leaderboard-followers hidden-phone">
+                    <a href="{% url 'leaderboard' %}{% query_string "sort='followers'" "" %}">
+                        {% trans "Followers" %} <i class="icon-sort"></i>
+                    </a>
+                </th>
+                <th class="leaderboard-images hidden-phone">
+                    <a href="{% url 'leaderboard' %}{% query_string "sort='images'" "" %}">
+                        {% trans "Images" %} <i class="icon-sort"></i>
+                    </a>
+                </th>
+                <th class="leaderboard-integration hidden-phone">
+                    <a href="{% url 'leaderboard' %}{% query_string "sort='integration'" "" %}">
+                        {% trans "Total integration" %} <i class="icon-sort"></i>
+                    </a>
+                </th>
+            </tr>
+        </thead>
+
+        {% for u in user_list|slice:":100" %}
+            <tr>
+                <td class="leaderboard-position">{{forloop.counter}}</td>
+                <td class="leaderboard-user">
+                    <a href="{% url 'user_page' u.username %}">
+                        {% if u.object %}
+                            {{u.object.userprofile}}
+                        {% else %}
+                            {{u.username}}
+                        {% endif %}
+                    </a>
+                </td>
+
+                <td class="leaderboard-index">
+                    {% if request.GET.t == '6m' %}
+                        {{u.normalized_likes_6m|floatformat:2}}
+                    {% endif %}
+
+                    {% if request.GET.t == '1y' or 't' not in request.GET%}
+                        {{u.normalized_likes_1y|floatformat:2}}
+                    {% endif %}
+
+                    {% if request.GET.t == 'all' %}
+                        {{u.normalized_likes|floatformat:2}}
+                    {% endif %}
+                </td>
+
+                <td class="leaderboard-followers hidden-phone">
+                    {% if request.GET.t == '6m' %}
+                        {{u.followers_6m|floatformat:2}}
+                    {% endif %}
+
+                    {% if request.GET.t == '1y' or 't' not in request.GET %}
+                        {{u.followers_1y|floatformat:2}}
+                    {% endif %}
+
+                    {% if request.GET.t == 'all' %}
+                        {{u.followers|floatformat:2}}
+                    {% endif %}
+                </td>
+
+                <td class="leaderboard-images hidden-phone">
+                    {% if request.GET.t == '6m' %}
+                        {{u.images_6m|floatformat:2}}
+                    {% endif %}
+
+                    {% if request.GET.t == '1y' or 't' not in request.GET %}
+                        {{u.images_1y|floatformat:2}}
+                    {% endif %}
+
+                    {% if request.GET.t == 'all' %}
+                        {{u.images|floatformat:2}}
+                    {% endif %}
+                </td>
+
+                <td class="leaderboard-integration hidden-phone">
+                    {% if request.GET.t == '6m' %}
+                        {{u.images_6m|floatformat:2}}
+                    {% endif %}
+
+                    {% if request.GET.t == '1y' or 't' not in request.GET %}
+                        {{u.images_1y|floatformat:2}}
+                    {% endif %}
+
+                    {% if request.GET.t == 'all' %}
+                        {{u.images|floatformat:2}}
+                    {% endif %}
+                </td>
+            </tr>
+        {% endfor %}
+    </table>
 {% endblock %}

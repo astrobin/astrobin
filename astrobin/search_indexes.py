@@ -161,6 +161,12 @@ def _prepare_comments(obj):
         object_id = obj.id,
         deleted = False).count()
 
+def _6m_ago():
+    return datetime.datetime.now() - datetime.timedelta(183)
+
+def _1y_ago():
+    return datetime.datetime.now() - datetime.timedelta(365)
+
 
 class GearIndex(SearchIndex, Indexable):
     model_weight = IntegerField()
@@ -266,6 +272,8 @@ class UserIndex(SearchIndex, Indexable):
     model_weight = IntegerField()
 
     text = CharField(document=True, use_template=True)
+    images_6m = IntegerField()
+    images_1y = IntegerField()
     images = IntegerField()
     avg_integration = FloatField()
 
@@ -273,15 +281,23 @@ class UserIndex(SearchIndex, Indexable):
     likes = IntegerField()
 
     # Total likes of all user's images.
+    average_likes_6m = FloatField()
+    average_likes_1y = FloatField()
     average_likes = FloatField()
 
     # Normalized likes (best images only)
+    normalized_likes_6m = FloatField()
+    normalized_likes_1y = FloatField()
     normalized_likes = FloatField()
 
     # Number of followers
+    followers_6m = IntegerField()
+    followers_1y = IntegerField()
     followers = IntegerField()
 
     # Total user ingegration.
+    integration_6m = FloatField()
+    integration_1y = FloatField()
     integration = FloatField()
 
     # Average moon phase under which this user has operated.
@@ -315,18 +331,32 @@ class UserIndex(SearchIndex, Indexable):
     username = CharField(model_attr = 'username')
 
     def index_queryset(self, using = None):
-        return self.get_model().objects.all()
+        return self.get_model().objects.all().filter(username = 'siovene')
+
 
     def get_model(self):
         return User
+
 
     def prepare_model_weight(self, obj):
         # Printing here just because it's the first "prepare" function.
         print "%s: %d" % (obj.__class__.__name__, obj.pk)
         return 200;
 
+
+    def prepare_images_6m(self, obj):
+        return Image.objects.filter(user = obj).filter(
+            uploaded__gte = _6m_ago()).count()
+
+
+    def prepare_images_1y(self, obj):
+        return Image.objects.filter(user = obj).filter(
+            uploaded__gte = _1y_ago()).count()
+
+
     def prepare_images(self, obj):
         return Image.objects.filter(user = obj).count()
+
 
     def prepare_avg_integration(self, obj):
         integration = 0
@@ -346,11 +376,75 @@ class UserIndex(SearchIndex, Indexable):
             likes += ToggleProperty.objects.toggleproperties_for_object("like", i).count()
         return likes
 
+
+    def prepare_average_likes_6m(self, obj):
+        likes = self.prepare_likes(obj)
+        images = Image.objects.filter(user = obj, uploaded__gte = _6m_ago()).count()
+
+        return likes / float(images) if images > 0 else 0
+
+
+    def prepare_average_likes_1y(self, obj):
+        likes = self.prepare_likes(obj)
+        images = Image.objects.filter(user = obj, uploaded__gte = _1y_ago()).count()
+
+        return likes / float(images) if images > 0 else 0
+
+
     def prepare_average_likes(self, obj):
         likes = self.prepare_likes(obj)
         images = self.prepare_images(obj)
 
         return likes / float(images) if images > 0 else 0
+
+
+    def prepare_normalized_likes_6m(self, obj):
+        def average(values):
+            if len(values):
+                return sum(values) / float(len(values))
+            return 0
+
+        def index(values):
+            import math
+            return average(values) * math.log(len(values)+1, 10)
+
+        avg = self.prepare_average_likes_6m(obj)
+        norm = []
+
+        for i in Image.objects.filter(user = obj).filter(uploaded__gte = _6m_ago()):
+            likes = i.likes()
+            if likes >= avg:
+                norm.append(likes)
+
+        if len(norm) == 0:
+            return 0
+
+        return index(norm)
+
+
+    def prepare_normalized_likes_1y(self, obj):
+        def average(values):
+            if len(values):
+                return sum(values) / float(len(values))
+            return 0
+
+        def index(values):
+            import math
+            return average(values) * math.log(len(values)+1, 10)
+
+        avg = self.prepare_average_likes_1y(obj)
+        norm = []
+
+        for i in Image.objects.filter(user = obj).filter(uploaded__gte = _1y_ago()):
+            likes = i.likes()
+            if likes >= avg:
+                norm.append(likes)
+
+        if len(norm) == 0:
+            return 0
+
+        return index(norm)
+
 
     def prepare_normalized_likes(self, obj):
         def average(values):
@@ -376,6 +470,22 @@ class UserIndex(SearchIndex, Indexable):
         return index(norm)
 
 
+    def prepare_followers_6m(self, obj):
+        return ToggleProperty.objects.filter(
+            property_type = "follow",
+            content_type = ContentType.objects.get_for_model(User),
+            object_id = obj.pk
+        ).filter(created_on__gte = _6m_ago()).count()
+
+
+    def prepare_followers_1y(self, obj):
+        return ToggleProperty.objects.filter(
+            property_type = "follow",
+            content_type = ContentType.objects.get_for_model(User),
+            object_id = obj.pk
+        ).filter(created_on__gte = _1y_ago()).count()
+
+
     def prepare_followers(self, obj):
         return ToggleProperty.objects.filter(
             property_type = "follow",
@@ -383,12 +493,30 @@ class UserIndex(SearchIndex, Indexable):
             object_id = obj.pk
         ).count()
 
+
+    def prepare_integration_6m(self, obj):
+        integration = 0
+        for i in Image.objects.filter(user = obj, uploaded__gte = _6m_ago()):
+            integration += _get_integration(i)
+
+        return integration / 3600.0
+
+
+    def prepare_integration_1y(self, obj):
+        integration = 0
+        for i in Image.objects.filter(user = obj, uploaded__gte = _1y_ago()):
+            integration += _get_integration(i)
+
+        return integration / 3600.0
+
+
     def prepare_integration(self, obj):
         integration = 0
         for i in Image.objects.filter(user = obj):
             integration += _get_integration(i)
 
         return integration / 3600.0
+
 
     def prepare_moon_phase(self, obj):
         l = []

@@ -264,6 +264,10 @@
   .subtle-container {
     padding: 0;
   }
+  .page-header .filter-toggle-group {
+    position: initial;
+    text-align: center;
+  }
 }
 @media screen and (max-width: 375px) {
   .modal .form-horizontal input[type="text"],
