@@ -42,6 +42,7 @@ from actstream import action as act
 from actstream.models import Action
 from braces.views import LoginRequiredMixin
 from endless_pagination.decorators import page_template
+from haystack.exceptions import SearchFieldError
 from haystack.query import SearchQuerySet
 from registration.forms import RegistrationForm
 from reviews.forms import ReviewedItemForm
@@ -1080,10 +1081,16 @@ def user_page(request, username):
     sqs = sqs.filter(username = user.username).models(Image)
     sqs = sqs.order_by('-uploaded')
 
-    images = len(sqs)
-    integrated_images = len(sqs.filter(integration__gt = 0))
-    integration = sum([x.integration for x in sqs]) / 3600.0
-    avg_integration = (integration / integrated_images) if integrated_images > 0 else 0
+    try:
+        images = len(sqs)
+        integrated_images = len(sqs.filter(integration__gt = 0))
+        integration = sum([x.integration for x in sqs]) / 3600.0
+        avg_integration = (integration / integrated_images) if integrated_images > 0 else 0
+    except SearchFieldError:
+        images = 0
+        integrated_images = 0
+        integration = 0
+        avg_integration = 0
 
     stats = (
         (_('Member since'), member_since),
