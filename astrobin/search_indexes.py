@@ -331,7 +331,7 @@ class UserIndex(SearchIndex, Indexable):
     username = CharField(model_attr = 'username')
 
     def index_queryset(self, using = None):
-        return self.get_model().objects.all().filter(username = 'siovene')
+        return self.get_model().objects.all()
 
 
     def get_model(self):
