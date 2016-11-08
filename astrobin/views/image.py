@@ -533,7 +533,11 @@ class ImageDetailView(DetailView):
             'alias': alias,
             'mod': mod,
             'revisions': ImageRevision.objects.select_related('image__user__userprofile').filter(image = image),
-            'revisions_with_description': ImageRevision.objects.select_related('image__user__userprofile').filter(image = image).exclude(description = None),
+            'revisions_with_description':
+                ImageRevision.objects\
+                    .select_related('image__user__userprofile')\
+                    .filter(image = image)\
+                    .exclude(Q(description = None) | Q(description = '')),
             'is_revision': is_revision,
             'revision_image': revision_image,
             'revision_label': r,

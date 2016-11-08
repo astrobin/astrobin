@@ -354,6 +354,13 @@ class ImageTest(TestCase):
         response = self.client.get(reverse('image_detail', kwargs = {'id': image.id, 'r': 'B'}))
         self.assertContains(response, desc)
 
+        # If description is set to empty text, then it's gone
+        revision.description = ''
+        revision.save()
+        response = self.client.get(reverse('image_detail', kwargs = {'id': image.id, 'r': 'B'}))
+        self.assertNotContains(response, desc)
+        self.assertNotContains(response, '<h3>%s</h3>' % revision.label, html = True)
+
         # Correct revision displayed in gallery
         response = self.client.get(reverse('user_page', kwargs = {'username': 'test'}))
         self.assertContains(response, image.thumbnail('gallery', thumbnail_settings = {'revision_label': 'B'}))
