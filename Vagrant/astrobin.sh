@@ -319,7 +319,7 @@ function solr {
     $SUDO chown solr:astrobin /opt/solr
     if [ ! -f /opt/solr/solr.tgz ]; then
         $SUDO -u solr /bin/bash - <<"EOF"
-        curl https://archive.apache.org/dist/lucene/solr/4.4.0/solr-4.4.0.tgz > /opt/solr/solr.tgz && \
+        curl https://archive.apache.org/dist/lucene/solr/4.9.1/solr-4.9.1.tgz > /opt/solr/solr.tgz && \
 
         tar xvfz /opt/solr/solr.tgz -C /opt/solr && \
         chmod g+w /opt/solr/ -R
