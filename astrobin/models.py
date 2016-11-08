@@ -1951,6 +1951,7 @@ class UserProfile(models.Model):
         getattr(self, resolve[gear_type]).remove(gear)
 
     def get_scores(self):
+        from haystack.exceptions import SearchFieldError
         from haystack.query import SearchQuerySet
 
         scores = {
@@ -1965,7 +1966,7 @@ class UserProfile(models.Model):
             try:
                 user_search_result =\
                     SearchQuerySet().models(User).filter(django_id = self.user.pk)[0]
-            except IndexError:
+            except (IndexError, SearchFieldError):
                 return {
                     'user_scores_index': 0,
                     'user_scores_followers': 0
