@@ -93,43 +93,43 @@
 
                 <td class="trending-astrophotographers-followers hidden-phone">
                     {% if request.GET.t == '6m' %}
-                        {{u.followers_6m|floatformat:2}}
+                        {{u.followers_6m}}
                     {% endif %}
 
                     {% if request.GET.t == '1y' or 't' not in request.GET %}
-                        {{u.followers_1y|floatformat:2}}
+                        {{u.followers_1y}}
                     {% endif %}
 
                     {% if request.GET.t == 'all' %}
-                        {{u.followers|floatformat:2}}
+                        {{u.followers}}
                     {% endif %}
                 </td>
 
                 <td class="trending-astrophotographers-images hidden-phone">
                     {% if request.GET.t == '6m' %}
-                        {{u.images_6m|floatformat:2}}
+                        {{u.images_6m}}
                     {% endif %}
 
                     {% if request.GET.t == '1y' or 't' not in request.GET %}
-                        {{u.images_1y|floatformat:2}}
+                        {{u.images_1y}}
                     {% endif %}
 
                     {% if request.GET.t == 'all' %}
-                        {{u.images|floatformat:2}}
+                        {{u.images}}
                     {% endif %}
                 </td>
 
                 <td class="trending-astrophotographers-integration hidden-phone">
                     {% if request.GET.t == '6m' %}
-                        {{u.images_6m|floatformat:2}}
+                        {{u.integration_6m|floatformat:2}}
                     {% endif %}
 
                     {% if request.GET.t == '1y' or 't' not in request.GET %}
-                        {{u.images_1y|floatformat:2}}
+                        {{u.integration_1y|floatformat:2}}
                     {% endif %}
 
                     {% if request.GET.t == 'all' %}
-                        {{u.images|floatformat:2}}
+                        {{u.integration|floatformat:2}}
                     {% endif %}
                 </td>
             </tr>
