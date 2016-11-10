@@ -1979,19 +1979,22 @@ def trending_astrophotographers(request):
         raise Http404
 
     sqs = SearchQuerySet()
-    sort = '-normalized_likes'
-    if 'sort' in request.GET:
-        sort = request.GET.get('sort')
-        if sort == 'likes':
-            sort = '-normalized_likes'
-        elif sort == 'followers':
-            sort = '-followers'
-        elif sort == 'integration':
-            sort = '-integration'
-        elif sort == 'images':
-            sort = '-images'
-        else:
-            sort = '-normalized_likes'
+
+    sort = request.GET.get('sort', '-normalized_likes')
+    if sort == 'likes':
+        sort = '-normalized_likes'
+    elif sort == 'followers':
+        sort = '-followers'
+    elif sort == 'integration':
+        sort = '-integration'
+    elif sort == 'images':
+        sort = '-images'
+    else:
+        sort = '-normalized_likes'
+
+    t = request.GET.get('t', '6m')
+    if t not in ('', 'all', None):
+        sort += '_%s' % t
 
     queryset = sqs.models(User).order_by(sort)
 
