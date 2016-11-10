@@ -1980,8 +1980,8 @@ def trending_astrophotographers(request):
 
     sqs = SearchQuerySet()
 
-    sort = request.GET.get('sort', '-normalized_likes')
-    if sort == 'likes':
+    sort = request.GET.get('sort', 'index')
+    if sort == 'index':
         sort = '-normalized_likes'
     elif sort == 'followers':
         sort = '-followers'
