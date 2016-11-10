@@ -1992,7 +1992,7 @@ def trending_astrophotographers(request):
     else:
         sort = '-normalized_likes'
 
-    t = request.GET.get('t', '6m')
+    t = request.GET.get('t', '1y')
     if t not in ('', 'all', None):
         sort += '_%s' % t
 
