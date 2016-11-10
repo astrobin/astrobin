@@ -376,16 +376,28 @@ class UserIndex(SearchIndex, Indexable):
             likes += ToggleProperty.objects.toggleproperties_for_object("like", i).count()
         return likes
 
+    def prepare_likes_6m(self, obj):
+        likes = 0
+        for i in Image.objects.filter(user = obj, uploaded__gte = _6m_ago()):
+            likes += ToggleProperty.objects.toggleproperties_for_object("like", i).count()
+        return likes
+
+    def prepare_likes_1y(self, obj):
+        likes = 0
+        for i in Image.objects.filter(user = obj, uploaded__gte = _6m_ago()):
+            likes += ToggleProperty.objects.toggleproperties_for_object("like", i).count()
+        return likes
+
 
     def prepare_average_likes_6m(self, obj):
-        likes = self.prepare_likes(obj)
+        likes = self.prepare_likes_6m(obj)
         images = Image.objects.filter(user = obj, uploaded__gte = _6m_ago()).count()
 
         return likes / float(images) if images > 0 else 0
 
 
     def prepare_average_likes_1y(self, obj):
-        likes = self.prepare_likes(obj)
+        likes = self.prepare_likes_1y(obj)
         images = Image.objects.filter(user = obj, uploaded__gte = _1y_ago()).count()
 
         return likes / float(images) if images > 0 else 0
