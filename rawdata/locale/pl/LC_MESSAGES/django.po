@@ -8,7 +8,7 @@ msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2016-09-25 19:08+0100\n"
-"PO-Revision-Date: 2015-10-20 20:37+0000\n"
+"PO-Revision-Date: 2016-10-25 08:40+0000\n"
 "Last-Translator: Lukasz83 <lukasz.sujka83@gmail.com>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
 "Language: pl\n"
@@ -18,7 +18,7 @@ msgstr ""
 "Plural-Forms: nplurals=3; plural=(n==1 ? 0 : n%10>=2 && n%10<=4 && (n%100<10 "
 "|| n%100>=20) ? 1 : 2);\n"
 "X-Generator: Pootle 2.5.0\n"
-"X-POOTLE-MTIME: 1445373478.284214\n"
+"X-POOTLE-MTIME: 1477384832.255140\n"
 
 #: folders.py:82 models.py:215 models.py:283
 #: templates/rawdata/privatesharedfolder_detail.html:86
@@ -193,9 +193,8 @@ msgid "Files"
 msgstr "Pliki"
 
 #: templates/rawdata/_images.html:13
-#, fuzzy
 msgid "Filename"
-msgstr "Pliki"
+msgstr "Nazwa pliku"
 
 #: templates/rawdata/_images.html:15 templates/rawdata/library.html:74
 #: templates/rawdata/privatesharedfolder_detail.html:89
