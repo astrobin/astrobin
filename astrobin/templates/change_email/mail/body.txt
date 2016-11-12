@@ -1,0 +1,15 @@
+{% load i18n %}
+
+{% url 'change_email_confirm' signature=signature as confirmation_url %}
+{% blocktrans %}Hello,
+
+it looks like you have requested to change the e-mail address associated to
+your AstroBin account.
+
+To continue, please click or copy/paste the following URL:
+https://astrobin.com{{confirmation_url}}
+
+If you have NOT requested this change, you can safely ignore this message.
+
+Clear skies!
+The AstroBin Team{% endblocktrans %}
