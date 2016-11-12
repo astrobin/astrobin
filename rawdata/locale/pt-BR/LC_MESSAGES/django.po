@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2016-09-25 19:08+0100\n"
+"POT-Creation-Date: 2016-11-12 07:03+0000\n"
 "PO-Revision-Date: 2013-04-09 02:26+0100\n"
 "Last-Translator: GlaucoH <glauco.hass@ig.com.br>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -743,7 +743,6 @@ msgid "Processed images"
 msgstr "Imagens processadas"
 
 #: templates/rawdata/privatesharedfolder_list.html:42
-#: templates/rawdata/publicdatapool_list.html:36
 msgid "Last updated"
 msgstr "Última atualização"
 
@@ -876,6 +875,11 @@ msgstr ""
 "sem esforço, mas usando este serviço, também significa que você está "
 "contribuindo com a manutenção do AstroBin e talvez com descobertas "
 "científicas."
+
+#: templates/rawdata/publicdatapool_list.html:36
+#, fuzzy
+msgid "Created"
+msgstr "Criar"
 
 #: templates/rawdata/restricted.html:4 templates/rawdata/restricted.html:9
 msgid "Restricted content"

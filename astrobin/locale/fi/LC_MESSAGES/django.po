@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: 0.9\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2016-09-25 19:05+0100\n"
+"POT-Creation-Date: 2016-11-12 07:02+0000\n"
 "PO-Revision-Date: 2015-12-30 10:50+0000\n"
 "Last-Translator: Samuli <samuli.vuorinen@iki.fi>\n"
 "Language-Team: Finnish <tanja@iovene.com>\n"
@@ -1018,7 +1018,7 @@ msgstr ""
 "tähän. Valitettavasti AstroBin ei tarjoa levytilaa näiden jakamiseen "
 "toistaiseksi, joten joudut jakamaan ne omalla kotisivutilallasi."
 
-#: forms.py:80 models.py:2278 models.py:2361 templates/gear/page.html:199
+#: forms.py:80 models.py:2307 models.py:2390 templates/gear/page.html:199
 #: templates/image/detail/image_title.html:14
 msgid "Link"
 msgstr "Linkki"
@@ -1027,7 +1027,7 @@ msgstr "Linkki"
 msgid "Link to TIFF/FITS"
 msgstr "Linkki TIFF/FITS-kuvaan"
 
-#: forms.py:82 models.py:702 templates/maintenance_base.html:306
+#: forms.py:82 models.py:703 templates/maintenance_base.html:306
 #: templates/image/detail/image_card.html:98
 #: templates/user/profile/edit/navigation.html:36
 msgid "Locations"
@@ -1054,56 +1054,56 @@ msgstr ""
 msgid "If you want to watermark this image, you must specify some text."
 msgstr "Vesileimataksesi kuvan syötä tekstiä."
 
-#: forms.py:148 forms.py:395 models.py:770
+#: forms.py:148 forms.py:393 models.py:772
 msgid "Imaging telescopes or lenses"
 msgstr "Kuvauskaukoputket"
 
-#: forms.py:149 models.py:771
+#: forms.py:149 models.py:773
 msgid "Guiding telescopes or lenses"
 msgstr "Seurantakaukoputket"
 
-#: forms.py:150 forms.py:244 models.py:772 models.py:1762
-#: views/__init__.py:1609
+#: forms.py:150 forms.py:253 models.py:774 models.py:1800
+#: views/__init__.py:1538
 msgid "Mounts"
 msgstr "Jalustat"
 
-#: forms.py:151 forms.py:396 models.py:773
+#: forms.py:151 forms.py:394 models.py:775
 msgid "Imaging cameras"
 msgstr "Kuvauskamerat"
 
-#: forms.py:152 models.py:774
+#: forms.py:152 models.py:776
 msgid "Guiding cameras"
 msgstr "Seurantakamerat"
 
-#: forms.py:153 forms.py:246 models.py:775 models.py:1764
-#: views/__init__.py:1610
+#: forms.py:153 forms.py:255 models.py:777 models.py:1802
+#: views/__init__.py:1539
 msgid "Focal reducers"
 msgstr "Polttovälin lyhentäjät"
 
-#: forms.py:154 forms.py:247 models.py:776 models.py:1765
-#: views/__init__.py:283 views/__init__.py:1611 views/image.py:211
+#: forms.py:154 forms.py:256 models.py:778 models.py:1803
+#: views/__init__.py:1540 views/image.py:220
 msgid "Software"
 msgstr "Ohjelmistot"
 
-#: forms.py:155 forms.py:248 models.py:777 models.py:1766
-#: views/__init__.py:1612
+#: forms.py:155 forms.py:257 models.py:779 models.py:1804
+#: views/__init__.py:1541
 msgid "Filters"
 msgstr "Suodattimet"
 
-#: forms.py:156 forms.py:249 models.py:778 models.py:1767
-#: views/__init__.py:1613
+#: forms.py:156 forms.py:258 models.py:780 models.py:1805
+#: views/__init__.py:1542
 msgid "Accessories"
 msgstr "Oheislaitteet"
 
-#: forms.py:178
+#: forms.py:187
 msgid "If you have a personal website, put the address here."
 msgstr "Jos sinulla on kotisivut, liitä osoite tähän."
 
-#: forms.py:188 models.py:1681
+#: forms.py:197 models.py:1719
 msgid "Website"
 msgstr "Kotisivu"
 
-#: forms.py:212
+#: forms.py:221
 msgid ""
 "All the telescopes and lenses you own, including the ones you use for "
 "guiding, go here."
@@ -1111,12 +1111,12 @@ msgstr ""
 "Kaikki kaukoputket ja muu optiikka, mukaanlukien seurantaputket, tulevat "
 "tähän."
 
-#: forms.py:221
+#: forms.py:230
 msgid "Your DSLRs, CCDs, planetary cameras and guiding cameras go here."
 msgstr ""
 "Digijärkkärit, CCD:t, planeettakamerat ja seurantakamerat tulevat tähän."
 
-#: forms.py:234
+#: forms.py:243
 msgid ""
 "Hint: enter your filters separately! If you enter, for instance, LRGB in one "
 "box, you won't be able to add separate acquisition sessions for them."
@@ -1124,29 +1124,29 @@ msgstr ""
 "Vihje: Syötä kaikki suodattimesi erikseen! Jos syötät esim. LRGB, et voi "
 "lisätä erillisiä valotusaikoja ja/tai sessioita niille."
 
-#: forms.py:243 models.py:1761 views/__init__.py:1607
+#: forms.py:252 models.py:1799 views/__init__.py:1536
 msgid "Telescopes and lenses"
 msgstr "Kaukoputket ja linssit"
 
-#: forms.py:245 models.py:1763 views/__init__.py:1608
+#: forms.py:254 models.py:1801 views/__init__.py:1537
 msgid "Cameras"
 msgstr "Kamerat"
 
-#: forms.py:288 forms.py:304
+#: forms.py:283 forms.py:302
 #: templates/inclusion_tags/search_image_list.html:64
 msgid "Users"
 msgstr "Käyttäjät"
 
-#: forms.py:300
+#: forms.py:298
 msgid "Search type"
 msgstr "Hakutyyppi"
 
-#: forms.py:302
+#: forms.py:300
 msgid "All"
 msgstr "Kaikki"
 
-#: forms.py:303 models.py:1379 templates/leaderboard.html:35
-#: templates/gear/page.html:238
+#: forms.py:301 models.py:1417 templates/trending_astrophotographers.html:56
+#: templates/base/site_links.html:34 templates/gear/page.html:238
 #: templates/inclusion_tags/search_image_list.html:51
 #: templates/inclusion_tags/search_image_list.html:104
 #: templates/popover/user.html:15
@@ -1155,130 +1155,132 @@ msgstr "Kaikki"
 msgid "Images"
 msgstr "Kuvia"
 
-#: forms.py:305 models.py:658 models.py:1788
-#: templates/maintenance_base.html:300 templates/wall.html:132
+#: forms.py:303 models.py:659 models.py:1826
+#: templates/maintenance_base.html:300 templates/wall.html:138
+#: templates/image/detail/menu/edit.html:30
 #: templates/inclusion_tags/search_image_list.html:13
-#: templates/user/profile/navigation.html:151
-#: templates/user/profile/edit/navigation.html:30 views/__init__.py:1074
+#: templates/user/profile/navigation.html:154
+#: templates/user/profile/edit/navigation.html:30 views/__init__.py:999
 msgid "Gear"
 msgstr "Laitteisto"
 
-#: forms.py:317
+#: forms.py:315
 msgid "Telescope type"
 msgstr "Kaukoputken tyyppi"
 
-#: forms.py:318 forms.py:324
+#: forms.py:316 forms.py:322
 msgid "Any"
 msgstr "Mikä tahansa"
 
-#: forms.py:323
+#: forms.py:321
 msgid "Camera type"
 msgstr "Kameran tyyppi"
 
-#: forms.py:337 forms.py:342
+#: forms.py:335 forms.py:340
 msgid "Express value in mm"
 msgstr "Ilmaise arvo millimetreissä"
 
-#: forms.py:348 forms.py:353
+#: forms.py:346 forms.py:351
 msgid "Express value in &mu;m"
 msgstr "Ilmaise arvo mikrometreinä"
 
-#: forms.py:360 forms.py:365 forms.py:593 forms.py:638 forms.py:679
+#: forms.py:358 forms.py:363 forms.py:591 forms.py:636 forms.py:677
 msgid "Please use the following format: yyyy-mm-dd"
 msgstr "Käytä seuraavaa muotoa: vvvv-kk-pp"
 
-#: forms.py:369 forms.py:373
+#: forms.py:367 forms.py:371
 msgid "Express value in hours"
 msgstr "Ilmaise arvo tunneissa"
 
-#: forms.py:385 models.py:791 templates/image/detail/info.html:31
-#: templates/image/detail/info.html:32 templates/search/search.html:239
+#: forms.py:383 models.py:793 templates/image/detail/info.html:31
+#: templates/image/detail/info.html:32
+#: templates/image/detail/menu/edit.html:58 templates/search/search.html:239
 msgid "License"
 msgstr "Lisenssi"
 
-#: forms.py:392
+#: forms.py:390
 msgid ""
 "Search for astronomical objects, telescopes or lenses, cameras, filters..."
 msgstr "Etsi kohteita, kaukoputkia, kameroita, suodattimia..."
 
-#: forms.py:394 models.py:693
+#: forms.py:392 models.py:694
 msgid "Main solar system subject"
 msgstr "Aurinkokunnan kohde"
 
-#: forms.py:397
+#: forms.py:395
 msgid "Min. telescope aperture"
 msgstr "Kaukoputken minimiapertuuri"
 
-#: forms.py:398
+#: forms.py:396
 msgid "Max. telescope aperture"
 msgstr "Kaukoputken maksimiapertuuri"
 
-#: forms.py:399
+#: forms.py:397
 msgid "Acquired after"
 msgstr "Kuvattu myöhemmin kuin"
 
-#: forms.py:400
+#: forms.py:398
 msgid "Acquired before"
 msgstr "Kuvattu ennen"
 
-#: forms.py:401
+#: forms.py:399
 msgid "Min. integration"
 msgstr "Min. valotusaika"
 
-#: forms.py:402
+#: forms.py:400
 msgid "Max. integration"
 msgstr "Max. valotusaika"
 
-#: forms.py:403
+#: forms.py:401
 msgid "Min. Moon phase %"
 msgstr "Min. kuun vaihe %"
 
-#: forms.py:404
+#: forms.py:402
 msgid "Max. Moon phase %"
 msgstr "Max. kuun vaihe %"
 
-#: forms.py:543
+#: forms.py:541
 msgid "Latitude (degrees)"
 msgstr "Leveysaste (astetta)"
 
-#: forms.py:548
+#: forms.py:546
 msgid "Latitude (minutes)"
 msgstr "Leveysaste (minuuttia)"
 
-#: forms.py:554
+#: forms.py:552
 msgid "Latitude (seconds)"
 msgstr "Leveysaste (sekuntia)"
 
-#: forms.py:561
+#: forms.py:559
 msgid "Longitude (degrees)"
 msgstr "Pituusaste (astetta)"
 
-#: forms.py:566
+#: forms.py:564
 msgid "Longitude (minutes)"
 msgstr "Pituusaste (minuuttia)"
 
-#: forms.py:572
+#: forms.py:570
 msgid "Longitude (seconds)"
 msgstr "Pituusaste (sekuntia)"
 
-#: forms.py:594 forms.py:639 forms.py:680 models.py:1404
+#: forms.py:592 forms.py:637 forms.py:678 models.py:1442
 #: templates/image/detail/image_card.html:46
 msgid "Date"
 msgstr "Päivämäärä"
 
-#: forms.py:600
+#: forms.py:598
 msgid "Please enter a value between 1 and 5."
 msgstr "Syötä arvo väliltä 1 .. 5."
 
-#: forms.py:607
+#: forms.py:605
 msgid "Please enter a value between 1 and 10."
 msgstr "Syötä arvo väliltä 1 .. 10."
 
-#: forms.py:668 forms.py:686
+#: forms.py:666 forms.py:684
 msgid "The date cannot be in the future."
 msgstr "Päivämäärä ei voi olla tulevaisuudessa."
 
-#: forms.py:920 forms.py:981 models.py:196 templates/gear/fix.html:32
+#: forms.py:918 forms.py:979 models.py:196 templates/gear/fix.html:32
 #: templates/gear/fix.html.py:33 templates/gear/fix.html:34
 #: templates/gear/fix.html.py:42 templates/gear/fix.html:47
 #: templates/gear/fix.html.py:52 templates/gear/fix.html:57
@@ -1296,12 +1298,12 @@ msgstr "Päivämäärä ei voi olla tulevaisuudessa."
 msgid "Make"
 msgstr "Merkki"
 
-#: forms.py:921 forms.py:982 models.py:197
+#: forms.py:919 forms.py:980 models.py:197
 msgid "The make, brand, producer or developer of this product."
 msgstr "Tuotteen valmistaja tai merkki."
 
-#: forms.py:926 forms.py:987 models.py:204 models.py:1366 models.py:1964
-#: models.py:2103 templates/gear/fix.html:32 templates/gear/fix.html.py:33
+#: forms.py:924 forms.py:985 models.py:204 models.py:1404 models.py:2003
+#: models.py:2142 templates/gear/fix.html:32 templates/gear/fix.html.py:33
 #: templates/gear/fix.html:34 templates/gear/fix.html.py:42
 #: templates/gear/fix.html:47 templates/gear/fix.html.py:52
 #: templates/gear/fix.html:57 templates/gear/fix.html.py:62
@@ -1312,7 +1314,7 @@ msgstr "Tuotteen valmistaja tai merkki."
 msgid "Name"
 msgstr "Nimi"
 
-#: forms.py:931 forms.py:956 forms.py:992 forms.py:1027
+#: forms.py:929 forms.py:954 forms.py:990 forms.py:1025
 #: templates/user/profile/commercial/products.html:83
 #: templates/user/profile/commercial/products.html:165
 #: templates/user/profile/commercial/products.html:281
@@ -1322,7 +1324,7 @@ msgstr "Nimi"
 msgid "Merge"
 msgstr "Yhdistä"
 
-#: forms.py:932 forms.py:993
+#: forms.py:930 forms.py:991
 msgid ""
 "Use this field to mark that the item you are claiming really is the same "
 "product (or a variation thereof) of something you have claimed before."
@@ -1330,7 +1332,7 @@ msgstr ""
 "Käytä tätä kenttää merkitäksesi tuotteen samaksi (tai sen muunnokseksi) kuin "
 "aiemmin merkitsemäsi tuote."
 
-#: forms.py:946 forms.py:1009
+#: forms.py:944 forms.py:1007
 #, python-format
 msgid ""
 "You can't create more than %d claims. Consider upgrading your affiliation!"
@@ -1338,7 +1340,7 @@ msgstr ""
 "Et voi merkitä enempää kuin %d tuotetta. Harkitse käyttäjätilisi "
 "päivittämistä!"
 
-#: forms.py:957 forms.py:1028
+#: forms.py:955 forms.py:1026
 msgid ""
 "Use this field to mark that the item you are merging really is the same "
 "product (or a variation thereof) of something you have claimed before."
@@ -1346,7 +1348,7 @@ msgstr ""
 "Käytä tätä kenttää merkitsemään, että tuotteesi on sama (tai sen muunnos) "
 "kuin se johon yrität yhdistää tuotetta."
 
-#: forms.py:1017
+#: forms.py:1015
 msgid "You have already claimed this product."
 msgstr "Olet jo ilmoittautunut tämän tuotteen valmistajaksi."
 
@@ -1355,7 +1357,7 @@ msgid "Recipient"
 msgstr "Vastaanottaja"
 
 # This means the subject of a message (i.e. the title)
-#: locale_extras.py:5 templates/messages/inbox.html:21
+#: locale_extras.py:5 templates/messages/inbox.html:32
 msgid "Subject"
 msgstr "Aihe"
 
@@ -1413,28 +1415,28 @@ msgstr "luo uusi julkinen datakirjasto"
 msgid "joined the public group"
 msgstr ""
 
-#: locale_extras.py:19 settings.py:658
+#: locale_extras.py:19 settings.py:661
 msgid "Remove from bookmarks"
 msgstr "Poista kirjanmerkeistä"
 
-#: locale_extras.py:20 settings.py:659
+#: locale_extras.py:20 settings.py:662
 msgid "Bookmark"
 msgstr "Kirjanmerkki"
 
-#: locale_extras.py:21 settings.py:664 settings.py:666
+#: locale_extras.py:21 settings.py:668 settings.py:670
 msgid "Unlike"
 msgstr "Poista tykkäys"
 
-#: locale_extras.py:22 settings.py:665 settings.py:667
-#: templates/image/detail/like.html:10 templates/image/detail/like.html:24
+#: locale_extras.py:22 settings.py:669 settings.py:671
+#: templates/image/detail/like.html:11 templates/image/detail/like.html:25
 msgid "Like"
 msgstr "Tykkää"
 
-#: locale_extras.py:23 settings.py:672
+#: locale_extras.py:23 settings.py:677
 msgid "Stop following"
 msgstr "Lopeta seuraaminen"
 
-#: locale_extras.py:24 settings.py:673
+#: locale_extras.py:24 settings.py:678
 msgid "Follow"
 msgstr "Seuraa"
 
@@ -1466,8 +1468,8 @@ msgstr "Nimeä-Tarttuva Creative Commons"
 msgid "Attribution-NoDerivs Creative Commons"
 msgstr "Nimeä-Ei muutoksia Creative Commons"
 
-#: models.py:79 models.py:97 settings.py:95 views/image.py:415
-#: views/image.py:417
+#: models.py:79 models.py:97 settings.py:95 views/image.py:434
+#: views/image.py:436
 msgid "English"
 msgstr "Englanti"
 
@@ -1595,8 +1597,8 @@ msgstr "Pikkuplaneetta"
 msgid "Comet"
 msgstr "Komeetta"
 
-#: models.py:152 models.py:595 models.py:659 templates/wall.html:144
-#: templates/image/edit/acquisition.html:85 views/__init__.py:1075
+#: models.py:152 models.py:595 models.py:660 templates/wall.html:150
+#: templates/image/edit/acquisition.html:85 views/__init__.py:1000
 msgid "Other"
 msgstr "Muu"
 
@@ -1769,7 +1771,7 @@ msgstr "Apertuuri (aukko)"
 msgid "(in mm)"
 msgstr "(mm)"
 
-#: models.py:453 models.py:1558 templates/image/detail/image_card.html:58
+#: models.py:453 models.py:1596 templates/image/detail/image_card.html:58
 #: templates/popover/gear_telescope.html:19
 msgid "Focal length"
 msgstr "Polttoväli"
@@ -1936,32 +1938,37 @@ msgstr "Syvän taivaan kohde"
 msgid "Solar system body or event"
 msgstr "Aurinkokunnan kohde"
 
-#: models.py:656 templates/wall.html:120 views/__init__.py:1072
+#: models.py:656 templates/wall.html:120 views/__init__.py:997
 msgid "Extremely wide field"
 msgstr "Erittäin laaja kuvakenttä"
 
-#: models.py:657 templates/wall.html:126 views/__init__.py:1073
+#: models.py:657 templates/wall.html:126 views/__init__.py:998
 msgid "Star trails"
 msgstr "Tähtiviirut"
 
-#: models.py:676 templates/inclusion_tags/image_list.html:12
+#: models.py:658 templates/wall.html:132
+msgid "Northern lights"
+msgstr ""
+
+#: models.py:677 models.py:1828 templates/inclusion_tags/image_list.html:12
 #: templates/inclusion_tags/search_image_list.html:123
+#: templates/user/profile/navigation.html:139
 msgid "Title"
 msgstr "Otsikko"
 
-#: models.py:680 models.py:1786 templates/user/profile/navigation.html:145
+#: models.py:681 models.py:1824 templates/user/profile/navigation.html:148
 msgid "Subject type"
 msgstr "Kohdetyyppi"
 
-#: models.py:687
+#: models.py:688
 msgid "Objects in field"
 msgstr "Kentässä olevat kohteet"
 
-#: models.py:688
+#: models.py:689
 msgid "Use a <strong>comma</strong> to separate the values."
 msgstr "Käytä <strong>pilkkua</strong> erottaaksesi arvot."
 
-#: models.py:694
+#: models.py:695
 msgid ""
 "If the main subject of your image is a body in the solar system, please "
 "select which (or which type) it is."
@@ -1969,179 +1976,180 @@ msgstr ""
 "Mikäli kuvasi pääkohde on aurinkokunnan kappale, valitse mikä (tai minkä "
 "tyyppinen) se on."
 
-#: models.py:703
+#: models.py:704
 msgid ""
 "Drag items from the right side to the left side, or click on the plus sign."
 msgstr "Raahaa oikeasta reunasta vasempaan tai klikkaa plus-merkkiä."
 
-#: models.py:709 models.py:1372 models.py:2111 models.py:2368
+#: models.py:710 models.py:1330 models.py:1410 models.py:2150 models.py:2397
 #: templates/gear/page.html:49 templates/image/detail/image_description.html:8
 msgid "Description"
 msgstr "Kuvaus"
 
-#: models.py:710
+#: models.py:711 models.py:1331
 msgid "HTML tags are allowed."
 msgstr "HTML-tagit sallittu."
 
-#: models.py:748
+#: models.py:750
 msgid "Apply watermark to image"
 msgstr "Lisää kuvaan vesileima"
 
-#: models.py:752 templates/leaderboard.html:20
+#: models.py:754
 msgid "Position"
 msgstr "Paikka"
 
-#: models.py:761 templates/upload.html:134 templates/popover/subject.html:15
+#: models.py:763 templates/upload.html:134 templates/popover/subject.html:15
 #: templates/subscription/subscription_category_list.html:10
 msgid "Size"
 msgstr "Koko"
 
-#: models.py:762
+#: models.py:764
 msgid "The final font size will depend on how long your watermark is."
 msgstr ""
 
-#: models.py:800
+#: models.py:802
 msgid "Allow comments"
 msgstr "Salli kommentit"
 
-#: models.py:836 templates/user_collections_add_remove_images.html:27
+#: models.py:838 templates/top_picks.html:22
+#: templates/user_collections_add_remove_images.html:27
 #: templates/image/full.html:55 templates/image/detail/image_title.html:7
-#: templates/image/detail/menu/navigation.html:10
-#: templates/image/detail/menu/navigation.html:25
+#: templates/image/detail/menu/navigation.html:73
+#: templates/image/detail/menu/navigation.html:88
 #: templates/moderation/image_list.html:22
 msgid "(no title)"
 msgstr "(ei otsikkoa)"
 
-#: models.py:1387
+#: models.py:1425
 #, fuzzy
 msgid "Cover image"
 msgstr "Ei kuvia"
 
-#: models.py:1405
+#: models.py:1443
 msgid "Please use the following format: yyyy-mm-dd."
 msgstr "Käytä seuraavaa muotoa: vvvv-kk-pp."
 
-#: models.py:1410 models.py:2343
+#: models.py:1448 models.py:2372
 msgid "Image"
 msgstr "Kuva"
 
-#: models.py:1429
+#: models.py:1467
 msgid "1 - Excellent dark-site sky (BLACK)"
 msgstr "1 - Erittäin pimeä taivas (MUSTA)"
 
-#: models.py:1430
+#: models.py:1468
 msgid "2 - Typical truly dark site (GRAY)"
 msgstr "2 - Pimeä taivas (HARMAA)"
 
-#: models.py:1431
+#: models.py:1469
 msgid "3 - Rural sky (BLUE)"
 msgstr "3 - Maaseudun taivas (SININEN)"
 
-#: models.py:1432
+#: models.py:1470
 msgid "4 - Rural/suburban transition (GREEN/YELLOW)"
 msgstr "4 - Maaseudun/taajaman väliltä (VIHREÄ/KELTAINEN)"
 
-#: models.py:1433
+#: models.py:1471
 msgid "5 - Suburban sky (ORANGE)"
 msgstr "5 - Taajama-alueen taivas (ORANSSI)"
 
-#: models.py:1434
+#: models.py:1472
 msgid "6 - Bright suburban sky (RED)"
 msgstr "6 - Kirkas taajaman taivas (PUNAINEN)"
 
-#: models.py:1435
+#: models.py:1473
 msgid "7 - Suburban/urban transition or Full Moon (RED)"
 msgstr "7 - Taajaman/kaupungin väliltä (tai täysikuu) (PUNAINEN)"
 
-#: models.py:1436
+#: models.py:1474
 msgid "8 - City sky (WHITE)"
 msgstr "8 - Kaupunkitaivas (VALKOINEN)"
 
-#: models.py:1437
+#: models.py:1475
 msgid "9 - Inner city sky (WHITE)"
 msgstr "9 - Kaupungin keskustan taivas (VALKOINEN)"
 
-#: models.py:1441
+#: models.py:1479
 msgid "Synthetic channel"
 msgstr "Synteettinen kanava"
 
-#: models.py:1447 views/__init__.py:284 views/image.py:212
+#: models.py:1485 views/image.py:221
 msgid "Filter"
 msgstr "Suodatin"
 
-#: models.py:1454
+#: models.py:1492
 msgid "Binning"
 msgstr "Binnaus"
 
-#: models.py:1457
+#: models.py:1495
 msgid "Number"
 msgstr "Numero"
 
-#: models.py:1459
+#: models.py:1497
 msgid "The number of sub-frames."
 msgstr "Osavalotusten lukumäärä."
 
-#: models.py:1462
+#: models.py:1500
 msgid "Duration"
 msgstr "Valotusaika"
 
-#: models.py:1464
+#: models.py:1502
 msgid "Duration of each sub-frame, in seconds."
 msgstr "Osavalotusten pituus, sekuntia."
 
-#: models.py:1467
+#: models.py:1505
 msgid "ISO"
 msgstr "ISO"
 
-#: models.py:1471
+#: models.py:1509
 msgid "Gain"
 msgstr "Vahvistus (Gain)"
 
-#: models.py:1476
+#: models.py:1514
 msgid "Sensor cooling"
 msgstr "Kennon jäähdytys"
 
-#: models.py:1478
+#: models.py:1516
 msgid "The temperature of the chip. E.g.: -20."
 msgstr "Kennon lämpötila, esim. -20."
 
-#: models.py:1481 views/image.py:342
+#: models.py:1519 views/image.py:354
 msgid "Darks"
 msgstr "Darkit"
 
-#: models.py:1483
+#: models.py:1521
 msgid "The number of dark frames."
 msgstr "Dark-ruutujen lukumäärä."
 
-#: models.py:1486 views/image.py:343
+#: models.py:1524 views/image.py:355
 msgid "Flats"
 msgstr "Flatit"
 
-#: models.py:1488
+#: models.py:1526
 msgid "The number of flat frames."
 msgstr "Flat-ruutujen lukumäärä."
 
-#: models.py:1491 views/image.py:344
+#: models.py:1529 views/image.py:356
 msgid "Flat darks"
 msgstr "Flat darkit"
 
-#: models.py:1493
+#: models.py:1531
 msgid "The number of dark flat frames."
 msgstr "Dark flat -ruutujen lukumäärä."
 
-#: models.py:1496 views/image.py:345
+#: models.py:1534 views/image.py:357
 msgid "Bias"
 msgstr "Bias"
 
-#: models.py:1498
+#: models.py:1536
 msgid "The number of bias/offset frames."
 msgstr "Bias/offset-ruutujen lukumäärä."
 
-#: models.py:1501 views/image.py:348
+#: models.py:1539 views/image.py:360
 msgid "Bortle Dark-Sky Scale"
 msgstr "Bortlen asteikko"
 
-#: models.py:1505
+#: models.py:1543
 msgid ""
 "Quality of the sky according to <a href=\"http://en.wikipedia.org/wiki/"
 "Bortle_Dark-Sky_Scale\" target=\"_blank\">the Bortle Scale</a>."
@@ -2149,165 +2157,165 @@ msgstr ""
 "Taivaan pimeys <a href=\"http://en.wikipedia.org/wiki/Bortle_Dark-Sky_Scale"
 "\" target=\"_blank\">Bortlen asteikon</a> mukaan."
 
-#: models.py:1509
+#: models.py:1547
 msgid "Mean mag/arcsec^2"
 msgstr "Keskimääräinen magnitudi/kaarisekunti^2"
 
-#: models.py:1510
+#: models.py:1548
 msgid "As measured with your Sky Quality Meter."
 msgstr "SQM-mittarillasi mitattuna."
 
-#: models.py:1515 views/image.py:350
+#: models.py:1553 views/image.py:362
 msgid "Mean FWHM"
 msgstr "Keskiarvo FWHM"
 
-#: models.py:1520 views/image.py:351
+#: models.py:1558 views/image.py:363
 msgid "Temperature"
 msgstr "Lämpötila"
 
-#: models.py:1523
+#: models.py:1561
 msgid "Ambient temperature (in Centigrade degrees)."
 msgstr "Ilman lämpötila (astetta Celsiusta)."
 
-#: models.py:1544
+#: models.py:1582
 msgid "Number of frames"
 msgstr "Ruutujen lukumäärä"
 
-#: models.py:1545
+#: models.py:1583
 msgid "The total number of frames you have stacked."
 msgstr "Pinottujen ruutujen kokonaislukumäärä."
 
 # This is the same as line 155.
-#: models.py:1549 templates/image/detail/image_card.html:55
+#: models.py:1587 templates/image/detail/image_card.html:55
 msgid "FPS"
 msgstr "Kuvataajuus"
 
-#: models.py:1550
+#: models.py:1588
 msgid "Frames per second."
 msgstr "Kuvanopeus (fps)."
 
-#: models.py:1559
+#: models.py:1597
 msgid ""
 "The focal length of the whole optical train, including barlow lenses or "
 "other components."
 msgstr "Koko systeemin efektiivinen polttoväli."
 
-#: models.py:1565 templates/image/detail/image_card.html:61
+#: models.py:1603 templates/image/detail/image_card.html:61
 msgid "CMI"
 msgstr "CMI"
 
-#: models.py:1566
+#: models.py:1604
 msgid "Latitude of the first Central Meridian."
 msgstr "Ensimmäisen keskimeridiaanin leveysaste."
 
-#: models.py:1574 templates/image/detail/image_card.html:64
+#: models.py:1612 templates/image/detail/image_card.html:64
 msgid "CMII"
 msgstr "CMII"
 
-#: models.py:1575
+#: models.py:1613
 msgid "Latitude of the second Central Meridian."
 msgstr "Toisen keskimeridiaanin leveysaste."
 
-#: models.py:1583 templates/image/detail/image_card.html:67
+#: models.py:1621 templates/image/detail/image_card.html:67
 msgid "CMIII"
 msgstr "CMIII"
 
-#: models.py:1584
+#: models.py:1622
 msgid "Latitude of the third Central Meridian."
 msgstr "Kolmannen keskimeridiaanin leveysaste."
 
-#: models.py:1592 templates/image/detail/image_card.html:70
+#: models.py:1630 templates/image/detail/image_card.html:70
 msgid "Seeing"
 msgstr "Seeing"
 
-#: models.py:1593
+#: models.py:1631
 msgid "Your estimation of the seeing, on a scale from 1 to 5."
 msgstr "Seeing-arvio, 1-5."
 
-#: models.py:1599 templates/image/detail/image_card.html:73
+#: models.py:1637 templates/image/detail/image_card.html:73
 msgid "Transparency"
 msgstr "Läpinäkyvyys"
 
-#: models.py:1600
+#: models.py:1638
 msgid "Your estimation of the transparency, on a scale from 1 to 10."
 msgstr "Läpinäkyvyys-arvio, 1-10."
 
-#: models.py:1606 templates/image/detail/image_card.html:49
+#: models.py:1644 templates/image/detail/image_card.html:49
 msgid "Time"
 msgstr "Aika"
 
-#: models.py:1607
+#: models.py:1645
 msgid "Please use the following format: hh:mm."
 msgstr "Käytä seuraavaa muotoa: hh:mm."
 
-#: models.py:1627
+#: models.py:1665
 msgid "Request from"
 msgstr "Pyyntö käyttäjältä"
 
-#: models.py:1639
+#: models.py:1677
 msgid "Additional information"
 msgstr "Lisätietoja"
 
-#: models.py:1640
+#: models.py:1678
 msgid "TIFF/FITS"
 msgstr "TIFF/FITS"
 
-#: models.py:1641
+#: models.py:1679
 msgid "Higher resolution"
 msgstr "Suurempi resoluutio"
 
-#: models.py:1673
+#: models.py:1711
 msgid "Real name"
 msgstr "Oikea nimi"
 
-#: models.py:1674
+#: models.py:1712
 msgid "If present, your real name will be used throughout the website."
 msgstr "Sivustolla käytetään oikeaa nimeäsi, jos se on merkitty."
 
-#: models.py:1688
+#: models.py:1726
 msgid "Job"
 msgstr "Ammatti"
 
-#: models.py:1695
+#: models.py:1733
 msgid "Hobbies"
 msgstr "Harrastukset"
 
-#: models.py:1699
+#: models.py:1737
 msgid "Do you have any hobbies other than astrophotography?"
 msgstr "Mitä muita harrastuksia sinulla on tähtikuvaamisen lisäksi?"
 
-#: models.py:1706
+#: models.py:1744
 msgid "Timezone"
 msgstr "Aikavyöhyke"
 
-#: models.py:1707
+#: models.py:1745
 msgid ""
 "By selecting this, you will see all the dates on AstroBin in your timezone."
 msgstr ""
 "Jos valitset tämän, kaikki ajat AstroBinissä näkyvät oman aikavyöhykkeesi "
 "mukaan."
 
-#: models.py:1712
+#: models.py:1750
 msgid "About you"
 msgstr "Tietoja sinusta"
 
-#: models.py:1713
+#: models.py:1751
 msgid "Write something about yourself. HTML tags are allowed."
 msgstr "Kerro itsestäsi. HTML-tagit sallittu."
 
-#: models.py:1727
+#: models.py:1765
 msgid "Company name"
 msgstr "Yrityksen nimi"
 
-#: models.py:1728
+#: models.py:1766
 msgid "The name of the company you represent on AstroBin."
 msgstr "Yrityksen nimi, jota edustat AstroBin:ssa"
 
-#: models.py:1734
+#: models.py:1772
 msgid "Company description"
 msgstr "Yrityksen kuvaus"
 
-#: models.py:1735
+#: models.py:1773
 msgid ""
 "A short description of the company you represent on AstroBin. You can use "
 "some <a href=\"/faq/#comments\">formatting rules</a>."
@@ -2315,227 +2323,228 @@ msgstr ""
 "Lyhyt kuvaus AstroBinissa edustamastasi yrityksestä. Voit käyttää joitakin "
 "<a href=\"/faq/#comments\">muotoiluja</a>."
 
-#: models.py:1743
+#: models.py:1781
 msgid "Company website"
 msgstr "Yrityksen kotisivu"
 
-#: models.py:1744
+#: models.py:1782
 msgid "The website of the company you represent on AstroBin."
 msgstr "AstroBin:ssa edustamasi yrityksen sivusto."
 
-#: models.py:1748
+#: models.py:1786
 msgid "Country of operation"
 msgstr "Maa, jossa yritys toimii"
 
-#: models.py:1771 templates/index/root.html:133
+#: models.py:1809 templates/index/root.html:126
+#: templates/index/root.html.py:144
 #, fuzzy
 msgid "Global stream"
 msgstr "Pallomaiset joukot"
 
-#: models.py:1772 templates/index/root.html:137
+#: models.py:1810 templates/index/root.html:130
+#: templates/index/root.html.py:152
 msgid "Personal stream"
 msgstr ""
 
-#: models.py:1773
+#: models.py:1811
 #, fuzzy
 msgid "All uploaded images"
 msgstr "latasi uuden kuvan"
 
-#: models.py:1774
+#: models.py:1812
 #, fuzzy
 msgid "All images uploaded by people you follow"
 msgstr "Uusi kuva seuraamaltasi käyttäjältä"
 
-#: models.py:1779
+#: models.py:1817
 #, fuzzy
 msgid "Default front page view"
 msgstr "Etusivun oletusnäkymää muutettu."
 
-#: models.py:1784 templates/search/search.html:31
-#: templates/user/profile/navigation.html:139
+#: models.py:1822 templates/search/search.html:31
+#: templates/user/profile/navigation.html:142
 msgid "Upload time"
 msgstr "Latausaika"
 
-#: models.py:1785 templates/user/profile/navigation.html:142
+#: models.py:1823 templates/user/profile/navigation.html:145
 msgid "Acquisition time"
 msgstr "Kuvausajankohta"
 
-#: models.py:1787 templates/user/profile/navigation.html:148
+#: models.py:1825 templates/user/profile/navigation.html:151
 msgid "Year"
 msgstr "Vuosi"
 
-#: models.py:1789 templates/user/profile/navigation.html:136
+#: models.py:1827 templates/user/profile/navigation.html:136
 #, fuzzy
 msgid "Collections"
 msgstr "Sijainnit"
 
-#: models.py:1793
+#: models.py:1832
 msgid "Default gallery sorting"
 msgstr ""
 
-#: models.py:1799 templates/maintenance_base.html:312
+#: models.py:1838 templates/maintenance_base.html:312
 #: templates/user/profile/edit/navigation.html:42
 msgid "Default license"
 msgstr "Oletuslisenssi"
 
-#: models.py:1801
+#: models.py:1840
 msgid ""
 "The license you select here is automatically applied to all your new images."
 msgstr "Tämä lisenssi asetetaan automaattisesti uusille kuvillesi."
 
-#: models.py:1841
+#: models.py:1880
 msgid "Language"
 msgstr "Kieli"
 
-#: models.py:1862
+#: models.py:1901
 msgid "Signature"
 msgstr "Allekirjoitus"
 
-#: models.py:1867
+#: models.py:1906
 msgid "Signature HTML Version"
 msgstr "Allekirjoituksen HTML-versio"
 
-#: models.py:1872
+#: models.py:1911
 msgid "Show signatures"
 msgstr "Näytä allekirjoitukset"
 
-#: models.py:1877
+#: models.py:1916
 msgid "Post count"
 msgstr "Viestien määrä"
 
-#: models.py:1882
+#: models.py:1921
 msgid "Automatically subscribe"
 msgstr "Seuraa automaattisesti"
 
-#: models.py:1883
+#: models.py:1922
 msgid "Automatically subscribe to topics that you answer"
 msgstr "Seuraa vastaamiasi viestiketjuja automaattisesti"
 
-#: models.py:1890
-#: templates/pybb/mail_templates/subscription_email_subject.html:2
-msgid "New reply to a forum topic you subscribe to"
-msgstr "Uusi vastaus seuraamaasi foorumiketjuun"
+#: models.py:1929
+msgid "Receive e-mails from subscribed forum topics"
+msgstr ""
 
-#: models.py:1965
+#: models.py:2004
 msgid "A descriptive name, e.g. 'Home observatory' or 'Mount Whitney'."
 msgstr "Kuvaava nimi, esim. \"Takapihaobservatorio\" tai \"Mount Whitney\"."
 
-#: models.py:1971
+#: models.py:2010
 msgid "City"
 msgstr "Kaupunki"
 
-#: models.py:1972
+#: models.py:2011
 msgid "If this location is not in a city, use the name of the closest city."
 msgstr "Jos paikkakunta ei ole kaupunki, syötä lähimmän kaupungin nimi."
 
-#: models.py:1978
+#: models.py:2017
 msgid "State or province"
 msgstr "Lääni, osavaltio tai provinssi"
 
-#: models.py:1983
+#: models.py:2022
 msgid "Country"
 msgstr "Valtio"
 
-#: models.py:2000
+#: models.py:2039
 msgid "North"
 msgstr "Pohjoinen"
 
-#: models.py:2000
+#: models.py:2039
 msgid "South"
 msgstr "Etelä"
 
-#: models.py:2001
+#: models.py:2040
 msgid "North or south"
 msgstr "DeutschPohjois tai etelä"
 
-#: models.py:2016
+#: models.py:2055
 msgid "East"
 msgstr "Itä"
 
-#: models.py:2016
+#: models.py:2055
 msgid "West"
 msgstr "Länsi"
 
-#: models.py:2017
+#: models.py:2056
 msgid "East or West"
 msgstr "Itä tai länsi"
 
-#: models.py:2021
+#: models.py:2060
 msgid "Altitude"
 msgstr "Korkeus"
 
-#: models.py:2022
+#: models.py:2061
 msgid "In meters."
 msgstr "Metreissä."
 
-#: models.py:2104
+#: models.py:2143
 msgid "The name of the website or app that wishes to use the APIs."
 msgstr "Rajapinnan käyttöä toivovan sivuston tai ohjelman nimi."
 
-#: models.py:2112
+#: models.py:2151
 msgid ""
 "Please explain the purpose of your application, and how you intend to use "
 "the API."
 msgstr ""
 "Selitä ohjelman tarkoitus, ja miten aiot hyödyntää AstroBinin rajapintoja."
 
-#: models.py:2255
+#: models.py:2284
 msgid "AUD - Australian dollars"
 msgstr "AUD - Australian dollari"
 
-#: models.py:2256
+#: models.py:2285
 msgid "CAD - Canadian dollars"
 msgstr "CAD - Kanadan dollari"
 
-#: models.py:2257
+#: models.py:2286
 msgid "CHF - Swiss francs"
 msgstr "CHF - Sveitsin frangi"
 
-#: models.py:2258
+#: models.py:2287
 msgid "EUR - Euros"
 msgstr "EUR - Euro"
 
-#: models.py:2259
+#: models.py:2288
 msgid "GPB - Pound stelings"
 msgstr "GBP - Englannin punta"
 
-#: models.py:2260
+#: models.py:2289
 msgid "PLN - Polish zloty"
 msgstr "PLN - Puolan zloty"
 
-#: models.py:2261
+#: models.py:2290
 msgid "SEK - Swedish krona"
 msgstr "SEK - Ruotsin kruunu"
 
-#: models.py:2262
+#: models.py:2291
 msgid "USD - American dollars"
 msgstr "USD - Amerikan dollari"
 
-#: models.py:2268 models.py:2318
+#: models.py:2297 models.py:2347
 msgid "Producer"
 msgstr "Valmistaja"
 
-#: models.py:2279 models.py:2362
+#: models.py:2308 models.py:2391
 msgid "The link to this product's page on your website."
 msgstr "Linkki tämän tuotteen sivuun sivustollasi."
 
-#: models.py:2287 templates/subscription/subscription_category_list.html:8
+#: models.py:2316 templates/subscription/subscription_category_list.html:8
 msgid "Price"
 msgstr "Hinta"
 
-#: models.py:2295
+#: models.py:2324
 msgid "Currency"
 msgstr "Valuutta"
 
-#: models.py:2311
+#: models.py:2340
 msgid "Retailed gear items"
 msgstr "Myytävät laitteet"
 
-#: models.py:2327
+#: models.py:2356
 msgid "Proper make"
 msgstr "Varsinainen valmistaja"
 
-#: models.py:2328
+#: models.py:2357
 msgid ""
 "Sometimes, product make/brand/producer/developer names are not written "
 "properly by the users. Write here the proper make/brand/producer/developer "
@@ -2544,11 +2553,11 @@ msgstr ""
 "Joskus käyttäjät eivät kirjoita tuotteiden mallia/merkkiä/valmistaja/"
 "kehittäjää oikein. Kirjoita tähän oikea malli/merkki/valmistaja/kehittäjä."
 
-#: models.py:2335
+#: models.py:2364
 msgid "Proper name"
 msgstr "Varsinainen nimi"
 
-#: models.py:2336
+#: models.py:2365
 msgid ""
 "Sometimes, product names are not written properly by the users. Write here "
 "the proper product name, not including the make/brand/producer/developer "
@@ -2561,7 +2570,7 @@ msgstr ""
 "tuoteversiota voidaan niputtaa yhteen, joten pyri käyttämään mahdollisimman "
 "geneeristä versiota tuotenimestä."
 
-#: models.py:2344
+#: models.py:2373
 msgid ""
 "The official, commercial image for this product. Upload an image via the "
 "regular uploading interface, set its subject type to \"Gear\", and then "
@@ -2573,16 +2582,16 @@ msgstr ""
 "valitse kuva listasta. Jos lataat kuvasta useita versioita, ne kaikki "
 "näkyvät tuotteen sivulla."
 
-#: models.py:2353
+#: models.py:2382
 msgid "Tagline"
 msgstr "Iskulause"
 
-#: models.py:2354
+#: models.py:2383
 msgid ""
 "A memorable phrase that will sum up this product, for marketing purposes."
 msgstr "Helposti muistettava yhteenveto tuotteesta markkinointitarkoituksiin."
 
-#: models.py:2369
+#: models.py:2398
 msgid ""
 "Here you can write the full commercial description of your product. You can "
 "use some <a href=\"/faq/#comments\">formatting rules</a>."
@@ -2590,7 +2599,7 @@ msgstr ""
 "Tähän voit kirjoittaa täyden kuvauksen tuotteestasi. Voit käyttää joitakin "
 "<a href=\"/faq/#comments\">muotoiluja</a>."
 
-#: models.py:2388
+#: models.py:2417
 msgid "Commercial gear items"
 msgstr "Kaupalliset laitteet"
 
@@ -2756,25 +2765,34 @@ msgstr "Sinut on kutsuttu jaettuun yksityiskansioon"
 
 #: management/__init__.py:141
 #, fuzzy
+msgid "A user you follow joined a public group"
+msgstr "Seuraamasi käyttäjä on ladannut uuden version kuvastaan"
+
+#: management/__init__.py:147
+#, fuzzy
 msgid "You are invited to a group"
 msgstr "Sinut on kutsuttu jaettuun yksityiskansioon"
 
-#: management/__init__.py:147
+#: management/__init__.py:153
 msgid "A user requested to join a group you moderate"
 msgstr ""
 
-#: management/__init__.py:153
+#: management/__init__.py:159
 msgid "A group moderator approved your request to join"
 msgstr ""
 
-#: management/__init__.py:159
+#: management/__init__.py:165
 msgid "A group moderator rejected your request to join"
 msgstr ""
 
-#: management/__init__.py:165
+#: management/__init__.py:171
 #, fuzzy
 msgid "A user you follow created a new public group"
 msgstr "Seuraamasi käyttäjä on ladannut uuden version kuvastaan"
+
+#: management/__init__.py:177
+msgid "New forum topic in a group you are a member of"
+msgstr ""
 
 #: templates/403.html:4 templates/403.html.py:7
 msgid "You are not allowed to see this page."
@@ -2841,7 +2859,7 @@ msgid "There is no activity yet."
 msgstr "Viime aikoina ei ole tapahtunut mitään."
 
 #: templates/affiliates.html:8 templates/affiliates.html.py:11
-#: templates/maintenance_base.html:184 templates/base/site_links.html:151
+#: templates/maintenance_base.html:184 templates/base/site_links.html:202
 msgid "Affiliates"
 msgstr "Yhteistyökumppanit"
 
@@ -2876,7 +2894,9 @@ msgstr ""
 "Varmista että olet lukenut ohjelmointirajapintaa (API) koskevat <a href="
 "\"%(tos_url)s\">Käyttö- ja palveluehdot</a>."
 
-#: templates/app_api_key_request.html:20 templates/gear/page.html:114
+#: templates/app_api_key_request.html:20
+#: templates/change_email/emailchange_form.html:12
+#: templates/gear/page.html:114
 #: templates/registration/password_change_form.html:12
 #: templates/registration/password_reset_confirm.html:14
 #: templates/registration/password_reset_form.html:14
@@ -2898,13 +2918,13 @@ msgstr ""
 "rajapinta-avainta kohtaan!"
 
 #: templates/explore_choose.html:5 templates/explore_choose.html.py:8
-#: templates/maintenance_base.html:105 templates/base/site_links.html:54
+#: templates/maintenance_base.html:105 templates/base/site_links.html:99
 msgid "Explore"
 msgstr "Selaa"
 
 #: templates/explore_choose.html:10 templates/maintenance_base.html:112
-#: templates/wall.html:8 templates/wall.html.py:170
-#: templates/base/site_links.html:61
+#: templates/wall.html:8 templates/wall.html.py:176
+#: templates/base/site_links.html:106
 msgid "The Big Wall"
 msgstr "Suuri Kuvaseinä"
 
@@ -2918,7 +2938,7 @@ msgstr ""
 
 #: templates/faq.html:4 templates/maintenance_base.html:169
 #: templates/maintenance_base.html:515 templates/base/footer.html:21
-#: templates/base/site_links.html:129
+#: templates/base/site_links.html:180
 msgid "FAQ"
 msgstr "UKK"
 
@@ -3351,12 +3371,12 @@ msgstr ""
 
 #: templates/help.html:4 templates/maintenance_base.html:156
 #: templates/maintenance_base.html:514 templates/base/footer.html:20
-#: templates/base/site_links.html:116
+#: templates/base/site_links.html:167
 msgid "Help"
 msgstr "Ohjeita"
 
 #: templates/help.html:8 templates/maintenance_base.html:163
-#: templates/base/site_links.html:123
+#: templates/base/site_links.html:174
 msgid "What is this site?"
 msgstr "Mikä on AstroBin?"
 
@@ -3607,121 +3627,6 @@ msgstr "Mitä siis vielä odotat?"
 msgid "Sign up now!"
 msgstr "Rekisteröidy nyt!"
 
-#: templates/iotd_archive.html:7 templates/iotd_archive.html.py:13
-msgid "Archive of 'Image of the day' winners"
-msgstr "Menneet Päivän kuvat"
-
-#: templates/iotd_archive.html:25 templates/iotd_detail.html:32
-#: templates/gear/page.html:16
-msgid "by"
-msgstr "käyttäjältä"
-
-#: templates/iotd_archive.html:34
-msgid "Runners-up"
-msgstr "Muita huippukuvia"
-
-#: templates/iotd_choose.html:7 templates/iotd_choose.html.py:13
-msgid "Choose today's 'Image of the day'"
-msgstr "Valitse 'Päivän kuva' tälle päivälle"
-
-#: templates/iotd_choose.html:17
-msgid ""
-"Here is a selection of images uploaded during the past 7 days. About half of "
-"them are images that received lots of likes, and the other half were "
-"selected randomly. The images are anonymized as to not bias the selection."
-msgstr ""
-"Tässä on valikoima viimeisen 7 päivän aikana lähetettyjä kuvia. Noin puolet "
-"kuvista on saanut erittäin paljon tykkäyksiä, loput on valittu "
-"satunnaisesti. Kuvaajien nimet on sensuroitu, jotta valinta olisi puolueeton."
-
-#: templates/iotd_choose.html:27
-msgid "Choose"
-msgstr "Valitse"
-
-#: templates/iotd_choose.html:33
-msgid ""
-"There are no candidates for 'Image of the day' yet, today. Please try again "
-"later."
-msgstr ""
-"Päivän kuvaksi ei ole vielä kandidaatteja. Kokeile myöhemmin uudestaan."
-
-#: templates/iotd_choose_confirm.html:7 templates/iotd_choose_confirm.html:13
-#: templates/user/profile/commercial/products.html:288
-#: templates/user/profile/commercial/products.html:292
-#: templates/user/profile/commercial/products.html:358
-#: templates/user/profile/commercial/products.html:362
-msgid "Are you sure?"
-msgstr "Oletko varma?"
-
-#: templates/iotd_choose_confirm.html:22
-msgid "This image will be selected as today's 'Image of the day'."
-msgstr "Tämä kuva valitaan 'Päivän kuvaksi'."
-
-#: templates/iotd_choose_confirm.html:23
-msgid "This operation cannot be undone."
-msgstr "Tätä toimintoa ei voi peruuttaa."
-
-#: templates/iotd_choose_confirm.html:31
-msgid "Yes, I'm sure"
-msgstr "Kyllä, olen varma"
-
-#: templates/iotd_choose_finished.html:5 templates/iotd_choose_finished.html:9
-#: templates/contact_form/contact_completed.html:4
-#: templates/gear/fix_thanks.html:5 templates/gear/fix_thanks.html.py:8
-msgid "Thanks!"
-msgstr "Kiitokset!"
-
-#: templates/iotd_choose_finished.html:13
-msgid ""
-"\n"
-"                The 'Image of the day' was selected. Thank you for your "
-"help!\n"
-"            "
-msgstr ""
-"\n"
-"                Päivän kuva on valittu. Kiitos avustasi!\n"
-"            "
-
-#: templates/iotd_detail.html:7 templates/iotd_detail.html.py:13
-#, fuzzy
-msgid "Image of the Day"
-msgstr "Päivän kuva"
-
-#: templates/iotd_detail.html:18 templates/image/detail/iotd_banner.html:19
-msgid "chosen by"
-msgstr ""
-
-#: templates/iotd_detail.html:44
-msgctxt "images"
-msgid "Chosen from the following candidates"
-msgstr ""
-
-#: templates/leaderboard.html:7 templates/leaderboard.html.py:11
-#: templates/maintenance_base.html:149 templates/base/site_links.html:108
-msgid "Leaderboard"
-msgstr "Johtotähdet"
-
-#: templates/leaderboard.html:21 templates/maintenance_base.html:205
-#: templates/base/site_links.html:169 templates/image/detail/menu/user.html:8
-#: templates/inclusion_tags/image_list.html:11
-#: templates/inclusion_tags/search_image_list.html:122
-#: templates/user/profile/navigation.html:113
-msgid "User"
-msgstr "Käyttäjä"
-
-#: templates/leaderboard.html:25 templates/base/user_links.html:140
-msgid "AstroBin index"
-msgstr "AstroBin-indeksi"
-
-#: templates/leaderboard.html:30 templates/base/user_links.html:144
-#: templates/user/profile/navigation.html:103
-msgid "Followers"
-msgstr "Seuraajat"
-
-#: templates/leaderboard.html:40
-msgid "Total integration"
-msgstr "Kokonaisvalotusaika"
-
 #: templates/maintenance_base.html:84 templates/maintenance_base.html:509
 #: templates/base/footer.html:15
 msgid "Site links"
@@ -3730,53 +3635,74 @@ msgstr "Linkit"
 #: templates/maintenance_base.html:88 templates/maintenance_base.html.py:95
 #: templates/maintenance_base.html:511 templates/maintenance_base.html:545
 #: templates/base/footer.html:17 templates/base/footer.html.py:52
-#: templates/base/site_links.html:22 templates/base/site_links.html.py:44
+#: templates/base/site_links.html:23 templates/base/site_links.html.py:89
 #: templates/pybb/breadcrumb.html:4
 msgid "Home"
 msgstr "Etusivu"
 
 #: templates/maintenance_base.html:91 templates/maintenance_base.html:513
-#: templates/base/footer.html:19 templates/base/site_links.html:40
+#: templates/base/footer.html:19 templates/base/site_links.html:85
+#: templates/pybb/topic_list.html:12
 msgid "Forum"
 msgstr "Keskustelufoorumi"
 
-#: templates/maintenance_base.html:96 templates/base/site_links.html:45
+#: templates/maintenance_base.html:96 templates/base/site_links.html:90
 #: templates/pybb/index.html:22 templates/pybb/latest_topics.html:7
 #: templates/pybb/latest_topics.html:12
 msgid "Latest topics"
 msgstr "Viimeisimmät viestiketjut"
 
-#: templates/maintenance_base.html:98 templates/base/site_links.html:47
+#: templates/maintenance_base.html:98 templates/base/site_links.html:92
 msgid "Subscribed topics"
 msgstr "Seuratut viestiketjut"
 
-#: templates/maintenance_base.html:118 templates/base/site_links.html:67
-#: templates/image/detail/iotd_banner.html:10 templates/index/root.html:74
+#: templates/maintenance_base.html:118 templates/base/site_links.html:50
+#: templates/base/site_links.html.py:118
+#: templates/image/detail/iotd_banner.html:12
+#: templates/image/detail/menu/navigation.html:44 templates/index/root.html:63
 msgid "Image of the day"
 msgstr "Päivän kuva"
 
-#: templates/maintenance_base.html:127 templates/base/site_links.html:83
+#: templates/maintenance_base.html:127 templates/base/site_links.html:134
 msgid "Public data pools"
 msgstr "Julkiset datakirjastot"
 
-#: templates/maintenance_base.html:136 templates/base/site_links.html:90
+#: templates/maintenance_base.html:136 templates/base/site_links.html:141
 msgid "Advanced search"
 msgstr "Laajennettu haku"
 
 #: templates/maintenance_base.html:143 templates/stats.html:7
-#: templates/base/site_links.html:100 templates/user/profile/meta.html:86
+#: templates/base/site_links.html:151 templates/user/profile/meta.html:86
 msgid "Stats"
 msgstr "Tilastot"
 
-#: templates/maintenance_base.html:193 templates/base/site_links.html:160
+#: templates/maintenance_base.html:149
+#: templates/trending_astrophotographers.html:7
+#: templates/trending_astrophotographers.html:11
+#: templates/base/site_links.html:159
+#, fuzzy
+msgid "Trending astrophotographers"
+msgstr "Muokkaa tähtikuvauslaitteitasi"
+
+#: templates/maintenance_base.html:193 templates/base/site_links.html:211
 #: templates/contact_form/contact.html:5 templates/contact_form/contact.html:8
 msgid "Contact"
 msgstr "Ota yhteyttä"
 
+#: templates/maintenance_base.html:205
+#: templates/trending_astrophotographers.html:42
+#: templates/base/site_links.html:220 templates/image/detail/menu/user.html:8
+#: templates/inclusion_tags/image_list.html:11
+#: templates/inclusion_tags/search_image_list.html:122
+#: templates/user/profile/navigation.html:113
+msgid "User"
+msgstr "Käyttäjä"
+
 #: templates/maintenance_base.html:224 templates/upload.html:8
 #: templates/upload.html.py:70 templates/upload.html:86
-#: templates/avatar/change.html:38 templates/base/user_links_entries.html:14
-#: templates/image/detail/modals/upload_revision.html:17
+#: templates/avatar/change.html:38 templates/base/user_links.html:196
+#: templates/base/user_links_entries.html:14
+#: templates/image/detail/modals/upload_revision.html:18
 msgid "Upload"
 msgstr "Lataa"
 
@@ -3785,7 +3711,7 @@ msgstr "Lataa"
 msgid "My places"
 msgstr "Omat paikat"
 
-#: templates/maintenance_base.html:233 templates/wall.html:138
+#: templates/maintenance_base.html:233 templates/wall.html:144
 #: templates/base/user_links_entries.html:23
 #: templates/user/profile/navigation.html:38
 msgid "Commercial products"
@@ -3829,6 +3755,7 @@ msgid "My settings"
 msgstr "Omat asetukset"
 
 #: templates/maintenance_base.html:275
+#: templates/image/detail/menu/edit.html:22
 #: templates/user/profile/edit/navigation.html:8
 msgid "Basic information"
 msgstr "Perustiedot"
@@ -3849,12 +3776,12 @@ msgid "Preferences"
 msgstr "Asetukset"
 
 #: templates/maintenance_base.html:324
-#: templates/user/profile/edit/navigation.html:66
+#: templates/user/profile/edit/navigation.html:60
 msgid "Avatar"
 msgstr "Profiilikuva"
 
 #: templates/maintenance_base.html:331
-#: templates/base/user_links_entries.html:117 templates/user/profile.html:57
+#: templates/base/user_links_entries.html:97 templates/user/profile.html:57
 #: templates/user/profile.html.py:60
 msgid "Logout"
 msgstr "Kirjaudu ulos"
@@ -3865,16 +3792,16 @@ msgstr "Kirjaudu ulos"
 msgid "Notifications"
 msgstr "Ilmoitukset"
 
-#: templates/maintenance_base.html:356 templates/base/user_links.html:208
+#: templates/maintenance_base.html:356 templates/base/user_links.html:214
 msgid "Have an invite? Login!"
 msgstr "Oletko saanut kutsun? Kirjaudu sisään!"
 
-#: templates/maintenance_base.html:358 templates/base/user_links.html:210
+#: templates/maintenance_base.html:358 templates/base/user_links.html:216
 #: templates/registration/activation_complete.html:7
 msgid "Login"
 msgstr "Kirjaudu sisään"
 
-#: templates/maintenance_base.html:364 templates/base/user_links.html:216
+#: templates/maintenance_base.html:364 templates/base/user_links.html:222
 #: templates/registration/login.html:15
 msgid "Register"
 msgstr "Rekisteröidy"
@@ -4060,6 +3987,20 @@ msgstr "CCD vs DSLR: maailmanlaajuinen kehityssuunta"
 msgid "Global trend of telescope types"
 msgstr "Maailmanlaajuinen kehityssuunta kaukoputkityypeissä"
 
+#: templates/top_picks.html:8 templates/top_picks.html.py:11
+#: templates/base/site_links.html:112
+#: templates/image/detail/menu/navigation.html:53
+msgid "Top picks"
+msgstr ""
+
+#: templates/top_picks.html:13
+msgid "A collection of great images that were recently handpicked."
+msgstr ""
+
+#: templates/top_picks.html:32
+msgid "This list is currently empty."
+msgstr ""
+
 #: templates/tos.html:11
 msgid ""
 "The following Terms are only available in English. It is your responsibility "
@@ -4067,6 +4008,36 @@ msgid ""
 msgstr ""
 "Alla olevat käyttöehdot ovat saatavilla ainoastaan englanniksi. Jokainen on "
 "itse vastuussa niiden ymmärtämisestä."
+
+#: templates/trending_astrophotographers.html:17
+#, fuzzy
+msgid "Last 6 months"
+msgstr "Itä tai länsi"
+
+#: templates/trending_astrophotographers.html:25
+#, fuzzy
+msgid "Last year"
+msgstr "Viimeisin lähettäjä"
+
+#: templates/trending_astrophotographers.html:33
+#, fuzzy
+msgid "All time"
+msgstr "Latausaika"
+
+#: templates/trending_astrophotographers.html:46
+#: templates/base/user_links.html:140
+msgid "AstroBin index"
+msgstr "AstroBin-indeksi"
+
+#: templates/trending_astrophotographers.html:51
+#: templates/base/user_links.html:144
+#: templates/user/profile/navigation.html:103
+msgid "Followers"
+msgstr "Seuraajat"
+
+#: templates/trending_astrophotographers.html:61
+msgid "Total integration"
+msgstr "Kokonaisvalotusaika"
 
 #: templates/upload.html:12
 msgid "Image upload"
@@ -4180,7 +4151,7 @@ msgstr ""
 msgid "Filename"
 msgstr "Tiedostonimi"
 
-#: templates/upload.html:135 templates/messages/inbox.html:18
+#: templates/upload.html:135
 #: templates/subscription/subscription_detail.html:37
 msgid "Status"
 msgstr "Status"
@@ -4250,7 +4221,7 @@ msgstr "Lataus on valmis!"
 
 #: templates/user_collections_add_remove_images.html:8
 #: templates/user_collections_add_remove_images.html:15
-#: templates/user/profile/navigation.html:169
+#: templates/user/profile/navigation.html:172
 #, fuzzy
 msgid "Add/remove images"
 msgstr "Kuvia"
@@ -4269,7 +4240,10 @@ msgstr ""
 #: templates/image/edit/acquisition.html:52
 #: templates/image/edit/acquisition.html:68 templates/image/edit/basic.html:69
 #: templates/image/edit/gear.html:47 templates/image/edit/license.html:23
+#: templates/image/edit/platesolving_settings.html:23
+#: templates/image/edit/revision.html:14
 #: templates/image/edit/watermark.html:31 templates/location/edit.html:20
+#: templates/notification/notice_settings.html:43
 #: templates/user/profile/edit/basic.html:14
 #: templates/user/profile/edit/commercial.html:14
 #: templates/user/profile/edit/gear.html:39
@@ -4286,7 +4260,6 @@ msgstr ""
 #: templates/user/profile/edit/gear.html:411
 #: templates/user/profile/edit/license.html:20
 #: templates/user/profile/edit/locations.html:29
-#: templates/user/profile/edit/notifications.html:19
 #: templates/user/profile/edit/preferences.html:15
 #: templates/user/profile/edit/retailer.html:14
 msgid "Save"
@@ -4319,12 +4292,12 @@ msgstr ""
 "versiot kuvasta poistetaan. Oletko varma?"
 
 #: templates/user_collections_delete_modal.html:21
-#: templates/image/detail/menu/actions.html:136
+#: templates/image/detail/menu/actions.html:82
 #: templates/image/detail/modals/delete.html:14
 #: templates/image/detail/modals/delete.html:31
 #: templates/image/detail/modals/delete.html:48
 #: templates/pybb/post_template.html:64
-#: templates/user/profile/navigation.html:175
+#: templates/user/profile/navigation.html:178
 msgid "Delete"
 msgstr "Poista"
 
@@ -4371,7 +4344,7 @@ msgstr "Kuvattu"
 #: templates/wall.html:38 templates/inclusion_tags/search_image_list.html:36
 #: templates/inclusion_tags/search_image_list.html:89
 #: templates/search/search.html:43 templates/search/search.html.py:306
-#: views/image.py:341
+#: views/image.py:353
 msgid "Integration"
 msgstr "Valotusaika"
 
@@ -4382,7 +4355,7 @@ msgstr "Tykkäyksien lukumäärä"
 #: templates/wall.html:57 templates/gear/page.html:254
 #: templates/inclusion_tags/search_image_list.html:53
 #: templates/inclusion_tags/search_image_list.html:106
-#: templates/pybb/topic_list.html:23 templates/search/search.html:49
+#: templates/pybb/topic_list.html:32 templates/search/search.html:49
 #: templates/user/profile/commercial/products.html:212
 msgid "Views"
 msgstr "Katselukerrat"
@@ -4418,7 +4391,7 @@ msgstr "Planeetat"
 msgid "Comets"
 msgstr "Komeetat"
 
-#: templates/wall.html:151
+#: templates/wall.html:157
 msgid "Remove filter"
 msgstr "Poista suodatus"
 
@@ -4431,7 +4404,7 @@ msgid ""
 "                        "
 msgstr ""
 
-#: templates/actstream/action.html:37
+#: templates/actstream/action.html:38
 #, python-format
 msgid ""
 "\n"
@@ -4440,7 +4413,7 @@ msgid ""
 "                        "
 msgstr ""
 
-#: templates/actstream/action.html:67
+#: templates/actstream/action.html:58
 #, python-format
 msgid ""
 "\n"
@@ -4449,7 +4422,7 @@ msgid ""
 "                            "
 msgstr ""
 
-#: templates/actstream/action.html:71
+#: templates/actstream/action.html:62
 #, python-format
 msgid ""
 "\n"
@@ -4458,7 +4431,7 @@ msgid ""
 "                            "
 msgstr ""
 
-#: templates/actstream/action.html:102
+#: templates/actstream/action.html:83
 #, python-format
 msgid ""
 "\n"
@@ -4467,7 +4440,7 @@ msgid ""
 "                            "
 msgstr ""
 
-#: templates/actstream/action.html:106
+#: templates/actstream/action.html:87
 #, python-format
 msgid ""
 "\n"
@@ -4476,7 +4449,7 @@ msgid ""
 "                            "
 msgstr ""
 
-#: templates/actstream/action.html:137
+#: templates/actstream/action.html:108
 #, python-format
 msgid ""
 "\n"
@@ -4485,7 +4458,7 @@ msgid ""
 "                            "
 msgstr ""
 
-#: templates/actstream/action.html:141
+#: templates/actstream/action.html:112
 #, python-format
 msgid ""
 "\n"
@@ -4494,7 +4467,7 @@ msgid ""
 "                            "
 msgstr ""
 
-#: templates/actstream/action.html:172
+#: templates/actstream/action.html:135
 #, python-format
 msgid ""
 "\n"
@@ -4503,7 +4476,7 @@ msgid ""
 "                        "
 msgstr ""
 
-#: templates/actstream/action.html:197
+#: templates/actstream/action.html:161
 #, python-format
 msgid ""
 "\n"
@@ -4512,7 +4485,7 @@ msgid ""
 "                        "
 msgstr ""
 
-#: templates/actstream/action.html:222
+#: templates/actstream/action.html:187
 #, python-format
 msgid ""
 "\n"
@@ -4521,7 +4494,7 @@ msgid ""
 "                        "
 msgstr ""
 
-#: templates/actstream/action.html:249
+#: templates/actstream/action.html:211
 #, python-format
 msgid ""
 "\n"
@@ -4530,7 +4503,7 @@ msgid ""
 "                        "
 msgstr ""
 
-#: templates/actstream/action.html:274
+#: templates/actstream/action.html:237
 #, python-format
 msgid ""
 "\n"
@@ -4574,32 +4547,50 @@ msgstr ""
 msgid "View all"
 msgstr "Katso sivu"
 
-#: templates/base/modals.html:23 templates/pybb/index.html:28
+#: templates/base/modals.html:21
+#, fuzzy
+msgid "Settings"
+msgstr "Omat asetukset"
+
+#: templates/base/modals.html:27 templates/pybb/index.html:28
 #: templates/pybb/latest_topics.html:24
 #: templates/pybb/subscribed_topics.html:24
 #, fuzzy
 msgid "Mark all as read"
 msgstr "Merkitse valmiiksi"
 
-#: templates/base/site_links.html:28
+#: templates/base/site_links.html:29
 msgid "Moderate"
 msgstr ""
 
-#: templates/base/site_links.html:32 templates/moderation/image_list.html:10
+#: templates/base/site_links.html:38
 #, fuzzy
-msgid "Image moderation"
-msgstr "Kuvan tila"
+msgid "Image queue"
+msgstr "Kuvan koko"
 
-#: templates/base/site_links.html:33
+#: templates/base/site_links.html:44
 #, fuzzy
-msgid "View spam list"
-msgstr "Katso sivu"
+msgid "Spam list"
+msgstr "Kuvia"
 
-#: templates/base/site_links.html:76
+#: templates/base/site_links.html:57
+msgid "Submission queue"
+msgstr ""
+
+#: templates/base/site_links.html:66
+#, fuzzy
+msgid "Review queue"
+msgstr "Arvostelut"
+
+#: templates/base/site_links.html:75
+msgid "Judgement queue"
+msgstr ""
+
+#: templates/base/site_links.html:127
 msgid "Groups"
 msgstr ""
 
-#: templates/base/site_links.html:135
+#: templates/base/site_links.html:186
 #, fuzzy
 msgid "AstroBin Raw Data"
 msgstr "AstroBin on sosiaalinen!"
@@ -4647,15 +4638,42 @@ msgstr "Raakadatakirjasto"
 msgid "Private shared folders"
 msgstr "Jaetut yksityiskansiot"
 
-#: templates/base/user_links_entries.html:97
+#: templates/change_email/emailchange_confirm.html:4
 #, fuzzy
-msgid "Choose Image Of The Day"
-msgstr "Päivän kuva"
+msgid "E-mail change confirmation"
+msgstr "Näytä kaikki ilmoitukset"
 
-#: templates/base/user_links_entries.html:107
+#: templates/change_email/emailchange_detail.html:4
+msgid "E-mail change request"
+msgstr ""
+
+#: templates/change_email/emailchange_form.html:5
+#: templates/change_email/emailchange_form.html:8
+#: templates/user/profile/edit/basic.html:18
 #, fuzzy
-msgid "Content moderation"
-msgstr "Maa, jossa yritys toimii"
+msgid "Change your e-mail"
+msgstr "Vaihda avataria."
+
+#: templates/change_email/mail/body.txt:4
+#, python-format
+msgid ""
+"Hello,\n"
+"\n"
+"it looks like you have requested to change the e-mail address associated to\n"
+"your AstroBin account.\n"
+"\n"
+"To continue, please click or copy/paste the following URL:\n"
+"https://astrobin.com%(confirmation_url)s\n"
+"\n"
+"If you have NOT requested this change, you can safely ignore this message.\n"
+"\n"
+"Clear skies!\n"
+"The AstroBin Team"
+msgstr ""
+
+#: templates/change_email/mail/subject.txt:2
+msgid "Custom e-mail change request on AstroBin"
+msgstr ""
 
 #: templates/commercial/products/edit.html:7
 #: templates/commercial/products/edit.html:10
@@ -4694,9 +4712,19 @@ msgstr ""
 msgid "Send"
 msgstr "Lähetä"
 
+#: templates/contact_form/contact_completed.html:4
+#: templates/gear/fix_thanks.html:5 templates/gear/fix_thanks.html.py:8
+msgid "Thanks!"
+msgstr "Kiitokset!"
+
 #: templates/contact_form/contact_completed.html:7
 msgid "Thank you! Your message was sent successfully."
 msgstr "Kiitos!  Viestisi lähetettiin onnistuneesti."
+
+#: templates/endless/show_more.html:6 templates/index/root.html:83
+#, fuzzy
+msgid "More"
+msgstr "Lisää..."
 
 #: templates/gear/fix.html:10
 msgid "Instructions and examples"
@@ -4884,6 +4912,10 @@ msgid ""
 "grateful."
 msgstr "Panoksesi on hyvin tärkeä, ja koko AstroBin-yhteisö on kiitollinen."
 
+#: templates/gear/page.html:16
+msgid "by"
+msgstr "käyttäjältä"
+
 #: templates/gear/page.html:35
 msgid "Other images"
 msgstr "Muita kuvia"
@@ -4964,20 +4996,20 @@ msgstr "Omistajat"
 msgid "just now"
 msgstr "juuri äsken"
 
-#: templates/image/full.html:13 templates/image/full.html.py:75
+#: templates/image/full.html:13 templates/image/full.html.py:80
 msgid "Full resolution"
 msgstr "Katso täydessä koossa"
 
-#: templates/image/full.html:59
+#: templates/image/full.html:64
 #, python-format
 msgid "by <a href=\"%(the_url)s\">%(user)s</a>"
 msgstr "käyttäjältä <a href=\"%(the_url)s\">%(user)s</a>"
 
-#: templates/image/full.html:70
+#: templates/image/full.html:75
 msgid "Fit to window"
 msgstr "Sovita kuva ikkunaan"
 
-#: templates/image/full.html:82 templates/image/detail/image_card.html:10
+#: templates/image/full.html:87 templates/image/detail/image_card.html:10
 msgid "Technical card"
 msgstr "Tekniset tiedot"
 
@@ -5027,7 +5059,7 @@ msgstr ""
 msgid "Histogram"
 msgstr "Histogrammi"
 
-#: templates/image/detail/image_card.html:52 views/image.py:335
+#: templates/image/detail/image_card.html:52 views/image.py:347
 msgid "Frames"
 msgstr "Ruutuja"
 
@@ -5067,8 +5099,12 @@ msgstr "Kentän leveys"
 msgid "Contains"
 msgstr "Sisältää"
 
-#: templates/image/detail/info.html:12 templates/pybb/topic_list.html:17
+#: templates/image/detail/info.html:12 templates/pybb/topic_list.html:24
 msgid "Author"
+msgstr ""
+
+#: templates/image/detail/iotd_banner.html:19
+msgid "chosen by"
 msgstr ""
 
 #: templates/image/detail/js.html:103 templates/user/profile/js.html:11
@@ -5082,12 +5118,17 @@ msgid ""
 "page or search results."
 msgstr ""
 
-#: templates/image/detail/revisions.html:12
-#: templates/image/detail/revisions.html:33
+#: templates/image/detail/revisions.html:7
+#, fuzzy
+msgid "Revisions"
+msgstr "Arvostelut"
+
+#: templates/image/detail/revisions.html:14
+#: templates/image/detail/revisions.html:35
 msgid "Final"
 msgstr "Lopullinen versio"
 
-#: templates/image/detail/revisions.html:22
+#: templates/image/detail/revisions.html:24
 msgid "Original"
 msgstr "Alkuperäinen"
 
@@ -5113,89 +5154,62 @@ msgstr ""
 "tyytyväinen, ehkäpä parin uusintaversion jälkeen, <a href=\"%(promote_url)s"
 "\">nosta</a> se <a href=\"%(profile_url)s\">julkiselle alueelle</a>."
 
-#: templates/image/detail/menu/actions.html:9
+#: templates/image/detail/menu/actions.html:8
 #: templates/user/profile/commercial/products.html:44
 #: templates/user/profile/commercial/products.html:126
 msgid "Actions"
 msgstr "Toiminnot"
 
-#: templates/image/detail/menu/actions.html:17
-#, fuzzy
-msgid "Edit watermark"
-msgstr "Seuraava askel: vesileima"
-
-#: templates/image/detail/menu/actions.html:23
-msgid "Edit basic information"
-msgstr "Muokkaa perustietoja"
-
-#: templates/image/detail/menu/actions.html:30
-msgid "Edit gear used"
-msgstr "Muokkaa käytettyjä laitteita"
-
-#: templates/image/detail/menu/actions.html:36
-#: templates/image/edit/gear.html:48
-msgid "Edit acquisition details"
-msgstr "Muokkaa teknisiä tietoja"
-
-#: templates/image/detail/menu/actions.html:44
-msgid "Change license"
-msgstr "Vaihda lisenssiä"
-
-#: templates/image/detail/menu/actions.html:53
-#: templates/image/detail/modals/upload_revision.html:7
+#: templates/image/detail/menu/actions.html:15
+#: templates/image/detail/modals/upload_revision.html:8
 msgid "Upload new revision"
 msgstr "Lataa uusi versio"
 
-#: templates/image/detail/menu/actions.html:66
+#: templates/image/detail/menu/actions.html:28
 msgid "Mark this revision as final"
 msgstr "Merkitse tämä versio lopulliseksi"
 
-#: templates/image/detail/menu/actions.html:82
-#, fuzzy
-msgid "Attempt to plate-solve again"
-msgstr "Ratkaise uudestaan"
-
-#: templates/image/detail/menu/actions.html:93
+#: templates/image/detail/menu/actions.html:39
 #: templates/image/detail/modals/promote.html:7
 msgid "Promote to public area"
 msgstr "Nosta julkiselle alueelle"
 
-#: templates/image/detail/menu/actions.html:100
+#: templates/image/detail/menu/actions.html:46
 #: templates/image/detail/modals/demote.html:7
 msgid "Move to staging area"
 msgstr "Siirrä tilapäiselle alueelle"
 
-#: templates/image/detail/menu/actions.html:109
+#: templates/image/detail/menu/actions.html:55
 #: templates/image/detail/modals/send_to_group.html:8
 msgid "Send to group"
 msgstr ""
 
-#: templates/image/detail/menu/actions.html:117
+#: templates/image/detail/menu/actions.html:63
 #: templates/image/detail/modals/send_to_datapool.html:7
 #, fuzzy
 msgid "Send to public data pool"
 msgstr "Nosta julkiselle alueelle"
 
-#: templates/image/detail/menu/actions.html:124
+#: templates/image/detail/menu/actions.html:70
 #: templates/image/detail/modals/send_to_sharedfolder.html:7
 msgid "Send to private shared folder"
 msgstr "Lähetä jaettuun yksityiskansioon"
 
-#: templates/image/detail/menu/actions.html:134
+#: templates/image/detail/menu/actions.html:80
 #, fuzzy
 msgid "Delete image and all revisions"
 msgstr "Poista kuva kaikkine versioineen?"
 
-#: templates/image/detail/menu/actions.html:143
+#: templates/image/detail/menu/actions.html:89
 msgid "Delete original image"
 msgstr "Poista alkuperäinen kuva"
 
-#: templates/image/detail/menu/actions.html:150
+#: templates/image/detail/menu/actions.html:96
 #, fuzzy
 msgid "Delete this revision only"
 msgstr "Poista tämä versio"
 
-#: templates/image/detail/menu/actions.html:162
+#: templates/image/detail/menu/actions.html:107
 #: templates/image/detail/modals/flag_thumbnails.html:6
 msgid "Flag malfunctioning thumbnails"
 msgstr ""
@@ -5210,6 +5224,62 @@ msgstr ""
 #: templates/user/profile/navigation.html:19
 msgid "Ban user"
 msgstr ""
+
+#: templates/image/detail/menu/edit.html:8
+#: templates/inclusion_tags/list_gear.html:21
+#: templates/pybb/post_template.html:59
+#: templates/user/profile/navigation.html:175
+#: templates/user/profile/commercial/products.html:80
+#: templates/user/profile/commercial/products.html:162
+#: templates/user/profile/commercial/products.html:483
+#: templates/user/profile/commercial/products.html:810
+#: templates/user/profile/edit/gear.html:364
+msgid "Edit"
+msgstr "Muokkaa"
+
+#: templates/image/detail/menu/edit.html:15 templates/image/edit/menu.html:9
+#, fuzzy
+msgid "Watermark"
+msgstr "Tanska"
+
+#: templates/image/detail/menu/edit.html:37 templates/image/edit/menu.html:30
+#: templates/search/search.html:177
+msgid "Acquisition details"
+msgstr "Tekniset tiedot"
+
+#: templates/image/detail/menu/edit.html:50
+#, fuzzy
+msgid "Plate-solving settings"
+msgstr "Astrometrinen ratkaisu"
+
+#: templates/image/detail/menu/navigation.html:7
+#, fuzzy
+msgid "Context"
+msgstr "Ota yhteyttä"
+
+#: templates/image/detail/menu/navigation.html:12
+msgid "Navigation context"
+msgstr ""
+
+#: templates/image/detail/menu/navigation.html:18
+#, fuzzy
+msgid "User gallery"
+msgstr "Käyttäjän %(user)s galleria"
+
+#: templates/image/detail/menu/navigation.html:26
+#, fuzzy
+msgid "User collection"
+msgstr "Muokkaa sijaintiasi"
+
+#: templates/image/detail/menu/navigation.html:35
+#, fuzzy
+msgid "Public group"
+msgstr "Julkinen alue"
+
+#: templates/image/detail/menu/navigation.html:61
+#, fuzzy
+msgid "All image uploads"
+msgstr "Kuvan lataus"
 
 #: templates/image/detail/menu/share.html:6
 #: templates/image/detail/modals/share.html:7
@@ -5454,7 +5524,7 @@ msgstr "Kopioi"
 msgid "Image mode"
 msgstr "Kuvan tila"
 
-#: templates/image/detail/modals/upload_revision.html:11
+#: templates/image/detail/modals/upload_revision.html:12
 msgid ""
 "Did you improve the post-processing of your image? Upload the new revision!"
 msgstr "Teitkö muutoksia kuvaasi? Lataa uusi versio!"
@@ -5521,11 +5591,11 @@ msgstr ""
 msgid "What kind of image is this?"
 msgstr "Millainen kuva tämä on?"
 
-#: templates/image/edit/acquisition.html:79 views/__init__.py:1071
+#: templates/image/edit/acquisition.html:79 views/__init__.py:996
 msgid "Solar system"
 msgstr "Aurinkokunta"
 
-#: templates/image/edit/acquisition.html:82 views/__init__.py:1070
+#: templates/image/edit/acquisition.html:82 views/__init__.py:995
 msgid "Deep sky"
 msgstr "Syvä taivas"
 
@@ -5566,6 +5636,10 @@ msgstr "Voit hakea kuvauslaitetiedot toisesta kuvasta painamalla tätä nappia."
 #: templates/image/edit/gear.html:27
 msgid "Copy from another image"
 msgstr "Kopioi toisesta kuvasta"
+
+#: templates/image/edit/gear.html:48
+msgid "Edit acquisition details"
+msgstr "Muokkaa teknisiä tietoja"
 
 #: templates/image/edit/gear.html:58
 msgid "Copy gear"
@@ -5610,11 +5684,6 @@ msgstr ""
 "Muista, että voit vaihtaa oletuslisenssisi <a href=\"%(change_default_url)s"
 "\">tästä</a>."
 
-#: templates/image/edit/menu.html:9
-#, fuzzy
-msgid "Watermark"
-msgstr "Tanska"
-
 #: templates/image/edit/menu.html:16
 msgid "Basic Information"
 msgstr "Perustiedot"
@@ -5623,9 +5692,22 @@ msgstr "Perustiedot"
 msgid "Gear used"
 msgstr "Käytetyt laitteet"
 
-#: templates/image/edit/menu.html:30 templates/search/search.html:177
-msgid "Acquisition details"
-msgstr "Tekniset tiedot"
+#: templates/image/edit/platesolving_settings.html:7
+#: templates/image/edit/platesolving_settings.html:12
+#, fuzzy
+msgid "Edit your image: plate-solving settings"
+msgstr "Muokkaa kuvaasi: mittakaava ratkaisua varten"
+
+#: templates/image/edit/platesolving_settings.html:26
+#: templates/image/edit/revision.html:15
+#, fuzzy
+msgid "Back to image"
+msgstr "Takaisin ylös"
+
+#: templates/image/edit/revision.html:6 templates/image/edit/revision.html:9
+#, fuzzy
+msgid "Edit revision"
+msgstr "Kyllä, poista kuvaversio"
 
 #: templates/image/edit/watermark.html:6
 #: templates/image/edit/watermark.html:13
@@ -5670,17 +5752,6 @@ msgstr ""
 #: templates/user/profile/edit/gear.html:361
 msgid "Remove"
 msgstr "Poista"
-
-#: templates/inclusion_tags/list_gear.html:21
-#: templates/pybb/post_template.html:59
-#: templates/user/profile/navigation.html:172
-#: templates/user/profile/commercial/products.html:80
-#: templates/user/profile/commercial/products.html:162
-#: templates/user/profile/commercial/products.html:483
-#: templates/user/profile/commercial/products.html:810
-#: templates/user/profile/edit/gear.html:364
-msgid "Edit"
-msgstr "Muokkaa"
 
 #: templates/inclusion_tags/list_gear.html:25
 #: templates/popover/gear_accessory.html:23
@@ -5736,16 +5807,16 @@ msgstr ""
 msgid "Date joined"
 msgstr "Liittymispäivämäärä"
 
-#: templates/index/root.html:14
+#: templates/index/root.html:15
 #, fuzzy
 msgid "Home of Astrophotography"
 msgstr "Muokkaa tähtikuvauslaitteitasi"
 
-#: templates/index/root.html:26
+#: templates/index/root.html:28
 msgid "The perfect home for your astrophotography."
 msgstr "Paras paikka tähtikuvillesi."
 
-#: templates/index/root.html:28
+#: templates/index/root.html:30
 #, python-format
 msgid ""
 "AstroBin is an image hosting service made specifically for "
@@ -5757,11 +5828,11 @@ msgstr ""
 "tähtikuvaajille. Se sisältää paljon tähtikuvaajayhteisölle hyödyllisiä "
 "toimintoja! Lue lisää <a href=\"%(help_url)s\">ohjeita-sivulta</a>."
 
-#: templates/index/root.html:35
+#: templates/index/root.html:37
 msgid "Unlimited uploads, unlimited size."
 msgstr "Rajaton määrä rajattoman kokoisia latauksia."
 
-#: templates/index/root.html:36
+#: templates/index/root.html:38
 #, fuzzy
 msgid ""
 "Astrophotography images have scientific value that shouldn't be lost in file "
@@ -5771,11 +5842,11 @@ msgstr ""
 "AstroBinissä voit (ja kannattaa!) ladata täyskokoisia kuvia. Saat rajattoman "
 "määrän tilaa ilmaiseksi."
 
-#: templates/index/root.html:43
+#: templates/index/root.html:45
 msgid "Have your data neatly plotted."
 msgstr "Piirrä datasta kuvaaja."
 
-#: templates/index/root.html:44
+#: templates/index/root.html:46
 msgid ""
 "Data is everything, and AstroBin will give you the tools to keep your data "
 "neat and organized. And with our plots, you can get insights on your "
@@ -5785,21 +5856,16 @@ msgstr ""
 "siistissä järjestyksessä. Käppyröillämme näet yhdellä silmäyksellä milloin "
 "tuottavuus on huipussaan ja mitä laitteita käytät eniten."
 
-#: templates/index/root.html:94
+#: templates/index/root.html:80
 #, fuzzy
 msgid "Latest from the forums"
 msgstr "Mitä vikaa foorumeissa on?"
 
-#: templates/index/root.html:97
-#, fuzzy
-msgid "More"
-msgstr "Lisää..."
-
-#: templates/index/root.html:141
+#: templates/index/root.html:134 templates/index/root.html.py:160
 msgid "Recent images"
 msgstr "Uusimpia kuvia"
 
-#: templates/index/root.html:145
+#: templates/index/root.html:138 templates/index/root.html.py:168
 #, fuzzy
 msgid "Recent from your followed users"
 msgstr "Seuraamasi käyttäjät"
@@ -5815,7 +5881,7 @@ msgstr ""
 "korjata."
 
 #: templates/messages/compose.html:6 templates/messages/compose.html.py:9
-#: templates/messages/inbox.html:48
+#: templates/messages/inbox.html:20
 msgid "Compose message"
 msgstr "Kirjoita viesti"
 
@@ -5831,27 +5897,20 @@ msgstr "Ei tuloksia"
 msgid "Searching"
 msgstr "Etsitään"
 
-#: templates/messages/inbox.html:14
+#: templates/messages/inbox.html:26
 msgid "Messages"
 msgstr "Viestit"
 
-#: templates/messages/inbox.html:19
+#: templates/messages/inbox.html:33
 msgid "Participants"
 msgstr "Osallistujat"
 
-#: templates/messages/inbox.html:20
-msgid "Date and time"
-msgstr "Päivämäärä ja kellonaika"
+#: templates/messages/inbox.html:34
+#, fuzzy
+msgid "Last message"
+msgstr "Viestini"
 
-#: templates/messages/inbox.html:22
-msgid "Excerpt"
-msgstr "Ote"
-
-#: templates/messages/inbox.html:26
-msgid "New!"
-msgstr "Uutta!"
-
-#: templates/messages/inbox.html:39
+#: templates/messages/inbox.html:64
 msgid "No messages"
 msgstr "Ei viestejä"
 
@@ -5859,34 +5918,39 @@ msgstr "Ei viestejä"
 msgid "Message sent"
 msgstr "Viesti lähetetty"
 
-#: templates/messages/view.html:12
+#: templates/messages/view.html:16
+msgid "Back"
+msgstr ""
+
+#: templates/messages/view.html:22
+msgid "Delete conversation"
+msgstr "Poista keskustelu"
+
+#: templates/messages/view.html:31
 #, python-format
 msgid "A conversation between <a href=\"%(sender_url)s\">you</a> and"
 msgstr "Keskustelijat: <a href=\"%(sender_url)s\">sinä</a> ja"
 
-#: templates/messages/view.html:20
-msgid "Delete conversation"
-msgstr "Poista keskustelu"
-
-#: templates/messages/view.html:23 templates/messages/view.html.py:44
-msgid "or return to messages"
-msgstr "tai palaa takaisin viesteihin"
-
-#: templates/messages/view.html:42 templates/messages/view.html.py:77
+#: templates/messages/view.html:52 templates/messages/view.html.py:82
 msgid "Reply"
 msgstr "Vastaa"
 
-#: templates/messages/view.html:64
+#: templates/messages/view.html:69
 msgid "Sending..."
 msgstr "Lähetetään..."
 
-#: templates/messages/view.html:86
+#: templates/messages/view.html:91
 msgid "Error. Try again!"
 msgstr "Virhe! Yritä uudestaan!"
 
 #: templates/moderation/image_list.html:6
 #, fuzzy
 msgid "Image modetation"
+msgstr "Kuvan tila"
+
+#: templates/moderation/image_list.html:10
+#, fuzzy
+msgid "Image moderation"
 msgstr "Kuvan tila"
 
 #: templates/moderation/image_list.html:14
@@ -5957,6 +6021,17 @@ msgstr ""
 "\n"
 "Kipeitä niskoja,\n"
 "AstroBin.\n"
+
+#: templates/notification/notice_settings.html:5
+#: templates/notification/notice_settings.html:8
+#, fuzzy
+msgid "Notification settings"
+msgstr "Ilmoitukset"
+
+#: templates/notification/notice_settings.html:15
+#, fuzzy
+msgid "Notification Type"
+msgstr "Ilmoitukset"
 
 #: templates/notification/api_key_request_approved/full.txt:3
 #, python-format
@@ -6443,10 +6518,39 @@ msgstr ""
 msgid "%(creator)s created a new public group: \"%(group_name)s\""
 msgstr ""
 
+#: templates/notification/new_topic_in_group/full.txt:2
+#, fuzzy, python-format
+msgid ""
+"%(user)s posted a new topic to the group: \"%(group_name)s\"\n"
+"\n"
+"\"%(topic_title)s\"\n"
+"\n"
+"View the topic: %(url)s\n"
+"View the group: %(group_url)s"
+msgstr ""
+"<strong>%(username)s</strong> on pyytänyt nähdä kuvasi TIFF tai FITS -"
+"tiedostona."
+
+#: templates/notification/new_topic_in_group/notice.html:3
+#: templates/notification/new_topic_in_group/short.html:3
+#, fuzzy, python-format
+msgid ""
+"<strong>%(user)s</strong> posted a new topic to the group: \"%(group_name)s\""
+msgstr ""
+"<strong>%(username)s</strong> on pyytänyt nähdä kuvasi TIFF tai FITS -"
+"tiedostona."
+
+#: templates/notification/new_topic_in_group/short.txt:2
+#, fuzzy, python-format
+msgid "%(user)s posted a new topic to the group: \"%(group_name)s\""
+msgstr ""
+"<strong>%(username)s</strong> on pyytänyt nähdä kuvasi TIFF tai FITS -"
+"tiedostona."
+
 #: templates/notification/rawdata_invited_to_private_folder/full.txt:2
 #, python-format
 msgid ""
-"You are invited you to the private shared folder: \"%(folder_name)s\".\n"
+"You are invited to the private shared folder: \"%(folder_name)s\".\n"
 "\n"
 "You can now contribute data and processed images to the folder. You can also "
 "invite more people.\n"
@@ -6458,15 +6562,16 @@ msgstr ""
 #: templates/notification/rawdata_invited_to_private_folder/short.html:2
 #, fuzzy, python-format
 msgid ""
-"<a href=\"%(folder_url)s\">You are invited you to the private shared folder: "
+"<a href=\"%(folder_url)s\">You are invited to the private shared folder: "
 "<strong>\"%(folder_name)s.\"</strong></a>"
 msgstr ""
 "<a href=\"%(object_url)s\">Et enää seuraa <strong>%(object)s</strong>.</a>"
 
 #: templates/notification/rawdata_invited_to_private_folder/short.txt:2
-#, python-format
-msgid "You are invited you to the private shared folder: %(folder_name)s"
+#, fuzzy, python-format
+msgid "You are invited to the private shared folder: %(folder_name)s"
 msgstr ""
+"<a href=\"%(object_url)s\">Et enää seuraa <strong>%(object)s</strong>.</a>"
 
 #: templates/notification/rawdata_posted_image_to_private_folder/full.txt:2
 #, fuzzy, python-format
@@ -6673,7 +6778,7 @@ msgstr "RA"
 msgid "Dec"
 msgstr "Dec"
 
-#: templates/popover/user.html:19 views/__init__.py:1165
+#: templates/popover/user.html:19 views/__init__.py:1096
 msgid "Member since"
 msgstr "Liittynyt"
 
@@ -6696,6 +6801,10 @@ msgstr ""
 "\"%(login_url)s\">kirjautua sisään</a>, muussa tapauksessa voit jättää "
 "meille sähköpostiosoitteesi ja me otamme sinuun yhteyttä heti kun nettisivu "
 "avataan!"
+
+#: templates/pybb/_topic_closed.html:4
+msgid "This topic was closed by a moderator."
+msgstr ""
 
 #: templates/pybb/forum.html:21
 #, fuzzy
@@ -6729,7 +6838,7 @@ msgid "Topics"
 msgstr ""
 
 #: templates/pybb/index.html:55 templates/pybb/topic.html:96
-#: templates/pybb/topic_list.html:20
+#: templates/pybb/topic_list.html:29
 msgid "Posts"
 msgstr ""
 
@@ -6812,37 +6921,41 @@ msgstr ""
 msgid "Subscribe"
 msgstr ""
 
-#: templates/pybb/topic.html:110
+#: templates/pybb/topic.html:114
 msgid "Subscribers"
 msgstr ""
 
-#: templates/pybb/topic_list.html:13
+#: templates/pybb/topic_list.html:20
 msgid "Topic"
 msgstr ""
 
-#: templates/pybb/topic_list.html:26
+#: templates/pybb/topic_list.html:37
 #, fuzzy
 msgid "Last post"
 msgstr "Itä tai länsi"
 
-#: templates/pybb/topic_list.html:39
+#: templates/pybb/topic_list.html:59
 msgid "Sticky"
 msgstr ""
 
-#: templates/pybb/topic_list.html:40
+#: templates/pybb/topic_list.html:60
 #, fuzzy
 msgid "Closed"
 msgstr "Sulje"
 
-#: templates/pybb/topic_list.html:44
+#: templates/pybb/topic_list.html:64
 #, fuzzy
 msgid "pages"
 msgstr "Kuvia"
 
-#: templates/pybb/topic_list.html:77
+#: templates/pybb/topic_list.html:101
 #, fuzzy
 msgid "This forum does not have any topics."
 msgstr "Sinulle ei ole uusia ilmoituksia."
+
+#: templates/pybb/mail_templates/subscription_email_subject.html:2
+msgid "New reply to a forum topic you subscribe to"
+msgstr "Uusi vastaus seuraamaasi foorumiketjuun"
 
 #: templates/registration/activate.html:4
 #: templates/registration/activate.html:9
@@ -7007,12 +7120,12 @@ msgstr "Peruskriteerit"
 msgid "Please input some search terms!"
 msgstr "Syötä hakusanoja!"
 
-#: templates/search/search.html:307 views/__init__.py:1167
-#: views/__init__.py:1168 views/image.py:341
+#: templates/search/search.html:307 views/__init__.py:1098
+#: views/__init__.py:1099 views/image.py:353
 msgid "hours"
 msgstr "tuntia"
 
-#: templates/search/search.html:313 views/image.py:347
+#: templates/search/search.html:313 views/image.py:359
 msgid "Avg. Moon phase"
 msgstr "Kuun vaiheen keskiarvo"
 
@@ -7110,7 +7223,7 @@ msgid "Free"
 msgstr ""
 
 #: templates/subscription/subscription_category_list.html:47
-#: views/image.py:346
+#: views/image.py:358
 msgid "days"
 msgstr "vuorokautta"
 
@@ -7560,7 +7673,7 @@ msgstr "Muokka profiilia"
 
 #: templates/user/profile/delete.html:6 templates/user/profile/delete.html:11
 #: templates/user/profile/delete.html:18
-#: templates/user/profile/edit/basic.html:18
+#: templates/user/profile/edit/basic.html:19
 #, fuzzy
 msgid "Delete account"
 msgstr "Poista keskustelu"
@@ -7581,8 +7694,8 @@ msgstr ""
 msgid "Import from Flickr"
 msgstr "Tuo Flickristä"
 
-#: templates/user/profile/flickr_import.html:14 views/__init__.py:581
-#: views/__init__.py:2039
+#: templates/user/profile/flickr_import.html:14 views/__init__.py:451
+#: views/__init__.py:1894
 msgid ""
 "AstroBin is currently in read-only mode, because of server maintenance. "
 "Please try again soon!"
@@ -7679,11 +7792,11 @@ msgstr "Tilapäinen alue"
 msgid "Following"
 msgstr "Seuraa"
 
-#: templates/user/profile/navigation.html:155
+#: templates/user/profile/navigation.html:158
 msgid "Lacking data"
 msgstr "Puuttuvat tiedot"
 
-#: templates/user/profile/navigation.html:163
+#: templates/user/profile/navigation.html:166
 msgid "Collection tools"
 msgstr ""
 
@@ -7776,6 +7889,13 @@ msgstr ""
 msgid "Select the product you want to merge to"
 msgstr "Klikkaa valitaksesi kuvat, jotka haluat tuoda"
 
+#: templates/user/profile/commercial/products.html:288
+#: templates/user/profile/commercial/products.html:292
+#: templates/user/profile/commercial/products.html:358
+#: templates/user/profile/commercial/products.html:362
+msgid "Are you sure?"
+msgstr "Oletko varma?"
+
 #: templates/user/profile/commercial/products.html:305
 msgid "Claim retailed product"
 msgstr ""
@@ -7841,11 +7961,11 @@ msgid "Add gear item"
 msgstr ""
 
 #: templates/user/profile/edit/gear.html:168
-#: templates/user/profile/edit/gear.html:243 views/__init__.py:923
-#: views/__init__.py:950 views/__init__.py:1509 views/__init__.py:1522
-#: views/__init__.py:1543 views/__init__.py:1580 views/__init__.py:1670
-#: views/__init__.py:1732 views/__init__.py:1934 views/__init__.py:1976
-#: views/__init__.py:3075 views/__init__.py:3245 views/image.py:830
+#: templates/user/profile/edit/gear.html:243 views/__init__.py:841
+#: views/__init__.py:868 views/__init__.py:1438 views/__init__.py:1451
+#: views/__init__.py:1472 views/__init__.py:1509 views/__init__.py:1599
+#: views/__init__.py:1661 views/__init__.py:1831 views/__init__.py:2933
+#: views/__init__.py:3103 views/image.py:905 views/image.py:977
 msgid "Form saved. Thank you!"
 msgstr "Tallennettu. Kiitos!"
 
@@ -7878,23 +7998,6 @@ msgstr ""
 msgid "AstroBin will not share your location details with other users."
 msgstr "AstroBin ei jaa sijaintitietojasi muiden käyttäjien kanssa."
 
-#: templates/user/profile/edit/navigation.html:60
-#, fuzzy
-msgid "E-mail notifications"
-msgstr "Näytä kaikki ilmoitukset"
-
-#: templates/user/profile/edit/notifications.html:6
-#, fuzzy
-msgid "Edit your e-mail notification preferences"
-msgstr "Muokkaa asetuksiasi"
-
-#: templates/user/profile/edit/notifications.html:12
-msgid ""
-"Select which notifications you would like to receive via e-mail. Please note "
-"that all notifications are always delivered on-site via the notifications "
-"menu, in all cases."
-msgstr ""
-
 #: templates/user/profile/edit/preferences.html:6
 msgid "Edit your site preferences"
 msgstr "Muokkaa asetuksiasi"
@@ -7904,91 +8007,36 @@ msgstr "Muokkaa asetuksiasi"
 msgid "Edit your retailer information"
 msgstr "Muokkaa perustietojasi"
 
-#: templatetags/tags.py:75 views/__init__.py:1139 views/__init__.py:2502
+#: templatetags/tags.py:75 views/__init__.py:1064 views/__init__.py:2360
 msgid "minutes"
 msgstr "minuuttia"
 
-#: templatetags/tags.py:76 views/__init__.py:1140 views/__init__.py:2503
+#: templatetags/tags.py:76 views/__init__.py:1065 views/__init__.py:2361
 msgid "seconds ago"
 msgstr "sekunteja sitten"
 
-#: templatetags/tags.py:77 views/__init__.py:1142 views/__init__.py:2505
+#: templatetags/tags.py:77 views/__init__.py:1067 views/__init__.py:2363
 #, python-format
 msgid "%s ago"
 msgstr "%s sitten"
 
-#: templatetags/tags.py:204 views/__init__.py:2376
+#: templatetags/tags.py:220 views/__init__.py:2234
 msgid "no alias"
 msgstr "Ei lempinimeä"
 
-#: views/__init__.py:259 views/image.py:187
-#, fuzzy
-msgid "Imaging telescope or lens"
-msgid_plural "Imaging telescopes or lenses"
-msgstr[0] "Kuvauskaukoputket"
-msgstr[1] "Kuvauskaukoputket"
-
-#: views/__init__.py:263 views/image.py:191
-#, fuzzy
-msgid "Imaging camera"
-msgid_plural "Imaging cameras"
-msgstr[0] "Kuvauskamerat"
-msgstr[1] "Kuvauskamerat"
-
-#: views/__init__.py:267 views/image.py:195
-#, fuzzy
-msgid "Mount"
-msgid_plural "Mounts"
-msgstr[0] "Jalustat"
-msgstr[1] "Jalustat"
-
-#: views/__init__.py:271 views/image.py:199
-#, fuzzy
-msgid "Guiding telescope or lens"
-msgid_plural "Guiding telescopes or lenses"
-msgstr[0] "Seurantakaukoputket"
-msgstr[1] "Seurantakaukoputket"
-
-#: views/__init__.py:275 views/image.py:203
-#, fuzzy
-msgid "Guiding camera"
-msgid_plural "Guiding cameras"
-msgstr[0] "Seurantakamerat"
-msgstr[1] "Seurantakamerat"
-
-#: views/__init__.py:279 views/image.py:207
-#, fuzzy
-msgid "Focal reducer"
-msgid_plural "Focal reducers"
-msgstr[0] "Polttovälin lyhentäjät"
-msgstr[1] "Polttovälin lyhentäjät"
-
-#: views/__init__.py:288 views/image.py:216
-#, fuzzy
-msgid "Accessory"
-msgid_plural "Accessories"
-msgstr[0] "Oheislaitteet"
-msgstr[1] "Oheislaitteet"
-
-#: views/__init__.py:455
-#, fuzzy
-msgid "Today's 'Image of the day' was already chosen. Come back tomorrow!"
-msgstr ""
-"'Päivän kuva' tälle päivälle on jo valittu. Tervetuloa takaisin uudestaan!"
-
-#: views/__init__.py:570 views/__init__.py:2028
+#: views/__init__.py:440 views/__init__.py:1883
 msgid ""
 "Invalid image or no image provided. Allowed formats are JPG, PNG and GIF."
 msgstr ""
 "Virheellinen kuva tai ei kuvaa. Sallitut formaatit ovat JPG, PNG ja GIF."
 
-#: views/__init__.py:577
+#: views/__init__.py:447
 #, fuzzy
 msgid "You have reached your image count limit. Please upgrade!"
 msgstr ""
 "Olet saavuttanut kuvien lataamismäärän ylärajan. Ole hyvä ja päivitä tilisi!"
 
-#: views/__init__.py:601 views/__init__.py:2059
+#: views/__init__.py:471 views/__init__.py:1914
 msgid ""
 "You uploaded an Indexed PNG file. AstroBin will need to lower the color "
 "count to 256 in order to work with it."
@@ -7996,8 +8044,9 @@ msgstr ""
 "Olet lähettänyt indeksoidun PNG-tiedoston. AstroBinin on pakko pienentää "
 "värien määrää 256 kappaleeseen, jotta kuva toimisi."
 
-#: views/__init__.py:811 views/__init__.py:893 views/__init__.py:905
-#: views/__init__.py:917 views/__init__.py:941 views/__init__.py:1660
+#: views/__init__.py:696 views/__init__.py:729 views/__init__.py:811
+#: views/__init__.py:823 views/__init__.py:835 views/__init__.py:859
+#: views/__init__.py:1589
 msgid ""
 "There was one or more errors processing the form. You may need to scroll "
 "down to see them."
@@ -8005,51 +8054,57 @@ msgstr ""
 "Lomakkeen käsittelyssä tapahtui yksi tai useampi virhe. Rullaa alaspäin "
 "nähdäksesi virheet."
 
-#: views/__init__.py:888
+#: views/__init__.py:711
+msgid ""
+"Form saved. A new plate-solving process will start when you visit your image "
+"again."
+msgstr ""
+
+#: views/__init__.py:806
 msgid "Fill in one session, before adding more."
 msgstr "Täytä tämä sessio ennen seuraavien lisäämistä."
 
-#: views/__init__.py:1022
+#: views/__init__.py:947
 msgid "No date specified"
 msgstr "Päivämäärää ei annettu"
 
-#: views/__init__.py:1044 views/__init__.py:1103
+#: views/__init__.py:969 views/__init__.py:1028
 msgid "No imaging telescopes or lenses, or no imaging cameras specified"
 msgstr "Kaukoputkea, objektiivia tai kameraa ei määritetty"
 
-#: views/__init__.py:1045
+#: views/__init__.py:970
 msgid "Gear images"
 msgstr "Kalustokuvia"
 
-#: views/__init__.py:1102
+#: views/__init__.py:1027
 msgid "No subjects specified"
 msgstr "Kohteita ei määritetty"
 
-#: views/__init__.py:1104
+#: views/__init__.py:1029
 msgid "No acquisition details specified"
 msgstr "Kuvaustietoja ei määritelty"
 
-#: views/__init__.py:1166
+#: views/__init__.py:1097
 msgid "Last login"
 msgstr "Viimeksi kirjautunut"
 
-#: views/__init__.py:1167
+#: views/__init__.py:1098
 msgid "Total integration time"
 msgstr "Kokonaisvalotusaika"
 
-#: views/__init__.py:1168
+#: views/__init__.py:1099
 msgid "Average integration time"
 msgstr "Keskimääräinen valotusaika"
 
-#: views/__init__.py:1169
+#: views/__init__.py:1100
 msgid "Forum posts"
 msgstr "Foorumiviestit"
 
-#: views/__init__.py:2082
+#: views/__init__.py:1937
 msgid "Image uploaded. Thank you!"
 msgstr "Tallennettu. Kiitos!"
 
-#: views/__init__.py:3035 views/__init__.py:3228
+#: views/__init__.py:2893 views/__init__.py:3086
 msgid "You can't merge a product to itself."
 msgstr "Et voi yhdistää tuotetta itseensä."
 
@@ -8067,52 +8122,205 @@ msgstr "Sijainnit"
 msgid "Collection deleted!"
 msgstr "Versio poistettu."
 
-#: views/image.py:88
+#: views/image.py:94
 msgid ""
 "Thanks for reporting the problem. All thumbnails will be generated again."
 msgstr ""
 "Kiitos kun raportoit ongelman. Kaikki esikatselukuvat generoidaan uudestaan."
 
-#: views/image.py:333
+#: views/image.py:196
+#, fuzzy
+msgid "Imaging telescope or lens"
+msgid_plural "Imaging telescopes or lenses"
+msgstr[0] "Kuvauskaukoputket"
+msgstr[1] "Kuvauskaukoputket"
+
+#: views/image.py:200
+#, fuzzy
+msgid "Imaging camera"
+msgid_plural "Imaging cameras"
+msgstr[0] "Kuvauskamerat"
+msgstr[1] "Kuvauskamerat"
+
+#: views/image.py:204
+#, fuzzy
+msgid "Mount"
+msgid_plural "Mounts"
+msgstr[0] "Jalustat"
+msgstr[1] "Jalustat"
+
+#: views/image.py:208
+#, fuzzy
+msgid "Guiding telescope or lens"
+msgid_plural "Guiding telescopes or lenses"
+msgstr[0] "Seurantakaukoputket"
+msgstr[1] "Seurantakaukoputket"
+
+#: views/image.py:212
+#, fuzzy
+msgid "Guiding camera"
+msgid_plural "Guiding cameras"
+msgstr[0] "Seurantakamerat"
+msgstr[1] "Seurantakamerat"
+
+#: views/image.py:216
+#, fuzzy
+msgid "Focal reducer"
+msgid_plural "Focal reducers"
+msgstr[0] "Polttovälin lyhentäjät"
+msgstr[1] "Polttovälin lyhentäjät"
+
+#: views/image.py:225
+#, fuzzy
+msgid "Accessory"
+msgid_plural "Accessories"
+msgstr[0] "Oheislaitteet"
+msgstr[1] "Oheislaitteet"
+
+#: views/image.py:345
 msgid "Resolution"
 msgstr "Resoluutio"
 
-#: views/image.py:334 views/image.py:500
+#: views/image.py:346 views/image.py:570
 msgid "Dates"
 msgstr "Päivämäärät"
 
-#: views/image.py:346
+#: views/image.py:358
 msgid "Avg. Moon age"
 msgstr "Keskimääräinen kuun ikä"
 
-#: views/image.py:349
+#: views/image.py:361
 msgid "Mean SQM"
 msgstr "Keskiarvo SQM"
 
-#: views/image.py:617
+#: views/image.py:692
 msgid "Image deleted."
 msgstr "Kuva on poistettu."
 
-#: views/image.py:653 views/image.py:723
+#: views/image.py:728 views/image.py:798
 msgid "Revision deleted."
 msgstr "Versio poistettu."
 
-#: views/image.py:755
+#: views/image.py:830
 #, fuzzy
 msgid "Image moved to the staging area."
 msgstr "Siirrä tilapäiselle alueelle"
 
-#: views/image.py:801
+#: views/image.py:876
 #, fuzzy
 msgid "Image moved to the public area."
 msgstr "Nosta julkiselle alueelle"
 
-#: views/image.py:835
+#: views/image.py:910
 #, fuzzy
 msgid "There was one or more errors processing the form. "
 msgstr ""
 "Lomakkeen käsittelyssä tapahtui yksi tai useampi virhe. Rullaa alaspäin "
 "nähdäksesi virheet."
+
+#~ msgid "Archive of 'Image of the day' winners"
+#~ msgstr "Menneet Päivän kuvat"
+
+#~ msgid "Runners-up"
+#~ msgstr "Muita huippukuvia"
+
+#~ msgid "Choose today's 'Image of the day'"
+#~ msgstr "Valitse 'Päivän kuva' tälle päivälle"
+
+#~ msgid ""
+#~ "Here is a selection of images uploaded during the past 7 days. About half "
+#~ "of them are images that received lots of likes, and the other half were "
+#~ "selected randomly. The images are anonymized as to not bias the selection."
+#~ msgstr ""
+#~ "Tässä on valikoima viimeisen 7 päivän aikana lähetettyjä kuvia. Noin "
+#~ "puolet kuvista on saanut erittäin paljon tykkäyksiä, loput on valittu "
+#~ "satunnaisesti. Kuvaajien nimet on sensuroitu, jotta valinta olisi "
+#~ "puolueeton."
+
+#~ msgid "Choose"
+#~ msgstr "Valitse"
+
+#~ msgid ""
+#~ "There are no candidates for 'Image of the day' yet, today. Please try "
+#~ "again later."
+#~ msgstr ""
+#~ "Päivän kuvaksi ei ole vielä kandidaatteja. Kokeile myöhemmin uudestaan."
+
+#~ msgid "This image will be selected as today's 'Image of the day'."
+#~ msgstr "Tämä kuva valitaan 'Päivän kuvaksi'."
+
+#~ msgid "This operation cannot be undone."
+#~ msgstr "Tätä toimintoa ei voi peruuttaa."
+
+#~ msgid "Yes, I'm sure"
+#~ msgstr "Kyllä, olen varma"
+
+#~ msgid ""
+#~ "\n"
+#~ "                The 'Image of the day' was selected. Thank you for your "
+#~ "help!\n"
+#~ "            "
+#~ msgstr ""
+#~ "\n"
+#~ "                Päivän kuva on valittu. Kiitos avustasi!\n"
+#~ "            "
+
+#, fuzzy
+#~ msgid "Image of the Day"
+#~ msgstr "Päivän kuva"
+
+#~ msgid "Leaderboard"
+#~ msgstr "Johtotähdet"
+
+#, fuzzy
+#~ msgid "View spam list"
+#~ msgstr "Katso sivu"
+
+#, fuzzy
+#~ msgid "Choose Image Of The Day"
+#~ msgstr "Päivän kuva"
+
+#, fuzzy
+#~ msgid "Content moderation"
+#~ msgstr "Maa, jossa yritys toimii"
+
+#, fuzzy
+#~ msgid "Edit watermark"
+#~ msgstr "Seuraava askel: vesileima"
+
+#~ msgid "Edit basic information"
+#~ msgstr "Muokkaa perustietoja"
+
+#~ msgid "Edit gear used"
+#~ msgstr "Muokkaa käytettyjä laitteita"
+
+#~ msgid "Change license"
+#~ msgstr "Vaihda lisenssiä"
+
+#, fuzzy
+#~ msgid "Attempt to plate-solve again"
+#~ msgstr "Ratkaise uudestaan"
+
+#~ msgid "Date and time"
+#~ msgstr "Päivämäärä ja kellonaika"
+
+#~ msgid "Excerpt"
+#~ msgstr "Ote"
+
+#~ msgid "New!"
+#~ msgstr "Uutta!"
+
+#~ msgid "or return to messages"
+#~ msgstr "tai palaa takaisin viesteihin"
+
+#, fuzzy
+#~ msgid "Edit your e-mail notification preferences"
+#~ msgstr "Muokkaa asetuksiasi"
+
+#, fuzzy
+#~ msgid "Today's 'Image of the day' was already chosen. Come back tomorrow!"
+#~ msgstr ""
+#~ "'Päivän kuva' tälle päivälle on jo valittu. Tervetuloa takaisin uudestaan!"
 
 #~ msgid "ago"
 #~ msgstr "sitten"
@@ -8321,13 +8529,6 @@ msgstr ""
 #~ msgstr ""
 #~ "<a href=\"%(url)s\"><strong>%(user)s</strong> merkkasi kuvasi "
 #~ "suosikikseen!</a>"
-
-#, fuzzy
-#~ msgid ""
-#~ "<a href=\"%(folder_url)s\">You are invited you to the private shared "
-#~ "folder: <strong>\"%(folder_name)s.\"</a>"
-#~ msgstr ""
-#~ "<a href=\"%(object_url)s\">Et enää seuraa <strong>%(object)s</strong>.</a>"
 
 #~ msgid "Step 2 of 5: watermark"
 #~ msgstr "Vaihe 2/5: vesileima"
@@ -8609,9 +8810,6 @@ msgstr ""
 #~ msgid "Favorited"
 #~ msgstr "Merkitty suosiksi."
 
-#~ msgid "Plate-solve"
-#~ msgstr "Astrometrinen ratkaisu"
-
 #~ msgid "Delete everything"
 #~ msgstr "Poista kaikki"
 
@@ -8674,9 +8872,6 @@ msgstr ""
 #~ msgid "Yes, delete everything"
 #~ msgstr "Kyllä, poista kaikki"
 
-#~ msgid "Yes, delete revision"
-#~ msgstr "Kyllä, poista kuvaversio"
-
 #~ msgid "Yes, delete image"
 #~ msgstr "Kyllä, poista kuva"
 
@@ -8712,9 +8907,6 @@ msgstr ""
 
 #~ msgid "Step 1 of 5: plate solving scale"
 #~ msgstr "Vaihe 1/5: mittakaava ratkaisua varten"
-
-#~ msgid "Edit your image: plate-solving scale"
-#~ msgstr "Muokkaa kuvaasi: mittakaava ratkaisua varten"
 
 #~ msgid ""
 #~ "AstroBin <em>could</em> plate-solve your image without knowing anything "
@@ -8943,9 +9135,6 @@ msgstr ""
 #~ msgid "current month"
 #~ msgstr "nykyinen kuukausi"
 
-#~ msgid "Last sender"
-#~ msgstr "Viimeisin lähettäjä"
-
 #~ msgid " by <a href=\"%(user_page)s\">%(user)s</a>"
 #~ msgstr "käyttäjältä <a href=\"%(user_page)s\">%(user)s</a>"
 
@@ -9082,9 +9271,6 @@ msgstr ""
 #, fuzzy
 #~ msgid "Producer's description"
 #~ msgstr "Kuvaus"
-
-#~ msgid "Change your avatar"
-#~ msgstr "Vaihda avataria."
 
 #~ msgid "Import your photos from Flickr"
 #~ msgstr "Tuo kuviasi Flickristä"

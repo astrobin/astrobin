@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2016-09-25 19:08+0100\n"
+"POT-Creation-Date: 2016-11-12 07:03+0000\n"
 "PO-Revision-Date: 2014-01-23 17:31+0000\n"
 "Last-Translator: kookoo_gr <kookoo_gr@yahoo.com>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -784,7 +784,6 @@ msgid "Processed images"
 msgstr "Επεξεργασμένες εικόνες"
 
 #: templates/rawdata/privatesharedfolder_list.html:42
-#: templates/rawdata/publicdatapool_list.html:36
 msgid "Last updated"
 msgstr "Τελευταία ενημέρωση"
 
@@ -949,6 +948,11 @@ msgstr ""
 "ανεπεξέργαστων αρχείων σας, και να είναι οργανωμένα χωρίς κόπο, αλλά το να "
 "είστε μέρος της σημαίνει επίσης ότι υποστηρίζετε το AstroBin και ίσως να "
 "συνεισφέρετε τα ανεπεξέργαστα δεδομένα σας για επιστημονικές ανακαλύψεις."
+
+#: templates/rawdata/publicdatapool_list.html:36
+#, fuzzy
+msgid "Created"
+msgstr "Δημιουργία"
 
 #: templates/rawdata/restricted.html:4 templates/rawdata/restricted.html:9
 msgid "Restricted content"

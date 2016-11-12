@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2016-09-25 19:08+0100\n"
+"POT-Creation-Date: 2016-11-12 07:03+0000\n"
 "PO-Revision-Date: 2014-01-29 13:06+0000\n"
 "Last-Translator: naavis <svnaavis@gmail.com>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -684,7 +684,6 @@ msgid "Processed images"
 msgstr "Käsitellyt kuvat"
 
 #: templates/rawdata/privatesharedfolder_list.html:42
-#: templates/rawdata/publicdatapool_list.html:36
 msgid "Last updated"
 msgstr "Viimeksi päivitetty"
 
@@ -810,6 +809,11 @@ msgid ""
 "organized, but being part of it also means that you support AstroBin and can "
 "perhaps contribute your raw files to scientic discoveries."
 msgstr ""
+
+#: templates/rawdata/publicdatapool_list.html:36
+#, fuzzy
+msgid "Created"
+msgstr "Luo"
 
 #: templates/rawdata/restricted.html:4 templates/rawdata/restricted.html:9
 msgid "Restricted content"

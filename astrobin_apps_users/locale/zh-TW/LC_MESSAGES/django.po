@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2016-09-25 19:09+0100\n"
+"POT-Creation-Date: 2016-11-12 07:03+0000\n"
 "PO-Revision-Date: 2014-02-19 13:11+0000\n"
 "Last-Translator: mychat_aa <mychat.aa@gmail.com>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -20,41 +20,35 @@ msgstr ""
 "X-POOTLE-MTIME: 1392815468.571925\n"
 
 #: templates/astrobin_apps_users/inclusion_tags/astrobin_user.html:42
-#: templates/astrobin_apps_users/inclusion_tags/astrobin_user.html:86
-#: templates/astrobin_apps_users/inclusion_tags/user_list.html:7
+#: templates/astrobin_apps_users/inclusion_tags/user_list.html:18
 msgid "Images"
 msgstr "影像"
 
 #: templates/astrobin_apps_users/inclusion_tags/astrobin_user.html:43
-#: templates/astrobin_apps_users/inclusion_tags/astrobin_user.html:89
-#: templates/astrobin_apps_users/inclusion_tags/user_list.html:8
+#: templates/astrobin_apps_users/inclusion_tags/user_list.html:19
 msgid "Followers"
 msgstr "粉絲"
 
 #: templates/astrobin_apps_users/inclusion_tags/astrobin_user.html:44
-#: templates/astrobin_apps_users/inclusion_tags/user_list.html:9
+#: templates/astrobin_apps_users/inclusion_tags/user_list.html:20
 msgid "Following"
 msgstr "追蹤"
 
-#: templates/astrobin_apps_users/inclusion_tags/astrobin_user.html:125
-#, python-format
-msgid "%(images_number)s image"
-msgid_plural "%(images_number)s images"
-msgstr[0] "%(images_number)s 張影像"
-msgstr[1] "%(images_number)s 張影像"
-
-#: templates/astrobin_apps_users/inclusion_tags/astrobin_user.html:126
-#, python-format
-msgid "%(followers_number)s follower"
-msgid_plural "%(followers_number)s followers"
-msgstr[0] "%(followers_number)s 位粉絲"
-msgstr[1] "%(followers_number)s 位粉絲"
-
-#: templates/astrobin_apps_users/inclusion_tags/user_list.html:6
+#: templates/astrobin_apps_users/inclusion_tags/user_list.html:16
 msgid "User"
 msgstr "使用者"
 
-#: templates/astrobin_apps_users/inclusion_tags/user_list_entries.html:23
-#: templates/astrobin_apps_users/inclusion_tags/user_list_entries.html:27
+#: templates/astrobin_apps_users/inclusion_tags/user_list_entries.html:20
+#: templates/astrobin_apps_users/inclusion_tags/user_list_entries.html:24
 msgid "No users."
 msgstr "沒有使用者。"
+
+#~ msgid "%(images_number)s image"
+#~ msgid_plural "%(images_number)s images"
+#~ msgstr[0] "%(images_number)s 張影像"
+#~ msgstr[1] "%(images_number)s 張影像"
+
+#~ msgid "%(followers_number)s follower"
+#~ msgid_plural "%(followers_number)s followers"
+#~ msgstr[0] "%(followers_number)s 位粉絲"
+#~ msgstr[1] "%(followers_number)s 位粉絲"
