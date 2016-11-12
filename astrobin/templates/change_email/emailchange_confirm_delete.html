@@ -1,11 +1,11 @@
 {% extends "base.html" %}
 {% load i18n %}
 
-{% block title %}{% trans "E-mail change request" %}{% endblock %}
+{% block title %}{% trans "Confirm deletion of e-mail change request" %}{% endblock %}
 
 {% block content %}
-    <h1>{% trans "E-mail change request" %}</h1>
-    <p class="well">{% trans "You already have a pending request to change your e-mail address. You should have received a confirmation e-mail with instructions about how to confirm this request. If not, please delete it and start a new one." %}</p>
+    <h1>{% trans "Confirm deletion of e-mail change request" %}</h1>
+    <p class="well">{% trans "Please confirm that you want to delete the following e-mail change request." %}</p>
 
     <table class="table">
         <thead>
@@ -20,9 +20,9 @@
                 <td><abbr class="timeago" title="{{object.date|date:'Y-m-d\TH:i:s'}}"></abbr></td>
                 <td><a href="mailto:{{object.new_email}}">{{object.new_email}}</a></td>
                 <td>
-                    <a href="{% url 'change_email_delete' object.pk %}" class="btn btn-danger">
-                        {% trans "Delete and start new request" %}
-                    </a>
+                    <form class="form-horizontal" method="post" action=".">{% csrf_token %}
+                        <input class="btn btn-primary btn-block-mobile" type="submit" value="{% trans 'Confirm' %}" />
+                    </form>
                 </td>
             </tr>
         </tbody>
