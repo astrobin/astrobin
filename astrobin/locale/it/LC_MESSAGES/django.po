@@ -8,7 +8,7 @@ msgstr ""
 "Project-Id-Version: AstroBin 1.0\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2016-11-12 07:02+0000\n"
-"PO-Revision-Date: 2016-11-12 08:00+0000\n"
+"PO-Revision-Date: 2016-11-13 10:32+0000\n"
 "Last-Translator: Salvatore <salvatore@iovene.com>\n"
 "Language-Team: Salvatore Iovene <salvatore@iovene.com>\n"
 "Language: it\n"
@@ -17,7 +17,7 @@ msgstr ""
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=(n != 1);\n"
 "X-Generator: Pootle 2.5.0\n"
-"X-POOTLE-MTIME: 1478937650.272506\n"
+"X-POOTLE-MTIME: 1479033120.299452\n"
 
 #: fields.py:10
 msgid "United Kingdom"
@@ -6627,7 +6627,7 @@ msgstr "A %(user)s piace la tua immagine: %(url)s"
 #, python-format
 msgid "<a href=\"%(url)s\"><strong>%(user)s</strong> likes your image!</a>"
 msgstr ""
-"<a href=\"%(url)s\">A <strong>%(user)s</strong>piace la tua immagine!</a>"
+"<a href=\"%(url)s\">A <strong>%(user)s</strong> piace la tua immagine!</a>"
 
 #: templates/notification/new_like/short.txt:2
 #, python-format
