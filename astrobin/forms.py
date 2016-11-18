@@ -10,6 +10,8 @@ from haystack.query import SQ
 from models import *
 from utils import affiliate_limit, retailer_affiliate_limit
 
+from astrobin_apps_groups.models import Group
+
 import string
 import unicodedata
 import operator
@@ -65,25 +67,58 @@ class ImageEditBasicForm(forms.ModelForm):
     link = forms.RegexField(
         regex = '^(http|https)://',
         required = False,
+        label = _("Link"),
         help_text = _("If you're hosting a copy of this image on your website, put the address here."),
         error_messages = {'invalid': "The address must start with http:// or https://."},
     )
+
     link_to_fits = forms.RegexField(
         regex = '^(http|https)://',
         required = False,
+        label = _("Link to TIFF/FITS"),
         help_text = _("If you want to share the TIFF or FITS file of your image, put a link to the file here. Unfortunately, AstroBin cannot offer to store these files at the moment, so you will have to host them on your personal space."),
         error_messages = {'invalid': "The address must start with http:// or https://."},
     )
 
+    groups = forms.MultipleChoiceField(
+        required = False,
+        label = _("Groups"),
+        help_text = _("Submit this image to the selected groups."),
+    )
+
     def __init__(self, **kwargs):
         super(ImageEditBasicForm, self).__init__(**kwargs)
-        self.fields['link'].label = _("Link")
-        self.fields['link_to_fits'].label = _("Link to TIFF/FITS")
-        self.fields['locations'].label = _("Locations")
 
-        locations = Location.objects.filter(user = self.instance.user.userprofile)
-        self.fields['locations'].queryset = locations
-        self.fields['locations'].required = False
+        self.fields['locations'].queryset = Location.objects.filter(
+            user = self.instance.user.userprofile)
+
+        self.fields['groups'].choices = [
+            (x.pk, x.name) for x in Group.objects.filter(
+                autosubmission = False,
+                members = self.instance.user)]
+        self.fields['groups'].initial = [
+            x.pk for x in self.instance.part_of_group_set.filter(
+                autosubmission = False,
+                members = self.instance.user)]
+
+    def save(self, commit = True):
+        instance = super(ImageEditBasicForm, self).save(commit=False)
+
+        existing_groups = instance.part_of_group_set.filter(autosubmission = False)
+        new_groups_pks = self.cleaned_data['groups']
+        new_groups = [Group.objects.get(pk = int(x)) for x in new_groups_pks]
+
+        for group in existing_groups:
+            if group.pk not in [int(x) for x in new_groups_pks]:
+                group.images.remove(self.instance)
+
+        for group in new_groups:
+            if group not in existing_groups:
+                group.images.add(self.instance)
+
+        if commit:
+            instance.save()
+        return instance
 
     def clean_link(self):
         return self.cleaned_data['link'].strip()
@@ -97,7 +132,10 @@ class ImageEditBasicForm(forms.ModelForm):
 
     class Meta:
         model = Image
-        fields = ('title', 'link', 'link_to_fits', 'subject_type', 'solar_system_main_subject', 'locations', 'description', 'allow_comments')
+        fields = (
+            'title', 'link', 'link_to_fits', 'subject_type',
+            'solar_system_main_subject', 'locations', 'groups', 'description',
+            'allow_comments')
 
 
 class ImageEditWatermarkForm(forms.ModelForm):

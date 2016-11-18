@@ -702,6 +702,8 @@ class Image(HasSolutionMixin, models.Model):
         'astrobin.Location',
         verbose_name = _("Locations"),
         help_text = _("Drag items from the right side to the left side, or click on the plus sign."),
+        null = True,
+        blank = True,
     )
 
     description = models.TextField(

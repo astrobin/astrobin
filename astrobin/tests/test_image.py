@@ -24,6 +24,7 @@ from astrobin.models import (
     Accessory,
     DeepSky_Acquisition,
     SolarSystem_Acquisition)
+from astrobin_apps_groups.models import Group as AstroBinGroup
 from astrobin_apps_notifications.utils import get_unseen_notifications
 
 
@@ -715,6 +716,61 @@ class ImageTest(TestCase):
             reverse('image_detail', kwargs = {'id': image.pk}),
             status_code = 302,
             target_status_code = 200)
+        image = Image.all_objects.get(pk = image.pk)
+        self.assertEqual(image.title, "Test title")
+        self.assertEqual(image.link, "http://www.example.com")
+        self.assertEqual(image.link_to_fits, "http://www.example.com/fits")
+        self.assertEqual(image.subject_type, 600)
+        self.assertEqual(image.solar_system_main_subject, 0)
+        self.assertEqual(image.locations.count(), 0)
+        self.assertEqual(image.description, "Image description")
+        self.assertEqual(image.allow_comments, True)
+
+        # Test that groups are updated
+        group1 = AstroBinGroup.objects.create(
+            name = "group1", creator = self.user, owner = self.user,
+            category = 100)
+        group2 = AstroBinGroup.objects.create(
+            name = "group2", creator = self.user, owner = self.user,
+            category = 100)
+        group3 = AstroBinGroup.objects.create(
+            name = "group3", creator = self.user, owner = self.user,
+            category = 100, autosubmission = True)
+
+        response = self.client.get(get_url((image.pk,)))
+        self.assertContains(response, "group1")
+        self.assertContains(response, "group2")
+        self.assertNotContains(response, "group3")
+
+        data = post_data(image)
+
+        data.update({"groups": [group1.pk]})
+        response = self.client.post(get_url((image.pk,)), data, follow = True)
+        image = Image.all_objects.get(pk = image.pk)
+        self.assertTrue(group1 in image.part_of_group_set.all())
+        self.assertFalse(group2 in image.part_of_group_set.all())
+
+        data.update({"groups": [group1.pk, group2.pk]})
+        response = self.client.post(get_url((image.pk,)), data, follow = True)
+        image = Image.all_objects.get(pk = image.pk)
+        self.assertTrue(group1 in image.part_of_group_set.all())
+        self.assertTrue(group2 in image.part_of_group_set.all())
+
+        data.update({"groups": [group2.pk]})
+        response = self.client.post(get_url((image.pk,)), data, follow = True)
+        image = Image.all_objects.get(pk = image.pk)
+        self.assertFalse(group1 in image.part_of_group_set.all())
+        self.assertTrue(group2 in image.part_of_group_set.all())
+
+        data.update({"groups": []})
+        response = self.client.post(get_url((image.pk,)), data, follow = True)
+        image = Image.all_objects.get(pk = image.pk)
+        self.assertFalse(group1 in image.part_of_group_set.all())
+        self.assertFalse(group2 in image.part_of_group_set.all())
+
+        group1.delete()
+        group2.delete()
+        group3.delete()
 
         # Invalid form
         response = self.client.post(get_url((image.pk,)), {})
