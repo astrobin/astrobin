@@ -23,7 +23,8 @@ from astrobin.models import (
     Filter,
     Accessory,
     DeepSky_Acquisition,
-    SolarSystem_Acquisition)
+    SolarSystem_Acquisition,
+    Location)
 from astrobin_apps_groups.models import Group as AstroBinGroup
 from astrobin_apps_notifications.utils import get_unseen_notifications
 
@@ -243,6 +244,9 @@ class ImageTest(TestCase):
         self.assertEqual(image.watermark_opacity, 100)
 
         # Test basic settings
+        location, created = Location.objects.get_or_create(
+            name = "Test location")
+        self.user.userprofile.location_set.add(location)
         response = self.client.post(
             reverse('image_edit_basic', args = (image.pk,)),
             {
@@ -252,7 +256,7 @@ class ImageTest(TestCase):
                 'link_to_fits': "http://www.example.com/fits",
                 'subject_type': 600,
                 'solar_system_main_subject': 0,
-                'locations': [],
+                'locations': [location.pk],
                 'description': "Image description",
                 'allow_comments': True
             },
@@ -268,9 +272,11 @@ class ImageTest(TestCase):
         self.assertEqual(image.link_to_fits, "http://www.example.com/fits")
         self.assertEqual(image.subject_type, 600)
         self.assertEqual(image.solar_system_main_subject, 0)
-        self.assertEqual(image.locations.count(), 0)
+        self.assertEqual(image.locations.count(), 1)
+        self.assertEqual(image.locations.all().first().pk, location.pk)
         self.assertEqual(image.description, "Image description")
         self.assertEqual(image.allow_comments, True)
+        self.user.userprofile.location_set.clear()
 
         response = self.client.post(
             reverse('image_edit_gear', args = (image.pk,)),
@@ -681,7 +687,7 @@ class ImageTest(TestCase):
                 'link_to_fits': "http://www.example.com/fits",
                 'subject_type': 600,
                 'solar_system_main_subject': 0,
-                'locations': [],
+                'locations': [x.pk for x in image.user.userprofile.location_set.all()],
                 'description': "Image description",
                 'allow_comments': True
             }
@@ -710,6 +716,9 @@ class ImageTest(TestCase):
         self.assertEqual(response.status_code, 200)
 
         # POST
+        location, created = Location.objects.get_or_create(
+            name = "Test location")
+        self.user.userprofile.location_set.add(location)
         response = self.client.post(get_url((image.pk,)), post_data(image), follow = True)
         self.assertRedirects(
             response,
@@ -722,7 +731,8 @@ class ImageTest(TestCase):
         self.assertEqual(image.link_to_fits, "http://www.example.com/fits")
         self.assertEqual(image.subject_type, 600)
         self.assertEqual(image.solar_system_main_subject, 0)
-        self.assertEqual(image.locations.count(), 0)
+        self.assertEqual(image.locations.count(), 1)
+        self.assertEqual(image.locations.all().first().pk, image.user.userprofile.location_set.all().first().pk)
         self.assertEqual(image.description, "Image description")
         self.assertEqual(image.allow_comments, True)
 

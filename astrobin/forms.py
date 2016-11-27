@@ -116,9 +116,7 @@ class ImageEditBasicForm(forms.ModelForm):
             if group not in existing_groups:
                 group.images.add(self.instance)
 
-        if commit:
-            instance.save()
-        return instance
+        return super(ImageEditBasicForm, self).save(commit)
 
     def clean_link(self):
         return self.cleaned_data['link'].strip()
