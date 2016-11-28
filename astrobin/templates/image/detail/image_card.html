@@ -26,6 +26,14 @@
 
             <div class="acquisition">
                 <div class="acquisition-inner">
+                    {% for data in basic_data %}
+                        {% if data.1 %}
+                            <p>
+                                <strong>{{data.0}}</strong>: {{data.1|safe|linebreaksbr}}
+                            </p>
+                        {% endif %}
+                    {% endfor %}
+
                     {% if image_type == 'deep_sky' %}
                         {% for data in deep_sky_data %}
                             {% if data.1 %}
