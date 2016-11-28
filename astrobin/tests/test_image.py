@@ -339,8 +339,11 @@ class ImageTest(TestCase):
         self.assertEqual(response.status_code, 200)
         self.assertContains(response, image.thumbnail('regular'))
 
+        # Image resolution
+        self.assertContains(response, "<strong>Resolution</strong>: 340x280")
+
         # Revision redirect
-        self._do_upload_revision(image, 'astrobin/fixtures/test.jpg')
+        self._do_upload_revision(image, 'astrobin/fixtures/test_smaller.jpg')
         revision = self._get_last_image_revision()
         response = self.client.get(reverse('image_detail', kwargs = {'id': image.id}))
         self.assertRedirects(
@@ -353,6 +356,9 @@ class ImageTest(TestCase):
         response = self.client.get(reverse('image_detail', kwargs = {'id': image.id, 'r': 'B'}))
         self.assertContains(response, image.thumbnail('regular', thumbnail_settings = {'revision_label': 'B'}))
         self.assertContains(response, image.thumbnail('thumb'))
+
+        # Revision resolution differs from original
+        self.assertContains(response, "<strong>Resolution</strong>: 200x165")
 
         # Revision description displayed
         desc = "Test revision description"

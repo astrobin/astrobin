@@ -7,6 +7,7 @@ from django.conf import settings
 from django.contrib.contenttypes.models import ContentType
 from django.contrib import messages
 from django.contrib.auth.models import User
+from django.core.files.images import get_image_dimensions
 from django.core.exceptions import PermissionDenied
 from django.core.urlresolvers import reverse_lazy
 from django.db.models import Q
@@ -342,7 +343,6 @@ class ImageDetailView(DetailView):
             frames_list = sorted(dsa_data['frames'].items())
 
             deep_sky_data = (
-                (_('Resolution'), '%dx%d' % (image.w, image.h) if (image.w and image.h) else None),
                 (_('Dates'), sorted(dsa_data['dates'])),
                 (_('Frames'),
                     ('\n' if len(frames_list) > 1 else '') +
@@ -367,7 +367,24 @@ class ImageDetailView(DetailView):
         elif ssa:
             image_type = 'solar_system'
 
+        # Image resolution, aka size in pixels
+        try:
+            if is_revision:
+                w, h = revision_image.w, revision_image.h
+                if not (w and h):
+                    w, h = get_image_dimensions(revision_image.image_file)
+            else:
+                w, h = image.w, image.h
+                if not (w and h):
+                    w, h = get_image_dimensions(image.image_file)
+        except TypeError:
+            # This might happen in unit tests
+            w, h = 0, 0
 
+        # Data that's common to both DS and SS images
+        basic_data = (
+            (_('Resolution'), '%dx%d' % (w, h) if (w and h) else None),
+        )
 
         profile = None
         if self.request.user.is_authenticated():
@@ -563,6 +580,7 @@ class ImageDetailView(DetailView):
             'gear_list_has_paid_commercial': gear_list_has_paid_commercial,
             'image_type': image_type,
             'ssa': ssa,
+            'basic_data': basic_data,
             'deep_sky_data': deep_sky_data,
             # TODO: check that solved image is correcly laid on top
             'private_message_form': PrivateMessageForm(),
