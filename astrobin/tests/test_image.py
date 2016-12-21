@@ -1482,10 +1482,13 @@ class ImageTest(TestCase):
         def post_url(args = None):
             return reverse('image_promote', args = args)
 
-        # Upload an image
+        # Upload a WIP image and a public image
         self.client.login(username = 'test', password = 'password')
         self._do_upload('astrobin/fixtures/test.jpg')
-        image = self._get_last_image()
+        public_image = self._get_last_image()
+
+        self._do_upload('astrobin/fixtures/test.jpg', True)
+        wip_image = self._get_last_image()
 
         # user2 follows user
         self.client.logout()
@@ -1500,24 +1503,36 @@ class ImageTest(TestCase):
         self.assertEqual(response.status_code, 200)
 
         # GET with wrong user
-        response = self.client.post(post_url((image.pk,)))
+        response = self.client.post(post_url((public_image.pk,)))
         self.assertEqual(response.status_code, 403)
         self.client.logout()
 
-        # Test when image was not WIP
+        # Test public image
         self.client.login(username = 'test', password = 'password')
-        response = self.client.post(post_url((image.pk,)))
-        image = Image.objects.get(pk = image.pk)
+        response = self.client.post(post_url((public_image.pk,)))
+        image = Image.objects.get(pk = public_image.pk)
         self.assertEquals(image.is_wip, False)
         self.assertEquals(len(get_unseen_notifications(self.user2)), 0)
 
-        # Test when image was WIP
-        image.is_wip = True
-        image.save()
-        response = self.client.post(post_url((image.pk,)))
-        image = Image.objects.get(pk = image.pk)
-        self.assertEquals(image.is_wip, False)
-        self.assertEquals(len(get_unseen_notifications(self.user2)), 1)
+        # Test WIP image
+        self.assertIsNone(wip_image.published)
+        self.assertTrue(wip_image.is_wip)
+        response = self.client.post(post_url((wip_image.pk,)))
+        wip_image = Image.objects.get(pk = wip_image.pk)
+        self.assertFalse(wip_image.is_wip)
+        self.assertIsNotNone(wip_image.published)
+        notifications = get_unseen_notifications(self.user2)
+        self.assertEquals(len(notifications), 1)
+        self.assertTrue("a new image" in notifications[0].message)
+
+        # Test that previously published images don't trigger a notification
+        wip_image.is_wip = True
+        wip_image.save()
+        response = self.client.post(post_url((wip_image.pk,)))
+        wip_image = Image.objects.get(pk = wip_image.pk)
+        self.assertFalse(wip_image.is_wip)
+        self.assertIsNotNone(wip_image.published)
+        self.assertEquals(len(get_unseen_notifications(self.user2)), 1) # Same as before
 
         image.delete()
 

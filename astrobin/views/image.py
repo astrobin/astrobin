@@ -876,20 +876,22 @@ class ImagePromoteView(LoginRequiredMixin, UpdateView):
     def post(self, request, *args, **kwargs):
         image = self.get_object()
         if image.is_wip:
+            previously_published = image.published
             image.is_wip = False
             image.save()
 
-            followers = [
-                x.user for x in
-                ToggleProperty.objects.toggleproperties_for_object("follow", User.objects.get(pk = request.user.pk))
-            ]
-            push_notification(followers, 'new_image',
-                {
-                    'originator': request.user.userprofile.get_display_name(),
-                    'object_url': settings.ASTROBIN_BASE_URL + image.get_absolute_url()
-                })
+            if not previously_published:
+                followers = [
+                    x.user for x in
+                    ToggleProperty.objects.toggleproperties_for_object("follow", User.objects.get(pk = request.user.pk))
+                ]
+                push_notification(followers, 'new_image',
+                    {
+                        'originator': request.user.userprofile.get_display_name(),
+                        'object_url': settings.ASTROBIN_BASE_URL + image.get_absolute_url()
+                    })
 
-            add_story(image.user, verb = 'VERB_UPLOADED_IMAGE', action_object = image)
+                add_story(image.user, verb = 'VERB_UPLOADED_IMAGE', action_object = image)
 
             messages.success(request, _("Image moved to the public area."))
 
