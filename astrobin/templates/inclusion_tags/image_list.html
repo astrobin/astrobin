@@ -5,39 +5,43 @@
 
 
 {% ifequal view "table" %}
-    <table class="table table-condensed table-striped">
+    <table class="table table-condensed table-striped image-list">
         <thead>
             <tr>
-                <th class="hidden-phone">{% trans "User" %}</th>
-                <th>{% trans "Title" %}</th>
-                <th class="hidden-phone"><i class="icon-calendar"></i></th>
-                <th class="hidden-phone"><i class="icon-eye-open"></i></th>
-                <th class="hidden-phone"><i class="icon-thumbs-up"></i></th>
-                <th class="hidden-phone"><i class="icon-bookmark"></i></th>
-                <th class="hidden-phone"><i class="icon-comments-alt"></i></th>
+                {% if requested_user %}
+                    <th class="user hidden-phone">{% trans "User" %}</th>
+                {% endif %}
+                <th class="title">{% trans "Title" %}</th>
+                <th class="published hidden-phone"><i class="icon-calendar"></i></th>
+                <th class="views hidden-phone"><i class="icon-eye-open"></i></th>
+                <th class="likes hidden-phone"><i class="icon-thumbs-up"></i></th>
+                <th class="bookmarks hidden-phone"><i class="icon-bookmark"></i></th>
+                <th class="comments hidden-phone"><i class="icon-comments-alt"></i></th>
             </tr>
         </thead>
         <tbody>
             {% for image in image_list %}
                 <tr>
-                    <td class="hidden-phone">
-                        <a href="{% url 'user_page' image.user %} ">{{image.user.userprofile}}</a>
-                    </td>
+                    {% if requested_user %}
+                        <td class="user hidden-phone">
+                            <a href="{% url 'user_page' image.user %} ">{{image.user.userprofile}}</a>
+                        </td>
+                    {% endif %}
 
-                    <td>
+                    <td class="title">
                         <a href="{% get_image_url image %} ">{{image.title}}</a>
                     </td>
-                    <td class="hidden-phone">
+                    <td class="published hidden-phone">
                         {% if image.published %}
                             {{image.published|date:"SHORT_DATE_FORMAT"}}
                         {% else %}
                             {{image.uploaded|date:"SHORT_DATE_FORMAT"}}
                         {% endif %}
                     </td>
-                    <td class="hidden-phone">{% get_hit_count for image %}</td>
-                    <td class="hidden-phone">{{image.likes}}</td>
-                    <td class="hidden-phone">{{image.bookmarks}}</td>
-                    <td class="hidden-phone">{{image.comments}}</td>
+                    <td class="views hidden-phone">{% get_hit_count for image %}</td>
+                    <td class="likes hidden-phone">{{image.likes}}</td>
+                    <td class="bookmarks hidden-phone">{{image.bookmarks}}</td>
+                    <td class="comments hidden-phone">{{image.comments}}</td>
                 </tr>
             {% endfor %}
         </tbody>
