@@ -60,6 +60,12 @@
                     {% trans "Unavailable" %}
                 </span>
             {% endif %}
+
+            {% if usersubscription and usersubscription.active and not usersubscription.cancelled and usersubscription.expired %}
+                <span class="label label-warning">
+                    {% trans "Expired" %}
+                </span>
+            {% endif %}
         </p>
     </div>
 
