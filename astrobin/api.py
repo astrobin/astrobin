@@ -62,6 +62,12 @@ class ImageRevisionResource(ModelResource):
 
     is_solved = fields.BooleanField()
 
+    ra = fields.DecimalField()
+    dec = fields.DecimalField()
+    pixscale = fields.DecimalField()
+    orientation = fields.DecimalField()
+    radius = fields.DecimalField()
+
     class Meta:
         authentication = AppAuthentication()
         queryset = ImageRevision.objects.filter(image__is_wip = False)
@@ -80,6 +86,12 @@ class ImageRevisionResource(ModelResource):
 
             'is_final',
             'is_solved',
+
+            'ra',
+            'dec',
+            'pixscale',
+            'orientation',
+            'radius',
         ]
 
         allowed_methods = ['get']
@@ -108,6 +120,31 @@ class ImageRevisionResource(ModelResource):
     def dehydrate_is_solved(self, bundle):
         return bundle.obj.solution != None
 
+    def dehydrate_ra(self, bundle):
+        if bundle.obj.solution:
+            return bundle.obj.solution.ra
+        return None
+
+    def dehydrate_dec(self, bundle):
+        if bundle.obj.solution:
+            return bundle.obj.solution.dec
+        return None
+
+    def dehydrate_pixscale(self, bundle):
+        if bundle.obj.solution:
+            return bundle.obj.solution.pixscale
+        return None
+
+    def dehydrate_orientation(self, bundle):
+        if bundle.obj.solution:
+            return bundle.obj.solution.orientation
+        return None
+
+    def dehydrate_radius(self, bundle):
+        if bundle.obj.solution:
+            return bundle.obj.solution.radius
+        return None
+
 
 class ImageResource(ModelResource):
     user = fields.CharField('user__username')
@@ -133,6 +170,12 @@ class ImageResource(ModelResource):
     url_duckduckgo_small = fields.CharField()
 
     is_solved = fields.BooleanField()
+
+    ra = fields.DecimalField()
+    dec = fields.DecimalField()
+    pixscale = fields.DecimalField()
+    orientation = fields.DecimalField()
+    radius = fields.DecimalField()
 
     class Meta:
         authentication = AppAuthentication()
@@ -165,6 +208,12 @@ class ImageResource(ModelResource):
 
             'is_final',
             'is_solved',
+
+            'ra',
+            'dec',
+            'pixscale',
+            'orientation',
+            'radius',
         ]
         allowed_methods = ['get']
 
@@ -223,6 +272,31 @@ class ImageResource(ModelResource):
 
             return ret
         return []
+
+    def dehydrate_ra(self, bundle):
+        if bundle.obj.solution:
+            return bundle.obj.solution.ra
+        return None
+
+    def dehydrate_dec(self, bundle):
+        if bundle.obj.solution:
+            return bundle.obj.solution.dec
+        return None
+
+    def dehydrate_pixscale(self, bundle):
+        if bundle.obj.solution:
+            return bundle.obj.solution.pixscale
+        return None
+
+    def dehydrate_orientation(self, bundle):
+        if bundle.obj.solution:
+            return bundle.obj.solution.orientation
+        return None
+
+    def dehydrate_radius(self, bundle):
+        if bundle.obj.solution:
+            return bundle.obj.solution.radius
+        return None
 
     def dehydrate_imaging_telescopes(self, bundle):
         telescopes = bundle.obj.imaging_telescopes.all()
