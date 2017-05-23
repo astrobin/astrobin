@@ -33,3 +33,4 @@ TMPZIPS=/var/www/tmpzips
 00 11 * * * (. $ASTROBIN_ROOT/env/production; $PYTHON $ASTROBIN_ROOT/manage.py clean_temporary_archives) 2>&1 >/dev/null
 00 00 1 1 * (. $ASTROBIN_ROOT/env/production; $PYTHON $ASTROBIN_ROOT/manage.py reset_lite_counters) 2>&1 >/dev/null
 00 22 * * * (. $ASTROBIN_ROOT/env/production; $PYTHON $ASTROBIN_ROOT/manage.py fix_expired_subscriptions) 2>&1 >/dev/null
+00 23 * * * (. $ASTROBIN_ROOT/env/production; $PYTHON $ASTROBIN_ROOT/manage.py purge_old_notifications) 2>&1 >/dev/null
