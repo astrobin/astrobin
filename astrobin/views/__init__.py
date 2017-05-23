@@ -1845,38 +1845,6 @@ def user_profile_delete(request):
 
 @login_required
 @require_POST
-def send_private_message(request):
-    form = PrivateMessageForm(data=request.POST)
-    if form.is_valid():
-        subject = form.cleaned_data['subject']
-        body    = form.cleaned_data['body']
-        to_user = request.POST['to_user']
-
-        recipient = User.objects.get(username=to_user)
-        message = persistent_messages.add_message(
-            request, persistent_messages.SUCCESS, body,
-            subject=subject, user=recipient, from_user=request.user)
-        push_message(recipient, {'sender':request.user.username,
-                                 'subject': subject,
-                                 'message_id': message.id if message is not None else 0})
-        try:
-            reqs = ImageRequest.objects.filter(
-                to_user = request.user,
-                from_user = recipient,
-                type = "FITS",
-                fulfilled = False)
-            for req in reqs:
-                req.fulfilled = True
-                req.save()
-        except:
-            pass
-
-        return ajax_success()
-    return ajax_fail()
-
-
-@login_required
-@require_POST
 def image_revision_upload_process(request):
     # TODO: unify Image and ImageRevision
     def upload_error(image):

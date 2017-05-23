@@ -308,7 +308,6 @@ urlpatterns = patterns('',
     url(r'^messages/modal-compose/$', messages_compose, { "template_name":"messages/modal_compose.html", "form_class": MessagesComposeForm }, name='modal_messages_compose'),
     url(r'^messages/modal-compose/(?P<recipient>[\w.@+-]+)/$', messages_compose, { "template_name":"messages/modal_compose.html", "form_class": MessagesComposeForm }, name='modal_messages_compose_to'),
     url(r'^messages/view/(?P<thread_id>[\d]+)/$', messages_view, {'template_name': 'messages/view.html'}, name='messages_detail'),
-    url(r'^send_private_message/$', views.send_private_message, name='send_private_message'),
 
 
     ###########################################################################
