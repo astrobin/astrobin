@@ -22,8 +22,8 @@ def privatebeta_enabled(request):
 def notices_count(request):
     response = {}
     if request.user.is_authenticated():
-        response['notifications_count'] =\
-            len(get_unseen_notifications(request.user, -1))
+        count = get_unseen_notifications(request.user, -1).count()
+        response['notifications_count'] = count
 
     return response
 
