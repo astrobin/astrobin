@@ -3,19 +3,6 @@
 
 <script type="text/javascript">
 $(document).ready(function() {
-    astrobin_common.init(
-        '{{requested_user.username}}',
-        {
-            message_action: {
-                dialog: {
-                    title : "{% blocktrans with requested_user.username as username %}Send {{username}} a message{% endblocktrans %}",
-                    body  : "",
-                    button: "{% trans "Send" %} &rarr;"
-                },
-                form_html: '{% filter escapejs %}{{private_message_form.as_p}}{% endfilter %}',
-                csrf_token: '{{csrf_token}}',
-                url      : "{% url 'send_private_message' %}"
-            }
-        });
+    astrobin_common.init('{{requested_user.username}}');
 });
 </script>
