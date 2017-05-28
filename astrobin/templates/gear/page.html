@@ -248,30 +248,6 @@
                         </tr>
                     </table>
                 </div>
-
-                <div class="subtle-container">
-                    <div class="header">
-                        <h4><i class="icon-bar-chart"></i> {% trans "Views" %}</h4>
-                    </div>
-                    <div id="stats_gear_views" class="plot" style="width:260px; height: 100px;">
-                        <div class="loading">
-                            <p>{% trans "Please wait: the plot is loading..." %}</p>
-                            <img alt="{% trans "Loading..." %}" src="{{STATIC_URL}}images/ajax-loader.gif" />
-                        </div>
-                    </div>
-                </div>
-
-                <div class="subtle-container">
-                    <div class="header">
-                        <h4><i class="icon-bar-chart"></i> {% trans "Total images" %}</h4>
-                    </div>
-                    <div id="stats_total_images" class="plot" style="width:260px; height: 100px;">
-                        <div class="loading">
-                            <p>{% trans "Please wait: the plot is loading..." %}</p>
-                            <img alt="{% trans "Loading..." %}" src="{{STATIC_URL}}images/ajax-loader.gif" />
-                        </div>
-                    </div>
-                </div>
             </div> <!-- span4 -->
         </div> <!-- row -->
     </div> <!-- gear-page -->
@@ -334,19 +310,6 @@ $(document).ready(function() {
         }
     };
     $('.review-form').ajaxForm(reviewFormOptions);
-
-    astrobin_stats.init();
-    astrobin_stats.plot(
-        '#stats_total_images',
-        "{% url 'stats_gear_total_images' gear.id %}",
-        30000);
-    astrobin_stats.enableTooltips("#stats_total_images");
-
-    astrobin_stats.plot(
-        '#stats_gear_views',
-        "{% url 'stats_gear_views' gear.id %}",
-        30000);
-    astrobin_stats.enableTooltips("#stats_gear_views");
 
     var hilighted_comment = location.hash.substr(1);
     if (hilighted_comment) {

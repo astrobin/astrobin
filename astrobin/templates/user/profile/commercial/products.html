@@ -204,21 +204,6 @@
                 {% endif %}
             </div>
         </div>
-
-        <div class="row">
-            <div class="span12">
-                <h2>{% trans "Plots" %}</h2>
-                <div class="subtle-container">
-                    <div class="header">{% trans "Views" %}</div>
-                    <div id="stats_affiliated_gear_views" class="plot" style="width:914px;height:150px;">
-                        <div class="loading">
-                            <p>{% trans "Please wait: the plot is loading..." %}</p>
-                            <img alt="{% trans "Loading..." %}" src="{{STATIC_URL}}images/ajax-loader.gif" />
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
     {% endif %}
 {% endblock %}
 
@@ -378,17 +363,6 @@
     </script>
 
     {% ifequal user request.user %}
-        {% if user_is_producer or user_is_retailer %}
-            <script type="text/javascript">
-                astrobin_stats.init();
-                astrobin_stats.plot(
-                    '#stats_affiliated_gear_views',
-                    "{% url 'stats_affiliated_gear_views' user 'monthly' %}",
-                    30000);
-                astrobin_stats.enableTooltips("#stats_affiliated_gear_views");
-            </script>
-        {% endif %}
-
         {% if user_is_producer %}
             <script type="text/javascript">
                 $(document).ready(function() {
