@@ -134,7 +134,7 @@ function init_system {
 
     astrobin_log "Setting locale..."
     $SUDO locale-gen "en_US.UTF-8"
-    $SUDO dpkg-reconfigure locales
+    $SUDO dpkg-reconfigure -f noninteractive locales
 }
 
 function apt {
