@@ -41,11 +41,11 @@ from django.views.decorators.http import require_GET, require_POST
 from actstream import action as act
 from actstream.models import Action
 from braces.views import LoginRequiredMixin
-from endless_pagination.decorators import page_template
+from el_pagination.decorators import page_template
 from haystack.exceptions import SearchFieldError
 from haystack.query import SearchQuerySet
 from registration.forms import RegistrationForm
-from reviews.forms import ReviewedItemForm
+from reviews.views import ReviewAddForm
 import persistent_messages
 
 # AstroBin apps
@@ -2363,7 +2363,7 @@ def gear_page(request, id, slug):
     response_dict = {
         'gear': gear,
         'examples': all_images[:28],
-        'review_form': ReviewedItemForm(instance = ReviewedItem(content_type = ContentType.objects.get_for_model(Gear), content_object = gear)),
+        'review_form': ReviewAddForm(instance = ReviewedItem(content_type = ContentType.objects.get_for_model(Gear), content_object = gear)),
         'reviews': reviews,
         'content_type': ContentType.objects.get_for_model(Gear),
         'owners_count': UserProfile.objects.filter(**{user_attr_lookup[gear_type]: gear}).count(),
@@ -2640,7 +2640,7 @@ def gear_fix_thanks(request):
 @require_POST
 @login_required
 def gear_review_save(request):
-    form = ReviewedItemForm(data = request.POST)
+    form = ReviewAddForm(data = request.POST)
 
     if form.is_valid():
         gear, gear_type = get_correct_gear(form.data['gear_id'])

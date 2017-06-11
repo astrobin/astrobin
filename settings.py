@@ -59,8 +59,7 @@ if not TESTING:
             'USER': os.environ['ASTROBIN_DATABASE_USER'],
             'PASSWORD': os.environ['ASTROBIN_DATABASE_PASSWORD'],
             'HOST': os.environ['ASTROBIN_DATABASE_HOST'],
-            'PORT': '5432',
-            'OPTIONS': {'autocommit': True},
+            'PORT': '5432'
         }
     }
 else:
@@ -247,8 +246,7 @@ INSTALLED_APPS = [
     'djcelery',
     'gunicorn',
     'privatebeta',
-    'south',
-    'django.contrib.comments',
+    'django_comments',
     'tagging',
     'mptt',
     'tinymce',
@@ -264,14 +262,13 @@ INSTALLED_APPS = [
     'reviews',
     'actstream',
     'modeltranslation',
-    'openid_provider',
     'paypal.standard.ipn',
     'subscription',
     'ember',
     'rest_framework',
     'rest_framework.authtoken',
     'easy_thumbnails',
-    'endless_pagination',
+    'el_pagination',
     'dfp', # For Google DFP
     'django_user_agents',
     'pybb', # Forum
@@ -553,7 +550,7 @@ LOGGING = {
     'handlers': {
         'null': {
             'level':'DEBUG',
-            'class':'django.utils.log.NullHandler',
+            'class':'logging.NullHandler',
         },
         'console':{
             'level':'DEBUG',
@@ -680,14 +677,6 @@ TOGGLEPROPERTIES = {
         "property_icon": "icon-plus",
     }
 }
-
-SOUTH_MIGRATION_MODULES = {
-    'easy_thumbnails': 'easy_thumbnails.south_migrations',
-    'pybb': 'pybb.south_migrations',
-    'djcelery': 'djcelery.south_migrations',
-}
-SOUTH_TESTS_MIGRATE = False
-
 
 PYBB_DEFAULT_TITLE = "AstroBin Forum"
 PYBB_DEFAULT_FROM_EMAIL = "AstroBin Forum <noreply@astrobin.com>"

@@ -1,2 +1,2 @@
-from .signals import *
+#from .signals import *
 import monkeypatch

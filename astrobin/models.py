@@ -26,7 +26,7 @@ from django import forms
 from django.utils import translation
 from django.utils.translation import ugettext_lazy as _
 from django.conf import settings
-from django.contrib.contenttypes import generic
+from django.contrib.contenttypes.fields import GenericRelation
 from django.contrib.contenttypes.models import ContentType
 from django.core.validators import MaxLengthValidator
 from django.template.defaultfilters import slugify
@@ -34,13 +34,13 @@ from django.template.defaultfilters import slugify
 from nested_comments.models import NestedComment
 
 from model_utils.managers import InheritanceManager
-from timezones.forms import PRETTY_TIMEZONE_CHOICES
+from timezones.zones import PRETTY_TIMEZONE_CHOICES
 
 from fields import *
 from utils import user_is_paying
 
 from mptt.models import MPTTModel, TreeForeignKey
-from reviews.models import ReviewedItem
+from reviews.models import Review
 from toggleproperties.models import ToggleProperty
 
 from astrobin_apps_notifications.utils import push_notification
@@ -235,7 +235,7 @@ class Gear(models.Model):
         blank = True,
     )
 
-    reviews = generic.GenericRelation(ReviewedItem)
+    reviews = GenericRelation(Review)
 
     def __unicode__(self):
         make = self.get_make()
@@ -304,7 +304,7 @@ class Gear(models.Model):
         ).update(object_id = self.id)
 
         # Find matching gear reviews and move them to the master
-        reviews = ReviewedItem.objects.filter(
+        reviews = Review.objects.filter(
             content_type = ContentType.objects.get(app_label = 'astrobin', model = 'gear'),
             object_id = slave.id
         ).update(object_id = self.id)
@@ -738,7 +738,7 @@ class Image(HasSolutionMixin, models.Model):
     updated = models.DateTimeField(editable=False, auto_now=True, null=True, blank=True)
 
     # For likes, bookmarks, and perhaps more.
-    toggleproperties = generic.GenericRelation(ToggleProperty)
+    toggleproperties = GenericRelation(ToggleProperty)
 
     watermark_text = models.CharField(
         max_length = 128,
@@ -1992,12 +1992,6 @@ def create_user_profile(sender, instance, created, **kwargs):
     if created:
         profile, created = UserProfile.objects.get_or_create(user=instance)
 post_save.connect(create_user_profile, sender=User)
-
-
-def create_user_openid(sender, instance, created, **kwargs):
-    if created:
-        instance.openid_set.create(openid=instance.username)
-post_save.connect(create_user_openid, sender=User)
 
 
 class Location(models.Model):

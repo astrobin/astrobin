@@ -21,7 +21,7 @@ http://docs.vagrantup.com/v2/installation/index.html
 Then create a trusty64 box:
 
 ```bash
-vagrant box add astrobin https://cloud-images.ubuntu.com/vagrant/trusty/current/trusty-server-cloudimg-amd64-vagrant-disk1.box
+vagrant box add astrobin https://cloud-images.ubuntu.com/xenial/current/xenial-server-cloudimg-amd64-vagrant.box
 ```
 
 Go to the directory that holds the AstroBin code and start the Vagrant box:

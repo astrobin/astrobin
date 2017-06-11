@@ -275,7 +275,7 @@ function abc {
     (
         mkdir -p /tmp/libabc_build; \
         cd /tmp/libabc_build; \
-        qmake /var/www/astrobin/submodules/abc && make -j4 && $SUDO make install
+        qmake /var/www/astrobin/submodules/abc && make -j 4 && $SUDO make install
     )
 }
 
@@ -302,8 +302,8 @@ function astrobin {
     fi
 
     # Initialize db
-    /var/www/astrobin/manage.py syncdb --noinput
-    /var/www/astrobin/manage.py migrate
+    /var/www/astrobin/manage.py 
+    /var/www/astrobin/manage.py migrate --fake-initial
     /var/www/astrobin/manage.py sync_translation_fields --noinput
 
     /var/www/astrobin/manage.py collectstatic --noinput

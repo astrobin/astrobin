@@ -615,6 +615,7 @@ class LocationEditForm(forms.ModelForm):
 
     class Meta:
         model = Location
+        exclude = []
 
 
 class SolarSystem_AcquisitionForm(forms.ModelForm):
@@ -675,6 +676,7 @@ class DeepSky_AcquisitionForm(forms.ModelForm):
 
     class Meta:
         model = DeepSky_Acquisition
+        exclude = []
 
     def __init__(self, user=None, **kwargs):
         queryset = None
@@ -900,6 +902,7 @@ class AppApiKeyRequestForm(forms.ModelForm):
 
     class Meta:
         model = AppApiKeyRequest
+        exclude = []
 
 
 class GearUserInfoForm(forms.ModelForm):
@@ -907,6 +910,7 @@ class GearUserInfoForm(forms.ModelForm):
 
     class Meta:
         model = GearUserInfo
+        exclude = []
 
 
 class ModeratorGearFixForm(forms.ModelForm):
