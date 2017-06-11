@@ -274,7 +274,7 @@ function abc {
     (
         mkdir -p /tmp/libabc_build; \
         cd /tmp/libabc_build; \
-        qmake /var/www/astrobin/submodules/abc && make -j $SUDO make install
+        qmake /var/www/astrobin/submodules/abc && make -j4 && $SUDO make install
     )
 }
 
