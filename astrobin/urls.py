@@ -179,7 +179,6 @@ urlpatterns = [
           name='password_reset_confirm'),
     #and now add the registration urls
     url(r'^accounts/', include('registration.backends.default.urls')),
-    url(r'^accounts/email/', include('change_email.urls')),
 
     url(r'^activity/', include('actstream.urls')),
     url(r'^avatar/', include('avatar.urls')),

@@ -274,7 +274,6 @@ INSTALLED_APPS = [
     'pybb', # Forum
     'markup_deprecated',
     'sanitizer',
-    'change_email',
 
     # AstroBin apps
     'astrobin',
