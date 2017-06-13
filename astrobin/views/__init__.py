@@ -879,6 +879,10 @@ def me(request):
 def user_page(request, username):
     """Shows the user's public page"""
     user = get_object_or_404(User, username = username)
+
+    if Image.all_objects.filter(user = user, moderator_decision = 2).count() > 0:
+        raise Http404
+
     profile = user.userprofile
     user_ct = ContentType.objects.get_for_model(User)
 

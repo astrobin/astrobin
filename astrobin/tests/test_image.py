@@ -460,6 +460,12 @@ class ImageTest(TestCase):
         response = self.client.get(reverse('image_detail', kwargs = {'id': image.id}))
         self.assertEqual(response.context[0]['user_can_like'], True)
 
+        # Spam images should be 404
+        image.moderator_decision = 2
+        image.save()
+        response = self.client.get(reverse('image_detail', kwargs = {'id': image.id}))
+        self.assertEqual(response.status_code, 404)
+
         us.unsubscribe()
         us.delete()
         s.delete()

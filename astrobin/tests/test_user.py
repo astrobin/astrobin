@@ -332,6 +332,12 @@ class UserTest(TestCase):
         self.assertEquals(response.status_code, 200)
         self.assertEquals(image.title in response.content, True)
 
+        # Users with at least one spam image should be 404
+        image.moderator_decision = 2
+        image.save()
+        response = self.client.get(reverse('user_page', args = ('user',)))
+        self.assertEquals(response.status_code, 404)
+
         image.delete()
         self.client.logout()
 

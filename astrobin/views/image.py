@@ -151,6 +151,10 @@ class ImageDetailView(DetailView):
     def dispatch(self, request, *args, **kwargs):
         # Redirect to the correct revision
         image = get_object_or_404(Image.all_objects, pk = kwargs[self.pk_url_kwarg])
+
+        if image.moderator_decision == 2:
+            raise Http404
+
         revision_label = kwargs['r']
 
         if revision_label is None:
@@ -634,6 +638,10 @@ class ImageFullView(DetailView):
     def dispatch(self, request, *args, **kwargs):
         # Redirect to the correct revision
         image = get_object_or_404(Image.all_objects, pk = kwargs[self.pk_url_kwarg])
+
+        if image.moderator_decision == 2:
+            raise Http404
+
         self.revision_label = kwargs['r']
 
         if self.revision_label is None:

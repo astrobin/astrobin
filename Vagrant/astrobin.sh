@@ -134,7 +134,7 @@ function init_system {
 
     astrobin_log "Setting locale..."
     $SUDO locale-gen "en_US.UTF-8"
-    $SUDO dpkg-reconfigure locales
+    $SUDO dpkg-reconfigure -f noninteractive locales
 }
 
 function apt {
@@ -274,7 +274,7 @@ function abc {
     (
         mkdir -p /tmp/libabc_build; \
         cd /tmp/libabc_build; \
-        qmake /var/www/astrobin/submodules/abc && make -j $SUDO make install
+        qmake /var/www/astrobin/submodules/abc && make -j4 && $SUDO make install
     )
 }
 
@@ -332,11 +332,11 @@ EOF
     . /venv/astrobin/dev/bin/activate
     . /var/www/astrobin/env/dev
 
-    /var/www/astrobin/manage.py build_solr_schema > /opt/solr/solr-4.4.0/example/solr/collection1/conf/schema.xml
+    /var/www/astrobin/manage.py build_solr_schema > /opt/solr/solr-4.9.1/example/solr/collection1/conf/schema.xml
 
     # TODO: see https://bitbucket.org/siovene/astrobin/issue/257/migrate-to-haystack-2x
-    sed -i '/EnglishPorterFilterFactory/d' /opt/solr/solr-4.4.0/example/solr/collection1/conf/schema.xml
-    sed -i '/<\/fields>/i<field name="_version_" type="slong" indexed="true" stored="true" multiValued="false"\/>' /opt/solr/solr-4.4.0/example/solr/collection1/conf/schema.xml
+    sed -i '/EnglishPorterFilterFactory/d' /opt/solr/solr-4.9.1/example/solr/collection1/conf/schema.xml
+    sed -i '/<\/fields>/i<field name="_version_" type="slong" indexed="true" stored="true" multiValued="false"\/>' /opt/solr/solr-4.9.1/example/solr/collection1/conf/schema.xml
 EOF
 
     if [ $return_value -eq 0 ]; then
