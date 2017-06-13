@@ -189,5 +189,5 @@ def create_notice_types(app, created_models, verbosity, **kwargs):
                                         default = notice_type[3])
 
 
-signals.post_syncdb.connect(create_notice_types, sender=notification)
+signals.post_migrate.connect(create_notice_types, sender=notification)
 
