@@ -1005,6 +1005,9 @@ class CommercialGearForm(forms.ModelForm):
 
     class Meta:
         model = CommercialGear
+        fields = (
+            'proper_make', 'proper_name', 'image', 'tagline', 'link',
+            'description')
 
     def __init__(self, user, **kwargs):
         super(CommercialGearForm, self).__init__(**kwargs)
@@ -1078,6 +1081,7 @@ class RetailedGearForm(forms.ModelForm):
 
     class Meta:
         model = RetailedGear
+        fields = ('link', 'price', 'currency')
 
 
 class CollectionCreateForm(forms.ModelForm):
