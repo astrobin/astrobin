@@ -332,11 +332,11 @@ EOF
     . /venv/astrobin/dev/bin/activate
     . /var/www/astrobin/env/dev
 
-    /var/www/astrobin/manage.py build_solr_schema > /opt/solr/solr-4.4.0/example/solr/collection1/conf/schema.xml
+    /var/www/astrobin/manage.py build_solr_schema > /opt/solr/solr-4.9.1/example/solr/collection1/conf/schema.xml
 
     # TODO: see https://bitbucket.org/siovene/astrobin/issue/257/migrate-to-haystack-2x
-    sed -i '/EnglishPorterFilterFactory/d' /opt/solr/solr-4.4.0/example/solr/collection1/conf/schema.xml
-    sed -i '/<\/fields>/i<field name="_version_" type="slong" indexed="true" stored="true" multiValued="false"\/>' /opt/solr/solr-4.4.0/example/solr/collection1/conf/schema.xml
+    sed -i '/EnglishPorterFilterFactory/d' /opt/solr/solr-4.9.1/example/solr/collection1/conf/schema.xml
+    sed -i '/<\/fields>/i<field name="_version_" type="slong" indexed="true" stored="true" multiValued="false"\/>' /opt/solr/solr-4.9.1/example/solr/collection1/conf/schema.xml
 EOF
 
     if [ $return_value -eq 0 ]; then
