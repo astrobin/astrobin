@@ -89,7 +89,7 @@ from astrobin.views import (
     retailed_products_edit,
     retailed_products_merge,
     retailed_products_unclaim,
-    rcommercial_products_save,
+    commercial_products_save,
     commercial_products_unclaim,
 
     gear_page,
@@ -102,12 +102,12 @@ from astrobin.views import (
     gear_review_save,
     gear_popover_ajax,
     get_makes_by_type,
-    get_edit_Gear_form,
+    get_edit_gear_form,
     get_empty_edit_gear_form,
     get_gear_user_info_form,
     get_is_gear_complete,
     save_gear_details,
-    save_Gear_user_info,
+    save_gear_user_info,
     user_popover_ajax,
 
     stats_camera_types_trend_ajax,
