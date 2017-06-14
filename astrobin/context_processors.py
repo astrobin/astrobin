@@ -15,10 +15,6 @@ from nested_comments.models import NestedComment
 from astrobin_apps_notifications.utils import get_unseen_notifications
 
 
-def privatebeta_enabled(request):
-    return {'privatebeta_enabled': settings.PRIVATEBETA_ENABLE_BETA}
-
-
 def notices_count(request):
     response = {}
     if request.user.is_authenticated():

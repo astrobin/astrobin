@@ -190,7 +190,6 @@ MIDDLEWARE_CLASSES += [
     'pagination.middleware.PaginationMiddleware',
     'astrobin.middlewares.ProfileMiddleware',
 #   'astrobin.middlewares.VaryOnLangCacheMiddleware',
-    #'privatebeta.middleware.PrivateBetaMiddleware',
     'maintenancemode.middleware.MaintenanceModeMiddleware',
     'gadjo.requestprovider.middleware.RequestProvider',
 #    'pipeline.middleware.MinifyHTMLMiddleware', Enable after dealing with the blank spaces everywhere
@@ -217,7 +216,6 @@ TEMPLATE_CONTEXT_PROCESSORS = (
     'django.core.context_processors.request',
     'django.contrib.auth.context_processors.auth',
     'django.contrib.messages.context_processors.messages',
-    'astrobin.context_processors.privatebeta_enabled',
     'astrobin.context_processors.notices_count',
     'astrobin.context_processors.user_language',
     'astrobin.context_processors.user_profile',
@@ -245,7 +243,6 @@ INSTALLED_APPS = [
     'persistent_messages',
     'djcelery',
     'gunicorn',
-    'privatebeta',
     'django_comments',
     'tagging',
     'mptt',
