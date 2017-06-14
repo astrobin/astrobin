@@ -8,3 +8,4 @@ from astrobin_apps_iotd.models import *
 class IotdSubmissionCreateForm(forms.ModelForm):
     class Meta:
         model = IotdSubmission
+        fields = ('image',)
