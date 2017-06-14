@@ -112,10 +112,13 @@ from astrobin.views import (
     user_popover_ajax,
 
     stats_camera_types_trend_ajax,
+    stats_telescope_types_trend_ajax,
     stats_subject_type_trend_ajax,
     stats_subject_images_monthly_ajax,
+    stats_subject_camera_types_ajax,
     stats_subject_telescope_types_ajax,
     stats_subject_total_images_ajax,
+    stats_subject_integration_monthly_ajax,
 
     affiliates,
     faq,
