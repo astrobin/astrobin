@@ -23,4 +23,4 @@ class NestedCommentSerializer(serializers.ModelSerializer):
             'parent',
         )
 
-    parent = PKRelatedFieldAcceptNull();
+    parent = PKRelatedFieldAcceptNull(read_only = True)
