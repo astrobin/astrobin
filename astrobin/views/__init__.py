@@ -1645,33 +1645,18 @@ def user_profile_flickr_import(request):
         'readonly': settings.READONLY_MODE
     }
 
-    if 'flickr_token' in request.session:
-        token = request.session['flickr_token']
-    else:
-        token = None
-        if 'flickr_step' in request.session:
-            del request.session['flickr_step']
-
     flickr = flickrapi.FlickrAPI(settings.FLICKR_API_KEY,
-                                 settings.FLICKR_SECRET,
-                                 token = token,
-                                 store_token = False)
-    if token:
-        # We have a token, but it might not be valid
-        try:
-            flickr.auth_checkToken()
-        except flickrapi.FlickrError:
-            token = None
-            del request.session['flickr_token']
+                                 settings.FLICKR_SECRET)
 
-    if not token:
+    if not flickr.token_valid(perms=u'read'):
         # We were never authenticated, or authentication expired. We need
         # to reauthenticate.
-        link = flickr.web_login_url(perms='read')
-        response_dict['flickr_link'] = link
-        return render_to_response("user/profile/flickr_import.html",
-            response_dict,
-            context_instance=RequestContext(request))
+        flickr.get_request_token(settings.ASTROBIN_BASE_URL + reverse('flickr_auth_callback'))
+        authorize_url = flickr.auth_url(perms=u'read')
+        request.session['request_token'] = flickr.flickr_oauth.resource_owner_key
+        request.session['request_token_secret'] = flickr.flickr_oauth.resource_owner_secret
+        request.session['requested_permissions'] = flickr.flickr_oauth.requested_permissions
+        return HttpResponseRedirect(authorize_url)
 
     if not request.POST:
         # If we made it this far (it's a GET request), it means that we
@@ -1726,6 +1711,7 @@ def user_profile_flickr_import(request):
                                   title=title if title is not None else '',
                                   description=description if description is not None else '',
                                   subject_type = 600, # Default to Other only when doing a Flickr import
+                                  is_wip = True,
                                   license = profile.default_license)
                     image.save()
 
@@ -1737,20 +1723,12 @@ def user_profile_flickr_import(request):
 
 
 def flickr_auth_callback(request):
-    f = flickrapi.FlickrAPI(settings.FLICKR_API_KEY,
-                            settings.FLICKR_SECRET, store_token = False)
-
-    if 'frob' in request.GET:
-        frob = request.GET['frob']
-        try:
-            token = f.get_token(frob)
-        except flickrapi.FlickrError:
-            token = None
-    else:
-        token = None
-
-    request.session['flickr_token'] = token
-
+    flickr = flickrapi.FlickrAPI(settings.FLICKR_API_KEY, settings.FLICKR_SECRET)
+    flickr.flickr_oauth.resource_owner_key = request.session['request_token']
+    flickr.flickr_oauth.resource_owner_secret = request.session['request_token_secret']
+    flickr.flickr_oauth.requested_permissions = request.session['requested_permissions']
+    verifier = request.GET['oauth_verifier']
+    flickr.get_access_token(verifier)
     return HttpResponseRedirect("/profile/edit/flickr/")
 
 

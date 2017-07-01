@@ -69,20 +69,14 @@
 <script language="javascript">
 $(function() {
     var selected_photos = [];
-    var phase = 0; // nothing done yet
-    var link = '{% autoescape off %}{{flickr_link}}{% endautoescape %}';
+    var phase = 1;
     var refresh_id;
+    var username = "{{request.user.username}}";
 
     $('.js').css('display', 'block');
 
-    if (link == '') {
-        // we have passed the user authentication phase
-        phase++;
-    }
     $('.btn-flickr').click(function() {
-        if (phase == 0) {
-                window.location = link;
-        } else if (phase == 1) { // Time to ask for the photos in the set.
+        if (phase == 1) { // Time to ask for the photos in the set.
             $.ajax({
                     type: 'POST',
                     url: '/profile/edit/flickr/',
@@ -95,9 +89,9 @@ $(function() {
                         $('p#flickr_photos').html(function() {
                                 var ret = '\
                                     <h3>{% trans "Click to select the photos you want to import" %}</h3> \
-                                    <ul class="select-links"> \
-                                        <li><a class="btn" id="all" href="#">{% trans "Select all" %}</a></li> \
-                                        <li><a class="btn" id="none" href="#">{% trans "Select none" %}</a></li> \
+                                    <ul class="select-links" style="margin-left: 0; margin-bottom: 10px;"> \
+                                        <li style="display: inline-block"><a class="btn btn-mini" id="all" href="#">{% trans "Select all" %}</a></li> \
+                                        <li style="display: inline-block"><a class="btn btn-mini" id="none" href="#">{% trans "Select none" %}</a></li> \
                                     </ul>';
                                 $.each(photos, function(id, url) {
                                     ret += '\
@@ -127,9 +121,10 @@ $(function() {
                     url: '/profile/edit/flickr/',
                     dataType: 'json',
                     data: ({'flickr_selected_photos': selected_photos}),
+                    timeout: 60000,
                     success: function(data) {
                         $('p#flickr_progress_message').hide();
-                        $('p#flickr_progress').html("{% blocktrans %}Done! Go to <a href=\"/me\">your profile</a> to see the new pictures (and keep an eye on your notifications)!{% endblocktrans %}");
+                        $('p#flickr_progress').html("{% blocktrans %}Done! Go to <a href=\"/users/" + username + "/?staging&sub=uploaded\">your staging gallery</a> to see the new pictures (and keep an eye on your notifications)!{% endblocktrans %}");
                     }
             });
         }
