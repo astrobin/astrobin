@@ -65,7 +65,10 @@ class IotdSubmissionQueueView(
                 'images': sorted(list(set([
                     x
                     for x in self.model.objects\
-                        .filter(published__gte = date, published__lt = date + timedelta(1))
+                        .filter(
+                            moderator_decision = 1,
+                            published__gte = date,
+                            published__lt = date + timedelta(1))
                     if not Iotd.objects.filter(
                         image = x,
                         date__lte = datetime.now().date()).exists()

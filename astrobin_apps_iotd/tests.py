@@ -50,6 +50,10 @@ class IotdTest(TestCase):
         self.client.logout()
         self.image = Image.objects.all()[0]
 
+        # Approve the image
+        self.image.moderator_decision = 1
+        self.image.save()
+
     def tearDown(self):
         self.submitters.delete()
         self.submitter_1.delete()
@@ -463,6 +467,28 @@ class IotdTest(TestCase):
         self.assertEqual(len(bs.select('.iotd-queue-item.may-not-select')), 1)
         self.submitters.user_set.remove(self.reviewer_1)
         self.image.user = self.user
+        self.image.save()
+
+        # Check that non-moderated (or spam) images are not rendered
+        self.image.moderator_decision = 0
+        self.image.save()
+        submission = IotdSubmission.objects.create(
+            submitter = self.submitter_1,
+            image = self.image)
+        response = self.client.get(url)
+        self.assertNotContains(response, 'data-id="%s"' % self.image.pk)
+        submission.delete()
+
+        self.image.moderator_decision = 2
+        self.image.save()
+        submission = IotdSubmission.objects.create(
+            submitter = self.submitter_1,
+            image = self.image)
+        response = self.client.get(url)
+        self.assertNotContains(response, 'data-id="%s"' % self.image.pk)
+        submission.delete()
+
+        self.image.moderator_decision = 1
         self.image.save()
 
         # Check that current or past IOTD is not rendered
