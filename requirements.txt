@@ -68,7 +68,7 @@ django-pipeline==1.3.15
 django-recaptcha-works==0.3.4
 django-registration==1.0
 django-request-provider==1.0.0
--e git://github.com/danawoodman/django-reviews.git@b8daab8ae9aeed1b93556d6ec768bcb89087ee25#egg=django_reviews-master
+-e git+https://github.com/danawoodman/django-reviews.git@b8daab8ae9aeed1b93556d6ec768bcb89087ee25#egg=django_reviews-master
 django-robots==0.8.1
 django-staticfiles==1.2.1
 django-storages==1.1.4
@@ -107,6 +107,7 @@ newrelic==2.4.0.4
 nose==1.1.2
 numpy==1.6.2
 oauth2==1.5.211
+oauthlib==2.0.2
 odict==1.5.1
 ply==3.4
 privatebeta==0.4.1
@@ -124,6 +125,8 @@ python-memcached==1.48
 python-openid==2.2.5
 pytz==2016.6.1
 requests==2.9.1
+requests-oauthlib==0.8.0
+requests-toolbelt==0.8.0
 setproctitle==1.1.3
 simplejson==2.3.2
 six==1.10.0

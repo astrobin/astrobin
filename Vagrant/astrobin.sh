@@ -210,12 +210,12 @@ function pip {
 
     # Installing requestprovider manually because the pip package is broken
     (
-	rm -rf /venv/astrobin/dev/src/django-contrib-requestprovider &&
+    rm -rf /venv/astrobin/dev/src/django-contrib-requestprovider &&
         mkdir -p /venv/astrobin/dev/src/django-contrib-requestprovider &&
         git clone https://github.com/malfaux/snakecheese.git /venv/astrobin/dev/src/django-contrib-requestprovider &&
         cd /venv/astrobin/dev/src/django-contrib-requestprovider/gadjolib/ &&
         touch README.txt &&
-        python setup.py install
+        python setup.py develop --no-deps
     )
 EOF
 }
@@ -307,6 +307,7 @@ function astrobin {
 
     /var/www/astrobin/manage.py collectstatic --noinput
     echo "from django.contrib.sites.models import Site; Site.objects.get_or_create(name='AstroBin', domain='localhost')" | /var/www/astrobin/manage.py shell
+    (cd /var/www/astrobin/; ./scripts/test.sh)
 EOF
 }
 

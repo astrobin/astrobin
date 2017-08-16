@@ -3,6 +3,7 @@ export DJANGO_SETTINGS_MODULE="settings"
 
 export ASTROBIN_DEBUG='true'
 export ASTROBIN_DEBUG_TOOLBAR='false'
+export ASTROBIN_HOST='localhost'
 export ASTROBIN_EMAIL_HOST_USER=''
 export ASTROBIN_EMAIL_HOST_PASSWORD=''
 export ASTROBIN_EMAIL_HOST='127.0.0.1'
