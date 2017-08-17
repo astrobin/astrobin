@@ -1343,7 +1343,7 @@ class ImageRevision(HasSolutionMixin, models.Model):
     )
 
     label = models.CharField(
-        max_length = 1,
+        max_length = 2,
         editable = False)
 
     class Meta:
