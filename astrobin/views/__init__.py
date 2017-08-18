@@ -1849,7 +1849,7 @@ def image_revision_upload_process(request):
     image_revision.user = request.user
     image_revision.image = image
     image_revision.is_final = True
-    image_revision.label = base26_encode(ord(highest_label) - ord('A') + 1)
+    image_revision.label = base26_encode(base26_decode(highest_label) + 1)
 
     image_revision.image_file.file.seek(0) # Because we opened it with PIL
     image_revision.save()
