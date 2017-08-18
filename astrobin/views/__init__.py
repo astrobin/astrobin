@@ -1646,7 +1646,8 @@ def user_profile_flickr_import(request):
     }
 
     flickr = flickrapi.FlickrAPI(settings.FLICKR_API_KEY,
-                                 settings.FLICKR_SECRET)
+                                 settings.FLICKR_SECRET,
+                                 username = request.user.username)
 
     if not flickr.token_valid(perms=u'read'):
         # We were never authenticated, or authentication expired. We need
@@ -1723,7 +1724,9 @@ def user_profile_flickr_import(request):
 
 
 def flickr_auth_callback(request):
-    flickr = flickrapi.FlickrAPI(settings.FLICKR_API_KEY, settings.FLICKR_SECRET)
+    flickr = flickrapi.FlickrAPI(
+        settings.FLICKR_API_KEY, settings.FLICKR_SECRET,
+        username = request.user.username)
     flickr.flickr_oauth.resource_owner_key = request.session['request_token']
     flickr.flickr_oauth.resource_owner_secret = request.session['request_token_secret']
     flickr.flickr_oauth.requested_permissions = request.session['requested_permissions']
