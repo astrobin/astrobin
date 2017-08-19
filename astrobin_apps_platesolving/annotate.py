@@ -132,7 +132,7 @@ class Annotator:
         if self.solution.annotations is None:
             return None
 
-        annotationsObj = null
+        annotationsObj = None
         try:
             annotationsObj = simplejson.loads(self.solution.annotations)['annotations']
         except TypeError:
