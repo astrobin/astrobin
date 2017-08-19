@@ -132,6 +132,12 @@ class Annotator:
         if self.solution.annotations is None:
             return None
 
+        annotationsObj = null
+        try:
+            annotationsObj = simplejson.loads(self.solution.annotations)['annotations']
+        except TypeError:
+            return None
+
         w, h = self.solution.content_object.w, self.solution.content_object.h
         if w:
             hd_w = settings.THUMBNAIL_ALIASES['']['hd']['size'][0]
@@ -157,9 +163,7 @@ class Annotator:
 
             overlay = Image.new('RGBA', base.size, (255, 255, 255, 0))
             draw = ImageDraw.Draw(overlay)
-            self.drawAnnotations(
-                draw,
-                simplejson.loads(self.solution.annotations)['annotations'])
+            self.drawAnnotations(draw, annotationsObj)
             del draw
 
             image_io = StringIO()
