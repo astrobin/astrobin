@@ -7,6 +7,9 @@ from django.core.exceptions import ValidationError
 from django.core.urlresolvers import reverse
 from django.test import TestCase
 
+# Third party
+from toggleproperties.models import ToggleProperty
+
 # AstroBin
 from astrobin.models import (
     Acquisition,
@@ -25,6 +28,9 @@ class UserTest(TestCase):
         self.user = User.objects.create_user(
             username = "user", email = "user@example.com",
             password = "password")
+        self.user_2 = User.objects.create_user(
+            username = "user_2", email = "user_2@example.com",
+            password = "password")
 
         self.producers = Group.objects.create(name = 'Producers')
         self.retailers = Group.objects.create(name = 'Retailers')
@@ -32,6 +38,7 @@ class UserTest(TestCase):
 
     def tearDown(self):
         self.user.delete()
+        self.user_2.delete()
         self.producers.delete()
         self.retailers.delete()
         self.payers.delete()
@@ -441,6 +448,16 @@ class UserTest(TestCase):
         response = self.client.get(reverse("user_page_bookmarks", args = (self.user.username,)))
         self.assertEqual(response.status_code, 200)
         self.client.logout()
+
+    def test_liked(self):
+        self.client.login(username = "user", password = "password")
+        image = self._do_upload('astrobin/fixtures/test.jpg', "TEST IMAGE")
+        self.client.logout()
+
+        prop = ToggleProperty.objects.create_toggleproperty('like', image, self.user_2)
+        response = self.client.get(reverse("user_page_liked", args = (self.user_2.username,)))
+        self.assertEqual(response.status_code, 200)
+        self.assertContains(response, image.thumbnail('gallery'))
 
     def test_plots(self):
         self.client.login(username = "user", password = "password")
