@@ -1,0 +1,23 @@
+{% extends 'base.html' %}
+{% load i18n %}
+{% load tags %}
+
+{% block title %}{% blocktrans with user=user %}{{user}}'s liked images{% endblocktrans %}{% endblock %}
+{% block container_extra_classes %}has-subnav{% endblock %}
+
+{% block content %}
+    {% include 'user/profile/navigation.html' %}
+    <h1>
+        {% ifequal user request.user %}
+            {% blocktrans %}Your liked images{% endblocktrans %}
+        {% else %}
+            {% blocktrans with user.username as username %}{{username}}'s liked images{% endblocktrans %}
+        {% endifequal %}
+    </h1>
+
+    {% image_list image_list %}
+{% endblock %}
+
+{% block extra_js %}
+    {% include 'user/profile/js.html' %}
+{% endblock %}
