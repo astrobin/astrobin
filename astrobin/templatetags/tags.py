@@ -408,7 +408,7 @@ def can_like(user, image):
     from astrobin_apps_premium.templatetags.astrobin_apps_premium_tags import is_free
 
     user_scores_index = 0
-    min_index_to_like = 1.00
+    min_index_to_like = settings.MIN_INDEX_TO_LIKE
 
     if user.is_authenticated():
         user_scores_index = user.userprofile.get_scores()['user_scores_index']

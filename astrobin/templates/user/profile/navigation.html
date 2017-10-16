@@ -61,6 +61,12 @@
                     </a>
                 </li>
                 <li>
+                    <a href="{% url 'user_page_liked' requested_user.username %}">
+                        <i class="icon-thumbs-up"></i>
+                        {% trans "Liked images" %}
+                    </a>
+                </li>
+                <li>
                     <a href="{% url 'user_page_plots' requested_user.username %}">
                         <i class="icon-bar-chart"></i>
                         {% trans "Plots" %}

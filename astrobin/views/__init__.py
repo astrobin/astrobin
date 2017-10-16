@@ -1204,6 +1204,33 @@ def user_page_bookmarks(request, username):
 
 
 @require_GET
+def user_page_liked(request, username):
+    user = get_object_or_404(User, username = username)
+
+    image_ct = ContentType.objects.get(app_label = 'astrobin', model = 'image')
+    images = \
+        [x.content_object for x in \
+         ToggleProperty.objects.toggleproperties_for_user("like", user) \
+            .filter(content_type = image_ct) \
+            .order_by('-created_on')
+        ]
+
+    template_name = 'user/liked.html'
+    if request.is_ajax():
+        template_name = 'inclusion_tags/image_list_entries.html'
+
+    return render_to_response(template_name,
+        {
+            'requested_user': user,
+            'image_list': images,
+            'private_message_form': PrivateMessageForm(),
+            'alias': 'gallery',
+        },
+        context_instance = RequestContext(request)
+    )
+
+
+@require_GET
 @page_template('astrobin_apps_users/inclusion_tags/user_list_entries.html', key = 'users_page')
 def user_page_following(request, username, extra_context = None):
     user = get_object_or_404(User, username = username)

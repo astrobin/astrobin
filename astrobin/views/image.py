@@ -571,7 +571,7 @@ class ImageDetailView(DetailView):
             'like_this': like_this,
             'user_can_like': can_like(self.request.user, image),
             'bookmarked_this': bookmarked_this,
-            'min_index_to_like': 1.00,
+            'min_index_to_like': settings.MIN_INDEX_TO_LIKE,
 
             'comments_number': NestedComment.objects.filter(
                 deleted = False,

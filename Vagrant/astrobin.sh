@@ -66,6 +66,7 @@ function check {
         ASTROMETRY_NET_API_KEY
         ASTROBIN_RAWDATA_ROOT
         ASTROBIN_PAYPAL_MERCHANT_ID
+        ASTROBIN_MIN_INDEX_TO_LIKE
     )
 
     local FILES=(
