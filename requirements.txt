@@ -77,14 +77,14 @@ django-reviews==1.2.1
 django-robots==3.0
 django-staticfiles==1.2.1
 django-storages==1.5.2
--e git+https://github.com/siovene/django-subscription.git@e61ae8fd8650b80572e9d3d5c732933f1c64a11a#egg=django_subscription-master
+-e git+https://github.com/siovene/django-subscription.git#egg=django_subscription
 django-tagging==0.4.5
 django-tastypie==0.13.3
--e git+http://github.com/siovene/django-threaded-messages.git@b1c67f1846d03f20bf813b9a9940c07a0806a3ee#egg=django_threaded_messages-master
+-e git+http://github.com/siovene/django-threaded-messages.git@#egg=django_threaded_messages
 django-threaded-multihost==1.4.post1
 django-timezones==0.2
 django-tinymce==2.6.0
-django-uni-form==0.9.0
+django-crispy-form==1.6.1
 django-user-agents==0.3.0
 django-xmlrpc==0.1.7
 django.js==0.8.1

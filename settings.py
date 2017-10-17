@@ -250,7 +250,7 @@ INSTALLED_APPS = [
     'hitcount',
     'pagination',
     'avatar',
-    'uni_form',
+    'crispy_forms',
     'threaded_messages',
     'bootstrap_toolkit',
     'contact_form',
