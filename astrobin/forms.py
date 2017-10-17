@@ -919,14 +919,15 @@ class ModeratorGearFixForm(forms.ModelForm):
     class Meta:
         model = Gear
         fields = ('make', 'name',)
-        widgets = {
-            'make': forms.TextInput(attrs = {
-                'data-provide': 'typeahead',
-                'data-source': simplejson.dumps(
-                    uniq([x.make for x in Gear.objects.exclude(make = None).exclude(make = '')])),
-                'autocomplete': 'off',
-            }),
-        }
+
+    def __init__(self, **kwargs):
+        super(ModeratorGearFixForm, self).__init__(**kwargs)
+        self.widgets['make'] = forms.TextInput(attrs = {
+            'data-provide': 'typeahead',
+            'data-source': simplejson.dumps(
+                uniq([x.make for x in Gear.objects.exclude(make = None).exclude(make = '')])),
+            'autocomplete': 'off',
+            })
 
     def clean_make(self):
         return self.cleaned_data['make'].strip()
@@ -954,7 +955,6 @@ class ClaimCommercialGearForm(forms.Form):
     error_css_class = 'error'
 
     make = forms.ChoiceField(
-        choices = [('', '---------')] + sorted(uniq(Gear.objects.exclude(make = None).exclude(make = '').values_list('make', 'make')), key = lambda x: x[0].lower()),
         label = _("Make"),
         help_text = _("The make, brand, producer or developer of this product."),
         required = True)
@@ -973,6 +973,7 @@ class ClaimCommercialGearForm(forms.Form):
     def __init__(self, user, **kwargs):
         super(ClaimCommercialGearForm, self).__init__(**kwargs)
         self.user = user
+        self.fields['make'].choices = [('', '---------')] + sorted(uniq(Gear.objects.exclude(make = None).exclude(make = '').values_list('make', 'make')), key = lambda x: x[0].lower())
         self.fields['merge_with'].choices = [('', '---------')] + uniq(CommercialGear.objects.filter(producer = user).values_list('id', 'proper_name'))
 
     def clean (self):
@@ -1018,7 +1019,6 @@ class ClaimRetailedGearForm(forms.Form):
     error_css_class = 'error'
 
     make = forms.ChoiceField(
-        choices = [('', '---------')] + sorted(uniq(Gear.objects.exclude(make = None).exclude(make = '').values_list('make', 'make')), key = lambda x: x[0].lower()),
         label = _("Make"),
         help_text = _("The make, brand, producer or developer of this product."),
         required = True)
@@ -1037,6 +1037,7 @@ class ClaimRetailedGearForm(forms.Form):
     def __init__(self, user, **kwargs):
         super(ClaimRetailedGearForm, self).__init__(**kwargs)
         self.user = user
+        self.fields['make'].choices = [('', '---------')] + sorted(uniq(Gear.objects.exclude(make = None).exclude(make = '').values_list('make', 'make')), key = lambda x: x[0].lower())
         self.fields['merge_with'].choices =\
             [('', '---------')] +\
             uniq_id_tuple(RetailedGear.objects.filter(retailer = user).exclude(gear__name = None).values_list('id', 'gear__name'))
