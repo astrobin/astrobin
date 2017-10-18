@@ -1182,7 +1182,7 @@ def user_page_bookmarks(request, username):
 
     image_ct = ContentType.objects.get(app_label = 'astrobin', model = 'image')
     images = \
-        [x.content_object for x in \
+        [x.object_id for x in \
          ToggleProperty.objects.toggleproperties_for_user("bookmark", user) \
             .filter(content_type = image_ct) \
             .order_by('-created_on')
@@ -1195,7 +1195,7 @@ def user_page_bookmarks(request, username):
     return render_to_response(template_name,
         {
             'requested_user': user,
-            'image_list': images,
+            'image_list': Image.objects.filter(pk__in = images),
             'private_message_form': PrivateMessageForm(),
             'alias': 'gallery',
         },
@@ -1209,10 +1209,9 @@ def user_page_liked(request, username):
 
     image_ct = ContentType.objects.get(app_label = 'astrobin', model = 'image')
     images = \
-        [x.content_object for x in \
+        [x.object_id for x in \
          ToggleProperty.objects.toggleproperties_for_user("like", user) \
-            .filter(content_type = image_ct) \
-            .order_by('-created_on')
+            .filter(content_type = image_ct)
         ]
 
     template_name = 'user/liked.html'
@@ -1222,7 +1221,7 @@ def user_page_liked(request, username):
     return render_to_response(template_name,
         {
             'requested_user': user,
-            'image_list': images,
+            'image_list': Image.objects.filter(pk__in = images),
             'private_message_form': PrivateMessageForm(),
             'alias': 'gallery',
         },
