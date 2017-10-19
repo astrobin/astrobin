@@ -49,6 +49,7 @@ from reviews.views import ReviewAddForm
 import persistent_messages
 
 # AstroBin apps
+from astrobin_apps_notifications.types import NOTICE_TYPES
 from astrobin_apps_notifications.utils import push_notification
 from astrobin_apps_platesolving.forms import PlateSolvingSettingsForm
 from astrobin_apps_platesolving.models import PlateSolvingSettings
@@ -57,7 +58,6 @@ from astrobin_apps_platesolving.solver import Solver
 # AstroBin
 from astrobin.forms import *
 from astrobin.gear import *
-from astrobin.management import NOTICE_TYPES
 from astrobin.models import *
 from astrobin.shortcuts import *
 from astrobin.utils import *

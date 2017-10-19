@@ -273,7 +273,7 @@ INSTALLED_APPS = [
     'sanitizer',
 
     # AstroBin apps
-    'astrobin',
+    'astrobin.apps.AstroBinAppConfig',
     'common',
     'nested_comments',
     'rawdata',
