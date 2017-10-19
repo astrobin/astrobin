@@ -6,13 +6,35 @@ import urllib2
 from django.conf import settings
 
 # Third party
+from gadjo.requestprovider.signals import get_request
 from notification import models as notification
+from notification.models import get_formatted_messages
 from persistent_messages.models import Message
+import persistent_messages
 
 
 def push_notification(recipients, notice_type, data):
     data.update({'notices_url': settings.ASTROBIN_BASE_URL + '/'})
+
+    # Send as email
     notification.send(recipients, notice_type, data)
+
+    # Send as persistent message
+    try:
+        request = get_request()
+    except IndexError:
+        # This may happen during unit testing
+        return
+
+    messages = get_formatted_messages(['notice.html'],
+        notice_type, data)
+
+    for recipient in recipients:
+        persistent_messages.add_message(
+            request,
+            persistent_messages.INFO,
+            messages['notice.html'],
+            user = recipient)
 
 
 def get_recent_notifications(user, n = 10):
