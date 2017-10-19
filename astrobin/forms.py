@@ -706,7 +706,7 @@ class DeepSky_AcquisitionForm(forms.ModelForm):
 
     def clean_date(self):
         date = self.cleaned_data['date']
-        if date and date > datetime.date.today():
+        if date and date > datetime.today().date():
             raise forms.ValidationError(_("The date cannot be in the future."))
         return date
 
@@ -724,7 +724,7 @@ class DeepSky_AcquisitionBasicForm(forms.ModelForm):
 
     def clean_date(self):
         date = self.cleaned_data['date']
-        if date and date > datetime.date.today():
+        if date and date > datetime.today().date():
             raise forms.ValidationError(_("The date cannot be in the future."))
         return date
 
