@@ -22,15 +22,14 @@ The functions of primary interest provided by this module are phase(),
 which gives you a variety of data on the status of the moon for a
 given date; and phase_hunt(), which given a date, finds the dates of
 the nearest full moon, new moon, etc.
+
+modified Oct 2012 by Chris Wallace to replace the older DateTime module with the datetime module
+
 """
 
 from math import sin, cos, floor, sqrt, pi, tan, atan # asin, atan2
 import bisect
-try:
-    import DateTime
-except ImportError:
-    from mx import DateTime
-
+import datetime
 __TODO__ = [
     'Add command-line interface.',
     'Make front-end modules for ASCII and various GUIs.',
@@ -45,12 +44,35 @@ FULL = 2 / 4.0
 LAST = 3 / 4.0
 NEXTNEW = 4 / 4.0
 
+def tojdn(year, month, day):
+    """Returns the Julian day number of a date."""
+    a = (14 - month)//12
+    y = year + 4800 - a
+    m = month + 12*a - 3
+    return day + ((153*m + 2)//5) + 365*y + y//4 - y//100 + y//400 - 32045
+
+def fromjdn(thejdn):
+    """Returns a date corresponding to the given Julian day number."""
+    if not isinstance(thejdn, int):
+        raise TypeError, "%s is not an integer." % str(thejdn)
+
+    a = thejdn + 32044
+    b = (4*a + 3)//146097
+    c = a - (146097*b)//4
+    d = (4*c + 3)//1461
+    e = c - (1461*d)//4
+    m = (5*e + 2)//153
+
+    year=(100*b + d - 4800 + m/10)
+    month=(m + 3 - 12*(m//10))
+    day=(e + 1 - (153*m + 2)//5)
+    return (year, month, day)       
 
 class MoonPhase:
     """I describe the phase of the moon.
 
     I have the following properties:
-        date - a DateTime instance
+        date - a datetime instance
         phase - my phase, in the range 0.0 .. 1.0
         phase_text - a string describing my phase
         illuminated - the percentage of the face of the moon illuminated
@@ -64,13 +86,17 @@ class MoonPhase:
         nextnew_date - the date of the next new moon
     """
 
-    def __init__(self, date=DateTime.now()):
-        """MoonPhase constructor."""
+    def __init__(self, date=datetime.datetime.now()):
+        """MoonPhase constructor.
 
-        if isinstance(date, DateTime.DateTimeType):
-            self.date = date
-        else:
-            self.date = DateTime.DateTimeFrom(date)
+        Give me a date, as either a Julian Day Number or a datetime
+        object."""
+
+#        if not isinstance(date, datetime.datetimeType):
+#           self.date = datetime.datetimeFromJDN(date)
+#       else:
+#            
+        self.date = date
 
         self.__dict__.update(phase(self.date))
 
@@ -95,10 +121,10 @@ class MoonPhase:
         return "<%s(%d)>" % (self.__class__, jdn)
 
     def __str__(self):
-        if type(self.date) is int:
-            d = DateTime.DateTimeFromJDN(self.date)
-        else:
-            d = self.date
+#        if type(self.date) is int:
+#            d = datetime.datetimeFromJDN(self.date)
+#        else:
+        d = self.date
         s = "%s for %s, %s (%%%.2f illuminated)" %\
             (self.__class__, d.strftime(), self.phase_text,
              self.illuminated * 100)
@@ -112,7 +138,7 @@ class AstronomicalConstants:
     # Angles here are in degrees
 
     # 1980 January 0.0 in JDN
-    # XXX: DateTime(1980).jdn yields 2444239.5 -- which one is right?
+    # XXX: datetime(1980).jdn yields 2444239.5 -- which one is right?
     epoch = 2444238.5
 
     # Ecliptic longitude of the Sun at epoch 1980.0
@@ -191,11 +217,11 @@ def phase_string(p):
     return phase_strings[i][1]
 
 
-def phase(phase_date=DateTime.now()):
+def phase(phase_date=datetime.datetime.now()):
     """Calculate phase of moon as a fraction:
 
     The argument is the time for which the phase is requested,
-    expressed in either a DateTime or by Julian Day Number.
+    expressed in either a datetime or by Julian Day Number.
 
     Returns a dictionary containing the terminator phase angle as a
     percentage of a full circle (i.e., 0 to 1), the illuminated
@@ -207,10 +233,10 @@ def phase(phase_date=DateTime.now()):
     # Calculation of the Sun's position
 
     # date within the epoch
-    if hasattr(phase_date, "jdn"):
-        day = phase_date.jdn - c.epoch
-    else:
-        day = phase_date - c.epoch
+#    if hasattr(phase_date, "jdn"):
+    day = tojdn(phase_date.year,phase_date.month,phase_date.day) - c.epoch
+#    else:
+#        day = phase_date - c.epoch
 
     # Mean anomaly of the Sun
     N = fixangle((360/365.2422) * day)
@@ -324,17 +350,17 @@ def phase(phase_date=DateTime.now()):
 # phase()
 
 
-def phase_hunt(sdate=DateTime.now()):
+def phase_hunt(sdate=datetime.datetime.now()):
     """Find time of phases of the moon which surround the current date.
 
     Five phases are found, starting and ending with the new moons
     which bound the current lunation.
     """
 
-    if not hasattr(sdate,'jdn'):
-        sdate = DateTime.DateTimeFromJDN(sdate)
+ #   if not hasattr(sdate,'jdn'):
+ #       sdate = datetime.datetimeFromJDN(sdate)
 
-    adate = sdate + DateTime.RelativeDateTime(days=-45)
+    adate = sdate + datetime.timedelta(days=-45)
 
     k1 = floor((adate.year + ((adate.month - 1) * (1.0/12.0)) - 1900) * 12.3685)
 
@@ -372,12 +398,12 @@ def meanphase(sdate, k):
     """
 
     # Time in Julian centuries from 1900 January 0.5
-    if not hasattr(sdate,'jdn'):
-        delta_t = sdate - DateTime.DateTime(1900,1,1,12).jdn
-        t = delta_t / 36525
-    else:
-        delta_t = sdate - DateTime.DateTime(1900,1,1,12)
-        t = delta_t.days / 36525
+#    if not hasattr(sdate,'jdn'):
+#        delta_t = sdate - datetime.datetime(1900,1,1,12).jdn
+#        t = delta_t / 36525
+#    else:
+    delta_t = sdate - datetime.datetime(1900,1,1,12)
+    t = delta_t.days / 36525
 
     # square for frequent use
     t2 = t * t
@@ -478,7 +504,7 @@ def truephase(k, tphase):
             "TRUEPHASE called with invalid phase selector",
             tphase)
 
-    return DateTime.DateTimeFromJDN(pt)
+    return fromjdn(pt)
 # truephase()
 
 
