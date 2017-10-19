@@ -4,7 +4,7 @@ import os
 # Django
 from django.conf import settings
 from django.core.urlresolvers import reverse
-from django.test import TestCase
+from django.test import TransactionTestCase
 from django.utils.http import urlencode
 
 # This app
@@ -14,7 +14,7 @@ from rawdata.models import RawImage, TemporaryArchive
 from .test_common import *
 
 
-class RawImageTest(TestCase):
+class RawImageTest(TransactionTestCase):
     def setUp(self):
         setup_data(self)
 
