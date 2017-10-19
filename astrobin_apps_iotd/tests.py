@@ -69,8 +69,8 @@ class IotdTest(TestCase):
         self.judge_1.delete()
         self.judge_2.delete()
 
-        self.user.delete()
         self.image.delete()
+        self.user.delete()
 
 
     # Models
