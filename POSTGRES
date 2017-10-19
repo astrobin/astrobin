@@ -7,6 +7,8 @@ create index on toggleproperties_toggleproperty using btree(property_type, conte
 CREATE INDEX object_id_integer_cast ON toggleproperties_toggleproperty (CAST(toggleproperties_toggleproperty.object_id AS INT))
 CREATE INDEX persistent_messages_message_user_id_read_idx ON persistent_messages_message (user_id, read);
 CREATE INDEX persistent_messages_message_created_idx ON persistent_messages_message (created);
+create index on hitcount_hit_count using btree(object_pk, content_type_id);
+create index on nested_comments_nestedcomment using btree(deleted, object_id);
 
 Configuration tricks
 
