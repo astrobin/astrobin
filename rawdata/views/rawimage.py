@@ -141,9 +141,6 @@ class RawImageLibrary(RestrictToSubscriberMixin, TemplateView):
 # API                                                                         #
 ###############################################################################
 
-def rawimage_pre_save(request, obj):
-    obj.user = request.user
-
 
 class RawImageList(generics.ListCreateAPIView):
     model = RawImage
@@ -153,8 +150,8 @@ class RawImageList(generics.ListCreateAPIView):
                           IsOwnerOrReadOnly,
                           IsSubscriber,)
 
-    def pre_save(self, obj):
-        rawimage_pre_save(self.request, obj)
+    def perform_create(self, serializer):
+        serializer.save(user=self.request.user)
 
 
 class RawImageDetail(generics.RetrieveUpdateDestroyAPIView):
@@ -164,5 +161,5 @@ class RawImageDetail(generics.RetrieveUpdateDestroyAPIView):
                           IsOwnerOrReadOnly,
                           IsSubscriber)
 
-    def pre_save(self, obj):
-        rawimage_pre_save(self.request, obj)
+    def perform_create(self, serializer):
+        serializer.save(user=self.request.user)

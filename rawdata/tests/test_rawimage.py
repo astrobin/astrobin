@@ -29,7 +29,7 @@ class RawImageTest(TransactionTestCase):
 
     def test_api_create_anon(self):
         f, h = get_file()
-        test_response(self, reverse('api.rawdata.rawimage.list'), {'file': f}, 403)
+        test_response(self, reverse('api.rawdata.rawimage.list'), {'file': f}, 401)
         f.close()
 
     def test_api_create_unsub(self):
@@ -43,7 +43,7 @@ class RawImageTest(TransactionTestCase):
         f, h = get_file()
         self.client.login(username = 'username_sub', password = 'passw0rd')
         test_response(self, reverse('api.rawdata.rawimage.list'), {}, 400,
-                            'file', "This field is required.")
+                            'file', "No file was submitted.")
         self.client.logout()
         f.close()
 
