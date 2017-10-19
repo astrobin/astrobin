@@ -237,9 +237,12 @@ def toggleproperty_post_save(sender, instance, created, **kwargs):
             user_ct = ContentType.objects.get_for_model(User)
             if instance.content_type == user_ct:
                 followed_user = user_ct.get_object_for_this_type(pk = instance.object_id)
-                push_notification([followed_user], 'new_follower',
-                                  {'object': instance.user.userprofile.get_display_name(),
-                                   'object_url': instance.user.get_absolute_url()})
+                push_notification(
+                    [followed_user], 'new_follower', {
+                        'object': instance.user.userprofile.get_display_name(),
+                        'object_url': reverse_url('user_page', kwargs = {'username': instance.user.username}),
+                    }
+                )
 post_save.connect(toggleproperty_post_save, sender = ToggleProperty)
 
 
