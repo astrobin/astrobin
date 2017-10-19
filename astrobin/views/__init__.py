@@ -535,8 +535,8 @@ def image_edit_acquisition(request, id):
         edit_type = 'deep_sky'
     elif solar_system_acquisition:
         edit_type = 'solar_system'
-    elif 'edit_type' in request.REQUEST:
-       edit_type = request.REQUEST['edit_type']
+    elif 'edit_type' in request.GET:
+       edit_type = request.GET['edit_type']
     else:
        edit_type = None
 
@@ -2021,7 +2021,7 @@ def location_edit(request, id):
 def set_language(request, lang):
     from django.utils.translation import check_for_language, activate
 
-    next = request.REQUEST.get('next', None)
+    next = request.GET.get('next', None)
     if not next:
         next = request.META.get('HTTP_REFERER', None)
     if not next:
