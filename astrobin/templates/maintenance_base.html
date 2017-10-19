@@ -2,7 +2,7 @@
 {% load tags %}
 {% load astrobin_apps_notifications_tags %}
 {% load inbox %}
-{% load compressed %}
+{% load pipeline %}
 {% load common_tags %}
 {% load url from future %}
 
@@ -28,7 +28,7 @@
         <![endif]-->
 
         <link href="https://fonts.googleapis.com/css?family=Noto+Sans:400,400i,700|Noto+Serif:700&subset=latin-ext" rel="stylesheet">
-        {% compressed_css 'screen' %}
+        {% stylesheet 'screen' %}
 
         <!--[if IE 6]><link rel="stylesheet" type="text/css" media="screen" href="{{STATIC_URL}}css/ie6.css"/><![endif]-->
 
@@ -551,7 +551,7 @@
 
         <!--[if lte IE 8]><script type="text/javascript" src="{{STATIC_URL}}js/flashcanvas.js"></script><![endif]-->
 
-        {% compressed_js 'scripts' %}
+        {% javascript 'scripts' %}
 
         <!-- javascript -->
         <script type="text/javascript">

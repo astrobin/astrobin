@@ -1,5 +1,5 @@
 {% load i18n %}
-{% load compressed %}
+{% load pipeline %}
 
 <!DOCTYPE html>
 <html lang="{% if request.user.is_authenticated and user_language %}{{user_language}}{% else %}en{% endif %}">
@@ -17,7 +17,7 @@
         <link rel="shortcut icon" href="{{STATIC_URL}}favicon.ico" type="image/x-icon">
         <link rel="icon" href="{{STATIC_URL}}favicon.ico" type="image/x-icon">
 
-        {% compressed_css 'screen' %}
+        {% stylesheet 'screen' %}
     </head>
 
     <body data-offset="55">

@@ -1,5 +1,5 @@
 {% load astrobin_apps_donations_tags %}
-{% load compressed %}
+{% load pipeline %}
 {% load dfp_tags %}
 
 <!DOCTYPE html>
@@ -16,7 +16,7 @@
         <link rel="stylesheet" href="//cdn.jsdelivr.net/jquery.multiselect/1.13/jquery.multiselect.css"/>
         <link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/qtip2/2.1.1/basic/jquery.qtip.min.css"/>
 
-        {% compressed_css 'screen' %}
+        {% stylesheet 'screen' %}
 
         {% include "base/ie6.html" %}
 
