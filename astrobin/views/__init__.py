@@ -156,7 +156,7 @@ def object_list(request, queryset, paginate_by=None, page=None,
         model = queryset.model
         template_name = "%s/%s_list.html" % (model._meta.app_label, model._meta.object_name.lower())
     t = template_loader.get_template(template_name)
-    return HttpResponse(t.render(c), mimetype=mimetype)
+    return HttpResponse(t.render(c), content_type=mimetype)
 
 def monthdelta(date, delta):
     m, y = (date.month+delta) % 12, date.year + ((date.month)+delta-1) // 12
@@ -2073,7 +2073,7 @@ def get_edit_gear_form(request, id):
 
     return HttpResponse(
         simplejson.dumps(response_dict),
-        mimetype = 'application/javascript')
+        content_type = 'application/javascript')
 
 
 @require_GET
@@ -2097,7 +2097,7 @@ def get_empty_edit_gear_form(request, gear_type):
 
     return HttpResponse(
         simplejson.dumps(response_dict),
-        mimetype = 'application/javascript')
+        content_type = 'application/javascript')
 
 
 @require_POST
@@ -2169,7 +2169,7 @@ def save_gear_details(request):
         }
         return HttpResponse(
             simplejson.dumps(response_dict),
-            mimetype = 'application/javascript')
+            content_type = 'application/javascript')
 
     form.save()
 
@@ -2194,7 +2194,7 @@ def save_gear_details(request):
 
     return HttpResponse(
         simplejson.dumps(response_dict),
-        mimetype = 'application/javascript')
+        content_type = 'application/javascript')
 
 
 @require_GET
@@ -2203,7 +2203,7 @@ def save_gear_details(request):
 def get_is_gear_complete(request, id):
     return HttpResponse(
         simplejson.dumps({'complete': is_gear_complete(id)}),
-        mimetype = 'application/javascript')
+        content_type = 'application/javascript')
 
 
 @require_GET
@@ -2225,7 +2225,7 @@ def get_gear_user_info_form(request, id):
 
     return HttpResponse(
         simplejson.dumps(response_dict),
-        mimetype = 'application/javascript')
+        content_type = 'application/javascript')
 
 
 @require_POST
@@ -2245,7 +2245,7 @@ def save_gear_user_info(request):
         }
         return HttpResponse(
             simplejson.dumps(response_dict),
-            mimetype = 'application/javascript')
+            content_type = 'application/javascript')
 
     form.save()
     return ajax_success()
@@ -2289,7 +2289,7 @@ def gear_popover_ajax(request, id):
 
     return HttpResponse(
         simplejson.dumps(response_dict),
-        mimetype = 'application/javascript')
+        content_type = 'application/javascript')
 
 
 @require_GET
@@ -2325,7 +2325,7 @@ def user_popover_ajax(request, username):
 
     return HttpResponse(
         simplejson.dumps(response_dict),
-        mimetype = 'application/javascript')
+        content_type = 'application/javascript')
 
 
 @require_GET
@@ -2517,7 +2517,7 @@ def gear_by_image(request, image_id):
 
     return HttpResponse(
         simplejson.dumps(response_dict),
-        mimetype = 'application/javascript')
+        content_type = 'application/javascript')
 
 
 @require_GET
@@ -2550,7 +2550,7 @@ def gear_by_make(request, make):
 
     return HttpResponse(
         simplejson.dumps(ret),
-        mimetype = 'application/javascript')
+        content_type = 'application/javascript')
 
 
 @require_GET
@@ -2559,7 +2559,7 @@ def gear_by_ids(request, ids):
     gear = [[str(x.id), x.get_make(), x.get_name()] for x in Gear.objects.filter(filters)]
     return HttpResponse(
         simplejson.dumps(gear),
-        mimetype = 'application/javascript')
+        content_type = 'application/javascript')
 
 
 @require_GET
@@ -2574,7 +2574,7 @@ def get_makes_by_type(request, klass):
     ret['makes'] = unique_items([x.get_make() for x in CLASS_LOOKUP[klass].objects.exclude(make = '').exclude(make = None)])
     return HttpResponse(
         simplejson.dumps(ret),
-        mimetype = 'application/javascript')
+        content_type = 'application/javascript')
 
 
 @require_GET
@@ -2679,7 +2679,7 @@ def gear_review_save(request):
         }
         return HttpResponse(
             simplejson.dumps(response_dict),
-            mimetype = 'application/javascript')
+            content_type = 'application/javascript')
 
     return ajax_fail()
 
@@ -2698,7 +2698,7 @@ def commercial_products_claim(request, id):
         }
         return HttpResponse(
             simplejson.dumps(response_dict),
-            mimetype = 'application/javascript')
+            content_type = 'application/javascript')
 
     form = ClaimCommercialGearForm(data = request.POST, user = request.user)
     try:
@@ -2747,7 +2747,7 @@ def commercial_products_claim(request, id):
             'images': gear_images(gear),
             'is_merge': form.cleaned_data['merge_with'] != '',
         }),
-        mimetype = 'application/javascript')
+        content_type = 'application/javascript')
 
 
 
@@ -2789,7 +2789,7 @@ def commercial_products_unclaim(request, id):
             'claimed_gear_ids': u','.join(str(x) for x in claimed_gear),
             'claimed_gear_ids_links': u', '.join('<a href="/gear/%s/">%s</a>' % (x, x) for x in claimed_gear),
         }),
-        mimetype = 'application/javascript')
+        content_type = 'application/javascript')
 
 
 @require_GET
@@ -2817,14 +2817,14 @@ def commercial_products_merge(request, from_id, to_id):
                 'claimed_gear_ids': u','.join(str(x) for x in claimed_gear),
                 'claimed_gear_ids_links': u', '.join('<a href="/gear/%s/">%s</a>' % (x, x) for x in claimed_gear),
             }),
-            mimetype = 'application/javascript')
+            content_type = 'application/javascript')
 
     return HttpResponse(
         simplejson.dumps({
             'success': False,
             'message': _("You can't merge a product to itself."),
         }),
-        mimetype = 'application/javascript')
+        content_type = 'application/javascript')
 
 
 @require_GET
@@ -2889,7 +2889,7 @@ def retailed_products_claim(request, id):
         }
         return HttpResponse(
             simplejson.dumps(response_dict),
-            mimetype = 'application/javascript')
+            content_type = 'application/javascript')
 
     form = ClaimRetailedGearForm(data = request.POST, user = request.user)
     try:
@@ -2935,7 +2935,7 @@ def retailed_products_claim(request, id):
             'images': gear_images(gear),
             'is_merge': form.cleaned_data['merge_with'] != '',
         }),
-        mimetype = 'application/javascript')
+        content_type = 'application/javascript')
 
 
 @require_GET
@@ -2979,7 +2979,7 @@ def retailed_products_unclaim(request, id):
             'claimed_gear_ids': u','.join(str(x) for x in claimed_gear),
             'claimed_gear_ids_links': u', '.join('<a href="/gear/%s/">%s</a>' % (x, x) for x in claimed_gear),
         }),
-        mimetype = 'application/javascript')
+        content_type = 'application/javascript')
 
 
 @require_GET
@@ -3010,14 +3010,14 @@ def retailed_products_merge(request, from_id, to_id):
                 'claimed_gear_ids': u','.join(str(x) for x in claimed_gear),
                 'claimed_gear_ids_links': u', '.join('<a href="/gear/%s/">%s</a>' % (x, x) for x in claimed_gear),
             }),
-            mimetype = 'application/javascript')
+            content_type = 'application/javascript')
 
     return HttpResponse(
         simplejson.dumps({
             'success': False,
             'message': _("You can't merge a product to itself."),
         }),
-        mimetype = 'application/javascript')
+        content_type = 'application/javascript')
 
 
 @login_required

@@ -4,7 +4,7 @@ import simplejson
 def ajax_response(context={}):
     return HttpResponse(
         simplejson.dumps(context),
-        mimetype='application/javascript')
+        content_type='application/javascript')
 
 
 def ajax_success(context={}):

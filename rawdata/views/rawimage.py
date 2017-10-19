@@ -75,7 +75,7 @@ class RawImageDeleteView(RestrictToSubscriberMixin, BaseDeleteView):
                 context['ids'] = ','.join(ids)
             return HttpResponse(
                 json.dumps(context),
-                mimetype = 'application/json')
+                content_type = 'application/json')
 
         return HttpResponseRedirect(self.get_success_url())
 

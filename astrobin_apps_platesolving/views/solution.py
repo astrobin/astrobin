@@ -72,7 +72,7 @@ class SolveView(base.View):
             'submission': solution.submission_id,
             'status': solution.status,
         }
-        return HttpResponse(simplejson.dumps(context), mimetype='application/json')
+        return HttpResponse(simplejson.dumps(context), content_type='application/json')
 
 
 class SolutionUpdateView(base.View):
@@ -86,7 +86,7 @@ class SolutionUpdateView(base.View):
             solution.save()
 
         context = {'status': status}
-        return HttpResponse(simplejson.dumps(context), mimetype='application/json')
+        return HttpResponse(simplejson.dumps(context), content_type='application/json')
 
 
 class SolutionFinalizeView(base.View):
@@ -124,7 +124,7 @@ class SolutionFinalizeView(base.View):
             except solution.content_type.model_class().DoesNotExist:
                 # Target image was deleted meanwhile
                 context = {'status': Solver.FAILED}
-                return HttpResponse(simplejson.dumps(context), mimetype='application/json')
+                return HttpResponse(simplejson.dumps(context), content_type='application/json')
 
             # Annotate image
             annotations_obj = solver.annotations(solution.submission_id)
@@ -153,7 +153,7 @@ class SolutionFinalizeView(base.View):
         solution.save()
 
         context = {'status': solution.status}
-        return HttpResponse(simplejson.dumps(context), mimetype='application/json')
+        return HttpResponse(simplejson.dumps(context), content_type='application/json')
 
 
 ###############################################################################
