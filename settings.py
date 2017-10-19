@@ -482,29 +482,6 @@ PIPELINE = {
     'JS_COMPRESSOR': 'pipeline.compressors.jsmin.SlimItCompressor'
 }
 
-ACTSTREAM_SETTINGS = {
-    'MODELS': (
-        'auth.user',
-        'astrobin.gear',
-        'astrobin.telescope',
-        'astrobin.camera',
-        'astrobin.mount',
-        'astrobin.filter',
-        'astrobin.software',
-        'astrobin.accessory',
-        'astrobin.focalreducer',
-        'astrobin.image',
-        'astrobin.imagerevision',
-        'rawdata.PublicDataPool',
-        'rawdata.RawImage',
-        'nested_comments.nestedcomment',
-        'reviews.revieweditem',
-        'toggleproperties.toggleproperty',
-        'astrobin_apps_groups.group',
-    ),
-
-}
-
 PAYPAL_TEST = DEBUG
 PAYPAL_DEBUG = PAYPAL_TEST
 
