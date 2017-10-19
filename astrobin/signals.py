@@ -15,7 +15,7 @@ from django.db.models.signals import (
 # Third party apps
 from pybb.models import Forum, Topic, Post
 from rest_framework.authtoken.models import Token
-from reviews.models import ReviewedItem
+from reviews.models import Review
 from toggleproperties.models import ToggleProperty
 from subscription.models import UserSubscription
 from subscription.signals import subscribed, paid
@@ -626,11 +626,11 @@ def forum_post_post_save(sender, instance, created, **kwargs):
 post_save.connect(forum_post_post_save, sender = Post)
 
 
-def reviewed_item_post_save(sender, instance, created, **kwargs):
+def review_post_save(sender, instance, created, **kwargs):
     verb = "VERB_WROTE_REVIEW"
     if created:
          add_story(instance.user,
                    verb = verb,
                    action_object = instance,
                    target = instance.content_object)
-post_save.connect(reviewed_item_post_save, sender = ReviewedItem)
+post_save.connect(review_post_save, sender = Review)
