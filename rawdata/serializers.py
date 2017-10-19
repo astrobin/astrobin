@@ -33,7 +33,7 @@ class RawImageSerializer(serializers.ModelSerializer):
                 _("You don't have any free space on AstroBin Rawdata. Consider upgrading your account."))
 
         try:
-            provided_hash = attrs['file_hash']
+            provided_hash = self.initial_data['file_hash']
         except KeyError:
             return attrs
 
