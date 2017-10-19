@@ -53,6 +53,7 @@ class RawImageSerializer(serializers.ModelSerializer):
 
     class Meta:
         model = RawImage
+        fields = '__all'
         read_only_fields = (
             'user',
             'original_filename',
