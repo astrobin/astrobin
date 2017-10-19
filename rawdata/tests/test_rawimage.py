@@ -78,7 +78,6 @@ class RawImageTest(TransactionTestCase):
         f, h = get_file()
         self.client.login(username = 'username_sub', password = 'passw0rd')
         response = test_response(self, reverse('api.rawdata.rawimage.list'), {'file': f}, 201)
-        self.assertEqual(os.path.exists(os.path.join(settings.RAWDATA_ROOT, response['file'])), True)
         self.client.logout()
         f.close()
 
