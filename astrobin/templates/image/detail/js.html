@@ -4,6 +4,9 @@
 {% load i18n %}
 {% load tags %}
 
+{% ifnotequal request.user image.user %} 
+    {% insert_hit_count_js_variables for image %}
+{% endifnotequal %}
 
 <script src="{{STATIC_URL}}nested_comments/js/nested_comments_app.js"></script>
 
@@ -90,10 +93,6 @@ $(document).ready(function() {
 
         textarea.val(content);
     });
-
-    {% ifnotequal request.user image.user %} 
-        {% insert_hit_count_js_variables for image %}
-    {% endifnotequal %}
 
     astrobin_common.init('{{image.user.username}}');
 

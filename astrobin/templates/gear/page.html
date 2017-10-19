@@ -254,10 +254,10 @@
 {% endblock %}
 
 {% block extra_js %}
+{% insert_hit_count_js_variables for gear %}
 <script src="{{STATIC_URL}}nested_comments/js/nested_comments_app.js"></script>
 <script type="text/javascript">
 $(document).ready(function() {
-    {% insert_hit_count_js_variables for gear %}
 
     var reviewFormOptions = {
         dataType: 'json',
