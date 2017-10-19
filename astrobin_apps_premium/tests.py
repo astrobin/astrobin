@@ -145,12 +145,12 @@ class PremiumTest(TestCase):
         self._assertMessage(response, "error unread", "You have reached your image count limit")
 
         # Deleting an image uploaded this year decreases the counter as expected
-        Image.all_objects.get(pk = 20).delete()
+        Image.all_objects.get(pk = 40).delete()
         profile = UserProfile.objects.get(pk = profile.pk)
         self.assertEqual(profile.premium_counter, settings.PREMIUM_MAX_IMAGES_FREE - 1)
 
         # But deleting an image uploaded before the subscription was created does not
-        image = Image.all_objects.get(pk = 19)
+        image = Image.all_objects.get(pk = 39)
         image.uploaded = image.uploaded - datetime.timedelta(days = 1)
         image.save()
         image.delete()
