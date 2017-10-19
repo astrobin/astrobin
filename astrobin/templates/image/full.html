@@ -103,7 +103,7 @@
         <script type="text/javascript">
             $(document).ready(function() {
                 astrobin_common.init_ajax_csrf_token();
-                {% get_hit_count_javascript for image %}
+                {% insert_hit_count_js_variables for image %}
 
                 {% if image.w > 0 %}
                 if ($(window).width() * .95 > {{image.w}}) {

@@ -6,7 +6,6 @@ from django.contrib import admin
 from django.contrib.auth import views as auth_views
 
 # Third party
-from hitcount.views import update_hit_count_ajax
 from tastypie.api import Api
 from threaded_messages.forms import ComposeForm as MessagesComposeForm
 from threaded_messages.views import batch_update as messages_batch_update
@@ -188,7 +187,7 @@ urlpatterns = [
     url(r'^comments/', include('django_comments.urls')),
     url(r'^contact/', include("contact_form.urls", namespace="contact_form")),
     url(r'^forum/', include('pybb.urls', namespace='pybb')),
-    url(r'^hitcount/$', update_hit_count_ajax, name='hitcount_update_ajax'),
+    url(r'hitcount/', include('hitcount.urls', namespace='hitcount')),
     url(r'^persistent_messages/', include('persistent_messages.urls')),
     url(r'^subscriptions/', include('subscription.urls')),
     url(r'^tinymce/', include('tinymce.urls')),
