@@ -318,7 +318,7 @@ class Gear(models.Model):
         reviews = Review.objects.filter(
             content_type = ContentType.objects.get(app_label = 'astrobin', model = 'gear'),
             content_id = slave.id
-        ).update(object_id = self.id)
+        ).update(content_id = self.id)
 
         # Fetch slave's master if this hard-merge's master doesn't have a soft-merge master
         if not self.master:
