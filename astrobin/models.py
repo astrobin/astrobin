@@ -248,8 +248,6 @@ class Gear(models.Model):
         blank = True,
     )
 
-    reviews = GenericRelation(Review)
-
     def __unicode__(self):
         make = self.get_make()
         name = self.get_name()
@@ -319,7 +317,7 @@ class Gear(models.Model):
         # Find matching gear reviews and move them to the master
         reviews = Review.objects.filter(
             content_type = ContentType.objects.get(app_label = 'astrobin', model = 'gear'),
-            object_id = slave.id
+            content_id = slave.id
         ).update(object_id = self.id)
 
         # Fetch slave's master if this hard-merge's master doesn't have a soft-merge master

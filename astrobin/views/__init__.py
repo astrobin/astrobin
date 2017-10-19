@@ -2358,12 +2358,12 @@ def gear_page(request, id, slug):
     all_images = Image.by_gear(gear, gear_type).filter(is_wip = False)
     show_commercial = (gear.commercial and gear.commercial.is_paid()) or (gear.commercial and gear.commercial.producer == request.user)
     content_type = ContentType.objects.get(app_label = 'astrobin', model = 'gear')
-    reviews = ReviewedItem.objects.filter(object_id = id, content_type = content_type)
+    reviews = Review.objects.filter(content_id = id, content_type = content_type)
 
     response_dict = {
         'gear': gear,
         'examples': all_images[:28],
-        'review_form': ReviewAddForm(instance = ReviewedItem(content_type = ContentType.objects.get_for_model(Gear), content_object = gear)),
+        'review_form': ReviewAddForm(instance = Review(content_type = ContentType.objects.get_for_model(Gear), content = gear)),
         'reviews': reviews,
         'content_type': ContentType.objects.get_for_model(Gear),
         'owners_count': UserProfile.objects.filter(**{user_attr_lookup[gear_type]: gear}).count(),
