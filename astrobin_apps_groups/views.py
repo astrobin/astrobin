@@ -331,6 +331,7 @@ class GroupAddRemoveImages(
         JSONResponseMixin, LoginRequiredMixin, RestrictToGroupMembersMixin,
         RestrictToNonAutosubmissionGroupsMixin, UpdateView):
     model = Group
+    fields = ('images',)
     template_name = 'astrobin_apps_groups/group_add_remove_images.html'
 
     def get_context_data(self, **kwargs):
