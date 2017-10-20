@@ -1,5 +1,8 @@
 #!/bin/bash
 
+# Please run this script as the user vagrant if installing in Vagrant, or as
+# root if running directly to install on a real server.
+
 SUDO='sudo -E'
 
 function astrobin_log {
@@ -10,7 +13,7 @@ function astrobin_err {
     local COLOR="tput setaf 1; tput setab 3; tput bold"
     local COLOR_RST="tput sgr 0"
 
-    astrobin_log "$(${COLOR})ERROR: $1$(${COLOR_RST})"
+    astrobin_log "ERROR: $1"
     exit 1
 }
 
@@ -101,6 +104,7 @@ function init_system {
     astrobin_log "Adding users..."
     if ! id -u astrobin >/dev/null 2>&1; then
         useradd -m -s /bin/bash -g astrobin -u 2000 astrobin
+        usermod -a -G sudo astrobin
     fi
 
     if ! id -u solr >/dev/null 2>&1; then
@@ -125,12 +129,12 @@ function init_system {
     chmod g+w /opt/solr
     chmod g+w /var/log/astrobin
 
-    astrobin_log "Customizing vagrant's home directory..."
-    if grep -q DebuggingServer /home/vagrant/.bashrc; then
+    astrobin_log "Customizing astrobin's home directory..."
+    if grep -q DebuggingServer /home/astrobin/.bashrc; then
         astrobin_log "Debug smpt server already setup"
     else
-        echo "nc -z 127.0.0.1 25 || $SUDO python -m smtpd -n -c DebuggingServer localhost:25 &" >> /home/vagrant/.bashrc
-        echo "nc -z 127.0.0.1 1025 || python -m smtpd -n -c DebuggingServer localhost:1025 &" >> /home/vagrant/.bashrc
+        echo "nc -z 127.0.0.1 25 || $SUDO python -m smtpd -n -c DebuggingServer localhost:25 &" >> /home/astrobin/.bashrc
+        echo "nc -z 127.0.0.1 1025 || python -m smtpd -n -c DebuggingServer localhost:1025 &" >> /home/astrobin/.bashrc
     fi
 
     astrobin_log "Setting locale..."
@@ -190,7 +194,7 @@ function apt {
 function pip {
     astrobin_log "Installing dependencies..."
 
-    $SUDO -u astrobin /bin/bash - <<"EOF"
+    $SUDO -H -u astrobin /bin/bash - <<"EOF"
     virtualenv --no-site-packages /venv/astrobin/dev
     . /venv/astrobin/dev/bin/activate
 
@@ -222,12 +226,13 @@ EOF
 }
 
 function postgres {
+    local PSQL_V="`psql -V | egrep -o '[0-9]{1,}\.[0-9]{1,}'`"
     # Setup postgresql
     astrobin_log "Creating postgres cluster..."
-    $SUDO pg_createcluster 9.3 main --start
+    $SUDO pg_createcluster $PSQL_V main --start
 
     astrobin_log "Copying postgres conf file..."
-    $SUDO cp /var/www/astrobin/conf/pg_hba.conf /etc/postgresql/9.3/main/
+    $SUDO cp /var/www/astrobin/conf/pg_hba.conf /etc/postgresql/$PSQL_V/main/
 
     function postgres_db {
         astrobin_log "Setting up database..."
@@ -353,7 +358,6 @@ function end {
     astrobin_log "### All done!"
     astrobin_log "#################################################################"
 }
-
 
 if [ "$1" != "1" ]; then
     exec 3>&1 &>/var/www/astrobin/vagrant.log
