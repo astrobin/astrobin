@@ -307,8 +307,7 @@ function astrobin {
     fi
 
     # Initialize db
-    /var/www/astrobin/manage.py 
-    /var/www/astrobin/manage.py migrate --fake-initial
+    /var/www/astrobin/manage.py migrate run-syncdb
     /var/www/astrobin/manage.py sync_translation_fields --noinput
 
     /var/www/astrobin/manage.py collectstatic --noinput
