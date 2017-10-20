@@ -121,7 +121,7 @@ olefile==0.44
 pbr==3.0.1
 ply==3.10
 psycopg2==2.7.1
-pybbm==0.18.4
+-e git+https://https://github.com/siovene/pybbm.git@astrobin#egg=pybbm
 pyflakes==1.5.0
 pyparsing==2.2.0
 pyquery==1.2.17
