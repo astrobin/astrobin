@@ -46,7 +46,7 @@ django-contrib-comments==1.8.0
 -e git+https://github.com/nephila/django-contrib-requestprovider.git@a8a6803ad042227d1c5583bcc3c7f4441678e035#egg=django_contrib_requestprovider-master
 django-countries==4.5
 django-debug-toolbar==1.8
--e git+https://github.com/siovene/django-dfp.git#egg=django_dfp-origin
+-e git+https://github.com/siovene/django-dfp.git@master#egg=django_dfp-origin
 django-easysettings==1.1
 django-el-pagination==3.1.0
 django-ember==0.3.1
