@@ -66,7 +66,7 @@ export ASTROBIN_HAYSTACK_SOLR_URL='http://127.0.0.1:8983/solr'
 export ASTROBIN_BROKER_URL='amqp://astrobin:s3cr3t@127.0.0.1:5672/astrobin'
 export ASTROBIN_CELERY_RESULT_DBURI='psql://${ASTROBIN_DATABASE_USER}:${ASTROBIN_DATABASE_PASSWORD}@${ASTROBIN_DATABASE_HOST}/${ASTROBIN_DATABASE_NAME}'
 
-# AstroBin uses Astormetry.net to plate-solve images. You can create an
+# AstroBin uses Astrometry.net to plate-solve images. You can create an
 # account there and get a key for free.
 export ASTROMETRY_NET_API_KEY='***CHANGE ME***'
 
