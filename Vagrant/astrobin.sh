@@ -70,6 +70,7 @@ function check {
         ASTROBIN_RAWDATA_ROOT
         ASTROBIN_PAYPAL_MERCHANT_ID
         ASTROBIN_MIN_INDEX_TO_LIKE
+        ASTROBIN_GOOGLE_ANALYTICS_ID
     )
 
     local FILES=(

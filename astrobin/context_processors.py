@@ -82,6 +82,7 @@ def common_variables(request):
         'PAYPAL_TEST': settings.PAYPAL_TEST,
         'IOTD_SHOW_CHOOSING_JUDGE': settings.IOTD_SHOW_CHOOSING_JUDGE,
         'SOLVING_ENABLED': settings.ASTROBIN_ENABLE_SOLVING,
+        'GOOGLE_ANALYTICS_ID': settings.GOOGLE_ANALYTICS_ID,
     }
 
     return d
