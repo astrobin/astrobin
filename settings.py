@@ -338,12 +338,7 @@ MESSAGE_STORAGE = 'persistent_messages.storage.PersistentMessageStorage'
 import djcelery
 djcelery.setup_loader()
 
-BROKER_HOST = 'localhost'
-BROKER_PORT = 5672
-BROKER_USER = os.environ['ASTROBIN_BROKER_USER']
-BROKER_PASSWORD = os.environ['ASTROBIN_BROKER_PASSWORD']
-BROKER_VHOST = 'astrobin'
-
+BROKER_URL = os.environ['ASTROBIN_BROKER_URL']
 CELERY_RESULT_BACKEND = 'database'
 CELERY_RESULT_DBURI = os.environ['ASTROBIN_CELERY_RESULT_DBURI']
 CELERY_IMPORTS = ('rawdata.tasks',)
@@ -351,9 +346,8 @@ CELERY_QUEUES = {"default" : {"exchange":"default", "binding_key":"default"},}
 CELERY_DEFAULT_QUEUE = "default"
 
 CELERYD_NODES = "w1 w2 w3 w4"
-CELERYD_OPTS = "--time-limit=300 --concurrency=8 --verbosity=2 --loglevel=DEBUG"
+CELERYD_OPTS = "--time-limit=300 --concurrency=8 --verbosity=2 --loglevel=DEBUG --logfile=celeryd.log"
 CELERYD_CHDIR = ASTROBIN_BASE_PATH
-CELERYD_LOG_FILE = "celeryd.log"
 CELERYD_PID_FILE = "celeryd.pid"
 CELERYD = ASTROBIN_BASE_PATH + "manage.py celeryd"
 
