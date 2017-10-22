@@ -71,4 +71,5 @@ export ASTROBIN_RAWDATA_ROOT='/rawdata/files'
 # The PayPal merchant ID used to get payments for donations, Premium, and Raw Data
 export ASTROBIN_PAYPAL_MERCHANT_ID='***CHANGE ME OPTIONALLY***'
 
+# The minimum value of AstroBin index allowed to Like images
 export ASTROBIN_MIN_INDEX_TO_LIKE='1.00'
