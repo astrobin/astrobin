@@ -1999,13 +1999,10 @@ class UserProfile(models.Model):
     class Meta:
         app_label = 'astrobin'
 
-# Please note: the user profile is created by pybbm's signals.py
-"""
 def create_user_profile(sender, instance, created, **kwargs):
     if created:
         profile, created = UserProfile.objects.get_or_create(user=instance)
 post_save.connect(create_user_profile, sender=User)
-"""
 
 
 class Location(models.Model):
