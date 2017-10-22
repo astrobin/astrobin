@@ -136,8 +136,7 @@ from astrobin.api import (
     ImageRevisionResource,
     LocationResource,
     CollectionResource)
-from astrobin.forms import AdvancedSearchForm
-from astrobin.search import SearchView
+from astrobin.search import AstroBinSearchView
 
 admin.autodiscover()
 
@@ -266,7 +265,7 @@ urlpatterns = [
     ### SEARCH VIEWS                                                        ###
     ###########################################################################
 
-    url(r'^search/', SearchView(form_class=AdvancedSearchForm), name='haystack_search'),
+    url(r'^search/', AstroBinSearchView.as_view(), name='haystack_search'),
 
     ###########################################################################
     ### EXPLORE VIEWS                                                       ###
