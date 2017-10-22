@@ -1,3 +1,5 @@
+from __future__ import absolute_import
+
 # Python
 import tempfile, zipfile
 
@@ -5,14 +7,14 @@ import tempfile, zipfile
 from django.core.files import File
 
 # Third party apps
-from celery.task import task
+from celery import shared_task
 import PySide.QtCore
 import PyABC as abc
 
 # This app
 from .models import RawImage, TemporaryArchive
 
-@task()
+@shared_task()
 def index_raw_image(id):
     try:
         image = RawImage.objects.get(id = id)
@@ -34,7 +36,7 @@ def index_raw_image(id):
     image.save()
 
 
-@task()
+@shared_task()
 def prepare_zip(image_ids, owner_id, temp_archive_id, folder_or_pool = None):
     temp = tempfile.NamedTemporaryFile()
     archive = zipfile.ZipFile(temp, 'w', zipfile.ZIP_DEFLATED)
