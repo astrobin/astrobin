@@ -72,9 +72,8 @@ else:
 
 DEFAULT_CHARSET = 'utf-8'
 
-ASTROBIN_BASE_URL = 'http://www.astrobin.com'
-ASTROBIN_SHORT_BASE_URL = 'http://astrob.in'
-
+ASTROBIN_BASE_URL = os.environ['ASTROBIN_BASE_URL']
+ASTROBIN_SHORT_BASE_URL = os.environ['ASTROBIN_SHORT_BASE_URL']
 ASTROBIN_BASE_PATH = os.path.dirname(__file__)
 
 # Local time zone for this installation. Choices can be found here:

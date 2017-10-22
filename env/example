@@ -1,6 +1,8 @@
 # Do not modify the next line
 export DJANGO_SETTINGS_MODULE="settings"
 
+export ASTROBIN_BASE_URL='127.0.0.1'
+export ASTROBIN_SHORT_BASE_URL='127.0.0.1'
 export ASTROBIN_HOST='127.0.0.1'
 export ASTROBIN_DEBUG='true'
 export ASTROBIN_DEBUG_TOOLBAR='false'

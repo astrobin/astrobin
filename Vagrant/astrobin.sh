@@ -42,6 +42,8 @@ function check {
 
     local VARS=(
         ASTROBIN_DEBUG
+        ASTROBIN_BASE_URL
+        ASTROBIN_SHORT_BASE_URL
         ASTROBIN_HOST
         ASTROBIN_SERVER_EMAIL
         ASTROBIN_DEFAULT_FROM_EMAIL
