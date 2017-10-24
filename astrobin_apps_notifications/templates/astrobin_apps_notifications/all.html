@@ -1,13 +1,13 @@
 {% extends 'base.html' %}
 
 {% load i18n %}
-{% load pagination_tags %}
+{% load el_pagination_tags %}
 {% load astrobin_apps_notifications_tags %}
 
 {% block title %}{% trans "Notifications" %}{% endblock %}
 
 {% block content %}
-    {% autopaginate notification_list 25 %}
+    {% paginate notification_list %}
         <h1>{% trans "Notifications" %}</h1>
 
         <table class="table table-striped notifications">
@@ -43,6 +43,6 @@
         </div>
 
         <div class="pagination pagination-centered">
-            {% paginate %}
+            {% get_pages %}
         </div>
 {% endblock %}
