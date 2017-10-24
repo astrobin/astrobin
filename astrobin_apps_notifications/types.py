@@ -174,7 +174,11 @@ NOTICE_TYPES = (
         _("New forum topic in a group you are a member of"),
         '',
         2,
+    ),
+    (
+        'received_email',
+        _("You have received a new private message"),
+        '',
+        2
     )
 )
-
-
