@@ -75,7 +75,7 @@ class HasSolutionMixin(object):
 
 def image_upload_path(instance, filename):
     ext = filename.split('.')[-1]
-    return "%d/%d/%s.%s" % (instance.user.id, date.today().year, uuid.uuid4(), ext)
+    return "images/%d/%d/%s.%s" % (instance.user.id, date.today().year, uuid.uuid4(), ext)
 
 
 LICENSE_CHOICES = (
@@ -1103,7 +1103,7 @@ class Image(HasSolutionMixin, models.Model):
                     pass
         else:
             thumbnailer = get_thumbnailer(OverwritingFileSystemStorage(
-                location = settings.UPLOADS_DIRECTORY), name)
+                location = os.path.join(settings.UPLOADS_DIRECTORY)), name)
 
         if self.watermark and 'watermark' in options:
             options['watermark_text'] = self.watermark_text

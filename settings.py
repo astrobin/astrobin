@@ -129,9 +129,9 @@ MEDIA_URL = '/media/'
 STATIC_ROOT = MEDIA_ROOT + 'static/'
 STATIC_URL = MEDIA_URL + 'static/'
 
-IMAGES_URL = MEDIA_URL + 'images/'
+IMAGES_URL = MEDIA_URL
 IMAGE_CACHE_DIRECTORY = MEDIA_ROOT + 'imagecache/'
-UPLOADS_DIRECTORY = MEDIA_ROOT + 'images/'
+UPLOADS_DIRECTORY = MEDIA_ROOT
 
 # URL that handles the media served from MEDIA_ROOT. Make sure to use a
 # trailing slash if there is a path component (optional in other cases).
@@ -379,9 +379,14 @@ TINYMCE_JS_ROOT = MEDIA_ROOT + '/js/tiny_mce'
 HITCOUNT_KEEP_HIT_ACTIVE = { 'hours': 1 }
 HITCOUNT_HITS_PER_IP_LIMIT = 0
 
-AVATAR_GRAVATAR_BACKUP = False
 AVATAR_DEFAULT_URL = 'images/astrobin-default-avatar.png?v=1'
-AVATAR_AUTO_GENERATE_SIZES = (64,)
+AVATAR_STORAGE_DIR = 'images/avatars'
+AVATAR_AUTO_GENERATE_SIZES = (64, 80, 194)
+AVATAR_CACHE_ENABLED = not DEBUG
+AVATAR_PROVIDERS = (
+    'avatar.providers.PrimaryAvatarProvider',
+    'avatar.providers.DefaultAvatarProvider',
+)
 
 if LOCAL_STATIC_STORAGE:
     STATICFILES_STORAGE = 'pipeline.storage.PipelineStorage'

@@ -53,7 +53,7 @@ export ASTROBIN_AWS_STORAGE_BUCKET_NAME='cdn.astrobin.com'
 # http://my_bucket.s3.amazonaws.com/...
 #
 # IMPORTANT: You only need these if you are using Amazon S3.
-export ASTROBIN_IMAGES_URL='http://cdn.astrobin.com/images/'
+export ASTROBIN_IMAGES_URL='http://cdn.astrobin.com/'
 export ASTROBIN_CDN_URL='http://cdn.astrobin.com/'
 
 # AstroBin can import data from Flickr
