@@ -141,7 +141,6 @@ function init_system {
     if grep -q DebuggingServer /home/astrobin/.bashrc; then
         astrobin_log "Debug smpt server already setup"
     else
-        echo "nc -z 127.0.0.1 25 || $SUDO python -m smtpd -n -c DebuggingServer localhost:25 &" >> /home/astrobin/.bashrc
         echo "nc -z 127.0.0.1 1025 || python -m smtpd -n -c DebuggingServer localhost:1025 &" >> /home/astrobin/.bashrc
     fi
 
