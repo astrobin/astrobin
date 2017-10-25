@@ -1666,10 +1666,17 @@ def user_profile_save_gear(request):
 def user_profile_flickr_import(request):
     from django.core.files import File
     from django.core.files.temp import NamedTemporaryFile
+    from astrobin_apps_premium.templatetags.astrobin_apps_premium_tags import is_free
 
     response_dict = {
         'readonly': settings.READONLY_MODE
     }
+
+    if is_free(request.user):
+        return render_to_response(
+                "user/profile/flickr_import.html",
+                response_dict,
+                context_instance=RequestContext(request))
 
     flickr = flickrapi.FlickrAPI(settings.FLICKR_API_KEY,
                                  settings.FLICKR_SECRET,
