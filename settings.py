@@ -259,6 +259,7 @@ INSTALLED_APPS = [
     'paypal.standard.ipn',
     'subscription',
     'ember',
+    'django_filters',
     'rest_framework',
     'rest_framework.authtoken',
     'easy_thumbnails',

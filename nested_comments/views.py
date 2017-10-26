@@ -3,6 +3,7 @@ from django.shortcuts import get_object_or_404
 from django.views.generic import *
 
 # Third party apps
+from django_filters.rest_framework import DjangoFilterBackend
 from rest_framework import generics
 from rest_framework.decorators import api_view
 from rest_framework import permissions
@@ -26,6 +27,7 @@ class NestedCommentList(generics.ListCreateAPIView):
     model = NestedComment
     queryset = NestedComment.objects.order_by('pk')
     serializer_class = NestedCommentSerializer
+    filter_backends = (DjangoFilterBackend,)
     filter_fields = ('content_type', 'object_id',)
     permission_classes = (permissions.IsAuthenticatedOrReadOnly,
                           IsOwnerOrReadOnly,)
