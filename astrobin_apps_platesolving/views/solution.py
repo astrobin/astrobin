@@ -173,4 +173,4 @@ class SolutionDetail(generics.RetrieveUpdateDestroyAPIView):
     model = Solution
     serializer_class = SolutionSerializer
     permission_classes = (permissions.IsAuthenticatedOrReadOnly,)
-
+    queryset = Solution.objects.all()
