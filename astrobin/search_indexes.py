@@ -541,7 +541,7 @@ class UserIndex(SearchIndex, Indexable):
     def prepare_first_acquisition_date(self, obj):
         l = []
         for i in Image.objects.filter(user = obj):
-            l.append(_prepare_first_acquisition_date(obj))
+            l.append(_prepare_first_acquisition_date(i))
         if len(l) == 0:
             return None
         return min(l)
@@ -549,7 +549,7 @@ class UserIndex(SearchIndex, Indexable):
     def prepare_last_acquisition_date(self, obj):
         l = []
         for i in Image.objects.filter(user = obj):
-            l.append(_prepare_last_acquisition_date(obj))
+            l.append(_prepare_last_acquisition_date(i))
         if len(l) == 0:
             return None
         return max(l)
