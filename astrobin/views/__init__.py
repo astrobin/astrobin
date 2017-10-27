@@ -1900,11 +1900,12 @@ def stats(request):
     response_dict = {}
 
     sqs = SearchQuerySet()
-    gs = GlobalStat.objects.all()[0]
+    gs = GlobalStat.objects.first()
 
-    response_dict['total_users'] = gs.users
-    response_dict['total_images'] = gs.images
-    response_dict['total_integration'] = gs.integration
+    if gs:
+        response_dict['total_users'] = gs.users
+        response_dict['total_images'] = gs.images
+        response_dict['total_integration'] = gs.integration
 
     sort = '-user_integration'
     if 'sort' in request.GET:
