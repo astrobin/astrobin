@@ -1,7 +1,6 @@
 {% extends 'base.html' %}
 {% load i18n %}
 {% load tags %}
-{% load pagination_tags %}
 {% load avatar_tags %}
 {% load markup %}
 
@@ -25,10 +24,5 @@
             {{ affiliate.company_description|markdown|linebreaks }}
         </div>
     {% endfor %}
-
-    <div class="pagination pagination-centered">
-        {% paginate 4 %}
-    </div>
-
 {% endblock %}
 
