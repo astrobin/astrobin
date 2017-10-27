@@ -110,7 +110,9 @@ register.inclusion_tag('inclusion_tags/image_list.html', takes_context=True)(ima
 
 
 @register.inclusion_tag('inclusion_tags/search_image_list.html', takes_context = True)
-def search_image_list(context, object_list, paginate = True, **kwargs):
+def search_image_list(context, paginate = True, **kwargs):
+    object_list = context['object_list']
+
     user_list  = [x for x in object_list if x != None and x.verbose_name == 'User']
     gear_list  = [x for x in object_list if x != None and x.verbose_name == 'Gear']
     image_list = [x for x in object_list if x != None and x.verbose_name == 'Image']

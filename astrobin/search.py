@@ -38,8 +38,3 @@ class AstroBinSearchView(SearchView):
             sqs = sqs.order_by(order_by)
 
         return sqs
-
-    def get_context_data(self, *args, **kwargs):
-	context = super(AstroBinSearchView, self).get_context_data(*args, **kwargs)
-        return context
-
