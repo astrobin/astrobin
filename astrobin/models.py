@@ -713,7 +713,6 @@ class Image(HasSolutionMixin, models.Model):
         'astrobin.Location',
         verbose_name = _("Locations"),
         help_text = _("Drag items from the right side to the left side, or click on the plus sign."),
-        null = True,
         blank = True,
     )
 
@@ -782,15 +781,15 @@ class Image(HasSolutionMixin, models.Model):
     )
 
     # gear
-    imaging_telescopes = models.ManyToManyField(Telescope, null=True, blank=True, related_name='imaging_telescopes', verbose_name=_("Imaging telescopes or lenses"))
-    guiding_telescopes = models.ManyToManyField(Telescope, null=True, blank=True, related_name='guiding_telescopes', verbose_name=_("Guiding telescopes or lenses"))
-    mounts = models.ManyToManyField(Mount, null=True, blank=True, verbose_name=_("Mounts"))
-    imaging_cameras = models.ManyToManyField(Camera, null=True, blank=True, related_name='imaging_cameras', verbose_name=_("Imaging cameras"))
-    guiding_cameras = models.ManyToManyField(Camera, null=True, blank=True, related_name='guiding_cameras', verbose_name=_("Guiding cameras"))
-    focal_reducers = models.ManyToManyField(FocalReducer, null=True, blank=True, verbose_name=_("Focal reducers"))
-    software = models.ManyToManyField(Software, null=True, blank=True, verbose_name=_("Software"))
-    filters = models.ManyToManyField(Filter, null=True, blank=True, verbose_name=_("Filters"))
-    accessories = models.ManyToManyField(Accessory, null=True, blank=True, verbose_name=_("Accessories"))
+    imaging_telescopes = models.ManyToManyField(Telescope, blank=True, related_name='imaging_telescopes', verbose_name=_("Imaging telescopes or lenses"))
+    guiding_telescopes = models.ManyToManyField(Telescope, blank=True, related_name='guiding_telescopes', verbose_name=_("Guiding telescopes or lenses"))
+    mounts = models.ManyToManyField(Mount, blank=True, verbose_name=_("Mounts"))
+    imaging_cameras = models.ManyToManyField(Camera, blank=True, related_name='imaging_cameras', verbose_name=_("Imaging cameras"))
+    guiding_cameras = models.ManyToManyField(Camera, blank=True, related_name='guiding_cameras', verbose_name=_("Guiding cameras"))
+    focal_reducers = models.ManyToManyField(FocalReducer, blank=True, verbose_name=_("Focal reducers"))
+    software = models.ManyToManyField(Software, blank=True, verbose_name=_("Software"))
+    filters = models.ManyToManyField(Filter, blank=True, verbose_name=_("Filters"))
+    accessories = models.ManyToManyField(Accessory, blank=True, verbose_name=_("Accessories"))
 
     user = models.ForeignKey(User)
 
@@ -1425,10 +1424,9 @@ class Collection(models.Model):
 
     images = models.ManyToManyField(
         Image,
-        null = True,
-        blank = True,
         verbose_name = _("Images"),
         related_name = 'collections',
+        blank = True,
     )
 
     cover = models.ForeignKey(
@@ -1809,13 +1807,13 @@ class UserProfile(models.Model):
     )
 
     # Gear
-    telescopes = models.ManyToManyField(Telescope, null=True, blank=True, verbose_name=_("Telescopes and lenses"), related_name='telescopes')
-    mounts = models.ManyToManyField(Mount, null=True, blank=True, verbose_name=_("Mounts"), related_name='mounts')
-    cameras = models.ManyToManyField(Camera, null=True, blank=True, verbose_name=_("Cameras"), related_name='cameras')
-    focal_reducers = models.ManyToManyField(FocalReducer, null=True, blank=True, verbose_name=_("Focal reducers"), related_name='focal_reducers')
-    software = models.ManyToManyField(Software, null=True, blank=True, verbose_name=_("Software"), related_name='software')
-    filters = models.ManyToManyField(Filter, null=True, blank=True, verbose_name=_("Filters"), related_name='filters')
-    accessories = models.ManyToManyField(Accessory, null=True, blank=True, verbose_name=_("Accessories"), related_name='accessories')
+    telescopes = models.ManyToManyField(Telescope, blank=True, verbose_name=_("Telescopes and lenses"), related_name='telescopes')
+    mounts = models.ManyToManyField(Mount, blank=True, verbose_name=_("Mounts"), related_name='mounts')
+    cameras = models.ManyToManyField(Camera, blank=True, verbose_name=_("Cameras"), related_name='cameras')
+    focal_reducers = models.ManyToManyField(FocalReducer, blank=True, verbose_name=_("Focal reducers"), related_name='focal_reducers')
+    software = models.ManyToManyField(Software, blank=True, verbose_name=_("Software"), related_name='software')
+    filters = models.ManyToManyField(Filter, blank=True, verbose_name=_("Filters"), related_name='filters')
+    accessories = models.ManyToManyField(Accessory, blank=True, verbose_name=_("Accessories"), related_name='accessories')
 
     default_frontpage_section = models.CharField(
         choices = (

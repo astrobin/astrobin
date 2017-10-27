@@ -97,37 +97,32 @@ class Group(models.Model):
 
     moderators = models.ManyToManyField(
         User,
-        null = True,
-        blank = True,
         related_name = 'moderated_group_set',
+        blank = True,
     )
 
     members = models.ManyToManyField(
         User,
-        null = True,
-        blank = True,
         related_name = 'joined_group_set',
+        blank = True,
     )
 
     invited_users = models.ManyToManyField(
         User,
-        null = True,
-        blank = True,
         related_name = 'invited_group_set',
+        blank = True,
     )
 
     join_requests = models.ManyToManyField(
         User,
-        null = True,
-        blank = True,
         related_name = 'join_requested_group_set',
+        blank = True,
     )
 
     images = models.ManyToManyField(
         Image,
-        null = True,
-        blank = True,
         related_name = 'part_of_group_set',
+        blank = True,
     )
 
     forum = models.OneToOneField(
