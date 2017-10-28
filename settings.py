@@ -405,7 +405,7 @@ PIPELINE = {
             'source_filenames': (
                 'common/js/handlebars-1.0.rc.1.js',
                 'common/js/ember-1.0.0-pre.2.js',
-                'common/fancybox/jquery.fancybox.js/',
+                'common/fancybox/jquery.fancybox.js',
 
                 'astrobin_apps_images/js/astrobin_apps_images.js',
                 'astrobin_apps_images/js/jquery.capty.js',
