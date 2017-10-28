@@ -155,8 +155,8 @@ if AWS_S3_ENABLED:
     AWS_S3_SECURE_URLS = False
     AWS_QUERYSTRING_AUTH = False
 
-    from S3 import CallingFormat
-    AWS_CALLING_FORMAT = CallingFormat.SUBDOMAIN
+    AWS_S3_CALLING_FORMAT = 'boto.s3.connection.OrdinaryCallingFormat'
+    AWS_S3_HOST = 's3.amazonaws.com'
 
     # see http://developer.yahoo.com/performance/rules.html#expires
     AWS_HEADERS = {
