@@ -1892,11 +1892,22 @@ class UserProfile(models.Model):
     @property
     def time_zone(self):
         import pytz
+        from datetime import timedelta
 
-        if self.timezone is None:
+        tz = self.timezone
+        if tz is None:
             return 0
 
-        return pytz.timezone(self.timezone).utcoffset(datetime.now()).seconds / 3600
+        now = datetime.now()
+        try:
+            offset = pytz.timezone(tz).utcoffset(now)
+        except (pytz.NonExistentTimeError, pytz.AmbiguousTimeError):
+            # If you're really unluckly, this offset results in a time that
+            # doesn't actually exist because it's within the hour that gets
+            # skipped when you enter DST.
+            offset = pytz.timezone(tz).utcoffset(now + timedelta(hours=1))
+
+        return offset.seconds / 3600
 
     # PYBBM fields
     signature = models.TextField(
