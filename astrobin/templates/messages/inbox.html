@@ -10,7 +10,7 @@
 {% block container_extra_classes %}has-subnav{% endblock %}
 
 {% block content %}
-    {% paginate thread_list %}
+    {% paginate 50 thread_list %}
 
     <div class="subnav subnav-fixed">
         <ul class="nav nav-pills">
@@ -69,6 +69,6 @@
     </table>
 
     <div class="pagination pagination-centered">
-        {% get_pages %}
+        {% show_pages %}
     </div>
 {% endblock %}

@@ -617,8 +617,8 @@ THUMBNAIL_QUALITY = 100
 THUMBNAIL_SUBDIR = 'thumbs'
 THUMBNAIL_DEFAULT_STORAGE = DEFAULT_FILE_STORAGE
 
-ENDLESS_PAGINATION_PER_PAGE = 35
-ENDLESS_PAGINATION_LOADING = '<img src="' + STATIC_URL + 'common/images/ajax-loader-bar.gif" alt="..." />'
+EL_PAGINATION_PER_PAGE = 35
+EL_PAGINATION_LOADING = '<img src="' + STATIC_URL + 'common/images/ajax-loader-bar.gif" alt="..." />'
 
 TOGGLEPROPERTIES = {
     "bookmark": {

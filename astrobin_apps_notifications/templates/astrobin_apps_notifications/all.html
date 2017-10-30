@@ -7,7 +7,7 @@
 {% block title %}{% trans "Notifications" %}{% endblock %}
 
 {% block content %}
-    {% paginate notification_list %}
+    {% paginate 20 notification_list %}
         <h1>{% trans "Notifications" %}</h1>
 
         <table class="table table-striped notifications">
@@ -43,6 +43,6 @@
         </div>
 
         <div class="pagination pagination-centered">
-            {% get_pages %}
+            {% show_pages %}
         </div>
 {% endblock %}
