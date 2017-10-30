@@ -86,7 +86,7 @@ def _prepare_first_acquisition_date(obj):
     elif solar_system_acquisition:
         date = solar_system_acquisition.date
 
-    return date
+    return date if date else datetime.date.min
 
 def _prepare_last_acquisition_date(obj):
     deep_sky_acquisitions = DeepSky_Acquisition.objects.filter(image=obj)
@@ -107,7 +107,7 @@ def _prepare_last_acquisition_date(obj):
     elif solar_system_acquisition:
         date = solar_system_acquisition.date
 
-    return date if date else datetime.datetime.min
+    return date if date else datetime.date.min
 
 def _prepare_views(obj, content_type):
     views = 0
