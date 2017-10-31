@@ -2698,7 +2698,7 @@ def gear_review_save(request):
 @login_required
 @user_passes_test(lambda u: user_is_producer(u))
 def commercial_products_claim(request, id):
-    from templatetags.tags import gear_owners, gear_images
+    from astrobin.templatetags.tags import gear_owners, gear_images
 
     def error(form):
         from bootstrap_toolkit.templatetags.bootstrap_toolkit import as_bootstrap
@@ -2889,7 +2889,7 @@ def commercial_products_save(request, id):
 @login_required
 @user_passes_test(lambda u: user_is_retailer(u))
 def retailed_products_claim(request, id):
-    from templatetags.tags import gear_owners, gear_images
+    from astrobin.templatetags.tags import gear_owners, gear_images
 
     def error(form):
         from bootstrap_toolkit.templatetags.bootstrap_toolkit import as_bootstrap
