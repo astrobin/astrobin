@@ -1,5 +1,5 @@
 # Do not modify the next line
-export DJANGO_SETTINGS_MODULE="settings"
+export DJANGO_SETTINGS_MODULE='settings'
 
 export ASTROBIN_BASE_URL='127.0.0.1'
 export ASTROBIN_SHORT_BASE_URL='127.0.0.1'
@@ -35,8 +35,8 @@ export ASTROBIN_EMAIL_USE_TLS='false'
 # free for development purposes, because the first GB is always free.
 #
 # IMPORTANT: You only need this if you are using Amazon S3.
-export ASTROBIN_AWS_S3_ENABLED="false"
-export ASTROBIN_LOCAL_STATIC_STORAGE="true"
+export ASTROBIN_AWS_S3_ENABLED='false'
+export ASTROBIN_LOCAL_STATIC_STORAGE='true'
 export ASTROBIN_AWS_ACCESS_KEY_ID='***CHANGE ME OPTIONALLY***'
 export ASTROBIN_AWS_SECRET_ACCESS_KEY='***CHANGE ME OPTIONALLY***'
 
