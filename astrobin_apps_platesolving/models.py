@@ -112,7 +112,7 @@ class Solution(models.Model):
     )
 
     skyplot_zoom1 = models.ImageField(
-        upload_to = 'skyplots',
+        upload_to = 'images/skyplots',
         null = True,
         blank = True,
     )
