@@ -14,7 +14,7 @@ import persistent_messages
 
 
 def push_notification(recipients, notice_type, data):
-    data.update({'notices_url': settings.ASTROBIN_BASE_URL + '/'})
+    data.update({'notices_url': settings.ASTROBIN_BASE_URL})
 
     # Send as email
     notification.send(recipients, notice_type, data)
