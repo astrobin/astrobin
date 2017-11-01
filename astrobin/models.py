@@ -1038,6 +1038,8 @@ class Image(HasSolutionMixin, models.Model):
         options = settings.THUMBNAIL_ALIASES[''][alias].copy()
 
         field = self.get_thumbnail_field(revision_label);
+        if not field.name.startswith('images/'):
+            field.name = 'images/' + field.name
 
         local_path = None
         name = field.name
@@ -1071,7 +1073,7 @@ class Image(HasSolutionMixin, models.Model):
                 log.debug("Image %d: getting remote file..." % self.id)
 
                 # First try to get the file via URL, because that might hit the CloudFlare cache.
-                url = settings.IMAGES_URL + field.name
+                url = settings.IMAGES_URL + name
                 log.debug("Image %d: trying URL %s..." % (self.id, url))
                 headers = { 'User-Agent': 'Mozilla/5.0' }
                 req = urllib2.Request(url, None, headers)
@@ -1139,6 +1141,8 @@ class Image(HasSolutionMixin, models.Model):
         options = thumbnail_settings.copy()
         revision_label = options.get('revision_label', 'final')
         field = self.get_thumbnail_field(revision_label);
+        if not field.name.startswith('images/'):
+            field.name = 'images/' + field.name
 
         # For compatibility:
         if alias in ('revision', 'runnerup'):

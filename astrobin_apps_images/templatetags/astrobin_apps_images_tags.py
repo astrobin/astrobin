@@ -167,6 +167,8 @@ def astrobin_image(context, image, alias, **kwargs):
     # Determine whether this is an animated gif, and we should show it as such
     field = image.get_thumbnail_field(revision)
     animated = False
+    if not field.name.startswith('images/'):
+        field.name = 'images/' + field.name
     if field.name.lower().endswith('.gif') and alias in ('regular', 'hd', 'real'):
         try:
             gif = PILImage.open(field.file)
