@@ -670,10 +670,26 @@ PYBB_SMILES = {
 PYBB_TOPIC_PAGE_SIZE = 25
 PYBB_FORUM_PAGE_SIZE = 50
 
-def pybb_premoderation(user, post):
-    index = user.userprofile.get_scores()['user_scores_index']
-    return index >= 1.00
+def pybb_premoderation(user, post_content):
+    # Paying members always approved
+    from astrobin_apps_premium.templatetags.astrobin_apps_premium_tags import (
+        is_lite, is_premium)
+    if is_lite(user) or is_premium(user):
+        return True
 
+    # Users with sufficient index are always approved
+    from django.conf import settings
+    index = user.userprofile.get_scores()['user_scores_index']
+    if index >= settings.MIN_INDEX_TO_LIKE:
+        return True
+
+    # Users that have had 5 messages approved before are always approved
+    from pybb.models import Post
+    posts = Post.objects.filter(user = user, on_moderation = False)
+    if posts.count() >= 5:
+        return True
+
+    return False
 PYBB_PREMODERATION = pybb_premoderation
 
 if TESTING:
