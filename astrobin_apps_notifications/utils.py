@@ -4,11 +4,11 @@ import urllib2
 
 # Django
 from django.conf import settings
+from django.template.loader import render_to_string
 
 # Third party
 from gadjo.requestprovider.signals import get_request
 from notification import models as notification
-from notification.models import get_formatted_messages
 from persistent_messages.models import Message
 import persistent_messages
 
@@ -26,8 +26,22 @@ def push_notification(recipients, notice_type, data):
         # This may happen during unit testing
         return
 
-    messages = get_formatted_messages(['notice.html'],
-        notice_type, data)
+    def get_formatted_messages(formats, label, context):
+        """
+        Returns a dictionary with the format identifier as the key. The values are
+        are fully rendered templates with the given context.
+        """
+        format_templates = {}
+        for fmt in formats:
+            # conditionally turn off autoescaping for .txt extensions in format
+            if fmt.endswith(".txt"):
+                context.autoescape = False
+            format_templates[fmt] = render_to_string((
+                "notification/%s/%s" % (label, fmt),
+                "notification/%s" % fmt), context=context)
+        return format_templates
+
+    messages = get_formatted_messages(['notice.html'], notice_type, data)
 
     for recipient in recipients:
         persistent_messages.add_message(
