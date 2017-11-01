@@ -49,7 +49,7 @@ django-debug-toolbar==1.8
 -e git+https://github.com/siovene/django-dfp.git@master#egg=django_dfp-origin
 django-easysettings==1.1
 django-el-pagination==3.1.0
-django-ember==0.3.1
+-e git+https://github.com/siovene/django-ember.git@b925ecd22c8008ccb339a4977d0081972c58f39f#egg=django-ember
 -e git+https://github.com/siovene/django.js.git#egg=django.js
 django-filter==1.1.0
 django-followit==0.2.1
