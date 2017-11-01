@@ -5,6 +5,9 @@
 
 SUDO='sudo -E'
 
+ROOT="/var/www/astrobin"
+DEV="${ROOT}/env/dev"
+
 function astrobin_log {
     echo -e " - $1" >&3
 }
@@ -29,9 +32,7 @@ function begin {
 }
 
 function check {
-    local ROOT="/var/www/astrobin"
     local EXAMPLE="${ROOT}/env/example"
-    local DEV="${ROOT}/env/dev"
     local GUNICORN="${ROOT}/conf/supervisord/gunicorn.conf"
     local CELERY="${ROOT}/conf/supervisord/celeryd_default.conf"
 
@@ -68,6 +69,7 @@ function check {
         ASTROBIN_FLICKR_API_KEY
         ASTROBIN_FLICKR_SECRET
         ASTROBIN_HAYSTACK_SOLR_URL
+        ASTROBIN_BROKER_PASSWORD
         ASTROBIN_BROKER_URL
         ASTROBIN_CELERY_RESULT_DBURI
         ASTROMETRY_NET_API_KEY
@@ -250,8 +252,9 @@ EOF
     }
 
     function postgres_priv {
-        $SUDO -u postgres psql <<"EOF"
-        alter user astrobin with encrypted password 's3cr3t';
+        local PASSWORD=`grep "export *ASTROBIN_DATABASE_PASSWORD" $DEV | tr "'" '"' | awk -F\" '{print $2}'`
+        $SUDO -u postgres psql <<EOF
+        alter user astrobin with encrypted password '$PASSWORD';
         alter user astrobin createdb;
         grant all privileges on database astrobin to astrobin;
 EOF
@@ -261,8 +264,9 @@ EOF
 }
 
 function rabbitmq {
+    local PASSWORD=`grep "export *ASTROBIN_BROKER_PASSWORD" $DEV | tr "'" '"' | awk -F\" '{print $2}'`
     astrobin_log "Setting up rabbitmq..."
-    $SUDO rabbitmqctl add_user astrobin s3cr3t
+    $SUDO rabbitmqctl add_user astrobin $PASSWORD
     $SUDO rabbitmqctl add_vhost astrobin
     $SUDO rabbitmqctl set_permissions -p astrobin astrobin ".*" ".*" ".*"
 }
@@ -294,16 +298,16 @@ function abc {
 function astrobin {
     echo "Preparing AstroBin..."
 
-    $SUDO -u astrobin /bin/bash - <<"EOF"
+    $SUDO -u astrobin /bin/bash - <<EOF
     # Initialize the environment
     . /venv/astrobin/dev/bin/activate
-    . /var/www/astrobin/env/dev
+    . $DEV
 
     # Automatically activating the environment upon login
     if [ ! -f /home/astrobin/.profile.customized ]; then
         touch /home/astrobin/.profile.customized &&
         echo "source /venv/astrobin/dev/bin/activate" >> /home/astrobin/.profile &&
-        echo "source /var/www/astrobin/env/dev" >> /home/astrobin/.profile &&
+        echo "source $DEV" >> /home/astrobin/.profile &&
         echo "cd /var/www/astrobin" >> /home/astrobin/.profile
     fi
 
@@ -342,9 +346,9 @@ function solr {
 EOF
     fi
 
-    $SUDO -u astrobin /bin/bash - <<"EOF"
+    $SUDO -u astrobin /bin/bash - <<EOF
     . /venv/astrobin/dev/bin/activate
-    . /var/www/astrobin/env/dev
+    . $DEV
 
     /var/www/astrobin/manage.py build_solr_schema > /opt/solr/solr-4.9.1/example/solr/collection1/conf/schema.xml
 

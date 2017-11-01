@@ -63,7 +63,8 @@ export ASTROBIN_FLICKR_SECRET='***CHANGE ME***'
 export ASTROBIN_HAYSTACK_SOLR_URL='http://127.0.0.1:8983/solr'
 
 # AstroBin uses RabbitMQ as a broker to deal messages to celery.
-export ASTROBIN_BROKER_URL='amqp://astrobin:s3cr3t@127.0.0.1:5672/astrobin'
+export ASTROBIN_BROKER_PASSWORD='s3cr3t'
+export ASTROBIN_BROKER_URL='amqp://astrobin:${ASTROBIN_BROKER_PASSWORD}@127.0.0.1:5672/astrobin'
 export ASTROBIN_CELERY_RESULT_DBURI='psql://${ASTROBIN_DATABASE_USER}:${ASTROBIN_DATABASE_PASSWORD}@${ASTROBIN_DATABASE_HOST}/${ASTROBIN_DATABASE_NAME}'
 
 # AstroBin uses Astrometry.net to plate-solve images. You can create an
