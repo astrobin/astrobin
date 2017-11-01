@@ -41,6 +41,7 @@ class NestedCommentDetail(generics.RetrieveUpdateDestroyAPIView):
     API endpoint that represents a single nested comment.
     """
     model = NestedComment
+    queryset = NestedComment.objects.all()
     serializer_class = NestedCommentSerializer
     permission_classes = (permissions.IsAuthenticatedOrReadOnly,
                           IsOwnerOrReadOnly,)
