@@ -16,13 +16,6 @@ server {
 
 server {
         listen   80;
-        server_name q.astrob.in;
-        rewrite ^/(\d+)/?$ http://questions.astrobin.com/question/$1 permanent;
-        rewrite ^/(.*) http://questions.astrobin.com/$1 permanent;
-}
-
-server {
-        listen   80;
         server_name trns.astrob.in;
         rewrite ^/(.*) http://translate.astrobin.com/$1 permanent;
 }
@@ -45,11 +38,8 @@ server {
     access_log /var/log/nginx/astrobin.com-access.log;
     error_log /var/log/nginx/astrobin.com-error.log;
 
-    #ssl_certificate      /etc/nginx/server.crt;
-    #ssl_certificate_key  /etc/nginx/server.key;
     ssl_certificate      /etc/ssl/localcerts/astrobin.com-ssl-bundle.crt;
     ssl_certificate_key  /etc/ssl/localcerts/www.astrobin.com.key;
-
 
     keepalive_timeout 5;
     proxy_read_timeout 1200;
@@ -105,30 +95,6 @@ server {
         root /media/static;
         expires max;
     }
-
-    # internal publish endpoint (keep it private / protected)
-    #location /publish {
-    #    set $push_channel_id $arg_id;      #/?id=239aff3 or somesuch
-    #    push_publisher;
-    #
-    #    push_store_messages off;           # disable message queueing
-    #    push_message_timeout 0;            # never expire buffer messages
-    #    push_message_buffer_length 0;      # don't store messages
-    #    #push_min_message_recipients 0;    # minimum recipients before purge
-    #}
-
-    # public long-polling endpoint
-    #location /activity {
-    #    push_subscriber;
-    #
-        # how multiple listener requests to the same channel id are handled
-        # - last: only the most recent listener request is kept, 409 for others.
-        # - first: only the oldest listener request is kept, 409 for others.
-        # - broadcast: any number of listener requests may be long-polling.
-    #    push_subscriber_concurrency first;
-    #    set $push_channel_id $arg_id;
-    #    default_type  text/plain;
-    #}
 }
 
 server {
@@ -160,58 +126,3 @@ server {
         fastcgi_read_timeout 1200;
     }
 }
-
-
-upstream questions_app_server {
-    server 127.0.0.1:8083 fail_timeout=0;
-}
-
-server {
-    client_max_body_size 2M;
-    server_name questions.astrobin.com;
-
-    access_log /var/log/nginx/questions.astrobin.com-access.log;
-    error_log /var/log/nginx/questions.astrobin.com-error.log;
-
-    keepalive_timeout 10;
-    proxy_read_timeout 300;
-
-    ## Compression
-    # src: http://www.ruby-forum.com/topic/141251
-    # src: http://wiki.brightbox.co.uk/docs:nginx
-
-    gzip on;
-    gzip_http_version 1.0;
-    gzip_comp_level 2;
-    gzip_proxied any;
-    gzip_min_length  1100;
-    gzip_buffers 16 8k;
-    gzip_types text/plain text/css application/x-javascript text/xml application/xml application/xml+rss text/javascript;
-
-    # Some version of IE 6 don't handle compression well on some mime-types, so just disable for them
-    gzip_disable "MSIE [1-6].(?!.*SV1)";
-
-    # Set a vary header so downstream proxies don't send cached gzipped content to IE6
-    gzip_vary on;
-    ## /Compression
-
-    location /static/ {
-        root /webserver/questions;
-        expires 30d;
-    }
-
-    location / {
-        if ($request_uri ~* "^/robots.txt") {
-            rewrite ^/robots.txt /static/robots.txt permanent;
-        }
-
-        proxy_set_header X-Forwarded-For $proxy_add_x_forwarded_for;
-        proxy_set_header Host $http_host;
-        proxy_redirect off;
-        if (!-f $request_filename) {
-            proxy_pass http://questions_app_server;
-            break;
-        }
-    }
-}
-
