@@ -15,10 +15,6 @@ from nested_comments.models import NestedComment
 from astrobin_apps_notifications.utils import get_unseen_notifications
 
 
-def privatebeta_enabled(request):
-    return {'privatebeta_enabled': settings.PRIVATEBETA_ENABLE_BETA}
-
-
 def notices_count(request):
     response = {}
     if request.user.is_authenticated():
@@ -86,6 +82,7 @@ def common_variables(request):
         'PAYPAL_TEST': settings.PAYPAL_TEST,
         'IOTD_SHOW_CHOOSING_JUDGE': settings.IOTD_SHOW_CHOOSING_JUDGE,
         'SOLVING_ENABLED': settings.ASTROBIN_ENABLE_SOLVING,
+        'GOOGLE_ANALYTICS_ID': settings.GOOGLE_ANALYTICS_ID,
     }
 
     return d

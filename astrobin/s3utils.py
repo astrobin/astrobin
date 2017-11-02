@@ -46,7 +46,7 @@ class OverwritingFileSystemStorage(FileSystemStorage):
 
 class CachedS3BotoStorage(S3BotoStorage):
     def __init__(self, *args, **kwargs):
-        super(CachedS3BotoStorage, self).__init__(location=kwargs.pop('location'))
+        super(CachedS3BotoStorage, self).__init__()
         self.local_storage = OverwritingFileSystemStorage(location = settings.IMAGE_CACHE_DIRECTORY)
 
     def generate_local_name(self, name):
@@ -67,7 +67,7 @@ class CachedS3BotoStorage(S3BotoStorage):
         return name
 
 if settings.AWS_S3_ENABLED:
-    ImageStorage = lambda: CachedS3BotoStorage(location='images')
+    ImageStorage = lambda: CachedS3BotoStorage()
 else:
     ImageStorage = lambda: OverwritingFileSystemStorage(location=settings.UPLOADS_DIRECTORY)
 

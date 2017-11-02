@@ -1,3 +1,6 @@
+# Python
+import sys
+
 # Django
 from django.db.models.signals import post_save
 
@@ -11,4 +14,5 @@ def start_indexing_task(sender, instance, created, **kwargs):
         index_raw_image.apply_async(args=(instance.id,), countdown = 300)
 
 
-post_save.connect(start_indexing_task, sender = RawImage)
+if not 'test' in sys.argv:
+    post_save.connect(start_indexing_task, sender = RawImage)

@@ -3,7 +3,9 @@ import simplejson
 import urllib2
 
 # Django
+from django.apps import apps
 from django.conf import settings
+from django.core.exceptions import ImproperlyConfigured
 
 # Third party
 from notification import models as notification

@@ -17,11 +17,11 @@ ALLOWED_HOSTS = ['*']
 TEMPLATE_DEBUG = DEBUG
 MAINTENANCE_MODE = False
 READONLY_MODE = False
-MEDIA_VERSION = '196'
+MEDIA_VERSION = '197'
 LONGPOLL_ENABLED = False
-ADS_ENABLED = True
-DONATIONS_ENABLED = False
-PREMIUM_ENABLED = True
+ADS_ENABLED = os.environ['ASTROBIN_ADS_ENABLED'] == 'true'
+DONATIONS_ENABLED = os.environ['ASTROBIN_DONATIONS_ENABLED'] == 'true'
+PREMIUM_ENABLED = os.environ['ASTROBIN_PREMIUM_ENABLED'] == 'true'
 
 if TESTING:
     DEBUG = False
@@ -41,11 +41,11 @@ ADMINS = (
 )
 
 MANAGERS = ADMINS
-SERVER_EMAIL = 'noreply@astrobin.com'
-DEFAULT_FROM_EMAIL = 'AstroBin <noreply@astrobin.com>'
+SERVER_EMAIL = os.environ['ASTROBIN_SERVER_EMAIL']
+DEFAULT_FROM_EMAIL = os.environ['ASTROBIN_DEFAULT_FROM_EMAIL']
 EMAIL_HOST_USER = os.environ['ASTROBIN_EMAIL_HOST_USER']
 EMAIL_HOST_PASSWORD = os.environ['ASTROBIN_EMAIL_HOST_PASSWORD']
-EMAIL_SUBJECT_PREFIX = '[AstroBin]'
+EMAIL_SUBJECT_PREFIX = os.environ['ASTROBIN_EMAIL_SUBJECT_PREFIX']
 EMAIL_HOST = os.environ['ASTROBIN_EMAIL_HOST']
 EMAIL_PORT = os.environ['ASTROBIN_EMAIL_PORT']
 EMAIL_USE_TLS= os.environ['ASTROBIN_EMAIL_USE_TLS'] == "true"
@@ -59,8 +59,7 @@ if not TESTING:
             'USER': os.environ['ASTROBIN_DATABASE_USER'],
             'PASSWORD': os.environ['ASTROBIN_DATABASE_PASSWORD'],
             'HOST': os.environ['ASTROBIN_DATABASE_HOST'],
-            'PORT': '5432',
-            'OPTIONS': {'autocommit': True},
+            'PORT': '5432'
         }
     }
 else:
@@ -73,9 +72,8 @@ else:
 
 DEFAULT_CHARSET = 'utf-8'
 
-ASTROBIN_BASE_URL = 'http://www.astrobin.com'
-ASTROBIN_SHORT_BASE_URL = 'http://astrob.in'
-
+ASTROBIN_BASE_URL = os.environ['ASTROBIN_BASE_URL']
+ASTROBIN_SHORT_BASE_URL = os.environ['ASTROBIN_SHORT_BASE_URL']
 ASTROBIN_BASE_PATH = os.path.dirname(__file__)
 
 # Local time zone for this installation. Choices can be found here:
@@ -131,9 +129,9 @@ MEDIA_URL = '/media/'
 STATIC_ROOT = MEDIA_ROOT + 'static/'
 STATIC_URL = MEDIA_URL + 'static/'
 
-IMAGES_URL = MEDIA_URL + 'images/'
+IMAGES_URL = MEDIA_URL
 IMAGE_CACHE_DIRECTORY = MEDIA_ROOT + 'imagecache/'
-UPLOADS_DIRECTORY = MEDIA_ROOT + 'images/'
+UPLOADS_DIRECTORY = MEDIA_ROOT
 
 # URL that handles the media served from MEDIA_ROOT. Make sure to use a
 # trailing slash if there is a path component (optional in other cases).
@@ -149,16 +147,17 @@ if AWS_S3_ENABLED:
     IMAGES_URL = os.environ['ASTROBIN_IMAGES_URL']
 
     MEDIA_URL = os.environ['ASTROBIN_CDN_URL']
+    STATIC_URL = MEDIA_URL + 'static/'
 
     AWS_ACCESS_KEY_ID = os.environ['ASTROBIN_AWS_ACCESS_KEY_ID']
     AWS_SECRET_ACCESS_KEY = os.environ['ASTROBIN_AWS_SECRET_ACCESS_KEY']
     AWS_STORAGE_BUCKET_NAME = os.environ['ASTROBIN_AWS_STORAGE_BUCKET_NAME']
     AWS_STORAGE_BUCKET_CNAME = AWS_STORAGE_BUCKET_NAME
-    AWS_S3_SECURE_URLS = False
+    AWS_S3_SECURE_URLS = True
     AWS_QUERYSTRING_AUTH = False
 
-    from S3 import CallingFormat
-    AWS_CALLING_FORMAT = CallingFormat.SUBDOMAIN
+    AWS_S3_CALLING_FORMAT = 'boto.s3.connection.OrdinaryCallingFormat'
+    AWS_S3_HOST = 's3.amazonaws.com'
 
     # see http://developer.yahoo.com/performance/rules.html#expires
     AWS_HEADERS = {
@@ -188,10 +187,8 @@ MIDDLEWARE_CLASSES += [
     'django.contrib.auth.middleware.AuthenticationMiddleware',
     'django.middleware.csrf.CsrfViewMiddleware',
     'django.contrib.messages.middleware.MessageMiddleware',
-    'pagination.middleware.PaginationMiddleware',
     'astrobin.middlewares.ProfileMiddleware',
 #   'astrobin.middlewares.VaryOnLangCacheMiddleware',
-    #'privatebeta.middleware.PrivateBetaMiddleware',
     'maintenancemode.middleware.MaintenanceModeMiddleware',
     'gadjo.requestprovider.middleware.RequestProvider',
 #    'pipeline.middleware.MinifyHTMLMiddleware', Enable after dealing with the blank spaces everywhere
@@ -218,7 +215,6 @@ TEMPLATE_CONTEXT_PROCESSORS = (
     'django.core.context_processors.request',
     'django.contrib.auth.context_processors.auth',
     'django.contrib.messages.context_processors.messages',
-    'astrobin.context_processors.privatebeta_enabled',
     'astrobin.context_processors.notices_count',
     'astrobin.context_processors.user_language',
     'astrobin.context_processors.user_profile',
@@ -246,16 +242,13 @@ INSTALLED_APPS = [
     'persistent_messages',
     'djcelery',
     'gunicorn',
-    'privatebeta',
-    'south',
-    'django.contrib.comments',
+    'django_comments',
     'tagging',
     'mptt',
     'tinymce',
     'hitcount',
-    'pagination',
     'avatar',
-    'uni_form',
+    'crispy_forms',
     'threaded_messages',
     'bootstrap_toolkit',
     'contact_form',
@@ -264,23 +257,22 @@ INSTALLED_APPS = [
     'reviews',
     'actstream',
     'modeltranslation',
-    'openid_provider',
     'paypal.standard.ipn',
     'subscription',
     'ember',
+    'django_filters',
     'rest_framework',
     'rest_framework.authtoken',
     'easy_thumbnails',
-    'endless_pagination',
+    'el_pagination',
     'dfp', # For Google DFP
     'django_user_agents',
     'pybb', # Forum
     'markup_deprecated',
     'sanitizer',
-    'change_email',
 
     # AstroBin apps
-    'astrobin',
+    'astrobin.apps.AstroBinAppConfig',
     'common',
     'nested_comments',
     'rawdata',
@@ -346,12 +338,7 @@ MESSAGE_STORAGE = 'persistent_messages.storage.PersistentMessageStorage'
 import djcelery
 djcelery.setup_loader()
 
-BROKER_HOST = 'localhost'
-BROKER_PORT = 5672
-BROKER_USER = os.environ['ASTROBIN_BROKER_USER']
-BROKER_PASSWORD = os.environ['ASTROBIN_BROKER_PASSWORD']
-BROKER_VHOST = 'astrobin'
-
+BROKER_URL = os.environ['ASTROBIN_BROKER_URL']
 CELERY_RESULT_BACKEND = 'database'
 CELERY_RESULT_DBURI = os.environ['ASTROBIN_CELERY_RESULT_DBURI']
 CELERY_IMPORTS = ('rawdata.tasks',)
@@ -359,9 +346,8 @@ CELERY_QUEUES = {"default" : {"exchange":"default", "binding_key":"default"},}
 CELERY_DEFAULT_QUEUE = "default"
 
 CELERYD_NODES = "w1 w2 w3 w4"
-CELERYD_OPTS = "--time-limit=300 --concurrency=8 --verbosity=2 --loglevel=DEBUG"
+CELERYD_OPTS = "--time-limit=300 --concurrency=8 --verbosity=2 --loglevel=DEBUG --logfile=celeryd.log"
 CELERYD_CHDIR = ASTROBIN_BASE_PATH
-CELERYD_LOG_FILE = "celeryd.log"
 CELERYD_PID_FILE = "celeryd.pid"
 CELERYD = ASTROBIN_BASE_PATH + "manage.py celeryd"
 
@@ -397,9 +383,14 @@ TINYMCE_JS_ROOT = MEDIA_ROOT + '/js/tiny_mce'
 HITCOUNT_KEEP_HIT_ACTIVE = { 'hours': 1 }
 HITCOUNT_HITS_PER_IP_LIMIT = 0
 
-AVATAR_GRAVATAR_BACKUP = False
 AVATAR_DEFAULT_URL = 'images/astrobin-default-avatar.png?v=1'
-AVATAR_AUTO_GENERATE_SIZES = (64,)
+AVATAR_STORAGE_DIR = 'images/avatars'
+AVATAR_AUTO_GENERATE_SIZES = (64, 80, 194)
+AVATAR_CACHE_ENABLED = not DEBUG
+AVATAR_PROVIDERS = (
+    'avatar.providers.PrimaryAvatarProvider',
+    'avatar.providers.DefaultAvatarProvider',
+)
 
 if LOCAL_STATIC_STORAGE:
     STATICFILES_STORAGE = 'pipeline.storage.PipelineStorage'
@@ -408,107 +399,85 @@ else:
 STATICFILES_FINDERS = (
     'django.contrib.staticfiles.finders.FileSystemFinder',
     'django.contrib.staticfiles.finders.AppDirectoriesFinder',
+    'pipeline.finders.PipelineFinder',
 )
 STATICFILES_DIRS = (local_path('astrobin/static/'),)
 
-PIPELINE_CSS_COMPRESSOR = 'pipeline.compressors.cssmin.CssminCompressor'
-PIPELINE_JS_COMPRESSOR = 'pipeline.compressors.jsmin.SlimItCompressor'
+PIPELINE = {
+    'PIPELINE_ENABLED': not DEBUG,
+    'JAVASCRIPT': {
+        'scripts': {
+            'source_filenames': (
+                'common/js/handlebars-1.0.rc.1.js',
+                'common/js/ember-1.0.0-pre.2.js',
+                'common/fancybox/jquery.fancybox.js',
 
-PIPELINE_CSS = {
-    'screen': {
-        'source_filenames': (
-            'css/jquery-ui.css',
-            'css/jquery-ui-astrobin/jquery-ui-1.8.17.custom.css',
-            'css/ui.multiselect.css',
-            'css/validationEngine.jquery.css',
-            'css/token-input.css',
-            'css/jquery.multiselect.css',
-            'css/jquery.qtip.css',
+                'astrobin_apps_images/js/astrobin_apps_images.js',
+                'astrobin_apps_images/js/jquery.capty.js',
 
-            'wysibb/theme/default/wbbtheme.css',
-
-            'astrobin_apps_images/css/jquery.capty.css',
-            'astrobin_apps_donations/css/astrobin_apps_donations.css',
-            'astrobin_apps_premium/css/astrobin_apps_premium.css',
-
-            'css/reset.css',
-            'css/bootstrap.css',
-            'css/bootstrap-responsive.css',
-
-            'common/fancybox/jquery.fancybox.css',
-
-            'css/astrobin.css',
-            'css/astrobin-mobile.css',
-        ),
-        'output_filename': 'css/astrobin_pipeline_screen_v' + MEDIA_VERSION + '.css',
-        'extra_content':  {
-            'media': 'screen, projection',
-        },
+                'js/jquery.i18n.js',
+                'js/plugins/localization/jquery.localisation.js',
+                'js/jquery.uniform.js',
+                'js/jquery-ui-1.10.3.custom.min.js',
+                'js/jquery-ui-timepicker-addon.js',
+                'js/jquery.validationEngine-en.js',
+                'js/jquery.validationEngine.js',
+                'js/jquery.autoSuggest.js',
+                'js/jquery.blockUI.js',
+                'js/jquery.tmpl.1.1.1.js',
+                'js/ui.multiselect.js',
+                'js/jquery.form.js',
+                'js/jquery.tokeninput.js',
+                'js/jquery.flot.js',
+                'js/jquery.flot.pie.min.js',
+                'js/jquery.cycle.all.js',
+                'js/jquery.easing.1.3.js',
+                'js/jquery.multiselect.js',
+                'js/jquery.qtip.js',
+                'js/jquery.stickytableheaders.js',
+                'js/jquery.timeago.js',
+                'js/respond.src.js',
+                'js/dfp.gpt.logger.override.js',
+                'js/bootstrap.js',
+                'js/astrobin.js',
+            ),
+            'output_filename': 'js/astrobin_pipeline_v' + MEDIA_VERSION + '.js',
+        }
     },
-}
+    'STYLESHEETS': {
+        'screen': {
+            'source_filenames': (
+                'css/jquery-ui.css',
+                'css/jquery-ui-astrobin/jquery-ui-1.8.17.custom.css',
+                'css/ui.multiselect.css',
+                'css/validationEngine.jquery.css',
+                'css/token-input.css',
+                'css/jquery.multiselect.css',
+                'css/jquery.qtip.css',
 
-# TODO: remove capty files
-PIPELINE_JS = {
-    'scripts': {
-        'source_filenames': (
-            'common/js/handlebars-1.0.rc.1.js',
-            'common/js/ember-1.0.0-pre.2.js',
-            'common/fancybox/jquery.fancybox.js/',
+                'wysibb/theme/default/wbbtheme.css',
 
-            'astrobin_apps_images/js/astrobin_apps_images.js',
-            'astrobin_apps_images/js/jquery.capty.js',
+                'astrobin_apps_images/css/jquery.capty.css',
+                'astrobin_apps_donations/css/astrobin_apps_donations.css',
+                'astrobin_apps_premium/css/astrobin_apps_premium.css',
 
-            'js/jquery.i18n.js',
-            'js/plugins/localization/jquery.localisation.js',
-            'js/jquery.uniform.js',
-            'js/jquery-ui-1.10.3.custom.min.js',
-            'js/jquery-ui-timepicker-addon.js',
-            'js/jquery.validationEngine-en.js',
-            'js/jquery.validationEngine.js',
-            'js/jquery.autoSuggest.js',
-            'js/jquery.blockUI.js',
-            'js/jquery.tmpl.1.1.1.js',
-            'js/ui.multiselect.js',
-            'js/jquery.form.js',
-            'js/jquery.tokeninput.js',
-            'js/jquery.flot.js',
-            'js/jquery.flot.pie.min.js',
-            'js/jquery.cycle.all.js',
-            'js/jquery.easing.1.3.js',
-            'js/jquery.multiselect.js',
-            'js/jquery.qtip.js',
-            'js/jquery.stickytableheaders.js',
-            'js/jquery.timeago.js',
-            'js/respond.src.js',
-            'js/dfp.gpt.logger.override.js',
-            'js/bootstrap.js',
-            'js/astrobin.js',
-        ),
-        'output_filename': 'js/astrobin_pipeline_v' + MEDIA_VERSION + '.js',
+                'css/reset.css',
+                'css/bootstrap.css',
+                'css/bootstrap-responsive.css',
+
+                'common/fancybox/jquery.fancybox.css',
+
+                'css/astrobin.css',
+                'css/astrobin-mobile.css',
+            ),
+            'output_filename': 'css/astrobin_pipeline_screen_v' + MEDIA_VERSION + '.css',
+            'extra_content':  {
+                'media': 'screen, projection',
+            },
+        }
     },
-}
-
-ACTSTREAM_SETTINGS = {
-    'MODELS': (
-        'auth.user',
-        'astrobin.gear',
-        'astrobin.telescope',
-        'astrobin.camera',
-        'astrobin.mount',
-        'astrobin.filter',
-        'astrobin.software',
-        'astrobin.accessory',
-        'astrobin.focalreducer',
-        'astrobin.image',
-        'astrobin.imagerevision',
-        'rawdata.PublicDataPool',
-        'rawdata.RawImage',
-        'nested_comments.nestedcomment',
-        'reviews.revieweditem',
-        'toggleproperties.toggleproperty',
-        'astrobin_apps_groups.group',
-    ),
-
+    'CSS_COMPRESSOR': 'pipeline.compressors.cssmin.CssminCompressor',
+    'JS_COMPRESSOR': 'pipeline.compressors.jsmin.SlimItCompressor'
 }
 
 PAYPAL_TEST = DEBUG
@@ -553,7 +522,7 @@ LOGGING = {
     'handlers': {
         'null': {
             'level':'DEBUG',
-            'class':'django.utils.log.NullHandler',
+            'class':'logging.NullHandler',
         },
         'console':{
             'level':'DEBUG',
@@ -653,8 +622,8 @@ THUMBNAIL_QUALITY = 100
 THUMBNAIL_SUBDIR = 'thumbs'
 THUMBNAIL_DEFAULT_STORAGE = DEFAULT_FILE_STORAGE
 
-ENDLESS_PAGINATION_PER_PAGE = 35
-ENDLESS_PAGINATION_LOADING = '<img src="' + STATIC_URL + 'common/images/ajax-loader-bar.gif" alt="..." />'
+EL_PAGINATION_PER_PAGE = 35
+EL_PAGINATION_LOADING = '<img src="' + STATIC_URL + 'common/images/ajax-loader-bar.gif" alt="..." />'
 
 TOGGLEPROPERTIES = {
     "bookmark": {
@@ -681,14 +650,6 @@ TOGGLEPROPERTIES = {
     }
 }
 
-SOUTH_MIGRATION_MODULES = {
-    'easy_thumbnails': 'easy_thumbnails.south_migrations',
-    'pybb': 'pybb.south_migrations',
-    'djcelery': 'djcelery.south_migrations',
-}
-SOUTH_TESTS_MIGRATE = False
-
-
 PYBB_DEFAULT_TITLE = "AstroBin Forum"
 PYBB_DEFAULT_FROM_EMAIL = "AstroBin Forum <noreply@astrobin.com>"
 PYBB_NICE_URL = True
@@ -713,10 +674,26 @@ PYBB_SMILES = {
 PYBB_TOPIC_PAGE_SIZE = 25
 PYBB_FORUM_PAGE_SIZE = 50
 
-def pybb_premoderation(user, post):
-    index = user.userprofile.get_scores()['user_scores_index']
-    return index >= 1.00
+def pybb_premoderation(user, post_content):
+    # Paying members always approved
+    from astrobin_apps_premium.templatetags.astrobin_apps_premium_tags import (
+        is_lite, is_premium)
+    if is_lite(user) or is_premium(user):
+        return True
 
+    # Users with sufficient index are always approved
+    from django.conf import settings
+    index = user.userprofile.get_scores()['user_scores_index']
+    if index >= settings.MIN_INDEX_TO_LIKE:
+        return True
+
+    # Users that have had 5 messages approved before are always approved
+    from pybb.models import Post
+    posts = Post.objects.filter(user = user, on_moderation = False)
+    if posts.count() >= 5:
+        return True
+
+    return False
 PYBB_PREMODERATION = pybb_premoderation
 
 if TESTING:
@@ -744,3 +721,4 @@ IOTD_JUDGEMENT_MAX_FUTURE_PER_JUDGE = 2
 IOTD_SHOW_CHOOSING_JUDGE = False
 
 MIN_INDEX_TO_LIKE = float(os.environ['ASTROBIN_MIN_INDEX_TO_LIKE'])
+GOOGLE_ANALYTICS_ID = os.environ['ASTROBIN_GOOGLE_ANALYTICS_ID']

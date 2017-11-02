@@ -1,9 +1,6 @@
 from django.utils.translation import ugettext_lazy as _
 from django.db import models
 
-from south.modelsinspector import add_introspection_rules
-add_introspection_rules([], ["^astrobin\.fields\.CountryField"])
-
 # ISO 3166-1 country names and codes adapted from http://opencountrycodes.appspot.com/python/
 COUNTRIES = (
     ('', '---------'),

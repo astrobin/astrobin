@@ -41,14 +41,15 @@ from django.views.decorators.http import require_GET, require_POST
 from actstream import action as act
 from actstream.models import Action
 from braces.views import LoginRequiredMixin
-from endless_pagination.decorators import page_template
+from el_pagination.decorators import page_template
 from haystack.exceptions import SearchFieldError
 from haystack.query import SearchQuerySet
 from registration.forms import RegistrationForm
-from reviews.forms import ReviewedItemForm
+from reviews.views import ReviewAddForm
 import persistent_messages
 
 # AstroBin apps
+from astrobin_apps_notifications.types import NOTICE_TYPES
 from astrobin_apps_notifications.utils import push_notification
 from astrobin_apps_platesolving.forms import PlateSolvingSettingsForm
 from astrobin_apps_platesolving.models import PlateSolvingSettings
@@ -57,7 +58,6 @@ from astrobin_apps_platesolving.solver import Solver
 # AstroBin
 from astrobin.forms import *
 from astrobin.gear import *
-from astrobin.management import NOTICE_TYPES
 from astrobin.models import *
 from astrobin.shortcuts import *
 from astrobin.utils import *
@@ -156,7 +156,7 @@ def object_list(request, queryset, paginate_by=None, page=None,
         model = queryset.model
         template_name = "%s/%s_list.html" % (model._meta.app_label, model._meta.object_name.lower())
     t = template_loader.get_template(template_name)
-    return HttpResponse(t.render(c), mimetype=mimetype)
+    return HttpResponse(t.render(c), content_type=mimetype)
 
 def monthdelta(date, delta):
     m, y = (date.month+delta) % 12, date.year + ((date.month)+delta-1) // 12
@@ -535,8 +535,8 @@ def image_edit_acquisition(request, id):
         edit_type = 'deep_sky'
     elif solar_system_acquisition:
         edit_type = 'solar_system'
-    elif 'edit_type' in request.REQUEST:
-       edit_type = request.REQUEST['edit_type']
+    elif 'edit_type' in request.GET:
+       edit_type = request.GET['edit_type']
     else:
        edit_type = None
 
@@ -1666,10 +1666,17 @@ def user_profile_save_gear(request):
 def user_profile_flickr_import(request):
     from django.core.files import File
     from django.core.files.temp import NamedTemporaryFile
+    from astrobin_apps_premium.templatetags.astrobin_apps_premium_tags import is_free
 
     response_dict = {
         'readonly': settings.READONLY_MODE
     }
+
+    if is_free(request.user):
+        return render_to_response(
+                "user/profile/flickr_import.html",
+                response_dict,
+                context_instance=RequestContext(request))
 
     flickr = flickrapi.FlickrAPI(settings.FLICKR_API_KEY,
                                  settings.FLICKR_SECRET,
@@ -1893,11 +1900,12 @@ def stats(request):
     response_dict = {}
 
     sqs = SearchQuerySet()
-    gs = GlobalStat.objects.all()[0]
+    gs = GlobalStat.objects.first()
 
-    response_dict['total_users'] = gs.users
-    response_dict['total_images'] = gs.images
-    response_dict['total_integration'] = gs.integration
+    if gs:
+        response_dict['total_users'] = gs.users
+        response_dict['total_images'] = gs.images
+        response_dict['total_integration'] = gs.integration
 
     sort = '-user_integration'
     if 'sort' in request.GET:
@@ -2023,7 +2031,7 @@ def location_edit(request, id):
 def set_language(request, lang):
     from django.utils.translation import check_for_language, activate
 
-    next = request.REQUEST.get('next', None)
+    next = request.GET.get('next', None)
     if not next:
         next = request.META.get('HTTP_REFERER', None)
     if not next:
@@ -2075,7 +2083,7 @@ def get_edit_gear_form(request, id):
 
     return HttpResponse(
         simplejson.dumps(response_dict),
-        mimetype = 'application/javascript')
+        content_type = 'application/javascript')
 
 
 @require_GET
@@ -2099,7 +2107,7 @@ def get_empty_edit_gear_form(request, gear_type):
 
     return HttpResponse(
         simplejson.dumps(response_dict),
-        mimetype = 'application/javascript')
+        content_type = 'application/javascript')
 
 
 @require_POST
@@ -2171,7 +2179,7 @@ def save_gear_details(request):
         }
         return HttpResponse(
             simplejson.dumps(response_dict),
-            mimetype = 'application/javascript')
+            content_type = 'application/javascript')
 
     form.save()
 
@@ -2196,7 +2204,7 @@ def save_gear_details(request):
 
     return HttpResponse(
         simplejson.dumps(response_dict),
-        mimetype = 'application/javascript')
+        content_type = 'application/javascript')
 
 
 @require_GET
@@ -2205,7 +2213,7 @@ def save_gear_details(request):
 def get_is_gear_complete(request, id):
     return HttpResponse(
         simplejson.dumps({'complete': is_gear_complete(id)}),
-        mimetype = 'application/javascript')
+        content_type = 'application/javascript')
 
 
 @require_GET
@@ -2227,7 +2235,7 @@ def get_gear_user_info_form(request, id):
 
     return HttpResponse(
         simplejson.dumps(response_dict),
-        mimetype = 'application/javascript')
+        content_type = 'application/javascript')
 
 
 @require_POST
@@ -2247,7 +2255,7 @@ def save_gear_user_info(request):
         }
         return HttpResponse(
             simplejson.dumps(response_dict),
-            mimetype = 'application/javascript')
+            content_type = 'application/javascript')
 
     form.save()
     return ajax_success()
@@ -2291,7 +2299,7 @@ def gear_popover_ajax(request, id):
 
     return HttpResponse(
         simplejson.dumps(response_dict),
-        mimetype = 'application/javascript')
+        content_type = 'application/javascript')
 
 
 @require_GET
@@ -2327,7 +2335,7 @@ def user_popover_ajax(request, username):
 
     return HttpResponse(
         simplejson.dumps(response_dict),
-        mimetype = 'application/javascript')
+        content_type = 'application/javascript')
 
 
 @require_GET
@@ -2360,12 +2368,12 @@ def gear_page(request, id, slug):
     all_images = Image.by_gear(gear, gear_type).filter(is_wip = False)
     show_commercial = (gear.commercial and gear.commercial.is_paid()) or (gear.commercial and gear.commercial.producer == request.user)
     content_type = ContentType.objects.get(app_label = 'astrobin', model = 'gear')
-    reviews = ReviewedItem.objects.filter(object_id = id, content_type = content_type)
+    reviews = Review.objects.filter(content_id = id, content_type = content_type)
 
     response_dict = {
         'gear': gear,
         'examples': all_images[:28],
-        'review_form': ReviewedItemForm(instance = ReviewedItem(content_type = ContentType.objects.get_for_model(Gear), content_object = gear)),
+        'review_form': ReviewAddForm(instance = Review(content_type = ContentType.objects.get_for_model(Gear), content = gear)),
         'reviews': reviews,
         'content_type': ContentType.objects.get_for_model(Gear),
         'owners_count': UserProfile.objects.filter(**{user_attr_lookup[gear_type]: gear}).count(),
@@ -2519,7 +2527,7 @@ def gear_by_image(request, image_id):
 
     return HttpResponse(
         simplejson.dumps(response_dict),
-        mimetype = 'application/javascript')
+        content_type = 'application/javascript')
 
 
 @require_GET
@@ -2552,7 +2560,7 @@ def gear_by_make(request, make):
 
     return HttpResponse(
         simplejson.dumps(ret),
-        mimetype = 'application/javascript')
+        content_type = 'application/javascript')
 
 
 @require_GET
@@ -2561,7 +2569,7 @@ def gear_by_ids(request, ids):
     gear = [[str(x.id), x.get_make(), x.get_name()] for x in Gear.objects.filter(filters)]
     return HttpResponse(
         simplejson.dumps(gear),
-        mimetype = 'application/javascript')
+        content_type = 'application/javascript')
 
 
 @require_GET
@@ -2576,7 +2584,7 @@ def get_makes_by_type(request, klass):
     ret['makes'] = unique_items([x.get_make() for x in CLASS_LOOKUP[klass].objects.exclude(make = '').exclude(make = None)])
     return HttpResponse(
         simplejson.dumps(ret),
-        mimetype = 'application/javascript')
+        content_type = 'application/javascript')
 
 
 @require_GET
@@ -2642,7 +2650,7 @@ def gear_fix_thanks(request):
 @require_POST
 @login_required
 def gear_review_save(request):
-    form = ReviewedItemForm(data = request.POST)
+    form = ReviewAddForm(data = request.POST)
 
     if form.is_valid():
         gear, gear_type = get_correct_gear(form.data['gear_id'])
@@ -2681,7 +2689,7 @@ def gear_review_save(request):
         }
         return HttpResponse(
             simplejson.dumps(response_dict),
-            mimetype = 'application/javascript')
+            content_type = 'application/javascript')
 
     return ajax_fail()
 
@@ -2690,7 +2698,7 @@ def gear_review_save(request):
 @login_required
 @user_passes_test(lambda u: user_is_producer(u))
 def commercial_products_claim(request, id):
-    from templatetags.tags import gear_owners, gear_images
+    from astrobin.templatetags.tags import gear_owners, gear_images
 
     def error(form):
         from bootstrap_toolkit.templatetags.bootstrap_toolkit import as_bootstrap
@@ -2700,7 +2708,7 @@ def commercial_products_claim(request, id):
         }
         return HttpResponse(
             simplejson.dumps(response_dict),
-            mimetype = 'application/javascript')
+            content_type = 'application/javascript')
 
     form = ClaimCommercialGearForm(data = request.POST, user = request.user)
     try:
@@ -2749,7 +2757,7 @@ def commercial_products_claim(request, id):
             'images': gear_images(gear),
             'is_merge': form.cleaned_data['merge_with'] != '',
         }),
-        mimetype = 'application/javascript')
+        content_type = 'application/javascript')
 
 
 
@@ -2791,7 +2799,7 @@ def commercial_products_unclaim(request, id):
             'claimed_gear_ids': u','.join(str(x) for x in claimed_gear),
             'claimed_gear_ids_links': u', '.join('<a href="/gear/%s/">%s</a>' % (x, x) for x in claimed_gear),
         }),
-        mimetype = 'application/javascript')
+        content_type = 'application/javascript')
 
 
 @require_GET
@@ -2819,14 +2827,14 @@ def commercial_products_merge(request, from_id, to_id):
                 'claimed_gear_ids': u','.join(str(x) for x in claimed_gear),
                 'claimed_gear_ids_links': u', '.join('<a href="/gear/%s/">%s</a>' % (x, x) for x in claimed_gear),
             }),
-            mimetype = 'application/javascript')
+            content_type = 'application/javascript')
 
     return HttpResponse(
         simplejson.dumps({
             'success': False,
             'message': _("You can't merge a product to itself."),
         }),
-        mimetype = 'application/javascript')
+        content_type = 'application/javascript')
 
 
 @require_GET
@@ -2881,7 +2889,7 @@ def commercial_products_save(request, id):
 @login_required
 @user_passes_test(lambda u: user_is_retailer(u))
 def retailed_products_claim(request, id):
-    from templatetags.tags import gear_owners, gear_images
+    from astrobin.templatetags.tags import gear_owners, gear_images
 
     def error(form):
         from bootstrap_toolkit.templatetags.bootstrap_toolkit import as_bootstrap
@@ -2891,7 +2899,7 @@ def retailed_products_claim(request, id):
         }
         return HttpResponse(
             simplejson.dumps(response_dict),
-            mimetype = 'application/javascript')
+            content_type = 'application/javascript')
 
     form = ClaimRetailedGearForm(data = request.POST, user = request.user)
     try:
@@ -2937,7 +2945,7 @@ def retailed_products_claim(request, id):
             'images': gear_images(gear),
             'is_merge': form.cleaned_data['merge_with'] != '',
         }),
-        mimetype = 'application/javascript')
+        content_type = 'application/javascript')
 
 
 @require_GET
@@ -2981,7 +2989,7 @@ def retailed_products_unclaim(request, id):
             'claimed_gear_ids': u','.join(str(x) for x in claimed_gear),
             'claimed_gear_ids_links': u', '.join('<a href="/gear/%s/">%s</a>' % (x, x) for x in claimed_gear),
         }),
-        mimetype = 'application/javascript')
+        content_type = 'application/javascript')
 
 
 @require_GET
@@ -3012,14 +3020,14 @@ def retailed_products_merge(request, from_id, to_id):
                 'claimed_gear_ids': u','.join(str(x) for x in claimed_gear),
                 'claimed_gear_ids_links': u', '.join('<a href="/gear/%s/">%s</a>' % (x, x) for x in claimed_gear),
             }),
-            mimetype = 'application/javascript')
+            content_type = 'application/javascript')
 
     return HttpResponse(
         simplejson.dumps({
             'success': False,
             'message': _("You can't merge a product to itself."),
         }),
-        mimetype = 'application/javascript')
+        content_type = 'application/javascript')
 
 
 @login_required

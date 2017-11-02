@@ -98,7 +98,6 @@ class RawImage(models.Model):
     )
 
     image_type = models.IntegerField(
-        max_length = 1,
         default = 0, # Unknown
         choices = TYPE_CHOICES,
         editable = False,
@@ -240,12 +239,11 @@ class PublicDataPool(models.Model):
 
     images = models.ManyToManyField(
         RawImage,
-        null = True,
     )
 
     processed_images = models.ManyToManyField(
         Image,
-        null = True,
+        blank = True,
     )
 
     archive = models.ForeignKey(
@@ -312,13 +310,10 @@ class PrivateSharedFolder(models.Model):
 
     images = models.ManyToManyField(
         RawImage,
-        null = True,
-        blank = True,
     )
 
     processed_images = models.ManyToManyField(
         Image,
-        null = True,
         blank = True,
     )
 

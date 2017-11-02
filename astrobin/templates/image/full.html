@@ -1,6 +1,6 @@
 {% load astrobin_apps_images_tags %}
 {% load common_tags %}
-{% load compressed %}
+{% load pipeline %}
 {% load hitcount_tags %}
 {% load i18n %}
 {% load tags %}
@@ -20,7 +20,7 @@
         <meta name="googlebot" content="noarchive" />
 
         <link href="https://fonts.googleapis.com/css?family=Noto+Sans:400,400i,700|Noto+Serif:700&subset=latin-ext" rel="stylesheet">
-        {% compressed_css 'screen' %}
+        {% stylesheet 'screen' %}
 
         <script type="text/javascript">
           var _gaq = _gaq || [];
@@ -100,11 +100,10 @@
         <script type="text/javascript" src="{{STATIC_URL}}js/bootstrap.js"></script>
         <script type="text/javascript" src="{{STATIC_URL}}astrobin_apps_images/js/astrobin_apps_images.js"></script>
         <script type="text/javascript" src="{{STATIC_URL}}js/astrobin.js"></script>
+        {% insert_hit_count_js_variables for image %}
         <script type="text/javascript">
             $(document).ready(function() {
                 astrobin_common.init_ajax_csrf_token();
-                {% get_hit_count_javascript for image %}
-
                 {% if image.w > 0 %}
                 if ($(window).width() * .95 > {{image.w}}) {
                     $('#full-size-image img').addClass('real');

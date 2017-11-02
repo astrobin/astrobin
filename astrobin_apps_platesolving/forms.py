@@ -8,6 +8,7 @@ from .models import PlateSolvingSettings
 class PlateSolvingSettingsForm(forms.ModelForm):
     class Meta:
         model = PlateSolvingSettings
+        exclude = []
 
     def __init__(self, *args, **kwargs):
         super(PlateSolvingSettingsForm, self).__init__(*args, **kwargs)

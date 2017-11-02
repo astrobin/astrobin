@@ -4,6 +4,7 @@ from django.contrib.auth.decorators import login_required
 from django.views.generic import TemplateView
 
 # Third party
+from notification import urls as notification_urls
 from notification.views import notice_settings
 
 # This app
@@ -23,4 +24,5 @@ urlpatterns = patterns('',
         r'settings/$',
         login_required(notice_settings),
         name = 'astrobin_apps_notifications.settings'),
+    url(r'_/', include(notification_urls)),
 )

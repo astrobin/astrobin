@@ -1,18 +1,21 @@
-from haystack.views import SearchView
+from haystack.generic_views import SearchView
 from haystack.query import SearchQuerySet, SQ
 
 from django.shortcuts import render_to_response
 from django.conf import settings
 from django.utils.translation import ugettext as _
 
+from forms import AdvancedSearchForm
 from views import jsonDump, valueReader
 from models import Telescope, Camera
 
 import operator
 import unicodedata
 
-class SearchView(SearchView):
-    def get_results(self):
+class AstroBinSearchView(SearchView):
+    form_class = AdvancedSearchForm
+
+    def get_queryset(self):
         q = self.request.GET.get('q')
         try:
             q = unicodedata.normalize('NFKD', q).encode('ascii', 'ignore')
@@ -20,7 +23,7 @@ class SearchView(SearchView):
             pass
 
         self.query = q
-        sqs = super(SearchView, self).get_results()
+        sqs = super(AstroBinSearchView, self).get_queryset()
 
         ssms = self.request.GET.get('ssms')
         if ssms:
@@ -35,30 +38,3 @@ class SearchView(SearchView):
             sqs = sqs.order_by(order_by)
 
         return sqs
-
-    def create_response(self):
-        """
-        Generates the actual HttpResponse to send back to the user.
-        """
-        (paginator, page) = self.build_page()
-        
-        strings = [
-            "",
-            _("No results. Sorry."),
-            _("Matching items:"),
-        ]
-
-        context = {
-            'query': self.query,
-            'form': self.form,
-            'page': page,
-            'paginator': paginator,
-            'suggestion': None,
-        }
-        
-        if getattr(settings, 'HAYSTACK_INCLUDE_SPELLING', False):
-            context['suggestion'] = self.form.get_suggestion()
-
-        context.update(self.extra_context())
-        return render_to_response(self.template, context, context_instance=self.context_class(self.request))
-

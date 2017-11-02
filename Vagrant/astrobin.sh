@@ -1,6 +1,12 @@
 #!/bin/bash
 
+# Please run this script as the user vagrant if installing in Vagrant, or as
+# root if running directly to install on a real server.
+
 SUDO='sudo -E'
+
+ROOT="/var/www/astrobin"
+DEV="${ROOT}/env/dev"
 
 function astrobin_log {
     echo -e " - $1" >&3
@@ -10,7 +16,7 @@ function astrobin_err {
     local COLOR="tput setaf 1; tput setab 3; tput bold"
     local COLOR_RST="tput sgr 0"
 
-    astrobin_log "$(${COLOR})ERROR: $1$(${COLOR_RST})"
+    astrobin_log "ERROR: $1"
     exit 1
 }
 
@@ -26,9 +32,7 @@ function begin {
 }
 
 function check {
-    local ROOT="/var/www/astrobin"
     local EXAMPLE="${ROOT}/env/example"
-    local DEV="${ROOT}/env/dev"
     local GUNICORN="${ROOT}/conf/supervisord/gunicorn.conf"
     local CELERY="${ROOT}/conf/supervisord/celeryd_default.conf"
 
@@ -39,7 +43,12 @@ function check {
 
     local VARS=(
         ASTROBIN_DEBUG
+        ASTROBIN_BASE_URL
+        ASTROBIN_SHORT_BASE_URL
         ASTROBIN_HOST
+        ASTROBIN_SERVER_EMAIL
+        ASTROBIN_DEFAULT_FROM_EMAIL
+        ASTROBIN_EMAIL_SUBJECT_PREFIX
         ASTROBIN_EMAIL_HOST_USER
         ASTROBIN_EMAIL_HOST_PASSWORD
         ASTROBIN_EMAIL_HOST
@@ -60,13 +69,17 @@ function check {
         ASTROBIN_FLICKR_API_KEY
         ASTROBIN_FLICKR_SECRET
         ASTROBIN_HAYSTACK_SOLR_URL
-        ASTROBIN_BROKER_USER
         ASTROBIN_BROKER_PASSWORD
+        ASTROBIN_BROKER_URL
         ASTROBIN_CELERY_RESULT_DBURI
         ASTROMETRY_NET_API_KEY
         ASTROBIN_RAWDATA_ROOT
         ASTROBIN_PAYPAL_MERCHANT_ID
         ASTROBIN_MIN_INDEX_TO_LIKE
+        ASTROBIN_GOOGLE_ANALYTICS_ID
+        ASTROBIN_ADS_ENABLED
+        ASTROBIN_DONATIONS_ENABLED
+        ASTROBIN_PREMIUM_ENABLED
     )
 
     local FILES=(
@@ -101,6 +114,7 @@ function init_system {
     astrobin_log "Adding users..."
     if ! id -u astrobin >/dev/null 2>&1; then
         useradd -m -s /bin/bash -g astrobin -u 2000 astrobin
+        usermod -a -G sudo astrobin
     fi
 
     if ! id -u solr >/dev/null 2>&1; then
@@ -125,12 +139,11 @@ function init_system {
     chmod g+w /opt/solr
     chmod g+w /var/log/astrobin
 
-    astrobin_log "Customizing vagrant's home directory..."
-    if grep -q DebuggingServer /home/vagrant/.bashrc; then
+    astrobin_log "Customizing astrobin's home directory..."
+    if grep -q DebuggingServer /home/astrobin/.bashrc; then
         astrobin_log "Debug smpt server already setup"
     else
-        echo "nc -z 127.0.0.1 25 || $SUDO python -m smtpd -n -c DebuggingServer localhost:25 &" >> /home/vagrant/.bashrc
-        echo "nc -z 127.0.0.1 1025 || python -m smtpd -n -c DebuggingServer localhost:1025 &" >> /home/vagrant/.bashrc
+        echo "nc -z 127.0.0.1 1025 || python -m smtpd -n -c DebuggingServer localhost:1025 &" >> /home/astrobin/.bashrc
     fi
 
     astrobin_log "Setting locale..."
@@ -190,7 +203,7 @@ function apt {
 function pip {
     astrobin_log "Installing dependencies..."
 
-    $SUDO -u astrobin /bin/bash - <<"EOF"
+    $SUDO -H -u astrobin /bin/bash - <<"EOF"
     virtualenv --no-site-packages /venv/astrobin/dev
     . /venv/astrobin/dev/bin/activate
 
@@ -222,12 +235,13 @@ EOF
 }
 
 function postgres {
+    local PSQL_V="`psql -V | egrep -o '[0-9]{1,}\.[0-9]{1,}'`"
     # Setup postgresql
     astrobin_log "Creating postgres cluster..."
-    $SUDO pg_createcluster 9.3 main --start
+    $SUDO pg_createcluster $PSQL_V main --start
 
     astrobin_log "Copying postgres conf file..."
-    $SUDO cp /var/www/astrobin/conf/pg_hba.conf /etc/postgresql/9.3/main/
+    $SUDO cp /var/www/astrobin/conf/pg_hba.conf /etc/postgresql/$PSQL_V/main/
 
     function postgres_db {
         astrobin_log "Setting up database..."
@@ -238,8 +252,9 @@ EOF
     }
 
     function postgres_priv {
-        $SUDO -u postgres psql <<"EOF"
-        alter user astrobin with encrypted password 's3cr3t';
+        local PASSWORD=`grep "export *ASTROBIN_DATABASE_PASSWORD" $DEV | tr "'" '"' | awk -F\" '{print $2}'`
+        $SUDO -u postgres psql <<EOF
+        alter user astrobin with encrypted password '$PASSWORD';
         alter user astrobin createdb;
         grant all privileges on database astrobin to astrobin;
 EOF
@@ -249,8 +264,9 @@ EOF
 }
 
 function rabbitmq {
+    local PASSWORD=`grep "export *ASTROBIN_BROKER_PASSWORD" $DEV | tr "'" '"' | awk -F\" '{print $2}'`
     astrobin_log "Setting up rabbitmq..."
-    $SUDO rabbitmqctl add_user astrobin s3cr3t
+    $SUDO rabbitmqctl add_user astrobin $PASSWORD
     $SUDO rabbitmqctl add_vhost astrobin
     $SUDO rabbitmqctl set_permissions -p astrobin astrobin ".*" ".*" ".*"
 }
@@ -275,23 +291,23 @@ function abc {
     (
         mkdir -p /tmp/libabc_build; \
         cd /tmp/libabc_build; \
-        qmake /var/www/astrobin/submodules/abc && make -j4 && $SUDO make install
+        qmake /var/www/astrobin/submodules/abc && make -j 4 && $SUDO make install
     )
 }
 
 function astrobin {
     echo "Preparing AstroBin..."
 
-    $SUDO -u astrobin /bin/bash - <<"EOF"
+    $SUDO -u astrobin /bin/bash - <<EOF
     # Initialize the environment
     . /venv/astrobin/dev/bin/activate
-    . /var/www/astrobin/env/dev
+    . $DEV
 
     # Automatically activating the environment upon login
     if [ ! -f /home/astrobin/.profile.customized ]; then
         touch /home/astrobin/.profile.customized &&
         echo "source /venv/astrobin/dev/bin/activate" >> /home/astrobin/.profile &&
-        echo "source /var/www/astrobin/env/dev" >> /home/astrobin/.profile &&
+        echo "source $DEV" >> /home/astrobin/.profile &&
         echo "cd /var/www/astrobin" >> /home/astrobin/.profile
     fi
 
@@ -302,8 +318,8 @@ function astrobin {
     fi
 
     # Initialize db
-    /var/www/astrobin/manage.py syncdb --noinput
     /var/www/astrobin/manage.py migrate
+    /var/www/astrobin/manage.py migrate --run-syncdb
     /var/www/astrobin/manage.py sync_translation_fields --noinput
 
     /var/www/astrobin/manage.py collectstatic --noinput
@@ -330,9 +346,9 @@ function solr {
 EOF
     fi
 
-    $SUDO -u astrobin /bin/bash - <<"EOF"
+    $SUDO -u astrobin /bin/bash - <<EOF
     . /venv/astrobin/dev/bin/activate
-    . /var/www/astrobin/env/dev
+    . $DEV
 
     /var/www/astrobin/manage.py build_solr_schema > /opt/solr/solr-4.9.1/example/solr/collection1/conf/schema.xml
 
@@ -353,7 +369,6 @@ function end {
     astrobin_log "### All done!"
     astrobin_log "#################################################################"
 }
-
 
 if [ "$1" != "1" ]; then
     exec 3>&1 &>/var/www/astrobin/vagrant.log

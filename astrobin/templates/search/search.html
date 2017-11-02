@@ -257,7 +257,7 @@
     <div class="span9">
         {% if 'q' in request.GET %}
             <div class="search-results">
-                {% search_image_list page.object_list %}
+                {% search_image_list %}
             </div>
         {% else %}
             <div class="well">{% blocktrans %}Please input some search terms!{% endblocktrans %}</div>

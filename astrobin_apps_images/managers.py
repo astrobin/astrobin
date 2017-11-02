@@ -1,8 +1,8 @@
 from django.db import models
 
 class ImagesManager(models.Manager):
-    def get_query_set(self):
-        return super(ImagesManager, self).get_query_set()\
+    def get_queryset(self):
+        return super(ImagesManager, self).get_queryset()\
             .select_related(
                 'user__userprofile',
             )\
@@ -15,13 +15,13 @@ class ImagesManager(models.Manager):
 
 
 class PublicImagesManager(ImagesManager):
-    def get_query_set(self):
-        return super(PublicImagesManager, self).get_query_set()\
+    def get_queryset(self):
+        return super(PublicImagesManager, self).get_queryset()\
             .filter(is_wip = False)
 
 
 class WipImagesManager(ImagesManager):
-    def get_query_set(self):
-        return super(WipImagesManager, self).get_query_set()\
+    def get_queryset(self):
+        return super(WipImagesManager, self).get_queryset()\
             .filter(is_wip = True)
 

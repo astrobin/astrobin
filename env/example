@@ -1,14 +1,11 @@
 # Do not modify the next line
-export DJANGO_SETTINGS_MODULE="settings"
+export DJANGO_SETTINGS_MODULE='settings'
 
+export ASTROBIN_BASE_URL='127.0.0.1'
+export ASTROBIN_SHORT_BASE_URL='127.0.0.1'
+export ASTROBIN_HOST='127.0.0.1'
 export ASTROBIN_DEBUG='true'
 export ASTROBIN_DEBUG_TOOLBAR='false'
-export ASTROBIN_HOST='localhost'
-export ASTROBIN_EMAIL_HOST_USER=''
-export ASTROBIN_EMAIL_HOST_PASSWORD=''
-export ASTROBIN_EMAIL_HOST='127.0.0.1'
-export ASTROBIN_EMAIL_PORT='1025'
-export ASTROBIN_EMAIL_USE_TLS='false'
 
 export ASTROBIN_DATABASE_HOST='127.0.0.1'
 export ASTROBIN_DATABASE_NAME='astrobin'
@@ -21,6 +18,16 @@ export ASTROBIN_DATABASE_PASSWORD='s3cr3t'
 # http://www.miniwebtool.com/django-secret-key-generator/
 export ASTROBIN_DJANGO_SECRET_KEY='***CHANGE ME***'
 
+# Email settings
+export ASTROBIN_SERVER_EMAIL='noreply@astrobin.com'
+export ASTROBIN_DEFAULT_FROM_EMAIL='AstroBin <noreply@astrobin.com>'
+export ASTROBIN_EMAIL_SUBJECT_PREFIX='[AstroBin]'
+export ASTROBIN_EMAIL_HOST_USER=''
+export ASTROBIN_EMAIL_HOST_PASSWORD=''
+export ASTROBIN_EMAIL_HOST='127.0.0.1'
+export ASTROBIN_EMAIL_PORT='1025'
+export ASTROBIN_EMAIL_USE_TLS='false'
+
 # Optionally, AstroBin can use Amazon S3 to store images and static files.
 # To enable that, set the AWS_S3_ENABLED variable to True in
 # astrobin/settings.py.
@@ -28,8 +35,8 @@ export ASTROBIN_DJANGO_SECRET_KEY='***CHANGE ME***'
 # free for development purposes, because the first GB is always free.
 #
 # IMPORTANT: You only need this if you are using Amazon S3.
-export ASTROBIN_AWS_S3_ENABLED="false"
-export ASTROBIN_LOCAL_STATIC_STORAGE="true"
+export ASTROBIN_AWS_S3_ENABLED='false'
+export ASTROBIN_LOCAL_STATIC_STORAGE='true'
 export ASTROBIN_AWS_ACCESS_KEY_ID='***CHANGE ME OPTIONALLY***'
 export ASTROBIN_AWS_SECRET_ACCESS_KEY='***CHANGE ME OPTIONALLY***'
 
@@ -45,7 +52,7 @@ export ASTROBIN_AWS_STORAGE_BUCKET_NAME='cdn.astrobin.com'
 # http://my_bucket.s3.amazonaws.com/...
 #
 # IMPORTANT: You only need these if you are using Amazon S3.
-export ASTROBIN_IMAGES_URL='http://cdn.astrobin.com/images/'
+export ASTROBIN_IMAGES_URL='http://cdn.astrobin.com/'
 export ASTROBIN_CDN_URL='http://cdn.astrobin.com/'
 
 # AstroBin can import data from Flickr
@@ -55,18 +62,31 @@ export ASTROBIN_FLICKR_SECRET='***CHANGE ME***'
 export ASTROBIN_HAYSTACK_SOLR_URL='http://127.0.0.1:8983/solr'
 
 # AstroBin uses RabbitMQ as a broker to deal messages to celery.
-export ASTROBIN_BROKER_USER='astrobin'
 export ASTROBIN_BROKER_PASSWORD='s3cr3t'
-
+export ASTROBIN_BROKER_URL='amqp://astrobin:${ASTROBIN_BROKER_PASSWORD}@127.0.0.1:5672/astrobin'
 export ASTROBIN_CELERY_RESULT_DBURI='psql://${ASTROBIN_DATABASE_USER}:${ASTROBIN_DATABASE_PASSWORD}@${ASTROBIN_DATABASE_HOST}/${ASTROBIN_DATABASE_NAME}'
 
-# AstroBin uses Astormetry.net to plate-solve images. You can create an
+# AstroBin uses Astrometry.net to plate-solve images. You can create an
 # account there and get a key for free.
 export ASTROMETRY_NET_API_KEY='***CHANGE ME***'
 
 # The location of the rawdata files
 export ASTROBIN_RAWDATA_ROOT='/rawdata/files'
 
+# The PayPal merchant ID used to get payments for donations, Premium, and Raw Data
 export ASTROBIN_PAYPAL_MERCHANT_ID='***CHANGE ME OPTIONALLY***'
 
+# The minimum value of AstroBin index allowed to Like images
 export ASTROBIN_MIN_INDEX_TO_LIKE='1.00'
+
+# The Google Analytics app ID
+export ASTROBIN_GOOGLE_ANALYTICS_ID='UA-XXYYZZ-99'
+
+# Whether ads are enabled
+export ASTROBIN_ADS_ENABLED='true'
+#
+# Whether the donations platform is enabled
+export ASTROBIN_DONATIONS_ENABLED='true'
+
+# Whether the Premium platform is enabled
+export ASTROBIN_PREMIUM_ENABLED='true'

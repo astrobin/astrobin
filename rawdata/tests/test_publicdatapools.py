@@ -1,6 +1,6 @@
 # Django
 from django.core.urlresolvers import reverse
-from django.test import TestCase
+from django.test import TransactionTestCase
 from django.utils.http import urlencode
 
 # Other AstroBin apps
@@ -13,7 +13,7 @@ from rawdata.models import PublicDataPool, TemporaryArchive
 from .test_common import *
 
 
-class PublicDataPoolTest(TestCase):
+class PublicDataPoolTest(TransactionTestCase):
     def setUp(self):
         setup_data(self)
 

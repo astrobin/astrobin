@@ -547,6 +547,9 @@ class ImageDetailView(DetailView):
 
         from astrobin_apps_platesolving.solver import Solver
 
+        if skyplot_zoom1 and not skyplot_zoom1.name.startswith('images/'):
+                skyplot_zoom1.name = 'images/' + skyplot_zoom1.name
+
         response_dict = context.copy()
         response_dict.update({
             'SHARE_PATH': settings.ASTROBIN_SHORT_BASE_URL,

@@ -508,23 +508,6 @@ class ImageTest(TestCase):
         self.assertEqual(response.status_code, 200)
         image.delete()
 
-    def test_image_rawthumb_view(self):
-        self.client.login(username = 'test', password = 'password')
-        self._do_upload('astrobin/fixtures/test.jpg')
-        image = self._get_last_image()
-        response = self.client.get(
-            reverse('image_rawthumb', kwargs = {
-                'id': image.id,
-                'alias': 'regular'
-            }),
-            follow = True)
-        self.assertRedirects(
-            response,
-            image.thumbnail('regular'),
-            status_code = 302,
-            target_status_code = 200)
-        image.delete()
-
     def test_image_full_view(self):
         self.client.login(username = 'test', password = 'password')
         self._do_upload('astrobin/fixtures/test.jpg')

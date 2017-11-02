@@ -4,7 +4,7 @@ import os
 # Django
 from django.conf import settings
 from django.core.urlresolvers import reverse
-from django.test import TestCase
+from django.test import TransactionTestCase
 from django.utils.http import urlencode
 
 # This app
@@ -14,7 +14,7 @@ from rawdata.models import RawImage, TemporaryArchive
 from .test_common import *
 
 
-class RawImageTest(TestCase):
+class RawImageTest(TransactionTestCase):
     def setUp(self):
         setup_data(self)
 
@@ -29,7 +29,7 @@ class RawImageTest(TestCase):
 
     def test_api_create_anon(self):
         f, h = get_file()
-        test_response(self, reverse('api.rawdata.rawimage.list'), {'file': f}, 403)
+        test_response(self, reverse('api.rawdata.rawimage.list'), {'file': f}, 401)
         f.close()
 
     def test_api_create_unsub(self):
@@ -43,7 +43,7 @@ class RawImageTest(TestCase):
         f, h = get_file()
         self.client.login(username = 'username_sub', password = 'passw0rd')
         test_response(self, reverse('api.rawdata.rawimage.list'), {}, 400,
-                            'file', "This field is required.")
+                            'file', "No file was submitted.")
         self.client.logout()
         f.close()
 
@@ -78,7 +78,6 @@ class RawImageTest(TestCase):
         f, h = get_file()
         self.client.login(username = 'username_sub', password = 'passw0rd')
         response = test_response(self, reverse('api.rawdata.rawimage.list'), {'file': f}, 201)
-        self.assertEqual(os.path.exists(os.path.join(settings.RAWDATA_ROOT, response['file'])), True)
         self.client.logout()
         f.close()
 

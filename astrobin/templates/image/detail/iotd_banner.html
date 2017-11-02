@@ -2,7 +2,7 @@
 {% load astrobin_apps_iotd_tags %}
 
 {% if image|is_current_or_past_iotd and not image.user.userprofile.exclude_from_competitions %}
-    {% with iotd=image.iotd_set.all.0 %}
+    {% with iotd=image.iotd %}
         <div class="iotd-ribbon-container">
             <div class="iotd-ribbon">
                 <div class="ribbon-stitches-top"></div>

@@ -1,6 +1,13 @@
 # Django
 from django.contrib.auth.models import User
-from django.contrib.contenttypes import generic
+
+try:
+    # Django < 1.10
+    from django.contrib.contenttypes.generic import GenericForeignKey
+except ImportError:
+    # Django >= 1.10
+    from django.contrib.contenttypes.fields import GenericForeignKey
+
 from django.contrib.contenttypes.models import ContentType
 from django.core.exceptions import ValidationError
 from django.db import models
@@ -17,7 +24,7 @@ class NestedComment(models.Model):
 
     object_id = models.PositiveIntegerField()
 
-    content_object = generic.GenericForeignKey(
+    content_object = GenericForeignKey(
         'content_type',
         'object_id',
     )

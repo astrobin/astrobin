@@ -1,5 +1,5 @@
 {% load i18n %}
-{% load endless %}
+{% load el_pagination_tags %}
 {% load astrobin_apps_groups_tags %}
 
 {% lazy_paginate 50 object.members.all as members %}

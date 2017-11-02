@@ -1,11 +1,11 @@
 # Django
 from django.conf import settings
-from django.conf.urls import patterns, url, include
+from django.conf.urls import url, include
+from django.conf.urls.static import static
 from django.contrib import admin
 from django.contrib.auth import views as auth_views
 
 # Third party
-from hitcount.views import update_hit_count_ajax
 from tastypie.api import Api
 from threaded_messages.forms import ComposeForm as MessagesComposeForm
 from threaded_messages.views import batch_update as messages_batch_update
@@ -25,13 +25,110 @@ from rawdata.views.helppages import (
 
 # AstroBin
 from astrobin import lookups
-from astrobin import views
 from astrobin.views import (
     api as api_views,
     explore as explore_views,
     image as image_views,
     moderation as moderation_views,
     collections as collections_views,
+
+    index,
+
+    image_edit_acquisition,
+    image_edit_acquisition_reset,
+    image_edit_license,
+    image_edit_platesolving_settings,
+    image_edit_make_final,
+    image_edit_revision_make_final,
+    image_edit_save_acquisition,
+    image_edit_save_license,
+    image_edit_save_watermark,
+    image_edit_watermark,
+    image_upload,
+    image_upload_process,
+    image_revision_upload_process,
+
+    stats_get_image_views_ajax,
+    me,
+    user_page,
+    user_page_api_keys,
+    user_ban,
+    user_page_bookmarks,
+    user_page_liked,
+    user_page_commercial_products,
+    user_page_followers,
+    user_page_following,
+    user_page_plots,
+    user_profile_stats_get_integration_hours_ajax,
+    user_profile_stats_get_integration_hours_by_gear_ajax,
+    user_profile_stats_get_uploaded_images_ajax,
+    user_profile_stats_get_views_ajax,
+
+    flickr_auth_callback,
+    user_profile_delete,
+    user_profile_edit_basic,
+    user_profile_edit_commercial,
+    user_profile_flickr_import,
+    user_profile_edit_gear,
+    user_profile_edit_gear_remove,
+    user_profile_edit_license,
+    user_profile_edit_locations,
+    user_profile_edit_preferences,
+    user_profile_edit_retailer,
+    user_profile_save_basic,
+    user_profile_save_gear,
+    user_profile_save_license,
+    user_profile_save_locations,
+    user_profile_save_preferences,
+    user_profile_seen_realname,
+
+    commercial_products_claim,
+    commercial_products_edit,
+    commercial_products_merge,
+    retailed_products_claim,
+    retailed_products_edit,
+    retailed_products_merge,
+    retailed_products_unclaim,
+    commercial_products_save,
+    commercial_products_unclaim,
+
+    gear_page,
+    gear_by_ids,
+    gear_by_image,
+    gear_by_make,
+    gear_fix,
+    gear_fix_save,
+    gear_fix_thanks,
+    gear_review_save,
+    gear_popover_ajax,
+    get_makes_by_type,
+    get_edit_gear_form,
+    get_empty_edit_gear_form,
+    get_gear_user_info_form,
+    get_is_gear_complete,
+    save_gear_details,
+    save_gear_user_info,
+    user_popover_ajax,
+
+    stats_camera_types_trend_ajax,
+    stats_telescope_types_trend_ajax,
+    stats_subject_type_trend_ajax,
+    stats_subject_images_monthly_ajax,
+    stats_subject_camera_types_ajax,
+    stats_subject_telescope_types_ajax,
+    stats_subject_total_images_ajax,
+    stats_subject_integration_monthly_ajax,
+
+    affiliates,
+    faq,
+    guidelines,
+    help,
+    api_help,
+    trending_astrophotographers,
+    stats,
+    tos,
+
+    set_language
 )
 from astrobin.api import (
     ImageOfTheDayResource,
@@ -39,8 +136,7 @@ from astrobin.api import (
     ImageRevisionResource,
     LocationResource,
     CollectionResource)
-from astrobin.forms import AdvancedSearchForm
-from astrobin.search import SearchView
+from astrobin.search import AstroBinSearchView
 
 admin.autodiscover()
 
@@ -52,13 +148,12 @@ v1_api.register(ImageRevisionResource())
 v1_api.register(ImageOfTheDayResource())
 v1_api.register(CollectionResource())
 
-urlpatterns = patterns('',
+urlpatterns = [
     ###########################################################################
     ### DJANGO VIEWS                                                        ###
     ###########################################################################
 
     url(r'^admin/', include(admin.site.urls)),
-    url(r'^media/(?P<path>.*)$', 'django.views.static.serve', {'document_root': settings.MEDIA_ROOT}),
 
     ###########################################################################
     ### THIRD PARTY APPS VIEWS                                              ###
@@ -85,15 +180,13 @@ urlpatterns = patterns('',
           name='password_reset_confirm'),
     #and now add the registration urls
     url(r'^accounts/', include('registration.backends.default.urls')),
-    url(r'^accounts/email/', include('change_email.urls')),
 
     url(r'^activity/', include('actstream.urls')),
     url(r'^avatar/', include('avatar.urls')),
-    url(r'^comments/', include('django.contrib.comments.urls')),
+    url(r'^comments/', include('django_comments.urls')),
     url(r'^contact/', include("contact_form.urls", namespace="contact_form")),
     url(r'^forum/', include('pybb.urls', namespace='pybb')),
-    url(r'^hitcount/$', update_hit_count_ajax, name='hitcount_update_ajax'),
-    url(r'^openid/', include('openid_provider.urls')),
+    url(r'hitcount/', include('hitcount.urls', namespace='hitcount')),
     url(r'^persistent_messages/', include('persistent_messages.urls')),
     url(r'^subscriptions/', include('subscription.urls')),
     url(r'^tinymce/', include('tinymce.urls')),
@@ -130,7 +223,7 @@ urlpatterns = patterns('',
     ### HOME VIEWS                                                          ###
     ###########################################################################
 
-    url(r'^$', views.index, name='index'),
+    url(r'^$',index, name='index'),
 
     ###########################################################################
     ### IMAGE VIEWS                                                         ###
@@ -150,29 +243,29 @@ urlpatterns = patterns('',
     url(r'^delete/original/(?P<id>\d+)/$', image_views.ImageDeleteOriginalView.as_view(), name='image_delete_original'),
     url(r'^delete/revision/(?P<id>\d+)/$', image_views.ImageRevisionDeleteView.as_view(), name='image_delete_revision'),
     url(r'^demote/(?P<id>\d+)/$', image_views.ImageDemoteView.as_view(), name='image_demote'),
-    url(r'^edit/acquisition/(?P<id>\d+)/$', views.image_edit_acquisition, name='image_edit_acquisition'),
-    url(r'^edit/acquisition/reset/(?P<id>\d+)/$', views.image_edit_acquisition_reset, name='image_edit_acquisition_reset'),
+    url(r'^edit/acquisition/(?P<id>\d+)/$', image_edit_acquisition, name='image_edit_acquisition'),
+    url(r'^edit/acquisition/reset/(?P<id>\d+)/$',image_edit_acquisition_reset, name='image_edit_acquisition_reset'),
     url(r'^edit/basic/(?P<id>\d+)/$', image_views.ImageEditBasicView.as_view(), name='image_edit_basic'),
     url(r'^edit/gear/(?P<id>\d+)/$', image_views.ImageEditGearView.as_view(), name='image_edit_gear'),
-    url(r'^edit/license/(?P<id>\d+)/$', views.image_edit_license, name='image_edit_license'),
-    url(r'^edit/platesolving/(?P<pk>\d+)/(?:(?P<revision_label>\w+)/)?$', views.image_edit_platesolving_settings, name='image_edit_platesolving_settings'),
-    url(r'^edit/makefinal/(?P<id>\d+)/$', views.image_edit_make_final, name='image_edit_make_final'),
-    url(r'^edit/revision/makefinal/(?P<id>\d+)/$', views.image_edit_revision_make_final, name='image_edit_revision_make_final'),
-    url(r'^edit/save/acquisition/$', views.image_edit_save_acquisition, name='image_edit_save_acquisition'),
-    url(r'^edit/save/license/$', views.image_edit_save_license, name='image_edit_save_license'),
-    url(r'^edit/save/watermark/$', views.image_edit_save_watermark, name='image_edit_save_watermark'),
-    url(r'^edit/watermark/(?P<id>\d+)/$', views.image_edit_watermark, name='image_edit_watermark'),
+    url(r'^edit/license/(?P<id>\d+)/$', image_edit_license, name='image_edit_license'),
+    url(r'^edit/platesolving/(?P<pk>\d+)/(?:(?P<revision_label>\w+)/)?$', image_edit_platesolving_settings, name='image_edit_platesolving_settings'),
+    url(r'^edit/makefinal/(?P<id>\d+)/$', image_edit_make_final, name='image_edit_make_final'),
+    url(r'^edit/revision/makefinal/(?P<id>\d+)/$', image_edit_revision_make_final, name='image_edit_revision_make_final'),
+    url(r'^edit/save/acquisition/$', image_edit_save_acquisition, name='image_edit_save_acquisition'),
+    url(r'^edit/save/license/$', image_edit_save_license, name='image_edit_save_license'),
+    url(r'^edit/save/watermark/$', image_edit_save_watermark, name='image_edit_save_watermark'),
+    url(r'^edit/watermark/(?P<id>\d+)/$', image_edit_watermark, name='image_edit_watermark'),
     url(r'^edit/revision/(?P<id>\d+)/$', image_views.ImageEditRevisionView.as_view(), name='image_edit_revision'),
     url(r'^promote/(?P<id>\d+)/$', image_views.ImagePromoteView.as_view(), name='image_promote'),
-    url(r'^upload/$', views.image_upload, name='image_upload'),
-    url(r'^upload/process$', views.image_upload_process, name='image_upload_process'),
-    url(r'^upload/revision/process/$', views.image_revision_upload_process, name='image_revision_upload_process'),
+    url(r'^upload/$', image_upload, name='image_upload'),
+    url(r'^upload/process$', image_upload_process, name='image_upload_process'),
+    url(r'^upload/revision/process/$', image_revision_upload_process, name='image_revision_upload_process'),
 
     ###########################################################################
     ### SEARCH VIEWS                                                        ###
     ###########################################################################
 
-    url(r'^search/', SearchView(form_class=AdvancedSearchForm), name='haystack_search'),
+    url(r'^search/', AstroBinSearchView.as_view(), name='haystack_search'),
 
     ###########################################################################
     ### EXPLORE VIEWS                                                       ###
@@ -185,50 +278,50 @@ urlpatterns = patterns('',
     ### USER VIEWS                                                          ###
     ###########################################################################
 
-    url(r'^(?P<id>\d+)/stats/views/(?P<period>\w+)/$', views.stats_get_image_views_ajax, name = 'stats_image_views'),
-    url(r'^me/$', views.me, name='me'),
-    url(r'^users/(?P<username>[\w.@+-]+)/$', views.user_page, name='user_page'),
+    url(r'^(?P<id>\d+)/stats/views/(?P<period>\w+)/$', stats_get_image_views_ajax, name = 'stats_image_views'),
+    url(r'^me/$', me, name='me'),
+    url(r'^users/(?P<username>[\w.@+-]+)/$', user_page, name='user_page'),
     url(r'^users/(?P<username>[\w.@+-]+)/collections/$', collections_views.UserCollectionsList.as_view(), name='user_collections_list'),
     url(r'^users/(?P<username>[\w.@+-]+)/collections/create/$', collections_views.UserCollectionsCreate.as_view(), name='user_collections_create'),
     url(r'^users/(?P<username>[\w.@+-]+)/collections/(?P<collection_pk>\d+)/$', collections_views.UserCollectionsDetail.as_view(), name='user_collections_detail'),
     url(r'^users/(?P<username>[\w.@+-]+)/collections/(?P<collection_pk>\d+)/update/$', collections_views.UserCollectionsUpdate.as_view(), name='user_collections_update'),
     url(r'^users/(?P<username>[\w.@+-]+)/collections/(?P<collection_pk>\d+)/add-remove-images/$', collections_views.UserCollectionsAddRemoveImages.as_view(), name='user_collections_add_remove_images'),
     url(r'^users/(?P<username>[\w.@+-]+)/collections/(?P<collection_pk>\d+)/delete/$', collections_views.UserCollectionsDelete.as_view(), name='user_collections_delete'),
-    url(r'^users/(?P<username>[\w.@+-]+)/apikeys/$', views.user_page_api_keys, name='user_page_api_keys'),
-    url(r'^users/(?P<username>[\w.@+-]+)/ban/$', views.user_ban, name='user_ban'),
-    url(r'^users/(?P<username>[\w.@+-]+)/bookmarks/$', views.user_page_bookmarks, name='user_page_bookmarks'),
-    url(r'^users/(?P<username>[\w.@+-]+)/liked/$', views.user_page_liked, name='user_page_liked'),
-    url(r'^users/(?P<username>[\w.@+-]+)/commercial/products/$', views.user_page_commercial_products, name='user_page_commercial_products'),
-    url(r'^users/(?P<username>[\w.@+-]+)/followers/$', views.user_page_followers, name='user_page_followers'),
-    url(r'^users/(?P<username>[\w.@+-]+)/following/$', views.user_page_following, name='user_page_following'),
-    url(r'^users/(?P<username>[\w.@+-]+)/plots/$', views.user_page_plots, name='user_page_plots'),
-    url(r'^users/(?P<username>[\w.@+-]+)/stats/integration_hours/(?P<period>\w+)/(?P<since>\d+)/$', views.user_profile_stats_get_integration_hours_ajax, name = 'stats_integration_hours'),
-    url(r'^users/(?P<username>[\w.@+-]+)/stats/integration_hours_by_gear/(?P<period>\w+)/$', views.user_profile_stats_get_integration_hours_by_gear_ajax, name = 'stats_integration_hours_by_gear'),
-    url(r'^users/(?P<username>[\w.@+-]+)/stats/uploaded_images/(?P<period>\w+)/$', views.user_profile_stats_get_uploaded_images_ajax, name = 'stats_uploaded_images'),
-    url(r'^users/(?P<username>[\w.@+-]+)/stats/views/(?P<period>\w+)/$', views.user_profile_stats_get_views_ajax, name = 'stats_views'),
+    url(r'^users/(?P<username>[\w.@+-]+)/apikeys/$',user_page_api_keys, name='user_page_api_keys'),
+    url(r'^users/(?P<username>[\w.@+-]+)/ban/$',user_ban, name='user_ban'),
+    url(r'^users/(?P<username>[\w.@+-]+)/bookmarks/$',user_page_bookmarks, name='user_page_bookmarks'),
+    url(r'^users/(?P<username>[\w.@+-]+)/liked/$', user_page_liked, name='user_page_liked'),
+    url(r'^users/(?P<username>[\w.@+-]+)/commercial/products/$',user_page_commercial_products, name='user_page_commercial_products'),
+    url(r'^users/(?P<username>[\w.@+-]+)/followers/$',user_page_followers, name='user_page_followers'),
+    url(r'^users/(?P<username>[\w.@+-]+)/following/$',user_page_following, name='user_page_following'),
+    url(r'^users/(?P<username>[\w.@+-]+)/plots/$',user_page_plots, name='user_page_plots'),
+    url(r'^users/(?P<username>[\w.@+-]+)/stats/integration_hours/(?P<period>\w+)/(?P<since>\d+)/$',user_profile_stats_get_integration_hours_ajax, name = 'stats_integration_hours'),
+    url(r'^users/(?P<username>[\w.@+-]+)/stats/integration_hours_by_gear/(?P<period>\w+)/$',user_profile_stats_get_integration_hours_by_gear_ajax, name = 'stats_integration_hours_by_gear'),
+    url(r'^users/(?P<username>[\w.@+-]+)/stats/uploaded_images/(?P<period>\w+)/$',user_profile_stats_get_uploaded_images_ajax, name = 'stats_uploaded_images'),
+    url(r'^users/(?P<username>[\w.@+-]+)/stats/views/(?P<period>\w+)/$',user_profile_stats_get_views_ajax, name = 'stats_views'),
 
     ###########################################################################
     ### PROFILE VIEWS                                                       ###
     ###########################################################################
 
-    url(r'^flickr_auth_callback/$', views.flickr_auth_callback, name='flickr_auth_callback'),
-    url(r'^profile/delete/$', views.user_profile_delete, name='profile_delete'),
-    url(r'^profile/edit/$', views.user_profile_edit_basic, name='profile_edit_basic'),
-    url(r'^profile/edit/basic/$', views.user_profile_edit_basic, name='profile_edit_basic'),
-    url(r'^profile/edit/commercial/$', views.user_profile_edit_commercial, name='profile_edit_commercial'),
-    url(r'^profile/edit/flickr/$', views.user_profile_flickr_import, name='profile_flickr_import'),
-    url(r'^profile/edit/gear/$', views.user_profile_edit_gear, name='profile_edit_gear'),
-    url(r'^profile/edit/gear/remove/(?P<id>\d+)/$', views.user_profile_edit_gear_remove, name='profile_edit_gear_remove'),
-    url(r'^profile/edit/license/$', views.user_profile_edit_license, name='profile_edit_license'),
-    url(r'^profile/edit/locations/$', views.user_profile_edit_locations, name='profile_edit_locations'),
-    url(r'^profile/edit/preferences/$', views.user_profile_edit_preferences, name='profile_edit_preferences'),
-    url(r'^profile/edit/retailer/$', views.user_profile_edit_retailer, name='profile_edit_retailer'),
-    url(r'^profile/save/basic/$', views.user_profile_save_basic, name='profile_save_basic'),
-    url(r'^profile/save/gear/$', views.user_profile_save_gear, name='profile_save_gear'),
-    url(r'^profile/save/license/$', views.user_profile_save_license, name='profile_save_license'),
-    url(r'^profile/save/locations/$', views.user_profile_save_locations, name='profile_save_locations'),
-    url(r'^profile/save/preferences/$', views.user_profile_save_preferences, name='profile_save_preferences'),
-    url(r'^profile/seen/realname/$', views.user_profile_seen_realname, name='profile_seen_realname'),
+    url(r'^flickr_auth_callback/$',flickr_auth_callback, name='flickr_auth_callback'),
+    url(r'^profile/delete/$',user_profile_delete, name='profile_delete'),
+    url(r'^profile/edit/$',user_profile_edit_basic, name='profile_edit_basic'),
+    url(r'^profile/edit/basic/$',user_profile_edit_basic, name='profile_edit_basic'),
+    url(r'^profile/edit/commercial/$',user_profile_edit_commercial, name='profile_edit_commercial'),
+    url(r'^profile/edit/flickr/$',user_profile_flickr_import, name='profile_flickr_import'),
+    url(r'^profile/edit/gear/$',user_profile_edit_gear, name='profile_edit_gear'),
+    url(r'^profile/edit/gear/remove/(?P<id>\d+)/$',user_profile_edit_gear_remove, name='profile_edit_gear_remove'),
+    url(r'^profile/edit/license/$',user_profile_edit_license, name='profile_edit_license'),
+    url(r'^profile/edit/locations/$',user_profile_edit_locations, name='profile_edit_locations'),
+    url(r'^profile/edit/preferences/$',user_profile_edit_preferences, name='profile_edit_preferences'),
+    url(r'^profile/edit/retailer/$',user_profile_edit_retailer, name='profile_edit_retailer'),
+    url(r'^profile/save/basic/$',user_profile_save_basic, name='profile_save_basic'),
+    url(r'^profile/save/gear/$',user_profile_save_gear, name='profile_save_gear'),
+    url(r'^profile/save/license/$',user_profile_save_license, name='profile_save_license'),
+    url(r'^profile/save/locations/$',user_profile_save_locations, name='profile_save_locations'),
+    url(r'^profile/save/preferences/$',user_profile_save_preferences, name='profile_save_preferences'),
+    url(r'^profile/seen/realname/$',user_profile_seen_realname, name='profile_seen_realname'),
 
     ###########################################################################
     ### AUTOCOMPLETE VIEWS                                                 ###
@@ -242,55 +335,55 @@ urlpatterns = patterns('',
     ### AFFILIATION PLATFORM VIEWS                                          ###
     ###########################################################################
 
-    url(r'^commercial/products/claim/(?P<id>\d+)/$', views.commercial_products_claim, name='commercial_products_claim'),
-    url(r'^commercial/products/edit/(?P<id>\d+)/$', views.commercial_products_edit, name='commercial_products_edit'),
-    url(r'^commercial/products/merge/(?P<from_id>\d+)/(?P<to_id>\d+)/$', views.commercial_products_merge, name='commercial_products_merge'),
-    url(r'^commercial/products/retailed/claim/(?P<id>\d+)/$', views.retailed_products_claim, name='retailed_products_claim'),
-    url(r'^commercial/products/retailed/edit/(?P<id>\d+)/$', views.retailed_products_edit, name='retailed_products_edit'),
-    url(r'^commercial/products/retailed/merge/(?P<from_id>\d+)/(?P<to_id>\d+)/$', views.retailed_products_merge, name='retailedgg_products_merge'),
-    url(r'^commercial/products/retailed/unclaim/(?P<id>\d+)/$', views.retailed_products_unclaim, name='retailed_products_unclaim'),
-    url(r'^commercial/products/save/(?P<id>\d+)/$', views.commercial_products_save, name='commercial_products_save'),
-    url(r'^commercial/products/unclaim/(?P<id>\d+)/$', views.commercial_products_unclaim, name='commercial_products_unclaim'),
+    url(r'^commercial/products/claim/(?P<id>\d+)/$',commercial_products_claim, name='commercial_products_claim'),
+    url(r'^commercial/products/edit/(?P<id>\d+)/$',commercial_products_edit, name='commercial_products_edit'),
+    url(r'^commercial/products/merge/(?P<from_id>\d+)/(?P<to_id>\d+)/$',commercial_products_merge, name='commercial_products_merge'),
+    url(r'^commercial/products/retailed/claim/(?P<id>\d+)/$',retailed_products_claim, name='retailed_products_claim'),
+    url(r'^commercial/products/retailed/edit/(?P<id>\d+)/$',retailed_products_edit, name='retailed_products_edit'),
+    url(r'^commercial/products/retailed/merge/(?P<from_id>\d+)/(?P<to_id>\d+)/$',retailed_products_merge, name='retailedgg_products_merge'),
+    url(r'^commercial/products/retailed/unclaim/(?P<id>\d+)/$',retailed_products_unclaim, name='retailed_products_unclaim'),
+    url(r'^commercial/products/save/(?P<id>\d+)/$',commercial_products_save, name='commercial_products_save'),
+    url(r'^commercial/products/unclaim/(?P<id>\d+)/$',commercial_products_unclaim, name='commercial_products_unclaim'),
 
     ###########################################################################
     ### GEAR VIEWS                                                          ###
     ###########################################################################
 
-    url(r'^gear/(?P<id>\d+)/(?:(?P<slug>[a-z0-9-_]+)/)?$', views.gear_page, name='gear_page'),
-    url(r'^gear/by-ids/(?P<ids>([0-9]+,?)+)/$', views.gear_by_ids, name='gear_by_ids'),
-    url(r'^gear/by-image/(?P<image_id>\d+)/$', views.gear_by_image, name='gear_by_image'),
-    url(r'^gear/by-make/(?P<make>[(\w|\W).+-]*)/$', views.gear_by_make, name='gear_by_make'),
-    url(r'^gear/fix/(?P<id>\d+)/$', views.gear_fix, name='gear_fix'),
-    url(r'^gear/fix/save/$', views.gear_fix_save, name='gear_fix_save'),
-    url(r'^gear/fix/thanks/$', views.gear_fix_thanks, name='gear_fix_thanks'),
-    url(r'^gear/review/save/$', views.gear_review_save, name='gear_review_save'),
-    url(r'^gear_popover_ajax/(?P<id>\d+)/$', views.gear_popover_ajax, name='gear_popover_ajax'),
-    url(r'^get-makes-by-type/(?P<klass>\w+)/$', views.get_makes_by_type, name='get_makes_by_type'),
-    url(r'^get_edit_gear_form/(?P<id>\d+)/$', views.get_edit_gear_form, name='get_edit_gear_form'),
-    url(r'^get_empty_edit_gear_form/(?P<gear_type>\w+)/$', views.get_empty_edit_gear_form, name='get_empty_edit_gear_form'),
-    url(r'^get_gear_user_info_form/(?P<id>\d+)/$', views.get_gear_user_info_form, name='get_gear_user_info_form'),
-    url(r'^get_is_gear_complete/(?P<id>\d+)/$', views.get_is_gear_complete, name='get_is_gear_complete'),
-    url(r'^save_gear_details/$', views.save_gear_details, name='save_gear_details'),
-    url(r'^save_gear_user_info/$', views.save_gear_user_info, name='save_gear_user_info'),
-    url(r'^user_popover_ajax/(?P<username>[\w.@+-]+)/$', views.user_popover_ajax, name='user_popover_ajax'),
+    url(r'^gear/(?P<id>\d+)/(?:(?P<slug>[a-z0-9-_]+)/)?$',gear_page, name='gear_page'),
+    url(r'^gear/by-ids/(?P<ids>([0-9]+,?)+)/$',gear_by_ids, name='gear_by_ids'),
+    url(r'^gear/by-image/(?P<image_id>\d+)/$',gear_by_image, name='gear_by_image'),
+    url(r'^gear/by-make/(?P<make>[(\w|\W).+-]*)/$',gear_by_make, name='gear_by_make'),
+    url(r'^gear/fix/(?P<id>\d+)/$',gear_fix, name='gear_fix'),
+    url(r'^gear/fix/save/$',gear_fix_save, name='gear_fix_save'),
+    url(r'^gear/fix/thanks/$',gear_fix_thanks, name='gear_fix_thanks'),
+    url(r'^gear/review/save/$',gear_review_save, name='gear_review_save'),
+    url(r'^gear_popover_ajax/(?P<id>\d+)/$',gear_popover_ajax, name='gear_popover_ajax'),
+    url(r'^get-makes-by-type/(?P<klass>\w+)/$',get_makes_by_type, name='get_makes_by_type'),
+    url(r'^get_edit_gear_form/(?P<id>\d+)/$',get_edit_gear_form, name='get_edit_gear_form'),
+    url(r'^get_empty_edit_gear_form/(?P<gear_type>\w+)/$',get_empty_edit_gear_form, name='get_empty_edit_gear_form'),
+    url(r'^get_gear_user_info_form/(?P<id>\d+)/$',get_gear_user_info_form, name='get_gear_user_info_form'),
+    url(r'^get_is_gear_complete/(?P<id>\d+)/$',get_is_gear_complete, name='get_is_gear_complete'),
+    url(r'^save_gear_details/$',save_gear_details, name='save_gear_details'),
+    url(r'^save_gear_user_info/$',save_gear_user_info, name='save_gear_user_info'),
+    url(r'^user_popover_ajax/(?P<username>[\w.@+-]+)/$',user_popover_ajax, name='user_popover_ajax'),
 
     ###########################################################################
     ### STATS VIEWS                                                         ###
     ###########################################################################
 
-    url(r'^stats/camera-types-trend/$', views.stats_camera_types_trend_ajax, name = 'stats_camera_types_trend'),
-    url(r'^stats/subject-type-trend/$', views.stats_subject_type_trend_ajax, name = 'stats_subject_type_trend'),
-    url(r'^stats/telescope-types-trend/$', views.stats_telescope_types_trend_ajax, name = 'stats_telescope_types_trend'),
+    url(r'^stats/camera-types-trend/$',stats_camera_types_trend_ajax, name = 'stats_camera_types_trend'),
+    url(r'^stats/subject-type-trend/$',stats_subject_type_trend_ajax, name = 'stats_subject_type_trend'),
+    url(r'^stats/telescope-types-trend/$',stats_telescope_types_trend_ajax, name = 'stats_telescope_types_trend'),
 
     ###########################################################################
     ### SUBJECT VIEWS                                                       ###
     ###########################################################################
 
-    url(r'^subject/stats/camera-types/(?P<id>\d+)/$', views.stats_subject_camera_types_ajax, name = 'stats_subject_camera_types'),
-    url(r'^subject/stats/images-monthly/(?P<id>\d+)/$', views.stats_subject_images_monthly_ajax, name = 'stats_subject_images_monthly'),
-    url(r'^subject/stats/integration-monthly/(?P<id>\d+)/$', views.stats_subject_integration_monthly_ajax, name = 'stats_subject_integration_monthly'),
-    url(r'^subject/stats/telescope-types/(?P<id>\d+)/$', views.stats_subject_telescope_types_ajax, name = 'stats_subject_telescope_types'),
-    url(r'^subject/stats/total-images/(?P<id>\d+)/$', views.stats_subject_total_images_ajax, name = 'stats_subject_total_images'),
+    url(r'^subject/stats/camera-types/(?P<id>\d+)/$',stats_subject_camera_types_ajax, name = 'stats_subject_camera_types'),
+    url(r'^subject/stats/images-monthly/(?P<id>\d+)/$',stats_subject_images_monthly_ajax, name = 'stats_subject_images_monthly'),
+    url(r'^subject/stats/integration-monthly/(?P<id>\d+)/$',stats_subject_integration_monthly_ajax, name = 'stats_subject_integration_monthly'),
+    url(r'^subject/stats/telescope-types/(?P<id>\d+)/$',stats_subject_telescope_types_ajax, name = 'stats_subject_telescope_types'),
+    url(r'^subject/stats/total-images/(?P<id>\d+)/$',stats_subject_total_images_ajax, name = 'stats_subject_total_images'),
 
     ###########################################################################
     ### MESSAGES VIEWS                                                      ###
@@ -331,22 +424,29 @@ urlpatterns = patterns('',
     ### PAGES VIEWS                                                         ###
     ###########################################################################
 
-    url(r'^affiliates/$', views.affiliates, name='affiliates'),
-    url(r'^faq/', views.faq, name='faq'),
-    url(r'^guidelines/', views.guidelines, name='guidelines'),
-    url(r'^help/$', views.help, name='help'),
-    url(r'^help/api/$', views.api_help, name='api'),
+    url(r'^affiliates/$',affiliates, name='affiliates'),
+    url(r'^faq/',faq, name='faq'),
+    url(r'^guidelines/',guidelines, name='guidelines'),
+    url(r'^help/$',help, name='help'),
+    url(r'^help/api/$',api_help, name='api'),
     url(r'^help/rawdata/1/$', RawDataHelp1.as_view(), name='rawdata.help1'),
     url(r'^help/rawdata/2/$', RawDataHelp2.as_view(), name='rawdata.help2'),
     url(r'^help/rawdata/3/$', RawDataHelp3.as_view(), name='rawdata.help3'),
     url(r'^trending-astrophotographers/',
-        views.trending_astrophotographers,
+       trending_astrophotographers,
         name='trending_astrophotographers'),
-    url(r'^stats/', views.stats, name='stats'),
-    url(r'^tos/', views.tos, name='tos'),
+    url(r'^stats/',stats, name='stats'),
+    url(r'^tos/',tos, name='tos'),
 
     ###########################################################################
     ### I18N VIEWS                                                          ###
     ###########################################################################
-    url(r'^language/set/(?P<lang>[\w-]+)/$', views.set_language, name='set_language'),
-)
+
+    url(r'^language/set/(?P<lang>[\w-]+)/$',set_language, name='set_language'),
+] + static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT);
+
+if settings.DEBUG_TOOLBAR:
+    import debug_toolbar
+    urlpatterns += [
+        url(r'^__debug__/', include(debug_toolbar.urls)),
+    ]

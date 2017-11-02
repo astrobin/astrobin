@@ -1,5 +1,5 @@
 {% load astrobin_apps_images_tags %}
-{% load endless %}
+{% load el_pagination_tags %}
 {% load i18n %}
 
 {% lazy_paginate recent_images_batch_size recent_images using "recent_images_page" %}

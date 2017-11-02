@@ -8,6 +8,7 @@ from astrobin_apps_platesolving.models import Solution
 class SolutionSerializer(serializers.ModelSerializer):
     class Meta:
         model = Solution
+        fields = '__all__'
         read_only_fields = (
             'status',
             'submission_id',

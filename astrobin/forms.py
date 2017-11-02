@@ -1,23 +1,29 @@
-from django import forms
-from django.db import models
-from django.utils.translation import ugettext_lazy as _
-from django.utils.datastructures import MultiValueDictKeyError
-
-from haystack.forms import SearchForm
-from haystack.query import SearchQuerySet, EmptySearchQuerySet
-from haystack.query import SQ
-
-from models import *
-from utils import affiliate_limit, retailer_affiliate_limit
-
-from astrobin_apps_groups.models import Group
-
+# Python
 import string
 import unicodedata
 import operator
 import datetime
 
-from management import NOTICE_TYPES
+# Django
+from django import forms
+from django.db import models
+from django.utils.translation import ugettext_lazy as _
+from django.utils.datastructures import MultiValueDictKeyError
+
+# Third party apps
+from haystack.forms import SearchForm
+from haystack.query import SearchQuerySet, EmptySearchQuerySet
+from haystack.query import SQ
+
+# AstroBin apps
+from astrobin_apps_groups.models import Group
+from astrobin_apps_notifications.types import NOTICE_TYPES
+
+# This app
+from models import *
+from utils import affiliate_limit, retailer_affiliate_limit
+
+
 
 def uniq(seq):
     # Not order preserving
@@ -615,6 +621,7 @@ class LocationEditForm(forms.ModelForm):
 
     class Meta:
         model = Location
+        exclude = []
 
 
 class SolarSystem_AcquisitionForm(forms.ModelForm):
@@ -675,6 +682,7 @@ class DeepSky_AcquisitionForm(forms.ModelForm):
 
     class Meta:
         model = DeepSky_Acquisition
+        exclude = []
 
     def __init__(self, user=None, **kwargs):
         queryset = None
@@ -698,7 +706,7 @@ class DeepSky_AcquisitionForm(forms.ModelForm):
 
     def clean_date(self):
         date = self.cleaned_data['date']
-        if date and date > datetime.date.today():
+        if date and date > datetime.today().date():
             raise forms.ValidationError(_("The date cannot be in the future."))
         return date
 
@@ -716,7 +724,7 @@ class DeepSky_AcquisitionBasicForm(forms.ModelForm):
 
     def clean_date(self):
         date = self.cleaned_data['date']
-        if date and date > datetime.date.today():
+        if date and date > datetime.today().date():
             raise forms.ValidationError(_("The date cannot be in the future."))
         return date
 
@@ -900,6 +908,7 @@ class AppApiKeyRequestForm(forms.ModelForm):
 
     class Meta:
         model = AppApiKeyRequest
+        exclude = []
 
 
 class GearUserInfoForm(forms.ModelForm):
@@ -907,6 +916,7 @@ class GearUserInfoForm(forms.ModelForm):
 
     class Meta:
         model = GearUserInfo
+        exclude = []
 
 
 class ModeratorGearFixForm(forms.ModelForm):
@@ -915,14 +925,15 @@ class ModeratorGearFixForm(forms.ModelForm):
     class Meta:
         model = Gear
         fields = ('make', 'name',)
-        widgets = {
-            'make': forms.TextInput(attrs = {
-                'data-provide': 'typeahead',
-                'data-source': simplejson.dumps(
-                    uniq([x.make for x in Gear.objects.exclude(make = None).exclude(make = '')])),
-                'autocomplete': 'off',
-            }),
-        }
+
+    def __init__(self, **kwargs):
+        super(ModeratorGearFixForm, self).__init__(**kwargs)
+        self.widgets['make'] = forms.TextInput(attrs = {
+            'data-provide': 'typeahead',
+            'data-source': simplejson.dumps(
+                uniq([x.make for x in Gear.objects.exclude(make = None).exclude(make = '')])),
+            'autocomplete': 'off',
+            })
 
     def clean_make(self):
         return self.cleaned_data['make'].strip()
@@ -950,7 +961,6 @@ class ClaimCommercialGearForm(forms.Form):
     error_css_class = 'error'
 
     make = forms.ChoiceField(
-        choices = [('', '---------')] + sorted(uniq(Gear.objects.exclude(make = None).exclude(make = '').values_list('make', 'make')), key = lambda x: x[0].lower()),
         label = _("Make"),
         help_text = _("The make, brand, producer or developer of this product."),
         required = True)
@@ -969,6 +979,7 @@ class ClaimCommercialGearForm(forms.Form):
     def __init__(self, user, **kwargs):
         super(ClaimCommercialGearForm, self).__init__(**kwargs)
         self.user = user
+        self.fields['make'].choices = [('', '---------')] + sorted(uniq(Gear.objects.exclude(make = None).exclude(make = '').values_list('make', 'make')), key = lambda x: x[0].lower())
         self.fields['merge_with'].choices = [('', '---------')] + uniq(CommercialGear.objects.filter(producer = user).values_list('id', 'proper_name'))
 
     def clean (self):
@@ -1001,6 +1012,9 @@ class CommercialGearForm(forms.ModelForm):
 
     class Meta:
         model = CommercialGear
+        fields = (
+            'proper_make', 'proper_name', 'image', 'tagline', 'link',
+            'description')
 
     def __init__(self, user, **kwargs):
         super(CommercialGearForm, self).__init__(**kwargs)
@@ -1011,7 +1025,6 @@ class ClaimRetailedGearForm(forms.Form):
     error_css_class = 'error'
 
     make = forms.ChoiceField(
-        choices = [('', '---------')] + sorted(uniq(Gear.objects.exclude(make = None).exclude(make = '').values_list('make', 'make')), key = lambda x: x[0].lower()),
         label = _("Make"),
         help_text = _("The make, brand, producer or developer of this product."),
         required = True)
@@ -1030,6 +1043,7 @@ class ClaimRetailedGearForm(forms.Form):
     def __init__(self, user, **kwargs):
         super(ClaimRetailedGearForm, self).__init__(**kwargs)
         self.user = user
+        self.fields['make'].choices = [('', '---------')] + sorted(uniq(Gear.objects.exclude(make = None).exclude(make = '').values_list('make', 'make')), key = lambda x: x[0].lower())
         self.fields['merge_with'].choices =\
             [('', '---------')] +\
             uniq_id_tuple(RetailedGear.objects.filter(retailer = user).exclude(gear__name = None).values_list('id', 'gear__name'))
@@ -1074,6 +1088,7 @@ class RetailedGearForm(forms.ModelForm):
 
     class Meta:
         model = RetailedGear
+        fields = ('link', 'price', 'currency')
 
 
 class CollectionCreateForm(forms.ModelForm):

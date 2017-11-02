@@ -26,6 +26,7 @@ class ContentTypeDetail(generics.RetrieveAPIView):
     model = ContentType
     serializer_class = ContentTypeSerializer
     permission_classes = (ReadOnly,)
+    queryset = ContentType.objects.all()
 
 
 class UserList(generics.ListAPIView):
@@ -44,5 +45,4 @@ class UserDetail(generics.RetrieveAPIView):
     model = User
     serializer_class = UserSerializer
     permission_classes = (ReadOnly,)
-
-
+    queryset = User.objects.all()

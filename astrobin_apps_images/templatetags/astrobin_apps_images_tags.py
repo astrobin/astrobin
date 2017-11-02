@@ -167,6 +167,8 @@ def astrobin_image(context, image, alias, **kwargs):
     # Determine whether this is an animated gif, and we should show it as such
     field = image.get_thumbnail_field(revision)
     animated = False
+    if not field.name.startswith('images/'):
+        field.name = 'images/' + field.name
     if field.name.lower().endswith('.gif') and alias in ('regular', 'hd', 'real'):
         try:
             gif = PILImage.open(field.file)
@@ -205,7 +207,10 @@ def astrobin_image(context, image, alias, **kwargs):
     badges = []
 
     if alias in ('thumb', 'gallery', 'gallery_inverted', 'regular', 'regular_inverted'):
-        if image.iotd_set.filter(date__lte = datetime.now().date()).count() > 0 and not image.user.userprofile.exclude_from_competitions:
+        if (hasattr(image, 'iotd') and
+            image.iotd is not None and
+            image.iotd.date <= datetime.now().date() and
+            not image.user.userprofile.exclude_from_competitions):
             badges.append('iotd')
 
         top100_ids = SearchQuerySet().models(Image).all().order_by('-likes').values_list('django_id', flat = True)[:100]

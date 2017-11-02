@@ -1,9 +1,9 @@
 # Django
 from django.contrib.contenttypes.models import ContentType
-from django.contrib.contenttypes import generic
+from django.contrib.contenttypes import fields
 from django.core.validators import MinValueValidator, MaxValueValidator
 from django.db import models
-from django.utils.translation import ugettext as _
+from django.utils.translation import ugettext_lazy as _
 # This app
 from astrobin_apps_platesolving.solver import Solver
 
@@ -103,7 +103,7 @@ class Solution(models.Model):
 
     content_type = models.ForeignKey(ContentType)
     object_id = models.TextField()
-    content_object = generic.GenericForeignKey('content_type', 'object_id')
+    content_object = fields.GenericForeignKey('content_type', 'object_id')
 
     image_file = models.ImageField(
         upload_to = 'solutions',
@@ -112,7 +112,7 @@ class Solution(models.Model):
     )
 
     skyplot_zoom1 = models.ImageField(
-        upload_to = 'skyplots',
+        upload_to = 'images/skyplots',
         null = True,
         blank = True,
     )

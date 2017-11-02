@@ -1,3 +1,6 @@
+# Python
+import sys
+
 # Django
 from django.core.urlresolvers import reverse
 from django.http import HttpResponseRedirect
@@ -11,7 +14,8 @@ def serve_zip(images, owner, folder_or_pool = None):
     archive.save()
 
     image_ids = images.values_list('id', flat = True)
-    prepare_zip.delay(image_ids, owner.id, archive.id, folder_or_pool)
+    if not 'test' in sys.argv:
+        prepare_zip.delay(image_ids, owner.id, archive.id, folder_or_pool)
 
     response = HttpResponseRedirect(
         reverse('rawdata.temporary_archive_detail', args = (archive.pk,)))

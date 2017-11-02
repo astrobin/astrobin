@@ -237,7 +237,7 @@ $(function() {
                     dataType: 'json',
                     data: data,
                     success: function(response) {
-                        $.each(response.results, function(i, nc_data) {
+                        $.each(response, function(i, nc_data) {
                             var comment = nc_app.Comment.create(nc_data);
                             comment.set('authorIsRequestingUser', nc_app.userId == comment.get('author'));
                             comment.set('deleted', nc_data.deleted);

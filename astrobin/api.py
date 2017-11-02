@@ -306,7 +306,7 @@ class ImageResource(ModelResource):
         cameras = bundle.obj.imaging_cameras.all()
         return [unicode(x) for x in cameras]
 
-    def build_filters(self, filters = None):
+    def build_filters(self, filters = None, ignore_bad_filters = False):
         subjects = None
         ids = None
 
@@ -321,7 +321,7 @@ class ImageResource(ModelResource):
             ids = filters['ids']
             del filters['ids']
 
-        orm_filters = super(ImageResource, self).build_filters(filters)
+        orm_filters = super(ImageResource, self).build_filters(filters, ignore_bad_filters)
 
         if subjects:
             from astrobin_apps_platesolving.models import Solution

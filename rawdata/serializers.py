@@ -18,18 +18,13 @@ from .utils import (
 
 
 class RawImageSerializer(serializers.ModelSerializer):
-    def validate_file(self, attrs, source):
-        try:
-            value = attrs[source]
-        except KeyError:
-            return attrs
-
+    def validate_file(self, value):
         name, ext = os.path.splitext(value.name)
         stripped_ext = ext.lower().strip('.')
         if stripped_ext not in rawdata_supported_raw_formats():
             raise UnsupportedMediaType(stripped_ext)
 
-        return attrs
+        return value
 
     def validate(self, attrs):
         user = self.context['request'].user
@@ -38,7 +33,7 @@ class RawImageSerializer(serializers.ModelSerializer):
                 _("You don't have any free space on AstroBin Rawdata. Consider upgrading your account."))
 
         try:
-            provided_hash = attrs['file_hash']
+            provided_hash = self.initial_data['file_hash']
         except KeyError:
             return attrs
 
@@ -53,6 +48,7 @@ class RawImageSerializer(serializers.ModelSerializer):
 
     class Meta:
         model = RawImage
+        fields = '__all__'
         read_only_fields = (
             'user',
             'original_filename',

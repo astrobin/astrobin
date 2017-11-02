@@ -26,7 +26,14 @@ from django import forms
 from django.utils import translation
 from django.utils.translation import ugettext_lazy as _
 from django.conf import settings
-from django.contrib.contenttypes import generic
+
+try:
+    # Django < 1.10
+    from django.contrib.contenttypes.generic import GenericRelation
+except ImportError:
+    # Django >= 1.10
+    from django.contrib.contenttypes.fields import GenericRelation
+
 from django.contrib.contenttypes.models import ContentType
 from django.core.validators import MaxLengthValidator
 from django.template.defaultfilters import slugify
@@ -34,13 +41,19 @@ from django.template.defaultfilters import slugify
 from nested_comments.models import NestedComment
 
 from model_utils.managers import InheritanceManager
-from timezones.forms import PRETTY_TIMEZONE_CHOICES
+
+try:
+    # Django < 1.10
+    from timezones.forms import PRETTY_TIMEZONE_CHOICES
+except:
+    # Django >= 1.10
+    from timezones.zones import PRETTY_TIMEZONE_CHOICES
 
 from fields import *
 from utils import user_is_paying
 
 from mptt.models import MPTTModel, TreeForeignKey
-from reviews.models import ReviewedItem
+from reviews.models import Review
 from toggleproperties.models import ToggleProperty
 
 from astrobin_apps_notifications.utils import push_notification
@@ -62,7 +75,7 @@ class HasSolutionMixin(object):
 
 def image_upload_path(instance, filename):
     ext = filename.split('.')[-1]
-    return "%d/%d/%s.%s" % (instance.user.id, date.today().year, uuid.uuid4(), ext)
+    return "images/%d/%d/%s.%s" % (instance.user.id, date.today().year, uuid.uuid4(), ext)
 
 
 LICENSE_CHOICES = (
@@ -235,8 +248,6 @@ class Gear(models.Model):
         blank = True,
     )
 
-    reviews = generic.GenericRelation(ReviewedItem)
-
     def __unicode__(self):
         make = self.get_make()
         name = self.get_name()
@@ -304,10 +315,10 @@ class Gear(models.Model):
         ).update(object_id = self.id)
 
         # Find matching gear reviews and move them to the master
-        reviews = ReviewedItem.objects.filter(
+        reviews = Review.objects.filter(
             content_type = ContentType.objects.get(app_label = 'astrobin', model = 'gear'),
-            object_id = slave.id
-        ).update(object_id = self.id)
+            content_id = slave.id
+        ).update(content_id = self.id)
 
         # Fetch slave's master if this hard-merge's master doesn't have a soft-merge master
         if not self.master:
@@ -702,7 +713,6 @@ class Image(HasSolutionMixin, models.Model):
         'astrobin.Location',
         verbose_name = _("Locations"),
         help_text = _("Drag items from the right side to the left side, or click on the plus sign."),
-        null = True,
         blank = True,
     )
 
@@ -738,7 +748,7 @@ class Image(HasSolutionMixin, models.Model):
     updated = models.DateTimeField(editable=False, auto_now=True, null=True, blank=True)
 
     # For likes, bookmarks, and perhaps more.
-    toggleproperties = generic.GenericRelation(ToggleProperty)
+    toggleproperties = GenericRelation(ToggleProperty)
 
     watermark_text = models.CharField(
         max_length = 128,
@@ -771,15 +781,15 @@ class Image(HasSolutionMixin, models.Model):
     )
 
     # gear
-    imaging_telescopes = models.ManyToManyField(Telescope, null=True, blank=True, related_name='imaging_telescopes', verbose_name=_("Imaging telescopes or lenses"))
-    guiding_telescopes = models.ManyToManyField(Telescope, null=True, blank=True, related_name='guiding_telescopes', verbose_name=_("Guiding telescopes or lenses"))
-    mounts = models.ManyToManyField(Mount, null=True, blank=True, verbose_name=_("Mounts"))
-    imaging_cameras = models.ManyToManyField(Camera, null=True, blank=True, related_name='imaging_cameras', verbose_name=_("Imaging cameras"))
-    guiding_cameras = models.ManyToManyField(Camera, null=True, blank=True, related_name='guiding_cameras', verbose_name=_("Guiding cameras"))
-    focal_reducers = models.ManyToManyField(FocalReducer, null=True, blank=True, verbose_name=_("Focal reducers"))
-    software = models.ManyToManyField(Software, null=True, blank=True, verbose_name=_("Software"))
-    filters = models.ManyToManyField(Filter, null=True, blank=True, verbose_name=_("Filters"))
-    accessories = models.ManyToManyField(Accessory, null=True, blank=True, verbose_name=_("Accessories"))
+    imaging_telescopes = models.ManyToManyField(Telescope, blank=True, related_name='imaging_telescopes', verbose_name=_("Imaging telescopes or lenses"))
+    guiding_telescopes = models.ManyToManyField(Telescope, blank=True, related_name='guiding_telescopes', verbose_name=_("Guiding telescopes or lenses"))
+    mounts = models.ManyToManyField(Mount, blank=True, verbose_name=_("Mounts"))
+    imaging_cameras = models.ManyToManyField(Camera, blank=True, related_name='imaging_cameras', verbose_name=_("Imaging cameras"))
+    guiding_cameras = models.ManyToManyField(Camera, blank=True, related_name='guiding_cameras', verbose_name=_("Guiding cameras"))
+    focal_reducers = models.ManyToManyField(FocalReducer, blank=True, verbose_name=_("Focal reducers"))
+    software = models.ManyToManyField(Software, blank=True, verbose_name=_("Software"))
+    filters = models.ManyToManyField(Filter, blank=True, verbose_name=_("Filters"))
+    accessories = models.ManyToManyField(Accessory, blank=True, verbose_name=_("Accessories"))
 
     user = models.ForeignKey(User)
 
@@ -1028,6 +1038,8 @@ class Image(HasSolutionMixin, models.Model):
         options = settings.THUMBNAIL_ALIASES[''][alias].copy()
 
         field = self.get_thumbnail_field(revision_label);
+        if not field.name.startswith('images/'):
+            field.name = 'images/' + field.name
 
         local_path = None
         name = field.name
@@ -1061,7 +1073,7 @@ class Image(HasSolutionMixin, models.Model):
                 log.debug("Image %d: getting remote file..." % self.id)
 
                 # First try to get the file via URL, because that might hit the CloudFlare cache.
-                url = settings.IMAGES_URL + field.name
+                url = settings.IMAGES_URL + name
                 log.debug("Image %d: trying URL %s..." % (self.id, url))
                 headers = { 'User-Agent': 'Mozilla/5.0' }
                 req = urllib2.Request(url, None, headers)
@@ -1092,7 +1104,7 @@ class Image(HasSolutionMixin, models.Model):
                     pass
         else:
             thumbnailer = get_thumbnailer(OverwritingFileSystemStorage(
-                location = settings.UPLOADS_DIRECTORY), name)
+                location = os.path.join(settings.UPLOADS_DIRECTORY)), name)
 
         if self.watermark and 'watermark' in options:
             options['watermark_text'] = self.watermark_text
@@ -1129,6 +1141,8 @@ class Image(HasSolutionMixin, models.Model):
         options = thumbnail_settings.copy()
         revision_label = options.get('revision_label', 'final')
         field = self.get_thumbnail_field(revision_label);
+        if not field.name.startswith('images/'):
+            field.name = 'images/' + field.name
 
         # For compatibility:
         if alias in ('revision', 'runnerup'):
@@ -1414,10 +1428,9 @@ class Collection(models.Model):
 
     images = models.ManyToManyField(
         Image,
-        null = True,
-        blank = True,
         verbose_name = _("Images"),
         related_name = 'collections',
+        blank = True,
     )
 
     cover = models.ForeignKey(
@@ -1798,13 +1811,13 @@ class UserProfile(models.Model):
     )
 
     # Gear
-    telescopes = models.ManyToManyField(Telescope, null=True, blank=True, verbose_name=_("Telescopes and lenses"), related_name='telescopes')
-    mounts = models.ManyToManyField(Mount, null=True, blank=True, verbose_name=_("Mounts"), related_name='mounts')
-    cameras = models.ManyToManyField(Camera, null=True, blank=True, verbose_name=_("Cameras"), related_name='cameras')
-    focal_reducers = models.ManyToManyField(FocalReducer, null=True, blank=True, verbose_name=_("Focal reducers"), related_name='focal_reducers')
-    software = models.ManyToManyField(Software, null=True, blank=True, verbose_name=_("Software"), related_name='software')
-    filters = models.ManyToManyField(Filter, null=True, blank=True, verbose_name=_("Filters"), related_name='filters')
-    accessories = models.ManyToManyField(Accessory, null=True, blank=True, verbose_name=_("Accessories"), related_name='accessories')
+    telescopes = models.ManyToManyField(Telescope, blank=True, verbose_name=_("Telescopes and lenses"), related_name='telescopes')
+    mounts = models.ManyToManyField(Mount, blank=True, verbose_name=_("Mounts"), related_name='mounts')
+    cameras = models.ManyToManyField(Camera, blank=True, verbose_name=_("Cameras"), related_name='cameras')
+    focal_reducers = models.ManyToManyField(FocalReducer, blank=True, verbose_name=_("Focal reducers"), related_name='focal_reducers')
+    software = models.ManyToManyField(Software, blank=True, verbose_name=_("Software"), related_name='software')
+    filters = models.ManyToManyField(Filter, blank=True, verbose_name=_("Filters"), related_name='filters')
+    accessories = models.ManyToManyField(Accessory, blank=True, verbose_name=_("Accessories"), related_name='accessories')
 
     default_frontpage_section = models.CharField(
         choices = (
@@ -2003,12 +2016,6 @@ def create_user_profile(sender, instance, created, **kwargs):
     if created:
         profile, created = UserProfile.objects.get_or_create(user=instance)
 post_save.connect(create_user_profile, sender=User)
-
-
-def create_user_openid(sender, instance, created, **kwargs):
-    if created:
-        instance.openid_set.create(openid=instance.username)
-post_save.connect(create_user_openid, sender=User)
 
 
 class Location(models.Model):

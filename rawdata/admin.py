@@ -21,7 +21,7 @@ class RawImageAdmin(admin.ModelAdmin):
     )
 
     def queryset(self, request):
-        # Default: qs = self.model._default_manager.get_query_set()
+        # Default: qs = self.model._default_manager.get_queryset()
         qs = self.model._default_manager.all_with_inactive()
         # TODO: this should be handled by some parameter to the ChangeList.
         ordering = self.ordering or () # otherwise we might try to *None, which is bad ;)
