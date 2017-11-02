@@ -23,8 +23,9 @@ def premium_get_usersubscription(user):
 
 
 def premium_get_valid_usersubscription(user):
-    us = UserSubscription.active_objects.filter(
+    us = UserSubscription.objects.filter(
         user = user,
+        active = True,
         subscription__name__in = SUBSCRIPTION_NAMES,)
 
     if us.count() > 0:
