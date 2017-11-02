@@ -934,6 +934,23 @@ class ImageTest(TestCase):
         response = self.client.get(get_url((image.pk,)))
         self.assertEqual(response.status_code, 200)
 
+        # Check that the user's other images are available to copy from
+        self._do_upload('astrobin/fixtures/test.jpg')
+        other_1 = self._get_last_image(); other_1.title = "Other 1"; other_1.save()
+        self._do_upload('astrobin/fixtures/test.jpg', wip = True);
+        other_2 = self._get_last_image(); other_2.title = "Other 2"; other_2.save()
+        response = self.client.get(get_url((image.pk,)))
+        other_images = Image.all_objects\
+            .filter(user = self.user)\
+            .exclude(pk = image.pk)
+        for i in other_images:
+            self.assertContains(
+                response,
+                '<option value="%d">%s</option>' % (i.pk, i.title),
+                html = True)
+        other_1.delete()
+        other_2.delete()
+
         # POST
         response = self.client.post(
             get_url((image.pk,)),
