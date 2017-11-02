@@ -370,6 +370,10 @@ ASTROBIN_USER='astrobin'
 
 
 NOTIFICATION_LANGUAGE_MODULE = "astrobin.UserProfile"
+NOTIFICATION_BACKENDS = (
+    ("on-site", "astrobin_apps_notifications.backends.PersistentMessagesBackend"),
+    ("email", "notification.backends.email.EmailBackend"),
+)
 
 ZINNIA_COPYRIGHT = 'AstroBin'
 ZINNIA_MARKUP_LANGUAGE = 'html'
