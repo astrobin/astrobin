@@ -1801,6 +1801,7 @@ def user_profile_save_preferences(request):
     profile = request.user.userprofile
     form = UserProfileEditPreferencesForm(data=request.POST, instance=profile)
     response_dict = {'form': form}
+    response = HttpResponseRedirect("/profile/edit/preferences/");
 
     if form.is_valid():
         form.save()
@@ -1810,6 +1811,8 @@ def user_profile_save_preferences(request):
         if lang and check_for_language(lang):
             if hasattr(request, 'session'):
                 request.session['django_language'] = lang
+
+            response.set_cookie(settings.LANGUAGE_COOKIE_NAME, lang)
             activate(lang)
     else:
         return render_to_response("user/profile/edit/preferences.html",
@@ -1817,7 +1820,7 @@ def user_profile_save_preferences(request):
             context_instance=RequestContext(request))
 
     messages.success(request, _("Form saved. Thank you!"))
-    return HttpResponseRedirect("/profile/edit/preferences/");
+    return response
 
 
 @login_required
