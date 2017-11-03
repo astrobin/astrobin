@@ -111,7 +111,7 @@ class UserCollectionsUpdate(
 class UserCollectionsAddRemoveImages(
         JSONResponseMixin, EnsureCollectionOwnerMixin, UserCollectionsBaseEdit,
         UpdateView):
-    form = CollectionAddRemoveImagesForm
+    form_class = CollectionAddRemoveImagesForm
     template_name = 'user_collections_add_remove_images.html'
     pk_url_kwarg = 'collection_pk'
     context_object_name = 'collection'

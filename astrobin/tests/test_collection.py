@@ -153,6 +153,11 @@ class CollectionTest(TestCase):
         self._do_upload('astrobin/fixtures/test.jpg')
         image2 = self._get_last_image()
 
+        response = self.client.get(
+            reverse('user_collections_add_remove_images', args = (self.user.username, collection.pk)),
+        )
+        self.assertEqual(response.status_code, 200)
+
         self.client.post(
             reverse('user_collections_add_remove_images', args = (self.user.username, collection.pk)),
             {
