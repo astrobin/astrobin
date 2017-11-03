@@ -59,7 +59,7 @@ export ASTROBIN_CDN_URL='http://cdn.astrobin.com/'
 export ASTROBIN_FLICKR_API_KEY='***CHANGE ME***'
 export ASTROBIN_FLICKR_SECRET='***CHANGE ME***'
 
-export ASTROBIN_HAYSTACK_SOLR_URL='http://127.0.0.1:8983/solr'
+export ASTROBIN_HAYSTACK_BACKEND_URL='http://127.0.0.1:9200/'
 
 # AstroBin uses RabbitMQ as a broker to deal messages to celery.
 export ASTROBIN_BROKER_PASSWORD='s3cr3t'

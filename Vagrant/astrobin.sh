@@ -68,7 +68,7 @@ function check {
         ASTROBIN_CDN_URL
         ASTROBIN_FLICKR_API_KEY
         ASTROBIN_FLICKR_SECRET
-        ASTROBIN_HAYSTACK_SOLR_URL
+        ASTROBIN_HAYSTACK_BACKEND_URL
         ASTROBIN_BROKER_PASSWORD
         ASTROBIN_BROKER_URL
         ASTROBIN_CELERY_RESULT_DBURI
@@ -104,7 +104,6 @@ function init_system {
     mkdir -p /var/www/media
     mkdir -p /var/www/tmpzips
     mkdir -p /rawdata/files
-    mkdir -p /opt/solr
     mkdir -p /venv
     mkdir -p /var/log/astrobin
 
@@ -117,10 +116,6 @@ function init_system {
         usermod -a -G sudo astrobin
     fi
 
-    if ! id -u solr >/dev/null 2>&1; then
-        useradd -MN -s /dev/null -g astrobin -u 2001 solr
-    fi
-
     if id -u vagrant >/dev/null 2>&1; then
         usermod -G astrobin vagrant
     fi
@@ -130,13 +125,11 @@ function init_system {
     chown -R astrobin:astrobin /var/www/media
     chown -R astrobin:astrobin /var/www/tmpzips
     chown -R astrobin:astrobin /rawdata
-    chown -R solr:astrobin /opt/solr
     chown -R astrobin:astrobin /var/log/astrobin
 
     chmod g+w /venv
     chmod g+w /var/www/media
     chmod g+w /rawdata
-    chmod g+w /opt/solr
     chmod g+w /var/log/astrobin
 
     astrobin_log "Customizing astrobin's home directory..."
@@ -274,7 +267,7 @@ function rabbitmq {
 function supervisor {
     astrobin_log "Setting up supervisor..."
     $SUDO cp /var/www/astrobin/conf/supervisord/* /etc/supervisor/conf.d/
-    $SUDO mkdir -p /var/log/{celery,gunicorn,nginx,solr}
+    $SUDO mkdir -p /var/log/{celery,gunicorn,nginx}
 }
 
 function abc {
@@ -328,42 +321,6 @@ function astrobin {
 EOF
 }
 
-function solr {
-    astrobin_log "Setting up solr..."
-
-    local return_value=0
-
-    $SUDO mkdir -p /opt/solr
-    $SUDO chown solr:astrobin /opt/solr
-    if [ ! -f /opt/solr/solr.tgz ]; then
-        $SUDO -u solr /bin/bash - <<"EOF"
-        curl https://archive.apache.org/dist/lucene/solr/4.9.1/solr-4.9.1.tgz > /opt/solr/solr.tgz && \
-
-        tar xvfz /opt/solr/solr.tgz -C /opt/solr && \
-        chmod g+w /opt/solr/ -R
-
-        [ $? -eq 0 ] && return_value=0
-EOF
-    fi
-
-    $SUDO -u astrobin /bin/bash - <<EOF
-    . /venv/astrobin/dev/bin/activate
-    . $DEV
-
-    /var/www/astrobin/manage.py build_solr_schema > /opt/solr/solr-4.9.1/example/solr/collection1/conf/schema.xml
-
-    # TODO: see https://bitbucket.org/siovene/astrobin/issue/257/migrate-to-haystack-2x
-    sed -i '/EnglishPorterFilterFactory/d' /opt/solr/solr-4.9.1/example/solr/collection1/conf/schema.xml
-    sed -i '/<\/fields>/i<field name="_version_" type="slong" indexed="true" stored="true" multiValued="false"\/>' /opt/solr/solr-4.9.1/example/solr/collection1/conf/schema.xml
-EOF
-
-    if [ $return_value -eq 0 ]; then
-        true
-    else
-        false
-    fi
-}
-
 function end {
     astrobin_log "#################################################################"
     astrobin_log "### All done!"
@@ -388,6 +345,5 @@ check
     supervisor && \
     abc && \
     astrobin && \
-    solr && \
     end
 ) || abort

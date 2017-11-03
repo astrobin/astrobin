@@ -316,8 +316,9 @@ HAYSTACK_DEFAULT_OPERATOR = 'AND'
 HAYSTACK_SEARCH_RESULTS_PER_PAGE = 70
 HAYSTACK_CONNECTIONS = {
     'default': {
-        'ENGINE': 'haystack.backends.solr_backend.SolrEngine',
-        'URL': os.environ['ASTROBIN_HAYSTACK_SOLR_URL'],
+        'ENGINE': 'haystack.backends.elasticsearch_backend.ElasticsearchSearchEngine',
+        'URL': os.environ['ASTROBIN_HAYSTACK_BACKEND_URL'],
+        'INDEX_NAME': 'astrobin',
         'EXCLUDED_INDEXES': [
             'threaded_messages.search_indexes.Thread',
             'threaded_messages.search_indexes.ThreadIndex',
