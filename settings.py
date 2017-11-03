@@ -331,7 +331,7 @@ HAYSTACK_CONNECTIONS = {
 if DEBUG_TOOLBAR:
     INTERNAL_IPS = ('127.0.0.2', '10.0.0.2',)
     DEBUG_TOOLBAR_CONFIG = {
-        "SHOW_TOOLBAR_CALLBACK" : 'astrobin.debug_toolbar.show_debug_toolbar',
+        "SHOW_TOOLBAR_CALLBACK" : 'astrobin.debug_toolbar_conf.show_debug_toolbar',
     }
 
 MESSAGE_STORAGE = 'persistent_messages.storage.PersistentMessageStorage'
