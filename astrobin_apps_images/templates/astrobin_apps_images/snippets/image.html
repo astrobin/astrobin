@@ -53,10 +53,10 @@
                      data-loaded="true"
                 {% else %}
                      {% if alias == 'gallery' %}
-                        src="{% get_static_prefix %}/images/placeholder-gallery.jpg"
+                        src="{% get_static_prefix %}images/placeholder-gallery.jpg"
                      {% else %}
                         {% if alias == 'story' %}
-                            src="{% get_static_prefix %}/images/placeholder-stories.jpg"
+                            src="{% get_static_prefix %}images/placeholder-stories.jpg"
                         {% else %}
                             src="http://placehold.it/{{placehold_size}}/222/333&text={% trans "Loading" %}"
                         {% endif %}
