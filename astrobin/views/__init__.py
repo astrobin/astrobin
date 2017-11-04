@@ -1081,26 +1081,32 @@ def user_page(request, username):
         user = user,
         content_type = user_ct).count()
 
-    sqs = SearchQuerySet()
-    sqs = sqs.filter(username = user.username).models(Image)
-    sqs = sqs.order_by('-uploaded')
 
-    try:
-        images = len(sqs)
-        integrated_images = len(sqs.filter(integration__gt = 0))
-        integration = sum([x.integration for x in sqs]) / 3600.0
-        avg_integration = (integration / integrated_images) if integrated_images > 0 else 0
-    except SearchFieldError:
-        images = 0
-        integrated_images = 0
-        integration = 0
-        avg_integration = 0
+    key = "User.%d.Stats" % user.pk
+    data = cache.get(key)
+    if data is None:
+        sqs = SearchQuerySet()
+        sqs = sqs.filter(username = user.username).models(Image)
+        sqs = sqs.order_by('-uploaded')
+
+        data = {}
+        try:
+            data['images'] = len(sqs)
+            integrated_images = len(sqs.filter(integration__gt = 0))
+            data['integration'] = sum([x.integration for x in sqs]) / 3600.0
+            data['avg_integration'] = (integration / integrated_images) if integrated_images > 0 else 0
+        except SearchFieldError:
+            data['images'] = 0
+            data['integration'] = 0
+            data['avg_integration'] = 0
+
+        cache.set(key, data, 84600)
 
     stats = (
         (_('Member since'), member_since),
         (_('Last login'), last_login),
-        (_('Total integration time'), "%.1f %s" % (integration, _("hours"))),
-        (_('Average integration time'), "%.1f %s" % (avg_integration, _("hours"))),
+        (_('Total integration time'), "%.1f %s" % (data['integration'], _("hours"))),
+        (_('Average integration time'), "%.1f %s" % (data['avg_integration'], _("hours"))),
         (_('Forum posts'), "%d" % Post.objects.filter(user = user).count()),
     )
 
@@ -1119,7 +1125,7 @@ def user_page(request, username):
         'active':active,
         'menu':menu,
         'stats':stats,
-        'images_no': images,
+        'images_no': data['images'],
         'alias':'gallery',
     }
 
