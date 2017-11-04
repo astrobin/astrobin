@@ -340,9 +340,8 @@ import djcelery
 djcelery.setup_loader()
 
 BROKER_URL = os.environ['ASTROBIN_BROKER_URL']
-CELERY_RESULT_BACKEND = 'database'
-CELERY_RESULT_DBURI = os.environ['ASTROBIN_CELERY_RESULT_DBURI']
-CELERY_IMPORTS = ('rawdata.tasks',)
+CELERY_RESULT_BACKEND = 'cache+memcached://127.0.0.1:11211/'
+CELERY_IMPORTS = ('astrobin.tasks', 'rawdata.tasks',)
 CELERY_QUEUES = {"default" : {"exchange":"default", "binding_key":"default"},}
 CELERY_DEFAULT_QUEUE = "default"
 

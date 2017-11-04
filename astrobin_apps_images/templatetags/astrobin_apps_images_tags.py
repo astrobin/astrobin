@@ -216,9 +216,9 @@ def astrobin_image(context, image, alias, **kwargs):
         cache_key = 'top100_ids'
         top100_ids = cache.get(cache_key)
         if top100_ids is None:
-            top100_ids = [int(x.pk) for x in SearchQuerySet().models(Image).order_by('-likes')]
-            cache.set(cache_key, top100_ids, 60*60*24)
-        if image.pk in top100_ids:
+            from astrobin.tasks import update_top100_ids
+            update_top100_ids.delay()
+        elif image.pk in top100_ids:
             badges.append('top100')
 
 
