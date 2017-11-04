@@ -240,6 +240,7 @@ INSTALLED_APPS = [
     'haystack',
     'notification',
     'persistent_messages',
+    'celery_haystack',
     'djcelery',
     'gunicorn',
     'django_comments',
@@ -325,6 +326,7 @@ HAYSTACK_CONNECTIONS = {
         ],
     },
 }
+HAYSTACK_SIGNAL_PROCESSOR = 'celery_haystack.signals.CelerySignalProcessor'
 
 
 #INTERNAL_IPS = ('88.115.221.254',) # for django-debug-toolbar: add own local IP to enable

@@ -9,6 +9,7 @@ from django.contrib.contenttypes.models import ContentType
 from django.db.models import Q
 
 # Third party apps
+from celery_haystack.indexes import CelerySearchIndex
 from haystack.indexes import *
 from hitcount.models import HitCount
 from toggleproperties.models import ToggleProperty
@@ -168,7 +169,7 @@ def _1y_ago():
     return datetime.datetime.now() - datetime.timedelta(365)
 
 
-class GearIndex(SearchIndex, Indexable):
+class GearIndex(CelerySearchIndex, SearchIndex, Indexable):
     model_weight = IntegerField()
 
     text = CharField(document=True, use_template=True)
@@ -268,7 +269,7 @@ class GearIndex(SearchIndex, Indexable):
         return ["%s" % x.retailer.userprofile.company_name for x in retailers]
 
 
-class UserIndex(SearchIndex, Indexable):
+class UserIndex(CelerySearchIndex, SearchIndex, Indexable):
     model_weight = IntegerField()
 
     text = CharField(document=True, use_template=True)
@@ -620,7 +621,7 @@ class UserIndex(SearchIndex, Indexable):
         return NestedComment.objects.filter(author = obj, deleted = False).count()
 
 
-class ImageIndex(SearchIndex, Indexable):
+class ImageIndex(CelerySearchIndex, SearchIndex, Indexable):
     model_weight = IntegerField()
 
     text = CharField(document=True, use_template=True)
