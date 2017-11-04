@@ -213,7 +213,11 @@ def astrobin_image(context, image, alias, **kwargs):
             not image.user.userprofile.exclude_from_competitions):
             badges.append('iotd')
 
-        top100_ids = SearchQuerySet().models(Image).all().order_by('-likes').values_list('django_id', flat = True)[:100]
+        cache_key = 'top100_ids'
+        top100_ids = cache.get(cache_key)
+        if top100_ids is None:
+            top100_ids = [int(x.pk) for x in SearchQuerySet().models(Image).order_by('-likes')]
+            cache.set(cache_key, top100_ids, 60*60*24)
         if image.pk in top100_ids:
             badges.append('top100')
 
