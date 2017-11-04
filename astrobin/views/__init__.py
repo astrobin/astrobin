@@ -1094,7 +1094,7 @@ def user_page(request, username):
             data['images'] = len(sqs)
             integrated_images = len(sqs.filter(integration__gt = 0))
             data['integration'] = sum([x.integration for x in sqs]) / 3600.0
-            data['avg_integration'] = (integration / integrated_images) if integrated_images > 0 else 0
+            data['avg_integration'] = (data['integration'] / integrated_images) if integrated_images > 0 else 0
         except SearchFieldError:
             data['images'] = 0
             data['integration'] = 0
