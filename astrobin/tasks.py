@@ -33,6 +33,7 @@ def update_top100_ids():
             cache.set('top100_ids', top100_ids, 60*60*24)
         finally:
             release_lock()
+        return
 
     logger.debug(
         'Top100 ids task is already being run by another worker')
