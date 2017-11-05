@@ -1,3 +1,10 @@
+map $http_user_agent $limit_bots {
+    default '';
+    ~*(bing|yandex|msnbot) $binary_remote_addr;
+}
+limit_req_zone $limit_bots zone=bots:10m rate=1r/m;
+
+
 upstream app_server {
     server 127.0.0.1:8082 fail_timeout=0;
 }
@@ -74,6 +81,7 @@ server {
     }
 
     location / {
+	limit_req zone=bots burst=5 nodelay;
         if ($request_uri ~* "^/robots.txt") {
             rewrite ^/robots.txt /media/static/robots.txt permanent;
         }
