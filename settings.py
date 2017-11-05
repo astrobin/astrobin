@@ -59,7 +59,8 @@ if not TESTING:
             'USER': os.environ['ASTROBIN_DATABASE_USER'],
             'PASSWORD': os.environ['ASTROBIN_DATABASE_PASSWORD'],
             'HOST': os.environ['ASTROBIN_DATABASE_HOST'],
-            'PORT': '5432'
+            'PORT': '5432',
+            'CONN_MAX_AGE': 60,
         }
     }
 else:
