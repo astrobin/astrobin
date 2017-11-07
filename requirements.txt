@@ -1,14 +1,14 @@
--e git+http://github.com/siovene/django-threaded-messages.git@#egg=django_threaded_messages
--e git+https://bitbucket.org/siovene/django-toggle-properties.git#egg=toggleproperties-master
--e git+https://github.com/astrobin/django-notification.git@96f6339b1ccb4fb5ad38b13deeedf1231f6d434e#egg=django_notification-master
--e git+https://github.com/nephila/django-contrib-requestprovider.git@a8a6803ad042227d1c5583bcc3c7f4441678e035#egg=django_contrib_requestprovider-master
--e git+https://github.com/rassie/django-persistent-messages.git@7d3f687ed419e6761338757bea1374d25271334b#egg=django_persistent_messages-master
--e git+https://github.com/siovene/django-dfp.git@master#egg=django_dfp-origin
+-e git+http://github.com/siovene/django-threaded-messages.git@0010f1cd5d1f96dda25ecdd2b101781ca33c96bf#egg=django_threaded_messages
+-e git+https://bitbucket.org/siovene/django-toggle-properties.git@ae0c1e5df12a0bb3257c983ac76b0b3eee6c59f8#egg=toggleproperties
+-e git+https://github.com/astrobin/django-notification.git@96f6339b1ccb4fb5ad38b13deeedf1231f6d434e#egg=django_notification
+-e git+https://github.com/malfaux/snakecheese.git@685ba51d9e03d3ffcf7ba4739241e37fb125de01#egg=django_contrib_requestprovider&subdirectory=gadjolib
+-e git+https://github.com/rassie/django-persistent-messages.git@7d3f687ed419e6761338757bea1374d25271334b#egg=django_persistent_messages
+-e git+https://github.com/siovene/django-dfp.git@900d1e136a254b0c3b8517efdb6377719c531d67#egg=django_dfp
 -e git+https://github.com/siovene/django-ember.git@b925ecd22c8008ccb339a4977d0081972c58f39f#egg=django-ember
--e git+https://github.com/siovene/django-subscription.git#egg=django_subscription
--e git+https://github.com/siovene/django.js.git#egg=django.js
--e git+https://github.com/siovene/pybbm.git@astrobin#egg=pybbm
--e git+https://github.com/ui/django-html_sanitizer.git@63311131630471ef2315f1ddbbd18354159d24c1#egg=django_html_sanitizer-master
+-e git+https://github.com/siovene/django-subscription.git@d613c8b5c3c81a9d0baf7b361b6e907d1081d7d5#egg=django_subscription
+-e git+https://github.com/siovene/django.js.git@bee62fca8fb814fdccd8cbd837008e2e761a277f#egg=django.js
+-e git+https://github.com/siovene/pybbm.git@a6d1a3e1df7208308191927c23c6a3ad71018547#egg=pybbm
+-e git+https://github.com/ui/django-html_sanitizer.git@63311131630471ef2315f1ddbbd18354159d24c1#egg=django_html_sanitizer
 akismet==1.0.1
 amqp==2.1.4
 amqplib==1.0.2
