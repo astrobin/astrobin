@@ -200,6 +200,7 @@ function pip {
     . /venv/astrobin/dev/bin/activate
 
     # Install python requirements
+    LCALL=C pip install -U pip setuptools
     LCALL=C pip install --no-deps -r /var/www/astrobin/requirements.txt
 
     # Install submodules
