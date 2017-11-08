@@ -354,15 +354,6 @@ CELERY_QUEUES = {"default" : {"exchange":"default", "binding_key":"default"},}
 CELERY_DEFAULT_QUEUE = "default"
 CELERY_ACCEPT_CONTENT = ['pickle']
 
-CELERYD_NODES = "w1 w2 w3 w4"
-CELERYD_OPTS = "--time-limit=300 --concurrency=8 --verbosity=2 --loglevel=DEBUG --logfile=celeryd.log"
-CELERYD_CHDIR = ASTROBIN_BASE_PATH
-CELERYD_PID_FILE = "celeryd.pid"
-CELERYD = ASTROBIN_BASE_PATH + "manage.py celeryd"
-
-CELERYBEAT = ASTROBIN_BASE_PATH + "manage.py celerybeat"
-CELERYBEAT_OPTS = "--verbosity=2 --loglevel=DEBUG"
-
 ASTROBIN_ENABLE_SOLVING = True
 ASTROBIN_PLATESOLVING_BACKEND = \
     'astrobin_apps_platesolving.backends.astrometry_net.solver.Solver'
