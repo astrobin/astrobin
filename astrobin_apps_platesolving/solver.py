@@ -24,6 +24,8 @@ class Solver(object):
             return self.MISSING
 
         sub_status = self._backend().sub_status(submission)
+        if sub_status is None:
+            return self.PENDING
 
         if sub_status.get('status', '') == 'fail':
             return self.FAILED
