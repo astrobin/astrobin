@@ -194,7 +194,7 @@ MIDDLEWARE_CLASSES += [
 #    'pipeline.middleware.MinifyHTMLMiddleware', Enable after dealing with the blank spaces everywhere
     'pybb.middleware.PybbMiddleware',
 ]
-if not TESTING:
+if not TESTING and DEBUG:
     MIDDLEWARE_CLASSES += [
         'astrobin.middlewares.prof.ProfileMiddleware',
     ]
