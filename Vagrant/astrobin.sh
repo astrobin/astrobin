@@ -214,16 +214,6 @@ function pip {
             fi
         );
     done
-
-    # Installing requestprovider manually because the pip package is broken
-    (
-    rm -rf /venv/astrobin/dev/src/django-contrib-requestprovider &&
-        mkdir -p /venv/astrobin/dev/src/django-contrib-requestprovider &&
-        git clone https://github.com/malfaux/snakecheese.git /venv/astrobin/dev/src/django-contrib-requestprovider &&
-        cd /venv/astrobin/dev/src/django-contrib-requestprovider/gadjolib/ &&
-        touch README.txt &&
-        python setup.py develop --no-deps
-    )
 EOF
 }
 
