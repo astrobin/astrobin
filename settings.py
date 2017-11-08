@@ -352,6 +352,7 @@ CELERY_RESULT_BACKEND = 'cache+memcached://127.0.0.1:11211/'
 CELERY_IMPORTS = ('astrobin.tasks', 'rawdata.tasks',)
 CELERY_QUEUES = {"default" : {"exchange":"default", "binding_key":"default"},}
 CELERY_DEFAULT_QUEUE = "default"
+CELERY_ACCEPT_CONTENT = ['pickle']
 
 CELERYD_NODES = "w1 w2 w3 w4"
 CELERYD_OPTS = "--time-limit=300 --concurrency=8 --verbosity=2 --loglevel=DEBUG --logfile=celeryd.log"
