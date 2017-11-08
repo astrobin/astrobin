@@ -135,6 +135,7 @@ class ImageRawThumbView(DetailView):
         url = image.thumbnail(alias, {
             'revision_label': r,
             'animated': 'animated' in self.request.GET,
+            'insecure': 'insecure' in self.request.GET,
         })
         return redirect(url)
 

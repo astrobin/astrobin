@@ -49,7 +49,7 @@ $(document).ready(function() {
         var thumbnail_alias = 'gallery';
         if (image_mode == 1)
             thumbnail_alias = 'gallery_inverted';
-        var thumbnail_url = '{{SHARE_PATH}}/{{image.id}}/{{revision_label}}/rawthumb/' + thumbnail_alias + '/get.jpg';
+        var thumbnail_url = '{{SHARE_PATH}}/{{image.id}}/{{revision_label}}/rawthumb/' + thumbnail_alias + '/get.jpg?insecure';
 
         /* Make link url */
         var qs = '';

@@ -1136,6 +1136,13 @@ class Image(HasSolutionMixin, models.Model):
 
 
     def thumbnail(self, alias, thumbnail_settings = {}):
+        def normalize_url_security(url, thumbnail_settings):
+            insecure = 'insecure' in thumbnail_settings and thumbnail_settings['insecure'] == True
+            if insecure:
+                if url.startswith('https'):
+                    return url.replace('https', 'http', 1)
+            return url
+
         from astrobin_apps_images.models import ThumbnailGroup
 
         options = thumbnail_settings.copy()
@@ -1162,13 +1169,13 @@ class Image(HasSolutionMixin, models.Model):
             if alias in ('regular', 'hd', 'real'):
                 url = settings.IMAGES_URL + field.name
                 cache.set(cache_key + '_animated', url, 60*60*24*365)
-                return url
+                return normalize_url_security(url, thumbnail_settings)
 
         cache_key = self.thumbnail_cache_key(field, alias)
         url = cache.get(cache_key)
         if url:
             log.debug("Image %d: got URL from cache entry %s" % (self.id, cache_key))
-            return url
+            return normalize_url_security(url, thumbnail_settings)
 
         # Not found in cache, attempt to fetch from database
         log.debug("Image %d: thumbnail not found in cache %s" % (self.id, cache_key))
@@ -1179,7 +1186,7 @@ class Image(HasSolutionMixin, models.Model):
             if url:
                 cache.set(cache_key, url, 60*60*24*365)
                 log.debug("Image %d: thumbnail url found in database and saved into cache: %s" % (self.id, url))
-                return url
+                return normalize_url_security(url, thumbnail_settings)
         except ThumbnailGroup.DoesNotExist:
             log.debug("Image %d: there are no thumbnails in database." % self.id)
             try:
@@ -1208,7 +1215,7 @@ class Image(HasSolutionMixin, models.Model):
                 thumbnails.save()
                 log.debug("Image %d: saved generated thumbnail in the database." % self.id)
 
-            return url
+            return normalize_url_security(url, thumbnail_settings)
 
         return "http://placehold.it/%dx%d/B53838/fff&text=Error" % (
             thumbnail_alias_settings['size'][0],
