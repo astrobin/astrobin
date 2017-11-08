@@ -111,10 +111,12 @@ def integration_hours_by_gear(user, period='monthly'):
     thickness = all_telescopes.count() + all_cameras.count()
 
     for t in (all_telescopes, all_cameras):
+        all = DeepSky_Acquisition.objects.filter(image__user = user).exclude(date = None).order_by('date')
         for g in t:
-            all = DeepSky_Acquisition.objects.filter(
-                Q(image__user = user),
-                Q(image__imaging_telescopes = g) | Q(image__imaging_cameras = g)).exclude(date = None).order_by('date')
+            if hasattr(t, 'model') and t.model.__name__ == 'Telescope':
+                all = all.filter(image__imaging_telescopes = g)
+            if hasattr(t, 'model') and t.model.__name__ == 'Camera':
+                all = all.filter(image__imaging_cameras = g)
 
             g_dict = {
                 'label': _map[period][0] + ": " + unicodedata.normalize('NFKD', unicode(g)).encode('ascii', 'ignore'),
