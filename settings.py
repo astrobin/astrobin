@@ -188,13 +188,16 @@ MIDDLEWARE_CLASSES += [
     'django.contrib.auth.middleware.AuthenticationMiddleware',
     'django.middleware.csrf.CsrfViewMiddleware',
     'django.contrib.messages.middleware.MessageMiddleware',
-    'astrobin.middlewares.ProfileMiddleware',
 #   'astrobin.middlewares.VaryOnLangCacheMiddleware',
     'maintenancemode.middleware.MaintenanceModeMiddleware',
     'gadjo.requestprovider.middleware.RequestProvider',
 #    'pipeline.middleware.MinifyHTMLMiddleware', Enable after dealing with the blank spaces everywhere
     'pybb.middleware.PybbMiddleware',
 ]
+if not TESTING:
+    MIDDLEWARE_CLASSES += [
+        'astrobin.middlewares.prof.ProfileMiddleware',
+    ]
 if not TESTING and not DEBUG:
     MIDDLEWARE_CLASSES += [
         'django.middleware.locale.LocaleMiddleware',
@@ -327,7 +330,8 @@ HAYSTACK_CONNECTIONS = {
         ],
     },
 }
-HAYSTACK_SIGNAL_PROCESSOR = 'celery_haystack.signals.CelerySignalProcessor'
+if not TESTING:
+    HAYSTACK_SIGNAL_PROCESSOR = 'celery_haystack.signals.CelerySignalProcessor'
 
 
 #INTERNAL_IPS = ('88.115.221.254',) # for django-debug-toolbar: add own local IP to enable
