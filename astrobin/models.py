@@ -1107,7 +1107,7 @@ class Image(HasSolutionMixin, models.Model):
                 location = os.path.join(settings.UPLOADS_DIRECTORY)), name)
 
         if self.watermark and 'watermark' in options:
-            options['watermark_text'] = self.watermark_text
+            options['watermark_text'] = sha1(self.watermark_text.encode('utf-8')).hexdigest()
             options['watermark_position'] = self.watermark_position
             options['watermark_size'] = self.watermark_size
             options['watermark_opacity'] = self.watermark_opacity
@@ -1233,7 +1233,7 @@ class Image(HasSolutionMixin, models.Model):
         for alias, thumbnail_settings in aliases.iteritems():
             options = settings.THUMBNAIL_ALIASES[''][alias].copy()
             if self.watermark and 'watermark' in options:
-                options['watermark_text'] = self.watermark_text
+                options['watermark_text'] = sha1(self.watermark_text.encode('utf-8')).hexdigest()
                 options['watermark_position'] = self.watermark_position
                 options['watermark_size'] = self.watermark_size
                 options['watermark_opacity'] = self.watermark_opacity
