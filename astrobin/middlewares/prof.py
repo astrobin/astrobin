@@ -87,7 +87,7 @@ class ProfileMiddleware(object):
                "</pre>"
 
     def process_response(self, request, response):
-        if (settings.DEBUG or request.user.is_superuser()) and 'prof' in request.GET:
+        if (settings.DEBUG or request.user.is_superuser) and 'prof' in request.GET:
             self.prof.close()
 
             out = StringIO.StringIO()
