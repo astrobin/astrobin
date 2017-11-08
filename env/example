@@ -61,9 +61,8 @@ export ASTROBIN_FLICKR_SECRET='***CHANGE ME***'
 
 export ASTROBIN_HAYSTACK_BACKEND_URL='http://127.0.0.1:9200/'
 
-# AstroBin uses RabbitMQ as a broker to deal messages to celery.
-export ASTROBIN_BROKER_PASSWORD='s3cr3t'
-export ASTROBIN_BROKER_URL='amqp://astrobin:${ASTROBIN_BROKER_PASSWORD}@127.0.0.1:5672/astrobin'
+# AstroBin uses redis as a broker to deal messages to celery.
+export ASTROBIN_BROKER_URL='redis://localhost:6379/0'
 
 # AstroBin uses Astrometry.net to plate-solve images. You can create an
 # account there and get a key for free.

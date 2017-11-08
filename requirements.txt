@@ -10,7 +10,7 @@
 -e git+https://github.com/siovene/snakecheese.git@72c5c7be4a5ae19c9054f11c8cedb68dd661fd65#egg=django-request-provider\&subdirectory=gadjolib
 -e git+https://github.com/ui/django-html_sanitizer.git@63311131630471ef2315f1ddbbd18354159d24c1#egg=django_html_sanitizer
 akismet==1.0.1
-amqp==2.1.4
+amqp==2.2.2
 amqplib==1.0.2
 anyjson==0.3.3
 argparse==1.2.1
@@ -19,13 +19,12 @@ bbcode==1.0.25
 beautifulsoup4==4.6.0
 BeautifulSoup==3.2.1
 beautifulsoupselect==0.2
-billiard==3.3.0.23
+billiard==3.5.0.3
 bleach==2.0.0
 boto==2.47.0
 ccy==0.7.0
 celery-haystack==0.10
-celery==3.1.25
-celerymon==1.0.3
+celery==4.1.0
 certifi==2017.4.17
 chardet==3.0.3
 Coffin==2.0.1
@@ -39,7 +38,6 @@ django-appconf==1.0.2
 django-avatar==4.0.0
 django-bootstrap-toolkit==2.15.0
 django-braces==1.11.0
-django-celery==3.2.1
 django-change-email==0.1.3
 django-compressor==2.1.1
 django-contact-form-gv==0.5.1
@@ -96,7 +94,7 @@ IPy==0.83
 Jinja2==2.9.6
 js.tinymce==4.5.4
 jsmin==2.2.2
-kombu==3.0.37
+kombu==4.1.0
 lamson==1.3.4
 lockfile==0.12.2
 longerusername==0.4
@@ -132,9 +130,10 @@ python-memcached==1.58
 python-mimeparse==1.6.0
 python-modargs==1.7
 python-openid==2.2.5
-pytz==2017.2
+pytz==2017.3
 PyYAML==3.12
 rcssmin==1.0.6
+redis==2.10.6
 requests-oauthlib==0.8.0
 requests-toolbelt==0.8.0
 requests==2.17.3
@@ -153,7 +152,7 @@ ua-parser==0.7.3
 Unidecode==0.04.20
 urllib3==1.21.1
 user-agents==1.1.0
-vine==1.1.3
+vine==1.1.4
 webencodings==0.5.1
 WebOb==1.7.2
 wsgiref==0.1.2

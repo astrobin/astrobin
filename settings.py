@@ -245,7 +245,6 @@ INSTALLED_APPS = [
     'notification',
     'persistent_messages',
     'celery_haystack',
-    'djcelery',
     'gunicorn',
     'django_comments',
     'tagging',
@@ -343,10 +342,12 @@ if DEBUG_TOOLBAR:
 
 MESSAGE_STORAGE = 'persistent_messages.storage.PersistentMessageStorage'
 
-import djcelery
-djcelery.setup_loader()
-
 BROKER_URL = os.environ['ASTROBIN_BROKER_URL']
+BROKER_TRANSPORT_OPTIONS = {
+    'visibility_timeout': 3600,
+    'fanout_prefix': True,
+    'fanout_patterns': True,
+}
 CELERY_RESULT_BACKEND = 'cache+memcached://127.0.0.1:11211/'
 CELERY_IMPORTS = ('astrobin.tasks', 'rawdata.tasks',)
 CELERY_QUEUES = {"default" : {"exchange":"default", "binding_key":"default"},}

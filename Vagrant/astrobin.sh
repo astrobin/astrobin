@@ -69,7 +69,6 @@ function check {
         ASTROBIN_FLICKR_API_KEY
         ASTROBIN_FLICKR_SECRET
         ASTROBIN_HAYSTACK_BACKEND_URL
-        ASTROBIN_BROKER_PASSWORD
         ASTROBIN_BROKER_URL
         ASTROMETRY_NET_API_KEY
         ASTROBIN_RAWDATA_ROOT
@@ -171,7 +170,7 @@ function apt {
         libqt4-dev \
         python-virtualenv \
         supervisor \
-        rabbitmq-server \
+        redis-server \
         gettext \
         python-pyside libpyside-dev \
         libqjson-dev libraw-dev \
@@ -244,14 +243,6 @@ EOF
     }
 
     postgres_db && postgres_priv
-}
-
-function rabbitmq {
-    local PASSWORD=`grep "export *ASTROBIN_BROKER_PASSWORD" $DEV | tr "'" '"' | awk -F\" '{print $2}'`
-    astrobin_log "Setting up rabbitmq..."
-    $SUDO rabbitmqctl add_user astrobin $PASSWORD
-    $SUDO rabbitmqctl add_vhost astrobin
-    $SUDO rabbitmqctl set_permissions -p astrobin astrobin ".*" ".*" ".*"
 }
 
 function supervisor {
@@ -331,7 +322,6 @@ check
     apt && \
     pip && \
     postgres && \
-    rabbitmq && \
     supervisor && \
     abc && \
     astrobin && \
