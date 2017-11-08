@@ -1,30 +1,18 @@
--e git+https://github.com/siovene/django-threaded-messages.git@0010f1cd5d1f96dda25ecdd2b101781ca33c96bf#egg=django_threaded_messages
--e git+https://bitbucket.org/siovene/django-toggle-properties.git@ae0c1e5df12a0bb3257c983ac76b0b3eee6c59f8#egg=toggleproperties
--e git+https://github.com/astrobin/django-notification.git@96f6339b1ccb4fb5ad38b13deeedf1231f6d434e#egg=django_notification
--e git+https://github.com/rassie/django-persistent-messages.git@7d3f687ed419e6761338757bea1374d25271334b#egg=django_persistent_messages
--e git+https://github.com/siovene/django-dfp.git@900d1e136a254b0c3b8517efdb6377719c531d67#egg=django_dfp
--e git+https://github.com/siovene/django-ember.git@b925ecd22c8008ccb339a4977d0081972c58f39f#egg=django-ember
--e git+https://github.com/siovene/django-subscription.git@d613c8b5c3c81a9d0baf7b361b6e907d1081d7d5#egg=django_subscription
--e git+https://github.com/siovene/django.js.git@bee62fca8fb814fdccd8cbd837008e2e761a277f#egg=django.js
--e git+https://github.com/siovene/pybbm.git@a6d1a3e1df7208308191927c23c6a3ad71018547#egg=pybbm
--e git+https://github.com/siovene/snakecheese.git@72c5c7be4a5ae19c9054f11c8cedb68dd661fd65#egg=django-request-provider\&subdirectory=gadjolib
--e git+https://github.com/ui/django-html_sanitizer.git@63311131630471ef2315f1ddbbd18354159d24c1#egg=django_html_sanitizer
 akismet==1.0.1
 amqp==2.2.2
 amqplib==1.0.2
 anyjson==0.3.3
-argparse==1.2.1
 backports-abc==0.5
 bbcode==1.0.26
-beautifulsoup4==4.6.0
 BeautifulSoup==3.2.1
+beautifulsoup4==4.6.0
 beautifulsoupselect==0.2
 billiard==3.5.0.3
 bleach==2.0.0
 boto==2.47.0
 ccy==0.7.0
-celery-haystack==0.10
 celery==4.1.0
+celery-haystack==0.10
 certifi==2017.4.17
 chardet==3.0.3
 Coffin==2.0.1
@@ -32,6 +20,7 @@ coverage==4.4.1
 cssmin==0.2.0
 cssselect==1.0.1
 defusedxml==0.5.0
+Django==1.9.13
 django-activity-stream==0.6.3
 django-annoying==0.10.3
 django-appconf==1.0.2
@@ -42,15 +31,19 @@ django-change-email==0.1.3
 django-compressor==2.1.1
 django-contact-form-gv==0.5.1
 django-contrib-comments==1.8.0
+-e git+https://github.com/siovene/snakecheese.git@72c5c7be4a5ae19c9054f11c8cedb68dd661fd65#egg=django_contrib_requestprovider&subdirectory=gadjolib
 django-countries==4.5
 django-crispy-forms==1.6.1
 django-debug-toolbar==1.8
+-e git+https://github.com/siovene/django-dfp.git@900d1e136a254b0c3b8517efdb6377719c531d67#egg=django_dfp
 django-easysettings==1.1
 django-el-pagination==3.1.0
+-e git+https://github.com/siovene/django-ember.git@b925ecd22c8008ccb339a4977d0081972c58f39f#egg=django_ember
 django-filter==1.1.0
 django-followit==0.2.1
 django-haystack==2.6.1
 django-hitcount==1.2.3
+-e git+https://github.com/ui/django-html_sanitizer.git@63311131630471ef2315f1ddbbd18354159d24c1#egg=django_html_sanitizer
 django-keyedcache==1.5.1
 django-kombu==0.9.4
 django-maintenancemode==0.11.2
@@ -59,8 +52,10 @@ django-memcached==0.1.2
 django-model-utils==3.0.0
 django-modeltranslation==0.12.1
 django-mptt==0.8.7
+-e git+https://github.com/astrobin/django-notification.git@96f6339b1ccb4fb5ad38b13deeedf1231f6d434e#egg=django_notification
 django-openid-provider==0.6
 django-paypal==0.3.6
+-e git+https://github.com/rassie/django-persistent-messages.git@7d3f687ed419e6761338757bea1374d25271334b#egg=django_persistent_messages
 django-picklefield==0.3.2
 django-pipeline==1.6.13
 django-recaptcha-works==0.3.4
@@ -69,14 +64,16 @@ django-reviews==1.2.1
 django-robots==3.0
 django-staticfiles==1.2.1
 django-storages==1.5.2
+-e git+https://github.com/siovene/django-subscription.git@d613c8b5c3c81a9d0baf7b361b6e907d1081d7d5#egg=django_subscription
 django-tagging==0.4.5
 django-tastypie==0.13.3
+-e git+https://github.com/siovene/django-threaded-messages.git@0010f1cd5d1f96dda25ecdd2b101781ca33c96bf#egg=django_threaded_messages
 django-threaded-multihost==1.4-1
 django-timezones==0.2
 django-tinymce==2.6.0
 django-user-agents==0.3.0
 django-xmlrpc==0.1.7
-Django==1.9.13
+-e git+https://github.com/siovene/django.js.git@bee62fca8fb814fdccd8cbd837008e2e761a277f#egg=django.js
 djangorestframework==3.6.3
 docutils==0.13.1
 easy-thumbnails==2.4.1
@@ -85,8 +82,8 @@ fanstatic==0.16
 flickrapi==2.3
 funcsigs==1.0.2
 futures==3.1.1
-gunicorn-console==0.1.16
 gunicorn==19.7.1
+gunicorn-console==0.1.16
 html5lib==0.999999999
 httplib2==0.10.3
 idna==2.5
@@ -99,8 +96,8 @@ lamson==1.3.4
 lockfile==0.12.2
 longerusername==0.4
 lxml==3.8.0
-markdown2==2.3.4
 Markdown==2.6.8
+markdown2==2.3.4
 MarkupSafe==1.0
 mimeparse==0.1.3
 mock==2.0.0
@@ -117,6 +114,7 @@ pbr==3.0.1
 Pillow==4.1.1
 ply==3.10
 psycopg2==2.7.1
+-e git+https://github.com/siovene/pybbm.git@a6d1a3e1df7208308191927c23c6a3ad71018547#egg=pybbm
 pyflakes==1.5.0
 pyparsing==2.2.0
 pyquery==1.2.17
@@ -134,9 +132,9 @@ pytz==2017.3
 PyYAML==3.12
 rcssmin==1.0.6
 redis==2.10.6
+requests==2.17.3
 requests-oauthlib==0.8.0
 requests-toolbelt==0.8.0
-requests==2.17.3
 rjsmin==1.0.12
 setproctitle==1.1.10
 simplejson==3.10.0
@@ -147,13 +145,13 @@ sphinx-me==0.3
 SQLAlchemy==1.1.14
 sqlparse==0.2.3
 termcolor==1.1.0
+-e git+https://bitbucket.org/siovene/django-toggle-properties.git@ae0c1e5df12a0bb3257c983ac76b0b3eee6c59f8#egg=toggleproperties
 tornado==4.5.1
 ua-parser==0.7.3
-Unidecode==0.04.20
+Unidecode==0.4.20
 urllib3==1.21.1
 user-agents==1.1.0
 vine==1.1.4
 webencodings==0.5.1
 WebOb==1.7.2
-wsgiref==0.1.2
 yolk==0.4.3
