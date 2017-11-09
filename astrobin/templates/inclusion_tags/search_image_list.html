@@ -175,6 +175,11 @@
 
 {% endif %}
 
+{% if not gear_list and not user_list and not image_list %}
+    <div class="alert alert-warning">
+        {% trans "No results. Sorry." %}
+    </div>
+{% endif %}
 
 {% if paginate %}
     {% include 'pagination.html' %}
