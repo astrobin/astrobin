@@ -1,3 +1,31 @@
+2017-11-09 Salvatore Iovene <salvatore@iovene.com>
+ * v1.16.0
+ * Fix crash when posting to a forum with no group
+ * Remove sorting groups by members and images (too slow)(fixes: #374)
+ * Apply minor UI readability improvements
+ * Apply minor mobile UI improvements
+ * Rehaul notification UI
+ * Fix table formatting bug
+ * Restrict Actions menu to image owner
+ * Add ability to edit autosubmission property of groups
+ * Redesign the home page and add Like buttons to stories
+ * Add context to next/prev links on image page
+ * Always show the "More" button, useful for vertically large screens
+ * Add sorting by title to user galleries
+ * Add advanced plate-solving settings and perform annotations locally
+ * Fix various small issues with forum permissions
+ * Add new IOTD process
+ * Add 6m and 1y filters to leaderboard
+ * Add ability to change own email address
+ * Fix double notifications when images are promoted to public multiple times
+ * Allow more than 26 image revisions by using 2 characters for the label
+ * Performa massive requirement update, including Django 1.9
+ * Move from Solr to ElasticSearch
+ * Move from RabbitMQ to Redis
+ * Fix Top100 badge
+ * Use HTTPS for S3 urls
+ * Repository clean up and migration from BitBucket to GitHub
+
 2016-09-16 Salvatore Iovene <salvatore@iovene.com>
  * v1.15.0
  * Make Free and Lite more generous by counting images rather than uploads
