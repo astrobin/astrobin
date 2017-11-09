@@ -312,6 +312,9 @@ function astrobin {
     # Create Site
     echo "from django.contrib.sites.models import Site; Site.objects.get_or_create(name='AstroBin', domain='localhost')" | /var/www/astrobin/manage.py shell
 
+    # Compile messages
+    (cd /var/www/astrobin/; ./scripts/compilemessages.sh)
+
     # Run tests
     (cd /var/www/astrobin/; ./scripts/test.sh)
 EOF
