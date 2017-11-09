@@ -1,3 +1,15 @@
+2017-11-10 Salvatore Iovene <salvatore@iovene.com>
+ * v1.16.2
+ * (plate-solving) Fix crash when Astrometry.net login won't work
+ * (search) Fix broken parameters in advanced search
+ * (search) Show message if nothing is found
+ * (vagrant) Create superuser
+ * (vagrant) Create necessary groups
+ * (vagrant) Setup elasticsearch
+ * (vagrant) Compile messages
+ * (deps) Update django-notification to version with migrations
+ * (db) Add missing migrations
+
 2017-11-09 Salvatore Iovene <salvatore@iovene.com>
  * v1.16.1
  * Fix issue with watermar text being the sha1 of the text
