@@ -282,6 +282,23 @@ function astrobin {
     /var/www/astrobin/manage.py migrate --run-syncdb
     /var/www/astrobin/manage.py sync_translation_fields --noinput
 
+    # Create Premium groups
+    echo "from django.contrib.auth.models import Group; Group.objects.get_or_create(name='astrobin_lite')" | /var/www/astrobin/manage.py shell
+    echo "from django.contrib.auth.models import Group; Group.objects.get_or_create(name='astrobin_premium')" | /var/www/astrobin/manage.py shell
+
+    # Create moderation groups
+    echo "from django.contrib.auth.models import Group; Group.objects.get_or_create(name='content_moderators')" | /var/www/astrobin/manage.py shell
+    echo "from django.contrib.auth.models import Group; Group.objects.get_or_create(name='image_moderators')" | /var/www/astrobin/manage.py shell
+
+    # Create Raw Data groups
+    echo "from django.contrib.auth.models import Group; Group.objects.get_or_create(name='rawdata_atom')" | /var/www/astrobin/manage.py shell
+
+    # Create IOTD board groups
+    echo "from django.contrib.auth.models import Group; Group.objects.get_or_create(name='iotd_staff')" | /var/www/astrobin/manage.py shell
+    echo "from django.contrib.auth.models import Group; Group.objects.get_or_create(name='iotd_submitters')" | /var/www/astrobin/manage.py shell
+    echo "from django.contrib.auth.models import Group; Group.objects.get_or_create(name='iotd_reviewers')" | /var/www/astrobin/manage.py shell
+    echo "from django.contrib.auth.models import Group; Group.objects.get_or_create(name='iotd_judges')" | /var/www/astrobin/manage.py shell
+
     /var/www/astrobin/manage.py collectstatic --noinput
     echo "from django.contrib.sites.models import Site; Site.objects.get_or_create(name='AstroBin', domain='localhost')" | /var/www/astrobin/manage.py shell
     (cd /var/www/astrobin/; ./scripts/test.sh)
