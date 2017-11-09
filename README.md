@@ -80,13 +80,13 @@ server {
 server {
     listen 80 default;
     listen 443 default ssl;
-    
+
     # No upload limits
     client_max_body_size 4G;
-    
+
     server_name www.astrobin.com;
     error_page 502 503 /media/static/html/502.html;
-    
+
     # Logs
     access_log /var/log/nginx/astrobin.com-access.log;
     error_log /var/log/nginx/astrobin.com-error.log;
@@ -134,7 +134,7 @@ server {
         root /media/static;
         expires max;
     }
-    
+
     # Main server location
     location / {
         limit_req zone=bots burst=5 nodelay;
@@ -248,4 +248,3 @@ IMGCACH=/var/www/media/imagecache
 
 AstroBin accept contributions. Please fork the project and submit pull requests!
 If you need support, please use the [astrobin-dev Google Group](https://groups.google.com/forum/#!forum/astrobin-dev).
-
