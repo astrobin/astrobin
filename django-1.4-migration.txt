@@ -1,2 +1,0 @@
-* Change the Notice.user field to Notice.recipient:
-  sudo su postgres -c "psql astrobin < sql/django-notification-update-to-django-1.4.sql"
