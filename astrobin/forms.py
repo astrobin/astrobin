@@ -3,6 +3,7 @@ import string
 import unicodedata
 import operator
 import datetime
+import itertools
 
 # Django
 from django import forms
@@ -558,20 +559,20 @@ class AdvancedSearchForm(SearchForm):
         # This section deals with properties of the Gear search index.
         # TODO
 
+        search_type = self.cleaned_data['search_type']
+        if search_type == '1':
+            sqs = image_sqs
+        elif search_type == '2':
+            sqs = user_sqs
+        elif search_type == '3':
+            sqs = gear_sqs
+
         if self.cleaned_data['q'] == '' and self.cleaned_data['solar_system_main_subject'] == None:
             sqs = SearchQuerySet().models(Image, User, Gear).all()
         elif self.cleaned_data['solar_system_main_subject']:
             sqs = image_sqs
-        else:
-            sqs = sqs | user_sqs | image_sqs | gear_sqs
-
-        search_type = self.cleaned_data['search_type']
-        if search_type == '1':
-            sqs = sqs.filter(django_ct = 'astrobin.image')
-        elif search_type == '2':
-            sqs = sqs.filter(django_ct = 'auth.user')
-        elif search_type == '3':
-            sqs = sqs.filter(django_ct = 'astrobin.gear')
+        elif search_type == None:
+            sqs = list(itertools.chain(sqs, user_sqs, image_sqs, gear_sqs))
 
         return sqs
 
