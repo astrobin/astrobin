@@ -308,7 +308,7 @@ function astrobin {
     echo "from django.contrib.auth.models import Group; Group.objects.get_or_create(name='iotd_judges')" | /var/www/astrobin/manage.py shell
 
     # Create superuser
-    echo "from django.contrib.auth.models import User; User.objects.filter(email='dev@astrobin.com').delete(); User.objects.create_superuser('astrobin_dev', 'dev@eastrobin.com', 'astrobin_dev')" | python manage.py shell
+    echo "from django.contrib.auth.models import User; User.objects.filter(email='dev@astrobin.com').delete(); User.objects.create_superuser('astrobin_dev', 'dev@eastrobin.com', 'astrobin_dev')" | /var/www/astrobin/manage.py shell
 
     # Assign superuser to some groups
     echo "from django.contrib.auth.models import User, Group; u = User.objects.get(username='astrobin_dev'); g = Group.objects.get(name='content_moderators'); g.user_set.add(u)" | /var/www/astrobin/manage.py shell
