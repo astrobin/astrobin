@@ -573,6 +573,7 @@ if TESTING:
     logging.disable(logging.CRITICAL)
 
 THUMBNAIL_DEBUG = DEBUG
+THUMBNAIL_NAMER = 'easy_thumbnails.namers.source_hashed'
 THUMBNAIL_ALWAYS_GENERATE = THUMBNAIL_DEBUG
 THUMBNAIL_PROCESSORS = (
     # Default processors
