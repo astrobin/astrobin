@@ -1,4 +1,10 @@
 2017-11-09 Salvatore Iovene <salvatore@iovene.com>
+ * v1.16.1
+ * Fix issue with watermar text being the sha1 of the text
+ * Improve installation instructions
+ * Fix missing requirement
+
+2017-11-09 Salvatore Iovene <salvatore@iovene.com>
  * v1.16.0
  * Fix crash when posting to a forum with no group
  * Remove sorting groups by members and images (too slow)(fixes: #374)
