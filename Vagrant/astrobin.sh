@@ -299,6 +299,13 @@ function astrobin {
     echo "from django.contrib.auth.models import Group; Group.objects.get_or_create(name='iotd_reviewers')" | /var/www/astrobin/manage.py shell
     echo "from django.contrib.auth.models import Group; Group.objects.get_or_create(name='iotd_judges')" | /var/www/astrobin/manage.py shell
 
+    # Create superuser
+    echo "from django.contrib.auth.models import User; User.objects.filter(email='dev@astrobin.com').delete(); User.objects.create_superuser('astrobin_dev', 'dev@eastrobin.com', 'astrobin_dev')" | python manage.py shell
+
+    # Assign superuser to some groups
+    echo "from django.contrib.auth.models import User, Group; u = User.objects.get(username='astrobin_dev'); g = Group.objects.get(name='content_moderators'); g.user_set.add(u)" | /var/www/astrobin/manage.py shell
+    echo "from django.contrib.auth.models import User, Group; u = User.objects.get(username='astrobin_dev'); g = Group.objects.get(name='image_moderators'); g.user_set.add(u)" | /var/www/astrobin/manage.py shell
+
     /var/www/astrobin/manage.py collectstatic --noinput
     echo "from django.contrib.sites.models import Site; Site.objects.get_or_create(name='AstroBin', domain='localhost')" | /var/www/astrobin/manage.py shell
     (cd /var/www/astrobin/; ./scripts/test.sh)
