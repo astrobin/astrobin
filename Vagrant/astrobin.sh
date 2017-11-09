@@ -306,8 +306,13 @@ function astrobin {
     echo "from django.contrib.auth.models import User, Group; u = User.objects.get(username='astrobin_dev'); g = Group.objects.get(name='content_moderators'); g.user_set.add(u)" | /var/www/astrobin/manage.py shell
     echo "from django.contrib.auth.models import User, Group; u = User.objects.get(username='astrobin_dev'); g = Group.objects.get(name='image_moderators'); g.user_set.add(u)" | /var/www/astrobin/manage.py shell
 
+    # Collect static files
     /var/www/astrobin/manage.py collectstatic --noinput
+
+    # Create Site
     echo "from django.contrib.sites.models import Site; Site.objects.get_or_create(name='AstroBin', domain='localhost')" | /var/www/astrobin/manage.py shell
+
+    # Run tests
     (cd /var/www/astrobin/; ./scripts/test.sh)
 EOF
 }
