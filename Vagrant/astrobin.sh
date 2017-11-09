@@ -217,9 +217,6 @@ function postgres {
     astrobin_log "Creating postgres cluster..."
     $SUDO pg_createcluster $PSQL_V main --start
 
-    astrobin_log "Copying postgres conf file..."
-    $SUDO cp /var/www/astrobin/conf/pg_hba.conf /etc/postgresql/$PSQL_V/main/
-
     function postgres_db {
         astrobin_log "Setting up database..."
         $SUDO -u postgres /bin/sh <<"EOF"
