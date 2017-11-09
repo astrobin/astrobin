@@ -199,6 +199,25 @@ environment =
 	... insert and configure all variables from env/example here ...
 ```
 
+## Postgresql
+
+The following indexes are recommended for your Postgresql server:
+
+```sql
+create index on astrobin_image using btree (uploaded, id);
+create index on actstream_action using btree (timestamp);
+create index on toggleproperties_toggleproperty using btree(property_type, content_type_id, object_id);
+create index on toggleproperties_toggleproperty using btree(property_type, content_type_id, created_on);
+create index object_id_integer_cast on toggleproperties_toggleproperty (cast(toggleproperties_toggleproperty.object_id as int))
+create index persistent_messages_message_user_id_read_idx on persistent_messages_message (user_id, read);
+create index persistent_messages_message_created_idx on persistent_messages_message (created);
+create index on hitcount_hit_count using btree(object_pk, content_type_id);
+create index on nested_comments_nestedcomment using btree(deleted, object_id);
+ ```
+
+You may want to configure `work_mem` to be your RAM in GB, times 16, divided by the number of CPUs in your server.
+
+
 # Running regular tasks
 
 AstroBin needs some tasks to be run regularly, so here's a `crontab` that you should use:
