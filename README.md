@@ -26,7 +26,7 @@ Copy `env/example` to `env/dev` and set all the variables.
 Then create a Ubuntu 16.04 box:
 
 ```bash
-vagrant init ubuntu/xenial64
+vagrant box add ubuntu/xenial64
 vagrant up
 ```
 
