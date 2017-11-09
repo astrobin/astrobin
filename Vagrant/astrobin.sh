@@ -33,8 +33,6 @@ function begin {
 
 function check {
     local EXAMPLE="${ROOT}/env/example"
-    local GUNICORN="${ROOT}/conf/supervisord/gunicorn.conf"
-    local CELERY="${ROOT}/conf/supervisord/celeryd_default.conf"
 
     # Check env/dev
     if [ ! -f $DEV ]; then
@@ -82,8 +80,6 @@ function check {
 
     local FILES=(
         ${DEV}
-        ${GUNICORN}
-        ${CELERY}
     )
 
     for FILE in ${FILES[@]}; do
@@ -169,7 +165,6 @@ function apt {
         qt4-qmake \
         libqt4-dev \
         python-virtualenv \
-        supervisor \
         redis-server \
         gettext \
         python-pyside libpyside-dev \
@@ -245,12 +240,6 @@ EOF
     postgres_db && postgres_priv
 }
 
-function supervisor {
-    astrobin_log "Setting up supervisor..."
-    $SUDO cp /var/www/astrobin/conf/supervisord/* /etc/supervisor/conf.d/
-    $SUDO mkdir -p /var/log/{celery,gunicorn,nginx}
-}
-
 function abc {
     astrobin_log "Setting up 'abc'..."
     . /venv/astrobin/dev/bin/activate
@@ -322,7 +311,6 @@ check
     apt && \
     pip && \
     postgres && \
-    supervisor && \
     abc && \
     astrobin && \
     end
