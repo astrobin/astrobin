@@ -165,6 +165,7 @@ function apt {
         qt4-qmake \
         libqt4-dev \
         python-virtualenv \
+        elasticsearch \
         redis-server \
         gettext \
         python-pyside libpyside-dev \
@@ -255,6 +256,13 @@ function abc {
     )
 }
 
+function elasticsearch {
+    astrobin_log "Setting up ElasticSearch..."
+    $SUDO sed -i 's/#START_DAEMON/START_DAEMON/' /etc/default/elasticsearch
+    $SUDO systemctl enable elasticsearch
+    $SUDO systemctl restart elasticsearch
+}
+
 function astrobin {
     echo "Preparing AstroBin..."
 
@@ -341,6 +349,7 @@ check
     pip && \
     postgres && \
     abc && \
+    elasticsearch && \
     astrobin && \
     end
 ) || abort
