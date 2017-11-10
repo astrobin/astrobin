@@ -8,7 +8,7 @@ for app in $apps; do
     echo -n " * $app:"
     for lang in $langs; do
         echo -n " $lang"
-        (cd $app; $manage makemessages -l $lang -e html,txt,py -i *zinnia* >/dev/null 2>&1)
+        (cd $app; $manage makemessages -l $lang -e html,txt,py >/dev/null 2>&1)
     done
     echo
 done
