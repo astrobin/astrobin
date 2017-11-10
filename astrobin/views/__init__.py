@@ -1126,6 +1126,8 @@ def user_page(request, username):
         'menu':menu,
         'stats':stats,
         'images_no': data['images'],
+        'public_images_no': Image.objects.filter(user = user).count(),
+        'wip_images_no': Image.wip.filter(user = user).count(),
         'alias':'gallery',
     }
 

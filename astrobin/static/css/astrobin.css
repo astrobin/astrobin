@@ -787,6 +787,13 @@ body.full .navbar .nav.pull-right > li > a.btn:focus {
 .dropdown-menu > li > a.active {
   font-weight: bold;
 }
+.dropdown-menu > li > a .badge {
+  position: absolute;
+  right: 4px;
+}
+.dropdown-menu > li > a .badge.badge-success {
+  color: white;
+}
 .btn-group.open > .btn.dropdown-toggle {
   padding-left: 8px;
   padding-right: 8px;
