@@ -3812,9 +3812,9 @@ table#private-shared-folders tr:hover a.delete-folder { visibility: visible; }
 
 #profile-details {
     margin: 0;
-    width: 182px;
-    height: 49px;
-    padding: 6px 6px 0 6px;
+    width: calc(~"100% - 24px");
+    height: 20%;
+    padding: 2px 0;
     overflow: hidden;
     .rounded-corners(0 0 20px 20px);
     background: rgba(0,0,0,0.65);
@@ -3826,16 +3826,17 @@ table#private-shared-folders tr:hover a.delete-folder { visibility: visible; }
         margin: 0;
 
         li {
-            display: inline-block;
-            width: 56px;
+            float: left;
+            width: 33.33%;
 
             > a {
                 float: left;
                 color: #d6d6d6;
                 text-transform: uppercase;
-                padding: 4px 8px;
+                padding: 4px 0;
                 font-size: 8px;
                 text-align: center;
+                width: 100%;
 
                 &:hover, &:hover strong {
                     color: @link-color;
@@ -3853,6 +3854,39 @@ table#private-shared-folders tr:hover a.delete-folder { visibility: visible; }
                     border: none;
                 }
             }
+        }
+    }
+}
+
+@media screen and (max-width: 979px) {
+    #profile-details {
+        ul > li > a {
+            font-size: 6px;
+        }
+    }
+}
+
+@media screen and (max-width: 767px) {
+    .profile-meta {
+        .user-card, .stats {
+            width: calc(~"100% - 170px");
+            float: left;
+            height: 250px;
+        }
+
+        .user-card {
+            width: 142px;
+            padding: 0 12px;
+
+            #profile-details {
+                bottom: 64px;
+                height: 42px;
+                width: calc(~"100% - 26px");
+            }
+        }
+
+        .stats {
+            font-size: 12px;
         }
     }
 }

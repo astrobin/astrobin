@@ -8,7 +8,7 @@
 {% get_current_language as LANGUAGE_CODE %}
 
 {% if view == 'default' %}
-    <div class="subtle-container user-card hidden-phone">
+    <div class="subtle-container user-card">
         <div class="header">
             <h4>
                 {{user.userprofile}}
@@ -17,8 +17,7 @@
 
         <div class="avatar">
             <a href="{% url 'user_page' user.username %}">
-                <span class="hidden-phone hidden-tablet">{% avatar user 194 %}</span>
-                <span class="visible-tablet">{% avatar user 140 %}</span>
+                {% avatar user 194 %}
 
                 {% if DONATIONS_ENABLED %}
                     {% donor_badge user 'large' %}
@@ -30,13 +29,11 @@
             </a>
 
             {% if request.user != user %}
-                <div class="hidden-phone hidden-tablet">
-                    {% add_remove_toggleproperty "follow" user request_user %}
-                </div>
+                {% add_remove_toggleproperty "follow" user request_user %}
             {% endif %}
         </div>
 
-        <div id="profile-details" class="hidden-phone hidden-tablet">
+        <div id="profile-details">
             {% cache 300 astrobin_user user.username view LANGUAGE_CODE %}
             <ul>
                 <li><a href="{% url 'user_page' user.username %}?sub=uploaded"><strong>{{images}}</strong> {% trans "Images" %}</a></li>

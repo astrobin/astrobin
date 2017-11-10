@@ -3551,9 +3551,9 @@ table#private-shared-folders tr:hover a.delete-folder {
 }
 #profile-details {
   margin: 0;
-  width: 182px;
-  height: 49px;
-  padding: 6px 6px 0 6px;
+  width: calc(100% - 24px);
+  height: 20%;
+  padding: 2px 0;
   overflow: hidden;
   -moz-border-radius: 0 0 20px 20px;
   -webkit-border-radius: 0 0 20px 20px;
@@ -3567,16 +3567,17 @@ table#private-shared-folders tr:hover a.delete-folder {
   margin: 0;
 }
 #profile-details ul li {
-  display: inline-block;
-  width: 56px;
+  float: left;
+  width: 33.33%;
 }
 #profile-details ul li > a {
   float: left;
   color: #d6d6d6;
   text-transform: uppercase;
-  padding: 4px 8px;
+  padding: 4px 0;
   font-size: 8px;
   text-align: center;
+  width: 100%;
 }
 #profile-details ul li > a:hover,
 #profile-details ul li > a:hover strong {
@@ -3589,6 +3590,31 @@ table#private-shared-folders tr:hover a.delete-folder {
 }
 #profile-details ul li:last-child > a {
   border: none;
+}
+@media screen and (max-width: 979px) {
+  #profile-details ul > li > a {
+    font-size: 6px;
+  }
+}
+@media screen and (max-width: 767px) {
+  .profile-meta .user-card,
+  .profile-meta .stats {
+    width: calc(100% - 170px);
+    float: left;
+    height: 250px;
+  }
+  .profile-meta .user-card {
+    width: 142px;
+    padding: 0 12px;
+  }
+  .profile-meta .user-card #profile-details {
+    bottom: 64px;
+    height: 42px;
+    width: calc(100% - 26px);
+  }
+  .profile-meta .stats {
+    font-size: 12px;
+  }
 }
 .progress {
   margin-bottom: 4px;
