@@ -120,7 +120,7 @@
             </a>
             <ul class="dropdown-menu">
                 <li>
-                    <a class="send-private-message" href="{% url 'messages_compose_to' requested_user.username %}{% query_string "next=request.path" "" %}">
+                    <a class="send-private-message" href="{% url 'messages_compose_to' requested_user.username %}">
                         <i class="icon-envelope"></i>
                         {% trans "Send private message" %}
                     </a>
