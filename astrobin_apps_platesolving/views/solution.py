@@ -14,7 +14,8 @@ from django.http import Http404, HttpResponse
 from django.shortcuts import get_object_or_404
 from django.views.generic import base
 
-# restframework
+# Third party
+from django_filters.rest_framework import DjangoFilterBackend
 from rest_framework import generics
 from rest_framework import permissions
 
@@ -166,6 +167,7 @@ class SolutionList(generics.ListCreateAPIView):
     queryset = Solution.objects.order_by('pk')
     serializer_class = SolutionSerializer
     permission_classes = (permissions.IsAuthenticatedOrReadOnly,)
+    filter_backends = (DjangoFilterBackend,)
     filter_fields = ('content_type', 'object_id',)
 
 
