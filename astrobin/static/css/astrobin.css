@@ -68,7 +68,6 @@ abbr[title] {
   filter: gray;
   filter: url("data:image/svg+xml;utf8,<svg xmlns=\'http://www.w3.org/2000/svg\'><filter id=\'grayscale\'><feColorMatrix type=\'matrix\' values=\'0.3333 0.3333 0.3333 0 0 0.3333 0.3333 0.3333 0 0 0.3333 0.3333 0.3333 0 0 0 0 0 1 0\'/></filter></svg>#grayscale");
   /* Firefox 10+ */
-
   -webkit-filter: grayscale(100%);
 }
 .js {
@@ -168,7 +167,6 @@ div.selector span {
 }
 div.selector select {
   /* change these to adjust positioning of select element */
-
   top: 0px;
   left: 0px;
 }
@@ -337,7 +335,6 @@ div.uploader span.filename {
   background-position: 0px -299px;
   cursor: pointer;
   /* change this line to adjust positioning of filename area */
-
   margin: 2px 0px 2px 2px;
   line-height: 24px;
 }
@@ -533,13 +530,10 @@ div.selector select {
   position: absolute;
   -webkit-opacity: 0;
   /* Netscape */
-
   -moz-opacity: 0;
   /* Safari 1.x */
-
   -khtml-opacity: 0;
   /* Good browsers */
-
   opacity: 0;
   height: 25px;
   border: none;
@@ -556,13 +550,10 @@ div.checker span {
 div.checker input {
   -webkit-opacity: 0;
   /* Netscape */
-
   -moz-opacity: 0;
   /* Safari 1.x */
-
   -khtml-opacity: 0;
   /* Good browsers */
-
   opacity: 0;
   display: inline-block;
   background: none;
@@ -579,13 +570,10 @@ div.radio span {
 div.radio input {
   -webkit-opacity: 0;
   /* Netscape */
-
   -moz-opacity: 0;
   /* Safari 1.x */
-
   -khtml-opacity: 0;
   /* Good browsers */
-
   opacity: 0;
   text-align: center;
   display: inline-block;
@@ -617,13 +605,10 @@ div.uploader span.filename {
 div.uploader input {
   -webkit-opacity: 0;
   /* Netscape */
-
   -moz-opacity: 0;
   /* Safari 1.x */
-
   -khtml-opacity: 0;
   /* Good browsers */
-
   opacity: 0;
   position: absolute;
   top: 2px;
@@ -747,13 +732,10 @@ body.full .navbar .nav.pull-right > li > a.btn:focus {
   margin-right: -6px;
   -webkit-opacity: 0.5;
   /* Netscape */
-
   -moz-opacity: 0.5;
   /* Safari 1.x */
-
   -khtml-opacity: 0.5;
   /* Good browsers */
-
   opacity: 0.5;
 }
 .nav-tabs li a {
@@ -932,7 +914,6 @@ body.full .navbar .nav.pull-right > li > a.btn:focus {
   right: 0;
   z-index: 1020;
   /* 10 less than .navbar-fixed to prevent any overlap */
-
   -moz-border-radius: 6px 6px 0 0;
   -webkit-border-radius: 6px 6px 0 0;
   border-radius: 6px 6px 0 0;
@@ -1458,12 +1439,10 @@ BODY:first-of-type ul.as-list,
 x:-moz-any-link,
 x:default {
   /* Target FF 3.5+ */
-
   border: none;
 }
 .tabs {
   /* Override some annoying jquery.ui stuff. */
-
   background: transparent;
   border-width: 0px 0px 1px 0px;
   border-radius: 0px;
@@ -1570,13 +1549,10 @@ div.capty-target .capty-caption-content .table-condensed td {
 div.capty-target .capty-caption-content .link-overlay {
   -webkit-opacity: 0;
   /* Netscape */
-
   -moz-opacity: 0;
   /* Safari 1.x */
-
   -khtml-opacity: 0;
   /* Good browsers */
-
   opacity: 0;
   position: absolute;
   left: 0;
@@ -1689,7 +1665,6 @@ div.capty-target .capty-caption-content .link-overlay a {
 }
 .astrobin-image-container {
   /* Because of the IOTD banner. */
-
   position: relative;
 }
 .astrobin-image-container.plot-overlay {
@@ -1699,13 +1674,10 @@ div.capty-target .capty-caption-content .link-overlay a {
 .astrobin-image-container.plot-overlay img {
   -webkit-opacity: 0;
   /* Netscape */
-
   -moz-opacity: 0;
   /* Safari 1.x */
-
   -khtml-opacity: 0;
   /* Good browsers */
-
   opacity: 0;
   filter: alpha(opacity=0);
   zoom: 1;
@@ -1713,16 +1685,12 @@ div.capty-target .capty-caption-content .link-overlay a {
 .astrobin-image-container.plot-overlay img:hover {
   -webkit-opacity: 1;
   /* Netscape */
-
   -moz-opacity: 1;
   /* Safari 1.x */
-
   -khtml-opacity: 1;
   /* Good browsers */
-
   opacity: 1;
   /* IE */
-
   filter: alpha(opacity=100);
   transition: opacity 0.35s ease-in-out;
   -moz-transition: opacity 0.35s ease-in-out;
@@ -1731,16 +1699,12 @@ div.capty-target .capty-caption-content .link-overlay a {
 .astrobin-image-container.plot-overlay.plot-overlay-fixed img {
   -webkit-opacity: 1;
   /* Netscape */
-
   -moz-opacity: 1;
   /* Safari 1.x */
-
   -khtml-opacity: 1;
   /* Good browsers */
-
   opacity: 1;
   /* IE */
-
   filter: alpha(opacity=100);
 }
 .main-image .main-image-inner {
@@ -2135,7 +2099,6 @@ div.capty-target .capty-caption-content .link-overlay a {
   -moz-box-shadow: none;
   box-shadow: none;
   /* Hide by default, will be shown if ad is rendered. */
-
   display: none;
 }
 .subtle-container.advertisement .header {
@@ -2472,7 +2435,6 @@ div.token-input-dropdown p {
 #full-size-image img.real {
   max-width: 65536px;
   /* ... ought to be enough for everybody... */
-
   width: auto;
 }
 form.copy label {
@@ -2493,13 +2455,10 @@ form.copy #clip-container .flash-container {
   top: -3px;
   -webkit-opacity: 0;
   /* Netscape */
-
   -moz-opacity: 0;
   /* Safari 1.x */
-
   -khtml-opacity: 0;
   /* Good browsers */
-
   opacity: 0;
   cursoer: hand;
   cursor: pointer;
@@ -3764,7 +3723,6 @@ ul.astrobin-users li {
   filter: gray;
   filter: url("data:image/svg+xml;utf8,<svg xmlns=\'http://www.w3.org/2000/svg\'><filter id=\'grayscale\'><feColorMatrix type=\'matrix\' values=\'0.3333 0.3333 0.3333 0 0 0.3333 0.3333 0.3333 0 0 0.3333 0.3333 0.3333 0 0 0 0 0 1 0\'/></filter></svg>#grayscale");
   /* Firefox 10+ */
-
   -webkit-filter: grayscale(100%);
 }
 .form-donate {
@@ -3942,18 +3900,14 @@ th.forum-name {
 .post-content {
   padding: 18px !important;
   /* These are technically the same, but use both */
-
   overflow-wrap: break-word;
   word-wrap: break-word;
   -ms-word-break: break-all;
   /* This is the dangerous one in WebKit, as it breaks things wherever */
-
   word-break: break-all;
   /* Instead use this non-standard one: */
-
   word-break: break-word;
   /* Adds a hyphen where the word breaks, if supported (No Blink) */
-
   -ms-hyphens: auto;
   -moz-hyphens: auto;
   -webkit-hyphens: auto;
