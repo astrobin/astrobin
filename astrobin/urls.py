@@ -31,6 +31,7 @@ from astrobin.views import (
     image as image_views,
     moderation as moderation_views,
     collections as collections_views,
+    registration as registration_views,
 
     index,
 
@@ -179,7 +180,10 @@ urlpatterns = [
           auth_views.password_reset_confirm,
           name='password_reset_confirm'),
     #and now add the registration urls
-    url(r'^accounts/', include('registration.backends.default.urls')),
+    url(r'^accounts/register/$',
+        registration_views.RegistrationViewUniqueEmail.as_view(),
+        name='registration_register'),
+    url(r'^accounts/', include('registration.backends.hmac.urls')),
 
     url(r'^activity/', include('actstream.urls')),
     url(r'^avatar/', include('avatar.urls')),

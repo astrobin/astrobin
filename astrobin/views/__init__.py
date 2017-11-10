@@ -44,7 +44,6 @@ from braces.views import LoginRequiredMixin
 from el_pagination.decorators import page_template
 from haystack.exceptions import SearchFieldError
 from haystack.query import SearchQuerySet
-from registration.forms import RegistrationForm
 from reviews.views import ReviewAddForm
 import persistent_messages
 
