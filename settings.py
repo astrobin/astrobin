@@ -177,6 +177,11 @@ TEMPLATE_LOADERS = (
 )
 
 MIDDLEWARE_CLASSES = []
+if not TESTING and not DEBUG:
+    MIDDLEWARE_CLASSES += [
+        'django.middleware.locale.LocaleMiddleware',
+        'django.middleware.gzip.GZipMiddleware',
+    ]
 if DEBUG_TOOLBAR:
     MIDDLEWARE_CLASSES += [
         'debug_toolbar.middleware.DebugToolbarMiddleware',
@@ -198,12 +203,6 @@ if not TESTING and DEBUG:
     MIDDLEWARE_CLASSES += [
         'astrobin.middlewares.prof.ProfileMiddleware',
     ]
-if not TESTING and not DEBUG:
-    MIDDLEWARE_CLASSES += [
-        'django.middleware.locale.LocaleMiddleware',
-        'django.middleware.gzip.GZipMiddleware',
-    ]
-
 SESSION_ENGINE = "django.contrib.sessions.backends.cached_db"
 
 ROOT_URLCONF = 'astrobin.urls'
@@ -339,6 +338,24 @@ if DEBUG_TOOLBAR:
     DEBUG_TOOLBAR_CONFIG = {
         "SHOW_TOOLBAR_CALLBACK" : 'astrobin.debug_toolbar_conf.show_debug_toolbar',
     }
+    DEBUG_TOOLBAR_PANELS = [
+        # Default
+        'debug_toolbar.panels.versions.VersionsPanel',
+        'debug_toolbar.panels.timer.TimerPanel',
+        'debug_toolbar.panels.settings.SettingsPanel',
+        'debug_toolbar.panels.headers.HeadersPanel',
+        'debug_toolbar.panels.request.RequestPanel',
+        'debug_toolbar.panels.sql.SQLPanel',
+        'debug_toolbar.panels.staticfiles.StaticFilesPanel',
+        'debug_toolbar.panels.templates.TemplatesPanel',
+        'debug_toolbar.panels.cache.CachePanel',
+        'debug_toolbar.panels.signals.SignalsPanel',
+        'debug_toolbar.panels.logging.LoggingPanel',
+        'debug_toolbar.panels.redirects.RedirectsPanel',
+
+        # Added by us
+        'debug_toolbar.panels.profiling.ProfilingPanel',
+]
 
 MESSAGE_STORAGE = 'persistent_messages.storage.PersistentMessageStorage'
 
