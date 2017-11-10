@@ -1,4 +1,4 @@
-# AstroBin
+![AstroBin](astrobin/static/images/astrobin-logo.png)
 
 AstroBin is an image hosting website for astrophotographers. The original production copy is run on https://www.astrobin.com/.
 
