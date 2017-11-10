@@ -50,9 +50,13 @@ class UserCollectionsBase(View):
     def get_context_data(self, **kwargs):
         context = super(UserCollectionsBase, self).get_context_data(**kwargs)
         try:
-            context['requested_user'] = User.objects.get(username = self.kwargs['username'])
+            user = User.objects.get(username = self.kwargs['username'])
         except User.DoesNotExist:
             raise Http404
+
+        context['requested_user'] = user
+        context['public_images_no'] = Image.objects.filter(user = user).count()
+        context['wip_images_no'] = Image.wip.filter(user = user).count()
 
         # TODO: stats
 
