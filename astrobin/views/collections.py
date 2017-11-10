@@ -4,7 +4,7 @@ from django.contrib.auth.models import User
 from django.core.urlresolvers import reverse_lazy
 from django.db import IntegrityError
 from django.forms import ValidationError
-from django.http import HttpResponseForbidden
+from django.http import Http404, HttpResponseForbidden
 from django.shortcuts import get_object_or_404
 from django.utils.translation import ugettext as _
 from django.views.generic import CreateView
@@ -49,7 +49,10 @@ class UserCollectionsBase(View):
 
     def get_context_data(self, **kwargs):
         context = super(UserCollectionsBase, self).get_context_data(**kwargs)
-        context['requested_user'] = User.objects.get(username = self.kwargs['username'])
+        try:
+            context['requested_user'] = User.objects.get(username = self.kwargs['username'])
+        except User.DoesNotExist:
+            raise Http404
 
         # TODO: stats
 
