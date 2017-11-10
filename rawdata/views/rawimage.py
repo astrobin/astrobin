@@ -144,11 +144,13 @@ class RawImageLibrary(RestrictToSubscriberMixin, TemplateView):
 
 class RawImageList(generics.ListCreateAPIView):
     model = RawImage
-    queryset = RawImage.objects.order_by('pk')
     serializer_class = RawImageSerializer
-    permission_classes = (permissions.IsAuthenticatedOrReadOnly,
+    permission_classes = (permissions.IsAuthenticated,
                           IsOwnerOrReadOnly,
                           IsSubscriber,)
+
+    def get_queryset(self):
+        return self.model.objects.order_by('pk')
 
     def perform_create(self, serializer):
         serializer.save(user=self.request.user)
@@ -160,6 +162,9 @@ class RawImageDetail(generics.RetrieveUpdateDestroyAPIView):
     permission_classes = (permissions.IsAuthenticatedOrReadOnly,
                           IsOwnerOrReadOnly,
                           IsSubscriber)
+
+    def get_queryset(self):
+        return self.model.objects.order_by('pk')
 
     def perform_create(self, serializer):
         serializer.save(user=self.request.user)
