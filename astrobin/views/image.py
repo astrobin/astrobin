@@ -14,6 +14,7 @@ from django.db.models import Q
 from django.http import Http404, HttpResponseRedirect
 from django.shortcuts import get_object_or_404
 from django.shortcuts import redirect
+from django.utils.encoding import iri_to_uri
 from django.utils.translation import ugettext as _
 from django.utils.translation import ungettext
 from django.views.generic import (
@@ -118,7 +119,7 @@ class ImageThumbView(JSONResponseMixin, DetailView):
             'id': image.pk,
             'alias': alias,
             'revision': r,
-            'url': url
+            'url': iri_to_uri(url)
         })
 
 
@@ -137,7 +138,7 @@ class ImageRawThumbView(DetailView):
             'animated': 'animated' in self.request.GET,
             'insecure': 'insecure' in self.request.GET,
         })
-        return redirect(url)
+        return redirect(url.decode('utf-8'))
 
 
 class ImageDetailView(DetailView):
