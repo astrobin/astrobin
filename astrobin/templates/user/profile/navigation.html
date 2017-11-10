@@ -78,12 +78,18 @@
                     <a href="{% url 'user_page' requested_user.username %}{% query_string "" "sub,active,staging" %}">
                         <i class="icon-bullhorn"></i>
                         {% trans "Public Area" %}
+                        <span class="pull-right badge badge-success">
+                            {{public_images_no}}
+                        </span>
                     </a>
                 </li>
                 <li>
                     <a href="{% url 'user_page' requested_user.username %}{% query_string "sub=uploaded,staging=" "public,active" %}">
                         <i class="icon-lock"></i>
                         {% trans "Staging Area" %}
+                        <span class="pull-right badge badge-success">
+                            {{wip_images_no}}
+                        </span>
                     </a>
                 </li>
                 <li class="divider"></li>
