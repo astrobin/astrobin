@@ -423,6 +423,7 @@ STATICFILES_DIRS = (local_path('astrobin/static/'),)
 
 PIPELINE = {
     'PIPELINE_ENABLED': not DEBUG,
+    'PIPELINE_COLLECTOR_ENABLED': not DEBUG,
     'JAVASCRIPT': {
         'scripts': {
             'source_filenames': (
