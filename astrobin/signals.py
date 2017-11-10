@@ -4,6 +4,7 @@ from itertools import chain
 
 # Django
 from django.conf import settings
+from django.contrib import messages
 from django.contrib.auth.models import User, Group as DjangoGroup
 from django.contrib.contenttypes.models import ContentType
 from django.core.urlresolvers import reverse as reverse_url
@@ -11,11 +12,14 @@ from django.db import IntegrityError
 from django.db import transaction
 from django.db.models.signals import (
         pre_save, post_save, pre_delete, post_delete, m2m_changed)
+from django.utils.translation import ugettext_lazy as _
 
 # Third party apps
+from gadjo.requestprovider.signals import get_request
 from pybb.models import Forum, Topic, Post
 from rest_framework.authtoken.models import Token
 from reviews.models import Review
+from threaded_messages.models import Thread
 from toggleproperties.models import ToggleProperty
 from subscription.models import UserSubscription
 from subscription.signals import subscribed, paid
@@ -637,3 +641,14 @@ def review_post_save(sender, instance, created, **kwargs):
                    action_object = instance,
                    target = instance.content_object)
 post_save.connect(review_post_save, sender = Review)
+
+def threaded_messages_thread_post_save(sender, instance, created, **kwargs):
+    if created:
+        try:
+            request = get_request()
+        except InexError:
+            # This may happen during unit testing
+            return
+
+        messages.success(request, _("Message sent"))
+post_save.connect(threaded_messages_thread_post_save, sender = Thread)
