@@ -1,5 +1,6 @@
 {% extends 'base.html' %}
 
+{% load cache %}
 {% load i18n %}
 {% load static %}
 {% load astrobin_apps_iotd_tags %}
@@ -14,23 +15,25 @@
     </div>
 
     <div class="top-picks">
-        {% for image in object_list %}
-            <div class="top-picks-item">
-                {% astrobin_image image 'story' tooltip=False nav_ctx='picks' %}
-                <div class="overlay">
-                    <div class="inner">
-                        <div class="image-title">{{image.title|default:_("(no title)")}}</div>
-                        <div class="image-author">
-                            <a href="{% url 'user_page' image.user %}">
-                                {{image.user.userprofile}}
-                            </a>
+        {% cache 3600 top_peaks %}
+            {% for image in object_list %}
+                <div class="top-picks-item">
+                    {% astrobin_image image 'story' tooltip=False nav_ctx='picks' %}
+                    <div class="overlay">
+                        <div class="inner">
+                            <div class="image-title">{{image.title|default:_("(no title)")}}</div>
+                            <div class="image-author">
+                                <a href="{% url 'user_page' image.user %}">
+                                    {{image.user.userprofile}}
+                                </a>
+                            </div>
                         </div>
                     </div>
                 </div>
-            </div>
-        {% empty %}
-            {% trans "This list is currently empty." %}
-        {% endfor %}
+            {% empty %}
+                {% trans "This list is currently empty." %}
+            {% endfor %}
+        {% endcache %}
     </div>
 
     {% include 'pagination.html' %}
