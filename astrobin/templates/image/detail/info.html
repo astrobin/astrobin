@@ -1,5 +1,6 @@
 {% load avatar_tags %}
 {% load astrobin_apps_donations_tags %}
+{% load astrobin_apps_premium_tags %}
 {% load common_tags %}
 {% load i18n %}
 {% load hitcount_tags %}
@@ -14,7 +15,14 @@
     <div class="avatar">
         <a href="{% url 'user_page' image.user %}">
             {% avatar image.user 106 %}
-            {% donor_badge user 'medium' %}
+
+            {% if DONATIONS_ENABLED %}
+                {% donor_badge user 'medium' %}
+            {% endif %}
+
+            {% if PREMIUM_ENABLED %}
+                {% premium_badge user 'medium' %}
+            {% endif %}
         </a>
     </div>
     <div class="username">
