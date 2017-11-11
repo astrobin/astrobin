@@ -58,7 +58,9 @@
             {% add_remove_toggleproperty "follow" image.user request.user %}
         {% endif %}
 
-        {% add_remove_toggleproperty "bookmark" image request.user %}
+        {% if request.user == image.user %}
+            {% add_remove_toggleproperty "bookmark" image.user request.user %}
+        {% endif %}
     </div>
 </div>
 

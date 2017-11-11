@@ -1,0 +1,15 @@
+{% load i18n %}
+{% load tags %}
+{% load toggleproperty_tags %}
+
+{% if request.user.is_authenticated and request.user != image.user %}
+    {% add_remove_toggleproperty "bookmark" image request.user %}
+{% endif %}
+
+{% if not request.user.is_authenticated %}
+    <span class="toggleproperty-add-remove property-bookmark">
+        <a class="btn btn-primary" href="{% url 'auth_login' %}?next={{request.path}}">
+            <i class="icon-bookmark"></i>
+        </a>
+    </span>
+{% endif %}
