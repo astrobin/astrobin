@@ -84,10 +84,13 @@ def get_query_string(p_list, p_dict, new_params, remove, context):
         else:
             p_list[i][1] = mark_safe('&amp;'.join([u'%s=%s' % (p_list[i][0], k) for k in p_list[i][1]]))
             p_list[i][0] = ''
-        try:
-            p_list[i][1] = template.Variable(p_list[i][1]).resolve(context)
-        except:
-            pass
+
+        protected_keywords = ['block']
+        if p_list[i][1] not in protected_keywords:
+            try:
+                p_list[i][1] = template.Variable(p_list[i][1]).resolve(context)
+            except:
+                pass
 
     return mark_safe('?' + '&amp;'.join([k[1] if k[0] == '' else u'%s=%s' % (k[0], k[1]) for k in p_list if k[1] is not None and k[1] != 'None']).replace(' ', '%20'))
 
