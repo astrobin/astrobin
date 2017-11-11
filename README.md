@@ -271,5 +271,5 @@ IMGCACH=/var/www/media/imagecache
 
 # Contributing
 
-AstroBin accept contributions. Please fork the project and submit pull requests!
+AstroBin accepts contributions. Please fork the project and submit pull requests!
 If you need support, please use the [astrobin-dev Google Group](https://groups.google.com/forum/#!forum/astrobin-dev).
