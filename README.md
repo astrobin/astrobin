@@ -30,6 +30,12 @@ vagrant box add ubuntu/xenial64
 vagrant up
 ```
 
+`vagrant up` will take a long time, probably around 30 to 60 minutes depending on your hardware. If you want to monitor more closely what is going on, tail the log file in another terminal:
+
+```bash
+tail -f vagrant.log
+```
+
 ## Login into the AstroBin's Vagrant box:
 
 ```bash
