@@ -1812,6 +1812,15 @@ div.capty-target .capty-caption-content .link-overlay a {
   color: #a3a3a3;
   border-bottom: 1px dotted #646464;
 }
+.avatar-block .username .property-bookmark {
+  margin: 0;
+  width: 30px;
+}
+.avatar-block .username .property-bookmark button,
+.avatar-block .username .property-bookmark a {
+  font-size: 12px;
+  line-height: initial;
+}
 .avatar {
   position: relative;
 }
@@ -3632,15 +3641,26 @@ table#private-shared-folders tr:hover a.delete-folder {
   top: 6px;
   left: 8px;
 }
-.toggleproperty-add-remove.property-like,
-.btn-iotd-submit {
-  display: block;
+.toggleproperty-add-remove.property-like {
+  display: inline-block;
+  width: calc(70% - 6px);
   margin: 16px 0;
+  margin-right: 2px;
 }
 .toggleproperty-add-remove.property-like button,
-.btn-iotd-submit button,
-.toggleproperty-add-remove.property-like a,
-.btn-iotd-submit a {
+.toggleproperty-add-remove.property-like a {
+  width: 100%;
+  font-size: 16px;
+  line-height: 48px;
+  padding: 4px 0;
+}
+.toggleproperty-add-remove.property-bookmark {
+  display: inline-block;
+  width: calc(30% - 2px);
+  margin: 16px 0;
+}
+.toggleproperty-add-remove.property-bookmark button,
+.toggleproperty-add-remove.property-bookmark a {
   width: 100%;
   font-size: 16px;
   line-height: 48px;
