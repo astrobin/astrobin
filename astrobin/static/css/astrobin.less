@@ -3514,12 +3514,18 @@ li.revisions {
         width: 83px;
     }
     .quick-data {
-        position: absolute;
-        top: (@spacer-medium * 2) + 22px;
-        left: (@spacer-medium * 2) + 83px;
+        float: right;
+        width: calc(~"50% - 8px");
 
         th {
             padding: 4px 4px 4px 0;
+            background: none;
+            border-top: 1px solid #363636;
+            border-bottom: 1px solid #363636;
+
+            i {
+                width: 16px;
+            }
         }
         td {
             padding: 4px;

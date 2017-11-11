@@ -3271,13 +3271,19 @@ li.revisions {
 }
 .user-business-card .quick-data,
 .gear-business-card .quick-data {
-  position: absolute;
-  top: 38px;
-  left: 99px;
+  float: right;
+  width: calc(50% - 8px);
 }
 .user-business-card .quick-data th,
 .gear-business-card .quick-data th {
   padding: 4px 4px 4px 0;
+  background: none;
+  border-top: 1px solid #363636;
+  border-bottom: 1px solid #363636;
+}
+.user-business-card .quick-data th i,
+.gear-business-card .quick-data th i {
+  width: 16px;
 }
 .user-business-card .quick-data td,
 .gear-business-card .quick-data td {
