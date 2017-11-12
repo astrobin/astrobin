@@ -32,6 +32,7 @@ class NestedComment(models.Model):
     author = models.ForeignKey(
         User,
         on_delete = models.SET(get_sentinel_user),
+        editable = False,
     )
 
     text = models.TextField()
