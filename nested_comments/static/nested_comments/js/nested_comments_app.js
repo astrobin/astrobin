@@ -279,9 +279,6 @@ $(function() {
                 parent: comment.get('parent')
             };
 
-            if (data.parent == null)
-                data.parent = 0;
-
             return data;
         },
 
@@ -325,8 +322,6 @@ $(function() {
 
         saveEdit: function(comment) {
             var data = this.dump(comment);
-            if (data.parent == null)
-                data.parent = 0;
 
             comment.set('submitting', true);
             $.ajax({
