@@ -32,8 +32,8 @@ class NestedCommentList(generics.ListCreateAPIView):
     permission_classes = (permissions.IsAuthenticatedOrReadOnly,
                           IsOwnerOrReadOnly,)
 
-    def pre_save(self, obj):
-        obj.author = self.request.user
+    def perform_create(self, serializer):
+        serializer.save(author = self.request.user)
 
 
 class NestedCommentDetail(generics.RetrieveUpdateDestroyAPIView):
@@ -46,6 +46,5 @@ class NestedCommentDetail(generics.RetrieveUpdateDestroyAPIView):
     permission_classes = (permissions.IsAuthenticatedOrReadOnly,
                           IsOwnerOrReadOnly,)
 
-    def pre_save(self, obj):
-        obj.author = self.request.user
-
+    def perform_create(self, serializer):
+        serializer.save(user = self.request.user)
