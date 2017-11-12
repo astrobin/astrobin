@@ -60,7 +60,7 @@ class NestedComment(models.Model):
     )
 
     def __unicode__(self):
-        return "%s: \"%s\"" % (self.author, self.text)
+        return "Comment %d" % self.pk
 
     def get_absolute_url(self):
         object_url = self.content_type.get_object_for_this_type(id = self.object_id).get_absolute_url()
