@@ -15,7 +15,7 @@
     </div>
 
     <div class="top-picks">
-        {% cache 3600 top_peaks %}
+        {% cache 3600 top_picks page_obj.number %}
             {% for image in object_list %}
                 <div class="top-picks-item">
                     {% astrobin_image image 'story' tooltip=False nav_ctx='picks' %}
