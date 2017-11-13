@@ -38,11 +38,10 @@ class CustomForumPermissions(DefaultPermissionHandler):
         if user.is_authenticated():
             f = f.filter(
                 Q(group = None) |
-                Q(group__public = True) |
                 Q(group__owner = user) |
                 Q(group__members = user)).distinct()
         else:
-            f = f.filter(Q(group = None) | Q(group__public = True))
+            f = f.filter(group = None)
 
         return f
 
@@ -61,11 +60,10 @@ class CustomForumPermissions(DefaultPermissionHandler):
         try:
             if topic.forum.group is not None:
                 if user.is_authenticated():
-                    may = topic.forum.group.public or \
-                        user == topic.forum.group.owner or \
-                        user in topic.forum.group.members.all()
+                    may = user == topic.forum.group.owner or \
+                          user in topic.forum.group.members.all()
                 else:
-                    may = topic.forum.group.public
+                    may = False
         except Group.DoesNotExist:
             pass
 
@@ -82,11 +80,10 @@ class CustomForumPermissions(DefaultPermissionHandler):
         if user.is_authenticated():
             f = f.filter(
                 Q(forum__group = None) |
-                Q(forum__group__public = True) |
                 Q(forum__group__owner = user) |
                 Q(forum__group__members = user)).distinct()
         else:
-            f = f.filter(Q(forum__group = None) | Q(forum__group__public = True))
+            f = f.filter(forum__group = None)
 
         return f
 
@@ -96,8 +93,6 @@ class CustomForumPermissions(DefaultPermissionHandler):
 
         try:
             if forum.group is not None:
-                if forum.group.public:
-                    return may
                 return may and (
                     user == forum.group.owner or
                     user in forum.group.members.all())
