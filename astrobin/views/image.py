@@ -113,6 +113,7 @@ class ImageThumbView(JSONResponseMixin, DetailView):
         url = image.thumbnail(alias, {
             'revision_label': r,
             'animated': 'animated' in self.request.GET,
+            'insecure': 'insecure' in self.request.GET,
         })
 
         return self.render_json_response({
