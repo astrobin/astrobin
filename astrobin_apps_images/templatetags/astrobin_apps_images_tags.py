@@ -227,6 +227,10 @@ def astrobin_image(context, image, alias, **kwargs):
         cache_key += '_animated'
     thumb_url = cache.get(cache_key)
 
+    # Force HTTPS
+    if thumb_url:
+        thumb_url = thumb_url.replace('http://', 'https://', 1)
+
     # If we're testing, we want to bypass the placeholder thing and force-get
     # the thumb url.
     if thumb_url is None and settings.TESTING:
