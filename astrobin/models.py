@@ -1138,9 +1138,11 @@ class Image(HasSolutionMixin, models.Model):
     def thumbnail(self, alias, thumbnail_settings = {}):
         def normalize_url_security(url, thumbnail_settings):
             insecure = 'insecure' in thumbnail_settings and thumbnail_settings['insecure'] == True
-            if insecure:
-                if url.startswith('https'):
-                    return url.replace('https', 'http', 1)
+            if insecure and url.startswith('https'):
+                return url.replace('https', 'http', 1)
+            if not insecure and url.startswith('http://'):
+                return url.replace('http', 'https', 1)
+
             return url
 
         from astrobin_apps_images.models import ThumbnailGroup
