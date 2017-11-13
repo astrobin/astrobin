@@ -77,15 +77,9 @@ class WallView(ListView):
 
 
 class TopPicksView(ListView):
-    model = IotdVote
+    model = Image
     template_name = 'top_picks.html'
     paginate_by = 30
 
     def get_queryset(self):
-        return sorted(list(set([
-            x.image
-            for x in self.model.objects.all()
-            if not Iotd.objects.filter(
-                image = x.image,
-                date__lte = datetime.now().date()).exists()])),
-            key = lambda x: x.published, reverse = True)
+        return self.model.objects.exclude(iotdvote = None).filter(iotd = None)
