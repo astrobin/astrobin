@@ -1219,7 +1219,7 @@ class Image(HasSolutionMixin, models.Model):
 
             return normalize_url_security(url, thumbnail_settings)
 
-        return "http://placehold.it/%dx%d/B53838/fff&text=Error" % (
+        return "https://placehold.it/%dx%d/B53838/fff&text=Error" % (
             thumbnail_alias_settings['size'][0],
             thumbnail_alias_settings['size'][1])
 
