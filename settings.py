@@ -17,7 +17,7 @@ ALLOWED_HOSTS = ['*']
 TEMPLATE_DEBUG = DEBUG
 MAINTENANCE_MODE = False
 READONLY_MODE = False
-MEDIA_VERSION = '205'
+MEDIA_VERSION = '206'
 LONGPOLL_ENABLED = False
 ADS_ENABLED = os.environ['ASTROBIN_ADS_ENABLED'] == 'true'
 DONATIONS_ENABLED = os.environ['ASTROBIN_DONATIONS_ENABLED'] == 'true'
@@ -273,6 +273,7 @@ INSTALLED_APPS = [
     'pybb', # Forum
     'markup_deprecated',
     'sanitizer',
+    'precise_bbcode',
 
     # AstroBin apps
     'astrobin.apps.AstroBinAppConfig',

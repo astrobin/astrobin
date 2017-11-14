@@ -45,7 +45,7 @@
     </div>
 
     <div class="message-form">
-        <form class="reply-form form-horizontal" method="POST" action="{% url 'message_reply' thread.pk %}">{% csrf_token %}
+        <form class="reply-form form-vertical" method="POST" action="{% url 'message_reply' thread.pk %}">{% csrf_token %}
             <a class="anchor" name="reply"></a>
             {{ form|as_bootstrap }}
             <div class="form-actions">
@@ -56,42 +56,49 @@
 {% endblock %}
 
 {% block extra_js %}
-     <script type="text/javascript">
-         $(document).ready(function(){
-             $('.reply-form').ajaxForm({
-                 resetForm: true,
-                 timeout: 5000,
-                 beforeSubmit: function () {
-                     if ($('.reply-form #id_body').val() != '') {
-                         $('.reply-form .submit-button')
-                            .attr('disabled', 'disabled')
-                            .addClass('btn-disabled')
-                            .val("{% trans "Sending..." %}");
-                     }
-                 },
-                 success: function(data) {
-                    var $new_message = $(data);
-                    var $container = $('<div/>').addClass('message-container own');
+    <script src="{{STATIC_URL}}wysibb/jquery.wysibb.min.js"></script>
+    <script type="text/javascript">
+    $(document).ready(function(){
+        var textarea = $('#id_body');
+        textarea.wysibb({
+            buttons: "bold,italic,underline,|,img,link,|,bullist,numlist,|,code"
+        });
 
-                    $container.append($new_message);
-                    $('.message-list').append($container);
+        $('.reply-form').ajaxForm({
+            resetForm: true,
+            timeout: 5000,
+            beforeSubmit: function () {
+                if ($('.reply-form #id_body').val() != '') {
+                    $('.reply-form .submit-button')
+                        .attr('disabled', 'disabled')
+                        .addClass('btn-disabled')
+                        .val("{% trans "Sending..." %}");
+                }
+            },
+            success: function(data) {
+                var $new_message = $(data);
+                var $container = $('<div/>').addClass('message-container own');
 
+                $container.append($new_message);
+                $('.message-list').append($container);
+                $('.wysibb-body').text('');
+
+                $('.reply-form .submit-button')
+                    .removeAttr('disabled')
+                    .removeClass('btn-disabled')
+                    .val("{% trans "Reply" %}");
+            },
+            error: function(data) {
+                if (data.status == 400) {
+                    // Invalid form, do nothing, as it was surely empty.
+                } else if (data.status == 500) {
                     $('.reply-form .submit-button')
                         .removeAttr('disabled')
-                        .removeClass('btn-disabled')
-                        .val("{% trans "Reply" %}");
-                 },
-                 error: function(data) {
-                    if (data.status == 400) {
-                        // Invalid form, do nothing, as it was surely empty.
-                    } else if (data.status == 500) {
-                        $('.reply-form .submit-button')
-                            .removeAttr('disabled')
-                            .removeClass('button-disabled')
-                            .val("{% trans "Error. Try again!" %}");
-                    }
-                 }
-             })
-         })
-     </script>
+                        .removeClass('button-disabled')
+                        .val("{% trans "Error. Try again!" %}");
+                }
+            }
+        })
+    })
+    </script>
 {% endblock %}

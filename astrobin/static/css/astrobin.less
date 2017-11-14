@@ -1397,22 +1397,29 @@ input:focus, textarea:focus {
     background: #333 url('../images/dark-panel-tile.png');
     border-color: #393939;
 }
-.form-horizontal input[type=text],
-.form-horizontal input[type=password],
-.form-horizontal textarea,
-.form-horizontal .help-block {
-    width: 610px;
-    max-width: 96%;
-}
-.form-horizontal select {
-    width: 620px;
-    max-width: 96%;
-}
-.form-horizontal label {
-    font-weight: bold;
 
-    &.checkbox {
-        padding-left: 0;
+.form-horizontal {
+    input[type=text],
+    input[type=password],
+    textarea,
+    .help-block {
+        width: 610px;
+        max-width: 96%;
+    }
+    select {
+        width: 620px;
+        max-width: 96%;
+    }
+    label {
+        font-weight: bold;
+
+        &.checkbox {
+            padding-left: 0;
+        }
+    }
+    .wysibb {
+        width: 622px;
+        max-width: 98%;
     }
 }
 
@@ -1422,6 +1429,12 @@ input:focus, textarea:focus {
     }
     .btn {
         margin-left: @spacer-medium;
+    }
+}
+
+.form-vertical {
+    .form-actions {
+        padding-left: 0;
     }
 }
 
@@ -2542,6 +2555,7 @@ ul.token-input-list {
     background-color: #404040;
     border: 1px solid #282828;
     width: 610px;
+    max-width: 97%;
 
     li.token-input-token {
         display: inline-block;
