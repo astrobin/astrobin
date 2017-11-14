@@ -20,8 +20,14 @@
 {% endblock %}
 
 {% block extra_js %}
+    <script src="{{STATIC_URL}}wysibb/jquery.wysibb.min.js"></script>
     <script type="text/javascript">
         $(document).ready(function() {
+            var textarea = $('#id_body');
+            textarea.wysibb({
+                buttons: "bold,italic,underline,|,img,link,|,bullist,numlist,|,code"
+            });
+
             {% if 'subject' in request.GET %}
             $('input#id_subject').val("{{request.GET.subject}}");
             {% endif %}

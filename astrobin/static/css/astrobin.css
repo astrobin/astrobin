@@ -1252,11 +1252,18 @@ textarea:focus {
 .form-horizontal label.checkbox {
   padding-left: 0;
 }
+.form-horizontal .wysibb {
+  width: 622px;
+  max-width: 98%;
+}
 .form-inline label {
   margin-right: 8px;
 }
 .form-inline .btn {
   margin-left: 8px;
+}
+.form-vertical .form-actions {
+  padding-left: 0;
 }
 .form-content .loading {
   text-align: center;
@@ -2357,6 +2364,7 @@ ul.token-input-list {
   background-color: #404040;
   border: 1px solid #282828;
   width: 610px;
+  max-width: 97%;
 }
 ul.token-input-list li.token-input-token {
   display: inline-block;

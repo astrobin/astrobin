@@ -1,4 +1,5 @@
 {% load avatar_tags %}
+{% load bbcode_tags %}
 
 <div class="message">
     <div class="avatar">
@@ -12,7 +13,7 @@
         <span class="date">{{ message.sent_at|date:"SHORT_DATETIME_FORMAT"}}</span>
     </div>
     <div class="body">
-        {{ message.body|linebreaksbr }}
+        {% bbcode message.body %}
     </div>
 </div>
 
