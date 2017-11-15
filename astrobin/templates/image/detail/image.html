@@ -20,7 +20,12 @@
 
 {% block extra_js %}
 <script type="text/javascript">
+    var attempts = 0;
+
     function solution_image_error(img) {
+        if (attempts > 1)
+            return;
+
         if (img.src.indexOf('images/solutions') === -1) {
             split = img.src.split('solutions');
             img.src = split[0] + 'images/solutions' + split[1];
@@ -28,6 +33,8 @@
             split = img.src.split('images/solutions');
             img.src = split[0] + 'solutions' + split[1];
         }
+
+        attempts++;
     }
 </script>
 {% endblock %}
