@@ -1319,6 +1319,11 @@ class ImageTest(TestCase):
         self.assertEqual(response.status_code, 403)
         self.client.logout()
 
+        # GET missing revision
+        self.client.login(username = 'test', password = 'password')
+        response = self.client.get(get_url((999,)))
+        self.assertEqual(response.status_code, 404)
+
         # GET
         self.client.login(username = 'test', password = 'password')
         response = self.client.get(get_url((revision.pk,)))
