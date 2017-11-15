@@ -17,7 +17,7 @@ ALLOWED_HOSTS = ['*']
 TEMPLATE_DEBUG = DEBUG
 MAINTENANCE_MODE = False
 READONLY_MODE = False
-MEDIA_VERSION = '206'
+MEDIA_VERSION = '207'
 LONGPOLL_ENABLED = False
 ADS_ENABLED = os.environ['ASTROBIN_ADS_ENABLED'] == 'true'
 DONATIONS_ENABLED = os.environ['ASTROBIN_DONATIONS_ENABLED'] == 'true'
@@ -428,11 +428,7 @@ PIPELINE = {
     'JAVASCRIPT': {
         'scripts': {
             'source_filenames': (
-                'common/js/handlebars-1.0.rc.1.js',
-                'common/js/ember-1.0.0-pre.2.js',
                 'common/fancybox/jquery.fancybox.js',
-
-                'nested_comments/js/nested_comments_app.js',
 
                 'astrobin_apps_images/js/astrobin_apps_images.js',
                 'astrobin_apps_images/js/jquery.capty.js',
