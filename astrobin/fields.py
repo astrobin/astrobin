@@ -219,7 +219,7 @@ COUNTRIES = (
     ('SE', _('Sweden')), 
     ('CH', _('Switzerland')), 
     ('SY', _('Syrian Arab Republic')), 
-    ('TW', _('Taiwan, Province of China')), 
+    ('TW', _('Taiwan')), 
     ('TJ', _('Tajikistan')), 
     ('TZ', _('Tanzania, United Republic of')), 
     ('TH', _('Thailand')), 
