@@ -525,15 +525,9 @@ class ImageDetailView(DetailView):
                 except Iotd.DoesNotExist:
                     pass
             elif nav_ctx == 'picks':
-                picks = list(set([x.image for x in IotdVote.objects.all()]))
-                try:
-                    index = picks.index(image)
-                    if index > 0:
-                        image_next = [picks[index - 1]]
-                    if index < len(picks) - 1:
-                        image_prev = [picks[index + 1]]
-                except ValueError:
-                    pass
+                picks = Image.objects.exclude(iotdvote = None).filter(iotd = None)
+                image_next = picks.filter(pk__gt = image.pk).order_by('pk')[0:1]
+                image_prev = picks.filter(pk__lt = image.pk).order_by('-pk')[0:1]
         except Image.DoesNotExist:
             image_next = None
             image_prev = None
