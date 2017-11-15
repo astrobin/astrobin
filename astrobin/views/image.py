@@ -999,7 +999,7 @@ class ImageEditRevisionView(LoginRequiredMixin, UpdateView):
     def dispatch(self, request, *args, **kwargs):
         try:
             revision = self.model.objects.get(pk = kwargs[self.pk_url_kwarg])
-        except Image.DoesNotExist:
+        except self.model.DoesNotExist:
             raise Http404
 
         if request.user.is_authenticated() and request.user != revision.image.user and not request.user.is_superuser:
