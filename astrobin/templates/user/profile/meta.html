@@ -6,7 +6,7 @@
 
 {% load i18n %}
 
-<div class="profile-meta">
+<div class="profile-meta hidden-phone">
     {% astrobin_user requested_user view='default'%}
 
     {% if PREMIUM_ENABLED and requested_user == request.user %}

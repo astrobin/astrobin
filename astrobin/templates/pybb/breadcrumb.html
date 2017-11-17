@@ -1,7 +1,6 @@
 {% load i18n pybb_tags %}
-<ul class='breadcrumb hidden-phone'>
+<ul class='breadcrumb'>
     {% include "pybb/breadcrumb_top_extra_crumb.html" %}
-    <li><a href="{% url 'pybb:index' %}">{% trans "Home" %}</a> <span class="divider">/</span></li>
     {% if object %}
         {% if object.get_parents %}
             {% for obj in object.get_parents %}
@@ -18,5 +17,7 @@
         <li>{% trans extra_crumb %}</li>
     {% endif %}
 
-    {% include "pybb/pagination.html" %}
+    <div class="hidden-phone">
+        {% include "pybb/pagination.html" %}
+    </div>
 </ul>

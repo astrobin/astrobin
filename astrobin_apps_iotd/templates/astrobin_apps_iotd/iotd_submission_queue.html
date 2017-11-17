@@ -2,25 +2,30 @@
 
 {% load i18n %}
 {% load static %}
+{% load django_bootstrap_breadcrumbs %}
 {% load astrobin_apps_iotd_tags %}
 {% load astrobin_apps_images_tags %}
 
 {% block title %}{% trans "IOTD Submission Queue" %}{% endblock %}
 
-{% block content %}
-    <div class="iotd-promotion-queue">
-        <h1>
-            {% trans "IOTD Submission Queue" %}
-            <div class="pull-right todays-count">
-                <span class="used">
-                    {{user|iotd_submissions_today}}
-                </span> / {{MAX_SUBMISSIONS_PER_DAY}}
-            </div>
-        </h1>
-        <div class="subtitle">
-            {% blocktrans %}Please select the images that you want to propose for IOTD consideration.{% endblocktrans %}
-        </div>
+{% block breadcrumbs %}
+    {{ block.super }}
+    {% breadcrumb_safe 'Moderate' None %}
+    {% breadcrumb 'IOTD Submission Queue' None %}
+{% endblock %}
 
+{% block content %}
+    <div class="subtitle">
+        <i class="icon icon-info-sign"></i>
+        {% blocktrans %}Please select the images that you want to propose for IOTD consideration.{% endblocktrans %}
+        <div class="pull-right todays-count badge badge-success">
+            <span class="used">
+                {{user|iotd_submissions_today}}
+            </span> / {{MAX_SUBMISSIONS_PER_DAY}}
+        </div>
+    </div>
+
+    <div class="iotd-promotion-queue">
         {% for image_group in object_list %}
             <h2>{{image_group.date}}</h2>
             {% for image in image_group.images %}

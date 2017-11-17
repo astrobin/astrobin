@@ -1,19 +1,29 @@
 {% extends 'base.html' %}
 {% load i18n %}
 {% load bootstrap_toolkit %}
+{% load django_bootstrap_breadcrumbs %}
 
 {% block title %}{% trans "Request an API key" %}{% endblock %}
 
+{% block breadcrumbs %}
+    {{ block.super }}
+    {% breadcrumb_safe 'Users' None %}
+    {% breadcrumb request.user.userprofile.get_display_name 'user_page' request.user.username %}
+    {% breadcrumb 'API Keys' 'user_page_api_keys' request.user.username %}
+    {% breadcrumb 'Request an API key' None %}
+{% endblock %}
+
 {% block content %}
-    <h1>{% trans "Request an API key" %}</h1>
     <div class="well">
-    {% blocktrans %}Thanks for your interest in using AstroBin's APIs! You need a <strong>key</strong> and a <strong>secret</strong> if you want to access AstroBin's data in your own app or website.{% endblocktrans %}<br/>
-    {% blocktrans %}After you submit a request, you will receive a reply within 24 hours.{% endblocktrans %}
+        {% blocktrans %}Thanks for your interest in using AstroBin's APIs! You need a <strong>key</strong> and a <strong>secret</strong> if you want to access AstroBin's data in your own app or website.{% endblocktrans %}
+        {% blocktrans %}After you submit a request, you will receive a reply within 24 hours.{% endblocktrans %}
     </div>
+
     <div class="alert alert-warning">
         {% url 'tos' as tos_url %}
         {% blocktrans %}Please make sure you have read the section about APIs in the <a href="{{tos_url}}">Terms of Service</a>.{% endblocktrans %}
     </div>
+
     <form class="form-horizontal" action="." method="post">{% csrf_token %}
         {{form|as_bootstrap}}
         <div class="form-actions">

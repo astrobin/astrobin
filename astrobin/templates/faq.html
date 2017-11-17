@@ -1,7 +1,15 @@
 {% extends 'base.html' %}
+
 {% load i18n %}
+{% load django_bootstrap_breadcrumbs %}
 
 {% block title %}{% trans "FAQ" %}{% endblock %}
+
+{% block breadcrumbs %}
+    {{ block.super }}
+    {% breadcrumb_safe 'Help' None %}
+    {% breadcrumb 'FAQ' None %}
+{% endblock %}
 
 {% block content %}
     <div class="row">

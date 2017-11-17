@@ -1,7 +1,16 @@
 {% extends 'base.html' %}
+
 {% load i18n %}
+{% load django_bootstrap_breadcrumbs %}
 
 {% block title %}AstroBin - {% trans "Your download is ready" %}{% endblock %}
+
+{% block breadcrumbs %}
+    {{ block.super }}
+    {% breadcrumb_safe 'Explore' None %}
+    {% breadcrumb 'Public data pools' 'rawdata.publicdatapool_list' %}
+    {% breadcrumb 'Download' None %}
+{% endblock %}
 
 {% block content %}
     {% if object.ready %}

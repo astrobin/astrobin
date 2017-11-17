@@ -1,6 +1,13 @@
 {% load astrobin_apps_donations_tags %}
 {% load pipeline %}
 {% load dfp_tags %}
+{% load django_bootstrap_breadcrumbs %}
+
+
+{% block breadcrumbs %}
+    {% clear_breadcrumbs %}
+    {% breadcrumb_safe '<i class="icon-home hidden-phone"></i> Home' "/" %}
+{% endblock %}
 
 <!DOCTYPE html>
 <html lang="{% if request.user.is_authenticated and user_language %}{{user_language}}{% else %}en{% endif %}">
@@ -48,9 +55,10 @@
         </div>
 
         <div id="top" class="container astrobin-container {% block container_extra_classes %}{% endblock %}">
+            {% block breadcrumb %} {# Use a block to allow forum template to override this #}
+                {% render_breadcrumbs %}
+            {% endblock %}
             {% include "base/alerts.html" %}
-
-            {% block breadcrumb %}{% endblock %}
             {% block content %}{% endblock %}
         </div> <!-- container -->
 

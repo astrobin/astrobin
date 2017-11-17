@@ -2,14 +2,18 @@
 
 {% load i18n %}
 {% load el_pagination_tags %}
+{% load django_bootstrap_breadcrumbs %}
 {% load astrobin_apps_notifications_tags %}
 
 {% block title %}{% trans "Notifications" %}{% endblock %}
 
+{% block breadcrumbs %}
+    {{ block.super }}
+    {% breadcrumb 'Notifications' 'astrobin_apps_notifications.all' %}
+{% endblock %}
+
 {% block content %}
     {% paginate 20 notification_list %}
-        <h1>{% trans "Notifications" %}</h1>
-
         <table class="table table-striped notifications">
             {% for n in notification_list %}
                 <tr class="notification-item {% if n.read %}notification-read{% else %}notification-unread{% endif %}">

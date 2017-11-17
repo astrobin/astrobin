@@ -1,12 +1,17 @@
 {% extends 'base.html' %}
 
 {% load i18n %}
+{% load django_bootstrap_breadcrumbs %}
 
 {% block title %}{% trans "Notification settings" %}{% endblock %}
 
-{% block content %}
-    <h1>{% trans "Notification settings" %}</h1>
+{% block breadcrumbs %}
+    {{ block.super }}
+    {% breadcrumb 'Notifications' 'astrobin_apps_notifications.all' %}
+    {% breadcrumb 'Settings' None %}
+{% endblock %}
 
+{% block content %}
     <form method="POST" class="form" action="">
         {% csrf_token %}
         <table class="table table-striped notice-settings">

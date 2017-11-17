@@ -2,18 +2,23 @@
 {% load i18n %}
 {% load tags %}
 {% load bootstrap_toolkit %}
+{% load django_bootstrap_breadcrumbs %}
 
 {% block title %}{% trans "Edit your image: gear used" %}{% endblock %}
 {% block container_extra_classes %}has-subnav{% endblock %}
 
+{% block breadcrumbs %}
+    {{ block.super }}
+    {% breadcrumb 'Image' None %}
+    {% breadcrumb image.title|escape|default:_("(no title)") 'image_detail' image.pk %}
+    {% breadcrumb 'Gear used' None %}
+{% endblock %}
+
 {% block content %}
     {% include 'image/edit/menu.html' %}
 
-    <h1>
-        {% trans "Edit your image: gear used" %}
-    </h1>
-
-    <div class="well">
+    <div class="subtitle">
+        <i class="icon icon-info-sign"></i>
         {% if no_gear %}
             {% url 'profile_edit_gear' as the_url %}
             {% blocktrans %}Can't see anything here? Perhaps you should first add some gear in your <a href="{{the_url}}">profile</a>!{% endblocktrans %}

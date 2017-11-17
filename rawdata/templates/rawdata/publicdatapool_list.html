@@ -1,18 +1,20 @@
 {% extends 'base.html' %}
-{% load i18n %}
 
-{% block title %}
-    AstroBin - {% trans "Public data pools" %}
+{% load i18n %}
+{% load django_bootstrap_breadcrumbs %}
+
+{% block title %}{% trans "Public data pools" %}{% endblock %}
+
+{% block breadcrumbs %}
+    {{ block.super }}
+    {% breadcrumb_safe 'Explore' None %}
+    {% breadcrumb 'Public data pools' None %}
 {% endblock %}
 
 {% block content %}
-    <div class="page-header">
-        <h1>
-            {% trans "Public data pools" %}
-            <small>
-                {% trans "Collections of raw files for massive, collectively acquired deep sky images." %}
-            </small>
-        </h1>
+    <div class="subtitle">
+        <i class="icon icon-info-sign"></i>
+        {% trans "Collections of raw files for massive, collectively acquired deep sky images." %}
     </div>
 
     <div class="row section">

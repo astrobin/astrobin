@@ -927,7 +927,7 @@ body.full .navbar .nav.pull-right > li > a.btn:focus {
 }
 .subnav-fixed .nav {
   margin: 0 auto;
-  padding: 0 31px;
+  padding: 0 20px;
 }
 .subnav .nav > li:first-child > a,
 .subnav .nav > li:first-child > a:hover {
@@ -972,7 +972,7 @@ li [class*=" icon-"],
 }
 .astrobin-container {
   position: relative;
-  padding: 34px 30px 30px 30px;
+  padding: 0 30px 30px 30px;
   margin-bottom: 20px;
   -webkit-box-shadow: 0 0 16px rgba(0, 0, 0, 0.5);
   -moz-box-shadow: 0 0 16px rgba(0, 0, 0, 0.5);
@@ -981,6 +981,30 @@ li [class*=" icon-"],
   -moz-border-radius: 6px;
   -webkit-border-radius: 6px;
   border-radius: 6px;
+}
+.astrobin-container.has-subnav {
+  padding-top: 27px;
+}
+.astrobin-container .subtitle {
+  padding: 8px 30px;
+  margin-top: -20px;
+  margin-left: -30px;
+  margin-bottom: 20px;
+  width: 100%;
+  background-color: rgba(255, 255, 255, 0.02);
+  border-bottom: 1px solid #333;
+  color: #999;
+  font-size: 13px;
+  font-style: italic;
+}
+.astrobin-container .subtitle .icon {
+  margin: 0 5px 0 3px;
+  color: #cc7b6a;
+}
+.astrobin-container .subtitle .button {
+  padding: 1px 4px;
+  font-size: 12px;
+  line-height: 14px;
 }
 #index #why-astrobin {
   margin: -33px -29px 40px -29px;
@@ -1215,6 +1239,13 @@ h1 + .subtitle {
 }
 h1 + .subtitle strong {
   color: white;
+}
+h1 small {
+  font-size: 17px;
+  line-height: 19px;
+  margin-top: 9px;
+  color: #696969;
+  display: block;
 }
 h2 {
   margin-top: 28px;
@@ -2846,7 +2877,7 @@ form.avatar-change label.control-label {
 }
 .image-of-the-day {
   position: relative;
-  margin: -33px -29px 20px -29px;
+  margin: 0 -29px 20px -29px;
 }
 .image-of-the-day .header {
   position: absolute;
@@ -2882,7 +2913,7 @@ form.avatar-change label.control-label {
   border-radius: 6px 6px 0 0;
 }
 .iotd-archive-image {
-  padding-top: 12px;
+  padding-bottom: 12px;
   position: relative;
 }
 .iotd-archive-image img {
@@ -4122,11 +4153,30 @@ table.post th.post-avatar {
 }
 .breadcrumb {
   position: relative;
+  padding-left: 30px;
+  padding-right: 30px;
+  margin-left: -30px;
+  margin-bottom: 20px;
+  width: 100%;
   background-color: #272727;
-  margin-top: 12px;
+  border-radius: 4px 0;
+  line-height: 26px;
 }
-.breadcrumb li {
+.breadcrumb > li {
   text-shadow: none;
+}
+.breadcrumb > li .divider {
+  color: #555;
+}
+.breadcrumb > li:last-of-type {
+  font-weight: bold;
+  color: white;
+  background: #3092d0;
+  padding: 4px 8px;
+  border-radius: 4px;
+  font-style: italic;
+  text-shadow: 0 1px 1px rgba(0, 0, 0, 0.5);
+  box-shadow: 0 1px 8px rgba(0, 0, 0, 0.2);
 }
 .breadcrumb .pagination {
   position: absolute;
@@ -4265,14 +4315,6 @@ pre {
 }
 .collections > .collection > .collection-name a:hover {
   color: #cc4b2e;
-}
-.collection-detail h1 {
-  text-align: center;
-  border-bottom: 1px solid #555;
-  padding-bottom: 10px;
-}
-.collection-detail .thumbnails {
-  margin-top: 40px;
 }
 .collection-add-remove-images .astrobin-image-container,
 .group-add-remove-images .astrobin-image-container {

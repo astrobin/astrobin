@@ -2,27 +2,21 @@
 
 {% load i18n %}
 {% load bootstrap_toolkit %}
+{% load django_bootstrap_breadcrumbs %}
 
 {% block title %}
     {% trans "Edit group" %}
 {% endblock %}
 
-{% block container_extra_classes %}has-subnav{% endblock %}
+{% block breadcrumbs %}
+    {{ block.super }}
+    {% breadcrumb 'Explore' None %}
+    {% breadcrumb 'Groups' 'group_list' %}
+    {% breadcrumb group.name 'group_detail' group.pk %}
+    {% breadcrumb 'Edit' None %}
+{% endblock %}
 
 {% block content %}
-    <div class="subnav subnav-fixed">
-        <ul class="nav nav-pills">
-            <li>
-                <a href="{% url 'group_detail' object.pk %}">
-                    <i class="icon icon-arrow-left"></i>
-                    {% trans "Back to group" %}
-                </a>
-            </li>
-        </ul> <!-- nav -->
-    </div> <!-- subnav -->
-
-    <h1>{% trans "Edit group" %}</h1>
-
     <form id="group-update-form" class="form-horizontal" action="." method="post">{% csrf_token %}
         {{form|as_bootstrap}}
         <div class="form-actions">

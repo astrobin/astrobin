@@ -1,6 +1,7 @@
 {% extends 'base.html' %}
 
 {% load i18n %}
+{% load django_bootstrap_breadcrumbs %}
 {% load astrobin_apps_donations_tags %}
 {% load common_tags %}
 {% load tags %}
@@ -8,6 +9,12 @@
 {% block title %}{% trans "The Big Wall" %}{% endblock %}
 
 {% block container_extra_classes %}has-subnav{% endblock %}
+
+{% block breadcrumbs %}
+    {{ block.super }}
+    {% breadcrumb_safe 'Explore' None %}
+    {% breadcrumb 'The Big Wall' None %}
+{% endblock %}
 
 {% block content %}
     <a class="anchor" name="page_anchor"></a>
@@ -173,6 +180,5 @@
         </ul> <!-- nav -->
     </div> <!-- subnav -->
 
-    <h1>{% trans "The Big Wall" %}</h1>
     {% search_image_list object_list %}
 {% endblock %}

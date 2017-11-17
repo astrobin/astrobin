@@ -2,17 +2,20 @@
 {% load i18n %}
 {% load tags %}
 {% load bootstrap_toolkit %}
-
+{% load django_bootstrap_breadcrumbs %}
 
 {% block title %}{% trans "Edit your image: basic information" %}{% endblock %}
 {% block container_extra_classes %}has-subnav{% endblock %}
 
+{% block breadcrumbs %}
+    {{ block.super }}
+    {% breadcrumb 'Image' None %}
+    {% breadcrumb image.title|escape|default:_("(no title)") 'image_detail' image.pk %}
+    {% breadcrumb 'Basic information' None %}
+{% endblock %}
+
 {% block content %}
     {% include 'image/edit/menu.html' %}
-
-    <h1>
-        {% blocktrans %}Edit your image: basic information{% endblocktrans %}
-    </h1>
 
     <form class="form-horizontal" id="basic" action="." method="post">{% csrf_token %}
         <div id="js_form" style="display:none">

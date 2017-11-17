@@ -2,16 +2,18 @@
 
 {% load i18n %}
 {% load bootstrap_toolkit %}
-
+{% load django_bootstrap_breadcrumbs %}
 
 {% block title %}{% trans "Edit your image: plate-solving settings" %}{% endblock %}
-{% block container_extra_classes %}has-subnav{% endblock %}
+
+{% block breadcrumbs %}
+    {{ block.super }}
+    {% breadcrumb 'Image' None %}
+    {% breadcrumb image.title|escape|default:_("(no title)") 'image_detail' image.pk %}
+    {% breadcrumb 'Plate-solving settings' None %}
+{% endblock %}
 
 {% block content %}
-    <h1>
-        {% blocktrans %}Edit your image: plate-solving settings{% endblocktrans %}
-    </h1>
-
     <form id="platesolving-settings" class="form-horizontal" action="." method="post">{% csrf_token %}
         {{form|as_bootstrap}}
 

@@ -3,14 +3,21 @@
 {% load cache %}
 {% load i18n %}
 {% load static %}
+{% load django_bootstrap_breadcrumbs %}
 {% load astrobin_apps_iotd_tags %}
 {% load astrobin_apps_images_tags %}
 
 {% block title %}{% trans "Top picks" %}{% endblock %}
 
+{% block breadcrumbs %}
+    {{ block.super }}
+    {% breadcrumb_safe 'Explore' None %}
+    {% breadcrumb 'Top picks' None %}
+{% endblock %}
+
 {% block content %}
-    <h1>{% trans "Top picks" %}</h1>
     <div class="subtitle">
+        <i class="icon icon-info-sign"></i>
         {% blocktrans %}A collection of great images that were recently handpicked.{% endblocktrans %}
     </div>
 

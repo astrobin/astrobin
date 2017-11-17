@@ -1,6 +1,7 @@
 {% extends 'base.html' %}
 
 {% load i18n %}
+{% load django_bootstrap_breadcrumbs %}
 
 {% block title %}
     {% if not deleted %}
@@ -8,6 +9,13 @@
     {% else %}
         {% trans "User banned" %}
     {% endif %}
+{% endblock %}
+
+{% block breadcrumbs %}
+    {{ block.super }}
+    {% breadcrumb 'User' None %}
+    {% breadcrumb user.username 'user_page' user.username %}
+    {% breadcrumb 'Ban' None %}
 {% endblock %}
 
 {% block content %}

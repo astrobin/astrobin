@@ -1,11 +1,18 @@
 {% extends 'base.html' %}
-{% load i18n %}
 
-{% block title %}{% trans "Help" %}{% endblock %}
+{% load i18n %}
+{% load django_bootstrap_breadcrumbs %}
+
+{% block title %}{% trans "What is this site?" %}{% endblock %}
+
+{% block breadcrumbs %}
+    {{ block.super }}
+    {% breadcrumb_safe 'Help' None %}
+    {% breadcrumb 'What is this site?' None %}
+{% endblock %}
 
 {% block content %}
     <div class="row help">
-        <div class="span12"><h1>{% trans "What is this site?" %}</h1></div>
         <div class="span6">
             <h4>{% trans "Hey!" %}</h4>
             <p>

@@ -1,22 +1,26 @@
 {% extends 'user_collections_base.html' %}
 
 {% load i18n %}
+{% load django_bootstrap_breadcrumbs %}
 {% load astrobin_apps_images_tags %}
 
 {% block title %}
     {% trans "Add/remove images" %}
 {% endblock %}
 
-{% block collections_content %}
-    <div class="collection-add-remove-images">
-        <h1>
-            {{collection.name}}
-            <small>{% trans "Add/remove images" %}</small>
-        </h1>
-        <p class="well">
-            {% trans "Click on the images to include them in this collection (and click again to exclude them). Then click on the Save button down below." %}
-        </p>
+{% block breadcrumbs %}
+    {{ block.super }}
+    {% breadcrumb object.name 'user_collection' requested_user.username %}
+    {% breadcrumb 'Add/Remove images' None %}
+{% endblock %}
 
+{% block collections_content %}
+    <div class="subtitle">
+        <i class="icon icon-info-sign"></i>
+        {% trans "Click on the images to include them in this collection (and click again to exclude them). Then click on the Save button down below." %}
+    </div>
+
+    <div class="collection-add-remove-images">
         <ul class="astrobin-thumbnails">
             {% for image in images %}
                 <li class="thumbnail astrobin-thumbnail top-title">

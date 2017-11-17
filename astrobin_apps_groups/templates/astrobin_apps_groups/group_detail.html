@@ -5,9 +5,17 @@
 {% load tags %}
 {% load pybb_tags %}
 {% load sanitizer %}
+{% load django_bootstrap_breadcrumbs %}
 
 {% block title %}{{object.name}}{% endblock %}
 {% block container_extra_classes %}has-subnav{% endblock %}
+
+{% block breadcrumbs %}
+    {{ block.super }}
+    {% breadcrumb_safe 'Explore' None %}
+    {% breadcrumb 'Groups' 'group_list' %}
+    {% breadcrumb object.name|escape|safe None %}
+{% endblock %}
 
 {% block content %}
     <div class="subnav subnav-fixed">
@@ -154,31 +162,10 @@
         </ul>
     </div> <!-- subnav -->
 
-    <div class="row group-header">
-        <div class="span10">
-            <h1>{{object.name}}</h1>
-            <div class="subtitle">
-                {% url 'user_page' object.owner.username as owner_url %}
-                {% blocktrans with date_created=object.date_created|date:"SHORT_DATE_FORMAT" owner=object.owner.userprofile category=object.category_humanized %}A group created on {{date_created}}, owned by <a href="{{owner_url}}">{{owner}}</a>, categorized as <strong>{{category}}</strong>.{% endblocktrans %}
-            </div>
-        </div>
-        <div class="span2">
-            {% if user_is_member %}
-                <a  href="#leave-modal"
-                    data-toggle="modal"
-                    class="btn btn-danger btn-large btn-block">
-                    <i class="icon icon-signout"></i>
-                    {% trans "Leave" %}
-                </a>
-            {% else %}
-                <a  href="#join-modal"
-                    data-toggle="modal"
-                    class="btn btn-primary btn-large btn-block">
-                    <i class="icon icon-signin"></i>
-                    {% trans "Join" %}
-                </a>
-            {% endif %}
-        </div>
+    <div class="subtitle">
+        <i class="icon icon-info-sign"></i>
+        {% url 'user_page' object.owner.username as owner_url %}
+        {% blocktrans with date_created=object.date_created|date:"SHORT_DATE_FORMAT" owner=object.owner.userprofile category=object.category_humanized %}A group created on {{date_created}}, owned by <a href="{{owner_url}}">{{owner}}</a>, categorized as <strong>{{category}}</strong>.{% endblocktrans %}
     </div>
 
     <div class="group-description">

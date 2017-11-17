@@ -1,8 +1,18 @@
 {% extends 'base.html' %}
 {% load i18n %}
 {% load bootstrap_toolkit %}
+{% load django_bootstrap_breadcrumbs %}
 
 {% block title %}{% trans "Your API key request has been submitted" %}{% endblock %}
+
+{% block breadcrumbs %}
+    {{ block.super }}
+    {% breadcrumb_safe 'Users' None %}
+    {% breadcrumb request.user.userprofile.get_display_name 'user_page' request.user.username %}
+    {% breadcrumb 'API Keys' 'user_page_api_keys' request.user.username %}
+    {% breadcrumb 'Request an API key' 'app_api_key_request' %}
+    {% breadcrumb 'Done' None %}
+{% endblock %}
 
 {% block content %}
     <h1>{% trans "Your API key request has been submitted" %}</h1>

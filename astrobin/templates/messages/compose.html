@@ -1,13 +1,18 @@
-{% extends "django_messages/base.html" %}
+{% extends "base.html" %}
 
 {% load i18n %}
 {% load bootstrap_toolkit %}
+{% load django_bootstrap_breadcrumbs %}
 
 {% block title %}{% trans "Compose message" %}{% endblock %}
 
-{% block content %}
-    <h1>{% trans "Compose message" %}</h1>
+{% block breadcrumbs %}
+    {{ block.super }}
+    {% breadcrumb 'Messages' 'messages_inbox' %}
+    {% breadcrumb 'Compose' None %}
+{% endblock %}
 
+{% block content %}
     <form action="" method="post" class="form-horizontal">{% csrf_token %}
         {{form|as_bootstrap }}
         <div class="form-actions">

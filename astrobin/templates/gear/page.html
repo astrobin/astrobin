@@ -4,8 +4,16 @@
 {% load i18n tags bootstrap_toolkit avatar_tags markup %}
 {% load hitcount_tags %}
 {% load thumbnail %}
+{% load django_bootstrap_breadcrumbs %}
 
 {% block title %}{{gear}}{% endblock %}
+
+{% block breadcrumbs %}
+    {{ block.super }}
+    {% breadcrumb_safe 'Gear' None %}
+    {% breadcrumb gear.get_make None %}
+    {% breadcrumb gear.get_name None %}
+{% endblock %}
 
 {% block content %}
     <!-- TODO: check that this page works -->

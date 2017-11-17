@@ -3,11 +3,17 @@
 {% load i18n %}
 {% load el_pagination_tags %}
 {% load truncchar_tag %}
+{% load django_bootstrap_breadcrumbs %}
 {% load common_tags %}
 {% load tags %}
 
 {% block title %}{% trans "My messages" %}{% endblock %}
 {% block container_extra_classes %}has-subnav{% endblock %}
+
+{% block breadcrumbs %}
+    {{ block.super }}
+    {% breadcrumb 'Messages' 'messages_inbox' %}
+{% endblock %}
 
 {% block content %}
     {% paginate 50 thread_list %}

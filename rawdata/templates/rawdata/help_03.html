@@ -1,13 +1,21 @@
 {% extends 'base.html' %}
+
 {% load i18n %}
+{% load django_bootstrap_breadcrumbs %}
 
 {% block title %}{% trans "AstroBin Raw Data" %}{% endblock %}
 
+{% block breadcrumbs %}
+    {{ block.super }}
+    {% breadcrumb_safe 'Help' None %}
+    {% breadcrumb 'AstroBin Raw Data' None %}
+    {% breadcrumb '3' None %}
+{% endblock %}
+
 {% block content %}
-    <div class="page-header">
-        <h1>{% trans "AstroBin Raw Data" %}
-            <small>{% trans "To safely store and organize your raw files." %}</small>
-        </h1>
+    <div class="subtitle">
+        <i class="icon icon-info-sign"></i>
+        {% trans "To safely store and organize your raw files." %}</small>
     </div>
 
     <div class="row section">

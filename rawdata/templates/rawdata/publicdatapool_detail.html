@@ -1,11 +1,22 @@
 {% extends 'base.html' %}
+
 {% load i18n %}
 {% load bootstrap_toolkit %}
+{% load django_bootstrap_breadcrumbs %}
 {% load tags %} {% comment %} AstroBin tags {% endcomment %}
 {% load common_tags %}
 
 {% block title %}AstroBin - {% blocktrans %}Public data pool{% endblocktrans %} - {{object}}{% endblock %}
-{% block container_extra_classes %}has-subnav{% endblock %}
+{% block container_extra_classes %}
+    {% ifequal object.creator request.user %}has-subnav{% endifequal %}
+{% endblock %}
+
+{% block breadcrumbs %}
+    {{ block.super }}
+    {% breadcrumb_safe 'Explore' None %}
+    {% breadcrumb 'Public data pools' 'rawdata.publicdatapool_list' %}
+    {% breadcrumb object.name None %}
+{% endblock %}
 
 {% block content %}
     {% ifequal object.creator request.user %}
@@ -30,13 +41,10 @@
         </div>
     {% endifequal %}
 
-    <div class="page-header">
-        <h1><span id="pool-name">{{object}}</spa>
-            <small>
-            {% url 'user_page' object.creator as user_url %}
-            {% blocktrans with object.creator as user and size|filesizeformat as size and object.images.all|length as image_count %}A public data pool created by <a href="{{user_url}}">{{user}}</a>, with {{size}} in {{image_count}} images.{% endblocktrans %}
-            </small>
-        </h1>
+    <div class="subtitle">
+        <i class="icon icon-info-sign"></i>
+        {% url 'user_page' object.creator as user_url %}
+        {% blocktrans with object.creator as user and size|filesizeformat as size and object.images.all|length as image_count %}A public data pool created by <a href="{{user_url}}">{{user}}</a>, with {{size}} in {{image_count}} images.{% endblocktrans %}
     </div>
 
     <div id="pool-description" class="well">{{object.description|linebreaks}}</div>

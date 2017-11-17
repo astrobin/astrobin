@@ -1,15 +1,22 @@
 {% extends 'base.html' %}
+
 {% load i18n %}
+{% load django_bootstrap_breadcrumbs %}
 {% load tags %}
 
 {% block title %}{% blocktrans with user=requested_user %}{{user}}'s plots{% endblocktrans %}{% endblock %}
 {% block container_extra_classes %}has-subnav{% endblock %}
 
+{% block breadcrumbs %}
+    {{ block.super }}
+    {% breadcrumb_safe 'Users' None %}
+    {% breadcrumb requested_user.userprofile.get_display_name 'user_page' requested_user.username %}
+    {% breadcrumb 'Plots' None %}
+{% endblock %}
+
 {% block content %}
     <a class="anchor" name="page_anchor"></a>
     {% include 'user/profile/navigation.html' %}
-
-    <h1>{% blocktrans with requested_user.username as user %}{{user}}'s plots{% endblocktrans %}</h1>
 
     {% ifequal request.user requested_user %}
     <p class="alert alert-info">

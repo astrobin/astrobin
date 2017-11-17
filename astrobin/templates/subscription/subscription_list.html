@@ -1,8 +1,15 @@
 {% extends 'base.html' %}
+
 {% load i18n %}
+{% load django_bootstrap_breadcrumbs %}
 {% load tags %}
 
 {% block title %}{% trans "Subscription plans" %}{% endblock %}
+
+{% block breadcrumbs %}
+    {{ block.super }}
+    {% breadcrumb 'Subscription plans' None %}
+{% endblock %}
 
 {% block content %}
     {% if request.user|valid_subscriptions %}

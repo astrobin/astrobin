@@ -1,14 +1,22 @@
 {% extends 'base.html' %}
 {% load i18n %}
-{% load tags %}
+{% load django_bootstrap_breadcrumbs %}
 {% load avatar_tags %}
 {% load markup %}
+{% load tags %}
 
 {% block title %}{% trans "Affiliates" %}{% endblock %}
 
+{% block breadcrumbs %}
+    {{ block.super }}
+    {% breadcrumb_safe 'Help' None %}
+    {% breadcrumb 'Affiliates' None %}
+{% endblock %}
+
+
 {% block content %}
-    <h1>{% trans "Affiliates" %}</h1>
-    <div class="well">
+    <div class="subtitle">
+        <i class="icon icon-info-sign"></i>
         {% blocktrans %}The following companies support AstroBin.{% endblocktrans %}
     </div>
 

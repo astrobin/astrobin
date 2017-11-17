@@ -1,14 +1,19 @@
 {% extends 'base.html' %}
 
 {% load i18n %}
+{% load django_bootstrap_breadcrumbs %}
 {% load astrobin_apps_images_tags %}
 
-{% block title %}{% trans "Image modetation" %}{% endblock %}
+{% block title %}{% trans "Moderate" %} /{% trans "Image queue" %}{% endblock %}
+
+{% block breadcrumbs %}
+    {{ block.super }}
+    {% breadcrumb_safe 'Moderate' None %}
+    {% breadcrumb 'Image queue' None %}
+{% endblock %}
 
 {% block content %}
     <div class="image-moderation">
-        <h1>{% trans "Image moderation" %}</h1>
-
         {% if image_list %}
             <p class="well">
                 {% blocktrans %}Please click on the images that you want to mark as SPAM, then click on the Approve button below to approve all the others.{% endblocktrans %}

@@ -1,15 +1,23 @@
 {% extends 'base.html' %}
+
 {% load i18n %}
 {% load bootstrap_toolkit %}
+{% load django_bootstrap_breadcrumbs %}
 {% load common_tags %}
 
 {% block title %}AstroBin - {% blocktrans %}Share on a public data pool{% endblocktrans %}{% endblock %}
 
+{% block breadcrumbs %}
+    {{ block.super }}
+    {% breadcrumb_safe 'Explore' None %}
+    {% breadcrumb 'Raw data library' 'rawdata.library' %}
+    {% breadcrumb 'Share on a public data pool' None %}
+{% endblock %}
+
 {% block content %}
-    <div class="page-header">
-        <h1>{% blocktrans %}Share on a public data pool{% endblocktrans %}
-            <small>{% blocktrans %}Contribute to public group of raw data{% endblocktrans %}</small>
-        </h1>
+    <div class="subtitle">
+        <i class="icon icon-info-sign"></i>
+        {% blocktrans %}Contribute to public group of raw data{% endblocktrans %}
     </div>
 
     <div class="row">

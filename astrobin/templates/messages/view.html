@@ -2,12 +2,18 @@
 
 {% load i18n %}
 {% load bootstrap_toolkit %}
+{% load django_bootstrap_breadcrumbs %}
 
 {% block title %}{{thread.subject}}{% endblock %}
 {% block container_extra_classes %}has-subnav{% endblock %}
 
-{% block content %}
+{% block breadcrumbs %}
+    {{ block.super }}
+    {% breadcrumb 'Messages' 'messages_inbox' %}
+    {% breadcrumb thread.subject None %}
+{% endblock %}
 
+{% block content %}
     <div class="subnav subnav-fixed">
         <ul class="nav nav-pills">
             <li>
@@ -25,14 +31,13 @@
         </ul>
     </div>
 
-    <h1>{{ thread.subject }}</h1>
-
-    <p class="well">
+    <div class="subtitle">
+        <i class="icon icon-info-sign"></i>
         {% blocktrans with participant.user.get_absolute_url as sender_url %}A conversation between <a href="{{ sender_url }}">you</a> and{% endblocktrans %}:
-         {% for participant in participant.others %}
+        {% for participant in participant.others %}
             <a href="{{ participant.user.get_absolute_url }}" class="btn btn-mini btn-primary">{{ participant.user.userprofile }}</a>
-         {% endfor %}
-    </p>
+        {% endfor %}
+    </div>
 
     <div class="message-list">
         {% for message_tuple in message_list %}
