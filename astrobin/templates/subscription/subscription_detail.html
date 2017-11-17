@@ -1,10 +1,53 @@
 {% extends 'base.html' %}
 
 {% load i18n %}
+{% load django_bootstrap_breadcrumbs %}
 
 {% block title %}{% trans "Subscription plan" %}: {{object.name}}{% endblock %}
 
+{% block breadcrumbs %}
+    {{ block.super }}
+    {% breadcrumb 'Subscription plans' 'subscription_list' %}
+    {% breadcrumb object.name None %}
+{% endblock %}
+
 {% block content %}
+    <div class="subtitle">
+        <i class="icon icon-info-sign"></i>
+        {% trans "Status" %}:
+
+        {% if usersubscription and usersubscription.valid %}
+            <span class="label label-success">
+                {% trans "Subscribed" %}
+            </span>
+            {% if usersubscription and usersubscription.cancelled %}
+                <span class="label label-info">
+                    {% trans "Cancelled" %}
+                </span>
+            {% endif %}
+
+            {% trans "Expires" %}: {{usersubscription.expires|date:"SHORT_DATE_FORMAT"}}
+        {% endif %}
+
+        {% if not usersubscription and not change_denied_reasons %}
+            <span class="label label-warning">
+                {% trans "Unsubscribed" %}
+            </span>
+        {% endif %}
+
+        {% if not usersubscription and change_denied_reasons %}
+            <span class="label label-warning">
+                {% trans "Unavailable" %}
+            </span>
+        {% endif %}
+
+        {% if usersubscription and usersubscription.active and not usersubscription.cancelled and usersubscription.expired %}
+            <span class="label label-warning">
+                {% trans "Expired" %}
+            </span>
+        {% endif %}
+    </div>
+
     <div class="page-header">
         <h1>
             {{object.name}}
@@ -32,40 +75,6 @@
                 {% endif %}
             </small>
         </h1>
-        <p>
-            {% trans "Status" %}:
-
-            {% if usersubscription and usersubscription.valid %}
-                <span class="label label-success">
-                    {% trans "Subscribed" %}
-                </span>
-                {% if usersubscription and usersubscription.cancelled %}
-                    <span class="label label-info">
-                        {% trans "Cancelled" %}
-                    </span>
-                {% endif %}
-
-                {% trans "Expires" %}: {{usersubscription.expires|date:"SHORT_DATE_FORMAT"}}
-            {% endif %}
-
-            {% if not usersubscription and not change_denied_reasons %}
-                <span class="label label-warning">
-                    {% trans "Unsubscribed" %}
-                </span>
-            {% endif %}
-
-            {% if not usersubscription and change_denied_reasons %}
-                <span class="label label-warning">
-                    {% trans "Unavailable" %}
-                </span>
-            {% endif %}
-
-            {% if usersubscription and usersubscription.active and not usersubscription.cancelled and usersubscription.expired %}
-                <span class="label label-warning">
-                    {% trans "Expired" %}
-                </span>
-            {% endif %}
-        </p>
     </div>
 
     <div>

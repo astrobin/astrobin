@@ -1,22 +1,22 @@
 {% extends 'base.html' %}
 
-{% load astrobin_apps_users_tags %}
 {% load i18n %}
+{% load django_bootstrap_breadcrumbs %}
+{% load astrobin_apps_users_tags %}
 {% load tags %}
 
 {% block title %}{% blocktrans with user=requested_user.userprofile %}{{user}}'s followers{% endblocktrans %}{% endblock %}
 {% block container_extra_classes %}has-subnav{% endblock %}
 
+{% block breadcrumbs %}
+    {{ block.super }}
+    {% breadcrumb 'Users' None %}
+    {% breadcrumb requested_user.userprofile.get_display_name 'user_page' requested_user.username %}
+    {% breadcrumb 'Followers' None %}
+{% endblock %}
+
 {% block content %}
     {% include 'user/profile/navigation.html' %}
-    <h1>
-        {% ifequal requested_user request.user %}
-            {% blocktrans %}Your followers{% endblocktrans %}
-        {% else %}
-            {% blocktrans with requested_user.userprofile as username %}{{username}}'s followers{% endblocktrans %}
-        {% endifequal %}
-    </h1>
-
     {% astrobin_apps_users_list user_list %}
 {% endblock %}
 

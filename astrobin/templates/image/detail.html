@@ -1,6 +1,9 @@
 {% extends 'base.html' %}
 
+{% load i18n %}
+{% load django_bootstrap_breadcrumbs %}
 {% load astrobin_apps_donations_tags %}
+{% load tags %}
 
 
 {% include 'image/detail/custom_ga.html' %}
@@ -8,7 +11,33 @@
 {% block title %}{{image.title}} ({{image.user.userprofile}}){% endblock %}
 {% block container_extra_classes %}has-subnav{% endblock %}
 
+{% block breadcrumbs %}
+    {{ block.super }}
+    {% breadcrumb 'Image' None %}
+    {% breadcrumb image.title|escape|default:_("(no title)") None %}
+{% endblock %}
+
 {% block content %}
+    {% if show_contains %}
+    <div class="subtitle">
+        {% comment %} TODO: hardcoded subject_type values? So ugly! {% endcomment %}
+        <i class="icon icon-paperclip"></i>
+        <strong>{% trans "Contains" %}:</strong>
+        {% if image.subject_type == 100 or image.subject_type == 200 %}
+            {% if solar_system_main_subject %}
+                <a href="/search/?q=&amp;ssms={{solar_system_main_subject_id}}{% search_form_query %}">{{solar_system_main_subject}}</a>{% if subjects_all %},{% endif %}
+            {% endif %}
+
+            {% for s in subjects_all %}
+                <a href="/search/?q={{s|escape}}{% search_form_query %}">{{s|escape}}</a>{% if not forloop.last %},{% endif %}
+            {% endfor %}
+        {% else %}
+            {{subject_type}}
+        {% endif %}
+    </div> <!-- subtitle -->
+    {% endif %}
+
+
     <div class="visible-phone">
         {% include 'image/detail/phone_ad.html' %}
     </div>

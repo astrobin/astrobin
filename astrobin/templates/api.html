@@ -1,11 +1,18 @@
 {% extends 'base.html' %}
+
 {% load i18n %}
+{% load django_bootstrap_breadcrumbs %}
 
 {% block title %}API (beta){% endblock %}
 
-{% block content %}
-    <h1>AstroBin API documentation (beta)</h1>
+{% block breadcrumbs %}
+    {{ block.super }}
+    {% breadcrumb_safe 'Help' None %}
+    {% breadcrumb 'AstroBin API documentation (beta)' None %}
+{% endblock %}
 
+
+{% block content %}
     <div class="alert alert-info">
         <strong>Note:</strong> API documentation is only available in English.
     </div>

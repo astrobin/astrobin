@@ -2,18 +2,23 @@
 {% load i18n %}
 {% load tags %}
 {% load bootstrap_toolkit %}
+{% load django_bootstrap_breadcrumbs %}
 
 {% block title %}{% trans "Apply a watermark to image" %}{% endblock %}
 {% block container_extra_classes %}has-subnav{% endblock %}
 
+{% block breadcrumbs %}
+    {{ block.super }}
+    {% breadcrumb 'Image' None %}
+    {% breadcrumb image.title|escape|default:_("(no title)") 'image_detail' image.pk %}
+    {% breadcrumb 'Watermark' None %}
+{% endblock %}
+
 {% block content %}
     {% include 'image/edit/menu.html' %}
 
-    <h1>
-        {% blocktrans %}Apply a watermark to image{% endblocktrans %}
-    </h1>
-
-    <div class="well">
+    <div class="subtitle">
+        <i class="icon icon-info-sign"></i>
         {% blocktrans %}AstroBin can protect your images from theft by applying a watermark to them. Be careful with your settings though: once a watermark has been applied, it cannot be removed (AstroBin won't store the non-watermarked version of your image, for your safety). If you don't like the watermark resulting from the following settings, your only choice is to delete the image and start over.{% endblocktrans %}
         {% blocktrans %}Please note: animated GIFs cannot be watermarked at this time.{% endblocktrans %}
     </div>

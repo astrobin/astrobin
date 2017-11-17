@@ -1,9 +1,16 @@
 {% extends 'base.html' %}
 
 {% load i18n %}
+{% load django_bootstrap_breadcrumbs %}
 
 {% block title %}{% trans "Groups" %}{% endblock %}
 {% block container_extra_classes %}has-subnav{% endblock %}
+
+{% block breadcrumbs %}
+    {{ block.super }}
+    {% breadcrumb_safe 'Explore' None %}
+    {% breadcrumb 'Groups' None %}
+{% endblock %}
 
 {% block content %}
     <div class="subnav subnav-fixed">
@@ -75,8 +82,12 @@
         <div class="group-list">
             <div class="row header">
                 <div class="span9">
-                    <h1>{% trans "Your private groups" %}</h1>
-                    <div class="subtitle">{% trans "You own, or are a member of, or were invited to, these private groups." %}</div>
+                    <h1>
+                        {% trans "Your private groups" %}
+                        <small>
+                            {% trans "You own, or are a member of, or were invited to, these private groups." %}
+                        </small>
+                    </h1>
                 </div>
                 <div class="span3 text-right hidden-phone">
                     <a href="{% url 'group_create' %}" class="btn btn-primary btn-large create-group">
@@ -96,8 +107,12 @@
         <div class="group-list">
             <div class="row">
                 <div class="span9">
-                    <h1>{% trans "Public groups" %}</h1>
-                    <div class="subtitle">{% trans "Open to the whole community." %}</div>
+                    <h1>
+                        {% trans "Public groups" %}
+                        <small>
+                            {% trans "Open to the whole community." %}
+                        </small>
+                    </h1>
                 </div>
                 <div class="span3 text-right hidden-phone">
                     <a href="{% url 'group_create' %}?public=True" class="btn btn-primary btn-large create-group">

@@ -2,9 +2,18 @@
 {% load i18n %}
 {% load tags %}
 {% load bootstrap_toolkit %}
-
+{% load django_bootstrap_breadcrumbs %}
 
 {% block title %}{% trans "Edit commercial product" %}: {{gear}}{% endblock %}
+
+{% block breadcrumbs %}
+    {{ block.super }}
+    {% breadcrumb_safe 'Users' None %}
+    {% breadcrumb request.user.userprofile.get_display_name 'user_page' request.user.username %}
+    {% breadcrumb 'Commercial products' 'user_page_commercial_products' request.user.username %}
+    {% breadcrumb gear.get_make None %}
+    {% breadcrumb gear.get_name None %}
+{% endblock %}
 
 {% block content %}
     <h1>{% blocktrans %}Edit commercial product{% endblocktrans %}: {{gear}}</h1>

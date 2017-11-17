@@ -1,17 +1,24 @@
 {% extends 'base.html' %}
 
 {% load i18n %}
+{% load django_bootstrap_breadcrumbs %}
 {% load astrobin_apps_images_tags %}
 
-{% block title %}{% trans "Spam images" %}{% endblock %}
+{% block title %}{% trans "Moderate" %} / {% trans "Spam list" %}{% endblock %}
+{% block container_extra_classes %}no-subtitle{% endblock %}
+
+{% block breadcrumbs %}
+    {{ block.super }}
+    {% breadcrumb_safe 'Moderate' None %}
+    {% breadcrumb 'Spam list' None %}
+{% endblock %}
 
 {% block content %}
-    <h1>{% trans "Spam images" %}</h1>
-
     {% if image_list %}
-        <p class="well">
+        <div class="subtitle">
+            <i class="icon icon-info-sign"></i>
             {% blocktrans %}Please click on the images that you want to mark as NOT SPAM, then click on the Approve button below to approve them.{% endblocktrans %}
-        </p>
+        </div>
 
         <ul class="astrobin-thumbnails">
             {% for image in image_list %}

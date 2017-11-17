@@ -11,8 +11,15 @@
 {% load cache %}
 {% load tags %}
 {% load pybb_tags %}
+{% load django_bootstrap_breadcrumbs %}
 
 {% block title %}{% trans "Home of Astrophotography" %}{% endblock %}
+
+{% block breadcrumbs %}
+    {% clear_breadcrumbs %}
+{% endblock %}
+
+{% block container_extra_classes %}no-breadcrumb{% endblock %}
 
 {% block content %}
 

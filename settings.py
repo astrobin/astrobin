@@ -17,7 +17,7 @@ ALLOWED_HOSTS = ['*']
 TEMPLATE_DEBUG = DEBUG
 MAINTENANCE_MODE = False
 READONLY_MODE = False
-MEDIA_VERSION = '207'
+MEDIA_VERSION = '208'
 LONGPOLL_ENABLED = False
 ADS_ENABLED = os.environ['ASTROBIN_ADS_ENABLED'] == 'true'
 DONATIONS_ENABLED = os.environ['ASTROBIN_DONATIONS_ENABLED'] == 'true'
@@ -274,6 +274,7 @@ INSTALLED_APPS = [
     'markup_deprecated',
     'sanitizer',
     'precise_bbcode',
+    'django_bootstrap_breadcrumbs',
 
     # AstroBin apps
     'astrobin.apps.AstroBinAppConfig',

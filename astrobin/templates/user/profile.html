@@ -3,11 +3,18 @@
 {% load astrobin_apps_donations_tags %}
 {% load avatar_tags %}
 {% load i18n %}
+{% load django_bootstrap_breadcrumbs %}
 {% load tags %}
 {% load toggleproperty_tags %}
 
 {% block title %}{% blocktrans with user=requested_user.userprofile %}{{user}}'s gallery{% endblocktrans %}{% endblock %}
 {% block container_extra_classes %}has-subnav{% endblock %}
+
+{% block breadcrumbs %}
+    {{ block.super }}
+    {% breadcrumb_safe 'Users' None %}
+    {% breadcrumb requested_user.userprofile.get_display_name None %}
+{% endblock %}
 
 {% block content %}
     <a class="anchor" name="page_anchor"></a>
@@ -15,7 +22,8 @@
     {% include 'user/profile/navigation.html' %}
 
     {% if requested_user == request.user and section == 'staging' %}
-    <div class="well">
+    <div class="subtitle">
+        <i class="icon icon-info-sign"></i>
         {% blocktrans %}These are your "work in progress" images: only you can see this list. You can show people individual images by sharing them using the <em>Share</em> menu.{% endblocktrans %}
     </div>
     {% endif %}

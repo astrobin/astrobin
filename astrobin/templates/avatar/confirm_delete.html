@@ -1,7 +1,21 @@
 {% extends "avatar/base.html" %}
 
+{% load django_bootstrap_breadcrumbs %}
+
+{% block breadcrumbs %}
+    {{ block.super }}
+    {% breadcrumb_safe 'Users' None %}
+    {% breadcrumb request.user.userprofile.get_display_name 'user_page' request.user.username %}
+    {% breadcrumb 'Settings' None %}
+    {% breadcrumb 'Avatar' 'avatar_change' %}
+    {% breadcrumb 'Delete' None %}
+{% endblock %}
+
 {% block content %}
-    <p>Please select the avatars that you would like to delete.</p>
+    <div class="subtitle">
+        <i class="icon icon-info-sign"></i>
+        {% trans "Please select the avatars that you would like to delete." %}
+    </div>
     {% if not avatars %}
         <p>You have no avatars to delete.  Please <a href="{% url 'avatar_change' %}">upload one</a> now.</p>
     {% else %}

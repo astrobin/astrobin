@@ -1,14 +1,19 @@
 {% extends 'base.html' %}
 
 {% load i18n %}
+{% load django_bootstrap_breadcrumbs %}
 {% load astrobin_apps_images_tags %}
 {% load tags %}
 
-{% block title %}{% trans "Archive of 'Image of the day' winners" %}{% endblock %}
+{% block title %}{% trans "Image of the day" %}{% endblock %}
+
+{% block breadcrumbs %}
+    {{ block.super }}
+    {% breadcrumb_safe 'Explore' None %}
+    {% breadcrumb 'Image of the day' None %}
+{% endblock %}
 
 {% block content %}
-    <h1>{% trans "Archive of 'Image of the day' winners" %}</h1>
-
     <a class="anchor" name="page_anchor"></a>
     {% for iotd in object_list %}
         <div class="iotd-archive-image">

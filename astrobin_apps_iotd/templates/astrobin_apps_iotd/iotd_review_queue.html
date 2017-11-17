@@ -2,25 +2,30 @@
 
 {% load i18n %}
 {% load static %}
+{% load django_bootstrap_breadcrumbs %}
 {% load astrobin_apps_iotd_tags %}
 {% load astrobin_apps_images_tags %}
 
 {% block title %}{% trans "IOTD Review Queue" %}{% endblock %}
 
-{% block content %}
-    <div class="iotd-promotion-queue">
-        <h1>
-            {% trans "IOTD Review Queue" %}
-            <div class="pull-right todays-count">
-                <span class="used">
-                    {{user|iotd_votes_today}}
-                </span> / {{MAX_VOTES_PER_DAY}}
-            </div>
-        </h1>
-        <div class="subtitle">
-            {% blocktrans %}Please select the images that you want to promote for final judgement by clicking on them.{% endblocktrans %}
-        </div>
+{% block breadcrumbs %}
+    {{ block.super }}
+    {% breadcrumb_safe 'Moderate' None %}
+    {% breadcrumb 'IOTD Review Queue' None %}
+{% endblock %}
 
+{% block content %}
+    <div class="subtitle">
+        <i class="icon icon-info-sign"></i>
+        {% blocktrans %}Please select the images that you want to promote for final judgement by clicking on them.{% endblocktrans %}
+        <div class="pull-right todays-count badge badge-success">
+            <span class="used">
+                {{user|iotd_votes_today}}
+            </span> / {{MAX_VOTES_PER_DAY}}
+        </div>
+    </div>
+
+    <div class="iotd-promotion-queue">
         {% for image in object_list %}
             <div class="iotd-queue-item
                        {% if request.user|may_toggle_vote:image %} may-select{% else %}may-not-select{% endif %}

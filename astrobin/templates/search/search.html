@@ -1,10 +1,20 @@
 {% extends 'base.html' %}
 
 {% load i18n %}
+{% load django_bootstrap_breadcrumbs %}
 {% load common_tags %}
 {% load tags %}
 
 {% block title %}{% trans "Search" %}{% endblock %}
+{% block container_extra_classes %}
+    {% if 'q' in request.GET %}has-subnav{% endif %}
+{% endblock %}
+
+{% block breadcrumbs %}
+    {{ block.super }}
+    {% breadcrumb_safe 'Explore' None %}
+    {% breadcrumb 'Search' None %}
+{% endblock %}
 
 {% block content %}
 
@@ -65,7 +75,7 @@
             </li>
         </ul> <!-- nav -->
     </div> <!-- subnav -->
-    {% endif %}
+{% endif %}
 
 <div class="row">
     <div class="span3 advanced-search-box">

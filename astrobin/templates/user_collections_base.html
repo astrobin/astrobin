@@ -1,10 +1,19 @@
 {% extends 'base.html' %}
 
 {% load i18n %}
+{% load django_bootstrap_breadcrumbs %}
 {% load astrobin_apps_donations_tags %}
 
 {% block title %}{% blocktrans with user=requested_user.userprofile %}{{user}}'s gallery{% endblocktrans %}{% endblock %}
 {% block container_extra_classes %}has-subnav{% endblock %}
+
+{% block breadcrumbs %}
+    {{ block.super }}
+    {% breadcrumb 'Users' None %}
+    {% breadcrumb requested_user.userprofile.get_display_name 'user_page' requested_user.username %}
+    {% breadcrumb 'Collections' 'user_collections_list' requested_user.username %}
+{% endblock %}
+
 
 {% block content %}
     {% include 'user/profile/navigation.html' %}

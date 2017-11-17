@@ -1,6 +1,19 @@
 {% load i18n %}
 
 <li>
-    Forum
+    <a href="{% url 'index' %}">
+        <i class="icon icon-home"></i>
+        {% trans "Home" %}
+    </a>
     <span class="divider">/</span>
+</li>
+<li>
+    {% if object or extra_crumb %}
+    <a href="{% url 'pybb:index' %}">
+    {% endif %}
+        {% trans "Forum" %}
+    {% if object or extra_crumb %}
+    </a>
+    <span class="divider">/</span>
+    {% endif %}
 </li>

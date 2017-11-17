@@ -2,16 +2,21 @@
 {% load i18n %}
 {% load tags %}
 {% load bootstrap_toolkit %}
+{% load django_bootstrap_breadcrumbs %}
 
 {% block title %}{% trans "Change the license for this image" %}{% endblock %}
-{% block container_extra_classes %}has-subnav{% endblock %}
+
+{% block breadcrumbs %}
+    {{ block.super }}
+    {% breadcrumb 'Image' None %}
+    {% breadcrumb image.title|escape|default:_("(no title)") 'image_detail' image.pk %}
+    {% breadcrumb 'License' None %}
+{% endblock %}
 
 {% block content %}
-    <h1>{% trans "Change the license for this image" %}</h1>
-
-    <div class="well">
+    <div class="subtitle">
+        <i class="icon icon-info-sign"></i>
         {% blocktrans %}You can associate a Creative Commons license with your content if you wish, to grant people the right to use your work under certain circumstances. For more information on what your options are, please visit the <a target="_blank" href="http://www.creativecommons.org/">Creative Commons website</a>.{% endblocktrans %}
-        <br/><br/>
         {% url 'profile_edit_license' as change_default_url %}
         {% blocktrans %}Remember that you can change your default license <a href="{{change_default_url}}">here</a>.{% endblocktrans %}
     </div>

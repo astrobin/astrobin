@@ -1,20 +1,21 @@
 {% extends 'base.html' %}
 {% load i18n %}
-{% load tags %}
 {% load bootstrap_toolkit %}
+{% load django_bootstrap_breadcrumbs %}
+{% load tags %}
 
 {% block title %}AstroBin - {% blocktrans with user=user %}{{user}}'s commercial products{% endblocktrans %}{% endblock %}
 {% block container_extra_classes %}has-subnav{% endblock %}
 
+{% block breadcrumbs %}
+    {{ block.super }}
+    {% breadcrumb_safe 'Users' None %}
+    {% breadcrumb request.user.userprofile.get_display_name 'user_page' request.user.username %}
+    {% breadcrumb 'Commercial products' None %}
+{% endblock %}
+
 {% block content %}
     {% include 'user/profile/navigation.html' %}
-    <h1>
-        {% ifequal user request.user %}
-            {% blocktrans %}Your commercial products{% endblocktrans %}
-        {% else %}
-            {% blocktrans with user as user %}{{user}}'s commercial products{% endblocktrans %}
-        {% endifequal %}
-    </h1>
 
     {% if user == request.user %}
     <div class="alert alert-info">

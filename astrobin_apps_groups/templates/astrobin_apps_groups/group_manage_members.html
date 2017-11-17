@@ -1,30 +1,20 @@
 {% extends 'base.html' %}
 
-{% load bootstrap_toolkit %}
 {% load i18n %}
+{% load bootstrap_toolkit %}
+{% load django_bootstrap_breadcrumbs %}
 
 {% block title %}{{object.name}}: {% trans "Manage members" %}{% endblock %}
-{% block container_extra_classes %}has-subnav{% endblock %}
+
+{% block breadcrumbs %}
+    {{ block.super }}
+    {% breadcrumb 'Explore' None %}
+    {% breadcrumb 'Groups' 'group_list' %}
+    {% breadcrumb group.name 'group_detail' group.pk %}
+    {% breadcrumb 'Manage members' None %}
+{% endblock %}
 
 {% block content %}
-    <div class="subnav subnav-fixed">
-        <ul class="nav nav-pills">
-            <li>
-                <a href="{% url 'group_detail' object.pk %}">
-                    <i class="icon icon-arrow-left"></i>
-                    {% trans "Back to group" %}
-                </a>
-            </li>
-        </ul> <!-- nav -->
-    </div> <!-- subnav -->
-
-    <h1>
-        {{object.name}}
-        <small>
-            {% trans "Manage members" %}
-        </small>
-    </h1>
-
     <form id="invite-form" class="form-horizontal" method="post" action="{% url 'group_invite' object.pk %}">
         {% csrf_token %}
         {{form|as_bootstrap}}

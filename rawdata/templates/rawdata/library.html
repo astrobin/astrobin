@@ -1,10 +1,16 @@
 {% extends 'base.html' %}
 {% load i18n %}
+{% load django_bootstrap_breadcrumbs %}
 {% load common_tags %}
 {% load rawdata_tags %}
 
 {% block title %}AstroBin - {% blocktrans %}Your raw data library{% endblocktrans %}{% endblock %}
 {% block container_extra_classes %}has-subnav{% endblock %}
+
+{% block breadcrumbs %}
+    {{ block.super }}
+    {% breadcrumb 'Raw data library' 'rawdata.library' %}
+{% endblock %}
 
 {% block content %}
     {% comment %}
@@ -12,31 +18,25 @@
     {% endcomment %}
     {% include 'user/profile/navigation.html' %}
 
-    <div class="row section">
-        <div class="span10">
-            <div class="page-header">
-                <h1>{% blocktrans %}Your raw data library{% endblocktrans %}
-                    <small>
-                        {% blocktrans with used_bytes|filesizeformat as used and byte_limit|filesizeformat as limit %}You have used {{used}} of your {{limit}}.{% endblocktrans %}
-                        ({{used_percent}}%)
-                    </small>
-                </h1>
-            </div>
-            {% if used_percent > 0 %}
-                <div class="progress {{progress_class}}">
-                    <div class="bar" style="width:{{used_percent}}%"></div>
-                </div>
-            {% endif %}
-        </div>
+    <div class="subtitle">
+        <i class="icon icon-info-sign"></i>
+        {% blocktrans with used_bytes|filesizeformat as used and byte_limit|filesizeformat as limit %}You have used {{used}} of your {{limit}}.{% endblocktrans %}
+        ({{used_percent}}%)
+    </div>
 
-        <div class="span2">
-            <a class="btn btn-large btn-primary btn-header" href="{% url 'subscription_list' %}">
-                <i class="icon-book"></i> {% trans "Manage plans" %}
-            </a>
-            <a class="btn btn-large btn-primary btn-header" href="{% url 'image_upload' %}">
-                <i class="icon-upload-alt"></i> {% trans "Upload" %}
-            </a>
+    {% if used_percent > 0 %}
+        <div class="progress {{progress_class}}">
+            <div class="bar" style="width:{{used_percent}}%"></div>
         </div>
+    {% endif %}
+
+    <div class="text-center" style="margin: 20px 0">
+        <a class="btn btn-large btn-primary" href="{% url 'subscription_list' %}">
+            <i class="icon-book"></i> {% trans "Manage plans" %}
+        </a>
+        <a class="btn btn-large btn-primary" href="{% url 'image_upload' %}">
+            <i class="icon-upload-alt"></i> {% trans "Upload" %}
+        </a>
     </div>
 
     {% if over_limit %}

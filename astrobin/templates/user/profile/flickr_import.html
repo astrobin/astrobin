@@ -2,8 +2,18 @@
 
 {% load i18n %}
 {% load astrobin_apps_premium_tags %}
+{% load django_bootstrap_breadcrumbs %}
 
 {% block title %}{% trans "Import from Flickr" %}{% endblock %}
+
+{% block breadcrumbs %}
+    {{ block.super }}
+    {% breadcrumb_safe 'Users' None %}
+    {% breadcrumb request.user.userprofile.get_display_name 'user_page' request.user.username %}
+    {% breadcrumb 'Settings' None %}
+    {% breadcrumb 'Import from Flickr' None %}
+{% endblock %}
+
 {% block content %}
     <div class="row">
         {% include 'user/profile/edit/navigation.html' %}

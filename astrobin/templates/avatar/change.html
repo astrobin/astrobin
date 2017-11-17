@@ -2,6 +2,15 @@
 {% load i18n %}
 {% load avatar_tags %}
 {% load bootstrap_toolkit %}
+{% load django_bootstrap_breadcrumbs %}
+
+{% block breadcrumbs %}
+    {{ block.super }}
+    {% breadcrumb_safe 'Users' None %}
+    {% breadcrumb request.user.userprofile.get_display_name 'user_page' request.user.username %}
+    {% breadcrumb 'Settings' None %}
+    {% breadcrumb 'Avatar' None %}
+{% endblock %}
 
 {% block content %}
 <div class="row">

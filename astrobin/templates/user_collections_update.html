@@ -1,18 +1,20 @@
 {% extends 'user_collections_base.html' %}
 
 {% load i18n %}
+{% load django_bootstrap_breadcrumbs %}
 {% load bootstrap_toolkit %}
 
 {% block title %}
     {% trans "Edit collection" %}
 {% endblock %}
 
-{% block collections_content %}
-    <h1>
-        {{collection.name}}
-        <small>{% trans "Edit collection" %}</small>
-    </h1>
+{% block breadcrumbs %}
+    {{ block.super }}
+    {% breadcrumb object.name 'user_collection' requested_user.username %}
+    {% breadcrumb 'Edit' None %}
+{% endblock %}
 
+{% block collections_content %}
     <form class="form-horizontal" action="{{request.path}}?next={{request.GET.next}}" method="post">
         {% csrf_token %}
         {{form|as_bootstrap}}

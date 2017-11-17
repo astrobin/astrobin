@@ -1,15 +1,21 @@
 {% extends 'user_collections_base.html' %}
 
 {% load i18n %}
+{% load django_bootstrap_breadcrumbs %}
 {% load tags %}
 
 {% block title %}
     {{collection.name}}
 {% endblock %}
 
+{% block breadcrumbs %}
+    {{ block.super }}
+    {% breadcrumb object.name None %}
+{% endblock %}
+
+
 {% block collections_content %}
     <div class="collection-detail">
-        <h1>{{collection.name}}</h1>
         {% if collection.description %}
             <p>{{collection.description}}</p>
         {% endif %}

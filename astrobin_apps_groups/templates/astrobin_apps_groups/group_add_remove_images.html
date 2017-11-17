@@ -1,22 +1,28 @@
 {% extends 'base.html' %}
 
 {% load i18n %}
+{% load django_bootstrap_breadcrumbs %}
 {% load astrobin_apps_images_tags %}
 
 {% block title %}
     {% trans "Add/remove images" %}
 {% endblock %}
 
-{% block content %}
-    <div class="group-add-remove-images">
-        <h1>
-            {{object.name}}
-            <small>{% trans "Add/remove images" %}</small>
-        </h1>
-        <p class="well">
-            {% trans "Click on the images to include them in this group (and click again to exclude them). Then click on the Save button down below." %}
-        </p>
+{% block breadcrumbs %}
+    {{ block.super }}
+    {% breadcrumb 'Explore' None %}
+    {% breadcrumb 'Groups' 'group_list' %}
+    {% breadcrumb group.name 'group_detail' group.pk %}
+    {% breadcrumb 'Add/Remove images' None %}
+{% endblock %}
 
+{% block content %}
+    <div class="subtitle">
+        <i class="icon icon-info-sign"></i>
+        {% trans "Click on the images to include them in this group (and click again to exclude them). Then click on the Save button down below." %}
+    </div>
+
+    <div class="group-add-remove-images">
         <ul class="astrobin-thumbnails">
             {% for image in images %}
                 <li class="thumbnail astrobin-thumbnail top-title">

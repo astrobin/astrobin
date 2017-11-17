@@ -23,27 +23,6 @@
         </div>
     </div>
     {% endif %}
-
-    <div class="row">
-        <div class="span8">
-            {% comment %} TODO: hardcoded subject_type values? So ugly! {% endcomment %}
-
-            {% if show_contains %}
-                <strong>{% trans "Contains" %}:</strong>
-                {% if image.subject_type == 100 or image.subject_type == 200 %}
-                    {% if solar_system_main_subject %}
-                        <a href="/search/?q=&amp;ssms={{solar_system_main_subject_id}}{% search_form_query %}">{{solar_system_main_subject}}</a>{% if subjects_all %},{% endif %}
-                    {% endif %}
-
-                    {% for s in subjects_all %}
-                        <a href="/search/?q={{s|escape}}{% search_form_query %}">{{s|escape}}</a>{% if not forloop.last %},{% endif %}
-                    {% endfor %}
-                {% else %}
-                    {{subject_type}}
-                {% endif %}
-            {% endif %}
-        </div> <!-- span8 -->
-    </div>
 </div>
 
 

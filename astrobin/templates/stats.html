@@ -1,12 +1,20 @@
 {% extends 'base.html' %}
 {% load i18n %}
+{% load django_bootstrap_breadcrumbs %}
 {% load tags %}
 {% load cache %}
 
 {% block title %}{% trans "Stats" %}{% endblock %}
 
+{% block breadcrumbs %}
+    {{ block.super }}
+    {% breadcrumb_safe 'Explore' None %}
+    {% breadcrumb 'Stats' None %}
+{% endblock %}
+
 {% block content %}
-    <div class="well">
+    <div class="subtitle">
+        <i class="icon icon-info-sign"></i>
         {% blocktrans %}<strong>{{total_users}}</strong> users uploaded <strong>{{total_images}}</strong> images, reaching <strong>{{total_integration}}</strong> hours of integration time.{% endblocktrans %}
     </div>
 

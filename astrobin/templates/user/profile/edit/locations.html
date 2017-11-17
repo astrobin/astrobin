@@ -1,9 +1,19 @@
 {% extends 'base.html' %}
 {% load i18n %}
-{% load tags %}
 {% load bootstrap_toolkit %}
+{% load django_bootstrap_breadcrumbs %}
+{% load tags %}
 
 {% block title %}{% trans "Edit your locations" %}{% endblock %}
+
+{% block breadcrumbs %}
+    {{ block.super }}
+    {% breadcrumb_safe 'Users' None %}
+    {% breadcrumb request.user.userprofile.get_display_name 'user_page' request.user.username %}
+    {% breadcrumb 'Settings' None %}
+    {% breadcrumb 'Locations' None %}
+{% endblock %}
+
 {% block content %}
     <div class="row">
         {% include 'user/profile/edit/navigation.html' %}
