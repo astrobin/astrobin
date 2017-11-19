@@ -1,3 +1,30 @@
+2017-11-19 Salvatore Iovene <salvatore@iovene.com>
+ * v1.17.0
+ * (accounts) Don't allow multiple registrations with the same email
+ * (comments) Fix security defects in API
+ * (common) Fix query_string breaking when 'block' was in the variables
+ * (forums) Do not show public group forums if not joined
+ * (gallery) Add badge counter to public/private/bookmarks/likes
+ * (gallery) Fix missing default title in table view
+ * (gallery) Hide caret icons on phones
+ * (gallery) Raise 404 when getting collections of missing user
+ * (gallery) Reorg View menu
+ * (gallery) Show avatar also on tablets/phones
+ * (gardening) Remove obsolete and unneeded files
+ * (general) Add breadcrumb navigation throughout the site
+ * (general) Rename Taiwan, Province of China, to simply Taiwan
+ * (images) Add '?insecure' flag to sharing code, for forums
+ * (images) Add Premium badge to avatars
+ * (images) Fix crasher when attempting to edit a missing revision
+ * (images) Fix crasher when watermaks contains non ASCII symbols
+ * (images) Place Bookmark button next to Like button
+ * (iotd) Performance improvements in Top Picks page
+ * (messages) Add success msg when posting, redirect to inbox
+ * (messages) Fix broken participant URLs
+ * (rawdata) Prevent leaking RawImages via API
+ * (search) Make the indexing real-time
+ * (ui) Fix layout of API keys table
+
 2017-11-10 Salvatore Iovene <salvatore@iovene.com>
  * v1.16.2
  * (plate-solving) Fix crash when Astrometry.net login won't work
