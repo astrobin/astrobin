@@ -53,7 +53,7 @@
                 </td>
                 <td class="message-participants">
                     {% for participant in message.others %}
-                        <a href="{{ participant.user.get_absolute_url }}">
+                        <a href="{% url 'user_page' participant.user %}">
                             {{participant.user.userprofile }}
                         </a>
                         {% if not forloop.last %},{% endif %}
