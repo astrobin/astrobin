@@ -1204,6 +1204,8 @@ def user_page_bookmarks(request, username):
             'requested_user': user,
             'image_list': Image.objects.filter(pk__in = images),
             'private_message_form': PrivateMessageForm(),
+            'public_images_no': Image.objects.filter(user = user).count(),
+            'wip_images_no': Image.wip.filter(user = user).count(),
             'alias': 'gallery',
         },
         context_instance = RequestContext(request)
@@ -1230,6 +1232,8 @@ def user_page_liked(request, username):
             'requested_user': user,
             'image_list': Image.objects.filter(pk__in = images),
             'private_message_form': PrivateMessageForm(),
+            'public_images_no': Image.objects.filter(user = user).count(),
+            'wip_images_no': Image.wip.filter(user = user).count(),
             'alias': 'gallery',
         },
         context_instance = RequestContext(request)
@@ -1266,6 +1270,8 @@ def user_page_following(request, username, extra_context = None):
             'view': request.GET.get('view', 'default'),
             'STATIC_URL': settings.STATIC_URL,
             'private_message_form': PrivateMessageForm(),
+            'public_images_no': Image.objects.filter(user = user).count(),
+            'wip_images_no': Image.wip.filter(user = user).count(),
         },
         context_instance = RequestContext(request)
     )
@@ -1297,6 +1303,8 @@ def user_page_followers(request, username, extra_context = None):
             'view': request.GET.get('view', 'default'),
             'STATIC_URL': settings.STATIC_URL,
             'private_message_form': PrivateMessageForm(),
+            'public_images_no': Image.objects.filter(user = user).count(),
+            'wip_images_no': Image.wip.filter(user = user).count(),
         },
         context_instance = RequestContext(request)
     )
@@ -1313,6 +1321,8 @@ def user_page_plots(request, username):
         {
             'requested_user':user,
             'profile':profile,
+            'public_images_no': Image.objects.filter(user = user).count(),
+            'wip_images_no': Image.wip.filter(user = user).count(),
         },
         context_instance = RequestContext(request))
 
@@ -1333,6 +1343,8 @@ def user_page_api_keys(request, username):
             'requested_user': user,
             'profile': profile,
             'api_keys': keys,
+            'public_images_no': Image.objects.filter(user = user).count(),
+            'wip_images_no': Image.wip.filter(user = user).count(),
         },
         context_instance = RequestContext(request))
 
