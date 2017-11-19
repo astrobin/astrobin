@@ -9,7 +9,7 @@
                 <a class="dropdown-toggle" data-toggle="dropdown" href="#">
                     <i class="icon-legal icon-white"></i>
                     <span class="hidden-phone">{% trans "Admin" %}</span>
-                    <span class="caret"></span>
+                    <span class="caret hidden-phone"></span>
                 </a>
                 <ul class="dropdown-menu">
                     <li>
@@ -26,7 +26,7 @@
             <a class="dropdown-toggle" data-toggle="dropdown" href="#">
                 <i class="icon-eye-open icon-white"></i>
                 <span class="hidden-phone">{% trans "View" %}</span>
-                <span class="caret"></span>
+                <span class="caret hidden-phone"></span>
             </a>
             <ul class="dropdown-menu">
                 {% ifequal request.user requested_user %}
@@ -122,7 +122,7 @@
             <a class="dropdown-toggle" data-toggle="dropdown" href="#">
                 <i class="icon-user icon-white"></i>
                 <span class="hidden-phone">{% trans "User" %}</span>
-                <span class="caret"></span>
+                <span class="caret hidden-phone"></span>
             </a>
             <ul class="dropdown-menu">
                 <li>
@@ -139,7 +139,7 @@
             <a class="dropdown-toggle" data-toggle="dropdown" href="#">
                 <i class="icon-sort icon-white"></i>
                 <span class="hidden-phone">{% trans "Sort" %}</span>
-                <span class="caret"></span>
+                <span class="caret hidden-phone"></span>
             </a>
             <ul class="dropdown-menu">
                 <li><a href="{% url 'user_collections_list' requested_user.username %}">
@@ -175,7 +175,7 @@
                 <a class="dropdown-toggle" data-toggle="dropdown" href="#">
                     <i class="icon-wrench"></i>
                     <span class="hidden-phone">{% trans "Collection tools" %}</span>
-                    <span class="caret"></span>
+                    <span class="caret hidden-phone"></span>
                 </a>
                 <ul class="dropdown-menu">
                     <li><a href="{% url 'user_collections_add_remove_images' requested_user.username collection.pk %}" data-toggle="modal">
