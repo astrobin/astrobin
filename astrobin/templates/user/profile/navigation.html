@@ -4,6 +4,7 @@
 
 <div class="subnav subnav-fixed">
     <ul class="nav nav-pills">
+
         {% if request.user.is_superuser %}
             <li class="dropdown hidden-phone">
                 <a class="dropdown-toggle" data-toggle="dropdown" href="#">
@@ -29,6 +30,52 @@
                 <span class="caret hidden-phone"></span>
             </a>
             <ul class="dropdown-menu">
+                <li class="nav-header">{% trans "Gallery" %}</li>
+
+                <li>
+                    <a href="{% url 'user_page' requested_user.username %}{% query_string "" "sub,active,staging" %}">
+                        <i class="icon-bullhorn"></i>
+                        {% trans "Public Area" %}
+                        <span class="badge badge-success">
+                            {{public_images_no}}
+                        </span>
+                    </a>
+                </li>
+
+                {% ifequal requested_user request.user %}
+                <li>
+                    <a href="{% url 'user_page' requested_user.username %}{% query_string "sub=uploaded,staging=" "public,active" %}">
+                        <i class="icon-lock"></i>
+                        {% trans "Staging Area" %}
+                        <span class="badge badge-success">
+                            {{wip_images_no}}
+                        </span>
+                    </a>
+                </li>
+                {% endifequal %}
+
+                <li>
+                    <a href="{% url 'user_page_bookmarks' requested_user.username %}">
+                        <i class="icon-bookmark"></i>
+                        {% trans "Bookmarks" %}
+                        <span class="badge badge-success">
+                            {{bookmarks_no}}
+                        </span>
+                    </a>
+                </li>
+
+                <li>
+                    <a href="{% url 'user_page_liked' requested_user.username %}">
+                        <i class="icon-thumbs-up"></i>
+                        {% trans "Liked images" %}
+                        <span class="badge badge-success">
+                            {{likes_no}}
+                        </span>
+                    </a>
+                </li>
+
+                <li class="divider"></li>
+
                 {% ifequal request.user requested_user %}
                     {% if is_producer or is_retailer %}
                         <li>
@@ -39,13 +86,8 @@
                         </li>
                     {% endif %}
                 {% endifequal %}
-                <li>
-                    <a href="{% url 'user_page' requested_user.username %}{% query_string "public=" "sub,active" %}">
-                        <i class="icon-picture"></i>
-                        {% trans "Gallery" %}
-                    </a>
-                </li>
-                {% if rawdata_has_subscription %}
+
+                {% if rawdata_has_subscription and requested_user == request.user %}
                 <li>
                     <a href="{% url 'rawdata.library' %}">
                         <i class="icon-book"></i>
@@ -53,18 +95,7 @@
                     </a>
                 </li>
                 {% endif %}
-                <li>
-                    <a href="{% url 'user_page_bookmarks' requested_user.username %}">
-                        <i class="icon-bookmark"></i>
-                        {% trans "Bookmarks" %}
-                    </a>
-                </li>
-                <li>
-                    <a href="{% url 'user_page_liked' requested_user.username %}">
-                        <i class="icon-thumbs-up"></i>
-                        {% trans "Liked images" %}
-                    </a>
-                </li>
+
                 <li>
                     <a href="{% url 'user_page_plots' requested_user.username %}">
                         <i class="icon-bar-chart"></i>
@@ -73,25 +104,6 @@
                 </li>
 
                 {% ifequal requested_user request.user %}
-                <li class="divider"></li>
-                <li>
-                    <a href="{% url 'user_page' requested_user.username %}{% query_string "" "sub,active,staging" %}">
-                        <i class="icon-bullhorn"></i>
-                        {% trans "Public Area" %}
-                        <span class="badge badge-success">
-                            {{public_images_no}}
-                        </span>
-                    </a>
-                </li>
-                <li>
-                    <a href="{% url 'user_page' requested_user.username %}{% query_string "sub=uploaded,staging=" "public,active" %}">
-                        <i class="icon-lock"></i>
-                        {% trans "Staging Area" %}
-                        <span class="badge badge-success">
-                            {{wip_images_no}}
-                        </span>
-                    </a>
-                </li>
                 <li class="divider"></li>
                 <li>
                     <a href="{% url 'user_page_api_keys' requested_user.username %}">

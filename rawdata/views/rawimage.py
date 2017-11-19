@@ -2,6 +2,7 @@
 import json
 
 # Django
+from django.contrib.contenttypes.models import ContentType
 from django.http import Http404, HttpResponse
 from django.views.generic import (
     base,
@@ -17,6 +18,7 @@ from rest_framework.decorators import api_view
 from rest_framework import permissions
 from rest_framework.reverse import reverse
 from rest_framework.response import Response
+from toggleproperties.models import ToggleProperty
 
 # This app
 from rawdata.folders import *
@@ -29,6 +31,7 @@ from rawdata.zip import *
 
 # AstroBin
 from astrobin.models import Image
+
 
 class RawImageDetailView(RestrictToSubscriberMixin, DetailView):
     model = RawImage
@@ -99,6 +102,8 @@ class RawImageLibrary(RestrictToSubscriberMixin, TemplateView):
         return folders
 
     def get_context_data(self, **kwargs):
+        image_ct = ContentType.objects.get_for_model(Image)
+
         total_files = RawImage.objects.filter(user = self.request.user)
 
         context = super(RawImageLibrary, self).get_context_data(**kwargs)
@@ -112,6 +117,10 @@ class RawImageLibrary(RestrictToSubscriberMixin, TemplateView):
         context['requested_user'] = self.request.user
         context['public_images_no'] = Image.objects.filter(user = self.request.user).count()
         context['wip_images_no'] = Image.wip.filter(user = self.request.user).count()
+        context['bookmarks_no'] = ToggleProperty.objects.toggleproperties_for_user("bookmark", self.request.user) \
+            .filter(content_type = image_ct).count()
+        context['likes_no'] = ToggleProperty.objects.toggleproperties_for_user("like", self.request.user) \
+            .filter(content_type = image_ct).count()
 
         for filtering in (
             'type',

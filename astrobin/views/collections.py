@@ -1,6 +1,7 @@
 # Django
 from django.contrib import messages
 from django.contrib.auth.models import User
+from django.contrib.contenttypes.models import ContentType
 from django.core.urlresolvers import reverse_lazy
 from django.db import IntegrityError
 from django.forms import ValidationError
@@ -24,6 +25,7 @@ from astrobin.models import Image
 # Third party
 from braces.views import LoginRequiredMixin
 from braces.views import JSONResponseMixin
+from toggleproperties.models import ToggleProperty
 
 
 class EnsureCollectionOwnerMixin(View):
@@ -54,9 +56,15 @@ class UserCollectionsBase(View):
         except User.DoesNotExist:
             raise Http404
 
+        image_ct = ContentType.objects.get_for_model(Image)
+
         context['requested_user'] = user
         context['public_images_no'] = Image.objects.filter(user = user).count()
         context['wip_images_no'] = Image.wip.filter(user = user).count()
+        context['bookmarks_no'] = ToggleProperty.objects.toggleproperties_for_user("bookmark", user) \
+            .filter(content_type = image_ct).count()
+        context['likes_no'] = ToggleProperty.objects.toggleproperties_for_user("like", user) \
+            .filter(content_type = image_ct).count()
 
         # TODO: stats
 
