@@ -17,21 +17,21 @@
     {% include 'user/profile/navigation.html' %}
 
     {% if api_keys %}
-        <table class="table table-striped">
+        <table class="table table-striped api-keys">
                 <tr>
-                    <th>{% trans "Name" %}</th>
-                    <th>Key</th>
-                    <th>Secret</th>
-                    <th>{% trans "Created on" %}</th>
-                    <th>{% trans "Active" %}</th>
+                    <th class="name">{% trans "Name" %}</th>
+                    <th class="key hidden-phone">Key</th>
+                    <th class="secret hidden-phone">Secret</th>
+                    <th class="created-on hidden-phone">{% trans "Created on" %}</th>
+                    <th class="active">{% trans "Active" %}</th>
                 </tr>
             {% for key in api_keys %}
                 <tr>
-                    <td>{{key.name}}</td>
-                    <td>{{key.key}}</td>
-                    <td>{{key.secret}}</td>
-                    <td>{{key.created}}</td>
-                    <td>
+                    <td class="name">{{key.name}}</td>
+                    <td class="key hidden-phone">{{key.key}}</td>
+                    <td class="secret hidden-phone">{{key.secret}}</td>
+                    <td class="created-on hidden-phone">{{key.created}}</td>
+                    <td class="active">
                         {% if key.active %}
                             <img src="{{STATIC_URL}}icons/iconic/white/check_alt_16x16.png" alt="{% trans "Yes" %}"/>
                         {% endif %}
