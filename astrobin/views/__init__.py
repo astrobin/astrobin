@@ -884,6 +884,7 @@ def user_page(request, username):
 
     profile = user.userprofile
     user_ct = ContentType.objects.get_for_model(User)
+    image_ct = ContentType.objects.get_for_model(Image)
 
     viewer_profile = None
     if request.user.is_authenticated():
@@ -1127,6 +1128,10 @@ def user_page(request, username):
         'images_no': data['images'],
         'public_images_no': Image.objects.filter(user = user).count(),
         'wip_images_no': Image.wip.filter(user = user).count(),
+        'bookmarks_no': ToggleProperty.objects.toggleproperties_for_user("bookmark", user) \
+            .filter(content_type = image_ct).count(),
+        'likes_no': ToggleProperty.objects.toggleproperties_for_user("like", user) \
+            .filter(content_type = image_ct).count(),
         'alias':'gallery',
     }
 
@@ -1146,6 +1151,7 @@ def user_page_commercial_products(request, username):
         return HttpResponseForbidden()
 
     profile = user.userprofile
+    image_ct = ContentType.objects.get_for_model(Image)
 
     response_dict = {
         'requested_user': user,
@@ -1158,6 +1164,12 @@ def user_page_commercial_products(request, username):
         'merge_commercial_gear_form': MergeCommercialGearForm(user = user),
         'claim_retailed_gear_form': ClaimRetailedGearForm(user = user),
         'merge_retailed_gear_form': MergeRetailedGearForm(user = user),
+        'public_images_no': Image.objects.filter(user = user).count(),
+        'wip_images_no': Image.wip.filter(user = user).count(),
+        'bookmarks_no': ToggleProperty.objects.toggleproperties_for_user("bookmark", user) \
+            .filter(content_type = image_ct).count(),
+        'likes_no': ToggleProperty.objects.toggleproperties_for_user("like", user) \
+            .filter(content_type = image_ct).count(),
     }
 
     return render_to_response(
@@ -1206,6 +1218,10 @@ def user_page_bookmarks(request, username):
             'private_message_form': PrivateMessageForm(),
             'public_images_no': Image.objects.filter(user = user).count(),
             'wip_images_no': Image.wip.filter(user = user).count(),
+            'bookmarks_no': ToggleProperty.objects.toggleproperties_for_user("bookmark", user) \
+                .filter(content_type = image_ct).count(),
+            'likes_no': ToggleProperty.objects.toggleproperties_for_user("like", user) \
+                .filter(content_type = image_ct).count(),
             'alias': 'gallery',
         },
         context_instance = RequestContext(request)
@@ -1234,6 +1250,10 @@ def user_page_liked(request, username):
             'private_message_form': PrivateMessageForm(),
             'public_images_no': Image.objects.filter(user = user).count(),
             'wip_images_no': Image.wip.filter(user = user).count(),
+            'bookmarks_no': ToggleProperty.objects.toggleproperties_for_user("bookmark", user) \
+                .filter(content_type = image_ct).count(),
+            'likes_no': ToggleProperty.objects.toggleproperties_for_user("like", user) \
+                .filter(content_type = image_ct).count(),
             'alias': 'gallery',
         },
         context_instance = RequestContext(request)
@@ -1246,6 +1266,7 @@ def user_page_following(request, username, extra_context = None):
     user = get_object_or_404(User, username = username)
 
     user_ct = ContentType.objects.get_for_model(User)
+    image_ct = ContentType.objects.get_for_model(Image)
     followed_users = []
     properties = ToggleProperty.objects.filter(
         property_type = "follow",
@@ -1272,6 +1293,10 @@ def user_page_following(request, username, extra_context = None):
             'private_message_form': PrivateMessageForm(),
             'public_images_no': Image.objects.filter(user = user).count(),
             'wip_images_no': Image.wip.filter(user = user).count(),
+            'bookmarks_no': ToggleProperty.objects.toggleproperties_for_user("bookmark", user) \
+                .filter(content_type = image_ct).count(),
+            'likes_no': ToggleProperty.objects.toggleproperties_for_user("like", user) \
+                .filter(content_type = image_ct).count(),
         },
         context_instance = RequestContext(request)
     )
@@ -1283,6 +1308,7 @@ def user_page_followers(request, username, extra_context = None):
     user = get_object_or_404(User, username = username)
 
     user_ct = ContentType.objects.get_for_model(User)
+    image_ct = ContentType.objects.get_for_model(Image)
     followers = [
         x.user for x in
         ToggleProperty.objects.filter(
@@ -1305,6 +1331,10 @@ def user_page_followers(request, username, extra_context = None):
             'private_message_form': PrivateMessageForm(),
             'public_images_no': Image.objects.filter(user = user).count(),
             'wip_images_no': Image.wip.filter(user = user).count(),
+            'bookmarks_no': ToggleProperty.objects.toggleproperties_for_user("bookmark", user) \
+                .filter(content_type = image_ct).count(),
+            'likes_no': ToggleProperty.objects.toggleproperties_for_user("like", user) \
+                .filter(content_type = image_ct).count(),
         },
         context_instance = RequestContext(request)
     )
@@ -1315,6 +1345,7 @@ def user_page_plots(request, username):
     """Shows the user's public page"""
     user = get_object_or_404(User, username = username)
     profile = user.userprofile
+    image_ct = ContentType.objects.get_for_model(Image)
 
     return render_to_response(
         'user/plots.html',
@@ -1323,6 +1354,10 @@ def user_page_plots(request, username):
             'profile':profile,
             'public_images_no': Image.objects.filter(user = user).count(),
             'wip_images_no': Image.wip.filter(user = user).count(),
+            'bookmarks_no': ToggleProperty.objects.toggleproperties_for_user("bookmark", user) \
+                .filter(content_type = image_ct).count(),
+            'likes_no': ToggleProperty.objects.toggleproperties_for_user("like", user) \
+                .filter(content_type = image_ct).count(),
         },
         context_instance = RequestContext(request))
 
@@ -1335,6 +1370,7 @@ def user_page_api_keys(request, username):
         return HttpResponseForbidden()
 
     profile = user.userprofile
+    image_ct = ContentType.objects.get_for_model(Image)
     keys = App.objects.filter(registrar = user)
 
     return render_to_response(
@@ -1345,6 +1381,10 @@ def user_page_api_keys(request, username):
             'api_keys': keys,
             'public_images_no': Image.objects.filter(user = user).count(),
             'wip_images_no': Image.wip.filter(user = user).count(),
+            'bookmarks_no': ToggleProperty.objects.toggleproperties_for_user("bookmark", user) \
+                .filter(content_type = image_ct).count(),
+            'likes_no': ToggleProperty.objects.toggleproperties_for_user("like", user) \
+                .filter(content_type = image_ct).count(),
         },
         context_instance = RequestContext(request))
 
