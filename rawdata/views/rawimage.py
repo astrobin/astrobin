@@ -27,6 +27,8 @@ from rawdata.serializers import RawImageSerializer
 from rawdata.utils import *
 from rawdata.zip import *
 
+# AstroBin
+from astrobin.models import Image
 
 class RawImageDetailView(RestrictToSubscriberMixin, DetailView):
     model = RawImage
@@ -108,6 +110,8 @@ class RawImageLibrary(RestrictToSubscriberMixin, TemplateView):
         context['total_files'] = total_files.count()
         context['unindexed_count'] = total_files.filter(indexed = False).count()
         context['requested_user'] = self.request.user
+        context['public_images_no'] = Image.objects.filter(user = self.request.user).count()
+        context['wip_images_no'] = Image.wip.filter(user = self.request.user).count()
 
         for filtering in (
             'type',
