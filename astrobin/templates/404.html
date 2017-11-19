@@ -1,7 +1,14 @@
 {% extends 'base.html' %}
+
 {% load i18n %}
+{% load django_bootstrap_breadcrumbs %}
 
 {% block title %}404{% endblock %}
+
+{% block breadcrumbs %}
+    {{ block.super }}
+    {% breadcrumb 'Error 404' None %}
+{% endblock %}
 
 {% block content %}
     <div class="row">
