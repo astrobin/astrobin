@@ -3,6 +3,7 @@
 {% load astrobin_apps_donations_tags %}
 {% load astrobin_apps_images_tags %}
 {% load astrobin_apps_iotd_tags %}
+{% load astrobin_apps_users_tags %}
 {% load avatar_tags %}
 {% load el_pagination_tags %}
 {% load i18n %}
@@ -70,9 +71,7 @@
                         {% trans "Image of the day" %}
                         <span class="title">
                             {{iotd.image.title|truncatechars:50}},
-                            <a href="{% url 'user_page' iotd.image.user %}">
-                                {{iotd.image.user.userprofile}}
-                            </a>
+                            {% astrobin_username iotd.image.user %}
                         </span>
                     </h2>
                 </div>
@@ -109,9 +108,7 @@
                                 <a href="{{topic.get_absolute_url}}?first-unread=1">{{topic.name|truncatewords:10}}</a>
                             </td>
                             <td class="topic-author hidden-phone hidden-tablet">
-                                <a href="{% url 'user_page' topic.user.username %}">
-                                    {{topic.user.userprofile}}
-                                </a>
+                                {% astrobin_username topic.user %}
                             </td>
                             <td class="topic-last-post hidden-phone hidden-tablet">
                                 {% if topic.updated %}

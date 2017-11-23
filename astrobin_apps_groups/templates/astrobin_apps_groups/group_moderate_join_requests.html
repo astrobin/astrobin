@@ -3,6 +3,7 @@
 {% load bootstrap_toolkit %}
 {% load django_bootstrap_breadcrumbs %}
 {% load i18n %}
+{% load astrobin_apps_users_tags %}
 
 {% block title %}{{object.name}}: {% trans "Moderate join requests" %}{% endblock %}
 
@@ -25,11 +26,7 @@
         <tbody>
             {% for user in object.join_requests.all %}
                 <tr>
-                    <td class="user">
-                        <a href="{% url 'user_page' user.username %}">
-                            {{user.userprofile}}
-                        </a>
-                    </td>
+                    <td class="user">{% astrobin_username user %}</td>
                     <td class="actions">
                         <a
                             href="#"

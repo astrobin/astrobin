@@ -3,15 +3,72 @@ from django.conf import settings
 from django.contrib.auth.models import User
 from django.contrib.contenttypes.models import ContentType
 from django.template import Library, Node
+from django.utils.translation import ugettext_lazy as _
 
 # AstroBin apps
 from astrobin.models import Image
+from astrobin_apps_premium.utils import premium_user_has_valid_subscription
 
 # Third party apps
 from toggleproperties.models import ToggleProperty
 
 
 register = Library()
+
+
+@register.inclusion_tag('astrobin_apps_users/inclusion_tags/astrobin_username.html')
+def astrobin_username(user, **kwargs):
+    display_name = user.userprofile.get_display_name()
+    is_superuser = user.is_superuser
+    is_moderator = user.userprofile.is_moderator()
+    is_iotd_staff = user.userprofile.is_iotd_staff()
+    is_iotd_submitter = user.userprofile.is_iotd_submitter()
+    is_iotd_reviewer = user.userprofile.is_iotd_reviewer()
+    is_iotd_judge = user.userprofile.is_iotd_judge()
+    is_premium = premium_user_has_valid_subscription(user)
+
+    classes = ['astrobin-username']
+    titles = []
+
+    if is_superuser:
+        classes.append('astrobin-superuser')
+        titles.append(_('Administrator'))
+
+    if is_moderator:
+        classes.append('astrobin-moderator')
+        titles.append(_('Moderator'))
+
+    if is_iotd_staff:
+        classes.append(' astrobin-iotd-staff')
+
+    if is_iotd_submitter:
+        classes.append(' astrobin-iotd-submitter')
+        titles.append(_('IOTD Submitter'))
+
+    if is_iotd_reviewer:
+        classes.append(' astrobin-iotd-reviewer')
+        titles.append(_('IOTD Reviewer'))
+
+    if is_iotd_judge:
+        classes.append(' astrobin-iotd-judge')
+        titles.append(_('IOTD Judge'))
+
+    if is_premium:
+        classes.append(' astrobin-premium-member')
+        titles.append(_('Premium member'))
+
+    return {
+        'user': user,
+        'display_name': display_name,
+        'is_superuser': is_superuser,
+        'is_moderator': is_moderator,
+        'is_iotd_staff': is_iotd_staff,
+        'is_premium': is_premium,
+        'classes': classes,
+        'titles': titles,
+        'link': kwargs.get('link', True),
+    }
+
 
 @register.inclusion_tag('astrobin_apps_users/inclusion_tags/astrobin_user.html', takes_context = True)
 def astrobin_user(context, user, **kwargs):

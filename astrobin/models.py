@@ -2017,6 +2017,20 @@ class UserProfile(models.Model):
 
         return scores
 
+    def is_moderator(self):
+        return self.user.groups.filter(name = 'content_moderator')
+
+    def is_iotd_staff(self):
+        return self.user.groups.filter(name = 'iotd_staff')
+
+    def is_iotd_submitter(self):
+        return self.user.groups.filter(name = 'iotd_submitters')
+
+    def is_iotd_reviewer(self):
+        return self.user.groups.filter(name = 'iotd_reviewers')
+
+    def is_iotd_judge(self):
+        return self.user.groups.filter(name = 'iotd_judges')
 
     class Meta:
         app_label = 'astrobin'

@@ -1,10 +1,11 @@
+{% load astrobin_apps_users_tags %}
+
+
 {% if image and image.title %}
     <div class="title hidden-phone hidden-tablet">
         <div class="inner">
             {{image.title}}
-            <a href="{% url 'user_page' image.user.username %}">
-                {{image.user.userprofile}}
-            </a>
+            {% astrobin_username image.user %}
         </div>
     </div>
 {% endif %}

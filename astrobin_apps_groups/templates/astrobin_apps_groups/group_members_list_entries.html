@@ -1,16 +1,13 @@
 {% load i18n %}
 {% load el_pagination_tags %}
 {% load astrobin_apps_groups_tags %}
+{% load astrobin_apps_users_tags %}
 
 {% lazy_paginate 50 object.members.all as members %}
 
 {% for user in members %}
     <tr>
-        <td class="member-name">
-            <a href="{% url 'user_page' user %}">
-                {{user.userprofile}}
-            </a>
-        </td>
+        <td class="member-name">{% astrobin_username user %}</td>
         <td class="member-images-count">{{user | count_images_in_group:object}}</td>
         <td class="member-posts-count">{{user | count_forum_posts_in_group:object}}</td>
     </tr>

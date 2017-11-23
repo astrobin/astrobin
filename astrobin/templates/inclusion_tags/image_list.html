@@ -1,4 +1,5 @@
 {% load astrobin_apps_images_tags %}
+{% load astrobin_apps_users_tags %}
 {% load common_tags %}
 {% load hitcount_tags %}
 {% load i18n %}
@@ -24,7 +25,7 @@
                 <tr>
                     {% if requested_user %}
                         <td class="user hidden-phone">
-                            <a href="{% url 'user_page' image.user %} ">{{image.user.userprofile}}</a>
+                            {% astrobin_username image.user %}
                         </td>
                     {% endif %}
 

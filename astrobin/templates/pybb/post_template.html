@@ -1,6 +1,9 @@
 {% load i18n pybb_tags %}
 {% load avatar_tags %}
 
+{% load astrobin_apps_users_tags %}
+
+
 {% pybb_get_profile user=post.user as post_user_profile %}
 {% pybb_get_profile user=user as user_profile %}
 
@@ -14,9 +17,7 @@
             {% avatar post.user 60 %}
         </div>
         <div class="post-author">
-            <a href="{% url 'user_page' post.user.username %}">
-                {{post.user.userprofile}}
-            </a>
+            {% astrobin_username post.user %}
         </div>
         <div class="post-updated">
             <a class="permalink" href="{{ post.get_absolute_url }}">#</a>

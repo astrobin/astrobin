@@ -3,6 +3,7 @@
 {% load i18n %}
 {% load django_bootstrap_breadcrumbs %}
 {% load astrobin_apps_images_tags %}
+{% load astrobin_apps_users_tags %}
 {% load tags %}
 
 {% block title %}{% trans "Image of the day" %}{% endblock %}
@@ -24,9 +25,7 @@
                 <p>
                     {{iotd.date|date:"SHORT_DATE_FORMAT"}},
                     {% trans "by" %}
-                    <a href="{% url 'user_page' iotd.image.user %}">
-                        {{iotd.image.user.userprofile}}
-                    </a>
+                    {% astrobin_username iotd.image.user %}
                 </p>
             </div>
         </div>

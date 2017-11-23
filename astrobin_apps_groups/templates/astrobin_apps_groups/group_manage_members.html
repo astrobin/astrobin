@@ -3,6 +3,7 @@
 {% load i18n %}
 {% load bootstrap_toolkit %}
 {% load django_bootstrap_breadcrumbs %}
+{% load astrobin_apps_users_tags %}
 
 {% block title %}{{object.name}}: {% trans "Manage members" %}{% endblock %}
 
@@ -36,11 +37,7 @@
         <tbody>
             {% for user in object.invited_users.all %}
                 <tr>
-                    <td>
-                        <a href="{% url 'user_page' user.username %}">
-                            {{user.userprofile}}
-                        </a>
-                    </td>
+                    <td>{% astrobin_username user %}</td>
                     <td>
                         <a
                             href="#"
@@ -73,11 +70,7 @@
             <tbody>
                 {% for user in object.moderators.all %}
                     <tr>
-                        <td>
-                            <a href="{% url 'user_page' user.username %}">
-                                {{user.userprofile}}
-                            </a>
-                        </td>
+                        <td>{% astrobin_username user %}</td>
                         <td>
                             <a
                                href="#"
@@ -109,11 +102,7 @@
             <tbody>
                 {% for user in object.members.all %}
                 <tr data-user="{{user.pk}}">
-                        <td>
-                            <a href="{% url 'user_page' user.username %}">
-                                {{user.userprofile}}
-                            </a>
-                        </td>
+                        <td>{% astrobin_username user %}</td>
                         <td>
                             {% if object.moderated and not user in object.moderators.all %}
                                 <a
