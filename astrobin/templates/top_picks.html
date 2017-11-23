@@ -6,6 +6,7 @@
 {% load django_bootstrap_breadcrumbs %}
 {% load astrobin_apps_iotd_tags %}
 {% load astrobin_apps_images_tags %}
+{% load astrobin_apps_users_tags %}
 
 {% block title %}{% trans "Top picks" %}{% endblock %}
 
@@ -29,11 +30,7 @@
                     <div class="overlay">
                         <div class="inner">
                             <div class="image-title">{{image.title|default:_("(no title)")}}</div>
-                            <div class="image-author">
-                                <a href="{% url 'user_page' image.user %}">
-                                    {{image.user.userprofile}}
-                                </a>
-                            </div>
+                            <div class="image-author">{% astrobin_username image.user %}</div>
                         </div>
                     </div>
                 </div>

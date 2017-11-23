@@ -3,6 +3,7 @@
 {% load i18n %}
 {% load bootstrap_toolkit %}
 {% load django_bootstrap_breadcrumbs %}
+{% load astrobin_apps_users_tags %}
 
 {% block title %}{{thread.subject}}{% endblock %}
 {% block container_extra_classes %}has-subnav{% endblock %}
@@ -36,7 +37,7 @@
         {% url 'user_page' participant.user as sender_url %}
         {% blocktrans %}A conversation between <a href="{{ sender_url }}">you</a> and{% endblocktrans %}:
         {% for participant in participant.others %}
-            <a href="{% url 'user_page' participant.user %}" class="btn btn-mini btn-primary">{{ participant.user.userprofile }}</a>
+            {% astrobin_username participant.user %}
         {% endfor %}
     </div>
 

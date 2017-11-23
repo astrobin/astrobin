@@ -5,6 +5,7 @@
 {% load truncchar_tag %}
 {% load django_bootstrap_breadcrumbs %}
 {% load common_tags %}
+{% load astrobin_apps_users_tags %}
 {% load tags %}
 
 {% block title %}{% trans "My messages" %}{% endblock %}
@@ -53,9 +54,7 @@
                 </td>
                 <td class="message-participants">
                     {% for participant in message.others %}
-                        <a href="{% url 'user_page' participant.user %}">
-                            {{participant.user.userprofile }}
-                        </a>
+                        {% astrobin_username participant.user %}
                         {% if not forloop.last %},{% endif %}
                     {% endfor %}
                 </td>

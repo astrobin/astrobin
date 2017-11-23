@@ -2004,7 +2004,7 @@ div.capty-target {
         margin-left: 120px;
         margin-top: @spacer-small;
 
-        a.username-link {
+        a.astrobin-username {
             font-size: 80%
         }
 
@@ -5064,4 +5064,27 @@ table.image-list {
 
 table.api-keys {
     table-layout: auto;
+}
+
+.astrobin-username {
+    &.astrobin-moderator, &.astrobin-iotd-staff, &.astrobin-superuser {
+        font-style: italic;
+        font-weight: bold;
+        line-height: 1.5em;
+        padding: 0.1em 0.5em;
+        border-radius: 6px;
+        color: white;
+    }
+
+    &.astrobin-iotd-staff {
+        background-color: #ce9931;
+    }
+
+    &.astrobin-moderator {
+        background-color: #1f9028;
+    }
+
+    &.astrobin-superuser {
+        background: #3092d1;
+    }
 }

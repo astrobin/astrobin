@@ -1,6 +1,7 @@
 {% load avatar_tags %}
 {% load astrobin_apps_donations_tags %}
 {% load astrobin_apps_premium_tags %}
+{% load astrobin_apps_users_tags %}
 {% load common_tags %}
 {% load i18n %}
 {% load hitcount_tags %}
@@ -26,12 +27,7 @@
         </a>
     </div>
     <div class="username">
-        <a
-            class="username-link"
-            rel="tooltip"
-            title="{{image.user.userprofile}}"
-            href="{% url 'user_page' image.user %}">{{image.user.userprofile|truncatechars:20}}</a>
-
+        {% astrobin_username image.user %}
         <div class="data">
             <img class="license"
                  src="{{STATIC_URL}}icons/{{license_icon}}"

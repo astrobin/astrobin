@@ -1,4 +1,5 @@
 {% load astrobin_apps_images_tags %}
+{% load astrobin_apps_users_tags %}
 {% load avatar_tags %}
 {% load common_tags %}
 {% load hitcount_tags %}
@@ -74,9 +75,7 @@
                 <div class="business-card-inner">
                     <div class="header">
                         <i class="icon-user icon-white"></i>
-                        <a href="{% url 'user_page' search_result.object.username %}">
-                            {{search_result.object.userprofile}}
-                        </a>
+                        {% astrobin_username search_result.object %}
                     </div>
                     <div class="avatar">
                         <a href="{% url 'user_page' search_result.object.username %}">
@@ -133,7 +132,7 @@
                 {% if search_result.object and search_result.object.id %}
                     <tr>
                         <td class="search-table-user">
-                            <a href="{% url 'user_page' search_result.object.user %} ">{{search_result.object.user.userprofile}}</a>
+                            {% astrobin_username search_result.object.user %}
                         </td>
 
                         <td class="search-table-title">

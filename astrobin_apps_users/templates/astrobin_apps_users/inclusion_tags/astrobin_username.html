@@ -1,0 +1,17 @@
+{% load i18n %}
+
+{% load common_tags %}
+
+
+{% if link %}
+<a
+    class="{{classes|join:' '}}"
+    title="{{display_name}} ({{user.username}}){% if titles|length > 0 %}: {% endif %}{{titles|join:' / '}}"
+    href="{% url 'user_page' user.username %}">
+{% endif %}
+
+    {{display_name|truncatechars:20}}
+
+{% if link %}
+</a>
+{% endif %}

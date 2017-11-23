@@ -1,5 +1,6 @@
 {% load astrobin_apps_donations_tags %}
 {% load astrobin_apps_premium_tags %}
+{% load astrobin_apps_users_tags %}
 {% load avatar_tags %}
 {% load cache %}
 {% load i18n %}
@@ -10,9 +11,7 @@
 {% if view == 'default' %}
     <div class="subtle-container user-card">
         <div class="header">
-            <h4>
-                {{user.userprofile}}
-            </h4>
+            <h4>{% astrobin_username user link=False %}</h4>
         </div>
 
         <div class="avatar">
@@ -56,11 +55,7 @@
         </a>
     </div>
 
-    <td class="user-list-name">
-        <a href="{% url 'user_page' user.username %}">
-            {{user.userprofile}}
-        </a>
-    </td>
+    <td class="user-list-name">{% astrobin_username user %}</td>
 
     {% if layout == 'default' %}
         <td class="user-list-images">

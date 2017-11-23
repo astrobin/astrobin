@@ -1819,7 +1819,7 @@ div.capty-target .capty-caption-content .link-overlay a {
   margin-left: 120px;
   margin-top: 4px;
 }
-.avatar-block .username a.username-link {
+.avatar-block .username a.astrobin-username {
   font-size: 80%;
 }
 .avatar-block .username .data {
@@ -4717,4 +4717,23 @@ table.image-list .comments {
 }
 table.api-keys {
   table-layout: auto;
+}
+.astrobin-username.astrobin-moderator,
+.astrobin-username.astrobin-iotd-staff,
+.astrobin-username.astrobin-superuser {
+  font-style: italic;
+  font-weight: bold;
+  line-height: 1.5em;
+  padding: 0.1em 0.5em;
+  border-radius: 6px;
+  color: white;
+}
+.astrobin-username.astrobin-moderator {
+  background-color: #1f9028;
+}
+.astrobin-username.astrobin-iotd-staff {
+  background-color: #ce9931;
+}
+.astrobin-username.astrobin-superuser {
+  background: #3092d1;
 }
