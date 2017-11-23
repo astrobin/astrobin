@@ -3111,7 +3111,7 @@ form.avatar-change label.control-label {
   text-overflow: ellipsis;
 }
 .activity-actions .action .action-object .title > .inner a {
-  display: block;
+  display: table;
   font-weight: normal;
 }
 .activity-actions .action .action-object .toggleproperty-add-remove {
