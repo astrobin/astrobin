@@ -47,8 +47,7 @@ class CustomForumPermissions(DefaultPermissionHandler):
 
 
     def may_view_topic(self, user, topic):
-        # Not using super because of:
-        # https://github.com/hovel/pybbm/issues/241
+        may = super(CustomForumPermissions, self).may_view_topic(user, topic)
 
         if user.is_superuser:
             return True
@@ -56,20 +55,13 @@ class CustomForumPermissions(DefaultPermissionHandler):
         if not user.is_staff and (topic.forum.hidden or topic.forum.category.hidden):
             return False  # only staff may see hidden forum / category
 
-        may = True
         try:
-            if topic.forum.group is not None:
-                if user.is_authenticated():
-                    may = user == topic.forum.group.owner or \
-                          user in topic.forum.group.members.all()
-                else:
-                    may = False
+            if topic.forum.group and user.is_authenticated():
+                may = user == topic.forum.group.owner or \
+                      user in topic.forum.group.members.all() or \
+                      user in topic.subscribers.all()
         except Group.DoesNotExist:
             pass
-
-        if topic.on_moderation:
-            if user.is_authenticated():
-                may = may and (user == topic.user or user in topic.forum.moderators.all())
 
         return may
 
