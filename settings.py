@@ -12,7 +12,6 @@ try:
     DEBUG_TOOLBAR = DEBUG and os.environ['ASTROBIN_DEBUG_TOOLBAR'] == 'true'
 except KeyError:
     DEBUG_TOOLBAR = False
-CACHE = not DEBUG
 ALLOWED_HOSTS = ['*']
 TEMPLATE_DEBUG = DEBUG
 MAINTENANCE_MODE = False
@@ -26,7 +25,6 @@ PREMIUM_ENABLED = os.environ['ASTROBIN_PREMIUM_ENABLED'] == 'true'
 if TESTING:
     DEBUG = False
     TEMPLATE_DEBUG = False
-    CACHE = False
     AWS_S3_ENABLED = False
     LOCAL_STATIC_STORAGE = True
     PASSWORD_HASHERS = (
@@ -203,7 +201,7 @@ if not TESTING and DEBUG:
     MIDDLEWARE_CLASSES += [
         'astrobin.middlewares.prof.ProfileMiddleware',
     ]
-SESSION_ENGINE = "django.contrib.sessions.backends.cached_db"
+SESSION_ENGINE = "django.contrib.sessions.backends.cache"
 
 ROOT_URLCONF = 'astrobin.urls'
 
@@ -301,20 +299,12 @@ AUTH_PROFILE_MODULE = 'astrobin.UserProfile'
 FLICKR_API_KEY = os.environ['ASTROBIN_FLICKR_API_KEY']
 FLICKR_SECRET  = os.environ['ASTROBIN_FLICKR_SECRET']
 
-if CACHE:
-    CACHES = {
-        'default': {
-            'BACKEND': 'django.core.cache.backends.memcached.MemcachedCache',
-            'LOCATION': '127.0.0.1:11211',
-        },
-    }
-else:
-    CACHES = {
-        'default': {
-            'BACKEND': 'django.core.cache.backends.dummy.DummyCache',
-        },
-    }
-
+CACHES = {
+    'default': {
+        'BACKEND': 'django.core.cache.backends.memcached.MemcachedCache',
+        'LOCATION': '127.0.0.1:11211',
+    },
+}
 JOHNNY_MIDDLEWARE_KEY_PREFIX='jc_astrobin'
 
 HAYSTACK_DEFAULT_OPERATOR = 'AND'
