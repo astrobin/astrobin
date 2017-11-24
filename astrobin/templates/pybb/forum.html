@@ -3,7 +3,11 @@
 
 {% block title %}{{ forum.name }}{% endblock title %}
 
-{% block container_extra_classes %}has-subnav{% endblock %}
+{% block container_extra_classes %}
+    {% if forum.category.slug == 'group-forums' or user|pybb_may_create_topic:forum %}
+        has-subnav
+    {% endif %}
+{% endblock %}
 
 {% block breadcrumb %}
     {% with forum as object %}
@@ -12,6 +16,7 @@
 {% endblock %}
 
 {% block content %}
+    {% if forum.category.slug == 'group-forums' or user|pybb_may_create_topic:forum %}
     <div class="subnav subnav-fixed">
         <ul class="nav nav-pills">
             {% if forum.category.slug == 'group-forums' %}
@@ -33,6 +38,7 @@
             {% endif %}
         </ul>
     </div>
+    {% endif %}
 
     <div class="forum">
         {% if forum.headline %}

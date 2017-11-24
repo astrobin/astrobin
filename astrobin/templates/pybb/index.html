@@ -5,7 +5,11 @@
 
 {% block title %}{{ PYBB_DEFAULT_TITLE }}{% endblock title %}
 
-{% block container_extra_classes %}has-subnav{% endblock %}
+{% block container_extra_classes %}
+    {% if user.is_authenticated %}
+        has-subnav
+    {% endif %}
+{% endblock %}
 
 {% block breadcrumb %}
     {% include "pybb/breadcrumb.html" %}
