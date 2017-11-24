@@ -18,11 +18,11 @@
             {% avatar image.user 106 %}
 
             {% if DONATIONS_ENABLED %}
-                {% donor_badge user 'medium' %}
+                {% donor_badge image.user 'medium' %}
             {% endif %}
 
             {% if PREMIUM_ENABLED %}
-                {% premium_badge user 'medium' %}
+                {% premium_badge image.user 'medium' %}
             {% endif %}
         </a>
     </div>
