@@ -1,15 +1,22 @@
 {% extends "base.html" %}
-{% load i18n %}
 
-{% block title %}{% trans "Account successfully activated" %}{% endblock %}
+{% load i18n %}
+{% load django_bootstrap_breadcrumbs %}
+
+
+{% block title %}{% trans "Account activation" %}{% endblock %}
+
+{% block breadcrumbs %}
+    {{ block.super }}
+    {% breadcrumb 'Accounts' None %}
+    {% breadcrumb 'Activation' None %}
+{% endblock %}
 
 {% block content %}
-
-{% if account %}
-    <p>{% trans "Account successfully activated" %}</p>
-    <p><a class="btn btn-primary btn-block-mobile" href="{% url 'auth_login' %}">{% trans "Log in" %}</a></p>
-{% else %}
-    <p>{% trans "Account activation failed" %}</p>
-{% endif %}
-
+    {% if account %}
+        <p>{% trans "Account successfully activated" %}</p>
+        <p><a class="btn btn-primary btn-block-mobile" href="{% url 'auth_login' %}">{% trans "Log in" %}</a></p>
+    {% else %}
+        <p>{% trans "Account activation failed" %}</p>
+    {% endif %}
 {% endblock %}

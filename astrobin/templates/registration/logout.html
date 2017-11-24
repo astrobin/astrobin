@@ -1,7 +1,16 @@
 {% extends "base.html" %}
+
 {% load i18n %}
+{% load django_bootstrap_breadcrumbs %}
+
 
 {% block title %}{% trans "Good bye!" %}{% endblock %}
+
+{% block breadcrumbs %}
+    {{ block.super }}
+    {% breadcrumb 'Accounts' None %}
+    {% breadcrumb 'Logout' None %}
+{% endblock %}
 
 {% block content %}
     <h1>{% trans "Good bye!" %}</h3>

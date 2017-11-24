@@ -1,7 +1,16 @@
 {% extends "base.html" %}
+
 {% load i18n %}
+{% load django_bootstrap_breadcrumbs %}
+
 
 {% block title %}{% trans "Registration completed" %}{% endblock %}
+
+{% block breadcrumbs %}
+    {{ block.super }}
+    {% breadcrumb 'Account' None %}
+    {% breadcrumb 'Registration completed' None %}
+{% endblock %}
 
 {% block content %}
     <div class="page-header">

@@ -1,8 +1,17 @@
 {% extends "base.html" %}
+
 {% load i18n %}
 {% load bootstrap_toolkit %}
+{% load django_bootstrap_breadcrumbs %}
+
 
 {% block title %}{% trans "Register with AstroBin" %}{% endblock %}
+
+{% block breadcrumbs %}
+    {{ block.super }}
+    {% breadcrumb 'Account' None %}
+    {% breadcrumb 'Register with AstroBin' None %}
+{% endblock %}
 
 {% block content %}
     <h1>{% trans "Register with AstroBin" %}</h1>
