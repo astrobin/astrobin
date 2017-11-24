@@ -4,7 +4,7 @@
 {% load i18n %}
 {% load tags %}
 
-{% if action.verb|startswith:"VERB_" %}
+{% if action.verb|startswith:"VERB_" and user.username != '' %}
 
 <div class="action"
      id="{{action.verb}}.{{action.actor.pk}}.{{action.action_object.pk}}{% if action.target %}.{{action.target.pk}}{% endif %}">
