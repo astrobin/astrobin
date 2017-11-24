@@ -18,6 +18,12 @@ register = Library()
 
 @register.inclusion_tag('astrobin_apps_users/inclusion_tags/astrobin_username.html')
 def astrobin_username(user, **kwargs):
+    if not hasattr(user, 'userprofile'):
+        try:
+            user = User.objects.get(username = user)
+        except User.DoesNotExist:
+            return {'user': None}
+
     display_name = user.userprofile.get_display_name()
     is_superuser = user.is_superuser
     is_moderator = user.userprofile.is_moderator()
