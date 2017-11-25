@@ -26,7 +26,7 @@ def astrobin_username(user, **kwargs):
 
     display_name = user.userprofile.get_display_name()
     is_superuser = user.is_superuser
-    is_moderator = user.userprofile.is_moderator()
+    is_image_moderator = user.userprofile.is_image_moderator()
     is_iotd_staff = user.userprofile.is_iotd_staff()
     is_iotd_submitter = user.userprofile.is_iotd_submitter()
     is_iotd_reviewer = user.userprofile.is_iotd_reviewer()
@@ -40,9 +40,9 @@ def astrobin_username(user, **kwargs):
         classes.append('astrobin-superuser')
         titles.append(_('Administrator'))
 
-    if is_moderator:
-        classes.append('astrobin-moderator')
-        titles.append(_('Moderator'))
+    if is_image_moderator:
+        classes.append('astrobin-image-moderator')
+        titles.append(_('Image moderator'))
 
     if is_iotd_staff:
         classes.append(' astrobin-iotd-staff')
@@ -67,7 +67,7 @@ def astrobin_username(user, **kwargs):
         'user': user,
         'display_name': display_name,
         'is_superuser': is_superuser,
-        'is_moderator': is_moderator,
+        'is_image_moderator': is_image_moderator,
         'is_iotd_staff': is_iotd_staff,
         'is_premium': is_premium,
         'classes': classes,

@@ -4727,7 +4727,7 @@ table.image-list .comments {
 table.api-keys {
   table-layout: auto;
 }
-.astrobin-username.astrobin-moderator,
+.astrobin-username.astrobin-image-moderator,
 .astrobin-username.astrobin-iotd-staff,
 .astrobin-username.astrobin-superuser {
   font-style: italic;
@@ -4740,7 +4740,7 @@ table.api-keys {
 .astrobin-username.astrobin-iotd-staff {
   background-color: #ce9931;
 }
-.astrobin-username.astrobin-moderator {
+.astrobin-username.astrobin-image-moderator {
   background-color: #1f9028;
 }
 .astrobin-username.astrobin-superuser {
