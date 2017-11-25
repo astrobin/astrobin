@@ -155,7 +155,10 @@ class ImageDetailView(DetailView):
         # Redirect to the correct revision
         image = get_object_or_404(Image.all_objects, pk = kwargs[self.pk_url_kwarg])
 
-        if image.moderator_decision == 2:
+        if not request.user.is_authenticated() or \
+           not request.user.is_superuser and \
+           not request.user.userprofile.is_image_moderator() and \
+           image.moderator_decision == 2:
             raise Http404
 
         revision_label = kwargs['r']
