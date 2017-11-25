@@ -13,6 +13,7 @@ from braces.views import (
     LoginRequiredMixin,
     GroupRequiredMixin,
     JSONResponseMixin,
+    SuperuserRequiredMixin,
 )
 from toggleproperties.models import ToggleProperty
 
@@ -23,16 +24,17 @@ from astrobin_apps_notifications.utils import push_notification
 
 
 class ImageModerationListView(
-        LoginRequiredMixin, ListView, GroupRequiredMixin):
+        LoginRequiredMixin, GroupRequiredMixin, ListView):
     group_required = "image_moderators"
+    raise_exception = True
     model = Image
     queryset = Image.all_objects.filter(moderator_decision = 0)
     template_name = "moderation/image_list.html"
 
 
 class ImageModerationSpamListView(
-        LoginRequiredMixin, ListView, GroupRequiredMixin):
-    group_required = "image_moderators"
+        LoginRequiredMixin, SuperuserRequiredMixin, ListView):
+    raise_exception = True
     model = Image
     queryset = Image.all_objects.filter(moderator_decision = 2)
     template_name = "moderation/spam_list.html"
@@ -41,6 +43,7 @@ class ImageModerationSpamListView(
 class ImageModerationMarkAsSpamView(
         LoginRequiredMixin, GroupRequiredMixin, JSONResponseMixin, View):
     group_required = "image_moderators"
+    raise_exception = True
     methods = "post"
 
     def post(self, request, *args, **kwargs):
@@ -56,9 +59,9 @@ class ImageModerationMarkAsSpamView(
 
 
 class ImageModerationMarkAsHamView(
-        LoginRequiredMixin, GroupRequiredMixin, JSONResponseMixin, View):
-    group_required = "image_moderators"
+        LoginRequiredMixin, SuperuserRequiredMixin, JSONResponseMixin, View):
     methods = "post"
+    raise_exception = True
 
     def post(self, request, *args, **kwargs):
         ids = request.POST.getlist('ids[]')
@@ -89,9 +92,9 @@ class ImageModerationMarkAsHamView(
 
 
 class ImageModerationBanAllView(
-        LoginRequiredMixin, GroupRequiredMixin, JSONResponseMixin, View):
-    group_required = "image_moderators"
+        LoginRequiredMixin, SuperuserRequiredMixin, JSONResponseMixin, View):
     methods = "post"
+    raise_exception = True
 
     def post(self, request, *args, **kwargs):
         images = Image.all_objects.filter(moderator_decision = 2)

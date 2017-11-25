@@ -3,6 +3,8 @@
 {% load i18n %}
 {% load django_bootstrap_breadcrumbs %}
 {% load astrobin_apps_images_tags %}
+{% load astrobin_apps_users_tags %}
+
 
 {% block title %}{% trans "Moderate" %} / {% trans "Spam list" %}{% endblock %}
 {% block container_extra_classes %}no-subtitle{% endblock %}
@@ -14,52 +16,71 @@
 {% endblock %}
 
 {% block content %}
-    {% if image_list %}
-        <div class="subtitle">
-            <i class="icon icon-info-sign"></i>
-            {% blocktrans %}Please click on the images that you want to mark as NOT SPAM, then click on the Approve button below to approve them.{% endblocktrans %}
-        </div>
+    <div class="image-moderation">
+        {% if image_list %}
+            <div class="subtitle">
+                <i class="icon icon-info-sign"></i>
+                {% blocktrans %}Please click on the images that you want to mark as NOT SPAM, then click on the Approve button below to approve them.{% endblocktrans %}
+            </div>
 
-        <ul class="astrobin-thumbnails">
-            {% for image in image_list %}
-                <li class="thumbnail astrobin-thumbnail spam-thumbnail">
-                    <a href="#">
-                        {% astrobin_image image 'gallery' link=False tooltip=False %}
-                        <div class="ham-thumbnail-overlay hide">
-                            <span>
-                                OK
-                            </span>
+            <ul class="astrobin-thumbnails">
+                {% for image in image_list %}
+                    <li class="thumbnail astrobin-thumbnail top-title spam-thumbnail">
+                        <a href="#" rel="tooltip" title="{{image.title|escape|default:_("(no title)")}}, {% astrobin_username image.user link=False %}">
+                            {% astrobin_image image 'gallery' link=False tooltip=False %}
+                            <div class="image-title">
+                                {{image.title|escape|default:_("(no title)")}}
+                            </div>
+                            <div class="ham-thumbnail-overlay hide">
+                                <span>
+                                    OK
+                                </span>
+                            </div>
+                        </a>
+                        <div class="image-actions">
+                            <a href="{% url 'image_rawthumb' image.pk '0' 'hd' %}" class="fancybox">
+                                <i class="icon-zoom-in"></i>
+                            </a>
+
+                            <a href="{% url 'image_detail' image.pk %}" target="_blank">
+                                <i class="icon-link"></i>
+                            </a>
                         </div>
-                    </a>
-                </li>
-            {% endfor %}
-        </ul>
+                    </li>
+                {% endfor %}
+            </ul>
 
-        <div class="form-actions">
-            <a href="#" id="approve-button" class="btn btn-primary btn-block-mobile">
-                {% trans "Approve selected" %} &rarr;
-            </a>
-            <a href="#" id="approve-and-ban-button" class="btn btn-block-mobile">
-                {% trans "Approve selected and ban the rest" %} &rarr;
-            </a>
-            <span class="loading hide"><img src="{{STATIC_URL}}images/ajax-loader.gif" alt=""/></span>
-        </div>
-    {% else %}
-        <div class="alert alert-success">
-            {% trans "There are no images in the spam list." %}
-        </div>
-    {% endif %}
+            <div class="form-actions">
+                <a href="#" id="approve-button" class="btn btn-primary btn-block-mobile">
+                    {% trans "Approve selected" %} &rarr;
+                </a>
+                <a href="#" id="approve-and-ban-button" class="btn btn-block-mobile">
+                    {% trans "Approve selected and ban the rest" %} &rarr;
+                </a>
+                <span class="loading hide"><img src="{{STATIC_URL}}images/ajax-loader.gif" alt=""/></span>
+            </div>
+        {% else %}
+            <div class="alert alert-success">
+                {% trans "There are no images in the spam list." %}
+            </div>
+        {% endif %}
+    </div>
 {% endblock %}
 
 {% block extra_js %}
     <script type="text/javascript">
         $(document).ready(function() {
-            $('.astrobin-thumbnail a').click(function(e) {
+            $('.fancybox').fancybox({
+                type: 'image'
+            });
+
+            $('.astrobin-thumbnail > a').click(function(e) {
                 var $ham;
 
                 e.preventDefault();
 
                 $(this).closest('li.astrobin-thumbnail').toggleClass('spam-thumbnail');
+                $(this).closest('li.astrobin-thumbnail').toggleClass('ham-thumbnail');
 
                 $ham = $(this).find('.ham-thumbnail-overlay');
                 if ($ham.css('visibility') == 'hidden') {

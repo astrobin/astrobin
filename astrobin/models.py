@@ -2018,7 +2018,10 @@ class UserProfile(models.Model):
         return scores
 
     def is_moderator(self):
-        return self.user.groups.filter(name = 'content_moderator')
+        return self.user.groups.filter(name = 'content_moderators')
+
+    def is_image_moderator(self):
+        return self.user.groups.filter(name = 'image_moderators')
 
     def is_iotd_staff(self):
         return self.user.groups.filter(name = 'iotd_staff')

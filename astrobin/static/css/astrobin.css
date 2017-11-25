@@ -1045,13 +1045,13 @@ li.astrobin-thumbnail img {
   -webkit-border-radius: 20px;
   border-radius: 20px;
 }
-li.astrobin-thumbnail.spam-thumbnail {
+li.astrobin-thumbnail.spam-thumbnail img {
   border: 1px solid red;
   -moz-border-radius: 20px;
   -webkit-border-radius: 20px;
   border-radius: 20px;
 }
-li.astrobin-thumbnail.ham-thumbnail {
+li.astrobin-thumbnail.ham-thumbnail img {
   border: 1px solid green;
   -moz-border-radius: 20px;
   -webkit-border-radius: 20px;
@@ -1060,10 +1060,10 @@ li.astrobin-thumbnail.ham-thumbnail {
 li.astrobin-thumbnail .spam-thumbnail-overlay,
 li.astrobin-thumbnail .ham-thumbnail-overlay {
   position: absolute;
-  top: 0;
-  left: 0;
-  width: 100%;
-  height: 100%;
+  top: 11px;
+  left: 11px;
+  width: 130px;
+  height: 130px;
   -moz-border-radius: 20px;
   -webkit-border-radius: 20px;
   border-radius: 20px;
@@ -4335,7 +4335,16 @@ pre {
   color: white;
 }
 .image-moderation .astrobin-image-container {
-  padding: 9px;
+  padding: 8px;
+}
+.image-moderation .image-actions {
+  text-align: center;
+  width: 50%;
+  background: rgba(0, 0, 0, 0.2);
+  margin: 0 auto;
+  border-radius: 6px;
+  margin-top: -2px;
+  padding: 4px;
 }
 .subnav .group-info {
   margin: 0;
