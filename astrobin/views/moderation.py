@@ -59,9 +59,10 @@ class ImageModerationMarkAsSpamView(
 
 
 class ImageModerationMarkAsHamView(
-        LoginRequiredMixin, SuperuserRequiredMixin, JSONResponseMixin, View):
-    methods = "post"
+        LoginRequiredMixin, GroupRequiredMixin, JSONResponseMixin, View):
+    group_required = "image_moderators"
     raise_exception = True
+    methods = "post"
 
     def post(self, request, *args, **kwargs):
         ids = request.POST.getlist('ids[]')
