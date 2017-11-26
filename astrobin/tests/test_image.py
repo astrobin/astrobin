@@ -466,6 +466,26 @@ class ImageTest(TestCase):
         response = self.client.get(reverse('image_detail', kwargs = {'id': image.id}))
         self.assertEqual(response.status_code, 404)
 
+        # Except for moderators, they can see them
+        moderators, created = Group.objects.get_or_create(name = 'image_moderators')
+        self.user2.groups.add(moderators)
+        response = self.client.get(reverse('image_detail', kwargs = {'id': image.id}))
+        self.assertEqual(response.status_code, 200)
+        self.user2.groups.remove(moderators)
+
+        # And except for superusers
+        self.user2.is_superuser = True
+        self.user2.save()
+        response = self.client.get(reverse('image_detail', kwargs = {'id': image.id}))
+        self.assertEqual(response.status_code, 200)
+        self.user2.is_superuser = False
+        self.user2.save()
+
+        # Anon users get 404 of course
+        self.client.logout()
+        response = self.client.get(reverse('image_detail', kwargs = {'id': image.id}))
+        self.assertEqual(response.status_code, 404)
+
         us.unsubscribe()
         us.delete()
         s.delete()
