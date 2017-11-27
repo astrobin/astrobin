@@ -2113,6 +2113,7 @@ div.capty-target .capty-caption-content .link-overlay a {
   border-bottom: #404040;
   margin: -12px -12px 12px;
   padding: 8px 12px;
+  position: relative;
 }
 .subtle-container .header h4 {
   margin: 0;
@@ -3036,12 +3037,15 @@ form.avatar-change label.control-label {
   border-radius: 6px;
   margin: 0 0 12px 0;
   padding: 14px;
+  position: relative;
 }
 .simple-container .header h4 .actions {
-  float: right;
   font-weight: normal;
   font-family: "Noto Sans", Helvetica, Arial, sans-serif;
   font-size: 14px;
+  position: absolute;
+  top: 15px;
+  right: 8px;
 }
 .index-recent-topics {
   margin-bottom: 20px;
