@@ -2295,11 +2295,13 @@ div.capty-target {
         border-bottom: #404040;
         margin: -12px -12px 12px;
         padding: @spacer-medium @spacer-large;
+        position: relative;
 
         h4 {
           i {
               margin-right: 8px;
           }
+
           margin: 0;
           display: inline;
           text-overflow: clip;
@@ -3264,13 +3266,16 @@ form.avatar-change label.control-label {display: none;}
         .rounded-corners(6px);
         margin: 0 0 12px 0;
         padding: 14px;
+        position: relative;
 
         h4 {
             .actions {
-                float: right;
                 font-weight: normal;
                 font-family: @regular_font;
                 font-size: 14px;
+                position: absolute;
+                top: 15px;
+                right: 8px;
             }
         }
     }
