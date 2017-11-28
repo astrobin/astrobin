@@ -2801,7 +2801,7 @@ form.avatar-change label.control-label {
   min-height: 56px;
   margin: 8px 0;
 }
-.iotd-ribbon {
+.iotd-ribbon-container .iotd-ribbon {
   width: 109%;
   position: absolute;
   left: -46px;
@@ -2818,7 +2818,7 @@ form.avatar-change label.control-label {
   -moz-box-shadow: rgba(0, 0, 0, 0.3) 0 1px 1px;
   box-shadow: rgba(0, 0, 0, 0.3) 0 1px 1px;
 }
-.iotd-ribbon h1 {
+.iotd-ribbon-container .iotd-ribbon h1 {
   font-size: 20px!important;
   color: #f5ddae;
   text-shadow: #8f6b22 0 1px 0;
@@ -2826,23 +2826,21 @@ form.avatar-change label.control-label {
   padding: 5px 10px;
   border-bottom: none;
 }
-.iotd-ribbon h1 .date {
+.iotd-ribbon-container .iotd-ribbon h1 .date {
   color: #fff;
 }
-.iotd-ribbon h1 .chosen-by {
+.iotd-ribbon-container .iotd-ribbon h1 .chosen-by {
   font-weight: normal;
   font-style: italics;
   font-size: 70%;
 }
-.iotd-ribbon:after {
+.iotd-ribbon-container .iotd-ribbon:after {
   content: '';
   position: absolute;
   display: block;
   bottom: -1em;
   border: 1.5em solid #ad7e21;
   z-index: -1;
-}
-.iotd-ribbon:after {
   left: -2em;
   border-right-width: 1.5em;
   border-left-color: transparent;
@@ -2850,26 +2848,24 @@ form.avatar-change label.control-label {
   -moz-box-shadow: rgba(0, 0, 0, 0.4) 1px 1px 1px;
   box-shadow: rgba(0, 0, 0, 0.4) 1px 1px 1px;
 }
-.iotd-ribbon .ribbon-content:after {
+.iotd-ribbon-container .iotd-ribbon .ribbon-content:after {
   border-color: #6b4e15 transparent transparent transparent;
   position: absolute;
   display: block;
   border-style: solid;
   bottom: -1em;
   content: '';
-}
-.iotd-ribbon .ribbon-content:after {
   left: 0;
   border-width: 1em 0 0 1em;
 }
-.ribbon-stitches-top {
+.iotd-ribbon-container .iotd-ribbon .ribbon-stitches-top {
   margin-top: 2px;
   border-top: 1px dashed rgba(0, 0, 0, 0.2);
   -moz-box-shadow: 0px 0px 2px rgba(0, 0, 0, 0.5);
   -webkit-box-shadow: 0px 0px 2px rgba(0, 0, 0, 0.5);
   box-shadow: 0px 0px 2px rgba(255, 255, 255, 0.5);
 }
-.ribbon-stitches-bottom {
+.iotd-ribbon-container .iotd-ribbon .ribbon-stitches-bottom {
   margin-bottom: 2px;
   border-top: 1px dashed rgba(0, 0, 0, 0.2);
   -moz-box-shadow: 0px 0px 2px rgba(0, 0, 0, 0.3);

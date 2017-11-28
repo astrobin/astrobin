@@ -234,11 +234,19 @@
     }
 
     .iotd-ribbon-container {
-        margin-top: 0;
+        margin: 0;
 
         .iotd-ribbon {
             width: 100%;
             left: 0;
+
+            &:after {
+                display: none;
+            }
+
+            .ribbon-content:after {
+                display: none;
+            }
         }
     }
 
