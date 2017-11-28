@@ -33,7 +33,6 @@ if TESTING:
 else:
     AWS_S3_ENABLED = os.environ['ASTROBIN_AWS_S3_ENABLED'] == "true"
     LOCAL_STATIC_STORAGE = os.environ['ASTROBIN_LOCAL_STATIC_STORAGE'] == "true"
-    COLLECTFAST_ENABLED = AWS_S3_ENABLED
 
 ADMINS = (
     ('Salvatore Iovene', 'salvatore@astrobin.com'),
@@ -155,7 +154,6 @@ if AWS_S3_ENABLED:
     AWS_STORAGE_BUCKET_CNAME = AWS_STORAGE_BUCKET_NAME
     AWS_S3_SECURE_URLS = True
     AWS_QUERYSTRING_AUTH = False
-    AWS_PRELOAD_METADATA = True
 
     AWS_S3_CALLING_FORMAT = 'boto.s3.connection.OrdinaryCallingFormat'
     AWS_S3_HOST = 's3.amazonaws.com'
@@ -230,8 +228,6 @@ TEMPLATE_CONTEXT_PROCESSORS = (
 )
 
 INSTALLED_APPS = [
-    'collectfast', # This should be before staticfiles
-
     # Django apps
     'django.contrib.admin',
     'django.contrib.auth',
