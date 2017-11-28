@@ -199,11 +199,17 @@
     border-radius: 0;
   }
   .iotd-ribbon-container {
-    margin-top: 0;
+    margin: 0;
   }
   .iotd-ribbon-container .iotd-ribbon {
     width: 100%;
     left: 0;
+  }
+  .iotd-ribbon-container .iotd-ribbon:after {
+    display: none;
+  }
+  .iotd-ribbon-container .iotd-ribbon .ribbon-content:after {
+    display: none;
   }
   .main-image .main-image-inner img {
     -webkit-border-radius: 0;
