@@ -880,7 +880,10 @@ def user_page(request, username):
     user = get_object_or_404(User, username = username)
 
     if Image.all_objects.filter(user = user, moderator_decision = 2).count() > 0:
-        raise Http404
+        if (not request.user.is_authenticated() or \
+            not request.user.is_superuser and \
+            not request.user.userprofile.is_image_moderator()):
+            raise Http404
 
     profile = user.userprofile
     user_ct = ContentType.objects.get_for_model(User)
