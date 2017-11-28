@@ -11,6 +11,7 @@ class ModerationTest(TestCase):
     def setUp(self):
         self.user = User.objects.create_user('user', 'user@test.com', 'password')
         self.moderator = User.objects.create_user('moderator', 'moderator@test.com', 'password')
+        self.superuser = User.objects.create_superuser('superuser', 'superuser@test.com', 'password')
 
         self.content_moderators = Group.objects.create(name = 'content_moderators')
         self.image_moderators = Group.objects.create(name = 'image_moderators')
@@ -18,11 +19,13 @@ class ModerationTest(TestCase):
         self.moderator.groups.add(self.content_moderators, self.image_moderators)
 
 
+
     def tearDown(self):
         self.content_moderators.delete()
         self.image_moderators.delete()
         self.user.delete()
         self.moderator.delete()
+        self.superuser.delete()
 
 
     def _do_upload(self, filename, wip = False):
@@ -81,3 +84,35 @@ class ModerationTest(TestCase):
         self.assertEqual(response.status_code, 200)
         image = Image.all_objects.get(pk = image.pk)
         self.assertEqual(image.moderator_decision, 2)
+
+        image.delete()
+
+
+    def test_spam_user_gallery(self):
+        self.client.login(username = 'user', password = 'password')
+        response = self.client.get(reverse('user_page', args= ('user',)))
+        self.assertEquals(response.status_code, 200)
+
+        self._do_upload('astrobin/fixtures/test.jpg')
+        image = self._get_last_image()
+        image.moderator_decision = 2
+        image.save()
+
+        # Same user gets 404
+        response = self.client.get(reverse('user_page', args= ('user',)))
+        self.assertEquals(response.status_code, 404)
+
+        # Anon gets 404
+        self.client.logout()
+        response = self.client.get(reverse('user_page', args= ('user',)))
+        self.assertEquals(response.status_code, 404)
+
+        # Moderator gets 200
+        self.client.login(username = 'moderator', password = 'password')
+        response = self.client.get(reverse('user_page', args= ('user',)))
+        self.assertEquals(response.status_code, 200)
+
+        # Superuser gets 200
+        self.client.login(username = 'superuser', password = 'password')
+        response = self.client.get(reverse('user_page', args= ('user',)))
+        self.assertEquals(response.status_code, 200)
