@@ -6,16 +6,18 @@
         <tr>
             <th>{% trans "Plan" context "Subscription plan name" %}</th>
             <th>{% trans "Price" %}</th>
+            <th>{% trans "Validity" %}</th>
+            <th>{% trans "Autorenew" %}</th>
             <th>{% trans "Trial period" %}</th>
             <th>{% trans "Size" %}</th>
-            <th>{% trans "Action" %}</th>
+            <th>&nbsp;</th>
         </tr>
     </thead>
     <tbody>
         {% for object in object_list %}
         {% if object.category == subscription_category or subscription_category == 'any' %}
         <tr>
-            <td>{{object.name}}</td>
+            <td>{% trans object.name %}</td>
             <td>
                 {% if object.price > 0 %}
                     $ {{object.price}} USD /
@@ -35,10 +37,45 @@
                     {% if object.recurrence_unit == 'Y' %}
                         {% trans "year" %}
                     {% endif %}
+
+                    {% if object.recurrence_unit == None %}
+                        {% trans "one time" %}
+                    {% endif %}
                 {% else %}
                     {% trans "Free" context "At no cost" %}
                 {% endif %}
             </td>
+
+            <td>
+                {% if object.recurrence_unit == None %}
+                    1 {% trans "year" %}
+                {% else %}
+                    {% trans "n/a" %}
+                {% endif %}
+            </td>
+
+            <td>
+                {% if object.recurrence_unit == 'D' %}
+                    {% trans "Daily" %}
+                {% endif %}
+
+                {% if object.recurrence_unit == 'W' %}
+                    {% trans "Weekly" %}
+                {% endif %}
+
+                {% if object.recurrence_unit == 'M' %}
+                    {% trans "Monthly" %}
+                {% endif %}
+
+                {% if object.recurrence_unit == 'Y' %}
+                    {% trans "Yearly" %}
+                {% endif %}
+
+                {% if object.recurrence_unit == None %}
+                    {% trans "No" %}
+                {% endif %}
+            </td>
+
             <td>
                 {% if object.trial_period > 0 %}
                     {{object.trial_period}}
@@ -62,6 +99,7 @@
                     {% trans "No trial" %}
                 {% endif %}
             </td>
+
             <td>
                 {% if object.name == "AstroBin Lite" %}
                     {% blocktrans with max_allowed=PREMIUM_MAX_IMAGES_LITE %}{{max_allowed}} images per year {% endblocktrans %}
@@ -79,6 +117,7 @@
                     {% trans "n/a" %}
                 {% endif %}
             </td>
+
             <td>
                 <a  class="btn btn-block{% if request.user|has_valid_subscription:object.pk %} btn-danger{% endif %}"
                     href="{% url 'subscription_detail' object.pk %}">
@@ -88,7 +127,11 @@
                         {% if request.user|has_valid_subscription_in_category:object.category %}
                             {% trans "Switch to" %}
                         {% else %}
-                            {% trans "Subscribe" %}
+                            {% if object.recurrence_unit != None %}
+                                {% trans "Subscribe" %}
+                            {% else %}
+                                {% trans "Buy" %}
+                            {% endif %}
                         {% endif %}
                     {% endif %}
                 </a>

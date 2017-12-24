@@ -20,7 +20,7 @@ class SubscriptionsTest(TestCase):
     def test_subscription_validity(self):
         u = User.objects.create_user(
             username = 'test', email='test@test.com', password = 'password')
-        g, created = Group.objects.get_or_create(name = "Test group")
+        g, created = Group.objects.get_or_create(name = "astrobin_premium")
         s, created = Subscription.objects.get_or_create(
             name = "Test subscription",
             price = 1,

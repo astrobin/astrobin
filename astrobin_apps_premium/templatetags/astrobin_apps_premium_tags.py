@@ -26,7 +26,7 @@ def is_premium(user):
     if user.is_authenticated():
         us = UserSubscription.active_objects.filter(
             user = user,
-            subscription__name = 'AstroBin Premium')
+            subscription__group__name = 'astrobin_premium')
 
         if us.count() == 0:
             return False
@@ -41,7 +41,7 @@ def is_lite(user):
     if user.is_authenticated():
         us = UserSubscription.active_objects.filter(
             user = user,
-            subscription__name = 'AstroBin Lite')
+            subscription__group__name = 'astrobin_lite')
 
         if us.count() == 0:
             return False

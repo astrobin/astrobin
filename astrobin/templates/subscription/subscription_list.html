@@ -24,6 +24,7 @@
     {% if PREMIUM_ENABLED %}
     <div class="well">
         <h2>{% trans "AstroBin Premium subscription plans" %}</h2>
+
         <p>
             {% blocktrans with max_allowed=PREMIUM_MAX_IMAGES_FREE %}
             You can use AstroBin for free up to {{max_allowed}} images. After
@@ -33,9 +34,10 @@
             including non-paying members, have access to all social features of
             AstroBin.
             {% endblocktrans %}
-        </p>
+       </p>
 
-        <p>
+       <ul class="subscription-plans-description-list">
+            <li>
             {% blocktrans with max_allowed=PREMIUM_MAX_IMAGES_FREE %}
             As a user of <strong>AstroBin Free</strong>, you may have up to
             {{max_allowed}} images at the same time. You can delete some images
@@ -43,9 +45,9 @@
             maintain a window of your latest {{max_allowed}} images, or your
             best ones.
             {% endblocktrans %}
-        </p>
+            </li>
 
-        <p>
+            <li>
             {% blocktrans with max_allowed=PREMIUM_MAX_IMAGES_LITE %}
             As a user of <strong>AstroBin Lite</strong>, instead, you may have
             up to {{max_allowed}} images at the same time, per each year of
@@ -54,8 +56,15 @@
             deleted. Every year that you renew your membership, you get
             {{max_allowed}} new image credits.
             {% endblocktrans %}
-        </p>
+            </li>
 
+            <li>
+            {% blocktrans with max_allowed=PREMIUM_MAX_IMAGES_FREE %}
+            As a user of <strong>AstroBin Premium</strong>, instead, there are
+            no limitations whatsoever in the number of images you can upload.
+            {% endblocktrans %}
+            </li>
+        </ul>
 
         {% with subscription_category='premium' %}
             {% include 'subscription/subscription_category_list.html' %}

@@ -55,7 +55,7 @@ class ForumTest(TestCase):
 
     def test_create_post_premium(self):
         # Premium members have a free pass
-        g, created = Group.objects.get_or_create(name = "Test group")
+        g, created = Group.objects.get_or_create(name = "astrobin_premium")
         s, created = Subscription.objects.get_or_create(
             name = "AstroBin Premium",
             price = 1,

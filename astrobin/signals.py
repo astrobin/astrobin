@@ -22,7 +22,7 @@ from reviews.models import Review
 from threaded_messages.models import Thread
 from toggleproperties.models import ToggleProperty
 from subscription.models import UserSubscription
-from subscription.signals import subscribed, paid
+from subscription.signals import subscribed, paid, signed_up
 
 # Other AstroBin apps
 from nested_comments.models import NestedComment
@@ -113,7 +113,7 @@ def image_pre_delete(sender, instance, **kwargs):
         if is_lite(instance.user):
             usersub = UserSubscription.active_objects.get(
                 user = instance.user,
-                subscription__name = 'AstroBin Lite')
+                subscription__group__name = 'astrobin_lite')
 
             usersub_created = usersub.expires - datetime.timedelta(365) # leap years be damned
             dt = instance.uploaded.date() - usersub_created
@@ -398,13 +398,22 @@ post_save.connect(solution_post_save, sender = Solution)
 def subscription_subscribed(sender, **kwargs):
     subscription = kwargs.get("subscription")
 
-    if subscription.name == 'AstroBin Lite':
+    if subscription.group.name in ['astrobin_lite', 'astrobin_premium'] and \
+            subscription.recurrence_unit == None:
+        usersubscription = kwargs.get("usersubscription")
+        # AstorBin Premium and Lite are valid for 1 year
+        usersubscription.expires = datetime.datetime.now()
+        usersubscription.extend(datetime.timedelta(days = 365.2425))
+        usersubscription.save()
+
+    if subscription.group.name == 'astrobin_lite':
         user = kwargs.get("user")
         profile = user.userprofile
         profile.premium_counter = 0
         profile.save()
 subscribed.connect(subscription_subscribed)
 paid.connect(subscription_subscribed)
+signed_up.connect(subscription_subscribed)
 
 
 pre_delete.connect(image_pre_delete, sender = Image)
