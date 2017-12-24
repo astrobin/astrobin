@@ -36,7 +36,7 @@ class PremiumTest(TestCase):
     def test_subscription_validity(self):
         u = User.objects.create_user(
             username = 'test', email='test@test.com', password = 'password')
-        g, created = Group.objects.get_or_create(name = "premium")
+        g, created = Group.objects.get_or_create(name = "astrobin_premium")
         s, created = Subscription.objects.get_or_create(
             name = "AstroBin Premium",
             price = 1,
@@ -66,7 +66,7 @@ class PremiumTest(TestCase):
 
         u = User.objects.create_user(
             username = 'test', email='test@test.com', password = 'password')
-        g, created = Group.objects.get_or_create(name = "lite")
+        g, created = Group.objects.get_or_create(name = "astrobin_lite")
         s, created = Subscription.objects.get_or_create(
             name = "AstroBin Lite",
             price = 1,
@@ -115,7 +115,7 @@ class PremiumTest(TestCase):
         self.assertEqual(profile.premium_counter, 0)
 
         # Promote to Lite
-        group, created = Group.objects.get_or_create(name = "premium")
+        group, created = Group.objects.get_or_create(name = "astrobin_lite")
         sub, created = Subscription.objects.get_or_create(
             name = "AstroBin Lite",
             price = 1,
@@ -161,6 +161,7 @@ class PremiumTest(TestCase):
         usersub.delete()
 
         # Promote to Premium
+        group, created = Group.objects.get_or_create(name = "astrobin_premium")
         sub, created = Subscription.objects.get_or_create(
             name = "AstroBin Premium",
             price = 1,

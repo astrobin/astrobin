@@ -352,7 +352,8 @@ def get_premium_subscription_expiration(user):
         return None
 
     us = UserSubscription.active_objects.filter(
-        user = user, subscription__category = 'premium')
+        user = user,
+        subscription__group__name__in = ['astrobin_premium', 'astrobin_lite'])
 
     if us.count() == 0:
         return None

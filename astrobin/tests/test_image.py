@@ -447,7 +447,7 @@ class ImageTest(TestCase):
         self.assertEqual(response.context[0]['user_can_like'], False)
 
         # Test whether the Like button is active: index 0 but Premium can like
-        g, created = Group.objects.get_or_create(name = "premium")
+        g, created = Group.objects.get_or_create(name = "astrobin_premium")
         s, created = Subscription.objects.get_or_create(
             name = "AstroBin Premium",
             price = 1,

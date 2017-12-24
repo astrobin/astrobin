@@ -16,7 +16,7 @@ ALLOWED_HOSTS = ['*']
 TEMPLATE_DEBUG = DEBUG
 MAINTENANCE_MODE = False
 READONLY_MODE = False
-MEDIA_VERSION = '222'
+MEDIA_VERSION = '223'
 LONGPOLL_ENABLED = False
 ADS_ENABLED = os.environ['ASTROBIN_ADS_ENABLED'] == 'true'
 DONATIONS_ENABLED = os.environ['ASTROBIN_DONATIONS_ENABLED'] == 'true'
@@ -495,7 +495,7 @@ PAYPAL_DEBUG = PAYPAL_TEST
 if PAYPAL_TEST:
     PAYPAL_RECEIVER_EMAIL = 'salvatore.iovene+paypal+sandbox+business@gmail.com'
 else:
-    PAYPAL_RECEIVER_EMAIL = 'salvatore.iovene@gmail.com'
+    PAYPAL_RECEIVER_EMAIL = 'paypal@astrobin.com'
 
 # Used for the "Cancel subscription" link
 PAYPAL_MERCHANT_ID = os.environ['ASTROBIN_PAYPAL_MERCHANT_ID']

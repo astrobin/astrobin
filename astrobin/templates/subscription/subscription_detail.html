@@ -3,7 +3,7 @@
 {% load i18n %}
 {% load django_bootstrap_breadcrumbs %}
 
-{% block title %}{% trans "Subscription plan" %}: {{object.name}}{% endblock %}
+{% block title %}{% trans "Subscription plan" %}: {% trans object.name %}{% endblock %}
 
 {% block breadcrumbs %}
     {{ block.super }}
@@ -50,7 +50,7 @@
 
     <div class="page-header">
         <h1>
-            {{object.name}}
+            {% trans object.name %}
             <small>
                 {% if object.price > 0 %}
                     $ {{object.price}} USD /
@@ -69,6 +69,10 @@
 
                     {% if object.recurrence_unit == 'Y' %}
                         {% trans "year" %}
+                    {% endif %}
+
+                    {% if object.recurrence_unit == None %}
+                        {% trans "one time" %}
                     {% endif %}
                 {% else %}
                     {% trans "Free" context "At no cost" %}
@@ -90,7 +94,8 @@
             {% endblocktrans %}
         </p>
 
-        <p>
+        <ul class="subscription-plans-description-list">
+            <li>
             {% blocktrans with max_allowed=PREMIUM_MAX_IMAGES_LITE %}
             As a user of <strong>AstroBin Free</strong>, you may have up to
             {{max_allowed}} images at the same time. You can delete some images
@@ -98,9 +103,9 @@
             maintain a window of your latest {{max_allowed}} images, or your
             best ones.
             {% endblocktrans %}
-        </p>
+            </li>
 
-        <p>
+            <li>
             {% blocktrans with max_allowed=PREMIUM_MAX_IMAGES_FREE %}
             As a user of <strong>AstroBin Lite</strong>, instead, you may have
             up to {{max_allowed}} images at the same time, per each year of
@@ -109,7 +114,15 @@
             deleted. Every year that you renew your membership, you get
             {{max_allowed}} new image credits.
             {% endblocktrans %}
-        </p>
+            </li>
+
+            <li>
+            {% blocktrans with max_allowed=PREMIUM_MAX_IMAGES_FREE %}
+            As a user of <strong>AstroBin Premium</strong>, instead, there are
+            no limitations whatsoever in the number of images you can upload.
+            {% endblocktrans %}
+            </li>
+        </ul>
         {% endif %}
 
         {% if object.category == 'rawdata' %}
@@ -191,7 +204,11 @@
             {% else %} <!-- not atom -->
                 <div class="well text-center">
                     <h3>
-                        {% blocktrans %}Subscribe with a secure payment provided by PayPal:{% endblocktrans %}
+                        {% if object.recurrence_unit != None %}
+                            {% blocktrans %}Subscribe with a secure payment provided by PayPal:{% endblocktrans %}
+                        {% else %}
+                            {% blocktrans %}Buy with a secure payment provided by PayPal:{% endblocktrans %}
+                        {% endif %}
                     </h3>
 
                     {% if PAYPAL_TEST %}
@@ -223,7 +240,11 @@
             {% if form %}
                 <div class="well text-center">
                     <h3>
-                        {% blocktrans %}Subscribe with a secure payment provided by PayPal:{% endblocktrans %}
+                        {% if object.recurrence_unit != None %}
+                            {% blocktrans %}Subscribe with a secure payment provided by PayPal:{% endblocktrans %}
+                        {% else %}
+                            {% blocktrans %}Buy with a secure payment provided by PayPal:{% endblocktrans %}
+                        {% endif %}
                     </h3>
 
                     {% if PAYPAL_TEST %}
