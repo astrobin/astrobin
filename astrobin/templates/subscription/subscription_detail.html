@@ -20,7 +20,7 @@
             <span class="label label-success">
                 {% trans "Subscribed" %}
             </span>
-            {% if usersubscription and usersubscription.cancelled %}
+            {% if usersubscription and usersubscription.subscription.recurrence_unit != None and usersubscription.cancelled %}
                 <span class="label label-info">
                     {% trans "Cancelled" %}
                 </span>
@@ -41,7 +41,7 @@
             </span>
         {% endif %}
 
-        {% if usersubscription and usersubscription.active and not usersubscription.cancelled and usersubscription.expired %}
+        {% if usersubscription and usersubscription.expired %}
             <span class="label label-warning">
                 {% trans "Expired" %}
             </span>
@@ -80,6 +80,20 @@
             </small>
         </h1>
     </div>
+
+    {% if '(old)' in usersubscription.subscription.name %}
+    <div class="alert alert-error">
+        <h4>
+            <i class="icon icon-fire"></i>
+            {% trans "Error!" %}
+        </h4>
+
+        <p>
+            {% url 'subscription_list' as url %}
+            {% blocktrans %}Auto-renewing subscriptions are not offered anymore on AstroBin. Please visit the <a href="{{url}}">subscriptions page</a> to see the available plans, thanks!{% endblocktrans %}
+        </p>
+    </div>
+    {% endif %}
 
     <div>
         {% if object.category == 'premium' %}
@@ -152,7 +166,7 @@
 
             {% else %} <!-- not atom -->
 
-                {% if usersubscription.cancelled %}
+                {% if usersubscription.cancelled and usersubscription.subscription.recurrence_unit != None %}
                     <div class="alert alert-warning">
                         <h4>
                             <i class="icon icon-warning-sign"></i>
@@ -164,27 +178,29 @@
                         </p>
                     </div>
                 {% else %} <!-- not cancelled -->
-                    {% if object.category == 'premium' %}
-                    <div class="alert alert-warning">
-                        <h4>
-                            <i class="icon icon-warning-sign"></i>
-                            {% trans "Warning!" %}
-                        </h4>
+                    {% if usersubscription.subscription.recurrence_unit != None %}
+                        {% if object.category == 'premium' %}
+                        <div class="alert alert-warning">
+                            <h4>
+                                <i class="icon icon-warning-sign"></i>
+                                {% trans "Warning!" %}
+                            </h4>
 
-                        <p>
-                            {% trans "By cancelling, you will revert to a free plan." %}
-                            {% blocktrans with max_allowed=PREMIUM_MAX_IMAGES_FREE %}Free plans are limited to <strong>{{max_allowed}}</strong> images.{% endblocktrans %}
-                            {% blocktrans %}However, your existing images will not be deleted or deactivated in any way! Simply, you will not be able to upload any more images unless you switch to a paid plan.{% endblocktrans %}
-                        </p>
-                    </div>
-                    {% endif %} <!-- if premium -->
+                            <p>
+                                {% trans "By cancelling, you will revert to a free plan." %}
+                                {% blocktrans with max_allowed=PREMIUM_MAX_IMAGES_FREE %}Free plans are limited to <strong>{{max_allowed}}</strong> images.{% endblocktrans %}
+                                {% blocktrans %}However, your existing images will not be deleted or deactivated in any way! Simply, you will not be able to upload any more images unless you switch to a paid plan.{% endblocktrans %}
+                            </p>
+                        </div>
+                        {% endif %} <!-- if premium -->
 
-                    <div class="well text-center">
-                        <a href="{{cancel_url}}">
-                            <img src="https://www.paypalobjects.com/en_US/i/btn/btn_unsubscribe_LG.gif"
-                            alt="{% trans "Cacel via PayPal" %}"/>
-                        </a>
-                    </div>
+                        <div class="well text-center">
+                            <a href="{{cancel_url}}">
+                                <img src="https://www.paypalobjects.com/en_US/i/btn/btn_unsubscribe_LG.gif"
+                                alt="{% trans "Cacel via PayPal" %}"/>
+                            </a>
+                        </div>
+                    {% endif %} <!-- if recurring -->
                 {% endif %} <!-- if cancelled -->
             {% endif %} <!-- if atom -->
 
