@@ -121,16 +121,21 @@
             <td>
                 <a  class="btn btn-block{% if request.user|has_valid_subscription:object.pk %} btn-danger{% endif %}"
                     href="{% url 'subscription_detail' object.pk %}">
+
                     {% if request.user|has_valid_subscription:object.pk %}
-                        {% trans "Unsubscribe" %}
-                    {% else %}
-                        {% if request.user|has_valid_subscription_in_category:object.category %}
-                            {% trans "Switch to" %}
+                        {% if object.recurrence_unit == None %}
+                            {% trans "View" %}
                         {% else %}
-                            {% if object.recurrence_unit != None %}
-                                {% trans "Subscribe" %}
+                            {% trans "Unsubscribe" %}
+                        {% endif %}
+                    {% else %}
+                        {% if object.recurrence_unit == None %}
+                            {% trans "Buy" %}
+                        {% else %} 
+                            {% if request.user|has_valid_subscription_in_category:object.category %}
+                                {% trans "Switch to" %}
                             {% else %}
-                                {% trans "Buy" %}
+                                {% trans "Subscribe" %}
                             {% endif %}
                         {% endif %}
                     {% endif %}
