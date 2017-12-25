@@ -255,6 +255,9 @@ IMGCACH=/var/www/media/imagecache
 # Delete expired subscriptions so people may resubscribe eventually.
 00 05 * * * (. $ASTROBIN_ROOT/env/prod; cd $ASTROBIN_ROOT; $PYTHON ./manage.py fix_expired_subscriptions) 2>&1 >/dev/null
 
+# Send reminders about premium subscriptions about to expire.
+00 08 * * * (. $ASTROBIN_ROOT/env/prod; cd $ASTROBIN_ROOT; $PYTHON ./manage.py send_expiration_notifications) 2>&1 >/dev/null
+
 # Again to manage database dist space, old notifications should be deleted periodically.
 00 23 * * * (. $ASTROBIN_ROOT/env/prod; $PYTHON $ASTROBIN_ROOT/manage.py purge_old_notifications) 2>&1 >/dev/null
 

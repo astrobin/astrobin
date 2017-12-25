@@ -180,5 +180,11 @@ NOTICE_TYPES = (
         _("You have received a new private message"),
         '',
         2
+    ),
+    (
+        'expiring_subscription',
+        _("Your premium subscription will expire in one week"),
+        '',
+        2
     )
 )
