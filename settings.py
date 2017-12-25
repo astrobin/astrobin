@@ -489,21 +489,14 @@ PIPELINE = {
     'JS_COMPRESSOR': 'pipeline.compressors.jsmin.SlimItCompressor'
 }
 
-PAYPAL_TEST = DEBUG
-PAYPAL_DEBUG = PAYPAL_TEST
+# Only used in donations form
+SUBSCRIPTION_PAYPAL_SETTINGS = {
+    'business': 'paypal@astrobin.com'
+}
 
-if PAYPAL_TEST:
-    PAYPAL_RECEIVER_EMAIL = 'salvatore.iovene+paypal+sandbox+business@gmail.com'
-else:
-    PAYPAL_RECEIVER_EMAIL = 'paypal@astrobin.com'
-
+PAYPAL_TEST = False
 # Used for the "Cancel subscription" link
 PAYPAL_MERCHANT_ID = os.environ['ASTROBIN_PAYPAL_MERCHANT_ID']
-
-SUBSCRIPTION_GRACE_PERIOD = 7
-SUBSCRIPTION_PAYPAL_SETTINGS = {
-    "business": PAYPAL_RECEIVER_EMAIL,
-}
 
 REST_FRAMEWORK = {
     'DEFAULT_PERMISSION_CLASSES': ('rest_framework.permissions.IsAdminUser',),
