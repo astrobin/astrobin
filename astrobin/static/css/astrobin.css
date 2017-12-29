@@ -4476,13 +4476,12 @@ table.notifications-modal {
   font-size: 13px;
   table-layout: fixed;
 }
-table.notifications-modal td {
-  white-space: nowrap;
-  text-overflow: clip;
-  overflow: hidden;
+table.notifications-modal td.notification-content {
+  width: 99%;
 }
 table.notifications-modal td.notification-date {
   text-align: right;
+  width: 40%;
 }
 table.notifications-modal td.notification-mark-as-read {
   width: 12px;
