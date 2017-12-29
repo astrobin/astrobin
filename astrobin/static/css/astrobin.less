@@ -4802,12 +4802,16 @@ form#group-update-form .control-group:nth-child(8) {
 
 table.notifications-modal {
     font-size: 13px;
-    table-layout: auto;
+    table-layout: fixed;
 
     td {
         white-space: nowrap;
         text-overflow: clip;
         overflow: hidden;
+    }
+
+    td.notification-date {
+        text-align: right;
     }
 
     td.notification-mark-as-read {

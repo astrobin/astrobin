@@ -4474,12 +4474,15 @@ form#group-update-form .control-group:nth-child(8) select {
 }
 table.notifications-modal {
   font-size: 13px;
-  table-layout: auto;
+  table-layout: fixed;
 }
 table.notifications-modal td {
   white-space: nowrap;
   text-overflow: clip;
   overflow: hidden;
+}
+table.notifications-modal td.notification-date {
+  text-align: right;
 }
 table.notifications-modal td.notification-mark-as-read {
   width: 12px;
