@@ -4785,10 +4785,6 @@ form#group-update-form .control-group:nth-child(8) {
     }
 }
 
-table.notifications td {
-    text-align: left !important;
-}
-
 .notification-unread .state-indicator {
     background-color: @link-color;
 }
@@ -4806,16 +4802,12 @@ table.notifications td {
 
 table.notifications-modal {
     font-size: 13px;
-    table-layout: fixed;
+    table-layout: auto;
 
     td {
         white-space: nowrap;
         text-overflow: clip;
         overflow: hidden;
-    }
-
-    td.notification-content {
-        width: 100%;
     }
 
     td.notification-mark-as-read {

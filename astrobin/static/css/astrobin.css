@@ -4459,9 +4459,6 @@ form#group-update-form .control-group:nth-child(8) label,
 form#group-update-form .control-group:nth-child(8) select {
   color: red;
 }
-table.notifications td {
-  text-align: left !important;
-}
 .notification-unread .state-indicator {
   background-color: #cc4b2e;
 }
@@ -4477,15 +4474,12 @@ table.notifications td {
 }
 table.notifications-modal {
   font-size: 13px;
-  table-layout: fixed;
+  table-layout: auto;
 }
 table.notifications-modal td {
   white-space: nowrap;
   text-overflow: clip;
   overflow: hidden;
-}
-table.notifications-modal td.notification-content {
-  width: 100%;
 }
 table.notifications-modal td.notification-mark-as-read {
   width: 12px;
