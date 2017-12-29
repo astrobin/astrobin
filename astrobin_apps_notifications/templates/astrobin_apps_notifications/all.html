@@ -23,6 +23,11 @@
                     <td class="notification-content">
                         {% autoescape off %}{{n.message}}{% endautoescape %}
                     </td>
+                    <td class="notification-date hidden-phone">
+                        <abbr class="timeago" title="{{n.created|date:'Y-m-d\TH:i:s'}}">
+                            {{n.created|date}}
+                        </abbr>
+                    </td>
                 </tr>
             {% empty %}
                 <tr>
