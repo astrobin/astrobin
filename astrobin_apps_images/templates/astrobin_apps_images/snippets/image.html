@@ -34,6 +34,15 @@
                                 </li>
                             {% endif %}
 
+                            {% if badge == 'top-pick' %}
+                                <li class="top-pick-badge{% if alias == 'regular' %} top-pick-badge-large{% endif %}">
+                                    <h2>
+                                        <span>Top</span>
+                                        <span>pick</span>
+                                    </h2>
+                                </li>
+                            {% endif %}
+
                             {% if badge == 'top100' %}
                                 <li class="top100-badge{% if alias == 'regular' %} top100-badge-large{% endif %}">
                                     <h2>

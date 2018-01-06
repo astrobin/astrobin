@@ -2764,6 +2764,38 @@ form.avatar-change label.control-label {
   top: 5px;
   left: 3.5px;
 }
+.astrobin-image-container ul.badges li.top-pick-badge {
+  text-align: center;
+}
+.astrobin-image-container ul.badges li.top-pick-badge h2 {
+  margin: 0;
+  border-bottom: none;
+  font-size: 6px;
+  line-height: 6px;
+  color: #4a4a4a;
+  background: #c1c1c1;
+  -webkit-box-shadow: rgba(0, 0, 0, 0.8) 0 1px 5px;
+  -moz-box-shadow: rgba(0, 0, 0, 0.8) 0 1px 5px;
+  box-shadow: rgba(0, 0, 0, 0.8) 0 1px 5px;
+  -moz-border-radius: 16px;
+  -webkit-border-radius: 16px;
+  border-radius: 16px;
+  border: 1px solid white;
+  padding: 4px;
+  text-transform: uppercase;
+}
+.astrobin-image-container ul.badges li.top-pick-badge h2 span {
+  display: block;
+}
+.astrobin-image-container ul.badges li.top-pick-badge.top100-badge-large h2 {
+  font-size: 16px;
+  line-height: 12px;
+  padding: 12px 8px;
+  -moz-border-radius: 26px;
+  -webkit-border-radius: 26px;
+  border-radius: 26px;
+  width: 34px;
+}
 .astrobin-image-container ul.badges li.top100-badge {
   text-align: center;
 }
