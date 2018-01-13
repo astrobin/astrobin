@@ -6,8 +6,8 @@ from subscription.models import UserSubscription
 SUBSCRIPTION_NAMES = (
     'AstroBin Lite',
     'AstroBin Premium',
-    'AstroBin Lite (old)',
-    'AstroBin Premium (old)'
+    'AstroBin Lite (autorenew)',
+    'AstroBin Premium (autorenew)'
 )
 
 def premium_get_usersubscription(user):
