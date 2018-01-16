@@ -21,6 +21,16 @@
     </div>
     {% endif %}
 
+    {% if request.user|inactive_subscriptions %}
+    <div class="well">
+        <h2>{% trans "Your inactive subscription plans" %}</h2>
+        {% with object_list=request.user|inactive_subscriptions subscription_category='any' %}
+            {% include 'subscription/subscription_category_list.html' %}
+        {% endwith %}
+    </div>
+    {% endif %}
+
+
     {% if PREMIUM_ENABLED %}
     <div class="well">
         <h2>{% trans "AstroBin Premium subscription plans" %}</h2>

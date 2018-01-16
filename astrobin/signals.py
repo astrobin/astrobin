@@ -406,6 +406,13 @@ def subscription_subscribed(sender, **kwargs):
         usersubscription.extend(datetime.timedelta(days = 365.2425))
         usersubscription.save()
 
+        # Invalidate other premium subscriptions
+        UserSubscription.active_objects\
+            .filter(user = usersubscription.user,
+                    subscription__category__startswith = 'premium')\
+            .exclude(pk = usersubscription.pk)\
+            .update(active = False)
+
     if subscription.group.name == 'astrobin_lite':
         user = kwargs.get("user")
         profile = user.userprofile

@@ -313,6 +313,18 @@ def valid_subscriptions(user):
 
 
 @register.filter
+def inactive_subscriptions(user):
+    from subscription.models import UserSubscription
+
+    if user.is_anonymous():
+        return []
+
+    return [x.subscription
+            for x
+            in UserSubscription.objects.filter(user = user, active = False)]
+
+
+@register.filter
 def has_valid_subscription(user, subscription_pk):
     from subscription.models import UserSubscription
 
