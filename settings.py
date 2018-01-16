@@ -320,8 +320,8 @@ HAYSTACK_CONNECTIONS = {
         ],
     },
 }
-if not TESTING:
-    HAYSTACK_SIGNAL_PROCESSOR = 'celery_haystack.signals.CelerySignalProcessor'
+#if not TESTING:
+    #HAYSTACK_SIGNAL_PROCESSOR = 'celery_haystack.signals.CelerySignalProcessor'
 
 
 #INTERNAL_IPS = ('88.115.221.254',) # for django-debug-toolbar: add own local IP to enable
