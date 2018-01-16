@@ -57,10 +57,10 @@ def premium_used_percent(user):
         # expired.
         percent = counter / float(settings.PREMIUM_MAX_IMAGES_FREE) * 100
 
-    elif s.subscription.name == "AstroBin Lite":
+    elif s.subscription.group.name == "astrobin_lite":
         percent = counter / float(settings.PREMIUM_MAX_IMAGES_LITE) * 100
 
-    elif s.subscription.name == "AstroBin Premium":
+    elif s.subscription.group.name == "astrobin_premium":
         percent = -1
 
     if percent > 100:
