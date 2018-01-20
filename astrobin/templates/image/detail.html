@@ -3,11 +3,21 @@
 {% load i18n %}
 {% load django_bootstrap_breadcrumbs %}
 {% load astrobin_apps_donations_tags %}
+{% load astrobin_apps_images_tags %}
 {% load astrobin_apps_users_tags %}
+{% load common_tags %}
 {% load tags %}
 
 
 {% include 'image/detail/custom_ga.html' %}
+
+{% block extra_meta %}
+    {{ block.super }}
+    <meta property="og:title" content="{{image.title}}">
+    <meta property="og:description" content="An astrophotograph by {{image.user.userprofile}} on AstroBin">
+    <meta property="og:image"
+          content="{{SHARE_PATH}}/{{image.id}}/{{revision_label}}/rawthumb/regular/get.jpg?insecure">
+{% endblock %}
 
 {% block title %}{{image.title}} ({% astrobin_username image.user link=False %}){% endblock %}
 {% block container_extra_classes %}has-subnav{% endblock %}

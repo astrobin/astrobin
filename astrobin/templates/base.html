@@ -14,7 +14,7 @@
     <head>
         <title>{% block title %}{% endblock %} - AstroBin</title>
 
-        {% include "base/meta.html" %}
+        {% include "base/meta.html" %}{% block extra_meta %}{% endblock %}
         {% include "base/favicon.html" %}
         {% include "base/ie8html5.html" %}
 
