@@ -10,35 +10,55 @@ SUBSCRIPTION_NAMES = (
     'AstroBin Premium (autorenew)'
 )
 
+
+def _compareValidity(a, b):
+    return a.valid() - b.valid()
+
+
+def _compareNames(a, b):
+    key = {
+        "AstroBin Lite (autorenew)": 0,
+        "AstroBin Lite": 1,
+        "AstroBin Premium (autorenew)": 2,
+        "AstroBin Premium": 3
+    }
+
+    return key[b.subscription.name] - key[a.subscription.name]
+
+
 def premium_get_usersubscription(user):
     us = UserSubscription.objects.filter(
         user = user,
         subscription__name__in = SUBSCRIPTION_NAMES,
     )
 
-    if us.count() > 0:
-        us = us[0]
-    else:
+    if us.count() == 0:
         return None
 
-    return us
+    if us.count() == 1:
+        return us[0]
+
+    return sorted(list(us), cmp = _compareNames)[0]
 
 
 def premium_get_valid_usersubscription(user):
     us = UserSubscription.objects.filter(
         user = user,
+        subscription__name__in = SUBSCRIPTION_NAMES,
         active = True,
-        subscription__name__in = SUBSCRIPTION_NAMES,)
+    )
 
-    if us.count() > 0:
-        us = us[0]
-    else:
+    if us.count() == 0:
         return None
 
-    if not us.valid():
-        return None
+    if us.count() == 1:
+        return us[0]
 
-    return us
+    sortedByName = sorted(list(us), cmp = _compareNames)
+    sortedByValidity = sorted(sortedByName, cmp = _compareValidity)
+
+    return sortedByName[0]
+
 
 def premium_get_invalid_usersubscription(user):
     us = premium_get_usersubscription(user)
@@ -53,8 +73,7 @@ def premium_used_percent(user):
     percent = 100
 
     if s is None:
-        # User is on Free, or their subscription is inactive, cancelled or
-        # expired.
+        # User is on Free, or their subscription is inactive, or expired.
         percent = counter / float(settings.PREMIUM_MAX_IMAGES_FREE) * 100
 
     elif s.subscription.group.name == "astrobin_lite":

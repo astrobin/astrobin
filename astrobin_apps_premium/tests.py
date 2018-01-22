@@ -33,6 +33,64 @@ class PremiumTest(TestCase):
         self.assertEqual(found, True)
 
 
+    def test_premium_get_usersubscription(self):
+        u = User.objects.create_user(username = 'test', email='test@test.com', password = 'password')
+        g, created = Group.objects.get_or_create(name = "astrobin_premium")
+
+        premium_sub, created = Subscription.objects.get_or_create(
+            name = "AstroBin Premium",
+            price = 1,
+            group = g,
+            category = "premium")
+
+        premium_autorenew_sub, created = Subscription.objects.get_or_create(
+            name = "AstroBin Premium (autorenew)",
+            price = 1,
+            group = g,
+            category = "premium_autorenew")
+
+        lite_sub, created = Subscription.objects.get_or_create(
+            name = "AstroBin Lite",
+            price = 1,
+            group = g,
+            category = "premium")
+
+        lite_autorenew_sub, created = Subscription.objects.get_or_create(
+            name = "AstroBin Lite (autorenew)",
+            price = 1,
+            group = g,
+            category = "premium_autorenew")
+
+        premium_us, created = UserSubscription.objects.get_or_create(user = u, subscription = premium_sub, cancelled = False)
+        premium_us.subscribe()
+
+        self.assertEqual(False, premium_us.cancelled)
+
+        self.assertEqual(premium_us, premium_get_usersubscription(u))
+        self.assertEqual(premium_us, premium_get_valid_usersubscription(u))
+
+        premium_autorenew_us, created = UserSubscription.objects.get_or_create(user = u, subscription = premium_autorenew_sub, cancelled = False)
+        premium_autorenew_us.subscribe()
+
+        self.assertEqual(premium_us, premium_get_usersubscription(u))
+        self.assertEqual(premium_us, premium_get_valid_usersubscription(u))
+
+        lite_us, created = UserSubscription.objects.get_or_create(user = u, subscription = lite_sub, cancelled = False)
+        lite_us.subscribe()
+
+        self.assertEqual(premium_us, premium_get_usersubscription(u))
+        self.assertEqual(premium_us, premium_get_valid_usersubscription(u))
+
+        lite_autorenew_us, created = UserSubscription.objects.get_or_create(user = u, subscription = lite_autorenew_sub, cancelled = False)
+        lite_autorenew_us.subscribe()
+
+        self.assertEqual(premium_us, premium_get_usersubscription(u))
+        self.assertEqual(premium_us, premium_get_valid_usersubscription(u))
+
+        premium_us.active = False; premium_us.save()
+        self.assertEqual(premium_autorenew_us, premium_get_valid_usersubscription(u))
+
+
     def test_subscription_validity(self):
         u = User.objects.create_user(
             username = 'test', email='test@test.com', password = 'password')
@@ -44,7 +102,8 @@ class PremiumTest(TestCase):
             category = "premium")
         us, created = UserSubscription.objects.get_or_create(
             user = u,
-            subscription = s)
+            subscription = s,
+            cancelled = False)
         us.subscribe()
 
         self.assertEqual(premium_get_usersubscription(u), us)
