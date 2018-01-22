@@ -412,12 +412,6 @@ class UserTest(TestCase):
         profile.save()
         image = Image.all_objects.get(pk = image.pk)
 
-        # Check Index
-        from astrobin.search_indexes import UserIndex
-        userIndex = UserIndex()
-        index = userIndex.prepare_normalized_likes(self.user)
-        self.assertEquals(index, 0.0)
-
         # Check that the IOTD banner is not visible
         response = self.client.get(reverse('image_detail', args = (image.pk,)))
         self.assertNotContains(response, "iotd-ribbon")
