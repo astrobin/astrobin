@@ -420,6 +420,11 @@ class UserTest(TestCase):
         response = self.client.get(reverse('user_page', args = (self.user.username,)))
         self.assertNotContains(response, 'iotd-badge')
 
+        # Check that the Top Pick badge is not visible
+        iotd.delete()
+        response = self.client.get(reverse('user_page', args = (self.user.username,)))
+        self.assertNotContains(response, 'top-pick-badge')
+
         # Check that the top100 badge is not visible
         self.assertNotContains(response, 'top100-badge')
 
@@ -433,7 +438,6 @@ class UserTest(TestCase):
 
         submission.delete()
         vote.delete()
-        iotd.delete()
 
         image.delete()
 
