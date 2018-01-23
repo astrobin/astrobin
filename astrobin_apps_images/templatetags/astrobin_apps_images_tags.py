@@ -213,7 +213,7 @@ def astrobin_image(context, image, alias, **kwargs):
             not image.user.userprofile.exclude_from_competitions):
             badges.append('iotd')
 
-        if  (not hasattr(image, 'iotd') and
+        if  ((not hasattr(image, 'iotd') or image.iotd.date > datetime.now().date()) and
             hasattr(image, 'iotdvote_set') and
             image.iotdvote_set.count() > 0 and
             not image.user.userprofile.exclude_from_competitions):

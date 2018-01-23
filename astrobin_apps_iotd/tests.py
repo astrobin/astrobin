@@ -4,6 +4,7 @@ from datetime import datetime, timedelta
 # Django
 from django.conf import settings
 from django.contrib.auth.models import User, Group
+from django.core.cache import cache
 from django.core.exceptions import ValidationError
 from django.core.management import call_command
 from django.core.urlresolvers import reverse_lazy
@@ -48,10 +49,11 @@ class IotdTest(TestCase):
             { 'image_file': open('astrobin/fixtures/test.jpg', 'rb') },
             follow = True)
         self.client.logout()
-        self.image = Image.objects.all()[0]
+        self.image = Image.all_objects.first()
 
-        # Approve the image
+        # Approve the image and set a title
         self.image.moderator_decision = 1
+        self.image.title = "IOTD TEST IMAGE"
         self.image.save()
 
     def tearDown(self):
@@ -256,6 +258,50 @@ class IotdTest(TestCase):
         self.assertEqual(vote.reviewer, self.reviewer_1)
         self.assertEqual(vote.image, submission_1.image)
 
+        # Badge is present
+        response = self.client.get(reverse_lazy('image_detail', args = (self.image.pk,)))
+        self.assertContains(response, 'top-pick-badge')
+
+        # Image is in Top Picks page
+        response = self.client.get(reverse_lazy('top_picks'))
+        self.assertContains(response, self.image.title)
+        cache.clear()
+
+        # Badge is still present if image is future IOTD
+        iotd = Iotd.objects.create(
+            judge = self.judge_1,
+            image = self.image,
+            date = datetime.now().date() + timedelta(1))
+        response = self.client.get(reverse_lazy('image_detail', args = (self.image.pk,)))
+        self.assertContains(response, 'top-pick-badge')
+
+        # Image is still in Top Picks page
+        response = self.client.get(reverse_lazy('top_picks'))
+        self.assertContains(response, self.image.title)
+        cache.clear()
+
+        # Badge is gone if image is present IOTD
+        Iotd.objects.filter(pk = iotd.pk).update(date = datetime.now().date())
+        response = self.client.get(reverse_lazy('image_detail', args = (self.image.pk,)))
+        self.assertNotContains(response, 'top-pick-badge')
+
+        # Image is gone from Top Picks page
+        response = self.client.get(reverse_lazy('top_picks'))
+        self.assertNotContains(response, self.image.title)
+        cache.clear()
+
+        # Badge is gone is image is past IOTD
+        Iotd.objects.filter(pk = iotd.pk).update(date = datetime.now().date() - timedelta(1))
+        response = self.client.get(reverse_lazy('image_detail', args = (self.image.pk,)))
+        self.assertNotContains(response, 'top-pick-badge')
+
+        # Image is still gone from Top Picks page
+        response = self.client.get(reverse_lazy('top_picks'))
+        self.assertNotContains(response, self.image.title)
+        cache.clear()
+
+        iotd.delete()
+
         # Image must not be past IOTD
         iotd = Iotd.objects.create(
             judge = self.judge_1,
@@ -392,6 +438,10 @@ class IotdTest(TestCase):
             date = datetime.now().date())
         self.assertEqual(iotd.judge, self.judge_1)
         self.assertEqual(iotd.image, self.image)
+
+        # Badge is present
+        response = self.client.get(reverse_lazy('image_detail', args = (self.image.pk,)))
+        self.assertContains(response, 'iotd-ribbon')
 
         # Image must not be past IOTD
         with self.assertRaisesRegexp(ValidationError, "already been an IOTD"):
