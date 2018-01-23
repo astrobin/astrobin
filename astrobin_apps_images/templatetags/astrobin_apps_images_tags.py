@@ -215,7 +215,8 @@ def astrobin_image(context, image, alias, **kwargs):
 
         if  (not hasattr(image, 'iotd') and
             hasattr(image, 'iotdvote_set') and
-            image.iotdvote_set.count() > 0):
+            image.iotdvote_set.count() > 0 and
+            not image.user.userprofile.exclude_from_competitions):
             badges.append('top-pick')
 
         cache_key = 'top100_ids'
