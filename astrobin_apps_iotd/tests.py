@@ -596,7 +596,7 @@ class IotdTest(TestCase):
         self.assertEqual(len(bss('.astrobin-image-container')), 1)
 
         # Check for count badge
-        self.assertEqual(bss('.iotd-queue-item .badge')[0].text, '2')
+        self.assertEqual(bss('.iotd-queue-item .badge')[0].attrMap['title'], '2')
         submission_2.delete()
 
         # Check for may-not-select class
@@ -716,7 +716,7 @@ class IotdTest(TestCase):
         self.assertEqual(len(bss('.astrobin-image-container')), 1)
 
         # Check for count badge
-        self.assertEqual(bss('.iotd-queue-item .badge')[0].text, '2')
+        self.assertEqual(bss('.iotd-queue-item .badge')[0].attrMap['title'], '2')
         vote_2.delete()
 
         # Check for may-not-select class
