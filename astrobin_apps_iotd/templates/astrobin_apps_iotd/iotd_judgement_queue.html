@@ -35,8 +35,10 @@
                         <a class="badge"
                            href="#reviewers-modal"
                            data-toggle="modal"
-                           data-image="{{image.pk}}">
-                            {{votes}}
+                           data-image="{{image.pk}}"
+                           rel="tooltip"
+                           title="{{votes}}">
+                            #
                         </a>
                     </div>
                 {% endwith %}
