@@ -2,6 +2,7 @@
 from datetime import datetime
 
 # Django
+from django.db.models import Q
 from django.views.generic import ListView
 
 # Third party
@@ -82,4 +83,6 @@ class TopPicksView(ListView):
     paginate_by = 30
 
     def get_queryset(self):
-        return self.model.objects.exclude(iotdvote = None).filter(iotd = None)
+        return self.model.objects.exclude(iotdvote = None).filter(
+            Q(iotd = None) |
+            Q(iotd__date__gt = datetime.now().date()))
