@@ -1,0 +1,18 @@
+{% load i18n %}
+
+<div class="well text-center">
+    <h3>
+        {% if object.recurrence_unit != None %}
+            {% blocktrans %}Subscribe with a secure payment provided by PayPal:{% endblocktrans %}
+        {% else %}
+            {% blocktrans %}Buy with a secure payment provided by PayPal:{% endblocktrans %}
+        {% endif %}
+    </h3>
+
+    {% if PAYPAL_TEST %}
+        {{form.sandbox}}
+    {% else %}
+        {{form.render}}
+    {% endif %}
+</div>
+
