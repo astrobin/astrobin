@@ -4,6 +4,7 @@
 {% load el_pagination_tags %}
 {% load django_bootstrap_breadcrumbs %}
 {% load astrobin_apps_notifications_tags %}
+{% load tags %}
 
 {% block title %}{% trans "Notifications" %}{% endblock %}
 
@@ -24,8 +25,8 @@
                         {% autoescape off %}{{n.message}}{% endautoescape %}
                     </td>
                     <td class="notification-date hidden-phone">
-                        <abbr class="timeago" title="{{n.created|date:'Y-m-d\TH:i:s'}}">
-                            {{n.created|date}}
+                        <abbr class="timeago" title="{{n.created|to_user_timezone:n.user|date:'Y-m-d\TH:i:s'}}">
+                            {{n.created|to_user_timezone:n.user|date:'Y-m-d\TH:i:s'}}
                         </abbr>
                     </td>
                 </tr>
