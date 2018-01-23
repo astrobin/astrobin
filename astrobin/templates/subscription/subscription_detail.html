@@ -16,36 +16,40 @@
         <i class="icon icon-info-sign"></i>
         {% trans "Status" %}:
 
-        {% if usersubscription and usersubscription.valid %}
-            <span class="label label-success">
-                {% trans "Subscribed" %}
-            </span>
-            {% if usersubscription and usersubscription.subscription.recurrence_unit != None and usersubscription.cancelled %}
+        {% if usersubscription %}
+            {% if usersubscription.valid %}
+                <span class="label label-success">
+                    {% trans "Subscribed" %}
+                </span>
+                ({% trans "Expires" %}: {{usersubscription.expires|date:"SHORT_DATE_FORMAT"}})
+            {% else %}
+                <span class="label label-warning">
+                    {% trans "Invalid" %}
+                </span>
+            {% endif %} <!-- valid -->
+
+            {% if usersubscription.expired %}
+                <span class="label label-warning">
+                    {% trans "Expired" %}
+                </span>
+            {% endif %}
+
+            {% if usersubscription.cancelled and object.recurrence_unit %}
                 <span class="label label-info">
                     {% trans "Cancelled" %}
                 </span>
             {% endif %}
-
-            {% trans "Expires" %}: {{usersubscription.expires|date:"SHORT_DATE_FORMAT"}}
-        {% endif %}
-
-        {% if not usersubscription and not change_denied_reasons %}
-            <span class="label label-warning">
-                {% trans "Unsubscribed" %}
-            </span>
-        {% endif %}
-
-        {% if not usersubscription and change_denied_reasons %}
-            <span class="label label-warning">
-                {% trans "Unavailable" %}
-            </span>
-        {% endif %}
-
-        {% if usersubscription and usersubscription.expired %}
-            <span class="label label-warning">
-                {% trans "Expired" %}
-            </span>
-        {% endif %}
+        {% else %}
+            {% if change_denied_reasons %}
+                <span class="label label-warning">
+                    {% trans "Unavailable" %}
+                </span>
+            {% else %}
+                <span class="label label-warning">
+                    {% trans "Unsubscribed" %}
+                </span>
+            {% endif %}
+        {% endif %} <!-- usersubscription defined -->
     </div>
 
     <div class="page-header">
@@ -81,22 +85,15 @@
         </h1>
     </div>
 
-    {% if '(autorenew)' in usersubscription.subscription.name %}
+    {% if object.category == 'premium_autorenew' %}
     <div class="alert alert-error">
-        <h4>
-            <i class="icon icon-fire"></i>
-            {% trans "Error!" %}
-        </h4>
-
-        <p>
-            {% url 'subscription_list' as url %}
-            {% blocktrans %}Auto-renewing subscriptions are not offered anymore on AstroBin. Please visit the <a href="{{url}}">subscriptions page</a> to see the available plans, thanks!{% endblocktrans %}
-        </p>
+        {% url 'subscription_list' as url %}
+        {% blocktrans %}Auto-renewing subscriptions are not offered anymore on AstroBin. Please visit the <a href="{{url}}">subscriptions page</a> to see the available plans, thanks!{% endblocktrans %}
     </div>
     {% endif %}
 
     <div>
-        {% if object.category == 'premium' %}
+        {% if 'premium' in object.category %}
         <p>
             {% blocktrans with max_allowed=PREMIUM_MAX_IMAGES_FREE %}
             You can use AstroBin for free up to {{max_allowed}} images. After
@@ -149,95 +146,71 @@
         {% endif %}
     </div>
 
-    {% if usersubscription %}
-        {% if usersubscription.valid %}
-            {% if usersubscription.subscription.name == "Atom" %}
-                {% comment %} Free subscription {% endcomment %}
-                <div class="well text-center">
-                    <p>
-                        {% blocktrans %}Here you can deactivate your free Raw Data Atom subscription.{% endblocktrans %}
-                    </p>
+    {% comment %} Deactivate Atom {% endcomment %}
+    {% if usersubscription and usersubscription.valid and usersubscription.subscription.name == "Atom" %}
+        <div class="well text-center">
+            <p>
+                {% blocktrans %}Here you can deactivate your free Raw Data Atom subscription.{% endblocktrans %}
+            </p>
 
-                    <form action="{% url 'rawdata.atom_deactivate' %}" method="post">
-                        {% csrf_token %}
-                        <input type="submit" class="btn btn-primary btn-large" value="{% trans "Deactivate" %}"/>
-                    </form>
-                </div>
+            <form action="{% url 'rawdata.atom_deactivate' %}" method="post">
+                {% csrf_token %}
+                <input type="submit" class="btn btn-primary btn-large" value="{% trans "Deactivate" %}"/>
+            </form>
+        </div>
+    {% endif %}
 
-            {% else %} <!-- not atom -->
+    {% comment %} Cancelled subscription {% endcomment %}
+    {% if usersubscription and usersubscription.cancelled and object.recurrence_unit %}
+        <div class="alert alert-warning">
+            <h4>
+                <i class="icon icon-warning-sign"></i>
+                {% trans "Warning!" %}
+            </h4>
 
-                {% if usersubscription.cancelled and usersubscription.subscription.recurrence_unit != None %}
-                    <div class="alert alert-warning">
-                        <h4>
-                            <i class="icon icon-warning-sign"></i>
-                            {% trans "Warning!" %}
-                        </h4>
+            <p>
+                {% blocktrans %}Your subscription is either cancelled or not active yet. If you want to subscribe again, please wait until your subscription is expired. If you just subscribed, please wait a few minutes while PayPal contacts our server for the final transaction confirmation. Thank you!{% endblocktrans %}
+            </p>
+        </div>
+    {% endif %}
 
-                        <p>
-                            {% blocktrans %}Your subscription is either cancelled or not active yet. If you want to subscribe again, please wait until your subscription is expired. If you just subscribed, please wait a few minutes while PayPal contacts our server for the final transaction confirmation. Thank you!{% endblocktrans %}
-                        </p>
-                    </div>
-                {% else %} <!-- not cancelled -->
-                    {% if usersubscription.subscription.recurrence_unit != None %}
-                        {% if object.category == 'premium' %}
-                        <div class="alert alert-warning">
-                            <h4>
-                                <i class="icon icon-warning-sign"></i>
-                                {% trans "Warning!" %}
-                            </h4>
 
-                            <p>
-                                {% trans "By cancelling, you will revert to a free plan." %}
-                                {% blocktrans with max_allowed=PREMIUM_MAX_IMAGES_FREE %}Free plans are limited to <strong>{{max_allowed}}</strong> images.{% endblocktrans %}
-                                {% blocktrans %}However, your existing images will not be deleted or deactivated in any way! Simply, you will not be able to upload any more images unless you switch to a paid plan.{% endblocktrans %}
-                            </p>
-                        </div>
-                        {% endif %} <!-- if premium -->
+    {% comment %} Not cancelled subscription {% endcomment %}
+    {% if usersubscription and not usersubscription.cancelled and object.recurrence_unit %}
+        {% if 'premium' in object.category %}
+            <div class="alert alert-warning">
+                <h4>
+                    <i class="icon icon-warning-sign"></i>
+                    {% trans "Warning!" %}
+                </h4>
 
-                        <div class="well text-center">
-                            <a href="{{cancel_url}}">
-                                <img src="https://www.paypalobjects.com/en_US/i/btn/btn_unsubscribe_LG.gif"
-                                alt="{% trans "Cancel via PayPal" %}"/>
-                            </a>
-                        </div>
-                    {% endif %} <!-- if recurring -->
-                {% endif %} <!-- if cancelled -->
-            {% endif %} <!-- if atom -->
+                <p>
+                    {% trans "By cancelling, you will revert to a free plan." %}
+                    {% blocktrans with max_allowed=PREMIUM_MAX_IMAGES_FREE %}Free plans are limited to <strong>{{max_allowed}}</strong> images.{% endblocktrans %}
+                    {% blocktrans %}However, your existing images will not be deleted or deactivated in any way! Simply, you will not be able to upload any more images unless you switch to a paid plan.{% endblocktrans %}
+                </p>
+            </div>
+        {% endif %} <!-- if premium -->
 
-        {% else %} <!-- not valid -->
+        <div class="well text-center">
+            <a href="{{cancel_url}}">
+                <img src="https://www.paypalobjects.com/en_US/i/btn/btn_unsubscribe_LG.gif"
+                alt="{% trans "Cancel via PayPal" %}"/>
+            </a>
+        </div>
+    {% endif %}
 
-            {% if usersubscription.subscription.name == "Atom" %}
-                <div class="well text-center">
-                    <p>
-                        {% blocktrans %}Here you can activate your free Raw Data Atom subscription.{% endblocktrans %}
-                    </p>
+    {% comment %} Invalid subscription {% endcomment %}
+    {% if usersubscription and not usersubscription.valid and usersubscription.cancelled and 'autorenew' not in object.category %}
+        {% if usersubscription.subscription.name == "Atom" %}
+            {% include 'subscription/_atom_form.html' %}
+        {% else %} <!-- not atom -->
+            {% include 'subscription/_paypal_form.html' %}
+        {% endif %} <!-- if atom -->
+    {% endif %}
 
-                    <form action="{% url 'rawdata.atom_activate' %}" method="post">
-                        {% csrf_token %}
-                        <input type="submit" class="btn btn-primary btn-large" value="{% trans "Activate" %}"/>
-                    </form>
-                </div>
-            {% else %} <!-- not atom -->
-                <div class="well text-center">
-                    <h3>
-                        {% if object.recurrence_unit != None %}
-                            {% blocktrans %}Subscribe with a secure payment provided by PayPal:{% endblocktrans %}
-                        {% else %}
-                            {% blocktrans %}Buy with a secure payment provided by PayPal:{% endblocktrans %}
-                        {% endif %}
-                    </h3>
-
-                    {% if PAYPAL_TEST %}
-                        {{form.sandbox}}
-                    {% else %}
-                        {{form.render}}
-                    {% endif %}
-                </div>
-            {% endif %} <!-- if atom -->
-        {% endif %} <!-- if valid -->
-
-    {% else %} <!-- user subscription unavailable -->
-
+    {% comment %} Missing subscription {% endcomment %}
+    {% if not usersubscription and 'autorenew' not in object.category %}
         {% if change_denied_reasons %}
             <div class="alert alert-error">
                 <h4 class="alert-heading">
@@ -250,56 +223,22 @@
                     {% endfor %}
                 </ul>
             </div>
-
-        {% else %} <!-- user usbscription unavailable and no known reason -->
-
+        {% else %} <!-- usersubscription unavailable and no known reason -->
             {% if form %}
-                <div class="well text-center">
-                    <h3>
-                        {% if object.recurrence_unit != None %}
-                            {% blocktrans %}Subscribe with a secure payment provided by PayPal:{% endblocktrans %}
-                        {% else %}
-                            {% blocktrans %}Buy with a secure payment provided by PayPal:{% endblocktrans %}
-                        {% endif %}
-                    </h3>
-
-                    {% if PAYPAL_TEST %}
-                        {{form.sandbox}}
-                    {% else %}
-                        {{form.render}}
-                    {% endif %}
-                </div>
+                {% include 'subscription/_paypal_form.html' %}
             {% else %} <!-- no form, must be atom -->
-
-                {% comment %} Free subscription {% endcomment %}
-                <div class="well text-center">
-                    <p>
-                        {% blocktrans %}Here you can activate your free Raw Data Atom subscription.{% endblocktrans %}
-                    </p>
-
-                    <p class="alert alert-alert">
-                        {% trans "Careful! If you have already a paid Raw Data subscription, your available space will be reduced!" %}
-                    </p>
-
-                    <form action="{% url 'rawdata.atom_activate' %}" method="post">
-                        {% csrf_token %}
-                        <input type="submit" class="btn btn-primary btn-large" value="{% trans "Activate" %}"/>
-                    </form>
-                </div>
+                {% include 'subscription/_atom_form.html' %}
             {% endif %} <!-- if form -->
         {% endif %} <!-- if change_denied_reasons -->
     {% endif %}
 
-    {% if form %}
     <div class="thankyou">
         {% blocktrans %}Thank you for supporting AstroBin!{% endblocktrans %}
     </div>
-    {% endif %}
 
     <div class="text-center">
         <a class="btn btn-mini" href="{% url 'subscription_list' %}">
             {% trans "Back to the plans" %}
         </a>
     </div>
-
 {% endblock %}
