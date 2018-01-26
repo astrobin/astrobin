@@ -31,6 +31,7 @@ from braces.views import (
     SuperuserRequiredMixin,
     UserPassesTestMixin,
 )
+from silk.profiling.profiler import silk_profile
 from toggleproperties.models import ToggleProperty
 
 # AstroBin
@@ -147,6 +148,10 @@ class ImageDetailView(DetailView):
     pk_url_kwarg = 'id'
     template_name = 'image/detail.html'
     template_name_suffix = ''
+
+    @silk_profile(name='Image detail')
+    def get(self, request, *args, **kwargs):
+        return super(ImageDetailView, self).get(request, *args, **kwargs)
 
     def get_queryset(self):
         return Image.all_objects.all()
