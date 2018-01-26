@@ -18,7 +18,7 @@ register = Library()
 def donate_modal(context):
     
     return {
-        'base_url': settings.ASTROBIN_BASE_URL,
+        'base_url': settings.BASE_URL,
         'business': settings.SUBSCRIPTION_PAYPAL_SETTINGS['business'],
 
         'monthly_coffee_sub': get_object_or_None(Subscription, name = 'AstroBin Donor Coffee Monthly'),
@@ -40,7 +40,7 @@ def donate_modal(context):
 @register.inclusion_tag('astrobin_apps_donations/inclusion_tags/remove_ads_modal.html', takes_context = True)
 def remove_ads_modal(context):
     return {
-        'base_url': settings.ASTROBIN_BASE_URL,
+        'base_url': settings.BASE_URL,
         'business': settings.SUBSCRIPTION_PAYPAL_SETTINGS['business'],
 
         'monthly_coffee_sub': get_object_or_None(Subscription, name = 'AstroBin Donor Coffee Monthly'),

@@ -7,16 +7,16 @@ from django.utils.translation import ugettext_lazy as _
 local_path = lambda path: os.path.join(os.path.dirname(__file__), path)
 
 TESTING = len(sys.argv) > 1 and sys.argv[1] == 'test'
-DEBUG = os.environ['ASTROBIN_DEBUG'] == "true"
+DEBUG = os.environ['DEBUG'] == "true"
 ALLOWED_HOSTS = ['*']
 TEMPLATE_DEBUG = DEBUG
 MAINTENANCE_MODE = False
 READONLY_MODE = False
 MEDIA_VERSION = '224'
 LONGPOLL_ENABLED = False
-ADS_ENABLED = os.environ['ASTROBIN_ADS_ENABLED'] == 'true'
-DONATIONS_ENABLED = os.environ['ASTROBIN_DONATIONS_ENABLED'] == 'true'
-PREMIUM_ENABLED = os.environ['ASTROBIN_PREMIUM_ENABLED'] == 'true'
+ADS_ENABLED = os.environ['ADS_ENABLED'] == 'true'
+DONATIONS_ENABLED = os.environ['DONATIONS_ENABLED'] == 'true'
+PREMIUM_ENABLED = os.environ['PREMIUM_ENABLED'] == 'true'
 
 if TESTING:
     DEBUG = False
@@ -27,32 +27,33 @@ if TESTING:
         'django.contrib.auth.hashers.MD5PasswordHasher',
     )
 else:
-    AWS_S3_ENABLED = os.environ['ASTROBIN_AWS_S3_ENABLED'] == "true"
-    LOCAL_STATIC_STORAGE = os.environ['ASTROBIN_LOCAL_STATIC_STORAGE'] == "true"
+    AWS_S3_ENABLED = os.environ['AWS_S3_ENABLED'] == "true"
+    LOCAL_STATIC_STORAGE = os.environ['LOCAL_STATIC_STORAGE'] == "true"
 
 ADMINS = (
     ('Salvatore Iovene', 'salvatore@astrobin.com'),
 )
 
 MANAGERS = ADMINS
-SERVER_EMAIL = os.environ['ASTROBIN_SERVER_EMAIL']
-DEFAULT_FROM_EMAIL = os.environ['ASTROBIN_DEFAULT_FROM_EMAIL']
-EMAIL_HOST_USER = os.environ['ASTROBIN_EMAIL_HOST_USER']
-EMAIL_HOST_PASSWORD = os.environ['ASTROBIN_EMAIL_HOST_PASSWORD']
-EMAIL_SUBJECT_PREFIX = os.environ['ASTROBIN_EMAIL_SUBJECT_PREFIX']
-EMAIL_HOST = os.environ['ASTROBIN_EMAIL_HOST']
-EMAIL_PORT = os.environ['ASTROBIN_EMAIL_PORT']
-EMAIL_USE_TLS= os.environ['ASTROBIN_EMAIL_USE_TLS'] == "true"
+SERVER_EMAIL = os.environ['SERVER_EMAIL']
+DEFAULT_FROM_EMAIL = os.environ['DEFAULT_FROM_EMAIL']
+EMAIL_SUBJECT_PREFIX = os.environ['EMAIL_SUBJECT_PREFIX']
 EMAIL_BACKEND = 'django.core.mail.backends.smtp.EmailBackend'
+EMAIL_HOST = os.environ['EMAIL_HOST']
+EMAIL_HOST_USER = os.environ['EMAIL_HOST_USER']
+EMAIL_HOST_PASSWORD = os.environ['EMAIL_HOST_PASSWORD']
+EMAIL_PORT = 587
+EMAIL_USE_TLS = True
+
 
 if not TESTING:
     DATABASES = {
         'default': {
             'ENGINE': 'django.db.backends.postgresql_psycopg2',
-            'NAME': os.environ['ASTROBIN_DATABASE_NAME'],
-            'USER': os.environ['ASTROBIN_DATABASE_USER'],
-            'PASSWORD': os.environ['ASTROBIN_DATABASE_PASSWORD'],
-            'HOST': os.environ['ASTROBIN_DATABASE_HOST'],
+            'NAME': 'astrobin',
+            'USER': 'astrobin',
+            'PASSWORD': os.environ['POSTGRES_PASSWORD'],
+            'HOST': 'db',
             'PORT': '5432',
             'CONN_MAX_AGE': 60,
         }
@@ -67,9 +68,9 @@ else:
 
 DEFAULT_CHARSET = 'utf-8'
 
-ASTROBIN_BASE_URL = os.environ['ASTROBIN_BASE_URL']
-ASTROBIN_SHORT_BASE_URL = os.environ['ASTROBIN_SHORT_BASE_URL']
-ASTROBIN_BASE_PATH = os.path.dirname(__file__)
+BASE_URL = os.environ['BASE_URL']
+SHORT_BASE_URL = os.environ['SHORT_BASE_URL']
+BASE_PATH = os.path.dirname(__file__)
 
 # Local time zone for this installation. Choices can be found here:
 # http://en.wikipedia.org/wiki/List_of_tz_zones_by_name
@@ -111,18 +112,15 @@ USE_L10N = True
 SITE_ID = 1
 
 # Make this unique, and don't share it with anybody.
-SECRET_KEY = os.environ['ASTROBIN_DJANGO_SECRET_KEY']
+SECRET_KEY = os.environ['DJANGO_SECRET_KEY']
 
 # Django storages
 DEFAULT_FILE_STORAGE = 'astrobin.s3utils.ImageStorage'
 
 # Absolute path to the directory that holds media.
 # Example: "/home/media/media.lawrence.com/"
-MEDIA_ROOT = '/var/www/media/'
-MEDIA_URL = '/media/'
-
-STATIC_ROOT = MEDIA_ROOT + 'static/'
-STATIC_URL = MEDIA_URL + 'static/'
+MEDIA_ROOT = MEDIA_URL = '/media/'
+STATIC_ROOT = STATIC_URL = MEDIA_ROOT + 'static/'
 
 IMAGES_URL = MEDIA_URL
 IMAGE_CACHE_DIRECTORY = MEDIA_ROOT + 'imagecache/'
@@ -135,18 +133,18 @@ UPLOADS_DIRECTORY = MEDIA_ROOT
 # URL prefix for admin media -- CSS, JavaScript and images. Make sure to use a
 # trailing slash.
 # Examples: "http://foo.com/media/", "/media/".
-ADMIN_MEDIA_PREFIX = STATIC_URL + '/admin/'
+ADMIN_MEDIA_PREFIX = STATIC_URL + 'admin/'
 
 if AWS_S3_ENABLED:
     S3_URL = 's3.amazonaws.com'
-    IMAGES_URL = os.environ['ASTROBIN_IMAGES_URL']
+    IMAGES_URL = os.environ['IMAGES_URL']
 
-    MEDIA_URL = os.environ['ASTROBIN_CDN_URL']
+    MEDIA_URL = os.environ['CDN_URL']
     STATIC_URL = MEDIA_URL + 'static/'
 
-    AWS_ACCESS_KEY_ID = os.environ['ASTROBIN_AWS_ACCESS_KEY_ID']
-    AWS_SECRET_ACCESS_KEY = os.environ['ASTROBIN_AWS_SECRET_ACCESS_KEY']
-    AWS_STORAGE_BUCKET_NAME = os.environ['ASTROBIN_AWS_STORAGE_BUCKET_NAME']
+    AWS_ACCESS_KEY_ID = os.environ['AWS_ACCESS_KEY_ID']
+    AWS_SECRET_ACCESS_KEY = os.environ['AWS_SECRET_ACCESS_KEY']
+    AWS_STORAGE_BUCKET_NAME = os.environ['AWS_STORAGE_BUCKET_NAME']
     AWS_STORAGE_BUCKET_CNAME = AWS_STORAGE_BUCKET_NAME
     AWS_S3_SECURE_URLS = True
     AWS_QUERYSTRING_AUTH = False
@@ -205,7 +203,7 @@ TEMPLATE_DIRS = (
     # Put strings here, like "/home/html/django_templates" or "C:/www/django/templates".
     # Always use forward slashes, even on Windows.
     # Don't forget to use absolute paths, not relative paths.
-    local_path('astrobin/templates'),
+    local_path('templates'),
 )
 
 TEMPLATE_CONTEXT_PROCESSORS = (
@@ -291,14 +289,15 @@ LOGIN_REDIRECT_URL = '/'
 ACCOUNT_ACTIVATION_DAYS = 7
 AUTH_PROFILE_MODULE = 'astrobin.UserProfile'
 
-FLICKR_API_KEY = os.environ['ASTROBIN_FLICKR_API_KEY']
-FLICKR_SECRET  = os.environ['ASTROBIN_FLICKR_SECRET']
+FLICKR_API_KEY = os.environ['FLICKR_API_KEY']
+FLICKR_SECRET  = os.environ['FLICKR_SECRET']
 
 JOHNNY_MIDDLEWARE_KEY_PREFIX='jc_astrobin'
+
 CACHES = {
     'default': {
         'BACKEND': 'django.core.cache.backends.memcached.MemcachedCache',
-        'LOCATION': '127.0.0.1:11211',
+        'LOCATION': 'cache:11211',
     },
 }
 
@@ -316,13 +315,12 @@ if TESTING:
         }
     }
 
-
 HAYSTACK_DEFAULT_OPERATOR = 'AND'
 HAYSTACK_SEARCH_RESULTS_PER_PAGE = 70
 HAYSTACK_CONNECTIONS = {
     'default': {
         'ENGINE': 'haystack.backends.elasticsearch_backend.ElasticsearchSearchEngine',
-        'URL': os.environ['ASTROBIN_HAYSTACK_BACKEND_URL'],
+        'URL': 'http://search:9200',
         'INDEX_NAME': 'astrobin',
         'EXCLUDED_INDEXES': [
             'threaded_messages.search_indexes.Thread',
@@ -335,21 +333,21 @@ HAYSTACK_CONNECTIONS = {
 
 MESSAGE_STORAGE = 'persistent_messages.storage.PersistentMessageStorage'
 
-BROKER_URL = os.environ['ASTROBIN_BROKER_URL']
+BROKER_URL = 'amqp://astrobin:%s@queue:5672' % os.environ['RABBITMQ_DEFAULT_PASS']
 BROKER_TRANSPORT_OPTIONS = {
     'visibility_timeout': 3600,
     'fanout_prefix': True,
     'fanout_patterns': True,
 }
-CELERY_RESULT_BACKEND = 'cache+memcached://127.0.0.1:11211/'
+CELERY_RESULT_BACKEND = 'cache+memcached://cache:11211/'
 CELERY_IMPORTS = ('astrobin.tasks', 'rawdata.tasks',)
 CELERY_QUEUES = {"default" : {"exchange":"default", "binding_key":"default"},}
 CELERY_DEFAULT_QUEUE = "default"
 CELERY_ACCEPT_CONTENT = ['pickle']
 CELERY_TASK_SERIALIZER = 'pickle'
 
-ASTROBIN_ENABLE_SOLVING = True
-ASTROBIN_PLATESOLVING_BACKEND = \
+ENABLE_SOLVING = True
+PLATESOLVING_BACKEND = \
     'astrobin_apps_platesolving.backends.astrometry_net.solver.Solver'
 ASTROMETRY_NET_API_KEY = os.environ['ASTROMETRY_NET_API_KEY']
 
@@ -360,7 +358,7 @@ PRIVATEBETA_ALWAYS_ALLOW_VIEWS = (
     'astrobin.views.set_language',
 )
 
-ASTROBIN_USER='astrobin'
+USER='astrobin'
 
 
 NOTIFICATION_LANGUAGE_MODULE = "astrobin.UserProfile"
@@ -395,7 +393,7 @@ STATICFILES_FINDERS = (
     'django.contrib.staticfiles.finders.AppDirectoriesFinder',
     'pipeline.finders.PipelineFinder',
 )
-STATICFILES_DIRS = (local_path('astrobin/static/'),)
+STATICFILES_DIRS = (local_path('static/'),)
 
 PIPELINE = {
     'PIPELINE_ENABLED': not DEBUG,
@@ -481,7 +479,7 @@ SUBSCRIPTION_PAYPAL_SETTINGS = {
 
 PAYPAL_TEST = False
 # Used for the "Cancel subscription" link
-PAYPAL_MERCHANT_ID = os.environ['ASTROBIN_PAYPAL_MERCHANT_ID']
+PAYPAL_MERCHANT_ID = os.environ['PAYPAL_MERCHANT_ID']
 
 REST_FRAMEWORK = {
     'DEFAULT_PERMISSION_CLASSES': ('rest_framework.permissions.IsAdminUser',),
@@ -493,7 +491,7 @@ REST_FRAMEWORK = {
     )
 }
 
-RAWDATA_ROOT = os.environ['ASTROBIN_RAWDATA_ROOT']
+RAWDATA_ROOT = os.path.join(MEDIA_ROOT, 'rawdata')
 
 # See http://docs.djangoproject.com/en/dev/topics/logging for
 # more details on how to customize your logging configuration.
@@ -519,7 +517,7 @@ LOGGING = {
         'logfile': {
             'level':'DEBUG',
             'class':'logging.handlers.RotatingFileHandler',
-            'filename': "/var/log/astrobin/debug.log",
+            'filename': "debug.log",
             'maxBytes': 50000,
             'backupCount': 2,
             'formatter': 'standard',
@@ -708,8 +706,8 @@ IOTD_JUDGEMENT_MAX_FUTURE_PER_JUDGE = 2
 
 IOTD_SHOW_CHOOSING_JUDGE = False
 
-MIN_INDEX_TO_LIKE = float(os.environ['ASTROBIN_MIN_INDEX_TO_LIKE'])
-GOOGLE_ANALYTICS_ID = os.environ['ASTROBIN_GOOGLE_ANALYTICS_ID']
+MIN_INDEX_TO_LIKE = float(os.environ['MIN_INDEX_TO_LIKE'])
+GOOGLE_ANALYTICS_ID = os.environ['GOOGLE_ANALYTICS_ID']
 
 SILKY_PYTHON_PROFILER = True
 SILKY_PYTHON_PROFILER_BINARY = True

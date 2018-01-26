@@ -1,10 +1,13 @@
+[![Build Status](https://travis-ci.org/astrobin/astrobin.svg?branch=master)](https://travis-ci.org/astrobin/astrobin)
+
 ![AstroBin](astrobin/static/images/astrobin-logo.png)
 
-AstroBin is an image hosting website for astrophotographers. The original production copy is run on https://www.astrobin.com/.
+AstroBin is an image hosting website for astrophotographers. The original
+production copy is run on https://www.astrobin.com/.
 
 # Development
 
-You can setup a development environment using [Vagrant](https://www.vagrantup.com/).
+You can setup a development environment using Docker.
 
 ## Clone the code:
 
@@ -17,195 +20,280 @@ git submodule update
 
 ## Configure the system
 
-Copy `env/example` to `env/dev` and set all the variables.
+You will need two files, `.env-dev` and `.env-prod`, both like the following
+but changing the passwords, API keys, etc: 
 
-## Setup Vagrant
+```
+# General
+C_FORCE_ROOT=true
+PYTHONPATH=/usr/lib/python2.7/dist-packages
+DJANGO_SETTINGS_MODULE=astrobin.settings
+DJANGO_SECRET_KEY=astrobin
 
-[Install Vagrant](https://www.vagrantup.com/docs/installation/index.html) and consult its [documentation](https://www.vagrantup.com/intro/getting-started/index.html)
+# DB
+POSTGRES_DB=astrobin
+POSTGRES_USER=astrobin
+POSTGRES_PASSWORD=CHANGEME
 
-Then create a Ubuntu 16.04 box:
+# Queue
+RABBITMQ_DEFAULT_USER=astrobin
+RABBITMQ_DEFAULT_PASS=CHANGEME
 
-```bash
-vagrant box add ubuntu/xenial64
-vagrant up
+AMQP_HOST=queue
+AMQP_USERNAME=astrobin
+AMQP_PASSWORD=CHANGEME
+AMQP_ADMIN_HOST=queue
+AMQP_ADMIN_USERNAME=astrobin
+AMQP_ADMIN_PASSWORD=CHANGEME
+FLOWER_BASIC_AUTH=astrobin:CHANGEME
+
+# API keys
+SENDGRID_API_KEY=CHANGEME
+FLICKR_API_KEY=CHANGEME
+FLICKR_SECRET=CHANGEME
+ASTROMETRY_NET_API_KEY=CHANGEME
+
+# AWS
+AWS_ACCESS_KEY_ID=CHANGEME
+AWS_SECRET_ACCESS_KEY=CHANGEME
+AWS_S3_ENABLED=true
+AWS_STORAGE_BUCKET_NAME=CHANGEME
+
+# IDs
+PAYPAL_MERCHANT_ID=CHANGEME
+GOOGLE_ANALYTICS_ID=CHANGEME
+
+# Settings
+
+# URLs etc
+BASE_URL=CHANGEME
+SHORT_BASE_URL=CHANGEME
+HOST=CHANGEME
+IMAGES_URL=CHANGEME
+CDN_URL=CHANGEME
+
+# Email
+SERVER_EMAIL=CHANGEME
+DEFAULT_FROM_EMAIL=CHANGEME
+EMAIL_SUBJECT_PREFIX=CHANGEME
+EMAIL_HOST=CHANGEME
+EMAIL_HOST_USER=CHANGEME
+EMAIL_HOST_PASSWORD=CHANGEME
+
+# Storage
+LOCAL_STATIC_STORAGE=false
+
+# AstroBin internals
+MIN_INDEX_TO_LIKE=0.5
+ADS_ENABLED=false
+DONATIONS_ENABLED=false
+PREMIUM_ENABLED=true
+
+# Debug
+DEBUG=false
 ```
 
-`vagrant up` will take a long time, probably around 30 to 60 minutes depending on your hardware. If you want to monitor more closely what is going on, tail the log file in another terminal:
+
+## Setup Docker
+
+[Install Docker](https://www.docker.com/), then create and run the containers:
 
 ```bash
-tail -f vagrant.log
+docker-compose up
 ```
 
-## Login into the AstroBin's Vagrant box:
+The first time you create a container for AstroBin, you will need to run the following:
 
 ```bash
-vagrant ssh
-sudo su - astrobin
+docker-compose -f docker/docker-compose.yml run --no-deps --rm astrobin ./scripts/init.sh
 ```
 
-## Run it
+To make all the static files available to the app, run:
 
-```./scripts/run.sh```
+```bash
+docker-compose exec app python manage.py collectstatic --noinput
+```
 
-And then visit http://127.0.0.1:8083/ from your host.
+This might take a while, especially if run against AWS.
 
+
+AstroBin is running! Visit http://127.0.0.1/ from your host.
+
+*PLEASE NOTE*: the nginx configuration in `docker/nginx.conf` is meant for a
+production environment. Feel free to tune if you change things.
 
 # Setting up a production server.
 
-https://www.astrobin.com/ runs on the following components, and we recommend you use the same stack:
-  - nginx
-  - gunicorn
-  - postgresql
-  - elasticsearch
-  - redis
-  - memcached
+AstroBin.com is deployed on [Hyper.sh](https://hyper.sh/), but given that it's a
+set of Docker containers, you are of course free to deploy as you see fit.
 
-It is recommended that you copy `env/dev` to `env/prod` and set some production specific variables there (like disabling `ASTROBIN_DEBUG`, etc). FYI, the `crontab` below references `env/prod`.
-## nginx
+To deploy on Hyper.sh, simply run:
 
-```nginx
-# Rate limit bots
-map $http_user_agent $limit_bots {
-    default '';
-    ~*(bing|yandex|msnbot) $binary_remote_addr;
-}
-limit_req_zone $limit_bots zone=bots:10m rate=1r/m;
-
-# The main server (port 8082 served by gunicorn)
-upstream app_server {
-    server 127.0.0.1:8082 fail_timeout=0;
-}
-
-# Redirect URLs without www
-server {
-        listen   80;
-        server_name astrobin.com;
-        rewrite ^/(.*) http://www.astrobin.com/$1 permanent;
-}
-
-server {
-    listen 80 default;
-    listen 443 default ssl;
-
-    # No upload limits
-    client_max_body_size 4G;
-
-    server_name www.astrobin.com;
-    error_page 502 503 /media/static/html/502.html;
-
-    # Logs
-    access_log /var/log/nginx/astrobin.com-access.log;
-    error_log /var/log/nginx/astrobin.com-error.log;
-
-    # Certs
-    ssl_certificate      /etc/ssl/localcerts/astrobin.com-ssl-bundle.crt;
-    ssl_certificate_key  /etc/ssl/localcerts/www.astrobin.com.key;
-
-    keepalive_timeout 5;
-    proxy_read_timeout 1200;
-
-    ## Compression
-    # src: http://www.ruby-forum.com/topic/141251
-    # src: http://wiki.brightbox.co.uk/docs:nginx
-
-    gzip on;
-    gzip_http_version 1.0;
-    gzip_comp_level 2;
-    gzip_proxied any;
-    gzip_min_length  1100;
-    gzip_buffers 16 8k;
-    gzip_types text/plain text/css application/x-javascript text/xml application/xml application/xml+rss text/javascript;
-
-    # Some version of IE 6 don't handle compression well on some mime-types, so just disable for them
-    gzip_disable "MSIE [1-6].(?!.*SV1)";
-
-    # Set a vary header so downstream proxies don't send cached gzipped content to IE6
-    gzip_vary on;
-    ## /Compression
-
-    # Serve static files
-    location /media/  {
-        root /var/www;
-        expires 30d;
-    }
-
-    # Faw RawData
-    location /tmpzips/  {
-        root /var/www;
-        expires 3d;
-    }
-
-    # Favicon
-    location /favicon.ico {
-        root /media/static;
-        expires max;
-    }
-
-    # Main server location
-    location / {
-        limit_req zone=bots burst=5 nodelay;
-        if ($request_uri ~* "^/robots.txt") {
-            rewrite ^/robots.txt /media/static/robots.txt permanent;
-        }
-
-        proxy_no_cache $http_pragma $http_authorization;
-        proxy_cache_bypass $http_pragma $http_authorization;
-
-        proxy_set_header X-Forwarded-For $proxy_add_x_forwarded_for;
-        proxy_set_header Host $http_host;
-        proxy_set_header HTTP_AUTHORIZATION $http_authorization;
-        proxy_redirect off;
-        if (!-f $request_filename) {
-            proxy_pass http://app_server;
-            break;
-        }
-    }
-}
+```bash
+# ENV could be prod or beta
+ENV=prod hyper compose up -f hyper-compose.yml -d
 ```
 
-## Gunicorn
+# Running regular tasks
 
-The actual app is served by gunicorn, which is controlled by supervisord. Your `/etc/supervisord/conf.d/gunicorn.conf` should look like this:
+AstroBin needs some tasks to be run regularly, so here's a `crontab` that you
+should use:
 
-```supervisord
-[program:gunicorn]
-command = /venv/astrobin/dev/bin/python manage.py run_gunicorn 0.0.0.0:8082 -w 9 -p gunicorn.pid
-directory = /var/www/astrobin/
-user = astrobin
-numprocs = 1
-stdout_logfile = /var/log/gunicorn/default.log
-stderr_logfile = /var/log/gunicorn/default.err
-autostart = true
-autorestart = true
-startsecs = 10
-environment =
-	DJANGO_SETTINGS_MODULE='settings',
-	... insert and configure all variables from env/example here ...
+```crontab
+MAILTO=admin@astrobin.com
+
+ASTROBIN_ROOT=/code
+PYTHON=python
+
+TMPZIPS=/media/tmpzips
+IMGCACH=/media/imagecache
+
+# Sync the old IOTD tables to the new ones, for API compatibility purposes.
+00 00 * * * (cd $ASTROBIN_ROOT; $PYTHON ./manage.py image_of_the_day) 2>&1 >/dev/null
+
+# Update the search index, which affects search, the Wall, the stats, and the AstroBin Index.
+00 03 * * * (cd $ASTROBIN_ROOT; $PYTHON ./manage.py update_index --remove --workers=2) 2>&1 >/dev/null
+
+# Try to remove Gear duplicates
+10 00 * * 0 (cd $ASTROBIN_ROOT; $PYTHON ./manage.py merge_gear) 2>&1 >/dev/null
+
+# Clean up "hits" to manage database disk space. We only care about the count after all.
+20 00 * * * (cd $ASTROBIN_ROOT; $PYTHON ./manage.py hitcount_cleanup) 2>&1 >/dev/null
+
+# CAREFUL! This will delete the users that own images marked as spam. Not enabled by default in this crontab.
+#30 00 * * * (cd $ASTROBIN_ROOT; $PYTHON ./manage.py delete_spammers) 2>&1 >/dev/null
+
+# Delete expired subscriptions so people may resubscribe eventually.
+00 05 * * * (cd $ASTROBIN_ROOT; $PYTHON ./manage.py fix_expired_subscriptions) 2>&1 >/dev/null
+
+# Send reminders about premium subscriptions about to expire.
+00 08 * * * (cd $ASTROBIN_ROOT; $PYTHON ./manage.py send_expiration_notifications) 2>&1 >/dev/null
+
+# Again to manage database dist space, old notifications should be deleted periodically.
+00 23 * * * (cd $ASTROBIN_ROOT; $PYTHON $ASTROBIN_ROOT/manage.py purge_old_notifications) 2>&1 >/dev/null
+
+# Updates some global website stats, only available to superusers.
+30 00 * * * (cd $ASTROBIN_ROOT; $PYTHON $ASTROBIN_ROOT/manage.py global_stats) 2>&1 >/dev/null
+
+# Clean up caches
+00 */1 * * * ($ASTROBIN_ROOT/scripts/contain_directory_size.sh $IMGCACH 5000000) 2>&1 >/dev/null
+10 01 * * * (find $TMPZIPS -type f -name "*.zip" -mtime +2 -exec rm -f {} \; 2>&1 >/dev/null)
+
+# Clean up temporary files
+00 05 * * * (rm -rf /tmp/tmp.fits.*; rm -rf /tmp/tmp.ppm.*; rm -rf /tmp/tmp*.upload) 2>&1 >/dev/null
 ```
 
-## Celery
+The following commands create the relevant cron jobs on Hyper.sh:
 
-AstroBin needs [celery](http://celery.readthedocs.io/en/latest/) to function properly. Celery is used for real-time searchi ndex updates and for RawData tasks.
+```bash
+hyper cron create \
+    --name iotd-sync \
+    --container-name sync-iotd \
+    --env-file=docker/astrobin.env \
+    --env-file=docker/secrets.env  \
+    --env-file=docker/postgres.env \
+    --hour=4 --minute=0 \
+    astrobin/astrobin python manage.py image_of_the_day
 
-You should serve celery via supervisord, and your `/etc/supervisord/conf.d/celery.conf` should look like this:
+hyper cron create \
+    --name merge-gear \
+    --container-name merge-gear \
+    --env-file=docker/astrobin.env \
+    --env-file=docker/secrets.env  \
+    --env-file=docker/postgres.env \
+    --hour=4 --minute=5 \
+    astrobin/astrobin python manage.py merge_gear
 
-```supervisord
-[program:celeryd]
-command = /venv/astrobin/dev/bin/python manage.py celeryd -Q default -c 2 -E --pidfile=celeryd.pid --logfile=celeryd.log
-directory = /var/www/astrobin
-user = astrobin
-numprocs = 1
-stdout_logfile = /var/log/celery/default.log
-stderr_logfile = /var/log/celery/default.err
-autostart = true
-autorestart = true
-startsecs = 10
-environment =
-	DJANGO_SETTINGS_MODULE='settings',
-	... insert and configure all variables from env/example here ...
+hyper cron create \
+    --name fix-expired-subscriptions \
+    --container-name fix-expired-subscriptions \
+    --env-file=docker/astrobin.env \
+    --env-file=docker/secrets.env  \
+    --env-file=docker/postgres.env \
+    --hour=4 --minute=10 \
+    astrobin/astrobin python manage.py fix_expired_subscriptions
+
+hyper cron create \
+    --name hitcount-cleanup \
+    --container-name hitcount-cleanup \
+    --env-file=docker/astrobin.env \
+    --env-file=docker/secrets.env  \
+    --env-file=docker/postgres.env \
+    --hour=4 --minute=15 \
+    astrobin/astrobin python manage.py hitcount_cleanup
+
+hyper cron create \
+    --name purge-old-notifications \
+    --container-name purge-old-notifications \
+    --env-file=docker/astrobin.env \
+    --env-file=docker/secrets.env  \
+    --env-file=docker/postgres.env \
+    --week=6 --hour=4 --minute=20 \
+    astrobin/astrobin python manage.py purge_old_notifications
+
+hyper cron create \
+    --name global-stats \
+    --container-name global-stats \
+    --env-file=docker/astrobin.env \
+    --env-file=docker/secrets.env  \
+    --env-file=docker/postgres.env \
+    --week=6 --hour=4 --minute=25 \
+    astrobin/astrobin python manage.py global_stats
+
+hyper cron create \
+    --name contain-image-cache \
+    --container-name contain-image-cache \
+    --env-file=docker/astrobin.env \
+    --env-file=docker/secrets.env  \
+    --env-file=docker/postgres.env \
+    --hour=4 --minute=30 \
+    hyperhq/hypercli \
+    hyper exec -it astrobin \
+    scripts/contain_directory_size.sh /media/imagecaghe 5000000
+
+hyper cron create \
+    --name contain-tmp-zips \
+    --container-name contain-tmp-zips \
+    --env-file=docker/astrobin.env \
+    --env-file=docker/secrets.env  \
+    --env-file=docker/postgres.env \
+    --hour=4 --minute=35 \
+    hyperhq/hypercli \
+    hyper exec -it astrobin \
+    find /media/tmpzips -type f -name "*.zip" -mtime +2 -exec rm -f {} \;
+
+hyper cron create \
+    --name update-index \
+    --container-name update-index \
+    --env-file=docker/astrobin.env \
+    --env-file=docker/secrets.env  \
+    --env-file=docker/postgres.env \
+    --hour=4 --minute=40 \
+    astrobin/astrobin python manage.py update_index --remove --workers=2
+
+hyper cron create \
+    --name send-expiration-notifications \
+    --container-name send-expiration-notifications \
+    --env-file=docker/astrobin.env \
+    --env-file=docker/secrets.env  \
+    --env-file=docker/postgres.env \
+    --hour=18 --minute=0 \
+    astrobin/astrobin python manage.py send_expiration_notifications
+
+hyper cron create \
+    --name renew-ssl \
+    --container-name renew-ssl \
+    --week=1 --hour=8 --minute=0 \
+    hyperhq/hypercli hyper exec nginx certbot renew
 ```
 
-## Postgresql
+Note: here's a shortcut to remove all hyper cron jobs:
+
+```bash
+hyper cron rm `hyper cron ls | awk '{print $1}' | grep -v Name`
+```
+
+# Postgresql
 
 The following indexes are recommended for your Postgresql server:
 
@@ -221,58 +309,28 @@ create index on hitcount_hit_count using btree(object_pk, content_type_id);
 create index on nested_comments_nestedcomment using btree(deleted, object_id);
  ```
 
-You may want to configure `work_mem` to be your RAM in GB, times 16, divided by the number of CPUs in your server.
+You may want to configure `work_mem` to be your RAM in GB, times 16, divided by
+the number of CPUs in your server.
 
+# Note on building the nginx container
 
-# Running regular tasks
+```bash
+export ENV=prod; docker build -t astrobin/nginx-${ENV} --build-arg ENV=${ENV} -f docker/nginx.dockerfile . && docker push astrobin/nginx-${ENV}
+export ENV=beta; docker build -t astrobin/nginx-${ENV} --build-arg ENV=${ENV} -f docker/nginx.dockerfile . && docker push astrobin/nginx-${ENV}
+```
 
-AstroBin needs some tasks to be run regularly, so here's a `crontab` that you should use:
+# Notes on HTTPS
 
-```crontab
-MAILTO=admin@astrobin.com
-
-ASTROBIN_ROOT=/var/www/astrobin
-PYTHON=/venv/astrobin/dev/bin/python
-
-TMPZIPS=/var/www/tmpzips
-IMGCACH=/var/www/media/imagecache
-
-# Sync the old IOTD tables to the new ones, for API compatibility purposes.
-00 00 * * * (. $ASTROBIN_ROOT/env/prod; cd $ASTROBIN_ROOT; $PYTHON ./manage.py image_of_the_day) 2>&1 >/dev/null
-
-# Update the search index, which affects search, the Wall, the stats, and the AstroBin Index.
-00 03 * * * (. $ASTROBIN_ROOT/env/prod; cd $ASTROBIN_ROOT; $PYTHON ./manage.py update_index --remove) 2>&1 >/dev/null
-
-# Try to remove Gear duplicates
-10 00 * * 0 (. $ASTROBIN_ROOT/env/prod; cd $ASTROBIN_ROOT; $PYTHON ./manage.py merge_gear) 2>&1 >/dev/null
-
-# Clean up "hits" to manage database disk space. We only care about the count after all.
-20 00 * * * (. $ASTROBIN_ROOT/env/prod; cd $ASTROBIN_ROOT; $PYTHON ./manage.py hitcount_cleanup) 2>&1 >/dev/null
-
-# CAREFUL! This will delete the users that own images marked as spam. Not enabled by default in this crontab.
-#30 00 * * * (. $ASTROBIN_ROOT/env/prod; cd $ASTROBIN_ROOT; $PYTHON ./manage.py delete_spammers) 2>&1 >/dev/null
-
-# Delete expired subscriptions so people may resubscribe eventually.
-00 05 * * * (. $ASTROBIN_ROOT/env/prod; cd $ASTROBIN_ROOT; $PYTHON ./manage.py fix_expired_subscriptions) 2>&1 >/dev/null
-
-# Send reminders about premium subscriptions about to expire.
-00 08 * * * (. $ASTROBIN_ROOT/env/prod; cd $ASTROBIN_ROOT; $PYTHON ./manage.py send_expiration_notifications) 2>&1 >/dev/null
-
-# Again to manage database dist space, old notifications should be deleted periodically.
-00 23 * * * (. $ASTROBIN_ROOT/env/prod; $PYTHON $ASTROBIN_ROOT/manage.py purge_old_notifications) 2>&1 >/dev/null
-
-# Updates some global website stats, only available to superusers.
-30 00 * * * (. $ASTROBIN_ROOT/env/prod; $PYTHON $ASTROBIN_ROOT/manage.py global_stats) 2>&1 >/dev/null
-
-# Clean up caches
-00 */1 * * * ($ASTROBIN_ROOT/scripts/contain_directory_size.sh $IMGCACH 5000000) 2>&1 >/dev/null
-10 01 * * * (find $TMPZIPS -type f -name "*.zip" -mtime +2 -exec rm -f {} \; 2>&1 >/dev/null)
-
-# Clean up temporary files
-00 05 * * * (rm -rf /tmp/tmp.fits.*; rm -rf /tmp/tmp.ppm.*; rm -rf /tmp/tmp*.upload) 2>&1 >/dev/null
+To generate a LetsEncrypt certificate within the Hyper container:
+```
+hyper exec nginx certbot --authenticator webroot \
+    --installer nginx --agree-tos -m astrobin@astrobin.com -n \
+    -d astrobin.com --webroot-path /etc/letsencrypt
 ```
 
 # Contributing
 
-AstroBin accepts contributions. Please fork the project and submit pull requests!
-If you need support, please use the [astrobin-dev Google Group](https://groups.google.com/forum/#!forum/astrobin-dev).
+AstroBin accepts contributions. Please fork the project and submit pull
+requests!
+If you need support, please use the [astrobin-dev Google
+Group](https://groups.google.com/forum/#!forum/astrobin-dev).

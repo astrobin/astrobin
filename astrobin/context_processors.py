@@ -81,7 +81,7 @@ def common_variables(request):
         'PREMIUM_MAX_IMAGES_LITE': settings.PREMIUM_MAX_IMAGES_LITE,
         'PAYPAL_TEST': settings.PAYPAL_TEST,
         'IOTD_SHOW_CHOOSING_JUDGE': settings.IOTD_SHOW_CHOOSING_JUDGE,
-        'SOLVING_ENABLED': settings.ASTROBIN_ENABLE_SOLVING,
+        'SOLVING_ENABLED': settings.ENABLE_SOLVING,
         'GOOGLE_ANALYTICS_ID': settings.GOOGLE_ANALYTICS_ID,
         'MEDIA_VERSION': settings.MEDIA_VERSION,
     }

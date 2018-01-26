@@ -18,7 +18,7 @@ class EditView(TemplateView):
     def get_context_data(self, **kwargs):
         context = super(EditView, self).get_context_data(**kwargs)
 
-        context['base_url'] = settings.ASTROBIN_BASE_URL
+        context['base_url'] = settings.BASE_URL
         context['business'] = settings.SUBSCRIPTION_PAYPAL_SETTINGS['business']
 
         context['monthly_coffee_sub'] = Subscription.objects.get(name = 'AstroBin Donor Coffee Monthly')

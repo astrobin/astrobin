@@ -97,25 +97,25 @@ class ImageRevisionResource(ModelResource):
         allowed_methods = ['get']
 
     def dehydrate_url_thumb(self, bundle):
-        return '%s/%d/%s/rawthumb/thumb/' % (settings.ASTROBIN_BASE_URL, bundle.obj.image.id, bundle.obj.label)
+        return '%s/%d/%s/rawthumb/thumb/' % (settings.BASE_URL, bundle.obj.image.id, bundle.obj.label)
 
     def dehydrate_url_gallery(self, bundle):
-        return '%s/%d/%s/rawthumb/gallery/' % (settings.ASTROBIN_BASE_URL, bundle.obj.image.id, bundle.obj.label)
+        return '%s/%d/%s/rawthumb/gallery/' % (settings.BASE_URL, bundle.obj.image.id, bundle.obj.label)
 
     def dehydrate_url_regular(self, bundle):
-        return '%s/%d/%s/rawthumb/regular/' % (settings.ASTROBIN_BASE_URL, bundle.obj.image.id, bundle.obj.label)
+        return '%s/%d/%s/rawthumb/regular/' % (settings.BASE_URL, bundle.obj.image.id, bundle.obj.label)
 
     def dehydrate_url_hd(self, bundle):
-        return '%s/%d/%s/rawthumb/hd/' % (settings.ASTROBIN_BASE_URL, bundle.obj.image.id, bundle.obj.label)
+        return '%s/%d/%s/rawthumb/hd/' % (settings.BASE_URL, bundle.obj.image.id, bundle.obj.label)
 
     def dehydrate_url_real(self, bundle):
-        return '%s/%d/%s/rawthumb/real/' % (settings.ASTROBIN_BASE_URL, bundle.obj.image.id, bundle.obj.label)
+        return '%s/%d/%s/rawthumb/real/' % (settings.BASE_URL, bundle.obj.image.id, bundle.obj.label)
 
     def dehydrate_url_duckduckgo(self, bundle):
-        return '%s/%d/%s/rawthumb/duckduckgo/' % (settings.ASTROBIN_BASE_URL, bundle.obj.image.id, bundle.obj.label)
+        return '%s/%d/%s/rawthumb/duckduckgo/' % (settings.BASE_URL, bundle.obj.image.id, bundle.obj.label)
 
     def dehydrate_url_duckduckgo_small(self, bundle):
-        return '%s/%d/%s/rawthumb/duckduckgo_small/' % (settings.ASTROBIN_BASE_URL, bundle.obj.image.id, bundle.obj.label)
+        return '%s/%d/%s/rawthumb/duckduckgo_small/' % (settings.BASE_URL, bundle.obj.image.id, bundle.obj.label)
 
     def dehydrate_is_solved(self, bundle):
         return bundle.obj.solution != None
@@ -232,25 +232,25 @@ class ImageResource(ModelResource):
         ordering = ['uploaded']
 
     def dehydrate_url_thumb(self, bundle):
-        return '%s/%d/0/rawthumb/thumb/' % (settings.ASTROBIN_BASE_URL, bundle.obj.id)
+        return '%s/%d/0/rawthumb/thumb/' % (settings.BASE_URL, bundle.obj.id)
 
     def dehydrate_url_gallery(self, bundle):
-        return '%s/%d/0/rawthumb/gallery/' % (settings.ASTROBIN_BASE_URL, bundle.obj.id)
+        return '%s/%d/0/rawthumb/gallery/' % (settings.BASE_URL, bundle.obj.id)
 
     def dehydrate_url_regular(self, bundle):
-        return '%s/%d/0/rawthumb/regular/' % (settings.ASTROBIN_BASE_URL, bundle.obj.id)
+        return '%s/%d/0/rawthumb/regular/' % (settings.BASE_URL, bundle.obj.id)
 
     def dehydrate_url_hd(self, bundle):
-        return '%s/%d/0/rawthumb/hd/' % (settings.ASTROBIN_BASE_URL, bundle.obj.id)
+        return '%s/%d/0/rawthumb/hd/' % (settings.BASE_URL, bundle.obj.id)
 
     def dehydrate_url_real(self, bundle):
-        return '%s/%d/0/rawthumb/real/' % (settings.ASTROBIN_BASE_URL, bundle.obj.id)
+        return '%s/%d/0/rawthumb/real/' % (settings.BASE_URL, bundle.obj.id)
 
     def dehydrate_url_duckduckgo(self, bundle):
-        return '%s/%d/0/rawthumb/duckduckgo/' % (settings.ASTROBIN_BASE_URL, bundle.obj.id)
+        return '%s/%d/0/rawthumb/duckduckgo/' % (settings.BASE_URL, bundle.obj.id)
 
     def dehydrate_url_duckduckgo_small(self, bundle):
-        return '%s/%d/0/rawthumb/duckduckgo_small/' % (settings.ASTROBIN_BASE_URL, bundle.obj.id)
+        return '%s/%d/0/rawthumb/duckduckgo_small/' % (settings.BASE_URL, bundle.obj.id)
 
     def dehydrate_is_solved(self, bundle):
         return bundle.obj.solution != None
