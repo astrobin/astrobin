@@ -8,10 +8,6 @@ local_path = lambda path: os.path.join(os.path.dirname(__file__), path)
 
 TESTING = len(sys.argv) > 1 and sys.argv[1] == 'test'
 DEBUG = os.environ['ASTROBIN_DEBUG'] == "true"
-try:
-    DEBUG_TOOLBAR = DEBUG and os.environ['ASTROBIN_DEBUG_TOOLBAR'] == 'true'
-except KeyError:
-    DEBUG_TOOLBAR = False
 ALLOWED_HOSTS = ['*']
 TEMPLATE_DEBUG = DEBUG
 MAINTENANCE_MODE = False
@@ -180,10 +176,6 @@ if not TESTING and not DEBUG:
         'django.middleware.locale.LocaleMiddleware',
         'django.middleware.gzip.GZipMiddleware',
     ]
-if DEBUG_TOOLBAR:
-    MIDDLEWARE_CLASSES += [
-        'debug_toolbar.middleware.DebugToolbarMiddleware',
-    ]
 MIDDLEWARE_CLASSES += [
     'django.middleware.http.ConditionalGetMiddleware',
     'django.middleware.common.CommonMiddleware',
@@ -196,6 +188,7 @@ MIDDLEWARE_CLASSES += [
     'gadjo.requestprovider.middleware.RequestProvider',
 #    'pipeline.middleware.MinifyHTMLMiddleware', Enable after dealing with the blank spaces everywhere
     'pybb.middleware.PybbMiddleware',
+    'silk.middleware.SilkyMiddleware',
 ]
 if not TESTING and DEBUG:
     MIDDLEWARE_CLASSES += [
@@ -273,6 +266,7 @@ INSTALLED_APPS = [
     'sanitizer',
     'precise_bbcode',
     'django_bootstrap_breadcrumbs',
+    'silk',
 
     # AstroBin apps
     'astrobin.apps.AstroBinAppConfig',
@@ -289,8 +283,6 @@ INSTALLED_APPS = [
     'astrobin_apps_iotd',
     'toggleproperties',
 ]
-if DEBUG_TOOLBAR:
-    INSTALLED_APPS += ['debug_toolbar',]
 
 LOGIN_REDIRECT_URL = '/'
 ACCOUNT_ACTIVATION_DAYS = 7
@@ -329,32 +321,6 @@ HAYSTACK_CONNECTIONS = {
 }
 #if not TESTING:
     #HAYSTACK_SIGNAL_PROCESSOR = 'celery_haystack.signals.CelerySignalProcessor'
-
-
-#INTERNAL_IPS = ('88.115.221.254',) # for django-debug-toolbar: add own local IP to enable
-if DEBUG_TOOLBAR:
-    INTERNAL_IPS = ('127.0.0.2', '10.0.0.2',)
-    DEBUG_TOOLBAR_CONFIG = {
-        "SHOW_TOOLBAR_CALLBACK" : 'astrobin.debug_toolbar_conf.show_debug_toolbar',
-    }
-    DEBUG_TOOLBAR_PANELS = [
-        # Default
-        'debug_toolbar.panels.versions.VersionsPanel',
-        'debug_toolbar.panels.timer.TimerPanel',
-        'debug_toolbar.panels.settings.SettingsPanel',
-        'debug_toolbar.panels.headers.HeadersPanel',
-        'debug_toolbar.panels.request.RequestPanel',
-        'debug_toolbar.panels.sql.SQLPanel',
-        'debug_toolbar.panels.staticfiles.StaticFilesPanel',
-        'debug_toolbar.panels.templates.TemplatesPanel',
-        'debug_toolbar.panels.cache.CachePanel',
-        'debug_toolbar.panels.signals.SignalsPanel',
-        'debug_toolbar.panels.logging.LoggingPanel',
-        'debug_toolbar.panels.redirects.RedirectsPanel',
-
-        # Added by us
-        'debug_toolbar.panels.profiling.ProfilingPanel',
-]
 
 MESSAGE_STORAGE = 'persistent_messages.storage.PersistentMessageStorage'
 
@@ -733,3 +699,13 @@ IOTD_SHOW_CHOOSING_JUDGE = False
 
 MIN_INDEX_TO_LIKE = float(os.environ['ASTROBIN_MIN_INDEX_TO_LIKE'])
 GOOGLE_ANALYTICS_ID = os.environ['ASTROBIN_GOOGLE_ANALYTICS_ID']
+
+SILKY_PYTHON_PROFILER = True
+SILKY_PYTHON_PROFILER_BINARY = True
+SILKY_AUTHENTICATION = True
+SILKY_AUTHORISATION = True
+SILKY_PERMISSIONS = lambda user: user.is_superuser
+SILKY_META = True
+
+
+

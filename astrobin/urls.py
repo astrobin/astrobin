@@ -449,8 +449,5 @@ urlpatterns = [
     url(r'^language/set/(?P<lang>[\w-]+)/$',set_language, name='set_language'),
 ] + static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT);
 
-if settings.DEBUG_TOOLBAR:
-    import debug_toolbar
-    urlpatterns += [
-        url(r'^__debug__/', include(debug_toolbar.urls)),
-    ]
+urlpatterns += [url(r'^silk/', include('silk.urls', namespace='silk'))]
+
