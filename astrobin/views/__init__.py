@@ -46,6 +46,7 @@ from haystack.exceptions import SearchFieldError
 from haystack.query import SearchQuerySet
 from reviews.views import ReviewAddForm
 import persistent_messages
+from silk.profiling.profiler import silk_profile
 
 # AstroBin apps
 from astrobin_apps_notifications.types import NOTICE_TYPES
@@ -226,6 +227,7 @@ def jsonDump(all):
 
 @page_template('index/stream_page.html', key = 'stream_page')
 @page_template('index/recent_images_page.html', key = 'recent_images_page')
+@silk_profile('Index')
 def index(request, template = 'index/root.html', extra_context = None):
     """Main page"""
     from django.core.cache import cache
@@ -875,6 +877,7 @@ def me(request):
 
 
 @require_GET
+@silk_profile('User page')
 def user_page(request, username):
     """Shows the user's public page"""
     user = get_object_or_404(User, username = username)
