@@ -180,6 +180,7 @@ MIDDLEWARE_CLASSES += [
     'django.middleware.http.ConditionalGetMiddleware',
     'django.middleware.common.CommonMiddleware',
     'django.contrib.sessions.middleware.SessionMiddleware',
+    'silk.middleware.SilkyMiddleware',
     'django.contrib.auth.middleware.AuthenticationMiddleware',
     'django.middleware.csrf.CsrfViewMiddleware',
     'django.contrib.messages.middleware.MessageMiddleware',
@@ -188,7 +189,6 @@ MIDDLEWARE_CLASSES += [
     'gadjo.requestprovider.middleware.RequestProvider',
 #    'pipeline.middleware.MinifyHTMLMiddleware', Enable after dealing with the blank spaces everywhere
     'pybb.middleware.PybbMiddleware',
-    'silk.middleware.SilkyMiddleware',
 ]
 if not TESTING and DEBUG:
     MIDDLEWARE_CLASSES += [
