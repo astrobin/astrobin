@@ -1750,7 +1750,7 @@ def user_profile_flickr_import(request):
     if not flickr.token_valid(perms=u'read'):
         # We were never authenticated, or authentication expired. We need
         # to reauthenticate.
-        flickr.get_request_token(settings.ASTROBIN_BASE_URL + reverse('flickr_auth_callback'))
+        flickr.get_request_token(settings.BASE_URL + reverse('flickr_auth_callback'))
         authorize_url = flickr.auth_url(perms=u'read')
         request.session['request_token'] = flickr.flickr_oauth.resource_owner_key
         request.session['request_token_secret'] = flickr.flickr_oauth.resource_owner_secret
@@ -2737,7 +2737,7 @@ def gear_review_save(request):
             'Accessory': 'accessories',
         }
 
-        url = '%s/gear/%d#r%d' % (settings.ASTROBIN_BASE_URL, gear.id, review.id)
+        url = '%s/gear/%d#r%d' % (settings.BASE_URL, gear.id, review.id)
         recipients = [x.user for x in UserProfile.objects.filter(
             **{user_attr_lookup[gear_type]: gear})]
         notification = 'new_gear_review'

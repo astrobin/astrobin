@@ -91,7 +91,7 @@ def image_post_save(sender, instance, created, **kwargs):
 
             push_notification(followers, 'new_image',
                 {
-                    'object_url': settings.ASTROBIN_BASE_URL + instance.get_absolute_url(),
+                    'object_url': settings.BASE_URL + instance.get_absolute_url(),
                     'originator': instance.user.userprofile.get_display_name(),
                 })
 
@@ -132,7 +132,7 @@ def imagerevision_post_save(sender, instance, created, **kwargs):
 
         push_notification(followers, 'new_image_revision',
             {
-                'object_url': settings.ASTROBIN_BASE_URL + instance.get_absolute_url(),
+                'object_url': settings.BASE_URL + instance.get_absolute_url(),
                 'originator': instance.user.userprofile.get_display_name(),
             })
 
@@ -232,7 +232,7 @@ def toggleproperty_post_save(sender, instance, created, **kwargs):
                 push_notification(
                     [instance.content_object.user], 'new_' + instance.property_type,
                     {
-                        'url': settings.ASTROBIN_BASE_URL + instance.content_object.get_absolute_url(),
+                        'url': settings.BASE_URL + instance.content_object.get_absolute_url(),
                         'title': instance.content_object.title,
                         'user': instance.user.userprofile.get_display_name(),
                     })
@@ -391,7 +391,7 @@ def solution_post_save(sender, instance, created, **kwargs):
         return
 
     push_notification([user], notification,
-        {'object_url': settings.ASTROBIN_BASE_URL + target.get_absolute_url()})
+        {'object_url': settings.BASE_URL + target.get_absolute_url()})
 post_save.connect(solution_post_save, sender = Solution)
 
 
@@ -461,7 +461,7 @@ def group_post_save(sender, instance, created, **kwargs):
                 {
                     'creator': instance.creator.userprofile.get_display_name(),
                     'group_name': instance.name,
-                    'url': settings.ASTROBIN_BASE_URL + reverse_url('group_detail', args = (instance.pk,)),
+                    'url': settings.BASE_URL + reverse_url('group_detail', args = (instance.pk,)),
                 })
 
             add_story(
@@ -505,7 +505,7 @@ def group_members_changed(sender, instance, **kwargs):
                         {
                             'user': user.userprofile.get_display_name(),
                             'group_name': instance.name,
-                            'url': settings.ASTROBIN_BASE_URL + reverse_url('group_detail', args = (instance.pk,)),
+                            'url': settings.BASE_URL + reverse_url('group_detail', args = (instance.pk,)),
                         })
 
                     add_story(
@@ -610,7 +610,7 @@ def forum_topic_pre_save(sender, instance, **kwargs):
                 'new_topic_in_group',
                 {
                     'user': instance.user.userprofile.get_display_name(),
-                    'url': settings.ASTROBIN_BASE_URL + instance.get_absolute_url(),
+                    'url': settings.BASE_URL + instance.get_absolute_url(),
                     'group_url': reverse_url('group_detail', kwargs = {'pk': group.pk}),
                     'group_name': group.name,
                     'topic_title': instance.name,
@@ -634,8 +634,8 @@ def forum_topic_post_save(sender, instance, created, **kwargs):
             'new_topic_in_group',
             {
                 'user': instance.user.userprofile.get_display_name(),
-                'url': settings.ASTROBIN_BASE_URL + instance.get_absolute_url(),
-                'group_url': settings.ASTROBIN_BASE_URL + reverse_url('group_detail', kwargs = {'pk': group.pk}),
+                'url': settings.BASE_URL + instance.get_absolute_url(),
+                'group_url': settings.BASE_URL + reverse_url('group_detail', kwargs = {'pk': group.pk}),
                 'group_name': group.name,
                 'topic_title': instance.name,
             },

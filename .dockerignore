@@ -1,3 +1,6 @@
+.git
+.gitignore
+.dockerignore
 .DS_Store
 *.Plo
 *.Po
@@ -16,11 +19,8 @@
 *.log
 *.err
 *.po~
+*.sql.gz
 .dirstamp
-cover/
 .coverage
-env/dev
+/cover
 /src
-/docker/astrobin.env
-/docker/secrets.env
-/ssl-certs
