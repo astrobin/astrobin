@@ -1,5 +1,6 @@
 # Django
 from django.conf import settings
+from django.core.cache import cache
 from django.contrib.auth.models import User
 from django.contrib.contenttypes.models import ContentType
 from django.template import Library, Node
@@ -24,56 +25,65 @@ def astrobin_username(user, **kwargs):
         except User.DoesNotExist:
             return {'user': None}
 
-    display_name = user.userprofile.get_display_name()
-    is_superuser = user.is_superuser
-    is_image_moderator = user.userprofile.is_image_moderator()
-    is_iotd_staff = user.userprofile.is_iotd_staff()
-    is_iotd_submitter = user.userprofile.is_iotd_submitter()
-    is_iotd_reviewer = user.userprofile.is_iotd_reviewer()
-    is_iotd_judge = user.userprofile.is_iotd_judge()
-    is_premium = premium_user_has_valid_subscription(user)
+    cache_key = 'user_metadata_' + user.username
+    user_metadata = cache.get(cache_key)
+    if user_metadata is None:
+        user_metadata = {}
+        user_metadata['display_name'] = user.userprofile.get_display_name()
+        user_metadata['is_superuser'] = user.is_superuser
+        user_metadata['is_image_moderator'] = user.userprofile.is_image_moderator()
+        user_metadata['is_iotd_staff'] = user.userprofile.is_iotd_staff()
+        user_metadata['is_iotd_submitter'] = user.userprofile.is_iotd_submitter()
+        user_metadata['is_iotd_reviewer'] = user.userprofile.is_iotd_reviewer()
+        user_metadata['is_iotd_judge'] = user.userprofile.is_iotd_judge()
+        user_metadata['is_premium'] = premium_user_has_valid_subscription(user)
+        cache.set(cache_key, user_metadata, 600)
+    else:
+        display_name = user_metadata['display_name']
+        is_superuser = user_metadata['is_superuser']
+        is_image_moderator = user_metadata['is_image_moderator']
+        is_iotd_staff = user_metadata['is_iotd_staff']
+        is_iotd_submitter = user_metadata['is_iotd_submitter']
+        is_iotd_reviewer = user_metadata['is_iotd_reviewer']
+        is_iotd_judge = user_metadata['is_iotd_judge']
+        is_premium = user_metadata['is_premium']
 
     classes = ['astrobin-username']
     titles = []
 
-    if is_superuser:
+    if user_metadata['is_superuser']:
         classes.append('astrobin-superuser')
         titles.append(_('Administrator'))
 
-    if is_image_moderator:
+    if user_metadata['is_image_moderator']:
         classes.append('astrobin-image-moderator')
         titles.append(_('Image moderator'))
 
-    if is_iotd_staff:
+    if user_metadata['is_iotd_staff']:
         classes.append(' astrobin-iotd-staff')
 
-    if is_iotd_submitter:
+    if user_metadata['is_iotd_submitter']:
         classes.append(' astrobin-iotd-submitter')
         titles.append(_('IOTD Submitter'))
 
-    if is_iotd_reviewer:
+    if user_metadata['is_iotd_reviewer']:
         classes.append(' astrobin-iotd-reviewer')
         titles.append(_('IOTD Reviewer'))
 
-    if is_iotd_judge:
+    if user_metadata['is_iotd_judge']:
         classes.append(' astrobin-iotd-judge')
         titles.append(_('IOTD Judge'))
 
-    if is_premium:
+    if user_metadata['is_premium']:
         classes.append(' astrobin-premium-member')
         titles.append(_('Premium member'))
 
-    return {
+    return user_metadata.update({
         'user': user,
-        'display_name': display_name,
-        'is_superuser': is_superuser,
-        'is_image_moderator': is_image_moderator,
-        'is_iotd_staff': is_iotd_staff,
-        'is_premium': is_premium,
         'classes': classes,
         'titles': titles,
         'link': kwargs.get('link', True),
-    }
+    })
 
 
 @register.inclusion_tag('astrobin_apps_users/inclusion_tags/astrobin_user.html', takes_context = True)
