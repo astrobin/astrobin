@@ -1,11 +1,14 @@
 {% load astrobin_apps_premium_tags %}
 {% load astrobin_apps_images_tags %}
 {% load avatar_tags %}
+{% load cache %}
 {% load i18n %}
 {% load tags %}
 
-{% if action.verb|startswith:"VERB_" and user.username != '' %}
 
+{% cache 600 actstream_action action.verb action.actork action.action_object action.target user_language %}
+
+{% if action.verb|startswith:"VERB_" and user.username != '' %}
 <div class="action"
      id="{{action.verb}}.{{action.actor.pk}}.{{action.action_object.pk}}{% if action.target %}.{{action.target.pk}}{% endif %}">
 
@@ -254,5 +257,7 @@
     {% endif %}
 
 </div>
-
 {% endif %} {# action strts with VERB_ #}
+
+{% endcache %}
+
