@@ -82,7 +82,7 @@ def donor_badge(user, size = 'large'):
 
 @register.filter
 def is_donor(user):
-    if user.is_authenticated():
+    if settings.DONATIONS_ENABLED and user.is_authenticated():
         us = UserSubscription.objects.filter(
             Q(user = user) &
             Q(
@@ -110,7 +110,7 @@ def is_donor(user):
 
 @register.filter
 def has_donation_subscription(user, name):
-    if user.is_authenticated():
+    if settings.DONATIONS_ENABLED and user.is_authenticated():
         us = UserSubscription.objects.filter(
             Q(user = user) & Q(subscription__name = name))
 
@@ -138,7 +138,7 @@ def donation_form_selected(context, name):
 
 @register.simple_tag
 def user_donation_subscription(user):
-    if user.is_authenticated():
+    if settings.DONATIONS_ENABLED and user.is_authenticated():
         try:
             us = UserSubscription.objects.get(
                 Q(user = user) &
@@ -165,17 +165,19 @@ def user_donation_subscription(user):
 
 @register.simple_tag
 def user_donation_subscription_name(user):
-    us = user_donation_subscription(user)
-    if us:
-        return us.name
+    if settings.DONATIONS_ENABLED:
+        us = user_donation_subscription(user)
+        if us:
+            return us.name
     return ''
 
 
 @register.simple_tag
 def user_donation_subscription_id(user):
-    us = user_donation_subscription(user)
-    if us:
-        return us.id
+    if settings.DONATIONS_ENABLED:
+        us = user_donation_subscription(user)
+        if us:
+            return us.id
     return 0
 
 
