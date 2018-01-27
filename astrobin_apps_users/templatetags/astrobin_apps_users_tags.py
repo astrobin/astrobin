@@ -78,12 +78,15 @@ def astrobin_username(user, **kwargs):
         classes.append(' astrobin-premium-member')
         titles.append(_('Premium member'))
 
-    return user_metadata.update({
+    context = user_metadata.copy()
+    context.update({
         'user': user,
         'classes': classes,
         'titles': titles,
         'link': kwargs.get('link', True),
     })
+
+    return context
 
 
 @register.inclusion_tag('astrobin_apps_users/inclusion_tags/astrobin_user.html', takes_context = True)
