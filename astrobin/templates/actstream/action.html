@@ -4,21 +4,32 @@
 {% load cache %}
 {% load i18n %}
 {% load tags %}
+{% load common_tags %}
 
 {% if action.verb|startswith:"VERB_" and user.username != '' %}
 
-{% comment %}
-  The like mini-button is outside of the cache section because we cache for all
-  users with the same language, but the like button is the only thing that is
-  user specific there.
-{% endcomment %}
-{% if action.action_object.__class__ == 'image' or action.target.__class__ == 'image' %}
-    {% include 'actstream/_action_image_like.html' %}
-{% endif %}
-
 <div class="action"
      id="{{action.verb}}.{{action.actor.pk}}.{{action.action_object.pk}}{% if action.target %}.{{action.target.pk}}{% endif %}">
-{% cache 600 actstream_action action.verb action.actor action.action_object action.target user_language %}
+
+    {% comment %}
+      The like mini-button is outside of the cache section because we cache for all
+      users with the same language, but the like button is the only thing that is
+      user specific there.
+    {% endcomment %}
+    {% if action.action_object|get_class == 'Image' %}
+        {% with image=action.action_object %}
+            {% include 'actstream/_action_image_like.html' %}
+        {% endwith %}
+    {% endif %}
+
+    {% if action.target|get_class == 'Image' %}
+        {% with image=action.target %}
+            {% include 'actstream/_action_image_like.html' %}
+        {% endwith %}
+    {% endif %}
+
+    {% cache 600 actstream_action action.verb action.actor action.action_object action.target user_language %}
+
     {% if action.verb == 'VERB_UPLOADED_IMAGE' %}
         {% with image=action.action_object user=action.actor %}
             {% include 'actstream/_action_avatar.html' %}
@@ -256,7 +267,9 @@
             </div>
         {% endwith %}
     {% endif %}
-{% endcache %}
-</div>
+
+    {% endcache %}
+
+</div> <!-- action -->
 
 {% endif %} {# action strts with VERB_ #}

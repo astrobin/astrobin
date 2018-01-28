@@ -3090,6 +3090,25 @@ form.avatar-change label.control-label {
 .activity-actions .action:nth-child(odd) {
   margin-right: 16px;
 }
+.activity-actions .action .toggleproperty-add-remove {
+  position: absolute;
+  top: 12px;
+  right: 12px;
+  z-index: 2;
+  margin: 0;
+  width: 30px;
+}
+.activity-actions .action .toggleproperty-add-remove button {
+  font-size: 12px;
+  line-height: 12px;
+  padding: 6px;
+}
+.activity-actions .action .toggleproperty-add-remove .icon {
+  line-height: 26px;
+}
+.activity-actions .action .toggleproperty-add-remove .toggleproperties-label {
+  display: none;
+}
 .activity-actions .action .avatar {
   max-width: 64px;
   position: absolute;
@@ -3145,25 +3164,6 @@ form.avatar-change label.control-label {
 .activity-actions .action .action-object .title > .inner a {
   display: table;
   font-weight: normal;
-}
-.activity-actions .action .action-object .toggleproperty-add-remove {
-  position: absolute;
-  top: 12px;
-  right: 12px;
-  z-index: 1;
-  margin: 0;
-  width: 30px;
-}
-.activity-actions .action .action-object .toggleproperty-add-remove button {
-  font-size: 12px;
-  line-height: 12px;
-  padding: 6px;
-}
-.activity-actions .action .action-object .toggleproperty-add-remove .icon {
-  line-height: 26px;
-}
-.activity-actions .action .action-object .toggleproperty-add-remove .toggleproperties-label {
-  display: none;
 }
 .activity-actions .action .action-object.has-like-button .title .inner {
   padding-right: 80px;
