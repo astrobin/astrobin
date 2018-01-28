@@ -152,3 +152,7 @@ def truncatechars(value, arg):
 truncatechars.is_safe = True
 truncatechars = stringfilter(truncatechars)
 
+
+@register.filter(name='get_class')
+def get_class(value):
+  return value.__class__.__name__

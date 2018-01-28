@@ -12,7 +12,7 @@ ALLOWED_HOSTS = ['*']
 TEMPLATE_DEBUG = DEBUG
 MAINTENANCE_MODE = False
 READONLY_MODE = False
-MEDIA_VERSION = '223'
+MEDIA_VERSION = '224'
 LONGPOLL_ENABLED = False
 ADS_ENABLED = os.environ['ASTROBIN_ADS_ENABLED'] == 'true'
 DONATIONS_ENABLED = os.environ['ASTROBIN_DONATIONS_ENABLED'] == 'true'
@@ -196,7 +196,7 @@ if not TESTING and DEBUG:
     ]
 
 SESSION_ENGINE = "django.contrib.sessions.backends.cache"
-if TESTING:
+if TESTING or DEBUG:
     SESSION_ENGINE = "django.contrib.sessions.backends.cached_db"
 
 ROOT_URLCONF = 'astrobin.urls'
