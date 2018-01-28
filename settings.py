@@ -194,7 +194,10 @@ if not TESTING and DEBUG:
     MIDDLEWARE_CLASSES += [
         'astrobin.middlewares.prof.ProfileMiddleware',
     ]
+
 SESSION_ENGINE = "django.contrib.sessions.backends.cache"
+if TESTING:
+    SESSION_ENGINE = "django.contrib.sessions.backends.cached_db"
 
 ROOT_URLCONF = 'astrobin.urls'
 
@@ -291,20 +294,28 @@ AUTH_PROFILE_MODULE = 'astrobin.UserProfile'
 FLICKR_API_KEY = os.environ['ASTROBIN_FLICKR_API_KEY']
 FLICKR_SECRET  = os.environ['ASTROBIN_FLICKR_SECRET']
 
-if TESTING or DEBUG:
+JOHNNY_MIDDLEWARE_KEY_PREFIX='jc_astrobin'
+CACHES = {
+    'default': {
+        'BACKEND': 'django.core.cache.backends.memcached.MemcachedCache',
+        'LOCATION': '127.0.0.1:11211',
+    },
+}
+
+if DEBUG:
     CACHES = {
         'default': {
             'BACKEND': 'django.core.cache.backends.locmem.LocMemCache',
         }
     }
-else:
+
+if TESTING:
     CACHES = {
         'default': {
-            'BACKEND': 'django.core.cache.backends.memcached.MemcachedCache',
-            'LOCATION': '127.0.0.1:11211',
-        },
+            'BACKEND': 'django.core.cache.backends.dummy.DummyCache',
+        }
     }
-    JOHNNY_MIDDLEWARE_KEY_PREFIX='jc_astrobin'
+
 
 HAYSTACK_DEFAULT_OPERATOR = 'AND'
 HAYSTACK_SEARCH_RESULTS_PER_PAGE = 70
