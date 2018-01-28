@@ -6,7 +6,7 @@
 {% load tags %}
 
 
-{% cache 600 actstream_action action.verb action.actork action.action_object action.target user_language %}
+{% cache 600 actstream_action action.verb action.actor action.action_object action.target user_language %}
 
 {% if action.verb|startswith:"VERB_" and user.username != '' %}
 <div class="action"
