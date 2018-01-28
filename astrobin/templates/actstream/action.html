@@ -5,13 +5,20 @@
 {% load i18n %}
 {% load tags %}
 
-
-{% cache 600 actstream_action action.verb action.actor action.action_object action.target user_language %}
-
 {% if action.verb|startswith:"VERB_" and user.username != '' %}
+
+{% comment %}
+  The like mini-button is outside of the cache section because we cache for all
+  users with the same language, but the like button is the only thing that is
+  user specific there.
+{% endcomment %}
+{% if action.action_object.__class__ == 'image' or action.target.__class__ == 'image' %}
+    {% include 'actstream/_action_image_like.html' %}
+{% endif %}
+
 <div class="action"
      id="{{action.verb}}.{{action.actor.pk}}.{{action.action_object.pk}}{% if action.target %}.{{action.target.pk}}{% endif %}">
-
+{% cache 600 actstream_action action.verb action.actor action.action_object action.target user_language %}
     {% if action.verb == 'VERB_UPLOADED_IMAGE' %}
         {% with image=action.action_object user=action.actor %}
             {% include 'actstream/_action_avatar.html' %}
@@ -26,7 +33,6 @@
                 </div>
                 {% astrobin_image image 'story' nav_ctx='user' %}
                 {% include 'actstream/_action_image_title.html' %}
-                {% include 'actstream/_action_image_like.html' %}
             </div>
         {% endwith %}
     {% endif %}
@@ -45,7 +51,6 @@
                 </div>
                 {% astrobin_image image 'story' revision=revision.label nav_ctx='user' %}
                 {% include 'actstream/_action_image_title.html' %}
-                {% include 'actstream/_action_image_like.html' %}
             </div>
         {% endwith %}
     {% endif %}
@@ -70,7 +75,6 @@
                 </div>
                 {% astrobin_image image 'story' nav_ctx='user' %}
                 {% include 'actstream/_action_image_title.html' %}
-                {% include 'actstream/_action_image_like.html' %}
             </div>
         {% endwith %}
     {% endif %}
@@ -95,7 +99,6 @@
                 </div>
                 {% astrobin_image image 'story' nav_ctx='user' %}
                 {% include 'actstream/_action_image_title.html' %}
-                {% include 'actstream/_action_image_like.html' %}
             </div>
         {% endwith %}
     {% endif %}
@@ -124,7 +127,6 @@
                 </div>
                 {% astrobin_image image 'story' nav_ctx='user' %}
                 {% include 'actstream/_action_image_title.html' %}
-                {% include 'actstream/_action_image_like.html' %}
             </div>
         {% endwith %}
     {% endif %}
@@ -199,7 +201,6 @@
                 </div>
                 {% astrobin_image image 'story' nav_ctx='user' %}
                 {% include 'actstream/_action_image_title.html' %}
-                {% include 'actstream/_action_image_like.html' %}
             </div>
         {% endwith %}
     {% endif %}
@@ -255,9 +256,7 @@
             </div>
         {% endwith %}
     {% endif %}
-
-</div>
-{% endif %} {# action strts with VERB_ #}
-
 {% endcache %}
+</div>
 
+{% endif %} {# action strts with VERB_ #}
