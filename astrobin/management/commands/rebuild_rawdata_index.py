@@ -8,12 +8,12 @@ from rawdata.tasks import index_raw_image
 class Command(BaseCommand):
     help = "Rebuilds the raw data index for a specific user"
 
-    def handle(self, *args, **options):
-        if len(args) == 0:
-            print "Usage: rebuild_rawdata_index <username>"
-            return
+    def add_arguments(self, parser):
+        parser.add_argument('username')
 
-        username = args[0]
+    def handle(self, *args, **options):
+        username = options['username']
+
         try:
             user = User.objects.get(username = username)
         except User.DoesNotExist:

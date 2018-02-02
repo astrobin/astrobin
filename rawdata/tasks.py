@@ -12,7 +12,7 @@ import PySide.QtCore
 import PyABC as abc
 
 # This app
-from .models import RawImage, TemporaryArchive
+from .models import RawImage, TemporaryArchive, upload_path
 
 @shared_task()
 def index_raw_image(id):
@@ -22,7 +22,7 @@ def index_raw_image(id):
         return
 
     abc_image = abc.Image()
-    abc_image.load(image.file.path, image.original_filename)
+    abc_image.load(image.file.name, image.original_filename)
 
     image.image_type = abc_image.type()
     image.acquisition_date = abc_image.observationDate()
@@ -44,7 +44,20 @@ def prepare_zip(image_ids, owner_id, temp_archive_id, folder_or_pool = None):
         image = RawImage.objects.get(id = image_id)
         if not image.active:
             continue
-        archive.write(image.file.path, image.original_filename)
+
+        # Files before the migration to docker will be like '$userId/filename',
+        # while files after will ne 'rawdata/files/$userId/filename'.
+        path = image.file.name
+        if not path.startswith('rawdata/files/'):
+            path = 'rawdata/files/' + path
+
+        try:
+            remote_file = image.file.storage._open(path)
+        except IOError:
+            # The remote file does not exist.
+            continue
+
+        archive.writestr(image.original_filename, remote_file.read())
 
     archive.close()
 

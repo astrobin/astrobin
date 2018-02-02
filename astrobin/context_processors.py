@@ -74,6 +74,7 @@ def common_variables(request):
         'is_retailer': request.user.groups.filter(name='Retailers'),
         'rawdata_has_subscription': rawdata_user_has_valid_subscription(request.user),
         'IMAGES_URL' : settings.IMAGES_URL,
+        'MEDIA_URL' : settings.MEDIA_URL,
         'ADS_ENABLED': settings.ADS_ENABLED,
         'DONATIONS_ENABLED': settings.DONATIONS_ENABLED,
         'PREMIUM_ENABLED': settings.PREMIUM_ENABLED,
