@@ -491,8 +491,6 @@ REST_FRAMEWORK = {
     )
 }
 
-RAWDATA_ROOT = os.path.join(MEDIA_ROOT, 'rawdata')
-
 # See http://docs.djangoproject.com/en/dev/topics/logging for
 # more details on how to customize your logging configuration.
 LOGGING = {

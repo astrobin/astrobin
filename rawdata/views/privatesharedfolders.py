@@ -174,11 +174,6 @@ class PrivateSharedFolderDetailView(RestrictToInviteeMixin, DetailView):
 class PrivateSharedFolderDownloadView(RestrictToInviteeMixin, base.View):
     def get(self, request, *args, **kwargs):
         folder = get_object_or_404(PrivateSharedFolder, pk = kwargs.pop('pk'))
-        if folder.archive and path.exists(folder.archive.file.path):
-            return HttpResponseRedirect(
-                reverse('rawdata.temporary_archive_detail',
-                        args=(folder.archive.pk,)))
-
         response = serve_zip(folder.images.all(), self.request.user, folder)
         return response
 
