@@ -85,19 +85,32 @@ services:
       - GOOGLE_ANALYTICS_ID
 
       # Settings
+
+      # URLs etc
       - BASE_URL
       - SHORT_BASE_URL
       - HOST
       - IMAGES_URL
       - CDN_URL
-      - LOCAL_STATIC_STORAGE
+
+      # Email
       - SERVER_EMAIL
       - DEFAULT_FROM_EMAIL
       - EMAIL_SUBJECT_PREFIX
+      - EMAIL_HOST
+      - EMAIL_HOST_USER
+      - EMAIL_HOST_PASSWORD
+
+      # Storage
+      - LOCAL_STATIC_STORAGE
+
+      # AstroBin internals
       - MIN_INDEX_TO_LIKE
       - ADS_ENABLED
       - DONATIONS_ENABLED
       - PREMIUM_ENABLED
+
+      # Debug
       - DEBUG
 
   worker:
@@ -139,19 +152,32 @@ services:
       - GOOGLE_ANALYTICS_ID
 
       # Settings
+
+      # URLs etc
       - BASE_URL
       - SHORT_BASE_URL
       - HOST
       - IMAGES_URL
       - CDN_URL
-      - LOCAL_STATIC_STORAGE
+
+      # Email
       - SERVER_EMAIL
       - DEFAULT_FROM_EMAIL
       - EMAIL_SUBJECT_PREFIX
+      - EMAIL_HOST
+      - EMAIL_HOST_USER
+      - EMAIL_HOST_PASSWORD
+
+      # Storage
+      - LOCAL_STATIC_STORAGE
+
+      # AstroBin internals
       - MIN_INDEX_TO_LIKE
       - ADS_ENABLED
       - DONATIONS_ENABLED
       - PREMIUM_ENABLED
+
+      # Debug
       - DEBUG
 
   flower:
