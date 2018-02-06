@@ -1,21 +1,24 @@
-version: '3'
+version: '2'
 
 services:
   memcached:
     container_name: memcached
     image: memcached
     restart: always
+    ports:
+      - "11211:11211"
 
   postgres:
     container_name: postgres
     image: postgres
     restart: always
-    environment:
-      - POSTGRES_DB=astrobin
-      - POSTGRES_USER=astrobin
-      - POSTGRES_PASSWORD
+    env_file:
+      - ./postgres.env
+      - ./secrets.env
     volumes:
       - postgres-data:/var/lib/postgresql/data
+    ports:
+      - "5432:5432"
 
   rabbitmq:
     container_name: rabbitmq
@@ -24,6 +27,8 @@ services:
     env_file:
       - ./rabbitmq.env
       - ./secrets.env
+    ports:
+      - "5672:5672"
 
   nginx:
     container_name: nginx
@@ -37,168 +42,59 @@ services:
       - astrobin
     ports:
       - "80:80"
+    links:
+      - astrobin
 
-  search:
+  elasticsearch:
+    container_name: elasticsearch
     image: elasticsearch:2.4.6
     restart: always
-    volumes:
-      - search-data:/usr/share/elasticsearch/data
+    ports:
+      - "9200:9200"
 
-  app:
-    restart: always
-    build:
-      context: ../
-      dockerfile: docker/astrobin.dockerfile
-    volumes:
-      - media:/media
-    depends_on:
-      - db
-      - web
-      - cache
-      - queue
-      - search
-      - worker
-    environment:
-      # General
-      - PYTHONPATH=/usr/lib/python2.7/dist-packages
-      - DJANGO_SETTINGS_MODULE=astrobin.settings
-
-      # Passwords
-      - DJANGO_SECRET_KEY
-      - POSTGRES_PASSWORD
-      - RABBITMQ_DEFAULT_PASS
-
-      # API keys
-      - SENDGRID_API_KEY
-      - FLICKR_API_KEY
-      - FLICKR_SECRET
-      - ASTROMETRY_NET_API_KEY
-
-      # AWS
-      - AWS_ACCESS_KEY_ID
-      - AWS_SECRET_ACCESS_KEY
-      - AWS_S3_ENABLED
-      - AWS_STORAGE_BUCKET_NAME
-
-      # IDs
-      - PAYPAL_MERCHANT_ID
-      - GOOGLE_ANALYTICS_ID
-
-      # Settings
-
-      # URLs etc
-      - BASE_URL
-      - SHORT_BASE_URL
-      - HOST
-      - IMAGES_URL
-      - CDN_URL
-
-      # Email
-      - SERVER_EMAIL
-      - DEFAULT_FROM_EMAIL
-      - EMAIL_SUBJECT_PREFIX
-      - EMAIL_HOST
-      - EMAIL_HOST_USER
-      - EMAIL_HOST_PASSWORD
-
-      # Storage
-      - LOCAL_STATIC_STORAGE
-
-      # AstroBin internals
-      - MIN_INDEX_TO_LIKE
-      - ADS_ENABLED
-      - DONATIONS_ENABLED
-      - PREMIUM_ENABLED
-
-      # Debug
-      - DEBUG
-
-  worker:
-    restart: always
+  celery:
+    container_name: celery
     build:
       context: ../
       dockerfile: docker/astrobin.dockerfile
     command: celery worker -A astrobin -c 2
-    volumes:
-      - media:/media
-    depends_on:
-      - cache
-      - queue
+    links:
+      - memcached
+      - postgres
+      - rabbitmq
+      - elasticsearch
+    env_file:
+      - ./postgres.env
+      - ./rabbitmq.env
+      - ./astrobin.env
+      - ./secrets.env
     environment:
-      # General
       - C_FORCE_ROOT=true
       - PYTHONPATH=/usr/lib/python2.7/dist-packages
       - DJANGO_SETTINGS_MODULE=astrobin.settings
 
-      # Passwords
-      - DJANGO_SECRET_KEY
-      - POSTGRES_PASSWORD
-      - RABBITMQ_DEFAULT_PASS
 
-      # API keys
-      - SENDGRID_API_KEY
-      - FLICKR_API_KEY
-      - FLICKR_SECRET
-      - ASTROMETRY_NET_API_KEY
-
-      # AWS
-      - AWS_ACCESS_KEY_ID
-      - AWS_SECRET_ACCESS_KEY
-      - AWS_S3_ENABLED
-      - AWS_STORAGE_BUCKET_NAME
-
-      # IDs
-      - PAYPAL_MERCHANT_ID
-      - GOOGLE_ANALYTICS_ID
-
-      # Settings
-
-      # URLs etc
-      - BASE_URL
-      - SHORT_BASE_URL
-      - HOST
-      - IMAGES_URL
-      - CDN_URL
-
-      # Email
-      - SERVER_EMAIL
-      - DEFAULT_FROM_EMAIL
-      - EMAIL_SUBJECT_PREFIX
-      - EMAIL_HOST
-      - EMAIL_HOST_USER
-      - EMAIL_HOST_PASSWORD
-
-      # Storage
-      - LOCAL_STATIC_STORAGE
-
-      # AstroBin internals
-      - MIN_INDEX_TO_LIKE
-      - ADS_ENABLED
-      - DONATIONS_ENABLED
-      - PREMIUM_ENABLED
-
-      # Debug
-      - DEBUG
-
-  flower:
-    image: totem/celery-flower-docker
-    ports:
-      - "5555:5555"
-    depends_on:
-      - queue
-      - worker
+  astrobin:
+    container_name: astrobin
+    restart: always
+    build:
+      context: ../
+      dockerfile: docker/astrobin.dockerfile
+    links:
+      - memcached
+      - postgres
+      - rabbitmq
+      - elasticsearch
+    env_file:
+      - ./postgres.env
+      - ./rabbitmq.env
+      - ./astrobin.env
+      - ./secrets.env
     environment:
-      - AMQP_HOST=queue
-      - AMQP_USERNAME=astrobin
-      - AMQP_PASSWORD=${RABBITMQ_DEFAULT_PASS}
-      - AMQP_ADMIN_HOST=queue
-      - AMQP_ADMIN_USERNAME=astrobin
-      - AMQP_ADMIN_PASSWORD=${RABBITMQ_DEFAULT_PASS}
-      - FLOWER_BASIC_AUTH=astrobin:${RABBITMQ_DEFAULT_PASS}
+      - PYTHONPATH=/usr/lib/python2.7/dist-packages
+      - DJANGO_SETTINGS_MODULE=astrobin.settings
+    ports:
+      - "8083:8083"
 
 volumes:
-  media: {}
-  db-data: {}
-  queue-data: {}
-  search-data: {}
-
+  postgres-data: {}

@@ -20,86 +20,16 @@ git submodule update
 
 ## Configure the system
 
-You will need two files, `.env-dev` and `.env-prod`, both like the following
-but changing the passwords, API keys, etc: 
-
-```
-# General
-C_FORCE_ROOT=true
-PYTHONPATH=/usr/lib/python2.7/dist-packages
-DJANGO_SETTINGS_MODULE=astrobin.settings
-DJANGO_SECRET_KEY=astrobin
-
-# DB
-POSTGRES_DB=astrobin
-POSTGRES_USER=astrobin
-POSTGRES_PASSWORD=CHANGEME
-
-# Queue
-RABBITMQ_DEFAULT_USER=astrobin
-RABBITMQ_DEFAULT_PASS=CHANGEME
-
-AMQP_HOST=queue
-AMQP_USERNAME=astrobin
-AMQP_PASSWORD=CHANGEME
-AMQP_ADMIN_HOST=queue
-AMQP_ADMIN_USERNAME=astrobin
-AMQP_ADMIN_PASSWORD=CHANGEME
-FLOWER_BASIC_AUTH=astrobin:CHANGEME
-
-# API keys
-SENDGRID_API_KEY=CHANGEME
-FLICKR_API_KEY=CHANGEME
-FLICKR_SECRET=CHANGEME
-ASTROMETRY_NET_API_KEY=CHANGEME
-
-# AWS
-AWS_ACCESS_KEY_ID=CHANGEME
-AWS_SECRET_ACCESS_KEY=CHANGEME
-AWS_S3_ENABLED=true
-AWS_STORAGE_BUCKET_NAME=CHANGEME
-
-# IDs
-PAYPAL_MERCHANT_ID=CHANGEME
-GOOGLE_ANALYTICS_ID=CHANGEME
-
-# Settings
-
-# URLs etc
-BASE_URL=CHANGEME
-SHORT_BASE_URL=CHANGEME
-HOST=CHANGEME
-IMAGES_URL=CHANGEME
-CDN_URL=CHANGEME
-
-# Email
-SERVER_EMAIL=CHANGEME
-DEFAULT_FROM_EMAIL=CHANGEME
-EMAIL_SUBJECT_PREFIX=CHANGEME
-EMAIL_HOST=CHANGEME
-EMAIL_HOST_USER=CHANGEME
-EMAIL_HOST_PASSWORD=CHANGEME
-
-# Storage
-LOCAL_STATIC_STORAGE=false
-
-# AstroBin internals
-MIN_INDEX_TO_LIKE=0.5
-ADS_ENABLED=false
-DONATIONS_ENABLED=false
-PREMIUM_ENABLED=true
-
-# Debug
-DEBUG=false
-```
-
+You will need two files, `docker/astrobin.env` and `docker/secret.env`, that
+you can copy and modify from the respective example files in the `docker`
+directory.
 
 ## Setup Docker
 
 [Install Docker](https://www.docker.com/), then create and run the containers:
 
 ```bash
-docker-compose up
+docker-compose -f docker/docker-compose.yml up -d
 ```
 
 The first time you create a container for AstroBin, you will need to run the following:
@@ -111,7 +41,7 @@ docker-compose -f docker/docker-compose.yml run --no-deps --rm astrobin ./script
 To make all the static files available to the app, run:
 
 ```bash
-docker-compose exec app python manage.py collectstatic --noinput
+docker-compose -f docker/docker-compose.yml run --no-deps --rm astrobin python manage.py collectstatic --noinput
 ```
 
 This might take a while, especially if run against AWS.
