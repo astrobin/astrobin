@@ -59,6 +59,7 @@ services:
       - memcached
       - postgres
       - rabbitmq
+      - elasticsearch
     env_file:
       - ./docker/postgres.env
       - ./docker/astrobin.env
