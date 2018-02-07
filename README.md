@@ -20,9 +20,14 @@ git submodule update
 
 ## Configure the system
 
-You will need two files, `docker/astrobin.env` and `docker/secret.env`, that
-you can copy and modify from the respective example files in the `docker`
-directory.
+You will need to edit two files, `docker/astrobin.env` and `docker/secret.env`.
+To avoid committing your passwords to the repository, remember to instruct git
+to ignore changes to those files:
+
+```bash
+git update-index --assume-unchanged docker/astrobin.env
+git update-index --assume-unchanged docker/secrets.env
+```
 
 ## Setup Docker
 
