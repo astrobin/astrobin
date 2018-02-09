@@ -14,25 +14,39 @@
         <link rel="shortcut icon" href="favicon.ico" type="image/x-icon">
         <link rel="icon" href="favicon.ico" type="image/x-icon">
 
-        <link href="https://s3.amazonaws.com/cdn.astrobin.com/www/static/css/astrobin_pipeline_screen_v59.css" rel="stylesheet" type="text/css" />
+        <link href="https://cdn.astrobin.com/static/css/astrobin_pipeline_screen_v224.css" rel="stylesheet" type="text/css" />
     </head>
 
     <body data-offset="55">
-        <div id="top" class="container astrobin-container">
+        <div id="top" class="container astrobin-container" style="padding-top: 50px">
             <div class="row">
-                <div class="span4 offset1">
-                    <h1>
+                <div class="span8">
+                    <h1 style="font-size: 3em, line-height: 1em">
                         AstroBin is unavailable
                     </h1>
                     <p>
-                        AstroBin currently rebooting its service to accomodate a small update. Try again in a minute!
+                        AstroBin is undergoing maintenance. You are seeing this
+                        page because the server is either rebooting for an
+                        update. In most cases this will only take a minute, but
+                        in case of larger operations it could take longer.
+                    </p>
+                    <p>
+                        Please visit
+                        <a href="https://twitter.com/astrobin_com"
+                           target="_blank">
+                            AstroBin Twitter feed
+                        </a> for updated information, or try the
+                        <a href="https://www.astrobin.com/">home page</a>
+                        again.
+                    </p>
+                    <p class="strong">
+                        Thank you for your patience!
                     </p>
                 </div>
-                <div class="span5 offset1">
-                    <img src="/media/static/images/503.png" alt="AstroBin's server" />
+                <div class="span4">
+                    <img src="https://cdn.astrobin.com/static/images/502.png" alt="Error 502" />
                 </div>
             </div>
-
         </div> <!-- container -->
     </body>
 </html>
