@@ -15,6 +15,7 @@ celery==4.1.0
 celery-haystack==0.10
 certifi==2017.11.5
 chardet==3.0.4
+click==6.7
 Coffin==2.0.1
 confusable-homoglyphs==3.0.0
 coverage==4.4.2
@@ -89,13 +90,16 @@ gunicorn-console==0.1.16
 html5lib==0.999999999
 httplib2==0.10.3
 idna==2.5
+importmagic3==0.2.0
 IPy==0.83
+jedi==0.11.1
 Jinja2==2.9.6
 js.tinymce==4.5.4
 jsmin==2.2.2
 kombu==4.1.0
 lamson==1.3.4
 lockfile==0.12.2
+log-colorizer==1.8.5
 longerusername==0.4
 lxml==3.8.0
 Markdown==2.6.8
@@ -111,6 +115,7 @@ oauth2==1.9.0.post1
 oauthlib==2.0.2
 odict==1.5.2
 olefile==0.44
+parso==0.1.1
 Paste==2.0.3
 pbr==3.0.1
 Pillow==4.1.1
@@ -127,6 +132,7 @@ pystache==0.5.4
 python-daemon==2.1.2
 python-dateutil==2.6.0
 python-http-client==3.0.0
+python-magic==0.4.15
 python-memcached==1.58
 python-mimeparse==1.6.0
 python-modargs==1.7
@@ -145,6 +151,7 @@ simplejson==3.10.0
 singledispatch==3.4.0.3
 six==1.10.0
 slimit==0.8.1
+spark-parser==1.8.5
 sphinx-me==0.3
 SQLAlchemy==1.1.14
 sqlparse==0.2.3
@@ -152,10 +159,13 @@ termcolor==1.1.0
 -e git+https://bitbucket.org/siovene/django-toggle-properties.git@ae0c1e5df12a0bb3257c983ac76b0b3eee6c59f8#egg=toggleproperties
 tornado==4.5.1
 ua-parser==0.7.3
+uncompyle6==2.15.1
 Unidecode==0.4.20
 urllib3==1.21.1
 user-agents==1.1.0
 vine==1.1.4
+wdb==3.1.9
 webencodings==0.5.1
 WebOb==1.7.2
+xdis==3.6.11
 yolk==0.4.3
