@@ -45,6 +45,7 @@ INSTALLED_APPS = [
     'precise_bbcode',
     'django_bootstrap_breadcrumbs',
     'silk',
+    'djcelery_email',
 
     # AstroBin apps
     'astrobin.apps.AstroBinAppConfig',

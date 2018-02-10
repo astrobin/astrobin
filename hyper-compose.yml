@@ -25,9 +25,9 @@ services:
     container_name: rabbitmq
     image: rabbitmq
     restart: always 
-    env_file:
-      - ./docker/rabbitmq.env
-      - ./docker/secrets.env
+    environment:
+      - RABBITMQ_DEFAULT_USER=astrobin
+      - RABBITMQ_DEFAULT_PASS=astrobin
     ports:
       - "5672:5672"
 

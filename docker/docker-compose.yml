@@ -24,11 +24,11 @@ services:
     container_name: rabbitmq
     image: rabbitmq
     restart: always 
-    env_file:
-      - ./rabbitmq.env
-      - ./secrets.env
     ports:
       - "5672:5672"
+    environment:
+      - RABBITMQ_DEFAULT_USER=astrobin
+      - RABBITMQ_DEFAULT_PASS=astrobin
 
   nginx:
     container_name: nginx
@@ -38,6 +38,8 @@ services:
         - ENV=local
       dockerfile: docker/nginx.dockerfile
     restart: always
+    depends_on:
+      - astrobin
     links:
       - astrobin
     ports:
@@ -57,7 +59,12 @@ services:
     build:
       context: ../
       dockerfile: docker/astrobin.dockerfile
-    command: celery worker -A astrobin -c 2
+    command: celery worker -A astrobin -c 2 -b amqp://astrobin:astrobin@rabbitmq:5672 -l debug -f celery.log
+    depends_on:
+      - memcached
+      - postgres
+      - rabbitmq
+      - elasticsearch
     links:
       - memcached
       - postgres
@@ -65,14 +72,14 @@ services:
       - elasticsearch
     env_file:
       - ./postgres.env
-      - ./rabbitmq.env
       - ./astrobin.env
       - ./secrets.env
     environment:
       - C_FORCE_ROOT=true
       - PYTHONPATH=/usr/lib/python2.7/dist-packages
       - DJANGO_SETTINGS_MODULE=astrobin.settings
-
+    volumes:
+      - ..:/code
 
   astrobin:
     container_name: astrobin
@@ -83,6 +90,12 @@ services:
     command: python manage.py runserver 0.0.0.0:8083
     ports:
       - "8083:8083"
+    depends_on:
+      - memcached
+      - postgres
+      - rabbitmq
+      - elasticsearch
+      - wdb
     links:
       - memcached
       - postgres
@@ -91,7 +104,6 @@ services:
       - wdb
     env_file:
       - ./postgres.env
-      - ./rabbitmq.env
       - ./astrobin.env
       - ./secrets.env
     environment:
@@ -109,6 +121,23 @@ services:
     container_name: wdb
     ports:
         - "1984:1984"
+
+  flower:
+    container_name: flower
+    image: totem/celery-flower-docker
+    restart: always
+    ports:
+      - "5555:5555"
+    depends_on:
+      - rabbitmq
+    links:
+      - rabbitmq
+    env_file:
+      - ./secrets.env
+    environment:
+      - AMQP_HOST=rabbitmq
+      - AMQP_USERNAME=astrobin
+      - AMQP_PASSWORD=astrobin
 
 volumes:
   postgres-data: {}
