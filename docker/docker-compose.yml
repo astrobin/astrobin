@@ -80,11 +80,15 @@ services:
     build:
       context: ../
       dockerfile: docker/astrobin.dockerfile
+    command: python manage.py runserver 0.0.0.0:8083
+    ports:
+      - "8083:8083"
     links:
       - memcached
       - postgres
       - rabbitmq
       - elasticsearch
+      - wdb
     env_file:
       - ./postgres.env
       - ./rabbitmq.env
@@ -93,8 +97,18 @@ services:
     environment:
       - PYTHONPATH=/usr/lib/python2.7/dist-packages
       - DJANGO_SETTINGS_MODULE=astrobin.settings
+      - WDB_SOCKET_SERVER=wdb
+      - WDB_NO_BROWSER_AUTO_OPEN=True
     ports:
       - "8083:8083"
+    volumes:
+      - ..:/code
+
+  wdb:
+    image: kozea/wdb-server
+    container_name: wdb
+    ports:
+        - "1984:1984"
 
 volumes:
   postgres-data: {}
