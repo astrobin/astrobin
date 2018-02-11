@@ -2,6 +2,14 @@
 {% load i18n %}
 
 {% if request.user == image.user or request.user.is_superuser %}
+    {% if READONLY_MODE %}
+    <li class="dropdown">
+        <a data-toggle="modal" href="#readonly-mode-modal">
+            <i class="icon-pencil icon-white"></i>
+            <span class="hidden-phone">{% trans "Edit" %}</span>
+        </a>
+    </li>
+    {% else %}
     <li class="dropdown">
         <a class="dropdown-toggle" data-toggle="dropdown" href="#">
             <i class="icon-pencil icon-white"></i>
@@ -60,4 +68,5 @@
             </li>
         </ul>
     </li>
+    {% endif %} {# READONLY #}
 {% endif %} <!-- user is owner or superuser -->

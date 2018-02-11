@@ -15,7 +15,10 @@
 {% endblock %}
 
 {% block content %}
-     <div class="subtitle">
+    {% if READONLY_MODE %}
+        {% include 'readonly_mode.html' %}
+    {% else %}
+    <div class="subtitle">
         <i class="icon icon-info-sign"></i>
         {% blocktrans %}Please select the images that you want to elect to IOTD by clicking on them.{% endblocktrans %}
         <div class="pull-right todays-count badge badge-success">
@@ -25,7 +28,7 @@
         </div>
     </div>
 
-   <div class="iotd-promotion-queue">
+    <div class="iotd-promotion-queue">
         {% for image in object_list %}
             <div class="iotd-queue-item
                        {% if request.user|may_elect:image and request.user|may_unelect:image %} may-select{% else %}may-not-select{% endif %}
@@ -88,6 +91,7 @@
             {% trans "This queue is currently empty." %}
         {% endfor %}
     </div>
+    {% endif %} {# READONLY #}
 {% endblock %}
 
 {% block modals %}

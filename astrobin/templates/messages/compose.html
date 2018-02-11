@@ -13,15 +13,19 @@
 {% endblock %}
 
 {% block content %}
-    <form action="" method="post" class="form-horizontal">{% csrf_token %}
-        {{form|as_bootstrap }}
-        <div class="form-actions">
-            <input class="btn btn-primary" type="submit" value="{% trans "Send" %} &raquo;"/>
-            {% if 'next' in request.GET %}
-                <a class="btn" href="{{request.GET.next}}">{% trans "Cancel" %}</a>
-            {% endif %}
-        </div>
-    </form>
+    {% if READONLY_MODE %}
+        {% include 'readonly_mode.html' %}
+    {% else %}
+        <form action="" method="post" class="form-horizontal">{% csrf_token %}
+            {{form|as_bootstrap }}
+            <div class="form-actions">
+                <input class="btn btn-primary" type="submit" value="{% trans "Send" %} &raquo;"/>
+                {% if 'next' in request.GET %}
+                    <a class="btn" href="{{request.GET.next}}">{% trans "Cancel" %}</a>
+                {% endif %}
+            </div>
+        </form>
+    {% endif %} {# READONLY #}
 {% endblock %}
 
 {% block extra_js %}

@@ -85,6 +85,7 @@ def common_variables(request):
         'SOLVING_ENABLED': settings.ENABLE_SOLVING,
         'GOOGLE_ANALYTICS_ID': settings.GOOGLE_ANALYTICS_ID,
         'MEDIA_VERSION': settings.MEDIA_VERSION,
+        'READONLY_MODE': settings.READONLY_MODE,
     }
 
     if request.user.is_authenticated() and request.user.userprofile.is_image_moderator():
