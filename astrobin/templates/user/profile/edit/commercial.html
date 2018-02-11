@@ -18,12 +18,16 @@
     <div class="row">
         {% include 'user/profile/edit/navigation.html' %}
         <div class="span9">
-            <form class="form-horizontal" method="post" action="{% url 'profile_edit_commercial' %}">{% csrf_token %}
-                {{form|as_bootstrap}}
-                <div class="form-actions">
-                    <input class="btn btn-primary btn-block-mobile" type="submit" value="{% trans "Save" %}" />
-                </div>
-            </form>
+            {% if READONLY_MODE %}
+                {% include 'readonly_mode.html' %}
+            {% else %}
+                <form class="form-horizontal" method="post" action="{% url 'profile_edit_commercial' %}">{% csrf_token %}
+                    {{form|as_bootstrap}}
+                    <div class="form-actions">
+                        <input class="btn btn-primary btn-block-mobile" type="submit" value="{% trans "Save" %}" />
+                    </div>
+                </form>
+            {% endif %} {# READONLY #}
         </div> <!-- span -->
     </div> <!-- row -->
 {% endblock %}
