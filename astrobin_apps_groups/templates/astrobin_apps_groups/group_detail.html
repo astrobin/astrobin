@@ -22,6 +22,12 @@
         <ul class="nav nav-pills">
             {% if request.user == object.owner or request.user.is_superuser %}
             <li class="dropdown">
+                {% if READONLY_MODE %}
+                <a data-toggle="modal" href="#readonly-mode-modal">
+                    <i class="icon-legal icon-white"></i>
+                    <span class="hidden-phone">{% trans "Admin" %}</span>
+                </a>
+                {% else %}
                 <a class="dropdown-toggle" data-toggle="dropdown" href="#">
                     <i class="icon-legal icon-white"></i>
                     <span class="hidden-phone">{% trans "Admin" %}</span>
@@ -49,10 +55,17 @@
                         </a>
                     </li>
                 </ul>
+                {% endif %} {# READONLY #}
             </li>
             {% endif %} {# owner or superuser #}
 
             <li class="dropdown">
+                {% if READONLY_MODE %}
+                <a data-toggle="modal" href="#readonly-mode-modal">
+                    <i class="icon-bolt icon-white"></i>
+                    <span class="hidden-phone">{% trans "Actions" %}</span>
+                </a>
+                {% else %}
                 <a class="dropdown-toggle" data-toggle="dropdown" href="#">
                     <i class="icon-bolt icon-white"></i>
                     <span class="hidden-phone">{% trans "Actions" %}</span>
@@ -96,6 +109,7 @@
                         </li>
                     {% endif %}
                 </ul>
+                {% endif %} {# READONLY #}
             </li>
 
             <li class="group-info pull-right">

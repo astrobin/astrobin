@@ -47,9 +47,17 @@
                        rel="tooltip" title="{% trans "Download" %}">
                         <i class="icon-download-alt"></i>
                     </a>
+                    {% if READONLY_MODE %}
+                    <a
+                        data-toggle="modal" href="#readonly-mode-modal"
+                        class="delete-link" rel="tooltip" title="{% trans "Delete" %}">
+                        <i class="icon-trash"></i>
+                    </a>
+                    {% else %}
                     <a href="#" class="delete-link" rel="tooltip" title="{% trans "Delete" %}">
                         <i class="icon-trash"></i>
                     </a>
+                    {% endif %} {# READONLY #}
                 </td>
             </tr>
         {% endfor %}

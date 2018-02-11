@@ -19,15 +19,19 @@
     <div class="row">
         {% include 'user/profile/edit/navigation.html' %}
         <div class="span9">
-            <form class="form-horizontal" method="post" action="{% url 'profile_save_basic' %}">{% csrf_token %}
-                {{form|as_bootstrap}}
-                <div class="form-actions">
-                    <input class="btn btn-primary btn-block-mobile" type="submit" value="{% trans "Save" %}" />
-                    {% comment %}We should use {% url 'password_change' %} or something.{% endcomment %}
-                    <a class="btn btn-block-mobile" href="/accounts/password/change/">{% trans "Change your password" %}</a>
-                    <a class="btn btn-danger btn-block-mobile" href="{% url 'profile_delete' %}">{% trans "Delete account" %}</a>
-                </div>
-            </form>
+            {% if READONLY_MODE %}
+                {% include 'readonly_mode.html' %}
+            {% else %}
+                <form class="form-horizontal" method="post" action="{% url 'profile_save_basic' %}">{% csrf_token %}
+                    {{form|as_bootstrap}}
+                    <div class="form-actions">
+                        <input class="btn btn-primary btn-block-mobile" type="submit" value="{% trans "Save" %}" />
+                        {% comment %}We should use {% url 'password_change' %} or something.{% endcomment %}
+                        <a class="btn btn-block-mobile" href="/accounts/password/change/">{% trans "Change your password" %}</a>
+                        <a class="btn btn-danger btn-block-mobile" href="{% url 'profile_delete' %}">{% trans "Delete account" %}</a>
+                    </div>
+                </form>
+            {% endif %} {# READONLY #}
         </div> <!-- span12 -->
     </div> <!-- row -->
 {% endblock %}

@@ -15,6 +15,9 @@
 {% endblock %}
 
 {% block content %}
+    {% if READONLY_MODE %}
+        {% include 'readonly_mode.html' %}
+    {% else %}
     <div class="subtitle">
         <i class="icon icon-info-sign"></i>
         {% blocktrans %}Please select the images that you want to promote for final judgement by clicking on them.{% endblocktrans %}
@@ -83,6 +86,7 @@
             {% trans "This queue is currently empty." %}
         {% endfor %}
     </div>
+    {% endif %} {# READONLY #}
 {% endblock %}
 
 {% block modals %}

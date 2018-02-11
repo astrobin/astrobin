@@ -1,6 +1,19 @@
+{% load i18n %}
 {% load tags %}
 {% load toggleproperty_tags %}
 
 {% if image and request.user|can_like:image %}
-    {% add_remove_toggleproperty "like" image request.user %}
+    {% if READONLY_MODE %}
+        <span class="toggleproperty-add-remove property-like">
+            <button
+                class="btn btn-primary disabled"
+                data-toggle="modal"
+                data-target="#readonly-mode-modal"
+                title="{% trans "AstroBin is in READ ONLY mode "%}">
+                <i class="icon-thumbs-up"></i>
+            </button>
+        </span>
+    {% else %}
+        {% add_remove_toggleproperty "like" image request.user %}
+    {% endif %}
 {% endif %}
