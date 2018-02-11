@@ -3,7 +3,15 @@
 {% load toggleproperty_tags %}
 
 {% if request.user.is_authenticated and request.user != image.user %}
-    {% add_remove_toggleproperty "bookmark" image request.user %}
+    {% if READONLY_MODE %}
+        <span class="toggleproperty-add-remove property-bookmark">
+            <a class="btn btn-primary disabled" data-toggle="modal" href="#readonly-mode-modal">
+                <i class="icon-bookmark"></i>
+            </a>
+        </span>
+    {% else %}
+        {% add_remove_toggleproperty "bookmark" image request.user %}
+    {% endif %}
 {% endif %}
 
 {% if not request.user.is_authenticated %}

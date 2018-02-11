@@ -14,17 +14,21 @@
 {% endblock %}
 
 {% block content %}
-    <h1>{% trans "Register with AstroBin" %}</h1>
-    <div class="well">
-        {% url 'tos' as tos_url %}
-        {% blocktrans %}By registering with AstroBin, you agree to our <a href="{{tos_url}}">terms of service</a>.{% endblocktrans %}
-    </div>
-
-    <form class="form-horizontal" method="post" action=".">{% csrf_token %}
-        {{ form|as_bootstrap }}
-
-        <div class="form-actions">
-            <input class="btn btn-primary btn-block-mobile" type="submit" value="{% trans 'Submit' %}" />
+    {% if READONLY_MODE %}
+        {% include 'readonly_mode.html' %}
+    {% else %}
+        <h1>{% trans "Register with AstroBin" %}</h1>
+        <div class="well">
+            {% url 'tos' as tos_url %}
+            {% blocktrans %}By registering with AstroBin, you agree to our <a href="{{tos_url}}">terms of service</a>.{% endblocktrans %}
         </div>
-    </form>
+
+        <form class="form-horizontal" method="post" action=".">{% csrf_token %}
+            {{ form|as_bootstrap }}
+
+            <div class="form-actions">
+                <input class="btn btn-primary btn-block-mobile" type="submit" value="{% trans 'Submit' %}" />
+            </div>
+        </form>
+    {% endif %}
 {% endblock %}

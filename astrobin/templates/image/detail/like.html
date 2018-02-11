@@ -12,6 +12,15 @@
                 </span>
             </a>
         </span>
+    {% elif READONLY_MODE %}
+        <span class="toggleproperty-add-remove property-like">
+            <a class="btn btn-primary disabled" data-toggle="modal" href="#readonly-mode-modal">
+                <i class="icon-thumbs-up"></i>
+                <span class="toggleproperties-label">
+                    {% trans "Like" %}
+                </span>
+            </a>
+        </span>
     {% else %}
         {% add_remove_toggleproperty "like" image request.user %}
     {% endif %}

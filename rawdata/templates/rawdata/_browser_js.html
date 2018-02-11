@@ -124,8 +124,10 @@
                 .append($reset)
                 .append($download)
                 .append($preprocess)
-                .append($share)
-                .append($del);
+                .append($share);
+            {% if not READONLY_MODE %}
+            $h.append($del);
+            {% endif %}
         }
 
         function selection_headers(count) {
