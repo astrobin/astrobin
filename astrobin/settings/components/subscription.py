@@ -8,5 +8,5 @@ SUBSCRIPTION_PAYPAL_SETTINGS = {
 PAYPAL_TEST = False
 
 # Used for the "Cancel subscription" link
-PAYPAL_MERCHANT_ID = os.environ['PAYPAL_MERCHANT_ID']
+PAYPAL_MERCHANT_ID = os.environ.get('PAYPAL_MERCHANT_ID', 'invalid')
 

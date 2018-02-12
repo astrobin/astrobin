@@ -11,12 +11,12 @@ DEFAULT_CHARSET = 'utf-8'
 TIME_ZONE = 'Europe/London'
 
 # Make this unique, and don't share it with anybody.
-SECRET_KEY = os.environ['DJANGO_SECRET_KEY']
+SECRET_KEY = os.environ.get('DJANGO_SECRET_KEY', 'default.key')
 SITE_ID = 1
 
 
 TESTING = len(sys.argv) > 1 and sys.argv[1] == 'test'
-DEBUG = os.environ['DEBUG'] == "true"
+DEBUG = os.environ.get('DEBUG', 'false') == 'true'
 DEBUG_PROPAGATE_EXCEPTIONS = DEBUG
 INTERNAL_IPS = ['127.0.0.1', '172.18.0.1'] # localhost and docker gateway
 
@@ -26,18 +26,18 @@ LONGPOLL_ENABLED = False
 
 ALLOWED_HOSTS = ['*']
 
-ADS_ENABLED = os.environ['ADS_ENABLED'] == 'true'
-DONATIONS_ENABLED = os.environ['DONATIONS_ENABLED'] == 'true'
-PREMIUM_ENABLED = os.environ['PREMIUM_ENABLED'] == 'true'
+ADS_ENABLED = os.environ.get('ADS_ENABLED', 'false') == 'true'
+DONATIONS_ENABLED = os.environ.get('DONATIONS_ENABLED', 'false') == 'true'
+PREMIUM_ENABLED = os.environ.get('PREMIUM_ENABLED', 'true') == 'true'
 
 MEDIA_VERSION = '224'
 
-BASE_URL = os.environ['BASE_URL']
-SHORT_BASE_URL = os.environ['SHORT_BASE_URL']
+BASE_URL = os.environ.get('BASE_URL', 'https://www.astrobin.com')
+SHORT_BASE_URL = os.environ.get('SHORT_BASE_URL', 'https://astrob.in')
 BASE_PATH = os.path.dirname(__file__)
 
-MIN_INDEX_TO_LIKE = float(os.environ['MIN_INDEX_TO_LIKE'])
-GOOGLE_ANALYTICS_ID = os.environ['GOOGLE_ANALYTICS_ID']
+MIN_INDEX_TO_LIKE = float(os.environ.get('MIN_INDEX_TO_LIKE', '1.00'))
+GOOGLE_ANALYTICS_ID = os.environ.get('GOOGLE_ANALYTICS_ID', 'invalid')
 
 # Absolute path to the directory that holds media.
 # Example: "/home/media/media.lawrence.com/"
