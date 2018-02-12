@@ -29,14 +29,17 @@ RUN ln -s /usr/lib/x86_64-linux-gnu/libraw.so /usr/lib/x86_64-linux-gnu/libraw.s
 RUN mkdir -p /code/abc
 WORKDIR /code
 COPY submodules/abc /code/abc
-RUN cd /code/abc/cfitsio && ./configure && make -j4
-RUN cd /code/abc && qmake . && make -j4 && make install
+RUN cd /code/abc/cfitsio &&  \
+    ./configure && make -j4 && \
+    cd /code/abc && \
+    qmake . && \
+    make -j4 && make install
 
 # Install pip dependencies
 COPY requirements.txt /code
-RUN pip install -U setuptools
-RUN pip install -U pip
-RUN pip install --no-deps -r requirements.txt --src /src
+RUN pip install -U setuptools && \
+    pip install -U pip && \
+    pip install --no-deps -r requirements.txt --src /src
 
 CMD gunicorn wsgi:application -w 2 -b :8083
 EXPOSE 8083
