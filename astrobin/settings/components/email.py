@@ -12,13 +12,13 @@ if os.environ.get('SEND_EMAILS', 'true') == 'true':
 else:
     CELERY_EMAIL_BACKEND = 'django.core.mail.backends.dummy.EmailBackend'
 
-DEFAULT_FROM_EMAIL = os.environ['DEFAULT_FROM_EMAIL']
-EMAIL_SUBJECT_PREFIX = os.environ['EMAIL_SUBJECT_PREFIX']
-SERVER_EMAIL = os.environ['SERVER_EMAIL']
+DEFAULT_FROM_EMAIL = os.environ.get('DEFAULT_FROM_EMAIL', 'noreply@astrobin.com')
+EMAIL_SUBJECT_PREFIX = os.environ.get('EMAIL_SUBJECT_PREFIX', '[AstroBin]')
+SERVER_EMAIL = os.environ.get('SERVER_EMAIL', 'noreply@astrobin.com')
 
-EMAIL_HOST = os.environ['EMAIL_HOST']
-EMAIL_HOST_USER = os.environ['EMAIL_HOST_USER']
-EMAIL_HOST_PASSWORD = os.environ['EMAIL_HOST_PASSWORD']
-EMAIL_PORT = os.environ['EMAIL_HOST_PORT']
-EMAIL_USE_SSL = os.environ['EMAIL_USE_SSL'] == 'true'
+EMAIL_HOST = os.environ.get('EMAIL_HOST', 'postfix')
+EMAIL_HOST_USER = os.environ.get('EMAIL_HOST_USER', 'astrobin')
+EMAIL_HOST_PASSWORD = os.environ.get('EMAIL_HOST_PASSWORD', 'astrobin')
+EMAIL_PORT = os.environ.get('EMAIL_HOST_PORT', 465)
+EMAIL_USE_SSL = os.environ.get('EMAIL_USE_SSL', 'true') == 'true'
 

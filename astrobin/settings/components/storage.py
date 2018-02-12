@@ -3,17 +3,17 @@ import os
 local_path = lambda path: os.path.join(os.path.dirname(__file__), path)
 
 
-AWS_S3_ENABLED = os.environ['AWS_S3_ENABLED'] == "true"
+AWS_S3_ENABLED = os.environ.get('AWS_S3_ENABLED', 'false') == "true"
 if AWS_S3_ENABLED:
     S3_URL = 's3.amazonaws.com'
-    IMAGES_URL = os.environ['IMAGES_URL']
+    IMAGES_URL = os.environ.get('IMAGES_URL', 'https://cdn.astrobin.com/')
 
-    MEDIA_URL = os.environ['CDN_URL']
+    MEDIA_URL = os.environ.get('CDN_URL', 'https://cdn.astrobin.com/')
     STATIC_URL = MEDIA_URL + 'static/'
 
-    AWS_ACCESS_KEY_ID = os.environ['AWS_ACCESS_KEY_ID']
-    AWS_SECRET_ACCESS_KEY = os.environ['AWS_SECRET_ACCESS_KEY']
-    AWS_STORAGE_BUCKET_NAME = os.environ['AWS_STORAGE_BUCKET_NAME']
+    AWS_ACCESS_KEY_ID = os.environ.get('AWS_ACCESS_KEY_ID', 'invalid')
+    AWS_SECRET_ACCESS_KEY = os.environ.get('AWS_SECRET_ACCESS_KEY', 'invalid')
+    AWS_STORAGE_BUCKET_NAME = os.environ.get('AWS_STORAGE_BUCKET_NAME', 'cdn.astrobin.com')
     AWS_STORAGE_BUCKET_CNAME = AWS_STORAGE_BUCKET_NAME
     AWS_S3_SECURE_URLS = True
     AWS_QUERYSTRING_AUTH = False
@@ -26,7 +26,7 @@ if AWS_S3_ENABLED:
         'Expires': 'Wed, 31 Dec 2036 23:59:59 GMT'
     }
 
-LOCAL_STATIC_STORAGE = os.environ['LOCAL_STATIC_STORAGE'] == "true"
+LOCAL_STATIC_STORAGE = os.environ.get('LOCAL_STATIC_STORAGE', 'true') == "true"
 if LOCAL_STATIC_STORAGE:
     STATIC_URL = '/media/static/'
     STATICFILES_STORAGE = 'pipeline.storage.PipelineStorage'
