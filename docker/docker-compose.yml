@@ -5,8 +5,6 @@ services:
     container_name: memcached
     image: memcached
     restart: always
-    ports:
-      - "11211:11211"
 
   postgres:
     container_name: postgres
@@ -17,15 +15,11 @@ services:
       - ./secrets.env
     volumes:
       - postgres-data:/var/lib/postgresql/data
-    ports:
-      - "5432:5432"
 
   rabbitmq:
     container_name: rabbitmq
     image: rabbitmq
     restart: always 
-    ports:
-      - "5672:5672"
     environment:
       - RABBITMQ_DEFAULT_USER=astrobin
       - RABBITMQ_DEFAULT_PASS=astrobin
@@ -44,15 +38,11 @@ services:
       - astrobin
     ports:
       - "80:80"
-    links:
-      - astrobin
 
   elasticsearch:
     container_name: elasticsearch
     image: elasticsearch:2.4.6
     restart: always
-    ports:
-      - "9200:9200"
 
   celery:
     container_name: celery
@@ -88,8 +78,6 @@ services:
       context: ../
       dockerfile: docker/astrobin.dockerfile
     command: python manage.py runserver 0.0.0.0:8083
-    ports:
-      - "8083:8083"
     depends_on:
       - memcached
       - postgres
@@ -111,23 +99,22 @@ services:
       - DJANGO_SETTINGS_MODULE=astrobin.settings
       - WDB_SOCKET_SERVER=wdb
       - WDB_NO_BROWSER_AUTO_OPEN=True
-    ports:
-      - "8083:8083"
     volumes:
       - ..:/code
+    ports:
+      - "8083:8083"
 
   wdb:
     image: kozea/wdb-server
     container_name: wdb
     ports:
-        - "1984:1984"
+      - "1984:1984"
+
 
   flower:
     container_name: flower
     image: totem/celery-flower-docker
     restart: always
-    ports:
-      - "5555:5555"
     depends_on:
       - rabbitmq
     links:
@@ -138,6 +125,8 @@ services:
       - AMQP_HOST=rabbitmq
       - AMQP_USERNAME=astrobin
       - AMQP_PASSWORD=astrobin
+    ports:
+      - "5555:5555"
 
 volumes:
   postgres-data: {}
