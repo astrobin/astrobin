@@ -7,7 +7,7 @@ echo "Processing apps..."
 for app in $apps; do
     echo " * $app"
     for lang in $langs; do
-        echo -n " $lang"
+        echo -n " $lang: "
         (cd $app; python $manage compilemessages -l $lang)
     done
     echo
