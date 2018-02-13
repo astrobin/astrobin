@@ -255,6 +255,24 @@ hyper cron create \
     -e HYPER_SECRET=$HYPER_SECRET \
     --week=1 --hour=8 --minute=0 \
     hyperhq/hypercli hyper exec nginx certbot renew
+
+hyper cron create \
+    --name db-backup \
+    --container-name db-backup \
+    -e HYPER_ACCESS=$HYPER_ACCESS \
+    -e HYPER_SECRET=$HYPER_SECRET \
+    --hour=5 --minute=0 \
+    hyperhq/hypercli hyper exec postgres bash -c \
+        "apt-get update && apt-get install -y python-pip && \
+        pip install --upgrade pip && pip install awscli --upgrade --user && \
+        mkdir -p /var/lib/postgresql/data/backups/ &&
+        su postgres -c \
+           \"pg_dump astrobin | gzip -9 > /var/lib/postgresql/data/backups/astrobin-$(date +'%Y-%m-%d').sql.gz \" && \
+        /root/.local/bin/aws --region us-east-1 glacier upload-archive \
+            --account-id - \
+            --vault-name astrobin-database-backups \
+            --body /var/lib/postgresql/data/backups/astrobin-$(date +'%Y-%m-%d').sql.gz && \
+        rm /var/lib/postgresql/data/backups/astrobin-$(date +'%Y-%m-%d').sql.gz"
 ```
 
 Note: here's a shortcut to remove all hyper cron jobs:
