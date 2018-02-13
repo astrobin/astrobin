@@ -121,12 +121,19 @@ IMGCACH=/media/imagecache
 The following commands create the relevant cron jobs on Hyper.sh:
 
 ```bash
+export HYPER_ACCESS=(your Hyper.sh access key)
+export HYPER_SECRET=(your Hyper.sh access secret)
+
 hyper cron create \
     --name iotd-sync \
     --container-name sync-iotd \
     --env-file=docker/astrobin.env \
     --env-file=docker/secrets.env  \
     --env-file=docker/postgres.env \
+    --link memcached \
+    --link postgres \
+    --link rabbitmq \
+    --link elasticsearch \
     --hour=4 --minute=0 \
     astrobin/astrobin python manage.py image_of_the_day
 
@@ -136,6 +143,10 @@ hyper cron create \
     --env-file=docker/astrobin.env \
     --env-file=docker/secrets.env  \
     --env-file=docker/postgres.env \
+    --link memcached \
+    --link postgres \
+    --link rabbitmq \
+    --link elasticsearch \
     --hour=4 --minute=5 \
     astrobin/astrobin python manage.py merge_gear
 
@@ -145,6 +156,10 @@ hyper cron create \
     --env-file=docker/astrobin.env \
     --env-file=docker/secrets.env  \
     --env-file=docker/postgres.env \
+    --link memcached \
+    --link postgres \
+    --link rabbitmq \
+    --link elasticsearch \
     --hour=4 --minute=10 \
     astrobin/astrobin python manage.py fix_expired_subscriptions
 
@@ -154,6 +169,10 @@ hyper cron create \
     --env-file=docker/astrobin.env \
     --env-file=docker/secrets.env  \
     --env-file=docker/postgres.env \
+    --link memcached \
+    --link postgres \
+    --link rabbitmq \
+    --link elasticsearch \
     --hour=4 --minute=15 \
     astrobin/astrobin python manage.py hitcount_cleanup
 
@@ -163,6 +182,10 @@ hyper cron create \
     --env-file=docker/astrobin.env \
     --env-file=docker/secrets.env  \
     --env-file=docker/postgres.env \
+    --link memcached \
+    --link postgres \
+    --link rabbitmq \
+    --link elasticsearch \
     --week=6 --hour=4 --minute=20 \
     astrobin/astrobin python manage.py purge_old_notifications
 
@@ -172,6 +195,10 @@ hyper cron create \
     --env-file=docker/astrobin.env \
     --env-file=docker/secrets.env  \
     --env-file=docker/postgres.env \
+    --link memcached \
+    --link postgres \
+    --link rabbitmq \
+    --link elasticsearch \
     --week=6 --hour=4 --minute=25 \
     astrobin/astrobin python manage.py global_stats
 
@@ -181,6 +208,8 @@ hyper cron create \
     --env-file=docker/astrobin.env \
     --env-file=docker/secrets.env  \
     --env-file=docker/postgres.env \
+    -e HYPER_ACCESS=$HYPER_ACCESS \
+    -e HYPER_SECRET=$HYPER_SECRET \
     --hour=4 --minute=30 \
     hyperhq/hypercli \
     hyper exec -it astrobin \
@@ -192,6 +221,8 @@ hyper cron create \
     --env-file=docker/astrobin.env \
     --env-file=docker/secrets.env  \
     --env-file=docker/postgres.env \
+    -e HYPER_ACCESS=$HYPER_ACCESS \
+    -e HYPER_SECRET=$HYPER_SECRET \
     --hour=4 --minute=35 \
     hyperhq/hypercli \
     hyper exec -it astrobin \
@@ -203,6 +234,10 @@ hyper cron create \
     --env-file=docker/astrobin.env \
     --env-file=docker/secrets.env  \
     --env-file=docker/postgres.env \
+    --link memcached \
+    --link postgres \
+    --link rabbitmq \
+    --link elasticsearch \
     --hour=4 --minute=40 \
     astrobin/astrobin python manage.py update_index --remove --workers=2
 
@@ -212,12 +247,18 @@ hyper cron create \
     --env-file=docker/astrobin.env \
     --env-file=docker/secrets.env  \
     --env-file=docker/postgres.env \
+    --link memcached \
+    --link postgres \
+    --link rabbitmq \
+    --link elasticsearch \
     --hour=18 --minute=0 \
     astrobin/astrobin python manage.py send_expiration_notifications
 
 hyper cron create \
     --name renew-ssl \
     --container-name renew-ssl \
+    -e HYPER_ACCESS=$HYPER_ACCESS \
+    -e HYPER_SECRET=$HYPER_SECRET \
     --week=1 --hour=8 --minute=0 \
     hyperhq/hypercli hyper exec nginx certbot renew
 ```
