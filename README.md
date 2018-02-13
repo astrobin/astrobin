@@ -205,9 +205,6 @@ hyper cron create \
 hyper cron create \
     --name contain-image-cache \
     --container-name contain-image-cache \
-    --env-file=docker/astrobin.env \
-    --env-file=docker/secrets.env  \
-    --env-file=docker/postgres.env \
     -e HYPER_ACCESS=$HYPER_ACCESS \
     -e HYPER_SECRET=$HYPER_SECRET \
     --hour=4 --minute=30 \
@@ -218,9 +215,6 @@ hyper cron create \
 hyper cron create \
     --name contain-tmp-zips \
     --container-name contain-tmp-zips \
-    --env-file=docker/astrobin.env \
-    --env-file=docker/secrets.env  \
-    --env-file=docker/postgres.env \
     -e HYPER_ACCESS=$HYPER_ACCESS \
     -e HYPER_SECRET=$HYPER_SECRET \
     --hour=4 --minute=35 \
