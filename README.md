@@ -80,7 +80,6 @@ MAILTO=admin@astrobin.com
 ASTROBIN_ROOT=/code
 PYTHON=python
 
-TMPZIPS=/media/tmpzips
 IMGCACH=/media/imagecache
 
 # Sync the old IOTD tables to the new ones, for API compatibility purposes.
@@ -211,16 +210,6 @@ hyper cron create \
     hyperhq/hypercli \
     hyper exec -it astrobin \
     scripts/contain_directory_size.sh /media/imagecaghe 5000000
-
-hyper cron create \
-    --name contain-tmp-zips \
-    --container-name contain-tmp-zips \
-    -e HYPER_ACCESS=$HYPER_ACCESS \
-    -e HYPER_SECRET=$HYPER_SECRET \
-    --hour=4 --minute=35 \
-    hyperhq/hypercli \
-    hyper exec -it astrobin \
-    find /media/tmpzips -type f -name "*.zip" -mtime +2 -exec rm -f {} \;
 
 hyper cron create \
     --name update-index \
