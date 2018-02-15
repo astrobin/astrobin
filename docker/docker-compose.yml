@@ -68,6 +68,39 @@ services:
       - C_FORCE_ROOT=true
       - PYTHONPATH=/usr/lib/python2.7/dist-packages
       - DJANGO_SETTINGS_MODULE=astrobin.settings
+      - CELERY_RDB_HOST=0.0.0.0
+      - CELERY_RDB_PORT=6900
+    volumes:
+      - ..:/code
+    ports:
+      - "6900-6910:6900-6910" # Debug port
+
+  beat:
+    container_name: beat
+    build:
+      context: ../
+      dockerfile: docker/astrobin.dockerfile
+    command: celery -A astrobin beat -l info --scheduler django_celery_beat.schedulers:DatabaseScheduler
+    depends_on:
+      - memcached
+      - postgres
+      - rabbitmq
+      - elasticsearch
+    links:
+      - memcached
+      - postgres
+      - rabbitmq
+      - elasticsearch
+    env_file:
+      - ./postgres.env
+      - ./astrobin.env
+      - ./secrets.env
+    environment:
+      - C_FORCE_ROOT=true
+      - PYTHONPATH=/usr/lib/python2.7/dist-packages
+      - DJANGO_SETTINGS_MODULE=astrobin.settings
+      - CELERY_RDB_HOST=0.0.0.0
+      - CELERY_RDB_PORT=6900
     volumes:
       - ..:/code
 

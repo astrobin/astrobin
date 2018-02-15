@@ -1,5 +1,6 @@
 # Django
 from django.apps import AppConfig
+from django.db.utils import IntegrityError, ProgrammingError
 
 
 class AstroBinAppConfig(AppConfig):
@@ -26,9 +27,73 @@ class AstroBinAppConfig(AppConfig):
         registry.register('toggleproperties.toggleproperty')
         registry.register('astrobin_apps_groups.group')
 
+
+    def registerPeriodicTasks(self):
+        from django_celery_beat.models import CrontabSchedule, PeriodicTask
+
+        try:
+            schedule, _ = CrontabSchedule.objects.get_or_create(
+                minute='0',
+                hour='0',
+                day_of_week='*',
+                day_of_month='*',
+                month_of_year='*',
+            )
+            PeriodicTask.objects.create(
+                crontab=schedule,
+                name='global_stats',
+                task='astrobin.tasks.global_stats',
+            )
+
+            schedule, _ = CrontabSchedule.objects.get_or_create(
+                minute='0',
+                hour='4',
+                day_of_week='*',
+                day_of_month='*',
+                month_of_year='*',
+            )
+            PeriodicTask.objects.create(
+                crontab=schedule,
+                name='sync_iotd_api',
+                task='astrobin.tasks.sync_iotd_api',
+            )
+
+            schedule, _ = CrontabSchedule.objects.get_or_create(
+                minute='5',
+                hour='4',
+                day_of_week='*',
+                day_of_month='*',
+                month_of_year='*',
+            )
+            PeriodicTask.objects.create(
+                crontab=schedule,
+                name='merge_gear',
+                task='astrobin.tasks.merge_gear',
+            )
+
+            schedule, _ = CrontabSchedule.objects.get_or_create(
+                minute='15',
+                hour='4',
+                day_of_week='*',
+                day_of_month='*',
+                month_of_year='*',
+            )
+            PeriodicTask.objects.create(
+                crontab=schedule,
+                name='hitcount_cleanup',
+                task='astrobin.tasks.hitcount_cleanup',
+            )
+
+        except IntegrityError:
+            print "Periodic tasks already exists"
+        except ProgrammingError:
+            print "Attempting to create priodic task before the migration"
+
+
     def ready(self):
         from astrobin.signals import *
         from astrobin_apps_notifications.signals import *
         from rawdata.signals import *
 
         self.registerActStreamModels()
+        self.registerPeriodicTasks()
