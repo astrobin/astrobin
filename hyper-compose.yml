@@ -33,7 +33,7 @@ services:
 
   nginx:
     container_name: nginx
-    image: astrobin/nginx-${ENV}
+    image: astrobin/nginx
     restart: always
     ports:
       - "80:80"
