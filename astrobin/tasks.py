@@ -4,9 +4,8 @@ from __future__ import absolute_import
 from hashlib import md5
 
 # Django
-from django.contrib.auth.models import User
 from django.core.cache import cache
-from django.db.models import Q
+from django.core.management import call_command
 
 # Third party
 from celery import shared_task
@@ -14,13 +13,7 @@ from celery.utils.log import get_task_logger
 from haystack.query import SearchQuerySet
 
 # AstroBin
-from astrobin.models import GlobalStat
-from astrobin.models import Gear
 from astrobin.models import Image
-from astrobin.models import ImageOfTheDay
-
-# AstroBin apps
-from astrobin_apps_iotd.models import Iotd
 
 
 logger = get_task_logger(__name__)
@@ -77,54 +70,16 @@ def global_stats():
 
 @shared_task()
 def sync_iotd_api():
-    try:
-        iotd = Iotd.objects.get(date = datetime.now().date())
-        ImageOfTheDay.objects.get_or_create(
-            image = iotd.image,
-            date = iotd.date,
-            chosen_by =  iotd.judge)
-    except Iotd.DoesNotExist:
-        pass
+    call_commang("image_of_the_day")
 
 
 @shared_task()
 def merge_gear():
-    def unique_items(l):
-        found = []
-        for i in l:
-            if i not in found:
-                found.append(i)
-        return found
-
-    queryset = Gear.objects.all().order_by('id')
-    current = 0
-    count = queryset.count()
-    total_merges = 0
-    seen = []
-
-    for item in queryset:
-        if item in seen:
-            continue
-
-        seen.append(item)
-
-        twins = Gear.objects\
-            .filter(Q(make = item.make) & Q(name = item.name))\
-            .exclude(id = item.id)
-
-        for twin in twins:
-            if twin in seen:
-                continue
-
-            item.hard_merge(twin)
-            total_merges += 1
-            if twin not in seen:
-                seen.append(twin)
-
-        current += 1
+    call_command("merge_gear")
 
 
 @shared_task()
 def hitcount_cleanup():
-    from django.core.management import call_command
     call_command("hitcount_cleanup")
+
+
