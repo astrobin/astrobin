@@ -14,7 +14,7 @@ docker build -t astrobin/astrobin -f docker/astrobin.dockerfile .
 docker push astrobin/astrobin
 
 # If you have changed the nginx configuration:
-docker build -t astrobin/nginx -f docker/nginx.dockerfile .
+docker build --build-arg ENV=${ENV} -t astrobin/nginx -f docker/nginx.dockerfile .
 docker push astrobin/nginx
 ```
 
