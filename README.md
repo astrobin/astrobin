@@ -65,8 +65,7 @@ set of Docker containers, you are of course free to deploy as you see fit.
 To deploy on Hyper.sh, simply run:
 
 ```bash
-# ENV could be www or beta
-ENV=www hyper compose up -f hyper-compose.yml -d
+ENV=prod hyper compose up -f hyper-compose.yml -d
 ```
 
 # Running regular tasks
@@ -292,8 +291,7 @@ the number of CPUs in your server.
 # Note on building the nginx container
 
 ```bash
-export ENV=www; docker build -t astrobin/nginx-${ENV} --build-arg ENV=${ENV} -f docker/nginx.dockerfile . && docker push astrobin/nginx-${ENV}
-export ENV=beta; docker build -t astrobin/nginx-${ENV} --build-arg ENV=${ENV} -f docker/nginx.dockerfile . && docker push astrobin/nginx-${ENV}
+export ENV=prod; docker build -t astrobin/nginx-${ENV} --build-arg ENV=${ENV} -f docker/nginx.dockerfile . && docker push astrobin/nginx-${ENV}
 ```
 
 # Notes on HTTPS
