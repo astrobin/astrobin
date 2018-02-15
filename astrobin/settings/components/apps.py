@@ -46,6 +46,7 @@ INSTALLED_APPS = [
     'django_bootstrap_breadcrumbs',
     'silk',
     'djcelery_email',
+    'django_celery_beat',
 
     # AstroBin apps
     'astrobin.apps.AstroBinAppConfig',
