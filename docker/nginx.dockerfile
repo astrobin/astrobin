@@ -1,6 +1,6 @@
-FROM nginx:alpine
+FROM nginx:latest
 
-RUN apk update && apk add --no-cache certbot
+RUN apt-get update && apt-get install -y certbot && apt-get clean
 
 ARG ENV
 COPY docker/nginx-${ENV}.conf /etc/nginx/conf.d/default.conf
