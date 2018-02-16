@@ -22,7 +22,7 @@ after_script:
 
 after_success:
   - docker build -t astrobin/astrobin:latest -f docker/astrobin.dockerfile --cache-from astrobin/astrobin:latest .
-  - docker build -t astrobin/nginx:latest -f docker/nginx.dockerfile --cache-from astrobin/nginx:latest .
+  - docker build -t astrobin/nginx:latest --build-args ENV=prod -f docker/nginx.dockerfile --cache-from astrobin/nginx:latest .
   - docker login -u $DOCKER_USER -p $DOCKER_PASS
   - docker push astrobin/astrobin
   - docker push astrobin/nginx
