@@ -2,6 +2,7 @@ from __future__ import absolute_import
 
 # Python
 from hashlib import md5
+from time import sleep
 
 # Django
 from django.core.cache import cache
@@ -21,7 +22,9 @@ logger = get_task_logger(__name__)
 
 @shared_task()
 def test_task():
-    logger.info('Test task')
+    logger.info('Test task begins')
+    sleep(15)
+    logger.info('Test task ends')
 
 
 @shared_task()
