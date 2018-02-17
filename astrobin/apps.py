@@ -1,6 +1,6 @@
 # Django
 from django.apps import AppConfig
-from django.db.utils import IntegrityError, ProgrammingError
+from django.db.utils import IntegrityError, ProgrammingError, OperationalError
 
 
 class AstroBinAppConfig(AppConfig):
@@ -88,6 +88,9 @@ class AstroBinAppConfig(AppConfig):
             print "Periodic tasks already exists"
         except ProgrammingError:
             print "Attempting to create priodic task before the migration"
+        except OperationalError:
+            # Happens during tests
+            pass
 
 
     def ready(self):
