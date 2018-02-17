@@ -232,6 +232,7 @@ class PremiumTest(TestCase):
         usersub.subscribe()
 
         # Counter increases for Premium users too
+        profile = UserProfile.objects.get(pk = profile.pk)
         counter = profile.premium_counter
         response = self.client.post(
             reverse('image_upload_process'),

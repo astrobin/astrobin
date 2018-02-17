@@ -1734,6 +1734,13 @@ class UserProfile(models.Model):
 
     user = models.OneToOneField(User, editable=False)
 
+    updated = models.DateTimeField(
+        editable = False,
+        auto_now = True,
+        null = True,
+        blank = True,
+    )
+
     # Basic Information
     real_name = models.CharField(
         verbose_name = _("Real name"),
