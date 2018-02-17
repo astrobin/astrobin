@@ -118,11 +118,6 @@ class PublicDataPoolDetailView(DetailView):
 class PublicDataPoolDownloadView(base.View):
     def get(self, request, *args, **kwargs):
         pool = get_object_or_404(PublicDataPool, pk = kwargs.pop('pk'))
-        if pool.archive and path.exists(pool.archive.file.path):
-            return HttpResponseRedirect(
-                reverse('rawdata.temporary_archive_detail',
-                        args=(pool.archive.pk,)))
-
         response = serve_zip(pool.images.all(), self.request.user, pool)
         return response
 

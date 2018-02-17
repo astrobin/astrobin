@@ -8,8 +8,12 @@ from django.contrib.contenttypes.models import ContentType
 from django.core.urlresolvers import reverse
 from django.test import TestCase
 
+# AstroBin
+from nested_comments.models import NestedComment
+
 # Third party
 from subscription.models import Subscription, UserSubscription
+from toggleproperties.models import ToggleProperty
 
 # AstroBin
 from astrobin.models import (
@@ -1642,3 +1646,77 @@ class ImageTest(TestCase):
         self.assertEquals(image.title in response.content, False)
 
         # TODO: test image promotion
+
+    def test_image_updated_after_toggleproperty(self):
+        self.client.login(username = 'test', password = 'password')
+        self._do_upload('astrobin/fixtures/test.jpg')
+        image = self._get_last_image()
+        image.title = "TEST IMAGE"
+        image.save()
+
+        updated = image.updated
+
+        prop = ToggleProperty.objects.create_toggleproperty('like', image, self.user2)
+        image = self._get_last_image()
+        self.assertNotEquals(updated, image.updated)
+
+        updated = image.updated
+        prop = ToggleProperty.objects.create_toggleproperty('bookmark', image, self.user2)
+        image = self._get_last_image()
+        self.assertNotEquals(updated, image.updated)
+
+        updated = image.updated
+        prop.delete()
+        image = self._get_last_image()
+        self.assertNotEquals(updated, image.updated)
+
+        image.delete()
+        self.client.logout()
+
+    def test_image_updated_after_acquisition_saved(self):
+        self.client.login(username = 'test', password = 'password')
+        self._do_upload('astrobin/fixtures/test.jpg')
+        image = self._get_last_image()
+        image.title = "TEST IMAGE"
+        image.save()
+
+        updated = image.updated
+
+        today = time.strftime('%Y-%m-%d')
+        response = self.client.post(
+            reverse('image_edit_save_acquisition'),
+            {
+                'image_id': image.pk,
+                'edit_type': 'deep_sky',
+                'advanced': 'false',
+                'date': today,
+                'number': 10,
+                'duration': 1200
+            },
+            follow = True)
+
+        image = self._get_last_image()
+        self.assertNotEquals(updated, image.updated)
+
+        image.delete()
+        self.client.logout()
+
+    def test_image_updated_after_comment(self):
+        self.client.login(username = 'test', password = 'password')
+        self._do_upload('astrobin/fixtures/test.jpg')
+        image = self._get_last_image()
+        image.title = "TEST IMAGE"
+        image.save()
+
+        updated = image.updated
+
+        comment = NestedComment.objects.create(
+            content_object = image,
+            author = self.user2,
+            text = "Test")
+
+        image = self._get_last_image()
+        self.assertNotEquals(updated, image.updated)
+
+        image.delete()
+        self.client.logout()

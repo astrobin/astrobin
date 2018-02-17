@@ -22,12 +22,12 @@ def upload_path(instance, filename):
     instance.original_filename = filename
     ext = filename.split('.')[-1]
     filename = "%s.%s" % (uuid.uuid4(), ext)
-    return os.path.join(str(instance.user.id), filename)
+    return os.path.join('rawdata', 'files', str(instance.user.id), filename)
 
 def temporary_download_upload_path(instance, filename):
     ext = filename.split('.')[-1]
     filename = "%s.zip" % uuid.uuid4()
-    return os.path.join('tmpzips', filename)
+    return os.path.join('rawdata', 'tmpzips', filename)
 
 
 class RawImage(models.Model):
@@ -54,7 +54,6 @@ class RawImage(models.Model):
     )
 
     file = models.FileField(
-        storage = FileSystemStorage(location = settings.RAWDATA_ROOT),
         upload_to = upload_path,
     )
 
@@ -153,7 +152,7 @@ class RawImage(models.Model):
     def save(self, *args, **kwargs):
         from .utils import md5_for_file
         self.size = self.file.size
-        self.file_hash = md5_for_file(self.file.file.file)
+        self.file_hash = md5_for_file(self.file)
         super(RawImage, self).save(*args, **kwargs)
 
     def delete(self):
@@ -170,7 +169,6 @@ class TemporaryArchive(models.Model):
     )
 
     file = models.FileField(
-        storage = FileSystemStorage(location = '/var/www'),
         upload_to = temporary_download_upload_path,
     )
 

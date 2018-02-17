@@ -1,22 +1,36 @@
 from __future__ import absolute_import
 
+# Python
 from hashlib import md5
+import subprocess
+from time import sleep
 
+# Django
 from django.core.cache import cache
+from django.core.management import call_command
 
+# Third party
 from celery import shared_task
 from celery.utils.log import get_task_logger
 from haystack.query import SearchQuerySet
 
+# AstroBin
 from astrobin.models import Image
 
 
 logger = get_task_logger(__name__)
 
-LOCK_EXPIRE = 60 * 5 # Lock expires in 5 minutes
+
+@shared_task()
+def test_task():
+    logger.info('Test task begins')
+    sleep(15)
+    logger.info('Test task ends')
+
 
 @shared_task()
 def update_top100_ids():
+    LOCK_EXPIRE = 60 * 5 # Lock expires in 5 minutes
     lock_id = 'top100_ids_lock'
 
     # cache.add fails if the key already exists
@@ -37,3 +51,43 @@ def update_top100_ids():
 
     logger.debug(
         'Top100 ids task is already being run by another worker')
+
+
+@shared_task()
+def global_stats():
+    sqs = SearchQuerySet()
+
+    users = sqs.models(User).all().count()
+    images = sqs.models(Image).all().count()
+
+    integration = 0
+    for i in sqs.models(Image).all():
+        integration += i.integration
+    integration = int(integration / 3600.0)
+
+    gs = GlobalStat(
+            users = users,
+            images = images,
+            integration = integration)
+    gs.save()
+
+
+@shared_task()
+def sync_iotd_api():
+    call_commang("image_of_the_day")
+
+
+@shared_task()
+def merge_gear():
+    call_command("merge_gear")
+
+
+@shared_task()
+def hitcount_cleanup():
+    call_command("hitcount_cleanup")
+
+
+@shared_task()
+def contain_imagecache_size():
+    subprocess.call(['scripts/contain_directory_size.sh'], ['/media/imagecache'], ['10000000'])
+

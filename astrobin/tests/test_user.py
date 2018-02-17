@@ -19,6 +19,7 @@ from astrobin.models import (
     ImageOfTheDayCandidate,
     RetailedGear,
     Telescope,
+    UserProfile
 )
 from astrobin_apps_iotd.models import *
 
@@ -461,4 +462,31 @@ class UserTest(TestCase):
         self.client.login(username = "user", password = "password")
         response = self.client.get(reverse("user_page_plots", args = (self.user.username,)))
         self.assertEqual(response.status_code, 200)
+        self.client.logout()
+
+    def test_profile_updated_when_saved(self):
+        updated = self.user.userprofile.updated
+        self.user.first_name = "foo"
+        self.user.save()
+
+        profile = UserProfile.objects.get(user = self.user)
+        self.assertNotEquals(updated, profile.updated)
+
+    def test_profile_updated_when_image_saved(self):
+        updated = self.user.userprofile.updated
+
+        self.client.login(username = "user", password = "password")
+        image = self._do_upload('astrobin/fixtures/test.jpg', "TEST IMAGE")
+
+        profile = UserProfile.objects.get(user = self.user)
+        self.assertNotEquals(updated, profile.updated)
+
+        updated = self.user.userprofile.updated
+        image.title = "TEST IMAGE UPDATED"
+        image.save()
+
+        profile = UserProfile.objects.get(user = self.user)
+        self.assertNotEquals(updated, profile.updated)
+
+        image.delete()
         self.client.logout()

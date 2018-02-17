@@ -80,7 +80,7 @@ class ImageModerationMarkAsHamView(
 
                 push_notification(followers, 'new_image',
                     {
-                        'object_url': settings.ASTROBIN_BASE_URL + image.get_absolute_url(),
+                        'object_url': settings.BASE_URL + image.get_absolute_url(),
                         'originator': image.user.userprofile.get_display_name(),
                     })
 

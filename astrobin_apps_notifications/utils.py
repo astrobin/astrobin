@@ -13,7 +13,7 @@ from persistent_messages.models import Message
 
 
 def push_notification(recipients, notice_type, data):
-    data.update({'notices_url': settings.ASTROBIN_BASE_URL + '/'})
+    data.update({'notices_url': settings.BASE_URL + '/'})
     notification.send(recipients, notice_type, data)
 
 

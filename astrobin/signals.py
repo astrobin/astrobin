@@ -66,6 +66,8 @@ pre_save.connect(image_pre_save, sender = Image)
 
 
 def image_post_save(sender, instance, created, **kwargs):
+    profile_saved = False
+
     groups = instance.user.joined_group_set.filter(autosubmission = True)
     for group in groups:
         if instance.is_wip:
@@ -82,6 +84,7 @@ def image_post_save(sender, instance, created, **kwargs):
 
         instance.user.userprofile.premium_counter += 1
         instance.user.userprofile.save()
+        profile_saved = True
 
         if not instance.is_wip:
             followers = [x.user for x in ToggleProperty.objects.filter(
@@ -91,12 +94,18 @@ def image_post_save(sender, instance, created, **kwargs):
 
             push_notification(followers, 'new_image',
                 {
-                    'object_url': settings.ASTROBIN_BASE_URL + instance.get_absolute_url(),
+                    'object_url': settings.BASE_URL + instance.get_absolute_url(),
                     'originator': instance.user.userprofile.get_display_name(),
                 })
 
             if instance.moderator_decision == 1:
                 add_story(instance.user, verb = 'VERB_UPLOADED_IMAGE', action_object = instance)
+
+    if not profile_saved:
+        # Trigger update of auto_add fields
+        instance.user.userprofile.save()
+    # Trigger real time search index
+    instance.user.save()
 post_save.connect(image_post_save, sender = Image)
 
 
@@ -132,7 +141,7 @@ def imagerevision_post_save(sender, instance, created, **kwargs):
 
         push_notification(followers, 'new_image_revision',
             {
-                'object_url': settings.ASTROBIN_BASE_URL + instance.get_absolute_url(),
+                'object_url': settings.BASE_URL + instance.get_absolute_url(),
                 'originator': instance.user.userprofile.get_display_name(),
             })
 
@@ -208,10 +217,27 @@ def nested_comment_post_save(sender, instance, created, **kwargs):
                      verb = 'VERB_COMMENTED_GEAR',
                      action_object = instance,
                      target = gear)
+
+        if hasattr(instance.content_object, "updated"):
+            # This will trigger the auto_now fields in the content_object
+            # We do it only if created, because the content_object needs to
+            # only be updated if the number of comments changes.
+            instance.content_object.save()
 post_save.connect(nested_comment_post_save, sender = NestedComment)
 
 
+def toggleproperty_post_delete(sender, instance, **kwargs):
+    if hasattr(instance.content_object, "updated"):
+        # This will trigger the auto_now fields in the content_object
+        instance.content_object.save()
+post_delete.connect(toggleproperty_post_delete, sender = ToggleProperty)
+
+
 def toggleproperty_post_save(sender, instance, created, **kwargs):
+    if hasattr(instance.content_object, "updated"):
+        # This will trigger the auto_now fields in the content_object
+        instance.content_object.save()
+
     if created:
         if instance.property_type in ("like", "bookmark"):
             if instance.property_type == "like":
@@ -232,7 +258,7 @@ def toggleproperty_post_save(sender, instance, created, **kwargs):
                 push_notification(
                     [instance.content_object.user], 'new_' + instance.property_type,
                     {
-                        'url': settings.ASTROBIN_BASE_URL + instance.content_object.get_absolute_url(),
+                        'url': settings.BASE_URL + instance.content_object.get_absolute_url(),
                         'title': instance.content_object.title,
                         'user': instance.user.userprofile.get_display_name(),
                     })
@@ -391,7 +417,7 @@ def solution_post_save(sender, instance, created, **kwargs):
         return
 
     push_notification([user], notification,
-        {'object_url': settings.ASTROBIN_BASE_URL + target.get_absolute_url()})
+        {'object_url': settings.BASE_URL + target.get_absolute_url()})
 post_save.connect(solution_post_save, sender = Solution)
 
 
@@ -461,7 +487,7 @@ def group_post_save(sender, instance, created, **kwargs):
                 {
                     'creator': instance.creator.userprofile.get_display_name(),
                     'group_name': instance.name,
-                    'url': settings.ASTROBIN_BASE_URL + reverse_url('group_detail', args = (instance.pk,)),
+                    'url': settings.BASE_URL + reverse_url('group_detail', args = (instance.pk,)),
                 })
 
             add_story(
@@ -505,7 +531,7 @@ def group_members_changed(sender, instance, **kwargs):
                         {
                             'user': user.userprofile.get_display_name(),
                             'group_name': instance.name,
-                            'url': settings.ASTROBIN_BASE_URL + reverse_url('group_detail', args = (instance.pk,)),
+                            'url': settings.BASE_URL + reverse_url('group_detail', args = (instance.pk,)),
                         })
 
                     add_story(
@@ -610,7 +636,7 @@ def forum_topic_pre_save(sender, instance, **kwargs):
                 'new_topic_in_group',
                 {
                     'user': instance.user.userprofile.get_display_name(),
-                    'url': settings.ASTROBIN_BASE_URL + instance.get_absolute_url(),
+                    'url': settings.BASE_URL + instance.get_absolute_url(),
                     'group_url': reverse_url('group_detail', kwargs = {'pk': group.pk}),
                     'group_name': group.name,
                     'topic_title': instance.name,
@@ -634,8 +660,8 @@ def forum_topic_post_save(sender, instance, created, **kwargs):
             'new_topic_in_group',
             {
                 'user': instance.user.userprofile.get_display_name(),
-                'url': settings.ASTROBIN_BASE_URL + instance.get_absolute_url(),
-                'group_url': settings.ASTROBIN_BASE_URL + reverse_url('group_detail', kwargs = {'pk': group.pk}),
+                'url': settings.BASE_URL + instance.get_absolute_url(),
+                'group_url': settings.BASE_URL + reverse_url('group_detail', kwargs = {'pk': group.pk}),
                 'group_name': group.name,
                 'topic_title': instance.name,
             },
@@ -668,3 +694,9 @@ def threaded_messages_thread_post_save(sender, instance, created, **kwargs):
 
         messages.success(request, _("Message sent"))
 post_save.connect(threaded_messages_thread_post_save, sender = Thread)
+
+
+def user_post_save(sender, instance, created, **kwargs):
+    if not created:
+        instance.userprofile.save()
+post_save.connect(user_post_save, sender=User)
