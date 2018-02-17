@@ -66,6 +66,8 @@ pre_save.connect(image_pre_save, sender = Image)
 
 
 def image_post_save(sender, instance, created, **kwargs):
+    profile_saved = False
+
     groups = instance.user.joined_group_set.filter(autosubmission = True)
     for group in groups:
         if instance.is_wip:
@@ -82,6 +84,7 @@ def image_post_save(sender, instance, created, **kwargs):
 
         instance.user.userprofile.premium_counter += 1
         instance.user.userprofile.save()
+        profile_saved = True
 
         if not instance.is_wip:
             followers = [x.user for x in ToggleProperty.objects.filter(
@@ -97,6 +100,10 @@ def image_post_save(sender, instance, created, **kwargs):
 
             if instance.moderator_decision == 1:
                 add_story(instance.user, verb = 'VERB_UPLOADED_IMAGE', action_object = instance)
+
+    if not profile_saved:
+        # Trigger update of auto_add fields
+        instance.user.userprofile.save()
 post_save.connect(image_post_save, sender = Image)
 
 
@@ -685,3 +692,9 @@ def threaded_messages_thread_post_save(sender, instance, created, **kwargs):
 
         messages.success(request, _("Message sent"))
 post_save.connect(threaded_messages_thread_post_save, sender = Thread)
+
+
+def user_post_save(sender, instance, created, **kwargs):
+    if not created:
+        instance.userprofile.save()
+post_save.connect(user_post_save, sender=User)
