@@ -12,7 +12,7 @@ def getFromStorage(image, alias):
     if "://" in url:
         url = url.split('://')[1]
     else:
-        url = settings.ASTROBIN_BASE_URL + url
+        url = settings.BASE_URL + url
 
     url = 'http://' + urllib2.quote(url.encode('utf-8'))
     headers = { 'User-Agent' : 'Mozilla/5.0' }

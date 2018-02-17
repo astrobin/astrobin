@@ -1,0 +1,171 @@
+version: '2'
+
+services:
+  memcached:
+    container_name: memcached
+    image: memcached:alpine
+    restart: always
+
+  postgres:
+    container_name: postgres
+    image: postgres:alpine
+    restart: always
+    env_file:
+      - ./postgres.env
+      - ./secrets.env
+    volumes:
+      - postgres-data:/var/lib/postgresql/data
+
+  rabbitmq:
+    container_name: rabbitmq
+    image: rabbitmq:management-alpine
+    restart: always 
+    environment:
+      - RABBITMQ_DEFAULT_USER=astrobin
+      - RABBITMQ_DEFAULT_PASS=astrobin
+    ports:
+      - "15672:15672"
+
+  nginx:
+    container_name: nginx
+    build:
+      context: ../
+      args:
+        - ENV=local
+      dockerfile: docker/nginx.dockerfile
+    restart: always
+    depends_on:
+      - astrobin
+    links:
+      - astrobin
+    ports:
+      - "80:80"
+
+  elasticsearch:
+    container_name: elasticsearch
+    image: elasticsearch:2.4.6-alpine
+    restart: always
+
+  celery:
+    container_name: celery
+    build:
+      context: ../
+      dockerfile: docker/astrobin.dockerfile
+    command: celery worker -A astrobin -c 2 -l debug -f celery.log
+    depends_on:
+      - memcached
+      - postgres
+      - rabbitmq
+      - elasticsearch
+    links:
+      - memcached
+      - postgres
+      - rabbitmq
+      - elasticsearch
+    env_file:
+      - ./postgres.env
+      - ./astrobin.env
+      - ./secrets.env
+    environment:
+      - C_FORCE_ROOT=true
+      - PYTHONPATH=/usr/lib/python2.7/dist-packages
+      - DJANGO_SETTINGS_MODULE=astrobin.settings
+      - CELERY_RDB_HOST=0.0.0.0
+      - CELERY_RDB_PORT=6900
+    volumes:
+      - ..:/code
+    ports:
+      - "6900-6910:6900-6910" # Debug port
+
+  beat:
+    container_name: beat
+    build:
+      context: ../
+      dockerfile: docker/astrobin.dockerfile
+    command: celery -A astrobin beat -l info --scheduler django_celery_beat.schedulers:DatabaseScheduler
+    depends_on:
+      - memcached
+      - postgres
+      - rabbitmq
+      - elasticsearch
+    links:
+      - memcached
+      - postgres
+      - rabbitmq
+      - elasticsearch
+    env_file:
+      - ./postgres.env
+      - ./astrobin.env
+      - ./secrets.env
+    environment:
+      - C_FORCE_ROOT=true
+      - PYTHONPATH=/usr/lib/python2.7/dist-packages
+      - DJANGO_SETTINGS_MODULE=astrobin.settings
+      - CELERY_RDB_HOST=0.0.0.0
+      - CELERY_RDB_PORT=6900
+    volumes:
+      - ..:/code
+
+  astrobin:
+    container_name: astrobin
+    restart: always
+    build:
+      context: ../
+      dockerfile: docker/astrobin.dockerfile
+    command: python manage.py runserver 0.0.0.0:8083
+    depends_on:
+      - memcached
+      - postgres
+      - rabbitmq
+      - elasticsearch
+      - wdb
+    links:
+      - memcached
+      - postgres
+      - rabbitmq
+      - elasticsearch
+      - wdb
+    env_file:
+      - ./postgres.env
+      - ./astrobin.env
+      - ./secrets.env
+    environment:
+      - PYTHONPATH=/usr/lib/python2.7/dist-packages
+      - DJANGO_SETTINGS_MODULE=astrobin.settings
+      - WDB_SOCKET_SERVER=wdb
+      - WDB_NO_BROWSER_AUTO_OPEN=True
+    volumes:
+      - ..:/code
+    ports:
+      - "8083:8083"
+      - "8084:8084" # Debugging purposes
+
+  wdb:
+    image: kozea/wdb-server
+    container_name: wdb
+    ports:
+      - "1984:1984"
+
+
+  flower:
+    container_name: flower
+    image: totem/celery-flower-docker
+    restart: always
+    depends_on:
+      - rabbitmq
+    links:
+      - rabbitmq
+    env_file:
+      - ./secrets.env
+    environment:
+      - AMQP_HOST=rabbitmq
+      - AMQP_USERNAME=astrobin
+      - AMQP_PASSWORD=astrobin
+      - AMQP_ADMIN_HOST=rabbitmq
+      - AMQP_ADMIN_USERNAME=astrobin
+      - AMQP_ADMIN_PASSWORD=astrobin
+    ports:
+      - "5555:5555"
+
+volumes:
+  postgres-data: {}

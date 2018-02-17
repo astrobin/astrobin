@@ -1478,6 +1478,10 @@ class Acquisition(models.Model):
     def __unicode__(self):
         return self.image.title
 
+    def save(self, *args, **kwargs):
+        super(Acquisition, self).save(*args, **kwargs)
+        self.image.save()
+
 
 class DeepSky_Acquisition(Acquisition):
     BINNING_CHOICES = (
@@ -1729,6 +1733,13 @@ class UserProfile(models.Model):
     }
 
     user = models.OneToOneField(User, editable=False)
+
+    updated = models.DateTimeField(
+        editable = False,
+        auto_now = True,
+        null = True,
+        blank = True,
+    )
 
     # Basic Information
     real_name = models.CharField(
@@ -2233,8 +2244,8 @@ class AppApiKeyRequest(models.Model):
         if created:
             push_notification(
                 [self.registrar], 'api_key_request_approved',
-                {'api_docs_url': settings.ASTROBIN_BASE_URL + '/help/api/',
-                 'api_keys_url': settings.ASTROBIN_BASE_URL + '/users/%s/apikeys/' % self.registrar.username,
+                {'api_docs_url': settings.BASE_URL + '/help/api/',
+                 'api_keys_url': settings.BASE_URL + '/users/%s/apikeys/' % self.registrar.username,
                  'key': app.key,
                  'secret': app.secret})
         else:

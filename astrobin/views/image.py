@@ -558,7 +558,7 @@ class ImageDetailView(DetailView):
 
         response_dict = context.copy()
         response_dict.update({
-            'SHARE_PATH': settings.ASTROBIN_SHORT_BASE_URL,
+            'SHARE_PATH': settings.SHORT_BASE_URL,
 
             'alias': alias,
             'mod': mod,
@@ -905,7 +905,7 @@ class ImagePromoteView(LoginRequiredMixin, UpdateView):
                 push_notification(followers, 'new_image',
                     {
                         'originator': request.user.userprofile.get_display_name(),
-                        'object_url': settings.ASTROBIN_BASE_URL + image.get_absolute_url()
+                        'object_url': settings.BASE_URL + image.get_absolute_url()
                     })
 
                 add_story(image.user, verb = 'VERB_UPLOADED_IMAGE', action_object = image)

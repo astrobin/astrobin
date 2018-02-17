@@ -11,7 +11,7 @@ class Solver(object):
 
     def _backend(self):
         module_name, backend_name = \
-            settings.ASTROBIN_PLATESOLVING_BACKEND.rsplit('.', 1)
+            settings.PLATESOLVING_BACKEND.rsplit('.', 1)
         module = import_module(module_name)
         return getattr(module, backend_name)()
 
