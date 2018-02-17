@@ -104,6 +104,8 @@ def image_post_save(sender, instance, created, **kwargs):
     if not profile_saved:
         # Trigger update of auto_add fields
         instance.user.userprofile.save()
+    # Trigger real time search index
+    instance.user.save()
 post_save.connect(image_post_save, sender = Image)
 
 
