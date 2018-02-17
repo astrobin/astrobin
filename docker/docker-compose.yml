@@ -138,6 +138,7 @@ services:
       - ..:/code
     ports:
       - "8083:8083"
+      - "8084:8084" # Debugging purposes
 
   wdb:
     image: kozea/wdb-server
