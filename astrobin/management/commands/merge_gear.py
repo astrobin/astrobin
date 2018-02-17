@@ -1,6 +1,11 @@
+# Python
+from datetime import datetime, timedelta
+
+# Django
 from django.core.management.base import BaseCommand
 from django.db.models import Q
 
+# AstroBin
 from astrobin.models import Gear
 
 class Command(BaseCommand):
@@ -14,7 +19,8 @@ class Command(BaseCommand):
                     found.append(i)
             return found
 
-        queryset = Gear.objects.all().order_by('id')
+        time_threshold = datetime.now() - timedelta(hours=24)
+        queryset = Gear.objects.filter(updated__gt=time_threshold).order_by('id')
         current = 0
         count = queryset.count()
         total_merges = 0
