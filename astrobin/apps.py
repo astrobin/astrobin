@@ -111,6 +111,19 @@ class AstroBinAppConfig(AppConfig):
             )
 
             schedule, _ = CrontabSchedule.objects.get_or_create(
+                minute='20',
+                hour='4',
+                day_of_week='*',
+                day_of_month='*',
+                month_of_year='*',
+            )
+            PeriodicTask.objects.get_or_create(
+                crontab=schedule,
+                name='contain_imagecache_size',
+                task='astrobin.tasks.contain_imagecache_size',
+            )
+
+            schedule, _ = CrontabSchedule.objects.get_or_create(
                 minute='0',
                 hour='18',
                 day_of_week='*',
