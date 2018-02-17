@@ -47,7 +47,7 @@ class AstroBinAppConfig(AppConfig):
 
             schedule, _ = CrontabSchedule.objects.get_or_create(
                 minute='0',
-                hour='4',
+                hour='1',
                 day_of_week='*',
                 day_of_month='*',
                 month_of_year='*',
@@ -59,7 +59,7 @@ class AstroBinAppConfig(AppConfig):
             )
 
             schedule, _ = CrontabSchedule.objects.get_or_create(
-                minute='5',
+                minute='0',
                 hour='4',
                 day_of_week='*',
                 day_of_month='*',
@@ -72,7 +72,7 @@ class AstroBinAppConfig(AppConfig):
             )
 
             schedule, _ = CrontabSchedule.objects.get_or_create(
-                minute='15',
+                minute='5',
                 hour='4',
                 day_of_week='*',
                 day_of_month='*',
@@ -83,6 +83,48 @@ class AstroBinAppConfig(AppConfig):
                 name='hitcount_cleanup',
                 task='astrobin.tasks.hitcount_cleanup',
             )
+
+            schedule, _ = CrontabSchedule.objects.get_or_create(
+                minute='10',
+                hour='4',
+                day_of_week='*',
+                day_of_month='*',
+                month_of_year='*',
+            )
+            PeriodicTask.objects.get_or_create(
+                crontab=schedule,
+                name='fix_expired_subscriptions',
+                task='astrobin_apps_premium.tasks.fix_expired_subscriptions',
+            )
+
+            schedule, _ = CrontabSchedule.objects.get_or_create(
+                minute='15',
+                hour='4',
+                day_of_week='*',
+                day_of_month='*',
+                month_of_year='*',
+            )
+            PeriodicTask.objects.get_or_create(
+                crontab=schedule,
+                name='purge_old_notifications',
+                task='astrobin_apps_notifications.tasks.purge_old_notifications',
+            )
+
+            schedule, _ = CrontabSchedule.objects.get_or_create(
+                minute='0',
+                hour='18',
+                day_of_week='*',
+                day_of_month='*',
+                month_of_year='*',
+            )
+            PeriodicTask.objects.get_or_create(
+                crontab=schedule,
+                name='send_expiration_notifications',
+                task='astrobin_apps_premium.tasks.send_expiration_notifications',
+            )
+        except IntegrityError:
+            print "This only happens if changing tasks above. Only do that " +\
+                  " if you first delete them from the live db."
         except ProgrammingError:
             print "Attempting to create priodic task before the migration"
         except OperationalError:
