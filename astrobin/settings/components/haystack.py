@@ -11,6 +11,7 @@ HAYSTACK_CONNECTIONS = {
         ],
     },
 }
-#if not TESTING:
-    #HAYSTACK_SIGNAL_PROCESSOR = 'celery_haystack.signals.CelerySignalProcessor'
+
+if not TESTING:
+    HAYSTACK_SIGNAL_PROCESSOR = 'celery_haystack.signals.CelerySignalProcessor'
 
