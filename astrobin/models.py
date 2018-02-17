@@ -1478,6 +1478,10 @@ class Acquisition(models.Model):
     def __unicode__(self):
         return self.image.title
 
+    def save(self, *args, **kwargs):
+        super(Acquisition, self).save(*args, **kwargs)
+        self.image.save()
+
 
 class DeepSky_Acquisition(Acquisition):
     BINNING_CHOICES = (

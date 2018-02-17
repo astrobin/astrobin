@@ -208,10 +208,27 @@ def nested_comment_post_save(sender, instance, created, **kwargs):
                      verb = 'VERB_COMMENTED_GEAR',
                      action_object = instance,
                      target = gear)
+
+        if hasattr(instance.content_object, "updated"):
+            # This will trigger the auto_now fields in the content_object
+            # We do it only if created, because the content_object needs to
+            # only be updated if the number of comments changes.
+            instance.content_object.save()
 post_save.connect(nested_comment_post_save, sender = NestedComment)
 
 
+def toggleproperty_post_delete(sender, instance, **kwargs):
+    if hasattr(instance.content_object, "updated"):
+        # This will trigger the auto_now fields in the content_object
+        instance.content_object.save()
+post_delete.connect(toggleproperty_post_delete, sender = ToggleProperty)
+
+
 def toggleproperty_post_save(sender, instance, created, **kwargs):
+    if hasattr(instance.content_object, "updated"):
+        # This will trigger the auto_now fields in the content_object
+        instance.content_object.save()
+
     if created:
         if instance.property_type in ("like", "bookmark"):
             if instance.property_type == "like":
