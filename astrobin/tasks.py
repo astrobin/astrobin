@@ -2,6 +2,7 @@ from __future__ import absolute_import
 
 # Python
 from hashlib import md5
+import subprocess
 from time import sleep
 
 # Django
@@ -85,4 +86,8 @@ def merge_gear():
 def hitcount_cleanup():
     call_command("hitcount_cleanup")
 
+
+@shared_task()
+def contain_imagecache_size():
+    subprocess.call(['scripts/contain_directory_size.sh'], ['/media/imagecache'], ['10000000'])
 
