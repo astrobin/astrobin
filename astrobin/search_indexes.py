@@ -169,107 +169,7 @@ def _1y_ago():
     return datetime.datetime.now() - datetime.timedelta(365)
 
 
-class GearIndex(CelerySearchIndex, SearchIndex, Indexable):
-    model_weight = IntegerField()
-
-    text = CharField(document=True, use_template=True)
-
-    images = IntegerField()
-
-    # Total likes of all images taken with this item.
-    likes = IntegerField()
-
-    # Total integration of images taken with this item.
-    integration = FloatField()
-
-    # Total views on images taken with this item.
-    views = IntegerField()
-
-    # Number of bookmarks on images taken with this item.
-    bookmarks = IntegerField()
-
-    # Number of comments on images taken with this item.
-    comments = IntegerField()
-
-    producers = MultiValueField()
-    retailers = MultiValueField()
-
-    def index_queryset(self, using = None):
-        return self.get_model().objects\
-            .exclude(commercial = None)\
-            .filter(commercial__producer__groups__name = 'Paying')
-
-    def get_model(self):
-        return Gear
-
-    def get_images(self, obj):
-        filters = (\
-            Q(imaging_telescopes = obj) |\
-            Q(guiding_telescopes = obj) |\
-            Q(mounts = obj) |\
-            Q(imaging_cameras = obj) |\
-            Q(guiding_cameras = obj) |\
-            Q(focal_reducers = obj) |\
-            Q(software = obj) |\
-            Q(filters = obj) |\
-            Q(accessories = obj)\
-        )
-        return Image.objects.filter(filters).distinct()
-
-    def prepare_model_weight(self, obj):
-        # Printing here just because it's the first "prepare" function.
-        print "%s: %d" % (obj.__class__.__name__, obj.pk)
-        return 100;
-
-    def prepare_images(self, obj):
-        return len(self.get_images(obj))
-
-    def prepare_likes(self, obj):
-        likes = 0
-        for i in self.get_images(obj):
-            likes += ToggleProperty.objects.toggleproperties_for_object("like", i).count()
-
-        return likes
-
-    def prepare_integration(self, obj):
-        integration = 0
-        for i in self.get_images(obj):
-            integration += _get_integration(i)
-
-        return integration / 3600.0
-
-    def prepare_views(self, obj):
-        views = 0
-        for i in self.get_images(obj):
-            views += _prepare_views(i, 'image')
-        return views
-
-    def prepare_bookmarks(self, obj):
-        bookmarks = 0
-        for i in self.get_images(obj):
-            bookmarks += ToggleProperty.objects.toggleproperties_for_object("bookmark", i).count()
-        return bookmarks
-
-    def prepare_comments(self, obj):
-        comments = 0
-        for i in self.get_images(obj):
-            comments += _prepare_comments(i)
-        return comments
-
-    def prepare_producers(self, obj):
-        producers = CommercialGear.objects\
-            .filter(base_gear = obj)\
-            .exclude(Q(producer__userprofile__company_name = None) | Q(producer__userprofile__company_name = ""))
-        return ["%s" % x.producer.userprofile.company_name for x in producers]
-
-    def prepare_retailers(self, obj):
-        retailers = RetailedGear.objects\
-            .filter(gear = obj)\
-            .exclude(Q(retailer__userprofile__company_name = None) | Q(retailer__userprofile__company_name = ""))
-        return ["%s" % x.retailer.userprofile.company_name for x in retailers]
-
-
-class UserIndex(CelerySearchIndex, SearchIndex, Indexable):
+class UserIndex(CelerySearchIndex, Indexable):
     model_weight = IntegerField()
 
     text = CharField(document=True, use_template=True)
@@ -337,6 +237,10 @@ class UserIndex(CelerySearchIndex, SearchIndex, Indexable):
 
     def get_model(self):
         return User
+
+
+    def get_updated_field(self):
+        return "userprofile__updated"
 
 
     def prepare_model_weight(self, obj):
@@ -482,7 +386,6 @@ class UserIndex(CelerySearchIndex, SearchIndex, Indexable):
 
         return index(norm)
 
-
     def prepare_followers_6m(self, obj):
         return ToggleProperty.objects.filter(
             property_type = "follow",
@@ -621,7 +524,7 @@ class UserIndex(CelerySearchIndex, SearchIndex, Indexable):
         return NestedComment.objects.filter(author = obj, deleted = False).count()
 
 
-class ImageIndex(CelerySearchIndex, SearchIndex, Indexable):
+class ImageIndex(CelerySearchIndex, Indexable):
     model_weight = IntegerField()
 
     text = CharField(document=True, use_template=True)
@@ -675,6 +578,9 @@ class ImageIndex(CelerySearchIndex, SearchIndex, Indexable):
     def get_model(self):
         return Image
 
+    def get_updated_field(self):
+        return "updated"
+
     def prepare_model_weight(self, obj):
         # Printing here just because it's the first "prepare" function.
         print "%s: %d" % (obj.__class__.__name__, obj.pk)
@@ -700,7 +606,6 @@ class ImageIndex(CelerySearchIndex, SearchIndex, Indexable):
 
     def prepare_solar_system_main_subject(self, obj):
         return obj.solar_system_main_subject
-
 
     def prepare_is_deep_sky(self, obj):
         return DeepSky_Acquisition.objects.filter(image = obj).count() > 0
