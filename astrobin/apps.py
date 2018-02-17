@@ -39,7 +39,7 @@ class AstroBinAppConfig(AppConfig):
                 day_of_month='*',
                 month_of_year='*',
             )
-            PeriodicTask.objects.create(
+            PeriodicTask.objects.get_or_create(
                 crontab=schedule,
                 name='global_stats',
                 task='astrobin.tasks.global_stats',
@@ -52,7 +52,7 @@ class AstroBinAppConfig(AppConfig):
                 day_of_month='*',
                 month_of_year='*',
             )
-            PeriodicTask.objects.create(
+            PeriodicTask.objects.get_or_create(
                 crontab=schedule,
                 name='sync_iotd_api',
                 task='astrobin.tasks.sync_iotd_api',
@@ -65,7 +65,7 @@ class AstroBinAppConfig(AppConfig):
                 day_of_month='*',
                 month_of_year='*',
             )
-            PeriodicTask.objects.create(
+            PeriodicTask.objects.get_or_create(
                 crontab=schedule,
                 name='merge_gear',
                 task='astrobin.tasks.merge_gear',
@@ -78,14 +78,11 @@ class AstroBinAppConfig(AppConfig):
                 day_of_month='*',
                 month_of_year='*',
             )
-            PeriodicTask.objects.create(
+            PeriodicTask.objects.get_or_create(
                 crontab=schedule,
                 name='hitcount_cleanup',
                 task='astrobin.tasks.hitcount_cleanup',
             )
-
-        except IntegrityError:
-            print "Periodic tasks already exists"
         except ProgrammingError:
             print "Attempting to create priodic task before the migration"
         except OperationalError:
