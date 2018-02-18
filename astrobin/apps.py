@@ -111,8 +111,8 @@ class AstroBinAppConfig(AppConfig):
             )
 
             schedule, _ = CrontabSchedule.objects.get_or_create(
-                minute='20',
-                hour='4',
+                minute='30',
+                hour='*',
                 day_of_week='*',
                 day_of_month='*',
                 month_of_year='*',
