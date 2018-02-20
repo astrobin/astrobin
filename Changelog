@@ -1,3 +1,28 @@
+2018-02-20 Salvatore Iovene <salvatore@iovene.com>
+ * v1.18.0
+ * (help) Fix description of IOTD process in FAQ
+ * (forum) Let topic subscribers view topic even if not group members
+ * (users) Centralize username rendering and add color codes for roles
+ * (breadcrumbs) Fix for forums and account pages
+ * (images) Fix premium badge being rendered for wrong user
+ * (performance) Switch to cache backend for sessions
+ * (moderation) Redirect spam images to 404
+ * (notifications) Add timestamps
+ * (iotd) Add Top Pick badge
+ * (subscriptions) Add email notification when subscription about to expire
+ * (subscriptions) Implement single-payment and discontinue auto-renewals
+ * (sharing) Fix Facebook sharing preview image
+ * (iotd) Add link to full size in queues
+ * (infra) Replace debug_toolbar with silk
+ * (performance) Cache user metadata
+ * (performance) Prevent unneeded db queries when donations are disabled
+ * (performance) Cache activity stream stories
+ * (infra) Migrate from Vagrant to Docker
+ * (infra) Split settings in multiple files
+ * (general) Add support for READ ONLY mode to most views
+ * (email) Use celery to send emails in the background
+ * (search) Update index in real-time on celery worker
+
 2017-11-19 Salvatore Iovene <salvatore@iovene.com>
  * v1.17.0
  * (accounts) Don't allow multiple registrations with the same email
