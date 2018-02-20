@@ -28,7 +28,7 @@ RUN ln -s /usr/lib/x86_64-linux-gnu/libraw.so /usr/lib/x86_64-linux-gnu/libraw.s
 # Install abc
 COPY submodules/abc /code/submodules/abc
 WORKDIR /code/submodules/abc/cfitsio
-RUN sh configure && make -j4
+RUN sed -i -e 's/\r$//' configure && sh configure && make -j4
 WORKDIR /code/submodules/abc
 RUN qmake . && make -j4 && make install
 
