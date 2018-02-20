@@ -26,17 +26,15 @@ RUN apt-get update && apt-get install -y \
 RUN ln -s /usr/lib/x86_64-linux-gnu/libraw.so /usr/lib/x86_64-linux-gnu/libraw.so.10
 
 # Install abc
-RUN mkdir -p /code/abc
-WORKDIR /code
-COPY submodules/abc /code/abc
-RUN cd /code/abc/cfitsio &&  \
-    ./configure && make -j4 && \
-    cd /code/abc && \
-    qmake . && \
-    make -j4 && make install
+COPY submodules/abc /code/submodules/abc
+WORKDIR /code/submodules/abc/cfitsio
+RUN sh configure && make -j4
+WORKDIR /code/submodules/abc
+RUN qmake . && make -j4 && make install
 
 # Install pip dependencies
 COPY requirements.txt /code
+WORKDIR /code
 RUN pip install -U setuptools && \
     pip install -U pip && \
     pip install --no-deps -r requirements.txt --src /src
