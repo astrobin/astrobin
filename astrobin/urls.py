@@ -181,7 +181,7 @@ urlpatterns = [
           name='password_reset_confirm'),
     #and now add the registration urls
     url(r'^accounts/register/$',
-        registration_views.RegistrationViewUniqueEmail.as_view(),
+        registration_views.AstroBinRegistrationView.as_view(),
         name='registration_register'),
     url(r'^accounts/', include('registration.backends.hmac.urls')),
 

@@ -1907,6 +1907,29 @@ class UserProfile(models.Model):
         editable = False,
     )
 
+    accept_tos = models.BooleanField(
+        editable=False,
+        default=False
+    )
+
+    receive_important_communications = models.BooleanField(
+        default=False,
+        verbose_name=_(u'I accept to receive rare important communications via email'),
+        help_text=_(u'This is highly recommended. These are very rare and contain information that you probably want to have.')
+    )
+
+    receive_newsletter = models.BooleanField(
+        default=False,
+        verbose_name=_(u'I accept to receive occasional newsletters via email'),
+        help_text=_(u'Newsletters do not have a fixed schedule, but in any case they are not sent out more often than once per month.')
+    )
+
+    receive_marketing_and_commercial_material = models.BooleanField(
+        default=False,
+        verbose_name=_(u'I accept to receive occasional marketing and commercial material via email'),
+        help_text=_(u'These emails may contain offers, commercial news, and promotions from AstroBin or its partners.')
+    )
+
     # Preferences (notification preferences are stored in the django
     # notification model)
     language = models.CharField(
