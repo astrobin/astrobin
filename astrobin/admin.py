@@ -38,7 +38,15 @@ class UserProfileAdmin(admin.ModelAdmin):
         'filters',
         'accessories',
         'default_license',
-        'language'
+        'language',
+    )
+
+    list_display = (
+        'user',
+        'accept_tos',
+        'receive_important_communications',
+        'receive_newsletter',
+        'receive_marketing_and_commercial_material'
     )
 
     search_fields = ('user__username',)

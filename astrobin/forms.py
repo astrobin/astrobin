@@ -310,6 +310,9 @@ class UserProfileEditPreferencesForm(forms.ModelForm):
             'default_gallery_sorting',
             'exclude_from_competitions',
             'receive_forum_emails',
+            'receive_important_communications',
+            'receive_newsletter',
+            'receive_marketing_and_commercial_material'
         ]
 
 
