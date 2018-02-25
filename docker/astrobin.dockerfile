@@ -39,6 +39,6 @@ RUN pip install -U setuptools && \
     pip install -U pip && \
     pip install --no-deps -r requirements.txt --src /src
 
-CMD gunicorn wsgi:application -w 2 -b :8083
+CMD python manage.py migrate --noinput && gunicorn wsgi:application -w 2 -b :8083
 EXPOSE 8083
 COPY . /code
