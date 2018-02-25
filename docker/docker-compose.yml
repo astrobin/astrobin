@@ -112,7 +112,6 @@ services:
     build:
       context: ../
       dockerfile: docker/astrobin.dockerfile
-    command: python manage.py runserver 0.0.0.0:8083
     depends_on:
       - memcached
       - postgres
