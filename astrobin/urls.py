@@ -82,6 +82,7 @@ from astrobin.views import (
     user_profile_save_locations,
     user_profile_save_preferences,
     user_profile_seen_realname,
+    user_profile_seen_email_permissions,
 
     commercial_products_claim,
     commercial_products_edit,
@@ -327,6 +328,7 @@ urlpatterns = [
     url(r'^profile/save/locations/$',user_profile_save_locations, name='profile_save_locations'),
     url(r'^profile/save/preferences/$',user_profile_save_preferences, name='profile_save_preferences'),
     url(r'^profile/seen/realname/$',user_profile_seen_realname, name='profile_seen_realname'),
+    url(r'^profile/seen/email-permissions/$',user_profile_seen_email_permissions, name='profile_seen_email_permissions'),
 
     ###########################################################################
     ### AUTOCOMPLETE VIEWS                                                 ###
