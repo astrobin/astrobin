@@ -1,3 +1,12 @@
+2018-02-25 Salvatore Iovene <salvatore@iovene.com>
+ * v1.19.0
+ * (settings) Fix serving of local static files in debug mode
+ * (accounts) Upgrade django-registration to 2.4.1
+ * (celery) Remove periodic tasks from source code
+ * (docker) Remove custom runserver command from compose and document
+ * (nginx) Set 200 MB limit to local nginx conf too, for consistency
+ * (emails) Add django-bouncy to handle SES bounces/complaints
+
 2018-02-20 Salvatore Iovene <salvatore@iovene.com>
  * v1.18.0
  * (help) Fix description of IOTD process in FAQ
