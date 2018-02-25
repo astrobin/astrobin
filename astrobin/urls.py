@@ -194,6 +194,7 @@ urlpatterns = [
     url(r'^persistent_messages/', include('persistent_messages.urls')),
     url(r'^subscriptions/', include('subscription.urls')),
     url(r'^tinymce/', include('tinymce.urls')),
+    url(r'^bouncy/', include('django_bouncy.urls')),
 
     ###########################################################################
     ### API VIEWS                                                           ###
