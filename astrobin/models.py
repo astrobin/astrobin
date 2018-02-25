@@ -26,6 +26,7 @@ from django import forms
 from django.utils import translation
 from django.utils.translation import ugettext_lazy as _
 from django.conf import settings
+from django.utils import timezone
 
 try:
     # Django < 1.10
@@ -55,6 +56,7 @@ from utils import user_is_paying
 from mptt.models import MPTTModel, TreeForeignKey
 from reviews.models import Review
 from toggleproperties.models import ToggleProperty
+from tinymce import models as tinymce_models
 
 from astrobin_apps_notifications.utils import push_notification
 from astrobin_apps_images.managers import ImagesManager, PublicImagesManager, WipImagesManager
@@ -2495,3 +2497,12 @@ class CommercialGear(models.Model):
         app_label = 'astrobin'
         ordering = ['created']
         verbose_name_plural = _("Commercial gear items")
+
+
+class BroadcastEmail(models.Model):
+    subject = models.CharField(max_length=200)
+    created = models.DateTimeField(default=timezone.now)
+    message = tinymce_models.HTMLField()
+
+    def __unicode__(self):
+        return self.subject
