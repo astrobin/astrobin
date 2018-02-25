@@ -1,4 +1,12 @@
 2018-02-25 Salvatore Iovene <salvatore@iovene.com>
+ * v1.20.0
+ * (docker) Apply migrations in docker CMD
+ * (accounts) Add tos and email acceptance checkboxes
+ * (emails) Add admin backend to send emails to subscribers
+ * (emails) Add alert message prompting to check out email permission preferences
+ * (emails) Rate limit to 30/m to match SES limit
+
+2018-02-25 Salvatore Iovene <salvatore@iovene.com>
  * v1.19.0
  * (settings) Fix serving of local static files in debug mode
  * (accounts) Upgrade django-registration to 2.4.1
