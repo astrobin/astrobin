@@ -31,6 +31,7 @@ include(
     'components/rest.py',
     'components/silky.py',
     'components/subscription.py',
+    'components/tinymce.py',
     'components/thumbnail.py',
     'components/toggleproperties.py',
 

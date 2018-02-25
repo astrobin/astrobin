@@ -2,9 +2,12 @@ from astrobin.models import *
 
 import difflib
 
-from django.contrib import admin
-from django.http import HttpResponseRedirect
+from django.contrib import admin, messages
+from django.core.mail import BadHeaderError, EmailMessage
+from django.http import HttpResponse, HttpResponseRedirect
 from django.db.models import Q
+from django.utils.safestring import mark_safe
+
 
 class ImageAdmin(admin.ModelAdmin):
     fields = (
@@ -224,6 +227,80 @@ class CollectionAdmin(admin.ModelAdmin):
     list_filter = ('user',)
 
 
+class BroadcastEmailAdmin(admin.ModelAdmin):
+    def submit_email(self, request, obj, recipients):
+        if obj.count() != 1:
+            self.message_user(
+                request,
+                "Please select exactly one email",
+                messages.ERROR)
+        else:
+            obj = obj[0]
+            for recipient in recipients:
+                msg = EmailMessage(
+                    obj.subject,
+                    mark_safe(obj.message),
+                    settings.DEFAULT_FROM_EMAIL,
+                    [recipient])
+                msg.content_subtype = 'html'
+                msg.send()
+                self.message_user(
+                    request,
+                    "Email enqueued to be sent to %d users" % len(recipients))
+
+    def submit_mass_email(self, request, obj):
+        recipients = User.objects.all().values_list('email', flat=True)
+        self.submit_email(request, obj, recipients)
+
+    def submit_superuser_email(self, request, obj):
+        recipients = User.objects.filter(is_superuser = True).values_list('email', flat=True)
+        self.submit_email(request, obj, recipients)
+
+    def submit_important_communication(self, request, obj):
+        recipients = UserProfile.objects \
+            .filter(receive_important_communications=True) \
+            .values_list('user__email', flat=True)
+        self.submit_email(request, obj, recipients)
+
+    def submit_newsletter(self, request, obj):
+        recipients = UserProfile.objects \
+            .filter(receive_newsletter=True) \
+            .values_list('user__email', flat=True)
+        self.submit_email(request, obj, recipients)
+
+    def submit_marketing_and_commercial_material(self, request, obj):
+        recipients = UserProfile.objects \
+            .filter(receive_marketing_and_commercial_material=True) \
+            .values_list('user__email', flat=True)
+        self.submit_email(request, obj, recipients)
+
+    submit_mass_email.short_description = 'Submit mass email (select one only) - DO NOT ABUSE'
+    submit_mass_email.allow_tags = True
+
+    submit_superuser_email.short_description = 'Submit email to superusers (select one only)'
+    submit_superuser_email.allow_tags = True
+
+    submit_important_communication.short_description = 'Submit important communication (select one only)'
+    submit_important_communication.allow_tags = True
+
+    submit_newsletter.short_description = 'Submit newsletter (select one only)'
+    submit_newsletter.allow_tags = True
+
+    submit_marketing_and_commercial_material.short_description = 'Submit marketing and commercial material (select one only)'
+    submit_marketing_and_commercial_material.allow_tags = True
+
+    actions = [
+        'submit_mass_email',
+        'submit_superuser_email',
+        'submit_important_communication',
+        'submit_newsletter',
+        'submit_marketing_and_commercial_material',
+    ]
+
+    list_display = ("subject", "created")
+    search_fields = ['subject', ]
+
+
 admin.site.register(Gear, GearAdmin)
 admin.site.register(GearUserInfo)
 admin.site.register(GearAssistedMerge, GearAssistedMergeAdmin)
@@ -250,6 +327,7 @@ admin.site.register(ImageOfTheDay, ImageOfTheDayAdmin)
 admin.site.register(ImageOfTheDayCandidate, ImageOfTheDayCandidateAdmin)
 admin.site.register(Collection, CollectionAdmin)
 admin.site.register(GlobalStat)
+admin.site.register(BroadcastEmail, BroadcastEmailAdmin)
 
 ###############################################################################
 # Commercial models.                                                          #
