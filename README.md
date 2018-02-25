@@ -57,6 +57,14 @@ AstroBin is running! Visit http://127.0.0.1/ from your host.
 *PLEASE NOTE*: the nginx configuration in `docker/nginx.conf` is meant for a
 production environment. Feel free to tune if you change things.
 
+## Debugging
+
+For debugging purposes, it is recommended that you launch a simple development
+server on port 8084, and then access it directly bypassing nginx.
+
+```bash
+docker exec -it astrobin python manage.py runserver 0.0.0.0:8084
+```
 
 # Postgresql
 
