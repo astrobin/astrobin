@@ -1941,9 +1941,16 @@ class UserProfile(models.Model):
         choices = LANGUAGE_CHOICES,
     )
 
+    # One time notifications that won't disappear until marked as seen.
+
     seen_realname = models.BooleanField(
         default = False,
         editable = False,
+    )
+
+    seen_email_permissions = models.BooleanField(
+        default=False,
+        editable=False,
     )
 
     # PYBBM proxy fields

@@ -1844,6 +1844,16 @@ def user_profile_seen_realname(request):
 
 
 @login_required
+@require_POST
+def user_profile_seen_email_permissions(request):
+    profile = request.user.userprofile
+    profile.seen_email_permissions = True
+    profile.save()
+
+    return HttpResponseRedirect(request.POST.get('next', '/'))
+
+
+@login_required
 @require_GET
 def user_profile_edit_preferences(request):
     """Edits own preferences"""
