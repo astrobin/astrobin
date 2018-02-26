@@ -25,6 +25,7 @@ THUMBNAIL_ALIASES = {
         'real_inverted': {'size': (16536, 16536), 'invert': True, 'watermark': True},
 
         'hd': {'size': (1824, 0), 'crop': False, 'watermark': True},
+        'hd_anonymized': {'size': (1824, 0), 'crop': False, 'watermark': False},
         'hd_inverted': {'size': (1824, 0), 'crop': False, 'invert': True, 'watermark': True},
 
         'regular': {'size': (620, 0), 'crop': False, 'watermark': True},
