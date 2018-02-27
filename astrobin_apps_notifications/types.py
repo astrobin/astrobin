@@ -186,5 +186,11 @@ NOTICE_TYPES = (
         _("Your premium subscription will expire in one week"),
         '',
         2
+    ),
+    (
+        'expiring_subscription_autorenew',
+        _("Your subscription will be renewed in one week"),
+        '',
+        2
     )
 )
