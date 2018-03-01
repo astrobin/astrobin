@@ -74,7 +74,7 @@ def global_stats():
 
 @shared_task()
 def sync_iotd_api():
-    call_commang("image_of_the_day")
+    call_command("image_of_the_day")
 
 
 @shared_task()
