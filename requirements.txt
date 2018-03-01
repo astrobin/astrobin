@@ -61,13 +61,14 @@ django-mptt==0.8.7
 -e git+https://github.com/astrobin/django-notification.git@b2b1c1e076724db1a49486a3c4ac94d30f7433aa#egg=django_notification
 django-openid-provider==0.6
 django-paypal==0.3.6
--e git+https://github.com/rassie/django-persistent-messages.git@7d3f687ed419e6761338757bea1374d25271334b#egg=django_persistent_messages
+-e git+https://github.com/astrobin/django-persistent-messages.git@de99cfb#egg=django_persistent_messages
 django-pipeline==1.6.13
 django-precise-bbcode==1.2.8
 django-recaptcha-works==0.3.4
 django-registration==2.4.1
 django-reviews==1.2.1
 django-robots==3.0
+django-safedelete==0.4.5
 django-silk==1.1.0
 django-split-settings==0.3.0
 django-staticfiles==1.2.1
@@ -75,7 +76,7 @@ django-storages==1.5.2
 -e git+https://github.com/siovene/django-subscription.git@d613c8b5c3c81a9d0baf7b361b6e907d1081d7d5#egg=django_subscription
 django-tagging==0.4.5
 django-tastypie==0.13.3
--e git+https://github.com/siovene/django-threaded-messages.git@0010f1cd5d1f96dda25ecdd2b101781ca33c96bf#egg=django_threaded_messages
+-e git+https://github.com/astrobin/django-threaded-messages.git@7020cd56b562acabb1361668f9f012e70b0ab35f#egg=django_threaded_messages
 django-threaded-multihost==1.4-1
 django-timezones==0.2
 django-tinymce==2.6.0
@@ -167,7 +168,7 @@ sphinx-me==0.3
 SQLAlchemy==1.1.14
 sqlparse==0.2.3
 termcolor==1.1.0
--e git+https://bitbucket.org/siovene/django-toggle-properties.git@ae0c1e5df12a0bb3257c983ac76b0b3eee6c59f8#egg=toggleproperties
+-e git+https://github.com/astrobin/django-toggle-properties.git@b2af703096b0d283586c0f6678fddb384b586041#egg=toggleproperties
 tornado==4.5.1
 ua-parser==0.7.3
 uncompyle6==2.15.1

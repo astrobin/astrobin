@@ -1,6 +1,9 @@
 from django.db import models
 
-class ImagesManager(models.Manager):
+from safedelete.managers import SafeDeleteManager
+
+
+class ImagesManager(SafeDeleteManager):
     def get_queryset(self):
         return super(ImagesManager, self).get_queryset()\
             .select_related(

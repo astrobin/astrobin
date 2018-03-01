@@ -57,6 +57,7 @@ from mptt.models import MPTTModel, TreeForeignKey
 from reviews.models import Review
 from toggleproperties.models import ToggleProperty
 from tinymce import models as tinymce_models
+from safedelete.models import SafeDeleteModel
 
 from astrobin_apps_notifications.utils import push_notification
 from astrobin_apps_images.managers import ImagesManager, PublicImagesManager, WipImagesManager
@@ -654,7 +655,7 @@ def build_catalog_and_name(obj, name):
 # TODO: remember that thumbnails must return 'final' version
 # TODO: notifications for gear and subjects after upload
 # TODO: this makes animated gifs static :-(
-class Image(HasSolutionMixin, models.Model):
+class Image(HasSolutionMixin, SafeDeleteModel):
     BINNING_CHOICES = (
         (1, '1x1'),
         (2, '2x2'),
@@ -845,7 +846,7 @@ class Image(HasSolutionMixin, models.Model):
         ordering = ('-uploaded', '-id')
 
     objects = PublicImagesManager()
-    all_objects = ImagesManager()
+    objects_including_wip = ImagesManager()
     wip = WipImagesManager()
 
     def __unicode__(self):
@@ -854,7 +855,7 @@ class Image(HasSolutionMixin, models.Model):
     def save(self, *args, **kwargs):
         if self.id:
             try:
-                image = Image.all_objects.get(id = self.id)
+                image = Image.objects_including_wip.get(id = self.id)
             except Image.DoesNotExist:
                 # Abort!
                 print "Aborting because image was deleted."
@@ -914,7 +915,7 @@ class Image(HasSolutionMixin, models.Model):
                 .toggleproperties_for_object("like", self)\
                 .select_related('user')\
                 .values_list('user', flat = True)
-            val = User.objects.filter(pk__in = user_pks)
+            val = [profile.user for profile in UserProfile.objects.filter(user__pk__in = user_pks)]
             cache.set(key, val, 300)
         return val
 
@@ -934,7 +935,7 @@ class Image(HasSolutionMixin, models.Model):
                 .toggleproperties_for_object("bookmark", self)\
                 .select_related('user')\
                 .values_list('user', flat = True)
-            val = User.objects.filter(pk__in = user_pks)
+            val = [profile.user for profile in UserProfile.objects.filter(user__pk__in = user_pks)]
             cache.set(key, val, 300)
         return val
 
@@ -980,7 +981,7 @@ class Image(HasSolutionMixin, models.Model):
                 object_id = self.id)\
                     .select_related('author')\
                     .values_list('author', flat = True)
-            val = User.objects.filter(pk__in = user_pks)
+            val = [profile.user for profile in UserProfile.objects.filter(user__pk__in = user_pks)]
             cache.set(key, val, 300)
         return val
 
@@ -1337,7 +1338,7 @@ class Image(HasSolutionMixin, models.Model):
         return images
 
 
-class ImageRevision(HasSolutionMixin, models.Model):
+class ImageRevision(HasSolutionMixin, SafeDeleteModel):
     image = models.ForeignKey(
         Image,
         related_name = 'revisions'
@@ -1713,7 +1714,7 @@ class ImageRequest(Request):
     type  = models.CharField(max_length=8, choices=TYPE_CHOICES)
 
 
-class UserProfile(models.Model):
+class UserProfile(SafeDeleteModel):
     GEAR_CLASS_LOOKUP = {
         'telescopes': Telescope,
         'mounts': Mount,
@@ -2080,6 +2081,11 @@ class UserProfile(models.Model):
 
     class Meta:
         app_label = 'astrobin'
+
+    def delete(self, *args, **kwargs):
+        # Images are attached to the auth.User oject, and that's not really
+        # deleted, so nothing is cascaded, hence the following line.
+        self.user.images.objects_including_wip.delete()
 
 def create_user_profile(sender, instance, created, **kwargs):
     if created:

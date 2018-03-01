@@ -253,7 +253,9 @@ class BroadcastEmailAdmin(admin.ModelAdmin):
         self.submit_email(request, obj, recipients)
 
     def submit_superuser_email(self, request, obj):
-        recipients = User.objects.filter(is_superuser = True).values_list('email', flat=True)
+        recipients = UserProfile.objects\
+            .filter(user__is_superuser = True)\
+            .values_list('user__email', flat=True)
         self.submit_email(request, obj, recipients)
 
     def submit_important_communication(self, request, obj):

@@ -7,13 +7,17 @@ from django.views.generic.list import ListView
 # Third party
 from persistent_messages.models import Message
 
+# AstroBin
+from astrobin.models import UserProfile
+
 # This app
 from astrobin_apps_notifications.utils import push_notification
+
 
 class TestNotificationView(View):
     def post(request, *args, **kwargs):
         push_notification(
-            [User.objects.get(username = kwargs.pop('username'))],
+            [UserProfile.objects.get(user__username = kwargs.pop('username')).user],
             'test_notification',
             {})
         return HttpResponse("test_notification sent")

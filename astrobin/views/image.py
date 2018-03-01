@@ -51,6 +51,7 @@ from astrobin.models import (
     Image, ImageRevision,
     DeepSky_Acquisition,
     SolarSystem_Acquisition,
+    UserProfile,
     LANGUAGES,
     LICENSE_CHOICES,
     SOLAR_SYSTEM_SUBJECT_CHOICES,
@@ -82,8 +83,8 @@ class ImageFlagThumbsView(
 
     def get_queryset(self):
         if self.request.user.is_superuser:
-            return Image.all_objects.all()
-        return Image.all_objects.filter(user = self.request.user)
+            return Image.objects_including_wip.all()
+        return Image.objects_including_wip.filter(user = self.request.user)
 
     def get_success_url(self):
         image = self.get_object()
@@ -100,7 +101,7 @@ class ImageFlagThumbsView(
 
 class ImageThumbView(JSONResponseMixin, DetailView):
     model = Image
-    queryset = Image.all_objects.all()
+    queryset = Image.objects_including_wip.all()
     pk_url_kwarg = 'id'
 
     def get(self, request, *args, **kwargs):
@@ -127,7 +128,7 @@ class ImageThumbView(JSONResponseMixin, DetailView):
 
 class ImageRawThumbView(DetailView):
     model = Image
-    queryset = Image.all_objects.all()
+    queryset = Image.objects_including_wip.all()
     pk_url_kwarg = 'id'
 
     def get(self, request, *args, **kwargs):
@@ -154,11 +155,11 @@ class ImageDetailView(DetailView):
         return super(ImageDetailView, self).get(request, *args, **kwargs)
 
     def get_queryset(self):
-        return Image.all_objects.all()
+        return Image.objects_including_wip.all()
 
     def dispatch(self, request, *args, **kwargs):
         # Redirect to the correct revision
-        image = get_object_or_404(Image.all_objects, pk = kwargs[self.pk_url_kwarg])
+        image = get_object_or_404(Image.objects_including_wip, pk = kwargs[self.pk_url_kwarg])
 
         if image.moderator_decision == 2:
             if not request.user.is_authenticated() or \
@@ -641,12 +642,12 @@ class ImageFullView(DetailView):
     template_name_suffix = ''
 
     def get_queryset(self):
-        return Image.all_objects.all()
+        return Image.objects_including_wip.all()
 
     # TODO: unify this with ImageDetailView.dispatch
     def dispatch(self, request, *args, **kwargs):
         # Redirect to the correct revision
-        image = get_object_or_404(Image.all_objects, pk = kwargs[self.pk_url_kwarg])
+        image = get_object_or_404(Image.objects_including_wip, pk = kwargs[self.pk_url_kwarg])
 
         if image.moderator_decision == 2:
             raise Http404
@@ -704,13 +705,13 @@ class ImageDeleteView(LoginRequiredMixin, DeleteView):
     pk_url_kwarg = 'id'
 
     def get_queryset(self):
-        return Image.all_objects.all()
+        return Image.objects_including_wip.all()
 
     # I would like to use braces' UserPassesTest for this, but I can't
     # get_object from there because the view is not dispatched yet.
     def dispatch(self, request, *args, **kwargs):
         try:
-            image = Image.all_objects.get(pk = kwargs[self.pk_url_kwarg])
+            image = Image.objects_including_wip.get(pk = kwargs[self.pk_url_kwarg])
         except Image.DoesNotExist:
             raise Http404
 
@@ -769,13 +770,13 @@ class ImageDeleteOriginalView(LoginRequiredMixin, DeleteView):
     pk_url_kwarg = 'id'
 
     def get_queryset(self):
-        return Image.all_objects.all()
+        return Image.objects_including_wip.all()
 
     # I would like to use braces' UserPassesTest for this, but I can't
     # get_object from there because the view is not dispatched yet.
     def dispatch(self, request, *args, **kwargs):
         try:
-            image = Image.all_objects.get(pk = kwargs[self.pk_url_kwarg])
+            image = Image.objects_including_wip.get(pk = kwargs[self.pk_url_kwarg])
         except Image.DoesNotExist:
             raise Http404
 
@@ -841,14 +842,14 @@ class ImageDemoteView(LoginRequiredMixin, UpdateView):
     http_method_names = ('post',)
 
     def get_queryset(self):
-        return self.model.all_objects.all()
+        return self.model.objects_including_wip.all()
 
     def get_success_url(self):
         return reverse_lazy('image_detail', args = (self.get_object().pk,))
 
     def dispatch(self, request, *args, **kwargs):
         try:
-            image = self.model.all_objects.get(pk = kwargs[self.pk_url_kwarg])
+            image = self.model.objects_including_wip.get(pk = kwargs[self.pk_url_kwarg])
         except Image.DoesNotExist:
             raise Http404
 
@@ -874,14 +875,14 @@ class ImagePromoteView(LoginRequiredMixin, UpdateView):
     http_method_names = ('post',)
 
     def get_queryset(self):
-        return self.model.all_objects.all()
+        return self.model.objects_including_wip.all()
 
     def get_success_url(self):
         return reverse_lazy('image_detail', args = (self.get_object().pk,))
 
     def dispatch(self, request, *args, **kwargs):
         try:
-            image = self.model.all_objects.get(pk = kwargs[self.pk_url_kwarg])
+            image = self.model.objects_including_wip.get(pk = kwargs[self.pk_url_kwarg])
         except Image.DoesNotExist:
             raise Http404
 
@@ -900,7 +901,9 @@ class ImagePromoteView(LoginRequiredMixin, UpdateView):
             if not previously_published:
                 followers = [
                     x.user for x in
-                    ToggleProperty.objects.toggleproperties_for_object("follow", User.objects.get(pk = request.user.pk))
+                    ToggleProperty.objects.toggleproperties_for_object(
+                        "follow",
+                        UserProfile.objects.get(user__pk = request.user.pk).user)
                 ]
                 push_notification(followers, 'new_image',
                     {
@@ -922,14 +925,14 @@ class ImageEditBaseView(LoginRequiredMixin, UpdateView):
     context_object_name = 'image'
 
     def get_queryset(self):
-        return self.model.all_objects.all()
+        return self.model.objects_including_wip.all()
 
     def get_success_url(self):
         return reverse_lazy('image_detail', args = (self.get_object().pk,))
 
     def dispatch(self, request, *args, **kwargs):
         try:
-            image = self.model.all_objects.get(pk = kwargs[self.pk_url_kwarg])
+            image = self.model.objects_including_wip.get(pk = kwargs[self.pk_url_kwarg])
         except Image.DoesNotExist:
             raise Http404
 

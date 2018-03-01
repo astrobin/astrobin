@@ -1034,7 +1034,7 @@ class GroupsTest(TestCase):
                 { 'image_file': open('astrobin/fixtures/test.jpg', 'rb') },
                 follow = True)
             self.client.logout()
-            return Image.all_objects.all().order_by('-pk')[0]
+            return Image.objects_including_wip.all().order_by('-pk')[0]
 
         group = Group.objects.create(
             name = 'AS sync test group',
