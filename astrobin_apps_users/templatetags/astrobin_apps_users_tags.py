@@ -7,7 +7,7 @@ from django.template import Library, Node
 from django.utils.translation import ugettext_lazy as _
 
 # AstroBin apps
-from astrobin.models import Image
+from astrobin.models import Image, UserProfile
 from astrobin_apps_premium.utils import premium_user_has_valid_subscription
 
 # Third party apps
