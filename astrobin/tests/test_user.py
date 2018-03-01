@@ -45,7 +45,7 @@ class UserTest(TestCase):
         self.payers.delete()
 
     def _get_last_image(self):
-        return Image.all_objects.all().order_by('-id')[0]
+        return Image.objects_including_wip.all().order_by('-id')[0]
 
     def _do_upload(self, filename, title = "TEST IMAGE", wip = False):
         data = {'image_file': open(filename, 'rb')}
@@ -393,7 +393,7 @@ class UserTest(TestCase):
         self._do_upload('astrobin/fixtures/test.jpg')
         self.client.logout()
 
-        image = Image.all_objects.all()[0]
+        image = Image.objects_including_wip.all()[0]
 
         submitter = User.objects.create_user('submitter', 'submitter_1@test.com', 'password')
         submitters = Group.objects.create(name = 'iotd_submitters')
@@ -411,7 +411,7 @@ class UserTest(TestCase):
         profile = self.user.userprofile
         profile.exclude_from_competitions = True
         profile.save()
-        image = Image.all_objects.get(pk = image.pk)
+        image = Image.objects_including_wip.get(pk = image.pk)
 
         # Check that the IOTD banner is not visible
         response = self.client.get(reverse('image_detail', args = (image.pk,)))

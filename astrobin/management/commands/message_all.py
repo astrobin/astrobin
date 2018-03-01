@@ -12,7 +12,7 @@ class Command(BaseCommand):
 
         subject = args[0]
         body = args[1]
-        sender = User.objects.get(username = 'astrobin')
+        sender = UserProfile.objects.get(user__username = 'astrobin').user
 
         for recipient in User.objects.all():
             if recipient.username != 'astrobin':

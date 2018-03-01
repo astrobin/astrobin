@@ -20,6 +20,7 @@ from braces.views import LoginRequiredMixin
 from pybb.permissions import perms
 
 # AstroBin
+from astrobin.models import UserProfile
 from astrobin_apps_notifications.utils import push_notification
 
 # This app
@@ -275,8 +276,8 @@ class GroupInviteView(
         group = self.get_object()
         for pk in request.POST.getlist('users[]'):
             try:
-                user = User.objects.get(pk = pk)
-            except User.DoesNotExist:
+                user = UserProfile.objects.get(user__pk = pk).user
+            except UserProfile.DoesNotExist:
                 continue
 
             group.invited_users.add(user)
@@ -347,7 +348,7 @@ class GroupAddRemoveImages(
     def post(self, request, *args, **kwargs):
         if request.is_ajax():
             group = self.get_object()
-            group.images.remove(*Image.all_objects.filter(user = request.user))
+            group.images.remove(*Image.objects_including_wip.filter(user = request.user))
             images = Image.objects.filter(pk__in = request.POST.getlist('images[]'))
             if images:
                 if images[0].user == request.user:
@@ -402,7 +403,7 @@ class GroupAddModerator(
     def post(self, request, *args, **kwargs):
         if request.is_ajax():
             group = self.get_object()
-            user = User.objects.get(pk = self.request.POST.get('user'))
+            user = UserProfile.objects.get(user__pk = self.request.POST.get('user')).user
             if user not in group.members.all():
                 return HttpResponseForbidden()
             group.moderators.add(user)
@@ -431,7 +432,7 @@ class GroupRemoveModerator(
     def post(self, request, *args, **kwargs):
         if request.is_ajax():
             group = self.get_object()
-            user = User.objects.get(pk = self.request.POST.get('user'))
+            user = UserProfile.objects.get(user__pk = self.request.POST.get('user')).user
             if user not in group.moderators.all():
                 return HttpResponseForbidden()
             group.moderators.remove(user)
@@ -458,7 +459,7 @@ class GroupRemoveMember(
     def post(self, request, *args, **kwargs):
         if request.is_ajax():
             group = self.get_object()
-            user = User.objects.get(pk = self.request.POST.get('user'))
+            user = UserProfile.objects.get(user__pk = self.request.POST.get('user')).user
             if user not in group.members.all():
                 return HttpResponseForbidden()
             group.members.remove(user)
@@ -489,7 +490,7 @@ class GroupApproveJoinRequestView(JSONResponseMixin, LoginRequiredMixin,
     def post(self, request, *args, **kwargs):
         if request.is_ajax():
             group = self.get_object()
-            user = User.objects.get(pk = self.request.POST.get('user'))
+            user = UserProfile.objects.get(user__pk = self.request.POST.get('user')).user
 
             if user not in group.join_requests.all():
                 return HttpResponseForbidden()
@@ -518,7 +519,7 @@ class GroupRejectJoinRequestView(JSONResponseMixin, LoginRequiredMixin,
     def post(self, request, *args, **kwargs):
         if request.is_ajax():
             group = self.get_object()
-            user = User.objects.get(pk = self.request.POST.get('user'))
+            user = UserProfile.objects.get(user__pk = self.request.POST.get('user')).user
 
             if user not in group.join_requests.all():
                 return HttpResponseForbidden()

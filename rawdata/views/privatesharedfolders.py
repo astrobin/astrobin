@@ -32,7 +32,7 @@ from rawdata.models import PrivateSharedFolder, RawImage
 from rawdata.zip import *
 
 # Other AstroBin apps
-from astrobin.models import Image
+from astrobin.models import Image, UserProfile
 from common.mixins import AjaxableResponseMixin
 
 
@@ -131,9 +131,10 @@ class PrivateSharedFolderAddUsersView(RestrictToSubscriberMixin, RestrictToInvit
         usernames = form.cleaned_data['users'].split(',')
         for username in usernames:
             try:
-                user = User.objects.get(username = username)
+                user = UserProfile.objects.get(user__username = username).user
                 folder.users.add(user)
-            except:
+            except UserProfile.DoesNotExist:
+                print "User does not exist: %s" % username
                 continue
         return super(PrivateSharedFolderAddUsersView, self).form_valid(form)
 

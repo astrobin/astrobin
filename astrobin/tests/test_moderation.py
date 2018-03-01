@@ -40,7 +40,7 @@ class ModerationTest(TestCase):
 
 
     def _get_last_image(self):
-        return Image.all_objects.all().order_by('-id')[0]
+        return Image.objects_including_wip.all().order_by('-id')[0]
 
 
     def test_image_moderation_queue_view(self):
@@ -74,7 +74,7 @@ class ModerationTest(TestCase):
         # Moderator can approve it
         response = self.client.post(reverse('image_moderation_mark_as_ham'), {'ids[]': [image.pk]})
         self.assertEqual(response.status_code, 200)
-        image = Image.all_objects.get(pk = image.pk)
+        image = Image.objects_including_wip.get(pk = image.pk)
         self.assertEqual(image.moderator_decision, 1)
 
         # Moderator can mark it as spam
@@ -82,7 +82,7 @@ class ModerationTest(TestCase):
         image.save()
         response = self.client.post(reverse('image_moderation_mark_as_spam'), {'ids[]': [image.pk]})
         self.assertEqual(response.status_code, 200)
-        image = Image.all_objects.get(pk = image.pk)
+        image = Image.objects_including_wip.get(pk = image.pk)
         self.assertEqual(image.moderator_decision, 2)
 
         image.delete()

@@ -28,7 +28,7 @@ class ImageModerationListView(
     group_required = "image_moderators"
     raise_exception = True
     model = Image
-    queryset = Image.all_objects.filter(moderator_decision = 0)
+    queryset = Image.objects_including_wip.filter(moderator_decision = 0)
     template_name = "moderation/image_list.html"
 
 
@@ -36,7 +36,7 @@ class ImageModerationSpamListView(
         LoginRequiredMixin, SuperuserRequiredMixin, ListView):
     raise_exception = True
     model = Image
-    queryset = Image.all_objects.filter(moderator_decision = 2)
+    queryset = Image.objects_including_wip.filter(moderator_decision = 2)
     template_name = "moderation/spam_list.html"
 
 
@@ -48,7 +48,7 @@ class ImageModerationMarkAsSpamView(
 
     def post(self, request, *args, **kwargs):
         ids = request.POST.getlist('ids[]')
-        Image.all_objects.filter(pk__in = ids).update(
+        Image.objects_including_wip.filter(pk__in = ids).update(
             moderator_decision = 2,
             moderated_when = datetime.date.today(),
             moderated_by = request.user)
@@ -66,12 +66,12 @@ class ImageModerationMarkAsHamView(
 
     def post(self, request, *args, **kwargs):
         ids = request.POST.getlist('ids[]')
-        Image.all_objects.filter(pk__in = ids).update(
+        Image.objects_including_wip.filter(pk__in = ids).update(
             moderator_decision = 1,
             moderated_when = datetime.date.today(),
             moderated_by = request.user)
 
-        for image in Image.all_objects.filter(pk__in = ids):
+        for image in Image.objects_including_wip.filter(pk__in = ids):
             if not image.is_wip:
                 followers = [x.user for x in ToggleProperty.objects.filter(
                     property_type = "follow",
@@ -98,9 +98,9 @@ class ImageModerationBanAllView(
     raise_exception = True
 
     def post(self, request, *args, **kwargs):
-        images = Image.all_objects.filter(moderator_decision = 2)
+        images = Image.objects_including_wip.filter(moderator_decision = 2)
         for i in images:
-            i.user.delete()
+            i.user.userprofile.delete()
 
         return self.render_json_response({
             'status': 'OK',

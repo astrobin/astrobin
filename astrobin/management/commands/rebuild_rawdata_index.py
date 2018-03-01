@@ -15,7 +15,7 @@ class Command(BaseCommand):
         username = options['username']
 
         try:
-            user = User.objects.get(username = username)
+            user = UserProfile.objects.get(user__username = username).user
         except User.DoesNotExist:
             print "User not found."
             return

@@ -9,7 +9,7 @@ from astrobin.models import Image, ImageRevision
 
 
 def test_utils_get_last_image():
-    return Image.all_objects.all().order_by('-id')[0]
+    return Image.objects_including_wip.all().order_by('-id')[0]
 
 
 def test_utils_get_last_image_revision():
