@@ -21,8 +21,8 @@ register = Library()
 def astrobin_username(user, **kwargs):
     if not hasattr(user, 'userprofile'):
         try:
-            user = User.objects.get(username = user)
-        except User.DoesNotExist:
+            user = UserProfile.objects.get(user__username = user).user
+        except UserProfile.DoesNotExist:
             return {'user': None}
 
     cache_key = 'user_metadata_' + user.username
@@ -102,7 +102,7 @@ def astrobin_user(context, user, **kwargs):
     request = context['request']
     request_user = None
     if request.user.is_authenticated():
-        request_user = User.objects.get(pk = request.user.pk)
+        request_user = UserProfile.objects.get(user=request.user).user
 
     view = kwargs.get('view')
     if view is None and 'view' in context:
@@ -137,7 +137,7 @@ def astrobin_apps_users_list(context, user_list, **kwargs):
 
     request_user = None
     if request.user.is_authenticated():
-        request_user = User.objects.get(pk = request.user.pk)
+        request_user = UserProfile.objects.get(user=request.user).user
 
     view = kwargs.get('view')
     if view is None and 'view' in context:

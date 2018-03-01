@@ -172,10 +172,6 @@ class PremiumTest(TestCase):
                 follow = True)
             self._assertMessage(response, "error unread", "You have reached your image count limit")
 
-            Image.all_objects.filter(user = user).delete()
-            profile = UserProfile.objects.get(pk = profile.pk)
-            self.assertEqual(profile.premium_counter, 0)
-
             # Promote to Lite
             group, created = Group.objects.get_or_create(name = "astrobin_lite")
             sub, created = Subscription.objects.get_or_create(
@@ -207,12 +203,12 @@ class PremiumTest(TestCase):
             self._assertMessage(response, "error unread", "You have reached your image count limit")
 
             # Deleting an image uploaded this year decreases the counter as expected
-            Image.all_objects.get(pk = 40).delete()
+            Image.objects_including_wip.all().last().delete()
             profile = UserProfile.objects.get(pk = profile.pk)
             self.assertEqual(profile.premium_counter, settings.PREMIUM_MAX_IMAGES_FREE - 1)
 
             # But deleting an image uploaded before the subscription was created does not
-            image = Image.all_objects.get(pk = 39)
+            image = Image.objects_including_wip.all().order_by('-pk')[1] # Second last element
             image.uploaded = image.uploaded - datetime.timedelta(days = 1)
             image.save()
             image.delete()
@@ -245,7 +241,7 @@ class PremiumTest(TestCase):
             self.assertEqual(profile.premium_counter, counter + 1)
 
             # But it never decreases, as it's not necessary
-            image = Image.all_objects.all()[0]
+            image = Image.objects_including_wip.all()[0]
             image.delete()
             profile = UserProfile.objects.get(pk = profile.pk)
             self.assertEqual(profile.premium_counter, counter + 1)

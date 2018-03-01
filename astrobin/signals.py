@@ -11,7 +11,7 @@ from django.core.urlresolvers import reverse as reverse_url
 from django.db import IntegrityError
 from django.db import transaction
 from django.db.models.signals import (
-        pre_save, post_save, pre_delete, post_delete, m2m_changed)
+        pre_save, post_save, post_delete, m2m_changed)
 from django.utils.translation import ugettext_lazy as _
 
 # Third party apps
@@ -21,6 +21,7 @@ from rest_framework.authtoken.models import Token
 from reviews.models import Review
 from threaded_messages.models import Thread
 from toggleproperties.models import ToggleProperty
+from safedelete.signals import post_softdelete
 from subscription.models import UserSubscription
 from subscription.signals import subscribed, paid, signed_up
 
@@ -104,13 +105,17 @@ def image_post_save(sender, instance, created, **kwargs):
 
     if not profile_saved:
         # Trigger update of auto_add fields
-        instance.user.userprofile.save()
+        try:
+            instance.user.userprofile.save()
+        except UserProfile.DoesNotExist:
+            pass
+
     # Trigger real time search index
     instance.user.save()
 post_save.connect(image_post_save, sender = Image)
 
 
-def image_pre_delete(sender, instance, **kwargs):
+def image_post_delete(sender, instance, **kwargs):
     def decrease_counter(user):
         user.userprofile.premium_counter -= 1
         with transaction.atomic():
@@ -132,6 +137,7 @@ def image_pre_delete(sender, instance, **kwargs):
     except IntegrityError:
         # Possibly the user is being deleted
         pass
+post_softdelete.connect(image_post_delete, sender = Image)
 
 def imagerevision_post_save(sender, instance, created, **kwargs):
     if created and not instance.image.is_wip:
@@ -230,7 +236,10 @@ post_save.connect(nested_comment_post_save, sender = NestedComment)
 def toggleproperty_post_delete(sender, instance, **kwargs):
     if hasattr(instance.content_object, "updated"):
         # This will trigger the auto_now fields in the content_object
-        instance.content_object.save()
+        try:
+            instance.content_object.save()
+        except instance.content_object.DoesNotExist:
+            pass
 post_delete.connect(toggleproperty_post_delete, sender = ToggleProperty)
 
 
@@ -380,7 +389,7 @@ m2m_changed.connect(rawdata_privatesharedfolder_image_added, sender = PrivateSha
 
 def rawdata_privatesharedfolder_user_added(sender, instance, action, reverse, model, pk_set, **kwargs):
     if action == 'post_add' and len(pk_set) > 0:
-        user = User.objects.get(pk = list(pk_set)[0])
+        user = UserProfile.objects.get(user__pk = list(pk_set)[0]).user
         push_notification(
             [user],
             'rawdata_invited_to_private_folder',
@@ -450,8 +459,6 @@ paid.connect(subscription_subscribed)
 signed_up.connect(subscription_subscribed)
 
 
-pre_delete.connect(image_pre_delete, sender = Image)
-
 def group_pre_save(sender, instance, **kwargs):
     try:
         group = sender.objects.get(pk = instance.pk)
@@ -461,7 +468,7 @@ def group_pre_save(sender, instance, **kwargs):
         # Group is becoming autosubmission
         if not group.autosubmission and instance.autosubmission:
             instance.images.clear()
-            images = Image.all_objects.filter(user__in = instance.members.all())
+            images = Image.objects_including_wip.filter(user__in = instance.members.all())
             for image in images:
                 instance.images.add(image)
 
@@ -482,7 +489,7 @@ def group_post_save(sender, instance, created, **kwargs):
             followers = [
                 x.user for x in
                 ToggleProperty.objects.toggleproperties_for_object(
-                    "follow", User.objects.get(pk = instance.creator.pk))
+                    "follow", UserProfile.objects.get(user__pk = instance.creator.pk).user)
             ]
             push_notification(followers, 'new_public_group_created',
                 {
@@ -517,12 +524,12 @@ def group_members_changed(sender, instance, **kwargs):
         iotd_staff_group = None
 
     if action == 'post_add':
-        users = User.objects.filter(pk__in = pk_set)
+        users = [profile.user for profile in UserProfile.objects.filter(user__pk__in = pk_set)]
         instance.save() # trigger date_updated update
 
         if instance.public:
             for pk in pk_set:
-                user = User.objects.get(pk = pk)
+                user = UserProfile.objects.get(user__pk = pk).user
                 if user != instance.owner:
                     followers = [
                         x.user for x in
@@ -541,7 +548,7 @@ def group_members_changed(sender, instance, **kwargs):
                         action_object = instance)
 
         if instance.autosubmission:
-            images = Image.all_objects.filter(user__pk__in = pk_set)
+            images = Image.objects_including_wip.filter(user__pk__in = pk_set)
             for image in images:
                 instance.images.add(image)
 
@@ -554,8 +561,8 @@ def group_members_changed(sender, instance, **kwargs):
                     iotd_staff_group.members.add(user)
 
     elif action == 'post_remove':
-        users = User.objects.filter(pk__in = pk_set)
-        images = Image.all_objects.filter(user__pk__in = pk_set)
+        users = [profile.user for profile in UserProfile.objects.filter(user__pk__in = pk_set)]
+        images = Image.objects_including_wip.filter(user__pk__in = pk_set)
         for image in images:
             instance.images.remove(image)
 
@@ -699,5 +706,8 @@ post_save.connect(threaded_messages_thread_post_save, sender = Thread)
 
 def user_post_save(sender, instance, created, **kwargs):
     if not created:
-        instance.userprofile.save()
+        try:
+            instance.userprofile.save()
+        except UserProfile.DoesNotExist:
+            pass
 post_save.connect(user_post_save, sender=User)

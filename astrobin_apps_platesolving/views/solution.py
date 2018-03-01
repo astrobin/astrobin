@@ -35,8 +35,8 @@ class SolveView(base.View):
 
         content_type = ContentType.objects.get_for_id(content_type_id)
         manager = content_type.model_class()
-        if hasattr(manager, 'all_objects'):
-            manager = manager.all_objects
+        if hasattr(manager, 'objects_including_wip'):
+            manager = manager.objects_including_wip
         target = get_object_or_404(manager, pk = object_id)
         solution, created = Solution.objects.get_or_create(object_id = object_id, content_type = content_type)
         if solution.settings is None:

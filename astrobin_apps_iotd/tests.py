@@ -49,7 +49,7 @@ class IotdTest(TestCase):
             { 'image_file': open('astrobin/fixtures/test.jpg', 'rb') },
             follow = True)
         self.client.logout()
-        self.image = Image.all_objects.first()
+        self.image = Image.objects_including_wip.first()
 
         # Approve the image and set a title
         self.image.moderator_decision = 1
@@ -597,7 +597,7 @@ class IotdTest(TestCase):
         # All OK
         response = self.client.post(url, HTTP_X_REQUESTED_WITH = 'XMLHttpRequest')
         self.assertEqual(response.status_code, 200)
-        self.assertEqual(json.loads(response.content)['submission'], 1)
+        self.assertTrue('submission' in json.loads(response.content))
         self.assertEqual(json.loads(response.content)['used_today'], 1)
         self.assertFalse('error' in json.loads(response.content))
         self.assertEqual(IotdSubmission.objects.count(), 1)
@@ -716,7 +716,7 @@ class IotdTest(TestCase):
             image = self.image)
         response = self.client.post(url, HTTP_X_REQUESTED_WITH = 'XMLHttpRequest')
         self.assertEqual(response.status_code, 200)
-        self.assertEqual(json.loads(response.content)['vote'], 1)
+        self.assertTrue('vote' in json.loads(response.content))
         self.assertEqual(json.loads(response.content)['used_today'], 1)
         self.assertFalse('error' in json.loads(response.content))
         self.assertEqual(IotdVote.objects.count(), 1)
@@ -837,7 +837,7 @@ class IotdTest(TestCase):
             image = self.image)
         response = self.client.post(url, HTTP_X_REQUESTED_WITH = 'XMLHttpRequest')
         self.assertEqual(response.status_code, 200)
-        self.assertEqual(json.loads(response.content)['iotd'], 1)
+        self.assertTrue('iotd' in json.loads(response.content))
         self.assertEqual(json.loads(response.content)['used_today'], 1)
         self.assertFalse('error' in json.loads(response.content))
         self.assertEqual(json.loads(response.content)['date'], today.strftime('%m/%d/%Y'))

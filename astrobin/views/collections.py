@@ -21,6 +21,7 @@ from astrobin.forms import CollectionUpdateForm
 from astrobin.forms import CollectionAddRemoveImagesForm
 from astrobin.models import Collection
 from astrobin.models import Image
+from astrobin.models import UserProfile
 
 # Third party
 from braces.views import LoginRequiredMixin
@@ -52,8 +53,8 @@ class UserCollectionsBase(View):
     def get_context_data(self, **kwargs):
         context = super(UserCollectionsBase, self).get_context_data(**kwargs)
         try:
-            user = User.objects.get(username = self.kwargs['username'])
-        except User.DoesNotExist:
+            user = UserProfile.objects.get(user__username=self.kwargs['username']).user
+        except UserProfile.DoesNotExist:
             raise Http404
 
         image_ct = ContentType.objects.get_for_model(Image)

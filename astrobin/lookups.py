@@ -78,6 +78,6 @@ def autocomplete_user(request, what):
 @login_required
 @require_GET
 def autocomplete_usernames(request):
-    values = User.objects.filter(Q(username__icontains=request.GET['q']))[:10]
-    return HttpResponse(simplejson.dumps([{'id': str(v.id), 'name': v.username} for v in values]))
+    values = UserProfile.objects.filter(Q(user__username__icontains=request.GET['q']))[:10]
+    return HttpResponse(simplejson.dumps([{'id': str(v.id), 'name': v.user.username} for v in values]))
 
