@@ -28,7 +28,7 @@ urlpatterns = patterns('',
 
     # Judgements
     url(
-        r'^toggle-iotd--judgement-ajax/(?P<pk>\d+)/$',
+        r'^toggle-iotd-judgement-ajax/(?P<pk>\d+)/$',
         IotdToggleJudgementAjaxView.as_view(),
         name = 'iotd_toggle_judgement_ajax'),
     url(
