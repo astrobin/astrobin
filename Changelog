@@ -1,3 +1,13 @@
+2018-03-01 Salvatore Iovene <salvatore@iovene.com>
+ * v1.21.0
+ * (iotd) Anonymize hd zoom image in queues
+ * (docs) Replace Finnish Copyright Act with Swiss one in TOS
+ * (account) Switch to cookie based sessions
+ * (emails) Send specific reminder emails to autorenew and non-autorenew
+    members
+ * (tests) Make tests work also with PREMIUM_ENABLED=false
+ * (db) Soft-delete images and users
+
 2018-02-25 Salvatore Iovene <salvatore@iovene.com>
  * v1.20.0
  * (docker) Apply migrations in docker CMD
