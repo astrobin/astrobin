@@ -48,6 +48,7 @@ INSTALLED_APPS = [
     'djcelery_email',
     'django_celery_beat',
     'django_bouncy',
+    'safedelete',
 
     # AstroBin apps
     'astrobin.apps.AstroBinAppConfig',

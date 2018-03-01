@@ -43,20 +43,20 @@ class UserSearchView(JSONResponseMixin, base.View):
     def get(self, request, *args, **kwargs):
         term = request.GET.get('term')
 
-        users = User.objects.filter(
-            Q(first_name__icontains=term)|
-            Q(last_name__icontains=term)|
-            Q(username__icontains=term)|
-            Q(userprofile__real_name__icontains=term))
+        profiles = UserProfile.objects.filter(
+            Q(user__first_name__icontains=term)|
+            Q(user__last_name__icontains=term)|
+            Q(user__username__icontains=term)|
+            Q(real_name__icontains=term))
 
         if request.is_ajax():
             matches = []
-            for user in users:
+            for profile in profiles:
                 matches.append({
-                    'id': user.pk,
-                    'username': user.username,
-                    'display_name': user.userprofile.get_display_name(),
-                    'url': reverse('user_page', args = (user.username,)),
+                    'id': profile.user.pk,
+                    'username': profile.user.username,
+                    'display_name': profile.get_display_name(),
+                    'url': reverse('user_page', args = (profile.user.username,)),
                 })
 
             return self.render_json_response(matches)

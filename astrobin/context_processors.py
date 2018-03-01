@@ -89,6 +89,6 @@ def common_variables(request):
     }
 
     if request.user.is_authenticated() and request.user.userprofile.is_image_moderator():
-        d['images_pending_moderation_no'] = Image.all_objects.filter(moderator_decision = 0).count()
+        d['images_pending_moderation_no'] = Image.objects_including_wip.filter(moderator_decision = 0).count()
 
     return d

@@ -118,7 +118,7 @@ class ImageTest(TestCase):
             follow = True)
 
     def _get_last_image(self):
-        return Image.all_objects.all().order_by('-id')[0]
+        return Image.objects_including_wip.all().order_by('-id')[0]
 
     def _get_last_image_revision(self):
         return ImageRevision.objects.all().order_by('-id')[0]
@@ -629,7 +629,7 @@ class ImageTest(TestCase):
             follow = True)
         self.assertRedirects(
             response,
-            reverse('image_detail', kwargs = {'id': 1}),
+            reverse('image_detail', kwargs = {'id': image.id}),
             status_code = 302,
             target_status_code = 200)
         image = self._get_last_image()
@@ -674,7 +674,7 @@ class ImageTest(TestCase):
             follow = True)
         self.assertRedirects(
             response,
-            reverse('image_detail', kwargs = {'id': 1, 'r': b.label}),
+            reverse('image_detail', kwargs = {'id': image.id, 'r': b.label}),
             status_code = 302,
             target_status_code = 200)
 
@@ -744,7 +744,7 @@ class ImageTest(TestCase):
             reverse('image_detail', kwargs = {'id': image.pk}),
             status_code = 302,
             target_status_code = 200)
-        image = Image.all_objects.get(pk = image.pk)
+        image = Image.objects_including_wip.get(pk = image.pk)
         self.assertEqual(image.title, "Test title")
         self.assertEqual(image.link, "http://www.example.com")
         self.assertEqual(image.link_to_fits, "http://www.example.com/fits")
@@ -775,25 +775,25 @@ class ImageTest(TestCase):
 
         data.update({"groups": [group1.pk]})
         response = self.client.post(get_url((image.pk,)), data, follow = True)
-        image = Image.all_objects.get(pk = image.pk)
+        image = Image.objects_including_wip.get(pk = image.pk)
         self.assertTrue(group1 in image.part_of_group_set.all())
         self.assertFalse(group2 in image.part_of_group_set.all())
 
         data.update({"groups": [group1.pk, group2.pk]})
         response = self.client.post(get_url((image.pk,)), data, follow = True)
-        image = Image.all_objects.get(pk = image.pk)
+        image = Image.objects_including_wip.get(pk = image.pk)
         self.assertTrue(group1 in image.part_of_group_set.all())
         self.assertTrue(group2 in image.part_of_group_set.all())
 
         data.update({"groups": [group2.pk]})
         response = self.client.post(get_url((image.pk,)), data, follow = True)
-        image = Image.all_objects.get(pk = image.pk)
+        image = Image.objects_including_wip.get(pk = image.pk)
         self.assertFalse(group1 in image.part_of_group_set.all())
         self.assertTrue(group2 in image.part_of_group_set.all())
 
         data.update({"groups": []})
         response = self.client.post(get_url((image.pk,)), data, follow = True)
-        image = Image.all_objects.get(pk = image.pk)
+        image = Image.objects_including_wip.get(pk = image.pk)
         self.assertFalse(group1 in image.part_of_group_set.all())
         self.assertFalse(group2 in image.part_of_group_set.all())
 
@@ -964,7 +964,7 @@ class ImageTest(TestCase):
         self._do_upload('astrobin/fixtures/test.jpg', wip = True);
         other_2 = self._get_last_image(); other_2.title = "Other 2"; other_2.save()
         response = self.client.get(get_url((image.pk,)))
-        other_images = Image.all_objects\
+        other_images = Image.objects_including_wip\
             .filter(user = self.user)\
             .exclude(pk = image.pk)
         for i in other_images:
@@ -1401,7 +1401,7 @@ class ImageTest(TestCase):
             reverse('user_page', kwargs = {'username': image.user.username}),
             status_code = 302,
             target_status_code = 200)
-        self.assertEquals(Image.all_objects.filter(pk = image.pk).count(), 0)
+        self.assertEquals(Image.objects_including_wip.filter(pk = image.pk).count(), 0)
 
         # Test for success
         self._do_upload('astrobin/fixtures/test.jpg')
@@ -1412,7 +1412,7 @@ class ImageTest(TestCase):
             reverse('user_page', kwargs = {'username': image.user.username}),
             status_code = 302,
             target_status_code = 200)
-        self.assertEquals(Image.all_objects.filter(pk = image.pk).count(), 0)
+        self.assertEquals(Image.objects_including_wip.filter(pk = image.pk).count(), 0)
         self.client.logout()
 
     def test_image_delete_revision_view(self):
@@ -1608,12 +1608,12 @@ class ImageTest(TestCase):
 
         # Test when image was not WIP
         response = self.client.post(post_url((image.pk,)))
-        image = Image.all_objects.get(pk = image.pk)
+        image = Image.objects_including_wip.get(pk = image.pk)
         self.assertEquals(image.is_wip, True)
 
         # Test when image was WIP
         response = self.client.post(post_url((image.pk,)))
-        image = Image.all_objects.get(pk = image.pk)
+        image = Image.objects_including_wip.get(pk = image.pk)
         self.assertEquals(image.is_wip, True)
 
         # Test that we can't get the image via the regular manager

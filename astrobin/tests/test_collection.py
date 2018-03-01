@@ -36,7 +36,7 @@ class CollectionTest(TestCase):
             follow = True)
 
     def _get_last_image(self):
-        return Image.all_objects.all().order_by('-id')[0]
+        return Image.objects_including_wip.all().order_by('-id')[0]
 
     def _create_collection(self, user, name, description):
         self.client.post(

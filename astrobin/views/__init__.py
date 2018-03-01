@@ -490,7 +490,7 @@ def image_upload_process(request):
 @login_required
 @require_GET
 def image_edit_watermark(request, id):
-    image = get_object_or_404(Image.all_objects, pk=id)
+    image = get_object_or_404(Image.objects_including_wip, pk=id)
     if request.user != image.user:
         return HttpResponseForbidden()
 
@@ -518,7 +518,7 @@ def image_edit_watermark(request, id):
 @login_required
 @require_GET
 def image_edit_acquisition(request, id):
-    image = get_object_or_404(Image.all_objects, pk=id)
+    image = get_object_or_404(Image.objects_including_wip, pk=id)
     if request.user != image.user and not request.user.is_superuser:
         return HttpResponseForbidden()
 
@@ -582,7 +582,7 @@ def image_edit_acquisition(request, id):
 @login_required
 @require_GET
 def image_edit_acquisition_reset(request, id):
-    image = get_object_or_404(Image.all_objects, pk=id)
+    image = get_object_or_404(Image.objects_including_wip, pk=id)
     if request.user != image.user and not request.user.is_superuser:
         return HttpResponseForbidden()
 
@@ -601,7 +601,7 @@ def image_edit_acquisition_reset(request, id):
 @login_required
 @require_GET
 def image_edit_make_final(request, id):
-    image = get_object_or_404(Image.all_objects, pk=id)
+    image = get_object_or_404(Image.objects_including_wip, pk=id)
     if request.user != image.user and not request.user.is_superuser:
         return HttpResponseForbidden()
 
@@ -639,7 +639,7 @@ def image_edit_revision_make_final(request, id):
 @login_required
 @require_GET
 def image_edit_license(request, id):
-    image = get_object_or_404(Image.all_objects, pk=id)
+    image = get_object_or_404(Image.objects_including_wip, pk=id)
     if request.user != image.user and not request.user.is_superuser:
         return HttpResponseForbidden()
 
@@ -653,7 +653,7 @@ def image_edit_license(request, id):
 
 @login_required
 def image_edit_platesolving_settings(request, pk, revision_label):
-    image = get_object_or_404(Image.all_objects, pk = pk)
+    image = get_object_or_404(Image.objects_including_wip, pk = pk)
     if request.user != image.user and not request.user.is_superuser:
         return HttpResponseForbidden()
 
@@ -721,7 +721,7 @@ def image_edit_save_watermark(request):
     except MultiValueDictKeyError:
         raise Http404
 
-    image = get_object_or_404(Image.all_objects, pk=image_id)
+    image = get_object_or_404(Image.objects_including_wip, pk=image_id)
     if request.user != image.user:
         return HttpResponseForbidden()
 
@@ -765,7 +765,7 @@ def image_edit_save_acquisition(request):
     except MultiValueDictKeyError:
         raise Http404
 
-    image = get_object_or_404(Image.all_objects, pk=image_id)
+    image = get_object_or_404(Image.objects_including_wip, pk=image_id)
     if request.user != image.user and not request.user.is_superuser:
         return HttpResponseForbidden()
 
@@ -851,7 +851,7 @@ def image_edit_save_license(request):
     except MultiValueDictKeyError:
         raise Http404
 
-    image = get_object_or_404(Image.all_objects, pk=image_id)
+    image = get_object_or_404(Image.objects_including_wip, pk=image_id)
     if request.user != image.user and not request.user.is_superuser:
         return HttpResponseForbidden()
 
@@ -880,9 +880,9 @@ def me(request):
 @silk_profile('User page')
 def user_page(request, username):
     """Shows the user's public page"""
-    user = get_object_or_404(User, username = username)
+    user = get_object_or_404(UserProfile, user__username = username).user
 
-    if Image.all_objects.filter(user = user, moderator_decision = 2).count() > 0:
+    if Image.objects_including_wip.filter(user = user, moderator_decision = 2).count() > 0:
         if (not request.user.is_authenticated() or \
             not request.user.is_superuser and \
             not request.user.userprofile.is_image_moderator()):
@@ -951,7 +951,10 @@ def user_page(request, username):
         # YEAR #
         ########
         elif subsection == 'year':
-            acq = Acquisition.objects.filter(image__user = user, image__is_wip = False)
+            acq = Acquisition.objects.filter(
+                image__user = user,
+                image__is_wip = False,
+                image__deleted = None)
             if acq:
                 years = sorted(list(set([a.date.year for a in acq if a.date])), reverse = True)
                 nd = _("No date specified")
@@ -1152,7 +1155,7 @@ def user_page(request, username):
 
 @require_GET
 def user_page_commercial_products(request, username):
-    user = get_object_or_404(User, username = username)
+    user = get_object_or_404(UserProfile, user__username = username).user
     if user != request.user:
         return HttpResponseForbidden()
 
@@ -1187,10 +1190,10 @@ def user_page_commercial_products(request, username):
 
 @user_passes_test(lambda u: u.is_superuser)
 def user_ban(request, username):
-    user = get_object_or_404(User, username = username)
+    user = get_object_or_404(UserProfile, user__username = username).user
 
     if request.method == 'POST':
-        user.delete()
+        user.userprofile.delete()
 
     return render_to_response(
         'user/ban.html',
@@ -1203,7 +1206,7 @@ def user_ban(request, username):
 
 @require_GET
 def user_page_bookmarks(request, username):
-    user = get_object_or_404(User, username = username)
+    user = get_object_or_404(UserProfile, user__username = username).user
 
     image_ct = ContentType.objects.get(app_label = 'astrobin', model = 'image')
     images = \
@@ -1236,7 +1239,7 @@ def user_page_bookmarks(request, username):
 
 @require_GET
 def user_page_liked(request, username):
-    user = get_object_or_404(User, username = username)
+    user = get_object_or_404(UserProfile, user__username = username).user
 
     image_ct = ContentType.objects.get(app_label = 'astrobin', model = 'image')
     images = \
@@ -1269,7 +1272,7 @@ def user_page_liked(request, username):
 @require_GET
 @page_template('astrobin_apps_users/inclusion_tags/user_list_entries.html', key = 'users_page')
 def user_page_following(request, username, extra_context = None):
-    user = get_object_or_404(User, username = username)
+    user = get_object_or_404(UserProfile, user__username = username).user
 
     user_ct = ContentType.objects.get_for_model(User)
     image_ct = ContentType.objects.get_for_model(Image)
@@ -1291,7 +1294,7 @@ def user_page_following(request, username, extra_context = None):
 
     return render_to_response(template_name,
         {
-            'request_user': User.objects.get(pk = request.user.pk) if request.user.is_authenticated() else None,
+            'request_user': UserProfile.objects.get(user=request.user).user if request.user.is_authenticated() else None,
             'requested_user': user,
             'user_list': followed_users,
             'view': request.GET.get('view', 'default'),
@@ -1311,7 +1314,7 @@ def user_page_following(request, username, extra_context = None):
 @require_GET
 @page_template('astrobin_apps_users/inclusion_tags/user_list_entries.html', key = 'users_page')
 def user_page_followers(request, username, extra_context = None):
-    user = get_object_or_404(User, username = username)
+    user = get_object_or_404(UserProfile, user__username = username).user
 
     user_ct = ContentType.objects.get_for_model(User)
     image_ct = ContentType.objects.get_for_model(Image)
@@ -1329,7 +1332,7 @@ def user_page_followers(request, username, extra_context = None):
 
     return render_to_response(template_name,
         {
-            'request_user': User.objects.get(pk = request.user.pk) if request.user.is_authenticated() else None,
+            'request_user': UserProfile.objects.get(user=request.user).user if request.user.is_authenticated() else None,
             'requested_user': user,
             'user_list': followers,
             'view': request.GET.get('view', 'default'),
@@ -1349,7 +1352,7 @@ def user_page_followers(request, username, extra_context = None):
 @require_GET
 def user_page_plots(request, username):
     """Shows the user's public page"""
-    user = get_object_or_404(User, username = username)
+    user = get_object_or_404(UserProfile, user__username = username).user
     profile = user.userprofile
     image_ct = ContentType.objects.get_for_model(Image)
 
@@ -1371,7 +1374,7 @@ def user_page_plots(request, username):
 @require_GET
 def user_page_api_keys(request, username):
     """Shows the user's API Keys"""
-    user = get_object_or_404(User, username = username)
+    user = get_object_or_404(UserProfile, user__username = username).user
     if user != request.user:
         return HttpResponseForbidden()
 
@@ -1397,7 +1400,7 @@ def user_page_api_keys(request, username):
 
 @require_GET
 def user_profile_stats_get_integration_hours_ajax(request, username, period = 'monthly', since = 0):
-    user = User.objects.get(username = username)
+    user = get_object_or_404(UserProfile, user__username=username).user
 
     import astrobin.stats as _s
     (label, data, options) = _s.integration_hours(user, period, int(since))
@@ -1412,7 +1415,7 @@ def user_profile_stats_get_integration_hours_ajax(request, username, period = 'm
 
 @require_GET
 def user_profile_stats_get_integration_hours_by_gear_ajax(request, username, period = 'monthly'):
-    user = User.objects.get(username = username)
+    user = get_object_or_404(UserProfile, user__username=username).user
 
     import astrobin.stats as _s
     (data, options) = _s.integration_hours_by_gear(user, period)
@@ -1426,7 +1429,7 @@ def user_profile_stats_get_integration_hours_by_gear_ajax(request, username, per
 
 @require_GET
 def user_profile_stats_get_uploaded_images_ajax(request, username, period = 'monthly'):
-    user = User.objects.get(username = username)
+    user = get_object_or_404(UserProfile, user__username=username).user
 
     import astrobin.stats as _s
     (label, data, options) = _s.uploaded_images(user, period)
@@ -1441,7 +1444,7 @@ def user_profile_stats_get_uploaded_images_ajax(request, username, period = 'mon
 
 @require_GET
 def user_profile_stats_get_views_ajax(request, username, period = 'monthly'):
-    user = User.objects.get(username = username)
+    user = get_object_or_404(UserProfile, user__username=username).user
 
     import astrobin.stats as _s
     (label, data, options) = _s.views(user, period)
@@ -1902,7 +1905,7 @@ def user_profile_save_preferences(request):
 def user_profile_delete(request):
     if request.method == 'POST':
 
-        request.user.delete()
+        request.user.userprofile.delete()
         auth.logout(request)
 
     return render_to_response('user/profile/delete.html',
@@ -1922,7 +1925,7 @@ def image_revision_upload_process(request):
     except MultiValueDictKeyError:
         raise Http404
 
-    image = Image.all_objects.get(id=image_id)
+    image = Image.objects_including_wip.get(id=image_id)
 
     if settings.READONLY_MODE:
         messages.error(request, _("AstroBin is currently in read-only mode, because of server maintenance. Please try again soon!"));
@@ -2383,7 +2386,7 @@ def gear_popover_ajax(request, id):
 @require_GET
 @never_cache
 def user_popover_ajax(request, username):
-    user = get_object_or_404(User, username = username)
+    user = get_object_or_404(UserProfile, user__username = username)
     template = 'popover/user.html'
 
     from django.template.defaultfilters import timesince
