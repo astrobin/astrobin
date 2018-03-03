@@ -1952,7 +1952,7 @@ def image_revision_upload_process(request):
     except:
         return upload_error(image)
 
-    revisions = ImageRevision.objects.filter(image = image).order_by('id')
+    revisions = ImageRevision.all_objects.filter(image = image).order_by('id')
     highest_label = 'A'
     for r in revisions:
         r.is_final = False
