@@ -42,19 +42,19 @@ def premium_get_usersubscription(user):
 
 
 def premium_get_valid_usersubscription(user):
-    us = UserSubscription.objects.filter(
+    us = [obj for obj in UserSubscription.objects.filter(
         user = user,
         subscription__name__in = SUBSCRIPTION_NAMES,
         active = True,
-    )
+    ) if obj.valid()]
 
-    if us.count() == 0:
+    if len(us) == 0:
         return None
 
-    if us.count() == 1:
+    if len(us) == 1:
         return us[0]
 
-    sortedByName = sorted(list(us), cmp = _compareNames)
+    sortedByName = sorted(us, cmp = _compareNames)
     sortedByValidity = sorted(sortedByName, cmp = _compareValidity)
 
     return sortedByName[0]
