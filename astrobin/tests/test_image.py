@@ -611,6 +611,21 @@ class ImageTest(TestCase):
         image = self._get_last_image()
         revision = self._get_last_image_revision()
         self.assertEqual(image.revisions.count(), 1)
+        self.assertEqual('B', revision.label)
+
+        # Now delete B and see that the new one gets C because B is soft-deleted
+        revision.delete()
+        response = self._do_upload_revision(image, 'astrobin/fixtures/test.jpg')
+        self.assertRedirects(
+            response,
+            reverse('image_detail', kwargs = {'id': image.id, 'r': 'C'}),
+            status_code = 302,
+            target_status_code = 200)
+        self._assert_message(response, "success unread", "Image uploaded")
+        image = self._get_last_image()
+        revision = self._get_last_image_revision()
+        self.assertEqual(1, image.revisions.count())
+        self.assertEqual('C', revision.label)
 
         revision.delete()
         image.delete()
