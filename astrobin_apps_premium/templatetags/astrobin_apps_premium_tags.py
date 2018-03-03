@@ -9,6 +9,8 @@ from django.template import Library, Node
 # Third party
 from subscription.models import Subscription, UserSubscription
 
+# This app
+from astrobin_apps_premium.utils import premium_get_valid_usersubscription
 
 register = Library()
 
@@ -23,32 +25,13 @@ def premium_badge(user, size = 'large'):
 
 @register.filter
 def is_premium(user):
-    if user.is_authenticated():
-        us = UserSubscription.active_objects.filter(
-            user = user,
-            subscription__group__name = 'astrobin_premium')
-
-        if us.count() == 0:
-            return False
-
-        return us[0].valid()
-
-    return False
+    print "ciao"
+    return 'AstroBin Premium' in premium_get_valid_usersubscription(user).subscription.name
 
 
 @register.filter
 def is_lite(user):
-    if user.is_authenticated():
-        us = UserSubscription.active_objects.filter(
-            user = user,
-            subscription__group__name = 'astrobin_lite')
-
-        if us.count() == 0:
-            return False
-
-        return us[0].valid()
-
-    return False
+    return 'AstroBin Lite' in premium_get_valid_usersubscription(user).subscription.name
 
 
 @register.filter
