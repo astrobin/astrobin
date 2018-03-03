@@ -25,12 +25,18 @@ def premium_badge(user, size = 'large'):
 
 @register.filter
 def is_premium(user):
-    return 'AstroBin Premium' in premium_get_valid_usersubscription(user).subscription.name
+    userSubscription = premium_get_valid_usersubscription(user)
+    if userSubscription:
+        return 'AstroBin Premium' in userSubscription.subscription.name
+    return False
 
 
 @register.filter
 def is_lite(user):
-    return 'AstroBin Lite' in premium_get_valid_usersubscription(user).subscription.name
+    userSubscription = premium_get_valid_usersubscription(user)
+    if userSubscription:
+        return 'AstroBin Lite' in userSubscription.subscription.name
+    return False
 
 
 @register.filter
