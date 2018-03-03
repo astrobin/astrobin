@@ -321,7 +321,8 @@ def inactive_subscriptions(user):
 
     return [x.subscription
             for x
-            in UserSubscription.objects.filter(user = user, active = False)]
+            in UserSubscription.objects.filter(user = user)
+            if not x.valid() or not x.active]
 
 
 @register.filter
