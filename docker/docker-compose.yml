@@ -10,9 +10,10 @@ services:
     container_name: postgres
     image: postgres:alpine
     restart: always
-    env_file:
-      - ./postgres.env
-      - ./secrets.env
+    environment:
+      - POSTGRES_DB=astrobin
+      - POSTGRES_USER=astrobin
+      - POSTGRES_PASSWORD=astrobin
     volumes:
       - postgres-data:/var/lib/postgresql/data
 
@@ -63,15 +64,17 @@ services:
       - rabbitmq
       - elasticsearch
     env_file:
-      - ./postgres.env
       - ./astrobin.env
-      - ./secrets.env
     environment:
       - C_FORCE_ROOT=true
       - PYTHONPATH=/usr/lib/python2.7/dist-packages
       - DJANGO_SETTINGS_MODULE=astrobin.settings
       - CELERY_RDB_HOST=0.0.0.0
       - CELERY_RDB_PORT=6900
+      - POSTGRES_DB=astrobin
+      - POSTGRES_USER=astrobin
+      - POSTGRES_PASSWORD=astrobin
+      - POSTGRES_HOST=postgres
     volumes:
       - ..:/code
     ports:
@@ -94,15 +97,17 @@ services:
       - rabbitmq
       - elasticsearch
     env_file:
-      - ./postgres.env
       - ./astrobin.env
-      - ./secrets.env
     environment:
       - C_FORCE_ROOT=true
       - PYTHONPATH=/usr/lib/python2.7/dist-packages
       - DJANGO_SETTINGS_MODULE=astrobin.settings
       - CELERY_RDB_HOST=0.0.0.0
       - CELERY_RDB_PORT=6900
+      - POSTGRES_DB=astrobin
+      - POSTGRES_USER=astrobin
+      - POSTGRES_PASSWORD=astrobin
+      - POSTGRES_HOST=postgres
     volumes:
       - ..:/code
 
@@ -125,14 +130,16 @@ services:
       - elasticsearch
       - wdb
     env_file:
-      - ./postgres.env
       - ./astrobin.env
-      - ./secrets.env
     environment:
       - PYTHONPATH=/usr/lib/python2.7/dist-packages
       - DJANGO_SETTINGS_MODULE=astrobin.settings
       - WDB_SOCKET_SERVER=wdb
       - WDB_NO_BROWSER_AUTO_OPEN=True
+      - POSTGRES_DB=astrobin
+      - POSTGRES_USER=astrobin
+      - POSTGRES_PASSWORD=astrobin
+      - POSTGRES_HOST=postgres
       - CODECOV_TOKEN
     volumes:
       - ..:/code
@@ -156,7 +163,7 @@ services:
     links:
       - rabbitmq
     env_file:
-      - ./secrets.env
+      - ./astrobin.env
     environment:
       - AMQP_HOST=rabbitmq
       - AMQP_USERNAME=astrobin
