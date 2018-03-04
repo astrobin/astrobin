@@ -5,6 +5,9 @@ from django.contrib.contenttypes.models import ContentType
 # Third party apps
 from rest_framework import serializers
 
+# AstroBin
+from astrobin.models import UserProfile
+
 
 class ContentTypeSerializer(serializers.ModelSerializer):
     class Meta:
@@ -19,5 +22,11 @@ class ContentTypeSerializer(serializers.ModelSerializer):
 class UserSerializer(serializers.ModelSerializer):
     class Meta:
         model = User
-        fields = ('username',)
+        fields = ('username', 'userprofile')
+
+
+class UserProfileSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = UserProfile
+        fields = ('real_name',)
 

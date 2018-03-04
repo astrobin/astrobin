@@ -14,6 +14,7 @@ $(function() {
         ready: function() {
             this.commentsApiUrl = this.baseApiUrl + 'nestedcomments/nestedcomments/';
             this.authorsApiUrl = this.baseApiUrl + 'common/users/';
+            this.profilesApiUrl = this.baseApiUrl + 'common/userprofiles/';
             this.usersUrl = '/users/'
 
             this.userId = parseInt($('#nested-comments-user-id').attr('data-value'));
@@ -222,6 +223,20 @@ $(function() {
                 success: function(response) {
                     comment.set('author_username', response.username);
                     comment.set('author_url', nc_app.usersUrl + response.username);
+
+                    if (response.userprofile !== undefined) {
+                        var url = nc_app.profilesApiUrl + response.userprofile + '/';
+                        $.ajax({
+                            url: url,
+                            timeout: nc_app.ajaxTimeout,
+                            dataType: 'json',
+                            success: function(response) {
+                                if (response.real_name !== null && response.real_name !== "") {
+                                    comment.set('author_username', response.real_name);
+                                }
+                            }
+                        });
+                    }
                 }
             });
         },
