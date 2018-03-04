@@ -30,7 +30,7 @@ ADS_ENABLED = os.environ.get('ADS_ENABLED', 'false') == 'true'
 DONATIONS_ENABLED = os.environ.get('DONATIONS_ENABLED', 'false') == 'true'
 PREMIUM_ENABLED = os.environ.get('PREMIUM_ENABLED', 'true') == 'true'
 
-MEDIA_VERSION = '225'
+MEDIA_VERSION = '226'
 
 BASE_URL = os.environ.get('BASE_URL', 'http://localhost')
 SHORT_BASE_URL = os.environ.get('SHORT_BASE_URL', BASE_URL)
