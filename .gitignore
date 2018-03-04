@@ -14,12 +14,13 @@
 *.mo
 *.orig
 *.pid
-*.log
+*.log*
 *.err
 *.po~
 .dirstamp
 cover/
 .coverage
+coverage.xml
 env/dev
 /src
 /docker/astrobin.env
