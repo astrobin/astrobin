@@ -96,11 +96,10 @@ docker-compose -f docker/docker-compose.yml run --no-deps --rm astrobin python m
 
 This might take a while, especially if run against AWS.
 
+AstroBin is running! Visit http://127.0.0.1/ from your host. You can login with
+the following credentials:
 
-AstroBin is running! Visit http://127.0.0.1/ from your host.
-
-*PLEASE NOTE*: the nginx configuration in `docker/nginx.conf` is meant for a
-production environment. Feel free to tune if you change things.
+    astrobin_dev:astrobin_dev
 
 ## Debugging
 
@@ -113,7 +112,8 @@ docker exec -it astrobin python manage.py runserver 0.0.0.0:8084
 
 # Postgresql
 
-The following indexes are recommended for your Postgresql server:
+The following indexes are recommended for your Postgresql server (feel free to
+ignore this section for small or development installations):
 
 ```sql
 create index on astrobin_image using btree (uploaded, id);
