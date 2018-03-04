@@ -41,6 +41,8 @@ services:
       - astrobin
     ports:
       - "80:80"
+    volumes:
+      - media:/media
 
   elasticsearch:
     container_name: elasticsearch
@@ -143,6 +145,7 @@ services:
       - CODECOV_TOKEN
     volumes:
       - ..:/code
+      - media:/media
     ports:
       - "8083:8083"
       - "8084:8084" # Debugging purposes
@@ -176,3 +179,4 @@ services:
 
 volumes:
   postgres-data: {}
+  media: {}
