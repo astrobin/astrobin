@@ -16,7 +16,7 @@ SITE_ID = 1
 
 
 TESTING = len(sys.argv) > 1 and sys.argv[1] == 'test'
-DEBUG = os.environ.get('DEBUG', 'false') == 'true'
+DEBUG = os.environ.get('DEBUG', 'true') == 'true'
 DEBUG_PROPAGATE_EXCEPTIONS = DEBUG
 INTERNAL_IPS = ['127.0.0.1', '172.18.0.1'] # localhost and docker gateway
 
@@ -32,31 +32,12 @@ PREMIUM_ENABLED = os.environ.get('PREMIUM_ENABLED', 'true') == 'true'
 
 MEDIA_VERSION = '225'
 
-BASE_URL = os.environ.get('BASE_URL', 'https://www.astrobin.com')
-SHORT_BASE_URL = os.environ.get('SHORT_BASE_URL', 'https://astrob.in')
+BASE_URL = os.environ.get('BASE_URL', 'http://localhost')
+SHORT_BASE_URL = os.environ.get('SHORT_BASE_URL', BASE_URL)
 BASE_PATH = os.path.dirname(__file__)
 
 MIN_INDEX_TO_LIKE = float(os.environ.get('MIN_INDEX_TO_LIKE', '1.00'))
 GOOGLE_ANALYTICS_ID = os.environ.get('GOOGLE_ANALYTICS_ID', 'invalid')
-
-# Absolute path to the directory that holds media.
-# Example: "/home/media/media.lawrence.com/"
-MEDIA_ROOT = MEDIA_URL = '/media/'
-STATIC_ROOT = STATIC_URL = MEDIA_ROOT + 'static/'
-
-IMAGES_URL = MEDIA_URL
-IMAGE_CACHE_DIRECTORY = MEDIA_ROOT + 'imagecache/'
-UPLOADS_DIRECTORY = MEDIA_ROOT
-
-# URL that handles the media served from MEDIA_ROOT. Make sure to use a
-# trailing slash if there is a path component (optional in other cases).
-# Examples: "http://media.lawrence.com", "http://example.com/media/"
-
-# URL prefix for admin media -- CSS, JavaScript and images. Make sure to use a
-# trailing slash.
-# Examples: "http://foo.com/media/", "/media/".
-ADMIN_MEDIA_PREFIX = STATIC_URL + 'admin/'
-
 
 ROOT_URLCONF = 'astrobin.urls'
 
