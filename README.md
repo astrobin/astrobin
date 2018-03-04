@@ -66,9 +66,9 @@ git submodule update
 
 ## Configure the system
 
-You will need to edit two files, `docker/astrobin.env` and `docker/secret.env`.
-To avoid committing your passwords to the repository, remember to instruct git
-to ignore changes to those files:
+You will need to edit `docker/astrobin.env`.  To avoid committing your
+passwords to the repository, remember to instruct git to ignore changes to
+this file:
 
 ```bash
 git update-index --assume-unchanged docker/astrobin.env
