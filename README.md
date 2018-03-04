@@ -96,8 +96,9 @@ docker-compose -f docker/docker-compose.yml up -d
 ## Step 5: First-time setup
 
 The first time you launch AstroBin (and only the first time), you will find that
-it's not quite working yet.  For example, the `beat` container refuses to start,
-and accessing http://127.0.0.1/ brings up the site, but without any CSS or javascript.
+it's not quite working yet.  Notably, accessing http://127.0.0.1/ brings up
+the site, but without any CSS or javascript.  Also, the django framework
+is not yet set up.
 
 These need to be initialized by running the following commands.
 
@@ -112,12 +113,6 @@ Then, to make all the static files (CSS, javascript, images, etc.) available to 
 
 ```bash
 docker-compose -f docker/docker-compose.yml run --no-deps --rm astrobin python manage.py collectstatic --noinput
-```
-
-You'll need to manually restart the `beat` container after this; everything else should gracefully recover.
-
-```bash
-docker-compose -f docker/docker-compose.yml restart beat
 ```
 
 ## Step 6: Ensure services are running
