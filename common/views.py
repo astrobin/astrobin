@@ -10,6 +10,9 @@ from rest_framework import permissions
 from rest_framework.reverse import reverse
 from rest_framework.response import Response
 
+# AstroBin
+from astrobin.models import UserProfile
+
 # This app
 from .permissions import ReadOnly
 from .serializers import *
@@ -46,3 +49,22 @@ class UserDetail(generics.RetrieveAPIView):
     serializer_class = UserSerializer
     permission_classes = (ReadOnly,)
     queryset = User.objects.all()
+
+
+class UserProfileList(generics.ListAPIView):
+    """
+    This view presents a list of all the user profiles in the system.
+    """
+    model = UserProfile
+    serializer_class = UserProfileSerializer
+    permission_classes = (ReadOnly,)
+
+
+class UserProfileDetail(generics.RetrieveAPIView):
+    """
+    This view presents a instance of one of the user profiles in the system.
+    """
+    model = UserProfile
+    serializer_class = UserProfileSerializer
+    permission_classes = (ReadOnly,)
+    queryset = UserProfile.objects.all()
