@@ -7,6 +7,50 @@
 AstroBin is an image hosting website for astrophotographers. The original
 production copy is run on https://www.astrobin.com/.
 
+# Architecture overview
+
+![Architecture overview](https://raw.githubusercontent.com/astrobin/astrobin/master/graphics/astrobin-architecture.png)
+
+AstroBin is composed by several components. The following paragraphs shortly
+describes what they are, what they do, and what their relationships are.
+
+### nginx
+The proxy server that sits in front of the app and forwards the requests.
+
+### AstroBin app
+The actual main app.
+
+### rabbitmq
+The asynchronous message queue used to orchestrate background tasks.
+
+### celery beat
+The periodic task scheduler. Think of it as a cron daemon.
+
+### celery worker
+The background task worker. Background tasks include:
+  - sending emails
+  - updating the search index
+  - doing some performance intensive tasks
+  - periodically cleaning up caches
+
+### db
+The postgres database that holds all the data.
+
+### cache
+The memcache daemon that store transient data for performance reasons.
+
+### search
+The Elasticsearch engine that handles the search index. It's accessed by
+the AstroBin app directly for queries, and by the celery worker to update
+the index.
+
+### wdb
+A debug server that can be used in debug mode to interactively debug the app.
+
+### flower
+A monitor that sits on top of rabbitmq and monitors the celery tasks.
+
+
 # Development
 
 You can setup a development environment using Docker.
@@ -28,7 +72,6 @@ to ignore changes to those files:
 
 ```bash
 git update-index --assume-unchanged docker/astrobin.env
-git update-index --assume-unchanged docker/secrets.env
 ```
 
 ## Setup Docker

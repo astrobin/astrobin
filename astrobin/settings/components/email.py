@@ -7,14 +7,13 @@ CELERY_EMAIL_TASK_CONFIG = {
     'rate_limit': '30/m',  # 50 chunks per minute
 }
 
-if os.environ.get('SEND_EMAILS', 'true') == 'true':
+if os.environ.get('SEND_EMAILS', 'false') == 'true':
     CELERY_EMAIL_BACKEND = 'django.core.mail.backends.smtp.EmailBackend'
 else:
     CELERY_EMAIL_BACKEND = 'django.core.mail.backends.dummy.EmailBackend'
 
-DEFAULT_FROM_EMAIL = os.environ.get('DEFAULT_FROM_EMAIL', 'noreply@astrobin.com')
+SERVER_EMAIL = DEFAULT_FROM_EMAIL = os.environ.get('SERVER_EMAIL', 'noreply@astrobin.com')
 EMAIL_SUBJECT_PREFIX = os.environ.get('EMAIL_SUBJECT_PREFIX', '[AstroBin]')
-SERVER_EMAIL = os.environ.get('SERVER_EMAIL', 'noreply@astrobin.com')
 
 EMAIL_HOST = os.environ.get('EMAIL_HOST', 'postfix')
 EMAIL_HOST_USER = os.environ.get('EMAIL_HOST_USER', 'astrobin')

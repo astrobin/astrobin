@@ -5,12 +5,13 @@ local_path = lambda path: os.path.join(os.path.dirname(__file__), path)
 
 AWS_S3_ENABLED = os.environ.get('AWS_S3_ENABLED', 'false') == "true"
 if AWS_S3_ENABLED:
-    S3_URL = 's3.amazonaws.com'
-    IMAGES_URL = os.environ.get('IMAGES_URL', 'https://cdn.astrobin.com/')
-
+    MEDIA_ROOT = '/'
     MEDIA_URL = os.environ.get('CDN_URL', 'https://cdn.astrobin.com/')
+
+    STATIC_ROOT = '/static/'
     STATIC_URL = MEDIA_URL + 'static/'
 
+    S3_URL = 's3.amazonaws.com'
     AWS_ACCESS_KEY_ID = os.environ.get('AWS_ACCESS_KEY_ID', 'invalid')
     AWS_SECRET_ACCESS_KEY = os.environ.get('AWS_SECRET_ACCESS_KEY', 'invalid')
     AWS_STORAGE_BUCKET_NAME = os.environ.get('AWS_STORAGE_BUCKET_NAME', 'cdn.astrobin.com')
@@ -25,6 +26,18 @@ if AWS_S3_ENABLED:
     AWS_HEADERS = {
         'Expires': 'Wed, 31 Dec 2036 23:59:59 GMT'
     }
+else:
+    MEDIA_ROOT = MEDIA_URL = '/media/'
+    STATIC_ROOT = STATIC_URL = MEDIA_ROOT + 'static/'
+
+# Normalize
+if not MEDIA_URL.endswith('/'):
+    MEDIA_URL = '%s/' % MEDIA_URL
+
+IMAGES_URL = MEDIA_URL
+IMAGE_CACHE_DIRECTORY = MEDIA_ROOT + 'imagecache/'
+UPLOADS_DIRECTORY = MEDIA_ROOT
+ADMIN_MEDIA_PREFIX = STATIC_URL + 'admin/'
 
 LOCAL_STATIC_STORAGE = os.environ.get('LOCAL_STATIC_STORAGE', 'true') == "true"
 if LOCAL_STATIC_STORAGE:
