@@ -147,6 +147,38 @@ server on port 8084, and then access it directly bypassing nginx.
 docker exec -it astrobin python manage.py runserver 0.0.0.0:8084
 ```
 
+## Resetting to a "from scratch" build
+
+If something goes terribly wrong and you need to start over, or if you just want to validate that
+your code works properly with a "clean" build of the site, you will need to reset things.
+
+Most of the "state" is stored in the `docker_postgres-data` volume, which contains the PostgreSQL
+database.  So a "lightweight" reset would be to do the following:
+
+```bash
+# bring down the stack
+docker-compose -f docker/docker-compose.yml down
+
+# delete the postgresql volume
+docker volume rm docker_postgres-data
+
+# bring the stack back up
+docker-compose -f docker/docker-compose.yml up -d
+
+# re-initialize django
+docker-compose -f docker/docker-compose.yml run --no-deps --rm astrobin ./scripts/init.sh
+```
+
+But if you *really* want to start from scratch, for example to do a final thorough build and test
+of your new code, then you can do a "heavyweight" reset:
+
+```bash
+./scripts/docker-reset.sh
+```
+
+This script will reset your Astrobin docker environment back to zero, so you can start over
+at "step 1" of the build instructions above.
+
 # Postgresql
 
 The following indexes are recommended for your Postgresql server (feel free to
