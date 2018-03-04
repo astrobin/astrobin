@@ -1,6 +1,3 @@
-# Auto detect text files and perform LF normalization
-* text=auto
-
 # dont touch bash scripts so it doesnt mess up the shebang #!/bin/bash
 *.sh text eol=lf
 configure text eol=lf
