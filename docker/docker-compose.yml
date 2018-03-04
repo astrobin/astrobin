@@ -112,6 +112,7 @@ services:
       - POSTGRES_HOST=postgres
     volumes:
       - ..:/code
+    restart: on-failure
 
   astrobin:
     container_name: astrobin
