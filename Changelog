@@ -1,3 +1,14 @@
+2018-03-05 Salvatore Iovene <salvatore@iovene.com>
+ * v1.21.4
+ * (ci) Simplify travis jobs
+ * (docs) Improve README
+ * (docker) Add script to reset env
+ * (api) Fix IOTD API sync
+ * (comments) Make comments fetch real name from the API
+ * (docker) Use defaults that allow easy local dev
+ * (infra) Minitor dependency status with PyUp
+ * (ci) Add codecov support
+
 2018-03-02 Salvatore Iovene <salvatore@iovene.com>
  * v1.21.3
  * (premium) Safeguard is_lite/is_premium methods against missing
