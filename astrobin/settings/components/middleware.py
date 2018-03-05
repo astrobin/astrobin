@@ -11,11 +11,7 @@ MIDDLEWARE_CLASSES = [
     'pybb.middleware.PybbMiddleware',
 ]
 
-if DEBUG:
-    MIDDLEWARE_CLASSES += [
-        'astrobin.middlewares.prof.ProfileMiddleware',
-    ]
-else:
+if not DEBUG:
     MIDDLEWARE_CLASSES += [
         'django.middleware.locale.LocaleMiddleware',
         'django.middleware.gzip.GZipMiddleware',
