@@ -7,6 +7,7 @@ if TESTING:
     DEBUG = False
     AWS_S3_ENABLED = False
     LOCAL_STATIC_STORAGE = True
+    PREMIUM_ENABLED = True
 
     PASSWORD_HASHERS = (
         'django.contrib.auth.hashers.MD5PasswordHasher',
