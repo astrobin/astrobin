@@ -4,28 +4,12 @@ dist: trusty
 services:
   - docker
 
-env:
-  matrix:
-    - DEBUG=true
-    - DEBUG=false
-    - PREMIUM_ENABLED=true
-    - PREMIUM_ENABLED=false
-
 before_script:
-  - docker pull astrobin/astrobin:latest
   - docker-compose -f docker/docker-compose.yml up -d
-  - docker-compose -f docker/docker-compose.yml exec astrobin ./scripts/init.sh
 
 script:
   - docker-compose -f docker/docker-compose.yml exec astrobin ./scripts/test.sh
 
 after_script:
-  - docker-compose down
-
-after_success:
-  - docker build -t astrobin/astrobin:latest -f docker/astrobin.dockerfile --cache-from astrobin/astrobin:latest .
-  - docker build -t astrobin/nginx:latest --build-args ENV=prod -f docker/nginx.dockerfile --cache-from astrobin/nginx:latest .
-  - docker login -u $DOCKER_USER -p $DOCKER_PASS
-  - docker push astrobin/astrobin
-  - docker push astrobin/nginx
+  - docker-compose -f docker/docker-compose.yml down
 
