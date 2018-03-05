@@ -55,7 +55,7 @@ A monitor that sits on top of rabbitmq and monitors the celery tasks.
 
 You can setup a development environment using Docker.
 
-## Clone the code:
+## Step 1: Clone the code:
 
 ```bash
 git clone https://github.com/astrobin/astrobin.git
@@ -64,44 +64,76 @@ git submodule init
 git submodule update
 ```
 
-## Configure the system
+## Step 2: Configure the system
 
-You will need to edit `docker/astrobin.env`.  To avoid committing your
-passwords to the repository, remember to instruct git to ignore changes to
-this file:
+The `docker/astrobin.env` file contains configuration information for
+AWS, PayPal, Google Analytics, e-mail service, and others.  The default
+settings are sufficient to bring up a full Astrobin site on your
+workstation, so you should not need to make any changes here at first.
+
+But to avoid committing your passwords to the repository, remember
+to instruct git to ignore changes to this file:
 
 ```bash
 git update-index --assume-unchanged docker/astrobin.env
 ```
 
-## Setup Docker
+## Step 3: Setup Docker
 
-[Install Docker](https://www.docker.com/), then create and run the containers:
+[Install Docker](https://store.docker.com/search?type=edition&offering=community),
+and make sure you have the latest stable version of [docker-compose](https://github.com/docker/compose/releases)
+installed.
+
+## Step 4: Bring up the stack
+
+The `docker-compose.yml` file contains all the instructions needed to bring up the
+stack, including how to build the `astrobin`, `nginx`, `celery`, and `beat` containers.
 
 ```bash
 docker-compose -f docker/docker-compose.yml up -d
 ```
 
-The first time you create a container for AstroBin, you will need to run the following:
+## Step 5: First-time setup
+
+The first time you launch AstroBin (and only the first time), you will find that
+it's not quite working yet.  Notably, accessing http://127.0.0.1/ brings up
+the site, but without any CSS or javascript.  Also, the django framework
+is not yet set up.
+
+These need to be initialized by running the following commands.
+
+The `init.sh` script does some initial django initialization, like creating groups, a superuser,
+and the "site" configuration.
 
 ```bash
 docker-compose -f docker/docker-compose.yml run --no-deps --rm astrobin ./scripts/init.sh
 ```
 
-To make all the static files available to the app, run:
+Then, to make all the static files (CSS, javascript, images, etc.) available to the app, run:
 
 ```bash
 docker-compose -f docker/docker-compose.yml run --no-deps --rm astrobin python manage.py collectstatic --noinput
 ```
 
-This might take a while, especially if run against AWS.
+## Step 6: Ensure services are running
+
+```bash
+docker-compose -f docker/docker-compose.yml ps
+```
+
+This shows you the containers running.  Check the `State` column and make sure
+everything is `Up`. If you see `Restarting` or `Exit` that means the container didn't
+start up properly on its own, and you may need to do some troubleshooting
+in that container.
+
+## Step 7: Login!
 
 AstroBin is running! Visit http://127.0.0.1/ from your host. You can login with
 the following credentials:
 
     astrobin_dev:astrobin_dev
 
-## Debugging
+## Step 8: Debugging server
 
 For debugging purposes, it is recommended that you launch a simple development
 server on port 8084, and then access it directly bypassing nginx.
@@ -109,6 +141,38 @@ server on port 8084, and then access it directly bypassing nginx.
 ```bash
 docker exec -it astrobin python manage.py runserver 0.0.0.0:8084
 ```
+
+## Resetting to a "from scratch" build
+
+If something goes terribly wrong and you need to start over, or if you just want to validate that
+your code works properly with a "clean" build of the site, you will need to reset things.
+
+Most of the "state" is stored in the `docker_postgres-data` volume, which contains the PostgreSQL
+database.  So a "lightweight" reset would be to do the following:
+
+```bash
+# bring down the stack
+docker-compose -f docker/docker-compose.yml down
+
+# delete the postgresql volume
+docker volume rm docker_postgres-data
+
+# bring the stack back up
+docker-compose -f docker/docker-compose.yml up -d
+
+# re-initialize django
+docker-compose -f docker/docker-compose.yml run --no-deps --rm astrobin ./scripts/init.sh
+```
+
+But if you *really* want to start from scratch, for example to do a final thorough build and test
+of your new code, then you can do a "heavyweight" reset:
+
+```bash
+./scripts/docker-reset.sh
+```
+
+This script will reset your Astrobin docker environment back to zero, so you can start over
+at "step 1" of the build instructions above.
 
 # Postgresql
 
