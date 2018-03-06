@@ -19,6 +19,12 @@
 
     <form class="form-horizontal" action="" method="post">{% csrf_token %}
         {{form|as_bootstrap}}
+
+        <div class="well">
+            <strong>{% trans "Please note!" %}</strong>
+            {% blocktrans %}By using this form, you will reach the AstroBin staff. To contact a user instead, please use the private messaging functionality. It's available by navigating to a user's gallery or an image, and selecting the "User" menu and then "Send private message".{% endblocktrans %}
+        </div>
+
         <div class="form-actions">
             <input class="btn btn-primary" type="submit" value="{% trans "Send" %}" />
         </div>
