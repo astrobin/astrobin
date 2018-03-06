@@ -15,12 +15,26 @@
 
 {% block content %}
     <form class="form-horizontal" method="post" action=".">{% csrf_token %}
-        {{form|as_bootstrap}}
+
+        <div class="control-group required">
+          <label class="control-label" for="id_username">{% trans "Username" %}/{% trans "Email" %}</label>
+          <div class="controls">
+            <input id="id_username" maxlength="254" name="username" type="text">
+          </div>
+        </div>
+        <div class="control-group required">
+          <label class="control-label" for="id_password">{% trans "Password" %}</label>
+          <div class="controls">
+            <input id="id_password" name="password" type="password">
+          </div>
+        </div>
+
         <div class="form-actions">
             <input class="btn btn-primary btn-block-mobile" type="submit" value="{% trans 'Log in' %}" />
             <a class="btn btn-block-mobile" href="{% url 'auth_password_reset' %}">{% trans "Reset password" %}</a>
             <a class="btn btn-block-mobile" href="{% url 'registration_register' %}">{% trans "Register" %}</a>
             <input type="hidden" name="next" value="{{ next }}" />
         </div>
+
     </form>
 {% endblock %}
