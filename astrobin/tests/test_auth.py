@@ -21,6 +21,16 @@ class LoginTest(TestCase):
 
         self.assertRedirects(response, '/')
 
+    def test_email_login_view(self):
+        response = self.client.post(
+            '/accounts/login/',
+            {
+                'username': 'test@test.com',
+                'password': 'password',
+            })
+
+        self.assertRedirects(response, '/')
+
     def test_password_reset_view(self):
         response = self.client.get(reverse('password_reset'))
         self.assertEquals(response.status_code, 200)
