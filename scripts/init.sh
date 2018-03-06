@@ -25,7 +25,7 @@ echo "from django.contrib.auth.models import Group; Group.objects.get_or_create(
 echo "from django.contrib.auth.models import Group; Group.objects.get_or_create(name='iotd_judges')" | python manage.py shell
 
 # Create superuser
-echo "from django.contrib.auth.models import User; User.objects.filter(email='dev@astrobin.com').delete(); User.objects.create_superuser('astrobin_dev', 'dev@eastrobin.com', 'astrobin_dev')" | python manage.py shell
+echo "from django.contrib.auth.models import User; User.objects.filter(email='dev@astrobin.com').delete(); User.objects.create_superuser('astrobin_dev', 'dev@astrobin.com', 'astrobin_dev')" | python manage.py shell
 
 # Assign superuser to some groups
 echo "from django.contrib.auth.models import User, Group; u = User.objects.get(username='astrobin_dev'); g = Group.objects.get(name='content_moderators'); g.user_set.add(u)" | python manage.py shell
