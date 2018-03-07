@@ -15,9 +15,9 @@ else:
 SERVER_EMAIL = DEFAULT_FROM_EMAIL = os.environ.get('SERVER_EMAIL', 'noreply@astrobin.com')
 EMAIL_SUBJECT_PREFIX = os.environ.get('EMAIL_SUBJECT_PREFIX', '[AstroBin]')
 
-EMAIL_HOST = os.environ.get('EMAIL_HOST', 'postfix')
-EMAIL_HOST_USER = os.environ.get('EMAIL_HOST_USER', 'astrobin')
-EMAIL_HOST_PASSWORD = os.environ.get('EMAIL_HOST_PASSWORD', 'astrobin')
-EMAIL_PORT = os.environ.get('EMAIL_HOST_PORT', 465)
-EMAIL_USE_SSL = os.environ.get('EMAIL_USE_SSL', 'true') == 'true'
+EMAIL_HOST = os.environ.get('EMAIL_HOST', 'localhost')
+EMAIL_HOST_USER = os.environ.get('EMAIL_HOST_USER', '')
+EMAIL_HOST_PASSWORD = os.environ.get('EMAIL_HOST_PASSWORD', '')
+EMAIL_PORT = os.environ.get('EMAIL_HOST_PORT', 25)
+EMAIL_USE_SSL = os.environ.get('EMAIL_USE_SSL', 'false') == 'true'
 
