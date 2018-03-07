@@ -852,34 +852,6 @@ class Image(HasSolutionMixin, SafeDeleteModel):
     def __unicode__(self):
         return self.title if self.title is not None else _("(no title)")
 
-    def save(self, *args, **kwargs):
-        if self.id:
-            try:
-                image = Image.objects_including_wip.get(id = self.id)
-            except Image.DoesNotExist:
-                # Abort!
-                print "Aborting because image was deleted."
-                return
-
-        super(Image, self).save(*args, **kwargs)
-
-    def delete(self, *args, **kwargs):
-        self.delete_data()
-
-        # Delete references
-        for r in ImageRequest.objects.filter(image=self):
-            r.delete()
-
-        # Delete revisions
-        for r in ImageRevision.objects.filter(image=self):
-            r.delete()
-
-        super(Image, self).delete(*args, **kwargs)
-
-    def delete_data(self):
-        # Right now we don't delete anything, just to be on the safe side
-        pass
-
     def get_absolute_url(self, revision = 'final', size = 'regular'):
         if revision == 'final':
             if not self.is_final:
@@ -2081,11 +2053,6 @@ class UserProfile(SafeDeleteModel):
 
     class Meta:
         app_label = 'astrobin'
-
-    def delete(self, *args, **kwargs):
-        # Images are attached to the auth.User oject, and that's not really
-        # deleted, so nothing is cascaded, hence the following line.
-        self.user.images.objects_including_wip.delete()
 
 def create_user_profile(sender, instance, created, **kwargs):
     if created:

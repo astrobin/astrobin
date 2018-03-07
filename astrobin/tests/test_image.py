@@ -1735,3 +1735,23 @@ class ImageTest(TestCase):
 
         image.delete()
         self.client.logout()
+
+    def test_image_softdelete(self):
+        self.client.login(username = 'test', password = 'password')
+        self._do_upload('astrobin/fixtures/test.jpg')
+        image = self._get_last_image()
+
+        image.delete()
+        self.assertFalse(Image.objects.filter(pk=image.pk).exists())
+        self.assertTrue(Image.all_objects.filter(pk=image.pk).exists())
+
+        image.undelete()
+        self.assertTrue(Image.objects.filter(pk=image.pk).exists())
+
+        self._do_upload_revision(image, 'astrobin/fixtures/test_smaller.jpg')
+        revision = self._get_last_image_revision()
+
+        revision.delete()
+        self.assertFalse(ImageRevision.objects.filter(pk=revision.pk).exists())
+        self.assertTrue(ImageRevision.all_objects.filter(pk=revision.pk).exists())
+

@@ -490,3 +490,27 @@ class UserTest(TestCase):
 
         image.delete()
         self.client.logout()
+
+    def test_profile_softdelete(self):
+        user = User.objects.create_user(
+            username = "softdelete", email = "softdelete@example.com",
+            password = "password")
+
+        # Deleting the User really deletes stuff
+        user.delete()
+        self.assertFalse(User.objects.filter(username="softdelete").exists())
+        self.assertFalse(UserProfile.objects.filter(user__username="softdelete").exists())
+        self.assertFalse(UserProfile.all_objects.filter(user__username="softdelete").exists())
+
+        user = User.objects.create_user(
+            username = "softdelete", email = "softdelete@example.com",
+            password = "password")
+        profile = UserProfile.objects.get(user=user)
+
+        # Deleting the profile only soft-deletes
+        profile.delete()
+        self.assertTrue(User.objects.filter(username="softdelete").exists())
+        self.assertEqual(False, User.objects.get(username="softdelete").is_active)
+        self.assertFalse(UserProfile.objects.filter(user__username="softdelete").exists())
+        self.assertTrue(UserProfile.all_objects.filter(user__username="softdelete").exists())
+
