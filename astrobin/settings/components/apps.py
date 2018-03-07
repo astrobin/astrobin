@@ -49,6 +49,7 @@ INSTALLED_APPS = [
     'django_celery_beat',
     'django_bouncy',
     'safedelete',
+    'change_email',
 
     # AstroBin apps
     'astrobin.apps.AstroBinAppConfig',

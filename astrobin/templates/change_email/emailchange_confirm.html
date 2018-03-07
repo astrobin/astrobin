@@ -1,0 +1,12 @@
+{% extends "base.html" %}
+{% load i18n %}
+{% load django_bootstrap_breadcrumbs %}
+
+{% block breadcrumbs %}
+    {{ block.super }}
+    {% breadcrumb 'Accounts' None %}
+    {% breadcrumb 'E-mail change' None %}
+{% endblock %}
+
+
+{% block title %}{% trans "E-mail change confirmation" %}{% endblock %}
