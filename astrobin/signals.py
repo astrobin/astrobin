@@ -707,7 +707,17 @@ post_save.connect(threaded_messages_thread_post_save, sender = Thread)
 def user_post_save(sender, instance, created, **kwargs):
     if not created:
         try:
-            instance.userprofile.save()
+            instance.userprofile.save(keep_deleted=True)
         except UserProfile.DoesNotExist:
             pass
 post_save.connect(user_post_save, sender=User)
+
+
+def userprofile_post_delete(sender, instance, **kwargs):
+    # Images are attached to the auth.User oject, and that's not really
+    # deleted, so nothing is cascaded, hence the following line.
+    instance.user.is_active = False
+    instance.user.save()
+    Image.objects_including_wip.filter(user=instance.user).delete()
+post_softdelete.connect(userprofile_post_delete, sender = UserProfile)
+
