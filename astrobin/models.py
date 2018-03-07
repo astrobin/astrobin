@@ -1352,17 +1352,6 @@ class ImageRevision(HasSolutionMixin, SafeDeleteModel):
     def __unicode__(self):
         return self.image.title
 
-    def save(self, *args, **kwargs):
-        if self.id:
-            try:
-                r = ImageRevision.objects.get(id = self.id)
-            except ImageRevision.DoesNotExist:
-                # Abort!
-                print "Aborting because image revision was deleted."
-                return
-
-        super(ImageRevision, self).save(*args, **kwargs)
-
     def get_absolute_url(self, revision = 'nd', size = 'regular'):
         # We can ignore the revision argument of course
         if size == 'full':
