@@ -1,0 +1,38 @@
+{% extends "base.html" %}
+{% load i18n %}
+{% load django_bootstrap_breadcrumbs %}
+
+{% block breadcrumbs %}
+    {{ block.super }}
+    {% breadcrumb 'Accounts' None %}
+    {% breadcrumb 'E-mail change' 'change_email_index' %}
+    {% breadcrumb 'Confirm' None %}
+{% endblock %}
+
+{% block title %}{% trans "Confirm deletion of e-mail change request" %}{% endblock %}
+
+{% block content %}
+    <h1>{% trans "Confirm deletion of e-mail change request" %}</h1>
+    <p class="well">{% trans "Please confirm that you want to delete the following e-mail change request." %}</p>
+
+    <table class="table">
+        <thead>
+            <tr>
+                <th>{% trans "Date" %}</th>
+                <th>{% trans "New e-mail" %}</th>
+                <th></th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr>
+                <td><abbr class="timeago" title="{{object.date|date:'Y-m-d\TH:i:s'}}"></abbr></td>
+                <td><a href="mailto:{{object.new_email}}">{{object.new_email}}</a></td>
+                <td>
+                    <form class="form-horizontal" method="post" action=".">{% csrf_token %}
+                        <input class="btn btn-primary btn-block-mobile" type="submit" value="{% trans 'Confirm' %}" />
+                    </form>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+{% endblock %}
