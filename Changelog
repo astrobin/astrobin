@@ -1,3 +1,16 @@
+2018-03-08 Salvatore Iovene <salvatore@iovene.com>
+ * v1.22.0
+ * (infra) Update bleach to newest version
+ * (scripts) Fix typo in admin creation in init script
+ * (accounts) Allow login via email address too
+ * Add notice to contact form re contacting the staff
+ * (accounts) Add support to change one's own email
+ * Make imagecache directory always be in /media
+ * Fix soft-delete usage
+ * (tasks) Delete inactive users with hard-bounced emails
+ * (emails) Show alert on-site to users with bounced emails
+ * (emails) Do not send emails to permanently hard bounced address
+
 2018-03-05 Salvatore Iovene <salvatore@iovene.com>
  * v1.21.4
  * (ci) Simplify travis jobs
