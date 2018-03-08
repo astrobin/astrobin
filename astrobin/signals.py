@@ -163,7 +163,7 @@ def nested_comment_post_save(sender, instance, created, **kwargs):
     if created:
         model_class = instance.content_type.model_class()
         obj = instance.content_type.get_object_for_this_type(id = instance.object_id)
-        url = "http://astrobin.com/" + instance.get_absolute_url()
+        url = settings.BASE_URL + instance.get_absolute_url()
 
         if model_class == Image:
             image = instance.content_type.get_object_for_this_type(id = instance.object_id)
