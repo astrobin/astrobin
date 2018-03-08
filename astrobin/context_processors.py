@@ -62,8 +62,13 @@ def user_scores(request):
 def common_variables(request):
     from rawdata.utils import rawdata_user_has_valid_subscription
     from django_user_agents.utils import get_and_set_user_agent
+    from django_bouncy.models import Bounce
 
     get_and_set_user_agent(request)
+
+    bounced = False
+    if request.user.is_authenticated():
+        bounced = Bounce.objects.filter(address = request.user.email).exists()
 
     d = {
         'True': True,
@@ -86,6 +91,7 @@ def common_variables(request):
         'GOOGLE_ANALYTICS_ID': settings.GOOGLE_ANALYTICS_ID,
         'MEDIA_VERSION': settings.MEDIA_VERSION,
         'READONLY_MODE': settings.READONLY_MODE,
+        'HAS_BOUNCED_EMAILS': bounced
     }
 
     if request.user.is_authenticated() and request.user.userprofile.is_image_moderator():

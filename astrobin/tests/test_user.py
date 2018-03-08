@@ -8,6 +8,7 @@ from django.core.urlresolvers import reverse
 from django.test import TestCase
 
 # Third party
+from djang_bouncy.models import Bounce
 from toggleproperties.models import ToggleProperty
 
 # AstroBin
@@ -514,3 +515,15 @@ class UserTest(TestCase):
         self.assertFalse(UserProfile.objects.filter(user__username="softdelete").exists())
         self.assertTrue(UserProfile.all_objects.filter(user__username="softdelete").exists())
 
+    def test_bounced_email_alert(self):
+        bounce = Bounce.objects.create(
+            hard=True,
+            bounce_type="Permanent",
+            address="user@example.com",
+            mail_timestamp=timezone.now())
+
+        self.client.login(username = "user", password="password")
+        response = self.client.get(reverse('index'))
+        self.assertContainer(response, "Change your e-mail")
+
+        bounce.delete()
