@@ -2663,6 +2663,16 @@ p.small {
 .alert-actions {
   margin-top: 20px;
 }
+.global-alert {
+  margin-top: 8px;
+  padding-top: 20px;
+  padding-bottom: 20px;
+}
+.global-alert a {
+  font-weight: bold;
+  text-decoration: underline;
+  margin-left: 8px;
+}
 code {
   display: block;
 }
