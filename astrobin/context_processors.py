@@ -68,7 +68,8 @@ def common_variables(request):
 
     bounced = False
     if request.user.is_authenticated():
-        bounced = Bounce.objects.filter(address = request.user.email).exists()
+        bounced = Bounce.objects.filter(
+            address = request.user.email, bounce_type="Permanent").exists()
 
     d = {
         'True': True,
