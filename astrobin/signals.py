@@ -176,6 +176,8 @@ def nested_comment_post_save(sender, instance, created, **kwargs):
                     {
                         'url': url,
                         'user': instance.author.userprofile.get_display_name(),
+                        'user_url': settings.BASE_URL + reverse_url(
+                            'user_page', kwargs = {'username': instance.author.username}),
                     }
                 )
 
@@ -185,6 +187,8 @@ def nested_comment_post_save(sender, instance, created, **kwargs):
                     {
                         'url': url,
                         'user': instance.author.userprofile.get_display_name(),
+                        'user_url': settings.BASE_URL + reverse_url(
+                            'user_page', kwargs = {'username': instance.author.username}),
                     }
                 )
 
@@ -218,6 +222,8 @@ def nested_comment_post_save(sender, instance, created, **kwargs):
                 {
                     'url': url,
                     'user': instance.author.userprofile.get_display_name(),
+                    'user_url': settings.BASE_URL + reverse_url(
+                        'user_page', kwargs = {'username': instance.author.username}),
                 })
 
             add_story(instance.author,
@@ -271,6 +277,8 @@ def toggleproperty_post_save(sender, instance, created, **kwargs):
                         'url': settings.BASE_URL + instance.content_object.get_absolute_url(),
                         'title': instance.content_object.title,
                         'user': instance.user.userprofile.get_display_name(),
+                        'user_url': settings.BASE_URL + reverse_url(
+                            'user_page', kwargs = {'username': instance.user.username}),
                     })
 
         elif instance.property_type == "follow":
