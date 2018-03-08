@@ -6,12 +6,14 @@ import subprocess
 from time import sleep
 
 # Django
+from django.contrib.auth.models import User
 from django.core.cache import cache
 from django.core.management import call_command
 
 # Third party
 from celery import shared_task
 from celery.utils.log import get_task_logger
+from django_bouncy.models import Bounce
 from haystack.query import SearchQuerySet
 
 # AstroBin
@@ -91,3 +93,17 @@ def hitcount_cleanup():
 def contain_imagecache_size():
     subprocess.call(['scripts/contain_directory_size.sh'], ['/media/imagecache'], ['10000000'])
 
+
+"""
+This task will delete all inactive accounts with bounced email
+addresses.
+"""
+@shared_task()
+def delete_inactive_bounced_accounts():
+    bounces = Bounce.objects.filter(
+        hard=True,
+        bounce_type="Permanent")
+    emails = bounces.values_list('address', flat=True)
+
+    User.objects.filter(email__in=emails, is_active=False).delete()
+    bounces.delete()
