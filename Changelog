@@ -1,4 +1,10 @@
 2018-03-08 Salvatore Iovene <salvatore@iovene.com>
+ * v1.23.0
+ * (emails) Add HTML transactional emails
+ * (emails) Fix double-slash in comment emails
+ * (emails) Only warn users with permanent bounces
+
+2018-03-08 Salvatore Iovene <salvatore@iovene.com>
  * v1.22.0
  * (infra) Update bleach to newest version
  * (scripts) Fix typo in admin creation in init script
