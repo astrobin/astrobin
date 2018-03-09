@@ -610,11 +610,19 @@ class ImageTest(TestCase):
         self._assert_message(response, "success unread", "Image uploaded")
         image = self._get_last_image()
         revision = self._get_last_image_revision()
-        self.assertEqual(image.revisions.count(), 1)
+        self.assertEqual(1, image.revisions.count())
         self.assertEqual('B', revision.label)
 
         # Now delete B and see that the new one gets C because B is soft-deleted
         revision.delete()
+        with self.assertRaises(ImageRevision.DoesNotExist):
+            revision = ImageRevision.objects.get(pk = revision.pk)
+        revision = ImageRevision.all_objects.get(pk = revision.pk)
+        self.assertNotEqual(None, revision.deleted)
+        self.assertEqual(0, ImageRevision.objects.filter(image=image).count())
+        image = Image.objects.get(pk=image.pk)
+        self.assertEqual(0, image.revisions.count())
+
         response = self._do_upload_revision(image, 'astrobin/fixtures/test.jpg')
         self.assertRedirects(
             response,
@@ -622,8 +630,9 @@ class ImageTest(TestCase):
             status_code = 302,
             target_status_code = 200)
         self._assert_message(response, "success unread", "Image uploaded")
-        image = self._get_last_image()
         revision = self._get_last_image_revision()
+        self.assertEqual(1, ImageRevision.objects.filter(image=image).count())
+        image = Image.objects.get(pk=image.pk)
         self.assertEqual(1, image.revisions.count())
         self.assertEqual('C', revision.label)
 
@@ -1751,7 +1760,14 @@ class ImageTest(TestCase):
         self._do_upload_revision(image, 'astrobin/fixtures/test_smaller.jpg')
         revision = self._get_last_image_revision()
 
+        image = Image.objects.get(pk=image.pk)
+        self.assertEquals(1, image.revisions.count())
+
         revision.delete()
+        with self.assertRaises(ImageRevision.DoesNotExist):
+            revision = ImageRevision.objects.get(pk=revision.pk)
+        image = Image.objects.get(pk=image.pk)
+        self.assertEquals(0, image.revisions.count())
         self.assertFalse(ImageRevision.objects.filter(pk=revision.pk).exists())
         self.assertTrue(ImageRevision.all_objects.filter(pk=revision.pk).exists())
 
