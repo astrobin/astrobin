@@ -8,7 +8,7 @@ from django.core.urlresolvers import reverse
 from django.test import TestCase
 
 # Third party
-from djang_bouncy.models import Bounce
+from django_bouncy.models import Bounce
 from toggleproperties.models import ToggleProperty
 
 # AstroBin
