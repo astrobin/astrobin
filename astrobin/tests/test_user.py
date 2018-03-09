@@ -6,6 +6,7 @@ from django.contrib.auth.models import User, Group
 from django.core.exceptions import ValidationError
 from django.core.urlresolvers import reverse
 from django.test import TestCase
+from django.utils import timezone
 
 # Third party
 from django_bouncy.models import Bounce
@@ -524,6 +525,6 @@ class UserTest(TestCase):
 
         self.client.login(username = "user", password="password")
         response = self.client.get(reverse('index'))
-        self.assertContainer(response, "Change your e-mail")
+        self.assertContains(response, "Change your e-mail")
 
         bounce.delete()
