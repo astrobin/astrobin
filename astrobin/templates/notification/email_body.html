@@ -324,7 +324,9 @@
                                         </tr>
                                         <tr>
                                             <td class="content-block notification-message">
-                                                {{ message }}
+                                                {% block content %}
+                                                    {{ message }}
+                                                {% endblock %}
                                             </td>
                                         </tr>
                                         <tr>
