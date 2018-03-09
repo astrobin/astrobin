@@ -11,7 +11,10 @@ coverage run --source=. ./manage.py test \
 if [ $? -eq 0 ]; then
     if [[ -z "${CODECOV_TOKEN}" ]]; then
         echo "Please export CODECOV_TOKEN to upload coverage results to Codecov"
+        exit 1
     else
         codecov -t ${CODECOV_TOKEN}
     fi
+else
+    exit $?
 fi
