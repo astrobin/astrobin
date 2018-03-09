@@ -1956,7 +1956,7 @@ def image_revision_upload_process(request):
     highest_label = 'A'
     for r in revisions:
         r.is_final = False
-        r.save()
+        r.save(keep_deleted=True)
         highest_label = r.label
 
     image.is_final = False
