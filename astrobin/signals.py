@@ -288,7 +288,8 @@ def toggleproperty_post_save(sender, instance, created, **kwargs):
                 push_notification(
                     [followed_user], 'new_follower', {
                         'object': instance.user.userprofile.get_display_name(),
-                        'object_url': reverse_url('user_page', kwargs = {'username': instance.user.username}),
+                        'object_url': settings.BASE_URL + reverse_url(
+                            'user_page', kwargs = {'username': instance.user.username}),
                     }
                 )
 post_save.connect(toggleproperty_post_save, sender = ToggleProperty)
