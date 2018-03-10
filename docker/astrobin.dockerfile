@@ -4,6 +4,8 @@ MAINTAINER Salvatore Iovene <salvatore@astrobin.com>
 
 # Install build prerequisites
 RUN apt-get update && apt-get install -y \
+    apt-transport-https \
+    curl \
     git \
     build-essential \
     pkg-config \
@@ -19,7 +21,14 @@ RUN apt-get update && apt-get install -y \
     shiboken libshiboken-dev \
     libjpeg62 libjpeg62-dev \
     libfreetype6 libfreetype6-dev \
-    zlib1g-dev \
+    zlib1g-dev
+
+# Install yarn
+RUN curl -sS https://dl.yarnpkg.com/debian/pubkey.gpg | apt-key add - \
+    && echo "deb https://dl.yarnpkg.com/debian/ stable main" | tee /etc/apt/sources.list.d/yarn.list \
+    && apt-get update \
+    && apt-get install -y \
+        yarn \
     && apt-get clean && rm -rf /etc/lib/apt/lists/*
 
 # System hacks
@@ -39,6 +48,11 @@ RUN pip install -U setuptools && \
     pip install -U pip && \
     pip install --no-deps -r requirements.txt --src /src
 
+# Install frontend dependencies
+COPY yarn.lock /code
+RUN yarn install --modules-folder astrobin/static/node_modules
+
 CMD python manage.py migrate --noinput && gunicorn wsgi:application -w 2 -b :8083
 EXPOSE 8083
+
 COPY . /code

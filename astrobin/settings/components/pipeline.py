@@ -9,6 +9,8 @@ PIPELINE = {
                 'astrobin_apps_images/js/astrobin_apps_images.js',
                 'astrobin_apps_images/js/jquery.capty.js',
 
+                'node_modules/justifiedGallery/dist/js/jquery.justifiedGallery.js',
+
                 'js/jquery.i18n.js',
                 'js/plugins/localization/jquery.localisation.js',
                 'js/jquery.uniform.js',
@@ -41,6 +43,8 @@ PIPELINE = {
     'STYLESHEETS': {
         'screen': {
             'source_filenames': (
+                'node_modules/justifiedGallery/dist/css/justifiedGallery.css',
+
                 'css/jquery-ui.css',
                 'css/jquery-ui-astrobin/jquery-ui-1.8.17.custom.css',
                 'css/ui.multiselect.css',
