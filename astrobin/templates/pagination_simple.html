@@ -4,10 +4,18 @@
     <div class="pagination">
         <ul>
             <li class="prev {% if not page_obj.has_previous %}disabled{% endif %}">
-                <a href="{% if page_obj.has_previous %}?page={{ page_obj.previous_page_number }}{% endif %}">&lt;</a>
+                {% if page_obj.has_previous %}
+                <a title="Previous page" href="?page={{ page_obj.previous_page_number }}">&#9664;</a>
+                {% else %}
+                <span>&#9664;</span>
+                {% endif %}
             </li>
             <li class="next {% if not page_obj.has_next %}disabled{% endif %}">
-                <a href="{% if page_obj.has_next %}?page={{ page_obj.next_page_number }}{% endif %}" >&gt;</a>
+                {% if page_obj.has_next %}
+                <a title="Next page" href="?page={{ page_obj.next_page_number }}" >&#9654;</a>
+                {% else %}
+                <span>&#9654;</span>
+                {% endif %}
             </li>
         </ul>
     </div>
