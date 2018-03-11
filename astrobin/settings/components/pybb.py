@@ -19,7 +19,7 @@ PYBB_SMILES = {
     ';)': 'blink.png',
     '&lt;3': 'love.png',
 }
-PYBB_TOPIC_PAGE_SIZE = 15
+PYBB_TOPIC_PAGE_SIZE = 25
 PYBB_FORUM_PAGE_SIZE = 50
 
 def pybb_premoderation(user, post_content):
