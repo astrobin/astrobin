@@ -225,8 +225,9 @@ In a template use the
 to translate text.  Note that the template must first `{% load i18n %}` for this to work.
 For example, `{% trans "foo" %}`
 
-The translations are stored in `django.po` files.  If you add new text that is not
-already in the `django.po` files, then please add it.
+The translations are stored in `django.po` files.  Grep through these and if you're adding
+just short text snippets, there may already be translations available.  If not, the
+localization files should be updated (see https://djangobook.com/localization-create-language-files/)
 
 ## CSS changes
 
