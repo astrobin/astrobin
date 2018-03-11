@@ -9,6 +9,8 @@ production copy is run on https://www.astrobin.com/.
 
 # Architecture overview
 
+## Components
+
 ![Architecture overview](https://raw.githubusercontent.com/astrobin/astrobin/master/graphics/astrobin-architecture.png)
 
 AstroBin is composed by several components. The following paragraphs shortly
@@ -50,8 +52,7 @@ A debug server that can be used in debug mode to interactively debug the app.
 ### flower
 A monitor that sits on top of rabbitmq and monitors the celery tasks.
 
-
-# Development
+# Development Environment
 
 You can setup a development environment using Docker.
 
@@ -173,6 +174,86 @@ of your new code, then you can do a "heavyweight" reset:
 
 This script will reset your Astrobin docker environment back to zero, so you can start over
 at "step 1" of the build instructions above.
+
+# Development notes
+
+## Which template to edit?
+
+Start in the `urls.py` file -- the `urlpatterns` list contains the routing rules for
+the Astrobin site.  For example, if you're going to be editing the Big Wall, note
+the URL used in your browser (`/explore/wall/`) and then find the URL pattern that
+matches it:
+
+```
+url(r'^explore/wall/$', explore_views.WallView.as_view(), name='wall'),
+```
+
+This tells you that the Django View you're looking for is `WallView`, in the
+`explore_views` module.
+
+```
+$ grep "class WallView" * -r
+astrobin/views/explore.py:class WallView(ListView):
+```
+
+Looking at the `WallView` class, you can see the template associated with it:
+
+```
+class WallView(ListView):
+    template_name = 'wall.html'
+    paginate_by = 70
+```
+
+Django uses a search path when looking for templates.  Some templates might not
+be in this git repository, but rather included in 3rd party modules pulled in
+during the build process.  So don't panic if you don't see a template referenced
+in the code, within the git repository.
+
+In this case, as you might expect, `wall.html` is in the standard location for
+Django templates:
+
+```
+$ find astrobin -name wall.html
+astrobin/templates/wall.html
+```
+
+## Localization
+
+If you update one of the Django templates with text content, it needs to be localized.
+In a template use the
+[`trans` template tag](https://docs.djangoproject.com/en/1.9/topics/i18n/translation/#specifying-translation-strings-in-template-code)
+to translate text.  Note that the template must first `{% load i18n %}` for this to work.
+For example, `{% trans "foo" %}`
+
+The translations are stored in `django.po` files.  Grep through these and if you're adding
+just short text snippets, there may already be translations available.  If not, the
+localization files should be updated (see https://djangobook.com/localization-create-language-files/)
+
+## CSS changes
+
+All CSS is defined canonically in the `astrobin/astrobin/static/css/astrobin.less` file.
+CSS files are generated using the `lessc` utility, which you can install on your development
+system with `npm install -g less`.  Run this command to rebuild the CSS from the .less file:
+
+```
+lessc astrobin/static/css/astrobin.less astrobin/static/css/astrobin.css
+```
+
+After you update the `astrobin.css` file, you should be able to Shift+F5 in your browser
+to reload the page with the new CSS (if you're running the development server as noted above).
+
+When you are done making changes to the CSS (or any other static content), you need to tick
+the `MEDIA_VERSION` in `astrobin/settings/components/basic.py`.  This ensures that
+browsers pick up the new content instead of using their cached version.
+
+## Testing
+
+Before you submit your code for review, you should run tests to ensure that your changes
+have not broken anything important.  Run the test script by executing:
+
+```
+docker-compose -f docker/docker-compose.yml exec astrobin ./scripts/test.sh
+```
 
 # Postgresql
 
