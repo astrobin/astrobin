@@ -3,14 +3,14 @@
 {% if is_paginated %}
     <div class="pagination">
         <ul>
-            <li class="prev {% if not page_obj.has_previous %}disabled{% endif %}">
+            <li>
                 {% if page_obj.has_previous %}
                 <a class="arrow" title="{% trans "Previous page" %}" href="?page={{ page_obj.previous_page_number }}">&larr;</a>
                 {% else %}
                 <span class="arrow">&larr;</span>
                 {% endif %}
             </li>
-            <li class="next {% if not page_obj.has_next %}disabled{% endif %}">
+            <li>
                 {% if page_obj.has_next %}
                 <a class="arrow" title="{% trans "Next page" %}" href="?page={{ page_obj.next_page_number }}" >&rarr;</a>
                 {% else %}
