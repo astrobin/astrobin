@@ -48,9 +48,8 @@
         </tbody>
     </table>
 {% else %}
-    <ul class="thumbnails astrobin-thumbnails endless">
+    <div class="thumbnails astrobin-thumbnails endless justified-gallery">
         {% include 'inclusion_tags/image_list_entries.html' %}
-        {% include 'snippets/endless_pagination_js.html' %}
-    </ul>
+    </div>
 {% endifequal %}
 

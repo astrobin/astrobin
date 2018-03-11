@@ -1174,7 +1174,7 @@ li [class*=" icon-"], .nav li [class*=" icon-"] {
 }
 
 #index #why-astrobin {
-    margin: -33px -29px 40px -29px;
+    margin: 0px -30px 0 -30px;
 
     .carousel-inner, .carousel-image {
         height: 320px;
@@ -1197,20 +1197,21 @@ li [class*=" icon-"], .nav li [class*=" icon-"] {
     }
 }
 
-ul.astrobin-thumbnails {
+#index .astrobin-thumbnails {
+    margin-left: -30px;
+    margin-right: -30px;
+    margin-bottom: -30px;
+    width: calc(~"100% + 60px");
+}
+
+.astrobin-thumbnails {
     margin-left: 0;
 }
-li.astrobin-thumbnail {
-    position: relative;
-    padding: 2px;
+
+.astrobin-thumbnail {
     margin: 0;
     border: 0;
     .no-box-shadow;
-    display: inline-block;
-
-    img {
-        .rounded-corners(20px);
-    }
 
     &.spam-thumbnail img{
         border: 1px solid red;
@@ -3920,6 +3921,8 @@ table#private-shared-folders tr:hover a.delete-folder { visibility: visible; }
 .endless_container {
     text-align: center;
     width: 100%;
+    opacity: 1 !important; // Prevents overriding by justifiedGallery
+    bottom: 0;
 
     .endless_more {
         margin-top: @spacer-xxlarge;

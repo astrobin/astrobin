@@ -243,8 +243,8 @@ def index(request, template = 'index/root.html', extra_context = None):
 
     response_dict = {
         'recent_images': recent_images,
-        'recent_images_alias': 'gallery',
-        'recent_images_batch_size': 70,
+        'recent_images_alias': 'regular',
+        'recent_images_batch_size': 30,
         'section': 'recent',
     }
 

@@ -1,0 +1,19 @@
+{
+  "name": "astrobin",
+  "version": "1.24.1",
+  "description": "The Home of Astrophotography",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": "git+https://github.com/astrobin/astrobin.git",
+  "author": "Salvatore Iovene <salvatore@iovene.com>",
+  "license": "AGPL-3.0",
+  "bugs": {
+    "url": "https://github.com/astrobin/astrobin/issues"
+  },
+  "homepage": "https://github.com/astrobin/astrobin#readme",
+  "dependencies": {
+    "justifiedGallery": "^3.6.5"
+  }
+}

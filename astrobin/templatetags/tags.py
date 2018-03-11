@@ -87,7 +87,7 @@ def string_to_date(date):
 
 
 def image_list(context, object_list, **kwargs):
-    alias = kwargs.get('alias', 'gallery')
+    alias = kwargs.get('alias', 'regular')
     nav_ctx = kwargs.get('nav_ctx', 'all')
     nav_ctx_extra = kwargs.get('nav_ctx_extra', None)
 

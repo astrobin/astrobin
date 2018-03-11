@@ -1,6 +1,7 @@
 $(document).ready(function() {
-    /* TODO: make this a jQuery plugin */
     window.loadAstroBinImages = function(fragment) {
+        $('.astrobin-thumbnails').justifiedGallery();
+
         $(fragment).find('img.astrobin-image').each(function(index) {
             var $img = $(this);
             var random_timeout = Math.floor(Math.random() * 100) + 100; // 100-200 ms
@@ -10,18 +11,9 @@ $(document).ready(function() {
                     alias = $img.data('alias'),
                     revision = $img.data('revision'),
                     url = $img.data('get-thumb-url'),
-                    loaded = $img.data('loaded'),
-                    capty = $img.hasClass('capty');
+                    loaded = $img.data('loaded');
 
-                function captify($img) {
-                    var height = $img.attr('height');
-                    $img.capty({animation: 'slide', speed: 200, height: height});
-                    $img.closest('.capty-wrapper').find('.capty-target').show();
-                }
-
-                if (loaded && capty) {
-                    captify($img);
-                } else if (!loaded && url !== "") {
+                if (!loaded && url !== "") {
                     $.ajax({
                         dataType: 'json',
                         timeout: 0,
@@ -34,12 +26,6 @@ $(document).ready(function() {
                                 '][data-revision=' + data.revision +
                                 ']');
 
-                            if ($img.hasClass('capty')) {
-                                $img.load(function() {
-                                    captify($img);
-                                });
-                            }
-
                             $img
                                 .attr('src', data.url)
                                 .attr('data-loaded', 'true');
@@ -50,5 +36,10 @@ $(document).ready(function() {
         });
     };
 
-    window.loadAstroBinImages($('body'));
+    $('.astrobin-thumbnails').justifiedGallery({
+        rowHeight: 220,
+        selector: 'a, div:not(.endless_container)'
+    });
+
+   window.loadAstroBinImages($('body'));
 });
