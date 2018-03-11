@@ -1,0 +1,13 @@
+{% load i18n %}
+{% with "https://www.astrobin.com/help/api/" as api_docs_url %}
+    {% blocktrans %}Your request for an API Key has been approved!
+
+    Your key: {{key}}
+    Your secret: {{secret}}
+
+    Please read the API documentation at <a href="{{api_docs_url}}">{{api_docs_url}}</a>
+
+    You can review your API keys at <a href="{{api_keys_url}}">{{api_keys_url}}</a>
+
+    Thank you for using AstroBin's APIs!{% endblocktrans %}
+{% endwith %}
