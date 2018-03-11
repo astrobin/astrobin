@@ -1123,15 +1123,17 @@ li.astrobin-thumbnail.top-title .image-title {
 .pagination {
   text-align: center;
 }
-.pagination a {
-  border-color: #505050;
+.pagination ul > li > span,
+.pagination ul > li > a,
+.pagination ul > li > a:hover,
+.pagination ul > li > a:focus {
+  background-color: rgba(255, 255, 255, 0.025);
+  border: none;
+  padding: 6px 14px;
 }
-.pagination ul > .disabled > span,
-.pagination ul > .disabled > a,
-.pagination ul > .disabled > a:hover,
-.pagination ul > .disabled > a:focus {
-  color: #c8c8c8;
-  background-color: #eaeaea;
+.pagination > ul > li > .current,
+.pagination > ul > li > .ellipsis {
+  font-weight: bold;
 }
 .table {
   table-layout: fixed;
@@ -4235,11 +4237,6 @@ table.post th.post-avatar {
   margin: 0;
   top: 4px;
   right: 4px;
-}
-.breadcrumb .pagination a,
-.breadcrumb .pagination .disabled a {
-  border: none;
-  background: #333333 url('../images/dark-panel-tile.png');
 }
 .field-errors {
   color: red;

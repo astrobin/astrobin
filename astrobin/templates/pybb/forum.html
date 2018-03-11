@@ -50,4 +50,5 @@
         {% include 'pybb/forum_list.html' with forum_list=forum.forums_accessed category='' parent_forum=forum %}
         {% include "pybb/topic_list.html" %}
     </div>
+    {% include 'pagination_simple.html' %}
 {% endblock content %}
