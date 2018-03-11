@@ -6,9 +6,9 @@
             {% for pagenum in paginator.page_range %}
                 {% if forloop.first %}
                     {% if page_obj.has_previous %}
-                    <li><a class="arrow" title="{% trans "Previous page" %}" href="?page={{ page_obj.previous_page_number }}">&larr;</a></li>
+                    <li><a class="arrow" title="{% trans "Previous page" %}" href="?page={{ page_obj.previous_page_number }}">&lt;</a></li>
                     {% else %}
-                    <li><span class="arrow">&larr;</span></li>
+                    <li><span class="arrow">&lt;</span></li>
                     {% endif %}
                 {% endif %}
 
@@ -26,9 +26,9 @@
 
                 {% if forloop.last %}
                     {% if page_obj.has_next %}
-                    <li><a class="arrow" title="{% trans "Next page" %}" href="?page={{ page_obj.next_page_number }}" >&rarr;</a></li>
+                    <li><a class="arrow" title="{% trans "Next page" %}" href="?page={{ page_obj.next_page_number }}">&gt;</a></li>
                     {% else %}
-                    <li><span class="arrow">&rarr;</span></li>
+                    <li><span class="arrow">&gt;</span></li>
                     {% endif %}
                 {% endif %}
             {% endfor %}
