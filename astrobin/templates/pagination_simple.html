@@ -5,16 +5,16 @@
         <ul>
             <li class="prev {% if not page_obj.has_previous %}disabled{% endif %}">
                 {% if page_obj.has_previous %}
-                <a title="{% trans "Previous page" %}" href="?page={{ page_obj.previous_page_number }}">&larr;</a>
+                <a class="arrow" title="{% trans "Previous page" %}" href="?page={{ page_obj.previous_page_number }}">&larr;</a>
                 {% else %}
-                <span>&#9664;</span>
+                <span class="arrow">&larr;</span>
                 {% endif %}
             </li>
             <li class="next {% if not page_obj.has_next %}disabled{% endif %}">
                 {% if page_obj.has_next %}
-                <a title="{% trans "Next page" %}" href="?page={{ page_obj.next_page_number }}" >&rarr;</a>
+                <a class="arrow" title="{% trans "Next page" %}" href="?page={{ page_obj.next_page_number }}" >&rarr;</a>
                 {% else %}
-                <span>&#9654;</span>
+                <span class="arrow">&rarr;</span>
                 {% endif %}
             </li>
         </ul>
