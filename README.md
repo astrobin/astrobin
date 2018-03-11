@@ -233,11 +233,15 @@ localization files should be updated (see https://djangobook.com/localization-cr
 
 All CSS is defined canonically in the `astrobin/astrobin/static/css/astrobin.less` file.
 CSS files are generated using the `lessc` utility, which you can install on your development
-system with `npm install -g lessc`.  Run this command to rebuild the CSS from the .less file:
+system with `npm install -g less`.  Run this command to rebuild the CSS from the .less file:
 
 ```
 lessc astrobin/static/css/astrobin.less astrobin/static/css/astrobin.css
 ```
+
+After making any changes to the CSS (or any other static content), you need to tick
+the `MEDIA_VERSION` in `astrobin/settings/components/basic.py`.  This ensures that
+browsers pick up the new content instead of using their cached version.
 
 ## Testing
 
