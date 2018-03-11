@@ -98,7 +98,7 @@
         </div>
         <div>&nbsp;</div>
         {% with _('Posts') as label %}
-            {% include "pagination_simple.html" %}
+            {% include "pagination_numbered.html" %}
         {% endwith %}
 
         {% if user|pybb_may_create_post:topic %}

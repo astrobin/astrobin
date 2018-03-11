@@ -1,0 +1,38 @@
+{% load i18n %}
+
+{% if is_paginated %}
+    <div class="pagination">
+        <ul>
+            {% for pagenum in paginator.page_range %}
+                {% if forloop.first %}
+                    <li><span>Page:</span></li>
+                    {% if page_obj.has_previous %}
+                    <li><a title="Previous page" href="?page={{ page_obj.previous_page_number }}">&#9664;</a></li>
+                    {% else %}
+                    <li><span>&#9664;</span></li>
+                    {% endif %}
+                {% endif %}
+
+                {% if forloop.first or forloop.last or pagenum >= page_obj.number|add:"-2" and pagenum <= page_obj.number|add:"2" %}
+                    {% if page_obj.number == pagenum %}
+                        <li><span style="font-weight: bold;">{{ pagenum }}</span></li>
+                    {% else %}
+                        <li><a href="?page={{ pagenum }}">{{ pagenum }}</a></li>
+                    {% endif %}
+                {% else %}
+                    {% if pagenum == page_obj.number|add:"-3" or pagenum == page_obj.number|add:"3" %}
+                        <li><span style="font-weight: bold;">...</span></li>
+                    {% endif %}
+                {% endif %}
+
+                {% if forloop.last %}
+                    {% if page_obj.has_next %}
+                    <li><a title="Next page" href="?page={{ page_obj.next_page_number }}" >&#9654;</a></li>
+                    {% else %}
+                    <li><span>&#9654;</span></li>
+                    {% endif %}
+                {% endif %}
+            {% endfor %}
+        </ul>
+    </div>
+{% endif %}
