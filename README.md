@@ -239,7 +239,10 @@ system with `npm install -g less`.  Run this command to rebuild the CSS from the
 lessc astrobin/static/css/astrobin.less astrobin/static/css/astrobin.css
 ```
 
-After making any changes to the CSS (or any other static content), you need to tick
+After you update the `astrobin.css` file, you should be able to Shift+F5 in your browser
+to reload the page with the new CSS (if you're running the development server as noted above).
+
+When you are done making changes to the CSS (or any other static content), you need to tick
 the `MEDIA_VERSION` in `astrobin/settings/components/basic.py`.  This ensures that
 browsers pick up the new content instead of using their cached version.
 
