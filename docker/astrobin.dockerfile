@@ -51,7 +51,9 @@ RUN pip install -U setuptools && \
     pip install --no-deps -r requirements.txt --src /src
 
 # Install global node dependencies
-RUN yarn global add yuglify
+RUN yarn global add \
+    less \
+    yuglify
 
 CMD python manage.py migrate --noinput && gunicorn wsgi:application -w 2 -b :8083
 EXPOSE 8083
