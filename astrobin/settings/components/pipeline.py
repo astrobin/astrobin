@@ -70,7 +70,7 @@ PIPELINE = {
             },
         }
     },
-    'CSS_COMPRESSOR': 'pipeline.compressors.cssmin.CssminCompressor',
-    'JS_COMPRESSOR': 'pipeline.compressors.jsmin.SlimItCompressor'
+    'CSS_COMPRESSOR': 'pipeline.compressors.yuglify.YuglifyCompressor',
+    'JS_COMPRESSOR': 'pipeline.compressors.yuglify.YuglifyCompressor',
 }
 
