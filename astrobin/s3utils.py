@@ -6,6 +6,7 @@ from unidecode import unidecode
 
 # Django
 from django.conf import settings
+from django.contrib.staticfiles.storage import ManifestFilesMixin
 from django.core.files.storage import FileSystemStorage
 
 # Third party
@@ -72,7 +73,7 @@ else:
     ImageStorage = lambda: OverwritingFileSystemStorage(location=settings.UPLOADS_DIRECTORY)
 
 
-class S3PipelineStorage(PipelineMixin, S3BotoStorage):
+class S3PipelineStorage(PipelineMixin, ManifestFilesMixin, S3BotoStorage):
     pass
-StaticRootS3BotoStorage = lambda: S3PipelineStorage(location='static')
+StaticRootS3BotoStorage = lambda: S3PipelineStorage(location=settings.STATIC_ROOT)
 

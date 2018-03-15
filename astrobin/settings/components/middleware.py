@@ -15,5 +15,6 @@ if not DEBUG:
     MIDDLEWARE_CLASSES += [
         'django.middleware.locale.LocaleMiddleware',
         'django.middleware.gzip.GZipMiddleware',
+        'pipeline.middleware.MinifyHTMLMiddleware',
     ]
 
