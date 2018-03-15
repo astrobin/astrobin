@@ -231,20 +231,26 @@ localization files should be updated (see https://djangobook.com/localization-cr
 
 ## CSS changes
 
-All CSS is defined canonically in the `astrobin/astrobin/static/css/astrobin.less` file.
-CSS files are generated using the `lessc` utility, which you can install on your development
-system with `npm install -g less`.  Run this command to rebuild the CSS from the .less file:
+All primary stylesheets are defined canonically in the 
+`astrobin/static/scss/*.scss` files. CSS files are generated using the `compass`
+ utility automatically, when you perform a `collectstatic`.
+
+After you update the `astrobin.scss` or `astrobin-mobile.scss` file, you should
+first `collectstatic`, and then be able to Shift+F5 in your browser to reload
+the page with the new CSS (if you're running the development server as noted
+above).
+
+For convenience, you can save time by simply generating and copying the
+modified style file, e.g.:
 
 ```
-lessc astrobin/static/css/astrobin.less astrobin/static/css/astrobin.css
+docker cp astrobin/static/scss/astrobin.scss astrobin:/media/static/scss/
+docker exec -it astrobin \
+    sass /media/static/scss/astrobin.scss /media/static/css/astrobin.css
 ```
 
-After you update the `astrobin.css` file, you should be able to Shift+F5 in your browser
-to reload the page with the new CSS (if you're running the development server as noted above).
-
-When you are done making changes to the CSS (or any other static content), you need to tick
-the `MEDIA_VERSION` in `astrobin/settings/components/basic.py`.  This ensures that
-browsers pick up the new content instead of using their cached version.
+When collecting static files on AWS S3, a hash of their contents will be
+automatically added to their filenames, for cache-busting purposes.
 
 ## Testing
 
