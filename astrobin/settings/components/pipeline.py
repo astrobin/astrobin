@@ -1,6 +1,8 @@
 PIPELINE = {
     'PIPELINE_ENABLED': not DEBUG,
-    'PIPELINE_COLLECTOR_ENABLED': not DEBUG,
+    'PIPELINE_COLLECTOR_ENABLED': False,
+    'SHOW_ERRORS_INLINE': True,
+
     'JAVASCRIPT': {
         'scripts': {
             'source_filenames': (
@@ -35,7 +37,7 @@ PIPELINE = {
                 'js/bootstrap.js',
                 'js/astrobin.js',
             ),
-            'output_filename': 'js/astrobin_pipeline_v' + MEDIA_VERSION + '.js',
+            'output_filename': 'js/astrobin.js',
         }
     },
     'STYLESHEETS': {
@@ -64,7 +66,7 @@ PIPELINE = {
                 'css/astrobin.less',
                 'css/astrobin-mobile.less',
             ),
-            'output_filename': 'css/astrobin_pipeline_screen_v' + MEDIA_VERSION + '.css',
+            'output_filename': 'css/astrobin_screen.css',
             'extra_content':  {
                 'media': 'screen, projection',
             },

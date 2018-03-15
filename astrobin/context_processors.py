@@ -90,7 +90,6 @@ def common_variables(request):
         'IOTD_SHOW_CHOOSING_JUDGE': settings.IOTD_SHOW_CHOOSING_JUDGE,
         'SOLVING_ENABLED': settings.ENABLE_SOLVING,
         'GOOGLE_ANALYTICS_ID': settings.GOOGLE_ANALYTICS_ID,
-        'MEDIA_VERSION': settings.MEDIA_VERSION,
         'READONLY_MODE': settings.READONLY_MODE,
         'HAS_BOUNCED_EMAILS': bounced
     }
