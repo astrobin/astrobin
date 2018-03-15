@@ -63,8 +63,8 @@ PIPELINE = {
 
                 'common/fancybox/jquery.fancybox.css',
 
-                'css/astrobin.less',
-                'css/astrobin-mobile.less',
+                'scss/astrobin.scss',
+                'scss/astrobin-mobile.scss',
             ),
             'output_filename': 'css/astrobin_screen.css',
             'extra_content':  {
@@ -73,7 +73,7 @@ PIPELINE = {
         }
     },
     'COMPILERS': (
-        'pipeline.compilers.less.LessCompiler',
+        'pipeline.compilers.sass.SASSCompiler',
     ),
     'CSS_COMPRESSOR': 'pipeline.compressors.yuglify.YuglifyCompressor',
     'JS_COMPRESSOR': 'pipeline.compressors.yuglify.YuglifyCompressor',

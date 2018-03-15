@@ -1,6 +1,6 @@
 @font-face {
     font-family: LeagueGothicRegular;
-    src: url("../fonts/LeagueGothic-Regular.otf") format("opentype");
+    src: url("../fonts/LeagueGothic-Regular@mixin otf") format("opentype");
 }
 
 @media screen and (max-width: 979px) {
@@ -336,12 +336,12 @@
 
     .breadcrumb {
         margin-left: -15px;
-        width: calc(~"100% - 45px");
+        width: calc(100% - 45px);
     }
 
     .astrobin-container .subtitle {
         padding-left: 45px;
-        width: calc(~"100% - 45px");
+        width: calc(100% - 45px);
     }
 }
 

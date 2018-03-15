@@ -21,7 +21,8 @@ RUN apt-get update && apt-get install -y \
     shiboken libshiboken-dev \
     libjpeg62 libjpeg62-dev \
     libfreetype6 libfreetype6-dev \
-    zlib1g-dev
+    zlib1g-dev \
+    ruby ruby-dev
 
 # Install yarn
 RUN curl -sS https://dl.yarnpkg.com/debian/pubkey.gpg | apt-key add - \
@@ -52,8 +53,10 @@ RUN pip install -U setuptools && \
 
 # Install global node dependencies
 RUN yarn global add \
-    less \
     yuglify
+
+# Install compass
+RUN gem install compass
 
 CMD python manage.py migrate --noinput && gunicorn wsgi:application -w 2 -b :8083
 EXPOSE 8083
