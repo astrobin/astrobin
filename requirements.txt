@@ -60,7 +60,6 @@ django-model-utils==3.0.0
 django-modeltranslation==0.12.1
 django-mptt==0.8.7
 -e git+https://github.com/astrobin/django-notification.git@b2b1c1e076724db1a49486a3c4ac94d30f7433aa#egg=django_notification
-django-openid-provider==0.6
 django-paypal==0.3.6
 -e git+https://github.com/astrobin/django-persistent-messages.git@e4a3220#egg=django_persistent_messages
 django-pipeline==1.6.13
@@ -149,7 +148,6 @@ python-magic==0.4.15
 python-memcached==1.58
 python-mimeparse==1.6.0
 python-modargs==1.7
-python-openid==2.2.5
 pytz==2017.3
 PyYAML==3.12
 rcssmin==1.0.6
