@@ -6,6 +6,7 @@
 {% load django_bootstrap_breadcrumbs %}
 {% load tags %}
 {% load toggleproperty_tags %}
+{% load staticfiles %}
 
 {% block title %}{% blocktrans with user=requested_user.userprofile %}{{user}}'s gallery{% endblocktrans %}{% endblock %}
 {% block container_extra_classes %}has-subnav{% endblock %}

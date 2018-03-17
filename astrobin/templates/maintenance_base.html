@@ -4,6 +4,7 @@
 {% load inbox %}
 {% load pipeline %}
 {% load common_tags %}
+{% load staticfiles %}
 
 <!DOCTYPE html>
 <html lang="{% if request.user.is_authenticated and user_language %}{{user_language}}{% else %}en{% endif %}">
