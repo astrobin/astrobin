@@ -61,7 +61,7 @@
                     <a href="#" id="approve-and-ban-button" class="btn btn-block-mobile">
                         {% trans "Approve selected and ban the rest" %} &rarr;
                     </a>
-                    <span class="loading hide"><img src="{{STATIC_URL}}images/ajax-loader.gif" alt=""/></span>
+                    <span class="loading hide"><img src="{% static 'astrobin/images/ajax-loader.gif' %}" alt=""/></span>
                 </div>
             {% else %}
                 <div class="alert alert-success">

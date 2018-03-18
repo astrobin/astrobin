@@ -1,5 +1,5 @@
 {% load i18n %}
-{% load static %}
+{% load staticfiles %}
 
 {% load ember %}
 
@@ -8,7 +8,7 @@
 <div id="nested-comments-user-name" data-value="{{request.user.username}}"></div>
 <div id="nested-comments-user-is-authenticated" data-value="{{request.user.is_authenticated}}"></div>
 <div id="nested-comments-page-url" data-value="{{request.get_full_path}}"></div>
-<div id="nested-comments-static-url" data-value="{{STATIC_URL}}"></div>
+<div id="nested-comments-static-url" data-value="{% static '' %}"></div>
 
 {% handlebars "nested-comments" %}
     {{outlet top-level}}

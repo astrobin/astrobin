@@ -34,7 +34,7 @@
                     <td class="created-on hidden-phone">{{key.created}}</td>
                     <td class="active">
                         {% if key.active %}
-                            <img src="{{STATIC_URL}}icons/iconic/white/check_alt_16x16.png" alt="{% trans "Yes" %}"/>
+                            <img src="{% static 'astrobin/icons/iconic/white/check_alt_16x16.png' %}" alt="{% trans "Yes" %}"/>
                         {% endif %}
                     </td>
                 </tr>
