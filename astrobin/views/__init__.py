@@ -1298,7 +1298,6 @@ def user_page_following(request, username, extra_context = None):
             'requested_user': user,
             'user_list': followed_users,
             'view': request.GET.get('view', 'default'),
-            'STATIC_URL': settings.STATIC_URL,
             'private_message_form': PrivateMessageForm(),
             'public_images_no': Image.objects.filter(user = user).count(),
             'wip_images_no': Image.wip.filter(user = user).count(),
