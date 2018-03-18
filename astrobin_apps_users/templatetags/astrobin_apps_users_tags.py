@@ -157,7 +157,6 @@ def astrobin_apps_users_list(context, user_list, **kwargs):
         'user_list': user_list,
         'view': view,
         'layout': layout,
-        'STATIC_URL': settings.STATIC_URL,
         'DONATIONS_ENABLED': context['DONATIONS_ENABLED'],
         'PREMIUM_ENABLED': context['PREMIUM_ENABLED'],
     }
