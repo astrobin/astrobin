@@ -19,18 +19,18 @@
         <meta name="robots" content="index, follow, noarchive" />
         <meta name="googlebot" content="noarchive" />
 
-        <link rel="shortcut icon" href="{{STATIC_URL}}favicon.ico" type="image/x-icon">
-        <link rel="icon" href="{{STATIC_URL}}favicon.ico" type="image/x-icon">
+        <link rel="shortcut icon" href="{% static 'astrobin/favicon.ico' %}" type="image/x-icon">
+        <link rel="icon" href="{% static 'astrobin/favicon.ico' %}" type="image/x-icon">
 
         <!--[if lte IE 8]>
         <script src="http://html5shiv.googlecode.com/svn/trunk/html5.js"></script>
-        <script src="{{STATIC_URL}}js/selectivizr.js"></script>
+        <script src="{% static 'astrobin/js/selectivizr.js' %}"></script>
         <![endif]-->
 
         <link href="https://fonts.googleapis.com/css?family=Noto+Sans:400,400i,700|Noto+Serif:700&subset=latin-ext" rel="stylesheet">
         {% stylesheet 'screen' %}
 
-        <!--[if IE 6]><link rel="stylesheet" type="text/css" media="screen" href="{{STATIC_URL}}css/ie6.css"/><![endif]-->
+        <!--[if IE 6]><link rel="stylesheet" type="text/css" media="screen" href="{% static 'astrobin/css/ie6.css' %}"/><![endif]-->
 
         {% block extra_css %}{% endblock %}
 
@@ -341,7 +341,7 @@
                                     <span id="notifications_count" class="notice-count">{{notifications_count}}</span>
                                 {% endif %}
                                 <a class="dropdown notifications" data-toggle="dropdown" title="{% trans "Notifications" %}" href="#">
-                                    <img alt="{% trans "Notifications" %}" src="{{STATIC_URL}}icons/iconic/orange/notifications.gif"/>
+                                    <img alt="{% trans "Notifications" %}" src="{% static 'astrobin/icons/iconic/orange/notifications.gif' %}"/>
                                 </a>
                                 <ul class="dropdown-menu" id="notifications-popup">
                                     {% notification_list request.user %}
@@ -549,7 +549,7 @@
 
         {% block modals %}{% endblock %}
 
-        <!--[if lte IE 8]><script type="text/javascript" src="{{STATIC_URL}}js/flashcanvas.js"></script><![endif]-->
+        <!--[if lte IE 8]><script type="text/javascript" src="{% static 'astrobin/js/flashcanvas.js' %}"></script><![endif]-->
 
         {% javascript 'scripts' %}
 

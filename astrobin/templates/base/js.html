@@ -38,7 +38,7 @@
     $.localise('ui-multiselect', {
         loadBase: false,
         language: '{{request.LANGUAGE_CODE}}',
-        path: '{{STATIC_URL}}js/locale/',
+        path: '{% static 'astrobin/js/locale/' %}',
         timeout: 500
     });
 

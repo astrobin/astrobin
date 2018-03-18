@@ -2,8 +2,8 @@
 {% load crispy_forms_tags %}
 {% load staticfiles %}
 
-<link rel="stylesheet" type="text/css" media="screen" href="{{STATIC_URL}}css/token-input.css"/>
-<link rel="stylesheet" type="text/css" media="screen" href="{{STATIC_URL}}css/astrobin.css"/>
+<link rel="stylesheet" type="text/css" media="screen" href="{% static 'astrobin/css/token-input.css' %}"/>
+<link rel="stylesheet" type="text/css" media="screen" href="{% static 'astrobin/css/astrobin.css' %}"/>
 <div class="facebox-box">
 <form id="message-modal-form" action="{% url 'messages_compose' %}" method="post" class="uniForm">{% csrf_token %}
     <fieldset class="inlineLabels">
@@ -16,9 +16,9 @@
 </form>
 </div>
 
-<script type="text/javascript" src="{{STATIC_URL}}js/jquery-1.7.1.js"></script>
-<script type="text/javascript" src="{{STATIC_URL}}js/jquery.form.js"></script>
-<script type="text/javascript" src="{{STATIC_URL}}js/jquery.tokeninput.js"></script>
+<script type="text/javascript" src="{% static 'astrobin/js/jquery-1.7.1.js' %}"></script>
+<script type="text/javascript" src="{% static 'astrobin/js/jquery.form.js' %}"></script>
+<script type="text/javascript" src="{% static 'astrobin/js/jquery.tokeninput.js' %}"></script>
 <script type="text/javascript">
     $(document).ready(function() {
         var recipient = $("#id_recipient").val();

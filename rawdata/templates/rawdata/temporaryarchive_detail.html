@@ -2,6 +2,7 @@
 
 {% load i18n %}
 {% load django_bootstrap_breadcrumbs %}
+{% load staticfiles %}
 
 {% block title %}AstroBin - {% trans "Your download is ready" %}{% endblock %}
 
@@ -25,7 +26,7 @@
         <div class="download-with-icon">
             <div class="image">
                 <a href="{{MEDIA_URL}}{{object.file.name}}">
-                    <img src="{{STATIC_URL}}rawdata/images/zip.png" alt="ZIP" />
+                    <img src="{% static 'rawdata/images/zip.png' %}" alt="ZIP" />
                 </a>
             </div>
             <div class="data">
@@ -49,7 +50,7 @@
         <div class="download-with-icon">
             <div class="image">
                 <a href="/{{object.file.name}}">
-                    <img src="{{STATIC_URL}}rawdata/images/zip-not-ready.png" alt="ZIP" />
+                    <img src="{% static 'rawdata/images/zip-not-ready.png' %}" alt="ZIP" />
                 </a>
             </div>
             <div class="data">
@@ -60,7 +61,7 @@
                     {% trans "Please refresh this page in a few seconds." %}
                     {% trans "For larged downloads, this operation could take up to a few minutes." %}
                     <br/>
-                    <img src="{{STATIC_URL}}images/ajax-loader.gif" alt="" />
+                    <img src="{% static 'astrobin/images/ajax-loader.gif' %}" alt="" />
                 </span>
             </div>
         </div>

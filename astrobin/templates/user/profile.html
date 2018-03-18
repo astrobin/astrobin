@@ -55,7 +55,7 @@
         <ul>
             <li>
                 <a href="{% url 'profile_edit_basic' %}">
-                    <img src="{{STATIC_URL}}icons/iconic/orange/edit_profile.png" alt="{% trans "Edit profile" %}"/>
+                    <img src="{% static 'astrobin/icons/iconic/orange/edit_profile.png' %}" alt="{% trans "Edit profile" %}"/>
                 </a>
                 <a href="{% url 'profile_edit_basic' %}">
                     {% trans "Edit profile" %}
@@ -63,7 +63,7 @@
             </li>
             <li>
                 <a href="{% url 'auth_logout' %}">
-                    <img src="{{STATIC_URL}}icons/iconic/orange/logout.png" alt="{% trans "Logout" %}"/>
+                    <img src="{% static 'astrobin/icons/iconic/orange/logout.png' %}" alt="{% trans "Logout" %}"/>
                 </a>
                 <a href="{% url 'auth_logout' %}">
                     {% trans "Logout" %}

@@ -17,7 +17,7 @@
             {{upload_revision_form|as_bootstrap}}
             <input type="hidden" name="image_id" value="{{image.id}}"/>
             <input class="btn btn-primary" type="submit" value="{% trans "Upload" %}"/>
-            <span class="spinner hide"><img src="{{STATIC_URL}}images/loading-bar.gif" alt=""/></span>
+            <span class="spinner hide"><img src="{% static 'astrobin/images/loading-bar.gif' %}" alt=""/></span>
         </form>
     </div>
 </div>

@@ -9,7 +9,7 @@
 {% javascript 'scripts' %}
 
 <!-- other js -->
-<script type="text/javascript" src="{{STATIC_URL}}js/locale/jquery.timeago.{{request.LANGUAGE_CODE|default:'en'}}.js"></script>
-<script type="text/javascript" src="{{STATIC_URL}}js/Markdown.Converter.js"></script>
-<script type="text/javascript" src="{{STATIC_URL}}js/Markdown.Sanitizer.js"></script>
-<script type="text/javascript" src="{{STATIC_URL}}pybb/js/pybbjs.js"></script>
+<script type="text/javascript" src="{% static 'astrobin/js/locale/jquery.timeago' %}.{{request.LANGUAGE_CODE|default:'en'}}.js"></script>
+<script type="text/javascript" src="{% static 'astrobin/js/Markdown.Converter.js' %}"></script>
+<script type="text/javascript" src="{% static 'astrobin/js/Markdown.Sanitizer.js' %}"></script>
+<script type="text/javascript" src="{% static 'pybb/js/pybbjs.js' %}"></script>

@@ -2,6 +2,7 @@
 
 {% load i18n %}
 {% load django_bootstrap_breadcrumbs %}
+{% load staticfiles %}
 
 {% block title %}{% trans "AstroBin Raw Data" %}{% endblock %}
 
@@ -49,7 +50,7 @@
         </div>
 
         <div class="span4" style="padding-top: 80px; text-align: center;">
-            <img src="{{STATIC_URL}}rawdata/images/astrobin-rawdata-plan-luna.png" alt="{% trans "AstroBin Raw Data" %}" />
+            <img src="{% static 'rawdata/images/astrobin-rawdata-plan-luna.png' %}" alt="{% trans "AstroBin Raw Data" %}" />
             <a class="btn btn-primary btn-large" href="{% url 'subscription_list' %}">{% trans "Sign up now!" %}</a>
         </div>
     </div>
