@@ -77,3 +77,8 @@ class S3PipelineStorage(PipelineMixin, ManifestFilesMixin, S3BotoStorage):
     pass
 StaticRootS3BotoStorage = lambda: S3PipelineStorage(location=settings.STATIC_ROOT)
 
+class LocalPipelineStorage(PipelineMixin, ManifestFilesMixin, FileSystemStorage):
+    pass
+StaticRootLocalStorage = lambda: LocalPipelineStorage(
+    location=settings.STATIC_ROOT,
+    base_url=settings.STATIC_ROOT)
