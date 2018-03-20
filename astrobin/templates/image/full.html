@@ -97,9 +97,9 @@
         <div id="full-size-image">
             {% astrobin_image image alias revision=revision_label url_size='regular' %}
         </div>
-        <script type="text/javascript" src="{% static 'astrobin/common/js/jquery-1.8.3.js' %}"></script>
+        <script type="text/javascript" src="{% static 'common/js/jquery-1.8.3.js' %}"></script>
         <script type="text/javascript" src="{% static 'astrobin/js/bootstrap.js' %}"></script>
-        <script type="text/javascript" src="{% static 'astrobin/astrobin_apps_images/js/astrobin_apps_images.js' %}"></script>
+        <script type="text/javascript" src="{% static 'astrobin_apps_images/js/astrobin_apps_images.js' %}"></script>
         <script type="text/javascript" src="{% static 'astrobin/js/astrobin.js' %}"></script>
         {% insert_hit_count_js_variables for image %}
         <script type="text/javascript">
