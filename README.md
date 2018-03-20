@@ -2,7 +2,7 @@
 [![codecov](https://codecov.io/gh/astrobin/astrobin/branch/master/graph/badge.svg)](https://codecov.io/gh/astrobin/astrobin)
 [![Updates](https://pyup.io/repos/github/astrobin/astrobin/shield.svg)](https://pyup.io/repos/github/astrobin/astrobin/)
 
-![AstroBin](astrobin/static/images/astrobin-logo.png)
+![AstroBin](astrobin/static/astrobin/images/astrobin-logo.png)
 
 AstroBin is an image hosting website for astrophotographers. The original
 production copy is run on https://www.astrobin.com/.
