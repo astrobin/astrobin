@@ -1,5 +1,6 @@
 {% load i18n %}
 {% load pipeline %}
+{% load staticfiles %}
 
 <!DOCTYPE html>
 <html lang="{% if request.user.is_authenticated and user_language %}{{user_language}}{% else %}en{% endif %}">
@@ -14,8 +15,8 @@
         <meta name="robots" content="index, follow, noarchive" />
         <meta name="googlebot" content="noarchive" />
 
-        <link rel="shortcut icon" href="{{STATIC_URL}}favicon.ico" type="image/x-icon">
-        <link rel="icon" href="{{STATIC_URL}}favicon.ico" type="image/x-icon">
+        <link rel="shortcut icon" href="{% static 'astrobin/favicon.ico' %}" type="image/x-icon">
+        <link rel="icon" href="{% static 'astrobin/favicon.ico' %}" type="image/x-icon">
 
         {% stylesheet 'screen' %}
     </head>

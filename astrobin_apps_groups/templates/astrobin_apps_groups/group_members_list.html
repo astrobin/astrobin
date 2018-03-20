@@ -3,6 +3,7 @@
 {% load i18n %}
 {% load astrobin_apps_users_tags %}
 {% load el_pagination_tags %}
+{% load staticfiles %}
 
 {% block title %}{{object.name}}: {% trans "members list" %}{% endblock %}
 
@@ -37,7 +38,7 @@
 {% endblock %}
 
 {% block extra_js %}
-    <script src="{{STATIC_URL}}el-pagination/js/el-pagination.js"></script>
+    <script src="{% static 'el-pagination/js/el-pagination.js' %}"></script>
     <script>
         $.ajaxSetup({
             timeout: 30000

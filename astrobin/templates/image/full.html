@@ -4,6 +4,7 @@
 {% load hitcount_tags %}
 {% load i18n %}
 {% load tags %}
+{% load staticfiles %}
 
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
 "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
@@ -46,7 +47,7 @@
             <div class="navbar-inner">
                 <div class="container-fluid">
                     <a class="brand" href="{% url 'index' %}">
-                        <img src="{{STATIC_URL}}images/astrobin-logo-small.png" alt="AstroBin" />
+                        <img src="{% static 'astrobin/images/astrobin-logo-small.png' %}" alt="AstroBin" />
                     </a>
 
                     <ul class="nav">
@@ -96,10 +97,10 @@
         <div id="full-size-image">
             {% astrobin_image image alias revision=revision_label url_size='regular' %}
         </div>
-        <script type="text/javascript" src="{{STATIC_URL}}common/js/jquery-1.8.3.js"></script>
-        <script type="text/javascript" src="{{STATIC_URL}}js/bootstrap.js"></script>
-        <script type="text/javascript" src="{{STATIC_URL}}astrobin_apps_images/js/astrobin_apps_images.js"></script>
-        <script type="text/javascript" src="{{STATIC_URL}}js/astrobin.js"></script>
+        <script type="text/javascript" src="{% static 'common/js/jquery-1.8.3.js' %}"></script>
+        <script type="text/javascript" src="{% static 'astrobin/js/bootstrap.js' %}"></script>
+        <script type="text/javascript" src="{% static 'astrobin_apps_images/js/astrobin_apps_images.js' %}"></script>
+        <script type="text/javascript" src="{% static 'astrobin/js/astrobin.js' %}"></script>
         {% insert_hit_count_js_variables for image %}
         <script type="text/javascript">
             $(document).ready(function() {

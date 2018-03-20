@@ -1,4 +1,5 @@
 {% load i18n %}
+{% load static %}
 
 <!-- javascript -->
 <script type="text/javascript">
@@ -36,8 +37,8 @@
 
     $.localise('ui-multiselect', {
         loadBase: false,
-        language: '{{request.LANGUAGE_CODE}}',
-        path: '{{STATIC_URL}}js/locale/',
+        language: '{{request.LANGUAGE_CODE|default:'en'}}',
+        path: '{% get_static_prefix %}' + 'astrobin/js/locale/',
         timeout: 500
     });
 

@@ -5,6 +5,7 @@
 {% load i18n %}
 {% load tags %}
 {% load common_tags %}
+{% load staticfiles %}
 
 {% if action.verb|startswith:"VERB_" and user.username != '' %}
 
@@ -155,7 +156,7 @@
                 </div>
                 <div class="astrobin-image-container">
                     <a href="{% url 'rawdata.publicdatapool_detail' pool.pk %}">
-                        <img src="{{STATIC_URL}}images/actstream-rawdata-action.png" alt="RawData action" />
+                        <img src="{% static 'astrobin/images/actstream-rawdata-action.png' %}" alt="RawData action" />
                     </a>
                 </div>
                 <div class="title hidden-phone hidden-tablet">
@@ -181,7 +182,7 @@
                 </div>
                 <div class="astrobin-image-container">
                     <a href="{% url 'rawdata.publicdatapool_detail' pool.pk %}">
-                        <img src="{{STATIC_URL}}images/actstream-rawdata-action.png" alt="RawData action" />
+                        <img src="{% static 'astrobin/images/actstream-rawdata-action.png' %}" alt="RawData action" />
                     </a>
                 </div>
                 <div class="title hidden-phone hidden-tablet">
@@ -230,7 +231,7 @@
                 </div>
                 <div class="astrobin-image-container">
                     <a href="{% url 'group_detail' group.pk %}">
-                        <img src="{{STATIC_URL}}/images/actstream-group-action.png" alt="Group action" />
+                        <img src="{% static 'astrobin/images/actstream-group-action.png' %}" alt="Group action" />
                     </a>
                 </div>
                 <div class="title hidden-phone hidden-tablet">
@@ -256,7 +257,7 @@
                 </div>
                 <div class="astrobin-image-container">
                     <a href="{% url 'group_detail' group.pk %}">
-                        <img src="{{STATIC_URL}}/images/actstream-group-action.png" alt="Group action" />
+                        <img src="{% static 'astrobin/images/actstream-group-action.png' %}" alt="Group action" />
                     </a>
                 </div>
                 <div class="title hidden-phone hidden-tablet">

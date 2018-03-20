@@ -2,6 +2,7 @@
 
 {% load i18n %}
 {% load django_bootstrap_breadcrumbs %}
+{% load staticfiles %}
 
 {% block title %}{% trans "What is this site?" %}{% endblock %}
 
@@ -90,9 +91,9 @@
             </p>
         </div><!-- left column -->
         <div class="span6">
-            <img src="{{STATIC_URL}}images/help_1.png" />
-            <img src="{{STATIC_URL}}images/help_2.png" />
-            <img src="{{STATIC_URL}}images/help_3.png" />
+            <img src="{% static 'astrobin/images/help_1.png' %}" />
+            <img src="{% static 'astrobin/images/help_2.png' %}" />
+            <img src="{% static 'astrobin/images/help_3.png' %}" />
         </div>
     </div> <!-- row -->
 {% endblock %}

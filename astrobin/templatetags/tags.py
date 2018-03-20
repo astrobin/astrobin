@@ -102,7 +102,6 @@ def image_list(context, object_list, **kwargs):
         'request': context['request'],
         'alias': alias,
         'view': view,
-        'STATIC_URL': settings.STATIC_URL,
         'nav_ctx': nav_ctx,
         'nav_ctx_extra': nav_ctx_extra,
     }
@@ -140,7 +139,6 @@ def search_image_list(context, paginate = True, **kwargs):
 
     return {
         'request': request,
-        'STATIC_URL': settings.STATIC_URL,
         'paginate': paginate,
         'page_obj': page_obj,
         'show_first': True,

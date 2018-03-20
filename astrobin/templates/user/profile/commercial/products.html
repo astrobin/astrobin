@@ -3,6 +3,7 @@
 {% load bootstrap_toolkit %}
 {% load django_bootstrap_breadcrumbs %}
 {% load tags %}
+{% load staticfiles %}
 
 {% block title %}AstroBin - {% blocktrans with user=user %}{{user}}'s commercial products{% endblocktrans %}{% endblock %}
 {% block container_extra_classes %}has-subnav{% endblock %}
@@ -243,7 +244,7 @@
                     </div>
                     <form id="remove-commercial-product" class="form-inline">
                         <div class="form-content">
-                            <div class="loading"><img src="{{STATIC_URL}}images/loading-bar.gif" alt=""/></div>
+                            <div class="loading"><img src="{% static 'astrobin/images/loading-bar.gif' %}" alt=""/></div>
                         </div>
                     </form>
                 </div>
@@ -313,7 +314,7 @@
                 <div class="modal-body">
                     <form id="remove-retailed-product" class="form-inline">
                         <div class="form-content">
-                            <div class="loading"><img src="{{STATIC_URL}}images/loading-bar.gif" alt=""/></div>
+                            <div class="loading"><img src="{% static 'astrobin/images/loading-bar.gif' %}" alt=""/></div>
                         </div>
                     </form>
                 </div>

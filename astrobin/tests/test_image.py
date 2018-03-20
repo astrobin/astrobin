@@ -1604,10 +1604,13 @@ class ImageTest(TestCase):
         image = Image.objects.get(pk = image.pk)
         self.assertIsNotNone(image.published)
 
+        # The `published` field does not get updated the second time we make
+        # this image public.
         published = image.published
         image.is_wip = True; image.save()
-        image.is_wip = False; image.save()
-        self.assertTrue((published - image.uploaded).total_seconds() < 1)
+        response = self.client.post(post_url((image.pk,)))
+        image = Image.objects.get(pk = image.pk)
+        self.assertEqual(published, image.published)
 
         image.delete()
 

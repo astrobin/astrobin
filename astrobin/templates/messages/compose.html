@@ -3,6 +3,7 @@
 {% load i18n %}
 {% load bootstrap_toolkit %}
 {% load django_bootstrap_breadcrumbs %}
+{% load staticfiles %}
 
 {% block title %}{% trans "Compose message" %}{% endblock %}
 
@@ -29,7 +30,7 @@
 {% endblock %}
 
 {% block extra_js %}
-    <script src="{{STATIC_URL}}wysibb/jquery.wysibb.min.js"></script>
+    <script src="{% static 'astrobin/wysibb/jquery.wysibb.min.js' %}"></script>
     <script type="text/javascript">
         $(document).ready(function() {
             var textarea = $('#id_body');

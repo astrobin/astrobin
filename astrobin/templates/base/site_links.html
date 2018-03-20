@@ -1,6 +1,7 @@
 {% load i18n %}
 {% load tags %}
 {% load astrobin_apps_iotd_tags %}
+{% load staticfiles %}
 
 <button class="btn btn-navbar" data-toggle="collapse" data-target=".site-nav">
     <span class="icon-bar"></span>
@@ -9,7 +10,7 @@
 </button>
 
 <a class="brand hidden-phone hidden-tablet" href="{% url 'index' %}">
-    <img src="{{STATIC_URL}}images/astrobin-logo-small.png" alt="AstroBin" />
+    <img src="{% static 'astrobin/images/astrobin-logo-small.png' %}" alt="AstroBin" />
 </a>
 
 <a class="brand-mobile hidden-desktop" href="{% url 'index' %}">

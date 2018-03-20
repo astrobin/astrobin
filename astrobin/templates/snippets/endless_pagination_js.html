@@ -1,4 +1,5 @@
-<script src="{{STATIC_URL}}el-pagination/js/el-pagination.js"></script>
+{% load staticfiles %}
+<script src="{% static 'el-pagination/js/el-pagination.js' %}"></script>
 <script>
     $.ajaxSetup({ timeout: 10000 });
     $('.endless').endlessPaginate({

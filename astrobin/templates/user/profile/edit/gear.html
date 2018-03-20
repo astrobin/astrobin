@@ -3,6 +3,7 @@
 {% load bootstrap_toolkit %}
 {% load django_bootstrap_breadcrumbs %}
 {% load tags %}
+{% load staticfiles %}
 
 {% block title %}{% trans "Edit your astrophotography gear" %}{% endblock %}
 
@@ -45,7 +46,7 @@
             <form class="form-horizontal global" action="{% url 'save_gear_details' %}" method="post">{% csrf_token %}
                 <div class="form-content">
                     <div class="loading">
-                        <img src="{{STATIC_URL}}images/ajax-loader.gif" alt=""/>
+                        <img src="{% static 'astrobin/images/ajax-loader.gif' %}" alt=""/>
                     </div>
                 </div>
                 <input type="hidden" name="gear_id" value="" />
@@ -62,7 +63,7 @@
             <form class="form-horizontal custom" action="{% url 'save_gear_user_info' %}" method="post">{% csrf_token %}
                 <div class="form-content">
                     <div class="loading">
-                        <img src="{{STATIC_URL}}images/ajax-loader.gif" alt=""/>
+                        <img src="{% static 'astrobin/images/ajax-loader.gif' %}" alt=""/>
                     </div>
                 </div>
                 <input type="hidden" name="gear_id" value="" />
@@ -90,7 +91,7 @@
             <form class="form-horizontal" action="{% url 'save_gear_details' %}" method="post">{% csrf_token %}
                 <div class="form-content">
                     <div class="loading">
-                        <img src="{{STATIC_URL}}images/ajax-loader.gif" alt=""/>
+                        <img src="{% static 'astrobin/images/ajax-loader.gif' %}" alt=""/>
                     </div>
                 </div>
                 <div class="form-actions hidden">
@@ -128,7 +129,7 @@
         $('#add-gear-modal, #edit-gear-modal').on('hidden', function() {
             $(this).find('.form-content').html('\
                 <div class="loading">\
-                    <img src="{{STATIC_URL}}images/ajax-loader.gif" alt=""/>\
+                    <img src="{% static 'astrobin/images/ajax-loader.gif' %}" alt=""/>\
                 </div>'
             );
             $(this).find('.form-actions').addClass('hidden');

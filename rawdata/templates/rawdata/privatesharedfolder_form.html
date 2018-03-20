@@ -3,6 +3,7 @@
 {% load bootstrap_toolkit %}
 {% load django_bootstrap_breadcrumbs %}
 {% load common_tags %}
+{% load staticfiles %}
 
 {% block title %}AstroBin - {% blocktrans %}Share on a private folder{% endblocktrans %}{% endblock %}
 
@@ -69,7 +70,7 @@
                         {{folders_form}}
                         <button class="btn btn-primary">{% trans "Send" %}</button>
                         <img class="loading hidden"
-                             src="{{STATIC_URL}}images/ajax-loader.gif"
+                             src="{% static 'astrobin/images/ajax-loader.gif' %}"
                              alt="{% trans "Loading..." %}"/>
                     </form>
                 </div>

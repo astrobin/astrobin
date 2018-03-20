@@ -7,6 +7,7 @@
 {% load hitcount_tags %}
 {% load tags %} {% comment %} TODO: rename tags to astrobin_tags {% endcomment %}
 {% load toggleproperty_tags %}
+{% load staticfiles %}
 
 <div class="subtle-container avatar-block">
     <div class="header visible-phone">
@@ -30,7 +31,7 @@
         {% astrobin_username image.user %}
         <div class="data">
             <img class="license"
-                 src="{{STATIC_URL}}icons/{{license_icon}}"
+                 src="{{license_icon}}"
                  alt="{% trans "License" %}: {{license_title}}"
                  title="{% trans "License" %}: {{license_title}}" />
 

@@ -1,4 +1,5 @@
 {% load i18n pybb_tags %}
+{% load staticfiles %}
 
 {% if READONLY_MODE %}
     {% include 'readonly_mode.html' %}
@@ -22,7 +23,7 @@
         {% if form.body %} {% include "pybb/form_field.html" with field=form.body %}  {% endif %}
         <div id='emoticons'>
           {% for smile, url in form.available_smiles.items %}
-            <a href='#' title='{{ smile|safe }}'><img src='{{ STATIC_URL }}{{ form.smiles_prefix }}{{ url }}'></a>
+            <a href='#' title='{{ smile|safe }}'><img src='{% static form.smiles_prefix %}{{ url }}'></a>
           {% endfor %}
         </div>
 
@@ -46,7 +47,7 @@
 
 
 {% block extra_js %}
-    <script src="{{STATIC_URL}}wysibb/jquery.wysibb.min.js"></script>
+    <script src="{% static 'astrobin/wysibb/jquery.wysibb.min.js' %}"></script>
     <script language="javascript">
     $(document).ready(function() {
         var textarea = $('#id_body');

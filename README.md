@@ -232,7 +232,7 @@ localization files should be updated (see https://djangobook.com/localization-cr
 ## CSS changes
 
 All primary stylesheets are defined canonically in the 
-`astrobin/static/scss/*.scss` files. CSS files are generated using the `compass`
+`astrobin/static/astrobin/scss/*.scss` files. CSS files are generated using the `compass`
  utility automatically, when you perform a `collectstatic`.
 
 After you update the `astrobin.scss` or `astrobin-mobile.scss` file, you should
@@ -244,9 +244,9 @@ For convenience, you can save time by simply generating and copying the
 modified style file, e.g.:
 
 ```
-docker cp astrobin/static/scss/astrobin.scss astrobin:/media/static/scss/
+docker cp astrobin/static/astrobin/scss/astrobin.scss astrobin:/media/static/astrobin/scss/
 docker exec -it astrobin \
-    sass /media/static/scss/astrobin.scss /media/static/css/astrobin.css
+    sass /media/static/astrobin/scss/astrobin.scss /media/static/astrobin/css/astrobin.css
 ```
 
 When collecting static files on AWS S3, a hash of their contents will be
