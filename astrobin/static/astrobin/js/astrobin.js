@@ -1,7 +1,3 @@
-/*
- * All of AstroBin's javascript and jQuery code.
- */
-
 /**********************************************************************
  * Common
  *********************************************************************/
@@ -17,6 +13,10 @@ astrobin_common = {
     },
 
     globals: {
+        BREAKAGE_DATES: {
+            COMMENTS_MARKDOWN: "2018-03-29T13:00:00"
+        },
+
         requests: [],
         smart_ajax: $.ajax,
         current_username: ''

@@ -89,7 +89,11 @@
                     {{#if view.editing}}
                         {{view view.EditView commentBinding="view.node"}}
                     {{else}}
-                        {{{view.node.html}}}
+                        {{# if view.node.ready }}
+                            {{{view.node.getHTML}}}
+                        {{else}}
+                            {{view NestedCommentsApp.LoaderView}}
+                        {{/if}}
                     {{/if}}
                 {{/if}}
             </div>

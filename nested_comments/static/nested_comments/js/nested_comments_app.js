@@ -8,7 +8,7 @@ $(function() {
         ajaxTimeout: 20000,
 
         baseApiUrl: '/api/v2/',
-        loaderGif: 'images/ajax-loader.gif',
+        loaderGif: 'astrobin/images/ajax-loader.gif',
 
         ready: function() {
             this.commentsApiUrl = this.baseApiUrl + 'nestedcomments/nestedcomments/';
@@ -23,6 +23,8 @@ $(function() {
             this.staticUrl = $('#nested-comments-static-url').attr('data-value');
             this.contentTypeId = $(this.rootElement).attr('data-content-type-id');
             this.objectId = $(this.rootElement).attr('data-object-id');
+
+            this.markdownConverter = new Markdown.Converter();
         }
     });
 
@@ -119,6 +121,7 @@ $(function() {
         parent: null,
 
         // Fields that we compute manually
+        ready: false,
         children: null,
         author_username: null,
         author_url: null,
@@ -553,6 +556,7 @@ $(function() {
                     buttons: "bold,italic,underline,|,img,link,|,bullist,numlist,|,code"
                 });
                 self.set('node.html', self.$('textarea').getHTML());
+                self.set('node.ready', true);
             });
         },
 
