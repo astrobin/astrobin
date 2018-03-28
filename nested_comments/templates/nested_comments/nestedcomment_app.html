@@ -1,6 +1,5 @@
 {% load i18n %}
 {% load staticfiles %}
-
 {% load ember %}
 
 
@@ -28,12 +27,6 @@
                 {{#if view.submitting}}
                     {{view NestedCommentsApp.LoaderView}}
                 {{/if}}
-
-                {{#if view.comment.hasText}}
-                    {{view NestedCommentsApp.PreviewView commentBinding="view.comment"}}
-                {{/if}}
-
-                {{view NestedCommentsApp.FormattingHelpView}}
             </form>
         {{else}}
             <a href="#"
@@ -84,6 +77,11 @@
         </div>
 
         {{#unless view.collapsed}}
+            <!-- Used to access a wisybb object and convert the bbcode to HTML. -->
+            <div class="converter" style="display: none">
+                {{view Ember.TextArea rows=6 valueBinding="view.node.text"}}
+            </div>
+
             <div class="content">
                 {{#if view.node.deleted}}
                     <p>{% trans "(deleted)" %}</p>
@@ -91,7 +89,7 @@
                     {{#if view.editing}}
                         {{view view.EditView commentBinding="view.node"}}
                     {{else}}
-                        {{{view.node.markdown}}}
+                        {{{view.node.html}}}
                     {{/if}}
                 {{/if}}
             </div>
@@ -140,19 +138,13 @@
     {{view view.SaveEditButtonView commentBinding="view.comment"}}
     <a class="btn btn-mini" href="#" {{action "cancel" target="view"}}>{% trans "Cancel" %}</a>
 
-    {{#unless view.comment.hasText}}
+    {{#unless view.comment.getHTML}}
         <small>{% trans "The comment cannot be empty." %}</small>
     {{/unless}}
 
     {{#if view.parentView.submitting}}
         {{view NestedCommentsApp.LoaderView}}
     {{/if}}
-
-    {{#if view.comment.hasText}}
-        {{view NestedCommentsApp.PreviewView commentBinding="view.comment"}}
-    {{/if}}
-
-    {{view NestedCommentsApp.FormattingHelpView}}
 {% endhandlebars %}
 
 
@@ -163,19 +155,9 @@
         {{view view.SaveReplyButtonView}}
         <a class="btn btn-mini" href="#" {{action "cancel" target="view"}}>{% trans "Cancel" %}</a>
 
-        {{#unless view.comment.hasText}}
-            <small>{% trans "The comment cannot be empty." %}</small>
-        {{/unless}}
-
         {{#if view.parentView.submitting}}
             {{view NestedCommentsApp.LoaderView}}
         {{/if}}
-
-        {{#if view.comment.hasText}}
-            {{view NestedCommentsApp.PreviewView commentBinding="view.comment"}}
-        {{/if}}
-
-        {{view NestedCommentsApp.FormattingHelpView}}
     {{else}}
         <p>{% blocktrans %}Please <a href="/accounts/login/">login</a> or <a href="/accounts/register/">register</a> to leave a comment.</p>{% endblocktrans %}
     {{/if}}
@@ -194,56 +176,6 @@
 
 {% handlebars "loader" %}
     <img alt="" {{bindAttr src="view.loaderUrl"}}/>
-{% endhandlebars %}
-
-
-{% handlebars "preview" %}
-    <h3>{% trans "Preview" %}</h3>
-    {{{view.comment.markdown}}}
-{% endhandlebars %}
-
-
-{% handlebars "formatting-help" %}
-    <h3>{% trans "Formatting help" %}</h3>
-    <table class="table table-condensed">
-        <thead>
-            <tr>
-                <th>{% trans "You type:" %}</th>
-                <th>{% trans "You see:" %}</th>
-            </tr>
-        </thead>
-        <tbody>
-            <tr>
-                <td>*{% trans "italics" %}*</td>
-                <td><i>{% trans "italics" %}</i></td>
-            </tr>
-
-            <tr>
-                <td>**{% trans "bold" %}**</td>
-                <td><strong>{% trans "bold" %}</strong></td>
-            </tr>
-
-            <tr>
-                <td>[AstroBin!](http://astrobin.com)</td>
-                <td><a href="http://astrobin.com">AstroBin!</a></td>
-            </tr>
-
-            <tr>
-                <td><i>{% trans "(TAB or 4 spaces)" %}</i> {% trans "preformatted text" %}</td>
-                <td><tt>{% trans "preformatted text" %}</tt></td>
-            </tr>
-
-            <tr>
-                <td>&gt; {% trans "quoted text" %}</td>
-                <td>| <i>{% trans "quoted text" %}</i></td>
-            </tr>
-
-            <tr>
-                <td>\*{% trans "escape the formatting syntax" %}\*</td>
-                <td>*{% trans "escape the formatting syntax" %}*</td>
-            </tr>
-        </tbody>
-    </table>
 {% endhandlebars %}
 
 

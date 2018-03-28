@@ -1,5 +1,4 @@
 $(function() {
-
     /*******************************************************************
     * APP
     *******************************************************************/
@@ -24,11 +23,84 @@ $(function() {
             this.staticUrl = $('#nested-comments-static-url').attr('data-value');
             this.contentTypeId = $(this.rootElement).attr('data-content-type-id');
             this.objectId = $(this.rootElement).attr('data-object-id');
-
-            this.markdownConverter = new Markdown.Converter();
         }
     });
 
+    /*******************************************************************
+    * BASE VIEWS
+    *******************************************************************/
+
+    // A view used to DRY the logic common to views with textareas (top
+    // level, edit, reply).
+    nc_app.TextareaView = Em.View.extend({
+        TypeEnum: {
+            TOP_LEVEL: 1,
+            EDIT: 2,
+            REPLY: 3
+        },
+
+        syncInterval: null,
+        type: null,
+
+        createSyncInterval: function() {
+            var self = this;
+            this.set('syncInterval', setInterval(function() {
+                self.sync();
+            }, 1000));
+        },
+
+        removeSyncInterval: function() {
+            if (this.get('syncInterval') === null) {
+                return;
+            }
+
+            clearInterval(this.get('syncInterval'));
+            this.set('syncInterval', null);
+        },
+
+        sync: function(syncTextarea) {
+            try {
+                var textarea = this.$('textarea'),
+                    html = textarea.getHTML(),
+                    property = null;
+
+                switch (this.get('type')) {
+                    case this.TypeEnum.TOP_LEVEL:
+                    case this.TypeEnum.REPLY:
+                        property = 'comment';
+                        break;
+                    case this.TypeEnum.EDIT:
+                        property = 'parentView.node';
+                        break;
+                }
+
+                this.set(property + '.html', html);
+
+                if (typeof syncTextarea !== 'undefined' && syncTextarea) {
+                    textarea.sync();
+                    this.set(property + '.text', textarea.val());
+                }
+            } catch (TypeError) {
+                // textarea was not available, probably because the user is
+                // not signed in.
+            }
+        },
+
+        initTextarea: function() {
+            var self = this;
+
+            setTimeout(function() {
+                var textarea = self.$('textarea');
+
+                textarea.wysibb({
+                    buttons: "bold,italic,underline,|,img,link,|,bullist,numlist,|,code"
+                });
+                textarea.focus();
+
+                self.createSyncInterval();
+            }, 1);
+        }
+    });
 
     /*******************************************************************
     * Models
@@ -54,6 +126,7 @@ $(function() {
         editing: null,
         submitting: null,
         original_text: null, // Text before editing starts
+        html: null,
 
         // Computed properties
         cid: function() {
@@ -68,23 +141,25 @@ $(function() {
             return this.get('deleted') == false;
         }.property('deleted'),
 
-        markdown: function() {
-            var converter = nc_app.markdownConverter;
-            var html = converter.makeHtml(this.get('text'));
+        getHTML: function() {
+            var updated = new Date(this.updated);
+            var release = new Date(
+                astrobin_common.globals.BREAKAGE_DATES.COMMENTS_MARKDOWN);
 
-            return html;
-        }.property('text'),
+            if (updated > release) {
+                return this.get('html');
+            }
 
-        hasText: function() {
-            return this.get('text') != '';
-        }.property('text'),
+            // Old behavior before the move from Markdown to BBCode in 1.26.
+            return nc_app.markdownConverter.makeHtml(this.get('text'));
+        }.property('html', 'text'),
 
         disallowSaving: function() {
             var submitting = this.get('submitting');
-            var hasText = this.get('hasText');
+            var hasText = this.get('html') !== null && this.get('html').length > 0;
 
             return submitting || !hasText;
-        }.property('submitting', 'text'),
+        }.property('submitting', 'html'),
 
         // Functions
         init: function() {
@@ -126,13 +201,14 @@ $(function() {
 
 
     nc_app.TopLevelController = Em.Controller.extend();
-    nc_app.TopLevelView = Em.View.extend({
+    nc_app.TopLevelView = nc_app.TextareaView.extend({
         templateName: "top-level",
         classNames: 'top-level comment',
         submittingBinding: 'comment.submitting',
         disallowSavingBinding: 'comment.disallowSaving',
         userIsAuthenticated: null,
         collapsed: true,
+        syncInterval: null,
 
         collapse: function() {
             this.set('collapsed', true);
@@ -141,20 +217,24 @@ $(function() {
 
         uncollapse: function() {
             this.set('collapsed', false);
+            this.initTextarea();
         },
 
         reset: function() {
             var comment = nc_app.get('router.commentsController').createComment();
             this.set('comment', comment);
+            this.removeSyncInterval();
         },
 
         didInsertElement: function() {
+            this.set('type', this.TypeEnum.TOP_LEVEL);
             this.reset();
             this.set('userIsAuthenticated', nc_app.userIsAuthenticated);
         },
 
         save: function() {
             var self = this;
+            this.sync(true);
             nc_app.get('router.commentsController').saveNewComment(self.get('comment'))
                 .then(function(response, statusText, xhr) {
                     self.reset();
@@ -467,6 +547,13 @@ $(function() {
                 self.hilight();
                 self.scroll();
             }
+
+            setTimeout(function() {
+                self.$('textarea').wysibb({
+                    buttons: "bold,italic,underline,|,img,link,|,bullist,numlist,|,code"
+                });
+                self.set('node.html', self.$('textarea').getHTML());
+            });
         },
 
         link: function() {
@@ -517,28 +604,32 @@ $(function() {
             nc_app.get('router.commentsController').cancelReplying(this.get('node'));
         },
 
-        EditView: Em.View.extend({
+        EditView: nc_app.TextareaView.extend({
             templateName: 'edit',
             tagName: 'form',
             submittingBinding: 'parentView.submitting',
             disallowSavingBinding: 'parentView.disallowSaving',
 
             didInsertElement: function() {
-                this.$('textarea').focus();
+                this.set('type', this.TypeEnum.EDIT);
+                this.initTextarea();
             },
 
             save: function() {
+                this.removeSyncInterval();
+                this.sync(true);
                 this.get('parentView').saveEdit();
             },
 
             cancel: function() {
                 this.get('parentView').cancelEditing();
+                this.removeSyncInterval();
             },
 
             SaveEditButtonView: nc_app.SaveButtonView.extend()
         }),
 
-        ReplyView: Em.View.extend({
+        ReplyView: nc_app.TextareaView.extend({
             templateName: 'reply',
             tagName: 'form',
             submittingBinding: 'parentView.submitting',
@@ -553,14 +644,18 @@ $(function() {
                 this.set('comment', comment);
                 this.set('parentView.replyComment', comment);
 
-                this.$('textarea').focus();
+                this.set('type', this.TypeEnum.REPLY);
+                this.initTextarea();
             },
 
             cancel: function() {
                 this.get('parentView').cancelReplying();
+                this.removeSyncInterval();
             },
 
             save: function() {
+                this.removeSyncInterval();
+                this.sync(true);
                 this.get('parentView').saveReply();
             },
 
@@ -591,16 +686,6 @@ $(function() {
         didInsertElement: function() {
             this.set('loaderUrl', nc_app.staticUrl + nc_app.loaderGif);
         }
-    });
-
-    nc_app.PreviewView = Em.View.extend({
-        classNames: ['preview'],
-        templateName: 'preview'
-    });
-
-    nc_app.FormattingHelpView = Em.View.extend({
-        classNames: ['formatting-help'],
-        templateName: 'formatting-help'
     });
 
 

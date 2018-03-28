@@ -23,7 +23,7 @@ astrobin_common = {
     },
 
     utils: {
-       getParameterByName: function(name) {
+        getParameterByName: function(name) {
            name = name.replace(/[\[]/, "\\\[").replace(/[\]]/, "\\\]");
            var regexS = "[\\?&]" + name + "=([^&#]*)";
            var regex = new RegExp(regexS);
@@ -32,8 +32,9 @@ astrobin_common = {
                return "";
            else
                return decodeURIComponent(results[1].replace(/\+/g, " "));
-       },
-       checkParameterExists: function(parameter) {
+        },
+
+        checkParameterExists: function(parameter) {
            //Get Query String from url
            fullQString = window.location.search.substring(1);
 
@@ -58,6 +59,30 @@ astrobin_common = {
 
            return false;
        }
+    },
+
+    init: function(name) {
+        $('.dropdown-toggle').dropdown();
+        $('.carousel').carousel();
+        $('.nav-tabs').tab();
+        $('[rel=tooltip]').tooltip();
+
+        // date and time pickers
+        $('input').filter('.timepickerclass').timepicker({});
+        $('input').filter('.datepickerclass').datepicker({'dateFormat':'yy-mm-dd'});
+
+        $('abbr.timeago').timeago();
+
+        $("select[multiple]").not('*[name="license"]').multiselect({
+            searchable: false,
+            dividerLocation: 0.5
+        });
+
+        $('textarea.bocde').wysibb({
+            buttons: "bold,italic,underline,|,img,link,|,bullist,numlist,|,code"
+        });
+
+        astrobin_common.init_ajax_csrf_token();
     },
 
     listen_for_notifications: function(username, last_modified, etag) {

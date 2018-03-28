@@ -44,37 +44,13 @@
 
 
     $(document).ready(function() {
-        {% comment %}
-            {% if request.user.is_authenticated %}
-            var ver = getInternetExplorerVersion();
-            if (ver == -1) {
-                astrobin_common.start_listeners('{{request.user.username}}');
-            }
-            {%endif %}
-        {% endcomment %}
-        astrobin_common.init_ajax_csrf_token();
-
-        $('.dropdown-toggle').dropdown();
-        $('.carousel').carousel();
-        $('.nav-tabs').tab();
-        $('[rel=tooltip]').tooltip();
-
-        // date and time pickers
-        $('input').filter('.timepickerclass').timepicker({});
-        $('input').filter('.datepickerclass').datepicker({'dateFormat':'yy-mm-dd'});
-
-        $('abbr.timeago').timeago();
+        astrobin_common.init();
 
         $('input:checkbox, input:radio, input:file').uniform(
             {fileDefaultText: '{% trans "No file selected" %}',
              fileBtnText: '{% trans "Choose file" %}'
             }
         );
-
-        $("select[multiple]").not('*[name="license"]').multiselect({
-            searchable: false,
-            dividerLocation: 0.5
-        });
     });
 </script>
 
