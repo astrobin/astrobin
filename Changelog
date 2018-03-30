@@ -1,3 +1,14 @@
+2018-03-30 Salvatore Iovene <salvatore@iovene.com>
+ * v1.26.0
+ * (general) Unify pagination UI across modules
+ * (forums) Add numbered pagination
+ * (performance) Minify JS and CSS, and gzip HTML
+ * (infra) Automatically generate CSS from SCSS and cache-bust statics
+ * (docs) Add documentation to the "Exclude from competitions" field
+ * (infra) Fix template debugging in debug mode
+ * (comments) Take WYSIBB into use, just like the forums
+ * (comments) Improve UI and add avatars
+
 2018-03-10 Salvatore Iovene <salvatore@iovene.com>
  * v1.25.0
  * (emails) Add HTML versions to all notifications
