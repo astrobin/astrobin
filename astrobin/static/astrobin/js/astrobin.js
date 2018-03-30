@@ -14,7 +14,7 @@ astrobin_common = {
 
     globals: {
         BREAKAGE_DATES: {
-            COMMENTS_MARKDOWN: "2018-03-29T13:00:00"
+            COMMENTS_MARKDOWN: "2018-03-30T20:00:00"
         },
 
         requests: [],
