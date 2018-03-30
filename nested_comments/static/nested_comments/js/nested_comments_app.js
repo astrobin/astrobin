@@ -125,6 +125,7 @@ $(function() {
         children: null,
         author_username: null,
         author_url: null,
+        author_avatar: null,
         authorIsRequestingUser: null,
         editing: null,
         submitting: null,
@@ -306,6 +307,7 @@ $(function() {
                 success: function(response) {
                     comment.set('author_username', response.username);
                     comment.set('author_url', nc_app.usersUrl + response.username);
+                    comment.set('author_avatar', response.avatar);
 
                     if (response.userprofile !== undefined) {
                         var url = nc_app.profilesApiUrl + response.userprofile + '/';

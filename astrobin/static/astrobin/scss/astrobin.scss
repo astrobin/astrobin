@@ -2095,10 +2095,13 @@ div.capty-target {
     width: 302px;
 }
 
+.nested-comments-container {
+    overflow: visible !important;
+}
+
 .reviews, .comments {
     margin-top: $spacer-large;
-    margin-bottom: $spacer-xxlarge;
-    padding-top: $spacer-large;
+    margin-left: $spacer-large;
 
     .loader {
         display: block;
@@ -2113,19 +2116,17 @@ div.capty-target {
 
 .comment, .review {
     position: relative;
-    margin-top: $spacer-xlarge;
-    margin-bottom: $spacer-medium;
     font-size: 1em;
-    padding-left: $spacer-large;
-    border-left: 1px dotted #404040;
+    margin: 0;
+    padding: $spacer-medium 0;
+
+    .loader {
+        margin: 0;
+    }
 
     .collapse {
         font-family: monospace;
         letter-spacing: -2px;
-    }
-
-    .children {
-        margin-left: $spacer-large;
     }
 
     h3 {
@@ -2163,13 +2164,22 @@ div.capty-target {
     .avatar {
         float: left;
         margin-right: $spacer-large;
+
+        a {
+            margin: 0;
+        }
+    }
+
+    .comment-container {
+        display: inline-block;
+        width: calc(100% - 56px);
     }
 
     .content {
         padding: $spacer-medium 0;
+        color: $strong-text-color;
 
         p {
-            color: $strong-text-color;
             line-height: 1.5em;
             padding: 0;
         }
@@ -2197,35 +2207,31 @@ div.capty-target {
         }
     }
 
-    .preview {
-        padding: $spacer-large;
-        margin-top: $spacer-large;
-        background-color: #ffeebb;
-        border: 1px solid #ecb;
-        @include rounded-corners;
-
-        p {
-            color: #333;
-        }
-
-        h3 {
-            margin-top: 0;
-            color: #111;
-        }
-    }
-
     .meta, .links {
         font-size: 0.85em;
     }
 
+    .btn {
+        margin-top: $spacer-large;
+    }
+
     .links {
-        padding: $spacer-small 0;
+        padding: $spacer-small 0 $spacer-xlarge 0;
         border-bottom: 1px dashed #555;
 
         a {
             text-transform: lowercase;
             margin-right: $spacer-medium;
+            color: grey;
+
+            &.label-important {
+                color: $strong-text-color;
+            }
         }
+    }
+
+    &:last-of-type .links {
+        border-bottom: none;
     }
 
     form {
@@ -2244,6 +2250,7 @@ div.capty-target {
     height: 16px;
     font-size: 14px;
     padding: 8px;
+    margin-left: $spacer-large;
 }
 
 .review {
@@ -2251,8 +2258,22 @@ div.capty-target {
     padding-bottom: $spacer-large;
 }
 
+@keyframes bounceCommentIndicator {
+    from { left: -40px; }
+    to   { left: -70px }
+}
 .comment.newlyAdded, .comment.hilight, .review.hilight {
-    background: rgba(0,255,0,0.1);
+    &:before {
+        content: "\21E8";
+        position: absolute;
+        left: -40px;
+        font-size: 30px;
+        top: 20px;
+        color: $strong-text-color;
+        animation: bounceCommentIndicator 0.5s cubic-bezier(.5, .05, 1, 1);
+        animation-direction: alternate;
+        animation-iteration-count: infinite;
+    }
 }
 
 .review-form {
