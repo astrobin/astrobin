@@ -4,7 +4,7 @@ PYBB_NICE_URL = True
 PYBB_PERMISSION_HANDLER = "astrobin.permissions.CustomForumPermissions"
 PYBB_ATTACHMENT_ENABLE = False
 PYBB_PROFILE_RELATED_NAME = 'userprofile'
-PYBB_SMILES_PREFIX = 'emoticons/'
+PYBB_SMILES_PREFIX = 'astrobin/emoticons/'
 PYBB_SMILES = {
     '&gt;_&lt;': 'mad.png',
     ':.(': 'sad.png',
