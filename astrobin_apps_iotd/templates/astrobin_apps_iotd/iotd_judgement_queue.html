@@ -102,7 +102,7 @@
         </div>
 
         <div class="modal-body">
-            <img src="{% get_static_prefix %}images/ajax-loader.gif" alt="{% trans "Loading" %}" />
+            <img src="{% static 'astrobin/images/ajax-loader.gif' %}" alt="{% trans "Loading" %}" />
         </div>
     </div>
 
@@ -141,7 +141,7 @@
 
             $('#reviewers-modal').on('hidden', function() {
                 $(this).find('.modal-body').html(
-                    '<img src="{% get_static_prefix %}images/ajax-loader.gif" alt="{% trans "Loading" %}" />');
+                    '<img src="{% static "astrobin/images/ajax-loader.gif" %}" alt="{% trans "Loading" %}" />');
             });
 
             $('.iotd-queue-item a.elect').click(function(e) {
