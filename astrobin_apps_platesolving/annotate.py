@@ -24,7 +24,7 @@ class Annotator:
 
     def drawAnnotations(self, draw, annotations):
         def getAnnotationFont(annotation):
-            font_path = os.path.join(os.getcwd(), 'astrobin/static/fonts/arial.ttf')
+            font_path = os.path.join(os.getcwd(), 'astrobin/static/astrobin/fonts/arial.ttf')
             font_small = ImageFont.truetype(font_path, int(round(16 * self.resampling_factor)))
             font_medium = ImageFont.truetype(font_path, int(round(32 * self.resampling_factor)))
             font_large = ImageFont.truetype(font_path, int(round(48 * self.resampling_factor)))

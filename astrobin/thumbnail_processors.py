@@ -41,7 +41,7 @@ def watermark(image, watermark = False, **kwargs):
             draw = ImageDraw.Draw(watermark_image, 'RGBA')
             draw_shadow = ImageDraw.Draw(watermark_image_shadow, 'RGBA')
             fontsize = 1
-            ttf = os.path.join(os.getcwd(), 'astrobin/static/fonts/arial.ttf')
+            ttf = os.path.join(os.getcwd(), 'astrobin/static/astrobin/fonts/arial.ttf')
 
             img_fraction = 0.33
             if size == 'S':
