@@ -8,7 +8,6 @@ $(function() {
         ajaxTimeout: 20000,
 
         baseApiUrl: '/api/v2/',
-        loaderGif: 'astrobin/images/ajax-loader.gif',
 
         ready: function() {
             this.commentsApiUrl = this.baseApiUrl + 'nestedcomments/nestedcomments/';
@@ -20,7 +19,7 @@ $(function() {
             this.username = $('#nested-comments-user-name').attr('data-value');
             this.userIsAuthenticated = $('#nested-comments-user-is-authenticated').attr('data-value') == "True";
             this.page_url = $('#nested-comments-page-url').attr('data-value');
-            this.staticUrl = $('#nested-comments-static-url').attr('data-value');
+            this.loaderGif = $('#nested-comments-loaderGif-url').attr('data-value');
             this.contentTypeId = $(this.rootElement).attr('data-content-type-id');
             this.objectId = $(this.rootElement).attr('data-object-id');
 
@@ -690,7 +689,7 @@ $(function() {
         templateName: 'loader',
 
         didInsertElement: function() {
-            this.set('loaderUrl', nc_app.staticUrl + nc_app.loaderGif);
+            this.set('loaderUrl', nc_app.loaderGif);
         }
     });
 
