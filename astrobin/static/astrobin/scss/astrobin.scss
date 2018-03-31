@@ -1433,6 +1433,10 @@ input:focus, textarea:focus {
 .form-actions {
     background: #333 url('../images/dark-panel-tile.png');
     border-color: #393939;
+
+    .btn {
+        margin-right: $spacer-small;
+    }
 }
 
 .form-horizontal {
