@@ -61,30 +61,6 @@ astrobin_common = {
        }
     },
 
-    init: function(name) {
-        $('.dropdown-toggle').dropdown();
-        $('.carousel').carousel();
-        $('.nav-tabs').tab();
-        $('[rel=tooltip]').tooltip();
-
-        // date and time pickers
-        $('input').filter('.timepickerclass').timepicker({});
-        $('input').filter('.datepickerclass').datepicker({'dateFormat':'yy-mm-dd'});
-
-        $('abbr.timeago').timeago();
-
-        $("select[multiple]").not('*[name="license"]').multiselect({
-            searchable: false,
-            dividerLocation: 0.5
-        });
-
-        $('textarea.bocde').wysibb({
-            buttons: "bold,italic,underline,|,img,link,|,bullist,numlist,|,code"
-        });
-
-        astrobin_common.init_ajax_csrf_token();
-    },
-
     listen_for_notifications: function(username, last_modified, etag) {
         astrobin_common.globals.smart_ajax({
             'beforeSend': function(xhr) {
@@ -341,6 +317,28 @@ astrobin_common = {
         /* Init */
         astrobin_common.globals.current_username = current_username;
         $.extend(true, astrobin_common.config, config);
+
+        $('.dropdown-toggle').dropdown();
+        $('.carousel').carousel();
+        $('.nav-tabs').tab();
+        $('[rel=tooltip]').tooltip();
+
+        // date and time pickers
+        $('input').filter('.timepickerclass').timepicker({});
+        $('input').filter('.datepickerclass').datepicker({'dateFormat':'yy-mm-dd'});
+
+        $('abbr.timeago').timeago();
+
+        $("select[multiple]").not('*[name="license"]').multiselect({
+            searchable: false,
+            dividerLocation: 0.5
+        });
+
+        $('textarea.bocde').wysibb({
+            buttons: "bold,italic,underline,|,img,link,|,bullist,numlist,|,code"
+        });
+
+        astrobin_common.init_ajax_csrf_token();
    }
 };
 
