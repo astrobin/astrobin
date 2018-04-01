@@ -6,7 +6,6 @@ import re
 from django.conf import settings
 from django.contrib.contenttypes.models import ContentType
 from django.contrib import messages
-from django.contrib.auth.models import User
 from django.contrib.staticfiles.templatetags.staticfiles import static
 from django.core.files.images import get_image_dimensions
 from django.core.exceptions import PermissionDenied
