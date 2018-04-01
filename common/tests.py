@@ -1,16 +1,35 @@
-"""
-This file demonstrates writing tests using the unittest module. These will pass
-when you run "manage.py test".
-
-Replace this with more appropriate tests for your application.
-"""
-
+# Django
+from django.contrib.auth.models import User
+from django.core.urlresolvers import reverse_lazy
 from django.test import TestCase
 
+# Third party
+import simplejson as json
 
-class SimpleTest(TestCase):
-    def test_basic_addition(self):
+
+class CommonTest(TestCase):
+    def setUp(self):
+        self.user = User.objects.create_user(
+            'user', 'user@test.com', 'password')
+
+    def tearDown(self):
+        self.user.delete()
+
+    def test_real_name_in_user_api(self):
         """
-        Tests that 1 + 1 always equals 2.
+        Tests the userprofile.real_name field is available in the user api.
         """
-        self.assertEqual(1 + 1, 2)
+        self.user.userprofile.real_name = 'Real Name'
+        self.user.userprofile.save()
+
+        self.client.login(username='user', password='password')
+
+        response = json.loads(self.client.get(
+            reverse_lazy('user-detail', args=(self.user.pk,))).content)
+        self.assertTrue('userprofile' in response)
+        self.assertEqual(self.user.userprofile.pk, response['userprofile'])
+
+        response = json.loads(self.client.get(
+            reverse_lazy('userprofile-detail', args=(self.user.userprofile.pk,))).content)
+        self.assertTrue('real_name' in response)
+        self.assertEqual('Real Name', response['real_name'])

@@ -13,8 +13,7 @@ from astrobin.models import UserProfile
 class ContentTypeSerializer(serializers.ModelSerializer):
     class Meta:
         model = ContentType
-        fields = '__all__'
-        read_only_fields = (
+        fields = (
             'id',
             'app_label',
             'model',
@@ -35,13 +34,11 @@ class UserSerializer(serializers.ModelSerializer):
 
     class Meta:
         model = User
-        fields = '__all__'
-        read_only_fields = ('username', 'userprofile', 'avatar')
+        fields = ('username', 'userprofile', 'avatar')
 
 
 class UserProfileSerializer(serializers.ModelSerializer):
     class Meta:
         model = UserProfile
-        fields = '__all__'
-        read_only_fields = ('real_name',)
+        fields = ('real_name',)
 
