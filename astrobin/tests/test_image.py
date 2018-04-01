@@ -1,3 +1,5 @@
+# -*- coding: UTF-8
+
 # Python
 import time
 
@@ -530,6 +532,40 @@ class ImageTest(TestCase):
                 'alias': 'regular'
             }))
         self.assertEqual(response.status_code, 200)
+        image.delete()
+
+    def test_image_rawthumb_view(self):
+        self.client.login(username = 'test', password = 'password')
+        self._do_upload('astrobin/fixtures/test.jpg')
+        image = self._get_last_image()
+
+        opts = {
+            'id': image.id,
+            'alias': 'regular'
+        }
+
+        def get_expected_url(image):
+            url = image.thumbnail(opts['alias'], {
+                'revision_label': 0,
+                'animated': False,
+                'insecure': False
+            })
+            print url
+            return url
+
+        response = self.client.get(reverse('image_rawthumb', kwargs = opts))
+        # 404 because we don't serve that /media/static file, that's fine.
+        self.assertRedirects(response, get_expected_url(image), target_status_code=404)
+
+        # Set the watermark to some non ASCII symbol
+        image.watermark_text = "©"
+        image.watermark = True
+        image.save()
+
+        image = Image.objects.get(pk=image.pk)
+        response = self.client.get(reverse('image_rawthumb', kwargs = opts))
+        self.assertRedirects(response, get_expected_url(image), target_status_code=404)
+
         image.delete()
 
     def test_image_full_view(self):
