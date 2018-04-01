@@ -347,14 +347,11 @@
                     var edit;
                     if (opts.allowEdit && !isNaN(hidden_value)) {
                         if (data[opts.selectedItemProp] !== -1) {
-                            edit = $('<a href="#" class="as-edit"><img alt="&rarr;" src="/media/static/icons/iconic/black/edit.png"/></a>');
+                            edit = $('<a href="#" class="as-edit"><i class="icon icon-pencil"></i></a>');
                             edit.data('id', data[opts.selectedItemProp]);
                         }
                     }
-                    var close = $('<a href="#" class="as-close">' +
-                                  '    <img alt="&times;"' +
-                                  '         src="/media/static/icons/iconic/black/trash_fill_8x8.png"/>' +
-                                  '</a>');
+                    var close = $('<a href="#" class="as-close">&times;</a>');
                     close.click(function() {
                         values_input.val(values_input.val().replace(","+data[opts.selectedValuesProp]+",",","));
                         opts.selectionRemoved.call(this, item);

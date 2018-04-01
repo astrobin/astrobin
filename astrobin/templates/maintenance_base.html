@@ -341,7 +341,7 @@
                                     <span id="notifications_count" class="notice-count">{{notifications_count}}</span>
                                 {% endif %}
                                 <a class="dropdown notifications" data-toggle="dropdown" title="{% trans "Notifications" %}" href="#">
-                                    <img alt="{% trans "Notifications" %}" src="{% static 'astrobin/icons/iconic/orange/notifications.gif' %}"/>
+                                    <i class="icon icon-bell-alt"></i>
                                 </a>
                                 <ul class="dropdown-menu" id="notifications-popup">
                                     {% notification_list request.user %}

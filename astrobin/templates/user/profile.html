@@ -47,33 +47,6 @@
             {% image_list image_list nav_ctx='user' %}
         </div> <!-- images -->
     </div> <!-- row -->
-
-    {% if request.user == requested_user %}
-    <noscript>
-    <div class="tools-box clear">
-        <h2>{% trans "Tools" %}</h2>
-        <ul>
-            <li>
-                <a href="{% url 'profile_edit_basic' %}">
-                    <img src="{% static 'astrobin/icons/iconic/orange/edit_profile.png' %}" alt="{% trans "Edit profile" %}"/>
-                </a>
-                <a href="{% url 'profile_edit_basic' %}">
-                    {% trans "Edit profile" %}
-                </a>
-            </li>
-            <li>
-                <a href="{% url 'auth_logout' %}">
-                    <img src="{% static 'astrobin/icons/iconic/orange/logout.png' %}" alt="{% trans "Logout" %}"/>
-                </a>
-                <a href="{% url 'auth_logout' %}">
-                    {% trans "Logout" %}
-                </a>
-            </li>
-        </ul>
-    </div>
-    </noscript>
-    {% endif %}
-    </div> <!-- profile -->
 {% endblock %}
 
 {% block modals %}
