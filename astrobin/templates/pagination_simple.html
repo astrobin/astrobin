@@ -1,20 +1,29 @@
 {% load i18n %}
+{% load common_tags %}
 
 {% if is_paginated %}
     <div class="pagination">
         <ul>
             <li>
                 {% if page_obj.has_previous %}
-                <a class="arrow" title="{% trans "Previous page" %}" href="?page={{ page_obj.previous_page_number }}">&lt;</a>
+                    <a class="arrow"
+                       title="{% trans "Previous page" %}"
+                       href="{% query_string 'page=page_obj.previous_page_number' '' %}">
+                        &lt;
+                    </a>
                 {% else %}
-                <span class="arrow">&lt;</span>
+                    <span class="arrow">&lt;</span>
                 {% endif %}
             </li>
             <li>
                 {% if page_obj.has_next %}
-                <a class="arrow" title="{% trans "Next page" %}" href="?page={{ page_obj.next_page_number }}" >&gt;</a>
+                    <a class="arrow"
+                       title="{% trans "Next page" %}"
+                       href="{% query_string 'page=page_obj.next_page_number' '' %}">
+                        &gt;
+                    </a>
                 {% else %}
-                <span class="arrow">&gt;</span>
+                    <span class="arrow">&gt;</span>
                 {% endif %}
             </li>
         </ul>

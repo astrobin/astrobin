@@ -1,4 +1,5 @@
 {% load i18n %}
+{% load common_tags %}
 
 {% if is_paginated %}
     <div class="pagination">
@@ -6,29 +7,57 @@
             {% for pagenum in paginator.page_range %}
                 {% if forloop.first %}
                     {% if page_obj.has_previous %}
-                    <li><a class="arrow" title="{% trans "Previous page" %}" href="?page={{ page_obj.previous_page_number }}">&lt;</a></li>
+                        <li>
+                            <a class="arrow"
+                               title="{% trans "Previous page" %}"
+                               href="{% query_string 'page=page_obj.previous_page_number' ''%}">
+                                &lt;
+                            </a>
+                        </li>
                     {% else %}
-                    <li><span class="arrow">&lt;</span></li>
+                        <li>
+                            <span class="arrow">
+                                &lt;
+                            </span>
+                        </li>
                     {% endif %}
                 {% endif %}
 
                 {% if forloop.first or forloop.last or pagenum >= page_obj.number|add:"-2" and pagenum <= page_obj.number|add:"2" %}
                     {% if page_obj.number == pagenum %}
-                        <li><span class="current">{{ pagenum }}</span></li>
+                        <li>
+                            <span class="current">{{ pagenum }}</span>
+                        </li>
                     {% else %}
-                        <li><a href="?page={{ pagenum }}">{{ pagenum }}</a></li>
+                        <li>
+                            <a href="{% query_string 'page=pagenum' '' %}">{{ pagenum }}</a>
+                        </li>
                     {% endif %}
                 {% else %}
                     {% if pagenum == page_obj.number|add:"-3" or pagenum == page_obj.number|add:"3" %}
-                        <li><span class="ellipsis">&hellip;</span></li>
+                        <li>
+                            <span class="ellipsis">
+                                &hellip;
+                            </span>
+                        </li>
                     {% endif %}
                 {% endif %}
 
                 {% if forloop.last %}
                     {% if page_obj.has_next %}
-                    <li><a class="arrow" title="{% trans "Next page" %}" href="?page={{ page_obj.next_page_number }}">&gt;</a></li>
+                        <li>
+                            <a class="arrow"
+                               title="{% trans "Next page" %}"
+                               href="{% query_string 'page=page_obj.next_page_number' '' %}">
+                                &gt;
+                            </a>
+                        </li>
                     {% else %}
-                    <li><span class="arrow">&gt;</span></li>
+                        <li>
+                            <span class="arrow">
+                                &gt;
+                            </span>
+                        </li>
                     {% endif %}
                 {% endif %}
             {% endfor %}

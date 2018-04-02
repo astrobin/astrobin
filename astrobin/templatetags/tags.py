@@ -137,22 +137,17 @@ def search_image_list(context, paginate = True, **kwargs):
     if view is None:
       view = context['request'].GET.get('view', 'default')
 
-    return {
-        'request': request,
+    context.update({
         'paginate': paginate,
-        'page_obj': page_obj,
-        'show_first': True,
-        'show_last': True,
-
         'user_list': user_list,
         'gear_list': gear_list,
         'image_list': image_list,
-
         'sort': request.GET.get('sort'),
         'search_type': request.GET.get('search_type', 0),
         'multiple': multiple,
-        'view': view,
-    }
+    })
+
+    return context
 
 
 @register.filter
