@@ -798,6 +798,10 @@ class Image(HasSolutionMixin, SafeDeleteModel):
 
     plot_is_overlay = models.BooleanField(editable=False, default=False)
     is_wip = models.BooleanField(editable=False, default=False)
+
+    # Size of the image in bytes
+    size = models.PositiveIntegerField(editable=False, default=0)
+
     w = models.IntegerField(editable=False, default=0)
     h = models.IntegerField(editable=False, default=0)
     animated = models.BooleanField(editable=False, default=False)
@@ -1332,6 +1336,10 @@ class ImageRevision(HasSolutionMixin, SafeDeleteModel):
     )
 
     uploaded = models.DateTimeField(editable=False, auto_now_add=True)
+
+    # Size of the image in bytes
+    size = models.PositiveIntegerField(editable=False, default=0)
+
     w = models.IntegerField(editable=False, default=0)
     h = models.IntegerField(editable=False, default=0)
 
