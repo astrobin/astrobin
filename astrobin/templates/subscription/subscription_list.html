@@ -1,6 +1,7 @@
 {% extends 'base.html' %}
 
 {% load i18n %}
+{% load staticfiles %}
 {% load django_bootstrap_breadcrumbs %}
 {% load tags %}
 
@@ -15,119 +16,315 @@
     {% if READONLY_MODE %}
         {% include 'readonly_mode.html' %}
     {% else %}
-        {% if request.user|valid_subscriptions %}
-        <div class="well">
-            <h2>{% trans "Your active subscription plans" %}</h2>
-            {% with object_list=request.user|valid_subscriptions subscription_category='any' %}
-                {% include 'subscription/subscription_category_list.html' %}
-            {% endwith %}
-        </div>
-        {% endif %}
-
-        {% if request.user|inactive_subscriptions %}
-        <div class="well">
-            <h2>{% trans "Your inactive subscription plans" %}</h2>
-            {% with object_list=request.user|inactive_subscriptions subscription_category='any' %}
-                {% include 'subscription/subscription_category_list.html' %}
-            {% endwith %}
-        </div>
-        {% endif %}
-
+        <h1>{% trans "Subscription plans" %}</h1>
         {% if PREMIUM_ENABLED %}
-        <div class="well">
-            <h2>{% trans "AstroBin Premium subscription plans" %}</h2>
+            <div class="row subscription-plans-overview">
+                <div class="span4">
+                    <div class="subtle-container">
+                        <div class="logo">
+                            <img src="{% static 'astrobin/images/astrobin-lite-badge.png' %}" />
+                        </div>
+                        <div class="header">
+                            AstroBin Lite
+                            <div class="price">
+                                <span class="number">$19</span> USD / {% trans "year" %}
+                            </div>
+                            <a class="btn btn-primary" href="{% get_subscription_url_by_name 'AstroBin Lite' %}">
+                                {% trans "Buy" %}
+                            </a>
+                        </div>
+                        <ul>
+                            <li>
+                                <i class="icon-ok"></i>{% blocktrans with number=5 %}Unlimited images, max {{ number }} MB each {% endblocktrans %}
+                            </li>
+                            <li><i class="icon-ok"></i>{% trans "View images tech info" %}</li>
+                            <li><i class="icon-ok"></i>{% trans "Social features (likes, comments, forums, etc)" %}</li>
+                            <li><i class="icon-ok"></i>{% trans "Basic plate-solving" %}</li>
+                            <li><i class="icon-ok"></i>{% trans "View astronomy ads from our partners" %}</li>
+                        </ul>
+                    </div>
 
-            <p>
-                {% blocktrans with max_allowed=PREMIUM_MAX_IMAGES_FREE %}
-                You can use AstroBin for free up to {{max_allowed}} images. After
-                that you can upgrade to <strong>Lite</strong> if you have a limited
-                yearly output, or <strong>Premium</strong> for a limitless
-                experience.  Paying members will not see ads, and everybody,
-                including non-paying members, have access to all social features of
-                AstroBin.
-                {% endblocktrans %}
-           </p>
+                    <div class="subtle-container coming-soon">
+                        <div class="header">{% trans "Coming soon..." %}</div>
+                        <ul>
+                            <li><i class="icon-ok"></i>{% trans "Vote in custom contests" %}</li>
+                            <li><i class="icon-ok"></i>{% trans "View ads in the Buy & Sell section" %}</li>
+                        </ul>
+                    </div>
+                </div>
 
-           <ul class="subscription-plans-description-list">
-                <li>
-                {% blocktrans with max_allowed=PREMIUM_MAX_IMAGES_FREE %}
-                As a user of <strong>AstroBin Free</strong>, you may have up to
-                {{max_allowed}} images at the same time. You can delete some images
-                to make room for new ones, if you want. For instance you can
-                maintain a window of your latest {{max_allowed}} images, or your
-                best ones.
-                {% endblocktrans %}
-                </li>
+                <div class="span4">
+                    <div class="subtle-container">
+                        <div class="logo">
+                            <img src="{% static 'astrobin/images/astrobin-premium-badge.png' %}" />
+                        </div>
+                        <div class="header">
+                            AstroBin Premium
+                            <div class="price">
+                                <span class="number">$39</span> USD / {% trans "year" %}
+                            </div>
+                            <a class="btn btn-primary" href="{% get_subscription_url_by_name 'AstroBin Premium' %}">
+                                {% trans "Buy" %}
+                            </a>
+                        </div>
+                        <ul>
+                            <li>
+                                <i class="icon-ok"></i>{% blocktrans with number=10 %}Unlimited images, max {{ number }} MB each {% endblocktrans %}
+                            </li>
+                            <li><i class="icon-ok"></i>{% trans "View images tech info" %}</li>
+                            <li><i class="icon-ok"></i>{% trans "Social features (likes, comments, forums, etc)" %}</li>
+                            <li><i class="icon-ok"></i>{% trans "Participate in Image of the Day contest" %}</li>
+                            <li><i class="icon-ok"></i>{% trans "Basic plate-solving" %}</li>
+                            <li><i class="icon-ok"></i>{% trans "View astronomy ads from our partners" %}</li>
+                        </ul>
+                    </div>
 
-                <li>
-                {% blocktrans with max_allowed=PREMIUM_MAX_IMAGES_LITE %}
-                As a user of <strong>AstroBin Lite</strong>, instead, you may have
-                up to {{max_allowed}} images at the same time, per each year of
-                your membership. You may replace images uploaded within the current
-                subsciption period while images uploaded prior to that can only be
-                deleted. Every year that you renew your membership, you get
-                {{max_allowed}} new image credits.
-                {% endblocktrans %}
-                </li>
+                    <div class="subtle-container coming-soon">
+                        <div class="header">{% trans "Coming soon..." %}</div>
+                        <ul>
+                            <li><i class="icon-ok"></i>{% trans "Vote in custom contests" %}</li>
+                            <li><i class="icon-ok"></i>{% trans "View ads in the Buy & Sell section" %}</li>
+                            <li><i class="icon-ok"></i>{% trans "Basic access to official mobile app" %}</li>
+                        </ul>
+                    </div>
+                </div>
 
-                <li>
-                {% blocktrans with max_allowed=PREMIUM_MAX_IMAGES_FREE %}
-                As a user of <strong>AstroBin Premium</strong>, instead, there are
-                no limitations whatsoever in the number of images you can upload.
-                {% endblocktrans %}
-                </li>
-            </ul>
+                <div class="span4">
+                    <div class="subtle-container">
+                        <div class="logo">
+                            <img src="{% static 'astrobin/images/astrobin-ultimate-badge.png' %}" />
+                        </div>
+                        <div class="header">
+                            AstroBin Ultimate
+                            <div class="price">
+                                <span
+                                        class="number retail-price"
+                                        rel="tooltip"
+                                        title="{% trans "Special price while the 'Coming soon' features are being developed!" %}">
+                                    $69
+                                </span>
+                                <span class="number">$59</span> USD / {% trans "year" %}
+                            </div>
+                            <a class="btn btn-primary" href="{% get_subscription_url_by_name 'AstroBin Ultimate' %}">
+                                {% trans "Buy" %}
+                            </a>
+                        </div>
+                        <ul>
+                            <li>
+                                <i class="icon-ok"></i>{% blocktrans %}Unlimited images, unlimited size each {% endblocktrans %}
+                            </li>
+                            <li><i class="icon-ok"></i>{% trans "View images tech info" %}</li>
+                            <li><i class="icon-ok"></i>{% trans "Social features (likes, comments, forums, etc)" %}</li>
+                            <li><i class="icon-ok"></i>{% trans "Participate in Image of the Day contest" %}</li>
+                            <li>
+                                <i class="icon-ok"></i>{% trans "Enhanced plate-solving" %}
+                                <span class="coming-soon">{% trans "(coming soon)" %}</span>
+                            </li>
+                            <li><i class="icon-ok"></i>{% trans "Optionally hide astronomy ads from our partners" %}</li>
+                        </ul>
+                    </div>
 
-            {% with subscription_category='premium' %}
-                {% include 'subscription/subscription_category_list.html' %}
-            {% endwith %}
-        </div>
+                    <div class="subtle-container coming-soon">
+                        <div class="header">{% trans "Coming soon..." %}</div>
+                        <ul>
+                            <li><i class="icon-ok"></i>{% trans "Vote and participate in custom contests" %}</li>
+                            <li><i class="icon-ok"></i>{% trans "View and post ads in the Buy & Sell section" %}</li>
+                            <li><i class="icon-ok"></i>{% trans "Full access to official mobile app" %}</li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+
+            <div class="well">
+                <h2>{% trans "Feature comparison" %}</h2>
+                <table class="table subscription-plans-features">
+                    <thead>
+                    <tr>
+                        <th>&nbsp;</th>
+                        <th>
+                            <span class="hidden-phone">Free</span>
+                            <span class="visible-phone">Fr</span>
+                        </th>
+                        <th>
+                            <span class="hidden-phone">Lite</span>
+                            <span class="visible-phone">Li</span>
+                        </th>
+                        <th>
+                            <span class="hidden-phone">Premium</span>
+                            <span class="visible-phone">Pr</span>
+                        </th>
+                        <th>
+                            <span class="hidden-phone">Ultimate</span>
+                            <span class="visible-phone">Ul</span>
+                        </th>
+                    </tr>
+                    </thead>
+                    <tbody>
+                    <tr>
+                        <th>{% trans "Images" %}</th>
+                        <td class="free">{{ PREMIUM_MAX_IMAGES_FREE }}</td>
+                        <td class="lite"><span class="infinity">&infin;</span></td>
+                        <td class="premium"><span class="infinity">&infin;</span></td>
+                        <td class="ultimate"><span class="infinity">&infin;</span></td>
+                    </tr>
+                    <tr>
+                        <th>{% trans "Upload quality" %}</th>
+                        <td class="free">Max 5 MB</td>
+                        <td class="lite">Max 5 MB</td>
+                        <td class="premium">Max 10 MB</td>
+                        <td class="ultimate"><span class="infinity">&infin;</span></td>
+                    </tr>
+                    <tr>
+                        <th>{% trans "View images tech info" %}</th>
+                        <td class="free"><i class="icon-remove"></i></td>
+                        <td class="lite"><i class="icon-ok"></i></td>
+                        <td class="premium"><i class="icon-ok"></i></td>
+                        <td class="ultimate"><i class="icon-ok"></i></td>
+                    </tr>
+                    <tr>
+                        <th>{% trans "Social features" %}</th>
+                        <td class="free"><i class="icon-remove"></i></td>
+                        <td class="lite"><i class="icon-ok"></i></td>
+                        <td class="premium"><i class="icon-ok"></i></td>
+                        <td class="ultimate"><i class="icon-ok"></i></td>
+                    </tr>
+                    <tr>
+                        <th>{% trans "Plate-solving" %}</th>
+                        <td class="free"><i class="icon-remove"></i></td>
+                        <td class="lite">{% trans "Basic" %}</td>
+                        <td class="premium">{% trans "Basic" %}</td>
+                        <td class="ultimate">
+                            {% trans "Enhanced" %}
+                            <span class="coming-soon">
+                                {% trans "(coming soon)" %}
+                            </span>
+                        </td>
+                    </tr>
+                    <tr>
+                        <th>
+                            {% trans "Image of the Day participation" %}
+                        </th>
+                        <td class="free"><i class="icon-remove"></i></td>
+                        <td class="lite"><i class="icon-remove"></i></td>
+                        <td class="premium"><i class="icon-ok"></i></td>
+                        <td class="ultimate"><i class="icon-ok"></i></td>
+                    </tr>
+                    <tr>
+                        <th>
+                            {% trans "Custom contests" %}
+                            <span class="coming-soon">
+                                {% trans "(coming soon)" %}
+                            </span>
+                        </th>
+                        <td class="free"><i class="icon-remove"></i></td>
+                        <td class="lite">{% trans "Vote" %}</td>
+                        <td class="premium">{% trans "Vote" %}</td>
+                        <td class="ultimate">{% trans "Vote and enter" %}</td>
+                    </tr>
+                    <tr>
+                        <th>
+                            {% trans "Buy & Sell" %}
+                            <span class="coming-soon">
+                                {% trans "(coming soon)" %}
+                            </span>
+                        </th>
+                        <td class="free">{% trans "View" %}</td>
+                        <td class="lite">{% trans "View" %}</td>
+                        <td class="premium">{% trans "View" %}</td>
+                        <td class="ultimate">{% trans "Post" %}</td>
+                    </tr>
+                    <tr>
+                        <th>
+                            {% trans "Official mobile app" %}
+                            <span class="coming-soon">
+                                {% trans "(coming soon)" %}
+                            </span>
+                        </th>
+                        <td class="free"><i class="icon-remove"></i></td>
+                        <td class="lite"><i class="icon-remove"></i></td>
+                        <td class="premium">{% trans "Basic access" %}</td>
+                        <td class="ultimate">{% trans "Full access" %}</td>
+                    </tr>
+                    </tbody>
+                </table>
+            </div> <!-- well -->
         {% endif %}
 
         <div class="well">
             <h2>{% trans "AstroBin Raw Data subscription plans" %}</h2>
             <p>
-                {% blocktrans %}<strong>AstroBin Raw Data</strong> allows you to store your raw files (<strong>FIT</strong> and <strong>digital camera raw</strong>) on AstroBin. We will keep them neatly organized, and you will have a safe backup of all your work, including calibration files.{% endblocktrans %}
+                {% blocktrans %}<strong>AstroBin Raw Data</strong> allows you to store your raw files (
+                    <strong>FIT</strong> and <strong>digital camera raw</strong>) on AstroBin. We will keep them neatly
+                    organized, and you will have a safe backup of all your work, including calibration
+                    files.{% endblocktrans %}
 
                 {% url 'rawdata.help1' as rawdata_url %}
-                {% blocktrans %}Learn more by reading <a href="{{rawdata_url}}">a short introduction.</a>{% endblocktrans %}
+                {% blocktrans %}Learn more by reading
+                    <a href="{{ rawdata_url }}">a short introduction.</a>{% endblocktrans %}
             </p>
             <p>
                 {% trans "Here's a short description of each plan:" %}
-                <ul class="subscription-plans-description-list">
-                    <li>
-                        <strong>Atom</strong><br/>
-                        {% blocktrans %}This plan is free! Choose it to share a small amount of data with other users.{% endblocktrans %}
-                    </li>
-                    <li>
-                        <strong>Meteor</strong><br/>
-                        {% blocktrans %} Choose this plan if you want to keep your expenses to a minimum, but still want the possibity to share your FIT and digital camera raw files with your friends. You can also participate to public data pools and contribute to the deepest deep sky images ever created, and you will always know that you support AstroBin.{% endblocktrans %}
-                    </li>
-                    <li>
-                        <strong>Luna</strong><br/>
-                        {% blocktrans %}Choose this plan if you have started out in the recent year or two, or you don't want to share and backup your calibration files. Enjoy a lot of room for a convenient price.{% endblocktrans %}
-                    </li>
-                    <li>
-                        <strong>Sol</strong><br/>
-                        {% blocktrans %}Choose this plan if you have several years worth of data. You will probably have enough room for all your calibration files, and will enjoy the full potential of the platform.{% endblocktrans %}
-                    </li>
-                    <li>
-                        <strong>Galaxia</strong><br/>
-                        {% blocktrans %}Choose this plan if you have a massive amount of raw data that you want to share and backup securely online.{% endblocktrans %}
-                    </li>
-                </ul>
+            <ul class="subscription-plans-description-list">
+                <li>
+                    <strong>Atom</strong><br/>
+                    {% blocktrans %}This plan is free! Choose it to share a small amount of data with other
+                        users.{% endblocktrans %}
+                </li>
+                <li>
+                    <strong>Meteor</strong><br/>
+                    {% blocktrans %} Choose this plan if you want to keep your expenses to a minimum, but still want the
+                        possibity to share your FIT and digital camera raw files with your friends. You can also
+                        participate to public data pools and contribute to the deepest deep sky images ever created, and
+                        you will always know that you support AstroBin.{% endblocktrans %}
+                </li>
+                <li>
+                    <strong>Luna</strong><br/>
+                    {% blocktrans %}Choose this plan if you have started out in the recent year or two, or you don't
+                        want to share and backup your calibration files. Enjoy a lot of room for a convenient
+                        price.{% endblocktrans %}
+                </li>
+                <li>
+                    <strong>Sol</strong><br/>
+                    {% blocktrans %}Choose this plan if you have several years worth of data. You will probably have
+                        enough room for all your calibration files, and will enjoy the full potential of the
+                        platform.{% endblocktrans %}
+                </li>
+                <li>
+                    <strong>Galaxia</strong><br/>
+                    {% blocktrans %}Choose this plan if you have a massive amount of raw data that you want to share and
+                        backup securely online.{% endblocktrans %}
+                </li>
+            </ul>
             </p>
             {% with subscription_category='rawdata' %}
                 {% include 'subscription/subscription_category_list.html' %}
             {% endwith %}
         </div>
 
+        {% if request.user|valid_subscriptions %}
+            <div class="well">
+                <h2>{% trans "Your active subscription plans" %}</h2>
+                {% with object_list=request.user|valid_subscriptions subscription_category='any' %}
+                    {% include 'subscription/subscription_category_list.html' %}
+                {% endwith %}
+            </div>
+        {% endif %}
+
+        {% if request.user|inactive_subscriptions %}
+            <div class="well">
+                <h2>{% trans "Your inactive subscription plans" %}</h2>
+                {% with object_list=request.user|inactive_subscriptions subscription_category='any' %}
+                    {% include 'subscription/subscription_category_list.html' %}
+                {% endwith %}
+            </div>
+        {% endif %}
 
         <div class="thankyou">
             {% blocktrans %}Thank you for supporting AstroBin!{% endblocktrans %}
         </div>
         <div style="text-align:center">
-            {% blocktrans %}PS: are you interested in larger plans? <a href="/contact/">Let us know!</a>{% endblocktrans %}
+            {% blocktrans %}PS: are you interested in larger plans?
+                <a href="/contact/">Let us know!</a>{% endblocktrans %}
         </div>
     {% endif %} {# READONLY #}
 {% endblock %}

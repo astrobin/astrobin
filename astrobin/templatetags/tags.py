@@ -388,6 +388,18 @@ def get_subscription_by_name(user, name):
     return UserSubscription.objects.get(
         user = user, subscription__name = name)
 
+@register.simple_tag
+def get_subscription_url_by_name(name):
+    from subscription.models import Subscription
+
+    try:
+        sub = Subscription.objects.get(name = name)
+    except Subscription.DoesNotExist:
+        return '#'
+
+    return sub.get_absolute_url()
+
+
 @register.filter
 def is_content_moderator(user):
     if not user.is_authenticated():

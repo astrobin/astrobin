@@ -3735,8 +3735,156 @@ li.revisions {
     font-size: smaller;
 }
 
-table.subscription-plans {
-    table-layout: fixed;
+.subscription-plans-overview {
+  .subtle-container {
+    position: relative;
+    overflow: visible;
+    text-align: center;
+    margin-top: 40px;
+
+    .logo {
+      position: absolute;
+      width: calc(100% - 24px);
+      top: -10%;
+      z-index: 1;
+
+      img {
+        width: 140px;
+      }
+    }
+
+    .header {
+      margin: 0;
+      padding-top: 60px;
+      padding-bottom: 25px;
+      font-size: medium;
+      font-weight: bold;
+      line-height: 1em;
+      color: #b5b5b5;
+
+      .price {
+        font-size: medium;
+        font-weight: initial;
+        color: #555;
+        display: block;
+        margin-top: $spacer-xlarge;
+
+        .number {
+          color: $strong-text-color;
+          font-weight: bold;
+          font-size: xx-large
+        }
+
+        .retail-price {
+          color: #d74839;
+          text-decoration: line-through;
+          font-weight: normal;
+          font-size: medium;
+          cursor: pointer;
+          border-bottom: 1px dotted #d74839;
+          margin-right: $spacer-medium;
+        }
+      }
+
+      .btn {
+        display: block;
+        margin: $spacer-xxlarge auto 0;
+        padding: $spacer-large $spacer-medium;
+        text-transform: uppercase;
+        font-size: medium;
+        width: 50%;
+      }
+    }
+
+    ul {
+      margin: 0;
+      padding: $spacer-large;
+      text-align: left;
+
+      li {
+        padding: $spacer-medium 0;
+        color: $strong-text-color;
+
+        .icon-ok {
+          color: navajowhite;
+          padding-right: $spacer-medium;
+        }
+
+        .coming-soon {
+          color: #888888;
+        }
+      }
+    }
+
+    &.coming-soon {
+      margin-top: $spacer-medium;
+
+      .header {
+        font-style: italic;
+        color: navajowhite;
+        padding: $spacer-medium;
+        font-size: inherit;
+      }
+    }
+  }
+}
+.table.subscription-plans-features {
+  td, th {
+    text-align: center !important; // important overrides last-element
+    padding: $spacer-xxlarge $spacer-large;
+    vertical-align: middle;
+  }
+
+  thead th {
+    font-size: x-large;
+  }
+
+  tbody th {
+    text-align: right !important;
+    border: none;
+  }
+
+  .icon-remove {
+    color: #d74839;
+    font-size: large;
+  }
+
+  .icon-ok, .infinity {
+    color: #18af00;
+    font-size: large;
+  }
+
+  .infinity {
+    font-size: x-large !important;
+  }
+
+  .free {
+    color: #d74839;
+  }
+
+  .lite, .premium {
+    color: #ab7434;
+  }
+
+  .ultimate {
+    color: #18af00;
+  }
+
+  .coming-soon {
+    color: #888888;
+    display: block;
+    margin: 0;
+    font-weight: normal;
+  }
+
+  tr.price td {
+    font-size: 110%;
+
+    .number {
+      color: $strong-text-color;
+      font-weight: bold;
+    }
+  }
 }
 
 .subscription-plans-description-list {
