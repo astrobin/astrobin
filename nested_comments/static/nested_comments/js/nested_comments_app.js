@@ -96,7 +96,7 @@ $(function() {
                 textarea.wysibb({
                     buttons: "bold,italic,underline,|,img,link,|,bullist,numlist,|,code"
                 });
-                textarea.focus();
+                self.$('.wysibb-text-editor').focus();
 
                 self.createSyncInterval();
             }, 1);
