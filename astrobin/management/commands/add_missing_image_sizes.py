@@ -27,9 +27,10 @@ class Command(BaseCommand):
                 except AttributeError as e:
                     print e
 
+        qs = Image.all_objects.filter(size=0)
         i = 0
-        total = Image.all_objects.count()
-        for image in Image.all_objects.filter(size=0):
+        total = qs.count()
+        for image in qs:
             patchSize(image)
             i += 1
             for r in ImageRevision.all_objects.filter(image=image, size=0):
