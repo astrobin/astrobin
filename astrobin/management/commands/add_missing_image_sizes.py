@@ -1,8 +1,10 @@
 # Python
+from time import sleep
 import os
 
 # Django
 from django.core.management.base import BaseCommand
+from django.utils.encoding import smart_unicode
 
 # AstroBin
 from astrobin.models import Image, ImageRevision
@@ -12,21 +14,25 @@ class Command(BaseCommand):
 
     def handle(self, *args, **options):
         def patchSize(obj):
+            name = smart_unicode(obj.image_file.name)
+            path = name
             try:
-                obj.size = obj.image_file.storage.size(
-                    os.path.join('images', obj.image_file.name)
-                )
+                obj.size = obj.image_file.storage.size(path)
                 obj.save()
             except AttributeError:
-                print "\tSkipped due to error"
+                path = os.path.join('images', name)
+                try:
+                    obj.size = obj.image_file.storage.size(path)
+                    obj.save()
+                except AttributeError as e:
+                    print e
 
+        i = 0
+        total = Image.all_objects.count()
         for image in Image.all_objects.filter(size=0):
-            print "Patching image: \n\t- %s\n\t- %s\n\t- %s" % (
-                image.title,
-                image.user.username,
-                image.image_file.name)
             patchSize(image)
-
+            i += 1
             for r in ImageRevision.all_objects.filter(image=image, size=0):
-                print "\t\t- Revision %s" % r.label
                 patchSize(r)
+            print "%d/%d" % (i, total)
+            sleep(0.1)
