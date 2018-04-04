@@ -6,7 +6,8 @@ BROKER_TRANSPORT_OPTIONS = {
 }
 CELERY_RESULT_BACKEND = 'cache+memcached://memcached:11211/'
 CELERY_IMPORTS = ('astrobin.tasks', 'rawdata.tasks', 'djcelery_email.tasks')
-CELERY_DEFAULT_QUEUE = "default"
+CELERY_DEFAULT_QUEUE = 'default'
+CELERY_HAYSTACK_QUEUE = 'haystack'
 CELERY_ACCEPT_CONTENT = ['pickle']
 CELERY_TASK_SERIALIZER = 'pickle'
 CELERY_ENABLE_UTC = True

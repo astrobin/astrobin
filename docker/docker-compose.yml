@@ -49,12 +49,12 @@ services:
     image: elasticsearch:2.4.6-alpine
     restart: always
 
-  celery:
-    container_name: celery
+  celery_default:
+    container_name: celery_default
     build:
       context: ../
       dockerfile: docker/astrobin.dockerfile
-    command: celery worker -A astrobin -c 2 -l debug -f celery.log
+    command: celery worker -A astrobin -Q default -c 2 -l debug -f celery_default.log
     depends_on:
       - memcached
       - postgres
@@ -81,6 +81,37 @@ services:
       - ..:/code
     ports:
       - "6900-6910:6900-6910" # Debug port
+
+  celery_haystack:
+    container_name: celery_haystack
+    build:
+      context: ../
+      dockerfile: docker/astrobin.dockerfile
+    command: celery worker -A astrobin -Q haystack -c 2 -l debug -f celery_haystack.log
+    depends_on:
+      - memcached
+      - postgres
+      - rabbitmq
+      - elasticsearch
+    links:
+      - memcached
+      - postgres
+      - rabbitmq
+      - elasticsearch
+    env_file:
+      - ./astrobin.env
+    environment:
+      - C_FORCE_ROOT=true
+      - PYTHONPATH=/usr/lib/python2.7/dist-packages
+      - DJANGO_SETTINGS_MODULE=astrobin.settings
+      - CELERY_RDB_HOST=0.0.0.0
+      - CELERY_RDB_PORT=6900
+      - POSTGRES_DB=astrobin
+      - POSTGRES_USER=astrobin
+      - POSTGRES_PASSWORD=astrobin
+      - POSTGRES_HOST=postgres
+    volumes:
+      - ..:/code
 
   beat:
     container_name: beat
@@ -164,6 +195,8 @@ services:
     restart: always
     depends_on:
       - rabbitmq
+      - celery_default
+      - celery_haystack
     links:
       - rabbitmq
     env_file:
