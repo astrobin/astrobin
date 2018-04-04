@@ -1,7 +1,6 @@
 from __future__ import absolute_import
 
 # Python
-from hashlib import md5
 import subprocess
 from time import sleep
 
@@ -17,7 +16,7 @@ from django_bouncy.models import Bounce
 from haystack.query import SearchQuerySet
 
 # AstroBin
-from astrobin.models import Image
+from astrobin.models import Image, GlobalStat
 
 
 logger = get_task_logger(__name__)
