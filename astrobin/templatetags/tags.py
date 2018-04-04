@@ -1,18 +1,13 @@
-from datetime import datetime
-import random
-import string
-
+# Django
 from django.template.defaultfilters import timesince
 from django.utils.translation import ugettext as _
 from django.template import Library
-from django.conf import settings
 from django.core.paginator import Paginator, EmptyPage, PageNotAnInteger
-from django.db.models import Q
 
-from persistent_messages.models import Message
-from celery.result import AsyncResult
+# 3rd party
+from subscription.models import Subscription, UserSubscription
 
-from astrobin.models import Request
+# AstroBin
 from astrobin.gear import *
 
 
@@ -76,6 +71,7 @@ def ago(date_time):
             return _("seconds ago")
         return _("%s ago") % span
     return datetime.date(date_time)
+
 
 
 @register.filter
@@ -282,23 +278,21 @@ def show_ads(user):
     from astrobin_apps_premium.templatetags.astrobin_apps_premium_tags import is_premium, is_lite
 
     if not settings.ADS_ENABLED:
-        return False;
+        return False
 
     if is_donor(user):
-        return False;
+        return False
 
     if settings.PREMIUM_ENABLED and (is_lite(user) or is_premium(user)):
-        return False;
+        return False
 
-    return True;
+    return True
 
 
 @register.filter
 def valid_subscriptions(user):
-    from subscription.models import UserSubscription
-
     if user.is_anonymous():
-        return []
+         return []
 
     us = UserSubscription.active_objects.filter(user = user)
     subs = [x.subscription for x in us if x.valid()]
@@ -307,8 +301,6 @@ def valid_subscriptions(user):
 
 @register.filter
 def inactive_subscriptions(user):
-    from subscription.models import UserSubscription
-
     if user.is_anonymous():
         return []
 
@@ -320,8 +312,6 @@ def inactive_subscriptions(user):
 
 @register.filter
 def has_valid_subscription(user, subscription_pk):
-    from subscription.models import UserSubscription
-
     if user.is_anonymous():
         return False
 
@@ -336,8 +326,6 @@ def has_valid_subscription(user, subscription_pk):
 
 @register.filter
 def has_valid_subscription_in_category(user, category):
-    from subscription.models import UserSubscription
-
     if user.is_anonymous():
         return False
 
@@ -352,8 +340,6 @@ def has_valid_subscription_in_category(user, category):
 
 @register.filter
 def get_premium_subscription_expiration(user):
-    from subscription.models import UserSubscription
-
     if user.is_anonymous():
         return None
 
@@ -369,8 +355,6 @@ def get_premium_subscription_expiration(user):
 
 @register.filter
 def has_subscription_by_name(user, name):
-    from subscription.models import UserSubscription
-
     if user.is_anonymous():
         return False
 
@@ -379,19 +363,21 @@ def has_subscription_by_name(user, name):
 
 
 @register.filter
-def get_subscription_by_name(user, name):
-    from subscription.models import UserSubscription
-
+def get_usersubscription_by_name(user, name):
     if user.is_anonymous():
         return None
 
     return UserSubscription.objects.get(
         user = user, subscription__name = name)
 
+
+@register.simple_tag
+def get_subscription_by_name(name):
+    return Subscription.objects.filter(name = name).first()
+
+
 @register.simple_tag
 def get_subscription_url_by_name(name):
-    from subscription.models import Subscription
-
     try:
         sub = Subscription.objects.get(name = name)
     except Subscription.DoesNotExist:

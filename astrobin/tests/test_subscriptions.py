@@ -13,7 +13,7 @@ from astrobin.templatetags.tags import (
     has_valid_subscription_in_category,
     get_premium_subscription_expiration,
     has_subscription_by_name,
-    get_subscription_by_name)
+    get_usersubscription_by_name)
 
 
 class SubscriptionsTest(TestCase):
@@ -42,7 +42,7 @@ class SubscriptionsTest(TestCase):
             self.assertEqual(
                 has_subscription_by_name(u, "Test subscription"), True)
             self.assertEqual(
-                get_subscription_by_name(u, "Test subscription"), us)
+                get_usersubscription_by_name(u, "Test subscription"), us)
 
             us.delete()
             s.delete()

@@ -1,0 +1,15 @@
+{% load i18n %}
+{% load tags %}
+
+
+{% if request.user|has_valid_subscription:subscription.pk %}
+    <a class="btn btn-primary disabled" href="#">
+        {% trans "Buy" %}
+    </a>
+
+    <p>{% trans "You are already on this plan" %}</p>
+{% else %}
+    <a class="btn btn-primary" href="{{ subscription.get_absolute_url }}">
+        {% trans "Buy" %}
+    </a>
+{% endif %}

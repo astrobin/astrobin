@@ -29,15 +29,15 @@
                             <div class="price">
                                 <span class="number">$19</span> USD / {% trans "year" %}
                             </div>
-                            <a class="btn btn-primary" href="{% get_subscription_url_by_name 'AstroBin Lite' %}">
-                                {% trans "Buy" %}
-                            </a>
+                            {% get_subscription_by_name 'AstroBin Lite' as subscription %}
+                            {% include 'subscription/_subscription_status_form.html' %}
                         </div>
                         <ul>
                             <li>
-                                <i class="icon-ok"></i>{% blocktrans with number=5 %}Unlimited images, max {{ number }} MB each {% endblocktrans %}
+                                <i class="icon-ok"></i>{% blocktrans with number=PREMIUM_MAX_IMAGES_LITE size=PREMIUM_MAX_IMAGE_SIZE_LITE|filesizeformat %}{{ number }} images, max {{ size }} each {% endblocktrans %}
                             </li>
                             <li><i class="icon-ok"></i>{% trans "View images tech info" %}</li>
+                            <li><i class="icon-ok"></i>{% trans "Advanced search" %}</li>
                             <li><i class="icon-ok"></i>{% trans "Social features (likes, comments, forums, etc)" %}</li>
                             <li><i class="icon-ok"></i>{% trans "Basic plate-solving" %}</li>
                             <li><i class="icon-ok"></i>{% trans "View astronomy ads from our partners" %}</li>
@@ -63,17 +63,21 @@
                             <div class="price">
                                 <span class="number">$39</span> USD / {% trans "year" %}
                             </div>
-                            <a class="btn btn-primary" href="{% get_subscription_url_by_name 'AstroBin Premium' %}">
-                                {% trans "Buy" %}
-                            </a>
+                            {% get_subscription_by_name 'AstroBin Premium' as subscription %}
+                            {% include 'subscription/_subscription_status_form.html' %}
                         </div>
                         <ul>
                             <li>
-                                <i class="icon-ok"></i>{% blocktrans with number=10 %}Unlimited images, max {{ number }} MB each {% endblocktrans %}
+                                <i class="icon-ok"></i>{% blocktrans with number=PREMIUM_MAX_IMAGES_PREMIUM size=PREMIUM_MAX_IMAGE_SIZE_PREMIUM|filesizeformat %}{{ number }} images, max {{ size }} each {% endblocktrans %}
                             </li>
                             <li><i class="icon-ok"></i>{% trans "View images tech info" %}</li>
+                            <li><i class="icon-ok"></i>{% trans "Advanced search" %}</li>
+                            <li>
+                                <i class="icon-ok"></i>{% blocktrans with number=PREMIUM_MAX_REVISIONS_PREMIUM %}Up to {{  number  }} revisions per image{% endblocktrans %}
+                            </li>
                             <li><i class="icon-ok"></i>{% trans "Social features (likes, comments, forums, etc)" %}</li>
-                            <li><i class="icon-ok"></i>{% trans "Participate in Image of the Day contest" %}</li>
+                            <li><i class="icon-ok"></i>{% trans "Participate in Image of the Day / Top Picks contests" %}</li>
+                            <li><i class="icon-ok"></i>{% trans "Create and join Groups" %}</li>
                             <li><i class="icon-ok"></i>{% trans "Basic plate-solving" %}</li>
                             <li><i class="icon-ok"></i>{% trans "View astronomy ads from our partners" %}</li>
                         </ul>
@@ -97,27 +101,23 @@
                         <div class="header">
                             AstroBin Ultimate
                             <div class="price">
-                                <span
-                                        class="number retail-price"
-                                        rel="tooltip"
-                                        title="{% trans "Special price while the 'Coming soon' features are being developed!" %}">
-                                    $69
-                                </span>
-                                <span class="number">$59</span> USD / {% trans "year" %}
+                                <span class="number">$49</span> USD / {% trans "year" %}
                             </div>
-                            <a class="btn btn-primary" href="{% get_subscription_url_by_name 'AstroBin Ultimate' %}">
-                                {% trans "Buy" %}
-                            </a>
+                            {% get_subscription_by_name 'AstroBin Ultimate' as subscription %}
+                            {% include 'subscription/_subscription_status_form.html' %}
                         </div>
                         <ul>
                             <li>
                                 <i class="icon-ok"></i>{% blocktrans %}Unlimited images, unlimited size each {% endblocktrans %}
                             </li>
                             <li><i class="icon-ok"></i>{% trans "View images tech info" %}</li>
+                            <li><i class="icon-ok"></i>{% trans "Advanced search" %}</li>
+                            <li><i class="icon-ok"></i>{% trans "Unlimited revisions per image" %}</li>
                             <li><i class="icon-ok"></i>{% trans "Social features (likes, comments, forums, etc)" %}</li>
-                            <li><i class="icon-ok"></i>{% trans "Participate in Image of the Day contest" %}</li>
+                            <li><i class="icon-ok"></i>{% trans "Participate in Image of the Day / Top Picks contests" %}</li>
+                            <li><i class="icon-ok"></i>{% trans "Create and join Groups" %}</li>
                             <li>
-                                <i class="icon-ok"></i>{% trans "Enhanced plate-solving" %}
+                                <i class="icon-ok"></i>{% trans "Enhanced plate-solving with <a href='https://pixinsight.com/' target='_blank'>PixInsight</a>" %}
                                 <span class="coming-soon">{% trans "(coming soon)" %}</span>
                             </li>
                             <li><i class="icon-ok"></i>{% trans "Optionally hide astronomy ads from our partners" %}</li>
@@ -163,15 +163,22 @@
                     <tr>
                         <th>{% trans "Images" %}</th>
                         <td class="free">{{ PREMIUM_MAX_IMAGES_FREE }}</td>
-                        <td class="lite"><span class="infinity">&infin;</span></td>
-                        <td class="premium"><span class="infinity">&infin;</span></td>
+                        <td class="lite">{{ PREMIUM_MAX_IMAGES_LITE }}</td>
+                        <td class="premium">{{ PREMIUM_MAX_IMAGES_PREMIUM }}</td>
+                        <td class="ultimate"><span class="infinity">&infin;</span></td>
+                    </tr>
+                    <tr>
+                        <th>{% trans "Revisions" %}</th>
+                        <td class="free"><i class="icon-remove"></i></td>
+                        <td class="lite"><i class="icon-remove"></i></td>
+                        <td class="premium">{{ PREMIUM_MAX_REVISIONS_PREMIUM }}</td>
                         <td class="ultimate"><span class="infinity">&infin;</span></td>
                     </tr>
                     <tr>
                         <th>{% trans "Upload quality" %}</th>
-                        <td class="free">Max 5 MB</td>
-                        <td class="lite">Max 5 MB</td>
-                        <td class="premium">Max 10 MB</td>
+                        <td class="free">Max {{ PREMIUM_MAX_IMAGE_SIZE_FREE | filesizeformat }}</td>
+                        <td class="lite">Max {{ PREMIUM_MAX_IMAGE_SIZE_LITE | filesizeformat }}</td>
+                        <td class="premium">Max {{ PREMIUM_MAX_IMAGE_SIZE_PREMIUM | filesizeformat }}</td>
                         <td class="ultimate"><span class="infinity">&infin;</span></td>
                     </tr>
                     <tr>
@@ -182,9 +189,23 @@
                         <td class="ultimate"><i class="icon-ok"></i></td>
                     </tr>
                     <tr>
+                        <th>{% trans "Advanced search" %}</th>
+                        <td class="free"><i class="icon-remove"></i></td>
+                        <td class="lite"><i class="icon-ok"></i></td>
+                        <td class="premium"><i class="icon-ok"></i></td>
+                        <td class="ultimate"><i class="icon-ok"></i></td>
+                    </tr>
+                    <tr>
                         <th>{% trans "Social features" %}</th>
                         <td class="free"><i class="icon-remove"></i></td>
                         <td class="lite"><i class="icon-ok"></i></td>
+                        <td class="premium"><i class="icon-ok"></i></td>
+                        <td class="ultimate"><i class="icon-ok"></i></td>
+                    </tr>
+                    <tr>
+                        <th>{% trans "Groups" %}</th>
+                        <td class="free"><i class="icon-remove"></i></td>
+                        <td class="lite"><i class="icon-remove"></i></td>
                         <td class="premium"><i class="icon-ok"></i></td>
                         <td class="ultimate"><i class="icon-ok"></i></td>
                     </tr>
@@ -202,7 +223,7 @@
                     </tr>
                     <tr>
                         <th>
-                            {% trans "Image of the Day participation" %}
+                            {% trans "Image of the Day / Top Picks" %}
                         </th>
                         <td class="free"><i class="icon-remove"></i></td>
                         <td class="lite"><i class="icon-remove"></i></td>
