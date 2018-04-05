@@ -5,6 +5,7 @@ import subprocess
 from time import sleep
 
 # Django
+from django.conf import settings
 from django.contrib.auth.models import User
 from django.core.cache import cache
 from django.core.management import call_command
@@ -16,7 +17,7 @@ from django_bouncy.models import Bounce
 from haystack.query import SearchQuerySet
 
 # AstroBin
-from astrobin.models import Image, GlobalStat
+from astrobin_apps_images.models import ThumbnailGroup
 
 
 logger = get_task_logger(__name__)
@@ -31,6 +32,8 @@ def test_task():
 
 @shared_task()
 def update_top100_ids():
+    from astrobin.models import Image
+
     LOCK_EXPIRE = 60 * 5 # Lock expires in 5 minutes
     lock_id = 'top100_ids_lock'
 
@@ -56,6 +59,7 @@ def update_top100_ids():
 
 @shared_task()
 def global_stats():
+    from astrobin.models import Image, GlobalStat
     sqs = SearchQuerySet()
 
     users = sqs.models(User).all().count()
@@ -106,3 +110,42 @@ def delete_inactive_bounced_accounts():
 
     User.objects.filter(email__in=emails, is_active=False).delete()
     bounces.delete()
+
+
+"""
+This task gets the raw thumbnail data and sets the cache and ThumbnailGroup object
+"""
+@shared_task()
+def retrieve_thumbnail(pk, alias, options):
+    from astrobin.models import Image
+
+    revision_label = options.get('revision_label', 'final')
+
+    LOCK_EXPIRE = 1
+    lock_id = 'retrieve_thumbnail_%d_%s_%s' % (pk, revision_label, alias)
+
+    acquire_lock = lambda: cache.add(lock_id, 'true', LOCK_EXPIRE)
+    release_lock = lambda: cache.delete(lock_id)
+
+    if acquire_lock():
+        try:
+            image = Image.all_objects.get(pk = pk)
+            thumb = image.thumbnail_raw(alias, options)
+
+            if thumb:
+                url = settings.IMAGES_URL + thumb.name
+                field = image.get_thumbnail_field(revision_label);
+                if not field.name.startswith('images/'):
+                    field.name = 'images/' + field.name
+                cache_key = image.thumbnail_cache_key(field, alias)
+                cache.set(cache_key, url, 60 * 60 * 24 * 365)
+                logger.debug("Image %d: saved generated thumbnail in the cache." % image.pk)
+                thumbnails, created = ThumbnailGroup.objects.get_or_create(image=image, revision=revision_label)
+                setattr(thumbnails, alias, url)
+                thumbnails.save()
+                logger.debug("Image %d: saved generated thumbnail in the database." % image.pk)
+        finally:
+            release_lock()
+        return
+
+    logger.debug('retrieve_thumbnail task is already running')

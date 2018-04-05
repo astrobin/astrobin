@@ -545,13 +545,12 @@ class ImageTest(TestCase):
         }
 
         def get_expected_url(image):
-            url = image.thumbnail(opts['alias'], {
+            thumb = image.thumbnail_raw(opts['alias'], {
                 'revision_label': 0,
                 'animated': False,
                 'insecure': False
             })
-            print url
-            return url
+            return thumb.url
 
         response = self.client.get(reverse('image_rawthumb', kwargs = opts))
         # 404 because we don't serve that /media/static file, that's fine.

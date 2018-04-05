@@ -135,13 +135,19 @@ class ImageRawThumbView(DetailView):
         image = self.get_object()
         alias = kwargs.pop('alias')
         r = kwargs.pop('r')
-
-        url = image.thumbnail(alias, {
+        opts = {
             'revision_label': r,
             'animated': 'animated' in self.request.GET,
             'insecure': 'insecure' in self.request.GET,
-        })
+        }
 
+        if settings.TESTING:
+            thumb = image.thumbnail_raw(alias, opts)
+            if thumb:
+                return redirect(thumb.url)
+            return None
+
+        url = image.thumbnail(alias, opts)
         return redirect(smart_unicode(url))
 
 

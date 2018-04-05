@@ -1152,7 +1152,6 @@ class Image(HasSolutionMixin, SafeDeleteModel):
                 cache.set(cache_key + '_animated', url, 60*60*24*365)
                 return normalize_url_security(url, thumbnail_settings)
 
-        cache_key = self.thumbnail_cache_key(field, alias)
         url = cache.get(cache_key)
         if url:
             log.debug("Image %d: got URL from cache entry %s" % (self.id, cache_key))
@@ -1176,31 +1175,10 @@ class Image(HasSolutionMixin, SafeDeleteModel):
                 # Race condition
                 pass
 
-        # If we got down here, we don't have an url yet.
-        thumb = self.thumbnail_raw(alias, options)
-        thumbnail_alias_settings = settings.THUMBNAIL_ALIASES[''][alias].copy()
-
-        if thumb:
-            url = settings.IMAGES_URL + thumb.name
-            cache.set(cache_key, url, 60*60*24*365)
-            log.debug("Image %d: saved generated thumbnail in the cache." % self.id)
-            if not thumbnails:
-                try:
-                    thumbnails = ThumbnailGroup.objects.create(image = self, revision = revision_label)
-                except IntegrityError:
-                    # Race condition
-                    pass
-
-            if thumbnails:
-                setattr(thumbnails, alias, url)
-                thumbnails.save()
-                log.debug("Image %d: saved generated thumbnail in the database." % self.id)
-
-            return normalize_url_security(url, thumbnail_settings)
-
-        return "https://placehold.it/%dx%d/B53838/fff&text=Error" % (
-            thumbnail_alias_settings['size'][0],
-            thumbnail_alias_settings['size'][1])
+        # If we got down here, we don't have an url yet, so we start an asynchronous task and return a placeholder.
+        from tasks import retrieve_thumbnail
+        retrieve_thumbnail.delay(self.pk, alias, options);
+        return None
 
 
     def thumbnail_invalidate_real(self, field, revision_label, delete_remote = True):

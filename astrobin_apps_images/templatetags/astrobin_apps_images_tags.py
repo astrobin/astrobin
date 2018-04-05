@@ -240,7 +240,9 @@ def astrobin_image(context, image, alias, **kwargs):
     # If we're testing, we want to bypass the placeholder thing and force-get
     # the thumb url.
     if thumb_url is None and settings.TESTING:
-        thumb_url = image.thumbnail(alias, {'revision_label': revision})
+        thumb = image.thumbnail_raw(alias, {'revision_label': revision})
+        if thumb:
+            thumb_url = thumb.url
 
     get_thumb_url = None
     if thumb_url is None:

@@ -54,7 +54,7 @@ services:
     build:
       context: ../
       dockerfile: docker/astrobin.dockerfile
-    command: celery worker -A astrobin -Q default -c 2 -l debug -f celery_default.log
+    command: celery worker -A astrobin -Q default,thumbnails -c 2 -l debug -f celery_default.log
     depends_on:
       - memcached
       - postgres
@@ -79,6 +79,7 @@ services:
       - POSTGRES_HOST=postgres
     volumes:
       - ..:/code
+      - media:/media
     ports:
       - "6900-6910:6900-6910" # Debug port
 
@@ -112,6 +113,7 @@ services:
       - POSTGRES_HOST=postgres
     volumes:
       - ..:/code
+      - media:/media
 
   beat:
     container_name: beat
