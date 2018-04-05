@@ -116,7 +116,7 @@ def astrobin_image(context, image, alias, **kwargs):
             'revision': revision,
             'size_x': size[0],
             'size_y': size[1],
-            'capty_cache_key': 'astrobin_image_no_image',
+            'caption_cache_key': 'astrobin_image_no_image',
             'nav_ctx': nav_ctx,
             'nav_ctx_extra': nav_ctx_extra,
         }
@@ -180,7 +180,7 @@ def astrobin_image(context, image, alias, **kwargs):
                 'revision': revision,
                 'size_x': size[0],
                 'size_y': size[1],
-                'capty_cache_key': 'astrobin_image_no_image',
+                'caption_cache_key': 'astrobin_image_no_image',
                 'nav_ctx': nav_ctx,
                 'nav_ctx_extra': nav_ctx_extra,
             }
@@ -271,7 +271,7 @@ def astrobin_image(context, image, alias, **kwargs):
         'url'           : url,
         'show_tooltip'  : show_tooltip,
         'request'       : request,
-        'capty_cache_key': "%d_%s_%s" % (image.id, revision, alias),
+        'caption_cache_key': "%d_%s_%s" % (image.id, revision, alias),
         'badges'        : badges,
         'animated'      : animated,
         'get_thumb_url' : get_thumb_url,

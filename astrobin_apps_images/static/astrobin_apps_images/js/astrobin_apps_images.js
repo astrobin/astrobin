@@ -11,19 +11,10 @@ $(document).ready(function() {
                 alias = $img.data('alias'),
                 url = $img.data('get-thumb-url'),
                 loaded = $img.data('loaded'),
-                capty = $img.hasClass('capty'),
                 key = id + '.' + revision + '.' + alias;
 
             function load() {
-                function captify($img) {
-                    var height = $img.attr('height');
-                    $img.capty({animation: 'slide', speed: 200, height: height});
-                    $img.closest('.capty-wrapper').find('.capty-target').show();
-                }
-
-                if (loaded && capty) {
-                    captify($img);
-                } else if (!loaded && url !== "") {
+                if (!loaded && url !== "") {
                     if (tries[key] === undefined) {
                         tries[key] = 0;
                     }
@@ -51,12 +42,6 @@ $(document).ready(function() {
                                 '][data-alias=' + data.alias +
                                 '][data-revision=' + data.revision +
                                 ']');
-
-                            if ($img.hasClass('capty')) {
-                                $img.load(function() {
-                                    captify($img);
-                                });
-                            }
 
                             $img
                                 .attr('src', data.url)

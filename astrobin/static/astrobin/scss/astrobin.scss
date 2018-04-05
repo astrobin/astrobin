@@ -1208,10 +1208,6 @@ li.astrobin-thumbnail {
     @include no-box-shadow;
     display: inline-block;
 
-    img {
-        @include rounded-corners(20px);
-    }
-
     &.spam-thumbnail img{
         border: 1px solid red;
         @include rounded-corners(20px);
@@ -1718,65 +1714,6 @@ BODY:first-of-type ul.as-list, x:-moz-any-link, x:default { /* Target FF 3.5+ */
     margin-top: 0;
 }
 
-div.capty-caption {
-    background-color: black;
-    padding: 0;
-    @include rounded-corners(20px);
-    z-index: 3;
-}
-
-div.capty-target {
-    display: none;
-
-    .capty-caption-content {
-        padding: 12px 8px;
-
-        font-size: $base-font-size * 0.65;
-        color: #ddd;
-        text-shadow: 1px 1px 1px black;
-
-        a {
-            color: $link-color;
-            font-size: 90%;
-        }
-
-        .table {
-            margin-top: 8px;
-            th, td {
-                text-align: left !important;
-                background: none;
-                border-top: none;
-                border-right: none;
-                border-left: none;
-                border-bottom: 1px solid #363636;
-            }
-            th {
-                color: white;
-                width: 16px;
-            }
-            td {
-                color: #ddd;
-            }
-        }
-
-        .table-condensed th, .table-condensed td {
-            padding: 0 2px;
-        }
-
-        .link-overlay {
-            @include opacity(0);
-            position: absolute;
-            left: 0;
-
-            a {
-                display: block;
-                height: 100%;
-            }
-        }
-    }
-}
-
-
 .ui-multiselect {
     display: none;
     border: none;
@@ -1896,6 +1833,100 @@ div.capty-target {
 .astrobin-image-container {
     /* Because of the IOTD banner. */
     position: relative;
+
+    figure {
+      margin: 0;
+      position: relative;
+      overflow: hidden;
+
+      img {
+        -webkit-transition: all .3s ease-in-out;
+        -moz-transition: all .3s ease-in-out;
+        -o-transition: all .3s ease-in-out;
+        transition: all .3s ease-in-out;
+      }
+
+      figcaption {
+        position: absolute;
+        left: 0;
+        bottom: 0;
+        padding: 12px;
+        height: calc(100% - 24px);
+        width: calc(100% - 24px);
+        font-size: .7em;
+        color: #fff;
+        background-color: rgba(0, 0, 0, .7);
+        opacity: 0;
+        filter: alpha(opacity=0);
+        -webkit-transition: opacity .5s ease-in-out;
+        -moz-transition: opacity .5s ease-in-out;
+        -o-transition: opacity .5s ease-in-out;
+        transition: opacity .5s ease-in-out;
+
+        h3 {
+          // Image title
+          font-size: 10px;
+          line-height: 10px;
+          margin: 0 0 4px 0;
+          color: $link-color;
+        }
+
+        h4 {
+          // Image author
+          font-size: 10px;
+          line-height: 10px;
+          margin: 0 0 4px 0;
+          font-weight: normal;
+        }
+
+        h3, h4 {
+          white-space: nowrap;
+          overflow: hidden;
+          text-overflow: ellipsis;
+        }
+
+        .table {
+          margin-top: 8px;
+
+          th, td {
+            text-align: left !important;
+            background: none;
+            border-top: none;
+            border-right: none;
+            border-left: none;
+            border-bottom: 1px solid #363636;
+          }
+
+          th {
+            color: white;
+            width: 16px;
+          }
+
+          td {
+            color: #ddd;
+          }
+        }
+
+        .table-condensed th, .table-condensed td {
+          padding: 0 2px;
+        }
+      }
+
+      &:hover {
+        img[data-alias='gallery'] {
+          -webkit-transform: scale(1.25); /* Safari and Chrome */
+          -moz-transform: scale(1.25); /* Firefox */
+          -ms-transform: scale(1.25); /* IE 9 */
+          -o-transform: scale(1.25); /* Opera */
+          transform: scale(1.25);
+        }
+
+        figcaption {
+          opacity: 1;
+          filter: progid:DXImageTransform.Microsoft.gradient(startColorstr=#aa000000, endColorstr=#aa000000);
+        }
+      }
+    }
 
     &.plot-overlay {
         position: absolute;
@@ -4756,9 +4787,21 @@ pre {
     }
 } 
 
-.image-moderation {
+.image-moderation, .collection-add-remove-images, .group-add-remove-images {
     .astrobin-image-container {
-        padding: 8px;
+      padding: 8px;
+
+      figure:hover img {
+        -webkit-transform: none; /* Safari and Chrome */
+        -moz-transform: none; /* Firefox */
+        -ms-transform: none; /* IE 9 */
+        -o-transform: none; /* Opera */
+        transform: none;
+      }
+
+      figcaption {
+        display: none !important;
+      }
     }
 
     .image-actions {

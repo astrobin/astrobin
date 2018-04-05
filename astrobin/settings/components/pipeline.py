@@ -9,7 +9,6 @@ PIPELINE = {
                 'common/fancybox/jquery.fancybox.js',
 
                 'astrobin_apps_images/js/astrobin_apps_images.js',
-                'astrobin_apps_images/js/jquery.capty.js',
 
                 'astrobin/js/jquery.i18n.js',
                 'astrobin/js/plugins/localization/jquery.localisation.js',
@@ -54,7 +53,6 @@ PIPELINE = {
 
                 'astrobin/wysibb/theme/default/wbbtheme.css',
 
-                'astrobin_apps_images/css/jquery.capty.css',
                 'astrobin_apps_donations/css/astrobin_apps_donations.css',
                 'astrobin_apps_premium/css/astrobin_apps_premium.css',
 
