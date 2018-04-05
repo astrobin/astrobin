@@ -1,9 +1,7 @@
 # Python
-from datetime import date, datetime, timedelta
+from datetime import date
 
 # Django
-from django.contrib.auth.models import User, Group
-from django.core.exceptions import ValidationError
 from django.core.urlresolvers import reverse
 from django.test import TestCase
 from django.utils import timezone
@@ -16,10 +14,6 @@ from toggleproperties.models import ToggleProperty
 from astrobin.models import (
     Acquisition,
     CommercialGear,
-    Image,
-    ImageOfTheDay,
-    ImageOfTheDayCandidate,
-    RetailedGear,
     Telescope,
     UserProfile
 )
