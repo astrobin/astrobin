@@ -2749,13 +2749,24 @@ div.token-input-dropdown {
 
 #full-size-image {
     text-align: center;
-    img {
+
+    .astrobin-image-container {
+      figure {
+        overflow: initial;
+      }
+
+      img {
         max-width: 95%;
         margin-top: $spacer-medium;
-        @include box-shadow;}
-    img.real {
-        max-width: 65536px; /* ... ought to be enough for everybody... */
-        width: auto;}}
+        @include box-shadow;
+
+        &.real {
+          max-width: 65536px; /* ... ought to be enough for everybody... */
+          width: auto;
+        }
+      }
+    }
+}
 
 form.copy {
     label {
