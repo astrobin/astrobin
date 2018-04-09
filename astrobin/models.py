@@ -1170,7 +1170,7 @@ class Image(HasSolutionMixin, SafeDeleteModel):
         except ThumbnailGroup.DoesNotExist:
             log.debug("Image %d: there are no thumbnails in database." % self.id)
             try:
-                thumbnails = ThumbnailGroup.objects.create(image = self, revision = revision_label)
+                ThumbnailGroup.objects.create(image = self, revision = revision_label)
             except IntegrityError:
                 # Race condition
                 pass
