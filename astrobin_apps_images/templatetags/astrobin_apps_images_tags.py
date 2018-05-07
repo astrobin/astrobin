@@ -219,6 +219,8 @@ def astrobin_image(context, image, alias, **kwargs):
             not image.user.userprofile.exclude_from_competitions):
             badges.append('top-pick')
 
+        # Temporarily disable this because it hogs the default celery queue.
+        """
         cache_key = 'top100_ids'
         top100_ids = cache.get(cache_key)
         if top100_ids is None:
@@ -226,6 +228,7 @@ def astrobin_image(context, image, alias, **kwargs):
             update_top100_ids.delay()
         elif image.pk in top100_ids:
             badges.append('top100')
+        """
 
 
     cache_key = image.thumbnail_cache_key(field, alias)
