@@ -1,8 +1,12 @@
-2018-04-7 Salvatore Iovene <salvatore@iovene.com>
- * v1.27.1
+2018-05-07 Salvatore Iovene <salvatore@iovene.com>
+ * v1.27.02
+ * (images) Improve async generation of thumbnails
+
+2018-04-07 Salvatore Iovene <salvatore@iovene.com>
+ * v1.27.01
  * (images) Fix overflow of 'real' sized images
 
-2018-04-5 Salvatore Iovene <salvatore@iovene.com>
+2018-04-05 Salvatore Iovene <salvatore@iovene.com>
  * v1.27.0
  * (comments) Fix autofocus of input area
  * (images) Move away from 'capty' and use pure CSS and figure/figcaption
@@ -10,15 +14,15 @@
  * (infra) Move thumbnail generation to async task queue
  * (infra) Serve media files in DEBUG mode
 
-2018-04-2 Salvatore Iovene <salvatore@iovene.com>
+2018-04-02 Salvatore Iovene <salvatore@iovene.com>
  * v1.26.7
  * (searech) Fix missing pagination
 
-2018-04-1 Salvatore Iovene <salvatore@iovene.com>
+2018-04-01 Salvatore Iovene <salvatore@iovene.com>
  * v1.26.6
  * (images) Fix crash on old images with unicode characters in watermark
 
-2018-04-1 Salvatore Iovene <salvatore@iovene.com>
+2018-04-01 Salvatore Iovene <salvatore@iovene.com>
  * v1.26.5
  * Fix task that contains the size of the image cache directory
 
