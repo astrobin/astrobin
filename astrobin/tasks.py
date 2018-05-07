@@ -29,7 +29,7 @@ def test_task():
     logger.info('Test task ends')
 
 
-@shared_task()
+@shared_task(rate_limit="1/s", time_limit=5)
 def update_top100_ids():
     from astrobin.models import Image
 
