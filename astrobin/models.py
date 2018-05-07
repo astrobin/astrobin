@@ -277,7 +277,7 @@ class Gear(models.Model):
         return slugify("%s %s" % (self.get_make(), self.get_name()))
 
     def hard_merge(self, slave):
-        from gear import get_correct_gear
+        from astrobin.gear import get_correct_gear
         unused, master_gear_type = get_correct_gear(self.id)
         unused, slave_gear_type = get_correct_gear(slave.id)
 

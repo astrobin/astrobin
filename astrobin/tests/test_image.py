@@ -1,6 +1,7 @@
 # -*- coding: UTF-8
 
 # Python
+import re
 import time
 
 # Django
@@ -343,7 +344,7 @@ class ImageTest(TestCase):
         # Basic view
         response = self.client.get(reverse('image_detail', kwargs = {'id': image.id}))
         self.assertEqual(response.status_code, 200)
-        self.assertContains(response, image.thumbnail('regular'))
+        self.assertIsNotNone(re.search(r'data-id="%s"\s+data-alias="%s"' % (image.pk, "regular"), response.content))
 
         # Image resolution
         self.assertContains(response, "<strong>Resolution</strong>: 340x280")
@@ -360,8 +361,10 @@ class ImageTest(TestCase):
 
         # Correct revision displayed
         response = self.client.get(reverse('image_detail', kwargs = {'id': image.id, 'r': 'B'}))
-        self.assertContains(response, image.thumbnail('regular', thumbnail_settings = {'revision_label': 'B'}))
-        self.assertContains(response, image.thumbnail('thumb'))
+        self.assertIsNotNone(re.search(
+            r'data-id="%d"\s+data-alias="%s"\s+data-revision="%s"' % (image.pk, "regular", "B"),
+            response.content))
+        self.assertIsNotNone(re.search(r'data-id="%d"\s+data-alias="%s"' % (image.pk, "thumb"), response.content))
 
         # Revision resolution differs from original
         self.assertContains(response, "<strong>Resolution</strong>: 200x165")
@@ -382,18 +385,25 @@ class ImageTest(TestCase):
 
         # Correct revision displayed in gallery
         response = self.client.get(reverse('user_page', kwargs = {'username': 'test'}))
-        self.assertContains(response, image.thumbnail('gallery', thumbnail_settings = {'revision_label': 'B'}))
+        self.assertIsNotNone(re.search(
+            r'data-id="%d"\s+data-alias="%s"\s+data-revision="%s"' % (image.pk, "gallery", "final"),
+            response.content))
 
         response = self.client.get(reverse('image_detail', kwargs = {'id': image.id, 'r': '0'}))
-        self.assertContains(response, image.thumbnail('regular'))
-        self.assertContains(response, image.thumbnail('thumb', thumbnail_settings = {'revision_label': 'B'}))
+        self.assertIsNotNone(re.search(r'data-id="%d"\s+data-alias="%s"' % (image.pk, "regular"), response.content))
+        self.assertIsNotNone(re.search(
+            r'data-id="%d"\s+data-alias="%s"\s+data-revision="%s"' % (image.pk, "thumb", "B"),
+            response.content))
 
         # Inverted displayed
         response = self.client.get(reverse('image_detail', kwargs = {'id': image.id, 'r': '0'}) + "?mod=inverted")
-        self.assertContains(response, image.thumbnail('regular_inverted'))
+        self.assertIsNotNone(re.search(r'data-id="%d"\s+data-alias="%s"' % (image.pk, "regular_inverted"), response.content))
+
 
         response = self.client.get(reverse('image_detail', kwargs = {'id': image.id, 'r': 'B'}) + "?mod=inverted")
-        self.assertContains(response, image.thumbnail('regular_inverted', thumbnail_settings = {'revision_label': 'B'}))
+        self.assertIsNotNone(re.search(
+            r'data-id="%d"\s+data-alias="%s"\s+data-revision="%s"' % (image.pk, "regular_inverted", "B"),
+            response.content))
 
         revision.delete()
 
@@ -574,7 +584,8 @@ class ImageTest(TestCase):
         response = self.client.get(reverse('image_full', kwargs = {'id': image.id}))
         self.assertEqual(response.status_code, 200)
         self.assertEqual(response.context[0]['alias'], 'hd')
-        self.assertContains(response, image.thumbnail('hd'))
+        self.assertIsNotNone(re.search(r'data-id="%d"\s+data-alias="%s"' % (image.pk, "hd"), response.content))
+
 
         # Revision redirect
         self._do_upload_revision(image, 'astrobin/fixtures/test.jpg')
@@ -588,10 +599,11 @@ class ImageTest(TestCase):
 
         # Correct revision displayed
         response = self.client.get(reverse('image_full', kwargs = {'id': image.id, 'r': 'B'}))
-        self.assertContains(response, image.thumbnail('hd', thumbnail_settings = {'revision_label': 'B'}))
-
+        self.assertIsNotNone(re.search(
+            r'data-id="%d"\s+data-alias="%s"\s+data-revision="%s"' % (image.pk, "hd", "B"),
+            response.content))
         response = self.client.get(reverse('image_full', kwargs = {'id': image.id, 'r': '0'}))
-        self.assertContains(response, image.thumbnail('hd'))
+        self.assertIsNotNone(re.search(r'data-id="%d"\s+data-alias="%s"' % (image.pk, "hd"), response.content))
 
         revision.delete()
 
@@ -601,14 +613,14 @@ class ImageTest(TestCase):
         self.assertEqual(response.status_code, 200)
         self.assertEqual(response.context[0]['mod'], 'inverted')
         self.assertEqual(response.context[0]['alias'], 'hd_inverted')
-        self.assertContains(response, image.thumbnail('hd_inverted'))
+        self.assertIsNotNone(re.search(r'data-id="%d"\s+data-alias="%s"' % (image.pk, "hd_inverted"), response.content))
 
         # Real
         response = self.client.get(
             reverse('image_full', kwargs = {'id': image.id}) + "?real")
         self.assertEqual(response.status_code, 200)
         self.assertEqual(response.context[0]['alias'], 'real')
-        self.assertContains(response, image.thumbnail('real'))
+        self.assertIsNotNone(re.search(r'data-id="%d"\s+data-alias="%s"' % (image.pk, "real"), response.content))
 
         image.delete()
 

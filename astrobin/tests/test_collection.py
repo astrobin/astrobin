@@ -1,3 +1,6 @@
+# Python
+import re
+
 # Django
 from django.contrib.auth.models import User
 from django.core.urlresolvers import reverse
@@ -107,7 +110,8 @@ class CollectionTest(TestCase):
         response = self.client.get(
             reverse('user_collections_list', args = (self.user.username,))
         )
-        self.assertContains(response, image2.thumbnail('collection'))
+        self.assertIsNotNone(re.search(r'data-id="%d"\s+data-alias="%s"' % (image2.pk, "collection"), response.content))
+
 
         response = self.client.post(
             reverse('user_collections_update', args = (self.user.username, collection.pk)),
@@ -123,7 +127,7 @@ class CollectionTest(TestCase):
         response = self.client.get(
             reverse('user_collections_list', args = (self.user.username,))
         )
-        self.assertContains(response, image1.thumbnail('collection'))
+        self.assertIsNotNone(re.search(r'data-id="%d"\s+data-alias="%s"' % (image1.pk, "collection"), response.content))
 
         image1.delete()
         image2.delete()

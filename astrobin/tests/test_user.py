@@ -3,7 +3,7 @@ from datetime import date
 
 # Django
 from django.core.urlresolvers import reverse
-from django.test import TestCase
+from django.test import TestCase, override_settings
 from django.utils import timezone
 
 # Third party
@@ -444,6 +444,7 @@ class UserTest(TestCase):
         self.assertEqual(response.status_code, 200)
         self.client.logout()
 
+    @override_settings(CELERY_TASK_ALWAYS_EAGER=True)
     def test_liked(self):
         self.client.login(username = "user", password = "password")
         image = self._do_upload('astrobin/fixtures/test.jpg', "TEST IMAGE")
@@ -452,7 +453,7 @@ class UserTest(TestCase):
         prop = ToggleProperty.objects.create_toggleproperty('like', image, self.user_2)
         response = self.client.get(reverse("user_page_liked", args = (self.user_2.username,)))
         self.assertEqual(response.status_code, 200)
-        self.assertContains(response, image.thumbnail('gallery'))
+        self.assertContains(response, "data-id=\"%d\"" % image.pk)
 
     def test_plots(self):
         self.client.login(username = "user", password = "password")
