@@ -2,7 +2,7 @@ import os
 
 EMAIL_BACKEND = 'djcelery_email.backends.CeleryEmailBackend'
 CELERY_EMAIL_TASK_CONFIG = {
-    'queue': 'default',
+    'queue': 'email',
     'delivery_mode': 1,  # non persistent
     'rate_limit': '30/m',  # 50 chunks per minute
 }

@@ -26,4 +26,8 @@ CELERY_ROUTES = {
         'queue': 'thumbnails',
         'routing_key': 'thumbnails',
     },
+    'astrobin.tasks.retrieve_primary_thumbnails': {
+        'queue': 'thumbnails',
+        'routing_key': 'thumbnails',
+    },
 }
