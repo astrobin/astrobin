@@ -47,8 +47,8 @@ RUN qmake . && make -j4 && make install
 # Install pip dependencies
 COPY requirements.txt /code
 WORKDIR /code
-RUN pip install -U setuptools && \
-    pip install -U pip && \
+RUN python -m pip install --upgrade setuptools && \
+    python -m pip install --upgrade pip && \
     pip install --no-deps -r requirements.txt --src /src
 
 # Install global node dependencies
