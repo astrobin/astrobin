@@ -1,3 +1,6 @@
+# Python
+import re
+
 # Django
 from django.contrib.auth.models import User
 from django.core.urlresolvers import reverse
@@ -110,7 +113,8 @@ class GroupsTest(TestCase):
         self.group.members.add(self.user1)
         response = self.client.get(reverse('group_detail', kwargs = {'pk': self.group.pk}))
         self.assertEqual(response.status_code, 200)
-        self.assertContains(response, image.thumbnail('gallery'))
+        self.assertIsNotNone(re.search(r'data-id="%d"\s+data-alias="%s"' % (image.pk, "gallery"), response.content))
+
 
         # Test that WIP images are not rendered here
         image.is_wip = True; image.save()
