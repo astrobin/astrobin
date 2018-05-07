@@ -22,7 +22,7 @@ CELERY_QUEUES = (
     Queue('thumbnails', Exchange('thumbnails'), routing_key='thumbnails'),
 )
 CELERY_ROUTES = {
-    'astrobin.tasks.retrieve_thumbnails': {
+    'astrobin.tasks.retrieve_thumbnail': {
         'queue': 'thumbnails',
         'routing_key': 'thumbnails',
     },
