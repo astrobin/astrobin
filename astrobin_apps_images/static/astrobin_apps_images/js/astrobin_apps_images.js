@@ -19,7 +19,13 @@ $(document).ready(function() {
                         tries[key] = 0;
                     }
 
-                    if (tries[key] >= 10) {
+                    if (tries[key] >= 5) {
+                        $img
+                            .attr(
+                                'src',
+                                'https://placehold.it/' + $img.width() + 'x' + $img.height() +
+                                '/ff0000/fff&text=Timeout, please try again')
+                            .attr('data-loaded', 'true');
                         return;
                     }
 
@@ -30,7 +36,9 @@ $(document).ready(function() {
                         url: url,
                         success: function(data, status, request) {
                             tries[key] += 1;
-                            if (data.url === null) {
+                            if (data.url === undefined || data.url === null ||
+                                !(data.url.startsWith('http') || data.url.startsWith('/media')))
+                            {
                                 setTimeout(function() {
                                     load();
                                 }, random_timeout * Math.pow(2, tries[key]));

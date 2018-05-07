@@ -484,6 +484,9 @@ def image_upload_process(request):
     image.image_file.file.seek(0) # Because we opened it with PIL
     image.save()
 
+    from astrobin.tasks import retrieve_primary_thumbnails
+    retrieve_primary_thumbnails.delay(image.pk, {'revision_label': '0'})
+
     return HttpResponseRedirect(reverse('image_edit_watermark', kwargs={'id': image.id}))
 
 

@@ -1,14 +1,13 @@
-import uuid
+from __future__ import absolute_import
+
+# Python
 from datetime import date
 from datetime import datetime
-import os
-import urllib2
-import simplejson
 import hmac
-import operator
 import logging
-
-log = logging.getLogger('apps')
+import operator
+import os
+import uuid
 
 try:
     from hashlib import sha1
@@ -16,17 +15,21 @@ except ImportError:
     import sha
     sha1 = sha.sha
 
+# Django
+from django import forms
+from django.conf import settings
+from django.contrib.auth.models import User
+from django.contrib.contenttypes.models import ContentType
 from django.core.cache import cache
+from django.core.exceptions import ValidationError
+from django.core.validators import MaxLengthValidator
 from django.db import models, IntegrityError
 from django.db.models import Q
 from django.db.models.signals import post_save
-from django.contrib.auth.models import User
-from django.core.exceptions import ValidationError
-from django import forms
+from django.template.defaultfilters import slugify
+from django.utils import timezone
 from django.utils import translation
 from django.utils.translation import ugettext_lazy as _
-from django.conf import settings
-from django.utils import timezone
 
 try:
     # Django < 1.10
@@ -35,13 +38,15 @@ except ImportError:
     # Django >= 1.10
     from django.contrib.contenttypes.fields import GenericRelation
 
-from django.contrib.contenttypes.models import ContentType
-from django.core.validators import MaxLengthValidator
-from django.template.defaultfilters import slugify
+# Third party
 
-from nested_comments.models import NestedComment
-
+from celery.result import AsyncResult
 from model_utils.managers import InheritanceManager
+from mptt.models import MPTTModel, TreeForeignKey
+from reviews.models import Review
+from safedelete.models import SafeDeleteModel
+from tinymce import models as tinymce_models
+from toggleproperties.models import ToggleProperty
 
 try:
     # Django < 1.10
@@ -50,18 +55,19 @@ except:
     # Django >= 1.10
     from timezones.zones import PRETTY_TIMEZONE_CHOICES
 
-from fields import *
-from utils import user_is_paying
-
-from mptt.models import MPTTModel, TreeForeignKey
-from reviews.models import Review
-from toggleproperties.models import ToggleProperty
-from tinymce import models as tinymce_models
-from safedelete.models import SafeDeleteModel
-
-from astrobin_apps_notifications.utils import push_notification
+# AstroBin apps
 from astrobin_apps_images.managers import ImagesManager, PublicImagesManager, WipImagesManager
+from astrobin_apps_notifications.utils import push_notification
 from astrobin_apps_platesolving.models import Solution
+from nested_comments.models import NestedComment
+
+# This app
+from .fields import *
+from .utils import user_is_paying
+
+
+log = logging.getLogger('apps')
+
 
 class HasSolutionMixin(object):
      @property
@@ -1176,9 +1182,15 @@ class Image(HasSolutionMixin, SafeDeleteModel):
                 pass
 
         # If we got down here, we don't have an url yet, so we start an asynchronous task and return a placeholder.
-        from tasks import retrieve_thumbnail
-        retrieve_thumbnail.delay(self.pk, alias, options);
-        return None
+        from .tasks import retrieve_thumbnail
+        task_id_cache_key = '%s.retrieve' % cache_key
+        task_id = cache.get(task_id_cache_key)
+        if task_id is None:
+            result = retrieve_thumbnail.apply_async(args=(self.pk, alias, options), task_id=cache_key)
+            cache.set(task_id_cache_key, result.task_id)
+        else:
+            result = AsyncResult(task_id_cache_key)
+        return result.state
 
 
     def thumbnail_invalidate_real(self, field, revision_label, delete_remote = True):

@@ -19,7 +19,6 @@ from haystack.query import SearchQuerySet
 # AstroBin
 from astrobin_apps_images.models import ThumbnailGroup
 
-
 logger = get_task_logger(__name__)
 
 
@@ -48,7 +47,7 @@ def update_top100_ids():
         try:
             sqs = SearchQuerySet().models(Image).order_by('-likes')
             top100_ids = [int(x.pk) for x in sqs][:100]
-            cache.set('top100_ids', top100_ids, 60*60*24)
+            cache.set('top100_ids', top100_ids, 60 * 60 * 24)
         finally:
             release_lock()
         return
@@ -71,9 +70,9 @@ def global_stats():
     integration = int(integration / 3600.0)
 
     gs = GlobalStat(
-            users = users,
-            images = images,
-            integration = integration)
+        users=users,
+        images=images,
+        integration=integration)
     gs.save()
 
 
@@ -101,6 +100,8 @@ def contain_imagecache_size():
 This task will delete all inactive accounts with bounced email
 addresses.
 """
+
+
 @shared_task()
 def delete_inactive_bounced_accounts():
     bounces = Bounce.objects.filter(
@@ -113,8 +114,10 @@ def delete_inactive_bounced_accounts():
 
 
 """
-This task gets the raw thumbnail data and sets the cache and ThumbnailGroup object
+This task gets the raw thumbnail data and sets the cache and ThumbnailGroup object.
 """
+
+
 @shared_task()
 def retrieve_thumbnail(pk, alias, options):
     from astrobin.models import Image
@@ -129,12 +132,12 @@ def retrieve_thumbnail(pk, alias, options):
 
     if acquire_lock():
         try:
-            image = Image.all_objects.get(pk = pk)
+            image = Image.all_objects.get(pk=pk)
             thumb = image.thumbnail_raw(alias, options)
 
             if thumb:
                 url = settings.IMAGES_URL + thumb.name
-                field = image.get_thumbnail_field(revision_label);
+                field = image.get_thumbnail_field(revision_label)
                 if not field.name.startswith('images/'):
                     field.name = 'images/' + field.name
                 cache_key = image.thumbnail_cache_key(field, alias)
@@ -144,8 +147,19 @@ def retrieve_thumbnail(pk, alias, options):
                 setattr(thumbnails, alias, url)
                 thumbnails.save()
                 logger.debug("Image %d: saved generated thumbnail in the database." % image.pk)
+                cache.delete('%s.retrieve' % cache_key)
         finally:
             release_lock()
         return
 
     logger.debug('retrieve_thumbnail task is already running')
+
+
+"""
+This task retrieves all thumbnail data.
+"""
+@shared_task()
+def retrieve_primary_thumbnails(pk, options):
+    for alias in ('story', 'thumb', 'gallery', 'regular', 'hd', 'real'):
+        logger.debug("Starting retrieve thumbnail for %d:%s" % (pk, alias))
+        retrieve_thumbnail.delay(pk, alias, options)
