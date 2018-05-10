@@ -680,6 +680,25 @@ class Image(HasSolutionMixin, SafeDeleteModel):
         (600, _("Other")),
     )
 
+    DATA_SOURCE_CHOICES = (
+        (None, "---------"),
+        (_("Self acquired"), (
+            ("BACKYARD", _("Backyard")),
+            ("TRAVELLER", _("Traveller")),
+            ("OWN_REMOTE", _("Own remote observatory")),
+        )),
+        (_("Downloaded"), (
+            ("AMATEUR_HOSTING", _("Amateur hosting facility")),
+            ("PUBLIC_AMATEUR_DATA", _("Public amateur data")),
+            ("PRO_DATA", _("Professional, scientific grade data")),
+        )),
+        (_("Other"), (
+            ("MIX", _("Mix of multiple sources")),
+            ("OTHER", _("None of the above")),
+            ("UNKNOWN", _("Unknown")),
+        )),
+    )
+
     GEAR_CLASS_LOOKUP = {
         'imaging_telescopes': Telescope,
         'guiding_telescopes': Telescope,
@@ -703,6 +722,15 @@ class Image(HasSolutionMixin, SafeDeleteModel):
         default = 0,
     )
 
+    data_source = models.CharField(
+        verbose_name=_("Data source"),
+        help_text=_("Where does the data for this image come from?"),
+        max_length=32,
+        choices=DATA_SOURCE_CHOICES,
+        default="UNKNOWN",
+        null=False,
+        blank=False,
+    )
     objects_in_field = models.CharField(
         max_length = 512,
         verbose_name = _("Objects in field"),
@@ -1265,6 +1293,22 @@ class Image(HasSolutionMixin, SafeDeleteModel):
 
     def thumbnail_invalidate(self, delete_remote = True):
         return self.thumbnail_invalidate_real(self.image_file, '0', delete_remote)
+
+    def get_data_source(self):
+        LOOKUP = {
+            "BACKYARD": _("Backyard"),
+            "TRAVELLER": _("Traveller"),
+            "OWN_REMOTE": _("Own remote observatory"),
+            "AMATEUR_HOSTING": _("Amateur hosting facility"),
+            "PUBLIC_AMATEUR_DATA": _("Public amateur data"),
+            "PRO_DATA": _("Professional, scientific grade data"),
+            "MIX": _("Mix of multiple source"),
+            "OTHER": _("Other"),
+            "UNKNOWN": _("Unknown"),
+            None: None,
+        }
+
+        return LOOKUP[self.data_source]
 
     def is_platesolvable(self):
         return self.subject_type in (100, 300)

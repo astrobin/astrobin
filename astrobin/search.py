@@ -1,16 +1,12 @@
-from haystack.generic_views import SearchView
-from haystack.query import SearchQuerySet, SQ
-
-from django.shortcuts import render_to_response
-from django.conf import settings
-from django.utils.translation import ugettext as _
-
-from forms import AdvancedSearchForm
-from views import jsonDump, valueReader
-from models import Telescope, Camera
-
-import operator
+# Python
 import unicodedata
+
+# Third party apps
+from haystack.generic_views import SearchView
+
+# AstroBin
+from forms import AdvancedSearchForm
+
 
 class AstroBinSearchView(SearchView):
     form_class = AdvancedSearchForm

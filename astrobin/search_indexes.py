@@ -570,6 +570,8 @@ class ImageIndex(CelerySearchIndex, Indexable):
 
     subject_type = IntegerField(model_attr = 'subject_type')
 
+    data_source = CharField(model_attr = 'data_source')
+
     username = CharField(model_attr = 'user__username')
 
     def index_queryset(self, using = None):
@@ -669,3 +671,4 @@ class ImageIndex(CelerySearchIndex, Indexable):
     def prepare_is_commercial(self, obj):
         commercial_gear = CommercialGear.objects.filter(image = obj)
         return commercial_gear.count() > 0
+

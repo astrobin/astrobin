@@ -105,6 +105,10 @@
                     {% if locations %}
                         <p><strong>{% trans "Locations" %}</strong>: {{locations}}</p>
                     {% endif %}
+
+                    {% if image.data_source and image.data_source != "OTHER" %}
+                        <p><strong>{%  trans "Data source" %}</strong>: {{image.get_data_source}}</p>
+                    {% endif %}
                 </div> <!-- acquisition-inner -->
             </div> <!-- acquisition -->
         </div> <!-- image-detail-inner -->

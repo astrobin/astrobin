@@ -138,7 +138,7 @@ class ImageEditBasicForm(forms.ModelForm):
     class Meta:
         model = Image
         fields = (
-            'title', 'link', 'link_to_fits', 'subject_type',
+            'title', 'link', 'link_to_fits', 'data_source', 'subject_type',
             'solar_system_main_subject', 'locations', 'groups', 'description',
             'allow_comments')
 
@@ -398,6 +398,11 @@ class AdvancedSearchForm(SearchForm):
         min_value = 0,
     )
 
+    data_source = forms.ChoiceField (
+        required=False,
+        choices=Image.DATA_SOURCE_CHOICES,
+    )
+
     start_date = forms.DateField(
         required=False,
         widget=forms.TextInput(attrs={'class':'datepickerclass'}),
@@ -546,6 +551,13 @@ class AdvancedSearchForm(SearchForm):
         # This section deals with properties of the Image search index:
         if self.cleaned_data['solar_system_main_subject']:
             image_sqs = image_sqs.filter(solar_system_main_subject = self.cleaned_data['solar_system_main_subject'])
+            user_sqs = EmptySearchQuerySet()
+            gear_sqs = EmptySearchQuerySet()
+            sqs = EmptySearchQuerySet()
+
+        if self.cleaned_data['data_source']:
+            self.cleaned_data['search_type'] = '1'
+            image_sqs = image_sqs.filter(data_source = self.cleaned_data['data_source'])
             user_sqs = EmptySearchQuerySet()
             gear_sqs = EmptySearchQuerySet()
             sqs = EmptySearchQuerySet()
