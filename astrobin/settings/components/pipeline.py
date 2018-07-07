@@ -34,7 +34,6 @@ PIPELINE = {
                 'astrobin/js/respond.src.js',
                 'astrobin/js/dfp.gpt.logger.override.js',
                 'astrobin/wysibb/jquery.wysibb.js',
-                'astrobin/js/bootstrap.js',
                 'astrobin/js/astrobin.js',
             ),
             'output_filename': 'astrobin/js/astrobin.js',
