@@ -727,7 +727,6 @@ class Image(HasSolutionMixin, SafeDeleteModel):
         help_text=_("Where does the data for this image come from?"),
         max_length=32,
         choices=DATA_SOURCE_CHOICES,
-        default="UNKNOWN",
         null=False,
         blank=False,
     )
