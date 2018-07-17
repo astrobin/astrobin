@@ -44,6 +44,7 @@ services:
       - "443:443"
     volumes:
       - media:/media
+      - letsencrypt:/etc/letsencrypt
 
   elasticsearch:
     container_name: elasticsearch
@@ -250,3 +251,4 @@ services:
 volumes:
   postgres-data: {}
   media: {}
+  letsencrypt: {}
