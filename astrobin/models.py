@@ -7,6 +7,7 @@ import hmac
 import logging
 import operator
 import os
+import unicodedata
 import uuid
 
 try:
@@ -1140,7 +1141,7 @@ class Image(HasSolutionMixin, SafeDeleteModel):
             self._meta.object_name).lower()
         cache_key ='easy_thumb_alias_cache_%s.%s_%s' % (
             app_model,
-            field,
+            unicodedata.normalize('NFKD', unicode(field)).encode('ascii', 'ignore'),
             alias)
 
         from hashlib import sha256
