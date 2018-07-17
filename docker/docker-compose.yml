@@ -56,7 +56,7 @@ services:
     build:
       context: ../
       dockerfile: docker/astrobin.dockerfile
-    command: celery worker -A astrobin -Q default,email -c 2 -l debug -f celery_default.log
+    command: celery worker -A astrobin -Q default,email -c 8 -l debug -f celery_default.log
     depends_on:
       - memcached
       - postgres
@@ -90,7 +90,7 @@ services:
     build:
       context: ../
       dockerfile: docker/astrobin.dockerfile
-    command: celery worker -A astrobin -Q thumbnails -c 2 -l debug -f celery_thumbnails.log
+    command: celery worker -A astrobin -Q thumbnails -c 8 -l debug -f celery_thumbnails.log
     depends_on:
       - memcached
       - postgres
@@ -122,7 +122,7 @@ services:
     build:
       context: ../
       dockerfile: docker/astrobin.dockerfile
-    command: celery worker -A astrobin -Q haystack -c 2 -l debug -f celery_haystack.log
+    command: celery worker -A astrobin -Q haystack -c 8 -l debug -f celery_haystack.log
     depends_on:
       - memcached
       - postgres
@@ -187,6 +187,7 @@ services:
     build:
       context: ../
       dockerfile: docker/astrobin.dockerfile
+    command: gunicorn wsgi:application -w 4 -b :8083
     depends_on:
       - memcached
       - postgres
