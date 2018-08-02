@@ -57,6 +57,7 @@ services:
       context: ../
       dockerfile: docker/astrobin.dockerfile
     command: celery worker -A astrobin -Q default,email -c 8 -l debug -f celery_default.log
+    restart: always
     depends_on:
       - memcached
       - postgres
@@ -91,6 +92,7 @@ services:
       context: ../
       dockerfile: docker/astrobin.dockerfile
     command: celery worker -A astrobin -Q thumbnails -c 8 -l debug -f celery_thumbnails.log
+    restart: always
     depends_on:
       - memcached
       - postgres
@@ -123,6 +125,7 @@ services:
       context: ../
       dockerfile: docker/astrobin.dockerfile
     command: celery worker -A astrobin -Q haystack -c 8 -l debug -f celery_haystack.log
+    restart: always
     depends_on:
       - memcached
       - postgres
