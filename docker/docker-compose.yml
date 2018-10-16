@@ -53,6 +53,8 @@ services:
     container_name: elasticsearch
     image: elasticsearch:2.4.6-alpine
     restart: always
+    ports:
+      - "9200:9200"
 
   celery_default:
     container_name: celery_default
