@@ -84,7 +84,6 @@ services:
       - POSTGRES_DB=astrobin
       - POSTGRES_USER=astrobin
       - POSTGRES_PASSWORD=astrobin
-      - POSTGRES_HOST=postgres
     volumes:
       - ..:/code
       - media:/media
@@ -119,7 +118,6 @@ services:
       - POSTGRES_DB=astrobin
       - POSTGRES_USER=astrobin
       - POSTGRES_PASSWORD=astrobin
-      - POSTGRES_HOST=postgres
     volumes:
       - ..:/code
       - media:/media
@@ -152,7 +150,6 @@ services:
       - POSTGRES_DB=astrobin
       - POSTGRES_USER=astrobin
       - POSTGRES_PASSWORD=astrobin
-      - POSTGRES_HOST=postgres
     volumes:
       - ..:/code
       - media:/media
@@ -184,7 +181,6 @@ services:
       - POSTGRES_DB=astrobin
       - POSTGRES_USER=astrobin
       - POSTGRES_PASSWORD=astrobin
-      - POSTGRES_HOST=postgres
     volumes:
       - ..:/code
     restart: on-failure
@@ -218,7 +214,6 @@ services:
       - POSTGRES_DB=astrobin
       - POSTGRES_USER=astrobin
       - POSTGRES_PASSWORD=astrobin
-      - POSTGRES_HOST=postgres
       - CODECOV_TOKEN
     volumes:
       - ..:/code
