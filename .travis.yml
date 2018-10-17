@@ -5,6 +5,7 @@ services:
   - docker
 
 before_script:
+  - sudo /etc/init.d/postgresql stop
   - docker-compose -f docker/docker-compose.yml up -d
   - docker-compose -f docker/docker-compose.yml run --no-deps --rm astrobin python manage.py collectstatic --noinput 2>&1 >/dev/null
 
