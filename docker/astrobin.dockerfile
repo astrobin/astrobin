@@ -4,6 +4,7 @@ MAINTAINER Salvatore Iovene <salvatore@astrobin.com>
 
 # Install build prerequisites
 RUN apt-get update && apt-get install -y \
+    locales \
     apt-transport-https \
     curl \
     git \
@@ -23,6 +24,12 @@ RUN apt-get update && apt-get install -y \
     libfreetype6 libfreetype6-dev \
     zlib1g-dev \
     ruby ruby-dev
+
+# Set the locale
+RUN locale-gen en_US.UTF-8
+ENV LANG en_US.UTF-8
+ENV LANGUAGE en_US:en
+ENV LC_ALL en_US.UTF-8
 
 # Install yarn
 RUN curl -sS https://dl.yarnpkg.com/debian/pubkey.gpg | apt-key add - \
