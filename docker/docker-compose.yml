@@ -16,6 +16,8 @@ services:
       - POSTGRES_PASSWORD=astrobin
     volumes:
       - postgres-data:/var/lib/postgresql/data
+    ports:
+      - "5432:5432"
 
   rabbitmq:
     container_name: rabbitmq
@@ -25,6 +27,7 @@ services:
       - RABBITMQ_DEFAULT_USER=astrobin
       - RABBITMQ_DEFAULT_PASS=astrobin
     ports:
+      - "5672:5672"
       - "15672:15672"
 
   nginx:
@@ -50,6 +53,8 @@ services:
     container_name: elasticsearch
     image: elasticsearch:2.4.6-alpine
     restart: always
+    ports:
+      - "9200:9200"
 
   celery_default:
     container_name: celery_default
@@ -79,7 +84,6 @@ services:
       - POSTGRES_DB=astrobin
       - POSTGRES_USER=astrobin
       - POSTGRES_PASSWORD=astrobin
-      - POSTGRES_HOST=postgres
     volumes:
       - ..:/code
       - media:/media
@@ -114,7 +118,6 @@ services:
       - POSTGRES_DB=astrobin
       - POSTGRES_USER=astrobin
       - POSTGRES_PASSWORD=astrobin
-      - POSTGRES_HOST=postgres
     volumes:
       - ..:/code
       - media:/media
@@ -147,7 +150,6 @@ services:
       - POSTGRES_DB=astrobin
       - POSTGRES_USER=astrobin
       - POSTGRES_PASSWORD=astrobin
-      - POSTGRES_HOST=postgres
     volumes:
       - ..:/code
       - media:/media
@@ -179,7 +181,6 @@ services:
       - POSTGRES_DB=astrobin
       - POSTGRES_USER=astrobin
       - POSTGRES_PASSWORD=astrobin
-      - POSTGRES_HOST=postgres
     volumes:
       - ..:/code
     restart: on-failure
@@ -213,7 +214,6 @@ services:
       - POSTGRES_DB=astrobin
       - POSTGRES_USER=astrobin
       - POSTGRES_PASSWORD=astrobin
-      - POSTGRES_HOST=postgres
       - CODECOV_TOKEN
     volumes:
       - ..:/code
