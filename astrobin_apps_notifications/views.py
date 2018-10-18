@@ -1,6 +1,7 @@
 # Django
-from django.contrib.auth.models import User
-from django.http import HttpResponse
+from braces.views import JSONResponseMixin
+from django.http import HttpResponse, HttpResponseForbidden
+from django.shortcuts import redirect
 from django.views.generic.base import View
 from django.views.generic.list import ListView
 
@@ -11,7 +12,7 @@ from persistent_messages.models import Message
 from astrobin.models import UserProfile
 
 # This app
-from astrobin_apps_notifications.utils import push_notification
+from astrobin_apps_notifications.utils import clear_notifications_template_cache, push_notification
 
 
 class TestNotificationView(View):
@@ -32,3 +33,22 @@ class NotificationListView(ListView):
         return Message.objects\
             .filter(user = self.request.user)\
             .order_by('read', '-created')
+
+
+class NotificationMarkAllAsReadView(View):
+    def post(self, request, *args, **kwargs):
+        Message.objects.filter(user = request.user).update(read = True)
+        clear_notifications_template_cache(request.user.username)
+        return redirect(request.POST.get('next', '/'))
+
+
+class NotificationClearTemplateCacheAjaxView(JSONResponseMixin, View):
+    model = Message
+    http_method_names = ['post']
+
+    def post(self, request, *args, **kwargs):
+        if request.is_ajax():
+            print self.request.user.username
+            clear_notifications_template_cache(request.user.username)
+            return self.render_json_response({'result': 'ok'})
+        return HttpResponseForbidden()
