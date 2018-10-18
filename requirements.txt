@@ -43,6 +43,8 @@ django-contrib-comments==1.8.0
 -e git+https://github.com/siovene/snakecheese.git@72c5c7be4a5ae19c9054f11c8cedb68dd661fd65#egg=django_contrib_requestprovider&subdirectory=gadjolib
 django-crispy-forms==1.7.0
 -e git+https://github.com/siovene/django-dfp.git@900d1e136a254b0c3b8517efdb6377719c531d67#egg=django_dfp
+django-debug-toolbar==1.9.1
+django-debug-toolbar-template-timings==0.9
 django-easysettings==1.1
 django-el-pagination==3.1.0
 -e git+https://github.com/siovene/django-ember.git@b925ecd22c8008ccb339a4977d0081972c58f39f#egg=django_ember

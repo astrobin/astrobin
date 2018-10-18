@@ -50,6 +50,8 @@ INSTALLED_APPS = [
     'django_bouncy',
     'safedelete',
     'change_email',
+    'debug_toolbar',
+    'template_timings_panel',
 
     # AstroBin apps
     'astrobin.apps.AstroBinAppConfig',
