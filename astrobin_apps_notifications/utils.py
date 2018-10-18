@@ -10,7 +10,6 @@ from persistent_messages.models import Message
 
 def clear_notifications_template_cache(username):
     key = make_template_fragment_key('notifications_table', [username])
-    print key
     cache.delete(key)
 
 
