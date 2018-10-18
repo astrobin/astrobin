@@ -75,7 +75,7 @@ def common_variables(request):
         'True': True,
         'False': False,
 
-        'LANGUAGE_CODE': request.LANGUAGE_CODE,
+        'LANGUAGE_CODE': request.LANGUAGE_CODE if hasattr(request, "LANGUAGE_CODE") else "en",
 
         #'random_gear_item': Gear.objects.filter(moderator_fixed = None).order_by('?')[:1].get(),
         'is_producer': request.user.groups.filter(name='Producers'),
