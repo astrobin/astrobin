@@ -2387,13 +2387,12 @@ def gear_popover_ajax(request, id):
 @require_GET
 @never_cache
 def user_popover_ajax(request, username):
-    user = get_object_or_404(UserProfile, user__username = username)
+    profile = get_object_or_404(UserProfile, user__username = username)
     template = 'popover/user.html'
 
     from django.template.defaultfilters import timesince
 
-    member_since = None
-    date_time = user.date_joined.replace(tzinfo = None)
+    date_time = profile.user.date_joined.replace(tzinfo = None)
     span = timesince(date_time)
     span = span.split(",")[0] # just the most significant digit
     if span == "0 " + _("minutes"):
@@ -2403,8 +2402,8 @@ def user_popover_ajax(request, username):
 
     html = render_to_string(template,
         {
-            'user': user,
-            'images': Image.objects.filter(user = user).count(),
+            'user': profile.user,
+            'images': Image.objects.filter(user = profile.user).count(),
             'member_since': member_since,
             'is_authenticated': request.user.is_authenticated(),
             'request': request,
