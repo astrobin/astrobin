@@ -849,6 +849,10 @@ body.full {
         background: #303030 url('../images/darker-panel-tile.png');
         border-top: 1px solid #303030;
         @include no-box-shadow;
+
+        form {
+          margin-bottom: 0;
+        }
     }
 
     .form-inline {
@@ -1426,9 +1430,14 @@ input:focus, textarea:focus {
     margin-top: $spacer-medium;
     color: #866158;
 }
+
 .form-actions {
     background: #333 url('../images/dark-panel-tile.png');
     border-color: #393939;
+
+    form {
+      margin-bottom: 0;
+    }
 
     .btn {
         margin-right: $spacer-small;
