@@ -268,6 +268,7 @@ ignore this section for small or development installations):
 
 ```sql
 create index on astrobin_image using btree (uploaded, id);
+create index on astrobin_image using btree (moderator_decision, deleted);
 create index on actstream_action using btree (timestamp);
 create index on toggleproperties_toggleproperty using btree(property_type, content_type_id, object_id);
 create index on toggleproperties_toggleproperty using btree(property_type, content_type_id, created_on);
