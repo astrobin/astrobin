@@ -3,7 +3,7 @@
 {% load common_tags %}
 
 
-{% cache 3600 astrobin_username user.username %}
+{% cache 3600 astrobin_username user.username link %}
     {% if user %}
         {% if link %}
         <a
