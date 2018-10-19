@@ -11,13 +11,13 @@ MIDDLEWARE_CLASSES = [
     'pybb.middleware.PybbMiddleware',
 ]
 
-if DEBUG:
-    MIDDLEWARE_CLASSES += [
-        'debug_toolbar.middleware.DebugToolbarMiddleware',
-    ]
-else:
+if not DEBUG:
     MIDDLEWARE_CLASSES += [
         'django.middleware.locale.LocaleMiddleware',
         'django.middleware.gzip.GZipMiddleware',
         'pipeline.middleware.MinifyHTMLMiddleware',
     ]
+
+MIDDLEWARE_CLASSES += [
+    'debug_toolbar.middleware.DebugToolbarMiddleware',
+]
