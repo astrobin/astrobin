@@ -87,10 +87,11 @@ installed.
 ## Step 4: Bring up the stack
 
 The `docker-compose.yml` file contains all the instructions needed to bring up the
-stack, including how to build the `astrobin`, `nginx`, `celery`, and `beat` containers.
+stack, including how to build the `astrobin`, `celery`, and `beat` containers.
 
 ```bash
-docker-compose -f docker/docker-compose.yml up -d
+export NGINX_MODE=local
+docker-compose -f docker/docker-compose.yml -f docker/docker-compose.build.yml up -d
 ```
 
 ## Step 5: First-time setup
@@ -106,19 +107,19 @@ The `init.sh` script does some initial django initialization, like creating grou
 and the "site" configuration.
 
 ```bash
-docker-compose -f docker/docker-compose.yml run --no-deps --rm astrobin ./scripts/init.sh
+docker-compose -f docker/docker-compose.yml -f docker/docker-compose.build.yml run --no-deps --rm astrobin ./scripts/init.sh
 ```
 
 Then, to make all the static files (CSS, javascript, images, etc.) available to the app, run:
 
 ```bash
-docker-compose -f docker/docker-compose.yml run --no-deps --rm astrobin python manage.py collectstatic --noinput
+docker-compose -f docker/docker-compose.yml -f docker/docker-compose.build.yml run --no-deps --rm astrobin python manage.py collectstatic --noinput
 ```
 
 ## Step 6: Ensure services are running
 
 ```bash
-docker-compose -f docker/docker-compose.yml ps
+docker-compose -f docker/docker-compose.yml -f docker/docker-compose.build.yml ps
 ```
 
 This shows you the containers running.  Check the `State` column and make sure
@@ -152,16 +153,16 @@ database.  So a "lightweight" reset would be to do the following:
 
 ```bash
 # bring down the stack
-docker-compose -f docker/docker-compose.yml down
+docker-compose -f docker/docker-compose.yml -f docker/docker-compose.build.yml down
 
 # delete the postgresql volume
 docker volume rm docker_postgres-data
 
 # bring the stack back up
-docker-compose -f docker/docker-compose.yml up -d
+docker-compose -f docker/docker-compose.yml -f docker/docker-compose.build.yml up -d
 
 # re-initialize django
-docker-compose -f docker/docker-compose.yml run --no-deps --rm astrobin ./scripts/init.sh
+docker-compose -f docker/docker-compose.yml -f docker/docker-compose.build.yml run --no-deps --rm astrobin ./scripts/init.sh
 ```
 
 But if you *really* want to start from scratch, for example to do a final thorough build and test
@@ -285,6 +286,25 @@ the number of CPUs in your server.
 
 ```bash
 export ENV=prod; docker build -t astrobin/nginx-${ENV} --build-arg ENV=${ENV} -f docker/nginx.dockerfile . && docker push astrobin/nginx-${ENV}
+```
+
+# Docker Swarm deployment
+
+To install on one or more servers and make a swarm out of it all, do the following on the swarm manager:
+
+```bash
+export NGINX_MODE=dev # or prod
+docker swarm init
+docker node update --label-add default=true <manager-node-id> # docker node ls
+docker node update --label-add app=true <worker-node-id>
+docker swarm join-token worker # Take note of the output command
+docker stack deploy -c docker/docker-compose.yml -c docker/docker-compose.deploy.yml astrobin
+```
+
+And on a worker:
+
+```bash
+docker swarm join --token <token> <ip>:<port>
 ```
 
 # Contributing
