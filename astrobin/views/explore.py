@@ -85,4 +85,4 @@ class TopPicksView(ListView):
     def get_queryset(self):
         return self.model.objects.exclude(iotdvote = None).filter(
             Q(iotd = None) |
-            Q(iotd__date__gt = datetime.now().date()))
+            Q(iotd__date__gt = datetime.now().date())).order_by('-published')
