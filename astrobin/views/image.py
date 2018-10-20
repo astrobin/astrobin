@@ -860,7 +860,7 @@ class ImageDemoteView(LoginRequiredMixin, UpdateView):
         except Image.DoesNotExist:
             raise Http404
 
-        if request.user.is_authenticated() and request.user != image.user:
+        if request.user.is_authenticated() and request.user != image.user and not request.user.is_superuser:
             raise PermissionDenied
 
         return super(ImageDemoteView, self).dispatch(request, *args, **kwargs)
@@ -893,7 +893,7 @@ class ImagePromoteView(LoginRequiredMixin, UpdateView):
         except Image.DoesNotExist:
             raise Http404
 
-        if request.user.is_authenticated() and request.user != image.user:
+        if request.user.is_authenticated() and request.user != image.user and not request.user.is_superuser:
             raise PermissionDenied
 
         return super(ImagePromoteView, self).dispatch(request, *args, **kwargs)
