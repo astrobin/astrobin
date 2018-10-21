@@ -61,8 +61,7 @@ You can setup a development environment using Docker.
 ```bash
 git clone https://github.com/astrobin/astrobin.git
 cd astrobin
-git submodule init
-git submodule update
+git submodule update --init --recursive
 ```
 
 ## Step 2: Configure the system
