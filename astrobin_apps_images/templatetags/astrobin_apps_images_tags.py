@@ -274,7 +274,7 @@ def astrobin_image(context, image, alias, **kwargs):
         'url'           : url,
         'show_tooltip'  : show_tooltip,
         'request'       : request,
-        'caption_cache_key': "%d_%s_%s" % (image.id, revision, alias),
+        'caption_cache_key': "%d_%s_%s_%s" % (image.id, revision, alias, request.LANGUAGE_CODE),
         'badges'        : badges,
         'animated'      : animated,
         'get_thumb_url' : get_thumb_url,
