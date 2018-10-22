@@ -2030,6 +2030,10 @@ BODY:first-of-type ul.as-list, x:-moz-any-link, x:default { /* Target FF 3.5+ */
             margin-top: $spacer-xxlarge;
         }
     }
+
+    .card-label {
+      margin-right: $spacer-small;
+    }
 }
 
 .avatar-block {
