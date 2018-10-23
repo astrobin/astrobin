@@ -21,6 +21,7 @@ from django import forms
 from django.conf import settings
 from django.contrib.auth.models import User
 from django.contrib.contenttypes.models import ContentType
+from django.contrib.staticfiles.templatetags.staticfiles import static
 from django.core.cache import cache
 from django.core.exceptions import ValidationError
 from django.core.validators import MaxLengthValidator
@@ -31,6 +32,7 @@ from django.template.defaultfilters import slugify
 from django.utils import timezone
 from django.utils import translation
 from django.utils.translation import ugettext_lazy as _
+
 
 try:
     # Django < 1.10
@@ -1193,7 +1195,6 @@ class Image(HasSolutionMixin, SafeDeleteModel):
 
         # Not found in cache, attempt to fetch from database
         log.debug("Image %d: thumbnail not found in cache %s" % (self.id, cache_key))
-        thumbnails = None
         try:
             thumbnails = self.thumbnails.get(revision = revision_label)
             url = getattr(thumbnails, alias)
@@ -1217,8 +1218,9 @@ class Image(HasSolutionMixin, SafeDeleteModel):
             result = retrieve_thumbnail.apply_async(args=(self.pk, alias, options), task_id=cache_key)
             cache.set(task_id_cache_key, result.task_id)
         else:
-            result = AsyncResult(task_id_cache_key)
-        return result.state
+            AsyncResult(task_id_cache_key)
+
+        return static('astrobin/images/placeholder-gallery.jpg')
 
 
     def thumbnail_invalidate_real(self, field, revision_label, delete_remote = True):
