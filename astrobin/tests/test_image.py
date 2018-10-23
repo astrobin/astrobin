@@ -367,7 +367,7 @@ class ImageTest(TestCase):
         self.assertIsNotNone(re.search(r'data-id="%s"\s+data-alias="%s"' % (image.pk, "regular"), response.content))
 
         # Image resolution
-        self.assertContains(response, "<strong>Resolution</strong>: 340x280")
+        self.assertContains(response, "<strong>Resolution:</strong> 340x280")
 
         # Revision redirect
         self._do_upload_revision(image, 'astrobin/fixtures/test_smaller.jpg')
@@ -387,7 +387,7 @@ class ImageTest(TestCase):
         self.assertIsNotNone(re.search(r'data-id="%d"\s+data-alias="%s"' % (image.pk, "thumb"), response.content))
 
         # Revision resolution differs from original
-        self.assertContains(response, "<strong>Resolution</strong>: 200x165")
+        self.assertContains(response, "<strong>Resolution:</strong> 200x165")
 
         # Revision description displayed
         desc = "Test revision description"
