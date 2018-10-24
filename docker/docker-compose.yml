@@ -55,6 +55,8 @@ services:
     restart: always
     ports:
       - "9200:9200"
+    volumes:
+      - elasticsearch-data:/usr/share/elasticsearch/data
 
   celery_default:
     container_name: celery_default
@@ -254,5 +256,6 @@ services:
 
 volumes:
   postgres-data: {}
+  elasticsearch-data: {}
   media: {}
   letsencrypt: {}
