@@ -1741,7 +1741,7 @@ def user_profile_flickr_import(request):
         'readonly': settings.READONLY_MODE
     }
 
-    if is_free(request.user) or settings.READONLY_MODE:
+    if not request.user.is_superuser and is_free(request.user) or settings.READONLY_MODE:
         return render_to_response(
                 "user/profile/flickr_import.html",
                 response_dict,
