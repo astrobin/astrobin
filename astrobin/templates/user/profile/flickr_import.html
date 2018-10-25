@@ -22,7 +22,7 @@
             {% if READONLY_MODE %}
                 {% include 'readonly_mode.html' %}
             {% else %}
-                {% if request.user|is_premium %}
+                {% if request.user|is_premium or request.user.is_superuser %}
                     {% if readonly %}
                         <div class="alert alert-error">
                             {% blocktrans %}AstroBin is currently in read-only mode, because of server maintenance. Please try again soon!{% endblocktrans %}
