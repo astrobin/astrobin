@@ -683,6 +683,18 @@ class Image(HasSolutionMixin, SafeDeleteModel):
         (600, _("Other")),
     )
 
+    DATA_SOURCE_TYPES = (
+        'BACKYARD',
+        'TRAVELLER',
+        'OWN_REMOTE',
+        'AMATEUR_HOSTING',
+        'PUBLIC_AMATEUR_DATA',
+        'PRO_DATA',
+        'MIX',
+        'OTHER',
+        'UNKNOWN'
+    )
+
     DATA_SOURCE_CHOICES = (
         (None, "---------"),
         (_("Self acquired"), (
