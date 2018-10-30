@@ -494,7 +494,7 @@ def image_upload_process(request):
 @require_GET
 def image_edit_watermark(request, id):
     image = get_object_or_404(Image.objects_including_wip, pk=id)
-    if request.user != image.user:
+    if request.user != image.user && not request.user.is_superuser:
         return HttpResponseForbidden()
 
     profile = image.user.userprofile
@@ -725,7 +725,7 @@ def image_edit_save_watermark(request):
         raise Http404
 
     image = get_object_or_404(Image.objects_including_wip, pk=image_id)
-    if request.user != image.user:
+    if request.user != image.user and not request.user.is_superuser:
         return HttpResponseForbidden()
 
     form = ImageEditWatermarkForm(data = request.POST, instance = image)
