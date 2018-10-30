@@ -289,7 +289,7 @@ class UserIndex(CelerySearchIndex, Indexable):
 
     def prepare_likes_1y(self, obj):
         likes = 0
-        for i in Image.objects.filter(user = obj, uploaded__gte = _6m_ago()):
+        for i in Image.objects.filter(user = obj, uploaded__gte = _1y_ago()):
             likes += ToggleProperty.objects.toggleproperties_for_object("like", i).count()
         return likes
 
