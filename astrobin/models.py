@@ -1044,12 +1044,9 @@ class Image(HasSolutionMixin, SafeDeleteModel):
 
     def thumbnail_raw(self, alias, thumbnail_settings = {}):
         import urllib2
-
-        from unidecode import unidecode
         from django.core.files.base import File, ContentFile
-        from easy_thumbnails.exceptions import InvalidImageFormatError
         from easy_thumbnails.files import get_thumbnailer
-        from astrobin.s3utils import CachedS3BotoStorage, OverwritingFileSystemStorage
+        from astrobin.s3utils import OverwritingFileSystemStorage
 
         revision_label = thumbnail_settings.get('revision_label', 'final')
 
@@ -1121,7 +1118,7 @@ class Image(HasSolutionMixin, SafeDeleteModel):
                         return None
 
                 try:
-                    local_file = field.storage.local_storage._save(name_hash, remote_file)
+                    field.storage.local_storage._save(name_hash, remote_file)
                     thumbnailer = get_thumbnailer(
                         OverwritingFileSystemStorage(location = settings.IMAGE_CACHE_DIRECTORY),
                         name_hash)
