@@ -112,6 +112,10 @@ class ImageThumbView(JSONResponseMixin, DetailView):
         if r is None:
             r = 'final'
 
+        force = request.GET.get('force')
+        if force is not None:
+            image.thumbnail_invalidate(False)
+
         url = image.thumbnail(alias, {
             'revision_label': r,
             'animated': 'animated' in self.request.GET,
