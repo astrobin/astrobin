@@ -463,6 +463,9 @@ def image_upload_process(request):
     image_file = request.FILES["image_file"]
     ext = os.path.splitext(image_file.name)[1].lower()
 
+    if ext not in settings.ALLOWED_IMAGE_EXTENSIONS:
+        return upload_error()
+
     try:
         from PIL import Image as PILImage
         trial_image = PILImage.open(image_file)
@@ -1940,8 +1943,8 @@ def image_revision_upload_process(request):
     image_file = request.FILES["image_file"]
     ext = os.path.splitext(image_file.name)[1].lower()
 
-    if ext not in ('.jpg', '.jpeg', '.png', '.gif'):
-        return upload_error(image)
+    if ext not in settings.ALLOWED_IMAGE_EXTENSIONS:
+        return upload_error()
 
     try:
         from PIL import Image as PILImage
