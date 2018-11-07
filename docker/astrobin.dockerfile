@@ -5,6 +5,8 @@ MAINTAINER Salvatore Iovene <salvatore@astrobin.com>
 # Install build prerequisites
 RUN apt-get update && apt-get install -y \
     locales \
+    rsyslog \
+    logrotate \
     apt-transport-https \
     curl \
     git \
@@ -64,6 +66,10 @@ RUN yarn global add \
 
 # Install compass
 RUN gem install compass
+
+# Install logrotate file
+COPY docker/astrobin.logrotate /etc/logrotate.d/astrobin
+RUN chown root:root /etc/logrotate.d/astrobin && chmod 644 /etc/logrotate.d/astrobin
 
 CMD python manage.py migrate --noinput && gunicorn wsgi:application -w 2 -b :8083
 EXPOSE 8083
