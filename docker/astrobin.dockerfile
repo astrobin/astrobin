@@ -68,7 +68,7 @@ RUN yarn global add \
 RUN gem install compass
 
 # Install logrotate file
-COPY docker/astrobin.logrotate /etc/logrotate.d/astrobin
+COPY docker/astrobin.logrotate.conf /etc/logrotate.d/astrobin
 RUN chown root:root /etc/logrotate.d/astrobin && chmod 644 /etc/logrotate.d/astrobin
 
 CMD python manage.py migrate --noinput && gunicorn wsgi:application -w 2 -b :8083
