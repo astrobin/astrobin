@@ -1,3 +1,25 @@
+2018-11-10 Salvatore Iovene <salvatore@iovene.com>
+ * v1.30.0
+ * (admin) Allow superuser to change any image's watermark
+ * (admin) Allow superuser to do Flickr import without Premium account, for debugging purposes
+ * (admin) Allow superuser to promote/demote any image
+ * (admin) Fix broken IOTD models on admin interface
+ * (ci) Add unit tests to Top Picks page
+ * (docker) Add support for swarm mode
+ * (docker) Persist search data in a volume
+ * (forums) Fix broken word breaks on Firefox/IE
+ * (images) Allow filtering by data source on Wall and Top Picks pages
+ * (images) Fix caching of image captions not being segregated by language
+ * (images) Fix issue when redirecting to invalid URL
+ * (images) Fix spacing after technical card labels
+ * (images) Restrict extensions to jpg/jpeg/png/gif in upload form
+ * (index) Fix index 1y index calculation
+ * (infra) Enable log rotation
+ * (iotd) Sort top picks by published date
+ * (quality) Perform small clean up of main models file
+ * (thumbnails) Add "force" option to thumbnail retrieval, for debugging purposes
+ * (users) Fix broken user info popup
+
 2018-10-20 Salvatore Iovene <salvatore@iovene.com>
  * v1.29.0
  * (ci) Stop Travis's native postgres so port mapping works
