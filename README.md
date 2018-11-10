@@ -298,7 +298,7 @@ docker swarm init
 docker node update --label-add default=true <manager-node-id> # docker node ls
 docker node update --label-add app=true <worker-node-id>
 docker swarm join-token worker # Take note of the output command
-docker stack deploy -c docker/docker-compose.yml -c docker/docker-compose.deploy.yml astrobin
+docker stack deploy -c docker/docker-compose.yml -c docker/docker-compose.deploy.yml docker
 ```
 
 And on a worker:
