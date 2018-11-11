@@ -25,7 +25,8 @@ RUN apt-get update && apt-get install -y --no-install-recommends \
     libjpeg62 libjpeg62-dev \
     libfreetype6 libfreetype6-dev \
     zlib1g-dev \
-    ruby ruby-dev
+    ruby ruby-dev \
+    && apt-get clean && rm -rf /var/lib/apt/lists/*
 
 # Set the locale
 RUN locale-gen en_US.UTF-8
@@ -39,7 +40,7 @@ RUN curl -sS https://dl.yarnpkg.com/debian/pubkey.gpg | apt-key add - \
     && apt-get update \
     && apt-get install -y \
         yarn \
-    && apt-get clean && rm -rf /etc/lib/apt/lists/*
+    && apt-get clean && rm -rf /var/lib/apt/lists/*
 
 
 # System hacks
