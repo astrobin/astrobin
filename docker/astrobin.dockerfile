@@ -3,7 +3,7 @@ FROM ubuntu:16.04
 MAINTAINER Salvatore Iovene <salvatore@astrobin.com>
 
 # Install build prerequisites
-RUN apt-get update && apt-get install -y \
+RUN apt-get update && apt-get install -y --no-install-recommends \
     locales \
     rsyslog \
     logrotate \
