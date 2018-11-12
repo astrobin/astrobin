@@ -1,5 +1,6 @@
-{% load i18n %}
+{% load cache i18n %}
 
+{% cache 600 notifications_table username %}
 <table class="table table-condensed table-striped notifications-modal">
     <tbody>
         {% for n in unseen %}
@@ -27,3 +28,4 @@
         {% endif %}
     </tbody>
 </table>
+{% endcache %}

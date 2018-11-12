@@ -21,6 +21,7 @@ from django import forms
 from django.conf import settings
 from django.contrib.auth.models import User
 from django.contrib.contenttypes.models import ContentType
+from django.contrib.staticfiles.templatetags.staticfiles import static
 from django.core.cache import cache
 from django.core.exceptions import ValidationError
 from django.core.validators import MaxLengthValidator
@@ -31,6 +32,7 @@ from django.template.defaultfilters import slugify
 from django.utils import timezone
 from django.utils import translation
 from django.utils.translation import ugettext_lazy as _
+
 
 try:
     # Django < 1.10
@@ -681,6 +683,18 @@ class Image(HasSolutionMixin, SafeDeleteModel):
         (600, _("Other")),
     )
 
+    DATA_SOURCE_TYPES = (
+        'BACKYARD',
+        'TRAVELLER',
+        'OWN_REMOTE',
+        'AMATEUR_HOSTING',
+        'PUBLIC_AMATEUR_DATA',
+        'PRO_DATA',
+        'MIX',
+        'OTHER',
+        'UNKNOWN'
+    )
+
     DATA_SOURCE_CHOICES = (
         (None, "---------"),
         (_("Self acquired"), (
@@ -1030,12 +1044,9 @@ class Image(HasSolutionMixin, SafeDeleteModel):
 
     def thumbnail_raw(self, alias, thumbnail_settings = {}):
         import urllib2
-
-        from unidecode import unidecode
         from django.core.files.base import File, ContentFile
-        from easy_thumbnails.exceptions import InvalidImageFormatError
         from easy_thumbnails.files import get_thumbnailer
-        from astrobin.s3utils import CachedS3BotoStorage, OverwritingFileSystemStorage
+        from astrobin.s3utils import OverwritingFileSystemStorage
 
         revision_label = thumbnail_settings.get('revision_label', 'final')
 
@@ -1107,7 +1118,7 @@ class Image(HasSolutionMixin, SafeDeleteModel):
                         return None
 
                 try:
-                    local_file = field.storage.local_storage._save(name_hash, remote_file)
+                    field.storage.local_storage._save(name_hash, remote_file)
                     thumbnailer = get_thumbnailer(
                         OverwritingFileSystemStorage(location = settings.IMAGE_CACHE_DIRECTORY),
                         name_hash)
@@ -1193,7 +1204,6 @@ class Image(HasSolutionMixin, SafeDeleteModel):
 
         # Not found in cache, attempt to fetch from database
         log.debug("Image %d: thumbnail not found in cache %s" % (self.id, cache_key))
-        thumbnails = None
         try:
             thumbnails = self.thumbnails.get(revision = revision_label)
             url = getattr(thumbnails, alias)
@@ -1217,8 +1227,9 @@ class Image(HasSolutionMixin, SafeDeleteModel):
             result = retrieve_thumbnail.apply_async(args=(self.pk, alias, options), task_id=cache_key)
             cache.set(task_id_cache_key, result.task_id)
         else:
-            result = AsyncResult(task_id_cache_key)
-        return result.state
+            AsyncResult(task_id_cache_key)
+
+        return static('astrobin/images/placeholder-gallery.jpg')
 
 
     def thumbnail_invalidate_real(self, field, revision_label, delete_remote = True):

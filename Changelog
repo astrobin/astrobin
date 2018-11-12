@@ -1,3 +1,64 @@
+2018-11-10 Salvatore Iovene <salvatore@iovene.com>
+ * v1.30.0
+ * (admin) Allow superuser to change any image's watermark
+ * (admin) Allow superuser to do Flickr import without Premium account, for debugging purposes
+ * (admin) Allow superuser to promote/demote any image
+ * (admin) Fix broken IOTD models on admin interface
+ * (ci) Add unit tests to Top Picks page
+ * (docker) Add support for swarm mode
+ * (docker) Persist search data in a volume
+ * (forums) Fix broken word breaks on Firefox/IE
+ * (images) Allow filtering by data source on Wall and Top Picks pages
+ * (images) Fix caching of image captions not being segregated by language
+ * (images) Fix issue when redirecting to invalid URL
+ * (images) Fix spacing after technical card labels
+ * (images) Restrict extensions to jpg/jpeg/png/gif in upload form
+ * (index) Fix index 1y index calculation
+ * (infra) Enable log rotation
+ * (iotd) Sort top picks by published date
+ * (quality) Perform small clean up of main models file
+ * (thumbnails) Add "force" option to thumbnail retrieval, for debugging purposes
+ * (users) Fix broken user info popup
+
+2018-10-20 Salvatore Iovene <salvatore@iovene.com>
+ * v1.29.0
+ * (ci) Stop Travis's native postgres so port mapping works
+ * (dependencies) Update cryptography from 2.1.4 to 2.3.1
+ * (dependencies) Update markdown2 from 2.3.4 to 2.3.6
+ * (dependencies) Update pyyaml from 3.12 to 3.13
+ * (dependencies) Update requests from 2.17.3 to 2.19.1
+ * (deps) Update django-avatar to 4.1.0
+ * (docker) Add some production-friendly defaults that also work for local dev
+ * (docker) Always restart celery workers
+ * (docker) Do not use beat pid file
+ * (docker) Expose elasticsearch port
+ * (docker) Expose postgres port
+ * (docker) Expose rabbitmq port
+ * (docker) Make postgres host configurable
+ * (docker) Publish port 443 for nginx container
+ * (docker) Use shared volume for letsencrypt
+ * (docs) Add info about new db index on astrobin_image
+ * (forum) Improve topic list
+ * (general) Use hasattr to see if request haas LANGUAGE_CODE
+ * (homepage) Reduce stream actions to 20 per page, for performance
+ * (images) Add blank space after 'Contains'
+ * (images) Transliterate image field when making cache key
+ * (infra) Add django-debug-toolbar with template debug panel
+ * (infra) Fix locale issues by setting locale to utf-8
+ * (infra) Make celery broker URL configurable
+ * (infra) Make Elasticsearch URL configurable
+ * (infra) Remove invalid reference to bootstrap.js from full.html
+ * (infra) Rename JS bundle to avoid conflict
+ * (infra) Simplify contain_imagecache_size task/script
+ * (iotd) Reduce submission window to 2 days
+ * (notifications) Fix url to logo
+ * (performance) Cache astrobin usernames
+ * (performance) Cache notifications table
+ * (registration) Use https in activation email
+ * (search) Fix pagination when provided page is "last"
+ * (search) USe batch-size and concurrency in update_index script
+ * (users) Fix broken user popover
+
 2018-07-07 Salvatore Iovene <salvatore@iovene.com>
  * v1.28.2
  * (infra) Use bootstrap from CDN and fix modal problems
