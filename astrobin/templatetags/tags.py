@@ -112,36 +112,27 @@ register.inclusion_tag('inclusion_tags/image_list.html', takes_context=True)(ima
 def search_image_list(context, paginate = True, **kwargs):
     object_list = context['object_list']
 
-    user_list  = [x for x in object_list if x != None and x.verbose_name == 'User']
+    users_list  = [x for x in object_list if x != None and x.verbose_name == 'User']
     gear_list  = [x for x in object_list if x != None and x.verbose_name == 'Gear']
-    image_list = [x for x in object_list if x != None and x.verbose_name == 'Image']
+    images_list = [x for x in object_list if x != None and x.verbose_name == 'Image']
 
     multiple = 0
-    if len(user_list) > 0:
+    if len(users_list) > 0:
         multiple += 1
     if len(gear_list) > 0:
         multiple += 1
-    if len(image_list) > 0:
+    if len(images_list) > 0:
         multiple += 1
 
     multiple = multiple > 1
 
     request = context['request']
-    page = request.GET.get('page')
-    if page is None:
-        page = 1
-    paginator = context['paginator']
-    page_obj = paginator.page(page)
-
-    view = kwargs.get('view')
-    if view is None:
-      view = context['request'].GET.get('view', 'default')
 
     context.update({
         'paginate': paginate,
-        'user_list': user_list,
+        'user_list': users_list,
         'gear_list': gear_list,
-        'image_list': image_list,
+        'image_list': images_list,
         'sort': request.GET.get('sort'),
         'search_type': request.GET.get('search_type', 0),
         'multiple': multiple,

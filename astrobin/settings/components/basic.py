@@ -38,3 +38,5 @@ GOOGLE_ANALYTICS_ID = os.environ.get('GOOGLE_ANALYTICS_ID', 'invalid')
 
 ROOT_URLCONF = 'astrobin.urls'
 
+ALLOWED_IMAGE_EXTENSIONS = ('.jpg', '.jpeg', '.png', '.gif')
+

@@ -14,6 +14,10 @@ from django.views.generic import base
 from braces.views import JSONResponseMixin
 from toggleproperties.models import ToggleProperty
 
+# AstroBin
+from astrobin.models import UserProfile
+
+
 class TogglePropertyUsersAjaxView(base.View):
     def get(self, request, *args, **kwargs):
         property_type = kwargs.pop('property_type')

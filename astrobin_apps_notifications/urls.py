@@ -1,7 +1,6 @@
 # Django
 from django.conf.urls import patterns, url, include
 from django.contrib.auth.decorators import login_required
-from django.views.generic import TemplateView
 
 # Third party
 from notification import urls as notification_urls
@@ -24,5 +23,13 @@ urlpatterns = patterns('',
         r'settings/$',
         login_required(notice_settings),
         name = 'astrobin_apps_notifications.settings'),
+    url(
+        r'mark-all-as-read/$',
+        login_required(NotificationMarkAllAsReadView.as_view()),
+        name='astrobin_apps_notifications.mark_all_as_read'),
+    url(
+        r'clear-template-cache/$',
+        login_required(NotificationClearTemplateCacheAjaxView.as_view()),
+        name='astrobin_apps_notifications.clear_template_cache'),
     url(r'_/', include(notification_urls)),
 )

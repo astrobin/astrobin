@@ -15,6 +15,7 @@
 *.orig
 *.pid
 *.log*
+!docker/astrobin.logrotate.conf
 *.err
 *.po~
 .dirstamp

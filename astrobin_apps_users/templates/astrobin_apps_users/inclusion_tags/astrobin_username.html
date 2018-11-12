@@ -1,18 +1,21 @@
-{% load i18n %}
+{% load cache i18n %}
 
 {% load common_tags %}
 
-{% if user %}
-    {% if link %}
-    <a
-        class="{{classes|join:' '}}"
-        title="{{display_name}} ({{user.username}}){% if titles|length > 0 %}: {% endif %}{{titles|join:' / '}}"
-        href="{% url 'user_page' user.username %}">
-    {% endif %}
 
-        {{display_name|truncatechars:20}}
+{% cache 3600 astrobin_username user.username link %}
+    {% if user %}
+        {% if link %}
+        <a
+            class="{{classes|join:' '}}"
+            title="{{display_name}} ({{user.username}}){% if titles|length > 0 %}: {% endif %}{{titles|join:' / '}}"
+            href="{% url 'user_page' user.username %}">
+        {% endif %}
 
-    {% if link %}
-    </a>
+            {{display_name|truncatechars:20}}
+
+        {% if link %}
+        </a>
+        {% endif %}
     {% endif %}
-{% endif %}
+{% endcache %}

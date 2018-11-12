@@ -463,6 +463,9 @@ def image_upload_process(request):
     image_file = request.FILES["image_file"]
     ext = os.path.splitext(image_file.name)[1].lower()
 
+    if ext not in settings.ALLOWED_IMAGE_EXTENSIONS:
+        return upload_error()
+
     try:
         from PIL import Image as PILImage
         trial_image = PILImage.open(image_file)
@@ -494,7 +497,7 @@ def image_upload_process(request):
 @require_GET
 def image_edit_watermark(request, id):
     image = get_object_or_404(Image.objects_including_wip, pk=id)
-    if request.user != image.user:
+    if request.user != image.user and not request.user.is_superuser:
         return HttpResponseForbidden()
 
     profile = image.user.userprofile
@@ -725,7 +728,7 @@ def image_edit_save_watermark(request):
         raise Http404
 
     image = get_object_or_404(Image.objects_including_wip, pk=image_id)
-    if request.user != image.user:
+    if request.user != image.user and not request.user.is_superuser:
         return HttpResponseForbidden()
 
     form = ImageEditWatermarkForm(data = request.POST, instance = image)
@@ -1741,7 +1744,7 @@ def user_profile_flickr_import(request):
         'readonly': settings.READONLY_MODE
     }
 
-    if is_free(request.user) or settings.READONLY_MODE:
+    if not request.user.is_superuser and is_free(request.user) or settings.READONLY_MODE:
         return render_to_response(
                 "user/profile/flickr_import.html",
                 response_dict,
@@ -1940,8 +1943,8 @@ def image_revision_upload_process(request):
     image_file = request.FILES["image_file"]
     ext = os.path.splitext(image_file.name)[1].lower()
 
-    if ext not in ('.jpg', '.jpeg', '.png', '.gif'):
-        return upload_error(image)
+    if ext not in settings.ALLOWED_IMAGE_EXTENSIONS:
+        return upload_error()
 
     try:
         from PIL import Image as PILImage
@@ -2387,13 +2390,12 @@ def gear_popover_ajax(request, id):
 @require_GET
 @never_cache
 def user_popover_ajax(request, username):
-    user = get_object_or_404(UserProfile, user__username = username)
+    profile = get_object_or_404(UserProfile, user__username = username)
     template = 'popover/user.html'
 
     from django.template.defaultfilters import timesince
 
-    member_since = None
-    date_time = user.date_joined.replace(tzinfo = None)
+    date_time = profile.user.date_joined.replace(tzinfo = None)
     span = timesince(date_time)
     span = span.split(",")[0] # just the most significant digit
     if span == "0 " + _("minutes"):
@@ -2403,8 +2405,8 @@ def user_popover_ajax(request, username):
 
     html = render_to_string(template,
         {
-            'user': user,
-            'images': Image.objects.filter(user = user).count(),
+            'user': profile.user,
+            'images': Image.objects.filter(user = profile.user).count(),
             'member_since': member_since,
             'is_authenticated': request.user.is_authenticated(),
             'request': request,

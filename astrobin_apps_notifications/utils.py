@@ -1,21 +1,23 @@
-# Python
-import simplejson
-import urllib2
-
 # Django
-from django.apps import apps
 from django.conf import settings
-from django.core.exceptions import ImproperlyConfigured
+from django.core.cache import cache
+from django.core.cache.utils import make_template_fragment_key
 
 # Third party
 from notification import models as notification
 from persistent_messages.models import Message
 
 
+def clear_notifications_template_cache(username):
+    key = make_template_fragment_key('notifications_table', [username])
+    cache.delete(key)
+
+
 def push_notification(recipients, notice_type, data):
     data.update({'notices_url': settings.BASE_URL + '/'})
     notification.send(recipients, notice_type, data)
-
+    for recipient in recipients:
+        clear_notifications_template_cache(recipient.username)
 
 def get_recent_notifications(user, n = 10):
     if not user.is_authenticated():

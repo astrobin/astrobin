@@ -18,3 +18,6 @@ if not DEBUG:
         'pipeline.middleware.MinifyHTMLMiddleware',
     ]
 
+MIDDLEWARE_CLASSES += [
+    'debug_toolbar.middleware.DebugToolbarMiddleware',
+]

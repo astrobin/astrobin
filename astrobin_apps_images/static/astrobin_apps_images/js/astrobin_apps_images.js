@@ -36,9 +36,7 @@ $(document).ready(function() {
                         url: url,
                         success: function(data, status, request) {
                             tries[key] += 1;
-                            if (data.url === undefined || data.url === null ||
-                                !(data.url.startsWith('http') || data.url.startsWith('/media')))
-                            {
+                            if (data.url === undefined || data.url === null || data.url.indexOf("placeholder") > -1) {
                                 setTimeout(function() {
                                     load();
                                 }, random_timeout * Math.pow(2, tries[key]));

@@ -1,0 +1,39 @@
+version: '3'
+
+# This file is meant to be used by docker-compose to build images locally. It's useful for development.
+
+services:
+  nginx:
+    build:
+      context: ../
+      dockerfile: docker/nginx.${NGINX_MODE}.dockerfile
+
+
+  astrobin:
+    build:
+      context: ../
+      dockerfile: docker/astrobin.dockerfile
+
+
+  celery_default:
+    build:
+      context: ../
+      dockerfile: docker/astrobin.dockerfile
+
+
+  celery_thumbnails:
+    build:
+      context: ../
+      dockerfile: docker/astrobin.dockerfile
+
+
+  celery_haystack:
+    build:
+      context: ../
+      dockerfile: docker/astrobin.dockerfile
+
+
+  beat:
+    build:
+      context: ../
+      dockerfile: docker/astrobin.dockerfile
