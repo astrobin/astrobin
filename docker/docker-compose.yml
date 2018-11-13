@@ -127,7 +127,7 @@ services:
 
   astrobin:
     image: astrobin/astrobin:latest
-    command: ./manage.py migrate --noinput && gunicorn wsgi:application -w 4 -b :8083
+    command: bash -c "./manage.py migrate --noinput && gunicorn wsgi:application -w 4 -b :8083"
     links:
       - memcached
       - postgres
