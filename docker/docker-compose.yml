@@ -123,8 +123,6 @@ services:
       - CELERY_RDB_PORT=6900
       - POSTGRES_DB=astrobin
       - POSTGRES_USER=astrobin
-    volumes:
-      - media:/media
 
 
   astrobin:
