@@ -107,7 +107,7 @@ services:
 
   beat:
     image: astrobin/astrobin:latest
-    command: celery -A astrobin beat -l info -f celery_beat.log --pidfile= --scheduler django_celery_beat.schedulers:DatabaseScheduler
+    command: celery -A astrobin beat -l debug -f celery_beat.log --pidfile= --scheduler django_celery_beat.schedulers:DatabaseScheduler
     links:
       - memcached
       - postgres
@@ -123,6 +123,8 @@ services:
       - CELERY_RDB_PORT=6900
       - POSTGRES_DB=astrobin
       - POSTGRES_USER=astrobin
+    volumes:
+      - media:/media
 
 
   astrobin:
