@@ -4201,6 +4201,21 @@ ul.astrobin-users {
         width: 194px;
         height: 194px;
         overflow: hidden;
+
+        &:hover .icon.edit {
+          position: absolute;
+          top: 40px;
+          left: 62px;
+          font-size: 24px;
+          color: #555;
+          background: rgba(255, 255, 255, .66);
+          padding: 20px;
+          border-radius: 25%;
+          width: 30px;
+          height: 30px;
+          text-align: center;
+          line-height: 30px;
+        }
     }
 }
 
