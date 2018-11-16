@@ -13,6 +13,11 @@ services:
     build:
       context: ../
       dockerfile: docker/astrobin.dockerfile
+    ports:
+      - "8083:8083"
+      - "8084:8084"
+    volumes:
+      - ..:/code
 
 
   celery_default:
