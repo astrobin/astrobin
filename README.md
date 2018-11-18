@@ -177,28 +177,27 @@ at "step 1" of the build instructions above.
 ## Which template to edit?
 
 Start in the `urls.py` file -- the `urlpatterns` list contains the routing rules for
-the Astrobin site.  For example, if you're going to be editing the Big Wall, note
-the URL used in your browser (`/explore/wall/`) and then find the URL pattern that
+the AstroBin site.  For example, if you're going to be editing the Top Picks, note
+the URL used in your browser (`/explore/top-picks/`) and then find the URL pattern that
 matches it:
 
 ```
-url(r'^explore/wall/$', explore_views.WallView.as_view(), name='wall'),
+url(r'^explore/top-picks/$', explore_views.TopPicksView.as_view(), name='top_picks'),
 ```
 
-This tells you that the Django View you're looking for is `WallView`, in the
+This tells you that the Django View you're looking for is `TopPicksView`, in the
 `explore_views` module.
 
 ```
-$ grep "class WallView" * -r
-astrobin/views/explore.py:class WallView(ListView):
+$ grep "class TopPicksView" * -r
+astrobin/views/explore.py:class TopPicksView(ListView):
 ```
 
-Looking at the `WallView` class, you can see the template associated with it:
+Looking at the `TopPicksView` class, you can see the template associated with it:
 
 ```
-class WallView(ListView):
-    template_name = 'wall.html'
-    paginate_by = 70
+class TopPicksView(ListView):
+    template_name = 'top_picks.html'
 ```
 
 Django uses a search path when looking for templates.  Some templates might not
@@ -206,12 +205,12 @@ be in this git repository, but rather included in 3rd party modules pulled in
 during the build process.  So don't panic if you don't see a template referenced
 in the code, within the git repository.
 
-In this case, as you might expect, `wall.html` is in the standard location for
+In this case, as you might expect, `top_picks.html` is in the standard location for
 Django templates:
 
 ```
-$ find astrobin -name wall.html
-astrobin/templates/wall.html
+$ find astrobin -name top_picks.html
+astrobin/templates/top_picks.html
 ```
 
 ## Localization

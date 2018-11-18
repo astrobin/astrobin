@@ -13,13 +13,13 @@
     {% endif %}
     <div class="data">
 		<h3>{{gear.name}}</h3>
-		{% if gear.get_make %}<p><strong>{% trans "Make" %}</strong>: <a href="/search/?q={{gear.make}}{% search_form_query %}&amp;search_type=3">{{gear.get_make}}</a></p>{% endif %}
+		{% if gear.get_make %}<p><strong>{% trans "Make" %}</strong>: <a href="/search/?q={{gear.make}}">{{gear.get_make}}</a></p>{% endif %}
 
 		<div class="actions">
 		    {% if is_authenticated %}
                 {% add_remove_toggleproperty "follow" gear request.user %}
 		    {% endif %}
-		    <a class="btn btn-mini btn-primary" href="/search/?q={% gear_name_iriencoded gear %}{% search_form_query %}">{% trans "Find images" %}</a>
+		    <a class="btn btn-mini btn-primary" href="/search/?q={% gear_name_iriencoded gear %}">{% trans "Find images" %}</a>
 		    <a class="btn btn-mini" href="{% url 'gear_page' gear.id gear.slug %}">{% trans "View page" %}</a>
 		</div>
 	</div>

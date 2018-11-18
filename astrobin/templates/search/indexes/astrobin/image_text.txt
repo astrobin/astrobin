@@ -3,6 +3,10 @@
 {{object.title}}
 {{object.description}}
 
+{% for i in object.locations.all %}
+    {{i.city}}
+{% endfor %}
+
 {{object.solution.objects_in_field}}
 
 {% for i in object.imaging_telescopes.all %}

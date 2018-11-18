@@ -1,0 +1,89 @@
+{% load i18n %}
+
+<script type="text/x-template" id="license-filter-template">
+    <div class="form-group" :class="{highlighted: highlighted}">
+        <v-multiselect v-model="value" :options="options" track-by="id" label="label"
+                       selectLabel="" deselectLabel="" selectedLabel="" :searchable="false" :multiple="true"
+                       placeholder="{% trans "Select" %}">
+        </v-multiselect>
+        <input type="hidden" name="license" :value="getFormValue()">
+    </div>
+</script>
+
+<script>
+    Vue.component("license-filter", {
+        template: "#license-filter-template",
+        props: [
+            "license"
+        ],
+        mixins: [
+            FilterComponentMixin
+        ],
+        data: function () {
+            return {
+                value: [],
+                options: [
+                    {
+                        id: "0",
+                        label: "{% trans "None (All rights reserved)" %}"
+                    },
+                    {
+                        id: "1",
+                        label: "{% trans "Attribution-NonCommercial-ShareAlike Creative Commons" %}"
+                    },
+                    {
+                        id: "2",
+                        label: "{% trans "Attribution-NonCommercial Creative Commons" %}"
+                    },
+                    {
+                        id: "3",
+                        label: "{% trans "Attribution-NonCommercial-NoDerivs Creative Commons" %}"
+                    },
+                    {
+                        id: "4",
+                        label: "{% trans "Attribution Creative Commons" %}"
+                    },
+                    {
+                        id: "5",
+                        label: "{% trans "Attribution-ShareAlike Creative Commons" %}"
+                    },
+                    {
+                        id: "6",
+                        label: "{% trans "Attribution-NoDerivs Creative Commons" %}"
+                    }
+                ]
+            }
+        },
+        created: function () {
+            if (this.license) {
+                var licenses = this.license.split(",");
+                this.value = [];
+
+                for (var i = 0; i < this.options.length; i++) {
+                    if (licenses.indexOf(this.options[i].id) > -1) {
+                        this.value.push(this.options[i]);
+                    }
+                }
+            }
+
+            if (this.value.length === 0) {
+                this.value = this.options[0];
+            }
+        },
+        methods: {
+            getFormValue: function () {
+                if (Array.isArray(this.value)) {
+                    return this.value.map(function (v) {
+                        return v.id;
+                    }).join(',');
+                }
+
+                if (this.value) {
+                    return this.value.id;
+                }
+
+                return null;
+            }
+        }
+    });
+</script>

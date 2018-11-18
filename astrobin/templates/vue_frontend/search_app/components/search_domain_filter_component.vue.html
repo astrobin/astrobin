@@ -1,0 +1,58 @@
+{% load i18n %}
+
+<script type="text/x-template" id="search-domain-filter-template">
+    <div class="form-group">
+        <v-multiselect v-model="value" :options="options" track-by="id" label="label"
+                       selectLabel="" deselectLabel="" selectedLabel="" :searchable="false"
+                       placeholder="{% trans "Select" %}">
+        </v-multiselect>
+        <input type="hidden" name="d" :value="value.id">
+    </div>
+</script>
+
+<script>
+    Vue.component("search-domain-filter", {
+        template: "#search-domain-filter-template",
+        props: [
+            "searchDomain"
+        ],
+        mixins: [
+            FilterComponentMixin
+        ],
+        data: function () {
+            return {
+                value: null,
+                options: [
+                    {
+                        id: "i",
+                        label: "{% trans "Images" %}"
+                    },
+                    {
+                        id: "u",
+                        label: "{% trans "Users" %}"
+                    },
+                    {
+                        id: "cf",
+                        label: "{% trans "Comments & forums" %}"
+                    }
+                ]
+            }
+        },
+        created: function () {
+            for (var i = 0; i < this.options.length; i++) {
+                if (this.options[i].id === this.searchDomain) {
+                    this.value = this.options[i];
+                    return;
+                }
+            }
+            this.value = this.options[0];
+        },
+        watch: {
+            value: function (val) {
+                if (val) {
+                    this.$emit("input", val.id);
+                }
+            }
+        }
+    });
+</script>

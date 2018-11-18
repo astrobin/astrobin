@@ -306,6 +306,7 @@ astrobin_common = {
         $('.carousel').carousel();
         $('.nav-tabs').tab();
         $('[rel=tooltip]').tooltip();
+        $('.collapse.in').collapse();
 
         // date and time pickers
         $('input').filter('.timepickerclass').timepicker({});

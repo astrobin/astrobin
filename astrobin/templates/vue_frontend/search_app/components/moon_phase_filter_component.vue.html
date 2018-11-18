@@ -1,0 +1,34 @@
+<script type="text/x-template" id="moon-phase-filter-template">
+    <div class="form-group" :class="{highlighted: highlighted}">
+        <div id="moon-phase-slider" class="slider-filter"></div>
+
+        <input id="moon-phase-min-value" name="moon_phase_min" type="hidden" :value="moonPhaseMin" />
+        <input id="moon-phase-max-value" name="moon_phase_max" type="hidden" :value="moonPhaseMax" />
+    </div>
+</script>
+
+<script>
+    Vue.component("moon-phase-filter", {
+        template: "#moon-phase-filter-template",
+        props: [
+            "moonPhaseMin",
+            "moonPhaseMax"
+        ],
+        mixins: [
+            FilterComponentMixin
+        ],
+        mounted() {
+            var slider = noUiSlider.create($('#moon-phase-slider')[0], {
+                start: [this.moonPhaseMin, this.moonPhaseMax],
+                range: {min: 0, max: 100},
+                step: 1,
+                tooltips: true
+            });
+
+            slider.on("change", function () {
+                $("#moon-phase-min-value").val(slider.get()[0]);
+                $("#moon-phase-max-value").val(slider.get()[1]);
+            });
+        }
+    });
+</script>

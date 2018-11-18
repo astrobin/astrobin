@@ -41,7 +41,7 @@
                                     <strong class="card-label">{{data.0}}:</strong>
                                     {% if data.0 == dates_label %}
                                         {% for date in data.1 %}
-                                            <a href="/search/{% query_string "q=, start_date=date, end_date=date" "plate_solving_started, r, mod" %}{% search_form_query %}">{{date|date:"DATE_FORMAT"}}</a>{% if not forloop.last %},&nbsp;{% endif %}
+                                            <a href="/search/{% query_string "q=, start_date=date, end_date=date" "plate_solving_started, r, mod" %}">{{date|date:"DATE_FORMAT"}}</a>{% if not forloop.last %},&nbsp;{% endif %}
                                         {% endfor %}
                                     {% else %}
                                         {{data.1|safe|linebreaksbr}}
@@ -51,7 +51,7 @@
                         {% endfor %}
                     {% else %}
                         {% if ssa.date %}
-                            <p><strong class="card-label">{% trans "Date" %}:</strong> <a href="/search/{% query_string "q=, start_date=ssa.date, end_date=ssa.date" "plate_solving_started, r, mod" %}{% search_form_query %}">{{ssa.date|date:"DATE_FORMAT"}}</a></p>
+                            <p><strong class="card-label">{% trans "Date" %}:</strong> <a href="/search/{% query_string "q=, start_date=ssa.date, end_date=ssa.date" "plate_solving_started, r, mod" %}">{{ssa.date|date:"DATE_FORMAT"}}</a></p>
                         {% endif %}
                         {% if ssa.time %}
                             <p><strong class="card-label">{% trans "Time" %}:</strong> {{ssa.time}}</p>

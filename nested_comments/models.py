@@ -67,9 +67,9 @@ class NestedComment(models.Model):
         return '%s#c%d' % (object_url, self.id)
 
     def delete(self):
-        if self.deleted == False:
-            self.deleted = True;
-            self.save();
+        if not self.deleted:
+            self.deleted = True
+            self.save()
 
     def clean(self, *args, **kwargs):
         obj = self.content_type.get_object_for_this_type(pk = self.object_id)
