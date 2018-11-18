@@ -436,7 +436,7 @@ class ImageDetailView(DetailView):
         if mod == 'inverted':
             alias = 'regular_inverted'
 
-        subjects = image.objects_in_field.split(',') if image.objects_in_field else ''
+        subjects = image.solution.objects_in_field.split(',') if image.solution and image.solution.objects_in_field else ''
         skyplot_zoom1 = None
 
         if is_revision:
