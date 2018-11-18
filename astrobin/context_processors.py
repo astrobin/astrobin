@@ -1,17 +1,8 @@
 from django.conf import settings
-from django.core.cache import cache
-from django.contrib.auth.models import User
-from django.db.models import Q
-from django.utils.translation import ugettext as _
 
-from toggleproperties.models import ToggleProperty
-from persistent_messages.models import Message
-
-from astrobin.models import Request
-from astrobin.models import Gear
+from astrobin.fields import COUNTRIES
 from astrobin.models import Image
 
-from nested_comments.models import NestedComment
 from astrobin_apps_notifications.utils import get_unseen_notifications
 
 
@@ -76,6 +67,7 @@ def common_variables(request):
         'False': False,
 
         'LANGUAGE_CODE': request.LANGUAGE_CODE if hasattr(request, "LANGUAGE_CODE") else "en",
+        'DEBUG_MODE': settings.DEBUG,
 
         #'random_gear_item': Gear.objects.filter(moderator_fixed = None).order_by('?')[:1].get(),
         'is_producer': request.user.groups.filter(name='Producers'),
@@ -93,7 +85,8 @@ def common_variables(request):
         'SOLVING_ENABLED': settings.ENABLE_SOLVING,
         'GOOGLE_ANALYTICS_ID': settings.GOOGLE_ANALYTICS_ID,
         'READONLY_MODE': settings.READONLY_MODE,
-        'HAS_BOUNCED_EMAILS': bounced
+        'HAS_BOUNCED_EMAILS': bounced,
+        'COUNTRIES': COUNTRIES
     }
 
     if request.user.is_authenticated() and request.user.userprofile.is_image_moderator():

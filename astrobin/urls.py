@@ -278,7 +278,6 @@ urlpatterns = [
     ### EXPLORE VIEWS                                                       ###
     ###########################################################################
 
-    url(r'^explore/wall/$', explore_views.WallView.as_view(), name='wall'),
     url(r'^explore/top-picks/$', explore_views.TopPicksView.as_view(), name='top_picks'),
 
     ###########################################################################

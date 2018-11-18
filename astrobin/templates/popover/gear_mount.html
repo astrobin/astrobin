@@ -13,7 +13,7 @@
     {% endif %}
     <div class="data">
         <h3>{{gear.get_name}}</h3>
-        {% if gear.get_make %}<p><strong>{% trans "Make" %}</strong>: <a href="/search/?q={{gear.get_make}}{% search_form_query %}&amp;search_type=3">{{gear.get_make}}</a></p>{% endif %}
+        {% if gear.get_make %}<p><strong>{% trans "Make" %}</strong>: <a href="/search/?q={{gear.get_make}}">{{gear.get_make}}</a></p>{% endif %}
         {% if gear.max_payload %}<p><strong>{% trans "Max. payload" %}</strong>: {{gear.max_payload}} kg</p>{% endif %}
         {% if gear.pe %}<p><strong>{% trans "Periodic error" %}</strong>: {{gear.pe}}"</p>{% endif %}
 
@@ -21,7 +21,7 @@
             {% if is_authenticated %}
                 {% add_remove_toggleproperty "follow" gear request.user %}
             {% endif %}
-            <a class="btn btn-mini btn-primary" href="/search/?q={% gear_name_iriencoded gear %}{% search_form_query %}">{% trans "Find images" %}</a>
+            <a class="btn btn-mini btn-primary" href="/search/?q={% gear_name_iriencoded gear %}">{% trans "Find images" %}</a>
             <a class="btn btn-mini" href="{% url 'gear_page' gear.id gear.slug %}">{% trans "View page" %}</a>
         </div>
     </div>

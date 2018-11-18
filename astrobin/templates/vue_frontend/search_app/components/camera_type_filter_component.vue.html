@@ -1,0 +1,80 @@
+{% load i18n %}
+
+<script type="text/x-template" id="camera-type-filter-template">
+    <div class="form-group" :class="{highlighted: highlighted}">
+        <v-multiselect v-model="value" :options="options" track-by="id" label="label"
+                       selectLabel="" deselectLabel="" selectedLabel="" :multiple="true" :searchable="false"
+                       placeholder="{% trans "Select" %}">
+        </v-multiselect>
+        <input type="hidden" name="camera_type" :value="getFormValue()">
+    </div>
+</script>
+
+<script>
+    Vue.component("camera-type-filter", {
+        template: "#camera-type-filter-template",
+        props: [
+            "cameraType"
+        ],
+        mixins: [
+            FilterComponentMixin
+        ],
+        data: function () {
+            return {
+                value: [],
+                options: [
+                    {
+                        id: "0",
+                        label: "{% trans "CCD" %}"
+                    },
+                    {
+                        id: "1",
+                        label: "{% trans "DSLR" %}"
+                    },
+                    {
+                        id: "2",
+                        label: "{% trans "Guider/planetary" %}"
+                    },
+                    {
+                        id: "3",
+                        label: "{% trans "Film" %}"
+                    },
+                    {
+                        id: "4",
+                        label: "{% trans "Compact" %}"
+                    },
+                    {
+                        id: "5",
+                        label: "{% trans "Video camera" %}"
+                    }
+                ]
+            }
+        },
+        created: function() {
+            if (this.cameraType) {
+                var types = this.cameraType.split(',');
+
+                for (var i = 0; i < this.options.length; i++) {
+                    if (types.indexOf(this.options[i].id) > -1) {
+                        this.value.push(this.options[i]);
+                    }
+                }
+            }
+        },
+        methods: {
+            getFormValue: function () {
+                if (Array.isArray(this.value)) {
+                    return this.value.map(function (v) {
+                        return v.id;
+                    }).join(',');
+                }
+
+                if (this.value) {
+                    return this.value.id;
+                }
+
+                return null;
+            }
+        }
+    });
+</script>

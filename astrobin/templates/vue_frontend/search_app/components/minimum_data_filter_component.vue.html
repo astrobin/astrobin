@@ -1,0 +1,80 @@
+{% load i18n %}
+
+<script type="text/x-template" id="minimum-data-filter-template">
+    <div class="form-group" :class="{highlighted: highlighted}">
+        <v-multiselect v-model="value" :options="options" track-by="id" label="label"
+                       selectLabel="" deselectLabel="" selectedLabel="" :multiple="true" :searchable="false"
+                       placeholder="{% trans "Select" %}">
+        </v-multiselect>
+        <input type="hidden" name="minimum_data" :value="getFormValue()">
+    </div>
+</script>
+
+<script>
+    Vue.component("minimum-data-filter", {
+        template: "#minimum-data-filter-template",
+        props: [
+            "minimumData"
+        ],
+        mixins: [
+            FilterComponentMixin
+        ],
+        data: function () {
+            return {
+                value: [],
+                options: [
+                    {
+                        id: "t",
+                        label: "{% trans "Imaging telescopes" %}"
+                    },
+                    {
+                        id: "c",
+                        label: "{% trans "Imaging cameras" %}"
+                    },
+                    {
+                        id: "a",
+                        label: "{% trans "Acquisition details" %}"
+                    },
+                    {
+                        id: "s",
+                        label: "{% trans "Astrometry" %}"
+                    }
+                ]
+            }
+        },
+        created: function () {
+            if (this.minimumData) {
+                var types = this.minimumData.split(',');
+
+                for (var i = 0; i < this.options.length; i++) {
+                    if (types.indexOf(this.options[i].id) > -1) {
+                        this.value.push(this.options[i]);
+                    }
+                }
+            }
+
+            if (this.value.length === 0) {
+                this.value = [
+                    this.options[0],
+                    this.options[1],
+                    this.options[2]
+                ];
+            }
+        },
+        methods: {
+            getFormValue: function () {
+                if (Array.isArray(this.value)) {
+                    return this.value.map(function (v) {
+                        return v.id;
+                    }).join(',');
+                }
+
+                if (this.value) {
+                    return this.value.id;
+                }
+
+                return null;
+            }
+        }
+    });
+</script>

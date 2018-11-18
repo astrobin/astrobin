@@ -1,18 +1,14 @@
 from datetime import datetime
-import random
-import string
 
 from django.template.defaultfilters import timesince
 from django.utils.translation import ugettext as _
 from django.template import Library
 from django.conf import settings
 from django.core.paginator import Paginator, EmptyPage, PageNotAnInteger
-from django.db.models import Q
+from django.contrib.auth.models import User
 
-from persistent_messages.models import Message
-from celery.result import AsyncResult
+from pybb.models import Topic, Post
 
-from astrobin.models import Request
 from astrobin.gear import *
 
 
@@ -110,32 +106,10 @@ register.inclusion_tag('inclusion_tags/image_list.html', takes_context=True)(ima
 
 @register.inclusion_tag('inclusion_tags/search_image_list.html', takes_context = True)
 def search_image_list(context, paginate = True, **kwargs):
-    object_list = context['object_list']
-
-    users_list  = [x for x in object_list if x != None and x.verbose_name == 'User']
-    gear_list  = [x for x in object_list if x != None and x.verbose_name == 'Gear']
-    images_list = [x for x in object_list if x != None and x.verbose_name == 'Image']
-
-    multiple = 0
-    if len(users_list) > 0:
-        multiple += 1
-    if len(gear_list) > 0:
-        multiple += 1
-    if len(images_list) > 0:
-        multiple += 1
-
-    multiple = multiple > 1
-
-    request = context['request']
-
     context.update({
         'paginate': paginate,
-        'user_list': users_list,
-        'gear_list': gear_list,
-        'image_list': images_list,
-        'sort': request.GET.get('sort'),
-        'search_type': request.GET.get('search_type', 0),
-        'multiple': multiple,
+        'search_domain': context['request'].GET.get('d'),
+        'sort': context['request'].GET.get('sort'),
     })
 
     return context
@@ -166,24 +140,6 @@ def cut_decimals(value, places):
 def is_checkbox(value):
     from django.forms.fields import CheckboxInput
     return isinstance(value, CheckboxInput)
-
-
-@register.simple_tag
-def search_form_query():
-    query = '&amp;search_type=0'
-
-    for i in range(0, 7):
-        query += '&amp;license=%d' % i
-
-    query += '&amp;telescope_type=any'
-    for i in range(0, 23):
-        query += '&amp;telescope_type=%d' % i
-
-    query += '&amp;camera_type=any'
-    for i in range(0, 6):
-        query += '&amp;camera_type=%d' % i
-
-    return query
 
 
 @register.inclusion_tag('inclusion_tags/list_gear.html')

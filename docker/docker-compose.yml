@@ -40,7 +40,6 @@ services:
       - elasticsearch-data:/usr/share/elasticsearch/data
 
 
-
   celery_default:
     image: astrobin/astrobin:latest
     command: celery worker -A astrobin -Q default,email -c 8 -l debug -f celery_default.log
