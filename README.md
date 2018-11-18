@@ -46,9 +46,6 @@ The Elasticsearch engine that handles the search index. It's accessed by
 the AstroBin app directly for queries, and by the celery worker to update
 the index.
 
-### wdb
-A debug server that can be used in debug mode to interactively debug the app.
-
 ### flower
 A monitor that sits on top of rabbitmq and monitors the celery tasks.
 
