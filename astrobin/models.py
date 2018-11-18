@@ -745,12 +745,6 @@ class Image(HasSolutionMixin, SafeDeleteModel):
         null=False,
         blank=False,
     )
-    objects_in_field = models.CharField(
-        max_length = 512,
-        verbose_name = _("Objects in field"),
-        help_text=_("Use a <strong>comma</strong> to separate the values."),
-        null = True,
-    )
 
     solar_system_main_subject = models.IntegerField(
         verbose_name = _("Main solar system subject"),

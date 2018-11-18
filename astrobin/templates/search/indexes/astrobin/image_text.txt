@@ -3,9 +3,7 @@
 {{object.title}}
 {{object.description}}
 
-{% for i in object.objects_in_field %}
-	{{i}}
-{% endfor %}
+{{object.solution.objects_in_field}}
 
 {% for i in object.imaging_telescopes.all %}
 	{{i}}

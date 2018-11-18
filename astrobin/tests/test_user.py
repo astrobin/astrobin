@@ -311,7 +311,6 @@ class UserTest(TestCase):
         # Test "no data" sub-section
         image = self._do_upload('astrobin/fixtures/test.jpg', "IMAGE_NODATA")
         image.subject_type = 100
-        image.objects_in_field = None
         image.save()
         response = self.client.get(
             reverse('user_page', args = ('user',)) + "?sub=nodata")
