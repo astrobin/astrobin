@@ -1,6 +1,5 @@
 # Django
 from django.apps import AppConfig
-from django.db.utils import IntegrityError, ProgrammingError, OperationalError
 
 
 class AstroBinAppConfig(AppConfig):
