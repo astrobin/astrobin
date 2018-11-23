@@ -13,6 +13,7 @@ services:
     build:
       context: ../
       dockerfile: docker/astrobin.dockerfile
+    command: bash -c "./manage.py migrate --noinput && ./manage.py collectstatic --noinput && gunicorn wsgi:application -w 4 -b :8083"
     ports:
       - "8083:8083"
       - "8084:8084"

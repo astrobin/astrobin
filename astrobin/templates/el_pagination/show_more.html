@@ -1,9 +1,15 @@
 {% load i18n %}
+{% load static %}
+
+
 {% if querystring %}
     <div class="endless_container">
         <a class="endless_more btn btn-block-mobile" href="{{ path }}{{ querystring }}"
            data-el-querystring-key="{{ querystring_key }}">
            {% if label %}{{ label }}{% else %}{% trans "More" %}{% endif %}</a>
-        <div class="endless_loading" style="display: none;">{{ loading|safe }}</div>
+
+        <div class="endless_loading" style="display: none;">
+            <img src="{% static 'common/images/ajax-loader-bar.gif' %}" alt="..." />
+        </div>
     </div>
 {% endif %}
