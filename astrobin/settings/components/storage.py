@@ -42,7 +42,7 @@ ADMIN_MEDIA_PREFIX = STATIC_URL + 'admin/'
 
 LOCAL_STATIC_STORAGE = os.environ.get('LOCAL_STATIC_STORAGE', 'true') == "true"
 if LOCAL_STATIC_STORAGE:
-    STATIC_URL = '/media/static/'
+    STATIC_ROOT = STATIC_URL = '/media/static/'
     STATICFILES_STORAGE = 'astrobin.s3utils.StaticRootLocalStorage'
 else:
     STATICFILES_STORAGE = 'astrobin.s3utils.StaticRootS3BotoStorage'
