@@ -1,4 +1,8 @@
 2018-11-23 Salvatore Iovene <salvatore@iovene.com>
+ * v1.31.1
+ * (infra) Fix STATIC_ROOT setting to be compatible with django-storages 1.7
+
+2018-11-23 Salvatore Iovene <salvatore@iovene.com>
  * v1.31.0
  * (search) Rehaul search module
  * (infra) Fix plate-solving on local development mode
