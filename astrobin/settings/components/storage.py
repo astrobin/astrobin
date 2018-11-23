@@ -9,7 +9,7 @@ if AWS_S3_ENABLED:
     MEDIA_ROOT = '/'
     MEDIA_URL = 'https://%s/' % AWS_S3_CUSTOM_DOMAIN
 
-    STATIC_ROOT = '/static/'
+    STATIC_ROOT = 'static/'
     STATIC_URL = MEDIA_URL + 'static/'
 
     S3_URL = 's3.amazonaws.com'
