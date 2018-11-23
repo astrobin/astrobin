@@ -1,3 +1,22 @@
+2018-11-23 Salvatore Iovene <salvatore@iovene.com>
+ * v1.31.0
+ * (search) Rehaul search module
+ * (infra) Fix plate-solving on local development mode
+ * (infra) Remove references to wdb for debugging
+ * (infra) Remove obsolete field Image.objects_in_field
+ * (infra) Autoformat scss file
+ * (docker) Export ports, share code with compose
+ * (profile) Add short cut to editing own avatar
+ * (profile) Fix broken HTML tag
+ * (docker) Do db migrate AstroBin image on start-up
+ * (docker) Perform message compilation at build time
+ * (docker) Always clean after apt-get install to save on image size
+ * (docker) Slim down images by not installing recommended packages
+ * (docker) Lock nginx version to 1.15
+ * (docker) Add file logging to celery beat
+ * (docker) Make the stack prefix "docker" to be compatible with compose
+ * (infra) Add missing semi-colons to nginx configuration file
+
 2018-11-10 Salvatore Iovene <salvatore@iovene.com>
  * v1.30.0
  * (admin) Allow superuser to change any image's watermark
