@@ -2712,11 +2712,11 @@ msgstr "Revisión de imagen de usuario seguido"
 
 #: management/__init__.py:39
 msgid "Your image was plate-solved"
-msgstr "El campo de tu imagen ha sido resuelto"
+msgstr "Las coordenadas de tu imagen han sido identificadas"
 
 #: management/__init__.py:45
 msgid "Your image could not be plate-solved"
-msgstr "El campo de tu imagen no pudo ser resuelto"
+msgstr "No se ha podido identificar las coordenadas de tu imagen"
 
 #: management/__init__.py:51
 msgid "AstroBin has published a new blog entry"
@@ -3593,8 +3593,8 @@ msgstr ""
 "<em>AstroBin</em> hará más que sólo guardar una copia de tu imagen: cuando "
 "subas una fotografía se generará automáticamente su histograma, y una "
 "versión de la imagen en B/N en la que es más fácil reconocer regiones de "
-"ténue nebulosidad o brazos espirales. El campo de las imágenes también será "
-"resuelto (plate-solve) y aparecerá una versión anotada en el sitio. "
+"ténue nebulosidad o brazos espirales. Las coordenadas también serán "
+"identificadas (plate-solve) y aparecerá una versión anotada en el sitio. "
 "¡<em>AstroBin</em> reconocerá cuáles son los objetos astronómicos que hay en "
 "tu imagen sin que se lo digas!"
 
@@ -5364,7 +5364,7 @@ msgstr "Detalles de adquisición"
 #: templates/image/detail/menu/edit.html:50
 #, fuzzy
 msgid "Plate-solving settings"
-msgstr "Resolver el campo (plate-solve)"
+msgstr "Identificar coordenadas (plate-solve)"
 
 #: templates/image/detail/menu/navigation.html:7
 #, fuzzy
@@ -5824,7 +5824,7 @@ msgstr "Equipo utilizado"
 #: templates/image/edit/platesolving_settings.html:12
 #, fuzzy
 msgid "Edit your image: plate-solving settings"
-msgstr "Editar tu imagen: escala de resolución del campo (plate-solve)"
+msgstr "Editar tu imagen: opciones de identificación de coordenadas (plate-solve)"
 
 #: templates/image/edit/platesolving_settings.html:26
 #: templates/image/edit/revision.html:15
@@ -6247,18 +6247,18 @@ msgstr "Tu imagen ha sido borrada."
 #: templates/notification/image_not_solved/full.txt:2
 #, python-format
 msgid "Your image at %(object_url)s could not be plate-solved."
-msgstr "No ha podido ser resuelto el campo de tu imagen %(object_url)s ."
+msgstr "No se ha podido identificar las coordenadas de tu imagen %(object_url)s ."
 
 #: templates/notification/image_not_solved/notice.html:2
 #: templates/notification/image_not_solved/short.html:2
 #, python-format
 msgid "<a href=\"%(object_url)s\">Your image could not be plate-solved.</a>"
 msgstr ""
-"<a href=\"%(object_url)s\">El campo de tu imagen no pudo ser resuelto.</a>"
+"<a href=\"%(object_url)s\">No se ha podido identificar las coordenadas de tu imagen.</a>"
 
 #: templates/notification/image_not_solved/short.txt:2
 msgid "Your image could not be plate-solved."
-msgstr "No se pudo resolver el campo de tu imagen."
+msgstr "No se ha podido identificar las coordenadas de tu imagen."
 
 #: templates/notification/image_ready/notice.html:2
 #: templates/notification/image_ready/short.html:2
@@ -6269,7 +6269,7 @@ msgstr "<a href=\"%(object_url)s\">Tu imagen ha sido procesada.</a>"
 #: templates/notification/image_solved/full.txt:2
 #, python-format
 msgid "Your image at %(object_url)s was plate-solved."
-msgstr "El campo de tu imagen en %(object_url)s fue resuelto."
+msgstr "Se ha podido identificar las coordenadas de tu imagen en %(object_url)s."
 
 #: templates/notification/image_solved/notice.html:2
 #: templates/notification/image_solved/short.html:2
@@ -6277,12 +6277,12 @@ msgstr "El campo de tu imagen en %(object_url)s fue resuelto."
 msgid ""
 "<a href=\"%(object_url)s\">Your image has been successfully plate-solved.</a>"
 msgstr ""
-"<a href=\"%(object_url)s\">El campo de tu imagen ha sido resuelto "
-"satisfactoriamente.</a>"
+"<a href=\"%(object_url)s\">Se han identificado satisfactoriamente las coordenadas "
+"de tu imagen.</a>"
 
 #: templates/notification/image_solved/short.txt:2
 msgid "Your image has been successfully plate-solved."
-msgstr "El campo de tu imagen ha sido resuelto. "
+msgstr "Se han identificado las coordenadas de tu imagen. "
 
 #: templates/notification/lacking_data_reminder/full.txt:2
 #, python-format
@@ -8241,7 +8241,8 @@ msgstr ""
 msgid ""
 "Form saved. A new plate-solving process will start when you visit your image "
 "again."
-msgstr ""
+msgstr "Formulario guardado. Se iniciará un nuevo proceso de identificación "
+"de coordenadas la próxima vez que visites la imagen."
 
 #: views/__init__.py:806
 msgid "Fill in one session, before adding more."
