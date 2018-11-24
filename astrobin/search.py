@@ -3,11 +3,11 @@ import unicodedata
 
 # Django
 from django.contrib.auth.models import User
+from django import forms
 
 # Third party apps
-from django.core.paginator import Paginator
-from django.http import Http404
 from haystack.query import SearchQuerySet
+from haystack.forms import SearchForm
 from haystack.generic_views import SearchView
 from pybb.models import Post, Topic
 
@@ -16,12 +16,58 @@ from nested_comments.models import NestedComment
 from models import Image
 
 
-class AstroBinSearchView(SearchView):
-    query = None
-    results = None
+FIELDS = (
+    # Filtering
+    'q',
+    'd',
+    't',
+    'animated',
+    'camera_type',
+    'country',
+    'data_source',
+    'field_radius_min',
+    'field_radius_max',
+    'minimum_data',
+    'moon_phase_min',
+    'moon_phase_max',
+    'license',
+    'pixel_scale_min',
+    'pixel_scale_max',
+    'subject_type',
+    'telescope_type',
+
+    # Sorting
+    'sort'
+)
+
+
+class AstroBinSearchForm(SearchForm):
+    # q is inherited from the parent form.
+
+    d = forms.CharField(required=False)
+    t = forms.CharField(required=False)
+    
+    animated = forms.BooleanField(required=False)
+    camera_type = forms.CharField(required=False)
+    country = forms.CharField(required=False)
+    data_source = forms.CharField(required=False)
+    field_radius_min = forms.IntegerField(required=False)
+    field_radius_max = forms.IntegerField(required=False)
+    minimum_data = forms.CharField(required=False)
+    moon_phase_min = forms.IntegerField(required=False)
+    moon_phase_max = forms.IntegerField(required=False)
+    license = forms.CharField(required=False)
+    pixel_scale_min = forms.FloatField(required=False)
+    pixel_scale_max = forms.FloatField(required=False)
+    subject_type = forms.CharField(required=False)
+    telescope_type = forms.CharField(required=False)
+
+    def __init__(self, *args, **kwargs):
+        super(AstroBinSearchForm, self).__init__(args, kwargs)
+        self.data = {x: kwargs.pop(x, None) for x in FIELDS}
 
     def filterByDomain(self, results):
-        d = self.request.GET.get("d")
+        d = self.cleaned_data.get("d")
 
         if d is None or d == "":
             d = "i"
@@ -36,26 +82,26 @@ class AstroBinSearchView(SearchView):
         return results
 
     def filterByType(self, results):
-        t = self.request.GET.get("t")
+        t = self.cleaned_data.get("t")
 
         if t is None or t == "":
             t = "all"
 
         if t != "all":
-            results = results.filter(**{t: self.query})
+            results = results.filter(**{t: self.cleaned_data.get('q')})
 
         return results
 
     def filterByAnimated(self, results):
-        t = self.request.GET.get("animated")
+        t = self.cleaned_data.get("animated")
 
-        if t is not None:
+        if t:
             results = results.filter(animated=True)
 
         return results
 
     def filterByCameraType(self, results):
-        camera_type = self.request.GET.get("camera_type")
+        camera_type = self.cleaned_data.get("camera_type")
 
         if camera_type is not None and camera_type != "":
             types = camera_type.split(',')
@@ -64,7 +110,7 @@ class AstroBinSearchView(SearchView):
         return results
 
     def filterByCountry(self, results):
-        country = self.request.GET.get("country")
+        country = self.cleaned_data.get("country")
 
         if country is not None and country != "":
             results = results.filter(countries=country)
@@ -72,22 +118,22 @@ class AstroBinSearchView(SearchView):
         return results
 
     def filterByDataSource(self, results):
-        data_source = self.request.GET.get("data_source")
+        data_source = self.cleaned_data.get("data_source")
 
-        if data_source is not None:
+        if data_source is not None and data_source != "":
             results = results.filter(data_source=data_source)
 
         return results
 
     def filterByFieldRadius(self, results):
         try:
-            min = float(self.request.GET.get("field_radius_min"))
+            min = float(self.cleaned_data.get("field_radius_min"))
             results = results.filter(field_radius__gte=min)
         except TypeError:
             pass
 
         try:
-            max = float(self.request.GET.get("field_radius_max"))
+            max = float(self.cleaned_data.get("field_radius_max"))
             results = results.filter(field_radius__lte=max)
         except TypeError:
             pass
@@ -95,7 +141,7 @@ class AstroBinSearchView(SearchView):
         return results
 
     def filterByMinimumData(self, results):
-        minimum_data = self.request.GET.get("minimum_data")
+        minimum_data = self.cleaned_data.get("minimum_data")
 
         if minimum_data is not None and minimum_data != "":
             minimum = minimum_data.split(',')
@@ -114,13 +160,13 @@ class AstroBinSearchView(SearchView):
 
     def filterByMoonPhase(self, results):
         try:
-            min = float(self.request.GET.get("moon_phase_min"))
+            min = float(self.cleaned_data.get("moon_phase_min"))
             results = results.filter(moon_phase__gte=min)
         except TypeError:
             pass
 
         try:
-            max = float(self.request.GET.get("moon_phase_max"))
+            max = float(self.cleaned_data.get("moon_phase_max"))
             results = results.filter(moon_phase__lte=max)
         except TypeError:
             pass
@@ -128,7 +174,7 @@ class AstroBinSearchView(SearchView):
         return results
 
     def filterByLicense(self, results):
-        license = self.request.GET.get("license")
+        license = self.cleaned_data.get("license")
 
         if license is not None and license != "":
             licenses = license.split(',')
@@ -138,13 +184,13 @@ class AstroBinSearchView(SearchView):
 
     def filterByPixelScale(self, results):
         try:
-            min = float(self.request.GET.get("pixel_scale_min"))
+            min = float(self.cleaned_data.get("pixel_scale_min"))
             results = results.filter(pixel_scale__gte=min)
         except TypeError:
             pass
 
         try:
-            max = float(self.request.GET.get("pixel_scale_max"))
+            max = float(self.cleaned_data.get("pixel_scale_max"))
             results = results.filter(pixel_scale__lte=max)
         except TypeError:
             pass
@@ -152,7 +198,7 @@ class AstroBinSearchView(SearchView):
         return results
 
     def filterBySubjectType(self, results):
-        subject_type = self.request.GET.get("subject_type")
+        subject_type = self.cleaned_data.get("subject_type")
 
         if subject_type == "deep_sky":
             results = results.filter(subject_type=100)
@@ -196,7 +242,7 @@ class AstroBinSearchView(SearchView):
         return results
 
     def filterByTelescopeType(self, results):
-        telescope_type = self.request.GET.get("telescope_type")
+        telescope_type = self.cleaned_data.get("telescope_type")
 
         if telescope_type is not None and telescope_type != "":
             types = telescope_type.split(',')
@@ -204,58 +250,79 @@ class AstroBinSearchView(SearchView):
 
         return results
 
-    def get_queryset(self):
-        self.query = self.request.GET.get('q')
-        try:
-            self.query = unicodedata.normalize('NFKD', self.query).encode('ascii', 'ignore')
-        except:
-            pass
-
-        if self.query is None or self.query == u"":
-            self.results = SearchQuerySet().all()
-        else:
-            self.results = super(AstroBinSearchView, self).get_queryset().filter(text=self.query)
-
-        self.results = self.filterByDomain(self.results)
-
-        # Images
-        self.results = self.filterByType(self.results)
-        self.results = self.filterByAnimated(self.results)
-        self.results = self.filterByCameraType(self.results)
-        self.results = self.filterByCountry(self.results)
-        self.results = self.filterByDataSource(self.results)
-        self.results = self.filterByLicense(self.results)
-        self.results = self.filterByFieldRadius(self.results)
-        self.results = self.filterByMinimumData(self.results)
-        self.results = self.filterByMoonPhase(self.results)
-        self.results = self.filterByPixelScale(self.results)
-        self.results = self.filterBySubjectType(self.results)
-        self.results = self.filterByTelescopeType(self.results)
-
+    def sort(self, results):
         order_by = None
+        domain = self.cleaned_data.get('d', 'i')
 
         # Default to upload order for images.
-        if  'd' not in self.request.GET or self.request.GET.get('d') == 'i':
+        if domain == 'i':
             order_by = ('-published', '-uploaded')
 
         # Default to updated/created order for comments/forums.
-        if self.request.GET.get('d') == 'cf':
+        if domain == 'cf':
             order_by = ('-updated', '-created')
 
-        # Override with user choice of course.
-        if 'sort' in self.request.GET:
-            order_by = self.request.GET['sort']
+        # Prefer user's choice of course.
+        if self.data.get('sort') is not None:
+            order_by = self.data.get('sort')
 
             # Special fixes for some fields.
             if order_by.endswith('field_radius'):
-                self.results = self.results.exclude(_missing_='field_radius')
-            if order_by.endswith('pixel_scale'):
-                self.results = self.results.exclude(_missing_='pixel_scale')
-
-            # Make it a list that will be exploded into arguments here below.
-            order_by = [order_by]
+                results = results.exclude(_missing_='field_radius')
+            elif order_by.endswith('pixel_scale'):
+                results = results.exclude(_missing_='pixel_scale')
 
         if order_by is not None:
-            self.results = self.results.order_by(*order_by)
+            if type(order_by) is list or type(order_by) is tuple:
+                results = results.order_by(*order_by)
+            else:
+                results = results.order_by(order_by)
 
-        return self.results
+        return results
+
+    def search(self):
+        q = self.cleaned_data.get('q')
+
+        try:
+            q = unicodedata.normalize('NFKD', q).encode('ascii', 'ignore')
+        except:
+            pass
+
+        if q is None or q == u"":
+            sqs = SearchQuerySet().all()
+        else:
+            sqs = self.searchqueryset.auto_query(q)
+
+        sqs = self.filterByDomain(sqs)
+
+        # Images
+        sqs = self.filterByType(sqs)
+        sqs = self.filterByAnimated(sqs)
+        sqs = self.filterByCameraType(sqs)
+        sqs = self.filterByCountry(sqs)
+        sqs = self.filterByDataSource(sqs)
+        sqs = self.filterByLicense(sqs)
+        sqs = self.filterByFieldRadius(sqs)
+        sqs = self.filterByMinimumData(sqs)
+        sqs = self.filterByMoonPhase(sqs)
+        sqs = self.filterByPixelScale(sqs)
+        sqs = self.filterBySubjectType(sqs)
+        sqs = self.filterByTelescopeType(sqs)
+
+        sqs = self.sort(sqs)
+
+        return sqs
+
+
+class AstroBinSearchView(SearchView):
+    query = None
+    results = None
+    form_class = AstroBinSearchForm
+
+    def get_form(self, form_class=None):
+        return self.get_form_class()(**{x: self.request.GET.get(x, None) for x in FIELDS})
+
+    def get_context_data(self, **kwargs):
+        context = super(AstroBinSearchView, self).get_context_data(**kwargs)
+        context['object_list'] = self.queryset
+        return context
