@@ -1,0 +1,21 @@
+version: '3'
+
+services:
+  celery_default:
+    image: astrobin/astrobin:latest
+
+
+  celery_thumbnails:
+    image: astrobin/astrobin:latest
+
+
+  celery_haystack:
+    image: astrobin/astrobin:latest
+
+
+  beat:
+    image: astrobin/astrobin:latest
+
+
+  astrobin:
+    image: astrobin/astrobin:latest
