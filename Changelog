@@ -1,3 +1,12 @@
+2018-11-24 Salvatore Iovene <salvatore@iovene.com>
+ * v1.32.0
+ * (search) Change filter animation from shake to pop-in
+ * (search) Finalize Big Wall / Search merger by showing all images by default
+ * (travis) Login with docker early on and use "run" to run tests in compose mode
+ * (i18n) Add support for en-GB locale
+ * (search) Fix accidental limitation in search indexes
+ * (infra) Fix fresh installation start-up issues
+
 2018-11-23 Salvatore Iovene <salvatore@iovene.com>
  * v1.31.1
  * (infra) Fix STATIC_ROOT setting to be compatible with django-storages 1.7
