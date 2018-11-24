@@ -8,7 +8,7 @@
 {% block title %}{% trans "Search" %}{% endblock %}
 
 {% block container_extra_classes %}
-    {% if request.GET.d == "i" %}
+    {% if request.GET.d == "i" or request.get.d == None %}
         has-subnav
     {% endif %}
 {% endblock %}
@@ -23,7 +23,7 @@
 
     <a class="anchor" name="page_anchor"></a>
 
-    {% if request.GET.d == "i" %}
+    {% if request.GET.d == "i" or request.GET.d == None %}
     <div class="subnav subnav-fixed">
         <ul class="nav nav-pills">
             <li class="dropdown">
