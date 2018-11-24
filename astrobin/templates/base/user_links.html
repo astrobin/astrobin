@@ -15,7 +15,13 @@
                 <ul class="dropdown-menu">
                     <li>
                         <a href="{% url 'set_language' "en" %}" title="English">
-                            <img src="{% static 'astrobin/icons/flags/16/United-Kingdom.png' %}" alt="English"/> English
+                            <img src="{% static 'astrobin/icons/flags/16/United-States.png' %}" alt="English (US)"/> English (US)
+                        </a>
+                    </li>
+                    <li>
+                        <a href="{% url 'set_language' "en-GB" %}" title="English">
+                            <img src="{% static 'astrobin/icons/flags/16/United-Kingdom.png' %}" alt="English (GB)" />
+                            English (GB)
                         </a>
                     </li>
                     <li>

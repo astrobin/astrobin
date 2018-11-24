@@ -101,7 +101,8 @@ LICENSE_CHOICES = (
 )
 
 LANGUAGE_CHOICES = (
-    ('en', _("English")),
+    ('en', _("English (US)")),
+    ('en-GB', _("English (GB)")),
     ('it', _("Italian")),
     ('es', _("Spanish")),
     ('fr', _("French")),
@@ -119,7 +120,8 @@ LANGUAGE_CHOICES = (
 )
 
 LANGUAGES = {
-    'en': _("English"),
+    'en': _("English (US)"),
+    'en-GB': _("English (GB)"),
     'it': _("Italian"),
     'es': _("Spanish"),
     'fr': _("French"),

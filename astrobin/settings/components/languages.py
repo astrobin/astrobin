@@ -5,7 +5,8 @@ LANGUAGE_COOKIE_NAME = 'astrobin_lang'
 
 gettext = lambda s: s
 LANGUAGES = (
-    ('en', gettext('English')),
+    ('en', gettext('English (US)')),
+    ('en-GB', gettext('English (GB)')),
     ('it', gettext('Italian')),
     ('es', gettext('Spanish')),
     ('fr', gettext('French')),
