@@ -4,7 +4,7 @@
 {% load i18n %}
 {% load avatar_tags %}
 
-{% if paginator.object_list and request.GET.q %}
+{% if paginator.object_list %}
 
     {% if search_domain == None or search_domain == 'i' %}
         <ul class="thumbnails astrobin-thumbnails">

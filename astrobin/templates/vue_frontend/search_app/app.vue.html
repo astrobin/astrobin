@@ -100,7 +100,12 @@
         el: '#search-app',
         template: "#app-template",
         data: {
-            collapsed: false,
+            collapsed:
+                {% if request.GET.q == None %}
+                    true
+                {% else %}
+                    false
+                {% endif %},
 
             q: "{{ request.GET.q }}",
             searchDomain:
