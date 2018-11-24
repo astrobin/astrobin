@@ -585,7 +585,7 @@ class NestedCommentIndex(CelerySearchIndex, Indexable):
         return NestedComment
 
     def index_queryset(self, using=None):
-        return self.get_model().objects.filter(deleted=False, pk__lte = 200)
+        return self.get_model().objects.filter(deleted=False)
 
 
 class ForumTopicIndex(CelerySearchIndex, Indexable):
@@ -609,4 +609,4 @@ class ForumPostIndex(CelerySearchIndex, Indexable):
         return Post
 
     def index_queryset(self, using=None):
-        return self.get_model().objects.filter(on_moderation=False).filter(pk__lte = 200)
+        return self.get_model().objects.filter(on_moderation=False)
