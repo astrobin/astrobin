@@ -9,9 +9,11 @@
     {% if search_domain == None or search_domain == 'i' %}
         <ul class="thumbnails astrobin-thumbnails">
             {% for result in page_obj.object_list %}
-                <li class="thumbnail astrobin-thumbnail">
-                    {% astrobin_image result.object 'gallery' %}
-                </li>
+                {% if result.object %}
+                    <li class="thumbnail astrobin-thumbnail">
+                        {% astrobin_image result.object 'gallery' %}
+                    </li>
+                {% endif %}
             {% endfor %}
         </ul>
     {% endif %}
