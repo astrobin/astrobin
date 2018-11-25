@@ -1,4 +1,10 @@
 2018-11-25 Salvatore Iovene <salvatore@iovene.com>
+ * v1.32.3
+ * (search) Fix z-index issues
+ * (search) Exclude missing images from search results
+ * (search) Add management command to update index
+
+2018-11-25 Salvatore Iovene <salvatore@iovene.com>
  * v1.32.2
  * (astrometry) Revert: Fix plate-solving on local development mode
 
