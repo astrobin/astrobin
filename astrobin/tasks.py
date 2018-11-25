@@ -163,3 +163,8 @@ def retrieve_primary_thumbnails(pk, options):
     for alias in ('story', 'thumb', 'gallery', 'regular', 'hd', 'real'):
         logger.debug("Starting retrieve thumbnail for %d:%s" % (pk, alias))
         retrieve_thumbnail.delay(pk, alias, options)
+
+
+@shared_task()
+def update_index():
+    call_command('update_index', '-k 4', '-b 100', '--remove', '--age=24')
