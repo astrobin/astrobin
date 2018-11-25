@@ -1184,6 +1184,7 @@ li [class*=" icon-"], .nav li [class*=" icon-"] {
   box-shadow: 0 0 16px rgba(0, 0, 0, 0.5);
   background: #333 url('../images/dark-panel-tile.png');
   @include rounded-corners;
+  overflow: hidden;
 
   &.has-subnav {
     padding-top: 27px;
