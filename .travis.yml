@@ -28,7 +28,7 @@ before_script:
 
 
 script:
-  - if [ ${DOCKER_MODE} = "compose" ]; then docker-compose -f docker/docker-compose.yml -f docker/docker-compose.build.yml -f docker/docker-compose.travis.yml run --no-deps --rm astrobin ./scripts/test.sh; fi
+  - if [ ${DOCKER_MODE} = "compose" ]; then docker-compose -f docker/docker-compose.yml -f docker/docker-compose.build.yml -f docker/docker-compose.travis.yml run --no-deps --rm astrobin bash -c "./manage.py collectstatic --noinput && ./scripts/test.sh"; fi
   - if [ ${DOCKER_MODE} = "stack" ]; then docker exec -it $(docker ps -q -f name=astrobin_astrobin --last 1) ./scripts/test.sh; fi
 
 after_success:
