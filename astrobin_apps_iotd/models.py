@@ -59,11 +59,9 @@ class IotdVote(models.Model):
         unique_together = ['reviewer', 'image']
 
     def __unicode__(self):
-        return "IOTD vote by %s: %s (%d, %d)" % (
+        return "IOTD vote by %s: %s" % (
             self.reviewer.username,
-            self.submission.image.title,
-            self.submission.pk,
-            self.submission.image.pk)
+            self.image.title)
 
     @classmethod
     def first_for_image(cls, image):
