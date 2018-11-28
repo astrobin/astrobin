@@ -1216,7 +1216,9 @@ li [class*=" icon-"], .nav li [class*=" icon-"] {
 }
 
 #index #why-astrobin {
-  margin: -33px -29px 40px -29px;
+  margin: 0px -29px 40px -29px;
+  @include rounded-corners-top;
+  overflow: hidden;
 
   .carousel-inner, .carousel-image {
     height: 320px;
