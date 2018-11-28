@@ -1,6 +1,5 @@
+{% load pybb_tags %}
+
 {% if topic.updated %}
-    <abbr
-        class="timeago"
-        title="{{topic.updated | date:'Y-m-d\TH:i:s'}}">
-    </abbr>
+    {% pybb_time topic.updated %}
 {% endif %}
