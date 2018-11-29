@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2016-11-12 07:04+0000\n"
+"POT-Creation-Date: 2018-11-29 20:26+0000\n"
 "PO-Revision-Date: 2016-04-14 06:28+0000\n"
 "Last-Translator: Tomáš <fun2mas@gmail.com>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -52,29 +52,6 @@ msgstr "Zakladateľ AstroBin."
 #: templates/astrobin_apps_donations/edit.html:8
 msgid "Edit your recurring donation settings"
 msgstr "Upraviť nastavenia Vašich opakovaných darov"
-
-#: templates/astrobin_apps_donations/success.html:5
-#: templates/astrobin_apps_donations/success.html:10
-msgid "Thank you for your donation!"
-msgstr "Ďakujeme za Váš dar!"
-
-#: templates/astrobin_apps_donations/success.html:13
-msgid ""
-"We are very grateful for your support! Your contribution will help AstroBin "
-"with its ever increasing hosting costs, and will serve an incentive for us "
-"to continue to improve it."
-msgstr ""
-"Sme veľmi vďační za Vašu podporu! Váš príspevok pomôže službe AstroBin s jej "
-"rastúcimi nákladmi za hostovanie a bude nás motivovať pokračovať v jej "
-"zlepšovaní."
-
-#: templates/astrobin_apps_donations/success.html:17
-msgid ""
-"In a few minutes, once your PayPal transaction is processed, we will stop "
-"showing you ads on this website."
-msgstr ""
-"O niekoľko minút, po spracovaní Vašej PayPal transakcie, Vám zastavíme "
-"zobrazovanie reklám na tejtto web stránke."
 
 #: templates/astrobin_apps_donations/inclusion_tags/_paypal_button.html:33
 msgid "What is AstroBin worth to you?"
@@ -245,3 +222,26 @@ msgstr "Ďakujeme za Váš dar!"
 #: templates/astrobin_apps_donations/inclusion_tags/thank_you_for_your_donations.html:7
 msgid "Want to cancel?"
 msgstr ""
+
+#: templates/astrobin_apps_donations/success.html:5
+#: templates/astrobin_apps_donations/success.html:10
+msgid "Thank you for your donation!"
+msgstr "Ďakujeme za Váš dar!"
+
+#: templates/astrobin_apps_donations/success.html:13
+msgid ""
+"We are very grateful for your support! Your contribution will help AstroBin "
+"with its ever increasing hosting costs, and will serve an incentive for us "
+"to continue to improve it."
+msgstr ""
+"Sme veľmi vďační za Vašu podporu! Váš príspevok pomôže službe AstroBin s jej "
+"rastúcimi nákladmi za hostovanie a bude nás motivovať pokračovať v jej "
+"zlepšovaní."
+
+#: templates/astrobin_apps_donations/success.html:17
+msgid ""
+"In a few minutes, once your PayPal transaction is processed, we will stop "
+"showing you ads on this website."
+msgstr ""
+"O niekoľko minút, po spracovaní Vašej PayPal transakcie, Vám zastavíme "
+"zobrazovanie reklám na tejtto web stránke."
