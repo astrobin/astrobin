@@ -52,6 +52,7 @@ INSTALLED_APPS = [
     'change_email',
     'debug_toolbar',
     'template_timings_panel',
+    'cookielaw',
 
     # AstroBin apps
     'astrobin.apps.AstroBinAppConfig',

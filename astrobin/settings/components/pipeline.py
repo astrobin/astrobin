@@ -6,6 +6,8 @@ PIPELINE = {
     'JAVASCRIPT': {
         'scripts': {
             'source_filenames': (
+                'cookielaw/js/cookielaw.js',
+
                 'common/fancybox/jquery.fancybox.js',
 
                 'astrobin_apps_images/js/astrobin_apps_images.js',

@@ -1,0 +1,14 @@
+{% load i18n %}
+
+<div id="CookielawBanner" class="cookielaw-banner">
+    <div class="container">
+        <h6>{% trans "Cookie consent" %}</h6>
+        <p>
+            {% trans "AstroBin saves small pieces of text information (cookies) on your device in order to deliver better content and for statistical purposes. You can disable the usage of cookies by changing the settings of your browser. By browsing AstroBin without changing the browser settings, you grant us permission to store that information on your device." %}
+        </p>
+
+        <a class="btn btn-primary" href="javascript:Cookielaw.createCookielawCookie();">
+            {% trans "I agree" %}
+        </a>
+    </div>
+</div>

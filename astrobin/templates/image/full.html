@@ -2,6 +2,7 @@
 {% load common_tags %}
 {% load pipeline %}
 {% load hitcount_tags %}
+{% load cookielaw_tags %}
 {% load i18n %}
 {% load tags %}
 {% load staticfiles %}
@@ -43,6 +44,8 @@
     </head>
 
     <body class="full">
+        {% cookielaw_banner %}
+
         <div class="navbar navbar-fixed-top" id="top">
             <div class="navbar-inner">
                 <div class="container-fluid">
