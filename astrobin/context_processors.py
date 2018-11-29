@@ -86,7 +86,8 @@ def common_variables(request):
         'GOOGLE_ANALYTICS_ID': settings.GOOGLE_ANALYTICS_ID,
         'READONLY_MODE': settings.READONLY_MODE,
         'HAS_BOUNCED_EMAILS': bounced,
-        'COUNTRIES': COUNTRIES
+        'COUNTRIES': COUNTRIES,
+        'COOKIELAW_ACCEPTED': request.COOKIES.get('cookielaw_accepted', False),
     }
 
     if request.user.is_authenticated() and request.user.userprofile.is_image_moderator():
