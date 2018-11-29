@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2016-11-12 07:04+0000\n"
+"POT-Creation-Date: 2018-11-29 20:25+0000\n"
 "PO-Revision-Date: 2015-12-28 19:51+0000\n"
 "Last-Translator: Salvatore <salvatore@iovene.com>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -52,29 +52,6 @@ msgstr "Fondatore di AstroBin"
 #: templates/astrobin_apps_donations/edit.html:8
 msgid "Edit your recurring donation settings"
 msgstr "Modifica la tua donazione ricorrente"
-
-#: templates/astrobin_apps_donations/success.html:5
-#: templates/astrobin_apps_donations/success.html:10
-msgid "Thank you for your donation!"
-msgstr "Grazie per la tua donazione!"
-
-#: templates/astrobin_apps_donations/success.html:13
-msgid ""
-"We are very grateful for your support! Your contribution will help AstroBin "
-"with its ever increasing hosting costs, and will serve an incentive for us "
-"to continue to improve it."
-msgstr ""
-"Siamo molto grati per il tuo supporto! Il tuo contributo ha aiutato AstroBin "
-"con i suoi costi di hosting sempre in aumento, ed è stato un incentivo per "
-"farci continuare a migliorarlo."
-
-#: templates/astrobin_apps_donations/success.html:17
-msgid ""
-"In a few minutes, once your PayPal transaction is processed, we will stop "
-"showing you ads on this website."
-msgstr ""
-"In pochi minuti, nonappena la tua transazione PayPal sarà processata, "
-"smetteremo di mostrarti pubblicità su questo sito."
 
 #: templates/astrobin_apps_donations/inclusion_tags/_paypal_button.html:33
 msgid "What is AstroBin worth to you?"
@@ -271,6 +248,29 @@ msgstr "Grazie per le tue donazioni!"
 #: templates/astrobin_apps_donations/inclusion_tags/thank_you_for_your_donations.html:7
 msgid "Want to cancel?"
 msgstr "Vuoi cancellare?"
+
+#: templates/astrobin_apps_donations/success.html:5
+#: templates/astrobin_apps_donations/success.html:10
+msgid "Thank you for your donation!"
+msgstr "Grazie per la tua donazione!"
+
+#: templates/astrobin_apps_donations/success.html:13
+msgid ""
+"We are very grateful for your support! Your contribution will help AstroBin "
+"with its ever increasing hosting costs, and will serve an incentive for us "
+"to continue to improve it."
+msgstr ""
+"Siamo molto grati per il tuo supporto! Il tuo contributo ha aiutato AstroBin "
+"con i suoi costi di hosting sempre in aumento, ed è stato un incentivo per "
+"farci continuare a migliorarlo."
+
+#: templates/astrobin_apps_donations/success.html:17
+msgid ""
+"In a few minutes, once your PayPal transaction is processed, we will stop "
+"showing you ads on this website."
+msgstr ""
+"In pochi minuti, nonappena la tua transazione PayPal sarà processata, "
+"smetteremo di mostrarti pubblicità su questo sito."
 
 #~ msgid "Thank you for your support!"
 #~ msgstr "Grazie per il tuo supporto!"

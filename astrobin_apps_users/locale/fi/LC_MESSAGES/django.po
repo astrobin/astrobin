@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2016-11-12 07:03+0000\n"
+"POT-Creation-Date: 2018-11-29 20:20+0000\n"
 "PO-Revision-Date: 2015-12-30 10:21+0000\n"
 "Last-Translator: Samuli <samuli.vuorinen@iki.fi>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -19,17 +19,17 @@ msgstr ""
 "X-Generator: Pootle 2.5.0\n"
 "X-POOTLE-MTIME: 1451470906.568632\n"
 
-#: templates/astrobin_apps_users/inclusion_tags/astrobin_user.html:42
+#: templates/astrobin_apps_users/inclusion_tags/astrobin_user.html:49
 #: templates/astrobin_apps_users/inclusion_tags/user_list.html:18
 msgid "Images"
 msgstr "Kuvat"
 
-#: templates/astrobin_apps_users/inclusion_tags/astrobin_user.html:43
+#: templates/astrobin_apps_users/inclusion_tags/astrobin_user.html:50
 #: templates/astrobin_apps_users/inclusion_tags/user_list.html:19
 msgid "Followers"
 msgstr "Seuraajat"
 
-#: templates/astrobin_apps_users/inclusion_tags/astrobin_user.html:44
+#: templates/astrobin_apps_users/inclusion_tags/astrobin_user.html:51
 #: templates/astrobin_apps_users/inclusion_tags/user_list.html:20
 msgid "Following"
 msgstr "Seuraa"
@@ -42,6 +42,30 @@ msgstr "Käyttäjä"
 #: templates/astrobin_apps_users/inclusion_tags/user_list_entries.html:24
 msgid "No users."
 msgstr "Ei käyttäjiä"
+
+#: templatetags/astrobin_apps_users_tags.py:56
+msgid "Administrator"
+msgstr ""
+
+#: templatetags/astrobin_apps_users_tags.py:60
+msgid "Image moderator"
+msgstr ""
+
+#: templatetags/astrobin_apps_users_tags.py:67
+msgid "IOTD Submitter"
+msgstr ""
+
+#: templatetags/astrobin_apps_users_tags.py:71
+msgid "IOTD Reviewer"
+msgstr ""
+
+#: templatetags/astrobin_apps_users_tags.py:75
+msgid "IOTD Judge"
+msgstr ""
+
+#: templatetags/astrobin_apps_users_tags.py:79
+msgid "Premium member"
+msgstr ""
 
 #~ msgid "%(images_number)s image"
 #~ msgid_plural "%(images_number)s images"

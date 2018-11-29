@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2016-11-12 07:04+0000\n"
+"POT-Creation-Date: 2018-11-29 20:28+0000\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -121,4 +121,65 @@ msgstr ""
 
 #: templates/astrobin_apps_premium/migrate_donations_success.html:12
 msgid "Thanks for supporting AstroBin!"
+msgstr ""
+
+#: templates/notification/expiring_subscription/full.txt:3
+#, python-format
+msgid ""
+"Your \"%(subscription_name)s\" subscription on AstroBin will expire in one "
+"week."
+msgstr ""
+
+#: templates/notification/expiring_subscription/full.txt:5
+#: templates/notification/expiring_subscription_autorenew/full.txt:7
+msgid ""
+"When a Premium or Lite subscription on AstroBin expires, nothing happens to "
+"your images or any of your content. You are reverted to AstroBin Free and "
+"will not be able to upload new images until you renew, but you may continue "
+"to use AstroBin in all other aspects if you do not have any new images to "
+"share at the moment."
+msgstr ""
+
+#: templates/notification/expiring_subscription/full.txt:7
+#: templates/notification/expiring_subscription_autorenew/full.txt:9
+msgid ""
+"When you are ready to renew your subscription, please visit the following "
+"page:"
+msgstr ""
+
+#: templates/notification/expiring_subscription/notice.html:4
+#: templates/notification/expiring_subscription/short.html:4
+#: templates/notification/expiring_subscription/short.txt:3
+msgid "Your premium subscription will expire in one week"
+msgstr ""
+
+#: templates/notification/expiring_subscription_autorenew/full.txt:3
+#, python-format
+msgid ""
+"Your \"%(subscription_name)s\" subscription on AstroBin will be "
+"automatically renewed in one week."
+msgstr ""
+
+#: templates/notification/expiring_subscription_autorenew/full.txt:5
+msgid ""
+"You have an automatically renewing subscription on AstroBin, and we will "
+"attempt to renew it automatically. If your subscription was created the "
+"regular way, via PayPal, then PayPal will attempt to charge your credit card "
+"or retrieve funds that are available in your account."
+msgstr ""
+
+#: templates/notification/expiring_subscription_autorenew/full.txt:13
+msgid ""
+"If your subscription was created manually via a bank transfer, please get in "
+"touch for a new payment."
+msgstr ""
+
+#: templates/notification/expiring_subscription_autorenew/full.txt:17
+msgid "Thank you!"
+msgstr ""
+
+#: templates/notification/expiring_subscription_autorenew/notice.html:4
+#: templates/notification/expiring_subscription_autorenew/short.html:4
+#: templates/notification/expiring_subscription_autorenew/short.txt:3
+msgid "Your premium subscription will be automatically renewed in one week"
 msgstr ""

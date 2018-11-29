@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2016-11-12 07:04+0000\n"
+"POT-Creation-Date: 2018-11-29 20:26+0000\n"
 "PO-Revision-Date: 2014-02-20 10:01+0000\n"
 "Last-Translator: mychat_aa <mychat.aa@gmail.com>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -52,28 +52,6 @@ msgstr "Astrobin的資助者"
 #, fuzzy
 msgid "Edit your recurring donation settings"
 msgstr "取消您經常性的捐助"
-
-#: templates/astrobin_apps_donations/success.html:5
-#: templates/astrobin_apps_donations/success.html:10
-msgid "Thank you for your donation!"
-msgstr "謝謝您的捐獻"
-
-#: templates/astrobin_apps_donations/success.html:13
-msgid ""
-"We are very grateful for your support! Your contribution will help AstroBin "
-"with its ever increasing hosting costs, and will serve an incentive for us "
-"to continue to improve it."
-msgstr ""
-"我們非常感謝您的支持！你的貢獻將幫助支付AstroBin日益增加的主機託管費用，並且"
-"將激勵我們持續不斷的進步。"
-
-#: templates/astrobin_apps_donations/success.html:17
-msgid ""
-"In a few minutes, once your PayPal transaction is processed, we will stop "
-"showing you ads on this website."
-msgstr ""
-"幾分鐘之後，一旦你的PayPal轉帳交易處理完畢，我們將終止在您專屬頁面的商業廣"
-"告。"
 
 #: templates/astrobin_apps_donations/inclusion_tags/_paypal_button.html:33
 msgid "What is AstroBin worth to you?"
@@ -256,6 +234,28 @@ msgstr "謝謝您的捐獻"
 #: templates/astrobin_apps_donations/inclusion_tags/thank_you_for_your_donations.html:7
 msgid "Want to cancel?"
 msgstr "想取消嗎?"
+
+#: templates/astrobin_apps_donations/success.html:5
+#: templates/astrobin_apps_donations/success.html:10
+msgid "Thank you for your donation!"
+msgstr "謝謝您的捐獻"
+
+#: templates/astrobin_apps_donations/success.html:13
+msgid ""
+"We are very grateful for your support! Your contribution will help AstroBin "
+"with its ever increasing hosting costs, and will serve an incentive for us "
+"to continue to improve it."
+msgstr ""
+"我們非常感謝您的支持！你的貢獻將幫助支付AstroBin日益增加的主機託管費用，並且"
+"將激勵我們持續不斷的進步。"
+
+#: templates/astrobin_apps_donations/success.html:17
+msgid ""
+"In a few minutes, once your PayPal transaction is processed, we will stop "
+"showing you ads on this website."
+msgstr ""
+"幾分鐘之後，一旦你的PayPal轉帳交易處理完畢，我們將終止在您專屬頁面的商業廣"
+"告。"
 
 #~ msgid "Thank you for your support!"
 #~ msgstr "謝謝您的幫助!"
