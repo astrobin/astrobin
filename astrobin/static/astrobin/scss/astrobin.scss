@@ -818,6 +818,29 @@ body.full {
   }
 }
 
+.cookielaw-banner {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  width: 100%;
+  z-index: 1040;
+
+  background: #111 url('../images/darker-panel-tile.png');
+  color: #a0a0a0;
+  padding: 30px 0;
+
+  h6 {
+    color: $strong-text-color;
+    font-size: 16px;
+    margin: 0 0 20px 0;
+  }
+
+  .btn {
+    margin-top: 10px;
+  }
+}
+
 #navbar-user-scores {
   font-size: 66%;
   color: #F2CEB8;
