@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2018-11-29 20:19+0000\n"
+"POT-Creation-Date: 2018-12-01 16:36+0000\n"
 "PO-Revision-Date: 2013-10-14 09:52+0100\n"
 "Last-Translator: Koen_Dierckens <koen.dierckens@pandora.be>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -18,78 +18,48 @@ msgstr ""
 "Plural-Forms: nplurals=2; plural=(n != 1);\n"
 "X-Generator: Pootle 2.1.6\n"
 
-#: templates/nested_comments/nestedcomment_app.html:26
-#: templates/nested_comments/nestedcomment_app.html:152
-#: templates/nested_comments/nestedcomment_app.html:169
-#: templates/nested_comments/nestedcomment_list.html:59
 msgid "Cancel"
 msgstr "Annuleren"
 
-#: templates/nested_comments/nestedcomment_app.html:35
 msgid "Add a comment"
 msgstr "Commentaar toevoegen"
 
-#: templates/nested_comments/nestedcomment_app.html:40
-#: templates/nested_comments/nestedcomment_app.html:175
-msgid ""
-"Please <a href=\"/accounts/login/\">login</a> or <a href=\"/accounts/"
-"register/\">register</a> to leave a comment.</p>"
-msgstr ""
-"Gelieve <a href=\"/accounts/login/\">in te loggen</a> of te <a href=\"/"
-"accounts/register/\">registreren</a> om commentaar te kunnen geven.</p>"
+msgid "Please <a href=\"/accounts/login/\">login</a> or <a href=\"/accounts/register/\">register</a> to leave a comment.</p>"
+msgstr "Gelieve <a href=\"/accounts/login/\">in te loggen</a> of te <a href=\"/accounts/register/\">registreren</a> om commentaar te kunnen geven.</p>"
 
-#: templates/nested_comments/nestedcomment_app.html:49
 msgid "There are no comments yet."
 msgstr "Er zijn nog geen commentaren."
 
-#: templates/nested_comments/nestedcomment_app.html:73
-#: templates/nested_comments/nestedcomment_app.html:96
 msgid "(deleted)"
 msgstr "(gewist)"
 
-#: templates/nested_comments/nestedcomment_app.html:111
-#: templates/nested_comments/nestedcomment_list.html:34
 msgid "Link"
 msgstr "Link"
 
-#: templates/nested_comments/nestedcomment_app.html:115
-#: templates/nested_comments/nestedcomment_list.html:40
 msgid "Undelete"
 msgstr "Ongedaan maken wissen"
 
-#: templates/nested_comments/nestedcomment_app.html:117
-#: templates/nested_comments/nestedcomment_list.html:42
 msgid "Delete"
 msgstr "Wissen"
 
-#: templates/nested_comments/nestedcomment_app.html:122
-#: templates/nested_comments/nestedcomment_list.html:45
 msgid "Edit"
 msgstr "Bewerken"
 
-#: templates/nested_comments/nestedcomment_app.html:127
-#: templates/nested_comments/nestedcomment_list.html:47
 msgid "Reply"
 msgstr "Antwoorden"
 
-#: templates/nested_comments/nestedcomment_app.html:155
 msgid "The comment cannot be empty."
 msgstr "Het commentaarveld mag niet leeg zijn."
 
-#: templates/nested_comments/nestedcomment_app.html:186
-#: templates/nested_comments/nestedcomment_list.html:58
 msgid "Save"
 msgstr "Bewaren"
 
-#: templates/nested_comments/nestedcomment_list.html:27
 msgid "(comment deleted)"
 msgstr "(commentaar gewist)"
 
-#: templates/nested_comments/nestedcomment_list.html:61
 msgid "Formatting help"
 msgstr "Hulp ivm het formatteren"
 
-#: templates/nested_comments/nestedcomment_list.html:76
 msgid "There doesn't seem to be anything here."
 msgstr "Het lijkt er op dat hier niets is."
 
@@ -120,12 +90,5 @@ msgstr "Het lijkt er op dat hier niets is."
 #~ msgid "escape the formatting syntax"
 #~ msgstr "verlaten van de formatterenende syntax"
 
-#~ msgid ""
-#~ "Remember to use the <span class=\"label label-important\">reply</span> "
-#~ "button when replying directly to a comment. To post a new top level "
-#~ "comment, use the form at the end of the comment list."
-#~ msgstr ""
-#~ "Denk eraan om de <span class=\"label label-important\">antwoorden</span>-"
-#~ "knop te gebruiken om een rechtstreeks antwoord te formuleren op een "
-#~ "commentaar. Om een nieuw commentaar aan te maken dien je het invulveld te "
-#~ "gebruiken onderaan de commentaarlijst."
+#~ msgid "Remember to use the <span class=\"label label-important\">reply</span> button when replying directly to a comment. To post a new top level comment, use the form at the end of the comment list."
+#~ msgstr "Denk eraan om de <span class=\"label label-important\">antwoorden</span>-knop te gebruiken om een rechtstreeks antwoord te formuleren op een commentaar. Om een nieuw commentaar aan te maken dien je het invulveld te gebruiken onderaan de commentaarlijst."

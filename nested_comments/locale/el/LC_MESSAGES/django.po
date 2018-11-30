@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2018-11-29 20:18+0000\n"
+"POT-Creation-Date: 2018-12-01 16:36+0000\n"
 "PO-Revision-Date: 2013-12-28 09:06+0000\n"
 "Last-Translator: kookoo_gr <kookoo_gr@yahoo.com>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -19,78 +19,48 @@ msgstr ""
 "X-Generator: Pootle 2.5.0\n"
 "X-POOTLE-MTIME: 1388221612.935002\n"
 
-#: templates/nested_comments/nestedcomment_app.html:26
-#: templates/nested_comments/nestedcomment_app.html:152
-#: templates/nested_comments/nestedcomment_app.html:169
-#: templates/nested_comments/nestedcomment_list.html:59
 msgid "Cancel"
 msgstr "Ακύρωση"
 
-#: templates/nested_comments/nestedcomment_app.html:35
 msgid "Add a comment"
 msgstr "Προσθήκη σχολίου"
 
-#: templates/nested_comments/nestedcomment_app.html:40
-#: templates/nested_comments/nestedcomment_app.html:175
-msgid ""
-"Please <a href=\"/accounts/login/\">login</a> or <a href=\"/accounts/"
-"register/\">register</a> to leave a comment.</p>"
-msgstr ""
-"Παρακαλώ <a href=\"/accounts/login/\">κάντε είσοδο</a> ή <a href=\"/accounts/"
-"register/\">εγγραφείτε</a> για να αφήσετε σχόλιο.</p>"
+msgid "Please <a href=\"/accounts/login/\">login</a> or <a href=\"/accounts/register/\">register</a> to leave a comment.</p>"
+msgstr "Παρακαλώ <a href=\"/accounts/login/\">κάντε είσοδο</a> ή <a href=\"/accounts/register/\">εγγραφείτε</a> για να αφήσετε σχόλιο.</p>"
 
-#: templates/nested_comments/nestedcomment_app.html:49
 msgid "There are no comments yet."
 msgstr "Δεν υπάρχουν σχόλια."
 
-#: templates/nested_comments/nestedcomment_app.html:73
-#: templates/nested_comments/nestedcomment_app.html:96
 msgid "(deleted)"
 msgstr "(διεγράφη)"
 
-#: templates/nested_comments/nestedcomment_app.html:111
-#: templates/nested_comments/nestedcomment_list.html:34
 msgid "Link"
 msgstr "Σύνδεσμος"
 
-#: templates/nested_comments/nestedcomment_app.html:115
-#: templates/nested_comments/nestedcomment_list.html:40
 msgid "Undelete"
 msgstr "Επαναφορά"
 
-#: templates/nested_comments/nestedcomment_app.html:117
-#: templates/nested_comments/nestedcomment_list.html:42
 msgid "Delete"
 msgstr "Διαγραφή"
 
-#: templates/nested_comments/nestedcomment_app.html:122
-#: templates/nested_comments/nestedcomment_list.html:45
 msgid "Edit"
 msgstr "Επεξεργασία"
 
-#: templates/nested_comments/nestedcomment_app.html:127
-#: templates/nested_comments/nestedcomment_list.html:47
 msgid "Reply"
 msgstr "Απάντηση"
 
-#: templates/nested_comments/nestedcomment_app.html:155
 msgid "The comment cannot be empty."
 msgstr "Το σχόλιο δεν μπορεί να είναι άδειο."
 
-#: templates/nested_comments/nestedcomment_app.html:186
-#: templates/nested_comments/nestedcomment_list.html:58
 msgid "Save"
 msgstr "Σώσιμο"
 
-#: templates/nested_comments/nestedcomment_list.html:27
 msgid "(comment deleted)"
 msgstr "(σχόλιο διεγράφη)"
 
-#: templates/nested_comments/nestedcomment_list.html:61
 msgid "Formatting help"
 msgstr "Βοήθεια μορφοποίησης"
 
-#: templates/nested_comments/nestedcomment_list.html:76
 msgid "There doesn't seem to be anything here."
 msgstr "Δεν φαίνεται να υπάρχει κάτι εδώ."
 
@@ -121,11 +91,5 @@ msgstr "Δεν φαίνεται να υπάρχει κάτι εδώ."
 #~ msgid "escape the formatting syntax"
 #~ msgstr "έξοδος από το συντακτικό μορφοποίησης"
 
-#~ msgid ""
-#~ "Remember to use the <span class=\"label label-important\">reply</span> "
-#~ "button when replying directly to a comment. To post a new top level "
-#~ "comment, use the form at the end of the comment list."
-#~ msgstr ""
-#~ "Θυμηθείτε να χρησιμοποιήσετε το κουμπί <span class=\"label label-important"
-#~ "\">απάντησης</span> όταν απαντάτε σε ένα σχόλιο. Για να αναρτήσετε ένα "
-#~ "σχόλιο στην κορυφή, χρησιμοποιήστε την φόρμα στο τέλος της λίστας σχολίων."
+#~ msgid "Remember to use the <span class=\"label label-important\">reply</span> button when replying directly to a comment. To post a new top level comment, use the form at the end of the comment list."
+#~ msgstr "Θυμηθείτε να χρησιμοποιήσετε το κουμπί <span class=\"label label-important\">απάντησης</span> όταν απαντάτε σε ένα σχόλιο. Για να αναρτήσετε ένα σχόλιο στην κορυφή, χρησιμοποιήστε την φόρμα στο τέλος της λίστας σχολίων."

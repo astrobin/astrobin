@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2018-11-29 20:20+0000\n"
+"POT-Creation-Date: 2018-12-01 16:36+0000\n"
 "PO-Revision-Date: 2013-08-04 18:20+0100\n"
 "Last-Translator: AstroShomy <stoja07@gmail.com>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -15,82 +15,51 @@ msgstr ""
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"Plural-Forms: nplurals=3; plural=(n%10==1 && n%100!=11 ? 0 : n%10>=2 && n"
-"%10<=4 && (n%100<10 || n%100>=20) ? 1 : 2);\n"
+"Plural-Forms: nplurals=3; plural=(n%10==1 && n%100!=11 ? 0 : n%10>=2 && n%10<=4 && (n%100<10 || n%100>=20) ? 1 : 2);\n"
 "X-Generator: Pootle 2.1.6\n"
 
-#: templates/nested_comments/nestedcomment_app.html:26
-#: templates/nested_comments/nestedcomment_app.html:152
-#: templates/nested_comments/nestedcomment_app.html:169
-#: templates/nested_comments/nestedcomment_list.html:59
 msgid "Cancel"
 msgstr "Otkaži"
 
-#: templates/nested_comments/nestedcomment_app.html:35
 msgid "Add a comment"
 msgstr "Dodaj komentar"
 
-#: templates/nested_comments/nestedcomment_app.html:40
-#: templates/nested_comments/nestedcomment_app.html:175
-msgid ""
-"Please <a href=\"/accounts/login/\">login</a> or <a href=\"/accounts/"
-"register/\">register</a> to leave a comment.</p>"
-msgstr ""
-"Molimo vas da se <a href=\"/accounts/login/\">prijavite</a> ili <a href=\"/"
-"accounts/register/\">registrujete</a> da biste ostavili komentar.</p>"
+msgid "Please <a href=\"/accounts/login/\">login</a> or <a href=\"/accounts/register/\">register</a> to leave a comment.</p>"
+msgstr "Molimo vas da se <a href=\"/accounts/login/\">prijavite</a> ili <a href=\"/accounts/register/\">registrujete</a> da biste ostavili komentar.</p>"
 
-#: templates/nested_comments/nestedcomment_app.html:49
 msgid "There are no comments yet."
 msgstr "Nema komentara."
 
-#: templates/nested_comments/nestedcomment_app.html:73
-#: templates/nested_comments/nestedcomment_app.html:96
 msgid "(deleted)"
 msgstr "(obrisano)"
 
-#: templates/nested_comments/nestedcomment_app.html:111
-#: templates/nested_comments/nestedcomment_list.html:34
 msgid "Link"
 msgstr "Veza"
 
-#: templates/nested_comments/nestedcomment_app.html:115
-#: templates/nested_comments/nestedcomment_list.html:40
 msgid "Undelete"
 msgstr "Otkaži brisanje"
 
-#: templates/nested_comments/nestedcomment_app.html:117
-#: templates/nested_comments/nestedcomment_list.html:42
 msgid "Delete"
 msgstr "Obriši"
 
-#: templates/nested_comments/nestedcomment_app.html:122
-#: templates/nested_comments/nestedcomment_list.html:45
 msgid "Edit"
 msgstr "Uredi"
 
-#: templates/nested_comments/nestedcomment_app.html:127
-#: templates/nested_comments/nestedcomment_list.html:47
 msgid "Reply"
 msgstr "Odgovori"
 
-#: templates/nested_comments/nestedcomment_app.html:155
 msgid "The comment cannot be empty."
 msgstr "Polje za komentar ne može da bude prazno."
 
-#: templates/nested_comments/nestedcomment_app.html:186
-#: templates/nested_comments/nestedcomment_list.html:58
 msgid "Save"
 msgstr "Sačuvaj"
 
-#: templates/nested_comments/nestedcomment_list.html:27
 msgid "(comment deleted)"
 msgstr "(komentar je obrisan)"
 
-#: templates/nested_comments/nestedcomment_list.html:61
 msgid "Formatting help"
 msgstr "Pomoć u vezi sa formatiranjem"
 
-#: templates/nested_comments/nestedcomment_list.html:76
 msgid "There doesn't seem to be anything here."
 msgstr "Izgleda da ovde nema ničega."
 

@@ -1,22 +1,34 @@
 #!/bin/bash
-LANGS="ar be ca cs de el es fa fi fr it hu ja nl pl pt pt-BR ro ru sk sq sr tr zh-CN zh-TW"
-PROJECTS="astrobin nested_comments rawdata astrobin_apps_users astrobin_apps_images astrobin_apps_platesolving astrobin_apps_donations astrobin_apps_premium astrobin_apps_groups"
-TO='/var/www/astrobin'
-FROM='/home/astrobin/venv/translate.astrobin.com/lib/python2.7/site-packages/pootle/po'
 
+# Usage:
+#
+#    ./out.sh $ssh_cmd $pootle_host $remote_pootle_root
+#
+# e.g.:
+#    ./out.sh "ssh -i auth.pem" user@host.com /opt/pootle
 
-echo "Syncing Pootle files to disk..."
-pootle sync_stores
+FILES=$(find . -name *.po | grep -v "^./src")
 
-for proj in $PROJECTS
-do
-    echo "* $proj"
-    for lang in $LANGS
-    do
-        echo "  Copying $lang..."
-        cp $FROM/$proj/$lang/django.po $TO/$proj/locale/$lang/LC_MESSAGES/
-    done
+SSH=$1
+HOST=$2
+POOTLE_ROOT=$3
+
+TMPDIR=$(mktemp -d -t astrobin)
+
+for FILE in ${FILES}; do
+    echo "Processing ${FILE}..."
+    APP=$(echo ${FILE} | awk -F "/" '{print $2}')
+    LANG=$(echo ${FILE} | awk -F "/" '{print $4}')
+    EXT="po"
+
+    if [[ "${LANG}" == "en" ]]; then
+        LANG="templates"
+        EXT="pot"
+    fi
+
+    mkdir -p ${TMPDIR}/${APP}/${LANG}
+    cp ${FILE} ${TMPDIR}/${APP}/${LANG}/${APP}.${EXT}
 done
 
-echo "Done."
-
+rsync -avz -e "${SSH}" ${TMPDIR}/* ${HOST}:${POOTLE_ROOT}/lib/pootle/translations
+${SSH} ${HOST} -t sudo python ${POOTLE_ROOT}/bin/pootle update_stores
