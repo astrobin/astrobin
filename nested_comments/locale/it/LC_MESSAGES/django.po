@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2018-11-29 20:19+0000\n"
+"POT-Creation-Date: 2018-12-01 16:36+0000\n"
 "PO-Revision-Date: 2013-07-24 16:08+0100\n"
 "Last-Translator: Salvatore <salvatore@iovene.com>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -18,78 +18,48 @@ msgstr ""
 "Plural-Forms: nplurals=2; plural=(n != 1);\n"
 "X-Generator: Pootle 2.1.6\n"
 
-#: templates/nested_comments/nestedcomment_app.html:26
-#: templates/nested_comments/nestedcomment_app.html:152
-#: templates/nested_comments/nestedcomment_app.html:169
-#: templates/nested_comments/nestedcomment_list.html:59
 msgid "Cancel"
 msgstr "Annulla"
 
-#: templates/nested_comments/nestedcomment_app.html:35
 msgid "Add a comment"
 msgstr "Aggiungi un commento"
 
-#: templates/nested_comments/nestedcomment_app.html:40
-#: templates/nested_comments/nestedcomment_app.html:175
-msgid ""
-"Please <a href=\"/accounts/login/\">login</a> or <a href=\"/accounts/"
-"register/\">register</a> to leave a comment.</p>"
-msgstr ""
-"Fai il <a href=\"/accounts/login/\">login</a> o <a href=\"/accounts/register/"
-"\">registrati</a> per lasciare un commento."
+msgid "Please <a href=\"/accounts/login/\">login</a> or <a href=\"/accounts/register/\">register</a> to leave a comment.</p>"
+msgstr "Fai il <a href=\"/accounts/login/\">login</a> o <a href=\"/accounts/register/\">registrati</a> per lasciare un commento."
 
-#: templates/nested_comments/nestedcomment_app.html:49
 msgid "There are no comments yet."
 msgstr "Non ci sono ancora commenti."
 
-#: templates/nested_comments/nestedcomment_app.html:73
-#: templates/nested_comments/nestedcomment_app.html:96
 msgid "(deleted)"
 msgstr "(cancellato)"
 
-#: templates/nested_comments/nestedcomment_app.html:111
-#: templates/nested_comments/nestedcomment_list.html:34
 msgid "Link"
 msgstr "Link"
 
-#: templates/nested_comments/nestedcomment_app.html:115
-#: templates/nested_comments/nestedcomment_list.html:40
 msgid "Undelete"
 msgstr "Ripristina"
 
-#: templates/nested_comments/nestedcomment_app.html:117
-#: templates/nested_comments/nestedcomment_list.html:42
 msgid "Delete"
 msgstr "Cancella"
 
-#: templates/nested_comments/nestedcomment_app.html:122
-#: templates/nested_comments/nestedcomment_list.html:45
 msgid "Edit"
 msgstr "Modifica"
 
-#: templates/nested_comments/nestedcomment_app.html:127
-#: templates/nested_comments/nestedcomment_list.html:47
 msgid "Reply"
 msgstr "Rispondi"
 
-#: templates/nested_comments/nestedcomment_app.html:155
 msgid "The comment cannot be empty."
 msgstr "Il commento non può essere vuoto."
 
-#: templates/nested_comments/nestedcomment_app.html:186
-#: templates/nested_comments/nestedcomment_list.html:58
 msgid "Save"
 msgstr "Salva"
 
-#: templates/nested_comments/nestedcomment_list.html:27
 msgid "(comment deleted)"
 msgstr "(commento cancellato)"
 
-#: templates/nested_comments/nestedcomment_list.html:61
 msgid "Formatting help"
 msgstr "Istruzioni per la formattazione"
 
-#: templates/nested_comments/nestedcomment_list.html:76
 msgid "There doesn't seem to be anything here."
 msgstr "Sembra che non ci sia niente qui."
 
@@ -120,11 +90,5 @@ msgstr "Sembra che non ci sia niente qui."
 #~ msgid "escape the formatting syntax"
 #~ msgstr "evita la sintassi di formattazione"
 
-#~ msgid ""
-#~ "Remember to use the <span class=\"label label-important\">reply</span> "
-#~ "button when replying directly to a comment. To post a new top level "
-#~ "comment, use the form at the end of the comment list."
-#~ msgstr ""
-#~ "Ricordati di usare il pulsante <span class=\"label label-important"
-#~ "\">rispondi</span> quando vuoi lasciare una risposta ad un commento. Per "
-#~ "lasciare un commento di primo livello, usa il modulo in fondo."
+#~ msgid "Remember to use the <span class=\"label label-important\">reply</span> button when replying directly to a comment. To post a new top level comment, use the form at the end of the comment list."
+#~ msgstr "Ricordati di usare il pulsante <span class=\"label label-important\">rispondi</span> quando vuoi lasciare una risposta ad un commento. Per lasciare un commento di primo livello, usa il modulo in fondo."

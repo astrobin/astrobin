@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2018-11-29 20:19+0000\n"
+"POT-Creation-Date: 2018-12-01 16:36+0000\n"
 "PO-Revision-Date: 2015-12-30 10:44+0000\n"
 "Last-Translator: Samuli <samuli.vuorinen@iki.fi>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -19,78 +19,48 @@ msgstr ""
 "X-Generator: Pootle 2.5.0\n"
 "X-POOTLE-MTIME: 1451472275.88037\n"
 
-#: templates/nested_comments/nestedcomment_app.html:26
-#: templates/nested_comments/nestedcomment_app.html:152
-#: templates/nested_comments/nestedcomment_app.html:169
-#: templates/nested_comments/nestedcomment_list.html:59
 msgid "Cancel"
 msgstr "Peruuta"
 
-#: templates/nested_comments/nestedcomment_app.html:35
 msgid "Add a comment"
 msgstr "Lisää kommentti"
 
-#: templates/nested_comments/nestedcomment_app.html:40
-#: templates/nested_comments/nestedcomment_app.html:175
-msgid ""
-"Please <a href=\"/accounts/login/\">login</a> or <a href=\"/accounts/"
-"register/\">register</a> to leave a comment.</p>"
-msgstr ""
-"Ole hyvä ja <a href=\"/accounts/login\">kirjaudu sisään</a> tai <a href=\"/"
-"accounts/register/\">rekisteröidy</a> jättääksesi kommentteja.</p>"
+msgid "Please <a href=\"/accounts/login/\">login</a> or <a href=\"/accounts/register/\">register</a> to leave a comment.</p>"
+msgstr "Ole hyvä ja <a href=\"/accounts/login\">kirjaudu sisään</a> tai <a href=\"/accounts/register/\">rekisteröidy</a> jättääksesi kommentteja.</p>"
 
-#: templates/nested_comments/nestedcomment_app.html:49
 msgid "There are no comments yet."
 msgstr "Kommentteja ei ole vielä."
 
-#: templates/nested_comments/nestedcomment_app.html:73
-#: templates/nested_comments/nestedcomment_app.html:96
 msgid "(deleted)"
 msgstr "(poistettu)"
 
-#: templates/nested_comments/nestedcomment_app.html:111
-#: templates/nested_comments/nestedcomment_list.html:34
 msgid "Link"
 msgstr "Linkki"
 
-#: templates/nested_comments/nestedcomment_app.html:115
-#: templates/nested_comments/nestedcomment_list.html:40
 msgid "Undelete"
 msgstr "Peru poisto"
 
-#: templates/nested_comments/nestedcomment_app.html:117
-#: templates/nested_comments/nestedcomment_list.html:42
 msgid "Delete"
 msgstr "Poista"
 
-#: templates/nested_comments/nestedcomment_app.html:122
-#: templates/nested_comments/nestedcomment_list.html:45
 msgid "Edit"
 msgstr "Muokkaa"
 
-#: templates/nested_comments/nestedcomment_app.html:127
-#: templates/nested_comments/nestedcomment_list.html:47
 msgid "Reply"
 msgstr "Vastaa"
 
-#: templates/nested_comments/nestedcomment_app.html:155
 msgid "The comment cannot be empty."
 msgstr "Kommentti ei saa olla tyhjä."
 
-#: templates/nested_comments/nestedcomment_app.html:186
-#: templates/nested_comments/nestedcomment_list.html:58
 msgid "Save"
 msgstr "Tallenna"
 
-#: templates/nested_comments/nestedcomment_list.html:27
 msgid "(comment deleted)"
 msgstr "(kommentti poistettu)"
 
-#: templates/nested_comments/nestedcomment_list.html:61
 msgid "Formatting help"
 msgstr "Muotoiluapua"
 
-#: templates/nested_comments/nestedcomment_list.html:76
 msgid "There doesn't seem to be anything here."
 msgstr "Täällä ei näytä olevan mitään."
 
