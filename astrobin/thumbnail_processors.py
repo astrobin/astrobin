@@ -130,7 +130,7 @@ def histogram(image, histogram = False, **kwargs):
     green = (51,204,51)             # Color for the green lines
     blue = (0,102,255)              # Color for the blue lines
     ##################################################################################
-    hist = image.histogram()
+    hist = image.convert("RGB").histogram()
     histMax = max(hist)                                     # comon color
     xScale = float(histWidth)/len(hist)                     # xScaling
     yScale = float((histHeight)*multiplierValue)/histMax    # yScaling
