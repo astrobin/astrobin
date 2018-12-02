@@ -1,4 +1,12 @@
 2018-12-02 Salvatore Iovene <salvatore@iovene.com>
+ * v1.33.1
+ * (images) Fix histogram on PNG images with alpha channel
+ * (images) Make debugging thumbnailing easier
+ * (images) Minor code quality fixes to histogram thumbnail processor
+ * (notifications) Fix localization of notification settings
+ * (cookies) Move cookielaw js out of pipeline and remove cookie banner from maintenance pag
+
+2018-12-02 Salvatore Iovene <salvatore@iovene.com>
  * v1.33.0
  * (i18n) Update Italian and Romanian translations
  * (i18n) Updarte link to translation server
