@@ -173,3 +173,8 @@ def update_index():
 @shared_task()
 def send_missing_data_source_notifications():
     call_command("send_missing_data_source_notifications")
+
+
+@shared_task()
+def send_missing_remote_source_notifications():
+    call_command("send_missing_remote_source_notifications")

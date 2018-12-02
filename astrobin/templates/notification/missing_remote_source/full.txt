@@ -1,0 +1,13 @@
+{% load i18n %}
+
+{% blocktrans %}Data is paramount on AstroBin, and the whole community thrives on it.{% endblocktrans %}
+
+{% blocktrans %}We have noticed that one or more of your images that were acquired at a remote observatory are missing the "Remote source" field, a very important piece of information that the members of the AstroBin community value a lot.{% endblocktrans %}
+
+{% blocktrans %}We would really appreciate if you could edit the following images of yours and set the missing field appropriately:{% endblocktrans %}
+
+{% for image in images %}
+{{ image.title | default:_("(no title)") }}:
+{{ BASE_URL }}{% url 'image_edit_basic' image.pk %}
+
+{% endfor %}

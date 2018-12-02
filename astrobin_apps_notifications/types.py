@@ -195,5 +195,11 @@ NOTICE_TYPES = (
         'You have images with a missing "Data source"',
         '',
         2
+    ),
+    (
+        'missing_remote_source',
+        'You have images with a missing "Remote source"',
+        '',
+        2
     )
 )
