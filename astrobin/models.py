@@ -720,6 +720,7 @@ class Image(HasSolutionMixin, SafeDeleteModel):
         (None, "---------"),
 
         ("AC", "AstroCamp"),
+        ("CS", "ChileScope"),
         ("DSP", "Dark Sky Portal"),
         ("DSC", "DeepSkyChile"),
         ("DSW", "DeepSkyWest"),
