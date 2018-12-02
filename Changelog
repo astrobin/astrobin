@@ -1,3 +1,11 @@
+2018-12-02 Salvatore Iovene <salvatore@iovene.c*om>
+ * v1.34.0
+ * (notifications) Add notifications for users with images lacking a "Remote source"
+ * (notifications) Add notifications for users with images lacking a "Data source"
+ * (docker) Make debugging emails easier via dummy SMTP container
+ * (images) Add "Remote source" field to specify remote hosting facility
+ * (search) Fix image badges being on top of search filter dropdowns
+
 2018-12-02 Salvatore Iovene <salvatore@iovene.com>
  * v1.33.1
  * (images) Fix histogram on PNG images with alpha channel
