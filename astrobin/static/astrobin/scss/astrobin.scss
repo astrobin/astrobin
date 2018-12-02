@@ -5546,6 +5546,9 @@ table.api-keys {
 }
 
 .search-filters-app {
+  position: relative;
+  z-index: 2;
+
   .search-filter {
     display: inline-block;
     border: 1px dashed #494949;
@@ -5646,6 +5649,9 @@ table.api-keys {
 }
 
 .search-results {
+  position: relative;
+  z-index: 1;
+
   &__text {
     margin-left: 0;
 
