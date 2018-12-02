@@ -31,3 +31,5 @@ if DEBUG:
         'debug_toolbar.panels.logging.LoggingPanel',
         'debug_toolbar.panels.redirects.RedirectsPanel',
     ]
+
+    CELERY_TASK_ALWAYS_EAGER = True
