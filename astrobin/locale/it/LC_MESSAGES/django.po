@@ -8,16 +8,16 @@ msgstr ""
 "Project-Id-Version: AstroBin 1.0\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2018-12-01 16:35+0000\n"
-"PO-Revision-Date: 2016-11-13 10:32+0000\n"
-"Last-Translator: Salvatore <salvatore@iovene.com>\n"
+"PO-Revision-Date: 2018-12-01 22:46+0000\n"
+"Last-Translator: Salvatore Iovene <salvatore@iovene.com>\n"
 "Language-Team: Salvatore Iovene <salvatore@iovene.com>\n"
 "Language: it\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=(n != 1);\n"
-"X-Generator: Pootle 2.5.0\n"
-"X-POOTLE-MTIME: 1479033120.299452\n"
+"X-Generator: Pootle 2.8\n"
+"X-POOTLE-MTIME: 1543704411.000000\n"
 
 msgid "United Kingdom"
 msgstr "Regno Unito"
@@ -665,7 +665,7 @@ msgid "Syrian Arab Republic"
 msgstr "Repubblica Araba di Siria"
 
 msgid "Taiwan"
-msgstr ""
+msgstr "Taiwan"
 
 msgid "Tajikistan"
 msgstr "Tajikistan"
@@ -772,10 +772,9 @@ msgstr "Se vuoi condividere il file TIFF o FITS della tua immagine, metti qui un
 msgid "Groups"
 msgstr "Gruppi"
 
-#, fuzzy
 #| msgid "How is the Image of the Day selected?"
 msgid "Submit this image to the selected groups."
-msgstr "Come viene selezionata la foto del giorno?"
+msgstr "Proponi questa immagine ai gruppi selezionati."
 
 msgid "This field is required."
 msgstr "Questo campo è obbligatorio."
@@ -982,15 +981,13 @@ msgstr "Attribuzione-Condividi CreativeCommons"
 msgid "Attribution-NoDerivs Creative Commons"
 msgstr "Attribuzione-NoOpereDerivate Creative Commons"
 
-#, fuzzy
 #| msgid "English"
 msgid "English (US)"
-msgstr "Inglese"
+msgstr "Inglese (USA)"
 
-#, fuzzy
 #| msgid "English"
 msgid "English (GB)"
-msgstr "Inglese"
+msgstr "Inglese (GB)"
 
 msgid "Italian"
 msgstr "Italiano"
@@ -1340,50 +1337,44 @@ msgstr "Aurora boreale"
 msgid "Gear"
 msgstr "Strumentazione"
 
-#, fuzzy
 #| msgid "acquired on"
 msgid "Self acquired"
-msgstr "Acquisita il"
+msgstr "Acquisita da sé"
 
-#, fuzzy
 #| msgid "Back"
 msgid "Backyard"
-msgstr "Indietro"
+msgstr "Giardino"
 
-#, fuzzy
 #| msgid "Gallery"
 msgid "Traveller"
-msgstr "Galleria"
+msgstr "Itinerante"
 
 msgid "Own remote observatory"
-msgstr ""
+msgstr "Osservatorio remoto di proprietà"
 
-#, fuzzy
 #| msgid "Uploaded"
 msgid "Downloaded"
-msgstr "Caricamento"
+msgstr "Scaricata"
 
 msgid "Amateur hosting facility"
-msgstr ""
+msgstr "Struttura di hosting amatoriale"
 
-#, fuzzy
 #| msgid "Public data pools"
 msgid "Public amateur data"
-msgstr "Gruppi di dati pubblici"
+msgstr "Dati pubblici amatoriali"
 
 msgid "Professional, scientific grade data"
-msgstr ""
+msgstr "Dati professionali di qualità scientifica"
 
 msgid "Mix of multiple sources"
-msgstr ""
+msgstr "Mix di origini multiple"
 
-#, fuzzy
 #| msgid "Image of the day"
 msgid "None of the above"
-msgstr "Foto del giorno"
+msgstr "Nessuna delle precedenti"
 
 msgid "Unknown"
-msgstr ""
+msgstr "Sconosciuta"
 
 msgid "Title"
 msgstr "Titolo"
@@ -1392,12 +1383,11 @@ msgid "Subject type"
 msgstr "Tipo di soggetto"
 
 msgid "Data source"
-msgstr ""
+msgstr "Origine dei dati"
 
-#, fuzzy
 #| msgid "Where did you get the idea for this site?"
 msgid "Where does the data for this image come from?"
-msgstr "Come ti è venuta l'idea di fare questo sito?"
+msgstr "Da dove vengono i dati per questa immagine?"
 
 msgid "Main solar system subject"
 msgstr "Corpo del sistema solare principale"
@@ -1439,7 +1429,7 @@ msgid "(no title)"
 msgstr "(senza titolo)"
 
 msgid "Mix of multiple source"
-msgstr ""
+msgstr "Mix di origini multiple"
 
 msgid "Images"
 msgstr "Immagini"
@@ -1483,12 +1473,11 @@ msgstr "9 - Centro città (BIANCO)"
 msgid "Synthetic channel"
 msgstr "Canale sintetico"
 
-#, fuzzy
 #| msgid "Filter"
 msgid "Filter"
 msgid_plural "Filters"
 msgstr[0] "Filtro"
-msgstr[1] "Filtro"
+msgstr[1] "Filtri"
 
 msgid "Binning"
 msgstr "Bin"
@@ -1674,10 +1663,13 @@ msgid "Country of operation"
 msgstr "Paese in cui si opera"
 
 msgid "I want to be excluded from competitions"
-msgstr ""
+msgstr "Desidero di essere escluso dalle competizioni"
 
 msgid "Check this box to be excluded from competitions and contests, such as the Image of the Day, the Top Picks, other custom contests. This will remove you from the leaderboards and hide your AstroBin Index."
 msgstr ""
+"Seleziona questo quadretto per essere escluso da competizioni e gare, come "
+"la Foto del Giorno, i Top Picks, ed altre gare ad-hoc. Verrai dimosso dalle "
+"classifiche ed il tuo Indice AstroBin sarà nascosto."
 
 msgid "Global stream"
 msgstr "Stream di attività globale"
@@ -1716,22 +1708,30 @@ msgid "The license you select here is automatically applied to all your new imag
 msgstr "La licenza che selezioni qui verrà applicata a tutte le tue nuove immagini."
 
 msgid "I accept to receive rare important communications via email"
-msgstr ""
+msgstr "Accetto di ricevere rare ed importanti comunicazioni via email"
 
 msgid "This is highly recommended. These are very rare and contain information that you probably want to have."
 msgstr ""
+"Altamente raccomandato. Si tratta di informazioni molto occasionali che "
+"probabilmente ti interesseranno."
 
 msgid "I accept to receive occasional newsletters via email"
-msgstr ""
+msgstr "Accetto di ricevere newsletter occasionali via email"
 
 msgid "Newsletters do not have a fixed schedule, but in any case they are not sent out more often than once per month."
 msgstr ""
+"Le newsletter non hanno una programmazione fissa, ma in ogni caso non "
+"saranno spedite più frequentemente di una volta al mese."
 
 msgid "I accept to receive occasional marketing and commercial material via email"
 msgstr ""
+"Accetto di ricevere materiale commerciale e di marketing occasionalmente via "
+"email"
 
 msgid "These emails may contain offers, commercial news, and promotions from AstroBin or its partners."
 msgstr ""
+"Queste email possono contenere offerte, novità commerciali, e promozioni da "
+"AstroBin o i suoi affiliati."
 
 msgid "Language"
 msgstr "Lingua"
@@ -1956,7 +1956,7 @@ msgid "Come back soon!"
 msgstr "Torna presto!"
 
 msgid "AstroBin is in READ ONLY mode "
-msgstr ""
+msgstr "AstroBin è in modalità a SOLA LETTURA."
 
 #, python-format
 msgid ""
@@ -2140,10 +2140,9 @@ msgstr "Immagine avatar"
 msgid "Upload"
 msgstr "Carica"
 
-#, fuzzy
 #| msgid "Select the language in which you would like to see this website:"
 msgid "Please select the avatars that you would like to delete."
-msgstr "Scegli la lingua usata per questo sito:"
+msgstr "Scegli gli avatar che vuoi cancellare."
 
 msgid "Hey!"
 msgstr "Ehi!"
@@ -2212,6 +2211,8 @@ msgstr "Torna su"
 
 msgid "Please review your preferences about receiving important communications, newsletters, and marketing emails from AstorBin."
 msgstr ""
+"Verifica le tue preferenze riguardo il ricevere comunicazioni importanti, "
+"newsletter, e materiale commerciale via email da AstroBin."
 
 msgid "Preferences"
 msgstr "Opzioni"
@@ -3486,7 +3487,7 @@ msgstr "Approva selezione e banna il resto"
 msgid "There are no images in the spam list."
 msgstr "Non ci sono immagini nella lista dello spam."
 
-#, fuzzy, python-format
+#, python-format
 #| msgid ""
 #| "Your request for an API Key has been approved!\n"
 #| "\n"
