@@ -145,6 +145,10 @@ class ImageRawThumbView(DetailView):
             'insecure': 'insecure' in self.request.GET,
         }
 
+        force = request.GET.get('force')
+        if force is not None:
+            image.thumbnail_invalidate(False)
+
         if settings.TESTING:
             thumb = image.thumbnail_raw(alias, opts)
             if thumb:
