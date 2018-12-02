@@ -1,3 +1,17 @@
+2018-12-02 Salvatore Iovene <salvatore@iovene.com>
+ * v1.33.0
+ * (i18n) Update Italian and Romanian translations
+ * (i18n) Updarte link to translation server
+ * (i18n) Update script to push/pull translations from translation server
+ * (i18n) Update language files
+ * (infra) Add cookie consent banner
+ * (admin) Fix broken IOTD admin view
+ * (homepage) Fix overflow of the #why-astrobin carousel on the anonymous user homepage
+ * (forums) Fix forum "last post" time
+ * (infra) Fix nginx HTTPS redirects
+ * (ci) Do collectstatic before testing on travis-ci test container
+ * (ci) Use docker-compose run to run tests on travis-ci
+
 2018-11-25 Salvatore Iovene <salvatore@iovene.com>
  * v1.32.5
  * (style) Hide content overflowing out of main container
