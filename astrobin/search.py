@@ -33,6 +33,7 @@ FIELDS = (
     'license',
     'pixel_scale_min',
     'pixel_scale_max',
+    'remote_source',
     'subject_type',
     'telescope_type',
 
@@ -59,6 +60,7 @@ class AstroBinSearchForm(SearchForm):
     license = forms.CharField(required=False)
     pixel_scale_min = forms.FloatField(required=False)
     pixel_scale_max = forms.FloatField(required=False)
+    remote_source = forms.CharField(required=False)
     subject_type = forms.CharField(required=False)
     telescope_type = forms.CharField(required=False)
 
@@ -197,6 +199,14 @@ class AstroBinSearchForm(SearchForm):
 
         return results
 
+    def filterByRemoteSource(self, results):
+        remote_source = self.cleaned_data.get("remote_source")
+
+        if remote_source is not None and remote_source != "":
+            results = results.filter(remote_source=remote_source)
+
+        return results
+
     def filterBySubjectType(self, results):
         subject_type = self.cleaned_data.get("subject_type")
 
@@ -306,6 +316,7 @@ class AstroBinSearchForm(SearchForm):
         sqs = self.filterByMinimumData(sqs)
         sqs = self.filterByMoonPhase(sqs)
         sqs = self.filterByPixelScale(sqs)
+        sqs = self.filterByRemoteSource(sqs)
         sqs = self.filterBySubjectType(sqs)
         sqs = self.filterByTelescopeType(sqs)
 

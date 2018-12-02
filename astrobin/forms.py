@@ -134,10 +134,22 @@ class ImageEditBasicForm(forms.ModelForm):
 
         return self.cleaned_data['subject_type']
 
+    def clean_remote_source(self):
+        try:
+            data_source = self.cleaned_data['data_source']
+            remote_source = self.cleaned_data['remote_source']
+
+            if data_source in ['OWN_REMOTE', 'AMATEUR_HOSTING'] and remote_source is None:
+                raise forms.ValidationError(_("Please select a remote source if this image was acquired remotely."))
+        except KeyError:
+            pass
+
+        return self.cleaned_data['remote_source']
+
     class Meta:
         model = Image
         fields = (
-            'title', 'link', 'link_to_fits', 'data_source', 'subject_type',
+            'title', 'link', 'link_to_fits', 'data_source', 'remote_source', 'subject_type',
             'solar_system_main_subject', 'locations', 'groups', 'description',
             'allow_comments')
 

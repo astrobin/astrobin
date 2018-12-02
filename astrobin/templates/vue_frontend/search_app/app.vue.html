@@ -64,6 +64,9 @@
                                                     :pixel-scale-min="pixelScaleMin"
                                                     :pixel-scale-max="pixelScaleMax"></pixel-scale-filter>
 
+                                <remote-source-filter v-if="filter.name === 'remote_source'"
+                                                    :remote-source="remoteSource"></remote-source-filter>
+
                                 <subject-type-filter v-if="filter.name === 'subject_type'"
                                                     :subject-type="subjectType"></subject-type-filter>
 
@@ -194,6 +197,12 @@
                 {% else %}
                     10
                 {% endif %},
+            remoteSource:
+                {% if "remote_source" in request.GET and request.GET.remote_source %}
+                    "{{ request.GET.remote_source }}"
+                {% else %}
+                    undefined
+                {% endif %},
             subjectType:
                 {% if "subject_type" in request.GET and request.GET.subject_type %}
                     "{{ request.GET.subject_type }}"
@@ -267,6 +276,11 @@
                     removable: true
                 },
                 {
+                    name: "remote_source",
+                    label: "{% trans "Remote source" %}",
+                    removable: true
+                },
+                {
                     name: "subject_type",
                     label: "{% trans "Subject type" %}",
                     removable: true
@@ -329,6 +343,10 @@
 
             if (this.minimumData) {
                 this.enabledFilters.push(this.getFilterByName("minimum_data"));
+            }
+
+            if (this.remoteSource) {
+                this.enabledFilters.push(this.getFilterByName("remote_source"));
             }
 
             if (this.subjectType) {
