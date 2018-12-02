@@ -30,7 +30,7 @@
                     {% if row.notice_type.label != 'test_notification' %}
                         <tr class="notice-row">
                             <td class="notification-type">
-                                {{ row.notice_type.display }}
+                                {% trans row.notice_type.display %}
                             </td>
                             {% for cell in row.cells %}
                                 <td class="notification-medium">
