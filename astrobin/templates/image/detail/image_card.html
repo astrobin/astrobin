@@ -109,6 +109,11 @@
                     {% if image.data_source and image.data_source != "OTHER" %}
                         <p><strong class="card-label">{%  trans "Data source" %}:</strong> {{image.get_data_source}}</p>
                     {% endif %}
+
+                    {% if image.remote_source and image.remote_source != "OTHER" %}
+                        <p><strong class="card-label">{% trans "Remote source" %}:</strong> {{ image.get_remote_source }}
+                        </p>
+                    {% endif %}
                 </div> <!-- acquisition-inner -->
             </div> <!-- acquisition -->
         </div> <!-- image-detail-inner -->

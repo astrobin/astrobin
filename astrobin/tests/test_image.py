@@ -273,6 +273,24 @@ class ImageTest(TestCase):
             follow = True)
         self._assert_message(response, "error unread", "There was one or more errors processing the form")
 
+        # Test missing remote_source
+        response = self.client.post(
+            reverse('image_edit_basic', args=(image.pk,)),
+            {
+                'submit_gear': True,
+                'title': "Test title",
+                'link': "http://www.example.com",
+                'link_to_fits': "http://www.example.com/fits",
+                'data_source': 'AMATEUR_HOSTING',
+                'subject_type': 600,
+                'solar_system_main_subject': 0,
+                'locations': [location.pk],
+                'description': "Image description",
+                'allow_comments': True
+            },
+            follow=True)
+        self._assert_message(response, "error unread", "There was one or more errors processing the form")
+
         response = self.client.post(
             reverse('image_edit_basic', args = (image.pk,)),
             {

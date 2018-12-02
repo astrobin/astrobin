@@ -716,6 +716,30 @@ class Image(HasSolutionMixin, SafeDeleteModel):
         )),
     )
 
+    REMOTE_OBSERVATORY_CHOICES = (
+        (None, "---------"),
+
+        ("AC", "AstroCamp"),
+        ("DSP", "Dark Sky Portal"),
+        ("DSC", "DeepSkyChile"),
+        ("DSW", "DeepSkyWest"),
+        ("eEyE", "e-EyE Extremadura"),
+        ("GMO", "Grand Mesa Observatory"),
+        ("HMO", "Heaven's Mirror Observatory"),
+        ("IC", "IC Astronomy Observatories"),
+        ("ITU", "Image The Universe"),
+        ("iT", "iTelescope"),
+        ("NMS", "New Mexico Skies"),
+        ("OES", "Observatorio El Sauce"),
+        ("RLD", "Riverland Dingo Observatory"),
+        ("SS", "Sahara Sky"),
+        ("SPVO", "San Pedro Valley Observatory"),
+        ("SRO", "Sierra Remote Observatories"),
+        ("SPOO", "SkyPi Online Observatory"),
+
+        ("OTHER", _("None of the above"))
+    )
+
     GEAR_CLASS_LOOKUP = {
         'imaging_telescopes': Telescope,
         'guiding_telescopes': Telescope,
@@ -746,6 +770,15 @@ class Image(HasSolutionMixin, SafeDeleteModel):
         choices=DATA_SOURCE_CHOICES,
         null=False,
         blank=False,
+    )
+
+    remote_source = models.CharField(
+        verbose_name=_("Remote data source"),
+        help_text=_("Which remote hosting facility did you use to acquire data for this image?"),
+        max_length=8,
+        choices=REMOTE_OBSERVATORY_CHOICES,
+        null=True,
+        blank=True,
     )
 
     solar_system_main_subject = models.IntegerField(
@@ -1316,6 +1349,11 @@ class Image(HasSolutionMixin, SafeDeleteModel):
         }
 
         return LOOKUP[self.data_source]
+
+    def get_remote_source(self):
+        for source in self.REMOTE_OBSERVATORY_CHOICES:
+            if self.remote_source == source[0]:
+                return source[1]
 
     def is_platesolvable(self):
         return self.subject_type in (100, 300)
