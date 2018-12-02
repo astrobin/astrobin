@@ -106,7 +106,7 @@
                         <p><strong class="card-label">{% trans "Locations" %}:</strong> {{locations}}</p>
                     {% endif %}
 
-                    {% if image.data_source and image.data_source != "OTHER" %}
+                    {% if image.data_source and image.data_source != "OTHER" and image.data_source != "UNSET" %}
                         <p><strong class="card-label">{%  trans "Data source" %}:</strong> {{image.get_data_source}}</p>
                     {% endif %}
 

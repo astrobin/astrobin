@@ -1335,20 +1335,9 @@ class Image(HasSolutionMixin, SafeDeleteModel):
         return self.thumbnail_invalidate_real(self.image_file, '0', delete_remote)
 
     def get_data_source(self):
-        LOOKUP = {
-            "BACKYARD": _("Backyard"),
-            "TRAVELLER": _("Traveller"),
-            "OWN_REMOTE": _("Own remote observatory"),
-            "AMATEUR_HOSTING": _("Amateur hosting facility"),
-            "PUBLIC_AMATEUR_DATA": _("Public amateur data"),
-            "PRO_DATA": _("Professional, scientific grade data"),
-            "MIX": _("Mix of multiple source"),
-            "OTHER": _("Other"),
-            "UNKNOWN": _("Unknown"),
-            None: None,
-        }
-
-        return LOOKUP[self.data_source]
+        for source in self.DATA_SOURCE_CHOICES:
+            if self.data_source == source[0]:
+                return source[1]
 
     def get_remote_source(self):
         for source in self.REMOTE_OBSERVATORY_CHOICES:
