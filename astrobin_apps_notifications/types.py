@@ -189,5 +189,11 @@ NOTICE_TYPES = (
         'Your subscription will be renewed in one week',
         '',
         2
+    ),
+    (
+        'missing_data_source',
+        'You have images with a missing "Data source"',
+        '',
+        2
     )
 )
