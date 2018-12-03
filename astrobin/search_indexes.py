@@ -499,7 +499,7 @@ class ImageIndex(CelerySearchIndex, Indexable):
 
     data_source = CharField(model_attr = 'data_source')
 
-    remote_source = CharField(model_attr='remote_source')
+    remote_source = CharField(model_attr='remote_source', null=True)
 
     username = CharField(model_attr = 'user__username')
 
