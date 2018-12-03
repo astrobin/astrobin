@@ -736,6 +736,7 @@ class Image(HasSolutionMixin, SafeDeleteModel):
         ("SS", "Sahara Sky"),
         ("SPVO", "San Pedro Valley Observatory"),
         ("SRO", "Sierra Remote Observatories"),
+        ("SRO2", "Sky Ranch Observatory"),
         ("SPOO", "SkyPi Online Observatory"),
 
         ("OTHER", _("None of the above"))
