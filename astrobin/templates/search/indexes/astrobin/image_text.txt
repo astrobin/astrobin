@@ -2,6 +2,7 @@
 {{object.user.userprofile.real_name}}
 {{object.title}}
 {{object.description}}
+{{object.get_remote_source}}
 
 {% for i in object.locations.all %}
     {{i.city}}
