@@ -2716,50 +2716,71 @@ BODY:first-of-type ul.as-list, x:-moz-any-link, x:default { /* Target FF 3.5+ */
   z-index: 9999;
 }
 
-.message {
-  position: relative;
-  @include stitched-box;
-  width: 90%;
-  text-align: left;
-
-  .avatar {
-    position: absolute;
-    top: 0;
-    right: 0;
-  }
-
-  .new, .sender, .subject, .message-tease, .actions {
-    display: inline;
-  }
-  .date {
-    color: $text-color / $hilight-factor;
-  }
-  .sender {
-    padding: $spacer-small;
-    font-size: 0.9em;
-    border-bottom: 1px dashed $border-top-color;
-  }
-  .subject {
-    margin-left: $spacer-small;
-  }
-
-  .body {
-    padding: $spacer-large;
-  }
-}
-
 .message-container {
-  margin-bottom: $spacer-large;
-  overflow: hidden;
-}
+  margin-bottom: $spacer-xxlarge;
 
-.message-container .message {
-  background: $light-panel-color url('../images/light-panel-tile.png');
-}
+  .message {
+    background: $light-panel-color url('../images/light-panel-tile.png');
 
-.message-container.other .message {
-  float: right;
-  background: $dark-panel-color url('../images/dark-panel-tile.png');
+    position: relative;
+    @include stitched-box;
+    width: 90%;
+    text-align: left;
+
+    .avatar {
+      position: absolute;
+      top: -24px;
+      right: -24px;
+
+      img {
+        box-shadow: 6px 6px 12px rgba(0, 0, 0, .4);
+        @include rounded-corners(50%);
+      }
+    }
+
+    .new, .sender, .subject, .message-tease, .actions {
+      display: inline;
+    }
+
+    .date {
+      color: $text-color / $hilight-factor;
+    }
+
+    .sender {
+      padding: $spacer-small;
+      font-size: 0.9em;
+      border-bottom: 1px dashed $border-top-color;
+
+      .astrobin-username {
+        margin-right: 12px;
+      }
+    }
+
+    .subject {
+      margin-left: $spacer-small;
+    }
+
+    .body {
+      padding: $spacer-large;
+      font-size: 15px;
+    }
+
+    @media screen and (max-width: 767px) {
+      width: 100%;
+
+      .avatar {
+        display: none;
+      }
+    }
+  }
+
+  &.other .message {
+    background: $dark-panel-color url('../images/dark-panel-tile.png');
+
+    @media screen and (min-width: 767px) {
+      margin-left: 5%;
+    }
+  }
 }
 
 .message-form {

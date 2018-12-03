@@ -1,17 +1,22 @@
 {% load avatar_tags %}
 {% load bbcode_tags %}
+{% load tags %}
+{% load astrobin_apps_users_tags %}
 
 <div class="message">
     <div class="avatar">
         <a href="{% url 'user_page' message.sender %}">
-            {% avatar message.sender 32 %}
+            {% avatar message.sender 48 %}
         </a>
     </div>
 
     <div class="sender">
-        <a href="{% url 'user_page' message.sender %}">{{ message.sender.userprofile }}</a>
-        <span class="date">{{ message.sent_at|date:"SHORT_DATETIME_FORMAT"}}</span>
+        {% astrobin_username message.sender %}
+        <abbr class="timeago"
+              title="{{ message.sent_at|to_user_timezone:request.user|date:'Y-m-d\TH:i:s' }}">
+        </abbr>
     </div>
+
     <div class="body">
         {% bbcode message.body %}
     </div>
