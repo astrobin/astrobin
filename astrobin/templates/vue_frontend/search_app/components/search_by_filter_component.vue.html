@@ -1,6 +1,6 @@
 {% load i18n %}
 
-<script type="text/x-template" id="search-type-filter-template">
+<script type="text/x-template" id="search-by-filter-template">
     <div class="form-group" :class="{highlighted: highlighted}">
         <v-multiselect class="multiselect--grouped" v-model="value" :options="optionGroups" track-by="id" label="label"
                        group-values="options" group-label="group" selectLabel="" deselectLabel="" selectedLabel=""
@@ -11,10 +11,10 @@
 </script>
 
 <script>
-    Vue.component("search-type-filter", {
-        template: "#search-type-filter-template",
+    Vue.component("search-by-filter", {
+        template: "#search-by-filter-template",
         props: [
-            "searchType"
+            "searchBy"
         ],
         mixins: [
             FilterComponentMixin
@@ -85,7 +85,7 @@
         created: function () {
             for (var i = 0; i < this.optionGroups.length; i++) {
                 for (var j = 0; j < this.optionGroups[i].options.length; j++) {
-                    if (this.optionGroups[i].options[j].id === this.searchType) {
+                    if (this.optionGroups[i].options[j].id === this.searchBy) {
                         this.value = this.optionGroups[i].options[j];
                         return;
                     }

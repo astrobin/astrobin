@@ -32,8 +32,8 @@
                                                     :searchDomain="searchDomain"
                                                     @input="onSearchDomainChanged($event)"></search-domain-filter>
 
-                                <search-type-filter v-if="filter.name === 't'"
-                                                    :searchType="searchType"></search-type-filter>
+                                <search-by-filter v-if="filter.name === 't'"
+                                                    :searchBy="searchBy"></search-by-filter>
 
                                 <animated-filter v-if="filter.name === 'animated'"
                                                  :animated="animated"></animated-filter>
@@ -118,7 +118,7 @@
                     undefined
                 {% endif %},
 
-            searchType:
+            searchBy:
                 {% if "t" in request.GET %}
                     "{{ request.GET.t }}"
                 {% else %}
@@ -227,7 +227,7 @@
                 },
                 {
                     name: "t",
-                    label: "{% trans "Search type" %}",
+                    label: "{% trans "Search by" %}",
                     removable: true
                 },
                 {
@@ -305,8 +305,8 @@
                 this.enabledFilters.push(this.getFilterByName("t"));
             }
 
-            if (this.searchType === undefined) {
-                this.searchType = "all";
+            if (this.searchBy === undefined) {
+                this.searchBy = "all";
             }
 
             if (this.animated) {
