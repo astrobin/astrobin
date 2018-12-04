@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2018-12-01 16:35+0000\n"
+"POT-Creation-Date: 2018-12-04 22:05+0000\n"
 "PO-Revision-Date: 2014-02-24 20:42+0000\n"
 "Last-Translator: Ayatola <ayatola@gmail.com>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -778,6 +778,9 @@ msgstr ""
 msgid "This field is required."
 msgstr "Este campo é obrigatório."
 
+msgid "Please select a remote source if this image was acquired remotely."
+msgstr ""
+
 msgid "Opacity"
 msgstr "Opacidade"
 
@@ -1387,6 +1390,9 @@ msgstr "Imagem do dia"
 msgid "Unknown"
 msgstr ""
 
+msgid "Non-commercial independent facility"
+msgstr ""
+
 msgid "Title"
 msgstr "Título"
 
@@ -1397,6 +1403,14 @@ msgid "Data source"
 msgstr ""
 
 msgid "Where does the data for this image come from?"
+msgstr ""
+
+#, fuzzy
+#| msgid "Remove data"
+msgid "Remote data source"
+msgstr "Remover informações"
+
+msgid "Which remote hosting facility did you use to acquire data for this image?"
 msgstr ""
 
 msgid "Main solar system subject"
@@ -2913,6 +2927,9 @@ msgstr "Orientação"
 msgid "Field radius"
 msgstr "Largura do campo"
 
+msgid "Remote source"
+msgstr ""
+
 msgid "Author"
 msgstr ""
 
@@ -3212,6 +3229,9 @@ msgstr "Céu profundo"
 
 msgid "Edit your image: basic information"
 msgstr "Edite sua imagem: informações básicas"
+
+msgid "Loading..."
+msgstr "Carregando..."
 
 msgid "Next step: gear used"
 msgstr "Próximo passo: equipamento utilizado"
@@ -3711,6 +3731,24 @@ msgstr "<a href=\"%(url)s\">Você possui <strong>%(number)s</strong> imagens com
 #, python-format
 msgid "You have %(number)s images with insufficient data!"
 msgstr "Você possui %(number)s imagens com informações insuficientes!"
+
+msgid "Data is paramount on AstroBin, and the whole community thrives on it."
+msgstr ""
+
+msgid "We have noticed that one or more of your images are missing the \"Data source\" field, a very important piece of information that the members of the AstroBin community value a lot."
+msgstr ""
+
+msgid "We would really appreciate if you could edit the following images of yours and set the missing field appropriately:"
+msgstr ""
+
+msgid "You have images on AstroBin missing the \"Data source\" information"
+msgstr ""
+
+msgid "We have noticed that one or more of your images that were acquired at a remote observatory are missing the \"Remote source\" field, a very important piece of information that the members of the AstroBin community value a lot."
+msgstr ""
+
+msgid "You have images on AstroBin missing the \"Remote source\" information"
+msgstr ""
 
 #, fuzzy, python-format
 #| msgid ""
@@ -4463,9 +4501,6 @@ msgstr "Tempo total de captura, em horas, nos últimos 12 meses"
 
 msgid "Please wait: the plot is loading..."
 msgstr "Por favor, aguarde: o gráfico está sendo carregado..."
-
-msgid "Loading..."
-msgstr "Carregando..."
 
 msgid "Global distribution of camera types"
 msgstr "Distribuição global dos tipos de câmeras"
@@ -5247,7 +5282,9 @@ msgstr "Tipo de busca"
 msgid "Search domain"
 msgstr "Pesquisando"
 
-msgid "Search type"
+#, fuzzy
+#| msgid "Search type"
+msgid "Search by"
 msgstr "Tipo de busca"
 
 msgid "Only animated"
@@ -5297,11 +5334,6 @@ msgid "Astrometry"
 msgstr ""
 
 #, fuzzy
-#| msgid "Comments"
-msgid "Comments & forums"
-msgstr "Comentários"
-
-#, fuzzy
 #| msgid "Everything is static"
 msgid "Everything"
 msgstr "Tudo é estático"
@@ -5326,6 +5358,11 @@ msgstr "Editar equipamento usado"
 #, fuzzy
 msgid "Guiding telescopes"
 msgstr "Telescópios ou lentes de guia"
+
+#, fuzzy
+#| msgid "Comments"
+msgid "Comments & forums"
+msgstr "Comentários"
 
 #, fuzzy
 #| msgid "Earth's Moon"

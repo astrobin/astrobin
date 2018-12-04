@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: AstroBin 1.0\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2018-12-01 16:35+0000\n"
+"POT-Creation-Date: 2018-12-04 22:05+0000\n"
 "PO-Revision-Date: 2018-12-01 22:46+0000\n"
 "Last-Translator: Salvatore Iovene <salvatore@iovene.com>\n"
 "Language-Team: Salvatore Iovene <salvatore@iovene.com>\n"
@@ -772,12 +772,14 @@ msgstr "Se vuoi condividere il file TIFF o FITS della tua immagine, metti qui un
 msgid "Groups"
 msgstr "Gruppi"
 
-#| msgid "How is the Image of the Day selected?"
 msgid "Submit this image to the selected groups."
 msgstr "Proponi questa immagine ai gruppi selezionati."
 
 msgid "This field is required."
 msgstr "Questo campo è obbligatorio."
+
+msgid "Please select a remote source if this image was acquired remotely."
+msgstr ""
 
 msgid "Opacity"
 msgstr "Opacità"
@@ -981,11 +983,9 @@ msgstr "Attribuzione-Condividi CreativeCommons"
 msgid "Attribution-NoDerivs Creative Commons"
 msgstr "Attribuzione-NoOpereDerivate Creative Commons"
 
-#| msgid "English"
 msgid "English (US)"
 msgstr "Inglese (USA)"
 
-#| msgid "English"
 msgid "English (GB)"
 msgstr "Inglese (GB)"
 
@@ -1337,29 +1337,24 @@ msgstr "Aurora boreale"
 msgid "Gear"
 msgstr "Strumentazione"
 
-#| msgid "acquired on"
 msgid "Self acquired"
 msgstr "Acquisita da sé"
 
-#| msgid "Back"
 msgid "Backyard"
 msgstr "Giardino"
 
-#| msgid "Gallery"
 msgid "Traveller"
 msgstr "Itinerante"
 
 msgid "Own remote observatory"
 msgstr "Osservatorio remoto di proprietà"
 
-#| msgid "Uploaded"
 msgid "Downloaded"
 msgstr "Scaricata"
 
 msgid "Amateur hosting facility"
 msgstr "Struttura di hosting amatoriale"
 
-#| msgid "Public data pools"
 msgid "Public amateur data"
 msgstr "Dati pubblici amatoriali"
 
@@ -1369,12 +1364,14 @@ msgstr "Dati professionali di qualità scientifica"
 msgid "Mix of multiple sources"
 msgstr "Mix di origini multiple"
 
-#| msgid "Image of the day"
 msgid "None of the above"
 msgstr "Nessuna delle precedenti"
 
 msgid "Unknown"
 msgstr "Sconosciuta"
+
+msgid "Non-commercial independent facility"
+msgstr ""
 
 msgid "Title"
 msgstr "Titolo"
@@ -1385,9 +1382,16 @@ msgstr "Tipo di soggetto"
 msgid "Data source"
 msgstr "Origine dei dati"
 
-#| msgid "Where did you get the idea for this site?"
 msgid "Where does the data for this image come from?"
 msgstr "Da dove vengono i dati per questa immagine?"
+
+#, fuzzy
+#| msgid "Data source"
+msgid "Remote data source"
+msgstr "Origine dei dati"
+
+msgid "Which remote hosting facility did you use to acquire data for this image?"
+msgstr ""
 
 msgid "Main solar system subject"
 msgstr "Corpo del sistema solare principale"
@@ -1473,7 +1477,6 @@ msgstr "9 - Centro città (BIANCO)"
 msgid "Synthetic channel"
 msgstr "Canale sintetico"
 
-#| msgid "Filter"
 msgid "Filter"
 msgid_plural "Filters"
 msgstr[0] "Filtro"
@@ -1666,10 +1669,7 @@ msgid "I want to be excluded from competitions"
 msgstr "Desidero di essere escluso dalle competizioni"
 
 msgid "Check this box to be excluded from competitions and contests, such as the Image of the Day, the Top Picks, other custom contests. This will remove you from the leaderboards and hide your AstroBin Index."
-msgstr ""
-"Seleziona questo quadretto per essere escluso da competizioni e gare, come "
-"la Foto del Giorno, i Top Picks, ed altre gare ad-hoc. Verrai dimosso dalle "
-"classifiche ed il tuo Indice AstroBin sarà nascosto."
+msgstr "Seleziona questo quadretto per essere escluso da competizioni e gare, come la Foto del Giorno, i Top Picks, ed altre gare ad-hoc. Verrai dimosso dalle classifiche ed il tuo Indice AstroBin sarà nascosto."
 
 msgid "Global stream"
 msgstr "Stream di attività globale"
@@ -1711,27 +1711,19 @@ msgid "I accept to receive rare important communications via email"
 msgstr "Accetto di ricevere rare ed importanti comunicazioni via email"
 
 msgid "This is highly recommended. These are very rare and contain information that you probably want to have."
-msgstr ""
-"Altamente raccomandato. Si tratta di informazioni molto occasionali che "
-"probabilmente ti interesseranno."
+msgstr "Altamente raccomandato. Si tratta di informazioni molto occasionali che probabilmente ti interesseranno."
 
 msgid "I accept to receive occasional newsletters via email"
 msgstr "Accetto di ricevere newsletter occasionali via email"
 
 msgid "Newsletters do not have a fixed schedule, but in any case they are not sent out more often than once per month."
-msgstr ""
-"Le newsletter non hanno una programmazione fissa, ma in ogni caso non "
-"saranno spedite più frequentemente di una volta al mese."
+msgstr "Le newsletter non hanno una programmazione fissa, ma in ogni caso non saranno spedite più frequentemente di una volta al mese."
 
 msgid "I accept to receive occasional marketing and commercial material via email"
-msgstr ""
-"Accetto di ricevere materiale commerciale e di marketing occasionalmente via "
-"email"
+msgstr "Accetto di ricevere materiale commerciale e di marketing occasionalmente via email"
 
 msgid "These emails may contain offers, commercial news, and promotions from AstroBin or its partners."
-msgstr ""
-"Queste email possono contenere offerte, novità commerciali, e promozioni da "
-"AstroBin o i suoi affiliati."
+msgstr "Queste email possono contenere offerte, novità commerciali, e promozioni da AstroBin o i suoi affiliati."
 
 msgid "Language"
 msgstr "Lingua"
@@ -2140,7 +2132,6 @@ msgstr "Immagine avatar"
 msgid "Upload"
 msgstr "Carica"
 
-#| msgid "Select the language in which you would like to see this website:"
 msgid "Please select the avatars that you would like to delete."
 msgstr "Scegli gli avatar che vuoi cancellare."
 
@@ -2210,9 +2201,7 @@ msgid "Back to top"
 msgstr "Torna su"
 
 msgid "Please review your preferences about receiving important communications, newsletters, and marketing emails from AstorBin."
-msgstr ""
-"Verifica le tue preferenze riguardo il ricevere comunicazioni importanti, "
-"newsletter, e materiale commerciale via email da AstroBin."
+msgstr "Verifica le tue preferenze riguardo il ricevere comunicazioni importanti, newsletter, e materiale commerciale via email da AstroBin."
 
 msgid "Preferences"
 msgstr "Opzioni"
@@ -2953,6 +2942,11 @@ msgstr "Orientazione"
 msgid "Field radius"
 msgstr "Raggio del campo"
 
+#, fuzzy
+#| msgid "Data source"
+msgid "Remote source"
+msgstr "Origine dei dati"
+
 msgid "Author"
 msgstr "Autore"
 
@@ -3237,6 +3231,9 @@ msgstr "Profondo cielo"
 msgid "Edit your image: basic information"
 msgstr "Modifica l'immagine: informazioni di base"
 
+msgid "Loading..."
+msgstr "Caricamento in corso..."
+
 msgid "Next step: gear used"
 msgstr "Possimo passo: strumentazione usata"
 
@@ -3488,17 +3485,6 @@ msgid "There are no images in the spam list."
 msgstr "Non ci sono immagini nella lista dello spam."
 
 #, python-format
-#| msgid ""
-#| "Your request for an API Key has been approved!\n"
-#| "\n"
-#| "    Your key: %(key)s\n"
-#| "    Your secret: %(secret)s\n"
-#| "\n"
-#| "    Please read the API documentation at %(api_docs_url)s\n"
-#| "    \n"
-#| "    You can review your API keys at %(api_keys_url)s\n"
-#| "    \n"
-#| "    Thank you for using AstroBin's APIs!"
 msgid ""
 "Your request for an API Key has been approved!\n"
 "\n"
@@ -3737,6 +3723,24 @@ msgstr "<a href=\"%(url)s\">Hai <strong>%(number)s</strong> immagini con dati in
 #, python-format
 msgid "You have %(number)s images with insufficient data!"
 msgstr "Hai %(number)s immagini con dati insufficienti!"
+
+msgid "Data is paramount on AstroBin, and the whole community thrives on it."
+msgstr ""
+
+msgid "We have noticed that one or more of your images are missing the \"Data source\" field, a very important piece of information that the members of the AstroBin community value a lot."
+msgstr ""
+
+msgid "We would really appreciate if you could edit the following images of yours and set the missing field appropriately:"
+msgstr ""
+
+msgid "You have images on AstroBin missing the \"Data source\" information"
+msgstr ""
+
+msgid "We have noticed that one or more of your images that were acquired at a remote observatory are missing the \"Remote source\" field, a very important piece of information that the members of the AstroBin community value a lot."
+msgstr ""
+
+msgid "You have images on AstroBin missing the \"Remote source\" information"
+msgstr ""
 
 #, fuzzy, python-format
 #| msgid ""
@@ -4536,9 +4540,6 @@ msgstr "Ore totali di integrazione negli ultimi 12 mesi"
 
 msgid "Please wait: the plot is loading..."
 msgstr "Attendere, prego: caricamento del grafico in corso..."
-
-msgid "Loading..."
-msgstr "Caricamento in corso..."
 
 msgid "Global distribution of camera types"
 msgstr "Distribuzione globale di tipi di camera"
@@ -5342,7 +5343,9 @@ msgstr "Tipo di ricerca"
 msgid "Search domain"
 msgstr "Ricerca in corso"
 
-msgid "Search type"
+#, fuzzy
+#| msgid "Search type"
+msgid "Search by"
 msgstr "Tipo di ricerca"
 
 msgid "Only animated"
@@ -5395,11 +5398,6 @@ msgid "Astrometry"
 msgstr "Astrometria"
 
 #, fuzzy
-#| msgid "Comments are closed."
-msgid "Comments & forums"
-msgstr "I commenti sono chiusi."
-
-#, fuzzy
 #| msgid "Everything is static"
 msgid "Everything"
 msgstr "Tutto è statico"
@@ -5425,6 +5423,11 @@ msgstr "Scegli la strumentazione usata"
 #| msgid_plural "Guiding telescopes or lenses"
 msgid "Guiding telescopes"
 msgstr "Telescopio o obiettivio di guida"
+
+#, fuzzy
+#| msgid "Comments are closed."
+msgid "Comments & forums"
+msgstr "I commenti sono chiusi."
 
 #, fuzzy
 #| msgid "Earth's Moon"

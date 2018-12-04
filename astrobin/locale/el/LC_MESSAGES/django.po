@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2018-12-01 16:35+0000\n"
+"POT-Creation-Date: 2018-12-04 22:05+0000\n"
 "PO-Revision-Date: 2014-01-24 09:40+0000\n"
 "Last-Translator: kookoo_gr <kookoo_gr@yahoo.com>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -781,6 +781,9 @@ msgstr "Πως γίνεται επιλογή της Εικόνας της Ημέ
 msgid "This field is required."
 msgstr "Αυτό το πεδίο είναι προαπαιτούμενο"
 
+msgid "Please select a remote source if this image was acquired remotely."
+msgstr ""
+
 msgid "Opacity"
 msgstr "Αδιαφάνεια"
 
@@ -1387,6 +1390,9 @@ msgstr "Εικόνα της ημέρας"
 msgid "Unknown"
 msgstr ""
 
+msgid "Non-commercial independent facility"
+msgstr ""
+
 msgid "Title"
 msgstr "Τίτλος"
 
@@ -1397,6 +1403,14 @@ msgid "Data source"
 msgstr ""
 
 msgid "Where does the data for this image come from?"
+msgstr ""
+
+#, fuzzy
+#| msgid "Remove data"
+msgid "Remote data source"
+msgstr "Αφαίρεση δεδομένων"
+
+msgid "Which remote hosting facility did you use to acquire data for this image?"
 msgstr ""
 
 msgid "Main solar system subject"
@@ -2911,6 +2925,9 @@ msgstr "Προσανατολισμός"
 msgid "Field radius"
 msgstr "Ακτίνα πεδίου"
 
+msgid "Remote source"
+msgstr ""
+
 msgid "Author"
 msgstr ""
 
@@ -3207,6 +3224,9 @@ msgstr "Βαθύ ουρανού"
 
 msgid "Edit your image: basic information"
 msgstr "Επεξεργασία της εικόνας σας: βασικές πληροφορίες"
+
+msgid "Loading..."
+msgstr "Γίνεται φόρτωση..."
 
 msgid "Next step: gear used"
 msgstr "Επόμενο βήμα: εξοπλισμός που χρησιμοποιήθηκε"
@@ -3707,6 +3727,24 @@ msgstr "<a href=\"%(url)s\">Έχετε <strong>%(number)s</strong> εικόνε�
 #, python-format
 msgid "You have %(number)s images with insufficient data!"
 msgstr "Έχετε %(number)s εικόνες με ανεπαρκή δεδομένα!"
+
+msgid "Data is paramount on AstroBin, and the whole community thrives on it."
+msgstr ""
+
+msgid "We have noticed that one or more of your images are missing the \"Data source\" field, a very important piece of information that the members of the AstroBin community value a lot."
+msgstr ""
+
+msgid "We would really appreciate if you could edit the following images of yours and set the missing field appropriately:"
+msgstr ""
+
+msgid "You have images on AstroBin missing the \"Data source\" information"
+msgstr ""
+
+msgid "We have noticed that one or more of your images that were acquired at a remote observatory are missing the \"Remote source\" field, a very important piece of information that the members of the AstroBin community value a lot."
+msgstr ""
+
+msgid "You have images on AstroBin missing the \"Remote source\" information"
+msgstr ""
 
 #, fuzzy, python-format
 #| msgid ""
@@ -4474,9 +4512,6 @@ msgstr "Συνολικές ώρες ολοκλήρωσης τους τελευτ
 
 msgid "Please wait: the plot is loading..."
 msgstr "Παρακαλώ περιμένετε: το διάγραμμα φορτώνει..."
-
-msgid "Loading..."
-msgstr "Γίνεται φόρτωση..."
 
 msgid "Global distribution of camera types"
 msgstr "Παγκόσμια κατανομή τύπων κάμερας"
@@ -5258,7 +5293,9 @@ msgstr "Τύπος αναζήτησης"
 msgid "Search domain"
 msgstr "Γίνεται αναζήτηση"
 
-msgid "Search type"
+#, fuzzy
+#| msgid "Search type"
+msgid "Search by"
 msgstr "Τύπος αναζήτησης"
 
 msgid "Only animated"
@@ -5309,11 +5346,6 @@ msgid "Astrometry"
 msgstr "Αστρομετρία"
 
 #, fuzzy
-#| msgid "Comments"
-msgid "Comments & forums"
-msgstr "Σχόλια"
-
-#, fuzzy
 #| msgid "Everything is static"
 msgid "Everything"
 msgstr "Όλα είναι στατικά"
@@ -5337,6 +5369,11 @@ msgstr "Επεξεργασία εξοπλισμού που χρησιμοποι�
 #, fuzzy
 msgid "Guiding telescopes"
 msgstr "Οδηγητικά τηλεσκόπια ή φακοί"
+
+#, fuzzy
+#| msgid "Comments"
+msgid "Comments & forums"
+msgstr "Σχόλια"
 
 #, fuzzy
 #| msgid "Earth's Moon"

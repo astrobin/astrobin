@@ -7,17 +7,17 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2018-12-01 16:35+0000\n"
-"PO-Revision-Date: 2016-09-26 14:26+0000\n"
-"Last-Translator: Salvatore <salvatore@iovene.com>\n"
+"POT-Creation-Date: 2018-12-04 22:05+0000\n"
+"PO-Revision-Date: 2018-12-03 03:42+0000\n"
+"Last-Translator: csve <csve00@gmail.com>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
 "Language: ru\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=3; plural=(n%10==1 && n%100!=11 ? 0 : n%10>=2 && n%10<=4 && (n%100<10 || n%100>=20) ? 1 : 2);\n"
-"X-Generator: Pootle 2.5.0\n"
-"X-POOTLE-MTIME: 1474900019.779642\n"
+"X-Generator: Pootle 2.8\n"
+"X-POOTLE-MTIME: 1543808576.000000\n"
 
 msgid "United Kingdom"
 msgstr "Великобритания"
@@ -780,6 +780,9 @@ msgstr "Как выбираются Изображения Дня?"
 msgid "This field is required."
 msgstr "Это обязательное поле."
 
+msgid "Please select a remote source if this image was acquired remotely."
+msgstr ""
+
 msgid "Opacity"
 msgstr "Непрозрачность"
 
@@ -1383,6 +1386,9 @@ msgstr "Изображение дня"
 msgid "Unknown"
 msgstr ""
 
+msgid "Non-commercial independent facility"
+msgstr ""
+
 msgid "Title"
 msgstr "Заголовок"
 
@@ -1393,6 +1399,14 @@ msgid "Data source"
 msgstr ""
 
 msgid "Where does the data for this image come from?"
+msgstr ""
+
+#, fuzzy
+#| msgid "Remove data"
+msgid "Remote data source"
+msgstr "Удалить данные"
+
+msgid "Which remote hosting facility did you use to acquire data for this image?"
 msgstr ""
 
 msgid "Main solar system subject"
@@ -2928,6 +2942,9 @@ msgstr "Направление"
 msgid "Field radius"
 msgstr "Радиус поля"
 
+msgid "Remote source"
+msgstr ""
+
 msgid "Author"
 msgstr "Автор"
 
@@ -3001,9 +3018,8 @@ msgstr "Контакты"
 msgid "Navigation context"
 msgstr ""
 
-#, fuzzy
 msgid "User gallery"
-msgstr "%(user)s's галерея"
+msgstr "Галерея пользователя"
 
 #, fuzzy
 msgid "User collection"
@@ -3217,6 +3233,9 @@ msgstr "Глубокий космос"
 
 msgid "Edit your image: basic information"
 msgstr "Правка вашего изображения: основная информация"
+
+msgid "Loading..."
+msgstr "Загрузка…"
 
 msgid "Next step: gear used"
 msgstr "Далее: используемое оборудование"
@@ -3724,6 +3743,24 @@ msgstr "<a href=\"%(url)s\">У вас<strong>%(number)s</strong> изображ�
 #, python-format
 msgid "You have %(number)s images with insufficient data!"
 msgstr "У вас %(number)s изображений с недостаточными данными!"
+
+msgid "Data is paramount on AstroBin, and the whole community thrives on it."
+msgstr ""
+
+msgid "We have noticed that one or more of your images are missing the \"Data source\" field, a very important piece of information that the members of the AstroBin community value a lot."
+msgstr ""
+
+msgid "We would really appreciate if you could edit the following images of yours and set the missing field appropriately:"
+msgstr ""
+
+msgid "You have images on AstroBin missing the \"Data source\" information"
+msgstr ""
+
+msgid "We have noticed that one or more of your images that were acquired at a remote observatory are missing the \"Remote source\" field, a very important piece of information that the members of the AstroBin community value a lot."
+msgstr ""
+
+msgid "You have images on AstroBin missing the \"Remote source\" information"
+msgstr ""
 
 #, fuzzy, python-format
 #| msgid ""
@@ -4506,9 +4543,6 @@ msgstr "Общее время посещений в часах за послед
 
 msgid "Please wait: the plot is loading..."
 msgstr "Пожалуйста, подождите: график загружается..."
-
-msgid "Loading..."
-msgstr "Загрузка…"
 
 msgid "Global distribution of camera types"
 msgstr "Полное распределение по типам камер"
@@ -5322,7 +5356,9 @@ msgstr "Тип поиска"
 msgid "Search domain"
 msgstr "Ищется"
 
-msgid "Search type"
+#, fuzzy
+#| msgid "Search type"
+msgid "Search by"
 msgstr "Тип поиска"
 
 msgid "Only animated"
@@ -5375,11 +5411,6 @@ msgid "Astrometry"
 msgstr ""
 
 #, fuzzy
-#| msgid "Comments are closed."
-msgid "Comments & forums"
-msgstr "Оставлять комментарии запрещено."
-
-#, fuzzy
 #| msgid "Everything is static"
 msgid "Everything"
 msgstr "Все статично"
@@ -5405,6 +5436,11 @@ msgstr "Править используемое оборудование"
 #| msgid_plural "Guiding telescopes or lenses"
 msgid "Guiding telescopes"
 msgstr "Гидирующий телескоп/объектив"
+
+#, fuzzy
+#| msgid "Comments are closed."
+msgid "Comments & forums"
+msgstr "Оставлять комментарии запрещено."
 
 #, fuzzy
 #| msgid "Earth's Moon"
