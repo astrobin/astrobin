@@ -2318,6 +2318,10 @@ BODY:first-of-type ul.as-list, x:-moz-any-link, x:default { /* Target FF 3.5+ */
   .comment-container {
     display: inline-block;
     width: calc(100% - 56px);
+
+    @media screen and (max-width: 979px) {
+      width: 100%;
+    }
   }
 
   .content {
