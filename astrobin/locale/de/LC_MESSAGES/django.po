@@ -7,17 +7,17 @@ msgid ""
 msgstr ""
 "Project-Id-Version: AstroBin 1.4\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2018-12-01 16:35+0000\n"
-"PO-Revision-Date: 2016-02-07 22:29+0000\n"
-"Last-Translator: Niels <astrobin.com@n13l5.de>\n"
+"POT-Creation-Date: 2018-12-04 22:05+0000\n"
+"PO-Revision-Date: 2018-12-02 14:30+0000\n"
+"Last-Translator: Magellen <fritz.poelzl@web.de>\n"
 "Language-Team: German <LL@li.org>\n"
 "Language: de\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=(n != 1);\n"
-"X-Generator: Pootle 2.5.0\n"
-"X-POOTLE-MTIME: 1454884177.116022\n"
+"X-Generator: Pootle 2.8\n"
+"X-POOTLE-MTIME: 1543761017.000000\n"
 
 msgid "United Kingdom"
 msgstr "Großbritannien"
@@ -780,6 +780,9 @@ msgstr "Wie wird das Bild des Tages ausgewählt?"
 msgid "This field is required."
 msgstr "Pflichtfeld"
 
+msgid "Please select a remote source if this image was acquired remotely."
+msgstr ""
+
 msgid "Opacity"
 msgstr "Deckkraft"
 
@@ -1343,31 +1346,25 @@ msgid "Star trails"
 msgstr "Startrails"
 
 msgid "Northern lights"
-msgstr ""
+msgstr "Polarlichter"
 
 msgid "Gear"
 msgstr "Ausrüstung"
 
-#, fuzzy
-#| msgid "Acquired"
 msgid "Self acquired"
-msgstr "Aufgenommen"
+msgstr "Selbst aufgenommen"
 
 msgid "Backyard"
-msgstr ""
+msgstr "Gartensternwarte"
 
-#, fuzzy
-#| msgid "Gallery"
 msgid "Traveller"
-msgstr "Galerie"
+msgstr "Mobil"
 
 msgid "Own remote observatory"
-msgstr ""
+msgstr "Eigene Sternwarte, ferngesteuert"
 
-#, fuzzy
-#| msgid "Uploaded"
 msgid "Downloaded"
-msgstr "Hochgeladen"
+msgstr "Heruntergeladen"
 
 msgid "Amateur hosting facility"
 msgstr ""
@@ -1391,6 +1388,9 @@ msgstr "Bild des Tages"
 msgid "Unknown"
 msgstr ""
 
+msgid "Non-commercial independent facility"
+msgstr ""
+
 msgid "Title"
 msgstr "Titel"
 
@@ -1401,6 +1401,14 @@ msgid "Data source"
 msgstr ""
 
 msgid "Where does the data for this image come from?"
+msgstr ""
+
+#, fuzzy
+#| msgid "Remove data"
+msgid "Remote data source"
+msgstr "Daten entfernen"
+
+msgid "Which remote hosting facility did you use to acquire data for this image?"
 msgstr ""
 
 msgid "Main solar system subject"
@@ -2915,6 +2923,9 @@ msgstr "Ausrichtung"
 msgid "Field radius"
 msgstr "Feldradius"
 
+msgid "Remote source"
+msgstr ""
+
 msgid "Author"
 msgstr ""
 
@@ -3215,6 +3226,9 @@ msgstr "Deep Sky"
 
 msgid "Edit your image: basic information"
 msgstr "Bild bearbeiten: grundlegende Informationen"
+
+msgid "Loading..."
+msgstr "Lädt..."
 
 msgid "Next step: gear used"
 msgstr "Nächster Schritt: verwendete Ausrüstung"
@@ -3715,6 +3729,24 @@ msgstr "<a href=\"%(url)s\">Du hast <strong>%(number)s</strong> Bilder mit unvol
 #, python-format
 msgid "You have %(number)s images with insufficient data!"
 msgstr "Du hast %(number)s Bilder mit unvollständigen Daten!"
+
+msgid "Data is paramount on AstroBin, and the whole community thrives on it."
+msgstr ""
+
+msgid "We have noticed that one or more of your images are missing the \"Data source\" field, a very important piece of information that the members of the AstroBin community value a lot."
+msgstr ""
+
+msgid "We would really appreciate if you could edit the following images of yours and set the missing field appropriately:"
+msgstr ""
+
+msgid "You have images on AstroBin missing the \"Data source\" information"
+msgstr ""
+
+msgid "We have noticed that one or more of your images that were acquired at a remote observatory are missing the \"Remote source\" field, a very important piece of information that the members of the AstroBin community value a lot."
+msgstr ""
+
+msgid "You have images on AstroBin missing the \"Remote source\" information"
+msgstr ""
 
 #, fuzzy, python-format
 #| msgid ""
@@ -4472,9 +4504,6 @@ msgstr "Gesamte Aufnahmedauer in Stunden während der letzten 12 Monate"
 
 msgid "Please wait: the plot is loading..."
 msgstr "Bitte warten während das Diagramm lädt..."
-
-msgid "Loading..."
-msgstr "Lädt..."
 
 msgid "Global distribution of camera types"
 msgstr "Globale Verteilung des Kameratyps"
@@ -5260,7 +5289,9 @@ msgstr "Suchtyp"
 msgid "Search domain"
 msgstr "Suche"
 
-msgid "Search type"
+#, fuzzy
+#| msgid "Search type"
+msgid "Search by"
 msgstr "Suchtyp"
 
 msgid "Only animated"
@@ -5313,11 +5344,6 @@ msgid "Astrometry"
 msgstr "Astrometrie"
 
 #, fuzzy
-#| msgid "Comments are closed."
-msgid "Comments & forums"
-msgstr "Keine Kommentare möglich."
-
-#, fuzzy
 #| msgid "Everything is static"
 msgid "Everything"
 msgstr "Alles ist statisch."
@@ -5343,6 +5369,11 @@ msgstr "Benutzte Ausrüstung bearbeiten"
 #| msgid_plural "Guiding telescopes or lenses"
 msgid "Guiding telescopes"
 msgstr "Guidingteleskop oder -objektiv"
+
+#, fuzzy
+#| msgid "Comments are closed."
+msgid "Comments & forums"
+msgstr "Keine Kommentare möglich."
 
 #, fuzzy
 #| msgid "Earth's Moon"

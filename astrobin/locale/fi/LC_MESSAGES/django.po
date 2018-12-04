@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: 0.9\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2018-12-01 16:35+0000\n"
+"POT-Creation-Date: 2018-12-04 22:05+0000\n"
 "PO-Revision-Date: 2015-12-30 10:50+0000\n"
 "Last-Translator: Samuli <samuli.vuorinen@iki.fi>\n"
 "Language-Team: Finnish <tanja@iovene.com>\n"
@@ -780,6 +780,9 @@ msgstr "Miten Päivän kuva valitaan?"
 msgid "This field is required."
 msgstr "Tämä kenttä on pakollinen."
 
+msgid "Please select a remote source if this image was acquired remotely."
+msgstr ""
+
 msgid "Opacity"
 msgstr "Läpinäkyvyys"
 
@@ -1387,6 +1390,9 @@ msgstr "Päivän kuva"
 msgid "Unknown"
 msgstr ""
 
+msgid "Non-commercial independent facility"
+msgstr ""
+
 msgid "Title"
 msgstr "Otsikko"
 
@@ -1400,6 +1406,14 @@ msgstr ""
 #| msgid "Where did you get the idea for this site?"
 msgid "Where does the data for this image come from?"
 msgstr "Mistä sait idean sivustolle?"
+
+#, fuzzy
+#| msgid "Remove data"
+msgid "Remote data source"
+msgstr "Poista tiedot"
+
+msgid "Which remote hosting facility did you use to acquire data for this image?"
+msgstr ""
 
 msgid "Main solar system subject"
 msgstr "Aurinkokunnan kohde"
@@ -2913,6 +2927,9 @@ msgstr "Kuvan asento"
 msgid "Field radius"
 msgstr "Kentän leveys"
 
+msgid "Remote source"
+msgstr ""
+
 msgid "Author"
 msgstr ""
 
@@ -3211,6 +3228,9 @@ msgstr "Syvä taivas"
 
 msgid "Edit your image: basic information"
 msgstr "Muokkaa kuvaasi: perustiedot"
+
+msgid "Loading..."
+msgstr "Ladataan..."
 
 msgid "Next step: gear used"
 msgstr "Seuraava vaihe: muokkaa käytettyjä laitteita"
@@ -3713,6 +3733,24 @@ msgstr "<a href=\"%(url)s\">Sinulla on <strong>%(number)s</strong> kuvaa, joista
 #, python-format
 msgid "You have %(number)s images with insufficient data!"
 msgstr "Sinulla on %(number)s kuvaa, joissa on puutteelliset lisätiedot!"
+
+msgid "Data is paramount on AstroBin, and the whole community thrives on it."
+msgstr ""
+
+msgid "We have noticed that one or more of your images are missing the \"Data source\" field, a very important piece of information that the members of the AstroBin community value a lot."
+msgstr ""
+
+msgid "We would really appreciate if you could edit the following images of yours and set the missing field appropriately:"
+msgstr ""
+
+msgid "You have images on AstroBin missing the \"Data source\" information"
+msgstr ""
+
+msgid "We have noticed that one or more of your images that were acquired at a remote observatory are missing the \"Remote source\" field, a very important piece of information that the members of the AstroBin community value a lot."
+msgstr ""
+
+msgid "You have images on AstroBin missing the \"Remote source\" information"
+msgstr ""
 
 #, fuzzy, python-format
 #| msgid ""
@@ -4474,9 +4512,6 @@ msgstr "Kokonaisvalotusaika viime vuonna"
 
 msgid "Please wait: the plot is loading..."
 msgstr "Odota: Kuvaajaa ladataan..."
-
-msgid "Loading..."
-msgstr "Ladataan..."
 
 msgid "Global distribution of camera types"
 msgstr "Kameratyyppien maantieteellinen jakauma"
@@ -5262,7 +5297,9 @@ msgstr "Hakutyyppi"
 msgid "Search domain"
 msgstr "Etsitään"
 
-msgid "Search type"
+#, fuzzy
+#| msgid "Search type"
+msgid "Search by"
 msgstr "Hakutyyppi"
 
 msgid "Only animated"
@@ -5312,11 +5349,6 @@ msgid "Astrometry"
 msgstr "Astrometria"
 
 #, fuzzy
-#| msgid "Comments"
-msgid "Comments & forums"
-msgstr "Kommentit"
-
-#, fuzzy
 #| msgid "Everything is static"
 msgid "Everything"
 msgstr "Kaikki on staattista"
@@ -5340,6 +5372,11 @@ msgstr "Muokkaa käytettyjä laitteita"
 #, fuzzy
 msgid "Guiding telescopes"
 msgstr "Seurantakaukoputket"
+
+#, fuzzy
+#| msgid "Comments"
+msgid "Comments & forums"
+msgstr "Kommentit"
 
 #, fuzzy
 #| msgid "Earth's Moon"

@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: AstroBin 1.9\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2018-12-01 16:35+0000\n"
+"POT-Creation-Date: 2018-12-04 22:05+0000\n"
 "PO-Revision-Date: 2012-11-25 18:36+0100\n"
 "Last-Translator: strugar <strugar@gmail.com>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -777,6 +777,9 @@ msgstr ""
 msgid "This field is required."
 msgstr ""
 
+msgid "Please select a remote source if this image was acquired remotely."
+msgstr ""
+
 msgid "Opacity"
 msgstr ""
 
@@ -1375,6 +1378,9 @@ msgstr "Slika dana"
 msgid "Unknown"
 msgstr ""
 
+msgid "Non-commercial independent facility"
+msgstr ""
+
 msgid "Title"
 msgstr ""
 
@@ -1385,6 +1391,12 @@ msgid "Data source"
 msgstr ""
 
 msgid "Where does the data for this image come from?"
+msgstr ""
+
+msgid "Remote data source"
+msgstr ""
+
+msgid "Which remote hosting facility did you use to acquire data for this image?"
 msgstr ""
 
 msgid "Main solar system subject"
@@ -2904,6 +2916,9 @@ msgstr ""
 msgid "Field radius"
 msgstr ""
 
+msgid "Remote source"
+msgstr ""
+
 msgid "Author"
 msgstr ""
 
@@ -3191,6 +3206,9 @@ msgstr ""
 
 msgid "Edit your image: basic information"
 msgstr ""
+
+msgid "Loading..."
+msgstr "Učitavanje..."
 
 msgid "Next step: gear used"
 msgstr ""
@@ -3608,6 +3626,24 @@ msgstr ""
 
 #, python-format
 msgid "You have %(number)s images with insufficient data!"
+msgstr ""
+
+msgid "Data is paramount on AstroBin, and the whole community thrives on it."
+msgstr ""
+
+msgid "We have noticed that one or more of your images are missing the \"Data source\" field, a very important piece of information that the members of the AstroBin community value a lot."
+msgstr ""
+
+msgid "We would really appreciate if you could edit the following images of yours and set the missing field appropriately:"
+msgstr ""
+
+msgid "You have images on AstroBin missing the \"Data source\" information"
+msgstr ""
+
+msgid "We have noticed that one or more of your images that were acquired at a remote observatory are missing the \"Remote source\" field, a very important piece of information that the members of the AstroBin community value a lot."
+msgstr ""
+
+msgid "You have images on AstroBin missing the \"Remote source\" information"
 msgstr ""
 
 #, python-format
@@ -4301,9 +4337,6 @@ msgstr "Ukupno vreme integracije u satima, za zadnjih 12 meseci"
 
 msgid "Please wait: the plot is loading..."
 msgstr "Molimo Vas sačekajte: grafikon se učitava..."
-
-msgid "Loading..."
-msgstr "Učitavanje..."
 
 msgid "Global distribution of camera types"
 msgstr "Globalna raspodjela vrsta kamera"
@@ -5052,7 +5085,7 @@ msgstr ""
 msgid "Search domain"
 msgstr ""
 
-msgid "Search type"
+msgid "Search by"
 msgstr ""
 
 msgid "Only animated"
@@ -5095,9 +5128,6 @@ msgstr ""
 msgid "Astrometry"
 msgstr ""
 
-msgid "Comments & forums"
-msgstr ""
-
 #, fuzzy
 #| msgid "Everything is static"
 msgid "Everything"
@@ -5120,6 +5150,9 @@ msgid "By gear used"
 msgstr "Slika dana"
 
 msgid "Guiding telescopes"
+msgstr ""
+
+msgid "Comments & forums"
 msgstr ""
 
 msgid "Earth's moon"

@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: AstroBin 1.9\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2018-12-01 16:35+0000\n"
+"POT-Creation-Date: 2018-12-04 22:05+0000\n"
 "PO-Revision-Date: 2014-04-28 13:58+0000\n"
 "Last-Translator: ecloud <yecloud@me.com>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -778,6 +778,9 @@ msgstr ""
 msgid "This field is required."
 msgstr "此字段是必需的。"
 
+msgid "Please select a remote source if this image was acquired remotely."
+msgstr ""
+
 msgid "Opacity"
 msgstr "透明度"
 
@@ -1376,6 +1379,9 @@ msgstr ""
 msgid "Unknown"
 msgstr ""
 
+msgid "Non-commercial independent facility"
+msgstr ""
+
 msgid "Title"
 msgstr "标题"
 
@@ -1386,6 +1392,12 @@ msgid "Data source"
 msgstr ""
 
 msgid "Where does the data for this image come from?"
+msgstr ""
+
+msgid "Remote data source"
+msgstr ""
+
+msgid "Which remote hosting facility did you use to acquire data for this image?"
 msgstr ""
 
 msgid "Main solar system subject"
@@ -2881,6 +2893,9 @@ msgstr ""
 msgid "Field radius"
 msgstr ""
 
+msgid "Remote source"
+msgstr ""
+
 msgid "Author"
 msgstr ""
 
@@ -3170,6 +3185,9 @@ msgid "Deep sky"
 msgstr ""
 
 msgid "Edit your image: basic information"
+msgstr ""
+
+msgid "Loading..."
 msgstr ""
 
 msgid "Next step: gear used"
@@ -3590,6 +3608,24 @@ msgstr ""
 
 #, python-format
 msgid "You have %(number)s images with insufficient data!"
+msgstr ""
+
+msgid "Data is paramount on AstroBin, and the whole community thrives on it."
+msgstr ""
+
+msgid "We have noticed that one or more of your images are missing the \"Data source\" field, a very important piece of information that the members of the AstroBin community value a lot."
+msgstr ""
+
+msgid "We would really appreciate if you could edit the following images of yours and set the missing field appropriately:"
+msgstr ""
+
+msgid "You have images on AstroBin missing the \"Data source\" information"
+msgstr ""
+
+msgid "We have noticed that one or more of your images that were acquired at a remote observatory are missing the \"Remote source\" field, a very important piece of information that the members of the AstroBin community value a lot."
+msgstr ""
+
+msgid "You have images on AstroBin missing the \"Remote source\" information"
 msgstr ""
 
 #, python-format
@@ -4279,9 +4315,6 @@ msgid "Total integration hours in the last 12 months"
 msgstr ""
 
 msgid "Please wait: the plot is loading..."
-msgstr ""
-
-msgid "Loading..."
 msgstr ""
 
 msgid "Global distribution of camera types"
@@ -5029,7 +5062,9 @@ msgstr "搜索类型"
 msgid "Search domain"
 msgstr ""
 
-msgid "Search type"
+#, fuzzy
+#| msgid "Search type"
+msgid "Search by"
 msgstr "搜索类型"
 
 msgid "Only animated"
@@ -5073,9 +5108,6 @@ msgstr "摄影用望远镜或者镜头"
 msgid "Astrometry"
 msgstr ""
 
-msgid "Comments & forums"
-msgstr ""
-
 msgid "Everything"
 msgstr ""
 
@@ -5097,6 +5129,9 @@ msgstr "图片"
 #, fuzzy
 msgid "Guiding telescopes"
 msgstr "导星镜或者镜头"
+
+msgid "Comments & forums"
+msgstr ""
 
 #, fuzzy
 #| msgid "Earth's Moon"
