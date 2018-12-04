@@ -718,7 +718,8 @@ class Image(HasSolutionMixin, SafeDeleteModel):
 
     REMOTE_OBSERVATORY_CHOICES = (
         (None, "---------"),
-
+        ("OWN", _("Non-commercial independent facility")),
+        (None, "---------"),
         ("AC", "AstroCamp"),
         ("CS", "ChileScope"),
         ("DSP", "Dark Sky Portal"),
