@@ -18,6 +18,7 @@ $(function() {
             this.userId = parseInt($('#nested-comments-user-id').attr('data-value'));
             this.username = $('#nested-comments-user-name').attr('data-value');
             this.userIsAuthenticated = $('#nested-comments-user-is-authenticated').attr('data-value') == "True";
+            this.userIsSuperuser = $('#nested-comments-user-is-superuser').attr('data-value') == "True";
             this.page_url = $('#nested-comments-page-url').attr('data-value');
             this.loaderGif = $('#nested-comments-loaderGif-url').attr('data-value');
             this.contentTypeId = $(this.rootElement).attr('data-content-type-id');
@@ -518,6 +519,7 @@ $(function() {
         submittingBinding: 'node.submitting',
         disallowSavingBinding: 'node.disallowSaving',
         collapsed: false,
+        userIsSuperuser: null,
 
         scroll: function() {
             /* Using a timeout here, because the "reply" view is still
@@ -538,6 +540,8 @@ $(function() {
         },
 
         didInsertElement: function() {
+            this.set('userIsSuperuser', nc_app.userIsSuperuser);
+
             var self = this,
                 hilighted_comment = location.hash.substr(1);
 
