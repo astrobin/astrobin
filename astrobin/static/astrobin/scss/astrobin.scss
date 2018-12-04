@@ -2309,6 +2309,13 @@ BODY:first-of-type ul.as-list, x:-moz-any-link, x:default { /* Target FF 3.5+ */
   .avatar {
     float: left;
     margin-right: $spacer-large;
+    margin-top: 3px;
+
+    img {
+      -webkit-box-shadow: 4px 4px 8px rgba(0, 0, 0, .4);
+      -moz-box-shadow: 4px 4px 8px rgba(0, 0, 0, .4);
+      box-shadow: 4px 4px 8px rgba(0, 0, 0, .4);
+    }
 
     a {
       margin: 0;
@@ -2379,10 +2386,6 @@ BODY:first-of-type ul.as-list, x:-moz-any-link, x:default { /* Target FF 3.5+ */
     }
   }
 
-  &:last-of-type .links {
-    border-bottom: none;
-  }
-
   form {
     textarea {
       width: 98.75%;
@@ -2409,10 +2412,10 @@ BODY:first-of-type ul.as-list, x:-moz-any-link, x:default { /* Target FF 3.5+ */
 
 @keyframes bounceCommentIndicator {
   from {
-    left: -40px;
+    left: -30px;
   }
   to {
-    left: -70px
+    left: -50px
   }
 }
 
@@ -2428,15 +2431,20 @@ BODY:first-of-type ul.as-list, x:-moz-any-link, x:default { /* Target FF 3.5+ */
 
 .comment.newlyAdded, .comment.hilight, .review.hilight {
   &:before {
-    content: "\21E8";
+    content: "\279F";
     position: absolute;
     left: -40px;
-    font-size: 30px;
-    top: 20px;
-    color: $strong-text-color;
-    animation: bounceCommentIndicator 0.5s cubic-bezier(.5, .05, 1, 1);
+    font-size: 20px;
+    top: 36px;
+    color: #949494;
+    animation: bounceCommentIndicator 0.5s cubic-bezier(0.75, 0.1, 0.9, 0.9);
     animation-direction: alternate;
     animation-iteration-count: infinite;
+  }
+
+  .content {
+    font-weight: bold;
+    color: yellow;
   }
 }
 
