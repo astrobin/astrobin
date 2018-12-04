@@ -1,3 +1,20 @@
+2018-12-05 Salvatore Iovene <salvatore@iovene.c*om>
+ * v1.35.0
+ * (i18n) Update messages
+ * (comments) Improve UI of highlighted comment
+ * (comments) Do not nest comments on small screens
+ * (comments) Let superuser reply to own comments for debugging purposes
+ * (search) Rename "Search type" filter to "Search by" for clarity
+ * (images) Add "Non-commercial independent facility" to remote sources
+ * (notifications) Add new lines to data/remote source emails
+ * (i18n) Fix issue in string
+ * (inbox) Apply minor UI improvements
+ * (images) Add Sky Ranch Observatory to the list of remote sources
+ * (search) Add the remote source display to the image index
+ * (search) Allow the remote_source field of the Image index to be null
+ * (images) Add ChileScope to the list of remote data sources
+ * (images) Fix displaying of data source on technical card*
+
 2018-12-02 Salvatore Iovene <salvatore@iovene.c*om>
  * v1.34.0
  * (notifications) Add notifications for users with images lacking a "Remote source"
