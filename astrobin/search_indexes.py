@@ -478,6 +478,9 @@ class ImageIndex(CelerySearchIndex, Indexable):
     is_planets = BooleanField()
     is_comets = BooleanField()
 
+    is_iotd = BooleanField()
+    is_top_pick = BooleanField()
+
     license = IntegerField(model_attr = 'license')
 
     min_aperture = IntegerField()
@@ -568,6 +571,12 @@ class ImageIndex(CelerySearchIndex, Indexable):
     def prepare_is_commercial(self, obj):
         commercial_gear = CommercialGear.objects.filter(image = obj)
         return commercial_gear.count() > 0
+
+    def prepare_is_iotd(self, obj):
+        return hasattr(obj, 'iotd')
+
+    def prepare_is_top_pick(self, obj):
+        return obj.iotdvote_set.count() > 0 and not hasattr(obj, 'iotd');
 
     def prepare_objects_in_field(self, obj):
         return obj.solution.objects_in_field.join(", ") \
