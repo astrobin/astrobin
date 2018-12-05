@@ -22,6 +22,7 @@ FIELDS = (
     'd',
     't',
     'animated',
+    'award',
     'camera_type',
     'country',
     'data_source',
@@ -49,6 +50,7 @@ class AstroBinSearchForm(SearchForm):
     t = forms.CharField(required=False)
     
     animated = forms.BooleanField(required=False)
+    award = forms.CharField(required=False)
     camera_type = forms.CharField(required=False)
     country = forms.CharField(required=False)
     data_source = forms.CharField(required=False)
@@ -99,6 +101,20 @@ class AstroBinSearchForm(SearchForm):
 
         if t:
             results = results.filter(animated=True)
+
+        return results
+
+    def filterByAward(self, results):
+        award = self.cleaned_data.get("award")
+
+        if award is not None and award != "":
+            types = award.split(',')
+
+            if "iotd" in types:
+                results = results.filter(is_iotd=True)
+
+            if "top-pick" in types:
+                results = results.filter(is_top_pick=True)
 
         return results
 
@@ -308,6 +324,7 @@ class AstroBinSearchForm(SearchForm):
         # Images
         sqs = self.filterByType(sqs)
         sqs = self.filterByAnimated(sqs)
+        sqs = self.filterByAward(sqs)
         sqs = self.filterByCameraType(sqs)
         sqs = self.filterByCountry(sqs)
         sqs = self.filterByDataSource(sqs)
