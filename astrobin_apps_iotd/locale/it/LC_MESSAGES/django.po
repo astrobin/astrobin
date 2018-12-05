@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2018-12-04 22:08+0000\n"
+"POT-Creation-Date: 2018-12-05 19:48+0000\n"
 "PO-Revision-Date: 2018-12-04 22:57+0000\n"
 "Last-Translator: Salvatore Iovene <salvatore@iovene.com>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -36,9 +36,7 @@ msgstr "Non puoi proporre l'immagine di un giudice."
 
 #, python-format
 msgid "You cannot submit an image that was published more than %(max_days)s days ago."
-msgstr ""
-"Non puoi proporre un'immagine che è stata pubblicata più di %(max_days)s "
-"giorni fa."
+msgstr "Non puoi proporre un'immagine che è stata pubblicata più di %(max_days)s giorni fa."
 
 msgid "This image has already been an IOTD in the past"
 msgstr "Questa immagine è già stata Foto del Giorno in passato"
@@ -67,9 +65,7 @@ msgstr "Non puoi votare la tua proposta."
 
 #, python-format
 msgid "You cannot vote for an image that has been in the submission queue for more than %(max_days)s days."
-msgstr ""
-"Non puoi votare un'immagine che è stata nella coda delle proposte oltre "
-"%(max_days)s giorni."
+msgstr "Non puoi votare un'immagine che è stata nella coda delle proposte oltre %(max_days)s giorni."
 
 #, python-format
 msgid "You have already voted for %(max_allowed)s images today."
@@ -98,9 +94,7 @@ msgstr "Non puoi eleggere una immagine che hai votato."
 
 #, python-format
 msgid "You cannot elect an image that has been in the review queue for more than %(max_days)s days."
-msgstr ""
-"Non puoi eleggere una immagine che è stata nella coda di votazioni per oltre "
-"%(max_days)s giorni."
+msgstr "Non puoi eleggere una immagine che è stata nella coda di votazioni per oltre %(max_days)s giorni."
 
 #, python-format
 msgid "You have already elected %(max_allowed)s images today."
@@ -117,22 +111,16 @@ msgid "You cannot unelect an image you voted for."
 msgstr "Non puoi rimuovere l'elezione di una immagine che hai votato."
 
 msgid "You cannot unelect an image elected by another judge."
-msgstr ""
-"Non puoi rimuovere l'elezione di una immagine eletta da un altro giudice."
+msgstr "Non puoi rimuovere l'elezione di una immagine eletta da un altro giudice."
 
 msgid "You cannot unelect a past or current IOTD."
-msgstr ""
-"Non puoi rimuovere l'elezione di una Foto del Giorno passata o corrente."
+msgstr "Non puoi rimuovere l'elezione di una Foto del Giorno passata o corrente."
 
 msgid "Submit for IOTD"
 msgstr "Proponi come Foto del Giorno"
 
 msgid "You will submit this image to the IOTD Submissions Queue. From there, a member of the IOTD Reviewers Board will consider promoting it for final evaluation from an IOTD Judge"
-msgstr ""
-"Questa immagine sarà proposta alla coda si proposte per la Foto del Giorno. "
-"Lì, un membro del gruppo dei reviewer della Foto del Giorno considererà la "
-"suo promozione per la valutazione finale da parte di un giudice della Foto "
-"del Giorno."
+msgstr "Questa immagine sarà proposta alla coda si proposte per la Foto del Giorno. Lì, un membro del gruppo dei reviewer della Foto del Giorno considererà la suo promozione per la valutazione finale da parte di un giudice della Foto del Giorno."
 
 msgid "Submit"
 msgstr "Proponi"
@@ -165,8 +153,7 @@ msgid "IOTD Review Queue"
 msgstr "Coda di Votazione Foto del Giorno"
 
 msgid "Please select the images that you want to promote for final judgement by clicking on them."
-msgstr ""
-"Selezione le immagini che vuoi promuovere per il giudizio finale cliccandole."
+msgstr "Selezione le immagini che vuoi promuovere per il giudizio finale cliccandole."
 
 msgid "Submitters"
 msgstr "Submitter"
@@ -175,18 +162,14 @@ msgid "IOTD Submission Queue"
 msgstr "Coda di Proposte Foto del Giorno"
 
 msgid "Please select the images that you want to propose for IOTD consideration."
-msgstr ""
-"Scegli le immagini che vuoi proporre per la considerazione a Foto del Giorno."
+msgstr "Scegli le immagini che vuoi proporre per la considerazione a Foto del Giorno."
 
 msgid "No images uploaded on this day."
 msgstr "Nessuna immagine caricata questo giorno."
 
 msgid "You cannot unelect an IOTD elected by another judge."
-msgstr ""
-"Non puoi rimuovere l'elezione a Foto del Giorno eletta da un altro giudice."
+msgstr "Non puoi rimuovere l'elezione a Foto del Giorno eletta da un altro giudice."
 
 #, python-format
 msgid "All IOTD slots for the next %(days)s days are already filled."
-msgstr ""
-"Tutte le posizioni per Foto del Giorno per i prossimi %(days)s sono state "
-"occupate."
+msgstr "Tutte le posizioni per Foto del Giorno per i prossimi %(days)s sono state occupate."
