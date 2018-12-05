@@ -1,4 +1,12 @@
-2018-12-05 Salvatore Iovene <salvatore@iovene.c*om>
+2018-12-05 Salvatore Iovene <salvatore@iovene.com>
+ * v1.36.0
+ * (search) Add filter for IOTD and Top Picks
+ * (infra) Rename Pootle in/out.sh files to download/upload for clarity
+ * (i18n) Disable no-wrap options of makemessages as it conflicts with Pootle
+ * (i18n) Fix missing localizaion of notification settings
+ * (quality) Fix typo in Changelog
+
+2018-12-05 Salvatore Iovene <salvatore@iovene.com>
  * v1.35.0
  * (i18n) Update messages
  * (comments) Improve UI of highlighted comment
@@ -15,7 +23,7 @@
  * (images) Add ChileScope to the list of remote data sources
  * (images) Fix displaying of data source on technical card
 
-2018-12-02 Salvatore Iovene <salvatore@iovene.c*om>
+2018-12-02 Salvatore Iovene <salvatore@iovene.com>
  * v1.34.0
  * (notifications) Add notifications for users with images lacking a "Remote source"
  * (notifications) Add notifications for users with images lacking a "Data source"
