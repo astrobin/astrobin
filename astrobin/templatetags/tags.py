@@ -237,7 +237,7 @@ def show_ads(user):
     if settings.PREMIUM_ENABLED and (is_lite(user) or is_premium(user)):
         return False
 
-    return True;
+    return True
 
 
 @register.filter
