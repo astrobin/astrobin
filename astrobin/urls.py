@@ -448,6 +448,12 @@ urlpatterns = [
     ###########################################################################
 
     url(r'^language/set/(?P<lang>[\w-]+)/$',set_language, name='set_language'),
+
+    ###########################################################################
+    ### HOME VIEWS                                                          ###
+    ###########################################################################
+
+    url(r'^welcome/', include('astrobin_apps_landing.urls', namespace='landing')),
 ]
 
 urlpatterns += [url(r'^silk/', include('silk.urls', namespace='silk'))]
