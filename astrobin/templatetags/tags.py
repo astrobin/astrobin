@@ -229,15 +229,15 @@ def show_ads(user):
     from astrobin_apps_premium.templatetags.astrobin_apps_premium_tags import is_premium, is_lite
 
     if not settings.ADS_ENABLED:
-        return False;
+        return False
 
     if is_donor(user):
-        return False;
+        return False
 
     if settings.PREMIUM_ENABLED and (is_lite(user) or is_premium(user)):
-        return False;
+        return False
 
-    return True;
+    return True
 
 
 @register.filter
