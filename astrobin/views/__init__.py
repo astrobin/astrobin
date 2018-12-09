@@ -225,6 +225,10 @@ def jsonDump(all):
 
 # VIEWS
 
+def app(request, template = 'app.html'):
+    return render_to_response(template, {}, context_instance=RequestContext(request))
+
+
 @page_template('index/stream_page.html', key = 'stream_page')
 @page_template('index/recent_images_page.html', key = 'recent_images_page')
 @silk_profile('Index')

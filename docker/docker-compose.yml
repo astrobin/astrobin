@@ -139,7 +139,6 @@ services:
       - DJANGO_SETTINGS_MODULE=astrobin.settings
       - POSTGRES_DB=astrobin
       - POSTGRES_USER=astrobin
-      - CODECOV_TOKEN
     volumes:
       - media:/media
 

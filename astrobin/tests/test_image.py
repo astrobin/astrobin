@@ -12,6 +12,8 @@ from django.core.urlresolvers import reverse
 from django.test import TestCase
 
 # AstroBin
+from mock import patch
+
 from nested_comments.models import NestedComment
 
 # Third party
@@ -141,7 +143,8 @@ class ImageTest(TestCase):
     # View tests                                                              #
     ###########################################################################
 
-    def test_image_upload_process_view(self):
+    @patch('astrobin.tasks.retrieve_primary_thumbnails.delay')
+    def test_image_upload_process_view(self, retrieve_primary_thumbnail):
         self.client.login(username = 'test', password = 'password')
 
         # Test file with invalid extension
@@ -602,7 +605,7 @@ class ImageTest(TestCase):
 
         response = self.client.get(reverse('image_rawthumb', kwargs = opts))
         # 404 because we don't serve that /media/static file, that's fine.
-        self.assertRedirects(response, get_expected_url(image), target_status_code=404)
+        self.assertRedirects(response, get_expected_url(image))
 
         # Set the watermark to some non ASCII symbol
         image.watermark_text = "©"
@@ -611,7 +614,7 @@ class ImageTest(TestCase):
 
         image = Image.objects.get(pk=image.pk)
         response = self.client.get(reverse('image_rawthumb', kwargs = opts))
-        self.assertRedirects(response, get_expected_url(image), target_status_code=404)
+        self.assertRedirects(response, get_expected_url(image))
 
         image.delete()
 

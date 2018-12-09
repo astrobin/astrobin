@@ -1,21 +1,22 @@
 version: '3'
 
 services:
-  celery_default:
-    image: astrobin/astrobin:latest
-
-
-  celery_thumbnails:
-    image: astrobin/astrobin:latest
-
-
-  celery_haystack:
-    image: astrobin/astrobin:latest
-
-
-  beat:
-    image: astrobin/astrobin:latest
-
-
   astrobin:
     image: astrobin/astrobin:latest
+    command: bash -c "./manage.py collectstatic --noinput && gunicorn wsgi:application -w 4 -b :8083"
+    environment:
+      - TESTING=true
+      - CODECOV_TOKEN
+
+
+  celery_default:
+    image: astrobin/astrobin:latest
+    environment:
+      - TESTING=true
+
+
+  rabbitmq:
+    image: rabbitmq:management-alpine
+    environment:
+      - RABBITMQ_DEFAULT_USER=astrobin
+      - RABBITMQ_DEFAULT_PASS=astrobin

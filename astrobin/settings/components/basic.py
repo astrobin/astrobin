@@ -20,6 +20,8 @@ DEBUG = os.environ.get('DEBUG', 'true') == 'true'
 INTERNAL_IPS = ['127.0.0.1', '172.18.0.1'] # localhost and docker gateway
 
 MAINTENANCE_MODE = False
+MAINTENANCE_LOCKFILE_PATH = 'maintenance-lock.file'
+
 READONLY_MODE = False
 LONGPOLL_ENABLED = False
 
