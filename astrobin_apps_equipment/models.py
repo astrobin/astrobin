@@ -104,7 +104,7 @@ class EquipmentItem(models.Model):
         (constants.EQUIPMENT_ITEM_SUBCATEGORY_OPTICAL_FILTER_LP, _("Light pollution filter")),
         (constants.EQUIPMENT_ITEM_SUBCATEGORY_OPTICAL_FILTER_SOLAR, _("Solar filter")),
         (constants.EQUIPMENT_ITEM_SUBCATEGORY_OPTICAL_FILTER_LUNAR, _("Lunar filter")),
-        (constants.EQUIPMENT_ITEM_SUBCATEGORY_DETECTOR_CCD, _("CCD camera")),
+        (constants.EQUIPMENT_ITEM_SUBCATEGORY_DETECTOR_DEDICATED, _("Dedicated astronomical camera")),
         (constants.EQUIPMENT_ITEM_SUBCATEGORY_DETECTOR_DSLR, _("DSLR camera")),
         (constants.EQUIPMENT_ITEM_SUBCATEGORY_DETECTOR_MIRRORLESS, _("Mirrorless camera")),
         (constants.EQUIPMENT_ITEM_SUBCATEGORY_DETECTOR_FILM, _("Film camera")),
