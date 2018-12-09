@@ -1,4 +1,8 @@
+import os
+
 from split_settings.tools import optional, include
+
+BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 
 include(
     # Begin
@@ -34,6 +38,7 @@ include(
     'components/tinymce.py',
     'components/thumbnail.py',
     'components/toggleproperties.py',
+    'components/webpack-loader.py',
 
     # AstroBin settings
     'components/flickr.py',

@@ -1,0 +1,85 @@
+<nav class="navbar navbar-expand-lg">
+  <div class="container">
+
+    <a class="navbar-brand" [href]="legacyRoutes.HOME">
+      <img src="assets/images/nav-logo.png" alt="AstroBin" />
+    </a>
+
+    <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent"
+            aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+      <span class="navbar-toggler-icon"></span>
+    </button>
+
+    <ul class="navbar-nav mr-auto mt-2 mt-lg-0">
+    </ul>
+
+    <ul *ngIf="!appContext.currentUserProfile" class="navbar-nav">
+      <li class="nav-item"><a class="nav-link" [href]="legacyRoutes.LOGIN" translate>Login</a></li>
+      <li class="nav-item"><a class="nav-link" [href]="legacyRoutes.REGISTER" translate>Register</a></li>
+    </ul>
+
+    <ul *ngIf="appContext.currentUserProfile" class="navbar-nav">
+
+      <li class="nav-item">
+        <div ngbDropdown class="d-inline-block">
+          <button class="btn btn-primary" id="userDropdown" ngbDropdownToggle>
+            {{ appContext.currentUserProfile.userObject.username }}
+          </button>
+          <div ngbDropdownMenu aria-labelledby="userDropdown">
+
+            <a class="dropdown-item" [href]="legacyRoutes.SUBSCRIPTIONS">
+              <fa-icon icon="asterisk"></fa-icon>
+              {{ "Subscription plans" | translate }}
+            </a>
+
+            <a class="dropdown-item" [href]="legacyRoutes.UPLOAD">
+              <fa-icon icon="upload"></fa-icon>
+              {{ "Upload" | translate }}
+            </a>
+
+            <h6 class="dropdown-header" translate>My places</h6>
+
+            <a *ngIf="appContext.currentUserProfile | isProducer"
+              class="dropdown-item" [href]="legacyRoutes.COMMERCIAL_PRODUCTS(appContext.currentUserProfile)">
+              <fa-icon icon="barcode"></fa-icon>
+              {{ "Commercial products" | translate }}
+            </a>
+
+            <a
+              class="dropdown-item" [href]="legacyRoutes.GALLERY(appContext.currentUserProfile)">
+              <fa-icon icon="image"></fa-icon>
+              {{ "Gallery" | translate }}
+            </a>
+
+            <a
+              class="dropdown-item" [href]="legacyRoutes.BOOKMARKS(appContext.currentUserProfile)">
+              <fa-icon icon="bookmark"></fa-icon>
+              {{ "Bookmarks" | translate }}
+            </a>
+
+            <a
+              class="dropdown-item" [href]="legacyRoutes.PLOTS(appContext.currentUserProfile)">
+              <fa-icon icon="chart-bar"></fa-icon>
+              {{ "Plots" | translate }}
+            </a>
+
+            <h6 class="dropdown-header" translate>Raw data</h6>
+
+            <a
+              *ngIf="usersService.hasValidRawDataSubscription(appContext.currentUserProfile)"
+              class="dropdown-item" [href]="legacyRoutes.RAWDATA">
+              <fa-icon icon="book"></fa-icon>
+              {{ "Raw data library" | translate }}
+            </a>
+
+          </div>
+        </div>
+      </li>
+
+      <li class="nav-item"><a class="nav-link" [href]="legacyRoutes.UPLOAD">
+        <fa-icon icon="upload"></fa-icon>
+      </a></li>
+    </ul>
+
+  </div> <!-- ./container -->
+</nav>

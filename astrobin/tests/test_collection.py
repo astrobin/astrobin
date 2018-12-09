@@ -7,6 +7,8 @@ from django.core.urlresolvers import reverse
 from django.test import TestCase
 
 # AstroBin
+from mock import patch
+
 from astrobin.models import Collection
 from astrobin.models import Image
 
@@ -33,6 +35,7 @@ class CollectionTest(TestCase):
         if wip:
             data['wip'] = True
 
+        patch('astrobin.tasks.retrieve_primary_thumbnails.delay')
         return self.client.post(
             reverse('image_upload_process'),
             data,

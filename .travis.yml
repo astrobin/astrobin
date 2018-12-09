@@ -1,49 +1,53 @@
 sudo: required
 dist: trusty
 
-services:
-  - docker
+jobs:
+  include:
+    - stage: test
+      name: Dockerized Django backend
+      services:
+        - docker
+      install:
+        - sudo apt update -y
+        - sudo apt install --only-upgrade docker-ce -y
+        - echo "$DOCKER_PASSWORD" | docker login -u "$DOCKER_USERNAME" --password-stdin
+        - docker pull astrobin/astrobin:latest
+        - docker build --cache-from astrobin/astrobin:latest -t astrobin/astrobin:latest -f docker/astrobin.dockerfile .
+      before_script:
+        - docker-compose -f docker/docker-compose.travis.yml up --no-deps -d
+        - docker-compose -f docker/docker-compose.travis.yml exec astrobin ./scripts/init.sh
+      script:
+        - docker-compose -f docker/docker-compose.travis.yml exec astrobin ./scripts/test.sh
+      after_success:
+        - docker cp -a .git $(docker ps -q -f name=docker_astrobin --last 1):/code # Needed by codecov.
+        - docker-compose -f docker/docker-compose.travis.yml exec astrobin ./scripts/codecov.sh
+        - docker push astrobin/astrobin:latest
+      after_script:
+        - docker-compose -f docker/docker-compose.travis.yml down
+        - docker logout
 
-env:
-  - NGINX_MODE=dev DOCKER_MODE=compose
-  - NGINX_MODE=prod DOCKER_MODE=compose
-  - NGINX_MODE=dev DOCKER_MODE=stack
-  - NGINX_MODE=prod DOCKER_MODE=stack
+    - stage: test
+      name: Frontend unit tests
+      language: node_js
+      node_js: 10
+      cache:
+        directories:
+          - node_modules
+      install:
+        - (cd frontend && npm install)
+      script:
+        - (cd frontend; npm test)
 
-before_install:
-  - ulimit -s 1082768
-  - sudo /etc/init.d/postgresql stop
-
-install:
-  - sudo apt update -y
-  - sudo apt install --only-upgrade docker-ce -y
-  - docker build --no-cache -t astrobin/nginx-${NGINX_MODE}:latest -f docker/nginx.${NGINX_MODE}.dockerfile .
-  - docker build --no-cache -t astrobin/astrobin:latest -f docker/astrobin.dockerfile .
-  - echo "$DOCKER_PASSWORD" | docker login -u "$DOCKER_USERNAME" --password-stdin
-  - if [ ${DOCKER_MODE} = "compose" ]; then docker-compose -f docker/docker-compose.yml -f docker/docker-compose.build.yml -f docker/docker-compose.travis.yml up -d; fi
-  - if [ ${DOCKER_MODE} = "stack" ]; then docker swarm init; fi
-  - if [ ${DOCKER_MODE} = "stack" ]; then docker node update --label-add default=true --label-add app=true $(docker node ls --format "{{.ID}}"); fi
-  - if [ ${DOCKER_MODE} = "stack" ]; then docker stack deploy -c docker/docker-compose.yml -c docker/docker-compose.deploy.yml -c docker/docker-compose.travis.yml astrobin; fi
-  - if [ ${DOCKER_MODE} = "stack" ]; then while ! docker service ps astrobin_astrobin --format '{{.CurrentState}} {{.Image}}' | grep Running.*astrobin/astrobin:latest; do sleep 10; done; fi
-
-before_script:
-  - if [ ${DOCKER_MODE} = "compose" ]; then docker-compose -f docker/docker-compose.yml -f docker/docker-compose.build.yml -f docker/docker-compose.travis.yml run --no-deps --rm astrobin ./scripts/init.sh; fi
-  - if [ ${DOCKER_MODE} = "stack" ]; then docker exec -it $(docker ps -q -f name=astrobin_astrobin --last 1) ./scripts/init.sh; fi
-  - if [ ${DOCKER_MODE} = "stack" ]; then docker exec -it $(docker ps -q -f name=astrobin_astrobin --last 1) python manage.py collectstatic --noinput 2>&1 >/dev/null; fi
-
-script:
-  - if [ ${DOCKER_MODE} = "compose" ]; then docker-compose -f docker/docker-compose.yml -f docker/docker-compose.build.yml -f docker/docker-compose.travis.yml run --no-deps --rm astrobin bash -c "./manage.py collectstatic --noinput && ./scripts/test.sh"; fi
-  - if [ ${DOCKER_MODE} = "stack" ]; then docker exec -it $(docker ps -q -f name=astrobin_astrobin --last 1) ./scripts/test.sh; fi
-
-after_success:
-  - docker cp -a .git $(docker ps -q -f name=astrobin_astrobin --last 1):/code # Needed by codecov.
-  - if [ ${DOCKER_MODE} = "compose" ]; then docker-compose -f docker/docker-compose.yml -f docker/docker-compose.build.yml -f docker/docker-compose.travis.yml exec astrobin ./scripts/codecov.sh; fi
-  - if [ ${DOCKER_MODE} = "stack" ]; then docker exec -it $(docker ps -q -f name=astrobin_astrobin --last 1) ./scripts/codecov.sh; fi
-  - docker push astrobin/nginx-${NGINX_MODE}:latest
-  - docker push astrobin/astrobin:latest
-
-after_script:
-  - if [ ${DOCKER_MODE} = "compose" ]; then docker-compose -f docker/docker-compose.yml -f docker/docker-compose.build.yml -f docker/docker-compose.travis.yml down; fi
-  - if [ ${DOCKER_MODE} = "stack" ]; then docker stack rm astrobin; fi
-  - docker logout
-
+    - stage: test
+      name: Frontend e2e tests
+      language: node_js
+      node_js: 10
+      cache:
+        directories:
+          - node_modules
+      addons:
+        chrome: stable
+      install:
+        - (cd frontend && npm install)
+      script:
+        - (cd frontend; npm run e2e)

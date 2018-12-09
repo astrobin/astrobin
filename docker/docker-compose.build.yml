@@ -17,6 +17,7 @@ services:
     ports:
       - "8083:8083"
       - "8084:8084"
+      - "4200:4200"
     volumes:
       - ..:/code
     links:

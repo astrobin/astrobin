@@ -8,6 +8,7 @@ from django.utils import timezone
 
 # Third party
 from django_bouncy.models import Bounce
+from mock import patch
 from toggleproperties.models import ToggleProperty
 
 # AstroBin
@@ -48,6 +49,7 @@ class UserTest(TestCase):
         if wip:
             data['wip'] = True
 
+        patch('astrobin.tasks.retrieve_primary_thumbnails.delay')
         self.client.post(
             reverse('image_upload_process'),
             data,

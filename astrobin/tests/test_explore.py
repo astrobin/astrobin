@@ -4,6 +4,8 @@ from django.core.urlresolvers import reverse_lazy
 from django.test import TestCase
 
 # Other apps
+from mock import patch
+
 from astrobin_apps_iotd.models import IotdSubmission, IotdVote
 
 # AstroBin
@@ -12,6 +14,8 @@ from astrobin.models import Image
 
 class ExploreTest(TestCase):
     def setUp(self):
+        patch('astrobin.tasks.retrieve_primary_thumbnails.delay')
+
         self.submitter = User.objects.create_user('submitter_1', 'submitter_1@test.com', 'password')
         self.submitters = Group.objects.create(name='iotd_submitters')
         self.submitters.user_set.add(self.submitter)
