@@ -211,6 +211,7 @@ urlpatterns = [
     url(r'^api/v2/nestedcomments/', include('nested_comments.api_urls')),
     url(r'^api/v2/platesolving/', include('astrobin_apps_platesolving.api_urls')),
     url(r'^api/v2/rawdata/', include('rawdata.api_urls')),
+    url(r'^api/v2/equipment/', include('astrobin_apps_equipment.api_urls')),
 
     ###########################################################################
     ### OWN APPS VIEWS                                                      ###
