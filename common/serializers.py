@@ -7,6 +7,9 @@ from avatar.utils import get_primary_avatar, get_default_avatar_url
 from rest_framework import serializers
 
 # AstroBin
+from rest_framework.fields import BooleanField
+from subscription.models import UserSubscription, Subscription
+
 from astrobin.models import UserProfile
 
 
@@ -34,11 +37,34 @@ class UserSerializer(serializers.ModelSerializer):
 
     class Meta:
         model = User
-        fields = ('username', 'userprofile', 'avatar')
+        exclude = ('password', 'email', 'last_name')
+        depth = 1
 
 
 class UserProfileSerializer(serializers.ModelSerializer):
     class Meta:
         model = UserProfile
-        fields = ('real_name',)
+        exclude = (
+            'premium_counter',
+            'exclude_from_competitions',
+        )
 
+
+class UserProfileSerializerPrivate(UserProfileSerializer):
+    class Meta(UserProfileSerializer.Meta):
+        exclude = ()
+
+
+class SubscriptionSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = Subscription
+        fields = '__all__'
+        depth = 1
+
+
+class UserSubscriptionSerializer(serializers.ModelSerializer):
+    valid = BooleanField()
+
+    class Meta:
+        model = UserSubscription
+        fields = '__all__'

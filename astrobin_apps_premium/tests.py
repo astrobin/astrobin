@@ -1,21 +1,19 @@
 # Python
 import datetime
+from mock import patch
 
 # Django
-from django.conf import settings
 from django.contrib.auth.models import User, Group
 from django.core.urlresolvers import reverse
-from django.test import TestCase
-
-# Third party
-from subscription.models import Subscription, UserSubscription
+from django.test import TestCase, override_settings
 
 # AstroBin
 from astrobin.models import Image, UserProfile
+from astrobin_apps_premium.templatetags.astrobin_apps_premium_tags import *
 
 # Premium
 from astrobin_apps_premium.utils import *
-from astrobin_apps_premium.templatetags.astrobin_apps_premium_tags import *
+
 
 
 class PremiumTest(TestCase):
@@ -149,104 +147,105 @@ class PremiumTest(TestCase):
             g.delete()
             u.delete()
 
-    def test_upload_limits(self):
-        with self.settings(PREMIUM_ENABLED = True):
-            user = User.objects.create_user(
-                username = 'test', email='test@test.com', password = 'password')
-            profile = user.userprofile
-            self.client.login(username = 'test', password = 'password')
+    @override_settings(PREMIUM_ENABLED=True)
+    @patch('astrobin.tasks.retrieve_primary_thumbnails.delay')
+    def test_upload_limits(self, retrieve_primary_thumbnail):
+        user = User.objects.create_user(
+            username = 'test', email='test@test.com', password = 'password')
+        profile = user.userprofile
+        self.client.login(username = 'test', password = 'password')
 
-            # Let's start with free
-            self.assertEqual(user.userprofile.premium_counter, 0)
-            for i in range(1, settings.PREMIUM_MAX_IMAGES_FREE + 1):
-                response = self.client.post(
-                    reverse('image_upload_process'),
-                    { 'image_file': open('astrobin/fixtures/test.jpg', 'rb') },
-                    follow = True)
-                profile = UserProfile.objects.get(pk = profile.pk)
-                self.assertEqual(profile.premium_counter, i)
-
-            response = self.client.post(
-                reverse('image_upload_process'),
-                { 'image_file': open('astrobin/fixtures/test.jpg', 'rb') },
-                follow = True)
-            self._assertMessage(response, "error unread", "You have reached your image count limit")
-
-            # Promote to Lite
-            group, created = Group.objects.get_or_create(name = "astrobin_lite")
-            sub, created = Subscription.objects.get_or_create(
-                name = "AstroBin Lite",
-                price = 1,
-                recurrence_unit = 'Y',
-                recurrence_period = 1,
-                group = group,
-                category = "premium")
-            usersub, created = UserSubscription.objects.get_or_create(
-                user = user,
-                subscription = sub)
-            usersub.subscribe()
-            usersub.extend()
-            usersub.save()
-
-            for i in range(1, settings.PREMIUM_MAX_IMAGES_FREE + 1):
-                response = self.client.post(
-                    reverse('image_upload_process'),
-                    { 'image_file': open('astrobin/fixtures/test.jpg', 'rb') },
-                    follow = True)
-                profile = UserProfile.objects.get(pk = profile.pk)
-                self.assertEqual(profile.premium_counter, i)
-
-            response = self.client.post(
-                reverse('image_upload_process'),
-                { 'image_file': open('astrobin/fixtures/test.jpg', 'rb') },
-                follow = True)
-            self._assertMessage(response, "error unread", "You have reached your image count limit")
-
-            # Deleting an image uploaded this year decreases the counter as expected
-            Image.objects_including_wip.all().last().delete()
-            profile = UserProfile.objects.get(pk = profile.pk)
-            self.assertEqual(profile.premium_counter, settings.PREMIUM_MAX_IMAGES_FREE - 1)
-
-            # But deleting an image uploaded before the subscription was created does not
-            image = Image.objects_including_wip.all().order_by('-pk')[1] # Second last element
-            image.uploaded = image.uploaded - datetime.timedelta(days = 1)
-            image.save()
-            image.delete()
-            profile = UserProfile.objects.get(pk = profile.pk)
-            self.assertEqual(profile.premium_counter, settings.PREMIUM_MAX_IMAGES_FREE - 1)
-
-            sub.delete()
-            usersub.delete()
-
-            # Promote to Premium
-            group, created = Group.objects.get_or_create(name = "astrobin_premium")
-            sub, created = Subscription.objects.get_or_create(
-                name = "AstroBin Premium",
-                price = 1,
-                group = group,
-                category = "premium")
-            usersub, created = UserSubscription.objects.get_or_create(
-                user = user,
-                subscription = sub)
-            usersub.subscribe()
-
-            # Counter increases for Premium users too
-            profile = UserProfile.objects.get(pk = profile.pk)
-            counter = profile.premium_counter
+        # Let's start with free
+        self.assertEqual(user.userprofile.premium_counter, 0)
+        for i in range(1, settings.PREMIUM_MAX_IMAGES_FREE + 1):
             response = self.client.post(
                 reverse('image_upload_process'),
                 { 'image_file': open('astrobin/fixtures/test.jpg', 'rb') },
                 follow = True)
             profile = UserProfile.objects.get(pk = profile.pk)
-            self.assertEqual(profile.premium_counter, counter + 1)
+            self.assertEqual(profile.premium_counter, i)
 
-            # But it never decreases, as it's not necessary
-            image = Image.objects_including_wip.all()[0]
-            image.delete()
+        response = self.client.post(
+            reverse('image_upload_process'),
+            { 'image_file': open('astrobin/fixtures/test.jpg', 'rb') },
+            follow = True)
+        self._assertMessage(response, "error unread", "You have reached your image count limit")
+
+        # Promote to Lite
+        group, created = Group.objects.get_or_create(name = "astrobin_lite")
+        sub, created = Subscription.objects.get_or_create(
+            name = "AstroBin Lite",
+            price = 1,
+            recurrence_unit = 'Y',
+            recurrence_period = 1,
+            group = group,
+            category = "premium")
+        usersub, created = UserSubscription.objects.get_or_create(
+            user = user,
+            subscription = sub)
+        usersub.subscribe()
+        usersub.extend()
+        usersub.save()
+
+        for i in range(1, settings.PREMIUM_MAX_IMAGES_FREE + 1):
+            response = self.client.post(
+                reverse('image_upload_process'),
+                { 'image_file': open('astrobin/fixtures/test.jpg', 'rb') },
+                follow = True)
             profile = UserProfile.objects.get(pk = profile.pk)
-            self.assertEqual(profile.premium_counter, counter + 1)
+            self.assertEqual(profile.premium_counter, i)
 
-            user.delete()
-            group.delete()
-            sub.delete()
-            usersub.delete()
+        response = self.client.post(
+            reverse('image_upload_process'),
+            { 'image_file': open('astrobin/fixtures/test.jpg', 'rb') },
+            follow = True)
+        self._assertMessage(response, "error unread", "You have reached your image count limit")
+
+        # Deleting an image uploaded this year decreases the counter as expected
+        Image.objects_including_wip.all().last().delete()
+        profile = UserProfile.objects.get(pk = profile.pk)
+        self.assertEqual(profile.premium_counter, settings.PREMIUM_MAX_IMAGES_FREE - 1)
+
+        # But deleting an image uploaded before the subscription was created does not
+        image = Image.objects_including_wip.all().order_by('-pk')[1] # Second last element
+        image.uploaded = image.uploaded - datetime.timedelta(days = 1)
+        image.save()
+        image.delete()
+        profile = UserProfile.objects.get(pk = profile.pk)
+        self.assertEqual(profile.premium_counter, settings.PREMIUM_MAX_IMAGES_FREE - 1)
+
+        sub.delete()
+        usersub.delete()
+
+        # Promote to Premium
+        group, created = Group.objects.get_or_create(name = "astrobin_premium")
+        sub, created = Subscription.objects.get_or_create(
+            name = "AstroBin Premium",
+            price = 1,
+            group = group,
+            category = "premium")
+        usersub, created = UserSubscription.objects.get_or_create(
+            user = user,
+            subscription = sub)
+        usersub.subscribe()
+
+        # Counter increases for Premium users too
+        profile = UserProfile.objects.get(pk = profile.pk)
+        counter = profile.premium_counter
+        response = self.client.post(
+            reverse('image_upload_process'),
+            { 'image_file': open('astrobin/fixtures/test.jpg', 'rb') },
+            follow = True)
+        profile = UserProfile.objects.get(pk = profile.pk)
+        self.assertEqual(profile.premium_counter, counter + 1)
+
+        # But it never decreases, as it's not necessary
+        image = Image.objects_including_wip.all()[0]
+        image.delete()
+        profile = UserProfile.objects.get(pk = profile.pk)
+        self.assertEqual(profile.premium_counter, counter + 1)
+
+        user.delete()
+        group.delete()
+        sub.delete()
+        usersub.delete()

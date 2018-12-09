@@ -1,7 +1,8 @@
+import os
 import sys
 import logging
 
-TESTING = len(sys.argv) > 1 and sys.argv[1] == 'test'
+TESTING = os.environ.get("TESTING", len(sys.argv) > 1 and sys.argv[1] == 'test')
 
 if TESTING:
     DEBUG = False
@@ -26,6 +27,15 @@ if TESTING:
         }
     }
 
+    MIDDLEWARE_CLASSES = [
+        'django.middleware.common.CommonMiddleware',
+        'django.contrib.sessions.middleware.SessionMiddleware',
+        'django.contrib.auth.middleware.AuthenticationMiddleware',
+        'django.middleware.csrf.CsrfViewMiddleware',
+        'django.contrib.messages.middleware.MessageMiddleware',
+        'gadjo.requestprovider.middleware.RequestProvider',
+    ]
+
     EMAIL_BACKEND = 'django.core.mail.backends.dummy.EmailBackend'
 
     SESSION_ENGINE = "django.contrib.sessions.backends.cached_db"
@@ -35,3 +45,8 @@ if TESTING:
     PREMIUM_MAX_IMAGES_FREE = 20
     PREMIUM_MAX_IMAGES_LITE = 20
 
+    CELERY_TASK_ALWAYS_EAGER = True
+    CELERY_RESULT_BACKEND = 'cache'
+    CELERY_CACHE_BACKEND = 'memory'
+
+    STATICFILES_STORAGE = 'pipeline.storage.NonPackagingPipelineStorage'

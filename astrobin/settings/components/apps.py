@@ -53,6 +53,7 @@ INSTALLED_APPS = [
     'debug_toolbar',
     'template_timings_panel',
     'cookielaw',
+    'webpack_loader',
 
     # AstroBin apps
     'astrobin.apps.AstroBinAppConfig',

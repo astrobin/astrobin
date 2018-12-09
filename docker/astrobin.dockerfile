@@ -28,6 +28,8 @@ RUN apt-get update && apt-get install -y --no-install-recommends \
     ruby ruby-dev \
     && apt-get clean && rm -rf /var/lib/apt/lists/*
 
+RUN curl -sL https://deb.nodesource.com/setup_10.x | bash - && apt-get install -y nodejs
+
 # Set the locale
 RUN locale-gen en_US.UTF-8
 ENV LANG en_US.UTF-8
@@ -44,8 +46,7 @@ RUN curl -sS https://dl.yarnpkg.com/debian/pubkey.gpg | apt-key add - \
 
 
 # System hacks
-RUN ln -s /usr/lib/x86_64-linux-gnu/libraw.so /usr/lib/x86_64-linux-gnu/libraw.so.10 \
-    && ln -s /usr/bin/nodejs /usr/bin/node
+RUN ln -s /usr/lib/x86_64-linux-gnu/libraw.so /usr/lib/x86_64-linux-gnu/libraw.so.10
 
 # Install abc
 COPY submodules/abc /code/submodules/abc
@@ -67,6 +68,13 @@ RUN yarn global add \
 
 # Install compass
 RUN gem install compass
+
+# Build frontend
+RUN yarn global add @angular/cli
+COPY frontend /code/frontend
+WORKDIR /code/frontend
+RUN npm install && ng build --aot && rm -rf node_modules
+WORKDIR /code
 
 # Install logrotate file
 COPY docker/astrobin.logrotate.conf /etc/logrotate.d/astrobin
