@@ -9,4 +9,12 @@
   margin-left: .75rem;
   font-size: .85rem; }
 
+fa-icon#languageDropdown {
+  line-height: 38px;
+  padding: 6px;
+  color: #CC4B2E;
+  cursor: pointer; }
+  fa-icon#languageDropdown::after {
+    border: none; }
+
 /*# sourceMappingURL=header.component.css.map */

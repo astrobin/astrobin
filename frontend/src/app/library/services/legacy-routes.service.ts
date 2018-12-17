@@ -20,4 +20,5 @@ export class LegacyRoutesService {
   API_KEYS = (profile: UserProfileModel) => `/users/${profile.userObject.username}/apikeys/`;
   SETTINGS = "/profile/edit/basic/";
   LOGOUT = "/accounts/logout/";
+  SET_LANGUAGE = (languageCode: string) => `/language/set/${languageCode}/`;
 }
