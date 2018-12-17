@@ -10,7 +10,12 @@ import {
   faBook,
   faBookmark,
   faChartBar,
+  faEdit,
   faImage,
+  faInbox,
+  faKey,
+  faLock,
+  faSignOutAlt,
   faUpload
 } from "@fortawesome/free-solid-svg-icons";
 import { NgbModule } from "@ng-bootstrap/ng-bootstrap";
@@ -38,7 +43,12 @@ fontAwesomeLibrary.add(faBarcode);
 fontAwesomeLibrary.add(faBook)
 fontAwesomeLibrary.add(faBookmark);
 fontAwesomeLibrary.add(faChartBar);
+fontAwesomeLibrary.add(faEdit);
 fontAwesomeLibrary.add(faImage);
+fontAwesomeLibrary.add(faInbox);
+fontAwesomeLibrary.add(faKey);
+fontAwesomeLibrary.add(faLock);
+fontAwesomeLibrary.add(faSignOutAlt);
 fontAwesomeLibrary.add(faUpload);
 
 @NgModule({
@@ -78,4 +88,5 @@ fontAwesomeLibrary.add(faUpload);
   ],
   bootstrap: [AppComponent]
 })
-export class AppModule { }
+export class AppModule {
+}
