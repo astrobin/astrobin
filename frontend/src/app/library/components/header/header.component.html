@@ -37,6 +37,7 @@
               {{ "Upload" | translate }}
             </a>
 
+            <div class="dropdown-divider"></div>
             <h6 class="dropdown-header" translate>My places</h6>
 
             <a *ngIf="appContext.currentUserProfile | isProducer"
@@ -63,6 +64,7 @@
               {{ "Plots" | translate }}
             </a>
 
+            <div class="dropdown-divider"></div>
             <h6 class="dropdown-header" translate>Raw data</h6>
 
             <a
@@ -70,6 +72,40 @@
               class="dropdown-item" [href]="legacyRoutes.RAWDATA">
               <fa-icon icon="book"></fa-icon>
               {{ "Raw data library" | translate }}
+            </a>
+
+            <a
+              class="dropdown-item" [href]="legacyRoutes.RAWDATA_PRIVATE_SHARED_FOLDERS">
+              <fa-icon icon="lock"></fa-icon>
+              {{ "Private shared folders" | translate }}
+            </a>
+
+            <div class="dropdown-divider"></div>
+
+            <a
+              class="dropdown-item" [href]="legacyRoutes.INBOX">
+              <fa-icon icon="inbox"></fa-icon>
+              {{ "My messages" | translate }}
+            </a>
+
+            <a
+              class="dropdown-item" [href]="legacyRoutes.API_KEYS(appContext.currentUserProfile)">
+              <fa-icon icon="key"></fa-icon>
+              {{ "API Keys" | translate }}
+            </a>
+
+            <a
+              class="dropdown-item" [href]="legacyRoutes.SETTINGS">
+              <fa-icon icon="edit"></fa-icon>
+              {{ "My settings" | translate }}
+            </a>
+
+            <div class="dropdown-divider"></div>
+
+            <a
+              class="dropdown-item" [href]="legacyRoutes.LOGOUT">
+              <fa-icon icon="sign-out-alt"></fa-icon>
+              {{ "Logout" | translate }}
             </a>
 
           </div>
