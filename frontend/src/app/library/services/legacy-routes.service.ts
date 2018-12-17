@@ -17,6 +17,7 @@ export class LegacyRoutesService {
   RAWDATA = "/rawdata/";
   RAWDATA_PRIVATE_SHARED_FOLDERS = "/rawdata/privatesharedfolders/";
   RAWDATA_PUBLIC_DATA_POOLS  = "/rawdata/publicdatapools/";
+  RAWDATA_HELP = "/rawdata/help/1/";
   INBOX = "/messages/inbox/";
   API_KEYS = (profile: UserProfileModel) => `/users/${profile.userObject.username}/apikeys/`;
   SETTINGS = "/profile/edit/basic/";
@@ -28,4 +29,8 @@ export class LegacyRoutesService {
   IOTD = "/iotd/archive/";
   GROUPS = "/groups/";
   TRENDING_ASTROPHOTOGRAPHERS = "/trending-astrophotographers/";
+  HELP = "/help/";
+  FAQ = "/faq/";
+  HELP_API = "/help/api/";
+  CONTACT = "/contact/";
 }

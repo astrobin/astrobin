@@ -12,13 +12,16 @@ import {
   faChartBar,
   faComments,
   faEdit,
+  faEnvelope,
   faEye,
   faGlobe,
   faImage,
   faInbox,
+  faInfo,
   faKey,
   faListOl,
   faLock,
+  faQuestion,
   faSearch,
   faSignOutAlt,
   faSortAmountDown,
@@ -55,13 +58,16 @@ fontAwesomeLibrary.add(faBookmark);
 fontAwesomeLibrary.add(faChartBar);
 fontAwesomeLibrary.add(faComments);
 fontAwesomeLibrary.add(faEdit);
+fontAwesomeLibrary.add(faEnvelope);
 fontAwesomeLibrary.add(faEye);
 fontAwesomeLibrary.add(faGlobe);
 fontAwesomeLibrary.add(faImage);
 fontAwesomeLibrary.add(faInbox);
+fontAwesomeLibrary.add(faInfo);
 fontAwesomeLibrary.add(faKey);
 fontAwesomeLibrary.add(faListOl);
 fontAwesomeLibrary.add(faLock);
+fontAwesomeLibrary.add(faQuestion);
 fontAwesomeLibrary.add(faSearch);
 fontAwesomeLibrary.add(faSignOutAlt);
 fontAwesomeLibrary.add(faSortAmountDown);
