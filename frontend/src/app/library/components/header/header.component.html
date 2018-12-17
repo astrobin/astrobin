@@ -85,6 +85,46 @@
       </li>
       <!-- ./Explore menu -->
 
+      <!-- Help menu -->
+      <li class="nav-item">
+        <div ngbDropdown class="d-inline-block">
+          <a id="helpDropdown" href="#" ngbDropdownToggle translate>Help</a>
+          <div ngbDropdownMenu aria-labelledby="helpDropdown">
+
+            <a class="dropdown-item" [href]="legacyRoutes.HELP">
+              <fa-icon icon="info"></fa-icon>
+              {{ "What is this site?" | translate }}
+            </a>
+
+            <div class="dropdown-divider"></div>
+
+            <a class="dropdown-item" [href]="legacyRoutes.FAQ">
+              <fa-icon icon="question"></fa-icon>
+              {{ "FAQ" | translate }}
+            </a>
+
+            <a class="dropdown-item" [href]="legacyRoutes.RAWDATA_HELP">
+              <fa-icon icon="book"></fa-icon>
+              {{ "AstroBin Raw Data" | translate }}
+            </a>
+
+            <div class="dropdown-divider"></div>
+
+            <a class="dropdown-item" [href]="legacyRoutes.HELP_API">
+              <fa-icon icon="key"></fa-icon>
+              {{ "API (beta)" | translate }}
+            </a>
+
+            <a class="dropdown-item" [href]="legacyRoutes.CONTACT">
+              <fa-icon icon="envelope"></fa-icon>
+              {{ "Contact" | translate }}
+            </a>
+
+          </div>
+        </div>
+      </li>
+      <!-- ./Help menu -->
+
     </ul>
 
     <ul *ngIf="!appContext.currentUserProfile" class="navbar-nav">
