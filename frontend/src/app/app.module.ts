@@ -11,11 +11,13 @@ import {
   faBookmark,
   faChartBar,
   faEdit,
+  faGlobe,
   faImage,
   faInbox,
   faKey,
   faLock,
   faSignOutAlt,
+  faTasks,
   faUpload
 } from "@fortawesome/free-solid-svg-icons";
 import { NgbModule } from "@ng-bootstrap/ng-bootstrap";
@@ -44,11 +46,13 @@ fontAwesomeLibrary.add(faBook)
 fontAwesomeLibrary.add(faBookmark);
 fontAwesomeLibrary.add(faChartBar);
 fontAwesomeLibrary.add(faEdit);
+fontAwesomeLibrary.add(faGlobe);
 fontAwesomeLibrary.add(faImage);
 fontAwesomeLibrary.add(faInbox);
 fontAwesomeLibrary.add(faKey);
 fontAwesomeLibrary.add(faLock);
 fontAwesomeLibrary.add(faSignOutAlt);
+fontAwesomeLibrary.add(faTasks);
 fontAwesomeLibrary.add(faUpload);
 
 @NgModule({

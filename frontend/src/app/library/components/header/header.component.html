@@ -20,6 +20,28 @@
 
     <ul *ngIf="appContext.currentUserProfile" class="navbar-nav">
 
+      <!-- Language selector -->
+      <li class="nav-item">
+        <div ngbDropdown class="d-inline-block">
+          <fa-icon icon="globe" id="languageDropdown" ngbDropdownToggle></fa-icon>
+          <div ngbDropdownMenu aria-labelledby="languageDropdown">
+            <a *ngFor="let flag of flags" class="dropdown-item" [href]="legacyRoutes.SET_LANGUAGE(flag.languageCode)">
+              <span class="flag-icon flag-icon-{{ flag.countryCode }}"></span>
+              {{ flag.label }}
+            </a>
+
+            <div class="dropdown-divider"></div>
+
+            <a class="dropdown-item" href="https://translate.astrobin.com/projects" target="_blank">
+              <fa-icon icon="tasks"></fa-icon>
+              {{ "Help with translations!" | translate }}
+            </a>
+          </div>
+        </div>
+      </li>
+      <!-- ./Language selector -->
+
+      <!-- User menu -->
       <li class="nav-item">
         <div ngbDropdown class="d-inline-block">
           <button class="btn btn-primary" id="userDropdown" ngbDropdownToggle>
@@ -111,10 +133,16 @@
           </div>
         </div>
       </li>
+      <!-- ./User menu -->
 
-      <li class="nav-item"><a class="nav-link" [href]="legacyRoutes.UPLOAD">
-        <fa-icon icon="upload"></fa-icon>
-      </a></li>
+      <!-- Upload button -->
+      <li class="nav-item">
+        <a class="nav-link" [href]="legacyRoutes.UPLOAD">
+          <fa-icon icon="upload"></fa-icon>
+        </a>
+      </li>
+      <!-- ./Upload button -->
+
     </ul>
 
   </div> <!-- ./container -->

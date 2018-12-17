@@ -5,4 +5,7 @@ $darkest_background_text_color: #B0B0B0;
 // Bootstrap overrides:
 $theme-colors: (
   "primary": $accent-color
-)
+);
+
+// Flag Icons overrides:
+$flag-icon-css-path: '~flag-icon-css/flags' !default;

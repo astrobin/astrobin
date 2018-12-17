@@ -12,3 +12,14 @@
   margin-left: .75rem;
   font-size: .85rem;
 }
+
+fa-icon#languageDropdown {
+  line-height: 38px;
+  padding: 6px;
+  color: $accent-color;
+  cursor: pointer;
+
+  &::after {
+    border: none;
+  }
+}
