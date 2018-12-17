@@ -10,15 +10,23 @@ import {
   faBook,
   faBookmark,
   faChartBar,
+  faComments,
   faEdit,
+  faEye,
   faGlobe,
   faImage,
   faInbox,
   faKey,
+  faListOl,
   faLock,
+  faSearch,
   faSignOutAlt,
+  faSortAmountDown,
+  faStar,
   faTasks,
-  faUpload
+  faTrophy,
+  faUpload,
+  faUsers
 } from "@fortawesome/free-solid-svg-icons";
 import { NgbModule } from "@ng-bootstrap/ng-bootstrap";
 
@@ -42,18 +50,26 @@ export function appInitializer(appContext: AppContextService) {
 
 fontAwesomeLibrary.add(faAsterisk);
 fontAwesomeLibrary.add(faBarcode);
-fontAwesomeLibrary.add(faBook)
+fontAwesomeLibrary.add(faBook);
 fontAwesomeLibrary.add(faBookmark);
 fontAwesomeLibrary.add(faChartBar);
+fontAwesomeLibrary.add(faComments);
 fontAwesomeLibrary.add(faEdit);
+fontAwesomeLibrary.add(faEye);
 fontAwesomeLibrary.add(faGlobe);
 fontAwesomeLibrary.add(faImage);
 fontAwesomeLibrary.add(faInbox);
 fontAwesomeLibrary.add(faKey);
+fontAwesomeLibrary.add(faListOl);
 fontAwesomeLibrary.add(faLock);
+fontAwesomeLibrary.add(faSearch);
 fontAwesomeLibrary.add(faSignOutAlt);
+fontAwesomeLibrary.add(faSortAmountDown);
+fontAwesomeLibrary.add(faStar);
 fontAwesomeLibrary.add(faTasks);
+fontAwesomeLibrary.add(faTrophy);
 fontAwesomeLibrary.add(faUpload);
+fontAwesomeLibrary.add(faUsers);
 
 @NgModule({
   declarations: [
