@@ -11,6 +11,80 @@
     </button>
 
     <ul class="navbar-nav mr-auto mt-2 mt-lg-0">
+
+      <!-- Forum menu -->
+      <li class="nav-item">
+        <div ngbDropdown class="d-inline-block">
+          <a id="forumDropdown" href="#" ngbDropdownToggle translate>Forum</a>
+          <div ngbDropdownMenu aria-labelledby="languageDropdown">
+
+            <a class="dropdown-item" [href]="legacyRoutes.FORUM_HOME">
+              <fa-icon icon="comments"></fa-icon>
+              {{ "Home" | translate }}
+            </a>
+
+            <a class="dropdown-item" [href]="legacyRoutes.FORUM_LATEST">
+              <fa-icon icon="sort-amount-down"></fa-icon>
+              {{ "Latest topics" | translate }}
+            </a>
+
+            <a class="dropdown-item" [href]="legacyRoutes.FORUM_SUBSCRIBED">
+              <fa-icon icon="eye"></fa-icon>
+              {{ "Subscribed topics" | translate }}
+            </a>
+
+          </div>
+        </div>
+      </li>
+      <!-- ./Forum menu -->
+
+      <!-- Explore menu -->
+      <li class="nav-item">
+        <div ngbDropdown class="d-inline-block">
+          <a id="exploreDropdown" href="#" ngbDropdownToggle translate>Explore</a>
+          <div ngbDropdownMenu aria-labelledby="exploreDropdown">
+
+            <a class="dropdown-item" [href]="legacyRoutes.SEARCH">
+              <fa-icon icon="search"></fa-icon>
+              {{ "The Big Wall / Advanced search" | translate }}
+            </a>
+
+            <div class="dropdown-divider"></div>
+
+            <a class="dropdown-item" [href]="legacyRoutes.TOP_PICKS">
+              <fa-icon icon="star"></fa-icon>
+              {{ "Top Picks" | translate }}
+            </a>
+
+            <a class="dropdown-item" [href]="legacyRoutes.IOTD">
+              <fa-icon icon="trophy"></fa-icon>
+              {{ "Image of the day" | translate }}
+            </a>
+
+            <div class="dropdown-divider"></div>
+
+            <a class="dropdown-item" [href]="legacyRoutes.GROUPS">
+              <fa-icon icon="users"></fa-icon>
+              {{ "Groups" | translate }}
+            </a>
+
+            <a class="dropdown-item" [href]="legacyRoutes.RAWDATA_PUBLIC_DATA_POOLS">
+              <fa-icon icon="book"></fa-icon>
+              {{ "Public data pools" | translate }}
+            </a>
+
+            <div class="dropdown-divider"></div>
+
+            <a class="dropdown-item" [href]="legacyRoutes.TRENDING_ASTROPHOTOGRAPHERS">
+              <fa-icon icon="list-ol"></fa-icon>
+              {{ "Trending astrophotographers" | translate }}
+            </a>
+
+          </div>
+        </div>
+      </li>
+      <!-- ./Explore menu -->
+
     </ul>
 
     <ul *ngIf="!appContext.currentUserProfile" class="navbar-nav">

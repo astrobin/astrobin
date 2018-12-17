@@ -6,8 +6,10 @@
   font-size: .8rem; }
 
 .nav-item {
-  margin-left: .75rem;
+  margin-left: 1.25rem;
   font-size: .85rem; }
+  .nav-item .dropdown-toggle {
+    padding: 15px 0; }
 
 fa-icon#languageDropdown {
   line-height: 38px;
