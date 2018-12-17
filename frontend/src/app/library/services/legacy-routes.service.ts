@@ -24,6 +24,8 @@ export class LegacyRoutesService {
   LOGOUT = "/accounts/logout/";
   SET_LANGUAGE = (languageCode: string) => `/language/set/${languageCode}/`;
   FORUM_HOME = "/forum/";
+  FORUM_LATEST = "/forum/topic/latest/";
+  FORUM_SUBSCRIBED = "/forum/topic/subscribed";
   SEARCH = "/search/";
   TOP_PICKS = "/explore/top-picks/";
   IOTD = "/iotd/archive/";
