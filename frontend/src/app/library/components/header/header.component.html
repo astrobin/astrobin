@@ -18,6 +18,8 @@
           <a id="moderateDropdown" href="#" ngbDropdownToggle translate>Moderate</a>
           <div ngbDropdownMenu aria-labelledby="moderateDropdown">
 
+            <h6 class="dropdown-header" translate>Images</h6>
+
             <a class="dropdown-item" *ngIf="appContext.currentUserProfile | isImageModerator"
               [href]="legacyRoutes.MODERATE_IMAGE_QUEUE">
               <fa-icon icon="images"></fa-icon>

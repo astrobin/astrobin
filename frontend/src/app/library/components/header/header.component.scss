@@ -9,11 +9,19 @@
 }
 
 .nav-item {
-  margin-left: 1.25rem;
+  margin-left: .75rem;
   font-size: .85rem;
 
-  .dropdown-toggle &:not(.btn) {
-    padding: 15px 0;
+  .dropdown-toggle:not(.btn) {
+    padding: 15px 8px;
+
+    &:hover {
+      text-decoration: none;
+    }
+
+    &[aria-expanded="true"] {
+      background: transparentize($white, 0.975);
+    }
   }
 }
 
