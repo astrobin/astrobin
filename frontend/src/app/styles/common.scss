@@ -41,6 +41,14 @@ app-root:empty + .app-loading {
   z-index: 1;
 }
 
+.container {
+  @media screen and (min-width: 1200px) {
+    // Match the legacy AstroBin frontend on Bootstrap 2.
+    // TODO: get rid of this eventually.
+    max-width: 970px;
+  }
+}
+
 a {
   color: $accent-color;
 
