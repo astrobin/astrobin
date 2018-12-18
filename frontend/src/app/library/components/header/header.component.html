@@ -175,6 +175,14 @@
       </li>
       <!-- ./Help menu -->
 
+      <!-- Quick search form -->
+      <li class="nav-item quick-search">
+        <form [action]="legacyRoutes.SEARCH" method="get">
+          <input type="text" name="q" placeholder="{{ 'Quick search' | translate }}" />
+        </form>
+      </li>
+      <!-- ./Quick search form -->
+
     </ul>
 
     <ul *ngIf="!appContext.currentUserProfile" class="navbar-nav">
@@ -187,7 +195,9 @@
       <!-- Language selector -->
       <li class="nav-item">
         <div ngbDropdown class="d-inline-block">
-          <fa-icon icon="globe" id="languageDropdown" ngbDropdownToggle></fa-icon>
+          <a href="#" id="languageDropdown" class="nav-link no-triangle" ngbDropdownToggle>
+            <fa-icon icon="globe"></fa-icon>
+          </a>
           <div ngbDropdownMenu aria-labelledby="languageDropdown">
             <a *ngFor="let flag of flags" class="dropdown-item" [href]="legacyRoutes.SET_LANGUAGE(flag.languageCode)">
               <span class="flag-icon flag-icon-{{ flag.countryCode }}"></span>
@@ -301,7 +311,7 @@
 
       <!-- Upload button -->
       <li class="nav-item">
-        <a class="nav-link" [href]="legacyRoutes.UPLOAD">
+        <a class="nav-link no-triangle" [href]="legacyRoutes.UPLOAD">
           <fa-icon icon="upload"></fa-icon>
         </a>
       </li>
