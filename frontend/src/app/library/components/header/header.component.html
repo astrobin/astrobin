@@ -12,11 +12,59 @@
 
     <ul class="navbar-nav mr-auto mt-2 mt-lg-0">
 
+      <!-- Moderate menu -->
+      <li class="nav-item" *ngIf="appContext.currentUserProfile | isContentModerator">
+        <div ngbDropdown class="d-inline-block">
+          <a id="moderateDropdown" href="#" ngbDropdownToggle translate>Moderate</a>
+          <div ngbDropdownMenu aria-labelledby="moderateDropdown">
+
+            <a class="dropdown-item" *ngIf="appContext.currentUserProfile | isImageModerator"
+              [href]="legacyRoutes.MODERATE_IMAGE_QUEUE">
+              <fa-icon icon="images"></fa-icon>
+              {{ "Image queue" | translate }}
+            </a>
+
+            <a class="dropdown-item"
+              *ngIf="(appContext.currentUserProfile | isImageModerator) &&
+                     (appContext.currentUserProfile | isSuperuser)"
+              [href]="legacyRoutes.MODERATE_SPAM_QUEUE">
+              <fa-icon icon="flag"></fa-icon>
+              {{ "Spam queue" | translate }}
+            </a>
+
+            <ng-container *ngIf="appContext.currentUserProfile | isIotdStaff">
+              <div class="dropdown-divider"></div>
+              <h6 class="dropdown-header" translate>Image of the day</h6>
+
+              <a class="dropdown-item" *ngIf="appContext.currentUserProfile | isIotdSubmitter"
+                [href]="legacyRoutes.IOTD_SUBMISSION_QUEUE">
+                <fa-icon icon="upload"></fa-icon>
+                {{ "Submission queue" | translate }}
+              </a>
+
+              <a class="dropdown-item" *ngIf="appContext.currentUserProfile | isIotdReviewer"
+                [href]="legacyRoutes.IOTD_REVIEW_QUEUE">
+                <fa-icon icon="star"></fa-icon>
+                {{ "Review queue" | translate }}
+              </a>
+
+              <a class="dropdown-item" *ngIf="appContext.currentUserProfile | isIotdJudge"
+                [href]="legacyRoutes.IOTD_JUDGEMENT_QUEUE">
+                <fa-icon icon="hammer"></fa-icon>
+                {{ "Judgement queue" | translate }}
+              </a>
+            </ng-container>
+
+          </div>
+        </div>
+      </li>
+      <!-- ./Moderate menu -->
+
       <!-- Forum menu -->
       <li class="nav-item">
         <div ngbDropdown class="d-inline-block">
           <a id="forumDropdown" href="#" ngbDropdownToggle translate>Forum</a>
-          <div ngbDropdownMenu aria-labelledby="languageDropdown">
+          <div ngbDropdownMenu aria-labelledby="forumDropdown">
 
             <a class="dropdown-item" [href]="legacyRoutes.FORUM_HOME">
               <fa-icon icon="comments"></fa-icon>
