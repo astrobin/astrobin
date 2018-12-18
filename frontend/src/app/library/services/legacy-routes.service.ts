@@ -35,4 +35,9 @@ export class LegacyRoutesService {
   FAQ = "/faq/";
   HELP_API = "/help/api/";
   CONTACT = "/contact/";
+  MODERATE_IMAGE_QUEUE = "/moderate/images/";
+  MODERATE_SPAM_QUEUE = "/moderate/spam/";
+  IOTD_SUBMISSION_QUEUE = "/iotd/submission-queue/";
+  IOTD_REVIEW_QUEUE = "/iotd/review-queue/";
+  IOTD_JUDGEMENT_QUEUE = "/iotd/judgement-queue/";
 }

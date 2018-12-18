@@ -14,8 +14,11 @@ import {
   faEdit,
   faEnvelope,
   faEye,
+  faFlag,
   faGlobe,
+  faHammer,
   faImage,
+  faImages,
   faInbox,
   faInfo,
   faKey,
@@ -60,8 +63,11 @@ fontAwesomeLibrary.add(faComments);
 fontAwesomeLibrary.add(faEdit);
 fontAwesomeLibrary.add(faEnvelope);
 fontAwesomeLibrary.add(faEye);
+fontAwesomeLibrary.add(faFlag);
 fontAwesomeLibrary.add(faGlobe);
+fontAwesomeLibrary.add(faHammer);
 fontAwesomeLibrary.add(faImage);
+fontAwesomeLibrary.add(faImages);
 fontAwesomeLibrary.add(faInbox);
 fontAwesomeLibrary.add(faInfo);
 fontAwesomeLibrary.add(faKey);
