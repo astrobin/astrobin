@@ -9,11 +9,10 @@
 }
 
 .nav-item {
-  margin-left: .75rem;
-  font-size: .85rem;
+  margin: 8px 0 0 6px;
 
   .dropdown-toggle:not(.btn) {
-    padding: 15px 8px;
+    padding: 12px;
 
     &:hover {
       text-decoration: none;
@@ -23,15 +22,27 @@
       background: transparentize($white, 0.975);
     }
   }
-}
 
-fa-icon#languageDropdown {
-  line-height: 38px;
-  padding: 6px;
-  color: $accent-color;
-  cursor: pointer;
+  &.btn {
+    margin-top: -4px;
+  }
 
-  &::after {
-    border: none;
+  &.quick-search {
+    margin-top: 0px;
+    margin-left: 12px;
+  }
+
+  .nav-link {
+    display: inline-block;
+    margin: 0;
+    padding: 5px;
+
+    &.no-triangle::after {
+      border: none;
+    }
+  }
+
+  > .nav-link {
+    padding: 10px;
   }
 }
