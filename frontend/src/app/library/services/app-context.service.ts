@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-import { forkJoin } from "rxjs";
+import { forkJoin, of } from "rxjs";
 import { flatMap, share } from "rxjs/operators";
 import { SubscriptionModel } from "../models/common/subscription.model";
 import { UserProfileModel } from "../models/common/userprofile.model";
@@ -15,14 +15,30 @@ export interface IAppContext {
 })
 export class AppContextService {
   private _appContext = {} as IAppContext;
+
   private _getCurrentUserProfile$ = this.commonApi.getCurrentUserProfile().pipe(share());
+
   private _getCurrentUser$ = this._getCurrentUserProfile$.pipe(
-    flatMap(userProfile => this.commonApi.getUser(userProfile.user)),
+    flatMap(userProfile => {
+      if (userProfile !== null) {
+        return this.commonApi.getUser(userProfile.user);
+      }
+
+      return of(null);
+    }),
     share());
+
   private _getUserSubscriptions$ = this._getCurrentUser$.pipe(
-    flatMap(user => this.commonApi.getUserSubscriptions(user)),
+    flatMap(user => {
+      if (user !== null) {
+        return this.commonApi.getUserSubscriptions(user);
+      }
+
+      return of(null);
+    }),
     share());
-  private _getSubscriptions$ = this.commonApi.getSubscriptions().pipe(share())
+
+  private _getSubscriptions$ = this.commonApi.getSubscriptions().pipe(share());
 
   constructor(public commonApi: CommonApiService) {
   }
