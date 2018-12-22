@@ -12,7 +12,7 @@ class Command(BaseCommand):
         # running this script daily, you get to spread all these emails over a period of 30 days, and each user doesn't
         # get it more often than once a month.
         for user in User.objects.filter(date_joined__day = date.today().day):
-            images = Image.objects_including_wip.filter(user=user, data_source="UNSET")
+            images = Image.objects.filter(user=user, data_source="UNSET")
 
             if images.count() > 0:
                 push_notification([user], 'missing_data_source', {
