@@ -9,9 +9,10 @@
 }
 
 .nav-item {
-  margin: 8px 0 0 6px;
+  margin: 0 0 0 6px;
 
-  .dropdown-toggle:not(.btn) {
+  .dropdown-toggle:not(.user-dropdown-toggle) {
+    margin: 0;
     padding: 12px;
 
     &:hover {
@@ -23,12 +24,17 @@
     }
   }
 
+  .user-dropdown-toggle {
+    margin-top: 8px;
+    padding: 4px 12px;
+  }
+
   &.btn {
     margin-top: -4px;
   }
 
   &.quick-search {
-    margin-top: 0px;
+    margin-top: 7px;
     margin-left: 12px;
   }
 
@@ -36,13 +42,13 @@
     display: inline-block;
     margin: 0;
     padding: 5px;
-
-    &.no-triangle::after {
-      border: none;
-    }
   }
 
   > .nav-link {
     padding: 10px;
+  }
+
+  .no-triangle::after {
+    border: none;
   }
 }

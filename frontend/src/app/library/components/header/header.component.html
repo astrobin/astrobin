@@ -15,7 +15,7 @@
       <!-- Moderate menu -->
       <li class="nav-item" *ngIf="appContext.currentUserProfile | isContentModerator">
         <div ngbDropdown class="d-inline-block">
-          <a id="moderateDropdown" href="#" ngbDropdownToggle translate>Moderate</a>
+          <button id="moderateDropdown" class="btn btn-link" ngbDropdownToggle translate>Moderate</button>
           <div ngbDropdownMenu aria-labelledby="moderateDropdown">
 
             <h6 class="dropdown-header" translate>Images</h6>
@@ -65,7 +65,7 @@
       <!-- Forum menu -->
       <li class="nav-item">
         <div ngbDropdown class="d-inline-block">
-          <a id="forumDropdown" href="#" ngbDropdownToggle translate>Forum</a>
+          <button id="forumDropdown" class="btn btn-link" ngbDropdownToggle translate>Forum</button>
           <div ngbDropdownMenu aria-labelledby="forumDropdown">
 
             <a class="dropdown-item" [href]="legacyRoutes.FORUM_HOME">
@@ -91,7 +91,7 @@
       <!-- Explore menu -->
       <li class="nav-item">
         <div ngbDropdown class="d-inline-block">
-          <a id="exploreDropdown" href="#" ngbDropdownToggle translate>Explore</a>
+          <button id="exploreDropdown" class="btn btn-link" ngbDropdownToggle translate>Explore</button>
           <div ngbDropdownMenu aria-labelledby="exploreDropdown">
 
             <a class="dropdown-item" [href]="legacyRoutes.SEARCH">
@@ -138,7 +138,7 @@
       <!-- Help menu -->
       <li class="nav-item">
         <div ngbDropdown class="d-inline-block">
-          <a id="helpDropdown" href="#" ngbDropdownToggle translate>Help</a>
+          <button id="helpDropdown" class="btn btn-link" ngbDropdownToggle translate>Help</button>
           <div ngbDropdownMenu aria-labelledby="helpDropdown">
 
             <a class="dropdown-item" [href]="legacyRoutes.HELP">
@@ -195,7 +195,7 @@
       <!-- Language selector -->
       <li class="nav-item">
         <div ngbDropdown class="d-inline-block">
-          <button id="languageDropdown" class="btn btn-link nav-link no-triangle" ngbDropdownToggle>
+          <button id="languageDropdown" class="btn btn-link no-triangle" ngbDropdownToggle>
             <fa-icon icon="globe"></fa-icon>
           </button>
           <div ngbDropdownMenu aria-labelledby="languageDropdown">
@@ -220,7 +220,7 @@
       <!-- User menu -->
       <li class="nav-item">
         <div ngbDropdown class="d-inline-block">
-          <button class="btn btn-primary" id="userDropdown" ngbDropdownToggle>
+          <button class="btn btn-primary user-dropdown-toggle" id="userDropdown" ngbDropdownToggle>
             {{ appContext.currentUserProfile.userObject.username }}
           </button>
           <div ngbDropdownMenu aria-labelledby="userDropdown">
@@ -313,7 +313,7 @@
 
       <!-- Upload button -->
       <li class="nav-item">
-        <a class="nav-link no-triangle" [href]="legacyRoutes.UPLOAD">
+        <a class="btn btn-link nav-link" [href]="legacyRoutes.UPLOAD">
           <fa-icon icon="upload"></fa-icon>
         </a>
       </li>
