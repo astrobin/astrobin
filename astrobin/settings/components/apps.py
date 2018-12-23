@@ -69,7 +69,6 @@ INSTALLED_APPS = [
      'template_timings_panel',
      'cookielaw',
      'webpack_loader',
-     'statici18n',
 
      'astrobin.apps.AstroBinAppConfig',
 ] + ASTROBIN_APPS
