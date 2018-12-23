@@ -3,7 +3,7 @@
   "version": "0.0.0",
   "scripts": {
     "ng": "ng",
-    "start": "ng serve --base-href /app/ --deploy-url /app/ --proxy-config proxy.conf.json --host 0.0.0.0",
+    "start": "ng serve --proxy-config proxy.conf.json --host 0.0.0.0",
     "build": "ng build",
     "test": "ng test",
     "lint": "ng lint",
@@ -28,7 +28,6 @@
     "@ngx-translate/http-loader": "^4.0.0",
     "bootstrap": "^4.1.1",
     "core-js": "^2.5.4",
-    "flag-icon-css": "^3.2.1",
     "intl": "^1.2.5",
     "rxjs": "~6.3.3",
     "tslib": "^1.9.0",
