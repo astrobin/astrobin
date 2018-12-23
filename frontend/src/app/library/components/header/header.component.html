@@ -195,9 +195,9 @@
       <!-- Language selector -->
       <li class="nav-item">
         <div ngbDropdown class="d-inline-block">
-          <a href="#" id="languageDropdown" class="nav-link no-triangle" ngbDropdownToggle>
+          <button id="languageDropdown" class="btn btn-link nav-link no-triangle" ngbDropdownToggle>
             <fa-icon icon="globe"></fa-icon>
-          </a>
+          </button>
           <div ngbDropdownMenu aria-labelledby="languageDropdown">
             <a *ngFor="let flag of flags" class="dropdown-item" [href]="legacyRoutes.SET_LANGUAGE(flag.languageCode)">
               <span class="flag-icon flag-icon-{{ flag.countryCode }}"></span>

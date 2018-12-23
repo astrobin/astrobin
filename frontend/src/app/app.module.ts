@@ -37,18 +37,13 @@ import {
 import { NgbModule } from "@ng-bootstrap/ng-bootstrap";
 
 import { TranslateLoader, TranslateModule } from '@ngx-translate/core';
-import { TranslateHttpLoader } from "@ngx-translate/http-loader";
 
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { LibraryModule } from "./library/library.module";
 import { AppContextService } from "./library/services/app-context.service";
 import { SharedModule } from "./library/shared.module";
-
-// AoT requires an exported function for factories
-export function HttpLoaderFactory(http: HttpClient) {
-  return new TranslateHttpLoader(http, './assets/i18n/', '.json');
-}
+import { LanguageLoader } from "./translate-loader";
 
 export function appInitializer(appContext: AppContextService) {
   return () => appContext.load();
@@ -97,7 +92,7 @@ fontAwesomeLibrary.add(faUsers);
     TranslateModule.forRoot({
       loader: {
         provide: TranslateLoader,
-        useFactory: HttpLoaderFactory,
+        useClass: LanguageLoader,
         deps: [HttpClient]
       }
     }),

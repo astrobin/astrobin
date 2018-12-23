@@ -2,7 +2,7 @@ import { HttpClient } from "@angular/common/http";
 import { HttpClientTestingModule } from "@angular/common/http/testing";
 import { async, ComponentFixture, TestBed } from '@angular/core/testing';
 import { TranslateLoader, TranslateModule } from "@ngx-translate/core";
-import { HttpLoaderFactory } from "../../../app.module";
+import { LanguageLoader } from "../../../translate-loader";
 import { UserModel } from "../../models/common/user.model";
 import { UserProfileModel } from "../../models/common/userprofile.model";
 import { PipesModule } from "../../pipes/pipes.module";
@@ -18,6 +18,7 @@ class MockAppContextService {
     )
   } as IAppContext);
 }
+
 describe('HeaderComponent', () => {
   let component: HeaderComponent;
   let fixture: ComponentFixture<HeaderComponent>;
@@ -29,7 +30,7 @@ describe('HeaderComponent', () => {
         TranslateModule.forRoot({
           loader: {
             provide: TranslateLoader,
-            useFactory: HttpLoaderFactory,
+            useClass: LanguageLoader,
             deps: [HttpClient]
           }
         }),
@@ -37,7 +38,7 @@ describe('HeaderComponent', () => {
         PipesModule
       ],
       providers: [
-        { provide: AppContextService, useClass: MockAppContextService }
+        {provide: AppContextService, useClass: MockAppContextService}
       ],
       declarations: [HeaderComponent]
     })

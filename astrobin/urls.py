@@ -4,8 +4,10 @@ from django.conf.urls import url, include, patterns
 from django.conf.urls.static import static
 from django.contrib import admin
 from django.contrib.auth import views as auth_views
+from django.views.decorators.cache import cache_page
 
 # Third party
+from django.views.i18n import json_catalog
 from tastypie.api import Api
 from threaded_messages.forms import ComposeForm as MessagesComposeForm
 from threaded_messages.views import batch_update as messages_batch_update
@@ -163,6 +165,11 @@ urlpatterns = [
     ###########################################################################
 
     url(r'^admin/', include(admin.site.urls)),
+
+    url(r'^jsi18n/$', cache_page(86400, key_prefix="js18n-%s" % settings.VERSION)(json_catalog), {
+        'domain': 'django',
+        'packages': ['astrobin'] + settings.ASTROBIN_APPS
+    }, name='javascript-catalog'),
 
     ###########################################################################
     ### THIRD PARTY APPS VIEWS                                              ###
