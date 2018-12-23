@@ -1,4 +1,4 @@
-import { Injectable } from '@angular/core';
+import { Injectable, isDevMode } from '@angular/core';
 import { forkJoin, of } from "rxjs";
 import { flatMap, share } from "rxjs/operators";
 import { SubscriptionModel } from "../models/common/subscription.model";
@@ -6,8 +6,8 @@ import { UserProfileModel } from "../models/common/userprofile.model";
 import { CommonApiService } from "./api/common-api.service";
 
 export interface IAppContext {
-  currentUserProfile: UserProfileModel,
-  subscriptions: SubscriptionModel[]
+  currentUserProfile: UserProfileModel;
+  subscriptions: SubscriptionModel[];
 }
 
 @Injectable({

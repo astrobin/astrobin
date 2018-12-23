@@ -1,7 +1,8 @@
 @import "app/styles/variables";
 @import "~bootstrap/scss/bootstrap";
-@import "~flag-icon-css/sass/flag-icon";
+@import "assets/flags/flags.min.css";
 
 @import "app/styles/buttons.scss";
 @import "app/styles/forms.scss";
 @import "app/styles/common";
+

@@ -200,7 +200,9 @@
           </button>
           <div ngbDropdownMenu aria-labelledby="languageDropdown">
             <a *ngFor="let flag of flags" class="dropdown-item" [href]="legacyRoutes.SET_LANGUAGE(flag.languageCode)">
-              <span class="flag-icon flag-icon-{{ flag.countryCode }}"></span>
+              <img src="/assets/flags/blank.gif"
+                   width="16" height="16"
+                   class="flag flag-{{ flag.countryCode }}"/>
               {{ flag.label }}
             </a>
 
