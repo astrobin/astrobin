@@ -15,6 +15,7 @@ interface IFlag {
   styleUrls: ['./header.component.scss']
 })
 export class HeaderComponent implements OnInit {
+  isCollapsed = true;
   appContext: IAppContext;
   flags: IFlag[] = [
     {languageCode: "en", countryCode: "us", label: "English (US)"},

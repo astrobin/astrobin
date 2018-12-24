@@ -7,6 +7,7 @@ import { library as fontAwesomeLibrary } from "@fortawesome/fontawesome-svg-core
 import {
   faAsterisk,
   faBarcode,
+  faBars,
   faBook,
   faBookmark,
   faChartBar,
@@ -68,6 +69,7 @@ fontAwesomeLibrary.add(faInfo);
 fontAwesomeLibrary.add(faKey);
 fontAwesomeLibrary.add(faListOl);
 fontAwesomeLibrary.add(faLock);
+fontAwesomeLibrary.add(faBars);
 fontAwesomeLibrary.add(faQuestion);
 fontAwesomeLibrary.add(faSearch);
 fontAwesomeLibrary.add(faSignOutAlt);
