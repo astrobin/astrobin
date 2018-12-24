@@ -1,53 +1,33 @@
 sudo: required
 dist: trusty
 
-jobs:
-  include:
-    - stage: test
-      name: Dockerized Django backend
-      services:
-        - docker
-      install:
-        - sudo apt update -y
-        - sudo apt install --only-upgrade docker-ce -y
-        - echo "$DOCKER_PASSWORD" | docker login -u "$DOCKER_USERNAME" --password-stdin
-        - docker pull astrobin/astrobin:latest
-        - docker build --cache-from astrobin/astrobin:latest -t astrobin/astrobin:latest -f docker/astrobin.dockerfile .
-      before_script:
-        - docker-compose -f docker/docker-compose.travis.yml up --no-deps -d
-        - docker-compose -f docker/docker-compose.travis.yml exec astrobin ./scripts/init.sh
-      script:
-        - docker-compose -f docker/docker-compose.travis.yml exec astrobin ./scripts/test.sh
-      after_success:
-        - docker cp -a .git $(docker ps -q -f name=docker_astrobin --last 1):/code # Needed by codecov.
-        - docker-compose -f docker/docker-compose.travis.yml exec astrobin ./scripts/codecov.sh
-        - docker push astrobin/astrobin:latest
-      after_script:
-        - docker-compose -f docker/docker-compose.travis.yml down
-        - docker logout
+addons:
+  chrome: stable
 
-    - stage: test
-      name: Frontend unit tests
-      language: node_js
-      node_js: 10
-      cache:
-        directories:
-          - node_modules
-      install:
-        - (cd frontend && npm install)
-      script:
-        - (cd frontend; npm test)
+services:
+  - docker
 
-    - stage: test
-      name: Frontend e2e tests
-      language: node_js
-      node_js: 10
-      cache:
-        directories:
-          - node_modules
-      addons:
-        chrome: stable
-      install:
-        - (cd frontend && npm install)
-      script:
-        - (cd frontend; npm run e2e)
+install:
+  - sudo apt update -y
+  - sudo apt install --only-upgrade docker-ce -y
+  - echo "$DOCKER_PASSWORD" | docker login -u "$DOCKER_USERNAME" --password-stdin
+  - docker pull astrobin/astrobin:latest
+  - docker build --cache-from astrobin/astrobin:latest -t astrobin/astrobin:latest -f docker/astrobin.dockerfile .
+
+before_script:
+  - docker-compose -f docker/docker-compose.travis.yml up --no-deps -d
+  - docker-compose -f docker/docker-compose.travis.yml exec astrobin ./scripts/init.sh
+
+script:
+  - docker-compose -f docker/docker-compose.travis.yml exec astrobin ./scripts/test.sh
+  - (cd frontend; npm run ng -- test --code-coverage)
+  - (cd frontend; npm run e2e)
+
+after_success:
+  - docker cp -a .git $(docker ps -q -f name=docker_astrobin --last 1):/code # Needed by codecov.
+  - docker-compose -f docker/docker-compose.travis.yml exec astrobin ./scripts/codecov.sh
+  - docker push astrobin/astrobin:latest
+
+after_script:
+  - docker-compose -f docker/docker-compose.travis.yml down
+  - docker logout
