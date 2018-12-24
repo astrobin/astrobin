@@ -3,7 +3,7 @@ version: '3'
 services:
   astrobin:
     image: astrobin/astrobin:latest
-    command: bash -c "./manage.py collectstatic --noinput && gunicorn wsgi:application -w 4 -b :8083"
+    command: bash -c "./manage.py collectstatic --noinput && gunicorn wsgi:application -w 1 -b :8083"
     environment:
       - TESTING=true
       - CODECOV_TOKEN

@@ -65,10 +65,14 @@ INSTALLED_APPS = [
      'django_bouncy',
      'safedelete',
      'change_email',
-     'debug_toolbar',
      'template_timings_panel',
      'cookielaw',
      'webpack_loader',
 
      'astrobin.apps.AstroBinAppConfig',
 ] + ASTROBIN_APPS
+
+if DEBUG:
+     INSTALLED_APPS += [
+          'debug_toolbar',
+     ]
