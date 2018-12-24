@@ -16,12 +16,11 @@ install:
 
 before_script:
   - docker-compose -f docker/docker-compose.travis.yml up --no-deps -d
-  - docker-compose -f docker/docker-compose.travis.yml exec astrobin ./scripts/init.sh
+  - docker-compose -f docker/docker-compose.travis.yml exec astrobin bash -c "cd frontend; npm i"
 
 script:
   - docker-compose -f docker/docker-compose.travis.yml exec astrobin ./scripts/test.sh
-  - (cd frontend; npm run ng -- test --code-coverage)
-  - (cd frontend; npm run e2e)
+  - docker-compose -f docker/docker-compose.travis.yml exec astrobin bash -c "cd frontend; npm run ng -- test --code-coverage"
 
 after_success:
   - docker cp -a .git $(docker ps -q -f name=docker_astrobin --last 1):/code # Needed by codecov.
