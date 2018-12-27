@@ -7,7 +7,7 @@ from avatar.utils import get_primary_avatar, get_default_avatar_url
 from rest_framework import serializers
 
 # AstroBin
-from rest_framework.fields import BooleanField
+from rest_framework.fields import BooleanField, IntegerField, FloatField
 from rest_framework.relations import PrimaryKeyRelatedField
 from subscription.models import UserSubscription, Subscription
 
@@ -53,6 +53,9 @@ class UserProfileSerializer(serializers.ModelSerializer):
 
 
 class UserProfileSerializerPrivate(UserProfileSerializer):
+    astrobin_index = FloatField(read_only=True, source="get_scores.user_scores_index")
+    followers = IntegerField(read_only=True, source="get_scores.user_scores_followers")
+
     class Meta(UserProfileSerializer.Meta):
         exclude = ()
 

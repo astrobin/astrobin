@@ -224,6 +224,21 @@
           <div ngbDropdown class="d-inline-block">
             <button class="btn btn-primary user-dropdown-toggle" id="userDropdown" ngbDropdownToggle>
               {{ appContext.currentUserProfile.userObject.username }}
+              <span class="scores">
+                <span
+                  *ngIf="!appContext.currentUserProfile.exclude_from_competitions"
+                  class="score"
+                  placement="bottom"
+                  ngbTooltip="{{ 'AstroBin index' | translate }}">
+                   {{ appContext.currentUserProfile.astrobin_index }} &bull;
+                </span>
+                <span
+                  class="score"
+                  placement="bottom"
+                  ngbTooltip="{{ 'Followers' | translate }}">
+                   {{ appContext.currentUserProfile.followers }}
+                </span>
+              </span>
             </button>
 
             <div ngbDropdownMenu aria-labelledby="userDropdown">
