@@ -32,6 +32,18 @@
     margin-top: 8px;
     padding: 4px 12px;
 
+    .scores {
+      font-size: 66%;
+      color: lighten($accent-color, 25%);
+      font-weight: 700;
+      padding-left: 4px;
+      vertical-align: middle;
+
+      .score {
+        border-bottom: 1px dotted lighten($accent-color, 10%);
+      }
+    }
+
     @media screen and (max-width: 991px) {
       margin-top: 2rem;
       margin-bottom: 1rem;
@@ -39,6 +51,14 @@
       background: none;
       border: 0;
       color: $accent-color;
+
+      .scores {
+        color: darken($accent-color, 20%);
+
+        .score {
+          border-bottom-color: darken($accent-color, 25%);
+        }
+      }
     }
   }
 
