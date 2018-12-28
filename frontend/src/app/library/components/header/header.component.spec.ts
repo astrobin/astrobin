@@ -1,7 +1,7 @@
 import { HttpClient } from "@angular/common/http";
 import { HttpClientTestingModule } from "@angular/common/http/testing";
 import { async, ComponentFixture, TestBed } from '@angular/core/testing';
-import { NgbCollapseModule } from "@ng-bootstrap/ng-bootstrap";
+import { NgbCollapseModule, NgbTooltipModule } from "@ng-bootstrap/ng-bootstrap";
 import { TranslateLoader, TranslateModule } from "@ngx-translate/core";
 import { LanguageLoader } from "../../../translate-loader";
 import { UserModel } from "../../models/common/user.model";
@@ -29,6 +29,7 @@ describe('HeaderComponent', () => {
       imports: [
         HttpClientTestingModule,
         NgbCollapseModule,
+        NgbTooltipModule,
         TranslateModule.forRoot({
           loader: {
             provide: TranslateLoader,
