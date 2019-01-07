@@ -136,6 +136,7 @@ from astrobin.views import (
     set_language
 )
 from astrobin.api import (
+    TopPickResource,
     ImageOfTheDayResource,
     ImageResource,
     ImageRevisionResource,
@@ -150,6 +151,7 @@ v1_api = Api(api_name = 'v1')
 v1_api.register(LocationResource())
 v1_api.register(ImageResource())
 v1_api.register(ImageRevisionResource())
+v1_api.register(TopPickResource())
 v1_api.register(ImageOfTheDayResource())
 v1_api.register(CollectionResource())
 
