@@ -1,12 +1,11 @@
 from django.conf import settings
-from django.db.models import Q
-
-from tastypie.resources import ModelResource, ALL, ALL_WITH_RELATIONS
 from tastypie import fields
 from tastypie.authentication import Authentication
+from tastypie.resources import ModelResource, ALL, ALL_WITH_RELATIONS
 
 from astrobin.models import Location, Image, ImageRevision, ImageOfTheDay, App, Collection
 from astrobin.models import SOLAR_SYSTEM_SUBJECT_CHOICES
+from astrobin_apps_iotd.models import IotdVote
 
 
 class AppAuthentication(Authentication):
@@ -366,6 +365,20 @@ class ImageOfTheDayResource(ModelResource):
             'runnerup_1',
             'runnerup_2',
             'date',
+        ]
+        allowed_methods = ['get']
+
+
+class TopPickResource(ModelResource):
+    image = fields.ForeignKey('astrobin.api.ImageResource', 'image')
+    date = fields.DateField('date')
+
+    class Meta:
+        authentication = AppAuthentication()
+        queryset = IotdVote.objects.all()
+        fields = [
+            'image',
+            'date'
         ]
         allowed_methods = ['get']
 
