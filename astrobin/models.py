@@ -732,15 +732,17 @@ class Image(HasSolutionMixin, SafeDeleteModel):
         ("IC", "IC Astronomy Observatories"),
         ("ITU", "Image The Universe"),
         ("iT", "iTelescope"),
+        ("MARIO", "Marathon Remote Imaging Observatory (MaRIO)"),
         ("NMS", "New Mexico Skies"),
         ("OES", "Observatorio El Sauce"),
         ("RLD", "Riverland Dingo Observatory"),
-        ("SLO", "Slooh"),
         ("SS", "Sahara Sky"),
         ("SPVO", "San Pedro Valley Observatory"),
         ("SRO", "Sierra Remote Observatories"),
         ("SRO2", "Sky Ranch Observatory"),
         ("SPOO", "SkyPi Online Observatory"),
+        ("SLO", "Slooh"),
+        ("SSLLC", "Stellar Skies LLC"),
 
         ("OTHER", _("None of the above"))
     )
