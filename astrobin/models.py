@@ -692,6 +692,7 @@ class Image(HasSolutionMixin, SafeDeleteModel):
         'AMATEUR_HOSTING',
         'PUBLIC_AMATEUR_DATA',
         'PRO_DATA',
+        'RENTED/SHARED',
         'MIX',
         'OTHER',
         'UNKNOWN'
@@ -703,6 +704,7 @@ class Image(HasSolutionMixin, SafeDeleteModel):
             ("BACKYARD", _("Backyard")),
             ("TRAVELLER", _("Traveller")),
             ("OWN_REMOTE", _("Own remote observatory")),
+            ("RENTED/SHARED", _("Rented or shared equipment")),
         )),
         (_("Downloaded"), (
             ("AMATEUR_HOSTING", _("Amateur hosting facility")),
@@ -1346,6 +1348,7 @@ class Image(HasSolutionMixin, SafeDeleteModel):
             "BACKYARD": _("Backyard"),
             "TRAVELLER": _("Traveller"),
             "OWN_REMOTE": _("Own remote observatory"),
+            "RENTED/SHARED": _("Rented or shared equipment"),
             "AMATEUR_HOSTING": _("Amateur hosting facility"),
             "PUBLIC_AMATEUR_DATA": _("Public amateur data"),
             "PRO_DATA": _("Professional, scientific grade data"),
