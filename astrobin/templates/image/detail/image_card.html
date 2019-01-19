@@ -65,6 +65,9 @@
                         {% if ssa.focal_length %}
                             <p><strong class="card-label">{% trans "Focal length" %}:</strong> {{ssa.focal_length}}</p>
                         {% endif %}
+                        {% if ssa.focal_ratio %}
+                            <p><strong class="card-label">{% trans "Focal ratio" %}:</strong> f/{{ssa.focal_ratio}}</p>
+                        {% endif %}
                         {% if ssa.cmi %}
                             <p><strong class="card-label">{% trans "CMI" %}:</strong> {{ssa.cmi}}</p>
                         {% endif %}
