@@ -328,6 +328,8 @@ class ImageDetailView(DetailView):
                         key += '-temp(%d)' % a.sensor_cooling
                     if a.binning:
                         key += '-bin(%d)' % a.binning
+                    if a.focal_ratio:
+                        key += 'f/(%.1f)' % a.focal_ratio
                     key += '-duration(%d)' % a.duration
 
                     try:
@@ -346,6 +348,7 @@ class ImageDetailView(DetailView):
                     dsa_data['frames'][key]['sensor_cooling'] = '%dC' % a.sensor_cooling if a.sensor_cooling else ''
                     dsa_data['frames'][key]['binning'] = 'bin %sx%s' % (a.binning, a.binning) if a.binning else ''
                     dsa_data['frames'][key]['integration'] = '%sx%s"' % (current_number + a.number, a.duration)
+                    dsa_data['frames'][key]['focal_ratio'] = 'f/%.1f' % (a.focal_ratio) if a.focal_ratio else ''
 
                     dsa_data['integration'] += (a.duration * a.number / 3600.0)
 
@@ -380,7 +383,7 @@ class ImageDetailView(DetailView):
                     ('\n' if len(frames_list) > 1 else '') +
                     u'\n'.join("%s %s" % (
                         "<a href=\"%s\">%s</a>:" % (f[1]['filter_url'], f[1]['filter']) if f[1]['filter'] else '',
-                        "%s %s %s %s %s" % (f[1]['integration'], f[1]['iso'], f[1]['gain'], f[1]['sensor_cooling'], f[1]['binning']),
+                        "%s %s %s %s %s %s" % (f[1]['integration'], f[1]['iso'], f[1]['gain'], f[1]['sensor_cooling'], f[1]['binning'], f[1]['focal_ratio']),
                     ) for f in frames_list)),
                 (_('Integration'), "%.1f %s" % (dsa_data['integration'], _("hours"))),
                 (_('Darks'), '~%d' % (int(reduce(lambda x, y: int(x) + int(y), dsa_data['darks'])) / len(dsa_data['darks'])) if dsa_data['darks'] else 0),
@@ -439,6 +442,10 @@ class ImageDetailView(DetailView):
         mod = self.request.GET.get('mod')
         if mod == 'inverted':
             alias = 'regular_inverted'
+        elif mod == 'flipped':
+            alias = 'regular_flipped'
+        elif mod == 'mirrored':
+            alias = 'mirrored'
 
         subjects = image.solution.objects_in_field.split(',') if image.solution and image.solution.objects_in_field else ''
         skyplot_zoom1 = None
