@@ -692,7 +692,7 @@ class Image(HasSolutionMixin, SafeDeleteModel):
         'AMATEUR_HOSTING',
         'PUBLIC_AMATEUR_DATA',
         'PRO_DATA',
-        'RENT/SHARED',
+        'RENTED/SHARED',
         'MIX',
         'OTHER',
         'UNKNOWN'
@@ -745,6 +745,7 @@ class Image(HasSolutionMixin, SafeDeleteModel):
         ("SPOO", "SkyPi Online Observatory"),
         ("SLO", "Slooh"),
         ("SSLLC", "Stellar Skies LLC"),
+        ("LGO", "Lijiang Gemini Observatory"),
 
         ("OTHER", _("None of the above"))
     )
