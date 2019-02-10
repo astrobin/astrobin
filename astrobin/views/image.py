@@ -442,10 +442,6 @@ class ImageDetailView(DetailView):
         mod = self.request.GET.get('mod')
         if mod == 'inverted':
             alias = 'regular_inverted'
-        elif mod == 'flipped':
-            alias = 'regular_flipped'
-        elif mod == 'mirrored':
-            alias = 'mirrored'
 
         subjects = image.solution.objects_in_field.split(',') if image.solution and image.solution.objects_in_field else ''
         skyplot_zoom1 = None
