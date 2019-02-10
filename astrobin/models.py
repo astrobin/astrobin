@@ -692,6 +692,7 @@ class Image(HasSolutionMixin, SafeDeleteModel):
         'AMATEUR_HOSTING',
         'PUBLIC_AMATEUR_DATA',
         'PRO_DATA',
+        'RENT/SHARED',
         'MIX',
         'OTHER',
         'UNKNOWN'
@@ -703,6 +704,7 @@ class Image(HasSolutionMixin, SafeDeleteModel):
             ("BACKYARD", _("Backyard")),
             ("TRAVELLER", _("Traveller")),
             ("OWN_REMOTE", _("Own remote observatory")),
+            ("RENTED/SHARED", _("Rented or shared equipment")),
         )),
         (_("Downloaded"), (
             ("AMATEUR_HOSTING", _("Amateur hosting facility")),
@@ -1346,6 +1348,7 @@ class Image(HasSolutionMixin, SafeDeleteModel):
             "BACKYARD": _("Backyard"),
             "TRAVELLER": _("Traveller"),
             "OWN_REMOTE": _("Own remote observatory"),
+            "RENTED/SHARED": _("Rented or shared equipment"),
             "AMATEUR_HOSTING": _("Amateur hosting facility"),
             "PUBLIC_AMATEUR_DATA": _("Public amateur data"),
             "PRO_DATA": _("Professional, scientific grade data"),
@@ -1588,6 +1591,15 @@ class DeepSky_Acquisition(Acquisition):
         null=True, blank=True,
         help_text=_("Duration of each sub-frame, in seconds."))
 
+    focal_ratio = models.DecimalField(
+        _("Focal ratio"),
+        null=True, 
+        blank=True,
+        max_digits=3, 
+        decimal_places=1,
+        help_text=_("The Focal ratio of the optical system (in f-stops). Eg: 4.5"))
+
+
     iso = models.IntegerField(
         _("ISO"),
         null=True, blank=True)
@@ -1685,6 +1697,15 @@ class SolarSystem_Acquisition(Acquisition):
         null = True,
         blank = True,
     )
+
+    focal_ratio = models.DecimalField(
+        verbose_name = _("Focal ratio"),
+        null=True, 
+        blank=True,
+        max_digits=3, 
+        decimal_places=1,
+        help_text=_("The Focal ratio of the optical system (in f-stops). Eg: 4.5"))
+
 
     cmi = models.DecimalField(
         verbose_name = _("CMI"),
