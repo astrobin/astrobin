@@ -721,6 +721,7 @@ class Image(HasSolutionMixin, SafeDeleteModel):
         ("OWN", _("Non-commercial independent facility")),
         (None, "---------"),
         ("AC", "AstroCamp"),
+        ("AHK", "Astro Hostel Krasnodar"),
         ("CS", "ChileScope"),
         ("DSP", "Dark Sky Portal"),
         ("DSC", "DeepSkyChile"),
@@ -731,6 +732,7 @@ class Image(HasSolutionMixin, SafeDeleteModel):
         ("IC", "IC Astronomy Observatories"),
         ("ITU", "Image The Universe"),
         ("iT", "iTelescope"),
+        ("MARIO", "Marathon Remote Imaging Observatory (MaRIO)"),
         ("NMS", "New Mexico Skies"),
         ("OES", "Observatorio El Sauce"),
         ("RLD", "Riverland Dingo Observatory"),
@@ -739,6 +741,9 @@ class Image(HasSolutionMixin, SafeDeleteModel):
         ("SRO", "Sierra Remote Observatories"),
         ("SRO2", "Sky Ranch Observatory"),
         ("SPOO", "SkyPi Online Observatory"),
+        ("SLO", "Slooh"),
+        ("SSLLC", "Stellar Skies LLC"),
+        ("LGO", "Lijiang Gemini Observatory"),
 
         ("OTHER", _("None of the above"))
     )

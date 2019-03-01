@@ -8,7 +8,7 @@ msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2018-12-05 20:23+0000\n"
-"PO-Revision-Date: 2018-12-04 19:07+0000\n"
+"PO-Revision-Date: 2018-12-12 12:55+0000\n"
 "Last-Translator: Łukasz Sujka <lukasz.sujka83@gmail.com>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
 "Language: pl\n"
@@ -18,7 +18,7 @@ msgstr ""
 "Plural-Forms: nplurals=3; plural=(n==1 ? 0 : n%10>=2 && n%10<=4 && (n%100<10 "
 "|| n%100>=20) ? 1 : 2);\n"
 "X-Generator: Pootle 2.8\n"
-"X-POOTLE-MTIME: 1543950459.000000\n"
+"X-POOTLE-MTIME: 1544619301.000000\n"
 
 msgid "United Kingdom"
 msgstr "Zjednoczone Królestwo Wielkiej Brytanii i Irlandii Północnej"
@@ -4458,12 +4458,12 @@ msgstr "Twój wniosek o dołączenie do grupy \"%(group_name)s\" został odrzuco
 msgid "Your image has been deleted."
 msgstr "Twój obraz został usunięty."
 
-#, fuzzy, python-format
+#, python-format
 #| msgid "<a href=\"%(object_url\")s>Your image</a> could not be plate-solved."
 msgid "<a href=\"%(object_url)s\">Your image</a> could not be plate-solved."
 msgstr ""
-"<a href=\"%(object_url\")s>Your image</a> nie może być opisane - błąd "
-"astrometrii"
+"<a href=\"%(object_url)s\">Your image</a> nie może być opisane - błąd "
+"astrometrii."
 
 #, python-format
 msgid "Your image at %(object_url)s could not be plate-solved."

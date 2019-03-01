@@ -8,7 +8,7 @@ from astrobin.models import Image
 class Command(BaseCommand):
     def handle(self, *args, **kwargs):
         for user in User.objects.all():
-            images = Image.objects_including_wip.filter(
+            images = Image.objects.filter(
                 user=user,
                 data_source__in=["OWN_REMOTE", "AMATEUR_HOSTING"],
                 remote_source=None)
