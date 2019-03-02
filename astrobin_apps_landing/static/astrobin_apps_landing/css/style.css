@@ -929,6 +929,20 @@ span, a, a:hover {
     text-align: center;
 }
 
+.services .more {
+    margin-top: 120px;
+}
+
+.services .more a {
+    color: #cc4b2e;
+    text-decoration: underline;
+}
+
+.services .more .divider {
+    padding: 0 10px;
+    color: #bbb;
+}
+
 /* ----------------------------------------------------------------
      [ End Services ]
 -----------------------------------------------------------------*/
