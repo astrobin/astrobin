@@ -743,7 +743,6 @@ class Image(HasSolutionMixin, SafeDeleteModel):
         ("SPOO", "SkyPi Online Observatory"),
         ("SLO", "Slooh"),
         ("SSLLC", "Stellar Skies LLC"),
-        ("LGO", "Lijiang Gemini Observatory"),
 
         ("OTHER", _("None of the above"))
     )
