@@ -28,6 +28,7 @@ script:
 
 after_success:
   - docker cp -a .git $(docker ps -q -f name=docker_astrobin --last 1):/code # Needed by codecov.
+  - docker ps
   - docker-compose -f docker/docker-compose.yml -f docker/docker-compose.build.yml -f docker/docker-compose.travis.yml exec astrobin ./scripts/codecov.sh
   - docker push astrobin/nginx-${NGINX_MODE}:latest
   - docker push astrobin/astrobin:latest
