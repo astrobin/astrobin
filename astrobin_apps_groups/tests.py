@@ -1,5 +1,6 @@
 # Python
 import re
+from mock import patch
 
 # Django
 from django.contrib.auth.models import User
@@ -96,7 +97,8 @@ class GroupsTest(TestCase):
         self.group.public = True
         self.group.save()
 
-    def test_group_detail_view(self):
+    @patch("astrobin.tasks.retrieve_primary_thumbnails")
+    def test_group_detail_view(self, retrieve_primary_thumbnails):
         # Everything okay when it's empty
         response = self.client.get(reverse('group_detail', kwargs = {'pk': self.group.pk}))
         self.assertEqual(response.status_code, 200)
@@ -208,7 +210,8 @@ class GroupsTest(TestCase):
 
         self.client.logout()
 
-    def test_group_update_view(self):
+    @patch("astrobin.tasks.retrieve_primary_thumbnails")
+    def test_group_update_view(self, retrieve_primary_thumbnails):
         url = reverse('group_update', kwargs = {'pk': self.group.pk})
         response = self.client.get(url)
         self.assertEqual(response.status_code, 302)
@@ -372,7 +375,8 @@ class GroupsTest(TestCase):
 
         self.client.logout()
 
-    def test_group_leave_view(self):
+    @patch("astrobin.tasks.retrieve_primary_thumbnails")
+    def test_group_leave_view(self, retrieve_primary_thumbnails):
         url = reverse('group_leave', kwargs = {'pk': self.group.pk})
 
         # Login required
@@ -549,7 +553,8 @@ class GroupsTest(TestCase):
 
         self.client.logout()
 
-    def test_group_add_remove_images_view(self):
+    @patch("astrobin.tasks.retrieve_primary_thumbnails")
+    def test_group_add_remove_images_view(self, retrieve_primary_thumbnails):
         url = reverse('group_add_remove_images', kwargs = {'pk': self.group.pk})
 
         # Login required
@@ -620,7 +625,8 @@ class GroupsTest(TestCase):
         self.group.autosubmission = True
         self.client.logout()
 
-    def test_group_add_image_view(self):
+    @patch("astrobin.tasks.retrieve_primary_thumbnails")
+    def test_group_add_image_view(self, retrieve_primary_thumbnails):
         url = reverse('group_add_image', kwargs = {'pk': self.group.pk})
 
         # Login required
@@ -1030,7 +1036,8 @@ class GroupsTest(TestCase):
         self.assertTrue(len(get_unseen_notifications(self.user2)) > 0)
         self.assertIn("REJECTED", get_unseen_notifications(self.user2)[0].message)
 
-    def test_group_autosubmission_sync(self):
+    @patch("astrobin.tasks.retrieve_primary_thumbnails")
+    def test_group_autosubmission_sync(self, retrieve_primary_thumbnails):
         def _upload():
             self.client.login(username = 'user2', password = 'password')
             self.client.post(

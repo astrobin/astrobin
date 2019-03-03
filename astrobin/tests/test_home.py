@@ -14,7 +14,8 @@ class HomeTest(TestCase):
     def tearDown(self):
         self.user.delete()
 
-    def test_global_stream(self):
+    @patch("astrobin.tasks.retrieve_primary_thumbnails")
+    def test_global_stream(self, retrieve_primary_thumbnails):
         url = reverse('index') + '?s=global'
         self.client.login(username = 'test', password = 'password')
 

@@ -1,3 +1,6 @@
+# Python
+from mock import patch
+
 # Django
 from django.contrib.auth.models import User, Group
 from django.core.urlresolvers import reverse_lazy
@@ -11,7 +14,8 @@ from astrobin.models import Image
 
 
 class ExploreTest(TestCase):
-    def setUp(self):
+    @patch("astrobin.tasks.retrieve_primary_thumbnails")
+    def setUp(self, retrieve_primary_thumbnails):
         self.submitter = User.objects.create_user('submitter_1', 'submitter_1@test.com', 'password')
         self.submitters = Group.objects.create(name='iotd_submitters')
         self.submitters.user_set.add(self.submitter)
