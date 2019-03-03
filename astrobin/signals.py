@@ -130,7 +130,9 @@ def image_post_delete(sender, instance, **kwargs):
                 user = instance.user,
                 subscription__group__name = 'astrobin_lite')
 
-            usersub_created = usersub.expires - datetime.timedelta(365) # leap years be damned
+            from dateutil.relativedelta import relativedelta
+
+            usersub_created = usersub.expires - relativedelta(years=1)
             dt = instance.uploaded.date() - usersub_created
             if dt.days >= 0:
                 decrease_counter(instance.user)
