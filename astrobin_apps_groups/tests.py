@@ -54,7 +54,7 @@ class GroupsTest(TestCase):
         self.group.delete()
 
     def test_misc_ui_elements(self):
-        response = self.client.get(reverse('index'))
+        response = self.client.get(reverse('group_list'))
         bss = BSS(response.content)
         self.assertEqual(len(bss('.explore-menu-groups')), 1)
 
