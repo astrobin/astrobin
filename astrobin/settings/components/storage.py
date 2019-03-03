@@ -49,10 +49,8 @@ else:
 
 DEFAULT_FILE_STORAGE = 'astrobin.s3utils.ImageStorage'
 STATICFILES_FINDERS = (
-    'django.contrib.staticfiles.finders.FileSystemFinder',
     'django.contrib.staticfiles.finders.AppDirectoriesFinder',
     'pipeline.finders.PipelineFinder',
 )
-STATICFILES_DIRS = (local_path('../static'),)
 
 MESSAGE_STORAGE = 'persistent_messages.storage.PersistentMessageStorage'
