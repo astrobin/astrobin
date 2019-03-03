@@ -1,21 +1,74 @@
 version: '3'
 
 services:
-  celery_default:
+  astrobin:
     image: astrobin/astrobin:latest
+    environment:
+      - DB_ENGINE=django.db.backends.sqlite3
+
+
+  # Override all other services with most minimalist image
+
+  celery_default:
+    image: tianon/true
+    command: "/true"
+    entrypoint: "/true"
 
 
   celery_thumbnails:
-    image: astrobin/astrobin:latest
+    image: tianon/true
+    command: "/true"
+    entrypoint: "/true"
 
 
   celery_haystack:
-    image: astrobin/astrobin:latest
-
+    image: tianon/true
+    command: "/true"
+    entrypoint: "/true"
 
   beat:
-    image: astrobin/astrobin:latest
+    image: tianon/true
+    command: "/true"
+    entrypoint: "/true"
 
 
-  astrobin:
-    image: astrobin/astrobin:latest
+  nginx:
+    image: tianon/true
+    command: "/true"
+    entrypoint: "/true"
+
+
+  memcached:
+    image: tianon/true
+    command: "/true"
+    entrypoint: "/true"
+
+
+  postgres:
+    image: tianon/true
+    command: "/true"
+    entrypoint: "/true"
+
+
+  rabbitmq:
+    image: tianon/true
+    command: "/true"
+    entrypoint: "/true"
+
+
+  elasticsearch:
+    image: tianon/true
+    command: "/true"
+    entrypoint: "/true"
+
+
+  flower:
+    image: tianon/true
+    command: "/true"
+    entrypoint: "/true"
+
+
+  debug_email:
+    image: tianon/true
+    command: "/true"
+    entrypoint: "/true"
