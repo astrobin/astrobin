@@ -24,7 +24,7 @@ before_script:
   - docker-compose -f docker/docker-compose.yml -f docker/docker-compose.build.yml -f docker/docker-compose.travis.yml run --no-deps --rm astrobin ./scripts/init.sh
 
 script:
-  - docker-compose -f docker/docker-compose.yml -f docker/docker-compose.build.yml -f docker/docker-compose.travis.yml run --no-deps --rm astrobin bash -c "./manage.py collectstatic --noinput && ./scripts/test.sh" 2>&1 >/dev/null
+  - docker-compose -f docker/docker-compose.yml -f docker/docker-compose.build.yml -f docker/docker-compose.travis.yml run --no-deps --rm astrobin bash -c "./manage.py collectstatic --noinput && ./scripts/test.sh"
 
 after_success:
   - docker cp -a .git $(docker ps -q -f name=astrobin_astrobin --last 1):/code # Needed by codecov.
