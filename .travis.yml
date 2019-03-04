@@ -19,7 +19,7 @@ install:
 before_script:
   - echo "$DOCKER_PASSWORD" | docker login -u "$DOCKER_USERNAME" --password-stdin
   - docker-compose -f docker/docker-compose.yml -f docker/docker-compose.build.yml -f docker/docker-compose.travis.yml up -d
-  - docker exec -it docker_astrobin_1 ./manage.py collectstatic --noinput
+  - docker exec -it docker_astrobin_1 ./manage.py collectstatic --noinput --verbosity 0
 
 script:
   - docker exec -it docker_astrobin_1 ./scripts/test.sh
