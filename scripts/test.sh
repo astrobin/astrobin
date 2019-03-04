@@ -6,4 +6,4 @@ coverage run --source=. ./manage.py test \
     astrobin_apps_notifications \
     astrobin_apps_premium \
     rawdata \
-    --noinput --failfast
+    --noinput --failfast --keepdb
