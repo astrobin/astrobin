@@ -1,5 +1,6 @@
 # Python
 import datetime
+from mock import patch
 
 # Django
 from django.conf import settings
@@ -149,7 +150,8 @@ class PremiumTest(TestCase):
             g.delete()
             u.delete()
 
-    def test_upload_limits(self):
+    @patch("astrobin.tasks.retrieve_primary_thumbnails")
+    def test_upload_limits(self, retrieve_primary_thumbnails):
         with self.settings(PREMIUM_ENABLED = True):
             user = User.objects.create_user(
                 username = 'test', email='test@test.com', password = 'password')

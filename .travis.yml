@@ -5,45 +5,32 @@ services:
   - docker
 
 env:
-  - NGINX_MODE=dev DOCKER_MODE=compose
-  - NGINX_MODE=prod DOCKER_MODE=compose
-  - NGINX_MODE=dev DOCKER_MODE=stack
-  - NGINX_MODE=prod DOCKER_MODE=stack
+  - NGINX_MODE=dev
 
 before_install:
   - ulimit -s 1082768
-  - sudo /etc/init.d/postgresql stop
 
 install:
   - sudo apt update -y
   - sudo apt install --only-upgrade docker-ce -y
   - docker build --no-cache -t astrobin/nginx-${NGINX_MODE}:latest -f docker/nginx.${NGINX_MODE}.dockerfile .
   - docker build --no-cache -t astrobin/astrobin:latest -f docker/astrobin.dockerfile .
-  - echo "$DOCKER_PASSWORD" | docker login -u "$DOCKER_USERNAME" --password-stdin
-  - if [ ${DOCKER_MODE} = "compose" ]; then docker-compose -f docker/docker-compose.yml -f docker/docker-compose.build.yml -f docker/docker-compose.travis.yml up -d; fi
-  - if [ ${DOCKER_MODE} = "stack" ]; then docker swarm init; fi
-  - if [ ${DOCKER_MODE} = "stack" ]; then docker node update --label-add default=true --label-add app=true $(docker node ls --format "{{.ID}}"); fi
-  - if [ ${DOCKER_MODE} = "stack" ]; then docker stack deploy -c docker/docker-compose.yml -c docker/docker-compose.deploy.yml -c docker/docker-compose.travis.yml astrobin; fi
-  - if [ ${DOCKER_MODE} = "stack" ]; then while ! docker service ps astrobin_astrobin --format '{{.CurrentState}} {{.Image}}' | grep Running.*astrobin/astrobin:latest; do sleep 10; done; fi
 
 before_script:
-  - if [ ${DOCKER_MODE} = "compose" ]; then docker-compose -f docker/docker-compose.yml -f docker/docker-compose.build.yml -f docker/docker-compose.travis.yml run --no-deps --rm astrobin ./scripts/init.sh; fi
-  - if [ ${DOCKER_MODE} = "stack" ]; then docker exec -it $(docker ps -q -f name=astrobin_astrobin --last 1) ./scripts/init.sh; fi
-  - if [ ${DOCKER_MODE} = "stack" ]; then docker exec -it $(docker ps -q -f name=astrobin_astrobin --last 1) python manage.py collectstatic --noinput 2>&1 >/dev/null; fi
+  - echo "$DOCKER_PASSWORD" | docker login -u "$DOCKER_USERNAME" --password-stdin
+  - docker-compose -f docker/docker-compose.yml -f docker/docker-compose.build.yml -f docker/docker-compose.travis.yml up -d
+  - docker exec -it docker_astrobin_1 ./manage.py collectstatic --noinput --verbosity 0
 
 script:
-  - if [ ${DOCKER_MODE} = "compose" ]; then docker-compose -f docker/docker-compose.yml -f docker/docker-compose.build.yml -f docker/docker-compose.travis.yml run --no-deps --rm astrobin bash -c "./manage.py collectstatic --noinput && ./scripts/test.sh"; fi
-  - if [ ${DOCKER_MODE} = "stack" ]; then docker exec -it $(docker ps -q -f name=astrobin_astrobin --last 1) ./scripts/test.sh; fi
+  - docker exec -it docker_astrobin_1 ./scripts/test.sh
 
 after_success:
-  - docker cp -a .git $(docker ps -q -f name=astrobin_astrobin --last 1):/code # Needed by codecov.
-  - if [ ${DOCKER_MODE} = "compose" ]; then docker-compose -f docker/docker-compose.yml -f docker/docker-compose.build.yml -f docker/docker-compose.travis.yml exec astrobin ./scripts/codecov.sh; fi
-  - if [ ${DOCKER_MODE} = "stack" ]; then docker exec -it $(docker ps -q -f name=astrobin_astrobin --last 1) ./scripts/codecov.sh; fi
+  - docker cp -a .git docker_astrobin_1:/code # Needed by codecov.
+  - docker exec -it docker_astrobin_1 ./scripts/codecov.sh
   - docker push astrobin/nginx-${NGINX_MODE}:latest
   - docker push astrobin/astrobin:latest
 
 after_script:
-  - if [ ${DOCKER_MODE} = "compose" ]; then docker-compose -f docker/docker-compose.yml -f docker/docker-compose.build.yml -f docker/docker-compose.travis.yml down; fi
-  - if [ ${DOCKER_MODE} = "stack" ]; then docker stack rm astrobin; fi
+  - docker-compose -f docker/docker-compose.yml -f docker/docker-compose.build.yml -f docker/docker-compose.travis.yml down
   - docker logout
 

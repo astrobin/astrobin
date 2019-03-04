@@ -734,6 +734,7 @@ class Image(HasSolutionMixin, SafeDeleteModel):
         ("IC", "IC Astronomy Observatories"),
         ("ITU", "Image The Universe"),
         ("iT", "iTelescope"),
+        ("LGO", "Lijiang Gemini Observatory"),
         ("MARIO", "Marathon Remote Imaging Observatory (MaRIO)"),
         ("NMS", "New Mexico Skies"),
         ("OES", "Observatorio El Sauce"),
