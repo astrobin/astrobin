@@ -67,6 +67,7 @@ INSTALLED_APPS = [
     'astrobin_apps_notifications',
     'astrobin_apps_groups',
     'astrobin_apps_iotd',
+    'astrobin_apps_landing',
     'toggleproperties',
 ]
 
