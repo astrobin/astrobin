@@ -1,3 +1,11 @@
+2019-03-05 Salvatore Iovene <salvatore@iovene.com>
+ * v1.39.0
+ * (deps) Update numpy to 1.16.2
+ * (ci) Simplify Travis configuration
+ * (images) Add Lijiang Gemini Observatory to the list of remote sources
+ * (subscriptions) Fix leap year bug aftecting Free and Lite subscriptions
+ * (landing) Introduce new landing page for anonymous users
+
 2019-02-10 Salvatore Iovene <salvatore@iovene.com>
  * v1.38.2
  * (infra) Upgrade to node 10
