@@ -415,7 +415,7 @@ span, a, a:hover {
      [ 04 Start Header ]
 -----------------------------------------------------------------*/
 .header {
-    min-height: calc(100vh + 80px);
+    min-height: calc(100vh - -80px);
     padding-bottom: 80px;
     overflow: hidden;
 }
