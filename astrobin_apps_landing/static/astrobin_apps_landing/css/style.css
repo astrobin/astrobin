@@ -485,6 +485,16 @@ span, a, a:hover {
     animation-delay: 1.2s;
 }
 
+@media screen and (max-width: 425px) {
+    .header .caption .butn {
+        display: block;
+    }
+
+    .header .caption .butn:not(:first-of-type) {
+        margin-top: 10px !important;
+    }
+}
+
 .header .scroll-down {
     margin-top: 120px;
 }
@@ -967,10 +977,26 @@ span, a, a:hover {
     font-size: 55px;
     font-weight: 700;
     margin-bottom: 30px;
+    white-space: nowrap;
 }
 
 .numbers h6 {
     font-weight: 300;
+    white-space: nowrap;
+}
+
+@media screen and (max-width: 991px) {
+    .numbers [class^='col-']:nth-child(even) .item {
+        border-right: 0;
+    }
+}
+
+@media screen and (max-width: 768px) {
+    .numbers .item:not(.last) {
+        border-right: 0;
+        border-bottom: 1px solid #444;
+        padding-bottom: 40px
+    }
 }
 
 /* ----------------------------------------------------------------
@@ -984,6 +1010,14 @@ span, a, a:hover {
     width: calc(33% - 20px);
     text-shadow: 1px 1px 1px rgba(0, 0, 0, .5);
     border-radius: 10px;
+}
+
+@media screen and (max-width: 768px) {
+    .explore .butn-huge {
+        display: block;
+        width: 80%;
+        margin: 0 auto;
+    }
 }
 
 .explore .butn .icon {
