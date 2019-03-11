@@ -1,3 +1,6 @@
+# Python
+from mock import patch
+
 # Django
 from django.contrib.auth.models import Group, User
 from django.core.urlresolvers import reverse
@@ -45,8 +48,8 @@ class ModerationTest(TestCase):
     def _get_last_image(self):
         return Image.objects_including_wip.all().order_by('-id')[0]
 
-
-    def test_image_moderation_queue_view(self):
+    @patch("astrobin.tasks.retrieve_primary_thumbnails")
+    def test_image_moderation_queue_view(self, retrieve_primary_thumbnails):
         # Anon cannot access
         response = self.client.get(reverse('image_moderation'))
         self.assertEqual(response.status_code, 403)
@@ -90,8 +93,8 @@ class ModerationTest(TestCase):
 
         image.delete()
 
-
-    def test_spam_user_gallery(self):
+    @patch("astrobin.tasks.retrieve_primary_thumbnails")
+    def test_spam_user_gallery(self, retrieve_primary_thumbnails):
         self.client.login(username = 'user', password = 'password')
         response = self.client.get(reverse('user_page', args= ('user',)))
         self.assertEquals(response.status_code, 200)

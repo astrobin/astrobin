@@ -1,5 +1,6 @@
 # Python
 from datetime import date
+from mock import patch
 
 # Django
 from django.core.urlresolvers import reverse
@@ -62,7 +63,8 @@ class UserTest(TestCase):
 
         return image
 
-    def test_user_page_view(self):
+    @patch("astrobin.tasks.retrieve_primary_thumbnails")
+    def test_user_page_view(self, retrieve_primary_thumbnails):
         today = date.today()
 
         # Test simple access
@@ -385,7 +387,8 @@ class UserTest(TestCase):
 
         self.client.logout()
 
-    def test_user_profile_exclude_from_competitions(self):
+    @patch("astrobin.tasks.retrieve_primary_thumbnails")
+    def test_user_profile_exclude_from_competitions(self, retrieve_primary_thumbnails):
         self.client.login(username = "user", password="password")
         self._do_upload('astrobin/fixtures/test.jpg')
         self.client.logout()
@@ -445,8 +448,8 @@ class UserTest(TestCase):
         self.assertEqual(response.status_code, 200)
         self.client.logout()
 
-    @override_settings(CELERY_TASK_ALWAYS_EAGER=True)
-    def test_liked(self):
+    @patch("astrobin.tasks.retrieve_primary_thumbnails")
+    def test_liked(self, retrieve_primary_thumbnails):
         self.client.login(username = "user", password = "password")
         image = self._do_upload('astrobin/fixtures/test.jpg', "TEST IMAGE")
         self.client.logout()
@@ -470,7 +473,8 @@ class UserTest(TestCase):
         profile = UserProfile.objects.get(user = self.user)
         self.assertNotEquals(updated, profile.updated)
 
-    def test_profile_updated_when_image_saved(self):
+    @patch("astrobin.tasks.retrieve_primary_thumbnails")
+    def test_profile_updated_when_image_saved(self, retrieve_primary_thumbnails):
         updated = self.user.userprofile.updated
 
         self.client.login(username = "user", password = "password")
