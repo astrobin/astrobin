@@ -234,6 +234,11 @@ def app(request, template = 'app.html'):
 @silk_profile('Index')
 def index(request, template = 'index/root.html', extra_context = None):
     """Main page"""
+
+    if not request.user.is_authenticated():
+        from django.shortcuts import redirect
+        return redirect(reverse("landing:main"))
+
     from django.core.cache import cache
 
     image_ct = ContentType.objects.get_for_model(Image)
@@ -252,130 +257,129 @@ def index(request, template = 'index/root.html', extra_context = None):
         'section': 'recent',
     }
 
-    if request.user.is_authenticated():
-        profile = request.user.userprofile
+    profile = request.user.userprofile
 
-        section = request.GET.get('s')
-        if section is None:
-            section = profile.default_frontpage_section
-        response_dict['section'] = section
+    section = request.GET.get('s')
+    if section is None:
+        section = profile.default_frontpage_section
+    response_dict['section'] = section
 
-        if section == 'global':
-            ##################
-            # GLOBAL ACTIONS #
-            ##################
-            actions = Action.objects.all().prefetch_related(
+    if section == 'global':
+        ##################
+        # GLOBAL ACTIONS #
+        ##################
+        actions = Action.objects.all().prefetch_related(
+            'actor__userprofile',
+            'target_content_type',
+            'target')
+        response_dict['actions'] = actions
+        response_dict['cache_prefix'] = 'astrobin_global_actions'
+
+    elif section == 'personal':
+        ####################
+        # PERSONAL ACTIONS #
+        ####################
+        cache_key = 'astrobin_users_image_ids_%s' % request.user
+        users_image_ids = cache.get(cache_key)
+        if users_image_ids is None:
+            users_image_ids = [
+                str(x) for x in
+                Image.objects.filter(
+                    user = request.user).values_list('id', flat = True)
+            ]
+            cache.set(cache_key, users_image_ids, 300)
+
+        cache_key = 'astrobin_users_revision_ids_%s' % request.user
+        users_revision_ids = cache.get(cache_key)
+        if users_revision_ids is None:
+            users_revision_ids = [
+                str(x) for x in
+                ImageRevision.objects.filter(
+                    image__user = request.user).values_list('id', flat = True)
+            ]
+            cache.set(cache_key, users_revision_ids, 300)
+
+        cache_key = 'astrobin_followed_user_ids_%s' % request.user
+        followed_user_ids = cache.get(cache_key)
+        if followed_user_ids is None:
+            followed_user_ids = [
+                str(x) for x in
+                ToggleProperty.objects.filter(
+                    property_type = "follow",
+                    user = request.user,
+                    content_type = ContentType.objects.get_for_model(User)
+                ).values_list('object_id', flat = True)
+            ]
+            cache.set(cache_key, followed_user_ids, 900)
+        response_dict['has_followed_users'] = len(followed_user_ids) > 0
+
+        cache_key = 'astrobin_followees_image_ids_%s' % request.user
+        followees_image_ids = cache.get(cache_key)
+        if followees_image_ids is None:
+            followees_image_ids = [
+                str(x) for x in
+                Image.objects.filter(user_id__in = followed_user_ids).values_list('id', flat = True)
+            ]
+            cache.set(cache_key, followees_image_ids, 900)
+
+        actions = Action.objects\
+            .prefetch_related(
                 'actor__userprofile',
                 'target_content_type',
-                'target')
-            response_dict['actions'] = actions
-            response_dict['cache_prefix'] = 'astrobin_global_actions'
+                'target'
+            ).filter(
+                # Actor is user, or...
+                Q(
+                    Q(actor_content_type = user_ct) &
+                    Q(actor_object_id = request.user.id)
+                ) |
 
-        elif section == 'personal':
-            ####################
-            # PERSONAL ACTIONS #
-            ####################
-            cache_key = 'astrobin_users_image_ids_%s' % request.user
-            users_image_ids = cache.get(cache_key)
-            if users_image_ids is None:
-                users_image_ids = [
-                    str(x) for x in
-                    Image.objects.filter(
-                        user = request.user).values_list('id', flat = True)
-                ]
-                cache.set(cache_key, users_image_ids, 300)
+                # Action concerns user's images as target, or...
+                Q(
+                    Q(target_content_type = image_ct) &
+                    Q(target_object_id__in = users_image_ids)
+                ) |
+                Q(
+                    Q(target_content_type = image_rev_ct) &
+                    Q(target_object_id__in = users_revision_ids)
+                ) |
 
-            cache_key = 'astrobin_users_revision_ids_%s' % request.user
-            users_revision_ids = cache.get(cache_key)
-            if users_revision_ids is None:
-                users_revision_ids = [
-                    str(x) for x in
-                    ImageRevision.objects.filter(
-                        image__user = request.user).values_list('id', flat = True)
-                ]
-                cache.set(cache_key, users_revision_ids, 300)
+                # Action concerns user's images as object, or...
+                Q(
+                    Q(action_object_content_type = image_ct) &
+                    Q(action_object_object_id__in = users_image_ids)
+                ) |
+                Q(
+                    Q(action_object_content_type = image_rev_ct) &
+                    Q(action_object_object_id__in = users_revision_ids)
+                ) |
 
-            cache_key = 'astrobin_followed_user_ids_%s' % request.user
-            followed_user_ids = cache.get(cache_key)
-            if followed_user_ids is None:
-                followed_user_ids = [
-                    str(x) for x in
-                    ToggleProperty.objects.filter(
-                        property_type = "follow",
-                        user = request.user,
-                        content_type = ContentType.objects.get_for_model(User)
-                    ).values_list('object_id', flat = True)
-                ]
-                cache.set(cache_key, followed_user_ids, 900)
-            response_dict['has_followed_users'] = len(followed_user_ids) > 0
+                # Actor is somebody the user follows, or...
+                Q(
+                    Q(actor_content_type = user_ct) &
+                    Q(actor_object_id__in = followed_user_ids)
+                ) |
 
-            cache_key = 'astrobin_followees_image_ids_%s' % request.user
-            followees_image_ids = cache.get(cache_key)
-            if followees_image_ids is None:
-                followees_image_ids = [
-                    str(x) for x in
-                    Image.objects.filter(user_id__in = followed_user_ids).values_list('id', flat = True)
-                ]
-                cache.set(cache_key, followees_image_ids, 900)
-
-            actions = Action.objects\
-                .prefetch_related(
-                    'actor__userprofile',
-                    'target_content_type',
-                    'target'
-                ).filter(
-                    # Actor is user, or...
-                    Q(
-                        Q(actor_content_type = user_ct) &
-                        Q(actor_object_id = request.user.id)
-                    ) |
-
-                    # Action concerns user's images as target, or...
-                    Q(
-                        Q(target_content_type = image_ct) &
-                        Q(target_object_id__in = users_image_ids)
-                    ) |
-                    Q(
-                        Q(target_content_type = image_rev_ct) &
-                        Q(target_object_id__in = users_revision_ids)
-                    ) |
-
-                    # Action concerns user's images as object, or...
-                    Q(
-                        Q(action_object_content_type = image_ct) &
-                        Q(action_object_object_id__in = users_image_ids)
-                    ) |
-                    Q(
-                        Q(action_object_content_type = image_rev_ct) &
-                        Q(action_object_object_id__in = users_revision_ids)
-                    ) |
-
-                    # Actor is somebody the user follows, or...
-                    Q(
-                        Q(actor_content_type = user_ct) &
-                        Q(actor_object_id__in = followed_user_ids)
-                    ) |
-
-                    # Action concerns an image by a followed user...
-                    Q(
-                        Q(target_content_type = image_ct) &
-                        Q(target_object_id__in = followees_image_ids)
-                    ) |
-                    Q(
-                        Q(action_object_content_type = image_ct) &
-                        Q(action_object_object_id__in = followees_image_ids)
-                    )
+                # Action concerns an image by a followed user...
+                Q(
+                    Q(target_content_type = image_ct) &
+                    Q(target_object_id__in = followees_image_ids)
+                ) |
+                Q(
+                    Q(action_object_content_type = image_ct) &
+                    Q(action_object_object_id__in = followees_image_ids)
                 )
-            response_dict['actions'] = actions
-            response_dict['cache_prefix'] = 'astrobin_personal_actions'
+            )
+        response_dict['actions'] = actions
+        response_dict['cache_prefix'] = 'astrobin_personal_actions'
 
-        elif section == 'followed':
-            followed = [x.object_id for x in ToggleProperty.objects.filter(
-                property_type = "follow",
-                content_type = ContentType.objects.get_for_model(User),
-                user = request.user)]
+    elif section == 'followed':
+        followed = [x.object_id for x in ToggleProperty.objects.filter(
+            property_type = "follow",
+            content_type = ContentType.objects.get_for_model(User),
+            user = request.user)]
 
-            response_dict['recent_images'] = recent_images.filter(user__in = followed)
+        response_dict['recent_images'] = recent_images.filter(user__in = followed)
 
     if extra_context is not None:
         response_dict.update(extra_context)

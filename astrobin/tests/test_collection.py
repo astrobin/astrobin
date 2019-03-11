@@ -1,5 +1,6 @@
 # Python
 import re
+from mock import patch
 
 # Django
 from django.contrib.auth.models import User
@@ -62,7 +63,8 @@ class CollectionTest(TestCase):
     # View tests                                                              #
     ###########################################################################
 
-    def test_collections_list_view(self):
+    @patch("astrobin.tasks.retrieve_primary_thumbnails")
+    def test_collections_list_view(self, retrieve_primary_thumbnails):
         # Anon user, no collections
         response = self.client.get(reverse('user_collections_list', args = (self.user.username,)))
         self.assertContains(response, "This user does not have any collections")
@@ -96,7 +98,8 @@ class CollectionTest(TestCase):
         image.delete()
         collection.delete()
 
-    def test_collection_update_view(self):
+    @patch("astrobin.tasks.retrieve_primary_thumbnails")
+    def test_collection_update_view(self, retrieve_primary_thumbnails):
         self.client.login(username = 'test', password = 'password')
         self._create_collection(self.user, 'test_collection', 'test_description')
         collection = self._get_last_collection()
@@ -136,7 +139,8 @@ class CollectionTest(TestCase):
         image2.delete()
         collection.delete()
 
-    def test_collection_delete_view(self):
+    @patch("astrobin.tasks.retrieve_primary_thumbnails")
+    def test_collection_delete_view(self, retrieve_primary_thumbnails):
         # Create a collection
         self.client.login(username = 'test', password = 'password')
         self._do_upload('astrobin/fixtures/test.jpg')
@@ -150,7 +154,8 @@ class CollectionTest(TestCase):
 
         image.delete()
 
-    def test_collection_add_remove_images_view(self):
+    @patch("astrobin.tasks.retrieve_primary_thumbnails")
+    def test_collection_add_remove_images_view(self, retrieve_primary_thumbnails):
         # Create a collection
         self.client.login(username = 'test', password = 'password')
         self._create_collection(self.user, 'test_collection', 'test_description')

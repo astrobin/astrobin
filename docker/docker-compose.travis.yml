@@ -3,20 +3,74 @@ version: '3'
 services:
   astrobin:
     image: astrobin/astrobin:latest
-    command: bash -c "./manage.py collectstatic --noinput && gunicorn wsgi:application -w 1 -b :8083"
     environment:
+      - USE_SQLITE=true
       - TESTING=true
       - CODECOV_TOKEN
 
 
+  # Override all other services with most minimalist image
+
   celery_default:
-    image: astrobin/astrobin:latest
-    environment:
-      - TESTING=true
+    image: tianon/true
+    command: "/true"
+    entrypoint: "/true"
+
+
+  celery_thumbnails:
+    image: tianon/true
+    command: "/true"
+    entrypoint: "/true"
+
+
+  celery_haystack:
+    image: tianon/true
+    command: "/true"
+    entrypoint: "/true"
+
+  beat:
+    image: tianon/true
+    command: "/true"
+    entrypoint: "/true"
+
+
+  nginx:
+    image: tianon/true
+    command: "/true"
+    entrypoint: "/true"
+
+
+  memcached:
+    image: tianon/true
+    command: "/true"
+    entrypoint: "/true"
+
+
+  postgres:
+    image: tianon/true
+    command: "/true"
+    entrypoint: "/true"
 
 
   rabbitmq:
-    image: rabbitmq:management-alpine
-    environment:
-      - RABBITMQ_DEFAULT_USER=astrobin
-      - RABBITMQ_DEFAULT_PASS=astrobin
+    image: tianon/true
+    command: "/true"
+    entrypoint: "/true"
+
+
+  elasticsearch:
+    image: tianon/true
+    command: "/true"
+    entrypoint: "/true"
+
+
+  flower:
+    image: tianon/true
+    command: "/true"
+    entrypoint: "/true"
+
+
+  debug_email:
+    image: tianon/true
+    command: "/true"
+    entrypoint: "/true"

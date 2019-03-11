@@ -1,3 +1,6 @@
+# Python
+from mock import patch
+
 # Django
 from datetime import datetime, timedelta
 
@@ -15,9 +18,6 @@ from bs4 import BeautifulSoup as BS
 from beautifulsoupselect import BeautifulSoupSelect as BSS
 import simplejson as json
 
-# AstroBin
-from mock import patch
-
 from astrobin.models import Image
 from astrobin_apps_groups.models import Group as AstroBinGroup
 
@@ -26,9 +26,8 @@ from astrobin_apps_iotd.models import *
 
 
 class IotdTest(TestCase):
-    def setUp(self):
-        patch('astrobin.tasks.retrieve_primary_thumbnails.delay')
-
+    @patch("astrobin.tasks.retrieve_primary_thumbnails")
+    def setUp(self, retrieve_primary_thumbnails):
         self.submitter_1 = User.objects.create_user('submitter_1', 'submitter_1@test.com', 'password')
         self.submitter_2 = User.objects.create_user('submitter_2', 'submitter_2@test.com', 'password')
         self.submitter_3 = User.objects.create_user('submitter_3', 'submitter_3@test.com', 'password')

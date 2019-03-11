@@ -147,9 +147,8 @@ class PremiumTest(TestCase):
             g.delete()
             u.delete()
 
-    @override_settings(PREMIUM_ENABLED=True)
-    @patch('astrobin.tasks.retrieve_primary_thumbnails.delay')
-    def test_upload_limits(self, retrieve_primary_thumbnail):
+    @patch("astrobin.tasks.retrieve_primary_thumbnails")
+    def test_upload_limits(self, retrieve_primary_thumbnails):
         user = User.objects.create_user(
             username = 'test', email='test@test.com', password = 'password')
         profile = user.userprofile

@@ -21,6 +21,14 @@ if TESTING:
         }
     }
 
+    MIGRATION_MODULES = {
+        "astrobin": None,
+        "rawdata": None,
+        "astrobin_apps_images": None,
+        "astrobin_apps_iotd": None,
+        "astrobin_apps_groups": None,
+    }
+
     CACHES = {
         'default': {
             'BACKEND': 'django.core.cache.backends.dummy.DummyCache',

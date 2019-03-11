@@ -1,32 +1,40 @@
 sudo: required
 dist: trusty
 
-addons:
-  chrome: stable
-
 services:
   - docker
+
+env:
+  - NGINX_MODE=dev
+
+before_install:
+  - ulimit -s 1082768
 
 install:
   - sudo apt update -y
   - sudo apt install --only-upgrade docker-ce -y
-  - echo "$DOCKER_PASSWORD" | docker login -u "$DOCKER_USERNAME" --password-stdin
-  - docker pull astrobin/astrobin:latest
-  - docker build --cache-from astrobin/astrobin:latest -t astrobin/astrobin:latest -f docker/astrobin.dockerfile .
+  - docker build --no-cache -t astrobin/nginx-${NGINX_MODE}:latest -f docker/nginx.${NGINX_MODE}.dockerfile .
+  - docker build --no-cache -t astrobin/astrobin:latest -f docker/astrobin.dockerfile .
 
 before_script:
-  - docker-compose -f docker/docker-compose.travis.yml up --no-deps -d
-  - docker-compose -f docker/docker-compose.travis.yml exec astrobin bash -c "cd frontend; npm i"
+  - echo "$DOCKER_PASSWORD" | docker login -u "$DOCKER_USERNAME" --password-stdin
+  - docker-compose -f docker/docker-compose.yml -f docker/docker-compose.build.yml -f docker/docker-compose.travis.yml up -d
+  - docker exec -it docker_astrobin_1 ./manage.py collectstatic --noinput --verbosity 0
+  - docker exec -it docker_astrobin_1 apt-get update
+  - docker exec -it docker_astrobin_1 apt-get install -y chromium-browser
 
 script:
-  - docker-compose -f docker/docker-compose.travis.yml exec astrobin ./scripts/test.sh
-  - docker-compose -f docker/docker-compose.travis.yml exec astrobin bash -c "cd frontend; npm run ng -- test --code-coverage"
+  - docker exec -it docker_astrobin_1 ./scripts/test.sh
+  - docker exec -it docker_astrobin_1 bash -c "cd frontend; npm run ng -- test --code-coverage"
+  - docker exec -it docker_astrobin_1 bash -c "cd frontend; npm run e2e"
 
 after_success:
-  - docker cp -a .git $(docker ps -q -f name=docker_astrobin --last 1):/code # Needed by codecov.
-  - docker-compose -f docker/docker-compose.travis.yml exec astrobin ./scripts/codecov.sh
+  - docker cp -a .git docker_astrobin_1:/code # Needed by codecov.
+  - docker exec -it docker_astrobin_1 ./scripts/codecov.sh
+  - docker push astrobin/nginx-${NGINX_MODE}:latest
   - docker push astrobin/astrobin:latest
 
 after_script:
-  - docker-compose -f docker/docker-compose.travis.yml down
+#  - docker-compose -f docker/docker-compose.yml -f docker/docker-compose.build.yml -f docker/docker-compose.travis.yml down
   - docker logout
+

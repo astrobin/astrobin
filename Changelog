@@ -1,3 +1,30 @@
+2019-03-07 Salvatore Iovene <salvatore@iovene.com>
+ * v1.39.2
+ * (landing) Fix typos
+ * (landing) Fix mobile issues
+
+2019-03-06 Salvatore Iovene <salvatore@iovene.com>
+ * v1.39.1
+ * (landing) Fix broken link
+ * (landing) Fix styling issue caused by uglification
+
+2019-03-05 Salvatore Iovene <salvatore@iovene.com>
+ * v1.39.0
+ * (deps) Update numpy to 1.16.2
+ * (ci) Simplify Travis configuration
+ * (images) Add Lijiang Gemini Observatory to the list of remote sources
+ * (subscriptions) Fix leap year bug aftecting Free and Lite subscriptions
+ * (landing) Introduce new landing page for anonymous users
+
+2019-02-10 Salvatore Iovene <salvatore@iovene.com>
+ * v1.38.2
+ * (infra) Upgrade to node 10
+ * (i18n) Update translations
+
+2019-01-21 Salvatore Iovene <salvatore@iovene.com>
+ * v1.38.1
+ * (infra) Make contain_image_cache task stick to hardcoded 7-day retention policy
+
 2019-01-07 Salvatore Iovene <salvatore@iovene.com>
  * v1.38.0
  * (search) Add MaRIO and Stellar Skies to list of remote observatories
