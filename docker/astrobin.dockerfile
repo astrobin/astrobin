@@ -28,8 +28,6 @@ RUN apt-get update && apt-get install -y --no-install-recommends \
     ruby ruby-dev \
     && apt-get clean && rm -rf /var/lib/apt/lists/*
 
-RUN curl -sL https://deb.nodesource.com/setup_10.x | bash - && apt-get install -y nodejs
-
 # Set the locale
 RUN locale-gen en_US.UTF-8
 ENV LANG en_US.UTF-8
