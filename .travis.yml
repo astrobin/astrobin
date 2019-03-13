@@ -6,8 +6,8 @@ services:
 
 install:
   # Make sure docker packages build even tho we don't use them on Travis because of memory issues.
-  # - docker build --no-cache -t astrobin/nginx-dev:latest -f docker/nginx.dev.dockerfile .
-  # - docker build --no-cache -t astrobin/astrobin:latest -f docker/astrobin.dockerfile .
+  - docker build --no-cache -t astrobin/nginx-dev:latest -f docker/nginx.dev.dockerfile .
+  - docker build --no-cache -t astrobin/astrobin:latest -f docker/astrobin.dockerfile .
   - ./ci/install.sh
 
 before_script:
@@ -18,9 +18,9 @@ script:
 
 after_success:
   - ./scripts/codecov.sh
-  # - echo "$DOCKER_PASSWORD" | docker login -u "$DOCKER_USERNAME" --password-stdin
-  # - docker push astrobin/nginx-dev:latest
-  # - docker push astrobin/astrobin:latest
+  - echo "$DOCKER_PASSWORD" | docker login -u "$DOCKER_USERNAME" --password-stdin
+  - docker push astrobin/nginx-dev:latest
+  - docker push astrobin/astrobin:latest
 
-# after_script:
-  # - docker logout
+after_script:
+  - docker logout
