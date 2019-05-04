@@ -27,7 +27,7 @@
             {% blocktrans %}Please make sure you have read the section about APIs in the <a href="{{tos_url}}">Terms of Service</a>.{% endblocktrans %}
         </div>
 
-        <form class="form-horizontal" action="." method="post">{% csrf_token %}
+        <form class="form-horizontal" action="" method="post">{% csrf_token %}
             {{form|as_bootstrap}}
             <div class="form-actions">
                 <input class="btn btn-primary" type="submit" value="{% trans "Submit" %} &rarr;" />
