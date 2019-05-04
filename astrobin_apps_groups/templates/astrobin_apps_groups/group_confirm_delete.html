@@ -13,7 +13,7 @@
         {% trans "Careful! Do you really want to delete this group? This operation cannot be undone!" %}
     </div>
 
-    <form class="form-horizontal" action="." method="post">{% csrf_token %}
+    <form class="form-horizontal" action="" method="post">{% csrf_token %}
         <div class="form-actions">
             <input class="btn btn-primary" type="submit" value="{% trans "Delete group" %}"/>
         </div>

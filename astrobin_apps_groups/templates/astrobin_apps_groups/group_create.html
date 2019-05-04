@@ -19,7 +19,7 @@
     {% if READONLY_MODE %}
         {% include 'readonly_mode.html' %}
     {% else %}
-        <form class="form-horizontal" action="." method="post">{% csrf_token %}
+        <form class="form-horizontal" action="" method="post">{% csrf_token %}
             {{form|as_bootstrap}}
             <div class="form-actions">
                 <input class="btn btn-primary" type="submit" value="{% trans "Create new group" %}"/>
