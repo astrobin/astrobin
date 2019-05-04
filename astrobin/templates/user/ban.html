@@ -25,7 +25,7 @@
             {% blocktrans with username=user.profile %}User <strong>{{user}}</strong> will be deleted, with all their images, messages, comments, and so on.{% endblocktrans %}
         </p>
 
-        <form method="post" action=".">
+        <form method="post" action="">
             {% csrf_token %}
             <input type="submit" value="Confirm ban" class="btn btn-primary" />
         </form>

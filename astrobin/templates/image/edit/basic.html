@@ -24,7 +24,7 @@
              alt="{% trans "Loading..." %}" />
     </div>
 
-    <form class="form-horizontal hidden" id="basic" action="." method="post">{% csrf_token %}
+    <form class="form-horizontal hidden" id="basic" action="" method="post">{% csrf_token %}
         {{form|as_bootstrap}}
         <input type="hidden" name="image_id" value="{{image.id}}" />
 
