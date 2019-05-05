@@ -205,11 +205,11 @@
 
         <li class="pull-right">
             {% ifequal request.GET.view 'table' %}
-                <a href="{% query_string "" "view" %}">
+                <a href="{{ request.path }}{% query_string "" "view" %}">
                     <i class="icon-th"></i>
                 </a>
             {% else %}
-                <a href="{% query_string "view=table" "" %}">
+                <a href="{{ request.path }}{% query_string "view=table" "" %}">
                     <i class="icon-list"></i>
                 </a>
             {% endifequal %}
