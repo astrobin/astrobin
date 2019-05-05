@@ -97,7 +97,9 @@
         function selectGearItem($select, text) {
             $select.multiselect('select', text);
         };
-        $('.copy-gear-form .btn').click(function() {
+        $('.copy-gear-form .btn').click(function(e) {
+            e.preventDefault();
+
             var $modal = $(this).closest('.modal');
 
             $.ajax({
