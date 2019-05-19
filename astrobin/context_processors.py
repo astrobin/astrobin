@@ -1,7 +1,9 @@
 from django.conf import settings
+from django.contrib.gis.geoip2 import GeoIP2
 
 from astrobin.fields import COUNTRIES
 from astrobin.models import Image
+from astrobin.utils import get_client_ip
 
 from astrobin_apps_notifications.utils import get_unseen_notifications
 
@@ -62,12 +64,20 @@ def common_variables(request):
         bounced = Bounce.objects.filter(
             address = request.user.email, bounce_type="Permanent").exists()
 
+    REQUEST_COUNTRY = "UNKNOWN"
+    try:
+        REQUEST_COUNTRY = GeoIP2().country(get_client_ip(request)).country_code
+    except:
+        # Probably the address was not in the database.
+        pass
+
     d = {
         'True': True,
         'False': False,
 
         'LANGUAGE_CODE': request.LANGUAGE_CODE if hasattr(request, "LANGUAGE_CODE") else "en",
         'DEBUG_MODE': settings.DEBUG,
+        'REQUEST_COUNTRY': REQUEST_COUNTRY,
 
         #'random_gear_item': Gear.objects.filter(moderator_fixed = None).order_by('?')[:1].get(),
         'is_producer': request.user.groups.filter(name='Producers'),
