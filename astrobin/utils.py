@@ -4,6 +4,7 @@ import sys
 
 # Django
 from django.conf import settings
+from django.contrib.gis.geoip2 import GeoIP2
 
 # Third party
 import pytz
@@ -88,6 +89,15 @@ def get_client_ip(request):
     else:
         ip = request.META.get('REMOTE_ADDR')
     return ip
+
+
+def get_client_country_code(request):
+    geoip2 = GeoIP2()
+
+    try:
+        return geoip2.country(get_client_ip(request))
+    except:
+        return "UNKNOWN"
 
 
 #################################
