@@ -1,0 +1,58 @@
+{% if REQUEST_COUNTRY == "it" %}
+<div class="subtle-container" id="emout-feed">
+    <div class="header">
+        <h4>
+            <i class="icon-bullhorn"></i>
+            Ultimi annunci su Emout {{ REQUEST_COUNTRY }}
+        </h4>
+    </div>
+
+    <script language="JavaScript"
+            src="http://feed2js.org//feed2js.php?src=https%3A%2F%2Fwww.emout.org%2Ffeed&num=15&targ=y&utf=y&css=emout&html=a"
+            charset="UTF-8" type="text/javascript"></script>
+
+    <script type="application/javascript">
+        $(document).ready(function () {
+            $("#emout-feed").show();
+        });
+    </script>
+
+    <style>
+        .rss-box-emout ul.rss-items {
+            margin-left: 9px;
+            max-height: 700px;
+            overflow-y: scroll;
+        }
+
+        .rss-box-emout li.rss-item {
+            margin-bottom: 18px;
+            overflow: hidden;
+            max-height: 180px;
+            border-top: 1px solid #444;
+            padding-top: 12px;
+            color: #bbbbbb;
+        }
+
+        .rss-box-emout li.rss-item:first-child {
+            border-top: 0;
+            padding-top: 0;
+        }
+
+        .rss-box-emout li.rss-item br {
+            display: none;
+        }
+
+        .rss-box-emout a.rss-item {
+            font-size: 14px;
+            display: block;
+            margin-bottom: 8px;
+            text-decoration: underline;
+        }
+
+        .rss-box-emout img {
+            padding: 4px 10px 0 0;
+            width: 100px;
+        }
+    </style>
+</div>
+{% endif %}
