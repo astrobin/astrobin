@@ -92,6 +92,10 @@ def get_client_ip(request):
 
 
 def get_client_country_code(request):
+    DEBUG_COUNTRY = request.GET.get('DEBUG_COUNTRY', None)
+    if DEBUG_COUNTRY is not None:
+        return DEBUG_COUNTRY
+
     geoip2 = GeoIP2()
 
     try:
