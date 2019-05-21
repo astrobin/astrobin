@@ -1589,6 +1589,15 @@ class DeepSky_Acquisition(Acquisition):
         null=True, blank=True,
         help_text=_("Duration of each sub-frame, in seconds."))
 
+    focal_ratio = models.DecimalField(
+        _("Focal ratio"),
+        null=True, 
+        blank=True,
+        max_digits=3, 
+        decimal_places=1,
+        help_text=_("The Focal ratio of the optical system (in f-stops). Eg: 4.5"))
+
+
     iso = models.IntegerField(
         _("ISO"),
         null=True, blank=True)
@@ -1686,6 +1695,15 @@ class SolarSystem_Acquisition(Acquisition):
         null = True,
         blank = True,
     )
+
+    focal_ratio = models.DecimalField(
+        verbose_name = _("Focal ratio"),
+        null=True, 
+        blank=True,
+        max_digits=3, 
+        decimal_places=1,
+        help_text=_("The Focal ratio of the optical system (in f-stops). Eg: 4.5"))
+
 
     cmi = models.DecimalField(
         verbose_name = _("CMI"),
