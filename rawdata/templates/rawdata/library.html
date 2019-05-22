@@ -55,13 +55,13 @@
 
     {% if total_files %}
         <div class="rawdata-browser-breadcrumb">
-            <a class="btn btn-mini btn-primary" href="{% query_string '' 'f,type,upload,acquisition,camera,telescope,filter,subject,temperature' %}">
+            <a class="btn btn-mini btn-primary" href="{{ request.path }}{% query_string '' 'f,type,upload,acquisition,camera,telescope,filter,subject,temperature' %}">
                 {% trans "All files" %}
             </a>
 
             {% if filter_type %}
                 <span class="divider">/</span>
-                <a class="btn btn-mini btn-primary" href="{% query_string '' 'type' %}">
+                <a class="btn btn-mini btn-primary" href="{{ request.path }}{% query_string '' 'type' %}">
                     {% trans "Type" %}: <strong>{{filter_type|humanize_rawimage_type}}</strong>
                     <i class="icon-remove"></i>
                 </a>
@@ -69,7 +69,7 @@
 
             {% if filter_upload %}
                 <span class="divider">/</span>
-                <a class="btn btn-mini btn-primary" href="{% query_string '' 'upload' %}">
+                <a class="btn btn-mini btn-primary" href="{{ request.path }}{% query_string '' 'upload' %}">
                     {% trans "Uploaded" %}: <strong>{{filter_upload}}</strong>
                     <i class="icon-remove"></i>
                 </a>
@@ -77,7 +77,7 @@
 
             {% if filter_acquisition %}
                 <span class="divider">/</span>
-                <a class="btn btn-mini btn-primary" href="{% query_string '' 'acquisition' %}">
+                <a class="btn btn-mini btn-primary" href="{{ request.path }}{% query_string '' 'acquisition' %}">
                     {% trans "Acquisition date" %}: <strong>{{filter_acquisition}}</strong>
                     <i class="icon-remove"></i>
                 </a>
@@ -85,7 +85,7 @@
 
             {% if filter_camera %}
                 <span class="divider">/</span>
-                <a class="btn btn-mini btn-primary" href="{% query_string '' 'camera' %}">
+                <a class="btn btn-mini btn-primary" href="{{ request.path }}{% query_string '' 'camera' %}">
                     {% trans "Camera" %}: <strong>{{filter_camera}}</strong>
                     <i class="icon-remove"></i>
                 </a>
@@ -93,7 +93,7 @@
 
             {% if filter_telescope %}
                 <span class="divider">/</span>
-                <a class="btn btn-mini btn-primary" href="{% query_string '' 'telescope' %}">
+                <a class="btn btn-mini btn-primary" href="{{ request.path }}{% query_string '' 'telescope' %}">
                     {% trans "Telescope or lens" %}: <strong>{{filter_telescope}}</strong>
                     <i class="icon-remove"></i>
                 </a>
@@ -101,7 +101,7 @@
 
             {% if filter_filter %}
                 <span class="divider">/</span>
-                <a class="btn btn-mini btn-primary" href="{% query_string '' 'filter' %}">
+                <a class="btn btn-mini btn-primary" href="{{ request.path }}{% query_string '' 'filter' %}">
                     {% trans "Filter" %}: <strong>{{filter_filter}}</strong>
                     <i class="icon-remove"></i>
                 </a>
@@ -109,7 +109,7 @@
 
             {% if filter_subject %}
                 <span class="divider">/</span>
-                <a class="btn btn-mini btn-primary" href="{% query_string '' 'subject' %}">
+                <a class="btn btn-mini btn-primary" href="{{ request.path }}{% query_string '' 'subject' %}">
                     {% trans "Subject" %}: <strong>{{filter_subject}}</strong>
                     <i class="icon-remove"></i>
                 </a>
@@ -117,7 +117,7 @@
 
             {% if filter_temperature %}
                 <span class="divider">/</span>
-                <a class="btn btn-mini btn-primary" href="{% query_string '' 'temperature' %}">
+                <a class="btn btn-mini btn-primary" href="{{ request.path }}{% query_string '' 'temperature' %}">
                     {% trans "Temperature" %}: <strong>{{filter_temperature}}</strong>
                     <i class="icon-remove"></i>
                 </a>
@@ -125,7 +125,7 @@
 
             {% if folders_header %}
                 <span class="divider">/</span>
-                <a class="btn btn-mini" href="{% query_string 'f=none' '' %}">
+                <a class="btn btn-mini" href="{{ request.path }}{% query_string 'f=none' '' %}">
                     {% trans "Smart folders" %}: <strong>{{folders_header}}</strong>
                     <i class="icon-remove"></i>
                 </a>

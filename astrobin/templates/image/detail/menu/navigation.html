@@ -13,7 +13,7 @@
             </li>
 
             <li>
-                <a{% if nav_ctx == 'user' %} class="active"{% endif %} href="{% query_string "nc='user'" "nce" %}">
+                <a{% if nav_ctx == 'user' %} class="active"{% endif %} href="{{ request.path }}{% query_string "nc='user'" "nce" %}">
                     <i class="icon-user"></i>
                     {% trans "User gallery" %}
                 </a>
@@ -21,7 +21,7 @@
 
             {% if image.collections and image.collections.count == 1 or nav_ctx == 'collection' %}
             <li>
-                <a{% if nav_ctx == 'collection' %} class="active"{% endif %} href="{% query_string "nc='collection',nce=nav_ctx_extra" "" %}">
+                <a{% if nav_ctx == 'collection' %} class="active"{% endif %} href="{{ request.path }}{% query_string "nc='collection',nce=nav_ctx_extra" "" %}">
                     <i class="icon-folder-open"></i>
                     {% trans "User collection" %}
                 </a>
@@ -30,7 +30,7 @@
 
             {% if image.part_of_group_set and image.part_of_group_set.count == 1 or nav_ctx == 'group' %}
             <li>
-                <a{% if nav_ctx == 'group' %} class="active"{% endif %} href="{% query_string "nc='group',nce=nav_ctx_extra" "" %}">
+                <a{% if nav_ctx == 'group' %} class="active"{% endif %} href="{{ request.path }}{% query_string "nc='group',nce=nav_ctx_extra" "" %}">
                     <i class="icon-group"></i>
                     {% trans "Public group" %}
                 </a>
@@ -39,7 +39,7 @@
 
             {% if image|is_iotd and not image.user.userprofile.exclude_from_competitions %}
             <li>
-                <a{% if nav_ctx == 'iotd' %} class="active"{% endif %} href="{% query_string "nc='iotd'" "nce" %}">
+                <a{% if nav_ctx == 'iotd' %} class="active"{% endif %} href="{{ request.path }}{% query_string "nc='iotd'" "nce" %}">
                     <i class="icon-trophy"></i>
                     {% trans "Image of the day" %}
                 </a>
@@ -48,7 +48,7 @@
 
             {% if image|votes_count %}
             <li>
-                <a{% if nav_ctx == 'picks' %} class="active"{% endif %} href="{% query_string "nc='picks'" "nce" %}">
+                <a{% if nav_ctx == 'picks' %} class="active"{% endif %} href="{{ request.path }}{% query_string "nc='picks'" "nce" %}">
                     <i class="icon-star"></i>
                     {% trans "Top picks" %}
                 </a>
@@ -56,7 +56,7 @@
             {% endif %}
 
             <li>
-                <a{% if nav_ctx == 'all' %} class="active"{% endif %} href="{% query_string "nc='all'" "nce" %}">
+                <a{% if nav_ctx == 'all' %} class="active"{% endif %} href="{{ request.path }}{% query_string "nc='all'" "nce" %}">
                     <i class="icon-time"></i>
                     {% trans "All image uploads" %}
                 </a>
