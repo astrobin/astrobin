@@ -8,56 +8,56 @@
     </button>
     <ul class="dropdown-menu">
         <li>
-            <a href="{% query_string 'f=type' '' %}">
+            <a href="{{ request.path }}{% query_string 'f=type' '' %}">
                 {% if request.GET.f == 'type' %}<i class="icon-ok"></i>{% endif %}
                 {% trans "Type" %}
             </a>
         </li>
 
         <li>
-            <a href="{% query_string 'f=acquisition' '' %}">
+            <a href="{{ request.path }}{% query_string 'f=acquisition' '' %}">
                 {% if request.GET.f == 'acquisition' %}<i class="icon-ok"></i>{% endif %}
                 {% trans "Acquisition date" %}
             </a>
         </li>
 
         <li>
-            <a href="{% query_string 'f=upload' '' %}">
+            <a href="{{ request.path }}{% query_string 'f=upload' '' %}">
                 {% if request.GET.f == 'upload' or request.GET.f == None %}<i class="icon-ok"></i>{% endif %}
                 {% trans "Upload date" %}
             </a>
         </li>
 
         <li>
-            <a href="{% query_string 'f=camera' '' %}">
+            <a href="{{ request.path }}{% query_string 'f=camera' '' %}">
                 {% if request.GET.f == 'camera' %}<i class="icon-ok"></i>{% endif %}
                 {% trans "Camera" %}
             </a>
         </li>
 
         <li>
-            <a href="{% query_string 'f=telescope' '' %}">
+            <a href="{{ request.path }}{% query_string 'f=telescope' '' %}">
                 {% if request.GET.f == 'telescope' %}<i class="icon-ok"></i>{% endif %}
                 {% trans "Telescope or lens" %}
             </a>
         </li>
 
         <li>
-            <a href="{% query_string 'f=filter' '' %}">
+            <a href="{{ request.path }}{% query_string 'f=filter' '' %}">
                 {% if request.GET.f == 'filter' %}<i class="icon-ok"></i>{% endif %}
                 {% trans "Filter" %}
             </a>
         </li>
 
         <li>
-            <a href="{% query_string 'f=subject' '' %}">
+            <a href="{{ request.path }}{% query_string 'f=subject' '' %}">
                 {% if request.GET.f == 'subject' %}<i class="icon-ok"></i>{% endif %}
                 {% trans "Subject" %}
             </a>
         </li>
 
         <li>
-            <a href="{% query_string 'f=temperature' '' %}">
+            <a href="{{ request.path }}{% query_string 'f=temperature' '' %}">
                 {% if request.GET.f == 'temperature' %}<i class="icon-ok"></i>{% endif %}
                 {% trans "Temperature" %}
             </a>
