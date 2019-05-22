@@ -30,37 +30,37 @@
                 </a>
                 <ul class="dropdown-menu">
                     <li>
-                        <a href="{% query_string "source='backyard'" "" %}">
+                        <a href="{{ request.path }}{% query_string "source='backyard'" "" %}">
                             <span class="bg-icon{% if source == 'backyard' %} icon-ok{% endif %}"></span>
                             {% trans "Backyard" %}
                         </a>
                     </li>
                     <li>
-                        <a href="{% query_string "source='traveller'" "" %}">
+                        <a href="{{ request.path }}{% query_string "source='traveller'" "" %}">
                             <span class="bg-icon{% if source == 'traveller' %} icon-ok{% endif %}"></span>
                             {% trans "Traveller" %}
                         </a>
                     </li>
                     <li>
-                        <a href="{% query_string "source='own-remote'" "" %}">
+                        <a href="{{ request.path }}{% query_string "source='own-remote'" "" %}">
                             <span class="bg-icon{% if source == 'own-remote' %} icon-ok{% endif %}"></span>
                             {% trans "Own remote observatory" %}
                         </a>
                     </li>
                     <li>
-                        <a href="{% query_string "source='amateur-hosting'" "" %}">
+                        <a href="{{ request.path }}{% query_string "source='amateur-hosting'" "" %}">
                             <span class="bg-icon{% if source == 'amateur-hosting' %} icon-ok{% endif %}"></span>
                             {% trans "Amateur hosting facility" %}
                         </a>
                     </li>
                     <li>
-                        <a href="{% query_string "source='public-amateur-data'" "" %}">
+                        <a href="{{ request.path }}{% query_string "source='public-amateur-data'" "" %}">
                             <span class="bg-icon{% if source == 'public-amateur-data' %} icon-ok{% endif %}"></span>
                             {% trans "Public amateur data" %}
                         </a>
                     </li>
                     <li>
-                        <a href="{% query_string "source='pro-data'" "" %}">
+                        <a href="{{ request.path }}{% query_string "source='pro-data'" "" %}">
                             <span class="bg-icon{% if source == 'pro-data' %} icon-ok{% endif %}"></span>
                             {% trans "Professional, scientific grade data" %}
                         </a>
@@ -69,7 +69,7 @@
                     <li class="divider"></li>
 
                     <li class="bg-icon">
-                        <a href="{% query_string "" "source" %}">{% trans "All" %}</a>
+                        <a href="{{ request.path }}{% query_string "" "source" %}">{% trans "All" %}</a>
                     </li>
                 </ul>
             </li>

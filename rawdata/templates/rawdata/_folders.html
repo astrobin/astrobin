@@ -22,35 +22,35 @@
                 <td class="rawdata-browser-icon"><i class="icon-folder-close"></i></td>
                 <td class="rawdata-browser-file">
                     {% ifequal folder.folder_type 'type' %}
-                    <a href="{% query_string 'type=folder.type, f=none' '' %}">
+                    <a href="{{ request.path }}{% query_string 'type=folder.type, f=none' '' %}">
                     {% endifequal %}
 
                     {% ifequal folder.folder_type 'upload' %}
-                    <a href="{% query_string 'upload=folder.date, f=none' '' %}">
+                    <a href="{{ request.path }}{% query_string 'upload=folder.date, f=none' '' %}">
                     {% endifequal %}
 
                     {% ifequal folder.folder_type 'acquisition' %}
-                    <a href="{% query_string 'acquisition=folder.date, f=none' '' %}">
+                    <a href="{{ request.path }}{% query_string 'acquisition=folder.date, f=none' '' %}">
                     {% endifequal %}
 
                     {% ifequal folder.folder_type 'camera' %}
-                    <a href="{% query_string 'camera=folder.camera, f=none' '' %}">
+                    <a href="{{ request.path }}{% query_string 'camera=folder.camera, f=none' '' %}">
                     {% endifequal %}
 
                     {% ifequal folder.folder_type 'telescope' %}
-                    <a href="{% query_string 'telescope=folder.telescope, f=none' '' %}">
+                    <a href="{{ request.path }}{% query_string 'telescope=folder.telescope, f=none' '' %}">
                     {% endifequal %}
 
                     {% ifequal folder.folder_type 'filterName' %}
-                    <a href="{% query_string 'filter=folder.filterName, f=none' '' %}">
+                    <a href="{{ request.path }}{% query_string 'filter=folder.filterName, f=none' '' %}">
                     {% endifequal %}
 
                     {% ifequal folder.folder_type 'subjectName' %}
-                    <a href="{% query_string 'subject=folder.subjectName, f=none' '' %}">
+                    <a href="{{ request.path }}{% query_string 'subject=folder.subjectName, f=none' '' %}">
                     {% endifequal %}
 
                     {% ifequal folder.folder_type 'temperature' %}
-                    <a href="{% query_string 'temperature=folder.temperature, f=none' '' %}">
+                    <a href="{{ request.path }}{% query_string 'temperature=folder.temperature, f=none' '' %}">
                     {% endifequal %}
 
                         {{folder.label}}
