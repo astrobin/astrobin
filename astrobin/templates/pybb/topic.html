@@ -50,7 +50,7 @@
                             {% else %}
                                 <a href="{% url 'pybb:close_topic' topic.id %}">{% trans "Close topic" %}</a>
                             {% endif %}
-                        </li class="hidden-phone">
+                        </li>
 
                         {% if perms.pybb.change_topic and user.is_staff %}
                             <li class="hidden-phone">
@@ -77,7 +77,7 @@
                 </ul>
             </div>
         {% endif %}
-        {% endif %} {# READONLY #}
+    {% endif %} {# not  READONLY #}
 
     <div class="topic">
         <h1>{{ topic.name }}</h1>
