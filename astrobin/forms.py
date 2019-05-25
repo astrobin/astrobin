@@ -149,7 +149,7 @@ class ImageEditBasicForm(forms.ModelForm):
     class Meta:
         model = Image
         fields = (
-            'title', 'link', 'link_to_fits', 'data_source', 'remote_source', 'subject_type',
+            'title', 'link', 'link_to_fits', 'acquisition_type', 'data_source', 'remote_source', 'subject_type',
             'solar_system_main_subject', 'locations', 'groups', 'description',
             'allow_comments')
 
