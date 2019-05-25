@@ -47,6 +47,9 @@
                                 <country-filter v-if="filter.name === 'country'"
                                                     :country="country"></country-filter>
 
+                                <acquisition-type-filter v-if="filter.name === 'acquisition_type'"
+                                                    :acquisition-type="acquisitionType"></acquisition-type-filter>
+
                                 <data-source-filter v-if="filter.name === 'data_source'"
                                                     :data-source="dataSource"></data-source-filter>
 
@@ -149,6 +152,12 @@
             country:
                 {% if "country" in request.GET and request.GET.country %}
                     "{{ request.GET.country }}"
+                {% else %}
+                    undefined
+                {% endif %},
+            acquisitionType:
+                {% if "acquisition_type" in request.GET and request.GET.acquisition_type %}
+                    "{{ request.GET.acquisition_type }}"
                 {% else %}
                     undefined
                 {% endif %},
@@ -260,6 +269,11 @@
                     removable: true
                 },
                 {
+                    name: "acquisition_type",
+                    label: "{% trans "Acquisition type" %}",
+                    removable: true
+                },
+                {
                     name: "data_source",
                     label: "{% trans "Data source" %}",
                     removable: true
@@ -337,6 +351,10 @@
 
             if (this.country) {
                 this.enabledFilters.push(this.getFilterByName("country"));
+            }
+
+            if (this.acquisitionType) {
+                this.enabledFilters.push(this.getFilterByName("acquisition_type"));
             }
 
             if (this.dataSource) {
