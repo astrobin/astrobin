@@ -1,5 +1,6 @@
 # Django
 from django.contrib.auth.models import User, Group
+from django.core.urlresolvers import reverse
 from django.test import TestCase
 
 # Third party
@@ -20,6 +21,13 @@ class ForumTest(TestCase):
             username = "user", email = "user@example.com",
             password = "password")
 
+        self.moderator = User.objects.create_user(
+            username="moderator", email="moderator@example.com",
+            password="password")
+
+        self.content_moderators = Group.objects.create(name='content_moderators')
+        self.moderator.groups.add(self.content_moderators)
+
         self.category = Category.objects.create(name = "Test category")
         self.forum = Forum.objects.create(name = "Test forum", category = self.category)
 
@@ -30,6 +38,7 @@ class ForumTest(TestCase):
         self.forum.delete()
         self.category.delete()
         self.user.delete()
+        self.content_moderators.delete()
 
 
     def _get_post_form(self):
@@ -151,3 +160,25 @@ class ForumTest(TestCase):
         user2.delete()
         post.delete()
         group.delete()
+
+
+    def test_mark_as_spam(self):
+        topic1 = Topic.objects.create(forum=self.forum, name="Test topic 1", user=self.user)
+        topic2 = Topic.objects.create(forum=self.forum, name="Test topic 2", user=self.user)
+
+        self.client.login(username="moderator", password="password")
+
+        response = self.client.post(
+            reverse('forum_moderation_mark_as_spam'),
+            {
+                "topic-ids[]": [topic1.id, topic2.id]
+            },
+            follow=True)
+
+        self.client.logout()
+        self.client.login()
+
+        self.assertContains(response, "2 topics deleted");
+        self.assertEquals(0, Topic.objects.filter(id=topic1.id).count())
+        self.assertEquals(0, Topic.objects.filter(id=topic2.id).count())
+        self.assertEquals(0, User.objects.filter(id=self.user.id).count())
