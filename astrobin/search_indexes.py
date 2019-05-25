@@ -500,6 +500,8 @@ class ImageIndex(CelerySearchIndex, Indexable):
 
     subject_type = IntegerField(model_attr = 'subject_type')
 
+    acquisition_type = CharField(model_attr='acquisition_type')
+
     data_source = CharField(model_attr = 'data_source')
 
     remote_source = CharField(model_attr='remote_source', null=True)

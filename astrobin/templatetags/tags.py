@@ -379,3 +379,11 @@ def can_like(user, image):
         return False
 
     return True
+
+
+@register.filter
+def humanize_image_acquisition_type(type):
+    for choice in Image.ACQUISITION_TYPE_CHOICES:
+        if type == choice[0]:
+            return choice[1]
+    return ""

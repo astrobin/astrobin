@@ -826,6 +826,7 @@ class ImageTest(TestCase):
                 'title': "Test title",
                 'link': "http://www.example.com",
                 'link_to_fits': "http://www.example.com/fits",
+                'acquisition_type': 'EAA',
                 'data_source': 'OTHER',
                 'subject_type': 600,
                 'solar_system_main_subject': 0,
@@ -871,6 +872,7 @@ class ImageTest(TestCase):
         self.assertEqual(image.title, "Test title")
         self.assertEqual(image.link, "http://www.example.com")
         self.assertEqual(image.link_to_fits, "http://www.example.com/fits")
+        self.assertEqual(image.acquisition_type, 'EAA');
         self.assertEqual(image.subject_type, 600)
         self.assertEqual(image.solar_system_main_subject, 0)
         self.assertEqual(image.locations.count(), 1)
@@ -893,6 +895,10 @@ class ImageTest(TestCase):
         self.assertContains(response, "group1")
         self.assertContains(response, "group2")
         self.assertNotContains(response, "group3")
+
+        response = self.client.get(image.get_absolute_url())
+        self.assertContains(response, "Acquisition type")
+        self.assertContains(response, "Electronically-Assisted Astronomy (EAA)")
 
         data = post_data(image)
 

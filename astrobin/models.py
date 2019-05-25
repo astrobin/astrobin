@@ -674,6 +674,22 @@ class Image(HasSolutionMixin, SafeDeleteModel):
         (4, '4x4'),
     )
 
+    ACQUISITION_TYPES = (
+        'TRADITIONAL',
+        'EAA',
+        'LUCKY',
+        'DRAWING',
+        'OTHER',
+    )
+
+    ACQUISITION_TYPE_CHOICES = (
+       ('TRADITIONAL', _("Traditional")),
+       ('EAA', _("Electronically-Assisted Astronomy (EAA)")),
+       ('LUCKY', _("Lucky imaging")),
+       ('DRAWING', _("Drawing/Sketch")),
+       ('OTHER', _("Other/Unknown")),
+    )
+
     SUBJECT_TYPE_CHOICES = (
         (0, "---------"),
         (100, _("Deep sky object")),
@@ -763,6 +779,14 @@ class Image(HasSolutionMixin, SafeDeleteModel):
     title = models.CharField(
         max_length = 128,
         verbose_name = _("Title"),
+    )
+
+    acquisition_type = models.CharField(
+        verbose_name=_("Acquisition type"),
+        choices=ACQUISITION_TYPE_CHOICES,
+        max_length=32,
+        null=False,
+        default='TRADITIONAL'
     )
 
     subject_type = models.IntegerField(

@@ -25,6 +25,7 @@ FIELDS = (
     'award',
     'camera_type',
     'country',
+    'acquisition_type',
     'data_source',
     'field_radius_min',
     'field_radius_max',
@@ -53,6 +54,7 @@ class AstroBinSearchForm(SearchForm):
     award = forms.CharField(required=False)
     camera_type = forms.CharField(required=False)
     country = forms.CharField(required=False)
+    acquisition_type = forms.CharField(required=False)
     data_source = forms.CharField(required=False)
     field_radius_min = forms.IntegerField(required=False)
     field_radius_max = forms.IntegerField(required=False)
@@ -132,6 +134,14 @@ class AstroBinSearchForm(SearchForm):
 
         if country is not None and country != "":
             results = results.filter(countries=country)
+
+        return results
+
+    def filterByAcquisitionType(self, results):
+        acquisition_type = self.cleaned_data.get("acquisition_type")
+
+        if acquisition_type is not None and acquisition_type != "":
+            results = results.filter(acquisition_type=acquisition_type)
 
         return results
 
@@ -327,6 +337,7 @@ class AstroBinSearchForm(SearchForm):
         sqs = self.filterByAward(sqs)
         sqs = self.filterByCameraType(sqs)
         sqs = self.filterByCountry(sqs)
+        sqs = self.filterByAcquisitionType(sqs)
         sqs = self.filterByDataSource(sqs)
         sqs = self.filterByLicense(sqs)
         sqs = self.filterByFieldRadius(sqs)

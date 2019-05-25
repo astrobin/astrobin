@@ -73,6 +73,51 @@
                     </li>
                 </ul>
             </li>
+            <li class="dropdown">
+                <a class="dropdown-toggle" data-toggle="dropdown" href="#">
+                    <i class="icon-filter icon-white"></i>
+                    <span class="hidden-phone">{% trans "Acquisition type" %}</span>
+                    <b class="caret"></b>
+                </a>
+                <ul class="dropdown-menu">
+                    <li>
+                        <a href="{{ request.path }}{% query_string "acquisition_type='traditional'" "" %}">
+                            <span class="bg-icon{% if acquisition_type == 'traditional' %} icon-ok{% endif %}"></span>
+                            {% trans "Traditional" %}
+                        </a>
+                    </li>
+                    <li>
+                        <a href="{{ request.path }}{% query_string "acquisition_type='eaa'" "" %}">
+                            <span class="bg-icon{% if acquisition_type == 'eaa' %} icon-ok{% endif %}"></span>
+                            {% trans "Electronically-Assisted Astronomy (EAA)" %}
+                        </a>
+                    </li>
+                    <li>
+                        <a href="{{ request.path }}{% query_string "acquisition_type='lucky'" "" %}">
+                            <span class="bg-icon{% if acquisition_type == 'lucky' %} icon-ok{% endif %}"></span>
+                            {% trans "Lucky imaging" %}
+                        </a>
+                    </li>
+                    <li>
+                        <a href="{{ request.path }}{% query_string "acquisition_type='drawing'" "" %}">
+                            <span class="bg-icon{% if acquisition_type == 'drawing' %} icon-ok{% endif %}"></span>
+                            {% trans "Drawing/Sketch" %}
+                        </a>
+                    </li>
+                    <li>
+                        <a href="{{ request.path }}{% query_string "acquisition_type='other'" "" %}">
+                            <span class="bg-icon{% if acquisition_type == 'other' %} icon-ok{% endif %}"></span>
+                            {% trans "Other/Unknown" %}
+                        </a>
+                    </li>
+
+                    <li class="divider"></li>
+
+                    <li class="bg-icon">
+                        <a href="{{ request.path }}{% query_string "" "acquisition_type" %}">{% trans "All" %}</a>
+                    </li>
+                </ul>
+            </li>
         </ul> <!-- nav -->
     </div> <!-- subnav -->
 
