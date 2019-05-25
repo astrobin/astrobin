@@ -9,7 +9,6 @@ from django.views.decorators.cache import cache_page
 # Third party
 from django.views.i18n import json_catalog
 from tastypie.api import Api
-from threaded_messages.forms import ComposeForm as MessagesComposeForm
 from threaded_messages.views import batch_update as messages_batch_update
 from threaded_messages.views import compose as messages_compose
 from threaded_messages.views import delete as messages_delete
@@ -440,6 +439,9 @@ urlpatterns = [
     url(r'^moderate/images/ban-all/$',
             moderation_views.ImageModerationBanAllView.as_view(),
             name='image_moderation_ban_all'),
+    url(r'^moderate/forums/mark-as-spam/$',
+        moderation_views.ForumModerationMarkAsSpamView.as_view(),
+        name='forum_moderation_mark_as_spam'),
 
     ###########################################################################
     ### PAGES VIEWS                                                         ###
