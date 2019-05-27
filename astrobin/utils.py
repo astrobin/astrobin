@@ -102,7 +102,7 @@ def get_client_country_code(request):
     geoip2 = GeoIP2()
 
     try:
-        return geoip2.country(get_client_ip(request))
+        return geoip2.country_code(get_client_ip(request))
     except:
         return "UNKNOWN"
 
