@@ -24,13 +24,13 @@ from models import *
 from utils import affiliate_limit, retailer_affiliate_limit
 
 
-
 def uniq(seq):
     # Not order preserving
     keys = {}
     for e in seq:
         keys[e] = 1
     return keys.keys()
+
 
 def uniq_id_tuple(seq):
     seen = set()
@@ -71,56 +71,62 @@ class ImageEditBasicForm(forms.ModelForm):
     error_css_class = 'error'
 
     link = forms.RegexField(
-        regex = '^(http|https)://',
-        required = False,
-        label = _("Link"),
-        help_text = _("If you're hosting a copy of this image on your website, put the address here."),
-        error_messages = {'invalid': "The address must start with http:// or https://."},
+        regex='^(http|https)://',
+        required=False,
+        label=_("Link"),
+        help_text=_("If you're hosting a copy of this image on your website, put the address here."),
+        error_messages={'invalid': "The address must start with http:// or https://."},
     )
 
     link_to_fits = forms.RegexField(
-        regex = '^(http|https)://',
-        required = False,
-        label = _("Link to TIFF/FITS"),
-        help_text = _("If you want to share the TIFF or FITS file of your image, put a link to the file here. Unfortunately, AstroBin cannot offer to store these files at the moment, so you will have to host them on your personal space."),
-        error_messages = {'invalid': "The address must start with http:// or https://."},
+        regex='^(http|https)://',
+        required=False,
+        label=_("Link to TIFF/FITS"),
+        help_text=_(
+            "If you want to share the TIFF or FITS file of your image, put a link to the file here. Unfortunately, AstroBin cannot offer to store these files at the moment, so you will have to host them on your personal space."),
+        error_messages={'invalid': "The address must start with http:// or https://."},
     )
 
     groups = forms.MultipleChoiceField(
-        required = False,
-        label = _("Groups"),
-        help_text = _("Submit this image to the selected groups."),
+        required=False,
+        label=_("Groups"),
+        help_text=_("Submit this image to the selected groups."),
     )
 
     def __init__(self, **kwargs):
         super(ImageEditBasicForm, self).__init__(**kwargs)
 
-        self.fields['locations'].queryset = Location.objects.filter(
-            user = self.instance.user.userprofile)
+        locations = Location.objects.filter(user=self.instance.user.userprofile)
+        if locations.count() > 0:
+            self.fields['locations'].queryset = locations
+        else:
+            self.fields.pop('locations')
 
-        self.fields['groups'].choices = [
-            (x.pk, x.name) for x in Group.objects.filter(
-                autosubmission = False,
-                members = self.instance.user)]
-        self.fields['groups'].initial = [
-            x.pk for x in self.instance.part_of_group_set.filter(
-                autosubmission = False,
-                members = self.instance.user)]
+        groups = Group.objects.filter(autosubmission=False, members=self.instance.user)
+        if groups.count() > 0:
+            self.fields['groups'].choices = [(x.pk, x.name) for x in groups]
+            self.fields['groups'].initial = [
+                x.pk for x in self.instance.part_of_group_set.filter(
+                    autosubmission=False,
+                    members=self.instance.user)]
+        else:
+            self.fields.pop('groups')
 
-    def save(self, commit = True):
+    def save(self, commit=True):
         instance = super(ImageEditBasicForm, self).save(commit=False)
 
-        existing_groups = instance.part_of_group_set.filter(autosubmission = False)
-        new_groups_pks = self.cleaned_data['groups']
-        new_groups = [Group.objects.get(pk = int(x)) for x in new_groups_pks]
+        if 'groups' in self.cleaned_data:
+            existing_groups = instance.part_of_group_set.filter(autosubmission=False)
+            new_groups_pks = self.cleaned_data['groups']
+            new_groups = [Group.objects.get(pk=int(x)) for x in new_groups_pks]
 
-        for group in existing_groups:
-            if group.pk not in [int(x) for x in new_groups_pks]:
-                group.images.remove(self.instance)
+            for group in existing_groups:
+                if group.pk not in [int(x) for x in new_groups_pks]:
+                    group.images.remove(self.instance)
 
-        for group in new_groups:
-            if group not in existing_groups:
-                group.images.add(self.instance)
+            for group in new_groups:
+                if group not in existing_groups:
+                    group.images.add(self.instance)
 
         return super(ImageEditBasicForm, self).save(commit)
 
@@ -158,10 +164,11 @@ class ImageEditWatermarkForm(forms.ModelForm):
     error_css_class = 'error'
 
     watermark_opacity = forms.IntegerField(
-        label = _("Opacity"),
-        help_text = _("0 means invisible; 100 means completely opaque. Recommended values are: 10 if the watermark will appear on the dark sky background, 50 if on some bright object."),
-        min_value = 0,
-        max_value = 100,
+        label=_("Opacity"),
+        help_text=_(
+            "0 means invisible; 100 means completely opaque. Recommended values are: 10 if the watermark will appear on the dark sky background, 50 if on some bright object."),
+        min_value=0,
+        max_value=100,
     )
 
     def __init__(self, user=None, **kwargs):
@@ -196,7 +203,7 @@ class ImageEditGearForm(forms.ModelForm):
                      'software',
                      'filters',
                      'accessories',
-                    ):
+                     ):
             self.fields[attr].queryset = getattr(profile, attr).all()
 
         self.fields['imaging_telescopes'].label = _("Imaging telescopes or lenses")
@@ -220,7 +227,7 @@ class ImageEditGearForm(forms.ModelForm):
                   'software',
                   'filters',
                   'accessories',
-                 )
+                  )
 
 
 class ImageEditRevisionForm(forms.ModelForm):
@@ -228,7 +235,7 @@ class ImageEditRevisionForm(forms.ModelForm):
         model = ImageRevision
         fields = ('description',)
         widgets = {
-            'description': forms.Textarea(attrs={'rows':4}),
+            'description': forms.Textarea(attrs={'rows': 4}),
         }
 
 
@@ -236,10 +243,10 @@ class UserProfileEditBasicForm(forms.ModelForm):
     error_css_class = 'error'
 
     website = forms.RegexField(
-        regex = '^(http|https)://',
-        required = False,
-        help_text = _("If you have a personal website, put the address here."),
-        error_messages = {'invalid': "The address must start with http:// or https://."},
+        regex='^(http|https)://',
+        required=False,
+        help_text=_("If you have a personal website, put the address here."),
+        error_messages={'invalid': "The address must start with http:// or https://."},
     )
 
     class Meta:
@@ -294,7 +301,8 @@ class UserProfileEditGearForm(forms.Form):
 
     filters = forms.CharField(
         max_length=256,
-        help_text=_("Hint: enter your filters separately! If you enter, for instance, LRGB in one box, you won't be able to add separate acquisition sessions for them."),
+        help_text=_(
+            "Hint: enter your filters separately! If you enter, for instance, LRGB in one box, you won't be able to add separate acquisition sessions for them."),
         required=False)
 
     accessories = forms.CharField(
@@ -345,7 +353,7 @@ class ImageRevisionUploadForm(forms.ModelForm):
         model = ImageRevision
         fields = ('image_file', 'description',)
         widgets = {
-            'description': forms.Textarea(attrs={'rows':4}),
+            'description': forms.Textarea(attrs={'rows': 4}),
         }
 
 
@@ -353,44 +361,44 @@ class LocationEditForm(forms.ModelForm):
     error_css_class = 'error'
 
     lat_deg = forms.IntegerField(
-        label = _("Latitude (degrees)"),
-        help_text = "(0-90)",
-        max_value = 90,
-        min_value = 0)
+        label=_("Latitude (degrees)"),
+        help_text="(0-90)",
+        max_value=90,
+        min_value=0)
     lat_min = forms.IntegerField(
-        label = _("Latitude (minutes)"),
-        help_text = "(0-60)",
-        max_value = 60,
-        min_value = 0,
-        required = False)
+        label=_("Latitude (minutes)"),
+        help_text="(0-60)",
+        max_value=60,
+        min_value=0,
+        required=False)
     lat_sec = forms.IntegerField(
-        label = _("Latitude (seconds)"),
-        help_text = "(0-60)",
-        max_value = 60,
-        min_value = 0,
-        required = False)
+        label=_("Latitude (seconds)"),
+        help_text="(0-60)",
+        max_value=60,
+        min_value=0,
+        required=False)
 
     lon_deg = forms.IntegerField(
-        label = _("Longitude (degrees)"),
-        help_text = "(0-180)",
-        max_value = 180,
-        min_value = 0)
+        label=_("Longitude (degrees)"),
+        help_text="(0-180)",
+        max_value=180,
+        min_value=0)
     lon_min = forms.IntegerField(
-        label = _("Longitude (minutes)"),
-        help_text = "(0-60)",
-        max_value = 60,
-        min_value = 0,
-        required = False)
+        label=_("Longitude (minutes)"),
+        help_text="(0-60)",
+        max_value=60,
+        min_value=0,
+        required=False)
     lon_sec = forms.IntegerField(
-        label = _("Longitude (seconds)"),
-        help_text = "(0-60)",
-        max_value = 60,
-        min_value = 0,
-        required = False)
+        label=_("Longitude (seconds)"),
+        help_text="(0-60)",
+        max_value=60,
+        min_value=0,
+        required=False)
 
     def __init__(self, **kwargs):
         super(LocationEditForm, self).__init__(**kwargs)
-        self.fields['country'].choices = sorted(COUNTRIES, key = lambda c: c[1])
+        self.fields['country'].choices = sorted(COUNTRIES, key=lambda c: c[1])
 
     class Meta:
         model = Location
@@ -402,10 +410,10 @@ class SolarSystem_AcquisitionForm(forms.ModelForm):
 
     date = forms.DateField(
         required=False,
-        input_formats = ['%Y-%m-%d'],
-        widget=forms.TextInput(attrs={'class':'datepickerclass'}),
+        input_formats=['%Y-%m-%d'],
+        widget=forms.TextInput(attrs={'class': 'datepickerclass'}),
         help_text=_("Please use the following format: yyyy-mm-dd"),
-        label = _("Date"),
+        label=_("Date"),
     )
 
     def clean_seeing(self):
@@ -447,10 +455,10 @@ class DeepSky_AcquisitionForm(forms.ModelForm):
 
     date = forms.DateField(
         required=False,
-        input_formats = ['%Y-%m-%d'],
-        widget=forms.TextInput(attrs={'class':'datepickerclass'}),
+        input_formats=['%Y-%m-%d'],
+        widget=forms.TextInput(attrs={'class': 'datepickerclass'}),
         help_text=_("Please use the following format: yyyy-mm-dd"),
-        label = _("Date"),
+        label=_("Date"),
     )
 
     class Meta:
@@ -489,10 +497,10 @@ class DeepSky_AcquisitionBasicForm(forms.ModelForm):
 
     date = forms.DateField(
         required=False,
-        input_formats = ['%Y-%m-%d'],
-        widget=forms.TextInput(attrs={'class':'datepickerclass'}),
+        input_formats=['%Y-%m-%d'],
+        widget=forms.TextInput(attrs={'class': 'datepickerclass'}),
         help_text=_("Please use the following format: yyyy-mm-dd"),
-        label = _("Date"),
+        label=_("Date"),
     )
 
     def clean_date(self):
@@ -527,6 +535,7 @@ class TelescopeEditForm(forms.ModelForm):
     class Meta:
         model = Telescope
         exclude = ('make', 'name', 'retailed')
+
 
 class MountEditForm(forms.ModelForm):
     error_css_class = 'error'
@@ -583,8 +592,8 @@ class TelescopeEditNewForm(forms.ModelForm):
         model = Telescope
         fields = ('make', 'name')
         widgets = {
-            'make': forms.TextInput(attrs = {'autocomplete': 'off'}),
-            'name': forms.TextInput(attrs = {'autocomplete': 'off'}),
+            'make': forms.TextInput(attrs={'autocomplete': 'off'}),
+            'name': forms.TextInput(attrs={'autocomplete': 'off'}),
         }
 
 
@@ -595,10 +604,9 @@ class MountEditNewForm(forms.ModelForm):
         model = Mount
         fields = ('make', 'name')
         widgets = {
-            'make': forms.TextInput(attrs = {'autocomplete': 'off'}),
-            'name': forms.TextInput(attrs = {'autocomplete': 'off'}),
+            'make': forms.TextInput(attrs={'autocomplete': 'off'}),
+            'name': forms.TextInput(attrs={'autocomplete': 'off'}),
         }
-
 
 
 class CameraEditNewForm(forms.ModelForm):
@@ -608,10 +616,9 @@ class CameraEditNewForm(forms.ModelForm):
         model = Camera
         fields = ('make', 'name')
         widgets = {
-            'make': forms.TextInput(attrs = {'autocomplete': 'off'}),
-            'name': forms.TextInput(attrs = {'autocomplete': 'off'}),
+            'make': forms.TextInput(attrs={'autocomplete': 'off'}),
+            'name': forms.TextInput(attrs={'autocomplete': 'off'}),
         }
-
 
 
 class FocalReducerEditNewForm(forms.ModelForm):
@@ -621,10 +628,9 @@ class FocalReducerEditNewForm(forms.ModelForm):
         model = FocalReducer
         fields = ('make', 'name')
         widgets = {
-            'make': forms.TextInput(attrs = {'autocomplete': 'off'}),
-            'name': forms.TextInput(attrs = {'autocomplete': 'off'}),
+            'make': forms.TextInput(attrs={'autocomplete': 'off'}),
+            'name': forms.TextInput(attrs={'autocomplete': 'off'}),
         }
-
 
 
 class SoftwareEditNewForm(forms.ModelForm):
@@ -634,10 +640,9 @@ class SoftwareEditNewForm(forms.ModelForm):
         model = Software
         fields = ('make', 'name')
         widgets = {
-            'make': forms.TextInput(attrs = {'autocomplete': 'off'}),
-            'name': forms.TextInput(attrs = {'autocomplete': 'off'}),
+            'make': forms.TextInput(attrs={'autocomplete': 'off'}),
+            'name': forms.TextInput(attrs={'autocomplete': 'off'}),
         }
-
 
 
 class FilterEditNewForm(forms.ModelForm):
@@ -647,10 +652,9 @@ class FilterEditNewForm(forms.ModelForm):
         model = Filter
         fields = ('make', 'name')
         widgets = {
-            'make': forms.TextInput(attrs = {'autocomplete': 'off'}),
-            'name': forms.TextInput(attrs = {'autocomplete': 'off'}),
+            'make': forms.TextInput(attrs={'autocomplete': 'off'}),
+            'name': forms.TextInput(attrs={'autocomplete': 'off'}),
         }
-
 
 
 class AccessoryEditNewForm(forms.ModelForm):
@@ -660,20 +664,19 @@ class AccessoryEditNewForm(forms.ModelForm):
         model = Accessory
         fields = ('make', 'name')
         widgets = {
-            'make': forms.TextInput(attrs = {'autocomplete': 'off'}),
-            'name': forms.TextInput(attrs = {'autocomplete': 'off'}),
+            'make': forms.TextInput(attrs={'autocomplete': 'off'}),
+            'name': forms.TextInput(attrs={'autocomplete': 'off'}),
         }
-
 
 
 class CopyGearForm(forms.Form):
     image = forms.ModelChoiceField(
-        queryset = None,
+        queryset=None,
     )
 
     def __init__(self, user, **kwargs):
         super(CopyGearForm, self).__init__(**kwargs)
-        self.fields['image'].queryset = Image.objects_including_wip.filter(user = user)
+        self.fields['image'].queryset = Image.objects_including_wip.filter(user=user)
 
 
 class AppApiKeyRequestForm(forms.ModelForm):
@@ -701,12 +704,12 @@ class ModeratorGearFixForm(forms.ModelForm):
 
     def __init__(self, **kwargs):
         super(ModeratorGearFixForm, self).__init__(**kwargs)
-        self.widgets['make'] = forms.TextInput(attrs = {
+        self.widgets['make'] = forms.TextInput(attrs={
             'data-provide': 'typeahead',
             'data-source': simplejson.dumps(
-                uniq([x.make for x in Gear.objects.exclude(make = None).exclude(make = '')])),
+                uniq([x.make for x in Gear.objects.exclude(make=None).exclude(make='')])),
             'autocomplete': 'off',
-            })
+        })
 
     def clean_make(self):
         return self.cleaned_data['make'].strip()
@@ -714,12 +717,12 @@ class ModeratorGearFixForm(forms.ModelForm):
     def clean_name(self):
         return self.cleaned_data['name'].strip()
 
-    def save(self, force_insert = False, force_update = False, commit = True):
+    def save(self, force_insert=False, force_update=False, commit=True):
         instance = getattr(self, 'instance', None)
-        old_make = Gear.objects.get(id = instance.id).make
-        old_name = Gear.objects.get(id = instance.id).name
+        old_make = Gear.objects.get(id=instance.id).make
+        old_name = Gear.objects.get(id=instance.id).name
 
-        m = super(ModeratorGearFixForm, self).save(commit = False)
+        m = super(ModeratorGearFixForm, self).save(commit=False)
 
         # Update the time
         m.moderator_fixed = datetime.datetime.now()
@@ -734,34 +737,39 @@ class ClaimCommercialGearForm(forms.Form):
     error_css_class = 'error'
 
     make = forms.ChoiceField(
-        label = _("Make"),
-        help_text = _("The make, brand, producer or developer of this product."),
-        required = True)
+        label=_("Make"),
+        help_text=_("The make, brand, producer or developer of this product."),
+        required=True)
 
     name = forms.ChoiceField(
-        choices = [('', '---------')],
-        label = _("Name"),
-        required = True)
+        choices=[('', '---------')],
+        label=_("Name"),
+        required=True)
 
     merge_with = forms.ChoiceField(
-        choices = [('', '---------')],
-        label = _("Merge"),
-        help_text = _("Use this field to mark that the item you are claiming really is the same product (or a variation thereof) of something you have claimed before."),
-        required = False)
+        choices=[('', '---------')],
+        label=_("Merge"),
+        help_text=_(
+            "Use this field to mark that the item you are claiming really is the same product (or a variation thereof) of something you have claimed before."),
+        required=False)
 
     def __init__(self, user, **kwargs):
         super(ClaimCommercialGearForm, self).__init__(**kwargs)
         self.user = user
-        self.fields['make'].choices = [('', '---------')] + sorted(uniq(Gear.objects.exclude(make = None).exclude(make = '').values_list('make', 'make')), key = lambda x: x[0].lower())
-        self.fields['merge_with'].choices = [('', '---------')] + uniq(CommercialGear.objects.filter(producer = user).values_list('id', 'proper_name'))
+        self.fields['make'].choices = [('', '---------')] + sorted(
+            uniq(Gear.objects.exclude(make=None).exclude(make='').values_list('make', 'make')),
+            key=lambda x: x[0].lower())
+        self.fields['merge_with'].choices = [('', '---------')] + uniq(
+            CommercialGear.objects.filter(producer=user).values_list('id', 'proper_name'))
 
-    def clean (self):
+    def clean(self):
         cleaned_data = super(ClaimCommercialGearForm, self).clean()
 
         max_items = affiliate_limit(self.user)
-        current_items = CommercialGear.objects.filter(producer = self.user).count()
+        current_items = CommercialGear.objects.filter(producer=self.user).count()
         if current_items >= max_items:
-            raise forms.ValidationError(_("You can't create more than %d claims. Consider upgrading your affiliation!" % max_items))
+            raise forms.ValidationError(
+                _("You can't create more than %d claims. Consider upgrading your affiliation!" % max_items))
 
         return self.cleaned_data
 
@@ -770,14 +778,16 @@ class MergeCommercialGearForm(forms.Form):
     error_css_class = 'error'
 
     merge_with = forms.ChoiceField(
-        choices = [('', '---------')],
-        label = _("Merge"),
-        help_text = _("Use this field to mark that the item you are merging really is the same product (or a variation thereof) of something you have claimed before."),
-        required = False)
+        choices=[('', '---------')],
+        label=_("Merge"),
+        help_text=_(
+            "Use this field to mark that the item you are merging really is the same product (or a variation thereof) of something you have claimed before."),
+        required=False)
 
     def __init__(self, user, **kwargs):
         super(MergeCommercialGearForm, self).__init__(**kwargs)
-        self.fields['merge_with'].choices = [('', '---------')] + uniq(CommercialGear.objects.filter(producer = user).values_list('id', 'proper_name'))
+        self.fields['merge_with'].choices = [('', '---------')] + uniq(
+            CommercialGear.objects.filter(producer=user).values_list('id', 'proper_name'))
 
 
 class CommercialGearForm(forms.ModelForm):
@@ -791,47 +801,52 @@ class CommercialGearForm(forms.ModelForm):
 
     def __init__(self, user, **kwargs):
         super(CommercialGearForm, self).__init__(**kwargs)
-        self.fields['image'].queryset = Image.objects.filter(user = user, subject_type = 500)
+        self.fields['image'].queryset = Image.objects.filter(user=user, subject_type=500)
 
 
 class ClaimRetailedGearForm(forms.Form):
     error_css_class = 'error'
 
     make = forms.ChoiceField(
-        label = _("Make"),
-        help_text = _("The make, brand, producer or developer of this product."),
-        required = True)
+        label=_("Make"),
+        help_text=_("The make, brand, producer or developer of this product."),
+        required=True)
 
     name = forms.ChoiceField(
-        choices = [('', '---------')],
-        label = _("Name"),
-        required = True)
+        choices=[('', '---------')],
+        label=_("Name"),
+        required=True)
 
     merge_with = forms.ChoiceField(
-        choices = [('', '---------')],
-        label = _("Merge"),
-        help_text = _("Use this field to mark that the item you are claiming really is the same product (or a variation thereof) of something you have claimed before."),
-        required = False)
+        choices=[('', '---------')],
+        label=_("Merge"),
+        help_text=_(
+            "Use this field to mark that the item you are claiming really is the same product (or a variation thereof) of something you have claimed before."),
+        required=False)
 
     def __init__(self, user, **kwargs):
         super(ClaimRetailedGearForm, self).__init__(**kwargs)
         self.user = user
-        self.fields['make'].choices = [('', '---------')] + sorted(uniq(Gear.objects.exclude(make = None).exclude(make = '').values_list('make', 'make')), key = lambda x: x[0].lower())
-        self.fields['merge_with'].choices =\
-            [('', '---------')] +\
-            uniq_id_tuple(RetailedGear.objects.filter(retailer = user).exclude(gear__name = None).values_list('id', 'gear__name'))
+        self.fields['make'].choices = [('', '---------')] + sorted(
+            uniq(Gear.objects.exclude(make=None).exclude(make='').values_list('make', 'make')),
+            key=lambda x: x[0].lower())
+        self.fields['merge_with'].choices = \
+            [('', '---------')] + \
+            uniq_id_tuple(
+                RetailedGear.objects.filter(retailer=user).exclude(gear__name=None).values_list('id', 'gear__name'))
 
-    def clean (self):
+    def clean(self):
         cleaned_data = super(ClaimRetailedGearForm, self).clean()
 
         max_items = retailer_affiliate_limit(self.user)
-        current_items = RetailedGear.objects.filter(gear = self.user).count()
+        current_items = RetailedGear.objects.filter(gear=self.user).count()
         if current_items >= max_items:
-            raise forms.ValidationError(_("You can't create more than %d claims. Consider upgrading your affiliation!" % max_items))
+            raise forms.ValidationError(
+                _("You can't create more than %d claims. Consider upgrading your affiliation!" % max_items))
 
         already_claimed = set(
             item.id
-                for sublist in [x.gear_set.all() for x in RetailedGear.objects.filter(retailer = self.user)]
+            for sublist in [x.gear_set.all() for x in RetailedGear.objects.filter(retailer=self.user)]
             for item in sublist)
 
         if int(cleaned_data['name']) in already_claimed:
@@ -844,16 +859,18 @@ class MergeRetailedGearForm(forms.Form):
     error_css_class = 'error'
 
     merge_with = forms.ChoiceField(
-        choices = [('', '---------')],
-        label = _("Merge"),
-        help_text = _("Use this field to mark that the item you are merging really is the same product (or a variation thereof) of something you have claimed before."),
-        required = False)
+        choices=[('', '---------')],
+        label=_("Merge"),
+        help_text=_(
+            "Use this field to mark that the item you are merging really is the same product (or a variation thereof) of something you have claimed before."),
+        required=False)
 
     def __init__(self, user, **kwargs):
         super(MergeRetailedGearForm, self).__init__(**kwargs)
-        self.fields['merge_with'].choices =\
-            [('', '---------')] +\
-            uniq_id_tuple(RetailedGear.objects.filter(retailer = user).exclude(gear__name = None).values_list('id', 'gear__name'))
+        self.fields['merge_with'].choices = \
+            [('', '---------')] + \
+            uniq_id_tuple(
+                RetailedGear.objects.filter(retailer=user).exclude(gear__name=None).values_list('id', 'gear__name'))
 
 
 class RetailedGearForm(forms.ModelForm):
@@ -869,7 +886,7 @@ class CollectionCreateForm(forms.ModelForm):
 
     class Meta:
         model = Collection
-        fields = ('name', 'description',) 
+        fields = ('name', 'description',)
 
 
 class CollectionUpdateForm(forms.ModelForm):
@@ -877,7 +894,7 @@ class CollectionUpdateForm(forms.ModelForm):
 
     class Meta:
         model = Collection
-        fields = ('name', 'description', 'cover',) 
+        fields = ('name', 'description', 'cover',)
 
 
 class CollectionAddRemoveImagesForm(forms.ModelForm):

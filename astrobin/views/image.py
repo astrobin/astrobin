@@ -75,7 +75,7 @@ from rawdata.models import PrivateSharedFolder
 
 
 class ImageFlagThumbsView(
-        LoginRequiredMixin, UpdateView):
+    LoginRequiredMixin, UpdateView):
     form_class = ImageFlagThumbsForm
     model = Image
     pk_url_kwarg = 'id'
@@ -84,11 +84,11 @@ class ImageFlagThumbsView(
     def get_queryset(self):
         if self.request.user.is_superuser:
             return Image.objects_including_wip.all()
-        return Image.objects_including_wip.filter(user = self.request.user)
+        return Image.objects_including_wip.filter(user=self.request.user)
 
     def get_success_url(self):
         image = self.get_object()
-        return reverse_lazy('image_detail', args = (image.pk,))
+        return reverse_lazy('image_detail', args=(image.pk,))
 
     def post(self, request, *args, **kwargs):
         image = self.get_object()
@@ -174,14 +174,13 @@ class ImageDetailView(DetailView):
 
     def dispatch(self, request, *args, **kwargs):
         # Redirect to the correct revision
-        image = get_object_or_404(Image.objects_including_wip, pk = kwargs[self.pk_url_kwarg])
+        image = get_object_or_404(Image.objects_including_wip, pk=kwargs[self.pk_url_kwarg])
 
         if image.moderator_decision == 2:
             if not request.user.is_authenticated() or \
-               not request.user.is_superuser and \
-               not request.user.userprofile.is_image_moderator():
+                    not request.user.is_superuser and \
+                    not request.user.userprofile.is_image_moderator():
                 raise Http404
-
 
         revision_label = kwargs['r']
 
@@ -189,11 +188,11 @@ class ImageDetailView(DetailView):
             # No revision specified, let's see if we need to redirect to the
             # final.
             if image.is_final == False:
-                final = image.revisions.filter(is_final = True)
+                final = image.revisions.filter(is_final=True)
                 if final.count() > 0:
                     url = reverse_lazy(
                         'image_detail',
-                        args = (image.pk, final[0].label,))
+                        args=(image.pk, final[0].label,))
                     if 'ctx' in request.GET:
                         url += '?ctx=%s' % request.GET.get('ctx')
                     return redirect(url)
@@ -214,7 +213,7 @@ class ImageDetailView(DetailView):
         is_revision = False
         if r != '0':
             try:
-                revision_image = ImageRevision.objects.filter(image = image, label = r)[0]
+                revision_image = ImageRevision.objects.filter(image=image, label=r)[0]
                 instance_to_platesolve = revision_image
                 is_revision = True
             except:
@@ -264,11 +263,11 @@ class ImageDetailView(DetailView):
         gear_list_has_commercial = False
         gear_list_has_paid_commercial = False
         for g in gear_list:
-            if g[1].exclude(commercial = None).count() > 0:
+            if g[1].exclude(commercial=None).count() > 0:
                 gear_list_has_commercial = True
                 break
         for g in gear_list:
-            for i in g[1].exclude(commercial = None):
+            for i in g[1].exclude(commercial=None):
                 if i.commercial.is_paid() or i.commercial.producer == self.request.user:
                     gear_list_has_paid_commercial = True
                     # It would be faster if we exited the outer loop, but really,
@@ -277,8 +276,8 @@ class ImageDetailView(DetailView):
 
         makes_list = ','.join(
             filter(None, reduce(
-                lambda x,y: x+y,
-                [list(x.values_list('make', flat = True)) for x in [y[1] for y in gear_list]])))
+                lambda x, y: x + y,
+                [list(x.values_list('make', flat=True)) for x in [y[1] for y in gear_list]])))
 
         deep_sky_acquisitions = DeepSky_Acquisition.objects.filter(image=image)
         ssa = None
@@ -377,21 +376,32 @@ class ImageDetailView(DetailView):
             deep_sky_data = (
                 (_('Dates'), sorted(dsa_data['dates'])),
                 (_('Frames'),
-                    ('\n' if len(frames_list) > 1 else '') +
-                    u'\n'.join("%s %s" % (
-                        "<a href=\"%s\">%s</a>:" % (f[1]['filter_url'], f[1]['filter']) if f[1]['filter'] else '',
-                        "%s %s %s %s %s" % (f[1]['integration'], f[1]['iso'], f[1]['gain'], f[1]['sensor_cooling'], f[1]['binning']),
-                    ) for f in frames_list)),
+                 ('\n' if len(frames_list) > 1 else '') +
+                 u'\n'.join("%s %s" % (
+                     "<a href=\"%s\">%s</a>:" % (f[1]['filter_url'], f[1]['filter']) if f[1]['filter'] else '',
+                     "%s %s %s %s %s" % (
+                     f[1]['integration'], f[1]['iso'], f[1]['gain'], f[1]['sensor_cooling'], f[1]['binning']),
+                 ) for f in frames_list)),
                 (_('Integration'), "%.1f %s" % (dsa_data['integration'], _("hours"))),
-                (_('Darks'), '~%d' % (int(reduce(lambda x, y: int(x) + int(y), dsa_data['darks'])) / len(dsa_data['darks'])) if dsa_data['darks'] else 0),
-                (_('Flats'), '~%d' % (int(reduce(lambda x, y: int(x) + int(y), dsa_data['flats'])) / len(dsa_data['flats'])) if dsa_data['flats'] else 0),
-                (_('Flat darks'), '~%d' % (int(reduce(lambda x, y: int(x) + int(y), dsa_data['flat_darks'])) / len(dsa_data['flat_darks'])) if dsa_data['flat_darks'] else 0),
-                (_('Bias'), '~%d' % (int(reduce(lambda x, y: int(x) + int(y), dsa_data['bias'])) / len(dsa_data['bias'])) if dsa_data['bias'] else 0),
-                (_('Avg. Moon age'), ("%.2f " % (average(moon_age_list), ) + _("days")) if moon_age_list else None),
-                (_('Avg. Moon phase'), "%.2f%%" % (average(moon_illuminated_list), ) if moon_illuminated_list else None),
-                (_('Bortle Dark-Sky Scale'), "%.2f" % (average([float(x) for x in dsa_data['bortle']])) if dsa_data['bortle'] else None),
-                (_('Mean SQM'), "%.2f" % (average([float(x) for x in dsa_data['mean_sqm']])) if dsa_data['mean_sqm'] else None),
-                (_('Mean FWHM'), "%.2f" % (average([float(x) for x in dsa_data['mean_fwhm']])) if dsa_data['mean_fwhm'] else None),
+                (_('Darks'),
+                 '~%d' % (int(reduce(lambda x, y: int(x) + int(y), dsa_data['darks'])) / len(dsa_data['darks'])) if
+                 dsa_data['darks'] else 0),
+                (_('Flats'),
+                 '~%d' % (int(reduce(lambda x, y: int(x) + int(y), dsa_data['flats'])) / len(dsa_data['flats'])) if
+                 dsa_data['flats'] else 0),
+                (_('Flat darks'), '~%d' % (int(reduce(lambda x, y: int(x) + int(y), dsa_data['flat_darks'])) / len(
+                    dsa_data['flat_darks'])) if dsa_data['flat_darks'] else 0),
+                (_('Bias'),
+                 '~%d' % (int(reduce(lambda x, y: int(x) + int(y), dsa_data['bias'])) / len(dsa_data['bias'])) if
+                 dsa_data['bias'] else 0),
+                (_('Avg. Moon age'), ("%.2f " % (average(moon_age_list),) + _("days")) if moon_age_list else None),
+                (_('Avg. Moon phase'), "%.2f%%" % (average(moon_illuminated_list),) if moon_illuminated_list else None),
+                (_('Bortle Dark-Sky Scale'),
+                 "%.2f" % (average([float(x) for x in dsa_data['bortle']])) if dsa_data['bortle'] else None),
+                (_('Mean SQM'),
+                 "%.2f" % (average([float(x) for x in dsa_data['mean_sqm']])) if dsa_data['mean_sqm'] else None),
+                (_('Mean FWHM'),
+                 "%.2f" % (average([float(x) for x in dsa_data['mean_fwhm']])) if dsa_data['mean_fwhm'] else None),
                 (_('Temperature'),
                  "%.2f" % (average([float(x) for x in dsa_data['temperature']])) if dsa_data['temperature'] else None),
             )
@@ -422,31 +432,31 @@ class ImageDetailView(DetailView):
         if self.request.user.is_authenticated():
             profile = self.request.user.userprofile
 
-
         ##############
         # BASIC DATA #
         ##############
 
         published_on = \
             to_user_timezone(image.uploaded, profile) \
-            if profile else image.uploaded
+                if profile else image.uploaded
         if image.published:
             published_on = \
                 to_user_timezone(image.published, profile) \
-                if profile else image.published
+                    if profile else image.published
 
         alias = 'regular'
         mod = self.request.GET.get('mod')
         if mod == 'inverted':
             alias = 'regular_inverted'
 
-        subjects = image.solution.objects_in_field.split(',') if image.solution and image.solution.objects_in_field else ''
+        subjects = image.solution.objects_in_field.split(
+            ',') if image.solution and image.solution.objects_in_field else ''
         skyplot_zoom1 = None
 
         if is_revision:
             if revision_image.solution:
                 if revision_image.solution.objects_in_field:
-                   subjects = revision_image.solution.objects_in_field.split(',')
+                    subjects = revision_image.solution.objects_in_field.split(',')
                 if revision_image.solution.skyplot_zoom1:
                     skyplot_zoom1 = revision_image.solution.skyplot_zoom1
         else:
@@ -459,17 +469,16 @@ class ImageDetailView(DetailView):
         subjects_limit = 5
 
         licenses = (
-            (0, 'cc/c.png',           LICENSE_CHOICES[0][1]),
+            (0, 'cc/c.png', LICENSE_CHOICES[0][1]),
             (1, 'cc/cc-by-nc-sa.png', LICENSE_CHOICES[1][1]),
-            (2, 'cc/cc-by-nc.png',    LICENSE_CHOICES[2][1]),
+            (2, 'cc/cc-by-nc.png', LICENSE_CHOICES[2][1]),
             (3, 'cc/cc-by-nc-nd.png', LICENSE_CHOICES[3][1]),
-            (4, 'cc/cc-by.png',       LICENSE_CHOICES[4][1]),
-            (5, 'cc/cc-by-sa.png',    LICENSE_CHOICES[5][1]),
-            (6, 'cc/cc-by-nd.png',    LICENSE_CHOICES[6][1]),
+            (4, 'cc/cc-by.png', LICENSE_CHOICES[4][1]),
+            (5, 'cc/cc-by-sa.png', LICENSE_CHOICES[5][1]),
+            (6, 'cc/cc-by-nd.png', LICENSE_CHOICES[6][1]),
         )
 
         locations = '; '.join([u'%s' % (x) for x in image.locations.all()])
-
 
         ######################
         # PREFERRED LANGUAGE #
@@ -484,13 +493,11 @@ class ImageDetailView(DetailView):
         else:
             preferred_language = _("English")
 
-
         ##########################
         # LIKE / BOOKMARKED THIS #
         ##########################
-        like_this = image.toggleproperties.filter(property_type = "like")
-        bookmarked_this = image.toggleproperties.filter(property_type = "bookmark")
-
+        like_this = image.toggleproperties.filter(property_type="like")
+        bookmarked_this = image.toggleproperties.filter(property_type="bookmark")
 
         ##############
         # NAVIGATION #
@@ -510,38 +517,42 @@ class ImageDetailView(DetailView):
 
             # Always only lookup public images!
             if nav_ctx == 'user':
-                image_next = Image.objects.filter(user = image.user, pk__gt = image.pk).order_by('pk')[0:1]
-                image_prev = Image.objects.filter(user = image.user, pk__lt = image.pk).order_by('-pk')[0:1]
+                image_next = Image.objects.filter(user=image.user, pk__gt=image.pk).order_by('pk')[0:1]
+                image_prev = Image.objects.filter(user=image.user, pk__lt=image.pk).order_by('-pk')[0:1]
             elif nav_ctx == 'collection':
                 try:
                     try:
-                        collection = image.collections.get(pk = nav_ctx_extra)
+                        collection = image.collections.get(pk=nav_ctx_extra)
                     except ValueError:
                         # Maybe this image is in a single collection
                         collection = image.collections.all()[0]
 
-                    image_next = Image.objects.filter(user = image.user, collections = collection, pk__gt = image.pk).order_by('pk')[0:1]
-                    image_prev = Image.objects.filter(user = image.user, collections = collection, pk__lt = image.pk).order_by('-pk')[0:1]
+                    image_next = Image.objects.filter(user=image.user, collections=collection,
+                                                      pk__gt=image.pk).order_by('pk')[0:1]
+                    image_prev = Image.objects.filter(user=image.user, collections=collection,
+                                                      pk__lt=image.pk).order_by('-pk')[0:1]
                 except Collection.DoesNotExist:
                     # image_prev and image_next will remain None
                     pass
             elif nav_ctx == 'group':
                 try:
-                    group = image.part_of_group_set.get(pk = nav_ctx_extra)
+                    group = image.part_of_group_set.get(pk=nav_ctx_extra)
                     if group.public:
-                        image_next = Image.objects.filter(part_of_group_set = group, pk__gt = image.pk).order_by('pk')[0:1]
-                        image_prev = Image.objects.filter(part_of_group_set = group, pk__lt = image.pk).order_by('-pk')[0:1]
+                        image_next = Image.objects.filter(part_of_group_set=group, pk__gt=image.pk).order_by('pk')[0:1]
+                        image_prev = Image.objects.filter(part_of_group_set=group, pk__lt=image.pk).order_by('-pk')[0:1]
                 except Group.DoesNotExist:
                     # image_prev and image_next will remain None
                     pass
             elif nav_ctx == 'all':
-                image_next = Image.objects.filter(pk__gt = image.pk).order_by('pk')[0:1]
-                image_prev = Image.objects.filter(pk__lt = image.pk).order_by('-pk')[0:1]
+                image_next = Image.objects.filter(pk__gt=image.pk).order_by('pk')[0:1]
+                image_prev = Image.objects.filter(pk__lt=image.pk).order_by('-pk')[0:1]
             elif nav_ctx == 'iotd':
                 try:
-                    iotd = Iotd.objects.get(image = image)
-                    iotd_next = Iotd.objects.filter(date__gt = iotd.date, date__lte = datetime.now().date()).order_by('date')[0:1]
-                    iotd_prev = Iotd.objects.filter(date__lt = iotd.date, date__lte = datetime.now().date()).order_by('-date')[0:1]
+                    iotd = Iotd.objects.get(image=image)
+                    iotd_next = Iotd.objects.filter(date__gt=iotd.date, date__lte=datetime.now().date()).order_by(
+                        'date')[0:1]
+                    iotd_prev = Iotd.objects.filter(date__lt=iotd.date, date__lte=datetime.now().date()).order_by(
+                        '-date')[0:1]
 
                     if iotd_next:
                         image_next = [iotd_next[0].image]
@@ -550,9 +561,9 @@ class ImageDetailView(DetailView):
                 except Iotd.DoesNotExist:
                     pass
             elif nav_ctx == 'picks':
-                picks = Image.objects.exclude(iotdvote = None).filter(iotd = None)
-                image_next = picks.filter(pk__gt = image.pk).order_by('pk')[0:1]
-                image_prev = picks.filter(pk__lt = image.pk).order_by('-pk')[0:1]
+                picks = Image.objects.exclude(iotdvote=None).filter(iotd=None)
+                image_next = picks.filter(pk__gt=image.pk).order_by('pk')[0:1]
+                image_prev = picks.filter(pk__lt=image.pk).order_by('-pk')[0:1]
         except Image.DoesNotExist:
             image_next = None
             image_prev = None
@@ -562,7 +573,6 @@ class ImageDetailView(DetailView):
         if image_prev:
             image_prev = image_prev[0]
 
-
         #################
         # RESPONSE DICT #
         #################
@@ -570,7 +580,7 @@ class ImageDetailView(DetailView):
         from astrobin_apps_platesolving.solver import Solver
 
         if skyplot_zoom1 and not skyplot_zoom1.name.startswith('images/'):
-                skyplot_zoom1.name = 'images/' + skyplot_zoom1.name
+            skyplot_zoom1.name = 'images/' + skyplot_zoom1.name
 
         response_dict = context.copy()
         response_dict.update({
@@ -578,12 +588,12 @@ class ImageDetailView(DetailView):
 
             'alias': alias,
             'mod': mod,
-            'revisions': ImageRevision.objects.select_related('image__user__userprofile').filter(image = image),
+            'revisions': ImageRevision.objects.select_related('image__user__userprofile').filter(image=image),
             'revisions_with_description':
-                ImageRevision.objects\
-                    .select_related('image__user__userprofile')\
-                    .filter(image = image)\
-                    .exclude(Q(description = None) | Q(description = '')),
+                ImageRevision.objects \
+                    .select_related('image__user__userprofile') \
+                    .filter(image=image) \
+                    .exclude(Q(description=None) | Q(description='')),
             'is_revision': is_revision,
             'revision_image': revision_image,
             'revision_label': r,
@@ -599,10 +609,10 @@ class ImageDetailView(DetailView):
             'min_index_to_like': settings.MIN_INDEX_TO_LIKE,
 
             'comments_number': NestedComment.objects.filter(
-                deleted = False,
-                content_type__app_label = 'astrobin',
-                content_type__model = 'image',
-                object_id = image.id).count(),
+                deleted=False,
+                content_type__app_label='astrobin',
+                content_type__model='image',
+                object_id=image.id).count(),
             'gear_list': gear_list,
             'makes_list': makes_list,
             'gear_list_has_commercial': gear_list_has_commercial,
@@ -621,7 +631,8 @@ class ImageDetailView(DetailView):
             'subjects_reminder': subjects[subjects_limit:],
             'subjects_all': subjects,
             'subjects_limit': subjects_limit,
-            'subject_type': [x[1] for x in Image.SUBJECT_TYPE_CHOICES if x[0] == image.subject_type][0] if image.subject_type else 0,
+            'subject_type': [x[1] for x in Image.SUBJECT_TYPE_CHOICES if x[0] == image.subject_type][
+                0] if image.subject_type else 0,
             'license_icon': static('astrobin/icons/%s' % licenses[image.license][1]),
             'license_title': licenses[image.license][2],
             'locations': locations,
@@ -630,16 +641,19 @@ class ImageDetailView(DetailView):
             # implement this ugly hack.
 
             'solar_system_main_subject_id': image.solar_system_main_subject,
-            'solar_system_main_subject': SOLAR_SYSTEM_SUBJECT_CHOICES[image.solar_system_main_subject][1] if image.solar_system_main_subject is not None else None,
-            'content_type': ContentType.objects.get(app_label = 'astrobin', model = 'image'),
+            'solar_system_main_subject': SOLAR_SYSTEM_SUBJECT_CHOICES[image.solar_system_main_subject][
+                1] if image.solar_system_main_subject is not None else None,
+            'content_type': ContentType.objects.get(app_label='astrobin', model='image'),
             'preferred_language': preferred_language,
-            'select_group_form': GroupSelectForm(user = self.request.user) if self.request.user.is_authenticated() else None,
-            'in_public_groups': Group.objects.filter(Q(public = True, images = image)),
+            'select_group_form': GroupSelectForm(
+                user=self.request.user) if self.request.user.is_authenticated() else None,
+            'in_public_groups': Group.objects.filter(Q(public=True, images=image)),
             'select_datapool_form': PublicDataPool_SelectExistingForm(),
-            'select_sharedfolder_form': PrivateSharedFolder_SelectExistingForm(user = self.request.user) if self.request.user.is_authenticated() else None,
+            'select_sharedfolder_form': PrivateSharedFolder_SelectExistingForm(
+                user=self.request.user) if self.request.user.is_authenticated() else None,
             'has_sharedfolders': PrivateSharedFolder.objects.filter(
-                Q(creator = self.request.user) |
-                Q(users = self.request.user)).count() > 0 if self.request.user.is_authenticated() else False,
+                Q(creator=self.request.user) |
+                Q(users=self.request.user)).count() > 0 if self.request.user.is_authenticated() else False,
 
             'image_next': image_next,
             'image_prev': image_prev,
@@ -662,7 +676,7 @@ class ImageFullView(DetailView):
     # TODO: unify this with ImageDetailView.dispatch
     def dispatch(self, request, *args, **kwargs):
         # Redirect to the correct revision
-        image = get_object_or_404(Image.objects_including_wip, pk = kwargs[self.pk_url_kwarg])
+        image = get_object_or_404(Image.objects_including_wip, pk=kwargs[self.pk_url_kwarg])
 
         if image.moderator_decision == 2:
             raise Http404
@@ -673,19 +687,18 @@ class ImageFullView(DetailView):
             # No revision specified, let's see if we need to redirect to the
             # final.
             if image.is_final == False:
-                final = image.revisions.filter(is_final = True)
+                final = image.revisions.filter(is_final=True)
                 if final.count() > 0:
                     url = reverse_lazy(
                         'image_full',
-                        args = (image.pk, final[0].label,))
+                        args=(image.pk, final[0].label,))
                     if 'ctx' in request.GET:
                         url += '?ctx=%s' % request.GET.get('ctx')
                     return redirect(url)
 
-
         if self.revision_label is None:
             try:
-                self.revision_label = image.revisions.filter(is_final = True)[0].label
+                self.revision_label = image.revisions.filter(is_final=True)[0].label
             except IndexError:
                 self.revision_label = '0'
 
@@ -715,6 +728,7 @@ class ImageFullView(DetailView):
 
         return response_dict
 
+
 class ImageDeleteView(LoginRequiredMixin, DeleteView):
     model = Image
     pk_url_kwarg = 'id'
@@ -726,7 +740,7 @@ class ImageDeleteView(LoginRequiredMixin, DeleteView):
     # get_object from there because the view is not dispatched yet.
     def dispatch(self, request, *args, **kwargs):
         try:
-            image = Image.objects_including_wip.get(pk = kwargs[self.pk_url_kwarg])
+            image = Image.objects_including_wip.get(pk=kwargs[self.pk_url_kwarg])
         except Image.DoesNotExist:
             raise Http404
 
@@ -736,12 +750,13 @@ class ImageDeleteView(LoginRequiredMixin, DeleteView):
         return super(ImageDeleteView, self).dispatch(request, *args, **kwargs)
 
     def get_success_url(self):
-        return reverse_lazy('user_page', args = (self.request.user,))
+        return reverse_lazy('user_page', args=(self.request.user,))
 
     def post(self, *args, **kwargs):
         self.get_object().thumbnail_invalidate()
         messages.success(self.request, _("Image deleted."))
         return super(ImageDeleteView, self).post(args, kwargs)
+
 
 class ImageRevisionDeleteView(LoginRequiredMixin, DeleteView):
     model = ImageRevision
@@ -751,12 +766,12 @@ class ImageRevisionDeleteView(LoginRequiredMixin, DeleteView):
     # get_object from there because the view is not dispatched yet.
     def dispatch(self, request, *args, **kwargs):
         try:
-            revision = ImageRevision.objects.get(pk = kwargs[self.pk_url_kwarg])
+            revision = ImageRevision.objects.get(pk=kwargs[self.pk_url_kwarg])
         except ImageRevision.DoesNotExist:
             raise Http404
 
-        if request.user.is_authenticated() and\
-           request.user != revision.image.user:
+        if request.user.is_authenticated() and \
+                request.user != revision.image.user:
             raise PermissionDenied
 
         # Save this so it's accessible in get_success_url
@@ -765,7 +780,7 @@ class ImageRevisionDeleteView(LoginRequiredMixin, DeleteView):
         return super(ImageRevisionDeleteView, self).dispatch(request, *args, **kwargs)
 
     def get_success_url(self):
-        return reverse_lazy('image_detail', args = (self.image.pk,))
+        return reverse_lazy('image_detail', args=(self.image.pk,))
 
     def post(self, *args, **kwargs):
         revision = self.get_object()
@@ -780,6 +795,7 @@ class ImageRevisionDeleteView(LoginRequiredMixin, DeleteView):
 
         return super(ImageRevisionDeleteView, self).post(args, kwargs)
 
+
 class ImageDeleteOriginalView(LoginRequiredMixin, DeleteView):
     model = Image
     pk_url_kwarg = 'id'
@@ -791,7 +807,7 @@ class ImageDeleteOriginalView(LoginRequiredMixin, DeleteView):
     # get_object from there because the view is not dispatched yet.
     def dispatch(self, request, *args, **kwargs):
         try:
-            image = Image.objects_including_wip.get(pk = kwargs[self.pk_url_kwarg])
+            image = Image.objects_including_wip.get(pk=kwargs[self.pk_url_kwarg])
         except Image.DoesNotExist:
             raise Http404
 
@@ -801,7 +817,7 @@ class ImageDeleteOriginalView(LoginRequiredMixin, DeleteView):
         return super(ImageDeleteOriginalView, self).dispatch(request, *args, **kwargs)
 
     def get_success_url(self):
-        return reverse_lazy('image_detail', args = (self.image.pk,))
+        return reverse_lazy('image_detail', args=(self.image.pk,))
 
     def post(self, *args, **kwargs):
         image = self.get_object()
@@ -838,17 +854,18 @@ class ImageDeleteOriginalView(LoginRequiredMixin, DeleteView):
         if final.solution:
             # Get the solution this way, I don't know why it wouldn't work otherwise
             content_type = ContentType.objects.get_for_model(ImageRevision)
-            solution = Solution.objects.get(content_type = content_type, object_id = final.pk)
+            solution = Solution.objects.get(content_type=content_type, object_id=final.pk)
             solution.content_object = image
             solution.save()
 
-        image.thumbnails.filter(revision = final.label).update(revision = '0')
+        image.thumbnails.filter(revision=final.label).update(revision='0')
         self.image = image
         final.delete()
 
         messages.success(self.request, _("Revision deleted."));
         # We do not call super, because that would delete the Image
         return HttpResponseRedirect(self.get_success_url())
+
 
 class ImageDemoteView(LoginRequiredMixin, UpdateView):
     form_class = ImageDemoteForm
@@ -860,11 +877,11 @@ class ImageDemoteView(LoginRequiredMixin, UpdateView):
         return self.model.objects_including_wip.all()
 
     def get_success_url(self):
-        return reverse_lazy('image_detail', args = (self.get_object().pk,))
+        return reverse_lazy('image_detail', args=(self.get_object().pk,))
 
     def dispatch(self, request, *args, **kwargs):
         try:
-            image = self.model.objects_including_wip.get(pk = kwargs[self.pk_url_kwarg])
+            image = self.model.objects_including_wip.get(pk=kwargs[self.pk_url_kwarg])
         except Image.DoesNotExist:
             raise Http404
 
@@ -893,11 +910,11 @@ class ImagePromoteView(LoginRequiredMixin, UpdateView):
         return self.model.objects_including_wip.all()
 
     def get_success_url(self):
-        return reverse_lazy('image_detail', args = (self.get_object().pk,))
+        return reverse_lazy('image_detail', args=(self.get_object().pk,))
 
     def dispatch(self, request, *args, **kwargs):
         try:
-            image = self.model.objects_including_wip.get(pk = kwargs[self.pk_url_kwarg])
+            image = self.model.objects_including_wip.get(pk=kwargs[self.pk_url_kwarg])
         except Image.DoesNotExist:
             raise Http404
 
@@ -918,15 +935,15 @@ class ImagePromoteView(LoginRequiredMixin, UpdateView):
                     x.user for x in
                     ToggleProperty.objects.toggleproperties_for_object(
                         "follow",
-                        UserProfile.objects.get(user__pk = request.user.pk).user)
+                        UserProfile.objects.get(user__pk=request.user.pk).user)
                 ]
                 push_notification(followers, 'new_image',
-                    {
-                        'originator': request.user.userprofile.get_display_name(),
-                        'object_url': settings.BASE_URL + image.get_absolute_url()
-                    })
+                                  {
+                                      'originator': request.user.userprofile.get_display_name(),
+                                      'object_url': settings.BASE_URL + image.get_absolute_url()
+                                  })
 
-                add_story(image.user, verb = 'VERB_UPLOADED_IMAGE', action_object = image)
+                add_story(image.user, verb='VERB_UPLOADED_IMAGE', action_object=image)
 
             messages.success(request, _("Image moved to the public area."))
 
@@ -943,11 +960,11 @@ class ImageEditBaseView(LoginRequiredMixin, UpdateView):
         return self.model.objects_including_wip.all()
 
     def get_success_url(self):
-        return reverse_lazy('image_detail', args = (self.get_object().pk,))
+        return reverse_lazy('image_detail', args=(self.get_object().pk,))
 
     def dispatch(self, request, *args, **kwargs):
         try:
-            image = self.model.objects_including_wip.get(pk = kwargs[self.pk_url_kwarg])
+            image = self.model.objects_including_wip.get(pk=kwargs[self.pk_url_kwarg])
         except Image.DoesNotExist:
             raise Http404
 
@@ -974,8 +991,8 @@ class ImageEditBasicView(ImageEditBaseView):
     def get_success_url(self):
         image = self.get_object()
         if 'submit_gear' in self.request.POST:
-            return reverse_lazy('image_edit_gear', kwargs = {'id': image.pk})
-        return reverse_lazy('image_detail', kwargs = {'id': image.pk})
+            return reverse_lazy('image_edit_gear', kwargs={'id': image.pk})
+        return reverse_lazy('image_detail', kwargs={'id': image.pk})
 
 
 class ImageEditGearView(ImageEditBaseView):
@@ -988,23 +1005,23 @@ class ImageEditGearView(ImageEditBaseView):
         user = self.get_object().user
         profile = user.userprofile
 
-        context['no_gear'] = not(profile.telescopes and profile.cameras)
+        context['no_gear'] = profile.telescopes.count() == 0 and profile.cameras.count() == 0
         context['copy_gear_form'] = CopyGearForm(user)
         return context
 
     def get_success_url(self):
         image = self.get_object()
         if 'submit_acquisition' in self.request.POST:
-            return reverse_lazy('image_edit_acquisition', kwargs = {'id': image.pk})
-        return reverse_lazy('image_detail', kwargs = {'id': image.pk})
+            return reverse_lazy('image_edit_acquisition', kwargs={'id': image.pk})
+        return reverse_lazy('image_detail', kwargs={'id': image.pk})
 
     def get_form(self, form_class):
         image = self.get_object()
         if self.request.method == 'POST':
             return form_class(
-                user = image.user, instance = image, data = self.request.POST)
+                user=image.user, instance=image, data=self.request.POST)
         else:
-            return form_class(user = image.user, instance = image)
+            return form_class(user=image.user, instance=image)
 
 
 class ImageEditRevisionView(LoginRequiredMixin, UpdateView):
@@ -1015,11 +1032,11 @@ class ImageEditRevisionView(LoginRequiredMixin, UpdateView):
     form_class = ImageEditRevisionForm
 
     def get_success_url(self):
-        return reverse_lazy('image_detail', args = (self.get_object().image.pk,))
+        return reverse_lazy('image_detail', args=(self.get_object().image.pk,))
 
     def dispatch(self, request, *args, **kwargs):
         try:
-            revision = self.model.objects.get(pk = kwargs[self.pk_url_kwarg])
+            revision = self.model.objects.get(pk=kwargs[self.pk_url_kwarg])
         except self.model.DoesNotExist:
             raise Http404
 
