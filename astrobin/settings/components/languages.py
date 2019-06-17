@@ -28,4 +28,3 @@ MODELTRANSLATION_TRANSLATION_REGISTRY = 'astrobin.translation'
 # to load the internationalization machinery.
 USE_I18N = True
 USE_L10N = True
-

@@ -16,7 +16,8 @@
 {% block content %}
     <div class="subtitle">
         <i class="icon icon-info-sign"></i>
-        {% blocktrans %}<strong>{{total_users}}</strong> users uploaded <strong>{{total_images}}</strong> images, reaching <strong>{{total_integration}}</strong> hours of integration time.{% endblocktrans %}
+        {% blocktrans %}<strong>{{ total_users }}</strong> users uploaded <strong>{{ total_images }}</strong> images,
+            reaching <strong>{{ total_integration }}</strong> hours of integration time.{% endblocktrans %}
     </div>
 
     <div class="row section">
@@ -50,13 +51,14 @@
     <div class="row section">
         <div class="span6">
             <div class="subtle-container">
-            <div class="header">{% trans "Global distribution of camera types" %}</div>
+                <div class="header">{% trans "Global distribution of camera types" %}</div>
                 <div class="row">
                     <div class="span3">
                         <div id="stats_camera_types" class="plot" style="width:200px; height: 200px;">
                             <div class="loading">
                                 <p>{% trans "Please wait: the plot is loading..." %}</p>
-                                <img alt="{% trans "Loading..." %}" src="{% static 'astrobin/images/ajax-loader.gif' %}" />
+                                <img alt="{% trans "Loading..." %}"
+                                     src="{% static 'astrobin/images/ajax-loader.gif' %}" />
                             </div>
                         </div>
                     </div>
@@ -76,7 +78,8 @@
                         <div id="stats_telescope_types" class="plot" style="width:200px; height: 200px;">
                             <div class="loading">
                                 <p>{% trans "Please wait: the plot is loading..." %}</p>
-                                <img alt="{% trans "Loading..." %}" src="{% static 'astrobin/images/ajax-loader.gif' %}" />
+                                <img alt="{% trans "Loading..." %}"
+                                     src="{% static 'astrobin/images/ajax-loader.gif' %}" />
                             </div>
                         </div>
                     </div>
@@ -117,81 +120,81 @@
 {% endblock %}
 
 {% block extra_js %}
-<script type="text/javascript">
-$(document).ready(function() {
-    astrobin_stats.init();
-    astrobin_stats.plot(
-        '#stats_integration_hours',
-        {% if 's_ihp' in request.GET %}
-            {% if request.GET.s_ihp == 'monthly' %}
-                "{% url 'stats_integration_hours' 'astrobin' 'monthly' 365 %}",
-            {% else %}
-                "{% url 'stats_integration_hours' 'astrobin' 'daily' 30 %}",
-            {% endif %}
-        {% else %}
-        "{% url 'stats_integration_hours' 'astrobin' 'monthly' 365 %}",
-        {% endif %}
-        5000);
-    astrobin_stats.enableTooltips("#stats_integration_hours");
+    <script type="text/javascript">
+        $(document).ready(function () {
+            astrobin_stats.init();
+            astrobin_stats.plot(
+                '#stats_integration_hours',
+                {% if 's_ihp' in request.GET %}
+                    {% if request.GET.s_ihp == 'monthly' %}
+                        "{% url 'stats_integration_hours' 'astrobin' 'monthly' 365 %}",
+                    {% else %}
+                        "{% url 'stats_integration_hours' 'astrobin' 'daily' 30 %}",
+                    {% endif %}
+                {% else %}
+                    "{% url 'stats_integration_hours' 'astrobin' 'monthly' 365 %}",
+                {% endif %}
+                5000);
+            astrobin_stats.enableTooltips("#stats_integration_hours");
 
-    $.ajax({
-        url: "{% url 'stats_subject_type_trend' %}",
-        method: 'GET',
-        dataType: 'json',
-        timeout: 5000,
-        success: function(series) {
-            $.plot($('#stats_subject_type_trend'),
-                series['flot_data'],
-                series['flot_options']);
-        }
-    });
-    astrobin_stats.enableTooltips("#stats_subject_type_trend");
+            $.ajax({
+                url: "{% url 'stats_subject_type_trend' %}",
+                method: 'GET',
+                dataType: 'json',
+                timeout: 5000,
+                success: function (series) {
+                    $.plot($('#stats_subject_type_trend'),
+                        series['flot_data'],
+                        series['flot_options']);
+                }
+            });
+            astrobin_stats.enableTooltips("#stats_subject_type_trend");
 
-    astrobin_stats.plot_pie(
-        '#stats_camera_types',
-        "{% url 'stats_subject_camera_types' 0 %}",
-        30000);
-    $('#stats_camera_types').bind('plothover', function(event, pos, obj) {
-        if (!obj) return;
-        percent = parseFloat(obj.series.percent).toFixed(2);
-        $('#stats_camera_types_hover').html('<span style="font-weight: bold; color: '+obj.series.color+'">'+obj.series.label+' ('+percent+'%)</span>');
-    });
+            astrobin_stats.plot_pie(
+                '#stats_camera_types',
+                "{% url 'stats_subject_camera_types' 0 %}",
+                30000);
+            $('#stats_camera_types').bind('plothover', function (event, pos, obj) {
+                if (!obj) return;
+                percent = parseFloat(obj.series.percent).toFixed(2);
+                $('#stats_camera_types_hover').html('<span style="font-weight: bold; color: ' + obj.series.color + '">' + obj.series.label + ' (' + percent + '%)</span>');
+            });
 
-    astrobin_stats.plot_pie(
-        '#stats_telescope_types',
-        "{% url 'stats_subject_telescope_types' 0 %}",
-        30000);
-    $('#stats_telescope_types').bind('plothover', function(event, pos, obj) {
-        if (!obj) return;
-        percent = parseFloat(obj.series.percent).toFixed(2);
-        $('#stats_telescope_types_hover').html('<span style="font-weight: bold; color: '+obj.series.color+'">'+obj.series.label+' ('+percent+'%)</span>');
-    });
+            astrobin_stats.plot_pie(
+                '#stats_telescope_types',
+                "{% url 'stats_subject_telescope_types' 0 %}",
+                30000);
+            $('#stats_telescope_types').bind('plothover', function (event, pos, obj) {
+                if (!obj) return;
+                percent = parseFloat(obj.series.percent).toFixed(2);
+                $('#stats_telescope_types_hover').html('<span style="font-weight: bold; color: ' + obj.series.color + '">' + obj.series.label + ' (' + percent + '%)</span>');
+            });
 
-    $.ajax({
-        url: "{% url 'stats_camera_types_trend' %}",
-        method: 'GET',
-        dataType: 'json',
-        timeout: 60000,
-        success: function(series) {
-            $.plot($('#stats_camera_types_trend'),
-                series['flot_data'],
-                series['flot_options']);
-        }
-    });
-    astrobin_stats.enableTooltips("#stats_camera_types_trend");
+            $.ajax({
+                url: "{% url 'stats_camera_types_trend' %}",
+                method: 'GET',
+                dataType: 'json',
+                timeout: 60000,
+                success: function (series) {
+                    $.plot($('#stats_camera_types_trend'),
+                        series['flot_data'],
+                        series['flot_options']);
+                }
+            });
+            astrobin_stats.enableTooltips("#stats_camera_types_trend");
 
-    $.ajax({
-        url: "{% url 'stats_telescope_types_trend' %}",
-        method: 'GET',
-        dataType: 'json',
-        timeout: 60000,
-        success: function(series) {
-            $.plot($('#stats_telescope_types_trend'),
-                series['flot_data'],
-                series['flot_options']);
-        }
-    });
-    astrobin_stats.enableTooltips("#stats_telescope_types_trend");
-});
-</script>
+            $.ajax({
+                url: "{% url 'stats_telescope_types_trend' %}",
+                method: 'GET',
+                dataType: 'json',
+                timeout: 60000,
+                success: function (series) {
+                    $.plot($('#stats_telescope_types_trend'),
+                        series['flot_data'],
+                        series['flot_options']);
+                }
+            });
+            astrobin_stats.enableTooltips("#stats_telescope_types_trend");
+        });
+    </script>
 {% endblock %}

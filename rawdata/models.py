@@ -3,19 +3,16 @@ import os
 import uuid
 
 # Django
-from django.conf import settings
 from django.contrib.auth.models import User
-from django.core.files.storage import FileSystemStorage
 from django.core.urlresolvers import reverse
 from django.db import models
 from django.db.models.signals import m2m_changed
 from django.utils.translation import ugettext_lazy as _
 
-# This app
-from .managers import RawImageManager, SoftDeleteManager
-
 # Other AstroBin apps
 from astrobin.models import Image
+# This app
+from .managers import RawImageManager, SoftDeleteManager
 
 
 def upload_path(instance, filename):
@@ -23,6 +20,7 @@ def upload_path(instance, filename):
     ext = filename.split('.')[-1]
     filename = "%s.%s" % (uuid.uuid4(), ext)
     return os.path.join('rawdata', 'files', str(instance.user.id), filename)
+
 
 def temporary_download_upload_path(instance, filename):
     ext = filename.split('.')[-1]
@@ -35,111 +33,111 @@ class RawImage(models.Model):
 
     # Definitions
     TYPE_UNKNOWN = 0
-    TYPE_LIGHT   = 1
-    TYPE_OFFSET  = 2 
-    TYPE_DARK    = 3
-    TYPE_FLAT    = 4
+    TYPE_LIGHT = 1
+    TYPE_OFFSET = 2
+    TYPE_DARK = 3
+    TYPE_FLAT = 4
 
     TYPE_CHOICES = (
         (TYPE_UNKNOWN, _('Unknown')),
-        (TYPE_LIGHT,   _('Light')),
-        (TYPE_OFFSET,  _('Offset/Bias')),
-        (TYPE_DARK,    _('Dark')),
-        (TYPE_FLAT,    _('Flat')),
+        (TYPE_LIGHT, _('Light')),
+        (TYPE_OFFSET, _('Offset/Bias')),
+        (TYPE_DARK, _('Dark')),
+        (TYPE_FLAT, _('Flat')),
     )
 
     user = models.ForeignKey(
         User,
-        editable = False
+        editable=False
     )
 
     file = models.FileField(
-        upload_to = upload_path,
+        upload_to=upload_path,
     )
 
     file_hash = models.CharField(
-        max_length = 32,
-        editable = False,
-        null = True,
+        max_length=32,
+        editable=False,
+        null=True,
     )
 
     original_filename = models.CharField(
-        max_length = 256,
-        editable = False,
-        null = True,
+        max_length=256,
+        editable=False,
+        null=True,
     )
 
     original_path = models.CharField(
-        max_length = 512,
-        editable = False,
-        null = True,
+        max_length=512,
+        editable=False,
+        null=True,
     )
 
     size = models.IntegerField(
-        default = 0,
-        editable = False,
+        default=0,
+        editable=False,
     )
 
     uploaded = models.DateTimeField(
-        auto_now_add = True,
-        editable = False,
-        null = True,
+        auto_now_add=True,
+        editable=False,
+        null=True,
     )
 
     indexed = models.BooleanField(
-        default = False,
-        editable = False,
+        default=False,
+        editable=False,
     )
 
     active = models.BooleanField(
-        default = True,
-        editable = False,
+        default=True,
+        editable=False,
     )
 
     image_type = models.IntegerField(
-        default = 0, # Unknown
-        choices = TYPE_CHOICES,
-        editable = False,
+        default=0,  # Unknown
+        choices=TYPE_CHOICES,
+        editable=False,
     )
 
     acquisition_date = models.DateTimeField(
-        null = True,
-        blank = True,
-        editable = False,
+        null=True,
+        blank=True,
+        editable=False,
     )
 
     camera = models.CharField(
-        max_length = 128,
-        null = True,
-        blank = True,
-        editable = False,
+        max_length=128,
+        null=True,
+        blank=True,
+        editable=False,
     )
 
     telescopeName = models.CharField(
-        max_length = 128,
-        null = True,
-        blank = True,
-        editable = False,
+        max_length=128,
+        null=True,
+        blank=True,
+        editable=False,
     )
 
     filterName = models.CharField(
-        max_length = 128,
-        null = True,
-        blank = True,
-        editable = False,
+        max_length=128,
+        null=True,
+        blank=True,
+        editable=False,
     )
 
     subjectName = models.CharField(
-        max_length = 128,
-        null = True,
-        blank = True,
-        editable = False,
+        max_length=128,
+        null=True,
+        blank=True,
+        editable=False,
     )
 
     temperature = models.SmallIntegerField(
-        null = True,
-        blank = True,
-        editable = False,
+        null=True,
+        blank=True,
+        editable=False,
     )
 
     class Meta:
@@ -165,31 +163,31 @@ class TemporaryArchive(models.Model):
 
     user = models.ForeignKey(
         User,
-        editable = False,
+        editable=False,
     )
 
     file = models.FileField(
-        upload_to = temporary_download_upload_path,
+        upload_to=temporary_download_upload_path,
     )
 
     size = models.IntegerField(
-        default = 0,
-        editable = False,
+        default=0,
+        editable=False,
     )
 
     created = models.DateTimeField(
-        auto_now_add = True,
-        editable = False,
+        auto_now_add=True,
+        editable=False,
     )
 
     ready = models.BooleanField(
-        default = False,
-        editable = False,
+        default=False,
+        editable=False,
     )
 
     active = models.BooleanField(
-        default = True,
-        editable = False,
+        default=True,
+        editable=False,
     )
 
     class Meta:
@@ -207,32 +205,33 @@ class PublicDataPool(models.Model):
     objects = SoftDeleteManager()
 
     name = models.CharField(
-        max_length = 128,
-        unique = True,
-        verbose_name = _("Name"),
-        help_text = _("A public name for this pool. Be descriptive, include the name of the celestial object and a target focal length in millimeters."),
+        max_length=128,
+        unique=True,
+        verbose_name=_("Name"),
+        help_text=_(
+            "A public name for this pool. Be descriptive, include the name of the celestial object and a target focal length in millimeters."),
     )
 
     description = models.TextField(
-        verbose_name = _("Description"),
-        help_text = _("Describe the goals and terms of this pool."),
+        verbose_name=_("Description"),
+        help_text=_("Describe the goals and terms of this pool."),
     )
 
     creator = models.ForeignKey(
         User,
-        editable = False,
-        on_delete = models.SET_NULL,
-        null = True,
+        editable=False,
+        on_delete=models.SET_NULL,
+        null=True,
     )
 
     created = models.DateTimeField(
-        auto_now_add = True,
-        editable = False,
+        auto_now_add=True,
+        editable=False,
     )
 
     updated = models.DateTimeField(
-        auto_now = True,
-        editable = False,
+        auto_now=True,
+        editable=False,
     )
 
     images = models.ManyToManyField(
@@ -241,19 +240,19 @@ class PublicDataPool(models.Model):
 
     processed_images = models.ManyToManyField(
         Image,
-        blank = True,
+        blank=True,
     )
 
     archive = models.ForeignKey(
         TemporaryArchive,
-        null = True,
-        on_delete = models.SET_NULL,
-        editable = False,
+        null=True,
+        on_delete=models.SET_NULL,
+        editable=False,
     )
 
     active = models.BooleanField(
-        default = True,
-        editable = False,
+        default=True,
+        editable=False,
     )
 
     def __unicode__(self):
@@ -275,35 +274,36 @@ class PrivateSharedFolder(models.Model):
     objects = SoftDeleteManager()
 
     name = models.CharField(
-        max_length = 128,
-        verbose_name = _("Name"),
-        help_text = _("A name for this folder. Be descriptive, so that the folder can be quickly recognized by the name."),
+        max_length=128,
+        verbose_name=_("Name"),
+        help_text=_(
+            "A name for this folder. Be descriptive, so that the folder can be quickly recognized by the name."),
     )
 
     description = models.TextField(
-        verbose_name = _("Description"),
-        help_text = _("Describe the goals of this folder."),
+        verbose_name=_("Description"),
+        help_text=_("Describe the goals of this folder."),
     )
 
     creator = models.ForeignKey(
         User,
-        editable = False,
-        related_name = 'privatesharedfolders_created',
+        editable=False,
+        related_name='privatesharedfolders_created',
     )
 
     created = models.DateTimeField(
-        auto_now_add = True,
-        editable = False,
+        auto_now_add=True,
+        editable=False,
     )
 
     updated = models.DateTimeField(
-        auto_now = True,
-        editable = False,
+        auto_now=True,
+        editable=False,
     )
 
     users = models.ManyToManyField(
         User,
-        related_name = 'privatesharedfolders_invited',
+        related_name='privatesharedfolders_invited',
     )
 
     images = models.ManyToManyField(
@@ -312,19 +312,19 @@ class PrivateSharedFolder(models.Model):
 
     processed_images = models.ManyToManyField(
         Image,
-        blank = True,
+        blank=True,
     )
 
     archive = models.ForeignKey(
         TemporaryArchive,
-        null = True,
-        on_delete = models.SET_NULL,
-        editable = False,
+        null=True,
+        on_delete=models.SET_NULL,
+        editable=False,
     )
 
     active = models.BooleanField(
-        default = True,
-        editable = False,
+        default=True,
+        editable=False,
     )
 
     def __unicode__(self):
@@ -346,6 +346,6 @@ def on_images_changed(sender, instance, action, reverse, model, pk_set, **kwargs
     instance.archive = None
     instance.save()
 
-m2m_changed.connect(on_images_changed, sender = PublicDataPool.images.through)
-m2m_changed.connect(on_images_changed, sender = PrivateSharedFolder.images.through)
 
+m2m_changed.connect(on_images_changed, sender=PublicDataPool.images.through)
+m2m_changed.connect(on_images_changed, sender=PrivateSharedFolder.images.through)

@@ -20,21 +20,25 @@
         </div>
 
         <p>
-            {% blocktrans %}We have prepared a ZIP file to bundle the raw data you have requested for download. Please be aware that this is a temporary file will be deleted from our servers within the next 48 hours, and this download is only for you. If you want to share data with others, don't give them this link, but use the <strong>Private shared folders</strong> or <strong>Public data pool</strong> pages.{% endblocktrans %}
+            {% blocktrans %}We have prepared a ZIP file to bundle the raw data you have requested for download. Please
+                be aware that this is a temporary file will be deleted from our servers within the next 48 hours, and
+                this download is only for you. If you want to share data with others, don't give them this link, but use
+                the <strong>Private shared folders</strong> or <strong>Public data pool</strong>
+                pages.{% endblocktrans %}
         </p>
 
         <div class="download-with-icon">
             <div class="image">
-                <a href="{{MEDIA_URL}}{{object.file.name}}">
+                <a href="{{ MEDIA_URL }}{{ object.file.name }}">
                     <img src="{% static 'rawdata/images/zip.png' %}" alt="ZIP" />
                 </a>
             </div>
             <div class="data">
-                <a class="btn btn-primary btn-large" href="{{MEDIA_URL}}{{object.file.name}}">
+                <a class="btn btn-primary btn-large" href="{{ MEDIA_URL }}{{ object.file.name }}">
                     {% trans "Download" %}
                 </a>
                 <span class="size">
-                    {% trans "File size" %}: <strong>{{object.size|filesizeformat}}</strong>
+                    {% trans "File size" %}: <strong>{{ object.size|filesizeformat }}</strong>
                 </span>
             </div>
         </div>
@@ -44,12 +48,14 @@
         </div>
 
         <p>
-            {% blocktrans %}The file or files you have requested are being prepared for download. This should take only a second if you requested just a few files, or a minute for a lot of files. Try to refresh this page soon!{% endblocktrans %}
+            {% blocktrans %}The file or files you have requested are being prepared for download. This should take only
+                a second if you requested just a few files, or a minute for a lot of files. Try to refresh this page
+                soon!{% endblocktrans %}
         </p>
 
         <div class="download-with-icon">
             <div class="image">
-                <a href="/{{object.file.name}}">
+                <a href="/{{ object.file.name }}">
                     <img src="{% static 'rawdata/images/zip-not-ready.png' %}" alt="ZIP" />
                 </a>
             </div>
@@ -60,7 +66,7 @@
                 <span class="size">
                     {% trans "Please refresh this page in a few seconds." %}
                     {% trans "For larged downloads, this operation could take up to a few minutes." %}
-                    <br/>
+                    <br />
                     <img src="{% static 'astrobin/images/ajax-loader.gif' %}" alt="" />
                 </span>
             </div>

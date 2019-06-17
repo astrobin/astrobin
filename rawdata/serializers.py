@@ -3,7 +3,6 @@ import os
 
 # Django
 from django.utils.translation import ugettext as _
-
 # Third party apps
 from rest_framework import serializers
 from rest_framework.exceptions import PermissionDenied, UnsupportedMediaType
@@ -42,7 +41,7 @@ class RawImageSerializer(serializers.ModelSerializer):
         if provided_hash is not None and provided_hash != real_hash:
             raise serializers.ValidationError(
                 "file_hash %s doesn't match uploaded file, whose hash is %s" %
-                    (provided_hash, real_hash))
+                (provided_hash, real_hash))
 
         return attrs
 

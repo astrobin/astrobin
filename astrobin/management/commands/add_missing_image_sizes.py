@@ -1,6 +1,6 @@
 # Python
-from time import sleep
 import os
+from time import sleep
 
 # Django
 from django.core.management.base import BaseCommand
@@ -8,6 +8,7 @@ from django.utils.encoding import smart_unicode
 
 # AstroBin
 from astrobin.models import Image, ImageRevision
+
 
 class Command(BaseCommand):
     help = "Adds missing 'size' attribute to Image/ImageRevision model instances"

@@ -1,7 +1,6 @@
-from mock import patch
-
 # Django
 from django.test import TestCase
+from mock import patch
 
 # AstroBin
 from astrobin.utils import get_client_country_code

@@ -6,7 +6,6 @@ from django.db import migrations, models
 
 
 class Migration(migrations.Migration):
-
     dependencies = [
         ('astrobin', '0013_auto_20181124_1656'),
     ]
@@ -15,6 +14,19 @@ class Migration(migrations.Migration):
         migrations.AddField(
             model_name='image',
             name='remote_source',
-            field=models.CharField(blank=True, choices=[(None, b'---------'), (b'AstroCamp', b'AC'), (b'Dark Sky Portal', b'DSP'), (b'DeepSkyChile', b'DSC'), (b'DeepSkyWest', b'DSW'), (b'e-EyE Extremadura', b'eEyE'), (b'Grand Mesa Observatory', b'GME'), (b"Heaven's Mirror Observatory", b'HMO'), (b'IC Astronomy Observatories', b'IC'), (b'Image The Universe', b'ITU'), (b'iTelescope', b'iT'), (b'New Mexico Skies', b'NMS'), (b'Observatorio El Sauce', b'OES'), (b'Riverland Dingo Observatory', b'RLD'), (b'Sahara Sky', b'SS'), (b'San Pedro Valley Observatory', b'SPV'), (b'Sierra Remote Observatories', b'SRO'), (b'SkyPi Online Observatory', b'SPOO')], help_text='Which remote hosting facility did you use to acquire data for this image?', max_length=8, null=True, verbose_name='Remote data source'),
+            field=models.CharField(blank=True,
+                                   choices=[(None, b'---------'), (b'AstroCamp', b'AC'), (b'Dark Sky Portal', b'DSP'),
+                                            (b'DeepSkyChile', b'DSC'), (b'DeepSkyWest', b'DSW'),
+                                            (b'e-EyE Extremadura', b'eEyE'), (b'Grand Mesa Observatory', b'GME'),
+                                            (b"Heaven's Mirror Observatory", b'HMO'),
+                                            (b'IC Astronomy Observatories', b'IC'), (b'Image The Universe', b'ITU'),
+                                            (b'iTelescope', b'iT'), (b'New Mexico Skies', b'NMS'),
+                                            (b'Observatorio El Sauce', b'OES'),
+                                            (b'Riverland Dingo Observatory', b'RLD'), (b'Sahara Sky', b'SS'),
+                                            (b'San Pedro Valley Observatory', b'SPV'),
+                                            (b'Sierra Remote Observatories', b'SRO'),
+                                            (b'SkyPi Online Observatory', b'SPOO')],
+                                   help_text='Which remote hosting facility did you use to acquire data for this image?',
+                                   max_length=8, null=True, verbose_name='Remote data source'),
         ),
     ]

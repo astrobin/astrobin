@@ -12,101 +12,150 @@
 {% endblock %}
 
 <!DOCTYPE html>
-<html lang="{% if request.user.is_authenticated and user_language %}{{user_language}}{% else %}en{% endif %}">
-    <head>
-        <title>{% block title %}{% endblock %} - AstroBin</title>
-        <base href="{% block base_href %}/{% endblock %}">
+<html lang="{% if request.user.is_authenticated and user_language %}{{ user_language }}{% else %}en{% endif %}">
+<head>
+    <title>{% block title %}{% endblock %} - AstroBin</title>
+    <base href="{% block base_href %}/{% endblock %}">
 
-        {% include "base/meta.html" %}{% block extra_meta %}{% endblock %}
-        {% include "base/favicon.html" %}
-        {% include "base/ie8html5.html" %}
+    {% include "base/meta.html" %}{% block extra_meta %}{% endblock %}
+    {% include "base/favicon.html" %}
+    {% include "base/ie8html5.html" %}
 
-        <link rel="stylesheet" href="//ajax.googleapis.com/ajax/libs/jqueryui/1.10.3/themes/ui-darkness/jquery-ui.min.css"/>
-        <link rel="stylesheet" href="//cdn.jsdelivr.net/jquery.tokeninput/1.6.0/styles/token-input.css"/>
-        <link rel="stylesheet" href="//cdn.jsdelivr.net/jquery.multiselect/1.13/jquery.multiselect.css"/>
-        <link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/qtip2/2.1.1/basic/jquery.qtip.min.css"/>
-        <link rel="stylesheet" href="https://unpkg.com/vue-multiselect@2.1.0/dist/vue-multiselect.min.css">
-        <link rel="stylesheet" href="https://unpkg.com/nouislider@12.1.0/distribute/nouislider.min.css" />
+    <link rel="stylesheet"
+          href="//ajax.googleapis.com/ajax/libs/jqueryui/1.10.3/themes/ui-darkness/jquery-ui.min.css" />
+    <link rel="stylesheet" href="//cdn.jsdelivr.net/jquery.tokeninput/1.6.0/styles/token-input.css" />
+    <link rel="stylesheet" href="//cdn.jsdelivr.net/jquery.multiselect/1.13/jquery.multiselect.css" />
+    <link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/qtip2/2.1.1/basic/jquery.qtip.min.css" />
+    <link rel="stylesheet" href="https://unpkg.com/vue-multiselect@2.1.0/dist/vue-multiselect.min.css">
+    <link rel="stylesheet" href="https://unpkg.com/nouislider@12.1.0/distribute/nouislider.min.css" />
 
-        <link href="https://fonts.googleapis.com/css?family=Noto+Sans:400,400i,700|Noto+Serif:700&subset=latin-ext" rel="stylesheet">
-        {% stylesheet 'screen' %}
+    <link href="https://fonts.googleapis.com/css?family=Noto+Sans:400,400i,700|Noto+Serif:700&subset=latin-ext"
+          rel="stylesheet">
+    {% stylesheet 'screen' %}
 
-        {% include "base/ie6.html" %}
+    {% include "base/ie6.html" %}
 
-        {% block extra_css %}{% endblock %}
-        {% block extra_head %}{% endblock %}
+    {% block extra_css %}{% endblock %}
+    {% block extra_head %}{% endblock %}
 
-        {% comment %}Alternative spelling.{% endcomment %}
-        {% block extrahead %}{% endblock %}
+    {% comment %}Alternative spelling.{% endcomment %}
+    {% block extrahead %}{% endblock %}
 
-        {% include "base/noscript.html" %}
-        {% include "base/ga.html" %}
+    {% include "base/noscript.html" %}
+    {% include "base/ga.html" %}
 
-        <script src="//ajax.googleapis.com/ajax/libs/jquery/1.8.3/jquery.min.js"></script>
-    </head>
+    <script src="//ajax.googleapis.com/ajax/libs/jquery/1.8.3/jquery.min.js"></script>
+</head>
 
-    <body data-offset="55">
-        {% cookielaw_banner %}
+{% show_adsense_ads as show_adsense_ads %}
+<body data-offset="55"
+        {% if show_adsense_ads %}
+      class="with-ads-sidebar"
+        {% endif %}>
 
-        <div class="navbar navbar-fixed-top">
-            <div class="navbar-inner">
-                <div class="container">
+{% cookielaw_banner %}
 
-                    {% include "base/site_links.html" %}
-                    {% include "base/user_links.html" %}
-                    {% include "base/search_form.html" %}
+<div class="navbar navbar-fixed-top">
+    <div class="navbar-inner">
+        <div class="container">
 
-                </div>
-            </div>
+            {% include "base/site_links.html" %}
+            {% include "base/user_links.html" %}
+            {% include "base/search_form.html" %}
+
         </div>
+    </div>
+</div>
 
-        {% include "base/global_alerts.html" %}
+{% include "base/global_alerts.html" %}
 
-        <div id="top" class="container astrobin-container {% block container_extra_classes %}{% endblock %}">
-            {% block breadcrumb %} {# Use a block to allow forum template to override this #}
-                {% render_breadcrumbs %}
-            {% endblock %}
-            {% include "base/alerts.html" %}
-            {% block content %}{% endblock %}
-        </div> <!-- container -->
+<div id="top" class="container astrobin-container {% block container_extra_classes %}{% endblock %}">
+    {% if show_adsense_ads %}
+        <div class="ads-sidebar-left"></div>
+        <div class="ads-sidebar-right"></div>
 
-        {% include "base/footer.html" %}
+        <script>
+            if (window.innerWidth >= 1180) {
+                var externalScript = document.createElement("script");
+                externalScript.type = "text/javascript";
+                externalScript.setAttribute("async", "async");
+                externalScript.src = "//pagead2.googlesyndication.com/pagead/js/adsbygoogle.js";
+                document.getElementsByTagName("body")[0].appendChild(externalScript);
 
-        {% if DONATIONS_ENABLED and not request.user|is_donor %}
-            {% donate_modal %}
-        {% endif %}
+                var inlineScript = document.createElement("script");
+                inlineScript.type = "text/javascript";
+                inlineScript.text = "(adsbygoogle = window.adsbygoogle || []).push({});";
 
-        {% block base_modals %}
-            {% include "base/modals.html" %}
-        {% endblock %}
+                var ins = document.createElement("ins");
+                ins.setAttribute("class", "adsbygoogle");
+                ins.setAttribute("style", "display:inline-block;width:160px;height:600px;");
+                ins.setAttribute("data-ad-client", "ca-pub-6593405236842139");
+                ins.setAttribute("data-ad-slot", "8733694975");
+                document.getElementsByClassName("ads-sidebar-right")[0].appendChild(ins);
+                document.getElementsByClassName("ads-sidebar-right")[0].appendChild(inlineScript);
 
-        {% block modals %}{% endblock %}
+                if (window.innerWidth >= 1366) {
+                    inlineScript = document.createElement("script");
+                    inlineScript.type = "text/javascript";
+                    inlineScript.text = "(adsbygoogle = window.adsbygoogle || []).push({});";
 
-        {% include "base/scripts.html" %}
-        {% include "base/js.html" %}
-
-        {% block extra_js %}{% endblock %}
-
-        {% if ADS_ENABLED %}
-            {% dfp_footer %}
-        {% endif %}
-
-        <!-- used to figure out how many users use ad blocking software -->
-        <script type="text/javascript">
-            document.write('<div id="adsense" style="visibility: hidden;">Test ad.</div>');
-            $(document).ready(checkAds());
-
-            /* Adblock Check */
-            function checkAds() {
-                var ad = document.getElementById('adsense');
-                if(!ad || ad.innerHTML.length == 0 || ad.clientHeight === 0) {
-                    document.write("<script>_gaq.push(['_setCustomVar', 5, 'Adblock','Blocked',2]);<\/sc" + "ript>");
-                } else {
-                    document.write("<script>_gaq.push(['_setCustomVar', 5, 'Adblock','UnBlocked',2]);<\/sc" + "ript>");
+                    ins = document.createElement("ins");
+                    ins.setAttribute("class", "adsbygoogle");
+                    ins.setAttribute("style", "display:inline-block;width:160px;height:600px;");
+                    ins.setAttribute("data-ad-client", "ca-pub-6593405236842139");
+                    ins.setAttribute("data-ad-slot", "5954677296");
+                    document.getElementsByClassName("ads-sidebar-left")[0].appendChild(ins);
+                    document.getElementsByClassName("ads-sidebar-left")[0].appendChild(inlineScript);
                 }
             }
-            /* End Adblock Check */
         </script>
-    </body>
+    {% endif %} {# ./show adsense ads #}
+
+    {% block breadcrumb %} {# Use a block to allow forum template to override this #}
+        {% render_breadcrumbs %}
+    {% endblock %}
+    {% include "base/alerts.html" %}
+    {% block content %}{% endblock %}
+</div> <!-- container -->
+
+{% include "base/footer.html" %}
+
+{% if DONATIONS_ENABLED and not request.user|is_donor %}
+    {% donate_modal %}
+{% endif %}
+
+{% block base_modals %}
+    {% include "base/modals.html" %}
+{% endblock %}
+
+{% block modals %}{% endblock %}
+
+{% include "base/scripts.html" %}
+{% include "base/js.html" %}
+
+{% block extra_js %}{% endblock %}
+
+{% if ADS_ENABLED %}
+    {% dfp_footer %}
+{% endif %}
+
+<!-- used to figure out how many users use ad blocking software -->
+<script type="text/javascript">
+    document.write('<div id="adsense" style="visibility: hidden;">Test ad.</div>');
+    $(document).ready(checkAds());
+
+    /* Adblock Check */
+    function checkAds() {
+        var ad = document.getElementById('adsense');
+        if (!ad || ad.innerHTML.length == 0 || ad.clientHeight === 0) {
+            document.write("<script>_gaq.push(['_setCustomVar', 5, 'Adblock','Blocked',2]);<\/sc" + "ript>");
+        } else {
+            document.write("<script>_gaq.push(['_setCustomVar', 5, 'Adblock','UnBlocked',2]);<\/sc" + "ript>");
+        }
+    }
+
+    /* End Adblock Check */
+</script>
+</body>
 </html>
 

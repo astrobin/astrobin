@@ -14,10 +14,10 @@ class Command(BaseCommand):
 
     def handle(self, *args, **options):
         try:
-            iotd = Iotd.objects.get(date = datetime.now().date())
+            iotd = Iotd.objects.get(date=datetime.now().date())
             ImageOfTheDay.objects.get_or_create(
-                image = iotd.image,
-                date = iotd.date,
-                chosen_by =  iotd.judge)
+                image=iotd.image,
+                date=iotd.date,
+                chosen_by=iotd.judge)
         except Iotd.DoesNotExist:
             pass

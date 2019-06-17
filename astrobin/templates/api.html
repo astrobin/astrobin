@@ -31,11 +31,11 @@
                 <h2>Step 2 &rarr;</h2>
                 <p>
                     <strong>Perform queries:</strong>
-                    <ul>
-                        <li>Search images</li>
-                        <li>Get image data</li>
-                        <li>Filter and order</li>
-                    </ul>
+                <ul>
+                    <li>Search images</li>
+                    <li>Get image data</li>
+                    <li>Filter and order</li>
+                </ul>
                 </p>
             </div>
         </div>
@@ -44,11 +44,11 @@
                 <h2>Step 3</h2>
                 <p>
                     <strong>Build amazing apps!</strong>
-                    <ul>
-                        <li>Websites</li>
-                        <li>Desktop applications</li>
-                        <li>Mobile apps for any platform</li>
-                    </ul>
+                <ul>
+                    <li>Websites</li>
+                    <li>Desktop applications</li>
+                    <li>Mobile apps for any platform</li>
+                </ul>
                 </p>
             </div>
         </div>
@@ -68,12 +68,12 @@
             </p>
             <p>
                 Some possibilities:
-                <ul>
-                    <li>A web widget that displays the recent images of a certain user.</li>
-                    <li>A web widget that displays the <em>Image of the day</em>.</li>
-                    <li>An iPhone/Android/other app for browsing AstroBin effectively.</li>
-                    <li>... and many more!</li>
-                </ul>
+            <ul>
+                <li>A web widget that displays the recent images of a certain user.</li>
+                <li>A web widget that displays the <em>Image of the day</em>.</li>
+                <li>An iPhone/Android/other app for browsing AstroBin effectively.</li>
+                <li>... and many more!</li>
+            </ul>
             </p>
 
             <h2>Availability and limitations.</h2>
@@ -97,7 +97,7 @@
                 <!-- TODO: refactor for removal of filename and original_ext -->
                 If you get an Image object using the APIs, it will have a <em>filename</em>
                 and <em>original_ext</em> field. To display the image, you must append them
-                to <strong>{{IMAGES_URL}}</strong>.
+                to <strong>{{ IMAGES_URL }}</strong>.
             </p>
             <p>
                 This will give you the full size image. If you want a smaller version, you can
@@ -124,8 +124,8 @@
             <div class="alert alert-info">
                 All examples omit the base URL <strong>/api/v1</strong> and the
                 <strong>api_key</strong>, <strong>api_secret</strong> and <strong>format</strong>
-                URL arguments, for brevity.<br/>
-                You must add them in real usage, e.g.:<br/>
+                URL arguments, for brevity.<br />
+                You must add them in real usage, e.g.:<br />
                 <a href="#">http://astrobin.com/api/v1/.../?...&amp;api_key=123456790&amp;api_secret=0987654321&amp;format=json</a>
             </div>
             <p>Remember that you can combine most of these queries, so feel free to experiment!</p>
@@ -158,7 +158,8 @@
                 </tr>
                 <tr>
                     <th>Search by upload date range:</th>
-                    <td><code>image/?uploaded__gte=2012-04-10%200:00:00&amp;uploaded__lt=2012-04-11%200:00:00</code></td>
+                    <td><code>image/?uploaded__gte=2012-04-10%200:00:00&amp;uploaded__lt=2012-04-11%200:00:00</code>
+                    </td>
                 </tr>
                 <tr>
                     <th>Comparison operators:</th>

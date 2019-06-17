@@ -1,10 +1,9 @@
-from django.core.management.base import BaseCommand
 from django.contrib.auth.models import User
-from django.utils.hashcompat import md5_constructor
-
+from django.core.management.base import BaseCommand
 from haystack.query import SearchQuerySet
 
 from astrobin.models import Image, GlobalStat
+
 
 class Command(BaseCommand):
     help = "Updates the global stats."
@@ -21,7 +20,7 @@ class Command(BaseCommand):
         integration = int(integration / 3600.0)
 
         gs = GlobalStat(
-            users = users,
-            images = images,
-            integration = integration)
+            users=users,
+            images=images,
+            integration=integration)
         gs.save()

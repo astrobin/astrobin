@@ -1,17 +1,15 @@
 # Django
 from django.contrib.contenttypes.models import ContentType
-from django.template import Library, Node
+from django.template import Library
 
 # This app
-from astrobin_apps_platesolving.solver import Solver
-
 
 register = Library()
 
 
 @register.inclusion_tag(
     'astrobin_apps_platesolving/inclusion_tags/platesolving_machinery.html',
-    takes_context = True)
+    takes_context=True)
 def platesolving_machinery(context, target):
     content_type = ContentType.objects.get_for_model(target)
     return {
@@ -20,4 +18,3 @@ def platesolving_machinery(context, target):
         'solution_id': target.solution.pk if target.solution else 0,
         'solution_status': target.solution.status if target.solution else 0,
     }
-

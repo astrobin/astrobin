@@ -4,20 +4,19 @@ from __future__ import absolute_import
 import subprocess
 from time import sleep
 
+from celery.utils.log import get_task_logger
 # Django
 from django.conf import settings
 from django.contrib.auth.models import User
 from django.core.cache import cache
 from django.core.management import call_command
-
-# Third party
-from celery import shared_task
-from celery.utils.log import get_task_logger
 from django_bouncy.models import Bounce
 from haystack.query import SearchQuerySet
 
 # AstroBin
 from astrobin_apps_images.models import ThumbnailGroup
+# Third party
+from celery import shared_task
 
 logger = get_task_logger(__name__)
 
@@ -33,7 +32,7 @@ def test_task():
 def update_top100_ids():
     from astrobin.models import Image
 
-    LOCK_EXPIRE = 60 * 5 # Lock expires in 5 minutes
+    LOCK_EXPIRE = 60 * 5  # Lock expires in 5 minutes
     lock_id = 'top100_ids_lock'
 
     # cache.add fails if the key already exists
@@ -158,6 +157,8 @@ def retrieve_thumbnail(pk, alias, options):
 """
 This task retrieves all thumbnail data.
 """
+
+
 @shared_task()
 def retrieve_primary_thumbnails(pk, options):
     for alias in ('story', 'thumb', 'gallery', 'regular', 'hd', 'real'):

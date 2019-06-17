@@ -5,5 +5,4 @@ CACHES = {
     },
 }
 
-JOHNNY_MIDDLEWARE_KEY_PREFIX='jc_astrobin'
-
+JOHNNY_MIDDLEWARE_KEY_PREFIX = 'jc_astrobin'

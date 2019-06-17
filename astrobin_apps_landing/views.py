@@ -1,11 +1,10 @@
-from django.views.generic import TemplateView
 from django.contrib.auth.models import User
-
+from django.views.generic import TemplateView
 from pybb.models import Post
 
 from astrobin.models import Gear, Image
-
 from nested_comments.models import NestedComment
+
 
 class LandingView(TemplateView):
     template_name = "astrobin_apps_landing/landing.html"

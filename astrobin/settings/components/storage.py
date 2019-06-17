@@ -2,7 +2,6 @@ import os
 
 local_path = lambda path: os.path.join(os.path.dirname(__file__), path)
 
-
 AWS_S3_ENABLED = os.environ.get('AWS_S3_ENABLED', 'false') == "true"
 if AWS_S3_ENABLED:
     AWS_S3_CUSTOM_DOMAIN = os.environ.get('AWS_S3_CUSTOM_DOMAIN', 'cdn.astrobin.com')

@@ -20,13 +20,14 @@
 
     <div class="subtitle">
         <i class="icon icon-info-sign"></i>
-        {% blocktrans with used_bytes|filesizeformat as used and byte_limit|filesizeformat as limit %}You have used {{used}} of your {{limit}}.{% endblocktrans %}
-        ({{used_percent}}%)
+        {% blocktrans with used_bytes|filesizeformat as used and byte_limit|filesizeformat as limit %}You have used
+            {{ used }} of your {{ limit }}.{% endblocktrans %}
+        ({{ used_percent }}%)
     </div>
 
     {% if used_percent > 0 %}
-        <div class="progress {{progress_class}}">
-            <div class="bar" style="width:{{used_percent}}%"></div>
+        <div class="progress {{ progress_class }}">
+            <div class="bar" style="width:{{ used_percent }}%"></div>
         </div>
     {% endif %}
 
@@ -42,27 +43,29 @@
     {% if over_limit %}
         <div class="alert alert-error">
             <h4 class="alert-heading"><i class="icon-fire"></i> {% trans "Error!" %}</h3>
-            {% trans "You have no more space left on your Raw Data account. Please delete some files to make room, or upgrade your account." %}
+                {% trans "You have no more space left on your Raw Data account. Please delete some files to make room, or upgrade your account." %}
         </div>
-    {% endif %} 
+    {% endif %}
 
     {% if unindexed_count %}
         <div class="alert alert-warning">
             <h4 class="alert-heading"><i class="icon-warning-sign"></i> {% trans "Warning!" %}</h3>
-            {% blocktrans with unindexed_count as number and total_files as total %}AstroBin is still working to index {{number}} of your {{total}} raw files.{% endblocktrans %}
+                {% blocktrans with unindexed_count as number and total_files as total %}AstroBin is still working to
+                    index {{ number }} of your {{ total }} raw files.{% endblocktrans %}
         </div>
-    {% endif %} 
+    {% endif %}
 
     {% if total_files %}
         <div class="rawdata-browser-breadcrumb">
-            <a class="btn btn-mini btn-primary" href="{{ request.path }}{% query_string '' 'f,type,upload,acquisition,camera,telescope,filter,subject,temperature' %}">
+            <a class="btn btn-mini btn-primary" href="
+                    {{ request.path }}{% query_string '' 'f,type,upload,acquisition,camera,telescope,filter,subject,temperature' %}">
                 {% trans "All files" %}
             </a>
 
             {% if filter_type %}
                 <span class="divider">/</span>
                 <a class="btn btn-mini btn-primary" href="{{ request.path }}{% query_string '' 'type' %}">
-                    {% trans "Type" %}: <strong>{{filter_type|humanize_rawimage_type}}</strong>
+                    {% trans "Type" %}: <strong>{{ filter_type|humanize_rawimage_type }}</strong>
                     <i class="icon-remove"></i>
                 </a>
             {% endif %}
@@ -70,7 +73,7 @@
             {% if filter_upload %}
                 <span class="divider">/</span>
                 <a class="btn btn-mini btn-primary" href="{{ request.path }}{% query_string '' 'upload' %}">
-                    {% trans "Uploaded" %}: <strong>{{filter_upload}}</strong>
+                    {% trans "Uploaded" %}: <strong>{{ filter_upload }}</strong>
                     <i class="icon-remove"></i>
                 </a>
             {% endif %}
@@ -78,7 +81,7 @@
             {% if filter_acquisition %}
                 <span class="divider">/</span>
                 <a class="btn btn-mini btn-primary" href="{{ request.path }}{% query_string '' 'acquisition' %}">
-                    {% trans "Acquisition date" %}: <strong>{{filter_acquisition}}</strong>
+                    {% trans "Acquisition date" %}: <strong>{{ filter_acquisition }}</strong>
                     <i class="icon-remove"></i>
                 </a>
             {% endif %}
@@ -86,7 +89,7 @@
             {% if filter_camera %}
                 <span class="divider">/</span>
                 <a class="btn btn-mini btn-primary" href="{{ request.path }}{% query_string '' 'camera' %}">
-                    {% trans "Camera" %}: <strong>{{filter_camera}}</strong>
+                    {% trans "Camera" %}: <strong>{{ filter_camera }}</strong>
                     <i class="icon-remove"></i>
                 </a>
             {% endif %}
@@ -94,7 +97,7 @@
             {% if filter_telescope %}
                 <span class="divider">/</span>
                 <a class="btn btn-mini btn-primary" href="{{ request.path }}{% query_string '' 'telescope' %}">
-                    {% trans "Telescope or lens" %}: <strong>{{filter_telescope}}</strong>
+                    {% trans "Telescope or lens" %}: <strong>{{ filter_telescope }}</strong>
                     <i class="icon-remove"></i>
                 </a>
             {% endif %}
@@ -102,7 +105,7 @@
             {% if filter_filter %}
                 <span class="divider">/</span>
                 <a class="btn btn-mini btn-primary" href="{{ request.path }}{% query_string '' 'filter' %}">
-                    {% trans "Filter" %}: <strong>{{filter_filter}}</strong>
+                    {% trans "Filter" %}: <strong>{{ filter_filter }}</strong>
                     <i class="icon-remove"></i>
                 </a>
             {% endif %}
@@ -110,7 +113,7 @@
             {% if filter_subject %}
                 <span class="divider">/</span>
                 <a class="btn btn-mini btn-primary" href="{{ request.path }}{% query_string '' 'subject' %}">
-                    {% trans "Subject" %}: <strong>{{filter_subject}}</strong>
+                    {% trans "Subject" %}: <strong>{{ filter_subject }}</strong>
                     <i class="icon-remove"></i>
                 </a>
             {% endif %}
@@ -118,7 +121,7 @@
             {% if filter_temperature %}
                 <span class="divider">/</span>
                 <a class="btn btn-mini btn-primary" href="{{ request.path }}{% query_string '' 'temperature' %}">
-                    {% trans "Temperature" %}: <strong>{{filter_temperature}}</strong>
+                    {% trans "Temperature" %}: <strong>{{ filter_temperature }}</strong>
                     <i class="icon-remove"></i>
                 </a>
             {% endif %}
@@ -126,7 +129,7 @@
             {% if folders_header %}
                 <span class="divider">/</span>
                 <a class="btn btn-mini" href="{{ request.path }}{% query_string 'f=none' '' %}">
-                    {% trans "Smart folders" %}: <strong>{{folders_header}}</strong>
+                    {% trans "Smart folders" %}: <strong>{{ folders_header }}</strong>
                     <i class="icon-remove"></i>
                 </a>
             {% endif %}
@@ -138,7 +141,8 @@
         <p>
             {% blocktrans %}There doesn't seem to be anything here.{% endblocktrans %}
             {% url 'image_upload' as upload_url %}
-            {% blocktrans %}Head over to the <a href="{{upload_url}}">upload page</a> to get started. {% endblocktrans %}
+            {% blocktrans %}Head over to the <a href="{{ upload_url }}">upload page</a> to get
+                started. {% endblocktrans %}
         </p>
     {% endif %}
 {% endblock %}
@@ -158,10 +162,15 @@
             </div>
 
             <p>
-                {% blocktrans %}<strong>AstroBin Raw Data</strong> will soon allow you to automatically preprocess your data with a single click!{% endblocktrans %}
+                {% blocktrans %}<strong>AstroBin Raw Data</strong> will soon allow you to automatically preprocess your
+                    data with a single click!{% endblocktrans %}
             </p>
             <p>
-                {% blocktrans %}We are working on algorithms that will automatically scan your library for calibration files, and identify the best matches for dark, offset and flat files. AstroBin will automatically create master frames, calibrate your selected images, align them, stack them and offer you the stacked file for download, ready to be postprocessed in your favorite image processing program.{% endblocktrans %}
+                {% blocktrans %}We are working on algorithms that will automatically scan your library for calibration
+                    files, and identify the best matches for dark, offset and flat files. AstroBin will automatically
+                    create master frames, calibrate your selected images, align them, stack them and offer you the
+                    stacked file for download, ready to be postprocessed in your favorite image processing
+                    program.{% endblocktrans %}
             </p>
             <p>
                 {% blocktrans %}We will let you know when this feature is available!{% endblocktrans %}

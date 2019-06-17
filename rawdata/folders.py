@@ -8,6 +8,7 @@ from django.utils.translation import ugettext_lazy as _
 
 UNKNOWN_LABEL = "---------"
 
+
 class BaseFolderFactory(object):
     def __init__(self, *args, **kwargs):
         self.source = kwargs.pop('source', [])
@@ -19,56 +20,56 @@ class BaseFolderFactory(object):
     def filter(self, params):
         filter_type = params.get('type')
         if filter_type:
-            self.source = self.source.filter(image_type = filter_type)
+            self.source = self.source.filter(image_type=filter_type)
 
         filter_upload = params.get('upload')
         if filter_upload:
             self.source = self.source.filter(
-                Q(uploaded__gte = datetime.strptime(filter_upload, '%Y-%m-%d')) &
-                Q(uploaded__lte = datetime.strptime(filter_upload, '%Y-%m-%d') + timedelta(days=1)))
+                Q(uploaded__gte=datetime.strptime(filter_upload, '%Y-%m-%d')) &
+                Q(uploaded__lte=datetime.strptime(filter_upload, '%Y-%m-%d') + timedelta(days=1)))
 
         filter_acquisition = params.get('acquisition')
         if filter_acquisition:
-            self.source = self.source\
+            self.source = self.source \
                 .filter(
-                    Q(acquisition_date__gte = datetime.strptime(filter_acquisition, '%Y-%m-%d')) &
-                    Q(acquisition_date__lte = datetime.strptime(filter_acquisition, '%Y-%m-%d') +
-                                              timedelta(days=1)))
+                Q(acquisition_date__gte=datetime.strptime(filter_acquisition, '%Y-%m-%d')) &
+                Q(acquisition_date__lte=datetime.strptime(filter_acquisition, '%Y-%m-%d') +
+                                        timedelta(days=1)))
 
         filter_camera = params.get('camera')
         if filter_camera:
             if filter_camera != UNKNOWN_LABEL:
-                self.source = self.source.filter(camera = filter_camera)
+                self.source = self.source.filter(camera=filter_camera)
             else:
-                self.source = self.source.filter(camera__isnull = True)
+                self.source = self.source.filter(camera__isnull=True)
 
         filter_telescope = params.get('telescope')
         if filter_telescope:
             if filter_telescope != UNKNOWN_LABEL:
-                self.source = self.source.filter(telescopeName = filter_telescope)
+                self.source = self.source.filter(telescopeName=filter_telescope)
             else:
-                self.source = self.source.filter(telescopeName__isnull = True)
+                self.source = self.source.filter(telescopeName__isnull=True)
 
         filter_filter = params.get('filter')
         if filter_filter:
             if filter_filter != UNKNOWN_LABEL:
-                self.source = self.source.filter(filterName = filter_filter)
+                self.source = self.source.filter(filterName=filter_filter)
             else:
-                self.source = self.source.filter(filterName__isnull = True)
+                self.source = self.source.filter(filterName__isnull=True)
 
         filter_subject = params.get('subject')
         if filter_subject:
             if filter_subject != UNKNOWN_LABEL:
-                self.source = self.source.filter(subjectName = filter_subject)
+                self.source = self.source.filter(subjectName=filter_subject)
             else:
-                self.source = self.source.filter(subjectName__isnull = True)
+                self.source = self.source.filter(subjectName__isnull=True)
 
         filter_temperature = params.get('temperature')
         if filter_temperature:
             if filter_temperature != UNKNOWN_LABEL:
-                self.source = self.source.filter(temperature = filter_temperature)
+                self.source = self.source.filter(temperature=filter_temperature)
             else:
-                self.source = self.source.filter(temperature__isnull = True)
+                self.source = self.source.filter(temperature__isnull=True)
 
         return self.source
 
@@ -77,6 +78,7 @@ class NoFolderFactory(BaseFolderFactory):
     """ A special kind of factory that produces no folders, useful if you
         still want to use .filter().
     """
+
     def __init__(self, *args, **kwargs):
         super(NoFolderFactory, self).__init__(*args, **kwargs)
         self.label = _("Name")
@@ -94,7 +96,7 @@ class TypeFolderFactory(BaseFolderFactory):
 
     def produce(self):
         from .templatetags.rawdata_tags import humanize_rawimage_type
-        folders = [] # {'type': 123, 'label': 'abc', 'images': []}
+        folders = []  # {'type': 123, 'label': 'abc', 'images': []}
         for image in self.source:
             t = image.image_type
             try:
@@ -118,7 +120,7 @@ class UploadDateFolderFactory(BaseFolderFactory):
         self.source = self.source.order_by('-uploaded')
 
     def produce(self):
-        folders = [] # {'date': _, 'label': _, 'images': []}
+        folders = []  # {'date': _, 'label': _, 'images': []}
         for image in self.source:
             date = image.uploaded.date()
             try:
@@ -142,7 +144,7 @@ class AcquisitionDateFolderFactory(BaseFolderFactory):
         self.source = self.source.order_by('-acquisition_date')
 
     def produce(self):
-        folders = [] # {'date': _, 'label': _, 'images': []}
+        folders = []  # {'date': _, 'label': _, 'images': []}
         for image in self.source:
             if image.acquisition_date:
                 date = image.acquisition_date.date()
@@ -167,9 +169,9 @@ class CameraFolderFactory(BaseFolderFactory):
         self.source = self.source.order_by('camera')
 
     def produce(self):
-        folders = [] # {'camera': 'abc', 'label': 'abc', 'images': []}
+        folders = []  # {'camera': 'abc', 'label': 'abc', 'images': []}
         for image in self.source:
-            camera = image.camera if image.camera else UNKNOWN_LABEL 
+            camera = image.camera if image.camera else UNKNOWN_LABEL
             try:
                 index = map(itemgetter('camera'), folders).index(camera)
                 folders[index]['images'].append(image)
@@ -191,9 +193,9 @@ class TelescopeFolderFactory(BaseFolderFactory):
         self.source = self.source.order_by('telescopeName')
 
     def produce(self):
-        folders = [] # {'telescope': 'abc', 'label': 'abc', 'images': []}
+        folders = []  # {'telescope': 'abc', 'label': 'abc', 'images': []}
         for image in self.source:
-            telescope = image.telescopeName if image.telescopeName else UNKNOWN_LABEL 
+            telescope = image.telescopeName if image.telescopeName else UNKNOWN_LABEL
             try:
                 index = map(itemgetter('telescope'), folders).index(telescope)
                 folders[index]['images'].append(image)
@@ -215,9 +217,9 @@ class FilterFolderFactory(BaseFolderFactory):
         self.source = self.source.order_by('filterName')
 
     def produce(self):
-        folders = [] # {'filter': 'abc', 'label': 'abc', 'images': []}
+        folders = []  # {'filter': 'abc', 'label': 'abc', 'images': []}
         for image in self.source:
-            filterName = image.filterName if image.filterName else UNKNOWN_LABEL 
+            filterName = image.filterName if image.filterName else UNKNOWN_LABEL
             try:
                 index = map(itemgetter('filterName'), folders).index(filterName)
                 folders[index]['images'].append(image)
@@ -239,9 +241,9 @@ class SubjectFolderFactory(BaseFolderFactory):
         self.source = self.source.order_by('subjectName')
 
     def produce(self):
-        folders = [] # {'subject': 'abc', 'label': 'abc', 'images': []}
+        folders = []  # {'subject': 'abc', 'label': 'abc', 'images': []}
         for image in self.source:
-            subjectName = image.subjectName if image.subjectName else UNKNOWN_LABEL 
+            subjectName = image.subjectName if image.subjectName else UNKNOWN_LABEL
             try:
                 index = map(itemgetter('subjectName'), folders).index(subjectName)
                 folders[index]['images'].append(image)
@@ -263,9 +265,9 @@ class TemperatureFolderFactory(BaseFolderFactory):
         self.source = self.source.order_by('-temperature')
 
     def produce(self):
-        folders = [] # {'temperature': '123', 'label': '123', 'images': []}
+        folders = []  # {'temperature': '123', 'label': '123', 'images': []}
         for image in self.source:
-            temperature = image.temperature if image.camera else UNKNOWN_LABEL 
+            temperature = image.temperature if image.camera else UNKNOWN_LABEL
             try:
                 index = map(itemgetter('temperature'), folders).index(temperature)
                 folders[index]['images'].append(image)
@@ -291,4 +293,3 @@ FOLDER_TYPE_LOOKUP = {
     'subject': SubjectFolderFactory,
     'temperature': TemperatureFolderFactory,
 }
-

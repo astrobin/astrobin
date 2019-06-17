@@ -24,4 +24,3 @@ TOGGLEPROPERTIES = {
         "property_icon": "icon-plus",
     }
 }
-

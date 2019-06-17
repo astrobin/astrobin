@@ -1,11 +1,11 @@
-from django.utils.translation import ugettext as _
-
 import subscription.signals
+from django.utils.translation import ugettext as _
 
 from .utils import (
     rawdata_user_used_bytes,
     rawdata_subscription_byte_limit,
 )
+
 
 def impossible_downgrade(sender, subscription, **kwargs):
     before = sender.subscription
@@ -15,12 +15,15 @@ def impossible_downgrade(sender, subscription, **kwargs):
     limit = rawdata_subscription_byte_limit(subscription)
 
     if used > limit:
-        return _("You cannot downgrade to this plan because your files would not fit in the allocated space. Please delete some files first.")
+        return _(
+            "You cannot downgrade to this plan because your files would not fit in the allocated space. Please delete some files first.")
 
     return None
 
 
 __installed = False
+
+
 def install():
     global __installed
     if not __installed:

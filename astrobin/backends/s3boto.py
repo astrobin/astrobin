@@ -2,8 +2,8 @@
 Incorporated from django-storages, copyright all of those listed in:
 http://code.welldev.org/django-storages/src/tip/AUTHORS
 """
-import os
 import mimetypes
+import os
 
 try:
     from cStringIO import StringIO
@@ -43,16 +43,17 @@ GZIP_CONTENT_TYPES = getattr(settings, 'GZIP_CONTENT_TYPES', (
 if IS_GZIPPED:
     from gzip import GzipFile
 
+
 class S3BotoStorage(Storage):
     """Amazon Simple Storage Service using Boto"""
 
     def __init__(self, bucket=STORAGE_BUCKET_NAME,
-                       bucket_cname=STORAGE_BUCKET_CNAME,
-                       access_key=None, secret_key=None, acl=DEFAULT_ACL,
-                       headers=HEADERS, gzip=IS_GZIPPED,
-                       gzip_content_types=GZIP_CONTENT_TYPES,
-                       querystring_auth=QUERYSTRING_AUTH,
-                       force_no_ssl=True):
+                 bucket_cname=STORAGE_BUCKET_CNAME,
+                 access_key=None, secret_key=None, acl=DEFAULT_ACL,
+                 headers=HEADERS, gzip=IS_GZIPPED,
+                 gzip_content_types=GZIP_CONTENT_TYPES,
+                 querystring_auth=QUERYSTRING_AUTH,
+                 force_no_ssl=True):
         self.bucket_name = bucket
         self.bucket_cname = bucket_cname
         self.acl = acl
@@ -97,8 +98,8 @@ class S3BotoStorage(Storage):
             if AUTO_CREATE_BUCKET:
                 return self.connection.create_bucket(name)
             raise ImproperlyConfigured, ("Bucket specified by "
-            "AWS_STORAGE_BUCKET_NAME does not exist. Buckets can be "
-            "automatically created by setting AWS_AUTO_CREATE_BUCKET=True")
+                                         "AWS_STORAGE_BUCKET_NAME does not exist. Buckets can be "
+                                         "automatically created by setting AWS_AUTO_CREATE_BUCKET=True")
 
     def _clean_name(self, name):
         # Useful for windows' paths
@@ -136,7 +137,7 @@ class S3BotoStorage(Storage):
 
         headers.update({
             'Content-Type': content_type,
-            'Content-Length' : len(content),
+            'Content-Length': len(content),
         })
 
         content.name = name
@@ -196,6 +197,7 @@ class S3BotoStorage(Storage):
         name = self._clean_name(name)
         return name
 
+
 class S3BotoStorage_AllPublic(S3BotoStorage):
     """
     Same as S3BotoStorage, but defaults to uploading everything with a
@@ -210,6 +212,7 @@ class S3BotoStorage_AllPublic(S3BotoStorage):
     WARNING: This backend makes absolutely no attempt to verify whether the
     given key exists on self.url(). This is much faster, but be aware.
     """
+
     def __init__(self, *args, **kwargs):
         super(S3BotoStorage_AllPublic, self).__init__(acl='public-read',
                                                       querystring_auth=False,
@@ -226,6 +229,7 @@ class S3BotoStorage_AllPublic(S3BotoStorage):
             return "http://%s/%s" % (self.bucket_cname, name)
         else:
             return "http://s3.amazonaws.com/%s/%s" % (self.bucket_name, name)
+
 
 class S3BotoStorageFile(File):
     def __init__(self, name, mode, storage):
@@ -260,5 +264,6 @@ class S3BotoStorageFile(File):
         if self._is_dirty:
             if not self.key:
                 self.key = self._storage.bucket.new_key(key_name=self.name)
-            self.key.set_contents_from_string(self.file.getvalue(), headers=self._storage.headers, policy=self.storage.acl)
+            self.key.set_contents_from_string(self.file.getvalue(), headers=self._storage.headers,
+                                              policy=self.storage.acl)
         self.key.close()

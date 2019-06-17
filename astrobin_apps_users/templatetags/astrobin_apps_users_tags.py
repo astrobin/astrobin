@@ -1,18 +1,15 @@
 # Django
-from django.conf import settings
-from django.core.cache import cache
 from django.contrib.auth.models import User
 from django.contrib.contenttypes.models import ContentType
-from django.template import Library, Node
+from django.core.cache import cache
+from django.template import Library
 from django.utils.translation import ugettext_lazy as _
+# Third party apps
+from toggleproperties.models import ToggleProperty
 
 # AstroBin apps
 from astrobin.models import Image, UserProfile
 from astrobin_apps_premium.utils import premium_user_has_valid_subscription
-
-# Third party apps
-from toggleproperties.models import ToggleProperty
-
 
 register = Library()
 
@@ -21,7 +18,7 @@ register = Library()
 def astrobin_username(user, **kwargs):
     if not hasattr(user, 'userprofile'):
         try:
-            user = UserProfile.objects.get(user__username = user).user
+            user = UserProfile.objects.get(user__username=user).user
         except UserProfile.DoesNotExist:
             return {'user': None}
 
@@ -89,15 +86,15 @@ def astrobin_username(user, **kwargs):
     return context
 
 
-@register.inclusion_tag('astrobin_apps_users/inclusion_tags/astrobin_user.html', takes_context = True)
+@register.inclusion_tag('astrobin_apps_users/inclusion_tags/astrobin_user.html', takes_context=True)
 def astrobin_user(context, user, **kwargs):
     user_ct = ContentType.objects.get_for_model(User)
-    images = Image.objects.filter(user = user).count()
+    images = Image.objects.filter(user=user).count()
     followers = ToggleProperty.objects.toggleproperties_for_object("follow", user).count()
     following = ToggleProperty.objects.filter(
-        property_type = "follow",
-        user = user,
-        content_type = user_ct).count()
+        property_type="follow",
+        user=user,
+        content_type=user_ct).count()
 
     request = context['request']
     request_user = None
@@ -131,7 +128,7 @@ def astrobin_user(context, user, **kwargs):
     }
 
 
-@register.inclusion_tag('astrobin_apps_users/inclusion_tags/user_list.html', takes_context = True)
+@register.inclusion_tag('astrobin_apps_users/inclusion_tags/user_list.html', takes_context=True)
 def astrobin_apps_users_list(context, user_list, **kwargs):
     request = context['request']
 
@@ -160,4 +157,3 @@ def astrobin_apps_users_list(context, user_list, **kwargs):
         'DONATIONS_ENABLED': context['DONATIONS_ENABLED'],
         'PREMIUM_ENABLED': context['PREMIUM_ENABLED'],
     }
-

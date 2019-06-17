@@ -86,7 +86,7 @@ PIPELINE = {
                 'astrobin/scss/astrobin-mobile.scss',
             ),
             'output_filename': 'astrobin/css/astrobin_screen.css',
-            'extra_content':  {
+            'extra_content': {
                 'media': 'screen, projection',
             },
         },
@@ -96,7 +96,7 @@ PIPELINE = {
                 'astrobin_apps_landing/css/style.css'
             },
             'output_filename': 'astrobin_css/astrobin_landing.css',
-             'extra_content':  {
+            'extra_content': {
                 'media': 'screen, projection',
             },
         }
@@ -107,4 +107,3 @@ PIPELINE = {
     'CSS_COMPRESSOR': 'pipeline.compressors.yuglify.YuglifyCompressor',
     'JS_COMPRESSOR': 'pipeline.compressors.yuglify.YuglifyCompressor',
 }
-

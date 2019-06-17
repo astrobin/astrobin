@@ -12,9 +12,9 @@
 
     <form class="form-horizontal" action="" method="post">
         {% csrf_token %}
-        {{form|as_bootstrap}}
+        {{ form|as_bootstrap }}
         <div class="form-actions">
-            <input class="btn btn-primary" type="submit" value="{% trans "Create new collection" %}"/>
+            <input class="btn btn-primary" type="submit" value="{% trans "Create new collection" %}" />
             <a class="btn" href="{% url 'user_collections_list' requested_user.username %}">
                 {% trans "Cancel" %}
             </a>

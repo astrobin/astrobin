@@ -26,12 +26,12 @@
                     </a>
                 </li>
                 {% if not READONLY_MODE %}
-                <li>
-                    <a href='{% url 'pybb:mark_all_as_read' %}'>
-                        <i class="icon-check icon-white"></i>
-                        <span class="hidden-phone">{% trans "Mark all as read" %}</span>
-                    </a>
-                </li>
+                    <li>
+                        <a href='{% url 'pybb:mark_all_as_read' %}'>
+                            <i class="icon-check icon-white"></i>
+                            <span class="hidden-phone">{% trans "Mark all as read" %}</span>
+                        </a>
+                    </li>
                 {% endif %}
             </ul>
         </div>
@@ -45,26 +45,26 @@
 
     {% if categories %}
         <table class="forums table {% if category %}category-table{% elif parent_forum %}child-forums-table{% endif %}">
-        {% for category in categories %}
-            <tr class="forum-row head-row">
-                <th class="forum-status">
-                    &nbsp;
-                </th>
-                <th class="forum-name">
-                    {{category.name}}
-                </th>
-                <th class="forum-topic-count hidden-phone">
-                    {% trans "Topics" %}
-                </th>
-                <th class="forum-post-count hidden-phone">
-                    {% trans "Posts" %}
-                </th>
-                <th class="forum-last-post hidden-phone hidden-tablet">
-                    {% trans "Last posts" %}
-                </th>
-            </tr>
-            {% include 'pybb/forum_list.html' with forum_list=category.forums_accessed category=category parent_forum='' %}
-        {% endfor %}
+            {% for category in categories %}
+                <tr class="forum-row head-row">
+                    <th class="forum-status">
+                        &nbsp;
+                    </th>
+                    <th class="forum-name">
+                        {{ category.name }}
+                    </th>
+                    <th class="forum-topic-count hidden-phone">
+                        {% trans "Topics" %}
+                    </th>
+                    <th class="forum-post-count hidden-phone">
+                        {% trans "Posts" %}
+                    </th>
+                    <th class="forum-last-post hidden-phone hidden-tablet">
+                        {% trans "Last posts" %}
+                    </th>
+                </tr>
+                {% include 'pybb/forum_list.html' with forum_list=category.forums_accessed category=category parent_forum='' %}
+            {% endfor %}
         </table>
     {% else %}
         <h2>{% trans "Forum categories are not created" %}</h2>

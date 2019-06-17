@@ -17,7 +17,7 @@ class Command(BaseCommand):
             days = args[0]
 
         archives = TemporaryArchive.objects.filter(
-            created__lte = datetime.now() - timedelta(days = days))
+            created__lte=datetime.now() - timedelta(days=days))
 
         for archive in archives:
             print "Deleting archive: %s" % archive

@@ -7,7 +7,6 @@ from astrobin_apps_notifications.utils import (
     get_unseen_notifications,
 )
 
-
 register = Library()
 
 

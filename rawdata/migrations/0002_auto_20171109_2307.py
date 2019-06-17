@@ -6,7 +6,6 @@ from django.db import migrations, models
 
 
 class Migration(migrations.Migration):
-
     dependencies = [
         ('rawdata', '0001_initial'),
     ]
@@ -35,6 +34,8 @@ class Migration(migrations.Migration):
         migrations.AlterField(
             model_name='rawimage',
             name='image_type',
-            field=models.IntegerField(choices=[(0, 'Unknown'), (1, 'Light'), (2, 'Offset/Bias'), (3, 'Dark'), (4, 'Flat')], default=0, editable=False),
+            field=models.IntegerField(
+                choices=[(0, 'Unknown'), (1, 'Light'), (2, 'Offset/Bias'), (3, 'Dark'), (4, 'Flat')], default=0,
+                editable=False),
         ),
     ]

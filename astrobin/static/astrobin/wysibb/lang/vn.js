@@ -1,4 +1,6 @@
-﻿if (typeof (WBBLANG)=="undefined") {WBBLANG = {};}
+﻿if (typeof (WBBLANG) == "undefined") {
+    WBBLANG = {};
+}
 WBBLANG['vi'] = {
     bold: "In đậm",
     italic: "In nghiêng",
@@ -28,36 +30,36 @@ WBBLANG['vi'] = {
     fs_verybig: "Rất lớn",
     smilebox: "Box Smile",
     video: "Hình ảnh",
-    
+
     modal_link_title: "Chèn Link vào bài viết",
     modal_link_text: "Text hiển thị",
     modal_link_url: "URL trang",
     modal_email_text: "Chèn Email liên hệ",
     modal_email_url: "Email",
     modal_link_tab1: "Insert URL",
-    
+
     modal_img_title: "Insert IMG",
     modal_img_tab1: "Nhập URL",
     modal_img_tab2: "Tải lên",
     modal_imgsrc_text: "Nhập địa chỉ hình ảnh",
     modal_img_btn: "Chọn hình ảnh tải lên",
-    
+
     modal_video_text: "Nhập URL video",
-    
+
     close: "Đóng",
     save: "Lưu",
     cancel: "Hủy",
     remove: "Xóa",
-    
+
     validation_err: "Dữ liệu nhập không hợp lệ",
     error_onupload: "Lỗi Upload tập tin",
-    
+
     fileupload_text1: "Kéo hình ảnh vào đây",
     fileupload_text2: "Hoặc",
-    
+
     loading: "Đang tải...",
     auto: "Chọn màu",
-    
+
     //smiles
     sm1: "Nụ cười",
     sm2: "Cười",

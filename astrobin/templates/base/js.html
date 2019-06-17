@@ -3,11 +3,11 @@
 
 <!-- javascript -->
 <script type="text/javascript">
-    $(window).bind('beforeunload', function() {
-        $.each(astrobin_common.globals.requests, function(i, xhr) {
+    $(window).bind('beforeunload', function () {
+        $.each(astrobin_common.globals.requests, function (i, xhr) {
             try {
                 xhr.abort();
-            } catch(e) {
+            } catch (e) {
                 if (console)
                     console.log('failed to abort xhr');
             }
@@ -19,15 +19,14 @@
     // Returns the version of Internet Explorer or a -1
     // (indicating the use of another browser).
     {
-      var rv = -1; // Return value assumes failure.
-      if (navigator.appName == 'Microsoft Internet Explorer')
-      {
-        var ua = navigator.userAgent;
-        var re  = new RegExp("MSIE ([0-9]{1,}[\.0-9]{0,})");
-        if (re.exec(ua) != null)
-          rv = parseFloat( RegExp.$1 );
-      }
-      return rv;
+        var rv = -1; // Return value assumes failure.
+        if (navigator.appName == 'Microsoft Internet Explorer') {
+            var ua = navigator.userAgent;
+            var re = new RegExp("MSIE ([0-9]{1,}[\.0-9]{0,})");
+            if (re.exec(ua) != null)
+                rv = parseFloat(RegExp.$1);
+        }
+        return rv;
     }
 
     var dictionary = {
@@ -43,12 +42,13 @@
     });
 
 
-    $(document).ready(function() {
+    $(document).ready(function () {
         astrobin_common.init();
 
         $('input:checkbox, input:radio, input:file').uniform(
-            {fileDefaultText: '{% trans "No file selected" %}',
-             fileBtnText: '{% trans "Choose file" %}'
+            {
+                fileDefaultText: '{% trans "No file selected" %}',
+                fileBtnText: '{% trans "Choose file" %}'
             }
         );
     });

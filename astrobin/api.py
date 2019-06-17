@@ -20,7 +20,7 @@ class AppAuthentication(Authentication):
             return False
 
         try:
-            app = App.objects.get(secret = app_secret, key = app_key)
+            app = App.objects.get(secret=app_secret, key=app_key)
         except App.DoesNotExist:
             return False
 
@@ -69,7 +69,7 @@ class ImageRevisionResource(ModelResource):
 
     class Meta:
         authentication = AppAuthentication()
-        queryset = ImageRevision.objects.filter(image__is_wip = False)
+        queryset = ImageRevision.objects.filter(image__is_wip=False)
         fields = [
             'uploaded',
             'w',
@@ -305,7 +305,7 @@ class ImageResource(ModelResource):
         cameras = bundle.obj.imaging_cameras.all()
         return [unicode(x) for x in cameras]
 
-    def build_filters(self, filters = None, ignore_bad_filters = False):
+    def build_filters(self, filters=None, ignore_bad_filters=False):
         subjects = None
         ids = None
 
@@ -343,7 +343,7 @@ class ImageResource(ModelResource):
                 return name
 
             r = r"\y{0}\y".format(fix_name(subjects))
-            qs = Solution.objects.filter(objects_in_field__iregex = r)
+            qs = Solution.objects.filter(objects_in_field__iregex=r)
             orm_filters['pk__in'] = [i.object_id for i in qs]
 
         if ids:
@@ -354,8 +354,8 @@ class ImageResource(ModelResource):
 
 class ImageOfTheDayResource(ModelResource):
     image = fields.ForeignKey('astrobin.api.ImageResource', 'image')
-    runnerup_1 = fields.ForeignKey('astrobin.api.ImageResource', 'runnerup_1', null = True)
-    runnerup_2 = fields.ForeignKey('astrobin.api.ImageResource', 'runnerup_2', null = True)
+    runnerup_1 = fields.ForeignKey('astrobin.api.ImageResource', 'runnerup_1', null=True)
+    runnerup_2 = fields.ForeignKey('astrobin.api.ImageResource', 'runnerup_2', null=True)
 
     class Meta:
         authentication = AppAuthentication()

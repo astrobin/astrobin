@@ -15,7 +15,7 @@
                     {% if message.level == 30 %}<i class="icon-warning-sign"></i> {% trans "Warning!" %}{% endif %}
                     {% if message.level == 40 %}<i class="icon-fire"></i> {% trans "Error!" %}{% endif %}
                 </h4>
-                {{message}}
+                {{ message }}
             </div>
         {% endif %}
     {% endfor %}
@@ -27,7 +27,8 @@
             <div class="alert alert-warning">
                 <h4 class="alert-heading"><i class="icon-warning-sign"></i> {% trans "Warning!" %}</h4>
                 {% url 'profile_edit_commercial' as the_url %}
-                {% blocktrans %}As a producer and/or a retailer on AstroBin, it's very important that you fill in all of your company details! Click <a href="{{the_url}}">here</a> to do it now.{% endblocktrans %}
+                {% blocktrans %}As a producer and/or a retailer on AstroBin, it's very important that you fill in all of
+                    your company details! Click <a href="{{ the_url }}">here</a> to do it now.{% endblocktrans %}
             </div>
         {% endif %}
     {% endwith %}
@@ -39,7 +40,8 @@
             <div class="alert alert-warning">
                 <h4 class="alert-heading"><i class="icon-warning-sign"></i> {% trans "Warning!" %}</h4>
                 {% url 'profile_edit_retailer' as the_url %}
-                {% blocktrans %}As a retailer on AstroBin, it's very important that you fill in your country of operation! Click <a href="{{the_url}}">here</a> to do it now.{% endblocktrans %}
+                {% blocktrans %}As a retailer on AstroBin, it's very important that you fill in your country of
+                    operation! Click <a href="{{ the_url }}">here</a> to do it now.{% endblocktrans %}
             </div>
         {% endif %}
     {% endwith %}

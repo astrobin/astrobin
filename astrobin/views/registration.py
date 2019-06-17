@@ -1,12 +1,8 @@
 from __future__ import absolute_import
 
-# Python
-from datetime import datetime
-
 # Django
 from django import forms
 from django.utils.translation import ugettext_lazy as _
-
 # 3rd party
 from registration.backends.hmac.views import RegistrationView
 from registration.forms import (
@@ -17,19 +13,24 @@ from registration.signals import user_registered
 from astrobin.models import UserProfile
 
 
+# Python
+
+
 class AstroBinRegistrationForm(RegistrationFormUniqueEmail,
                                RegistrationFormTermsOfService):
     important_communications = forms.fields.BooleanField(
         widget=forms.CheckboxInput,
         required=False,
         label=_(u'I accept to receive rare important communications via email'),
-        help_text=_(u'This is highly recommended. These are very rare and contain information that you probably want to have.'))
+        help_text=_(
+            u'This is highly recommended. These are very rare and contain information that you probably want to have.'))
 
     newsletter = forms.fields.BooleanField(
         widget=forms.CheckboxInput,
         required=False,
         label=_(u'I accept to receive occasional newsletters via email'),
-        help_text=_(u'Newsletters do not have a fixed schedule, but in any case they are not sent out more often than once per month.'))
+        help_text=_(
+            u'Newsletters do not have a fixed schedule, but in any case they are not sent out more often than once per month.'))
 
     marketing_material = forms.fields.BooleanField(
         widget=forms.CheckboxInput,

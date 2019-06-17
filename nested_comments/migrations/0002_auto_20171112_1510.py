@@ -4,11 +4,11 @@ from __future__ import unicode_literals
 
 from django.conf import settings
 from django.db import migrations, models
+
 import nested_comments.models
 
 
 class Migration(migrations.Migration):
-
     dependencies = [
         ('nested_comments', '0001_initial'),
     ]
@@ -17,6 +17,7 @@ class Migration(migrations.Migration):
         migrations.AlterField(
             model_name='nestedcomment',
             name='author',
-            field=models.ForeignKey(editable=False, on_delete=models.SET(nested_comments.models.get_sentinel_user), to=settings.AUTH_USER_MODEL),
+            field=models.ForeignKey(editable=False, on_delete=models.SET(nested_comments.models.get_sentinel_user),
+                                    to=settings.AUTH_USER_MODEL),
         ),
     ]

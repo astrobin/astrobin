@@ -23,17 +23,17 @@ def add_story(actor, **kwargs):
     def clear_as_action_object(kwargs):
         if 'action_object' in kwargs:
             Action.objects.filter(
-                Q(action_object_object_id = kwargs['action_object'].pk) |
-                Q(target_object_id = kwargs['action_object'].pk),
-                timestamp__gte = date_from).delete()
+                Q(action_object_object_id=kwargs['action_object'].pk) |
+                Q(target_object_id=kwargs['action_object'].pk),
+                timestamp__gte=date_from).delete()
 
     # Delete previous stories with the same target
     def clear_as_target(kwargs):
         if 'target' in kwargs:
             Action.objects.filter(
-                Q(action_object_object_id = kwargs['target'].pk) |
-                Q(target_object_id = kwargs['target'].pk),
-                timestamp__gte = date_from).delete()
+                Q(action_object_object_id=kwargs['target'].pk) |
+                Q(target_object_id=kwargs['target'].pk),
+                timestamp__gte=date_from).delete()
 
     CLEAR_AS_ACTION_OBJECT_VERBS = [
         'VERB_UPLOADED_IMAGE',

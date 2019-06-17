@@ -24,4 +24,3 @@ class TaskTest(TestCase):
 
         self.assertFalse(User.objects.filter(username="test").exists())
         self.assertFalse(Bounce.objects.filter(address="test@test.com").exists())
-

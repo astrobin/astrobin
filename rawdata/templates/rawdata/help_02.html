@@ -26,11 +26,15 @@
 
         <div class="span4">
             <h3>{% trans "How does it work?" %}</h3>
-            <p>{% blocktrans %}You can have up to <strong>500 GB</strong> to store your <strong>FIT</strong> and <strong>digital camera raw</strong> files.{% endblocktrans %}</p>
+            <p>{% blocktrans %}You can have up to <strong>500 GB</strong> to store your <strong>FIT</strong> and
+                <strong>digital camera raw</strong> files.{% endblocktrans %}</p>
 
-            <p>{% blocktrans %}You can upload all of them in a matter of a few clicks, and AstroBin will start organizing your data in "virtual folders".{% endblocktrans %}</p>
+            <p>{% blocktrans %}You can upload all of them in a matter of a few clicks, and AstroBin will start
+                organizing your data in "virtual folders".{% endblocktrans %}</p>
 
-            <p>{% blocktrans %}Forget about having to take care of complicated folder structures in your computer! CCD and DSLR raw files have comprehensive headers: why shouldn't you use those to automatically and efficiently tag your raw files?{% endblocktrans %}</p>
+            <p>{% blocktrans %}Forget about having to take care of complicated folder structures in your computer! CCD
+                and DSLR raw files have comprehensive headers: why shouldn't you use those to automatically and
+                efficiently tag your raw files?{% endblocktrans %}</p>
 
             <ul>
                 <li><strong>{% trans "By type" %}</strong> (BIAS, DARK, FLAT, LIGHT)</li>
@@ -42,15 +46,20 @@
                 <li><strong>{% trans "By temperature" %}</strong> *</li>
             </ul>
 
-            <p>{% blocktrans %}Not only will your data be safely and securely preserved, but you will be able to download bundles of your files in a <strong>zip</strong> file.{% endblocktrans %}</p>
+            <p>{% blocktrans %}Not only will your data be safely and securely preserved, but you will be able to
+                download bundles of your files in a <strong>zip</strong> file.{% endblocktrans %}</p>
 
-            <p>{% blocktrans %}This way, it will be easy, later on, to download again your dark frames taken at -15&deg;C in October two years ago!{% endblocktrans %}</p>
+            <p>{% blocktrans %}This way, it will be easy, later on, to download again your dark frames taken at -15&deg;
+                C in October two years ago!{% endblocktrans %}</p>
 
-            <p><small>* {% trans "if the information is present in the file's headers" %}</small></p>
+            <p>
+                <small>* {% trans "if the information is present in the file's headers" %}</small>
+            </p>
         </div>
 
         <div class="span4" style="padding-top: 80px; text-align: center;">
-            <img src="{% static 'rawdata/images/astrobin-rawdata-plan-luna.png' %}" alt="{% trans "AstroBin Raw Data" %}" />
+            <img src="{% static 'rawdata/images/astrobin-rawdata-plan-luna.png' %}"
+                 alt="{% trans "AstroBin Raw Data" %}" />
             <a class="btn btn-primary btn-large" href="{% url 'subscription_list' %}">{% trans "Sign up now!" %}</a>
         </div>
     </div>

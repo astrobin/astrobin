@@ -10,5 +10,5 @@ class SolutionAdmin(admin.ModelAdmin):
         'status', 'submission_id', 'image_file')
     list_filter = ('status',)
 
-admin.site.register(Solution, SolutionAdmin)
 
+admin.site.register(Solution, SolutionAdmin)

@@ -17,20 +17,22 @@ SUBSCRIPTION_NAMES = (
 
 def donations_user_get_subscription(user):
     try:
-        return UserSubscription.objects.get(user = user, subscription__name__in = SUBSCRIPTION_NAMES)
+        return UserSubscription.objects.get(user=user, subscription__name__in=SUBSCRIPTION_NAMES)
     except UserSubscription.DoesNotExist:
         return None
     except UserSubscription.MultipleObjectsReturned:
-        return UserSubscription.objects.filter(user = user, subscription__name__in = SUBSCRIPTION_NAMES)[0]
+        return UserSubscription.objects.filter(user=user, subscription__name__in=SUBSCRIPTION_NAMES)[0]
 
 
 def donations_user_get_active_subscription(user):
     try:
-        us = UserSubscription.objects.get(user = user, subscription__name__in = SUBSCRIPTION_NAMES, active = True, cancelled = False)
+        us = UserSubscription.objects.get(user=user, subscription__name__in=SUBSCRIPTION_NAMES, active=True,
+                                          cancelled=False)
     except UserSubscription.DoesNotExist:
         return None
     except UserSubscription.MultipleObjectsReturned:
-        us = UserSubscription.objects.filter(user = user, subscription__name__in = SUBSCRIPTION_NAMES, active = True, cancelled = False)[0]
+        us = UserSubscription.objects.filter(user=user, subscription__name__in=SUBSCRIPTION_NAMES, active=True,
+                                             cancelled=False)[0]
 
     if us.expired():
         return None
@@ -57,6 +59,7 @@ def donations_user_has_valid_subscription(user):
         return us.active and not us.cancelled and not us.expired()
 
     False
+
 
 def donations_user_has_inactive_subscription(user):
     active = donations_user_has_valid_subscription(user)

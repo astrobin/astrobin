@@ -10,35 +10,33 @@
 -----------------------------------------------------------------------------------*/
 
 
-$(function() {
+$(function () {
 
     "use strict";
 
     var wind = $(window);
 
 
-
     // scrollIt
     $.scrollIt({
-      upKey: 38,                // key code to navigate to the next section
-      downKey: 40,              // key code to navigate to the previous section
-      easing: 'swing',          // the easing function for animation
-      scrollTime: 600,          // how long (in ms) the animation takes
-      activeClass: 'active',    // class given to the active nav element
-      onPageChange: null,       // function(pageIndex) that is called when page is changed
-      topOffset: -80            // offste (in px) for fixed top navigation
+        upKey: 38,                // key code to navigate to the next section
+        downKey: 40,              // key code to navigate to the previous section
+        easing: 'swing',          // the easing function for animation
+        scrollTime: 600,          // how long (in ms) the animation takes
+        activeClass: 'active',    // class given to the active nav element
+        onPageChange: null,       // function(pageIndex) that is called when page is changed
+        topOffset: -80            // offste (in px) for fixed top navigation
     });
 
 
-
     // navbar scrolling background
-    wind.on("scroll",function () {
+    wind.on("scroll", function () {
         var bodyScroll = wind.scrollTop(),
             navbar = $(".navbar");
 
-        if(bodyScroll > 100){
+        if (bodyScroll > 100) {
             navbar.addClass("nav-scroll");
-        }else{
+        } else {
             navbar.removeClass("nav-scroll");
         }
     });
@@ -50,30 +48,28 @@ $(function() {
     });
 
 
-
     // progress bar
     wind.on('scroll', function () {
         $(".skill-progress .progres").each(function () {
-            var bottom_of_object = 
-            $(this).offset().top + $(this).outerHeight();
-            var bottom_of_window = 
-            $(window).scrollTop() + $(window).height();
+            var bottom_of_object =
+                $(this).offset().top + $(this).outerHeight();
+            var bottom_of_window =
+                $(window).scrollTop() + $(window).height();
             var myVal = $(this).attr('data-value');
-            if(bottom_of_window > bottom_of_object) {
+            if (bottom_of_window > bottom_of_object) {
                 $(this).css({
-                  width : myVal
+                    width: myVal
                 });
             }
         });
     });
 
 
-
     // sections background image from data background
     var pageSection = $(".bg-img, section");
-    pageSection.each(function(indx){
-        
-        if ($(this).attr("data-background")){
+    pageSection.each(function (indx) {
+
+        if ($(this).attr("data-background")) {
             $(this).css("background-image", "url(" + $(this).data("background") + ")");
         }
     });
@@ -83,36 +79,36 @@ $(function() {
 
     // Testimonials owlCarousel
     $('.carousel-single .owl-carousel').owlCarousel({
-        items:1,
-        loop:true,
+        items: 1,
+        loop: true,
         margin: 0,
-        mouseDrag:false,
-        autoplay:true,
-        smartSpeed:500,
+        mouseDrag: false,
+        autoplay: true,
+        smartSpeed: 500,
         dots: false,
         nav: true,
-        navText: ['<i class="fas fa-chevron-left"></i>','<i class="fas fa-chevron-right"></i>']
+        navText: ['<i class="fas fa-chevron-left"></i>', '<i class="fas fa-chevron-right"></i>']
     });
 
     // Clients owlCarousel
     $('.testimonials .owl-carousel').owlCarousel({
-        loop:true,
+        loop: true,
         margin: 60,
-        mouseDrag:true,
+        mouseDrag: true,
         dots: false,
-        responsiveClass:true,
-        responsive:{
-            0:{
-                items:2,
-                autoplay:true,
+        responsiveClass: true,
+        responsive: {
+            0: {
+                items: 2,
+                autoplay: true,
             },
-            600:{
-                items:3,
-                autoplay:true,
+            600: {
+                items: 3,
+                autoplay: true,
             },
-            1000:{
-                items:6,
-                autoplay:false,
+            1000: {
+                items: 6,
+                autoplay: false,
             }
         }
     });
@@ -141,7 +137,7 @@ $(function() {
 
 
     // accordion
-    $(".accordion").on("click",".title", function () {
+    $(".accordion").on("click", ".title", function () {
 
         $(this).next().slideDown();
 
@@ -149,7 +145,7 @@ $(function() {
 
     });
 
-    $(".accordion").on("click",".item", function () {
+    $(".accordion").on("click", ".item", function () {
 
         $(this).addClass("active").siblings().removeClass("active");
 
@@ -161,7 +157,7 @@ $(function() {
 
 // === window When Loading === //
 
-$(window).on("load",function (){
+$(window).on("load", function () {
 
     var wind = $(window);
 
@@ -175,24 +171,24 @@ $(window).on("load",function (){
 
     // isotope
     $('.gallery').isotope({
-      // options
-      itemSelector: '.items'
+        // options
+        itemSelector: '.items'
     });
 
     var $gallery = $('.gallery').isotope({
-      // options
+        // options
     });
 
     // filter items on button click
-    $('.filtering').on( 'click', 'span', function() {
+    $('.filtering').on('click', 'span', function () {
 
         var filterValue = $(this).attr('data-filter');
 
-        $gallery.isotope({ filter: filterValue });
+        $gallery.isotope({filter: filterValue});
 
     });
 
-    $('.filtering').on( 'click', 'span', function() {
+    $('.filtering').on('click', 'span', function () {
 
         $(this).addClass('active').siblings().removeClass('active');
 
@@ -210,8 +206,7 @@ $(window).on("load",function (){
                 type: "POST",
                 url: url,
                 data: $(this).serialize(),
-                success: function (data)
-                {
+                success: function (data) {
                     var messageAlert = 'alert-' + data.type;
                     var messageText = data.message;
 
@@ -230,7 +225,7 @@ $(window).on("load",function (){
 
 
 // Slider 
-$(document).ready(function() {
+$(document).ready(function () {
 
     var owl = $('.header .owl-carousel');
 
@@ -238,23 +233,23 @@ $(document).ready(function() {
     // Slider owlCarousel
     $('.slider .owl-carousel').owlCarousel({
         items: 1,
-        loop:true,
+        loop: true,
         margin: 0,
-        autoplay:true,
-        smartSpeed:500
+        autoplay: true,
+        smartSpeed: 500
     });
 
     // Slider owlCarousel
     $('.slider-fade .owl-carousel').owlCarousel({
         items: 1,
-        loop:true,
+        loop: true,
         margin: 0,
-        autoplay:true,
-        smartSpeed:500,
+        autoplay: true,
+        smartSpeed: 500,
         animateOut: 'fadeOut'
     });
 
-    owl.on('changed.owl.carousel', function(event) {
+    owl.on('changed.owl.carousel', function (event) {
         var item = event.item.index - 2;     // Position of the current item
         $('h4').removeClass('animated fadeInLeft');
         $('h1').removeClass('animated fadeInRight');

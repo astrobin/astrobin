@@ -4,7 +4,6 @@ REST_FRAMEWORK = {
     'FILTER_BACKEND': 'rest_framework.filters.DjangoFilterBackend',
     'DEFAULT_AUTHENTICATION_CLASSES': (
         'rest_framework.authentication.TokenAuthentication',
-        'rest_framework.authentication.SessionAuthentication', # Useful for unit tests
+        'rest_framework.authentication.SessionAuthentication',  # Useful for unit tests
     )
 }
-

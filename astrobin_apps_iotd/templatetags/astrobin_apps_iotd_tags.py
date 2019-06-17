@@ -1,15 +1,11 @@
 # Python
-from datetime import datetime, timedelta
 
 # Django
-from django.conf import settings
 from django.template import Library
-from django.utils.translation import ugettext_lazy as _
 
 # This app
 from astrobin_apps_iotd.models import *
 from astrobin_apps_iotd.permissions import *
-
 
 register = Library()
 
@@ -18,17 +14,17 @@ register = Library()
 
 @register.filter
 def is_iotd_submitter(user):
-    return user.groups.filter(name = 'iotd_submitters').exists()
+    return user.groups.filter(name='iotd_submitters').exists()
 
 
 @register.filter
 def is_iotd_reviewer(user):
-    return user.groups.filter(name = 'iotd_reviewers').exists()
+    return user.groups.filter(name='iotd_reviewers').exists()
 
 
 @register.filter
 def is_iotd_judge(user):
-    return user.groups.filter(name = 'iotd_judges').exists()
+    return user.groups.filter(name='iotd_judges').exists()
 
 
 # Permissions
@@ -85,52 +81,52 @@ def may_not_unelect_reason(user, image):
 
 @register.filter
 def has_submitted(user, image):
-    return IotdSubmission.objects.filter(image = image, submitter = user).exists()
+    return IotdSubmission.objects.filter(image=image, submitter=user).exists()
 
 
 @register.filter
 def has_voted(user, image):
-    return IotdVote.objects.filter(image = image, reviewer = user).exists()
+    return IotdVote.objects.filter(image=image, reviewer=user).exists()
 
 
 @register.filter
 def is_submitted_by(image, user):
-    return IotdSubmission.objects.filter(image = image, submitter = user).exists()
+    return IotdSubmission.objects.filter(image=image, submitter=user).exists()
 
 
 @register.filter
 def submissions_count(image):
-    return IotdSubmission.objects.filter(image = image).count()
+    return IotdSubmission.objects.filter(image=image).count()
 
 
 @register.filter
 def votes_count(image):
-    return IotdVote.objects.filter(image = image).count()
+    return IotdVote.objects.filter(image=image).count()
 
 
 @register.filter
 def is_iotd(image):
-    return Iotd.objects.filter(image = image).exists()
+    return Iotd.objects.filter(image=image).exists()
 
 
 @register.filter
 def is_current_or_past_iotd(image):
-    return Iotd.objects.filter(image = image, date__lte = datetime.now().date())
+    return Iotd.objects.filter(image=image, date__lte=datetime.now().date())
 
 
 @register.filter
 def iotd_submissions_today(user):
-    return IotdSubmission.objects.filter(submitter = user, date__contains = datetime.now().date()).count()
+    return IotdSubmission.objects.filter(submitter=user, date__contains=datetime.now().date()).count()
 
 
 @register.filter
 def iotd_votes_today(user):
-    return IotdVote.objects.filter(reviewer = user, date__contains = datetime.now().date()).count()
+    return IotdVote.objects.filter(reviewer=user, date__contains=datetime.now().date()).count()
 
 
 @register.filter
 def iotd_elections_today(user):
-    return Iotd.objects.filter(judge = user, created__contains = datetime.now().date()).count()
+    return Iotd.objects.filter(judge=user, created__contains=datetime.now().date()).count()
 
 
 # Getters
@@ -138,14 +134,15 @@ def iotd_elections_today(user):
 @register.filter
 def iotd_date_for_image(image):
     try:
-        iotd = Iotd.objects.get(image = image)
+        iotd = Iotd.objects.get(image=image)
         return iotd.date
     except Iotd.DoesNotExist:
         return ""
 
+
 @register.assignment_tag
 def get_iotd():
-    iotds = Iotd.objects.filter(date__lte = datetime.now().date()).order_by('-date')
+    iotds = Iotd.objects.filter(date__lte=datetime.now().date()).order_by('-date')
     if iotds:
         return iotds[0]
     return None

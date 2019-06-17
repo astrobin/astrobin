@@ -28,14 +28,14 @@
                     <a href="#">
                         {% astrobin_image image 'gallery' link=False tooltip=False %}
                         <div class="image-title">
-                            {{image.title|escape|default:_("(no title)")}}
+                            {{ image.title|escape|default:_("(no title)") }}
                         </div>
                         <div
-                            {% if image.pk in images_pk_in_collection %}
-                                class="added-thumbnail-overlay added" style="visibility:visible"
-                            {% else %}
-                                class="added-thumbnail-overlay" style="visibility:hidden"
-                            {% endif %}>
+                                {% if image.pk in images_pk_in_collection %}
+                                    class="added-thumbnail-overlay added" style="visibility:visible"
+                                {% else %}
+                                    class="added-thumbnail-overlay" style="visibility:hidden"
+                                {% endif %}>
                             <span>&#x2714;</span>
                         </div>
                     </a>
@@ -43,9 +43,9 @@
             {% endfor %}
         </ul>
 
-        <hr/>
+        <hr />
         <div class="text-right">
-            <span class="loading hide"><img src="{% static 'astrobin/images/ajax-loader.gif' %}" alt=""/></span>
+            <span class="loading hide"><img src="{% static 'astrobin/images/ajax-loader.gif' %}" alt="" /></span>
             <a href="#" id="save-button" class="btn btn-primary">
                 {% trans "Save" %} &rarr;
             </a>
@@ -55,8 +55,8 @@
 
 {% block extra_js %}
     <script type="text/javascript">
-        $(document).ready(function() {
-            $('.astrobin-thumbnail a').click(function(e) {
+        $(document).ready(function () {
+            $('.astrobin-thumbnail a').click(function (e) {
                 var $spam;
 
                 e.preventDefault();
@@ -73,7 +73,7 @@
                 }
             });
 
-            $('#save-button').click(function(e) {
+            $('#save-button').click(function (e) {
                 var $btn, added_ids;
 
                 e.preventDefault();
@@ -85,10 +85,9 @@
                 added_ids = $('.astrobin-thumbnails .added')
                     .siblings('.astrobin-image-container')
                     .find('img')
-                    .map(function()
-                {
-                    return $(this).data('id');
-                }).get();
+                    .map(function () {
+                        return $(this).data('id');
+                    }).get();
 
                 console.log(added_ids);
                 $.ajax({
@@ -98,7 +97,7 @@
                     timeout: 10000,
                     data: {images: added_ids},
                     dataType: 'json'
-                }).done(function() {
+                }).done(function () {
                     location = "{% url 'user_collections_detail' requested_user.username collection.pk %}";
                 });
             });

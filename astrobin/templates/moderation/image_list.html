@@ -22,15 +22,17 @@
         {% else %}
             {% if image_list %}
                 <p class="well">
-                    {% blocktrans %}Please click on the images that you want to mark as SPAM, then click on the Finish button below to approve all the others.{% endblocktrans %}
+                    {% blocktrans %}Please click on the images that you want to mark as SPAM, then click on the Finish
+                        button below to approve all the others.{% endblocktrans %}
                 </p>
                 <ul class="astrobin-thumbnails">
                     {% for image in image_list %}
                         <li class="thumbnail astrobin-thumbnail top-title ham-thumbnail">
-                            <a href="#" rel="tooltip" title="{{image.title|escape|default:_("(no title)")}}, {% astrobin_username image.user link=False %}">
+                            <a href="#" rel="tooltip"
+                               title="{{ image.title|escape|default:_("(no title)") }}, {% astrobin_username image.user link=False %}">
                                 {% astrobin_image image 'gallery' link=False tooltip=False %}
                                 <div class="image-title">
-                                    {{image.title|escape|default:_("(no title)")}}
+                                    {{ image.title|escape|default:_("(no title)") }}
                                 </div>
                                 <div class="spam-thumbnail-overlay hide">
                                     <span>
@@ -55,7 +57,8 @@
                     <a href="#" id="finish-button" class="btn btn-primary btn-block-mobile">
                         {% trans "Finish" %} &rarr;
                     </a>
-                    <span class="loading hide"><img src="{% static 'astrobin/images/ajax-loader.gif' %}" alt=""/></span>
+                    <span class="loading hide"><img src="{% static 'astrobin/images/ajax-loader.gif' %}"
+                                                    alt="" /></span>
                 </div>
             {% else %}
                 <div class="alert alert-success">
@@ -68,12 +71,12 @@
 
 {% block extra_js %}
     <script type="text/javascript">
-        $(document).ready(function() {
+        $(document).ready(function () {
             $('.fancybox').fancybox({
                 type: 'image'
             });
 
-            $('.astrobin-thumbnail > a').click(function(e) {
+            $('.astrobin-thumbnail > a').click(function (e) {
                 var $spam;
 
                 e.preventDefault();
@@ -91,7 +94,7 @@
 
             });
 
-            $('#finish-button').click(function(e) {
+            $('#finish-button').click(function (e) {
                 var $btn, spam_ids, ham_ids;
 
                 e.preventDefault();
@@ -100,11 +103,11 @@
                 $btn.addClass('disabled');
                 $btn.siblings('.loading').removeClass('hide');
 
-                spam_ids = $('.astrobin-thumbnails img.spam').map(function() {
+                spam_ids = $('.astrobin-thumbnails img.spam').map(function () {
                     return $(this).data('id');
                 }).get();
 
-                ham_ids = $('.astrobin-thumbnails img:not(.spam)').map(function() {
+                ham_ids = $('.astrobin-thumbnails img:not(.spam)').map(function () {
                     return $(this).data('id');
                 }).get();
 
@@ -115,7 +118,7 @@
                     timeout: 10000,
                     data: {ids: spam_ids},
                     dataType: 'json'
-                }).done(function() {
+                }).done(function () {
                     $.ajax({
                         url: '{% url 'image_moderation_mark_as_ham' %}',
                         type: 'POST',
@@ -123,7 +126,7 @@
                         timeout: 10000,
                         data: {ids: ham_ids},
                         dataType: 'json'
-                    }).done(function() {
+                    }).done(function () {
                         location.reload();
                     });
                 });

@@ -6,4 +6,3 @@ AVATAR_PROVIDERS = (
     'avatar.providers.PrimaryAvatarProvider',
     'avatar.providers.DefaultAvatarProvider',
 )
-

@@ -18,7 +18,7 @@ LOCALE_EXTRAS = (
     _("joined the public group"),
     _("Remove from bookmarks"),
     _("Bookmark").
-    _("Unlike"),
+        _("Unlike"),
     _("Like"),
     _("Stop following"),
     _("Follow"),

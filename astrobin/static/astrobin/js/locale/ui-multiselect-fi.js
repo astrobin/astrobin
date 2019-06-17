@@ -5,7 +5,7 @@
  */
 
 $.extend($.ui.multiselect.locale, {
-	addAll:'Lisää kaikki',
-	removeAll:'Poista kaikki',
-	itemsCount:'valittuna'
+    addAll: 'Lisää kaikki',
+    removeAll: 'Poista kaikki',
+    itemsCount: 'valittuna'
 });

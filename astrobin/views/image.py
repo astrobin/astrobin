@@ -1,14 +1,19 @@
 # Python
-from datetime import datetime
 import re
+from datetime import datetime
 
+# Third party
+from braces.views import (
+    JSONResponseMixin,
+    LoginRequiredMixin,
+)
 # Django
 from django.conf import settings
-from django.contrib.contenttypes.models import ContentType
 from django.contrib import messages
+from django.contrib.contenttypes.models import ContentType
 from django.contrib.staticfiles.templatetags.staticfiles import static
-from django.core.files.images import get_image_dimensions
 from django.core.exceptions import PermissionDenied
+from django.core.files.images import get_image_dimensions
 from django.core.urlresolvers import reverse_lazy
 from django.db.models import Q
 from django.http import Http404, HttpResponseRedirect
@@ -21,15 +26,6 @@ from django.views.generic import (
     DeleteView,
     DetailView,
     UpdateView,
-)
-
-# Third party
-from actstream.models import Action
-from braces.views import (
-    JSONResponseMixin,
-    LoginRequiredMixin,
-    SuperuserRequiredMixin,
-    UserPassesTestMixin,
 )
 from silk.profiling.profiler import silk_profile
 from toggleproperties.models import ToggleProperty
@@ -57,14 +53,13 @@ from astrobin.models import (
     SOLAR_SYSTEM_SUBJECT_CHOICES,
 )
 from astrobin.stories import add_story
-from astrobin.utils import to_user_timezone
 from astrobin.templatetags.tags import can_like
-
+from astrobin.utils import to_user_timezone
 # AstroBin apps
 from astrobin_apps_groups.forms import GroupSelectForm
 from astrobin_apps_groups.models import Group
+from astrobin_apps_iotd.models import Iotd
 from astrobin_apps_notifications.utils import push_notification
-from astrobin_apps_iotd.models import Iotd, IotdVote
 from astrobin_apps_platesolving.models import Solution
 from nested_comments.models import NestedComment
 from rawdata.forms import (
@@ -380,7 +375,7 @@ class ImageDetailView(DetailView):
                  u'\n'.join("%s %s" % (
                      "<a href=\"%s\">%s</a>:" % (f[1]['filter_url'], f[1]['filter']) if f[1]['filter'] else '',
                      "%s %s %s %s %s" % (
-                     f[1]['integration'], f[1]['iso'], f[1]['gain'], f[1]['sensor_cooling'], f[1]['binning']),
+                         f[1]['integration'], f[1]['iso'], f[1]['gain'], f[1]['sensor_cooling'], f[1]['binning']),
                  ) for f in frames_list)),
                 (_('Integration'), "%.1f %s" % (dsa_data['integration'], _("hours"))),
                 (_('Darks'),

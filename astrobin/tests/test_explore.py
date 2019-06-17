@@ -1,16 +1,14 @@
 # Python
-from mock import patch
-
 # Django
 from django.contrib.auth.models import User, Group
 from django.core.urlresolvers import reverse_lazy
 from django.test import TestCase
-
-# Other apps
-from astrobin_apps_iotd.models import IotdSubmission, IotdVote
+from mock import patch
 
 # AstroBin
 from astrobin.models import Image
+# Other apps
+from astrobin_apps_iotd.models import IotdSubmission, IotdVote
 
 
 class ExploreTest(TestCase):
@@ -24,7 +22,7 @@ class ExploreTest(TestCase):
         self.reviewers = Group.objects.create(name='iotd_reviewers')
         self.reviewers.user_set.add(self.reviewer)
 
-        self.judges = Group.objects.create(name = 'iotd_judges')
+        self.judges = Group.objects.create(name='iotd_judges')
 
         self.user = User.objects.create_user('user', 'user@test.com', 'password')
         self.client.login(username='user', password='password')

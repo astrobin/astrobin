@@ -17,22 +17,22 @@
 
     <table class="table">
         <thead>
-            <tr>
-                <th>{% trans "Date" %}</th>
-                <th>{% trans "New e-mail" %}</th>
-                <th></th>
-            </tr>
+        <tr>
+            <th>{% trans "Date" %}</th>
+            <th>{% trans "New e-mail" %}</th>
+            <th></th>
+        </tr>
         </thead>
         <tbody>
-            <tr>
-                <td><abbr class="timeago" title="{{object.date|date:'Y-m-d\TH:i:s'}}"></abbr></td>
-                <td><a href="mailto:{{object.new_email}}">{{object.new_email}}</a></td>
-                <td>
-                    <a href="{% url 'change_email_delete' object.pk %}" class="btn btn-danger">
-                        {% trans "Delete and start new request" %}
-                    </a>
-                </td>
-            </tr>
+        <tr>
+            <td><abbr class="timeago" title="{{ object.date|date:'Y-m-d\TH:i:s' }}"></abbr></td>
+            <td><a href="mailto:{{ object.new_email }}">{{ object.new_email }}</a></td>
+            <td>
+                <a href="{% url 'change_email_delete' object.pk %}" class="btn btn-danger">
+                    {% trans "Delete and start new request" %}
+                </a>
+            </td>
+        </tr>
         </tbody>
     </table>
 {% endblock %}

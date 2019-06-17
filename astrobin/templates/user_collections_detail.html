@@ -5,7 +5,7 @@
 {% load tags %}
 
 {% block title %}
-    {{collection.name}}
+    {{ collection.name }}
 {% endblock %}
 
 {% block breadcrumbs %}
@@ -17,7 +17,7 @@
 {% block collections_content %}
     <div class="collection-detail">
         {% if collection.description %}
-            <p>{{collection.description}}</p>
+            <p>{{ collection.description }}</p>
         {% endif %}
 
         {% if collection.images.count > 0 %}

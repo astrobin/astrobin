@@ -15,17 +15,17 @@
 {% endblock %}
 
 {% block collections_content %}
-    <form class="form-horizontal" action="{{request.path}}?next={{request.GET.next}}" method="post">
+    <form class="form-horizontal" action="{{ request.path }}?next={{ request.GET.next }}" method="post">
         {% csrf_token %}
-        {{form|as_bootstrap}}
+        {{ form|as_bootstrap }}
         <div class="form-actions">
-            <input type="hidden" name="collection_pk" value="{{collection.pk}}"/>
-            <input class="btn btn-primary" type="submit" value="{% trans "Save" %}"/>
+            <input type="hidden" name="collection_pk" value="{{ collection.pk }}" />
+            <input class="btn btn-primary" type="submit" value="{% trans "Save" %}" />
             <a
-                class="btn"
-                href="
+                    class="btn"
+                    href="
                 {% if request.GET.next %}
-                    {{request.GET.next}}
+                    {{ request.GET.next }}
                 {% else %}
                     {% url 'user_collections_list' requested_user %}
                 {% endif %}">

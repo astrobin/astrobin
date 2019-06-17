@@ -4,7 +4,8 @@
 {% load django_bootstrap_breadcrumbs %}
 {% load astrobin_apps_donations_tags %}
 
-{% block title %}{% blocktrans with user=requested_user.userprofile %}{{user}}'s gallery{% endblocktrans %}{% endblock %}
+{% block title %}{% blocktrans with user=requested_user.userprofile %}{{ user }}'s gallery
+{% endblocktrans %}{% endblock %}
 {% block container_extra_classes %}has-subnav{% endblock %}
 
 {% block breadcrumbs %}
@@ -19,20 +20,20 @@
     {% include 'user/profile/navigation.html' %}
 
     <div class="row">
-        {% if not form %}
-            <div class="span3">
-                {% include 'user/profile/meta.html' %}
-            </div>
-        {% endif %}
-
-        {% if not form %}
-        <div class="span9">
-        {% else %}
-        <div class="span12">
-        {% endif %}
-            {% block collections_content %}{% endblock %}
+    {% if not form %}
+        <div class="span3">
+            {% include 'user/profile/meta.html' %}
         </div>
-    </div> <!-- row -->
+    {% endif %}
+
+    {% if not form %}
+        <div class="span9">
+    {% else %}
+        <div class="span12">
+    {% endif %}
+{% block collections_content %}{% endblock %}
+</div>
+</div> <!-- row -->
 {% endblock %}
 
 {% block modals %}

@@ -2,17 +2,15 @@
 import hashlib
 import logging
 import os
-from unidecode import unidecode
 
 # Django
 from django.conf import settings
 from django.contrib.staticfiles.storage import ManifestFilesMixin
 from django.core.files.storage import FileSystemStorage
-
+from pipeline.storage import PipelineMixin
 # Third party
 from storages.backends.s3boto import S3BotoStorage
-from pipeline.storage import PipelineMixin
-
+from unidecode import unidecode
 
 log = logging.getLogger('apps')
 
@@ -48,7 +46,7 @@ class OverwritingFileSystemStorage(FileSystemStorage):
 class CachedS3BotoStorage(S3BotoStorage):
     def __init__(self, *args, **kwargs):
         super(CachedS3BotoStorage, self).__init__()
-        self.local_storage = OverwritingFileSystemStorage(location = settings.IMAGE_CACHE_DIRECTORY)
+        self.local_storage = OverwritingFileSystemStorage(location=settings.IMAGE_CACHE_DIRECTORY)
 
     def generate_local_name(self, name):
         local_name = hashlib.md5(unidecode(name)).hexdigest()
@@ -67,6 +65,7 @@ class CachedS3BotoStorage(S3BotoStorage):
 
         return name
 
+
 if settings.AWS_S3_ENABLED:
     ImageStorage = lambda: CachedS3BotoStorage()
 else:
@@ -75,10 +74,15 @@ else:
 
 class S3PipelineStorage(PipelineMixin, ManifestFilesMixin, S3BotoStorage):
     pass
+
+
 StaticRootS3BotoStorage = lambda: S3PipelineStorage(location=settings.STATIC_ROOT)
+
 
 class LocalPipelineStorage(PipelineMixin, ManifestFilesMixin, FileSystemStorage):
     pass
+
+
 StaticRootLocalStorage = lambda: LocalPipelineStorage(
     location=settings.STATIC_ROOT,
     base_url=settings.STATIC_ROOT)

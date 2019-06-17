@@ -51,12 +51,12 @@
 <li class="nav-header">{% trans "Raw data" %}</li>
 
 {% if rawdata_has_subscription %}
-<li>
-    <a href="{% url 'rawdata.library' %}">
-        <i class="icon-book"></i>
-        {% trans "Raw data library" %}
-    </a>
-</li>
+    <li>
+        <a href="{% url 'rawdata.library' %}">
+            <i class="icon-book"></i>
+            {% trans "Raw data library" %}
+        </a>
+    </li>
 {% endif %}
 
 <li>

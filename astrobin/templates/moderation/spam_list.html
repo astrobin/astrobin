@@ -24,16 +24,18 @@
             {% if image_list %}
                 <div class="subtitle">
                     <i class="icon icon-info-sign"></i>
-                    {% blocktrans %}Please click on the images that you want to mark as NOT SPAM, then click on the Approve button below to approve them.{% endblocktrans %}
+                    {% blocktrans %}Please click on the images that you want to mark as NOT SPAM, then click on the
+                        Approve button below to approve them.{% endblocktrans %}
                 </div>
 
                 <ul class="astrobin-thumbnails">
                     {% for image in image_list %}
                         <li class="thumbnail astrobin-thumbnail top-title spam-thumbnail">
-                            <a href="#" rel="tooltip" title="{{image.title|escape|default:_("(no title)")}}, {% astrobin_username image.user link=False %}">
+                            <a href="#" rel="tooltip"
+                               title="{{ image.title|escape|default:_("(no title)") }}, {% astrobin_username image.user link=False %}">
                                 {% astrobin_image image 'gallery' link=False tooltip=False %}
                                 <div class="image-title">
-                                    {{image.title|escape|default:_("(no title)")}}
+                                    {{ image.title|escape|default:_("(no title)") }}
                                 </div>
                                 <div class="ham-thumbnail-overlay hide">
                                     <span>
@@ -61,25 +63,26 @@
                     <a href="#" id="approve-and-ban-button" class="btn btn-block-mobile">
                         {% trans "Approve selected and ban the rest" %} &rarr;
                     </a>
-                    <span class="loading hide"><img src="{% static 'astrobin/images/ajax-loader.gif' %}" alt=""/></span>
+                    <span class="loading hide"><img src="{% static 'astrobin/images/ajax-loader.gif' %}"
+                                                    alt="" /></span>
                 </div>
             {% else %}
                 <div class="alert alert-success">
                     {% trans "There are no images in the spam list." %}
                 </div>
-                {% endif %} {# image_list #}
-            {% endif %} {# READONLY #}
+            {% endif %} {# image_list #}
+        {% endif %} {# READONLY #}
     </div>
 {% endblock %}
 
 {% block extra_js %}
     <script type="text/javascript">
-        $(document).ready(function() {
+        $(document).ready(function () {
             $('.fancybox').fancybox({
                 type: 'image'
             });
 
-            $('.astrobin-thumbnail > a').click(function(e) {
+            $('.astrobin-thumbnail > a').click(function (e) {
                 var $ham;
 
                 e.preventDefault();
@@ -97,7 +100,7 @@
             });
 
             function mark_as_ham() {
-                ham_ids = $('.astrobin-thumbnail:not(.spam-thumbnail) img').map(function() {
+                ham_ids = $('.astrobin-thumbnail:not(.spam-thumbnail) img').map(function () {
                     return $(this).data('id');
                 }).get();
 
@@ -121,7 +124,7 @@
             }
 
 
-            $('#approve-button').click(function(e) {
+            $('#approve-button').click(function (e) {
                 var $btn;
 
                 e.preventDefault();
@@ -130,12 +133,12 @@
                 $btn.addClass('disabled');
                 $btn.siblings('.loading').removeClass('hide');
 
-                mark_as_ham().done(function() {
+                mark_as_ham().done(function () {
                     location.reload();
                 });
             });
 
-            $('#approve-and-ban-button').click(function(e) {
+            $('#approve-and-ban-button').click(function (e) {
                 var $btn;
 
                 e.preventDefault();
@@ -144,8 +147,8 @@
                 $btn.addClass('disabled');
                 $btn.siblings('.loading').removeClass('hide');
 
-                mark_as_ham().done(function() {
-                    ban_all().done(function() {
+                mark_as_ham().done(function () {
+                    ban_all().done(function () {
                         location.reload();
                     });
                 });

@@ -1,6 +1,6 @@
 import os
-from kombu import Exchange, Queue
 
+from kombu import Exchange, Queue
 
 BROKER_URL = os.environ.get('BROKER_URL', 'amqp://astrobin:astrobin@rabbitmq:5672')
 BROKER_TRANSPORT_OPTIONS = {

@@ -2,12 +2,11 @@
 import datetime
 import sys
 
+# Third party
+import pytz
 # Django
 from django.conf import settings
 from django.contrib.gis.geoip2 import GeoIP2
-
-# Third party
-import pytz
 
 
 def unique_items(l):
@@ -19,6 +18,8 @@ def unique_items(l):
 
 
 ALPHABET = "ABCDEFGHIJKLMNOPQRSTUVWXYZ"
+
+
 def base26_encode(num, alphabet=ALPHABET):
     """Encode a number in Base X
 
@@ -35,6 +36,7 @@ def base26_encode(num, alphabet=ALPHABET):
         arr.append(alphabet[rem])
     arr.reverse()
     return ''.join(arr)
+
 
 def base26_decode(string, alphabet=ALPHABET):
     """Decode a Base X encoded string into the number
@@ -63,7 +65,7 @@ def to_user_timezone(date, profile):
         return None
 
     timezone = profile.timezone if profile.timezone else settings.TIME_ZONE
-    return date.replace(tzinfo=pytz.timezone(settings.TIME_ZONE))\
+    return date.replace(tzinfo=pytz.timezone(settings.TIME_ZONE)) \
         .astimezone(pytz.timezone(timezone))
 
 
@@ -72,13 +74,13 @@ def to_system_timezone(date, profile):
         return None
 
     timezone = profile.timezone if profile.timezone else settings.TIME_ZONE
-    return date.replace(tzinfo=pytz.timezone(timezone))\
+    return date.replace(tzinfo=pytz.timezone(timezone)) \
         .astimezone(pytz.timezone(settings.TIME_ZONE))
 
 
 def now_timezone():
-    return datetime.now()\
-        .replace(tzinfo=pytz.timezone(settings.TIME_ZONE))\
+    return datetime.now() \
+        .replace(tzinfo=pytz.timezone(settings.TIME_ZONE)) \
         .astimezone(pytz.timezone(settings.TIME_ZONE))
 
 
@@ -113,34 +115,35 @@ def get_client_country_code(request):
 def user_is_producer(user):
     is_producer = False
     if user:
-        is_producer = user.groups.filter(name = 'Producers').count() > 0
+        is_producer = user.groups.filter(name='Producers').count() > 0
     return is_producer
 
 
 def user_is_retailer(user):
     if user:
-        return user.groups.filter(name = 'Retailers').count() > 0
-    return False 
+        return user.groups.filter(name='Retailers').count() > 0
+    return False
+
 
 def user_is_paying(user):
     if user:
-        return user.groups.filter(name = 'Paying').count() > 0
-    return False 
+        return user.groups.filter(name='Paying').count() > 0
+    return False
 
 
 def affiliate_limit(user):
     if not user:
         return 0
 
-    if user.groups.filter(name = 'affiliate-1'):
+    if user.groups.filter(name='affiliate-1'):
         return 1
-    if user.groups.filter(name = 'affiliate-10'):
+    if user.groups.filter(name='affiliate-10'):
         return 10
-    if user.groups.filter(name = 'affiliate-50'):
+    if user.groups.filter(name='affiliate-50'):
         return 50
-    if user.groups.filter(name = 'affiliate-100'):
+    if user.groups.filter(name='affiliate-100'):
         return 100
-    if user.groups.filter(name = 'affiliate-inf'):
+    if user.groups.filter(name='affiliate-inf'):
         return sys.maxint
 
     return 0
@@ -150,15 +153,15 @@ def retailer_affiliate_limit(user):
     if not user:
         return 0
 
-    if user.groups.filter(name = 'retailer-affiliate-1'):
+    if user.groups.filter(name='retailer-affiliate-1'):
         return 1
-    if user.groups.filter(name = 'retailer-affiliate-10'):
+    if user.groups.filter(name='retailer-affiliate-10'):
         return 10
-    if user.groups.filter(name = 'retailer-affiliate-50'):
+    if user.groups.filter(name='retailer-affiliate-50'):
         return 50
-    if user.groups.filter(name = 'retailer-affiliate-100'):
+    if user.groups.filter(name='retailer-affiliate-100'):
         return 100
-    if user.groups.filter(name = 'retailer-affiliate-inf'):
+    if user.groups.filter(name='retailer-affiliate-inf'):
         return sys.maxint
 
     return 0

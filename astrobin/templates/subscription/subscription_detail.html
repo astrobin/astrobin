@@ -24,7 +24,7 @@
                     <span class="label label-success">
                         {% trans "Subscribed" %}
                     </span>
-                    ({% trans "Expires" %}: {{usersubscription.expires|date:"SHORT_DATE_FORMAT"}})
+                    ({% trans "Expires" %}: {{ usersubscription.expires|date:"SHORT_DATE_FORMAT" }})
                 {% else %}
                     <span class="label label-warning">
                         {% trans "Invalid" %}
@@ -60,7 +60,7 @@
                 {% trans object.name %}
                 <small>
                     {% if object.price > 0 %}
-                        $ {{object.price}} USD /
+                        $ {{ object.price }} USD /
 
                         {% if object.recurrence_unit == 'D' %}
                             {% trans "day" %}
@@ -89,63 +89,68 @@
         </div>
 
         {% if object.category == 'premium_autorenew' %}
-        <div class="alert alert-error">
-            {% url 'subscription_list' as url %}
-            {% blocktrans %}Auto-renewing subscriptions are not offered anymore on AstroBin. Please visit the <a href="{{url}}">subscriptions page</a> to see the available plans, thanks!{% endblocktrans %}
-        </div>
+            <div class="alert alert-error">
+                {% url 'subscription_list' as url %}
+                {% blocktrans %}Auto-renewing subscriptions are not offered anymore on AstroBin. Please visit the
+                    <a href="{{ url }}">subscriptions page</a> to see the available plans, thanks!{% endblocktrans %}
+            </div>
         {% endif %}
 
         <div>
             {% if 'premium' in object.category %}
-            <p>
-                {% blocktrans with max_allowed=PREMIUM_MAX_IMAGES_FREE %}
-                You can use AstroBin for free up to {{max_allowed}} images. After
-                that you can upgrade to <strong>Lite</strong> if you have a limited
-                yearly output, or <strong>Premium</strong> for a limitless
-                experience.  Paying members will not see ads, and everybody,
-                including non-paying members, have access to all social features of
-                AstroBin.
-                {% endblocktrans %}
-            </p>
+                <p>
+                    {% blocktrans with max_allowed=PREMIUM_MAX_IMAGES_FREE %}
+                        You can use AstroBin for free up to {{ max_allowed }} images. After
+                        that you can upgrade to <strong>Lite</strong> if you have a limited
+                        yearly output, or <strong>Premium</strong> for a limitless
+                        experience.  Paying members will not see ads, and everybody,
+                        including non-paying members, have access to all social features of
+                        AstroBin.
+                    {% endblocktrans %}
+                </p>
 
-            <ul class="subscription-plans-description-list">
-                <li>
-                {% blocktrans with max_allowed=PREMIUM_MAX_IMAGES_FREE %}
-                As a user of <strong>AstroBin Free</strong>, you may have up to
-                {{max_allowed}} images at the same time. You can delete some images
-                to make room for new ones, if you want. For instance you can
-                maintain a window of your latest {{max_allowed}} images, or your
-                best ones.
-                {% endblocktrans %}
-                </li>
+                <ul class="subscription-plans-description-list">
+                    <li>
+                        {% blocktrans with max_allowed=PREMIUM_MAX_IMAGES_FREE %}
+                            As a user of <strong>AstroBin Free</strong>, you may have up to
+                            {{ max_allowed }} images at the same time. You can delete some images
+                            to make room for new ones, if you want. For instance you can
+                            maintain a window of your latest {{ max_allowed }} images, or your
+                            best ones.
+                        {% endblocktrans %}
+                    </li>
 
-                <li>
-                {% blocktrans with max_allowed=PREMIUM_MAX_IMAGES_LITE %}
-                As a user of <strong>AstroBin Lite</strong>, instead, you may have
-                up to {{max_allowed}} images at the same time, per each year of
-                your membership. You may replace images uploaded within the current
-                subsciption period while images uploaded prior to that can only be
-                deleted. Every year that you renew your membership, you get
-                {{max_allowed}} new image credits.
-                {% endblocktrans %}
-                </li>
+                    <li>
+                        {% blocktrans with max_allowed=PREMIUM_MAX_IMAGES_LITE %}
+                            As a user of <strong>AstroBin Lite</strong>, instead, you may have
+                            up to {{ max_allowed }} images at the same time, per each year of
+                            your membership. You may replace images uploaded within the current
+                            subsciption period while images uploaded prior to that can only be
+                            deleted. Every year that you renew your membership, you get
+                            {{ max_allowed }} new image credits.
+                        {% endblocktrans %}
+                    </li>
 
-                <li>
-                {% blocktrans %}
-                As a user of <strong>AstroBin Premium</strong>, instead, there are
-                no limitations whatsoever in the number of images you can upload.
-                {% endblocktrans %}
-                </li>
-            </ul>
+                    <li>
+                        {% blocktrans %}
+                            As a user of <strong>AstroBin Premium</strong>, instead, there are
+                            no limitations whatsoever in the number of images you can upload.
+                        {% endblocktrans %}
+                    </li>
+                </ul>
             {% endif %}
 
             {% if object.category == 'rawdata' %}
-            <p>
-                {% blocktrans %}<strong>AstroBin Raw Data</strong> allows you to store your raw files (<strong>FIT</strong> and <strong>digital camera raw</strong>) on AstroBin. We will keep them neatly organized, and you will have a safe backup of all your work, including calibration files.{% endblocktrans %}
+                <p>
+                    {% blocktrans %}<strong>AstroBin Raw Data</strong> allows you to store your raw files (
+                        <strong>FIT</strong> and <strong>digital camera raw</strong>) on AstroBin. We will keep them
+                        neatly organized, and you will have a safe backup of all your work, including calibration
+                        files.{% endblocktrans %}
 
-                {% url 'rawdata.help1' as rawdata_url %}
-                {% blocktrans %}Learn more by reading <a href="{{rawdata_url}}">a short introduction.</a>{% endblocktrans %}
-            </p>
+                    {% url 'rawdata.help1' as rawdata_url %}
+                    {% blocktrans %}Learn more by reading
+                        <a href="{{ rawdata_url }}">a short introduction.</a>{% endblocktrans %}
+                </p>
             {% endif %}
         </div>
 
@@ -158,7 +163,7 @@
 
                 <form action="{% url 'rawdata.atom_deactivate' %}" method="post">
                     {% csrf_token %}
-                    <input type="submit" class="btn btn-primary btn-large" value="{% trans "Deactivate" %}"/>
+                    <input type="submit" class="btn btn-primary btn-large" value="{% trans "Deactivate" %}" />
                 </form>
             </div>
         {% endif %}
@@ -172,7 +177,10 @@
                 </h4>
 
                 <p>
-                    {% blocktrans %}Your subscription is either cancelled or not active yet. If you want to subscribe again, please wait until your subscription is expired. If you just subscribed, please wait a few minutes while PayPal contacts our server for the final transaction confirmation. Thank you!{% endblocktrans %}
+                    {% blocktrans %}Your subscription is either cancelled or not active yet. If you want to subscribe
+                        again, please wait until your subscription is expired. If you just subscribed, please wait a few
+                        minutes while PayPal contacts our server for the final transaction confirmation. Thank
+                        you!{% endblocktrans %}
                 </p>
             </div>
         {% endif %}
@@ -189,16 +197,19 @@
 
                     <p>
                         {% trans "By cancelling, you will revert to a free plan." %}
-                        {% blocktrans with max_allowed=PREMIUM_MAX_IMAGES_FREE %}Free plans are limited to <strong>{{max_allowed}}</strong> images.{% endblocktrans %}
-                        {% blocktrans %}However, your existing images will not be deleted or deactivated in any way! Simply, you will not be able to upload any more images unless you switch to a paid plan.{% endblocktrans %}
+                        {% blocktrans with max_allowed=PREMIUM_MAX_IMAGES_FREE %}Free plans are limited to
+                            <strong>{{ max_allowed }}</strong> images.{% endblocktrans %}
+                        {% blocktrans %}However, your existing images will not be deleted or deactivated in any way!
+                            Simply, you will not be able to upload any more images unless you switch to a paid
+                            plan.{% endblocktrans %}
                     </p>
                 </div>
             {% endif %} <!-- if premium -->
 
             <div class="well text-center">
-                <a href="{{cancel_url}}">
+                <a href="{{ cancel_url }}">
                     <img src="https://www.paypalobjects.com/en_US/i/btn/btn_unsubscribe_LG.gif"
-                    alt="{% trans "Cancel via PayPal" %}"/>
+                         alt="{% trans "Cancel via PayPal" %}" />
                 </a>
             </div>
         {% endif %}
@@ -222,7 +233,7 @@
                     </h4>
                     <ul class="unstyled">
                         {% for reason in change_denied_reasons %}
-                            <li>{{reason}}</li>
+                            <li>{{ reason }}</li>
                         {% endfor %}
                     </ul>
                 </div>

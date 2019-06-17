@@ -1,16 +1,15 @@
 # Django
+import persistent_messages
 from django.conf import settings
 from django.core.mail import send_mail
-from django.template.loader import get_template, render_to_string
 from django.template import TemplateDoesNotExist
+from django.template.loader import get_template, render_to_string
 from django.utils.translation import ugettext
-
 # Third party
 from django_bouncy.models import Bounce
 from gadjo.requestprovider.signals import get_request
 from notification.backends import BaseBackend
 from notification.backends.email import EmailBackend as BaseEmailBackend
-import persistent_messages
 
 
 class PersistentMessagesBackend(BaseBackend):
@@ -26,12 +25,12 @@ class PersistentMessagesBackend(BaseBackend):
         context = self.default_context()
         context.update(extra_context)
         messages = self.get_formatted_messages(['notice.html'],
-            notice_type.label, context)
+                                               notice_type.label, context)
         persistent_messages.add_message(
             request,
             persistent_messages.INFO,
             messages['notice.html'],
-            user = recipient)
+            user=recipient)
 
 
 class EmailBackend(BaseEmailBackend):
@@ -82,4 +81,4 @@ class EmailBackend(BaseEmailBackend):
             body,
             settings.DEFAULT_FROM_EMAIL,
             [recipient.email],
-            html_message = html_body)
+            html_message=html_body)

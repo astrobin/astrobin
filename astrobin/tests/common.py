@@ -16,7 +16,7 @@ def test_utils_get_last_image_revision():
     return ImageRevision.objects.all().order_by('-id')[0]
 
 
-def test_utils_upload_image(test, filename = 'astrobin/fixtures/test.jpg', wip = False):
+def test_utils_upload_image(test, filename='astrobin/fixtures/test.jpg', wip=False):
     data = {'image_file': open(filename, 'rb')}
     if wip:
         data['wip'] = True
@@ -24,17 +24,17 @@ def test_utils_upload_image(test, filename = 'astrobin/fixtures/test.jpg', wip =
     response = test.client.post(
         reverse('image_upload_process'),
         data,
-        follow = True)
+        follow=True)
     image = test_utils_get_last_image()
 
     return response, image
 
 
-def test_utils_upload_revision(test, image, filename = 'astrobin/fixtures/test.jpg'):
+def test_utils_upload_revision(test, image, filename='astrobin/fixtures/test.jpg'):
     response = test.client.post(
         reverse('image_revision_upload_process'),
         {'image_id': image.id, 'image_file': open(filename, 'rb')},
-        follow = True)
+        follow=True)
     revision = test_utils_get_last_image_revision()
 
     return response, revision

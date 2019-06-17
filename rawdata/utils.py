@@ -2,7 +2,6 @@ from subscription.models import UserSubscription
 
 from .models import RawImage
 
-
 SUBSCRIPTION_NAMES = (
     'Atom',
     'Meteor',
@@ -16,9 +15,9 @@ SUBSCRIPTION_NAMES = (
 
 
 def rawdata_user_used_bytes(user):
-    sizes = RawImage.objects\
-        .filter(user = user)\
-        .values_list('size', flat = True)
+    sizes = RawImage.objects \
+        .filter(user=user) \
+        .values_list('size', flat=True)
     return sum(sizes)
 
 
@@ -38,21 +37,22 @@ def rawdata_user_progress_class(user):
 def rawdata_user_is_over_limit(user):
     return rawdata_user_used_percent(user) >= 100
 
+
 def rawdata_user_get_subscription(user):
     if not user.is_authenticated():
         raise UserSubscription.DoesNotExist
 
     try:
-        return UserSubscription.objects.get(user = user, subscription__name__in = SUBSCRIPTION_NAMES)
+        return UserSubscription.objects.get(user=user, subscription__name__in=SUBSCRIPTION_NAMES)
     except UserSubscription.MultipleObjectsReturned:
-        return UserSubscription.objects.filter(user = user, subscription__name__in = SUBSCRIPTION_NAMES)[0]
+        return UserSubscription.objects.filter(user=user, subscription__name__in=SUBSCRIPTION_NAMES)[0]
 
 
 def rawdata_user_get_valid_subscription(user):
     if not user.is_authenticated():
         raise UserSubscription.DoesNotExist
 
-    us = UserSubscription.active_objects.filter(user = user, subscription__name__in = SUBSCRIPTION_NAMES)
+    us = UserSubscription.active_objects.filter(user=user, subscription__name__in=SUBSCRIPTION_NAMES)
     if us.count() == 0 or not us[0].valid():
         raise UserSubscription.DoesNotExist
 
@@ -76,6 +76,7 @@ def rawdata_user_has_valid_subscription(user):
 
     return True
 
+
 def rawdata_user_has_invalid_subscription(user):
     valid = rawdata_user_has_valid_subscription(user)
     if valid:
@@ -90,24 +91,24 @@ def rawdata_user_has_invalid_subscription(user):
 
 
 def rawdata_subscription_byte_limit(subscription):
-    GB = 1024*1024*1024
+    GB = 1024 * 1024 * 1024
 
     # Used in the unit tests
     if subscription.group.name == 'rawdata-empty':
         return 0
     if subscription.group.name == 'rawdata-test':
-        return 5*GB
+        return 5 * GB
 
     if subscription.group.name == 'rawdata-atom':
-        return 0.5*GB
+        return 0.5 * GB
     if subscription.group.name == 'rawdata-meteor':
-        return 5*GB
+        return 5 * GB
     if subscription.group.name == 'rawdata-luna':
-        return 100*GB
+        return 100 * GB
     if subscription.group.name == 'rawdata-sol':
-        return 200*GB
+        return 200 * GB
     if subscription.group.name == 'rawdata-galaxia':
-        return 500*GB
+        return 500 * GB
 
     return 0
 
@@ -119,6 +120,7 @@ def rawdata_user_byte_limit(user):
         return 0
 
     return rawdata_subscription_byte_limit(us.subscription)
+
 
 def rawdata_supported_raw_formats():
     return [
@@ -143,7 +145,7 @@ def rawdata_supported_raw_formats():
     ]
 
 
-def md5_for_file(f, block_size=2**20):
+def md5_for_file(f, block_size=2 ** 20):
     import hashlib
     md5 = hashlib.md5()
     f.seek(0)

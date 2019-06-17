@@ -4,4 +4,3 @@ PRIVATEBETA_ALWAYS_ALLOW_VIEWS = (
     'astrobin.views.faq',
     'astrobin.views.set_language',
 )
-

@@ -17,27 +17,27 @@
 
 {% block content %}
     {% if forum.category.slug == 'group-forums' or user|pybb_may_create_topic:forum %}
-    <div class="subnav subnav-fixed">
-        <ul class="nav nav-pills">
-            {% if forum.category.slug == 'group-forums' %}
-                <li>
-                    <a href="{% url 'group_detail' forum.group.pk %}">
-                        <i class="icon-arrow-left icon-white"></i>
-                        <span class="hidden-phone">{% trans "Back to group" %}</span>
-                    </a>
-                </li>
-            {% endif %}
+        <div class="subnav subnav-fixed">
+            <ul class="nav nav-pills">
+                {% if forum.category.slug == 'group-forums' %}
+                    <li>
+                        <a href="{% url 'group_detail' forum.group.pk %}">
+                            <i class="icon-arrow-left icon-white"></i>
+                            <span class="hidden-phone">{% trans "Back to group" %}</span>
+                        </a>
+                    </li>
+                {% endif %}
 
-            {% if user|pybb_may_create_topic:forum %}
-                <li>
-                    <a href="{% url 'pybb:add_topic' forum.id %}">
-                        <i class="icon-plus icon-white"></i>
-                        {% trans "New topic" %}
-                    </a>
-                </li>
-            {% endif %}
-        </ul>
-    </div>
+                {% if user|pybb_may_create_topic:forum %}
+                    <li>
+                        <a href="{% url 'pybb:add_topic' forum.id %}">
+                            <i class="icon-plus icon-white"></i>
+                            {% trans "New topic" %}
+                        </a>
+                    </li>
+                {% endif %}
+            </ul>
+        </div>
     {% endif %}
 
     <div class="forum">

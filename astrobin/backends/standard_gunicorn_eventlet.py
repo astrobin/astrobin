@@ -4,18 +4,20 @@ workers. These should eventually becom unecessary as the supporting libraries
 continue to improve.
 """
 import os
+
 import eventlet
 from django.conf import settings
 from django.core.files import locks
 from django.core.files.move import file_move_safe
-from django.utils.text import get_valid_filename
 from django.core.files.storage import FileSystemStorage
+
 
 class EventletFileSystemStorage(FileSystemStorage):
     """
     Modified standard FileSystemStorage class to play nicely with large file
     uploads and eventlet gunicorn workers.
     """
+
     def _save(self, name, content):
         full_path = self.path(name)
 

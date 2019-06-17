@@ -1,6 +1,5 @@
 import os
 
-
 if os.environ.get('SEND_EMAILS', 'false') == 'true':
     EMAIL_BACKEND = 'djcelery_email.backends.CeleryEmailBackend'
     CELERY_EMAIL_BACKEND = 'django.core.mail.backends.smtp.EmailBackend'
@@ -27,5 +26,3 @@ else:
 
 SERVER_EMAIL = DEFAULT_FROM_EMAIL = os.environ.get('SERVER_EMAIL', 'noreply@astrobin.com')
 EMAIL_SUBJECT_PREFIX = os.environ.get('EMAIL_SUBJECT_PREFIX', '[AstroBin]')
-
-

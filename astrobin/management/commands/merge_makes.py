@@ -1,11 +1,12 @@
-import shlex
 import difflib
+import shlex
 import sys
 
 from django.core.management.base import BaseCommand
 from django.db.models import Q
 
 from astrobin.models import Gear
+
 
 class Command(BaseCommand):
     help = "Merges similar make names."
@@ -22,8 +23,8 @@ class Command(BaseCommand):
         while True:
             number_merged = 0
 
-            queryset = Gear.objects.exclude(Q(make = None) | Q(make = '') | Q(make__in = seen))
-            all_makes = [x.make for x in Gear.objects.exclude(Q(make = None) | Q(make = ''))]
+            queryset = Gear.objects.exclude(Q(make=None) | Q(make='') | Q(make__in=seen))
+            all_makes = [x.make for x in Gear.objects.exclude(Q(make=None) | Q(make=''))]
 
             item = queryset[0]
             matches = unique_items(difflib.get_close_matches(item.make, all_makes))
@@ -50,14 +51,14 @@ class Command(BaseCommand):
             if new_make == '':
                 new_make = item.make
 
-            masters = Gear.objects.filter(make = item.make)
+            masters = Gear.objects.filter(make=item.make)
             for master in masters:
                 master.make = new_make
                 master.save()
                 number_merged += 1
 
             for i in shlex.split(to_merge):
-                slaves = Gear.objects.filter(make = matches[int(i)])
+                slaves = Gear.objects.filter(make=matches[int(i)])
                 for slave in slaves:
                     slave.make = new_make
                     slave.save()

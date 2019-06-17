@@ -4,11 +4,13 @@ import simplejson as json
 # Django
 from django.http import HttpResponse
 
+
 class AjaxableResponseMixin(object):
     """
     Mixin to add AJAX support to a form.
     Must be used with an object-based FormView (e.g. CreateView)
     """
+
     def render_to_json_response(self, context, **response_kwargs):
         data = json.dumps(context)
         response_kwargs['content_type'] = 'application/json'
@@ -28,4 +30,3 @@ class AjaxableResponseMixin(object):
             return self.render_to_json_response(data)
         else:
             return super(AjaxableResponseMixin, self).form_valid(form)
-

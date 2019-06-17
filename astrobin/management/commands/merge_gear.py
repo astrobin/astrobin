@@ -8,6 +8,7 @@ from django.db.models import Q
 # AstroBin
 from astrobin.models import Gear
 
+
 class Command(BaseCommand):
     help = "Merges gear items with the same make/name."
 
@@ -32,9 +33,9 @@ class Command(BaseCommand):
 
             seen.append(item)
 
-            twins = Gear.objects\
-                .filter(Q(make = item.make) & Q(name = item.name))\
-                .exclude(id = item.id)
+            twins = Gear.objects \
+                .filter(Q(make=item.make) & Q(name=item.name)) \
+                .exclude(id=item.id)
 
             if twins:
                 print "Examining item %d/%d: [%d] %s" % (current, count, item.id, item),

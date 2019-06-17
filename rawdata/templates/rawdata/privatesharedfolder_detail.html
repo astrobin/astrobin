@@ -6,7 +6,7 @@
 {% load tags %} {% comment %} AstroBin tags {% endcomment %}
 {% load common_tags %}
 
-{% block title %}AstroBin - {% blocktrans %}Private shared folder{% endblocktrans %} - {{object}}{% endblock %}
+{% block title %}AstroBin - {% blocktrans %}Private shared folder{% endblocktrans %} - {{ object }}{% endblock %}
 {% block container_extra_classes %}
     {% ifequal object.creator request.user %}has-subnav{% endifequal %}
 {% endblock %}
@@ -23,8 +23,9 @@
         <h4 class="alert-heading">
             <i class="icon-ok-sign"></i>
             {% trans "Success!" %}
-         </h4>
-        <p>{% blocktrans %}The users you selected have been invited. They will receive a notification.{% endblocktrans %}</p>
+        </h4>
+        <p>{% blocktrans %}The users you selected have been invited. They will receive a
+            notification.{% endblocktrans %}</p>
     </div>
 
     {% ifequal object.creator request.user %}
@@ -66,10 +67,12 @@
     <div class="subtitle">
         <i class="icon icon-info-sign"></i>
         {% url 'user_page' object.creator as user_url %}
-        {% blocktrans with object.creator as user and size|filesizeformat as size and object.images.all|length as image_count %}A private shared folder created by <a href="{{user_url}}">{{user}}</a>, with {{size}} in {{image_count}} images.{% endblocktrans %}
+        {% blocktrans with object.creator as user and size|filesizeformat as size and object.images.all|length as image_count %}
+            A private shared folder created by <a href="{{ user_url }}">{{ user }}</a>, with {{ size }} in
+            {{ image_count }} images.{% endblocktrans %}
     </div>
 
-    <div id="folder-description" class="well">{{object.description|linebreaks}}</div>
+    <div id="folder-description" class="well">{{ object.description|linebreaks }}</div>
 
     {% if object.processed_images.all %}
         <div class="subtle-container">
@@ -88,42 +91,43 @@
         <div class="span6"> <!-- file list -->
             <table class="table table-striped rawdata-browser hidden-phone">
                 <thead>
-                    <tr>
-                        <th class="rawdata-browser-counter"></th>
-                        <th class="rawdata-browser-name">{% trans "Name" %}</th>
-                        <th class="rawdata-browser-user">{% trans "User" %}</th>
-                        <th class="rawdata-browser-size">{% trans "Size" %}</th>
-                        <th class="rawdata-browser-uploaded">{% trans "Uploaded" %}</th>
-                        <th class="rawdata-browser-action"></th>
-                    </tr>
+                <tr>
+                    <th class="rawdata-browser-counter"></th>
+                    <th class="rawdata-browser-name">{% trans "Name" %}</th>
+                    <th class="rawdata-browser-user">{% trans "User" %}</th>
+                    <th class="rawdata-browser-size">{% trans "Size" %}</th>
+                    <th class="rawdata-browser-uploaded">{% trans "Uploaded" %}</th>
+                    <th class="rawdata-browser-action"></th>
+                </tr>
                 </thead>
                 <tbody>
-                    {% for image in object.images.all %}
-                        <tr id="{{image.id}}" class="rawfile">
-                            <td class="rawdata-browser-counter">{{forloop.counter}}</td>
-                            <td class="rawdata-browser-name">
-                                {{image.original_filename|truncatechars:40}}
-                            </td>
-                            <td class="rawdata-browser-name"><a href="{% url 'user_page' image.user %}">{{image.user}}</td>
-                            <td class="rawdata-browser-size">{{image.size|filesizeformat}}</td>
-                            <td class="rawdata-browser-uploaded">
-                                <abbr class="timeago" title="{{image.uploaded|date:'Y-m-d\TH:i:s'}}">
-                                    {{image.uploaded|date}}
-                                </abbr>
-                            </td>
-                            <td class="rawdata-browser-action">
-                                {% ifequal request.user image.user %}
-                                    <a href="#"
-                                       class="remove-rawimage"
-                                       data-pk="{{image.pk}}"
-                                       rel="tooltip"
-                                       title="{% trans "Remove from this folder" %}">
-                                        <i class="icon-remove-sign"></i>
-                                    </a>
-                                {% endifequal %}
-                            </td>
-                        </tr>
-                    {% endfor %}
+                {% for image in object.images.all %}
+                    <tr id="{{ image.id }}" class="rawfile">
+                        <td class="rawdata-browser-counter">{{ forloop.counter }}</td>
+                        <td class="rawdata-browser-name">
+                            {{ image.original_filename|truncatechars:40 }}
+                        </td>
+                        <td class="rawdata-browser-name"><a href="{% url 'user_page' image.user %}">{{ image.user }}
+                        </td>
+                        <td class="rawdata-browser-size">{{ image.size|filesizeformat }}</td>
+                        <td class="rawdata-browser-uploaded">
+                            <abbr class="timeago" title="{{ image.uploaded|date:'Y-m-d\TH:i:s' }}">
+                                {{ image.uploaded|date }}
+                            </abbr>
+                        </td>
+                        <td class="rawdata-browser-action">
+                            {% ifequal request.user image.user %}
+                                <a href="#"
+                                   class="remove-rawimage"
+                                   data-pk="{{ image.pk }}"
+                                   rel="tooltip"
+                                   title="{% trans "Remove from this folder" %}">
+                                    <i class="icon-remove-sign"></i>
+                                </a>
+                            {% endifequal %}
+                        </td>
+                    </tr>
+                {% endfor %}
                 </tbody>
             </table>
         </div>
@@ -133,12 +137,13 @@
                 <div class="subtle-container">
                     <div class="header"><h4>{% trans "Shared with the following users" %}</h4></div>
                     {% for user in users %}
-                        <button id="remove-user" class="btn btn-small" style="margin-bottom: 4px" data-id="{{user.id}}">
+                        <button id="remove-user" class="btn btn-small" style="margin-bottom: 4px"
+                                data-id="{{ user.id }}">
                             {% ifequal object.creator request.user %}
-                            <i class="icon-remove-sign"></i>
+                                <i class="icon-remove-sign"></i>
                             {% endifequal %}
 
-                            {{user}}
+                            {{ user }}
                         </button>
                     {% endfor %}
                 </div>
@@ -146,12 +151,13 @@
 
             <div class="download-with-icon">
                 <div class="data" style="padding-top: 0">
-                    <a class="btn btn-primary btn-large" href="{% url 'rawdata.privatesharedfolder_download' object.pk %}">
+                    <a class="btn btn-primary btn-large"
+                       href="{% url 'rawdata.privatesharedfolder_download' object.pk %}">
                         <i class="icon-download-alt"></i>
                         {% trans "Download" %}
                     </a>
                     <span class="size">
-                        {% trans "Size before zip compression" %}: <strong>{{size|filesizeformat}}</strong>
+                        {% trans "Size before zip compression" %}: <strong>{{ size|filesizeformat }}</strong>
                     </span>
                 </div>
             </div>
@@ -172,8 +178,8 @@
                     </p>
 
                     <div id="nested-comments"
-                         data-content-type-id="{{content_type.pk}}"
-                         data-object-id="{{object.pk}}">
+                         data-content-type-id="{{ content_type.pk }}"
+                         data-object-id="{{ object.pk }}">
                     </div>
                     {% include 'nested_comments/nestedcomment_app.html' %}
                 {% endif %}
@@ -190,11 +196,12 @@
         </div>
         <div class="modal-body">
             <p>{% blocktrans %}Are you sure you want to delete this shared folder?{% endblocktrans %}</p>
-            <small>{% blocktrans %}Don't worry, no files will be deleted from your raw data account, nor from the accounts of other people who may have contributed to this shared folder.{% endblocktrans %}</small>
+            <small>{% blocktrans %}Don't worry, no files will be deleted from your raw data account, nor from the
+                accounts of other people who may have contributed to this shared folder.{% endblocktrans %}</small>
         </div>
         <div class="modal-footer">
             <a href="#" class="btn" data-dismiss="modal">{% trans "Cancel" %}</a>
-            <a href="#" id="confirm-delete-folder" class="btn btn-primary" data-id="{{object.id}}">
+            <a href="#" id="confirm-delete-folder" class="btn btn-primary" data-id="{{ object.id }}">
                 {% trans "Delete" %}
             </a>
         </div>
@@ -208,7 +215,7 @@
         <div class="modal-body">
             <form id="edit-folder" class="form-horizontal" method="post"
                   action="{% url 'rawdata.privatesharedfolder_update' object.id %}">
-                {{update_form|as_bootstrap}}
+                {{ update_form|as_bootstrap }}
             </form>
         </div>
 
@@ -224,10 +231,11 @@
             <h3>{% trans "Invite" %}</h3>
         </div>
         <div class="modal-body">
-            <p>{% blocktrans %}Invite users to this share private folders. Invitees will be able to add raw data and processed images, and invite more users.{% endblocktrans %}
+            <p>{% blocktrans %}Invite users to this share private folders. Invitees will be able to add raw data and
+                processed images, and invite more users.{% endblocktrans %}
             <form id="invite" class="form-horizontal" method="post"
                   action="{% url 'rawdata.privatesharedfolder_add_users' object.id %}">
-                {{users_form|as_bootstrap}}
+                {{ users_form|as_bootstrap }}
             </form>
         </div>
 
@@ -241,11 +249,11 @@
 
 {% block extra_js %}
     <script type="text/javascript">
-        $(document).ready(function() {
+        $(document).ready(function () {
             var $edit_form = $('form#edit-folder');
             var $invite_form = $('form#invite');
 
-            $('#confirm-delete-folder').click(function(e) {
+            $('#confirm-delete-folder').click(function (e) {
                 var id = $(this).data('id');
                 var $modal = $(this).closest('.modal');
 
@@ -253,7 +261,7 @@
                     url: '/rawdata/privatesharedfolders/' + id + '/delete/',
                     type: 'delete',
                     timeout: 10000,
-                    success: function() {
+                    success: function () {
                         window.location.href = '/rawdata/privatesharedfolders/';
                     }
                 });
@@ -263,10 +271,10 @@
 
             $('form#edit-folder').ajaxForm({
                 timeout: 10000,
-                beforeSubmit: function(data, $form, options) {
+                beforeSubmit: function (data, $form, options) {
                     $form.find('.btn').addClass('disabled').attr('disabled');
                 },
-                error: function(xhr, status, error) {
+                error: function (xhr, status, error) {
                     if (xhr.status == 400) {
                         // Form did not validate
                         data = $.parseJSON(xhr.responseText);
@@ -282,7 +290,7 @@
                         }
                     }
                 },
-                success: function(response, status, xhr, $form) {
+                success: function (response, status, xhr, $form) {
                     $('#folder-name').text($form.find('input[name=name]').val());
                     $('#folder-description').text($form.find('textarea[name=description]').val());
                     $form.closest('.modal').modal('hide');
@@ -291,42 +299,42 @@
                 }
             });
 
-            $('#edit-folder-modal .btn-primary').click(function(e) {
+            $('#edit-folder-modal .btn-primary').click(function (e) {
                 $('form#edit-folder').submit();
                 e.preventDefault();
             });
 
             function extractor(query) {
                 var result = /([^,]+)$/.exec(query);
-                if(result && result[1])
+                if (result && result[1])
                     return result[1].trim();
                 return '';
             }
 
             $('#invite-modal input[name=users]').typeahead({
                 source: {{users_form_source|safe}},
-                updater: function(item) {
-                    return this.$element.val().replace(/[^,]*$/,'')+item+',';
+                updater: function (item) {
+                    return this.$element.val().replace(/[^,]*$/, '') + item + ',';
                 },
                 matcher: function (item) {
-                  var tquery = extractor(this.query);
-                  if(!tquery) return false;
-                  return ~item.toLowerCase().indexOf(tquery)
+                    var tquery = extractor(this.query);
+                    if (!tquery) return false;
+                    return ~item.toLowerCase().indexOf(tquery)
                 },
                 highlighter: function (item) {
-                  var query = extractor(this.query).replace(/[\-\[\]{}()*+?.,\\\^$|#\s]/g, '\\$&')
-                  return item.replace(new RegExp('(' + query + ')', 'ig'), function ($1, match) {
-                    return '<strong>' + match + '</strong>'
-                  })
+                    var query = extractor(this.query).replace(/[\-\[\]{}()*+?.,\\\^$|#\s]/g, '\\$&')
+                    return item.replace(new RegExp('(' + query + ')', 'ig'), function ($1, match) {
+                        return '<strong>' + match + '</strong>'
+                    })
                 }
             });
 
             $('form#invite').ajaxForm({
                 timeout: 10000,
-                beforeSubmit: function(data, $form, options) {
+                beforeSubmit: function (data, $form, options) {
                     $form.find('.btn').addClass('disabled').attr('disabled');
                 },
-                error: function(xhr, status, error) {
+                error: function (xhr, status, error) {
                     if (xhr.status == 400) {
                         // Form did not validate
                         data = $.parseJSON(xhr.responseText);
@@ -342,7 +350,7 @@
                         }
                     }
                 },
-                success: function(response, status, xhr, $form) {
+                success: function (response, status, xhr, $form) {
                     $form.closest('.modal').modal('hide');
                     $('#invite-success-alert').removeClass('hidden');
                     $form.find('.error').removeClass('error');
@@ -350,38 +358,38 @@
                 }
             });
 
-            $('#invite-modal .btn-primary').click(function(e) {
+            $('#invite-modal .btn-primary').click(function (e) {
                 $('form#invite').submit();
                 e.preventDefault();
             });
 
             {% ifequal object.creator request.user %}
-            $('button#remove-user').click(function(e) {
-                var $button = $(this);
-                var user_id = $button.attr('data-id');
+                $('button#remove-user').click(function (e) {
+                    var $button = $(this);
+                    var user_id = $button.attr('data-id');
 
-                $.ajax({
-                    url: '/rawdata/privatesharedfolders/' + {{object.id}} + '/remove-user/' + user_id + '/',
-                    type: 'post',
-                    success: function() {
-                        $button.remove();
-                    }
+                    $.ajax({
+                        url: '/rawdata/privatesharedfolders/' + {{object.id}} +'/remove-user/' + user_id + '/',
+                        type: 'post',
+                        success: function () {
+                            $button.remove();
+                        }
+                    });
+
+                    e.preventDefault();
                 });
-
-                e.preventDefault();
-            });
             {% endifequal %}
 
-            $('.remove-rawimage').click(function(e) {
+            $('.remove-rawimage').click(function (e) {
                 var $cells = $(this).closest('tr').find('td');
                 var pk = $(this).attr('data-pk');
 
                 $.ajax({
-                    url: '/rawdata/privatesharedfolders/' + {{object.pk}} + '/remove-data/' + pk + '/',
+                    url: '/rawdata/privatesharedfolders/' + {{object.pk}} +'/remove-data/' + pk + '/',
                     type: 'post',
-                    success: function() {
+                    success: function () {
                         $cells.animate({'color': 'red'}, 500)
-                              .css('text-decoration', 'line-through');
+                            .css('text-decoration', 'line-through');
                     }
                 });
 

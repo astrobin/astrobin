@@ -6,7 +6,7 @@ from django.conf import settings
 class Solver(object):
     MISSING = 0
     PENDING = 1
-    FAILED  = 2
+    FAILED = 2
     SUCCESS = 3
 
     def _backend(self):
@@ -61,4 +61,3 @@ class Solver(object):
 
     def sky_plot_zoom1_image_url(self, submission):
         return self._backend().sky_plot_zoom1_image_url(submission)
-

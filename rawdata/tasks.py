@@ -1,23 +1,23 @@
 from __future__ import absolute_import
 
+import PyABC as abc
 # Python
-import tempfile, zipfile
+import tempfile
+import zipfile
 
 # Django
 from django.core.files import File
 
 # Third party apps
 from celery import shared_task
-import PySide.QtCore
-import PyABC as abc
-
 # This app
-from .models import RawImage, TemporaryArchive, upload_path
+from .models import RawImage, TemporaryArchive
+
 
 @shared_task()
 def index_raw_image(id):
     try:
-        image = RawImage.objects.get(id = id)
+        image = RawImage.objects.get(id=id)
     except RawImage.DoesNotExist:
         return
 
@@ -37,11 +37,11 @@ def index_raw_image(id):
 
 
 @shared_task()
-def prepare_zip(image_ids, owner_id, temp_archive_id, folder_or_pool = None):
+def prepare_zip(image_ids, owner_id, temp_archive_id, folder_or_pool=None):
     temp = tempfile.NamedTemporaryFile()
     archive = zipfile.ZipFile(temp, 'w', zipfile.ZIP_DEFLATED)
     for image_id in image_ids:
-        image = RawImage.objects.get(id = image_id)
+        image = RawImage.objects.get(id=image_id)
         if not image.active:
             continue
 
@@ -63,7 +63,7 @@ def prepare_zip(image_ids, owner_id, temp_archive_id, folder_or_pool = None):
 
     size = sum([x.file_size for x in archive.infolist()])
 
-    temp_archive = TemporaryArchive.objects.get(id = temp_archive_id)
+    temp_archive = TemporaryArchive.objects.get(id=temp_archive_id)
     temp_archive.size = size
     temp_archive.file.save('', File(temp))
     temp_archive.ready = True

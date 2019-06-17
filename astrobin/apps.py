@@ -27,8 +27,4 @@ class AstroBinAppConfig(AppConfig):
         registry.register('astrobin_apps_groups.group')
 
     def ready(self):
-        from astrobin.signals import *
-        from astrobin_apps_notifications.signals import *
-        from rawdata.signals import *
-
         self.registerActStreamModels()

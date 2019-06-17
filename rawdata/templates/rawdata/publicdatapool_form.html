@@ -28,62 +28,69 @@
             <div class="span6"> <!-- file list -->
                 <table class="table rawdata-browser">
                     <thead>
-                        <tr>
-                            <th colspan="2">{% trans "Name" %}</th>
-                            <th>{% trans "Size" %}</th>
-                            <th>{% trans "Uploaded" %}</th>
-                        </tr>
+                    <tr>
+                        <th colspan="2">{% trans "Name" %}</th>
+                        <th>{% trans "Size" %}</th>
+                        <th>{% trans "Uploaded" %}</th>
+                    </tr>
                     </thead>
                     <tbody>
-                        {% for image in images %}
-                            <tr id="{{image.id}}" class="rawfile">
-                                <td class="icon"><i class="icon-file"></i></td>
-                                <td class="filename" rel="tooltip" title="{{image.original_filename}}">
-                                    {{image.original_filename|truncatechars:40}}
-                                </td>
-                                <td>{{image.size|filesizeformat}}</td>
-                                <td>
-                                    <abbr class="timeago" title="{{image.uploaded|date:'Y-m-d\TH:i:s'}}">
-                                        {{image.uploaded|date}}
-                                    </abbr>
-                                </td>
-                            </tr>
-                        {% endfor %}
+                    {% for image in images %}
+                        <tr id="{{ image.id }}" class="rawfile">
+                            <td class="icon"><i class="icon-file"></i></td>
+                            <td class="filename" rel="tooltip" title="{{ image.original_filename }}">
+                                {{ image.original_filename|truncatechars:40 }}
+                            </td>
+                            <td>{{ image.size|filesizeformat }}</td>
+                            <td>
+                                <abbr class="timeago" title="{{ image.uploaded|date:'Y-m-d\TH:i:s' }}">
+                                    {{ image.uploaded|date }}
+                                </abbr>
+                            </td>
+                        </tr>
+                    {% endfor %}
                     </tbody>
                 </table>
             </div>
 
             <div class="span6">
                 <p>
-                    {% blocktrans %}A <strong>public data pool</strong> is a place where anyone with an <strong>AstroBin Raw Data</strong> account can contribute raw data, and anyone in the world can download it. By sharing your raw data here, you are contributing your work to possibly massive efforts to produce the deepest deep sky images that the amateur astronomy community has ever attempted.{% endblocktrans %}
+                    {% blocktrans %}A <strong>public data pool</strong> is a place where anyone with an
+                        <strong>AstroBin Raw Data</strong> account can contribute raw data, and anyone in the world can
+                        download it. By sharing your raw data here, you are contributing your work to possibly massive
+                        efforts to produce the deepest deep sky images that the amateur astronomy community has ever
+                        attempted.{% endblocktrans %}
                 </p>
 
                 <p>
-                    {% blocktrans %}When you select an existing data pool, or create a new one, the images listed here on the side will be added to it.{% endblocktrans %}
+                    {% blocktrans %}When you select an existing data pool, or create a new one, the images listed here
+                        on the side will be added to it.{% endblocktrans %}
                 </p>
 
                 {% if pools_form %}
-                <div class="well">
-                    <p>
-                        {% blocktrans %}Use this form to select an existing <strong>public data pool</strong>.{% endblocktrans %}
-                    </p>
-                    <form id="select-existing-form" class="form-inline">
-                        {{pools_form}}
-                        <button class="btn btn-primary">{% trans "Send" %}</button>
-                        <img class="loading hidden"
-                             src="{% static 'astrobin/images/ajax-loader.gif' %}"
-                             alt="{% trans "Loading..." %}"/>
-                    </form>
-                </div>
+                    <div class="well">
+                        <p>
+                            {% blocktrans %}Use this form to select an existing <strong>public data pool</strong>
+                                .{% endblocktrans %}
+                        </p>
+                        <form id="select-existing-form" class="form-inline">
+                            {{ pools_form }}
+                            <button class="btn btn-primary">{% trans "Send" %}</button>
+                            <img class="loading hidden"
+                                 src="{% static 'astrobin/images/ajax-loader.gif' %}"
+                                 alt="{% trans "Loading..." %}" />
+                        </form>
+                    </div>
                 {% endif %}
 
                 <div id="success-1" class="alert alert-success hidden"></div>
 
                 <div class="well">
                     {% if pools_form %}
-                    <p>
-                        {% blocktrans %}Or use this button to create a whole new <strong>public data pool</strong>.{% endblocktrans %}
-                    </p>
+                        <p>
+                            {% blocktrans %}Or use this button to create a whole new <strong>public data pool</strong>
+                                .{% endblocktrans %}
+                        </p>
                     {% endif %}
                     <a id="create-new-modal-link" href="#create-new-modal" class="btn btn-primary">
                         {% trans "Create new public data pool" %}
@@ -104,7 +111,7 @@
         </div>
         <div class="modal-body">
             <form class="form-horizontal" method="post" action="">
-                {{form|as_bootstrap}}
+                {{ form|as_bootstrap }}
             </form>
         </div>
 
@@ -117,7 +124,7 @@
 
 {% block extra_js %}
     <script type="text/javascript">
-        $(function($) {
+        $(function ($) {
             $('table').stickyTableHeaders({fixedOffset: 44});
 
             function post_images(pool_id, $success) {
@@ -134,13 +141,13 @@
                     dataType: 'json',
                     type: 'post',
                     timeout: 10000,
-                    success: function() {
+                    success: function () {
                         if ($success !== undefined) {
                             $success.removeClass('hidden');
                             $success.html(
                                 "{% trans "Success!" %} " +
                                 "<a href=\"/rawdata/publicdatapools/" + pool_id + "/\">" +
-                                  "Go to the pool's page" +
+                                "Go to the pool's page" +
                                 "</a>");
                         }
                     },
@@ -148,7 +155,7 @@
                 });
             }
 
-            $('form#select-existing-form button').click(function(e) {
+            $('form#select-existing-form button').click(function (e) {
                 var $form = $(this).closest('form');
                 var pool_id = $form.find('select option:selected').val();
                 $form.find('loading').removeClass('hidden');
@@ -156,7 +163,7 @@
                 e.preventDefault();
             });
 
-            $('#create-new-modal-link').click(function(e) {
+            $('#create-new-modal-link').click(function (e) {
                 $('#create-new-modal').modal('show');
                 e.preventDefault();
             });
@@ -164,7 +171,7 @@
             $('#create-new-modal form').ajaxForm({
                 cache: false,
                 timeout: 10000,
-                error: function(xhr, status, error) {
+                error: function (xhr, status, error) {
                     if (xhr.status == 400) {
                         // Form did not validate
                         data = $.parseJSON(xhr.responseText);
@@ -179,13 +186,13 @@
                         }
                     }
                 },
-                success: function(response, status, xhr, $form) {
+                success: function (response, status, xhr, $form) {
                     var pool_id = response.pk;
                     $form.closest('.modal').modal('hide');
                     post_images(pool_id, $('#success-2'));
                 }
             });
-            $('#create-new-modal .btn-primary').click(function(e) {
+            $('#create-new-modal .btn-primary').click(function (e) {
                 $('#create-new-modal form').submit();
                 e.preventDefault();
             });

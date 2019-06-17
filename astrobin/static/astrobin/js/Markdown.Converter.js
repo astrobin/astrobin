@@ -4,7 +4,7 @@ if (typeof exports === "object" && typeof require === "function") // we're in a 
     Markdown = exports;
 else
     Markdown = {};
-    
+
 // The following text is included for historical reasons, but should
 // be taken with a pinch of salt; it's not all true anymore.
 
@@ -52,10 +52,16 @@ else
 
 (function () {
 
-    function identity(x) { return x; }
-    function returnFalse(x) { return false; }
+    function identity(x) {
+        return x;
+    }
 
-    function HookCollection() { }
+    function returnFalse(x) {
+        return false;
+    }
+
+    function HookCollection() {
+    }
 
     HookCollection.prototype = {
 
@@ -67,7 +73,9 @@ else
             if (original === identity)
                 this[hookname] = func;
             else
-                this[hookname] = function (x) { return func(original(x)); }
+                this[hookname] = function (x) {
+                    return func(original(x));
+                }
         },
         set: function (hookname, func) {
             if (!this[hookname])
@@ -91,7 +99,9 @@ else
     // http://meta.stackoverflow.com/questions/64655/strange-wmd-bug
     // (granted, switching from Array() to Object() alone would have left only __proto__
     // to be a problem)
-    function SaveHash() { }
+    function SaveHash() {
+    }
+
     SaveHash.prototype = {
         set: function (key, value) {
             this["s_" + key] = value;
@@ -133,7 +143,7 @@ else
             // Don't do that.
             if (g_urls)
                 throw new Error("Recursive call to converter.makeHtml");
-        
+
             // Create the private state objects.
             g_urls = new SaveHash();
             g_titles = new SaveHash();
@@ -425,9 +435,9 @@ else
             // Must come after _DoAnchors(), because you can use < and >
             // delimiters in inline links like [this](<url>).
             text = _DoAutoLinks(text);
-            
+
             text = text.replace(/~P/g, "://"); // put in place to prevent autolinking; reset now
-            
+
             text = _EncodeAmpsAndAngles(text);
             text = _DoItalicsAndBold(text);
 
@@ -573,8 +583,7 @@ else
                     if (g_titles.get(link_id) != undefined) {
                         title = g_titles.get(link_id);
                     }
-                }
-                else {
+                } else {
                     if (whole_match.search(/\(\s*\)$/m) > -1) {
                         // Special case for explicit empty url
                         url = "";
@@ -656,7 +665,7 @@ else
 
             return text;
         }
-        
+
         function attributeEncode(text) {
             // unconditionally replace angle brackets here -- what ends up in an attribute (e.g. alt or title)
             // never makes sense to have verbatim HTML in it (and the sanitizer would totally break it)
@@ -684,12 +693,11 @@ else
                     if (g_titles.get(link_id) != undefined) {
                         title = g_titles.get(link_id);
                     }
-                }
-                else {
+                } else {
                     return whole_match;
                 }
             }
-            
+
             alt_text = escapeCharacters(attributeEncode(alt_text), "*_[]()");
             url = escapeCharacters(url, "*_");
             var result = "<img src=\"" + url + "\" alt=\"" + alt_text + "\"";
@@ -718,11 +726,15 @@ else
             //  --------
             //
             text = text.replace(/^(.+)[ \t]*\n=+[ \t]*\n+/gm,
-                function (wholeMatch, m1) { return "<h1>" + _RunSpanGamut(m1) + "</h1>\n\n"; }
+                function (wholeMatch, m1) {
+                    return "<h1>" + _RunSpanGamut(m1) + "</h1>\n\n";
+                }
             );
 
             text = text.replace(/^(.+)[ \t]*\n-+[ \t]*\n+/gm,
-                function (matchFound, m1) { return "<h2>" + _RunSpanGamut(m1) + "</h2>\n\n"; }
+                function (matchFound, m1) {
+                    return "<h2>" + _RunSpanGamut(m1) + "</h2>\n\n";
+                }
             );
 
             // atx-style headers:
@@ -823,7 +835,7 @@ else
             return text;
         }
 
-        var _listItemMarkers = { ol: "\\d+[.]", ul: "[*+-]" };
+        var _listItemMarkers = {ol: "\\d+[.]", ul: "[*+-]"};
 
         function _ProcessListItems(list_str, list_type) {
             //
@@ -872,7 +884,7 @@ else
             //
             // We changed this to behave identical to MarkdownSharp. This is the constructed RegEx,
             // with {MARKER} being one of \d+[.] or [*+-], depending on list_type:
-        
+
             /*
             list_str = list_str.replace(/
                 (^[ \t]*)                       // leading whitespace = $1
@@ -898,8 +910,7 @@ else
 
                     if (contains_double_newline || last_item_had_a_double_newline) {
                         item = _RunBlockGamut(_Outdent(item), /* doNotUnhash = */true);
-                    }
-                    else {
+                    } else {
                         // Recursion for sub-lists:
                         item = _DoLists(_Outdent(item));
                         item = item.replace(/\n$/, ""); // chomp(item)
@@ -1052,10 +1063,10 @@ else
 
             // <strong> must go first:
             text = text.replace(/([\W_]|^)(\*\*|__)(?=\S)([^\r]*?\S[\*_]*)\2([\W_]|$)/g,
-            "$1<strong>$3</strong>$4");
+                "$1<strong>$3</strong>$4");
 
             text = text.replace(/([\W_]|^)(\*|_)(?=\S)([^\r\*_]*?\S)\2([\W_]|$)/g,
-            "$1<em>$3</em>$4");
+                "$1<em>$3</em>$4");
 
             return text;
         }
@@ -1093,7 +1104,7 @@ else
                     bq = bq.replace(/(^|\n)/g, "$1  ");
                     // These leading spaces screw with <pre> content, so we need to fix that:
                     bq = bq.replace(
-                            /(\s*<pre>[^\r]+?<\/pre>)/gm,
+                        /(\s*<pre>[^\r]+?<\/pre>)/gm,
                         function (wholeMatch, m1) {
                             var pre = m1;
                             // attacklab: hack around Konqueror 3.5.4 bug:
@@ -1120,7 +1131,7 @@ else
 
             var grafs = text.split(/\n{2,}/g);
             var grafsOut = [];
-            
+
             var markerRe = /~K(\d+)K/;
 
             //
@@ -1133,8 +1144,7 @@ else
                 // if this is an HTML marker, copy it
                 if (markerRe.test(str)) {
                     grafsOut.push(str);
-                }
-                else if (/\S/.test(str)) {
+                } else if (/\S/.test(str)) {
                     str = _RunSpanGamut(str);
                     str = str.replace(/^([ \t]*)/g, "<p>");
                     str += "</p>"
@@ -1205,8 +1215,10 @@ else
             text = text.replace(/(^|\s)(https?|ftp)(:\/\/[-A-Z0-9+&@#\/%?=~_|\[\]\(\)!:,\.;]*[-A-Z0-9+&@#\/%=~_|\[\]])($|\W)/gi, "$1<$2$3>$4");
 
             //  autolink anything like <http://example.com>
-            
-            var replacer = function (wholematch, m1) { return "<a href=\"" + m1 + "\">" + pluginHooks.plainLinkText(m1) + "</a>"; }
+
+            var replacer = function (wholematch, m1) {
+                return "<a href=\"" + m1 + "\">" + pluginHooks.plainLinkText(m1) + "</a>";
+            }
             text = text.replace(/<((https?|ftp):[^'">\s]+)>/gi, replacer);
 
             // Email addresses: <address@domain.foo>
@@ -1267,8 +1279,8 @@ else
                 return text;
 
             var spaces = ["    ", "   ", "  ", " "],
-            skew = 0,
-            v;
+                skew = 0,
+                v;
 
             return text.replace(/[\n\t]/g, function (match, offset) {
                 if (match === "\n") {

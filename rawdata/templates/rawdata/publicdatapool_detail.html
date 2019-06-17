@@ -6,7 +6,7 @@
 {% load tags %} {% comment %} AstroBin tags {% endcomment %}
 {% load common_tags %}
 
-{% block title %}AstroBin - {% blocktrans %}Public data pool{% endblocktrans %} - {{object}}{% endblock %}
+{% block title %}AstroBin - {% blocktrans %}Public data pool{% endblocktrans %} - {{ object }}{% endblock %}
 {% block container_extra_classes %}
     {% ifequal object.creator request.user %}has-subnav{% endifequal %}
 {% endblock %}
@@ -44,10 +44,12 @@
     <div class="subtitle">
         <i class="icon icon-info-sign"></i>
         {% url 'user_page' object.creator as user_url %}
-        {% blocktrans with object.creator as user and size|filesizeformat as size and object.images.all|length as image_count %}A public data pool created by <a href="{{user_url}}">{{user}}</a>, with {{size}} in {{image_count}} images.{% endblocktrans %}
+        {% blocktrans with object.creator as user and size|filesizeformat as size and object.images.all|length as image_count %}
+            A public data pool created by <a href="{{ user_url }}">{{ user }}</a>, with {{ size }} in {{ image_count }}
+            images.{% endblocktrans %}
     </div>
 
-    <div id="pool-description" class="well">{{object.description|linebreaks}}</div>
+    <div id="pool-description" class="well">{{ object.description|linebreaks }}</div>
 
     {% if object.processed_images.all %}
         <div class="subtle-container">
@@ -66,51 +68,56 @@
         <div class="span6"> <!-- file list -->
             <table class="table table-striped rawdata-browser hidden-phone">
                 <thead>
-                    <tr>
-                        <th class="rawdata-browser-counter"></th>
-                        <th class="rawdata-browser-name">{% trans "Name" %}</th>
-                        <th class="rawdata-browser-user">{% trans "User" %}</th>
-                        <th class="rawdata-browser-size">{% trans "Size" %}</th>
-                        <th class="rawdata-browser-uploaded">{% trans "Uploaded" %}</th>
-                        <th class="rawdata-browser-action"></th>
-                    </tr>
+                <tr>
+                    <th class="rawdata-browser-counter"></th>
+                    <th class="rawdata-browser-name">{% trans "Name" %}</th>
+                    <th class="rawdata-browser-user">{% trans "User" %}</th>
+                    <th class="rawdata-browser-size">{% trans "Size" %}</th>
+                    <th class="rawdata-browser-uploaded">{% trans "Uploaded" %}</th>
+                    <th class="rawdata-browser-action"></th>
+                </tr>
                 </thead>
                 <tbody>
-                    {% for image in object.images.all %}
-                        <tr id="{{image.id}}" class="rawfile">
-                            <td class="rawdata-browser-counter">{{forloop.counter}}</td>
-                            <td class="rawdata-browser-name">
-                                {{image.original_filename|truncatechars:40}}
-                            </td>
-                            <td class="rawdata-browser-user"><a href="{% url 'user_page' image.user %}">{{image.user}}</td>
-                            <td class="rawdata-browser-size">{{image.size|filesizeformat}}</td>
-                            <td class="rawdata-browser-uploaded">
-                                <abbr class="timeago" title="{{image.uploaded|date:'Y-m-d\TH:i:s'}}">
-                                    {{image.uploaded|date}}
-                                </abbr>
-                            </td>
-                            <td class="rawdata-browser-action">
-                                {% ifequal request.user image.user %}
-                                    <a href="#"
-                                       class="remove-rawimage"
-                                       data-pk="{{image.pk}}"
-                                       rel="tooltip"
-                                       title="{% trans "Remove from this pool" %}">
-                                        <i class="icon-remove-sign"></i>
-                                    </a>
-                                {% endifequal %}
-                            </td>
-                        </tr>
-                    {% endfor %}
+                {% for image in object.images.all %}
+                    <tr id="{{ image.id }}" class="rawfile">
+                        <td class="rawdata-browser-counter">{{ forloop.counter }}</td>
+                        <td class="rawdata-browser-name">
+                            {{ image.original_filename|truncatechars:40 }}
+                        </td>
+                        <td class="rawdata-browser-user"><a href="{% url 'user_page' image.user %}">{{ image.user }}
+                        </td>
+                        <td class="rawdata-browser-size">{{ image.size|filesizeformat }}</td>
+                        <td class="rawdata-browser-uploaded">
+                            <abbr class="timeago" title="{{ image.uploaded|date:'Y-m-d\TH:i:s' }}">
+                                {{ image.uploaded|date }}
+                            </abbr>
+                        </td>
+                        <td class="rawdata-browser-action">
+                            {% ifequal request.user image.user %}
+                                <a href="#"
+                                   class="remove-rawimage"
+                                   data-pk="{{ image.pk }}"
+                                   rel="tooltip"
+                                   title="{% trans "Remove from this pool" %}">
+                                    <i class="icon-remove-sign"></i>
+                                </a>
+                            {% endifequal %}
+                        </td>
+                    </tr>
+                {% endfor %}
                 </tbody>
             </table>
         </div>
 
         <div class="span6">
             <p>
-            {% url 'user_page' object.creator as user_url %}
-            {% url 'rawdata.help1' as rawdata_url %}
-            {% blocktrans with object.creator as user and size|filesizeformat as size and object.images.all|length as image_count and object.created|date:"DATE_FORMAT" as date %}This public data pool was created on {{date}} by <a href="{{user_url}}">{{user}}</a>. It consists of {{size}} in {{image_count}} images. You can contribute by donating your raw files, if you are subscribed to <a href="{{rawdata_url}}">AstroBin Raw Data</a>, or you can download the available data and try to process it!{% endblocktrans %}
+                {% url 'user_page' object.creator as user_url %}
+                {% url 'rawdata.help1' as rawdata_url %}
+                {% blocktrans with object.creator as user and size|filesizeformat as size and object.images.all|length as image_count and object.created|date:"DATE_FORMAT" as date %}
+                    This public data pool was created on {{ date }} by <a href="{{ user_url }}">{{ user }}</a>. It
+                    consists of {{ size }} in {{ image_count }} images. You can contribute by donating your raw files,
+                    if you are subscribed to <a href="{{ rawdata_url }}">AstroBin Raw Data</a>, or you can download the
+                    available data and try to process it!{% endblocktrans %}
             </p>
 
             <div class="download-with-icon">
@@ -120,7 +127,7 @@
                         {% trans "Download" %}
                     </a>
                     <span class="size">
-                        {% trans "Size before zip compression" %}: <strong>{{size|filesizeformat}}</strong>
+                        {% trans "Size before zip compression" %}: <strong>{{ size|filesizeformat }}</strong>
                     </span>
                 </div>
             </div>
@@ -141,8 +148,8 @@
                     </p>
 
                     <div id="nested-comments"
-                         data-content-type-id="{{content_type.pk}}"
-                         data-object-id="{{object.pk}}">
+                         data-content-type-id="{{ content_type.pk }}"
+                         data-object-id="{{ object.pk }}">
                     </div>
                     {% include 'nested_comments/nestedcomment_app.html' %}
                 {% endif %}
@@ -160,7 +167,7 @@
         <div class="modal-body">
             <form class="form-horizontal" method="post"
                   action="{% url 'rawdata.publicdatapool_update' object.id %}">
-                {{update_form|as_bootstrap}}
+                {{ update_form|as_bootstrap }}
             </form>
         </div>
 
@@ -174,13 +181,13 @@
 
 {% block extra_js %}
     <script type="text/javascript">
-        $(document).ready(function() {
+        $(document).ready(function () {
             $('#edit-pool-modal form').ajaxForm({
                 timeout: 10000,
-                beforeSubmit: function(data, $form, options) {
+                beforeSubmit: function (data, $form, options) {
                     $form.find('.btn').addClass('disabled').attr('disabled');
                 },
-                error: function(xhr, status, error) {
+                error: function (xhr, status, error) {
                     if (xhr.status == 400) {
                         // Form did not validate
                         data = $.parseJSON(xhr.responseText);
@@ -196,7 +203,7 @@
                         }
                     }
                 },
-                success: function(response, status, xhr, $form) {
+                success: function (response, status, xhr, $form) {
                     $('#pool-name').text($form.find('input[name=name]').val());
                     $('#pool-description').text($form.find('textarea[name=description]').val());
                     $form.closest('.modal').modal('hide');
@@ -205,21 +212,21 @@
                 }
             });
 
-            $('#edit-pool-modal .btn-primary').click(function(e) {
+            $('#edit-pool-modal .btn-primary').click(function (e) {
                 $('#edit-pool-modal form').submit();
                 e.preventDefault();
             });
 
-            $('.remove-rawimage').click(function(e) {
+            $('.remove-rawimage').click(function (e) {
                 var $cells = $(this).closest('tr').find('td');
                 var pk = $(this).attr('data-pk');
 
                 $.ajax({
-                    url: '/rawdata/publicdatapools/' + {{object.pk}} + '/remove-data/' + pk + '/',
+                    url: '/rawdata/publicdatapools/' + {{object.pk}} +'/remove-data/' + pk + '/',
                     type: 'post',
-                    success: function() {
+                    success: function () {
                         $cells.animate({'color': 'red'}, 500)
-                              .css('text-decoration', 'line-through');
+                            .css('text-decoration', 'line-through');
                     }
                 });
 

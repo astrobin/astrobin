@@ -1,32 +1,34 @@
 {% load i18n %}
 
 {% if request.user.is_authenticated and not request.user.userprofile.seen_email_permissions %}
-<div class="container alert alert-warning global-alert">
-    <div class="row">
-        <div class="span9">
-            <p>
-                {% blocktrans %}Please review your preferences about receiving important communications, newsletters, and marketing emails from AstorBin.{% endblocktrans %}
-            </p>
-        </div>
-        <div class="span3">
-            <form action="{% url 'profile_seen_email_permissions' %}" method="post">{% csrf_token %}
-                <input type="hidden" name="next" value="{% url 'profile_edit_preferences' %}" />
-                <input class="btn btn-primary" type="submit" value="{% trans "Preferences" %} &rarr;" />
-            </form>
-            <form action="{% url 'profile_seen_email_permissions' %}" method="post">{% csrf_token %}
-                <input type="hidden" name="next" value="{{request.path}}" />
-                <input class="btn" type="submit" value="{% trans "Don't show again" %}" />
-            </form>
-        </div>
-    </div> <!-- row -->
-</div>
+    <div class="container alert alert-warning global-alert">
+        <div class="row">
+            <div class="span9">
+                <p>
+                    {% blocktrans %}Please review your preferences about receiving important communications,
+                        newsletters, and marketing emails from AstorBin.{% endblocktrans %}
+                </p>
+            </div>
+            <div class="span3">
+                <form action="{% url 'profile_seen_email_permissions' %}" method="post">{% csrf_token %}
+                    <input type="hidden" name="next" value="{% url 'profile_edit_preferences' %}" />
+                    <input class="btn btn-primary" type="submit" value="{% trans "Preferences" %} &rarr;" />
+                </form>
+                <form action="{% url 'profile_seen_email_permissions' %}" method="post">{% csrf_token %}
+                    <input type="hidden" name="next" value="{{ request.path }}" />
+                    <input class="btn" type="submit" value="{% trans "Don't show again" %}" />
+                </form>
+            </div>
+        </div> <!-- row -->
+    </div>
 {% endif %}
 
 
 {% if HAS_BOUNCED_EMAILS %}
-<div class="container alert alert-warning global-alert">
-    {% blocktrans %}AstroBin is unable to deliver your emails, looks like your address is incorrect.{% endblocktrans %}
-    <a href="{% url 'change_email_index' %}">{% trans "Change your e-mail" %}</a>.
-</div>
+    <div class="container alert alert-warning global-alert">
+        {% blocktrans %}AstroBin is unable to deliver your emails, looks like your address is
+            incorrect.{% endblocktrans %}
+        <a href="{% url 'change_email_index' %}">{% trans "Change your e-mail" %}</a>.
+    </div>
 {% endif %}
 

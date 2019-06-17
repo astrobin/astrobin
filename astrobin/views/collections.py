@@ -1,10 +1,11 @@
 # Django
+from braces.views import JSONResponseMixin
+# Third party
+from braces.views import LoginRequiredMixin
 from django.contrib import messages
-from django.contrib.auth.models import User
 from django.contrib.contenttypes.models import ContentType
 from django.core.urlresolvers import reverse_lazy
 from django.db import IntegrityError
-from django.forms import ValidationError
 from django.http import Http404, HttpResponseForbidden
 from django.shortcuts import get_object_or_404
 from django.utils.translation import ugettext as _
@@ -14,24 +15,20 @@ from django.views.generic import DetailView
 from django.views.generic import ListView
 from django.views.generic import UpdateView
 from django.views.generic.base import View
+from toggleproperties.models import ToggleProperty
 
+from astrobin.forms import CollectionAddRemoveImagesForm
 # AstroBin
 from astrobin.forms import CollectionCreateForm
 from astrobin.forms import CollectionUpdateForm
-from astrobin.forms import CollectionAddRemoveImagesForm
 from astrobin.models import Collection
 from astrobin.models import Image
 from astrobin.models import UserProfile
 
-# Third party
-from braces.views import LoginRequiredMixin
-from braces.views import JSONResponseMixin
-from toggleproperties.models import ToggleProperty
-
 
 class EnsureCollectionOwnerMixin(View):
     def dispatch(self, request, *args, **kwargs):
-        collection = get_object_or_404(Collection, pk = kwargs[self.pk_url_kwarg])
+        collection = get_object_or_404(Collection, pk=kwargs[self.pk_url_kwarg])
         if request.user != collection.user:
             return HttpResponseForbidden
 
@@ -40,7 +37,7 @@ class EnsureCollectionOwnerMixin(View):
 
 class RedirectToCollectionListMixin():
     def get_success_url(self):
-        return reverse_lazy('user_collections_list', args = (self.kwargs['username'],))
+        return reverse_lazy('user_collections_list', args=(self.kwargs['username'],))
 
 
 class UserCollectionsBase(View):
@@ -48,7 +45,7 @@ class UserCollectionsBase(View):
 
     def get_queryset(self):
         qs = super(UserCollectionsBase, self).get_queryset()
-        return qs.filter(user__username = self.kwargs['username'])
+        return qs.filter(user__username=self.kwargs['username'])
 
     def get_context_data(self, **kwargs):
         context = super(UserCollectionsBase, self).get_context_data(**kwargs)
@@ -60,12 +57,12 @@ class UserCollectionsBase(View):
         image_ct = ContentType.objects.get_for_model(Image)
 
         context['requested_user'] = user
-        context['public_images_no'] = Image.objects.filter(user = user).count()
-        context['wip_images_no'] = Image.wip.filter(user = user).count()
+        context['public_images_no'] = Image.objects.filter(user=user).count()
+        context['wip_images_no'] = Image.wip.filter(user=user).count()
         context['bookmarks_no'] = ToggleProperty.objects.toggleproperties_for_user("bookmark", user) \
-            .filter(content_type = image_ct).count()
+            .filter(content_type=image_ct).count()
         context['likes_no'] = ToggleProperty.objects.toggleproperties_for_user("like", user) \
-            .filter(content_type = image_ct).count()
+            .filter(content_type=image_ct).count()
 
         # TODO: stats
 
@@ -78,14 +75,14 @@ class UserCollectionsList(UserCollectionsBase, ListView):
 
     def get_context_data(self, **kwargs):
         context = super(UserCollectionsList, self).get_context_data(**kwargs)
-        context['non_empty_collections_count'] = self.get_queryset().exclude(images = None).count()
+        context['non_empty_collections_count'] = self.get_queryset().exclude(images=None).count()
         context['view'] = self.request.GET.get('view')
         return context
 
 
 class UserCollectionsBaseEdit(LoginRequiredMixin, UserCollectionsBase, View):
     def form_valid(self, form):
-        collection = form.save(commit = False)
+        collection = form.save(commit=False)
         collection.user = self.request.user
         try:
             return super(UserCollectionsBaseEdit, self).form_valid(form)
@@ -96,14 +93,14 @@ class UserCollectionsBaseEdit(LoginRequiredMixin, UserCollectionsBase, View):
 
 
 class UserCollectionsCreate(
-        UserCollectionsBaseEdit, RedirectToCollectionListMixin, CreateView):
+    UserCollectionsBaseEdit, RedirectToCollectionListMixin, CreateView):
     form_class = CollectionCreateForm
     template_name = 'user_collections_create.html'
 
 
 class UserCollectionsUpdate(
-        RedirectToCollectionListMixin, EnsureCollectionOwnerMixin,
-        UserCollectionsBaseEdit, UpdateView):
+    RedirectToCollectionListMixin, EnsureCollectionOwnerMixin,
+    UserCollectionsBaseEdit, UpdateView):
     form_class = CollectionUpdateForm
     template_name = 'user_collections_update.html'
     pk_url_kwarg = 'collection_pk'
@@ -111,7 +108,7 @@ class UserCollectionsUpdate(
 
     def get_form(self, form_class):
         form = super(UserCollectionsUpdate, self).get_form(form_class)
-        form.fields['cover'].queryset = Collection.objects.get(pk = self.kwargs['collection_pk']).images.all()
+        form.fields['cover'].queryset = Collection.objects.get(pk=self.kwargs['collection_pk']).images.all()
         return form
 
     def get_success_url(self):
@@ -124,9 +121,10 @@ class UserCollectionsUpdate(
         messages.success(self.request, _("Collection updated!"))
         return super(UserCollectionsUpdate, self).post(*args, **kwargs)
 
+
 class UserCollectionsAddRemoveImages(
-        JSONResponseMixin, EnsureCollectionOwnerMixin, UserCollectionsBaseEdit,
-        UpdateView):
+    JSONResponseMixin, EnsureCollectionOwnerMixin, UserCollectionsBaseEdit,
+    UpdateView):
     form_class = CollectionAddRemoveImagesForm
     template_name = 'user_collections_add_remove_images.html'
     pk_url_kwarg = 'collection_pk'
@@ -135,18 +133,18 @@ class UserCollectionsAddRemoveImages(
 
     def get_context_data(self, **kwargs):
         context = super(UserCollectionsAddRemoveImages, self).get_context_data(**kwargs)
-        context['images'] = Image.objects.filter(user__username = self.kwargs['username'])
+        context['images'] = Image.objects.filter(user__username=self.kwargs['username'])
         context['images_pk_in_collection'] = [x.pk for x in self.get_object().images.all()]
         return context
 
     def get_success_url(self):
-        return reverse_lazy('user_collections_detail', args = (self.kwargs['username'], self.kwargs['collection_pk'],))
+        return reverse_lazy('user_collections_detail', args=(self.kwargs['username'], self.kwargs['collection_pk'],))
 
     def post(self, request, *args, **kwargs):
         if request.is_ajax():
             self.get_object().images.clear()
             for pk in request.POST.getlist('images[]'):
-                image = Image.objects.get(pk = pk)
+                image = Image.objects.get(pk=pk)
                 self.get_object().images.add(image)
 
             messages.success(request, _("Collection updated!"))
@@ -159,8 +157,8 @@ class UserCollectionsAddRemoveImages(
 
 
 class UserCollectionsDelete(
-        LoginRequiredMixin, EnsureCollectionOwnerMixin, RedirectToCollectionListMixin,
-        UserCollectionsBase, DeleteView):
+    LoginRequiredMixin, EnsureCollectionOwnerMixin, RedirectToCollectionListMixin,
+    UserCollectionsBase, DeleteView):
     pk_url_kwarg = 'collection_pk'
     context_object_name = 'collection'
 

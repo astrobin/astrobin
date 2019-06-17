@@ -12,42 +12,42 @@
             {% if view == 'table' %}
                 <table class="table table-striped">
                     <thead>
-                        <tr>
-                            <th class="collection-name">{% trans "Collection" %}</th>
-                            <th class="collection-images hidden-phone">{% trans "Images" %}</th>
-                            <th class="collection-actions">{% trans "Tools" %}</th>
-                        </tr>
+                    <tr>
+                        <th class="collection-name">{% trans "Collection" %}</th>
+                        <th class="collection-images hidden-phone">{% trans "Images" %}</th>
+                        <th class="collection-actions">{% trans "Tools" %}</th>
+                    </tr>
                     </thead>
                     <tbody>
-                        {% for collection in collections_list %}
-                            <tr>
-                                <td class="collection-name">
-                                    {% if collection.images.count > 0 %}
-                                        <a href="{% url 'user_collections_detail' requested_user.username collection.pk %}">
-                                    {% endif %}
-                                            {{collection.name}}
-                                    {% if collection.images.count > 0 %}
-                                        </a>
-                                    {% endif %}
-                                </td>
-                                <td class="collection-images hidden-phone">
-                                    {{collection.images.count}}
-                                </td>
-                                <td class="collection-tools">
-                                    {% ifequal requested_user request.user %}
-                                        <a href="{% url 'user_collections_update' requested_user.username collection.pk %}">
-                                            <i class="icon icon-edit"></i>
-                                        </a>
-                                        <a href="{% url 'user_collections_add_remove_images' requested_user.username collection.pk %}">
-                                            <i class="icon icon-plus"></i>
-                                        </a>
-                                        <a href="#" class="delete-modal-toggle" data-collection-pk="{{collection.pk}}">
-                                            <i class="icon icon-trash"></i>
-                                        </a>
-                                    {% endifequal %}
-                                </td>
-                            </tr>
-                        {% endfor %}
+                    {% for collection in collections_list %}
+                        <tr>
+                            <td class="collection-name">
+                                {% if collection.images.count > 0 %}
+                                    <a href="{% url 'user_collections_detail' requested_user.username collection.pk %}">
+                                {% endif %}
+                                {{ collection.name }}
+                                {% if collection.images.count > 0 %}
+                                    </a>
+                                {% endif %}
+                            </td>
+                            <td class="collection-images hidden-phone">
+                                {{ collection.images.count }}
+                            </td>
+                            <td class="collection-tools">
+                                {% ifequal requested_user request.user %}
+                                    <a href="{% url 'user_collections_update' requested_user.username collection.pk %}">
+                                        <i class="icon icon-edit"></i>
+                                    </a>
+                                    <a href="{% url 'user_collections_add_remove_images' requested_user.username collection.pk %}">
+                                        <i class="icon icon-plus"></i>
+                                    </a>
+                                    <a href="#" class="delete-modal-toggle" data-collection-pk="{{ collection.pk }}">
+                                        <i class="icon icon-trash"></i>
+                                    </a>
+                                {% endifequal %}
+                            </td>
+                        </tr>
+                    {% endfor %}
                     </tbody>
                 </table>
 
@@ -66,14 +66,14 @@
                                         {% if collection.cover %}
                                             {% astrobin_image collection.cover 'collection' link=False tooltip=False %}
                                         {% else %}
-                                            {% astrobin_image collection.images.all.0  'collection' link=False tooltip=False %}
+                                            {% astrobin_image collection.images.all.0 'collection' link=False tooltip=False %}
                                         {% endif %}
                                     </a>
                                 {% endif %}
                             </div>
                             <div class="collection-name">
                                 <a href="{% url 'user_collections_detail' requested_user.username collection.pk %}">
-                                    {{collection.name}}
+                                    {{ collection.name }}
                                 </a>
                             </div>
                             {% ifequal requested_user request.user %}
@@ -84,7 +84,7 @@
                                     <a href="{% url 'user_collections_add_remove_images' requested_user.username collection.pk %}">
                                         <i class="icon icon-plus"></i>
                                     </a>
-                                    <a href="#" class="delete-modal-toggle" data-collection-pk="{{collection.pk}}">
+                                    <a href="#" class="delete-modal-toggle" data-collection-pk="{{ collection.pk }}">
                                         <i class="icon icon-trash"></i>
                                     </a>
                                 </div>
@@ -133,8 +133,8 @@
 
 {% block extra_js %}
     <script type="text/javascript">
-        $(document).ready(function() {
-            $('a.delete-modal-toggle').click(function(e) {
+        $(document).ready(function () {
+            $('a.delete-modal-toggle').click(function (e) {
                 var $modal = $('#delete-modal'),
                     $form = $modal.find('form'),
                     collection_pk = $(this).data('collection-pk'),

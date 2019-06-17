@@ -5,5 +5,4 @@ SILKY_AUTHORISATION = True
 SILKY_PERMISSIONS = lambda user: user.is_superuser
 SILKY_META = True
 SILKY_INTERCEPT_FUNC = lambda request: 'silk_intercept' in request.GET
-SILKY_MAX_RECORDED_REQUESTS = 10**3
-
+SILKY_MAX_RECORDED_REQUESTS = 10 ** 3

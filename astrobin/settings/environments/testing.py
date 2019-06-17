@@ -1,6 +1,6 @@
+import logging
 import os
 import sys
-import logging
 
 TESTING = os.environ.get("TESTING", len(sys.argv) > 1 and sys.argv[1] == 'test') == 'true'
 

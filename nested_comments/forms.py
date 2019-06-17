@@ -16,7 +16,7 @@ class NestedCommentForm(forms.ModelForm):
         model = NestedComment
         fields = ('text',)
         widgets = {
-            'text': forms.Textarea(attrs = {
+            'text': forms.Textarea(attrs={
                 'rows': 4,
             })
         }

@@ -1,21 +1,19 @@
 import os
 
-from django.conf import settings
-
 from PIL import Image, ImageOps, ImageDraw, ImageEnhance, ImageFont, ImageFilter
 
 
-def rounded_corners(image, rounded = False, **kwargs):
+def rounded_corners(image, rounded=False, **kwargs):
     if rounded:
         mask = Image.open('astrobin/thumbnail-mask.png').convert('L')
         mask = mask.resize(image.size, Image.ANTIALIAS)
-        image = ImageOps.fit(image, mask.size, centering = (0.5, 0.5))
+        image = ImageOps.fit(image, mask.size, centering=(0.5, 0.5))
         image.putalpha(mask)
 
     return image
 
 
-def invert(image, invert = False, **kwargs):
+def invert(image, invert=False, **kwargs):
     if invert:
         image = ImageOps.grayscale(image)
         image = ImageOps.invert(image)
@@ -25,7 +23,7 @@ def invert(image, invert = False, **kwargs):
     return image
 
 
-def watermark(image, watermark = False, **kwargs):
+def watermark(image, watermark=False, **kwargs):
     if watermark:
         try:
             text = kwargs['watermark_text']
@@ -50,7 +48,7 @@ def watermark(image, watermark = False, **kwargs):
                 img_fraction = 0.5
 
             font = ImageFont.truetype(ttf, fontsize)
-            while font.getsize(text)[0] < img_fraction*image.size[0]:
+            while font.getsize(text)[0] < img_fraction * image.size[0]:
                 # iterate until the text size is just larger than the criteria
                 fontsize += 1
                 font = ImageFont.truetype(ttf, fontsize)
@@ -85,7 +83,7 @@ def watermark(image, watermark = False, **kwargs):
             shadowcolor = 0x000000
             x = pos[0] + 1
             y = pos[1]
-            draw_shadow.text((x,y), text, font=font, fill=(255,0,0,255))
+            draw_shadow.text((x, y), text, font=font, fill=(255, 0, 0, 255))
             watermark_image_shadow = watermark_image_shadow.filter(ImageFilter.BLUR)
 
             # Draw text
@@ -96,12 +94,13 @@ def watermark(image, watermark = False, **kwargs):
             watermark_image.putalpha(mask)
 
             mask_shadow = watermark_image_shadow.convert('L').point(lambda x: min(x, opacity))
-            watermark_image_shadow.putalpha(mask_shadow) 
+            watermark_image_shadow.putalpha(mask_shadow)
 
             image.paste(watermark_image_shadow, None, watermark_image_shadow)
             image.paste(watermark_image, None, watermark_image)
 
     return image
+
 
 # RGB Hitogram
 # This script will create a histogram image based on the RGB content of
@@ -110,30 +109,30 @@ def watermark(image, watermark = False, **kwargs):
 #
 # May 2009,  Scott McDonough, www.scottmcdonough.co.uk
 #
-def histogram(image, histogram = False, **kwargs):
+def histogram(image, histogram=False, **kwargs):
     if not histogram:
         return image
 
     histWidth = kwargs['size'][0]  # Width of the histogram
-    histHeight = kwargs['size'][1] # Height of the histogram
-    multiplierValue = 1.0          # The multiplier value basically increases
-                                   # the histogram height so that low values
-                                   # are easier to see, this in effect chops off
-                                   # the top of the histogram.
-    showFstopLines = True          # True/False to hide outline
+    histHeight = kwargs['size'][1]  # Height of the histogram
+    multiplierValue = 1.0  # The multiplier value basically increases
+    # the histogram height so that low values
+    # are easier to see, this in effect chops off
+    # the top of the histogram.
+    showFstopLines = True  # True/False to hide outline
     fStopLines = 5
 
     # Colours to be used
-    backgroundColor = (0,0,0,0)     # Background color
-    lineColor = (102,102,102)       # Line color of fStop Markers
-    red = (255,60,60)               # Color for the red lines
-    green = (51,204,51)             # Color for the green lines
-    blue = (0,102,255)              # Color for the blue lines
+    backgroundColor = (0, 0, 0, 0)  # Background color
+    lineColor = (102, 102, 102)  # Line color of fStop Markers
+    red = (255, 60, 60)  # Color for the red lines
+    green = (51, 204, 51)  # Color for the green lines
+    blue = (0, 102, 255)  # Color for the blue lines
     ##################################################################################
     hist = image.convert("RGB").histogram()
-    histMax = max(hist)                                     # comon color
-    xScale = float(histWidth)/len(hist)                     # xScaling
-    yScale = float((histHeight)*multiplierValue)/histMax    # yScaling
+    histMax = max(hist)  # comon color
+    xScale = float(histWidth) / len(hist)  # xScaling
+    yScale = float((histHeight) * multiplierValue) / histMax  # yScaling
 
     im = Image.new("RGBA", (histWidth, histHeight), backgroundColor)
     red_layer = Image.new("RGBA", (histWidth, histHeight), red)
@@ -143,12 +142,12 @@ def histogram(image, histogram = False, **kwargs):
 
     # Draw Outline is required
     if showFstopLines:
-        xMarker = histWidth/fStopLines
-        x =0
-        for i in range(1,fStopLines+1):
+        xMarker = histWidth / fStopLines
+        x = 0
+        for i in range(1, fStopLines + 1):
             draw.line((x, 0, x, histHeight), fill=lineColor)
-            x+=xMarker
-        draw.line((histWidth-1, 0, histWidth-1, 200), fill=lineColor)
+            x += xMarker
+        draw.line((histWidth - 1, 0, histWidth - 1, 200), fill=lineColor)
         draw.line((0, 0, 0, histHeight), fill=lineColor)
 
     # Draw the RGB histogram lines
@@ -166,7 +165,7 @@ def histogram(image, histogram = False, **kwargs):
             # Wow, we could _not_ be any slower here. :-/
             alpha_mask = Image.new("L", (histWidth, histHeight), 0)
             alpha_mask_draw = ImageDraw.Draw(alpha_mask)
-            alpha_mask_draw.line((x, histHeight, x, histHeight - (i * yScale)), fill = 128)
+            alpha_mask_draw.line((x, histHeight, x, histHeight - (i * yScale)), fill=128)
             if color == red:
                 im = Image.composite(red_layer, im, alpha_mask)
             elif color == green:
@@ -174,10 +173,9 @@ def histogram(image, histogram = False, **kwargs):
             elif color == blue:
                 im = Image.composite(blue_layer, im, alpha_mask)
         if x > 255:
-            x=0
+            x = 0
         else:
             x += 1
         c += 1
 
     return im
-

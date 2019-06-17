@@ -6,7 +6,7 @@
     <div class="endless_container">
         <a class="endless_more btn btn-block-mobile" href="{{ path }}{{ querystring }}"
            data-el-querystring-key="{{ querystring_key }}">
-           {% if label %}{{ label }}{% else %}{% trans "More" %}{% endif %}</a>
+            {% if label %}{{ label }}{% else %}{% trans "More" %}{% endif %}</a>
 
         <div class="endless_loading" style="display: none;">
             <img src="{% static 'common/images/ajax-loader-bar.gif' %}" alt="..." />

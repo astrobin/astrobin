@@ -28,4 +28,3 @@ urlpatterns = patterns(
 
 # Format suffixes
 urlpatterns = format_suffix_patterns(urlpatterns, allowed=['json', 'api'])
-

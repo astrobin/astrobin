@@ -1,20 +1,17 @@
 # Python
 import unicodedata
 
+from django import forms
 # Django
 from django.contrib.auth.models import User
-from django import forms
-
-# Third party apps
-from haystack.query import SearchQuerySet
 from haystack.forms import SearchForm
 from haystack.generic_views import SearchView
+# Third party apps
+from haystack.query import SearchQuerySet
 from pybb.models import Post, Topic
 
-from nested_comments.models import NestedComment
-
 from models import Image
-
+from nested_comments.models import NestedComment
 
 FIELDS = (
     # Filtering
@@ -49,7 +46,7 @@ class AstroBinSearchForm(SearchForm):
 
     d = forms.CharField(required=False)
     t = forms.CharField(required=False)
-    
+
     animated = forms.BooleanField(required=False)
     award = forms.CharField(required=False)
     camera_type = forms.CharField(required=False)

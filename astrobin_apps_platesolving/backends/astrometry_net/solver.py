@@ -1,26 +1,21 @@
-from email.mime.multipart import MIMEMultipart
-from email.mime.base import MIMEBase
-from email.mime.application  import MIMEApplication
 from email.encoders import encode_noop
-
-import simplejson
-
+from email.mime.application import MIMEApplication
+from email.mime.base import MIMEBase
+from email.mime.multipart import MIMEMultipart
 from urllib import urlencode
 from urllib2 import urlopen, Request, HTTPError
 
 from django.conf import settings
 
 from astrobin_apps_platesolving.backends.base import AbstractPlateSolvingBackend
-
-from errors import MalformedResponse, RequestError
+from errors import RequestError
 from utils import json2python, python2json
-
 
 default_url = 'http://nova.astrometry.net/api/'
 
 
 class Solver(AbstractPlateSolvingBackend):
-    def __init__(self, apiurl = default_url):
+    def __init__(self, apiurl=default_url):
         self.session = None
         self.apiurl = apiurl
 
@@ -33,7 +28,7 @@ class Solver(AbstractPlateSolvingBackend):
         args: dict
         '''
         if self.session is not None:
-            args.update({ 'session' : self.session })
+            args.update({'session': self.session})
         print 'Python:', args
         json = python2json(args)
         print 'Sending json:', json
@@ -46,13 +41,13 @@ class Solver(AbstractPlateSolvingBackend):
             m1.add_header('Content-disposition', 'form-data; name="request-json"')
             m1.set_payload(json)
 
-            m2 = MIMEApplication(file_args[1],'octet-stream',encode_noop)
+            m2 = MIMEApplication(file_args[1], 'octet-stream', encode_noop)
             m2.add_header('Content-disposition',
                           'form-data; name="file"; filename="%s"' % file_args[0])
 
-            #msg.add_header('Content-Disposition', 'attachment',
+            # msg.add_header('Content-Disposition', 'attachment',
             # filename='bud.gif')
-            #msg.add_header('Content-Disposition', 'attachment',
+            # msg.add_header('Content-Disposition', 'attachment',
             # filename=('iso-8859-1', '', 'FuSballer.ppt'))
 
             mp = MIMEMultipart('form-data', None, [m1, m2])
@@ -66,6 +61,7 @@ class Solver(AbstractPlateSolvingBackend):
                     Generator.__init__(self, fp, mangle_from_=False,
                                        maxheaderlen=0)
                     self.root = root
+
                 def _write_headers(self, msg):
                     # We don't want to write the top-level headers;
                     # they go into Request(headers) instead.
@@ -75,7 +71,7 @@ class Solver(AbstractPlateSolvingBackend):
                     # doesn't provide the flexibility to override, so we
                     # have to copy-n-paste-n-modify.
                     for h, v in msg.items():
-                        print >> self._fp, ('%s: %s\r\n' % (h,v)),
+                        print >> self._fp, ('%s: %s\r\n' % (h, v)),
                     # A blank line always separates headers from body
                     print >> self._fp, '\r\n',
 
@@ -125,7 +121,6 @@ class Solver(AbstractPlateSolvingBackend):
         except HTTPError, e:
             print 'HTTPError', e
 
-
     def login(self, apikey):
         args = {'apikey': apikey}
 
@@ -139,26 +134,25 @@ class Solver(AbstractPlateSolvingBackend):
             raise RequestError('no session in result')
         self.session = session
 
-
     def _get_upload_args(self, **kwargs):
         args = {}
-        for key,default,typ in [('allow_commercial_use', 'n', str),
-                                ('allow_modifications', 'n', str),
-                                ('publicly_visible', 'n', str),
-                                ('scale_units', None, str),
-                                ('scale_type', None, str),
-                                ('scale_lower', None, float),
-                                ('scale_upper', None, float),
-                                ('scale_est', None, float),
-                                ('scale_err', None, float),
-                                ('center_ra', None, float),
-                                ('center_dec', None, float),
-                                ('radius', None, float),
-                                ('downsample_factor', None, int),
-                                ('tweak_order', None, int),
-                                ('crpix_center', None, bool),
-                                # image_width, image_height
-                                ]:
+        for key, default, typ in [('allow_commercial_use', 'n', str),
+                                  ('allow_modifications', 'n', str),
+                                  ('publicly_visible', 'n', str),
+                                  ('scale_units', None, str),
+                                  ('scale_type', None, str),
+                                  ('scale_lower', None, float),
+                                  ('scale_upper', None, float),
+                                  ('scale_est', None, float),
+                                  ('scale_err', None, float),
+                                  ('center_ra', None, float),
+                                  ('center_dec', None, float),
+                                  ('radius', None, float),
+                                  ('downsample_factor', None, int),
+                                  ('tweak_order', None, int),
+                                  ('crpix_center', None, bool),
+                                  # image_width, image_height
+                                  ]:
             if key in kwargs:
                 val = kwargs.pop(key)
                 if val is not None:
@@ -167,7 +161,6 @@ class Solver(AbstractPlateSolvingBackend):
             elif default is not None:
                 args.update({key: default})
         return args
-
 
     def url_upload(self, url, **kwargs):
         args = dict(url=url)
@@ -206,7 +199,6 @@ class Solver(AbstractPlateSolvingBackend):
 
         return result
 
-
     def sub_status(self, sub_id):
         return self.send_request('submissions/%s' % sub_id)
 
@@ -217,7 +209,6 @@ class Solver(AbstractPlateSolvingBackend):
             return None
 
         return jobs[0]
-
 
     def get_job_calibration_from_sub(self, sub_id):
         s = self.sub_status(sub_id)
@@ -261,4 +252,3 @@ class Solver(AbstractPlateSolvingBackend):
             return upload['subid']
 
         return 0
-

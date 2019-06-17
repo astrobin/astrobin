@@ -1,27 +1,17 @@
 # Python
-import string
-import unicodedata
-import operator
 import datetime
-import itertools
 
 # Django
-from django import forms
-from django.db import models
 from django.utils.translation import ugettext_lazy as _
-from django.utils.datastructures import MultiValueDictKeyError
-
-# Third party apps
-from haystack.query import SearchQuerySet, EmptySearchQuerySet
-from haystack.query import SQ
 
 # AstroBin apps
 from astrobin_apps_groups.models import Group
-from astrobin_apps_notifications.types import NOTICE_TYPES
-
 # This app
 from models import *
 from utils import affiliate_limit, retailer_affiliate_limit
+
+
+# Third party apps
 
 
 def uniq(seq):

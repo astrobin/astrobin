@@ -3,146 +3,147 @@
 
 <table class="table subscription-plans">
     <thead>
-        <tr>
-            <th>{% trans "Plan" context "Subscription plan name" %}</th>
-            <th>{% trans "Price" %}</th>
-            <th>{% trans "Validity" %}</th>
-            <th>{% trans "Autorenew" %}</th>
-            <th>{% trans "Trial period" %}</th>
-            <th>{% trans "Size" %}</th>
-            <th>&nbsp;</th>
-        </tr>
+    <tr>
+        <th>{% trans "Plan" context "Subscription plan name" %}</th>
+        <th>{% trans "Price" %}</th>
+        <th>{% trans "Validity" %}</th>
+        <th>{% trans "Autorenew" %}</th>
+        <th>{% trans "Trial period" %}</th>
+        <th>{% trans "Size" %}</th>
+        <th>&nbsp;</th>
+    </tr>
     </thead>
     <tbody>
-        {% for object in object_list %}
+    {% for object in object_list %}
         {% if object.category == subscription_category or subscription_category == 'any' %}
-        <tr>
-            <td>{% trans object.name %}</td>
-            <td>
-                {% if object.price > 0 %}
-                    $ {{object.price}} USD /
+            <tr>
+                <td>{% trans object.name %}</td>
+                <td>
+                    {% if object.price > 0 %}
+                        $ {{ object.price }} USD /
 
+                        {% if object.recurrence_unit == 'D' %}
+                            {% trans "day" %}
+                        {% endif %}
+
+                        {% if object.recurrence_unit == 'W' %}
+                            {% trans "week" %}
+                        {% endif %}
+
+                        {% if object.recurrence_unit == 'M' %}
+                            {% trans "month" %}
+                        {% endif %}
+
+                        {% if object.recurrence_unit == 'Y' %}
+                            {% trans "year" %}
+                        {% endif %}
+
+                        {% if object.recurrence_unit == None %}
+                            {% trans "one time" %}
+                        {% endif %}
+                    {% else %}
+                        {% trans "Free" context "At no cost" %}
+                    {% endif %}
+                </td>
+
+                <td>
+                    {% if object.recurrence_unit == None %}
+                        1 {% trans "year" %}
+                    {% else %}
+                        {% trans "n/a" %}
+                    {% endif %}
+                </td>
+
+                <td>
                     {% if object.recurrence_unit == 'D' %}
-                        {% trans "day" %}
+                        {% trans "Daily" %}
                     {% endif %}
 
                     {% if object.recurrence_unit == 'W' %}
-                        {% trans "week" %}
+                        {% trans "Weekly" %}
                     {% endif %}
 
                     {% if object.recurrence_unit == 'M' %}
-                        {% trans "month" %}
+                        {% trans "Monthly" %}
                     {% endif %}
 
                     {% if object.recurrence_unit == 'Y' %}
-                        {% trans "year" %}
+                        {% trans "Yearly" %}
                     {% endif %}
 
                     {% if object.recurrence_unit == None %}
-                        {% trans "one time" %}
+                        {% trans "No" %}
                     {% endif %}
-                {% else %}
-                    {% trans "Free" context "At no cost" %}
-                {% endif %}
-            </td>
+                </td>
 
-            <td>
-                {% if object.recurrence_unit == None %}
-                    1 {% trans "year" %}
-                {% else %}
-                    {% trans "n/a" %}
-                {% endif %}
-            </td>
+                <td>
+                    {% if object.trial_period > 0 %}
+                        {{ object.trial_period }}
 
-            <td>
-                {% if object.recurrence_unit == 'D' %}
-                    {% trans "Daily" %}
-                {% endif %}
+                        {% if object.trial_unit == 'D' %}
+                            {% trans "days" %}
+                        {% endif %}
 
-                {% if object.recurrence_unit == 'W' %}
-                    {% trans "Weekly" %}
-                {% endif %}
+                        {% if object.trial_unit == 'W' %}
+                            {% trans "weeks" %}
+                        {% endif %}
 
-                {% if object.recurrence_unit == 'M' %}
-                    {% trans "Monthly" %}
-                {% endif %}
+                        {% if object.trial_unit == 'M' %}
+                            {% trans "months" %}
+                        {% endif %}
 
-                {% if object.recurrence_unit == 'Y' %}
-                    {% trans "Yearly" %}
-                {% endif %}
-
-                {% if object.recurrence_unit == None %}
-                    {% trans "No" %}
-                {% endif %}
-            </td>
-
-            <td>
-                {% if object.trial_period > 0 %}
-                    {{object.trial_period}}
-
-                    {% if object.trial_unit == 'D' %}
-                        {% trans "days" %}
-                    {% endif %}
-
-                    {% if object.trial_unit == 'W' %}
-                        {% trans "weeks" %}
-                    {% endif %}
-
-                    {% if object.trial_unit == 'M' %}
-                        {% trans "months" %}
-                    {% endif %}
-
-                    {% if object.trial_unit == 'Y' %}
-                        {% trans "years" %}
-                    {% endif %}
-                {% else %}
-                    {% trans "No trial" %}
-                {% endif %}
-            </td>
-
-            <td>
-                {% if object.name == "AstroBin Lite" %}
-                    {% blocktrans with max_allowed=PREMIUM_MAX_IMAGES_LITE %}{{max_allowed}} images per year {% endblocktrans %}
-                {% endif %}
-
-                {% if object.name == "AstroBin Premium" %}
-                    {% blocktrans %}Unlimited images{% endblocktrans %}
-                {% endif %}
-
-                {% if object.category == "rawdata" %}
-                    {{object.description}}
-                {% endif %}
-
-                {% if object.category == "donor" %}
-                    {% trans "n/a" %}
-                {% endif %}
-            </td>
-
-            <td>
-                <a  class="btn btn-block{% if request.user|has_valid_subscription:object.pk %} btn-danger{% endif %}"
-                    href="{% url 'subscription_detail' object.pk %}">
-
-                    {% if request.user|has_valid_subscription:object.pk %}
-                        {% if object.recurrence_unit == None %}
-                            {% trans "View" %}
-                        {% else %}
-                            {% trans "Unsubscribe" %}
+                        {% if object.trial_unit == 'Y' %}
+                            {% trans "years" %}
                         {% endif %}
                     {% else %}
-                        {% if object.recurrence_unit == None %}
-                            {% trans "Buy" %}
-                        {% else %} 
-                            {% if request.user|has_valid_subscription_in_category:object.category %}
-                                {% trans "Switch to" %}
+                        {% trans "No trial" %}
+                    {% endif %}
+                </td>
+
+                <td>
+                    {% if object.name == "AstroBin Lite" %}
+                        {% blocktrans with max_allowed=PREMIUM_MAX_IMAGES_LITE %}{{ max_allowed }} images per year
+                        {% endblocktrans %}
+                    {% endif %}
+
+                    {% if object.name == "AstroBin Premium" %}
+                        {% blocktrans %}Unlimited images{% endblocktrans %}
+                    {% endif %}
+
+                    {% if object.category == "rawdata" %}
+                        {{ object.description }}
+                    {% endif %}
+
+                    {% if object.category == "donor" %}
+                        {% trans "n/a" %}
+                    {% endif %}
+                </td>
+
+                <td>
+                    <a class="btn btn-block{% if request.user|has_valid_subscription:object.pk %} btn-danger{% endif %}"
+                       href="{% url 'subscription_detail' object.pk %}">
+
+                        {% if request.user|has_valid_subscription:object.pk %}
+                            {% if object.recurrence_unit == None %}
+                                {% trans "View" %}
                             {% else %}
-                                {% trans "Subscribe" %}
+                                {% trans "Unsubscribe" %}
+                            {% endif %}
+                        {% else %}
+                            {% if object.recurrence_unit == None %}
+                                {% trans "Buy" %}
+                            {% else %}
+                                {% if request.user|has_valid_subscription_in_category:object.category %}
+                                    {% trans "Switch to" %}
+                                {% else %}
+                                    {% trans "Subscribe" %}
+                                {% endif %}
                             {% endif %}
                         {% endif %}
-                    {% endif %}
-                </a>
-            </td>
-        </tr>
+                    </a>
+                </td>
+            </tr>
         {% endif %}
-        {% endfor %}
+    {% endfor %}
     </tbody>
 </table>

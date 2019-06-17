@@ -1,11 +1,11 @@
 {% load staticfiles %}
 <script src="{% static 'el-pagination/js/el-pagination.js' %}"></script>
 <script>
-    $.ajaxSetup({ timeout: 10000 });
+    $.ajaxSetup({timeout: 10000});
     $('.endless').endlessPaginate({
         paginateOnScroll: true,
         paginateOnScrollMargin: 300,
-        onCompleted: function(context, fragment) {
+        onCompleted: function (context, fragment) {
             window.loadAstroBinImages(fragment);
             $.ajaxSetup({timeout: 0});
         }

@@ -4,7 +4,6 @@
 from rest_framework import generics
 # AstroBin
 from rest_framework.filters import DjangoFilterBackend
-from subscription.models import UserSubscription, Subscription
 
 # This app
 from .permissions import ReadOnly

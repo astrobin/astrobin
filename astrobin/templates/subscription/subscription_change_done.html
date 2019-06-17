@@ -9,9 +9,10 @@
     </div>
 
     <div class="alert alert-success">
-        {% blocktrans %}Your request for a change in your subscription has been processed successfully.{% endblocktrans %}
+        {% blocktrans %}Your request for a change in your subscription has been processed
+            successfully.{% endblocktrans %}
     </div>
 
     {% url 'subscription_list' as plans_url %}
-    {% blocktrans %}Return to the <a href="{{plans_url}}">plans page</a>.{% endblocktrans %}
+    {% blocktrans %}Return to the <a href="{{ plans_url }}">plans page</a>.{% endblocktrans %}
 {% endblock %}

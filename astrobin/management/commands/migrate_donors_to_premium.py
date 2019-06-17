@@ -1,26 +1,24 @@
-from django.core.management.base import BaseCommand
-
 from datetime import date, timedelta
 
-from paypal.standard.ipn import models
+from django.core.management.base import BaseCommand
 from subscription.models import Subscription, UserSubscription, Transaction
 
 
 class Command(BaseCommand):
     def __init__(self):
-        self.premium_subscription = Subscription.objects.get(name = 'AstroBin Premium')
+        self.premium_subscription = Subscription.objects.get(name='AstroBin Premium')
 
     def process_user(self, user, amount, first_payment):
         price = 36.0
-        days_paid = int(float(amount)/price * 365.25)
+        days_paid = int(float(amount) / price * 365.25)
         expires = (first_payment + timedelta(days_paid)).date()
 
         if expires > date.today():
             us, created = UserSubscription.objects.get_or_create(
-                user = user,
-                subscription = self.premium_subscription,
-                expires = expires,
-                cancelled = False)
+                user=user,
+                subscription=self.premium_subscription,
+                expires=expires,
+                cancelled=False)
             us.fix()
 
             print "%.2f \t %d \t %s \t %s \t\t %s <%s>" % (
@@ -57,9 +55,9 @@ class Command(BaseCommand):
         """
         data = dict()
         for transaction in Transaction.objects.filter(
-                subscription__name__in = SUBSCRIPTION_NAMES,
-                event = "subscription payment",
-                timestamp__year = date.today().year).order_by('timestamp'):
+                subscription__name__in=SUBSCRIPTION_NAMES,
+                event="subscription payment",
+                timestamp__year=date.today().year).order_by('timestamp'):
 
             if transaction.user not in data:
                 data[transaction.user] = {

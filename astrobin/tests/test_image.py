@@ -3,7 +3,6 @@
 # Python
 import re
 import time
-from mock import patch
 
 # Django
 from django.conf import settings
@@ -11,10 +10,7 @@ from django.contrib.auth.models import Group, User
 from django.contrib.contenttypes.models import ContentType
 from django.core.urlresolvers import reverse
 from django.test import TestCase
-
-# AstroBin
-from nested_comments.models import NestedComment
-
+from mock import patch
 # Third party
 from subscription.models import Subscription, UserSubscription
 from toggleproperties.models import ToggleProperty
@@ -35,6 +31,8 @@ from astrobin.models import (
     Location)
 from astrobin_apps_groups.models import Group as AstroBinGroup
 from astrobin_apps_notifications.utils import get_unseen_notifications
+# AstroBin
+from nested_comments.models import NestedComment
 
 
 class ImageTest(TestCase):

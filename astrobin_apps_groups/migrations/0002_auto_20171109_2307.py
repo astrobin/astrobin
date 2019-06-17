@@ -7,7 +7,6 @@ from django.db import migrations, models
 
 
 class Migration(migrations.Migration):
-
     dependencies = [
         ('astrobin_apps_groups', '0001_initial'),
     ]
@@ -26,7 +25,8 @@ class Migration(migrations.Migration):
         migrations.AlterField(
             model_name='group',
             name='join_requests',
-            field=models.ManyToManyField(blank=True, related_name='join_requested_group_set', to=settings.AUTH_USER_MODEL),
+            field=models.ManyToManyField(blank=True, related_name='join_requested_group_set',
+                                         to=settings.AUTH_USER_MODEL),
         ),
         migrations.AlterField(
             model_name='group',

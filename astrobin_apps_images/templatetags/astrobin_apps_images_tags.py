@@ -1,32 +1,29 @@
 # Python
-from datetime import datetime
 import random
 import string
-from PIL import Image as PILImage
 import zlib
+from datetime import datetime
 
+from PIL import Image as PILImage
 # Django
 from django.conf import settings
 from django.core.cache import cache
 from django.core.urlresolvers import reverse
-from django.template import Library, Node
-from django.template.loader import render_to_string
+from django.template import Library
 from django.utils.translation import ugettext as _
 
 # AstroBin
-from astrobin.models import CommercialGear, Gear
 from astrobin.models import Image, ImageRevision
 
 # Third party
-from haystack.query import SearchQuerySet
-
 
 register = Library()
+
 
 # Returns the URL of an image, taking into account the fact that it might be
 # a commercial gear image.
 @register.simple_tag
-def get_image_url(image, revision = 'final', size = 'regular'):
+def get_image_url(image, revision='final', size='regular'):
     def commercial_gear_url(commercial_gear):
         gear = commercial_gear.base_gear.all()
         if gear:
@@ -106,7 +103,7 @@ def astrobin_image(context, image, alias, **kwargs):
     else:
         mod = None
 
-    size  = settings.THUMBNAIL_ALIASES[''][alias]['size']
+    size = settings.THUMBNAIL_ALIASES[''][alias]['size']
 
     if image is None or not isinstance(image, Image):
         return {
@@ -125,7 +122,7 @@ def astrobin_image(context, image, alias, **kwargs):
     image_revision = image
     if revision not in [0, '0', 'final']:
         try:
-            image_revision = image.revisions.get(label = revision)
+            image_revision = image.revisions.get(label=revision)
         except ImageRevision.DoesNotExist:
             # Image revision was deleted
             pass
@@ -150,13 +147,13 @@ def astrobin_image(context, image, alias, **kwargs):
             h = size[1] if size[1] > 0 else w
 
     if alias in ('regular', 'regular_inverted',
-                 'hd'     , 'hd_inverted',
-                 'real'   , 'real_inverted'):
+                 'hd', 'hd_inverted',
+                 'real', 'real_inverted'):
         size = (size[0], int(size[0] / (w / float(h))))
         response_dict['provide_size'] = False
 
     placehold_size = [size[0], size[1]]
-    for i in range(0,2):
+    for i in range(0, 2):
         if placehold_size[i] > 1920:
             placehold_size[i] = 1920
 
@@ -199,7 +196,6 @@ def astrobin_image(context, image, alias, **kwargs):
         'thumb',
     ))
 
-
     ##########
     # BADGES #
     ##########
@@ -208,15 +204,15 @@ def astrobin_image(context, image, alias, **kwargs):
 
     if alias in ('thumb', 'gallery', 'gallery_inverted', 'regular', 'regular_inverted'):
         if (hasattr(image, 'iotd') and
-            image.iotd is not None and
-            image.iotd.date <= datetime.now().date() and
-            not image.user.userprofile.exclude_from_competitions):
+                image.iotd is not None and
+                image.iotd.date <= datetime.now().date() and
+                not image.user.userprofile.exclude_from_competitions):
             badges.append('iotd')
 
-        if  ((not hasattr(image, 'iotd') or image.iotd.date > datetime.now().date()) and
-            hasattr(image, 'iotdvote_set') and
-            image.iotdvote_set.count() > 0 and
-            not image.user.userprofile.exclude_from_competitions):
+        if ((not hasattr(image, 'iotd') or image.iotd.date > datetime.now().date()) and
+                hasattr(image, 'iotdvote_set') and
+                image.iotdvote_set.count() > 0 and
+                not image.user.userprofile.exclude_from_competitions):
             badges.append('top-pick')
 
         # Temporarily disable this because it hogs the default celery queue.
@@ -229,7 +225,6 @@ def astrobin_image(context, image, alias, **kwargs):
         elif image.pk in top100_ids:
             badges.append('top100')
         """
-
 
     cache_key = image.thumbnail_cache_key(field, alias)
     if animated:
@@ -257,43 +252,42 @@ def astrobin_image(context, image, alias, **kwargs):
         if revision is None or revision != 'final':
             get_thumb_kwargs['r'] = revision
 
-        get_thumb_url = reverse('image_thumb', kwargs = get_thumb_kwargs)
+        get_thumb_url = reverse('image_thumb', kwargs=get_thumb_kwargs)
         if animated:
             get_thumb_url += '?animated'
 
     return dict(response_dict.items() + {
-        'status'        : 'success',
-        'image'         : image,
-        'alias'         : alias,
-        'mod'           : mod,
-        'revision'      : revision,
-        'size_x'        : size[0],
-        'size_y'        : size[1],
+        'status': 'success',
+        'image': image,
+        'alias': alias,
+        'mod': mod,
+        'revision': revision,
+        'size_x': size[0],
+        'size_y': size[1],
         'placehold_size': "%sx%s" % (placehold_size[0], placehold_size[1]),
-        'real'          : alias in ('real', 'real_inverted'),
-        'url'           : url,
-        'show_tooltip'  : show_tooltip,
-        'request'       : request,
+        'real': alias in ('real', 'real_inverted'),
+        'url': url,
+        'show_tooltip': show_tooltip,
+        'request': request,
         'caption_cache_key': "%d_%s_%s_%s" % (
             image.id, revision, alias, request.LANGUAGE_CODE if hasattr(request, "LANGUAGE_CODE") else "en"),
-        'badges'        : badges,
-        'animated'      : animated,
-        'get_thumb_url' : get_thumb_url,
-        'thumb_url'     : thumb_url,
-        'link'          : link,
-        'nav_ctx'       : nav_ctx,
+        'badges': badges,
+        'animated': animated,
+        'get_thumb_url': get_thumb_url,
+        'thumb_url': thumb_url,
+        'link': link,
+        'nav_ctx': nav_ctx,
         'nav_ctx_extra': nav_ctx_extra,
     }.items())
+
+
 register.inclusion_tag(
     'astrobin_apps_images/snippets/image.html',
-    takes_context = True)(astrobin_image)
+    takes_context=True)(astrobin_image)
 
 
-@register.simple_tag(takes_context = True)
-def random_id(context, size = 8, chars = string.ascii_uppercase + string.digits):
+@register.simple_tag(takes_context=True)
+def random_id(context, size=8, chars=string.ascii_uppercase + string.digits):
     id = ''.join(random.choice(chars) for x in range(size))
     context['randomid'] = id
     return ''
-
-
-

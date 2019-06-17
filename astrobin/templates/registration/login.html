@@ -17,16 +17,16 @@
     <form class="form-horizontal" method="post" action="">{% csrf_token %}
 
         <div class="control-group required">
-          <label class="control-label" for="id_username">{% trans "Username" %}/{% trans "Email" %}</label>
-          <div class="controls">
-            <input id="id_username" maxlength="254" name="username" type="text">
-          </div>
+            <label class="control-label" for="id_username">{% trans "Username" %}/{% trans "Email" %}</label>
+            <div class="controls">
+                <input id="id_username" maxlength="254" name="username" type="text">
+            </div>
         </div>
         <div class="control-group required">
-          <label class="control-label" for="id_password">{% trans "Password" %}</label>
-          <div class="controls">
-            <input id="id_password" name="password" type="password">
-          </div>
+            <label class="control-label" for="id_password">{% trans "Password" %}</label>
+            <div class="controls">
+                <input id="id_password" name="password" type="password">
+            </div>
         </div>
 
         <div class="form-actions">

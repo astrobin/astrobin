@@ -9,11 +9,11 @@
 </li>
 <li>
     {% if object or extra_crumb %}
-    <a href="{% url 'pybb:index' %}">
+        <a href="{% url 'pybb:index' %}">
     {% endif %}
-        {% trans "Forum" %}
+    {% trans "Forum" %}
     {% if object or extra_crumb %}
-    </a>
-    <span class="divider">/</span>
+        </a>
+        <span class="divider">/</span>
     {% endif %}
 </li>

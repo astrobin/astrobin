@@ -18,11 +18,11 @@
         {% include 'readonly_mode.html' %}
     {% else %}
         <form action="" method="post" class="form-horizontal">{% csrf_token %}
-            {{form|as_bootstrap }}
+            {{ form|as_bootstrap }}
             <div class="form-actions">
-                <input class="btn btn-primary btn-block-mobile" type="submit" value="{% trans "Send" %} &raquo;"/>
+                <input class="btn btn-primary btn-block-mobile" type="submit" value="{% trans "Send" %} &raquo;" />
                 {% if 'next' in request.GET %}
-                    <a class="btn btn-block-mobile" href="{{request.GET.next}}">{% trans "Cancel" %}</a>
+                    <a class="btn btn-block-mobile" href="{{ request.GET.next }}">{% trans "Cancel" %}</a>
                 {% endif %}
             </div>
         </form>
@@ -31,14 +31,14 @@
 
 {% block extra_js %}
     <script type="text/javascript">
-        $(document).ready(function() {
+        $(document).ready(function () {
             var textarea = $('#id_body');
             textarea.wysibb({
                 buttons: "bold,italic,underline,|,img,link,|,bullist,numlist,|,code"
             });
 
             {% if 'subject' in request.GET %}
-            $('input#id_subject').val("{{request.GET.subject}}");
+                $('input#id_subject').val("{{request.GET.subject}}");
             {% endif %}
 
             var recipients = $("#id_recipient").val().split(',');

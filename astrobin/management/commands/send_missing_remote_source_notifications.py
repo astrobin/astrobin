@@ -1,8 +1,9 @@
 from django.conf import settings
 from django.contrib.auth.models import User
 from django.core.management.base import BaseCommand
-from astrobin_apps_notifications.utils import push_notification
+
 from astrobin.models import Image
+from astrobin_apps_notifications.utils import push_notification
 
 
 class Command(BaseCommand):

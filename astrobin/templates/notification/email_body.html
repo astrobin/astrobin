@@ -1,13 +1,14 @@
 {% load i18n %}
 
-<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+        "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml">
-    <head>
-        <meta name="viewport" content="width=device-width" />
-        <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
-        <title>{% trans "You have a new notification on AstroBin" %}</title>
+<head>
+    <meta name="viewport" content="width=device-width" />
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+    <title>{% trans "You have a new notification on AstroBin" %}</title>
 
-        <style>
+    <style>
         /* -------------------------------------
            GLOBAL
            ------------------------------------- */
@@ -101,9 +102,11 @@
             color: #999;
             padding: 20px;
         }
+
         .footer a {
             color: #999;
         }
+
         .footer p, .footer a, .footer unsubscribe, .footer td {
             font-size: 12px;
         }
@@ -154,6 +157,7 @@
             margin-bottom: 10px;
             font-weight: normal;
         }
+
         p li, ul li, ol li {
             margin-left: 5px;
             list-style-position: inside;
@@ -222,18 +226,22 @@
             text-align: center;
             border-radius: 3px 3px 0 0;
         }
+
         .alert a {
             color: #fff;
             text-decoration: none;
             font-weight: 500;
             font-size: 16px;
         }
+
         .alert.alert-warning {
             background: #ff9f00;
         }
+
         .alert.alert-bad {
             background: #d0021b;
         }
+
         .alert.alert-good {
             background: #68b90f;
         }
@@ -246,15 +254,19 @@
             text-align: left;
             width: 80%;
         }
+
         .invoice td {
             padding: 5px 0;
         }
+
         .invoice .invoice-items {
             width: 100%;
         }
+
         .invoice .invoice-items td {
             border-top: #eee 1px solid;
         }
+
         .invoice .invoice-items .total td {
             border-top: 2px solid #333;
             border-bottom: 2px solid #333;
@@ -294,78 +306,79 @@
                 width: 100% !important;
             }
         }
-        </style>
-    </head>
+    </style>
+</head>
 
-    <body>
+<body>
 
-        <table class="body-wrap">
-            <tr>
-                <td></td>
-                <td class="container" width="600">
-                    <div class="content">
-                        <table class="main" width="100%" cellpadding="0" cellspacing="0">
-                            <tr>
-                                <td class="content-wrap">
-                                    <table width="100%" cellpadding="0" cellspacing="0">
-                                        <tr>
-                                            <td class="content-block logo">
-                                                <a href="{{base_url}}">
-                                                    <img alt="AstroBin logo" src="https://cdn.astrobin.com/static/astrobin/images/astrobin-logo-square-mini.png" />
-                                                </a>
-                                            </td>
-                                        </tr>
-                                        <tr>
-                                            <td class="content-block">
-                                                <h2>
-                                                    {% trans "You have a new notification on AstroBin" %}
-                                                </h2>
-                                            </td>
-                                        </tr>
-                                        <tr>
-                                            <td class="content-block notification-message">
-                                                {% block content %}
-                                                    {{ message }}
-                                                {% endblock %}
-                                            </td>
-                                        </tr>
-                                        <tr>
-                                            <td class="content-block settings-links">
-                                                <a href="{{base_url}}/notifications/all/">
-                                                    {% trans "See all your notifications" %}
-                                                </a>
-                                                <br/>
-                                                <a href="{{base_url}}/notifications/settings/">
-                                                    {% trans "Edit your notification preferences" %}
-                                                </a>
-                                            </td>
-                                        </tr>
-                                        <tr>
-                                            <td class="content-block">
-                                                {% trans "Clear skies" %},<br/>
-                                                AstroBin.
-                                            </td>
-                                        </tr>
-                                    </table>
-                                </td>
-                            </tr>
-                        </table>
-                        <div class="footer">
-                            <table width="100%">
+<table class="body-wrap">
+    <tr>
+        <td></td>
+        <td class="container" width="600">
+            <div class="content">
+                <table class="main" width="100%" cellpadding="0" cellspacing="0">
+                    <tr>
+                        <td class="content-wrap">
+                            <table width="100%" cellpadding="0" cellspacing="0">
                                 <tr>
-                                    <td class="aligncenter content-block">
-                                        {% trans "Follow AstroBin" %}:
-                                        <a href="https://facebook.com/astrobin">Facebook</a> - 
-                                        <a href="https://twitter.com/astrobin_com">Twitter</a>
+                                    <td class="content-block logo">
+                                        <a href="{{ base_url }}">
+                                            <img alt="AstroBin logo"
+                                                 src="https://cdn.astrobin.com/static/astrobin/images/astrobin-logo-square-mini.png" />
+                                        </a>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td class="content-block">
+                                        <h2>
+                                            {% trans "You have a new notification on AstroBin" %}
+                                        </h2>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td class="content-block notification-message">
+                                        {% block content %}
+                                            {{ message }}
+                                        {% endblock %}
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td class="content-block settings-links">
+                                        <a href="{{ base_url }}/notifications/all/">
+                                            {% trans "See all your notifications" %}
+                                        </a>
+                                        <br />
+                                        <a href="{{ base_url }}/notifications/settings/">
+                                            {% trans "Edit your notification preferences" %}
+                                        </a>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td class="content-block">
+                                        {% trans "Clear skies" %},<br />
+                                        AstroBin.
                                     </td>
                                 </tr>
                             </table>
-                        </div>
-                    </div>
-                </td>
-            </tr>
-        </table>
+                        </td>
+                    </tr>
+                </table>
+                <div class="footer">
+                    <table width="100%">
+                        <tr>
+                            <td class="aligncenter content-block">
+                                {% trans "Follow AstroBin" %}:
+                                <a href="https://facebook.com/astrobin">Facebook</a> -
+                                <a href="https://twitter.com/astrobin_com">Twitter</a>
+                            </td>
+                        </tr>
+                    </table>
+                </div>
+            </div>
+        </td>
+    </tr>
+</table>
 
-    </body>
+</body>
 </html>
 

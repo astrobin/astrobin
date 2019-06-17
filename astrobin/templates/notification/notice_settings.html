@@ -16,30 +16,30 @@
         {% csrf_token %}
         <table class="table table-striped notice-settings">
             <thead>
-                <tr>
-                    <th class="notification-type">{% trans "Notification Type" %}</th>
-                    {% for header in notice_settings.column_headers %}
-                        <th class="notification-medium">
-                            {{ header.title }}
-                        </th>
-                    {% endfor %}
-                </tr>
+            <tr>
+                <th class="notification-type">{% trans "Notification Type" %}</th>
+                {% for header in notice_settings.column_headers %}
+                    <th class="notification-medium">
+                        {{ header.title }}
+                    </th>
+                {% endfor %}
+            </tr>
             </thead>
             <tbody>
-                {% for row in notice_settings.rows %}
-                    {% if row.notice_type.label != 'test_notification' %}
-                        <tr class="notice-row">
-                            <td class="notification-type">
-                                {% trans row.notice_type.display %}
+            {% for row in notice_settings.rows %}
+                {% if row.notice_type.label != 'test_notification' %}
+                    <tr class="notice-row">
+                        <td class="notification-type">
+                            {% trans row.notice_type.display %}
+                        </td>
+                        {% for cell in row.cells %}
+                            <td class="notification-medium">
+                                <input type="checkbox" name="{{ cell.0 }}" {% if cell.1 %}checked="yes"{% endif %} />
                             </td>
-                            {% for cell in row.cells %}
-                                <td class="notification-medium">
-                                    <input type="checkbox" name="{{ cell.0 }}" {% if cell.1 %}checked="yes"{% endif %} />
-                                </td>
-                            {% endfor %}
-                        </tr>
-                    {% endif %}
-                {% endfor %}
+                        {% endfor %}
+                    </tr>
+                {% endif %}
+            {% endfor %}
             </tbody>
         </table>
 

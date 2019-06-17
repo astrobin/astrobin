@@ -5,7 +5,7 @@
  */
 
 $.extend($.ui.multiselect.locale, {
-	addAll:'Tümünü Ekle',
-	removeAll:'Tümünü Çıkar',
-	itemsCount:'öğe seçildi'
+    addAll: 'Tümünü Ekle',
+    removeAll: 'Tümünü Çıkar',
+    itemsCount: 'öğe seçildi'
 });

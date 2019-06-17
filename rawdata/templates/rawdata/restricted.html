@@ -18,11 +18,14 @@
             {% trans "Error!" %}
         </h4>
 
-        {% blocktrans %}The page you tried to access is reserved for subscribers to the AstroBin <a href="{{rawdata_url}}">Raw Data Platform</a>.{% endblocktrans %}
+        {% blocktrans %}The page you tried to access is reserved for subscribers to the AstroBin
+            <a href="{{ rawdata_url }}">Raw Data Platform</a>.{% endblocktrans %}
     </div>
 
     <p>
-        {% blocktrans %}The <a href="{{rawdata_url}}">Raw Data Platform</a> is primarily a way to securely back up your raw files, and keep them neatly and effortlessly organized, but being part of it also means that you support AstroBin and can perhaps contribute your raw files to scientic discoveries.{% endblocktrans %}
+        {% blocktrans %}The <a href="{{ rawdata_url }}">Raw Data Platform</a> is primarily a way to securely back up
+            your raw files, and keep them neatly and effortlessly organized, but being part of it also means that you
+            support AstroBin and can perhaps contribute your raw files to scientic discoveries.{% endblocktrans %}
     </p>
 
     <div class="pagination pagination-centered">

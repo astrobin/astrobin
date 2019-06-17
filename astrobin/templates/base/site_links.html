@@ -24,72 +24,72 @@
         </li>
 
         {% if request.user|is_content_moderator %}
-        <li class="dropdown moderate-menu">
-            <a href="#" class="dropdown-toggle" data-toggle="dropdown">
-                {% trans "Moderate" %}
-                {% if images_pending_moderation_no > 0 %}
-                    <div class="badge badge-warning">
-                        !
-                    </div>
-                {% endif %}
-                <i class="icon-caret-down"></i>
-            </a>
-            <ul class="dropdown-menu">
-                {% if request.user|is_image_moderator %}
-                    <li class="nav-header">{% trans "Images" %}</li>
-                    <li>
-                        <a href="{% url 'image_moderation' %}">
-                            <i class="icon-picture"></i>
-                            {% trans "Image queue" %}
-                            {% if images_pending_moderation_no > 0 %}
-                                <div class="badge badge-success">
-                                    {{images_pending_moderation_no }}
-                                </div>
-                            {% endif %}
-                        </a>
-                    </li>
-                    {% if request.user.is_superuser %}
+            <li class="dropdown moderate-menu">
+                <a href="#" class="dropdown-toggle" data-toggle="dropdown">
+                    {% trans "Moderate" %}
+                    {% if images_pending_moderation_no > 0 %}
+                        <div class="badge badge-warning">
+                            !
+                        </div>
+                    {% endif %}
+                    <i class="icon-caret-down"></i>
+                </a>
+                <ul class="dropdown-menu">
+                    {% if request.user|is_image_moderator %}
+                        <li class="nav-header">{% trans "Images" %}</li>
                         <li>
-                            <a href="{% url 'image_moderation_view_spam' %}">
-                                <i class="icon-flag"></i>
-                                {% trans "Spam list" %}
+                            <a href="{% url 'image_moderation' %}">
+                                <i class="icon-picture"></i>
+                                {% trans "Image queue" %}
+                                {% if images_pending_moderation_no > 0 %}
+                                    <div class="badge badge-success">
+                                        {{ images_pending_moderation_no }}
+                                    </div>
+                                {% endif %}
+                            </a>
+                        </li>
+                        {% if request.user.is_superuser %}
+                            <li>
+                                <a href="{% url 'image_moderation_view_spam' %}">
+                                    <i class="icon-flag"></i>
+                                    {% trans "Spam list" %}
+                                </a>
+                            </li>
+                        {% endif %}
+                    {% endif %}
+
+                    {% if request.user|is_iotd_reviewer or request.user|is_iotd_judge %}
+                        <li class="nav-header">{% trans "Image of the day" %}</li>
+                    {% endif %}
+
+                    {% if request.user|is_iotd_submitter %}
+                        <li>
+                            <a href="{% url 'iotd_submission_queue' %}">
+                                <i class="icon-upload"></i>
+                                {% trans "Submission queue" %}
                             </a>
                         </li>
                     {% endif %}
-                {% endif %}
 
-                {% if request.user|is_iotd_reviewer or request.user|is_iotd_judge %}
-                    <li class="nav-header">{% trans "Image of the day" %}</li>
-                {% endif %}
+                    {% if request.user|is_iotd_reviewer %}
+                        <li>
+                            <a href="{% url 'iotd_review_queue' %}">
+                                <i class="icon-star"></i>
+                                {% trans "Review queue" %}
+                            </a>
+                        </li>
+                    {% endif %}
 
-                {% if request.user|is_iotd_submitter %}
-                    <li>
-                        <a href="{% url 'iotd_submission_queue' %}">
-                            <i class="icon-upload"></i>
-                            {% trans "Submission queue" %}
-                        </a>
-                    </li>
-                {% endif %}
-
-                {% if request.user|is_iotd_reviewer %}
-                    <li>
-                        <a href="{% url 'iotd_review_queue' %}">
-                            <i class="icon-star"></i>
-                            {% trans "Review queue" %}
-                        </a>
-                    </li>
-                {% endif %}
-
-                {% if request.user|is_iotd_judge %}
-                    <li>
-                        <a href="{% url 'iotd_judgement_queue' %}">
-                            <i class="icon-legal"></i>
-                            {% trans "Judgement queue" %}
-                        </a>
-                    </li>
-                {% endif %}
-            </ul>
-        </li>
+                    {% if request.user|is_iotd_judge %}
+                        <li>
+                            <a href="{% url 'iotd_judgement_queue' %}">
+                                <i class="icon-legal"></i>
+                                {% trans "Judgement queue" %}
+                            </a>
+                        </li>
+                    {% endif %}
+                </ul>
+            </li>
         {% endif %}
 
         <li class="dropdown forum-menu {% current request "^/forum/" %}">
@@ -99,9 +99,11 @@
             </a>
             <ul class="dropdown-menu">
                 <li><a href="{% url 'pybb:index' %}"><i class="icon-comments"></i> {% trans "Home" %}</a></li>
-                <li><a href="{% url 'pybb:topic_latest' %}"><i class="icon-sort-by-attributes-alt"></i> {% trans "Latest topics" %}</a></li>
+                <li><a href="{% url 'pybb:topic_latest' %}"><i
+                        class="icon-sort-by-attributes-alt"></i> {% trans "Latest topics" %}</a></li>
                 {% if request.user.is_authenticated %}
-                <li><a href="{% url 'pybb:topic_subscribed' %}"><i class="icon-eye-open"></i> {% trans "Subscribed topics" %}</a></li>
+                    <li><a href="{% url 'pybb:topic_subscribed' %}"><i
+                            class="icon-eye-open"></i> {% trans "Subscribed topics" %}</a></li>
                 {% endif %}
             </ul>
         </li>
@@ -152,12 +154,12 @@
                 <li class="divider"></li>
 
                 {% if request.user.is_superuser %}
-                <li class="explore-menu-stats">
-                    <a href="{% url 'stats' %}">
-                        <i class="icon-bar-chart"></i>
-                        {% trans "Stats" %}
-                    </a>
-                </li>
+                    <li class="explore-menu-stats">
+                        <a href="{% url 'stats' %}">
+                            <i class="icon-bar-chart"></i>
+                            {% trans "Stats" %}
+                        </a>
+                    </li>
                 {% endif %}
 
                 <li class="explore-menu-trending-astrophotographers">

@@ -1,7 +1,9 @@
 import csv
 import datetime
 from optparse import make_option
+
 from django.core.management.base import BaseCommand
+
 from astrobin.models import UserProfile
 
 
@@ -9,9 +11,9 @@ class Command(BaseCommand):
     help = "Export all user emails to a CSV file"
     option_list = BaseCommand.option_list + (
         make_option('--since',
-            help="A starting date in the yyyy-mm-dd format",
-            dest="since",
-            default=False),
+                    help="A starting date in the yyyy-mm-dd format",
+                    dest="since",
+                    default=False),
     )
 
     def handle(self, *args, **options):
@@ -27,9 +29,9 @@ class Command(BaseCommand):
         except:
             since = default_since()
 
-        profiles = UserProfile.objects\
-            .filter(user__date_joined__gte = since)\
-            .exclude(user__email = None)
+        profiles = UserProfile.objects \
+            .filter(user__date_joined__gte=since) \
+            .exclude(user__email=None)
         header = [['username', 'realname', 'email', 'joined']]
         values = list(
             profiles.values_list(
@@ -45,8 +47,8 @@ class Command(BaseCommand):
             x[3]) for x in data
         ]
 
-        filename = 'emails_since_%s.csv' %\
-            datetime.datetime.strftime(since, "%Y_%m_%d")
+        filename = 'emails_since_%s.csv' % \
+                   datetime.datetime.strftime(since, "%Y_%m_%d")
         with open(filename, 'w') as f:
             writer = csv.writer(f, delimiter=',')
             writer.writerows(encoded)

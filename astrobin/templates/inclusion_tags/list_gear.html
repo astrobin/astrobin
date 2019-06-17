@@ -3,14 +3,14 @@
 
 <div class="list-gear">
     <div class="header">
-        <span class="title">{{label}}</span>
+        <span class="title">{{ label }}</span>
     </div>
     <div class="content">
         {% for item in gear %}
-            <div id="{{item.id}}" class="btn btn-gear {% gear_complete_class item %}">
+            <div id="{{ item.id }}" class="btn btn-gear {% gear_complete_class item %}">
                 <div class="labels">
-                    <div class="make">{{item.make}}</div>
-                    <div class="name">{{item.name}}</div>
+                    <div class="make">{{ item.make }}</div>
+                    <div class="name">{{ item.name }}</div>
                     <div class="alias">({% gear_alias item user %})</div>
                 </div>
                 <div class="actions">
@@ -18,11 +18,13 @@
                         <i class="icon-trash"></i>
                     </a>
 
-                    <a href="#edit-gear-modal" class="edit" data-toggle="modal" rel="tooltip" title="{% trans "Edit" %}">
+                    <a href="#edit-gear-modal" class="edit" data-toggle="modal" rel="tooltip"
+                       title="{% trans "Edit" %}">
                         <i class="icon-pencil"></i>
                     </a>
 
-                    <a href="{% url 'gear_page' item.id item.slug %}" class="page" rel="tooltip" title="{% trans "View page" %}">
+                    <a href="{% url 'gear_page' item.id item.slug %}" class="page" rel="tooltip"
+                       title="{% trans "View page" %}">
                         <i class="icon-info-sign"></i>
                     </a>
                 </div>
@@ -34,6 +36,7 @@
         {% endfor %}
     </div>
     <div class="actions">
-        <a href="#add-gear-modal" class="btn btn-primary add-gear" data-toggle="modal" data-klass="{{klass}}">{% trans "Add" %}</a>
+        <a href="#add-gear-modal" class="btn btn-primary add-gear" data-toggle="modal"
+           data-klass="{{ klass }}">{% trans "Add" %}</a>
     </div>
 </div>

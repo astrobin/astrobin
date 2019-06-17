@@ -3,11 +3,11 @@
 from __future__ import unicode_literals
 
 from django.db import migrations, models
+
 import rawdata.models
 
 
 class Migration(migrations.Migration):
-
     dependencies = [
         ('rawdata', '0002_auto_20171109_2307'),
     ]

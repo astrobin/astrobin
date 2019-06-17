@@ -1,16 +1,15 @@
-from models import DeepSky_Acquisition, Image, UserProfile, Gear, User, Camera, Telescope
-
-from django.utils.translation import ugettext as _
-from django.db.models import Q
-from django.core.cache import cache
-
-from hitcount.models import Hit
-
-from datetime import datetime, timedelta
+import operator
 import time
 import unicodedata
-from collections import defaultdict
-import operator
+from datetime import datetime, timedelta
+
+from django.core.cache import cache
+from django.db.models import Q
+from django.utils.translation import ugettext as _
+from hitcount.models import Hit
+
+from models import DeepSky_Acquisition, Image, User, Camera, Telescope
+
 
 def unique_items(l):
     found = []
@@ -26,11 +25,11 @@ def daterange(start, end):
     return [start + timedelta(days=i) for i in range(r)]
 
 
-def integration_hours(user, period = 'monthly', since = 0):
+def integration_hours(user, period='monthly', since=0):
     _map = {
-        'yearly' : (_("Integration hours, yearly") , '%Y'),
+        'yearly': (_("Integration hours, yearly"), '%Y'),
         'monthly': (_("Integration hours, monthly"), '%Y-%m'),
-        'daily'  : (_("Integration hours, daily")  , '%Y-%m-%d'),
+        'daily': (_("Integration hours, daily"), '%Y-%m-%d'),
     }
 
     flot_label = _map[period][0]
@@ -49,14 +48,14 @@ def integration_hours(user, period = 'monthly', since = 0):
     if period == 'monthly':
         flot_options['xaxis']['timeformat'] = '%b'
 
-    astrobin = User.objects.get(username = 'astrobin')
-    all = DeepSky_Acquisition.objects.all().exclude(date = None).order_by('date')
+    astrobin = User.objects.get(username='astrobin')
+    all = DeepSky_Acquisition.objects.all().exclude(date=None).order_by('date')
 
     if since > 0:
-        all = all.filter(date__gte = datetime.today().date() - timedelta(days = since))
+        all = all.filter(date__gte=datetime.today().date() - timedelta(days=since))
 
     if user != astrobin:
-        all = all.filter(image__user = user)
+        all = all.filter(image__user=user)
 
     data = {}
     for i in all:
@@ -85,9 +84,9 @@ def integration_hours(user, period = 'monthly', since = 0):
 
 def integration_hours_by_gear(user, period='monthly'):
     _map = {
-        'yearly' : (_("Integration hours by gear, yearly") , '%Y'),
+        'yearly': (_("Integration hours by gear, yearly"), '%Y'),
         'monthly': (_("Integration hours by gear, monthly"), '%Y-%m'),
-        'daily'  : (_("Integration hours by gear, daily")  , '%Y-%m-%d'),
+        'daily': (_("Integration hours by gear, daily"), '%Y-%m-%d'),
     }
 
     flot_data = []
@@ -111,12 +110,12 @@ def integration_hours_by_gear(user, period='monthly'):
     thickness = all_telescopes.count() + all_cameras.count()
 
     for t in (all_telescopes, all_cameras):
-        all = DeepSky_Acquisition.objects.filter(image__user = user).exclude(date = None).order_by('date')
+        all = DeepSky_Acquisition.objects.filter(image__user=user).exclude(date=None).order_by('date')
         for g in t:
             if hasattr(t, 'model') and t.model.__name__ == 'Telescope':
-                all = all.filter(image__imaging_telescopes = g)
+                all = all.filter(image__imaging_telescopes=g)
             if hasattr(t, 'model') and t.model.__name__ == 'Camera':
-                all = all.filter(image__imaging_cameras = g)
+                all = all.filter(image__imaging_cameras=g)
 
             g_dict = {
                 'label': _map[period][0] + ": " + unicodedata.normalize('NFKD', unicode(g)).encode('ascii', 'ignore'),
@@ -154,9 +153,9 @@ def integration_hours_by_gear(user, period='monthly'):
 
 def uploaded_images(user, period='monthly'):
     _map = {
-        'yearly' : (_("Uploaded images, yearly") , '%Y'),
+        'yearly': (_("Uploaded images, yearly"), '%Y'),
         'monthly': (_("Uploaded images, monthly"), '%Y-%m'),
-        'daily'  : (_("Uploaded images, daily")  , '%Y-%m-%d'),
+        'daily': (_("Uploaded images, daily"), '%Y-%m-%d'),
     }
 
     flot_label = _map[period][0]
@@ -175,10 +174,10 @@ def uploaded_images(user, period='monthly'):
     if period == 'monthly':
         flot_options['xaxis']['timeformat'] = '%b'
 
-    astrobin = User.objects.get(username = 'astrobin')
+    astrobin = User.objects.get(username='astrobin')
     all = Image.objects.all().order_by('uploaded')
     if user != astrobin:
-        all = all.filter(user = user)
+        all = all.filter(user=user)
 
     data = {}
     for i in all:
@@ -203,9 +202,9 @@ def uploaded_images(user, period='monthly'):
 
 def views(user, period='monthly'):
     _map = {
-        'yearly' : (_("Views, yearly") , '%Y'),
+        'yearly': (_("Views, yearly"), '%Y'),
         'monthly': (_("Views, monthly"), '%Y-%m'),
-        'daily'  : (_("Views, daily")  , '%Y-%m-%d'),
+        'daily': (_("Views, daily"), '%Y-%m-%d'),
     }
 
     flot_label = _map[period][0]
@@ -224,8 +223,8 @@ def views(user, period='monthly'):
     if period == 'monthly':
         flot_options['xaxis']['timeformat'] = '%b'
 
-    user_images = Image.objects.filter(user = user)
-    all = Hit.objects.filter(hitcount__object_pk__in = [x.pk for x in user_images]).order_by('created')
+    user_images = Image.objects.filter(user=user)
+    all = Hit.objects.filter(hitcount__object_pk__in=[x.pk for x in user_images]).order_by('created')
     data = {}
     for i in all:
         key = i.created.date().strftime(_map[period][1])
@@ -249,9 +248,9 @@ def views(user, period='monthly'):
 
 def image_views(image_id, period='monthly'):
     _map = {
-        'yearly' : (_("Views, yearly") , '%Y'),
+        'yearly': (_("Views, yearly"), '%Y'),
         'monthly': (_("Views, monthly"), '%Y-%m'),
-        'daily'  : (_("Views, daily")  , '%Y-%m-%d'),
+        'daily': (_("Views, daily"), '%Y-%m-%d'),
     }
 
     flot_label = _map[period][0]
@@ -270,7 +269,7 @@ def image_views(image_id, period='monthly'):
     if period == 'monthly':
         flot_options['xaxis']['timeformat'] = '%b'
 
-    all = Hit.objects.filter(hitcount__object_pk = image_id).order_by('created')
+    all = Hit.objects.filter(hitcount__object_pk=image_id).order_by('created')
     data = {}
     for i in all:
         key = i.created.date().strftime(_map[period][1])
@@ -288,7 +287,6 @@ def image_views(image_id, period='monthly'):
             else:
                 flot_data.append([t, 0])
         flot_data = unique_items(flot_data)
-
 
     return (flot_label, flot_data, flot_options)
 
@@ -309,7 +307,7 @@ def subject_images_monthly(subject_id):
         'grid': {'hoverable': 'true'},
     }
 
-    all = Image.objects.filter(subjects__id = subject_id).order_by('uploaded')
+    all = Image.objects.filter(subjects__id=subject_id).order_by('uploaded')
     data = {}
     for i in all:
         key = i.uploaded.date().strftime('%m')
@@ -347,8 +345,8 @@ def subject_integration_monthly(subject_id):
     }
 
     all = DeepSky_Acquisition.objects \
-        .filter(image__subjects__id = subject_id) \
-        .exclude(Q(number = None) | Q(duration = None) | Q(date = None)) \
+        .filter(image__subjects__id=subject_id) \
+        .exclude(Q(number=None) | Q(duration=None) | Q(date=None)) \
         .order_by('date')
 
     data = {}
@@ -390,7 +388,7 @@ def subject_total_images(subject_id):
         'grid': {'hoverable': 'true'},
     }
 
-    all = Image.objects.filter(subjects__id = subject_id).order_by('uploaded')
+    all = Image.objects.filter(subjects__id=subject_id).order_by('uploaded')
 
     data = {}
     total = 0
@@ -416,7 +414,7 @@ def subject_total_images(subject_id):
     return (flot_label, flot_data, flot_options)
 
 
-def subject_camera_types(subject_id, lang = 'en'):
+def subject_camera_types(subject_id, lang='en'):
     flot_label = None
     flot_data = []
     flot_options = {
@@ -437,11 +435,11 @@ def subject_camera_types(subject_id, lang = 'en'):
     cache_key = 'stats.subjects.camera_types.%d.%s' % (int(subject_id), lang)
     if not cache.has_key(cache_key):
         all = Image.objects.all() \
-                           .exclude(imaging_cameras__type = None) \
-                           .order_by('uploaded')
+            .exclude(imaging_cameras__type=None) \
+            .order_by('uploaded')
 
         if subject_id != '0':
-            all = all.filter(subjects__id = subject_id)
+            all = all.filter(subjects__id=subject_id)
 
         data = {}
         for i in all:
@@ -455,7 +453,7 @@ def subject_camera_types(subject_id, lang = 'en'):
         for label, value in data.iteritems():
             flot_data.append({'label': label, 'data': value * 100.0 / all.count()})
 
-        flot_data = cache.set(cache_key, flot_data, 7*24*60*60)
+        flot_data = cache.set(cache_key, flot_data, 7 * 24 * 60 * 60)
     else:
         flot_data = cache.get(cache_key)
 
@@ -483,11 +481,11 @@ def subject_telescope_types(subject_id, lang='en'):
     cache_key = 'stats.subjects.telescope_types.%d.%s' % (int(subject_id), lang)
     if not cache.has_key(cache_key):
         all = Image.objects.all() \
-                           .exclude(imaging_telescopes__type = None) \
-                           .order_by('uploaded')
+            .exclude(imaging_telescopes__type=None) \
+            .order_by('uploaded')
 
         if subject_id != '0':
-            all = all.filter(subjects__id = subject_id)
+            all = all.filter(subjects__id=subject_id)
 
         data = {}
         for i in all:
@@ -501,7 +499,7 @@ def subject_telescope_types(subject_id, lang='en'):
         for label, value in data.iteritems():
             flot_data.append({'label': label, 'data': value * 100.0 / all.count()})
 
-        flot_data = cache.set(cache_key, flot_data, 7*24*60*60)
+        flot_data = cache.set(cache_key, flot_data, 7 * 24 * 60 * 60)
     else:
         flot_data = cache.get(cache_key)
 
@@ -534,8 +532,8 @@ def camera_types_trend():
             continue
 
         all = DeepSky_Acquisition.objects \
-            .filter(Q(image__imaging_cameras__type = g[0]) & Q(date__gte = '2011-01-01')) \
-            .exclude(date = None) \
+            .filter(Q(image__imaging_cameras__type=g[0]) & Q(date__gte='2011-01-01')) \
+            .exclude(date=None) \
             .order_by('date')
 
         g_dict = {
@@ -595,12 +593,12 @@ def telescope_types_trend():
         _('Refractor'): range(0, 6),
         _('Reflector'): range(6, 12),
         _('Catadioptric'): range(12, 21),
-        _('Camera lens'): [21,],
+        _('Camera lens'): [21, ],
     }
     for key, value in telescope_types.items():
         filters = reduce(operator.or_, [Q(**{'image__imaging_telescopes__type': x}) for x in value])
         all = DeepSky_Acquisition.objects \
-            .filter(filters & Q(date__gte = '2011-01-01')) \
+            .filter(filters & Q(date__gte='2011-01-01')) \
             .order_by('date')
 
         g_dict = {
@@ -656,7 +654,7 @@ def subject_type_trend():
 
     for g in Image.SUBJECT_TYPE_CHOICES:
         all = Image.objects \
-            .filter(Q(subject_type = g[0])) \
+            .filter(Q(subject_type=g[0])) \
             .order_by('uploaded')
 
         g_dict = {

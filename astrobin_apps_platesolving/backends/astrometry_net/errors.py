@@ -7,4 +7,3 @@ class MalformedResponse(Exception):
 
 class RequestError(Exception):
     pass
-

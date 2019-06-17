@@ -5,7 +5,8 @@ from django.utils.translation import ugettext_lazy as _
 # This app
 from rawdata.models import RawImage
 
-register = Library() 
+register = Library()
+
 
 @register.filter
 def humanize_rawimage_type(image_type):

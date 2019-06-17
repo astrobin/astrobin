@@ -1,6 +1,13 @@
 # Python
 import datetime
 
+# Third party
+from braces.views import (
+    LoginRequiredMixin,
+    GroupRequiredMixin,
+    JSONResponseMixin,
+    SuperuserRequiredMixin,
+)
 # Django
 from django.conf import settings
 from django.contrib import messages
@@ -11,14 +18,6 @@ from django.shortcuts import redirect
 from django.utils.translation import ugettext_lazy as _
 from django.views.generic import View
 from django.views.generic.list import ListView
-
-# Third party
-from braces.views import (
-    LoginRequiredMixin,
-    GroupRequiredMixin,
-    JSONResponseMixin,
-    SuperuserRequiredMixin,
-)
 from pybb.models import Topic
 from toggleproperties.models import ToggleProperty
 

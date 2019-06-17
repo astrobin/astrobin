@@ -8,43 +8,43 @@
 {% ifequal view "table" %}
     <table class="table table-condensed table-striped image-list">
         <thead>
-            <tr>
-                {% if requested_user %}
-                    <th class="user hidden-phone">{% trans "User" %}</th>
-                {% endif %}
-                <th class="title">{% trans "Title" %}</th>
-                <th class="published hidden-phone"><i class="icon-calendar"></i></th>
-                <th class="views hidden-phone"><i class="icon-eye-open"></i></th>
-                <th class="likes hidden-phone"><i class="icon-thumbs-up"></i></th>
-                <th class="bookmarks hidden-phone"><i class="icon-bookmark"></i></th>
-                <th class="comments hidden-phone"><i class="icon-comments-alt"></i></th>
-            </tr>
+        <tr>
+            {% if requested_user %}
+                <th class="user hidden-phone">{% trans "User" %}</th>
+            {% endif %}
+            <th class="title">{% trans "Title" %}</th>
+            <th class="published hidden-phone"><i class="icon-calendar"></i></th>
+            <th class="views hidden-phone"><i class="icon-eye-open"></i></th>
+            <th class="likes hidden-phone"><i class="icon-thumbs-up"></i></th>
+            <th class="bookmarks hidden-phone"><i class="icon-bookmark"></i></th>
+            <th class="comments hidden-phone"><i class="icon-comments-alt"></i></th>
+        </tr>
         </thead>
         <tbody>
-            {% for image in image_list %}
-                <tr>
-                    {% if requested_user %}
-                        <td class="user hidden-phone">
-                            {% astrobin_username image.user %}
-                        </td>
-                    {% endif %}
+        {% for image in image_list %}
+            <tr>
+                {% if requested_user %}
+                    <td class="user hidden-phone">
+                        {% astrobin_username image.user %}
+                    </td>
+                {% endif %}
 
-                    <td class="title">
-                        <a href="{% get_image_url image %} ">{{image.title|escape|default:_("(no title)")}}</a>
-                    </td>
-                    <td class="published hidden-phone">
-                        {% if image.published %}
-                            {{image.published|date:"SHORT_DATE_FORMAT"}}
-                        {% else %}
-                            {{image.uploaded|date:"SHORT_DATE_FORMAT"}}
-                        {% endif %}
-                    </td>
-                    <td class="views hidden-phone">{% get_hit_count for image %}</td>
-                    <td class="likes hidden-phone">{{image.likes}}</td>
-                    <td class="bookmarks hidden-phone">{{image.bookmarks}}</td>
-                    <td class="comments hidden-phone">{{image.comments}}</td>
-                </tr>
-            {% endfor %}
+                <td class="title">
+                    <a href="{% get_image_url image %} ">{{ image.title|escape|default:_("(no title)") }}</a>
+                </td>
+                <td class="published hidden-phone">
+                    {% if image.published %}
+                        {{ image.published|date:"SHORT_DATE_FORMAT" }}
+                    {% else %}
+                        {{ image.uploaded|date:"SHORT_DATE_FORMAT" }}
+                    {% endif %}
+                </td>
+                <td class="views hidden-phone">{% get_hit_count for image %}</td>
+                <td class="likes hidden-phone">{{ image.likes }}</td>
+                <td class="bookmarks hidden-phone">{{ image.bookmarks }}</td>
+                <td class="comments hidden-phone">{{ image.comments }}</td>
+            </tr>
+        {% endfor %}
         </tbody>
     </table>
 {% else %}

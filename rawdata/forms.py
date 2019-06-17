@@ -1,5 +1,4 @@
 # Python
-import os
 
 # Django
 from django import forms
@@ -8,7 +7,6 @@ from django.utils.translation import ugettext_lazy as _
 
 # This app
 from .models import (
-    RawImage,
     PublicDataPool,
     PrivateSharedFolder,
 )
@@ -26,8 +24,8 @@ class PublicDataPool_SelectExistingForm(forms.Form):
     error_css_class = 'error'
 
     existing_pools = forms.ChoiceField(
-        label = '',
-        choices = [],
+        label='',
+        choices=[],
     )
 
     def __init__(self, **kwargs):
@@ -37,7 +35,7 @@ class PublicDataPool_SelectExistingForm(forms.Form):
 
 
 class PublicDataPool_ImagesForm(forms.ModelForm):
-    error_css_class= 'error'
+    error_css_class = 'error'
 
     class Meta:
         model = PublicDataPool
@@ -56,22 +54,21 @@ class PrivateSharedFolder_SelectExistingForm(forms.Form):
     error_css_class = 'error'
 
     existing_folders = forms.ChoiceField(
-        label = '',
-        choices = [],
+        label='',
+        choices=[],
     )
 
     def __init__(self, user, **kwargs):
         super(PrivateSharedFolder_SelectExistingForm, self).__init__(**kwargs)
         # Init choices here to prevent stagnation due to django caching.
         folders = PrivateSharedFolder.objects.filter(
-            Q(creator = user) |
-            Q(users = user)).values_list('id', 'name')
+            Q(creator=user) |
+            Q(users=user)).values_list('id', 'name')
         self.fields['existing_folders'].choices = folders
 
 
-
 class PrivateSharedFolder_ImagesForm(forms.ModelForm):
-    error_css_class= 'error'
+    error_css_class = 'error'
 
     class Meta:
         model = PrivateSharedFolder
@@ -79,13 +76,13 @@ class PrivateSharedFolder_ImagesForm(forms.ModelForm):
 
 
 class PrivateSharedFolder_UsersForm(forms.ModelForm):
-    error_css_class= 'error'
+    error_css_class = 'error'
 
     users = forms.CharField(
-        label = _("Users"),
-        help_text = _("A list of users you want to invite. Use a comma to separate them."),
-        widget = forms.TextInput(attrs = {
-                'data-provide': 'typeahead',
+        label=_("Users"),
+        help_text=_("A list of users you want to invite. Use a comma to separate them."),
+        widget=forms.TextInput(attrs={
+            'data-provide': 'typeahead',
         })
     )
 

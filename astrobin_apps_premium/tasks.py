@@ -13,4 +13,3 @@ def fix_expired_subscriptions():
 @shared_task()
 def send_expiration_notifications():
     call_command("send_expiration_notifications")
-

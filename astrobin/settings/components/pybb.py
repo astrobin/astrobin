@@ -22,6 +22,7 @@ PYBB_SMILES = {
 PYBB_TOPIC_PAGE_SIZE = 25
 PYBB_FORUM_PAGE_SIZE = 50
 
+
 def pybb_premoderation(user, post_content):
     # Paying members always approved
     from astrobin_apps_premium.templatetags.astrobin_apps_premium_tags import (
@@ -37,14 +38,14 @@ def pybb_premoderation(user, post_content):
 
     # Users that have had 5 messages approved before are always approved
     from pybb.models import Post
-    posts = Post.objects.filter(user = user, on_moderation = False)
+    posts = Post.objects.filter(user=user, on_moderation=False)
     if posts.count() >= 5:
         return True
 
     return False
+
+
 PYBB_PREMODERATION = pybb_premoderation
 
 SANITIZER_ALLOWED_TAGS = ['b', 'i', 'strong', 'em', 'a', 'img']
 SANITIZER_ALLOWED_ATTRIBUTES = ['href', 'target', 'src']
-
-

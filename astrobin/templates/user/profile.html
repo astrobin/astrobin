@@ -8,7 +8,8 @@
 {% load toggleproperty_tags %}
 {% load staticfiles %}
 
-{% block title %}{% blocktrans with user=requested_user.userprofile %}{{user}}'s gallery{% endblocktrans %}{% endblock %}
+{% block title %}{% blocktrans with user=requested_user.userprofile %}{{ user }}'s gallery
+{% endblocktrans %}{% endblock %}
 {% block container_extra_classes %}has-subnav{% endblock %}
 
 {% block breadcrumbs %}
@@ -23,10 +24,11 @@
     {% include 'user/profile/navigation.html' %}
 
     {% if requested_user == request.user and section == 'staging' %}
-    <div class="subtitle">
-        <i class="icon icon-info-sign"></i>
-        {% blocktrans %}These are your "work in progress" images: only you can see this list. You can show people individual images by sharing them using the <em>Share</em> menu.{% endblocktrans %}
-    </div>
+        <div class="subtitle">
+            <i class="icon icon-info-sign"></i>
+            {% blocktrans %}These are your "work in progress" images: only you can see this list. You can show people
+                individual images by sharing them using the <em>Share</em> menu.{% endblocktrans %}
+        </div>
     {% endif %}
 
     <div class="row">
@@ -36,12 +38,14 @@
 
         <div class="span9"> <!-- images -->
             {% if subsection == 'nodata' %}
-            <div class="well">
-                {% blocktrans %}These images don't have enough data. It's a shame...{% endblocktrans %}
-                {% if request.user = requested_user %}
-                    {% blocktrans %}If you want your images to be categorized in albums, you should really fill in some data. Imaging telescopes, imaging cameras and subjects are the bare minimum. Dates of acquisitions are very important too.{% endblocktrans %}
-                {% endif %}
-            </div>
+                <div class="well">
+                    {% blocktrans %}These images don't have enough data. It's a shame...{% endblocktrans %}
+                    {% if request.user = requested_user %}
+                        {% blocktrans %}If you want your images to be categorized in albums, you should really fill in
+                            some data. Imaging telescopes, imaging cameras and subjects are the bare minimum. Dates of
+                            acquisitions are very important too.{% endblocktrans %}
+                    {% endif %}
+                </div>
             {% endif %}
 
             {% image_list image_list nav_ctx='user' %}

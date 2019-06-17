@@ -5,7 +5,7 @@
  */
 
 $.extend($.ui.multiselect.locale, {
-	addAll:'Shtoji te gjitha',
-	removeAll:'Hiqi te gjitha',
-	itemsCount:'artikujt e zgjedhur'
+    addAll: 'Shtoji te gjitha',
+    removeAll: 'Hiqi te gjitha',
+    itemsCount: 'artikujt e zgjedhur'
 });

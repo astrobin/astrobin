@@ -1,7 +1,7 @@
 {% load i18n %}
 
 <script type="text/javascript">
-    $(function() {
+    $(function () {
         var $table = $('table.rawdata-browser');
         var $rows = $table.find('tr.rawfile');
         var $header = $table.find('tbody tr:first td');
@@ -17,7 +17,7 @@
                     .attr('id', 'select-all')
                     .addClass('btn btn-mini')
                     .text("{% trans "Select all" %}"));
-                $h.html($select_all);
+            $h.html($select_all);
         }
 
         function reset_headers() {
@@ -36,7 +36,7 @@
                 .attr('href', '#')
                 .addClass('btn btn-mini')
                 .text("{% trans "Reset selection" %}")
-                .click(function(e) {
+                .click(function (e) {
                     $table.find('tr.active').removeClass('active');
                     reset_headers();
                     e.preventDefault();
@@ -58,8 +58,8 @@
                 .addClass('btn btn-mini btn-primary dropdown-toggle')
                 .attr('data-toggle', 'dropdown')
                 .html('<i class="icon-share-alt"></i> ' +
-                      "{% trans "Share" %}" +
-                      '<b class="caret"></b>');
+                    "{% trans "Share" %}" +
+                    '<b class="caret"></b>');
             var $share_menu = $('<ul/>')
                 .addClass('dropdown-menu')
                 .html(
@@ -79,7 +79,7 @@
 
             if (is_image_browser) {
                 var ids = [];
-                $.each($table.find('tr.active'), function(i, $row) {
+                $.each($table.find('tr.active'), function (i, $row) {
                     ids.push($($row).attr('id'));
                 });
 
@@ -92,7 +92,7 @@
                 $share_menu.find('#share-to-public-data-pool')
                     .attr('href', '/rawdata/publicdatapools/share/' + ids.join(',') + '/');
 
-                $del.find('a').click(function(e) {
+                $del.find('a').click(function (e) {
                     del(ids);
                     e.preventDefault();
                 });
@@ -111,7 +111,7 @@
                 $share_menu.find('#share-to-public-data-pool')
                     .attr('href', '/rawdata/publicdatapools/share/?' + params);
 
-                $del.find('a').click(function(e) {
+                $del.find('a').click(function (e) {
                     del(params);
                     e.preventDefault();
                 });
@@ -126,7 +126,7 @@
                 .append($preprocess)
                 .append($share);
             {% if not READONLY_MODE %}
-            $h.append($del);
+                $h.append($del);
             {% endif %}
         }
 
@@ -142,29 +142,29 @@
                 var ids = params;
                 query_string = ids.join(',') + '/';
 
-                $.each(ids, function(i, id) {
+                $.each(ids, function (i, id) {
                     affected_rows.push($table.find('tr#' + id + ' td'));
                 });
             } else {
-                $.each($table.find('tr.active'), function(i, $row) {
+                $.each($table.find('tr.active'), function (i, $row) {
                     affected_rows.push($row);
                 });
                 query_string = '?' + params;
             }
 
-            $.each(affected_rows, function(i, row) {
+            $.each(affected_rows, function (i, row) {
                 $(row).animate({'color': 'red'}, 500);
                 $(row).css('text-decoration', 'line-through');
             });
 
-            setTimeout(function() {
+            setTimeout(function () {
                 $.ajax({
                     type: 'delete',
                     url: '/rawdata/delete/' + query_string,
                     cache: false,
                     timeout: 10000,
-                    success: function() {
-                        $.each(affected_rows, function(i, row) {
+                    success: function () {
+                        $.each(affected_rows, function (i, row) {
                             $(row).remove();
                             $('body').find('.tooltip').remove();
                         });
@@ -173,7 +173,7 @@
             }, 500);
         }
 
-        $rows.click(function(e) {
+        $rows.click(function (e) {
             if (e.target.tagName !== 'TD' && e.target.tagName !== 'TR')
                 return;
 
@@ -191,7 +191,7 @@
             }
         });
 
-        $('.delete-link').click(function(e) {
+        $('.delete-link').click(function (e) {
             e.stopPropagation();
 
             var self = this,
@@ -203,7 +203,7 @@
             e.preventDefault();
         });
 
-        $('a#select-all').live('click', function(e) {
+        $('a#select-all').live('click', function (e) {
             $rows.trigger('click');
             e.preventDefault();
         });

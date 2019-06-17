@@ -1,10 +1,8 @@
 # Python
-from mock import patch
-
 # Django
 from django.contrib.auth.models import User
-from django.core.urlresolvers import reverse
 from django.test import TestCase
+from mock import patch
 
 # Test stuff
 from astrobin.tests.common import *
@@ -20,7 +18,7 @@ class HomeTest(TestCase):
     @patch("astrobin.tasks.retrieve_primary_thumbnails")
     def test_global_stream(self, retrieve_primary_thumbnails):
         url = reverse('index') + '?s=global'
-        self.client.login(username = 'test', password = 'password')
+        self.client.login(username='test', password='password')
 
         # Uploading an image shows up in the stream
         response, image = test_utils_upload_image(self)

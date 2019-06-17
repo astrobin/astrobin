@@ -17,6 +17,7 @@ CLASS_LOOKUP = {
     'FocalReducer': FocalReducer,
 }
 
+
 def get_correct_gear(id):
     types = (
         Telescope,
@@ -31,7 +32,7 @@ def get_correct_gear(id):
     gear_type = None
     for type in types:
         try:
-            gear = type.objects.get(id = id)
+            gear = type.objects.get(id=id)
             gear_type = gear.__class__.__name__
             return (gear, gear_type)
         except type.DoesNotExist:
@@ -42,7 +43,7 @@ def get_correct_gear(id):
 
 def is_gear_complete(id):
     gear, gear_type = get_correct_gear(id)
-    
+
     ret = False
     if gear_type == 'Telescope':
         ret = (gear.aperture != None and
@@ -68,5 +69,3 @@ def is_gear_complete(id):
 
     ret = ret and (gear.make != None) and (gear.make != '')
     return ret
-
-

@@ -1,17 +1,14 @@
 # Python
-import simplejson
-
-# Django
-from django.db.models import Q
-from django.contrib.auth.models import User
-from django.contrib.contenttypes.models import ContentType
-from django.core.urlresolvers import reverse
-from django.shortcuts import render_to_response
-from django.template import RequestContext
-from django.views.generic import base
 
 # Third party
 from braces.views import JSONResponseMixin
+from django.contrib.contenttypes.models import ContentType
+from django.core.urlresolvers import reverse
+# Django
+from django.db.models import Q
+from django.shortcuts import render_to_response
+from django.template import RequestContext
+from django.views.generic import base
 from toggleproperties.models import ToggleProperty
 
 # AstroBin
@@ -25,9 +22,9 @@ class TogglePropertyUsersAjaxView(base.View):
         content_type = ContentType.objects.get_for_id(kwargs.pop('content_type_id'))
 
         users = [x.user for x in ToggleProperty.objects.filter(
-            property_type = property_type,
-            object_id = object_id,
-            content_type = content_type)]
+            property_type=property_type,
+            object_id=object_id,
+            content_type=content_type)]
 
         context = {
             'user_list': users,
@@ -38,7 +35,7 @@ class TogglePropertyUsersAjaxView(base.View):
         return render_to_response(
             'astrobin_apps_users/inclusion_tags/user_list.html',
             context,
-            context_instance = RequestContext(request))
+            context_instance=RequestContext(request))
 
 
 class UserSearchView(JSONResponseMixin, base.View):
@@ -48,9 +45,9 @@ class UserSearchView(JSONResponseMixin, base.View):
         term = request.GET.get('term')
 
         profiles = UserProfile.objects.filter(
-            Q(user__first_name__icontains=term)|
-            Q(user__last_name__icontains=term)|
-            Q(user__username__icontains=term)|
+            Q(user__first_name__icontains=term) |
+            Q(user__last_name__icontains=term) |
+            Q(user__username__icontains=term) |
             Q(real_name__icontains=term))
 
         if request.is_ajax():
@@ -60,7 +57,7 @@ class UserSearchView(JSONResponseMixin, base.View):
                     'id': profile.user.pk,
                     'username': profile.user.username,
                     'display_name': profile.get_display_name(),
-                    'url': reverse('user_page', args = (profile.user.username,)),
+                    'url': reverse('user_page', args=(profile.user.username,)),
                 })
 
             return self.render_json_response(matches)

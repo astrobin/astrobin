@@ -12,27 +12,27 @@
 <table class="table post {% if post.on_moderation %}on-moderation{% endif %}" id="post-{{ post.id }}">
     <thead class="post-header">
     <tr>
-    <th>
-        <div class="hidden-phone">
-            {% avatar post.user 60 %}
-        </div>
-        <div class="post-author">
-            {% astrobin_username post.user %}
-        </div>
-        <div class="post-updated">
-            <a class="permalink" href="{{ post.get_absolute_url }}">#</a>
-            {% pybb_time post.created %}
-        </div>
-    </th>
+        <th>
+            <div class="hidden-phone">
+                {% avatar post.user 60 %}
+            </div>
+            <div class="post-author">
+                {% astrobin_username post.user %}
+            </div>
+            <div class="post-updated">
+                <a class="permalink" href="{{ post.get_absolute_url }}">#</a>
+                {% pybb_time post.created %}
+            </div>
+        </th>
     </tr>
     </thead>
     <tbody>
     {% if post.on_moderation %}
-    <tr class="alert alert-warning">
-        <td>
-            {% trans "Warning: this post awaits moderation and is not yet visible to everybody" %}
-        </td>
-    </tr>
+        <tr class="alert alert-warning">
+            <td>
+                {% trans "Warning: this post awaits moderation and is not yet visible to everybody" %}
+            </td>
+        </tr>
     {% endif %}
     <tr class="post-row">
         <td class="post-content">
@@ -51,24 +51,28 @@
 
             <div class="post-related">
                 {% if user|pybb_may_create_post:post.topic %}
-                    <a href="{% url 'pybb:add_post' topic.id %}?quote_id={{ post.id }}" class="btn btn-mini bb-quote-link">{% trans "quote" %}</a>
+                    <a href="{% url 'pybb:add_post' topic.id %}?quote_id={{ post.id }}"
+                       class="btn btn-mini bb-quote-link">{% trans "quote" %}</a>
                     <a href="#" class="btn btn-mini bb-quote-selected-link">{% trans "quote selected" %}</a>
                 {% endif %}
 
                 {% if user.is_moderator or post|pybb_posted_by:user %}
-                    <a class="btn btn-mini btn-primary" href="{% url 'pybb:edit_post' pk=post.id %}">{% trans "Edit" %}</a>
+                    <a class="btn btn-mini btn-primary"
+                       href="{% url 'pybb:edit_post' pk=post.id %}">{% trans "Edit" %}</a>
                 {% endif %}
                 {% if user.is_moderator %}
                     <a class="btn btn-mini btn-danger" onclick="pybb_delete_post('{% url 'pybb:delete_post' post.id %}',
                             'post-{{ post.id }}', '{% trans 'Delete post?' %}'); return false;"
                        href="{% url 'pybb:delete_post' post.id %}">{% trans "Delete" %}</a>
                     {% if post.on_moderation %}
-                        <a class="btn btn-mini btn-danger" href="{% url 'pybb:moderate_post' pk=post.id %}">{% trans "Approve post" %}</a>
+                        <a class="btn btn-mini btn-danger"
+                           href="{% url 'pybb:moderate_post' pk=post.id %}">{% trans "Approve post" %}</a>
                     {% endif %}
                 {% endif %}
 
                 {% if perms.pybb.change_post and user.is_staff %}
-                    <a class="btn btn-mini btn-danger" href="{% url 'admin:pybb_post_change' post.id %}">{% trans 'Admin' %}</a>
+                    <a class="btn btn-mini btn-danger"
+                       href="{% url 'admin:pybb_post_change' post.id %}">{% trans 'Admin' %}</a>
                 {% endif %}
             </div>
         </td>

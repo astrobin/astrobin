@@ -1,11 +1,9 @@
 # Django
-from django.contrib.auth.models import User
-from django.contrib.contenttypes.models import ContentType
-
 # Third party apps
 from avatar.utils import get_primary_avatar, get_default_avatar_url
+from django.contrib.auth.models import User
+from django.contrib.contenttypes.models import ContentType
 from rest_framework import serializers
-
 # AstroBin
 from rest_framework.fields import BooleanField, IntegerField, FloatField
 from rest_framework.relations import PrimaryKeyRelatedField

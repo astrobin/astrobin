@@ -19,4 +19,5 @@ class NestedCommentAdmin(admin.ModelAdmin):
         'author',
     )
 
+
 admin.site.register(NestedComment, NestedCommentAdmin)

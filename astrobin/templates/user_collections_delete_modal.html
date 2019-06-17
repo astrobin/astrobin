@@ -11,14 +11,14 @@
         </div>
 
         <form
-            class="form-inline"
-            {% if collection %}
+                class="form-inline"
+                {% if collection %}
                 action="{% url 'user_collections_delete' requested_user.username collection.pk %}"
-            {% else %}
+                {% else %}
                 action="#"
-            {% endif %}
-            method="post">{% csrf_token %}
-            <input class="btn btn-primary" type="submit" value="{% trans "Delete" %}"/>
+                {% endif %}
+                method="post">{% csrf_token %}
+            <input class="btn btn-primary" type="submit" value="{% trans "Delete" %}" />
         </form>
     </div>
 </div>

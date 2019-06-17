@@ -4,10 +4,10 @@
 <h3>{% trans "Screenshot tour" %}</h3>
 <div id="rawdata-tour">
     {% for url in screenshot_urls %}
-        <a class="fancybox" rel="group" href="{{url.href}}">
+        <a class="fancybox" rel="group" href="{{ url.href }}">
             <img
-                src="{{url.thumb}}"
-                alt="Tour {{forloop.counter}}" />
+                    src="{{ url.thumb }}"
+                    alt="Tour {{ forloop.counter }}" />
         </a>
     {% endfor %}
 </div>

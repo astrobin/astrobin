@@ -2,11 +2,12 @@ from django.core.management.base import BaseCommand
 
 from astrobin.models import Image
 
+
 class Command(BaseCommand):
     help = "Guesses subject type for images in which it's missing."
 
     def handle(self, *args, **options):
-        images = Image.objects.filter(subject_type = None)
+        images = Image.objects.filter(subject_type=None)
         for i in images:
             if i.solar_system_main_subject:
                 i.subject_type = 200

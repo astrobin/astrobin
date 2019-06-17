@@ -1,5 +1,6 @@
-from django.http import HttpResponse
 import simplejson
+from django.http import HttpResponse
+
 
 def ajax_response(context={}):
     return HttpResponse(
@@ -15,4 +16,3 @@ def ajax_success(context={}):
 def ajax_fail(context={}):
     context['success'] = False
     return ajax_response(context)
-

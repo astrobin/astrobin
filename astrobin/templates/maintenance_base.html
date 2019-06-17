@@ -7,371 +7,384 @@
 {% load staticfiles %}
 
 <!DOCTYPE html>
-<html lang="{% if request.user.is_authenticated and user_language %}{{user_language}}{% else %}en{% endif %}">
-    <head>
-        <title>{% block title %}AstroBin{% endblock %}</title>
+<html lang="{% if request.user.is_authenticated and user_language %}{{ user_language }}{% else %}en{% endif %}">
+<head>
+    <title>{% block title %}AstroBin{% endblock %}</title>
 
-        <meta name="viewport" content="width=device-width, initial-scale=1.0">
-        <meta http-equiv="content-type" content="text/html; charset=UTF-8" />
-        <meta name="author" content="Salvatore Iovene - http://iovene.com/" />
-        <meta name="description" content="AstroBin is an image hosting website specifically targeted to astrophotographers: it's the first and the last place where you need to upload your astrophotography images. Made by an astrophotographer, for the astrophotographers." />
-        <meta name="keywords" content="astrophotography, astronomy, telescopes" />
-        <meta name="robots" content="index, follow, noarchive" />
-        <meta name="googlebot" content="noarchive" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="content-type" content="text/html; charset=UTF-8" />
+    <meta name="author" content="Salvatore Iovene - http://iovene.com/" />
+    <meta name="description"
+          content="AstroBin is an image hosting website specifically targeted to astrophotographers: it's the first and the last place where you need to upload your astrophotography images. Made by an astrophotographer, for the astrophotographers." />
+    <meta name="keywords" content="astrophotography, astronomy, telescopes" />
+    <meta name="robots" content="index, follow, noarchive" />
+    <meta name="googlebot" content="noarchive" />
 
-        <link rel="shortcut icon" href="{% static 'astrobin/favicon.ico' %}" type="image/x-icon">
-        <link rel="icon" href="{% static 'astrobin/favicon.ico' %}" type="image/x-icon">
+    <link rel="shortcut icon" href="{% static 'astrobin/favicon.ico' %}" type="image/x-icon">
+    <link rel="icon" href="{% static 'astrobin/favicon.ico' %}" type="image/x-icon">
 
-        <!--[if lte IE 8]>
+    <!--[if lte IE 8]>
         <script src="http://html5shiv.googlecode.com/svn/trunk/html5.js"></script>
         <script src="{% static 'astrobin/js/selectivizr.js' %}"></script>
         <![endif]-->
 
-        <link href="https://fonts.googleapis.com/css?family=Noto+Sans:400,400i,700|Noto+Serif:700&subset=latin-ext" rel="stylesheet">
-        {% stylesheet 'screen' %}
+    <link href="https://fonts.googleapis.com/css?family=Noto+Sans:400,400i,700|Noto+Serif:700&subset=latin-ext"
+          rel="stylesheet">
+    {% stylesheet 'screen' %}
 
-        <!--[if IE 6]><link rel="stylesheet" type="text/css" media="screen" href="{% static 'astrobin/css/ie6.css' %}"/><![endif]-->
+    <!--[if IE 6]><link rel="stylesheet" type="text/css" media="screen" href="{% static 'astrobin/css/ie6.css' %}"/><![endif]-->
 
-        {% block extra_css %}{% endblock %}
+    {% block extra_css %}{% endblock %}
 
-        {% block extra_head %}{% endblock %}
+    {% block extra_head %}{% endblock %}
 
-        {% comment %}Alternative spelling.{% endcomment %}
-        {% block extrahead %}{% endblock %}
+    {% comment %}Alternative spelling.{% endcomment %}
+    {% block extrahead %}{% endblock %}
 
-        <noscript>
-            <style type="text/css">
-                form select { width: 70%; }
-            </style>
-        </noscript>
+    <noscript>
+        <style type="text/css">
+            form select {
+                width: 70%;
+            }
+        </style>
+    </noscript>
 
-        <script type="text/javascript">
-          var _gaq = _gaq || [];
-          _gaq.push(['_setAccount', 'UA-844985-10']);
-          _gaq.push(['_setDomainName', 'astrobin.com']);
-          _gaq.push(['_setAllowLinker', true]);
+    <script type="text/javascript">
+        var _gaq = _gaq || [];
+        _gaq.push(['_setAccount', 'UA-844985-10']);
+        _gaq.push(['_setDomainName', 'astrobin.com']);
+        _gaq.push(['_setAllowLinker', true]);
 
-          {% if user.is_authenticated %}
-          _gaq.push(['_setCustomVar', 1, 'User Type', 'Member']);
-          _gaq.push(['_setCustomVar', 2, 'Username', '{{user.username}}']);
-          {% else %}
-          _gaq.push(['_setCustomVar', 1, 'User Type', 'Anonymous']);
-          {% endif %}
+        {% if user.is_authenticated %}
+            _gaq.push(['_setCustomVar', 1, 'User Type', 'Member']);
+            _gaq.push(['_setCustomVar', 2, 'Username', '{{user.username}}']);
+        {% else %}
+            _gaq.push(['_setCustomVar', 1, 'User Type', 'Anonymous']);
+        {% endif %}
 
-          // Reset the custom variables that might be then overriden later.
-          _gaq.push(['_setCustomVar', 3, 'Staging Image', 'No']);
-          {% block extra_gaq_push %}{% endblock %}
+        // Reset the custom variables that might be then overriden later.
+        _gaq.push(['_setCustomVar', 3, 'Staging Image', 'No']);
+        {% block extra_gaq_push %}{% endblock %}
 
-          _gaq.push(['_trackPageview']);
+        _gaq.push(['_trackPageview']);
 
-          (function() {
-            var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
+        (function () {
+            var ga = document.createElement('script');
+            ga.type = 'text/javascript';
+            ga.async = true;
             ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
-            var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
-          })();
-        </script>
-    </head>
+            var s = document.getElementsByTagName('script')[0];
+            s.parentNode.insertBefore(ga, s);
+        })();
+    </script>
+</head>
 
-    <body data-offset="55">
-        <div class="navbar navbar-fixed-top">
-            <div class="navbar-inner">
-                <div class="container">
-                    <a class="btn btn-navbar" data-toggle="collapse" data-target=".site-nav">
-                        <span class="icon-bar"></span>
-                        <span class="icon-bar"></span>
-                        <span class="icon-bar"></span>
-                        <span class="text">{% trans "Site links" %}</span>
-                    </a>
-                    <div class="site-nav nav-collapse collapse pull-left">
-                        <ul class="nav">
-                            <li><a href="{% url 'index' %}">{% trans "Home" %}</a></li>
-                            <li class="dropdown {% current request "^/forum/" %}">
-                                <a href="#" class="dropdown-toggle" data-toggle="dropdown">
-                                    {% trans "Forum" %}
-                                    <i class="icon-caret-down"></i>
+<body data-offset="55">
+<div class="navbar navbar-fixed-top">
+    <div class="navbar-inner">
+        <div class="container">
+            <a class="btn btn-navbar" data-toggle="collapse" data-target=".site-nav">
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+                <span class="text">{% trans "Site links" %}</span>
+            </a>
+            <div class="site-nav nav-collapse collapse pull-left">
+                <ul class="nav">
+                    <li><a href="{% url 'index' %}">{% trans "Home" %}</a></li>
+                    <li class="dropdown {% current request "^/forum/" %}">
+                        <a href="#" class="dropdown-toggle" data-toggle="dropdown">
+                            {% trans "Forum" %}
+                            <i class="icon-caret-down"></i>
+                        </a>
+                        <ul class="dropdown-menu">
+                            <li><a href="{% url 'pybb:index' %}"><i class="icon-comments"></i> {% trans "Home" %}</a>
+                            </li>
+                            <li><a href="{% url 'pybb:topic_latest' %}"><i
+                                    class="icon-sort-by-attributes-alt"></i> {% trans "Latest topics" %}</a></li>
+                            {% if request.user.is_authenticated %}
+                                <li><a href="{% url 'pybb:topic_subscribed' %}"><i
+                                        class="icon-eye-open"></i> {% trans "Subscribed topics" %}</a></li>
+                            {% endif %}
+                        </ul>
+                    </li>
+
+                    <li class="dropdown">
+                        <a href="#" class="dropdown-toggle" data-toggle="dropdown">
+                            {% trans "Explore" %}
+                            <b class="caret"></b>
+                        </a>
+                        <ul class="dropdown-menu">
+                            <li>
+                                <a href="{% url 'iotd_archive' %}">
+                                    <i class="icon-trophy"></i>
+                                    {% trans "Image of the day" %}
                                 </a>
-                                <ul class="dropdown-menu">
-                                    <li><a href="{% url 'pybb:index' %}"><i class="icon-comments"></i> {% trans "Home" %}</a></li>
-                                    <li><a href="{% url 'pybb:topic_latest' %}"><i class="icon-sort-by-attributes-alt"></i> {% trans "Latest topics" %}</a></li>
-                                    {% if request.user.is_authenticated %}
-                                    <li><a href="{% url 'pybb:topic_subscribed' %}"><i class="icon-eye-open"></i> {% trans "Subscribed topics" %}</a></li>
-                                    {% endif %}
-                                </ul>
                             </li>
 
-                            <li class="dropdown">
-                                <a href="#" class="dropdown-toggle" data-toggle="dropdown">
-                                    {% trans "Explore" %}
-                                    <b class="caret"></b>
+                            <li class="divider"></li>
+
+                            <li>
+                                <a href="{% url 'rawdata.publicdatapool_list' %}">
+                                    <i class="icon-book"></i>
+                                    {% trans "Public data pools" %}
                                 </a>
-                                <ul class="dropdown-menu">
-                                    <li>
-                                        <a href="{% url 'iotd_archive' %}">
-                                            <i class="icon-trophy"></i>
-                                            {% trans "Image of the day" %}
-                                        </a>
-                                    </li>
-
-                                    <li class="divider"></li>
-
-                                    <li>
-                                        <a href="{% url 'rawdata.publicdatapool_list' %}">
-                                            <i class="icon-book"></i>
-                                            {% trans "Public data pools" %}
-                                        </a>
-                                    </li>
-
-
-                                    <li class="divider"></li>
-                                    <li>
-                                        <a href="{% url 'haystack_search' %}">
-                                            <i class="icon-search"></i>
-                                            {% trans "Advanced search" %}
-                                        </a>
-                                    </li>
-                                    <li class="divider"></li>
-                                    <li>
-                                        <a href="{% url 'stats' %}">
-                                            <i class="icon-bar-chart"></i>
-                                            {% trans "Stats" %}
-                                        </a>
-                                    </li>
-                                    <li>
-                                        <a href="{% url 'trending_astrophotographers' %}">
-                                            <i class="icon-list-ol"></i>
-                                            {% trans "Trending astrophotographers" %}
-                                        </a>
-                                    </li>
-                                </ul>
                             </li>
-                            <li class="dropdown">
-                                <a href="#" class="dropdown-toggle" data-toggle="dropdown">
-                                    {% trans "Help" %}
-                                    <b class="caret"></b>
+
+
+                            <li class="divider"></li>
+                            <li>
+                                <a href="{% url 'haystack_search' %}">
+                                    <i class="icon-search"></i>
+                                    {% trans "Advanced search" %}
                                 </a>
-                                <ul class="dropdown-menu">
-                                    <li>
-                                        <a href="{% url 'help' %}">
-                                            <i class="icon-info-sign"></i>
-                                            {% trans "What is this site?" %}
-                                        </a>
-                                    </li>
-                                    <li>
-                                        <a href="{% url 'faq' %}">
-                                            <i class="icon-question-sign"></i>
-                                            {% trans "FAQ" %}
-                                        </a>
-                                    </li>
-
-                                    <li class="divider"></li>
-
-                                    <li>
-                                        <a href="{% url 'api' %}">
-                                            <i class="icon-key"></i>
-                                            API (beta)
-                                        </a>
-                                    </li>
-                                    <li>
-                                        <a href="{% url 'affiliates' %}">
-                                            <i class="icon-group"></i>
-                                            {% trans "Affiliates" %}
-                                        </a>
-                                    </li>
-
-                                    <li class="divider"></li>
-
-                                    <li>
-                                        <a href="/contact/">
-                                            <i class="icon-envelope"></i>
-                                            {% trans "Contact" %}
-                                        </a>
-                                    </li>
-                                </ul>
+                            </li>
+                            <li class="divider"></li>
+                            <li>
+                                <a href="{% url 'stats' %}">
+                                    <i class="icon-bar-chart"></i>
+                                    {% trans "Stats" %}
+                                </a>
+                            </li>
+                            <li>
+                                <a href="{% url 'trending_astrophotographers' %}">
+                                    <i class="icon-list-ol"></i>
+                                    {% trans "Trending astrophotographers" %}
+                                </a>
                             </li>
                         </ul>
-                    </div> <!-- nav-collapse -->
+                    </li>
+                    <li class="dropdown">
+                        <a href="#" class="dropdown-toggle" data-toggle="dropdown">
+                            {% trans "Help" %}
+                            <b class="caret"></b>
+                        </a>
+                        <ul class="dropdown-menu">
+                            <li>
+                                <a href="{% url 'help' %}">
+                                    <i class="icon-info-sign"></i>
+                                    {% trans "What is this site?" %}
+                                </a>
+                            </li>
+                            <li>
+                                <a href="{% url 'faq' %}">
+                                    <i class="icon-question-sign"></i>
+                                    {% trans "FAQ" %}
+                                </a>
+                            </li>
 
-                    <a class="btn btn-navbar" data-toggle="collapse" data-target=".user-nav">
-                        <span class="icon-bar"></span>
-                        <span class="icon-bar"></span>
-                        <span class="icon-bar"></span>
-                        <span class="text">{% trans "User" %}</span>
-                    </a>
+                            <li class="divider"></li>
 
-                    <div class="user-nav nav-collapse collapse pull-right">
-                        <ul class="nav pull-right">
-                            {% if request.user.is_authenticated %}
-                            <li class="dropdown">
-                                <div class="btn-group">
-                                    <a href="{% url 'user_page' request.user %}" class="btn btn-primary">
-                                        <i class="icon-user icon-white"></i>
-                                        {{request.user|truncatechars:"12"}}
-                                    </a>
-                                    <a href="#" class="btn btn-primary dropdown-toggle" data-toggle="dropdown">
-                                        <span class="caret"></span>
-                                    </a>
-                                    <ul class="dropdown-menu">
+                            <li>
+                                <a href="{% url 'api' %}">
+                                    <i class="icon-key"></i>
+                                    API (beta)
+                                </a>
+                            </li>
+                            <li>
+                                <a href="{% url 'affiliates' %}">
+                                    <i class="icon-group"></i>
+                                    {% trans "Affiliates" %}
+                                </a>
+                            </li>
+
+                            <li class="divider"></li>
+
+                            <li>
+                                <a href="/contact/">
+                                    <i class="icon-envelope"></i>
+                                    {% trans "Contact" %}
+                                </a>
+                            </li>
+                        </ul>
+                    </li>
+                </ul>
+            </div> <!-- nav-collapse -->
+
+            <a class="btn btn-navbar" data-toggle="collapse" data-target=".user-nav">
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+                <span class="text">{% trans "User" %}</span>
+            </a>
+
+            <div class="user-nav nav-collapse collapse pull-right">
+                <ul class="nav pull-right">
+                    {% if request.user.is_authenticated %}
+                        <li class="dropdown">
+                            <div class="btn-group">
+                                <a href="{% url 'user_page' request.user %}" class="btn btn-primary">
+                                    <i class="icon-user icon-white"></i>
+                                    {{ request.user|truncatechars:"12" }}
+                                </a>
+                                <a href="#" class="btn btn-primary dropdown-toggle" data-toggle="dropdown">
+                                    <span class="caret"></span>
+                                </a>
+                                <ul class="dropdown-menu">
+                                    <li>
+                                        <a href="{% url 'image_upload' %}">
+                                            <i class="icon-upload-alt"></i>
+                                            {% trans "Upload" %}
+                                        </a>
+                                    </li>
+                                    <li class="nav-header">{% trans "My places" %}</li>
+
+                                    {% if is_producer or is_retailer %}
                                         <li>
-                                            <a href="{% url 'image_upload' %}">
-                                                <i class="icon-upload-alt"></i>
-                                                {% trans "Upload" %}
+                                            <a href="{% url 'user_page_commercial_products' request.user %}">
+                                                <i class="icon-barcode"></i>
+                                                {% trans "Commercial products" %}
                                             </a>
                                         </li>
-                                        <li class="nav-header">{% trans "My places" %}</li>
+                                    {% endif %}
 
-                                        {% if is_producer or is_retailer %}
-                                            <li>
-                                                <a href="{% url 'user_page_commercial_products' request.user %}">
-                                                    <i class="icon-barcode"></i>
-                                                    {% trans "Commercial products" %}
-                                                </a>
-                                            </li>
-                                        {% endif %}
+                                    <li>
+                                        <a href="{% url 'user_page' request.user %}">
+                                            <i class="icon-picture"></i>
+                                            {% trans "Gallery" %}
+                                        </a>
+                                    </li>
+                                    <li>
+                                        <a href="{% url 'user_page_bookmarks' request.user %}">
+                                            <i class="icon-bookmark"></i>
+                                            {% trans "Bookmarks" %}
+                                        </a>
+                                    </li>
+                                    <li>
+                                        <a href="{% url 'user_page_plots' request.user %}">
+                                            <i class="icon-bar-chart"></i>
+                                            {% trans "Plots" %}
+                                        </a>
+                                    </li>
+                                    <li class="divider"></li>
 
-                                        <li>
-                                            <a href="{% url 'user_page' request.user %}">
-                                                <i class="icon-picture"></i>
-                                                {% trans "Gallery" %}
-                                            </a>
-                                        </li>
-                                        <li>
-                                            <a href="{% url 'user_page_bookmarks' request.user %}">
-                                                <i class="icon-bookmark"></i>
-                                                {% trans "Bookmarks" %}
-                                            </a>
-                                        </li>
-                                        <li>
-                                            <a href="{% url 'user_page_plots' request.user %}">
-                                                <i class="icon-bar-chart"></i>
-                                                {% trans "Plots" %}
-                                            </a>
-                                        </li>
-                                        <li class="divider"></li>
+                                    <li>
+                                        <a href="{% url 'messages_inbox' %}">
+                                            <i class="icon-inbox"></i>
+                                            {% trans "My messages" %}
+                                        </a>
+                                    </li>
+                                    <li>
+                                        <a href="{% url 'user_page_api_keys' request.user %}">
+                                            <i class="icon-key"></i>
+                                            {% trans "API Keys" %}
+                                        </a>
+                                    </li>
 
-                                        <li>
-                                            <a href="{% url 'messages_inbox' %}">
-                                                <i class="icon-inbox"></i>
-                                                {% trans "My messages" %}
-                                            </a>
-                                        </li>
-                                        <li>
-                                            <a href="{% url 'user_page_api_keys' request.user %}">
-                                                <i class="icon-key"></i>
-                                                {% trans "API Keys" %}
-                                            </a>
-                                        </li>
+                                    <li class="nav-header">{% trans "My settings" %}</li>
+                                    <li>
+                                        <a href="{% url 'profile_edit_basic' %}">
+                                            <i class="icon-edit"></i>
+                                            {% trans "Basic information" %}
+                                        </a>
+                                    </li>
 
-                                        <li class="nav-header">{% trans "My settings" %}</li>
-                                        <li>
-                                            <a href="{% url 'profile_edit_basic' %}">
-                                                <i class="icon-edit"></i>
-                                                {% trans "Basic information" %}
-                                            </a>
-                                        </li>
-
-                                        {% if is_producer or is_retailer %}
+                                    {% if is_producer or is_retailer %}
                                         <li>
                                             <a href="{% url 'profile_edit_commercial' %}">
                                                 <i class="icon-briefcase"></i>
                                                 {% trans "Commercial information" %}
                                             </a>
                                         </li>
-                                        {% endif %}
+                                    {% endif %}
 
-                                        {% if is_retailer %}
+                                    {% if is_retailer %}
                                         <li>
                                             <a href="{% url 'profile_edit_retailer' %}">
                                                 <i class="icon-truck"></i>
                                                 {% trans "Retailer information" %}
                                             </a>
                                         </li>
-                                        {% endif %}
+                                    {% endif %}
 
-                                        <li>
-                                            <a href="{% url 'profile_edit_gear' %}">
-                                                <i class="icon-cog"></i>
-                                                {% trans "Gear" %}
-                                            </a>
-                                        </li>
-                                        <li>
-                                            <a href="{% url 'profile_edit_locations' %}">
-                                                <i class="icon-globe"></i>
-                                                {% trans "Locations" %}
-                                            </a>
-                                        </li>
-                                        <li>
-                                            <a href="{% url 'profile_edit_license' %}">
-                                                <i class="icon-legal"></i>
-                                                {% trans "Default license" %}
-                                            </a>
-                                        </li>
-                                        <li>
-                                            <a href="{% url 'profile_edit_preferences' %}">
-                                                <i class="icon-wrench"></i>
-                                                {% trans "Preferences" %}
-                                            </a>
-                                        </li>
-                                        <li>
-                                            <a href="{% url 'avatar_change' %}">
-                                                <i class="icon-user"></i>
-                                                {% trans "Avatar" %}
-                                            </a>
-                                        </li>
-                                        <li class="divider"></li>
-                                        <li>
-                                            <a href="{% url 'auth_logout' %}">
-                                                <i class="icon-signout"></i>
-                                                {% trans "Logout" %}
-                                            </a>
-                                        </li>
-                                    </ul>
-                                </div> <!-- btn-group -->
-                            </li> <!-- user menu -->
-
-                            <li class="divider-vertical"></li>
-
-                            <li class="dropdown notice-container hidden-phone hidden-tablet">
-                                {% if notifications_count > 0 %}
-                                    <span id="notifications_count" class="notice-count">{{notifications_count}}</span>
-                                {% endif %}
-                                <a class="dropdown notifications" data-toggle="dropdown" title="{% trans "Notifications" %}" href="#">
-                                    <i class="icon icon-bell-alt"></i>
-                                </a>
-                                <ul class="dropdown-menu" id="notifications-popup">
-                                    {% notification_list request.user %}
+                                    <li>
+                                        <a href="{% url 'profile_edit_gear' %}">
+                                            <i class="icon-cog"></i>
+                                            {% trans "Gear" %}
+                                        </a>
+                                    </li>
+                                    <li>
+                                        <a href="{% url 'profile_edit_locations' %}">
+                                            <i class="icon-globe"></i>
+                                            {% trans "Locations" %}
+                                        </a>
+                                    </li>
+                                    <li>
+                                        <a href="{% url 'profile_edit_license' %}">
+                                            <i class="icon-legal"></i>
+                                            {% trans "Default license" %}
+                                        </a>
+                                    </li>
+                                    <li>
+                                        <a href="{% url 'profile_edit_preferences' %}">
+                                            <i class="icon-wrench"></i>
+                                            {% trans "Preferences" %}
+                                        </a>
+                                    </li>
+                                    <li>
+                                        <a href="{% url 'avatar_change' %}">
+                                            <i class="icon-user"></i>
+                                            {% trans "Avatar" %}
+                                        </a>
+                                    </li>
+                                    <li class="divider"></li>
+                                    <li>
+                                        <a href="{% url 'auth_logout' %}">
+                                            <i class="icon-signout"></i>
+                                            {% trans "Logout" %}
+                                        </a>
+                                    </li>
                                 </ul>
-                            </li> <!-- notifications -->
+                            </div> <!-- btn-group -->
+                        </li> <!-- user menu -->
 
-                            {% else %} <!-- request.user.is_authenticated -->
-                            <li>
-                                <a href="{% url 'auth_login' %}{% if request.path|slice:"9" != "/accounts" %}?next={{request.path}}{% endif %}">
-                                    {% trans "Login" %}
-                                </a>
-                            </li>
-                            {% if not privatebeta_enabled %}
+                        <li class="divider-vertical"></li>
+
+                        <li class="dropdown notice-container hidden-phone hidden-tablet">
+                            {% if notifications_count > 0 %}
+                                <span id="notifications_count" class="notice-count">{{ notifications_count }}</span>
+                            {% endif %}
+                            <a class="dropdown notifications" data-toggle="dropdown" title="{% trans "Notifications" %}"
+                               href="#">
+                                <i class="icon icon-bell-alt"></i>
+                            </a>
+                            <ul class="dropdown-menu" id="notifications-popup">
+                                {% notification_list request.user %}
+                            </ul>
+                        </li> <!-- notifications -->
+
+                    {% else %} <!-- request.user.is_authenticated -->
+                        <li>
+                            <a href="
+                                    {% url 'auth_login' %}{% if request.path|slice:"9" != "/accounts" %}?next={{ request.path }}{% endif %}">
+                                {% trans "Login" %}
+                            </a>
+                        </li>
+                        {% if not privatebeta_enabled %}
                             <li>
                                 <a href="{% url 'registration_register' %}">{% trans "Register" %}</a>
                             </li>
-                            {% endif %}
-                        {% endif %} <!-- request.user.is_authenticated -->
-                        </ul>
-                    </div> <!-- user-nav -->
+                        {% endif %}
+                    {% endif %} <!-- request.user.is_authenticated -->
+                </ul>
+            </div> <!-- user-nav -->
 
-                    <form class="navbar-search pull-right hidden-phone hidden-tablet" id="quick-search" action="{% url 'haystack_search' %}" method="get" >
-                        <input class="tbox"
-                               id="q"
-                               type="text"
-                               name="q"
-                               value="{% trans "Quick search" %}"
-                               onfocus="astrobin_common.clearText(this)"
-                               onblur="astrobin_common.clearText(this)"/>
-                    </form>
-                </div>
-            </div>
+            <form class="navbar-search pull-right hidden-phone hidden-tablet" id="quick-search"
+                  action="{% url 'haystack_search' %}" method="get">
+                <input class="tbox"
+                       id="q"
+                       type="text"
+                       name="q"
+                       value="{% trans "Quick search" %}"
+                       onfocus="astrobin_common.clearText(this)"
+                       onblur="astrobin_common.clearText(this)" />
+            </form>
         </div>
+    </div>
+</div>
 
-        <div id="top" class="container astrobin-container">
-            {% comment %}
+<div id="top" class="container astrobin-container">
+    {% comment %}
             {% if request.user.is_authenticated %}
                 <div class="alert">
                     {% blocktrans %}AstroBin is running a campaign to collectively improve the consistency of the gear database.{% endblocktrans %} <a href="{% url 'gear_fix' random_gear_item.id %}">{% trans "Click here to help!" %}</a>
@@ -395,205 +408,224 @@
             </div>
             {% endcomment %}
 
-            {% if request.user.is_authenticated and messages %}
-                {% for message in messages %}
-                    <div class="alert
+    {% if request.user.is_authenticated and messages %}
+        {% for message in messages %}
+            <div class="alert
                         {% if message.level == 20 %}alert-info{% endif %}
                         {% if message.level == 25 %}alert-success{% endif %}
                         {% if message.level == 30 %}alert-warning{% endif %}
                         {% if message.level == 40 %}alert-error{% endif %}">
-                        <button class="close" data-dismiss="alert">&times;</button>
-                        <h4 class="alert-heading">
-                            {% if message.level == 20 %}<i class="icon-info-sign"></i> {% trans "Hey!" %}{% endif %}
-                            {% if message.level == 25 %}<i class="icon-ok-sign"></i> {% trans "Success!" %}{% endif %}
-                            {% if message.level == 30 %}<i class="icon-warning-sign"></i> {% trans "Warning!" %}{% endif %}
-                            {% if message.level == 40 %}<i class="icon-fire"></i> {% trans "Error!" %}{% endif %}
-                        </h4>
-                        {{message}}
-                    </div>
-                {% endfor %}
+                <button class="close" data-dismiss="alert">&times;</button>
+                <h4 class="alert-heading">
+                    {% if message.level == 20 %}<i class="icon-info-sign"></i> {% trans "Hey!" %}{% endif %}
+                    {% if message.level == 25 %}<i class="icon-ok-sign"></i> {% trans "Success!" %}{% endif %}
+                    {% if message.level == 30 %}<i class="icon-warning-sign"></i> {% trans "Warning!" %}{% endif %}
+                    {% if message.level == 40 %}<i class="icon-fire"></i> {% trans "Error!" %}{% endif %}
+                </h4>
+                {{ message }}
+            </div>
+        {% endfor %}
+    {% endif %}
+
+    {% if is_producer or is_retailer %}
+        {% with request.user.userprofile as profile %}
+            {% if not profile.company_name or not profile.company_description or not profile.company_website %}
+                <div class="alert alert-warning">
+                    <h4 class="alert-heading"><i class="icon-warning-sign"></i> {% trans "Warning!" %}</h4>
+                    {% url 'profile_edit_commercial' as the_url %}
+                    {% blocktrans %}As a producer and/or a retailer on AstroBin, it's very important that you fill in
+                        all of your company details! Click <a href="{{ the_url }}">here</a> to do it
+                        now.{% endblocktrans %}
+                </div>
             {% endif %}
+        {% endwith %}
+    {% endif %}
 
-            {% if is_producer or is_retailer %}
-                {% with request.user.userprofile as profile %}
-                    {% if not profile.company_name or not profile.company_description or not profile.company_website %}
-                        <div class="alert alert-warning">
-                            <h4 class="alert-heading"><i class="icon-warning-sign"></i> {% trans "Warning!" %}</h4>
-                            {% url 'profile_edit_commercial' as the_url %}
-                            {% blocktrans %}As a producer and/or a retailer on AstroBin, it's very important that you fill in all of your company details! Click <a href="{{the_url}}">here</a> to do it now.{% endblocktrans %}
-                        </div>
-                    {% endif %}
-                {% endwith %}
+    {% if is_retailer %}
+        {% with request.user.userprofile as profile %}
+            {% if not profile.retailer_country %}
+                <div class="alert alert-warning">
+                    <h4 class="alert-heading"><i class="icon-warning-sign"></i> {% trans "Warning!" %}</h4>
+                    {% url 'profile_edit_retailer' as the_url %}
+                    {% blocktrans %}As a retailer on AstroBin, it's very important that you fill in your country of
+                        operation! Click <a href="{{ the_url }}">here</a> to do it now.{% endblocktrans %}
+                </div>
             {% endif %}
+        {% endwith %}
+    {% endif %}
 
-            {% if is_retailer %}
-                {% with request.user.userprofile as profile %}
-                    {% if not profile.retailer_country %}
-                        <div class="alert alert-warning">
-                            <h4 class="alert-heading"><i class="icon-warning-sign"></i> {% trans "Warning!" %}</h4>
-                            {% url 'profile_edit_retailer' as the_url %}
-                            {% blocktrans %}As a retailer on AstroBin, it's very important that you fill in your country of operation! Click <a href="{{the_url}}">here</a> to do it now.{% endblocktrans %}
-                        </div>
-                    {% endif %}
-                {% endwith %}
-            {% endif %}
+    {% block content %}{% endblock %}
+</div> <!-- container -->
 
-            {% block content %}{% endblock %}
-        </div> <!-- container -->
-
-        <footer>
-            {% block footer %}
-            <div class="container">
-                <div class="row hidden-phone">
-                    <div class="span3">
-                        <h3>{% trans "About" %}</h3>
-                        <p>
+<footer>
+    {% block footer %}
+        <div class="container">
+            <div class="row hidden-phone">
+                <div class="span3">
+                    <h3>{% trans "About" %}</h3>
+                    <p>
                         {% trans "AstroBin is an image hosting website specifically targeted to astrophotographers: it's the first and the last place where you need to upload your astrophotography images. Made by an astrophotographer, for the astrophotographers." %}
-                        </p>
-                    </div>
-                    <div class="span3">
-                        <h3>{% trans "Site links" %}</h3>
-                        <ul>
-                            <li><a href="{% url 'index' %}">{% trans "Home" %}</a></li>
-                            <li><a href="/blog/">{% trans "Blog" %}</a></li>
-                            <li><a href="{% url 'pybb:index' %}">{% trans "Forum" %}</a></li>
-                            <li><a href="{% url 'help' %}">{% trans "Help" %}</a></li>
-                            <li><a href="{% url 'faq' %}">{% trans "FAQ" %}</a></li>
-                            <li><a href="{% url 'tos' %}">{% trans "Terms of Service" %}</a></li>
-                            <li><a href="{% url 'guidelines' %}">{% trans "Guidelines" %}</a></li>
-                            <li>
-                                <a href="https://bitbucket.org/siovene/astrobin/overview" target="_blank">
-                                    {% trans "Source code" %}
-                                </a>
-                            </li>
-                        </ul>
-                    </div>
-                    <div class="span3">
-                        <h3>{% trans "Thanks to" %}</h3>
-                        <ul>
-                            <li>{% trans "The localization team" %}: <a href="/users/PepeChambo">Jos&eacute; J. Chamb&oacute;</a>, <a href="/users/Tannhauser">Jean-Charles Schmidt</a>, <a href="/users/OrionRider">Laurent Schmitz</a>, <a href="/users/Vostok/">Lauri Kangas</a>, <a href="/users/naavis/">Samuli Vuorinen</a>, <a href="/users/ketarax/">Jussi Kantola</a>, <a href="/users/KoenDierckens/">Koen Dierckens</a>, <a href="http://lambermont.dyndns.org/astro/" target="_blank">Hans Lambermont</a>, <a href="http://strehl1.de" target="_blank">Michael Wilk</a>, <a href="/users/stimpy/">Marc Demierre</a>, <a href="/users/kalle66/">Rinke Kallenkoot</a>, <a href="/users/leonh/">Leon Handreke</a>, <a href="/users/bilgebay/">Sedat Bilgebay</a>, <a href="/users/onuratilgan/">Onur Atilgan</a>, <a href="/users/guvenozkan/">Güven Özkan</a>, <a href="/users/castle/">Ahmet Kale</a>, <a href="/users/AstroAlb/">Ardian Xherrahi</a>, <a href="/users/milosz/">Milosz Wasilewski</a>, <a href="/users/GlaucoH/">Glauco Hass</a>, <a href="/users/kookoo_gr/">Konstantinos Stavropoulos</a>, <a href="/users/sypai/">Pavel Syrin</a>, <a href="/users/ohmishonin/">Ken-ichiro Tanaka</a>.</li>
-                            <li><a href="http://astrometry.net/" target="_blank">Astrometry.net</a></li>
-                        </ul>
-                    </div>
-                    <div class="span3">
-                        <h3>{% trans "Copyright" %}</h3>
-                        <p>
-                        {% blocktrans %}AstroBin is Copyright &copy; 2010-2012 Salvatore Iovene, All Rights Reserved. The images on this websites are copyright of their respective owners.{% endblocktrans %}
-                        </p>
-                    </div>
-                </div> <!-- row -->
+                    </p>
+                </div>
+                <div class="span3">
+                    <h3>{% trans "Site links" %}</h3>
+                    <ul>
+                        <li><a href="{% url 'index' %}">{% trans "Home" %}</a></li>
+                        <li><a href="/blog/">{% trans "Blog" %}</a></li>
+                        <li><a href="{% url 'pybb:index' %}">{% trans "Forum" %}</a></li>
+                        <li><a href="{% url 'help' %}">{% trans "Help" %}</a></li>
+                        <li><a href="{% url 'faq' %}">{% trans "FAQ" %}</a></li>
+                        <li><a href="{% url 'tos' %}">{% trans "Terms of Service" %}</a></li>
+                        <li><a href="{% url 'guidelines' %}">{% trans "Guidelines" %}</a></li>
+                        <li>
+                            <a href="https://bitbucket.org/siovene/astrobin/overview" target="_blank">
+                                {% trans "Source code" %}
+                            </a>
+                        </li>
+                    </ul>
+                </div>
+                <div class="span3">
+                    <h3>{% trans "Thanks to" %}</h3>
+                    <ul>
+                        <li>{% trans "The localization team" %}: <a href="/users/PepeChambo">Jos&eacute; J. Chamb&oacute;</a>,
+                            <a href="/users/Tannhauser">Jean-Charles Schmidt</a>, <a href="/users/OrionRider">Laurent
+                                Schmitz</a>, <a href="/users/Vostok/">Lauri Kangas</a>, <a href="/users/naavis/">Samuli
+                                Vuorinen</a>, <a href="/users/ketarax/">Jussi Kantola</a>, <a
+                                    href="/users/KoenDierckens/">Koen Dierckens</a>, <a
+                                    href="http://lambermont.dyndns.org/astro/" target="_blank">Hans Lambermont</a>, <a
+                                    href="http://strehl1.de" target="_blank">Michael Wilk</a>, <a href="/users/stimpy/">Marc
+                                Demierre</a>, <a href="/users/kalle66/">Rinke Kallenkoot</a>, <a href="/users/leonh/">Leon
+                                Handreke</a>, <a href="/users/bilgebay/">Sedat Bilgebay</a>, <a
+                                    href="/users/onuratilgan/">Onur Atilgan</a>, <a href="/users/guvenozkan/">Güven
+                                Özkan</a>, <a href="/users/castle/">Ahmet Kale</a>, <a href="/users/AstroAlb/">Ardian
+                                Xherrahi</a>, <a href="/users/milosz/">Milosz Wasilewski</a>, <a href="/users/GlaucoH/">Glauco
+                                Hass</a>, <a href="/users/kookoo_gr/">Konstantinos Stavropoulos</a>, <a
+                                    href="/users/sypai/">Pavel Syrin</a>, <a href="/users/ohmishonin/">Ken-ichiro
+                                Tanaka</a>.
+                        </li>
+                        <li><a href="http://astrometry.net/" target="_blank">Astrometry.net</a></li>
+                    </ul>
+                </div>
+                <div class="span3">
+                    <h3>{% trans "Copyright" %}</h3>
+                    <p>
+                        {% blocktrans %}AstroBin is Copyright &copy; 2010-2012 Salvatore Iovene, All Rights Reserved.
+                            The images on this websites are copyright of their respective owners.{% endblocktrans %}
+                    </p>
+                </div>
+            </div> <!-- row -->
 
-                <div class="row bottom">
-                    <div class="span8">
-                        <p>&copy; 2010-2012 <a href="/users/siovene/">Salvatore Iovene</a><br/>
-                    </div>
-                    <div class="span4">
-                        <a href="{% url 'index' %}">{% trans "Home" %}</a> /
-                        <a href="http://facebook.com/astrobin" target="_blank">Facebook</a> /
-                        <a href="https://plus.google.com/u/0/b/105764284631954214838/" target="_blank">Google+</a> /
-                        <a href="http://twitter.com/astrobin_com" target="_blank">Twitter</a> /
-                        <a href="#top" class="back-to-top">{% trans "Back to top" %}</a>
-                    </div>
-                </div> <!-- row -->
-            </div> <!-- container -->
-            {% endblock %}
-        </footer>
+            <div class="row bottom">
+                <div class="span8">
+                    <p>&copy; 2010-2012 <a href="/users/siovene/">Salvatore Iovene</a><br />
+                </div>
+                <div class="span4">
+                    <a href="{% url 'index' %}">{% trans "Home" %}</a> /
+                    <a href="http://facebook.com/astrobin" target="_blank">Facebook</a> /
+                    <a href="https://plus.google.com/u/0/b/105764284631954214838/" target="_blank">Google+</a> /
+                    <a href="http://twitter.com/astrobin_com" target="_blank">Twitter</a> /
+                    <a href="#top" class="back-to-top">{% trans "Back to top" %}</a>
+                </div>
+            </div> <!-- row -->
+        </div> <!-- container -->
+    {% endblock %}
+</footer>
 
-        {% block modals %}{% endblock %}
+{% block modals %}{% endblock %}
 
-        <!--[if lte IE 8]><script type="text/javascript" src="{% static 'astrobin/js/flashcanvas.js' %}"></script><![endif]-->
+<!--[if lte IE 8]><script type="text/javascript" src="{% static 'astrobin/js/flashcanvas.js' %}"></script><![endif]-->
 
-        {% javascript 'scripts' %}
+{% javascript 'scripts' %}
 
-        <!-- javascript -->
-        <script type="text/javascript">
-            $(window).bind('beforeunload', function() {
-                $.each(astrobin_common.globals.requests, function(i, xhr) {
-                    try {
-                        xhr.abort();
-                    } catch(e) {
-                        if (console)
-                            console.log('failed to abort xhr');
-                    }
-                });
-                astrobin_common.globals.requests = [];
-            });
-
-            function getInternetExplorerVersion()
-            // Returns the version of Internet Explorer or a -1
-            // (indicating the use of another browser).
-            {
-              var rv = -1; // Return value assumes failure.
-              if (navigator.appName == 'Microsoft Internet Explorer')
-              {
-                var ua = navigator.userAgent;
-                var re  = new RegExp("MSIE ([0-9]{1,}[\.0-9]{0,})");
-                if (re.exec(ua) != null)
-                  rv = parseFloat( RegExp.$1 );
-              }
-              return rv;
+<!-- javascript -->
+<script type="text/javascript">
+    $(window).bind('beforeunload', function () {
+        $.each(astrobin_common.globals.requests, function (i, xhr) {
+            try {
+                xhr.abort();
+            } catch (e) {
+                if (console)
+                    console.log('failed to abort xhr');
             }
+        });
+        astrobin_common.globals.requests = [];
+    });
 
-            var dictionary = {
-                'Cancel': '{% trans "Cancel" %}'
-            }
-            $.i18n.setDictionary(dictionary);
+    function getInternetExplorerVersion()
+    // Returns the version of Internet Explorer or a -1
+    // (indicating the use of another browser).
+    {
+        var rv = -1; // Return value assumes failure.
+        if (navigator.appName == 'Microsoft Internet Explorer') {
+            var ua = navigator.userAgent;
+            var re = new RegExp("MSIE ([0-9]{1,}[\.0-9]{0,})");
+            if (re.exec(ua) != null)
+                rv = parseFloat(RegExp.$1);
+        }
+        return rv;
+    }
 
-            $(document).ready(function() {
-                {% comment %}
-                    {% if request.user.is_authenticated %}
-                    var ver = getInternetExplorerVersion();
-                    if (ver == -1) {
-                        astrobin_common.start_listeners('{{request.user.username}}');
-                    }
-                    {%endif %}
-                {% endcomment %}
-                astrobin_common.init_ajax_csrf_token();
+    var dictionary = {
+        'Cancel': '{% trans "Cancel" %}'
+    }
+    $.i18n.setDictionary(dictionary);
 
-                $('.dropdown-toggle').dropdown();
-                $('.carousel').carousel();
-                $('.nav-tabs').tab();
-                $('[rel=tooltip]').tooltip();
-
-                // date and time pickers
-                $('input').filter('.timepickerclass').timepicker({});
-                $('input').filter('.datepickerclass').datepicker({'dateFormat':'yy-mm-dd'});
-
-                $('input:checkbox, input:radio, input:file').uniform(
-                    {fileDefaultText: '{% trans "No file selected" %}',
-                     fileBtnText: '{% trans "Choose file" %}'
-                    }
-                );
-
-                $("select[multiple]").not('*[name="license"]').multiselect({
-                    searchable: false,
-                    dividerLocation: 0.5
-                });
-
-                $('.notice-container a.notifications').click(function(event) {
-                    setTimeout(function() {
-                        notifications_mark_seen();
-                    }, 1000);
-                });
-
-                var notifications_read_timer = 0;
-                var notifications_mark_seen = function() {
-                    $.ajax(
-                    {
-                        url: '/notifications/seen/',
-                        dataType: 'json',
-                        success: function() {
-                            $('#notifications-popup li.unread').removeClass('unread');
-                            $('#notifications_count').remove();
-                        }
-                    });
-                };
-            });
-        </script>
-
-        {% block extra_js %}{% endblock %}
-
+    $(document).ready(function () {
         {% comment %}
+            {% if request.user.is_authenticated %}
+            var ver = getInternetExplorerVersion();
+            if (ver == -1) {
+                astrobin_common.start_listeners('{{request.user.username}}');
+            }
+            {%endif %}
+        {% endcomment %}
+        astrobin_common.init_ajax_csrf_token();
+
+        $('.dropdown-toggle').dropdown();
+        $('.carousel').carousel();
+        $('.nav-tabs').tab();
+        $('[rel=tooltip]').tooltip();
+
+        // date and time pickers
+        $('input').filter('.timepickerclass').timepicker({});
+        $('input').filter('.datepickerclass').datepicker({'dateFormat': 'yy-mm-dd'});
+
+        $('input:checkbox, input:radio, input:file').uniform(
+            {
+                fileDefaultText: '{% trans "No file selected" %}',
+                fileBtnText: '{% trans "Choose file" %}'
+            }
+        );
+
+        $("select[multiple]").not('*[name="license"]').multiselect({
+            searchable: false,
+            dividerLocation: 0.5
+        });
+
+        $('.notice-container a.notifications').click(function (event) {
+            setTimeout(function () {
+                notifications_mark_seen();
+            }, 1000);
+        });
+
+        var notifications_read_timer = 0;
+        var notifications_mark_seen = function () {
+            $.ajax(
+                {
+                    url: '/notifications/seen/',
+                    dataType: 'json',
+                    success: function () {
+                        $('#notifications-popup li.unread').removeClass('unread');
+                        $('#notifications_count').remove();
+                    }
+                });
+        };
+    });
+</script>
+
+{% block extra_js %}{% endblock %}
+
+{% comment %}
         <div id="fb-root"></div>
         <script>(function(d, s, id) {
           var js, fjs = d.getElementsByTagName(s)[0];
