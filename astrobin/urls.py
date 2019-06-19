@@ -5,7 +5,6 @@ from django.conf.urls.static import static
 from django.contrib import admin
 from django.contrib.auth import views as auth_views
 from django.views.decorators.cache import cache_page
-
 # Third party
 from django.views.i18n import json_catalog
 from tastypie.api import Api
@@ -17,15 +16,16 @@ from threaded_messages.views import message_ajax_reply as messages_message_ajax_
 from threaded_messages.views import recipient_search as messages_recipient_search
 from threaded_messages.views import view as messages_view
 
-# AstroBin apps
-from rawdata.views.helppages import (
-    Help1 as RawDataHelp1,
-    Help2 as RawDataHelp2,
-    Help3 as RawDataHelp3,
-)
-
 # AstroBin
 from astrobin import lookups
+from astrobin.api import (
+    TopPickResource,
+    ImageOfTheDayResource,
+    ImageResource,
+    ImageRevisionResource,
+    LocationResource,
+    CollectionResource)
+from astrobin.search import AstroBinSearchView
 from astrobin.views import (
     api as api_views,
     explore as explore_views,
@@ -134,19 +134,17 @@ from astrobin.views import (
 
     set_language
 )
-from astrobin.api import (
-    TopPickResource,
-    ImageOfTheDayResource,
-    ImageResource,
-    ImageRevisionResource,
-    LocationResource,
-    CollectionResource)
-from astrobin.search import AstroBinSearchView
+# AstroBin apps
+from rawdata.views.helppages import (
+    Help1 as RawDataHelp1,
+    Help2 as RawDataHelp2,
+    Help3 as RawDataHelp3,
+)
 
 admin.autodiscover()
 
 # These are the old API, not djangorestframework
-v1_api = Api(api_name = 'v1')
+v1_api = Api(api_name='v1')
 v1_api.register(LocationResource())
 v1_api.register(ImageResource())
 v1_api.register(ImageRevisionResource())
@@ -176,26 +174,26 @@ urlpatterns = [
     ### THIRD PARTY APPS VIEWS                                              ###
     ###########################################################################
 
-    #override the default urls
+    # override the default urls
     url(r'^accounts/password/change/$',
-          auth_views.password_change,
-          name='password_change'),
+        auth_views.password_change,
+        name='password_change'),
     url(r'^accounts/password/change/done/$',
-          auth_views.password_change_done,
-          name='password_change_done'),
+        auth_views.password_change_done,
+        name='password_change_done'),
     url(r'^accounts/password/reset/$',
-          auth_views.password_reset,
-          name='password_reset'),
+        auth_views.password_reset,
+        name='password_reset'),
     url(r'^accounts/password/reset/done/$',
-          auth_views.password_reset_done,
-          name='password_reset_done'),
+        auth_views.password_reset_done,
+        name='password_reset_done'),
     url(r'^accounts/password/reset/complete/$',
-          auth_views.password_reset_complete,
-          name='password_reset_complete'),
+        auth_views.password_reset_complete,
+        name='password_reset_complete'),
     url(r'^accounts/password/reset/confirm/(?P<uidb64>[0-9A-Za-z]+)-(?P<token>.+)/$',
-          auth_views.password_reset_confirm,
-          name='password_reset_confirm'),
-    #and now add the registration urls
+        auth_views.password_reset_confirm,
+        name='password_reset_confirm'),
+    # and now add the registration urls
     url(r'^accounts/register/$',
         registration_views.AstroBinRegistrationView.as_view(),
         name='registration_register'),
@@ -218,8 +216,9 @@ urlpatterns = [
     ###########################################################################
 
     url(r'^api/', include(v1_api.urls)),
-    url(r'^api/request-key/$', api_views.AppApiKeyRequestView.as_view(), name = 'app_api_key_request'),
-    url(r'^api/request-key/complete/$', api_views.AppApiKeyRequestCompleteView.as_view(), name = 'app_api_key_request_complete'),
+    url(r'^api/request-key/$', api_views.AppApiKeyRequestView.as_view(), name='app_api_key_request'),
+    url(r'^api/request-key/complete/$', api_views.AppApiKeyRequestCompleteView.as_view(),
+        name='app_api_key_request_complete'),
     url(r'^api/v2/api-auth-token/', 'rest_framework.authtoken.views.obtain_auth_token'),
     url(r'^api/v2/api-auth/', include('rest_framework.urls', namespace='rest_framework')),
     url(r'^api/v2/common/', include('common.api_urls')),
@@ -245,7 +244,7 @@ urlpatterns = [
     ### HOME VIEWS                                                          ###
     ###########################################################################
 
-    url(r'^$',index, name='index'),
+    url(r'^$', index, name='index'),
 
     ###########################################################################
     ### IMAGE VIEWS                                                         ###
@@ -253,8 +252,10 @@ urlpatterns = [
 
     url(r'^(?P<id>\d+)/flagthumbs/$', image_views.ImageFlagThumbsView.as_view(), name='image_flag_thumbs'),
     url(r'^(?P<id>\d+)/(?:(?P<r>\w+)/)?$', image_views.ImageDetailView.as_view(), name='image_detail'),
-    url(r'^(?P<id>\d+)/(?:(?P<r>\w+)/)?rawthumb/(?P<alias>\w+)/(?:get.jpg)?$', image_views.ImageRawThumbView.as_view(), name='image_rawthumb'),
-    url(r'^(?P<id>\d+)/(?:(?P<r>\w+)/)?thumb/(?P<alias>\w+)/$', image_views.ImageThumbView.as_view(), name='image_thumb'),
+    url(r'^(?P<id>\d+)/(?:(?P<r>\w+)/)?rawthumb/(?P<alias>\w+)/(?:get.jpg)?$', image_views.ImageRawThumbView.as_view(),
+        name='image_rawthumb'),
+    url(r'^(?P<id>\d+)/(?:(?P<r>\w+)/)?thumb/(?P<alias>\w+)/$', image_views.ImageThumbView.as_view(),
+        name='image_thumb'),
     url(r'^full/(?P<id>\d+)/(?:(?P<r>\w+)/)?$', image_views.ImageFullView.as_view(), name='image_full'),
 
     ###########################################################################
@@ -266,13 +267,15 @@ urlpatterns = [
     url(r'^delete/revision/(?P<id>\d+)/$', image_views.ImageRevisionDeleteView.as_view(), name='image_delete_revision'),
     url(r'^demote/(?P<id>\d+)/$', image_views.ImageDemoteView.as_view(), name='image_demote'),
     url(r'^edit/acquisition/(?P<id>\d+)/$', image_edit_acquisition, name='image_edit_acquisition'),
-    url(r'^edit/acquisition/reset/(?P<id>\d+)/$',image_edit_acquisition_reset, name='image_edit_acquisition_reset'),
+    url(r'^edit/acquisition/reset/(?P<id>\d+)/$', image_edit_acquisition_reset, name='image_edit_acquisition_reset'),
     url(r'^edit/basic/(?P<id>\d+)/$', image_views.ImageEditBasicView.as_view(), name='image_edit_basic'),
     url(r'^edit/gear/(?P<id>\d+)/$', image_views.ImageEditGearView.as_view(), name='image_edit_gear'),
     url(r'^edit/license/(?P<id>\d+)/$', image_edit_license, name='image_edit_license'),
-    url(r'^edit/platesolving/(?P<pk>\d+)/(?:(?P<revision_label>\w+)/)?$', image_edit_platesolving_settings, name='image_edit_platesolving_settings'),
+    url(r'^edit/platesolving/(?P<pk>\d+)/(?:(?P<revision_label>\w+)/)?$', image_edit_platesolving_settings,
+        name='image_edit_platesolving_settings'),
     url(r'^edit/makefinal/(?P<id>\d+)/$', image_edit_make_final, name='image_edit_make_final'),
-    url(r'^edit/revision/makefinal/(?P<id>\d+)/$', image_edit_revision_make_final, name='image_edit_revision_make_final'),
+    url(r'^edit/revision/makefinal/(?P<id>\d+)/$', image_edit_revision_make_final,
+        name='image_edit_revision_make_final'),
     url(r'^edit/save/acquisition/$', image_edit_save_acquisition, name='image_edit_save_acquisition'),
     url(r'^edit/save/license/$', image_edit_save_license, name='image_edit_save_license'),
     url(r'^edit/save/watermark/$', image_edit_save_watermark, name='image_edit_save_watermark'),
@@ -299,51 +302,63 @@ urlpatterns = [
     ### USER VIEWS                                                          ###
     ###########################################################################
 
-    url(r'^(?P<id>\d+)/stats/views/(?P<period>\w+)/$', stats_get_image_views_ajax, name = 'stats_image_views'),
+    url(r'^(?P<id>\d+)/stats/views/(?P<period>\w+)/$', stats_get_image_views_ajax, name='stats_image_views'),
     url(r'^me/$', me, name='me'),
     url(r'^users/(?P<username>[\w.@+-]*)/$', user_page, name='user_page'),
-    url(r'^users/(?P<username>[\w.@+-]*)/collections/$', collections_views.UserCollectionsList.as_view(), name='user_collections_list'),
-    url(r'^users/(?P<username>[\w.@+-]*)/collections/create/$', collections_views.UserCollectionsCreate.as_view(), name='user_collections_create'),
-    url(r'^users/(?P<username>[\w.@+-]*)/collections/(?P<collection_pk>\d+)/$', collections_views.UserCollectionsDetail.as_view(), name='user_collections_detail'),
-    url(r'^users/(?P<username>[\w.@+-]*)/collections/(?P<collection_pk>\d+)/update/$', collections_views.UserCollectionsUpdate.as_view(), name='user_collections_update'),
-    url(r'^users/(?P<username>[\w.@+-]*)/collections/(?P<collection_pk>\d+)/add-remove-images/$', collections_views.UserCollectionsAddRemoveImages.as_view(), name='user_collections_add_remove_images'),
-    url(r'^users/(?P<username>[\w.@+-]*)/collections/(?P<collection_pk>\d+)/delete/$', collections_views.UserCollectionsDelete.as_view(), name='user_collections_delete'),
-    url(r'^users/(?P<username>[\w.@+-]*)/apikeys/$',user_page_api_keys, name='user_page_api_keys'),
-    url(r'^users/(?P<username>[\w.@+-]*)/ban/$',user_ban, name='user_ban'),
-    url(r'^users/(?P<username>[\w.@+-]*)/bookmarks/$',user_page_bookmarks, name='user_page_bookmarks'),
+    url(r'^users/(?P<username>[\w.@+-]*)/collections/$', collections_views.UserCollectionsList.as_view(),
+        name='user_collections_list'),
+    url(r'^users/(?P<username>[\w.@+-]*)/collections/create/$', collections_views.UserCollectionsCreate.as_view(),
+        name='user_collections_create'),
+    url(r'^users/(?P<username>[\w.@+-]*)/collections/(?P<collection_pk>\d+)/$',
+        collections_views.UserCollectionsDetail.as_view(), name='user_collections_detail'),
+    url(r'^users/(?P<username>[\w.@+-]*)/collections/(?P<collection_pk>\d+)/update/$',
+        collections_views.UserCollectionsUpdate.as_view(), name='user_collections_update'),
+    url(r'^users/(?P<username>[\w.@+-]*)/collections/(?P<collection_pk>\d+)/add-remove-images/$',
+        collections_views.UserCollectionsAddRemoveImages.as_view(), name='user_collections_add_remove_images'),
+    url(r'^users/(?P<username>[\w.@+-]*)/collections/(?P<collection_pk>\d+)/delete/$',
+        collections_views.UserCollectionsDelete.as_view(), name='user_collections_delete'),
+    url(r'^users/(?P<username>[\w.@+-]*)/apikeys/$', user_page_api_keys, name='user_page_api_keys'),
+    url(r'^users/(?P<username>[\w.@+-]*)/ban/$', user_ban, name='user_ban'),
+    url(r'^users/(?P<username>[\w.@+-]*)/bookmarks/$', user_page_bookmarks, name='user_page_bookmarks'),
     url(r'^users/(?P<username>[\w.@+-]*)/liked/$', user_page_liked, name='user_page_liked'),
-    url(r'^users/(?P<username>[\w.@+-]*)/commercial/products/$',user_page_commercial_products, name='user_page_commercial_products'),
-    url(r'^users/(?P<username>[\w.@+-]*)/followers/$',user_page_followers, name='user_page_followers'),
-    url(r'^users/(?P<username>[\w.@+-]*)/following/$',user_page_following, name='user_page_following'),
-    url(r'^users/(?P<username>[\w.@+-]*)/plots/$',user_page_plots, name='user_page_plots'),
-    url(r'^users/(?P<username>[\w.@+-]*)/stats/integration_hours/(?P<period>\w+)/(?P<since>\d+)/$',user_profile_stats_get_integration_hours_ajax, name = 'stats_integration_hours'),
-    url(r'^users/(?P<username>[\w.@+-]*)/stats/integration_hours_by_gear/(?P<period>\w+)/$',user_profile_stats_get_integration_hours_by_gear_ajax, name = 'stats_integration_hours_by_gear'),
-    url(r'^users/(?P<username>[\w.@+-]*)/stats/uploaded_images/(?P<period>\w+)/$',user_profile_stats_get_uploaded_images_ajax, name = 'stats_uploaded_images'),
-    url(r'^users/(?P<username>[\w.@+-]*)/stats/views/(?P<period>\w+)/$',user_profile_stats_get_views_ajax, name = 'stats_views'),
+    url(r'^users/(?P<username>[\w.@+-]*)/commercial/products/$', user_page_commercial_products,
+        name='user_page_commercial_products'),
+    url(r'^users/(?P<username>[\w.@+-]*)/followers/$', user_page_followers, name='user_page_followers'),
+    url(r'^users/(?P<username>[\w.@+-]*)/following/$', user_page_following, name='user_page_following'),
+    url(r'^users/(?P<username>[\w.@+-]*)/plots/$', user_page_plots, name='user_page_plots'),
+    url(r'^users/(?P<username>[\w.@+-]*)/stats/integration_hours/(?P<period>\w+)/(?P<since>\d+)/$',
+        user_profile_stats_get_integration_hours_ajax, name='stats_integration_hours'),
+    url(r'^users/(?P<username>[\w.@+-]*)/stats/integration_hours_by_gear/(?P<period>\w+)/$',
+        user_profile_stats_get_integration_hours_by_gear_ajax, name='stats_integration_hours_by_gear'),
+    url(r'^users/(?P<username>[\w.@+-]*)/stats/uploaded_images/(?P<period>\w+)/$',
+        user_profile_stats_get_uploaded_images_ajax, name='stats_uploaded_images'),
+    url(r'^users/(?P<username>[\w.@+-]*)/stats/views/(?P<period>\w+)/$', user_profile_stats_get_views_ajax,
+        name='stats_views'),
 
     ###########################################################################
     ### PROFILE VIEWS                                                       ###
     ###########################################################################
 
-    url(r'^flickr_auth_callback/$',flickr_auth_callback, name='flickr_auth_callback'),
-    url(r'^profile/delete/$',user_profile_delete, name='profile_delete'),
-    url(r'^profile/edit/$',user_profile_edit_basic, name='profile_edit_basic'),
-    url(r'^profile/edit/basic/$',user_profile_edit_basic, name='profile_edit_basic'),
-    url(r'^profile/edit/commercial/$',user_profile_edit_commercial, name='profile_edit_commercial'),
-    url(r'^profile/edit/flickr/$',user_profile_flickr_import, name='profile_flickr_import'),
-    url(r'^profile/edit/gear/$',user_profile_edit_gear, name='profile_edit_gear'),
-    url(r'^profile/edit/gear/remove/(?P<id>\d+)/$',user_profile_edit_gear_remove, name='profile_edit_gear_remove'),
-    url(r'^profile/edit/license/$',user_profile_edit_license, name='profile_edit_license'),
-    url(r'^profile/edit/locations/$',user_profile_edit_locations, name='profile_edit_locations'),
-    url(r'^profile/edit/preferences/$',user_profile_edit_preferences, name='profile_edit_preferences'),
-    url(r'^profile/edit/retailer/$',user_profile_edit_retailer, name='profile_edit_retailer'),
-    url(r'^profile/save/basic/$',user_profile_save_basic, name='profile_save_basic'),
-    url(r'^profile/save/gear/$',user_profile_save_gear, name='profile_save_gear'),
-    url(r'^profile/save/license/$',user_profile_save_license, name='profile_save_license'),
-    url(r'^profile/save/locations/$',user_profile_save_locations, name='profile_save_locations'),
-    url(r'^profile/save/preferences/$',user_profile_save_preferences, name='profile_save_preferences'),
-    url(r'^profile/seen/realname/$',user_profile_seen_realname, name='profile_seen_realname'),
-    url(r'^profile/seen/email-permissions/$',user_profile_seen_email_permissions, name='profile_seen_email_permissions'),
+    url(r'^flickr_auth_callback/$', flickr_auth_callback, name='flickr_auth_callback'),
+    url(r'^profile/delete/$', user_profile_delete, name='profile_delete'),
+    url(r'^profile/edit/$', user_profile_edit_basic, name='profile_edit_basic'),
+    url(r'^profile/edit/basic/$', user_profile_edit_basic, name='profile_edit_basic'),
+    url(r'^profile/edit/commercial/$', user_profile_edit_commercial, name='profile_edit_commercial'),
+    url(r'^profile/edit/flickr/$', user_profile_flickr_import, name='profile_flickr_import'),
+    url(r'^profile/edit/gear/$', user_profile_edit_gear, name='profile_edit_gear'),
+    url(r'^profile/edit/gear/remove/(?P<id>\d+)/$', user_profile_edit_gear_remove, name='profile_edit_gear_remove'),
+    url(r'^profile/edit/license/$', user_profile_edit_license, name='profile_edit_license'),
+    url(r'^profile/edit/locations/$', user_profile_edit_locations, name='profile_edit_locations'),
+    url(r'^profile/edit/preferences/$', user_profile_edit_preferences, name='profile_edit_preferences'),
+    url(r'^profile/edit/retailer/$', user_profile_edit_retailer, name='profile_edit_retailer'),
+    url(r'^profile/save/basic/$', user_profile_save_basic, name='profile_save_basic'),
+    url(r'^profile/save/gear/$', user_profile_save_gear, name='profile_save_gear'),
+    url(r'^profile/save/license/$', user_profile_save_license, name='profile_save_license'),
+    url(r'^profile/save/locations/$', user_profile_save_locations, name='profile_save_locations'),
+    url(r'^profile/save/preferences/$', user_profile_save_preferences, name='profile_save_preferences'),
+    url(r'^profile/seen/realname/$', user_profile_seen_realname, name='profile_seen_realname'),
+    url(r'^profile/seen/email-permissions/$', user_profile_seen_email_permissions,
+        name='profile_seen_email_permissions'),
 
     ###########################################################################
     ### AUTOCOMPLETE VIEWS                                                 ###
@@ -357,55 +372,63 @@ urlpatterns = [
     ### AFFILIATION PLATFORM VIEWS                                          ###
     ###########################################################################
 
-    url(r'^commercial/products/claim/(?P<id>\d+)/$',commercial_products_claim, name='commercial_products_claim'),
-    url(r'^commercial/products/edit/(?P<id>\d+)/$',commercial_products_edit, name='commercial_products_edit'),
-    url(r'^commercial/products/merge/(?P<from_id>\d+)/(?P<to_id>\d+)/$',commercial_products_merge, name='commercial_products_merge'),
-    url(r'^commercial/products/retailed/claim/(?P<id>\d+)/$',retailed_products_claim, name='retailed_products_claim'),
-    url(r'^commercial/products/retailed/edit/(?P<id>\d+)/$',retailed_products_edit, name='retailed_products_edit'),
-    url(r'^commercial/products/retailed/merge/(?P<from_id>\d+)/(?P<to_id>\d+)/$',retailed_products_merge, name='retailedgg_products_merge'),
-    url(r'^commercial/products/retailed/unclaim/(?P<id>\d+)/$',retailed_products_unclaim, name='retailed_products_unclaim'),
-    url(r'^commercial/products/save/(?P<id>\d+)/$',commercial_products_save, name='commercial_products_save'),
-    url(r'^commercial/products/unclaim/(?P<id>\d+)/$',commercial_products_unclaim, name='commercial_products_unclaim'),
+    url(r'^commercial/products/claim/(?P<id>\d+)/$', commercial_products_claim, name='commercial_products_claim'),
+    url(r'^commercial/products/edit/(?P<id>\d+)/$', commercial_products_edit, name='commercial_products_edit'),
+    url(r'^commercial/products/merge/(?P<from_id>\d+)/(?P<to_id>\d+)/$', commercial_products_merge,
+        name='commercial_products_merge'),
+    url(r'^commercial/products/retailed/claim/(?P<id>\d+)/$', retailed_products_claim, name='retailed_products_claim'),
+    url(r'^commercial/products/retailed/edit/(?P<id>\d+)/$', retailed_products_edit, name='retailed_products_edit'),
+    url(r'^commercial/products/retailed/merge/(?P<from_id>\d+)/(?P<to_id>\d+)/$', retailed_products_merge,
+        name='retailedgg_products_merge'),
+    url(r'^commercial/products/retailed/unclaim/(?P<id>\d+)/$', retailed_products_unclaim,
+        name='retailed_products_unclaim'),
+    url(r'^commercial/products/save/(?P<id>\d+)/$', commercial_products_save, name='commercial_products_save'),
+    url(r'^commercial/products/unclaim/(?P<id>\d+)/$', commercial_products_unclaim, name='commercial_products_unclaim'),
 
     ###########################################################################
     ### GEAR VIEWS                                                          ###
     ###########################################################################
 
-    url(r'^gear/(?P<id>\d+)/(?:(?P<slug>[a-z0-9-_]+)/)?$',gear_page, name='gear_page'),
-    url(r'^gear/by-ids/(?P<ids>([0-9]+,?)+)/$',gear_by_ids, name='gear_by_ids'),
-    url(r'^gear/by-image/(?P<image_id>\d+)/$',gear_by_image, name='gear_by_image'),
-    url(r'^gear/by-make/(?P<make>[(\w|\W).+-]*)/$',gear_by_make, name='gear_by_make'),
-    url(r'^gear/fix/(?P<id>\d+)/$',gear_fix, name='gear_fix'),
-    url(r'^gear/fix/save/$',gear_fix_save, name='gear_fix_save'),
-    url(r'^gear/fix/thanks/$',gear_fix_thanks, name='gear_fix_thanks'),
-    url(r'^gear/review/save/$',gear_review_save, name='gear_review_save'),
-    url(r'^gear_popover_ajax/(?P<id>\d+)/$',gear_popover_ajax, name='gear_popover_ajax'),
-    url(r'^get-makes-by-type/(?P<klass>\w+)/$',get_makes_by_type, name='get_makes_by_type'),
-    url(r'^get_edit_gear_form/(?P<id>\d+)/$',get_edit_gear_form, name='get_edit_gear_form'),
-    url(r'^get_empty_edit_gear_form/(?P<gear_type>\w+)/$',get_empty_edit_gear_form, name='get_empty_edit_gear_form'),
-    url(r'^get_gear_user_info_form/(?P<id>\d+)/$',get_gear_user_info_form, name='get_gear_user_info_form'),
-    url(r'^get_is_gear_complete/(?P<id>\d+)/$',get_is_gear_complete, name='get_is_gear_complete'),
-    url(r'^save_gear_details/$',save_gear_details, name='save_gear_details'),
-    url(r'^save_gear_user_info/$',save_gear_user_info, name='save_gear_user_info'),
-    url(r'^user_popover_ajax/(?P<username>[\w.@+-]+)/$',user_popover_ajax, name='user_popover_ajax'),
+    url(r'^gear/(?P<id>\d+)/(?:(?P<slug>[a-z0-9-_]+)/)?$', gear_page, name='gear_page'),
+    url(r'^gear/by-ids/(?P<ids>([0-9]+,?)+)/$', gear_by_ids, name='gear_by_ids'),
+    url(r'^gear/by-image/(?P<image_id>\d+)/$', gear_by_image, name='gear_by_image'),
+    url(r'^gear/by-make/(?P<make>[(\w|\W).+-]*)/$', gear_by_make, name='gear_by_make'),
+    url(r'^gear/fix/(?P<id>\d+)/$', gear_fix, name='gear_fix'),
+    url(r'^gear/fix/save/$', gear_fix_save, name='gear_fix_save'),
+    url(r'^gear/fix/thanks/$', gear_fix_thanks, name='gear_fix_thanks'),
+    url(r'^gear/review/save/$', gear_review_save, name='gear_review_save'),
+    url(r'^gear_popover_ajax/(?P<id>\d+)/$', gear_popover_ajax, name='gear_popover_ajax'),
+    url(r'^get-makes-by-type/(?P<klass>\w+)/$', get_makes_by_type, name='get_makes_by_type'),
+    url(r'^get_edit_gear_form/(?P<id>\d+)/$', get_edit_gear_form, name='get_edit_gear_form'),
+    url(r'^get_empty_edit_gear_form/(?P<gear_type>\w+)/$', get_empty_edit_gear_form, name='get_empty_edit_gear_form'),
+    url(r'^get_gear_user_info_form/(?P<id>\d+)/$', get_gear_user_info_form, name='get_gear_user_info_form'),
+    url(r'^get_is_gear_complete/(?P<id>\d+)/$', get_is_gear_complete, name='get_is_gear_complete'),
+    url(r'^save_gear_details/$', save_gear_details, name='save_gear_details'),
+    url(r'^save_gear_user_info/$', save_gear_user_info, name='save_gear_user_info'),
+    url(r'^user_popover_ajax/(?P<username>[\w.@+-]+)/$', user_popover_ajax, name='user_popover_ajax'),
 
     ###########################################################################
     ### STATS VIEWS                                                         ###
     ###########################################################################
 
-    url(r'^stats/camera-types-trend/$',stats_camera_types_trend_ajax, name = 'stats_camera_types_trend'),
-    url(r'^stats/subject-type-trend/$',stats_subject_type_trend_ajax, name = 'stats_subject_type_trend'),
-    url(r'^stats/telescope-types-trend/$',stats_telescope_types_trend_ajax, name = 'stats_telescope_types_trend'),
+    url(r'^stats/camera-types-trend/$', stats_camera_types_trend_ajax, name='stats_camera_types_trend'),
+    url(r'^stats/subject-type-trend/$', stats_subject_type_trend_ajax, name='stats_subject_type_trend'),
+    url(r'^stats/telescope-types-trend/$', stats_telescope_types_trend_ajax, name='stats_telescope_types_trend'),
 
     ###########################################################################
     ### SUBJECT VIEWS                                                       ###
     ###########################################################################
 
-    url(r'^subject/stats/camera-types/(?P<id>\d+)/$',stats_subject_camera_types_ajax, name = 'stats_subject_camera_types'),
-    url(r'^subject/stats/images-monthly/(?P<id>\d+)/$',stats_subject_images_monthly_ajax, name = 'stats_subject_images_monthly'),
-    url(r'^subject/stats/integration-monthly/(?P<id>\d+)/$',stats_subject_integration_monthly_ajax, name = 'stats_subject_integration_monthly'),
-    url(r'^subject/stats/telescope-types/(?P<id>\d+)/$',stats_subject_telescope_types_ajax, name = 'stats_subject_telescope_types'),
-    url(r'^subject/stats/total-images/(?P<id>\d+)/$',stats_subject_total_images_ajax, name = 'stats_subject_total_images'),
+    url(r'^subject/stats/camera-types/(?P<id>\d+)/$', stats_subject_camera_types_ajax,
+        name='stats_subject_camera_types'),
+    url(r'^subject/stats/images-monthly/(?P<id>\d+)/$', stats_subject_images_monthly_ajax,
+        name='stats_subject_images_monthly'),
+    url(r'^subject/stats/integration-monthly/(?P<id>\d+)/$', stats_subject_integration_monthly_ajax,
+        name='stats_subject_integration_monthly'),
+    url(r'^subject/stats/telescope-types/(?P<id>\d+)/$', stats_subject_telescope_types_ajax,
+        name='stats_subject_telescope_types'),
+    url(r'^subject/stats/total-images/(?P<id>\d+)/$', stats_subject_total_images_ajax,
+        name='stats_subject_total_images'),
 
     ###########################################################################
     ### MESSAGES VIEWS                                                      ###
@@ -414,31 +437,33 @@ urlpatterns = [
     url(r"^messages/recipient-search/$", messages_recipient_search, name="recipient_search"),
     url(r'^messages/batch-update/$', messages_batch_update, name='messages_batch_update'),
     url(r'^messages/compose/$', messages_compose, {'template_name': 'messages/compose.html'}, name='messages_compose'),
-    url(r'^messages/compose/(?P<recipient>[\w.@+-]+)/$', messages_compose, {'template_name': 'messages/compose.html'}, name='messages_compose_to'),
+    url(r'^messages/compose/(?P<recipient>[\w.@+-]+)/$', messages_compose, {'template_name': 'messages/compose.html'},
+        name='messages_compose_to'),
     url(r'^messages/delete/(?P<thread_id>[\d]+)/$', messages_delete, name='messages_delete'),
     url(r'^messages/inbox/$', messages_inbox, {'template_name': 'messages/inbox.html'}, name='messages_inbox'),
-    url(r'^messages/message-reply/(?P<thread_id>[\d]+)/$', messages_message_ajax_reply, {'template_name': 'messages/message_list_view.html'}, name="message_reply"),
-    url(r'^messages/view/(?P<thread_id>[\d]+)/$', messages_view, {'template_name': 'messages/view.html'}, name='messages_detail'),
-
+    url(r'^messages/message-reply/(?P<thread_id>[\d]+)/$', messages_message_ajax_reply,
+        {'template_name': 'messages/message_list_view.html'}, name="message_reply"),
+    url(r'^messages/view/(?P<thread_id>[\d]+)/$', messages_view, {'template_name': 'messages/view.html'},
+        name='messages_detail'),
 
     ###########################################################################
     ### MODERATION VIEWS                                                    ###
     ###########################################################################
 
     url(r'^moderate/images/$', moderation_views.ImageModerationListView.as_view(),
-            name='image_moderation'),
+        name='image_moderation'),
     url(r'^moderate/images/spam/$',
-            moderation_views.ImageModerationSpamListView.as_view(),
-            name='image_moderation_view_spam'),
+        moderation_views.ImageModerationSpamListView.as_view(),
+        name='image_moderation_view_spam'),
     url(r'^moderate/images/mark-as-spam/$',
-            moderation_views.ImageModerationMarkAsSpamView.as_view(),
-            name='image_moderation_mark_as_spam'),
+        moderation_views.ImageModerationMarkAsSpamView.as_view(),
+        name='image_moderation_mark_as_spam'),
     url(r'^moderate/images/mark-as-ham/$',
-            moderation_views.ImageModerationMarkAsHamView.as_view(),
-            name='image_moderation_mark_as_ham'),
+        moderation_views.ImageModerationMarkAsHamView.as_view(),
+        name='image_moderation_mark_as_ham'),
     url(r'^moderate/images/ban-all/$',
-            moderation_views.ImageModerationBanAllView.as_view(),
-            name='image_moderation_ban_all'),
+        moderation_views.ImageModerationBanAllView.as_view(),
+        name='image_moderation_ban_all'),
     url(r'^moderate/forums/mark-as-spam/$',
         moderation_views.ForumModerationMarkAsSpamView.as_view(),
         name='forum_moderation_mark_as_spam'),
@@ -447,25 +472,25 @@ urlpatterns = [
     ### PAGES VIEWS                                                         ###
     ###########################################################################
 
-    url(r'^affiliates/$',affiliates, name='affiliates'),
-    url(r'^faq/',faq, name='faq'),
-    url(r'^guidelines/',guidelines, name='guidelines'),
-    url(r'^help/$',help, name='help'),
-    url(r'^help/api/$',api_help, name='api'),
+    url(r'^affiliates/$', affiliates, name='affiliates'),
+    url(r'^faq/', faq, name='faq'),
+    url(r'^guidelines/', guidelines, name='guidelines'),
+    url(r'^help/$', help, name='help'),
+    url(r'^help/api/$', api_help, name='api'),
     url(r'^help/rawdata/1/$', RawDataHelp1.as_view(), name='rawdata.help1'),
     url(r'^help/rawdata/2/$', RawDataHelp2.as_view(), name='rawdata.help2'),
     url(r'^help/rawdata/3/$', RawDataHelp3.as_view(), name='rawdata.help3'),
     url(r'^trending-astrophotographers/',
-       trending_astrophotographers,
+        trending_astrophotographers,
         name='trending_astrophotographers'),
-    url(r'^stats/',stats, name='stats'),
-    url(r'^tos/',tos, name='tos'),
+    url(r'^stats/', stats, name='stats'),
+    url(r'^tos/', tos, name='tos'),
 
     ###########################################################################
     ### I18N VIEWS                                                          ###
     ###########################################################################
 
-    url(r'^language/set/(?P<lang>[\w-]+)/$',set_language, name='set_language'),
+    url(r'^language/set/(?P<lang>[\w-]+)/$', set_language, name='set_language'),
 
     ###########################################################################
     ### HOME VIEWS                                                          ###
@@ -493,5 +518,6 @@ if settings.LOCAL_STATIC_STORAGE:
 
 if settings.DEBUG or settings.TESTING:
     import debug_toolbar
+
     urlpatterns += [url(r'^__debug__/', include(debug_toolbar.urls))]
     INTERNAL_IPS = ["*"]

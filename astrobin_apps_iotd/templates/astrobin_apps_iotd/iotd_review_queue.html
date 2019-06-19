@@ -5,6 +5,7 @@
 {% load django_bootstrap_breadcrumbs %}
 {% load astrobin_apps_iotd_tags %}
 {% load astrobin_apps_images_tags %}
+{% load common_tags %}
 
 {% block title %}{% trans "IOTD Review Queue" %}{% endblock %}
 
@@ -51,7 +52,7 @@
                 </a>
 
                 <div class="iotd-queue-item-actions">
-                    <a href="{% url 'image_rawthumb' image.pk '0' 'hd_anonymized' %}" class="fancybox">
+                    <a href="{% url 'image_rawthumb' image.pk '0' 'hd_anonymized' %}{% query_string "sync=" "" %}" class="fancybox">
                         <i class="icon-zoom-in"></i>
                     </a>
 
