@@ -87,7 +87,7 @@ The `docker-compose.yml` file contains all the instructions needed to bring up t
 stack, including how to build the `astrobin`, `celery`, and `beat` containers.
 
 ```bash
-export NGINX_MODE=local
+export NGINX_MODE=dev
 docker-compose -f docker/docker-compose.yml -f docker/docker-compose.build.yml up -d
 ```
 
