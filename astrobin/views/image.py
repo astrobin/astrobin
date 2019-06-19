@@ -149,6 +149,10 @@ class ImageRawThumbView(DetailView):
         if force is not None:
             image.thumbnail_invalidate(False)
 
+        sync = request.GET.get('sync')
+        if sync is not None:
+            opts['sync'] = True
+
         if settings.TESTING:
             thumb = image.thumbnail_raw(alias, opts)
             if thumb:
