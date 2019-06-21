@@ -3,7 +3,6 @@ from django.conf import settings
 from astrobin.fields import COUNTRIES
 from astrobin.models import Image
 from astrobin.utils import get_client_country_code
-
 from astrobin_apps_notifications.utils import get_unseen_notifications
 
 
@@ -54,15 +53,16 @@ def user_scores(request):
 def common_variables(request):
     from rawdata.utils import rawdata_user_has_valid_subscription
     from django_user_agents.utils import get_and_set_user_agent
-    from django_bouncy.models import Bounce
+    from django_bouncy.models import Bounce, Complaint
 
     get_and_set_user_agent(request)
 
     bounced = False
-    if request.user.is_authenticated():
-        bounced = Bounce.objects.filter(
-            address = request.user.email, bounce_type="Permanent").exists()
+    complained = False
 
+    if request.user.is_authenticated():
+        bounced = Bounce.objects.filter(address=request.user.email, bounce_type="Permanent").exists()
+        complained = Complaint.objects.filter(address=request.user.email).exists()
 
     d = {
         'True': True,
@@ -72,12 +72,12 @@ def common_variables(request):
         'DEBUG_MODE': settings.DEBUG,
         'REQUEST_COUNTRY': get_client_country_code(request),
 
-        #'random_gear_item': Gear.objects.filter(moderator_fixed = None).order_by('?')[:1].get(),
+        # 'random_gear_item': Gear.objects.filter(moderator_fixed = None).order_by('?')[:1].get(),
         'is_producer': request.user.groups.filter(name='Producers'),
         'is_retailer': request.user.groups.filter(name='Retailers'),
         'rawdata_has_subscription': rawdata_user_has_valid_subscription(request.user),
-        'IMAGES_URL' : settings.IMAGES_URL,
-        'MEDIA_URL' : settings.MEDIA_URL,
+        'IMAGES_URL': settings.IMAGES_URL,
+        'MEDIA_URL': settings.MEDIA_URL,
         'ADS_ENABLED': settings.ADS_ENABLED,
         'DONATIONS_ENABLED': settings.DONATIONS_ENABLED,
         'PREMIUM_ENABLED': settings.PREMIUM_ENABLED,
@@ -89,11 +89,12 @@ def common_variables(request):
         'GOOGLE_ANALYTICS_ID': settings.GOOGLE_ANALYTICS_ID,
         'READONLY_MODE': settings.READONLY_MODE,
         'HAS_BOUNCED_EMAILS': bounced,
+        'HAS_COMPLAINT': complained,
         'COUNTRIES': COUNTRIES,
         'COOKIELAW_ACCEPTED': request.COOKIES.get('cookielaw_accepted', False),
     }
 
     if request.user.is_authenticated() and request.user.userprofile.is_image_moderator():
-        d['images_pending_moderation_no'] = Image.objects_including_wip.filter(moderator_decision = 0).count()
+        d['images_pending_moderation_no'] = Image.objects_including_wip.filter(moderator_decision=0).count()
 
     return d
