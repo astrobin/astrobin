@@ -1,3 +1,4 @@
+{% load common_tags %}
 {% load i18n %}
 
 {% if request.user.is_authenticated and not request.user.userprofile.seen_email_permissions %}
@@ -30,3 +31,11 @@
 </div>
 {% endif %}
 
+{% if HAS_COMPLAINT %}
+    <div class="container alert alert-warning global-alert">
+        {% blocktrans %}AstroBin is not delivering you emails because you have marked some of them as spam.{% endblocktrans %}
+        <a href="{% url 'contact_form:contact' %}">
+            {% trans "Contact us to resolve the issue" %}
+        </a>.
+    </div>
+{% endif %}
