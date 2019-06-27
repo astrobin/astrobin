@@ -34,14 +34,19 @@ class PersistentMessagesBackend(BaseBackend):
 
 class EmailBackend(BaseEmailBackend):
     def can_send(self, user, notice_type):
-        can_send = super(EmailBackend, self).can_send(user, notice_type)
         bounces = Bounce.objects.filter(
             hard=True,
             bounce_type="Permanent",
             address=user.email)
         complaints = Complaint.objects.filter(
             address=user.email)
-        return can_send and not bounces.exists() and not complaints.exists()
+        deleted = user.userprofile.deleted is not None
+
+        if deleted or bounces or complaints:
+            return False
+
+        return super(EmailBackend, self).can_send(user, notice_type)
+
 
     def deliver(self, recipient, sender, notice_type, extra_context):
         context = self.default_context()
