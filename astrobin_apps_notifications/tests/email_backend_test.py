@@ -41,5 +41,10 @@ class EmailBackendTest(TransactionTestCase):
 
         complaint.delete()
 
+    def test_can_send_to_deleted_user(self):
+        self.user.userprofile.deleted = datetime.datetime.now()
+        self.assertFalse(EmailBackend(1).can_send(self.user, self.notice_type))
+        self.user.userprofile.deleted = None
+
     def test_can_send(self):
         self.assertTrue(EmailBackend(1).can_send(self.user, self.notice_type))
