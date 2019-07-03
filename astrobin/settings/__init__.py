@@ -11,6 +11,7 @@ include(
 
     # Django settings
     'components/admins.py',
+    'components/ads.py',
     'components/apps.py',
     'components/caches.py',
     'components/db.py',
@@ -51,6 +52,6 @@ include(
     'environments/debug.py',
     'environments/testing.py',
 
-    # Locally overriden settings
+    # Locally overridden settings
     optional('local_settings.py')
 )
