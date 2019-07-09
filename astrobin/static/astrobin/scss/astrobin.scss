@@ -925,6 +925,44 @@ body.full {
   }
 }
 
+.with-ads-sidebar {
+  @media only screen and (min-width: 1180px) and (max-width: 1365px) {
+    .container {
+      margin-left: 10px;
+      margin-right: 0;
+    }
+
+    .navbar-fixed-top .container {
+      margin-left: 40px;
+    }
+  }
+
+  @media only screen and (min-width: 1180px) {
+    .ads-sidebar-left {
+      position: absolute;
+      top: 0;
+      left: -170px;
+      width: 160px;
+      height: 600px;
+    }
+
+    .ads-sidebar-right {
+      position: absolute;
+      top: 0;
+      right: -170px;
+      width: 160px;
+      height: 600px;
+    }
+  }
+
+  @media only screen and (max-width: 1179px) {
+    .ads-sidebar-left,
+    .ads-sidebar-right {
+      display: none;
+    }
+  }
+}
+
 .navbar-fixed-top .container {
   max-height: 40px;
 }
@@ -1211,7 +1249,6 @@ li [class*=" icon-"], .nav li [class*=" icon-"] {
   box-shadow: 0 0 16px rgba(0, 0, 0, 0.5);
   background: #333 url('../images/dark-panel-tile.png');
   @include rounded-corners;
-  overflow: hidden;
 
   &.has-subnav {
     padding-top: 27px;
@@ -1551,7 +1588,6 @@ footer .container {
   -webkit-box-shadow: 0 0 12px black;
   -moz-box-shadow: 0 0 12px black;
   box-shadow: 0 0 12px black;
-  margin: 0 auto;
   padding: 20px 30px 10px 30px;
   max-width: 940px;
   background: #303030 url('../images/darker-panel-tile.png');
@@ -5697,3 +5733,4 @@ table.api-keys {
     padding: 0 4px;
   }
 }
+
