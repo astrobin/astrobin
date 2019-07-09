@@ -240,6 +240,13 @@ def show_ads(user):
     return True
 
 
+@register.simple_tag(takes_context=True)
+def show_adsense_ads(context):
+    return show_ads(context.request.user) and \
+           context["COOKIELAW_ACCEPTED"] and \
+           not context.request.get_host().startswith("localhost")
+
+
 @register.filter
 def valid_subscriptions(user):
     from subscription.models import UserSubscription
