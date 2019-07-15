@@ -1,3 +1,18 @@
+2019-07-14 Salvatore Iovene <salvatore@iovene.com>
+ * v1.41.0
+ * (geoip) Use country_code instead of country, as expected by frontend
+ * (ci) Fix geoip test
+ * (images) Make warning about missing gear on edit page more obvious
+ * (images) Allow revision upload without notification
+ * (email) Do not deliver email to addresses with a complaint
+ * (docs) Fix mistake in README
+ * (iotd) Remove unused variable and format file
+ * (thumbs) Add url parameters to force synchronous retrieval
+ * (general) Add alert message to resolve email complaint issues
+ * (notifications) Do not send emails to users marked as deleted
+ * (ads) Add /ads.txt for adsense
+ * (nginx) Fix location of robots.txt
+
 2019-05-25 Salvatore Iovene <salvatore@iovene.com>
  * v1.40.0
  * (general) Add geoip support to detect user country
