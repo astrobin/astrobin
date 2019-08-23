@@ -414,7 +414,7 @@ class UserTest(TestCase):
         image = Image.objects_including_wip.get(pk = image.pk)
 
         # Check that the IOTD banner is not visible
-        response = self.client.get(reverse('image_detail', args = (image.pk,)))
+        response = self.client.get(reverse('image_detail', args = (image.get_id(),)))
         self.assertNotContains(response, "iotd-ribbon")
 
         # Check that the IOTD badge is not visible

@@ -67,7 +67,7 @@
     <li class="image-navigation pull-right{% if not image_next %} disabled{% endif %}">
         <a
             {% if image_next %}
-                href="{% url 'image_detail' image_next.pk %}"
+                href="{% url 'image_detail' image_next.get_id %}"
                 rel="tooltip"
                 data-placement="bottom"
                 title="{{image_next.title|escape|default:_("(no title)")}}"
@@ -82,7 +82,7 @@
     <li class="image-navigation pull-right{% if not image_prev %} disabled{% endif %}">
         <a
             {% if image_prev %}
-                href="{% url 'image_detail' image_prev.pk %}"
+                href="{% url 'image_detail' image_prev.get_id %}"
                 rel="tooltip"
                 data-placement="bottom"
                 title="{{image_prev.title|escape|default:_("(no title)")}}"

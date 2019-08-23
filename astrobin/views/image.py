@@ -1,18 +1,22 @@
 # Python
-from datetime import datetime
 import re
+from datetime import datetime
 
+# Third party
+from braces.views import (
+    JSONResponseMixin,
+    LoginRequiredMixin,
+)
 # Django
 from django.conf import settings
-from django.contrib.contenttypes.models import ContentType
 from django.contrib import messages
+from django.contrib.contenttypes.models import ContentType
 from django.contrib.staticfiles.templatetags.staticfiles import static
-from django.core.files.images import get_image_dimensions
 from django.core.exceptions import PermissionDenied
+from django.core.files.images import get_image_dimensions
 from django.core.urlresolvers import reverse_lazy
 from django.db.models import Q
 from django.http import Http404, HttpResponseRedirect
-from django.shortcuts import get_object_or_404
 from django.shortcuts import redirect
 from django.utils.encoding import iri_to_uri, smart_unicode
 from django.utils.translation import ugettext as _
@@ -22,15 +26,7 @@ from django.views.generic import (
     DetailView,
     UpdateView,
 )
-
-# Third party
-from actstream.models import Action
-from braces.views import (
-    JSONResponseMixin,
-    LoginRequiredMixin,
-    SuperuserRequiredMixin,
-    UserPassesTestMixin,
-)
+from django.views.generic.detail import SingleObjectMixin
 from silk.profiling.profiler import silk_profile
 from toggleproperties.models import ToggleProperty
 
@@ -57,14 +53,13 @@ from astrobin.models import (
     SOLAR_SYSTEM_SUBJECT_CHOICES,
 )
 from astrobin.stories import add_story
-from astrobin.utils import to_user_timezone
 from astrobin.templatetags.tags import can_like
-
+from astrobin.utils import to_user_timezone
 # AstroBin apps
 from astrobin_apps_groups.forms import GroupSelectForm
 from astrobin_apps_groups.models import Group
+from astrobin_apps_iotd.models import Iotd
 from astrobin_apps_notifications.utils import push_notification
-from astrobin_apps_iotd.models import Iotd, IotdVote
 from astrobin_apps_platesolving.models import Solution
 from nested_comments.models import NestedComment
 from rawdata.forms import (
@@ -74,8 +69,47 @@ from rawdata.forms import (
 from rawdata.models import PrivateSharedFolder
 
 
+class ImageSingleObjectMixin(SingleObjectMixin):
+    def get_object(self, queryset=None):
+        if queryset is None:
+            queryset = self.get_queryset()
+
+        id = self.kwargs.get(self.pk_url_kwarg)
+
+        # hashes will always have at least a letter
+        if id.isdigit():
+            # old style numerical pk
+            image = super(ImageSingleObjectMixin, self).get_object(queryset)
+            if image is not None:
+                # if an image has a hash, we don't allow getting it by pk
+                if image.hash is not None:
+                    raise Http404
+                return image
+
+        # we always allow getting by hash
+        queryset = queryset.filter(hash=id)
+        try:
+            image = queryset.get()
+        except queryset.model.DoesNotExist:
+            raise Http404
+
+        return image
+
+
+class ImageDetailViewBase(ImageSingleObjectMixin, DetailView):
+    pass
+
+
+class ImageUpdateViewBase(ImageSingleObjectMixin, UpdateView):
+    pass
+
+
+class ImageDeleteViewBase(ImageSingleObjectMixin, DeleteView):
+    pass
+
+
 class ImageFlagThumbsView(
-    LoginRequiredMixin, UpdateView):
+    LoginRequiredMixin, ImageUpdateViewBase):
     form_class = ImageFlagThumbsForm
     model = Image
     pk_url_kwarg = 'id'
@@ -87,8 +121,7 @@ class ImageFlagThumbsView(
         return Image.objects_including_wip.filter(user=self.request.user)
 
     def get_success_url(self):
-        image = self.get_object()
-        return reverse_lazy('image_detail', args=(image.pk,))
+        return self.object.get_absolute_url()
 
     def post(self, request, *args, **kwargs):
         image = self.get_object()
@@ -99,7 +132,7 @@ class ImageFlagThumbsView(
         return super(ImageFlagThumbsView, self).post(self.request, args, kwargs)
 
 
-class ImageThumbView(JSONResponseMixin, DetailView):
+class ImageThumbView(JSONResponseMixin, ImageDetailViewBase):
     model = Image
     queryset = Image.objects_including_wip.all()
     pk_url_kwarg = 'id'
@@ -130,7 +163,7 @@ class ImageThumbView(JSONResponseMixin, DetailView):
         })
 
 
-class ImageRawThumbView(DetailView):
+class ImageRawThumbView(ImageDetailViewBase):
     model = Image
     queryset = Image.objects_including_wip.all()
     pk_url_kwarg = 'id'
@@ -163,7 +196,7 @@ class ImageRawThumbView(DetailView):
         return redirect(smart_unicode(url))
 
 
-class ImageDetailView(DetailView):
+class ImageDetailView(ImageDetailViewBase):
     model = Image
     pk_url_kwarg = 'id'
     template_name = 'image/detail.html'
@@ -178,7 +211,7 @@ class ImageDetailView(DetailView):
 
     def dispatch(self, request, *args, **kwargs):
         # Redirect to the correct revision
-        image = get_object_or_404(Image.objects_including_wip, pk=kwargs[self.pk_url_kwarg])
+        image = self.get_object(Image.objects_including_wip)
 
         if image.moderator_decision == 2:
             if not request.user.is_authenticated() or \
@@ -196,7 +229,7 @@ class ImageDetailView(DetailView):
                 if final.count() > 0:
                     url = reverse_lazy(
                         'image_detail',
-                        args=(image.pk, final[0].label,))
+                        args=(image.get_id(), final[0].label,))
                     if 'ctx' in request.GET:
                         url += '?ctx=%s' % request.GET.get('ctx')
                     return redirect(url)
@@ -384,7 +417,7 @@ class ImageDetailView(DetailView):
                  u'\n'.join("%s %s" % (
                      "<a href=\"%s\">%s</a>:" % (f[1]['filter_url'], f[1]['filter']) if f[1]['filter'] else '',
                      "%s %s %s %s %s" % (
-                     f[1]['integration'], f[1]['iso'], f[1]['gain'], f[1]['sensor_cooling'], f[1]['binning']),
+                         f[1]['integration'], f[1]['iso'], f[1]['gain'], f[1]['sensor_cooling'], f[1]['binning']),
                  ) for f in frames_list)),
                 (_('Integration'), "%.1f %s" % (dsa_data['integration'], _("hours"))),
                 (_('Darks'),
@@ -668,7 +701,7 @@ class ImageDetailView(DetailView):
         return response_dict
 
 
-class ImageFullView(DetailView):
+class ImageFullView(ImageDetailView):
     model = Image
     pk_url_kwarg = 'id'
     template_name = 'image/full.html'
@@ -680,7 +713,7 @@ class ImageFullView(DetailView):
     # TODO: unify this with ImageDetailView.dispatch
     def dispatch(self, request, *args, **kwargs):
         # Redirect to the correct revision
-        image = get_object_or_404(Image.objects_including_wip, pk=kwargs[self.pk_url_kwarg])
+        image = self.get_object()
 
         if image.moderator_decision == 2:
             raise Http404
@@ -695,7 +728,7 @@ class ImageFullView(DetailView):
                 if final.count() > 0:
                     url = reverse_lazy(
                         'image_full',
-                        args=(image.pk, final[0].label,))
+                        args=(image.get_id(), final[0].label,))
                     if 'ctx' in request.GET:
                         url += '?ctx=%s' % request.GET.get('ctx')
                     return redirect(url)
@@ -733,7 +766,7 @@ class ImageFullView(DetailView):
         return response_dict
 
 
-class ImageDeleteView(LoginRequiredMixin, DeleteView):
+class ImageDeleteView(LoginRequiredMixin, ImageDeleteViewBase):
     model = Image
     pk_url_kwarg = 'id'
 
@@ -743,10 +776,7 @@ class ImageDeleteView(LoginRequiredMixin, DeleteView):
     # I would like to use braces' UserPassesTest for this, but I can't
     # get_object from there because the view is not dispatched yet.
     def dispatch(self, request, *args, **kwargs):
-        try:
-            image = Image.objects_including_wip.get(pk=kwargs[self.pk_url_kwarg])
-        except Image.DoesNotExist:
-            raise Http404
+        image = self.get_object()
 
         if request.user.is_authenticated() and request.user != image.user and not request.user.is_superuser:
             raise PermissionDenied
@@ -784,7 +814,7 @@ class ImageRevisionDeleteView(LoginRequiredMixin, DeleteView):
         return super(ImageRevisionDeleteView, self).dispatch(request, *args, **kwargs)
 
     def get_success_url(self):
-        return reverse_lazy('image_detail', args=(self.image.pk,))
+        return reverse_lazy('image_detail', args=(self.image.get_id(),))
 
     def post(self, *args, **kwargs):
         revision = self.get_object()
@@ -800,28 +830,12 @@ class ImageRevisionDeleteView(LoginRequiredMixin, DeleteView):
         return super(ImageRevisionDeleteView, self).post(args, kwargs)
 
 
-class ImageDeleteOriginalView(LoginRequiredMixin, DeleteView):
+class ImageDeleteOriginalView(ImageDeleteView):
     model = Image
     pk_url_kwarg = 'id'
 
-    def get_queryset(self):
-        return Image.objects_including_wip.all()
-
-    # I would like to use braces' UserPassesTest for this, but I can't
-    # get_object from there because the view is not dispatched yet.
-    def dispatch(self, request, *args, **kwargs):
-        try:
-            image = Image.objects_including_wip.get(pk=kwargs[self.pk_url_kwarg])
-        except Image.DoesNotExist:
-            raise Http404
-
-        if request.user.is_authenticated() and request.user != image.user:
-            raise PermissionDenied
-
-        return super(ImageDeleteOriginalView, self).dispatch(request, *args, **kwargs)
-
     def get_success_url(self):
-        return reverse_lazy('image_detail', args=(self.image.pk,))
+        return self.image.get_absolute_url()
 
     def post(self, *args, **kwargs):
         image = self.get_object()
@@ -871,7 +885,7 @@ class ImageDeleteOriginalView(LoginRequiredMixin, DeleteView):
         return HttpResponseRedirect(self.get_success_url())
 
 
-class ImageDemoteView(LoginRequiredMixin, UpdateView):
+class ImageDemoteView(LoginRequiredMixin, ImageUpdateViewBase):
     form_class = ImageDemoteForm
     model = Image
     pk_url_kwarg = 'id'
@@ -881,13 +895,10 @@ class ImageDemoteView(LoginRequiredMixin, UpdateView):
         return self.model.objects_including_wip.all()
 
     def get_success_url(self):
-        return reverse_lazy('image_detail', args=(self.get_object().pk,))
+        return self.object.get_absolute_url()
 
     def dispatch(self, request, *args, **kwargs):
-        try:
-            image = self.model.objects_including_wip.get(pk=kwargs[self.pk_url_kwarg])
-        except Image.DoesNotExist:
-            raise Http404
+        image = self.get_object()
 
         if request.user.is_authenticated() and request.user != image.user and not request.user.is_superuser:
             raise PermissionDenied
@@ -904,7 +915,7 @@ class ImageDemoteView(LoginRequiredMixin, UpdateView):
         return super(ImageDemoteView, self).post(request, args, kwargs)
 
 
-class ImagePromoteView(LoginRequiredMixin, UpdateView):
+class ImagePromoteView(LoginRequiredMixin, ImageUpdateViewBase):
     form_class = ImagePromoteForm
     model = Image
     pk_url_kwarg = 'id'
@@ -914,13 +925,10 @@ class ImagePromoteView(LoginRequiredMixin, UpdateView):
         return self.model.objects_including_wip.all()
 
     def get_success_url(self):
-        return reverse_lazy('image_detail', args=(self.get_object().pk,))
+        return self.object.get_absolute_url()
 
     def dispatch(self, request, *args, **kwargs):
-        try:
-            image = self.model.objects_including_wip.get(pk=kwargs[self.pk_url_kwarg])
-        except Image.DoesNotExist:
-            raise Http404
+        image = self.get_object()
 
         if request.user.is_authenticated() and request.user != image.user and not request.user.is_superuser:
             raise PermissionDenied
@@ -954,7 +962,7 @@ class ImagePromoteView(LoginRequiredMixin, UpdateView):
         return super(ImagePromoteView, self).post(request, args, kwargs)
 
 
-class ImageEditBaseView(LoginRequiredMixin, UpdateView):
+class   ImageEditBaseView(LoginRequiredMixin, ImageUpdateViewBase):
     model = Image
     pk_url_kwarg = 'id'
     template_name_suffix = ''
@@ -964,13 +972,10 @@ class ImageEditBaseView(LoginRequiredMixin, UpdateView):
         return self.model.objects_including_wip.all()
 
     def get_success_url(self):
-        return reverse_lazy('image_detail', args=(self.get_object().pk,))
+        return self.object.get_absolute_url()
 
     def dispatch(self, request, *args, **kwargs):
-        try:
-            image = self.model.objects_including_wip.get(pk=kwargs[self.pk_url_kwarg])
-        except Image.DoesNotExist:
-            raise Http404
+        image = self.get_object()
 
         if request.user.is_authenticated() and request.user != image.user and not request.user.is_superuser:
             raise PermissionDenied
@@ -995,8 +1000,8 @@ class ImageEditBasicView(ImageEditBaseView):
     def get_success_url(self):
         image = self.get_object()
         if 'submit_gear' in self.request.POST:
-            return reverse_lazy('image_edit_gear', kwargs={'id': image.pk})
-        return reverse_lazy('image_detail', kwargs={'id': image.pk})
+            return reverse_lazy('image_edit_gear', kwargs={'id': image.get_id()})
+        return image.get_absolute_url()
 
 
 class ImageEditGearView(ImageEditBaseView):
@@ -1014,10 +1019,10 @@ class ImageEditGearView(ImageEditBaseView):
         return context
 
     def get_success_url(self):
-        image = self.get_object()
+        image = self.object
         if 'submit_acquisition' in self.request.POST:
-            return reverse_lazy('image_edit_acquisition', kwargs={'id': image.pk})
-        return reverse_lazy('image_detail', kwargs={'id': image.pk})
+            return reverse_lazy('image_edit_acquisition', kwargs={'id': image.get_id()})
+        return image.get_absolute_url()
 
     def get_form(self, form_class):
         image = self.get_object()
@@ -1036,7 +1041,7 @@ class ImageEditRevisionView(LoginRequiredMixin, UpdateView):
     form_class = ImageEditRevisionForm
 
     def get_success_url(self):
-        return reverse_lazy('image_detail', args=(self.get_object().image.pk,))
+        return reverse_lazy('image_detail', args=(self.object.image.get_id(),))
 
     def dispatch(self, request, *args, **kwargs):
         try:

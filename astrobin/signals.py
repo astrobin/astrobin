@@ -437,9 +437,6 @@ m2m_changed.connect(rawdata_privatesharedfolder_user_added, sender=PrivateShared
 
 
 def solution_post_save(sender, instance, created, **kwargs):
-    notification = None
-    user = None
-
     ct = instance.content_type
 
     try:
