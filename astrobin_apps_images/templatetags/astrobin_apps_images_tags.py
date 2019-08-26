@@ -139,7 +139,7 @@ def astrobin_image(context, image, alias, **kwargs):
             (w, h) = get_image_dimensions(image_revision.image_file.file)
             image_revision.w = w
             image_revision.h = h
-            image_revision.save()
+            image_revision.save(keep_deleted=True)
         except (IOError, ValueError):
             w = size[0]
             h = size[1] if size[1] > 0 else w

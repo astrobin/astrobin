@@ -64,7 +64,7 @@ def user_created(sender, user, request, **kwargs):
         changed = True
 
     if changed:
-        profile.save()
+        profile.save(keep_deleted=True)
 
 
 user_registered.connect(user_created)

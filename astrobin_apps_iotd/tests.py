@@ -57,7 +57,7 @@ class IotdTest(TestCase):
         # Approve the image and set a title
         self.image.moderator_decision = 1
         self.image.title = "IOTD TEST IMAGE"
-        self.image.save()
+        self.image.save(keep_deleted=True)
 
     def tearDown(self):
         self.submitters.delete()
@@ -91,7 +91,7 @@ class IotdTest(TestCase):
         self.image.published =\
             datetime.now() -\
             timedelta(settings.IOTD_SUBMISSION_WINDOW_DAYS + 1)
-        self.image.save()
+        self.image.save(keep_deleted=True)
         with self.assertRaisesRegexp(ValidationError, "published more than"):
             IotdSubmission.objects.create(
                 submitter = self.submitter_1,
@@ -100,43 +100,43 @@ class IotdTest(TestCase):
         # Image must not be WIP
         self.image.published = datetime.now()
         self.image.is_wip = True
-        self.image.save()
+        self.image.save(keep_deleted=True)
         with self.assertRaisesRegexp(ValidationError, "staging area"):
             IotdSubmission.objects.create(
                 submitter = self.submitter_1,
                 image = self.image)
         self.image.is_wip = False
-        self.image.save()
+        self.image.save(keep_deleted=True)
 
         # Image owner must not be excluded from competitions
         self.image.user.userprofile.exclude_from_competitions = True
-        self.image.user.userprofile.save()
+        self.image.user.userprofile.save(keep_deleted=True)
         with self.assertRaisesRegexp(ValidationError, "excluded from competitions"):
             IotdSubmission.objects.create(
                 submitter = self.submitter_1,
                 image = self.image)
         self.image.user.userprofile.exclude_from_competitions = False
-        self.image.user.userprofile.save()
+        self.image.user.userprofile.save(keep_deleted=True)
 
         # Cannot submit own image
         self.image.user = self.submitter_1
-        self.image.save()
+        self.image.save(keep_deleted=True)
         with self.assertRaisesRegexp(ValidationError, "your own image"):
             IotdSubmission.objects.create(
                 submitter = self.submitter_1,
                 image = self.image)
         self.image.user = self.user
-        self.image.save()
+        self.image.save(keep_deleted=True)
 
         # Cannot submit an image authored by a judge
         self.image.user = self.judge_1
-        self.image.save()
+        self.image.save(keep_deleted=True)
         with self.assertRaisesRegexp(ValidationError, "a judge's image"):
             IotdSubmission.objects.create(
                 submitter = self.submitter_1,
                 image = self.image)
         self.image.user = self.user
-        self.image.save()
+        self.image.save(keep_deleted=True)
 
         # All OK
         submission = IotdSubmission.objects.create(
@@ -204,43 +204,43 @@ class IotdTest(TestCase):
 
         # Image must not be WIP
         self.image.is_wip = True
-        self.image.save()
+        self.image.save(keep_deleted=True)
         with self.assertRaisesRegexp(ValidationError, "staging area"):
             IotdVote.objects.create(
                 reviewer = self.reviewer_1,
                 image = submission_1.image)
         self.image.is_wip = False
-        self.image.save()
+        self.image.save(keep_deleted=True)
 
         # Image owner must not be excluded from competitions
         self.image.user.userprofile.exclude_from_competitions = True
-        self.image.user.userprofile.save()
+        self.image.user.userprofile.save(keep_deleted=True)
         with self.assertRaisesRegexp(ValidationError, "excluded from competitions"):
             IotdSubmission.objects.create(
                 submitter = self.submitter_1,
                 image = self.image)
         self.image.user.userprofile.exclude_from_competitions = False
-        self.image.user.userprofile.save()
+        self.image.user.userprofile.save(keep_deleted=True)
 
         # Cannot vote for own image
         self.image.user = self.reviewer_1
-        self.image.save()
+        self.image.save(keep_deleted=True)
         with self.assertRaisesRegexp(ValidationError, "your own image"):
             IotdVote.objects.create(
                 reviewer = self.reviewer_1,
                 image = submission_1.image)
         self.image.user = self.user
-        self.image.save()
+        self.image.save(keep_deleted=True)
 
         # Cannot vote for an image authored by a judge
         self.image.user = self.judge_1
-        self.image.save()
+        self.image.save(keep_deleted=True)
         with self.assertRaisesRegexp(ValidationError, "a judge's image"):
             IotdVote.objects.create(
                 reviewer = self.reviewer_1,
                 image = self.image)
         self.image.user = self.user
-        self.image.save()
+        self.image.save(keep_deleted=True)
 
         # Cannot vote for own submission
         self.submitters.user_set.add(self.reviewer_1)
@@ -372,43 +372,43 @@ class IotdTest(TestCase):
 
         # Image must not be WIP
         self.image.is_wip = True
-        self.image.save()
+        self.image.save(keep_deleted=True)
         with self.assertRaisesRegexp(ValidationError, "staging area"):
             Iotd.objects.create(
                 judge = self.judge_1,
                 image = self.image)
         self.image.is_wip = False
-        self.image.save()
+        self.image.save(keep_deleted=True)
 
         # Image owner must not be excluded from competitions
         self.image.user.userprofile.exclude_from_competitions = True
-        self.image.user.userprofile.save()
+        self.image.user.userprofile.save(keep_deleted=True)
         with self.assertRaisesRegexp(ValidationError, "excluded from competitions"):
             IotdSubmission.objects.create(
                 submitter = self.submitter_1,
                 image = self.image)
         self.image.user.userprofile.exclude_from_competitions = False
-        self.image.user.userprofile.save()
+        self.image.user.userprofile.save(keep_deleted=True)
 
         # Cannot elect own image
         self.image.user = self.judge_1
-        self.image.save()
+        self.image.save(keep_deleted=True)
         with self.assertRaisesRegexp(ValidationError, "your own image"):
             Iotd.objects.create(
                 judge = self.judge_1,
                 image = self.image)
         self.image.user = self.user
-        self.image.save()
+        self.image.save(keep_deleted=True)
 
         # Cannot elect an image authored by a judge
         self.image.user = self.judge_2
-        self.image.save()
+        self.image.save(keep_deleted=True)
         with self.assertRaisesRegexp(ValidationError, "a judge's image"):
             Iotd.objects.create(
                 judge = self.judge_1,
                 image = self.image)
         self.image.user = self.user
-        self.image.save()
+        self.image.save(keep_deleted=True)
 
         # Cannot elect own submission
         self.submitters.user_set.add(self.judge_1)
@@ -514,17 +514,17 @@ class IotdTest(TestCase):
 
         # Check for may-not-select class
         self.image.user = self.submitter_1
-        self.image.save()
+        self.image.save(keep_deleted=True)
         response = self.client.get(url)
         bs = BS(response.content)
         self.assertEqual(len(bs.select('.iotd-queue-item.may-not-select')), 1)
         self.submitters.user_set.remove(self.reviewer_1)
         self.image.user = self.user
-        self.image.save()
+        self.image.save(keep_deleted=True)
 
         # Check that non-moderated (or spam) images are not rendered
         self.image.moderator_decision = 0
-        self.image.save()
+        self.image.save(keep_deleted=True)
         submission = IotdSubmission.objects.create(
             submitter = self.submitter_1,
             image = self.image)
@@ -533,7 +533,7 @@ class IotdTest(TestCase):
         submission.delete()
 
         self.image.moderator_decision = 2
-        self.image.save()
+        self.image.save(keep_deleted=True)
         submission = IotdSubmission.objects.create(
             submitter = self.submitter_1,
             image = self.image)
@@ -542,7 +542,7 @@ class IotdTest(TestCase):
         submission.delete()
 
         self.image.moderator_decision = 1
-        self.image.save()
+        self.image.save(keep_deleted=True)
 
         # Check that current or past IOTD is not rendered
         submission = IotdSubmission.objects.create(
@@ -566,11 +566,11 @@ class IotdTest(TestCase):
 
         # Images by judges are now shown here
         self.image.user = self.judge_1
-        self.image.save()
+        self.image.save(keep_deleted=True)
         response = self.client.get(url)
         self.assertNotContains(response, 'data-id="%s"' % self.image.pk)
         self.image.user = self.user
-        self.image.save()
+        self.image.save(keep_deleted=True)
 
         submission.delete()
         vote.delete()
@@ -682,11 +682,11 @@ class IotdTest(TestCase):
 
         # Images by judges are now shown here
         self.image.user = self.judge_1
-        self.image.save()
+        self.image.save(keep_deleted=True)
         response = self.client.get(url)
         self.assertNotContains(response, 'data-id="%s"' % self.image.pk)
         self.image.user = self.user
-        self.image.save()
+        self.image.save(keep_deleted=True)
 
         submission_1.delete()
         vote.delete()
@@ -799,11 +799,11 @@ class IotdTest(TestCase):
 
         # Images by judges are now shown here
         self.image.user = self.judge_1
-        self.image.save()
+        self.image.save(keep_deleted=True)
         response = self.client.get(url)
         self.assertNotContains(response, 'data-id="%s"' % self.image.pk)
         self.image.user = self.user
-        self.image.save()
+        self.image.save(keep_deleted=True)
 
         submission_1.delete()
         vote_1.delete()
