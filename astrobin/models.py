@@ -6,7 +6,7 @@ import operator
 import os
 import unicodedata
 import uuid
-# Python
+
 from datetime import date
 from datetime import datetime
 
@@ -772,6 +772,13 @@ class Image(HasSolutionMixin, SafeDeleteModel):
         'filters': Filter,
         'accessories': Accessory,
     }
+
+    hash = models.CharField(
+        max_length=6,
+        default=None,
+        null=True,
+        unique=True
+    )
 
     title = models.CharField(
         max_length=128,
