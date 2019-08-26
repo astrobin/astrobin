@@ -224,7 +224,7 @@ class IotdToggleJudgementAjaxView(
 
 class IotdArchiveView(ListView):
     model = Iotd
-    queryset = Iotd.objects.filter(date__lte=datetime.now().date())
+    queryset = Iotd.objects.filter(date__lte=datetime.now().date(), image__deleted = None)
     template_name = 'astrobin_apps_iotd/iotd_archive.html'
     paginate_by = 30
 
