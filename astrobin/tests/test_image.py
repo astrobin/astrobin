@@ -164,7 +164,7 @@ class ImageTest(TestCase):
 
         # Test failure due to full use of Free membership
         self.user.userprofile.premium_counter = settings.PREMIUM_MAX_IMAGES_FREE
-        self.user.userprofile.save()
+        self.user.userprofile.save(keep_deleted=True)
         response = self._do_upload('astrobin/fixtures/test.jpg')
         self.assertRedirects(
             response,
@@ -173,7 +173,7 @@ class ImageTest(TestCase):
             target_status_code=200)
         self._assert_message(response, "error unread", "Please upgrade")
         self.user.userprofile.premium_counter = 0
-        self.user.userprofile.save()
+        self.user.userprofile.save(keep_deleted=True)
 
         # Test failure due to read-only mode
         with self.settings(READONLY_MODE=True):
@@ -414,13 +414,13 @@ class ImageTest(TestCase):
         # Revision description displayed
         desc = "Test revision description"
         revision.description = desc
-        revision.save()
+        revision.save(keep_deleted=True)
         response = self.client.get(reverse('image_detail', kwargs={'id': image.get_id(), 'r': 'B'}))
         self.assertContains(response, desc)
 
         # If description is set to empty text, then it's gone
         revision.description = ''
-        revision.save()
+        revision.save(keep_deleted=True)
         response = self.client.get(reverse('image_detail', kwargs={'id': image.get_id(), 'r': 'B'}))
         self.assertNotContains(response, desc)
         self.assertNotContains(response, '<h3>%s</h3>' % revision.label, html=True)
@@ -520,7 +520,7 @@ class ImageTest(TestCase):
 
         # Spam images should be 404
         image.moderator_decision = 2
-        image.save()
+        image.save(keep_deleted=True)
         response = self.client.get(reverse('image_detail', kwargs={'id': image.get_id()}))
         self.assertEqual(response.status_code, 404)
 
@@ -619,7 +619,7 @@ class ImageTest(TestCase):
         # Set the watermark to some non ASCII symbol
         image.watermark_text = "©"
         image.watermark = True
-        image.save()
+        image.save(keep_deleted=True)
 
         image = Image.objects.get(pk=image.pk)
         response = self.client.get(reverse('image_rawthumb', kwargs=opts))
@@ -978,7 +978,7 @@ class ImageTest(TestCase):
         self._do_upload('astrobin/fixtures/test.jpg')
         image = self._get_last_image()
         image.title = "Test title"
-        image.save()
+        image.save(keep_deleted=True)
         self.client.logout()
 
         # GET
@@ -1071,7 +1071,7 @@ class ImageTest(TestCase):
         self._do_upload('astrobin/fixtures/test.jpg')
         image = self._get_last_image()
         image.title = "Test title"
-        image.save()
+        image.save(keep_deleted=True)
         self.client.logout()
 
         # GET
@@ -1106,11 +1106,11 @@ class ImageTest(TestCase):
         self._do_upload('astrobin/fixtures/test.jpg')
         other_1 = self._get_last_image();
         other_1.title = "Other 1";
-        other_1.save()
+        other_1.save(keep_deleted=True)
         self._do_upload('astrobin/fixtures/test.jpg', wip=True);
         other_2 = self._get_last_image();
         other_2.title = "Other 2";
-        other_2.save()
+        other_2.save(keep_deleted=True)
         response = self.client.get(get_url((image.get_id(),)))
         other_images = Image.objects_including_wip \
             .filter(user=self.user) \
@@ -1232,7 +1232,7 @@ class ImageTest(TestCase):
         self._do_upload('astrobin/fixtures/test.jpg')
         image = self._get_last_image()
         image.title = "Test title"
-        image.save()
+        image.save(keep_deleted=True)
         self.client.logout()
 
         # GET with wrong user
@@ -1423,7 +1423,7 @@ class ImageTest(TestCase):
         self._do_upload('astrobin/fixtures/test.jpg')
         image = self._get_last_image()
         image.title = "Test title"
-        image.save()
+        image.save(keep_deleted=True)
         self.client.logout()
 
         # GET with wrong user
@@ -1479,7 +1479,7 @@ class ImageTest(TestCase):
         self._do_upload('astrobin/fixtures/test.jpg')
         image = self._get_last_image()
         image.title = "Test title"
-        image.save()
+        image.save(keep_deleted=True)
         self._do_upload_revision(image, 'astrobin/fixtures/test.jpg', "Test revision description")
         revision = self._get_last_image_revision()
         self.client.logout()
@@ -1545,7 +1545,7 @@ class ImageTest(TestCase):
         # Test deleting WIP image
         self.client.login(username='test', password='password')
         image.is_wip = True
-        image.save()
+        image.save(keep_deleted=True)
         response = self.client.post(post_url((image.get_id(),)))
         self.assertRedirects(
             response,
@@ -1653,9 +1653,9 @@ class ImageTest(TestCase):
         revision = self._get_last_image_revision()
         image = Image.objects.get(pk=image.pk)
         image.is_final = True
-        image.save()
+        image.save(keep_deleted=True)
         revision.is_final = False
-        revision.save()
+        revision.save(keep_deleted=True)
 
         response = self.client.post(post_url((image.get_id(),)))
         self.assertRedirects(
@@ -1718,7 +1718,7 @@ class ImageTest(TestCase):
 
         # Test that previously published images don't trigger a notification
         wip_image.is_wip = True
-        wip_image.save()
+        wip_image.save(keep_deleted=True)
         response = self.client.post(post_url((wip_image.get_id(),)))
         wip_image = Image.objects.get(pk=wip_image.pk)
         self.assertFalse(wip_image.is_wip)
@@ -1740,7 +1740,7 @@ class ImageTest(TestCase):
         # this image public.
         published = image.published
         image.is_wip = True
-        image.save()
+        image.save(keep_deleted=True)
         response = self.client.post(post_url((image.get_id(),)))
         image = Image.objects.get(pk=image.pk)
         self.assertEqual(published, image.published)
@@ -1789,7 +1789,7 @@ class ImageTest(TestCase):
         self._do_upload('astrobin/fixtures/test.jpg')
         image = self._get_last_image()
         image.title = "TEST IMAGE"
-        image.save()
+        image.save(keep_deleted=True)
 
         # As the test user does not have a high enough AstroBin Index, the
         # iamge should be in the moderation queue.
@@ -1815,7 +1815,7 @@ class ImageTest(TestCase):
         self._do_upload('astrobin/fixtures/test.jpg')
         image = self._get_last_image()
         image.title = "TEST IMAGE"
-        image.save()
+        image.save(keep_deleted=True)
 
         updated = image.updated
 
@@ -1842,7 +1842,7 @@ class ImageTest(TestCase):
         self._do_upload('astrobin/fixtures/test.jpg')
         image = self._get_last_image()
         image.title = "TEST IMAGE"
-        image.save()
+        image.save(keep_deleted=True)
 
         updated = image.updated
 
@@ -1871,7 +1871,7 @@ class ImageTest(TestCase):
         self._do_upload('astrobin/fixtures/test.jpg')
         image = self._get_last_image()
         image.title = "TEST IMAGE"
-        image.save()
+        image.save(keep_deleted=True)
 
         updated = image.updated
 

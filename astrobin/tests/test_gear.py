@@ -121,12 +121,12 @@ class GearTest(TestCase):
         # Assign slave to profile
         u = User.objects.create_user('test', 'test@test.com', 'password')
         u.userprofile.filters.add(g2)
-        u.userprofile.save()
+        u.userprofile.save(keep_deleted=True)
 
         # Assign slave to image
         i, created  = Image.objects.get_or_create(user = u)
         i.filters.add(g2)
-        i.save()
+        i.save(keep_deleted=True)
 
         # Check DSA too
         dsa, created = DeepSky_Acquisition.objects.get_or_create(

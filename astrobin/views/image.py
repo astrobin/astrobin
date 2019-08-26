@@ -27,6 +27,7 @@ from django.views.generic import (
     UpdateView,
 )
 from django.views.generic.detail import SingleObjectMixin
+
 from silk.profiling.profiler import silk_profile
 from toggleproperties.models import ToggleProperty
 
@@ -822,7 +823,7 @@ class ImageRevisionDeleteView(LoginRequiredMixin, DeleteView):
 
         if revision.is_final:
             image.is_final = True
-            image.save()
+            image.save(keep_deleted=True)
 
         revision.thumbnail_invalidate()
         messages.success(self.request, _("Revision deleted."))
@@ -867,7 +868,7 @@ class ImageDeleteOriginalView(ImageDeleteView):
         if image.solution:
             image.solution.delete()
 
-        image.save()
+        image.save(keep_deleted=True)
 
         if final.solution:
             # Get the solution this way, I don't know why it wouldn't work otherwise
@@ -909,7 +910,7 @@ class ImageDemoteView(LoginRequiredMixin, ImageUpdateViewBase):
         image = self.get_object()
         if not image.is_wip:
             image.is_wip = True
-            image.save()
+            image.save(keep_deleted=True)
             messages.success(request, _("Image moved to the staging area."))
 
         return super(ImageDemoteView, self).post(request, args, kwargs)
@@ -940,7 +941,7 @@ class ImagePromoteView(LoginRequiredMixin, ImageUpdateViewBase):
         if image.is_wip:
             previously_published = image.published
             image.is_wip = False
-            image.save()
+            image.save(keep_deleted=True)
 
             if not previously_published:
                 followers = [

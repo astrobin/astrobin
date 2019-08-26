@@ -79,10 +79,10 @@ def image_post_save(sender, instance, created, **kwargs):
         if user_scores_index >= 1.00 or is_lite(instance.user) or is_premium(instance.user):
             instance.moderated_when = datetime.date.today()
             instance.moderator_decision = 1
-            instance.save()
+            instance.save(keep_deleted=True)
 
         instance.user.userprofile.premium_counter += 1
-        instance.user.userprofile.save()
+        instance.user.userprofile.save(keep_deleted=True)
         profile_saved = True
 
         if not instance.is_wip:
@@ -103,7 +103,7 @@ def image_post_save(sender, instance, created, **kwargs):
     if not profile_saved:
         # Trigger update of auto_add fields
         try:
-            instance.user.userprofile.save()
+            instance.user.userprofile.save(keep_deleted=True)
         except UserProfile.DoesNotExist:
             pass
 
@@ -118,7 +118,7 @@ def image_post_delete(sender, instance, **kwargs):
     def decrease_counter(user):
         user.userprofile.premium_counter -= 1
         with transaction.atomic():
-            user.userprofile.save()
+            user.userprofile.save(keep_deleted=True)
 
     try:
         if is_free(instance.user):
@@ -241,7 +241,7 @@ def nested_comment_post_save(sender, instance, created, **kwargs):
             # This will trigger the auto_now fields in the content_object
             # We do it only if created, because the content_object needs to
             # only be updated if the number of comments changes.
-            instance.content_object.save()
+            instance.content_object.save(keep_deleted=True)
 
 
 post_save.connect(nested_comment_post_save, sender=NestedComment)
@@ -251,7 +251,7 @@ def toggleproperty_post_delete(sender, instance, **kwargs):
     if hasattr(instance.content_object, "updated"):
         # This will trigger the auto_now fields in the content_object
         try:
-            instance.content_object.save()
+            instance.content_object.save(keep_deleted=True)
         except instance.content_object.DoesNotExist:
             pass
 
@@ -262,7 +262,7 @@ post_delete.connect(toggleproperty_post_delete, sender=ToggleProperty)
 def toggleproperty_post_save(sender, instance, created, **kwargs):
     if hasattr(instance.content_object, "updated"):
         # This will trigger the auto_now fields in the content_object
-        instance.content_object.save()
+        instance.content_object.save(keep_deleted=True)
 
     if created:
         if instance.property_type in ("like", "bookmark"):
@@ -487,7 +487,7 @@ def subscription_subscribed(sender, **kwargs):
         user = kwargs.get("user")
         profile = user.userprofile
         profile.premium_counter = 0
-        profile.save()
+        profile.save(keep_deleted=True)
 
 
 subscribed.connect(subscription_subscribed)

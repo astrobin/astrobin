@@ -39,7 +39,7 @@ class ExploreTest(TestCase):
         self.image.moderator_decision = 1
         self.image.title = "IOTD TEST IMAGE"
         self.image.data_source = "BACKYARD"
-        self.image.save()
+        self.image.save(keep_deleted=True)
 
     def tearDown(self):
         self.submitters.delete()
@@ -67,35 +67,35 @@ class ExploreTest(TestCase):
         self.assertNotContains(response, self.image.title)
 
         self.image.data_source = 'TRAVELLER'
-        self.image.save()
+        self.image.save(keep_deleted=True)
         response = self.client.get(reverse_lazy('top_picks') + '?source=traveller')
         self.assertContains(response, self.image.title)
         response = self.client.get(reverse_lazy('top_picks') + '?source=backyard')
         self.assertNotContains(response, self.image.title)
 
         self.image.data_source = 'OWN_REMOTE'
-        self.image.save()
+        self.image.save(keep_deleted=True)
         response = self.client.get(reverse_lazy('top_picks') + '?source=own-remote')
         self.assertContains(response, self.image.title)
         response = self.client.get(reverse_lazy('top_picks') + '?source=traveller')
         self.assertNotContains(response, self.image.title)
 
         self.image.data_source = 'AMATEUR_HOSTING'
-        self.image.save()
+        self.image.save(keep_deleted=True)
         response = self.client.get(reverse_lazy('top_picks') + '?source=amateur-hosting')
         self.assertContains(response, self.image.title)
         response = self.client.get(reverse_lazy('top_picks') + '?source=own-remote')
         self.assertNotContains(response, self.image.title)
 
         self.image.data_source = 'PUBLIC_AMATEUR_DATA'
-        self.image.save()
+        self.image.save(keep_deleted=True)
         response = self.client.get(reverse_lazy('top_picks') + '?source=public-amateur-data')
         self.assertContains(response, self.image.title)
         response = self.client.get(reverse_lazy('top_picks') + '?source=amateur-hosting')
         self.assertNotContains(response, self.image.title)
 
         self.image.data_source = 'PRO_DATA'
-        self.image.save()
+        self.image.save(keep_deleted=True)
         response = self.client.get(reverse_lazy('top_picks') + '?source=pro-data')
         self.assertContains(response, self.image.title)
         response = self.client.get(reverse_lazy('top_picks') + '?source=public-amateur-data')
@@ -115,28 +115,28 @@ class ExploreTest(TestCase):
         self.assertNotContains(response, self.image.title)
 
         self.image.acquisition_type = 'EAA'
-        self.image.save()
+        self.image.save(keep_deleted=True)
         response = self.client.get(reverse_lazy('top_picks') + '?acquisition_type=eaa')
         self.assertContains(response, self.image.title)
         response = self.client.get(reverse_lazy('top_picks') + '?acquisition_type=traditional')
         self.assertNotContains(response, self.image.title)
 
         self.image.acquisition_type = 'LUCKY'
-        self.image.save()
+        self.image.save(keep_deleted=True)
         response = self.client.get(reverse_lazy('top_picks') + '?acquisition_type=lucky')
         self.assertContains(response, self.image.title)
         response = self.client.get(reverse_lazy('top_picks') + '?acquisition_type=traditional')
         self.assertNotContains(response, self.image.title)
 
         self.image.acquisition_type = 'DRAWING'
-        self.image.save()
+        self.image.save(keep_deleted=True)
         response = self.client.get(reverse_lazy('top_picks') + '?acquisition_type=drawing')
         self.assertContains(response, self.image.title)
         response = self.client.get(reverse_lazy('top_picks') + '?acquisition_type=traditional')
         self.assertNotContains(response, self.image.title)
 
         self.image.acquisition_type = 'OTHER'
-        self.image.save()
+        self.image.save(keep_deleted=True)
         response = self.client.get(reverse_lazy('top_picks') + '?acquisition_type=other')
         self.assertContains(response, self.image.title)
         response = self.client.get(reverse_lazy('top_picks') + '?acquisition_type=traditional')
