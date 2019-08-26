@@ -9,7 +9,7 @@
 {% block breadcrumbs %}
     {{ block.super }}
     {% breadcrumb 'Image' None %}
-    {% breadcrumb image.title|escape|default:_("(no title)") 'image_detail' image.pk %}
+    {% breadcrumb image.title|escape|default:_("(no title)") 'image_detail' image.get_id %}
     {% breadcrumb 'License' None %}
 {% endblock %}
 
@@ -23,7 +23,7 @@
 
     <form class="form-horizontal" action="{% url 'image_edit_save_license' %}" method="post">{% csrf_token %}
         {{form|as_bootstrap}}
-        <input type="hidden" name="image_id" value="{{image.id}}"/>
+        <input type="hidden" name="image_id" value="{{image.get_id}}"/>
         <div class="form-actions">
             <input class="btn btn-primary btn-block-mobile" type="submit" value="{% trans "Save" %} &rarr;" />
             <a class="btn btn-block-mobile" href="{% url 'image_detail' image.id %}">{% trans "Cancel" %}</a>

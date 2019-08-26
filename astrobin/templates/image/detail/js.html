@@ -47,21 +47,21 @@ $(document).ready(function() {
 
         /* Make thumbnail url */
         var thumbnail_alias = 'gallery';
-        if (image_mode == 1)
+        if (image_mode === 1)
             thumbnail_alias = 'gallery_inverted';
-        var thumbnail_url = '{{SHARE_PATH}}/{{image.id}}/{{revision_label}}/rawthumb/' + thumbnail_alias + '/get.jpg?insecure';
+        var thumbnail_url = '{{SHARE_PATH}}/{{image.get_id}}/{{revision_label}}/rawthumb/' + thumbnail_alias + '/get.jpg?insecure';
 
         /* Make link url */
         var qs = '';
-        if (image_mode == 1)
+        if (image_mode === 1)
            qs += "{% query_string "mod='inverted'" "" %}";
 
         var sharing_url = '{{SHARE_PATH}}';
-        if (image_size == 0) { /* regular */
+        if (image_size === 0) { /* regular */
             sharing_url += "{% get_image_url image revision_label %}";
-        } else if (image_size == 1) { /* full */
+        } else if (image_size === 1) { /* full */
             sharing_url += "{% get_image_url image revision_label 'full' %}";
-        } else if (image_size == 2) { /* real */
+        } else if (image_size === 2) { /* real */
             if(qs.length > 0)
                 qs += "&real=";
             else
@@ -76,35 +76,35 @@ $(document).ready(function() {
 
         /* Make text */
         var text = "{{image.title|escape}}";
-        if (thumbnail == 0)
+        if (thumbnail === 0)
             text = thumbnail_url;
 
         /*************
         * SIMPLE URL *
         *************/
-        if (sharing_mode == 0) {
+        if (sharing_mode === 0) {
             content = sharing_url;
         } else
 
         /********
         * FORUM *
         ********/
-        if (sharing_mode == 1) {
+        if (sharing_mode === 1) {
             content = "[URL=" + sharing_url + "]";
-            if (thumbnail == 0) content += "[IMG]";
+            if (thumbnail === 0) content += "[IMG]";
             content += text
-            if (thumbnail == 0) content += "[/IMG]";
+            if (thumbnail === 0) content += "[/IMG]";
             content += "[/URL]"
         } else
 
         /*******
         * HTML *
         *******/
-        if (sharing_mode == 2) {
+        if (sharing_mode === 2) {
             content = "<a href=\"" + sharing_url + "\">";
-            if (thumbnail == 0) content += "<img src=\"";
+            if (thumbnail === 0) content += "<img src=\"";
             content += text;
-            if (thumbnail == 0) content += "\"/>";
+            if (thumbnail === 0) content += "\"/>";
             content += "</a>"
         }
 

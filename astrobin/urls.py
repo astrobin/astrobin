@@ -254,46 +254,6 @@ urlpatterns = [
     url(r'^ads.txt$', special_views.AdsTxtView.as_view(), name='ads_txt'),
 
     ###########################################################################
-    ### IMAGE VIEWS                                                         ###
-    ###########################################################################
-
-    url(r'^(?P<id>\d+)/flagthumbs/$', image_views.ImageFlagThumbsView.as_view(), name='image_flag_thumbs'),
-    url(r'^(?P<id>\d+)/(?:(?P<r>\w+)/)?$', image_views.ImageDetailView.as_view(), name='image_detail'),
-    url(r'^(?P<id>\d+)/(?:(?P<r>\w+)/)?rawthumb/(?P<alias>\w+)/(?:get.jpg)?$', image_views.ImageRawThumbView.as_view(),
-        name='image_rawthumb'),
-    url(r'^(?P<id>\d+)/(?:(?P<r>\w+)/)?thumb/(?P<alias>\w+)/$', image_views.ImageThumbView.as_view(),
-        name='image_thumb'),
-    url(r'^full/(?P<id>\d+)/(?:(?P<r>\w+)/)?$', image_views.ImageFullView.as_view(), name='image_full'),
-
-    ###########################################################################
-    ### IMAGE EDIT VIEWS                                                    ###
-    ###########################################################################
-
-    url(r'^delete/(?P<id>\d+)/$', image_views.ImageDeleteView.as_view(), name='image_delete'),
-    url(r'^delete/original/(?P<id>\d+)/$', image_views.ImageDeleteOriginalView.as_view(), name='image_delete_original'),
-    url(r'^delete/revision/(?P<id>\d+)/$', image_views.ImageRevisionDeleteView.as_view(), name='image_delete_revision'),
-    url(r'^demote/(?P<id>\d+)/$', image_views.ImageDemoteView.as_view(), name='image_demote'),
-    url(r'^edit/acquisition/(?P<id>\d+)/$', image_edit_acquisition, name='image_edit_acquisition'),
-    url(r'^edit/acquisition/reset/(?P<id>\d+)/$', image_edit_acquisition_reset, name='image_edit_acquisition_reset'),
-    url(r'^edit/basic/(?P<id>\d+)/$', image_views.ImageEditBasicView.as_view(), name='image_edit_basic'),
-    url(r'^edit/gear/(?P<id>\d+)/$', image_views.ImageEditGearView.as_view(), name='image_edit_gear'),
-    url(r'^edit/license/(?P<id>\d+)/$', image_edit_license, name='image_edit_license'),
-    url(r'^edit/platesolving/(?P<pk>\d+)/(?:(?P<revision_label>\w+)/)?$', image_edit_platesolving_settings,
-        name='image_edit_platesolving_settings'),
-    url(r'^edit/makefinal/(?P<id>\d+)/$', image_edit_make_final, name='image_edit_make_final'),
-    url(r'^edit/revision/makefinal/(?P<id>\d+)/$', image_edit_revision_make_final,
-        name='image_edit_revision_make_final'),
-    url(r'^edit/save/acquisition/$', image_edit_save_acquisition, name='image_edit_save_acquisition'),
-    url(r'^edit/save/license/$', image_edit_save_license, name='image_edit_save_license'),
-    url(r'^edit/save/watermark/$', image_edit_save_watermark, name='image_edit_save_watermark'),
-    url(r'^edit/watermark/(?P<id>\d+)/$', image_edit_watermark, name='image_edit_watermark'),
-    url(r'^edit/revision/(?P<id>\d+)/$', image_views.ImageEditRevisionView.as_view(), name='image_edit_revision'),
-    url(r'^promote/(?P<id>\d+)/$', image_views.ImagePromoteView.as_view(), name='image_promote'),
-    url(r'^upload/$', image_upload, name='image_upload'),
-    url(r'^upload/process$', image_upload_process, name='image_upload_process'),
-    url(r'^upload/revision/process/$', image_revision_upload_process, name='image_revision_upload_process'),
-
-    ###########################################################################
     ### SEARCH VIEWS                                                        ###
     ###########################################################################
 
@@ -398,7 +358,7 @@ urlpatterns = [
 
     url(r'^gear/(?P<id>\d+)/(?:(?P<slug>[a-z0-9-_]+)/)?$', gear_page, name='gear_page'),
     url(r'^gear/by-ids/(?P<ids>([0-9]+,?)+)/$', gear_by_ids, name='gear_by_ids'),
-    url(r'^gear/by-image/(?P<image_id>\d+)/$', gear_by_image, name='gear_by_image'),
+    url(r'^gear/by-image/(?P<image_id>\w+)/$', gear_by_image, name='gear_by_image'),
     url(r'^gear/by-make/(?P<make>[(\w|\W).+-]*)/$', gear_by_make, name='gear_by_make'),
     url(r'^gear/fix/(?P<id>\d+)/$', gear_fix, name='gear_fix'),
     url(r'^gear/fix/save/$', gear_fix_save, name='gear_fix_save'),
@@ -504,6 +464,46 @@ urlpatterns = [
     ###########################################################################
 
     url(r'^welcome/', include('astrobin_apps_landing.urls', namespace='landing')),
+
+    ###########################################################################
+    ### IMAGE EDIT VIEWS                                                    ###
+    ###########################################################################
+
+    url(r'^delete/(?P<id>\w+)/$', image_views.ImageDeleteView.as_view(), name='image_delete'),
+    url(r'^delete/original/(?P<id>\w+)/$', image_views.ImageDeleteOriginalView.as_view(), name='image_delete_original'),
+    url(r'^delete/revision/(?P<id>\w+)/$', image_views.ImageRevisionDeleteView.as_view(), name='image_delete_revision'),
+    url(r'^demote/(?P<id>\w+)/$', image_views.ImageDemoteView.as_view(), name='image_demote'),
+    url(r'^edit/acquisition/(?P<id>\w+)/$', image_edit_acquisition, name='image_edit_acquisition'),
+    url(r'^edit/acquisition/reset/(?P<id>\w+)/$', image_edit_acquisition_reset, name='image_edit_acquisition_reset'),
+    url(r'^edit/basic/(?P<id>\w+)/$', image_views.ImageEditBasicView.as_view(), name='image_edit_basic'),
+    url(r'^edit/gear/(?P<id>\w+)/$', image_views.ImageEditGearView.as_view(), name='image_edit_gear'),
+    url(r'^edit/license/(?P<id>\w+)/$', image_edit_license, name='image_edit_license'),
+    url(r'^edit/platesolving/(?P<id>\w+)/(?:(?P<revision_label>\w+)/)?$', image_edit_platesolving_settings,
+        name='image_edit_platesolving_settings'),
+    url(r'^edit/makefinal/(?P<id>\w+)/$', image_edit_make_final, name='image_edit_make_final'),
+    url(r'^edit/revision/makefinal/(?P<id>\w+)/$', image_edit_revision_make_final,
+        name='image_edit_revision_make_final'),
+    url(r'^edit/save/acquisition/$', image_edit_save_acquisition, name='image_edit_save_acquisition'),
+    url(r'^edit/save/license/$', image_edit_save_license, name='image_edit_save_license'),
+    url(r'^edit/save/watermark/$', image_edit_save_watermark, name='image_edit_save_watermark'),
+    url(r'^edit/watermark/(?P<id>\w+)/$', image_edit_watermark, name='image_edit_watermark'),
+    url(r'^edit/revision/(?P<id>\w+)/$', image_views.ImageEditRevisionView.as_view(), name='image_edit_revision'),
+    url(r'^promote/(?P<id>\w+)/$', image_views.ImagePromoteView.as_view(), name='image_promote'),
+    url(r'^upload/$', image_upload, name='image_upload'),
+    url(r'^upload/process$', image_upload_process, name='image_upload_process'),
+    url(r'^upload/revision/process/$', image_revision_upload_process, name='image_revision_upload_process'),
+
+    ###########################################################################
+    ### IMAGE VIEWS                                                         ###
+    ###########################################################################
+
+    url(r'^full/(?P<id>\w+)/(?:(?P<r>\w+)/)?$', image_views.ImageFullView.as_view(), name='image_full'),
+    url(r'^(?P<id>\w+)/flagthumbs/$', image_views.ImageFlagThumbsView.as_view(), name='image_flag_thumbs'),
+    url(r'^(?P<id>\w+)/(?:(?P<r>\w+)/)?$', image_views.ImageDetailView.as_view(), name='image_detail'),
+    url(r'^(?P<id>\w+)/(?:(?P<r>\w+)/)?rawthumb/(?P<alias>\w+)/(?:get.jpg)?$', image_views.ImageRawThumbView.as_view(),
+        name='image_rawthumb'),
+    url(r'^(?P<id>\w+)/(?:(?P<r>\w+)/)?thumb/(?P<alias>\w+)/$', image_views.ImageThumbView.as_view(),
+        name='image_thumb'),
 ]
 
 urlpatterns += [url(r'^silk/', include('silk.urls', namespace='silk'))]
