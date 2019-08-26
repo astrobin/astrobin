@@ -1,14 +1,14 @@
 from __future__ import absolute_import
 
-# Python
-from datetime import date
-from datetime import datetime
 import hmac
 import logging
 import operator
 import os
 import unicodedata
 import uuid
+# Python
+from datetime import date
+from datetime import datetime
 
 try:
     from hashlib import sha1
@@ -18,7 +18,6 @@ except ImportError:
     sha1 = sha.sha
 
 # Django
-from django import forms
 from django.conf import settings
 from django.contrib.auth.models import User
 from django.contrib.contenttypes.models import ContentType
@@ -26,12 +25,11 @@ from django.contrib.staticfiles.templatetags.staticfiles import static
 from django.core.cache import cache
 from django.core.exceptions import ValidationError
 from django.core.validators import MaxLengthValidator
-from django.db import models, IntegrityError
+from django.db import IntegrityError
 from django.db.models import Q
 from django.db.models.signals import post_save
 from django.template.defaultfilters import slugify
 from django.utils import timezone
-from django.utils import translation
 from django.utils.translation import ugettext_lazy as _
 
 try:
@@ -45,7 +43,6 @@ except ImportError:
 
 from celery.result import AsyncResult
 from model_utils.managers import InheritanceManager
-from mptt.models import MPTTModel, TreeForeignKey
 from reviews.models import Review
 from safedelete.models import SafeDeleteModel
 from tinymce import models as tinymce_models
@@ -1107,7 +1104,7 @@ class Image(HasSolutionMixin, SafeDeleteModel):
 
     def thumbnail_raw(self, alias, thumbnail_settings={}):
         import urllib2
-        from django.core.files.base import File, ContentFile
+        from django.core.files.base import ContentFile
         from easy_thumbnails.files import get_thumbnailer
         from astrobin.s3utils import OverwritingFileSystemStorage
 
@@ -1579,7 +1576,7 @@ class Acquisition(models.Model):
 
     def save(self, *args, **kwargs):
         super(Acquisition, self).save(*args, **kwargs)
-        self.image.save()
+        self.image.save(keep_deleted=True)
 
 
 class DeepSky_Acquisition(Acquisition):
