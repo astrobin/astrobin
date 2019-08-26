@@ -11,7 +11,7 @@
             {% trans "This will move this image to your staging area, making it unlisted. The image will be accessible by anyone with a direct link." %}
         </div>
 
-        <form class="form-inline" action="{% url 'image_demote' image.id %}" method="post">{% csrf_token %}
+        <form class="form-inline" action="{% url 'image_demote' image.get_id %}" method="post">{% csrf_token %}
             <input class="btn btn-primary" type="submit" value="{% trans "Continue" %}"/>
         </form>
     </div>

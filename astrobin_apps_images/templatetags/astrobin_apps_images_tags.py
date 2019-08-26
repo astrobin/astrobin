@@ -250,7 +250,7 @@ def astrobin_image(context, image, alias, **kwargs):
     get_thumb_url = None
     if thumb_url is None:
         get_thumb_kwargs = {
-            'id': image.id,
+            'id': image.hash if image.hash else image.id,
             'alias': alias,
         }
 

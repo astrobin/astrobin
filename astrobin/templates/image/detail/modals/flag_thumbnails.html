@@ -10,7 +10,7 @@
             {% trans "This will trigger the regeneration of all thumbnails for this image and all its revisions." %}
         </div>
 
-        <form class="form-inline" action="{% url 'image_flag_thumbs' image.id %}" method="post">{% csrf_token %}
+        <form class="form-inline" action="{% url 'image_flag_thumbs' image.get_id %}" method="post">{% csrf_token %}
             <input class="btn btn-primary" type="submit" value="{% trans "Continue" %}"/>
         </form>
     </div>
