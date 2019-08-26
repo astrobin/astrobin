@@ -9,7 +9,7 @@
 {% block breadcrumbs %}
     {{ block.super }}
     {% breadcrumb 'Image' None %}
-    {% breadcrumb image.title|escape|default:_("(no title)") 'image_detail' image.pk %}
+    {% breadcrumb image.title|escape|default:_("(no title)") 'image_detail' image.get_id %}
     {% breadcrumb 'Plate-solving settings' None %}
 {% endblock %}
 

@@ -46,7 +46,7 @@
                                     <i class="icon-zoom-in"></i>
                                 </a>
 
-                                <a href="{% url 'image_detail' image.pk %}" target="_blank">
+                                <a href="{{image.get_absolute_url}}" target="_blank">
                                     <i class="icon-link"></i>
                                 </a>
                             </div>

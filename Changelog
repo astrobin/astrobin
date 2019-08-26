@@ -1,4 +1,8 @@
-2019-08-11 Salvatore Iovene <salvatore@iovene.com>
+2019-08-26 Salvatore Iovene <salvatore@iovene.com>
+ * v1.42.1
+ * (image) Address image by 6 character alphanumerical random id instead of sequential number
+
+2019-08-26 Salvatore Iovene <salvatore@iovene.com>
  * v1.42.0
  * (image) Add transitional hash field (preparatory migration work)
 
@@ -6,7 +10,7 @@
  * v1.41.2
  * (docs) Fix FAQ links
  * (images) Prevent deleted images from getting undeleted
- & (iotd) Prevent deleted images to still appear on IOTD archive
+ * (iotd) Prevent deleted images to still appear on IOTD archive
 
 2019-07-14 Salvatore Iovene <salvatore@iovene.com>
  * v1.41.0

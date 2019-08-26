@@ -253,7 +253,7 @@ class IotdTest(TestCase):
         self.assertEqual(vote.image, submission_1.image)
 
         # Badge is present
-        response = self.client.get(reverse_lazy('image_detail', args=(self.image.pk,)))
+        response = self.client.get(reverse_lazy('image_detail', args=(self.image.get_id(),)))
         self.assertContains(response, 'top-pick-badge')
 
         # Image is in Top Picks page
@@ -266,7 +266,7 @@ class IotdTest(TestCase):
             judge=self.judge_1,
             image=self.image,
             date=datetime.now().date() + timedelta(1))
-        response = self.client.get(reverse_lazy('image_detail', args=(self.image.pk,)))
+        response = self.client.get(reverse_lazy('image_detail', args=(self.image.get_id(),)))
         self.assertContains(response, 'top-pick-badge')
 
         # Image is still in Top Picks page
@@ -275,8 +275,9 @@ class IotdTest(TestCase):
         cache.clear()
 
         # Badge is gone if image is present IOTD
+
         Iotd.objects.filter(pk=iotd.pk).update(date=datetime.now().date())
-        response = self.client.get(reverse_lazy('image_detail', args=(self.image.pk,)))
+        response = self.client.get(reverse_lazy('image_detail', args=(self.image.get_id(),)))
         self.assertNotContains(response, 'top-pick-badge')
 
         # Image is gone from Top Picks page
@@ -286,7 +287,7 @@ class IotdTest(TestCase):
 
         # Badge is gone is image is past IOTD
         Iotd.objects.filter(pk=iotd.pk).update(date=datetime.now().date() - timedelta(1))
-        response = self.client.get(reverse_lazy('image_detail', args=(self.image.pk,)))
+        response = self.client.get(reverse_lazy('image_detail', args=(self.image.get_id(),)))
         self.assertNotContains(response, 'top-pick-badge')
 
         # Image is still gone from Top Picks page
@@ -434,7 +435,7 @@ class IotdTest(TestCase):
         self.assertEqual(iotd.image, self.image)
 
         # Badge is present
-        response = self.client.get(reverse_lazy('image_detail', args=(self.image.pk,)))
+        response = self.client.get(reverse_lazy('image_detail', args=(self.image.get_id(),)))
         self.assertContains(response, 'iotd-ribbon')
 
         # Image must not be past IOTD

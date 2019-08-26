@@ -4,8 +4,13 @@ import hmac
 import logging
 import operator
 import os
+# Python
+import random
+import string
 import unicodedata
 import uuid
+from datetime import date
+from datetime import datetime
 
 from datetime import date
 from datetime import datetime
@@ -84,6 +89,17 @@ class HasSolutionMixin(object):
 def image_upload_path(instance, filename):
     ext = filename.split('.')[-1]
     return "images/%d/%d/%s.%s" % (instance.user.id, date.today().year, uuid.uuid4(), ext)
+
+
+def image_hash():
+    def generate_hash():
+        return "".join(random.choice(string.ascii_lowercase + string.digits) for _ in range(6))
+
+    hash = generate_hash()
+    while hash.isdigit() or Image.all_objects.filter(hash=hash).exists():
+        hash = generate_hash()
+
+    return hash
 
 
 LICENSE_CHOICES = (
@@ -775,7 +791,7 @@ class Image(HasSolutionMixin, SafeDeleteModel):
 
     hash = models.CharField(
         max_length=6,
-        default=None,
+        default=image_hash,
         null=True,
         unique=True
     )
@@ -974,6 +990,9 @@ class Image(HasSolutionMixin, SafeDeleteModel):
     def __unicode__(self):
         return self.title if self.title is not None else _("(no title)")
 
+    def get_id(self):
+        return self.hash if self.hash else self.pk
+
     def get_absolute_url(self, revision='final', size='regular'):
         if revision == 'final':
             if not self.is_final:
@@ -985,7 +1004,7 @@ class Image(HasSolutionMixin, SafeDeleteModel):
         if size == 'full':
             url += 'full/'
 
-        url += '%i/' % self.id
+        url += '%s/' % (self.hash if self.hash else self.pk)
 
         if revision != 'final':
             url += '%s/' % revision
@@ -1493,9 +1512,9 @@ class ImageRevision(HasSolutionMixin, SafeDeleteModel):
     def get_absolute_url(self, revision='nd', size='regular'):
         # We can ignore the revision argument of course
         if size == 'full':
-            return '/%i/%s/full/' % (self.image.id, self.label)
+            return '/%s/%s/full/' % (self.image.get_id(), self.label)
 
-        return '/%i/%s/' % (self.image.id, self.label)
+        return '/%s/%s/' % (self.image.get_id(), self.label)
 
     def thumbnail_raw(self, alias, thumbnail_settings={}):
         return self.image.thumbnail_raw(alias,

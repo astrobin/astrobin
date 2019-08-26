@@ -75,13 +75,13 @@
         <li class="divider"></li>
 
         <li>
-            <a href="{% url 'image_full' image.pk revision_label %}{% query_string "mod=mod" "plate_solving_started,real" %}">
+            <a href="{% url 'image_full' image.get_id revision_label %}{% query_string "mod=mod" "plate_solving_started,real" %}">
                 <i class="icon-zoom-in"></i>
                 {% trans "Large size" %}
             </a>
         </li>
         <li>
-            <a href="{% url 'image_full' image.pk revision_label %}{% query_string "real='',mod=mod" "plate_solving_started" %}">
+            <a href="{% url 'image_full' image.get_id revision_label %}{% query_string "real='',mod=mod" "plate_solving_started" %}">
                 <i class="icon-fullscreen"></i>
                 {% trans "Full size" %}
             </a>

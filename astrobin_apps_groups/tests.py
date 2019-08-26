@@ -693,7 +693,7 @@ class GroupsTest(TestCase):
         self.assertEqual(self.group.images.count(), 1)
         self.group.members.remove(self.user2)
 
-        response = self.client.get(reverse('image_detail', args = (image.pk,)))
+        response = self.client.get(reverse('image_detail', args = (image.get_id(),)))
         self.assertContains(
             response,
             '<tr><td><a href="%s">%s</a></td></tr>' % (
