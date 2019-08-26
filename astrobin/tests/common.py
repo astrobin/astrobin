@@ -43,4 +43,4 @@ def test_utils_upload_revision(test, image, filename = 'astrobin/fixtures/test.j
 def test_utils_approve_image(image):
     image.moderator_decision = 1
     image.moderated_when = datetime.date.today()
-    image.save()
+    image.save(keep_deleted=True)
