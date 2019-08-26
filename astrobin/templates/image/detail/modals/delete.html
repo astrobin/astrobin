@@ -10,7 +10,7 @@
             {% trans "The image will be permanently deleted and cannot be recovered. All its revisions will be deleted too. Are you sure?" %}
         </div>
 
-        <form class="form-inline" action="{% url 'image_delete' image.id %}" method="post">{% csrf_token %}
+        <form class="form-inline" action="{% url 'image_delete' image.get_id %}" method="post">{% csrf_token %}
             <input class="btn btn-primary" type="submit" value="{% trans "Delete" %}"/>
         </form>
     </div>
@@ -44,7 +44,7 @@
             {% trans "The image will be permanently deleted and cannot be recovered. Its revisions will not be deleted. Are you sure?"%}
         </div>
 
-        <form class="form-inline" action="{% url 'image_delete_original' image.id %}" method="post">{% csrf_token %}
+        <form class="form-inline" action="{% url 'image_delete_original' image.get_id %}" method="post">{% csrf_token %}
             <input class="btn btn-primary" type="submit" value="{% trans "Delete" %}"/>
         </form>
     </div>
