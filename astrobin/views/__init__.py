@@ -493,7 +493,7 @@ def image_upload_process(request):
         image.is_wip = True
 
     image.image_file.file.seek(0) # Because we opened it with PIL
-    image.save()
+    image.save(keep_deleted=True)
 
     from astrobin.tasks import retrieve_primary_thumbnails
     retrieve_primary_thumbnails.delay(image.pk, {'revision_label': '0'})
@@ -511,7 +511,7 @@ def image_edit_watermark(request, id):
     profile = image.user.userprofile
     if not profile.default_watermark_text or profile.default_watermark_text == '':
         profile.default_watermark_text = "Copyright %s" % image.user.username
-        profile.save()
+        profile.save(keep_deleted=True)
 
     image.watermark = profile.default_watermark
     image.watermark_text = profile.default_watermark_text
@@ -622,9 +622,9 @@ def image_edit_make_final(request, id):
     revisions = ImageRevision.objects.filter(image = image)
     for r in revisions:
         r.is_final = False
-        r.save()
+        r.save(keep_deleted=True)
     image.is_final = True
-    image.save()
+    image.save(keep_deleted=True)
 
     return HttpResponseRedirect('/%i/' % image.id)
 
@@ -639,13 +639,13 @@ def image_edit_revision_make_final(request, id):
     other = ImageRevision.objects.filter(image = r.image)
     for i in other:
         i.is_final = False
-        i.save()
+        i.save(keep_deleted=True)
 
     r.image.is_final = False
-    r.image.save()
+    r.image.save(keep_deleted=True)
 
     r.is_final = True
-    r.save()
+    r.save(keep_deleted=True)
 
     return HttpResponseRedirect('/%i/%s/' % (r.image.id, r.label))
 
@@ -759,7 +759,7 @@ def image_edit_save_watermark(request):
     profile.default_watermark_position = form.cleaned_data['watermark_position']
     profile.default_watermark_size = form.cleaned_data['watermark_size']
     profile.default_watermark_opacity = form.cleaned_data['watermark_opacity']
-    profile.save()
+    profile.save(keep_deleted=True)
 
     if not image.title:
         return HttpResponseRedirect(
@@ -1734,7 +1734,7 @@ def user_profile_save_gear(request):
             getattr(profile, k).add(gear_item)
         form.fields[k].initial = value
 
-    profile.save()
+    profile.save(keep_deleted=True)
 
     initial = "&initial=true" if "initial" in request.POST else ""
     messages.success(request, _("Form saved. Thank you!"))
@@ -1826,7 +1826,7 @@ def user_profile_flickr_import(request):
                                   subject_type = 600, # Default to Other only when doing a Flickr import
                                   is_wip = True,
                                   license = profile.default_license)
-                    image.save()
+                    image.save(keep_deleted=True)
 
         return ajax_response(response_dict)
 
@@ -1852,7 +1852,7 @@ def flickr_auth_callback(request):
 def user_profile_seen_realname(request):
     profile = request.user.userprofile
     profile.seen_realname = True
-    profile.save()
+    profile.save(keep_deleted=True)
 
     return HttpResponseRedirect(request.POST.get('next', '/'))
 
@@ -1862,7 +1862,7 @@ def user_profile_seen_realname(request):
 def user_profile_seen_email_permissions(request):
     profile = request.user.userprofile
     profile.seen_email_permissions = True
-    profile.save()
+    profile.save(keep_deleted=True)
 
     return HttpResponseRedirect(request.POST.get('next', '/'))
 
@@ -1971,7 +1971,7 @@ def image_revision_upload_process(request):
         highest_label = r.label
 
     image.is_final = False
-    image.save()
+    image.save(keep_deleted=True)
 
     image_revision = form.save(commit = False)
     image_revision.user = request.user
@@ -1980,7 +1980,7 @@ def image_revision_upload_process(request):
     image_revision.label = base26_encode(base26_decode(highest_label) + 1)
 
     image_revision.image_file.file.seek(0) # Because we opened it with PIL
-    image_revision.save()
+    image_revision.save(keep_deleted=True)
 
     messages.success(request, _("Image uploaded. Thank you!"))
     return HttpResponseRedirect(image_revision.get_absolute_url())
@@ -2139,7 +2139,7 @@ def set_language(request, lang):
     if request.user.is_authenticated():
         profile = request.user.userprofile
         profile.language = lang
-        profile.save()
+        profile.save(keep_deleted=True)
 
     return response
 

@@ -208,7 +208,7 @@ class PremiumTest(TestCase):
         # But deleting an image uploaded before the subscription was created does not
         image = Image.objects_including_wip.all().order_by('-pk')[1] # Second last element
         image.uploaded = image.uploaded - datetime.timedelta(days = 1)
-        image.save()
+        image.save(keep_deleted=True)
         image.delete()
         profile = UserProfile.objects.get(pk = profile.pk)
         self.assertEqual(profile.premium_counter, settings.PREMIUM_MAX_IMAGES_FREE - 1)

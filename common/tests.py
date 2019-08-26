@@ -20,7 +20,7 @@ class CommonTest(TestCase):
         Tests the userprofile.real_name field is available in the user api.
         """
         self.user.userprofile.real_name = 'Real Name'
-        self.user.userprofile.save()
+        self.user.userprofile.save(keep_deleted=True)
 
         self.client.login(username='user', password='password')
 

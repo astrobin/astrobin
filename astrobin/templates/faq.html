@@ -16,18 +16,18 @@
         <div class="span12">
             <h2>{% trans "Frequently Asked Questions" %}</h2>
             <ol>
-                <li><a href="#free">{% blocktrans %}Is this website for free?{% endblocktrans %}</a></li>
-                <li><a href="#limits">{% blocktrans %}Are there any limits on how large and how many images I can upload?{% endblocktrans %}</a></li>
-                <li><a href="#formats">{% blocktrans %}What image formats are supported?{% endblocktrans %}</a></li>
-                <li><a href="#safe">{% blocktrans %}Is my data safe on AstroBin?{% endblocktrans %}</a></li>
-                <li><a href="#worthy">{% blocktrans %}I've seen beautiful images on this site. I'm not worthy of posting mine!{% endblocktrans %}</a></li>
-                <li><a href="#staging">{% blocktrans %}What's the deal with the Staging Area and the Public Area?{% endblocktrans %}</a></li>
-                <li><a href="#why">{% blocktrans %}Why was AstroBin created?{% endblocktrans %}</a></li>
-                <li><a href="#plans">{% blocktrans %}What are the plans for the future?{% endblocktrans %}</a></li>
-                <li><a href="#comments">{% blocktrans %}How can I format my comments?{% endblocktrans %}</a></li>
-                <li><a href="#indexhow">{% blocktrans %}How is the AstroBin index calculated?{% endblocktrans %}</a></li>
-                <li><a href="#indexslow">{% blocktrans %}I received some Likes, why is my AstroBin index not updated?{% endblocktrans %}</a></li>
-                <li><a href="#iotd">{% blocktrans %}How is the Image of the Day selected?{% endblocktrans %}</a></li>
+                <li><a href="{% url 'faq' %}#free">{% blocktrans %}Is this website for free?{% endblocktrans %}</a></li>
+                <li><a href="{% url 'faq' %}#limits">{% blocktrans %}Are there any limits on how large and how many images I can upload?{% endblocktrans %}</a></li>
+                <li><a href="{% url 'faq' %}#formats">{% blocktrans %}What image formats are supported?{% endblocktrans %}</a></li>
+                <li><a href="{% url 'faq' %}#safe">{% blocktrans %}Is my data safe on AstroBin?{% endblocktrans %}</a></li>
+                <li><a href="{% url 'faq' %}#worthy">{% blocktrans %}I've seen beautiful images on this site. I'm not worthy of posting mine!{% endblocktrans %}</a></li>
+                <li><a href="{% url 'faq' %}#staging">{% blocktrans %}What's the deal with the Staging Area and the Public Area?{% endblocktrans %}</a></li>
+                <li><a href="{% url 'faq' %}#why">{% blocktrans %}Why was AstroBin created?{% endblocktrans %}</a></li>
+                <li><a href="{% url 'faq' %}#plans">{% blocktrans %}What are the plans for the future?{% endblocktrans %}</a></li>
+                <li><a href="{% url 'faq' %}#comments">{% blocktrans %}How can I format my comments?{% endblocktrans %}</a></li>
+                <li><a href="{% url 'faq' %}#indexhow">{% blocktrans %}How is the AstroBin index calculated?{% endblocktrans %}</a></li>
+                <li><a href="{% url 'faq' %}#indexslow">{% blocktrans %}I received some Likes, why is my AstroBin index not updated?{% endblocktrans %}</a></li>
+                <li><a href="{% url 'faq' %}#iotd">{% blocktrans %}How is the Image of the Day selected?{% endblocktrans %}</a></li>
             </ol>
             <br/>
             <h2>{% trans "... and their answers!" %}</h2>

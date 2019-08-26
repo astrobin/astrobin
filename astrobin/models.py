@@ -6,6 +6,7 @@ import operator
 import os
 import unicodedata
 import uuid
+
 from datetime import date
 from datetime import datetime
 
@@ -1582,7 +1583,7 @@ class Acquisition(models.Model):
 
     def save(self, *args, **kwargs):
         super(Acquisition, self).save(*args, **kwargs)
-        self.image.save()
+        self.image.save(keep_deleted=True)
 
 
 class DeepSky_Acquisition(Acquisition):
