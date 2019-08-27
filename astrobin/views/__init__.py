@@ -1950,7 +1950,7 @@ def image_revision_upload_process(request):
 
     if settings.READONLY_MODE:
         messages.error(request, _(
-            "AstroBin is currently in read-only mode, because of server maintenance. Please try again soon!"));
+            "AstroBin is currently in read-only mode, because of server maintenance. Please try again soon!"))
         return HttpResponseRedirect(image.get_absolute_url())
 
     form = ImageRevisionUploadForm(request.POST, request.FILES)
@@ -1962,7 +1962,7 @@ def image_revision_upload_process(request):
     ext = os.path.splitext(image_file.name)[1].lower()
 
     if ext not in settings.ALLOWED_IMAGE_EXTENSIONS:
-        return upload_error()
+        return upload_error(image)
 
     try:
         from PIL import Image as PILImage
