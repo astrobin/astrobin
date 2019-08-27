@@ -62,7 +62,7 @@
             </div>
         </form>
         {% else %}
-            {% url 'image_edit_acquisition' image.id as advanced_form_url %}
+            {% url 'image_edit_acquisition' image.get_id as advanced_form_url %}
             <div class="subtitle">
                 <i class="icon icon-info-sign"></i>
                 {% blocktrans %}With this form you can input the basic details for the acquisition of your image. If you want to be more thorough or fill in separate details for each filter, go to the <a class="button" href="{{advanced_form_url}}?edit_type=deep_sky&advanced=true">advanced form</a>.{% endblocktrans %}
