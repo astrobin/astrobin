@@ -1,19 +1,12 @@
-# Python
-import datetime
-from mock import patch
-
-# Django
 from django.contrib.auth.models import User, Group
 from django.core.urlresolvers import reverse
-from django.test import TestCase, override_settings
+from django.test import TestCase
+from mock import patch
+from subscription.models import Subscription
 
-# AstroBin
 from astrobin.models import Image, UserProfile
 from astrobin_apps_premium.templatetags.astrobin_apps_premium_tags import *
-
-# Premium
 from astrobin_apps_premium.utils import *
-
 
 
 class PremiumTest(TestCase):

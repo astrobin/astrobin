@@ -1,15 +1,7 @@
-# Python
-import urllib
+import datetime
 
-# Django
-from django.conf import settings
-from django.db.models import Q
-from django.template import Library, Node
+from django.template import Library
 
-# Third party
-from subscription.models import Subscription, UserSubscription
-
-# This app
 from astrobin_apps_premium.utils import premium_get_valid_usersubscription
 
 register = Library()
@@ -44,3 +36,15 @@ def is_lite(user):
 @register.filter
 def is_free(user):
     return not (is_lite(user) or is_premium(user))
+
+
+@register.filter
+def has_valid_premium_offer(user):
+    return user.userprofile.premium_offer \
+           and user.userprofile.premium_offer_expiration \
+           and user.userprofile.premium_offer_expiration > datetime.datetime.now()
+
+
+@register.filter
+def is_offer(subscription):
+    return "offer" in subscription.category
