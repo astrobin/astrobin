@@ -1,12 +1,12 @@
-from astrobin.models import *
-
 import difflib
+from datetime import timedelta
 
 from django.contrib import admin, messages
-from django.core.mail import BadHeaderError, EmailMessage
-from django.http import HttpResponse, HttpResponseRedirect
-from django.db.models import Q
+from django.core.mail import EmailMessage
+from django.http import HttpResponseRedirect
 from django.utils.safestring import mark_safe
+
+from astrobin.models import *
 
 
 class ImageAdmin(admin.ModelAdmin):
@@ -275,6 +275,20 @@ class BroadcastEmailAdmin(admin.ModelAdmin):
             .filter(receive_marketing_and_commercial_material=True) \
             .values_list('user__email', flat=True)
         self.submit_email(request, obj, recipients)
+
+    def submit_premium_offer_discount(self, request, obj):
+        recipients = UserProfile.objects \
+            .exclude(
+                premium_offer=None,
+                premium_offer_expiration__lt=datetime.now(),
+            )\
+            .filter(
+                Q(premium_offer_sent = None) |
+                Q(premium_offer_sent__lt=datetime.now() - timedelta(days=30))
+            )\
+            .values_list('user__email', flat=True)
+        self.submit_email(request, obj, recipients)
+        recipients.update(premium_offer_sent=datetime.now())
 
     submit_mass_email.short_description = 'Submit mass email (select one only) - DO NOT ABUSE'
     submit_mass_email.allow_tags = True

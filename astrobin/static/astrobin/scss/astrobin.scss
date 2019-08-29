@@ -3969,6 +3969,10 @@ li.revisions {
 
 table.subscription-plans {
   table-layout: fixed;
+
+  th, td {
+    vertical-align: middle;
+  }
 }
 
 .subscription-plans-description-list {
@@ -3977,6 +3981,25 @@ table.subscription-plans {
   li {
     padding: 8px 0;
     list-style: circle;
+  }
+}
+
+.premium-offer.well {
+  $green: #277344;
+
+  position: relative;
+  border-left: 1rem solid $green;
+
+  &::before {
+    background-image: url("../images/discount.png");
+    background-size: 80px;
+    background-repeat: no-repeat;
+    content: " ";
+    position: absolute;
+    top: 45px;
+    left: -90px;
+    height: 80px;
+    width: 80px;
   }
 }
 
