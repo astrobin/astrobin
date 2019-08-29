@@ -1,10 +1,12 @@
 from django.conf import settings
-from tastypie import fields
+from django.http import Http404
+from tastypie import fields, http
 from tastypie.authentication import Authentication
 from tastypie.resources import ModelResource, ALL, ALL_WITH_RELATIONS
 
 from astrobin.models import Location, Image, ImageRevision, ImageOfTheDay, App, Collection
 from astrobin.models import SOLAR_SYSTEM_SUBJECT_CHOICES
+from astrobin.views import get_image_or_404
 from astrobin_apps_iotd.models import IotdVote
 
 
@@ -96,25 +98,25 @@ class ImageRevisionResource(ModelResource):
         allowed_methods = ['get']
 
     def dehydrate_url_thumb(self, bundle):
-        return '%s/%d/%s/rawthumb/thumb/' % (settings.BASE_URL, bundle.obj.image.id, bundle.obj.label)
+        return '%s/%s/%s/rawthumb/thumb/' % (settings.BASE_URL, bundle.obj.image.get_id(), bundle.obj.label)
 
     def dehydrate_url_gallery(self, bundle):
-        return '%s/%d/%s/rawthumb/gallery/' % (settings.BASE_URL, bundle.obj.image.id, bundle.obj.label)
+        return '%s/%s/%s/rawthumb/gallery/' % (settings.BASE_URL, bundle.obj.image.get_id(), bundle.obj.label)
 
     def dehydrate_url_regular(self, bundle):
-        return '%s/%d/%s/rawthumb/regular/' % (settings.BASE_URL, bundle.obj.image.id, bundle.obj.label)
+        return '%s/%s/%s/rawthumb/regular/' % (settings.BASE_URL, bundle.obj.image.get_id(), bundle.obj.label)
 
     def dehydrate_url_hd(self, bundle):
-        return '%s/%d/%s/rawthumb/hd/' % (settings.BASE_URL, bundle.obj.image.id, bundle.obj.label)
+        return '%s/%s/%s/rawthumb/hd/' % (settings.BASE_URL, bundle.obj.image.get_id(), bundle.obj.label)
 
     def dehydrate_url_real(self, bundle):
-        return '%s/%d/%s/rawthumb/real/' % (settings.BASE_URL, bundle.obj.image.id, bundle.obj.label)
+        return '%s/%s/%s/rawthumb/real/' % (settings.BASE_URL, bundle.obj.image.get_id(), bundle.obj.label)
 
     def dehydrate_url_duckduckgo(self, bundle):
-        return '%s/%d/%s/rawthumb/duckduckgo/' % (settings.BASE_URL, bundle.obj.image.id, bundle.obj.label)
+        return '%s/%s/%s/rawthumb/duckduckgo/' % (settings.BASE_URL, bundle.obj.image.get_id(), bundle.obj.label)
 
     def dehydrate_url_duckduckgo_small(self, bundle):
-        return '%s/%d/%s/rawthumb/duckduckgo_small/' % (settings.BASE_URL, bundle.obj.image.id, bundle.obj.label)
+        return '%s/%s/%s/rawthumb/duckduckgo_small/' % (settings.BASE_URL, bundle.obj.image.get_id(), bundle.obj.label)
 
     def dehydrate_is_solved(self, bundle):
         return bundle.obj.solution != None
@@ -181,6 +183,7 @@ class ImageResource(ModelResource):
         queryset = Image.objects.all()
         fields = [
             'id',
+            'hash',
             'title',
             'w',
             'h',
@@ -231,25 +234,25 @@ class ImageResource(ModelResource):
         ordering = ['uploaded']
 
     def dehydrate_url_thumb(self, bundle):
-        return '%s/%d/0/rawthumb/thumb/' % (settings.BASE_URL, bundle.obj.id)
+        return '%s/%s/0/rawthumb/thumb/' % (settings.BASE_URL, bundle.obj.get_id())
 
     def dehydrate_url_gallery(self, bundle):
-        return '%s/%d/0/rawthumb/gallery/' % (settings.BASE_URL, bundle.obj.id)
+        return '%s/%s/0/rawthumb/gallery/' % (settings.BASE_URL, bundle.obj.get_id())
 
     def dehydrate_url_regular(self, bundle):
-        return '%s/%d/0/rawthumb/regular/' % (settings.BASE_URL, bundle.obj.id)
+        return '%s/%s/0/rawthumb/regular/' % (settings.BASE_URL, bundle.obj.get_id())
 
     def dehydrate_url_hd(self, bundle):
-        return '%s/%d/0/rawthumb/hd/' % (settings.BASE_URL, bundle.obj.id)
+        return '%s/%s/0/rawthumb/hd/' % (settings.BASE_URL, bundle.obj.get_id())
 
     def dehydrate_url_real(self, bundle):
-        return '%s/%d/0/rawthumb/real/' % (settings.BASE_URL, bundle.obj.id)
+        return '%s/%s/0/rawthumb/real/' % (settings.BASE_URL, bundle.obj.get_id())
 
     def dehydrate_url_duckduckgo(self, bundle):
-        return '%s/%d/0/rawthumb/duckduckgo/' % (settings.BASE_URL, bundle.obj.id)
+        return '%s/%s/0/rawthumb/duckduckgo/' % (settings.BASE_URL, bundle.obj.get_id())
 
     def dehydrate_url_duckduckgo_small(self, bundle):
-        return '%s/%d/0/rawthumb/duckduckgo_small/' % (settings.BASE_URL, bundle.obj.id)
+        return '%s/%s/0/rawthumb/duckduckgo_small/' % (settings.BASE_URL, bundle.obj.get_id())
 
     def dehydrate_is_solved(self, bundle):
         return bundle.obj.solution != None
@@ -304,6 +307,26 @@ class ImageResource(ModelResource):
     def dehydrate_imaging_cameras(self, bundle):
         cameras = bundle.obj.imaging_cameras.all()
         return [unicode(x) for x in cameras]
+
+    def get_detail(self, request, **kwargs):
+        """
+        Returns a single serialized resource.
+
+        Calls ``cached_obj_get/obj_get`` to provide the data, then handles that result
+        set and serializes it.
+
+        Should return a HttpResponse (200 OK).
+        """
+
+        try:
+            obj = get_image_or_404(self._meta.queryset, kwargs.get("pk"))
+        except Http404:
+            return http.HttpNotFound()
+
+        bundle = self.build_bundle(obj=obj, request=request)
+        bundle = self.full_dehydrate(bundle)
+        bundle = self.alter_detail_data_to_serialize(request, bundle)
+        return self.create_response(request, bundle)
 
     def build_filters(self, filters = None, ignore_bad_filters = False):
         subjects = None
