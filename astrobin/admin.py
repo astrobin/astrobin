@@ -278,10 +278,9 @@ class BroadcastEmailAdmin(admin.ModelAdmin):
 
     def submit_premium_offer_discount(self, request, obj):
         recipients = UserProfile.objects \
-            .exclude(
-                premium_offer=None,
-                premium_offer_expiration__lt=datetime.now(),
-            )\
+            .exclude(premium_offer=None) \
+            .exclude(premium_offer_expiration=None) \
+            .exclude(premium_offer_expiration__lt=datetime.now())\
             .filter(
                 Q(premium_offer_sent = None) |
                 Q(premium_offer_sent__lt=datetime.now() - timedelta(days=30))
