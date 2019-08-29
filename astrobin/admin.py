@@ -2,11 +2,10 @@ import difflib
 from datetime import timedelta
 
 from django.contrib import admin, messages
-from django.core.mail import EmailMessage
 from django.http import HttpResponseRedirect
-from django.utils.safestring import mark_safe
 
 from astrobin.models import *
+from astrobin.tasks import send_broadcast_email
 
 
 class ImageAdmin(admin.ModelAdmin):
@@ -235,18 +234,10 @@ class BroadcastEmailAdmin(admin.ModelAdmin):
                 "Please select exactly one email",
                 messages.ERROR)
         else:
-            obj = obj[0]
-            for recipient in recipients:
-                msg = EmailMessage(
-                    obj.subject,
-                    mark_safe(obj.message),
-                    settings.DEFAULT_FROM_EMAIL,
-                    [recipient])
-                msg.content_subtype = 'html'
-                msg.send()
-                self.message_user(
-                    request,
-                    "Email enqueued to be sent to %d users" % len(recipients))
+            send_broadcast_email.delay(obj[0], recipients)
+            self.message_user(
+                request,
+                "Email enqueued to be sent to %d users" % len(recipients))
 
     def submit_mass_email(self, request, obj):
         recipients = User.objects.all().values_list('email', flat=True)

@@ -4,20 +4,21 @@ from __future__ import absolute_import
 import subprocess
 from time import sleep
 
+from celery.utils.log import get_task_logger
 # Django
 from django.conf import settings
 from django.contrib.auth.models import User
 from django.core.cache import cache
+from django.core.mail import EmailMessage
 from django.core.management import call_command
-
 # Third party
-from celery import shared_task
-from celery.utils.log import get_task_logger
+from django.utils.safestring import mark_safe
 from django_bouncy.models import Bounce
 from haystack.query import SearchQuerySet
 
 # AstroBin
 from astrobin_apps_images.models import ThumbnailGroup
+from celery import shared_task
 
 logger = get_task_logger(__name__)
 
@@ -100,8 +101,6 @@ def contain_imagecache_size():
 This task will delete all inactive accounts with bounced email
 addresses.
 """
-
-
 @shared_task()
 def delete_inactive_bounced_accounts():
     bounces = Bounce.objects.filter(
@@ -116,8 +115,6 @@ def delete_inactive_bounced_accounts():
 """
 This task gets the raw thumbnail data and sets the cache and ThumbnailGroup object.
 """
-
-
 @shared_task()
 def retrieve_thumbnail(pk, alias, options):
     from astrobin.models import Image
@@ -178,3 +175,15 @@ def send_missing_data_source_notifications():
 @shared_task()
 def send_missing_remote_source_notifications():
     call_command("send_missing_remote_source_notifications")
+
+
+@shared_task()
+def send_broadcast_email(broadcastEmail, recipients):
+    for recipient in recipients:
+        msg = EmailMessage(
+            broadcastEmail.subject,
+            mark_safe(broadcastEmail.message),
+            settings.DEFAULT_FROM_EMAIL,
+            [recipient])
+        msg.content_subtype = 'html'
+        msg.send()
