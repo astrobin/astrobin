@@ -391,6 +391,9 @@ class ImageOfTheDayResource(ModelResource):
         ]
         allowed_methods = ['get']
 
+    def dehydrate_image(self, bundle):
+        return "/api/v1/image/%s" % bundle.obj.image.get_id()
+
 
 class TopPickResource(ModelResource):
     image = fields.ForeignKey('astrobin.api.ImageResource', 'image')
@@ -404,6 +407,9 @@ class TopPickResource(ModelResource):
             'date'
         ]
         allowed_methods = ['get']
+
+    def dehydrate_image(self, bundle):
+        return "/api/v1/image/%s" % bundle.obj.image.get_id()
 
 
 class CollectionResource(ModelResource):
