@@ -12,9 +12,6 @@ import uuid
 from datetime import date
 from datetime import datetime
 
-from datetime import date
-from datetime import datetime
-
 try:
     from hashlib import sha1
 except ImportError:
@@ -1912,6 +1909,24 @@ class UserProfile(SafeDeleteModel):
     premium_counter = models.PositiveIntegerField(
         default=0,
         editable=False
+    )
+
+    premium_offer = models.CharField(
+        max_length=32,
+        default=None,
+        null=True,
+        blank=True,
+        editable=False,
+    )
+
+    premium_offer_expiration = models.DateTimeField(
+        editable=False,
+        null=True
+    )
+
+    premium_offer_sent = models.DateTimeField(
+        editable=False,
+        null=True
     )
 
     # Commercial information
