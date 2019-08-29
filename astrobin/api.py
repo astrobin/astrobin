@@ -430,3 +430,7 @@ class CollectionResource(ModelResource):
             'user': ALL_WITH_RELATIONS,
         }
         ordering = ['-date_created']
+
+    def dehydrate_images(self, bundle):
+        images = bundle.obj.images.all()
+        return ["/api/v1/image/%s" % image.get_id() for image in images]
