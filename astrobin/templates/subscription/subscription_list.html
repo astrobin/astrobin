@@ -3,6 +3,7 @@
 {% load i18n %}
 {% load django_bootstrap_breadcrumbs %}
 {% load tags %}
+{% load astrobin_apps_premium_tags %}
 
 {% block title %}{% trans "Subscription plans" %}{% endblock %}
 
@@ -34,54 +35,71 @@
         {% endif %}
 
         {% if PREMIUM_ENABLED %}
-        <div class="well">
-            <h2>{% trans "AstroBin Premium subscription plans" %}</h2>
+            {% if request.user.is_authenticated and request.user|has_valid_premium_offer and not request.user|has_valid_subscription_in_category:"premium" %}
+                <div class="well premium-offer">
+                    <h2>{% trans "Limited offer for you!" %}</h2>
 
-            <p>
-                {% blocktrans with max_allowed=PREMIUM_MAX_IMAGES_FREE %}
-                You can use AstroBin for free up to {{max_allowed}} images. After
-                that you can upgrade to <strong>Lite</strong> if you have a limited
-                yearly output, or <strong>Premium</strong> for a limitless
-                experience.  Paying members will not see ads, and everybody,
-                including non-paying members, have access to all social features of
-                AstroBin.
-                {% endblocktrans %}
-           </p>
+                    <p>
+                        {% blocktrans %}For a limited time, you are personally offered AstroBin Premium for one year, at
+                            a sizeable discount. Don't miss this opportunity!{% endblocktrans %}
+                    </p>
 
-           <ul class="subscription-plans-description-list">
-                <li>
-                {% blocktrans with max_allowed=PREMIUM_MAX_IMAGES_FREE %}
-                As a user of <strong>AstroBin Free</strong>, you may have up to
-                {{max_allowed}} images at the same time. You can delete some images
-                to make room for new ones, if you want. For instance you can
-                maintain a window of your latest {{max_allowed}} images, or your
-                best ones.
-                {% endblocktrans %}
-                </li>
+                    {% with subscription_category=request.user.userprofile.premium_offer %}
+                        {% include 'subscription/subscription_category_list.html' %}
+                    {% endwith %}
+                </div>
+            {% endif %}
 
-                <li>
-                {% blocktrans with max_allowed=PREMIUM_MAX_IMAGES_LITE %}
-                As a user of <strong>AstroBin Lite</strong>, instead, you may have
-                up to {{max_allowed}} images at the same time, per each year of
-                your membership. You may replace images uploaded within the current
-                subsciption period while images uploaded prior to that can only be
-                deleted. Every year that you renew your membership, you get
-                {{max_allowed}} new image credits.
-                {% endblocktrans %}
-                </li>
+            {% if not request.user|has_valid_subscription_in_category:"premium" %}
+            <div class="well">
+                <h2>{% trans "AstroBin Premium subscription plans" %}</h2>
 
-                <li>
-                {% blocktrans with max_allowed=PREMIUM_MAX_IMAGES_FREE %}
-                As a user of <strong>AstroBin Premium</strong>, instead, there are
-                no limitations whatsoever in the number of images you can upload.
-                {% endblocktrans %}
-                </li>
-            </ul>
+                <p>
+                    {% blocktrans with max_allowed=PREMIUM_MAX_IMAGES_FREE %}
+                    You can use AstroBin for free up to {{max_allowed}} images. After
+                    that you can upgrade to <strong>Lite</strong> if you have a limited
+                    yearly output, or <strong>Premium</strong> for a limitless
+                    experience.  Paying members will not see ads, and everybody,
+                    including non-paying members, have access to all social features of
+                    AstroBin.
+                    {% endblocktrans %}
+               </p>
 
-            {% with subscription_category='premium' %}
-                {% include 'subscription/subscription_category_list.html' %}
-            {% endwith %}
-        </div>
+               <ul class="subscription-plans-description-list">
+                    <li>
+                    {% blocktrans with max_allowed=PREMIUM_MAX_IMAGES_FREE %}
+                    As a user of <strong>AstroBin Free</strong>, you may have up to
+                    {{max_allowed}} images at the same time. You can delete some images
+                    to make room for new ones, if you want. For instance you can
+                    maintain a window of your latest {{max_allowed}} images, or your
+                    best ones.
+                    {% endblocktrans %}
+                    </li>
+
+                    <li>
+                    {% blocktrans with max_allowed=PREMIUM_MAX_IMAGES_LITE %}
+                    As a user of <strong>AstroBin Lite</strong>, instead, you may have
+                    up to {{max_allowed}} images at the same time, per each year of
+                    your membership. You may replace images uploaded within the current
+                    subsciption period while images uploaded prior to that can only be
+                    deleted. Every year that you renew your membership, you get
+                    {{max_allowed}} new image credits.
+                    {% endblocktrans %}
+                    </li>
+
+                    <li>
+                    {% blocktrans with max_allowed=PREMIUM_MAX_IMAGES_FREE %}
+                    As a user of <strong>AstroBin Premium</strong>, instead, there are
+                    no limitations whatsoever in the number of images you can upload.
+                    {% endblocktrans %}
+                    </li>
+                </ul>
+
+                {% with subscription_category='premium' %}
+                    {% include 'subscription/subscription_category_list.html' %}
+                {% endwith %}
+            </div>
+            {% endif %}
         {% endif %}
 
         <div class="well">
