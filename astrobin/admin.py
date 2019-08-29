@@ -305,12 +305,16 @@ class BroadcastEmailAdmin(admin.ModelAdmin):
     submit_marketing_and_commercial_material.short_description = 'Submit marketing and commercial material (select one only)'
     submit_marketing_and_commercial_material.allow_tags = True
 
+    submit_premium_offer_discount.short_description = 'Submit Premium discount offer'
+    submit_premium_offer_discount.allow_tags = True
+
     actions = [
         'submit_mass_email',
         'submit_superuser_email',
         'submit_important_communication',
         'submit_newsletter',
         'submit_marketing_and_commercial_material',
+        'submit_premium_offer_discount'
     ]
 
     list_display = ("subject", "created")
