@@ -189,7 +189,7 @@ def send_broadcast_email(broadcastEmail, recipients):
 @shared_task()
 def send_inactive_account_reminder():
     try:
-        email = BroadcastEmail.get(subject="We miss your astrophotographs!")
+        email = BroadcastEmail.objects.get(subject="We miss your astrophotographs!")
         recipients = inactive_accounts()
         send_broadcast_email.delay(email, recipients)
     except BroadcastEmail.DoesNotExist:
