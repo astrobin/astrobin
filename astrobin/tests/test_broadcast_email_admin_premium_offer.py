@@ -11,9 +11,9 @@ from astrobin.admin import BroadcastEmailAdmin
 from astrobin.models import BroadcastEmail
 
 
-class BroadcastEmailAdminTest(TestCase):
-    @patch("django.core.mail.EmailMessage.send")
-    def test_submit_premium_offer_discount_no_users(self, sendMock):
+class BroadcastEmailAdminPremiumOfferTest(TestCase):
+    @patch("astrobin.tasks.send_broadcast_email.delay")
+    def test_submit_premium_offer_discount_no_users(self, taskMock):
         request = RequestFactory().get("/")
 
         email = BroadcastEmail.objects.create(subject="test")
@@ -21,7 +21,7 @@ class BroadcastEmailAdminTest(TestCase):
 
         admin.submit_premium_offer_discount(request, BroadcastEmail.objects.filter(pk=email.pk))
 
-        sendMock.assert_not_called()
+        taskMock.assert_not_called()
 
     @patch("astrobin.tasks.send_broadcast_email.delay")
     @patch("django.contrib.admin.ModelAdmin.message_user")

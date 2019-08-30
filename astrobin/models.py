@@ -2076,6 +2076,10 @@ class UserProfile(SafeDeleteModel):
         help_text=_(u'These emails may contain offers, commercial news, and promotions from AstroBin or its partners.')
     )
 
+    inactive_account_reminder_sent = models.DateTimeField(
+        null=True
+    )
+
     # Preferences (notification preferences are stored in the django
     # notification model)
     language = models.CharField(

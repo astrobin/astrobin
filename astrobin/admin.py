@@ -6,6 +6,7 @@ from django.http import HttpResponseRedirect
 
 from astrobin.models import *
 from astrobin.tasks import send_broadcast_email
+from astrobin.utils import inactive_accounts
 from astrobin_apps_premium.utils import premium_get_valid_usersubscription
 
 
@@ -285,6 +286,11 @@ class BroadcastEmailAdmin(admin.ModelAdmin):
         self.submit_email(request, obj, recipients)
         recipients.update(premium_offer_sent=datetime.now())
 
+    def submit_inactive_email_reminder(self, request, obj):
+        recipients = inactive_accounts()
+        self.submit_email(request, obj, recipients)
+        recipients.update(inactive_account_reminder_sent=timezone.now())
+
     submit_mass_email.short_description = 'Submit mass email (select one only) - DO NOT ABUSE'
     submit_mass_email.allow_tags = True
 
@@ -303,13 +309,17 @@ class BroadcastEmailAdmin(admin.ModelAdmin):
     submit_premium_offer_discount.short_description = 'Submit Premium discount offer'
     submit_premium_offer_discount.allow_tags = True
 
+    submit_inactive_email_reminder.short_description = 'Submit inactive account reminder'
+    submit_inactive_email_reminder.allow_tags = True
+
     actions = [
         'submit_mass_email',
         'submit_superuser_email',
         'submit_important_communication',
         'submit_newsletter',
         'submit_marketing_and_commercial_material',
-        'submit_premium_offer_discount'
+        'submit_premium_offer_discount',
+        'submit_inactive_email_reminder',
     ]
 
     list_display = ("subject", "created")
