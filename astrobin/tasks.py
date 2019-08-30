@@ -1,21 +1,19 @@
 from __future__ import absolute_import
 
-# Python
 import subprocess
 from time import sleep
 
 from celery.utils.log import get_task_logger
-# Django
 from django.conf import settings
 from django.contrib.auth.models import User
 from django.core.cache import cache
 from django.core.mail import EmailMultiAlternatives
 from django.core.management import call_command
-# Third party
 from django_bouncy.models import Bounce
 from haystack.query import SearchQuerySet
 
-# AstroBin
+from astrobin.models import BroadcastEmail
+from astrobin.utils import inactive_accounts
 from astrobin_apps_images.models import ThumbnailGroup
 from celery import shared_task
 
@@ -176,7 +174,7 @@ def send_missing_remote_source_notifications():
     call_command("send_missing_remote_source_notifications")
 
 
-@shared_task()
+@shared_task(rate_limit="1/s")
 def send_broadcast_email(broadcastEmail, recipients):
     for recipient in recipients:
         msg = EmailMultiAlternatives(
@@ -186,3 +184,13 @@ def send_broadcast_email(broadcastEmail, recipients):
             [recipient])
         msg.attach_alternative(broadcastEmail.message_html, "text/html")
         msg.send()
+
+
+@shared_task()
+def send_inactive_account_reminder():
+    try:
+        email = BroadcastEmail.get(subject="We miss your astrophotographs!")
+        recipients = inactive_accounts()
+        send_broadcast_email.delay(email, recipients)
+    except BroadcastEmail.DoesNotExist:
+        pass
