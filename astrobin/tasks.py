@@ -9,10 +9,9 @@ from celery.utils.log import get_task_logger
 from django.conf import settings
 from django.contrib.auth.models import User
 from django.core.cache import cache
-from django.core.mail import EmailMessage
+from django.core.mail import EmailMultiAlternatives
 from django.core.management import call_command
 # Third party
-from django.utils.safestring import mark_safe
 from django_bouncy.models import Bounce
 from haystack.query import SearchQuerySet
 
@@ -180,10 +179,10 @@ def send_missing_remote_source_notifications():
 @shared_task()
 def send_broadcast_email(broadcastEmail, recipients):
     for recipient in recipients:
-        msg = EmailMessage(
+        msg = EmailMultiAlternatives(
             broadcastEmail.subject,
-            mark_safe(broadcastEmail.message),
+            broadcastEmail.message,
             settings.DEFAULT_FROM_EMAIL,
             [recipient])
-        msg.content_subtype = 'html'
+        msg.attach_alternative(broadcastEmail.message_html, "text/html")
         msg.send()

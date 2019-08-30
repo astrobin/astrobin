@@ -2660,7 +2660,8 @@ class CommercialGear(models.Model):
 class BroadcastEmail(models.Model):
     subject = models.CharField(max_length=200)
     created = models.DateTimeField(default=timezone.now)
-    message = tinymce_models.HTMLField()
+    message = models.TextField()
+    message_html = models.TextField(null=True)
 
     def __unicode__(self):
         return self.subject
