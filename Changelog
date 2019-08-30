@@ -1,4 +1,11 @@
 2019-08-29 Salvatore Iovene <salvatore@iovene.com>
+ * v1.44.0
+ * (email) Use celery task to send broadcast emails
+ * (email) Support sending broadcast emails as multipart text/html
+ * (admin) Only send premium offers to people without Premium and that accepted marketing emails
+ * (admin) Support sending reminder emails to users with at least an image but no uplads in > 2 months
+
+2019-08-29 Salvatore Iovene <salvatore@iovene.com>
  * v1.43.2
  * (admin) Fix query to determine users to send Premium offers to
 
