@@ -358,7 +358,7 @@ urlpatterns = [
 
     url(r'^gear/(?P<id>\d+)/(?:(?P<slug>[a-z0-9-_]+)/)?$', gear_page, name='gear_page'),
     url(r'^gear/by-ids/(?P<ids>([0-9]+,?)+)/$', gear_by_ids, name='gear_by_ids'),
-    url(r'^gear/by-image/(?P<image_id>\w+)/$', gear_by_image, name='gear_by_image'),
+    url(r'^gear/by-image/(?P<image_id>\d+)/$', gear_by_image, name='gear_by_image'),
     url(r'^gear/by-make/(?P<make>[(\w|\W).+-]*)/$', gear_by_make, name='gear_by_make'),
     url(r'^gear/fix/(?P<id>\d+)/$', gear_fix, name='gear_fix'),
     url(r'^gear/fix/save/$', gear_fix_save, name='gear_fix_save'),

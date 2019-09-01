@@ -2619,7 +2619,7 @@ def stats_subject_type_trend_ajax(request):
 
 @require_GET
 def gear_by_image(request, image_id):
-    image = get_image_or_404(Image, image_id)
+    image = get_object_or_404(Image, pk=image_id)
 
     attrs = ('imaging_telescopes', 'guiding_telescopes', 'mounts',
              'imaging_cameras', 'guiding_cameras', 'focal_reducers',
