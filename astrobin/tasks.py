@@ -176,7 +176,7 @@ def send_missing_remote_source_notifications():
 
 @shared_task(rate_limit="1/s")
 def send_broadcast_email(broadcastEmail, recipients):
-    for recipient in recipients:
+    for recipient in list(recipients):
         msg = EmailMultiAlternatives(
             broadcastEmail.subject,
             broadcastEmail.message,
@@ -191,6 +191,7 @@ def send_inactive_account_reminder():
     try:
         email = BroadcastEmail.objects.get(subject="We miss your astrophotographs!")
         recipients = inactive_accounts()
-        send_broadcast_email.delay(email, recipients)
+        send_broadcast_email.delay(email, recipients.values_list('user__email', flat=True))
+        recipients.update(inactive_account_reminder_sent=timezone.now())
     except BroadcastEmail.DoesNotExist:
         pass

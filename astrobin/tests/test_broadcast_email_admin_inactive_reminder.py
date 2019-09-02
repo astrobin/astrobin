@@ -78,7 +78,7 @@ class BroadcastEmailAdminInactiveReminderTest(TestCase):
         email = BroadcastEmail.objects.create(subject="test")
         admin = BroadcastEmailAdmin(model=BroadcastEmail, admin_site=AdminSite())
 
-        user = User.objects.create(username="inactive", password="inactive")
+        user = User.objects.create(username="inactive", password="inactive", email="email@email.com")
         user.userprofile.inactive_account_reminder_sent = timezone.now() - timedelta(days=90)
         user.userprofile.save()
         image = Image.objects.create(user=user)
@@ -87,7 +87,9 @@ class BroadcastEmailAdminInactiveReminderTest(TestCase):
 
         admin.submit_inactive_email_reminder(request, BroadcastEmail.objects.filter(pk=email.pk))
 
+        args, kwargs = taskMock.call_args
         taskMock.assert_called()
+        self.assertEquals(["email@email.com"], list(args[1]))
 
     @patch("astrobin.tasks.send_broadcast_email.delay")
     @patch("django.contrib.admin.ModelAdmin.message_user")
@@ -97,11 +99,13 @@ class BroadcastEmailAdminInactiveReminderTest(TestCase):
         email = BroadcastEmail.objects.create(subject="test")
         admin = BroadcastEmailAdmin(model=BroadcastEmail, admin_site=AdminSite())
 
-        user = User.objects.create(username="inactive", password="inactive")
+        user = User.objects.create(username="inactive", password="inactive", email="email@email.com")
         image = Image.objects.create(user=user)
         image.uploaded = image.uploaded - timedelta(61)
         image.save()
 
         admin.submit_inactive_email_reminder(request, BroadcastEmail.objects.filter(pk=email.pk))
 
+        args, kwargs = taskMock.call_args
         taskMock.assert_called()
+        self.assertEquals(["email@email.com"], list(args[1]))
