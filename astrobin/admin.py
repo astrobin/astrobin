@@ -283,12 +283,12 @@ class BroadcastEmailAdmin(admin.ModelAdmin):
         profiles = [x for x in profiles if premium_get_valid_usersubscription(x.user) is None]
 
         recipients = UserProfile.objects.filter(pk__in=[x.pk for x in profiles])
-        self.submit_email(request, obj, recipients)
+        self.submit_email(request, obj, recipients.values_list("user__email", flat=True))
         recipients.update(premium_offer_sent=datetime.now())
 
     def submit_inactive_email_reminder(self, request, obj):
         recipients = inactive_accounts()
-        self.submit_email(request, obj, recipients)
+        self.submit_email(request, obj, recipients.values_list('user__email', flat=True))
         recipients.update(inactive_account_reminder_sent=timezone.now())
 
     submit_mass_email.short_description = 'Submit mass email (select one only) - DO NOT ABUSE'

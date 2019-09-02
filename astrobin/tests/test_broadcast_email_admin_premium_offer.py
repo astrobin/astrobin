@@ -31,7 +31,7 @@ class BroadcastEmailAdminPremiumOfferTest(TestCase):
         email = BroadcastEmail.objects.create(subject="test")
         admin = BroadcastEmailAdmin(model=BroadcastEmail, admin_site=AdminSite())
 
-        user = User.objects.create(username="discount", password="discount")
+        user = User.objects.create(username="discount", password="discount", email="email@email.com")
         user.userprofile.premium_offer = "premium_offer_discount_20"
         user.userprofile.premium_offer_expiration = datetime.now() + timedelta(days=1)
         user.userprofile.receive_marketing_and_commercial_material = True
@@ -39,7 +39,9 @@ class BroadcastEmailAdminPremiumOfferTest(TestCase):
 
         admin.submit_premium_offer_discount(request, BroadcastEmail.objects.filter(pk=email.pk))
 
+        args, kwargs = taskMock.call_args
         taskMock.assert_called()
+        self.assertEquals(["email@email.com"], list(args[1]))
         self.assertEqual(1, taskMock.call_count)
         user.userprofile.refresh_from_db()
         self.assertIsNotNone(user.userprofile.premium_offer_sent)
@@ -98,7 +100,7 @@ class BroadcastEmailAdminPremiumOfferTest(TestCase):
         email = BroadcastEmail.objects.create(subject="test")
         admin = BroadcastEmailAdmin(model=BroadcastEmail, admin_site=AdminSite())
 
-        user = User.objects.create(username="discount", password="discount")
+        user = User.objects.create(username="discount", password="discount", email="email@email.com")
         user.userprofile.premium_offer = "premium_offer_discount_20"
         user.userprofile.premium_offer_expiration = datetime.now() + timedelta(days=1)
         user.userprofile.receive_marketing_and_commercial_material = True
@@ -120,8 +122,9 @@ class BroadcastEmailAdminPremiumOfferTest(TestCase):
         user_subscription.save()
 
         admin.submit_premium_offer_discount(request, BroadcastEmail.objects.filter(pk=email.pk))
-
+        args, kwargs = taskMock.call_args
         taskMock.assert_called()
+        self.assertEquals(["email@email.com"], list(args[1]))
 
     @patch("astrobin.tasks.send_broadcast_email.delay")
     def test_submit_premium_offer_discount_already_lite(self, taskMock):
@@ -190,13 +193,13 @@ class BroadcastEmailAdminPremiumOfferTest(TestCase):
         email = BroadcastEmail.objects.create(subject="test")
         admin = BroadcastEmailAdmin(model=BroadcastEmail, admin_site=AdminSite())
 
-        user = User.objects.create(username="discount", password="discount")
+        user = User.objects.create(username="discount", password="discount", email="email@email.com")
         user.userprofile.premium_offer = "premium_offer_discount_20"
         user.userprofile.premium_offer_expiration = datetime.now() + timedelta(days=1)
         user.userprofile.receive_marketing_and_commercial_material = True
         user.userprofile.save()
 
-        user2 = User.objects.create(username="discount2", password="discount")
+        user2 = User.objects.create(username="discount2", password="discount", email="email2@email.com")
         user2.userprofile.premium_offer = "premium_offer_discount_50"
         user2.userprofile.premium_offer_expiration = datetime.now() + timedelta(days=1)
         user2.userprofile.receive_marketing_and_commercial_material = True
@@ -204,8 +207,9 @@ class BroadcastEmailAdminPremiumOfferTest(TestCase):
 
         admin.submit_premium_offer_discount(request, BroadcastEmail.objects.filter(pk=email.pk))
 
+        args, kwargs = taskMock.call_args
         taskMock.assert_called()
-
+        self.assertEquals(["email@email.com", "email2@email.com"], list(args[1]))
         user.userprofile.refresh_from_db()
         user2.userprofile.refresh_from_db()
         self.assertIsNotNone(user.userprofile.premium_offer_sent)
@@ -219,7 +223,7 @@ class BroadcastEmailAdminPremiumOfferTest(TestCase):
         email = BroadcastEmail.objects.create(subject="test")
         admin = BroadcastEmailAdmin(model=BroadcastEmail, admin_site=AdminSite())
 
-        user = User.objects.create(username="discount", password="discount")
+        user = User.objects.create(username="discount", password="discount", email="email@email.com")
         user.userprofile.premium_offer = "premium_offer_discount_20"
         user.userprofile.premium_offer_expiration = datetime.now() + timedelta(days=1)
         user.userprofile.premium_offer_sent = datetime.now() - timedelta(days=31)
@@ -228,7 +232,9 @@ class BroadcastEmailAdminPremiumOfferTest(TestCase):
 
         admin.submit_premium_offer_discount(request, BroadcastEmail.objects.filter(pk=email.pk))
 
+        args, kwargs = taskMock.call_args
         taskMock.assert_called()
+        self.assertEquals(["email@email.com"], list(args[1]))
         user.userprofile.refresh_from_db()
         self.assertTrue(user.userprofile.premium_offer_sent > datetime.now() - timedelta(minutes=1))
 
