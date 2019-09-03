@@ -68,7 +68,6 @@ INSTALLED_APPS = [
     'change_email',
     'template_timings_panel',
     'cookielaw',
-    'webpack_loader',
     'corsheaders',
 
     'astrobin.apps.AstroBinAppConfig',

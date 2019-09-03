@@ -40,7 +40,6 @@ include(
     'components/tinymce.py',
     'components/thumbnail.py',
     'components/toggleproperties.py',
-    'components/webpack-loader.py',
 
     # AstroBin settings
     'components/flickr.py',
