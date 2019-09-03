@@ -43,3 +43,7 @@ ROOT_URLCONF = 'astrobin.urls'
 ALLOWED_IMAGE_EXTENSIONS = ('.jpg', '.jpeg', '.png', '.gif')
 
 GEOIP_PATH = os.path.abspath(os.path.dirname(__name__)) + "/astrobin/geoip2"
+
+CORS_ORIGIN_ALLOW_ALL = (
+    'app.astrobin.com'
+)
