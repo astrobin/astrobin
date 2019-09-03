@@ -43,6 +43,7 @@ django-contact-form-gv==0.5.2
 django-contrib-comments==1.8.0
 django-cookie-law==2.0.1
 -e git+https://github.com/siovene/snakecheese.git@72c5c7be4a5ae19c9054f11c8cedb68dd661fd65#egg=django_contrib_requestprovider&subdirectory=gadjolib
+django-cors-middleware==1.3.1
 django-crispy-forms==1.7.0
 -e git+https://github.com/siovene/django-dfp.git@5ab04abe52844ffc737107b0325751000fba9a85#egg=django_dfp
 django-debug-toolbar==1.9.1
