@@ -70,13 +70,6 @@ RUN yarn global add \
 # Install compass
 RUN gem install compass
 
-# Build frontend
-RUN yarn global add @angular/cli
-COPY frontend /code/frontend
-WORKDIR /code/frontend
-RUN npm install && ng build --aot && rm -rf node_modules
-WORKDIR /code
-
 # Install logrotate file
 COPY docker/astrobin.logrotate.conf /etc/logrotate.d/astrobin
 RUN chown root:root /etc/logrotate.d/astrobin && chmod 644 /etc/logrotate.d/astrobin
