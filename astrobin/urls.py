@@ -36,7 +36,6 @@ from astrobin.views import (
     special as special_views,
 
     index,
-    app,
 
     image_edit_acquisition,
     image_edit_acquisition_reset,
@@ -154,12 +153,6 @@ v1_api.register(ImageOfTheDayResource())
 v1_api.register(CollectionResource())
 
 urlpatterns = [
-    ###########################################################################
-    ### FRONTEND APP                                                        ###
-    ###########################################################################
-
-    url(r'^app/$', app, name='app'),
-
     ###########################################################################
     ### DJANGO VIEWS                                                        ###
     ###########################################################################
@@ -517,11 +510,6 @@ if (settings.DEBUG or settings.TESTING) and settings.LOCAL_STATIC_STORAGE:
     urlpatterns += static(settings.STATIC_URL, document_root=settings.STATIC_ROOT)
     urlpatterns += patterns('', (r'^static/(?P<path>.*)$', 'django.views.static.serve',
                                  {'document_root': settings.STATIC_ROOT, 'show_indexes': True}))
-
-if settings.LOCAL_STATIC_STORAGE:
-    urlpatterns += static("^assets", document_root="frontend/src/assets")
-    urlpatterns += patterns('', (r'^assets/(?P<path>.*)$', 'django.views.static.serve',
-                                 {'document_root': "frontend/src/assets", 'show_indexes': True}))
 
 if settings.DEBUG or settings.TESTING:
     import debug_toolbar
