@@ -126,7 +126,7 @@ services:
 
   astrobin:
     image: astrobin/astrobin:v1.44.5
-    command: bash -c "./manage.py migrate --noinput && gunicorn wsgi:application -w 4 -b :8083"
+    command: bash -c "./manage.py migrate --noinput && gunicorn wsgi:application -w 4 -b :8083 --timeout 300"
     links:
       - memcached
       - postgres
@@ -141,6 +141,7 @@ services:
       - POSTGRES_USER=astrobin
     volumes:
       - media:/media
+      - tmp:/tmp
 
 
   flower:
@@ -165,3 +166,4 @@ volumes:
   elasticsearch-data: {}
   media: {}
   letsencrypt: {}
+  tmp: {}
