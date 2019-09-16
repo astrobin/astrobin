@@ -472,16 +472,19 @@ def image_upload_process(request):
     if ext not in settings.ALLOWED_IMAGE_EXTENSIONS:
         return upload_error()
 
-    try:
-        from PIL import Image as PILImage
-        trial_image = PILImage.open(image_file)
-        trial_image.verify()
+    if image_file.size < 2e+7:
+        try:
+            from PIL import Image as PILImage
+            trial_image = PILImage.open(image_file)
+            trial_image.verify()
 
-        if ext == '.png' and trial_image.mode == 'I':
-            messages.warning(request, _(
-                "You uploaded an Indexed PNG file. AstroBin will need to lower the color count to 256 in order to work with it."))
-    except:
-        return upload_error()
+            if ext == '.png' and trial_image.mode == 'I':
+                messages.warning(request, _(
+                    "You uploaded an Indexed PNG file. AstroBin will need to lower the color count to 256 in order to work with it."))
+        except:
+            return upload_error()
+    else:
+        messages.warning(request, _("You uploaded a pretty large file. For that reason, AstroBin could not verify that it's a valid image."))
 
     profile = request.user.userprofile
     image = form.save(commit=False)
