@@ -472,11 +472,12 @@ def image_upload_process(request):
     if ext not in settings.ALLOWED_IMAGE_EXTENSIONS:
         return upload_error()
 
-    if image_file.size < 2e+7:
+    if image_file.size < 1e+7:
         try:
             from PIL import Image as PILImage
             trial_image = PILImage.open(image_file)
             trial_image.verify()
+            image_file.file.seek(0) # Because we opened it with PIL
 
             if ext == '.png' and trial_image.mode == 'I':
                 messages.warning(request, _(
@@ -494,7 +495,6 @@ def image_upload_process(request):
     if 'wip' in request.POST:
         image.is_wip = True
 
-    image.image_file.file.seek(0) # Because we opened it with PIL
     image.save(keep_deleted=True)
 
     from astrobin.tasks import retrieve_primary_thumbnails
@@ -1963,16 +1963,21 @@ def image_revision_upload_process(request):
     if ext not in settings.ALLOWED_IMAGE_EXTENSIONS:
         return upload_error(image)
 
-    try:
-        from PIL import Image as PILImage
-        trial_image = PILImage.open(image_file)
-        trial_image.verify()
+    if image_file.size < 1e+7:
+        try:
+            from PIL import Image as PILImage
+            trial_image = PILImage.open(image_file)
+            trial_image.verify()
+            image_file.file.seek(0) # Because we opened it with PIL
 
-        if ext == '.png' and trial_image.mode == 'I':
-            messages.warning(request, _(
-                "You uploaded an Indexed PNG file. AstroBin will need to lower the color count to 256 in order to work with it."))
-    except:
-        return upload_error(image)
+            if ext == '.png' and trial_image.mode == 'I':
+                messages.warning(request, _(
+                    "You uploaded an Indexed PNG file. AstroBin will need to lower the color count to 256 in order to work with it."))
+        except:
+            return upload_error(image)
+    else:
+        messages.warning(request, _(
+            "You uploaded a pretty large file. For that reason, AstroBin could not verify that it's a valid image."))
 
     revisions = ImageRevision.all_objects.filter(image=image).order_by('id')
     highest_label = 'A'
@@ -1990,7 +1995,6 @@ def image_revision_upload_process(request):
     image_revision.is_final = True
     image_revision.label = base26_encode(base26_decode(highest_label) + 1)
 
-    image_revision.image_file.file.seek(0) # Because we opened it with PIL
     image_revision.save(keep_deleted=True)
 
     messages.success(request, _("Image uploaded. Thank you!"))
