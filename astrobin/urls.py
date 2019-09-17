@@ -483,7 +483,7 @@ urlpatterns = [
     url(r'^edit/revision/(?P<id>\w+)/$', image_views.ImageEditRevisionView.as_view(), name='image_edit_revision'),
     url(r'^promote/(?P<id>\w+)/$', image_views.ImagePromoteView.as_view(), name='image_promote'),
     url(r'^upload/$', image_upload, name='image_upload'),
-    url(r'^upload/process$', image_upload_process, name='image_upload_process'),
+    url(r'^upload/process/$', image_upload_process, name='image_upload_process'),
     url(r'^upload/revision/process/$', image_revision_upload_process, name='image_revision_upload_process'),
 
     ###########################################################################
