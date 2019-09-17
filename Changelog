@@ -1,3 +1,8 @@
+2019-09-17 Salvatore Iovene <salvatore@iovene.com>
+ * v1.44.7
+ * (images) Lower image verification limit to 10MB and apply to revisions too
+ * (images) Avoid 302 redirect by appending slash to upload/process/ url
+
 2019-09-16 Salvatore Iovene <salvatore@iovene.com>
  * v1.44.6
  * (infra) Increase gunicorn timeout to 300s
