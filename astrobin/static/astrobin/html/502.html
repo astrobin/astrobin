@@ -1,52 +1,154 @@
-<!DOCTYPE html>
+<!doctype html>
+
 <html lang="en">
-    <head>
-        <title>AstroBin is unavailable right now</title>
 
-        <meta name="viewport" content="width=device-width, initial-scale=1.0">
-        <meta http-equiv="content-type" content="text/html; charset=UTF-8" />
-        <meta name="author" content="Salvatore Iovene - http://iovene.com/" />
-        <meta name="description" content="AstroBin is an image hosting website specifically targeted to astrophotographers: it's the first and the last place where you need to upload your astrophotography images. Made by an astrophotographer, for the astrophotographers." />
-        <meta name="keywords" content="astrophotography, astronomy, telescopes" />
-        <meta name="robots" content="index, follow, noarchive" />
-        <meta name="googlebot" content="noarchive" />
+<head>
+    <meta charset="utf-8">
 
-        <link rel="shortcut icon" href="favicon.ico" type="image/x-icon">
-        <link rel="icon" href="favicon.ico" type="image/x-icon">
+    <title>Oops, AstroBin is currently unavailable</title>
+    <meta name="description" content="AstroBin unavailable">
+    <meta name="author" content="Salvatore Iovene <salvatore@iovene.com>">
 
-        <link href="https://cdn.astrobin.com/static/css/astrobin_pipeline_screen_v224.css" rel="stylesheet" type="text/css" />
-    </head>
+    <style>
+        body {
+            color: #ccc;
+            background: #333 url("https://cdn.astrobin.com/static/astrobin/images/background-tile.png") repeat;
+            text-align: center;
+            padding: 2rem 0 5rem;
+        }
 
-    <body data-offset="55">
-        <div id="top" class="container astrobin-container" style="padding-top: 50px">
-            <div class="row">
-                <div class="span8">
-                    <h1 style="font-size: 3em, line-height: 1em">
-                        AstroBin is unavailable
-                    </h1>
-                    <p>
-                        AstroBin is undergoing maintenance. You are seeing this
-                        page because the server is either rebooting for an
-                        update. In most cases this will only take a minute, but
-                        in case of larger operations it could take longer.
-                    </p>
-                    <p>
-                        Please visit
-                        <a href="https://twitter.com/astrobin_com"
-                           target="_blank">
-                            AstroBin Twitter feed
-                        </a> for updated information, or try the
-                        <a href="https://www.astrobin.com/">home page</a>
-                        again.
-                    </p>
-                    <p class="strong">
-                        Thank you for your patience!
-                    </p>
-                </div>
-                <div class="span4">
-                    <img src="https://cdn.astrobin.com/static/images/502.png" alt="Error 502" />
-                </div>
-            </div>
-        </div> <!-- container -->
-    </body>
+        header {
+            color: #f0f0f0;
+            text-shadow: 0 0 .5rem rgba(0, 0, 0, .2);
+        }
+
+        header h1 {
+            font-size: 2rem;
+        }
+
+        header h2 {
+            color: #ddd;
+            margin-top: -1.5rem;
+            margin-bottom: 2rem;
+            font-size: 1.5rem;
+        }
+
+        .container {
+            position: relative;
+            border: 1px solid #505050;
+            border-radius: .5rem;
+            box-shadow: 0 0 1rem rgba(0, 0, 0, .2);
+            background: #222 url("https://cdn.astrobin.com/static/astrobin/images/dark-panel-tile.png") repeat;
+            padding: 1rem 2rem;
+            width: 50%;
+                margin: 2rem auto 0;
+        }
+
+        .container:after {
+            content: "";
+            width: 17px;
+            height: 15px;
+            position: absolute;
+            top: 1rem;
+            left: 1rem;
+        }
+
+        .container.en:after {
+            background: url("https://cdn.astrobin.com/static/astrobin/icons/flags/16/United-Kingdom.png") no-repeat;
+        }
+
+        .container.de:after {
+            background: url("https://cdn.astrobin.com/static/astrobin/icons/flags/16/Germany.png") no-repeat;
+        }
+
+        .container.fr:after {
+            background: url("https://cdn.astrobin.com/static/astrobin/icons/flags/16/France.png");
+        }
+
+        .container.it:after {
+            background: url("https://cdn.astrobin.com/static/astrobin/icons/flags/16/Italy.png");
+        }
+
+        .container:not(.en) {
+            opacity: .33;
+            transform: scale(.95);
+            transition: all .2s ease-in-out;
+        }
+
+        .container:not(.en):hover {
+            opacity: 1;
+            transform: scale(1);
+        }
+
+        .content p {
+            margin-bottom: 1rem;
+            line-height: 1.5rem;
+        }
+
+        .logo {
+            margin-top: 5rem;
+        }
+    </style>
+</head>
+
+<body>
+
+<section class="container en">
+    <header>
+        <h1>Oops!</h1>
+        <h2>AstroBin is momentarily unavailable.</h2>
+    </header>
+
+    <article class="content">
+        <p>This is most likely due to a quick service restart or a small maintenance window. Please refresh the page to
+            try again!</p>
+        <p>Sorry about the inconvenience!</p>
+    </article>
+</section>
+
+<section class="container de">
+    <header>
+        <h1>Hoppla!</h1>
+        <h2>AstroBin ist momentan nicht verfügbar.</h2>
+    </header>
+
+    <article class="content">
+        <p>Dies ist höchstwahrscheinlich auf einen schnellen Neustart des Dienstes oder ein kleines Wartungsfenster
+            zurückzuführen. Bitte aktualisieren Sie die Seite, um es erneut zu versuchen!</p>
+        <p>Entschuldigen Sie die Unannehmlichkeiten!</p>
+    </article>
+</section>
+
+<section class="container fr">
+    <header>
+        <h1>Oops!</h1>
+        <h2>AstroBin est momentanément indisponible.</h2>
+    </header>
+
+    <article class="content">
+        <p>Cela est probablement dû à un redémarrage rapide du service ou à une petite fenêtre de maintenance. Veuillez
+            rafraîchir la page pour réessayer!</p>
+        <p>Désolé pour le dérangement!</p>
+    </article>
+</section>
+
+<section class="container it">
+    <header>
+        <h1>Ops!</h1>
+        <h2>AstroBin al momento non è disponibile.</h2>
+    </header>
+
+    <article class="content">
+        <p>Probabilmente è per via di un rapido reboot di un servizio, oppure di manutenzione al sistema! Prova a
+            ricaicre la pagina!</p>
+        <p>Spiacenti per il disagio!</p>
+    </article>
+</section>
+
+<section class="logo">
+    <img src="https://cdn.astrobin.com/static/astrobin/images/astrobin-logo-small.png " alt="AstroBin " />
+</section>
+
+</body>
+
 </html>
