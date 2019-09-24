@@ -46,7 +46,7 @@ $(document).ready(function () {
 
                             var $img =
                                 $('img.astrobin-image[data-id=' + data.id +
-                                    '][data-hash=' + data.hash +
+                                    (data.hash ? '][data-hash=' + data.hash : "") +
                                     '][data-alias=' + data.alias +
                                     '][data-revision=' + data.revision +
                                     ']');
