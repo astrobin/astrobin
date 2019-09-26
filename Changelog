@@ -1,3 +1,9 @@
+2019-09-26 Salvatore Iovene <salvatore@iovene.com>
+ * v1.44.8
+ * (infra) Add custom 502 page to nginx configuration
+ * (infra) Add some memory optimization options for gunicorn and celery
+ * (images) Deal with missing hash when loading thumbnails
+
 2019-09-17 Salvatore Iovene <salvatore@iovene.com>
  * v1.44.7
  * (images) Lower image verification limit to 10MB and apply to revisions too
