@@ -1,25 +1,9 @@
-# Python
-import string
-import unicodedata
-import operator
 import datetime
-import itertools
 
-# Django
 from django import forms
-from django.db import models
 from django.utils.translation import ugettext_lazy as _
-from django.utils.datastructures import MultiValueDictKeyError
 
-# Third party apps
-from haystack.query import SearchQuerySet, EmptySearchQuerySet
-from haystack.query import SQ
-
-# AstroBin apps
 from astrobin_apps_groups.models import Group
-from astrobin_apps_notifications.types import NOTICE_TYPES
-
-# This app
 from models import *
 from utils import affiliate_limit, retailer_affiliate_limit
 
@@ -93,6 +77,13 @@ class ImageEditBasicForm(forms.ModelForm):
         help_text=_("Submit this image to the selected groups."),
     )
 
+    mouse_hover_image = forms.ChoiceField(
+        required=False,
+        label=_("Mouse hover image"),
+        help_text=_("Choose what will be displayed when somebody hovers the mouse over this image. Please note: only "
+                    "revisions with the same width and height of your original image can be considered."),
+    )
+
     def __init__(self, **kwargs):
         super(ImageEditBasicForm, self).__init__(**kwargs)
 
@@ -111,6 +102,16 @@ class ImageEditBasicForm(forms.ModelForm):
                     members=self.instance.user)]
         else:
             self.fields.pop('groups')
+
+        self.fields['mouse_hover_image'].choices = Image.MOUSE_HOVER_CHOICES
+
+        revisions = self.instance.revisions
+        if revisions.count() > 0:
+            for revision in revisions.all():
+                if revision.w == self.instance.w and revision.h == self.instance.h:
+                    self.fields['mouse_hover_image'].choices = self.fields['mouse_hover_image'].choices + [
+                        ("REVISION__%s" % revision.label, "%s %s" % (_("Revision"), revision.label))
+                    ]
 
     def save(self, commit=True):
         instance = super(ImageEditBasicForm, self).save(commit=False)
@@ -156,8 +157,7 @@ class ImageEditBasicForm(forms.ModelForm):
         model = Image
         fields = (
             'title', 'link', 'link_to_fits', 'acquisition_type', 'data_source', 'remote_source', 'subject_type',
-            'solar_system_main_subject', 'locations', 'groups', 'description',
-            'allow_comments')
+            'solar_system_main_subject', 'locations', 'groups', 'description', 'mouse_hover_image', 'allow_comments')
 
 
 class ImageEditWatermarkForm(forms.ModelForm):
@@ -231,13 +231,39 @@ class ImageEditGearForm(forms.ModelForm):
 
 
 class ImageEditRevisionForm(forms.ModelForm):
+    mouse_hover_image = forms.ChoiceField(
+        required=False,
+        label=_("Mouse hover image"),
+        help_text=_("Choose what will be displayed when somebody hovers the mouse over this image revision. Please"
+                    "note: only revisions with the same width and height as this one can be considered."),
+    )
+
+    def __init__(self, **kwargs):
+        super(ImageEditRevisionForm, self).__init__(**kwargs)
+
+        self.fields['mouse_hover_image'].choices = Image.MOUSE_HOVER_CHOICES
+
+        revisions = self.instance.image.revisions
+        if revisions.count() > 0:
+            for revision in revisions.all():
+                if revision.label != self.instance.label \
+                        and revision.w == self.instance.w \
+                        and revision.h == self.instance.h:
+                    self.fields['mouse_hover_image'].choices = self.fields['mouse_hover_image'].choices + [
+                        ("REVISION__%s" % revision.label, "%s %s" % (_("Revision"), revision.label))
+                    ]
+
+        if self.instance.w == self.instance.image.w and self.instance.h == self.instance.image.h:
+            self.fields['mouse_hover_image'].choices = self.fields['mouse_hover_image'].choices + [
+                ("ORIGINAL", _("Original image"))
+            ]
+
     class Meta:
         model = ImageRevision
-        fields = ('description',)
+        fields = ('description', 'mouse_hover_image')
         widgets = {
             'description': forms.Textarea(attrs={'rows': 4}),
         }
-
 
 class UserProfileEditBasicForm(forms.ModelForm):
     error_css_class = 'error'
