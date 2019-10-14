@@ -637,7 +637,9 @@ class ImageDetailView(ImageDetailViewBase):
             'revision_label': r,
 
             'instance_to_platesolve': instance_to_platesolve,
-            'show_solution': instance_to_platesolve.solution and instance_to_platesolve.solution.status == Solver.SUCCESS,
+            'show_solution': instance_to_platesolve.mouse_hover_image == "SOLUTION"
+                             and instance_to_platesolve.solution
+                             and instance_to_platesolve.solution.status == Solver.SUCCESS,
             'skyplot_zoom1': skyplot_zoom1,
 
             'image_ct': ContentType.objects.get_for_model(Image),

@@ -1,25 +1,17 @@
 # -*- coding: UTF-8
 
-# Python
 import re
 import time
-from mock import patch
 
-# Django
 from django.conf import settings
 from django.contrib.auth.models import Group, User
 from django.contrib.contenttypes.models import ContentType
 from django.core.urlresolvers import reverse
 from django.test import TestCase
-
-# AstroBin
-from nested_comments.models import NestedComment
-
-# Third party
+from mock import patch
 from subscription.models import Subscription, UserSubscription
 from toggleproperties.models import ToggleProperty
 
-# AstroBin
 from astrobin.models import (
     Image,
     ImageRevision,
@@ -35,6 +27,9 @@ from astrobin.models import (
     Location)
 from astrobin_apps_groups.models import Group as AstroBinGroup
 from astrobin_apps_notifications.utils import get_unseen_notifications
+from astrobin_apps_platesolving.models import Solution
+from astrobin_apps_platesolving.solver import Solver
+from nested_comments.models import NestedComment
 
 
 class ImageTest(TestCase):
@@ -375,6 +370,166 @@ class ImageTest(TestCase):
         self.assertEqual(acquisition.duration, 1200)
 
         image.delete()
+
+    @patch("astrobin.tasks.retrieve_primary_thumbnails")
+    def test_image_detail_view_original_revision_overlay(self, retrieve_primary_thumbnails):
+        self.client.login(username='test', password='password')
+        self._do_upload('astrobin/fixtures/test.jpg')
+        image = self._get_last_image()
+
+        Solution.objects.create(
+            status=Solver.SUCCESS,
+            content_object=image
+        )
+
+        self._do_upload_revision(image, 'astrobin/fixtures/test.jpg', "Test revision description")
+        revision = self._get_last_image_revision()
+
+        image.mouse_hover_image = "REVISION__%s" % revision.label
+        image.save()
+
+        response = self.client.get(reverse('image_detail', kwargs={'id': image.get_id()}))
+        self.assertContains(response, "hover-overlay-original-revision")
+        self.assertNotContains(response, "hover-overlay-solution")
+
+        image.delete()
+        self.client.logout()
+
+    @patch("astrobin.tasks.retrieve_primary_thumbnails")
+    def test_image_detail_view_original_solution_overlay(self, retrieve_primary_thumbnails):
+        self.client.login(username='test', password='password')
+        self._do_upload('astrobin/fixtures/test.jpg')
+        image = self._get_last_image()
+
+        Solution.objects.create(
+            status=Solver.SUCCESS,
+            content_object=image
+        )
+
+        response = self.client.get(reverse('image_detail', kwargs={'id': image.get_id()}))
+        self.assertContains(response, "hover-overlay-solution")
+
+        image.delete()
+        self.client.logout()
+
+    @patch("astrobin.tasks.retrieve_primary_thumbnails")
+    def test_image_detail_view_original_inverted_overlay(self, retrieve_primary_thumbnails):
+        self.client.login(username='test', password='password')
+        self._do_upload('astrobin/fixtures/test.jpg')
+        image = self._get_last_image()
+
+        Solution.objects.create(
+            status=Solver.SUCCESS,
+            content_object=image
+        )
+
+        image.mouse_hover_image = "INVERTED"
+        image.save()
+
+        response = self.client.get(reverse('image_detail', kwargs={'id': image.get_id()}))
+        self.assertContains(response, "hover-overlay-original-inverted")
+        self.assertNotContains(response, "hover-overlay-solution")
+
+        image.delete()
+        self.client.logout()
+
+    @patch("astrobin.tasks.retrieve_primary_thumbnails")
+    def test_image_detail_view_revision_original_overlay(self, retrieve_primary_thumbnails):
+        self.client.login(username='test', password='password')
+        self._do_upload('astrobin/fixtures/test.jpg')
+        image = self._get_last_image()
+
+        self._do_upload_revision(image, 'astrobin/fixtures/test.jpg', "Test revision description")
+        revision = self._get_last_image_revision()
+
+        Solution.objects.create(
+            status=Solver.SUCCESS,
+            content_object=revision
+        )
+
+        revision.mouse_hover_image = "ORIGINAL"
+        revision.save()
+
+        response = self.client.get(reverse('image_detail', kwargs={'id': image.get_id(), "r": revision.label}))
+        self.assertContains(response, "hover-overlay-revision-original")
+        self.assertNotContains(response, "hover-overlay-solution")
+
+        image.delete()
+        self.client.logout()
+
+    @patch("astrobin.tasks.retrieve_primary_thumbnails")
+    def test_image_detail_view_revision_solutin_overlay(self, retrieve_primary_thumbnails):
+        self.client.login(username='test', password='password')
+        self._do_upload('astrobin/fixtures/test.jpg')
+        image = self._get_last_image()
+
+        self._do_upload_revision(image, 'astrobin/fixtures/test.jpg', "Test revision description")
+        revision = self._get_last_image_revision()
+
+        Solution.objects.create(
+            status=Solver.SUCCESS,
+            content_object=revision
+        )
+
+        response = self.client.get(reverse('image_detail', kwargs={'id': image.get_id(), "r": revision.label}))
+        self.assertContains(response, "hover-overlay-solution")
+
+        image.delete()
+        self.client.logout()
+
+    @patch("astrobin.tasks.retrieve_primary_thumbnails")
+    def test_image_detail_view_revision_revision_overlay(self, retrieve_primary_thumbnails):
+        self.client.login(username='test', password='password')
+        self._do_upload('astrobin/fixtures/test.jpg')
+        image = self._get_last_image()
+
+        self._do_upload_revision(image, 'astrobin/fixtures/test.jpg', "Test revision description")
+        revision = self._get_last_image_revision()
+
+        self._do_upload_revision(image, 'astrobin/fixtures/test.jpg', "Test revision description")
+        revision2 = self._get_last_image_revision()
+
+        Solution.objects.create(
+            status=Solver.SUCCESS,
+            content_object=revision
+        )
+
+        revision.mouse_hover_image = "REVISION__%s" % revision2.label
+        revision.save()
+
+        response = self.client.get(reverse('image_detail', kwargs={'id': image.get_id(), "r": revision.label}))
+        self.assertContains(response, "hover-overlay-revision-revision")
+        self.assertNotContains(response, "hover-overlay-solution")
+
+        image.delete()
+        self.client.logout()
+
+    @patch("astrobin.tasks.retrieve_primary_thumbnails")
+    def test_image_detail_view_revision_inverted_overlay(self, retrieve_primary_thumbnails):
+        self.client.login(username='test', password='password')
+        self._do_upload('astrobin/fixtures/test.jpg')
+        image = self._get_last_image()
+
+        self._do_upload_revision(image, 'astrobin/fixtures/test.jpg', "Test revision description")
+        revision = self._get_last_image_revision()
+
+        self._do_upload_revision(image, 'astrobin/fixtures/test.jpg', "Test revision description")
+        revision2 = self._get_last_image_revision()
+
+        Solution.objects.create(
+            status=Solver.SUCCESS,
+            content_object=revision
+        )
+
+        revision.mouse_hover_image = "INVERTED"
+        revision.save()
+
+        response = self.client.get(reverse('image_detail', kwargs={'id': image.get_id(), "r": revision.label}))
+        self.assertContains(response, "hover-overlay-revision-inverted")
+        self.assertNotContains(response, "hover-overlay-solution")
+
+        image.delete()
+        self.client.logout()
 
     @patch("astrobin.tasks.retrieve_primary_thumbnails")
     def test_image_detail_view(self, retrieve_primary_thumbnails):

@@ -2009,7 +2009,7 @@ BODY:first-of-type ul.as-list, x:-moz-any-link, x:default { /* Target FF 3.5+ */
     }
   }
 
-  &.plot-overlay {
+  &.hover-overlay {
     position: absolute;
     top: 0;
 
@@ -2030,7 +2030,7 @@ BODY:first-of-type ul.as-list, x:-moz-any-link, x:default { /* Target FF 3.5+ */
       }
     }
 
-    &.plot-overlay-fixed {
+    &.hover-overlay-fixed {
       img {
         @include opacity(1);
 

@@ -1,11 +1,8 @@
-# Python
 import csv
 import urllib2
 
 import flickrapi
-# Third party
 from actstream.models import Action
-# Django
 from django.contrib import auth
 from django.contrib import messages
 from django.contrib.auth.decorators import login_required, user_passes_test
@@ -20,22 +17,22 @@ from django.shortcuts import get_object_or_404
 from django.shortcuts import render_to_response
 from django.template import loader, RequestContext
 from django.template.loader import render_to_string
+from django.utils.datastructures import MultiValueDictKeyError
 from django.utils.functional import curry
 from django.utils.translation import ugettext as _
 from django.views.decorators.cache import never_cache
 from django.views.decorators.http import require_GET, require_POST
 from el_pagination.decorators import page_template
 from haystack.exceptions import SearchFieldError
+from haystack.query import SearchQuerySet
 from reviews.views import ReviewAddForm
 from silk.profiling.profiler import silk_profile
 
-# AstroBin
 from astrobin.forms import *
 from astrobin.gear import *
 from astrobin.models import *
 from astrobin.shortcuts import *
 from astrobin.utils import *
-# AstroBin apps
 from astrobin_apps_platesolving.forms import PlateSolvingSettingsForm
 from astrobin_apps_platesolving.models import PlateSolvingSettings
 
