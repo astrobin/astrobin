@@ -1,13 +1,18 @@
 from django.conf import settings
+from django.contrib.auth.models import User
+from django.contrib.contenttypes.models import ContentType
 from django.http import Http404
+from persistent_messages.models import Message
 from tastypie import fields, http
 from tastypie.authentication import Authentication
 from tastypie.resources import ModelResource, ALL, ALL_WITH_RELATIONS
+from toggleproperties.models import ToggleProperty
 
-from astrobin.models import Location, Image, ImageRevision, ImageOfTheDay, App, Collection
+from astrobin.models import Location, Image, ImageRevision, ImageOfTheDay, App, Collection, UserProfile
 from astrobin.models import SOLAR_SYSTEM_SUBJECT_CHOICES
 from astrobin.views import get_image_or_404
 from astrobin_apps_iotd.models import IotdVote
+from astrobin_apps_premium.utils import premium_get_valid_usersubscription
 
 
 class AppAuthentication(Authentication):
@@ -434,3 +439,96 @@ class CollectionResource(ModelResource):
     def dehydrate_images(self, bundle):
         images = bundle.obj.images.all()
         return ["/api/v1/image/%s" % image.get_id() for image in images]
+
+
+class UserProfileResource(ModelResource):
+    username = fields.CharField("user__username")
+    last_login = fields.DateTimeField("user__last_login", null=True)
+    date_joined = fields.DateTimeField("user__date_joined")
+
+    image_count = fields.IntegerField()
+    received_likes_count = fields.IntegerField()
+    followers_count = fields.IntegerField()
+    following_count = fields.IntegerField()
+    total_notifications_count = fields.IntegerField()
+    unread_notifications_count = fields.IntegerField()
+    premium_subscription = fields.CharField()
+    premium_subscription_expiration = fields.DateField()
+
+    class Meta:
+        authentication = AppAuthentication()
+        allowed_methods = ["get"]
+        queryset = UserProfile.objects.all()
+        filtering = {
+            "username": ALL
+        }
+        excludes = (
+            'accept_tos',
+            'autosubscribe',
+            'company_description',
+            'company_name',
+            'company_website',
+            'default_frontpage_section',
+            'default_gallery_sorting',
+            'default_license',
+            'default_watermark',
+            'default_watermark_opacity',
+            'default_watermark_position',
+            'default_watermark_size',
+            'default_watermark_text',
+            'deleted',
+            'exclude_from_competitions',
+            'inactive_account_reminder_sent',
+            'premium_counter',
+            'premium_offer',
+            'premium_offer_expiration',
+            'premium_offer_sent',
+            'receive_forum_emails',
+            'receive_important_communications',
+            'receive_marketing_and_commercial_material',
+            'receive_newsletter',
+            'retailer_country',
+            'seen_email_permissions',
+            'seen_realname',
+            'show_signatures',
+            'signature',
+            'signature_html',
+        )
+        ordering = ['-date_joined']
+
+    def dehydrate_image_count(self, bundle):
+        return Image.objects.filter(user=bundle.obj.user).count()
+
+    def dehydrate_received_likes_count(self, bundle):
+        likes = 0
+        for i in Image.objects.filter(user=bundle.obj.user):
+            likes += ToggleProperty.objects.toggleproperties_for_object("like", i).count()
+        return likes
+
+    def dehydrate_followers_count(self, bundle):
+        return ToggleProperty.objects.filter(
+            property_type="follow",
+            content_type=ContentType.objects.get_for_model(User),
+            object_id=bundle.obj.user.pk,
+        ).count()
+
+    def dehydrate_following_count(self, bundle):
+        return ToggleProperty.objects.filter(
+            property_type="follow",
+            user=bundle.obj.user,
+        ).count()
+
+    def dehydrate_total_notifications_count(self, bundle):
+        return Message.objects.filter(user=bundle.obj.user).count()
+
+    def dehydrate_unread_notifications_count(self, bundle):
+        return Message.objects.filter(user=bundle.obj.user, read=False).count()
+
+    def dehydrate_premium_subscription(self, bundle):
+        user_subscription = premium_get_valid_usersubscription(bundle.obj.user)
+        return user_subscription.subscription.name if user_subscription else None
+
+    def dehydrate_premium_subscription_expiration(self, bundle):
+        user_subscription = premium_get_valid_usersubscription(bundle.obj.user)
+        return user_subscription.expires if user_subscription else None
+
