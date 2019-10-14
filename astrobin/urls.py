@@ -24,7 +24,8 @@ from astrobin.api import (
     ImageResource,
     ImageRevisionResource,
     LocationResource,
-    CollectionResource)
+    CollectionResource,
+    UserProfileResource)
 from astrobin.search import AstroBinSearchView
 from astrobin.views import (
     api as api_views,
@@ -151,6 +152,7 @@ v1_api.register(ImageRevisionResource())
 v1_api.register(TopPickResource())
 v1_api.register(ImageOfTheDayResource())
 v1_api.register(CollectionResource())
+v1_api.register(UserProfileResource())
 
 urlpatterns = [
     ###########################################################################

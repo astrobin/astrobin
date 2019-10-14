@@ -2046,7 +2046,7 @@ BODY:first-of-type ul.as-list, x:-moz-any-link, x:default { /* Target FF 3.5+ */
     }
   }
 
-  &.plot-overlay {
+  &.hover-overlay {
     position: absolute;
     top: 0;
 
@@ -2067,7 +2067,7 @@ BODY:first-of-type ul.as-list, x:-moz-any-link, x:default { /* Target FF 3.5+ */
       }
     }
 
-    &.plot-overlay-fixed {
+    &.hover-overlay-fixed {
       img {
         @include opacity(1);
 
@@ -5470,6 +5470,28 @@ table.image-list {
 
 table.api-keys {
   table-layout: auto;
+}
+
+table.api-examples {
+  table-layout: auto;
+  margin-top: 2rem;
+
+  td:first-child {
+    font-weight: bold;
+    padding-top: 1rem;
+  }
+
+  code {
+    background: #222;
+    color: white;
+    border-color: #555;
+    padding: .5rem 1rem;
+    text-align: left;
+
+    &:not(:last-child) {
+      margin-bottom: .5rem;
+    }
+  }
 }
 
 .astrobin-username {

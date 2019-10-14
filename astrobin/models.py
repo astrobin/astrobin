@@ -47,7 +47,6 @@ from celery.result import AsyncResult
 from model_utils.managers import InheritanceManager
 from reviews.models import Review
 from safedelete.models import SafeDeleteModel
-from tinymce import models as tinymce_models
 from toggleproperties.models import ToggleProperty
 
 try:
@@ -774,6 +773,12 @@ class Image(HasSolutionMixin, SafeDeleteModel):
         ("OTHER", _("None of the above"))
     )
 
+    MOUSE_HOVER_CHOICES = [
+        (None, _("Nothing")),
+        ("SOLUTION", _("Plate-solution annotations (if available)")),
+        ("INVERTED", _("Inverted monochrome")),
+    ]
+
     GEAR_CLASS_LOOKUP = {
         'imaging_telescopes': Telescope,
         'guiding_telescopes': Telescope,
@@ -785,6 +790,7 @@ class Image(HasSolutionMixin, SafeDeleteModel):
         'filters': Filter,
         'accessories': Accessory,
     }
+
 
     hash = models.CharField(
         max_length=6,
@@ -951,6 +957,13 @@ class Image(HasSolutionMixin, SafeDeleteModel):
     allow_comments = models.BooleanField(
         verbose_name=_("Allow comments"),
         default=True,
+    )
+
+    mouse_hover_image = models.CharField(
+        null=True,
+        blank=True,
+        default="SOLUTION",
+        max_length=16,
     )
 
     # 0 = undecided
@@ -1471,6 +1484,13 @@ class ImageRevision(HasSolutionMixin, SafeDeleteModel):
         blank=True,
         verbose_name=_("Description"),
         help_text=_("HTML tags are allowed."),
+    )
+
+    mouse_hover_image = models.CharField(
+        null=True,
+        blank=True,
+        default="SOLUTION",
+        max_length=16,
     )
 
     skip_notifications = models.NullBooleanField(
