@@ -66,6 +66,7 @@ def astrobin_image(context, image, alias, **kwargs):
     tooltip = kwargs.get('tooltip', True)
     nav_ctx = kwargs.get('nav_ctx', None)
     nav_ctx_extra = kwargs.get('nav_ctx_extra', None)
+    classes = kwargs.get('classes', '')
 
     if nav_ctx is None:
         nav_ctx = request.GET.get('nc')
@@ -119,6 +120,7 @@ def astrobin_image(context, image, alias, **kwargs):
             'caption_cache_key': 'astrobin_image_no_image',
             'nav_ctx': nav_ctx,
             'nav_ctx_extra': nav_ctx_extra,
+            'classes': classes,
         }
 
     # Old images might not have a size in the database, let's fix it.
@@ -282,7 +284,8 @@ def astrobin_image(context, image, alias, **kwargs):
         'thumb_url'     : thumb_url,
         'link'          : link,
         'nav_ctx'       : nav_ctx,
-        'nav_ctx_extra': nav_ctx_extra,
+        'nav_ctx_extra' : nav_ctx_extra,
+        'classes'       : classes,
     }.items())
 register.inclusion_tag(
     'astrobin_apps_images/snippets/image.html',
