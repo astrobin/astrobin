@@ -6,7 +6,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: AstroBin 1.0\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2019-03-05 21:44+0000\n"
+"POT-Creation-Date: 2019-10-15 11:53+0000\n"
 "PO-Revision-Date: 2016-02-19 19:28+0000\n"
 "Last-Translator: OrionRider <orionrider@telenet.be>\n"
 "Language-Team: Français <LL@li.org>\n"
@@ -786,6 +786,20 @@ msgstr ""
 msgid "Submit this image to the selected groups."
 msgstr "Comment est sélectionnée l'image du jour?"
 
+#, fuzzy
+msgid "Mouse hover image"
+msgstr "Pas d'image"
+
+msgid ""
+"Choose what will be displayed when somebody hovers the mouse over this "
+"image. Please note: only revisions with the same width and height of your "
+"original image can be considered."
+msgstr ""
+
+#, fuzzy
+msgid "Revision"
+msgstr "Tests"
+
 msgid "This field is required."
 msgstr "Ce champ est obligatoire."
 
@@ -835,6 +849,17 @@ msgstr "Filtres"
 
 msgid "Accessories"
 msgstr "Accessoires"
+
+msgid ""
+"Choose what will be displayed when somebody hovers the mouse over this image "
+"revision. Pleasenote: only revisions with the same width and height as this "
+"one can be considered."
+msgstr ""
+
+#, fuzzy
+#| msgid "Delete original image"
+msgid "Original image"
+msgstr "Supprimer l'image originale"
 
 msgid "If you have a personal website, put the address here."
 msgstr "Entrez ici l'adresse de votre site personnel."
@@ -1385,6 +1410,23 @@ msgstr "(en nm)"
 msgid "nm"
 msgstr "nm"
 
+#, fuzzy
+#| msgid "Duration"
+msgid "Traditional"
+msgstr "Durée"
+
+msgid "Electronically-Assisted Astronomy (EAA)"
+msgstr ""
+
+msgid "Lucky imaging"
+msgstr ""
+
+msgid "Drawing/Sketch"
+msgstr ""
+
+msgid "Other/Unknown"
+msgstr ""
+
 msgid "Deep sky object"
 msgstr "Objets du ciel profond"
 
@@ -1449,8 +1491,22 @@ msgstr ""
 msgid "Non-commercial independent facility"
 msgstr ""
 
+msgid "Nothing"
+msgstr ""
+
+msgid "Plate-solution annotations (if available)"
+msgstr ""
+
+msgid "Inverted monochrome"
+msgstr "Négatif en noir et blanc"
+
 msgid "Title"
 msgstr "Titre"
+
+#, fuzzy
+#| msgid "Acquisition time"
+msgid "Acquisition type"
+msgstr "Date d'acquisition"
 
 msgid "Subject type"
 msgstr "Type d'objet"
@@ -1519,6 +1575,14 @@ msgid "(no title)"
 msgstr "(sans titre)"
 
 msgid "Mix of multiple source"
+msgstr ""
+
+#, fuzzy
+#| msgid "Notifications"
+msgid "Skip notifications"
+msgstr "Notifications"
+
+msgid "Do not notify your followers about this revision."
 msgstr ""
 
 msgid "Images"
@@ -2442,6 +2506,14 @@ msgstr ""
 #, fuzzy
 msgid "Change your e-mail"
 msgstr "Modifier votre avatar"
+
+msgid ""
+"AstroBin is not delivering you emails because you have marked some of them "
+"as spam."
+msgstr ""
+
+msgid "Contact us to resolve the issue"
+msgstr ""
 
 msgid "Cancel"
 msgstr "Annuler"
@@ -3743,9 +3815,6 @@ msgstr "Envoyer un message privé"
 msgid "View"
 msgstr "Affichage"
 
-msgid "Inverted monochrome"
-msgstr "Négatif en noir et blanc"
-
 msgid "Annotated (original version)"
 msgstr "Annoté (première version)"
 
@@ -3919,8 +3988,13 @@ msgstr "Copier le lien"
 msgid "Image mode"
 msgstr "Type de l'image"
 
+#, fuzzy
+#| msgid ""
+#| "Did you improve the post-processing of your image? Upload the new "
+#| "revision!"
 msgid ""
-"Did you improve the post-processing of your image? Upload the new revision!"
+"Did you improve the post-processing of your image? Upload the new\n"
+"                    revision!"
 msgstr ""
 "Avez-vous amélioré le traitement de votre image? Publiez la nouvelle version!"
 
@@ -4033,17 +4107,25 @@ msgstr "Prochaine étape: matériel utilisé"
 msgid "Edit your image: gear used"
 msgstr "Modifier votre image: matériel utilisé"
 
-#, python-format
+#, fuzzy, python-format
+#| msgid ""
+#| "Can't see anything here? Perhaps you should first add some gear in your "
+#| "<a href=\"%(the_url)s\">profile</a>!"
 msgid ""
-"Can't see anything here? Perhaps you should first add some gear in your <a "
-"href=\"%(the_url)s\">profile</a>!"
+"Can't see anything here? Perhaps you should first add some gear in your\n"
+"                <a href=\"%(the_url)s\">profile</a>!"
 msgstr ""
 "Vous ne voyez rien ici? Peut-être devriez-vous d'abord ajouter du matériel "
 "dans votre <a href=\"%(the_url)s\">profil</a>!"
 
+#, fuzzy
+#| msgid ""
+#| "To choose the gear used for this image, drag items from the right side to "
+#| "left side, or click the plus sign."
 msgid ""
 "To choose the gear used for this image, drag items from the right side to "
-"left side, or click the plus sign."
+"left side, or\n"
+"                click the plus sign."
 msgstr ""
 "Pour choisir le matériel utilisé pour cette image, glissez-le depuis la "
 "partie gauche vers la partie droite, ou cliquez sur le signe \"plus\"."
@@ -4063,9 +4145,14 @@ msgstr "Modifier les détails d'acquisition"
 msgid "Copy gear"
 msgstr "Copier le matériel"
 
+#, fuzzy
+#| msgid ""
+#| "Copying the gear from another image will populate the gear selection form "
+#| "for you, but you will still need to save it in the end."
 msgid ""
 "Copying the gear from another image will populate the gear selection form "
-"for you, but you will still need to save it in the end."
+"for you, but\n"
+"                    you will still need to save it in the end."
 msgstr ""
 "Copier la configuration matérielle d'une autre image complètera "
 "automatiquement le formulaire, mais vous devez toujours l'enregistrer afin "
@@ -5489,6 +5576,11 @@ msgstr "Dernier message"
 msgid "This forum does not have any topics."
 msgstr "Vous n'avez pas de nouvelles notifications."
 
+#, fuzzy
+#| msgid "Mark as good"
+msgid "Mark as spam"
+msgstr "Marquer comme correcte"
+
 msgid ""
 "This page or operation is not available at the moment, because AstroBin is "
 "in READ ONLY mode."
@@ -5705,6 +5797,9 @@ msgstr "Consulter les <a href=\"%(plans_url)s\">abonnements</a>."
 msgctxt "Subscription plan name"
 msgid "Plan"
 msgstr "Abonnement"
+
+msgid "Offer valid until"
+msgstr ""
 
 msgid "Validity"
 msgstr ""
@@ -5984,8 +6079,98 @@ msgstr "Vos abonnements actifs"
 msgid "Your inactive subscription plans"
 msgstr "Vos abonnements actifs"
 
+msgid "Limited offer for you!"
+msgstr ""
+
+msgid ""
+"For a limited time, you are personally offered AstroBin Premium for one "
+"year, at\n"
+"                            a sizeable discount. Don't miss this opportunity!"
+msgstr ""
+
 msgid "AstroBin Premium subscription plans"
 msgstr "Les abonnements AstroBin Premium"
+
+#, fuzzy, python-format
+#| msgid ""
+#| "\n"
+#| "            You can use AstroBin for free up to %(max_allowed)s images. "
+#| "After\n"
+#| "            that you can upgrade to <strong>Lite</strong> if you have a "
+#| "limited\n"
+#| "            yearly output, or <strong>Premium</strong> for a limitless\n"
+#| "            experience.  Paying members will not see ads, and everybody,\n"
+#| "            including non-paying members, have access to all social "
+#| "features of\n"
+#| "            AstroBin.\n"
+#| "            "
+msgid ""
+"\n"
+"                    You can use AstroBin for free up to %(max_allowed)s "
+"images. After\n"
+"                    that you can upgrade to <strong>Lite</strong> if you "
+"have a limited\n"
+"                    yearly output, or <strong>Premium</strong> for a "
+"limitless\n"
+"                    experience.  Paying members will not see ads, and "
+"everybody,\n"
+"                    including non-paying members, have access to all social "
+"features of\n"
+"                    AstroBin.\n"
+"                    "
+msgstr ""
+"\n"
+"Vous pouvez utiliser gratuitement AstroBin pour un maximum de "
+"%(max_allowed)s images. Après cela,\n"
+"vous pouvez passer à un abonnement <strong>Lite</strong> si vous publiez peu "
+"d'images en une année \n"
+"ou bien un abonnement <strong>Premium</strong> pour une utilisation "
+"illimitée.\n"
+"Les membres payants ne voient pas les publicités et tous les membres,\n"
+"y compris les abonnements gratuits, ont accès à la totalité des fonctions "
+"sociales d'AstroBin.\n"
+"            "
+
+#, python-format
+msgid ""
+"\n"
+"                    As a user of <strong>AstroBin Free</strong>, you may "
+"have up to\n"
+"                    %(max_allowed)s images at the same time. You can delete "
+"some images\n"
+"                    to make room for new ones, if you want. For instance you "
+"can\n"
+"                    maintain a window of your latest %(max_allowed)s images, "
+"or your\n"
+"                    best ones.\n"
+"                    "
+msgstr ""
+
+#, python-format
+msgid ""
+"\n"
+"                    As a user of <strong>AstroBin Lite</strong>, instead, "
+"you may have\n"
+"                    up to %(max_allowed)s images at the same time, per each "
+"year of\n"
+"                    your membership. You may replace images uploaded within "
+"the current\n"
+"                    subsciption period while images uploaded prior to that "
+"can only be\n"
+"                    deleted. Every year that you renew your membership, you "
+"get\n"
+"                    %(max_allowed)s new image credits.\n"
+"                    "
+msgstr ""
+
+msgid ""
+"\n"
+"                    As a user of <strong>AstroBin Premium</strong>, instead, "
+"there are\n"
+"                    no limitations whatsoever in the number of images you "
+"can upload.\n"
+"                    "
+msgstr ""
 
 msgid "AstroBin Raw Data subscription plans"
 msgstr "Abonnements AstroBin pour Fichiers Bruts"
@@ -6715,13 +6900,13 @@ msgstr "arcsec/pixel"
 msgid "Telescope type"
 msgstr "Type d'instrument"
 
-msgid "Add filter:"
-msgstr ""
-
 #, fuzzy
 #| msgid "Select all"
 msgid "Select"
 msgstr "Tout sélectionner"
+
+msgid "Add filter:"
+msgstr ""
 
 #, fuzzy
 msgid "Image of the Day"
@@ -6917,6 +7102,11 @@ msgstr ""
 "256 couleurs pour l'afficher."
 
 msgid ""
+"You uploaded a pretty large file. For that reason, AstroBin could not verify "
+"that it's a valid image."
+msgstr ""
+
+msgid ""
 "There was one or more errors processing the form. You may need to scroll "
 "down to see them."
 msgstr ""
@@ -7048,6 +7238,10 @@ msgstr "Déplacer vers la zone d'attente"
 #, fuzzy
 msgid "Image moved to the public area."
 msgstr "Envoyer vers la zone publique"
+
+#, python-format
+msgid "%s topics deleted"
+msgstr ""
 
 #~ msgid "The perfect home for your astrophotography."
 #~ msgstr "Le coffre-fort de vos images."

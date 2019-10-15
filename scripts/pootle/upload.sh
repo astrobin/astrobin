@@ -2,10 +2,10 @@
 
 # Usage:
 #
-#    ./out.sh $ssh_cmd $pootle_host $remote_pootle_root
+#    ./upload.sh $ssh_cmd $pootle_host $remote_pootle_root
 #
 # e.g.:
-#    ./out.sh "ssh -i auth.pem" user@host.com /opt/pootle
+#    ./upload.sh "ssh -i auth.pem" user@host.com /opt/pootle
 
 FILES=$(find . -name *.po | grep -v "^./src")
 
