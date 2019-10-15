@@ -7,17 +7,17 @@ msgid ""
 msgstr ""
 "Project-Id-Version: AstroBin 1.8\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2019-03-05 21:44+0000\n"
-"PO-Revision-Date: 2015-12-30 20:50+0000\n"
-"Last-Translator: Petulinecko <ilas.peter@gmail.com>\n"
+"POT-Creation-Date: 2019-10-15 11:53+0000\n"
+"PO-Revision-Date: 2019-06-03 06:54+0000\n"
+"Last-Translator: funtomas <fun2mas@gmail.com>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
 "Language: sk\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=3; plural=(n==1) ? 0 : (n>=2 && n<=4) ? 1 : 2;\n"
-"X-Generator: Pootle 2.5.0\n"
-"X-POOTLE-MTIME: 1451508647.45168\n"
+"X-Generator: Pootle 2.8\n"
+"X-POOTLE-MTIME: 1559544856.000000\n"
 
 msgid "United Kingdom"
 msgstr "Spojené kráľovstvo Veľkej Británie a Severného Írska"
@@ -50,16 +50,10 @@ msgid "Antarctica"
 msgstr "Antarktída"
 
 msgid "Antigua and Barbuda"
-msgstr ""
-"lQjxsm  <a href=\"http://mtqgpkdvloem.com/\">mtqgpkdvloem</a>, [url=http://"
-"zxxdqtqhbwei.com/]zxxdqtqhbwei[/url], [link=http://vyiuyvvocqgu."
-"com/]vyiuyvvocqgu[/link], http://gwvnuojecoyi.com/"
+msgstr "Antigua a Barbuda"
 
 msgid "Argentina"
-msgstr ""
-"SBpr8E  <a href=\"http://ppadkodsfqye.com/\">ppadkodsfqye</a>, [url=http://"
-"wjezwbwdhnpu.com/]wjezwbwdhnpu[/url], [link=http://jkpokjscrxrn."
-"com/]jkpokjscrxrn[/link], http://eetbihcintlh.com/"
+msgstr "Argentína"
 
 msgid "Armenia"
 msgstr "Arménsko"
@@ -80,10 +74,7 @@ msgid "Bahamas"
 msgstr "Bahamy"
 
 msgid "Bahrain"
-msgstr ""
-"mZqg6D  <a href=\"http://yetqcnnxngur.com/\">yetqcnnxngur</a>, [url=http://"
-"lmhiurlukonz.com/]lmhiurlukonz[/url], [link=http://qfjfyzqpuemo."
-"com/]qfjfyzqpuemo[/link], http://gjofqdeyoyoh.com/"
+msgstr "Bahrajn"
 
 msgid "Bangladesh"
 msgstr "Bangladéš"
@@ -794,6 +785,20 @@ msgstr ""
 msgid "Submit this image to the selected groups."
 msgstr "Ako je vyberaný obrázok dňa?"
 
+#, fuzzy
+msgid "Mouse hover image"
+msgstr "Obrázok"
+
+msgid ""
+"Choose what will be displayed when somebody hovers the mouse over this "
+"image. Please note: only revisions with the same width and height of your "
+"original image can be considered."
+msgstr ""
+
+#, fuzzy
+msgid "Revision"
+msgstr "Revízia zmazaná."
+
 msgid "This field is required."
 msgstr "Pole je povinné"
 
@@ -841,6 +846,17 @@ msgstr "Filtre"
 
 msgid "Accessories"
 msgstr "Príslušenstvo"
+
+msgid ""
+"Choose what will be displayed when somebody hovers the mouse over this image "
+"revision. Pleasenote: only revisions with the same width and height as this "
+"one can be considered."
+msgstr ""
+
+#, fuzzy
+#| msgid "Total images"
+msgid "Original image"
+msgstr "Celkový počet obrázkov"
 
 msgid "If you have a personal website, put the address here."
 msgstr "Ak máte osobnú webstránku, vložte sem prosím adresu"
@@ -1378,6 +1394,23 @@ msgstr "(v nm)"
 msgid "nm"
 msgstr "mm"
 
+#, fuzzy
+#| msgid "Duration"
+msgid "Traditional"
+msgstr "Expozícia"
+
+msgid "Electronically-Assisted Astronomy (EAA)"
+msgstr ""
+
+msgid "Lucky imaging"
+msgstr ""
+
+msgid "Drawing/Sketch"
+msgstr ""
+
+msgid "Other/Unknown"
+msgstr ""
+
 msgid "Deep sky object"
 msgstr "Deep sky objekt"
 
@@ -1433,8 +1466,20 @@ msgstr ""
 msgid "Non-commercial independent facility"
 msgstr ""
 
+msgid "Nothing"
+msgstr ""
+
+msgid "Plate-solution annotations (if available)"
+msgstr ""
+
+msgid "Inverted monochrome"
+msgstr ""
+
 msgid "Title"
 msgstr "Názov"
+
+msgid "Acquisition type"
+msgstr ""
 
 msgid "Subject type"
 msgstr "Typ"
@@ -1499,6 +1544,12 @@ msgid "(no title)"
 msgstr "(bez názvu)"
 
 msgid "Mix of multiple source"
+msgstr ""
+
+msgid "Skip notifications"
+msgstr ""
+
+msgid "Do not notify your followers about this revision."
 msgstr ""
 
 msgid "Images"
@@ -1739,7 +1790,7 @@ msgid ""
 "some <a href=\"/faq/#comments\">formatting rules</a>."
 msgstr ""
 "Krátky popis spoločnosti, ktorú reprezentujete na Astrobin. Môžete použiť "
-"niektoré <a href=\"/faq/#10\">formátovacie pravidlá</a>."
+"niektoré <a href=\"/faq/#comments\">formátovacie pravidlá</a>."
 
 msgid "Company website"
 msgstr "Web stránka spoločnosti"
@@ -1985,7 +2036,7 @@ msgid ""
 "use some <a href=\"/faq/#comments\">formatting rules</a>."
 msgstr ""
 "Sem môžete vpísať detailný popis Vášho produktu. Môžete použiť niektoré<a "
-"href=\"/faq/#10\">formátovacie pravidlá</a>."
+"href=\"/faq/#comments\">formátovacie pravidlá</a>."
 
 msgid "Commercial gear items"
 msgstr "Komerčné príslušenstvo"
@@ -2360,6 +2411,14 @@ msgid ""
 msgstr ""
 
 msgid "Change your e-mail"
+msgstr ""
+
+msgid ""
+"AstroBin is not delivering you emails because you have marked some of them "
+"as spam."
+msgstr ""
+
+msgid "Contact us to resolve the issue"
 msgstr ""
 
 msgid "Cancel"
@@ -3481,9 +3540,6 @@ msgstr ""
 msgid "View"
 msgstr ""
 
-msgid "Inverted monochrome"
-msgstr ""
-
 msgid "Annotated (original version)"
 msgstr ""
 
@@ -3639,7 +3695,8 @@ msgid "Image mode"
 msgstr ""
 
 msgid ""
-"Did you improve the post-processing of your image? Upload the new revision!"
+"Did you improve the post-processing of your image? Upload the new\n"
+"                    revision!"
 msgstr ""
 
 msgid ""
@@ -3731,14 +3788,21 @@ msgstr ""
 
 #, python-format
 msgid ""
-"Can't see anything here? Perhaps you should first add some gear in your <a "
-"href=\"%(the_url)s\">profile</a>!"
+"Can't see anything here? Perhaps you should first add some gear in your\n"
+"                <a href=\"%(the_url)s\">profile</a>!"
 msgstr ""
 
+#, fuzzy
+#| msgid ""
+#| "Drag items from the right side to the left side, or click on the plus "
+#| "sign."
 msgid ""
 "To choose the gear used for this image, drag items from the right side to "
-"left side, or click the plus sign."
+"left side, or\n"
+"                click the plus sign."
 msgstr ""
+"Pretiahnite položky z pravej strany na ľavú stranu, alebo kliknite na značku "
+"plus"
 
 msgid ""
 "Use this button to import the gear settings from another image of yours."
@@ -3755,7 +3819,8 @@ msgstr ""
 
 msgid ""
 "Copying the gear from another image will populate the gear selection form "
-"for you, but you will still need to save it in the end."
+"for you, but\n"
+"                    you will still need to save it in the end."
 msgstr ""
 
 msgid "Copy"
@@ -4096,10 +4161,9 @@ msgstr ""
 msgid "Your image has been deleted."
 msgstr ""
 
-#, fuzzy, python-format
-#| msgid "Your image could not be plate-solved"
+#, python-format
 msgid "<a href=\"%(object_url)s\">Your image</a> could not be plate-solved."
-msgstr "Astrometria Vášho obrázku sa nepodarila"
+msgstr "Astrometria Vášho <a href=\"%(object_url)s\">obrázku</a> sa nepodarila"
 
 #, python-format
 msgid "Your image at %(object_url)s could not be plate-solved."
@@ -4116,10 +4180,9 @@ msgstr ""
 msgid "<a href=\"%(object_url)s\">Your image has been processed.</a>"
 msgstr ""
 
-#, fuzzy, python-format
-#| msgid "Your image was plate-solved"
+#, python-format
 msgid "<a href=\"%(object_url)s\">Your image</a> was plate-solved."
-msgstr "Astrometria Vášho obrázok je dokončená"
+msgstr "Astrometria Vášho <a href=\"%(object_url)s\">obrázku</a> je dokončená"
 
 #, python-format
 msgid "Your image at %(object_url)s was plate-solved."
@@ -4868,6 +4931,10 @@ msgstr "Východ alebo západ"
 msgid "This forum does not have any topics."
 msgstr ""
 
+#, fuzzy
+msgid "Mark as spam"
+msgstr "Marshallove ostrovy"
+
 msgid ""
 "This page or operation is not available at the moment, because AstroBin is "
 "in READ ONLY mode."
@@ -5056,6 +5123,9 @@ msgstr ""
 msgctxt "Subscription plan name"
 msgid "Plan"
 msgstr "Planetárny"
+
+msgid "Offer valid until"
+msgstr ""
 
 msgid "Validity"
 msgstr ""
@@ -5297,7 +5367,74 @@ msgstr ""
 msgid "Your inactive subscription plans"
 msgstr "Popis"
 
+msgid "Limited offer for you!"
+msgstr ""
+
+msgid ""
+"For a limited time, you are personally offered AstroBin Premium for one "
+"year, at\n"
+"                            a sizeable discount. Don't miss this opportunity!"
+msgstr ""
+
 msgid "AstroBin Premium subscription plans"
+msgstr ""
+
+#, python-format
+msgid ""
+"\n"
+"                    You can use AstroBin for free up to %(max_allowed)s "
+"images. After\n"
+"                    that you can upgrade to <strong>Lite</strong> if you "
+"have a limited\n"
+"                    yearly output, or <strong>Premium</strong> for a "
+"limitless\n"
+"                    experience.  Paying members will not see ads, and "
+"everybody,\n"
+"                    including non-paying members, have access to all social "
+"features of\n"
+"                    AstroBin.\n"
+"                    "
+msgstr ""
+
+#, python-format
+msgid ""
+"\n"
+"                    As a user of <strong>AstroBin Free</strong>, you may "
+"have up to\n"
+"                    %(max_allowed)s images at the same time. You can delete "
+"some images\n"
+"                    to make room for new ones, if you want. For instance you "
+"can\n"
+"                    maintain a window of your latest %(max_allowed)s images, "
+"or your\n"
+"                    best ones.\n"
+"                    "
+msgstr ""
+
+#, python-format
+msgid ""
+"\n"
+"                    As a user of <strong>AstroBin Lite</strong>, instead, "
+"you may have\n"
+"                    up to %(max_allowed)s images at the same time, per each "
+"year of\n"
+"                    your membership. You may replace images uploaded within "
+"the current\n"
+"                    subsciption period while images uploaded prior to that "
+"can only be\n"
+"                    deleted. Every year that you renew your membership, you "
+"get\n"
+"                    %(max_allowed)s new image credits.\n"
+"                    "
+msgstr ""
+
+msgid ""
+"\n"
+"                    As a user of <strong>AstroBin Premium</strong>, instead, "
+"there are\n"
+"                    no limitations whatsoever in the number of images you "
+"can upload.\n"
+"                    "
 msgstr ""
 
 msgid "AstroBin Raw Data subscription plans"
@@ -5922,13 +6059,13 @@ msgstr ""
 msgid "Telescope type"
 msgstr "Typ ďalekohľadu"
 
-msgid "Add filter:"
-msgstr ""
-
 #, fuzzy
 #| msgid "Reflector"
 msgid "Select"
 msgstr "Reflektor"
+
+msgid "Add filter:"
+msgstr ""
 
 #, fuzzy
 msgid "Image of the Day"
@@ -6114,6 +6251,11 @@ msgstr ""
 "256, aby s ním mohol pracovať."
 
 msgid ""
+"You uploaded a pretty large file. For that reason, AstroBin could not verify "
+"that it's a valid image."
+msgstr ""
+
+msgid ""
 "There was one or more errors processing the form. You may need to scroll "
 "down to see them."
 msgstr ""
@@ -6260,6 +6402,10 @@ msgstr ""
 #, fuzzy
 msgid "Image moved to the public area."
 msgstr "Nový obrázok odoslaný do verejnej zložky"
+
+#, python-format
+msgid "%s topics deleted"
+msgstr ""
 
 #~ msgid "Taiwan, Province of China"
 #~ msgstr "Taiwan"
