@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: 0.9\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2019-03-05 21:44+0000\n"
+"POT-Creation-Date: 2019-10-15 11:53+0000\n"
 "PO-Revision-Date: 2015-12-30 10:50+0000\n"
 "Last-Translator: Samuli <samuli.vuorinen@iki.fi>\n"
 "Language-Team: Finnish <tanja@iovene.com>\n"
@@ -784,6 +784,20 @@ msgstr ""
 msgid "Submit this image to the selected groups."
 msgstr "Miten Päivän kuva valitaan?"
 
+#, fuzzy
+msgid "Mouse hover image"
+msgstr "Ei kuvia"
+
+msgid ""
+"Choose what will be displayed when somebody hovers the mouse over this "
+"image. Please note: only revisions with the same width and height of your "
+"original image can be considered."
+msgstr ""
+
+#, fuzzy
+msgid "Revision"
+msgstr "Arvostelut"
+
 msgid "This field is required."
 msgstr "Tämä kenttä on pakollinen."
 
@@ -830,6 +844,17 @@ msgstr "Suodattimet"
 
 msgid "Accessories"
 msgstr "Oheislaitteet"
+
+msgid ""
+"Choose what will be displayed when somebody hovers the mouse over this image "
+"revision. Pleasenote: only revisions with the same width and height as this "
+"one can be considered."
+msgstr ""
+
+#, fuzzy
+#| msgid "Delete original image"
+msgid "Original image"
+msgstr "Poista alkuperäinen kuva"
 
 msgid "If you have a personal website, put the address here."
 msgstr "Jos sinulla on kotisivut, liitä osoite tähän."
@@ -1369,6 +1394,23 @@ msgstr "(nm)"
 msgid "nm"
 msgstr "nm"
 
+#, fuzzy
+#| msgid "Duration"
+msgid "Traditional"
+msgstr "Valotusaika"
+
+msgid "Electronically-Assisted Astronomy (EAA)"
+msgstr ""
+
+msgid "Lucky imaging"
+msgstr ""
+
+msgid "Drawing/Sketch"
+msgstr ""
+
+msgid "Other/Unknown"
+msgstr ""
+
 msgid "Deep sky object"
 msgstr "Syvän taivaan kohde"
 
@@ -1433,8 +1475,22 @@ msgstr ""
 msgid "Non-commercial independent facility"
 msgstr ""
 
+msgid "Nothing"
+msgstr ""
+
+msgid "Plate-solution annotations (if available)"
+msgstr ""
+
+msgid "Inverted monochrome"
+msgstr "Negatiivinen mustavalkokuva"
+
 msgid "Title"
 msgstr "Otsikko"
+
+#, fuzzy
+#| msgid "Acquisition time"
+msgid "Acquisition type"
+msgstr "Kuvausajankohta"
 
 msgid "Subject type"
 msgstr "Kohdetyyppi"
@@ -1501,6 +1557,14 @@ msgid "(no title)"
 msgstr "(ei otsikkoa)"
 
 msgid "Mix of multiple source"
+msgstr ""
+
+#, fuzzy
+#| msgid "Notifications"
+msgid "Skip notifications"
+msgstr "Ilmoitukset"
+
+msgid "Do not notify your followers about this revision."
 msgstr ""
 
 msgid "Images"
@@ -2374,6 +2438,14 @@ msgstr ""
 #, fuzzy
 msgid "Change your e-mail"
 msgstr "Vaihda avataria."
+
+msgid ""
+"AstroBin is not delivering you emails because you have marked some of them "
+"as spam."
+msgstr ""
+
+msgid "Contact us to resolve the issue"
+msgstr ""
 
 msgid "Cancel"
 msgstr "Peruuta"
@@ -3629,9 +3701,6 @@ msgstr "Lähetä yksityisviesti"
 msgid "View"
 msgstr "Katsele"
 
-msgid "Inverted monochrome"
-msgstr "Negatiivinen mustavalkokuva"
-
 msgid "Annotated (original version)"
 msgstr "Merkitty (alkuperäinen versio)"
 
@@ -3798,8 +3867,13 @@ msgstr "Kopioi"
 msgid "Image mode"
 msgstr "Kuvan tila"
 
+#, fuzzy
+#| msgid ""
+#| "Did you improve the post-processing of your image? Upload the new "
+#| "revision!"
 msgid ""
-"Did you improve the post-processing of your image? Upload the new revision!"
+"Did you improve the post-processing of your image? Upload the new\n"
+"                    revision!"
 msgstr "Teitkö muutoksia kuvaasi? Lataa uusi versio!"
 
 msgid ""
@@ -3905,17 +3979,25 @@ msgstr "Seuraava vaihe: muokkaa käytettyjä laitteita"
 msgid "Edit your image: gear used"
 msgstr "Muokkaa kuvaasi: käytetyt laitteet"
 
-#, python-format
+#, fuzzy, python-format
+#| msgid ""
+#| "Can't see anything here? Perhaps you should first add some gear in your "
+#| "<a href=\"%(the_url)s\">profile</a>!"
 msgid ""
-"Can't see anything here? Perhaps you should first add some gear in your <a "
-"href=\"%(the_url)s\">profile</a>!"
+"Can't see anything here? Perhaps you should first add some gear in your\n"
+"                <a href=\"%(the_url)s\">profile</a>!"
 msgstr ""
 "Onko tämä kohta tyhjä? Sinun täytyy ensin lisätä laitteita <a href="
 "\"%(the_url)s\">profiiliisi</a>!"
 
+#, fuzzy
+#| msgid ""
+#| "To choose the gear used for this image, drag items from the right side to "
+#| "left side, or click the plus sign."
 msgid ""
 "To choose the gear used for this image, drag items from the right side to "
-"left side, or click the plus sign."
+"left side, or\n"
+"                click the plus sign."
 msgstr ""
 "Valitaksesi käytetyt kuvauslaitteet raahaa kohteita oikeasta reunasta "
 "vasempaan reunaan, tai klikkaa plus-merkkiä."
@@ -3933,9 +4015,14 @@ msgstr "Muokkaa teknisiä tietoja"
 msgid "Copy gear"
 msgstr "Kopioi kalusto"
 
+#, fuzzy
+#| msgid ""
+#| "Copying the gear from another image will populate the gear selection form "
+#| "for you, but you will still need to save it in the end."
 msgid ""
 "Copying the gear from another image will populate the gear selection form "
-"for you, but you will still need to save it in the end."
+"for you, but\n"
+"                    you will still need to save it in the end."
 msgstr ""
 "Kuvauslaitetietojen kopiointi toisesta kuvasta täyttää laitekentät "
 "puolestasi, mutta lomake täytyy silti tallentaa lopuksi."
@@ -5312,6 +5399,11 @@ msgstr "Itä tai länsi"
 msgid "This forum does not have any topics."
 msgstr "Sinulle ei ole uusia ilmoituksia."
 
+#, fuzzy
+#| msgid "Mark as good"
+msgid "Mark as spam"
+msgstr "Merkitse valmiiksi"
+
 msgid ""
 "This page or operation is not available at the moment, because AstroBin is "
 "in READ ONLY mode."
@@ -5523,6 +5615,9 @@ msgstr ""
 msgctxt "Subscription plan name"
 msgid "Plan"
 msgstr "Planeetat"
+
+msgid "Offer valid until"
+msgstr ""
 
 msgid "Validity"
 msgstr ""
@@ -5772,9 +5867,76 @@ msgstr ""
 msgid "Your inactive subscription plans"
 msgstr "AstroBin on sosiaalinen!"
 
+msgid "Limited offer for you!"
+msgstr ""
+
+msgid ""
+"For a limited time, you are personally offered AstroBin Premium for one "
+"year, at\n"
+"                            a sizeable discount. Don't miss this opportunity!"
+msgstr ""
+
 #, fuzzy
 msgid "AstroBin Premium subscription plans"
 msgstr "AstroBin on sosiaalinen!"
+
+#, python-format
+msgid ""
+"\n"
+"                    You can use AstroBin for free up to %(max_allowed)s "
+"images. After\n"
+"                    that you can upgrade to <strong>Lite</strong> if you "
+"have a limited\n"
+"                    yearly output, or <strong>Premium</strong> for a "
+"limitless\n"
+"                    experience.  Paying members will not see ads, and "
+"everybody,\n"
+"                    including non-paying members, have access to all social "
+"features of\n"
+"                    AstroBin.\n"
+"                    "
+msgstr ""
+
+#, python-format
+msgid ""
+"\n"
+"                    As a user of <strong>AstroBin Free</strong>, you may "
+"have up to\n"
+"                    %(max_allowed)s images at the same time. You can delete "
+"some images\n"
+"                    to make room for new ones, if you want. For instance you "
+"can\n"
+"                    maintain a window of your latest %(max_allowed)s images, "
+"or your\n"
+"                    best ones.\n"
+"                    "
+msgstr ""
+
+#, python-format
+msgid ""
+"\n"
+"                    As a user of <strong>AstroBin Lite</strong>, instead, "
+"you may have\n"
+"                    up to %(max_allowed)s images at the same time, per each "
+"year of\n"
+"                    your membership. You may replace images uploaded within "
+"the current\n"
+"                    subsciption period while images uploaded prior to that "
+"can only be\n"
+"                    deleted. Every year that you renew your membership, you "
+"get\n"
+"                    %(max_allowed)s new image credits.\n"
+"                    "
+msgstr ""
+
+msgid ""
+"\n"
+"                    As a user of <strong>AstroBin Premium</strong>, instead, "
+"there are\n"
+"                    no limitations whatsoever in the number of images you "
+"can upload.\n"
+"                    "
+msgstr ""
 
 #, fuzzy
 msgid "AstroBin Raw Data subscription plans"
@@ -6477,13 +6639,13 @@ msgstr "kaarisekuntia/pikseli"
 msgid "Telescope type"
 msgstr "Kaukoputken tyyppi"
 
-msgid "Add filter:"
-msgstr ""
-
 #, fuzzy
 #| msgid "Select all"
 msgid "Select"
 msgstr "Valitse kaikki"
+
+msgid "Add filter:"
+msgstr ""
 
 #, fuzzy
 msgid "Image of the Day"
@@ -6674,6 +6836,11 @@ msgstr ""
 "värien määrää 256 kappaleeseen, jotta kuva toimisi."
 
 msgid ""
+"You uploaded a pretty large file. For that reason, AstroBin could not verify "
+"that it's a valid image."
+msgstr ""
+
+msgid ""
 "There was one or more errors processing the form. You may need to scroll "
 "down to see them."
 msgstr ""
@@ -6813,6 +6980,10 @@ msgstr "Siirrä tilapäiselle alueelle"
 #, fuzzy
 msgid "Image moved to the public area."
 msgstr "Nosta julkiselle alueelle"
+
+#, python-format
+msgid "%s topics deleted"
+msgstr ""
 
 #~ msgid "The perfect home for your astrophotography."
 #~ msgstr "Paras paikka tähtikuvillesi."
