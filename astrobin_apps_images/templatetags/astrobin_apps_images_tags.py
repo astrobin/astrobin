@@ -1,32 +1,23 @@
-# Python
-from datetime import datetime
 import random
 import string
-from PIL import Image as PILImage
 import zlib
+from datetime import datetime
 
-# Django
+from PIL import Image as PILImage
 from django.conf import settings
 from django.core.cache import cache
 from django.core.urlresolvers import reverse
-from django.template import Library, Node
-from django.template.loader import render_to_string
+from django.template import Library
 from django.utils.translation import ugettext as _
 
-# AstroBin
-from astrobin.models import CommercialGear, Gear
 from astrobin.models import Image, ImageRevision
-
-# Third party
-from haystack.query import SearchQuerySet
-
 
 register = Library()
 
 # Returns the URL of an image, taking into account the fact that it might be
 # a commercial gear image.
 @register.simple_tag
-def get_image_url(image, revision = 'final', size = 'regular'):
+def get_image_url(image, revision='final', size='regular'):
     def commercial_gear_url(commercial_gear):
         gear = commercial_gear.base_gear.all()
         if gear:
@@ -62,6 +53,7 @@ def astrobin_image(context, image, alias, **kwargs):
 
     revision = kwargs.get('revision', 'final')
     url_size = kwargs.get('url_size', 'regular')
+    url_revision = kwargs.get('url_revision', revision)
     link = kwargs.get('link', True)
     tooltip = kwargs.get('tooltip', True)
     nav_ctx = kwargs.get('nav_ctx', None)
@@ -185,6 +177,7 @@ def astrobin_image(context, image, alias, **kwargs):
                 'caption_cache_key': 'astrobin_image_no_image',
                 'nav_ctx': nav_ctx,
                 'nav_ctx_extra': nav_ctx_extra,
+                'classes': classes,
             }
 
         try:
@@ -194,7 +187,7 @@ def astrobin_image(context, image, alias, **kwargs):
         else:
             animated = True
 
-    url = get_image_url(image, revision, url_size)
+    url = get_image_url(image, url_revision, url_size)
 
     show_tooltip = tooltip and (alias in (
         'gallery', 'gallery_inverted',
