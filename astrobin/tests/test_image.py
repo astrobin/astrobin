@@ -707,6 +707,28 @@ class ImageTest(TestCase):
         image.delete()
 
     @patch("astrobin.tasks.retrieve_primary_thumbnails")
+    def test_image_7_digit_gain(self, retrieve_primary_thumbnails):
+        self.client.login(username='test', password='password')
+        self._do_upload('astrobin/fixtures/test.jpg')
+        image = self._get_last_image()
+        today = time.strftime('%Y-%m-%d')
+
+        # DSA data
+        dsa, created = DeepSky_Acquisition.objects.get_or_create(
+            image=image,
+            date=today,
+            number=10,
+            duration=1200,
+            gain=12345.67,
+        )
+        response = self.client.get(reverse('image_detail', kwargs={'id': image.get_id()}))
+        self.assertEqual(response.status_code, 200)
+        self.assertContains(response, "(gain: 12345.67)")
+
+        dsa.delete()
+        image.delete()
+
+    @patch("astrobin.tasks.retrieve_primary_thumbnails")
     def test_image_flag_thumbs_view(self, retrieve_primary_thumbnails):
         self.user.is_superuser = True
         self.user.save()
