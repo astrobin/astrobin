@@ -1675,7 +1675,7 @@ class DeepSky_Acquisition(Acquisition):
     gain = models.DecimalField(
         _("Gain"),
         null=True, blank=True,
-        max_digits=5, decimal_places=2)
+        max_digits=7, decimal_places=2)
 
     sensor_cooling = models.IntegerField(
         _("Sensor cooling"),
