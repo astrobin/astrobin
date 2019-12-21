@@ -188,3 +188,22 @@ def inactive_accounts():
                 recipientPks.append(profile.pk)
 
     return UserProfile.objects.filter(pk__in=recipientPks)
+
+
+def uniq(seq):
+    # Not order preserving
+    keys = {}
+    for e in seq:
+        keys[e] = 1
+    return keys.keys()
+
+
+def uniq_id_tuple(seq):
+    seen = set()
+    ret = []
+    for e in seq:
+        id = e[0]
+        if id not in seen:
+            seen.add(id)
+            ret.append(e)
+    return ret
