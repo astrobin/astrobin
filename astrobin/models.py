@@ -1589,13 +1589,20 @@ class Collection(models.Model):
         on_delete=models.SET_NULL,
     )
 
+    order_by_tag = models.CharField(
+        null=True,
+        blank=True,
+        max_length=255,
+        verbose_name=_("Order by image tag")
+    )
+
     class Meta:
         app_label = 'astrobin'
         unique_together = ('user', 'name')
         ordering = ['name']
 
     def __unincode__(self):
-        return "%s, a collectio by %s" % (self.name, self.user.username)
+        return "%s, a collection by %s" % (self.name, self.user.username)
 
 
 class Acquisition(models.Model):

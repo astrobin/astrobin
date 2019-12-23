@@ -7,6 +7,8 @@ from astrobin.models import Image, ImageRevision
 
 
 class Generators:
+    def __init__(self):
+        pass
 
     @staticmethod
     def randomString(stringLength=10):

@@ -1,10 +1,9 @@
-# Django
+from braces.views import JSONResponseMixin
+from braces.views import LoginRequiredMixin
 from django.contrib import messages
-from django.contrib.auth.models import User
 from django.contrib.contenttypes.models import ContentType
 from django.core.urlresolvers import reverse_lazy
 from django.db import IntegrityError
-from django.forms import ValidationError
 from django.http import Http404, HttpResponseForbidden
 from django.shortcuts import get_object_or_404
 from django.utils.translation import ugettext as _
@@ -14,19 +13,14 @@ from django.views.generic import DetailView
 from django.views.generic import ListView
 from django.views.generic import UpdateView
 from django.views.generic.base import View
+from toggleproperties.models import ToggleProperty
 
-# AstroBin
+from astrobin.forms import CollectionAddRemoveImagesForm
 from astrobin.forms import CollectionCreateForm
 from astrobin.forms import CollectionUpdateForm
-from astrobin.forms import CollectionAddRemoveImagesForm
 from astrobin.models import Collection
 from astrobin.models import Image
 from astrobin.models import UserProfile
-
-# Third party
-from braces.views import LoginRequiredMixin
-from braces.views import JSONResponseMixin
-from toggleproperties.models import ToggleProperty
 
 
 class EnsureCollectionOwnerMixin(View):
@@ -100,6 +94,10 @@ class UserCollectionsCreate(
     form_class = CollectionCreateForm
     template_name = 'user_collections_create.html'
 
+    def get_form_kwargs(self):
+        kwargs = super(UserCollectionsCreate, self).get_form_kwargs()
+        kwargs.update({'user': self.request.user})
+        return kwargs
 
 class UserCollectionsUpdate(
         RedirectToCollectionListMixin, EnsureCollectionOwnerMixin,
@@ -180,7 +178,15 @@ class UserCollectionsDetail(UserCollectionsBase, DetailView):
 
     def get_context_data(self, **kwargs):
         context = super(UserCollectionsDetail, self).get_context_data(**kwargs)
-        context['image_list'] = self.object.images.all()
+
+        image_list = self.object.images
+
+        if self.object.order_by_tag:
+            image_list = image_list \
+                .filter(keyvaluetags__key=self.object.order_by_tag) \
+                .order_by("keyvaluetags__value")
+
+        context['image_list'] = image_list.all()
         context['alias'] = 'gallery'
         return context
 

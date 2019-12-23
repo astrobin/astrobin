@@ -3,6 +3,7 @@ from django.utils.translation import ugettext_lazy as _
 
 from astrobin.models import Location, Image
 from astrobin_apps_groups.models import Group
+from astrobin_apps_images.models import KeyValueTag
 
 
 class ImageEditBasicForm(forms.ModelForm):
@@ -38,15 +39,32 @@ class ImageEditBasicForm(forms.ModelForm):
                     "revisions with the same width and height of your original image can be considered."),
     )
 
-    def __init__(self, **kwargs):
-        super(ImageEditBasicForm, self).__init__(**kwargs)
+    keyvaluetags = forms.CharField(
+        required=False,
+        label=_("Key/value tags"),
+        help_text=_("Provide a list of key/value pairs to tag this image with. Use the '=' symbol between key and "
+                    "value, and provide one pair per line. These tags can be used to sort images by arbitrary "
+                    "properties."),
+        widget=forms.Textarea(attrs={'rows': 4})
+    )
 
+    def __init__(self, *args, **kwargs):
+        super(ImageEditBasicForm, self).__init__(*args, **kwargs)
+
+        self.__initLocations()
+        self.__initGkroups()
+        self.__initMouseHoverImage()
+        self.__initRevisions()
+        self.__initKeyValueTags()
+
+    def __initLocations(self):
         locations = Location.objects.filter(user=self.instance.user.userprofile)
         if locations.count() > 0:
             self.fields['locations'].queryset = locations
         else:
             self.fields.pop('locations')
 
+    def __initGroups(self):
         groups = Group.objects.filter(autosubmission=False, members=self.instance.user)
         if groups.count() > 0:
             self.fields['groups'].choices = [(x.pk, x.name) for x in groups]
@@ -57,8 +75,10 @@ class ImageEditBasicForm(forms.ModelForm):
         else:
             self.fields.pop('groups')
 
+    def __initMouseHoverImage(self):
         self.fields['mouse_hover_image'].choices = Image.MOUSE_HOVER_CHOICES
 
+    def __initRevisions(self):
         revisions = self.instance.revisions
         if revisions.count() > 0:
             for revision in revisions.all():
@@ -67,9 +87,15 @@ class ImageEditBasicForm(forms.ModelForm):
                         ("REVISION__%s" % revision.label, "%s %s" % (_("Revision"), revision.label))
                     ]
 
-    def save(self, commit=True):
-        instance = super(ImageEditBasicForm, self).save(commit=False)
+    def __initKeyValueTags(self):
+        tags = self.instance.keyvaluetags.all()
+        initial = ""
+        for tag in tags:
+            initial += "%s=%s\r\n" % (tag.key, tag.value)
 
+        self.fields['keyvaluetags'].initial = initial
+
+    def __saveGroups(self, instance):
         if 'groups' in self.cleaned_data:
             existing_groups = instance.part_of_group_set.filter(autosubmission=False)
             new_groups_pks = self.cleaned_data['groups']
@@ -83,6 +109,47 @@ class ImageEditBasicForm(forms.ModelForm):
                 if group not in existing_groups:
                     group.images.add(self.instance)
 
+    def __saveKeyValueTags(self, instance):
+        instance.keyvaluetags.all().delete()
+
+        if 'keyvaluetags' in self.data:
+            tags = self.data['keyvaluetags']
+            if tags is None:
+                return
+
+            for tag in self.__parseKeyValueTags(tags):
+                KeyValueTag.objects.create(
+                    image=instance,
+                    key=tag["key"],
+                    value=tag["value"]
+                )
+
+    def __parseKeyValueTags(self, tags):
+        """
+        Reads tags from plain texts and returns parsed list of pairs
+        """
+        list = []
+
+        if tags:
+            lines = tags.split('\r\n')
+
+            for line in lines:
+                if line:
+                    key, value = line.split('=')
+
+                    if not key or not value:
+                        raise ValueError
+
+                    list.append({"key": key, "value": value})
+
+        return list
+
+    def save(self, commit=True):
+        instance = super(ImageEditBasicForm, self).save(commit=False)
+
+        self.__saveGroups(instance)
+        self.__saveKeyValueTags(instance)
+
         return super(ImageEditBasicForm, self).save(commit)
 
     def clean_link(self):
@@ -94,6 +161,12 @@ class ImageEditBasicForm(forms.ModelForm):
             raise forms.ValidationError(_('This field is required.'))
 
         return self.cleaned_data['subject_type']
+
+    def clean_keyvaluetags(self):
+        try:
+            parsed = self.__parseKeyValueTags(self.cleaned_data['keyvaluetags'])
+        except ValueError:
+            raise forms.ValidationError(_("Unable to parse."))
 
     def clean_remote_source(self):
         try:
@@ -111,4 +184,5 @@ class ImageEditBasicForm(forms.ModelForm):
         model = Image
         fields = (
             'title', 'link', 'link_to_fits', 'acquisition_type', 'data_source', 'remote_source', 'subject_type',
-            'solar_system_main_subject', 'locations', 'groups', 'description', 'mouse_hover_image', 'allow_comments')
+            'solar_system_main_subject', 'locations', 'groups', 'description', 'keyvaluetags', 'mouse_hover_image',
+            'allow_comments')

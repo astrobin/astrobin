@@ -1,6 +1,7 @@
 from django import forms
 from django.utils.translation import ugettext_lazy as _
 
+from astrobin.forms.utils import NULL_CHOICE
 from astrobin.models import Gear, RetailedGear
 from astrobin.utils import retailer_affiliate_limit
 from astrobin.utils import uniq, uniq_id_tuple
@@ -15,12 +16,12 @@ class ClaimRetailedGearForm(forms.Form):
         required=True)
 
     name = forms.ChoiceField(
-        choices=[('', '---------')],
+        choices=NULL_CHOICE,
         label=_("Name"),
         required=True)
 
     merge_with = forms.ChoiceField(
-        choices=[('', '---------')],
+        choices=NULL_CHOICE,
         label=_("Merge"),
         help_text=_(
             "Use this field to mark that the item you are claiming really is the same product (or a variation thereof) of something you have claimed before."),
@@ -29,11 +30,11 @@ class ClaimRetailedGearForm(forms.Form):
     def __init__(self, user, **kwargs):
         super(ClaimRetailedGearForm, self).__init__(**kwargs)
         self.user = user
-        self.fields['make'].choices = [('', '---------')] + sorted(
+        self.fields['make'].choices = NULL_CHOICE + sorted(
             uniq(Gear.objects.exclude(make=None).exclude(make='').values_list('make', 'make')),
             key=lambda x: x[0].lower())
         self.fields['merge_with'].choices = \
-            [('', '---------')] + \
+            NULL_CHOICE + \
             uniq_id_tuple(
                 RetailedGear.objects.filter(retailer=user).exclude(gear__name=None).values_list('id', 'gear__name'))
 
