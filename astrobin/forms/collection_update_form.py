@@ -1,4 +1,5 @@
 from django import forms
+from django.utils.translation import ugettext as _
 
 from astrobin.forms.utils import NULL_CHOICE
 from astrobin.models import Collection
@@ -8,7 +9,11 @@ from astrobin_apps_images.models import KeyValueTag
 class CollectionUpdateForm(forms.ModelForm):
     error_css_class = 'error'
 
-    order_by_tag = forms.ChoiceField(required=False)
+    order_by_tag = forms.ChoiceField(
+        required=False,
+        help_text=_("Select a tag to order this collection by its value. Images that lack this tag "
+                    "will not appear in the collection.")
+    )
 
     def __init__(self, *args, **kwargs):
         super(CollectionUpdateForm, self).__init__(*args, **kwargs)

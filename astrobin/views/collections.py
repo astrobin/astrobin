@@ -1,3 +1,4 @@
+import simplejson
 from braces.views import JSONResponseMixin
 from braces.views import LoginRequiredMixin
 from django.contrib import messages
@@ -18,9 +19,12 @@ from toggleproperties.models import ToggleProperty
 from astrobin.forms import CollectionAddRemoveImagesForm
 from astrobin.forms import CollectionCreateForm
 from astrobin.forms import CollectionUpdateForm
+from astrobin.forms import CollectionQuickEditKeyValueTagsForm
+from astrobin.forms.utils import parseKeyValueTags
 from astrobin.models import Collection
 from astrobin.models import Image
 from astrobin.models import UserProfile
+from astrobin_apps_images.models import KeyValueTag
 
 
 class EnsureCollectionOwnerMixin(View):
@@ -155,6 +159,53 @@ class UserCollectionsAddRemoveImages(
         else:
             return super(UserCollectionsAddRemoveImages, self).post(request, *args, **kwargs)
 
+
+class UserCollectionsQuickEditKeyValueTags(
+    JSONResponseMixin, EnsureCollectionOwnerMixin, UserCollectionsBaseEdit, UpdateView):
+    form_class = CollectionQuickEditKeyValueTagsForm
+    template_name = 'user_collections_quick_edit_key_value_tags.html'
+    pk_url_kwarg = 'collection_pk'
+    context_object_name = 'collection'
+    content_type = None
+
+    def get_context_data(self, **kwargs):
+        context = super(UserCollectionsQuickEditKeyValueTags, self).get_context_data(**kwargs)
+        context['images'] = self.get_object().images.all()
+        return context
+
+    def get_success_url(self):
+        return reverse_lazy('user_collections_detail', args=(self.kwargs['username'], self.kwargs['collection_pk'],))
+
+    def post(self, request, *args, **kwargs):
+        if request.is_ajax():
+            for data in simplejson.loads(request.POST.get('imageData')):
+                image = Image.objects.get(pk=data['image_pk'])
+                try:
+                    parsed = parseKeyValueTags(data['value'])
+                    image.keyvaluetags.all().delete()
+                    for tag in parsed:
+                        KeyValueTag.objects.create(
+                            image=image,
+                            key=tag["key"],
+                            value=tag["value"]
+                        )
+
+                except ValueError:
+                    return self.render_json_response({
+                        'error': _(
+                            "Provide a list of unique key/value pairs to tag this image with. Use the '=' symbol "
+                            "between key and value, and provide one pair per line. These tags can be used to sort "
+                            "images by arbitrary properties."),
+                        'image_pk': data['image_pk']
+                    })
+
+            messages.success(request, _("Images updated!"))
+
+            return self.render_json_response({
+                'images': ','.join([str(x.pk) for x in self.get_object().images.all()]),
+            })
+        else:
+            return super(UserCollectionsQuickEditKeyValueTags, self).post(request, *args, **kwargs)
 
 class UserCollectionsDelete(
         LoginRequiredMixin, EnsureCollectionOwnerMixin, RedirectToCollectionListMixin,

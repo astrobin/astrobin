@@ -1,6 +1,7 @@
 from django import forms
 from django.utils.translation import ugettext_lazy as _
 
+from astrobin.forms.utils import parseKeyValueTags
 from astrobin.models import Location, Image
 from astrobin_apps_groups.models import Group
 from astrobin_apps_images.models import KeyValueTag
@@ -42,8 +43,8 @@ class ImageEditBasicForm(forms.ModelForm):
     keyvaluetags = forms.CharField(
         required=False,
         label=_("Key/value tags"),
-        help_text=_("Provide a list of key/value pairs to tag this image with. Use the '=' symbol between key and "
-                    "value, and provide one pair per line. These tags can be used to sort images by arbitrary "
+        help_text=_("Provide a list of unique key/value pairs to tag this image with. Use the '=' symbol between key "
+                    "and value, and provide one pair per line. These tags can be used to sort images by arbitrary "
                     "properties."),
         widget=forms.Textarea(attrs={'rows': 4})
     )
@@ -52,7 +53,7 @@ class ImageEditBasicForm(forms.ModelForm):
         super(ImageEditBasicForm, self).__init__(*args, **kwargs)
 
         self.__initLocations()
-        self.__initGkroups()
+        self.__initGroups()
         self.__initMouseHoverImage()
         self.__initRevisions()
         self.__initKeyValueTags()
@@ -117,32 +118,12 @@ class ImageEditBasicForm(forms.ModelForm):
             if tags is None:
                 return
 
-            for tag in self.__parseKeyValueTags(tags):
+            for tag in parseKeyValueTags(tags):
                 KeyValueTag.objects.create(
                     image=instance,
                     key=tag["key"],
                     value=tag["value"]
                 )
-
-    def __parseKeyValueTags(self, tags):
-        """
-        Reads tags from plain texts and returns parsed list of pairs
-        """
-        list = []
-
-        if tags:
-            lines = tags.split('\r\n')
-
-            for line in lines:
-                if line:
-                    key, value = line.split('=')
-
-                    if not key or not value:
-                        raise ValueError
-
-                    list.append({"key": key, "value": value})
-
-        return list
 
     def save(self, commit=True):
         instance = super(ImageEditBasicForm, self).save(commit=False)
@@ -164,7 +145,7 @@ class ImageEditBasicForm(forms.ModelForm):
 
     def clean_keyvaluetags(self):
         try:
-            parsed = self.__parseKeyValueTags(self.cleaned_data['keyvaluetags'])
+            parsed = parseKeyValueTags(self.cleaned_data['keyvaluetags'])
         except ValueError:
             raise forms.ValidationError(_("Unable to parse."))
 

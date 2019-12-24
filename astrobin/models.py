@@ -1427,6 +1427,14 @@ class Image(HasSolutionMixin, SafeDeleteModel):
             if self.remote_source == source[0]:
                 return source[1]
 
+    def get_keyvaluetags(self):
+        tags = self.keyvaluetags.all()
+
+        if tags.count() == 0:
+            return ""
+
+        return '\r\n'.join([str(x) for x in self.keyvaluetags.all()])
+
     def is_platesolvable(self):
         return self.subject_type in (100, 300)
 

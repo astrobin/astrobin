@@ -8,6 +8,7 @@ from .claim_commecial_gear_form import ClaimCommercialGearForm
 from .claim_retailed_gear_form import ClaimRetailedGearForm
 from .collection_add_remove_images_form import CollectionAddRemoveImagesForm
 from .collection_ceate_form import CollectionCreateForm
+from .collection_quick_edit_key_value_tags_form import CollectionQuickEditKeyValueTagsForm
 from .collection_update_form import CollectionUpdateForm
 from .commercial_gear_form import CommercialGearForm
 from .copy_gear_form import CopyGearForm

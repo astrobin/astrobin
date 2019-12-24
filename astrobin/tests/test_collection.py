@@ -1,5 +1,6 @@
 import re
 
+import simplejson
 from django.contrib.auth.models import User
 from django.core.urlresolvers import reverse
 from django.test import TestCase
@@ -179,7 +180,7 @@ class CollectionTest(TestCase):
         collection.delete()
 
     @patch("astrobin.tasks.retrieve_primary_thumbnails")
-    def test_collections_list_view_order_by_tag(self, retrieve_primary_thumbnails):
+    def test_collection_order_by_tag(self, retrieve_primary_thumbnails):
         self.client.login(username='test', password='password')
         self._create_collection(self.user, 'test_collection', 'test_description')
 
@@ -219,6 +220,58 @@ class CollectionTest(TestCase):
 
         self.assertContains(response, image1.hash)
         self.assertNotContains(response, image2.hash)
+
+        image1.delete()
+        image2.delete()
+        collection.delete()
+
+    @patch("astrobin.tasks.retrieve_primary_thumbnails")
+    def test_collection_quick_edit_key_value_tags(self, retrieve_primary_thumbnails):
+        self.client.login(username='test', password='password')
+        self._create_collection(self.user, 'test_collection', 'test_description')
+
+        self._do_upload('astrobin/fixtures/test.jpg')
+        image1 = self._get_last_image()
+        KeyValueTag.objects.create(image=image1, key="a", value=1)
+
+        self._do_upload('astrobin/fixtures/test.jpg')
+        image2 = self._get_last_image()
+        KeyValueTag.objects.create(image=image2, key="a", value=2)
+
+        collection = Collection.objects.create(user=self.user, order_by_tag="a")
+        collection.images.add(image1, image2)
+
+        response = self.client.get(
+            reverse('user_collections_quick_edit_key_value_tags', args=(self.user.username, collection.pk,)))
+
+        self.assertContains(response, "a=1")
+        self.assertContains(response, "a=2")
+
+        response = self.client.post(
+            reverse('user_collections_quick_edit_key_value_tags', args=(self.user.username, collection.pk,)),
+            {
+                "imageData": simplejson.dumps([
+                    {
+                        "image_pk": image1.pk,
+                        "value": "a=1\nb=9"
+                    },
+                    {
+                        "image_pk": image2.pk,
+                        "value": "a=2\nb=10"
+                    }
+                ])
+            },
+            HTTP_X_REQUESTED_WITH='XMLHttpRequest',
+        )
+
+        image1 = Image.objects.get(pk=image1.pk)
+        image2 = Image.objects.get(pk=image2.pk)
+
+        self.assertEqual(2, image1.keyvaluetags.count())
+        self.assertEqual("9", image1.keyvaluetags.get(key="b").value)
+
+        self.assertEqual(2, image2.keyvaluetags.count())
+        self.assertEqual("10", image2   .keyvaluetags.get(key="b").value)
 
         image1.delete()
         image2.delete()
