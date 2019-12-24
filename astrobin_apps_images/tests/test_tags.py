@@ -4,7 +4,7 @@ from django.core.files.uploadedfile import SimpleUploadedFile
 from django.test import TestCase, RequestFactory
 
 from astrobin.models import Image
-from .templatetags.astrobin_apps_images_tags import astrobin_image
+from astrobin_apps_images.templatetags.astrobin_apps_images_tags import astrobin_image
 
 
 class TagTests(TestCase):

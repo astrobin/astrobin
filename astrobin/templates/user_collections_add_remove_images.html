@@ -11,7 +11,7 @@
 
 {% block breadcrumbs %}
     {{ block.super }}
-    {% breadcrumb object.name 'user_collection' requested_user.username %}
+    {% breadcrumb object.name 'user_collections_detail' requested_user.username object.pk %}
     {% breadcrumb 'Add/Remove images' None %}
 {% endblock %}
 

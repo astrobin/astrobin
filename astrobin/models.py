@@ -1427,6 +1427,14 @@ class Image(HasSolutionMixin, SafeDeleteModel):
             if self.remote_source == source[0]:
                 return source[1]
 
+    def get_keyvaluetags(self):
+        tags = self.keyvaluetags.all()
+
+        if tags.count() == 0:
+            return ""
+
+        return '\r\n'.join([str(x) for x in self.keyvaluetags.all()])
+
     def is_platesolvable(self):
         return self.subject_type in (100, 300)
 
@@ -1589,13 +1597,20 @@ class Collection(models.Model):
         on_delete=models.SET_NULL,
     )
 
+    order_by_tag = models.CharField(
+        null=True,
+        blank=True,
+        max_length=255,
+        verbose_name=_("Order by image tag")
+    )
+
     class Meta:
         app_label = 'astrobin'
         unique_together = ('user', 'name')
         ordering = ['name']
 
     def __unincode__(self):
-        return "%s, a collectio by %s" % (self.name, self.user.username)
+        return "%s, a collection by %s" % (self.name, self.user.username)
 
 
 class Acquisition(models.Model):
