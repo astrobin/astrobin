@@ -65,6 +65,8 @@ pre_save.connect(image_pre_save, sender=Image)
 
 
 def image_post_save(sender, instance, created, **kwargs):
+    # type: (object, Image, bool, object) -> None
+
     profile_saved = False
 
     groups = instance.user.joined_group_set.filter(autosubmission=True)
@@ -85,7 +87,7 @@ def image_post_save(sender, instance, created, **kwargs):
         instance.user.userprofile.save(keep_deleted=True)
         profile_saved = True
 
-        if not instance.is_wip:
+        if not instance.is_wip and not instance.skip_notifications:
             followers = [x.user for x in ToggleProperty.objects.filter(
                 property_type="follow",
                 content_type=ContentType.objects.get_for_model(User),
