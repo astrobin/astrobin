@@ -231,13 +231,17 @@ class UserCollectionsDetail(UserCollectionsBase, DetailView):
         context = super(UserCollectionsDetail, self).get_context_data(**kwargs)
 
         image_list = self.object.images
+        not_matching_tag = None
 
         if self.object.order_by_tag:
             image_list = image_list \
                 .filter(keyvaluetags__key=self.object.order_by_tag) \
                 .order_by("keyvaluetags__value")
+            not_matching_tag = self.object.images \
+                .exclude(keyvaluetags__key=self.object.order_by_tag)
 
         context['image_list'] = image_list.all()
+        context['not_matching_tag'] = not_matching_tag.all()
         context['alias'] = 'gallery'
         return context
 

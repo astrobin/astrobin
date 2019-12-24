@@ -217,9 +217,11 @@ class CollectionTest(TestCase):
         image2.keyvaluetags.filter(key="b").delete()
 
         response = self.client.get(reverse('user_collections_detail', args=(self.user.username, collection.pk,)))
+        encoded_response = response.content.decode('utf-8')
 
         self.assertContains(response, image1.hash)
-        self.assertNotContains(response, image2.hash)
+        self.assertContains(response, image2.hash)
+        self.assertTrue(encoded_response.find(image1.hash) < encoded_response.find(image2.hash))
 
         image1.delete()
         image2.delete()

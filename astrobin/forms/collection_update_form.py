@@ -12,7 +12,7 @@ class CollectionUpdateForm(forms.ModelForm):
     order_by_tag = forms.ChoiceField(
         required=False,
         help_text=_("Select a tag to order this collection by its value. Images that lack this tag "
-                    "will not appear in the collection.")
+                    "will appear at the bottom of the collection.")
     )
 
     def __init__(self, *args, **kwargs):
