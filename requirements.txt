@@ -82,7 +82,6 @@ django-storages==1.7.1
 django-tagging==0.4.5
 django-tastypie==0.13.3
 -e git+https://github.com/astrobin/django-threaded-messages.git@7020cd56b562acabb1361668f9f012e70b0ab35f#egg=django_threaded_messages
-django-threaded-multihost==1.4-1
 django-timezones==0.2
 django-tinymce==2.6.0
 django-user-agents==0.3.0
@@ -181,7 +180,7 @@ tornado==4.5.1
 ua-parser==0.7.3
 uncompyle6==2.15.1
 Unidecode==0.4.20
-urllib3==1.24.1
+urllib3==1.24.2
 user-agents==1.1.0
 vine==1.1.4
 webencodings==0.5.1
