@@ -20,8 +20,18 @@
             <p>{{collection.description}}</p>
         {% endif %}
 
-        {% if collection.images.count > 0 %}
-            {% image_list collection.images.all nav_ctx='collection' nav_ctx_extra=collection.pk %}
+        {% if image_list.count > 0 or not_matching_tag.count > 0 %}
+            {% if image_list.count > 0 %}
+                {% image_list image_list nav_ctx='collection' nav_ctx_extra=collection.pk %}
+            {% endif %}
+
+            {% if not_matching_tag.count > 0 %}
+                <div class="alert alert-warning">
+                    {% trans "The following images do not have the key/value tag chosen to order this collection, so they are shown as unsorted here." %}
+                </div>
+
+                {% image_list not_matching_tag nav_ctx='collection' nav_ctx_extra=collection.pk %}
+            {% endif %}
         {% else %}
             <p class="alert alert-warning">
                 {% trans "This collection contains no images." %}
