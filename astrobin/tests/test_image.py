@@ -95,10 +95,16 @@ class ImageTest(TestCase):
     # HELPERS                                                                 #
     ###########################################################################
 
-    def _do_upload(self, filename, wip=False):
+    def _do_upload(self, filename, wip=False, skip_notifications=False):
+        # type: (basestring, bool, bool) -> None
+
         data = {'image_file': open(filename, 'rb')}
+
         if wip:
             data['wip'] = True
+
+        if skip_notifications:
+            data['skip_notifications'] = True
 
         return self.client.post(
             reverse('image_upload_process'),
@@ -370,6 +376,24 @@ class ImageTest(TestCase):
         self.assertEqual(acquisition.duration, 1200)
 
         image.delete()
+
+    @patch("astrobin.tasks.retrieve_primary_thumbnails")
+    @patch("astrobin.signals.push_notification")
+    def test_image_upload_process_view_skip_notifications(self, push_notification, retrieve_primary_thumbnails):
+        self.client.login(username='test', password='password')
+
+        ToggleProperty.objects.create(
+            property_type='follow',
+            user=self.user2,
+            content_object=self.user
+        )
+
+        self._do_upload('astrobin/fixtures/test.jpg')
+        self.assertTrue(push_notification.called)
+        push_notification.reset_mock()
+
+        self._do_upload('astrobin/fixtures/test.jpg', skip_notifications=True)
+        self.assertFalse(push_notification.called)
 
     @patch("astrobin.tasks.retrieve_primary_thumbnails")
     def test_image_detail_view_original_revision_overlay(self, retrieve_primary_thumbnails):

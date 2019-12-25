@@ -989,6 +989,12 @@ class Image(HasSolutionMixin, SafeDeleteModel):
         on_delete=models.SET_NULL,
     )
 
+    skip_notifications = models.BooleanField(
+        default=False,
+        verbose_name=_("Skip notifications"),
+        help_text=_("Do not notify your followers about this image upload.")
+    )
+
     class Meta:
         app_label = 'astrobin'
         ordering = ('-uploaded', '-id')
