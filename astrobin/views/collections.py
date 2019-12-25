@@ -240,8 +240,8 @@ class UserCollectionsDetail(UserCollectionsBase, DetailView):
             not_matching_tag = self.object.images \
                 .exclude(keyvaluetags__key=self.object.order_by_tag)
 
-        context['image_list'] = image_list.all()
-        context['not_matching_tag'] = not_matching_tag.all()
+        context['image_list'] = image_list.all() if image_list else None
+        context['not_matching_tag'] = not_matching_tag.all() if not_matching_tag else None
         context['alias'] = 'gallery'
         return context
 
