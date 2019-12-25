@@ -1918,13 +1918,29 @@ BODY:first-of-type ul.as-list, x:-moz-any-link, x:default { /* Target FF 3.5+ */
     width: 50%;
     float: left;
 
+    &.wip-form-box form {
+      margin-bottom: 60px;
+    }
+
+    .progressbar {
+      margin-bottom: 42px;
+    }
+
     .upload-form-inner {
       padding: $spacer-medium;
       border-left: 1px solid #333;
       border-right: none;
 
+      label {
+        display: inline-block;
+      }
+
       form {
         display: none;
+
+        .row-fluid {
+          margin-bottom: 1rem;
+        }
 
         .btn-primary {
           display: inline-block;
