@@ -45,7 +45,7 @@
     <div class="message-list">
         {% for message_tuple in message_list %}
             {% with message_tuple.0 as message %}
-                <div class="message-container {% if message.sender = request.user %}own{% else %}other{% endif %}">
+                <div class="message-container {% if message.sender == request.user %}own{% else %}other{% endif %}">
                     {% include "messages/message_list_view.html" %}
                 </div>
             {% endwith %}

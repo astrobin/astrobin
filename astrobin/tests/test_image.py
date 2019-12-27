@@ -813,7 +813,7 @@ class ImageTest(TestCase):
             })
             return thumb.url
 
-        response = self.client.get(reverse('image_rawthumb', kwargs=opts))
+        response = self.client.get(reverse('image_rawthumb', kwargs=opts), follow=True)
         # 404 because we don't serve that /media/static file, that's fine.
         self.assertRedirects(response, get_expected_url(image))
 
@@ -823,7 +823,7 @@ class ImageTest(TestCase):
         image.save(keep_deleted=True)
 
         image = Image.objects.get(pk=image.pk)
-        response = self.client.get(reverse('image_rawthumb', kwargs=opts))
+        response = self.client.get(reverse('image_rawthumb', kwargs=opts), follow=True)
         self.assertRedirects(response, get_expected_url(image))
 
         image.delete()

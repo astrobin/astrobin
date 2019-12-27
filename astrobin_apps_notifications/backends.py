@@ -63,13 +63,13 @@ class EmailBackend(BaseEmailBackend):
             "full.html"
         ), notice_type.label, context)
 
-        subject = "".join(render_to_string("notification/email_subject.txt", {
+        subject = "".join(render_to_string("notification/email_subject.txt", context.update({
             "message": messages["short.txt"],
-        }, context).splitlines())
+        })).splitlines())
 
-        body = render_to_string("notification/email_body.txt", {
-            "message": messages["full.txt"],
-        }, context)
+        body = render_to_string("notification/email_body.txt", context.update({
+            "message": messages["full.txt"]
+        }))
 
         try:
             html_template = get_template(
@@ -78,9 +78,9 @@ class EmailBackend(BaseEmailBackend):
         except TemplateDoesNotExist:
             message = messages["full.txt"]
 
-        html_body = render_to_string("notification/email_body.html", {
+        html_body = render_to_string("notification/email_body.html", context.update({
             "message": message
-        }, context)
+        }))
 
         send_mail(
             subject,

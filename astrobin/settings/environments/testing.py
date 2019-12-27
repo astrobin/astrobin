@@ -42,6 +42,7 @@ if TESTING:
         'django.middleware.csrf.CsrfViewMiddleware',
         'django.contrib.messages.middleware.MessageMiddleware',
         'gadjo.requestprovider.middleware.RequestProvider',
+        'debug_toolbar.middleware.DebugToolbarMiddleware',
     ]
 
     EMAIL_BACKEND = 'django.core.mail.backends.dummy.EmailBackend'

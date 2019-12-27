@@ -14,7 +14,7 @@ from django.http import Http404
 from django.http import HttpResponseForbidden
 from django.http import HttpResponseRedirect
 from django.shortcuts import get_object_or_404
-from django.shortcuts import render_to_response
+from django.shortcuts import render
 from django.template import loader, RequestContext
 from django.template.loader import render_to_string
 from django.utils.datastructures import MultiValueDictKeyError
@@ -376,9 +376,7 @@ def index(request, template='index/root.html', extra_context=None):
     if extra_context is not None:
         response_dict.update(extra_context)
 
-    return render_to_response(
-        template, response_dict,
-        context_instance=RequestContext(request))
+    return render(request, template, response_dict)
 
 
 @login_required
@@ -428,10 +426,7 @@ def image_upload(request):
     if tmpl_premium_used_percent < 100:
         response_dict['upload_form'] = ImageUploadForm()
 
-    return render_to_response(
-        "upload.html",
-        response_dict,
-        context_instance=RequestContext(request))
+    return render(request, "upload.html", response_dict)
 
 
 @login_required
@@ -474,7 +469,7 @@ def image_upload_process(request):
             from PIL import Image as PILImage
             trial_image = PILImage.open(image_file)
             trial_image.verify()
-            image_file.file.seek(0) # Because we opened it with PIL
+            image_file.file.seek(0)  # Because we opened it with PIL
 
             if ext == '.png' and trial_image.mode == 'I':
                 messages.warning(request, _(
@@ -482,7 +477,8 @@ def image_upload_process(request):
         except:
             return upload_error()
     else:
-        messages.warning(request, _("You uploaded a pretty large file. For that reason, AstroBin could not verify that it's a valid image."))
+        messages.warning(request, _(
+            "You uploaded a pretty large file. For that reason, AstroBin could not verify that it's a valid image."))
 
     profile = request.user.userprofile
     image = form.save(commit=False)
@@ -520,12 +516,10 @@ def image_edit_watermark(request, id):
 
     form = ImageEditWatermarkForm(instance=image)
 
-    return render_to_response('image/edit/watermark.html',
-                              {
-                                  'image': image,
-                                  'form': form,
-                              },
-                              context_instance=RequestContext(request))
+    return render(request, 'image/edit/watermark.html', {
+        'image': image,
+        'form': form,
+    })
 
 
 @login_required
@@ -572,8 +566,7 @@ def image_edit_acquisition(request, id):
                                                form=DeepSky_AcquisitionForm)
             profile = image.user.userprofile
             filter_queryset = profile.filters.all()
-            DSAFormSet.form = staticmethod(curry(DeepSky_AcquisitionForm, queryset=filter_queryset))
-            deep_sky_acquisition_formset = DSAFormSet(instance=image)
+            deep_sky_acquisition_formset = DSAFormSet(instance=image, form_kwargs={'queryset': filter_queryset})
         else:
             dsa = dsa_qs[0] if dsa_qs else DeepSky_Acquisition({image: image, advanced: False})
             deep_sky_acquisition_basic_form = DeepSky_AcquisitionBasicForm(instance=dsa)
@@ -588,9 +581,7 @@ def image_edit_acquisition(request, id):
         'solar_system_acquisition': solar_system_acquisition,
     }
 
-    return render_to_response('image/edit/acquisition.html',
-                              response_dict,
-                              context_instance=RequestContext(request))
+    return render(request, 'image/edit/acquisition.html', response_dict)
 
 
 @login_required
@@ -607,9 +598,7 @@ def image_edit_acquisition_reset(request, id):
         'image': image,
         'deep_sky_acquisition_basic_form': DeepSky_AcquisitionBasicForm(),
     }
-    return render_to_response('image/edit/acquisition.html',
-                              response_dict,
-                              context_instance=RequestContext(request))
+    return render(request, 'image/edit/acquisition.html', response_dict)
 
 
 @login_required
@@ -658,11 +647,10 @@ def image_edit_license(request, id):
         return HttpResponseForbidden()
 
     form = ImageLicenseForm(instance=image)
-    return render_to_response(
-        'image/edit/license.html',
-        {'form': form,
-         'image': image},
-        context_instance=RequestContext(request))
+    return render(request, 'image/edit/license.html', {
+        'form': form,
+        'image': image
+    })
 
 
 @login_required
@@ -695,13 +683,11 @@ def image_edit_platesolving_settings(request, id, revision_label):
 
     if request.method == 'GET':
         form = PlateSolvingSettingsForm(instance=settings)
-        return render_to_response('image/edit/platesolving_settings.html',
-                                  {
-                                      'form': form,
-                                      'image': image,
-                                      'return_url': return_url,
-                                  },
-                                  context_instance=RequestContext(request))
+        return render(request, 'image/edit/platesolving_settings.html', {
+            'form': form,
+            'image': image,
+            'return_url': return_url,
+        })
 
     if request.method == 'POST':
         form = PlateSolvingSettingsForm(instance=settings, data=request.POST)
@@ -709,14 +695,11 @@ def image_edit_platesolving_settings(request, id, revision_label):
             messages.error(
                 request,
                 _("There was one or more errors processing the form. You may need to scroll down to see them."))
-            return render_to_response(
-                'image/edit/platesolving_settings.html',
-                {
-                    'form': form,
-                    'image': image,
-                    'return_url': return_url,
-                },
-                context_instance=RequestContext(request))
+            return render(request, 'image/edit/platesolving_settings.html', {
+                'form': form,
+                'image': image,
+                'return_url': return_url,
+            })
 
         form.save()
         solution.clear()
@@ -743,13 +726,10 @@ def image_edit_save_watermark(request):
     if not form.is_valid():
         messages.error(request,
                        _("There was one or more errors processing the form. You may need to scroll down to see them."))
-        return render_to_response(
-            'image/edit/watermark.html',
-            {
-                'image': image,
-                'form': form,
-            },
-            context_instance=RequestContext(request))
+        return render(request, 'image/edit/watermark.html', {
+            'image': image,
+            'form': form,
+        })
 
     form.save()
 
@@ -816,21 +796,16 @@ def image_edit_save_acquisition(request):
                                                        form=DeepSky_AcquisitionForm)
                     profile = image.user.userprofile
                     filter_queryset = profile.filters.all()
-                    DSAFormSet.form = staticmethod(curry(DeepSky_AcquisitionForm, queryset=filter_queryset))
-                    deep_sky_acquisition_formset = DSAFormSet(instance=image)
+                    deep_sky_acquisition_formset = DSAFormSet(instance=image, form_kwargs={'queryset': filter_queryset})
                     response_dict['deep_sky_acquisitions'] = deep_sky_acquisition_formset
                     response_dict['next_acquisition_session'] = deep_sky_acquisition_formset.total_form_count() - 1
                     if not dsa_qs:
                         messages.info(request, _("Fill in one session, before adding more."))
-                    return render_to_response('image/edit/acquisition.html',
-                                              response_dict,
-                                              context_instance=RequestContext(request))
+                    return render(request, 'image/edit/acquisition.html', response_dict)
             else:
                 messages.error(request, _(
                     "There was one or more errors processing the form. You may need to scroll down to see them."))
-                return render_to_response('image/edit/acquisition.html',
-                                          response_dict,
-                                          context_instance=RequestContext(request))
+                return render(request, 'image/edit/acquisition.html', response_dict)
         else:
             DeepSky_Acquisition.objects.filter(image=image).delete()
             dsa = DeepSky_Acquisition()
@@ -842,9 +817,7 @@ def image_edit_save_acquisition(request):
                 messages.error(request, _(
                     "There was one or more errors processing the form. You may need to scroll down to see them."))
                 response_dict['deep_sky_acquisition_basic_form'] = deep_sky_acquisition_basic_form
-                return render_to_response('image/edit/acquisition.html',
-                                          response_dict,
-                                          context_instance=RequestContext(request))
+                return render(request, 'image/edit/acquisition.html', response_dict)
 
     elif edit_type == 'solar_system':
         ssa = SolarSystem_Acquisition(image=image)
@@ -854,9 +827,7 @@ def image_edit_save_acquisition(request):
             response_dict['ssa_form'] = form
             messages.error(request, _(
                 "There was one or more errors processing the form. You may need to scroll down to see them."))
-            return render_to_response('image/edit/acquisition.html',
-                                      response_dict,
-                                      context_instance=RequestContext(request))
+            return render(request, 'image/edit/acquisition.html', response_dict)
         form.save()
 
     messages.success(request, _("Form saved. Thank you!"))
@@ -879,11 +850,10 @@ def image_edit_save_license(request):
     if not form.is_valid():
         messages.error(request,
                        _("There was one or more errors processing the form. You may need to scroll down to see them."))
-        return render_to_response(
-            'image/edit/license.html',
-            {'form': form,
-             'image': image},
-            context_instance=RequestContext(request))
+        return render(request, 'image/edit/license.html', {
+            'form': form,
+            'image': image
+        })
 
     form.save()
 
@@ -1173,9 +1143,7 @@ def user_page(request, username):
     if request.is_ajax():
         template_name = 'inclusion_tags/image_list_entries.html'
 
-    return render_to_response(
-        template_name, response_dict,
-        context_instance=RequestContext(request))
+    return render(request, template_name, response_dict)
 
 
 @require_GET
@@ -1206,11 +1174,7 @@ def user_page_commercial_products(request, username):
             .filter(content_type=image_ct).count(),
     }
 
-    return render_to_response(
-        'user/profile/commercial/products.html',
-        response_dict,
-        context_instance=RequestContext(request)
-    )
+    return render(request, 'user/profile/commercial/products.html', response_dict)
 
 
 @user_passes_test(lambda u: u.is_superuser)
@@ -1220,13 +1184,10 @@ def user_ban(request, username):
     if request.method == 'POST':
         user.userprofile.delete()
 
-    return render_to_response(
-        'user/ban.html',
-        {
-            'user': user,
-            'deleted': request.method == 'POST',
-        },
-        context_instance=RequestContext(request))
+    return render(request, 'user/ban.html', {
+        'user': user,
+        'deleted': request.method == 'POST',
+    })
 
 
 @require_GET
@@ -1245,21 +1206,18 @@ def user_page_bookmarks(request, username):
     if request.is_ajax():
         template_name = 'inclusion_tags/image_list_entries.html'
 
-    return render_to_response(template_name,
-                              {
-                                  'requested_user': user,
-                                  'image_list': Image.objects.filter(pk__in=images),
-                                  'private_message_form': PrivateMessageForm(),
-                                  'public_images_no': Image.objects.filter(user=user).count(),
-                                  'wip_images_no': Image.wip.filter(user=user).count(),
-                                  'bookmarks_no': ToggleProperty.objects.toggleproperties_for_user("bookmark", user) \
-                              .filter(content_type=image_ct).count(),
-                                  'likes_no': ToggleProperty.objects.toggleproperties_for_user("like", user) \
-                              .filter(content_type=image_ct).count(),
-                                  'alias': 'gallery',
-                              },
-                              context_instance=RequestContext(request)
-                              )
+    return render(request, template_name, {
+        'requested_user': user,
+        'image_list': Image.objects.filter(pk__in=images),
+        'private_message_form': PrivateMessageForm(),
+        'public_images_no': Image.objects.filter(user=user).count(),
+        'wip_images_no': Image.wip.filter(user=user).count(),
+        'bookmarks_no': ToggleProperty.objects.toggleproperties_for_user("bookmark", user) \
+                  .filter(content_type=image_ct).count(),
+        'likes_no': ToggleProperty.objects.toggleproperties_for_user("like", user) \
+                  .filter(content_type=image_ct).count(),
+        'alias': 'gallery',
+    })
 
 
 @require_GET
@@ -1277,21 +1235,18 @@ def user_page_liked(request, username):
     if request.is_ajax():
         template_name = 'inclusion_tags/image_list_entries.html'
 
-    return render_to_response(template_name,
-                              {
-                                  'requested_user': user,
-                                  'image_list': Image.objects.filter(pk__in=images),
-                                  'private_message_form': PrivateMessageForm(),
-                                  'public_images_no': Image.objects.filter(user=user).count(),
-                                  'wip_images_no': Image.wip.filter(user=user).count(),
-                                  'bookmarks_no': ToggleProperty.objects.toggleproperties_for_user("bookmark", user) \
-                              .filter(content_type=image_ct).count(),
-                                  'likes_no': ToggleProperty.objects.toggleproperties_for_user("like", user) \
-                              .filter(content_type=image_ct).count(),
-                                  'alias': 'gallery',
-                              },
-                              context_instance=RequestContext(request)
-                              )
+    return render(request, template_name, {
+        'requested_user': user,
+        'image_list': Image.objects.filter(pk__in=images),
+        'private_message_form': PrivateMessageForm(),
+        'public_images_no': Image.objects.filter(user=user).count(),
+        'wip_images_no': Image.wip.filter(user=user).count(),
+        'bookmarks_no': ToggleProperty.objects.toggleproperties_for_user("bookmark", user) \
+                  .filter(content_type=image_ct).count(),
+        'likes_no': ToggleProperty.objects.toggleproperties_for_user("like", user) \
+                  .filter(content_type=image_ct).count(),
+        'alias': 'gallery',
+    })
 
 
 @require_GET
@@ -1317,23 +1272,20 @@ def user_page_following(request, username, extra_context=None):
     if request.is_ajax():
         template_name = 'astrobin_apps_users/inclusion_tags/user_list_entries.html'
 
-    return render_to_response(template_name,
-                              {
-                                  'request_user': UserProfile.objects.get(
-                                      user=request.user).user if request.user.is_authenticated() else None,
-                                  'requested_user': user,
-                                  'user_list': followed_users,
-                                  'view': request.GET.get('view', 'default'),
-                                  'private_message_form': PrivateMessageForm(),
-                                  'public_images_no': Image.objects.filter(user=user).count(),
-                                  'wip_images_no': Image.wip.filter(user=user).count(),
-                                  'bookmarks_no': ToggleProperty.objects.toggleproperties_for_user("bookmark", user) \
-                              .filter(content_type=image_ct).count(),
-                                  'likes_no': ToggleProperty.objects.toggleproperties_for_user("like", user) \
-                              .filter(content_type=image_ct).count(),
-                              },
-                              context_instance=RequestContext(request)
-                              )
+    return render(request, template_name, {
+        'request_user': UserProfile.objects.get(
+            user=request.user).user if request.user.is_authenticated() else None,
+        'requested_user': user,
+        'user_list': followed_users,
+        'view': request.GET.get('view', 'default'),
+        'private_message_form': PrivateMessageForm(),
+        'public_images_no': Image.objects.filter(user=user).count(),
+        'wip_images_no': Image.wip.filter(user=user).count(),
+        'bookmarks_no': ToggleProperty.objects.toggleproperties_for_user("bookmark", user) \
+                  .filter(content_type=image_ct).count(),
+        'likes_no': ToggleProperty.objects.toggleproperties_for_user("like", user) \
+                  .filter(content_type=image_ct).count(),
+    })
 
 
 @require_GET
@@ -1355,23 +1307,20 @@ def user_page_followers(request, username, extra_context=None):
     if request.is_ajax():
         template_name = 'astrobin_apps_users/inclusion_tags/user_list_entries.html'
 
-    return render_to_response(template_name,
-                              {
-                                  'request_user': UserProfile.objects.get(
-                                      user=request.user).user if request.user.is_authenticated() else None,
-                                  'requested_user': user,
-                                  'user_list': followers,
-                                  'view': request.GET.get('view', 'default'),
-                                  'private_message_form': PrivateMessageForm(),
-                                  'public_images_no': Image.objects.filter(user=user).count(),
-                                  'wip_images_no': Image.wip.filter(user=user).count(),
-                                  'bookmarks_no': ToggleProperty.objects.toggleproperties_for_user("bookmark", user) \
-                              .filter(content_type=image_ct).count(),
-                                  'likes_no': ToggleProperty.objects.toggleproperties_for_user("like", user) \
-                              .filter(content_type=image_ct).count(),
-                              },
-                              context_instance=RequestContext(request)
-                              )
+    return render(request, template_name, {
+        'request_user': UserProfile.objects.get(
+            user=request.user).user if request.user.is_authenticated() else None,
+        'requested_user': user,
+        'user_list': followers,
+        'view': request.GET.get('view', 'default'),
+        'private_message_form': PrivateMessageForm(),
+        'public_images_no': Image.objects.filter(user=user).count(),
+        'wip_images_no': Image.wip.filter(user=user).count(),
+        'bookmarks_no': ToggleProperty.objects.toggleproperties_for_user("bookmark", user) \
+                  .filter(content_type=image_ct).count(),
+        'likes_no': ToggleProperty.objects.toggleproperties_for_user("like", user) \
+                  .filter(content_type=image_ct).count(),
+    })
 
 
 @require_GET
@@ -1381,19 +1330,16 @@ def user_page_plots(request, username):
     profile = user.userprofile
     image_ct = ContentType.objects.get_for_model(Image)
 
-    return render_to_response(
-        'user/plots.html',
-        {
-            'requested_user': user,
-            'profile': profile,
-            'public_images_no': Image.objects.filter(user=user).count(),
-            'wip_images_no': Image.wip.filter(user=user).count(),
-            'bookmarks_no': ToggleProperty.objects.toggleproperties_for_user("bookmark", user) \
-                .filter(content_type=image_ct).count(),
-            'likes_no': ToggleProperty.objects.toggleproperties_for_user("like", user) \
-                .filter(content_type=image_ct).count(),
-        },
-        context_instance=RequestContext(request))
+    return render(request, 'user/plots.html', {
+        'requested_user': user,
+        'profile': profile,
+        'public_images_no': Image.objects.filter(user=user).count(),
+        'wip_images_no': Image.wip.filter(user=user).count(),
+        'bookmarks_no': ToggleProperty.objects.toggleproperties_for_user("bookmark", user) \
+                  .filter(content_type=image_ct).count(),
+        'likes_no': ToggleProperty.objects.toggleproperties_for_user("like", user) \
+                  .filter(content_type=image_ct).count(),
+    })
 
 
 @require_GET
@@ -1407,20 +1353,17 @@ def user_page_api_keys(request, username):
     image_ct = ContentType.objects.get_for_model(Image)
     keys = App.objects.filter(registrar=user)
 
-    return render_to_response(
-        'user/api_keys.html',
-        {
-            'requested_user': user,
-            'profile': profile,
-            'api_keys': keys,
-            'public_images_no': Image.objects.filter(user=user).count(),
-            'wip_images_no': Image.wip.filter(user=user).count(),
-            'bookmarks_no': ToggleProperty.objects.toggleproperties_for_user("bookmark", user) \
-                .filter(content_type=image_ct).count(),
-            'likes_no': ToggleProperty.objects.toggleproperties_for_user("like", user) \
-                .filter(content_type=image_ct).count(),
-        },
-        context_instance=RequestContext(request))
+    return render(request, 'user/api_keys.html', {
+        'requested_user': user,
+        'profile': profile,
+        'api_keys': keys,
+        'public_images_no': Image.objects.filter(user=user).count(),
+        'wip_images_no': Image.wip.filter(user=user).count(),
+        'bookmarks_no': ToggleProperty.objects.toggleproperties_for_user("bookmark", user) \
+                  .filter(content_type=image_ct).count(),
+        'likes_no': ToggleProperty.objects.toggleproperties_for_user("like", user) \
+                  .filter(content_type=image_ct).count(),
+    })
 
 
 @require_GET
@@ -1507,9 +1450,7 @@ def user_profile_edit_basic(request):
     response_dict = {
         'form': form,
     }
-    return render_to_response("user/profile/edit/basic.html",
-                              response_dict,
-                              context_instance=RequestContext(request))
+    return render(request, "user/profile/edit/basic.html", response_dict)
 
 
 @login_required
@@ -1522,9 +1463,7 @@ def user_profile_save_basic(request):
     response_dict = {'form': form}
 
     if not form.is_valid():
-        return render_to_response("user/profile/edit/basic.html",
-                                  response_dict,
-                                  context_instance=RequestContext(request))
+        return render(request, "user/profile/edit/basic.html", response_dict)
 
     form.save()
 
@@ -1546,11 +1485,9 @@ def user_profile_edit_commercial(request):
     else:
         form = UserProfileEditCommercialForm(instance=profile)
 
-    return render_to_response("user/profile/edit/commercial.html",
-                              {
-                                  'form': form,
-                              },
-                              context_instance=RequestContext(request))
+    return render(request, "user/profile/edit/commercial.html", {
+        'form': form,
+    })
 
 
 @login_required
@@ -1567,11 +1504,9 @@ def user_profile_edit_retailer(request):
     else:
         form = UserProfileEditRetailerForm(instance=profile)
 
-    return render_to_response("user/profile/edit/retailer.html",
-                              {
-                                  'form': form,
-                              },
-                              context_instance=RequestContext(request))
+    return render(request, "user/profile/edit/retailer.html", {
+        'form': form,
+    })
 
 
 @login_required
@@ -1579,10 +1514,9 @@ def user_profile_edit_retailer(request):
 def user_profile_edit_license(request):
     profile = request.user.userprofile
     form = DefaultImageLicenseForm(instance=profile)
-    return render_to_response(
-        'user/profile/edit/license.html',
-        {'form': form},
-        context_instance=RequestContext(request))
+    return render(request, 'user/profile/edit/license.html', {
+        'form': form
+    })
 
 
 @login_required
@@ -1592,10 +1526,9 @@ def user_profile_save_license(request):
     form = DefaultImageLicenseForm(data=request.POST, instance=profile)
 
     if not form.is_valid():
-        return render_to_response(
-            'user/profile/edit/license.html',
-            {'form': form},
-            context_instance=RequestContext(request))
+        return render(request, 'user/profile/edit/license.html', {
+            'form': form
+        })
 
     form.save()
 
@@ -1637,9 +1570,7 @@ def user_profile_edit_gear(request):
         prefill[label] = [all_gear, klass]
 
     response_dict['prefill'] = prefill
-    return render_to_response("user/profile/edit/gear.html",
-                              response_dict,
-                              context_instance=RequestContext(request))
+    return render(request, "user/profile/edit/gear.html", response_dict)
 
 
 @login_required
@@ -1662,13 +1593,10 @@ def user_profile_edit_locations(request):
     LocationsFormset = inlineformset_factory(
         UserProfile, Location, form=LocationEditForm, extra=1)
 
-    return render_to_response(
-        'user/profile/edit/locations.html',
-        {
-            'formset': LocationsFormset(instance=profile),
-            'profile': profile,
-        },
-        context_instance=RequestContext(request))
+    return render(request, 'user/profile/edit/locations.html', {
+        'formset': LocationsFormset(instance=profile),
+        'profile': profile,
+    })
 
 
 @login_required
@@ -1681,13 +1609,10 @@ def user_profile_save_locations(request):
     if not formset.is_valid():
         messages.error(request,
                        _("There was one or more errors processing the form. You may need to scroll down to see them."))
-        return render_to_response(
-            'user/profile/edit/locations.html',
-            {
-                'formset': formset,
-                'profile': profile,
-            },
-            context_instance=RequestContext(request))
+        return render(request, 'user/profile/edit/locations.html', {
+            'formset': formset,
+            'profile': profile,
+        })
 
     formset.save()
     messages.success(request, _("Form saved. Thank you!"))
@@ -1718,9 +1643,7 @@ def user_profile_save_gear(request):
             allGear = getattr(profile, k).all()
             prefill_dict[k] = jsonDump(allGear)
 
-        return render_to_response("user/profile/edit/gear.html",
-                                  response_dict,
-                                  context_instance=RequestContext(request))
+        return render(request, "user/profile/edit/gear.html", response_dict)
 
     for k, v in {"telescopes": [Telescope, profile.telescopes],
                  "mounts": [Mount, profile.mounts],
@@ -1760,10 +1683,7 @@ def user_profile_flickr_import(request):
     }
 
     if not request.user.is_superuser and is_free(request.user) or settings.READONLY_MODE:
-        return render_to_response(
-            "user/profile/flickr_import.html",
-            response_dict,
-            context_instance=RequestContext(request))
+        return render(request, "user/profile/flickr_import.html", response_dict)
 
     flickr = flickrapi.FlickrAPI(settings.FLICKR_API_KEY,
                                  settings.FLICKR_SECRET,
@@ -1837,9 +1757,7 @@ def user_profile_flickr_import(request):
 
         return ajax_response(response_dict)
 
-    return render_to_response("user/profile/flickr_import.html",
-                              response_dict,
-                              context_instance=RequestContext(request))
+    return render(request, "user/profile/flickr_import.html", response_dict)
 
 
 def flickr_auth_callback(request):
@@ -1884,9 +1802,7 @@ def user_profile_edit_preferences(request):
         'form': form,
     }
 
-    return render_to_response("user/profile/edit/preferences.html",
-                              response_dict,
-                              context_instance=RequestContext(request))
+    return render(request, "user/profile/edit/preferences.html", response_dict)
 
 
 @login_required
@@ -1911,9 +1827,7 @@ def user_profile_save_preferences(request):
             response.set_cookie(settings.LANGUAGE_COOKIE_NAME, lang)
             activate(lang)
     else:
-        return render_to_response("user/profile/edit/preferences.html",
-                                  response_dict,
-                                  context_instance=RequestContext(request))
+        return render(request, "user/profile/edit/preferences.html", response_dict)
 
     messages.success(request, _("Form saved. Thank you!"))
     return response
@@ -1925,8 +1839,7 @@ def user_profile_delete(request):
         request.user.userprofile.delete()
         auth.logout(request)
 
-    return render_to_response('user/profile/delete.html',
-                              {}, context_instance=RequestContext(request))
+    return render(request, 'user/profile/delete.html', {})
 
 
 @login_required
@@ -1965,7 +1878,7 @@ def image_revision_upload_process(request):
             from PIL import Image as PILImage
             trial_image = PILImage.open(image_file)
             trial_image.verify()
-            image_file.file.seek(0) # Because we opened it with PIL
+            image_file.file.seek(0)  # Because we opened it with PIL
 
             if ext == '.png' and trial_image.mode == 'I':
                 messages.warning(request, _(
@@ -2070,16 +1983,12 @@ def trending_astrophotographers(request):
 
 @require_GET
 def help(request):
-    return render_to_response('help.html',
-                              context_instance=RequestContext(request))
+    return render(request, 'help.html')
 
 
 @require_GET
 def api_help(request):
-    return render_to_response('api.html',
-                              {
-                              },
-                              context_instance=RequestContext(request))
+    return render(request, 'api.html')
 
 
 @require_GET
@@ -2103,20 +2012,17 @@ def affiliates(request):
 
 @require_GET
 def faq(request):
-    return render_to_response('faq.html',
-                              context_instance=RequestContext(request))
+    return render(request, 'faq.html')
 
 
 @require_GET
 def tos(request):
-    return render_to_response('tos.html',
-                              context_instance=RequestContext(request))
+    return render(request, 'tos.html')
 
 
 @require_GET
 def guidelines(request):
-    return render_to_response('guidelines.html',
-                              context_instance=RequestContext(request))
+    return render(request, 'guidelines.html')
 
 
 @login_required
@@ -2125,11 +2031,10 @@ def location_edit(request, id):
     location = get_object_or_404(Location, pk=id)
     form = LocationEditForm(instance=location)
 
-    return render_to_response('location/edit.html',
-                              {'form': form,
-                               'id': id,
-                               },
-                              context_instance=RequestContext(request))
+    return render(request, 'location/edit.html', {
+        'form': form,
+        'id': id,
+    })
 
 
 @require_GET
@@ -2470,7 +2375,7 @@ def gear_page(request, id, slug):
 
     all_images = Image.by_gear(gear, gear_type).filter(is_wip=False)
     show_commercial = (gear.commercial and gear.commercial.is_paid()) or (
-                gear.commercial and gear.commercial.producer == request.user)
+            gear.commercial and gear.commercial.producer == request.user)
     content_type = ContentType.objects.get(app_label='astrobin', model='gear')
     reviews = Review.objects.filter(content_id=id, content_type=content_type)
 
@@ -2495,9 +2400,7 @@ def gear_page(request, id, slug):
         'show_description': show_commercial and gear.commercial.description,
     }
 
-    return render_to_response('gear/page.html',
-                              response_dict,
-                              context_instance=RequestContext(request))
+    return render(request, 'gear/page.html', response_dict)
 
 
 @require_GET
@@ -2702,16 +2605,13 @@ def gear_fix(request, id):
     form = ModeratorGearFixForm(instance=gear)
     next_gear = Gear.objects.filter(moderator_fixed=None).order_by('?')[:1].get()
 
-    return render_to_response(
-        'gear/fix.html',
-        {
-            'form': form,
-            'gear': gear,
-            'next_gear': next_gear,
-            'already_fixed': Gear.objects.exclude(moderator_fixed=None).count(),
-            'remaining': Gear.objects.filter(moderator_fixed=None).count(),
-        },
-        context_instance=RequestContext(request))
+    return render(request, 'gear/fix.html', {
+        'form': form,
+        'gear': gear,
+        'next_gear': next_gear,
+        'already_fixed': Gear.objects.exclude(moderator_fixed=None).count(),
+        'remaining': Gear.objects.filter(moderator_fixed=None).count(),
+    })
 
 
 @require_POST
@@ -2726,16 +2626,13 @@ def gear_fix_save(request):
     next_gear = Gear.objects.filter(moderator_fixed=None).order_by('?')[:1].get()
 
     if not form.is_valid():
-        return render_to_response(
-            'gear/fix.html',
-            {
-                'form': form,
-                'gear': gear,
-                'next_gear': next_gear,
-                'already_fixed': Gear.objects.exclude(moderator_fixed=None).count(),
-                'remaining': Gear.objects.filter(moderator_fixed=None).count(),
-            },
-            context_instance=RequestContext(request))
+        return render(request, 'gear/fix.html', {
+            'form': form,
+            'gear': gear,
+            'next_gear': next_gear,
+            'already_fixed': Gear.objects.exclude(moderator_fixed=None).count(),
+            'remaining': Gear.objects.filter(moderator_fixed=None).count(),
+        })
 
     form.save()
     return HttpResponseRedirect('/gear/fix/%d/' % next_gear.id)
@@ -2747,9 +2644,7 @@ def gear_fix_thanks(request):
     # Disable this view for now. We're good.
     return HttpResponseForbidden()
 
-    return render_to_response(
-        'gear/fix_thanks.html',
-        context_instance=RequestContext(request))
+    return render(request, 'gear/fix_thanks.html')
 
 
 @require_POST
@@ -2951,14 +2846,11 @@ def commercial_products_edit(request, id):
 
     form = CommercialGearForm(instance=product, user=request.user)
 
-    return render_to_response(
-        'commercial/products/edit.html',
-        {
-            'form': form,
-            'product': product,
-            'gear': Gear.objects.filter(commercial=product)[0],
-        },
-        context_instance=RequestContext(request))
+    return render(request, 'commercial/products/edit.html', {
+        'form': form,
+        'product': product,
+        'gear': Gear.objects.filter(commercial=product)[0],
+    })
 
 
 @require_POST
@@ -2979,14 +2871,11 @@ def commercial_products_save(request, id):
         messages.success(request, _("Form saved. Thank you!"))
         return HttpResponseRedirect('/commercial/products/edit/%i/' % product.id)
 
-    return render_to_response(
-        'commercial/products/edit.html',
-        {
-            'form': form,
-            'product': product,
-            'gear': Gear.objects.filter(commercial=product)[0],
-        },
-        context_instance=RequestContext(request))
+    return render(request, 'commercial/products/edit.html', {
+        'form': form,
+        'product': product,
+        'gear': Gear.objects.filter(commercial=product)[0],
+    })
 
 
 @require_POST
@@ -3151,11 +3040,8 @@ def retailed_products_edit(request, id):
     else:
         form = RetailedGearForm(instance=product)
 
-    return render_to_response(
-        'commercial/products/retailed/edit.html',
-        {
-            'form': form,
-            'product': product,
-            'gear': Gear.objects.filter(retailed=product)[0],
-        },
-        context_instance=RequestContext(request))
+    return render(request, 'commercial/products/retailed/edit.html', {
+        'form': form,
+        'product': product,
+        'gear': Gear.objects.filter(retailed=product)[0],
+    })

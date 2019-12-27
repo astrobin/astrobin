@@ -4,7 +4,7 @@
 {% if READONLY_MODE %}
     {% include 'readonly_mode.html' %}
 {% else %}
-    <form class="post-form" action="
+    <form novalidate class="post-form" action="
         {% if forum %}
             {% url 'pybb:add_topic' forum.pk %}
         {% else %}

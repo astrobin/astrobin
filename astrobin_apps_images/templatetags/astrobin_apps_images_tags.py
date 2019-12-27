@@ -49,7 +49,7 @@ def gallery_thumbnail_inverted(image, revision_label):
 # Renders an linked image tag with a placeholder and async loading of the
 # actual thumbnail.
 def astrobin_image(context, image, alias, **kwargs):
-    request = context['request']
+    request = kwargs.get('request', context['request'])
 
     revision = kwargs.get('revision', 'final')
     url_size = kwargs.get('url_size', 'regular')

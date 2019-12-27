@@ -43,7 +43,7 @@
                         {% endblocktrans %}
                     </div>
                 </div>
-                {% astrobin_image image 'story' nav_ctx='user' %}
+                {% astrobin_image image 'story' nav_ctx='user' request=request %}
                 {% include 'actstream/_action_image_title.html' %}
             </div>
         {% endwith %}
@@ -61,7 +61,7 @@
                         {% endblocktrans %}
                     </div>
                 </div>
-                {% astrobin_image image 'story' revision=revision.label nav_ctx='user' %}
+                {% astrobin_image image 'story' revision=revision.label nav_ctx='user' request=request %}
                 {% include 'actstream/_action_image_title.html' %}
             </div>
         {% endwith %}
@@ -85,7 +85,7 @@
                         {% endif %}
                     </div>
                 </div>
-                {% astrobin_image image 'story' nav_ctx='user' %}
+                {% astrobin_image image 'story' nav_ctx='user' request=request %}
                 {% include 'actstream/_action_image_title.html' %}
             </div>
         {% endwith %}
@@ -109,7 +109,7 @@
                         {% endif %}
                     </div>
                 </div>
-                {% astrobin_image image 'story' nav_ctx='user' %}
+                {% astrobin_image image 'story' nav_ctx='user' request=request %}
                 {% include 'actstream/_action_image_title.html' %}
             </div>
         {% endwith %}
@@ -137,7 +137,7 @@
                         </div>
                     </div>
                 </div>
-                {% astrobin_image image 'story' nav_ctx='user' %}
+                {% astrobin_image image 'story' nav_ctx='user' request=request %}
                 {% include 'actstream/_action_image_title.html' %}
             </div>
         {% endwith %}
@@ -211,7 +211,7 @@
                         </div>
                     </div>
                 </div>
-                {% astrobin_image image 'story' nav_ctx='user' %}
+                {% astrobin_image image 'story' nav_ctx='user' request=request %}
                 {% include 'actstream/_action_image_title.html' %}
             </div>
         {% endwith %}

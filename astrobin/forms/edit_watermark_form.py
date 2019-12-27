@@ -25,7 +25,7 @@ class ImageEditWatermarkForm(forms.ModelForm):
         if watermark and data == '':
             raise forms.ValidationError(_("If you want to watermark this image, you must specify some text."));
 
-        return data.strip()
+        return data.strip() if data else data
 
     class Meta:
         model = Image
