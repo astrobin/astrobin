@@ -14,6 +14,7 @@ from .commercial_gear_form import CommercialGearForm
 from .copy_gear_form import CopyGearForm
 from .deep_sky_acquisition_basic_form import DeepSky_AcquisitionBasicForm
 from .deep_sky_acquisition_form import DeepSky_AcquisitionForm
+from .default_license_form import DefaultImageLicenseForm
 from .demote_form import ImageDemoteForm
 from .edit_basic_form import ImageEditBasicForm
 from .edit_gear_form import ImageEditGearForm
@@ -34,6 +35,7 @@ from .mount_edit_form import MountEditForm
 from .mount_edit_new_form import MountEditNewForm
 from .private_message_form import PrivateMessageForm
 from .profile_edit_commercial_form import UserProfileEditCommercialForm
+from .profile_edit_gear_form import UserProfileEditGearForm
 from .profile_edit_preferences_form import UserProfileEditPreferencesForm
 from .profile_edit_retailer_form import UserProfileEditRetailerForm
 from .profile_update_edit_basic_form import UserProfileEditBasicForm
