@@ -16,6 +16,7 @@ from django.core.exceptions import PermissionDenied
 from django.core.files.images import get_image_dimensions
 from django.core.urlresolvers import reverse_lazy
 from django.db.models import Q
+from django.db.models.query import QuerySet
 from django.http import Http404, HttpResponseRedirect
 from django.shortcuts import redirect
 from django.utils.encoding import iri_to_uri, smart_unicode
@@ -565,10 +566,28 @@ class ImageDetailView(ImageDetailViewBase):
                         # Maybe this image is in a single collection
                         collection = image.collections.all()[0]
 
-                    image_next = Image.objects.filter(user=image.user, collections=collection,
-                                                      pk__gt=image.pk).order_by('pk')[0:1]
-                    image_prev = Image.objects.filter(user=image.user, collections=collection,
-                                                      pk__lt=image.pk).order_by('-pk')[0:1]
+                    if collection.order_by_tag:
+                        collection_images = Image.objects\
+                            .filter(user=image.user, collections=collection, keyvaluetags__key=collection.order_by_tag)\
+                            .order_by('keyvaluetags__value')
+
+                        current_index = 0
+                        for iter_image in collection_images.all():
+                            if iter_image.pk == image.pk:
+                                break
+                            current_index += 1
+
+                        image_next = collection_images.all()[current_index + 1] \
+                            if current_index < collection_images.count() - 1\
+                            else None
+                        image_prev = collection_images.all()[current_index - 1]\
+                            if current_index > 0 \
+                            else None
+                    else:
+                        image_next = Image.objects.filter(user=image.user, collections=collection,
+                                                          pk__gt=image.pk).order_by('pk')[0:1]
+                        image_prev = Image.objects.filter(user=image.user, collections=collection,
+                                                          pk__lt=image.pk).order_by('-pk')[0:1]
                 except Collection.DoesNotExist:
                     # image_prev and image_next will remain None
                     pass
@@ -606,9 +625,9 @@ class ImageDetailView(ImageDetailViewBase):
             image_next = None
             image_prev = None
 
-        if image_next:
-            image_next = image_next[0]
-        if image_prev:
+        if image_next and isinstance(image_next, QuerySet):
+                image_next = image_next[0]
+        if image_prev and isinstance(image_prev, QuerySet):
             image_prev = image_prev[0]
 
         #################
