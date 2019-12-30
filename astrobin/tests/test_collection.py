@@ -278,3 +278,38 @@ class CollectionTest(TestCase):
         image1.delete()
         image2.delete()
         collection.delete()
+
+    @patch("astrobin.tasks.retrieve_primary_thumbnails")
+    def test_collection_navigation_links(self, retrieve_primary_thumbnails):
+        self.client.login(username='test', password='password')
+        self._create_collection(self.user, 'test_collection', 'test_description')
+
+        self._do_upload('astrobin/fixtures/test.jpg')
+        image1 = self._get_last_image()
+        KeyValueTag.objects.create(image=image1, key="a", value=2)
+
+        self._do_upload('astrobin/fixtures/test.jpg')
+        image2 = self._get_last_image()
+        KeyValueTag.objects.create(image=image2, key="a", value=1)
+
+        collection = self._get_last_collection()
+        collection.images.add(image1, image2)
+
+        response = self.client.get(
+            reverse('image_detail', args=(image1.get_id(),)) + "?nc=collection&nce=" + str(collection.pk))
+
+        self.assertContains(response, "data-test=\"image-prev-none\"")
+        self.assertContains(response, "data-test=\"image-next-" + image2.get_id() + "\"")
+
+        collection.order_by_tag = "a"
+        collection.save()
+
+        response = self.client.get(
+            reverse('image_detail', args=(image1.get_id(),)) + "?nc=collection&nce=" + str(collection.pk))
+
+        self.assertContains(response, "data-test=\"image-prev-" + image2.get_id() + "\"")
+        self.assertContains(response, "data-test=\"image-next-none\"")
+
+        image1.delete()
+        image2.delete()
+        collection.delete()
