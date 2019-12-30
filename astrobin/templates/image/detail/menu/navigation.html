@@ -70,9 +70,11 @@
                 href="{% url 'image_detail' image_next.get_id %}"
                 rel="tooltip"
                 data-placement="bottom"
+                data-test="image-next-{{ image_next.get_id }}"
                 title="{{image_next.title|escape|default:_("(no title)")}}"
             {% else %}
                 href="#"
+                data-test="image-next-none"
             {% endif %}
         >
             <i class="icon-chevron-right"></i>
@@ -85,9 +87,11 @@
                 href="{% url 'image_detail' image_prev.get_id %}"
                 rel="tooltip"
                 data-placement="bottom"
+                data-test="image-prev-{{ image_prev.get_id }}"
                 title="{{image_prev.title|escape|default:_("(no title)")}}"
             {% else %}
                 href="#"
+                data-test="image-prev-none"
             {% endif %}
         >
             <i class="icon-chevron-left"></i>
