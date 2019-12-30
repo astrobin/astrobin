@@ -7,7 +7,7 @@ from django.contrib import auth
 from django.contrib import messages
 from django.contrib.auth.decorators import login_required, user_passes_test
 from django.core.exceptions import MultipleObjectsReturned
-from django.core.paginator import Paginator
+from django.core.paginator import Paginator, InvalidPage
 from django.core.urlresolvers import reverse
 from django.forms.models import inlineformset_factory
 from django.http import Http404
@@ -18,7 +18,6 @@ from django.shortcuts import render
 from django.template import loader, RequestContext
 from django.template.loader import render_to_string
 from django.utils.datastructures import MultiValueDictKeyError
-from django.utils.functional import curry
 from django.utils.translation import ugettext as _
 from django.views.decorators.cache import never_cache
 from django.views.decorators.http import require_GET, require_POST
@@ -28,6 +27,7 @@ from haystack.query import SearchQuerySet
 from reviews.views import ReviewAddForm
 from silk.profiling.profiler import silk_profile
 
+from astrobin.context_processors import notices_count, user_language, user_scores, common_variables
 from astrobin.forms import *
 from astrobin.gear import *
 from astrobin.models import *
@@ -96,11 +96,15 @@ def object_list(request, queryset, paginate_by=None, page=None,
             A list of the page numbers (1-indexed).
     """
     if extra_context is None: extra_context = {}
+
     queryset = queryset._clone()
+
     if paginate_by:
         paginator = Paginator(queryset, paginate_by, allow_empty_first_page=allow_empty)
+
         if not page:
             page = request.GET.get('page', 1)
+
         try:
             page_number = int(page)
         except ValueError:
@@ -113,6 +117,7 @@ def object_list(request, queryset, paginate_by=None, page=None,
             page_obj = paginator.page(page_number)
         except InvalidPage:
             raise Http404
+
         c = RequestContext(request, {
             '%s_list' % template_object_name: page_obj.object_list,
             'paginator': paginator,
@@ -140,18 +145,30 @@ def object_list(request, queryset, paginate_by=None, page=None,
             'page_obj': None,
             'is_paginated': False,
         }, context_processors)
+
         if not allow_empty and len(queryset) == 0:
             raise Http404
+
     for key, value in extra_context.items():
         if callable(value):
             c[key] = value()
         else:
             c[key] = value
+
     if not template_name:
         model = queryset.model
         template_name = "%s/%s_list.html" % (model._meta.app_label, model._meta.object_name.lower())
+
     t = template_loader.get_template(template_name)
-    return HttpResponse(t.render(c), content_type=mimetype)
+
+    context = c.flatten()
+    context.update({"request": request})
+    context.update(notices_count(request))
+    context.update(user_language(request))
+    context.update(user_scores(request))
+    context.update(common_variables(request))
+
+    return HttpResponse(t.render(context), content_type=mimetype)
 
 
 def monthdelta(date, delta):
