@@ -92,13 +92,36 @@
                         </p>
 
                         {% if instance_to_platesolve.solution.ra %}
-                            <p><strong class="card-label">{% trans "RA center" %}:</strong> {{instance_to_platesolve.solution.ra}} {% trans "degrees" %}</p>
-                            <p><strong class="card-label">{% trans "DEC center" %}:</strong> {{instance_to_platesolve.solution.dec}} {% trans "degrees" %}</p>
+                            <p>
+                                <strong class="card-label">{% trans "RA center" %}:</strong>
+                                <abbr title="{{ instance_to_platesolve.solution.ra }} {% trans "hours" %}">
+                                    {{instance_to_platesolve.solution.ra | ra_to_hms}}
+                                </abbr>
+                            </p>
+
+                            <p>
+                                <strong class="card-label">{% trans "DEC center" %}:</strong>
+                                <abbr title="{{ instance_to_platesolve.solution.dec }} {% trans "degrees" %}">
+                                    {{instance_to_platesolve.solution.dec | dec_to_dms}}
+                                </abbr>
+                            </p>
+
                             {% if instance_to_platesolve.solution.pixscale and instance_to_platesolve.solution.pixscale != 0 %}
-                                <p><strong class="card-label">{% trans "Pixel scale" %}:</strong> {{instance_to_platesolve.solution.pixscale}} {% trans "arcsec/pixel" %}</p>
+                                <p>
+                                    <strong class="card-label">{% trans "Pixel scale" %}:</strong>
+                                    {{instance_to_platesolve.solution.pixscale}} {% trans "arcsec/pixel" %}
+                                </p>
                             {% endif %}
-                            <p><strong class="card-label">{% trans "Orientation" %}:</strong> {{instance_to_platesolve.solution.orientation}} {% trans "degrees" %}</p>
-                            <p><strong class="card-label">{% trans "Field radius" %}:</strong> {{instance_to_platesolve.solution.radius}} {% trans "degrees" %}</p>
+
+                            <p>
+                                <strong class="card-label">{% trans "Orientation" %}:</strong>
+                                {{instance_to_platesolve.solution.orientation}} {% trans "degrees" %}
+                            </p>
+
+                            <p>
+                                <strong class="card-label">{% trans "Field radius" %}:</strong>
+                                {{instance_to_platesolve.solution.radius}}
+                            </p>
                         {% endif %}
                     {% endif %}
 
