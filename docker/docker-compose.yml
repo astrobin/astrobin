@@ -41,7 +41,7 @@ services:
 
 
   celery_default:
-    image: astrobin/astrobin:v1.48.2-adsense.1
+    image: astrobin/astrobin:v1.48.3-adsense.1
     command: celery worker -A astrobin -Q default,email -c 8 -l debug -f celery_default.log
     links:
       - memcached
@@ -63,7 +63,7 @@ services:
 
 
   celery_thumbnails:
-    image: astrobin/astrobin:v1.48.2-adsense.1
+    image: astrobin/astrobin:v1.48.3-adsense.1
     command: celery worker -A astrobin -Q thumbnails -c 8 -l debug -f celery_thumbnails.log
     links:
       - memcached
@@ -85,7 +85,7 @@ services:
 
 
   celery_haystack:
-    image: astrobin/astrobin:v1.48.2-adsense.1
+    image: astrobin/astrobin:v1.48.3-adsense.1
     command: celery worker -A astrobin -Q haystack -c 8 -l debug -f celery_haystack.log
     links:
       - memcached
@@ -105,7 +105,7 @@ services:
 
 
   beat:
-    image: astrobin/astrobin:v1.48.2-adsense.1
+    image: astrobin/astrobin:v1.48.3-adsense.1
     command: celery -A astrobin beat -l debug -f celery_beat.log --pidfile= --scheduler django_celery_beat.schedulers:DatabaseScheduler
     links:
       - memcached
@@ -125,7 +125,7 @@ services:
 
 
   astrobin:
-    image: astrobin/astrobin:v1.48.2-adsense.1
+    image: astrobin/astrobin:v1.48.3-adsense.1
     command: bash -c "./manage.py migrate --noinput && gunicorn wsgi:application -w 4 -b :8083 --max-requests 1000 --max-requests-jitter 50 --timeout 300 --graceful-timeout 300 -k gevent"
     links:
       - memcached
