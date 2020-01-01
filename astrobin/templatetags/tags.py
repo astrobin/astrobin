@@ -1,3 +1,7 @@
+# -*- coding: utf-8 -*-
+
+from math import floor
+
 from django.core.paginator import Paginator, EmptyPage, PageNotAnInteger
 from django.template import Library
 from django.template.defaultfilters import timesince
@@ -394,3 +398,27 @@ def humanize_image_acquisition_type(type):
         if type == choice[0]:
             return choice[1]
     return ""
+
+
+def decimal_to_degrees_minutes_seconds(value, degree_symbol="°", minute_symbol="'", second_symbol="\""):
+    is_positive = value >= 0
+    value = abs(value)
+    minutes, seconds = divmod(value * 3600, 60)
+    degrees, minutes = divmod(minutes, 60)
+    degrees = degrees if is_positive else -degrees
+
+    return "%s%d%s %d%s %d%s" % (
+        "+" if is_positive else "",
+        degrees, degree_symbol,
+        minutes, minute_symbol,
+        seconds, second_symbol)
+
+
+@register.filter
+def ra_to_hms(hours):
+    return decimal_to_degrees_minutes_seconds(hours, "h")
+
+
+@register.filter
+def dec_to_dms(degrees):
+    return decimal_to_degrees_minutes_seconds(degrees)
