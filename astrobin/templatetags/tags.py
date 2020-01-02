@@ -407,23 +407,36 @@ def humanize_image_acquisition_type(type):
     return ""
 
 
+def decimal_to_hours_minutes_seconds(value, hour_symbol="h", minute_symbol="'", second_symbol="\""):
+    is_positive = value >= 0
+    value = abs(value)
+    hours = int(value / 15)
+    minutes = int(((value / 15) - hours) * 60)
+    seconds = ((((value / 15) - hours) * 60) - minutes) * 60
+
+    return "%s%d%s %d%s %d%s" % (
+        "" if is_positive else "-",
+        hours, hour_symbol,
+        minutes, minute_symbol,
+        seconds, second_symbol)
+
+
 def decimal_to_degrees_minutes_seconds(value, degree_symbol="°", minute_symbol="'", second_symbol="\""):
     is_positive = value >= 0
     value = abs(value)
     minutes, seconds = divmod(value * 3600, 60)
     degrees, minutes = divmod(minutes, 60)
-    degrees = degrees if is_positive else -degrees
 
     return "%s%d%s %d%s %d%s" % (
-        "+" if is_positive else "",
+        "+" if is_positive else "-",
         degrees, degree_symbol,
         minutes, minute_symbol,
         seconds, second_symbol)
 
 
 @register.filter
-def ra_to_hms(hours):
-    return decimal_to_degrees_minutes_seconds(hours, "h")
+def ra_to_hms(degrees):
+    return decimal_to_hours_minutes_seconds(degrees)
 
 
 @register.filter
