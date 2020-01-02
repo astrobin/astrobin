@@ -94,7 +94,7 @@
                         {% if instance_to_platesolve.solution.ra %}
                             <p>
                                 <strong class="card-label">{% trans "RA center" %}:</strong>
-                                <abbr title="{{ instance_to_platesolve.solution.ra }} {% trans "hours" %}">
+                                <abbr title="{{ instance_to_platesolve.solution.ra }} {% trans "degrees" %}">
                                     {{instance_to_platesolve.solution.ra | ra_to_hms}}
                                 </abbr>
                             </p>
