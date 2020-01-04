@@ -984,7 +984,7 @@ class ImagePromoteView(LoginRequiredMixin, ImageUpdateViewBase):
         return super(ImagePromoteView, self).post(request, args, kwargs)
 
 
-class   ImageEditBaseView(LoginRequiredMixin, ImageUpdateViewBase):
+class ImageEditBaseView(LoginRequiredMixin, ImageUpdateViewBase):
     model = Image
     pk_url_kwarg = 'id'
     template_name_suffix = ''
@@ -1046,8 +1046,12 @@ class ImageEditGearView(ImageEditBaseView):
             return reverse_lazy('image_edit_acquisition', kwargs={'id': image.get_id()})
         return image.get_absolute_url()
 
-    def get_form(self, form_class):
+    def get_form(self, form_class=None):
         image = self.get_object()
+
+        if form_class is None:
+            form_class = self.get_form_class()
+
         if self.request.method == 'POST':
             return form_class(
                 user=image.user, instance=image, data=self.request.POST)

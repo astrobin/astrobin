@@ -111,7 +111,7 @@ class UserCollectionsUpdate(
     pk_url_kwarg = 'collection_pk'
     context_object_name = 'collection'
 
-    def get_form(self, form_class):
+    def get_form(self, form_class=None):
         form = super(UserCollectionsUpdate, self).get_form(form_class)
         form.fields['cover'].queryset = Collection.objects.get(pk = self.kwargs['collection_pk']).images.all()
         return form
