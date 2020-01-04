@@ -162,13 +162,12 @@ def object_list(request, queryset, paginate_by=None, page=None,
     t = template_loader.get_template(template_name)
 
     context = c.flatten()
-    context.update({"request": request})
     context.update(notices_count(request))
     context.update(user_language(request))
     context.update(user_scores(request))
     context.update(common_variables(request))
 
-    return HttpResponse(t.render(context), content_type=mimetype)
+    return HttpResponse(t.render(context, request))
 
 
 def monthdelta(date, delta):
