@@ -14,7 +14,7 @@ from astrobin_apps_notifications.utils import push_notification
 
 
 class Command(BaseCommand):
-    help = "Send a notificaion to user when their premium subscription " +\
+    help = "Send a notification to user when their premium subscription " +\
            "auto-renews in one week."
 
     def handle(self, *args, **kwargs):
@@ -25,7 +25,6 @@ class Command(BaseCommand):
             .exclude(subscription__recurrence_unit = None)
 
         for user_subscription in user_subscriptions:
-            print user_subscription
             push_notification([user_subscription.user], 'expiring_subscription_autorenew', {
                 'user_subscription': user_subscription,
                 'url': settings.BASE_URL + reverse('subscription_detail', kwargs = {
