@@ -252,9 +252,9 @@ def show_ads(user):
 
 @register.simple_tag(takes_context=True)
 def show_adsense_ads(context):
-    return show_ads(context.request.user) and \
+    return show_ads(context['request'].user) and \
            context["COOKIELAW_ACCEPTED"] and \
-           not context.request.get_host().startswith("localhost")
+           not context['request'].get_host().startswith("localhost")
 
 
 @register.filter
