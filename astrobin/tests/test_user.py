@@ -59,7 +59,7 @@ class UserTest(TestCase):
         image = self._get_last_image()
         if title:
             image.title = title
-            image.save()
+            image.save(keep_deleted=True)
 
         return image
 
@@ -99,8 +99,8 @@ class UserTest(TestCase):
         # Test "upload time" sorting
         image1 = self._do_upload('astrobin/fixtures/test.jpg', "IMAGE1")
         image2 = self._do_upload('astrobin/fixtures/test.jpg', "IMAGE2")
-        image1.uploaded = today; image1.save()
-        image2.uploaded = today + timedelta(1); image2.save()
+        image1.uploaded = today; image1.save(keep_deleted=True)
+        image2.uploaded = today + timedelta(1); image2.save(keep_deleted=True)
 
         response = self.client.get(
             reverse('user_page', args = ('user',)) + "?sub=uploaded")
@@ -136,12 +136,12 @@ class UserTest(TestCase):
         image5 = self._do_upload('astrobin/fixtures/test.jpg', "IMAGE5_GEAR")
         image6 = self._do_upload('astrobin/fixtures/test.jpg', "IMAGE6_OTHER")
 
-        image1.subject_type = 100; image1.save()
-        image2.subject_type = 200; image2.save()
-        image3.subject_type = 300; image3.save()
-        image4.subject_type = 400; image4.save()
-        image5.subject_type = 500; image5.save()
-        image6.subject_type = 600; image6.save()
+        image1.subject_type = 100; image1.save(keep_deleted=True)
+        image2.subject_type = 200; image2.save(keep_deleted=True)
+        image3.subject_type = 300; image3.save(keep_deleted=True)
+        image4.subject_type = 400; image4.save(keep_deleted=True)
+        image5.subject_type = 500; image5.save(keep_deleted=True)
+        image6.subject_type = 600; image6.save(keep_deleted=True)
 
         response = self.client.get(reverse('user_page', args = ('user',)) + "?sub=subject")
         self.assertEquals(response.status_code, 200)
@@ -262,16 +262,16 @@ class UserTest(TestCase):
         image3 = self._do_upload('astrobin/fixtures/test.jpg', "IMAGE3")
         image4 = self._do_upload('astrobin/fixtures/test.jpg', "IMAGE4")
 
-        image3.subject_type = 200; image3.save()
-        image4.subject_type = 500; image4.save()
+        image3.subject_type = 200; image3.save(keep_deleted=True)
+        image4.subject_type = 500; image4.save(keep_deleted=True)
 
 
         telescope1 = Telescope.objects.create(name = "TELESCOPE1")
         telescope2 = Telescope.objects.create(name = "TELESCOPE2")
         image1.imaging_telescopes.add(telescope1)
-        image1.save()
+        image1.save(keep_deleted=True)
         image2.imaging_telescopes.add(telescope2)
-        image2.save()
+        image2.save(keep_deleted=True)
 
         response = self.client.get(
             reverse('user_page', args = ('user',)) + "?sub=gear&active=%d" % telescope1.pk)
@@ -315,7 +315,7 @@ class UserTest(TestCase):
         # Test "no data" sub-section
         image = self._do_upload('astrobin/fixtures/test.jpg', "IMAGE_NODATA")
         image.subject_type = 100
-        image.save()
+        image.save(keep_deleted=True)
         response = self.client.get(
             reverse('user_page', args = ('user',)) + "?sub=nodata")
         self.assertEquals(response.status_code, 200)
@@ -323,7 +323,7 @@ class UserTest(TestCase):
 
         image.subject_type = 200
         image.solar_system_main_subject = None
-        image.save()
+        image.save(keep_deleted=True)
         response = self.client.get(
             reverse('user_page', args = ('user',)) + "?sub=nodata")
         self.assertEquals(response.status_code, 200)
@@ -341,7 +341,7 @@ class UserTest(TestCase):
 
         # Users with at least one spam image should be 404
         image.moderator_decision = 2
-        image.save()
+        image.save(keep_deleted=True)
         response = self.client.get(reverse('user_page', args = ('user',)))
         self.assertEquals(response.status_code, 404)
 
@@ -410,11 +410,11 @@ class UserTest(TestCase):
 
         profile = self.user.userprofile
         profile.exclude_from_competitions = True
-        profile.save()
+        profile.save(keep_deleted=True)
         image = Image.objects_including_wip.get(pk = image.pk)
 
         # Check that the IOTD banner is not visible
-        response = self.client.get(reverse('image_detail', args = (image.pk,)))
+        response = self.client.get(reverse('image_detail', args = (image.get_id(),)))
         self.assertNotContains(response, "iotd-ribbon")
 
         # Check that the IOTD badge is not visible
@@ -485,7 +485,7 @@ class UserTest(TestCase):
 
         updated = self.user.userprofile.updated
         image.title = "TEST IMAGE UPDATED"
-        image.save()
+        image.save(keep_deleted=True)
 
         profile = UserProfile.objects.get(user = self.user)
         self.assertNotEquals(updated, profile.updated)

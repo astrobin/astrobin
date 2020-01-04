@@ -94,18 +94,10 @@
 
             <h2>How to display images.</h2>
             <p>
-                <!-- TODO: refactor for removal of filename and original_ext -->
-                If you get an Image object using the APIs, it will have a <em>filename</em>
-                and <em>original_ext</em> field. To display the image, you must append them
-                to <strong>{{IMAGES_URL}}</strong>.
+                The API response will provide you with several "url_*" properties, each one a different image size.
             </p>
-            <p>
-                This will give you the full size image. If you want a smaller version, you can
-                append <em>_resized</em> to the filename.
-            </p>
-            <p>
-                For a thumbnail, append <em>_thumb</em> and use the .png extension.
-            </p>
+
+
             <h2>Fair use.</h2>
             <p>
                 Using the APIs to mercilessly scrape all the available content is not allowed.
@@ -121,6 +113,7 @@
     <div class="row section">
         <div class="span12">
             <h2>Some examples</h2>
+
             <div class="alert alert-info">
                 All examples omit the base URL <strong>/api/v1</strong> and the
                 <strong>api_key</strong>, <strong>api_secret</strong> and <strong>format</strong>
@@ -128,49 +121,59 @@
                 You must add them in real usage, e.g.:<br/>
                 <a href="#">http://astrobin.com/api/v1/.../?...&amp;api_key=123456790&amp;api_secret=0987654321&amp;format=json</a>
             </div>
+
             <p>Remember that you can combine most of these queries, so feel free to experiment!</p>
-            <table class="table">
+
+            <table class="table table-striped api-examples">
                 <tr>
-                    <th>Get a single image by ID:</th>
+                    <td>Get a single image by ID:</td>
                     <td><code>image/1234/</code></td>
                 </tr>
                 <tr>
-                    <th>Search by subject:</th>
+                    <td>Search by subject:</td>
                     <td><code>image/?subjects=M31</code></td>
                 </tr>
                 <tr>
-                    <th>Search by user:</th>
+                    <td>Search by user:</td>
                     <td><code>image/?user=siovene</code></td>
                 </tr>
                 <tr>
-                    <th>Search by case-insensitive, partial title:</th>
+                    <td>Search by case-insensitive, partial title:</td>
                     <td><code>image/?title__icontains=andromeda</code></td>
                 </tr>
                 <tr>
-                    <th>Search by case-insensitive, partial description:</th>
+                    <td>Search by case-insensitive, partial description:</td>
                     <td><code>image/?description__icontains=wind</code></td>
                 </tr>
                 <tr>
-                    <th>Other useful partial tricks:</th>
+                    <td>Other useful partial tricks:</td>
                     <td><code>__startswith=</code> <code>__endswith=</code>
                         <code>__contains=</code> <code>__istartswith=</code>
                         <code>__iendswith=</code></td>
                 </tr>
                 <tr>
-                    <th>Search by upload date range:</th>
+                    <td>Search by upload date range:</td>
                     <td><code>image/?uploaded__gte=2012-04-10%200:00:00&amp;uploaded__lt=2012-04-11%200:00:00</code></td>
                 </tr>
                 <tr>
-                    <th>Comparison operators:</th>
+                    <td>Comparison operators:</td>
                     <td><code>__lt=</code> <code>__lte=</code> <code>__gt=</code> <code>__gte=</code></td>
                 </tr>
                 <tr>
-                    <th>Get today's Image Of The Day:</th>
+                    <td>Get today's Image Of The Day:</td>
                     <td><code>imageoftheday/?limit=1</code></td>
                 </tr>
                 <tr>
-                    <th>Get yesterdays's Image Of The Day:</th>
+                    <td>Get yesterdays's Image Of The Day:</td>
                     <td><code>imageoftheday/?limit=1&amp;offset=1</code></td>
+                </tr>
+                <tr>
+                    <td>Get a user by id:</td>
+                    <td><code>userprofile/1234</code></td>
+                </tr>
+                <tr>
+                    <td>Get a user by username:</td>
+                    <td><code>userprofile/?username=siovene</code></td>
                 </tr>
 
             </table>

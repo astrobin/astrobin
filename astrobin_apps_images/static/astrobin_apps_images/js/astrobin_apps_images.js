@@ -1,12 +1,13 @@
-$(document).ready(function() {
+$(document).ready(function () {
     /* TODO: make this a jQuery plugin */
-    window.loadAstroBinImages = function(fragment) {
+    window.loadAstroBinImages = function (fragment) {
         var tries = {};
 
-        $(fragment).find('img.astrobin-image').each(function(index) {
+        $(fragment).find('img.astrobin-image').each(function (index) {
             var $img = $(this),
                 random_timeout = Math.floor(Math.random() * 100) + 100, // 100-200 ms
                 id = $img.data('id'),
+                hash = $img.data('hash'),
                 revision = $img.data('revision'),
                 alias = $img.data('alias'),
                 url = $img.data('get-thumb-url'),
@@ -34,10 +35,10 @@ $(document).ready(function() {
                         timeout: 0,
                         cache: true,
                         url: url,
-                        success: function(data, status, request) {
+                        success: function (data, status, request) {
                             tries[key] += 1;
-                            if (data.url === undefined || data.url === null || data.url.indexOf("placeholder") > -1) {
-                                setTimeout(function() {
+                            if (data.url === undefined || data.url === null || data.url.indexOf("placeholder") > -1) {
+                                setTimeout(function () {
                                     load();
                                 }, random_timeout * Math.pow(2, tries[key]));
                                 return;
@@ -45,9 +46,10 @@ $(document).ready(function() {
 
                             var $img =
                                 $('img.astrobin-image[data-id=' + data.id +
-                                '][data-alias=' + data.alias +
-                                '][data-revision=' + data.revision +
-                                ']');
+                                    (data.hash ? '][data-hash=' + data.hash : "") +
+                                    '][data-alias=' + data.alias +
+                                    '][data-revision=' + data.revision +
+                                    ']');
 
                             $img
                                 .attr('src', data.url)
@@ -59,7 +61,7 @@ $(document).ready(function() {
                 }
             }
 
-            setTimeout(function() {
+            setTimeout(function () {
                 load();
             }, random_timeout);
         });

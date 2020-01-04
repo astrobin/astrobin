@@ -83,7 +83,7 @@ class GroupsTest(TestCase):
         self.assertContains(response, '<td class="group-images hidden-phone">1</td>', html = True)
 
         # Test that WIP images don't work
-        image.is_wip = True; image.save()
+        image.is_wip = True; image.save(keep_deleted=True)
         response = self.client.get(reverse('group_list'))
         self.assertContains(response, '<td class="group-images hidden-phone">0</td>', html = True)
 
@@ -121,7 +121,7 @@ class GroupsTest(TestCase):
 
 
         # Test that WIP images are not rendered here
-        image.is_wip = True; image.save()
+        image.is_wip = True; image.save(keep_deleted=True)
         response = self.client.get(reverse('group_detail', kwargs = {'pk': self.group.pk}))
         self.assertEqual(response.status_code, 200)
         self.assertContains(response, '<li>No images.</li>', html = True)
@@ -693,7 +693,7 @@ class GroupsTest(TestCase):
         self.assertEqual(self.group.images.count(), 1)
         self.group.members.remove(self.user2)
 
-        response = self.client.get(reverse('image_detail', args = (image.pk,)))
+        response = self.client.get(reverse('image_detail', args = (image.get_id(),)))
         self.assertContains(
             response,
             '<tr><td><a href="%s">%s</a></td></tr>' % (
@@ -1075,11 +1075,11 @@ class GroupsTest(TestCase):
         # WIP images are NOT added
         image = _upload()
         self.assertTrue(image in group.images.all())
-        image.is_wip = True; image.save()
+        image.is_wip = True; image.save(keep_deleted=True)
         self.assertFalse(image in group.images.all())
 
         # When a member leaves a group, their images are gone
-        image.is_wip = False; image.save()
+        image.is_wip = False; image.save(keep_deleted=True)
         self.assertTrue(image in group.images.all())
         group.members.remove(self.user2)
         self.assertFalse(image in group.images.all())

@@ -19,7 +19,7 @@
             </div>
 
             {{ upload_revision_form|as_bootstrap }}
-            <input type="hidden" name="image_id" value="{{ image.id }}" />
+            <input type="hidden" name="image_id" value="{{ image.get_id }}" />
         </div>
 
         <div class="modal-footer">

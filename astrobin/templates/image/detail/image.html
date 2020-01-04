@@ -1,17 +1,47 @@
 {% load astrobin_apps_images_tags %}
 {% load common_tags %}
+{% load tags %}
 
 <div class="main-image">
     <div class="main-image-inner">
         {% astrobin_image image alias revision=revision_label url_size='full' %}
 
+        {% if is_revision %}
+            {% if revision_image.mouse_hover_image == "INVERTED" %}
+                {% astrobin_image image "regular_inverted" revision=revision_image.label url_size='full' classes="hover-overlay hover-overlay-revision-inverted" %}
+            {% endif %}
+
+            {% if revision_image.mouse_hover_image|startswith:"REVISION" %}
+                {% with revision_image.mouse_hover_image|split:"__" as revision_label_split %}
+                    {% astrobin_image image "regular" revision=revision_label_split.1 url_size='full' url_revision=revision_image.label classes="hover-overlay hover-overlay-revision-revision" %}
+                {% endwith %}
+            {% endif %}
+
+            {% if revision_image.mouse_hover_image == "ORIGINAL" %}
+                {% astrobin_image image "regular" revision='0' url_size='full' url_revision=revision_image.label classes="hover-overlay hover-overlay-revision-original" %}
+            {% endif %}
+        {% else %}
+            {% if image.mouse_hover_image %}
+                {% if image.mouse_hover_image == "INVERTED" %}
+                    {% astrobin_image image "regular_inverted" revision=revision_label url_size='full' classes="hover-overlay hover-overlay-original-inverted" %}
+                {% endif %}
+
+                {% if image.mouse_hover_image|startswith:"REVISION" %}
+                    {% with image.mouse_hover_image|split:"__" as revision_label_split %}
+                        {% astrobin_image image "regular" revision=revision_label_split.1 url_size='full' url_revision=revision_label classes="hover-overlay hover-overlay-original-revision" %}
+                    {% endwith %}
+                {% endif %}
+            {% endif %}
+        {% endif %}
+
         {% if show_solution %}
-            <div class="astrobin-image-container plot-overlay {% if mod == 'solved' %} plot-overlay-fixed{% endif %}">
-                <a href="{% get_image_url image revision_label 'full' %}{% if mod %}{% query_string "mod=mod" "" %}{% endif %}">
+            <div class="astrobin-image-container hover-overlay {% if mod == 'solved' %} hover-overlay-fixed{% endif %} hover-overlay-solution">
+                <a href="
+                        {% get_image_url image revision_label 'full' %}{% if mod %}{% query_string "mod=mod" "" %}{% endif %}">
                     <img
-                        onerror="solution_image_error(this)"
-                        src="{{IMAGES_URL}}{{instance_to_platesolve.solution.image_file}}"
-                        alt="{{image.title|escape}}" />
+                            onerror="solution_image_error(this)"
+                            src="{{ IMAGES_URL }}{{ instance_to_platesolve.solution.image_file }}"
+                            alt="{{ image.title|escape }}" />
                 </a>
             </div>
         {% endif %}

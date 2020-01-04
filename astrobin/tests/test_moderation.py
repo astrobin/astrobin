@@ -70,7 +70,7 @@ class ModerationTest(TestCase):
         self._do_upload('astrobin/fixtures/test.jpg')
         image = self._get_last_image()
         image.title = "Moderation test"
-        image.save()
+        image.save(keep_deleted=True)
 
         # Moderator can see the image in the queue
         self.client.login(username = 'moderator', password = 'password')
@@ -85,7 +85,7 @@ class ModerationTest(TestCase):
 
         # Moderator can mark it as spam
         image.moderator_decision = 0
-        image.save()
+        image.save(keep_deleted=True)
         response = self.client.post(reverse('image_moderation_mark_as_spam'), {'ids[]': [image.pk]})
         self.assertEqual(response.status_code, 200)
         image = Image.objects_including_wip.get(pk = image.pk)
@@ -102,7 +102,7 @@ class ModerationTest(TestCase):
         self._do_upload('astrobin/fixtures/test.jpg')
         image = self._get_last_image()
         image.moderator_decision = 2
-        image.save()
+        image.save(keep_deleted=True)
 
         # Same user gets 404
         response = self.client.get(reverse('user_page', args= ('user',)))

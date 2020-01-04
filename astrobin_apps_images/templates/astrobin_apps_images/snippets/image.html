@@ -6,7 +6,7 @@
 {% load staticfiles %}
 
 {% if status != 'error' %}
-    <div class="astrobin-image-container">
+    <div class="astrobin-image-container{% if classes %} {{classes}}{% endif %}">
         {% if error_message %}
             <div class="alert alert-error">
                 <h4 class="alert-heading">
@@ -88,7 +88,7 @@
                      data-get-thumb-url="{{get_thumb_url}}"
                      alt="{{image.title|escape}}, {% astrobin_username image.user link=False %}" />
 
-                {% if show_tooltip and alias == 'thumb' or alias == 'gallery' %}
+                {% if show_tooltip %}
                     <figcaption>
                         <h3>{{ image.title | escape | default:_("(no title)") }}</h3>
                         <h4>{% astrobin_username image.user link=False %}</h4>

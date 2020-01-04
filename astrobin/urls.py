@@ -1,12 +1,13 @@
-# Django
+import django
 from django.conf import settings
-from django.conf.urls import url, include, patterns
+from django.conf.urls import url, include
 from django.conf.urls.static import static
 from django.contrib import admin
 from django.contrib.auth import views as auth_views
 from django.views.decorators.cache import cache_page
-# Third party
 from django.views.i18n import json_catalog
+from django.views.static import serve
+from rest_framework.authtoken.views import obtain_auth_token
 from tastypie.api import Api
 from threaded_messages.views import batch_update as messages_batch_update
 from threaded_messages.views import compose as messages_compose
@@ -16,7 +17,6 @@ from threaded_messages.views import message_ajax_reply as messages_message_ajax_
 from threaded_messages.views import recipient_search as messages_recipient_search
 from threaded_messages.views import view as messages_view
 
-# AstroBin
 from astrobin import lookups
 from astrobin.api import (
     TopPickResource,
@@ -24,7 +24,8 @@ from astrobin.api import (
     ImageResource,
     ImageRevisionResource,
     LocationResource,
-    CollectionResource)
+    CollectionResource,
+    UserProfileResource)
 from astrobin.search import AstroBinSearchView
 from astrobin.views import (
     api as api_views,
@@ -36,7 +37,6 @@ from astrobin.views import (
     special as special_views,
 
     index,
-    app,
 
     image_edit_acquisition,
     image_edit_acquisition_reset,
@@ -152,14 +152,9 @@ v1_api.register(ImageRevisionResource())
 v1_api.register(TopPickResource())
 v1_api.register(ImageOfTheDayResource())
 v1_api.register(CollectionResource())
+v1_api.register(UserProfileResource())
 
 urlpatterns = [
-    ###########################################################################
-    ### FRONTEND APP                                                        ###
-    ###########################################################################
-
-    url(r'^app/$', app, name='app'),
-
     ###########################################################################
     ### DJANGO VIEWS                                                        ###
     ###########################################################################
@@ -220,7 +215,7 @@ urlpatterns = [
     url(r'^api/request-key/$', api_views.AppApiKeyRequestView.as_view(), name='app_api_key_request'),
     url(r'^api/request-key/complete/$', api_views.AppApiKeyRequestCompleteView.as_view(),
         name='app_api_key_request_complete'),
-    url(r'^api/v2/api-auth-token/', 'rest_framework.authtoken.views.obtain_auth_token'),
+    url(r'^api/v2/api-auth-token/', obtain_auth_token),
     url(r'^api/v2/api-auth/', include('rest_framework.urls', namespace='rest_framework')),
     url(r'^api/v2/common/', include('common.api_urls')),
     url(r'^api/v2/nestedcomments/', include('nested_comments.api_urls')),
@@ -254,46 +249,6 @@ urlpatterns = [
     url(r'^ads.txt$', special_views.AdsTxtView.as_view(), name='ads_txt'),
 
     ###########################################################################
-    ### IMAGE VIEWS                                                         ###
-    ###########################################################################
-
-    url(r'^(?P<id>\d+)/flagthumbs/$', image_views.ImageFlagThumbsView.as_view(), name='image_flag_thumbs'),
-    url(r'^(?P<id>\d+)/(?:(?P<r>\w+)/)?$', image_views.ImageDetailView.as_view(), name='image_detail'),
-    url(r'^(?P<id>\d+)/(?:(?P<r>\w+)/)?rawthumb/(?P<alias>\w+)/(?:get.jpg)?$', image_views.ImageRawThumbView.as_view(),
-        name='image_rawthumb'),
-    url(r'^(?P<id>\d+)/(?:(?P<r>\w+)/)?thumb/(?P<alias>\w+)/$', image_views.ImageThumbView.as_view(),
-        name='image_thumb'),
-    url(r'^full/(?P<id>\d+)/(?:(?P<r>\w+)/)?$', image_views.ImageFullView.as_view(), name='image_full'),
-
-    ###########################################################################
-    ### IMAGE EDIT VIEWS                                                    ###
-    ###########################################################################
-
-    url(r'^delete/(?P<id>\d+)/$', image_views.ImageDeleteView.as_view(), name='image_delete'),
-    url(r'^delete/original/(?P<id>\d+)/$', image_views.ImageDeleteOriginalView.as_view(), name='image_delete_original'),
-    url(r'^delete/revision/(?P<id>\d+)/$', image_views.ImageRevisionDeleteView.as_view(), name='image_delete_revision'),
-    url(r'^demote/(?P<id>\d+)/$', image_views.ImageDemoteView.as_view(), name='image_demote'),
-    url(r'^edit/acquisition/(?P<id>\d+)/$', image_edit_acquisition, name='image_edit_acquisition'),
-    url(r'^edit/acquisition/reset/(?P<id>\d+)/$', image_edit_acquisition_reset, name='image_edit_acquisition_reset'),
-    url(r'^edit/basic/(?P<id>\d+)/$', image_views.ImageEditBasicView.as_view(), name='image_edit_basic'),
-    url(r'^edit/gear/(?P<id>\d+)/$', image_views.ImageEditGearView.as_view(), name='image_edit_gear'),
-    url(r'^edit/license/(?P<id>\d+)/$', image_edit_license, name='image_edit_license'),
-    url(r'^edit/platesolving/(?P<pk>\d+)/(?:(?P<revision_label>\w+)/)?$', image_edit_platesolving_settings,
-        name='image_edit_platesolving_settings'),
-    url(r'^edit/makefinal/(?P<id>\d+)/$', image_edit_make_final, name='image_edit_make_final'),
-    url(r'^edit/revision/makefinal/(?P<id>\d+)/$', image_edit_revision_make_final,
-        name='image_edit_revision_make_final'),
-    url(r'^edit/save/acquisition/$', image_edit_save_acquisition, name='image_edit_save_acquisition'),
-    url(r'^edit/save/license/$', image_edit_save_license, name='image_edit_save_license'),
-    url(r'^edit/save/watermark/$', image_edit_save_watermark, name='image_edit_save_watermark'),
-    url(r'^edit/watermark/(?P<id>\d+)/$', image_edit_watermark, name='image_edit_watermark'),
-    url(r'^edit/revision/(?P<id>\d+)/$', image_views.ImageEditRevisionView.as_view(), name='image_edit_revision'),
-    url(r'^promote/(?P<id>\d+)/$', image_views.ImagePromoteView.as_view(), name='image_promote'),
-    url(r'^upload/$', image_upload, name='image_upload'),
-    url(r'^upload/process$', image_upload_process, name='image_upload_process'),
-    url(r'^upload/revision/process/$', image_revision_upload_process, name='image_revision_upload_process'),
-
-    ###########################################################################
     ### SEARCH VIEWS                                                        ###
     ###########################################################################
 
@@ -322,6 +277,9 @@ urlpatterns = [
         collections_views.UserCollectionsUpdate.as_view(), name='user_collections_update'),
     url(r'^users/(?P<username>[\w.@+-]*)/collections/(?P<collection_pk>\d+)/add-remove-images/$',
         collections_views.UserCollectionsAddRemoveImages.as_view(), name='user_collections_add_remove_images'),
+    url(r'^users/(?P<username>[\w.@+-]*)/collections/(?P<collection_pk>\d+)/quick-edit/key-value-pairs$',
+        collections_views.UserCollectionsQuickEditKeyValueTags.as_view(),
+        name='user_collections_quick_edit_key_value_tags'),
     url(r'^users/(?P<username>[\w.@+-]*)/collections/(?P<collection_pk>\d+)/delete/$',
         collections_views.UserCollectionsDelete.as_view(), name='user_collections_delete'),
     url(r'^users/(?P<username>[\w.@+-]*)/apikeys/$', user_page_api_keys, name='user_page_api_keys'),
@@ -504,24 +462,63 @@ urlpatterns = [
     ###########################################################################
 
     url(r'^welcome/', include('astrobin_apps_landing.urls', namespace='landing')),
+
+    ###########################################################################
+    ### IMAGE EDIT VIEWS                                                    ###
+    ###########################################################################
+
+    url(r'^delete/(?P<id>\w+)/$', image_views.ImageDeleteView.as_view(), name='image_delete'),
+    url(r'^delete/original/(?P<id>\w+)/$', image_views.ImageDeleteOriginalView.as_view(), name='image_delete_original'),
+    url(r'^delete/revision/(?P<id>\w+)/$', image_views.ImageRevisionDeleteView.as_view(), name='image_delete_revision'),
+    url(r'^demote/(?P<id>\w+)/$', image_views.ImageDemoteView.as_view(), name='image_demote'),
+    url(r'^edit/acquisition/(?P<id>\w+)/$', image_edit_acquisition, name='image_edit_acquisition'),
+    url(r'^edit/acquisition/reset/(?P<id>\w+)/$', image_edit_acquisition_reset, name='image_edit_acquisition_reset'),
+    url(r'^edit/basic/(?P<id>\w+)/$', image_views.ImageEditBasicView.as_view(), name='image_edit_basic'),
+    url(r'^edit/gear/(?P<id>\w+)/$', image_views.ImageEditGearView.as_view(), name='image_edit_gear'),
+    url(r'^edit/license/(?P<id>\w+)/$', image_edit_license, name='image_edit_license'),
+    url(r'^edit/platesolving/(?P<id>\w+)/(?:(?P<revision_label>\w+)/)?$', image_edit_platesolving_settings,
+        name='image_edit_platesolving_settings'),
+    url(r'^edit/makefinal/(?P<id>\w+)/$', image_edit_make_final, name='image_edit_make_final'),
+    url(r'^edit/revision/makefinal/(?P<id>\w+)/$', image_edit_revision_make_final,
+        name='image_edit_revision_make_final'),
+    url(r'^edit/save/acquisition/$', image_edit_save_acquisition, name='image_edit_save_acquisition'),
+    url(r'^edit/save/license/$', image_edit_save_license, name='image_edit_save_license'),
+    url(r'^edit/save/watermark/$', image_edit_save_watermark, name='image_edit_save_watermark'),
+    url(r'^edit/watermark/(?P<id>\w+)/$', image_edit_watermark, name='image_edit_watermark'),
+    url(r'^edit/revision/(?P<id>\w+)/$', image_views.ImageEditRevisionView.as_view(), name='image_edit_revision'),
+    url(r'^promote/(?P<id>\w+)/$', image_views.ImagePromoteView.as_view(), name='image_promote'),
+    url(r'^upload/$', image_upload, name='image_upload'),
+    url(r'^upload/process/$', image_upload_process, name='image_upload_process'),
+    url(r'^upload/revision/process/$', image_revision_upload_process, name='image_revision_upload_process'),
+
+    ###########################################################################
+    ### IMAGE VIEWS                                                         ###
+    ###########################################################################
+
+    url(r'^full/(?P<id>\w+)/(?:(?P<r>\w+)/)?$', image_views.ImageFullView.as_view(), name='image_full'),
+    url(r'^(?P<id>\w+)/flagthumbs/$', image_views.ImageFlagThumbsView.as_view(), name='image_flag_thumbs'),
+    url(r'^(?P<id>\w+)/(?:(?P<r>\w+)/)?$', image_views.ImageDetailView.as_view(), name='image_detail'),
+    url(r'^(?P<id>\w+)/(?:(?P<r>\w+)/)?rawthumb/(?P<alias>\w+)/(?:get.jpg)?$', image_views.ImageRawThumbView.as_view(),
+        name='image_rawthumb'),
+    url(r'^(?P<id>\w+)/(?:(?P<r>\w+)/)?thumb/(?P<alias>\w+)/$', image_views.ImageThumbView.as_view(),
+        name='image_thumb'),
 ]
 
 urlpatterns += [url(r'^silk/', include('silk.urls', namespace='silk'))]
 
 if (settings.DEBUG or settings.TESTING) and not settings.AWS_S3_ENABLED:
     urlpatterns += static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
-    urlpatterns += patterns('', (r'^media/(?P<path>.*)$', 'django.views.static.serve',
-                                 {'document_root': settings.MEDIA_ROOT, 'show_indexes': True}))
+    urlpatterns += [url(r'^media/(?P<path>.*)$', serve, {
+        'document_root': settings.MEDIA_ROOT,
+        'show_indexes': True
+    })]
 
 if (settings.DEBUG or settings.TESTING) and settings.LOCAL_STATIC_STORAGE:
     urlpatterns += static(settings.STATIC_URL, document_root=settings.STATIC_ROOT)
-    urlpatterns += patterns('', (r'^static/(?P<path>.*)$', 'django.views.static.serve',
-                                 {'document_root': settings.STATIC_ROOT, 'show_indexes': True}))
-
-if settings.LOCAL_STATIC_STORAGE:
-    urlpatterns += static("^assets", document_root="frontend/src/assets")
-    urlpatterns += patterns('', (r'^assets/(?P<path>.*)$', 'django.views.static.serve',
-                                 {'document_root': "frontend/src/assets", 'show_indexes': True}))
+    urlpatterns += [url(r'^static/(?P<path>.*)$', serve, {
+        'document_root': settings.STATIC_ROOT,
+        'show_indexes': True
+    })]
 
 if settings.DEBUG or settings.TESTING:
     import debug_toolbar

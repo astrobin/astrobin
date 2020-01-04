@@ -18,12 +18,12 @@ class Command(BaseCommand):
             path = name
             try:
                 obj.size = obj.image_file.storage.size(path)
-                obj.save()
+                obj.save(keep_deleted=True)
             except AttributeError:
                 path = os.path.join('images', name)
                 try:
                     obj.size = obj.image_file.storage.size(path)
-                    obj.save()
+                    obj.save(keep_deleted=True)
                 except AttributeError as e:
                     print e
 

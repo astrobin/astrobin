@@ -6,7 +6,7 @@
 
 <div id="nested-comments-user-id" data-value="{{request.user.id}}"></div>
 <div id="nested-comments-user-name" data-value="{{request.user.username}}"></div>
-<div id="nested-comments-user-is-authenticated" data-value="{{request.user.is_authenticated}}"></div>
+<div id="nested-comments-user-is-authenticated" data-value="{{ request.user.is_authenticated.value }}"></div>
 <div id="nested-comments-user-is-superuser" data-value="{{ request.user.is_superuser }}"></div>
 <div id="nested-comments-page-url" data-value="{{request.get_full_path}}"></div>
 <div id="nested-comments-loaderGif-url" data-value="{% static 'astrobin/images/ajax-loader.gif' %}"></div>
@@ -37,7 +37,6 @@
             </a>
         {{/unless}}
     {{else}}
-
         <p>{% blocktrans %}Please <a href="/accounts/login/">login</a> or <a href="/accounts/register/">register</a> to leave a comment.</p>{% endblocktrans %}
     {{/if}}
 {% endhandlebars %}

@@ -10,4 +10,4 @@ class Command(BaseCommand):
             profile = us.user.userprofile
             print "Processing user: %s" % profile
             profile.premium_counter = 0
-            profile.save()
+            profile.save(keep_deleted=True)

@@ -1918,13 +1918,29 @@ BODY:first-of-type ul.as-list, x:-moz-any-link, x:default { /* Target FF 3.5+ */
     width: 50%;
     float: left;
 
+    &.wip-form-box form {
+      margin-bottom: 60px;
+    }
+
+    .progressbar {
+      margin-bottom: 42px;
+    }
+
     .upload-form-inner {
       padding: $spacer-medium;
       border-left: 1px solid #333;
       border-right: none;
 
+      label {
+        display: inline-block;
+      }
+
       form {
         display: none;
+
+        .row-fluid {
+          margin-bottom: 1rem;
+        }
 
         .btn-primary {
           display: inline-block;
@@ -2046,7 +2062,7 @@ BODY:first-of-type ul.as-list, x:-moz-any-link, x:default { /* Target FF 3.5+ */
     }
   }
 
-  &.plot-overlay {
+  &.hover-overlay {
     position: absolute;
     top: 0;
 
@@ -2067,7 +2083,7 @@ BODY:first-of-type ul.as-list, x:-moz-any-link, x:default { /* Target FF 3.5+ */
       }
     }
 
-    &.plot-overlay-fixed {
+    &.hover-overlay-fixed {
       img {
         @include opacity(1);
 
@@ -3969,6 +3985,10 @@ li.revisions {
 
 table.subscription-plans {
   table-layout: fixed;
+
+  th, td {
+    vertical-align: middle;
+  }
 }
 
 .subscription-plans-description-list {
@@ -3977,6 +3997,25 @@ table.subscription-plans {
   li {
     padding: 8px 0;
     list-style: circle;
+  }
+}
+
+.premium-offer.well {
+  $green: #277344;
+
+  position: relative;
+  border-left: 1rem solid $green;
+
+  &::before {
+    background-image: url("../images/discount.png");
+    background-size: 80px;
+    background-repeat: no-repeat;
+    content: " ";
+    position: absolute;
+    top: 45px;
+    left: -90px;
+    height: 80px;
+    width: 80px;
   }
 }
 
@@ -5052,6 +5091,41 @@ pre {
   }
 }
 
+.collection-quick-edit {
+  td {
+    vertical-align: middle;
+  }
+
+  .error, .error-msg {
+    color: red;
+  }
+
+  .error-msg {
+    margin-top: .5rem;
+  }
+
+  .collection-quick-edit-key-value-tags {
+    .image {
+      width: 130px;
+    }
+
+    .title {
+      width: 30%;
+      padding: 0 2rem;
+    }
+
+    .input {
+      text-align: left;
+
+      textarea {
+        width: calc(100% - 20px);
+        height: 120px;
+        margin-bottom: 0;
+      }
+    }
+  }
+}
+
 .subnav {
   .group-info {
     margin: 0;
@@ -5447,6 +5521,28 @@ table.image-list {
 
 table.api-keys {
   table-layout: auto;
+}
+
+table.api-examples {
+  table-layout: auto;
+  margin-top: 2rem;
+
+  td:first-child {
+    font-weight: bold;
+    padding-top: 1rem;
+  }
+
+  code {
+    background: #222;
+    color: white;
+    border-color: #555;
+    padding: .5rem 1rem;
+    text-align: left;
+
+    &:not(:last-child) {
+      margin-bottom: .5rem;
+    }
+  }
 }
 
 .astrobin-username {

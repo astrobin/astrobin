@@ -13,7 +13,7 @@ services:
     build:
       context: ../
       dockerfile: docker/astrobin.dockerfile
-    command: bash -c "./manage.py migrate --noinput && ./manage.py collectstatic --noinput -i frontend && gunicorn wsgi:application -w 4 -b :8083"
+    command: bash -c "./manage.py migrate --noinput && ./manage.py collectstatic --noinput && gunicorn wsgi:application -w 4 -b :8083 --max-requests 1000 --max-requests-jitter 50 --timeout 300 --graceful-timeout 300 -k gevent"
     ports:
       - "8083:8083"
       - "8084:8084"

@@ -16,6 +16,7 @@ CELERY_ACCEPT_CONTENT = ['pickle', 'json']
 CELERY_TASK_SERIALIZER = 'pickle'
 CELERY_ENABLE_UTC = True
 CELERY_TIMEZONE = TIME_ZONE
+CELERY_WORKER_MAX_TASKS_PER_CHILD = 100
 
 CELERY_QUEUES = (
     Queue('default', Exchange('default'), routing_key='default'),

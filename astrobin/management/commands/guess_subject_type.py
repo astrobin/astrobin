@@ -15,7 +15,7 @@ class Command(BaseCommand):
             else:
                 i.subject_type = 600
 
-            i.save()
+            i.save(keep_deleted=True)
 
             print "Image %d: type %d." % (i.pk, i.subject_type)
 

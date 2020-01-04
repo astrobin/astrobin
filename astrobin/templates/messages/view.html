@@ -45,7 +45,7 @@
     <div class="message-list">
         {% for message_tuple in message_list %}
             {% with message_tuple.0 as message %}
-                <div class="message-container {% if message.sender = request.user %}own{% else %}other{% endif %}">
+                <div class="message-container {% if message.sender == request.user %}own{% else %}other{% endif %}">
                     {% include "messages/message_list_view.html" %}
                 </div>
             {% endwith %}
@@ -56,7 +56,7 @@
         {% if READONLY_MODE %}
             {% include 'readonly_mode.html' %}
         {% else %}
-            <form class="reply-form form-vertical" method="POST" action="{% url 'message_reply' thread.pk %}">{% csrf_token %}
+            <form class="reply-form form-vertical" method="POST" action="{% url 'message_reply' thread.pk %}" novalidate>{% csrf_token %}
                 <a class="anchor" name="reply"></a>
                 {{ form|as_bootstrap }}
                 <div class="form-actions">

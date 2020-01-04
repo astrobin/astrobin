@@ -48,12 +48,8 @@ cd ../..
 
 pip install --user --no-deps -r requirements.txt --src src
 
-sudo yarn global add yuglify @angular/cli
+sudo yarn global add yuglify
 
 sudo gem install compass
-
-cd frontend
-npm install && ng build --aot && rm -rf node_modules
-cd ..
 
 ./scripts/compilemessages.sh

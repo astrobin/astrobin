@@ -33,7 +33,7 @@ def test_utils_upload_image(test, filename = 'astrobin/fixtures/test.jpg', wip =
 def test_utils_upload_revision(test, image, filename = 'astrobin/fixtures/test.jpg'):
     response = test.client.post(
         reverse('image_revision_upload_process'),
-        {'image_id': image.id, 'image_file': open(filename, 'rb')},
+        {'image_id': image.get_id(), 'image_file': open(filename, 'rb')},
         follow = True)
     revision = test_utils_get_last_image_revision()
 
@@ -43,4 +43,4 @@ def test_utils_upload_revision(test, image, filename = 'astrobin/fixtures/test.j
 def test_utils_approve_image(image):
     image.moderator_decision = 1
     image.moderated_when = datetime.date.today()
-    image.save()
+    image.save(keep_deleted=True)

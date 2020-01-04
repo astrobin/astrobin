@@ -240,9 +240,9 @@ For convenience, you can save time by simply generating and copying the
 modified style file, e.g.:
 
 ```
-docker cp astrobin/static/astrobin/scss/astrobin.scss astrobin:/media/static/astrobin/scss/
-docker exec -it astrobin \
-    sass /media/static/astrobin/scss/astrobin.scss /media/static/astrobin/css/astrobin.css
+docker cp astrobin/static/astrobin/scss/astrobin.scss docker_astrobin_1:/media/static/astrobin/scss/
+docker exec -it docker_astrobin_1 \
+    sass /media/static/astrobin/scss/astrobin.scss /media/static/astrobin/scss/astrobin.css
 ```
 
 When collecting static files on AWS S3, a hash of their contents will be

@@ -1,14 +1,16 @@
 from __future__ import absolute_import
 
-# Python
-from datetime import date
-from datetime import datetime
 import hmac
 import logging
 import operator
 import os
+# Python
+import random
+import string
 import unicodedata
 import uuid
+from datetime import date
+from datetime import datetime
 
 try:
     from hashlib import sha1
@@ -18,7 +20,6 @@ except ImportError:
     sha1 = sha.sha
 
 # Django
-from django import forms
 from django.conf import settings
 from django.contrib.auth.models import User
 from django.contrib.contenttypes.models import ContentType
@@ -26,12 +27,11 @@ from django.contrib.staticfiles.templatetags.staticfiles import static
 from django.core.cache import cache
 from django.core.exceptions import ValidationError
 from django.core.validators import MaxLengthValidator
-from django.db import models, IntegrityError
+from django.db import IntegrityError
 from django.db.models import Q
 from django.db.models.signals import post_save
 from django.template.defaultfilters import slugify
 from django.utils import timezone
-from django.utils import translation
 from django.utils.translation import ugettext_lazy as _
 
 try:
@@ -45,10 +45,8 @@ except ImportError:
 
 from celery.result import AsyncResult
 from model_utils.managers import InheritanceManager
-from mptt.models import MPTTModel, TreeForeignKey
 from reviews.models import Review
 from safedelete.models import SafeDeleteModel
-from tinymce import models as tinymce_models
 from toggleproperties.models import ToggleProperty
 
 try:
@@ -87,6 +85,17 @@ class HasSolutionMixin(object):
 def image_upload_path(instance, filename):
     ext = filename.split('.')[-1]
     return "images/%d/%d/%s.%s" % (instance.user.id, date.today().year, uuid.uuid4(), ext)
+
+
+def image_hash():
+    def generate_hash():
+        return "".join(random.choice(string.ascii_lowercase + string.digits) for _ in range(6))
+
+    hash = generate_hash()
+    while hash.isdigit() or Image.all_objects.filter(hash=hash).exists():
+        hash = generate_hash()
+
+    return hash
 
 
 LICENSE_CHOICES = (
@@ -764,6 +773,12 @@ class Image(HasSolutionMixin, SafeDeleteModel):
         ("OTHER", _("None of the above"))
     )
 
+    MOUSE_HOVER_CHOICES = [
+        (None, _("Nothing")),
+        ("SOLUTION", _("Plate-solution annotations (if available)")),
+        ("INVERTED", _("Inverted monochrome")),
+    ]
+
     GEAR_CLASS_LOOKUP = {
         'imaging_telescopes': Telescope,
         'guiding_telescopes': Telescope,
@@ -775,6 +790,14 @@ class Image(HasSolutionMixin, SafeDeleteModel):
         'filters': Filter,
         'accessories': Accessory,
     }
+
+
+    hash = models.CharField(
+        max_length=6,
+        default=image_hash,
+        null=True,
+        unique=True
+    )
 
     title = models.CharField(
         max_length=128,
@@ -936,6 +959,13 @@ class Image(HasSolutionMixin, SafeDeleteModel):
         default=True,
     )
 
+    mouse_hover_image = models.CharField(
+        null=True,
+        blank=True,
+        default="SOLUTION",
+        max_length=16,
+    )
+
     # 0 = undecided
     # 1 = approved
     # 2 = rejected
@@ -959,6 +989,12 @@ class Image(HasSolutionMixin, SafeDeleteModel):
         on_delete=models.SET_NULL,
     )
 
+    skip_notifications = models.BooleanField(
+        default=False,
+        verbose_name=_("Skip notifications"),
+        help_text=_("Do not notify your followers about this image upload.")
+    )
+
     class Meta:
         app_label = 'astrobin'
         ordering = ('-uploaded', '-id')
@@ -969,6 +1005,9 @@ class Image(HasSolutionMixin, SafeDeleteModel):
 
     def __unicode__(self):
         return self.title if self.title is not None else _("(no title)")
+
+    def get_id(self):
+        return self.hash if self.hash else self.pk
 
     def get_absolute_url(self, revision='final', size='regular'):
         if revision == 'final':
@@ -981,7 +1020,7 @@ class Image(HasSolutionMixin, SafeDeleteModel):
         if size == 'full':
             url += 'full/'
 
-        url += '%i/' % self.id
+        url += '%s/' % (self.hash if self.hash else self.pk)
 
         if revision != 'final':
             url += '%s/' % revision
@@ -1107,7 +1146,7 @@ class Image(HasSolutionMixin, SafeDeleteModel):
 
     def thumbnail_raw(self, alias, thumbnail_settings={}):
         import urllib2
-        from django.core.files.base import File, ContentFile
+        from django.core.files.base import ContentFile
         from easy_thumbnails.files import get_thumbnailer
         from astrobin.s3utils import OverwritingFileSystemStorage
 
@@ -1394,6 +1433,14 @@ class Image(HasSolutionMixin, SafeDeleteModel):
             if self.remote_source == source[0]:
                 return source[1]
 
+    def get_keyvaluetags(self):
+        tags = self.keyvaluetags.all()
+
+        if tags.count() == 0:
+            return ""
+
+        return '\r\n'.join([str(x) for x in self.keyvaluetags.all()])
+
     def is_platesolvable(self):
         return self.subject_type in (100, 300)
 
@@ -1453,6 +1500,13 @@ class ImageRevision(HasSolutionMixin, SafeDeleteModel):
         help_text=_("HTML tags are allowed."),
     )
 
+    mouse_hover_image = models.CharField(
+        null=True,
+        blank=True,
+        default="SOLUTION",
+        max_length=16,
+    )
+
     skip_notifications = models.NullBooleanField(
         null=True,
         blank=True,
@@ -1489,9 +1543,9 @@ class ImageRevision(HasSolutionMixin, SafeDeleteModel):
     def get_absolute_url(self, revision='nd', size='regular'):
         # We can ignore the revision argument of course
         if size == 'full':
-            return '/%i/%s/full/' % (self.image.id, self.label)
+            return '/%s/%s/full/' % (self.image.get_id(), self.label)
 
-        return '/%i/%s/' % (self.image.id, self.label)
+        return '/%s/%s/' % (self.image.get_id(), self.label)
 
     def thumbnail_raw(self, alias, thumbnail_settings={}):
         return self.image.thumbnail_raw(alias,
@@ -1549,13 +1603,20 @@ class Collection(models.Model):
         on_delete=models.SET_NULL,
     )
 
+    order_by_tag = models.CharField(
+        null=True,
+        blank=True,
+        max_length=255,
+        verbose_name=_("Order by image tag")
+    )
+
     class Meta:
         app_label = 'astrobin'
         unique_together = ('user', 'name')
         ordering = ['name']
 
     def __unincode__(self):
-        return "%s, a collectio by %s" % (self.name, self.user.username)
+        return "%s, a collection by %s" % (self.name, self.user.username)
 
 
 class Acquisition(models.Model):
@@ -1579,7 +1640,7 @@ class Acquisition(models.Model):
 
     def save(self, *args, **kwargs):
         super(Acquisition, self).save(*args, **kwargs)
-        self.image.save()
+        self.image.save(keep_deleted=True)
 
 
 class DeepSky_Acquisition(Acquisition):
@@ -1635,7 +1696,7 @@ class DeepSky_Acquisition(Acquisition):
     gain = models.DecimalField(
         _("Gain"),
         null=True, blank=True,
-        max_digits=5, decimal_places=2)
+        max_digits=7, decimal_places=2)
 
     sensor_cooling = models.IntegerField(
         _("Sensor cooling"),
@@ -1891,6 +1952,24 @@ class UserProfile(SafeDeleteModel):
         editable=False
     )
 
+    premium_offer = models.CharField(
+        max_length=32,
+        default=None,
+        null=True,
+        blank=True,
+        editable=False,
+    )
+
+    premium_offer_expiration = models.DateTimeField(
+        editable=False,
+        null=True
+    )
+
+    premium_offer_sent = models.DateTimeField(
+        editable=False,
+        null=True
+    )
+
     # Commercial information
     company_name = models.CharField(
         max_length=128,
@@ -2036,6 +2115,10 @@ class UserProfile(SafeDeleteModel):
         default=False,
         verbose_name=_(u'I accept to receive occasional marketing and commercial material via email'),
         help_text=_(u'These emails may contain offers, commercial news, and promotions from AstroBin or its partners.')
+    )
+
+    inactive_account_reminder_sent = models.DateTimeField(
+        null=True
     )
 
     # Preferences (notification preferences are stored in the django
@@ -2622,7 +2705,8 @@ class CommercialGear(models.Model):
 class BroadcastEmail(models.Model):
     subject = models.CharField(max_length=200)
     created = models.DateTimeField(default=timezone.now)
-    message = tinymce_models.HTMLField()
+    message = models.TextField()
+    message_html = models.TextField(null=True)
 
     def __unicode__(self):
         return self.subject

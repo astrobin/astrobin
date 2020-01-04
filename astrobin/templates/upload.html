@@ -91,8 +91,21 @@
                             <h3>{% trans "Upload as a finished image" %}</h3>
                             <div class="loading"><img src="{% static 'astrobin/images/ajax-loader.gif' %}" alt=""/></div>
                             <form action="{% url 'image_upload_process' %}" method="post" enctype="multipart/form-data"> {% csrf_token %}
-                                <input type="file" name="image_file" class="file" id="id_file" />
-                                <input class="btn btn-primary" type="submit" value="{% trans "Upload" %}" />
+                                <div class="row-fluid">
+                                    <div class="span12">
+                                        <input type="file" name="image_file" class="file" id="id_file" />
+                                        <input class="btn btn-primary" type="submit" value="{% trans "Upload" %}" />
+                                    </div>
+                                </div>
+                                <div class="row-fluid">
+                                    <div class="span12">
+                                        <label for="id_skip_notifications">
+                                            <input type="checkbox" name="skip_notifications"
+                                                   id="id_skip_notifications" />
+                                            {% trans "Do not notify followers" %}
+                                        </label>
+                                    </div>
+                                </div>
                             </form>
                             <div class="progressbar"><img src="{% static 'astrobin/images/loading-bar.gif' %}" alt="{% trans "Uploading..." %}"/></div>
                             <p>

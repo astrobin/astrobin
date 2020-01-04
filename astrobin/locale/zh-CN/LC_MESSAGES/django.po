@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: AstroBin 1.9\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2019-03-05 21:44+0000\n"
+"POT-Creation-Date: 2019-10-15 11:53+0000\n"
 "PO-Revision-Date: 2014-04-28 13:58+0000\n"
 "Last-Translator: ecloud <yecloud@me.com>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -781,6 +781,19 @@ msgstr ""
 msgid "Submit this image to the selected groups."
 msgstr ""
 
+msgid "Mouse hover image"
+msgstr ""
+
+msgid ""
+"Choose what will be displayed when somebody hovers the mouse over this "
+"image. Please note: only revisions with the same width and height of your "
+"original image can be considered."
+msgstr ""
+
+#, fuzzy
+msgid "Revision"
+msgstr "编辑你的所在地"
+
 msgid "This field is required."
 msgstr "此字段是必需的。"
 
@@ -827,6 +840,15 @@ msgstr "滤镜"
 
 msgid "Accessories"
 msgstr "附件"
+
+msgid ""
+"Choose what will be displayed when somebody hovers the mouse over this image "
+"revision. Pleasenote: only revisions with the same width and height as this "
+"one can be considered."
+msgstr ""
+
+msgid "Original image"
+msgstr ""
 
 msgid "If you have a personal website, put the address here."
 msgstr "如果您有个人网站，请输入网址"
@@ -1359,6 +1381,23 @@ msgstr "（单位nm)"
 msgid "nm"
 msgstr "纳米"
 
+#, fuzzy
+#| msgid "Duration"
+msgid "Traditional"
+msgstr "时间长短"
+
+msgid "Electronically-Assisted Astronomy (EAA)"
+msgstr ""
+
+msgid "Lucky imaging"
+msgstr ""
+
+msgid "Drawing/Sketch"
+msgstr ""
+
+msgid "Other/Unknown"
+msgstr ""
+
 msgid "Deep sky object"
 msgstr "深空天体"
 
@@ -1413,8 +1452,20 @@ msgstr ""
 msgid "Non-commercial independent facility"
 msgstr ""
 
+msgid "Nothing"
+msgstr ""
+
+msgid "Plate-solution annotations (if available)"
+msgstr ""
+
+msgid "Inverted monochrome"
+msgstr ""
+
 msgid "Title"
 msgstr "标题"
+
+msgid "Acquisition type"
+msgstr ""
 
 msgid "Subject type"
 msgstr "主题类型"
@@ -1475,6 +1526,14 @@ msgid "(no title)"
 msgstr "（没有标题）"
 
 msgid "Mix of multiple source"
+msgstr ""
+
+#, fuzzy
+#| msgid "Edit your locations"
+msgid "Skip notifications"
+msgstr "编辑你的所在地"
+
+msgid "Do not notify your followers about this revision."
 msgstr ""
 
 msgid "Images"
@@ -2297,6 +2356,14 @@ msgid ""
 msgstr ""
 
 msgid "Change your e-mail"
+msgstr ""
+
+msgid ""
+"AstroBin is not delivering you emails because you have marked some of them "
+"as spam."
+msgstr ""
+
+msgid "Contact us to resolve the issue"
 msgstr ""
 
 msgid "Cancel"
@@ -3338,9 +3405,6 @@ msgstr ""
 msgid "View"
 msgstr ""
 
-msgid "Inverted monochrome"
-msgstr ""
-
 msgid "Annotated (original version)"
 msgstr ""
 
@@ -3496,7 +3560,8 @@ msgid "Image mode"
 msgstr ""
 
 msgid ""
-"Did you improve the post-processing of your image? Upload the new revision!"
+"Did you improve the post-processing of your image? Upload the new\n"
+"                    revision!"
 msgstr ""
 
 msgid ""
@@ -3587,14 +3652,19 @@ msgstr ""
 
 #, python-format
 msgid ""
-"Can't see anything here? Perhaps you should first add some gear in your <a "
-"href=\"%(the_url)s\">profile</a>!"
+"Can't see anything here? Perhaps you should first add some gear in your\n"
+"                <a href=\"%(the_url)s\">profile</a>!"
 msgstr ""
 
+#, fuzzy
+#| msgid ""
+#| "Drag items from the right side to the left side, or click on the plus "
+#| "sign."
 msgid ""
 "To choose the gear used for this image, drag items from the right side to "
-"left side, or click the plus sign."
-msgstr ""
+"left side, or\n"
+"                click the plus sign."
+msgstr "将这个项目从右边拖到左边，或者点击“+”号"
 
 msgid ""
 "Use this button to import the gear settings from another image of yours."
@@ -3611,7 +3681,8 @@ msgstr ""
 
 msgid ""
 "Copying the gear from another image will populate the gear selection form "
-"for you, but you will still need to save it in the end."
+"for you, but\n"
+"                    you will still need to save it in the end."
 msgstr ""
 
 msgid "Copy"
@@ -4713,6 +4784,10 @@ msgstr "东或西"
 msgid "This forum does not have any topics."
 msgstr ""
 
+#, fuzzy
+msgid "Mark as spam"
+msgstr "马绍尔群岛"
+
 msgid ""
 "This page or operation is not available at the moment, because AstroBin is "
 "in READ ONLY mode."
@@ -4901,6 +4976,9 @@ msgstr ""
 msgctxt "Subscription plan name"
 msgid "Plan"
 msgstr "行星"
+
+msgid "Offer valid until"
+msgstr ""
 
 msgid "Validity"
 msgstr ""
@@ -5138,7 +5216,74 @@ msgstr ""
 msgid "Your inactive subscription plans"
 msgstr "描述"
 
+msgid "Limited offer for you!"
+msgstr ""
+
+msgid ""
+"For a limited time, you are personally offered AstroBin Premium for one "
+"year, at\n"
+"                            a sizeable discount. Don't miss this opportunity!"
+msgstr ""
+
 msgid "AstroBin Premium subscription plans"
+msgstr ""
+
+#, python-format
+msgid ""
+"\n"
+"                    You can use AstroBin for free up to %(max_allowed)s "
+"images. After\n"
+"                    that you can upgrade to <strong>Lite</strong> if you "
+"have a limited\n"
+"                    yearly output, or <strong>Premium</strong> for a "
+"limitless\n"
+"                    experience.  Paying members will not see ads, and "
+"everybody,\n"
+"                    including non-paying members, have access to all social "
+"features of\n"
+"                    AstroBin.\n"
+"                    "
+msgstr ""
+
+#, python-format
+msgid ""
+"\n"
+"                    As a user of <strong>AstroBin Free</strong>, you may "
+"have up to\n"
+"                    %(max_allowed)s images at the same time. You can delete "
+"some images\n"
+"                    to make room for new ones, if you want. For instance you "
+"can\n"
+"                    maintain a window of your latest %(max_allowed)s images, "
+"or your\n"
+"                    best ones.\n"
+"                    "
+msgstr ""
+
+#, python-format
+msgid ""
+"\n"
+"                    As a user of <strong>AstroBin Lite</strong>, instead, "
+"you may have\n"
+"                    up to %(max_allowed)s images at the same time, per each "
+"year of\n"
+"                    your membership. You may replace images uploaded within "
+"the current\n"
+"                    subsciption period while images uploaded prior to that "
+"can only be\n"
+"                    deleted. Every year that you renew your membership, you "
+"get\n"
+"                    %(max_allowed)s new image credits.\n"
+"                    "
+msgstr ""
+
+msgid ""
+"\n"
+"                    As a user of <strong>AstroBin Premium</strong>, instead, "
+"there are\n"
+"                    no limitations whatsoever in the number of images you "
+"can upload.\n"
+"                    "
 msgstr ""
 
 msgid "AstroBin Raw Data subscription plans"
@@ -5768,10 +5913,10 @@ msgstr ""
 msgid "Telescope type"
 msgstr "望远镜类型"
 
-msgid "Add filter:"
+msgid "Select"
 msgstr ""
 
-msgid "Select"
+msgid "Add filter:"
 msgstr ""
 
 msgid "Image of the Day"
@@ -5952,6 +6097,11 @@ msgid ""
 msgstr ""
 
 msgid ""
+"You uploaded a pretty large file. For that reason, AstroBin could not verify "
+"that it's a valid image."
+msgstr ""
+
+msgid ""
 "There was one or more errors processing the form. You may need to scroll "
 "down to see them."
 msgstr "处理的表单中有一个或多个错误。您可能需要向下滚动才能看到它们。"
@@ -6085,6 +6235,10 @@ msgid "Image moved to the staging area."
 msgstr ""
 
 msgid "Image moved to the public area."
+msgstr ""
+
+#, python-format
+msgid "%s topics deleted"
 msgstr ""
 
 #~ msgid "Taiwan, Province of China"

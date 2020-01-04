@@ -12,7 +12,7 @@
         {{form|as_bootstrap}}
         <div class="form-actions">
             <input class="btn btn-primary btn-block-mobile" type="submit" value="{% trans "Save" %} &rarr;" />
-            <a class="btn btn-block-mobile" href="{% url 'image_detail' revision.image.id %}">{% trans "Back to image" %}</a>
+            <a class="btn btn-block-mobile" href="{% url 'image_detail' revision.image.get_id %}">{% trans "Back to image" %}</a>
         </div>
     </form>
 {% endblock %}

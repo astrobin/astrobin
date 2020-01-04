@@ -1,23 +1,21 @@
 from __future__ import absolute_import
 
-# Python
 import subprocess
 from time import sleep
 
-# Django
+from celery.utils.log import get_task_logger
 from django.conf import settings
 from django.contrib.auth.models import User
 from django.core.cache import cache
+from django.core.mail import EmailMultiAlternatives
 from django.core.management import call_command
-
-# Third party
-from celery import shared_task
-from celery.utils.log import get_task_logger
 from django_bouncy.models import Bounce
 from haystack.query import SearchQuerySet
 
-# AstroBin
+from astrobin.models import BroadcastEmail
+from astrobin.utils import inactive_accounts
 from astrobin_apps_images.models import ThumbnailGroup
+from celery import shared_task
 
 logger = get_task_logger(__name__)
 
@@ -100,8 +98,6 @@ def contain_imagecache_size():
 This task will delete all inactive accounts with bounced email
 addresses.
 """
-
-
 @shared_task()
 def delete_inactive_bounced_accounts():
     bounces = Bounce.objects.filter(
@@ -116,8 +112,6 @@ def delete_inactive_bounced_accounts():
 """
 This task gets the raw thumbnail data and sets the cache and ThumbnailGroup object.
 """
-
-
 @shared_task()
 def retrieve_thumbnail(pk, alias, options):
     from astrobin.models import Image
@@ -178,3 +172,26 @@ def send_missing_data_source_notifications():
 @shared_task()
 def send_missing_remote_source_notifications():
     call_command("send_missing_remote_source_notifications")
+
+
+@shared_task(rate_limit="1/s")
+def send_broadcast_email(broadcastEmail, recipients):
+    for recipient in list(recipients):
+        msg = EmailMultiAlternatives(
+            broadcastEmail.subject,
+            broadcastEmail.message,
+            settings.DEFAULT_FROM_EMAIL,
+            [recipient])
+        msg.attach_alternative(broadcastEmail.message_html, "text/html")
+        msg.send()
+
+
+@shared_task()
+def send_inactive_account_reminder():
+    try:
+        email = BroadcastEmail.objects.get(subject="We miss your astrophotographs!")
+        recipients = inactive_accounts()
+        send_broadcast_email.delay(email, recipients.values_list('user__email', flat=True))
+        recipients.update(inactive_account_reminder_sent=timezone.now())
+    except BroadcastEmail.DoesNotExist:
+        pass

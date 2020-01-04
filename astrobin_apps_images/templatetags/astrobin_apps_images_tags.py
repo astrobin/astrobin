@@ -1,32 +1,23 @@
-# Python
-from datetime import datetime
 import random
 import string
-from PIL import Image as PILImage
 import zlib
+from datetime import datetime
 
-# Django
+from PIL import Image as PILImage
 from django.conf import settings
 from django.core.cache import cache
 from django.core.urlresolvers import reverse
-from django.template import Library, Node
-from django.template.loader import render_to_string
+from django.template import Library
 from django.utils.translation import ugettext as _
 
-# AstroBin
-from astrobin.models import CommercialGear, Gear
 from astrobin.models import Image, ImageRevision
-
-# Third party
-from haystack.query import SearchQuerySet
-
 
 register = Library()
 
 # Returns the URL of an image, taking into account the fact that it might be
 # a commercial gear image.
 @register.simple_tag
-def get_image_url(image, revision = 'final', size = 'regular'):
+def get_image_url(image, revision='final', size='regular'):
     def commercial_gear_url(commercial_gear):
         gear = commercial_gear.base_gear.all()
         if gear:
@@ -58,14 +49,16 @@ def gallery_thumbnail_inverted(image, revision_label):
 # Renders an linked image tag with a placeholder and async loading of the
 # actual thumbnail.
 def astrobin_image(context, image, alias, **kwargs):
-    request = context['request']
+    request = kwargs.get('request', context['request'])
 
     revision = kwargs.get('revision', 'final')
     url_size = kwargs.get('url_size', 'regular')
+    url_revision = kwargs.get('url_revision', revision)
     link = kwargs.get('link', True)
     tooltip = kwargs.get('tooltip', True)
     nav_ctx = kwargs.get('nav_ctx', None)
     nav_ctx_extra = kwargs.get('nav_ctx_extra', None)
+    classes = kwargs.get('classes', '')
 
     if nav_ctx is None:
         nav_ctx = request.GET.get('nc')
@@ -119,6 +112,7 @@ def astrobin_image(context, image, alias, **kwargs):
             'caption_cache_key': 'astrobin_image_no_image',
             'nav_ctx': nav_ctx,
             'nav_ctx_extra': nav_ctx_extra,
+            'classes': classes,
         }
 
     # Old images might not have a size in the database, let's fix it.
@@ -139,7 +133,7 @@ def astrobin_image(context, image, alias, **kwargs):
             (w, h) = get_image_dimensions(image_revision.image_file.file)
             image_revision.w = w
             image_revision.h = h
-            image_revision.save()
+            image_revision.save(keep_deleted=True)
         except (IOError, ValueError):
             w = size[0]
             h = size[1] if size[1] > 0 else w
@@ -183,6 +177,7 @@ def astrobin_image(context, image, alias, **kwargs):
                 'caption_cache_key': 'astrobin_image_no_image',
                 'nav_ctx': nav_ctx,
                 'nav_ctx_extra': nav_ctx_extra,
+                'classes': classes,
             }
 
         try:
@@ -192,7 +187,7 @@ def astrobin_image(context, image, alias, **kwargs):
         else:
             animated = True
 
-    url = get_image_url(image, revision, url_size)
+    url = get_image_url(image, url_revision, url_size)
 
     show_tooltip = tooltip and (alias in (
         'gallery', 'gallery_inverted',
@@ -250,7 +245,7 @@ def astrobin_image(context, image, alias, **kwargs):
     get_thumb_url = None
     if thumb_url is None:
         get_thumb_kwargs = {
-            'id': image.id,
+            'id': image.hash if image.hash else image.id,
             'alias': alias,
         }
 
@@ -282,7 +277,8 @@ def astrobin_image(context, image, alias, **kwargs):
         'thumb_url'     : thumb_url,
         'link'          : link,
         'nav_ctx'       : nav_ctx,
-        'nav_ctx_extra': nav_ctx_extra,
+        'nav_ctx_extra' : nav_ctx_extra,
+        'classes'       : classes,
     }.items())
 register.inclusion_tag(
     'astrobin_apps_images/snippets/image.html',

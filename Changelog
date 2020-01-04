@@ -1,3 +1,165 @@
+2020-01-04 Salvatore Iovene <salvatore@iovene.com>
+ * v1.49.0
+ * (infra) Upgrade Django to 1.11.27
+
+2020-01-02 Salvatore Iovene <salvatore@iovene.com>
+ * v1.48.5
+ * (images) Fix RA hover label
+
+2020-01-02 Salvatore Iovene <salvatore@iovene.com>
+ * v1.48.4
+ * (images) Fix degree to Right Ascension conversion
+
+2020-01-01 Salvatore Iovene <salvatore@iovene.com>
+ * v1.48.3
+ * (images) Use hours/minutes/seconds and degrees/minutes/seconds for RA and dec
+
+2019-12-30 Salvatore Iovene <salvatore@iovene.com>
+ * v1.48.2
+ * (images) Fix ordered collection navigation context
+ * (collections) Handle empty queryset with no tags
+
+2019-12-28 Salvatore Iovene <salvatore@iovene.com>
+ * v1.48.1
+ * (profile) Fix missing imports
+
+2019-12-25 Salvatore Iovene <salvatore@iovene.com>
+ * v1.48.0
+ * (images) Add feature to upload public image without notifying subscribers
+
+2019-12-24 Salvatore Iovene <salvatore@iovene.com>
+ * v1.47.0
+ * (tech) Refactor forms to own package
+ * (infra) Remove unused and broken dependency django-threaded-multihost
+ * (images) Add support for key/value tags to sort collections
+
+2019-11-18 Salvatore Iovene <salvatore@iovene.com>
+ * v1.46.0
+ * (images) Extend gain field digits to 5 + 2 decimals
+ * (users) Allow avatars up to 15 MB and disable avatar caching
+
+2019-10-16 Salvatore Iovene <salvatore@iovene.com>
+ * v1.45.2
+ * (images) Fix mouse hover link to full
+
+2019-10-15 Salvatore Iovene <salvatore@iovene.com>
+ * v1.45.1
+ * (i18n) Update languages
+ * (docs) Fix style of API docs page
+ * (images) Fix "back" link from editing image reevision
+
+2019-10-14 Salvatore Iovene <salvatore@iovene.com>
+ * v1.45.0
+ * (images) Add support for custom mouse-hover behavior
+ * (api) Add UserProfile API
+ * (docs) Improve API documentation page
+
+2019-09-26 Salvatore Iovene <salvatore@iovene.com>
+ * v1.44.8
+ * (infra) Add custom 502 page to nginx configuration
+ * (infra) Add some memory optimization options for gunicorn and celery
+ * (images) Deal with missing hash when loading thumbnails
+
+2019-09-17 Salvatore Iovene <salvatore@iovene.com>
+ * v1.44.7
+ * (images) Lower image verification limit to 10MB and apply to revisions too
+ * (images) Avoid 302 redirect by appending slash to upload/process/ url
+
+2019-09-16 Salvatore Iovene <salvatore@iovene.com>
+ * v1.44.6
+ * (infra) Increase gunicorn timeout to 300s
+ * (infra) Start using gevent for gunicorn threads
+ * (infra) Let astrobin app container share the tmp directoroy
+
+2019-09-16 Salvatore Iovene <salvatore@iovene.com>
+ * v1.44.5
+ * (images) Skip image verification for uploads larger than 20 MB
+
+2019-09-08 Salvatore Iovene <salvatore@iovene.com>
+ * v1.44.4
+ * (api) Fix Solution API to be able to filter by image hash too
+
+2019-09-02 Salvatore Iovene <salvatore@iovene.com>
+ * v1.44.3
+ * (emails) Fix attempting to send emails to objects instead of emails
+
+2019-09-01 Salvatore Iovene <salvatore@iovene.com>
+ * v1.44.2
+ * (image) Fix button to copy gear from another image
+
+2019-08-30 Salvatore Iovene <salvatore@iovene.com>
+ * v1.44.1
+ * (tasks) Fix model usage
+
+2019-08-30 Salvatore Iovene <salvatore@iovene.com>
+ * v1.44.0
+ * (email) Use celery task to send broadcast emails
+ * (email) Support sending broadcast emails as multipart text/html
+ * (admin) Only send premium offers to people without Premium and that accepted marketing emails
+ * (admin) Support sending reminder emails to users with at least an image but no uplads in > 2 months
+
+2019-08-29 Salvatore Iovene <salvatore@iovene.com>
+ * v1.43.2
+ * (admin) Fix query to determine users to send Premium offers to
+
+2019-08-29 Salvatore Iovene <salvatore@iovene.com>
+ * v1.43.1
+ * (admin) Add missing action to send Premium discount offer emails
+
+2019-08-29 Salvatore Iovene <salvatore@iovene.com>
+ * v1.43.0
+ * (premium) Add support for discounts on Premium
+
+2019-08-29 Salvatore Iovene <salvatore@iovene.com>
+ * v1.42.6
+ * (api) Fix URI resources of images in collections
+
+ 2019-08-29 Salvatore Iovene <salvatore@iovene.com>
+ * v1.42.5
+ * (api) Fix URI resources of IOTD/TP
+
+2019-08-29 Salvatore Iovene <salvatore@iovene.com>
+ * v1.42.4
+ * (api) Fix image id in returned urls, and getting image by hash/id
+
+2019-08-27 Salvatore Iovene <salvatore@iovene.com>
+ * v1.42.3
+ * (moderation) Fix zoom thumb of images in moderation/spam queues
+
+2019-08-27 Salvatore Iovene <salvatore@iovene.com>
+ * v1.42.2
+ * (image) Fix revision upload
+ * (image) Fix link to advanced acquisition details form
+
+2019-08-26 Salvatore Iovene <salvatore@iovene.com>
+ * v1.42.1
+ * (image) Address image by 6 character alphanumerical random id instead of sequential number
+
+2019-08-26 Salvatore Iovene <salvatore@iovene.com>
+ * v1.42.0
+ * (image) Add transitional hash field (preparatory migration work)
+
+2019-08-26 Salvatore Iovene <salvatore@iovene.com>
+ * v1.41.2
+ * (docs) Fix FAQ links
+ * (images) Prevent deleted images from getting undeleted
+ * (iotd) Prevent deleted images to still appear on IOTD archive
+
+2019-07-14 Salvatore Iovene <salvatore@iovene.com>
+ * v1.41.0
+ * (geoip) Use country_code instead of country, as expected by frontend
+ * (ci) Fix geoip test
+ * (images) Make warning about missing gear on edit page more obvious
+ * (images) Allow revision upload without notification
+ * (email) Do not deliver email to addresses with a complaint
+ * (docs) Fix mistake in README
+ * (iotd) Remove unused variable and format file
+ * (thumbs) Add url parameters to force synchronous retrieval
+ * (general) Add alert message to resolve email complaint issues
+ * (notifications) Do not send emails to users marked as deleted
+ * (ads) Add /ads.txt for adsense
+ * (nginx) Fix location of robots.txt
+
 2019-05-25 Salvatore Iovene <salvatore@iovene.com>
  * v1.40.0
  * (general) Add geoip support to detect user country

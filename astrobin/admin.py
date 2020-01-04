@@ -1,12 +1,13 @@
-from astrobin.models import *
-
 import difflib
+from datetime import timedelta
 
 from django.contrib import admin, messages
-from django.core.mail import BadHeaderError, EmailMessage
-from django.http import HttpResponse, HttpResponseRedirect
-from django.db.models import Q
-from django.utils.safestring import mark_safe
+from django.http import HttpResponseRedirect
+
+from astrobin.models import *
+from astrobin.tasks import send_broadcast_email
+from astrobin.utils import inactive_accounts
+from astrobin_apps_premium.utils import premium_get_valid_usersubscription
 
 
 class ImageAdmin(admin.ModelAdmin):
@@ -234,19 +235,11 @@ class BroadcastEmailAdmin(admin.ModelAdmin):
                 request,
                 "Please select exactly one email",
                 messages.ERROR)
-        else:
-            obj = obj[0]
-            for recipient in recipients:
-                msg = EmailMessage(
-                    obj.subject,
-                    mark_safe(obj.message),
-                    settings.DEFAULT_FROM_EMAIL,
-                    [recipient])
-                msg.content_subtype = 'html'
-                msg.send()
-                self.message_user(
-                    request,
-                    "Email enqueued to be sent to %d users" % len(recipients))
+        elif recipients.count() > 0:
+            send_broadcast_email.delay(obj[0], recipients)
+            self.message_user(
+                request,
+                "Email enqueued to be sent to %d users" % len(recipients))
 
     def submit_mass_email(self, request, obj):
         recipients = User.objects.all().values_list('email', flat=True)
@@ -276,6 +269,28 @@ class BroadcastEmailAdmin(admin.ModelAdmin):
             .values_list('user__email', flat=True)
         self.submit_email(request, obj, recipients)
 
+    def submit_premium_offer_discount(self, request, obj):
+        profiles = UserProfile.objects \
+            .exclude(premium_offer=None) \
+            .exclude(premium_offer_expiration=None) \
+            .exclude(premium_offer_expiration__lt=datetime.now()) \
+            .filter(receive_marketing_and_commercial_material=True) \
+            .filter(
+                Q(premium_offer_sent = None) |
+                Q(premium_offer_sent__lt=datetime.now() - timedelta(days=30))
+            )
+
+        profiles = [x for x in profiles if premium_get_valid_usersubscription(x.user) is None]
+
+        recipients = UserProfile.objects.filter(pk__in=[x.pk for x in profiles])
+        self.submit_email(request, obj, recipients.values_list("user__email", flat=True))
+        recipients.update(premium_offer_sent=datetime.now())
+
+    def submit_inactive_email_reminder(self, request, obj):
+        recipients = inactive_accounts()
+        self.submit_email(request, obj, recipients.values_list('user__email', flat=True))
+        recipients.update(inactive_account_reminder_sent=timezone.now())
+
     submit_mass_email.short_description = 'Submit mass email (select one only) - DO NOT ABUSE'
     submit_mass_email.allow_tags = True
 
@@ -291,12 +306,20 @@ class BroadcastEmailAdmin(admin.ModelAdmin):
     submit_marketing_and_commercial_material.short_description = 'Submit marketing and commercial material (select one only)'
     submit_marketing_and_commercial_material.allow_tags = True
 
+    submit_premium_offer_discount.short_description = 'Submit Premium discount offer'
+    submit_premium_offer_discount.allow_tags = True
+
+    submit_inactive_email_reminder.short_description = 'Submit inactive account reminder'
+    submit_inactive_email_reminder.allow_tags = True
+
     actions = [
         'submit_mass_email',
         'submit_superuser_email',
         'submit_important_communication',
         'submit_newsletter',
         'submit_marketing_and_commercial_material',
+        'submit_premium_offer_discount',
+        'submit_inactive_email_reminder',
     ]
 
     list_display = ("subject", "created")

@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2019-03-05 21:55+0000\n"
+"POT-Creation-Date: 2019-10-15 11:58+0000\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -18,159 +18,103 @@ msgstr ""
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=3; plural=(n==1) ? 0 : (n>=2 && n<=4) ? 1 : 2;\n"
 
-#: templates/astrobin_apps_landing/explore.html:9
 msgid "Explore AstroBin"
 msgstr ""
 
-#: templates/astrobin_apps_landing/explore.html:14
 msgid "Search engine"
 msgstr ""
 
-#: templates/astrobin_apps_landing/explore.html:21
 msgid "Image of the day"
 msgstr ""
 
-#: templates/astrobin_apps_landing/explore.html:28
 msgid "Top picks"
 msgstr ""
 
-#: templates/astrobin_apps_landing/header.html:17
 msgid "Learn More"
 msgstr ""
 
-#: templates/astrobin_apps_landing/header.html:20
 msgid "Login"
 msgstr ""
 
-#: templates/astrobin_apps_landing/header.html:23
-#: templates/astrobin_apps_landing/price.html:43
 msgid "Sign up"
 msgstr ""
 
-#: templates/astrobin_apps_landing/navbar.html:20
 msgid "Home"
 msgstr ""
 
-#: templates/astrobin_apps_landing/navbar.html:23
 msgid "About"
 msgstr ""
 
-#: templates/astrobin_apps_landing/navbar.html:26
 msgid "Explore"
 msgstr ""
 
-#: templates/astrobin_apps_landing/numbers.html:11
 msgid "Users"
 msgstr ""
 
-#: templates/astrobin_apps_landing/numbers.html:19
 msgid "Images"
 msgstr ""
 
-#: templates/astrobin_apps_landing/numbers.html:27
 msgid "Equipment items"
 msgstr ""
 
-#: templates/astrobin_apps_landing/numbers.html:35
 msgid "Social messages"
 msgstr ""
 
-#: templates/astrobin_apps_landing/price.html:8
-#: templates/astrobin_apps_landing/services.html:68
 msgid "Subscription plans"
 msgstr ""
 
-#: templates/astrobin_apps_landing/price.html:28
-#: templates/astrobin_apps_landing/price.html:64
-#: templates/astrobin_apps_landing/price.html:104
 msgid "View full image data"
 msgstr ""
 
-#: templates/astrobin_apps_landing/price.html:29
 msgid "Advanced search"
 msgstr ""
 
-#: templates/astrobin_apps_landing/price.html:30
-#: templates/astrobin_apps_landing/price.html:66
-#: templates/astrobin_apps_landing/price.html:106
 msgid "Social tools"
 msgstr ""
 
-#: templates/astrobin_apps_landing/price.html:31
-#: templates/astrobin_apps_landing/price.html:67
-#: templates/astrobin_apps_landing/price.html:107
 msgid "Groups"
 msgstr ""
 
-#: templates/astrobin_apps_landing/price.html:32
-#: templates/astrobin_apps_landing/price.html:68
-#: templates/astrobin_apps_landing/price.html:108
 msgid "Image uploads"
 msgstr ""
 
-#: templates/astrobin_apps_landing/price.html:33
-#: templates/astrobin_apps_landing/price.html:69
-#: templates/astrobin_apps_landing/price.html:109
 msgid "Plate-solving"
 msgstr ""
 
-#: templates/astrobin_apps_landing/price.html:34
-#: templates/astrobin_apps_landing/price.html:70
-#: templates/astrobin_apps_landing/price.html:110
-#: templates/astrobin_apps_landing/services.html:52
 msgid "Image revisions"
 msgstr ""
 
-#: templates/astrobin_apps_landing/price.html:35
-#: templates/astrobin_apps_landing/price.html:71
-#: templates/astrobin_apps_landing/price.html:111
 msgid "Raw data downloads"
 msgstr ""
 
-#: templates/astrobin_apps_landing/price.html:36
-#: templates/astrobin_apps_landing/price.html:72
-#: templates/astrobin_apps_landing/price.html:112
 msgid "Contests"
 msgstr ""
 
-#: templates/astrobin_apps_landing/price.html:37
-#: templates/astrobin_apps_landing/price.html:73
-#: templates/astrobin_apps_landing/price.html:113
 msgid "Ad free"
 msgstr ""
 
-#: templates/astrobin_apps_landing/price.html:59
-#: templates/astrobin_apps_landing/price.html:99
 msgid "per annum"
 msgstr ""
 
-#: templates/astrobin_apps_landing/price.html:65
-#: templates/astrobin_apps_landing/price.html:105
 msgid "Advanced earch"
 msgstr ""
 
-#: templates/astrobin_apps_landing/price.html:79
-#: templates/astrobin_apps_landing/price.html:119
 msgid "Buy"
 msgstr ""
 
-#: templates/astrobin_apps_landing/price.html:84
 #, python-format
 msgid ""
 "That's only %(amount)s per\n"
 "                                    month!"
 msgstr ""
 
-#: templates/astrobin_apps_landing/price.html:124
 #, python-format
 msgid "That's only %(amount)s per month!"
 msgstr ""
 
-#: templates/astrobin_apps_landing/services.html:9
 msgid "What AstroBin is about"
 msgstr ""
 
-#: templates/astrobin_apps_landing/services.html:12
 msgid ""
 "Online since 2011, AstroBin is the <strong>#1 complete solution</strong> for "
 "image hosting of astrophotographs. Far from being a generic run-of-the-mill "
@@ -179,63 +123,51 @@ msgid ""
 "astrophotography."
 msgstr ""
 
-#: templates/astrobin_apps_landing/services.html:18
 msgid "Zero compromise storage"
 msgstr ""
 
-#: templates/astrobin_apps_landing/services.html:19
 #, python-format
 msgid ""
 "AstroBin stores your images absolutely unaltered: 100%% quality, no "
 "compression, no resizing."
 msgstr ""
 
-#: templates/astrobin_apps_landing/services.html:26
 msgid "Maximum reliability"
 msgstr ""
 
-#: templates/astrobin_apps_landing/services.html:27
 msgid ""
 "Your data is stored with state-of-the-art technology for very high "
 "reliability and durability."
 msgstr ""
 
-#: templates/astrobin_apps_landing/services.html:34
 msgid "Dedication to data"
 msgstr ""
 
-#: templates/astrobin_apps_landing/services.html:35
 msgid ""
 "Astrophotography is more than pretty pixels. AstroBin stores and indexes "
 "anything you want about your images!"
 msgstr ""
 
-#: templates/astrobin_apps_landing/services.html:44
 msgid "Astrometry tools"
 msgstr ""
 
-#: templates/astrobin_apps_landing/services.html:45
 msgid ""
 "AstroBin automatically identifies deep sky objects in your images and "
 "provides precise astrometry details."
 msgstr ""
 
-#: templates/astrobin_apps_landing/services.html:53
 msgid ""
 "Astrophotography often is a continuous improvement process, and AstroBin "
 "allows you to upload multiple revisions of the same image."
 msgstr ""
 
-#: templates/astrobin_apps_landing/services.html:60
 msgid "Largest astrophoto community"
 msgstr ""
 
-#: templates/astrobin_apps_landing/services.html:61
 msgid ""
 "With forums, comments, private messaging, groups and more social features, "
 "AstroBin is truly the world wide hub for astrophotographers!"
 msgstr ""
 
-#: templates/astrobin_apps_landing/services.html:66
 msgid "Frequently asked questions"
 msgstr ""

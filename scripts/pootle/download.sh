@@ -2,10 +2,10 @@
 
 # Usage:
 #
-#    ./in.sh $ssh_cmd $pootle_host $remote_pootle_root
+#    ./download.sh $ssh_cmd $pootle_host $remote_pootle_root
 #
 # e.g.:
-#    ./in.sh "ssh -i auth.pem" user@host.com /opt/pootle
+#    ./download.sh "ssh -i auth.pem" user@host.com /opt/pootle
 
 SSH=$1
 HOST=$2

@@ -1,25 +1,17 @@
 # -*- coding: UTF-8
 
-# Python
 import re
 import time
-from mock import patch
 
-# Django
 from django.conf import settings
 from django.contrib.auth.models import Group, User
 from django.contrib.contenttypes.models import ContentType
 from django.core.urlresolvers import reverse
 from django.test import TestCase
-
-# AstroBin
-from nested_comments.models import NestedComment
-
-# Third party
+from mock import patch
 from subscription.models import Subscription, UserSubscription
 from toggleproperties.models import ToggleProperty
 
-# AstroBin
 from astrobin.models import (
     Image,
     ImageRevision,
@@ -35,6 +27,9 @@ from astrobin.models import (
     Location)
 from astrobin_apps_groups.models import Group as AstroBinGroup
 from astrobin_apps_notifications.utils import get_unseen_notifications
+from astrobin_apps_platesolving.models import Solution
+from astrobin_apps_platesolving.solver import Solver
+from nested_comments.models import NestedComment
 
 
 class ImageTest(TestCase):
@@ -100,10 +95,16 @@ class ImageTest(TestCase):
     # HELPERS                                                                 #
     ###########################################################################
 
-    def _do_upload(self, filename, wip=False):
+    def _do_upload(self, filename, wip=False, skip_notifications=False):
+        # type: (basestring, bool, bool) -> None
+
         data = {'image_file': open(filename, 'rb')}
+
         if wip:
             data['wip'] = True
+
+        if skip_notifications:
+            data['skip_notifications'] = True
 
         return self.client.post(
             reverse('image_upload_process'),
@@ -114,7 +115,7 @@ class ImageTest(TestCase):
         return self.client.post(
             reverse('image_revision_upload_process'),
             {
-                'image_id': image.id,
+                'image_id': image.get_id(),
                 'image_file': open(filename, 'rb'),
                 'description': description,
             },
@@ -164,7 +165,7 @@ class ImageTest(TestCase):
 
         # Test failure due to full use of Free membership
         self.user.userprofile.premium_counter = settings.PREMIUM_MAX_IMAGES_FREE
-        self.user.userprofile.save()
+        self.user.userprofile.save(keep_deleted=True)
         response = self._do_upload('astrobin/fixtures/test.jpg')
         self.assertRedirects(
             response,
@@ -173,7 +174,7 @@ class ImageTest(TestCase):
             target_status_code=200)
         self._assert_message(response, "error unread", "Please upgrade")
         self.user.userprofile.premium_counter = 0
-        self.user.userprofile.save()
+        self.user.userprofile.save(keep_deleted=True)
 
         # Test failure due to read-only mode
         with self.settings(READONLY_MODE=True):
@@ -201,7 +202,7 @@ class ImageTest(TestCase):
         image = self._get_last_image()
         self.assertRedirects(
             response,
-            reverse('image_edit_watermark', kwargs={'id': image.pk}),
+            reverse('image_edit_watermark', kwargs={'id': image.get_id()}),
             status_code=302,
             target_status_code=200)
         self._assert_message(response, "warning unread", "Indexed PNG")
@@ -219,7 +220,7 @@ class ImageTest(TestCase):
         image = self._get_last_image()
         self.assertRedirects(
             response,
-            reverse('image_edit_watermark', kwargs={'id': image.pk}),
+            reverse('image_edit_watermark', kwargs={'id': image.get_id()}),
             status_code=302,
             target_status_code=200)
 
@@ -230,7 +231,7 @@ class ImageTest(TestCase):
         response = self.client.post(
             reverse('image_edit_save_watermark'),
             {
-                'image_id': image.pk,
+                'image_id': image.get_id(),
                 'watermark': True,
                 'watermark_text': "Watermark test",
                 'watermark_position': 0,
@@ -241,7 +242,7 @@ class ImageTest(TestCase):
         image = Image.objects.get(pk=image.pk)
         self.assertRedirects(
             response,
-            reverse('image_edit_basic', kwargs={'id': image.pk}),
+            reverse('image_edit_basic', kwargs={'id': image.get_id()}),
             status_code=302,
             target_status_code=200)
         self.assertEqual(image.watermark, True)
@@ -258,7 +259,7 @@ class ImageTest(TestCase):
 
         # Test missing data_source
         response = self.client.post(
-            reverse('image_edit_basic', args=(image.pk,)),
+            reverse('image_edit_basic', args=(image.get_id(),)),
             {
                 'submit_gear': True,
                 'title': "Test title",
@@ -276,7 +277,7 @@ class ImageTest(TestCase):
 
         # Test missing remote_source
         response = self.client.post(
-            reverse('image_edit_basic', args=(image.pk,)),
+            reverse('image_edit_basic', args=(image.get_id(),)),
             {
                 'submit_gear': True,
                 'title': "Test title",
@@ -294,7 +295,7 @@ class ImageTest(TestCase):
         self._assert_message(response, "error unread", "There was one or more errors processing the form")
 
         response = self.client.post(
-            reverse('image_edit_basic', args=(image.pk,)),
+            reverse('image_edit_basic', args=(image.get_id(),)),
             {
                 'submit_gear': True,
                 'title': "Test title",
@@ -312,7 +313,7 @@ class ImageTest(TestCase):
         image = Image.objects.get(pk=image.pk)
         self.assertRedirects(
             response,
-            reverse('image_edit_gear', kwargs={'id': image.pk}),
+            reverse('image_edit_gear', kwargs={'id': image.get_id()}),
             status_code=302,
             target_status_code=200)
         self.assertEqual(image.title, "Test title")
@@ -327,7 +328,7 @@ class ImageTest(TestCase):
         self.user.userprofile.location_set.clear()
 
         response = self.client.post(
-            reverse('image_edit_gear', args=(image.pk,)),
+            reverse('image_edit_gear', args=(image.get_id(),)),
             {
                 'image_id': image.pk,
                 'submit_acquisition': True,
@@ -345,7 +346,7 @@ class ImageTest(TestCase):
         image = Image.objects.get(pk=image.pk)
         self.assertRedirects(
             response,
-            reverse('image_edit_acquisition', kwargs={'id': image.pk}),
+            reverse('image_edit_acquisition', kwargs={'id': image.get_id()}),
             status_code=302,
             target_status_code=200)
 
@@ -354,7 +355,7 @@ class ImageTest(TestCase):
         response = self.client.post(
             reverse('image_edit_save_acquisition'),
             {
-                'image_id': image.pk,
+                'image_id': image.get_id(),
                 'edit_type': 'deep_sky',
                 'advanced': 'false',
                 'date': today,
@@ -364,7 +365,7 @@ class ImageTest(TestCase):
             follow=True)
         self.assertRedirects(
             response,
-            reverse('image_detail', kwargs={'id': image.pk}),
+            reverse('image_detail', kwargs={'id': image.get_id()}),
             status_code=302,
             target_status_code=200)
 
@@ -377,6 +378,184 @@ class ImageTest(TestCase):
         image.delete()
 
     @patch("astrobin.tasks.retrieve_primary_thumbnails")
+    @patch("astrobin.signals.push_notification")
+    def test_image_upload_process_view_skip_notifications(self, push_notification, retrieve_primary_thumbnails):
+        self.client.login(username='test', password='password')
+
+        ToggleProperty.objects.create(
+            property_type='follow',
+            user=self.user2,
+            content_object=self.user
+        )
+
+        self._do_upload('astrobin/fixtures/test.jpg')
+        self.assertTrue(push_notification.called)
+        push_notification.reset_mock()
+
+        self._do_upload('astrobin/fixtures/test.jpg', skip_notifications=True)
+        self.assertFalse(push_notification.called)
+
+    @patch("astrobin.tasks.retrieve_primary_thumbnails")
+    def test_image_detail_view_original_revision_overlay(self, retrieve_primary_thumbnails):
+        self.client.login(username='test', password='password')
+        self._do_upload('astrobin/fixtures/test.jpg')
+        image = self._get_last_image()
+
+        Solution.objects.create(
+            status=Solver.SUCCESS,
+            content_object=image
+        )
+
+        self._do_upload_revision(image, 'astrobin/fixtures/test.jpg', "Test revision description")
+        revision = self._get_last_image_revision()
+
+        image.mouse_hover_image = "REVISION__%s" % revision.label
+        image.save()
+
+        response = self.client.get(reverse('image_detail', kwargs={'id': image.get_id()}))
+        self.assertContains(response, "hover-overlay-original-revision")
+        self.assertNotContains(response, "hover-overlay-solution")
+
+        image.delete()
+        self.client.logout()
+
+    @patch("astrobin.tasks.retrieve_primary_thumbnails")
+    def test_image_detail_view_original_solution_overlay(self, retrieve_primary_thumbnails):
+        self.client.login(username='test', password='password')
+        self._do_upload('astrobin/fixtures/test.jpg')
+        image = self._get_last_image()
+
+        Solution.objects.create(
+            status=Solver.SUCCESS,
+            content_object=image
+        )
+
+        response = self.client.get(reverse('image_detail', kwargs={'id': image.get_id()}))
+        self.assertContains(response, "hover-overlay-solution")
+
+        image.delete()
+        self.client.logout()
+
+    @patch("astrobin.tasks.retrieve_primary_thumbnails")
+    def test_image_detail_view_original_inverted_overlay(self, retrieve_primary_thumbnails):
+        self.client.login(username='test', password='password')
+        self._do_upload('astrobin/fixtures/test.jpg')
+        image = self._get_last_image()
+
+        Solution.objects.create(
+            status=Solver.SUCCESS,
+            content_object=image
+        )
+
+        image.mouse_hover_image = "INVERTED"
+        image.save()
+
+        response = self.client.get(reverse('image_detail', kwargs={'id': image.get_id()}))
+        self.assertContains(response, "hover-overlay-original-inverted")
+        self.assertNotContains(response, "hover-overlay-solution")
+
+        image.delete()
+        self.client.logout()
+
+    @patch("astrobin.tasks.retrieve_primary_thumbnails")
+    def test_image_detail_view_revision_original_overlay(self, retrieve_primary_thumbnails):
+        self.client.login(username='test', password='password')
+        self._do_upload('astrobin/fixtures/test.jpg')
+        image = self._get_last_image()
+
+        self._do_upload_revision(image, 'astrobin/fixtures/test.jpg', "Test revision description")
+        revision = self._get_last_image_revision()
+
+        Solution.objects.create(
+            status=Solver.SUCCESS,
+            content_object=revision
+        )
+
+        revision.mouse_hover_image = "ORIGINAL"
+        revision.save()
+
+        response = self.client.get(reverse('image_detail', kwargs={'id': image.get_id(), "r": revision.label}))
+        self.assertContains(response, "hover-overlay-revision-original")
+        self.assertNotContains(response, "hover-overlay-solution")
+
+        image.delete()
+        self.client.logout()
+
+    @patch("astrobin.tasks.retrieve_primary_thumbnails")
+    def test_image_detail_view_revision_solutin_overlay(self, retrieve_primary_thumbnails):
+        self.client.login(username='test', password='password')
+        self._do_upload('astrobin/fixtures/test.jpg')
+        image = self._get_last_image()
+
+        self._do_upload_revision(image, 'astrobin/fixtures/test.jpg', "Test revision description")
+        revision = self._get_last_image_revision()
+
+        Solution.objects.create(
+            status=Solver.SUCCESS,
+            content_object=revision
+        )
+
+        response = self.client.get(reverse('image_detail', kwargs={'id': image.get_id(), "r": revision.label}))
+        self.assertContains(response, "hover-overlay-solution")
+
+        image.delete()
+        self.client.logout()
+
+    @patch("astrobin.tasks.retrieve_primary_thumbnails")
+    def test_image_detail_view_revision_revision_overlay(self, retrieve_primary_thumbnails):
+        self.client.login(username='test', password='password')
+        self._do_upload('astrobin/fixtures/test.jpg')
+        image = self._get_last_image()
+
+        self._do_upload_revision(image, 'astrobin/fixtures/test.jpg', "Test revision description")
+        revision = self._get_last_image_revision()
+
+        self._do_upload_revision(image, 'astrobin/fixtures/test.jpg', "Test revision description")
+        revision2 = self._get_last_image_revision()
+
+        Solution.objects.create(
+            status=Solver.SUCCESS,
+            content_object=revision
+        )
+
+        revision.mouse_hover_image = "REVISION__%s" % revision2.label
+        revision.save()
+
+        response = self.client.get(reverse('image_detail', kwargs={'id': image.get_id(), "r": revision.label}))
+        self.assertContains(response, "hover-overlay-revision-revision")
+        self.assertNotContains(response, "hover-overlay-solution")
+
+        image.delete()
+        self.client.logout()
+
+    @patch("astrobin.tasks.retrieve_primary_thumbnails")
+    def test_image_detail_view_revision_inverted_overlay(self, retrieve_primary_thumbnails):
+        self.client.login(username='test', password='password')
+        self._do_upload('astrobin/fixtures/test.jpg')
+        image = self._get_last_image()
+
+        self._do_upload_revision(image, 'astrobin/fixtures/test.jpg', "Test revision description")
+        revision = self._get_last_image_revision()
+
+        self._do_upload_revision(image, 'astrobin/fixtures/test.jpg', "Test revision description")
+        revision2 = self._get_last_image_revision()
+
+        Solution.objects.create(
+            status=Solver.SUCCESS,
+            content_object=revision
+        )
+
+        revision.mouse_hover_image = "INVERTED"
+        revision.save()
+
+        response = self.client.get(reverse('image_detail', kwargs={'id': image.get_id(), "r": revision.label}))
+        self.assertContains(response, "hover-overlay-revision-inverted")
+        self.assertNotContains(response, "hover-overlay-solution")
+
+        image.delete()
+        self.client.logout()
+
+    @patch("astrobin.tasks.retrieve_primary_thumbnails")
     def test_image_detail_view(self, retrieve_primary_thumbnails):
         self.client.login(username='test', password='password')
         self._do_upload('astrobin/fixtures/test.jpg')
@@ -384,7 +563,7 @@ class ImageTest(TestCase):
         today = time.strftime('%Y-%m-%d')
 
         # Basic view
-        response = self.client.get(reverse('image_detail', kwargs={'id': image.id}))
+        response = self.client.get(reverse('image_detail', kwargs={'id': image.get_id()}))
         self.assertEqual(response.status_code, 200)
         self.assertIsNotNone(re.search(r'data-id="%s"\s+data-alias="%s"' % (image.pk, "regular"), response.content))
 
@@ -394,15 +573,15 @@ class ImageTest(TestCase):
         # Revision redirect
         self._do_upload_revision(image, 'astrobin/fixtures/test_smaller.jpg')
         revision = self._get_last_image_revision()
-        response = self.client.get(reverse('image_detail', kwargs={'id': image.id}))
+        response = self.client.get(reverse('image_detail', kwargs={'id': image.get_id()}))
         self.assertRedirects(
             response,
-            reverse('image_detail', kwargs={'id': image.id, 'r': revision.label}),
+            reverse('image_detail', kwargs={'id': image.get_id(), 'r': revision.label}),
             status_code=302,
             target_status_code=200)
 
         # Correct revision displayed
-        response = self.client.get(reverse('image_detail', kwargs={'id': image.id, 'r': 'B'}))
+        response = self.client.get(reverse('image_detail', kwargs={'id': image.get_id(), 'r': 'B'}))
         self.assertIsNotNone(re.search(
             r'data-id="%d"\s+data-alias="%s"\s+data-revision="%s"' % (image.pk, "regular", "B"),
             response.content))
@@ -414,14 +593,14 @@ class ImageTest(TestCase):
         # Revision description displayed
         desc = "Test revision description"
         revision.description = desc
-        revision.save()
-        response = self.client.get(reverse('image_detail', kwargs={'id': image.id, 'r': 'B'}))
+        revision.save(keep_deleted=True)
+        response = self.client.get(reverse('image_detail', kwargs={'id': image.get_id(), 'r': 'B'}))
         self.assertContains(response, desc)
 
         # If description is set to empty text, then it's gone
         revision.description = ''
-        revision.save()
-        response = self.client.get(reverse('image_detail', kwargs={'id': image.id, 'r': 'B'}))
+        revision.save(keep_deleted=True)
+        response = self.client.get(reverse('image_detail', kwargs={'id': image.get_id(), 'r': 'B'}))
         self.assertNotContains(response, desc)
         self.assertNotContains(response, '<h3>%s</h3>' % revision.label, html=True)
 
@@ -431,18 +610,18 @@ class ImageTest(TestCase):
             r'data-id="%d"\s+data-alias="%s"\s+data-revision="%s"' % (image.pk, "gallery", "final"),
             response.content))
 
-        response = self.client.get(reverse('image_detail', kwargs={'id': image.id, 'r': '0'}))
+        response = self.client.get(reverse('image_detail', kwargs={'id': image.get_id(), 'r': '0'}))
         self.assertIsNotNone(re.search(r'data-id="%d"\s+data-alias="%s"' % (image.pk, "regular"), response.content))
         self.assertIsNotNone(re.search(
             r'data-id="%d"\s+data-alias="%s"\s+data-revision="%s"' % (image.pk, "thumb", "B"),
             response.content))
 
         # Inverted displayed
-        response = self.client.get(reverse('image_detail', kwargs={'id': image.id, 'r': '0'}) + "?mod=inverted")
+        response = self.client.get(reverse('image_detail', kwargs={'id': image.get_id(), 'r': '0'}) + "?mod=inverted")
         self.assertIsNotNone(
             re.search(r'data-id="%d"\s+data-alias="%s"' % (image.pk, "regular_inverted"), response.content))
 
-        response = self.client.get(reverse('image_detail', kwargs={'id': image.id, 'r': 'B'}) + "?mod=inverted")
+        response = self.client.get(reverse('image_detail', kwargs={'id': image.get_id(), 'r': 'B'}) + "?mod=inverted")
         self.assertIsNotNone(re.search(
             r'data-id="%d"\s+data-alias="%s"\s+data-revision="%s"' % (image.pk, "regular_inverted", "B"),
             response.content))
@@ -469,7 +648,7 @@ class ImageTest(TestCase):
             mean_sqm=20.0,
             mean_fwhm=1,
             temperature=10)
-        response = self.client.get(reverse('image_detail', kwargs={'id': image.id}))
+        response = self.client.get(reverse('image_detail', kwargs={'id': image.get_id()}))
         self.assertEqual(response.status_code, 200)
         self.assertEqual(response.context[0]['image_type'], 'deep_sky')
 
@@ -489,19 +668,19 @@ class ImageTest(TestCase):
             cmiii=3,
             seeing=1,
             transparency=1)
-        response = self.client.get(reverse('image_detail', kwargs={'id': image.id}))
+        response = self.client.get(reverse('image_detail', kwargs={'id': image.get_id()}))
         self.assertEqual(response.status_code, 200)
         self.assertEqual(response.context[0]['image_type'], 'solar_system')
         ssa.delete()
 
         # Test whether the Like button is active: image owner can't like
-        response = self.client.get(reverse('image_detail', kwargs={'id': image.id}))
+        response = self.client.get(reverse('image_detail', kwargs={'id': image.get_id()}))
         self.assertEqual(response.context[0]['user_can_like'], False)
 
         # Test whether the Like button is active: index 0 can't like
         self.client.logout()
         self.client.login(username='test2', password='password')
-        response = self.client.get(reverse('image_detail', kwargs={'id': image.id}))
+        response = self.client.get(reverse('image_detail', kwargs={'id': image.get_id()}))
         self.assertEqual(response.context[0]['user_can_like'], False)
 
         # Test whether the Like button is active: index 0 but Premium can like
@@ -515,33 +694,33 @@ class ImageTest(TestCase):
             user=self.user2,
             subscription=s)
         us.subscribe()
-        response = self.client.get(reverse('image_detail', kwargs={'id': image.id}))
+        response = self.client.get(reverse('image_detail', kwargs={'id': image.get_id()}))
         self.assertEqual(response.context[0]['user_can_like'], True)
 
         # Spam images should be 404
         image.moderator_decision = 2
-        image.save()
-        response = self.client.get(reverse('image_detail', kwargs={'id': image.id}))
+        image.save(keep_deleted=True)
+        response = self.client.get(reverse('image_detail', kwargs={'id': image.get_id()}))
         self.assertEqual(response.status_code, 404)
 
         # Except for moderators, they can see them
         moderators, created = Group.objects.get_or_create(name='image_moderators')
         self.user2.groups.add(moderators)
-        response = self.client.get(reverse('image_detail', kwargs={'id': image.id}))
+        response = self.client.get(reverse('image_detail', kwargs={'id': image.get_id()}))
         self.assertEqual(response.status_code, 200)
         self.user2.groups.remove(moderators)
 
         # And except for superusers
         self.user2.is_superuser = True
         self.user2.save()
-        response = self.client.get(reverse('image_detail', kwargs={'id': image.id}))
+        response = self.client.get(reverse('image_detail', kwargs={'id': image.get_id()}))
         self.assertEqual(response.status_code, 200)
         self.user2.is_superuser = False
         self.user2.save()
 
         # Anon users get 404 of course
         self.client.logout()
-        response = self.client.get(reverse('image_detail', kwargs={'id': image.id}))
+        response = self.client.get(reverse('image_detail', kwargs={'id': image.get_id()}))
         self.assertEqual(response.status_code, 404)
 
         us.unsubscribe()
@@ -549,6 +728,28 @@ class ImageTest(TestCase):
         s.delete()
         g.delete()
 
+        image.delete()
+
+    @patch("astrobin.tasks.retrieve_primary_thumbnails")
+    def test_image_7_digit_gain(self, retrieve_primary_thumbnails):
+        self.client.login(username='test', password='password')
+        self._do_upload('astrobin/fixtures/test.jpg')
+        image = self._get_last_image()
+        today = time.strftime('%Y-%m-%d')
+
+        # DSA data
+        dsa, created = DeepSky_Acquisition.objects.get_or_create(
+            image=image,
+            date=today,
+            number=10,
+            duration=1200,
+            gain=12345.67,
+        )
+        response = self.client.get(reverse('image_detail', kwargs={'id': image.get_id()}))
+        self.assertEqual(response.status_code, 200)
+        self.assertContains(response, "(gain: 12345.67)")
+
+        dsa.delete()
         image.delete()
 
     @patch("astrobin.tasks.retrieve_primary_thumbnails")
@@ -562,12 +763,15 @@ class ImageTest(TestCase):
         revision = self._get_last_image_revision()
 
         response = self.client.post(
-            reverse('image_flag_thumbs', kwargs={'id': image.id}))
+            reverse('image_flag_thumbs', kwargs={'id': image.get_id()}))
         self.assertRedirects(
             response,
-            reverse('image_detail', kwargs={'id': image.id}),
+            reverse('image_detail', kwargs={
+                'id': image.get_id(),
+                'r': 'B',
+            }),
             status_code=302,
-            target_status_code=302)  # target 302 due to revision redirect
+            target_status_code=200)
 
         revision.delete()
         image.delete()
@@ -583,7 +787,7 @@ class ImageTest(TestCase):
         image = self._get_last_image()
         response = self.client.get(
             reverse('image_thumb', kwargs={
-                'id': image.id,
+                'id': image.get_id(),
                 'alias': 'regular'
             }))
         self.assertEqual(response.status_code, 200)
@@ -597,7 +801,7 @@ class ImageTest(TestCase):
         image = self._get_last_image()
 
         opts = {
-            'id': image.id,
+            'id': image.get_id(),
             'alias': 'regular'
         }
 
@@ -609,17 +813,17 @@ class ImageTest(TestCase):
             })
             return thumb.url
 
-        response = self.client.get(reverse('image_rawthumb', kwargs=opts))
+        response = self.client.get(reverse('image_rawthumb', kwargs=opts), follow=True)
         # 404 because we don't serve that /media/static file, that's fine.
         self.assertRedirects(response, get_expected_url(image))
 
         # Set the watermark to some non ASCII symbol
         image.watermark_text = "©"
         image.watermark = True
-        image.save()
+        image.save(keep_deleted=True)
 
         image = Image.objects.get(pk=image.pk)
-        response = self.client.get(reverse('image_rawthumb', kwargs=opts))
+        response = self.client.get(reverse('image_rawthumb', kwargs=opts), follow=True)
         self.assertRedirects(response, get_expected_url(image))
 
         image.delete()
@@ -629,7 +833,7 @@ class ImageTest(TestCase):
         self.client.login(username='test', password='password')
         self._do_upload('astrobin/fixtures/test.jpg')
         image = self._get_last_image()
-        response = self.client.get(reverse('image_full', kwargs={'id': image.id}))
+        response = self.client.get(reverse('image_full', kwargs={'id': image.get_id()}))
         self.assertEqual(response.status_code, 200)
         self.assertEqual(response.context[0]['alias'], 'hd')
         self.assertIsNotNone(re.search(r'data-id="%d"\s+data-alias="%s"' % (image.pk, "hd"), response.content))
@@ -637,26 +841,26 @@ class ImageTest(TestCase):
         # Revision redirect
         self._do_upload_revision(image, 'astrobin/fixtures/test.jpg')
         revision = self._get_last_image_revision()
-        response = self.client.get(reverse('image_full', kwargs={'id': image.id}))
+        response = self.client.get(reverse('image_full', kwargs={'id': image.get_id()}))
         self.assertRedirects(
             response,
-            reverse('image_full', kwargs={'id': image.id, 'r': revision.label}),
+            reverse('image_full', kwargs={'id': image.get_id(), 'r': revision.label}),
             status_code=302,
             target_status_code=200)
 
         # Correct revision displayed
-        response = self.client.get(reverse('image_full', kwargs={'id': image.id, 'r': 'B'}))
+        response = self.client.get(reverse('image_full', kwargs={'id': image.get_id(), 'r': 'B'}))
         self.assertIsNotNone(re.search(
             r'data-id="%d"\s+data-alias="%s"\s+data-revision="%s"' % (image.pk, "hd", "B"),
             response.content))
-        response = self.client.get(reverse('image_full', kwargs={'id': image.id, 'r': '0'}))
+        response = self.client.get(reverse('image_full', kwargs={'id': image.get_id(), 'r': '0'}))
         self.assertIsNotNone(re.search(r'data-id="%d"\s+data-alias="%s"' % (image.pk, "hd"), response.content))
 
         revision.delete()
 
         # Mods
         response = self.client.get(
-            reverse('image_full', kwargs={'id': image.id}) + "?mod=inverted")
+            reverse('image_full', kwargs={'id': image.get_id()}) + "?mod=inverted")
         self.assertEqual(response.status_code, 200)
         self.assertEqual(response.context[0]['mod'], 'inverted')
         self.assertEqual(response.context[0]['alias'], 'hd_inverted')
@@ -664,7 +868,7 @@ class ImageTest(TestCase):
 
         # Real
         response = self.client.get(
-            reverse('image_full', kwargs={'id': image.id}) + "?real")
+            reverse('image_full', kwargs={'id': image.get_id()}) + "?real")
         self.assertEqual(response.status_code, 200)
         self.assertEqual(response.context[0]['alias'], 'real')
         self.assertIsNotNone(re.search(r'data-id="%d"\s+data-alias="%s"' % (image.pk, "real"), response.content))
@@ -681,7 +885,7 @@ class ImageTest(TestCase):
         response = self._do_upload_revision(image, 'astrobin/fixtures/invalid_file')
         self.assertRedirects(
             response,
-            reverse('image_detail', kwargs={'id': image.id}),
+            reverse('image_detail', kwargs={'id': image.get_id()}),
             status_code=302,
             target_status_code=200)
         self._assert_message(response, "error unread", "Invalid image")
@@ -690,7 +894,7 @@ class ImageTest(TestCase):
         response = self._do_upload_revision(image, 'astrobin/fixtures/invalid_file.jpg')
         self.assertRedirects(
             response,
-            reverse('image_detail', kwargs={'id': image.id}),
+            reverse('image_detail', kwargs={'id': image.get_id()}),
             status_code=302,
             target_status_code=200)
         self._assert_message(response, "error unread", "Invalid image")
@@ -699,7 +903,7 @@ class ImageTest(TestCase):
         response = self._do_upload_revision(image, 'astrobin/fixtures/test.jpg')
         self.assertRedirects(
             response,
-            reverse('image_detail', kwargs={'id': image.id, 'r': 'B'}),
+            reverse('image_detail', kwargs={'id': image.get_id(), 'r': 'B'}),
             status_code=302,
             target_status_code=200)
         self._assert_message(response, "success unread", "Image uploaded")
@@ -721,7 +925,7 @@ class ImageTest(TestCase):
         response = self._do_upload_revision(image, 'astrobin/fixtures/test.jpg')
         self.assertRedirects(
             response,
-            reverse('image_detail', kwargs={'id': image.id, 'r': 'C'}),
+            reverse('image_detail', kwargs={'id': image.get_id(), 'r': 'C'}),
             status_code=302,
             target_status_code=200)
         self._assert_message(response, "success unread", "Image uploaded")
@@ -745,11 +949,11 @@ class ImageTest(TestCase):
         image = self._get_last_image()
 
         response = self.client.get(
-            reverse('image_edit_make_final', kwargs={'id': image.id}),
+            reverse('image_edit_make_final', kwargs={'id': image.get_id()}),
             follow=True)
         self.assertRedirects(
             response,
-            reverse('image_detail', kwargs={'id': image.id}),
+            reverse('image_detail', kwargs={'id': image.get_id()}),
             status_code=302,
             target_status_code=200)
         image = self._get_last_image()
@@ -762,7 +966,7 @@ class ImageTest(TestCase):
         # Test with wrong user
         self.client.login(username='test2', password='password')
         response = self.client.get(
-            reverse('image_edit_make_final', kwargs={'id': image.id}))
+            reverse('image_edit_make_final', kwargs={'id': image.get_id()}))
         self.assertEqual(response.status_code, 403)
         self.client.logout()
 
@@ -795,7 +999,7 @@ class ImageTest(TestCase):
             follow=True)
         self.assertRedirects(
             response,
-            reverse('image_detail', kwargs={'id': image.id, 'r': b.label}),
+            reverse('image_detail', kwargs={'id': image.get_id(), 'r': b.label}),
             status_code=302,
             target_status_code=200)
 
@@ -845,27 +1049,27 @@ class ImageTest(TestCase):
 
         # GET
         self.client.login(username='test2', password='password')
-        response = self.client.get(get_url((image.pk,)))
+        response = self.client.get(get_url((image.get_id(),)))
         self.assertEqual(response.status_code, 403)
 
         # POST
-        response = self.client.post(get_url((image.pk,)), post_data(image), follow=True)
+        response = self.client.post(get_url((image.get_id(),)), post_data(image), follow=True)
         self.assertEqual(response.status_code, 403)
         self.client.logout()
 
         # GET
         self.client.login(username='test', password='password')
-        response = self.client.get(get_url((image.pk,)))
+        response = self.client.get(get_url((image.get_id(),)))
         self.assertEqual(response.status_code, 200)
 
         # POST
         location, created = Location.objects.get_or_create(
             name="Test location")
         self.user.userprofile.location_set.add(location)
-        response = self.client.post(get_url((image.pk,)), post_data(image), follow=True)
+        response = self.client.post(get_url((image.get_id(),)), post_data(image), follow=True)
         self.assertRedirects(
             response,
-            reverse('image_detail', kwargs={'id': image.pk}),
+            reverse('image_detail', kwargs={'id': image.get_id()}),
             status_code=302,
             target_status_code=200)
         image = Image.objects_including_wip.get(pk=image.pk)
@@ -891,7 +1095,7 @@ class ImageTest(TestCase):
             name="group3", creator=self.user, owner=self.user,
             category=100, autosubmission=True)
 
-        response = self.client.get(get_url((image.pk,)))
+        response = self.client.get(get_url((image.get_id(),)))
         self.assertContains(response, "group1")
         self.assertContains(response, "group2")
         self.assertNotContains(response, "group3")
@@ -903,25 +1107,25 @@ class ImageTest(TestCase):
         data = post_data(image)
 
         data.update({"groups": [group1.pk]})
-        response = self.client.post(get_url((image.pk,)), data, follow=True)
+        response = self.client.post(get_url((image.get_id(),)), data, follow=True)
         image = Image.objects_including_wip.get(pk=image.pk)
         self.assertTrue(group1 in image.part_of_group_set.all())
         self.assertFalse(group2 in image.part_of_group_set.all())
 
         data.update({"groups": [group1.pk, group2.pk]})
-        response = self.client.post(get_url((image.pk,)), data, follow=True)
+        response = self.client.post(get_url((image.get_id(),)), data, follow=True)
         image = Image.objects_including_wip.get(pk=image.pk)
         self.assertTrue(group1 in image.part_of_group_set.all())
         self.assertTrue(group2 in image.part_of_group_set.all())
 
         data.update({"groups": [group2.pk]})
-        response = self.client.post(get_url((image.pk,)), data, follow=True)
+        response = self.client.post(get_url((image.get_id(),)), data, follow=True)
         image = Image.objects_including_wip.get(pk=image.pk)
         self.assertFalse(group1 in image.part_of_group_set.all())
         self.assertTrue(group2 in image.part_of_group_set.all())
 
         data.update({"groups": []})
-        response = self.client.post(get_url((image.pk,)), data, follow=True)
+        response = self.client.post(get_url((image.get_id(),)), data, follow=True)
         image = Image.objects_including_wip.get(pk=image.pk)
         self.assertFalse(group1 in image.part_of_group_set.all())
         self.assertFalse(group2 in image.part_of_group_set.all())
@@ -931,23 +1135,23 @@ class ImageTest(TestCase):
         group3.delete()
 
         # Invalid form
-        response = self.client.post(get_url((image.pk,)), {})
+        response = self.client.post(get_url((image.get_id(),)), {})
         self.assertContains(response, "This field is required");
         self.client.logout()
 
         # Anonymous GET
-        response = self.client.get(get_url((image.pk,)))
+        response = self.client.get(get_url((image.get_id(),)))
         self.assertRedirects(
             response,
-            '/accounts/login/?next=' + get_url((image.pk,)),
+            '/accounts/login/?next=' + get_url((image.get_id(),)),
             status_code=302,
             target_status_code=200)
 
         # Anonymous POST
-        response = self.client.post(get_url((image.pk,)), post_data(image), follow=True)
+        response = self.client.post(get_url((image.get_id(),)), post_data(image), follow=True)
         self.assertRedirects(
             response,
-            '/accounts/login/?next=' + get_url((image.pk,)),
+            '/accounts/login/?next=' + get_url((image.get_id(),)),
             status_code=302,
             target_status_code=200)
 
@@ -957,7 +1161,7 @@ class ImageTest(TestCase):
     def test_image_edit_watermark_view(self, retrieve_primary_thumbnails):
         def post_data(image):
             return {
-                'image_id': image.pk,
+                'image_id': image.get_id(),
                 'watermark': True,
                 'watermark_text': "Watermark test",
                 'watermark_position': 0,
@@ -975,12 +1179,12 @@ class ImageTest(TestCase):
         self._do_upload('astrobin/fixtures/test.jpg')
         image = self._get_last_image()
         image.title = "Test title"
-        image.save()
+        image.save(keep_deleted=True)
         self.client.logout()
 
         # GET
         self.client.login(username='test2', password='password')
-        response = self.client.get(get_url((image.pk,)))
+        response = self.client.get(get_url((image.get_id(),)))
         self.assertEqual(response.status_code, 403)
 
         # POST
@@ -993,7 +1197,7 @@ class ImageTest(TestCase):
 
         # GET
         self.client.login(username='test', password='password')
-        response = self.client.get(get_url((image.pk,)))
+        response = self.client.get(get_url((image.get_id(),)))
         self.assertEqual(response.status_code, 200)
 
         # POST
@@ -1003,7 +1207,7 @@ class ImageTest(TestCase):
             follow=True)
         self.assertRedirects(
             response,
-            reverse('image_detail', kwargs={'id': image.pk}),
+            reverse('image_detail', kwargs={'id': image.get_id()}),
             status_code=302,
             target_status_code=200)
         image = Image.objects.get(pk=image.pk)
@@ -1018,17 +1222,17 @@ class ImageTest(TestCase):
         self.assertEqual(response.status_code, 404)
 
         # Invalid form
-        response = self.client.post(post_url(), {'image_id': image.pk})
+        response = self.client.post(post_url(), {'image_id': image.get_id()})
         self.assertEqual(response.status_code, 200)
         self._assert_message(response, "error unread", "errors processing the form")
         self.client.logout()
 
         # Anonymous GET
-        response = self.client.get(get_url((image.pk,)))
+        response = self.client.get(get_url((image.get_id(),)))
         self.assertRedirects(
             response,
             '/accounts/login/?next=' +
-            get_url((image.pk,)),
+            get_url((image.get_id(),)),
             status_code=302,
             target_status_code=200)
 
@@ -1049,7 +1253,7 @@ class ImageTest(TestCase):
     def test_image_edit_gear_view(self, retrieve_primary_thumbnails):
         def post_data(image):
             return {
-                'image_id': image.pk,
+                'image_id': image.get_id(),
                 'imaging_telescopes': ','.join(["%d" % x.pk for x in self.imaging_telescopes]),
                 'guiding_telescopes': ','.join(["%d" % x.pk for x in self.guiding_telescopes]),
                 'mounts': ','.join(["%d" % x.pk for x in self.mounts]),
@@ -1068,17 +1272,17 @@ class ImageTest(TestCase):
         self._do_upload('astrobin/fixtures/test.jpg')
         image = self._get_last_image()
         image.title = "Test title"
-        image.save()
+        image.save(keep_deleted=True)
         self.client.logout()
 
         # GET
         self.client.login(username='test2', password='password')
-        response = self.client.get(get_url((image.pk,)))
+        response = self.client.get(get_url((image.get_id(),)))
         self.assertEqual(response.status_code, 403)
 
         # POST
         response = self.client.post(
-            get_url((image.pk,)),
+            get_url((image.get_id(),)),
             post_data(image),
             follow=True)
         self.assertEqual(response.status_code, 403)
@@ -1086,14 +1290,14 @@ class ImageTest(TestCase):
 
         # GET
         self.client.login(username='test', password='password')
-        response = self.client.get(get_url((image.pk,)))
+        response = self.client.get(get_url((image.get_id(),)))
         self.assertEqual(response.status_code, 200)
 
         # No gear
         self.user.userprofile.telescopes.clear()
         self.user.userprofile.cameras.clear()
 
-        response = self.client.get(get_url((image.pk,)))
+        response = self.client.get(get_url((image.get_id(),)))
         self.assertContains(response, "Can't see anything here?")
 
         self.user.userprofile.telescopes = self.imaging_telescopes + self.guiding_telescopes
@@ -1103,12 +1307,12 @@ class ImageTest(TestCase):
         self._do_upload('astrobin/fixtures/test.jpg')
         other_1 = self._get_last_image();
         other_1.title = "Other 1";
-        other_1.save()
+        other_1.save(keep_deleted=True)
         self._do_upload('astrobin/fixtures/test.jpg', wip=True);
         other_2 = self._get_last_image();
         other_2.title = "Other 2";
-        other_2.save()
-        response = self.client.get(get_url((image.pk,)))
+        other_2.save(keep_deleted=True)
+        response = self.client.get(get_url((image.get_id(),)))
         other_images = Image.objects_including_wip \
             .filter(user=self.user) \
             .exclude(pk=image.pk)
@@ -1122,7 +1326,7 @@ class ImageTest(TestCase):
 
         # POST
         response = self.client.post(
-            get_url((image.pk,)),
+            get_url((image.get_id(),)),
             post_data(image),
             follow=True)
         self.assertEqual(response.status_code, 200)
@@ -1139,27 +1343,27 @@ class ImageTest(TestCase):
         self.assertEqual(list(image.accessories.all()), self.accessories)
 
         # No data
-        response = self.client.post(get_url((image.pk,)), {}, follow=True)
-        self.assertRedirects(response, reverse('image_detail', args=(image.pk,)))
+        response = self.client.post(get_url((image.get_id(),)), {}, follow=True)
+        self.assertRedirects(response, reverse('image_detail', args=(image.get_id(),)))
         self.client.logout()
 
         # Anonymous GET
-        response = self.client.get(get_url((image.pk,)))
+        response = self.client.get(get_url((image.get_id(),)))
         self.assertRedirects(
             response,
             '/accounts/login/?next=' +
-            get_url((image.pk,)),
+            get_url((image.get_id(),)),
             status_code=302,
             target_status_code=200)
 
         # Anonymous POST
         response = self.client.post(
-            get_url((image.pk,)),
+            get_url((image.get_id(),)),
             post_data(image),
             follow=True)
         self.assertRedirects(
             response,
-            '/accounts/login/?next=' + get_url((image.pk,)),
+            '/accounts/login/?next=' + get_url((image.get_id(),)),
             status_code=302,
             target_status_code=200)
 
@@ -1171,7 +1375,7 @@ class ImageTest(TestCase):
 
         def post_data_deep_sky_simple(image):
             return {
-                'image_id': image.pk,
+                'image_id': image.get_id(),
                 'edit_type': 'deep_sky',
                 'advanced': 'false',
                 'date': today,
@@ -1183,7 +1387,7 @@ class ImageTest(TestCase):
             return {
                 'deepsky_acquisition_set-TOTAL_FORMS': 1,
                 'deepsky_acquisition_set-INITIAL_FORMS': 0,
-                'image_id': image.pk,
+                'image_id': image.get_id(),
                 'edit_type': 'deep_sky',
                 'advanced': 'true',
                 'deepsky_acquisition_set-0-date': today,
@@ -1205,7 +1409,7 @@ class ImageTest(TestCase):
 
         def post_data_solar_system(image):
             return {
-                'image_id': image.pk,
+                'image_id': image.get_id(),
                 'edit_type': 'solar_system',
                 'date': today,
                 'frames': 1000,
@@ -1229,12 +1433,12 @@ class ImageTest(TestCase):
         self._do_upload('astrobin/fixtures/test.jpg')
         image = self._get_last_image()
         image.title = "Test title"
-        image.save()
+        image.save(keep_deleted=True)
         self.client.logout()
 
         # GET with wrong user
         self.client.login(username='test2', password='password')
-        response = self.client.get(get_url((image.pk,)))
+        response = self.client.get(get_url((image.get_id(),)))
         self.assertEqual(response.status_code, 403)
 
         # POST with wrong user
@@ -1246,30 +1450,30 @@ class ImageTest(TestCase):
 
         # Reset with wrong user
         response = self.client.get(
-            reverse('image_edit_acquisition_reset', args=(image.pk,)))
+            reverse('image_edit_acquisition_reset', args=(image.get_id(),)))
         self.assertEqual(response.status_code, 403)
         self.client.logout()
 
         # GET
         self.client.login(username='test', password='password')
-        response = self.client.get(get_url((image.pk,)))
+        response = self.client.get(get_url((image.get_id(),)))
         self.assertEqual(response.status_code, 200)
 
         # GET with existing DSA
         dsa, created = DeepSky_Acquisition.objects.get_or_create(
             image=image,
             date=today)
-        response = self.client.get(get_url((image.pk,)))
+        response = self.client.get(get_url((image.get_id(),)))
         self.assertEqual(response.status_code, 200)
 
         # GET with existing DSA in advanced mode
         dsa.advanced = True
         dsa.save()
-        response = self.client.get(get_url((image.pk,)))
+        response = self.client.get(get_url((image.get_id(),)))
         self.assertEqual(response.status_code, 200)
 
         # Test the add_more argument for the formset
-        response = self.client.get(get_url((image.pk,)) + "?add_more")
+        response = self.client.get(get_url((image.get_id(),)) + "?add_more")
         self.assertEqual(response.status_code, 200)
         dsa.delete()
 
@@ -1277,17 +1481,17 @@ class ImageTest(TestCase):
         ssa, created = SolarSystem_Acquisition.objects.get_or_create(
             image=image,
             date=today)
-        response = self.client.get(get_url((image.pk,)))
+        response = self.client.get(get_url((image.get_id(),)))
         self.assertEqual(response.status_code, 200)
         ssa.delete()
 
         # GET with edit_type in request.GET
-        response = self.client.get(get_url((image.pk,)) + "?edit_type=deep_sky")
+        response = self.client.get(get_url((image.get_id(),)) + "?edit_type=deep_sky")
         self.assertEqual(response.status_code, 200)
 
         # Reset
         response = self.client.get(
-            reverse('image_edit_acquisition_reset', args=(image.pk,)))
+            reverse('image_edit_acquisition_reset', args=(image.get_id(),)))
         self.assertEqual(response.status_code, 200)
 
         # POST basic deep sky
@@ -1297,7 +1501,7 @@ class ImageTest(TestCase):
             follow=True)
         self.assertRedirects(
             response,
-            reverse('image_detail', kwargs={'id': image.pk}),
+            reverse('image_detail', kwargs={'id': image.get_id()}),
             status_code=302,
             target_status_code=200)
         self.assertEquals(image.acquisition_set.count(), 1)
@@ -1323,7 +1527,7 @@ class ImageTest(TestCase):
             follow=True)
         self.assertRedirects(
             response,
-            reverse('image_detail', kwargs={'id': image.pk}),
+            reverse('image_detail', kwargs={'id': image.get_id()}),
             status_code=302,
             target_status_code=200)
         self.assertEquals(image.acquisition_set.count(), 1)
@@ -1382,7 +1586,7 @@ class ImageTest(TestCase):
             post_url(), post_data_solar_system(image), follow=True)
         self.assertRedirects(
             response,
-            reverse('image_detail', kwargs={'id': image.pk}),
+            reverse('image_detail', kwargs={'id': image.get_id()}),
             status_code=302,
             target_status_code=200)
         self.assertEquals(image.acquisition_set.count(), 1)
@@ -1406,7 +1610,7 @@ class ImageTest(TestCase):
     def test_image_edit_license_view(self, retrieve_primary_thumbnails):
         def post_data(image):
             return {
-                'image_id': image.pk,
+                'image_id': image.get_id(),
                 'license': 1,
             }
 
@@ -1420,12 +1624,12 @@ class ImageTest(TestCase):
         self._do_upload('astrobin/fixtures/test.jpg')
         image = self._get_last_image()
         image.title = "Test title"
-        image.save()
+        image.save(keep_deleted=True)
         self.client.logout()
 
         # GET with wrong user
         self.client.login(username='test2', password='password')
-        response = self.client.get(get_url((image.pk,)))
+        response = self.client.get(get_url((image.get_id(),)))
         self.assertEqual(response.status_code, 403)
 
         # POST with wrong user
@@ -1435,7 +1639,7 @@ class ImageTest(TestCase):
 
         # GET
         self.client.login(username='test', password='password')
-        response = self.client.get(get_url((image.pk,)))
+        response = self.client.get(get_url((image.get_id(),)))
         self.assertEqual(response.status_code, 200)
 
         # POST with missing image_id
@@ -1453,7 +1657,7 @@ class ImageTest(TestCase):
         response = self.client.post(post_url(), post_data(image), follow=True)
         self.assertRedirects(
             response,
-            reverse('image_detail', kwargs={'id': image.pk}),
+            reverse('image_detail', kwargs={'id': image.get_id()}),
             status_code=302,
             target_status_code=200)
         self._assert_message(response, "success unread", "Form saved")
@@ -1476,7 +1680,7 @@ class ImageTest(TestCase):
         self._do_upload('astrobin/fixtures/test.jpg')
         image = self._get_last_image()
         image.title = "Test title"
-        image.save()
+        image.save(keep_deleted=True)
         self._do_upload_revision(image, 'astrobin/fixtures/test.jpg', "Test revision description")
         revision = self._get_last_image_revision()
         self.client.logout()
@@ -1506,7 +1710,7 @@ class ImageTest(TestCase):
         response = self.client.post(get_url((revision.pk,)), post_data(), follow=True)
         self.assertRedirects(
             response,
-            reverse('image_detail', kwargs={'id': image.pk, 'r': revision.label}),
+            reverse('image_detail', kwargs={'id': image.get_id(), 'r': revision.label}),
             status_code=302,
             target_status_code=200)
         self._assert_message(response, "success unread", "Form saved")
@@ -1526,24 +1730,24 @@ class ImageTest(TestCase):
         self.client.logout()
 
         # Try with anonymous user
-        response = self.client.post(post_url((image.pk,)))
+        response = self.client.post(post_url((image.get_id(),)))
         self.assertRedirects(
             response,
-            '/accounts/login/?next=' + post_url((image.pk,)),
+            '/accounts/login/?next=' + post_url((image.get_id(),)),
             status_code=302,
             target_status_code=200)
 
         # POST with wrong user
         self.client.login(username='test2', password='password')
-        response = self.client.post(post_url((image.pk,)))
+        response = self.client.post(post_url((image.get_id(),)))
         self.assertEqual(response.status_code, 403)
         self.client.logout()
 
         # Test deleting WIP image
         self.client.login(username='test', password='password')
         image.is_wip = True
-        image.save()
-        response = self.client.post(post_url((image.pk,)))
+        image.save(keep_deleted=True)
+        response = self.client.post(post_url((image.get_id(),)))
         self.assertRedirects(
             response,
             reverse('user_page', kwargs={'username': image.user.username}),
@@ -1554,7 +1758,7 @@ class ImageTest(TestCase):
         # Test for success
         self._do_upload('astrobin/fixtures/test.jpg')
         image = self._get_last_image()
-        response = self.client.post(post_url((image.pk,)))
+        response = self.client.post(post_url((image.get_id(),)))
         self.assertRedirects(
             response,
             reverse('user_page', kwargs={'username': image.user.username}),
@@ -1594,7 +1798,7 @@ class ImageTest(TestCase):
         response = self.client.post(post_url((revision.pk,)))
         self.assertRedirects(
             response,
-            reverse('image_detail', kwargs={'id': image.pk}),
+            reverse('image_detail', kwargs={'id': image.get_id()}),
             status_code=302,
             target_status_code=200)
         self.assertEquals(ImageRevision.objects.filter(pk=revision.pk).count(), 0)
@@ -1615,13 +1819,13 @@ class ImageTest(TestCase):
 
         # POST with wrong user
         self.client.login(username='test2', password='password')
-        response = self.client.post(post_url((image.pk,)))
+        response = self.client.post(post_url((image.get_id(),)))
         self.assertEqual(response.status_code, 403)
         self.client.logout()
 
         # Test when there are no revisions
         self.client.login(username='test', password='password')
-        response = self.client.post(post_url((image.pk,)))
+        response = self.client.post(post_url((image.get_id(),)))
         self.assertRedirects(
             response,
             reverse('user_page', kwargs={'username': image.user.username}),
@@ -1634,10 +1838,10 @@ class ImageTest(TestCase):
         image = self._get_last_image()
         self._do_upload_revision(image, 'astrobin/fixtures/test.jpg')
         revision = self._get_last_image_revision()
-        response = self.client.post(post_url((image.pk,)))
+        response = self.client.post(post_url((image.get_id(),)))
         self.assertRedirects(
             response,
-            reverse('image_detail', kwargs={'id': image.pk}),
+            reverse('image_detail', kwargs={'id': image.get_id()}),
             status_code=302,
             target_status_code=200)
         self.assertEquals(ImageRevision.objects.filter(image=image).count(), 0)
@@ -1649,15 +1853,15 @@ class ImageTest(TestCase):
         self._do_upload_revision(image, 'astrobin/fixtures/test.jpg')
         revision = self._get_last_image_revision()
         image = Image.objects.get(pk=image.pk)
-        image.is_final = True;
-        image.save()
-        revision.is_final = False;
-        revision.save()
+        image.is_final = True
+        image.save(keep_deleted=True)
+        revision.is_final = False
+        revision.save(keep_deleted=True)
 
-        response = self.client.post(post_url((image.pk,)))
+        response = self.client.post(post_url((image.get_id(),)))
         self.assertRedirects(
             response,
-            reverse('image_detail', kwargs={'id': image.pk}),
+            reverse('image_detail', kwargs={'id': image.get_id()}),
             status_code=302,
             target_status_code=200)
         self.assertEquals(ImageRevision.objects.filter(image=image).count(), 0)
@@ -1691,13 +1895,13 @@ class ImageTest(TestCase):
         self.assertEqual(response.status_code, 200)
 
         # GET with wrong user
-        response = self.client.post(post_url((public_image.pk,)))
+        response = self.client.post(post_url((public_image.get_id(),)))
         self.assertEqual(response.status_code, 403)
         self.client.logout()
 
         # Test public image
         self.client.login(username='test', password='password')
-        response = self.client.post(post_url((public_image.pk,)))
+        response = self.client.post(post_url((public_image.get_id(),)))
         image = Image.objects.get(pk=public_image.pk)
         self.assertEquals(image.is_wip, False)
         self.assertEquals(len(get_unseen_notifications(self.user2)), 0)
@@ -1705,7 +1909,7 @@ class ImageTest(TestCase):
         # Test WIP image
         self.assertIsNone(wip_image.published)
         self.assertTrue(wip_image.is_wip)
-        response = self.client.post(post_url((wip_image.pk,)))
+        response = self.client.post(post_url((wip_image.get_id(),)))
         wip_image = Image.objects.get(pk=wip_image.pk)
         self.assertFalse(wip_image.is_wip)
         self.assertIsNotNone(wip_image.published)
@@ -1715,8 +1919,8 @@ class ImageTest(TestCase):
 
         # Test that previously published images don't trigger a notification
         wip_image.is_wip = True
-        wip_image.save()
-        response = self.client.post(post_url((wip_image.pk,)))
+        wip_image.save(keep_deleted=True)
+        response = self.client.post(post_url((wip_image.get_id(),)))
         wip_image = Image.objects.get(pk=wip_image.pk)
         self.assertFalse(wip_image.is_wip)
         self.assertIsNotNone(wip_image.published)
@@ -1729,16 +1933,16 @@ class ImageTest(TestCase):
         image = self._get_last_image()
         self.assertTrue(image.is_wip)
         self.assertIsNone(image.published)
-        response = self.client.post(post_url((image.pk,)))
+        response = self.client.post(post_url((image.get_id(),)))
         image = Image.objects.get(pk=image.pk)
         self.assertIsNotNone(image.published)
 
         # The `published` field does not get updated the second time we make
         # this image public.
         published = image.published
-        image.is_wip = True;
-        image.save()
-        response = self.client.post(post_url((image.pk,)))
+        image.is_wip = True
+        image.save(keep_deleted=True)
+        response = self.client.post(post_url((image.get_id(),)))
         image = Image.objects.get(pk=image.pk)
         self.assertEqual(published, image.published)
 
@@ -1759,18 +1963,18 @@ class ImageTest(TestCase):
         # GET with wrong user
         self.client.logout()
         self.client.login(username='test2', password='password')
-        response = self.client.post(post_url((image.pk,)))
+        response = self.client.post(post_url((image.get_id(),)))
         self.assertEqual(response.status_code, 403)
         self.client.logout()
         self.client.login(username='test', password='password')
 
         # Test when image was not WIP
-        response = self.client.post(post_url((image.pk,)))
+        response = self.client.post(post_url((image.get_id(),)))
         image = Image.objects_including_wip.get(pk=image.pk)
         self.assertEquals(image.is_wip, True)
 
         # Test when image was WIP
-        response = self.client.post(post_url((image.pk,)))
+        response = self.client.post(post_url((image.get_id(),)))
         image = Image.objects_including_wip.get(pk=image.pk)
         self.assertEquals(image.is_wip, True)
 
@@ -1786,7 +1990,7 @@ class ImageTest(TestCase):
         self._do_upload('astrobin/fixtures/test.jpg')
         image = self._get_last_image()
         image.title = "TEST IMAGE"
-        image.save()
+        image.save(keep_deleted=True)
 
         # As the test user does not have a high enough AstroBin Index, the
         # iamge should be in the moderation queue.
@@ -1812,7 +2016,7 @@ class ImageTest(TestCase):
         self._do_upload('astrobin/fixtures/test.jpg')
         image = self._get_last_image()
         image.title = "TEST IMAGE"
-        image.save()
+        image.save(keep_deleted=True)
 
         updated = image.updated
 
@@ -1839,7 +2043,7 @@ class ImageTest(TestCase):
         self._do_upload('astrobin/fixtures/test.jpg')
         image = self._get_last_image()
         image.title = "TEST IMAGE"
-        image.save()
+        image.save(keep_deleted=True)
 
         updated = image.updated
 
@@ -1847,7 +2051,7 @@ class ImageTest(TestCase):
         response = self.client.post(
             reverse('image_edit_save_acquisition'),
             {
-                'image_id': image.pk,
+                'image_id': image.get_id(),
                 'edit_type': 'deep_sky',
                 'advanced': 'false',
                 'date': today,
@@ -1868,7 +2072,7 @@ class ImageTest(TestCase):
         self._do_upload('astrobin/fixtures/test.jpg')
         image = self._get_last_image()
         image.title = "TEST IMAGE"
-        image.save()
+        image.save(keep_deleted=True)
 
         updated = image.updated
 

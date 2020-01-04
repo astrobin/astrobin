@@ -6,8 +6,14 @@ from subscription.models import UserSubscription
 SUBSCRIPTION_NAMES = (
     'AstroBin Lite',
     'AstroBin Premium',
+
     'AstroBin Lite (autorenew)',
-    'AstroBin Premium (autorenew)'
+    'AstroBin Premium (autorenew)',
+
+    'AstroBin Premium 20% discount',
+    'AstroBin Premium 30% discount',
+    'AstroBin Premium 40% discount',
+    'AstroBin Premium 50% discount',
 )
 
 
@@ -20,7 +26,11 @@ def _compareNames(a, b):
         "AstroBin Lite (autorenew)": 0,
         "AstroBin Lite": 1,
         "AstroBin Premium (autorenew)": 2,
-        "AstroBin Premium": 3
+        "AstroBin Premium": 3,
+        'AstroBin Premium 20% discount': 4,
+        'AstroBin Premium 30% discount': 5,
+        'AstroBin Premium 40% discount': 6,
+        'AstroBin Premium 50% discount': 7,
     }
 
     return key[b.subscription.name] - key[a.subscription.name]
