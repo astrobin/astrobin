@@ -56,7 +56,7 @@
         {% if READONLY_MODE %}
             {% include 'readonly_mode.html' %}
         {% else %}
-            <form class="reply-form form-vertical" method="POST" action="{% url 'message_reply' thread.pk %}">{% csrf_token %}
+            <form class="reply-form form-vertical" method="POST" action="{% url 'message_reply' thread.pk %}" novalidate>{% csrf_token %}
                 <a class="anchor" name="reply"></a>
                 {{ form|as_bootstrap }}
                 <div class="form-actions">
