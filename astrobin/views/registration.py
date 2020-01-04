@@ -48,19 +48,19 @@ def user_created(sender, user, request, **kwargs):
     changed = False
 
     if 'tos' in form.data:
-        profile.accept_tos = form.data['tos']
+        profile.accept_tos = form.data['tos'] == "on"
         changed = True
 
     if 'important_communications' in form.data:
-        profile.receive_important_communications = form.data['important_communications']
+        profile.receive_important_communications = form.data['important_communications'] == "on"
         changed = True
 
     if 'newsletter' in form.data:
-        profile.receive_newsletter = form.data['newsletter']
+        profile.receive_newsletter = form.data['newsletter'] == "on"
         changed = True
 
     if 'marketing_material' in form.data:
-        profile.receive_marketing_and_commercial_material = form.data['marketing_material']
+        profile.receive_marketing_and_commercial_material = form.data['marketing_material'] == "on"
         changed = True
 
     if changed:
