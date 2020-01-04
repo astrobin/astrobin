@@ -1,4 +1,10 @@
 2020-01-04 Salvatore Iovene <salvatore@iovene.com>
+ * v1.49.1
+ * (subscriptions) Send notification 1 day after expiration
+ * (general) Fix usage of context in object_list, so that it retains the request object
+ * (deps) Upgrade cookie-law to 2.0.2
+
+2020-01-04 Salvatore Iovene <salvatore@iovene.com>
  * v1.49.0
  * (infra) Upgrade Django to 1.11.27
 
