@@ -33,6 +33,7 @@ from .merge_retailed_gear_form import MergeRetailedGearForm
 from .moderator_gear_fix_form import ModeratorGearFixForm
 from .mount_edit_form import MountEditForm
 from .mount_edit_new_form import MountEditNewForm
+from .profile_edit_gear_form import UserProfileEditGearForm
 from .private_message_form import PrivateMessageForm
 from .profile_edit_commercial_form import UserProfileEditCommercialForm
 from .profile_edit_gear_form import UserProfileEditGearForm

@@ -3,7 +3,7 @@ from braces.views import (
     JSONResponseMixin,
     LoginRequiredMixin)
 from django.http import HttpResponseForbidden
-from django.shortcuts import get_object_or_404, render_to_response
+from django.shortcuts import get_object_or_404, render
 from django.template import RequestContext
 from django.utils import formats
 from django.utils.translation import ugettext
@@ -238,13 +238,11 @@ class IotdSubmittersForImageAjaxView(
             image = get_object_or_404(Image, pk=kwargs['pk'])
             submitters = [x.submitter for x in IotdSubmission.objects.filter(image=image)]
 
-            return render_to_response(
-                'astrobin_apps_users/inclusion_tags/user_list.html',
-                {
+            return render(request, 'astrobin_apps_users/inclusion_tags/user_list.html', {
                     'view': 'table',
                     'layout': 'compact',
                     'user_list': submitters,
-                }, context_instance=RequestContext(request))
+                })
 
         return HttpResponseForbidden()
 
@@ -258,12 +256,10 @@ class IotdReviewersForImageAjaxView(
             image = get_object_or_404(Image, pk=kwargs['pk'])
             reviewers = [x.reviewer for x in IotdVote.objects.filter(image=image)]
 
-            return render_to_response(
-                'astrobin_apps_users/inclusion_tags/user_list.html',
-                {
+            return render(request, 'astrobin_apps_users/inclusion_tags/user_list.html', {
                     'view': 'table',
                     'layout': 'compact',
                     'user_list': reviewers,
-                }, context_instance=RequestContext(request))
+                })
 
         return HttpResponseForbidden()
