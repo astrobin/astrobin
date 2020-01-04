@@ -1,12 +1,13 @@
-# Django
+import django
 from django.conf import settings
-from django.conf.urls import url, include, patterns
+from django.conf.urls import url, include
 from django.conf.urls.static import static
 from django.contrib import admin
 from django.contrib.auth import views as auth_views
 from django.views.decorators.cache import cache_page
-# Third party
 from django.views.i18n import json_catalog
+from django.views.static import serve
+from rest_framework.authtoken.views import obtain_auth_token
 from tastypie.api import Api
 from threaded_messages.views import batch_update as messages_batch_update
 from threaded_messages.views import compose as messages_compose
@@ -16,7 +17,6 @@ from threaded_messages.views import message_ajax_reply as messages_message_ajax_
 from threaded_messages.views import recipient_search as messages_recipient_search
 from threaded_messages.views import view as messages_view
 
-# AstroBin
 from astrobin import lookups
 from astrobin.api import (
     TopPickResource,
@@ -215,7 +215,7 @@ urlpatterns = [
     url(r'^api/request-key/$', api_views.AppApiKeyRequestView.as_view(), name='app_api_key_request'),
     url(r'^api/request-key/complete/$', api_views.AppApiKeyRequestCompleteView.as_view(),
         name='app_api_key_request_complete'),
-    url(r'^api/v2/api-auth-token/', 'rest_framework.authtoken.views.obtain_auth_token'),
+    url(r'^api/v2/api-auth-token/', obtain_auth_token),
     url(r'^api/v2/api-auth/', include('rest_framework.urls', namespace='rest_framework')),
     url(r'^api/v2/common/', include('common.api_urls')),
     url(r'^api/v2/nestedcomments/', include('nested_comments.api_urls')),
@@ -508,13 +508,17 @@ urlpatterns += [url(r'^silk/', include('silk.urls', namespace='silk'))]
 
 if (settings.DEBUG or settings.TESTING) and not settings.AWS_S3_ENABLED:
     urlpatterns += static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
-    urlpatterns += patterns('', (r'^media/(?P<path>.*)$', 'django.views.static.serve',
-                                 {'document_root': settings.MEDIA_ROOT, 'show_indexes': True}))
+    urlpatterns += [url(r'^media/(?P<path>.*)$', serve, {
+        'document_root': settings.MEDIA_ROOT,
+        'show_indexes': True
+    })]
 
 if (settings.DEBUG or settings.TESTING) and settings.LOCAL_STATIC_STORAGE:
     urlpatterns += static(settings.STATIC_URL, document_root=settings.STATIC_ROOT)
-    urlpatterns += patterns('', (r'^static/(?P<path>.*)$', 'django.views.static.serve',
-                                 {'document_root': settings.STATIC_ROOT, 'show_indexes': True}))
+    urlpatterns += [url(r'^static/(?P<path>.*)$', serve, {
+        'document_root': settings.STATIC_ROOT,
+        'show_indexes': True
+    })]
 
 if settings.DEBUG or settings.TESTING:
     import debug_toolbar
