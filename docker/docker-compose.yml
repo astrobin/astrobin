@@ -25,6 +25,8 @@ services:
       - POSTGRES_PASSWORD=astrobin
     volumes:
       - postgres-data:/var/lib/postgresql/data
+    ports:
+      - "5432:5432"
 
 
   rabbitmq:
