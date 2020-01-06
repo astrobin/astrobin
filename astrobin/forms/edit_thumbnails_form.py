@@ -1,7 +1,7 @@
 from django import forms
-from image_cropping import ImageCropWidget
 
 from astrobin.models import Image
+from astrobin.widgets import HiddenImageCropWidget
 
 
 class ImageEditThumbnailsForm(forms.ModelForm):
@@ -11,5 +11,5 @@ class ImageEditThumbnailsForm(forms.ModelForm):
         model = Image
         fields = ('image_file', 'square_cropping')
         widgets = {
-            'image_file': ImageCropWidget
+            'image_file': HiddenImageCropWidget
         }
