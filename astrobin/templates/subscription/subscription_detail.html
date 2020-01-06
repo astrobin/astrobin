@@ -98,7 +98,7 @@
         {% if usersubscription and usersubscription.valid %}
             <div class="alert alert-info">
                 <em>
-                    {% blocktrans %}If you would like to renew your subscription, please visit this page again after yourcurrent subscription's expiration date:{% endblocktrans %}
+                    {% blocktrans %}If you would like to renew your subscription, please visit this page again after your current subscription's expiration date:{% endblocktrans %}
                     <strong>{{ usersubscription.expires|date:"SHORT_DATE_FORMAT" }}</strong>.
                 </em>
             </div>
