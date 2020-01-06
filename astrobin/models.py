@@ -1177,8 +1177,11 @@ class Image(HasSolutionMixin, SafeDeleteModel):
                 options['box'] = self.square_cropping
                 options['crop'] = True
             elif revision_label == 'final':
-                revision = ImageRevision.objects.get(image=self, label=self.get_final_revision_label())
-                options['box'] = revision.square_cropping
+                try:
+                    revision = ImageRevision.objects.get(image=self, label=self.get_final_revision_label())
+                    options['box'] = revision.square_cropping
+                except ImageRevision.DoesNotExist:
+                    options['box'] = self.square_cropping
                 options['crop'] = True
             else:
                 revision = ImageRevision.objects.get(image=self, label=revision_label)
