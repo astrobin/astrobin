@@ -69,6 +69,7 @@ INSTALLED_APPS = [
     'template_timings_panel',
     'cookielaw',
     'corsheaders',
+    'image_cropping',
 
     'astrobin.apps.AstroBinAppConfig',
 ] + ASTROBIN_APPS

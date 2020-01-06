@@ -18,6 +18,13 @@
         </a>
         <ul class="dropdown-menu">
             <li>
+                <a href="{% url 'image_edit_thumbnails' image.get_id %}">
+                    <i class="icon-check-empty"></i>
+                    {% trans "Thumbnails" %}
+                </a>
+            </li>
+
+            <li>
                 <a href="{% url 'image_edit_watermark' image.get_id %}">
                     <i class="icon-tint"></i>
                     {% trans "Watermark" %}

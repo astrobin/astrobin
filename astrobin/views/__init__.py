@@ -509,7 +509,7 @@ def image_upload_process(request):
     from astrobin.tasks import retrieve_primary_thumbnails
     retrieve_primary_thumbnails.delay(image.pk, {'revision_label': '0'})
 
-    return HttpResponseRedirect(reverse('image_edit_watermark', kwargs={'id': image.get_id()}))
+    return HttpResponseRedirect(reverse('image_edit_thumbnails', kwargs={'id': image.get_id()}))
 
 
 @login_required

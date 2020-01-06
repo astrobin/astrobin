@@ -485,6 +485,7 @@ urlpatterns = [
     url(r'^edit/save/license/$', image_edit_save_license, name='image_edit_save_license'),
     url(r'^edit/save/watermark/$', image_edit_save_watermark, name='image_edit_save_watermark'),
     url(r'^edit/watermark/(?P<id>\w+)/$', image_edit_watermark, name='image_edit_watermark'),
+    url(r'^edit/thumbnails/(?P<id>\w+)/$', image_views.ImageEditThumbnailsView.as_view(), name='image_edit_thumbnails'),
     url(r'^edit/revision/(?P<id>\w+)/$', image_views.ImageEditRevisionView.as_view(), name='image_edit_revision'),
     url(r'^promote/(?P<id>\w+)/$', image_views.ImagePromoteView.as_view(), name='image_promote'),
     url(r'^upload/$', image_upload, name='image_upload'),

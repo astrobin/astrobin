@@ -1,5 +1,6 @@
 from django import forms
 from django.utils.translation import ugettext_lazy as _
+from image_cropping import ImageCropWidget
 
 from astrobin.models import Image, ImageRevision
 
@@ -34,7 +35,8 @@ class ImageEditRevisionForm(forms.ModelForm):
 
     class Meta:
         model = ImageRevision
-        fields = ('description', 'mouse_hover_image')
+        fields = ('description', 'mouse_hover_image', 'image_file', 'square_cropping')
         widgets = {
             'description': forms.Textarea(attrs={'rows': 4}),
+            'image_file': ImageCropWidget
         }
