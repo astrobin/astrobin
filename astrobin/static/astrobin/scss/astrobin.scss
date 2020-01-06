@@ -5830,3 +5830,14 @@ table.api-examples {
   }
 }
 
+form.edit-thumbnails {
+  .control-group:first-of-type {
+    display: none;
+  }
+}
+
+form.edit-revision {
+  .control-group:nth-of-type(3) {
+    display: none;
+  }
+}

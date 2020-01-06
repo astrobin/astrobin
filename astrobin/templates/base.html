@@ -35,15 +35,16 @@
         {% include "base/ie6.html" %}
 
         {% block extra_css %}{% endblock %}
-        {% block extra_head %}{% endblock %}
-
-        {% comment %}Alternative spelling.{% endcomment %}
-        {% block extrahead %}{% endblock %}
 
         {% include "base/noscript.html" %}
         {% include "base/ga.html" %}
 
         <script src="//ajax.googleapis.com/ajax/libs/jquery/1.8.3/jquery.min.js"></script>
+
+        {% block extra_head %}{% endblock %}
+
+        {% comment %}Alternative spelling.{% endcomment %}
+        {% block extrahead %}{% endblock %}
     </head>
 
     {% show_adsense_ads as show_adsense_ads %}

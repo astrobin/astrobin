@@ -202,7 +202,7 @@ class ImageTest(TestCase):
         image = self._get_last_image()
         self.assertRedirects(
             response,
-            reverse('image_edit_watermark', kwargs={'id': image.get_id()}),
+            reverse('image_edit_thumbnails', kwargs={'id': image.get_id()}),
             status_code=302,
             target_status_code=200)
         self._assert_message(response, "warning unread", "Indexed PNG")
@@ -220,12 +220,28 @@ class ImageTest(TestCase):
         image = self._get_last_image()
         self.assertRedirects(
             response,
-            reverse('image_edit_watermark', kwargs={'id': image.get_id()}),
+            reverse('image_edit_thumbnails', kwargs={'id': image.get_id()}),
             status_code=302,
             target_status_code=200)
 
         self.assertEqual(image.title, u"")
         self.assertTrue((image.published - image.uploaded).total_seconds() < 1)
+
+        # Test thumbnails
+        response = self.client.post(
+            reverse('image_edit_thumbnails', kwargs={'id': image.get_id()}),
+            {
+                'image_id': image.get_id(),
+                'square_cropping': '100, 0, 100, 0',
+                'submit_watermark': True,
+            },
+            follow=True)
+        image = Image.objects.get(pk=image.pk)
+        self.assertRedirects(
+            response,
+            reverse('image_edit_watermark', kwargs={'id': image.get_id()}),
+            status_code=302,
+            target_status_code=200)
 
         # Test watermark
         response = self.client.post(
@@ -239,12 +255,12 @@ class ImageTest(TestCase):
                 'watermark_opacity': 100
             },
             follow=True)
-        image = Image.objects.get(pk=image.pk)
         self.assertRedirects(
             response,
             reverse('image_edit_basic', kwargs={'id': image.get_id()}),
             status_code=302,
             target_status_code=200)
+        image = Image.objects.get(pk=image.pk)
         self.assertEqual(image.watermark, True)
         self.assertEqual(image.watermark_text, "Watermark test")
         self.assertEqual(image.watermark_position, 0)
