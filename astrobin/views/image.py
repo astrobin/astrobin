@@ -28,7 +28,6 @@ from django.views.generic import (
     UpdateView,
 )
 from django.views.generic.detail import SingleObjectMixin
-
 from silk.profiling.profiler import silk_profile
 from toggleproperties.models import ToggleProperty
 
@@ -43,7 +42,7 @@ from astrobin.forms import (
     ImagePromoteForm,
     ImageRevisionUploadForm,
     PrivateMessageForm,
-)
+    ImageEditThumbnailsForm)
 from astrobin.models import (
     Collection,
     Image, ImageRevision,
@@ -1083,3 +1082,26 @@ class ImageEditRevisionView(LoginRequiredMixin, UpdateView):
     def form_valid(self, form):
         messages.success(self.request, _("Form saved. Thank you!"))
         return super(ImageEditRevisionView, self).form_valid(form)
+
+    def post(self, request, *args, **kwargs):
+        image = self.get_object()  # type: ImageRevision
+        image.thumbnail_invalidate(delete_remote=False)
+
+        return super(ImageEditRevisionView, self).post(request, *args, **kwargs)
+
+
+class ImageEditThumbnailsView(ImageEditBaseView):
+    form_class = ImageEditThumbnailsForm
+    template_name = 'image/edit/thumbnails.html'
+
+    def get_success_url(self):
+        image = self.get_object()
+        if 'submit_watermark' in self.request.POST:
+            return reverse_lazy('image_edit_watermark', kwargs={'id': image.get_id()})
+        return image.get_absolute_url()
+
+    def post(self, request, *args, **kwargs):
+        image = self.get_object()  # type: Image
+        image.thumbnail_invalidate(delete_remote=False)
+
+        return super(ImageEditThumbnailsView, self).post(request, *args, **kwargs)

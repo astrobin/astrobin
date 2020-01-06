@@ -3,6 +3,13 @@
 
 <div class="subnav subnav-fixed">
     <ul class="nav nav-pills">
+        <li class="{% current request '^/edit(/save)?/thumbnails/' %}">
+            <a href="{% url 'image_edit_thumbnails' image.get_id %}">
+                <i class="icon-check-empty"></i>
+                <span class="hidden-phone">{% trans "Thumbnails" %}</span>
+            </a>
+        </li>
+
         <li class="{% current request '^/edit(/save)?/watermark/' %}">
             <a href="{% url 'image_edit_watermark' image.get_id %}">
                 <i class="icon-tint"></i>

@@ -1,15 +1,13 @@
 import os
 
-from django.conf import settings
-
 from PIL import Image, ImageOps, ImageDraw, ImageEnhance, ImageFont, ImageFilter
 
 
-def rounded_corners(image, rounded = False, **kwargs):
+def rounded_corners(image, rounded=False, **kwargs):
     if rounded:
         mask = Image.open('astrobin/thumbnail-mask.png').convert('L')
         mask = mask.resize(image.size, Image.ANTIALIAS)
-        image = ImageOps.fit(image, mask.size, centering = (0.5, 0.5))
+        image = ImageOps.fit(image, mask.size, centering=(0.5, 0.5))
         image.putalpha(mask)
 
     return image
@@ -174,10 +172,9 @@ def histogram(image, histogram = False, **kwargs):
             elif color == blue:
                 im = Image.composite(blue_layer, im, alpha_mask)
         if x > 255:
-            x=0
+            x = 0
         else:
             x += 1
         c += 1
 
     return im
-
