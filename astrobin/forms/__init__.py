@@ -19,6 +19,7 @@ from .demote_form import ImageDemoteForm
 from .edit_basic_form import ImageEditBasicForm
 from .edit_gear_form import ImageEditGearForm
 from .edit_revision_form import ImageEditRevisionForm
+from .edit_thumbnails_form import ImageEditThumbnailsForm
 from .edit_watermark_form import ImageEditWatermarkForm
 from .filter_edit_form import FilterEditForm
 from .filter_edit_new_form import FilterEditNewForm

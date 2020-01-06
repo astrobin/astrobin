@@ -12,6 +12,8 @@ import uuid
 from datetime import date
 from datetime import datetime
 
+from image_cropping import ImageRatioField
+
 try:
     from hashlib import sha1
 except ImportError:
@@ -879,6 +881,13 @@ class Image(HasSolutionMixin, SafeDeleteModel):
         null=True,
     )
 
+    square_cropping = ImageRatioField(
+        'image_file',
+        '130x130',
+        verbose_name=_("Gallery thumbnail"),
+        help_text=_("Select an area of the image to be used as thumbnail in your gallery.")
+    )
+
     uploaded = models.DateTimeField(editable=False, auto_now_add=True)
     published = models.DateTimeField(editable=False, null=True, blank=True)
     updated = models.DateTimeField(editable=False, auto_now=True, null=True, blank=True)
@@ -1134,7 +1143,7 @@ class Image(HasSolutionMixin, SafeDeleteModel):
         return field
 
     def get_final_revision_label(self):
-        # Avoid hitting the db by potentially exitting early
+        # Avoid hitting the db by potentially exiting early
         if self.is_final:
             return '0'
 
@@ -1161,9 +1170,22 @@ class Image(HasSolutionMixin, SafeDeleteModel):
 
         log.debug("Image %d: requested raw thumbnail: %s / %s" % (self.id, alias, revision_label))
 
-        options = settings.THUMBNAIL_ALIASES[''][alias].copy()
+        options = dict(settings.THUMBNAIL_ALIASES[''][alias].copy(), **thumbnail_settings)
 
-        field = self.get_thumbnail_field(revision_label);
+        if alias in ("gallery", "gallery_inverted", "collection", "thumb"):
+            if revision_label == '0' and self.square_cropping:
+                options['box'] = self.square_cropping
+                options['crop'] = True
+            elif revision_label == 'final':
+                revision = ImageRevision.objects.get(image=self, label=self.get_final_revision_label())
+                options['box'] = revision.square_cropping
+                options['crop'] = True
+            else:
+                revision = ImageRevision.objects.get(image=self, label=revision_label)
+                options['box'] = revision.square_cropping
+                options['crop'] = True
+
+        field = self.get_thumbnail_field(revision_label)
         if not field.name.startswith('images/'):
             field.name = 'images/' + field.name
 
@@ -1251,10 +1273,11 @@ class Image(HasSolutionMixin, SafeDeleteModel):
         app_model = "{0}.{1}".format(
             self._meta.app_label,
             self._meta.object_name).lower()
-        cache_key = 'easy_thumb_alias_cache_%s.%s_%s' % (
+        cache_key = 'easy_thumb_alias_cache_%s.%s_%s_%s' % (
             app_model,
             unicodedata.normalize('NFKD', unicode(field)).encode('ascii', 'ignore'),
-            alias)
+            alias,
+            self.square_cropping)
 
         from hashlib import sha256
         return sha256(cache_key).hexdigest()
@@ -1272,8 +1295,9 @@ class Image(HasSolutionMixin, SafeDeleteModel):
         from astrobin_apps_images.models import ThumbnailGroup
 
         options = thumbnail_settings.copy()
+
         revision_label = options.get('revision_label', 'final')
-        field = self.get_thumbnail_field(revision_label);
+        field = self.get_thumbnail_field(revision_label)
         if not field.name.startswith('images/'):
             field.name = 'images/' + field.name
 
@@ -1491,6 +1515,13 @@ class ImageRevision(HasSolutionMixin, SafeDeleteModel):
         width_field='w',
         null=True,
         max_length=256,
+    )
+
+    square_cropping = ImageRatioField(
+        'image_file',
+        '130x130',
+        verbose_name=_("Gallery thumbnail"),
+        help_text=_("Select an area of the image to be used as thumbnail in your gallery.")
     )
 
     description = models.TextField(
