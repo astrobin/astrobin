@@ -22,6 +22,7 @@ include(
     'components/session.py',
     'components/storage.py',
     'components/templates.py',
+    'components/cloudflare.py',
 
     # Apps settings
     'components/account.py',
