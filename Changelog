@@ -1,3 +1,7 @@
+2020-01-08 Salvatore Iovene <salvatore@iovene.com>
+ * v1.51.0
+ * (infra) Use Cloudflare API to purge cache upon thumbnail regeneration
+
 2020-01-07 Salvatore Iovene <salvatore@iovene.com>
  * v1.50.1
  * (images) Monkey patch getting image crop thumbnails to work with S3
