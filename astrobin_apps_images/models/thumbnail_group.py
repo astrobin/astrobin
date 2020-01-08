@@ -33,6 +33,30 @@ class ThumbnailGroup(models.Model):
     duckduckgo = models.CharField(max_length=512, null=True, blank=True)
     duckduckgo_small = models.CharField(max_length=512, null=True, blank=True)
 
+    def get_all_urls(self):
+        # type: () -> list[basestring]
+
+        return [
+            self.real,
+            self.real_inverted,
+            self.hd,
+            self.hd_anonymized,
+            self.hd_inverted,
+            self.regular,
+            self.real_inverted,
+            self.gallery,
+            self.gallery_inverted,
+            self.collection,
+            self.thumb,
+            self.revision,
+            self.histogram,
+            self.iotd,
+            self.iotd_candidate,
+            self.story,
+            self.duckduckgo,
+            self.duckduckgo_small
+        ]
+
     def __unicode__(self):
         return "Thumbnails for image %s" % self.image.title
 

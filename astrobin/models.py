@@ -14,6 +14,8 @@ from datetime import datetime
 
 from image_cropping import ImageRatioField
 
+from astrobin.services import CloudflareService
+
 try:
     from hashlib import sha1
 except ImportError:
@@ -1427,6 +1429,18 @@ class Image(HasSolutionMixin, SafeDeleteModel):
                     log.debug("Image %d: removed local cache %s" % (self.id, local_filename))
                 except OSError:
                     log.debug("Image %d: locally cached file not found." % self.id)
+
+                # Then we purge the Cloudflare cache
+                try:
+                    thumbnail_group = self.thumbnails.get(revision=revision_label)  # type: ThumbnailGroup
+                    all_urls = [x for x in thumbnail_group.get_all_urls() if x]
+
+                    cloudflare_service = CloudflareService()
+
+                    for url in all_urls:
+                        cloudflare_service.purge_resource(url)
+                except ThumbnailGroup.DoesNotExist:
+                    log.debug("Image %d: thumbnail group missing." % self.id)
 
         # Then we remove the database entries
         try:
