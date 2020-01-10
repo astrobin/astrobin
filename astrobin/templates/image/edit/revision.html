@@ -20,8 +20,14 @@
 {% block content %}
     <h1>{% trans "Edit revision" %}</h1>
 
-    <form class="form-horizontal edit-revision" action="{% url 'image_edit_revision' revision.pk %}" method="post"
-          enctype="multipart/form-data">{% csrf_token %}
+    <form
+            id="edit-revision-form"
+            class="form-horizontal edit-revision edit-thumbnails"
+            action="{% url 'image_edit_revision' revision.pk %}"
+            method="post"
+            enctype="multipart/form-data">
+
+        {% csrf_token %}
         {{ form|as_bootstrap }}
 
         <div class="form-actions">
@@ -30,4 +36,12 @@
                href="{% url 'image_detail' revision.image.get_id %}">{% trans "Back to image" %}</a>
         </div>
     </form>
+{% endblock %}
+
+{% block modals %}
+    {% include "./_processing_thumbnails_modal.html" %}
+{% endblock %}
+
+{% block extra_js %}
+    {% include "./_processing_thumbnails_modal_js.html" %}
 {% endblock %}
