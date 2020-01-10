@@ -1,0 +1,12 @@
+<script type="text/javascript">
+    $(document).ready(function () {
+        var $form = $("form.edit-thumbnails");
+        var $modal = $("#processing-thumbnails-modal");
+
+        $form.find("input[type=submit]").click(function (e) {
+            e.preventDefault();
+            $modal.modal("show");
+            $form.submit();
+        });
+    });
+</script>
