@@ -5841,3 +5841,9 @@ form.edit-revision {
     display: none;
   }
 }
+
+#processing-thumbnails-modal {
+  .loading {
+    margin: 1rem;
+  }
+}

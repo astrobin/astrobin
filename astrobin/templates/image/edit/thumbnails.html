@@ -21,17 +21,27 @@
 {% block content %}
     {% include 'image/edit/menu.html' %}
 
-    <form class="form-horizontal edit-thumbnails" action="" method="post" enctype="multipart/form-data">{% csrf_token %}
+    <form
+            id="edit-thumbnails-form"
+            class="form-horizontal edit-thumbnails"
+            action=""
+            method="post"
+            enctype="multipart/form-data">
+
+        {% csrf_token %}
         {{ form|as_bootstrap }}
 
         <div class="form-actions">
+            {% if not image.title %}
+            <input type="hidden" name="submit_watermark" value="true" />
+            {% endif %}
+
             <input
                     class="btn btn-primary btn-block-mobile"
                     type="submit"
                     {% if image.title %}
                     value="{% trans "Save" %} &rarr;"
                     {% else %}
-                    name="submit_watermark"
                     value="{% trans "Next step: edit watermark" %} &rarr;"
                     {% endif %}
             />
@@ -42,6 +52,15 @@
                 </a>
             {% endif %}
         </div>
+
     </form>
+{% endblock %}
+
+{% block modals %}
+    {% include "./_processing_thumbnails_modal.html" %}
+{% endblock %}
+
+{% block extra_js %}
+    {% include "./_processing_thumbnails_modal_js.html" %}
 {% endblock %}
 

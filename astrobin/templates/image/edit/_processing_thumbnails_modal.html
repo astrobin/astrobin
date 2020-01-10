@@ -1,0 +1,13 @@
+{% load i18n staticfiles %}
+
+<div class="modal hide fade text-center" id="processing-thumbnails-modal">
+    <div class="modal-header">
+        <h3>{% trans "Please wait..." %}</h3>
+    </div>
+    <div class="modal-body">
+        <p>
+            {% trans "AstroBin is processing your thumbnails." %}
+        </p>
+        <img class="loading" src="{% static "astrobin/images/ajax-loader.gif" %}" alt="{% trans "Loading" %}" />
+    </div>
+</div>
