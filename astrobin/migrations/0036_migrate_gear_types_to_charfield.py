@@ -140,7 +140,7 @@ def reverseMigrateFilterValues(apps, schema_editor):
 
 class Migration(migrations.Migration):
     dependencies = [
-        ('astrobin', '0034_add_square_cropping_to_image_revision'),
+        ('astrobin', '0035_add_pixelskies_remote_source'),
     ]
 
     operations = [
