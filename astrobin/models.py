@@ -1871,14 +1871,14 @@ class SolarSystem_Acquisition(Acquisition):
 
     seeing = models.IntegerField(
         verbose_name=_("Seeing"),
-        help_text=_("Your estimation of the seeing, on a scale from 1 to 5."),
+        help_text=_("Your estimation of the seeing, on a scale from 1 to 5. Larger is better."),
         null=True,
         blank=True,
     )
 
     transparency = models.IntegerField(
         verbose_name=_("Transparency"),
-        help_text=_("Your estimation of the transparency, on a scale from 1 to 10."),
+        help_text=_("Your estimation of the transparency, on a scale from 1 to 10. Larger is better."),
         null=True,
         blank=True
     )
