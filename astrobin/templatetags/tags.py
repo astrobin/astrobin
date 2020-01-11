@@ -225,7 +225,7 @@ def gear_type(gear):
 
     if real_gear and gear_type and hasattr(real_gear, 'type') and real_gear.type:
         try:
-            t = TYPES_LOOKUP[gear_type][real_gear.type][1]
+            t = [item for item in TYPES_LOOKUP[gear_type] if item[0] == real_gear.type][0][1]
             return t
         except KeyError:
             pass
