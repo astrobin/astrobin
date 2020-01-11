@@ -771,6 +771,7 @@ class Image(HasSolutionMixin, SafeDeleteModel):
         ("MARIO", "Marathon Remote Imaging Observatory (MaRIO)"),
         ("NMS", "New Mexico Skies"),
         ("OES", "Observatorio El Sauce"),
+        ("PSA", "PixelSkies"),
         ("RLD", "Riverland Dingo Observatory"),
         ("SS", "Sahara Sky"),
         ("SPVO", "San Pedro Valley Observatory"),
