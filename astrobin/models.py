@@ -450,31 +450,32 @@ class GearHardMergeRedirect(models.Model):
 
 class Telescope(Gear):
     TELESCOPE_TYPES = (
-        (0, _("Refractor: achromatic")),
-        (1, _("Refractor: semi-apochromatic")),
-        (2, _("Refractor: apochromatic")),
-        (3, _("Refractor: non-achromatic Galilean")),
-        (4, _("Refractor: non-achromatic Keplerian")),
-        (5, _("Refractor: superachromat")),
+        ("REFR ACHRO", _("Refractor: achromatic")),
+        ("REFR SEMI-APO", _("Refractor: semi-apochromatic")),
+        ("REFR APO", _("Refractor: apochromatic")),
+        ("REFR NON-ACHRO GALILEAN", _("Refractor: non-achromatic Galilean")),
+        ("REFR NON-ACHRO KEPLERIAN", _("Refractor: non-achromatic Keplerian")),
+        ("REFR SUPERACHRO", _("Refractor: superachromat")),
 
-        (6, _("Reflector: Dall-Kirkham")),
-        (7, _("Reflector: Nasmyth")),
-        (8, _("Reflector: Ritchey Chretien")),
-        (9, _("Reflector: Gregorian")),
-        (10, _("Reflector: Herschellian")),
-        (11, _("Reflector: Newtonian")),
+        ("REFL DALL-KIRKHAM", _("Reflector: Dall-Kirkham")),
+        ("REFL NASMYTH", _("Reflector: Nasmyth")),
+        ("REFL RITCHEY CHRETIEN", _("Reflector: Ritchey Chretien")),
+        ("REFL GREGORIAN", _("Reflector: Gregorian")),
+        ("REFL HERSCHELLIAN", _("Reflector: Herschellian")),
+        ("REFL NEWTONIAN", _("Reflector: Newtonian")),
 
-        (12, _("Catadioptric: Argunov-Cassegrain")),
-        (13, _("Catadioptric: Klevtsov-Cassegrain")),
-        (14, _("Catadioptric: Lurie-Houghton")),
-        (15, _("Catadioptric: Maksutov")),
-        (16, _("Catadioptric: Maksutov-Cassegrain")),
-        (17, _("Catadioptric: modified Dall-Kirkham")),
-        (18, _("Catadioptric: Schmidt camera")),
-        (19, _("Catadioptric: Schmidt-Cassegrain")),
-        (20, _("Catadioptric: ACF Schmidt-Cassegrain")),
-        (21, _("Camera lens")),
-        (22, _("Binoculars")),
+        ("CATA ARGUNOV-CASSEGRAIN", _("Catadioptric: Argunov-Cassegrain")),
+        ("CATA KLEVTSOV-CASSEGRAIN", _("Catadioptric: Klevtsov-Cassegrain")),
+        ("CATA LURIE-HOUGHTON", _("Catadioptric: Lurie-Houghton")),
+        ("CATA MAKSUTOV", _("Catadioptric: Maksutov")),
+        ("CATA MAKSUTOV-CASSEGRAIN", _("Catadioptric: Maksutov-Cassegrain")),
+        ("CATA MOD DALL-KIRKHAM", _("Catadioptric: modified Dall-Kirkham")),
+        ("CATA SCHMIDT CAMERA", _("Catadioptric: Schmidt camera")),
+        ("CATA SCHMIDT-CASSEGRAIN", _("Catadioptric: Schmidt-Cassegrain")),
+        ("CATA ACF SCHMIDT-CASSEGRAIN", _("Catadioptric: ACF Schmidt-Cassegrain")),
+        ("CATA ROWE-ACKERMANN SCHMIDT", _("Catadioptric: Rowe-Atkinson Schmidt astrograph")),
+        ("CAMERA LENS", _("Camera lens")),
+        ("BINOCULARS", _("Binoculars")),
     )
 
     aperture = models.DecimalField(
@@ -495,10 +496,11 @@ class Telescope(Gear):
         decimal_places=2,
     )
 
-    type = models.IntegerField(
+    type = models.CharField(
         verbose_name=_("Type"),
         null=True,
         blank=True,
+        max_length=64,
         choices=TELESCOPE_TYPES,
     )
 
@@ -539,12 +541,12 @@ class Mount(Gear):
 
 class Camera(Gear):
     CAMERA_TYPES = (
-        (0, _("CCD")),
-        (1, _("DSLR")),
-        (2, _("Guider/Planetary")),
-        (3, _("Film")),
-        (4, _("Compact")),
-        (5, _("Video camera")),
+        ("CCD", _("CCD")),
+        ("DSLR", _("DSLR")),
+        ("GUIDER/PLANETARY", _("Guider/Planetary")),
+        ("FILM", _("Film")),
+        ("COMPACT", _("Compact")),
+        ("VIDEO", _("Video camera")),
     )
 
     pixel_size = models.DecimalField(
@@ -574,10 +576,11 @@ class Camera(Gear):
         decimal_places=2,
     )
 
-    type = models.IntegerField(
+    type = models.CharField(
         verbose_name=_("Type"),
         null=True,
         blank=True,
+        max_length=64,
         choices=CAMERA_TYPES,
     )
 
@@ -596,14 +599,15 @@ class FocalReducer(Gear):
 
 class Software(Gear):
     SOFTWARE_TYPES = (
-        (0, _("Open source or freeware")),
-        (1, _("Paid")),
+        ("OPEN_SOURCE_OR_FREEWARE", _("Open source or freeware")),
+        ("PAID", _("Paid")),
     )
 
-    type = models.IntegerField(
+    type = models.CharField(
         verbose_name=_("Type"),
         null=True,
         blank=True,
+        max_length=64,
         choices=SOFTWARE_TYPES,
     )
 
@@ -613,30 +617,32 @@ class Software(Gear):
 
 class Filter(Gear):
     FILTER_TYPES = (
-        (0, _("Clear or color")),
+        ("CLEAR_OR_COLOR", _("Clear or color")),
 
-        (1, _("Broadband: H-Alpha")),
-        (2, _("Broadband: H-Beta")),
-        (3, _("Broadband: S-II")),
-        (4, _("Broadband: O-III")),
-        (5, _("Broadband: N-II")),
+        ("BROAD HA", _("Broadband: H-Alpha")),
+        ("BROAD HB", _("Broadband: H-Beta")),
+        ("BROAD SII", _("Broadband: S-II")),
+        ("BROAD OIII", _("Broadband: O-III")),
+        ("BROAD NII", _("Broadband: N-II")),
 
-        (6, _("Narrowband: H-Alpha")),
-        (7, _("Narrowband: H-Beta")),
-        (8, _("Narrowband: S-II")),
-        (9, _("Narrowband: O-III")),
-        (10, _("Narrowband: N-II")),
+        ("NARROW HA", _("Narrowband: H-Alpha")),
+        ("NARROW HB", _("Narrowband: H-Beta")),
+        ("NARROW SII", _("Narrowband: S-II")),
+        ("NARROW OIII", _("Narrowband: O-III")),
+        ("NARROW NII", _("Narrowband: N-II")),
 
-        (11, _("Light pollution suppression")),
-        (12, _("Planetary")),
-        (13, _("Other")),
-        (14, _("UHC: Ultra High Contrast")),
+        ("LP", _("Light pollution suppression")),
+        ("PLANETARY", _("Planetary")),
+        ("UHC", _("UHC: Ultra High Contrast")),
+
+        ("OTHER", _("Other")),
     )
 
-    type = models.IntegerField(
+    type = models.CharField(
         verbose_name=_("Type"),
         null=True,
         blank=True,
+        max_length=64,
         choices=FILTER_TYPES,
     )
 
@@ -765,6 +771,7 @@ class Image(HasSolutionMixin, SafeDeleteModel):
         ("MARIO", "Marathon Remote Imaging Observatory (MaRIO)"),
         ("NMS", "New Mexico Skies"),
         ("OES", "Observatorio El Sauce"),
+        ("PSA", "PixelSkies"),
         ("RLD", "Riverland Dingo Observatory"),
         ("SS", "Sahara Sky"),
         ("SPVO", "San Pedro Valley Observatory"),
@@ -1864,14 +1871,14 @@ class SolarSystem_Acquisition(Acquisition):
 
     seeing = models.IntegerField(
         verbose_name=_("Seeing"),
-        help_text=_("Your estimation of the seeing, on a scale from 1 to 5."),
+        help_text=_("Your estimation of the seeing, on a scale from 1 to 5. Larger is better."),
         null=True,
         blank=True,
     )
 
     transparency = models.IntegerField(
         verbose_name=_("Transparency"),
-        help_text=_("Your estimation of the transparency, on a scale from 1 to 10."),
+        help_text=_("Your estimation of the transparency, on a scale from 1 to 10. Larger is better."),
         null=True,
         blank=True
     )
