@@ -977,6 +977,8 @@ class Image(HasSolutionMixin, SafeDeleteModel):
         default=True,
     )
 
+    nested_comments = GenericRelation(NestedComment, related_query_name='image')
+
     mouse_hover_image = models.CharField(
         null=True,
         blank=True,
