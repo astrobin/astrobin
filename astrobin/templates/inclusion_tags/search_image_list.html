@@ -80,7 +80,7 @@
                 <li class="search-results__text__single">
 
                     {% if text.model_name == "nestedcomment" %}
-                        {% if text.object.image.count == 0 %}
+                        {% if text.object.image.count > 0 %}
                             <div class="search-results__text__meta">
                                 <span class="search-results__text__author">
                                     {% astrobin_username text.object.author %}
