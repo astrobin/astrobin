@@ -80,26 +80,30 @@
                 <li class="search-results__text__single">
 
                     {% if text.model_name == "nestedcomment" %}
-                        <div class="search-results__text__meta">
-                        <span class="search-results__text__author">
-                            {% astrobin_username text.object.author %}
-                        </span>
-                            <span class="search-results__text__date">
-                            <abbr class="timeago" title="{{ text.object.updated|date:'Y-m-d\TH:i:s' }}">
-                                {{ text.object.updated|date }}
-                            </abbr>
-                        </span>
-                        </div>
-                        <div class="search-results__text__content">
-                            {% if request.GET.q %}
-                                {% highlight text.text with request.GET.q css_class 'search-results__highlight' max_length 500 %}
-                            {% else %}
-                                {{ text.text }}
-                            {% endif %}
-                        </div>
-                        <div class="search-results__text__links">
-                            <a href="{{ text.object.get_absolute_url }}">{% trans "link" %}</a>
-                        </div>
+                        {% if text.object.image.count > 0 %}
+                            <div class="search-results__text__meta">
+                                <span class="search-results__text__author">
+                                    {% astrobin_username text.object.author %}
+                                </span>
+                                <span class="search-results__text__date">
+                                    <abbr class="timeago" title="{{ text.object.updated|date:'Y-m-d\TH:i:s' }}">
+                                        {{ text.object.updated|date }}
+                                    </abbr>
+                                </span>
+                            </div>
+                            <div class="search-results__text__content">
+                                {% if request.GET.q %}
+                                    {% highlight text.text with request.GET.q css_class 'search-results__highlight' max_length 500 %}
+                                {% else %}
+                                    {{ text.text }}
+                                {% endif %}
+                            </div>
+                            <div class="search-results__text__links">
+                                <a href="{{ text.object.get_absolute_url }}">{% trans "link" %}</a>
+                            </div>
+                        {% else %}
+                            <em>{% trans "Comment of deleted image not shown." %}</em>
+                        {% endif %}
                     {% endif %}
 
                     {% if text.model_name == "post" %}
