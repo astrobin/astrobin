@@ -13,7 +13,7 @@
 {% block breadcrumbs %}
     {{ block.super }}
     {% breadcrumb 'Image' None %}
-    {% breadcrumb image.title|escape|default:_("(no title)") 'image_detail' image.get_id %}
+    {% breadcrumb revision.image.title|escape|default:_("(no title)") 'image_detail' revision.image.get_id %}
     {% breadcrumb 'Revision' None %}
 {% endblock %}
 
@@ -22,7 +22,7 @@
 
     <form
             id="edit-revision-form"
-            class="form-horizontal edit-revision edit-thumbnails"
+            class="form-horizontal edit-revision"
             action="{% url 'image_edit_revision' revision.pk %}"
             method="post"
             enctype="multipart/form-data">
