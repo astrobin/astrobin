@@ -1,5 +1,6 @@
 {% extends 'base.html' %}
 {% load i18n %}
+{% load static %}
 {% load tags %}
 {% load bootstrap_toolkit %}
 {% load django_bootstrap_breadcrumbs %}
@@ -10,60 +11,23 @@
 {% block breadcrumbs %}
     {{ block.super }}
     {% breadcrumb 'Image' None %}
-    {% breadcrumb image.title|escape|default:_("(no title)") 'image_detail' image.pk %}
+    {% breadcrumb image.title|escape|default:_("(no title)") 'image_detail' image.get_id %}
     {% breadcrumb 'Basic information' None %}
 {% endblock %}
 
 {% block content %}
     {% include 'image/edit/menu.html' %}
 
-    <form class="form-horizontal" id="basic" action="." method="post">{% csrf_token %}
-        <div id="js_form" style="display:none">
-            {{form|as_bootstrap}}
-        </div>
+    <div class="text-center">
+        <img class="loading"
+             src="{% static 'astrobin/images/ajax-loader.gif' %}"
+             alt="{% trans "Loading..." %}" />
+    </div>
 
-        <noscript>
-            {{form.non_field_errors}}
+    <form class="form-horizontal hidden" id="basic" action="" method="post">{% csrf_token %}
+        {{form|as_bootstrap}}
+        <input type="hidden" name="image_id" value="{{image.get_id}}" />
 
-            {{form.title.errors}}
-            <p{% if form.title.errors %} class="error"{% endif %}>
-                {{form.title.label_tag}}
-                {{form.title}}
-            </p>
-
-            {{form.link.errors}}
-            <p{% if form.link.errors %} class="error"{% endif %}>
-                {{form.link.label_tag}}
-                {{form.link}}
-            </p>
-
-            <p>
-                {{form.subject_type.label_tag}}
-                {{form.subject_type}}
-                <span class="helptext">
-                    {{form.subject_type.help_text}}
-                </span>
-            </p>
-
-            <p>
-                {{form.solar_system_main_subject.label_tag}}
-                {{form.solar_system_main_subject}}
-                <span class="helptext">
-                    {{form.solar_system_main_subject.help_text}}
-                </span>
-            </p>
-
-            <p>
-                {{form.locations.label_tag}}
-                {{form.locations}}
-            </p>
-            <p>
-                {{form.description.label_tag}}
-                {{form.description}}
-            </p>
-        </noscript>
-
-        <input type="hidden" name="image_id" value="{{image.id}}" />
         {% if image.subject_type and image.subject_type == 500 or image.subject_type == 600 %}
             <input type="hidden" name="skip_rest" value="true"/>
         {% endif %}
@@ -82,11 +46,28 @@
 
 {% block extra_js %}
 <script language="javascript">
+    function showHideRemoteSource() {
+        var dataSource = $('#id_data_source').val();
+        var $remoteSourceGroup = $('#id_remote_source').closest('.control-group');
+
+        if (['OWN_REMOTE', 'AMATEUR_HOSTING'].indexOf(dataSource) === -1) {
+            $remoteSourceGroup.hide();
+            $('#id_remote_source').val("");
+        } else {
+            $remoteSourceGroup.show();
+        }
+    }
+
     $(document).ready(function() {
-        $('#js_form').show();
-        $('#js_form form .loading').hide();
-        $('#js_form .ui-multiselect').show();
-        $('#js_form .ui-multiselect').next('.helptext').hide();
+        $('.ui-multiselect').show();
+
+        showHideRemoteSource();
+        $(document).on('change', '#id_data_source', function () {
+            showHideRemoteSource();
+        });
+
+        $('form#basic').removeClass("hidden");
+        $('img.loading').parent().remove();
     });
 </script>
 {% endblock %}

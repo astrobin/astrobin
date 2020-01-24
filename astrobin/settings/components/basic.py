@@ -20,6 +20,8 @@ DEBUG = os.environ.get('DEBUG', 'true') == 'true'
 INTERNAL_IPS = ['127.0.0.1', '172.18.0.1'] # localhost and docker gateway
 
 MAINTENANCE_MODE = False
+MAINTENANCE_LOCKFILE_PATH = 'maintenance-lock.file'
+
 READONLY_MODE = False
 LONGPOLL_ENABLED = False
 
@@ -38,3 +40,10 @@ GOOGLE_ANALYTICS_ID = os.environ.get('GOOGLE_ANALYTICS_ID', 'invalid')
 
 ROOT_URLCONF = 'astrobin.urls'
 
+ALLOWED_IMAGE_EXTENSIONS = ('.jpg', '.jpeg', '.png', '.gif')
+
+GEOIP_PATH = os.path.abspath(os.path.dirname(__name__)) + "/astrobin/geoip2"
+
+CORS_ORIGIN_ALLOW_ALL = (
+    'app.astrobin.com'
+)

@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2016-11-12 07:03+0000\n"
+"POT-Creation-Date: 2019-10-15 11:54+0000\n"
 "PO-Revision-Date: 2013-11-17 17:26+0000\n"
 "Last-Translator: Salvatore <salvatore@iovene.com>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -19,29 +19,38 @@ msgstr ""
 "X-Generator: Pootle 2.5.0\n"
 "X-POOTLE-MTIME: 1384709205.360926\n"
 
-#: templates/astrobin_apps_users/inclusion_tags/astrobin_user.html:42
-#: templates/astrobin_apps_users/inclusion_tags/user_list.html:18
 msgid "Images"
 msgstr "Imatges"
 
-#: templates/astrobin_apps_users/inclusion_tags/astrobin_user.html:43
-#: templates/astrobin_apps_users/inclusion_tags/user_list.html:19
 msgid "Followers"
 msgstr "Seguidors"
 
-#: templates/astrobin_apps_users/inclusion_tags/astrobin_user.html:44
-#: templates/astrobin_apps_users/inclusion_tags/user_list.html:20
 msgid "Following"
 msgstr "Seguint"
 
-#: templates/astrobin_apps_users/inclusion_tags/user_list.html:16
 msgid "User"
 msgstr "Usuari"
 
-#: templates/astrobin_apps_users/inclusion_tags/user_list_entries.html:20
-#: templates/astrobin_apps_users/inclusion_tags/user_list_entries.html:24
 msgid "No users."
 msgstr "No hi ha usuaris."
+
+msgid "Administrator"
+msgstr ""
+
+msgid "Image moderator"
+msgstr ""
+
+msgid "IOTD Submitter"
+msgstr ""
+
+msgid "IOTD Reviewer"
+msgstr ""
+
+msgid "IOTD Judge"
+msgstr ""
+
+msgid "Premium member"
+msgstr ""
 
 #~ msgid "%(images_number)s image"
 #~ msgid_plural "%(images_number)s images"

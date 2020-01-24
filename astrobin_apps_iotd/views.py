@@ -1,35 +1,16 @@
-# Python
-from datetime import datetime, timedelta
-
-# Django
-from django.conf import settings
-from django.contrib import messages
-from django.contrib.auth.models import Group
-from django.core.exceptions import ValidationError
-from django.core.urlresolvers import reverse, reverse_lazy
-from django.http import HttpResponseForbidden
-from django.shortcuts import get_object_or_404, redirect, render_to_response
-from django.template import RequestContext
-from django.utils import formats
-from django.utils.translation import ugettext_lazy as _
-from django.utils.translation import ugettext
-from django.views.generic import (
-    CreateView,
-    DetailView,
-    ListView)
-from django.views.generic.base import View
-
-# Third party
 from braces.views import (
     GroupRequiredMixin,
     JSONResponseMixin,
     LoginRequiredMixin)
+from django.http import HttpResponseForbidden
+from django.shortcuts import get_object_or_404, render
+from django.template import RequestContext
+from django.utils import formats
+from django.utils.translation import ugettext
+from django.views.generic import (
+    ListView)
+from django.views.generic.base import View
 
-# AstroBin
-from astrobin.models import Image
-
-# This app
-from astrobin_apps_iotd.forms import *
 from astrobin_apps_iotd.models import *
 from astrobin_apps_iotd.permissions import *
 from astrobin_apps_iotd.templatetags.astrobin_apps_iotd_tags import (
@@ -48,15 +29,14 @@ class IotdBaseQueueView(View):
 
 
 class IotdSubmissionQueueView(
-        LoginRequiredMixin, GroupRequiredMixin, IotdBaseQueueView, ListView):
+    LoginRequiredMixin, GroupRequiredMixin, IotdBaseQueueView, ListView):
     group_required = ['iotd_submitters']
     model = Image
     template_name = 'astrobin_apps_iotd/iotd_submission_queue.html'
 
     def get_queryset(self):
         days = settings.IOTD_SUBMISSION_WINDOW_DAYS
-        cutoff = datetime.now() - timedelta(days)
-        judges = Group.objects.get(name = 'iotd_judges').user_set.all()
+        judges = Group.objects.get(name='iotd_judges').user_set.all()
         image_groups = []
 
         for date in (datetime.now().date() - timedelta(n) for n in range(days)):
@@ -64,31 +44,31 @@ class IotdSubmissionQueueView(
                 'date': date,
                 'images': sorted(list(set([
                     x
-                    for x in self.model.objects\
+                    for x in self.model.objects \
                         .filter(
-                            moderator_decision = 1,
-                            published__gte = date,
-                            published__lt = date + timedelta(1))
+                        moderator_decision=1,
+                        published__gte=date,
+                        published__lt=date + timedelta(1))
                     if not Iotd.objects.filter(
-                        image = x,
-                        date__lte = datetime.now().date()).exists()
-                    and not x.user in judges])), key = lambda x: x.published, reverse = True)})
+                        image=x,
+                        date__lte=datetime.now().date()).exists()
+                       and not x.user in judges])), key=lambda x: x.published, reverse=True)})
 
         return image_groups
 
 
 class IotdToggleSubmissionAjaxView(
-        JSONResponseMixin, LoginRequiredMixin, GroupRequiredMixin, View):
+    JSONResponseMixin, LoginRequiredMixin, GroupRequiredMixin, View):
     group_required = 'iotd_submitters'
     http_method_names = ['post']
 
     def post(self, request, *args, **kwargs):
         if request.is_ajax():
-            image = Image.objects.get(pk = kwargs.get('pk'))
+            image = Image.objects.get(pk=kwargs.get('pk'))
             try:
                 submission, created = IotdSubmission.objects.get_or_create(
-                    submitter = request.user,
-                    image = image)
+                    submitter=request.user,
+                    image=image)
                 if not created:
                     submission.delete()
                     return self.render_json_response({
@@ -108,7 +88,7 @@ class IotdToggleSubmissionAjaxView(
 
 
 class IotdReviewQueueView(
-        LoginRequiredMixin, GroupRequiredMixin, IotdBaseQueueView, ListView):
+    LoginRequiredMixin, GroupRequiredMixin, IotdBaseQueueView, ListView):
     group_required = ['iotd_reviewers']
     model = IotdSubmission
     template_name = 'astrobin_apps_iotd/iotd_review_queue.html'
@@ -116,28 +96,28 @@ class IotdReviewQueueView(
     def get_queryset(self):
         days = settings.IOTD_REVIEW_WINDOW_DAYS
         cutoff = datetime.now() - timedelta(days)
-        judges = Group.objects.get(name = 'iotd_judges').user_set.all()
+        judges = Group.objects.get(name='iotd_judges').user_set.all()
         return sorted(list(set([
             x.image
-            for x in self.model.objects.filter(date__gte = cutoff)
+            for x in self.model.objects.filter(date__gte=cutoff)
             if not Iotd.objects.filter(
-                image = x.image,
-                date__lte = datetime.now().date()).exists()
-            and not x.image.user in judges])), key = lambda x: x.published, reverse = True)
+                image=x.image,
+                date__lte=datetime.now().date()).exists()
+               and not x.image.user in judges])), key=lambda x: x.published, reverse=True)
 
 
 class IotdToggleVoteAjaxView(
-        JSONResponseMixin, LoginRequiredMixin, GroupRequiredMixin, View):
+    JSONResponseMixin, LoginRequiredMixin, GroupRequiredMixin, View):
     group_required = 'iotd_reviewers'
     http_method_names = ['post']
 
     def post(self, request, *args, **kwargs):
         if request.is_ajax():
-            image = get_object_or_404(Image, pk = kwargs.get('pk'))
+            image = get_object_or_404(Image, pk=kwargs.get('pk'))
             try:
                 vote, created = IotdVote.objects.get_or_create(
-                    reviewer = request.user,
-                    image = image)
+                    reviewer=request.user,
+                    image=image)
                 if not created:
                     vote.delete()
                     return self.render_json_response({
@@ -157,7 +137,7 @@ class IotdToggleVoteAjaxView(
 
 
 class IotdJudgementQueueView(
-        LoginRequiredMixin, GroupRequiredMixin, IotdBaseQueueView, ListView):
+    LoginRequiredMixin, GroupRequiredMixin, IotdBaseQueueView, ListView):
     group_required = ['iotd_judges']
     model = IotdVote
     template_name = 'astrobin_apps_iotd/iotd_judgement_queue.html'
@@ -165,30 +145,30 @@ class IotdJudgementQueueView(
     def get_queryset(self):
         days = settings.IOTD_JUDGEMENT_WINDOW_DAYS
         cutoff = datetime.now() - timedelta(days)
-        judges = Group.objects.get(name = 'iotd_judges').user_set.all()
+        judges = Group.objects.get(name='iotd_judges').user_set.all()
         return sorted(list(set([
             x.image
-            for x in self.model.objects.filter(date__gte = cutoff)
+            for x in self.model.objects.filter(date__gte=cutoff)
             if not Iotd.objects.filter(
-                image = x.image,
-                date__lte = datetime.now().date()).exists()
-            and not x.image.user in judges])), key = lambda x: x.published, reverse = True)
+                image=x.image,
+                date__lte=datetime.now().date()).exists()
+               and not x.image.user in judges])), key=lambda x: x.published, reverse=True)
 
 
 class IotdToggleJudgementAjaxView(
-        JSONResponseMixin, LoginRequiredMixin, GroupRequiredMixin, View):
+    JSONResponseMixin, LoginRequiredMixin, GroupRequiredMixin, View):
     group_required = 'iotd_judges'
     http_method_names = ['post']
 
     def post(self, request, *args, **kwargs):
         if request.is_ajax():
-            image = get_object_or_404(Image, pk = kwargs.get('pk'))
+            image = get_object_or_404(Image, pk=kwargs.get('pk'))
             ret = None
 
             try:
                 # Only delete it if it's in the future and from the same
                 # judge.
-                iotd = Iotd.objects.get(image = image)
+                iotd = Iotd.objects.get(image=image)
                 if iotd.date <= datetime.now().date():
                     ret = {
                         'iotd': iotd.pk,
@@ -212,14 +192,14 @@ class IotdToggleJudgementAjaxView(
                 max_days = settings.IOTD_JUDGEMENT_MAX_FUTURE_DAYS
                 for date in (datetime.now().date() + timedelta(n) for n in range(max_days)):
                     try:
-                        iotd = Iotd.objects.get(date = date)
+                        iotd = Iotd.objects.get(date=date)
                     except Iotd.DoesNotExist:
                         may, reason = may_elect_iotd(request.user, image)
                         if may:
                             iotd = Iotd.objects.create(
-                                judge = request.user,
-                                image = image,
-                                date = date)
+                                judge=request.user,
+                                image=image,
+                                date=date)
                             ret = {
                                 'iotd': iotd.pk,
                                 'date': formats.date_format(iotd.date, "SHORT_DATE_FORMAT"),
@@ -244,46 +224,42 @@ class IotdToggleJudgementAjaxView(
 
 class IotdArchiveView(ListView):
     model = Iotd
-    queryset = Iotd.objects.filter(date__lte = datetime.now().date())
+    queryset = Iotd.objects.filter(date__lte=datetime.now().date(), image__deleted = None)
     template_name = 'astrobin_apps_iotd/iotd_archive.html'
-    paginate_by = 30 
+    paginate_by = 30
 
 
 class IotdSubmittersForImageAjaxView(
-        LoginRequiredMixin, GroupRequiredMixin, View):
+    LoginRequiredMixin, GroupRequiredMixin, View):
     group_required = 'iotd_reviewers'
 
     def get(self, request, *args, **kwargs):
         if request.is_ajax():
-            image = get_object_or_404(Image, pk = kwargs['pk'])
-            submitters = [x.submitter for x in IotdSubmission.objects.filter(image = image)]
+            image = get_object_or_404(Image, pk=kwargs['pk'])
+            submitters = [x.submitter for x in IotdSubmission.objects.filter(image=image)]
 
-            return render_to_response(
-                'astrobin_apps_users/inclusion_tags/user_list.html',
-                {
+            return render(request, 'astrobin_apps_users/inclusion_tags/user_list.html', {
                     'view': 'table',
                     'layout': 'compact',
                     'user_list': submitters,
-                }, context_instance = RequestContext(request))
+                })
 
         return HttpResponseForbidden()
 
 
 class IotdReviewersForImageAjaxView(
-        LoginRequiredMixin, GroupRequiredMixin, View):
+    LoginRequiredMixin, GroupRequiredMixin, View):
     group_required = 'iotd_judges'
 
     def get(self, request, *args, **kwargs):
         if request.is_ajax():
-            image = get_object_or_404(Image, pk = kwargs['pk'])
-            reviewers = [x.reviewer for x in IotdVote.objects.filter(image = image)]
+            image = get_object_or_404(Image, pk=kwargs['pk'])
+            reviewers = [x.reviewer for x in IotdVote.objects.filter(image=image)]
 
-            return render_to_response(
-                'astrobin_apps_users/inclusion_tags/user_list.html',
-                {
+            return render(request, 'astrobin_apps_users/inclusion_tags/user_list.html', {
                     'view': 'table',
                     'layout': 'compact',
                     'user_list': reviewers,
-                }, context_instance = RequestContext(request))
+                })
 
         return HttpResponseForbidden()

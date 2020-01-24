@@ -1,0 +1,66 @@
+{% extends 'base.html' %}
+{% load i18n %}
+{% load tags %}
+{% load bootstrap_toolkit %}
+{% load django_bootstrap_breadcrumbs %}
+
+{% block extra_head %}
+    {{ form.media }}
+{% endblock %}
+
+{% block title %}{% trans "Change the thumbnails for this image" %}{% endblock %}
+{% block container_extra_classes %}has-subnav{% endblock %}
+
+{% block breadcrumbs %}
+    {{ block.super }}
+    {% breadcrumb 'Image' None %}
+    {% breadcrumb image.title|escape|default:_("(no title)") 'image_detail' image.get_id %}
+    {% breadcrumb 'Thumbnails' None %}
+{% endblock %}
+
+{% block content %}
+    {% include 'image/edit/menu.html' %}
+
+    <form
+            id="edit-thumbnails-form"
+            class="form-horizontal edit-thumbnails"
+            action=""
+            method="post"
+            enctype="multipart/form-data">
+
+        {% csrf_token %}
+        {{ form|as_bootstrap }}
+
+        <div class="form-actions">
+            {% if not image.title %}
+            <input type="hidden" name="submit_watermark" value="true" />
+            {% endif %}
+
+            <input
+                    class="btn btn-primary btn-block-mobile"
+                    type="submit"
+                    {% if image.title %}
+                    value="{% trans "Save" %} &rarr;"
+                    {% else %}
+                    value="{% trans "Next step: edit watermark" %} &rarr;"
+                    {% endif %}
+            />
+
+            {% if image.title %}
+                <a class="btn btn-block-mobile" href="{% url 'image_detail' image.get_id %}">
+                    {% trans "Cancel" %}
+                </a>
+            {% endif %}
+        </div>
+
+    </form>
+{% endblock %}
+
+{% block modals %}
+    {% include "./_processing_thumbnails_modal.html" %}
+{% endblock %}
+
+{% block extra_js %}
+    {% include "./_processing_thumbnails_modal_js.html" %}
+{% endblock %}
+

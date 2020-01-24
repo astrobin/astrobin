@@ -2,6 +2,7 @@
 {% load common_tags %}
 {% load pipeline %}
 {% load hitcount_tags %}
+{% load cookielaw_tags %}
 {% load i18n %}
 {% load tags %}
 {% load staticfiles %}
@@ -43,6 +44,8 @@
     </head>
 
     <body class="full">
+        {% cookielaw_banner %}
+
         <div class="navbar navbar-fixed-top" id="top">
             <div class="navbar-inner">
                 <div class="container-fluid">
@@ -98,7 +101,7 @@
             {% astrobin_image image alias revision=revision_label url_size='regular' %}
         </div>
         <script type="text/javascript" src="{% static 'common/js/jquery-1.8.3.js' %}"></script>
-        <script type="text/javascript" src="{% static 'astrobin/js/bootstrap.js' %}"></script>
+        <script type="text/javascript" src="{% static 'cookielaw/js/cookielaw.js' %}"></script>
         <script type="text/javascript" src="{% static 'astrobin_apps_images/js/astrobin_apps_images.js' %}"></script>
         <script type="text/javascript" src="{% static 'astrobin/js/astrobin.js' %}"></script>
         {% insert_hit_count_js_variables for image %}

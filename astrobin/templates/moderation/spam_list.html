@@ -42,11 +42,11 @@
                                 </div>
                             </a>
                             <div class="image-actions">
-                                <a href="{% url 'image_rawthumb' image.pk '0' 'hd' %}" class="fancybox">
+                                <a href="{% url 'image_rawthumb' image.get_id '0' 'hd' %}" class="fancybox">
                                     <i class="icon-zoom-in"></i>
                                 </a>
 
-                                <a href="{% url 'image_detail' image.pk %}" target="_blank">
+                                <a href="{{image.get_absolute_url}}" target="_blank">
                                     <i class="icon-link"></i>
                                 </a>
                             </div>

@@ -10,7 +10,7 @@
 {% block collections_content %}
     <h1>{% trans "Create new collection" %}</h1>
 
-    <form class="form-horizontal" action="." method="post">
+    <form class="form-horizontal" action="" method="post">
         {% csrf_token %}
         {{form|as_bootstrap}}
         <div class="form-actions">

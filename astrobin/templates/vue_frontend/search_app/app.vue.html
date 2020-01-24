@@ -1,0 +1,449 @@
+{% load i18n %}
+{% load common_tags %}
+
+<script type="text/x-template" id="app-template">
+    <div class="accordion search-filters-app">
+        <div class="accordion-group">
+            <div class="accordion-heading">
+                <a class="accordion-toggle" @click="toggleCollapsed">
+                        <span v-if="collapsed">
+                            {% trans "Show filters" %} <i class="pull-right icon-angle-down"></i>
+                        </span>
+                    <span v-if="!collapsed">
+                            {% trans "Hide filters" %} <i class="pull-right icon-angle-up"></i>
+                        </span>
+                </a>
+            </div>
+            <div id="searchFilterCollapsible" class="accordion-body" :class="{collapse: collapsed}">
+                <div class="accordion-inner">
+                    <form method="get" action="{% url 'haystack_search' %}">
+                        <div class="search-filters">
+                            <div class="search-filter" v-for="filter in enabledFilters">
+                                <a v-if="filter.removable" class="search-filter-remove"
+                                   @click="onRemoveFilter(filter.name)">
+                                    <i class="icon-trash"></i>
+                                </a>
+
+                                <div class="search-filter-title">{% trans "${filter.label}" %}</div>
+
+                                <search-terms-filter v-if="filter.name === 'q'" :q="q"></search-terms-filter>
+
+                                <search-domain-filter v-if="filter.name === 'd'"
+                                                    :searchDomain="searchDomain"
+                                                    @input="onSearchDomainChanged($event)"></search-domain-filter>
+
+                                <search-by-filter v-if="filter.name === 't'"
+                                                    :searchBy="searchBy"></search-by-filter>
+
+                                <animated-filter v-if="filter.name === 'animated'"
+                                                 :animated="animated"></animated-filter>
+
+                                <award-filter v-if="filter.name === 'award'"
+                                                 :award="award"></award-filter>
+
+                                <camera-type-filter v-if="filter.name === 'camera_type'"
+                                                       :camera-type="cameraType"></camera-type-filter>
+
+                                <country-filter v-if="filter.name === 'country'"
+                                                    :country="country"></country-filter>
+
+                                <acquisition-type-filter v-if="filter.name === 'acquisition_type'"
+                                                    :acquisition-type="acquisitionType"></acquisition-type-filter>
+
+                                <data-source-filter v-if="filter.name === 'data_source'"
+                                                    :data-source="dataSource"></data-source-filter>
+
+                                <field-radius-filter v-if="filter.name === 'field_radius'"
+                                                     :field-radius-min="fieldRadiusMin"
+                                                     :field-radius-max="fieldRadiusMax"></field-radius-filter>
+
+                                <license-filter v-if="filter.name === 'license'" :license="license"></license-filter>
+
+                                <minimum-data-filter v-if="filter.name === 'minimum_data'"
+                                                 :minimum-data="minimumData"></minimum-data-filter>
+
+                                <moon-phase-filter v-if="filter.name === 'moon_phase'"
+                                                   :moon-phase-min="moonPhaseMin"
+                                                   :moon-phase-max="moonPhaseMax"></moon-phase-filter>
+
+                                <pixel-scale-filter v-if="filter.name === 'pixel_scale'"
+                                                    :pixel-scale-min="pixelScaleMin"
+                                                    :pixel-scale-max="pixelScaleMax"></pixel-scale-filter>
+
+                                <remote-source-filter v-if="filter.name === 'remote_source'"
+                                                    :remote-source="remoteSource"></remote-source-filter>
+
+                                <subject-type-filter v-if="filter.name === 'subject_type'"
+                                                    :subject-type="subjectType"></subject-type-filter>
+
+                                <telescope-type-filter v-if="filter.name === 'telescope_type'"
+                                                     :telescope-type="telescopeType"></telescope-type-filter>
+                            </div>
+
+                            <add-filter
+                                    v-if="availableFilters().length > 0 && isImageSearch()"
+                                    :availableFilters="availableFilters()"
+                                    @onAddFilter="onAddFilter">
+                            </add-filter>
+                        </div>
+
+                        <div class="accordion-footer">
+                            <input class="btn btn-primary search-button" type="submit"
+                                   value="{% trans "Search" %}" />
+
+                            {% if paginator and request.GET.q %}
+                                <span class="result-count pull-right">
+                                    {% trans "Results" %}: {{ paginator.count }}
+                                </span>
+                            {% endif %}
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+</script>
+
+<script>
+    new Vue({
+        el: '#search-app',
+        template: "#app-template",
+        data: {
+            collapsed:
+                {% if request.GET.q == None %}
+                    true
+                {% else %}
+                    false
+                {% endif %},
+
+            q: "{{ request.GET.q }}",
+            searchDomain:
+                {% if "d" in request.GET %}
+                    "{{ request.GET.d }}"
+                {% else %}
+                    undefined
+                {% endif %},
+
+            searchBy:
+                {% if "t" in request.GET %}
+                    "{{ request.GET.t }}"
+                {% else %}
+                    undefined
+                {% endif %},
+
+            animated:
+                {% if "animated" in request.GET %}
+                    true
+                {% else %}
+                    undefined
+                {% endif %},
+            award:
+                {% if "award" in request.GET %}
+                    "{{ request.GET.award }}"
+                {% else %}
+                    undefined
+                {% endif %},
+            cameraType:
+                {% if "camera_type" in request.GET and request.GET.camera_type %}
+                    "{{ request.GET.camera_type }}"
+                {% else %}
+                    undefined
+                {% endif %},
+            country:
+                {% if "country" in request.GET and request.GET.country %}
+                    "{{ request.GET.country }}"
+                {% else %}
+                    undefined
+                {% endif %},
+            acquisitionType:
+                {% if "acquisition_type" in request.GET and request.GET.acquisition_type %}
+                    "{{ request.GET.acquisition_type }}"
+                {% else %}
+                    undefined
+                {% endif %},
+            dataSource:
+                {% if "data_source" in request.GET and request.GET.data_source %}
+                    "{{ request.GET.data_source }}"
+                {% else %}
+                    undefined
+                {% endif %},
+            fieldRadiusMin:
+                {% if "field_radius_min" in request.GET and request.GET.field_radius_min %}
+                    {{ request.GET.field_radius_min }}
+                {% else %}
+                    0
+                {% endif %},
+            fieldRadiusMax:
+                {% if "field_radius_max" in request.GET and request.GET.field_radius_max %}
+                    {{ request.GET.field_radius_max }}
+                {% else %}
+                    180
+                {% endif %},
+            license:
+                {% if "license" in request.GET and request.GET.license %}
+                    "{{ request.GET.license }}"
+                {% else %}
+                    undefined
+                {% endif %},
+            minimumData:
+                {% if "minimum_data" in request.GET and request.GET.minimum_data %}
+                    "{{ request.GET.minimum_data }}"
+                {% else %}
+                    undefined
+                {% endif %},
+            moonPhaseMin:
+                {% if "moon_phase_min" in request.GET and request.GET.moon_phase_min %}
+                    {{ request.GET.moon_phase_min }}
+                {% else %}
+                    0
+                {% endif %},
+            moonPhaseMax:
+                {% if "moon_phase_max" in request.GET and request.GET.moon_phase_max %}
+                    {{ request.GET.moon_phase_max }}
+                {% else %}
+                    100
+                {% endif %},
+            pixelScaleMin:
+                {% if "pixel_scale_min" in request.GET and request.GET.pixel_scale_min %}
+                    {{ request.GET.pixel_scale_min }}
+                {% else %}
+                    0
+                {% endif %},
+            pixelScaleMax:
+                {% if "pixel_scale_max" in request.GET and request.GET.pixel_scale_max %}
+                    {{ request.GET.pixel_scale_max }}
+                {% else %}
+                    10
+                {% endif %},
+            remoteSource:
+                {% if "remote_source" in request.GET and request.GET.remote_source %}
+                    "{{ request.GET.remote_source }}"
+                {% else %}
+                    undefined
+                {% endif %},
+            subjectType:
+                {% if "subject_type" in request.GET and request.GET.subject_type %}
+                    "{{ request.GET.subject_type }}"
+                {% else %}
+                    undefined
+                {% endif %},
+            telescopeType:
+                {% if "telescope_type" in request.GET and request.GET.telescope_type %}
+                    "{{ request.GET.telescope_type }}"
+                {% else %}
+                    undefined
+                {% endif %},
+
+            allFilters: [
+                {
+                    name: "q",
+                    label: "{% trans "Search terms" %}"
+                },
+                {
+                    name: "d",
+                    label: "{% trans "Search domain" %}"
+                },
+                {
+                    name: "t",
+                    label: "{% trans "Search by" %}",
+                    removable: true
+                },
+                {
+                    name: "animated",
+                    label: "{% trans "Only animated" %}",
+                    removable: true
+                },
+                {
+                    name: "award",
+                    label: "{% trans "Award" %}",
+                    removable: true
+                },
+                {
+                    name: "camera_type",
+                    label: "{% trans "Camera type" %}",
+                    removable: true
+                },
+                {
+                    name: "country",
+                    label: "{% trans "Country" %}",
+                    removable: true
+                },
+                {
+                    name: "acquisition_type",
+                    label: "{% trans "Acquisition type" %}",
+                    removable: true
+                },
+                {
+                    name: "data_source",
+                    label: "{% trans "Data source" %}",
+                    removable: true
+                },
+                {
+                    name: "field_radius",
+                    label: "{% trans "Field radius (deg)" %}",
+                    removable: true
+                },
+                {
+                    name: "license",
+                    label: "{% trans "License" %}",
+                    removable: true
+                },
+                {
+                    name: "minimum_data",
+                    label: "{% trans "Minimum data" %}",
+                    removable: true
+                },
+                {
+                    name: "moon_phase",
+                    label: "{% trans "Moon phase (%)" %}",
+                    removable: true
+                },
+                {
+                    name: "pixel_scale",
+                    label: "{% trans "Pixel scale (arcsec/pixel)" %}",
+                    removable: true
+                },
+                {
+                    name: "remote_source",
+                    label: "{% trans "Remote source" %}",
+                    removable: true
+                },
+                {
+                    name: "subject_type",
+                    label: "{% trans "Subject type" %}",
+                    removable: true
+                },
+                {
+                    name: "telescope_type",
+                    label: "{% trans "Telescope type" %}",
+                    removable: true
+                }
+            ],
+            enabledFilters: []
+        },
+        created: function () {
+            this.enabledFilters.push(this.getFilterByName("q"));
+            this.enabledFilters.push(this.getFilterByName("d"));
+
+            if (this.searchDomain === undefined) {
+                this.searchDomain = "i";
+            }
+
+            if (this.searchDomain === "i") {
+                this.enabledFilters.push(this.getFilterByName("t"));
+            }
+
+            if (this.searchBy === undefined) {
+                this.searchBy = "all";
+            }
+
+            if (this.animated) {
+                this.enabledFilters.push(this.getFilterByName("animated"));
+            }
+
+            if (this.award) {
+                this.enabledFilters.push(this.getFilterByName("award"));
+            }
+
+            if (this.cameraType) {
+                this.enabledFilters.push(this.getFilterByName("camera_type"));
+            }
+
+            if (this.country) {
+                this.enabledFilters.push(this.getFilterByName("country"));
+            }
+
+            if (this.acquisitionType) {
+                this.enabledFilters.push(this.getFilterByName("acquisition_type"));
+            }
+
+            if (this.dataSource) {
+                this.enabledFilters.push(this.getFilterByName("data_source"));
+            }
+
+            {% if "field_radius_min" in request.GET or "field_radius_max" in request.GET %}
+                this.enabledFilters.push(this.getFilterByName("field_radius"));
+            {% endif %}
+
+            {% if "moon_phase_min" in request.GET or "moon_phase_max" in request.GET %}
+                this.enabledFilters.push(this.getFilterByName("moon_phase"));
+            {% endif %}
+        
+            {% if "pixel_scale_min" in request.GET or "pixel_scale_max" in request.GET %}
+                this.enabledFilters.push(this.getFilterByName("pixel_scale"));
+            {% endif %}
+
+            if (this.license) {
+                this.enabledFilters.push(this.getFilterByName("license"));
+            }
+
+            if (this.minimumData) {
+                this.enabledFilters.push(this.getFilterByName("minimum_data"));
+            }
+
+            if (this.remoteSource) {
+                this.enabledFilters.push(this.getFilterByName("remote_source"));
+            }
+
+            if (this.subjectType) {
+                this.enabledFilters.push(this.getFilterByName("subject_type"));
+            }
+
+            if (this.telescopeType) {
+                this.enabledFilters.push(this.getFilterByName("telescope_type"));
+            }
+        },
+        methods: {
+            toggleCollapsed: function () {
+                this.collapsed = !this.collapsed;
+            },
+            getFilterByName: function (name) {
+                for (var i = 0; i < this.allFilters.length; i++) {
+                    if (this.allFilters[i].name === name) {
+                        return this.allFilters[i];
+                    }
+                }
+            },
+            hasFilter: function (name) {
+                return this.enabledFilters
+                    .map(function (filter) {
+                        return filter.name;
+                    })
+                    .indexOf(name) > -1;
+            },
+            availableFilters: function() {
+                var availableFilters = [];
+                for (var i = 0; i < this.allFilters.length; i++) {
+                    if (!this.hasFilter(this.allFilters[i].name) && this.allFilters[i].removable) {
+                        availableFilters.push(this.allFilters[i]);
+                    }
+                }
+
+                return availableFilters;
+            },
+            onAddFilter: function(name) {
+                this.enabledFilters.push(this.getFilterByName(name));
+            },
+            onRemoveFilter: function(name) {
+                var i = this.enabledFilters.length;
+                while (i--) {
+                    if (this.enabledFilters[i].name === name) {
+                        this.enabledFilters.splice(i, 1);
+                    }
+                }
+            },
+            isImageSearch: function() {
+                return this.searchDomain === "i";
+            },
+
+            onSearchDomainChanged: function(val) {
+                this.searchDomain = val;
+                if (this.searchDomain !== "i") {
+                    this.enabledFilters = this.enabledFilters.filter(function(filter) {
+                        return !filter.removable;
+                    });
+                }
+            }
+        }
+    })
+</script>

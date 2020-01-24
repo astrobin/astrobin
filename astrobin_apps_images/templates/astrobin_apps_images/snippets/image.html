@@ -6,7 +6,7 @@
 {% load staticfiles %}
 
 {% if status != 'error' %}
-    <div class="astrobin-image-container">
+    <div class="astrobin-image-container{% if classes %} {{classes}}{% endif %}">
         {% if error_message %}
             <div class="alert alert-error">
                 <h4 class="alert-heading">
@@ -20,7 +20,7 @@
 
         {% if alias != 'histogram' %}
             {% if link %}
-            <a href="{{url}}{% query_string "mod=mod,nc=nav_ctx,nce=nav_ctx_extra" "querystring_key,recent_images_page,public,staging,sub,s,q,search_type,license,camera_type,telescope_type,solar_system_main_subject,aperture_min,aperture_max,pixel_size_min,pixel_size_max,start_date,end_date,integration_min,integration_max,moon_phase_min,moon_phase_max" %}">
+            <a href="{{url}}{% query_string "mod=mod,nc=nav_ctx,nce=nav_ctx_extra" "querystring_key,recent_images_page,public,staging,sub,s,q,t,d,license,camera_type,telescope_type,subject_type,pixel_size_min,pixel_size_max,field_radius_min,field_radius_max,integration_min,integration_max,moon_phase_min,moon_phase_max,country" %}">
             {% endif %}
 
                 {% if badges %}
@@ -55,99 +55,79 @@
                     </ul>
                 {% endif %} {# badges #}
         {% endif %} {# not histogram #}
+            <figure>
+                <img
+                    {% if thumb_url %}
+                         src="{{thumb_url}}"
+                         data-preloaded="true"
+                         data-loaded="true"
+                    {% else %}
+                         {% if alias == 'gallery' %}
+                            src="{% static 'astrobin/images/placeholder-gallery.jpg' %}"
+                         {% else %}
+                            {% if alias == 'story' %}
+                                src="{% static 'astrobin/images/placeholder-stories.jpg' %}"
+                            {% else %}
+                                src="https://placehold.it/{{placehold_size}}/222/333&text={% trans "Loading" %}"
+                            {% endif %}
+                         {% endif %}
+                         data-preloaded="false"
+                         data-loaded="false"
+                    {% endif %}
 
-            <img
-                {% if thumb_url %}
-                     src="{{thumb_url}}"
-                     data-preloaded="true"
-                     data-loaded="true"
-                {% else %}
-                     {% if alias == 'gallery' %}
-                        src="{% static 'astrobin/images/placeholder-gallery.jpg' %}"
-                     {% else %}
-                        {% if alias == 'story' %}
-                            src="{% static 'astrobin/images/placeholder-stories.jpg' %}"
-                        {% else %}
-                            src="https://placehold.it/{{placehold_size}}/222/333&text={% trans "Loading" %}"
-                        {% endif %}
+                     class="astrobin-image{% if real %} real{% endif %}"
+
+                     {% if provide_size %}
+                         width="{{size_x}}"
+                         height="{{size_y}}"
                      {% endif %}
-                     data-preloaded="false"
-                     data-loaded="false"
+
+                     data-id="{{image.id}}"
+                     data-alias="{{alias}}"
+                     data-revision="{{revision}}"
+                     data-get-thumb-url="{{get_thumb_url}}"
+                     alt="{{image.title|escape}}, {% astrobin_username image.user link=False %}" />
+
+                {% if show_tooltip %}
+                    <figcaption>
+                        <h3>{{ image.title | escape | default:_("(no title)") }}</h3>
+                        <h4>{% astrobin_username image.user link=False %}</h4>
+                        {% if alias == 'gallery' %}
+                            {% cache 43200 astrobin_image_caption caption_cache_key %}
+                            <table class="table table-condensed">
+                                <tr>
+                                    <th><i class="icon-calendar"></i></th>
+                                    {% if image.published %}
+                                        <td>{{image.published|date:"SHORT_DATE_FORMAT"}}</td>
+                                    {% else %}
+                                        <td>{{image.uploaded|date:"SHORT_DATE_FORMAT"}}</td>
+                                    {% endif %}
+                                </tr>
+
+                                <tr>
+                                    <th><i class="icon-thumbs-up"></i></th>
+                                    <td>{{image.likes}}</td>
+                                </tr>
+
+                                <tr>
+                                    <th><i class="icon-bookmark"></i></th>
+                                    <td>{{image.bookmarks}}</td>
+                                </tr>
+
+                                {% if image.views %}
+                                    <tr>
+                                        <th><i class="icon-eye-open"></i></th>
+                                        <td>{{image.view}}</td>
+                                    </tr>
+                                {% endif %}
+                            </table>
+                            {% endcache %}
+                        {% endif %}
+                    </figcaption>
                 {% endif %}
-
-                 class="astrobin-image{% if real %} real{% endif %}{% if show_tooltip %} capty{% endif %}"
-
-                 {% if provide_size %}
-                     width="{{size_x}}"
-                     height="{{size_y}}"
-                 {% endif %}
-
-                 name="#capty-target-{{image.id}}-{{randomid}}"
-                 data-id="{{image.id}}"
-                 data-alias="{{alias}}"
-                 data-revision="{{revision}}"
-                 data-get-thumb-url="{{get_thumb_url}}"
-                 alt="{{image.title|escape}}, {% astrobin_username image.user link=False %}" />
-
+            </figure>
         {% if alias != 'histogram' and link %}
         </a>
-        {% endif %}
-
-        {% if alias == 'thumb' or alias == 'gallery' %}
-            <div id="capty-target-{{image.id}}-{{randomid}}" class="capty-target">
-                <div class="capty-caption-content">
-                    <div class="link-overlay" style="width:{{size_x}}px; height:{{size_y}}px">
-                        {% if link %}
-                        <a href="{{url}}{% query_string "mod=mod,nc=nav_ctx,nce=nav_ctx_extra" "querystring_key,recent_images_page,public,staging,sub,s,q,search_type,license,camera_type,telescope_type,solar_system_main_subject,aperture_min,aperture_max,pixel_size_min,pixel_size_max,start_date,end_date,integration_min,integration_max,moon_phase_min,moon_phase_max" %}">
-                            &nbsp;
-                        </a>
-                        {% endif %}
-                    </div>
-
-                    {% if link %}
-                    <a href="{{url}}{% query_string "mod=mod,nc=nav_ctx,nce=nav_ctx_extra" "querystring_key,recent_images_page,public,staging,sub,s,q,search_type,license,camera_type,telescope_type,solar_system_main_subject,aperture_min,aperture_max,pixel_size_min,pixel_size_max,start_date,end_date,integration_min,integration_max,moon_phase_min,moon_phase_max" %}">
-                    {% endif %}
-
-                        {{image.title|escape|default:_("(no title)")}}
-
-                    {% if link %}
-                    </a>
-                    {% endif %}
-                    , {% astrobin_username image.user link=False %}
-
-                    {% if alias == 'gallery' %}
-                        {% cache 43200 astrobin_image_capty capty_cache_key %}
-                        <table class="table table-condensed">
-                            <tr>
-                                <th><i class="icon-calendar"></i></th>
-                                {% if image.published %}
-                                    <td>{{image.published|date:"SHORT_DATE_FORMAT"}}</td>
-                                {% else %}
-                                    <td>{{image.uploaded|date:"SHORT_DATE_FORMAT"}}</td>
-                                {% endif %}
-                            </tr>
-
-                            <tr>
-                                <th><i class="icon-thumbs-up"></i></th>
-                                <td>{{image.likes}}</td>
-                            </tr>
-
-                            <tr>
-                                <th><i class="icon-bookmark"></i></th>
-                                <td>{{image.bookmarks}}</td>
-                            </tr>
-
-                            {% if image.views %}
-                                <tr>
-                                    <th><i class="icon-eye-open"></i></th>
-                                    <td>{{image.view}}</td>
-                                </tr>
-                            {% endif %}
-                        </table>
-                        {% endcache %}
-                    {% endif %}
-                </div>
-            </div>
         {% endif %}
     </div>
 {% endif %}

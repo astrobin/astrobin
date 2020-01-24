@@ -1,0 +1,97 @@
+{% load i18n %}
+
+<script type="text/x-template" id="search-by-filter-template">
+    <div class="form-group" :class="{highlighted: highlighted}">
+        <v-multiselect class="multiselect--grouped" v-model="value" :options="optionGroups" track-by="id" label="label"
+                       group-values="options" group-label="group" selectLabel="" deselectLabel="" selectedLabel=""
+                       :searchable="false" placeholder="{% trans "Select" %}">
+        </v-multiselect>
+        <input type="hidden" name="t" :value="value.id">
+    </div>
+</script>
+
+<script>
+    Vue.component("search-by-filter", {
+        template: "#search-by-filter-template",
+        props: [
+            "searchBy"
+        ],
+        mixins: [
+            FilterComponentMixin
+        ],
+        data: function () {
+            return {
+                value: null,
+                optionGroups: [
+                    {
+                        group: "",
+                        options: [
+                            {
+                                id: "all",
+                                label: "{% trans "Everything" %}"
+                            }
+                        ]
+                    },
+                    {
+                        group: "{% trans "By basic information" %}",
+                        options: [
+                            {
+                                id: "title",
+                                label: "{% trans "Title" %}"
+                            },
+                            {
+                                id: "description",
+                                label: "{% trans "Description" %}"
+                            }
+                        ]
+                    },
+                    {
+                        group: "{% trans "By astrometry details" %}",
+                        options: [
+                            {
+                                id: "objects_in_field",
+                                label: "{% trans "Objects in field" %}"
+                            }
+                        ]
+                    },
+                    {
+                        group: "{% trans "By gear used" %}",
+                        options: [
+                            {
+                                id: "imaging_telescopes",
+                                label: "{% trans "Imaging telescopes" %}"
+                            },
+                            {
+                                id: "guiding_telescopes",
+                                label: "{% trans "Guiding telescopes" %}"
+                            },
+                            {
+                                id: "imaging_cameras",
+                                label: "{% trans "Imaging cameras" %}"
+                            },
+                            {
+                                id: "guiding_cameras",
+                                label: "{% trans "Guiding cameras" %}"
+                            },
+                            {
+                                id: "mounts",
+                                label: "{% trans "Mounts" %}"
+                            }
+                        ]
+                    }
+                ]
+            }
+        },
+        created: function () {
+            for (var i = 0; i < this.optionGroups.length; i++) {
+                for (var j = 0; j < this.optionGroups[i].options.length; j++) {
+                    if (this.optionGroups[i].options[j].id === this.searchBy) {
+                        this.value = this.optionGroups[i].options[j];
+                        return;
+                    }
+                }
+            }
+            this.value = this.optionGroups[0].options[0];
+        }
+    });
+</script>

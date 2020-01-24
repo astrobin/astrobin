@@ -1,3 +1,4 @@
+.idea
 .DS_Store
 *.bak
 *.Plo
@@ -15,6 +16,7 @@
 *.orig
 *.pid
 *.log*
+!docker/astrobin.logrotate.conf
 *.err
 *.po~
 .dirstamp
@@ -29,3 +31,5 @@ env/dev
 astrobin-mobile.css
 astrobin.css
 *.scssc
+*.css.map
+node_modules

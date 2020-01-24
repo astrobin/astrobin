@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2016-11-12 07:03+0000\n"
+"POT-Creation-Date: 2019-10-15 11:54+0000\n"
 "PO-Revision-Date: 2015-12-30 10:44+0000\n"
 "Last-Translator: Samuli <samuli.vuorinen@iki.fi>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -19,19 +19,12 @@ msgstr ""
 "X-Generator: Pootle 2.5.0\n"
 "X-POOTLE-MTIME: 1451472275.88037\n"
 
-#: templates/nested_comments/nestedcomment_app.html:23
-#: templates/nested_comments/nestedcomment_app.html:138
-#: templates/nested_comments/nestedcomment_app.html:161
-#: templates/nested_comments/nestedcomment_list.html:58
 msgid "Cancel"
 msgstr "Peruuta"
 
-#: templates/nested_comments/nestedcomment_app.html:38
 msgid "Add a comment"
 msgstr "Lisää kommentti"
 
-#: templates/nested_comments/nestedcomment_app.html:43
-#: templates/nested_comments/nestedcomment_app.html:177
 msgid ""
 "Please <a href=\"/accounts/login/\">login</a> or <a href=\"/accounts/"
 "register/\">register</a> to leave a comment.</p>"
@@ -39,100 +32,65 @@ msgstr ""
 "Ole hyvä ja <a href=\"/accounts/login\">kirjaudu sisään</a> tai <a href=\"/"
 "accounts/register/\">rekisteröidy</a> jättääksesi kommentteja.</p>"
 
-#: templates/nested_comments/nestedcomment_app.html:52
 msgid "There are no comments yet."
 msgstr "Kommentteja ei ole vielä."
 
-#: templates/nested_comments/nestedcomment_app.html:68
-#: templates/nested_comments/nestedcomment_app.html:86
 msgid "(deleted)"
 msgstr "(poistettu)"
 
-#: templates/nested_comments/nestedcomment_app.html:97
-#: templates/nested_comments/nestedcomment_list.html:33
 msgid "Link"
 msgstr "Linkki"
 
-#: templates/nested_comments/nestedcomment_app.html:101
-#: templates/nested_comments/nestedcomment_list.html:39
 msgid "Undelete"
 msgstr "Peru poisto"
 
-#: templates/nested_comments/nestedcomment_app.html:103
-#: templates/nested_comments/nestedcomment_list.html:41
 msgid "Delete"
 msgstr "Poista"
 
-#: templates/nested_comments/nestedcomment_app.html:108
-#: templates/nested_comments/nestedcomment_list.html:44
 msgid "Edit"
 msgstr "Muokkaa"
 
-#: templates/nested_comments/nestedcomment_app.html:113
-#: templates/nested_comments/nestedcomment_list.html:46
 msgid "Reply"
 msgstr "Vastaa"
 
-#: templates/nested_comments/nestedcomment_app.html:141
-#: templates/nested_comments/nestedcomment_app.html:164
 msgid "The comment cannot be empty."
 msgstr "Kommentti ei saa olla tyhjä."
 
-#: templates/nested_comments/nestedcomment_app.html:188
-#: templates/nested_comments/nestedcomment_list.html:57
 msgid "Save"
 msgstr "Tallenna"
 
-#: templates/nested_comments/nestedcomment_app.html:198
-msgid "Preview"
-msgstr "Esikatselu"
-
-#: templates/nested_comments/nestedcomment_app.html:204
-#: templates/nested_comments/nestedcomment_list.html:60
-msgid "Formatting help"
-msgstr "Muotoiluapua"
-
-#: templates/nested_comments/nestedcomment_app.html:208
-msgid "You type:"
-msgstr "Kirjoitat:"
-
-#: templates/nested_comments/nestedcomment_app.html:209
-msgid "You see:"
-msgstr "Näet:"
-
-#: templates/nested_comments/nestedcomment_app.html:214
-#: templates/nested_comments/nestedcomment_app.html:215
-msgid "italics"
-msgstr "kursiivi"
-
-#: templates/nested_comments/nestedcomment_app.html:219
-#: templates/nested_comments/nestedcomment_app.html:220
-msgid "bold"
-msgstr "lihavointi"
-
-#: templates/nested_comments/nestedcomment_app.html:229
-msgid "(TAB or 4 spaces)"
-msgstr "(Tabulaattori tai 4 välilyöntiä)"
-
-#: templates/nested_comments/nestedcomment_app.html:229
-#: templates/nested_comments/nestedcomment_app.html:230
-msgid "preformatted text"
-msgstr "esimuotoiltu teksti"
-
-#: templates/nested_comments/nestedcomment_app.html:234
-#: templates/nested_comments/nestedcomment_app.html:235
-msgid "quoted text"
-msgstr "lainattu teksti"
-
-#: templates/nested_comments/nestedcomment_app.html:239
-#: templates/nested_comments/nestedcomment_app.html:240
-msgid "escape the formatting syntax"
-msgstr "ohita (escape) erikoismerkeillä tehtävä muotoilusyntaksi"
-
-#: templates/nested_comments/nestedcomment_list.html:26
 msgid "(comment deleted)"
 msgstr "(kommentti poistettu)"
 
-#: templates/nested_comments/nestedcomment_list.html:75
+msgid "Formatting help"
+msgstr "Muotoiluapua"
+
 msgid "There doesn't seem to be anything here."
 msgstr "Täällä ei näytä olevan mitään."
+
+#~ msgid "Preview"
+#~ msgstr "Esikatselu"
+
+#~ msgid "You type:"
+#~ msgstr "Kirjoitat:"
+
+#~ msgid "You see:"
+#~ msgstr "Näet:"
+
+#~ msgid "italics"
+#~ msgstr "kursiivi"
+
+#~ msgid "bold"
+#~ msgstr "lihavointi"
+
+#~ msgid "(TAB or 4 spaces)"
+#~ msgstr "(Tabulaattori tai 4 välilyöntiä)"
+
+#~ msgid "preformatted text"
+#~ msgstr "esimuotoiltu teksti"
+
+#~ msgid "quoted text"
+#~ msgstr "lainattu teksti"
+
+#~ msgid "escape the formatting syntax"
+#~ msgstr "ohita (escape) erikoismerkeillä tehtävä muotoilusyntaksi"

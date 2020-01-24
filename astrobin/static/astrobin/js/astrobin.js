@@ -286,32 +286,16 @@ astrobin_common = {
                         $count_badge.text(count - 1);
                     }
                 }
+
+                $.ajax({
+                    url: '/notifications/clear-template-cache/',
+                    type: 'POST',
+                    dataType: 'json',
+                    timeout: 1000
+                });
             }
         });
     },
-
-    mark_all_notifications_as_read: function() {
-        // Prevent closing
-        $('#notifications-popup').click(function(event) {
-            event.stopPropagation();
-        });
-
-        $('#notifications-popup .mark-all-as-read-spinner').show();
-
-        $.ajax({
-            url: '/persistent_messages/mark_read/all/',
-            dataType: 'json',
-            timeout: 5000,
-            success: function() {
-                $('#notifications-popup li').removeClass('unread');
-                $('#notifications-popup li a.mark-single-as-read').remove();
-                $('#notifications-popup li .tooltip').remove();
-                $('#notifications_count').remove();
-                $('#notifications-popup .mark-all-as-read-spinner').hide();
-            }
-        });
-    },
-
 
     init: function(current_username, config) {
         /* Init */
@@ -322,6 +306,7 @@ astrobin_common = {
         $('.carousel').carousel();
         $('.nav-tabs').tab();
         $('[rel=tooltip]').tooltip();
+        $('.collapse.in').collapse();
 
         // date and time pickers
         $('input').filter('.timepickerclass').timepicker({});

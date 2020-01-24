@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2016-11-12 07:03+0000\n"
+"POT-Creation-Date: 2019-10-15 11:53+0000\n"
 "PO-Revision-Date: 2014-01-23 17:31+0000\n"
 "Last-Translator: kookoo_gr <kookoo_gr@yahoo.com>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -19,88 +19,56 @@ msgstr ""
 "X-Generator: Pootle 2.5.0\n"
 "X-POOTLE-MTIME: 1390498300.150626\n"
 
-#: folders.py:82 models.py:215 models.py:283
-#: templates/rawdata/privatesharedfolder_detail.html:86
-#: templates/rawdata/privatesharedfolder_form.html:20
-#: templates/rawdata/privatesharedfolder_list.html:38
-#: templates/rawdata/publicdatapool_detail.html:64
-#: templates/rawdata/publicdatapool_form.html:20
-#: templates/rawdata/publicdatapool_list.html:32
 msgid "Name"
 msgstr "Όνομα"
 
-#: folders.py:92 templates/rawdata/_folder_dropdown.html:14
-#: templates/rawdata/_images.html:14 templates/rawdata/library.html:66
-#: templates/rawdata/rawimage_detail.html:15
 msgid "Type"
 msgstr "Τύπος"
 
-#: folders.py:117 templates/rawdata/_folder_dropdown.html:28
 msgid "Upload date"
 msgstr "Ημερομηνία ανεβάσματος"
 
-#: folders.py:141 templates/rawdata/_folder_dropdown.html:21
-#: templates/rawdata/library.html:82 templates/rawdata/rawimage_detail.html:18
 msgid "Acquisition date"
 msgstr "Ημερομηνία λήψης"
 
-#: folders.py:166 templates/rawdata/_folder_dropdown.html:35
-#: templates/rawdata/library.html:90 templates/rawdata/rawimage_detail.html:19
 msgid "Camera"
 msgstr "Κάμερα"
 
-#: folders.py:190 templates/rawdata/_folder_dropdown.html:42
-#: templates/rawdata/library.html:98
 msgid "Telescope or lens"
 msgstr "Τηλεσκόπιο ή φακός"
 
-#: folders.py:214 templates/rawdata/_folder_dropdown.html:49
-#: templates/rawdata/library.html:106
 msgid "Filter"
 msgstr "Φίλτρο"
 
-#: folders.py:238 templates/rawdata/_folder_dropdown.html:56
-#: templates/rawdata/library.html:114
 msgid "Subject"
 msgstr "Θέμα"
 
-#: folders.py:262 templates/rawdata/_folder_dropdown.html:63
-#: templates/rawdata/library.html:122
-#: templates/rawdata/rawimage_detail.html:20
 msgid "Temperature"
 msgstr "Θερμοκρασία"
 
-#: forms.py:85
 msgid "Users"
 msgstr "Χρήστες"
 
-#: forms.py:86
 msgid "A list of users you want to invite. Use a comma to separate them."
 msgstr ""
 "Μια λίστα από χρήστες που θέλετε να καλέσετε. Χρησιμοποιήστε κόμμα (,) για "
 "να τους διαχωρίσετε."
 
-#: models.py:44 templatetags/rawdata_tags.py:15
 msgid "Unknown"
 msgstr "Άγνωστο"
 
-#: models.py:45
 msgid "Light"
 msgstr "Light"
 
-#: models.py:46
 msgid "Offset/Bias"
 msgstr "Offset/Bias"
 
-#: models.py:47
 msgid "Dark"
 msgstr "Dark"
 
-#: models.py:48
 msgid "Flat"
 msgstr "Flat"
 
-#: models.py:216
 msgid ""
 "A public name for this pool. Be descriptive, include the name of the "
 "celestial object and a target focal length in millimeters."
@@ -109,15 +77,12 @@ msgstr ""
 "συμπεριλάβετε το όνομα του ουράνιου σώματος και μια εστιακή απόσταση σε "
 "χιλιοστά για τον στόχο."
 
-#: models.py:220 models.py:288
 msgid "Description"
 msgstr "Περιγραφή"
 
-#: models.py:221
 msgid "Describe the goals and terms of this pool."
 msgstr "Περιγράψτε τους στόχους και τους όρους αυτής της περιοχής."
 
-#: models.py:284
 msgid ""
 "A name for this folder. Be descriptive, so that the folder can be quickly "
 "recognized by the name."
@@ -125,11 +90,9 @@ msgstr ""
 "Ένα όνομα για αυτό τον φάκελο. Να είστε περιγραφικοί, ώστε ο φάκελος να "
 "μπορεί εύκολα να αναγνωριστεί από το όνομα."
 
-#: models.py:289
 msgid "Describe the goals of this folder."
 msgstr "Περιγράψτε τους στόχους αυτού του φακέλου."
 
-#: serializers.py:38
 msgid ""
 "You don't have any free space on AstroBin Rawdata. Consider upgrading your "
 "account."
@@ -137,7 +100,6 @@ msgstr ""
 "Δεν έχετε αρκετό ελεύθερο χώρο στα Ανεπεξέργαστα Δεδομένα του AstroBin. "
 "Εξετάστε την αναβάθμιση του λογαριασμού σας."
 
-#: signal_handlers.py:18
 msgid ""
 "You cannot downgrade to this plan because your files would not fit in the "
 "allocated space. Please delete some files first."
@@ -145,95 +107,57 @@ msgstr ""
 "Δεν μπορείτε να υποβιβάσετε αυτό το πλάνο επειδή τα αρχεία σας δεν θα "
 "χωρέσουν στον καθορισμένο χώρο. Παρακαλώ διαγράψτε πρώτα μερικά αρχεία."
 
-#: templates/rawdata/_browser_js.html:19 templates/rawdata/_images.html:24
 msgid "Select all"
 msgstr "Επιλογή όλων"
 
-#: templates/rawdata/_browser_js.html:38
 msgid "Reset selection"
 msgstr "Επαναφορά επιλογής"
 
-#: templates/rawdata/_browser_js.html:48 templates/rawdata/_images.html:48
-#: templates/rawdata/privatesharedfolder_detail.html:144
-#: templates/rawdata/publicdatapool_detail.html:113
-#: templates/rawdata/temporaryarchive_detail.html:24
 msgid "Download"
 msgstr "Κατέβασμα"
 
-#: templates/rawdata/_browser_js.html:54 templates/rawdata/library.html:151
 msgid "Preprocess"
 msgstr "Προεπεξεργασία"
 
-#: templates/rawdata/_browser_js.html:61
 msgid "Share"
 msgstr "Μοιραστείτε"
 
-#: templates/rawdata/_browser_js.html:68
-#: templates/rawdata/privatesharedfolder_detail.html:8
 msgid "Private shared folder"
 msgstr "Ιδιωτικός κοινόχρηστος φάκελος"
 
-#: templates/rawdata/_browser_js.html:72
-#: templates/rawdata/publicdatapool_detail.html:8
 msgid "Public data pool"
 msgstr "Δημόσια περιοχή δεδομένων"
 
-#: templates/rawdata/_browser_js.html:78 templates/rawdata/_images.html:51
-#: templates/rawdata/privatesharedfolder_detail.html:47
-#: templates/rawdata/privatesharedfolder_detail.html:186
-#: templates/rawdata/privatesharedfolder_list.html:95
 msgid "Delete"
 msgstr "Διαγραφή"
 
-#: templates/rawdata/_folder_dropdown.html:7
-#: templates/rawdata/library.html:130
 msgid "Smart folders"
 msgstr "Έξυπνοι φάκελοι"
 
-#: templates/rawdata/_folders.html:13
 msgid "Files"
 msgstr "Αρχεία"
 
-#: templates/rawdata/_images.html:13
 #, fuzzy
 msgid "Filename"
 msgstr "Αρχεία"
 
-#: templates/rawdata/_images.html:15 templates/rawdata/library.html:74
-#: templates/rawdata/privatesharedfolder_detail.html:89
-#: templates/rawdata/privatesharedfolder_form.html:22
-#: templates/rawdata/publicdatapool_detail.html:67
-#: templates/rawdata/publicdatapool_form.html:22
-#: templates/rawdata/rawimage_detail.html:17
 msgid "Uploaded"
 msgstr "Ανέβηκε"
 
-#: templates/rawdata/_screenshot_tour.html:3
 msgid "Screenshot tour"
 msgstr "Περιήγηση στιγμιότυπων"
 
-#: templates/rawdata/help_01.html:4 templates/rawdata/help_01.html.py:8
-#: templates/rawdata/help_01.html:32 templates/rawdata/help_02.html:4
-#: templates/rawdata/help_02.html.py:8 templates/rawdata/help_02.html:44
-#: templates/rawdata/help_03.html:4 templates/rawdata/help_03.html.py:8
-#: templates/rawdata/help_03.html:31 templates/rawdata/plans.html:4
-#: templates/rawdata/plans.html.py:8 templates/rawdata/restricted.html:4
-#: templates/rawdata/restricted.html:8
 msgid "AstroBin Raw Data"
 msgstr "Ανεπεξέργαστα Δεδομένα του AstroBin"
 
-#: templates/rawdata/help_01.html:9 templates/rawdata/help_02.html:9
-#: templates/rawdata/help_03.html:9
 msgid "To safely store and organize your raw files."
 msgstr ""
 "Για να αποθηκεύσετε και να οργανώσετε με ασφάλεια τα ανεπεξέργαστα δεδομένα "
 "σας."
 
-#: templates/rawdata/help_01.html:19
 msgid "What is AstroBin Raw Data?"
 msgstr "Τι είναι τα Ανεπεξέργαστα Δεδομένα του AstroBin;"
 
-#: templates/rawdata/help_01.html:20
 msgid ""
 "You already love AstroBin because of how it keeps your images organized. "
 "Thanks to it, you will never have to worry about losing your precious work, "
@@ -243,13 +167,11 @@ msgstr ""
 "Χάρη σε αυτό, δεν θα χρειαστεί ποτέ να ανησυχήσετε για απώλεια της πολύτιμης "
 "δουλειάς σας, ούτε όλα τα μεταδεδομένα που σχετίζονται με αυτήν."
 
-#: templates/rawdata/help_01.html:22
 msgid "What if we told you now you can do the same with your raw files?"
 msgstr ""
 "Τι θα λέγατε αν σας λέγαμε ότι μπορούμε να κάνουμε το ίδιο και με τα "
 "ανεπεξέργαστα αρχεία σας;"
 
-#: templates/rawdata/help_01.html:24
 msgid ""
 "Is your <em>astrophotography</em> folder full of thousands of poorly "
 "organized <strong>FIT</strong> or <strong>digital camera raw</strong> files? "
@@ -264,7 +186,6 @@ msgstr ""
 "να μπορούσατε να κάνετε ένα αντίγραφο ασφαλείας των ανεπεξέργαστων αρχείων "
 "σας κάπου με ασφάλεια;"
 
-#: templates/rawdata/help_01.html:26
 msgid ""
 "<strong>AstroBin Raw Data</strong> is the answer! For a very modest price, "
 "you can store your whole <strong>raw data library</strong> online, where it "
@@ -275,7 +196,6 @@ msgstr ""
 "των ανεπεξέργαστων δεδομένων σας</strong> online, όπου θα είναι προσβάσιμη "
 "με ασφάλεια μόνο από εσάς."
 
-#: templates/rawdata/help_01.html:28
 msgid ""
 "AstroBin will <em>automatically</em> organize your files by reading the "
 "<strong>FIT</strong> headers or <strong>EXIF</strong> information!"
@@ -284,20 +204,15 @@ msgstr ""
 "επικεφαλίδες από τα <strong>FIT</strong> αρχεία ή τις πληροφορίες "
 "<strong>EXIF</strong>!"
 
-#: templates/rawdata/help_01.html:33 templates/rawdata/help_02.html:45
-#: templates/rawdata/help_03.html:32 templates/rawdata/help_03.html.py:40
 msgid "Sign up now!"
 msgstr "Εγγραφείτε τώρα!"
 
-#: templates/rawdata/help_01.html:40 templates/rawdata/help_02.html:53
 msgid "Next page"
 msgstr "Επόμενη σελίδα"
 
-#: templates/rawdata/help_02.html:19
 msgid "How does it work?"
 msgstr "Πως λειτουργεί;"
 
-#: templates/rawdata/help_02.html:20
 msgid ""
 "You can have up to <strong>500 GB</strong> to store your <strong>FIT</"
 "strong> and <strong>digital camera raw</strong> files."
@@ -305,7 +220,6 @@ msgstr ""
 "Μπορείτε να έχετε μέχρι <strong>500 GB</strong> για να αποθηκεύσετε τα "
 "αρχεία <strong>FIT</strong> και <strong>raw αρχεία ψηφιακών καμερών</strong>."
 
-#: templates/rawdata/help_02.html:22
 msgid ""
 "You can upload all of them in a matter of a few clicks, and AstroBin will "
 "start organizing your data in \"virtual folders\"."
@@ -313,7 +227,6 @@ msgstr ""
 "Μπορείτε να τα ανεβάσετε όλα με λίγα κλικ και το AstroBin θα ξεκινήσει να "
 "οργανώνει τα δεδομένα σας σε \"εικονικούς φακέλους\"."
 
-#: templates/rawdata/help_02.html:24
 msgid ""
 "Forget about having to take care of complicated folder structures in your "
 "computer! CCD and DSLR raw files have comprehensive headers: why shouldn't "
@@ -324,35 +237,27 @@ msgstr ""
 "γιατί να μην τις χρησιμοποιήσετε για να σημαδέψετε αυτόματα και "
 "αποτελεσματικά τα ανεπεξέργαστα αρχεία σας;"
 
-#: templates/rawdata/help_02.html:27
 msgid "By type"
 msgstr "Ανά τύπο"
 
-#: templates/rawdata/help_02.html:28
 msgid "By acquisition date"
 msgstr "Ανά ημερομηνία λήψης"
 
-#: templates/rawdata/help_02.html:29
 msgid "By upload date"
 msgstr "Ανά ημερομηνία ανεβάσματος"
 
-#: templates/rawdata/help_02.html:30
 msgid "By subject"
 msgstr "Ανά θέμα"
 
-#: templates/rawdata/help_02.html:31
 msgid "By filter"
 msgstr "Ανά φίλτρο"
 
-#: templates/rawdata/help_02.html:32
 msgid "By acquisition telescope or lens"
 msgstr "Ανά τηλεσκόπιο ή φακό λήψης"
 
-#: templates/rawdata/help_02.html:33
 msgid "By temperature"
 msgstr "Ανά θερμοκρασία"
 
-#: templates/rawdata/help_02.html:36
 msgid ""
 "Not only will your data be safely and securely preserved, but you will be "
 "able to download bundles of your files in a <strong>zip</strong> file."
@@ -360,7 +265,6 @@ msgstr ""
 "Όχι μόνο τα δεδομένα σας θα διατηρούνται με ασφάλεια, αλλά θα είστε και "
 "ικανοί να κατεβάσετε πακέτα των δεδομένων σας σε αρχείο <strong>zip</strong>."
 
-#: templates/rawdata/help_02.html:38
 msgid ""
 "This way, it will be easy, later on, to download again your dark frames "
 "taken at -15&deg;C in October two years ago!"
@@ -368,19 +272,15 @@ msgstr ""
 "Έτσι, θα είναι πιο εύκολο, αργότερα, να κατεβάσετε ξανά τα dark καρέ σας που "
 "πήρατε στους -15&deg;C τον Οκτώβριο πριν από δυο χρόνια!"
 
-#: templates/rawdata/help_02.html:40
 msgid "if the information is present in the file's headers"
 msgstr "αν η πληροφορία είναι παρούσα στην επικεφαλίδα του αρχείου"
 
-#: templates/rawdata/help_02.html:52 templates/rawdata/help_03.html:39
 msgid "Previous page"
 msgstr "Προηγούμενη σελίδα"
 
-#: templates/rawdata/help_03.html:19
 msgid "Sharing is loving."
 msgstr "Το να μοιράζεστε είναι τρυφερό."
 
-#: templates/rawdata/help_03.html:20
 msgid ""
 "Optionally, you can share your raw data with a friend, or why not, your "
 "entire astronomy club! This will make it really easy to collaborate on that "
@@ -392,11 +292,9 @@ msgstr ""
 "πραγματικά εύκολο να συνεργαστείτε σε αυτό το μαζικό σχέδιο "
 "<strong>ολοκλήρωσης 100 ωρών</strong> που θέλατε να τελειώσετε."
 
-#: templates/rawdata/help_03.html:22
 msgid "Peace of mind."
 msgstr "Σιγουριά."
 
-#: templates/rawdata/help_03.html:23
 msgid ""
 "Ever had a hard-drive crash on you, and lost a lot of data? By keeping your "
 "raw files on <strong>AstroBin Raw Data</strong> you will be safe from "
@@ -409,11 +307,9 @@ msgstr ""
 "ατυχήματα! Στο AstroBin, λαμβάνουμε υπόψη την διατήρηση δεδομένων πολύ "
 "σοβαρά."
 
-#: templates/rawdata/help_03.html:25
 msgid "Do some science."
 msgstr "Κάντε επιστήμη."
 
-#: templates/rawdata/help_03.html:26
 msgid ""
 "Although your raw files are strictly private, unless you explicitly share "
 "them, professional and amateur astronomers may still search if a raw file of "
@@ -429,28 +325,22 @@ msgstr ""
 "καινοφανών, υπερκαινοφανών, αστεροειδών, κομητών, μεταβλητών αστέρων και "
 "άλλα!"
 
-#: templates/rawdata/library.html:6 templates/rawdata/library.html.py:19
 msgid "Your raw data library"
 msgstr "Η βιβλιοθήκη των ανεπεξέργαστων δεδομένων σας"
 
-#: templates/rawdata/library.html:21
 #, python-format
 msgid "You have used %(used)s of your %(limit)s."
 msgstr "Έχετε χρησιμοποιήσει %(used)s από %(limit)s."
 
-#: templates/rawdata/library.html:35
 msgid "Manage plans"
 msgstr "Διαχείριση πλάνων"
 
-#: templates/rawdata/library.html:38
 msgid "Upload"
 msgstr "Ανέβασμα"
 
-#: templates/rawdata/library.html:45 templates/rawdata/restricted.html:18
 msgid "Error!"
 msgstr "Σφάλμα!"
 
-#: templates/rawdata/library.html:46
 msgid ""
 "You have no more space left on your Raw Data account. Please delete some "
 "files to make room, or upgrade your account."
@@ -459,11 +349,9 @@ msgstr ""
 "Παρακαλώ διαγράψτε μερικά αρχεία για να κάνετε χώρο, ή αναβαθμίστε τον "
 "λογαριασμό σας."
 
-#: templates/rawdata/library.html:52
 msgid "Warning!"
 msgstr "Προειδοποίηση!"
 
-#: templates/rawdata/library.html:53
 #, python-format
 msgid ""
 "AstroBin is still working to index %(number)s of your %(total)s raw files."
@@ -471,15 +359,12 @@ msgstr ""
 "Το AstroBin επεξεργάζεται ακόμα για να κατατάξει %(number)s από τα %(total)s "
 "ανεπεξέργαστα αρχεία σας."
 
-#: templates/rawdata/library.html:60
 msgid "All files"
 msgstr "Όλα τα αρχεία"
 
-#: templates/rawdata/library.html:140
 msgid "There doesn't seem to be anything here."
 msgstr "Δεν φαίνεται να υπάρχει κάτι εδώ."
 
-#: templates/rawdata/library.html:142
 #, python-format
 msgid ""
 "Head over to the <a href=\"%(upload_url)s\">upload page</a> to get started. "
@@ -487,11 +372,9 @@ msgstr ""
 "Πηγαίνετε στην <a href=\"%(upload_url)s\">σελίδα ανεβάσματος</a> για να "
 "ξεκινήσετε."
 
-#: templates/rawdata/library.html:157
 msgid "Coming soon!"
 msgstr "Σύντομα κοντά σας!"
 
-#: templates/rawdata/library.html:162
 msgid ""
 "<strong>AstroBin Raw Data</strong> will soon allow you to automatically "
 "preprocess your data with a single click!"
@@ -499,7 +382,6 @@ msgstr ""
 "Τα <strong>Ανεπεξέργαστα Δεδομένα του AstroBin</strong> σύντομα θα σας "
 "επιτρέψουν αυτόματα να προεπεξεργαστείτε τα δεδομένα σας με ένα κλικ!"
 
-#: templates/rawdata/library.html:165
 msgid ""
 "We are working on algorithms that will automatically scan your library for "
 "calibration files, and identify the best matches for dark, offset and flat "
@@ -516,47 +398,32 @@ msgstr ""
 "κατέβασμα, έτοιμο για μετέπειτα επεξεργασία στο αγαπημένο σας πρόγραμμα "
 "επεξεργασίας εικόνας."
 
-#: templates/rawdata/library.html:168
 msgid "We will let you know when this feature is available!"
 msgstr "Θα σας ενημερώσουμε όταν η νέα λειτουργία θα είναι διαθέσιμη!"
 
-#: templates/rawdata/library.html:172
 msgid "OK"
 msgstr "Εντάξει"
 
-#: templates/rawdata/plans.html:4 templates/rawdata/plans.html.py:9
 msgid "Plans"
 msgstr "Πλάνα"
 
-#: templates/rawdata/privatesharedfolder_detail.html:15
-#: templates/rawdata/privatesharedfolder_form.html:128
-#: templates/rawdata/publicdatapool_form.html:128
 msgid "Success!"
 msgstr "Επιτυχία!"
 
-#: templates/rawdata/privatesharedfolder_detail.html:17
 msgid ""
 "The users you selected have been invited. They will receive a notification."
 msgstr ""
 "Οι χρήστες που επιλέξατε έχουν λάβει πρόσκληση. Θα λάβουν μια ειδοποίηση."
 
-#: templates/rawdata/privatesharedfolder_detail.html:26
-#: templates/rawdata/publicdatapool_detail.html:18
 msgid "Actions"
 msgstr "Ενέργειες"
 
-#: templates/rawdata/privatesharedfolder_detail.html:33
-#: templates/rawdata/privatesharedfolder_detail.html:212
-#: templates/rawdata/privatesharedfolder_detail.html:224
 msgid "Invite"
 msgstr "Πρόσκληση"
 
-#: templates/rawdata/privatesharedfolder_detail.html:40
-#: templates/rawdata/publicdatapool_detail.html:25
 msgid "Edit"
 msgstr "Επεξεργασία"
 
-#: templates/rawdata/privatesharedfolder_detail.html:60
 #, python-format
 msgid ""
 "A private shared folder created by <a href=\"%(user_url)s\">%(user)s</a>, "
@@ -565,43 +432,27 @@ msgstr ""
 "Ένας ιδιωτικός κοινόχρηστος φάκελος δημιουργήθηκε από τον/την <a href="
 "\"%(user_url)s\">%(user)s</a>, με %(size)s σε %(image_count)s εικόνες."
 
-#: templates/rawdata/privatesharedfolder_detail.html:72
 msgid "Processing submissions for this folder"
 msgstr "Υποβολές επεξεργασίας για αυτόν τον φάκελο"
 
-#: templates/rawdata/privatesharedfolder_detail.html:87
-#: templates/rawdata/publicdatapool_detail.html:65
 msgid "User"
 msgstr "Χρήστης"
 
-#: templates/rawdata/privatesharedfolder_detail.html:88
-#: templates/rawdata/privatesharedfolder_form.html:21
-#: templates/rawdata/publicdatapool_detail.html:66
-#: templates/rawdata/publicdatapool_form.html:21
-#: templates/rawdata/rawimage_detail.html:16
 msgid "Size"
 msgstr "Μέγεθος"
 
-#: templates/rawdata/privatesharedfolder_detail.html:113
 msgid "Remove from this folder"
 msgstr "Αφαίρεση από αυτόν τον φάκελο"
 
-#: templates/rawdata/privatesharedfolder_detail.html:127
 msgid "Shared with the following users"
 msgstr "Μοιράζετε με τους ακόλουθους χρήστες"
 
-#: templates/rawdata/privatesharedfolder_detail.html:147
-#: templates/rawdata/publicdatapool_detail.html:116
 msgid "Size before zip compression"
 msgstr "Μέγεθος πριν την συμπίεση σε zip αρχείο"
 
-#: templates/rawdata/privatesharedfolder_detail.html:156
-#: templates/rawdata/publicdatapool_detail.html:125
 msgid "Comments"
 msgstr "Σχόλια"
 
-#: templates/rawdata/privatesharedfolder_detail.html:160
-#: templates/rawdata/publicdatapool_detail.html:129
 msgid ""
 "You can use this space to discuss this public data pool and exchange "
 "information and tips with other contributors or people who want to process "
@@ -611,18 +462,12 @@ msgstr ""
 "δημόσια περιοχή δεδομένων και να ανταλλάξετε πληροφορίες και συμβουλές με "
 "άλλους συνεισφέροντες που θέλουν να επεξεργαστούν τα δεδομένα."
 
-#: templates/rawdata/privatesharedfolder_detail.html:177
-#: templates/rawdata/privatesharedfolder_list.html:87
 msgid "Delete folder"
 msgstr "Διαγραφή φακέλου"
 
-#: templates/rawdata/privatesharedfolder_detail.html:180
-#: templates/rawdata/privatesharedfolder_list.html:90
 msgid "Are you sure you want to delete this shared folder?"
 msgstr "Είστε σίγουρος/η ότι θέλετε να διαγράψετε αυτό τον κοινό φάκελο;"
 
-#: templates/rawdata/privatesharedfolder_detail.html:181
-#: templates/rawdata/privatesharedfolder_list.html:91
 msgid ""
 "Don't worry, no files will be deleted from your raw data account, nor from "
 "the accounts of other people who may have contributed to this shared folder."
@@ -631,26 +476,15 @@ msgstr ""
 "δεδομένων σας, ούτε από τους λογαριασμούς άλλων ανθρώπων που μπορεί να έχουν "
 "συνεισφέρει σε αυτόν τον κοινόχρηστο φάκελο."
 
-#: templates/rawdata/privatesharedfolder_detail.html:184
-#: templates/rawdata/privatesharedfolder_detail.html:204
-#: templates/rawdata/privatesharedfolder_detail.html:223
-#: templates/rawdata/privatesharedfolder_form.html:99
-#: templates/rawdata/privatesharedfolder_list.html:94
-#: templates/rawdata/publicdatapool_detail.html:156
-#: templates/rawdata/publicdatapool_form.html:99
 msgid "Cancel"
 msgstr "Ακύρωση"
 
-#: templates/rawdata/privatesharedfolder_detail.html:194
 msgid "Edit folder"
 msgstr "Επεξεργασία φακέλου"
 
-#: templates/rawdata/privatesharedfolder_detail.html:205
-#: templates/rawdata/publicdatapool_detail.html:157
 msgid "Save"
 msgstr "Σώσιμο"
 
-#: templates/rawdata/privatesharedfolder_detail.html:215
 msgid ""
 "Invite users to this share private folders. Invitees will be able to add raw "
 "data and processed images, and invite more users."
@@ -659,17 +493,13 @@ msgstr ""
 "μπορούν να προσθέσουν ανεπεξέργαστα δεδομένα και επεξεργασμένες εικόνες, και "
 "να καλέσουν περισσότερους χρήστες."
 
-#: templates/rawdata/privatesharedfolder_form.html:6
-#: templates/rawdata/privatesharedfolder_form.html:10
 msgid "Share on a private folder"
 msgstr "Μοιραστείτε σε έναν ιδιωτικό φάκελο"
 
-#: templates/rawdata/privatesharedfolder_form.html:11
 msgid "Share your raw data with a selected group of people"
 msgstr ""
 "Μοιραστείτε τα ανεπεξέργαστα δεδομένα σας με μια επιλεγμένη ομάδα ανθρώπων"
 
-#: templates/rawdata/privatesharedfolder_form.html:46
 msgid ""
 "A <strong>private shared folder</strong> is a place where you can "
 "collaborate with friends, memebers of your local astronomy club, or anyone "
@@ -684,7 +514,6 @@ msgstr ""
 "είναι επίσης συνδρομητές στα <strong>Ανεπεξέργαστα Δεδομένα του AstroBin</"
 "strong> και κανένας άλλος."
 
-#: templates/rawdata/privatesharedfolder_form.html:50
 msgid ""
 "When you select an existing private shared folder, or create a new one, the "
 "images listed here on the side will be added to it."
@@ -692,24 +521,18 @@ msgstr ""
 "Όταν επιλέγετε έναν υπάρχων ιδιωτικό κοινόχρηστο φάκελο, ή δημιουργείτε έναν "
 "νέο, οι εικόνες που είναι στο πλάι θα προστεθούν σε αυτόν."
 
-#: templates/rawdata/privatesharedfolder_form.html:56
 msgid ""
 "Use this form to select an existing <strong>private shared folder</strong>."
 msgstr ""
 "Χρησιμοποιείστε αυτή την φόρμα για να επιλέξετε έναν υπάρχων "
 "<strong>ιδιωτικό κοινόχρηστο φάκελο</strong>."
 
-#: templates/rawdata/privatesharedfolder_form.html:60
-#: templates/rawdata/publicdatapool_form.html:60
 msgid "Send"
 msgstr "Αποστολή"
 
-#: templates/rawdata/privatesharedfolder_form.html:63
-#: templates/rawdata/publicdatapool_form.html:63
 msgid "Loading..."
 msgstr "Γίνεται φόρτωση..."
 
-#: templates/rawdata/privatesharedfolder_form.html:73
 msgid ""
 "Or use this button to create a whole new <strong>private shared folder</"
 "strong>."
@@ -717,26 +540,18 @@ msgstr ""
 "Ή χρησιμοποιήστε αυτό το κουμπί για να δημιουργήσετε ένα νέο "
 "<strong>ιδιωτικό κοινόχρηστο φάκελο</strong>."
 
-#: templates/rawdata/privatesharedfolder_form.html:77
-#: templates/rawdata/privatesharedfolder_form.html:90
 msgid "Create new private shared folder"
 msgstr "Δημιουργία νέου ιδιωτικού κοινόχρηστου φακέλου"
 
-#: templates/rawdata/privatesharedfolder_form.html:100
-#: templates/rawdata/publicdatapool_form.html:100
 msgid "Create"
 msgstr "Δημιουργία"
 
-#: templates/rawdata/privatesharedfolder_list.html:5
-#: templates/rawdata/privatesharedfolder_list.html:11
 msgid "Private shared folders"
 msgstr "Ιδιωτικοί κοινόχρηστοι φάκελοι"
 
-#: templates/rawdata/privatesharedfolder_list.html:13
 msgid "Collections of raw files shared with selected users."
 msgstr "Συλλογές από ανεπεξέργαστα δεδομένα που μοιράζονται με άλλους χρήστες."
 
-#: templates/rawdata/privatesharedfolder_list.html:22
 #, python-format
 msgid ""
 "A <strong>private shared folder</strong> is a way for subscribers to the <a "
@@ -750,7 +565,6 @@ msgstr ""
 "FIT και αρχεία raw από ψηφιακές κάμερες, με άλλους χρήστες, να συνεργαστούν "
 "στην επεξεργασία, να λάβουν ή να δώσουν τεχνική βοήθεια."
 
-#: templates/rawdata/privatesharedfolder_list.html:25
 #, fuzzy, python-format
 msgid ""
 "The <a href=\"%(rawdata_url)s\">Raw Data Platform</a> is primarily a way to "
@@ -764,30 +578,21 @@ msgstr ""
 "είστε μέρος της σημαίνει επίσης ότι υποστηρίζετε το AstroBin και ίσως να "
 "συνεισφέρετε τα ανεπεξέργαστα δεδομένα σας για επιστημονικές ανακαλύψεις."
 
-#: templates/rawdata/privatesharedfolder_list.html:32
 msgid "You have access to the following private shared folders."
 msgstr "Έχετε πρόσβαση στους ακόλουθους ιδιωτικούς κοινόχρηστους φακέλους."
 
-#: templates/rawdata/privatesharedfolder_list.html:39
-#: templates/rawdata/publicdatapool_list.html:33
 msgid "Owner"
 msgstr "Ιδιοκτήτης"
 
-#: templates/rawdata/privatesharedfolder_list.html:40
-#: templates/rawdata/publicdatapool_list.html:34
 msgid "Raw images"
 msgstr "Ανεπεξέργαστες εικόνες"
 
-#: templates/rawdata/privatesharedfolder_list.html:41
-#: templates/rawdata/publicdatapool_list.html:35
 msgid "Processed images"
 msgstr "Επεξεργασμένες εικόνες"
 
-#: templates/rawdata/privatesharedfolder_list.html:42
 msgid "Last updated"
 msgstr "Τελευταία ενημέρωση"
 
-#: templates/rawdata/privatesharedfolder_list.html:75
 #, python-format
 msgid ""
 "You don't have access to any private shared folders. If you want to create "
@@ -801,24 +606,18 @@ msgstr ""
 "<strong>έξυπνους φακέλους</strong> και χρησιμοποιήστε το κουμπί "
 "<strong>Μοιραστείτε</strong> για να τα μοιραστείτε."
 
-#: templates/rawdata/privatesharedfolder_list.html:77
 msgid ""
 "You don't have access to any private shared folders. You don't have a Raw "
 "Data subscription, so you may not create shared folder, but you may still be "
 "invited by subscribers."
 msgstr ""
 
-#: templates/rawdata/privatesharedfolder_list.html:104
-#: templates/rawdata/publicdatapool_list.html:64
 msgid "Follow"
 msgstr "Ακολούθησε"
 
-#: templates/rawdata/privatesharedfolder_list.html:104
-#: templates/rawdata/publicdatapool_list.html:64
 msgid "Unfollow"
 msgstr "Σταμάτα να ακολουθείς"
 
-#: templates/rawdata/publicdatapool_detail.html:38
 #, python-format
 msgid ""
 "A public data pool created by <a href=\"%(user_url)s\">%(user)s</a>, with "
@@ -827,15 +626,12 @@ msgstr ""
 "Μια δημόσια περιοχή δεδομένων δημιουργήθηκε από τον/την <a href="
 "\"%(user_url)s\">%(user)s</a>, με %(size)s σε %(image_count)s εικόνες."
 
-#: templates/rawdata/publicdatapool_detail.html:50
 msgid "Processing submissions for this pool"
 msgstr "Υποβολές επεξεργασίας για αυτή την περιοχή"
 
-#: templates/rawdata/publicdatapool_detail.html:91
 msgid "Remove from this pool"
 msgstr "Αφαίρεση από αυτή την περιοχή"
 
-#: templates/rawdata/publicdatapool_detail.html:106
 #, python-format
 msgid ""
 "This public data pool was created on %(date)s by <a href=\"%(user_url)s\">"
@@ -851,20 +647,15 @@ msgstr ""
 "\">Ανεπεξέργαστα Δεδομένα του AstroBin</a>, ή μπορείτε να κατεβάσετε τα "
 "διαθέσιμα δεδομένα και να προσπαθήσετε να τα επεξεργαστείτε!"
 
-#: templates/rawdata/publicdatapool_detail.html:146
 msgid "Edit public data pool"
 msgstr "Επεξεργασία δημόσιας περιοχής δεδομένων"
 
-#: templates/rawdata/publicdatapool_form.html:6
-#: templates/rawdata/publicdatapool_form.html:10
 msgid "Share on a public data pool"
 msgstr "Μοιραστείτε σε μια δημόσια περιοχή δεδομένων"
 
-#: templates/rawdata/publicdatapool_form.html:11
 msgid "Contribute to public group of raw data"
 msgstr "Συνεισφέρετε στην δημόσια ομάδα ανεπεξέργαστων δεδομένων"
 
-#: templates/rawdata/publicdatapool_form.html:46
 msgid ""
 "A <strong>public data pool</strong> is a place where anyone with an "
 "<strong>AstroBin Raw Data</strong> account can contribute raw data, and "
@@ -880,7 +671,6 @@ msgstr ""
 "προσπάθειες για την παραγωγή των πιο βαθέων εικόνων βαθύ ουρανού που η "
 "κοινωνία των ερασιτεχνών αστρονόμων έχει προσπαθήσει ποτέ."
 
-#: templates/rawdata/publicdatapool_form.html:50
 msgid ""
 "When you select an existing data pool, or create a new one, the images "
 "listed here on the side will be added to it."
@@ -888,37 +678,29 @@ msgstr ""
 "Όταν επιλέγετε μια υπάρχουσα περιοχή δεδομένων, ή δημιουργείτε μια νέα, οι "
 "εικόνες που είναι στο πλάι θα προστεθούν σε αυτή."
 
-#: templates/rawdata/publicdatapool_form.html:56
 msgid "Use this form to select an existing <strong>public data pool</strong>."
 msgstr ""
 "Χρησιμοποιήστε αυτή την φόρμα για την επιλογή μιας υπάρχουσας "
 "<strong>δημόσιας περιοχής δεδομένων</strong>."
 
-#: templates/rawdata/publicdatapool_form.html:73
 msgid ""
 "Or use this button to create a whole new <strong>public data pool</strong>."
 msgstr ""
 "Ή χρησιμοποιήστε αυτό το κουμπί για να δημιουργήστε μια νέα <strong>δημόσια "
 "περιοχή δεδομένων</strong>."
 
-#: templates/rawdata/publicdatapool_form.html:77
-#: templates/rawdata/publicdatapool_form.html:90
 msgid "Create new public data pool"
 msgstr "Δημιουργία νέας δημόσιας περιοχής δεδομένων"
 
-#: templates/rawdata/publicdatapool_list.html:5
-#: templates/rawdata/publicdatapool_list.html:11
 msgid "Public data pools"
 msgstr "Δημόσιες περιοχές δεδομένων"
 
-#: templates/rawdata/publicdatapool_list.html:13
 msgid ""
 "Collections of raw files for massive, collectively acquired deep sky images."
 msgstr ""
 "Συλλογές από ανεπεξέργαστα δεδομένα για μαζικές, συλλογικές ληφθέντες "
 "εικόνες βαθύ ουρανού."
 
-#: templates/rawdata/publicdatapool_list.html:22
 #, python-format
 msgid ""
 "A <strong>public data pool</strong> is a way for subscribers to the <a href="
@@ -934,8 +716,6 @@ msgstr ""
 "ολοκλήρωσης, συχνά αποτελούμενους από εκατοντάδες ώρες ολοκλήρωσης, σε υπέρ-"
 "βαθιές εικόνες του σύμπαντος."
 
-#: templates/rawdata/publicdatapool_list.html:25
-#: templates/rawdata/restricted.html:25
 #, python-format
 msgid ""
 "The <a href=\"%(rawdata_url)s\">Raw Data Platform</a> is primarily a way to "
@@ -949,16 +729,13 @@ msgstr ""
 "είστε μέρος της σημαίνει επίσης ότι υποστηρίζετε το AstroBin και ίσως να "
 "συνεισφέρετε τα ανεπεξέργαστα δεδομένα σας για επιστημονικές ανακαλύψεις."
 
-#: templates/rawdata/publicdatapool_list.html:36
 #, fuzzy
 msgid "Created"
 msgstr "Δημιουργία"
 
-#: templates/rawdata/restricted.html:4 templates/rawdata/restricted.html:9
 msgid "Restricted content"
 msgstr "Περιορισμένο περιεχόμενο"
 
-#: templates/rawdata/restricted.html:21
 #, python-format
 msgid ""
 "The page you tried to access is reserved for subscribers to the AstroBin <a "
@@ -968,16 +745,12 @@ msgstr ""
 "<a href=\"%(rawdata_url)s\">Πλατφόρμας Ανεπεξέργαστων Δεδομένων</a> του "
 "AstroBin."
 
-#: templates/rawdata/restricted.html:31
 msgid "Find out more!"
 msgstr "Μάθετε περισσότερα!"
 
-#: templates/rawdata/temporaryarchive_detail.html:4
-#: templates/rawdata/temporaryarchive_detail.html:9
 msgid "Your download is ready"
 msgstr "Το αρχείο είναι έτοιμο για κατέβασμα"
 
-#: templates/rawdata/temporaryarchive_detail.html:13
 msgid ""
 "We have prepared a ZIP file to bundle the raw data you have requested for "
 "download. Please be aware that this is a temporary file will be deleted from "
@@ -994,15 +767,12 @@ msgstr ""
 "χρησιμοποιήστε τις σελίδες με τους <strong>Ιδιωτικούς κοινόχρηστους "
 "φακέλους</strong> ή την <strong>Δημόσια περιοχή δεδομένων</strong>."
 
-#: templates/rawdata/temporaryarchive_detail.html:27
 msgid "File size"
 msgstr "Μέγεθος αρχείου"
 
-#: templates/rawdata/temporaryarchive_detail.html:33
 msgid "Your download is processing"
 msgstr "Το αρχείο που ζητήσατε για κατέβασμα επεξεργάζεται "
 
-#: templates/rawdata/temporaryarchive_detail.html:37
 msgid ""
 "The file or files you have requested are being prepared for download. This "
 "should take only a second if you requested just a few files, or a minute for "
@@ -1012,23 +782,21 @@ msgstr ""
 "πρέπει να πάρει περίπου ένα δευτερόλεπτο αν ζητήσατε μόνο μερικά αρχεία, ή "
 "ένα λεπτό για πολλά αρχεία. Δοκιμάστε να ανανεώσετε την σελίδα σύντομα!"
 
-#: templates/rawdata/temporaryarchive_detail.html:48
 msgid "Download not ready"
 msgstr "Το αρχείο για κατέβασμα δεν είναι έτοιμο"
 
-#: templates/rawdata/temporaryarchive_detail.html:51
 msgid "Please refresh this page in a few seconds."
 msgstr "Παρακαλώ ανανεώστε την σελίδα σε μερικά δευτερόλεπτα."
 
-#: views/privatesharedfolders.py:118
+msgid "For larged downloads, this operation could take up to a few minutes."
+msgstr ""
+
 msgid "Your image has been added to the private shared folder."
 msgstr "Η εικόνα σας προστέθηκε στον ιδιωτικό κοινόχρηστο φάκελο."
 
-#: views/privatesharedfolders.py:206
 msgid "Your private shared folder has been deleted."
 msgstr "Ο ιδιωτικός κοινόχρηστος φάκελος σας διαγράφτηκε."
 
-#: views/publicdatapools.py:99
 msgid "Your image has been added to the pool."
 msgstr "Η εικόνα σας έχει προστεθεί στην περιοχή"
 

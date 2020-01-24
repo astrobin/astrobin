@@ -14,7 +14,7 @@
 
 {% block content %}
 <h1>{% trans "Change your e-mail" %}</h1>
-<form class="form-horizontal" method="post" action=".">{% csrf_token %}
+<form class="form-horizontal" method="post" action="">{% csrf_token %}
     {{ form|as_bootstrap }}
     <div class="form-actions">
         <input class="btn btn-primary btn-block-mobile" type="submit" value="{% trans 'Submit' %}" />

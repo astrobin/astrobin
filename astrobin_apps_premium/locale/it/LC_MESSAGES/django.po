@@ -7,69 +7,54 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2016-11-12 07:04+0000\n"
-"PO-Revision-Date: 2015-12-28 19:56+0000\n"
-"Last-Translator: Salvatore <salvatore@iovene.com>\n"
+"POT-Creation-Date: 2019-10-15 11:56+0000\n"
+"PO-Revision-Date: 2018-12-04 22:46+0000\n"
+"Last-Translator: Salvatore Iovene <salvatore@iovene.com>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
 "Language: it\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=(n != 1);\n"
-"X-Generator: Pootle 2.5.0\n"
-"X-POOTLE-MTIME: 1451332608.759264\n"
+"X-Generator: Pootle 2.8\n"
+"X-POOTLE-MTIME: 1543963575.000000\n"
 
-#: templates/astrobin_apps_premium/_migration_data.html:4
 msgid "Your migration data"
 msgstr "I tuoi dati di migrazione"
 
-#: templates/astrobin_apps_premium/_migration_data.html:7
 msgid "Total amount donated last year"
 msgstr "Totale donazioni dell'anno scorso"
 
-#: templates/astrobin_apps_premium/_migration_data.html:8
 msgid "First payment"
 msgstr "Primo pagamento"
 
-#: templates/astrobin_apps_premium/_migration_data.html:9
 msgid "Price for Premium"
 msgstr "Prezzo di Premium"
 
-#: templates/astrobin_apps_premium/_migration_data.html:10
 msgid "Days covered"
 msgstr "Giorni coperti"
 
-#: templates/astrobin_apps_premium/_migration_data.html:11
 msgid "Premium expiration"
 msgstr "Scadenza Premium"
 
-#: templates/astrobin_apps_premium/_transactions.html:4
 msgid "Your donations last year"
 msgstr "Le tue donazioni l'anno scorso"
 
-#: templates/astrobin_apps_premium/_transactions.html:7
 msgid "Amount"
 msgstr "Importo"
 
-#: templates/astrobin_apps_premium/_transactions.html:8
 msgid "Date"
 msgstr "Data"
 
-#: templates/astrobin_apps_premium/_transactions.html:9
 msgid "Subscription"
 msgstr "Sottoscrizione"
 
-#: templates/astrobin_apps_premium/migrate_donations.html:7
-#: templates/astrobin_apps_premium/migrate_donations.html:13
-#: templates/astrobin_apps_premium/migrate_donations.html:56
 msgid "Migrate donations"
 msgstr "Migra donazioni"
 
-#: templates/astrobin_apps_premium/migrate_donations.html:23
 msgid "Error!"
 msgstr "Errore!"
 
-#: templates/astrobin_apps_premium/migrate_donations.html:25
 msgid ""
 "Sorry, but it looks like you cannot migrate your donations to a Premium "
 "membership."
@@ -77,15 +62,12 @@ msgstr ""
 "Spiacente, ma sembra che non sia possibile migrare le tue donazioni ad una "
 "sottoscrizione Premium."
 
-#: templates/astrobin_apps_premium/migrate_donations.html:28
 msgid "You already have a paid membership."
 msgstr "Hai già una sottoscrizione a pagamento."
 
-#: templates/astrobin_apps_premium/migrate_donations.html:32
 msgid "We could not find any donations from you last year."
 msgstr "Non abbiamo trovato donazioni da parte tua lo scorso anno."
 
-#: templates/astrobin_apps_premium/migrate_donations.html:36
 msgid ""
 "Your donations last year were not enough to cover a Premium subscription for "
 "this year."
@@ -93,11 +75,9 @@ msgstr ""
 "Le tue donazioni l'anno scorso non sono state sufficienti a coprire una "
 "sottoscrizione Premium per quest'anno."
 
-#: templates/astrobin_apps_premium/migrate_donations.html:41
 msgid "View the subscription plans"
 msgstr "Vedi i piani di sottoscrizione"
 
-#: templates/astrobin_apps_premium/migrate_donations.html:45
 msgid ""
 "As you  have made donations during the last year, you may choose to transfer "
 "the amount you donated towards an AstroBin Premium membership. The "
@@ -109,7 +89,6 @@ msgstr ""
 "Premium. La sottoscrizione avrà una data di scadenza proporzionata "
 "all'importo che hai donato."
 
-#: templates/astrobin_apps_premium/migrate_donations.html:46
 msgid ""
 "If you are feeling particularly cool and generous, you may choose to "
 "consider your past donations as a contribution to support past efforts, and "
@@ -119,19 +98,75 @@ msgstr ""
 "le donazioni passate come un contributo di supporto verso gli sforzi "
 "passati, e pagare ancora per la sottoscrizione a Premium. Scegli tu!"
 
-#: templates/astrobin_apps_premium/migrate_donations.html:58
 msgid "No, I want to pay for Premium"
 msgstr "No, voglio pagare per Premium"
 
-#: templates/astrobin_apps_premium/migrate_donations_success.html:7
-#: templates/astrobin_apps_premium/migrate_donations_success.html:11
 msgid "Success"
 msgstr "Successo"
 
-#: templates/astrobin_apps_premium/migrate_donations_success.html:12
 msgid "Your migration was successful."
 msgstr "La tua migrazione è avvenuta con successo."
 
-#: templates/astrobin_apps_premium/migrate_donations_success.html:12
 msgid "Thanks for supporting AstroBin!"
 msgstr "Grazie per il tuo supporto ad AstroBin!"
+
+#, python-format
+msgid ""
+"Your \"%(subscription_name)s\" subscription on AstroBin will expire in one "
+"week."
+msgstr "Il tuo abbonamento \"%(subscription_name)s\" scadrà tra una settimana."
+
+msgid ""
+"When a Premium or Lite subscription on AstroBin expires, nothing happens to "
+"your images or any of your content. You are reverted to AstroBin Free and "
+"will not be able to upload new images until you renew, but you may continue "
+"to use AstroBin in all other aspects if you do not have any new images to "
+"share at the moment."
+msgstr ""
+"Quando un abbonamento Premium o Lite scade, non accade nulla alle tuo "
+"immagini o altro. Ritorni ad AstroBin Free e non potrai caricare nuove "
+"immagini fino al prossimo rinnovo, ma potrai continuare ad usare AstroBin in "
+"tutti gli altri aspetti se non hai nuove immagini da condividere al momento."
+
+msgid ""
+"When you are ready to renew your subscription, please visit the following "
+"page:"
+msgstr ""
+"Quando sarai pronto a rinnovare il tuo abbonamento, visita la seguente "
+"pagina:"
+
+msgid "Your premium subscription will expire in one week"
+msgstr "Il tuo abbonamento a Premium scadrà tra una settimana"
+
+#, python-format
+msgid ""
+"Your \"%(subscription_name)s\" subscription on AstroBin will be "
+"automatically renewed in one week."
+msgstr ""
+"Il tuo abbonamento \"%(subscription_name)s\" sarà rinnovato automaticamente "
+"in una settimana."
+
+msgid ""
+"You have an automatically renewing subscription on AstroBin, and we will "
+"attempt to renew it automatically. If your subscription was created the "
+"regular way, via PayPal, then PayPal will attempt to charge your credit card "
+"or retrieve funds that are available in your account."
+msgstr ""
+"Hai un abbonamento a rinnovo automatico su AstroBin, e proveremo a "
+"rinnovarlo automaticamente. Se il tuo abbonamento è stato creato in maniera "
+"normale, via PayPal, allora PayPal cercherà di riscuotere dalla tua carta di "
+"credito oppure usare i fondi disponibili nel tuo account."
+
+msgid ""
+"If your subscription was created manually via a bank transfer, please get in "
+"touch for a new payment."
+msgstr ""
+"Se il tuo abbonamento è stato creato manualmente tramite trasferimento "
+"bancario, contattaci per un nuovo pagamento."
+
+msgid "Thank you!"
+msgstr "Grazie!"
+
+msgid "Your premium subscription will be automatically renewed in one week"
+msgstr ""
+"Il tuo abbonamento Premium sarà rinnovato automaticamente in una settimana"

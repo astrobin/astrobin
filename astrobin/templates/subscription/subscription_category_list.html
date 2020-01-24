@@ -1,10 +1,14 @@
 {% load i18n %}
 {% load tags %}
+{% load astrobin_apps_premium_tags %}
 
 <table class="table subscription-plans">
     <thead>
         <tr>
             <th>{% trans "Plan" context "Subscription plan name" %}</th>
+            {% if request.user.is_authenticated and request.user|has_valid_premium_offer and not request.user|has_valid_subscription_in_category:"premium" %}
+                <th>{% trans "Offer valid until" %}</th>
+            {% endif %}
             <th>{% trans "Price" %}</th>
             <th>{% trans "Validity" %}</th>
             <th>{% trans "Autorenew" %}</th>
@@ -18,28 +22,33 @@
         {% if object.category == subscription_category or subscription_category == 'any' %}
         <tr>
             <td>{% trans object.name %}</td>
+
+            {% if request.user.is_authenticated and request.user|has_valid_premium_offer and not request.user|has_valid_subscription_in_category:"premium" %}
+                <td>{{ request.user.userprofile.premium_offer_expiration|date:"SHORT_DATE_FORMAT" }}</td>
+            {% endif %}
+
             <td>
                 {% if object.price > 0 %}
-                    $ {{object.price}} USD /
+                    $ {{ object.price }} USD
 
                     {% if object.recurrence_unit == 'D' %}
-                        {% trans "day" %}
+                        / {% trans "day" %}
                     {% endif %}
 
                     {% if object.recurrence_unit == 'W' %}
-                        {% trans "week" %}
+                        / {% trans "week" %}
                     {% endif %}
 
                     {% if object.recurrence_unit == 'M' %}
-                        {% trans "month" %}
+                        / {% trans "month" %}
                     {% endif %}
 
                     {% if object.recurrence_unit == 'Y' %}
-                        {% trans "year" %}
+                        / {% trans "year" %}
                     {% endif %}
 
                     {% if object.recurrence_unit == None %}
-                        {% trans "one time" %}
+                        / {% trans "one time" %}
                     {% endif %}
                 {% else %}
                     {% trans "Free" context "At no cost" %}
@@ -47,7 +56,7 @@
             </td>
 
             <td>
-                {% if object.recurrence_unit == None %}
+                {% if object.recurrence_unit == None or object.recurrence_unit == "0" %}
                     1 {% trans "year" %}
                 {% else %}
                     {% trans "n/a" %}
@@ -71,7 +80,7 @@
                     {% trans "Yearly" %}
                 {% endif %}
 
-                {% if object.recurrence_unit == None %}
+                {% if object.recurrence_unit == None or object.recurrence_unit == "0" %}
                     {% trans "No" %}
                 {% endif %}
             </td>
@@ -101,11 +110,11 @@
             </td>
 
             <td>
-                {% if object.name == "AstroBin Lite" %}
+                {% if "AstroBin Lite" in object.name %}
                     {% blocktrans with max_allowed=PREMIUM_MAX_IMAGES_LITE %}{{max_allowed}} images per year {% endblocktrans %}
                 {% endif %}
 
-                {% if object.name == "AstroBin Premium" %}
+                {% if "AstroBin Premium" in object.name %}
                     {% blocktrans %}Unlimited images{% endblocktrans %}
                 {% endif %}
 

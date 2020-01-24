@@ -7,40 +7,50 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2016-11-12 07:03+0000\n"
-"PO-Revision-Date: 2013-11-03 12:56+0100\n"
-"Last-Translator: Salvatore <salvatore@iovene.com>\n"
+"POT-Creation-Date: 2019-10-15 11:54+0000\n"
+"PO-Revision-Date: 2018-12-04 22:47+0000\n"
+"Last-Translator: Salvatore Iovene <salvatore@iovene.com>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
 "Language: it\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=(n != 1);\n"
-"X-Generator: Pootle 2.1.6\n"
+"X-Generator: Pootle 2.8\n"
+"X-POOTLE-MTIME: 1543963625.000000\n"
 
-#: templates/astrobin_apps_users/inclusion_tags/astrobin_user.html:42
-#: templates/astrobin_apps_users/inclusion_tags/user_list.html:18
 msgid "Images"
 msgstr "Immagini"
 
-#: templates/astrobin_apps_users/inclusion_tags/astrobin_user.html:43
-#: templates/astrobin_apps_users/inclusion_tags/user_list.html:19
 msgid "Followers"
 msgstr "Follower"
 
-#: templates/astrobin_apps_users/inclusion_tags/astrobin_user.html:44
-#: templates/astrobin_apps_users/inclusion_tags/user_list.html:20
 msgid "Following"
 msgstr "Following"
 
-#: templates/astrobin_apps_users/inclusion_tags/user_list.html:16
 msgid "User"
 msgstr "Utente"
 
-#: templates/astrobin_apps_users/inclusion_tags/user_list_entries.html:20
-#: templates/astrobin_apps_users/inclusion_tags/user_list_entries.html:24
 msgid "No users."
 msgstr "Nessun utente."
+
+msgid "Administrator"
+msgstr "Amministratore"
+
+msgid "Image moderator"
+msgstr "Moderatore di immagini"
+
+msgid "IOTD Submitter"
+msgstr "Submitter Foto del Giorno"
+
+msgid "IOTD Reviewer"
+msgstr "Reviewer Foto del Giorno"
+
+msgid "IOTD Judge"
+msgstr "Giudice Foto del Giorno"
+
+msgid "Premium member"
+msgstr "Utente Premium"
 
 #~ msgid "%(images_number)s image"
 #~ msgid_plural "%(images_number)s images"

@@ -1,9 +1,8 @@
-# Django
 from django.contrib.auth.models import User
-from django.core.urlresolvers import reverse
 from django.test import TestCase
+from django_bouncy.models import Complaint
+from mock import patch
 
-# Test stuff
 from astrobin.tests.common import *
 
 
@@ -14,9 +13,10 @@ class HomeTest(TestCase):
     def tearDown(self):
         self.user.delete()
 
-    def test_global_stream(self):
+    @patch("astrobin.tasks.retrieve_primary_thumbnails")
+    def test_global_stream(self, retrieve_primary_thumbnails):
         url = reverse('index') + '?s=global'
-        self.client.login(username = 'test', password = 'password')
+        self.client.login(username='test', password='password')
 
         # Uploading an image shows up in the stream
         response, image = test_utils_upload_image(self)
@@ -43,3 +43,19 @@ class HomeTest(TestCase):
         response = self.client.get(url)
         self.assertNotContains(response, 'VERB_UPLOADED_REVISION.%d.%d' % (self.user.pk, revision.pk))
         self.assertContains(response, 'VERB_UPLOADED_REVISION.%d.%d' % (self.user.pk, revision2.pk))
+
+    @patch("astrobin.tasks.retrieve_primary_thumbnails")
+    def test_complaint_alert(self, retrieve_primary_thumbnails):
+        self.client.login(username='test', password='password')
+        complaint = Complaint.objects.create(
+            address=self.user.email,
+            mail_timestamp=datetime.datetime.now()
+        )
+        url = reverse('index')
+
+        response = self.client.get(url)
+
+        self.assertContains(
+            response, "AstroBin is not delivering you emails because you have marked some of them as spam.")
+
+        complaint.delete()

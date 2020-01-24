@@ -1,15 +1,13 @@
 import os
 
-from django.conf import settings
-
 from PIL import Image, ImageOps, ImageDraw, ImageEnhance, ImageFont, ImageFilter
 
 
-def rounded_corners(image, rounded = False, **kwargs):
+def rounded_corners(image, rounded=False, **kwargs):
     if rounded:
         mask = Image.open('astrobin/thumbnail-mask.png').convert('L')
         mask = mask.resize(image.size, Image.ANTIALIAS)
-        image = ImageOps.fit(image, mask.size, centering = (0.5, 0.5))
+        image = ImageOps.fit(image, mask.size, centering=(0.5, 0.5))
         image.putalpha(mask)
 
     return image
@@ -116,8 +114,8 @@ def histogram(image, histogram = False, **kwargs):
 
     histWidth = kwargs['size'][0]  # Width of the histogram
     histHeight = kwargs['size'][1] # Height of the histogram
-    multiplerValue = 1.0           # The multiplier value basically increases
-                                   # the histogram height so that love values
+    multiplierValue = 1.0          # The multiplier value basically increases
+                                   # the histogram height so that low values
                                    # are easier to see, this in effect chops off
                                    # the top of the histogram.
     showFstopLines = True          # True/False to hide outline
@@ -130,10 +128,10 @@ def histogram(image, histogram = False, **kwargs):
     green = (51,204,51)             # Color for the green lines
     blue = (0,102,255)              # Color for the blue lines
     ##################################################################################
-    hist = image.histogram()
+    hist = image.convert("RGB").histogram()
     histMax = max(hist)                                     # comon color
     xScale = float(histWidth)/len(hist)                     # xScaling
-    yScale = float((histHeight)*multiplerValue)/histMax     # yScaling
+    yScale = float((histHeight)*multiplierValue)/histMax    # yScaling
 
     im = Image.new("RGBA", (histWidth, histHeight), backgroundColor)
     red_layer = Image.new("RGBA", (histWidth, histHeight), red)
@@ -143,17 +141,17 @@ def histogram(image, histogram = False, **kwargs):
 
     # Draw Outline is required
     if showFstopLines:
-        xmarker = histWidth/fStopLines
+        xMarker = histWidth/fStopLines
         x =0
         for i in range(1,fStopLines+1):
             draw.line((x, 0, x, histHeight), fill=lineColor)
-            x+=xmarker
+            x+=xMarker
         draw.line((histWidth-1, 0, histWidth-1, 200), fill=lineColor)
         draw.line((0, 0, 0, histHeight), fill=lineColor)
 
     # Draw the RGB histogram lines
-    x = 0;
-    c = 0;
+    x = 0
+    c = 0
     for i in hist:
         if int(i) == 0:
             pass
@@ -174,10 +172,9 @@ def histogram(image, histogram = False, **kwargs):
             elif color == blue:
                 im = Image.composite(blue_layer, im, alpha_mask)
         if x > 255:
-            x=0
+            x = 0
         else:
             x += 1
         c += 1
 
     return im
-

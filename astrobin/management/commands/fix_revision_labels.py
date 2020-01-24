@@ -12,7 +12,7 @@ class Command(BaseCommand):
             count = 0
             for r in i.imagerevision_set.all().order_by('id'):
                 r.label = base26_encode(count)
-                r.save()
+                r.save(keep_deleted=True)
                 count += 1
 
         print "Processed %d images." % images.count()

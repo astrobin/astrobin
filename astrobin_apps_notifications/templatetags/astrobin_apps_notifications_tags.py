@@ -17,8 +17,9 @@ def notifications_table(user, unseen_count, seen_count):
     seen = get_seen_notifications(user, seen_count)
 
     return {
-        'unseen' : unseen,
-        'seen'   : seen,
+        'unseen': unseen,
+        'seen': seen,
+        'username': user.username
     }
 
 

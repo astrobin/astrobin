@@ -1,60 +1,55 @@
-# Django
-from datetime import datetime, timedelta
-
-# Django
-from django.conf import settings
-from django.contrib.auth.models import User, Group
-from django.core.cache import cache
-from django.core.exceptions import ValidationError
-from django.core.management import call_command
-from django.core.urlresolvers import reverse_lazy
-from django.test import TestCase
-
+# Python
+import simplejson as json
+from beautifulsoupselect import BeautifulSoupSelect as BSS
 # Third party
 from bs4 import BeautifulSoup as BS
-from beautifulsoupselect import BeautifulSoupSelect as BSS
-import simplejson as json
+# Django
+from django.core.cache import cache
+from django.core.management import call_command
+from django.test import TestCase
+from mock import patch
 
-# AstroBin
-from astrobin.models import Image
 from astrobin_apps_groups.models import Group as AstroBinGroup
-
 # This app
 from astrobin_apps_iotd.models import *
 
 
+# Django
+
+
 class IotdTest(TestCase):
-    def setUp(self):
+    @patch("astrobin.tasks.retrieve_primary_thumbnails")
+    def setUp(self, retrieve_primary_thumbnails):
         self.submitter_1 = User.objects.create_user('submitter_1', 'submitter_1@test.com', 'password')
         self.submitter_2 = User.objects.create_user('submitter_2', 'submitter_2@test.com', 'password')
         self.submitter_3 = User.objects.create_user('submitter_3', 'submitter_3@test.com', 'password')
-        self.submitters = Group.objects.create(name = 'iotd_submitters')
+        self.submitters = Group.objects.create(name='iotd_submitters')
         self.submitters.user_set.add(self.submitter_1, self.submitter_2, self.submitter_3)
 
         self.reviewer_1 = User.objects.create_user('reviewer_1', 'reviewer_1@test.com', 'password')
         self.reviewer_2 = User.objects.create_user('reviewer_2', 'reviewer_2@test.com', 'password')
         self.reviewer_3 = User.objects.create_user('reviewer_3', 'reviewer_3@test.com', 'password')
-        self.reviewers = Group.objects.create(name = 'iotd_reviewers')
+        self.reviewers = Group.objects.create(name='iotd_reviewers')
         self.reviewers.user_set.add(self.reviewer_1, self.reviewer_2, self.reviewer_3)
 
         self.judge_1 = User.objects.create_user('judge_1', 'judge_1@test.com', 'password')
         self.judge_2 = User.objects.create_user('judge_2', 'judge_2@test.com', 'password')
-        self.judges = Group.objects.create(name = 'iotd_judges')
+        self.judges = Group.objects.create(name='iotd_judges')
         self.judges.user_set.add(self.judge_1, self.judge_2)
 
         self.user = User.objects.create_user('user', 'user@test.com', 'password')
-        self.client.login(username = 'user', password = 'password')
+        self.client.login(username='user', password='password')
         self.client.post(
             reverse_lazy('image_upload_process'),
-            { 'image_file': open('astrobin/fixtures/test.jpg', 'rb') },
-            follow = True)
+            {'image_file': open('astrobin/fixtures/test.jpg', 'rb')},
+            follow=True)
         self.client.logout()
         self.image = Image.objects_including_wip.first()
 
         # Approve the image and set a title
         self.image.moderator_decision = 1
         self.image.title = "IOTD TEST IMAGE"
-        self.image.save()
+        self.image.save(keep_deleted=True)
 
     def tearDown(self):
         self.submitters.delete()
@@ -74,170 +69,169 @@ class IotdTest(TestCase):
         self.image.delete()
         self.user.delete()
 
-
     # Models
 
     def test_submission_model(self):
         # User must be submitter
         with self.assertRaisesRegexp(ValidationError, "not a member"):
             IotdSubmission.objects.create(
-                submitter = self.user,
-                image = self.image)
+                submitter=self.user,
+                image=self.image)
 
         # Image must be recent enough
-        self.image.published =\
-            datetime.now() -\
+        self.image.published = \
+            datetime.now() - \
             timedelta(settings.IOTD_SUBMISSION_WINDOW_DAYS + 1)
-        self.image.save()
+        self.image.save(keep_deleted=True)
         with self.assertRaisesRegexp(ValidationError, "published more than"):
             IotdSubmission.objects.create(
-                submitter = self.submitter_1,
-                image = self.image)
+                submitter=self.submitter_1,
+                image=self.image)
 
         # Image must not be WIP
         self.image.published = datetime.now()
         self.image.is_wip = True
-        self.image.save()
+        self.image.save(keep_deleted=True)
         with self.assertRaisesRegexp(ValidationError, "staging area"):
             IotdSubmission.objects.create(
-                submitter = self.submitter_1,
-                image = self.image)
+                submitter=self.submitter_1,
+                image=self.image)
         self.image.is_wip = False
-        self.image.save()
+        self.image.save(keep_deleted=True)
 
         # Image owner must not be excluded from competitions
         self.image.user.userprofile.exclude_from_competitions = True
-        self.image.user.userprofile.save()
+        self.image.user.userprofile.save(keep_deleted=True)
         with self.assertRaisesRegexp(ValidationError, "excluded from competitions"):
             IotdSubmission.objects.create(
-                submitter = self.submitter_1,
-                image = self.image)
+                submitter=self.submitter_1,
+                image=self.image)
         self.image.user.userprofile.exclude_from_competitions = False
-        self.image.user.userprofile.save()
+        self.image.user.userprofile.save(keep_deleted=True)
 
         # Cannot submit own image
         self.image.user = self.submitter_1
-        self.image.save()
+        self.image.save(keep_deleted=True)
         with self.assertRaisesRegexp(ValidationError, "your own image"):
             IotdSubmission.objects.create(
-                submitter = self.submitter_1,
-                image = self.image)
+                submitter=self.submitter_1,
+                image=self.image)
         self.image.user = self.user
-        self.image.save()
+        self.image.save(keep_deleted=True)
 
         # Cannot submit an image authored by a judge
         self.image.user = self.judge_1
-        self.image.save()
+        self.image.save(keep_deleted=True)
         with self.assertRaisesRegexp(ValidationError, "a judge's image"):
             IotdSubmission.objects.create(
-                submitter = self.submitter_1,
-                image = self.image)
+                submitter=self.submitter_1,
+                image=self.image)
         self.image.user = self.user
-        self.image.save()
+        self.image.save(keep_deleted=True)
 
         # All OK
         submission = IotdSubmission.objects.create(
-            submitter = self.submitter_1,
-            image = self.image)
+            submitter=self.submitter_1,
+            image=self.image)
         self.assertEqual(submission.submitter, self.submitter_1)
         self.assertEqual(submission.image, self.image)
 
         # Image cannot be submitted again
         with self.assertRaisesRegexp(ValidationError, "already exists"):
             IotdSubmission.objects.create(
-                submitter = self.submitter_1,
-                image = self.image)
+                submitter=self.submitter_1,
+                image=self.image)
 
         # Image must not be past IOTD
         vote = IotdVote.objects.create(
-            reviewer = self.reviewer_1,
-            image = self.image)
+            reviewer=self.reviewer_1,
+            image=self.image)
         iotd = Iotd.objects.create(
-            judge = self.judge_1,
-            image = self.image,
-            date = datetime.now().date() - timedelta(1))
+            judge=self.judge_1,
+            image=self.image,
+            date=datetime.now().date() - timedelta(1))
         with self.assertRaisesRegexp(ValidationError, "already been an IOTD"):
             IotdSubmission.objects.create(
-                submitter = self.submitter_2,
-                image = self.image)
+                submitter=self.submitter_2,
+                image=self.image)
         vote.delete()
         iotd.delete()
 
         # Test max daily
         with self.assertRaisesRegexp(ValidationError, "already submitted.*today"):
-            image2 = Image.objects.create(user = self.user)
-            with self.settings(IOTD_SUBMISSION_MAX_PER_DAY = 1):
+            image2 = Image.objects.create(user=self.user)
+            with self.settings(IOTD_SUBMISSION_MAX_PER_DAY=1):
                 IotdSubmission.objects.create(
-                    submitter = self.submitter_1,
-                    image = image2)
+                    submitter=self.submitter_1,
+                    image=image2)
 
     def test_vote_model(self):
         # User must be reviewer
         with self.assertRaisesRegexp(ValidationError, "not a member"):
             IotdVote.objects.create(
-                reviewer = self.user,
-                image = self.image)
+                reviewer=self.user,
+                image=self.image)
 
         # Image must have been submitted
         with self.assertRaisesRegexp(ValidationError, "not been submitted"):
             IotdVote.objects.create(
-                reviewer = self.reviewer_1,
-                image = self.image)
+                reviewer=self.reviewer_1,
+                image=self.image)
         submission_1 = IotdSubmission.objects.create(
-            submitter = self.submitter_1,
-            image = self.image)
+            submitter=self.submitter_1,
+            image=self.image)
 
         # Submission must be within window
-        IotdSubmission.objects.filter(pk = submission_1.pk).update(
-            date = \
-                datetime.now() -\
+        IotdSubmission.objects.filter(pk=submission_1.pk).update(
+            date= \
+                datetime.now() - \
                 timedelta(settings.IOTD_REVIEW_WINDOW_DAYS + 1))
         with self.assertRaisesRegexp(ValidationError, "in the submission queue for more than"):
             IotdVote.objects.create(
-                reviewer = self.reviewer_1,
-                image = submission_1.image)
-        IotdSubmission.objects.filter(pk = submission_1.pk).update(
-            date = datetime.now())
+                reviewer=self.reviewer_1,
+                image=submission_1.image)
+        IotdSubmission.objects.filter(pk=submission_1.pk).update(
+            date=datetime.now())
 
         # Image must not be WIP
         self.image.is_wip = True
-        self.image.save()
+        self.image.save(keep_deleted=True)
         with self.assertRaisesRegexp(ValidationError, "staging area"):
             IotdVote.objects.create(
-                reviewer = self.reviewer_1,
-                image = submission_1.image)
+                reviewer=self.reviewer_1,
+                image=submission_1.image)
         self.image.is_wip = False
-        self.image.save()
+        self.image.save(keep_deleted=True)
 
         # Image owner must not be excluded from competitions
         self.image.user.userprofile.exclude_from_competitions = True
-        self.image.user.userprofile.save()
+        self.image.user.userprofile.save(keep_deleted=True)
         with self.assertRaisesRegexp(ValidationError, "excluded from competitions"):
             IotdSubmission.objects.create(
-                submitter = self.submitter_1,
-                image = self.image)
+                submitter=self.submitter_1,
+                image=self.image)
         self.image.user.userprofile.exclude_from_competitions = False
-        self.image.user.userprofile.save()
+        self.image.user.userprofile.save(keep_deleted=True)
 
         # Cannot vote for own image
         self.image.user = self.reviewer_1
-        self.image.save()
+        self.image.save(keep_deleted=True)
         with self.assertRaisesRegexp(ValidationError, "your own image"):
             IotdVote.objects.create(
-                reviewer = self.reviewer_1,
-                image = submission_1.image)
+                reviewer=self.reviewer_1,
+                image=submission_1.image)
         self.image.user = self.user
-        self.image.save()
+        self.image.save(keep_deleted=True)
 
         # Cannot vote for an image authored by a judge
         self.image.user = self.judge_1
-        self.image.save()
+        self.image.save(keep_deleted=True)
         with self.assertRaisesRegexp(ValidationError, "a judge's image"):
             IotdVote.objects.create(
-                reviewer = self.reviewer_1,
-                image = self.image)
+                reviewer=self.reviewer_1,
+                image=self.image)
         self.image.user = self.user
-        self.image.save()
+        self.image.save(keep_deleted=True)
 
         # Cannot vote for own submission
         self.submitters.user_set.add(self.reviewer_1)
@@ -245,21 +239,21 @@ class IotdTest(TestCase):
         submission_1.save()
         with self.assertRaisesRegexp(ValidationError, "your own submission"):
             IotdVote.objects.create(
-                reviewer = self.reviewer_1,
-                image = submission_1.image)
+                reviewer=self.reviewer_1,
+                image=submission_1.image)
         self.submitters.user_set.remove(self.reviewer_1)
         submission_1.submitter = self.submitter_1
         submission_1.save()
 
         # All OK
         vote = IotdVote.objects.create(
-            reviewer = self.reviewer_1,
-            image = submission_1.image)
+            reviewer=self.reviewer_1,
+            image=submission_1.image)
         self.assertEqual(vote.reviewer, self.reviewer_1)
         self.assertEqual(vote.image, submission_1.image)
 
         # Badge is present
-        response = self.client.get(reverse_lazy('image_detail', args = (self.image.pk,)))
+        response = self.client.get(reverse_lazy('image_detail', args=(self.image.get_id(),)))
         self.assertContains(response, 'top-pick-badge')
 
         # Image is in Top Picks page
@@ -269,10 +263,10 @@ class IotdTest(TestCase):
 
         # Badge is still present if image is future IOTD
         iotd = Iotd.objects.create(
-            judge = self.judge_1,
-            image = self.image,
-            date = datetime.now().date() + timedelta(1))
-        response = self.client.get(reverse_lazy('image_detail', args = (self.image.pk,)))
+            judge=self.judge_1,
+            image=self.image,
+            date=datetime.now().date() + timedelta(1))
+        response = self.client.get(reverse_lazy('image_detail', args=(self.image.get_id(),)))
         self.assertContains(response, 'top-pick-badge')
 
         # Image is still in Top Picks page
@@ -281,8 +275,9 @@ class IotdTest(TestCase):
         cache.clear()
 
         # Badge is gone if image is present IOTD
-        Iotd.objects.filter(pk = iotd.pk).update(date = datetime.now().date())
-        response = self.client.get(reverse_lazy('image_detail', args = (self.image.pk,)))
+
+        Iotd.objects.filter(pk=iotd.pk).update(date=datetime.now().date())
+        response = self.client.get(reverse_lazy('image_detail', args=(self.image.get_id(),)))
         self.assertNotContains(response, 'top-pick-badge')
 
         # Image is gone from Top Picks page
@@ -291,8 +286,8 @@ class IotdTest(TestCase):
         cache.clear()
 
         # Badge is gone is image is past IOTD
-        Iotd.objects.filter(pk = iotd.pk).update(date = datetime.now().date() - timedelta(1))
-        response = self.client.get(reverse_lazy('image_detail', args = (self.image.pk,)))
+        Iotd.objects.filter(pk=iotd.pk).update(date=datetime.now().date() - timedelta(1))
+        response = self.client.get(reverse_lazy('image_detail', args=(self.image.get_id(),)))
         self.assertNotContains(response, 'top-pick-badge')
 
         # Image is still gone from Top Picks page
@@ -304,31 +299,31 @@ class IotdTest(TestCase):
 
         # Image must not be past IOTD
         iotd = Iotd.objects.create(
-            judge = self.judge_1,
-            image = self.image,
-            date = datetime.now().date() - timedelta(1))
+            judge=self.judge_1,
+            image=self.image,
+            date=datetime.now().date() - timedelta(1))
         with self.assertRaisesRegexp(ValidationError, "already been an IOTD"):
             IotdVote.objects.create(
-                reviewer = self.reviewer_2,
-                image = self.image)
+                reviewer=self.reviewer_2,
+                image=self.image)
         iotd.delete()
 
         # Cannot vote again for the same
         with self.assertRaisesRegexp(ValidationError, "already exists"):
             IotdVote.objects.create(
-                reviewer = self.reviewer_1,
-                image = submission_1.image)
+                reviewer=self.reviewer_1,
+                image=submission_1.image)
 
         # Test max daily
-        image2 = Image.objects.create(user = self.user)
+        image2 = Image.objects.create(user=self.user)
         submission_2 = IotdSubmission.objects.create(
-            submitter = self.submitter_2,
-            image = image2)
+            submitter=self.submitter_2,
+            image=image2)
         with self.assertRaisesRegexp(ValidationError, "already voted.*today"):
-            with self.settings(IOTD_REVIEW_MAX_PER_DAY = 1):
+            with self.settings(IOTD_REVIEW_MAX_PER_DAY=1):
                 IotdVote.objects.create(
-                    reviewer = self.reviewer_1,
-                    image = submission_2.image)
+                    reviewer=self.reviewer_1,
+                    image=submission_2.image)
 
         submission_1.delete()
         submission_2.delete()
@@ -338,74 +333,74 @@ class IotdTest(TestCase):
         # User must be judge
         with self.assertRaisesRegexp(ValidationError, "not a member"):
             Iotd.objects.create(
-                judge = self.user,
-                image = self.image,
-                date = datetime.now().date())
+                judge=self.user,
+                image=self.image,
+                date=datetime.now().date())
 
         # Image must have been voted
         with self.assertRaisesRegexp(ValidationError, "has not been voted"):
             Iotd.objects.create(
-                judge = self.judge_1,
-                image = self.image,
-                date = datetime.now().date())
+                judge=self.judge_1,
+                image=self.image,
+                date=datetime.now().date())
         submission_1 = IotdSubmission.objects.create(
-            submitter = self.submitter_1,
-            image = self.image)
+            submitter=self.submitter_1,
+            image=self.image)
         vote_1 = IotdVote.objects.create(
-            reviewer = self.reviewer_1,
-            image = self.image)
+            reviewer=self.reviewer_1,
+            image=self.image)
 
         # Vote must be within window
-        IotdVote.objects.filter(pk = vote_1.pk).update(
-            date = \
-                datetime.now() -\
+        IotdVote.objects.filter(pk=vote_1.pk).update(
+            date= \
+                datetime.now() - \
                 timedelta(settings.IOTD_JUDGEMENT_WINDOW_DAYS + 1))
         with self.assertRaisesRegexp(ValidationError, "in the review queue for more than"):
             Iotd.objects.create(
-                judge = self.judge_1,
-                image = vote_1.image)
-        IotdVote.objects.filter(pk = vote_1.pk).update(
-            date = datetime.now())
+                judge=self.judge_1,
+                image=vote_1.image)
+        IotdVote.objects.filter(pk=vote_1.pk).update(
+            date=datetime.now())
 
         # Image must not be WIP
         self.image.is_wip = True
-        self.image.save()
+        self.image.save(keep_deleted=True)
         with self.assertRaisesRegexp(ValidationError, "staging area"):
             Iotd.objects.create(
-                judge = self.judge_1,
-                image = self.image)
+                judge=self.judge_1,
+                image=self.image)
         self.image.is_wip = False
-        self.image.save()
+        self.image.save(keep_deleted=True)
 
         # Image owner must not be excluded from competitions
         self.image.user.userprofile.exclude_from_competitions = True
-        self.image.user.userprofile.save()
+        self.image.user.userprofile.save(keep_deleted=True)
         with self.assertRaisesRegexp(ValidationError, "excluded from competitions"):
             IotdSubmission.objects.create(
-                submitter = self.submitter_1,
-                image = self.image)
+                submitter=self.submitter_1,
+                image=self.image)
         self.image.user.userprofile.exclude_from_competitions = False
-        self.image.user.userprofile.save()
+        self.image.user.userprofile.save(keep_deleted=True)
 
         # Cannot elect own image
         self.image.user = self.judge_1
-        self.image.save()
+        self.image.save(keep_deleted=True)
         with self.assertRaisesRegexp(ValidationError, "your own image"):
             Iotd.objects.create(
-                judge = self.judge_1,
-                image = self.image)
+                judge=self.judge_1,
+                image=self.image)
         self.image.user = self.user
-        self.image.save()
+        self.image.save(keep_deleted=True)
 
         # Cannot elect an image authored by a judge
         self.image.user = self.judge_2
-        self.image.save()
+        self.image.save(keep_deleted=True)
         with self.assertRaisesRegexp(ValidationError, "a judge's image"):
             Iotd.objects.create(
-                judge = self.judge_1,
-                image = self.image)
+                judge=self.judge_1,
+                image=self.image)
         self.image.user = self.user
-        self.image.save()
+        self.image.save(keep_deleted=True)
 
         # Cannot elect own submission
         self.submitters.user_set.add(self.judge_1)
@@ -413,8 +408,8 @@ class IotdTest(TestCase):
         submission_1.save()
         with self.assertRaisesRegexp(ValidationError, "your own submission"):
             Iotd.objects.create(
-                judge = self.judge_1,
-                image = submission_1.image)
+                judge=self.judge_1,
+                image=submission_1.image)
         self.submitters.user_set.remove(self.judge_1)
         submission_1.submitter = self.submitter_1
         submission_1.save()
@@ -425,57 +420,57 @@ class IotdTest(TestCase):
         vote_1.save()
         with self.assertRaisesRegexp(ValidationError, "you voted for"):
             Iotd.objects.create(
-                judge = self.judge_1,
-                image = vote_1.image)
+                judge=self.judge_1,
+                image=vote_1.image)
         self.reviewers.user_set.remove(self.judge_1)
         vote_1.reviewer = self.reviewer_1
         vote_1.save()
 
         # All OK
         iotd = Iotd.objects.create(
-            judge = self.judge_1,
-            image = self.image,
-            date = datetime.now().date())
+            judge=self.judge_1,
+            image=self.image,
+            date=datetime.now().date())
         self.assertEqual(iotd.judge, self.judge_1)
         self.assertEqual(iotd.image, self.image)
 
         # Badge is present
-        response = self.client.get(reverse_lazy('image_detail', args = (self.image.pk,)))
+        response = self.client.get(reverse_lazy('image_detail', args=(self.image.get_id(),)))
         self.assertContains(response, 'iotd-ribbon')
 
         # Image must not be past IOTD
         with self.assertRaisesRegexp(ValidationError, "already been an IOTD"):
             Iotd.objects.create(
-                judge = self.judge_1,
-                image = self.image)
+                judge=self.judge_1,
+                image=self.image)
 
         # No more than IOTD_JUDGEMENT_MAX_FUTURE_PER_JUDGE already scheduled
         with self.settings(
-                IOTD_JUDGEMENT_MAX_PER_DAY = 3,
-                IOTD_JUDGEMENT_MAX_FUTURE_PER_JUDGE = 1):
-            image2 = Image.objects.create(user = self.user)
+                IOTD_JUDGEMENT_MAX_PER_DAY=3,
+                IOTD_JUDGEMENT_MAX_FUTURE_PER_JUDGE=1):
+            image2 = Image.objects.create(user=self.user)
             submission_2 = IotdSubmission.objects.create(
-                submitter = self.submitter_2,
-                image = image2)
+                submitter=self.submitter_2,
+                image=image2)
             vote_2 = IotdVote.objects.create(
-                reviewer = self.reviewer_2,
-                image = image2)
+                reviewer=self.reviewer_2,
+                image=image2)
             Iotd.objects.create(
-                judge = self.judge_1,
-                image = image2,
-                date = datetime.now().date() + timedelta(1))
+                judge=self.judge_1,
+                image=image2,
+                date=datetime.now().date() + timedelta(1))
 
-            image3 = Image.objects.create(user = self.user)
+            image3 = Image.objects.create(user=self.user)
             submission_3 = IotdSubmission.objects.create(
-                submitter = self.submitter_3,
-                image = image3)
+                submitter=self.submitter_3,
+                image=image3)
             vote_3 = IotdVote.objects.create(
-                reviewer = self.reviewer_3,
-                image = image3)
+                reviewer=self.reviewer_3,
+                image=image3)
             with self.assertRaisesRegexp(ValidationError, "already scheduled"):
                 Iotd.objects.create(
-                    judge = self.judge_1,
-                    image = image3)
+                    judge=self.judge_1,
+                    image=image3)
 
         iotd.delete()
         vote_1.delete()
@@ -484,7 +479,6 @@ class IotdTest(TestCase):
         submission_1.delete()
         submission_2.delete()
         submission_3.delete()
-
 
     # Views
 
@@ -496,14 +490,14 @@ class IotdTest(TestCase):
         self.assertEqual(response.status_code, 302)
 
         # Only submitters allowed
-        self.client.login(username = 'user', password = 'password')
+        self.client.login(username='user', password='password')
         response = self.client.get(url)
         self.assertEqual(response.status_code, 302)
 
-        self.client.login(username = 'submitter_1', password = 'password')
+        self.client.login(username='submitter_1', password='password')
         response = self.client.get(url)
         self.assertEqual(response.status_code, 200)
-        self.assertContains(response, '<span class="used">0</span>', html = True)
+        self.assertContains(response, '<span class="used">0</span>', html=True)
 
         # Check that images are rendered
         response = self.client.get(url)
@@ -511,82 +505,82 @@ class IotdTest(TestCase):
 
         # Check for may-not-select class
         self.image.user = self.submitter_1
-        self.image.save()
+        self.image.save(keep_deleted=True)
         response = self.client.get(url)
         bs = BS(response.content)
         self.assertEqual(len(bs.select('.iotd-queue-item.may-not-select')), 1)
         self.submitters.user_set.remove(self.reviewer_1)
         self.image.user = self.user
-        self.image.save()
+        self.image.save(keep_deleted=True)
 
         # Check that non-moderated (or spam) images are not rendered
         self.image.moderator_decision = 0
-        self.image.save()
+        self.image.save(keep_deleted=True)
         submission = IotdSubmission.objects.create(
-            submitter = self.submitter_1,
-            image = self.image)
+            submitter=self.submitter_1,
+            image=self.image)
         response = self.client.get(url)
         self.assertNotContains(response, 'data-id="%s"' % self.image.pk)
         submission.delete()
 
         self.image.moderator_decision = 2
-        self.image.save()
+        self.image.save(keep_deleted=True)
         submission = IotdSubmission.objects.create(
-            submitter = self.submitter_1,
-            image = self.image)
+            submitter=self.submitter_1,
+            image=self.image)
         response = self.client.get(url)
         self.assertNotContains(response, 'data-id="%s"' % self.image.pk)
         submission.delete()
 
         self.image.moderator_decision = 1
-        self.image.save()
+        self.image.save(keep_deleted=True)
 
         # Check that current or past IOTD is not rendered
         submission = IotdSubmission.objects.create(
-            submitter = self.submitter_1,
-            image = self.image)
+            submitter=self.submitter_1,
+            image=self.image)
         vote = IotdVote.objects.create(
-            reviewer = self.reviewer_1,
-            image = self.image)
+            reviewer=self.reviewer_1,
+            image=self.image)
         iotd = Iotd.objects.create(
-            judge = self.judge_1,
-            image = self.image,
-            date = datetime.now().date())
+            judge=self.judge_1,
+            image=self.image,
+            date=datetime.now().date())
         response = self.client.get(url)
         self.assertNotContains(response, 'data-id="%s"' % self.image.pk)
 
         # Future IOTD should render tho
-        Iotd.objects.filter(image = self.image).update(
-            date = datetime.now().date() + timedelta(1))
+        Iotd.objects.filter(image=self.image).update(
+            date=datetime.now().date() + timedelta(1))
         response = self.client.get(url)
         self.assertContains(response, 'data-id="%s"' % self.image.pk)
 
         # Images by judges are now shown here
         self.image.user = self.judge_1
-        self.image.save()
+        self.image.save(keep_deleted=True)
         response = self.client.get(url)
         self.assertNotContains(response, 'data-id="%s"' % self.image.pk)
         self.image.user = self.user
-        self.image.save()
+        self.image.save(keep_deleted=True)
 
         submission.delete()
         vote.delete()
         iotd.delete()
 
     def test_toggle_submission_ajax_view(self):
-        url = reverse_lazy('iotd_toggle_submission_ajax', kwargs = {'pk': self.image.pk})
+        url = reverse_lazy('iotd_toggle_submission_ajax', kwargs={'pk': self.image.pk})
 
         # Login required
         response = self.client.post(url)
         self.assertEqual(response.status_code, 302)
 
         # Only submitters allowed
-        self.client.login(username = 'user', password = 'password')
+        self.client.login(username='user', password='password')
         response = self.client.post(url)
         self.assertEqual(response.status_code, 302)
 
         # GET not allowed
-        self.client.login(username = 'submitter_1', password = 'password')
+        self.client.login(username='submitter_1', password='password')
         response = self.client.get(url)
         self.assertEqual(response.status_code, 405)
 
@@ -595,7 +589,7 @@ class IotdTest(TestCase):
         self.assertEqual(response.status_code, 403)
 
         # All OK
-        response = self.client.post(url, HTTP_X_REQUESTED_WITH = 'XMLHttpRequest')
+        response = self.client.post(url, HTTP_X_REQUESTED_WITH='XMLHttpRequest')
         self.assertEqual(response.status_code, 200)
         self.assertTrue('submission' in json.loads(response.content))
         self.assertEqual(json.loads(response.content)['used_today'], 1)
@@ -603,7 +597,7 @@ class IotdTest(TestCase):
         self.assertEqual(IotdSubmission.objects.count(), 1)
 
         # Toggle off
-        response = self.client.post(url, HTTP_X_REQUESTED_WITH = 'XMLHttpRequest')
+        response = self.client.post(url, HTTP_X_REQUESTED_WITH='XMLHttpRequest')
         self.assertEqual(response.status_code, 200)
         self.assertEqual(json.loads(response.content)['used_today'], 0)
         self.assertFalse('submission' in json.loads(response.content))
@@ -611,10 +605,10 @@ class IotdTest(TestCase):
         self.assertEqual(IotdSubmission.objects.count(), 0)
 
         # You can still toggle off if you reached your max
-        response = self.client.post(url, HTTP_X_REQUESTED_WITH = 'XMLHttpRequest')
+        response = self.client.post(url, HTTP_X_REQUESTED_WITH='XMLHttpRequest')
         self.assertEqual(IotdSubmission.objects.count(), 1)
-        with self.settings(IOTD_SUBMISSION_MAX_PER_DAY = 1):
-            response = self.client.post(url, HTTP_X_REQUESTED_WITH = 'XMLHttpRequest')
+        with self.settings(IOTD_SUBMISSION_MAX_PER_DAY=1):
+            response = self.client.post(url, HTTP_X_REQUESTED_WITH='XMLHttpRequest')
             self.assertEqual(IotdSubmission.objects.count(), 0)
 
     def test_review_queue_view(self):
@@ -625,22 +619,22 @@ class IotdTest(TestCase):
         self.assertEqual(response.status_code, 302)
 
         # Only reviewers allowed
-        self.client.login(username = 'submitter_1', password = 'password')
+        self.client.login(username='submitter_1', password='password')
         response = self.client.get(url)
         self.assertEqual(response.status_code, 302)
 
-        self.client.login(username = 'reviewer_1', password = 'password')
+        self.client.login(username='reviewer_1', password='password')
         response = self.client.get(url)
         self.assertEqual(response.status_code, 200)
-        self.assertContains(response, '<span class="used">0</span>', html = True)
+        self.assertContains(response, '<span class="used">0</span>', html=True)
 
         # Check that images are rendered
-        submission_1 = IotdSubmission.objects.create(submitter = self.submitter_1, image = self.image)
+        submission_1 = IotdSubmission.objects.create(submitter=self.submitter_1, image=self.image)
         response = self.client.get(url)
         self.assertContains(response, 'data-id="%s"' % self.image.pk)
 
         # Check that multiple submissions for the same image result in one single image rendered
-        submission_2 = IotdSubmission.objects.create(submitter = self.submitter_2, image = self.image)
+        submission_2 = IotdSubmission.objects.create(submitter=self.submitter_2, image=self.image)
         response = self.client.get(url)
         bss = BSS(response.content)
         self.assertEqual(len(bss('.astrobin-image-container')), 1)
@@ -662,47 +656,47 @@ class IotdTest(TestCase):
 
         # Check that current or past IOTD is not rendered
         vote = IotdVote.objects.create(
-            reviewer = self.reviewer_1,
-            image = self.image)
+            reviewer=self.reviewer_1,
+            image=self.image)
         iotd = Iotd.objects.create(
-            judge = self.judge_1,
-            image = self.image,
-            date = datetime.now().date())
+            judge=self.judge_1,
+            image=self.image,
+            date=datetime.now().date())
         response = self.client.get(url)
         self.assertNotContains(response, 'data-id="%s"' % self.image.pk)
 
         # Future IOTD should render tho
-        Iotd.objects.filter(image = self.image).update(
-            date = datetime.now().date() + timedelta(1))
+        Iotd.objects.filter(image=self.image).update(
+            date=datetime.now().date() + timedelta(1))
         response = self.client.get(url)
         self.assertContains(response, 'data-id="%s"' % self.image.pk)
 
         # Images by judges are now shown here
         self.image.user = self.judge_1
-        self.image.save()
+        self.image.save(keep_deleted=True)
         response = self.client.get(url)
         self.assertNotContains(response, 'data-id="%s"' % self.image.pk)
         self.image.user = self.user
-        self.image.save()
+        self.image.save(keep_deleted=True)
 
         submission_1.delete()
         vote.delete()
         iotd.delete()
 
     def test_toggle_vote_ajax_view(self):
-        url = reverse_lazy('iotd_toggle_vote_ajax', kwargs = {'pk': self.image.pk})
+        url = reverse_lazy('iotd_toggle_vote_ajax', kwargs={'pk': self.image.pk})
 
         # Login required
         response = self.client.get(url)
         self.assertEqual(response.status_code, 302)
 
         # Only reviewers allowed
-        self.client.login(username = 'submitter_1', password = 'password')
+        self.client.login(username='submitter_1', password='password')
         response = self.client.get(url)
         self.assertEqual(response.status_code, 302)
 
         # GET not allowed
-        self.client.login(username = 'reviewer_1', password = 'password')
+        self.client.login(username='reviewer_1', password='password')
         response = self.client.get(url)
         self.assertEqual(response.status_code, 405)
 
@@ -712,9 +706,9 @@ class IotdTest(TestCase):
 
         # All OK
         submission = IotdSubmission.objects.create(
-            submitter = self.submitter_1,
-            image = self.image)
-        response = self.client.post(url, HTTP_X_REQUESTED_WITH = 'XMLHttpRequest')
+            submitter=self.submitter_1,
+            image=self.image)
+        response = self.client.post(url, HTTP_X_REQUESTED_WITH='XMLHttpRequest')
         self.assertEqual(response.status_code, 200)
         self.assertTrue('vote' in json.loads(response.content))
         self.assertEqual(json.loads(response.content)['used_today'], 1)
@@ -722,7 +716,7 @@ class IotdTest(TestCase):
         self.assertEqual(IotdVote.objects.count(), 1)
 
         # Toggle off
-        response = self.client.post(url, HTTP_X_REQUESTED_WITH = 'XMLHttpRequest')
+        response = self.client.post(url, HTTP_X_REQUESTED_WITH='XMLHttpRequest')
         self.assertEqual(response.status_code, 200)
         self.assertEqual(json.loads(response.content)['used_today'], 0)
         self.assertFalse('vote' in json.loads(response.content))
@@ -730,10 +724,10 @@ class IotdTest(TestCase):
         self.assertEqual(IotdVote.objects.count(), 0)
 
         # You can still toggle off if you reached your max
-        response = self.client.post(url, HTTP_X_REQUESTED_WITH = 'XMLHttpRequest')
+        response = self.client.post(url, HTTP_X_REQUESTED_WITH='XMLHttpRequest')
         self.assertEqual(IotdVote.objects.count(), 1)
-        with self.settings(IOTD_REVIEW_MAX_PER_DAY = 1):
-            response = self.client.post(url, HTTP_X_REQUESTED_WITH = 'XMLHttpRequest')
+        with self.settings(IOTD_REVIEW_MAX_PER_DAY=1):
+            response = self.client.post(url, HTTP_X_REQUESTED_WITH='XMLHttpRequest')
             self.assertEqual(IotdVote.objects.count(), 0)
 
     def test_judgement_queue_view(self):
@@ -744,23 +738,23 @@ class IotdTest(TestCase):
         self.assertEqual(response.status_code, 302)
 
         # Only judges allowed
-        self.client.login(username = 'reviewer_1', password = 'password')
+        self.client.login(username='reviewer_1', password='password')
         response = self.client.get(url)
         self.assertEqual(response.status_code, 302)
 
-        self.client.login(username = 'judge_1', password = 'password')
+        self.client.login(username='judge_1', password='password')
         response = self.client.get(url)
         self.assertEqual(response.status_code, 200)
-        self.assertContains(response, '<span class="used">0</span>', html = True)
+        self.assertContains(response, '<span class="used">0</span>', html=True)
 
         # Check that images are rendered
-        submission_1 = IotdSubmission.objects.create(submitter = self.submitter_1, image = self.image)
-        vote_1 = IotdVote.objects.create(reviewer = self.reviewer_1, image = self.image)
+        submission_1 = IotdSubmission.objects.create(submitter=self.submitter_1, image=self.image)
+        vote_1 = IotdVote.objects.create(reviewer=self.reviewer_1, image=self.image)
         response = self.client.get(url)
         self.assertContains(response, 'data-id="%s"' % self.image.pk)
 
         # Check that multiple votes for the same image result in one single image rendered
-        vote_2 = IotdVote.objects.create(reviewer = self.reviewer_2, image = self.image)
+        vote_2 = IotdVote.objects.create(reviewer=self.reviewer_2, image=self.image)
         response = self.client.get(url)
         bss = BSS(response.content)
         self.assertEqual(len(bss('.astrobin-image-container')), 1)
@@ -782,44 +776,44 @@ class IotdTest(TestCase):
 
         # Check that current or past IOTD is not rendered
         iotd = Iotd.objects.create(
-            judge = self.judge_1,
-            image = self.image,
-            date = datetime.now().date())
+            judge=self.judge_1,
+            image=self.image,
+            date=datetime.now().date())
         response = self.client.get(url)
         self.assertNotContains(response, 'data-id="%s"' % self.image.pk)
 
         # Future IOTD should render tho
-        Iotd.objects.filter(image = self.image).update(
-            date = datetime.now().date() + timedelta(1))
+        Iotd.objects.filter(image=self.image).update(
+            date=datetime.now().date() + timedelta(1))
         response = self.client.get(url)
         self.assertContains(response, 'data-id="%s"' % self.image.pk)
 
         # Images by judges are now shown here
         self.image.user = self.judge_1
-        self.image.save()
+        self.image.save(keep_deleted=True)
         response = self.client.get(url)
         self.assertNotContains(response, 'data-id="%s"' % self.image.pk)
         self.image.user = self.user
-        self.image.save()
+        self.image.save(keep_deleted=True)
 
         submission_1.delete()
         vote_1.delete()
         iotd.delete()
 
     def test_toggle_judgement_ajax_view(self):
-        url = reverse_lazy('iotd_toggle_judgement_ajax', kwargs = {'pk': self.image.pk})
+        url = reverse_lazy('iotd_toggle_judgement_ajax', kwargs={'pk': self.image.pk})
 
         # Login required
         response = self.client.get(url)
         self.assertEqual(response.status_code, 302)
 
         # Only judges allowed
-        self.client.login(username = 'reviewer_1', password = 'password')
+        self.client.login(username='reviewer_1', password='password')
         response = self.client.get(url)
         self.assertEqual(response.status_code, 302)
 
         # GET not allowed
-        self.client.login(username = 'judge_1', password = 'password')
+        self.client.login(username='judge_1', password='password')
         response = self.client.get(url)
         self.assertEqual(response.status_code, 405)
 
@@ -830,12 +824,12 @@ class IotdTest(TestCase):
         # IOTD for today
         today = datetime.now().date()
         submission = IotdSubmission.objects.create(
-            submitter = self.submitter_1,
-            image = self.image)
+            submitter=self.submitter_1,
+            image=self.image)
         vote = IotdVote.objects.create(
-            reviewer = self.reviewer_1,
-            image = self.image)
-        response = self.client.post(url, HTTP_X_REQUESTED_WITH = 'XMLHttpRequest')
+            reviewer=self.reviewer_1,
+            image=self.image)
+        response = self.client.post(url, HTTP_X_REQUESTED_WITH='XMLHttpRequest')
         self.assertEqual(response.status_code, 200)
         self.assertTrue('iotd' in json.loads(response.content))
         self.assertEqual(json.loads(response.content)['used_today'], 1)
@@ -848,7 +842,7 @@ class IotdTest(TestCase):
         self.assertEqual(iotd.date, today)
 
         # Cannot unelect current IOTD
-        response = self.client.post(url, HTTP_X_REQUESTED_WITH = 'XMLHttpRequest')
+        response = self.client.post(url, HTTP_X_REQUESTED_WITH='XMLHttpRequest')
         self.assertEqual(response.status_code, 200)
         self.assertTrue('error' in json.loads(response.content))
         self.assertEqual(json.loads(response.content)['error'], "You cannot unelect a past or current IOTD.")
@@ -857,11 +851,11 @@ class IotdTest(TestCase):
         self.assertEqual(Iotd.objects.count(), 1)
 
         # Cannot unelect IOTD elected by another judge
-        Iotd.objects.filter(pk = iotd.pk).update(
-            judge = self.judge_2,
-            date = today + timedelta(1)) # Make it future
-        iotd = Iotd.objects.get(pk = iotd.pk) # sqlite won't do the .update above without this?
-        response = self.client.post(url, HTTP_X_REQUESTED_WITH = 'XMLHttpRequest')
+        Iotd.objects.filter(pk=iotd.pk).update(
+            judge=self.judge_2,
+            date=today + timedelta(1))  # Make it future
+        iotd = Iotd.objects.get(pk=iotd.pk)  # sqlite won't do the .update above without this?
+        response = self.client.post(url, HTTP_X_REQUESTED_WITH='XMLHttpRequest')
         self.assertEqual(response.status_code, 200)
         self.assertTrue('error' in json.loads(response.content))
         self.assertEqual(json.loads(response.content)['error'], "You cannot unelect an IOTD elected by another judge.")
@@ -873,7 +867,7 @@ class IotdTest(TestCase):
         iotd.save()
 
         # Unelect OK
-        response = self.client.post(url, HTTP_X_REQUESTED_WITH = 'XMLHttpRequest')
+        response = self.client.post(url, HTTP_X_REQUESTED_WITH='XMLHttpRequest')
         self.assertEqual(response.status_code, 200)
         self.assertEqual(json.loads(response.content)['used_today'], 0)
         self.assertFalse('error' in json.loads(response.content))
@@ -882,69 +876,69 @@ class IotdTest(TestCase):
         self.assertEqual(Iotd.objects.count(), 0)
 
         # Test IOTD fitting first available slot
-        image2 = Image.objects.create(user = self.user)
-        submission2 = IotdSubmission.objects.create(submitter = self.submitter_1, image = image2)
-        vote2 = IotdVote.objects.create(reviewer = self.reviewer_1, image = image2)
+        image2 = Image.objects.create(user=self.user)
+        submission2 = IotdSubmission.objects.create(submitter=self.submitter_1, image=image2)
+        vote2 = IotdVote.objects.create(reviewer=self.reviewer_1, image=image2)
 
-        image3 = Image.objects.create(user = self.user)
-        submission3 = IotdSubmission.objects.create(submitter = self.submitter_1, image = image3)
-        vote3 = IotdVote.objects.create(reviewer = self.reviewer_1, image = image3)
+        image3 = Image.objects.create(user=self.user)
+        submission3 = IotdSubmission.objects.create(submitter=self.submitter_1, image=image3)
+        vote3 = IotdVote.objects.create(reviewer=self.reviewer_1, image=image3)
 
-        response = self.client.post(url, HTTP_X_REQUESTED_WITH = 'XMLHttpRequest')
-        iotd = Iotd.objects.get(pk = json.loads(response.content)['iotd'])
+        response = self.client.post(url, HTTP_X_REQUESTED_WITH='XMLHttpRequest')
+        iotd = Iotd.objects.get(pk=json.loads(response.content)['iotd'])
         self.assertEqual(iotd.date, today)
 
         with self.settings(
-                IOTD_JUDGEMENT_MAX_PER_DAY = 4, IOTD_SUBMISSION_MAX_PER_DAY = 4,
-                IOTD_REVIEW_MAX_PER_DAY = 4):
-            url = reverse_lazy('iotd_toggle_judgement_ajax', kwargs = {'pk': image2.pk})
-            response = self.client.post(url, HTTP_X_REQUESTED_WITH = 'XMLHttpRequest')
-            iotd2 = Iotd.objects.get(pk = json.loads(response.content)['iotd'])
+                IOTD_JUDGEMENT_MAX_PER_DAY=4, IOTD_SUBMISSION_MAX_PER_DAY=4,
+                IOTD_REVIEW_MAX_PER_DAY=4):
+            url = reverse_lazy('iotd_toggle_judgement_ajax', kwargs={'pk': image2.pk})
+            response = self.client.post(url, HTTP_X_REQUESTED_WITH='XMLHttpRequest')
+            iotd2 = Iotd.objects.get(pk=json.loads(response.content)['iotd'])
             self.assertEqual(iotd2.date, today + timedelta(1))
 
-            url = reverse_lazy('iotd_toggle_judgement_ajax', kwargs = {'pk': image3.pk})
-            response = self.client.post(url, HTTP_X_REQUESTED_WITH = 'XMLHttpRequest')
-            iotd3 = Iotd.objects.get(pk = json.loads(response.content)['iotd'])
+            url = reverse_lazy('iotd_toggle_judgement_ajax', kwargs={'pk': image3.pk})
+            response = self.client.post(url, HTTP_X_REQUESTED_WITH='XMLHttpRequest')
+            iotd3 = Iotd.objects.get(pk=json.loads(response.content)['iotd'])
             self.assertEqual(iotd3.date, today + timedelta(2))
 
             # Fills a hole
             iotd2.delete()
-            url = reverse_lazy('iotd_toggle_judgement_ajax', kwargs = {'pk': image2.pk})
-            response = self.client.post(url, HTTP_X_REQUESTED_WITH = 'XMLHttpRequest')
-            iotd2 = Iotd.objects.get(pk = json.loads(response.content)['iotd'])
+            url = reverse_lazy('iotd_toggle_judgement_ajax', kwargs={'pk': image2.pk})
+            response = self.client.post(url, HTTP_X_REQUESTED_WITH='XMLHttpRequest')
+            iotd2 = Iotd.objects.get(pk=json.loads(response.content)['iotd'])
             self.assertEqual(iotd2.date, today + timedelta(1))
 
-            image4 = Image.objects.create(user = self.user)
-            submission4 = IotdSubmission.objects.create(submitter = self.submitter_1, image = image4)
-            vote4 = IotdVote.objects.create(reviewer = self.reviewer_1, image = image4)
+            image4 = Image.objects.create(user=self.user)
+            submission4 = IotdSubmission.objects.create(submitter=self.submitter_1, image=image4)
+            vote4 = IotdVote.objects.create(reviewer=self.reviewer_1, image=image4)
 
         # Test MAX_FUTURE_DAYS cutoff
-        with self.settings(IOTD_JUDGEMENT_MAX_FUTURE_DAYS = 3):
-            url = reverse_lazy('iotd_toggle_judgement_ajax', kwargs = {'pk': image4.pk})
-            response = self.client.post(url, HTTP_X_REQUESTED_WITH = 'XMLHttpRequest')
+        with self.settings(IOTD_JUDGEMENT_MAX_FUTURE_DAYS=3):
+            url = reverse_lazy('iotd_toggle_judgement_ajax', kwargs={'pk': image4.pk})
+            response = self.client.post(url, HTTP_X_REQUESTED_WITH='XMLHttpRequest')
             self.assertFalse('iotd' in json.loads(response.content))
             self.assertTrue("are already filled" in json.loads(response.content)['error'])
             self.assertEqual(Iotd.objects.count(), 3)
 
         # Test max daily
-        with self.settings(IOTD_JUDGEMENT_MAX_PER_DAY = 3):
-            url = reverse_lazy('iotd_toggle_judgement_ajax', kwargs = {'pk': image4.pk})
-            response = self.client.post(url, HTTP_X_REQUESTED_WITH = 'XMLHttpRequest')
+        with self.settings(IOTD_JUDGEMENT_MAX_PER_DAY=3):
+            url = reverse_lazy('iotd_toggle_judgement_ajax', kwargs={'pk': image4.pk})
+            response = self.client.post(url, HTTP_X_REQUESTED_WITH='XMLHttpRequest')
             self.assertFalse('iotd' in json.loads(response.content))
             self.assertTrue("already elected" in json.loads(response.content)['error'])
             self.assertEqual(Iotd.objects.count(), 3)
 
         # You can still toggle off if you reached your max
-        with self.settings(IOTD_JUDGEMENT_MAX_PER_DAY = 3):
-            response = self.client.post(url, HTTP_X_REQUESTED_WITH = 'XMLHttpRequest')
+        with self.settings(IOTD_JUDGEMENT_MAX_PER_DAY=3):
+            response = self.client.post(url, HTTP_X_REQUESTED_WITH='XMLHttpRequest')
             self.assertEqual(Iotd.objects.count(), 3)
 
         # No more than IOTD_JUDGEMENT_MAX_FUTURE_PER_JUDGE already scheduled
 
         with self.settings(
-                IOTD_JUDGEMENT_MAX_PER_DAY = 4,
-                IOTD_JUDGEMENT_MAX_FUTURE_PER_JUDGE = 1):
-            response = self.client.post(url, HTTP_X_REQUESTED_WITH = 'XMLHttpRequest')
+                IOTD_JUDGEMENT_MAX_PER_DAY=4,
+                IOTD_JUDGEMENT_MAX_FUTURE_PER_JUDGE=1):
+            response = self.client.post(url, HTTP_X_REQUESTED_WITH='XMLHttpRequest')
             self.assertFalse('iotd' in json.loads(response.content))
             self.assertTrue("already scheduled" in json.loads(response.content)['error'])
             self.assertEqual(Iotd.objects.count(), 3)
@@ -971,24 +965,28 @@ class IotdTest(TestCase):
     def test_group_sync(self):
         group_creator = User.objects.create_user('group_creator', 'group_creator@test.com', 'password')
 
-        staff_group = AstroBinGroup.objects.create(name = 'IOTD Staff', creator = group_creator, owner = group_creator, category = 101)
-        submitters_group = AstroBinGroup.objects.create(name = 'IOTD Submitters', creator = group_creator, owner = group_creator, category = 101)
-        reviewers_group = AstroBinGroup.objects.create(name = 'IOTD Reviewers', creator = group_creator, owner = group_creator, category = 101)
-        judges_group = AstroBinGroup.objects.create(name = 'IOTD Judges', creator = group_creator, owner = group_creator, category = 101)
+        staff_group = AstroBinGroup.objects.create(name='IOTD Staff', creator=group_creator, owner=group_creator,
+                                                   category=101)
+        submitters_group = AstroBinGroup.objects.create(name='IOTD Submitters', creator=group_creator,
+                                                        owner=group_creator, category=101)
+        reviewers_group = AstroBinGroup.objects.create(name='IOTD Reviewers', creator=group_creator,
+                                                       owner=group_creator, category=101)
+        judges_group = AstroBinGroup.objects.create(name='IOTD Judges', creator=group_creator, owner=group_creator,
+                                                    category=101)
 
-        staff_group_dj, created = Group.objects.get_or_create(name = 'iotd_staff')
+        staff_group_dj, created = Group.objects.get_or_create(name='iotd_staff')
         self.assertFalse(created)
 
-        content_moderators_group_dj, created = Group.objects.get_or_create(name = 'content_moderators')
+        content_moderators_group_dj, created = Group.objects.get_or_create(name='content_moderators')
         self.assertFalse(created)
 
-        submitters_group_dj, created = Group.objects.get_or_create(name = 'iotd_submitters')
+        submitters_group_dj, created = Group.objects.get_or_create(name='iotd_submitters')
         self.assertFalse(created)
 
-        reviewers_group_dj, created = Group.objects.get_or_create(name = 'iotd_reviewers')
+        reviewers_group_dj, created = Group.objects.get_or_create(name='iotd_reviewers')
         self.assertFalse(created)
 
-        judges_group_dj, created = Group.objects.get_or_create(name = 'iotd_judges')
+        judges_group_dj, created = Group.objects.get_or_create(name='iotd_judges')
         self.assertFalse(created)
 
         submitters_group.members.add(self.user)
@@ -1123,3 +1121,20 @@ class IotdTest(TestCase):
         judges_group_dj.delete()
         staff_group_dj.delete()
         content_moderators_group_dj.delete()
+
+    def test_iotd_deleted_images(self):
+        """Deleted images should not appear in the IOTD archive"""
+
+        IotdSubmission.objects.create(submitter=self.submitter_1, image=self.image)
+        IotdVote.objects.create(reviewer=self.reviewer_1, image=self.image)
+        Iotd.objects.create(judge=self.judge_1, image=self.image, date=datetime.now())
+
+        response = self.client.get(reverse_lazy('iotd_archive'))
+        self.assertContains(response, self.image.title)
+
+        self.image.delete()
+
+        response = self.client.get(reverse_lazy('iotd_archive'))
+        self.assertNotContains(response, self.image.title)
+
+        self.image.undelete()

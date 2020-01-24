@@ -1,0 +1,120 @@
+{% load i18n %}
+
+<script type="text/x-template" id="subject-type-filter-template">
+    <div class="form-group" :class="{highlighted: highlighted}">
+        <v-multiselect class="multiselect--grouped" v-model="value" :options="options" track-by="id" label="label"
+                       selectLabel="" deselectLabel="" selectedLabel="" :searchable="false"
+                       placeholder="{% trans "Select" %}">
+        </v-multiselect>
+        <input type="hidden" name="subject_type" :value="getValue()">
+    </div>
+</script>
+
+<script>
+    Vue.component("subject-type-filter", {
+        template: "#subject-type-filter-template",
+        props: [
+            "subjectType"
+        ],
+        mixins: [
+            FilterComponentMixin
+        ],
+        data: function () {
+            return {
+                value: null,
+                options: [
+                    {
+                        id: "deep_sky",
+                        label: "{% trans "Deep sky object" %}"
+                    },
+                    {
+                        id: "solar_system",
+                        label: "{% trans "Solar system body or event" %}"
+                    },
+                    {
+                        id: "wide",
+                        label: "{% trans "Extremely wide field" %}"
+                    },
+                    {
+                        id: "trails",
+                        label: "{% trans "Star trails" %}"
+                    },
+                    {
+                        id: "aurora",
+                        label: "{% trans "Northern lights" %}"
+                    },
+                    {
+                        id: "gear",
+                        label: "{% trans "Gear" %}"
+                    },
+                    {
+                        id: null,
+                        label: "",
+                        $isDisabled: true
+                    },
+                    {
+                        id: "sun",
+                        label: "{% trans "Sun" %}"
+                    },
+                    {
+                        id: "moon",
+                        label: "{% trans "Earth's moon" %}"
+                    },
+                    {
+                        id: "mercury",
+                        label: "{% trans "Mercury" %}"
+                    },
+                    {
+                        id: "mars",
+                        label: "{% trans "Mars" %}"
+                    },
+                    {
+                        id: "jupiter",
+                        label: "{% trans "Jupiter" %}"
+                    },
+                    {
+                        id: "saturn",
+                        label: "{% trans "Saturn" %}"
+                    },
+                    {
+                        id: "uranus",
+                        label: "{% trans "Uranus" %}"
+                    },
+                    {
+                        id: "neptune",
+                        label: "{% trans "Neptune" %}"
+                    },
+                    {
+                        id: "minor_planet",
+                        label: "{% trans "Minor planet" %}"
+                    },
+                    {
+                        id: "comet",
+                        label: "{% trans "Comet" %}"
+                    },
+                    {
+                        id: "other",
+                        label: "{% trans "Other solar system object" %}"
+                    }
+                ]
+            }
+        },
+        created: function () {
+            for (var i = 0; i < this.options.length; i++) {
+                if (this.options[i].id === this.subjectType) {
+                    this.value = this.options[i];
+                    return;
+                }
+            }
+        },
+        methods: {
+            getValue: function() {
+                if (this.value) {
+                    return this.value.id;
+                }
+
+                return null;
+            }
+        }
+    });
+</script>

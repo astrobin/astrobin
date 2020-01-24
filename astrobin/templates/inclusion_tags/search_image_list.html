@@ -1,185 +1,187 @@
 {% load astrobin_apps_images_tags %}
 {% load astrobin_apps_users_tags %}
-{% load avatar_tags %}
-{% load common_tags %}
-{% load hitcount_tags %}
+{% load highlight %}
 {% load i18n %}
-{% load tags %}
+{% load avatar_tags %}
 
-{% if multiple %}
-<div class="alert alert-info">{% blocktrans %}This search found results of multiple types. If you want, you can refine your search using the <strong>Search type</strong> field in the <strong>Basic criteria</strong> box.{% endblocktrans %}</div>
-{% endif %}
+{% if paginator.object_list %}
 
-{% if gear_list %}
-<h2>{% trans "Gear" %}</h2>
-
-<ul class="thumbnails astrobin-thumbnails">
-{% for search_result in gear_list %}
-    {% if search_result.object and search_result.object.id %}
-        <li class="thumbnail astrobin-thumbnail">
-            <div class="gear-business-card">
-                <div class="business-card-inner">
-                    <div class="header">
-                        <i class="icon-cog icon-white"></i>
-                        <a href="{% url 'gear_page' search_result.object.id search_result.object.slug %}">
-                            {% if search_result.object.make %}{{search_result.object.make}}{% endif %}
-                            {{search_result.object.name}}
-                        </a>
-                    </div>
-                    {% if search_result.object.commercial and search_result.object.commercial.image  %}
-                        {% with search_result.object.commercial.image as image %}
-                            {% astrobin_image image 'thumb' %}
-                        {% endwith %}
-                    {% endif %}
-                    <div class="quick-data">
-                        <table class="table">
-                            <tr>
-                                <th><i class="icon-time icon-white" rel="tooltip" title="{% trans "Integration" %}"></i></th>
-                                <td>{{search_result.integration|floatformat}}</td>
-                            </tr>
-                            <tr>
-                                <th><i class="icon-thumbs-up" rel="tooltip" title="{% trans "Likes" %}"></i></th>
-                                <td>{{search_result.likes}}</td>
-                            </tr>
-                            <tr>
-                                <th><i class="icon-bookmark" rel="tooltip" title="{% trans "Bookmarks" %}"></i></th>
-                                <td>{{search_result.bookmarks}}</td>
-                            </tr>
-
-                        </table>
-                    </div>
-                    <div class="data">
-                        {% trans "Images" %}: <strong>{{search_result.images}}</strong><br/>
-                        {% trans "Comments" %}: <strong>{{search_result.comments}}</strong><br/>
-                        {% trans "Views" %}: <strong>{{search_result.views}}</strong>
-                    </div>
-                </div>
-            </div>
-        </li>
-    {% endif %}
-{% endfor %}
-</ul>
-{% endif %}
-
-{% if user_list %}
-<h2>{% trans "Users" %}</h2>
-<p>
-    <em>{% blocktrans %}If you searched for a gear item, the following users own one, or have imaged with one.{% endblocktrans %}</em>
-</p>
-
-<ul class="thumbnails astrobin-thumbnails">
-{% for search_result in user_list %}
-    {% if search_result.object and search_result.object.id %}
-        <li class="thumbnail astrobin-thumbnail">
-            <div class="user-business-card">
-                <div class="business-card-inner">
-                    <div class="header">
-                        <i class="icon-user icon-white"></i>
-                        {% astrobin_username search_result.object %}
-                    </div>
-                    <div class="avatar">
-                        <a href="{% url 'user_page' search_result.object.username %}">
-                            {% avatar search_result.object 83 %}
-                        </a>
-                    </div>
-                    <div class="quick-data">
-                        <table class="table">
-                            <tr>
-                                <th><i class="icon-time icon-white" rel="tooltip" title="{% trans "Integration" %}"></i></th>
-                                <td>{{search_result.integration|floatformat}}</td>
-                            </tr>
-                            <tr>
-                                <th><i class="icon-thumbs-up" rel="tooltip" title="{% trans "Likes" %}"></i></th>
-                                <td>{{search_result.likes}}</td>
-                            </tr>
-                            <tr>
-                                <th><i class="icon-heart icon-white" rel="tooltip" title="{% trans "Bookmarks" %}"></i></th>
-                                <td>{{search_result.bookmarks}}</td>
-                            </tr>
-                        </table>
-                    </div>
-                    <div class="data">
-                        {% trans "Date joined" %}: <strong>{{search_result.object.date_joined|ago}}</strong><br/>
-                        {% trans "Images" %}: <strong>{{search_result.images}}</strong><br/>
-                        {% trans "Comments" %}: <strong>{{search_result.comments_written}}/{{search_result.comments}}</strong><br/>
-                        {% trans "Views" %}: <strong>{{search_result.views}}</strong>
-                    </div>
-                </div>
-            </div>
-        </li>
-    {% endif %}
-{% endfor %}
-</ul>
-{% endif %}
-
-{% if image_list %}
-
-{% ifequal view "table" %}
-    <table class="table table-condensed table-striped search-table">
-        <thead>
-            <tr>
-                <th class="search-table-user">{% trans "User" %}</th>
-                <th class="search-table-title">{% trans "Title" %}</th>
-                <th class="search-table-date hidden-phone"><i class="icon-calendar"></i></th>
-                <th class="search-table-views hidden-phone"><i class="icon-eye-open"></i></th>
-                <th class="search-table-likes hidden-phone"><i class="icon-thumbs-up"></i></th>
-                <th class="search-table-bookmarks hidden-phone hidden-tablet"><i class="icon-bookmark"></i></th>
-                <th class="search-table-comments hidden-phone hidden-tablet"><i class="icon-comments-alt"></i></th>
-            </tr>
-        </thead>
-        <tbody>
-            {% for search_result in image_list %}
-                {% if search_result.object and search_result.object.id %}
-                    <tr>
-                        <td class="search-table-user">
-                            {% astrobin_username search_result.object.user %}
-                        </td>
-
-                        <td class="search-table-title">
-                            <a href="{% get_image_url search_result.object %} ">{{search_result.object.title}}</a>
-                        </td>
-
-                        <td class="search-table-date hidden-phone">
-                            {% if search_result.object.published %}
-                                <abbr class="timeago" title="{{search_result.object.published|date:'Y-m-d\TH:i:s'}}"></abbr>
-                            {% else %}
-                                <abbr class="timeago" title="{{search_result.object.uploaded|date:'Y-m-d\TH:i:s'}}"></abbr>
-                            {% endif %}
-                        </td>
-
-                        <td class="search-table-views hidden-phone">{% get_hit_count for search_result.object %}</td>
-                        <td class="search-table-likes hidden-phone">{{search_result.likes}}</td>
-                        <td class="search-table-bookmarks hidden-phone hidden-tablet">{{search_result.bookmarks}}</td>
-                        <td class="search-table-comments hidden-phone hidden-tablet">{{search_result.comments}}</td>
-                    </tr>
-                {% endif %}
-            {% endfor %}
-        </tbody>
-    </table>
-{% else %}
-    <ul class="thumbnails astrobin-thumbnails">
-        {% for search_result in image_list %}
-            {% with search_result.object as image %}
-                {% if image and image.id %}
+    {% if search_domain == None or search_domain == 'i' %}
+        <ul class="thumbnails astrobin-thumbnails">
+            {% for result in page_obj.object_list %}
+                {% if result.object %}
                     <li class="thumbnail astrobin-thumbnail">
-                        {% astrobin_image image 'gallery' %}
+                        {% astrobin_image result.object 'gallery' %}
                     </li>
                 {% endif %}
-            {% endwith %}
-        {% empty %}
-            <li>{% include 'inclusion_tags/no_images.html' %}</li>
-        {% endfor %}
-    </ul>
-{% endifequal %}
+            {% endfor %}
+        </ul>
+    {% endif %}
 
-{% endif %}
+    {% if search_domain == 'u' %}
+        <ul class="thumbnails astrobin-thumbnails">
+            {% for result in page_obj.object_list %}
+                {% if result.object and result.object.id %}
+                    <li class="thumbnail astrobin-thumbnail">
+                        <div class="user-business-card">
+                            <div class="business-card-inner">
+                                <div class="header">
+                                    <i class="icon-user icon-white"></i>
+                                    {% astrobin_username result.object %}
+                                </div>
+                                <div class="avatar">
+                                    <a href="{% url 'user_page' result.object.username %}">
+                                        {% avatar result.object 83 %}
+                                    </a>
+                                </div>
+                                <div class="quick-data">
+                                    <table class="table">
+                                        <tr>
+                                            <th><i class="icon-time icon-white" rel="tooltip"
+                                                   title="{% trans "Integration" %}"></i></th>
+                                            <td>{{ result.integration|floatformat }}</td>
+                                        </tr>
+                                        <tr>
+                                            <th><i class="icon-thumbs-up" rel="tooltip" title="{% trans "Likes" %}"></i>
+                                            </th>
+                                            <td>{{ result.likes }}</td>
+                                        </tr>
+                                        <tr>
+                                            <th><i class="icon-heart icon-white" rel="tooltip"
+                                                   title="{% trans "Bookmarks" %}"></i></th>
+                                            <td>{{ result.bookmarks }}</td>
+                                        </tr>
+                                    </table>
+                                </div>
+                                <div class="data">
+                                    {% trans "Date joined" %}:
+                                    <strong>
+                                        <abbr class="timeago"
+                                              title="{{ result.object.date_joined|date:'Y-m-d\TH:i:s' }}">
+                                            {{ result.object.date_joined|date }}
+                                        </abbr>
+                                    </strong><br />
+                                    {% trans "Images" %}: <strong>{{ result.images }}</strong><br />
+                                    {% trans "Comments" %}:
+                                    <strong>{{ result.comments_written }}/{{ result.comments }}</strong><br />
+                                    {% trans "Views" %}: <strong>{{ result.views }}</strong>
+                                </div>
+                            </div>
+                        </div>
+                    </li>
+                {% endif %}
+            {% endfor %}
+        </ul>
+    {% endif %}
 
-{% if not gear_list and not user_list and not image_list %}
-    <div class="alert alert-warning">
-        {% trans "No results. Sorry." %}
-    </div>
-{% endif %}
+    {% if search_domain == 'cf' %}
+        <ul class="search-results__text">
+            {% for text in page_obj.object_list %}
+                <li class="search-results__text__single">
 
-{% if paginate %}
-    {% include 'pagination_numbered.html' %}
+                    {% if text.model_name == "nestedcomment" %}
+                        {% if text.object.image.count > 0 %}
+                            <div class="search-results__text__meta">
+                                <span class="search-results__text__author">
+                                    {% astrobin_username text.object.author %}
+                                </span>
+                                <span class="search-results__text__date">
+                                    <abbr class="timeago" title="{{ text.object.updated|date:'Y-m-d\TH:i:s' }}">
+                                        {{ text.object.updated|date }}
+                                    </abbr>
+                                </span>
+                            </div>
+                            <div class="search-results__text__content">
+                                {% if request.GET.q %}
+                                    {% highlight text.text with request.GET.q css_class 'search-results__highlight' max_length 500 %}
+                                {% else %}
+                                    {{ text.text }}
+                                {% endif %}
+                            </div>
+                            <div class="search-results__text__links">
+                                <a href="{{ text.object.get_absolute_url }}">{% trans "link" %}</a>
+                            </div>
+                        {% else %}
+                            <em>{% trans "Comment of deleted image not shown." %}</em>
+                        {% endif %}
+                    {% endif %}
+
+                    {% if text.model_name == "post" %}
+                        <div class="search-results__text__meta">
+                    <span class="search-results__text__author">
+                        {% astrobin_username text.object.user %}
+                    </span>
+                            <span class="search-results__text__date">
+                        {% if text.object.updated %}
+                            <abbr class="timeago" title="{{ text.object.updated|date:'Y-m-d\TH:i:s' }}">
+                                {{ text.object.updated|date }}
+                            </abbr>
+                        {% elif text.object.created %}
+                            <abbr class="timeago" title="{{ text.object.created|date:'Y-m-d\TH:i:s' }}">
+                                {{ text.object.created|date }}
+                            </abbr>
+                        {% endif %}
+                    </span>
+                        </div>
+                        <div class="search-results__text__content">
+                            {% if request.GET.q %}
+                                {% highlight text.text with request.GET.q css_class 'search-results__highlight' max_length 500 %}
+                            {% else %}
+                                {{ text.text }}
+                            {% endif %}
+                        </div>
+                        <div class="search-results__text__links">
+                            <a href="{{ text.object.get_absolute_url }}">{% trans "link" %}</a>
+                        </div>
+                    {% endif %}
+
+                    {% if text.model_name == "topic" %}
+                        <div class="search-results__text__meta">
+                    <span class="search-results__text__author">
+                        {% astrobin_username text.object.user %}
+                    </span>
+                            <span class="search-results__text__date">
+                        {% if text.object.updated %}
+                            <abbr class="timeago" title="{{ text.object.updated|date:'Y-m-d\TH:i:s' }}">
+                                {{ text.object.updated|date }}
+                            </abbr>
+                        {% elif text.object.created %}
+                            <abbr class="timeago" title="{{ text.object.created|date:'Y-m-d\TH:i:s' }}">
+                                {{ text.object.created|date }}
+                            </abbr>
+                        {% endif %}
+                    </span>
+                        </div>
+                        <div class="search-results__text__content">
+                            {% if request.GET.q %}
+                                {% highlight text.text with request.GET.q css_class 'search-results__highlight' max_length 500 %}
+                            {% else %}
+                                {{ text.text }}
+                            {% endif %}
+                        </div>
+                        <div class="search-results__text__links">
+                            <a href="{{ text.object.get_absolute_url }}">{% trans "link" %}</a>
+                        </div>
+                    {% endif %}
+                </li>
+            {% endfor %}
+        </ul>
+    {% endif %}
+
+    {% if paginate and paginator.num_pages > 1 %}
+        {% include 'pagination_numbered.html' %}
+    {% endif %}
+
+{% else %}
+
+    {% if request.GET.q %}
+        <div class="alert alert-warning">
+            {% trans "No results. Sorry." %}
+        </div>
+    {% else %}
+        <div class="alert alert-warning">
+            {% trans "Please input some search terms!" %}
+        </div>
+    {% endif %}
+
 {% endif %}

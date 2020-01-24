@@ -1,0 +1,151 @@
+{% load i18n %}
+
+<script type="text/x-template" id="remote-source-filter-template">
+    <div class="form-group" :class="{highlighted: highlighted}">
+        <v-multiselect v-model="value" :options="options" track-by="id" label="label"
+                       selectLabel="" deselectLabel="" selectedLabel=""
+                       :searchable="true" placeholder="{% trans "Select" %}">
+        </v-multiselect>
+        <input type="hidden" name="remote_source" :value="getValue()">
+    </div>
+</script>
+
+<script>
+    Vue.component("remote-source-filter", {
+        template: "#remote-source-filter-template",
+        props: [
+            "remoteSource"
+        ],
+        mixins: [
+            FilterComponentMixin
+        ],
+        data: function () {
+            return {
+                value: null,
+                options: [
+                    {
+                        id: "OWN",
+                        label: "{% trans "Non-commercial independent facility" %}",
+                    },
+                    {
+                        id: "AC",
+                        label: "AstroCamp"
+                    },
+                    {
+                        id: "AHK",
+                        label: "Astro Hostel Krasnodar"
+                    },
+                    {
+                        id: "CS",
+                        label: "ChileScope"
+                    },
+                    {
+                        id: "DSP",
+                        label: "Dark Sky Portal"
+                    },
+                    {
+                        id: "DSC",
+                        label: "DeepSkyChile"
+                    },
+                    {
+                        id: "DSW",
+                        label: "DeepSkyWest"
+                    },
+                    {
+                        id: "eEye",
+                        label: "e-Eye Extremadura"
+                    },
+                    {
+                        id: "GMO",
+                        label: "Grand Mesa Observatory"
+                    },
+                    {
+                        id: "HMO",
+                        label: "Heaven's Mirror Observatory"
+                    },
+                    {
+                        id: "IC",
+                        label: "IC Astronomy Observatories"
+                    },
+                    {
+                        id: "ITU",
+                        label: "Image The Universe"
+                    },
+                    {
+                        id: "iT",
+                        label: "iTelescope"
+                    },
+                    {
+                        id: "LGO",
+                        label: "Lijiang Gemini Observatory"
+                    },
+                    {
+                        id: "MARIO",
+                        label: "Marathon Remote Imaging Observatory (MaRIO)"
+                    },
+                    {
+                        id: "NMS",
+                        label: "New Mexico Skies"
+                    },
+                    {
+                        id: "OES",
+                        label: "Observatorio El Sauce"
+                    },
+                    {
+                        id: "PSA",
+                        label: "PixelSkies"
+                    },
+                    {
+                        id: "RLD",
+                        label: "Riverland Dingo Observatory"
+                    },
+                    {
+                        id: "SS",
+                        label: "Sahara Sky"
+                    },
+                    {
+                        id: "SPVO",
+                        label: "San Pedro Valley Observatory"
+                    },
+                    {
+                        id: "SRO",
+                        label: "Sierra Remote Observatories"
+                    },
+                    {
+                        id: "SRO2",
+                        label: "Sky Ranch Observatory"
+                    },
+                    {
+                        id: "OTHER",
+                        label: "{% trans "Other" %}"
+                    },
+                    {
+                        id: "SLO",
+                        label: "Slooh"
+                    },
+                    {
+                        id: "SSLLC",
+                        label: "Stellar Skies LLC"
+                    }
+                ]
+            }
+        },
+        created: function() {
+            for (var i = 0; i < this.options.length; i++) {
+                if (this.options[i].id === this.remoteSource) {
+                    this.value = this.options[i];
+                    return;
+                }
+            }
+        },
+        methods: {
+            getValue: function () {
+                if (this.value) {
+                    return this.value.id;
+                }
+
+                return null;
+            }
+        }
+    });
+</script>

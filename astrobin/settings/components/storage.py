@@ -9,7 +9,7 @@ if AWS_S3_ENABLED:
     MEDIA_ROOT = '/'
     MEDIA_URL = 'https://%s/' % AWS_S3_CUSTOM_DOMAIN
 
-    STATIC_ROOT = '/static/'
+    STATIC_ROOT = 'static/'
     STATIC_URL = MEDIA_URL + 'static/'
 
     S3_URL = 's3.amazonaws.com'
@@ -42,17 +42,15 @@ ADMIN_MEDIA_PREFIX = STATIC_URL + 'admin/'
 
 LOCAL_STATIC_STORAGE = os.environ.get('LOCAL_STATIC_STORAGE', 'true') == "true"
 if LOCAL_STATIC_STORAGE:
-    STATIC_URL = '/media/static/'
+    STATIC_ROOT = STATIC_URL = '/media/static/'
     STATICFILES_STORAGE = 'astrobin.s3utils.StaticRootLocalStorage'
 else:
     STATICFILES_STORAGE = 'astrobin.s3utils.StaticRootS3BotoStorage'
 
 DEFAULT_FILE_STORAGE = 'astrobin.s3utils.ImageStorage'
 STATICFILES_FINDERS = (
-    'django.contrib.staticfiles.finders.FileSystemFinder',
     'django.contrib.staticfiles.finders.AppDirectoriesFinder',
     'pipeline.finders.PipelineFinder',
 )
-STATICFILES_DIRS = (local_path('../static'),)
 
 MESSAGE_STORAGE = 'persistent_messages.storage.PersistentMessageStorage'

@@ -1,3 +1,7 @@
+# Python
+import re
+from mock import patch
+
 # Django
 from django.contrib.auth.models import User
 from django.core.urlresolvers import reverse
@@ -6,6 +10,7 @@ from django.test import TestCase
 # Third party
 from beautifulsoupselect import BeautifulSoupSelect as BSS
 import simplejson as json
+from mock import patch
 from pybb.models import Forum, Topic
 
 # This app
@@ -51,7 +56,7 @@ class GroupsTest(TestCase):
         self.group.delete()
 
     def test_misc_ui_elements(self):
-        response = self.client.get(reverse('index'))
+        response = self.client.get(reverse('group_list'))
         bss = BSS(response.content)
         self.assertEqual(len(bss('.explore-menu-groups')), 1)
 
@@ -78,7 +83,7 @@ class GroupsTest(TestCase):
         self.assertContains(response, '<td class="group-images hidden-phone">1</td>', html = True)
 
         # Test that WIP images don't work
-        image.is_wip = True; image.save()
+        image.is_wip = True; image.save(keep_deleted=True)
         response = self.client.get(reverse('group_list'))
         self.assertContains(response, '<td class="group-images hidden-phone">0</td>', html = True)
 
@@ -93,7 +98,9 @@ class GroupsTest(TestCase):
         self.group.public = True
         self.group.save()
 
-    def test_group_detail_view(self):
+    @patch("astrobin.tasks.retrieve_primary_thumbnails")
+    def test_group_detail_view(self, retrieve_primary_thumbnails):
+        patch('astrobin.tasks.retrieve_primary_thumbnails.delay')
         # Everything okay when it's empty
         response = self.client.get(reverse('group_detail', kwargs = {'pk': self.group.pk}))
         self.assertEqual(response.status_code, 200)
@@ -110,10 +117,11 @@ class GroupsTest(TestCase):
         self.group.members.add(self.user1)
         response = self.client.get(reverse('group_detail', kwargs = {'pk': self.group.pk}))
         self.assertEqual(response.status_code, 200)
-        self.assertContains(response, image.thumbnail('gallery'))
+        self.assertIsNotNone(re.search(r'data-id="%d"\s+data-alias="%s"' % (image.pk, "gallery"), response.content))
+
 
         # Test that WIP images are not rendered here
-        image.is_wip = True; image.save()
+        image.is_wip = True; image.save(keep_deleted=True)
         response = self.client.get(reverse('group_detail', kwargs = {'pk': self.group.pk}))
         self.assertEqual(response.status_code, 200)
         self.assertContains(response, '<li>No images.</li>', html = True)
@@ -204,7 +212,9 @@ class GroupsTest(TestCase):
 
         self.client.logout()
 
-    def test_group_update_view(self):
+    @patch("astrobin.tasks.retrieve_primary_thumbnails")
+    def test_group_update_view(self, retrieve_primary_thumbnails):
+        patch('astrobin.tasks.retrieve_primary_thumbnails.delay')
         url = reverse('group_update', kwargs = {'pk': self.group.pk})
         response = self.client.get(url)
         self.assertEqual(response.status_code, 302)
@@ -368,7 +378,9 @@ class GroupsTest(TestCase):
 
         self.client.logout()
 
-    def test_group_leave_view(self):
+    @patch("astrobin.tasks.retrieve_primary_thumbnails")
+    def test_group_leave_view(self, retrieve_primary_thumbnails):
+        patch('astrobin.tasks.retrieve_primary_thumbnails.delay')
         url = reverse('group_leave', kwargs = {'pk': self.group.pk})
 
         # Login required
@@ -545,7 +557,9 @@ class GroupsTest(TestCase):
 
         self.client.logout()
 
-    def test_group_add_remove_images_view(self):
+    @patch("astrobin.tasks.retrieve_primary_thumbnails")
+    def test_group_add_remove_images_view(self, retrieve_primary_thumbnails):
+        patch('astrobin.tasks.retrieve_primary_thumbnails.delay')
         url = reverse('group_add_remove_images', kwargs = {'pk': self.group.pk})
 
         # Login required
@@ -616,7 +630,9 @@ class GroupsTest(TestCase):
         self.group.autosubmission = True
         self.client.logout()
 
-    def test_group_add_image_view(self):
+    @patch("astrobin.tasks.retrieve_primary_thumbnails")
+    def test_group_add_image_view(self, retrieve_primary_thumbnails):
+        patch('astrobin.tasks.retrieve_primary_thumbnails.delay')
         url = reverse('group_add_image', kwargs = {'pk': self.group.pk})
 
         # Login required
@@ -677,7 +693,7 @@ class GroupsTest(TestCase):
         self.assertEqual(self.group.images.count(), 1)
         self.group.members.remove(self.user2)
 
-        response = self.client.get(reverse('image_detail', args = (image.pk,)))
+        response = self.client.get(reverse('image_detail', args = (image.get_id(),)))
         self.assertContains(
             response,
             '<tr><td><a href="%s">%s</a></td></tr>' % (
@@ -1026,9 +1042,11 @@ class GroupsTest(TestCase):
         self.assertTrue(len(get_unseen_notifications(self.user2)) > 0)
         self.assertIn("REJECTED", get_unseen_notifications(self.user2)[0].message)
 
-    def test_group_autosubmission_sync(self):
+    @patch("astrobin.tasks.retrieve_primary_thumbnails")
+    def test_group_autosubmission_sync(self, retrieve_primary_thumbnails):
         def _upload():
             self.client.login(username = 'user2', password = 'password')
+            patch('astrobin.tasks.retrieve_primary_thumbnails.delay')
             self.client.post(
                 reverse('image_upload_process'),
                 { 'image_file': open('astrobin/fixtures/test.jpg', 'rb') },
@@ -1057,11 +1075,11 @@ class GroupsTest(TestCase):
         # WIP images are NOT added
         image = _upload()
         self.assertTrue(image in group.images.all())
-        image.is_wip = True; image.save()
+        image.is_wip = True; image.save(keep_deleted=True)
         self.assertFalse(image in group.images.all())
 
         # When a member leaves a group, their images are gone
-        image.is_wip = False; image.save()
+        image.is_wip = False; image.save(keep_deleted=True)
         self.assertTrue(image in group.images.all())
         group.members.remove(self.user2)
         self.assertFalse(image in group.images.all())

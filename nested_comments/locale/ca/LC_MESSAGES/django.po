@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2016-11-12 07:03+0000\n"
+"POT-Creation-Date: 2019-10-15 11:54+0000\n"
 "PO-Revision-Date: 2014-01-29 01:49+0000\n"
 "Last-Translator: Bufot <bufote@hotmail.com>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -19,19 +19,12 @@ msgstr ""
 "X-Generator: Pootle 2.5.0\n"
 "X-POOTLE-MTIME: 1390960156.180486\n"
 
-#: templates/nested_comments/nestedcomment_app.html:23
-#: templates/nested_comments/nestedcomment_app.html:138
-#: templates/nested_comments/nestedcomment_app.html:161
-#: templates/nested_comments/nestedcomment_list.html:58
 msgid "Cancel"
 msgstr "Cancel·lar"
 
-#: templates/nested_comments/nestedcomment_app.html:38
 msgid "Add a comment"
 msgstr "Afegir comentari"
 
-#: templates/nested_comments/nestedcomment_app.html:43
-#: templates/nested_comments/nestedcomment_app.html:177
 msgid ""
 "Please <a href=\"/accounts/login/\">login</a> or <a href=\"/accounts/"
 "register/\">register</a> to leave a comment.</p>"
@@ -39,100 +32,65 @@ msgstr ""
 "Si us plau, <a href=\"/accounts/login/\">identifica't</a> o <a href=\"/"
 "accounts/register/\">registra't</a> per deixar el teu comentari.</p>"
 
-#: templates/nested_comments/nestedcomment_app.html:52
 msgid "There are no comments yet."
 msgstr "Encara no hi ha comentaris."
 
-#: templates/nested_comments/nestedcomment_app.html:68
-#: templates/nested_comments/nestedcomment_app.html:86
 msgid "(deleted)"
 msgstr "(esborrat)"
 
-#: templates/nested_comments/nestedcomment_app.html:97
-#: templates/nested_comments/nestedcomment_list.html:33
 msgid "Link"
 msgstr "Enllaç"
 
-#: templates/nested_comments/nestedcomment_app.html:101
-#: templates/nested_comments/nestedcomment_list.html:39
 msgid "Undelete"
 msgstr "Recuperar"
 
-#: templates/nested_comments/nestedcomment_app.html:103
-#: templates/nested_comments/nestedcomment_list.html:41
 msgid "Delete"
 msgstr "Esborrar"
 
-#: templates/nested_comments/nestedcomment_app.html:108
-#: templates/nested_comments/nestedcomment_list.html:44
 msgid "Edit"
 msgstr "Editar"
 
-#: templates/nested_comments/nestedcomment_app.html:113
-#: templates/nested_comments/nestedcomment_list.html:46
 msgid "Reply"
 msgstr "Respondre"
 
-#: templates/nested_comments/nestedcomment_app.html:141
-#: templates/nested_comments/nestedcomment_app.html:164
 msgid "The comment cannot be empty."
 msgstr "El comentari no pot estar buit."
 
-#: templates/nested_comments/nestedcomment_app.html:188
-#: templates/nested_comments/nestedcomment_list.html:57
 msgid "Save"
 msgstr "Desar"
 
-#: templates/nested_comments/nestedcomment_app.html:198
-msgid "Preview"
-msgstr "Previsualitzar"
-
-#: templates/nested_comments/nestedcomment_app.html:204
-#: templates/nested_comments/nestedcomment_list.html:60
-msgid "Formatting help"
-msgstr "Ajuda amb el format"
-
-#: templates/nested_comments/nestedcomment_app.html:208
-msgid "You type:"
-msgstr "Escriu:"
-
-#: templates/nested_comments/nestedcomment_app.html:209
-msgid "You see:"
-msgstr "Per veure:"
-
-#: templates/nested_comments/nestedcomment_app.html:214
-#: templates/nested_comments/nestedcomment_app.html:215
-msgid "italics"
-msgstr "cursiva"
-
-#: templates/nested_comments/nestedcomment_app.html:219
-#: templates/nested_comments/nestedcomment_app.html:220
-msgid "bold"
-msgstr "negreta"
-
-#: templates/nested_comments/nestedcomment_app.html:229
-msgid "(TAB or 4 spaces)"
-msgstr "(tabulació o 4 espais)"
-
-#: templates/nested_comments/nestedcomment_app.html:229
-#: templates/nested_comments/nestedcomment_app.html:230
-msgid "preformatted text"
-msgstr "text amb format"
-
-#: templates/nested_comments/nestedcomment_app.html:234
-#: templates/nested_comments/nestedcomment_app.html:235
-msgid "quoted text"
-msgstr "text citat"
-
-#: templates/nested_comments/nestedcomment_app.html:239
-#: templates/nested_comments/nestedcomment_app.html:240
-msgid "escape the formatting syntax"
-msgstr "sortir de la sintaxi del format"
-
-#: templates/nested_comments/nestedcomment_list.html:26
 msgid "(comment deleted)"
 msgstr "(comentari esborrat)"
 
-#: templates/nested_comments/nestedcomment_list.html:75
+msgid "Formatting help"
+msgstr "Ajuda amb el format"
+
 msgid "There doesn't seem to be anything here."
 msgstr "Sembla que aquí no hi ha res."
+
+#~ msgid "Preview"
+#~ msgstr "Previsualitzar"
+
+#~ msgid "You type:"
+#~ msgstr "Escriu:"
+
+#~ msgid "You see:"
+#~ msgstr "Per veure:"
+
+#~ msgid "italics"
+#~ msgstr "cursiva"
+
+#~ msgid "bold"
+#~ msgstr "negreta"
+
+#~ msgid "(TAB or 4 spaces)"
+#~ msgstr "(tabulació o 4 espais)"
+
+#~ msgid "preformatted text"
+#~ msgstr "text amb format"
+
+#~ msgid "quoted text"
+#~ msgstr "text citat"
+
+#~ msgid "escape the formatting syntax"
+#~ msgstr "sortir de la sintaxi del format"

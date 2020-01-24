@@ -27,111 +27,91 @@
 
 <div id="index">
 
-    {% if not request.user.is_authenticated %}
-
-        <div id="why-astrobin" class="carousel slide">
-            <div class="carousel-inner">
-                <div class="active item">
-                    <div class="carousel-image" style="background-image:url('{% static 'astrobin/images/home_carousel_1.jpg' %}')"></div>
-                    <div class="carousel-caption">
-                        <h4>{% blocktrans %}The perfect home for your astrophotography.{% endblocktrans %}</h4>
-                        {% url 'help' as help_url %}
-                        <p>{% blocktrans %}AstroBin is an image hosting service made specifically for astrophotographers. It comes packed with features that benefit the astrophotography community greatly! See the <a href="{{help_url}}">help page.</a> for more information.{% endblocktrans %}</p>
-                    </div>
-                </div>
-
-                <div class="item">
-                    <div class="carousel-image" style="background-image:url('{% static 'astrobin/images/home_carousel_2.jpg' %}')"></div>
-                    <div class="carousel-caption">
-                        <h4>{% blocktrans %}Unlimited uploads, unlimited size.{% endblocktrans %}</h4>
-                        <p>{% blocktrans %}Astrophotography images have scientific value that shouldn't be lost in file compression. On AstroBin you can (and should!) upload full size images.{% endblocktrans %}</p>
-                    </div>
-                </div>
-
-                <div class="item">
-                    <div class="carousel-image" style="background-image:url('{% static 'astrobin/images/home_carousel_3.jpg' %}')"></div>
-                    <div class="carousel-caption">
-                        <h4>{% blocktrans %}Have your data neatly plotted.{% endblocktrans %}</h4>
-                        <p>{% blocktrans %}Data is everything, and AstroBin will give you the tools to keep your data neat and organized. And with our plots, you can get insights on your productivity and on the gear you use the most.{% endblocktrans %}</p>
-                    </div>
-                </div>
-            </div> <!-- carousel-inner -->
-
-            <a class="carousel-control left hidden-phone" href="#why-astrobin" data-slide="prev">&lsaquo;</a>
-            <a class="carousel-control right hidden-phone" href="#why-astrobin" data-slide="next">&rsaquo;</a>
-        </div> <!-- carousel -->
-
-    {% else %} {# authenticated #}
-
-        {% get_iotd as iotd %}
-        {% if iotd %}
-            <div class="image-of-the-day">
-                <div class="header">
-                    <h2>
-                        <i class="icon-trophy"></i>
-                        {% trans "Image of the day" %}
-                        <span class="title">
-                            {{iotd.image.title|truncatechars:50}},
-                            {% astrobin_username iotd.image.user %}
-                        </span>
-                    </h2>
-                </div>
-
-                {% astrobin_image iotd.image 'iotd' nav_ctx='iotd' %}
-            </div>
-        {% endif %}
-
-        <div class="subtle-container simple-container">
+    {% get_iotd as iotd %}
+    {% if iotd %}
+        <div class="image-of-the-day">
             <div class="header">
-                <h4>
-                    {% trans "Latest from the forums" %}
-                    <div class="actions">
-                        <a href="{% url 'pybb:topic_latest' %}">
-                            {% trans "More" %}
-                        </a>
-                    </div>
-                </h4>
+                <h2>
+                    <i class="icon-trophy"></i>
+                    {% trans "Image of the day" %}
+                    <span class="title">
+                        {{iotd.image.title|truncatechars:50}},
+                        {% astrobin_username iotd.image.user %}
+                    </span>
+                </h2>
             </div>
-            {% pybb_get_latest_topics cnt=5 as topic_list %}
-            <table class="table table-striped topic-list index-recent-topics">
-                <tbody>
-                    {% for topic in topic_list|pybb_topic_unread:request.user %}
-                        <tr class="topic-row{% if topic.on_moderation %} on-moderation{% endif %}">
-                            <td class="topic-state{% if topic.unread %} topic-unread{% endif %}">
-                                <div class="state-indicator"></div>
-                            </td>
-                            <td class="topic-forum hidden-phone">
-                                <a href="{{topic.forum.get_absolute_url}}">
-                                    [{{topic.forum.name}}]
-                                </a>
-                            </td>
-                            <td class="topic-name{% if topic.unread %} topic-unread{% endif %}">
-                                <a href="{{topic.get_absolute_url}}?first-unread=1">{{topic.name|truncatewords:10}}</a>
-                            </td>
-                            <td class="topic-author hidden-phone hidden-tablet">
-                                {% astrobin_username topic.user %}
-                            </td>
-                            <td class="topic-last-post hidden-phone hidden-tablet">
-                                {% if topic.updated %}
-                                    {% pybb_time topic.updated %}
-                                {% endif %}
-                            </td>
-                        </tr>
-                    {% endfor %}
-                </tbody>
-            </table>
+
+            {% astrobin_image iotd.image 'iotd' nav_ctx='iotd' %}
         </div>
-    {% endif %} {# authenticated #}
+    {% endif %}
+
+    <div class="subtle-container simple-container">
+        <div class="header">
+            <h4>
+                {% trans "Latest from the forums" %}
+                <div class="actions">
+                    <a href="{% url 'pybb:topic_latest' %}">
+                        {% trans "More" %}
+                    </a>
+                </div>
+            </h4>
+        </div>
+        {% pybb_get_latest_topics cnt=5 as topic_list %}
+        <table class="table table-striped topic-list index-recent-topics">
+            <tbody>
+                {% for topic in topic_list|pybb_topic_unread:request.user %}
+                    <tr class="topic-row{% if topic.on_moderation %} on-moderation{% endif %}">
+                        <td class="topic-state{% if topic.unread %} topic-unread{% endif %}">
+                            <div class="state-indicator"></div>
+                        </td>
+                        <td class="topic-forum hidden-phone">
+                            <a href="{{topic.forum.get_absolute_url}}">
+                                [{{topic.forum.name}}]
+                            </a>
+                        </td>
+                        <td class="topic-name{% if topic.unread %} topic-unread{% endif %}">
+                            <a href="{{ topic.get_absolute_url }}?first-unread=1" class="first-unread-post-link">&#8680;</a>
+                            <a href="{{topic.get_absolute_url}}">{{topic.name|truncatewords:10}}</a>
+                            {% if topic.sticky %} &nbsp;[{% trans "Sticky" %}] {% endif %}
+                            {% if topic.closed %} &nbsp;[{% trans "Closed" %}] {% endif %}
+                            {% with topic|pybb_topic_inline_pagination as pages %}
+                                {% if pages|length > 1 %}
+                                <span class="mini-pagination">
+                                    {% trans "pages" %}:
+                                    {% for page in pages %}
+                                    <span class="page">
+                                        {% if page == "..." %}
+                                        ...
+                                        {% else %}
+                                        <a href="{{ topic.get_absolute_url }}?page={{ page }}">{{ page }}</a>
+                                        {% endif %}
+                                    </span>
+                                    {% endfor %}
+                                </span>
+                                {% endif %}
+                            {% endwith %}
+                        </td>
+                        <td class="topic-author hidden-phone hidden-tablet">
+                            {% astrobin_username topic.user %}
+                        </td>
+                        <td class="topic-last-post hidden-phone hidden-tablet">
+                            {% include "pybb/topic_last_message_info.html" %}
+                        </td>
+                    </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+    </div>
 
     <a class="anchor" name="stream"></a>
     <div class="subtle-container simple-container">
         <div class="header">
             <h4>
-                {% if request.user.is_authenticated and section == 'global' %}
+                {% if section == 'global' %}
                     {% trans "Global stream" %}
                 {% endif %}
 
-                {% if request.user.is_authenticated and section == 'personal' %}
+                {% if section == 'personal' %}
                     {% trans "Personal stream" %}
                 {% endif %}
 
@@ -139,55 +119,53 @@
                     {% trans "Recent images" %}
                 {% endif %}
 
-                {% if request.user.is_authenticated and section == 'followed' %}
+                {% if section == 'followed' %}
                     {% trans "Recent from your followed users" %}
                 {% endif %}
 
-                {% if request.user.is_authenticated %}
-                    <div class="actions">
-                        {% if section != 'global' %}
-                            <a href="?s=global#stream" title="{% trans "Global stream" %}">
-                        {% endif %}
-                                <i class="icon icon-globe"></i>
-                        {% if section != 'global' %}
-                            </a>
-                        {% endif %}
-
-                        {% if section != 'personal' %}
-                            <a href="?s=personal#stream" title="{% trans "Personal stream" %}">
-                        {% endif %}
-                                <i class="icon icon-user"></i>
-                        {% if section != 'personal' %}
-                            </a>
-                        {% endif %}
-
-                        {% if section != 'recent' %}
-                            <a href="?s=recent#stream" title="{% trans "Recent images" %}">
-                        {% endif %}
-                                <i class="icon icon-time"></i>
-                        {% if section != 'recent' %}
-                            </a>
-                        {% endif %}
-
-                        {% if section != 'followed' %}
-                            <a href="?s=followed#stream" title="{% trans "Recent from your followed users" %}">
-                        {% endif %}
-                                <i class="icon icon-plus-sign"></i>
-                        {% if section != 'followed' %}
-                            </a>
-                        {% endif %}
-
-                        <span class="separator">/</span>
-
-                        <a href="{% url 'profile_edit_preferences' %}">
-                            <i class="icon-cog"></i>
+                <div class="actions">
+                    {% if section != 'global' %}
+                        <a href="?s=global#stream" title="{% trans "Global stream" %}">
+                    {% endif %}
+                            <i class="icon icon-globe"></i>
+                    {% if section != 'global' %}
                         </a>
-                    </div>
-                {% endif %} {# authenticated #}
+                    {% endif %}
+
+                    {% if section != 'personal' %}
+                        <a href="?s=personal#stream" title="{% trans "Personal stream" %}">
+                    {% endif %}
+                            <i class="icon icon-user"></i>
+                    {% if section != 'personal' %}
+                        </a>
+                    {% endif %}
+
+                    {% if section != 'recent' %}
+                        <a href="?s=recent#stream" title="{% trans "Recent images" %}">
+                    {% endif %}
+                            <i class="icon icon-time"></i>
+                    {% if section != 'recent' %}
+                        </a>
+                    {% endif %}
+
+                    {% if section != 'followed' %}
+                        <a href="?s=followed#stream" title="{% trans "Recent from your followed users" %}">
+                    {% endif %}
+                            <i class="icon icon-plus-sign"></i>
+                    {% if section != 'followed' %}
+                        </a>
+                    {% endif %}
+
+                    <span class="separator">/</span>
+
+                    <a href="{% url 'profile_edit_preferences' %}">
+                        <i class="icon-cog"></i>
+                    </a>
+                </div>
             </h4>
         </div>
 
-        {% if request.user.is_authenticated and section == 'global' or section == 'personal' %}
+        {% if section == 'global' or section == 'personal' %}
             <div class="activity-actions">
                 <div class="endless">
                     {% include 'index/stream_page.html' %}

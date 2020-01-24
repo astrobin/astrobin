@@ -33,14 +33,10 @@
     <div class="subtitle">
         {% comment %} TODO: hardcoded subject_type values? So ugly! {% endcomment %}
         <i class="icon icon-paperclip"></i>
-        <strong>{% trans "Contains" %}:</strong>
+        <strong>{% trans "Contains" %}:</strong>&nbsp;
         {% if image.subject_type == 100 or image.subject_type == 200 %}
-            {% if solar_system_main_subject %}
-                <a href="/search/?q=&amp;ssms={{solar_system_main_subject_id}}{% search_form_query %}">{{solar_system_main_subject}}</a>{% if subjects_all %},{% endif %}
-            {% endif %}
-
             {% for s in subjects_all %}
-                <a href="/search/?q={{s|escape}}{% search_form_query %}">{{s|escape}}</a>{% if not forloop.last %},{% endif %}
+                <a href="/search/?q={{s|escape}}">{{s|escape}}</a>{% if not forloop.last %},{% endif %}
             {% endfor %}
         {% else %}
             {{subject_type}}

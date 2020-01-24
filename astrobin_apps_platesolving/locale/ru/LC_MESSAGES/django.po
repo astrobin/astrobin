@@ -7,8 +7,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2016-11-12 07:04+0000\n"
-"PO-Revision-Date: 2014-01-28 12:07+0000\n"
+"POT-Creation-Date: 2019-10-15 11:55+0000\n"
+"PO-Revision-Date: 2019-01-25 14:30+0000\n"
 "Last-Translator: sypai <sypai@mail.ru>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
 "Language: ru\n"
@@ -17,103 +17,85 @@ msgstr ""
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=3; plural=(n%10==1 && n%100!=11 ? 0 : n%10>=2 && n"
 "%10<=4 && (n%100<10 || n%100>=20) ? 1 : 2);\n"
-"X-Generator: Pootle 2.5.0\n"
-"X-POOTLE-MTIME: 1390910826.422128\n"
+"X-Generator: Pootle 2.8\n"
+"X-POOTLE-MTIME: 1548426645.000000\n"
 
-#: models.py:15
 msgid "Perform a blind solve"
-msgstr ""
+msgstr "Выполнить определение \"вслепую\""
 
-#: models.py:16
 msgid ""
 "Attempt to solve with no hints. In most cases this will work, but it will "
 "take longer."
 msgstr ""
+"Попытаться определить без подсказок. В большинстве случаев срабатывает, но "
+"занимает больше времени."
 
-#: models.py:24
 msgid "Width of the field in degrees"
-msgstr ""
+msgstr "Ширина поля в градусах"
 
-#: models.py:25
 msgid "Width of the field in arcminutes"
-msgstr ""
+msgstr "Ширина поля в угл. минутах"
 
-#: models.py:26
 msgid "Resolution of the field in arcseconds/pixel"
-msgstr ""
+msgstr "Разрешение поля в угл. минутах/пкс"
 
-#: models.py:28
 msgid "Field size units"
-msgstr ""
+msgstr "Значения размера поля"
 
-#: models.py:37
 msgid "Min field size"
-msgstr ""
+msgstr "Минимальное значение поля"
 
-#: models.py:38
 msgid "Estimate the lower bound for the width of this field."
-msgstr ""
+msgstr "Определите нижнюю границу ширины этого поля."
 
-#: models.py:46
 msgid "Max field size"
-msgstr ""
+msgstr "Максимальный размер поля"
 
-#: models.py:47
 msgid "Estimate the upper bound for the width of this field."
-msgstr ""
+msgstr "Определите верхнюю границу ширины этого поля."
 
-#: models.py:56
 msgid "Center RA"
-msgstr ""
+msgstr "Центр RA"
 
-#: models.py:57
 msgid "Center RA of the field in degrees, 0.000 to 360.000"
-msgstr ""
+msgstr "Центр RA поля в градусах, 0.000 до 360.000"
 
-#: models.py:66
 msgid "Center dec"
-msgstr ""
+msgstr "Центр скл"
 
-#: models.py:67
 msgid "Center dec of the field in degrees, -90.000 to +90.000"
-msgstr ""
+msgstr "Центр склонения поля в градусах, -90.000 до +90.000"
 
-#: models.py:76
 msgid "Radius"
-msgstr ""
+msgstr "Радиус"
 
-#: models.py:77
 msgid ""
 "Tells the plate-solving engine to look within these many degrees of the "
 "given center RA and dec position."
 msgstr ""
+"Сообщает определителю по координатам смотреть в пределах данного центра по "
+"прямому восхождению и склонению."
 
-#: templates/astrobin_apps_platesolving/inclusion_tags/platesolving_machinery.html:10
 msgid "Getting plate-solving status, please wait..."
 msgstr "Получение статуса для размещения координат, пожалуйста ждите..."
 
-#: templates/astrobin_apps_platesolving/inclusion_tags/platesolving_machinery.html:29
 msgid "Plate-solving process starting, please do not leave this page..."
 msgstr ""
 "Размещение по координатам началось, пожалуйста не покидайте эту страницу..."
 
-#: templates/astrobin_apps_platesolving/inclusion_tags/platesolving_machinery.html:30
 msgid "Plate-solving started in the background. You may leave this page."
 msgstr ""
 "Размещение по координатам началось в фоновом режиме. Можете покинуть эту "
 "страницу."
 
-#: templates/astrobin_apps_platesolving/inclusion_tags/platesolving_machinery.html:31
 msgid "Plate-solving almost ready, please do not leave this page..."
 msgstr ""
 "Размещение по координатам почти готово, пожалуйста не покидайте эту "
 "страницу..."
 
-#: templates/astrobin_apps_platesolving/inclusion_tags/platesolving_machinery.html:32
 msgid "This image could not be plate-solved."
 msgstr "Это изображение не может быть размещено по координатам."
 
-#: templates/astrobin_apps_platesolving/inclusion_tags/platesolving_machinery.html:33
 msgid ""
 "This image has been successfully plate-solved. Please refresh the page to "
 "see the new data."

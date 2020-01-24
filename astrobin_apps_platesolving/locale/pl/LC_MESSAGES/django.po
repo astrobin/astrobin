@@ -7,9 +7,9 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2016-11-12 07:04+0000\n"
-"PO-Revision-Date: 2013-11-12 16:57+0000\n"
-"Last-Translator: jcbo <jcbo@wp.pl>\n"
+"POT-Creation-Date: 2019-10-15 11:55+0000\n"
+"PO-Revision-Date: 2018-12-04 11:40+0000\n"
+"Last-Translator: Łukasz Sujka <lukasz.sujka83@gmail.com>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
 "Language: pl\n"
 "MIME-Version: 1.0\n"
@@ -17,100 +17,82 @@ msgstr ""
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=3; plural=(n==1 ? 0 : n%10>=2 && n%10<=4 && (n%100<10 "
 "|| n%100>=20) ? 1 : 2);\n"
-"X-Generator: Pootle 2.5.0\n"
-"X-POOTLE-MTIME: 1384275474.177423\n"
+"X-Generator: Pootle 2.8\n"
+"X-POOTLE-MTIME: 1543923609.000000\n"
 
-#: models.py:15
 msgid "Perform a blind solve"
-msgstr ""
+msgstr "Uruchom losową astrometrię"
 
-#: models.py:16
 msgid ""
 "Attempt to solve with no hints. In most cases this will work, but it will "
 "take longer."
 msgstr ""
+"Spróbuj wykonać astrometrię bez podpowiedzi. W większości przypadków będzie "
+"to możliwe ale zajmie więcej czasu."
 
-#: models.py:24
 msgid "Width of the field in degrees"
-msgstr ""
+msgstr "Szerokość pola widzenia w stopniach"
 
-#: models.py:25
 msgid "Width of the field in arcminutes"
-msgstr ""
+msgstr "Szerokość pola widzenia w minutach kątowych"
 
-#: models.py:26
 msgid "Resolution of the field in arcseconds/pixel"
-msgstr ""
+msgstr "Rozdzielczość pola widzenia w sekundach kątowych na pixel (''/pix)"
 
-#: models.py:28
 msgid "Field size units"
-msgstr ""
+msgstr "Jednostka wielkości pola widzenia"
 
-#: models.py:37
 msgid "Min field size"
-msgstr ""
+msgstr "Minimalny rozmiar pola widzenia"
 
-#: models.py:38
 msgid "Estimate the lower bound for the width of this field."
-msgstr ""
+msgstr "Oszacuje dolną granicę dla szerokości tego pola widzenia"
 
-#: models.py:46
 msgid "Max field size"
-msgstr ""
+msgstr "Maksymalny rozmiar pola widzenia"
 
-#: models.py:47
 msgid "Estimate the upper bound for the width of this field."
-msgstr ""
+msgstr "Oszacuj górną granicę dla tego pola widzenia."
 
-#: models.py:56
 msgid "Center RA"
-msgstr ""
+msgstr "Centrum RA"
 
-#: models.py:57
 msgid "Center RA of the field in degrees, 0.000 to 360.000"
-msgstr ""
+msgstr "Centrum RA pola widzenia w stopniach, 0.000 to 360.000"
 
-#: models.py:66
 msgid "Center dec"
-msgstr ""
+msgstr "Centrum DEC"
 
-#: models.py:67
 msgid "Center dec of the field in degrees, -90.000 to +90.000"
-msgstr ""
+msgstr "Centrum DEC pola widzenia w stopniach, -90.000 to +90.000"
 
-#: models.py:76
 msgid "Radius"
-msgstr ""
+msgstr "Promień"
 
-#: models.py:77
 msgid ""
 "Tells the plate-solving engine to look within these many degrees of the "
 "given center RA and dec position."
 msgstr ""
+"Wskaż silnikowi do astrometrii żeby przeglądał zakres wewnątrz wskazanych "
+"pozycji RA i DEC"
 
-#: templates/astrobin_apps_platesolving/inclusion_tags/platesolving_machinery.html:10
 msgid "Getting plate-solving status, please wait..."
 msgstr "Pobieram status mapowania szczegółów zdjęcia, proszę czekać..."
 
-#: templates/astrobin_apps_platesolving/inclusion_tags/platesolving_machinery.html:29
 msgid "Plate-solving process starting, please do not leave this page..."
 msgstr ""
 "Mapowanie szczegółów zdjęcia rozpoczęte, proszę nie opuszczać strony..."
 
-#: templates/astrobin_apps_platesolving/inclusion_tags/platesolving_machinery.html:30
 msgid "Plate-solving started in the background. You may leave this page."
 msgstr "Mapowanie szczegółów zdjęcia uruchomione w tle. Możesz opuścić stronę."
 
-#: templates/astrobin_apps_platesolving/inclusion_tags/platesolving_machinery.html:31
 msgid "Plate-solving almost ready, please do not leave this page..."
 msgstr ""
 "Mapowanie szczegółów zdjęcia prawie gotowe, proszę nie opuszczać strony..."
 
-#: templates/astrobin_apps_platesolving/inclusion_tags/platesolving_machinery.html:32
 msgid "This image could not be plate-solved."
 msgstr "Mapowanie szczegółów nie jest możliwe dla tego zdjęcia."
 
-#: templates/astrobin_apps_platesolving/inclusion_tags/platesolving_machinery.html:33
 msgid ""
 "This image has been successfully plate-solved. Please refresh the page to "
 "see the new data."

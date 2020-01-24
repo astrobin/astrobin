@@ -1,25 +1,21 @@
 # Python
-from datetime import date, datetime, timedelta
+from datetime import date
+from mock import patch
 
 # Django
-from django.contrib.auth.models import User, Group
-from django.core.exceptions import ValidationError
 from django.core.urlresolvers import reverse
-from django.test import TestCase
+from django.test import TestCase, override_settings
 from django.utils import timezone
 
 # Third party
 from django_bouncy.models import Bounce
+from mock import patch
 from toggleproperties.models import ToggleProperty
 
 # AstroBin
 from astrobin.models import (
     Acquisition,
     CommercialGear,
-    Image,
-    ImageOfTheDay,
-    ImageOfTheDayCandidate,
-    RetailedGear,
     Telescope,
     UserProfile
 )
@@ -54,6 +50,7 @@ class UserTest(TestCase):
         if wip:
             data['wip'] = True
 
+        patch('astrobin.tasks.retrieve_primary_thumbnails.delay')
         self.client.post(
             reverse('image_upload_process'),
             data,
@@ -62,11 +59,12 @@ class UserTest(TestCase):
         image = self._get_last_image()
         if title:
             image.title = title
-            image.save()
+            image.save(keep_deleted=True)
 
         return image
 
-    def test_user_page_view(self):
+    @patch("astrobin.tasks.retrieve_primary_thumbnails")
+    def test_user_page_view(self, retrieve_primary_thumbnails):
         today = date.today()
 
         # Test simple access
@@ -101,8 +99,8 @@ class UserTest(TestCase):
         # Test "upload time" sorting
         image1 = self._do_upload('astrobin/fixtures/test.jpg', "IMAGE1")
         image2 = self._do_upload('astrobin/fixtures/test.jpg', "IMAGE2")
-        image1.uploaded = today; image1.save()
-        image2.uploaded = today + timedelta(1); image2.save()
+        image1.uploaded = today; image1.save(keep_deleted=True)
+        image2.uploaded = today + timedelta(1); image2.save(keep_deleted=True)
 
         response = self.client.get(
             reverse('user_page', args = ('user',)) + "?sub=uploaded")
@@ -138,12 +136,12 @@ class UserTest(TestCase):
         image5 = self._do_upload('astrobin/fixtures/test.jpg', "IMAGE5_GEAR")
         image6 = self._do_upload('astrobin/fixtures/test.jpg', "IMAGE6_OTHER")
 
-        image1.subject_type = 100; image1.save()
-        image2.subject_type = 200; image2.save()
-        image3.subject_type = 300; image3.save()
-        image4.subject_type = 400; image4.save()
-        image5.subject_type = 500; image5.save()
-        image6.subject_type = 600; image6.save()
+        image1.subject_type = 100; image1.save(keep_deleted=True)
+        image2.subject_type = 200; image2.save(keep_deleted=True)
+        image3.subject_type = 300; image3.save(keep_deleted=True)
+        image4.subject_type = 400; image4.save(keep_deleted=True)
+        image5.subject_type = 500; image5.save(keep_deleted=True)
+        image6.subject_type = 600; image6.save(keep_deleted=True)
 
         response = self.client.get(reverse('user_page', args = ('user',)) + "?sub=subject")
         self.assertEquals(response.status_code, 200)
@@ -264,16 +262,16 @@ class UserTest(TestCase):
         image3 = self._do_upload('astrobin/fixtures/test.jpg', "IMAGE3")
         image4 = self._do_upload('astrobin/fixtures/test.jpg', "IMAGE4")
 
-        image3.subject_type = 200; image3.save()
-        image4.subject_type = 500; image4.save()
+        image3.subject_type = 200; image3.save(keep_deleted=True)
+        image4.subject_type = 500; image4.save(keep_deleted=True)
 
 
         telescope1 = Telescope.objects.create(name = "TELESCOPE1")
         telescope2 = Telescope.objects.create(name = "TELESCOPE2")
         image1.imaging_telescopes.add(telescope1)
-        image1.save()
+        image1.save(keep_deleted=True)
         image2.imaging_telescopes.add(telescope2)
-        image2.save()
+        image2.save(keep_deleted=True)
 
         response = self.client.get(
             reverse('user_page', args = ('user',)) + "?sub=gear&active=%d" % telescope1.pk)
@@ -317,8 +315,7 @@ class UserTest(TestCase):
         # Test "no data" sub-section
         image = self._do_upload('astrobin/fixtures/test.jpg', "IMAGE_NODATA")
         image.subject_type = 100
-        image.objects_in_field = None
-        image.save()
+        image.save(keep_deleted=True)
         response = self.client.get(
             reverse('user_page', args = ('user',)) + "?sub=nodata")
         self.assertEquals(response.status_code, 200)
@@ -326,7 +323,7 @@ class UserTest(TestCase):
 
         image.subject_type = 200
         image.solar_system_main_subject = None
-        image.save()
+        image.save(keep_deleted=True)
         response = self.client.get(
             reverse('user_page', args = ('user',)) + "?sub=nodata")
         self.assertEquals(response.status_code, 200)
@@ -344,7 +341,7 @@ class UserTest(TestCase):
 
         # Users with at least one spam image should be 404
         image.moderator_decision = 2
-        image.save()
+        image.save(keep_deleted=True)
         response = self.client.get(reverse('user_page', args = ('user',)))
         self.assertEquals(response.status_code, 404)
 
@@ -390,7 +387,8 @@ class UserTest(TestCase):
 
         self.client.logout()
 
-    def test_user_profile_exclude_from_competitions(self):
+    @patch("astrobin.tasks.retrieve_primary_thumbnails")
+    def test_user_profile_exclude_from_competitions(self, retrieve_primary_thumbnails):
         self.client.login(username = "user", password="password")
         self._do_upload('astrobin/fixtures/test.jpg')
         self.client.logout()
@@ -412,11 +410,11 @@ class UserTest(TestCase):
 
         profile = self.user.userprofile
         profile.exclude_from_competitions = True
-        profile.save()
+        profile.save(keep_deleted=True)
         image = Image.objects_including_wip.get(pk = image.pk)
 
         # Check that the IOTD banner is not visible
-        response = self.client.get(reverse('image_detail', args = (image.pk,)))
+        response = self.client.get(reverse('image_detail', args = (image.get_id(),)))
         self.assertNotContains(response, "iotd-ribbon")
 
         # Check that the IOTD badge is not visible
@@ -450,7 +448,8 @@ class UserTest(TestCase):
         self.assertEqual(response.status_code, 200)
         self.client.logout()
 
-    def test_liked(self):
+    @patch("astrobin.tasks.retrieve_primary_thumbnails")
+    def test_liked(self, retrieve_primary_thumbnails):
         self.client.login(username = "user", password = "password")
         image = self._do_upload('astrobin/fixtures/test.jpg', "TEST IMAGE")
         self.client.logout()
@@ -458,7 +457,7 @@ class UserTest(TestCase):
         prop = ToggleProperty.objects.create_toggleproperty('like', image, self.user_2)
         response = self.client.get(reverse("user_page_liked", args = (self.user_2.username,)))
         self.assertEqual(response.status_code, 200)
-        self.assertContains(response, image.thumbnail('gallery'))
+        self.assertContains(response, "data-id=\"%d\"" % image.pk)
 
     def test_plots(self):
         self.client.login(username = "user", password = "password")
@@ -474,7 +473,8 @@ class UserTest(TestCase):
         profile = UserProfile.objects.get(user = self.user)
         self.assertNotEquals(updated, profile.updated)
 
-    def test_profile_updated_when_image_saved(self):
+    @patch("astrobin.tasks.retrieve_primary_thumbnails")
+    def test_profile_updated_when_image_saved(self, retrieve_primary_thumbnails):
         updated = self.user.userprofile.updated
 
         self.client.login(username = "user", password = "password")
@@ -485,7 +485,7 @@ class UserTest(TestCase):
 
         updated = self.user.userprofile.updated
         image.title = "TEST IMAGE UPDATED"
-        image.save()
+        image.save(keep_deleted=True)
 
         profile = UserProfile.objects.get(user = self.user)
         self.assertNotEquals(updated, profile.updated)

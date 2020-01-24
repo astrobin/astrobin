@@ -1,0 +1,165 @@
+{% load i18n %}
+
+<script type="text/x-template" id="telescope-type-filter-template">
+    <div class="form-group" :class="{highlighted: highlighted}">
+        <v-multiselect class="multiselect--grouped" v-model="value" :options="optionGroups" track-by="id" label="label"
+                       group-values="options" group-label="group" selectLabel="" deselectLabel="" selectedLabel=""
+                       :multiple="true" :searchable="false" placeholder="{% trans "Select" %}">
+        </v-multiselect>
+        <input type="hidden" name="telescope_type" :value="getFormValue()">
+    </div>
+</script>
+
+<script>
+    Vue.component("telescope-type-filter", {
+        template: "#telescope-type-filter-template",
+        props: [
+            "telescopeType"
+        ],
+        mixins: [
+            FilterComponentMixin
+        ],
+        data: function () {
+            return {
+                value: [],
+                optionGroups: [
+                    {
+                        group: "{% trans "Refractor" %}",
+                        options: [
+                            {
+                                id: "0",
+                                label: "{% trans "Achromatic" %}"
+                            },
+                            {
+                                id: "1",
+                                label: "{% trans "Semi-apochromatic" %}"
+                            },
+                            {
+                                id: "2",
+                                label: "{% trans "Apochromatic" %}"
+                            },
+                            {
+                                id: "3",
+                                label: "{% trans "Non-achromatic Galilean" %}"
+                            },
+                            {
+                                id: "4",
+                                label: "{% trans "Non-achromatic Keplerian" %}"
+                            },
+                            {
+                                id: "5",
+                                label: "{% trans "Superchromat" %}"
+                            }
+                        ]
+                    },
+                    {
+                        group: "{% trans "Reflector" %}",
+                        options: [
+                            {
+                                id: "6",
+                                label: "{% trans "Dall-Kirkham" %}"
+                            },
+                            {
+                                id: "7",
+                                label: "{% trans "Nasmyth" %}"
+                            },
+                            {
+                                id: "8",
+                                label: "{% trans "Ritchey Chretien" %}"
+                            },
+                            {
+                                id: "9",
+                                label: "{% trans "Gregorian" %}"
+                            },
+                            {
+                                id: "10",
+                                label: "{% trans "Herschellian" %}"
+                            },
+                            {
+                                id: "11",
+                                label: "{% trans "Newtonian" %}"
+                            }
+                        ]
+                    },
+                    {
+                        group: "{% trans "Catadioptric" %}",
+                        options: [
+                            {
+                                id: "12",
+                                label: "{% trans "Argunov-Cassegrain" %}"
+                            },
+                            {
+                                id: "13",
+                                label: "{% trans "Klevtsov-Cassegrain" %}"
+                            },
+                            {
+                                id: "14",
+                                label: "{% trans "Lurie-Houghton" %}"
+                            },
+                            {
+                                id: "15",
+                                label: "{% trans "Maksutov" %}"
+                            },
+                            {
+                                id: "16",
+                                label: "{% trans "Maksutov-Cassegrain" %}"
+                            },
+                            {
+                                id: "17",
+                                label: "{% trans "Modified Dall-Kirkham" %}"
+                            },
+                            {
+                                id: "18",
+                                label: "{% trans "Schmidt camera" %}"
+                            },
+                            {
+                                id: "19",
+                                label: "{% trans "Schmidt-Cassegrain" %}"
+                            },
+                            {
+                                id: "20",
+                                label: "{% trans "ACF Schmidt-Cassegrain" %}"
+                            },
+                            {
+                                id: "21",
+                                label: "{% trans "Camera lens" %}"
+                            },
+                            {
+                                id: "22",
+                                label: "{% trans "Binoculars" %}"
+                            }
+                        ]
+                    }
+                ]
+            }
+        },
+        created: function() {
+            if (this.telescopeType) {
+                var types = this.telescopeType.split(',');
+
+                for (var i = 0; i < this.optionGroups.length; i++) {
+                    for (var j = 0; j < this.optionGroups[i].options.length; j++) {
+                        if (types.indexOf(this.optionGroups[i].options[j].id) > -1) {
+                            this.value.push(this.optionGroups[i].options[j]);
+                        }
+                    }
+                }
+            }
+        },
+        methods: {
+            getFormValue: function () {
+                if (Array.isArray(this.value)) {
+                    return this.value.map(function (v) {
+                        return v.id;
+                    }).join(',');
+                }
+
+                if (this.value) {
+                    return this.value.id;
+                }
+
+                return null;
+            }
+        }
+    });
+</script>

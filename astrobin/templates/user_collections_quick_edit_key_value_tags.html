@@ -1,0 +1,108 @@
+{% extends 'user_collections_base.html' %}
+
+{% load i18n %}
+{% load django_bootstrap_breadcrumbs %}
+{% load astrobin_apps_images_tags %}
+{% load staticfiles %}
+
+{% block title %}
+    {% trans "Quick edit: key/value tags" %}
+{% endblock %}
+
+{% block breadcrumbs %}
+    {{ block.super }}
+    {% breadcrumb object.name 'user_collections_detail' request.user.username object.pk %}
+    {% breadcrumb 'Quick edit' None %}
+    {% breadcrumb 'Key/value tags' None %}
+{% endblock %}
+
+{% block collections_content %}
+    <div class="collection-quick-edit">
+        <form action="" method="post">
+
+            <table class="table table-striped collection-quick-edit-key-value-tags">
+                {% for image in images %}
+                    <tr>
+                        <td class="image">
+                            {% astrobin_image image 'gallery' link=False tooltip=False %}
+                        </td>
+
+                        <td class="title">
+                            {{ image.title|escape|default:_("(no title)") }}
+                        </td>
+
+                        <td class="input">
+                        <textarea
+                                class="control"
+                                id="keyvaluetags-{{ image.pk }}"
+                                name="keyvaluetags-{{ image.pk }}">{{ image.get_keyvaluetags }}</textarea>
+                            <p class="error-msg hide" id="keyvaluetags-{{ image.pk }}-error-msg"></p>
+                        </td>
+                    </tr>
+                {% endfor %}
+            </table>
+
+            <div class="form-actions">
+                <input
+                        id="save"
+                        class="btn btn-primary btn-block-mobile"
+                        type="submit"
+                        name="submit"
+                        value="{% trans "Save" %}" />
+
+                <a class="btn btn-block-mobile"
+                   href="{% url 'user_collections_detail' request.user.username object.pk %}">
+                    {% trans "Cancel" %}
+                </a>
+            </div>
+        </form>
+    </div>
+{% endblock %}
+
+{% block extra_js %}
+    <script type="text/javascript">
+        $(document).ready(function () {
+            $('#save').click(function (e) {
+                e.preventDefault();
+
+                var $btn = $(this);
+
+                $btn.addClass('disabled');
+                $btn.prop('disabled', true);
+                $('.error-msg').hide();
+                $('.control').removeClass('error');
+
+                var imageData = $('.control').map(function () {
+                    return {
+                        image_pk: $(this).attr('id').split('-')[1],
+                        value: $(this).val()
+                    };
+                }).get();
+
+                $.ajax({
+                    url: '{%  url 'user_collections_quick_edit_key_value_tags' request.user.username object.pk %}',
+                    type: 'POST',
+                    cache: false,
+                    timeout: 10000,
+                    data: {imageData: JSON.stringify(imageData)},
+                    dataType: 'json'
+                }).done(function (response) {
+                    if (response.error) {
+                        var $error = $('#keyvaluetags-' + response.image_pk + '-error-msg');
+                        var $control = $('#keyvaluetags-' + response.image_pk);
+
+                        $error[0].innerHTML = response.error;
+                        $error.show();
+
+                        $control.addClass('error');
+
+                        $btn.removeClass('disabled');
+                        $btn.prop('disabled', false);
+                    } else {
+                        window.location.assign("{% url 'user_collections_detail' request.user.username object.pk %}");
+                    }
+                })
+            });
+        });
+    </script>
+{% endblock %}

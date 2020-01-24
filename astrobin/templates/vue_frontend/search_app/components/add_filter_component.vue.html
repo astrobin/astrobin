@@ -1,0 +1,40 @@
+{% load i18n %}
+
+<script type="text/x-template" id="add-filter-template">
+    <div class="search-filter">
+        <div class="search-filter-title">{% trans "Add filter:" %}</div>
+        <div class="search-filter-widget">
+            <div class="form-group">
+                <v-multiselect v-model="value" @input="onAddFilter" :options="options" track-by="name" label="label"
+                               selectLabel="" deselectLabel="" :searchable="false" placeholder="{% trans "Select" %}">
+                </v-multiselect>
+            </div>
+        </div>
+    </div>
+</script>
+
+<script>
+    Vue.component("add-filter", {
+        template: "#add-filter-template",
+        props: [
+            "availableFilters"
+        ],
+        data: function () {
+            return {
+                value: null,
+                options: this.availableFilters
+            }
+        },
+        methods: {
+            onAddFilter: function () {
+                this.$emit("onAddFilter", this.value.name);
+                this.value = null;
+            }
+        },
+        watch: {
+            availableFilters: function(newValue) {
+                this.options = newValue;
+            }
+        }
+    });
+</script>

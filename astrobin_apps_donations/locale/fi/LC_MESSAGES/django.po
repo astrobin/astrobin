@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2016-11-12 07:04+0000\n"
+"POT-Creation-Date: 2019-10-15 11:56+0000\n"
 "PO-Revision-Date: 2015-12-30 10:25+0000\n"
 "Last-Translator: Samuli <samuli.vuorinen@iki.fi>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -19,12 +19,9 @@ msgstr ""
 "X-Generator: Pootle 2.5.0\n"
 "X-POOTLE-MTIME: 1451471110.980609\n"
 
-#: templates/astrobin_apps_donations/cancel.html:5
-#: templates/astrobin_apps_donations/cancel.html:10
 msgid "Your recurring donation has been canceled"
 msgstr "Toistuva lahjoituksesi on peruttu"
 
-#: templates/astrobin_apps_donations/cancel.html:13
 msgid ""
 "We are very grateful for your support so far! Your contribution has helped "
 "AstroBin with its ever increasing hosting costs, and served an incentive for "
@@ -34,108 +31,53 @@ msgstr ""
 "kasvavien ylläpitokulujen kanssa, ja samalla se kannustaa meitä jatkamaan ja "
 "parantamaan palvelua."
 
-#: templates/astrobin_apps_donations/cancel.html:17
 msgid "From now on, you will again see ads on this website."
 msgstr "Sivustolla tulee tästä eteenpäin näkymään mainoksia."
 
-#: templates/astrobin_apps_donations/cancel.html:23
-#: templates/astrobin_apps_donations/success.html:23
 msgid "Whishing you clear skies and excellent seeing!"
 msgstr "Selkeitä taivaita ja mahtavaa seeingiä toivottaen!"
 
-#: templates/astrobin_apps_donations/cancel.html:28
-#: templates/astrobin_apps_donations/success.html:28
 msgid "Founder of AstroBin"
 msgstr "AstroBinin perustaja"
 
-#: templates/astrobin_apps_donations/edit.html:5
-#: templates/astrobin_apps_donations/edit.html:8
 msgid "Edit your recurring donation settings"
 msgstr "Muokkaa toistuvan lahjoituksen asetuksia"
 
-#: templates/astrobin_apps_donations/success.html:5
-#: templates/astrobin_apps_donations/success.html:10
-msgid "Thank you for your donation!"
-msgstr "Kiitos lahjoituksestasi!"
-
-#: templates/astrobin_apps_donations/success.html:13
-msgid ""
-"We are very grateful for your support! Your contribution will help AstroBin "
-"with its ever increasing hosting costs, and will serve an incentive for us "
-"to continue to improve it."
-msgstr ""
-"Olemme kiitollisia tuestasi! Panoksesi auttaa AstroBiniä jatkuvasti "
-"kasvavien ylläpitokulujen kanssa ja toimii samalla meille kannustimena "
-"jatkuvasti parantaa palvelua."
-
-#: templates/astrobin_apps_donations/success.html:17
-msgid ""
-"In a few minutes, once your PayPal transaction is processed, we will stop "
-"showing you ads on this website."
-msgstr ""
-"Muutaman minuutin päästä, jahka PayPal-maksusi on käsitelty, lakkaamme "
-"näyttämästä sinulle mainoksia sivustollamme."
-
-#: templates/astrobin_apps_donations/inclusion_tags/_paypal_button.html:33
 msgid "What is AstroBin worth to you?"
 msgstr "Minkä arvoinen AstroBin on sinulle?"
 
-#: templates/astrobin_apps_donations/inclusion_tags/_paypal_button.html:38
 msgid "Monthly contributions"
 msgstr "Kuukausittaiset lahjoitukset"
 
-#: templates/astrobin_apps_donations/inclusion_tags/_paypal_button.html:39
-#: templates/astrobin_apps_donations/inclusion_tags/_paypal_button.html:40
-#: templates/astrobin_apps_donations/inclusion_tags/_paypal_button.html:41
-#: templates/astrobin_apps_donations/inclusion_tags/_paypal_button.html:42
-#: templates/astrobin_apps_donations/inclusion_tags/_paypal_button.html:43
 #, python-format
 msgid "$%(amount)s/month"
 msgstr "$%(amount)s/kuukausi"
 
-#: templates/astrobin_apps_donations/inclusion_tags/_paypal_button.html:39
-#: templates/astrobin_apps_donations/inclusion_tags/_paypal_button.html:47
 msgid "A coffee"
 msgstr "Kahvi"
 
-#: templates/astrobin_apps_donations/inclusion_tags/_paypal_button.html:40
-#: templates/astrobin_apps_donations/inclusion_tags/_paypal_button.html:48
 msgid "A snack"
 msgstr "Välipala"
 
-#: templates/astrobin_apps_donations/inclusion_tags/_paypal_button.html:41
-#: templates/astrobin_apps_donations/inclusion_tags/_paypal_button.html:49
 msgid "A pizza"
 msgstr "Pizza"
 
-#: templates/astrobin_apps_donations/inclusion_tags/_paypal_button.html:42
-#: templates/astrobin_apps_donations/inclusion_tags/_paypal_button.html:50
 msgid "A movie night for one"
 msgstr "Leffailta yhdelle"
 
-#: templates/astrobin_apps_donations/inclusion_tags/_paypal_button.html:43
-#: templates/astrobin_apps_donations/inclusion_tags/_paypal_button.html:51
 msgid "A frugal dinner out for one"
 msgstr "Niukka illallinen ulkona yhdelle"
 
-#: templates/astrobin_apps_donations/inclusion_tags/_paypal_button.html:46
 msgid "Yearly contributions (cheaper!)"
 msgstr "Vuosittaiset lahjoitukset (halvempia!)"
 
-#: templates/astrobin_apps_donations/inclusion_tags/_paypal_button.html:47
-#: templates/astrobin_apps_donations/inclusion_tags/_paypal_button.html:48
-#: templates/astrobin_apps_donations/inclusion_tags/_paypal_button.html:49
-#: templates/astrobin_apps_donations/inclusion_tags/_paypal_button.html:50
-#: templates/astrobin_apps_donations/inclusion_tags/_paypal_button.html:51
 #, python-format
 msgid "$%(amount)s/year"
 msgstr "$%(amount)s/vuosi"
 
-#: templates/astrobin_apps_donations/inclusion_tags/_paypal_button.html:119
 msgid "IMPORTANT"
 msgstr "TÄRKEÄÄ"
 
-#: templates/astrobin_apps_donations/inclusion_tags/_paypal_button.html:119
 msgid ""
 "Please note: if you are already a donor, the Subscribe button will update "
 "your existing subscription, not create a new one."
@@ -143,12 +85,9 @@ msgstr ""
 "Huom: jos olet jo lahjoittaja, Sitoudu lahjoittamaan -nappi päivittää "
 "olemassaolevaa lahjoitussopimustasi, eikä luo uutta."
 
-#: templates/astrobin_apps_donations/inclusion_tags/cancel_modal.html:8
-#: templates/astrobin_apps_donations/inclusion_tags/cancel_modal.html:24
 msgid "Cancel your recurring donation"
 msgstr "Peruuta toistuva lahjoituksesi"
 
-#: templates/astrobin_apps_donations/inclusion_tags/cancel_modal.html:12
 msgid ""
 "Thank you so much for your donations so far! We, and the whole AstroBin "
 "community, really appreciate your support."
@@ -156,7 +95,6 @@ msgstr ""
 "Kiitos lahjoituksistasi! Me, ja koko AstroBin-yhteisö, olemme kiitollisia "
 "tuestasi."
 
-#: templates/astrobin_apps_donations/inclusion_tags/cancel_modal.html:15
 msgid ""
 "Are you sure you want to cancel your subscription? AstroBin is a resource "
 "hungry website, and every small donation helps us with the hosting costs."
@@ -164,7 +102,6 @@ msgstr ""
 "Oletko varma, että haluat perua lahjoituksesi? AstroBinin ylläpito vaatii "
 "paljon resursseja, ja jokainen pieni lahjoitus auttaa ylläpitokulujen kanssa."
 
-#: templates/astrobin_apps_donations/inclusion_tags/cancel_modal.html:18
 msgid ""
 "If you really have made up your mind about it, use the button below to "
 "cancel your PayPal subscription. After the operation has been processed by "
@@ -174,20 +111,15 @@ msgstr ""
 "allaolevaa nappia. Kun PayPal on käsitellyt pyyntösi, sivustolla alkaa näkyä "
 "taas mainoksia."
 
-#: templates/astrobin_apps_donations/inclusion_tags/donate_modal.html:7
-#: templates/astrobin_apps_donations/inclusion_tags/remove_ads_modal.html:7
 msgid "Please donate!"
 msgstr "Lahjoituksia kiitos!"
 
-#: templates/astrobin_apps_donations/inclusion_tags/donate_modal.html:11
 msgid ""
 "Hosting this website is getting more and more expensive as new users sign up "
 "all the time."
 msgstr ""
 "Sivuston ylläpito muuttuu jatkuvasti kalliimmaksi uusien käyttäjien myötä."
 
-#: templates/astrobin_apps_donations/inclusion_tags/donate_modal.html:12
-#: templates/astrobin_apps_donations/inclusion_tags/remove_ads_modal.html:20
 msgid ""
 "AstroBin stores images at full size and quality, and with no limitations, "
 "because quality is important when it comes to astrophotography. But such "
@@ -197,7 +129,6 @@ msgstr ""
 "rajoituksia, koska laatu on tähtikuvauksessa tärkeää. Laadukkaat kuvat ovat "
 "kuitenkin usein isoja, ja kaista maksaa."
 
-#: templates/astrobin_apps_donations/inclusion_tags/donate_modal.html:16
 msgid ""
 "If you too would hate for AstroBin to cease to exist, we kindly ask you for "
 "a contribution. It would help us with the hosting bills, as they grow fatter "
@@ -209,8 +140,6 @@ msgstr ""
 "kuukausi suuremmiksi, ja ehkä tarjoaa pienen korvauksen niistä tuhansista "
 "tunneista, jotka ovat menneet sivuston kehittämiseen."
 
-#: templates/astrobin_apps_donations/inclusion_tags/donate_modal.html:20
-#: templates/astrobin_apps_donations/inclusion_tags/remove_ads_modal.html:24
 msgid ""
 "Please donate any amount you want, selecting from the options below and "
 "subscribing with a recurring monthly payment. You will be able to cancel "
@@ -220,12 +149,9 @@ msgstr ""
 "sitoutumalla kuukausittaiseen maksuun. Voit peruuttaa tilauksesi koska "
 "tahansa."
 
-#: templates/astrobin_apps_donations/inclusion_tags/donate_modal.html:24
-#: templates/astrobin_apps_donations/inclusion_tags/remove_ads_modal.html:29
 msgid "Thank you!"
 msgstr "Kiitos!"
 
-#: templates/astrobin_apps_donations/inclusion_tags/remove_ads_modal.html:11
 msgid ""
 "Although we have tried to keep AstroBin ad free, as of right now the only "
 "way we can keep the website running is with commercial support by "
@@ -235,7 +161,6 @@ msgstr ""
 "mainosten näyttäminen ja lahjoitusten kerääminen ovat ainoita keinoja pitää "
 "sivusto pystyssä."
 
-#: templates/astrobin_apps_donations/inclusion_tags/remove_ads_modal.html:15
 msgid ""
 "The ads you will see on AstroBin come from legitimate advertisers whose "
 "business we support, and each image and word is reviewed and approved before "
@@ -246,7 +171,6 @@ msgstr ""
 "kuva ja sana tarkistetaan ennen julkaisemista. AstroBin ei luovuta mitään "
 "henkilötietoja mainostajille."
 
-#: templates/astrobin_apps_donations/inclusion_tags/remove_ads_modal.html:19
 msgid ""
 "However, if you still feel that you would rather not see these ads, we "
 "kindly ask you for a small donation. It will keep our servers running and "
@@ -256,17 +180,33 @@ msgstr ""
 "tekemään pienen lahjoituksen sivuston hyväksi. Lahjoitus pitää palvelimemme "
 "pyörimässä ja auttaa ylläpitokulujen kanssa."
 
-#: templates/astrobin_apps_donations/inclusion_tags/remove_ads_modal.html:25
 msgid "If you donate, you will not be shown ads anymore."
 msgstr "Jos teet lahjoituksen, et näe mainoksia enää."
 
-#: templates/astrobin_apps_donations/inclusion_tags/thank_you_for_your_donations.html:4
 msgid "Thank you for your donations!"
 msgstr "Kiitos lahjoituksistasi!"
 
-#: templates/astrobin_apps_donations/inclusion_tags/thank_you_for_your_donations.html:7
 msgid "Want to cancel?"
 msgstr "Haluatko perua?"
+
+msgid "Thank you for your donation!"
+msgstr "Kiitos lahjoituksestasi!"
+
+msgid ""
+"We are very grateful for your support! Your contribution will help AstroBin "
+"with its ever increasing hosting costs, and will serve an incentive for us "
+"to continue to improve it."
+msgstr ""
+"Olemme kiitollisia tuestasi! Panoksesi auttaa AstroBiniä jatkuvasti "
+"kasvavien ylläpitokulujen kanssa ja toimii samalla meille kannustimena "
+"jatkuvasti parantaa palvelua."
+
+msgid ""
+"In a few minutes, once your PayPal transaction is processed, we will stop "
+"showing you ads on this website."
+msgstr ""
+"Muutaman minuutin päästä, jahka PayPal-maksusi on käsitelty, lakkaamme "
+"näyttämästä sinulle mainoksia sivustollamme."
 
 #~ msgid "Thank you for your support!"
 #~ msgstr "Kiitos tuestasi!"

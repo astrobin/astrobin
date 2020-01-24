@@ -6,4 +6,5 @@ AVATAR_PROVIDERS = (
     'avatar.providers.PrimaryAvatarProvider',
     'avatar.providers.DefaultAvatarProvider',
 )
-
+AVATAR_MAX_SIZE = 1024 * 1024 * 15
+AVATAR_CACHE_ENABLED = False

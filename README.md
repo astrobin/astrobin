@@ -46,9 +46,6 @@ The Elasticsearch engine that handles the search index. It's accessed by
 the AstroBin app directly for queries, and by the celery worker to update
 the index.
 
-### wdb
-A debug server that can be used in debug mode to interactively debug the app.
-
 ### flower
 A monitor that sits on top of rabbitmq and monitors the celery tasks.
 
@@ -61,8 +58,7 @@ You can setup a development environment using Docker.
 ```bash
 git clone https://github.com/astrobin/astrobin.git
 cd astrobin
-git submodule init
-git submodule update
+git submodule update --init --recursive
 ```
 
 ## Step 2: Configure the system
@@ -88,10 +84,11 @@ installed.
 ## Step 4: Bring up the stack
 
 The `docker-compose.yml` file contains all the instructions needed to bring up the
-stack, including how to build the `astrobin`, `nginx`, `celery`, and `beat` containers.
+stack, including how to build the `astrobin`, `celery`, and `beat` containers.
 
 ```bash
-docker-compose -f docker/docker-compose.yml up -d
+export NGINX_MODE=dev
+docker-compose -f docker/docker-compose.yml -f docker/docker-compose.build.yml up -d
 ```
 
 ## Step 5: First-time setup
@@ -107,19 +104,19 @@ The `init.sh` script does some initial django initialization, like creating grou
 and the "site" configuration.
 
 ```bash
-docker-compose -f docker/docker-compose.yml run --no-deps --rm astrobin ./scripts/init.sh
+docker-compose -f docker/docker-compose.yml -f docker/docker-compose.build.yml run --no-deps --rm astrobin ./scripts/init.sh
 ```
 
 Then, to make all the static files (CSS, javascript, images, etc.) available to the app, run:
 
 ```bash
-docker-compose -f docker/docker-compose.yml run --no-deps --rm astrobin python manage.py collectstatic --noinput
+docker-compose -f docker/docker-compose.yml -f docker/docker-compose.build.yml run --no-deps --rm astrobin python manage.py collectstatic --noinput
 ```
 
 ## Step 6: Ensure services are running
 
 ```bash
-docker-compose -f docker/docker-compose.yml ps
+docker-compose -f docker/docker-compose.yml -f docker/docker-compose.build.yml ps
 ```
 
 This shows you the containers running.  Check the `State` column and make sure
@@ -153,16 +150,16 @@ database.  So a "lightweight" reset would be to do the following:
 
 ```bash
 # bring down the stack
-docker-compose -f docker/docker-compose.yml down
+docker-compose -f docker/docker-compose.yml -f docker/docker-compose.build.yml down
 
 # delete the postgresql volume
 docker volume rm docker_postgres-data
 
 # bring the stack back up
-docker-compose -f docker/docker-compose.yml up -d
+docker-compose -f docker/docker-compose.yml -f docker/docker-compose.build.yml up -d
 
 # re-initialize django
-docker-compose -f docker/docker-compose.yml run --no-deps --rm astrobin ./scripts/init.sh
+docker-compose -f docker/docker-compose.yml -f docker/docker-compose.build.yml run --no-deps --rm astrobin ./scripts/init.sh
 ```
 
 But if you *really* want to start from scratch, for example to do a final thorough build and test
@@ -180,28 +177,27 @@ at "step 1" of the build instructions above.
 ## Which template to edit?
 
 Start in the `urls.py` file -- the `urlpatterns` list contains the routing rules for
-the Astrobin site.  For example, if you're going to be editing the Big Wall, note
-the URL used in your browser (`/explore/wall/`) and then find the URL pattern that
+the AstroBin site.  For example, if you're going to be editing the Top Picks, note
+the URL used in your browser (`/explore/top-picks/`) and then find the URL pattern that
 matches it:
 
 ```
-url(r'^explore/wall/$', explore_views.WallView.as_view(), name='wall'),
+url(r'^explore/top-picks/$', explore_views.TopPicksView.as_view(), name='top_picks'),
 ```
 
-This tells you that the Django View you're looking for is `WallView`, in the
+This tells you that the Django View you're looking for is `TopPicksView`, in the
 `explore_views` module.
 
 ```
-$ grep "class WallView" * -r
-astrobin/views/explore.py:class WallView(ListView):
+$ grep "class TopPicksView" * -r
+astrobin/views/explore.py:class TopPicksView(ListView):
 ```
 
-Looking at the `WallView` class, you can see the template associated with it:
+Looking at the `TopPicksView` class, you can see the template associated with it:
 
 ```
-class WallView(ListView):
-    template_name = 'wall.html'
-    paginate_by = 70
+class TopPicksView(ListView):
+    template_name = 'top_picks.html'
 ```
 
 Django uses a search path when looking for templates.  Some templates might not
@@ -209,12 +205,12 @@ be in this git repository, but rather included in 3rd party modules pulled in
 during the build process.  So don't panic if you don't see a template referenced
 in the code, within the git repository.
 
-In this case, as you might expect, `wall.html` is in the standard location for
+In this case, as you might expect, `top_picks.html` is in the standard location for
 Django templates:
 
 ```
-$ find astrobin -name wall.html
-astrobin/templates/wall.html
+$ find astrobin -name top_picks.html
+astrobin/templates/top_picks.html
 ```
 
 ## Localization
@@ -244,9 +240,9 @@ For convenience, you can save time by simply generating and copying the
 modified style file, e.g.:
 
 ```
-docker cp astrobin/static/astrobin/scss/astrobin.scss astrobin:/media/static/astrobin/scss/
-docker exec -it astrobin \
-    sass /media/static/astrobin/scss/astrobin.scss /media/static/astrobin/css/astrobin.css
+docker cp astrobin/static/astrobin/scss/astrobin.scss docker_astrobin_1:/media/static/astrobin/scss/
+docker exec -it docker_astrobin_1 \
+    sass /media/static/astrobin/scss/astrobin.scss /media/static/astrobin/scss/astrobin.css
 ```
 
 When collecting static files on AWS S3, a hash of their contents will be
@@ -268,6 +264,7 @@ ignore this section for small or development installations):
 
 ```sql
 create index on astrobin_image using btree (uploaded, id);
+create index on astrobin_image using btree (moderator_decision, deleted);
 create index on actstream_action using btree (timestamp);
 create index on toggleproperties_toggleproperty using btree(property_type, content_type_id, object_id);
 create index on toggleproperties_toggleproperty using btree(property_type, content_type_id, created_on);
@@ -285,6 +282,25 @@ the number of CPUs in your server.
 
 ```bash
 export ENV=prod; docker build -t astrobin/nginx-${ENV} --build-arg ENV=${ENV} -f docker/nginx.dockerfile . && docker push astrobin/nginx-${ENV}
+```
+
+# Docker Swarm deployment
+
+To install on one or more servers and make a swarm out of it all, do the following on the swarm manager:
+
+```bash
+export NGINX_MODE=dev # or prod
+docker swarm init
+docker node update --label-add default=true <manager-node-id> # docker node ls
+docker node update --label-add app=true <worker-node-id>
+docker swarm join-token worker # Take note of the output command
+docker stack deploy -c docker/docker-compose.yml -c docker/docker-compose.deploy.yml docker
+```
+
+And on a worker:
+
+```bash
+docker swarm join --token <token> <ip>:<port>
 ```
 
 # Contributing

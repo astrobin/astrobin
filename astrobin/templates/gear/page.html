@@ -16,7 +16,6 @@
 {% endblock %}
 
 {% block content %}
-    <!-- TODO: check that this page works -->
     <div class="gear-page">
         <div class="page-header">
             <h1>{{gear.get_name}}
@@ -66,7 +65,7 @@
                             <h4>
                                 <i class="icon-picture"></i>
                                 {% trans "Some images" %}
-                                <a href="/search/?q={{gear}}{% search_form_query %}">
+                                <a href="/search/?q={{gear}}">
                                     {% trans "(view more)" %}
                                 </a>
                             </h4>
@@ -222,7 +221,7 @@
                             <th>{% trans "Make" %}</th>
                             <td>
                                 {% if gear.commercial and gear.commercial.is_paid or gear.commercial.producer == request.user  %}
-                                    <a href="/search/?q={{gear.get_make}}{% search_form_query %}&amp;search_type=3">
+                                    <a href="/search/?q={{gear.get_make}}">
                                 {% endif %}
                                     {{gear.get_make}}
                                 {% if gear.commercial and gear.commercial.is_paid or gear.commercial.producer == request.user %}

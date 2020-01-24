@@ -7,9 +7,9 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2016-11-12 07:03+0000\n"
-"PO-Revision-Date: 2016-10-25 08:40+0000\n"
-"Last-Translator: Lukasz83 <lukasz.sujka83@gmail.com>\n"
+"POT-Creation-Date: 2019-10-15 11:54+0000\n"
+"PO-Revision-Date: 2018-12-04 11:27+0000\n"
+"Last-Translator: Łukasz Sujka <lukasz.sujka83@gmail.com>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
 "Language: pl\n"
 "MIME-Version: 1.0\n"
@@ -17,32 +17,41 @@ msgstr ""
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=3; plural=(n==1 ? 0 : n%10>=2 && n%10<=4 && (n%100<10 "
 "|| n%100>=20) ? 1 : 2);\n"
-"X-Generator: Pootle 2.5.0\n"
-"X-POOTLE-MTIME: 1477384805.54017\n"
+"X-Generator: Pootle 2.8\n"
+"X-POOTLE-MTIME: 1543922851.000000\n"
 
-#: templates/astrobin_apps_users/inclusion_tags/astrobin_user.html:42
-#: templates/astrobin_apps_users/inclusion_tags/user_list.html:18
 msgid "Images"
 msgstr "Obrazy"
 
-#: templates/astrobin_apps_users/inclusion_tags/astrobin_user.html:43
-#: templates/astrobin_apps_users/inclusion_tags/user_list.html:19
 msgid "Followers"
 msgstr "Obserwujący"
 
-#: templates/astrobin_apps_users/inclusion_tags/astrobin_user.html:44
-#: templates/astrobin_apps_users/inclusion_tags/user_list.html:20
 msgid "Following"
 msgstr "Obserwuję"
 
-#: templates/astrobin_apps_users/inclusion_tags/user_list.html:16
 msgid "User"
 msgstr "Użytkownik"
 
-#: templates/astrobin_apps_users/inclusion_tags/user_list_entries.html:20
-#: templates/astrobin_apps_users/inclusion_tags/user_list_entries.html:24
 msgid "No users."
 msgstr "Brak użytkownika"
+
+msgid "Administrator"
+msgstr "Administrator"
+
+msgid "Image moderator"
+msgstr "Moderator zdjęć"
+
+msgid "IOTD Submitter"
+msgstr "Zgłaszający IOTD"
+
+msgid "IOTD Reviewer"
+msgstr "Przeglądający IOTD"
+
+msgid "IOTD Judge"
+msgstr "Wybierający IOTD"
+
+msgid "Premium member"
+msgstr "Członek Premium"
 
 #~ msgid "%(images_number)s image"
 #~ msgid_plural "%(images_number)s images"

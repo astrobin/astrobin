@@ -18,7 +18,7 @@ log = logging.getLogger('apps')
 
 
 class OverwritingFileSystemStorage(FileSystemStorage):
-    def get_available_name(self, name):
+    def get_available_name(self, name, max_length=None):
         """
         Returns the only possible filename, not caring if the file gets overwritten.
         """

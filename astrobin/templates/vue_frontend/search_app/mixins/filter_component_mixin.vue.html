@@ -1,0 +1,15 @@
+<script>
+    var FilterComponentMixin = {
+        data: function() {
+            return {
+                highlighted: true
+            };
+        },
+        created: function () {
+            var self = this;
+            setTimeout(function() {
+                self.highlighted = false;
+            }, 300);
+        }
+    }
+</script>

@@ -1,0 +1,204 @@
+# SOME DESCRIPTIVE TITLE.
+# Copyright (C) YEAR THE PACKAGE'S COPYRIGHT HOLDER
+# This file is distributed under the same license as the PACKAGE package.
+# FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
+#
+msgid ""
+msgstr ""
+"Project-Id-Version: PACKAGE VERSION\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2019-10-15 11:57+0000\n"
+"PO-Revision-Date: 2019-02-25 18:41+0000\n"
+"Last-Translator: BG8JQT <BG8JQT@163.com>\n"
+"Language-Team: LANGUAGE <LL@li.org>\n"
+"Language: ru\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: nplurals=3; plural=(n%10==1 && n%100!=11 ? 0 : n%10>=2 && n"
+"%10<=4 && (n%100<10 || n%100>=20) ? 1 : 2);\n"
+"X-Generator: Pootle 2.8\n"
+"X-POOTLE-MTIME: 1551120112.000000\n"
+
+msgid "You are not a member of the IOTD Submitters board."
+msgstr "Вы не участник списка Номинирующих для Изображения Дня."
+
+msgid "You cannot submit your own image."
+msgstr "您不能提交您的图像。"
+
+msgid "Images in the staging area cannot be submitted."
+msgstr "Изображения в Staging Area не могут быть номинированы."
+
+msgid "This user has chosen to be excluded from competitions."
+msgstr "Этот пользователь хочет быть исключенным из соревнования."
+
+msgid "You cannot submit a judge's image."
+msgstr "Вы не можете номинировать изображения судей."
+
+#, python-format
+msgid ""
+"You cannot submit an image that was published more than %(max_days)s days "
+"ago."
+msgstr ""
+"Вы не можете номинировать изображения которые были опубликованы более, чем "
+"%(max_days)s дней назад."
+
+msgid "This image has already been an IOTD in the past"
+msgstr "Это изображение уже было Изображением Дня в прошлом"
+
+#, python-format
+msgid "You have already submitted %(max_allowed)s images today."
+msgstr "Вы уже номинировали %(max_allowed)s изображений на сегодня."
+
+msgid "You are not a member of the IOTD Reviewers board."
+msgstr "Вы не участник списка Рецензентов Изображения Дня."
+
+msgid "You cannot vote for your own image."
+msgstr "Вы не можете голосовать за собственные изображения."
+
+msgid "Images in the staging area cannot be voted for."
+msgstr "За изображения в Staging Area нельзя голосовать."
+
+msgid "You cannot vote for a judge's image."
+msgstr "Вы не можете голосовать за изображения судей."
+
+msgid "You cannot vote for an image that has not been submitted."
+msgstr "Вы не можете голосовать за изображения, которые не были номинированы."
+
+msgid "You cannot vote for your own submission."
+msgstr "Вы не можете голосовать за свою заявку."
+
+#, python-format
+msgid ""
+"You cannot vote for an image that has been in the submission queue for more "
+"than %(max_days)s days."
+msgstr ""
+"Вы не можете голосовать за изображение, которое находилось в очереди "
+"отправки более %(max_days)s дней."
+
+#, python-format
+msgid "You have already voted for %(max_allowed)s images today."
+msgstr "Вы уже проголосовали за %(max_allowed)s изображений на сегодня."
+
+msgid "You are not a member of the IOTD Judges board."
+msgstr "Вы не участника списка судей для Изображения Дня."
+
+msgid "You cannot elect your own image."
+msgstr "Вы не можете выбирать собственные изображения."
+
+msgid "Images in the staging area cannot be elected."
+msgstr "Изображения в Staging Area не могут быть выбраны."
+
+msgid "You cannot elect a judge's image."
+msgstr "Вы не можете выбирать изображения судей."
+
+msgid "You cannot elect an image that has not been voted."
+msgstr "Вы не можете выбирать изображения за которые нет голосов."
+
+msgid "You cannot elect your own submission."
+msgstr "Вы не можете выбрать собственную заявку."
+
+msgid "You cannot elect an image you voted for."
+msgstr "Вы не можете выбрать изображение за которое вы голосовали."
+
+#, python-format
+msgid ""
+"You cannot elect an image that has been in the review queue for more than "
+"%(max_days)s days."
+msgstr ""
+"Вы не можете выбирать изображение которое находится в очереди рецензий более "
+"чем %(max_days)s дней."
+
+#, python-format
+msgid "You have already elected %(max_allowed)s images today."
+msgstr "Вы уже выбрали %(max_allowed)s изображений на сегодня."
+
+#, python-format
+msgid "You have already scheduled %(max_allowed)s IOTDs."
+msgstr "Вы уже запланировали %(max_allowed)s Изображений Дня."
+
+msgid "You cannot unelect your own submission."
+msgstr "Вы не можете отозвать свою заявку."
+
+msgid "You cannot unelect an image you voted for."
+msgstr "Вы не можете отозвать изображение за которое голосовали."
+
+msgid "You cannot unelect an image elected by another judge."
+msgstr "Вы не можете отменить выбор изображения другого судьи."
+
+msgid "You cannot unelect a past or current IOTD."
+msgstr "Вы не можете переизбрать прошлые или текущие Изображения Дня."
+
+msgid "Submit for IOTD"
+msgstr "Номинировать на ИД"
+
+msgid ""
+"You will submit this image to the IOTD Submissions Queue. From there, a "
+"member of the IOTD Reviewers Board will consider promoting it for final "
+"evaluation from an IOTD Judge"
+msgstr ""
+"Вы номинируете это изображение в очередь заявок на Изображение Дня (ИД). "
+"После этого участник списка Рецензентов ИД рассмотрит вопрос о его "
+"продвижении для окончательной оценки Судьей ИД."
+
+msgid "Submit"
+msgstr "Номинировать"
+
+msgid "Image of the day"
+msgstr "Изображение Дня"
+
+msgid "by"
+msgstr "от"
+
+msgid "IOTD Judgement Queue"
+msgstr "IOTD 判断队列"
+
+msgid ""
+"Please select the images that you want to elect to IOTD by clicking on them."
+msgstr ""
+"Пожалуйста отметьте изображения, которые вы хотите выбрать для ИД, нажимая "
+"на них."
+
+msgid "This queue is currently empty."
+msgstr "Пока эта очередь пуста."
+
+msgid "Reviewers"
+msgstr "审核人"
+
+msgid "Loading"
+msgstr "加载中"
+
+msgid "Error"
+msgstr "错误"
+
+msgid "IOTD Review Queue"
+msgstr "Рецензируемая очередь ИД"
+
+msgid ""
+"Please select the images that you want to promote for final judgement by "
+"clicking on them."
+msgstr ""
+"Пожалуйста, отметьте изображения, которые вы хотите продвинуть для "
+"окончательного решения, нажав на них."
+
+msgid "Submitters"
+msgstr "提交者"
+
+msgid "IOTD Submission Queue"
+msgstr "IOTD 提交队列"
+
+msgid ""
+"Please select the images that you want to propose for IOTD consideration."
+msgstr ""
+"Пожалуйста, отметьте изображения, которые вы хотите номинировать на "
+"рассмотрение в качестве ИД."
+
+msgid "No images uploaded on this day."
+msgstr "Нет изображений для этого дня."
+
+msgid "You cannot unelect an IOTD elected by another judge."
+msgstr "Вы не можете отменить выбор ИД от другого судьи."
+
+#, python-format
+msgid "All IOTD slots for the next %(days)s days are already filled."
+msgstr "Все места для ИД на следующие %(days)s дней уже заполнены."

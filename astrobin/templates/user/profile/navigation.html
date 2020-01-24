@@ -190,26 +190,46 @@
                     <span class="caret hidden-phone"></span>
                 </a>
                 <ul class="dropdown-menu">
-                    <li><a href="{% url 'user_collections_add_remove_images' requested_user.username collection.pk %}" data-toggle="modal">
-                        <i class="icon-edit"></i>
-                        {% trans "Add/remove images" %}</a></li>
-                    <li><a href="{% url 'user_collections_update' requested_user.username collection.pk %}?next={{request.path}}">
-                        <i class="icon-edit"></i>
-                        {% trans "Edit" %}</a></li>
-                    <li><a class="danger" href="#delete-modal" data-toggle="modal">
-                        <i class="icon-trash"></i>
-                        {% trans "Delete" %}</a></li>
+                    <li>
+                        <a href="{% url 'user_collections_add_remove_images' requested_user.username collection.pk %}">
+                            <i class="icon-edit"></i>{% trans "Add/remove images" %}
+                        </a>
+                    </li>
+
+                    <li>
+                        <a href="{% url 'user_collections_update' requested_user.username collection.pk %}?next={{request.path}}">
+                            <i class="icon-edit"></i>{% trans "Edit" %}
+                        </a>
+                    </li>
+
+                    <li>
+                        <a class="danger" href="#delete-modal" data-toggle="modal">
+                            <i class="icon-trash"></i>{% trans "Delete" %}
+                        </a>
+                    </li>
+
+                    <li class="divider"></li>
+
+                    <li class="nav-header">
+                        {% trans "Quick edit" %}
+                    </li>
+
+                    <li>
+                        <a href="{% url 'user_collections_quick_edit_key_value_tags' requested_user.username collection.pk %}">
+                            <i class="icon-tags"></i>{% trans "Key/value pairs" %}
+                        </a>
+                    </li>
                 </ul>
             </li>
         {% endif %}
 
         <li class="pull-right">
             {% ifequal request.GET.view 'table' %}
-                <a href="{% query_string "" "view" %}">
+                <a href="{{ request.path }}{% query_string "" "view" %}">
                     <i class="icon-th"></i>
                 </a>
             {% else %}
-                <a href="{% query_string "view=table" "" %}">
+                <a href="{{ request.path }}{% query_string "view=table" "" %}">
                     <i class="icon-list"></i>
                 </a>
             {% endifequal %}

@@ -112,12 +112,14 @@
                 <i class="icon-caret-down"></i>
             </a>
             <ul class="dropdown-menu">
-                <li class="exlore-menu-wall">
-                    <a href="{% url 'wall' %}">
-                        <i class="icon-th"></i>
-                        {% trans "The Big Wall" %}
+                <li class="explore-menu-search">
+                    <a href="{% url 'haystack_search' %}?d=i">
+                        <i class="icon-search"></i>
+                        {% trans "The Big Wall" %} / {% trans "Advanced search" %}
                     </a>
                 </li>
+
+                <li class="divider"></li>
                 <li class="exlore-menu-top-picks">
                     <a href="{% url 'top_picks' %}">
                         <i class="icon-star"></i>
@@ -144,13 +146,6 @@
                     <a href="{% url 'rawdata.publicdatapool_list' %}">
                         <i class="icon-book"></i>
                         {% trans "Public data pools" %}
-                    </a>
-                </li>
-
-                <li class="explore-menu-search">
-                    <a href="{% url 'haystack_search' %}">
-                        <i class="icon-search"></i>
-                        {% trans "Advanced search" %}
                     </a>
                 </li>
 

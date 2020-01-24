@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2016-11-12 07:03+0000\n"
+"POT-Creation-Date: 2019-10-15 11:54+0000\n"
 "PO-Revision-Date: 2013-10-20 22:13+0100\n"
 "Last-Translator: VojtechKudela <vojtiik@gmail.com>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -18,19 +18,12 @@ msgstr ""
 "Plural-Forms: nplurals=3; plural=(n==1) ? 0 : (n>=2 && n<=4) ? 1 : 2;\n"
 "X-Generator: Pootle 2.1.6\n"
 
-#: templates/nested_comments/nestedcomment_app.html:23
-#: templates/nested_comments/nestedcomment_app.html:138
-#: templates/nested_comments/nestedcomment_app.html:161
-#: templates/nested_comments/nestedcomment_list.html:58
 msgid "Cancel"
 msgstr "Zrušit"
 
-#: templates/nested_comments/nestedcomment_app.html:38
 msgid "Add a comment"
 msgstr "Přidat komentář"
 
-#: templates/nested_comments/nestedcomment_app.html:43
-#: templates/nested_comments/nestedcomment_app.html:177
 msgid ""
 "Please <a href=\"/accounts/login/\">login</a> or <a href=\"/accounts/"
 "register/\">register</a> to leave a comment.</p>"
@@ -38,100 +31,65 @@ msgstr ""
 "Pro přidání komentáře se, prosím, <a href=\"/accounts/login/\">přihlašte</a> "
 "nebo <a href=\"/accounts/register/\">zaregistrujte</a>.</p>"
 
-#: templates/nested_comments/nestedcomment_app.html:52
 msgid "There are no comments yet."
 msgstr "Zatím nikdo žádný komentář nevložil."
 
-#: templates/nested_comments/nestedcomment_app.html:68
-#: templates/nested_comments/nestedcomment_app.html:86
 msgid "(deleted)"
 msgstr "(smazáno)"
 
-#: templates/nested_comments/nestedcomment_app.html:97
-#: templates/nested_comments/nestedcomment_list.html:33
 msgid "Link"
 msgstr "Odkaz"
 
-#: templates/nested_comments/nestedcomment_app.html:101
-#: templates/nested_comments/nestedcomment_list.html:39
 msgid "Undelete"
 msgstr "Obnovit smazané"
 
-#: templates/nested_comments/nestedcomment_app.html:103
-#: templates/nested_comments/nestedcomment_list.html:41
 msgid "Delete"
 msgstr "Smazat"
 
-#: templates/nested_comments/nestedcomment_app.html:108
-#: templates/nested_comments/nestedcomment_list.html:44
 msgid "Edit"
 msgstr "Upravit"
 
-#: templates/nested_comments/nestedcomment_app.html:113
-#: templates/nested_comments/nestedcomment_list.html:46
 msgid "Reply"
 msgstr "Odpovědět"
 
-#: templates/nested_comments/nestedcomment_app.html:141
-#: templates/nested_comments/nestedcomment_app.html:164
 msgid "The comment cannot be empty."
 msgstr "Není možné vložit prázdný komentář."
 
-#: templates/nested_comments/nestedcomment_app.html:188
-#: templates/nested_comments/nestedcomment_list.html:57
 msgid "Save"
 msgstr "Uložit"
 
-#: templates/nested_comments/nestedcomment_app.html:198
-msgid "Preview"
-msgstr "Náhled"
-
-#: templates/nested_comments/nestedcomment_app.html:204
-#: templates/nested_comments/nestedcomment_list.html:60
-msgid "Formatting help"
-msgstr "Nápověda k formátování"
-
-#: templates/nested_comments/nestedcomment_app.html:208
-msgid "You type:"
-msgstr "Co píšete:"
-
-#: templates/nested_comments/nestedcomment_app.html:209
-msgid "You see:"
-msgstr "Co se zobrazí:"
-
-#: templates/nested_comments/nestedcomment_app.html:214
-#: templates/nested_comments/nestedcomment_app.html:215
-msgid "italics"
-msgstr "kurzíva"
-
-#: templates/nested_comments/nestedcomment_app.html:219
-#: templates/nested_comments/nestedcomment_app.html:220
-msgid "bold"
-msgstr "tučně"
-
-#: templates/nested_comments/nestedcomment_app.html:229
-msgid "(TAB or 4 spaces)"
-msgstr "(TAB nebo 4 mezery)"
-
-#: templates/nested_comments/nestedcomment_app.html:229
-#: templates/nested_comments/nestedcomment_app.html:230
-msgid "preformatted text"
-msgstr "předformátovaný text"
-
-#: templates/nested_comments/nestedcomment_app.html:234
-#: templates/nested_comments/nestedcomment_app.html:235
-msgid "quoted text"
-msgstr "citovaný text"
-
-#: templates/nested_comments/nestedcomment_app.html:239
-#: templates/nested_comments/nestedcomment_app.html:240
-msgid "escape the formatting syntax"
-msgstr "opustit formátování"
-
-#: templates/nested_comments/nestedcomment_list.html:26
 msgid "(comment deleted)"
 msgstr "(komentář byl smazán)"
 
-#: templates/nested_comments/nestedcomment_list.html:75
+msgid "Formatting help"
+msgstr "Nápověda k formátování"
+
 msgid "There doesn't seem to be anything here."
 msgstr "Nic tady není."
+
+#~ msgid "Preview"
+#~ msgstr "Náhled"
+
+#~ msgid "You type:"
+#~ msgstr "Co píšete:"
+
+#~ msgid "You see:"
+#~ msgstr "Co se zobrazí:"
+
+#~ msgid "italics"
+#~ msgstr "kurzíva"
+
+#~ msgid "bold"
+#~ msgstr "tučně"
+
+#~ msgid "(TAB or 4 spaces)"
+#~ msgstr "(TAB nebo 4 mezery)"
+
+#~ msgid "preformatted text"
+#~ msgstr "předformátovaný text"
+
+#~ msgid "quoted text"
+#~ msgstr "citovaný text"
+
+#~ msgid "escape the formatting syntax"
+#~ msgstr "opustit formátování"

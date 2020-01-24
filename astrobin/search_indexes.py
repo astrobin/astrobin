@@ -1,6 +1,4 @@
 # Python
-import string
-import re
 import datetime
 
 # Django
@@ -12,16 +10,15 @@ from django.db.models import Q
 from celery_haystack.indexes import CelerySearchIndex
 from haystack.indexes import *
 from hitcount.models import HitCount
+from pybb.models import Post, Topic
 from toggleproperties.models import ToggleProperty
 
 # This app
 from astrobin.models import Image
 from astrobin.models import DeepSky_Acquisition
 from astrobin.models import SolarSystem_Acquisition
-from astrobin.models import UserProfile
-from astrobin.models import Gear, CommercialGear, RetailedGear
+from astrobin.models import Gear, CommercialGear
 
-from astrobin.utils import unique_items
 
 # Other AstroBin apps
 from nested_comments.models import NestedComment
@@ -49,6 +46,11 @@ def _get_integration(image):
 
 def _prepare_likes(obj):
     return ToggleProperty.objects.toggleproperties_for_object("like", obj).count()
+
+
+def _prepare_bookmarks(obj):
+    return ToggleProperty.objects.toggleproperties_for_object("bookmark", obj).count()
+
 
 def _prepare_moon_phase(obj):
     from moon import MoonPhase
@@ -170,8 +172,6 @@ def _1y_ago():
 
 
 class UserIndex(CelerySearchIndex, Indexable):
-    model_weight = IntegerField()
-
     text = CharField(document=True, use_template=True)
     images_6m = IntegerField()
     images_1y = IntegerField()
@@ -204,27 +204,11 @@ class UserIndex(CelerySearchIndex, Indexable):
     # Average moon phase under which this user has operated.
     moon_phase = FloatField()
 
-    # First and last acquisition dates, including all images of course.
-    first_acquisition_date = DateTimeField()
-    last_acquisition_date = DateTimeField()
-
     # Total views from all images.
     views = IntegerField()
 
-    # Min and max aperture of all telescopes used in this user's images.
-    min_aperture = IntegerField()
-    max_aperture = IntegerField()
-
-    # Min and max pixel size of all cameras used in this user's images.
-    min_pixel_size = IntegerField()
-    max_pixel_size = IntegerField()
-
     # Number of bookmarks on own images
     bookmarks = IntegerField()
-
-    # Types of telescopes and cameras with which this user has imaged.
-    telescope_types = MultiValueField()
-    camera_types = MultiValueField()
 
     comments = IntegerField()
     comments_written = IntegerField()
@@ -241,12 +225,6 @@ class UserIndex(CelerySearchIndex, Indexable):
 
     def get_updated_field(self):
         return "userprofile__updated"
-
-
-    def prepare_model_weight(self, obj):
-        # Printing here just because it's the first "prepare" function.
-        print "%s: %d" % (obj.__class__.__name__, obj.pk)
-        return 200;
 
 
     def prepare_images_6m(self, obj):
@@ -281,15 +259,17 @@ class UserIndex(CelerySearchIndex, Indexable):
             likes += ToggleProperty.objects.toggleproperties_for_object("like", i).count()
         return likes
 
+
     def prepare_likes_6m(self, obj):
         likes = 0
         for i in Image.objects.filter(user = obj, uploaded__gte = _6m_ago()):
             likes += ToggleProperty.objects.toggleproperties_for_object("like", i).count()
         return likes
 
+
     def prepare_likes_1y(self, obj):
         likes = 0
-        for i in Image.objects.filter(user = obj, uploaded__gte = _6m_ago()):
+        for i in Image.objects.filter(user = obj, uploaded__gte = _1y_ago()):
             likes += ToggleProperty.objects.toggleproperties_for_object("like", i).count()
         return likes
 
@@ -442,77 +422,17 @@ class UserIndex(CelerySearchIndex, Indexable):
             return 0
         return reduce(lambda x, y: x + y, l) / len(l)
 
-    def prepare_first_acquisition_date(self, obj):
-        l = []
-        for i in Image.objects.filter(user = obj):
-            l.append(_prepare_first_acquisition_date(i))
-        if len(l) == 0:
-            return None
-        return min(l)
-
-    def prepare_last_acquisition_date(self, obj):
-        l = []
-        for i in Image.objects.filter(user = obj):
-            l.append(_prepare_last_acquisition_date(i))
-        if len(l) == 0:
-            return None
-        return max(l)
-
     def prepare_views(self, obj):
         views = 0
         for i in Image.objects.filter(user = obj):
             views += _prepare_views(i, 'image')
         return views
 
-    def prepare_min_aperture(self, obj):
-        l = []
-        for i in Image.objects.filter(user = obj):
-            l.append(_prepare_min_aperture(i))
-        if len(l) == 0:
-            return 0
-        return min(l)
-
-    def prepare_max_aperture(self, obj):
-        l = []
-        for i in Image.objects.filter(user = obj):
-            l.append(_prepare_max_aperture(i))
-        if len(l) == 0:
-            return 0
-        return max(l)
-
-    def prepare_min_pixel_size(self, obj):
-        l = []
-        for i in Image.objects.filter(user = obj):
-            l.append(_prepare_min_pixel_size(i))
-        if len(l) == 0:
-            return 0
-        return min(l)
-
-    def prepare_max_pixel_size(self, obj):
-        l = []
-        for i in Image.objects.filter(user = obj):
-            l.append(_prepare_max_pixel_size(i))
-        if len(l) == 0:
-            return 0
-        return max(l)
-
     def prepare_bookmarks(self, obj):
         bookmarks = 0
         for i in Image.objects.filter(user = obj):
-            bookmarks += ToggleProperty.objects.toggleproperties_for_object("bookmark", i).count()
+            bookmarks += _prepare_bookmarks(i)
         return bookmarks
-
-    def prepare_telescope_types(self, obj):
-        l = []
-        for i in Image.objects.filter(user = obj):
-            l += _prepare_telescope_types(i)
-        return unique_items(l)
-
-    def prepare_camera_types(self, obj):
-        l = []
-        for i in Image.objects.filter(user = obj):
-            l += _prepare_camera_types(i)
-        return unique_items(l)
 
     def prepare_comments(self, obj):
         comments = 0
@@ -525,11 +445,22 @@ class UserIndex(CelerySearchIndex, Indexable):
 
 
 class ImageIndex(CelerySearchIndex, Indexable):
-    model_weight = IntegerField()
-
     text = CharField(document=True, use_template=True)
 
+    title = CharField(model_attr='title')
+    description = CharField(model_attr='description', null=True)
+    published = DateTimeField(model_attr='published')
     uploaded = DateTimeField(model_attr='uploaded')
+    imaging_telescopes = CharField()
+    guiding_telescopes = CharField()
+    mounts = CharField()
+    imaging_cameras = CharField()
+    guiding_cameras = CharField()
+    pixel_scale = FloatField()
+    field_radius = FloatField()
+    countries = CharField()
+
+    animated = BooleanField(model_attr='animated')
 
     likes = IntegerField()
     integration = FloatField()
@@ -541,15 +472,14 @@ class ImageIndex(CelerySearchIndex, Indexable):
     solar_system_main_subject = IntegerField()
 
     is_deep_sky = BooleanField()
-    is_clusters = BooleanField()
-    is_nebulae = BooleanField()
-    is_galaxies = BooleanField()
-
     is_solar_system = BooleanField()
     is_sun = BooleanField()
     is_moon = BooleanField()
     is_planets = BooleanField()
     is_comets = BooleanField()
+
+    is_iotd = BooleanField()
+    is_top_pick = BooleanField()
 
     license = IntegerField(model_attr = 'license')
 
@@ -570,7 +500,15 @@ class ImageIndex(CelerySearchIndex, Indexable):
 
     subject_type = IntegerField(model_attr = 'subject_type')
 
+    acquisition_type = CharField(model_attr='acquisition_type')
+
+    data_source = CharField(model_attr = 'data_source')
+
+    remote_source = CharField(model_attr='remote_source', null=True)
+
     username = CharField(model_attr = 'user__username')
+
+    objects_in_field = CharField()
 
     def index_queryset(self, using = None):
         return self.get_model().objects.filter(moderator_decision = 1)
@@ -581,10 +519,26 @@ class ImageIndex(CelerySearchIndex, Indexable):
     def get_updated_field(self):
         return "updated"
 
-    def prepare_model_weight(self, obj):
-        # Printing here just because it's the first "prepare" function.
-        print "%s: %d" % (obj.__class__.__name__, obj.pk)
-        return 300;
+    def prepare_imaging_telescopes(self, obj):
+        return ["%s, %s" % (x.get("make"), x.get("name")) for x in obj.imaging_telescopes.all().values('make', 'name')]
+
+    def prepare_guiding_telescopes(self, obj):
+        return ["%s, %s" % (x.get("make"), x.get("name")) for x in obj.guiding_telescopes.all().values('make', 'name')]
+
+    def prepare_mounts(self, obj):
+        return ["%s, %s" % (x.get("make"), x.get("name")) for x in obj.mounts.all().values('make', 'name')]
+
+    def prepare_imaging_cameras(self, obj):
+        return ["%s, %s" % (x.get("make"), x.get("name")) for x in obj.imaging_cameras.all().values('make', 'name')]
+
+    def prepare_guiding_cameras(self, obj):
+        return ["%s, %s" % (x.get("make"), x.get("name")) for x in obj.guiding_cameras.all().values('make', 'name')]
+
+    def prepare_pixel_scale(self, obj):
+        return obj.solution.pixscale if obj.solution else None
+
+    def prepare_field_radius(self, obj):
+        return obj.solution.radius if obj.solution else None
 
     def prepare_likes(self, obj):
         return _prepare_likes(obj)
@@ -604,58 +558,8 @@ class ImageIndex(CelerySearchIndex, Indexable):
     def prepare_views(self, obj):
         return _prepare_views(obj, 'image')
 
-    def prepare_solar_system_main_subject(self, obj):
-        return obj.solar_system_main_subject
-
-    def prepare_is_deep_sky(self, obj):
-        return DeepSky_Acquisition.objects.filter(image = obj).count() > 0
-
-    def prepare_is_solar_system(self, obj):
-        if obj.solar_system_main_subject:
-            return True
-
-        if SolarSystem_Acquisition.objects.filter(image = obj):
-            return True
-
-        return False
-
-    def prepare_is_sun(self, obj):
-        return obj.solar_system_main_subject == 0
-
-    def prepare_is_moon(self, obj):
-        return obj.solar_system_main_subject == 1
-
-    def prepare_is_planets(self, obj):
-        return obj.solar_system_main_subject in range(2, 8)
-
-    def prepare_is_comets(self, obj):
-        return obj.solar_system_main_subject == 10
-
-    def prepare_min_aperture(self, obj):
-        return _prepare_min_aperture(obj)
-
-    def prepare_max_aperture(self, obj):
-        return _prepare_max_aperture(obj)
-
-    def prepare_min_pixel_size(self, obj):
-        return _prepare_min_pixel_size(obj)
-        s = 0
-        for camera in obj.imaging_cameras.all():
-            if camera.pixel_size is not None and (s == 0 or camera.pixel_size < s):
-                s = int(camera.pixel_size)
-        return s
-
-    def prepare_max_pixel_size(self, obj):
-        return _prepare_max_pixel_size(obj)
-        import sys
-        s = sys.maxint
-        for camera in obj.imaging_cameras.all():
-            if camera.pixel_size is not None and (s == sys.maxint or camera.pixel_size > s):
-                s = int(camera.pixel_size)
-        return s
-
     def prepare_bookmarks(self, obj):
-        return ToggleProperty.objects.toggleproperties_for_object("bookmark", obj).count()
+        return _prepare_bookmarks(obj)
 
     def prepare_telescope_types(self, obj):
         return _prepare_telescope_types(obj)
@@ -669,3 +573,53 @@ class ImageIndex(CelerySearchIndex, Indexable):
     def prepare_is_commercial(self, obj):
         commercial_gear = CommercialGear.objects.filter(image = obj)
         return commercial_gear.count() > 0
+
+    def prepare_is_iotd(self, obj):
+        return hasattr(obj, 'iotd')
+
+    def prepare_is_top_pick(self, obj):
+        return obj.iotdvote_set.count() > 0 and not hasattr(obj, 'iotd');
+
+    def prepare_objects_in_field(self, obj):
+        return obj.solution.objects_in_field.join(", ") \
+            if obj.solution and obj.solution.objects_in_field \
+            else None
+
+    def prepare_countries(self, obj):
+        return ' '.join([x.country for x in obj.locations.all() if x.country])
+
+
+class NestedCommentIndex(CelerySearchIndex, Indexable):
+    text = CharField(document=True, use_template=True)
+    created = DateTimeField(model_attr='created')
+    updated = DateTimeField(model_attr='updated')
+
+    def get_model(self):
+        return NestedComment
+
+    def index_queryset(self, using=None):
+        return self.get_model().objects.filter(deleted=False, image__deleted=None)
+
+
+class ForumTopicIndex(CelerySearchIndex, Indexable):
+    text = CharField(document=True, use_template=True)
+    created = DateTimeField(model_attr='created')
+    updated = DateTimeField(model_attr='updated', null=True)
+
+    def get_model(self):
+        return Topic
+
+    def index_queryset(self, using=None):
+        return self.get_model().objects.filter(on_moderation=False)
+
+
+class ForumPostIndex(CelerySearchIndex, Indexable):
+    text = CharField(document=True, use_template=True)
+    created = DateTimeField(model_attr='created')
+    updated = DateTimeField(model_attr='updated', null=True)
+
+    def get_model(self):
+        return Post
+
+    def index_queryset(self, using=None):
+        return self.get_model().objects.filter(on_moderation=False)

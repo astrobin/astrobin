@@ -15,7 +15,14 @@
         </div>
 
         <div class="avatar">
-            <a href="{% url 'user_page' user.username %}">
+            <a href="
+                {% if request.user == user %}
+                    {% url 'avatar_change' %}
+
+                {% else %}
+                    {% url 'user_page' user.username %}
+                {% endif %}
+            ">
                 {% avatar user 194 %}
 
                 {% if DONATIONS_ENABLED %}
@@ -24,6 +31,10 @@
 
                 {% if PREMIUM_ENABLED %}
                     {% premium_badge user 'large' %}
+                {% endif %}
+
+                {% if request.user == user %}
+                    <i class="icon icon-pencil edit"></i>
                 {% endif %}
             </a>
 

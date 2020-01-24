@@ -1,0 +1,91 @@
+{% load i18n %}
+
+<script type="text/x-template" id="data-source-filter-template">
+    <div class="form-group" :class="{highlighted: highlighted}">
+        <v-multiselect class="multiselect--grouped" v-model="value" :options="optionGroups" track-by="id" label="label"
+                       group-values="options" group-label="group" selectLabel="" deselectLabel="" selectedLabel=""
+                       :searchable="false" placeholder="{% trans "Select" %}">
+        </v-multiselect>
+        <input type="hidden" name="data_source" :value="value.id">
+    </div>
+</script>
+
+<script>
+    Vue.component("data-source-filter", {
+        template: "#data-source-filter-template",
+        props: [
+            "dataSource"
+        ],
+        mixins: [
+            FilterComponentMixin
+        ],
+        data: function () {
+            return {
+                value: [],
+                optionGroups: [
+                    {
+                        group: "{% trans "Self acquired" %}",
+                        options: [
+                            {
+                                id: "BACKYARD",
+                                label: "{% trans "Backyard" %}"
+                            },
+                            {
+                                id: "TRAVELLER",
+                                label: "{% trans "Traveller" %}"
+                            },
+                            {
+                                id: "OWN_REMOTE",
+                                label: "{% trans "Own remote observatory" %}"
+                            }
+                        ]
+                    },
+                    {
+                        group: "{% trans "Downloaded" %}",
+                        options: [
+                            {
+                                id: "AMATEUR_HOSTING",
+                                label: "{% trans "Amateur hosting facility" %}"
+                            },
+                            {
+                                id: "PUBLIC_AMATEUR_DATA",
+                                label: "{% trans "Public amateur data" %}"
+                            },
+                            {
+                                id: "PRO_DATA",
+                                label: "{% trans "Professional, scientific grade data" %}"
+                            }
+                        ]
+                    },
+                    {
+                        group: "{% trans "Other" %}",
+                        options: [
+                            {
+                                id: "MIX",
+                                label: "{% trans "Mix of multiple sources" %}"
+                            },
+                            {
+                                id: "OTHER",
+                                label: "{% trans "None of the above" %}"
+                            },
+                            {
+                                id: "UNKNOWN",
+                                label: "{% trans "Unknown" %}"
+                            }
+                        ]
+                    }
+                ]
+            }
+        },
+        created: function() {
+            for (var i = 0; i < this.optionGroups.length; i++) {
+                for (var j = 0; j < this.optionGroups[i].options.length; j++) {
+                    if (this.optionGroups[i].options[j].id === this.dataSource) {
+                        this.value = this.optionGroups[i].options[j];
+                        return;
+                    }
+                }
+            }
+        }
+    });
+</script>

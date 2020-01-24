@@ -29,7 +29,7 @@
                     {% if is_revision %}
                         <a href="{% url 'image_edit_revision_make_final' revision_image.id %}">
                     {% else %}
-                        <a href="{% url 'image_edit_make_final' image.id %}">
+                        <a href="{% url 'image_edit_make_final' image.get_id %}">
                     {% endif %}
 
                         <i class="icon-ok"></i>

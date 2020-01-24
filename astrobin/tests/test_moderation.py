@@ -1,9 +1,14 @@
+# Python
+from mock import patch
+
 # Django
 from django.contrib.auth.models import Group, User
 from django.core.urlresolvers import reverse
 from django.test import TestCase
 
 # AstroBin
+from mock import patch
+
 from astrobin.models import Image
 
 
@@ -33,6 +38,7 @@ class ModerationTest(TestCase):
         if wip:
             data['wip'] = True
 
+        patch('astrobin.tasks.retrieve_primary_thumbnails.delay')
         return self.client.post(
             reverse('image_upload_process'),
             data,
@@ -42,8 +48,8 @@ class ModerationTest(TestCase):
     def _get_last_image(self):
         return Image.objects_including_wip.all().order_by('-id')[0]
 
-
-    def test_image_moderation_queue_view(self):
+    @patch("astrobin.tasks.retrieve_primary_thumbnails")
+    def test_image_moderation_queue_view(self, retrieve_primary_thumbnails):
         # Anon cannot access
         response = self.client.get(reverse('image_moderation'))
         self.assertEqual(response.status_code, 403)
@@ -64,7 +70,7 @@ class ModerationTest(TestCase):
         self._do_upload('astrobin/fixtures/test.jpg')
         image = self._get_last_image()
         image.title = "Moderation test"
-        image.save()
+        image.save(keep_deleted=True)
 
         # Moderator can see the image in the queue
         self.client.login(username = 'moderator', password = 'password')
@@ -79,7 +85,7 @@ class ModerationTest(TestCase):
 
         # Moderator can mark it as spam
         image.moderator_decision = 0
-        image.save()
+        image.save(keep_deleted=True)
         response = self.client.post(reverse('image_moderation_mark_as_spam'), {'ids[]': [image.pk]})
         self.assertEqual(response.status_code, 200)
         image = Image.objects_including_wip.get(pk = image.pk)
@@ -87,8 +93,8 @@ class ModerationTest(TestCase):
 
         image.delete()
 
-
-    def test_spam_user_gallery(self):
+    @patch("astrobin.tasks.retrieve_primary_thumbnails")
+    def test_spam_user_gallery(self, retrieve_primary_thumbnails):
         self.client.login(username = 'user', password = 'password')
         response = self.client.get(reverse('user_page', args= ('user',)))
         self.assertEquals(response.status_code, 200)
@@ -96,7 +102,7 @@ class ModerationTest(TestCase):
         self._do_upload('astrobin/fixtures/test.jpg')
         image = self._get_last_image()
         image.moderator_decision = 2
-        image.save()
+        image.save(keep_deleted=True)
 
         # Same user gets 404
         response = self.client.get(reverse('user_page', args= ('user',)))

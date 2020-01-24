@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2016-11-12 07:04+0000\n"
+"POT-Creation-Date: 2019-10-15 11:55+0000\n"
 "PO-Revision-Date: 2016-11-12 07:50+0000\n"
 "Last-Translator: Salvatore <salvatore@iovene.com>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -19,11 +19,9 @@ msgstr ""
 "X-Generator: Pootle 2.5.0\n"
 "X-POOTLE-MTIME: 1478937019.768970\n"
 
-#: models.py:15
 msgid "Perform a blind solve"
 msgstr "Fai la riduzione alla cieca"
 
-#: models.py:16
 msgid ""
 "Attempt to solve with no hints. In most cases this will work, but it will "
 "take longer."
@@ -31,59 +29,45 @@ msgstr ""
 "Cerca di ridurre senza suggerimenti. Nella maggior parte dei casi "
 "funzionerà, ma ci vorrà un po' più tempo."
 
-#: models.py:24
 msgid "Width of the field in degrees"
 msgstr "Grandezza del campo in gradi"
 
-#: models.py:25
 msgid "Width of the field in arcminutes"
 msgstr "Grandezza del campo in minuti d'arco"
 
-#: models.py:26
 msgid "Resolution of the field in arcseconds/pixel"
 msgstr "Risoluzione del campo in secondi d'arco per pixel"
 
-#: models.py:28
 msgid "Field size units"
 msgstr "Unità della grandezza del campo"
 
-#: models.py:37
 msgid "Min field size"
 msgstr "Minima dimensione del campo"
 
-#: models.py:38
 msgid "Estimate the lower bound for the width of this field."
 msgstr "Stima il limite inferiore per la grandezza di questo campo."
 
-#: models.py:46
 msgid "Max field size"
 msgstr "Massima dimensione del campo"
 
-#: models.py:47
 msgid "Estimate the upper bound for the width of this field."
 msgstr "Stima il limite superiore per la grandezza di questo campo."
 
-#: models.py:56
 msgid "Center RA"
 msgstr "Centro AR"
 
-#: models.py:57
 msgid "Center RA of the field in degrees, 0.000 to 360.000"
 msgstr "Centro AR del campo in gradi, da 0,000 a 360,000"
 
-#: models.py:66
 msgid "Center dec"
 msgstr "Centro dec"
 
-#: models.py:67
 msgid "Center dec of the field in degrees, -90.000 to +90.000"
 msgstr "Centro dec del campo in gradi, da -90,000 a +90,000"
 
-#: models.py:76
 msgid "Radius"
 msgstr "Raggio"
 
-#: models.py:77
 msgid ""
 "Tells the plate-solving engine to look within these many degrees of the "
 "given center RA and dec position."
@@ -91,28 +75,22 @@ msgstr ""
 "Dice al motore di riduzione astrometrica di guardare entro questi gradi dal "
 "centro AR e dec fornito."
 
-#: templates/astrobin_apps_platesolving/inclusion_tags/platesolving_machinery.html:10
 msgid "Getting plate-solving status, please wait..."
 msgstr "Controllo dello stato della riduzione astrometrica, attendere..."
 
-#: templates/astrobin_apps_platesolving/inclusion_tags/platesolving_machinery.html:29
 msgid "Plate-solving process starting, please do not leave this page..."
 msgstr ""
 "Riduzione astrometrica in fase di iniziazione, non chiudere questa pagina..."
 
-#: templates/astrobin_apps_platesolving/inclusion_tags/platesolving_machinery.html:30
 msgid "Plate-solving started in the background. You may leave this page."
 msgstr "Riduzione astrometrica in corso. Puoi chiudere questa pagina."
 
-#: templates/astrobin_apps_platesolving/inclusion_tags/platesolving_machinery.html:31
 msgid "Plate-solving almost ready, please do not leave this page..."
 msgstr "Riduzione astrmetrica quasi pronta, non chiudere questa pagina..."
 
-#: templates/astrobin_apps_platesolving/inclusion_tags/platesolving_machinery.html:32
 msgid "This image could not be plate-solved."
 msgstr "Non è stato possibile ridurre l'immagine astrometricamente."
 
-#: templates/astrobin_apps_platesolving/inclusion_tags/platesolving_machinery.html:33
 msgid ""
 "This image has been successfully plate-solved. Please refresh the page to "
 "see the new data."

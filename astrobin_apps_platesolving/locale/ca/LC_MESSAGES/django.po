@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2016-11-12 07:03+0000\n"
+"POT-Creation-Date: 2019-10-15 11:55+0000\n"
 "PO-Revision-Date: 2013-11-01 23:40+0100\n"
 "Last-Translator: Bufot <bufote@hotmail.com>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -18,99 +18,77 @@ msgstr ""
 "Plural-Forms: nplurals=2; plural=(n != 1);\n"
 "X-Generator: Pootle 2.1.6\n"
 
-#: models.py:15
 msgid "Perform a blind solve"
 msgstr ""
 
-#: models.py:16
 msgid ""
 "Attempt to solve with no hints. In most cases this will work, but it will "
 "take longer."
 msgstr ""
 
-#: models.py:24
 msgid "Width of the field in degrees"
 msgstr ""
 
-#: models.py:25
 msgid "Width of the field in arcminutes"
 msgstr ""
 
-#: models.py:26
 msgid "Resolution of the field in arcseconds/pixel"
 msgstr ""
 
-#: models.py:28
 msgid "Field size units"
 msgstr ""
 
-#: models.py:37
 msgid "Min field size"
 msgstr ""
 
-#: models.py:38
 msgid "Estimate the lower bound for the width of this field."
 msgstr ""
 
-#: models.py:46
 msgid "Max field size"
 msgstr ""
 
-#: models.py:47
 msgid "Estimate the upper bound for the width of this field."
 msgstr ""
 
-#: models.py:56
 msgid "Center RA"
 msgstr ""
 
-#: models.py:57
 msgid "Center RA of the field in degrees, 0.000 to 360.000"
 msgstr ""
 
-#: models.py:66
 msgid "Center dec"
 msgstr ""
 
-#: models.py:67
 msgid "Center dec of the field in degrees, -90.000 to +90.000"
 msgstr ""
 
-#: models.py:76
 msgid "Radius"
 msgstr ""
 
-#: models.py:77
 msgid ""
 "Tells the plate-solving engine to look within these many degrees of the "
 "given center RA and dec position."
 msgstr ""
 
-#: templates/astrobin_apps_platesolving/inclusion_tags/platesolving_machinery.html:10
 msgid "Getting plate-solving status, please wait..."
 msgstr "Obtenint l'estat de la resolució del camp, si us plau esperi..."
 
-#: templates/astrobin_apps_platesolving/inclusion_tags/platesolving_machinery.html:29
 msgid "Plate-solving process starting, please do not leave this page..."
 msgstr ""
 "Iniciant el procés per resoldre el camp, si us plau no abandoneu la pàgina..."
 
-#: templates/astrobin_apps_platesolving/inclusion_tags/platesolving_machinery.html:30
 msgid "Plate-solving started in the background. You may leave this page."
 msgstr ""
 "La resolució del camp s'ha iniciat en segon pla. Pot abandonar la pàgina."
 
-#: templates/astrobin_apps_platesolving/inclusion_tags/platesolving_machinery.html:31
 msgid "Plate-solving almost ready, please do not leave this page..."
 msgstr ""
 "La resolució del camp gairebé està a punt, si us plau no abandoneu la "
 "pàgina..."
 
-#: templates/astrobin_apps_platesolving/inclusion_tags/platesolving_machinery.html:32
 msgid "This image could not be plate-solved."
 msgstr "No es pot resoldre el camp d'aquesta imatge."
 
-#: templates/astrobin_apps_platesolving/inclusion_tags/platesolving_machinery.html:33
 msgid ""
 "This image has been successfully plate-solved. Please refresh the page to "
 "see the new data."

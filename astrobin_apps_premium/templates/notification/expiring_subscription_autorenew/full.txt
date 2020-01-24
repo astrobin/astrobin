@@ -6,10 +6,6 @@
 
 {% blocktrans %}When a Premium or Lite subscription on AstroBin expires, nothing happens to your images or any of your content. You are reverted to AstroBin Free and will not be able to upload new images until you renew, but you may continue to use AstroBin in all other aspects if you do not have any new images to share at the moment.{% endblocktrans %}
 
-{% blocktrans %}When you are ready to renew your subscription, please visit the following page:{% endblocktrans %}
-
-{{url}}
-
 {% blocktrans %}If your subscription was created manually via a bank transfer, please get in touch for a new payment.{% endblocktrans %}
 
 https://www.astrobin.com/contact/

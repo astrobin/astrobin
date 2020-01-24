@@ -1,10 +1,6 @@
 # Django
-from django.contrib.auth.models import User
 from django.test import TestCase, override_settings
 from django.utils import timezone
-
-# Third party
-from django_bouncy.models import Bounce
 
 # AstroBin
 from astrobin.tasks import *

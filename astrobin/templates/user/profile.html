@@ -38,7 +38,7 @@
             {% if subsection == 'nodata' %}
             <div class="well">
                 {% blocktrans %}These images don't have enough data. It's a shame...{% endblocktrans %}
-                {% if request.user = requested_user %}
+                {% if request.user == requested_user %}
                     {% blocktrans %}If you want your images to be categorized in albums, you should really fill in some data. Imaging telescopes, imaging cameras and subjects are the bare minimum. Dates of acquisitions are very important too.{% endblocktrans %}
                 {% endif %}
             </div>

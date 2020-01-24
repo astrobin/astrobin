@@ -9,12 +9,12 @@
 {% block breadcrumbs %}
     {{ block.super }}
     {% breadcrumb 'Image' None %}
-    {% breadcrumb image.title|escape|default:_("(no title)") 'image_detail' image.pk %}
+    {% breadcrumb image.title|escape|default:_("(no title)") 'image_detail' image.get_id %}
     {% breadcrumb 'Plate-solving settings' None %}
 {% endblock %}
 
 {% block content %}
-    <form id="platesolving-settings" class="form-horizontal" action="." method="post">{% csrf_token %}
+    <form id="platesolving-settings" class="form-horizontal" action="" method="post">{% csrf_token %}
         {{form|as_bootstrap}}
 
         <div class="form-actions">

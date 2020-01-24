@@ -1,0 +1,67 @@
+{% load i18n %}
+
+<script type="text/x-template" id="acquisition-type-filter-template">
+    <div class="form-group" :class="{highlighted: highlighted}">
+        <v-multiselect v-model="value" :options="options" track-by="id" label="label"
+                       selectLabel="" deselectLabel="" selectedLabel=""
+                       :searchable="true" placeholder="{% trans "Select" %}">
+        </v-multiselect>
+        <input type="hidden" name="acquisition_type" :value="getValue()">
+    </div>
+</script>
+
+<script>
+    Vue.component("acquisition-type-filter", {
+        template: "#acquisition-type-filter-template",
+        props: [
+            "acquisitionType"
+        ],
+        mixins: [
+            FilterComponentMixin
+        ],
+        data: function () {
+            return {
+                value: [],
+                options: [
+                    {
+                        id: "TRADITIONAL",
+                        label: "{% trans "Traditional" %}"
+                    },
+                    {
+                        id: "EAA",
+                        label: "{% trans "Electronically-Assisted Astronomy (EAA)" %}"
+                    },
+                    {
+                        id: "LUCKY",
+                        label: "{% trans "Lucky imaging" %}"
+                    },
+                    {
+                        id: "Drawing",
+                        label: "{% trans "Drawing/Sketch" %}"
+                    },
+                    {
+                        id: "OTHER",
+                        label: "{% trans "Other/Unknown" %}"
+                    }
+                ]
+            }
+        },
+        created: function () {
+            for (var i = 0; i < this.options.length; i++) {
+                if (this.options[i].id === this.acquisitionType) {
+                    this.value = this.options[i];
+                    return;
+                }
+            }
+        },
+        methods: {
+            getValue: function () {
+                if (this.value) {
+                    return this.value.id;
+                }
+
+                return null;
+            }
+        }
+    });
+</script>

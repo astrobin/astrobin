@@ -1,12 +1,474 @@
-2018-04-2 Salvatore Iovene <salvatore@iovene.com>
+2020-01-23 Salvatore Iovene <salvatore@iovene.com>
+ * v1.53.2
+ * (images) Restore visibility of description field on edit revision form
+ * (images) Fix broken breadcrumb on edit revision page
+
+2020-01-22 Salvatore Iovene <salvatore@iovene.com>
+ * v1.53.1
+ * (search) Hide comments belonging to deleted images
+
+2020-01-12 Salvatore Iovene <salvatore@iovene.com>
+ * v1.53.0
+ * (search) Add Drawing/Sketch to acquisition type search filter
+ * (images) Add PixelSkies to list of remote sources
+ * (gear) Migrate gear types to strings and add Rowe-Ackermann telescope
+ * (images) Add info about seeing and transparency scales (larger=better)
+
+2020-01-08 Salvatore Iovene <salvatore@iovene.com>
+ * v1.52.0
+ * (images) Add modal dialog about processing thumbnails
+
+ 2020-01-08 Salvatore Iovene <salvatore@iovene.com>
+ * v1.51.0
+ * (infra) Use Cloudflare API to purge cache upon thumbnail regeneration
+
+2020-01-07 Salvatore Iovene <salvatore@iovene.com>
+ * v1.50.1
+ * (images) Monkey patch getting image crop thumbnails to work with S3
+ * (images) Fix getting cropping thumbnail attribute for fresh uploads
+
+2020-01-06 Salvatore Iovene <salvatore@iovene.com>
+ * v1.50.0
+ * (images) Add feature to select custom gallery thumbnail
+ * (infra) Expose postgres port in docker (#761)
+ * (premium) Fix typo
+
+2020-01-04 Salvatore Iovene <salvatore@iovene.com>
+ * v1.49.1
+ * (subscriptions) Send notification 1 day after expiration
+ * (general) Fix usage of context in object_list, so that it retains the request object
+ * (deps) Upgrade cookie-law to 2.0.2
+
+2020-01-04 Salvatore Iovene <salvatore@iovene.com>
+ * v1.49.0
+ * (infra) Upgrade Django to 1.11.27
+
+2020-01-02 Salvatore Iovene <salvatore@iovene.com>
+ * v1.48.5
+ * (images) Fix RA hover label
+
+2020-01-02 Salvatore Iovene <salvatore@iovene.com>
+ * v1.48.4
+ * (images) Fix degree to Right Ascension conversion
+
+2020-01-01 Salvatore Iovene <salvatore@iovene.com>
+ * v1.48.3
+ * (images) Use hours/minutes/seconds and degrees/minutes/seconds for RA and dec
+
+2019-12-30 Salvatore Iovene <salvatore@iovene.com>
+ * v1.48.2
+ * (images) Fix ordered collection navigation context
+ * (collections) Handle empty queryset with no tags
+
+2019-12-28 Salvatore Iovene <salvatore@iovene.com>
+ * v1.48.1
+ * (profile) Fix missing imports
+
+2019-12-25 Salvatore Iovene <salvatore@iovene.com>
+ * v1.48.0
+ * (images) Add feature to upload public image without notifying subscribers
+
+2019-12-24 Salvatore Iovene <salvatore@iovene.com>
+ * v1.47.0
+ * (tech) Refactor forms to own package
+ * (infra) Remove unused and broken dependency django-threaded-multihost
+ * (images) Add support for key/value tags to sort collections
+
+2019-11-18 Salvatore Iovene <salvatore@iovene.com>
+ * v1.46.0
+ * (images) Extend gain field digits to 5 + 2 decimals
+ * (users) Allow avatars up to 15 MB and disable avatar caching
+
+2019-10-16 Salvatore Iovene <salvatore@iovene.com>
+ * v1.45.2
+ * (images) Fix mouse hover link to full
+
+2019-10-15 Salvatore Iovene <salvatore@iovene.com>
+ * v1.45.1
+ * (i18n) Update languages
+ * (docs) Fix style of API docs page
+ * (images) Fix "back" link from editing image reevision
+
+2019-10-14 Salvatore Iovene <salvatore@iovene.com>
+ * v1.45.0
+ * (images) Add support for custom mouse-hover behavior
+ * (api) Add UserProfile API
+ * (docs) Improve API documentation page
+
+2019-09-26 Salvatore Iovene <salvatore@iovene.com>
+ * v1.44.8
+ * (infra) Add custom 502 page to nginx configuration
+ * (infra) Add some memory optimization options for gunicorn and celery
+ * (images) Deal with missing hash when loading thumbnails
+
+2019-09-17 Salvatore Iovene <salvatore@iovene.com>
+ * v1.44.7
+ * (images) Lower image verification limit to 10MB and apply to revisions too
+ * (images) Avoid 302 redirect by appending slash to upload/process/ url
+
+2019-09-16 Salvatore Iovene <salvatore@iovene.com>
+ * v1.44.6
+ * (infra) Increase gunicorn timeout to 300s
+ * (infra) Start using gevent for gunicorn threads
+ * (infra) Let astrobin app container share the tmp directoroy
+
+2019-09-16 Salvatore Iovene <salvatore@iovene.com>
+ * v1.44.5
+ * (images) Skip image verification for uploads larger than 20 MB
+
+2019-09-08 Salvatore Iovene <salvatore@iovene.com>
+ * v1.44.4
+ * (api) Fix Solution API to be able to filter by image hash too
+
+2019-09-02 Salvatore Iovene <salvatore@iovene.com>
+ * v1.44.3
+ * (emails) Fix attempting to send emails to objects instead of emails
+
+2019-09-01 Salvatore Iovene <salvatore@iovene.com>
+ * v1.44.2
+ * (image) Fix button to copy gear from another image
+
+2019-08-30 Salvatore Iovene <salvatore@iovene.com>
+ * v1.44.1
+ * (tasks) Fix model usage
+
+2019-08-30 Salvatore Iovene <salvatore@iovene.com>
+ * v1.44.0
+ * (email) Use celery task to send broadcast emails
+ * (email) Support sending broadcast emails as multipart text/html
+ * (admin) Only send premium offers to people without Premium and that accepted marketing emails
+ * (admin) Support sending reminder emails to users with at least an image but no uplads in > 2 months
+
+2019-08-29 Salvatore Iovene <salvatore@iovene.com>
+ * v1.43.2
+ * (admin) Fix query to determine users to send Premium offers to
+
+2019-08-29 Salvatore Iovene <salvatore@iovene.com>
+ * v1.43.1
+ * (admin) Add missing action to send Premium discount offer emails
+
+2019-08-29 Salvatore Iovene <salvatore@iovene.com>
+ * v1.43.0
+ * (premium) Add support for discounts on Premium
+
+2019-08-29 Salvatore Iovene <salvatore@iovene.com>
+ * v1.42.6
+ * (api) Fix URI resources of images in collections
+
+ 2019-08-29 Salvatore Iovene <salvatore@iovene.com>
+ * v1.42.5
+ * (api) Fix URI resources of IOTD/TP
+
+2019-08-29 Salvatore Iovene <salvatore@iovene.com>
+ * v1.42.4
+ * (api) Fix image id in returned urls, and getting image by hash/id
+
+2019-08-27 Salvatore Iovene <salvatore@iovene.com>
+ * v1.42.3
+ * (moderation) Fix zoom thumb of images in moderation/spam queues
+
+2019-08-27 Salvatore Iovene <salvatore@iovene.com>
+ * v1.42.2
+ * (image) Fix revision upload
+ * (image) Fix link to advanced acquisition details form
+
+2019-08-26 Salvatore Iovene <salvatore@iovene.com>
+ * v1.42.1
+ * (image) Address image by 6 character alphanumerical random id instead of sequential number
+
+2019-08-26 Salvatore Iovene <salvatore@iovene.com>
+ * v1.42.0
+ * (image) Add transitional hash field (preparatory migration work)
+
+2019-08-26 Salvatore Iovene <salvatore@iovene.com>
+ * v1.41.2
+ * (docs) Fix FAQ links
+ * (images) Prevent deleted images from getting undeleted
+ * (iotd) Prevent deleted images to still appear on IOTD archive
+
+2019-07-14 Salvatore Iovene <salvatore@iovene.com>
+ * v1.41.0
+ * (geoip) Use country_code instead of country, as expected by frontend
+ * (ci) Fix geoip test
+ * (images) Make warning about missing gear on edit page more obvious
+ * (images) Allow revision upload without notification
+ * (email) Do not deliver email to addresses with a complaint
+ * (docs) Fix mistake in README
+ * (iotd) Remove unused variable and format file
+ * (thumbs) Add url parameters to force synchronous retrieval
+ * (general) Add alert message to resolve email complaint issues
+ * (notifications) Do not send emails to users marked as deleted
+ * (ads) Add /ads.txt for adsense
+ * (nginx) Fix location of robots.txt
+
+2019-05-25 Salvatore Iovene <salvatore@iovene.com>
+ * v1.40.0
+ * (general) Add geoip support to detect user country
+ * (general) Fix issues with relative links behaving incorrectly
+ * (image) Add support for EAA/Lucky imaging/Drawings as "Acquisition type"
+ * (forum) Add support for content moderators to mark multiple forum topics as spam
+
+2019-04-29 Salvatore Iovene <salvatore@iovene.com>
+ * v1.39.3
+ * (ads) Fix ad delivery
+ * (forms) Replace action="." with action="" to avoid redirect issues
+ * (gallery, image edit) Fix unwanted page redirects
+
+2019-03-07 Salvatore Iovene <salvatore@iovene.com>
+ * v1.39.2
+ * (landing) Fix typos
+ * (landing) Fix mobile issues
+
+2019-03-06 Salvatore Iovene <salvatore@iovene.com>
+ * v1.39.1
+ * (landing) Fix broken link
+ * (landing) Fix styling issue caused by uglification
+
+2019-03-05 Salvatore Iovene <salvatore@iovene.com>
+ * v1.39.0
+ * (deps) Update numpy to 1.16.2
+ * (ci) Simplify Travis configuration
+ * (images) Add Lijiang Gemini Observatory to the list of remote sources
+ * (subscriptions) Fix leap year bug aftecting Free and Lite subscriptions
+ * (landing) Introduce new landing page for anonymous users
+
+2019-02-10 Salvatore Iovene <salvatore@iovene.com>
+ * v1.38.2
+ * (infra) Upgrade to node 10
+ * (i18n) Update translations
+
+2019-01-21 Salvatore Iovene <salvatore@iovene.com>
+ * v1.38.1
+ * (infra) Make contain_image_cache task stick to hardcoded 7-day retention policy
+
+2019-01-07 Salvatore Iovene <salvatore@iovene.com>
+ * v1.38.0
+ * (search) Add MaRIO and Stellar Skies to list of remote observatories
+
+2018-12-20 Salvatore Iovene <salvatore@iovene.com>
+ * v1.37.0
+ * (search) Add Slooh and AstroHostel to list of remote observatories
+ * (api) Add Top Picks to v1 API
+
+2018-12-05 Salvatore Iovene <salvatore@iovene.com>
+ * v1.36.1
+ * (search) Add filter for IOTD and Top Picks
+ * (infra) Rename Pootle in/out.sh files to download/upload for clarity
+ * (i18n) Disable no-wrap options of makemessages as it conflicts with Pootle
+ * (i18n) Fix missing localizaion of notification settings
+ * (quality) Fix typo in Changelog
+
+2018-12-05 Salvatore Iovene <salvatore@iovene.com>
+ * v1.35.0
+ * (i18n) Update messages
+ * (comments) Improve UI of highlighted comment
+ * (comments) Do not nest comments on small screens
+ * (comments) Let superuser reply to own comments for debugging purposes
+ * (search) Rename "Search type" filter to "Search by" for clarity
+ * (images) Add "Non-commercial independent facility" to remote sources
+ * (notifications) Add new lines to data/remote source emails
+ * (i18n) Fix issue in string
+ * (inbox) Apply minor UI improvements
+ * (images) Add Sky Ranch Observatory to the list of remote sources
+ * (search) Add the remote source display to the image index
+ * (search) Allow the remote_source field of the Image index to be null
+ * (images) Add ChileScope to the list of remote data sources
+ * (images) Fix displaying of data source on technical card
+
+2018-12-02 Salvatore Iovene <salvatore@iovene.com>
+ * v1.34.0
+ * (notifications) Add notifications for users with images lacking a "Remote source"
+ * (notifications) Add notifications for users with images lacking a "Data source"
+ * (docker) Make debugging emails easier via dummy SMTP container
+ * (images) Add "Remote source" field to specify remote hosting facility
+ * (search) Fix image badges being on top of search filter dropdowns
+
+2018-12-02 Salvatore Iovene <salvatore@iovene.com>
+ * v1.33.1
+ * (images) Fix histogram on PNG images with alpha channel
+ * (images) Make debugging thumbnailing easier
+ * (images) Minor code quality fixes to histogram thumbnail processor
+ * (notifications) Fix localization of notification settings
+ * (cookies) Move cookielaw js out of pipeline and remove cookie banner from maintenance pag
+
+2018-12-02 Salvatore Iovene <salvatore@iovene.com>
+ * v1.33.0
+ * (i18n) Update Italian and Romanian translations
+ * (i18n) Updarte link to translation server
+ * (i18n) Update script to push/pull translations from translation server
+ * (i18n) Update language files
+ * (infra) Add cookie consent banner
+ * (admin) Fix broken IOTD admin view
+ * (homepage) Fix overflow of the #why-astrobin carousel on the anonymous user homepage
+ * (forums) Fix forum "last post" time
+ * (infra) Fix nginx HTTPS redirects
+ * (ci) Do collectstatic before testing on travis-ci test container
+ * (ci) Use docker-compose run to run tests on travis-ci
+
+2018-11-25 Salvatore Iovene <salvatore@iovene.com>
+ * v1.32.5
+ * (style) Hide content overflowing out of main container
+
+2018-11-25 Salvatore Iovene <salvatore@iovene.com>
+ * v1.32.4
+ * (search) Set image domain as default for menu entry
+
+2018-11-25 Salvatore Iovene <salvatore@iovene.com>
+ * v1.32.3
+ * (search) Fix z-index issues
+ * (search) Exclude missing images from search results
+ * (search) Add management command to update index
+
+2018-11-25 Salvatore Iovene <salvatore@iovene.com>
+ * v1.32.2
+ * (astrometry) Revert: Fix plate-solving on local development mode
+
+2018-11-25 Salvatore Iovene <salvatore@iovene.com>
+ * v1.32.1
+ * (search) Add uploaded sorting to Wall/Search link in menu
+
+2018-11-24 Salvatore Iovene <salvatore@iovene.com>
+ * v1.32.0
+ * (search) Change filter animation from shake to pop-in
+ * (search) Finalize Big Wall / Search merger by showing all images by default
+ * (travis) Login with docker early on and use "run" to run tests in compose mode
+ * (i18n) Add support for en-GB locale
+ * (search) Fix accidental limitation in search indexes
+ * (infra) Fix fresh installation start-up issues
+
+2018-11-23 Salvatore Iovene <salvatore@iovene.com>
+ * v1.31.1
+ * (infra) Fix STATIC_ROOT setting to be compatible with django-storages 1.7
+
+2018-11-23 Salvatore Iovene <salvatore@iovene.com>
+ * v1.31.0
+ * (search) Rehaul search module
+ * (infra) Fix plate-solving on local development mode
+ * (infra) Remove references to wdb for debugging
+ * (infra) Remove obsolete field Image.objects_in_field
+ * (infra) Autoformat scss file
+ * (docker) Export ports, share code with compose
+ * (profile) Add short cut to editing own avatar
+ * (profile) Fix broken HTML tag
+ * (docker) Do db migrate AstroBin image on start-up
+ * (docker) Perform message compilation at build time
+ * (docker) Always clean after apt-get install to save on image size
+ * (docker) Slim down images by not installing recommended packages
+ * (docker) Lock nginx version to 1.15
+ * (docker) Add file logging to celery beat
+ * (docker) Make the stack prefix "docker" to be compatible with compose
+ * (infra) Add missing semi-colons to nginx configuration file
+
+2018-11-10 Salvatore Iovene <salvatore@iovene.com>
+ * v1.30.0
+ * (admin) Allow superuser to change any image's watermark
+ * (admin) Allow superuser to do Flickr import without Premium account, for debugging purposes
+ * (admin) Allow superuser to promote/demote any image
+ * (admin) Fix broken IOTD models on admin interface
+ * (ci) Add unit tests to Top Picks page
+ * (docker) Add support for swarm mode
+ * (docker) Persist search data in a volume
+ * (forums) Fix broken word breaks on Firefox/IE
+ * (images) Allow filtering by data source on Wall and Top Picks pages
+ * (images) Fix caching of image captions not being segregated by language
+ * (images) Fix issue when redirecting to invalid URL
+ * (images) Fix spacing after technical card labels
+ * (images) Restrict extensions to jpg/jpeg/png/gif in upload form
+ * (index) Fix index 1y index calculation
+ * (infra) Enable log rotation
+ * (iotd) Sort top picks by published date
+ * (quality) Perform small clean up of main models file
+ * (thumbnails) Add "force" option to thumbnail retrieval, for debugging purposes
+ * (users) Fix broken user info popup
+
+2018-10-20 Salvatore Iovene <salvatore@iovene.com>
+ * v1.29.0
+ * (ci) Stop Travis's native postgres so port mapping works
+ * (dependencies) Update cryptography from 2.1.4 to 2.3.1
+ * (dependencies) Update markdown2 from 2.3.4 to 2.3.6
+ * (dependencies) Update pyyaml from 3.12 to 3.13
+ * (dependencies) Update requests from 2.17.3 to 2.19.1
+ * (deps) Update django-avatar to 4.1.0
+ * (docker) Add some production-friendly defaults that also work for local dev
+ * (docker) Always restart celery workers
+ * (docker) Do not use beat pid file
+ * (docker) Expose elasticsearch port
+ * (docker) Expose postgres port
+ * (docker) Expose rabbitmq port
+ * (docker) Make postgres host configurable
+ * (docker) Publish port 443 for nginx container
+ * (docker) Use shared volume for letsencrypt
+ * (docs) Add info about new db index on astrobin_image
+ * (forum) Improve topic list
+ * (general) Use hasattr to see if request haas LANGUAGE_CODE
+ * (homepage) Reduce stream actions to 20 per page, for performance
+ * (images) Add blank space after 'Contains'
+ * (images) Transliterate image field when making cache key
+ * (infra) Add django-debug-toolbar with template debug panel
+ * (infra) Fix locale issues by setting locale to utf-8
+ * (infra) Make celery broker URL configurable
+ * (infra) Make Elasticsearch URL configurable
+ * (infra) Remove invalid reference to bootstrap.js from full.html
+ * (infra) Rename JS bundle to avoid conflict
+ * (infra) Simplify contain_imagecache_size task/script
+ * (iotd) Reduce submission window to 2 days
+ * (notifications) Fix url to logo
+ * (performance) Cache astrobin usernames
+ * (performance) Cache notifications table
+ * (registration) Use https in activation email
+ * (search) Fix pagination when provided page is "last"
+ * (search) USe batch-size and concurrency in update_index script
+ * (users) Fix broken user popover
+
+2018-07-07 Salvatore Iovene <salvatore@iovene.com>
+ * v1.28.2
+ * (infra) Use bootstrap from CDN and fix modal problems
+
+2018-07-07 Salvatore Iovene <salvatore@iovene.com>
+ * v1.28.1
+ * (images) Make the data_source field default to none, so users notice it
+ * (images) Fix horizontal scrolling on full sizei mages for IE
+
+2018-05-10 Salvatore Iovene <salvatore@iovene.com>
+ * v1.28.0
+ * (images) Add data_source field (see #570)
+ * (infra) Make celery accept json serialized content
+
+2018-05-07 Salvatore Iovene <salvatore@iovene.com>
+ * v1.27.4
+ * (workers) Fix thumbnail queue by fixing task name typo
+
+2018-05-07 Salvatore Iovene <salvatore@iovene.com>
+ * v1.27.3
+ * (subscriptions) Fix documentation about available uploads on free/lite accounts
+ * (images) Disable "Top 100" badges until a more performing solution is implemented
+ * (infra) Add dedicated thumbnails and emails queues to celery
+
+2018-05-07 Salvatore Iovene <salvatore@iovene.com>
+ * v1.27.2
+ * (images) Improve async generation of thumbnails
+
+2018-04-07 Salvatore Iovene <salvatore@iovene.com>
+ * v1.27.01
+ * (images) Fix overflow of 'real' sized images
+
+2018-04-05 Salvatore Iovene <salvatore@iovene.com>
+ * v1.27.0
+ * (comments) Fix autofocus of input area
+ * (images) Move away from 'capty' and use pure CSS and figure/figcaption
+ * (infra) Move search engine update tasks to own queue
+ * (infra) Move thumbnail generation to async task queue
+ * (infra) Serve media files in DEBUG mode
+
+2018-04-02 Salvatore Iovene <salvatore@iovene.com>
  * v1.26.7
  * (searech) Fix missing pagination
 
-2018-04-1 Salvatore Iovene <salvatore@iovene.com>
+2018-04-01 Salvatore Iovene <salvatore@iovene.com>
  * v1.26.6
  * (images) Fix crash on old images with unicode characters in watermark
 
-2018-04-1 Salvatore Iovene <salvatore@iovene.com>
+2018-04-01 Salvatore Iovene <salvatore@iovene.com>
  * v1.26.5
  * Fix task that contains the size of the image cache directory
 

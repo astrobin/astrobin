@@ -18,14 +18,21 @@
         </a>
         <ul class="dropdown-menu">
             <li>
-                <a href="{% url 'image_edit_watermark' image.id %}">
+                <a href="{% url 'image_edit_thumbnails' image.get_id %}">
+                    <i class="icon-check-empty"></i>
+                    {% trans "Thumbnails" %}
+                </a>
+            </li>
+
+            <li>
+                <a href="{% url 'image_edit_watermark' image.get_id %}">
                     <i class="icon-tint"></i>
                     {% trans "Watermark" %}
                 </a>
             </li>
 
             <li>
-                <a href="{% url 'image_edit_basic' image.id %}">
+                <a href="{% url 'image_edit_basic' image.get_id %}">
                     <i class="icon-info"></i>
                     {% trans "Basic information" %}
                 </a>
@@ -33,14 +40,14 @@
 
             {% if image.subject_type < 500 %}
                 <li>
-                    <a href="{% url 'image_edit_gear' image.id %}">
+                    <a href="{% url 'image_edit_gear' image.get_id %}">
                         <i class="icon-cog"></i>
                         {% trans "Gear" %}
                     </a>
                 </li>
 
                 <li>
-                    <a href="{% url 'image_edit_acquisition' image.id %}">
+                    <a href="{% url 'image_edit_acquisition' image.get_id %}">
                         <i class="icon-time"></i>
                         {% trans "Acquisition details" %}
                     </a>
@@ -50,9 +57,9 @@
             {% if image.is_platesolvable %}
             <li>
                 {% if is_revision %}
-                    <a href="{% url 'image_edit_platesolving_settings' image.pk revision_image.label %}">
+                    <a href="{% url 'image_edit_platesolving_settings' image.get_id revision_image.label %}">
                 {% else %}
-                    <a href="{% url 'image_edit_platesolving_settings' image.pk %}">
+                    <a href="{% url 'image_edit_platesolving_settings' image.get_id %}">
                 {% endif %}
                     <i class="icon-location-arrow"></i>
                     {% trans "Plate-solving settings" %}
@@ -61,7 +68,7 @@
             {% endif %}
 
             <li>
-                <a href="{% url 'image_edit_license' image.id %}">
+                <a href="{% url 'image_edit_license' image.get_id %}">
                     <i class="icon-legal"></i>
                     {% trans "License" %}
                 </a>

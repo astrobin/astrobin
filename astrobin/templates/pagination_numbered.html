@@ -10,7 +10,7 @@
                         <li>
                             <a class="arrow"
                                title="{% trans "Previous page" %}"
-                               href="{% query_string 'page=page_obj.previous_page_number' ''%}">
+                               href="{{ request.path }}{% query_string 'page=page_obj.previous_page_number' ''%}">
                                 &lt;
                             </a>
                         </li>
@@ -30,7 +30,7 @@
                         </li>
                     {% else %}
                         <li>
-                            <a href="{% query_string 'page=pagenum' '' %}">{{ pagenum }}</a>
+                            <a href="{{ request.path }}{% query_string 'page=pagenum' '' %}">{{ pagenum }}</a>
                         </li>
                     {% endif %}
                 {% else %}
@@ -48,7 +48,7 @@
                         <li>
                             <a class="arrow"
                                title="{% trans "Next page" %}"
-                               href="{% query_string 'page=page_obj.next_page_number' '' %}">
+                               href="{{ request.path }}{% query_string 'page=page_obj.next_page_number' '' %}">
                                 &gt;
                             </a>
                         </li>

@@ -1,3 +1,19 @@
+ASTROBIN_APPS = [
+    'common',
+    'nested_comments',
+    'rawdata',
+    'astrobin_apps_images',
+    'astrobin_apps_platesolving',
+    'astrobin_apps_users',
+    'astrobin_apps_donations',
+    'astrobin_apps_premium',
+    'astrobin_apps_notifications',
+    'astrobin_apps_groups',
+    'astrobin_apps_iotd',
+    'astrobin_apps_landing',
+    'toggleproperties'
+]
+
 INSTALLED_APPS = [
     # Django apps
     'django.contrib.admin',
@@ -37,9 +53,9 @@ INSTALLED_APPS = [
     'rest_framework.authtoken',
     'easy_thumbnails',
     'el_pagination',
-    'dfp', # For Google DFP
+    'dfp',  # For Google DFP
     'django_user_agents',
-    'pybb', # Forum
+    'pybb',  # Forum
     'markup_deprecated',
     'sanitizer',
     'precise_bbcode',
@@ -50,20 +66,15 @@ INSTALLED_APPS = [
     'django_bouncy',
     'safedelete',
     'change_email',
+    'template_timings_panel',
+    'cookielaw',
+    'corsheaders',
+    'image_cropping',
 
-    # AstroBin apps
     'astrobin.apps.AstroBinAppConfig',
-    'common',
-    'nested_comments',
-    'rawdata',
-    'astrobin_apps_images',
-    'astrobin_apps_platesolving',
-    'astrobin_apps_users',
-    'astrobin_apps_donations',
-    'astrobin_apps_premium',
-    'astrobin_apps_notifications',
-    'astrobin_apps_groups',
-    'astrobin_apps_iotd',
-    'toggleproperties',
-]
+] + ASTROBIN_APPS
 
+if DEBUG:
+     INSTALLED_APPS += [
+          'debug_toolbar',
+     ]

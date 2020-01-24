@@ -5,21 +5,23 @@ from astrobin_apps_iotd.models import *
 
 
 class IotdSubmissionAdmin(admin.ModelAdmin):
-    fields = ('submitter', 'image', 'date')
-    list_display = ('submitter', 'image', 'date')
-    list_filter = ('date', 'submitter')
+    fields = ('submitter', 'image')
+    readonly_fields = ('date',)
+    list_display = ('submitter', 'image')
+    list_filter = ('submitter',)
 admin.site.register(IotdSubmission, IotdSubmissionAdmin)
 
 
 class IotdVoteAdmin(admin.ModelAdmin):
-    fields = ('reviewer', 'image', 'date')
-    list_display = ('reviewer', 'image', 'date')
-    list_filter = ('date', 'reviewer',)
+    fields = ('reviewer', 'image')
+    readonly_fields = ('date',)
+    list_display = ('reviewer', 'image')
+    list_filter = ('reviewer',)
 admin.site.register(IotdVote, IotdVoteAdmin)
 
 
 class IotdAdmin(admin.ModelAdmin):
-    fields = ('date',)
-    list_display = ('pk', 'judge', 'image', 'date', 'created')
+    fields = ('judge', 'image', 'date')
+    list_display = ('pk', 'judge', 'image', 'created')
     list_filter = ('judge',)
 admin.site.register(Iotd, IotdAdmin)

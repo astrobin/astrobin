@@ -7,8 +7,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2016-11-12 07:03+0000\n"
-"PO-Revision-Date: 2014-01-29 10:59+0000\n"
+"POT-Creation-Date: 2019-10-15 11:54+0000\n"
+"PO-Revision-Date: 2019-01-26 16:11+0000\n"
 "Last-Translator: sypai <sypai@mail.ru>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
 "Language: ru\n"
@@ -17,32 +17,41 @@ msgstr ""
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=3; plural=(n%10==1 && n%100!=11 ? 0 : n%10>=2 && n"
 "%10<=4 && (n%100<10 || n%100>=20) ? 1 : 2);\n"
-"X-Generator: Pootle 2.5.0\n"
-"X-POOTLE-MTIME: 1390993190.792513\n"
+"X-Generator: Pootle 2.8\n"
+"X-POOTLE-MTIME: 1548519102.000000\n"
 
-#: templates/astrobin_apps_users/inclusion_tags/astrobin_user.html:42
-#: templates/astrobin_apps_users/inclusion_tags/user_list.html:18
 msgid "Images"
 msgstr "Изображения"
 
-#: templates/astrobin_apps_users/inclusion_tags/astrobin_user.html:43
-#: templates/astrobin_apps_users/inclusion_tags/user_list.html:19
 msgid "Followers"
 msgstr "Подписчики"
 
-#: templates/astrobin_apps_users/inclusion_tags/astrobin_user.html:44
-#: templates/astrobin_apps_users/inclusion_tags/user_list.html:20
 msgid "Following"
 msgstr "Подписан"
 
-#: templates/astrobin_apps_users/inclusion_tags/user_list.html:16
 msgid "User"
 msgstr "Пользователь"
 
-#: templates/astrobin_apps_users/inclusion_tags/user_list_entries.html:20
-#: templates/astrobin_apps_users/inclusion_tags/user_list_entries.html:24
 msgid "No users."
 msgstr "Нет пользователей."
+
+msgid "Administrator"
+msgstr "Администратор"
+
+msgid "Image moderator"
+msgstr "Модератор изобр."
+
+msgid "IOTD Submitter"
+msgstr "ИД Номинирующий"
+
+msgid "IOTD Reviewer"
+msgstr "ИД Рецензент"
+
+msgid "IOTD Judge"
+msgstr "ИД Судья"
+
+msgid "Premium member"
+msgstr "Премиум участник"
 
 #~ msgid "%(images_number)s image"
 #~ msgid_plural "%(images_number)s images"

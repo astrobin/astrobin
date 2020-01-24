@@ -60,7 +60,8 @@
                 </td>
                 <td class="message-last-message hidden-phone">
                     <abbr class="timeago"
-                          title="{{message.thread.latest_msg.sent_at|date:'Y-m-d\TH:i:s'}}">
+                          title="{{message.thread.latest_msg.sent_at|to_user_timezone:request.user|date:'Y-m-d\TH:i:s'}}">
+                    </abbr>
                 </td>
             </tr>
         {% empty %}

@@ -11,48 +11,55 @@
 {% block breadcrumbs %}
     {{ block.super }}
     {% breadcrumb 'Image' None %}
-    {% breadcrumb image.title|escape|default:_("(no title)") 'image_detail' image.pk %}
+    {% breadcrumb image.title|escape|default:_("(no title)") 'image_detail' image.get_id %}
     {% breadcrumb 'Gear used' None %}
 {% endblock %}
 
 {% block content %}
     {% include 'image/edit/menu.html' %}
 
-    <div class="subtitle">
-        <i class="icon icon-info-sign"></i>
-        {% if no_gear %}
+    {% if no_gear %}
+        <div class="alert alert-warning">
             {% url 'profile_edit_gear' as the_url %}
-            {% blocktrans %}Can't see anything here? Perhaps you should first add some gear in your <a href="{{the_url}}">profile</a>!{% endblocktrans %}
-        {% else %}
-            {% blocktrans %}To choose the gear used for this image, drag items from the right side to left side, or click the plus sign.{% endblocktrans %}
-        {% endif %}
-    </div>
-
-    <form class="form-horizontal">
-        <div class="form-actions">
-            <a class="btn btn-primary btn-block-mobile" href="#copy-gear-modal" rel="tooltip" title="{% trans "Use this button to import the gear settings from another image of yours." %}" data-toggle="modal">{% trans "Copy from another image" %}</a>
+            {% blocktrans %}Can't see anything here? Perhaps you should first add some gear in your
+                <a href="{{ the_url }}">profile</a>!{% endblocktrans %}
         </div>
-    </form>
+    {% else %}
+        <div class="subtitle">
+            <i class="icon icon-info-sign"></i>
+            {% blocktrans %}To choose the gear used for this image, drag items from the right side to left side, or
+                click the plus sign.{% endblocktrans %}
+        </div>
 
-    <form class="form-horizontal" id="gear" method="post" action=".">{% csrf_token %}
-        {{form.non_field_errors}}
+        <form class="form-horizontal">
+            <div class="form-actions">
+                <a class="btn btn-primary btn-block-mobile" href="#copy-gear-modal" rel="tooltip"
+                   title="{% trans "Use this button to import the gear settings from another image of yours." %}"
+                   data-toggle="modal">{% trans "Copy from another image" %}</a>
+            </div>
+        </form>
+    {% endif %}
+
+    <form class="form-horizontal" id="gear" method="post" action="">{% csrf_token %}
+        {{ form.non_field_errors }}
         {% for field in form %}
             <div class="control-group">
-                <label class="control-label" for="id_{{field.name}}">{{field.label}}:</label>
-                <div class="loading"><img src="{% static 'astrobin/images/ajax-loader.gif' %}" alt=""/></div>
+                <label class="control-label" for="id_{{ field.name }}">{{ field.label }}:</label>
+                <div class="loading"><img src="{% static 'astrobin/images/ajax-loader.gif' %}" alt="" /></div>
                 <div class="controls">
-                    {{field}}
+                    {{ field }}
                 </div>
-                {{field.errors}}
+                {{ field.errors }}
             </div>
         {% endfor %}
 
-        <input type="hidden" name="image_id" value="{{image.id}}" />
+        <input type="hidden" name="image_id" value="{{ image.get_id }}" />
 
         <div class="form-actions">
             <input class="btn btn-primary btn-block-mobile" type="submit" value="{% trans "Save" %} &rarr;" />
-            <input class="btn btn-primary btn-block-mobile" type="submit" name="submit_acquisition" value="{% trans "Edit acquisition details" %} &rarr;" />
-            <a class="btn btn-block-mobile" href="{{image.get_absolute_url}}">{% trans "Cancel" %}</a>
+            <input class="btn btn-primary btn-block-mobile" type="submit" name="submit_acquisition"
+                   value="{% trans "Edit acquisition details" %} &rarr;" />
+            <a class="btn btn-block-mobile" href="{{ image.get_absolute_url }}">{% trans "Cancel" %}</a>
         </div>
     </form>
 {% endblock %}
@@ -65,10 +72,11 @@
         </div>
         <div class="modal-body">
             <div class="well">
-                {% blocktrans %}Copying the gear from another image will populate the gear selection form for you, but you will still need to save it in the end.{% endblocktrans %}
+                {% blocktrans %}Copying the gear from another image will populate the gear selection form for you, but
+                    you will still need to save it in the end.{% endblocktrans %}
             </div>
             <form class="form-inline copy-gear-form">
-                {{copy_gear_form}}
+                {{ copy_gear_form }}
                 <a class="btn btn-primary" href="#">{% trans "Copy" %}</a>
             </form>
         </div>
@@ -76,54 +84,58 @@
 {% endblock %}
 
 {% block extra_head %}
-<noscript>
-    <style type="text/css">
-        form#gear .loading {
-            display: none;
-        }
-        form#gear select {
-            display: block;
-        }
-    </style>
-</noscript>
+    <noscript>
+        <style type="text/css">
+            form#gear .loading {
+                display: none;
+            }
+
+            form#gear select {
+                display: block;
+            }
+        </style>
+    </noscript>
 {% endblock %}
 
 {% block extra_js %}
-<script type="text/javascript">
-    $(document).ready(function() {
-        $('form .loading').hide();
-        $('form .ui-multiselect').show();
+    <script type="text/javascript">
+        $(document).ready(function () {
+            $('form .loading').hide();
+            $('form .ui-multiselect').show();
 
-        function selectGearItem($select, text) {
-            $select.multiselect('select', text);
-        };
-        $('.copy-gear-form .btn').click(function() {
-            var $modal = $(this).closest('.modal');
+            function selectGearItem($select, text) {
+                $select.multiselect('select', text);
+            }
 
-            $.ajax({
-                url: '/gear/by-image/' + $('.copy-gear-form select#id_image').val() + '/',
-                dataType: 'json',
-                timeout: 5000,
-                cache: false,
-                success: function(data) {
-                    for (var attr in data) {
-                        var $select = $('form#gear select[name=' + attr + ']');
-                        $select.multiselect('selectNone');
+            $('.copy-gear-form .btn').click(function (e) {
+                e.preventDefault();
 
-                        var ids = data[attr];
-                        for (var i = 0; i < ids.length; i++) {
-                            var text = $select.find('option[value=' + ids[i] +']').text();
-                            (function(a, b) {
-                                setTimeout(function() {
-                                    selectGearItem(a, b);
-                                }, 250);
-                            })($select, text);
+                var $modal = $(this).closest('.modal');
+
+                $.ajax({
+                    url: '/gear/by-image/' + $('.copy-gear-form select#id_image').val() + '/',
+                    dataType: 'json',
+                    timeout: 5000,
+                    cache: false,
+                    success: function (data) {
+                        for (var attr in data) {
+                            var $select = $('form#gear select[name=' + attr + ']');
+                            $select.multiselect('selectNone');
+
+                            var ids = data[attr];
+                            for (var i = 0; i < ids.length; i++) {
+                                var text = $select.find('option[value=' + ids[i] + ']').text();
+                                (function (a, b) {
+                                    setTimeout(function () {
+                                        selectGearItem(a, b);
+                                    }, 250);
+                                })($select, text);
+                            }
                         }
+                        $modal.modal('hide');
                     }
-                    $modal.modal('hide');
-                }
+                });
             });
         });
-    });
-</script>
+    </script>
 {% endblock %}

@@ -1,0 +1,29 @@
+{% load i18n %}
+
+<script type="text/x-template" id="animated-filter-template">
+    <div class="form-group" :class="{highlighted: highlighted}">
+        <input type="checkbox" v-model="value" name="animated" /> {% trans "Yes" %}
+    </div>
+</script>
+
+<script>
+    Vue.component("animated-filter", {
+        template: "#animated-filter-template",
+        props: [
+            "animated"
+        ],
+        data: function() {
+            return {
+                value: this.animated
+            }
+        },
+        mixins: [
+            FilterComponentMixin
+        ],
+        created: function() {
+            if (this.animated === undefined) {
+                this.value = true;
+            }
+        }
+    });
+</script>

@@ -1,0 +1,64 @@
+{% load i18n %}
+
+<script type="text/x-template" id="award-filter-template">
+    <div class="form-group" :class="{highlighted: highlighted}">
+        <v-multiselect v-model="value" :options="options" track-by="id" label="label"
+                       selectLabel="" deselectLabel="" selectedLabel="" :multiple="true" :searchable="false"
+                       placeholder="{% trans "Select" %}">
+        </v-multiselect>
+        <input type="hidden" name="award" :value="getFormValue()">
+    </div>
+</script>
+
+<script>
+    Vue.component("award-filter", {
+        template: "#award-filter-template",
+        props: [
+            "award"
+        ],
+        mixins: [
+            FilterComponentMixin
+        ],
+        data: function () {
+            return {
+                value: [],
+                options: [
+                    {
+                        id: "iotd",
+                        label: "{% trans "Image of the Day" %}"
+                    },
+                    {
+                        id: "top-pick",
+                        label: "{% trans "Top Pick" %}"
+                    }
+                ]
+            }
+        },
+        created: function() {
+            if (this.award) {
+                var types = this.award.split(',');
+
+                for (var i = 0; i < this.options.length; i++) {
+                    if (types.indexOf(this.options[i].id) > -1) {
+                        this.value.push(this.options[i]);
+                    }
+                }
+            }
+        },
+        methods: {
+            getFormValue: function () {
+                if (Array.isArray(this.value)) {
+                    return this.value.map(function (v) {
+                        return v.id;
+                    }).join(',');
+                }
+
+                if (this.value) {
+                    return this.value.id;
+                }
+
+                return null;
+            }
+        }
+    });
+</script>

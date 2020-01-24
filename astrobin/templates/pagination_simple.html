@@ -8,7 +8,7 @@
                 {% if page_obj.has_previous %}
                     <a class="arrow"
                        title="{% trans "Previous page" %}"
-                       href="{% query_string 'page=page_obj.previous_page_number' '' %}">
+                       href="{{ request.path }}{% query_string 'page=page_obj.previous_page_number' '' %}">
                         &lt;
                     </a>
                 {% else %}
@@ -19,7 +19,7 @@
                 {% if page_obj.has_next %}
                     <a class="arrow"
                        title="{% trans "Next page" %}"
-                       href="{% query_string 'page=page_obj.next_page_number' '' %}">
+                       href="{{ request.path }}{% query_string 'page=page_obj.next_page_number' '' %}">
                         &gt;
                     </a>
                 {% else %}

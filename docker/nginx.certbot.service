@@ -1,6 +1,0 @@
-[Unit]
-Description=Let's Encrypt renewal
-
-[Service]
-Type=oneshot
-ExecStart=/usr/bin/certbot renew --quiet --agree-tos --deploy-hook "/etc/init.d/nginx restart"

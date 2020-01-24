@@ -1,32 +1,42 @@
+from __future__ import absolute_import
+
+import hmac
+import logging
+import operator
+import os
+# Python
+import random
+import string
+import unicodedata
 import uuid
 from datetime import date
 from datetime import datetime
-import os
-import urllib2
-import simplejson
-import hmac
-import operator
-import logging
 
-log = logging.getLogger('apps')
+from image_cropping import ImageRatioField
+
+from astrobin.services import CloudflareService
 
 try:
     from hashlib import sha1
 except ImportError:
     import sha
+
     sha1 = sha.sha
 
+# Django
+from django.conf import settings
+from django.contrib.auth.models import User
+from django.contrib.contenttypes.models import ContentType
+from django.contrib.staticfiles.templatetags.staticfiles import static
 from django.core.cache import cache
-from django.db import models, IntegrityError
+from django.core.exceptions import ValidationError
+from django.core.validators import MaxLengthValidator
+from django.db import IntegrityError
 from django.db.models import Q
 from django.db.models.signals import post_save
-from django.contrib.auth.models import User
-from django.core.exceptions import ValidationError
-from django import forms
-from django.utils import translation
-from django.utils.translation import ugettext_lazy as _
-from django.conf import settings
+from django.template.defaultfilters import slugify
 from django.utils import timezone
+from django.utils.translation import ugettext_lazy as _
 
 try:
     # Django < 1.10
@@ -35,13 +45,13 @@ except ImportError:
     # Django >= 1.10
     from django.contrib.contenttypes.fields import GenericRelation
 
-from django.contrib.contenttypes.models import ContentType
-from django.core.validators import MaxLengthValidator
-from django.template.defaultfilters import slugify
+# Third party
 
-from nested_comments.models import NestedComment
-
+from celery.result import AsyncResult
 from model_utils.managers import InheritanceManager
+from reviews.models import Review
+from safedelete.models import SafeDeleteModel
+from toggleproperties.models import ToggleProperty
 
 try:
     # Django < 1.10
@@ -50,28 +60,28 @@ except:
     # Django >= 1.10
     from timezones.zones import PRETTY_TIMEZONE_CHOICES
 
-from fields import *
-from utils import user_is_paying
-
-from mptt.models import MPTTModel, TreeForeignKey
-from reviews.models import Review
-from toggleproperties.models import ToggleProperty
-from tinymce import models as tinymce_models
-from safedelete.models import SafeDeleteModel
-
-from astrobin_apps_notifications.utils import push_notification
+# AstroBin apps
 from astrobin_apps_images.managers import ImagesManager, PublicImagesManager, WipImagesManager
+from astrobin_apps_notifications.utils import push_notification
 from astrobin_apps_platesolving.models import Solution
+from nested_comments.models import NestedComment
+
+# This app
+from .fields import *
+from .utils import user_is_paying
+
+log = logging.getLogger('apps')
+
 
 class HasSolutionMixin(object):
-     @property
-     def solution(self):
+    @property
+    def solution(self):
         ctype = ContentType.objects.get_for_model(self.__class__)
 
         try:
-            solution = Solution.objects.get(content_type = ctype, object_id = self.id)
+            solution = Solution.objects.get(content_type=ctype, object_id=self.id)
         except:
-           return None
+            return None
 
         return solution
 
@@ -79,6 +89,17 @@ class HasSolutionMixin(object):
 def image_upload_path(instance, filename):
     ext = filename.split('.')[-1]
     return "images/%d/%d/%s.%s" % (instance.user.id, date.today().year, uuid.uuid4(), ext)
+
+
+def image_hash():
+    def generate_hash():
+        return "".join(random.choice(string.ascii_lowercase + string.digits) for _ in range(6))
+
+    hash = generate_hash()
+    while hash.isdigit() or Image.all_objects.filter(hash=hash).exists():
+        hash = generate_hash()
+
+    return hash
 
 
 LICENSE_CHOICES = (
@@ -92,7 +113,8 @@ LICENSE_CHOICES = (
 )
 
 LANGUAGE_CHOICES = (
-    ('en', _("English")),
+    ('en', _("English (US)")),
+    ('en-GB', _("English (GB)")),
     ('it', _("Italian")),
     ('es', _("Spanish")),
     ('fr', _("French")),
@@ -110,7 +132,8 @@ LANGUAGE_CHOICES = (
 )
 
 LANGUAGES = {
-    'en': _("English"),
+    'en': _("English (US)"),
+    'en-GB': _("English (GB)"),
     'it': _("Italian"),
     'es': _("Spanish"),
     'fr': _("French"),
@@ -145,12 +168,12 @@ SUBJECT_TYPES = {
     'RNe': 'NEBULA',
     'ISM': 'NEBULA',
     'sh ': 'NEBULA',
-    'PN' : 'PLNEBU',
+    'PN': 'PLNEBU',
     'LIN': 'GALAXY',
-    'IG' : 'GALAXY',
+    'IG': 'GALAXY',
     'GiG': 'GALAXY',
     'Sy2': 'GALAXY',
-    'G'  : 'GALAXY',
+    'G': 'GALAXY',
 }
 
 SOLAR_SYSTEM_SUBJECT_CHOICES = (
@@ -187,17 +210,17 @@ WATERMARK_POSITION_CHOICES = (
 
 class GearMakeAutoRename(models.Model):
     rename_from = models.CharField(
-        verbose_name = "Rename form",
-        max_length = 128,
-        primary_key = True,
-        blank = False,
+        verbose_name="Rename form",
+        max_length=128,
+        primary_key=True,
+        blank=False,
     )
 
     rename_to = models.CharField(
-        verbose_name = "Rename to",
-        max_length = 128,
-        blank = False,
-        null = False,
+        verbose_name="Rename to",
+        max_length=128,
+        blank=False,
+        null=False,
     )
 
     def __unicode__(self):
@@ -209,29 +232,30 @@ class GearMakeAutoRename(models.Model):
 
 class Gear(models.Model):
     make = models.CharField(
-        verbose_name = _("Make"),
-        help_text = _("The make, brand, producer or developer of this product."),
-        max_length = 128,
-        null = True,
-        blank = True,
+        verbose_name=_("Make"),
+        help_text=_("The make, brand, producer or developer of this product."),
+        max_length=128,
+        null=True,
+        blank=True,
     )
 
     name = models.CharField(
-        verbose_name = _("Name"),
-        help_text = _("Just the name of this product, without any properties or personal customizations. Try to use the international name, in English language, if applicable. This name is shared among all users on AstroBin."),
-        max_length = 128,
-        null = False,
-        blank = False,
+        verbose_name=_("Name"),
+        help_text=_(
+            "Just the name of this product, without any properties or personal customizations. Try to use the international name, in English language, if applicable. This name is shared among all users on AstroBin."),
+        max_length=128,
+        null=False,
+        blank=False,
     )
 
-    master = models.ForeignKey('self', null = True, editable = False)
+    master = models.ForeignKey('self', null=True, editable=False)
 
     commercial = models.ForeignKey(
         'CommercialGear',
-        null = True,
-        editable = False,
-        on_delete = models.SET_NULL,
-        related_name = 'base_gear',
+        null=True,
+        editable=False,
+        on_delete=models.SET_NULL,
+        related_name='base_gear',
     )
 
     retailed = models.ManyToManyField(
@@ -239,16 +263,16 @@ class Gear(models.Model):
     )
 
     updated = models.DateTimeField(
-        editable = False,
-        auto_now = True,
-        null = True,
-        blank = True,
+        editable=False,
+        auto_now=True,
+        null=True,
+        blank=True,
     )
 
-    moderator_fixed =  models.DateTimeField(
-        editable = False,
-        null = True,
-        blank = True,
+    moderator_fixed = models.DateTimeField(
+        editable=False,
+        null=True,
+        blank=True,
     )
 
     def __unicode__(self):
@@ -271,7 +295,7 @@ class Gear(models.Model):
         return slugify("%s %s" % (self.get_make(), self.get_name()))
 
     def hard_merge(self, slave):
-        from gear import get_correct_gear
+        from astrobin.gear import get_correct_gear
         unused, master_gear_type = get_correct_gear(self.id)
         unused, slave_gear_type = get_correct_gear(slave.id)
 
@@ -282,10 +306,10 @@ class Gear(models.Model):
         images = Image.by_gear(slave)
         for image in images:
             for name, klass in Image.GEAR_CLASS_LOOKUP.iteritems():
-                s = getattr(image, name).filter(pk = slave.pk)
+                s = getattr(image, name).filter(pk=slave.pk)
                 if s:
                     try:
-                        getattr(image, name).add(klass.objects.get(pk = self.pk))
+                        getattr(image, name).add(klass.objects.get(pk=self.pk))
                         getattr(image, name).remove(s[0])
                     except klass.DoesNotExist:
                         continue
@@ -295,33 +319,33 @@ class Gear(models.Model):
         owners = UserProfile.objects.filter(filters).distinct()
         for owner in owners:
             for name, klass in UserProfile.GEAR_CLASS_LOOKUP.iteritems():
-                s = getattr(owner, name).filter(pk = slave.pk)
+                s = getattr(owner, name).filter(pk=slave.pk)
                 if s:
                     try:
-                        getattr(owner, name).add(klass.objects.get(pk = self.pk))
+                        getattr(owner, name).add(klass.objects.get(pk=self.pk))
                         getattr(owner, name).remove(s[0])
                     except klass.DoesNotExist:
                         continue
 
         # Find matching slaves in deep sky acquisitions
         try:
-            filter = Filter.objects.get(pk = self.pk)
-            DeepSky_Acquisition.objects.filter(filter__pk = slave.pk).update(
-                filter = filter)
+            filter = Filter.objects.get(pk=self.pk)
+            DeepSky_Acquisition.objects.filter(filter__pk=slave.pk).update(
+                filter=filter)
         except Filter.DoesNotExist:
             pass
 
         # Find matching comments and move them to the master
         NestedComment.objects.filter(
-            content_type = ContentType.objects.get(app_label = 'astrobin', model = 'gear'),
-            object_id = slave.id
-        ).update(object_id = self.id)
+            content_type=ContentType.objects.get(app_label='astrobin', model='gear'),
+            object_id=slave.id
+        ).update(object_id=self.id)
 
         # Find matching gear reviews and move them to the master
         reviews = Review.objects.filter(
-            content_type = ContentType.objects.get(app_label = 'astrobin', model = 'gear'),
-            content_id = slave.id
-        ).update(content_id = self.id)
+            content_type=ContentType.objects.get(app_label='astrobin', model='gear'),
+            content_id=slave.id
+        ).update(content_id=self.id)
 
         # Fetch slave's master if this hard-merge's master doesn't have a soft-merge master
         if not self.master:
@@ -337,13 +361,12 @@ class Gear(models.Model):
             if retailed not in self.retailed.all():
                 self.retailed.add(retailed)
 
-        GearHardMergeRedirect(fro = slave.pk, to = self.pk).save()
+        GearHardMergeRedirect(fro=slave.pk, to=self.pk).save()
         slave.delete()
-
 
     def save(self, *args, **kwargs):
         try:
-            autorename = GearMakeAutoRename.objects.get(rename_from = self.make)
+            autorename = GearMakeAutoRename.objects.get(rename_from=self.make)
             self.make = autorename.rename_to
         except:
             pass
@@ -370,27 +393,27 @@ class Gear(models.Model):
 class GearUserInfo(models.Model):
     gear = models.ForeignKey(
         Gear,
-        editable = False,
+        editable=False,
     )
 
     user = models.ForeignKey(
         User,
-        editable = False,
+        editable=False,
     )
 
     alias = models.CharField(
-        verbose_name = _("Alias"),
-        help_text = _("A descriptive name, alias or nickname for your own copy of this product."),
-        max_length = 128,
-        null = True,
-        blank = True,
+        verbose_name=_("Alias"),
+        help_text=_("A descriptive name, alias or nickname for your own copy of this product."),
+        max_length=128,
+        null=True,
+        blank=True,
     )
 
     comment = models.TextField(
-        verbose_name = _("Comment"),
-        help_text = _("Information, description or comment about your own copy of this product."),
-        null = True,
-        blank = True,
+        verbose_name=_("Comment"),
+        help_text=_("Information, description or comment about your own copy of this product."),
+        null=True,
+        blank=True,
     )
 
     def __unicode__(self):
@@ -402,9 +425,9 @@ class GearUserInfo(models.Model):
 
 
 class GearAssistedMerge(models.Model):
-    master = models.ForeignKey(Gear, related_name = 'assisted_master', null = True)
-    slave  = models.ForeignKey(Gear, related_name = 'assisted_slave', null = True)
-    cutoff = models.DecimalField(default = 0, max_digits = 3, decimal_places = 2)
+    master = models.ForeignKey(Gear, related_name='assisted_master', null=True)
+    slave = models.ForeignKey(Gear, related_name='assisted_slave', null=True)
+    cutoff = models.DecimalField(default=0, max_digits=3, decimal_places=2)
 
     def __unicode__(self):
         return self.master.name
@@ -427,60 +450,62 @@ class GearHardMergeRedirect(models.Model):
 
 class Telescope(Gear):
     TELESCOPE_TYPES = (
-        (0, _("Refractor: achromatic")),
-        (1, _("Refractor: semi-apochromatic")),
-        (2, _("Refractor: apochromatic")),
-        (3, _("Refractor: non-achromatic Galilean")),
-        (4, _("Refractor: non-achromatic Keplerian")),
-        (5, _("Refractor: superachromat")),
+        ("REFR ACHRO", _("Refractor: achromatic")),
+        ("REFR SEMI-APO", _("Refractor: semi-apochromatic")),
+        ("REFR APO", _("Refractor: apochromatic")),
+        ("REFR NON-ACHRO GALILEAN", _("Refractor: non-achromatic Galilean")),
+        ("REFR NON-ACHRO KEPLERIAN", _("Refractor: non-achromatic Keplerian")),
+        ("REFR SUPERACHRO", _("Refractor: superachromat")),
 
-        (6, _("Reflector: Dall-Kirkham")),
-        (7, _("Reflector: Nasmyth")),
-        (8, _("Reflector: Ritchey Chretien")),
-        (9, _("Reflector: Gregorian")),
-        (10, _("Reflector: Herschellian")),
-        (11, _("Reflector: Newtonian")),
+        ("REFL DALL-KIRKHAM", _("Reflector: Dall-Kirkham")),
+        ("REFL NASMYTH", _("Reflector: Nasmyth")),
+        ("REFL RITCHEY CHRETIEN", _("Reflector: Ritchey Chretien")),
+        ("REFL GREGORIAN", _("Reflector: Gregorian")),
+        ("REFL HERSCHELLIAN", _("Reflector: Herschellian")),
+        ("REFL NEWTONIAN", _("Reflector: Newtonian")),
 
-        (12, _("Catadioptric: Argunov-Cassegrain")),
-        (13, _("Catadioptric: Klevtsov-Cassegrain")),
-        (14, _("Catadioptric: Lurie-Houghton")),
-        (15, _("Catadioptric: Maksutov")),
-        (16, _("Catadioptric: Maksutov-Cassegrain")),
-        (17, _("Catadioptric: modified Dall-Kirkham")),
-        (18, _("Catadioptric: Schmidt camera")),
-        (19, _("Catadioptric: Schmidt-Cassegrain")),
-        (20, _("Catadioptric: ACF Schmidt-Cassegrain")),
-        (21, _("Camera lens")),
-        (22, _("Binoculars")),
+        ("CATA ARGUNOV-CASSEGRAIN", _("Catadioptric: Argunov-Cassegrain")),
+        ("CATA KLEVTSOV-CASSEGRAIN", _("Catadioptric: Klevtsov-Cassegrain")),
+        ("CATA LURIE-HOUGHTON", _("Catadioptric: Lurie-Houghton")),
+        ("CATA MAKSUTOV", _("Catadioptric: Maksutov")),
+        ("CATA MAKSUTOV-CASSEGRAIN", _("Catadioptric: Maksutov-Cassegrain")),
+        ("CATA MOD DALL-KIRKHAM", _("Catadioptric: modified Dall-Kirkham")),
+        ("CATA SCHMIDT CAMERA", _("Catadioptric: Schmidt camera")),
+        ("CATA SCHMIDT-CASSEGRAIN", _("Catadioptric: Schmidt-Cassegrain")),
+        ("CATA ACF SCHMIDT-CASSEGRAIN", _("Catadioptric: ACF Schmidt-Cassegrain")),
+        ("CATA ROWE-ACKERMANN SCHMIDT", _("Catadioptric: Rowe-Atkinson Schmidt astrograph")),
+        ("CAMERA LENS", _("Camera lens")),
+        ("BINOCULARS", _("Binoculars")),
     )
 
     aperture = models.DecimalField(
-        verbose_name = _("Aperture"),
-        help_text = _("(in mm)"),
-        null = True,
-        blank = True,
-        max_digits = 8,
-        decimal_places = 2,
+        verbose_name=_("Aperture"),
+        help_text=_("(in mm)"),
+        null=True,
+        blank=True,
+        max_digits=8,
+        decimal_places=2,
     )
 
     focal_length = models.DecimalField(
-        verbose_name = _("Focal length"),
-        help_text = _("(in mm)"),
-        null = True,
-        blank = True,
-        max_digits = 8,
-        decimal_places = 2,
+        verbose_name=_("Focal length"),
+        help_text=_("(in mm)"),
+        null=True,
+        blank=True,
+        max_digits=8,
+        decimal_places=2,
     )
 
-    type = models.IntegerField(
-        verbose_name = _("Type"),
-        null = True,
-        blank = True,
-        choices = TELESCOPE_TYPES,
+    type = models.CharField(
+        verbose_name=_("Type"),
+        null=True,
+        blank=True,
+        max_length=64,
+        choices=TELESCOPE_TYPES,
     )
 
     def attributes(self):
-        return super(Telescope, self).attributes() +\
+        return super(Telescope, self).attributes() + \
                [('aperture', _("mm")), ('focal_length', _("mm"))]
 
     class Meta:
@@ -489,25 +514,25 @@ class Telescope(Gear):
 
 class Mount(Gear):
     max_payload = models.DecimalField(
-        verbose_name = _("Max. payload"),
-        help_text = _("(in kg)"),
-        null = True,
-        blank = True,
-        max_digits = 6,
-        decimal_places = 2,
+        verbose_name=_("Max. payload"),
+        help_text=_("(in kg)"),
+        null=True,
+        blank=True,
+        max_digits=6,
+        decimal_places=2,
     )
 
     pe = models.DecimalField(
-        verbose_name = _("Periodic error"),
-        help_text = _("(peak to peak, in arcseconds)"),
-        null = True,
-        blank = True,
-        max_digits = 6,
-        decimal_places = 2,
+        verbose_name=_("Periodic error"),
+        help_text=_("(peak to peak, in arcseconds)"),
+        null=True,
+        blank=True,
+        max_digits=6,
+        decimal_places=2,
     )
 
     def attributes(self):
-        return super(Mount, self).attributes() +\
+        return super(Mount, self).attributes() + \
                [('max_payload', _("kg")), ('pe', "\"")]
 
     class Meta:
@@ -516,50 +541,51 @@ class Mount(Gear):
 
 class Camera(Gear):
     CAMERA_TYPES = (
-        (0, _("CCD")),
-        (1, _("DSLR")),
-        (2, _("Guider/Planetary")),
-        (3, _("Film")),
-        (4, _("Compact")),
-        (5, _("Video camera")),
+        ("CCD", _("CCD")),
+        ("DSLR", _("DSLR")),
+        ("GUIDER/PLANETARY", _("Guider/Planetary")),
+        ("FILM", _("Film")),
+        ("COMPACT", _("Compact")),
+        ("VIDEO", _("Video camera")),
     )
 
     pixel_size = models.DecimalField(
-        verbose_name = _("Pixel size"),
-        help_text = _("(in &mu;m)"),
-        null = True,
-        blank = True,
-        max_digits = 6,
-        decimal_places = 2,
+        verbose_name=_("Pixel size"),
+        help_text=_("(in &mu;m)"),
+        null=True,
+        blank=True,
+        max_digits=6,
+        decimal_places=2,
     )
 
     sensor_width = models.DecimalField(
-        verbose_name = _("Sensor width"),
-        help_text = _("(in mm)"),
-        null = True,
-        blank = True,
-        max_digits = 6,
-        decimal_places = 2,
+        verbose_name=_("Sensor width"),
+        help_text=_("(in mm)"),
+        null=True,
+        blank=True,
+        max_digits=6,
+        decimal_places=2,
     )
 
     sensor_height = models.DecimalField(
-        verbose_name = _("Sensor height"),
-        help_text = _("(in mm)"),
-        null = True,
-        blank = True,
-        max_digits = 6,
-        decimal_places = 2,
+        verbose_name=_("Sensor height"),
+        help_text=_("(in mm)"),
+        null=True,
+        blank=True,
+        max_digits=6,
+        decimal_places=2,
     )
 
-    type = models.IntegerField(
-        verbose_name = _("Type"),
-        null = True,
-        blank = True,
-        choices = CAMERA_TYPES,
+    type = models.CharField(
+        verbose_name=_("Type"),
+        null=True,
+        blank=True,
+        max_length=64,
+        choices=CAMERA_TYPES,
     )
 
     def attributes(self):
-        return super(Camera, self).attributes() +\
+        return super(Camera, self).attributes() + \
                [('sensor_width', _("mm")), ('sensor_height', _("mm")), ('pixel_size', _("&mu;m"))]
 
     class Meta:
@@ -573,15 +599,16 @@ class FocalReducer(Gear):
 
 class Software(Gear):
     SOFTWARE_TYPES = (
-        (0, _("Open source or freeware")),
-        (1, _("Paid")),
+        ("OPEN_SOURCE_OR_FREEWARE", _("Open source or freeware")),
+        ("PAID", _("Paid")),
     )
 
-    type = models.IntegerField(
-        verbose_name = _("Type"),
-        null = True,
-        blank = True,
-        choices = SOFTWARE_TYPES,
+    type = models.CharField(
+        verbose_name=_("Type"),
+        null=True,
+        blank=True,
+        max_length=64,
+        choices=SOFTWARE_TYPES,
     )
 
     class Meta:
@@ -590,48 +617,51 @@ class Software(Gear):
 
 class Filter(Gear):
     FILTER_TYPES = (
-        (0, _("Clear or color")),
+        ("CLEAR_OR_COLOR", _("Clear or color")),
 
-        (1, _("Broadband: H-Alpha")),
-        (2, _("Broadband: H-Beta")),
-        (3, _("Broadband: S-II")),
-        (4, _("Broadband: O-III")),
-        (5, _("Broadband: N-II")),
+        ("BROAD HA", _("Broadband: H-Alpha")),
+        ("BROAD HB", _("Broadband: H-Beta")),
+        ("BROAD SII", _("Broadband: S-II")),
+        ("BROAD OIII", _("Broadband: O-III")),
+        ("BROAD NII", _("Broadband: N-II")),
 
-        (6, _("Narrowband: H-Alpha")),
-        (7, _("Narrowband: H-Beta")),
-        (8, _("Narrowband: S-II")),
-        (9, _("Narrowband: O-III")),
-        (10, _("Narrowband: N-II")),
+        ("NARROW HA", _("Narrowband: H-Alpha")),
+        ("NARROW HB", _("Narrowband: H-Beta")),
+        ("NARROW SII", _("Narrowband: S-II")),
+        ("NARROW OIII", _("Narrowband: O-III")),
+        ("NARROW NII", _("Narrowband: N-II")),
 
-        (11, _("Light pollution suppression")),
-        (12, _("Planetary")),
-        (13, _("Other")),
-        (14, _("UHC: Ultra High Contrast")),
+        ("LP", _("Light pollution suppression")),
+        ("PLANETARY", _("Planetary")),
+        ("UHC", _("UHC: Ultra High Contrast")),
+
+        ("OTHER", _("Other")),
     )
 
-    type = models.IntegerField(
-        verbose_name = _("Type"),
-        null = True,
-        blank = True,
-        choices = FILTER_TYPES,
+    type = models.CharField(
+        verbose_name=_("Type"),
+        null=True,
+        blank=True,
+        max_length=64,
+        choices=FILTER_TYPES,
     )
 
     bandwidth = models.DecimalField(
-        verbose_name = _("Bandwidth"),
-        help_text = _("(in nm)"),
-        null = True,
-        blank = True,
-        max_digits = 6,
-        decimal_places = 2,
+        verbose_name=_("Bandwidth"),
+        help_text=_("(in nm)"),
+        null=True,
+        blank=True,
+        max_digits=6,
+        decimal_places=2,
     )
 
     def attributes(self):
-        return super(Filter, self).attributes() +\
+        return super(Filter, self).attributes() + \
                [('bandwidth', _("nm"))]
 
     class Meta:
         app_label = 'astrobin'
+
 
 class Accessory(Gear):
     pass
@@ -644,7 +674,7 @@ def build_catalog_and_name(obj, name):
     split = name.split(' ')
     if len(split) > 1:
         cat = split[0]
-        del(split[0])
+        del (split[0])
         name = ' '.join(split)
 
         setattr(obj, 'catalog', cat)
@@ -663,6 +693,22 @@ class Image(HasSolutionMixin, SafeDeleteModel):
         (4, '4x4'),
     )
 
+    ACQUISITION_TYPES = (
+        'TRADITIONAL',
+        'EAA',
+        'LUCKY',
+        'DRAWING',
+        'OTHER',
+    )
+
+    ACQUISITION_TYPE_CHOICES = (
+        ('TRADITIONAL', _("Traditional")),
+        ('EAA', _("Electronically-Assisted Astronomy (EAA)")),
+        ('LUCKY', _("Lucky imaging")),
+        ('DRAWING', _("Drawing/Sketch")),
+        ('OTHER', _("Other/Unknown")),
+    )
+
     SUBJECT_TYPE_CHOICES = (
         (0, "---------"),
         (100, _("Deep sky object")),
@@ -673,6 +719,76 @@ class Image(HasSolutionMixin, SafeDeleteModel):
         (500, _("Gear")),
         (600, _("Other")),
     )
+
+    DATA_SOURCE_TYPES = (
+        'BACKYARD',
+        'TRAVELLER',
+        'OWN_REMOTE',
+        'AMATEUR_HOSTING',
+        'PUBLIC_AMATEUR_DATA',
+        'PRO_DATA',
+        'MIX',
+        'OTHER',
+        'UNKNOWN'
+    )
+
+    DATA_SOURCE_CHOICES = (
+        (None, "---------"),
+        (_("Self acquired"), (
+            ("BACKYARD", _("Backyard")),
+            ("TRAVELLER", _("Traveller")),
+            ("OWN_REMOTE", _("Own remote observatory")),
+        )),
+        (_("Downloaded"), (
+            ("AMATEUR_HOSTING", _("Amateur hosting facility")),
+            ("PUBLIC_AMATEUR_DATA", _("Public amateur data")),
+            ("PRO_DATA", _("Professional, scientific grade data")),
+        )),
+        (_("Other"), (
+            ("MIX", _("Mix of multiple sources")),
+            ("OTHER", _("None of the above")),
+            ("UNKNOWN", _("Unknown")),
+        )),
+    )
+
+    REMOTE_OBSERVATORY_CHOICES = (
+        (None, "---------"),
+        ("OWN", _("Non-commercial independent facility")),
+        (None, "---------"),
+        ("AC", "AstroCamp"),
+        ("AHK", "Astro Hostel Krasnodar"),
+        ("CS", "ChileScope"),
+        ("DSP", "Dark Sky Portal"),
+        ("DSC", "DeepSkyChile"),
+        ("DSW", "DeepSkyWest"),
+        ("eEyE", "e-EyE Extremadura"),
+        ("GMO", "Grand Mesa Observatory"),
+        ("HMO", "Heaven's Mirror Observatory"),
+        ("IC", "IC Astronomy Observatories"),
+        ("ITU", "Image The Universe"),
+        ("iT", "iTelescope"),
+        ("LGO", "Lijiang Gemini Observatory"),
+        ("MARIO", "Marathon Remote Imaging Observatory (MaRIO)"),
+        ("NMS", "New Mexico Skies"),
+        ("OES", "Observatorio El Sauce"),
+        ("PSA", "PixelSkies"),
+        ("RLD", "Riverland Dingo Observatory"),
+        ("SS", "Sahara Sky"),
+        ("SPVO", "San Pedro Valley Observatory"),
+        ("SRO", "Sierra Remote Observatories"),
+        ("SRO2", "Sky Ranch Observatory"),
+        ("SPOO", "SkyPi Online Observatory"),
+        ("SLO", "Slooh"),
+        ("SSLLC", "Stellar Skies LLC"),
+
+        ("OTHER", _("None of the above"))
+    )
+
+    MOUSE_HOVER_CHOICES = [
+        (None, _("Nothing")),
+        ("SOLUTION", _("Plate-solution annotations (if available)")),
+        ("INVERTED", _("Inverted monochrome")),
+    ]
 
     GEAR_CLASS_LOOKUP = {
         'imaging_telescopes': Telescope,
@@ -686,64 +802,99 @@ class Image(HasSolutionMixin, SafeDeleteModel):
         'accessories': Accessory,
     }
 
+
+    hash = models.CharField(
+        max_length=6,
+        default=image_hash,
+        null=True,
+        unique=True
+    )
+
     title = models.CharField(
-        max_length = 128,
-        verbose_name = _("Title"),
+        max_length=128,
+        verbose_name=_("Title"),
+    )
+
+    acquisition_type = models.CharField(
+        verbose_name=_("Acquisition type"),
+        choices=ACQUISITION_TYPE_CHOICES,
+        max_length=32,
+        null=False,
+        default='TRADITIONAL'
     )
 
     subject_type = models.IntegerField(
-        verbose_name = _("Subject type"),
-        choices = SUBJECT_TYPE_CHOICES,
-        default = 0,
+        verbose_name=_("Subject type"),
+        choices=SUBJECT_TYPE_CHOICES,
+        default=0,
     )
 
-    objects_in_field = models.CharField(
-        max_length = 512,
-        verbose_name = _("Objects in field"),
-        help_text=_("Use a <strong>comma</strong> to separate the values."),
-        null = True,
+    data_source = models.CharField(
+        verbose_name=_("Data source"),
+        help_text=_("Where does the data for this image come from?"),
+        max_length=32,
+        choices=DATA_SOURCE_CHOICES,
+        null=False,
+        blank=False,
+    )
+
+    remote_source = models.CharField(
+        verbose_name=_("Remote data source"),
+        help_text=_("Which remote hosting facility did you use to acquire data for this image?"),
+        max_length=8,
+        choices=REMOTE_OBSERVATORY_CHOICES,
+        null=True,
+        blank=True,
     )
 
     solar_system_main_subject = models.IntegerField(
-        verbose_name = _("Main solar system subject"),
-        help_text = _("If the main subject of your image is a body in the solar system, please select which (or which type) it is."),
-        null = True,
-        blank = True,
-        choices = SOLAR_SYSTEM_SUBJECT_CHOICES,
+        verbose_name=_("Main solar system subject"),
+        help_text=_(
+            "If the main subject of your image is a body in the solar system, please select which (or which type) it is."),
+        null=True,
+        blank=True,
+        choices=SOLAR_SYSTEM_SUBJECT_CHOICES,
     )
 
     locations = models.ManyToManyField(
         'astrobin.Location',
-        verbose_name = _("Locations"),
-        help_text = _("Drag items from the right side to the left side, or click on the plus sign."),
-        blank = True,
+        verbose_name=_("Locations"),
+        help_text=_("Drag items from the right side to the left side, or click on the plus sign."),
+        blank=True,
     )
 
     description = models.TextField(
-        null = True,
-        blank = True,
-        verbose_name = _("Description"),
-        help_text = _("HTML tags are allowed."),
+        null=True,
+        blank=True,
+        verbose_name=_("Description"),
+        help_text=_("HTML tags are allowed."),
     )
 
     link = models.CharField(
-        max_length = 256,
-        null = True,
-        blank = True,
-     )
+        max_length=256,
+        null=True,
+        blank=True,
+    )
 
     link_to_fits = models.CharField(
-        max_length = 256,
-        null = True,
-        blank = True,
-     )
+        max_length=256,
+        null=True,
+        blank=True,
+    )
 
     image_file = models.ImageField(
-        upload_to = image_upload_path,
-        height_field = 'h',
-        width_field = 'w',
-        max_length = 256,
-        null = True,
+        upload_to=image_upload_path,
+        height_field='h',
+        width_field='w',
+        max_length=256,
+        null=True,
+    )
+
+    square_cropping = ImageRatioField(
+        'image_file',
+        '130x130',
+        verbose_name=_("Gallery thumbnail"),
+        help_text=_("Select an area of the image to be used as thumbnail in your gallery.")
     )
 
     uploaded = models.DateTimeField(editable=False, auto_now_add=True)
@@ -754,41 +905,45 @@ class Image(HasSolutionMixin, SafeDeleteModel):
     toggleproperties = GenericRelation(ToggleProperty)
 
     watermark_text = models.CharField(
-        max_length = 128,
-        null = True,
-        blank = True,
-        verbose_name = "Text",
+        max_length=128,
+        null=True,
+        blank=True,
+        verbose_name="Text",
     )
 
     watermark = models.BooleanField(
-        default = False,
-        verbose_name = _("Apply watermark to image"),
+        default=False,
+        verbose_name=_("Apply watermark to image"),
     )
 
     watermark_position = models.IntegerField(
-        verbose_name = _("Position"),
-        default = 0,
-        choices = WATERMARK_POSITION_CHOICES,
+        verbose_name=_("Position"),
+        default=0,
+        choices=WATERMARK_POSITION_CHOICES,
     )
 
     watermark_size = models.CharField(
-        max_length = 1,
-        choices = WATERMARK_SIZE_CHOICES,
-        default = 'M',
-        verbose_name = _("Size"),
-        help_text = _("The final font size will depend on how long your watermark is."),
+        max_length=1,
+        choices=WATERMARK_SIZE_CHOICES,
+        default='M',
+        verbose_name=_("Size"),
+        help_text=_("The final font size will depend on how long your watermark is."),
     )
 
     watermark_opacity = models.IntegerField(
-        default = 10,
+        default=10,
     )
 
     # gear
-    imaging_telescopes = models.ManyToManyField(Telescope, blank=True, related_name='imaging_telescopes', verbose_name=_("Imaging telescopes or lenses"))
-    guiding_telescopes = models.ManyToManyField(Telescope, blank=True, related_name='guiding_telescopes', verbose_name=_("Guiding telescopes or lenses"))
+    imaging_telescopes = models.ManyToManyField(Telescope, blank=True, related_name='imaging_telescopes',
+                                                verbose_name=_("Imaging telescopes or lenses"))
+    guiding_telescopes = models.ManyToManyField(Telescope, blank=True, related_name='guiding_telescopes',
+                                                verbose_name=_("Guiding telescopes or lenses"))
     mounts = models.ManyToManyField(Mount, blank=True, verbose_name=_("Mounts"))
-    imaging_cameras = models.ManyToManyField(Camera, blank=True, related_name='imaging_cameras', verbose_name=_("Imaging cameras"))
-    guiding_cameras = models.ManyToManyField(Camera, blank=True, related_name='guiding_cameras', verbose_name=_("Guiding cameras"))
+    imaging_cameras = models.ManyToManyField(Camera, blank=True, related_name='imaging_cameras',
+                                             verbose_name=_("Imaging cameras"))
+    guiding_cameras = models.ManyToManyField(Camera, blank=True, related_name='guiding_cameras',
+                                             verbose_name=_("Guiding cameras"))
     focal_reducers = models.ManyToManyField(FocalReducer, blank=True, verbose_name=_("Focal reducers"))
     software = models.ManyToManyField(Software, blank=True, verbose_name=_("Software"))
     filters = models.ManyToManyField(Filter, blank=True, verbose_name=_("Filters"))
@@ -807,42 +962,57 @@ class Image(HasSolutionMixin, SafeDeleteModel):
     animated = models.BooleanField(editable=False, default=False)
 
     license = models.IntegerField(
-        choices = LICENSE_CHOICES,
-        default = 0,
-        verbose_name = _("License"),
+        choices=LICENSE_CHOICES,
+        default=0,
+        verbose_name=_("License"),
     )
 
     is_final = models.BooleanField(
-        editable = False,
-        default = True
+        editable=False,
+        default=True
     )
 
     allow_comments = models.BooleanField(
-        verbose_name = _("Allow comments"),
-        default = True,
+        verbose_name=_("Allow comments"),
+        default=True,
+    )
+
+    nested_comments = GenericRelation(NestedComment, related_query_name='image')
+
+    mouse_hover_image = models.CharField(
+        null=True,
+        blank=True,
+        default="SOLUTION",
+        max_length=16,
     )
 
     # 0 = undecided
     # 1 = approved
     # 2 = rejected
     moderator_decision = models.PositiveIntegerField(
-        editable = False,
-        default = 0,
+        editable=False,
+        default=0,
     )
 
     moderated_when = models.DateTimeField(
-        editable = False,
-        null = True,
-        auto_now_add = False,
-        default = None,
+        editable=False,
+        null=True,
+        auto_now_add=False,
+        default=None,
     )
 
     moderated_by = models.ForeignKey(
         User,
-        editable = False,
-        null = True,
-        related_name = 'images_moderated',
-        on_delete = models.SET_NULL,
+        editable=False,
+        null=True,
+        related_name='images_moderated',
+        on_delete=models.SET_NULL,
+    )
+
+    skip_notifications = models.BooleanField(
+        default=False,
+        verbose_name=_("Skip notifications"),
+        help_text=_("Do not notify your followers about this image upload.")
     )
 
     class Meta:
@@ -856,10 +1026,13 @@ class Image(HasSolutionMixin, SafeDeleteModel):
     def __unicode__(self):
         return self.title if self.title is not None else _("(no title)")
 
-    def get_absolute_url(self, revision = 'final', size = 'regular'):
+    def get_id(self):
+        return self.hash if self.hash else self.pk
+
+    def get_absolute_url(self, revision='final', size='regular'):
         if revision == 'final':
             if not self.is_final:
-                r = self.revisions.filter(is_final = True)
+                r = self.revisions.filter(is_final=True)
                 if r:
                     revision = r[0].label
 
@@ -867,8 +1040,7 @@ class Image(HasSolutionMixin, SafeDeleteModel):
         if size == 'full':
             url += 'full/'
 
-
-        url += '%i/' % self.id
+        url += '%s/' % (self.hash if self.hash else self.pk)
 
         if revision != 'final':
             url += '%s/' % revision
@@ -887,11 +1059,11 @@ class Image(HasSolutionMixin, SafeDeleteModel):
         key = "Image.%d.liked_by" % self.pk
         val = cache.get(key)
         if val is None:
-            user_pks = ToggleProperty.objects\
-                .toggleproperties_for_object("like", self)\
-                .select_related('user')\
-                .values_list('user', flat = True)
-            val = [profile.user for profile in UserProfile.objects.filter(user__pk__in = user_pks)]
+            user_pks = ToggleProperty.objects \
+                .toggleproperties_for_object("like", self) \
+                .select_related('user') \
+                .values_list('user', flat=True)
+            val = [profile.user for profile in UserProfile.objects.filter(user__pk__in=user_pks)]
             cache.set(key, val, 300)
         return val
 
@@ -907,11 +1079,11 @@ class Image(HasSolutionMixin, SafeDeleteModel):
         key = "Image.%d.bookmarked_by" % self.pk
         val = cache.get(key)
         if val is None:
-            user_pks = ToggleProperty.objects\
-                .toggleproperties_for_object("bookmark", self)\
-                .select_related('user')\
-                .values_list('user', flat = True)
-            val = [profile.user for profile in UserProfile.objects.filter(user__pk__in = user_pks)]
+            user_pks = ToggleProperty.objects \
+                .toggleproperties_for_object("bookmark", self) \
+                .select_related('user') \
+                .values_list('user', flat=True)
+            val = [profile.user for profile in UserProfile.objects.filter(user__pk__in=user_pks)]
             cache.set(key, val, 300)
         return val
 
@@ -921,10 +1093,10 @@ class Image(HasSolutionMixin, SafeDeleteModel):
         val = cache.get(key)
         if val is None:
             val = NestedComment.objects.filter(
-                deleted = False,
-                content_type__app_label = 'astrobin',
-                content_type__model = 'image',
-                object_id = self.id).count()
+                deleted=False,
+                content_type__app_label='astrobin',
+                content_type__model='image',
+                object_id=self.id).count()
             cache.set(key, val, 300)
         return val
 
@@ -934,13 +1106,13 @@ class Image(HasSolutionMixin, SafeDeleteModel):
         val = cache.get(key)
         if val is None:
             user_pks = NestedComment.objects.filter(
-                deleted = False,
-                content_type__app_label = 'astrobin',
-                content_type__model = 'image',
-                object_id = self.id)\
-                    .select_related('author')\
-                    .values_list('author', flat = True)\
-                    .distinct()
+                deleted=False,
+                content_type__app_label='astrobin',
+                content_type__model='image',
+                object_id=self.id) \
+                .select_related('author') \
+                .values_list('author', flat=True) \
+                .distinct()
             val = len(user_pks)
             cache.set(key, val, 300)
         return val
@@ -951,13 +1123,13 @@ class Image(HasSolutionMixin, SafeDeleteModel):
         val = cache.get(key)
         if val is None:
             user_pks = NestedComment.objects.filter(
-                deleted = False,
-                content_type__app_label = 'astrobin',
-                content_type__model = 'image',
-                object_id = self.id)\
-                    .select_related('author')\
-                    .values_list('author', flat = True)
-            val = [profile.user for profile in UserProfile.objects.filter(user__pk__in = user_pks)]
+                deleted=False,
+                content_type__app_label='astrobin',
+                content_type__model='image',
+                object_id=self.id) \
+                .select_related('author') \
+                .values_list('author', flat=True)
+            val = [profile.user for profile in UserProfile.objects.filter(user__pk__in=user_pks)]
             cache.set(key, val, 300)
         return val
 
@@ -974,16 +1146,15 @@ class Image(HasSolutionMixin, SafeDeleteModel):
         else:
             # We have some label
             try:
-                r = ImageRevision.objects.get(image = self, label = revision_label)
+                r = ImageRevision.objects.get(image=self, label=revision_label)
                 field = r.image_file
             except ImageRevision.DoesNotExist:
                 pass
 
         return field
 
-
     def get_final_revision_label(self):
-        # Avoid hitting the db by potentially exitting early
+        # Avoid hitting the db by potentially exiting early
         if self.is_final:
             return '0'
 
@@ -993,15 +1164,11 @@ class Image(HasSolutionMixin, SafeDeleteModel):
 
         return '0'
 
-
-    def thumbnail_raw(self, alias, thumbnail_settings = {}):
+    def thumbnail_raw(self, alias, thumbnail_settings={}):
         import urllib2
-
-        from unidecode import unidecode
-        from django.core.files.base import File, ContentFile
-        from easy_thumbnails.exceptions import InvalidImageFormatError
+        from django.core.files.base import ContentFile
         from easy_thumbnails.files import get_thumbnailer
-        from astrobin.s3utils import CachedS3BotoStorage, OverwritingFileSystemStorage
+        from astrobin.s3utils import OverwritingFileSystemStorage
 
         revision_label = thumbnail_settings.get('revision_label', 'final')
 
@@ -1014,9 +1181,25 @@ class Image(HasSolutionMixin, SafeDeleteModel):
 
         log.debug("Image %d: requested raw thumbnail: %s / %s" % (self.id, alias, revision_label))
 
-        options = settings.THUMBNAIL_ALIASES[''][alias].copy()
+        options = dict(settings.THUMBNAIL_ALIASES[''][alias].copy(), **thumbnail_settings)
 
-        field = self.get_thumbnail_field(revision_label);
+        if alias in ("gallery", "gallery_inverted", "collection", "thumb"):
+            if revision_label == '0' and self.square_cropping:
+                options['box'] = self.square_cropping
+                options['crop'] = True
+            elif revision_label == 'final':
+                try:
+                    revision = ImageRevision.objects.get(image=self, label=self.get_final_revision_label())
+                    options['box'] = revision.square_cropping
+                except ImageRevision.DoesNotExist:
+                    options['box'] = self.square_cropping
+                options['crop'] = True
+            else:
+                revision = ImageRevision.objects.get(image=self, label=revision_label)
+                options['box'] = revision.square_cropping
+                options['crop'] = True
+
+        field = self.get_thumbnail_field(revision_label)
         if not field.name.startswith('images/'):
             field.name = 'images/' + field.name
 
@@ -1041,7 +1224,7 @@ class Image(HasSolutionMixin, SafeDeleteModel):
 
                 with open(local_path):
                     thumbnailer = get_thumbnailer(
-                        OverwritingFileSystemStorage(location = settings.IMAGE_CACHE_DIRECTORY),
+                        OverwritingFileSystemStorage(location=settings.IMAGE_CACHE_DIRECTORY),
                         name_hash)
                     log.debug("Image %d: got thumbnail from local file %s." % (self.id, name_hash))
             except (OSError, IOError, UnicodeEncodeError) as e:
@@ -1054,7 +1237,7 @@ class Image(HasSolutionMixin, SafeDeleteModel):
                 # First try to get the file via URL, because that might hit the CloudFlare cache.
                 url = settings.IMAGES_URL + name
                 log.debug("Image %d: trying URL %s..." % (self.id, url))
-                headers = { 'User-Agent': 'Mozilla/5.0' }
+                headers = {'User-Agent': 'Mozilla/5.0'}
                 req = urllib2.Request(url, None, headers)
 
                 try:
@@ -1073,9 +1256,9 @@ class Image(HasSolutionMixin, SafeDeleteModel):
                         return None
 
                 try:
-                    local_file = field.storage.local_storage._save(name_hash, remote_file)
+                    field.storage.local_storage._save(name_hash, remote_file)
                     thumbnailer = get_thumbnailer(
-                        OverwritingFileSystemStorage(location = settings.IMAGE_CACHE_DIRECTORY),
+                        OverwritingFileSystemStorage(location=settings.IMAGE_CACHE_DIRECTORY),
                         name_hash)
                     log.debug("Image %d: saved local file %s." % (self.id, name_hash))
                 except (OSError, UnicodeEncodeError):
@@ -1083,7 +1266,7 @@ class Image(HasSolutionMixin, SafeDeleteModel):
                     pass
         else:
             thumbnailer = get_thumbnailer(OverwritingFileSystemStorage(
-                location = os.path.join(settings.UPLOADS_DIRECTORY)), name)
+                location=os.path.join(settings.UPLOADS_DIRECTORY)), name)
 
         if self.watermark and 'watermark' in options:
             options['watermark_text'] = self.watermark_text
@@ -1100,21 +1283,20 @@ class Image(HasSolutionMixin, SafeDeleteModel):
 
         return thumb
 
-
     def thumbnail_cache_key(self, field, alias):
         app_model = "{0}.{1}".format(
             self._meta.app_label,
             self._meta.object_name).lower()
-        cache_key ='easy_thumb_alias_cache_%s.%s_%s' % (
+        cache_key = 'easy_thumb_alias_cache_%s.%s_%s_%s' % (
             app_model,
-            field,
-            alias)
+            unicodedata.normalize('NFKD', unicode(field)).encode('ascii', 'ignore'),
+            alias,
+            self.square_cropping)
 
         from hashlib import sha256
         return sha256(cache_key).hexdigest()
 
-
-    def thumbnail(self, alias, thumbnail_settings = {}):
+    def thumbnail(self, alias, thumbnail_settings={}):
         def normalize_url_security(url, thumbnail_settings):
             insecure = 'insecure' in thumbnail_settings and thumbnail_settings['insecure'] == True
             if insecure and url.startswith('https'):
@@ -1127,8 +1309,9 @@ class Image(HasSolutionMixin, SafeDeleteModel):
         from astrobin_apps_images.models import ThumbnailGroup
 
         options = thumbnail_settings.copy()
+
         revision_label = options.get('revision_label', 'final')
-        field = self.get_thumbnail_field(revision_label);
+        field = self.get_thumbnail_field(revision_label)
         if not field.name.startswith('images/'):
             field.name = 'images/' + field.name
 
@@ -1149,10 +1332,9 @@ class Image(HasSolutionMixin, SafeDeleteModel):
         if 'animated' in options and options['animated'] == True:
             if alias in ('regular', 'hd', 'real'):
                 url = settings.IMAGES_URL + field.name
-                cache.set(cache_key + '_animated', url, 60*60*24*365)
+                cache.set(cache_key + '_animated', url, 60 * 60 * 24 * 365)
                 return normalize_url_security(url, thumbnail_settings)
 
-        cache_key = self.thumbnail_cache_key(field, alias)
         url = cache.get(cache_key)
         if url:
             log.debug("Image %d: got URL from cache entry %s" % (self.id, cache_key))
@@ -1160,50 +1342,41 @@ class Image(HasSolutionMixin, SafeDeleteModel):
 
         # Not found in cache, attempt to fetch from database
         log.debug("Image %d: thumbnail not found in cache %s" % (self.id, cache_key))
-        thumbnails = None
         try:
-            thumbnails = self.thumbnails.get(revision = revision_label)
+            thumbnails = self.thumbnails.get(revision=revision_label)
             url = getattr(thumbnails, alias)
             if url:
-                cache.set(cache_key, url, 60*60*24*365)
+                cache.set(cache_key, url, 60 * 60 * 24 * 365)
                 log.debug("Image %d: thumbnail url found in database and saved into cache: %s" % (self.id, url))
                 return normalize_url_security(url, thumbnail_settings)
         except ThumbnailGroup.DoesNotExist:
             log.debug("Image %d: there are no thumbnails in database." % self.id)
             try:
-                thumbnails = ThumbnailGroup.objects.create(image = self, revision = revision_label)
+                ThumbnailGroup.objects.create(image=self, revision=revision_label)
             except IntegrityError:
                 # Race condition
                 pass
 
-        # If we got down here, we don't have an url yet.
-        thumb = self.thumbnail_raw(alias, options)
-        thumbnail_alias_settings = settings.THUMBNAIL_ALIASES[''][alias].copy()
+        from .tasks import retrieve_thumbnail
 
-        if thumb:
-            url = settings.IMAGES_URL + thumb.name
-            cache.set(cache_key, url, 60*60*24*365)
-            log.debug("Image %d: saved generated thumbnail in the cache." % self.id)
-            if not thumbnails:
-                try:
-                    thumbnails = ThumbnailGroup.objects.create(image = self, revision = revision_label)
-                except IntegrityError:
-                    # Race condition
-                    pass
+        if "sync" in thumbnail_settings and thumbnail_settings["sync"] is True:
+            retrieve_thumbnail.apply(args=(self.pk, alias, options))
+            thumbnails = self.thumbnails.get(revision=revision_label)
+            url = getattr(thumbnails, alias)
+            return url
 
-            if thumbnails:
-                setattr(thumbnails, alias, url)
-                thumbnails.save()
-                log.debug("Image %d: saved generated thumbnail in the database." % self.id)
+        # If we got down here, we don't have an url yet, so we start an asynchronous task and return a placeholder.
+        task_id_cache_key = '%s.retrieve' % cache_key
+        task_id = cache.get(task_id_cache_key)
+        if task_id is None:
+            result = retrieve_thumbnail.apply_async(args=(self.pk, alias, options), task_id=cache_key)
+            cache.set(task_id_cache_key, result.task_id)
+        else:
+            AsyncResult(task_id_cache_key)
 
-            return normalize_url_security(url, thumbnail_settings)
+        return static('astrobin/images/placeholder-gallery.jpg')
 
-        return "https://placehold.it/%dx%d/B53838/fff&text=Error" % (
-            thumbnail_alias_settings['size'][0],
-            thumbnail_alias_settings['size'][1])
-
-
-    def thumbnail_invalidate_real(self, field, revision_label, delete_remote = True):
+    def thumbnail_invalidate_real(self, field, revision_label, delete_remote=True):
         from easy_thumbnails.files import get_thumbnailer
 
         from astrobin.s3utils import OverwritingFileSystemStorage
@@ -1214,8 +1387,8 @@ class Image(HasSolutionMixin, SafeDeleteModel):
         thumbnailer = get_thumbnailer(field)
         local_filename = field.storage.generate_local_name(field.name)
         local_thumbnailer = get_thumbnailer(
-                OverwritingFileSystemStorage(location = settings.IMAGE_CACHE_DIRECTORY),
-                local_filename)
+            OverwritingFileSystemStorage(location=settings.IMAGE_CACHE_DIRECTORY),
+            local_filename)
 
         aliases = settings.THUMBNAIL_ALIASES['']
         for alias, thumbnail_settings in aliases.iteritems():
@@ -1237,14 +1410,14 @@ class Image(HasSolutionMixin, SafeDeleteModel):
             # Then we delete the remote thumbnail
             if delete_remote:
                 filename1 = thumbnailer.get_thumbnail_name(options)
-                filename2 = thumbnailer.get_thumbnail_name(options, transparent = True)
+                filename2 = thumbnailer.get_thumbnail_name(options, transparent=True)
                 field.storage.delete(filename1)
                 log.debug("Image %d: deleted remote file %s" % (self.id, filename1))
                 field.storage.delete(filename2)
                 log.debug("Image %d: deleted remote file %s" % (self.id, filename2))
 
                 filename1 = local_thumbnailer.get_thumbnail_name(options)
-                filename2 = local_thumbnailer.get_thumbnail_name(options, transparent = True)
+                filename2 = local_thumbnailer.get_thumbnail_name(options, transparent=True)
                 field.storage.delete(filename1)
                 log.debug("Image %d: deleted remote file %s" % (self.id, filename1))
                 field.storage.delete(filename2)
@@ -1266,21 +1439,63 @@ class Image(HasSolutionMixin, SafeDeleteModel):
                 except OSError:
                     log.debug("Image %d: locally cached file not found." % self.id)
 
+                # Then we purge the Cloudflare cache
+                try:
+                    thumbnail_group = self.thumbnails.get(revision=revision_label)  # type: ThumbnailGroup
+                    all_urls = [x for x in thumbnail_group.get_all_urls() if x]
+
+                    cloudflare_service = CloudflareService()
+
+                    for url in all_urls:
+                        cloudflare_service.purge_resource(url)
+                except ThumbnailGroup.DoesNotExist:
+                    log.debug("Image %d: thumbnail group missing." % self.id)
+
         # Then we remove the database entries
         try:
-            thumbnailgroup = self.thumbnails.get(revision = revision_label).delete()
+            thumbnailgroup = self.thumbnails.get(revision=revision_label).delete()
             log.debug("Image %d: removed thumbnail group." % self.id)
         except ThumbnailGroup.DoesNotExist:
             log.debug("Image %d: thumbnail group missing." % self.id)
 
-    def thumbnail_invalidate(self, delete_remote = True):
+    def thumbnail_invalidate(self, delete_remote=True):
         return self.thumbnail_invalidate_real(self.image_file, '0', delete_remote)
+
+    def get_data_source(self):
+        LOOKUP = {
+            "BACKYARD": _("Backyard"),
+            "TRAVELLER": _("Traveller"),
+            "OWN_REMOTE": _("Own remote observatory"),
+            "AMATEUR_HOSTING": _("Amateur hosting facility"),
+            "PUBLIC_AMATEUR_DATA": _("Public amateur data"),
+            "PRO_DATA": _("Professional, scientific grade data"),
+            "MIX": _("Mix of multiple source"),
+            "OTHER": _("Other"),
+            "UNKNOWN": _("Unknown"),
+            "UNSET": "None",
+            None: None
+        }
+
+        return LOOKUP[self.data_source]
+
+    def get_remote_source(self):
+        for source in self.REMOTE_OBSERVATORY_CHOICES:
+            if self.remote_source == source[0]:
+                return source[1]
+
+    def get_keyvaluetags(self):
+        tags = self.keyvaluetags.all()
+
+        if tags.count() == 0:
+            return ""
+
+        return '\r\n'.join([str(x) for x in self.keyvaluetags.all()])
 
     def is_platesolvable(self):
         return self.subject_type in (100, 300)
 
     @staticmethod
-    def by_gear(gear, gear_type = None):
+    def by_gear(gear, gear_type=None):
         images = Image.objects.all()
 
         if gear_type:
@@ -1317,22 +1532,44 @@ class Image(HasSolutionMixin, SafeDeleteModel):
 class ImageRevision(HasSolutionMixin, SafeDeleteModel):
     image = models.ForeignKey(
         Image,
-        related_name = 'revisions'
+        related_name='revisions'
     )
 
     image_file = models.ImageField(
-        upload_to = image_upload_path,
-        height_field = 'h',
-        width_field = 'w',
-        null = True,
-        max_length = 256,
+        upload_to=image_upload_path,
+        height_field='h',
+        width_field='w',
+        null=True,
+        max_length=256,
+    )
+
+    square_cropping = ImageRatioField(
+        'image_file',
+        '130x130',
+        verbose_name=_("Gallery thumbnail"),
+        help_text=_("Select an area of the image to be used as thumbnail in your gallery.")
     )
 
     description = models.TextField(
-        null = True,
-        blank = True,
-        verbose_name = _("Description"),
-        help_text = _("HTML tags are allowed."),
+        null=True,
+        blank=True,
+        verbose_name=_("Description"),
+        help_text=_("HTML tags are allowed."),
+    )
+
+    mouse_hover_image = models.CharField(
+        null=True,
+        blank=True,
+        default="SOLUTION",
+        max_length=16,
+    )
+
+    skip_notifications = models.NullBooleanField(
+        null=True,
+        blank=True,
+        default=None,
+        verbose_name=_("Skip notifications"),
+        help_text=_("Do not notify your followers about this revision.")
     )
 
     uploaded = models.DateTimeField(editable=False, auto_now_add=True)
@@ -1344,13 +1581,13 @@ class ImageRevision(HasSolutionMixin, SafeDeleteModel):
     h = models.IntegerField(editable=False, default=0)
 
     is_final = models.BooleanField(
-        editable = False,
-        default = False
+        editable=False,
+        default=False
     )
 
     label = models.CharField(
-        max_length = 2,
-        editable = False)
+        max_length=2,
+        editable=False)
 
     class Meta:
         app_label = 'astrobin'
@@ -1360,66 +1597,74 @@ class ImageRevision(HasSolutionMixin, SafeDeleteModel):
     def __unicode__(self):
         return self.image.title
 
-    def get_absolute_url(self, revision = 'nd', size = 'regular'):
+    def get_absolute_url(self, revision='nd', size='regular'):
         # We can ignore the revision argument of course
         if size == 'full':
-            return '/%i/%s/full/' % (self.image.id, self.label)
+            return '/%s/%s/full/' % (self.image.get_id(), self.label)
 
-        return '/%i/%s/' % (self.image.id, self.label)
+        return '/%s/%s/' % (self.image.get_id(), self.label)
 
-    def thumbnail_raw(self, alias, thumbnail_settings = {}):
-        return self.image.thumbnail_raw(alias, dict(thumbnail_settings.items() + {'revision_label': self.label}.items()))
+    def thumbnail_raw(self, alias, thumbnail_settings={}):
+        return self.image.thumbnail_raw(alias,
+                                        dict(thumbnail_settings.items() + {'revision_label': self.label}.items()))
 
-    def thumbnail(self, alias, thumbnail_settings = {}):
+    def thumbnail(self, alias, thumbnail_settings={}):
         return self.image.thumbnail(alias, dict(thumbnail_settings.items() + {'revision_label': self.label}.items()))
 
-    def thumbnail_invalidate(self, delete_remote = True):
+    def thumbnail_invalidate(self, delete_remote=True):
         return self.image.thumbnail_invalidate_real(self.image_file, self.label, delete_remote)
 
 
 class Collection(models.Model):
     date_created = models.DateField(
-        null = False,
-        blank = False,
-        auto_now_add = True,
-        editable = False,
+        null=False,
+        blank=False,
+        auto_now_add=True,
+        editable=False,
     )
 
     date_updated = models.DateField(
-        null = False,
-        blank = False,
-        auto_now = True,
-        editable = False,
+        null=False,
+        blank=False,
+        auto_now=True,
+        editable=False,
     )
 
     user = models.ForeignKey(User)
 
     name = models.CharField(
-        max_length = 256,
-        null = False,
-        blank = False,
-        verbose_name = _("Name"),
+        max_length=256,
+        null=False,
+        blank=False,
+        verbose_name=_("Name"),
     )
 
     description = models.TextField(
-        null = True,
-        blank = True,
-        verbose_name = _("Description"),
+        null=True,
+        blank=True,
+        verbose_name=_("Description"),
     )
 
     images = models.ManyToManyField(
         Image,
-        verbose_name = _("Images"),
-        related_name = 'collections',
-        blank = True,
+        verbose_name=_("Images"),
+        related_name='collections',
+        blank=True,
     )
 
     cover = models.ForeignKey(
         Image,
-        null = True,
-        blank = True,
-        verbose_name = _("Cover image"),
-        on_delete = models.SET_NULL,
+        null=True,
+        blank=True,
+        verbose_name=_("Cover image"),
+        on_delete=models.SET_NULL,
+    )
+
+    order_by_tag = models.CharField(
+        null=True,
+        blank=True,
+        max_length=255,
+        verbose_name=_("Order by image tag")
     )
 
     class Meta:
@@ -1428,15 +1673,15 @@ class Collection(models.Model):
         ordering = ['name']
 
     def __unincode__(self):
-        return "%s, a collectio by %s" % (self.name, self.user.username)
+        return "%s, a collection by %s" % (self.name, self.user.username)
 
 
 class Acquisition(models.Model):
     date = models.DateField(
-        null = True,
-        blank = True,
-        verbose_name = _("Date"),
-        help_text = _("Please use the following format: yyyy-mm-dd."),
+        null=True,
+        blank=True,
+        verbose_name=_("Date"),
+        help_text=_("Please use the following format: yyyy-mm-dd."),
     )
 
     image = models.ForeignKey(
@@ -1452,7 +1697,7 @@ class Acquisition(models.Model):
 
     def save(self, *args, **kwargs):
         super(Acquisition, self).save(*args, **kwargs)
-        self.image.save()
+        self.image.save(keep_deleted=True)
 
 
 class DeepSky_Acquisition(Acquisition):
@@ -1477,13 +1722,13 @@ class DeepSky_Acquisition(Acquisition):
 
     is_synthetic = models.BooleanField(
         _("Synthetic channel"),
-        default = False)
+        default=False)
 
     filter = models.ForeignKey(
         Filter,
         null=True, blank=True,
         verbose_name=_("Filter"),
-        on_delete = models.SET_NULL)
+        on_delete=models.SET_NULL)
 
     binning = models.IntegerField(
         null=True, blank=True,
@@ -1508,7 +1753,7 @@ class DeepSky_Acquisition(Acquisition):
     gain = models.DecimalField(
         _("Gain"),
         null=True, blank=True,
-        max_digits=5, decimal_places=2)
+        max_digits=7, decimal_places=2)
 
     sensor_cooling = models.IntegerField(
         _("Sensor cooling"),
@@ -1536,16 +1781,17 @@ class DeepSky_Acquisition(Acquisition):
         help_text=_("The number of bias/offset frames."))
 
     bortle = models.IntegerField(
-        verbose_name = _("Bortle Dark-Sky Scale"),
-        null = True,
-        blank = True,
-        choices = BORTLE_CHOICES,
-        help_text = _("Quality of the sky according to <a href=\"http://en.wikipedia.org/wiki/Bortle_Dark-Sky_Scale\" target=\"_blank\">the Bortle Scale</a>."),
+        verbose_name=_("Bortle Dark-Sky Scale"),
+        null=True,
+        blank=True,
+        choices=BORTLE_CHOICES,
+        help_text=_(
+            "Quality of the sky according to <a href=\"http://en.wikipedia.org/wiki/Bortle_Dark-Sky_Scale\" target=\"_blank\">the Bortle Scale</a>."),
     )
 
     mean_sqm = models.DecimalField(
-        verbose_name = _("Mean mag/arcsec^2"),
-        help_text = _("As measured with your Sky Quality Meter."),
+        verbose_name=_("Mean mag/arcsec^2"),
+        help_text=_("As measured with your Sky Quality Meter."),
         null=True, blank=True,
         max_digits=5, decimal_places=2)
 
@@ -1559,7 +1805,6 @@ class DeepSky_Acquisition(Acquisition):
         null=True, blank=True,
         max_digits=5, decimal_places=2,
         help_text=_("Ambient temperature (in Centigrade degrees)."))
-
 
     advanced = models.BooleanField(
         editable=False,
@@ -1577,75 +1822,75 @@ class DeepSky_Acquisition(Acquisition):
 
 class SolarSystem_Acquisition(Acquisition):
     frames = models.IntegerField(
-        null = True,
-        blank = True,
-        verbose_name = _("Number of frames"),
-        help_text = _("The total number of frames you have stacked."),
+        null=True,
+        blank=True,
+        verbose_name=_("Number of frames"),
+        help_text=_("The total number of frames you have stacked."),
     )
 
     fps = models.DecimalField(
-        verbose_name = _("FPS"),
-        help_text = _("Frames per second."),
-        max_digits = 12,
-        decimal_places = 5,
-        null = True,
-        blank = True,
+        verbose_name=_("FPS"),
+        help_text=_("Frames per second."),
+        max_digits=12,
+        decimal_places=5,
+        null=True,
+        blank=True,
     )
 
     focal_length = models.IntegerField(
-        verbose_name = _("Focal length"),
-        help_text = _("The focal length of the whole optical train, including barlow lenses or other components."),
-        null = True,
-        blank = True,
+        verbose_name=_("Focal length"),
+        help_text=_("The focal length of the whole optical train, including barlow lenses or other components."),
+        null=True,
+        blank=True,
     )
 
     cmi = models.DecimalField(
-        verbose_name = _("CMI"),
-        help_text = _("Latitude of the first Central Meridian."),
-        null = True,
-        blank = True,
-        max_digits = 5,
-        decimal_places = 2,
+        verbose_name=_("CMI"),
+        help_text=_("Latitude of the first Central Meridian."),
+        null=True,
+        blank=True,
+        max_digits=5,
+        decimal_places=2,
     )
 
     cmii = models.DecimalField(
-        verbose_name = _("CMII"),
-        help_text = _("Latitude of the second Central Meridian."),
-        null = True,
-        blank = True,
-        max_digits = 5,
-        decimal_places = 2,
+        verbose_name=_("CMII"),
+        help_text=_("Latitude of the second Central Meridian."),
+        null=True,
+        blank=True,
+        max_digits=5,
+        decimal_places=2,
     )
 
     cmiii = models.DecimalField(
-        verbose_name = _("CMIII"),
-        help_text = _("Latitude of the third Central Meridian."),
-        null = True,
-        blank = True,
-        max_digits = 5,
-        decimal_places = 2,
+        verbose_name=_("CMIII"),
+        help_text=_("Latitude of the third Central Meridian."),
+        null=True,
+        blank=True,
+        max_digits=5,
+        decimal_places=2,
     )
 
     seeing = models.IntegerField(
-        verbose_name = _("Seeing"),
-        help_text = _("Your estimation of the seeing, on a scale from 1 to 5."),
-        null = True,
-        blank = True,
+        verbose_name=_("Seeing"),
+        help_text=_("Your estimation of the seeing, on a scale from 1 to 5. Larger is better."),
+        null=True,
+        blank=True,
     )
 
     transparency = models.IntegerField(
-        verbose_name = _("Transparency"),
-        help_text = _("Your estimation of the transparency, on a scale from 1 to 10."),
-        null = True,
-        blank = True
+        verbose_name=_("Transparency"),
+        help_text=_("Your estimation of the transparency, on a scale from 1 to 10. Larger is better."),
+        null=True,
+        blank=True
     )
 
     time = models.CharField(
-        verbose_name = _("Time"),
-        help_text = _("Please use the following format: hh:mm."),
-        null = True,
-        blank = True,
-        max_length = 5,
+        verbose_name=_("Time"),
+        help_text=_("Please use the following format: hh:mm."),
+        null=True,
+        blank=True,
+        max_length=5,
     )
 
     class Meta:
@@ -1654,12 +1899,12 @@ class SolarSystem_Acquisition(Acquisition):
 
 class Request(models.Model):
     from_user = models.ForeignKey(User, editable=False, related_name='requester')
-    to_user   = models.ForeignKey(User, editable=False, related_name='requestee')
+    to_user = models.ForeignKey(User, editable=False, related_name='requestee')
     fulfilled = models.BooleanField()
-    message   = models.CharField(max_length=255)
-    created   = models.DateTimeField(auto_now_add=True)
+    message = models.CharField(max_length=255)
+    created = models.DateTimeField(auto_now_add=True)
 
-    objects   = InheritanceManager()
+    objects = InheritanceManager()
 
     def __unicode__(self):
         return '%s %s: %s' % (_('Request from'), self.from_user.username, self.message)
@@ -1674,13 +1919,13 @@ class Request(models.Model):
 
 class ImageRequest(Request):
     TYPE_CHOICES = (
-        ('INFO',     _('Additional information')),
-        ('FITS',     _('TIFF/FITS')),
-        ('HIRES',    _('Higher resolution')),
+        ('INFO', _('Additional information')),
+        ('FITS', _('TIFF/FITS')),
+        ('HIRES', _('Higher resolution')),
     )
 
     image = models.ForeignKey(Image, editable=False)
-    type  = models.CharField(max_length=8, choices=TYPE_CHOICES)
+    type = models.CharField(max_length=8, choices=TYPE_CHOICES)
 
 
 class UserProfile(SafeDeleteModel):
@@ -1707,41 +1952,41 @@ class UserProfile(SafeDeleteModel):
     user = models.OneToOneField(User, editable=False)
 
     updated = models.DateTimeField(
-        editable = False,
-        auto_now = True,
-        null = True,
-        blank = True,
+        editable=False,
+        auto_now=True,
+        null=True,
+        blank=True,
     )
 
     # Basic Information
     real_name = models.CharField(
-        verbose_name = _("Real name"),
-        help_text = _("If present, your real name will be used throughout the website."),
-        max_length = 128,
-        null = True,
-        blank = True,
+        verbose_name=_("Real name"),
+        help_text=_("If present, your real name will be used throughout the website."),
+        max_length=128,
+        null=True,
+        blank=True,
     )
 
     website = models.CharField(
-        verbose_name = _("Website"),
-        max_length = 128,
-        null = True,
-        blank = True,
+        verbose_name=_("Website"),
+        max_length=128,
+        null=True,
+        blank=True,
     )
 
     job = models.CharField(
-        verbose_name = _("Job"),
-        max_length = 128,
-        null = True,
-        blank = True,
+        verbose_name=_("Job"),
+        max_length=128,
+        null=True,
+        blank=True,
     )
 
     hobbies = models.CharField(
-        verbose_name = _("Hobbies"),
-        max_length = 128,
-        null = True,
-        blank = True,
-        help_text = _("Do you have any hobbies other than astrophotography?"),
+        verbose_name=_("Hobbies"),
+        max_length=128,
+        null=True,
+        blank=True,
+        help_text=_("Do you have any hobbies other than astrophotography?"),
     )
 
     timezone = models.CharField(
@@ -1752,82 +1997,105 @@ class UserProfile(SafeDeleteModel):
         help_text=_("By selecting this, you will see all the dates on AstroBin in your timezone."))
 
     about = models.TextField(
-        null = True,
-        blank = True,
-        verbose_name = _("About you"),
-        help_text = _("Write something about yourself. HTML tags are allowed."),
+        null=True,
+        blank=True,
+        verbose_name=_("About you"),
+        help_text=_("Write something about yourself. HTML tags are allowed."),
     )
 
     # Counter for uploaded images.
     premium_counter = models.PositiveIntegerField(
-        default = 0,
-        editable = False
+        default=0,
+        editable=False
+    )
+
+    premium_offer = models.CharField(
+        max_length=32,
+        default=None,
+        null=True,
+        blank=True,
+        editable=False,
+    )
+
+    premium_offer_expiration = models.DateTimeField(
+        editable=False,
+        null=True
+    )
+
+    premium_offer_sent = models.DateTimeField(
+        editable=False,
+        null=True
     )
 
     # Commercial information
     company_name = models.CharField(
-        max_length = 128,
-        null = True,
-        blank = True,
-        verbose_name = _("Company name"),
-        help_text = _("The name of the company you represent on AstroBin."),
+        max_length=128,
+        null=True,
+        blank=True,
+        verbose_name=_("Company name"),
+        help_text=_("The name of the company you represent on AstroBin."),
     )
 
     company_description = models.TextField(
-        null = True,
-        blank = True,
-        verbose_name = _("Company description"),
-        help_text = _("A short description of the company you represent on AstroBin. You can use some <a href=\"/faq/#comments\">formatting rules</a>."),
-        validators = [MaxLengthValidator(1000)],
+        null=True,
+        blank=True,
+        verbose_name=_("Company description"),
+        help_text=_(
+            "A short description of the company you represent on AstroBin. You can use some <a href=\"/faq/#comments\">formatting rules</a>."),
+        validators=[MaxLengthValidator(1000)],
     )
 
     company_website = models.URLField(
-        max_length = 512,
-        null = True,
-        blank = True,
-        verbose_name = _("Company website"),
-        help_text = _("The website of the company you represent on AstroBin."),
+        max_length=512,
+        null=True,
+        blank=True,
+        verbose_name=_("Company website"),
+        help_text=_("The website of the company you represent on AstroBin."),
     )
 
     retailer_country = CountryField(
-        verbose_name = _("Country of operation"),
-        null = True,
-        blank = True,
+        verbose_name=_("Country of operation"),
+        null=True,
+        blank=True,
     )
 
     # Avatar
     avatar = models.CharField(max_length=64, editable=False, null=True, blank=True)
 
     exclude_from_competitions = models.BooleanField(
-        default = False,
+        default=False,
         verbose_name=_("I want to be excluded from competitions"),
-        help_text=_("Check this box to be excluded from competitions and contests, such as the Image of the Day, the Top Picks, other custom contests. This will remove you from the leaderboards and hide your AstroBin Index."),
+        help_text=_(
+            "Check this box to be excluded from competitions and contests, such as the Image of the Day, the Top Picks, other custom contests. This will remove you from the leaderboards and hide your AstroBin Index."),
     )
 
     # Gear
-    telescopes = models.ManyToManyField(Telescope, blank=True, verbose_name=_("Telescopes and lenses"), related_name='telescopes')
+    telescopes = models.ManyToManyField(Telescope, blank=True, verbose_name=_("Telescopes and lenses"),
+                                        related_name='telescopes')
     mounts = models.ManyToManyField(Mount, blank=True, verbose_name=_("Mounts"), related_name='mounts')
     cameras = models.ManyToManyField(Camera, blank=True, verbose_name=_("Cameras"), related_name='cameras')
-    focal_reducers = models.ManyToManyField(FocalReducer, blank=True, verbose_name=_("Focal reducers"), related_name='focal_reducers')
+    focal_reducers = models.ManyToManyField(FocalReducer, blank=True, verbose_name=_("Focal reducers"),
+                                            related_name='focal_reducers')
     software = models.ManyToManyField(Software, blank=True, verbose_name=_("Software"), related_name='software')
     filters = models.ManyToManyField(Filter, blank=True, verbose_name=_("Filters"), related_name='filters')
-    accessories = models.ManyToManyField(Accessory, blank=True, verbose_name=_("Accessories"), related_name='accessories')
+    accessories = models.ManyToManyField(Accessory, blank=True, verbose_name=_("Accessories"),
+                                         related_name='accessories')
 
     default_frontpage_section = models.CharField(
-        choices = (
+        choices=(
             ('global', _("Global stream")),
             ('personal', _("Personal stream")),
             ('recent', _("All uploaded images")),
             ('followed', _("All images uploaded by people you follow")),
         ),
-        default = 'global',
-        max_length = 16,
-        null = False,
-        verbose_name = _("Default front page view"),
+        default='global',
+        max_length=16,
+        null=False,
+        verbose_name=_("Default front page view"),
     )
 
     default_gallery_sorting = models.SmallIntegerField(
-        choices = (
+        choices=(
             (0, _("Upload time")),
             (1, _("Acquisition time")),
             (2, _("Subject type")),
@@ -1836,49 +2104,49 @@ class UserProfile(SafeDeleteModel):
             (5, _("Collections")),
             (6, _("Title")),
         ),
-        default = 0,
-        null = False,
-        verbose_name = _("Default gallery sorting"),
+        default=0,
+        null=False,
+        verbose_name=_("Default gallery sorting"),
     )
 
     default_license = models.IntegerField(
-        choices = LICENSE_CHOICES,
-        default = 0,
-        verbose_name = _("Default license"),
-        help_text = _(
+        choices=LICENSE_CHOICES,
+        default=0,
+        verbose_name=_("Default license"),
+        help_text=_(
             "The license you select here is automatically applied to "
             "all your new images."
         ),
     )
 
     default_watermark_text = models.CharField(
-        max_length = 128,
-        null = True,
-        blank = True,
-        editable = False,
+        max_length=128,
+        null=True,
+        blank=True,
+        editable=False,
     )
 
     default_watermark = models.BooleanField(
-        default = False,
-        editable = False,
+        default=False,
+        editable=False,
     )
 
     default_watermark_size = models.CharField(
-        max_length = 1,
-        default = 'M',
-        choices = WATERMARK_SIZE_CHOICES,
-        editable = False,
+        max_length=1,
+        default='M',
+        choices=WATERMARK_SIZE_CHOICES,
+        editable=False,
     )
 
     default_watermark_position = models.IntegerField(
-        default = 0,
-        choices = WATERMARK_POSITION_CHOICES,
-        editable = False,
+        default=0,
+        choices=WATERMARK_POSITION_CHOICES,
+        editable=False,
     )
 
     default_watermark_opacity = models.IntegerField(
-        default = 10,
-        editable = False,
+        default=10,
+        editable=False,
     )
 
     accept_tos = models.BooleanField(
@@ -1889,13 +2157,15 @@ class UserProfile(SafeDeleteModel):
     receive_important_communications = models.BooleanField(
         default=False,
         verbose_name=_(u'I accept to receive rare important communications via email'),
-        help_text=_(u'This is highly recommended. These are very rare and contain information that you probably want to have.')
+        help_text=_(
+            u'This is highly recommended. These are very rare and contain information that you probably want to have.')
     )
 
     receive_newsletter = models.BooleanField(
         default=False,
         verbose_name=_(u'I accept to receive occasional newsletters via email'),
-        help_text=_(u'Newsletters do not have a fixed schedule, but in any case they are not sent out more often than once per month.')
+        help_text=_(
+            u'Newsletters do not have a fixed schedule, but in any case they are not sent out more often than once per month.')
     )
 
     receive_marketing_and_commercial_material = models.BooleanField(
@@ -1904,20 +2174,24 @@ class UserProfile(SafeDeleteModel):
         help_text=_(u'These emails may contain offers, commercial news, and promotions from AstroBin or its partners.')
     )
 
+    inactive_account_reminder_sent = models.DateTimeField(
+        null=True
+    )
+
     # Preferences (notification preferences are stored in the django
     # notification model)
     language = models.CharField(
         max_length=8,
         null=True, blank=True,
         verbose_name=_("Language"),
-        choices = LANGUAGE_CHOICES,
+        choices=LANGUAGE_CHOICES,
     )
 
     # One time notifications that won't disappear until marked as seen.
 
     seen_realname = models.BooleanField(
-        default = False,
-        editable = False,
+        default=False,
+        editable=False,
     )
 
     seen_email_permissions = models.BooleanField(
@@ -1975,6 +2249,7 @@ class UserProfile(SafeDeleteModel):
     @property
     def receive_emails(self):
         return self.receive_forum_emails
+
     receive_forum_emails = models.BooleanField(
         _('Receive e-mails from subscribed forum topics'),
         default=True)
@@ -2014,8 +2289,8 @@ class UserProfile(SafeDeleteModel):
 
         if not scores:
             try:
-                user_search_result =\
-                    SearchQuerySet().models(User).filter(django_id = self.user.pk)[0]
+                user_search_result = \
+                    SearchQuerySet().models(User).filter(django_id=self.user.pk)[0]
             except (IndexError, SearchFieldError):
                 return {
                     'user_scores_index': 0,
@@ -2033,99 +2308,102 @@ class UserProfile(SafeDeleteModel):
         return scores
 
     def is_moderator(self):
-        return self.user.groups.filter(name = 'content_moderators')
+        return self.user.groups.filter(name='content_moderators')
 
     def is_image_moderator(self):
-        return self.user.groups.filter(name = 'image_moderators')
+        return self.user.groups.filter(name='image_moderators')
 
     def is_iotd_staff(self):
-        return self.user.groups.filter(name = 'iotd_staff')
+        return self.user.groups.filter(name='iotd_staff')
 
     def is_iotd_submitter(self):
-        return self.user.groups.filter(name = 'iotd_submitters')
+        return self.user.groups.filter(name='iotd_submitters')
 
     def is_iotd_reviewer(self):
-        return self.user.groups.filter(name = 'iotd_reviewers')
+        return self.user.groups.filter(name='iotd_reviewers')
 
     def is_iotd_judge(self):
-        return self.user.groups.filter(name = 'iotd_judges')
+        return self.user.groups.filter(name='iotd_judges')
 
     class Meta:
         app_label = 'astrobin'
 
+
 def create_user_profile(sender, instance, created, **kwargs):
     if created:
         profile, created = UserProfile.objects.get_or_create(user=instance)
+
+
 post_save.connect(create_user_profile, sender=User)
 
 
 class Location(models.Model):
     name = models.CharField(
-        verbose_name = _("Name"),
-        help_text = _("A descriptive name, e.g. 'Home observatory' or 'Mount Whitney'."),
-        max_length = 255,
-        null = True,
-        blank = False,
+        verbose_name=_("Name"),
+        help_text=_("A descriptive name, e.g. 'Home observatory' or 'Mount Whitney'."),
+        max_length=255,
+        null=True,
+        blank=False,
     )
     city = models.CharField(
-        verbose_name = _("City"),
-        help_text = _("If this location is not in a city, use the name of the closest city."),
-        max_length = 255,
-        null = True,
-        blank = False,
+        verbose_name=_("City"),
+        help_text=_("If this location is not in a city, use the name of the closest city."),
+        max_length=255,
+        null=True,
+        blank=False,
     )
     state = models.CharField(
-        verbose_name = _("State or province"),
-        max_length = 255,
-        null = True, blank = True,
+        verbose_name=_("State or province"),
+        max_length=255,
+        null=True, blank=True,
     )
     country = CountryField(
-        verbose_name = _("Country"),
-        null = True,
-        blank = True,
+        verbose_name=_("Country"),
+        null=True,
+        blank=True,
     )
     lat_deg = models.IntegerField(
-        null = True,
-        blank = False,
+        null=True,
+        blank=False,
     )
     lat_min = models.IntegerField(
-        null = True, blank = True
+        null=True, blank=True
     )
     lat_sec = models.IntegerField(
-        null = True, blank = True
+        null=True, blank=True
     )
     lat_side = models.CharField(
-        default = 'N',
-        max_length = 1,
-        choices = (('N', _("North")), ('S', _("South"))),
-        verbose_name = _('North or south'),
+        default='N',
+        max_length=1,
+        choices=(('N', _("North")), ('S', _("South"))),
+        verbose_name=_('North or south'),
     )
     lon_deg = models.IntegerField(
-        null = True,
-        blank = False,
+        null=True,
+        blank=False,
     )
     lon_min = models.IntegerField(
-        null = True, blank = True
+        null=True, blank=True
     )
     lon_sec = models.IntegerField(
-        null = True, blank = True
+        null=True, blank=True
     )
     lon_side = models.CharField(
-        default = 'E',
-        max_length = 1,
-        choices = (('E', _("East")), ('W', _("West"))),
-        verbose_name = _('East or West'),
+        default='E',
+        max_length=1,
+        choices=(('E', _("East")), ('W', _("West"))),
+        verbose_name=_('East or West'),
     )
 
     altitude = models.IntegerField(
-        verbose_name = _("Altitude"),
-        help_text = _("In meters."),
-        null = True, blank = True)
+        verbose_name=_("Altitude"),
+        help_text=_("In meters."),
+        null=True, blank=True)
 
     user = models.ForeignKey(
         UserProfile,
-        editable = False,
-        null = True,
+        editable=False,
+        null=True,
     )
 
     def __unicode__(self):
@@ -2141,36 +2419,36 @@ class Location(models.Model):
 class App(models.Model):
     registrar = models.ForeignKey(
         User,
-        editable = False,
-        related_name = 'app_api_key')
+        editable=False,
+        related_name='app_api_key')
 
     name = models.CharField(
-        max_length = 256,
-        blank = False)
+        max_length=256,
+        blank=False)
 
     description = models.TextField(
-        null = True,
-        blank = True)
+        null=True,
+        blank=True)
 
     key = models.CharField(
-        max_length = 256,
-        editable = False,
-        blank = True,
-        default = '')
+        max_length=256,
+        editable=False,
+        blank=True,
+        default='')
 
     secret = models.CharField(
-        max_length = 256,
-        editable = False,
-        blank = True,
-        default = '')
+        max_length=256,
+        editable=False,
+        blank=True,
+        default='')
 
     active = models.BooleanField(
-        editable = False,
-        default = True)
+        editable=False,
+        default=True)
 
     created = models.DateTimeField(
-        editable = False,
-        auto_now_add = True)
+        editable=False,
+        auto_now_add=True)
 
     class Meta:
         ordering = ['-created']
@@ -2196,28 +2474,28 @@ class App(models.Model):
 class AppApiKeyRequest(models.Model):
     registrar = models.ForeignKey(
         User,
-        editable = False,
-        related_name = 'app_api_key_request')
+        editable=False,
+        related_name='app_api_key_request')
 
     name = models.CharField(
-        verbose_name = _("Name"),
-        help_text = _("The name of the website or app that wishes to use the APIs."),
-        max_length = 256,
-        blank = False)
+        verbose_name=_("Name"),
+        help_text=_("The name of the website or app that wishes to use the APIs."),
+        max_length=256,
+        blank=False)
 
     description = models.TextField(
-        null = True,
-        blank = True,
-        verbose_name = _("Description"),
-        help_text = _("Please explain the purpose of your application, and how you intend to use the API."))
+        null=True,
+        blank=True,
+        verbose_name=_("Description"),
+        help_text=_("Please explain the purpose of your application, and how you intend to use the API."))
 
     approved = models.BooleanField(
-        editable = False,
-        default = False)
+        editable=False,
+        default=False)
 
     created = models.DateTimeField(
-        editable = False,
-        auto_now_add = True)
+        editable=False,
+        auto_now_add=True)
 
     class Meta:
         ordering = ['-created']
@@ -2233,14 +2511,14 @@ class AppApiKeyRequest(models.Model):
             'subject': 'App API Key request from %s' % self.registrar.username,
             'body': 'Check the site\'s admin.',
         }
-        EmailMessage(**message).send(fail_silently = False)
+        EmailMessage(**message).send(fail_silently=False)
 
         return super(AppApiKeyRequest, self).save(*args, **kwargs)
 
     def approve(self):
         app, created = App.objects.get_or_create(
-            registrar = self.registrar, name = self.name,
-            description = self.description)
+            registrar=self.registrar, name=self.name,
+            description=self.description)
 
         self.approved = True
         self.save()
@@ -2261,30 +2539,30 @@ class AppApiKeyRequest(models.Model):
 class ImageOfTheDay(models.Model):
     image = models.ForeignKey(
         Image,
-        related_name = 'image_of_the_day')
+        related_name='image_of_the_day')
 
     date = models.DateField(
-        auto_now_add = True)
+        auto_now_add=True)
 
     runnerup_1 = models.ForeignKey(
         Image,
-        related_name = 'iotd_runnerup_1',
-        null = True,
-        on_delete = models.SET_NULL,
+        related_name='iotd_runnerup_1',
+        null=True,
+        on_delete=models.SET_NULL,
     )
 
     runnerup_2 = models.ForeignKey(
         Image,
-        related_name = 'iotd_runnerup_2',
-        null = True,
-        on_delete = models.SET_NULL,
+        related_name='iotd_runnerup_2',
+        null=True,
+        on_delete=models.SET_NULL,
     )
 
     chosen_by = models.ForeignKey(
         User,
-        related_name = "iotds_chosen",
-        null = True,
-        on_delete = models.SET_NULL,
+        related_name="iotds_chosen",
+        null=True,
+        on_delete=models.SET_NULL,
     )
 
     class Meta:
@@ -2298,10 +2576,10 @@ class ImageOfTheDay(models.Model):
 class ImageOfTheDayCandidate(models.Model):
     image = models.ForeignKey(
         Image,
-        related_name = 'image_of_the_day_candidate')
+        related_name='image_of_the_day_candidate')
 
     date = models.DateField(
-        auto_now_add = True)
+        auto_now_add=True)
 
     position = models.PositiveIntegerField()
 
@@ -2321,8 +2599,8 @@ class ImageOfTheDayCandidate(models.Model):
 
 class GlobalStat(models.Model):
     date = models.DateField(
-        editable = False,
-        auto_now_add = True)
+        editable=False,
+        auto_now_add=True)
 
     users = models.IntegerField()
     images = models.IntegerField()
@@ -2354,45 +2632,44 @@ class RetailedGear(models.Model):
 
     retailer = models.ForeignKey(
         User,
-        null = False,
-        verbose_name = _("Producer"),
-        related_name = 'retailed_gear',
-        editable = False
+        null=False,
+        verbose_name=_("Producer"),
+        related_name='retailed_gear',
+        editable=False
     )
 
-
     link = models.URLField(
-        max_length = 512,
-        null = True,
-        blank = True,
-        verbose_name = _("Link"),
-        help_text = _("The link to this product's page on your website."),
+        max_length=512,
+        null=True,
+        blank=True,
+        verbose_name=_("Link"),
+        help_text=_("The link to this product's page on your website."),
     )
 
     price = models.DecimalField(
-        max_digits = 10,
-        decimal_places = 2,
-        null = True,
-        blank = True,
-        verbose_name = _("Price"),
+        max_digits=10,
+        decimal_places=2,
+        null=True,
+        blank=True,
+        verbose_name=_("Price"),
     )
 
     currency = models.CharField(
-        max_length = 3,
-        choices = CURRENCY_CHOICES,
-        default = 'EUR',
-        blank = False,
-        verbose_name = _("Currency"),
+        max_length=3,
+        choices=CURRENCY_CHOICES,
+        default='EUR',
+        blank=False,
+        verbose_name=_("Currency"),
     )
 
     created = models.DateTimeField(
-        auto_now_add = True,
-        editable = False,
+        auto_now_add=True,
+        editable=False,
     )
 
     updated = models.DateTimeField(
-        auto_now = True,
-        editable = False,
+        auto_now=True,
+        editable=False,
     )
 
     class Meta:
@@ -2404,69 +2681,73 @@ class RetailedGear(models.Model):
 class CommercialGear(models.Model):
     producer = models.ForeignKey(
         User,
-        null = False,
-        verbose_name = _("Producer"),
-        related_name = 'commercial_gear',
-        editable = False
+        null=False,
+        verbose_name=_("Producer"),
+        related_name='commercial_gear',
+        editable=False
     )
 
     proper_make = models.CharField(
-        null = True,
-        blank = True,
-        max_length = 128,
-        verbose_name = _("Proper make"),
-        help_text = _("Sometimes, product make/brand/producer/developer names are not written properly by the users. Write here the proper make/brand/producer/developer name."),
+        null=True,
+        blank=True,
+        max_length=128,
+        verbose_name=_("Proper make"),
+        help_text=_(
+            "Sometimes, product make/brand/producer/developer names are not written properly by the users. Write here the proper make/brand/producer/developer name."),
     )
 
     proper_name = models.CharField(
-        null = True,
-        blank = True,
-        max_length = 128,
-        verbose_name = _("Proper name"),
-        help_text = _("Sometimes, product names are not written properly by the users. Write here the proper product name, not including the make/brand/producer/developer name.<br/>It is recommended that you try to group as many items as possible, so try to use a generic version of your product's name."),
+        null=True,
+        blank=True,
+        max_length=128,
+        verbose_name=_("Proper name"),
+        help_text=_(
+            "Sometimes, product names are not written properly by the users. Write here the proper product name, not including the make/brand/producer/developer name.<br/>It is recommended that you try to group as many items as possible, so try to use a generic version of your product's name."),
     )
 
     image = models.ForeignKey(
         Image,
-        null = True,
-        blank = True,
-        verbose_name = _("Image"),
-        help_text = _("The official, commercial image for this product. Upload an image via the regular uploading interface, set its subject type to \"Gear\", and then choose it from this list. If you upload several revisions, they will also appear in the commercial page."),
-        related_name = 'featured_gear',
-        on_delete = models.SET_NULL,
+        null=True,
+        blank=True,
+        verbose_name=_("Image"),
+        help_text=_(
+            "The official, commercial image for this product. Upload an image via the regular uploading interface, set its subject type to \"Gear\", and then choose it from this list. If you upload several revisions, they will also appear in the commercial page."),
+        related_name='featured_gear',
+        on_delete=models.SET_NULL,
     )
 
     tagline = models.CharField(
-        max_length = 256,
-        null = True,
-        blank = True,
-        verbose_name = _("Tagline"),
-        help_text = _("A memorable phrase that will sum up this product, for marketing purposes."),
+        max_length=256,
+        null=True,
+        blank=True,
+        verbose_name=_("Tagline"),
+        help_text=_("A memorable phrase that will sum up this product, for marketing purposes."),
     )
 
     link = models.URLField(
-        max_length = 256,
-        null = True,
-        blank = True,
-        verbose_name = _("Link"),
-        help_text = _("The link to this product's page on your website."),
-     )
+        max_length=256,
+        null=True,
+        blank=True,
+        verbose_name=_("Link"),
+        help_text=_("The link to this product's page on your website."),
+    )
 
     description = models.TextField(
-        null = True,
-        blank = True,
-        verbose_name = _("Description"),
-        help_text = _("Here you can write the full commercial description of your product. You can use some <a href=\"/faq/#comments\">formatting rules</a>."),
+        null=True,
+        blank=True,
+        verbose_name=_("Description"),
+        help_text=_(
+            "Here you can write the full commercial description of your product. You can use some <a href=\"/faq/#comments\">formatting rules</a>."),
     )
 
     created = models.DateTimeField(
-        auto_now_add = True,
-        editable = False,
+        auto_now_add=True,
+        editable=False,
     )
 
     updated = models.DateTimeField(
-        auto_now = True,
-        editable = False,
+        auto_now=True,
+        editable=False,
     )
 
     def is_paid(self):
@@ -2481,7 +2762,8 @@ class CommercialGear(models.Model):
 class BroadcastEmail(models.Model):
     subject = models.CharField(max_length=200)
     created = models.DateTimeField(default=timezone.now)
-    message = tinymce_models.HTMLField()
+    message = models.TextField()
+    message_html = models.TextField(null=True)
 
     def __unicode__(self):
         return self.subject

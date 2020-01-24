@@ -4,21 +4,27 @@
 {% load staticfiles %}
 
 <div class="modal hide fade" id="upload-revision-modal">
-    <div class="modal-header">
-        <a class="close" data-dismiss="modal">&times;</a>
-        <h3>{% trans "Upload new revision" %}</h3>
-    </div>
-    <div class="modal-body">
-        <div class="well">
-            {% blocktrans %}Did you improve the post-processing of your image? Upload the new revision!{% endblocktrans %}
+    <form id="upload-revision-form" class="form-inline" action="{% url 'image_revision_upload_process' %}" method="post"
+          enctype="multipart/form-data">{% csrf_token %}
+
+        <div class="modal-header">
+            <a class="close" data-dismiss="modal">&times;</a>
+            <h3>{% trans "Upload new revision" %}</h3>
         </div>
 
-        <form id="upload-revision-form" class="form-inline" action="{% url 'image_revision_upload_process' %}" method="post" enctype="multipart/form-data">{% csrf_token %}
-            {{upload_revision_form|as_bootstrap}}
-            <input type="hidden" name="image_id" value="{{image.id}}"/>
-            <input class="btn btn-primary" type="submit" value="{% trans "Upload" %}"/>
-            <span class="spinner hide"><img src="{% static 'astrobin/images/loading-bar.gif' %}" alt=""/></span>
-        </form>
-    </div>
-</div>
+        <div class="modal-body">
+            <div class="well">
+                {% blocktrans %}Did you improve the post-processing of your image? Upload the new
+                    revision!{% endblocktrans %}
+            </div>
 
+            {{ upload_revision_form|as_bootstrap }}
+            <input type="hidden" name="image_id" value="{{ image.get_id }}" />
+        </div>
+
+        <div class="modal-footer">
+            <input class="btn btn-primary" type="submit" value="{% trans "Upload" %}" />
+            <span class="spinner hide"><img src="{% static 'astrobin/images/loading-bar.gif' %}" alt="" /></span>
+        </div>
+    </form>
+</div>

@@ -36,7 +36,7 @@
 
         {% if requested_user|is_free or requested_user|is_lite %}
         <p>
-            {% trans "Images used" %}</br>
+            {% trans "Images used" %}<br/>
             <strong>
                 {{requested_user.userprofile.premium_counter}} /
                 {% if requested_user|is_free %}{{PREMIUM_MAX_IMAGES_FREE}}{% endif %}

@@ -7,9 +7,9 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2016-11-12 07:04+0000\n"
-"PO-Revision-Date: 2016-09-23 11:43+0000\n"
-"Last-Translator: csve <csve00@gmail.com>\n"
+"POT-Creation-Date: 2019-10-15 11:57+0000\n"
+"PO-Revision-Date: 2019-01-26 16:09+0000\n"
+"Last-Translator: sypai <sypai@mail.ru>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
 "Language: ru\n"
 "MIME-Version: 1.0\n"
@@ -17,22 +17,18 @@ msgstr ""
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=3; plural=(n%10==1 && n%100!=11 ? 0 : n%10>=2 && n"
 "%10<=4 && (n%100<10 || n%100>=20) ? 1 : 2);\n"
-"X-Generator: Pootle 2.5.0\n"
-"X-POOTLE-MTIME: 1474631026.396349\n"
+"X-Generator: Pootle 2.8\n"
+"X-POOTLE-MTIME: 1548518997.000000\n"
 
-#: forms.py:34
 msgid "Autosubmission deactivation strategy"
 msgstr "Варианты отключения автодобавления изображений"
 
-#: forms.py:36
 msgid "Keep all images currently auto-submitted"
 msgstr "Оставить все автодобавленные изображения"
 
-#: forms.py:37
 msgid "Remove all images and start over"
 msgstr "Удалить все изображения и начать заново"
 
-#: forms.py:39
 msgid ""
 "When changing your group from autosubmission to non-autosubmission, you need "
 "to think of what to do with the images currently in the group."
@@ -40,103 +36,74 @@ msgstr ""
 "В случае отключения автодобавления в группе, вы должны решить что делать с "
 "изображениями в группе."
 
-#: forms.py:52 templates/astrobin_apps_groups/group_manage_members.html:33
 msgid "Invite users"
 msgstr "Пригласить пользователей"
 
-#: forms.py:53
 msgid "Users will receive a notification and will be able to join the group"
 msgstr "Пользователи получат уведомления и смогут вступить в группу"
 
-#: models.py:17
 msgid "Professional network"
 msgstr "Профессиональная сеть"
 
-#: models.py:18
 msgid "Club or association"
 msgstr "Клуб или ассоциация"
 
-#: models.py:19
 msgid "Internet community"
 msgstr "Интернет сообщество"
 
-#: models.py:20
 msgid "Friends or partners"
 msgstr "Друзья или партнеры"
 
-#: models.py:21
 msgid "Geographical area"
 msgstr "Географическая территория"
 
-#: models.py:22
 msgid "Ad-hoc collaboration"
 msgstr "Целенаправленное сотрудничество"
 
-#: models.py:23
 msgid "Specific to an imaging technique"
 msgstr "Особенная технология съемки"
 
-#: models.py:24
 msgid "Specific to an astrophotography target"
 msgstr "Особенный объект съемки"
 
-#: models.py:25
 msgid "Specific to certain equipment"
 msgstr "Особенное оборудование"
 
-#: models.py:26
 msgid "Other"
 msgstr "Прочее"
 
-#: models.py:63 templates/astrobin_apps_groups/_group_list_table.html:7
-#: templates/astrobin_apps_groups/group_list.html:37
-#: templates/astrobin_apps_groups/group_manage_members.html:42
-#: templates/astrobin_apps_groups/group_manage_members.html:79
-#: templates/astrobin_apps_groups/group_manage_members.html:115
-#: templates/astrobin_apps_groups/group_members_list.html:28
-#: templates/astrobin_apps_groups/group_moderate_join_requests.html:31
 msgid "Name"
 msgstr "Название"
 
-#: models.py:69
 msgid "Description"
 msgstr "Описание"
 
-#: models.py:70
 msgid "HTML tags are allowed."
 msgstr "Разрешены HTML теги."
 
-#: models.py:77 templates/astrobin_apps_groups/_group_list_table.html:8
-#: templates/astrobin_apps_groups/group_list.html:44
 msgid "Category"
 msgstr "Категория"
 
-#: models.py:82
 msgid "Public group"
 msgstr "Открытая группа"
 
-#: models.py:83
 msgid ""
 "Public groups can be searched by anyone, and all their content is public."
 msgstr ""
 "В открытых группах можно искать всем желающим, и их содержимое открыто."
 
-#: models.py:88
 msgid "Moderated group"
 msgstr "Модерируемая группа"
 
-#: models.py:89
 msgid ""
 "Moderated groups have a moderation queue for posted images and join requests."
 msgstr ""
 "В модерируемых группах сущесвует очередь, в которую попадают изображения и "
 "запросы на вступление для последующей модерации."
 
-#: models.py:94
 msgid "Automatic submission"
 msgstr "Автодобавление"
 
-#: models.py:95
 msgid ""
 "Groups with automatic submissions always contain all public images from all "
 "members. Groups without automatic submission only contain images that are "
@@ -146,99 +113,36 @@ msgstr ""
 "Группы без автодобавления содержат только те изображения, которые были "
 "добавлены вручную."
 
-#: views.py:172
-msgid "Your new group was created successfully"
-msgstr "Ваша новая группа успешно создана"
-
-#: views.py:188
-msgid "Form saved"
-msgstr "Форма сохранена"
-
-#: views.py:197
-msgid "Group deleted"
-msgstr "Группа удалена"
-
-#: views.py:212
-msgid "You have joined the group"
-msgstr "Вы вступили в группу"
-
-#: views.py:215
-msgid "You already were a member of this group"
-msgstr "Вы уже были участником этой группы"
-
-#: views.py:221
-msgid ""
-"This is a moderated group, and your join request will be reviewed by a "
-"moderator"
-msgstr ""
-"Эта группа модерируемая, и ваш запрос на вступление будет рассмотрен "
-"модератором"
-
-#: views.py:253
-msgid "You have left the group"
-msgstr "Вы вышли из группы"
-
-#: views.py:354
-msgid "Group updated with your selection of images."
-msgstr "Группа пополнена вашей подборкой изображений."
-
-#: views.py:356 views.py:380
-msgid "You cannot add images that are not yours!"
-msgstr "Вы не можете добавить чужие изображения!"
-
-#: views.py:383
-msgid "Your image was added to the group."
-msgstr "Ваше изображение добавлено в группу."
-
-#: templates/astrobin_apps_groups/_group_list_table.html:9
-#: templates/astrobin_apps_groups/group_list.html:51
 msgid "Last activity"
 msgstr "Последние действия"
 
-#: templates/astrobin_apps_groups/_group_list_table.html:10
-#: templates/astrobin_apps_groups/group_detail.html:120
-#: templates/astrobin_apps_groups/group_manage_members.html:110
 msgid "Members"
 msgstr "Участники"
 
-#: templates/astrobin_apps_groups/_group_list_table.html:11
-#: templates/astrobin_apps_groups/group_detail.html:150
-#: templates/astrobin_apps_groups/group_detail.html:207
 msgid "Images"
 msgstr "Изображения"
 
-#: templates/astrobin_apps_groups/_group_list_table.html:12
-#: templates/astrobin_apps_groups/group_list.html:66
 msgid "Forum posts"
 msgstr "Сообщения на форуме"
 
-#: templates/astrobin_apps_groups/_group_list_table.html:19
 msgid "Owner"
 msgstr "Владелец"
 
-#: templates/astrobin_apps_groups/_group_list_table.html:23
 msgid "Moderator"
 msgstr "Модератор"
 
-#: templates/astrobin_apps_groups/_group_list_table.html:27
 msgid "Member"
 msgstr "Участник"
 
-#: templates/astrobin_apps_groups/_group_list_table.html:31
 msgid "Invited"
 msgstr "Приглашенный"
 
-#: templates/astrobin_apps_groups/_group_list_table.html:35
 msgid "Join request pending approval"
 msgstr "Запрос на вступление ожидает утверждения"
 
-#: templates/astrobin_apps_groups/group_add_remove_images.html:7
-#: templates/astrobin_apps_groups/group_add_remove_images.html:14
-#: templates/astrobin_apps_groups/group_detail.html:67
 msgid "Add/remove images"
 msgstr "Добавить/удалить изображения"
 
-#: templates/astrobin_apps_groups/group_add_remove_images.html:17
 msgid ""
 "Click on the images to include them in this group (and click again to "
 "exclude them). Then click on the Save button down below."
@@ -247,27 +151,18 @@ msgstr ""
 "группу (повторное нажатие отменяет выбор). Затем нажмите кнопку Сохранить "
 "ниже."
 
-#: templates/astrobin_apps_groups/group_add_remove_images.html:26
 msgid "(no title)"
 msgstr "(нет названия)"
 
-#: templates/astrobin_apps_groups/group_add_remove_images.html:45
-#: templates/astrobin_apps_groups/group_update.html:30
 msgid "Save"
 msgstr "Сохранить"
 
-#: templates/astrobin_apps_groups/group_add_remove_images.html:48
-#: templates/astrobin_apps_groups/group_create.html:29
 msgid "Cancel"
 msgstr "Отмена"
 
-#: templates/astrobin_apps_groups/group_confirm_delete.html:7
-#: templates/astrobin_apps_groups/group_confirm_delete.html:11
-#: templates/astrobin_apps_groups/group_detail.html:216
 msgid "Delete group?"
 msgstr "Удалить группу?"
 
-#: templates/astrobin_apps_groups/group_confirm_delete.html:14
 msgid ""
 "Careful! Do you really want to delete this group? This operation cannot be "
 "undone!"
@@ -275,96 +170,57 @@ msgstr ""
 "Осторожно! Вы действительно хотите удалить эту группу? Эта операция "
 "необратима!"
 
-#: templates/astrobin_apps_groups/group_confirm_delete.html:19
-#: templates/astrobin_apps_groups/group_detail.html:40
-#: templates/astrobin_apps_groups/group_detail.html:224
 msgid "Delete group"
 msgstr "Удалить группу"
 
-#: templates/astrobin_apps_groups/group_create.html:8
-#: templates/astrobin_apps_groups/group_create.html:23
-#: templates/astrobin_apps_groups/group_create.html:28
-#: templates/astrobin_apps_groups/group_list.html:21
 msgid "Create new group"
 msgstr "Создать новую группу"
 
-#: templates/astrobin_apps_groups/group_create.html:17
-msgid "Back to list"
-msgstr "Назад к списку"
-
-#: templates/astrobin_apps_groups/group_detail.html:19
 msgid "Admin"
 msgstr "Администратор"
 
-#: templates/astrobin_apps_groups/group_detail.html:26
-#: templates/astrobin_apps_groups/group_update.html:8
-#: templates/astrobin_apps_groups/group_update.html:25
 msgid "Edit group"
 msgstr "Редактировать группу"
 
-#: templates/astrobin_apps_groups/group_detail.html:33
-#: templates/astrobin_apps_groups/group_manage_members.html:6
-#: templates/astrobin_apps_groups/group_manage_members.html:24
 msgid "Manage members"
 msgstr "Управление участниками"
 
-#: templates/astrobin_apps_groups/group_detail.html:50
-#: templates/astrobin_apps_groups/group_list.html:14
-#: templates/astrobin_apps_groups/group_manage_members.html:80
-#: templates/astrobin_apps_groups/group_manage_members.html:116
 msgid "Actions"
 msgstr "Действия"
 
-#: templates/astrobin_apps_groups/group_detail.html:58
-#: templates/astrobin_apps_groups/group_detail.html:260
 msgid "Join group"
 msgstr "Вступить в группу"
 
-#: templates/astrobin_apps_groups/group_detail.html:76
-#: templates/astrobin_apps_groups/group_detail.html:276
 msgid "Leave group"
 msgstr "Покинуть группу"
 
-#: templates/astrobin_apps_groups/group_detail.html:86
-#: templates/astrobin_apps_groups/group_moderate_join_requests.html:6
-#: templates/astrobin_apps_groups/group_moderate_join_requests.html:24
 msgid "Moderate join requests"
 msgstr "Модерировать запросы на вступление"
 
-#: templates/astrobin_apps_groups/group_detail.html:96
 msgid "This group is public"
 msgstr "Эта группа открытая"
 
-#: templates/astrobin_apps_groups/group_detail.html:98
 msgid "This group is private"
 msgstr "Это закрытая группа"
 
-#: templates/astrobin_apps_groups/group_detail.html:102
 msgid "This group is moderated"
 msgstr "Это модерируемая группа"
 
-#: templates/astrobin_apps_groups/group_detail.html:104
 msgid "This group is not moderated"
 msgstr "Это немодерируемая группа"
 
-#: templates/astrobin_apps_groups/group_detail.html:108
 msgid "This group has automatic submission"
 msgstr "Это группа с автодобавлением"
 
-#: templates/astrobin_apps_groups/group_detail.html:110
 msgid "This group does not have automatic submission"
 msgstr "Это группа без автодополнения"
 
-#: templates/astrobin_apps_groups/group_detail.html:131
-#: templates/astrobin_apps_groups/group_manage_members.html:38
 msgid "Invited users"
 msgstr "Пригласить пользователей"
 
-#: templates/astrobin_apps_groups/group_detail.html:143
 msgid "Join requests"
 msgstr "Запросы на вступление"
 
-#: templates/astrobin_apps_groups/group_detail.html:162
 #, python-format
 msgid ""
 "A group created on %(date_created)s, owned by <a href=\"%(owner_url)s\">"
@@ -373,20 +229,9 @@ msgstr ""
 "Группа, созданная %(date_created)s, управляемая <a href=\"%(owner_url)s\">"
 "%(owner)s</a>, классифицируется как <strong>%(category)s</strong>."
 
-#: templates/astrobin_apps_groups/group_detail.html:171
-#, fuzzy
-msgid "Leave"
-msgstr "Покинуть группу"
-
-#: templates/astrobin_apps_groups/group_detail.html:178
-msgid "Join"
-msgstr ""
-
-#: templates/astrobin_apps_groups/group_detail.html:190
 msgid "Group forum"
 msgstr "Форум группы"
 
-#: templates/astrobin_apps_groups/group_detail.html:192
 #, python-format
 msgid ""
 "<strong>%(post_count)s</strong> posts in <strong>%(topic_count)s</strong> "
@@ -395,15 +240,15 @@ msgstr ""
 "<strong>%(post_count)s</strong> сообщений в <strong>%(topic_count)s</strong> "
 "темах"
 
-#: templates/astrobin_apps_groups/group_detail.html:199
 msgid "View all"
 msgstr "Посмотреть все"
 
-#: templates/astrobin_apps_groups/group_detail.html:201
 msgid "New topic"
 msgstr "Новая тема"
 
-#: templates/astrobin_apps_groups/group_detail.html:220
+msgid "Please join the group to view its forum."
+msgstr "Добавьтесь в группу, чтобы читать этот форум."
+
 msgid ""
 "Careful! Do you really want to delete this group? This operation cannot be "
 "undone and the group's forum and all its topics will be irreversibly deleted!"
@@ -411,11 +256,9 @@ msgstr ""
 "Осторожно! Вы действительно хотите удалить эту группу? Это необратимая "
 "операция, форум группы и все темы будут безвозвратно удалены!"
 
-#: templates/astrobin_apps_groups/group_detail.html:232
 msgid "Join group?"
 msgstr "Вступить в группу?"
 
-#: templates/astrobin_apps_groups/group_detail.html:238
 msgid ""
 "This is a public group: all content, including the members list, is "
 "available to non-members."
@@ -423,11 +266,9 @@ msgstr ""
 "Это открытая группа: весь контент, включая список участников, доступен для "
 "всех."
 
-#: templates/astrobin_apps_groups/group_detail.html:240
 msgid "This is a private group: only members have access to its contents."
 msgstr "Это закрытая группа: только участники имеют доступ к ее контенту."
 
-#: templates/astrobin_apps_groups/group_detail.html:245
 msgid ""
 "This is a moderated group, join requests, images and forum posts might go "
 "through a moderation queue."
@@ -435,11 +276,9 @@ msgstr ""
 "Это модерируемая группа, запросы на вступление, изображения и сообщения на "
 "форуме должны проходить модерацию."
 
-#: templates/astrobin_apps_groups/group_detail.html:247
 msgid "This is a non-moderated group."
 msgstr "Это немодерируемая группа."
 
-#: templates/astrobin_apps_groups/group_detail.html:252
 msgid ""
 "This is an automatic submission group: all of your images will instantly "
 "appear here without any need for action."
@@ -447,7 +286,6 @@ msgstr ""
 "Это группа с автодобавлением: все ваши изображения будут автоматически "
 "появляться здесь."
 
-#: templates/astrobin_apps_groups/group_detail.html:254
 msgid ""
 "This is a non-automatic submission group: you will pick and choose which "
 "images you want to submit."
@@ -455,11 +293,9 @@ msgstr ""
 "Это группа без автодобавления: вам нужно будет самостоятельно указать, какие "
 "изображения вы хотите добавить."
 
-#: templates/astrobin_apps_groups/group_detail.html:268
 msgid "Leave group?"
 msgstr "Покинуть группу?"
 
-#: templates/astrobin_apps_groups/group_detail.html:272
 msgid ""
 "By leaving this group, your image submissions will no longer be visible to "
 "group members, while your forum posts will remain. Are you sure?"
@@ -467,135 +303,135 @@ msgstr ""
 "Покидая эту группу, вы удаляете из нее все свои изображения, при этом ваши "
 "сообщения останутся. Вы уверены?"
 
-#: templates/astrobin_apps_groups/group_list.html:5
 msgid "Groups"
 msgstr "Группы"
 
-#: templates/astrobin_apps_groups/group_list.html:30
 msgid "Sort"
 msgstr "Упорядочить"
 
-#: templates/astrobin_apps_groups/group_list.html:59
 msgid "Date created"
 msgstr "Дата создания"
 
-#: templates/astrobin_apps_groups/group_list.html:78
 msgid "Your private groups"
 msgstr "Ваши закрытые группы"
 
-#: templates/astrobin_apps_groups/group_list.html:79
 msgid "You own, or are a member of, or were invited to, these private groups."
 msgstr "Вы владеете/участвуете/приглашены в эти закрытые группы."
 
-#: templates/astrobin_apps_groups/group_list.html:84
 msgctxt "group"
 msgid "Create private group"
 msgstr "Создать закрытую группу"
 
-#: templates/astrobin_apps_groups/group_list.html:99
 msgid "Public groups"
 msgstr "Открытые группы"
 
-#: templates/astrobin_apps_groups/group_list.html:100
 msgid "Open to the whole community."
 msgstr "Открыто для всего сообщества."
 
-#: templates/astrobin_apps_groups/group_list.html:105
 msgctxt "group"
 msgid "Create public group"
 msgstr "Создать открытую группу"
 
-#: templates/astrobin_apps_groups/group_list.html:117
 msgid "No groups available."
 msgstr "Нет доступных групп."
 
-#: templates/astrobin_apps_groups/group_manage_members.html:15
-#: templates/astrobin_apps_groups/group_members_list.html:15
-#: templates/astrobin_apps_groups/group_moderate_join_requests.html:15
-#: templates/astrobin_apps_groups/group_update.html:19
-msgid "Back to group"
-msgstr "Назад в группу"
-
-#: templates/astrobin_apps_groups/group_manage_members.html:43
 msgid "Revoke?"
 msgstr "Отозвать?"
 
-#: templates/astrobin_apps_groups/group_manage_members.html:59
-#: templates/astrobin_apps_groups/group_manage_members.html:224
 msgid "Revoke invitation"
 msgstr "Отозвать приглашение"
 
-#: templates/astrobin_apps_groups/group_manage_members.html:68
-#: templates/astrobin_apps_groups/group_manage_members.html:262
 msgid "This group has no active invitations."
 msgstr "В этой группе нет активных приглашений."
 
-#: templates/astrobin_apps_groups/group_manage_members.html:75
 msgid "Moderators"
 msgstr "Модераторы"
 
-#: templates/astrobin_apps_groups/group_manage_members.html:96
-#: templates/astrobin_apps_groups/group_manage_members.html:299
 msgid "Remove moderator status"
 msgstr "Убрать статус модератора"
 
-#: templates/astrobin_apps_groups/group_manage_members.html:104
-#: templates/astrobin_apps_groups/group_manage_members.html:335
 msgid "This group has no moderators."
 msgstr "В этой группе нет модераторов."
 
-#: templates/astrobin_apps_groups/group_manage_members.html:133
-#: templates/astrobin_apps_groups/group_manage_members.html:352
 msgid "Make moderator"
 msgstr "Добавить модератора"
 
-#: templates/astrobin_apps_groups/group_manage_members.html:144
 msgid "Remove member"
 msgstr "Удалить участника"
 
-#: templates/astrobin_apps_groups/group_manage_members.html:155
-#: templates/astrobin_apps_groups/group_manage_members.html:386
-#: templates/astrobin_apps_groups/group_members_list_entries.html:20
 msgid "This group has no members."
 msgstr "В этой группе нет участников."
 
-#: templates/astrobin_apps_groups/group_manage_members.html:175
 msgid "Type in a search term"
 msgstr "Введите слово для поиска"
 
-#: templates/astrobin_apps_groups/group_manage_members.html:176
 msgid "No results"
 msgstr "Результатов нет"
 
-#: templates/astrobin_apps_groups/group_manage_members.html:177
 msgid "Searching"
 msgstr "Выполняется поиск"
 
-#: templates/astrobin_apps_groups/group_members_list.html:7
 msgid "members list"
 msgstr "список участников"
 
-#: templates/astrobin_apps_groups/group_members_list.html:23
+msgid "Back to group"
+msgstr "Назад в группу"
+
 msgid "Full list of the group members"
 msgstr "Полный список участников группы"
 
-#: templates/astrobin_apps_groups/group_members_list.html:29
 msgid "Images in group"
 msgstr "Изображения в группе"
 
-#: templates/astrobin_apps_groups/group_members_list.html:30
 msgid "Forum posts in group"
 msgstr "Сообщения на форуме группы"
 
-#: templates/astrobin_apps_groups/group_moderate_join_requests.html:50
 msgid "Approve"
 msgstr "Подтвердить"
 
-#: templates/astrobin_apps_groups/group_moderate_join_requests.html:59
 msgid "Reject"
 msgstr "Отклонить"
 
-#: templates/astrobin_apps_groups/group_moderate_join_requests.html:66
-#: templates/astrobin_apps_groups/group_moderate_join_requests.html:97
 msgid "This group has no join requests."
 msgstr "В этой группе нет запросов на вступление."
+
+msgid "Your new group was created successfully"
+msgstr "Ваша новая группа успешно создана"
+
+msgid "Form saved"
+msgstr "Форма сохранена"
+
+msgid "Group deleted"
+msgstr "Группа удалена"
+
+msgid "You have joined the group"
+msgstr "Вы вступили в группу"
+
+msgid "You already were a member of this group"
+msgstr "Вы уже были участником этой группы"
+
+msgid ""
+"This is a moderated group, and your join request will be reviewed by a "
+"moderator"
+msgstr ""
+"Эта группа модерируемая, и ваш запрос на вступление будет рассмотрен "
+"модератором"
+
+msgid "You have left the group"
+msgstr "Вы вышли из группы"
+
+msgid "Group updated with your selection of images."
+msgstr "Группа пополнена вашей подборкой изображений."
+
+msgid "You cannot add images that are not yours!"
+msgstr "Вы не можете добавить чужие изображения!"
+
+msgid "Your image was added to the group."
+msgstr "Ваше изображение добавлено в группу."
+
+#~ msgid "Back to list"
+#~ msgstr "Назад к списку"
+
+#, fuzzy
+#~ msgid "Leave"
+#~ msgstr "Покинуть группу"

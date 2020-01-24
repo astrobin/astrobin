@@ -1,16 +1,14 @@
-# Django
+import persistent_messages
 from django.conf import settings
 from django.core.mail import send_mail
-from django.template.loader import get_template, render_to_string
 from django.template import TemplateDoesNotExist
+from django.template.loader import get_template, render_to_string
+from django.utils.safestring import mark_safe
 from django.utils.translation import ugettext
-
-# Third party
-from django_bouncy.models import Bounce
+from django_bouncy.models import Bounce, Complaint
 from gadjo.requestprovider.signals import get_request
 from notification.backends import BaseBackend
 from notification.backends.email import EmailBackend as BaseEmailBackend
-import persistent_messages
 
 
 class PersistentMessagesBackend(BaseBackend):
@@ -25,23 +23,30 @@ class PersistentMessagesBackend(BaseBackend):
 
         context = self.default_context()
         context.update(extra_context)
-        messages = self.get_formatted_messages(['notice.html'],
+        messages = self.get_formatted_messages(
+            ['notice.html'],
             notice_type.label, context)
         persistent_messages.add_message(
             request,
             persistent_messages.INFO,
             messages['notice.html'],
-            user = recipient)
+            user=recipient)
 
 
 class EmailBackend(BaseEmailBackend):
     def can_send(self, user, notice_type):
-        can_send = super(EmailBackend, self).can_send(user, notice_type)
         bounces = Bounce.objects.filter(
             hard=True,
             bounce_type="Permanent",
             address=user.email)
-        return can_send and not bounces.exists()
+        complaints = Complaint.objects.filter(
+            address=user.email)
+        deleted = user.userprofile.deleted is not None
+
+        if deleted or bounces or complaints:
+            return False
+
+        return super(EmailBackend, self).can_send(user, notice_type)
 
     def deliver(self, recipient, sender, notice_type, extra_context):
         context = self.default_context()
@@ -58,28 +63,27 @@ class EmailBackend(BaseEmailBackend):
             "full.html"
         ), notice_type.label, context)
 
-        subject = "".join(render_to_string("notification/email_subject.txt", {
+        subject = "".join(render_to_string("notification/email_subject.txt", dict(context, **{
             "message": messages["short.txt"],
-        }, context).splitlines())
+        })).splitlines())
 
-        body = render_to_string("notification/email_body.txt", {
-            "message": messages["full.txt"],
-        }, context)
+        body = render_to_string("notification/email_body.txt", dict(context, **{
+            "message": messages["full.txt"]
+        }))
 
         try:
-            html_template = get_template(
-                "notification/%s/full.html" % notice_type.label)
+            get_template("notification/%s/full.html" % notice_type.label)
             message = messages["full.html"]
         except TemplateDoesNotExist:
             message = messages["full.txt"]
 
-        html_body = render_to_string("notification/email_body.html", {
-            "message": message
-        }, context)
+        html_body = render_to_string("notification/email_body.html", dict(context, **{
+            "message": mark_safe(unicode(message))
+        }))
 
         send_mail(
             subject,
             body,
             settings.DEFAULT_FROM_EMAIL,
             [recipient.email],
-            html_message = html_body)
+            html_message=html_body)

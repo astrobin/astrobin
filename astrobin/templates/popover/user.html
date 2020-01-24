@@ -5,30 +5,30 @@
 
 <div class="user-popover">
     <div class="thumbnail astrobin-thumbnail">
-    	<a href="{% url 'user_page' user %}">{% avatar user 200 %}</a>
+        <a href="{% url 'user_page' user %}">{% avatar user 200 %}</a>
     </div>
     <div class="data">
-		<h3><a href="{% url 'user_page' user %}">{{user.username}}</a></h3>
+        <h3><a href="{% url 'user_page' user %}">{{ user.username }}</a></h3>
 
-		<table class="table">
-			<tr>
-				<th>{% trans "Images" %}:</th>
-				<td>{{images}}</td>
-			</tr>
-			<tr>
-				<th>{% trans "Member since" %}:</th>
-				<td>{{member_since}}</td>
-			</tr>
-		</table>
+        <table class="table">
+            <tr>
+                <th>{% trans "Images" %}:</th>
+                <td>{{ images }}</td>
+            </tr>
+            <tr>
+                <th>{% trans "Member since" %}:</th>
+                <td>{{ member_since }}</td>
+            </tr>
+        </table>
 
-		<div class="actions">
-		    {% if is_authenticated %}
+        <div class="actions">
+            {% if is_authenticated %}
                 {% add_remove_toggleproperty "follow" user request.user %}
-		    {% endif %}
-		    <a class="btn btn-mini btn-primary" href="{% url 'user_page' user %}">
-		    	<i class="icon-picture"></i>
-		    	{% trans "Gallery" %}
-		    </a>
-		</div>
-	</div>
+            {% endif %}
+            <a class="btn btn-mini btn-primary" href="{% url 'user_page' user %}">
+                <i class="icon-picture"></i>
+                {% trans "Gallery" %}
+            </a>
+        </div>
+    </div>
 </div>

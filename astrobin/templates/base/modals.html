@@ -12,20 +12,24 @@
     </div>
 
     <div class="modal-footer">
-        <a class="btn btn-primary" href="{% url 'astrobin_apps_notifications.all' %}">
-            {% trans "View all" %}
-        </a>
 
-        <a class="btn" href="{% url 'astrobin_apps_notifications.settings' %}">
-            {% trans "Settings" %}
-        </a>
-
-        {% if request.user|has_unseen_notifications %}
-            <a class="btn btn-danger"
-               href="{% url 'message_mark_all_read' %}">
-                {% trans "Mark all as read" %}
+        <form action="{% url 'astrobin_apps_notifications.mark_all_as_read' %}" method="post">{% csrf_token %}
+            <a class="btn btn-primary" href="{% url 'astrobin_apps_notifications.all' %}">
+                {% trans "View all" %}
             </a>
-        {% endif %}
+
+            <a class="btn" href="{% url 'astrobin_apps_notifications.settings' %}">
+                {% trans "Settings" %}
+            </a>
+
+            {% if request.user|has_unseen_notifications %}
+                <input type="submit"
+                       class="btn btn-danger"
+                       value="{% trans "Mark all as read" %}" />
+            {% endif %}
+
+            <input type="hidden" name="next" value="{{ request.path }}">
+        </form>
     </div>
 </div>
 

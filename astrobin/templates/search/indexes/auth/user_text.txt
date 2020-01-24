@@ -2,31 +2,3 @@
 {{object.real_name}}
 
 {{object.userprofile.real_name}}
-
-{% for i in object.telescopes.all %}
-	{{i}}
-{% endfor %}
-
-{% for i in object.cameras.all %}
-	{{i}}
-{% endfor %}
-
-{% for i in object.mounts.all %}
-	{{i}}
-{% endfor %}
-
-{% for i in object.filters.all %}
-	{{i}}
-{% endfor %}
-
-{% for i in object.focal_reducers.all %}
-	{{i}}
-{% endfor %}
-
-{% for i in object.software.all %}
-	{{i}}
-{% endfor %}
-
-{% for i in object.accessories.all %}
-	{{i}}
-{% endfor %}

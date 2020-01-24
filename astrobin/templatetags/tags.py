@@ -1,17 +1,19 @@
-# Django
+# -*- coding: utf-8 -*-
+
+from django.core.paginator import Paginator, EmptyPage, PageNotAnInteger
+from django.template import Library
 from django.template.defaultfilters import timesince
 from django.utils.translation import ugettext as _
-from django.template import Library
-from django.core.paginator import Paginator, EmptyPage, PageNotAnInteger
+from subscription.models import UserSubscription, Subscription
 
-# 3rd party
-from subscription.models import Subscription, UserSubscription
-
-# AstroBin
 from astrobin.gear import *
 
-
 register = Library()
+
+
+@register.filter
+def split(value, arg):
+    return value.split(arg)
 
 
 @register.filter
@@ -26,12 +28,14 @@ def current(request, pattern):
         return 'active'
     return ''
 
+
 @register.simple_tag
 def in_gallery(request):
     import re
     if re.search('/users/[\w.@+-]+/(?:collections.*)?$', request.path):
         return 'visible'
     return 'hidden'
+
 
 @register.simple_tag
 def in_collection(request):
@@ -54,24 +58,28 @@ def related_images(request, object_list, type):
         images = paginator.page(paginator.num_pages)
 
     return {
-            'request': request,
-            'images': images,
-            'related_type': type,
-           }
+        'request': request,
+        'images': images,
+        'related_type': type,
+    }
 
 
 @register.filter
 def ago(date_time):
-    date_time = date_time.replace(tzinfo = None)
+    date_time = date_time.replace(tzinfo=None)
     diff = abs(date_time - datetime.today())
     if diff.days <= 0:
         span = timesince(date_time)
-        span = span.split(",")[0] # just the most significant digit
+        span = span.split(",")[0]  # just the most significant digit
         if span == "0 " + _("minutes"):
             return _("seconds ago")
         return _("%s ago") % span
     return datetime.date(date_time)
 
+
+@register.filter
+def date_before(date1, date2):
+    return date1 < date2
 
 
 @register.filter
@@ -89,9 +97,9 @@ def image_list(context, object_list, **kwargs):
 
     view = kwargs.get('view')
     if view is None and 'view' in context:
-      view = context['view']
+        view = context['view']
     if view is None:
-      view = context['request'].GET.get('view', 'default')
+        view = context['request'].GET.get('view', 'default')
 
     return {
         'image_list': object_list,
@@ -101,46 +109,17 @@ def image_list(context, object_list, **kwargs):
         'nav_ctx': nav_ctx,
         'nav_ctx_extra': nav_ctx_extra,
     }
+
+
 register.inclusion_tag('inclusion_tags/image_list.html', takes_context=True)(image_list)
 
 
-@register.inclusion_tag('inclusion_tags/search_image_list.html', takes_context = True)
-def search_image_list(context, paginate = True, **kwargs):
-    object_list = context['object_list']
-
-    user_list  = [x for x in object_list if x != None and x.verbose_name == 'User']
-    gear_list  = [x for x in object_list if x != None and x.verbose_name == 'Gear']
-    image_list = [x for x in object_list if x != None and x.verbose_name == 'Image']
-
-    multiple = 0
-    if len(user_list) > 0:
-        multiple += 1
-    if len(gear_list) > 0:
-        multiple += 1
-    if len(image_list) > 0:
-        multiple += 1
-
-    multiple = multiple > 1
-
-    request = context['request']
-    page = request.GET.get('page')
-    if page is None:
-        page = 1
-    paginator = context['paginator']
-    page_obj = paginator.page(page)
-
-    view = kwargs.get('view')
-    if view is None:
-      view = context['request'].GET.get('view', 'default')
-
+@register.inclusion_tag('inclusion_tags/search_image_list.html', takes_context=True)
+def search_image_list(context, paginate=True, **kwargs):
     context.update({
         'paginate': paginate,
-        'user_list': user_list,
-        'gear_list': gear_list,
-        'image_list': image_list,
-        'sort': request.GET.get('sort'),
-        'search_type': request.GET.get('search_type', 0),
-        'multiple': multiple,
+        'search_domain': context['request'].GET.get('d'),
+        'sort': context['request'].GET.get('sort'),
     })
 
     return context
@@ -154,7 +133,6 @@ def seconds_to_hours(value):
         return "0"
 
     return "%.1f" % (int(value) / 3600.0)
-
 
 
 @register.filter
@@ -171,24 +149,6 @@ def cut_decimals(value, places):
 def is_checkbox(value):
     from django.forms.fields import CheckboxInput
     return isinstance(value, CheckboxInput)
-
-
-@register.simple_tag
-def search_form_query():
-    query = '&amp;search_type=0'
-
-    for i in range(0, 7):
-        query += '&amp;license=%d' % i
-
-    query += '&amp;telescope_type=any'
-    for i in range(0, 23):
-        query += '&amp;telescope_type=%d' % i
-
-    query += '&amp;camera_type=any'
-    for i in range(0, 6):
-        query += '&amp;camera_type=%d' % i
-
-    return query
 
 
 @register.inclusion_tag('inclusion_tags/list_gear.html')
@@ -211,7 +171,7 @@ def gear_alias(gear, user):
     default = _("no alias")
 
     try:
-        gear_user_info = GearUserInfo.objects.get(gear = gear, user = user)
+        gear_user_info = GearUserInfo.objects.get(gear=gear, user=user)
         if gear_user_info.alias:
             return gear_user_info.alias
     except GearUserInfo.DoesNotExist:
@@ -264,7 +224,7 @@ def gear_type(gear):
 
     if real_gear and gear_type and hasattr(real_gear, 'type') and real_gear.type:
         try:
-            t = TYPES_LOOKUP[gear_type][real_gear.type][1]
+            t = [item for item in TYPES_LOOKUP[gear_type] if item[0] == real_gear.type][0][1]
             return t
         except KeyError:
             pass
@@ -294,7 +254,7 @@ def valid_subscriptions(user):
     if user.is_anonymous():
          return []
 
-    us = UserSubscription.active_objects.filter(user = user)
+    us = UserSubscription.active_objects.filter(user=user)
     subs = [x.subscription for x in us if x.valid()]
     return subs
 
@@ -306,7 +266,7 @@ def inactive_subscriptions(user):
 
     return [x.subscription
             for x
-            in UserSubscription.objects.filter(user = user)
+            in UserSubscription.objects.filter(user=user)
             if not x.valid() or not x.active]
 
 
@@ -316,7 +276,7 @@ def has_valid_subscription(user, subscription_pk):
         return False
 
     us = UserSubscription.active_objects.filter(
-        user = user, subscription__pk = subscription_pk)
+        user=user, subscription__pk=subscription_pk)
 
     if us.count() == 0:
         return False
@@ -330,7 +290,7 @@ def has_valid_subscription_in_category(user, category):
         return False
 
     us = UserSubscription.active_objects.filter(
-        user = user, subscription__category = category)
+        user=user, subscription__category__contains=category)
 
     if us.count() == 0:
         return False
@@ -344,8 +304,8 @@ def get_premium_subscription_expiration(user):
         return None
 
     us = UserSubscription.active_objects.filter(
-        user = user,
-        subscription__group__name__in = ['astrobin_premium', 'astrobin_lite'])
+        user=user,
+        subscription__group__name__in=['astrobin_premium', 'astrobin_lite'])
 
     if us.count() == 0:
         return None
@@ -359,7 +319,7 @@ def has_subscription_by_name(user, name):
         return False
 
     return UserSubscription.objects.filter(
-        user = user, subscription__name = name).count() > 0
+        user=user, subscription__name=name).count() > 0
 
 
 @register.filter
@@ -368,7 +328,7 @@ def get_usersubscription_by_name(user, name):
         return None
 
     return UserSubscription.objects.get(
-        user = user, subscription__name = name)
+        user=user, subscription__name=name)
 
 
 @register.simple_tag
@@ -430,3 +390,48 @@ def can_like(user, image):
         return False
 
     return True
+
+
+@register.filter
+def humanize_image_acquisition_type(type):
+    for choice in Image.ACQUISITION_TYPE_CHOICES:
+        if type == choice[0]:
+            return choice[1]
+    return ""
+
+
+def decimal_to_hours_minutes_seconds(value, hour_symbol="h", minute_symbol="'", second_symbol="\""):
+    is_positive = value >= 0
+    value = abs(value)
+    hours = int(value / 15)
+    minutes = int(((value / 15) - hours) * 60)
+    seconds = ((((value / 15) - hours) * 60) - minutes) * 60
+
+    return "%s%d%s %d%s %d%s" % (
+        "" if is_positive else "-",
+        hours, hour_symbol,
+        minutes, minute_symbol,
+        seconds, second_symbol)
+
+
+def decimal_to_degrees_minutes_seconds(value, degree_symbol="°", minute_symbol="'", second_symbol="\""):
+    is_positive = value >= 0
+    value = abs(value)
+    minutes, seconds = divmod(value * 3600, 60)
+    degrees, minutes = divmod(minutes, 60)
+
+    return "%s%d%s %d%s %d%s" % (
+        "+" if is_positive else "-",
+        degrees, degree_symbol,
+        minutes, minute_symbol,
+        seconds, second_symbol)
+
+
+@register.filter
+def ra_to_hms(degrees):
+    return decimal_to_hours_minutes_seconds(degrees)
+
+
+@register.filter
+def dec_to_dms(degrees):
+    return decimal_to_degrees_minutes_seconds(degrees)

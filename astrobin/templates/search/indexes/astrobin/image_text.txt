@@ -2,10 +2,13 @@
 {{object.user.userprofile.real_name}}
 {{object.title}}
 {{object.description}}
+{{object.get_remote_source}}
 
-{% for i in object.objects_in_field %}
-	{{i}}
+{% for i in object.locations.all %}
+    {{i.city}}
 {% endfor %}
+
+{{object.solution.objects_in_field}}
 
 {% for i in object.imaging_telescopes.all %}
 	{{i}}

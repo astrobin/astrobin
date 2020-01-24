@@ -2,11 +2,13 @@
 import datetime
 import sys
 
-# Django
-from django.conf import settings
-
 # Third party
 import pytz
+# Django
+from django.conf import settings
+from django.contrib.gis.geoip2 import GeoIP2
+from django.db.models import Count
+from django.utils import timezone
 
 
 def unique_items(l):
@@ -81,6 +83,31 @@ def now_timezone():
         .astimezone(pytz.timezone(settings.TIME_ZONE))
 
 
+def get_client_ip(request):
+    x_forwarded_for = request.META.get('HTTP_X_FORWARDED_FOR')
+    if x_forwarded_for:
+        ip = x_forwarded_for.split(',')[0]
+    else:
+        ip = request.META.get('REMOTE_ADDR')
+    return ip
+
+
+def get_client_country_code(request):
+    try:
+        DEBUG_COUNTRY = request.GET.get('DEBUG_COUNTRY', None)
+        if DEBUG_COUNTRY is not None:
+            return DEBUG_COUNTRY
+    except AttributeError:
+        pass
+
+    geoip2 = GeoIP2()
+
+    try:
+        return geoip2.country_code(get_client_ip(request))
+    except:
+        return "UNKNOWN"
+
+
 #################################
 # TODO: move to affiliation app #
 #################################
@@ -136,3 +163,47 @@ def retailer_affiliate_limit(user):
         return sys.maxint
 
     return 0
+
+
+def inactive_accounts():
+    """Gets all the user profiles of users with at least one image, who haven't uploaded in over 2 months"""
+
+    from astrobin.models import Image, UserProfile
+
+    recipientPks = []
+    profiles = UserProfile.objects \
+        .annotate(num_images=Count("user__image")) \
+        .filter(num_images__gt=0)
+
+    two_months_ago = timezone.now() - datetime.timedelta(days=60)
+
+    for profile in profiles:
+        images = Image.objects_including_wip.filter(user=profile.user).order_by("-uploaded")
+        if images.count() > 0:
+            last_uploaded = images[0].uploaded
+            if last_uploaded < two_months_ago \
+                    and (profile.inactive_account_reminder_sent is None
+                         or profile.inactive_account_reminder_sent < two_months_ago):
+                # This user has at least 1 upload but all of them are older than 2 months
+                recipientPks.append(profile.pk)
+
+    return UserProfile.objects.filter(pk__in=recipientPks)
+
+
+def uniq(seq):
+    # Not order preserving
+    keys = {}
+    for e in seq:
+        keys[e] = 1
+    return keys.keys()
+
+
+def uniq_id_tuple(seq):
+    seen = set()
+    ret = []
+    for e in seq:
+        id = e[0]
+        if id not in seen:
+            seen.add(id)
+            ret.append(e)
+    return ret

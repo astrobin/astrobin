@@ -1,4 +1,9 @@
+import os
+
 from split_settings.tools import optional, include
+
+BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
+VERSION = "1.36.1"
 
 include(
     # Begin
@@ -6,6 +11,7 @@ include(
 
     # Django settings
     'components/admins.py',
+    'components/ads.py',
     'components/apps.py',
     'components/caches.py',
     'components/db.py',
@@ -16,6 +22,7 @@ include(
     'components/session.py',
     'components/storage.py',
     'components/templates.py',
+    'components/cloudflare.py',
 
     # Apps settings
     'components/account.py',
@@ -45,6 +52,6 @@ include(
     'environments/debug.py',
     'environments/testing.py',
 
-    # Locally overriden settings
+    # Locally overridden settings
     optional('local_settings.py')
 )

@@ -6,8 +6,11 @@
 {% load tags %}
 
 {% block title %}{% trans "Search" %}{% endblock %}
+
 {% block container_extra_classes %}
-    {% if 'q' in request.GET %}has-subnav{% endif %}
+    {% if request.GET.d == "i" or request.get.d == None %}
+        has-subnav
+    {% endif %}
 {% endblock %}
 
 {% block breadcrumbs %}
@@ -18,8 +21,9 @@
 
 {% block content %}
 
-<a class="anchor" name="page_anchor"></a>
-{% if 'q' in request.GET %}
+    <a class="anchor" name="page_anchor"></a>
+
+    {% if request.GET.d == "i" or request.GET.d == None %}
     <div class="subnav subnav-fixed">
         <ul class="nav nav-pills">
             <li class="dropdown">
@@ -35,6 +39,9 @@
                             {% trans "Relevance" %}
                         </a>
                     </li>
+
+                    <li class="divider"></li>
+
                     <li>
                         <a href="/search/{% query_string "sort='-uploaded'" "" %}">
                             <i class="icon-upload"></i>
@@ -59,333 +66,51 @@
                             {% trans "Views" %}
                         </a>
                     </li>
-                </ul>
-            </li>
 
-            <li class="pull-right">
-                {% ifequal request.GET.view 'table' %}
-                    <a href="{% query_string "" "view" %}">
-                        <i class="icon-th"></i>
-                    </a>
-                {% else %}
-                    <a href="{% query_string "view=table" "" %}">
-                        <i class="icon-list"></i>
-                    </a>
-                {% endifequal %}
+                    <li class="divider"></li>
+
+                    <li>
+                        <a href="/search/{% query_string "sort='-field_radius'" "" %}">
+                            <i class="icon-zoom-out"></i>
+                            {% trans "Large field radius" %}
+                        </a>
+                    </li>
+                    <li>
+                        <a href="/search/{% query_string "sort='field_radius'" "" %}">
+                            <i class="icon-zoom-in"></i>
+                            {% trans "Small field radius" %}
+                        </a>
+                    </li>
+
+                    <li class="divider"></li>
+
+                    <li>
+                        <a href="/search/{% query_string "sort='-pixel_scale'" "" %}">
+                            <i class="icon-zoom-out"></i>
+                            {% trans "Large pixel scale" %}
+                        </a>
+                    </li>
+                    <li>
+                        <a href="/search/{% query_string "sort='pixel_scale'" "" %}">
+                            <i class="icon-zoom-in"></i>
+                            {% trans "Small pixel scale" %}
+                        </a>
+                    </li>
+                </ul>
             </li>
         </ul> <!-- nav -->
     </div> <!-- subnav -->
-{% endif %}
+    {% endif %}
 
-<div class="row">
-    <div class="span3 advanced-search-box">
-        <form method="get" action="{% url 'haystack_search' %}">
-            <div class="search-category">
-                <div class="header">
-                    <span class="title">
-                        <i class="icon-search icon-white"></i>
-                        {% trans "Basic criteria" %}
-                    </span>
-                </div>
-                <div class="content">
-                    {% with form.q as field %}
-                    <p{% if field.errors %} class="error"{% endif %}>
-                            {{field.errors}}
-                            {{field.label_tag}}
-                            {{field}}
-                            <span class="helptext">{{field.help_text}}</span>
-                    </p>
-                    {% endwith %}
+    <div id="search-app"></div>
 
-                    {% with form.search_type as field %}
-                    <p{% if field.errors %} class="error"{% endif %}>
-                            {{field.errors}}
-                            {{field.label_tag}}
-                            {{field}}
-                            <span class="helptext">{{field.help_text}}</span>
-                    </p>
-                    {% endwith %}
-
-                    {% with form.solar_system_main_subject as field %}
-                    <p{% if field.errors %} class="error"{% endif %}>
-                            {{field.errors}}
-                            {{field.label_tag}}
-                            {{field}}
-                            <span class="helptext">{{field.help_text}}</span>
-                    </p>
-                    {% endwith %}
-
-                    <input class="btn btn-primary search-button" type="submit" value="{% trans "Search" %} &rarr;" />
-                </div>
-            </div>
-
-            <div class="search-category">
-                <div class="header">
-                    <span class="title"><i class="icon-cog icon-white"></i> {% trans "Gear used" %}</span>
-                    <span class="control"></span>
-                </div>
-                <div class="content">
-                    {% with form.telescope_type as field %}
-                    <p{% if field.errors %} class="error"{% endif %}>
-                            {{field.errors}}
-                            {{field.label_tag}}
-                            {{field}}
-                            <span class="helptext">{{field.help_text}}</span>
-                    </p>
-                    {% endwith %}
-
-                    {% with form.camera_type as field %}
-                    <p{% if field.errors %} class="error"{% endif %}>
-                            {{field.errors}}
-                            {{field.label_tag}}
-                            {{field}}
-                            <span class="helptext">{{field.help_text}}</span>
-                    </p>
-                    {% endwith %}
-
-                    {% with form.aperture_min as field %}
-                    <p{% if field.errors %} class="error"{% endif %}>
-                            {{field.errors}}
-                            {{field.label_tag}}
-                            {{field}}
-                            <span class="helptext">{{field.help_text}}</span>
-                    </p>
-                    {% endwith %}
-
-                    {% with form.aperture_max as field %}
-                    <p{% if field.errors %} class="error"{% endif %}>
-                            {{field.errors}}
-                            {{field.label_tag}}
-                            {{field}}
-                            <span class="helptext">{{field.help_text}}</span>
-                    </p>
-                    {% endwith %}
-
-                    {% with form.pixel_size_min as field %}
-                    <p{% if field.errors %} class="error"{% endif %}>
-                            {{field.errors}}
-                            {{field.label_tag}}
-                            {{field}}
-                            <span class="helptext">{{field.help_text}}</span>
-                    </p>
-                    {% endwith %}
-
-                    {% with form.pixel_size_max as field %}
-                    <p{% if field.errors %} class="error"{% endif %}>
-                            {{field.errors}}
-                            {{field.label_tag}}
-                            {{field}}
-                            <span class="helptext">{{field.help_text}}</span>
-                    </p>
-                    {% endwith %}
-
-                </div>
-            </div>
-
-            <div class="search-category">
-                <div class="header">
-                    <span class="title"><i class="icon-time icon-white"></i> {% trans "Acquisition details" %}</span>
-                    <span class="control"></span>
-                </div>
-                <div class="content">
-                    {% with form.start_date as field %}
-                    <p{% if field.errors %} class="error"{% endif %}>
-                            {{field.errors}}
-                            {{field.label_tag}}
-                            {{field}}
-                            <span class="helptext">{{field.help_text}}</span>
-                    </p>
-                    {% endwith %}
-
-                    {% with form.end_date as field %}
-                    <p{% if field.errors %} class="error"{% endif %}>
-                            {{field.errors}}
-                            {{field.label_tag}}
-                            {{field}}
-                            <span class="helptext">{{field.help_text}}</span>
-                    </p>
-                    {% endwith %}
-
-                    {% with form.integration_min as field %}
-                    <p{% if field.errors %} class="error"{% endif %}>
-                            {{field.errors}}
-                            {{field.label_tag}}
-                            {{field}}
-                            <span class="helptext">{{field.help_text}}</span>
-                    </p>
-                    {% endwith %}
-
-                    {% with form.integration_max as field %}
-                    <p{% if field.errors %} class="error"{% endif %}>
-                            {{field.errors}}
-                            {{field.label_tag}}
-                            {{field}}
-                            <span class="helptext">{{field.help_text}}</span>
-                    </p>
-                    {% endwith %}
-
-                    {% with form.moon_phase_min as field %}
-                    <p{% if field.errors %} class="error"{% endif %}>
-                            {{field.errors}}
-                            {{field.label_tag}}
-                            {{field}}
-                            <span class="helptext">{{field.help_text}}</span>
-                    </p>
-                    {% endwith %}
-
-                    {% with form.moon_phase_max as field %}
-                    <p{% if field.errors %} class="error"{% endif %}>
-                            {{field.errors}}
-                            {{field.label_tag}}
-                            {{field}}
-                            <span class="helptext">{{field.help_text}}</span>
-                    </p>
-                    {% endwith %}
-                </div>
-            </div>
-
-            <div class="search-category">
-                <div class="header">
-                    <span class="title"><i class="icon-legal icon-white"></i> {% trans "License" %}</span>
-                    <span class="control"></span>
-                </div>
-                <div class="content">
-                    {% with form.license as field %}
-                    <p{% if field.errors %} class="error"{% endif %}>
-                            {{field.errors}}
-                            {{field}}
-                            <span class="helptext">{{field.help_text}}</span>
-                    </p>
-                    {% endwith %}
-                </div>
-            </div>
-
-            <input class="btn btn-primary search-button" type="submit" value="{% trans "Search" %} &rarr;" />
-        </form>
-    </div> <!-- span3 -->
-
-    <div class="span9">
-        {% if 'q' in request.GET %}
-            <div class="search-results">
-                {% search_image_list %}
-            </div>
-        {% else %}
-            <div class="well">{% blocktrans %}Please input some search terms!{% endblocktrans %}</div>
-        {% endif %}
+    <div class="search-results">
+        {% search_image_list %}
     </div>
-</div>
+
 {% endblock %}
 
 {% block extra_js %}
-<script language="javascript">
-    $(document).ready(function() {
-        var range = function($input_min, $input_max, min, max, label, unit, help_text) {
-            var $first_p = $input_min.closest('p');
-
-            $input_min.closest('p').hide();
-            $input_max.closest('p').hide();
-
-            var template = '\
-                <label>' + label + ' <span class="min"></span> - <span class="max"></span> ' + unit + '</label>\
-                <div class="slider"></div>\
-                <span class="helptext">' + help_text + '</span>\
-            ';
-            var $container = $('<p/>').html(template);
-            $container.find('label .min').text($input_min.val() || min);
-            $container.find('label .max').text($input_max.val() || max);
-
-            $container.insertBefore($first_p);
-
-            $container.find('.slider').slider({
-                range: true,
-                min: min,
-                max: max,
-                values: [$input_min.val() || min, $input_max.val() || max],
-                slide: function(event, ui) {
-                    $container.find('label .min').text(ui.values[0]);
-                    $input_min.val(ui.values[0]);
-
-                    $container.find('label .max').text(ui.values[1]);
-                    $input_max.val(ui.values[1]);
-                }
-            });
-        };
-        range($('input[name="integration_min"]'),
-              $('input[name="integration_max"]'),
-              0, 100,
-              "{% trans "Integration" %}:",
-              "{% trans "hours" %}:",
-              ""
-        );
-        range($('input[name="moon_phase_min"]'),
-              $('input[name="moon_phase_max"]'),
-              0, 100,
-              "{% trans "Avg. Moon phase" %}:",
-              "%:",
-              ""
-        );
-
-        range($('input[name="aperture_min"]'),
-              $('input[name="aperture_max"]'),
-              0, 1000,
-              "{% trans "Telescope's aperture" %}:",
-              "{% trans "mm" %}:",
-              ""
-        );
-
-        range($('input[name="pixel_size_min"]'),
-              $('input[name="pixel_size_max"]'),
-              1, 24,
-              "{% trans "Pixel size" %}:",
-              "{% trans "&mu;m" %}:",
-              ""
-        );
-
-        var $controls = $('.search-category .header .control');
-        if (!astrobin_common.utils.checkParameterExists('q')) {
-            $controls.closest('.search-category').find('.content').hide();
-            $controls.html('<a class="expand" href="#">[+]</a>');
-        } else {
-            $controls.html('<a class="collapse" href="#">[-]</a>');
-        }
-        $controls.find('a').click(function() {
-            if ($(this).hasClass('expand')) {
-                $(this).closest('.search-category').find('.content').show('fast');
-                $(this).text('[-]')
-                       .removeClass('expand')
-                       .addClass('collapse');
-            } else if ($(this).hasClass('collapse')) {
-                $(this).closest('.search-category').find('.content').hide('fast');
-                $(this).text('[+]')
-                       .removeClass('collapse')
-                       .addClass('expand');
-            }
-            return false;
-        });
-
-        $('select[name="telescope_type"]').simplemultiselect({
-            maxWidth: 201,
-            checkAllText: "{% trans "Select all" %}",
-            uncheckAllText: "{% trans "Select none" %}",
-            noneSelectedText: "{% trans "Select types" %}",
-            selectedText: "{% trans "# selected" %}"
-        });
-        $('select[name="camera_type"]').simplemultiselect({
-            maxWidth: 201,
-            checkAllText: "{% trans "Select all" %}",
-            uncheckAllText: "{% trans "Select none" %}",
-            noneSelectedText: "{% trans "Select types" %}",
-            selectedText: "{% trans "# selected" %}"
-        });
-
-
-        $('select[name="license"]').simplemultiselect({
-            maxWidth: 201,
-            checkAllText: "{% trans "Select all" %}",
-            uncheckAllText: "{% trans "Select none" %}",
-            noneSelectedText: "{% trans "Select licenses" %}",
-            selectedText: "{% trans "# selected" %}"
-        });
-    });
-</script>
+    {% include "js/vue.html" %}
+    {% include "vue_frontend/search_app/index.html" %}
 {% endblock %}

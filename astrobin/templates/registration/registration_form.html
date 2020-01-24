@@ -23,7 +23,7 @@
             {% blocktrans %}By registering with AstroBin, you agree to our <a href="{{tos_url}}">terms of service</a>.{% endblocktrans %}
         </div>
 
-        <form class="form-horizontal" method="post" action=".">{% csrf_token %}
+        <form class="form-horizontal" method="post" action="">{% csrf_token %}
             {{ form|as_bootstrap }}
 
             <div class="form-actions">
