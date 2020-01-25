@@ -59,7 +59,7 @@
                     </a>
                 {% endif %}
 
-                {% if user|is_premium %}
+                {% if user|is_premium or user|is_ultimate_2020 %}
                     {% blocktrans %}Thank you for being a premium member! Enjoy your unlimited images.{% endblocktrans %}
                 {% endif %}
             </p>
