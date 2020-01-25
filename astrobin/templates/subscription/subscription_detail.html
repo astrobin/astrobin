@@ -60,7 +60,7 @@
                 {% trans object.name %}
                 <small>
                     {% if object.price > 0 %}
-                        $ {{object.price}} USD /
+                        {{ object.currency }} {{object.price}} /
 
                         {% if object.recurrence_unit == 'D' %}
                             {% trans "day" %}

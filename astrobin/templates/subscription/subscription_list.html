@@ -20,120 +20,122 @@
         <h1>{% trans "Subscription plans" %}</h1>
         {% if PREMIUM_ENABLED %}
             <div class="row subscription-plans-overview">
-                <div class="span4">
+                <div class="span4 lite">
+                    {% get_subscription_by_name 'AstroBin Lite 2020+' as subscription %}
                     <div class="subtle-container">
-                        <div class="logo">
-                            <img src="{% static 'astrobin/images/astrobin-lite-badge.png' %}" />
-                        </div>
                         <div class="header">
-                            AstroBin Lite
+                            <div class="subscription-name">Lite</div>
                             <div class="price">
-                                <span class="number">$19</span> USD / {% trans "year" %}
+                                {{ subscription.currency }}
+                                <span class="number">{{ PREMIUM_PRICE_LITE }}</span> / {% trans "year" %}
                             </div>
-                            {% get_subscription_by_name 'AstroBin Lite' as subscription %}
                             {% include 'subscription/_subscription_status_form.html' %}
                         </div>
+
                         <ul>
                             <li>
-                                <i class="icon-ok"></i>{% blocktrans with number=PREMIUM_MAX_IMAGES_LITE size=PREMIUM_MAX_IMAGE_SIZE_LITE|filesizeformat %}{{ number }} images, max {{ size }} each {% endblocktrans %}
+                                <i class="icon-ok"></i>{% blocktrans with number=PREMIUM_MAX_IMAGES_LITE size=PREMIUM_MAX_IMAGE_SIZE_LITE|filesizeformat %}
+                                {{ number }} images, max {{ size }} each{% endblocktrans %}
                             </li>
-                            <li><i class="icon-ok"></i>{% trans "View images tech info" %}</li>
+                            <li><i class="icon-ok"></i>{% trans "View complete images tech info" %}</li>
                             <li><i class="icon-ok"></i>{% trans "Advanced search" %}</li>
+                            <li>
+                                <i class="icon-ok"></i>{% blocktrans with number=PREMIUM_MAX_REVISIONS_LITE %}Up to {{ number }} revisions per image{% endblocktrans %}
+                            </li>
                             <li><i class="icon-ok"></i>{% trans "Social features (likes, comments, forums, etc)" %}</li>
-                            <li><i class="icon-ok"></i>{% trans "Basic plate-solving" %}</li>
-                            <li><i class="icon-ok"></i>{% trans "View astronomy ads from our partners" %}</li>
+                            <li><i class="icon-ok"></i>{% trans "Create and join Groups" %}</li>
+                            <li><i class="icon-ok"></i>{% trans "Plate-solving" %}</li>
                         </ul>
                     </div>
 
-                    <div class="subtle-container coming-soon">
-                        <div class="header">{% trans "Coming soon..." %}</div>
+                    <div class="subtle-container in-the-future">
+                        <div class="header">{% trans "In the future..." %}</div>
                         <ul>
-                            <li><i class="icon-ok"></i>{% trans "Vote in custom contests" %}</li>
+                            <li><i class="icon-ok"></i>{% trans "Vote in custom community contests" %}</li>
                             <li><i class="icon-ok"></i>{% trans "View ads in the Buy & Sell section" %}</li>
                         </ul>
                     </div>
                 </div>
 
-                <div class="span4">
+                <div class="span4 premium">
+                    {% get_subscription_by_name 'AstroBin Premium 2020+' as subscription %}
                     <div class="subtle-container">
-                        <div class="logo">
-                            <img src="{% static 'astrobin/images/astrobin-premium-badge.png' %}" />
-                        </div>
                         <div class="header">
-                            AstroBin Premium
+                            <div class="subscription-name">Premium</div>
                             <div class="price">
-                                <span class="number">$39</span> USD / {% trans "year" %}
+                                {{ subscription.currency }}
+                                <span class="number">{{ PREMIUM_PRICE_PREMIUM }}</span> / {% trans "year" %}
                             </div>
-                            {% get_subscription_by_name 'AstroBin Premium' as subscription %}
                             {% include 'subscription/_subscription_status_form.html' %}
                         </div>
                         <ul>
                             <li>
-                                <i class="icon-ok"></i>{% blocktrans with number=PREMIUM_MAX_IMAGES_PREMIUM size=PREMIUM_MAX_IMAGE_SIZE_PREMIUM|filesizeformat %}{{ number }} images, max {{ size }} each {% endblocktrans %}
+                                <i class="icon-ok"></i>
+                                {% blocktrans with number=PREMIUM_MAX_IMAGES_PREMIUM size=PREMIUM_MAX_IMAGE_SIZE_PREMIUM|filesizeformat %}{{ number }} images, max {{ size }} each{% endblocktrans %}
                             </li>
-                            <li><i class="icon-ok"></i>{% trans "View images tech info" %}</li>
+                            <li><i class="icon-ok"></i>{% trans "View complete images tech info" %}</li>
                             <li><i class="icon-ok"></i>{% trans "Advanced search" %}</li>
                             <li>
-                                <i class="icon-ok"></i>{% blocktrans with number=PREMIUM_MAX_REVISIONS_PREMIUM %}Up to {{  number  }} revisions per image{% endblocktrans %}
+                                <i class="icon-ok"></i>{% blocktrans with number=PREMIUM_MAX_REVISIONS_PREMIUM %}Up to {{ number }} revisions per image{% endblocktrans %}
                             </li>
                             <li><i class="icon-ok"></i>{% trans "Social features (likes, comments, forums, etc)" %}</li>
                             <li><i class="icon-ok"></i>{% trans "Participate in Image of the Day / Top Picks contests" %}</li>
                             <li><i class="icon-ok"></i>{% trans "Create and join Groups" %}</li>
-                            <li><i class="icon-ok"></i>{% trans "Basic plate-solving" %}</li>
-                            <li><i class="icon-ok"></i>{% trans "View astronomy ads from our partners" %}</li>
+                            <li><i class="icon-ok"></i>{% trans "Plate-solving" %}</li>
+                            <li><i class="icon-ok"></i>{% trans "Option to hide astronomy ads from our partners" %}</li>
                         </ul>
                     </div>
 
-                    <div class="subtle-container coming-soon">
-                        <div class="header">{% trans "Coming soon..." %}</div>
+                    <div class="subtle-container in-the-future">
+                        <div class="header">{% trans "In the future..." %}</div>
                         <ul>
-                            <li><i class="icon-ok"></i>{% trans "Vote in custom contests" %}</li>
-                            <li><i class="icon-ok"></i>{% trans "View ads in the Buy & Sell section" %}</li>
-                            <li><i class="icon-ok"></i>{% trans "Basic access to official mobile app" %}</li>
-                        </ul>
-                    </div>
-                </div>
-
-                <div class="span4">
-                    <div class="subtle-container">
-                        <div class="logo">
-                            <img src="{% static 'astrobin/images/astrobin-ultimate-badge.png' %}" />
-                        </div>
-                        <div class="header">
-                            AstroBin Ultimate
-                            <div class="price">
-                                <span class="number">$49</span> USD / {% trans "year" %}
-                            </div>
-                            {% get_subscription_by_name 'AstroBin Ultimate' as subscription %}
-                            {% include 'subscription/_subscription_status_form.html' %}
-                        </div>
-                        <ul>
-                            <li>
-                                <i class="icon-ok"></i>{% blocktrans %}Unlimited images, unlimited size each {% endblocktrans %}
-                            </li>
-                            <li><i class="icon-ok"></i>{% trans "View images tech info" %}</li>
-                            <li><i class="icon-ok"></i>{% trans "Advanced search" %}</li>
-                            <li><i class="icon-ok"></i>{% trans "Unlimited revisions per image" %}</li>
-                            <li><i class="icon-ok"></i>{% trans "Social features (likes, comments, forums, etc)" %}</li>
-                            <li><i class="icon-ok"></i>{% trans "Participate in Image of the Day / Top Picks contests" %}</li>
-                            <li><i class="icon-ok"></i>{% trans "Create and join Groups" %}</li>
-                            <li>
-                                <i class="icon-ok"></i>{% trans "Enhanced plate-solving with <a href='https://pixinsight.com/' target='_blank'>PixInsight</a>" %}
-                                <span class="coming-soon">{% trans "(coming soon)" %}</span>
-                            </li>
-                            <li><i class="icon-ok"></i>{% trans "Optionally hide astronomy ads from our partners" %}</li>
-                        </ul>
-                    </div>
-
-                    <div class="subtle-container coming-soon">
-                        <div class="header">{% trans "Coming soon..." %}</div>
-                        <ul>
-                            <li><i class="icon-ok"></i>{% trans "Vote and participate in custom contests" %}</li>
+                            <li><i class="icon-ok"></i>{% trans "Vote and participate in custom community contests" %}</li>
                             <li><i class="icon-ok"></i>{% trans "View and post ads in the Buy & Sell section" %}</li>
-                            <li><i class="icon-ok"></i>{% trans "Full access to official mobile app" %}</li>
                         </ul>
                     </div>
                 </div>
+
+                <div class="span4 ultimate">
+                    <div class="subtle-container">
+                        {% get_subscription_by_name 'AstroBin Ultimate 2020+' as subscription %}
+                        <div class="header">
+                            <div class="subscription-name">Ultimate</div>
+                            <div class="price">
+                                {{ subscription.currency }}
+                                <span class="number">{{ PREMIUM_PRICE_ULTIMATE }}</span> / {% trans "year" %}
+                            </div>
+                            {% include 'subscription/_subscription_status_form.html' %}
+                        </div>
+                        <ul>
+                            <li>
+                                <i class="icon-ok"></i>{% trans "Unlimited images, unlimited size" %}
+                            </li>
+                            <li><i class="icon-ok"></i>{% trans "View complete images tech info" %}</li>
+                            <li><i class="icon-ok"></i>{% trans "Advanced search" %}</li>
+                            <li>
+                                <i class="icon-ok"></i>{% trans "Unlimited image revisions" %}
+                            </li>
+                            <li><i class="icon-ok"></i>{% trans "Social features (likes, comments, forums, etc)" %}</li>
+                            <li>
+                                <i class="icon-ok"></i>{% trans "Participate in Image of the Day / Top Picks contests" %}
+                            </li>
+                            <li><i class="icon-ok"></i>{% trans "Create and join Groups" %}</li>
+                            <li><i class="icon-ok"></i>{% trans "Plate-solving" %}</li>
+                            <li><i class="icon-ok"></i>{% trans "No astronomy ads from our partners" %}</li>
+                            <li><i class="icon-ok"></i>{% trans "Nobody else, including visitors and free members, sees ads on your pages" %}</li>
+                            <li><i class="icon-ok"></i>{% trans "Guaranteed access to all future additions to AstroBin" %}</li>
+                        </ul>
+                    </div>
+
+                    <div class="subtle-container in-the-future">
+                        <div class="header">{% trans "In the future..." %}</div>
+                        <ul>
+                            <li><i class="icon-ok"></i>{% trans "Vote and participate in custom community contests" %}</li>
+                            <li><i class="icon-ok"></i>{% trans "View and post ads in the Buy & Sell section" %}</li>
+                        </ul>
+                    </div>
+                </div>
+
             </div>
 
             <div class="well">
@@ -169,9 +171,9 @@
                         <td class="ultimate"><span class="infinity">&infin;</span></td>
                     </tr>
                     <tr>
-                        <th>{% trans "Revisions" %}</th>
+                        <th>{% trans "Revisions per image" %}</th>
                         <td class="free"><i class="icon-remove"></i></td>
-                        <td class="lite"><i class="icon-remove"></i></td>
+                        <td class="lite">{{ PREMIUM_MAX_REVISIONS_PREMIUM }}</td>
                         <td class="premium">{{ PREMIUM_MAX_REVISIONS_PREMIUM }}</td>
                         <td class="ultimate"><span class="infinity">&infin;</span></td>
                     </tr>
@@ -183,8 +185,15 @@
                         <td class="ultimate"><span class="infinity">&infin;</span></td>
                     </tr>
                     <tr>
-                        <th>{% trans "View images tech info" %}</th>
+                        <th>{% trans "View complete images tech info" %}</th>
                         <td class="free"><i class="icon-remove"></i></td>
+                        <td class="lite"><i class="icon-ok"></i></td>
+                        <td class="premium"><i class="icon-ok"></i></td>
+                        <td class="ultimate"><i class="icon-ok"></i></td>
+                    </tr>
+                    <tr>
+                        <th>{% trans "Plate-solving" %}</th>
+                        <td class="free"><i class="icon-ok"></i></td>
                         <td class="lite"><i class="icon-ok"></i></td>
                         <td class="premium"><i class="icon-ok"></i></td>
                         <td class="ultimate"><i class="icon-ok"></i></td>
@@ -197,8 +206,22 @@
                         <td class="ultimate"><i class="icon-ok"></i></td>
                     </tr>
                     <tr>
-                        <th>{% trans "Social features" %}</th>
+                        <th>{% trans "Hide ads from our partners" %}</th>
                         <td class="free"><i class="icon-remove"></i></td>
+                        <td class="lite"><i class="icon-remove"></i></td>
+                        <td class="premium"><i class="icon-ok"></i></td>
+                        <td class="ultimate"><i class="icon-ok"></i></td>
+                    </tr>
+                    <tr>
+                        <th>{% trans "Nobody else, including visitors and free members, sees ads on your pages" %}</th>
+                        <td class="free"><i class="icon-remove"></i></td>
+                        <td class="lite"><i class="icon-remove"></i></td>
+                        <td class="premium"><i class="icon-remove"></i></td>
+                        <td class="ultimate"><i class="icon-ok"></i></td>
+                    </tr>
+                    <tr>
+                        <th>{% trans "Social features" %}</th>
+                        <td class="free"><i class="icon-ok"></i></td>
                         <td class="lite"><i class="icon-ok"></i></td>
                         <td class="premium"><i class="icon-ok"></i></td>
                         <td class="ultimate"><i class="icon-ok"></i></td>
@@ -209,18 +232,6 @@
                         <td class="lite"><i class="icon-remove"></i></td>
                         <td class="premium"><i class="icon-ok"></i></td>
                         <td class="ultimate"><i class="icon-ok"></i></td>
-                    </tr>
-                    <tr>
-                        <th>{% trans "Plate-solving" %}</th>
-                        <td class="free"><i class="icon-remove"></i></td>
-                        <td class="lite">{% trans "Basic" %}</td>
-                        <td class="premium">{% trans "Basic" %}</td>
-                        <td class="ultimate">
-                            {% trans "Enhanced" %}
-                            <span class="coming-soon">
-                                {% trans "(coming soon)" %}
-                            </span>
-                        </td>
                     </tr>
                     <tr>
                         <th>
@@ -234,38 +245,35 @@
                     <tr>
                         <th>
                             {% trans "Custom contests" %}
-                            <span class="coming-soon">
-                                {% trans "(coming soon)" %}
+                            <span class="in-the-future">
+                                {% trans "(in the future)" %}
                             </span>
                         </th>
                         <td class="free"><i class="icon-remove"></i></td>
                         <td class="lite">{% trans "Vote" %}</td>
                         <td class="premium">{% trans "Vote" %}</td>
-                        <td class="ultimate">{% trans "Vote and enter" %}</td>
+                        <td class="ultimate">{% trans "Vote + enter" %}</td>
                     </tr>
                     <tr>
                         <th>
-                            {% trans "Buy & Sell" %}
-                            <span class="coming-soon">
-                                {% trans "(coming soon)" %}
-                            </span>
-                        </th>
-                        <td class="free">{% trans "View" %}</td>
-                        <td class="lite">{% trans "View" %}</td>
-                        <td class="premium">{% trans "View" %}</td>
-                        <td class="ultimate">{% trans "Post" %}</td>
-                    </tr>
-                    <tr>
-                        <th>
-                            {% trans "Official mobile app" %}
-                            <span class="coming-soon">
-                                {% trans "(coming soon)" %}
+                            {% trans "Post in the Buy & Sell section" %}
+                            <span class="in-the-future">
+                                {% trans "(in the future)" %}
                             </span>
                         </th>
                         <td class="free"><i class="icon-remove"></i></td>
                         <td class="lite"><i class="icon-remove"></i></td>
-                        <td class="premium">{% trans "Basic access" %}</td>
-                        <td class="ultimate">{% trans "Full access" %}</td>
+                        <td class="premium"><i class="icon-remove"></i></td>
+                        <td class="ultimate"><i class="icon-ok"></i></td>
+                    </tr>
+                    <tr>
+                        <th>
+                            {% trans "Guaranteed access to future AstroBin features" %}
+                        </th>
+                        <td class="free"><i class="icon-remove"></i></td>
+                        <td class="lite"><i class="icon-remove"></i></td>
+                        <td class="premium"><i class="icon-remove"></i></td>
+                        <td class="ultimate"><i class="icon-ok"></i></td>
                     </tr>
                     </tbody>
                 </table>
@@ -274,6 +282,7 @@
 
         <div class="well">
             <h2>{% trans "AstroBin Raw Data subscription plans" %}</h2>
+
             <p>
                 {% blocktrans %}<strong>AstroBin Raw Data</strong> allows you to store your raw files (
                     <strong>FIT</strong> and <strong>digital camera raw</strong>) on AstroBin. We will keep them neatly
@@ -284,8 +293,11 @@
                 {% blocktrans %}Learn more by reading
                     <a href="{{ rawdata_url }}">a short introduction.</a>{% endblocktrans %}
             </p>
+
             <p>
                 {% trans "Here's a short description of each plan:" %}
+            </p>
+
             <ul class="subscription-plans-description-list">
                 <li>
                     <strong>Atom</strong><br/>
@@ -295,7 +307,7 @@
                 <li>
                     <strong>Meteor</strong><br/>
                     {% blocktrans %} Choose this plan if you want to keep your expenses to a minimum, but still want the
-                        possibity to share your FIT and digital camera raw files with your friends. You can also
+                        possibility to share your FIT and digital camera raw files with your friends. You can also
                         participate to public data pools and contribute to the deepest deep sky images ever created, and
                         you will always know that you support AstroBin.{% endblocktrans %}
                 </li>

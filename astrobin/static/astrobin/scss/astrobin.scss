@@ -3947,31 +3947,43 @@ li.revisions {
 }
 
 .subscription-plans-overview {
+  .lite,
+  .ultimate {
+    transform: scale(.975);
+  }
+
+  .premium {
+    @media (min-width: 767px) {
+      transform: scale(1.05);
+
+      .subtle-container:first-child {
+        box-shadow: 0 0 50px rgba(255, 255, 175, 0.15);
+      }
+    }
+  }
+
   .subtle-container {
     position: relative;
     overflow: visible;
     text-align: center;
     margin-top: 40px;
 
-    .logo {
-      position: absolute;
-      width: calc(100% - 24px);
-      top: -10%;
-      z-index: 1;
-
-      img {
-        width: 140px;
-      }
-    }
-
     .header {
       margin: 0;
-      padding-top: 60px;
+      padding-top: 25px;
       padding-bottom: 25px;
       font-size: medium;
       font-weight: bold;
       line-height: 1em;
       color: #b5b5b5;
+      height: 180px;
+
+      .subscription-name {
+        font-size: x-large;
+        color: white;
+        text-transform: uppercase;
+        margin-bottom: 50px;
+      }
 
       .price {
         font-size: medium;
@@ -3983,7 +3995,8 @@ li.revisions {
         .number {
           color: $strong-text-color;
           font-weight: bold;
-          font-size: xx-large
+          font-size: xx-large;
+          margin-left: $spacer-small;
         }
 
         .retail-price {
@@ -4005,6 +4018,13 @@ li.revisions {
         font-size: medium;
         width: 50%;
       }
+
+      .already-on-plan {
+        margin-top: 10px;
+        font-size: small;
+        font-style: italic;
+        color: #555;
+      }
     }
 
     ul {
@@ -4014,20 +4034,19 @@ li.revisions {
 
       li {
         padding: $spacer-medium 0;
-        color: $strong-text-color;
 
         .icon-ok {
           color: navajowhite;
           padding-right: $spacer-medium;
         }
 
-        .coming-soon {
+        .in-the-future {
           color: #888888;
         }
       }
     }
 
-    &.coming-soon {
+    &.in-the-future {
       margin-top: $spacer-medium;
 
       .header {
@@ -4035,6 +4054,7 @@ li.revisions {
         color: navajowhite;
         padding: $spacer-medium;
         font-size: inherit;
+        height: auto;
       }
     }
   }
@@ -4081,7 +4101,7 @@ li.revisions {
     color: #18af00;
   }
 
-  .coming-soon {
+  .in-the-future {
     color: #888888;
     display: block;
     margin: 0;

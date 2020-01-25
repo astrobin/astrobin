@@ -1,6 +1,19 @@
-{% if PAYPAL_TEST %}
-    {{form.sandbox}}
-{% else %}
-    {{form.render}}
-{% endif %}
+{% load i18n %}
+
+<p class="alert alert-warning">
+    <i class="icon-info-sign"></i>
+    <b>{% trans "Please note!" %}</b>
+    {% blocktrans %}AstroBin is a company based in Switzerland, and for this reasons prices are in CHF (Swiss Franc).{% endblocktrans %}
+    {% blocktrans with usd="1.03" eur="0.93" %}<b>1 CHF</b> is equal to approximately to <b>$ {{ usd }} USD</b> and <b>{{ eur }} €</b>.{% endblocktrans %}
+    {% blocktrans with url_start="<a target='_blank' href='https://www.xe.com/currencyconverter/convert/?Amount=1&From=CHF&To=USD'>" url_end="</a>" %}For more up-to-date exchange rates please {{ url_start }}see here{{ url_end }}.{% endblocktrans %}
+</p>
+<div class="well text-center">
+    <h3>{% trans "Buy with a secure payment provided by PayPal:" %}</h3>
+
+    {% if PAYPAL_TEST %}
+        {{ form.sandbox }}
+    {% else %}
+        {{ form.render }}
+    {% endif %}
+</div>
 
