@@ -4071,7 +4071,14 @@ li.revisions {
     }
   }
 }
-.table.subscription-plans-features {
+
+.subscription-plans-features {
+  @media (max-width: 600px) {
+    display: none;
+  }
+}
+
+.table.subscription-plans-features-table {
   td, th {
     text-align: center !important; // important overrides last-element
     padding: $spacer-xxlarge $spacer-large;
