@@ -27,20 +27,20 @@
                             <div class="subscription-name">Lite</div>
                             <div class="price">
                                 {{ subscription.currency }}
-                                <span class="number">{{ PREMIUM_PRICE_LITE }}</span> / {% trans "year" %}
+                                <span class="number">{{ PREMIUM_PRICE_LITE_2020 }}</span> / {% trans "year" %}
                             </div>
                             {% include 'subscription/_subscription_status_form.html' %}
                         </div>
 
                         <ul>
                             <li>
-                                <i class="icon-ok"></i>{% blocktrans with number=PREMIUM_MAX_IMAGES_LITE size=PREMIUM_MAX_IMAGE_SIZE_LITE|filesizeformat %}
+                                <i class="icon-ok"></i>{% blocktrans with number=PREMIUM_MAX_IMAGES_LITE_2020 size=PREMIUM_MAX_IMAGE_SIZE_LITE_2020|filesizeformat %}
                                 {{ number }} images, max {{ size }} each{% endblocktrans %}
                             </li>
                             <li><i class="icon-ok"></i>{% trans "View complete images tech info" %}</li>
                             <li><i class="icon-ok"></i>{% trans "Advanced search" %}</li>
                             <li>
-                                <i class="icon-ok"></i>{% blocktrans with number=PREMIUM_MAX_REVISIONS_LITE %}Up to {{ number }} revisions per image{% endblocktrans %}
+                                <i class="icon-ok"></i>{% blocktrans with number=PREMIUM_MAX_REVISIONS_LITE_2020 %}Up to {{ number }} revisions per image{% endblocktrans %}
                             </li>
                             <li><i class="icon-ok"></i>{% trans "Social features (likes, comments, forums, etc)" %}</li>
                             <li><i class="icon-ok"></i>{% trans "Create and join Groups" %}</li>
@@ -64,19 +64,19 @@
                             <div class="subscription-name">Premium</div>
                             <div class="price">
                                 {{ subscription.currency }}
-                                <span class="number">{{ PREMIUM_PRICE_PREMIUM }}</span> / {% trans "year" %}
+                                <span class="number">{{ PREMIUM_PRICE_PREMIUM_2020 }}</span> / {% trans "year" %}
                             </div>
                             {% include 'subscription/_subscription_status_form.html' %}
                         </div>
                         <ul>
                             <li>
                                 <i class="icon-ok"></i>
-                                {% blocktrans with number=PREMIUM_MAX_IMAGES_PREMIUM size=PREMIUM_MAX_IMAGE_SIZE_PREMIUM|filesizeformat %}{{ number }} images, max {{ size }} each{% endblocktrans %}
+                                {% blocktrans with number=PREMIUM_MAX_IMAGES_PREMIUM_2020 size=PREMIUM_MAX_IMAGE_SIZE_PREMIUM_2020|filesizeformat %}{{ number }} images, max {{ size }} each{% endblocktrans %}
                             </li>
                             <li><i class="icon-ok"></i>{% trans "View complete images tech info" %}</li>
                             <li><i class="icon-ok"></i>{% trans "Advanced search" %}</li>
                             <li>
-                                <i class="icon-ok"></i>{% blocktrans with number=PREMIUM_MAX_REVISIONS_PREMIUM %}Up to {{ number }} revisions per image{% endblocktrans %}
+                                <i class="icon-ok"></i>{% blocktrans with number=PREMIUM_MAX_REVISIONS_PREMIUM_2020 %}Up to {{ number }} revisions per image{% endblocktrans %}
                             </li>
                             <li><i class="icon-ok"></i>{% trans "Social features (likes, comments, forums, etc)" %}</li>
                             <li><i class="icon-ok"></i>{% trans "Participate in Image of the Day / Top Picks contests" %}</li>
@@ -102,7 +102,7 @@
                             <div class="subscription-name">Ultimate</div>
                             <div class="price">
                                 {{ subscription.currency }}
-                                <span class="number">{{ PREMIUM_PRICE_ULTIMATE }}</span> / {% trans "year" %}
+                                <span class="number">{{ PREMIUM_PRICE_ULTIMATE_2020 }}</span> / {% trans "year" %}
                             </div>
                             {% include 'subscription/_subscription_status_form.html' %}
                         </div>
@@ -165,23 +165,23 @@
                     <tbody>
                     <tr>
                         <th>{% trans "Images" %}</th>
-                        <td class="free">{{ PREMIUM_MAX_IMAGES_FREE }}</td>
-                        <td class="lite">{{ PREMIUM_MAX_IMAGES_LITE }}</td>
-                        <td class="premium">{{ PREMIUM_MAX_IMAGES_PREMIUM }}</td>
+                        <td class="free">{{ PREMIUM_MAX_IMAGES_FREE_2020 }}</td>
+                        <td class="lite">{{ PREMIUM_MAX_IMAGES_LITE_2020 }}</td>
+                        <td class="premium">{{ PREMIUM_MAX_IMAGES_PREMIUM_2020 }}</td>
                         <td class="ultimate"><span class="infinity">&infin;</span></td>
                     </tr>
                     <tr>
                         <th>{% trans "Revisions per image" %}</th>
                         <td class="free"><i class="icon-remove"></i></td>
-                        <td class="lite">{{ PREMIUM_MAX_REVISIONS_PREMIUM }}</td>
-                        <td class="premium">{{ PREMIUM_MAX_REVISIONS_PREMIUM }}</td>
+                        <td class="lite">{{ PREMIUM_MAX_REVISIONS_PREMIUM_2020 }}</td>
+                        <td class="premium">{{ PREMIUM_MAX_REVISIONS_PREMIUM_2020 }}</td>
                         <td class="ultimate"><span class="infinity">&infin;</span></td>
                     </tr>
                     <tr>
                         <th>{% trans "Upload quality" %}</th>
-                        <td class="free">Max {{ PREMIUM_MAX_IMAGE_SIZE_FREE | filesizeformat }}</td>
-                        <td class="lite">Max {{ PREMIUM_MAX_IMAGE_SIZE_LITE | filesizeformat }}</td>
-                        <td class="premium">Max {{ PREMIUM_MAX_IMAGE_SIZE_PREMIUM | filesizeformat }}</td>
+                        <td class="free">Max {{ PREMIUM_MAX_IMAGE_SIZE_FREE_2020 | filesizeformat }}</td>
+                        <td class="lite">Max {{ PREMIUM_MAX_IMAGE_SIZE_LITE_2020 | filesizeformat }}</td>
+                        <td class="premium">Max {{ PREMIUM_MAX_IMAGE_SIZE_PREMIUM_2020 | filesizeformat }}</td>
                         <td class="ultimate"><span class="infinity">&infin;</span></td>
                     </tr>
                     <tr>

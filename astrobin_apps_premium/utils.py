@@ -7,6 +7,10 @@ SUBSCRIPTION_NAMES = (
     'AstroBin Lite',
     'AstroBin Premium',
 
+    'AstroBin Lite 2020+',
+    'AstroBin Premium 2020+',
+    'AstroBin Ultimate 2020+',
+
     'AstroBin Lite (autorenew)',
     'AstroBin Premium (autorenew)',
 
@@ -22,15 +26,25 @@ def _compareValidity(a, b):
 
 
 def _compareNames(a, b):
+    """
+    This function is used to determin the "weight" of each Premium subscription. When a user has multiple, only the
+    heaviest one gets considered throughout the website.
+    :param a: left operand.
+    :param b: right operand.
+    :return: a negative number if the left operand is heavier than thee left, 0 if equal, a positive number otherwise.
+    """
     key = {
         "AstroBin Lite (autorenew)": 0,
         "AstroBin Lite": 1,
-        "AstroBin Premium (autorenew)": 2,
-        "AstroBin Premium": 3,
-        'AstroBin Premium 20% discount': 4,
-        'AstroBin Premium 30% discount': 5,
-        'AstroBin Premium 40% discount': 6,
-        'AstroBin Premium 50% discount': 7,
+        "AstroBin Lite 2020+": 2,
+        "AstroBin Premium (autorenew)": 3,
+        "AstroBin Premium": 4,
+        'AstroBin Premium 20% discount': 5,
+        'AstroBin Premium 30% discount': 6,
+        'AstroBin Premium 40% discount': 7,
+        'AstroBin Premium 50% discount': 8,
+        "AstroBin Premium 2020+": 9,
+        "AstroBin Ultimate 2020+": 10
     }
 
     return key[b.subscription.name] - key[a.subscription.name]
@@ -90,6 +104,17 @@ def premium_used_percent(user):
         percent = counter / float(settings.PREMIUM_MAX_IMAGES_LITE) * 100
 
     elif s.subscription.group.name == "astrobin_premium":
+        # Premium gets unlimited uploads.
+        percent = -1
+
+    elif s.subscription.group.name == "astrobin_lite_2020":
+        percent = counter / float(settings.PREMIUM_MAX_IMAGES_LITE_2020) * 100
+
+    elif s.subscription.group.name == "astrobin_premium_2020":
+        percent = counter / float(settings.PREMIUM_MAX_IMAGES_PREMIUM_2020) * 100
+
+    elif s.subscription.group.name == "astrobin_ultimate_2020":
+        # Ultimate 2020 gets unlimited uploads.
         percent = -1
 
     if percent > 100:
