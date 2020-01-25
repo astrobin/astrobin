@@ -3970,19 +3970,20 @@ li.revisions {
 
     .header {
       margin: 0;
-      padding-top: 25px;
-      padding-bottom: 25px;
+      padding-top: 40px;
+      padding-bottom: 40px;
       font-size: medium;
       font-weight: bold;
       line-height: 1em;
       color: #b5b5b5;
-      height: 180px;
 
       .subscription-name {
         font-size: x-large;
         color: white;
         text-transform: uppercase;
         margin-bottom: 50px;
+        padding-bottom: 20px;
+        border-bottom: 1px solid #333;
       }
 
       .price {
@@ -3995,8 +3996,8 @@ li.revisions {
         .number {
           color: $strong-text-color;
           font-weight: bold;
-          font-size: xx-large;
-          margin-left: $spacer-small;
+          font-size: 4rem;
+          margin: 0 $spacer-small 0 $spacer-medium;
         }
 
         .retail-price {
@@ -4007,6 +4008,17 @@ li.revisions {
           cursor: pointer;
           border-bottom: 1px dotted #d74839;
           margin-right: $spacer-medium;
+        }
+      }
+
+      .currency-conversion {
+        font-size: small;
+        font-weight: normal;
+        margin-top: 10px;
+        color: #555;
+
+        .currency-conversion-value {
+          color: #aaa;
         }
       }
 

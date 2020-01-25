@@ -29,13 +29,35 @@
                                 {{ subscription.currency }}
                                 <span class="number">{{ PREMIUM_PRICE_LITE_2020 }}</span> / {% trans "year" %}
                             </div>
+                            {% if subscription.currency == "CHF" %}
+                                <div class="currency-conversion">
+                                    ({% trans "about" context "approximately" %}
+                                    $ <span
+                                            class="currency-conversion-value"
+                                            data-to-currency="USD"
+                                            data-value="{{ subscription.price }}">
+                                    </span> USD /
+                                    <span
+                                        class="currency-conversion-value"
+                                        data-to-currency="EUR"
+                                        data-value="{{ subscription.price }}">
+                                    </span> € /
+                                    <span
+                                            class="currency-conversion-value"
+                                            data-to-currency="GBP"
+                                            data-value="{{ subscription.price }}">
+                                    </span> £)
+                                </div>
+                            {% endif %}
+
                             {% include 'subscription/_subscription_status_form.html' %}
                         </div>
 
                         <ul>
                             <li>
-                                <i class="icon-ok"></i>{% blocktrans with number=PREMIUM_MAX_IMAGES_LITE_2020 size=PREMIUM_MAX_IMAGE_SIZE_LITE_2020|filesizeformat %}
-                                {{ number }} images, max {{ size }} each{% endblocktrans %}
+                                <i class="icon-ok"></i>
+                                {% blocktrans with number=PREMIUM_MAX_IMAGES_LITE_2020 size=PREMIUM_MAX_IMAGE_SIZE_LITE_2020|filesizeformat %}
+                                    {{ number }} images, max {{ size }} each{% endblocktrans %}
                             </li>
                             <li><i class="icon-ok"></i>{% trans "View complete images tech info" %}</li>
                             <li><i class="icon-ok"></i>{% trans "Advanced search" %}</li>
@@ -66,6 +88,27 @@
                                 {{ subscription.currency }}
                                 <span class="number">{{ PREMIUM_PRICE_PREMIUM_2020 }}</span> / {% trans "year" %}
                             </div>
+                            {% if subscription.currency == "CHF" %}
+                                <div class="currency-conversion">
+                                    ({% trans "about" context "approximately" %}
+                                    $ <span
+                                        class="currency-conversion-value"
+                                        data-to-currency="USD"
+                                        data-value="{{ subscription.price }}">
+                                    </span> USD /
+                                    <span
+                                            class="currency-conversion-value"
+                                            data-to-currency="EUR"
+                                            data-value="{{ subscription.price }}">
+                                    </span> € /
+                                    <span
+                                            class="currency-conversion-value"
+                                            data-to-currency="GBP"
+                                            data-value="{{ subscription.price }}">
+                                    </span> £)
+                                </div>
+                            {% endif %}
+
                             {% include 'subscription/_subscription_status_form.html' %}
                         </div>
                         <ul>
@@ -104,6 +147,27 @@
                                 {{ subscription.currency }}
                                 <span class="number">{{ PREMIUM_PRICE_ULTIMATE_2020 }}</span> / {% trans "year" %}
                             </div>
+                            {% if subscription.currency == "CHF" %}
+                                <div class="currency-conversion">
+                                    ({% trans "about" context "approximately" %}
+                                    $ <span
+                                        class="currency-conversion-value"
+                                        data-to-currency="USD"
+                                        data-value="{{ subscription.price }}">
+                                    </span> USD /
+                                    <span
+                                            class="currency-conversion-value"
+                                            data-to-currency="EUR"
+                                            data-value="{{ subscription.price }}">
+                                    </span> € /
+                                    <span
+                                            class="currency-conversion-value"
+                                            data-to-currency="GBP"
+                                            data-value="{{ subscription.price }}">
+                                    </span> £)
+                                </div>
+                            {% endif %}
+
                             {% include 'subscription/_subscription_status_form.html' %}
                         </div>
                         <ul>
@@ -361,4 +425,17 @@
                 <a href="/contact/">Let us know!</a>{% endblocktrans %}
         </div>
     {% endif %} {# READONLY #}
+{% endblock %}
+
+{% block extra_js %}
+    <script type="text/javascript">
+        $(".currency-conversion-value").each(function (i, $el) {
+            var toCurrency = $el.getAttribute("data-to-currency"),
+                value = $el.getAttribute("data-value");
+
+            var converted = astrobin_common.utils.convertCurrency(value, toCurrency);
+
+            $el.innerHTML = converted;
+        });
+    </script>
 {% endblock %}
