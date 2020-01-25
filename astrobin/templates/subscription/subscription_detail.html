@@ -59,8 +59,9 @@
             <h1>
                 {% trans object.name %}
                 <small>
+                    <span class="price">
                     {% if object.price > 0 %}
-                        {{ object.currency }} {{object.price}} /
+                        {{ object.currency }} {{ object.price }} /
 
                         {% if object.recurrence_unit == 'D' %}
                             {% trans "day" %}
@@ -81,9 +82,14 @@
                         {% if object.recurrence_unit == None %}
                             {% trans "one time" %}
                         {% endif %}
+
+                        {% with subscription=object %}
+                            {% include "./_currency_conversion.html" %}
+                        {% endwith %}
                     {% else %}
                         {% trans "Free" context "At no cost" %}
                     {% endif %}
+                    </span>
                 </small>
             </h1>
         </div>
@@ -191,14 +197,12 @@
             {% endif %} <!-- if change_denied_reasons -->
         {% endif %}
 
-        <div class="thankyou">
-            {% blocktrans %}Thank you for supporting AstroBin!{% endblocktrans %}
-        </div>
-
-        <div class="text-center">
-            <a class="btn btn-mini" href="{% url 'subscription_list' %}">
-                {% trans "Back to the plans" %}
-            </a>
-        </div>
+        <a class="btn btn-secondary" href="{% url 'subscription_list' %}">
+            {% trans "Back to the plans" %}
+        </a>
     {% endif %} {# READONLY #}
+{% endblock %}
+
+{% block extra_js %}
+    {% include "subscription/_currency_conversion_js.html" %}
 {% endblock %}

@@ -4011,17 +4011,6 @@ li.revisions {
         }
       }
 
-      .currency-conversion {
-        font-size: small;
-        font-weight: normal;
-        margin-top: 10px;
-        color: #555;
-
-        .currency-conversion-value {
-          color: #aaa;
-        }
-      }
-
       .btn {
         display: block;
         margin: $spacer-xxlarge auto 0;
@@ -4069,6 +4058,17 @@ li.revisions {
         height: auto;
       }
     }
+  }
+}
+
+.currency-conversion {
+  font-size: small;
+  font-weight: normal;
+  margin-top: 10px;
+  color: #555;
+
+  .currency-conversion-value {
+    color: #aaa;
   }
 }
 
@@ -4220,26 +4220,6 @@ li.revisions {
     color: #cdcdcd;
     text-align: center;
   }
-}
-
-.thankyou {
-  font-size: 22px;
-  font-weight: bold;
-  text-align: center;
-  margin: 30px;
-
-  small {
-    display: block;
-    font-size: $base-font-size;
-    color: #eee;
-    padding-top: 10px;
-    font-weight: normal;
-  }
-}
-
-.btn-header {
-  width: 110px;
-  margin-top: 6px;
 }
 
 table.rawdata-browser {

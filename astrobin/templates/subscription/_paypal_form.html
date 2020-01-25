@@ -1,14 +1,7 @@
 {% load i18n %}
 
-<p class="alert alert-warning">
-    <i class="icon-info-sign"></i>
-    <b>{% trans "Please note!" %}</b>
-    {% blocktrans %}AstroBin is a company based in Switzerland, and for this reasons prices are in CHF (Swiss Franc).{% endblocktrans %}
-    {% blocktrans with usd="1.03" eur="0.93" %}<b>1 CHF</b> is equal to approximately to <b>$ {{ usd }} USD</b> and <b>{{ eur }} €</b>.{% endblocktrans %}
-    {% blocktrans with url_start="<a target='_blank' href='https://www.xe.com/currencyconverter/convert/?Amount=1&From=CHF&To=USD'>" url_end="</a>" %}For more up-to-date exchange rates please {{ url_start }}see here{{ url_end }}.{% endblocktrans %}
-</p>
-<div class="well text-center">
-    <h3>{% trans "Buy with a secure payment provided by PayPal:" %}</h3>
+<div class="subtle-container">
+    <h3>{% trans "Pay securely with PayPal" %}</h3>
 
     {% if PAYPAL_TEST %}
         {{ form.sandbox }}
@@ -17,3 +10,23 @@
     {% endif %}
 </div>
 
+{% if object.recurrence_unit == None %}
+    <div class="subtle-container">
+        <h3>{% trans "Pay with a bank transfer" %}</h3>
+        <p>
+            {% blocktrans with amount=object.price currency=object.currency email_prefix="<a href='mailto:astrobin@astrobin.com'>" email="astrobin@astrobin.com" email_postfix="</a>" %}
+                Prefer to pay via bank transfer? Please make a deposit or {{ currency }} {{ amount }} to the following
+                bank
+                details and then email us at {{ email_prefix }}{{ email }}{{ email_postfix }} with your username so we
+                may
+                upgrade your account manually. Thanks!
+            {% endblocktrans %}
+        </p>
+
+        <pre>BANK: PostFinance Switzerland
+ACCOUNT HOLDER: Salvatore Iovene
+ADDRESS: Obstgartenstrasse 32, 8136 Gattikon (Switzerland)
+ACCOUNT # (IBAN):  CH97 0900 0000 6922 3618 4
+SWIFT / BIC: POFICHBEXXX</pre>
+    </div>
+{% endif %}
