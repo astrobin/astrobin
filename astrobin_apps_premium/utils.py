@@ -166,3 +166,27 @@ def premium_get_max_allowed_image_size(user):
         return sys.maxsize
 
     return 0
+
+
+def premium_get_max_allowed_revisions(user):
+    s = premium_get_valid_usersubscription(user)
+
+    if s is None:
+        return settings.PREMIUM_MAX_REVISIONS_FREE_2020
+
+    if s.subscription.group.name == "astrobin_lite":
+        return sys.maxsize
+
+    if s.subscription.group.name == "astrobin_premium":
+        return sys.maxsize
+
+    if s.subscription.group.name == "astrobin_lite_2020":
+        return settings.PREMIUM_MAX_REVISIONS_LITE_2020
+
+    if s.subscription.group.name == "astrobin_premium_2020":
+        return settings.PREMIUM_MAX_REVISIONS_PREMIUM_2020
+
+    if s.subscription.group.name == "astrobin_ultimate_2020":
+        return sys.maxsize
+
+    return 0

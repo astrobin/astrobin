@@ -20,6 +20,7 @@ from django.template.defaultfilters import filesizeformat
 from django.template.loader import render_to_string
 from django.utils.datastructures import MultiValueDictKeyError
 from django.utils.translation import ugettext as _
+from django.utils.translation import ngettext as _n
 from django.views.decorators.cache import never_cache
 from django.views.decorators.http import require_GET, require_POST
 from el_pagination.decorators import page_template
@@ -36,7 +37,7 @@ from astrobin.shortcuts import *
 from astrobin.utils import *
 from astrobin_apps_platesolving.forms import PlateSolvingSettingsForm
 from astrobin_apps_platesolving.models import PlateSolvingSettings
-from astrobin_apps_premium.utils import premium_get_max_allowed_image_size
+from astrobin_apps_premium.utils import premium_get_max_allowed_image_size, premium_get_max_allowed_revisions
 
 
 def get_image_or_404(queryset, id):
@@ -263,6 +264,21 @@ def upload_size_error(request, max_size, image=None):
 
     return HttpResponseRedirect('/upload/')
 
+
+def upload_max_revisions_error(request, max_revisions, image):
+    subscriptions_url = reverse('subscription_list')
+    open_link = "<a href=\"%s\">" % subscriptions_url
+    close_link = "</a>"
+    msg_singular = "Sorry, but you have reached the maximum amount of allowed image revisions. Under your current subscription, the limit is %(max_revisions)s revision per image. %(open_link)sWould you like to upgrade?%(close_link)s"
+    msg_plural = "Sorry, but you have reached the maximum amount of allowed image revisions. Under your current subscription, the limit is %(max_revisions)s revisions per image. %(open_link)sWould you like to upgrade?%(close_link)s"
+
+    messages.error(request, _n(msg_singular, msg_plural, max_revisions) % {
+        "max_revisions": max_revisions,
+        "open_link": open_link,
+        "close_link": close_link
+    })
+
+    return HttpResponseRedirect(image.get_absolute_url())
 
 # VIEWS
 
@@ -1906,6 +1922,10 @@ def image_revision_upload_process(request):
 
     if not form.is_valid():
         return upload_error(request, image)
+
+    max_revisions = premium_get_max_allowed_revisions(request.user)
+    if image.revisions.count() >= max_revisions:
+        return upload_max_revisions_error(request, max_revisions, image)
 
     image_file = request.FILES["image_file"]
     ext = os.path.splitext(image_file.name)[1].lower()
