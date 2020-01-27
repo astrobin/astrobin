@@ -1,7 +1,7 @@
+import sys
+
 from django.conf import settings
-
 from subscription.models import UserSubscription
-
 
 SUBSCRIPTION_NAMES = (
     'AstroBin Lite',
@@ -52,8 +52,8 @@ def _compareNames(a, b):
 
 def premium_get_usersubscription(user):
     us = UserSubscription.objects.filter(
-        user = user,
-        subscription__name__in = SUBSCRIPTION_NAMES,
+        user=user,
+        subscription__name__in=SUBSCRIPTION_NAMES,
     )
 
     if us.count() == 0:
@@ -62,14 +62,14 @@ def premium_get_usersubscription(user):
     if us.count() == 1:
         return us[0]
 
-    return sorted(list(us), cmp = _compareNames)[0]
+    return sorted(list(us), cmp=_compareNames)[0]
 
 
 def premium_get_valid_usersubscription(user):
     us = [obj for obj in UserSubscription.objects.filter(
-        user = user,
-        subscription__name__in = SUBSCRIPTION_NAMES,
-        active = True,
+        user=user,
+        subscription__name__in=SUBSCRIPTION_NAMES,
+        active=True,
     ) if obj.valid()]
 
     if len(us) == 0:
@@ -78,8 +78,8 @@ def premium_get_valid_usersubscription(user):
     if len(us) == 1:
         return us[0]
 
-    sortedByName = sorted(us, cmp = _compareNames)
-    sortedByValidity = sorted(sortedByName, cmp = _compareValidity)
+    sortedByName = sorted(us, cmp=_compareNames)
+    sortedByValidity = sorted(sortedByName, cmp=_compareValidity)
 
     return sortedByName[0]
 
@@ -142,3 +142,27 @@ def premium_user_has_valid_subscription(user):
 def premium_user_has_invalid_subscription(user):
     us = premium_get_invalid_usersubscription(user)
     return us is not None
+
+
+def premium_get_max_allowed_image_size(user):
+    s = premium_get_valid_usersubscription(user)
+
+    if s is None:
+        return settings.PREMIUM_MAX_IMAGE_SIZE_FREE_2020
+
+    if s.subscription.group.name == "astrobin_lite":
+        return sys.maxsize
+
+    if s.subscription.group.name == "astrobin_premium":
+        return sys.maxsize
+
+    if s.subscription.group.name == "astrobin_lite_2020":
+        return settings.PREMIUM_MAX_IMAGE_SIZE_LITE_2020
+
+    if s.subscription.group.name == "astrobin_premium_2020":
+        return settings.PREMIUM_MAX_IMAGE_SIZE_PREMIUM_2020
+
+    if s.subscription.group.name == "astrobin_ultimate_2020":
+        return sys.maxsize
+
+    return 0

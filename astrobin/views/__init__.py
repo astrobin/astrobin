@@ -16,6 +16,7 @@ from django.http import HttpResponseRedirect
 from django.shortcuts import get_object_or_404
 from django.shortcuts import render
 from django.template import loader, RequestContext
+from django.template.defaultfilters import filesizeformat
 from django.template.loader import render_to_string
 from django.utils.datastructures import MultiValueDictKeyError
 from django.utils.translation import ugettext as _
@@ -35,6 +36,7 @@ from astrobin.shortcuts import *
 from astrobin.utils import *
 from astrobin_apps_platesolving.forms import PlateSolvingSettingsForm
 from astrobin_apps_platesolving.models import PlateSolvingSettings
+from astrobin_apps_premium.utils import premium_get_max_allowed_image_size
 
 
 def get_image_or_404(queryset, id):
@@ -233,6 +235,33 @@ def jsonDump(all):
         return simplejson.dumps([{'id': i.id, 'name': i.get_name(), 'complete': is_gear_complete(i.id)} for i in all])
     else:
         return []
+
+
+def upload_error(request, image=None):
+    messages.error(request, _("Invalid image or no image provided. Allowed formats are JPG, PNG and GIF."))
+
+    if image is not None:
+        return HttpResponseRedirect(image.get_absolute_url())
+
+    return HttpResponseRedirect('/upload/')
+
+
+def upload_size_error(request, max_size, image=None):
+    subscriptions_url = reverse('subscription_list')
+    open_link = "<a href=\"%s\">" % subscriptions_url
+    close_link = "</a>"
+    msg = "Sorry, but this image is too large. Under your current subscription plan, the maximum allowed image size is %(max_size)s. %(open_link)sWould you like to upgrade?%(close_link)s"
+
+    messages.error(request, _(msg) % {
+        "max_size": filesizeformat(max_size),
+        "open_link": open_link,
+        "close_link": close_link
+    })
+
+    if image is not None:
+        return HttpResponseRedirect(image.get_absolute_url())
+
+    return HttpResponseRedirect('/upload/')
 
 
 # VIEWS
@@ -450,35 +479,35 @@ def image_upload(request):
 def image_upload_process(request):
     """Process the form"""
 
-    def upload_error():
-        messages.error(request, _("Invalid image or no image provided. Allowed formats are JPG, PNG and GIF."))
-        return HttpResponseRedirect('/upload/')
-
     from astrobin_apps_premium.utils import premium_used_percent
 
     used_percent = premium_used_percent(request.user)
     if used_percent >= 100:
-        messages.error(request, _("You have reached your image count limit. Please upgrade!"));
+        messages.error(request, _("You have reached your image count limit. Please upgrade!"))
         return HttpResponseRedirect('/upload/')
 
     if settings.READONLY_MODE:
         messages.error(request, _(
-            "AstroBin is currently in read-only mode, because of server maintenance. Please try again soon!"));
+            "AstroBin is currently in read-only mode, because of server maintenance. Please try again soon!"))
         return HttpResponseRedirect('/upload/')
 
     if 'image_file' not in request.FILES:
-        return upload_error()
+        return upload_error(request)
 
     form = ImageUploadForm(request.POST, request.FILES)
 
     if not form.is_valid():
-        return upload_error()
+        return upload_error(request)
 
     image_file = request.FILES["image_file"]
     ext = os.path.splitext(image_file.name)[1].lower()
 
     if ext not in settings.ALLOWED_IMAGE_EXTENSIONS:
-        return upload_error()
+        return upload_error(request)
+
+    max_size = premium_get_max_allowed_image_size(request.user)
+    if image_file.size > max_size:
+        return upload_size_error(request, max_size)
 
     if image_file.size < 1e+7:
         try:
@@ -491,7 +520,7 @@ def image_upload_process(request):
                 messages.warning(request, _(
                     "You uploaded an Indexed PNG file. AstroBin will need to lower the color count to 256 in order to work with it."))
         except:
-            return upload_error()
+            return upload_error(request)
     else:
         messages.warning(request, _(
             "You uploaded a pretty large file. For that reason, AstroBin could not verify that it's a valid image."))
@@ -1861,11 +1890,6 @@ def user_profile_delete(request):
 @login_required
 @require_POST
 def image_revision_upload_process(request):
-    # TODO: unify Image and ImageRevision
-    def upload_error(image):
-        messages.error(request, _("Invalid image or no image provided. Allowed formats are JPG, PNG and GIF."))
-        return HttpResponseRedirect(image.get_absolute_url())
-
     try:
         image_id = request.POST['image_id']
     except MultiValueDictKeyError:
@@ -1881,13 +1905,17 @@ def image_revision_upload_process(request):
     form = ImageRevisionUploadForm(request.POST, request.FILES)
 
     if not form.is_valid():
-        return upload_error(image)
+        return upload_error(request, image)
 
     image_file = request.FILES["image_file"]
     ext = os.path.splitext(image_file.name)[1].lower()
 
     if ext not in settings.ALLOWED_IMAGE_EXTENSIONS:
-        return upload_error(image)
+        return upload_error(request, image)
+
+    max_size = premium_get_max_allowed_image_size(request.user)
+    if image_file.size > max_size:
+        return upload_size_error(request, max_size, image)
 
     if image_file.size < 1e+7:
         try:
@@ -1900,7 +1928,7 @@ def image_revision_upload_process(request):
                 messages.warning(request, _(
                     "You uploaded an Indexed PNG file. AstroBin will need to lower the color count to 256 in order to work with it."))
         except:
-            return upload_error(image)
+            return upload_error(request, image)
     else:
         messages.warning(request, _(
             "You uploaded a pretty large file. For that reason, AstroBin could not verify that it's a valid image."))

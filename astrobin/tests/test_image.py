@@ -412,6 +412,26 @@ class ImageTest(TestCase):
         self.assertFalse(push_notification.called)
 
     @patch("astrobin.tasks.retrieve_primary_thumbnails")
+    def test_image_upload_process_view_image_too_large(self, retrieve_primary_thumbnails):
+        self.client.login(username='test', password='password')
+
+        with self.settings(PREMIUM_MAX_IMAGE_SIZE_FREE_2020=10 * 1024):
+            response = self._do_upload('astrobin/fixtures/test.jpg')
+            self.assertContains(response, "this image is too large")
+            self.assertContains(response, "maximum allowed image size is 10.0")
+
+    @patch("astrobin.tasks.retrieve_primary_thumbnails")
+    def test_image_upload_revision_process_view_image_too_large(self, retrieve_primary_thumbnails):
+        self.client.login(username='test', password='password')
+        self._do_upload('astrobin/fixtures/test.jpg')
+        image = self._get_last_image()
+
+        with self.settings(PREMIUM_MAX_IMAGE_SIZE_FREE_2020=10 * 1024):
+            response = self._do_upload_revision(image, 'astrobin/fixtures/test.jpg')
+            self.assertContains(response, "this image is too large")
+            self.assertContains(response, "maximum allowed image size is 10.0")
+
+    @patch("astrobin.tasks.retrieve_primary_thumbnails")
     def test_image_detail_view_original_revision_overlay(self, retrieve_primary_thumbnails):
         self.client.login(username='test', password='password')
         self._do_upload('astrobin/fixtures/test.jpg')
