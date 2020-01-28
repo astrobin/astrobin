@@ -1,4 +1,5 @@
 {% load i18n %}
+{% load static %}
 {% load astrobin_apps_notifications_tags %}
 
 <div class="modal hide fade" id="notifications-modal">
@@ -41,5 +42,29 @@
 
     <div class="modal-body">
         {% include 'readonly_mode.html' %}
+    </div>
+</div>
+
+<div class="modal hide fade" id="feature-restricted-modal">
+    <div class="modal-header">
+        <a class="close" data-dismiss="modal">&times;</a>
+        <h3>{% trans "Sorry :-(" %}</h3>
+    </div>
+
+    <div class="modal-body">
+        <div class="row-fluid">
+            <div class="span3 visible-desktop">
+                <img src="{% static 'astrobin/images/red-lock.png' %}" alt="{% trans 'Access denied' %}" />
+            </div>
+            <div class="span9 upgrade-info">
+                <p>{% trans "This feature is only offered at higher membership levels." %}</p>
+                <p>{% trans "Would you be interested in upgrading? AstroBin is a very small business and your support would mean a lot!" %}</p>
+            </div>
+        </div>
+    </div>
+
+    <div class="modal-footer">
+        <button data-dismiss="modal" class="btn btn-secondary">{% trans "No, thanks" %}</button>
+        <a href="{% url 'subscription_list' %}" class="btn btn-primary">{% trans "Tell me more!" %}</a>
     </div>
 </div>

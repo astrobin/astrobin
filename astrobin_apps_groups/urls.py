@@ -1,6 +1,25 @@
 from django.conf.urls import url
 
 from astrobin_apps_groups.views import *
+from astrobin_apps_groups.views.group_add_image import GroupAddImage
+from astrobin_apps_groups.views.group_add_moderator import GroupAddModerator
+from astrobin_apps_groups.views.group_add_remove_images import GroupAddRemoveImages
+from astrobin_apps_groups.views.group_approve_join_request import GroupApproveJoinRequestView
+from astrobin_apps_groups.views.group_create import GroupCreateView
+from astrobin_apps_groups.views.group_delete import GroupDeleteView
+from astrobin_apps_groups.views.group_detail import GroupDetailView
+from astrobin_apps_groups.views.group_invite import GroupInviteView
+from astrobin_apps_groups.views.group_join import GroupJoinView
+from astrobin_apps_groups.views.group_leave import GroupLeaveView
+from astrobin_apps_groups.views.group_list import GroupListView
+from astrobin_apps_groups.views.group_manage_members import GroupManageMembersView
+from astrobin_apps_groups.views.group_members_list import GroupMembersListView
+from astrobin_apps_groups.views.group_moderate_join_requests import GroupModerateJoinRequestsView
+from astrobin_apps_groups.views.group_reject_join_request import GroupRejectJoinRequestView
+from astrobin_apps_groups.views.group_remove_member import GroupRemoveMember
+from astrobin_apps_groups.views.group_remove_moderator import GroupRemoveModerator
+from astrobin_apps_groups.views.group_revoke_invitation import GroupRevokeInvitationView
+from astrobin_apps_groups.views.group_update import GroupUpdateView
 
 urlpatterns = (
     url(

@@ -14,6 +14,7 @@ from mock import patch
 from pybb.models import Forum, Topic
 
 # This app
+from astrobin.tests.generators import Generators
 from astrobin_apps_groups.models import Group
 
 # Other AstroBin apps
@@ -154,7 +155,14 @@ class GroupsTest(TestCase):
         # Add user2 to user1's followers to check notification
         ToggleProperty.objects.create_toggleproperty("follow", self.user1, self.user2)
 
+        # Free users can't access.
         self.client.login(username = 'user1', password = 'password')
+        response = self.client.get(url)
+        self.assertEqual(response.status_code, 403)
+
+        us = Generators.premium_subscription(self.user1, "AstroBin Ultimate 2020+")
+
+        self.client.login(username='user1', password='password')
         response = self.client.get(url)
         self.assertEqual(response.status_code, 200)
 
@@ -211,6 +219,8 @@ class GroupsTest(TestCase):
         )
 
         self.client.logout()
+
+        us.delete()
 
     @patch("astrobin.tasks.retrieve_primary_thumbnails")
     def test_group_update_view(self, retrieve_primary_thumbnails):
@@ -313,6 +323,13 @@ class GroupsTest(TestCase):
 
         self.client.login(username = 'user1', password = 'password')
 
+        # Free users can't access.
+        self.client.login(username='user1', password='password')
+        response = self.client.get(url)
+        self.assertEqual(response.status_code, 403)
+
+        us1 = Generators.premium_subscription(self.user1, "AstroBin Ultimate 2020+")
+
         # GET not allowed
         response = self.client.get(url)
         self.assertEqual(response.status_code, 405)
@@ -324,6 +341,8 @@ class GroupsTest(TestCase):
         self.client.logout()
         self.client.login(username = 'user2', password = 'password')
 
+        us2 = Generators.premium_subscription(self.user2, "AstroBin Ultimate 2020+")
+
         # Private group, uninvited user
         self.group.public = False; self.group.save()
         response = self.client.post(url, follow = True)
@@ -332,7 +351,7 @@ class GroupsTest(TestCase):
 
         # Public group, but moderated
         self.group.moderated = True; self.group.save()
-        self.group.moderators.add(self.group.owner);
+        self.group.moderators.add(self.group.owner)
         response = self.client.post(url, follow = True)
         self.assertEqual(response.status_code, 200)
         self._assertMessage(response, "warning unread", "This is a moderated group, and your join request will be reviewed by a moderator")
@@ -377,6 +396,9 @@ class GroupsTest(TestCase):
         self.group.save()
 
         self.client.logout()
+
+        us1.delete()
+        us2.delete()
 
     @patch("astrobin.tasks.retrieve_primary_thumbnails")
     def test_group_leave_view(self, retrieve_primary_thumbnails):

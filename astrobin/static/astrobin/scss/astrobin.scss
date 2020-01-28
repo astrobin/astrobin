@@ -5973,3 +5973,11 @@ form.edit-revision {
     margin: 1rem;
   }
 }
+
+#feature-restricted-modal {
+  .upgrade-info {
+    @media (min-width: 768px) {
+      padding-top: 30px;
+    }
+  }
+}
