@@ -57,7 +57,7 @@ def is_lite(user):
 
 @register.filter
 def is_free(user):
-    return not is_any_premium(user)
+    return not (user.is_authenticated() and is_any_premium(user))
 
 
 @register.filter

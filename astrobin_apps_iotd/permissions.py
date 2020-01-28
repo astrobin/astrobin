@@ -6,6 +6,8 @@ from django.conf import settings
 from django.contrib.auth.models import Group
 from django.utils.translation import ugettext_lazy as _
 
+from astrobin_apps_premium.templatetags.astrobin_apps_premium_tags import is_free, is_lite_2020
+
 
 def may_toggle_submission_image(user, image):
     if user.is_superuser:
@@ -31,6 +33,13 @@ def may_toggle_submission_image(user, image):
         return False, _("You cannot submit an image that was published more than %(max_days)s days ago.") % {
             'max_days': days
         }
+
+    if settings.PREMIUM_RESTRICTS_IOTD:
+        if is_free(image.user):
+            return False, _("Users with a Free membership cannot participate in the IOTD.")
+
+        if is_lite_2020(image.user):
+            return False, _("Users with a Lite membership cannot participate in the IOTD.")
 
     # Import here to avoid circular dependency
     from astrobin_apps_iotd.models import IotdSubmission, Iotd
@@ -98,6 +107,13 @@ def may_toggle_vote_image(user, image):
             'max_allowed': max_allowed
         }
 
+    if settings.PREMIUM_RESTRICTS_IOTD:
+        if is_free(image.user):
+            return False, _("Users with a Free membership cannot participate in the IOTD.")
+
+        if is_lite_2020(image.user):
+            return False, _("Users with a Lite membership cannot participate in the IOTD.")
+
     return True, None
 
 
@@ -119,6 +135,13 @@ def may_elect_iotd(user, image):
 
     if image.user in Group.objects.get(name = 'iotd_judges').user_set.all():
         return False, _("You cannot elect a judge's image.")
+
+    if settings.PREMIUM_RESTRICTS_IOTD:
+        if is_free(image.user):
+            return False, _("Users with a Free membership cannot participate in the IOTD.")
+
+        if is_lite_2020(image.user):
+            return False, _("Users with a Lite membership cannot participate in the IOTD.")
 
     # Import here to avoid circular dependency
     from astrobin_apps_iotd.models import IotdSubmission, IotdVote, Iotd

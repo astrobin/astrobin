@@ -16,6 +16,8 @@ from astrobin_apps_iotd.templatetags.astrobin_apps_iotd_tags import (
     iotd_submissions_today,
     iotd_votes_today,
     iotd_elections_today)
+from astrobin_apps_premium.templatetags.astrobin_apps_premium_tags import is_lite, is_premium, is_premium_2020, \
+    is_ultimate_2020
 
 
 class IotdBaseQueueView(View):
@@ -38,6 +40,21 @@ class IotdSubmissionQueueView(
         judges = Group.objects.get(name='iotd_judges').user_set.all()
         image_groups = []
 
+        def can_add(image):
+            # type: (Image) -> bool
+
+            # Since the introduction of the 2020 plans, Free and Lite users cannot participate in the IOTD/TP.
+            # Older subscriptions (Lite/Premium) are still allowed, to offer continuity.
+            user_has_rights = is_lite(image.user) or \
+                              is_premium(image.user) or \
+                              is_premium_2020(image.user) or \
+                              is_ultimate_2020(image.user)  # type: bool
+
+            already_iotd = Iotd.objects.filter(image=x, date__lte=datetime.now().date()).exists()  # type: bool
+            user_is_judge = x.user in judges  # type: bool
+
+            return not user_has_rights and not (already_iotd or user_is_judge)
+
         for date in (datetime.now().date() - timedelta(n) for n in range(days)):
             image_groups.append({
                 'date': date,
@@ -48,10 +65,7 @@ class IotdSubmissionQueueView(
                         moderator_decision=1,
                         published__gte=date,
                         published__lt=date + timedelta(1))
-                    if not Iotd.objects.filter(
-                        image=x,
-                        date__lte=datetime.now().date()).exists()
-                       and not x.user in judges])), key=lambda x: x.published, reverse=True)})
+                    if can_add(x)])), key=lambda x: x.published, reverse=True)})
 
         return image_groups
 

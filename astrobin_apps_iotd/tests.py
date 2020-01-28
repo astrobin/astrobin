@@ -1,20 +1,14 @@
-# Python
 import simplejson as json
 from beautifulsoupselect import BeautifulSoupSelect as BSS
-# Third party
 from bs4 import BeautifulSoup as BS
-# Django
 from django.core.cache import cache
 from django.core.management import call_command
-from django.test import TestCase
+from django.test import TestCase, override_settings
 from mock import patch
 
+from astrobin.tests.generators import Generators
 from astrobin_apps_groups.models import Group as AstroBinGroup
-# This app
 from astrobin_apps_iotd.models import *
-
-
-# Django
 
 
 class IotdTest(TestCase):
@@ -129,6 +123,23 @@ class IotdTest(TestCase):
         self.image.user = self.user
         self.image.save(keep_deleted=True)
 
+        # Cannot submit an image authored by:
+        # - a free account or
+        # - a lite 2020 account
+        with self.assertRaisesRegexp(ValidationError, "a Free membership"):
+            IotdSubmission.objects.create(
+                submitter=self.submitter_1,
+                image=self.image)
+
+        us = Generators.premium_subscription(self.image.user, "AstroBin Lite 2020+")
+        with self.assertRaisesRegexp(ValidationError, "a Lite membership"):
+            IotdSubmission.objects.create(
+                submitter=self.submitter_1,
+                image=self.image)
+        us.delete()
+
+        us = Generators.premium_subscription(self.user, "AstroBin Ultimate 2020+")
+
         # All OK
         submission = IotdSubmission.objects.create(
             submitter=self.submitter_1,
@@ -165,6 +176,8 @@ class IotdTest(TestCase):
                     submitter=self.submitter_1,
                     image=image2)
 
+        us.delete()
+
     def test_vote_model(self):
         # User must be reviewer
         with self.assertRaisesRegexp(ValidationError, "not a member"):
@@ -177,6 +190,24 @@ class IotdTest(TestCase):
             IotdVote.objects.create(
                 reviewer=self.reviewer_1,
                 image=self.image)
+
+        # Cannot vote an image authored by:
+        # - a free account or
+        # - a lite 2020 account
+        with self.assertRaisesRegexp(ValidationError, "a Free membership"):
+            IotdSubmission.objects.create(
+                submitter=self.submitter_1,
+                image=self.image)
+
+        us = Generators.premium_subscription(self.image.user, "AstroBin Lite 2020+")
+        with self.assertRaisesRegexp(ValidationError, "a Lite membership"):
+            IotdSubmission.objects.create(
+                submitter=self.submitter_1,
+                image=self.image)
+        us.delete()
+
+        image_author_us = Generators.premium_subscription(self.image.user, "AstroBin Ultimate 2020+")
+
         submission_1 = IotdSubmission.objects.create(
             submitter=self.submitter_1,
             image=self.image)
@@ -328,6 +359,7 @@ class IotdTest(TestCase):
         submission_1.delete()
         submission_2.delete()
         image2.delete()
+        image_author_us.delete()
 
     def test_iotd_model(self):
         # User must be judge
@@ -336,6 +368,23 @@ class IotdTest(TestCase):
                 judge=self.user,
                 image=self.image,
                 date=datetime.now().date())
+
+        # Cannot elect an image authored by:
+        # - a free account or
+        # - a lite 2020 account
+        with self.assertRaisesRegexp(ValidationError, "a Free membership"):
+            IotdSubmission.objects.create(
+                submitter=self.submitter_1,
+                image=self.image)
+
+        us = Generators.premium_subscription(self.image.user, "AstroBin Lite 2020+")
+        with self.assertRaisesRegexp(ValidationError, "a Lite membership"):
+            IotdSubmission.objects.create(
+                submitter=self.submitter_1,
+                image=self.image)
+        us.delete()
+
+        image_author_us = Generators.premium_subscription(self.image.user, "AstroBin Ultimate 2020+")
 
         # Image must have been voted
         with self.assertRaisesRegexp(ValidationError, "has not been voted"):
@@ -479,9 +528,11 @@ class IotdTest(TestCase):
         submission_1.delete()
         submission_2.delete()
         submission_3.delete()
+        image_author_us.delete()
 
     # Views
 
+    @override_settings(PREMIUM_RESTRICTS_IOTD=False)
     def test_submission_queue_view(self):
         url = reverse_lazy('iotd_submission_queue')
 
@@ -567,6 +618,7 @@ class IotdTest(TestCase):
         vote.delete()
         iotd.delete()
 
+    @override_settings(PREMIUM_RESTRICTS_IOTD=False)
     def test_toggle_submission_ajax_view(self):
         url = reverse_lazy('iotd_toggle_submission_ajax', kwargs={'pk': self.image.pk})
 
@@ -611,6 +663,7 @@ class IotdTest(TestCase):
             response = self.client.post(url, HTTP_X_REQUESTED_WITH='XMLHttpRequest')
             self.assertEqual(IotdSubmission.objects.count(), 0)
 
+    @override_settings(PREMIUM_RESTRICTS_IOTD=False)
     def test_review_queue_view(self):
         url = reverse_lazy('iotd_review_queue')
 
@@ -683,6 +736,7 @@ class IotdTest(TestCase):
         vote.delete()
         iotd.delete()
 
+    @override_settings(PREMIUM_RESTRICTS_IOTD=False)
     def test_toggle_vote_ajax_view(self):
         url = reverse_lazy('iotd_toggle_vote_ajax', kwargs={'pk': self.image.pk})
 
@@ -730,6 +784,7 @@ class IotdTest(TestCase):
             response = self.client.post(url, HTTP_X_REQUESTED_WITH='XMLHttpRequest')
             self.assertEqual(IotdVote.objects.count(), 0)
 
+    @override_settings(PREMIUM_RESTRICTS_IOTD=False)
     def test_judgement_queue_view(self):
         url = reverse_lazy('iotd_judgement_queue')
 
@@ -800,6 +855,7 @@ class IotdTest(TestCase):
         vote_1.delete()
         iotd.delete()
 
+    @override_settings(PREMIUM_RESTRICTS_IOTD=False)
     def test_toggle_judgement_ajax_view(self):
         url = reverse_lazy('iotd_toggle_judgement_ajax', kwargs={'pk': self.image.pk})
 
@@ -962,6 +1018,7 @@ class IotdTest(TestCase):
         iotd2.delete()
         iotd3.delete()
 
+    @override_settings(PREMIUM_RESTRICTS_IOTD=False)
     def test_group_sync(self):
         group_creator = User.objects.create_user('group_creator', 'group_creator@test.com', 'password')
 
@@ -1122,6 +1179,7 @@ class IotdTest(TestCase):
         staff_group_dj.delete()
         content_moderators_group_dj.delete()
 
+    @override_settings(PREMIUM_RESTRICTS_IOTD=False)
     def test_iotd_deleted_images(self):
         """Deleted images should not appear in the IOTD archive"""
 

@@ -49,7 +49,7 @@ class Generators:
             group_name = "astrobin_premium_2020"
 
         elif name == "AstroBin Ultimate 2020+":
-            group_name = "astrobin_ul_2020"
+            group_name = "astrobin_ultimate_2020"
 
         g, created = Group.objects.get_or_create(name=group_name)
         s, created = Subscription.objects.get_or_create(
