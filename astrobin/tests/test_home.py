@@ -1,5 +1,5 @@
 from django.contrib.auth.models import User
-from django.test import TestCase
+from django.test import TestCase, override_settings
 from django_bouncy.models import Complaint
 from mock import patch
 
@@ -13,6 +13,7 @@ class HomeTest(TestCase):
     def tearDown(self):
         self.user.delete()
 
+    @override_settings(PREMIUM_MAX_REVISIONS_FREE_2020=2)
     @patch("astrobin.tasks.retrieve_primary_thumbnails")
     def test_global_stream(self, retrieve_primary_thumbnails):
         url = reverse('index') + '?s=global'

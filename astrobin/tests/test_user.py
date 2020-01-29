@@ -387,6 +387,7 @@ class UserTest(TestCase):
 
         self.client.logout()
 
+    @override_settings(PREMIUM_RESTRICTS_IOTD=False)
     @patch("astrobin.tasks.retrieve_primary_thumbnails")
     def test_user_profile_exclude_from_competitions(self, retrieve_primary_thumbnails):
         self.client.login(username = "user", password="password")
