@@ -17,6 +17,9 @@ def premium_badge(user, size='large'):
 
 @register.filter
 def is_ultimate_2020(user):
+    if not user.is_authenticated():
+        return False
+
     userSubscription = premium_get_valid_usersubscription(user)
     if userSubscription:
         return userSubscription.subscription.group.name == "astrobin_ultimate_2020"
@@ -25,6 +28,9 @@ def is_ultimate_2020(user):
 
 @register.filter
 def is_premium_2020(user):
+    if not user.is_authenticated():
+        return False
+
     userSubscription = premium_get_valid_usersubscription(user)
     if userSubscription:
         return userSubscription.subscription.group.name == "astrobin_premium_2020"
@@ -33,6 +39,9 @@ def is_premium_2020(user):
 
 @register.filter
 def is_lite_2020(user):
+    if not user.is_authenticated():
+        return False
+
     userSubscription = premium_get_valid_usersubscription(user)
     if userSubscription:
         return userSubscription.subscription.group.name == "astrobin_lite_2020"
@@ -41,6 +50,9 @@ def is_lite_2020(user):
 
 @register.filter
 def is_premium(user):
+    if not user.is_authenticated():
+        return False
+
     userSubscription = premium_get_valid_usersubscription(user)
     if userSubscription:
         return userSubscription.subscription.group.name == "astrobin_premium"
@@ -49,6 +61,9 @@ def is_premium(user):
 
 @register.filter
 def is_lite(user):
+    if not user.is_authenticated():
+        return False
+
     userSubscription = premium_get_valid_usersubscription(user)
     if userSubscription:
         return userSubscription.subscription.group.name == "astrobin_lite"
@@ -57,7 +72,7 @@ def is_lite(user):
 
 @register.filter
 def is_free(user):
-    return not (user.is_authenticated() and is_any_premium(user))
+    return not is_any_premium(user)
 
 
 @register.filter
