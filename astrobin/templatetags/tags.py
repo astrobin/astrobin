@@ -7,6 +7,9 @@ from django.utils.translation import ugettext as _
 from subscription.models import UserSubscription, Subscription
 
 from astrobin.gear import *
+from astrobin_apps_donations.templatetags.astrobin_apps_donations_tags import is_donor
+from astrobin_apps_premium.templatetags.astrobin_apps_premium_tags import is_premium_2020, is_premium, is_ultimate_2020, \
+    is_lite
 
 register = Library()
 
@@ -234,25 +237,33 @@ def gear_type(gear):
 
 @register.filter
 def show_ads(user):
-    from astrobin_apps_donations.templatetags.astrobin_apps_donations_tags import is_donor
-    from astrobin_apps_premium.templatetags.astrobin_apps_premium_tags import is_premium, is_lite
-
     if not settings.ADS_ENABLED:
         return False
 
-    if is_donor(user):
+    if is_donor(user) and not user.userprofile.allow_astronomy_ads:
         return False
 
-    if settings.PREMIUM_ENABLED and (is_lite(user) or is_premium(user)):
+    if (is_lite(user) or is_premium(user) or is_premium_2020(user) or is_ultimate_2020(user)) and \
+            not user.userprofile.allow_astronomy_ads:
         return False
 
     return True
+
+@register.filter
+def can_remove_ads(user):
+    if not settings.ADS_ENABLED:
+        return False
+
+    if is_lite(user) or is_premium(user) or is_premium_2020(user) or is_ultimate_2020(user):
+        return True
+
+    return False
 
 
 @register.filter
 def valid_subscriptions(user):
     if user.is_anonymous():
-         return []
+        return []
 
     us = UserSubscription.active_objects.filter(user=user)
     subs = [x.subscription for x in us if x.valid()]
@@ -333,13 +344,13 @@ def get_usersubscription_by_name(user, name):
 
 @register.simple_tag
 def get_subscription_by_name(name):
-    return Subscription.objects.filter(name = name).first()
+    return Subscription.objects.filter(name=name).first()
 
 
 @register.simple_tag
 def get_subscription_url_by_name(name):
     try:
-        sub = Subscription.objects.get(name = name)
+        sub = Subscription.objects.get(name=name)
     except Subscription.DoesNotExist:
         return '#'
 

@@ -802,7 +802,6 @@ class Image(HasSolutionMixin, SafeDeleteModel):
         'accessories': Accessory,
     }
 
-
     hash = models.CharField(
         max_length=6,
         default=image_hash,
@@ -2172,6 +2171,14 @@ class UserProfile(SafeDeleteModel):
         default=False,
         verbose_name=_(u'I accept to receive occasional marketing and commercial material via email'),
         help_text=_(u'These emails may contain offers, commercial news, and promotions from AstroBin or its partners.')
+    )
+
+    allow_astronomy_ads = models.BooleanField(
+        default=True,
+        verbose_name=_(u'Allow astronomy ads from our partners'),
+        help_text=_(u'It would mean a lot if you chose to allow astronomy relevant, non intrusive ads on this website. '
+                    u'AstroBin is a small business run by a single person, and this kind of support would be amazing. '
+                    u'Thank you in advance!')
     )
 
     inactive_account_reminder_sent = models.DateTimeField(

@@ -1,3 +1,4 @@
+{% load tags %}
 {% load astrobin_apps_donations_tags %}
 {% load pipeline %}
 {% load dfp_tags %}
@@ -88,7 +89,7 @@
 
         {% block extra_js %}{% endblock %}
 
-        {% if ADS_ENABLED %}
+        {% if request.user|show_ads %}
             {% dfp_footer %}
         {% endif %}
 

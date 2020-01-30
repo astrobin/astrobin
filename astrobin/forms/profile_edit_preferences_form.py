@@ -14,5 +14,6 @@ class UserProfileEditPreferencesForm(forms.ModelForm):
             'receive_forum_emails',
             'receive_important_communications',
             'receive_newsletter',
-            'receive_marketing_and_commercial_material'
+            'receive_marketing_and_commercial_material',
+            'allow_astronomy_ads',
         ]
