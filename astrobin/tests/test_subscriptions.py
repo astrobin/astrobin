@@ -1,6 +1,5 @@
 # Django
 from django.contrib.auth.models import User, Group
-from django.core.urlresolvers import reverse
 from django.test import TestCase
 # Third party
 from subscription.models import Subscription, UserSubscription
@@ -22,7 +21,7 @@ class SubscriptionsTest(TestCase):
                 username='test', email='test@test.com', password='password')
             g, created = Group.objects.get_or_create(name="astrobin_premium")
             s, created = Subscription.objects.get_or_create(
-                name="Test subscription",
+                name="AstroBin Premium",
                 price=1,
                 group=g,
                 category="premium")
@@ -34,14 +33,10 @@ class SubscriptionsTest(TestCase):
 
             self.assertEqual(valid_subscriptions(u), [s])
             self.assertEqual(has_valid_subscription(u, s.pk), True)
-            self.assertEqual(
-                has_valid_subscription_in_category(u, "premium"), True)
-            self.assertEqual(
-                get_premium_subscription_expiration(u), us.expires)
-            self.assertEqual(
-                has_subscription_by_name(u, "Test subscription"), True)
-            self.assertEqual(
-                get_usersubscription_by_name(u, "Test subscription"), us)
+            self.assertEqual(has_valid_subscription_in_category(u, "premium"), True)
+            self.assertEqual(get_premium_subscription_expiration(u), us.expires)
+            self.assertEqual(has_subscription_by_name(u, "AstroBin Premium"), True)
+            self.assertEqual(get_usersubscription_by_name(u, "AstroBin Premium"), us)
 
             us.delete()
             s.delete()
@@ -54,7 +49,7 @@ class SubscriptionsTest(TestCase):
                 username='test', email='test@test.com', password='password')
             g, created = Group.objects.get_or_create(name="astrobin_premium")
             s, created = Subscription.objects.get_or_create(
-                name="Test subscription",
+                name="AstroBin Premium 20% discount",
                 price=1,
                 group=g,
                 category="premium_offer_discount_20")
@@ -68,8 +63,8 @@ class SubscriptionsTest(TestCase):
             self.assertEqual(has_valid_subscription(u, s.pk), True)
             self.assertEqual(has_valid_subscription_in_category(u, "premium"), True)
             self.assertEqual(get_premium_subscription_expiration(u), us.expires)
-            self.assertEqual(has_subscription_by_name(u, "Test subscription"), True)
-            self.assertEqual(get_usersubscription_by_name(u, "Test subscription"), us)
+            self.assertEqual(has_subscription_by_name(u, "AstroBin Premium 20% discount"), True)
+            self.assertEqual(get_usersubscription_by_name(u, "AstroBin Premium 20% discount"), us)
 
             us.delete()
             s.delete()
