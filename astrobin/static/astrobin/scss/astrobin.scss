@@ -2141,30 +2141,17 @@ BODY:first-of-type ul.as-list, x:-moz-any-link, x:default { /* Target FF 3.5+ */
 }
 
 .image-detail {
-  .image-detail-inner {
-    padding: $spacer-large;
-
-    .gear, .acquisition {
-      float: left;
-      width: 50%;
-    }
-
-    .gear-inner, .acquisition-inner {
-      padding: 0 $spacer-medium;
-
-      p {
-        margin: 0;
-      }
-    }
-
-    .image-histogram {
-      margin-top: $spacer-xxlarge;
-    }
+  p {
+    margin: 2px;
   }
 
-  .card-label {
-    margin-right: $spacer-small;
+  .image-histogram {
+    margin-top: $spacer-xxlarge;
   }
+}
+
+.card-label {
+  margin-right: $spacer-small;
 }
 
 .avatar-block {
@@ -2547,6 +2534,17 @@ BODY:first-of-type ul.as-list, x:-moz-any-link, x:default { /* Target FF 3.5+ */
     .separator {
       margin-right: 6px;
       color: #999;
+    }
+
+    &.sub-header {
+      background: none;
+      margin-top: 20px;
+      border-top: 1px solid #444;
+      padding-top: 20px;
+
+      h4 {
+        font-size: 16px;
+      }
     }
   }
 
@@ -4752,12 +4750,12 @@ ul.astrobin-users {
 hr {
   border: 0;
   height: 1px;
-  background-image: -webkit-linear-gradient(left, rgba(255, 255, 255, 0), rgba(255, 255, 255, 0.5), rgba(0, 0, 0, 0));
-  background-image: -moz-linear-gradient(left, rgba(255, 255, 255, 0), rgba(255, 255, 255, 0.5), rgba(0, 0, 0, 0));
-  background-image: -ms-linear-gradient(left, rgba(255, 255, 255, 0), rgba(255, 255, 255, 0.5), rgba(0, 0, 0, 0));
-  background-image: -o-linear-gradient(left, rgba(255, 255, 255, 0), rgba(255, 255, 255, 0.5), rgba(0, 0, 0, 0));
-  margin: 25px;
-  width: 100%;
+  background-image: -webkit-linear-gradient(left, rgba(96, 96, 96, 0), rgba(96, 96, 96, 0.5), rgba(0, 0, 0, 0));
+  background-image: -moz-linear-gradient(left, rgba(96, 96, 96, 0), rgba(96, 96, 96, 0.5), rgba(0, 0, 0, 0));
+  background-image: -ms-linear-gradient(left, rgba(96, 96, 96, 0), rgba(96, 96, 96, 0.5), rgba(0, 0, 0, 0));
+  background-image: -o-linear-gradient(left, rgba(96, 96, 96, 0), rgba(96, 96, 96, 0.5), rgba(0, 0, 0, 0));
+  margin: 20px;
+  width: calc(100% - 40px);
 }
 
 .label.thank-you-for-your-support {

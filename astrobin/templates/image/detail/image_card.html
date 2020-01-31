@@ -3,144 +3,165 @@
 {% load tags %}
 
 {% if image.subject_type < 500 %}
-<div class="row image-detail">
-    <div class="span8">
-        <div class="subtle-container image-detail-inner">
-            <div class="header">
-                <h4><i class="icon-list-alt"></i> {% trans "Technical card" %}</h4>
-            </div>
-            <div class="gear">
-                <div class="gear-inner">
-                    {% for i in gear_list %}
-                        {% if i.1 %}
-                            <p>
-                              <strong class="card-label">{% trans i.0 %}:</strong>
-                              {% for g in i.1 %}
-                                    <a rel="popover" class="gear-popover{% if g.commercial and g.commercial.is_paid or g.commercial.producer == request.user %} btn btn-mini btn-warning{% endif %}" data-load="{% url 'gear_popover_ajax' g.id %}" href="{% url 'gear_page' g.id g.slug %}">{{g}}</a>{% if not forloop.last %},&nbsp;{% endif %}
-                                {% endfor %}
-                            </p>
-                        {% endif %}
-                    {% endfor %}
+    <div class="row image-detail">
+        <div class="span8">
+
+            <div class="subtle-container">
+                <div class="header">
+                    <h4><i class="icon-list-alt"></i> {% trans "Technical card" %}</h4>
                 </div>
-            </div> <!-- gear -->
-
-            <div class="acquisition">
-                <div class="acquisition-inner">
-                    {% for data in basic_data %}
-                        {% if data.1 %}
-                            <p>
-                                <strong class="card-label">{{data.0}}:</strong> {{data.1|safe|linebreaksbr}}
-                            </p>
-                        {% endif %}
-                    {% endfor %}
-
-                    {% if image_type == 'deep_sky' %}
-                        {% for data in deep_sky_data %}
-                            {% if data.1 %}
+                <div class="gear">
+                    <div class="gear-inner">
+                        {% for i in gear_list %}
+                            {% if i.1 %}
                                 <p>
-                                    <strong class="card-label">{{data.0}}:</strong>
-                                    {% if data.0 == dates_label %}
-                                        {% for date in data.1 %}
-                                            <a href="/search/{% query_string "q=, start_date=date, end_date=date" "plate_solving_started, r, mod" %}">{{date|date:"DATE_FORMAT"}}</a>{% if not forloop.last %},&nbsp;{% endif %}
-                                        {% endfor %}
-                                    {% else %}
-                                        {{data.1|safe|linebreaksbr}}
-                                    {% endif %}
+                                    <strong class="card-label">{% trans i.0 %}:</strong>
+                                    {% for g in i.1 %}
+                                        <a rel="popover"
+                                           class="gear-popover{% if g.commercial and g.commercial.is_paid or g.commercial.producer == request.user %} btn btn-mini btn-warning{% endif %}"
+                                           data-load="{% url 'gear_popover_ajax' g.id %}"
+                                           href="{% url 'gear_page' g.id g.slug %}">{{ g }}</a>{% if not forloop.last %}
+                                        ,&nbsp;{% endif %}
+                                    {% endfor %}
                                 </p>
                             {% endif %}
                         {% endfor %}
-                    {% else %}
-                        {% if ssa.date %}
-                            <p><strong class="card-label">{% trans "Date" %}:</strong> <a href="/search/{% query_string "q=, start_date=ssa.date, end_date=ssa.date" "plate_solving_started, r, mod" %}">{{ssa.date|date:"DATE_FORMAT"}}</a></p>
-                        {% endif %}
-                        {% if ssa.time %}
-                            <p><strong class="card-label">{% trans "Time" %}:</strong> {{ssa.time}}</p>
-                        {% endif %}
-                        {% if ssa.frames %}
-                            <p><strong class="card-label">{% trans "Frames" %}:</strong> {{ssa.frames}}</p>
-                        {% endif %}
-                        {% if ssa.fps %}
-                            <p><strong class="card-label">{% trans "FPS" %}:</strong> {{ssa.fps}}</p>
-                        {% endif %}
-                        {% if ssa.focal_length %}
-                            <p><strong class="card-label">{% trans "Focal length" %}:</strong> {{ssa.focal_length}}</p>
-                        {% endif %}
-                        {% if ssa.cmi %}
-                            <p><strong class="card-label">{% trans "CMI" %}:</strong> {{ssa.cmi}}</p>
-                        {% endif %}
-                        {% if ssa.cmii %}
-                            <p><strong class="card-label">{% trans "CMII" %}:</strong> {{ssa.cmii}}</p>
-                        {% endif %}
-                        {% if ssa.cmiii %}
-                            <p><strong class="card-label">{% trans "CMIII" %}:</strong> {{ssa.cmiii}}</p>
-                        {% endif %}
-                        {% if ssa.seeing %}
-                            <p><strong class="card-label">{% trans "Seeing" %}:</strong> {{ssa.seeing}}</p>
-                        {% endif %}
-                        {% if ssa.transparency %}
-                            <p><strong class="card-label">{% trans "Transparency" %}:</strong> {{ssa.transparency}}</p>
-                        {% endif %}
-                    {% endif %}
+                    </div>
+                </div>
 
-                    {% if instance_to_platesolve.solution %}
-                        <p>
-                            <strong class="card-label">Astrometry.net job:</strong>
-                            <a href="http://nova.astrometry.net/status/{{instance_to_platesolve.solution.submission_id}}"
-                               target="_blank">
-                                {{instance_to_platesolve.solution.submission_id}}
-                            </a>
-                        </p>
+                <hr/>
 
-                        {% if instance_to_platesolve.solution.ra %}
-                            <p>
-                                <strong class="card-label">{% trans "RA center" %}:</strong>
-                                <abbr title="{{ instance_to_platesolve.solution.ra }} {% trans "degrees" %}">
-                                    {{instance_to_platesolve.solution.ra | ra_to_hms}}
-                                </abbr>
-                            </p>
-
-                            <p>
-                                <strong class="card-label">{% trans "DEC center" %}:</strong>
-                                <abbr title="{{ instance_to_platesolve.solution.dec }} {% trans "degrees" %}">
-                                    {{instance_to_platesolve.solution.dec | dec_to_dms}}
-                                </abbr>
-                            </p>
-
-                            {% if instance_to_platesolve.solution.pixscale and instance_to_platesolve.solution.pixscale != 0 %}
+                <div class="acquisition">
+                    <div class="acquisition-inner">
+                        {% for data in basic_data %}
+                            {% if data.1 %}
                                 <p>
-                                    <strong class="card-label">{% trans "Pixel scale" %}:</strong>
-                                    {{instance_to_platesolve.solution.pixscale}} {% trans "arcsec/pixel" %}
+                                    <strong class="card-label">{{ data.0 }}:</strong> {{ data.1|safe|linebreaksbr }}
                                 </p>
                             {% endif %}
+                        {% endfor %}
 
-                            <p>
-                                <strong class="card-label">{% trans "Orientation" %}:</strong>
-                                {{instance_to_platesolve.solution.orientation}} {% trans "degrees" %}
-                            </p>
+                        {% if image_type == 'deep_sky' %}
+                            {% for data in deep_sky_data %}
+                                {% if data.1 %}
+                                    <p>
+                                        <strong class="card-label">{{ data.0 }}:</strong>
+                                        {% if data.0 == dates_label %}
+                                            {% for date in data.1 %}
+                                                <a href="/search/{% query_string "q=, start_date=date, end_date=date" "plate_solving_started, r, mod" %}">{{ date|date:"DATE_FORMAT" }}</a>
+                                                {% if not forloop.last %},&nbsp;{% endif %}
+                                            {% endfor %}
+                                        {% else %}
+                                            {{ data.1|safe|linebreaksbr }}
+                                        {% endif %}
+                                    </p>
+                                {% endif %}
+                            {% endfor %}
+                        {% else %}
+                            {% if ssa.date %}
+                                <p><strong class="card-label">{% trans "Date" %}:</strong> <a
+                                        href="/search/{% query_string "q=, start_date=ssa.date, end_date=ssa.date" "plate_solving_started, r, mod" %}">{{ ssa.date|date:"DATE_FORMAT" }}</a>
+                                </p>
+                            {% endif %}
+                            {% if ssa.time %}
+                                <p><strong class="card-label">{% trans "Time" %}:</strong> {{ ssa.time }}</p>
+                            {% endif %}
+                            {% if ssa.frames %}
+                                <p><strong class="card-label">{% trans "Frames" %}:</strong> {{ ssa.frames }}</p>
+                            {% endif %}
+                            {% if ssa.fps %}
+                                <p><strong class="card-label">{% trans "FPS" %}:</strong> {{ ssa.fps }}</p>
+                            {% endif %}
+                            {% if ssa.focal_length %}
+                                <p><strong
+                                        class="card-label">{% trans "Focal length" %}:</strong> {{ ssa.focal_length }}
+                                </p>
+                            {% endif %}
+                            {% if ssa.cmi %}
+                                <p><strong class="card-label">{% trans "CMI" %}:</strong> {{ ssa.cmi }}</p>
+                            {% endif %}
+                            {% if ssa.cmii %}
+                                <p><strong class="card-label">{% trans "CMII" %}:</strong> {{ ssa.cmii }}</p>
+                            {% endif %}
+                            {% if ssa.cmiii %}
+                                <p><strong class="card-label">{% trans "CMIII" %}:</strong> {{ ssa.cmiii }}</p>
+                            {% endif %}
+                            {% if ssa.seeing %}
+                                <p><strong class="card-label">{% trans "Seeing" %}:</strong> {{ ssa.seeing }}</p>
+                            {% endif %}
+                            {% if ssa.transparency %}
+                                <p><strong
+                                        class="card-label">{% trans "Transparency" %}:</strong> {{ ssa.transparency }}
+                                </p>
+                            {% endif %}
+                        {% endif %}
+                    </div>
+                </div>
 
+                {% if instance_to_platesolve.solution %}
+                    <hr />
+
+                    <p>
+                        <strong class="card-label">Astrometry.net job:</strong>
+                        <a href="http://nova.astrometry.net/status/{{ instance_to_platesolve.solution.submission_id }}"
+                           target="_blank">
+                            {{ instance_to_platesolve.solution.submission_id }}
+                        </a>
+                    </p>
+
+                    {% if instance_to_platesolve.solution.ra %}
+                        <p>
+                            <strong class="card-label">{% trans "RA center" %}:</strong>
+                            <abbr title="{{ instance_to_platesolve.solution.ra }} {% trans "degrees" %}">
+                                {{ instance_to_platesolve.solution.ra | ra_to_hms }}
+                            </abbr>
+                        </p>
+
+                        <p>
+                            <strong class="card-label">{% trans "DEC center" %}:</strong>
+                            <abbr title="{{ instance_to_platesolve.solution.dec }} {% trans "degrees" %}">
+                                {{ instance_to_platesolve.solution.dec | dec_to_dms }}
+                            </abbr>
+                        </p>
+
+                        {% if instance_to_platesolve.solution.pixscale and instance_to_platesolve.solution.pixscale != 0 %}
                             <p>
-                                <strong class="card-label">{% trans "Field radius" %}:</strong>
-                                {{instance_to_platesolve.solution.radius}}
+                                <strong class="card-label">{% trans "Pixel scale" %}:</strong>
+                                {{ instance_to_platesolve.solution.pixscale }} {% trans "arcsec/pixel" %}
                             </p>
                         {% endif %}
-                    {% endif %}
 
-                    {% if locations %}
-                        <p><strong class="card-label">{% trans "Locations" %}:</strong> {{locations}}</p>
-                    {% endif %}
+                        <p>
+                            <strong class="card-label">{% trans "Orientation" %}:</strong>
+                            {{ instance_to_platesolve.solution.orientation }} {% trans "degrees" %}
+                        </p>
 
-                    {% if image.data_source and image.data_source != "OTHER" and image.data_source != "UNSET" %}
-                        <p><strong class="card-label">{%  trans "Data source" %}:</strong> {{image.get_data_source}}</p>
-                    {% endif %}
-
-                    {% if image.remote_source and image.remote_source != "OTHER" %}
-                        <p><strong class="card-label">{% trans "Remote source" %}:</strong> {{ image.get_remote_source }}
+                        <p>
+                            <strong class="card-label">{% trans "Field radius" %}:</strong>
+                            {{ instance_to_platesolve.solution.radius }}
                         </p>
                     {% endif %}
-                </div> <!-- acquisition-inner -->
-            </div> <!-- acquisition -->
-        </div> <!-- image-detail-inner -->
-    </div> <!-- span8 -->
-</div> <!-- row image-detail -->
+                {% endif %}
+
+                <hr />
+
+                {% if locations %}
+                    <p><strong class="card-label">{% trans "Locations" %}:</strong> {{ locations }}</p>
+                {% endif %}
+
+                {% if image.data_source and image.data_source != "OTHER" and image.data_source != "UNSET" %}
+                    <p><strong class="card-label">{% trans "Data source" %}:</strong> {{ image.get_data_source }}
+                    </p>
+                {% endif %}
+
+                {% if image.remote_source and image.remote_source != "OTHER" %}
+                    <p><strong
+                            class="card-label">{% trans "Remote source" %}:</strong> {{ image.get_remote_source }}
+                    </p>
+                {% endif %}
+            </div>
+
+        </div> <!-- span -->
+    </div> <!-- row image-detail -->
 {% endif %} {# image.subject_type < 500 #}
 
