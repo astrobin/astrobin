@@ -2231,7 +2231,7 @@ class ImageTest(TestCase):
     def test_image_anon_see_ads(self, retrieve_primary_thumbnails):
         image = Generators.image()
         response = self.client.get(reverse('image_detail', kwargs={'id': image.get_id()}))
-        self.assertContains(response, "advertisement")
+        self.assertContains(response, "div class=\"subtle-container advertisement\"")
         image.delete()
 
     @override_settings(ADS_ENABLED=True)
@@ -2239,7 +2239,7 @@ class ImageTest(TestCase):
     def test_image_free_see_ads(self, retrieve_primary_thumbnails):
         image = Generators.image()
         response = self.client.get(reverse('image_detail', kwargs={'id': image.get_id()}))
-        self.assertContains(response, "advertisement")
+        self.assertContains(response, "div class=\"subtle-container advertisement\"")
         image.delete()
 
     @override_settings(ADS_ENABLED=True)
@@ -2250,7 +2250,7 @@ class ImageTest(TestCase):
         self.user.userprofile.save()
         self.client.login(username='test', password='password')
         response = self.client.get(reverse('image_detail', kwargs={'id': image.get_id()}))
-        self.assertContains(response, "advertisement")
+        self.assertContains(response, "div class=\"subtle-container advertisement\"")
         self.client.logout()
         image.delete()
 
@@ -2260,7 +2260,7 @@ class ImageTest(TestCase):
         image = Generators.image()
         us = Generators.premium_subscription(self.user, "AstroBin Lite")
         response = self.client.get(reverse('image_detail', kwargs={'id': image.get_id()}))
-        self.assertContains(response, "advertisement")
+        self.assertContains(response, "div class=\"subtle-container advertisement\"")
         image.delete()
         us.delete()
 
@@ -2273,7 +2273,7 @@ class ImageTest(TestCase):
         self.user.userprofile.save()
         self.client.login(username='test', password='password')
         response = self.client.get(reverse('image_detail', kwargs={'id': image.get_id()}))
-        self.assertNotContains(response, "advertisement")
+        self.assertNotContains(response, "div class=\"subtle-container advertisement\"")
         self.client.logout()
         image.delete()
         us.delete()
@@ -2284,7 +2284,7 @@ class ImageTest(TestCase):
         image = Generators.image()
         us = Generators.premium_subscription(self.user, "AstroBin Lite 2020+")
         response = self.client.get(reverse('image_detail', kwargs={'id': image.get_id()}))
-        self.assertContains(response, "advertisement")
+        self.assertContains(response, "div class=\"subtle-container advertisement\"")
         image.delete()
         us.delete()
 
@@ -2297,7 +2297,7 @@ class ImageTest(TestCase):
         self.user.userprofile.save()
         self.client.login(username='test', password='password')
         response = self.client.get(reverse('image_detail', kwargs={'id': image.get_id()}))
-        self.assertContains(response, "advertisement")
+        self.assertContains(response, "div class=\"subtle-container advertisement\"")
         self.client.logout()
         image.delete()
         us.delete()
@@ -2308,7 +2308,7 @@ class ImageTest(TestCase):
         image = Generators.image()
         us = Generators.premium_subscription(self.user, "AstroBin Premium")
         response = self.client.get(reverse('image_detail', kwargs={'id': image.get_id()}))
-        self.assertContains(response, "advertisement")
+        self.assertContains(response, "div class=\"subtle-container advertisement\"")
         image.delete()
         us.delete()
 
@@ -2321,7 +2321,7 @@ class ImageTest(TestCase):
         self.user.userprofile.save()
         self.client.login(username='test', password='password')
         response = self.client.get(reverse('image_detail', kwargs={'id': image.get_id()}))
-        self.assertNotContains(response, "advertisement")
+        self.assertNotContains(response, "div class=\"subtle-container advertisement\"")
         self.client.logout()
         image.delete()
         us.delete()
@@ -2332,7 +2332,7 @@ class ImageTest(TestCase):
         image = Generators.image()
         us = Generators.premium_subscription(self.user, "AstroBin Premium 2020+")
         response = self.client.get(reverse('image_detail', kwargs={'id': image.get_id()}))
-        self.assertContains(response, "advertisement")
+        self.assertContains(response, "div class=\"subtle-container advertisement\"")
         image.delete()
         us.delete()
 
@@ -2345,7 +2345,7 @@ class ImageTest(TestCase):
         self.user.userprofile.save()
         self.client.login(username='test', password='password')
         response = self.client.get(reverse('image_detail', kwargs={'id': image.get_id()}))
-        self.assertNotContains(response, "advertisement")
+        self.assertNotContains(response, "div class=\"subtle-container advertisement\"")
         self.client.logout()
         image.delete()
         us.delete()
@@ -2356,7 +2356,7 @@ class ImageTest(TestCase):
         image = Generators.image()
         us = Generators.premium_subscription(self.user, "AstroBin Ultimate 2020+")
         response = self.client.get(reverse('image_detail', kwargs={'id': image.get_id()}))
-        self.assertContains(response, "advertisement")
+        self.assertContains(response, "div class=\"subtle-container advertisement\"")
         image.delete()
         us.delete()
 
@@ -2369,7 +2369,19 @@ class ImageTest(TestCase):
         self.user.userprofile.save()
         self.client.login(username='test', password='password')
         response = self.client.get(reverse('image_detail', kwargs={'id': image.get_id()}))
-        self.assertNotContains(response, "advertisement")
+        self.assertNotContains(response, "div class=\"subtle-container advertisement\"")
         self.client.logout()
+        image.delete()
+        us.delete()
+
+    @override_settings(ADS_ENABLED=True)
+    @patch("astrobin.tasks.retrieve_primary_thumbnails")
+    def test_image_free_users_dont_see_ads_no_ultimate_2020_images(self, retrieve_primary_thumbnails):
+        image = Generators.image()
+        image.user = self.user
+        image.save()
+        us = Generators.premium_subscription(self.user, "AstroBin Ultimate 2020+")
+        response = self.client.get(reverse('image_detail', kwargs={'id': image.get_id()}))
+        self.assertNotContains(response, "div class=\"subtle-container advertisement\"")
         image.delete()
         us.delete()

@@ -30,7 +30,7 @@ from astrobin_apps_notifications.utils import push_notification
 from astrobin_apps_platesolving.models import Solution
 from astrobin_apps_platesolving.solver import Solver
 from astrobin_apps_premium.templatetags.astrobin_apps_premium_tags import (
-    is_lite, is_premium, is_any_premium, is_ultimate_2020)
+    is_lite, is_premium, is_any_premium_subscription, is_ultimate_2020)
 # Other AstroBin apps
 from astrobin_apps_premium.utils import premium_get_valid_usersubscription
 from nested_comments.models import NestedComment
@@ -80,7 +80,7 @@ def image_post_save(sender, instance, created, **kwargs):
 
     if created:
         user_scores_index = instance.user.userprofile.get_scores()['user_scores_index']
-        if user_scores_index >= 1.00 or is_any_premium(instance.user):
+        if user_scores_index >= 1.00 or is_any_premium_subscription(instance.user):
             instance.moderated_when = datetime.date.today()
             instance.moderator_decision = 1
             instance.save(keep_deleted=True)

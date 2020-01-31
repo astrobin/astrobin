@@ -1,11 +1,12 @@
 {% load astrobin_apps_donations_tags %}
+{% load astrobin_apps_premium_tags %}
 {% load i18n %}
 {% load dfp_tags %}
 {% load tags %}
 
 <a href="#remove-ads-modal" data-toggle="modal">test</a>
 {% comment %} TODO: make an app: astrobin_apps_ads {% endcomment %}
-{% if request.user|show_ads %}
+{% if request.user|show_ads and not image.user|has_ultimate %}
     <div class="subtle-container advertisement">
         <div class="header">
             <h4><i class="icon-bullhorn"></i></h4>

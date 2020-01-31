@@ -16,6 +16,11 @@ def premium_badge(user, size='large'):
 
 
 @register.filter
+def is_any_ultimate(user):
+    return is_ultimate_2020(user)
+
+
+@register.filter
 def is_ultimate_2020(user):
     if not user.is_authenticated():
         return False
@@ -27,6 +32,11 @@ def is_ultimate_2020(user):
 
 
 @register.filter
+def is_any_premium(user):
+    return is_premium(user) | is_premium_2020(user)
+
+
+@register.filter
 def is_premium_2020(user):
     if not user.is_authenticated():
         return False
@@ -34,17 +44,6 @@ def is_premium_2020(user):
     userSubscription = premium_get_valid_usersubscription(user)
     if userSubscription:
         return userSubscription.subscription.group.name == "astrobin_premium_2020"
-    return False
-
-
-@register.filter
-def is_lite_2020(user):
-    if not user.is_authenticated():
-        return False
-
-    userSubscription = premium_get_valid_usersubscription(user)
-    if userSubscription:
-        return userSubscription.subscription.group.name == "astrobin_lite_2020"
     return False
 
 
@@ -60,6 +59,21 @@ def is_premium(user):
 
 
 @register.filter
+def is_any_lite(user):
+    return is_lite(user) | is_lite_2020(user)
+
+
+@register.filter
+def is_lite_2020(user):
+    if not user.is_authenticated():
+        return False
+
+    userSubscription = premium_get_valid_usersubscription(user)
+    if userSubscription:
+        return userSubscription.subscription.group.name == "astrobin_lite_2020"
+    return False
+
+@register.filter
 def is_lite(user):
     if not user.is_authenticated():
         return False
@@ -72,11 +86,11 @@ def is_lite(user):
 
 @register.filter
 def is_free(user):
-    return not is_any_premium(user)
+    return not is_any_premium_subscription(user)
 
 
 @register.filter
-def is_any_premium(user):
+def is_any_premium_subscription(user):
     return \
         is_lite(user) or \
         is_premium(user) or \
@@ -91,6 +105,9 @@ def has_valid_premium_offer(user):
            and user.userprofile.premium_offer_expiration \
            and user.userprofile.premium_offer_expiration > datetime.datetime.now()
 
+@register.filter
+def has_ultimate(user):
+    return is_ultimate_2020(user)
 
 @register.filter
 def is_offer(subscription):
