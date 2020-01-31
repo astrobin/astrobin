@@ -4,8 +4,6 @@
 {% load dfp_tags %}
 {% load tags %}
 
-<a href="#remove-ads-modal" data-toggle="modal">test</a>
-{% comment %} TODO: make an app: astrobin_apps_ads {% endcomment %}
 {% if request.user|show_ads and not image.user|has_ultimate %}
     <div class="subtle-container advertisement">
         <div class="header">
