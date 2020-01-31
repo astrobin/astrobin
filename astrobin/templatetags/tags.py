@@ -10,6 +10,7 @@ from astrobin.gear import *
 from astrobin_apps_donations.templatetags.astrobin_apps_donations_tags import is_donor
 from astrobin_apps_premium.templatetags.astrobin_apps_premium_tags import is_premium_2020, is_premium, is_ultimate_2020, \
     is_lite
+from astrobin_apps_premium.utils import premium_get_valid_usersubscription
 
 register = Library()
 
@@ -314,14 +315,9 @@ def get_premium_subscription_expiration(user):
     if user.is_anonymous():
         return None
 
-    us = UserSubscription.active_objects.filter(
-        user=user,
-        subscription__group__name__in=['astrobin_premium', 'astrobin_lite'])
+    us = premium_get_valid_usersubscription(user)
 
-    if us.count() == 0:
-        return None
-
-    return us[0].expires
+    return us.expires if us else None
 
 
 @register.filter
