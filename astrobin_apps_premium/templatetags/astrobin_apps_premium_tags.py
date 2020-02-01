@@ -134,3 +134,8 @@ def can_view_technical_card_item(user, item):
     ]
 
     return item[0] in allowed_items and item[1] is not None
+
+
+@register.filter
+def can_access_advanced_search(user):
+    return not is_free(user)
