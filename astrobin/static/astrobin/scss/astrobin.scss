@@ -3618,18 +3618,25 @@ form.avatar-change label.control-label {
     margin: 0 0 12px 0;
     padding: 14px;
     position: relative;
+  }
+}
 
-    h4 {
-      .actions {
-        font-weight: normal;
-        font-family: $regular_font;
-        font-size: 14px;
-        position: absolute;
-        top: 15px;
-        right: 8px;
-      }
+.subtle-container,
+.simple-container {
+  h4 {
+    .actions {
+      font-weight: normal;
+      font-family: $regular_font;
+      font-size: 14px;
+      position: absolute;
+      top: 15px;
+      right: 8px;
     }
   }
+}
+
+.subtle-container h4 .actions {
+  top: 8px;
 }
 
 .index-recent-topics {

@@ -73,6 +73,7 @@ def is_lite_2020(user):
         return userSubscription.subscription.group.name == "astrobin_lite_2020"
     return False
 
+
 @register.filter
 def is_lite(user):
     if not user.is_authenticated():
@@ -105,10 +106,31 @@ def has_valid_premium_offer(user):
            and user.userprofile.premium_offer_expiration \
            and user.userprofile.premium_offer_expiration > datetime.datetime.now()
 
+
 @register.filter
 def has_ultimate(user):
     return is_ultimate_2020(user)
 
+
 @register.filter
 def is_offer(subscription):
     return "offer" in subscription.category
+
+
+@register.filter
+def can_view_full_technical_card(user):
+    return not is_free(user)
+
+
+@register.filter
+def can_view_technical_card_item(user, item):
+    if is_free(user):
+        return False
+
+    allowed_items = [
+        "Imaging telescope or lens",
+        "Imaging camera",
+        "Resolution"
+    ]
+
+    return item[0] in allowed_items and item[1] is not None

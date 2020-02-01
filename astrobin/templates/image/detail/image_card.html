@@ -1,27 +1,40 @@
 {% load common_tags %}
+{% load astrobin_apps_premium_tags %}
 {% load i18n %}
 {% load tags %}
 
 {% if image.subject_type < 500 %}
+
     <div class="row image-detail">
         <div class="span8">
-
             <div class="subtle-container">
                 <div class="header">
-                    <h4><i class="icon-list-alt"></i> {% trans "Technical card" %}</h4>
+                    <h4>
+                        <i class="icon-list-alt"></i> {% trans "Technical card" %}
+
+                        {% if not request.user|can_view_full_technical_card %}
+                            <div class="actions">
+                                <a href="#feature-restricted-modal" data-toggle="modal">
+                                    {% trans "More" %}
+                                </a>
+                            </div>
+                        {% endif %}
+                    </h4>
                 </div>
+
                 <div class="gear">
                     <div class="gear-inner">
                         {% for i in gear_list %}
-                            {% if i.1 %}
+                            {% if request.user|can_view_technical_card_item:i %}
                                 <p>
                                     <strong class="card-label">{% trans i.0 %}:</strong>
                                     {% for g in i.1 %}
                                         <a rel="popover"
                                            class="gear-popover{% if g.commercial and g.commercial.is_paid or g.commercial.producer == request.user %} btn btn-mini btn-warning{% endif %}"
                                            data-load="{% url 'gear_popover_ajax' g.id %}"
-                                           href="{% url 'gear_page' g.id g.slug %}">{{ g }}</a>{% if not forloop.last %}
-                                        ,&nbsp;{% endif %}
+                                           href="{% url 'gear_page' g.id g.slug %}">{{ g }}</a>
+                                        {% if not forloop.last %}
+                                            ,&nbsp;{% endif %}
                                     {% endfor %}
                                 </p>
                             {% endif %}
@@ -29,12 +42,14 @@
                     </div>
                 </div>
 
-                <hr/>
+                {% if request.user|can_view_full_technical_card %}
+                    <hr />
+                {% endif %}
 
                 <div class="acquisition">
                     <div class="acquisition-inner">
                         {% for data in basic_data %}
-                            {% if data.1 %}
+                            {% if request.user|can_view_technical_card_item:data %}
                                 <p>
                                     <strong class="card-label">{{ data.0 }}:</strong> {{ data.1|safe|linebreaksbr }}
                                 </p>
@@ -43,7 +58,7 @@
 
                         {% if image_type == 'deep_sky' %}
                             {% for data in deep_sky_data %}
-                                {% if data.1 %}
+                                {% if request.user|can_view_technical_card_item:data %}
                                     <p>
                                         <strong class="card-label">{{ data.0 }}:</strong>
                                         {% if data.0 == dates_label %}
@@ -58,47 +73,49 @@
                                 {% endif %}
                             {% endfor %}
                         {% else %}
-                            {% if ssa.date %}
-                                <p><strong class="card-label">{% trans "Date" %}:</strong> <a
-                                        href="/search/{% query_string "q=, start_date=ssa.date, end_date=ssa.date" "plate_solving_started, r, mod" %}">{{ ssa.date|date:"DATE_FORMAT" }}</a>
-                                </p>
-                            {% endif %}
-                            {% if ssa.time %}
-                                <p><strong class="card-label">{% trans "Time" %}:</strong> {{ ssa.time }}</p>
-                            {% endif %}
-                            {% if ssa.frames %}
-                                <p><strong class="card-label">{% trans "Frames" %}:</strong> {{ ssa.frames }}</p>
-                            {% endif %}
-                            {% if ssa.fps %}
-                                <p><strong class="card-label">{% trans "FPS" %}:</strong> {{ ssa.fps }}</p>
-                            {% endif %}
-                            {% if ssa.focal_length %}
-                                <p><strong
-                                        class="card-label">{% trans "Focal length" %}:</strong> {{ ssa.focal_length }}
-                                </p>
-                            {% endif %}
-                            {% if ssa.cmi %}
-                                <p><strong class="card-label">{% trans "CMI" %}:</strong> {{ ssa.cmi }}</p>
-                            {% endif %}
-                            {% if ssa.cmii %}
-                                <p><strong class="card-label">{% trans "CMII" %}:</strong> {{ ssa.cmii }}</p>
-                            {% endif %}
-                            {% if ssa.cmiii %}
-                                <p><strong class="card-label">{% trans "CMIII" %}:</strong> {{ ssa.cmiii }}</p>
-                            {% endif %}
-                            {% if ssa.seeing %}
-                                <p><strong class="card-label">{% trans "Seeing" %}:</strong> {{ ssa.seeing }}</p>
-                            {% endif %}
-                            {% if ssa.transparency %}
-                                <p><strong
-                                        class="card-label">{% trans "Transparency" %}:</strong> {{ ssa.transparency }}
-                                </p>
+                            {% if request.user|can_view_full_technical_card %}
+                                {% if ssa.date %}
+                                    <p><strong class="card-label">{% trans "Date" %}:</strong> <a
+                                            href="/search/{% query_string "q=, start_date=ssa.date, end_date=ssa.date" "plate_solving_started, r, mod" %}">{{ ssa.date|date:"DATE_FORMAT" }}</a>
+                                    </p>
+                                {% endif %}
+                                {% if ssa.time %}
+                                    <p><strong class="card-label">{% trans "Time" %}:</strong> {{ ssa.time }}</p>
+                                {% endif %}
+                                {% if ssa.frames %}
+                                    <p><strong class="card-label">{% trans "Frames" %}:</strong> {{ ssa.frames }}</p>
+                                {% endif %}
+                                {% if ssa.fps %}
+                                    <p><strong class="card-label">{% trans "FPS" %}:</strong> {{ ssa.fps }}</p>
+                                {% endif %}
+                                {% if ssa.focal_length %}
+                                    <p><strong
+                                            class="card-label">{% trans "Focal length" %}:</strong> {{ ssa.focal_length }}
+                                    </p>
+                                {% endif %}
+                                {% if ssa.cmi %}
+                                    <p><strong class="card-label">{% trans "CMI" %}:</strong> {{ ssa.cmi }}</p>
+                                {% endif %}
+                                {% if ssa.cmii %}
+                                    <p><strong class="card-label">{% trans "CMII" %}:</strong> {{ ssa.cmii }}</p>
+                                {% endif %}
+                                {% if ssa.cmiii %}
+                                    <p><strong class="card-label">{% trans "CMIII" %}:</strong> {{ ssa.cmiii }}</p>
+                                {% endif %}
+                                {% if ssa.seeing %}
+                                    <p><strong class="card-label">{% trans "Seeing" %}:</strong> {{ ssa.seeing }}</p>
+                                {% endif %}
+                                {% if ssa.transparency %}
+                                    <p><strong
+                                            class="card-label">{% trans "Transparency" %}:</strong> {{ ssa.transparency }}
+                                    </p>
+                                {% endif %}
                             {% endif %}
                         {% endif %}
                     </div>
                 </div>
 
-                {% if instance_to_platesolve.solution %}
+                {% if instance_to_platesolve.solution and request.user|can_view_full_technical_card %}
                     <hr />
 
                     <p>
@@ -143,25 +160,30 @@
                     {% endif %}
                 {% endif %}
 
-                <hr />
+                {% if request.user|can_view_full_technical_card %}
+                    <hr />
+                {% endif %}
 
                 {% if locations %}
                     <p><strong class="card-label">{% trans "Locations" %}:</strong> {{ locations }}</p>
                 {% endif %}
 
-                {% if image.data_source and image.data_source != "OTHER" and image.data_source != "UNSET" %}
-                    <p><strong class="card-label">{% trans "Data source" %}:</strong> {{ image.get_data_source }}
-                    </p>
+                {% if request.user|can_view_full_technical_card %}
+                    {% if image.data_source and image.data_source != "OTHER" and image.data_source != "UNSET" %}
+                        <p><strong class="card-label">{% trans "Data source" %}:</strong> {{ image.get_data_source }}
+                        </p>
+                    {% endif %}
+
+                    {% if image.remote_source and image.remote_source != "OTHER" %}
+                        <p><strong
+                                class="card-label">{% trans "Remote source" %}:</strong> {{ image.get_remote_source }}
+                        </p>
+                    {% endif %}
                 {% endif %}
 
-                {% if image.remote_source and image.remote_source != "OTHER" %}
-                    <p><strong
-                            class="card-label">{% trans "Remote source" %}:</strong> {{ image.get_remote_source }}
-                    </p>
-                {% endif %}
             </div>
-
         </div> <!-- span -->
     </div> <!-- row image-detail -->
+
 {% endif %} {# image.subject_type < 500 #}
 
