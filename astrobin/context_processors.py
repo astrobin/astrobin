@@ -105,7 +105,7 @@ def common_variables(request):
 
         'PAYPAL_TEST': settings.PAYPAL_TEST,
         'IOTD_SHOW_CHOOSING_JUDGE': settings.IOTD_SHOW_CHOOSING_JUDGE,
-        'SOLVING_ENABLED': settings.ENABLE_SOLVING,
+        'ENABLE_SOLVING': settings.ENABLE_SOLVING,
         'GOOGLE_ANALYTICS_ID': settings.GOOGLE_ANALYTICS_ID,
         'READONLY_MODE': settings.READONLY_MODE,
         'HAS_BOUNCED_EMAILS': bounced,

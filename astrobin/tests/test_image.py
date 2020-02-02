@@ -2385,3 +2385,62 @@ class ImageTest(TestCase):
         self.assertNotContains(response, "div class=\"subtle-container advertisement\"")
         image.delete()
         us.delete()
+
+    def test_image_platesolving_not_available_on_free(self):
+        image = Generators.image()
+        image.user = self.user
+        image.subject_type = 100
+        image.save()
+        response = self.client.get(reverse('image_detail', kwargs={'id': image.get_id()}))
+        self.assertNotContains(response, "id=\"platesolving-status\"")
+        image.delete()
+
+    def test_image_platesolving_available_on_lite(self):
+        image = Generators.image()
+        image.user = self.user
+        image.subject_type = 100
+        image.save()
+        us = Generators.premium_subscription(self.user, "AstroBin Lite")
+        response = self.client.get(reverse('image_detail', kwargs={'id': image.get_id()}))
+        self.assertContains(response, "id=\"platesolving-status\"")
+        image.delete()
+
+    def test_image_platesolving_available_on_premium(self):
+        image = Generators.image()
+        image.user = self.user
+        image.subject_type = 100
+        image.save()
+        us = Generators.premium_subscription(self.user, "AstroBin Premium")
+        response = self.client.get(reverse('image_detail', kwargs={'id': image.get_id()}))
+        self.assertContains(response, "id=\"platesolving-status\"")
+        image.delete()
+
+    def test_image_platesolving_available_on_lite_2020(self):
+        image = Generators.image()
+        image.user = self.user
+        image.subject_type = 100
+        image.save()
+        us = Generators.premium_subscription(self.user, "AstroBin Lite 2020+")
+        response = self.client.get(reverse('image_detail', kwargs={'id': image.get_id()}))
+        self.assertContains(response, "id=\"platesolving-status\"")
+        image.delete()
+
+    def test_image_platesolving_available_on_premium_2020(self):
+        image = Generators.image()
+        image.user = self.user
+        image.subject_type = 100
+        image.save()
+        us = Generators.premium_subscription(self.user, "AstroBin Premium 2020+")
+        response = self.client.get(reverse('image_detail', kwargs={'id': image.get_id()}))
+        self.assertContains(response, "id=\"platesolving-status\"")
+        image.delete()
+
+    def test_image_platesolving_available_on_ultimate_2020(self):
+        image = Generators.image()
+        image.user = self.user
+        image.subject_type = 100
+        image.save()
+        us = Generators.premium_subscription(self.user, "AstroBin Ultimate 2020+")
+        response = self.client.get(reverse('image_detail', kwargs={'id': image.get_id()}))
+        self.assertContains(response, "id=\"platesolving-status\"")
+        image.delete()
