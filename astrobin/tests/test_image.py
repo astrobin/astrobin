@@ -755,8 +755,6 @@ class ImageTest(TestCase):
         self.assertEqual(response.status_code, 200)
         self.assertEqual(response.context[0]['image_type'], 'deep_sky')
 
-        self.assertContains(response, "(gain: 1.00)")
-
         dsa.delete()
 
         # SSA data
@@ -840,6 +838,8 @@ class ImageTest(TestCase):
         image = self._get_last_image()
         today = time.strftime('%Y-%m-%d')
 
+        us = Generators.premium_subscription(self.user, "AstroBin Ultimate 2020+")
+
         # DSA data
         dsa, created = DeepSky_Acquisition.objects.get_or_create(
             image=image,
@@ -854,6 +854,7 @@ class ImageTest(TestCase):
 
         dsa.delete()
         image.delete()
+        us.delete()
 
     @patch("astrobin.tasks.retrieve_primary_thumbnails")
     @override_settings(PREMIUM_MAX_REVISIONS_FREE_2020=sys.maxsize)

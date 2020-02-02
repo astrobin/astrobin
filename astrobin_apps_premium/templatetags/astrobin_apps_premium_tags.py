@@ -124,16 +124,16 @@ def can_view_full_technical_card(user):
 
 @register.filter
 def can_view_technical_card_item(user, item):
-    if is_free(user):
-        return False
-
     allowed_items = [
         "Imaging telescope or lens",
         "Imaging camera",
         "Resolution"
     ]
 
-    return item[0] in allowed_items and item[1] is not None
+    if is_free(user) and item[0] not in allowed_items:
+        return False
+
+    return item[1] is not None
 
 
 @register.filter
