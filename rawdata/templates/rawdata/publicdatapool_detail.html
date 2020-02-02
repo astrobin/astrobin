@@ -5,6 +5,7 @@
 {% load django_bootstrap_breadcrumbs %}
 {% load tags %} {% comment %} AstroBin tags {% endcomment %}
 {% load common_tags %}
+{% load astrobin_apps_premium_tags %}
 
 {% block title %}AstroBin - {% blocktrans %}Public data pool{% endblocktrans %} - {{object}}{% endblock %}
 {% block container_extra_classes %}
@@ -115,7 +116,14 @@
 
             <div class="download-with-icon">
                 <div class="data" style="padding-top: 0">
-                    <a class="btn btn-primary btn-large" href="{% url 'rawdata.publicdatapool_download' object.pk %}">
+                    <a
+                            class="btn btn-primary btn-large"
+                            {% if request.user|can_download_rawdata %}
+                                href="{% url 'rawdata.publicdatapool_download' object.pk %}"
+                            {% else %}
+                                href="#feature-restricted-modal" data-toggle="modal"
+                            {% endif %}
+                    >
                         <i class="icon-download-alt"></i>
                         {% trans "Download" %}
                     </a>

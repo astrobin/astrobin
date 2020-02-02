@@ -139,3 +139,9 @@ def can_view_technical_card_item(user, item):
 @register.filter
 def can_access_advanced_search(user):
     return not is_free(user)
+
+
+@register.filter
+def can_download_rawdata(user):
+    # Lite is there for continuity reason. Not available since Lite 2020.
+    return is_lite(user) or is_any_premium(user) or is_any_ultimate(user)

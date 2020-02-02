@@ -21,7 +21,7 @@ from rawdata.forms import (
     PublicDataPool_ImagesForm,
     PublicDataPool_SelectExistingForm,
 )
-from rawdata.mixins import RestrictToSubscriberMixin, RestrictToCreatorMixin
+from rawdata.mixins import RestrictToSubscriberMixin, RestrictToCreatorMixin, RestrictToPremiumOrSubscriberMixin
 from rawdata.models import PublicDataPool, RawImage, TemporaryArchive
 from rawdata.zip import *
 
@@ -115,7 +115,7 @@ class PublicDataPoolDetailView(DetailView):
         return context
 
 
-class PublicDataPoolDownloadView(base.View):
+class PublicDataPoolDownloadView(RestrictToPremiumOrSubscriberMixin, base.View):
     def get(self, request, *args, **kwargs):
         pool = get_object_or_404(PublicDataPool, pk = kwargs.pop('pk'))
         response = serve_zip(pool.images.all(), self.request.user, pool)
