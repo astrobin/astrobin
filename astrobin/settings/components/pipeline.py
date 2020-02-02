@@ -36,28 +36,6 @@ PIPELINE = {
                 'astrobin/js/astrobin.js',
             ),
             'output_filename': 'astrobin/js/astrobin_bundle.js',
-        },
-        'landing': {
-            'source_filenames': (
-                'astrobin_apps_landing/js/jquery-3.0.0.min.js',
-                'astrobin_apps_landing/js/jquery-migrate-3.0.0.min.js',
-                'astrobin_apps_landing/js/popper.min.js',
-                'astrobin_apps_landing/js/bootstrap.min.js',
-                'astrobin_apps_landing/js/scrollIt.min.js',
-                'astrobin_apps_landing/js/jquery.waypoints.min.js',
-                'astrobin_apps_landing/js/jquery.counterup.min.js',
-                'astrobin_apps_landing/js/owl.carousel.min.js',
-                'astrobin_apps_landing/js/jquery.magnific-popup.min.js',
-                'astrobin_apps_landing/js/jquery.stellar.min.js',
-                'astrobin_apps_landing/js/isotope.pkgd.min.js',
-                'astrobin_apps_landing/js/YouTubePopUp.jquery.js',
-                'astrobin_apps_landing/js/particles.min.js',
-                'astrobin_apps_landing/js/app.js',
-                'astrobin_apps_landing/js/map.js',
-                'astrobin_apps_landing/js/validator.js',
-                'astrobin_apps_landing/js/scripts.js',
-            ),
-            'output_filename': 'astrobin/js/astrobin_landing.js',
         }
     },
     'STYLESHEETS': {
@@ -87,16 +65,6 @@ PIPELINE = {
             ),
             'output_filename': 'astrobin/css/astrobin_screen.css',
             'extra_content':  {
-                'media': 'screen, projection',
-            },
-        },
-        'landing': {
-            'source_filenames': {
-                'astrobin_apps_landing/css/plugins.css',
-                'astrobin_apps_landing/css/style.css'
-            },
-            'output_filename': 'astrobin_css/astrobin_landing.css',
-             'extra_content':  {
                 'media': 'screen, projection',
             },
         }

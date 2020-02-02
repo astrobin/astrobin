@@ -290,7 +290,7 @@ def index(request, template='index/root.html', extra_context=None):
 
     if not request.user.is_authenticated():
         from django.shortcuts import redirect
-        return redirect(reverse("landing:main"))
+        return redirect("https://welcome.astrobin.com/")
 
     from django.core.cache import cache
 
