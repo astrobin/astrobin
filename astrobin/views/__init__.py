@@ -2046,11 +2046,6 @@ def trending_astrophotographers(request):
 
 
 @require_GET
-def help(request):
-    return render(request, 'help.html')
-
-
-@require_GET
 def api_help(request):
     return render(request, 'api.html')
 
@@ -2072,21 +2067,6 @@ def affiliates(request):
         template_object_name='affiliate',
         paginate_by=100,
     )
-
-
-@require_GET
-def faq(request):
-    return render(request, 'faq.html')
-
-
-@require_GET
-def tos(request):
-    return render(request, 'tos.html')
-
-
-@require_GET
-def guidelines(request):
-    return render(request, 'guidelines.html')
 
 
 @login_required

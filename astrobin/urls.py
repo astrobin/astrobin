@@ -125,13 +125,9 @@ from astrobin.views import (
     stats_subject_integration_monthly_ajax,
 
     affiliates,
-    faq,
-    guidelines,
-    help,
     api_help,
     trending_astrophotographers,
     stats,
-    tos,
 
     set_language
 )
@@ -438,9 +434,6 @@ urlpatterns = [
     ###########################################################################
 
     url(r'^affiliates/$', affiliates, name='affiliates'),
-    url(r'^faq/', faq, name='faq'),
-    url(r'^guidelines/', guidelines, name='guidelines'),
-    url(r'^help/$', help, name='help'),
     url(r'^help/api/$', api_help, name='api'),
     url(r'^help/rawdata/1/$', RawDataHelp1.as_view(), name='rawdata.help1'),
     url(r'^help/rawdata/2/$', RawDataHelp2.as_view(), name='rawdata.help2'),
@@ -449,7 +442,6 @@ urlpatterns = [
         trending_astrophotographers,
         name='trending_astrophotographers'),
     url(r'^stats/', stats, name='stats'),
-    url(r'^tos/', tos, name='tos'),
 
     ###########################################################################
     ### I18N VIEWS                                                          ###
