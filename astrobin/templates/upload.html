@@ -81,8 +81,7 @@
                             </form>
                             <div class="progressbar"><img src="{% static 'astrobin/images/loading-bar.gif' %}" alt="{% trans "Uploading..." %}"/></div>
                             <p>
-                                {% url 'faq' as faq_url %}
-                                {% blocktrans %}Use this button to upload an image to the <strong>Staging Area</strong>. It's perfect for works in progress that you want to share on Internet forums. Read more in the <a href="{{faq_url}}#6">FAQ</a>.{% endblocktrans %}
+                                {% blocktrans %}Use this button to upload an image to the <strong>Staging Area</strong>. It's perfect for works in progress that you want to share on Internet forums. Read more in the <a href="https://welcome.astrobin.com/faq">FAQ</a>.{% endblocktrans %}
                             </p>
                         </div> <!-- upload-form-inner -->
                     </div> <!-- wip-form-box -->
