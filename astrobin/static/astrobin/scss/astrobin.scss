@@ -4034,21 +4034,6 @@ li.revisions {
 }
 
 .subscription-plans-overview {
-  .lite,
-  .ultimate {
-    transform: scale(.975);
-  }
-
-  .premium {
-    @media (min-width: 767px) {
-      transform: scale(1.05);
-
-      .subtle-container:first-child {
-        box-shadow: 0 0 50px rgba(255, 255, 175, 0.15);
-      }
-    }
-  }
-
   .subtle-container {
     position: relative;
     overflow: visible;
@@ -4128,8 +4113,17 @@ li.revisions {
           padding-right: $spacer-medium;
         }
 
+        .icon-remove {
+          color: red;
+          padding-right: $spacer-medium;
+        }
+
         .in-the-future {
           color: #888888;
+        }
+
+        &.off {
+          opacity: .075;
         }
       }
     }
@@ -4163,6 +4157,15 @@ li.revisions {
   @media (max-width: 600px) {
     display: none;
   }
+
+  .accordion-heading a {
+    font-size: x-large;
+    padding: $spacer-xxlarge;
+
+    .icon-caret {
+      margin-left: $spacer-large;
+    }
+  }
 }
 
 .table.subscription-plans-features-table {
@@ -4170,15 +4173,18 @@ li.revisions {
     text-align: center !important; // important overrides last-element
     padding: $spacer-xxlarge $spacer-large;
     vertical-align: middle;
+    background: none;
   }
 
   thead th {
-    font-size: x-large;
+    font-size: large;
+    text-transform: uppercase;
   }
 
   tbody th {
     text-align: right !important;
     border: none;
+    border-right: 1px solid $link-color;
   }
 
   .icon-remove {

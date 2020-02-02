@@ -1,146 +1,162 @@
 {% load i18n %}
 
-<table class="table subscription-plans-features-table">
-    <thead>
-    <tr>
-        <th>&nbsp;</th>
-        <th>
-            <span class="hidden-phone">Free</span>
-            <span class="visible-phone">Fr</span>
-        </th>
-        <th>
-            <span class="hidden-phone">Lite</span>
-            <span class="visible-phone">Li</span>
-        </th>
-        <th>
-            <span class="hidden-phone">Premium</span>
-            <span class="visible-phone">Pr</span>
-        </th>
-        <th>
-            <span class="hidden-phone">Ultimate</span>
-            <span class="visible-phone">Ul</span>
-        </th>
-    </tr>
-    </thead>
-    <tbody>
-    <tr>
-        <th>{% trans "Images" %}</th>
-        <td class="free">{{ PREMIUM_MAX_IMAGES_FREE_2020 }}</td>
-        <td class="lite">{{ PREMIUM_MAX_IMAGES_LITE_2020 }}</td>
-        <td class="premium">{{ PREMIUM_MAX_IMAGES_PREMIUM_2020 }}</td>
-        <td class="ultimate"><span class="infinity">&infin;</span></td>
-    </tr>
-    <tr>
-        <th>{% trans "Max size" %}</th>
-        <td class="free">Max {{ PREMIUM_MAX_IMAGE_SIZE_FREE_2020 | filesizeformat }}</td>
-        <td class="lite">Max {{ PREMIUM_MAX_IMAGE_SIZE_LITE_2020 | filesizeformat }}</td>
-        <td class="premium">Max {{ PREMIUM_MAX_IMAGE_SIZE_PREMIUM_2020 | filesizeformat }}</td>
-        <td class="ultimate"><span class="infinity">&infin;</span></td>
-    </tr>
-    <tr>
-        <th>{% trans "Revisions" %}</th>
-        <td class="free"><i class="icon-remove"></i></td>
-        <td class="lite">{{ PREMIUM_MAX_REVISIONS_LITE_2020 }}</td>
-        <td class="premium">{{ PREMIUM_MAX_REVISIONS_PREMIUM_2020 }}</td>
-        <td class="ultimate"><span class="infinity">&infin;</span></td>
-    </tr>
-    <tr>
-        <th>{% trans "View full image info" %}</th>
-        <td class="free"><i class="icon-remove"></i></td>
-        <td class="lite"><i class="icon-ok"></i></td>
-        <td class="premium"><i class="icon-ok"></i></td>
-        <td class="ultimate"><i class="icon-ok"></i></td>
-    </tr>
-    <tr>
-        <th>{% trans "Plate-solving" %}</th>
-        <td class="free"><i class="icon-remove"></i></td>
-        <td class="lite">Basic</td>
-        <td class="premium">Basic</td>
-        <td class="ultimate">Advanced</td>
-    </tr>
-    <tr>
-        <th>{% trans "Search" %}</th>
-        <td class="free">{% trans "Basic" %}</td>
-        <td class="lite"><span class="green">{% trans "Advanced" %}</span></td>
-        <td class="premium"><span class="green">{% trans "Advanced" %}</span></td>
-        <td class="ultimate">{% trans "Advanced" %}</td>
-    </tr>
-    <tr>
-        <th>{% trans "Hide astronomy ads" %}</th>
-        <td class="free"><i class="icon-remove"></i></td>
-        <td class="lite"><i class="icon-remove"></i></td>
-        <td class="premium"><i class="icon-ok"></i></td>
-        <td class="ultimate"><i class="icon-ok"></i></td>
-    </tr>
-    <tr>
-        <th>{% trans "No ads on your pages" %}</th>
-        <td class="free"><i class="icon-remove"></i></td>
-        <td class="lite"><i class="icon-remove"></i></td>
-        <td class="premium"><i class="icon-remove"></i></td>
-        <td class="ultimate"><i class="icon-ok"></i></td>
-    </tr>
-    <tr>
-        <th>{% trans "Social features" %}</th>
-        <td class="free"><i class="icon-ok"></i></td>
-        <td class="lite"><i class="icon-ok"></i></td>
-        <td class="premium"><i class="icon-ok"></i></td>
-        <td class="ultimate"><i class="icon-ok"></i></td>
-    </tr>
-    <tr>
-        <th>{% trans "Groups" %}</th>
-        <td class="free"><i class="icon-remove"></i></td>
-        <td class="lite"><i class="icon-remove"></i></td>
-        <td class="premium"><i class="icon-ok"></i></td>
-        <td class="ultimate"><i class="icon-ok"></i></td>
-    </tr>
-    <tr>
-        <th>{% trans "Download public raw data" %}</th>
-        <td class="free"><i class="icon-remove"></i></td>
-        <td class="lite"><i class="icon-remove"></i></td>
-        <td class="premium"><i class="icon-ok"></i></td>
-        <td class="ultimate"><i class="icon-ok"></i></td>
-    </tr>
-    <tr>
-        <th>
-            IOTD / Top Picks
-        </th>
-        <td class="free"><i class="icon-remove"></i></td>
-        <td class="lite"><i class="icon-remove"></i></td>
-        <td class="premium"><i class="icon-ok"></i></td>
-        <td class="ultimate"><i class="icon-ok"></i></td>
-    </tr>
-    <tr>
-        <th>
-            {% trans "Community contests" %}
-            <span class="in-the-future">
-                {% trans "(in the future)" %}
-            </span>
-        </th>
-        <td class="free"><i class="icon-remove"></i></td>
-        <td class="lite">{% trans "Vote" %}</td>
-        <td class="premium"><span class="green">{% trans "Vote / enter" %}</span></td>
-        <td class="ultimate">{% trans "Vote / enter" %}</td>
-    </tr>
-    <tr>
-        <th>
-            {% trans "Sell in the Marketplace" %}
-            <span class="in-the-future">
-                {% trans "(in the future)" %}
-            </span>
-        </th>
-        <td class="free"><i class="icon-remove"></i></td>
-        <td class="lite"><i class="icon-remove"></i></td>
-        <td class="premium"><i class="icon-remove"></i></td>
-        <td class="ultimate"><i class="icon-ok"></i></td>
-    </tr>
-    <tr>
-        <th>
-            {% trans "All future features" %}
-        </th>
-        <td class="free"><i class="icon-remove"></i></td>
-        <td class="lite"><i class="icon-remove"></i></td>
-        <td class="premium"><i class="icon-remove"></i></td>
-        <td class="ultimate"><i class="icon-ok"></i></td>
-    </tr>
-    </tbody>
-</table>
+<div class="accordion" id="features-accordtion">
+    <div class="accordion-group">
+        <div class="accordion-heading">
+            <a class="accordion-toggle" data-toggle="collapse" data-parent="#features-accordion" href="#features-body">
+                {% trans "View feature comparison" %} <i class="icon-caret-down"></i>
+            </a>
+        </div>
+        <div id="features-body" class="accordion-body collapse in">
+            <div class="accordion-inner">
+
+                <table class="table table-striped subscription-plans-features-table">
+                    <thead>
+                    <tr>
+                        <th>&nbsp;</th>
+                        <th>
+                            <span class="hidden-phone">Free</span>
+                            <span class="visible-phone">Fr</span>
+                        </th>
+                        <th>
+                            <span class="hidden-phone">Lite</span>
+                            <span class="visible-phone">Li</span>
+                        </th>
+                        <th>
+                            <span class="hidden-phone">Premium</span>
+                            <span class="visible-phone">Pr</span>
+                        </th>
+                        <th>
+                            <span class="hidden-phone">Ultimate</span>
+                            <span class="visible-phone">Ul</span>
+                        </th>
+                    </tr>
+                    </thead>
+
+                    <tbody>
+                    <tr>
+                        <th>{% trans "Images" %}</th>
+                        <td class="free">{{ PREMIUM_MAX_IMAGES_FREE_2020 }}</td>
+                        <td class="lite">{{ PREMIUM_MAX_IMAGES_LITE_2020 }}</td>
+                        <td class="premium">{{ PREMIUM_MAX_IMAGES_PREMIUM_2020 }}</td>
+                        <td class="ultimate"><span class="infinity">&infin;</span></td>
+                    </tr>
+                    <tr>
+                        <th>{% trans "Max size" %}</th>
+                        <td class="free">Max {{ PREMIUM_MAX_IMAGE_SIZE_FREE_2020 | filesizeformat }}</td>
+                        <td class="lite">Max {{ PREMIUM_MAX_IMAGE_SIZE_LITE_2020 | filesizeformat }}</td>
+                        <td class="premium">Max {{ PREMIUM_MAX_IMAGE_SIZE_PREMIUM_2020 | filesizeformat }}</td>
+                        <td class="ultimate"><span class="infinity">&infin;</span></td>
+                    </tr>
+                    <tr>
+                        <th>{% trans "Revisions" %}</th>
+                        <td class="free"><i class="icon-remove"></i></td>
+                        <td class="lite">{{ PREMIUM_MAX_REVISIONS_LITE_2020 }}</td>
+                        <td class="premium">{{ PREMIUM_MAX_REVISIONS_PREMIUM_2020 }}</td>
+                        <td class="ultimate"><span class="infinity">&infin;</span></td>
+                    </tr>
+                    <tr>
+                        <th>{% trans "View full image info" %}</th>
+                        <td class="free"><i class="icon-remove"></i></td>
+                        <td class="lite"><i class="icon-ok"></i></td>
+                        <td class="premium"><i class="icon-ok"></i></td>
+                        <td class="ultimate"><i class="icon-ok"></i></td>
+                    </tr>
+                    <tr>
+                        <th>{% trans "Plate-solving" %}</th>
+                        <td class="free"><i class="icon-remove"></i></td>
+                        <td class="lite">Basic</td>
+                        <td class="premium">Basic</td>
+                        <td class="ultimate">Advanced</td>
+                    </tr>
+                    <tr>
+                        <th>{% trans "Search" %}</th>
+                        <td class="free">{% trans "Basic" %}</td>
+                        <td class="lite"><span class="green">{% trans "Advanced" %}</span></td>
+                        <td class="premium"><span class="green">{% trans "Advanced" %}</span></td>
+                        <td class="ultimate">{% trans "Advanced" %}</td>
+                    </tr>
+                    <tr>
+                        <th>{% trans "Hide astronomy ads" %}</th>
+                        <td class="free"><i class="icon-remove"></i></td>
+                        <td class="lite"><i class="icon-remove"></i></td>
+                        <td class="premium"><i class="icon-ok"></i></td>
+                        <td class="ultimate"><i class="icon-ok"></i></td>
+                    </tr>
+                    <tr>
+                        <th>{% trans "No ads on your pages" %}</th>
+                        <td class="free"><i class="icon-remove"></i></td>
+                        <td class="lite"><i class="icon-remove"></i></td>
+                        <td class="premium"><i class="icon-remove"></i></td>
+                        <td class="ultimate"><i class="icon-ok"></i></td>
+                    </tr>
+                    <tr>
+                        <th>{% trans "Social features" %}</th>
+                        <td class="free"><i class="icon-ok"></i></td>
+                        <td class="lite"><i class="icon-ok"></i></td>
+                        <td class="premium"><i class="icon-ok"></i></td>
+                        <td class="ultimate"><i class="icon-ok"></i></td>
+                    </tr>
+                    <tr>
+                        <th>{% trans "Groups" %}</th>
+                        <td class="free"><i class="icon-remove"></i></td>
+                        <td class="lite"><i class="icon-remove"></i></td>
+                        <td class="premium"><i class="icon-ok"></i></td>
+                        <td class="ultimate"><i class="icon-ok"></i></td>
+                    </tr>
+                    <tr>
+                        <th>{% trans "Download public raw data" %}</th>
+                        <td class="free"><i class="icon-remove"></i></td>
+                        <td class="lite"><i class="icon-remove"></i></td>
+                        <td class="premium"><i class="icon-ok"></i></td>
+                        <td class="ultimate"><i class="icon-ok"></i></td>
+                    </tr>
+                    <tr>
+                        <th>
+                            IOTD / Top Picks
+                        </th>
+                        <td class="free"><i class="icon-remove"></i></td>
+                        <td class="lite"><i class="icon-remove"></i></td>
+                        <td class="premium"><i class="icon-ok"></i></td>
+                        <td class="ultimate"><i class="icon-ok"></i></td>
+                    </tr>
+                    <tr>
+                        <th>
+                            {% trans "Community contests" %}
+                            <span class="in-the-future">
+                                {% trans "(in the future)" %}
+                            </span>
+                        </th>
+                        <td class="free"><i class="icon-remove"></i></td>
+                        <td class="lite">{% trans "Vote" %}</td>
+                        <td class="premium"><span class="green">{% trans "Vote / enter" %}</span></td>
+                        <td class="ultimate">{% trans "Vote / enter" %}</td>
+                    </tr>
+                    <tr>
+                        <th>
+                            {% trans "Sell in the Marketplace" %}
+                            <span class="in-the-future">
+                                {% trans "(in the future)" %}
+                            </span>
+                        </th>
+                        <td class="free"><i class="icon-remove"></i></td>
+                        <td class="lite"><i class="icon-remove"></i></td>
+                        <td class="premium"><i class="icon-remove"></i></td>
+                        <td class="ultimate"><i class="icon-ok"></i></td>
+                    </tr>
+                    <tr>
+                        <th>
+                            {% trans "All future features" %}
+                        </th>
+                        <td class="free"><i class="icon-remove"></i></td>
+                        <td class="lite"><i class="icon-remove"></i></td>
+                        <td class="premium"><i class="icon-remove"></i></td>
+                        <td class="ultimate"><i class="icon-ok"></i></td>
+                    </tr>
+                    </tbody>
+                </table>
+
+            </div>
+        </div>
+    </div>
+</div>
