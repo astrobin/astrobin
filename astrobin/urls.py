@@ -1,4 +1,3 @@
-import django
 from django.conf import settings
 from django.conf.urls import url, include
 from django.conf.urls.static import static
@@ -202,6 +201,7 @@ urlpatterns = [
     url(r'^subscriptions/', include('subscription.urls')),
     url(r'^tinymce/', include('tinymce.urls')),
     url(r'^bouncy/', include('django_bouncy.urls')),
+    url(r'^paypal/', include('paypal.standard.ipn.urls')),
 
     ###########################################################################
     ### API VIEWS                                                           ###
@@ -448,7 +448,6 @@ urlpatterns = [
     ###########################################################################
 
     url(r'^language/set/(?P<lang>[\w-]+)/$', set_language, name='set_language'),
-
 
     ###########################################################################
     ### IMAGE EDIT VIEWS                                                    ###

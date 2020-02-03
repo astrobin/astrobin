@@ -1,26 +1,29 @@
 {% extends 'base.html' %}
 
 {% load i18n %}
+{% load django_bootstrap_breadcrumbs %}
 
 {% block title %}{% trans "Thank you for your donation!" %}{% endblock %}
 
+{% block breadcrumbs %}
+    {{ block.super }}
+    {% breadcrumb_safe 'Donations' None %}
+    {% breadcrumb 'Success' None %}
+{% endblock %}
+
 {% block content %}
     <div class="row">
-        <div class="span6 offset3">
+        <div class="span6 offset2">
             <h1>{% trans "Thank you for your donation!" %}</h1>
 
             <p>
-                {% blocktrans %}We are very grateful for your support! Your contribution will help AstroBin with its ever increasing hosting costs, and will serve an incentive for us to continue to improve it.{% endblocktrans %}
-            </p>
-
-            <p>
-                {% blocktrans %}In a few minutes, once your PayPal transaction is processed, we will stop showing you ads on this website.{% endblocktrans %}
+                {% blocktrans %}I am very grateful for your support! Your contribution will help AstroBin with its ever increasing hosting costs, and will serve an incentive for me to keep improving it.{% endblocktrans %}
             </p>
 
             <hr/>
 
             <p class="text-right">
-                {% blocktrans %}Whishing you clear skies and excellent seeing!{% endblocktrans %}
+                {% blocktrans %}Wishing you clear skies and excellent seeing!{% endblocktrans %}
             </p>
 
             <p class="text-right">

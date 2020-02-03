@@ -2,8 +2,8 @@
 
 {% load bootstrap_toolkit %}
 {% load i18n %}
-
 {% load astrobin_apps_images_tags %}
+{% load astrobin_apps_donations_tags %}
 
 
 {% block collections_content %}
@@ -129,6 +129,10 @@
 
 {% block modals %}
     {% include 'user_collections_delete_modal.html' %}
+
+    {% if request.user == requested_user and requested_user|is_donor %}
+        {% cancel_donation_modal %}
+    {% endif %}
 {% endblock %}
 
 {% block extra_js %}

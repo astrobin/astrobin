@@ -162,7 +162,11 @@
                 </div> <!-- btn-group -->
 
                 {% if DONATIONS_ENABLED and not request.user|is_donor %}
-                    <a id="donate-header-button" data-toggle="modal" href="#donate-modal" class="btn btn-success">
+                    <a
+                            id="donate-header-button"
+                            data-toggle="modal"
+                            href="https://welcome.astrobin.com/voluntary-donations"
+                            class="btn btn-success">
                         <i class="icon-gift"></i>
                     </a>
                 {% endif %}

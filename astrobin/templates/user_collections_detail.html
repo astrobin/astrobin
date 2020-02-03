@@ -3,6 +3,7 @@
 {% load i18n %}
 {% load django_bootstrap_breadcrumbs %}
 {% load tags %}
+{% load astrobin_apps_donations_tags %}
 
 {% block title %}
     {{collection.name}}
@@ -47,4 +48,8 @@
 
 {% block modals %}
     {% include 'user_collections_delete_modal.html' %}
+
+    {% if request.user == requested_user and requested_user|is_donor %}
+        {% cancel_donation_modal %}
+    {% endif %}
 {% endblock %}

@@ -1,165 +1,220 @@
 {% load i18n %}
 {% load astrobin_apps_donations_tags %}
 
-<form action="https://www.paypal.com/cgi-bin/webscr" method="post" target="_top" class="form-inline form-donate">
+<form
+        {% if PAYPAL_TEST %}
+            action="https://www.sandbox.paypal.com/cgi-bin/webscr"
+        {% else %}
+            action="https://www.paypal.com/cgi-bin/webscr"
+        {% endif %}
+            method="post"
+            target="_top"
+            class="form-horizontal form-donate">
     <input type="hidden" name="cmd" value="_xclick-subscriptions">
-    <input type="hidden" name="business" value="{{business}}">
-    <input type="hidden" name="lc" value="FI">
+    <input type="hidden" name="business" value="{{ business }}">
+    <input type="hidden" name="lc" value="CH">
     <input type="hidden" name="no_note" value="1">
     <input type="hidden" name="no_shipping" value="1">
     <input type="hidden" name="rm" value="1">
-    <input type="hidden" name="return" value="{{base_url}}/donations/success/">
-    <input type="hidden" name="cancel_return" value="{{base_url}}/donations/cancel/">
+    <input type="hidden" name="return" value="{{ base_url }}/donations/success/">
+    <input type="hidden" name="cancel_return" value="{{ base_url }}/donations/cancel/">
     <input type="hidden" name="src" value="1">
-    <input type="hidden" name="currency_code" value="USD">
+    <input type="hidden" name="currency_code" value="CHF">
     <input type="hidden" name="bn" value="PP-SubscriptionsBF:btn_subscribe_LG.gif:NonHosted">
-    <input type="hidden" name="notify_url" value="{{base_url}}/subscriptions/paypal/">
-    <input type="hidden" name="custom" value="{{request.user.id}}"/>
+    <input type="hidden" name="notify_url" value="{{ base_url }}/subscriptions/paypal/">
+    <input type="hidden" name="custom" value="{{ request.user.id }}" />
 
     {% if not request.user|is_donor %}
-        <input type="hidden" name="item_name" value="{{monthly_pizza_sub.name}}"/>
-        <input type="hidden" name="item_number" value="{{monthly_pizza_sub.id}}"/>
+        <input type="hidden" name="item_name" value="{{ monthly_gold_sub.name }}" />
+        <input type="hidden" name="item_number" value="{{ monthly_gold_sub.id }}" />
     {% else %}
-        <input type="hidden" name="item_name" value="{% user_donation_subscription_name request.user %}"/>
-        <input type="hidden" name="item_number" value="{% user_donation_subscription_id request.user %}"/>
-    {% endif %}
-
-    {% if request.user|is_donor %}
         <input type="hidden" name="modify" value="1" />
-    {% endif %}
-
-    {% if not request.user|is_donor %}
-        <label for="os0">
-            {% trans "What is AstroBin worth to you?" %}
-        </label>
+        <input type="hidden" name="item_name" value="{% user_donation_subscription_name request.user %}" />
+        <input type="hidden" name="item_number" value="{% user_donation_subscription_id request.user %}" />
     {% endif %}
 
     <select name="os0">
         <optgroup label="{% trans "Monthly contributions" %}">
-            <option id="coffee_monthly" value="A coffee, once a month" {% donation_form_selected "AstroBin Donor Coffee Monthly" %}>&nbsp;&nbsp;{% blocktrans with 2.50|floatformat:2 as amount %}${{amount}}/month{% endblocktrans %}: {% trans "A coffee" %}</option>
-            <option id="snack_monthly" value="A snack, once a month" {% donation_form_selected "AstroBin Donor Snack Monthly" %}>&nbsp;&nbsp;{% blocktrans with 3.50|floatformat:2 as amount %}${{amount}}/month{% endblocktrans %}: {% trans "A snack" %}</option>
-            <option id="pizza_monthly" value="A pizza, once a month" {% donation_form_selected "AstroBin Donor Pizza Monthly" %}>&nbsp;&nbsp;{% blocktrans with 6.00|floatformat:2 as amount %}${{amount}}/month{% endblocktrans %}: {% trans "A pizza" %}</option>
-            <option id="movie_monthly" value="A movie night for one, once a month" {% donation_form_selected "AstroBin Donor Movie Monthly" %}>&nbsp;{% blocktrans with 10.00|floatformat:2 as amount %}${{amount}}/month{% endblocktrans %}: {% trans "A movie night for one" %}</option>
-            <option id="dinner_monthly" value="A frugal dinner out for one, once a month" {% donation_form_selected "AstroBin Donor Dinner Monthly" %}>&nbsp;{% blocktrans with 25.00|floatformat:2 as amount %}${{amount}}/month{% endblocktrans %}: {% trans "A frugal dinner out for one" %}</option>
+            <option
+                    id="bronze_monthly"
+                    value="bronze_monthly"
+                    {% donation_form_selected "AstroBin Donor Bronze Monthly" %}>
+                {% trans "Bronze" %}:
+                {% blocktrans with 2.50|floatformat:2 as amount %}CHF {{ amount }} / month{% endblocktrans %}
+            </option>
+
+            <option
+                    id="silver_monthly"
+                    value="silver_monthly"
+                    {% donation_form_selected "AstroBin Donor Silver Monthly" %}>
+                {% trans "Silver" %}:
+                {% blocktrans with 5.00|floatformat:2 as amount %}CHF {{ amount }} / month{% endblocktrans %}
+            </option>
+
+            <option
+                    id="gold_monthly"
+                    value="gold_monthly"
+                    {% donation_form_selected "AstroBin Donor Gold Monthly" %}>
+                {% trans "Gold" %}:
+                {% blocktrans with 10.00|floatformat:2 as amount %}CHF {{ amount }} / month{% endblocktrans %}
+            </option>
+
+            <option
+                    id="platinum_monthly"
+                    value="platinum_monthly"
+                    {% donation_form_selected "AstroBin Donor Platinum Monthly" %}>
+                {% trans "Platinum" %}:
+                {% blocktrans with 20.00|floatformat:2 as amount %}CHF {{ amount }} / month{% endblocktrans %}
+            </option>
         </optgroup>
 
-        <optgroup label="{% trans "Yearly contributions (cheaper!)" %}">
-            <option id="coffee_yearly" value="A coffee, once a month (with yearly payments)" {% donation_form_selected "AstroBin Donor Coffee Yearly" %}>&nbsp;{% blocktrans with 24.00|floatformat:2 as amount %}${{amount}}/year{% endblocktrans %}: {% trans "A coffee" %}</option>
-            <option id="snack_yearly" value="A snack, once a month (with yearly payments)" {% donation_form_selected "AstroBin Donor Snack Yearly" %}>&nbsp;{% blocktrans with 34.00|floatformat:2 as amount %}${{amount}}/year{% endblocktrans %}: {% trans "A snack" %}</option>
-            <option id="pizza_yearly" value="A pizza, once a month (with yearly payments)" {% donation_form_selected "AstroBin Donor Pizza Yearly" %}>&nbsp;{% blocktrans with 60.00|floatformat:2 as amount %}${{amount}}/year{% endblocktrans %}: {% trans "A pizza" %}</option>
-            <option id="movie_yearly" value="A movie night for one, once a month (with yearly payments)" {% donation_form_selected "AstroBin Donor Movie Yearly" %}>{% blocktrans with 100.00|floatformat:2 as amount %}${{amount}}/year{% endblocktrans %}: {% trans "A movie night for one" %}</option>
-            <option id="dinner_yearly" value="A frugal dinner out for one, once a month (with yearly payments)" {% donation_form_selected "AstroBin Donor Dinner Yearly" %}>{% blocktrans with 250.00|floatformat:2 as amount %}${{amount}}/year{% endblocktrans %}: {% trans "A frugal dinner out for one" %}</option>
+        <optgroup label="{% trans "Yearly contributions (cheaper)" %}">
+            <option
+                    id="bronze_yearly"
+                    value="bronze_yearly"
+                    {% donation_form_selected "AstroBin Donor Bronze Yearly" %}>
+                {% trans "Bronze" %}:
+                {% blocktrans with 27.50|floatformat:2 as amount %}CHF {{ amount }} / year{% endblocktrans %}
+            </option>
+
+            <option
+                    id="silver_yearly"
+                    value="silver_yearly"
+                    {% donation_form_selected "AstroBin Donor Silver Yearly" %}>
+                {% trans "Silver" %}:
+                {% blocktrans with 55.00|floatformat:2 as amount %}CHF {{ amount }} / year{% endblocktrans %}
+            </option>
+
+            <option
+                    id="gold_yearly"
+                    value="gold_yearly"
+                    {% donation_form_selected "AstroBin Donor Gold Yearly" %}>
+                {% trans "Gold" %}:
+                {% blocktrans with 110.00|floatformat:2 as amount %}CHF {{ amount }} / year{% endblocktrans %}
+            </option>
+
+            <option
+                    id="platinum_yearly"
+                    value="platinum_yearly"
+                    {% donation_form_selected "AstroBin Donor Platinum Yearly" %}>
+                {% trans "Platinum" %}:
+                {% blocktrans with 220.00|floatformat:2 as amount %}CHF {{ amount }} / year{% endblocktrans %}
+            </option>
         </optgroup>
     </select>
 
-    <input type="image" src="https://www.paypalobjects.com/en_US/i/btn/btn_subscribe_LG.gif" name="submit"  class="button"/>
-    <img alt="" border="0" src="https://www.paypalobjects.com/en_US/i/scr/pixel.gif" width="1" height="1"/>
-
-    <input type="hidden" name="currency_code" value="USD">
+    <input type="image" src="https://www.paypalobjects.com/en_US/CH/i/btn/btn_donateCC_LG.gif" name="submit"
+           class="button" />
+    <img alt="" border="0" src="https://www.paypalobjects.com/en_US/i/scr/pixel.gif" width="1" height="1" />
 
     <!-- Monthly -->
-    <input type="hidden" name="option_select0" value="A coffee, once a month">
+    <input type="hidden" name="option_select0" value="bronze_monthly">
     <input type="hidden" name="option_amount0" value="2.50">
     <input type="hidden" name="option_period0" value="M">
     <input type="hidden" name="option_frequency0" value="1">
 
-    <input type="hidden" name="option_select1" value="A snack, once a month">
-    <input type="hidden" name="option_amount1" value="3.50">
+    <input type="hidden" name="option_select1" value="silver_monthly">
+    <input type="hidden" name="option_amount1" value="5.00">
     <input type="hidden" name="option_period1" value="M">
     <input type="hidden" name="option_frequency1" value="1">
-    <input type="hidden" name="option_item_name1" value="{{monthly_snack_sub.name}}">
-    <input type="hidden" name="option_item_number1" value="{{monthly_snack_sub.id}}">
 
-    <input type="hidden" name="option_select2" value="A pizza, once a month">
-    <input type="hidden" name="option_amount2" value="6.00">
+    <input type="hidden" name="option_select2" value="gold_monthly">
+    <input type="hidden" name="option_amount2" value="10.00">
     <input type="hidden" name="option_period2" value="M">
     <input type="hidden" name="option_frequency2" value="1">
 
-    <input type="hidden" name="option_select3" value="A movie night for one, once a month">
-    <input type="hidden" name="option_amount3" value="10.00">
+    <input type="hidden" name="option_select3" value="platinum_monthly">
+    <input type="hidden" name="option_amount3" value="20.00">
     <input type="hidden" name="option_period3" value="M">
     <input type="hidden" name="option_frequency3" value="1">
 
-    <input type="hidden" name="option_select4" value="A frugal dinner out for one, once a month">
-    <input type="hidden" name="option_amount4" value="25.00">
-    <input type="hidden" name="option_period4" value="M">
-    <input type="hidden" name="option_frequency4" value="1">
-
     <!-- Yearly -->
-    <input type="hidden" name="option_select5" value="A coffee, once a month (with yearly payments)">
-    <input type="hidden" name="option_amount5" value="24.00">
+    <input type="hidden" name="option_select5" value="bronze_yearly">
+    <input type="hidden" name="option_amount5" value="27.50">
     <input type="hidden" name="option_period5" value="Y">
     <input type="hidden" name="option_frequency5" value="1">
 
 
-    <input type="hidden" name="option_select6" value="A snack, once a month (with yearly payments)">
-    <input type="hidden" name="option_amount6" value="34.00">
+    <input type="hidden" name="option_select6" value="silver_yearly">
+    <input type="hidden" name="option_amount6" value="55.00">
     <input type="hidden" name="option_period6" value="Y">
     <input type="hidden" name="option_frequency6" value="1">
 
-    <input type="hidden" name="option_select7" value="A pizza, once a month (with yearly payments)">
-    <input type="hidden" name="option_amount7" value="60.00">
+    <input type="hidden" name="option_select7" value="gold_yearly">
+    <input type="hidden" name="option_amount7" value="110.00">
     <input type="hidden" name="option_period7" value="Y">
     <input type="hidden" name="option_frequency7" value="1">
 
-    <input type="hidden" name="option_select8" value="A movie night for one, once a month (with yearly payments)">
-    <input type="hidden" name="option_amount8" value="100.00">
+    <input type="hidden" name="option_select8" value="platinum_yearly">
+    <input type="hidden" name="option_amount8" value="220.00">
     <input type="hidden" name="option_period8" value="Y">
     <input type="hidden" name="option_frequency8" value="1">
-
-    <input type="hidden" name="option_select9" value="A frugal dinner out for one, once a month (with yearly payments)">
-    <input type="hidden" name="option_amount9" value="250.00">
-    <input type="hidden" name="option_period9" value="Y">
-    <input type="hidden" name="option_frequency9" value="1">
 
     <input type="hidden" name="option_index" value="k">
 </form>
 
 {% if request.user|is_donor %}
-    <p><strong>{% trans "IMPORTANT" %}</strong>: <i>{% trans "Please note: if you are already a donor, the Subscribe button will update your existing subscription, not create a new one." %}</i></p>
+    <p>
+        <strong>{% trans "IMPORTANT" %}</strong>:
+        <i>
+            {% trans "Please note: if you are already a donor, the Subscribe button will update your existing subscription, not create a new one." %}
+        </i>
+    </p>
 {% endif %}
 
-<script type="text/javascript">
-    $(document).ready(function() {
-        $('select[name=os0]').change(function() {
-            var item_name = "{{monthly_pizza_sub.name}}";
-            var item_number = "{{monthly_pizza_sub.id}}";
-            var opt = $(this).find('option:selected').attr('id');
+<div class="subtle-container">
+    <h3>{% trans "Pay with a bank transfer" %}</h3>
+    <p>
+        {% blocktrans with amount=object.price currency=object.currency email_prefix="<a href='mailto:astrobin@astrobin.com'>" email="astrobin@astrobin.com" email_postfix="</a>" %}
+            Prefer to donate via bank transfer? Please make a deposit of the amount you wish to donate to the following
+            bank details. Thanks!
+        {% endblocktrans %}
+    </p>
 
-            if (opt == 'coffee_monthly') {
-                item_name = "{{monthly_coffee_sub.name}}";
-                item_number = "{{monthly_coffee_sub.id}}";
-            } else if (opt == 'snack_monthly') {
-                item_name = "{{monthly_snack_sub.name}}";
-                item_number = "{{monthly_snack_sub.id}}";
-            } else if (opt == 'pizza_monthly') {
-                item_name = "{{monthly_pizza_esub.name}}";
-                item_number = "{{monthly_pizza_sub.id}}";
-            } else if (opt == 'movie_monthly') {
-                item_name = "{{monthly_movie_sub.name}}";
-                item_number = "{{monthly_movie_sub.id}}";
-            } else if (opt == 'dinner_monthly') {
-                item_name = "{{monthly_dinner_sub.name}}";
-                item_number = "{{monthly_dinner_sub.id}}";
-            } else if (opt == 'coffee_yearly') {
-                item_name = "{{yearly_coffee_sub.name}}";
-                item_number = "{{yearly_coffee_sub.id}}";
-            } else if (opt == 'snack_yearly') {
-                item_name = "{{yearly_snack_sub.name}}";
-                item_number = "{{yearly_snack_sub.id}}";
-            } else if (opt == 'pizza_yearly') {
-                item_name = "{{yearly_pizza_sub.name}}";
-                item_number = "{{yearly_pizza_sub.id}}";
-            } else if (opt == 'movie_yearly') {
-                item_name = "{{yearly_movie_sub.name}}";
-                item_number = "{{yearly_movie_sub.id}}";
-            } else if (opt == 'dinner_yearly') {
-                item_name = "{{yearly_dinner_sub.name}}";
-                item_number = "{{yearly_dinner_sub.id}}";
-            }
+    <pre>BANK: PostFinance Switzerland
+ACCOUNT HOLDER: Salvatore Iovene
+ADDRESS: Obstgartenstrasse 32, 8136 Gattikon (Switzerland)
+ACCOUNT # (IBAN):  CH97 0900 0000 6922 3618 4
+SWIFT / BIC: POFICHBEXXX</pre>
+</div>
 
-            $('input[name=item_name]').val(item_name);
-            $('input[name=item_number]').val(item_number);
+{% block extra_js %}
+    <script type="text/javascript">
+        $(document).ready(function () {
+            $('select[name=os0]').change(function () {
+                var item_name = "{{monthly_gold_sub.name}}";
+                var item_number = "{{monthly_gold_sub.id}}";
+                var opt = $(this).find('option:selected').attr('id');
+
+                if (opt === 'bronze_monthly') {
+                    item_name = "{{monthly_bronze_sub.name}}";
+                    item_number = "{{monthly_bronze_sub.id}}";
+                } else if (opt === 'silver_monthly') {
+                    item_name = "{{monthly_silver_sub.name}}";
+                    item_number = "{{monthly_silver_sub.id}}";
+                } else if (opt === 'gold_monthly') {
+                    item_name = "{{monthly_gold_sub.name}}";
+                    item_number = "{{monthly_gold_sub.id}}";
+                } else if (opt === 'platinum_monthly') {
+                    item_name = "{{monthly_platinum_sub.name}}";
+                    item_number = "{{monthly_platinum_sub.id}}";
+                } else if (opt === 'bronze_yearly') {
+                    item_name = "{{yearly_bronze_sub.name}}";
+                    item_number = "{{yearly_bronze_sub.id}}";
+                } else if (opt === 'silver_yearly') {
+                    item_name = "{{yearly_silver_sub.name}}";
+                    item_number = "{{yearly_silver_sub.id}}";
+                } else if (opt === 'gold_yearly') {
+                    item_name = "{{yearly_gold_sub.name}}";
+                    item_number = "{{yearly_gold_sub.id}}";
+                } else if (opt === 'platinum_yearly') {
+                    item_name = "{{yearly_platinum_sub.name}}";
+                    item_number = "{{yearly_platinum_sub.id}}";
+                }
+
+                $('input[name=item_name]').val(item_name);
+                $('input[name=item_number]').val(item_number);
+            });
         });
-    });
-</script>
+    </script>
+{% endblock %}

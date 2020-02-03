@@ -4759,8 +4759,12 @@ ul.astrobin-users {
     font-weight: bold;
   }
 
+  select {
+    width: auto;
+  }
+
   input.button {
-    padding-left: 8px;
+    padding-left: $spacer-large;
   }
 }
 

@@ -95,10 +95,6 @@
     {% include 'image/detail/modals/flag_thumbnails.html' %}
     {% include 'image/detail/modals/demote.html' %}
     {% include 'image/detail/modals/promote.html' %}
-
-    {% if ADS_ENABLED and not request.user|is_donor %}
-        {% remove_ads_modal %}
-    {% endif %}
 {% endblock %}
 
 {% block extra_js %}

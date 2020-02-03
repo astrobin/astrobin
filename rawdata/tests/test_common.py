@@ -58,6 +58,16 @@ def setup_data(testcase):
     donor_movie_yearly_group = Group.objects.create(name = "astrobin-donor-movie-yearly")
     donor_dinner_yearly_group = Group.objects.create(name = "astrobin-donor-dinner-yearly")
 
+    donor_bronze_monthly_group = Group.objects.create(name="astrobin-donor-bronze-monthly")
+    donor_silver_monthly_group = Group.objects.create(name="astrobin-donor-silver-monthly")
+    donor_gold_monthly_group = Group.objects.create(name="astrobin-donor-gold-monthly")
+    donor_platinum_monthly_group = Group.objects.create(name="astrobin-donor-platinum-monthly")
+
+    donor_bronze_yearly_group = Group.objects.create(name="astrobin-donor-bronze-yearly")
+    donor_silver_yearly_group = Group.objects.create(name="astrobin-donor-silver-yearly")
+    donor_gold_yearly_group = Group.objects.create(name="astrobin-donor-gold-yearly")
+    donor_platinum_yearly_group = Group.objects.create(name="astrobin-donor-platinum-yearly")
+    
     # Subscriptions
     Subscription.objects.create(name = "Atom", description = "512 MB", price = 0, recurrence_period = 100, recurrence_unit = "Y", group = rawdata_atom_group, trial_period = 0, trial_unit = "D")
     Subscription.objects.create(name = "Meteor", description = "5 GB", price = 2.95, recurrence_period = 1, recurrence_unit = "M", group = rawdata_meteor_group, trial_period = 7, trial_unit = "D")
@@ -77,6 +87,24 @@ def setup_data(testcase):
     Subscription.objects.create(name = "AstroBin Donor Movie Yearly", description = "", price = 100.00, recurrence_period = 1, recurrence_unit = "Y", group = donor_movie_yearly_group, trial_period = 0, trial_unit = "D")
     Subscription.objects.create(name = "AstroBin Donor Dinner Yearly", description = "", price = 250.00, recurrence_period = 1, recurrence_unit = "Y", group = donor_dinner_yearly_group, trial_period = 0, trial_unit = "D")
 
+    Subscription.objects.create(name="AstroBin Donor Bronze Monthly", description="", price=2.50, recurrence_period=1,
+                                recurrence_unit="M", group=donor_bronze_monthly_group, trial_period=0, trial_unit="D")
+    Subscription.objects.create(name="AstroBin Donor Silver Monthly", description="", price=5.00, recurrence_period=1,
+                                recurrence_unit="M", group=donor_silver_monthly_group, trial_period=0, trial_unit="D")
+    Subscription.objects.create(name="AstroBin Donor Gold Monthly", description="", price=10.00, recurrence_period=1,
+                                recurrence_unit="M", group=donor_gold_monthly_group, trial_period=0, trial_unit="D")
+    Subscription.objects.create(name="AstroBin Donor Platinum Monthly", description="", price=20.00,
+                                recurrence_period=1,
+                                recurrence_unit="M", group=donor_platinum_monthly_group, trial_period=0, trial_unit="D")
+    
+    Subscription.objects.create(name="AstroBin Donor Bronze Yearly", description="", price=27.50, recurrence_period=1,
+                                recurrence_unit="Y", group=donor_bronze_yearly_group, trial_period=0, trial_unit="D")
+    Subscription.objects.create(name="AstroBin Donor Silver Yearly", description="", price=55.00, recurrence_period=1,
+                                recurrence_unit="Y", group=donor_silver_yearly_group, trial_period=0, trial_unit="D")
+    Subscription.objects.create(name="AstroBin Donor Gold Yearly", description="", price=110.00, recurrence_period=1,
+                                recurrence_unit="Y", group=donor_gold_yearly_group, trial_period=0, trial_unit="D")
+    Subscription.objects.create(name="AstroBin Donor Platinum Yearly", description="", price=220.00, recurrence_period=1,
+                                recurrence_unit="Y", group=donor_platinum_yearly_group, trial_period=0, trial_unit="D")
 
     testcase.unsubscribed_user = User.objects.create_user('username_unsub', 'fake0@email.tld', 'passw0rd')
     testcase.subscribed_user = User.objects.create_user('username_sub', 'fake1@email.tld', 'passw0rd')

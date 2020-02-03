@@ -15,11 +15,9 @@
         <h3>{% trans "Pay with a bank transfer" %}</h3>
         <p>
             {% blocktrans with amount=object.price currency=object.currency email_prefix="<a href='mailto:astrobin@astrobin.com'>" email="astrobin@astrobin.com" email_postfix="</a>" %}
-                Prefer to pay via bank transfer? Please make a deposit or {{ currency }} {{ amount }} to the following
-                bank
-                details and then email us at {{ email_prefix }}{{ email }}{{ email_postfix }} with your username so we
-                may
-                upgrade your account manually. Thanks!
+                Prefer to pay via bank transfer? Please make a deposit of {{ currency }} {{ amount }} to the following
+                bank details and then email us at {{ email_prefix }}{{ email }}{{ email_postfix }} with your username so
+                we may upgrade your account manually. Thanks!
             {% endblocktrans %}
         </p>
 
