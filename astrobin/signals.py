@@ -464,10 +464,14 @@ post_save.connect(solution_post_save, sender=Solution)
 def subscription_subscribed(sender, **kwargs):
     subscription = kwargs.get("subscription")
 
-    if subscription.group.name in ['astrobin_lite', 'astrobin_premium'] and \
+    if subscription.group.name in [
+        'astrobin_lite', 'astrobin_premium',
+        'astrobin_lite_2020', 'astrobin_premium_2020',
+        'astrobin_ultimate_2020'
+    ] and \
             subscription.recurrence_unit == None:
         usersubscription = kwargs.get("usersubscription")
-        # AstorBin Premium and Lite are valid for 1 year
+        # AstorBin Premium/Lite/Ultimate are valid for 1 year
         usersubscription.expires = datetime.datetime.now()
         usersubscription.extend(datetime.timedelta(days=365.2425))
         usersubscription.save()
