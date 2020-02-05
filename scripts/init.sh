@@ -18,7 +18,7 @@ Group.objects.get_or_create(name='astrobin_ultimate_2020')
 
 Subscription.objects.get_or_create(
     name='AstroBin Lite',
-    currency="USD"
+    currency="USD",
     price=18,
     trial_period=0,
     trial_unit=None,
@@ -29,7 +29,7 @@ Subscription.objects.get_or_create(
 
 Subscription.objects.get_or_create(
     name='AstroBin Lite (autorenew)',
-    currency="USD"
+    currency="USD",
     price=18,
     trial_period=0,
     trial_unit=None,
@@ -62,7 +62,7 @@ Subscription.objects.get_or_create(
 
 Subscription.objects.get_or_create(
     name='AstroBin Premium (autorenew)',
-    currency="USD"
+    currency="USD",
     price=36,
     trial_period=0,
     trial_unit=None,
