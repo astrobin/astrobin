@@ -1,6 +1,7 @@
 from django import forms
 
 from astrobin.models import UserProfile
+from astrobin.templatetags.tags import can_remove_ads
 
 
 class UserProfileEditPreferencesForm(forms.ModelForm):
@@ -17,3 +18,9 @@ class UserProfileEditPreferencesForm(forms.ModelForm):
             'receive_marketing_and_commercial_material',
             'allow_astronomy_ads',
         ]
+
+    def __init__(self, **kwargs):
+        super(UserProfileEditPreferencesForm, self).__init__(**kwargs)
+        profile = getattr(self, 'instance', None)
+        if not can_remove_ads(profile.user):
+            self.fields['allow_astronomy_ads'].widget.attrs['disabled'] = True

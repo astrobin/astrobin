@@ -683,3 +683,61 @@ class UserTest(TestCase):
         self.client.logout()
         us.delete()
         image.delete()
+
+    @override_settings(ADS_ENABLED=True)
+    def test_user_preferences_allow_astronomy_ads_free(self):
+        self.client.login(username='user', password='password')
+        self.assertContains(
+            self.client.get(reverse('profile_edit_preferences')),
+            'name="allow_astronomy_ads" disabled')
+        self.client.logout()
+
+    @override_settings(ADS_ENABLED=True)
+    def test_user_preferences_allow_astronomy_ads_lite(self):
+        self.client.login(username='user', password='password')
+        us = Generators.premium_subscription(self.user, "AstroBin Lite")
+        self.assertNotContains(
+            self.client.get(reverse('profile_edit_preferences')),
+            'name="allow_astronomy_ads" disabled')
+        self.client.logout()
+        us.delete()
+
+    @override_settings(ADS_ENABLED=True)
+    def test_user_preferences_allow_astronomy_ads_lite_2020(self):
+        self.client.login(username='user', password='password')
+        us = Generators.premium_subscription(self.user, "AstroBin Lite 2020+")
+        self.assertContains(
+            self.client.get(reverse('profile_edit_preferences')),
+            'name="allow_astronomy_ads" disabled')
+        self.client.logout()
+        us.delete()
+
+    @override_settings(ADS_ENABLED=True)
+    def test_user_preferences_allow_astronomy_ads_premium(self):
+        self.client.login(username='user', password='password')
+        us = Generators.premium_subscription(self.user, "AstroBin Premium")
+        self.assertNotContains(
+            self.client.get(reverse('profile_edit_preferences')),
+            'name="allow_astronomy_ads" disabled')
+        self.client.logout()
+        us.delete()
+
+    @override_settings(ADS_ENABLED=True)
+    def test_user_preferences_allow_astronomy_ads_premium_2020(self):
+        self.client.login(username='user', password='password')
+        us = Generators.premium_subscription(self.user, "AstroBin Premium 2020+")
+        self.assertNotContains(
+            self.client.get(reverse('profile_edit_preferences')),
+            'name="allow_astronomy_ads" disabled')
+        self.client.logout()
+        us.delete()
+
+    @override_settings(ADS_ENABLED=True)
+    def test_user_preferences_allow_astronomy_ads_ultimate_2020(self):
+        self.client.login(username='user', password='password')
+        us = Generators.premium_subscription(self.user, "AstroBin Ultimate 2020+")
+        self.assertNotContains(
+            self.client.get(reverse('profile_edit_preferences')),
+            'name="allow_astronomy_ads" disabled')
+        self.client.logout()
+        us.delete()
