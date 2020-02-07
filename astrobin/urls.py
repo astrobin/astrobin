@@ -130,12 +130,6 @@ from astrobin.views import (
 
     set_language
 )
-# AstroBin apps
-from rawdata.views.helppages import (
-    Help1 as RawDataHelp1,
-    Help2 as RawDataHelp2,
-    Help3 as RawDataHelp3,
-)
 
 admin.autodiscover()
 
@@ -435,9 +429,6 @@ urlpatterns = [
 
     url(r'^affiliates/$', affiliates, name='affiliates'),
     url(r'^help/api/$', api_help, name='api'),
-    url(r'^help/rawdata/1/$', RawDataHelp1.as_view(), name='rawdata.help1'),
-    url(r'^help/rawdata/2/$', RawDataHelp2.as_view(), name='rawdata.help2'),
-    url(r'^help/rawdata/3/$', RawDataHelp3.as_view(), name='rawdata.help3'),
     url(r'^trending-astrophotographers/',
         trending_astrophotographers,
         name='trending_astrophotographers'),
