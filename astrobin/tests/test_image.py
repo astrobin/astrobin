@@ -414,7 +414,7 @@ class ImageTest(TestCase):
         self.assertFalse(push_notification.called)
 
     @patch("astrobin.tasks.retrieve_primary_thumbnails")
-    def test_image_upload_process_view_image_too_large(self, retrieve_primary_thumbnails):
+    def test_image_upload_process_view_image_too_large_free(self, retrieve_primary_thumbnails):
         self.client.login(username='test', password='password')
 
         with self.settings(PREMIUM_MAX_IMAGE_SIZE_FREE_2020=10 * 1024):
@@ -423,8 +423,66 @@ class ImageTest(TestCase):
             self.assertContains(response, "maximum allowed image size is 10.0")
 
     @patch("astrobin.tasks.retrieve_primary_thumbnails")
+    def test_image_upload_process_view_image_too_large_lite(self, retrieve_primary_thumbnails):
+        self.client.login(username='test', password='password')
+        us = Generators.premium_subscription(self.user, "AstroBin Lite")
+
+        with self.settings(PREMIUM_MAX_IMAGE_SIZE_LITE_2020=1):
+            response = self._do_upload('astrobin/fixtures/test.jpg')
+            self.assertNotContains(response, "this image is too large")
+
+        us.delete()
+
+    @patch("astrobin.tasks.retrieve_primary_thumbnails")
+    def test_image_upload_process_view_image_too_large_lite_2020(self, retrieve_primary_thumbnails):
+        self.client.login(username='test', password='password')
+        us = Generators.premium_subscription(self.user, "AstroBin Lite 2020+")
+
+        with self.settings(PREMIUM_MAX_IMAGE_SIZE_LITE_2020=10 * 1024):
+            response = self._do_upload('astrobin/fixtures/test.jpg')
+            self.assertContains(response, "this image is too large")
+            self.assertContains(response, "maximum allowed image size is 10.0")
+
+        us.delete()
+
+    @patch("astrobin.tasks.retrieve_primary_thumbnails")
+    def test_image_upload_process_view_image_too_large_premium(self, retrieve_primary_thumbnails):
+        self.client.login(username='test', password='password')
+        us = Generators.premium_subscription(self.user, "AstroBin Premium")
+
+        with self.settings(PREMIUM_MAX_IMAGE_SIZE_PREMIUM_2020=1):
+            response = self._do_upload('astrobin/fixtures/test.jpg')
+            self.assertNotContains(response, "this image is too large")
+
+        us.delete()
+
+    @patch("astrobin.tasks.retrieve_primary_thumbnails")
+    def test_image_upload_process_view_image_too_large_premium_2020(self, retrieve_primary_thumbnails):
+        self.client.login(username='test', password='password')
+        us = Generators.premium_subscription(self.user, "AstroBin Premium 2020+")
+
+        with self.settings(PREMIUM_MAX_IMAGE_SIZE_PREMIUM_2020=10 * 1024):
+            response = self._do_upload('astrobin/fixtures/test.jpg')
+            self.assertContains(response, "this image is too large")
+            self.assertContains(response, "maximum allowed image size is 10.0")
+
+        us.delete()
+
+    @patch("astrobin.tasks.retrieve_primary_thumbnails")
+    def test_image_upload_process_view_image_too_large_ultimate_2020(self, retrieve_primary_thumbnails):
+        self.client.login(username='test', password='password')
+        us = Generators.premium_subscription(self.user, "AstroBin Ultimate 2020+")
+
+        with self.settings(PREMIUM_MAX_IMAGE_SIZE_PREMIUM_2020=1):
+            response = self._do_upload('astrobin/fixtures/test.jpg')
+            self.assertNotContains(response, "this image is too large")
+
+        us.delete()
+
+    @patch("astrobin.tasks.retrieve_primary_thumbnails")
     @override_settings(PREMIUM_MAX_REVISIONS_FREE_2020=sys.maxsize)
-    def test_image_upload_revision_process_view_image_too_large(self, retrieve_primary_thumbnails):
+    @override_settings(PREMIUM_MAX_IMAGE_SIZE_FREE_2020=sys.maxsize)
+    def test_image_upload_revision_process_view_image_too_large_free(self, retrieve_primary_thumbnails):
         self.client.login(username='test', password='password')
         self._do_upload('astrobin/fixtures/test.jpg')
         image = self._get_last_image()
@@ -433,6 +491,86 @@ class ImageTest(TestCase):
             response = self._do_upload_revision(image, 'astrobin/fixtures/test.jpg')
             self.assertContains(response, "this image is too large")
             self.assertContains(response, "maximum allowed image size is 10.0")
+
+    @patch("astrobin.tasks.retrieve_primary_thumbnails")
+    @override_settings(PREMIUM_MAX_REVISIONS_FREE_2020=sys.maxsize)
+    @override_settings(PREMIUM_MAX_IMAGE_SIZE_FREE_2020=sys.maxsize)
+    def test_image_upload_revision_process_view_image_too_large_lite(self, retrieve_primary_thumbnails):
+        self.client.login(username='test', password='password')
+        self._do_upload('astrobin/fixtures/test.jpg')
+        image = self._get_last_image()
+
+        us = Generators.premium_subscription(self.user, "AstroBin Lite")
+
+        with self.settings(PREMIUM_MAX_IMAGE_SIZE_LITE_2020=10 * 1024):
+            response = self._do_upload_revision(image, 'astrobin/fixtures/test.jpg')
+            self.assertNotContains(response, "this image is too large")
+
+        us.delete()
+
+    @patch("astrobin.tasks.retrieve_primary_thumbnails")
+    @override_settings(PREMIUM_MAX_REVISIONS_FREE_2020=sys.maxsize)
+    @override_settings(PREMIUM_MAX_IMAGE_SIZE_FREE_2020=sys.maxsize)
+    def test_image_upload_revision_process_view_image_too_large_lite_2020(self, retrieve_primary_thumbnails):
+        self.client.login(username='test', password='password')
+        self._do_upload('astrobin/fixtures/test.jpg')
+        image = self._get_last_image()
+
+        us = Generators.premium_subscription(self.user, "AstroBin Lite 2020+")
+
+        with self.settings(PREMIUM_MAX_IMAGE_SIZE_LITE_2020=10 * 1024):
+            response = self._do_upload_revision(image, 'astrobin/fixtures/test.jpg')
+            self.assertContains(response, "this image is too large")
+
+        us.delete()
+
+    @patch("astrobin.tasks.retrieve_primary_thumbnails")
+    @override_settings(PREMIUM_MAX_REVISIONS_FREE_2020=sys.maxsize)
+    @override_settings(PREMIUM_MAX_IMAGE_SIZE_FREE_2020=sys.maxsize)
+    def test_image_upload_revision_process_view_image_too_large_premium(self, retrieve_primary_thumbnails):
+        self.client.login(username='test', password='password')
+        self._do_upload('astrobin/fixtures/test.jpg')
+        image = self._get_last_image()
+
+        us = Generators.premium_subscription(self.user, "AstroBin Premium")
+
+        with self.settings(PREMIUM_MAX_IMAGE_SIZE_PREMIUM_2020=10 * 1024):
+            response = self._do_upload_revision(image, 'astrobin/fixtures/test.jpg')
+            self.assertNotContains(response, "this image is too large")
+
+        us.delete()
+
+    @patch("astrobin.tasks.retrieve_primary_thumbnails")
+    @override_settings(PREMIUM_MAX_REVISIONS_FREE_2020=sys.maxsize)
+    @override_settings(PREMIUM_MAX_IMAGE_SIZE_FREE_2020=sys.maxsize)
+    def test_image_upload_revision_process_view_image_too_large_premium_2020(self, retrieve_primary_thumbnails):
+        self.client.login(username='test', password='password')
+        self._do_upload('astrobin/fixtures/test.jpg')
+        image = self._get_last_image()
+
+        us = Generators.premium_subscription(self.user, "AstroBin Premium 2020+")
+
+        with self.settings(PREMIUM_MAX_IMAGE_SIZE_PREMIUM_2020=10 * 1024):
+            response = self._do_upload_revision(image, 'astrobin/fixtures/test.jpg')
+            self.assertContains(response, "this image is too large")
+
+        us.delete()
+
+    @patch("astrobin.tasks.retrieve_primary_thumbnails")
+    @override_settings(PREMIUM_MAX_REVISIONS_FREE_2020=sys.maxsize)
+    @override_settings(PREMIUM_MAX_IMAGE_SIZE_FREE_2020=sys.maxsize)
+    def test_image_upload_revision_process_view_image_too_large_ultimate_2020(self, retrieve_primary_thumbnails):
+        self.client.login(username='test', password='password')
+        self._do_upload('astrobin/fixtures/test.jpg')
+        image = self._get_last_image()
+
+        us = Generators.premium_subscription(self.user, "AstroBin Ultimate 2020+")
+
+        with self.settings(PREMIUM_MAX_IMAGE_SIZE_PREMIUM_2020=10 * 1024):
+            response = self._do_upload_revision(image, 'astrobin/fixtures/test.jpg')
+            self.assertNotContains(response, "this image is too large")
+
+        us.delete()
 
     @patch("astrobin.tasks.retrieve_primary_thumbnails")
     def test_image_upload_revision_process_view_too_many_revisions_free(self, retrieve_primary_thumbnails):
