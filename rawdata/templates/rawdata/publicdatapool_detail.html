@@ -110,8 +110,7 @@
         <div class="span6">
             <p>
             {% url 'user_page' object.creator as user_url %}
-            {% url 'rawdata.help1' as rawdata_url %}
-            {% blocktrans with object.creator as user and size|filesizeformat as size and object.images.all|length as image_count and object.created|date:"DATE_FORMAT" as date %}This public data pool was created on {{date}} by <a href="{{user_url}}">{{user}}</a>. It consists of {{size}} in {{image_count}} images. You can contribute by donating your raw files, if you are subscribed to <a href="{{rawdata_url}}">AstroBin Raw Data</a>, or you can download the available data and try to process it!{% endblocktrans %}
+            {% blocktrans with object.creator as user and size|filesizeformat as size and object.images.all|length as image_count and object.created|date:"DATE_FORMAT" as date and rawdata_url="https://welcome.astrobin.com/features/raw-data-support"%}This public data pool was created on {{date}} by <a href="{{user_url}}">{{user}}</a>. It consists of {{size}} in {{image_count}} images. You can contribute by donating your raw files, if you are subscribed to <a href="{{rawdata_url}}">AstroBin Raw Data</a>, or you can download the available data and try to process it!{% endblocktrans %}
             </p>
 
             <div class="download-with-icon">

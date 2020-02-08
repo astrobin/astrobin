@@ -230,8 +230,7 @@
                 <div class="well">
                     <h4>{% trans "Did you know that AstroBin can host your FIT and digital camera raw files too?" %}</h4>
                     <p>
-                        {% url 'rawdata.help1' as rawdata_url %}
-                        {% blocktrans %}Have a look at <a href="{{rawdata_url}}">AstroBin Raw Data</a> if you want to safely store all your raw files, and have them neatily organized for future reference!{% endblocktrans %}
+                        {% blocktrans with rawdata_url="https://welcome.astrobin.com/features/raw-data-support" %}Have a look at <a href="{{rawdata_url}}">AstroBin Raw Data</a> if you want to safely store all your raw files, and have them neatily organized for future reference!{% endblocktrans %}
                     </p>
                 </div>
             </div>
@@ -239,7 +238,7 @@
 
         <div class="row">
             <div class="span6 offset3" style="text-align:center">
-                <a href="{% url 'rawdata.help1' %}">
+                <a href="https://welcome.astrobin.com/features/raw-data-support">
                     <img src="{% static 'rawdata/images/astrobin-rawdata-logo-luna.png' %}" />
                 </a>
             </div>
