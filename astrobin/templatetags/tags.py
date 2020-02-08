@@ -1,4 +1,5 @@
 # -*- coding: utf-8 -*-
+import math
 
 from django.core.paginator import Paginator, EmptyPage, PageNotAnInteger
 from django.template import Library
@@ -7,6 +8,7 @@ from django.utils.translation import ugettext as _
 from subscription.models import UserSubscription, Subscription
 
 from astrobin.gear import *
+from astrobin.utils import get_image_resolution
 from astrobin_apps_donations.templatetags.astrobin_apps_donations_tags import is_donor
 from astrobin_apps_premium.templatetags.astrobin_apps_premium_tags import is_premium_2020, is_premium, is_ultimate_2020, \
     is_lite
@@ -442,3 +444,17 @@ def ra_to_hms(degrees):
 @register.filter
 def dec_to_dms(degrees):
     return decimal_to_degrees_minutes_seconds(degrees)
+
+
+@register.filter
+def thumbnail_width(image, alias):
+    return settings.THUMBNAIL_ALIASES[''][alias]['size'][0]
+
+
+@register.filter
+def thumbnail_height(image, alias):
+    thumb_w = settings.THUMBNAIL_ALIASES[''][alias]['size'][0]
+    w, h = get_image_resolution(image)
+    ratio = w / float(thumb_w)
+
+    return math.floor(h / ratio)

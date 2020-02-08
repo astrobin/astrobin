@@ -52,6 +52,11 @@ LOGGING = {
             'level': 'ERROR',
             'propagate': True,
         },
+        'werkzeug': {
+            'handlers': ['console'],
+            'level': 'DEBUG',
+            'propagate': True,
+        },
     }
 }
 

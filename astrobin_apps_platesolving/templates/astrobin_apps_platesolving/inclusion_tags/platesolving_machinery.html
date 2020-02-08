@@ -1,5 +1,6 @@
 {% load i18n %}
 {% load static %}
+{% load astrobin_apps_premium_tags %}
 
 <div id="platesolving-status" class="hide">
     <div class="progress progress-striped progress-info active">
@@ -25,12 +26,17 @@
                     content_type_id: {{content_type_id}},
                     solution_id: {{solution_id}},
                     solution_status: {{solution_status}},
+                    perform_advanced: "{{ user|can_perform_advanced_platesolving }}",
 
-                    beforeSolveMsg    : "{% trans "Plate-solving process starting, please do not leave this page..." %}",
-                    solveStartedMsg   : "{% trans "Plate-solving started in the background. You may leave this page." %}",
+                    beforeSolveMsg: "{% trans "Plate-solving starting, please do not leave this page..." %}",
+                    beforeSolveAdvancedMsg: "{% trans "Advanced plate-solving starting, please do not leave this page..." %}",
+                    solveStartedMsg: "{% trans "Plate-solving started. You may leave this page." %}",
+                    solveAdvancedStartedMsg: "{% trans "Advanced plate-solving started. You may leave this page." %}",
                     solveFinalizingMsg: "{% trans "Plate-solving almost ready, please do not leave this page..." %}",
-                    solveFailedMsg    : "{% trans "This image could not be plate-solved." %}",
-                    solveSuccessMsg   : "{% trans "This image has been successfully plate-solved. Please refresh the page to see the new data." %}"
+                    solveFailedMsg: "{% trans "This image could not be plate-solved." %}",
+                    solveAdvancedFailedMsg: "{% trans "The advanced plate-solving failed." %}",
+                    solveSuccessMsg: "{% trans "This image has been plate-solved. Refresh the page to see new data!" %}",
+                    solveAdvancedSuccessMsg: "{% trans "The advanced plate-solved finished. Refresh the page to see new data!" %}"
                 });
 
                 solving.process();

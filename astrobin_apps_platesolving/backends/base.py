@@ -1,4 +1,5 @@
-from abc import ABCMeta, abstractmethod
+from abc import abstractmethod, ABCMeta
+
 
 class AbstractPlateSolvingBackend(object):
     __metaclass__ = ABCMeta

@@ -51,6 +51,7 @@ django-debug-toolbar-template-timings==0.9
 django-easysettings==1.1
 django-el-pagination==3.1.0
 -e git+https://github.com/siovene/django-ember.git@b925ecd22c8008ccb339a4977d0081972c58f39f#egg=django_ember
+django-extensions==2.2.6
 django-filter==1.1.0
 django-followit==0.2.1
 django-haystack==2.6.1
@@ -178,6 +179,7 @@ sqlparse==0.2.3
 termcolor==1.1.0
 -e git+https://github.com/astrobin/django-toggle-properties.git@76587303#egg=toggleproperties
 tornado==4.5.1
+typing==3.7.4.1
 ua-parser==0.7.3
 uncompyle6==2.15.1
 Unidecode==0.4.20
@@ -186,6 +188,7 @@ user-agents==1.1.0
 vine==1.1.4
 webencodings==0.5.1
 WebOb==1.7.2
+Werkzeug==0.16.1
 wheel==0.33.1
 xdis==3.6.11
 yolk==0.4.3

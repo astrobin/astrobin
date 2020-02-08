@@ -69,6 +69,7 @@ INSTALLED_APPS = [
     'cookielaw',
     'corsheaders',
     'image_cropping',
+    'django_extensions',
 
     'astrobin.apps.AstroBinAppConfig',
 ] + ASTROBIN_APPS

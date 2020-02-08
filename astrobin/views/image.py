@@ -55,7 +55,7 @@ from astrobin.models import (
 )
 from astrobin.stories import add_story
 from astrobin.templatetags.tags import can_like
-from astrobin.utils import to_user_timezone
+from astrobin.utils import to_user_timezone, get_image_resolution
 # AstroBin apps
 from astrobin_apps_groups.forms import GroupSelectForm
 from astrobin_apps_groups.models import Group
@@ -322,6 +322,11 @@ class ImageDetailView(ImageDetailViewBase):
         image_type = None
         deep_sky_data = {}
 
+        if is_revision:
+            w, h = get_image_resolution(revision_image)
+        else:
+            w, h = get_image_resolution(image)
+
         try:
             ssa = SolarSystem_Acquisition.objects.get(image=image)
         except SolarSystem_Acquisition.DoesNotExist:
@@ -447,20 +452,6 @@ class ImageDetailView(ImageDetailViewBase):
         elif ssa:
             image_type = 'solar_system'
 
-        # Image resolution, aka size in pixels
-        try:
-            if is_revision:
-                w, h = revision_image.w, revision_image.h
-                if not (w and h):
-                    w, h = get_image_dimensions(revision_image.image_file)
-            else:
-                w, h = image.w, image.h
-                if not (w and h):
-                    w, h = get_image_dimensions(image.image_file)
-        except TypeError:
-            # This might happen in unit tests
-            w, h = 0, 0
-
         # Data that's common to both DS and SS images
         basic_data = (
             (_('Resolution'), '%dx%d' % (w, h) if (w and h) else None),
@@ -566,8 +557,8 @@ class ImageDetailView(ImageDetailViewBase):
                         collection = image.collections.all()[0]
 
                     if collection.order_by_tag:
-                        collection_images = Image.objects\
-                            .filter(user=image.user, collections=collection, keyvaluetags__key=collection.order_by_tag)\
+                        collection_images = Image.objects \
+                            .filter(user=image.user, collections=collection, keyvaluetags__key=collection.order_by_tag) \
                             .order_by('keyvaluetags__value')
 
                         current_index = 0
@@ -577,9 +568,9 @@ class ImageDetailView(ImageDetailViewBase):
                             current_index += 1
 
                         image_next = collection_images.all()[current_index + 1] \
-                            if current_index < collection_images.count() - 1\
+                            if current_index < collection_images.count() - 1 \
                             else None
-                        image_prev = collection_images.all()[current_index - 1]\
+                        image_prev = collection_images.all()[current_index - 1] \
                             if current_index > 0 \
                             else None
                     else:
@@ -625,7 +616,7 @@ class ImageDetailView(ImageDetailViewBase):
             image_prev = None
 
         if image_next and isinstance(image_next, QuerySet):
-                image_next = image_next[0]
+            image_next = image_next[0]
         if image_prev and isinstance(image_prev, QuerySet):
             image_prev = image_prev[0]
 
@@ -657,7 +648,8 @@ class ImageDetailView(ImageDetailViewBase):
             'instance_to_platesolve': instance_to_platesolve,
             'show_solution': instance_to_platesolve.mouse_hover_image == "SOLUTION"
                              and instance_to_platesolve.solution
-                             and instance_to_platesolve.solution.status == Solver.SUCCESS,
+                             and (instance_to_platesolve.solution.status == Solver.SUCCESS or
+                                  instance_to_platesolve.solution.status == Solver.ADVANCED_SUCCESS),
             'skyplot_zoom1': skyplot_zoom1,
 
             'image_ct': ContentType.objects.get_for_model(Image),
@@ -744,7 +736,7 @@ class ImageFullView(ImageDetailView):
         if self.revision_label is None:
             # No revision specified, let's see if we need to redirect to the
             # final.
-            if image.is_final == False:
+            if not image.is_final:
                 final = image.revisions.filter(is_final=True)
                 if final.count() > 0:
                     url = reverse_lazy(
@@ -754,7 +746,6 @@ class ImageFullView(ImageDetailView):
                         url += '?ctx=%s' % request.GET.get('ctx')
                     return redirect(url)
 
-        if self.revision_label is None:
             try:
                 self.revision_label = image.revisions.filter(is_final=True)[0].label
             except IndexError:

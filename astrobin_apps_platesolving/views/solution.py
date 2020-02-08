@@ -1,40 +1,54 @@
+import logging
 import os
 import time
 import urllib2
 
 import simplejson
-from astrobin_apps_platesolving.api_filters.image_object_id_filter import ImageObjectIdFilter
 from django.conf import settings
 from django.contrib.contenttypes.models import ContentType
 from django.core.files import File
+from django.core.files.base import ContentFile
 from django.core.files.temp import NamedTemporaryFile
 from django.db import IntegrityError
 from django.http import HttpResponse
 from django.shortcuts import get_object_or_404
+from django.utils.decorators import method_decorator
+from django.views.decorators.csrf import csrf_exempt
 from django.views.generic import base
 from django_filters.rest_framework import DjangoFilterBackend
 from rest_framework import generics
 from rest_framework import permissions
 
 from astrobin_apps_platesolving.annotate import Annotator
+from astrobin_apps_platesolving.api_filters.image_object_id_filter import ImageObjectIdFilter
 from astrobin_apps_platesolving.models import PlateSolvingSettings
 from astrobin_apps_platesolving.models import Solution
 from astrobin_apps_platesolving.serializers import SolutionSerializer
-from astrobin_apps_platesolving.solver import Solver
+from astrobin_apps_platesolving.solver import Solver, AdvancedSolver, SolverBase
 from astrobin_apps_platesolving.utils import getFromStorage
+
+log = logging.getLogger('apps')
+
+
+def get_target(object_id, content_type_id):
+    content_type = ContentType.objects.get_for_id(content_type_id)
+    manager = content_type.model_class()
+    if hasattr(manager, 'objects_including_wip'):
+        manager = manager.objects_including_wip
+    return get_object_or_404(manager, pk=object_id)
+
+
+def get_solution(object_id, content_type_id):
+    content_type = ContentType.objects.get_for_id(content_type_id)
+    solution, created = Solution.objects.get_or_create(object_id=object_id, content_type=content_type)
+    return solution
 
 
 class SolveView(base.View):
     def post(self, request, *args, **kwargs):
-        object_id = kwargs.pop('object_id')
-        content_type_id = kwargs.pop('content_type_id')
+        target = get_target(kwargs.get('object_id'), kwargs.get('content_type_id'))
+        solution = get_solution(kwargs.get('object_id'), kwargs.get('content_type_id'))
 
-        content_type = ContentType.objects.get_for_id(content_type_id)
-        manager = content_type.model_class()
-        if hasattr(manager, 'objects_including_wip'):
-            manager = manager.objects_including_wip
-        target = get_object_or_404(manager, pk = object_id)
-        solution, created = Solution.objects.get_or_create(object_id = object_id, content_type = content_type)
         if solution.settings is None:
             solution.settings = PlateSolvingSettings.objects.create()
             solution.save()
@@ -48,18 +62,20 @@ class SolveView(base.View):
                 if solution.settings.blind:
                     submission = solver.solve(f)
                 else:
-                    submission = solver.solve(f,
-                        scale_units = solution.settings.scale_units,
-                        scale_lower = solution.settings.scale_min,
-                        scale_upper = solution.settings.scale_max,
-                        center_ra = solution.settings.center_ra,
-                        center_dec = solution.settings.center_dec,
-                        radius = solution.settings.radius,
+                    submission = solver.solve(
+                        f,
+                        scale_units=solution.settings.scale_units,
+                        scale_lower=solution.settings.scale_min,
+                        scale_upper=solution.settings.scale_max,
+                        center_ra=solution.settings.center_ra,
+                        center_dec=solution.settings.center_dec,
+                        radius=solution.settings.radius,
                     )
                 solution.status = Solver.PENDING
                 solution.submission_id = submission
                 solution.save()
-            except:
+            except Exception, e:
+                log.error(e)
                 solution.status = Solver.MISSING
                 solution.submission_id = None
                 solution.save()
@@ -72,11 +88,46 @@ class SolveView(base.View):
         return HttpResponse(simplejson.dumps(context), content_type='application/json')
 
 
+class SolveAdvancedView(base.View):
+    def post(self, request, *args, **kwargs):
+        target = get_target(kwargs.get('object_id'), kwargs.get('content_type_id'))
+        solution = get_solution(kwargs.get('object_id'), kwargs.get('content_type_id'))
+
+        if solution.pixinsight_serial_number is None or solution.status == SolverBase.SUCCESS:
+            solver = AdvancedSolver()
+
+            try:
+                submission = solver.solve(target.image_file.url, ra=solution.ra, dec=solution.dec,
+                                          pixscale=solution.pixscale)
+
+                solution.status = Solver.ADVANCED_PENDING
+                solution.pixinsight_serial_number = submission
+                solution.save()
+            except Exception, e:
+                log.error(e)
+                solution.status = Solver.MISSING
+                solution.submission_id = None
+                solution.save()
+
+        context = {
+            'solution': solution.id,
+            'submission': solution.pixinsight_serial_number,
+            'status': solution.status,
+        }
+        return HttpResponse(simplejson.dumps(context), content_type='application/json')
+
+
 class SolutionUpdateView(base.View):
     def post(self, request, *args, **kwargs):
-        solution = get_object_or_404(Solution, pk = kwargs.pop('pk'))
-        solver = Solver()
-        status = solver.status(solution.submission_id)
+        solution = get_object_or_404(Solution, pk=kwargs.pop('pk'))
+        solver = None
+        status = None
+
+        if solution.status < SolverBase.ADVANCED_PENDING:
+            solver = Solver()
+            status = solver.status(solution.submission_id)
+        else:
+            status = solution.status
 
         if status == Solver.MISSING:
             solution.status = status
@@ -88,7 +139,7 @@ class SolutionUpdateView(base.View):
 
 class SolutionFinalizeView(base.View):
     def post(self, request, *args, **kwargs):
-        solution = get_object_or_404(Solution, pk = kwargs.pop('pk'))
+        solution = get_object_or_404(Solution, pk=kwargs.pop('pk'))
         solver = Solver()
         status = solver.status(solution.submission_id)
 
@@ -97,10 +148,10 @@ class SolutionFinalizeView(base.View):
 
             solution.objects_in_field = ', '.join(info['objects_in_field'])
 
-            solution.ra          = "%.3f" % info['calibration']['ra']
-            solution.dec         = "%.3f" % info['calibration']['dec']
+            solution.ra = "%.3f" % info['calibration']['ra']
+            solution.dec = "%.3f" % info['calibration']['dec']
             solution.orientation = "%.3f" % info['calibration']['orientation']
-            solution.radius      = "%.3f" % info['calibration']['radius']
+            solution.radius = "%.3f" % info['calibration']['radius']
 
             # Get the images 'w' and adjust pixscale
             if solution.content_object:
@@ -112,12 +163,12 @@ class SolutionFinalizeView(base.View):
                         hd_w = w
                     ratio = hd_w / float(w)
                     corrected_scale = float(pixscale) * ratio
-                    solution.pixscale = "%.3f" %  corrected_scale
+                    solution.pixscale = "%.3f" % corrected_scale
                 else:
                     solution.pixscale = None
 
             try:
-                target = solution.content_type.get_object_for_this_type(pk = solution.object_id)
+                target = solution.content_type.get_object_for_this_type(pk=solution.object_id)
             except solution.content_type.model_class().DoesNotExist:
                 # Target image was deleted meanwhile
                 context = {'status': Solver.FAILED}
@@ -151,6 +202,37 @@ class SolutionFinalizeView(base.View):
 
         context = {'status': solution.status}
         return HttpResponse(simplejson.dumps(context), content_type='application/json')
+
+
+class SolutionFinalizeAdvancedView(base.View):
+    def post(self, request, *args, **kwargs):
+        solution = get_object_or_404(Solution, pk=kwargs.pop('pk'))
+        context = {'status': solution.status}
+        return HttpResponse(simplejson.dumps(context), content_type='application/json')
+
+
+class SolutionPixInsightWebhook(base.View):
+    @method_decorator(csrf_exempt)
+    def dispatch(self, request, *args, **kwargs):
+        return super(SolutionPixInsightWebhook, self).dispatch(request, *args, **kwargs)
+
+    def post(self, request, *args, **kwargs):
+        serial_number = request.POST['serialNumber']
+        svg = request.POST['svgAnnotation']
+        status = request.POST['status']
+        log.debug("PixInsight Webhook called for %s: %s" % (serial_number, status))
+
+        solution = get_object_or_404(Solution, pixinsight_serial_number=serial_number)
+
+        if status == 'OK':
+            solution.pixinsight_svg_annotation.save(serial_number + ".svg", ContentFile(svg))
+            solution.status = Solver.ADVANCED_SUCCESS
+        else:
+            solution.status = Solver.ADVANCED_FAILED
+
+        solution.save()
+
+        return HttpResponse("OK")
 
 
 ###############################################################################

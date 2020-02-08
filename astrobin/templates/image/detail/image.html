@@ -1,6 +1,7 @@
 {% load astrobin_apps_images_tags %}
 {% load common_tags %}
 {% load tags %}
+{% load astrobin_apps_platesolving_tags %}
 
 <div class="main-image">
     <div class="main-image-inner">
@@ -35,13 +36,24 @@
         {% endif %}
 
         {% if show_solution %}
-            <div class="astrobin-image-container hover-overlay {% if mod == 'solved' %} hover-overlay-fixed{% endif %} hover-overlay-solution">
-                <a href="
-                        {% get_image_url image revision_label 'full' %}{% if mod %}{% query_string "mod=mod" "" %}{% endif %}">
+            <div
+                    class="astrobin-image-container
+                    hover-overlay
+                    {% if mod == 'solved' %} hover-overlay-fixed{% endif %} hover-overlay-solution">
+                <a href="{% get_image_url image revision_label 'full' %}{% if mod %}{% query_string "mod=mod" "" %}{% endif %}">
+
+                {% if instance_to_platesolve.solution|is_advanced_success_status %}
+                    <img src="{{ IMAGES_URL }}{{ instance_to_platesolve.solution.pixinsight_svg_annotation }}"
+                         alt="{{ image.title|escape }}"
+                         width="{{ instance_to_platesolve | thumbnail_width:'regular' }}"
+                         height="{{ instance_to_platesolve | thumbnail_height:'regular' }}"
+                    />
+                {% else %}
                     <img
                             onerror="solution_image_error(this)"
                             src="{{ IMAGES_URL }}{{ instance_to_platesolve.solution.image_file }}"
                             alt="{{ image.title|escape }}" />
+                {% endif %}
                 </a>
             </div>
         {% endif %}
@@ -49,22 +61,22 @@
 </div> <!-- main-image -->
 
 {% block extra_js %}
-<script type="text/javascript">
-    var attempts = 0;
+    <script type="text/javascript">
+        var attempts = 0;
 
-    function solution_image_error(img) {
-        if (attempts > 1)
-            return;
+        function solution_image_error(img) {
+            if (attempts > 1)
+                return;
 
-        if (img.src.indexOf('images/solutions') === -1) {
-            split = img.src.split('solutions');
-            img.src = split[0] + 'images/solutions' + split[1];
-        } else {
-            split = img.src.split('images/solutions');
-            img.src = split[0] + 'solutions' + split[1];
+            if (img.src.indexOf('images/solutions') === -1) {
+                split = img.src.split('solutions');
+                img.src = split[0] + 'images/solutions' + split[1];
+            } else {
+                split = img.src.split('images/solutions');
+                img.src = split[0] + 'solutions' + split[1];
+            }
+
+            attempts++;
         }
-
-        attempts++;
-    }
-</script>
+    </script>
 {% endblock %}

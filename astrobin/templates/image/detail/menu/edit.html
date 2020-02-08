@@ -1,5 +1,6 @@
 {% load common_tags %}
 {% load i18n %}
+{% load astrobin_apps_premium_tags %}
 
 {% if request.user == image.user or request.user.is_superuser %}
     {% if READONLY_MODE %}
@@ -56,11 +57,16 @@
 
             {% if image.is_platesolvable %}
             <li>
-                {% if is_revision %}
-                    <a href="{% url 'image_edit_platesolving_settings' image.get_id revision_image.label %}">
-                {% else %}
-                    <a href="{% url 'image_edit_platesolving_settings' image.get_id %}">
+                {% if request.user|can_perform_basic_platesolving %}
+                    {% if is_revision %}
+                        <a href="{% url 'image_edit_platesolving_settings' image.get_id revision_image.label %}">
+                    {% else %}
+                        <a href="{% url 'image_edit_platesolving_settings' image.get_id %}">
+                    {% endif %}
+                {% else  %}
+                    <a href="#feature-restricted-modal" data-toggle="modal">
                 {% endif %}
+
                     <i class="icon-location-arrow"></i>
                     {% trans "Plate-solving settings" %}
                 </a>
