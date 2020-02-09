@@ -1,0 +1,7 @@
+{% load i18n %}
+
+{% url 'subscription_list' as url %}
+
+<span>
+{% blocktrans %}Sorry, this filter requires an <a href="{{ url }}">AstroBin Ultimate</a> subscription.{% endblocktrans %}
+</span>
