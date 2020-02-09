@@ -2,9 +2,9 @@
 {% load tags %}
 
 {% if request.user|has_valid_subscription:subscription.pk %}
-    <a class="btn btn-primary disabled" href="#">
+    <buttoon class="btn btn-primary disabled" disabled>
         {% trans "Buy" %}
-    </a>
+    </buttoon>
 
     <p class="already-on-plan">{% trans "You are already on this plan" %}</p>
 {% else %}
