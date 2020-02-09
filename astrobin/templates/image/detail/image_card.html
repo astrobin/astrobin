@@ -22,28 +22,30 @@
                     </h4>
                 </div>
 
-                <div class="gear">
-                    <div class="gear-inner">
-                        {% for i in gear_list %}
-                            {% if request.user|can_view_technical_card_item:i %}
-                                <p>
-                                    <strong class="card-label">{% trans i.0 %}:</strong>
-                                    {% for g in i.1 %}
-                                        <a rel="popover"
-                                           class="gear-popover{% if g.commercial and g.commercial.is_paid or g.commercial.producer == request.user %} btn btn-mini btn-warning{% endif %}"
-                                           data-load="{% url 'gear_popover_ajax' g.id %}"
-                                           href="{% url 'gear_page' g.id g.slug %}">{{ g }}</a>
-                                        {% if not forloop.last %}
-                                            ,&nbsp;{% endif %}
-                                    {% endfor %}
-                                </p>
-                            {% endif %}
-                        {% endfor %}
+                {% if gear_list|gear_list_has_items %}
+                    <div class="gear">
+                        <div class="gear-inner">
+                            {% for i in gear_list %}
+                                {% if request.user|can_view_technical_card_item:i %}
+                                    <p>
+                                        <strong class="card-label">{% trans i.0 %}:</strong>
+                                        {% for g in i.1 %}
+                                            <a rel="popover"
+                                               class="gear-popover{% if g.commercial and g.commercial.is_paid or g.commercial.producer == request.user %} btn btn-mini btn-warning{% endif %}"
+                                               data-load="{% url 'gear_popover_ajax' g.id %}"
+                                               href="{% url 'gear_page' g.id g.slug %}">{{ g }}</a>
+                                            {% if not forloop.last %}
+                                                ,&nbsp;{% endif %}
+                                        {% endfor %}
+                                    </p>
+                                {% endif %}
+                            {% endfor %}
+                        </div>
                     </div>
-                </div>
 
-                {% if request.user|can_view_full_technical_card %}
-                    <hr />
+                    {% if request.user|can_view_full_technical_card %}
+                        <hr />
+                    {% endif %}
                 {% endif %}
 
                 <div class="acquisition">

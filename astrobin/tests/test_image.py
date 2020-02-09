@@ -2583,3 +2583,22 @@ class ImageTest(TestCase):
         response = self.client.get(reverse('image_detail', kwargs={'id': image.get_id()}))
         self.assertContains(response, "id=\"platesolving-status\"")
         image.delete()
+
+    def test_image_gear_list_is_hidden(self):
+        image = Generators.image()
+        response = self.client.get(reverse('image_detail', kwargs={'id': image.get_id()}))
+        self.assertNotContains(response, "<div class=\"gear\">")
+        image.delete()
+
+    def test_image_gear_list_is_shown(self):
+        image = Generators.image()
+        telescope = Generators.telescope()
+
+        image.imaging_telescopes.add(telescope)
+        image.save()
+
+        response = self.client.get(reverse('image_detail', kwargs={'id': image.get_id()}))
+        self.assertContains(response, "<div class=\"gear\">")
+
+        telescope.delete()
+        image.delete()

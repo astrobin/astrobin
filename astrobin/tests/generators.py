@@ -4,7 +4,7 @@ import string
 from django.contrib.auth.models import User, Group
 from subscription.models import Subscription, UserSubscription
 
-from astrobin.models import Image, ImageRevision
+from astrobin.models import Image, ImageRevision, Telescope
 
 
 class Generators:
@@ -32,6 +32,16 @@ class Generators:
     def imageRevision():
         return ImageRevision.objects.create(
             image=Generators.image()
+        )
+
+    @staticmethod
+    def telescope():
+        return Telescope.objects.create(
+            make="Brand XYZ",
+            name="Telescope 100/1000",
+            aperture=100,
+            focal_length=1000,
+            type="REFR ACHRO",
         )
 
     @staticmethod

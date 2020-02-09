@@ -458,3 +458,12 @@ def thumbnail_height(image, alias):
     ratio = w / float(thumb_w)
 
     return math.floor(h / ratio)
+
+
+@register.filter
+def gear_list_has_items(gear_list):
+    for gear in gear_list:
+        if len(gear[1]) > 0:
+            return True
+
+    return False

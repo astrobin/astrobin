@@ -133,7 +133,7 @@ def can_view_technical_card_item(user, item):
     if is_free(user) and item[0] not in allowed_items:
         return False
 
-    return item[1] is not None
+    return item[1] is not None and len(item[1]) > 0
 
 
 @register.filter
