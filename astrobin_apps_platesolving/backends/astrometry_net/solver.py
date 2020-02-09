@@ -34,7 +34,7 @@ class Solver(AbstractPlateSolvingBackend):
         json = python2json(args)
         url = self.get_url(service)
 
-        log.debug("Astrmetry.net: sending request to %s" % url)
+        log.debug("Astrometry.net: sending request to %s" % url)
 
         # If we're sending a file, format a multipart/form-data
         if file_args is not None:
