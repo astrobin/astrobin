@@ -2102,6 +2102,18 @@ BODY:first-of-type ul.as-list, x:-moz-any-link, x:default { /* Target FF 3.5+ */
         filter: alpha(opacity=100);
       }
     }
+
+    #astrometry-position-tooltip {
+      text-align: center;
+      background: rgba(0, 0, 0, 0.95);
+      border: 1px solid rgba(255, 255, 255, 0.5);
+      color: rgba(255, 255, 255, 0.5);
+      padding: $spacer-medium;
+      position: fixed;
+      display: none;
+      white-space: nowrap;
+      z-index: 3;
+    }
   }
 }
 
@@ -2145,9 +2157,20 @@ BODY:first-of-type ul.as-list, x:-moz-any-link, x:default { /* Target FF 3.5+ */
   }
 }
 
-.image-detail {
+.technical-card {
   p {
-    margin: 2px;
+    margin: $spacer-small 0;
+  }
+
+  .astrometry-header {
+    margin-bottom: $spacer-large;
+    font-weight: bold;
+    font-size: 15px;
+    color: $strong-text-color;
+
+    &.advanced {
+      margin-top: $spacer-medium
+    }
   }
 
   .image-histogram {

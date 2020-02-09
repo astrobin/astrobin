@@ -122,18 +122,6 @@ class Solution(models.Model):
         blank=True,
     )
 
-    pixinsight_serial_number = models.CharField(
-        max_length=32,
-        null=True,
-        blank=True,
-    )
-
-    pixinsight_svg_annotation = models.ImageField(
-        upload_to='pixinsight-solutions',
-        null=True,
-        blank=True,
-    )
-
     objects_in_field = models.TextField(
         null=True,
         blank=True,
@@ -146,25 +134,11 @@ class Solution(models.Model):
         decimal_places=3,
     )
 
-    advanced_ra = models.DecimalField(
-        null=True,
-        blank=True,
-        max_digits=9,
-        decimal_places=6,
-    )
-
     dec = models.DecimalField(
         null=True,
         blank=True,
         max_digits=6,
         decimal_places=3,
-    )
-
-    advanced_dec = models.DecimalField(
-        null=True,
-        blank=True,
-        max_digits=9,
-        decimal_places=6,
     )
 
     pixscale = models.DecimalField(
@@ -174,25 +148,11 @@ class Solution(models.Model):
         decimal_places=3,
     )
 
-    advanced_pixscale = models.DecimalField(
-        null=True,
-        blank=True,
-        max_digits=9,
-        decimal_places=6,
-    )
-
     orientation = models.DecimalField(
         null=True,
         blank=True,
         max_digits=6,
         decimal_places=3,
-    )
-
-    advanced_orientation = models.DecimalField(
-        null=True,
-        blank=True,
-        max_digits=9,
-        decimal_places=6,
     )
 
     radius = models.DecimalField(
@@ -205,6 +165,110 @@ class Solution(models.Model):
     annotations = models.TextField(
         null=True,
         blank=True,
+    )
+
+    pixinsight_serial_number = models.CharField(
+        max_length=32,
+        null=True,
+        blank=True,
+    )
+
+    pixinsight_svg_annotation = models.ImageField(
+        upload_to='pixinsight-solutions',
+        null=True,
+        blank=True,
+    )
+
+    advanced_ra = models.DecimalField(
+        null=True,
+        blank=True,
+        max_digits=6,
+        decimal_places=3,
+    )
+
+    advanced_ra_top_left = models.DecimalField(
+        null=True,
+        blank=True,
+        max_digits=6,
+        decimal_places=3,
+    )
+
+    advanced_ra_top_right = models.DecimalField(
+        null=True,
+        blank=True,
+        max_digits=6,
+        decimal_places=3,
+    )
+
+    advanced_ra_bottom_left = models.DecimalField(
+        null=True,
+        blank=True,
+        max_digits=6,
+        decimal_places=3,
+    )
+
+    advanced_ra_bottom_right = models.DecimalField(
+        null=True,
+        blank=True,
+        max_digits=6,
+        decimal_places=3,
+    )
+
+    advanced_dec = models.DecimalField(
+        null=True,
+        blank=True,
+        max_digits=6,
+        decimal_places=3,
+    )
+
+    advanced_dec_top_left = models.DecimalField(
+        null=True,
+        blank=True,
+        max_digits=6,
+        decimal_places=3,
+    )
+
+    advanced_dec_top_right = models.DecimalField(
+        null=True,
+        blank=True,
+        max_digits=6,
+        decimal_places=3,
+    )
+
+    advanced_dec_bottom_left = models.DecimalField(
+        null=True,
+        blank=True,
+        max_digits=6,
+        decimal_places=3,
+    )
+
+    advanced_dec_bottom_right = models.DecimalField(
+        null=True,
+        blank=True,
+        max_digits=6,
+        decimal_places=3,
+    )
+
+    advanced_pixscale = models.DecimalField(
+        null=True,
+        blank=True,
+        max_digits=6,
+        decimal_places=3,
+    )
+
+    advanced_orientation = models.DecimalField(
+        null=True,
+        blank=True,
+        max_digits=6,
+        decimal_places=3,
+    )
+
+    advanced_flipped = models.NullBooleanField()
+
+    advanced_wcs_transformation = models.CharField(
+        null=True,
+        blank=True,
+        max_length=64,
     )
 
     def __unicode__(self):

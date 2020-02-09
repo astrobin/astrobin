@@ -40,20 +40,23 @@
                     class="astrobin-image-container
                     hover-overlay
                     {% if mod == 'solved' %} hover-overlay-fixed{% endif %} hover-overlay-solution">
-                <a href="{% get_image_url image revision_label 'full' %}{% if mod %}{% query_string "mod=mod" "" %}{% endif %}">
+                <a href="
+                        {% get_image_url image revision_label 'full' %}{% if mod %}{% query_string "mod=mod" "" %}{% endif %}">
 
-                {% if instance_to_platesolve.solution|is_advanced_success_status %}
-                    <img src="{{ IMAGES_URL }}{{ instance_to_platesolve.solution.pixinsight_svg_annotation }}"
-                         alt="{{ image.title|escape }}"
-                         width="{{ instance_to_platesolve | thumbnail_width:'regular' }}"
-                         height="{{ instance_to_platesolve | thumbnail_height:'regular' }}"
-                    />
-                {% else %}
-                    <img
-                            onerror="solution_image_error(this)"
-                            src="{{ IMAGES_URL }}{{ instance_to_platesolve.solution.image_file }}"
-                            alt="{{ image.title|escape }}" />
-                {% endif %}
+                    {% if instance_to_platesolve.solution|is_advanced_success_status %}
+                        <img class="coords"
+                             src="{{ IMAGES_URL }}{{ instance_to_platesolve.solution.pixinsight_svg_annotation }}"
+                             alt="{{ image.title|escape }}"
+                             width="{{ instance_to_platesolve | thumbnail_width:'regular' }}"
+                             height="{{ instance_to_platesolve | thumbnail_height:'regular' }}"
+                        />
+                        <div id="astrometry-position-tooltip"></div>
+                    {% else %}
+                        <img
+                                onerror="solution_image_error(this)"
+                                src="{{ IMAGES_URL }}{{ instance_to_platesolve.solution.image_file }}"
+                                alt="{{ image.title|escape }}" />
+                    {% endif %}
                 </a>
             </div>
         {% endif %}
@@ -62,10 +65,10 @@
 
 {% block extra_js %}
     <script type="text/javascript">
-        var attempts = 0;
+        var platesolving_attempts = 0;
 
         function solution_image_error(img) {
-            if (attempts > 1)
+            if (platesolving_attempts > 1)
                 return;
 
             if (img.src.indexOf('images/solutions') === -1) {
@@ -76,7 +79,34 @@
                 img.src = split[0] + 'solutions' + split[1];
             }
 
-            attempts++;
+            platesolving_attempts++;
         }
+
+        {% if instance_to_platesolve.solution|is_advanced_success_status %}
+            $(document).ready(function () {
+                var $image = $('.coords');
+                var $tooltip = $('#astrometry-position-tooltip');
+                var position = [
+                    $image.offset().left,
+                    $image.offset().top,
+                    $image.offset().left + $image.outerWidth(),
+                    $image.offset().top + $image.outerHeight()
+                ];
+
+                $image.mousemove(function (e) {
+                    var x = e.pageX - position[0];
+                    var y = e.pageY - position[1];
+                    $($tooltip)
+                        .text(x + ', ' + y)
+                        .css({
+                            left: x - $($tooltip).width() / 2 - 10,
+                            top: y - 42
+                        })
+                        .show();
+                }).mouseleave(function () {
+                    $($tooltip).hide();
+                });
+            });
+        {% endif %}
     </script>
 {% endblock %}

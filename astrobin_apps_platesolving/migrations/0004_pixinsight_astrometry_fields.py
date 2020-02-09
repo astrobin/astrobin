@@ -15,21 +15,21 @@ class Migration(migrations.Migration):
         migrations.AddField(
             model_name='solution',
             name='advanced_dec',
-            field=models.DecimalField(blank=True, decimal_places=6, max_digits=9, null=True),
+            field=models.DecimalField(blank=True, decimal_places=3, max_digits=6, null=True),
         ),
         migrations.AddField(
             model_name='solution',
             name='advanced_orientation',
-            field=models.DecimalField(blank=True, decimal_places=6, max_digits=9, null=True),
+            field=models.DecimalField(blank=True, decimal_places=3, max_digits=6, null=True),
         ),
         migrations.AddField(
             model_name='solution',
             name='advanced_pixscale',
-            field=models.DecimalField(blank=True, decimal_places=6, max_digits=9, null=True),
+            field=models.DecimalField(blank=True, decimal_places=3, max_digits=6, null=True),
         ),
         migrations.AddField(
             model_name='solution',
             name='advanced_ra',
-            field=models.DecimalField(blank=True, decimal_places=6, max_digits=9, null=True),
+            field=models.DecimalField(blank=True, decimal_places=3, max_digits=6, null=True),
         ),
     ]
