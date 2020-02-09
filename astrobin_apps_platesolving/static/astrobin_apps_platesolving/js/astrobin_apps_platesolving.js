@@ -143,7 +143,7 @@
                             });
                             break;
                         case Status.SUCCESS:
-                            self.$bar.css({"width": "75%"});
+                            self.$bar.css({"width": self.perform_advanced === "True" ? "50%" : "75%"});
                             self.$icon.attr('class', 'icon-warning-sign');
                             self.$content.text(self.solveFinalizingMsg);
                             $.ajax({
@@ -182,7 +182,7 @@
                             });
                             break;
                         case Status.ADVANCED_PENDING:
-                            self.onStatusPending();
+                            self.onStatusAdvancedPending();
                             break;
                     }
                 }
@@ -209,7 +209,7 @@
         },
 
         onStartedAdvanced: function () {
-            this.onStatusPending();
+            this.onStatusAdvancedPending();
         },
 
         onStatusMissing: function () {
@@ -228,7 +228,7 @@
             var self = this;
 
             self.$icon.attr('class', 'icon-ok');
-            self.$bar.css({"width": this.perform_advanced === "True" ? "25%" : "50%"});
+            self.$bar.css({"width": self.perform_advanced === "True" ? "25%" : "50%"});
             self.$content.text(self.solveStartedMsg);
 
             self.$root.removeClass('hide');
