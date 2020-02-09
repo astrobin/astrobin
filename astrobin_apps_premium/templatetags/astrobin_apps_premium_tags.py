@@ -1,5 +1,6 @@
 import datetime
 
+from django.db.models import QuerySet
 from django.template import Library
 
 from astrobin_apps_premium.utils import premium_get_valid_usersubscription
@@ -133,7 +134,13 @@ def can_view_technical_card_item(user, item):
     if is_free(user) and item[0] not in allowed_items:
         return False
 
-    return item[1] is not None and len(item[1]) > 0
+    if item[1] is None:
+        return False
+
+    if isinstance(item[1], QuerySet):
+        return len(item[1]) > 0
+
+    return True
 
 
 @register.filter
