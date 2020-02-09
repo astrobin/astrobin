@@ -146,11 +146,25 @@ class Solution(models.Model):
         decimal_places=3,
     )
 
+    advanced_ra = models.DecimalField(
+        null=True,
+        blank=True,
+        max_digits=9,
+        decimal_places=6,
+    )
+
     dec = models.DecimalField(
         null=True,
         blank=True,
         max_digits=6,
         decimal_places=3,
+    )
+
+    advanced_dec = models.DecimalField(
+        null=True,
+        blank=True,
+        max_digits=9,
+        decimal_places=6,
     )
 
     pixscale = models.DecimalField(
@@ -160,11 +174,25 @@ class Solution(models.Model):
         decimal_places=3,
     )
 
+    advanced_pixscale = models.DecimalField(
+        null=True,
+        blank=True,
+        max_digits=9,
+        decimal_places=6,
+    )
+
     orientation = models.DecimalField(
         null=True,
         blank=True,
         max_digits=6,
         decimal_places=3,
+    )
+
+    advanced_orientation = models.DecimalField(
+        null=True,
+        blank=True,
+        max_digits=9,
+        decimal_places=6,
     )
 
     radius = models.DecimalField(
@@ -186,18 +214,23 @@ class Solution(models.Model):
         self.status = Solver.MISSING
         self.submission_id = None
         self.pixinsight_serial_number = None
+        self.pixinsight_svg_annotation.delete()
+        self.pixinsight_svg_annotation = None
         self.image_file.delete()
         self.image_file = None
         self.skyplot_zoom1.delete()
         self.skyplot_zoom1 = None
-        self.pixinsight_image_file.delete()
-        self.pixinsight_image_file = None
         self.objects_in_field = None
         self.ra = None
         self.dec = None
         self.pixscale = None
         self.orientation = None
         self.radius = None
+        self.advanced_ra = None
+        self.advanced_dec = None
+        self.advanced_pixscale = None
+        self.advanced_orientation = None
+        self.advanced_radius = None
         self.annotations = None
         self.save()
 

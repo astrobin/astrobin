@@ -217,9 +217,15 @@ class SolutionPixInsightWebhook(base.View):
         return super(SolutionPixInsightWebhook, self).dispatch(request, *args, **kwargs)
 
     def post(self, request, *args, **kwargs):
-        serial_number = request.POST['serialNumber']
-        svg = request.POST['svgAnnotation']
-        status = request.POST['status']
+        serial_number = request.POST.get('serialNumber')
+        status = request.POST.get('status', 'ERROR')
+        svg = request.POST.get('svgAnnotation', None)
+        ra = request.POST.get('centerRA', None)
+        dec = request.POST.get('centerDec', None)
+        rotation = request.POST.get('rotation', None)
+        resolution = request.POST.get('resolution', None)
+
+
         log.debug("PixInsight Webhook called for %s: %s" % (serial_number, status))
 
         solution = get_object_or_404(Solution, pixinsight_serial_number=serial_number)
@@ -227,6 +233,10 @@ class SolutionPixInsightWebhook(base.View):
         if status == 'OK':
             solution.pixinsight_svg_annotation.save(serial_number + ".svg", ContentFile(svg))
             solution.status = Solver.ADVANCED_SUCCESS
+            solution.advanced_ra = ra
+            solution.advanced_dec = dec
+            solution.advanced_orientation = rotation
+            solution.advanced_pixscale = resolution
         else:
             solution.status = Solver.ADVANCED_FAILED
 
