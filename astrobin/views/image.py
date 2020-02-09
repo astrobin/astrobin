@@ -670,7 +670,6 @@ class ImageDetailView(ImageDetailViewBase):
             'ssa': ssa,
             'basic_data': basic_data,
             'deep_sky_data': deep_sky_data,
-            # TODO: check that solved image is correcly laid on top
             'private_message_form': PrivateMessageForm(),
             'upload_revision_form': ImageRevisionUploadForm(),
             'dates_label': _("Dates"),
