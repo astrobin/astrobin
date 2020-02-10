@@ -123,7 +123,7 @@ from astrobin.views import (
     stats_subject_total_images_ajax,
     stats_subject_integration_monthly_ajax,
 
-    affiliates,
+
     api_help,
     trending_astrophotographers,
     stats,
@@ -427,7 +427,6 @@ urlpatterns = [
     ### PAGES VIEWS                                                         ###
     ###########################################################################
 
-    url(r'^affiliates/$', affiliates, name='affiliates'),
     url(r'^help/api/$', api_help, name='api'),
     url(r'^trending-astrophotographers/',
         trending_astrophotographers,

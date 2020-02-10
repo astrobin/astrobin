@@ -151,13 +151,13 @@
                                 </a>
                                 <ul class="dropdown-menu">
                                     <li>
-                                        <a href="https://welcome.astrobin.com/help">
+                                        <a href="https://welcome.astrobin.com/help" target="_blank">
                                             <i class="icon-info-sign"></i>
                                             {% trans "What is this site?" %}
                                         </a>
                                     </li>
                                     <li>
-                                        <a href="https://welcome.astrobin.com/faq">
+                                        <a href="https://welcome.astrobin.com/faq" target="_blank">
                                             <i class="icon-question-sign"></i>
                                             {% trans "FAQ" %}
                                         </a>
@@ -172,9 +172,9 @@
                                         </a>
                                     </li>
                                     <li>
-                                        <a href="{% url 'affiliates' %}">
+                                        <a href="https://welcome.astrobin.com/sponsors" target="_blank">
                                             <i class="icon-group"></i>
-                                            {% trans "Affiliates" %}
+                                            {% trans "Sponsors" %}
                                         </a>
                                     </li>
 
@@ -457,10 +457,11 @@
                             <li><a href="{% url 'index' %}">{% trans "Home" %}</a></li>
                             <li><a href="/blog/">{% trans "Blog" %}</a></li>
                             <li><a href="{% url 'pybb:index' %}">{% trans "Forum" %}</a></li>
-                            <li><a href="https://welcome.astrobin.com/about">{% trans "About" %}</a></li>
-                            <li><a href="https://welcome.astrobin.com/faq">{% trans "FAQ" %}</a></li>
-                            <li><a href="https://welcome.astrobin.com/terms-of-service">{% trans "Terms of servic" %}</a></li>
-                            <li><a href="https://welcome.astrobin.com/community-guidelines">{% trans "Guidelines" %}</a></li>
+                            <li><a href="https://welcome.astrobin.com/about" target="_blank">{% trans "About" %}</a></li>
+                            <li><a href="https://welcome.astrobin.com/faq" target="_blank">{% trans "FAQ" %}</a></li>
+                            <li><a href="https://welcome.astrobin.com/terms-of-service" target="_blank">{% trans "Terms of servic" %}</a></li>
+                            <li><a href="https://welcome.astrobin.com/community-guidelines" target="_blank">{% trans "Guidelines" %}</a></li>
+                            <li><a href="https://welcome.astrobin.com/sponsors" target="_blank">{% trans "Sponsors" %}</a></li>
                             <li>
                                 <a href="https://bitbucket.org/siovene/astrobin/overview" target="_blank">
                                     {% trans "Source code" %}

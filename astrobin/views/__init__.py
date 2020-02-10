@@ -2050,25 +2050,6 @@ def api_help(request):
     return render(request, 'api.html')
 
 
-@require_GET
-def affiliates(request):
-    return object_list(
-        request,
-        queryset=UserProfile.objects
-            .filter(
-            Q(user__groups__name='Producers') |
-            Q(user__groups__name='Retailers'))
-            .filter(
-            Q(user__groups__name='Paying'))
-            .exclude(
-            Q(company_name=None) |
-            Q(company_name="")).distinct(),
-        template_name='affiliates.html',
-        template_object_name='affiliate',
-        paginate_by=100,
-    )
-
-
 @login_required
 @require_GET
 def location_edit(request, id):
