@@ -1,5 +1,6 @@
 {% load common_tags %}
 {% load astrobin_apps_premium_tags %}
+{% load astrobin_apps_platesolving_tags %}
 {% load i18n %}
 {% load tags %}
 
@@ -120,110 +121,109 @@
                 {% if instance_to_platesolve.solution and request.user|can_view_full_technical_card %}
                     <hr />
 
-                    <div class="row">
-                        <div class="span-12">
-                            <div class="astrometry-header basic">{% trans "Basic astrometry details" %}</div>
+                    {% if not instance_to_platesolve.solution|has_started_advanced_platesolving %}
+                        <div class="astrometry-header basic">{% trans "Basic astrometry details" %}</div>
+                    {% endif %}
 
-                            <p>
-                                <strong class="card-label">Astrometry.net job:</strong>
-                                <a href="http://nova.astrometry.net/status/{{ instance_to_platesolve.solution.submission_id }}"
-                                   target="_blank">
-                                    {{ instance_to_platesolve.solution.submission_id }}
-                                </a>
-                            </p>
+                    <p>
+                        <strong class="card-label">Astrometry.net job:</strong>
+                        <a href="http://nova.astrometry.net/status/{{ instance_to_platesolve.solution.submission_id }}"
+                           target="_blank">
+                            {{ instance_to_platesolve.solution.submission_id }}
+                        </a>
+                    </p>
 
-                            {% if instance_to_platesolve.solution.ra is not None %}
-                                <p>
-                                    <strong class="card-label">{% trans "RA center" %}:</strong>
-                                    <abbr title="{{ instance_to_platesolve.solution.ra }} {% trans "degrees" %}">
-                                        {{ instance_to_platesolve.solution.ra | ra_to_hms }}
-                                    </abbr>
-                                </p>
+                    {% if instance_to_platesolve.solution.ra is not None %}
+                        <p>
+                            <strong class="card-label">{% trans "RA center" %}:</strong>
+                            <abbr title="{{ instance_to_platesolve.solution.ra }} {% trans "degrees" %}">
+                                {{ instance_to_platesolve.solution.ra | ra_to_hms }}
+                            </abbr>
+                        </p>
+                    {% endif %}
+
+                    {% if instance_to_platesolve.solution.dec is not None %}
+                        <p>
+                            <strong class="card-label">{% trans "DEC center" %}:</strong>
+                            <abbr title="{{ instance_to_platesolve.solution.dec }} {% trans "degrees" %}">
+                                {{ instance_to_platesolve.solution.dec | dec_to_dms }}
+                            </abbr>
+                        </p>
+                    {% endif %}
+
+                    {% if instance_to_platesolve.solution.pixscale is not None %}
+                        <p>
+                            <strong class="card-label">{% trans "Pixel scale" %}:</strong>
+                            {{ instance_to_platesolve.solution.pixscale }} {% trans "arcsec/pixel" %}
+                        </p>
+                    {% endif %}
+
+                    {% if instance_to_platesolve.solution.orientation is not None %}
+                        <p>
+                            <strong class="card-label">{% trans "Orientation" %}:</strong>
+                            {{ instance_to_platesolve.solution.orientation }} {% trans "degrees" %}
+                        </p>
+                    {% endif %}
+
+                    {% if instance_to_platesolve.solution.radius is not None %}
+                        <p>
+                            <strong class="card-label">{% trans "Field radius" %}:</strong>
+                            {{ instance_to_platesolve.solution.radius }}
+                        </p>
+                    {% endif %}
+
+
+                    {% if instance_to_platesolve.solution.pixinsight_serial_number is not None %}
+                        <div class="astrometry-header advanced">{% trans "Advanced astrometry details" %}</div>
+
+                        <p>
+                            <strong class="card-label">PixInsight task s/n:</strong>
+                            {{ instance_to_platesolve.solution.pixinsight_serial_number }}
+                        </p>
+                    {% endif %}
+
+                    {% if instance_to_platesolve.solution.advanced_ra is not None %}
+                        <p>
+                            <strong class="card-label">{% trans "RA center" %}:</strong>
+                            <abbr title="{{ instance_to_platesolve.solution.advanced_ra }} {% trans "degrees" %}">
+                                {{ instance_to_platesolve.solution.advanced_ra | ra_to_hms }}
+                            </abbr>
+                        </p>
+                    {% endif %}
+
+                    {% if instance_to_platesolve.solution.advanced_dec is not None %}
+                        <p>
+                            <strong class="card-label">{% trans "DEC center" %}:</strong>
+                            <abbr title="{{ instance_to_platesolve.solution.advanced_dec }} {% trans "degrees" %}">
+                                {{ instance_to_platesolve.solution.advanced_dec | dec_to_dms }}
+                            </abbr>
+                        </p>
+                    {% endif %}
+
+                    {% if instance_to_platesolve.solution.advanced_pixscale is not None %}
+                        <p>
+                            <strong class="card-label">{% trans "Pixel scale" %}:</strong>
+                            {{ instance_to_platesolve.solution.advanced_pixscale }}
+                            {% trans "arcsec/pixel" %}
+                        </p>
+                    {% endif %}
+
+                    {% if instance_to_platesolve.solution.advanced_orientation is not None %}
+                        <p>
+                            <strong class="card-label">{% trans "Orientation" %}:</strong>
+                            {{ instance_to_platesolve.solution.advanced_orientation }} {% trans "degrees" %}
+                            {% if instance_to_platesolve.solution.advanved_flipped %}
+                                {% trans "(flipped)" %}
                             {% endif %}
+                        </p>
+                    {% endif %}
 
-                            {% if instance_to_platesolve.solution.dec is not None %}
-                                <p>
-                                    <strong class="card-label">{% trans "DEC center" %}:</strong>
-                                    <abbr title="{{ instance_to_platesolve.solution.dec }} {% trans "degrees" %}">
-                                        {{ instance_to_platesolve.solution.dec | dec_to_dms }}
-                                    </abbr>
-                                </p>
-                            {% endif %}
-
-                            {% if instance_to_platesolve.solution.pixscale is not None %}
-                                <p>
-                                    <strong class="card-label">{% trans "Pixel scale" %}:</strong>
-                                    {{ instance_to_platesolve.solution.pixscale }} {% trans "arcsec/pixel" %}
-                                </p>
-                            {% endif %}
-
-                            {% if instance_to_platesolve.solution.orientation is not None %}
-                                <p>
-                                    <strong class="card-label">{% trans "Orientation" %}:</strong>
-                                    {{ instance_to_platesolve.solution.orientation }} {% trans "degrees" %}
-                                </p>
-                            {% endif %}
-
-                            {% if instance_to_platesolve.solution.radius is not None %}
-                                <p>
-                                    <strong class="card-label">{% trans "Field radius" %}:</strong>
-                                    {{ instance_to_platesolve.solution.radius }}
-                                </p>
-                            {% endif %}
-                        </div>
-
-                        <div class="span-12">
-                            <div class="astrometry-header advanced">{% trans "Advanced astrometry details" %}</div>
-
-                            <p>
-                                <strong class="card-label">PixInsight task s/n:</strong>
-                                {{ instance_to_platesolve.solution.pixinsight_serial_number }}
-                            </p>
-
-                            {% if instance_to_platesolve.solution.advanced_ra is not None %}
-                                <p>
-                                    <strong class="card-label">{% trans "RA center" %}:</strong>
-                                    <abbr title="{{ instance_to_platesolve.solution.advanced_ra }} {% trans "degrees" %}">
-                                        {{ instance_to_platesolve.solution.advanced_ra | ra_to_hms }}
-                                    </abbr>
-                                </p>
-                            {% endif %}
-
-                            {% if instance_to_platesolve.solution.advanced_dec is not None %}
-                                <p>
-                                    <strong class="card-label">{% trans "DEC center" %}:</strong>
-                                    <abbr title="{{ instance_to_platesolve.solution.advanced_dec }} {% trans "degrees" %}">
-                                        {{ instance_to_platesolve.solution.advanced_dec | dec_to_dms }}
-                                    </abbr>
-                                </p>
-                            {% endif %}
-
-                            {% if instance_to_platesolve.solution.advanced_pixscale is not None %}
-                                <p>
-                                    <strong class="card-label">{% trans "Pixel scale" %}:</strong>
-                                    {{ instance_to_platesolve.solution.advanced_pixscale }}
-                                    {% trans "arcsec/pixel" %}
-                                </p>
-                            {% endif %}
-
-                            {% if instance_to_platesolve.solution.advanced_orientation is not None %}
-                                <p>
-                                    <strong class="card-label">{% trans "Orientation" %}:</strong>
-                                    {{ instance_to_platesolve.solution.advanced_orientation }} {% trans "degrees" %}
-                                    {% if instance_to_platesolve.solution.advanved_flipped %}
-                                        {% trans "(flipped)" %}
-                                    {% endif %}
-                                </p>
-                            {% endif %}
-
-                            {% if instance_to_platesolve.solution.advanced_wcs_transfrmation is not None %}
-                                <p>
-                                    <strong class="card-label">{% trans "WCS transformation" %}:</strong>
-                                    {{ instance_to_platesolve.solution.advanced_wcs_transformation }}
-                                </p>
-                            {% endif %}
-                        </div>
-                    </div>
+                    {% if instance_to_platesolve.solution.advanced_wcs_transfrmation is not None %}
+                        <p>
+                            <strong class="card-label">{% trans "WCS transformation" %}:</strong>
+                            {{ instance_to_platesolve.solution.advanced_wcs_transformation }}
+                        </p>
+                    {% endif %}
                 {% endif %}
 
                 {% if request.user|can_view_full_technical_card %}

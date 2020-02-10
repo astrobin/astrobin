@@ -57,13 +57,13 @@ class SolveView(base.View):
             solver = Solver()
 
             try:
-                f = getFromStorage(target, 'hd')
+                url = target.thumbnail('hd', {'sync': True})
 
                 if solution.settings.blind:
-                    submission = solver.solve(f)
+                    submission = solver.solve(url)
                 else:
                     submission = solver.solve(
-                        f,
+                        url,
                         scale_units=solution.settings.scale_units,
                         scale_lower=solution.settings.scale_min,
                         scale_upper=solution.settings.scale_max,
@@ -97,7 +97,8 @@ class SolveAdvancedView(base.View):
             solver = AdvancedSolver()
 
             try:
-                submission = solver.solve(target.image_file.url, ra=solution.ra, dec=solution.dec,
+                url = target.thumbnail('hd', {'sync': True})
+                submission = solver.solve(url, ra=solution.ra, dec=solution.dec,
                                           pixscale=solution.pixscale)
 
                 solution.status = Solver.ADVANCED_PENDING
@@ -262,6 +263,7 @@ class SolutionPixInsightWebhook(base.View):
             solution.advanced_wcs_transformation = wcs_transformation
         else:
             solution.status = Solver.ADVANCED_FAILED
+            log.error(request.POST.get('errorMessage', 'Unknown error'))
 
         solution.save()
 

@@ -20,8 +20,8 @@ class Solver(SolverBase):
         module = import_module(module_name)
         return getattr(module, backend_name)()
 
-    def solve(self, image_file, **kwargs):
-        return self.backend().start(image_file, **kwargs)
+    def solve(self, image_url, **kwargs):
+        return self.backend().start(image_url, **kwargs)
 
     def status(self, submission):
         if submission is None or submission == 0:

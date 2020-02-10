@@ -182,71 +182,71 @@ class Solution(models.Model):
     advanced_ra = models.DecimalField(
         null=True,
         blank=True,
-        max_digits=6,
-        decimal_places=3,
+        max_digits=11,
+        decimal_places=8,
     )
 
     advanced_ra_top_left = models.DecimalField(
         null=True,
         blank=True,
-        max_digits=6,
-        decimal_places=3,
+        max_digits=11,
+        decimal_places=8,
     )
 
     advanced_ra_top_right = models.DecimalField(
         null=True,
         blank=True,
-        max_digits=6,
-        decimal_places=3,
+        max_digits=11,
+        decimal_places=8,
     )
 
     advanced_ra_bottom_left = models.DecimalField(
         null=True,
         blank=True,
-        max_digits=6,
-        decimal_places=3,
+        max_digits=11,
+        decimal_places=8,
     )
 
     advanced_ra_bottom_right = models.DecimalField(
         null=True,
         blank=True,
-        max_digits=6,
-        decimal_places=3,
+        max_digits=11,
+        decimal_places=8,
     )
 
     advanced_dec = models.DecimalField(
         null=True,
         blank=True,
-        max_digits=6,
-        decimal_places=3,
+        max_digits=11,
+        decimal_places=9,
     )
 
     advanced_dec_top_left = models.DecimalField(
         null=True,
         blank=True,
-        max_digits=6,
-        decimal_places=3,
+        max_digits=11,
+        decimal_places=8,
     )
 
     advanced_dec_top_right = models.DecimalField(
         null=True,
         blank=True,
-        max_digits=6,
-        decimal_places=3,
+        max_digits=11,
+        decimal_places=8,
     )
 
     advanced_dec_bottom_left = models.DecimalField(
         null=True,
         blank=True,
-        max_digits=6,
-        decimal_places=3,
+        max_digits=11,
+        decimal_places=9,
     )
 
     advanced_dec_bottom_right = models.DecimalField(
         null=True,
         blank=True,
-        max_digits=6,
-        decimal_places=3,
+        max_digits=11,
+        decimal_places=8,
     )
 
     advanced_pixscale = models.DecimalField(

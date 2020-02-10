@@ -130,7 +130,7 @@ def retrieve_thumbnail(pk, alias, options):
             thumb = image.thumbnail_raw(alias, options)
 
             if thumb:
-                url = settings.IMAGES_URL + thumb.name
+                url = thumb.url
                 field = image.get_thumbnail_field(revision_label)
                 if not field.name.startswith('images/'):
                     field.name = 'images/' + field.name
