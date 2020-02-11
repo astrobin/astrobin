@@ -271,6 +271,27 @@ class Solution(models.Model):
         max_length=64,
     )
 
+    advanced_matrix_rect = models.CharField(
+        null=True,
+        blank=True,
+        max_length=131,
+    )
+
+    advanced_matrix_delta = models.IntegerField(
+        null=True,
+        blank=True,
+    )
+
+    advanced_ra_matrix = models.TextField(
+        null=True,
+        blank=True,
+    )
+
+    advanced_dec_matrix = models.TextField(
+        null=True,
+        blank=True,
+    )
+
     def __unicode__(self):
         return "solution_%d" % self.id
 

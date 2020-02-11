@@ -220,47 +220,37 @@ class SolutionPixInsightWebhook(base.View):
     def post(self, request, *args, **kwargs):
         serial_number = request.POST.get('serialNumber')
         status = request.POST.get('status', 'ERROR')
-        svg = request.POST.get('svgAnnotation', None)
-
-        ra = request.POST.get('centerRA', None)
-        ra_tl = request.POST.get('topLeftRA', None)
-        ra_tr = request.POST.get('topRightRA', None)
-        ra_bl = request.POST.get('bottomLeftRA', None)
-        ra_br = request.POST.get('bottomRightRA', None)
-        
-        dec = request.POST.get('centerDec', None)
-        dec_tl = request.POST.get('topLeftDec', None)
-        dec_tr = request.POST.get('topRightDec', None)
-        dec_bl = request.POST.get('bottomLeftDec', None)
-        dec_br = request.POST.get('bottomRightDec', None)
-        
-        rotation = request.POST.get('rotation', None)
-        resolution = request.POST.get('resolution', None)
-        flipped = request.POST.get('flipped', None) == 'true'
-        wcs_transformation = request.POST.get('wcs_transformation', None)
-
 
         log.debug("PixInsight Webhook called for %s: %s" % (serial_number, status))
 
         solution = get_object_or_404(Solution, pixinsight_serial_number=serial_number)
 
         if status == 'OK':
+            svg = request.POST.get('svgAnnotation', None)
             solution.pixinsight_svg_annotation.save(serial_number + ".svg", ContentFile(svg))
             solution.status = Solver.ADVANCED_SUCCESS
-            solution.advanced_ra = ra
-            solution.advanced_ra_top_left = ra_tl
-            solution.advanced_ra_top_right = ra_tr
-            solution.advanced_ra_bottom_left = ra_bl
-            solution.advanced_ra_bottom_right = ra_br
-            solution.advanced_dec = dec
-            solution.advanced_dec_top_left = dec_tl
-            solution.advanced_dec_top_right = dec_tr
-            solution.advanced_dec_bottom_left = dec_bl
-            solution.advanced_dec_bottom_right = dec_br
-            solution.advanced_orientation = rotation
-            solution.advanced_pixscale = resolution
-            solution.advanced_flipped = flipped
-            solution.advanced_wcs_transformation = wcs_transformation
+
+            solution.advanced_ra = request.POST.get('centerRA', None)
+            solution.advanced_ra_top_left = request.POST.get('topLeftRA', None)
+            solution.advanced_ra_top_right = request.POST.get('topRightRA', None)
+            solution.advanced_ra_bottom_left = request.POST.get('bottomLeftRA', None)
+            solution.advanced_ra_bottom_right = request.POST.get('bottomRightRA', None)
+
+            solution.advanced_dec = request.POST.get('centerDec', None)
+            solution.advanced_dec_top_left = request.POST.get('topLeftDec', None)
+            solution.advanced_dec_top_right = request.POST.get('topRightDec', None)
+            solution.advanced_dec_bottom_left = request.POST.get('bottomLeftDec', None)
+            solution.advanced_dec_bottom_right = request.POST.get('bottomRightDec', None)
+
+            solution.advanced_orientation = request.POST.get('rotation', None)
+            solution.advanced_pixscale = request.POST.get('resolution', None)
+            solution.advanced_flipped = request.POST.get('flipped', None) == 'true'
+            solution.advanced_wcs_transformation = request.POST.get('wcs_transformation', None)
+
+            solution.advanced_matrix_rect = request.POST.get('matrixRect', None)
+            solution.advanced_matrix_delta = request.POST.get('matrixDelta', None)
+            solution.advanced_ra_matrix = request.POST.get('raMatrix', None)
+            solution.advanced_dec_matrix = request.POST.get('decMatrix', None)
         else:
             solution.status = Solver.ADVANCED_FAILED
             log.error(request.POST.get('errorMessage', 'Unknown error'))
