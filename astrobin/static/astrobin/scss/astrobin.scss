@@ -2077,6 +2077,10 @@ BODY:first-of-type ul.as-list, x:-moz-any-link, x:default { /* Target FF 3.5+ */
     height: 100%;
     z-index: 1;
 
+    a {
+      cursor: crosshair;
+    }
+
     img {
       @include opacity(0);
       filter: alpha(opacity=0);
