@@ -6,6 +6,8 @@
 {% load i18n %}
 {% load tags %}
 {% load staticfiles %}
+{% load astrobin_apps_platesolving_tags %}
+
 
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
         "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
@@ -106,17 +108,20 @@
     </div>
 </div>
 
-<div id="full-size-image">
+<div id="full-size-image"{% if real %} class="real"{% endif %}>
     {% astrobin_image image alias revision=revision_label url_size='regular' %}
 
     {% if show_solution and not real%}
         <div class="astrobin-image-container hover-overlay hover-overlay-solution">
             <a href="{% get_image_url image revision_label %}{% if mod %}{% query_string "mod=mod" "" %}{% endif %}">
-                <img src="{{ IMAGES_URL }}{{ instance_to_platesolve.solution.pixinsight_svg_annotation }}"
-                       alt="{{ image.title|escape }}"
-                       width="{{ instance_to_platesolve | thumbnail_width:'hd' }}"
-                       height="{{ instance_to_platesolve | thumbnail_height:'hd' }}"
+                <img
+                        class="show-ra-dec-coordinates"
+                        src="{{ IMAGES_URL }}{{ instance_to_platesolve.solution.pixinsight_svg_annotation }}"
+                        alt="{{ image.title|escape }}"
+                        width="{{ instance_to_platesolve | thumbnail_width:'hd' }}"
+                        height="{{ instance_to_platesolve | thumbnail_height:'hd' }}"
                 />
+                <div id="ra-dec-coordinates"></div>
             </a>
         </div>
     {% endif %}
@@ -125,15 +130,23 @@
 <script type="text/javascript" src="{% static 'common/js/jquery-1.8.3.js' %}"></script>
 <script type="text/javascript" src="{% static 'cookielaw/js/cookielaw.js' %}"></script>
 <script type="text/javascript" src="{% static 'astrobin_apps_images/js/astrobin_apps_images.js' %}"></script>
+<script src="{% static 'astrobin_apps_platesolving/js/CoordinateInterpolation.js' %}"></script>
+<script src="{% static 'astrobin_apps_platesolving/js/astrobin_apps_platesolving_mousemove.js' %}"></script>
 <script type="text/javascript" src="{% static 'astrobin/js/astrobin.js' %}"></script>
 {% insert_hit_count_js_variables for image %}
 <script type="text/javascript">
     $(document).ready(function () {
         astrobin_common.init_ajax_csrf_token();
-        {% if image.w > 0 %}
-            if ($(window).width() * .95 > {{image.w}}) {
-                $('#full-size-image img').addClass('real');
-            }
+
+        {% if instance_to_platesolve.solution|is_advanced_success_status %}
+            new AstroBinPlatesolvingMouseMove(
+                '{{ instance_to_platesolve.solution.advanced_ra_matrix }}'.split(',').map(parseFloat),
+                '{{ instance_to_platesolve.solution.advanced_dec_matrix }}'.split(',').map(parseFloat),
+                '{{ instance_to_platesolve.solution.advanced_matrix_rect }}'.split(',').map(parseFloat),
+                parseFloat('{{ instance_to_platesolve.solution.advanced_matrix_delta }}'),
+                {{ instance_to_platesolve | thumbnail_width:'hd' }},
+                {{ instance_to_platesolve | thumbnail_height:'hd' }}
+            );
         {% endif %}
     });
 </script>

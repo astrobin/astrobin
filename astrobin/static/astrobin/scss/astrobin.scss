@@ -2109,10 +2109,10 @@ BODY:first-of-type ul.as-list, x:-moz-any-link, x:default { /* Target FF 3.5+ */
       border: 1px solid rgba(255, 255, 255, 0.5);
       color: rgba(255, 255, 255, 0.5);
       padding: $spacer-medium;
-      position: fixed;
+      position: absolute;
       display: none;
       white-space: nowrap;
-      z-index: 3;
+      z-index: 1;
     }
   }
 }
@@ -2994,6 +2994,15 @@ div.token-input-dropdown {
 #full-size-image {
   text-align: center;
   position: relative;
+  width: 95%;
+  max-width: 1824px; // HD size
+  margin: 0 auto;
+
+  &.real {
+    width: auto;
+    max-width: 16536px; // ought to be enough for everyone ;)
+    margin: $spacer-large;
+  }
 
   .astrobin-image-container {
     figure {
@@ -3001,21 +3010,11 @@ div.token-input-dropdown {
     }
 
     img {
-      max-width: 95%;
       margin-top: $spacer-medium;
       @include box-shadow;
 
       &.real {
-        max-width: 65536px; /* ... ought to be enough for everybody... */
-        width: auto;
-      }
-    }
-
-    &.hover-overlay {
-      max-width: 100%;
-
-      img {
-        max-width: 95%;
+        max-width: 16536px;
       }
     }
   }
