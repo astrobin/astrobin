@@ -4,6 +4,9 @@
 
         self.$image = $('.show-ra-dec-coordinates');
         self.$tooltip = $('#ra-dec-coordinates');
+        self.$xRuler = $('#x-ruler');
+        self.$yRuler = $('#y-ruler');
+
         self.enableCall = true;
 
         self.$image.mousemove(function (e) {
@@ -24,24 +27,26 @@
                 matrixRect[2],
                 matrixRect[3],
                 matrixDelta);
-            var interpolationText = interpolation.interpolateAsText(scaledX, scaledY);
+            var interpolationText = interpolation.interpolateAsText(scaledX, scaledY, false);
 
             self.$tooltip
-                .text(interpolationText.alpha + ', ' + interpolationText.delta)
-                .css({
-                    left: x - self.$tooltip.outerWidth() / 2,
-                    top: y - 45
-                })
+                .text(
+                    'α: ' + interpolationText.alpha + ' | δ: ' + interpolationText.delta
+                )
                 .show();
+
+            self.$xRuler.css({top: y}).show();
+            self.$yRuler.css({left: x}).show();
 
             setTimeout(function () {
                 self.enableCall = true;
-            }, 25);
+            }, 10);
         }).mouseleave(function () {
             self.$tooltip.hide();
+            self.$xRuler.hide();
+            self.$yRuler.hide();
         });
     }
 
     win.AstroBinPlatesolvingMouseMove = PlatesolvingMouseMove;
 })(window);
-

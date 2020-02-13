@@ -41,9 +41,8 @@
                     class="astrobin-image-container
                     hover-overlay
                     {% if mod == 'solved' %} hover-overlay-fixed{% endif %} hover-overlay-solution">
-                <a href="
-
-                        {% get_image_url image revision_label 'full' %}{% if mod %}{% query_string "mod=mod" "" %}{% endif %}">
+                <a {% if instance_to_platesolve.solution|is_advanced_success_status %}class="advanced-plate-solution"{% endif %}
+                   href="{% get_image_url image revision_label 'full' %}{% if mod %}{% query_string "mod=mod" "" %}{% endif %}">
 
                     {% if instance_to_platesolve.solution|is_advanced_success_status %}
                         <img class="show-ra-dec-coordinates"
@@ -53,6 +52,8 @@
                              height="{{ instance_to_platesolve | thumbnail_height:'regular' }}"
                         />
                         <div id="ra-dec-coordinates"></div>
+                        <div id="x-ruler"></div>
+                        <div id="y-ruler"></div>
                     {% else %}
                         <img
                                 onerror="solution_image_error(this)"

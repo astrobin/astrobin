@@ -34,5 +34,10 @@ def is_advanced_success_status(solution):
 
 
 @register.filter
+def is_advanced_failed_status(solution):
+    return solution is not None and solution.status == SolverBase.ADVANCED_FAILED
+
+
+@register.filter
 def has_started_advanced_platesolving(solution):
     return solution is not None and solution.status >= SolverBase.ADVANCED_PENDING

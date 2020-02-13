@@ -24,7 +24,7 @@
     <meta name="robots" content="index, follow, noarchive" />
     <meta name="googlebot" content="noarchive" />
 
-    <link href="https://fonts.googleapis.com/css?family=Noto+Sans:400,400i,700|Noto+Serif:700&subset=latin-ext"
+    <link href="https://fonts.googleapis.com/css?family=Noto+Sans:400,400i,700|Noto+Serif:700|Roboto+Mono&subset=latin-ext"
           rel="stylesheet">
     {% stylesheet 'screen' %}
 
@@ -111,9 +111,9 @@
 <div id="full-size-image"{% if real %} class="real"{% endif %}>
     {% astrobin_image image alias revision=revision_label url_size='regular' %}
 
-    {% if show_solution and not real%}
+    {% if show_advanced_solution and not real %}
         <div class="astrobin-image-container hover-overlay hover-overlay-solution">
-            <a href="{% get_image_url image revision_label %}{% if mod %}{% query_string "mod=mod" "" %}{% endif %}">
+            <a class="advanced-plate-solution" href="{% get_image_url image revision_label %}{% if mod %}{% query_string "mod=mod" "" %}{% endif %}">
                 <img
                         class="show-ra-dec-coordinates"
                         src="{{ IMAGES_URL }}{{ instance_to_platesolve.solution.pixinsight_svg_annotation }}"
@@ -121,11 +121,14 @@
                         width="{{ instance_to_platesolve | thumbnail_width:'hd' }}"
                         height="{{ instance_to_platesolve | thumbnail_height:'hd' }}"
                 />
-                <div id="ra-dec-coordinates"></div>
+                <div id="x-ruler"></div>
+                <div id="y-ruler"></div>
             </a>
         </div>
     {% endif %}
 </div>
+
+<div id="ra-dec-coordinates" class="full"></div>
 
 <script type="text/javascript" src="{% static 'common/js/jquery-1.8.3.js' %}"></script>
 <script type="text/javascript" src="{% static 'cookielaw/js/cookielaw.js' %}"></script>

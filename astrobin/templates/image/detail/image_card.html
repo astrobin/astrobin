@@ -182,6 +182,12 @@
                         </p>
                     {% endif %}
 
+                    {% if instance_to_platesolve.solution|is_advanced_failed_status%}
+                        <p>
+                            <strong class="card-label">{% trans "Status" %}:</strong> {% trans "Error" %}
+                        </p>
+                    {% endif %}
+
                     {% if instance_to_platesolve.solution.advanced_ra is not None %}
                         <p>
                             <strong class="card-label">{% trans "RA center" %}:</strong>

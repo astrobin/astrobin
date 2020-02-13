@@ -231,7 +231,7 @@ class SolutionPixInsightWebhook(base.View):
 
             resize_ratio = min(target.w, settings.THUMBNAIL_ALIASES['']['hd']['size'][0]) / \
                            float(settings.THUMBNAIL_ALIASES['']['regular']['size'][0]) / \
-                           1.5  # type: float
+                           1.75  # type: float
 
             svg_620 = re.sub(
                 r"font-size=\"(\d+)\"",

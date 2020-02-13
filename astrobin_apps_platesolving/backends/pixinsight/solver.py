@@ -26,6 +26,7 @@ class Solver(AbstractPlateSolvingBackend):
             'centerRA=%f' % kwargs.pop('ra'),
             'centerDec=%f' % kwargs.pop('dec'),
             'imageResolution=%f' % kwargs.pop('pixscale'),
+            'moreLayers=VdB|Sharpless|Bernard|PGC',
         ])
 
         data = {
