@@ -31,7 +31,8 @@
 
             self.$tooltip
                 .text(
-                    'α: ' + interpolationText.alpha + ' | δ: ' + interpolationText.delta
+                    'x: ' + x + ' | y: ' + y +
+                    ' | α: ' + interpolationText.alpha + ' | δ: ' + interpolationText.delta
                 )
                 .show();
 
