@@ -1,5 +1,6 @@
 import logging
 import os
+import re
 import time
 import urllib2
 
@@ -25,7 +26,6 @@ from astrobin_apps_platesolving.models import PlateSolvingSettings
 from astrobin_apps_platesolving.models import Solution
 from astrobin_apps_platesolving.serializers import SolutionSerializer
 from astrobin_apps_platesolving.solver import Solver, AdvancedSolver, SolverBase
-from astrobin_apps_platesolving.utils import getFromStorage
 
 log = logging.getLogger('apps')
 
@@ -227,7 +227,24 @@ class SolutionPixInsightWebhook(base.View):
 
         if status == 'OK':
             svg = request.POST.get('svgAnnotation', None)
+            target = get_target(solution.object_id, solution.content_type_id)  # type: Union[Image, ImageRevision]
+
+            resize_ratio = min(target.w, settings.THUMBNAIL_ALIASES['']['hd']['size'][0]) / \
+                           float(settings.THUMBNAIL_ALIASES['']['regular']['size'][0]) / \
+                           1.5  # type: float
+
+            svg_620 = re.sub(
+                r"font-size=\"(\d+)\"",
+                lambda m: "font-size=\"" + str(int(m.group(1)) * resize_ratio) + "\"",
+                svg)
+
+            svg_620 = re.sub(
+                r"stroke-width=\"(\d+)\"",
+                lambda m: "stroke-width=\"" + str(int(m.group(1)) * resize_ratio) + "\"",
+                svg_620)
+
             solution.pixinsight_svg_annotation.save(serial_number + ".svg", ContentFile(svg))
+            solution.pixinsight_svg_annotation_620.save(serial_number + ".svg", ContentFile(svg_620))
             solution.status = Solver.ADVANCED_SUCCESS
 
             solution.advanced_ra = request.POST.get('centerRA', None)

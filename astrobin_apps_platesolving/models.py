@@ -179,6 +179,12 @@ class Solution(models.Model):
         blank=True,
     )
 
+    pixinsight_svg_annotation_620 = models.ImageField(
+        upload_to='pixinsight-solutions-620',
+        null=True,
+        blank=True,
+    )
+
     advanced_ra = models.DecimalField(
         null=True,
         blank=True,
@@ -314,6 +320,8 @@ class Solution(models.Model):
         self.pixinsight_serial_number = None
         self.pixinsight_svg_annotation.delete()
         self.pixinsight_svg_annotation = None
+        self.pixinsight_svg_annotation_620.delete()
+        self.pixinsight_svg_annotation_620 = None
 
         self.advanced_ra = None
         self.advanced_ra_bottom_left = None
