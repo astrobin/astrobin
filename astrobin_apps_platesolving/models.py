@@ -298,9 +298,7 @@ class Solution(models.Model):
     def clear(self):
         self.status = Solver.MISSING
         self.submission_id = None
-        self.pixinsight_serial_number = None
-        self.pixinsight_svg_annotation.delete()
-        self.pixinsight_svg_annotation = None
+
         self.image_file.delete()
         self.image_file = None
         self.skyplot_zoom1.delete()
@@ -311,12 +309,30 @@ class Solution(models.Model):
         self.pixscale = None
         self.orientation = None
         self.radius = None
+        self.annotations = None
+
+        self.pixinsight_serial_number = None
+        self.pixinsight_svg_annotation.delete()
+        self.pixinsight_svg_annotation = None
+
         self.advanced_ra = None
+        self.advanced_ra_bottom_left = None
+        self.advanced_ra_bottom_right = None
+        self.advanced_ra_top_left = None
+        self.advanced_ra_top_right = None
         self.advanced_dec = None
+        self.advanced_dec_bottom_left = None
+        self.advanced_dec_bottom_right = None
+        self.advanced_dec_top_left = None
+        self.advanced_dec_top_right = None
         self.advanced_pixscale = None
         self.advanced_orientation = None
         self.advanced_radius = None
-        self.annotations = None
+        self.advanced_ra_matrix = None
+        self.advanced_dec_matrix = None
+        self.advanced_matrix_rect = None
+        self.advanced_matrix_delta = None
+
         self.save()
 
     class Meta:
