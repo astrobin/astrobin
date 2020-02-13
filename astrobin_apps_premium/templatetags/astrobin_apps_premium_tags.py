@@ -167,3 +167,8 @@ def can_perform_basic_platesolving(user):
 @register.filter
 def can_perform_advanced_platesolving(user):
     return is_any_ultimate(user)
+
+
+@register.filter
+def can_see_real_resolution(user):
+    return not is_free(user)

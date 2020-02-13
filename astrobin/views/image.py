@@ -62,6 +62,7 @@ from astrobin_apps_groups.models import Group
 from astrobin_apps_iotd.models import Iotd
 from astrobin_apps_notifications.utils import push_notification
 from astrobin_apps_platesolving.models import Solution
+from astrobin_apps_premium.templatetags.astrobin_apps_premium_tags import can_see_real_resolution
 from nested_comments.models import NestedComment
 from rawdata.forms import (
     PublicDataPool_SelectExistingForm,
@@ -759,7 +760,7 @@ class ImageFullView(ImageDetailView):
         context = super(ImageFullView, self).get_context_data(**kwargs)
 
         mod = self.request.GET.get('mod')
-        real = 'real' in self.request.GET
+        real = 'real' in self.request.GET and can_see_real_resolution(self.request.user)
         if real:
             alias = 'real'
         else:

@@ -1,13 +1,15 @@
-{% load astrobin_apps_images_tags %}
-{% load common_tags %}
-{% load pipeline %}
-{% load hitcount_tags %}
-{% load cookielaw_tags %}
 {% load i18n %}
-{% load tags %}
 {% load staticfiles %}
-{% load astrobin_apps_platesolving_tags %}
 
+{% load cookielaw_tags %}
+{% load hitcount_tags %}
+{% load pipeline %}
+
+{% load tags %}
+{% load common_tags %}
+{% load astrobin_apps_platesolving_tags %}
+{% load astrobin_apps_images_tags %}
+{% load astrobin_apps_premium_tags %}
 
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
         "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
@@ -65,16 +67,17 @@
                     <div class="full-title">
                         <span class="title">{{ image.title|escape|default:_("(no title)") }}</span>
                         <span class="subtitle">
-                                    (
+                            (
                             {% if image.published %}
                                 {{ image.published }}
                             {% else %}
                                 {{ image.uploaded }}
                             {% endif %}
+
                             {% url 'user_page' image.user.username as the_url %}
-                            {% blocktrans with user=image.user.userprofile %}by
-                                <a href="{{ the_url }}">{{ user }}</a>{% endblocktrans %})
-                                </span>
+                            {% blocktrans with user=image.user.userprofile %}by<a href="{{ the_url }}">{{ user }}</a>{% endblocktrans %}
+                            )
+                        </span>
                     </div>
                 </li>
             </ul>
@@ -82,22 +85,19 @@
                 {% with request.GET.mod as mod %}
                     <li>
                         {% if real %}
-                            <a class="btn btn-primary navbar-btn" href="
-                                    {% get_image_url image revision_label 'full' %}{% if mod %}{% query_string "mod=mod" "real" %}{% endif %}">
+                            <a class="btn btn-primary navbar-btn" href="{% get_image_url image revision_label 'full' %}{% if mod %}{% query_string "mod=mod" "real" %}{% endif %}">
                                 <i class="icon-resize-full"></i>
                                 {% trans "Fit to window" %}
                             </a>
-                        {% else %}
-                            <a class="btn btn-primary navbar-btn" href="
-                                    {% get_image_url image revision_label 'full' %}{% query_string "mod=mod,real=''" "" %}">
+                        {% elif request.user|can_see_real_resolution %}
+                            <a class="btn btn-primary navbar-btn" href="{% get_image_url image revision_label 'full' %}{% query_string "mod=mod,real=''" "" %}">
                                 <i class="icon-fullscreen"></i>
                                 {% trans "Full resolution" %}
                             </a>
                         {% endif %}
                     </li>
                     <li>
-                        <a class="btn navbar-btn" href="
-                                {% get_image_url image revision_label %}{% if mod %}{% query_string "mod=mod" "" %}{% endif %}">
+                        <a class="btn navbar-btn" href=" {% get_image_url image revision_label %}{% if mod %}{% query_string "mod=mod" "real" %}{% endif %}">
                             <i class="icon-list-alt"></i>
                             {% trans "Technical card" %}
                         </a>
@@ -113,7 +113,8 @@
 
     {% if show_advanced_solution and not real %}
         <div class="astrobin-image-container hover-overlay hover-overlay-solution">
-            <a class="advanced-plate-solution" href="{% get_image_url image revision_label %}{% if mod %}{% query_string "mod=mod" "" %}{% endif %}">
+            <a class="advanced-plate-solution"
+               href="{% get_image_url image revision_label %}{% if mod %}{% query_string "mod=mod" "" %}{% endif %}">
                 <img
                         class="show-ra-dec-coordinates"
                         src="{{ IMAGES_URL }}{{ instance_to_platesolve.solution.pixinsight_svg_annotation }}"
