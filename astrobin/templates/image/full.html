@@ -75,7 +75,7 @@
                             {% endif %}
 
                             {% url 'user_page' image.user.username as the_url %}
-                            {% blocktrans with user=image.user.userprofile %}by<a href="{{ the_url }}">{{ user }}</a>{% endblocktrans %}
+                            {% blocktrans with user=image.user.userprofile %}by <a href="{{ the_url }}">{{ user }}</a>{% endblocktrans %}
                             )
                         </span>
                     </div>
