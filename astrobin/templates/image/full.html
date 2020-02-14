@@ -112,16 +112,20 @@
     {% astrobin_image image alias revision=revision_label url_size='regular' %}
 
     {% if show_advanced_solution and not real %}
-        <div class="astrobin-image-container hover-overlay hover-overlay-solution">
+        <div
+                class="astrobin-image-container hover-overlay hover-overlay-solution advanced-plate-solution show-ra-dec-coordinates"
+                style="
+                    width: {{ instance_to_platesolve | thumbnail_width:'hd' }}px;
+                    height: {{ instance_to_platesolve | thumbnail_height:'hd' }}px;
+                ">
             <a class="advanced-plate-solution"
                href="{% get_image_url image revision_label %}{% if mod %}{% query_string "mod=mod" "" %}{% endif %}">
-                <img
-                        class="show-ra-dec-coordinates"
-                        src="{{ IMAGES_URL }}{{ instance_to_platesolve.solution.pixinsight_svg_annotation }}"
-                        alt="{{ image.title|escape }}"
+                <object
+                        type="image/svg+xml"
+                        data="{{ instance_to_platesolve.solution.pixinsight_svg_annotation.url }}"
                         width="{{ instance_to_platesolve | thumbnail_width:'hd' }}"
-                        height="{{ instance_to_platesolve | thumbnail_height:'hd' }}"
-                />
+                        height="{{ instance_to_platesolve | thumbnail_height:'hd' }}">
+                </object>
                 <div id="x-ruler"></div>
                 <div id="y-ruler"></div>
             </a>

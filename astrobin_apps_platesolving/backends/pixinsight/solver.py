@@ -2,6 +2,7 @@ import logging
 
 import requests
 from django.conf import settings
+from django.templatetags.static import get_static_prefix
 from django.urls import reverse
 
 from astrobin_apps_platesolving.backends.base import AbstractPlateSolvingBackend

@@ -32,7 +32,7 @@ else:
     MEDIA_URL = BASE_URL + MEDIA_ROOT
 
     STATIC_ROOT = MEDIA_ROOT
-    STATIC_URL = MEDIA_ROOT + 'static/'
+    STATIC_URL = MEDIA_URL + 'static/'
 
 # Normalize
 if not MEDIA_URL.endswith('/'):

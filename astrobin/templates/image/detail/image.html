@@ -39,19 +39,24 @@
         {% if show_solution %}
             <div
                     class="astrobin-image-container
+                    show-ra-dec-coordinates
                     hover-overlay
-                    {% if mod == 'solved' %} hover-overlay-fixed{% endif %} hover-overlay-solution">
-                <a {% if instance_to_platesolve.solution|is_advanced_success_status %}class="advanced-plate-solution"{% endif %}
-                   href="{% get_image_url image revision_label 'full' %}{% if mod %}{% query_string "mod=mod" "" %}{% endif %}">
+                    hover-overlay-solution
+                    {% if instance_to_platesolve.solution|is_advanced_success_status %}
+                        advanced-plate-solution show-ra-dec-coordinates
+                    {% endif %}
+                    {% if mod == 'solved' %}
+                        hover-overlay-fixed
+                    {% endif %}">
+                <a href="{% get_image_url image revision_label 'full' %}{% if mod %}{% query_string "mod=mod" "" %}{% endif %}">
 
                     {% if instance_to_platesolve.solution|is_advanced_success_status %}
-                        <img class="show-ra-dec-coordinates"
-                             src="{{ IMAGES_URL }}{{ instance_to_platesolve.solution.pixinsight_svg_annotation_620 }}"
-                             alt="{{ image.title|escape }}"
-                             width="{{ instance_to_platesolve | thumbnail_width:'regular' }}"
-                             height="{{ instance_to_platesolve | thumbnail_height:'regular' }}"
-                        />
-                        <div id="ra-dec-coordinates"></div>
+                        <object
+                                type="image/svg+xml"
+                                data="{{ instance_to_platesolve.solution.pixinsight_svg_annotation_620.url }}"
+                                width="{{ instance_to_platesolve | thumbnail_width:'regular' }}"
+                                height="{{ instance_to_platesolve | thumbnail_height:'regular' }}">
+                        </object>
                         <div id="x-ruler"></div>
                         <div id="y-ruler"></div>
                     {% else %}
@@ -62,9 +67,13 @@
                     {% endif %}
                 </a>
             </div>
+
+            <div id="ra-dec-coordinates"></div>
         {% endif %}
+
     </div> <!-- main-image-inner -->
 </div> <!-- main-image -->
+
 
 {% block extra_js %}
     <script src="{% static 'astrobin_apps_platesolving/js/CoordinateInterpolation.js' %}"></script>
