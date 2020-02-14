@@ -35,6 +35,13 @@
             var interpolationText = interpolation.interpolateAsText(scaledX, scaledY, false, true, true);
 
             self.$tooltip.show();
+
+            if (self.$tooltip.hasClass('full')) {
+                self.$tooltip.css({
+                    right: 'calc(50% - ' + self.$tooltip.outerWidth() / 2 + 'px)'
+                });
+            }
+
             self.$xRuler.css({top: y}).show();
             self.$yRuler.css({left: x}).show();
 

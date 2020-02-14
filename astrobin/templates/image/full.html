@@ -115,16 +115,14 @@
         <div
                 class="astrobin-image-container hover-overlay hover-overlay-solution advanced-plate-solution show-ra-dec-coordinates"
                 style="
-                    width: {{ instance_to_platesolve | thumbnail_width:'hd' }}px;
-                    height: {{ instance_to_platesolve | thumbnail_height:'hd' }}px;
+                    max-width: {{ instance_to_platesolve | thumbnail_width:'hd' }}px;
+                    max-height: {{ instance_to_platesolve | thumbnail_height:'hd' }}px;
                 ">
             <a class="advanced-plate-solution"
                href="{% get_image_url image revision_label %}{% if mod %}{% query_string "mod=mod" "" %}{% endif %}">
                 <object
                         type="image/svg+xml"
-                        data="{{ instance_to_platesolve.solution.pixinsight_svg_annotation.url }}"
-                        width="{{ instance_to_platesolve | thumbnail_width:'hd' }}"
-                        height="{{ instance_to_platesolve | thumbnail_height:'hd' }}">
+                        data="{{ instance_to_platesolve.solution.pixinsight_svg_annotation.url }}">
                 </object>
                 <div id="x-ruler"></div>
                 <div id="y-ruler"></div>
