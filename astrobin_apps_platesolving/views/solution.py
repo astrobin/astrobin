@@ -199,7 +199,16 @@ class SolutionFinalizeView(base.View):
             annotations_obj = solver.annotations(solution.submission_id)
             solution.annotations = simplejson.dumps(annotations_obj)
             annotator = Annotator(solution)
-            annotated_image = annotator.annotate()
+
+            try:
+                annotated_image = annotator.annotate()
+            except ThumbnailNotReadyException:
+                log.debug("Solution annotation %d: thumbnail not ready" % solution.id)
+                solution.status = Solver.PENDING
+                solution.save()
+                context = {'status': solution.status}
+                return HttpResponse(simplejson.dumps(context), content_type='application/json')
+
             filename, ext = os.path.splitext(target.image_file.name)
             annotated_filename = "%s-%d%s" % (filename, int(time.time()), ext)
             if annotated_image:

@@ -50,6 +50,7 @@ from astrobin.views import (
     image_upload,
     image_upload_process,
     image_revision_upload_process,
+    image_fits_upload_process,
 
     stats_get_image_views_ajax,
     me,
@@ -467,6 +468,7 @@ urlpatterns = [
     url(r'^upload/$', image_upload, name='image_upload'),
     url(r'^upload/process/$', image_upload_process, name='image_upload_process'),
     url(r'^upload/revision/process/$', image_revision_upload_process, name='image_revision_upload_process'),
+    url(r'^upload/fits/process/$', image_fits_upload_process, name='image_fits_upload_process'),
 
     ###########################################################################
     ### IMAGE VIEWS                                                         ###

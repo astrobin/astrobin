@@ -42,7 +42,7 @@ from astrobin.forms import (
     ImagePromoteForm,
     ImageRevisionUploadForm,
     PrivateMessageForm,
-    ImageEditThumbnailsForm)
+    ImageEditThumbnailsForm, ImageFitsUploadForm)
 from astrobin.models import (
     Collection,
     Image, ImageRevision,
@@ -676,6 +676,7 @@ class ImageDetailView(ImageDetailViewBase):
             'deep_sky_data': deep_sky_data,
             'private_message_form': PrivateMessageForm(),
             'upload_revision_form': ImageRevisionUploadForm(),
+            'upload_fits_form': ImageFitsUploadForm(instance=image),
             'dates_label': _("Dates"),
             'published_on': published_on,
             'show_contains': (image.subject_type == 100 and subjects) or (image.subject_type >= 200),

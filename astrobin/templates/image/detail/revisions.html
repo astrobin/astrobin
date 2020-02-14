@@ -1,6 +1,7 @@
-{% load astrobin_apps_images_tags %}
 {% load i18n %}
 {% load sanitizer %}
+{% load tags %}
+{% load astrobin_apps_images_tags %}
 
 {% if revisions %}
     <div class="subtle-container">
@@ -61,14 +62,28 @@
             {% for r in revisions_with_description %}
                 <div class="revision-description">
                     <h3>{{r.label}}</h3>
-                    <p>
-                        {{r.description|strip_html|safe}}
-                        {% ifequal request.user image.user %}
-                            - <a href="{% url 'image_edit_revision' r.pk %}">
-                                <i class="icon-pencil"></i>
+                    {% if r.description %}
+                        <p>
+                            <strong>{% trans "Description" %}:</strong> {{r.description|strip_html|safe}}
+                            {% ifequal request.user image.user %}
+                                <a href="{% url 'image_edit_revision' r.pk %}">
+                                    {% private_abbr %}
+                                    {% trans "Edit" %}
+                                </a>
+                            {% endifequal %}
+                        </p>
+                    {% endif %}
+
+                    {% if r.fits_file %}
+                        <p>
+                            <strong>{% trans "Associated FITS file" %}</strong>:
+
+                            <a href="{{r.fits_file.url}}">
+                                {% private_abbr %}
+                                {% trans "Download" %}
                             </a>
-                        {% endifequal %}
-                    </p>
+                        </p>
+                    {% endif %}
                 </div>
             {% endfor %}
         {% endif %}

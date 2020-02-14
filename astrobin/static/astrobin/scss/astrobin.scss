@@ -42,7 +42,11 @@ strong, .strong {
 }
 
 abbr[title] {
-  border-color: #555;
+  border: 0;
+
+  &.private {
+    display: inline-block;
+  }
 }
 
 @mixin rotate($amount: 45deg) {

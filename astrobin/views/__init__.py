@@ -1975,6 +1975,47 @@ def image_revision_upload_process(request):
     return HttpResponseRedirect(image_revision.get_absolute_url())
 
 
+@login_required
+@require_POST
+def image_fits_upload_process(request):
+    def fits_upload_error(request, image=None):
+        messages.error(request, _("Invalid image or no image provided. The allowed format is FITS (.fit, .fits, .fts)."))
+
+        if image is not None:
+            return HttpResponseRedirect(image.get_absolute_url())
+
+        return HttpResponseRedirect('/upload/')
+
+    try:
+        image_id = request.POST['image_id']
+    except MultiValueDictKeyError:
+        raise Http404
+
+    image = get_object_or_404(Image, id=image_id)
+
+    if settings.READONLY_MODE:
+        messages.error(request, _(
+            "AstroBin is currently in read-only mode, because of server maintenance. Please try again soon!"))
+        return HttpResponseRedirect(image.get_absolute_url())
+
+    form = ImageFitsUploadForm(request.POST, request.FILES)
+
+    if not form.is_valid():
+        return fits_upload_error(request, image)
+
+    fits_file = request.FILES["fits_file"]
+    ext = os.path.splitext(fits_file.name)[1].lower()
+
+    if ext not in settings.ALLOWED_FITS_IMAGE_EXTENSIONS:
+        return fits_upload_error(request, image)
+
+    image.fits_file = fits_file
+    image.save()
+
+    messages.success(request, _("FITS file uploaded. Thank you!"))
+    return HttpResponseRedirect(image.get_absolute_url())
+
+
 @require_GET
 @user_passes_test(lambda u: u.is_superuser)
 def stats(request):

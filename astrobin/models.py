@@ -88,7 +88,8 @@ class HasSolutionMixin(object):
 
 def image_upload_path(instance, filename):
     ext = filename.split('.')[-1]
-    return "images/%d/%d/%s.%s" % (instance.user.id, date.today().year, uuid.uuid4(), ext)
+    user = instance.user if instance._meta.model_name == u'image' else instance.image.user
+    return "images/%d/%d/%s.%s" % (user.id, date.today().year, uuid.uuid4(), ext)
 
 
 def image_hash():
@@ -889,6 +890,13 @@ class Image(HasSolutionMixin, SafeDeleteModel):
         null=True,
     )
 
+    fits_file = models.ImageField(
+        upload_to=image_upload_path,
+        max_length=256,
+        null=True,
+        blank=True,
+    )
+
     square_cropping = ImageRatioField(
         'image_file',
         '130x130',
@@ -1540,6 +1548,13 @@ class ImageRevision(HasSolutionMixin, SafeDeleteModel):
         width_field='w',
         null=True,
         max_length=256,
+    )
+
+    fits_file = models.ImageField(
+        upload_to=image_upload_path,
+        max_length=256,
+        null=True,
+        blank=True,
     )
 
     square_cropping = ImageRatioField(

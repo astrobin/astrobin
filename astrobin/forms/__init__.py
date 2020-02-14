@@ -23,6 +23,7 @@ from .edit_thumbnails_form import ImageEditThumbnailsForm
 from .edit_watermark_form import ImageEditWatermarkForm
 from .filter_edit_form import FilterEditForm
 from .filter_edit_new_form import FilterEditNewForm
+from .fits_upload_form import ImageFitsUploadForm
 from .flag_thumbs_form import ImageFlagThumbsForm
 from .focal_reducer_edit_form import FocalReducerEditForm
 from .focal_reducer_edit_new_form import FocalReducerEditNewForm
@@ -34,9 +35,9 @@ from .merge_retailed_gear_form import MergeRetailedGearForm
 from .moderator_gear_fix_form import ModeratorGearFixForm
 from .mount_edit_form import MountEditForm
 from .mount_edit_new_form import MountEditNewForm
-from .profile_edit_gear_form import UserProfileEditGearForm
 from .private_message_form import PrivateMessageForm
 from .profile_edit_commercial_form import UserProfileEditCommercialForm
+from .profile_edit_gear_form import UserProfileEditGearForm
 from .profile_edit_gear_form import UserProfileEditGearForm
 from .profile_edit_preferences_form import UserProfileEditPreferencesForm
 from .profile_edit_retailer_form import UserProfileEditRetailerForm

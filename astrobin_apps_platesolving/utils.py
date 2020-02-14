@@ -9,7 +9,7 @@ class ThumbnailNotReadyException(Exception):
 
 
 def getFromStorage(image, alias):
-    url = image.thumbnail(alias)
+    url = image.thumbnail(alias, {'sync': True})
 
     if "placeholder" in url:
         raise ThumbnailNotReadyException

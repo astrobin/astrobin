@@ -1,0 +1,45 @@
+{% load i18n %}
+{% load staticfiles %}
+{% load bootstrap_toolkit %}
+{% load tags %}
+{% load astrobin_apps_images_tags %}
+{% load astrobin_apps_premium_tags %}
+
+{% if image.user|can_perform_advanced_platesolving %}
+    <div class="modal hide fade" id="associate-fits-modal">
+        <form id="upload-revision-form" class="form-inline" action="{% url 'image_fits_upload_process' %}" method="post"
+              enctype="multipart/form-data">{% csrf_token %}
+
+            <div class="modal-header">
+                <a class="close" data-dismiss="modal">&times;</a>
+                <h3>{% trans "Associate FITS file" %}</h3>
+            </div>
+
+            <div class="modal-body">
+                <p>
+                    {% blocktrans %}
+                        To improve the accuracy of your plate-solution even further, please upload one of the FITS files
+                        from your data set. FITS files normally have date and time headers that will allow AstroBin to
+                        calculate solar system body ephemerides and find planets and asteroids in your image.
+                    {% endblocktrans %}
+                </p>
+
+                <p>
+                    {% blocktrans %}
+                        <strong>Please note:</strong> it's very important that the FITS you upload is aligned to your
+                        processed image that you uploaded to this page, otherwise the object annotations will not match.
+                    {% endblocktrans %}
+                </p>
+
+                {{ upload_fits_form|as_bootstrap }}
+
+                <input type="hidden" name="image_id" value="{{ image.id }}" />
+            </div>
+
+            <div class="modal-footer">
+                <input class="btn btn-primary" type="submit" value="{% trans "Upload" %}" />
+                <span class="spinner hide"><img src="{% static 'astrobin/images/loading-bar.gif' %}" alt="" /></span>
+            </div>
+        </form>
+    </div>
+{% endif %}

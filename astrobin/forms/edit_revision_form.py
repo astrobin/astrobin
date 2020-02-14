@@ -35,7 +35,7 @@ class ImageEditRevisionForm(forms.ModelForm):
 
     class Meta:
         model = ImageRevision
-        fields = ('description', 'mouse_hover_image', 'image_file', 'square_cropping')
+        fields = ('description', 'mouse_hover_image', 'image_file', 'square_cropping', 'fits_file')
         widgets = {
             'description': forms.Textarea(attrs={'rows': 4}),
             'image_file': HiddenImageCropWidget

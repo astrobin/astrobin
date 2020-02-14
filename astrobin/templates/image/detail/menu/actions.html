@@ -1,5 +1,7 @@
-{% load common_tags %}
 {% load i18n %}
+{% load common_tags %}
+{% load astrobin_apps_premium_tags %}
+
 
 {% if request.user == image.user or request.user.is_superuser %}
     {% if READONLY_MODE %}
@@ -23,6 +25,15 @@
                     {% trans "Upload new revision" %}
                 </a>
             </li>
+
+            {% if image.user|can_perform_advanced_platesolving %}
+            <li>
+                <a class="upload-fits" href="#associate-fits-modal" data-toggle="modal">
+                    <i class="icon-upload-alt"></i>
+                    {% trans "Associate FITS file" %}
+                </a>
+            </li>
+            {% endif %}
 
             {% if not is_final %}
                 <li>
