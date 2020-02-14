@@ -1,3 +1,4 @@
+{% load i18n %}
 {% load static %}
 {% load tags %}
 {% load common_tags %}
@@ -68,7 +69,12 @@
                 </a>
             </div>
 
-            <div id="ra-dec-coordinates"></div>
+            <div id="ra-dec-coordinates">
+                <div class="coordinates equatorial-coordinates">
+                    <abbr title="{% trans 'Right ascension' %}" class="alpha"></abbr>
+                    <abbr title="{% trans 'Declination' %}" class="delta"></abbr>
+                </div>
+            </div>
         {% endif %}
 
     </div> <!-- main-image-inner -->

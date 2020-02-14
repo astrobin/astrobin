@@ -1,4 +1,4 @@
-   /*
+/*
  * Evaluation of astrometric solutions for the AstroBin/PixInsight image
  * annotation project.
  *
@@ -8,6 +8,9 @@
  *
  * Copyright (C) 2020 Pleiades Astrophoto. All Rights Reserved.
  * Written by Juan Conejero (PTeam)
+ *
+ * Version 1.1.1
+ * Released 2020 February 14
  */
 
 /*
@@ -102,8 +105,9 @@ function BicubicInterpolationBase( M, cols, rows )
  * clamp    Linear clamping threshold to prevent oscillations, in the [0,1]
  *          range. Optional parameter; the default value is 0.3.
  *
- * Reference: Keys, R. G. (1981), Cubic Convolution Interpolation for Digital
- * Image Processing, IEEE Trans. Acoustics, Speech & Signal Proc., Vol. 29,
+ * Reference:
+ * Keys, R. G. (1981), Cubic Convolution Interpolation for Digital Image
+ * Processing, IEEE Trans. Acoustics, Speech & Signal Proc., Vol. 29,
  * pp. 1153-1160.
  */
 function BicubicSplineInterpolation( M, cols, rows, clamp )
@@ -166,6 +170,204 @@ function BicubicSplineInterpolation( M, cols, rows, clamp )
    };
 }
 
+function EphemUtils()
+{
+}
+
+/*
+ * Computes the Julian date (JD) for a given date and time.
+ *
+ * t  The required time point. Can be either a Date object or a string in ISO
+ *    8601 format.
+ *
+ * Returns the Julian date as {jdi,jdf}, where jdi and jdf are the integer and
+ * fractional parts of the JD, respectively.
+ *
+ * Reference:
+ * Meeus, Jean (1991), Astronomical Algorithms, Willmann-Bell, Inc., ch. 7.
+ *
+ * Algorithm modified to support negative Julian dates.
+ */
+EphemUtils.julianDate = function( t )
+{
+   if ( typeof( t ) === "string" )
+      t = new Date( t );
+   let year = t.getUTCFullYear();
+   let month = t.getUTCMonth() + 1;
+   let day = t.getUTCDate() + 1;
+   let dayf = (t.getUTCHours() + (t.getUTCMinutes() + (t.getUTCSeconds() + t.getUTCMilliseconds()/1000)/60)/60)/24;
+
+   if ( month <= 2 )
+   {
+      --year;
+      month += 12;
+   }
+
+   let jdi = Math.trunc( Math.floor( 365.25*(year + 4716) ) ) + Math.trunc( 30.6001*(month + 1) ) + day - 1524;
+   let jdf = dayf - 0.5;
+
+   if ( jdi > 0 && jdf < 0  )
+   {
+      jdf += 1;
+      --jdi;
+   }
+   else if ( jdi < 0 && jdf > 0 )
+   {
+      jdf -= 1;
+      ++jdi;
+   }
+
+   if ( jdi > 2299160 || jdi == 2299160 && jdf >= 0.5 )
+   {
+      let a = Math.trunc( 0.01*year );
+      jdi += 2 - a + (a >> 2);
+   }
+
+   return { jdi: jdi, jdf: jdf };
+};
+
+/*!
+ * Returns the time interval in Julian centuries (36525 days) elapsed since
+ * the standard J2000 epoch (JD 2451545.0 = 2000 January 1.5) for the specified
+ * Julian date.
+ */
+EphemUtils.centuriesSinceJ2000 = function( jd )
+{
+   return (jd.jdi-2451545 + jd.jdf)/36525;
+}
+
+/*
+ * Conversion from radians to degrees.
+ */
+EphemUtils.radiansToDegrees = function( rad )
+{
+   return 57.2957795130823208767981548141051700441964 * rad;
+};
+
+/*
+ * Conversion from degrees to radians.
+ */
+EphemUtils.degreesToRadians = function( deg )
+{
+   return 0.0174532925199432957692369076848861272222 * deg;
+};
+
+/*
+ * Mean obliquity of the ecliptic, IAU 2006 precession model.
+ *
+ * t  The required time point in the UTC timescale. Can be either a Date object
+ *    or a string in ISO 8601 format.
+ *
+ * Returns the mean obliquity in radians.
+ */
+EphemUtils.obliquity = function( t )
+{
+   let jd = EphemUtils.julianDate( t );
+   let T = EphemUtils.centuriesSinceJ2000( jd );
+   let T2 = T*T;
+   let T3 = T2*T;
+   let T4 = T3*T;
+   let T5 = T4*T;
+   return EphemUtils.degreesToRadians( (84381.406
+                                       - T*46.836769
+                                       - T2*0.0001831
+                                       + T3*0.00200340
+                                       - T4*0.000000576
+                                       - T5*0.0000000434)/3600 );
+};
+
+/*
+ * Returns an angle in degrees constrained to the range [0,360).
+ */
+EphemUtils.longitudeDegreesConstrained = function( deg )
+{
+   return (deg < 0) ? deg + 360 : ((deg < 360) ? deg : deg - 360);
+};
+
+/*
+ * Conversion from spherical to rectangular coordinates.
+ *
+ * s  The spherical coordinates {lon,lat} in radians.
+ *
+ * Returns the rectangular coordinates {x,y,z}.
+ */
+EphemUtils.sphericalToRectangular = function( s )
+{
+   let slon = Math.sin( s.lon );
+   let clon = Math.cos( s.lon );
+   let slat = Math.sin( s.lat );
+   let clat = Math.cos( s.lat );
+   return { x: clon*clat,
+            y: slon*clat,
+            z: slat };
+};
+
+/*
+ * Conversion from rectangular to spherical coordinates.
+ *
+ * r  The rectangular coordinates {x,y,z}.
+ *
+ * Returns the spherical coordinates {lon,lat} in radians.
+ */
+EphemUtils.rectangularToSpherical = function( r )
+{
+   let m2 = r.x*r.x + r.y*r.y;
+   return { lon: (m2 == 0) ? 0 : Math.atan2( r.y, r.x ),
+            lat: (r.z == 0) ? 0 : Math.atan2( r.z, Math.sqrt( m2 ) ) };
+};
+
+/*
+ * Conversion from rectangular to spherical coordinates in degrees, with the
+ * longitude constrained to the [0,360) range.
+ *
+ * r  The rectangular coordinates {x,y,z}.
+ *
+ * Returns the spherical coordinates {lon,lat} in degrees, 0 <= lon < 360.
+ */
+EphemUtils.rectangularToSphericalDegreesConstrained = function( r )
+{
+   let s = EphemUtils.rectangularToSpherical( r );
+   s.lon = EphemUtils.longitudeDegreesConstrained( EphemUtils.radiansToDegrees( s.lon ) );
+   s.lat = EphemUtils.radiansToDegrees( s.lat );
+   return s;
+};
+
+/*
+ * Conversion from rectangular equatorial to rectangular ecliptic coordinates.
+ *
+ * r        The rectangular equatorial coordinates {x,y,z}.
+ *
+ * se,ce    The sine and cosine of the obliquity of the ecliptic at the
+ *          observation time.
+ *
+ * Returns the rectangular ecliptic coordinates {x,y,z}.
+ */
+EphemUtils.rectangularEquatorialToEcliptic = function( r, se, ce )
+{
+   return { x: r.x,
+            y: r.y*ce + r.z*se,
+            z: r.z*ce - r.y*se };
+};
+
+/*
+ * Conversion from rectangular equatorial to ICRS rectangular galactic
+ * coordinates.
+ *
+ * r        The rectangular equatorial coordinates {x,y,z}.
+ *
+ * Returns the ICRS rectangular galactic coordinates {x,y,z}.
+ *
+ * Reference:
+ * Jia-Cheng Liu, Zi Zhu, and Hong Zhang, Reconsidering the galactic coordinate
+ * system, Astronomy & Astrophysics manuscript no. AA2010, October 26, 2018.
+ */
+EphemUtils.rectangularEquatorialToGalactic = function( r )
+{
+   return { x: +0.494055821648*r.x - 0.054657353964*r.y - 0.445679169947*r.z,
+            y: -0.872844082054*r.x - 0.484928636070*r.y + 0.746511167077*r.z,
+            z: -0.867710446378*r.x - 0.198779490637*r.y + 0.455593344276*r.z };
+};
+
 /*
  * Interpolation of an astrometric solution given by matrices of celestial
  * coordinates sampled at discrete, regular image coordinate intervals.
@@ -183,8 +385,13 @@ function BicubicSplineInterpolation( M, cols, rows, clamp )
  *
  * delta    Sampling distance, or the distance in image pixels between adjacent
  *          matrix columns or rows.
+ *
+ * date     The observation time in the UTC timescale. Can be a Date object or
+ *          a string in ISO 8601 format. If not specified or undefined,
+ *          ecliptic coordinates won't be calculated by coordinate
+ *          interpolation methods.
  */
-function CoordinateInterpolation( Ma, Md, x0, y0, x1, y1, delta )
+function CoordinateInterpolation( Ma, Md, x0, y0, x1, y1, delta, date )
 {
    this.Ma = Ma;
    this.Md = Md;
@@ -194,6 +401,13 @@ function CoordinateInterpolation( Ma, Md, x0, y0, x1, y1, delta )
    this.y0 = Math.min( y0, y1 );
    this.y1 = Math.max( y0, y1 );
    this.delta = delta;
+   this.date = date;
+   if ( this.date !== undefined )
+   {
+      let eps = EphemUtils.obliquity( this.date );
+      this.se = Math.sin( eps );
+      this.ce = Math.cos( eps );
+   }
 
    let width = this.x1 - this.x0;
    let height = this.y1 - this.y0;
@@ -211,47 +425,109 @@ function CoordinateInterpolation( Ma, Md, x0, y0, x1, y1, delta )
    /*
     * Interpolation of celestial equatorial spherical coordinates.
     *
-    * x, y  Interpolation point in image coordinates.
+    * x, y           Interpolation point in image coordinates.
     *
-    * Returns { alpha, delta }, where alpha is the right ascension in the range
-    * [0,360) and delta is the declination in [-90,+90], both values expressed
-    * in degrees.
+    * withGalactic   If specified as true, calculate ICRS galactic coordinates.
+    *
+    * withEcliptic   If specified as true, calculate ecliptic coordinates for
+    *                the date and time of observation. If no observation time
+    *                has been specified for this object, this option will be
+    *                ignored.
+    *
+    * Returns { alpha, delta, l, b, lambda, beta }, where alpha is the right
+    * ascension in the range [0,360) and delta is the declination in [-90,+90],
+    * both values expressed in degrees.
+    *
+    * If withGalactic has been specified as true, l and b are the ICRS galactic
+    * longitude and latitude, respectively in the ranges [0,360) and [-90,+90]
+    * in degrees. Otherwise the l and b properties will be undefined.
+    *
+    * If withEcliptic has been specified as true and this object knowns the
+    * observation time (because it was specified upon construction), lambda and
+    * beta are the ecliptic longitude and latitude at the time of observation,
+    * respectively in the ranges [0,360) and [-90,+90] in degrees. Otherwise
+    * the lambda and beta properties will be undefined.
     */
-   this.interpolate = function( x, y )
+   this.interpolate = function( x, y, withGalactic, withEcliptic )
    {
       let fx = (x - this.x0)/this.delta;
       let fy = (y - this.y0)/this.delta;
-      let alpha = this.Ia.interpolate( fx, fy );
+      let alpha = EphemUtils.longitudeDegreesConstrained( this.Ia.interpolate( fx, fy ) );
       let delta = this.Id.interpolate( fx, fy );
-      if ( alpha < 0 )
-         alpha += 360;
-      else if ( alpha >= 360 )
-         alpha -= 360;
-      return { alpha: alpha, delta: delta };
+      let retVal = { alpha: alpha, delta: delta };
+      if ( withGalactic || withEcliptic && this.date !== undefined )
+      {
+         let s = { lon: EphemUtils.degreesToRadians( alpha ),
+                   lat: EphemUtils.degreesToRadians( delta ) };
+         let r = EphemUtils.sphericalToRectangular( s );
+         if ( withGalactic )
+         {
+            let g = EphemUtils.rectangularToSphericalDegreesConstrained(
+                        EphemUtils.rectangularEquatorialToGalactic( r ) );
+            retVal.l = g.lon;
+            retVal.b = g.lat;
+         }
+         if ( withEcliptic )
+            if ( this.date !== undefined )
+            {
+               let e = EphemUtils.rectangularToSphericalDegreesConstrained(
+                           EphemUtils.rectangularEquatorialToEcliptic( r, this.se, this.ce ) );
+               retVal.lambda = e.lon;
+               retVal.beta = e.lat;
+            }
+      }
+      return retVal;
    };
 
    /*
     * Interpolation of celestial equatorial spherical coordinates represented
     * as formatted strings.
     *
-    * x, y     Interpolation point in image coordinates.
+    * x, y           Interpolation point in image coordinates.
     *
-    * units    Whether to include unit characters in the sexagesimal
-    *          representations. Enabled by default if not specified.
+    * units          Whether to include unit characters in the sexagesimal
+    *                representations. Enabled by default if not specified.
     *
-    * Returns { alpha, delta }, where both properties are textual sexagesimal
-    * representations of right ascension in hours and declination in degrees,
-    * respectively. The representations have three items (degrees|hours,
-    * minutes and seconds) and the decimal precision of the last item is
-    * selected automatically as a function of image scale.
+    * withGalactic   If specified as true, calculate ICRS galactic coordinates.
+    *
+    * withEcliptic   If specified as true, calculate ecliptic coordinates for
+    *                the date and time of observation. If no observation time
+    *                has been specified for this object, this option will be
+    *                ignored.
+    *
+    * Returns { alpha, delta, l, b, lambda, beta }, where the properties are
+    * textual sexagesimal representations of right ascension in hours,
+    * declination in degrees, galactic longitude and latitude in degrees, and
+    * ecliptic longitude and latitude in degrees, respectively. The
+    * representations have three items (degrees|hours, minutes and seconds) and
+    * the decimal precision of the last item is selected automatically as a
+    * function of image scale.
+    *
+    * If withGalactic has not been specified as true, the l and b properties
+    * will be undefined.
+    *
+    * If withEcliptic has not been specified as true, or if this object does
+    * not know the observation time (because it was not specified upon
+    * construction), the lambda and beta properties will be undefined.
     */
-   this.interpolateAsText = function( x, y, units )
+   this.interpolateAsText = function( x, y, units, withGalactic, withEcliptic )
    {
       if ( units === undefined )
          units = true;
-      let q = this.interpolate( x, y );
-      return { alpha: this.angleString( q.alpha/15, 24/*range*/, false/*sign*/, this.precision+1, units ),
-               delta: this.angleString( q.delta, 0/*range*/, true/*sign*/, this.precision, units ) };
+      let q = this.interpolate( x, y, withGalactic, withEcliptic );
+      let retVal = { alpha: this.angleString( q.alpha/15, 24/*range*/, false/*sign*/, this.precision+1, units ),
+                     delta: this.angleString( q.delta, 0/*range*/, true/*sign*/, this.precision, units ) };
+      if ( q.l !== undefined )
+      {
+         retVal.l = this.angleString( q.l, 360/*range*/, false/*sign*/, this.precision, units );
+         retVal.b = this.angleString( q.b, 0/*range*/, true/*sign*/, this.precision, units );
+      }
+      if ( q.lambda !== undefined )
+      {
+         retVal.lambda = this.angleString( q.lambda, 360/*range*/, false/*sign*/, this.precision, units );
+         retVal.beta = this.angleString( q.beta, 0/*range*/, true/*sign*/, this.precision, units );
+      }
+      return retVal;
    };
 
    // Determine an automatic coordinate precision, appropriate for the scale of
@@ -301,6 +577,14 @@ function CoordinateInterpolation( Ma, Md, x0, y0, x1, y1, delta )
          return s;
       }
 
+      function whitePadded( x, n )
+      {
+         let s = x.toString();
+         while ( s.length < n )
+            s = ' ' + s;
+         return s;
+      }
+
       let d = decimalToSexagesimal( angle );
       let dd = d[1];
       let mm = d[2];
@@ -316,6 +600,14 @@ function CoordinateInterpolation( Ma, Md, x0, y0, x1, y1, delta )
                dd = 0;
          }
       }
+      let ff;
+      if ( precision > 0 )
+      {
+         let si = Math.trunc( ss );
+         ff = Math.round( (ss - si)*Math.pow( 10, precision ) );
+         ss = si;
+      }
+
       let dw = (range >= 100) ? 3 : 2;
       let sw = 2 + ((precision > 0) ? 1 : 0) + precision;
       let du = ' ', mu = ' ', su = '';
@@ -333,16 +625,15 @@ function CoordinateInterpolation( Ma, Md, x0, y0, x1, y1, delta )
             su = '\u2033';
          }
       let result = (sign ? ((d[0] < 0) ? '-' : '+') : '')
-                 + zeroPadded( dd, dw )
+                 + whitePadded( dd, dw )
                  + du
                  + zeroPadded( mm, 2 )
                  + mu
-                 + zeroPadded( roundTo( ss, precision ), sw );
+                 + zeroPadded( ss, 2 );
       if ( units )
-         if ( precision > 0 )
-            result = result.replace( '.', su+'.' );
-         else
-            result += su;
+         result += su;
+      if ( precision > 0 )
+         result += '.' + zeroPadded( ff, precision );
       return result;
    };
 }

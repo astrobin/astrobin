@@ -1,5 +1,6 @@
 (function (win) {
     function PlatesolvingMouseMove(raMatrix, decMatrix, matrixRect, matrixDelta, solvedSizeX, solvedSizeY) {
+
         var self = this;
 
         self.$image = $('.show-ra-dec-coordinates');
@@ -8,6 +9,10 @@
         self.$yRuler = $('#y-ruler');
 
         self.enableCall = true;
+
+        self.$tooltip.mousemove(function (e) {
+            self.$tooltip.show();
+        });
 
         self.$image.mousemove(function (e) {
             if (!self.enableCall) return;
@@ -27,17 +32,35 @@
                 matrixRect[2],
                 matrixRect[3],
                 matrixDelta);
-            var interpolationText = interpolation.interpolateAsText(scaledX, scaledY, false);
+            var interpolationText = interpolation.interpolateAsText(scaledX, scaledY, false, true, true);
 
-            self.$tooltip
-                .text(
-                    'x: ' + x + ' | y: ' + y +
-                    ' | α: ' + interpolationText.alpha + ' | δ: ' + interpolationText.delta
-                )
-                .show();
-
+            self.$tooltip.show();
             self.$xRuler.css({top: y}).show();
             self.$yRuler.css({left: x}).show();
+
+            if (self.$tooltip.find('.image-coordinates') && x !== undefined) {
+                self.$tooltip.find('.x').text('x: ' + x);
+                self.$tooltip.find('.y').text('y: ' + y);
+                self.$tooltip.find('.image-coordinates').show();
+            }
+
+            if (self.$tooltip.find('.equatorial-coordinates') && interpolationText.alpha !== undefined) {
+                self.$tooltip.find('.alpha').text('α: ' + interpolationText.alpha);
+                self.$tooltip.find('.delta').text('δ: ' + interpolationText.delta);
+                self.$tooltip.find('.equatorial-coordinates').show();
+            }
+
+            if (self.$tooltip.find('.galactic-coordinates') && interpolationText.l !== undefined) {
+                self.$tooltip.find('.l').text('l: ' + interpolationText.l);
+                self.$tooltip.find('.b').text('b: ' + interpolationText.b);
+                self.$tooltip.find('.galactic-coordinates').show();
+            }
+
+            if (self.$tooltip.find('.ecliptic-coordinates') && interpolationText.lambda !== undefined) {
+                self.$tooltip.find('.lambda').text('λ: ' + interpolationText.lambda);
+                self.$tooltip.find('.beta').text('β: ' + interpolationText.beta);
+                self.$tooltip.find('.ecliptic-coordinates').show();
+            }
 
             setTimeout(function () {
                 self.enableCall = true;
