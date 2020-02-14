@@ -448,12 +448,12 @@ def dec_to_dms(degrees):
 
 @register.filter
 def thumbnail_width(image, alias):
-    return settings.THUMBNAIL_ALIASES[''][alias]['size'][0]
+    return min(settings.THUMBNAIL_ALIASES[''][alias]['size'][0], image.w)
 
 
 @register.filter
 def thumbnail_height(image, alias):
-    thumb_w = settings.THUMBNAIL_ALIASES[''][alias]['size'][0]
+    thumb_w = min(settings.THUMBNAIL_ALIASES[''][alias]['size'][0], image.w)
     w, h = get_image_resolution(image)
     ratio = w / float(thumb_w)
 

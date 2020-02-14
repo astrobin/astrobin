@@ -20,12 +20,14 @@ from django_filters.rest_framework import DjangoFilterBackend
 from rest_framework import generics
 from rest_framework import permissions
 
+from astrobin.models import DeepSky_Acquisition
 from astrobin_apps_platesolving.annotate import Annotator
 from astrobin_apps_platesolving.api_filters.image_object_id_filter import ImageObjectIdFilter
 from astrobin_apps_platesolving.models import PlateSolvingSettings
 from astrobin_apps_platesolving.models import Solution
 from astrobin_apps_platesolving.serializers import SolutionSerializer
 from astrobin_apps_platesolving.solver import Solver, AdvancedSolver, SolverBase
+from astrobin_apps_platesolving.utils import ThumbnailNotReadyException
 
 log = logging.getLogger('apps')
 
@@ -97,9 +99,27 @@ class SolveAdvancedView(base.View):
             solver = AdvancedSolver()
 
             try:
-                url = target.thumbnail('hd', {'sync': True})
-                submission = solver.solve(url, ra=solution.ra, dec=solution.dec,
-                                          pixscale=solution.pixscale)
+                url = None
+                observation_time = None
+                image = None
+
+                if target.fits_file:
+                    url = target.fits_file.url
+                else:
+                    url = target.thumbnail('hd', {'sync': True})
+
+                if target._meta.model_name == u'image':
+                    image = target
+                else:
+                    image = target.image
+
+                acquisitions = DeepSky_Acquisition.objects.filter(image=image)
+                if acquisitions.count() > 0:
+                    observation_time = acquisitions[0].date.isoformat()
+
+                submission = solver.solve(
+                    url, ra=solution.ra, dec=solution.dec,
+                    pixscale=solution.pixscale, observation_time=observation_time)
 
                 solution.status = Solver.ADVANCED_PENDING
                 solution.pixinsight_serial_number = submission
@@ -229,18 +249,19 @@ class SolutionPixInsightWebhook(base.View):
             svg = request.POST.get('svgAnnotation', None)
             target = get_target(solution.object_id, solution.content_type_id)  # type: Union[Image, ImageRevision]
 
-            resize_ratio = min(target.w, settings.THUMBNAIL_ALIASES['']['hd']['size'][0]) / \
-                           float(settings.THUMBNAIL_ALIASES['']['regular']['size'][0]) / \
-                           1.75  # type: float
+            resize_ratio = \
+                min(target.w, settings.THUMBNAIL_ALIASES['']['hd']['size'][0]) / \
+                float(settings.THUMBNAIL_ALIASES['']['regular']['size'][0]) / \
+                1.75 # type: float
 
             svg_620 = re.sub(
                 r"font-size=\"(\d+)\"",
-                lambda m: "font-size=\"" + str(int(m.group(1)) * resize_ratio) + "\"",
+                lambda m: "font-size=\"" + str(int(m.group(1)) / resize_ratio) + "\"",
                 svg)
 
             svg_620 = re.sub(
                 r"stroke-width=\"(\d+)\"",
-                lambda m: "stroke-width=\"" + str(int(m.group(1)) * resize_ratio) + "\"",
+                lambda m: "stroke-width=\"" + str(int(m.group(1)) / resize_ratio) + "\"",
                 svg_620)
 
             solution.pixinsight_svg_annotation.save(serial_number + ".svg", ContentFile(svg))
