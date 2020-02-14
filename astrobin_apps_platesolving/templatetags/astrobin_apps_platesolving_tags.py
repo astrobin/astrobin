@@ -14,9 +14,9 @@ def platesolving_machinery(context, target):
 
     user = None
 
-    if content_type.name == 'image':
+    if content_type.name == u'image':
         user = target.user
-    elif content_type.name == 'imagerevision':
+    elif content_type.model == u'imagerevision':
         user = target.image.user
 
     return {
