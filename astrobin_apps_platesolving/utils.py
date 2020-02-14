@@ -1,15 +1,19 @@
 import requests
 from django.conf import settings
+from django.contrib.contenttypes.models import ContentType
 from django.core.files import File
 from django.core.files.temp import NamedTemporaryFile
+from django.shortcuts import get_object_or_404
+
+from astrobin_apps_platesolving.models import Solution
 
 
 class ThumbnailNotReadyException(Exception):
     pass
 
 
-def getFromStorage(image, alias):
-    url = image.thumbnail(alias, {'sync': True})
+def get_from_storage(image, alias, revision_label):
+    url = image.thumbnail(alias, {'sync': True, 'revision_label': revision_label})
 
     if "placeholder" in url:
         raise ThumbnailNotReadyException
@@ -35,3 +39,17 @@ def getFromStorage(image, alias):
     img.seek(0)
 
     return File(img)
+
+
+def get_target(object_id, content_type_id):
+    content_type = ContentType.objects.get_for_id(content_type_id)
+    manager = content_type.model_class()
+    if hasattr(manager, 'objects_including_wip'):
+        manager = manager.objects_including_wip
+    return get_object_or_404(manager, pk=object_id)
+
+
+def get_solution(object_id, content_type_id):
+    content_type = ContentType.objects.get_for_id(content_type_id)
+    solution, created = Solution.objects.get_or_create(object_id=object_id, content_type=content_type)
+    return solution

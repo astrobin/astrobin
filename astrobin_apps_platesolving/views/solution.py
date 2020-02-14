@@ -6,7 +6,6 @@ import urllib2
 
 import simplejson
 from django.conf import settings
-from django.contrib.contenttypes.models import ContentType
 from django.core.files import File
 from django.core.files.base import ContentFile
 from django.core.files.temp import NamedTemporaryFile
@@ -27,23 +26,9 @@ from astrobin_apps_platesolving.models import PlateSolvingSettings
 from astrobin_apps_platesolving.models import Solution
 from astrobin_apps_platesolving.serializers import SolutionSerializer
 from astrobin_apps_platesolving.solver import Solver, AdvancedSolver, SolverBase
-from astrobin_apps_platesolving.utils import ThumbnailNotReadyException
+from astrobin_apps_platesolving.utils import ThumbnailNotReadyException, get_target, get_solution
 
 log = logging.getLogger('apps')
-
-
-def get_target(object_id, content_type_id):
-    content_type = ContentType.objects.get_for_id(content_type_id)
-    manager = content_type.model_class()
-    if hasattr(manager, 'objects_including_wip'):
-        manager = manager.objects_including_wip
-    return get_object_or_404(manager, pk=object_id)
-
-
-def get_solution(object_id, content_type_id):
-    content_type = ContentType.objects.get_for_id(content_type_id)
-    solution, created = Solution.objects.get_or_create(object_id=object_id, content_type=content_type)
-    return solution
 
 
 class SolveView(base.View):
@@ -59,7 +44,10 @@ class SolveView(base.View):
             solver = Solver()
 
             try:
-                url = target.thumbnail('hd', {'sync': True})
+                url = target.thumbnail('hd', {
+                    'sync': True,
+                    'revision_label': '0' if target._meta.model_name == u'image' else target.label
+                })
 
                 if solution.settings.blind:
                     submission = solver.solve(url)
@@ -106,7 +94,10 @@ class SolveAdvancedView(base.View):
                 if target.fits_file:
                     url = target.fits_file.url
                 else:
-                    url = target.thumbnail('hd', {'sync': True})
+                    url = target.thumbnail('hd', {
+                        'sync': True,
+                        'revision_label': '0' if target._meta.model_name == u'image' else target.label
+                    })
 
                 if target._meta.model_name == u'image':
                     image = target
