@@ -45,7 +45,6 @@ def setup_data(testcase):
     rawdata_meteor_2020_group = Group.objects.create(name="rawdata-meteor-2020")
     rawdata_luna_2020_group = Group.objects.create(name="rawdata-luna-2020")
     rawdata_sol_2020_group = Group.objects.create(name="rawdata-sol-2020")
-    rawdata_galaxia_2020_group = Group.objects.create(name="rawdata-galaxia-2020")
 
     donor_coffee_monthly_group = Group.objects.create(name="astrobin-donor-coffee-monthly")
     donor_snack_monthly_group = Group.objects.create(name="astrobin-donor-snack-monthly")
@@ -89,9 +88,6 @@ def setup_data(testcase):
                                 recurrence_unit="M", group=rawdata_luna_2020_group, trial_period=7, trial_unit="D")
     Subscription.objects.create(name="Sol 2020+", description="500 GB", price=30, currency="CHF", recurrence_period=1,
                                 recurrence_unit="M", group=rawdata_sol_2020_group, trial_period=7, trial_unit="D")
-    Subscription.objects.create(name="Galaxia 2020+", description="1000 GB", price=60, currency="CHF",
-                                recurrence_period=1, recurrence_unit="M", group=rawdata_galaxia_2020_group,
-                                trial_period=7, trial_unit="D")
 
     Subscription.objects.create(name="AstroBin Donor Coffee Monthly", description="", price=2.50, recurrence_period=1,
                                 recurrence_unit="M", group=donor_coffee_monthly_group, trial_period=0, trial_unit="D")
