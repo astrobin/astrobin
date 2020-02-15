@@ -2168,6 +2168,19 @@ BODY:first-of-type ul.as-list, x:-moz-any-link, x:default { /* Target FF 3.5+ */
     display: block !important;
     cursor: default;
   }
+
+  .coordinates > abbr {
+    width: 50%;
+  }
+
+  .powered-by-pixinsight {
+    margin-top: $spacer-small;
+
+    > * {
+      width: 50%;
+      display: inline-block;
+    }
+  }
 }
 
 .main-image {
@@ -3081,6 +3094,10 @@ div.token-input-dropdown {
   left: initial;
   font-size: 14px;
   padding: $spacer-xlarge;
+
+  .powered-by-pixinsight {
+    margin-top: $spacer-medium;
+  }
 }
 
 form.copy {

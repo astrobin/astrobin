@@ -49,24 +49,28 @@
                 self.$tooltip.find('.x').text('x: ' + x);
                 self.$tooltip.find('.y').text('y: ' + y);
                 self.$tooltip.find('.image-coordinates').show();
+                self.$tooltip.find('.image-coordinates abbr').css('display', 'inline-block');
             }
 
             if (self.$tooltip.find('.equatorial-coordinates') && interpolationText.alpha !== undefined) {
                 self.$tooltip.find('.alpha').text('α: ' + interpolationText.alpha);
                 self.$tooltip.find('.delta').text('δ: ' + interpolationText.delta);
                 self.$tooltip.find('.equatorial-coordinates').show();
+                self.$tooltip.find('.equatorial-coordinates abbr').css('display', 'inline-block');
             }
 
             if (self.$tooltip.find('.galactic-coordinates') && interpolationText.l !== undefined) {
                 self.$tooltip.find('.l').text('l: ' + interpolationText.l);
                 self.$tooltip.find('.b').text('b: ' + interpolationText.b);
                 self.$tooltip.find('.galactic-coordinates').show();
+                self.$tooltip.find('.galactic-coordinates abbr').css('display', 'inline-block');
             }
 
             if (self.$tooltip.find('.ecliptic-coordinates') && interpolationText.lambda !== undefined) {
                 self.$tooltip.find('.lambda').text('λ: ' + interpolationText.lambda);
                 self.$tooltip.find('.beta').text('β: ' + interpolationText.beta);
                 self.$tooltip.find('.ecliptic-coordinates').show();
+                self.$tooltip.find('.ecliptic-coordinates abbr').css('display', 'inline-block');
             }
 
             setTimeout(function () {
