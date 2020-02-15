@@ -16,6 +16,6 @@ class Migration(migrations.Migration):
         migrations.AddField(
             model_name='imagerevision',
             name='fits_file',
-            field=models.ImageField(max_length=256, null=True, upload_to=astrobin.models.image_upload_path),
+            field=models.FileField(max_length=256, null=True, upload_to=astrobin.models.image_upload_path),
         ),
     ]
