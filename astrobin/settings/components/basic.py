@@ -26,6 +26,7 @@ READONLY_MODE = False
 LONGPOLL_ENABLED = False
 
 ALLOWED_HOSTS = ['*']
+DATA_UPLOAD_MAX_MEMORY_SIZE = 10485760
 
 ADS_ENABLED = os.environ.get('ADS_ENABLED', 'false') == 'true'
 DONATIONS_ENABLED = os.environ.get('DONATIONS_ENABLED', 'false') == 'true'
