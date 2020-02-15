@@ -794,7 +794,6 @@ def image_restart_platesolving(request, id, revision_label):
 
     solution.delete()
 
-    messages.success(request, _("Success!"))
     return HttpResponseRedirect(return_url)
 
 
@@ -821,7 +820,6 @@ def image_restart_advanced_platesolving(request, id, revision_label):
 
     solution.clear_advanced()
 
-    messages.success(request, _("Success!"))
     return HttpResponseRedirect(return_url)
 
 @login_required
