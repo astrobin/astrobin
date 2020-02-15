@@ -267,17 +267,16 @@ class SolutionPixInsightWebhook(base.View):
 
             resize_ratio = \
                 min(target.w, settings.THUMBNAIL_ALIASES['']['hd']['size'][0]) / \
-                float(settings.THUMBNAIL_ALIASES['']['regular']['size'][0]) / \
-                2  # type: float
+                float(min(target.w, settings.THUMBNAIL_ALIASES['']['regular']['size'][0])) # type: float
 
             svg_620 = re.sub(
                 r"font-size=\"(\d+)\"",
-                lambda m: "font-size=\"" + str(int(m.group(1)) / resize_ratio) + "\"",
+                lambda m: "font-size=\"" + str(int(m.group(1)) * resize_ratio) + "\"",
                 svg)
 
             svg_620 = re.sub(
                 r"stroke-width=\"(\d+)\"",
-                lambda m: "stroke-width=\"" + str(int(m.group(1)) / resize_ratio) + "\"",
+                lambda m: "stroke-width=\"" + str(int(m.group(1)) * resize_ratio) + "\"",
                 svg_620)
 
             solution.pixinsight_svg_annotation.save(serial_number + ".svg", ContentFile(svg))
