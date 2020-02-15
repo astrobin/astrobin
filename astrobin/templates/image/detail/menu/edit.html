@@ -98,6 +98,20 @@
                 {% endif %}
 
                 {% if request.user|can_perform_advanced_platesolving and image.solution is not None and  image.solution|has_started_advanced_platesolving %}
+                    <li class="divider"></li>
+
+                    <li>
+                        {% if is_revision %}
+                            <a href="{% url 'image_edit_platesolving_advanced_settings' image.get_id revision_image.label %}">
+                        {% else %}
+                            <a href="{% url 'image_edit_platesolving_advanced_settings' image.get_id %}">
+                        {% endif %}
+
+                        <i class="icon-location-arrow"></i>
+                        {% trans "Advanced plate-solving settings" %}
+                        </a>
+                    </li>
+
                     <li>
                         <a href="
                             {% if is_revision %}
@@ -106,7 +120,7 @@
                                 {% url 'image_restart_advanced_platesolving' image.get_id %}
                             {% endif %}
                         ">
-                            <i class="icon-forward"></i>
+                            <i class="icon-repeat"></i>
                             {% trans "Restart advanced plate-solving" %}
                         </a>
                     </li>

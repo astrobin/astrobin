@@ -14,6 +14,8 @@
 {% endblock %}
 
 {% block content %}
+    <h1>{% trans "Plate-solving settings" %}</h1>
+
     <form id="platesolving-settings" class="form-horizontal" action="" method="post">{% csrf_token %}
         {{form|as_bootstrap}}
 

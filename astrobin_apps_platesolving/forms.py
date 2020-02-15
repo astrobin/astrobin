@@ -1,8 +1,6 @@
-# Django
 from django import forms
 
-# This app
-from .models import PlateSolvingSettings
+from .models import PlateSolvingSettings, PlateSolvingAdvancedSettings
 
 
 class PlateSolvingSettingsForm(forms.ModelForm):
@@ -17,3 +15,9 @@ class PlateSolvingSettingsForm(forms.ModelForm):
             for field in self.fields:
                 if field != 'blind':
                     self.fields[field].widget.attrs['disabled'] = 'disabled'
+
+
+class PlateSolvingAdvancedSettingsForm(forms.ModelForm):
+    class Meta:
+        model = PlateSolvingAdvancedSettings
+        exclude = []

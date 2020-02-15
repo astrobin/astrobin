@@ -23,7 +23,7 @@ from astrobin.models import DeepSky_Acquisition
 from astrobin.utils import degrees_minutes_seconds_to_decimal_degrees
 from astrobin_apps_platesolving.annotate import Annotator
 from astrobin_apps_platesolving.api_filters.image_object_id_filter import ImageObjectIdFilter
-from astrobin_apps_platesolving.models import PlateSolvingSettings
+from astrobin_apps_platesolving.models import PlateSolvingSettings, PlateSolvingAdvancedSettings
 from astrobin_apps_platesolving.models import Solution
 from astrobin_apps_platesolving.serializers import SolutionSerializer
 from astrobin_apps_platesolving.solver import Solver, AdvancedSolver, SolverBase
@@ -84,6 +84,10 @@ class SolveAdvancedView(base.View):
         target = get_target(kwargs.get('object_id'), kwargs.get('content_type_id'))
         solution = get_solution(kwargs.get('object_id'), kwargs.get('content_type_id'))
 
+        if solution.settings is None:
+            solution.advanced_settings = PlateSolvingAdvancedSettings.objects.create()
+            solution.save()
+
         if solution.pixinsight_serial_number is None or solution.status == SolverBase.SUCCESS:
             solver = AdvancedSolver()
 
@@ -126,7 +130,8 @@ class SolveAdvancedView(base.View):
                 submission = solver.solve(
                     url, ra=solution.ra, dec=solution.dec,
                     pixscale=solution.pixscale, observation_time=observation_time,
-                    latitude=latitude, longitude=longitude, altitude=altitude)
+                    latitude=latitude, longitude=longitude, altitude=altitude,
+                    advanced_settings=solution.advanced_settings)
 
                 solution.status = Solver.ADVANCED_PENDING
                 solution.pixinsight_serial_number = submission

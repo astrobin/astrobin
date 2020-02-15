@@ -3,6 +3,7 @@ from django.contrib.contenttypes import fields
 from django.contrib.contenttypes.models import ContentType
 from django.core.validators import MinValueValidator, MaxValueValidator
 from django.db import models
+from django.utils.safestring import mark_safe
 from django.utils.translation import ugettext_lazy as _
 
 # This app
@@ -77,6 +78,88 @@ class PlateSolvingSettings(models.Model):
         verbose_name=_("Radius"),
         help_text=_(
             "Tells the plate-solving engine to look within these many degrees of the given center RA and dec position."),
+    )
+
+class PlateSolvingAdvancedSettings(models.Model):
+    show_grid = models.BooleanField(
+        default=True,
+        verbose_name=_("Show equatorial grid"),
+    )
+
+    show_constellation_borders = models.BooleanField(
+        default=True,
+        verbose_name=_("Show constellation borders"),
+    )
+
+    show_constellation_lines = models.BooleanField(
+        default=True,
+        verbose_name=_("Show constellation lines"),
+    )
+
+    show_named_stars = models.BooleanField(
+        default=True,
+        verbose_name=_("Show named stars"),
+    )
+
+    show_messier = models.BooleanField(
+        default=True,
+        verbose_name=_("Show Messier objects"),
+    )
+
+    show_ngc_ic = models.BooleanField(
+        default=True,
+        verbose_name=_("Show NGC and IC objects"),
+    )
+
+    show_vdb = models.BooleanField(
+        default=True,
+        verbose_name=_("Show VdB objects"),
+    )
+
+    show_sharpless = models.BooleanField(
+        default=True,
+        verbose_name=_("Show Sharpless objects"),
+    )
+
+    show_barnard = models.BooleanField(
+        default=True,
+        verbose_name=_("Show Barnard objects"),
+    )
+
+    show_pgc = models.BooleanField(
+        default=False,
+        verbose_name=_("Show PGC objects"),
+    )
+
+    show_planets = models.BooleanField(
+        default=True,
+        verbose_name=_("Show planets"),
+        help_text=_("Only available if your image at least an acquisition time and an accurate location"),
+    )
+
+    show_asteroids = models.BooleanField(
+        default=True,
+        verbose_name=_("Show asteroids"),
+        help_text=_("Only available if your image at least an acquisition time and an accurate location"),
+    )
+
+    show_gcvs = models.BooleanField(
+        default=False,
+        verbose_name=_("Show GCVS stars"),
+        help_text=_("General Catalog of Variable Stars"),
+    )
+
+    show_gaia_dr2 = models.BooleanField(
+        default=False,
+        verbose_name=_("Show Gaia DR2 objects"),
+        help_text=mark_safe('<a href="https://wikipedia.org/wiki/Gaia_(spacecraft)" target="_blank">https://wikipedia.org/wiki/Gaia_(spacecraft)</a>'),
+    )
+
+    show_ppmxl = models.BooleanField(
+        default=False,
+        verbose_name=_("Show PPMXL catalog"),
+        help_text=mark_safe(
+            '<a href="https://arxiv.org/abs/1003.5852" target="_blank">https://arxiv.org/abs/1003.5852</a>'),
     )
 
 
@@ -183,6 +266,12 @@ class Solution(models.Model):
         upload_to='pixinsight-solutions-620',
         null=True,
         blank=True,
+    )
+
+    advanced_settings = models.OneToOneField(
+        PlateSolvingAdvancedSettings,
+        related_name='solution',
+        null=True,
     )
 
     advanced_ra = models.DecimalField(

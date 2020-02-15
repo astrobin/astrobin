@@ -19,8 +19,8 @@ from django.template import loader, RequestContext
 from django.template.defaultfilters import filesizeformat
 from django.template.loader import render_to_string
 from django.utils.datastructures import MultiValueDictKeyError
-from django.utils.translation import ugettext as _
 from django.utils.translation import ngettext as _n
+from django.utils.translation import ugettext as _
 from django.views.decorators.cache import never_cache
 from django.views.decorators.http import require_GET, require_POST
 from el_pagination.decorators import page_template
@@ -35,8 +35,9 @@ from astrobin.gear import *
 from astrobin.models import *
 from astrobin.shortcuts import *
 from astrobin.utils import *
-from astrobin_apps_platesolving.forms import PlateSolvingSettingsForm
-from astrobin_apps_platesolving.models import PlateSolvingSettings
+from astrobin_apps_platesolving.forms import PlateSolvingSettingsForm, PlateSolvingAdvancedSettingsForm
+from astrobin_apps_platesolving.models import PlateSolvingSettings, PlateSolvingAdvancedSettings
+from astrobin_apps_premium.templatetags.astrobin_apps_premium_tags import can_perform_advanced_platesolving
 from astrobin_apps_premium.utils import premium_get_max_allowed_image_size, premium_get_max_allowed_revisions
 
 
@@ -279,6 +280,7 @@ def upload_max_revisions_error(request, max_revisions, image):
     })
 
     return HttpResponseRedirect(image.get_absolute_url())
+
 
 # VIEWS
 
@@ -772,6 +774,64 @@ def image_edit_platesolving_settings(request, id, revision_label):
 
 
 @login_required
+def image_edit_platesolving_advanced_settings(request, id, revision_label):
+    image = get_image_or_404(Image.objects_including_wip, id)
+    if request.user != image.user and not request.user.is_superuser and not can_perform_advanced_platesolving(
+            image.user):
+        return HttpResponseForbidden()
+
+    if revision_label in (None, 'None', '0'):
+        url = reverse('image_edit_platesolving_advanced_settings', args=(image.get_id(),))
+        if image.revisions.count() > 0:
+            return_url = reverse('image_detail', args=(image.get_id(), '0',))
+        else:
+            return_url = reverse('image_detail', args=(image.get_id(),))
+        solution, created = Solution.objects.get_or_create(
+            content_type=ContentType.objects.get_for_model(Image),
+            object_id=image.pk)
+    else:
+        url = reverse('image_edit_platesolving_advanced_settings', args=(image.get_id(), revision_label,))
+        return_url = reverse('image_detail', args=(image.get_id(), revision_label,))
+        revision = ImageRevision.objects.get(image=image, label=revision_label)
+        solution, created = Solution.objects.get_or_create(
+            content_type=ContentType.objects.get_for_model(ImageRevision),
+            object_id=revision.pk)
+
+    advanced_settings = solution.advanced_settings
+    if advanced_settings is None:
+        solution.advanced_settings = PlateSolvingAdvancedSettings.objects.create()
+        solution.save()
+
+    if request.method == 'GET':
+        form = PlateSolvingAdvancedSettingsForm(instance=advanced_settings)
+        return render(request, 'image/edit/platesolving_advanced_settings.html', {
+            'form': form,
+            'image': image,
+            'return_url': return_url,
+        })
+
+    if request.method == 'POST':
+        form = PlateSolvingAdvancedSettingsForm(instance=advanced_settings, data=request.POST)
+        if not form.is_valid():
+            messages.error(
+                request,
+                _("There was one or more errors processing the form. You may need to scroll down to see them."))
+            return render(request, 'image/edit/platesolving_advanced_settings.html', {
+                'form': form,
+                'image': image,
+                'return_url': return_url,
+            })
+
+        form.save()
+        solution.clear_advanced()
+
+        messages.success(
+            request,
+            _("Form saved. A new advanced plate-solving process will start when you visit your image again."))
+        return HttpResponseRedirect(url)
+
+
+@login_required
 def image_restart_platesolving(request, id, revision_label):
     image = get_image_or_404(Image.objects_including_wip, id)
     if request.user != image.user and not request.user.is_superuser:
@@ -821,6 +881,7 @@ def image_restart_advanced_platesolving(request, id, revision_label):
     solution.clear_advanced()
 
     return HttpResponseRedirect(return_url)
+
 
 @login_required
 @require_POST

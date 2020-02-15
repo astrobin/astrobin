@@ -5,6 +5,7 @@ from django.conf import settings
 from django.urls import reverse
 
 from astrobin_apps_platesolving.backends.base import AbstractPlateSolvingBackend
+from astrobin_apps_platesolving.models import PlateSolvingAdvancedSettings
 
 log = logging.getLogger('apps')
 
@@ -26,7 +27,6 @@ class Solver(AbstractPlateSolvingBackend):
             'centerRA=%f' % kwargs.pop('ra'),
             'centerDec=%f' % kwargs.pop('dec'),
             'imageResolution=%f' % kwargs.pop('pixscale'),
-            'moreLayers=VdB|Sharpless|Barnard',
             'fontsBaseURL=%s' % settings.STATIC_URL + 'astrobin/fonts',
         ]
 
@@ -45,6 +45,43 @@ class Solver(AbstractPlateSolvingBackend):
         altitude = kwargs.pop('altitude')
         if altitude is not None:
             task_params.append('obsHeight=%f' % altitude)
+
+        layers = []
+        advanced_settings = kwargs.pop('advanced_settings', None)
+        if advanced_settings:
+            if advanced_settings.show_grid:
+                layers.append('Grid')
+            if advanced_settings.show_constellation_borders:
+                layers.append('Constellation Borders')
+            if advanced_settings.show_constellation_lines:
+                layers.append('Constellation Lines')
+            if advanced_settings.show_named_stars:
+                layers.append('NamedStars')
+            if advanced_settings.show_messier:
+                layers.append('Messier')
+            if advanced_settings.show_ngc_ic:
+                layers.append('NGC-IC')
+            if advanced_settings.show_vdb:
+                layers.append('VdB')
+            if advanced_settings.show_sharpless:
+                layers.append('Sharpless')
+            if advanced_settings.show_barnard:
+                layers.append('Barnard')
+            if advanced_settings.show_pgc:
+                layers.append('PGC')
+            if advanced_settings.show_planets:
+                layers.append('Planets')
+            if advanced_settings.show_asteroids:
+                layers.append('Asteroids')
+            if advanced_settings.show_gcvs:
+                layers.append('GCVS')
+            if advanced_settings.show_gaia_dr2:
+                layers.append('Gaia DR2')
+            if advanced_settings.show_ppmxl:
+                layers.append('PPMXL')
+
+        if len(layers) > 0:
+            task_params.append('layers=%s' % '|'.join(layers))
 
         data = {
             'userName': settings.PIXINSIGHT_USERNAME,
