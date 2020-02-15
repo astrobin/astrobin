@@ -100,7 +100,7 @@ def rawdata_subscription_byte_limit(subscription):
 
     if subscription.group.name == 'rawdata-atom':
         return 0.5*GB
-    if subscription.group.name == 'rawdata-meteor':
+    if subscription.group.name in 'rawdata-meteor':
         return 5*GB
     if subscription.group.name == 'rawdata-luna':
         return 100*GB
@@ -108,6 +108,17 @@ def rawdata_subscription_byte_limit(subscription):
         return 200*GB
     if subscription.group.name == 'rawdata-galaxia':
         return 500*GB
+
+    if subscription.group.name == 'rawdata-atom-2020':
+        return 5 * GB
+    if subscription.group.name in 'rawdata-meteor-2020':
+        return 50 * GB
+    if subscription.group.name == 'rawdata-luna-2020':
+        return 250 * GB
+    if subscription.group.name == 'rawdata-sol-2020':
+        return 500 * GB
+    if subscription.group.name == 'rawdata-galaxia-2020':
+        return 1000 * GB
 
     return 0
 
