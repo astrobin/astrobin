@@ -26,7 +26,7 @@ class Solver(AbstractPlateSolvingBackend):
             'centerRA=%f' % kwargs.pop('ra'),
             'centerDec=%f' % kwargs.pop('dec'),
             'imageResolution=%f' % kwargs.pop('pixscale'),
-            'moreLayers=VdB|Sharpless|Barnard|PGC',
+            'moreLayers=VdB|Sharpless|Barnard',
             'fontsBaseURL=%s' % settings.STATIC_URL + 'astrobin/fonts',
         ]
 
