@@ -2030,7 +2030,9 @@ def image_revision_upload_process(request):
 @require_POST
 def image_fits_upload_process(request):
     def fits_upload_error(request, image=None):
-        messages.error(request, _("Invalid image or no image provided. The allowed format is FITS (.fit, .fits, .fts)."))
+        messages.error(
+            request,
+            _("Invalid image or no image provided. The allowed formats are XISF (.xisf) and FITS (.fit, .fits, .fts)."))
 
         if image is not None:
             return HttpResponseRedirect(image.get_absolute_url())
@@ -2063,7 +2065,10 @@ def image_fits_upload_process(request):
     image.fits_file = fits_file
     image.save()
 
-    messages.success(request, _("FITS file uploaded. Thank you!"))
+    messages.success(
+        request,
+        _("File uploaded successfully. Feel free to restart the advanced plate-solving to use this file."))
+
     return HttpResponseRedirect(image.get_absolute_url())
 
 

@@ -122,6 +122,11 @@ $(document).ready(function() {
         $(this).siblings('.spinner').show();
     });
 
+    $('#associate-xisf-fits-modal form input[type=submit]').click(function (e) {
+        $(this).addClass('disabled');
+        $(this).siblings('.spinner').show();
+    });
+
     $('button#send-to-group').click(function(e) {
         var selected = $('form#select-group select option:selected').val();
 

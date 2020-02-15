@@ -890,7 +890,7 @@ class Image(HasSolutionMixin, SafeDeleteModel):
         null=True,
     )
 
-    fits_file = models.ImageField(
+    fits_file = models.FileField(
         upload_to=image_upload_path,
         max_length=256,
         null=True,
@@ -1550,7 +1550,7 @@ class ImageRevision(HasSolutionMixin, SafeDeleteModel):
         max_length=256,
     )
 
-    fits_file = models.ImageField(
+    fits_file = models.FileField(
         upload_to=image_upload_path,
         max_length=256,
         null=True,

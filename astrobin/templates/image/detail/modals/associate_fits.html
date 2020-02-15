@@ -6,30 +6,42 @@
 {% load astrobin_apps_premium_tags %}
 
 {% if image.user|can_perform_advanced_platesolving %}
-    <div class="modal hide fade" id="associate-fits-modal">
+    <div class="modal hide fade" id="associate-xisf-fits-modal">
         <form id="upload-revision-form" class="form-inline" action="{% url 'image_fits_upload_process' %}" method="post"
               enctype="multipart/form-data">{% csrf_token %}
 
             <div class="modal-header">
                 <a class="close" data-dismiss="modal">&times;</a>
-                <h3>{% trans "Associate FITS file" %}</h3>
+                <h3>{% trans "Associate XISF/FITS file" %}</h3>
             </div>
 
             <div class="modal-body">
                 <p>
                     {% blocktrans %}
-                        To improve the accuracy of your plate-solution even further, please upload one of the FITS files
-                        from your data set. FITS files normally have date and time headers that will allow AstroBin to
-                        calculate solar system body ephemerides and find planets and asteroids in your image.
+                        To improve the accuracy of your plate-solution even further, please upload one of the XISF or
+                        FITS files from your data set. Such files normally have date and time headers that will allow
+                        AstroBin to calculate solar system body ephemerides and find planets and asteroids in your
+                        image (provided you also add location information to your image).
+                    {% endblocktrans %}
+                </p>
+
+                <p>
+                    {% blocktrans with xisf_url='https://pixinsight.com/xisf/' %}
+                        For maximum accuracy, it's recommended that you use PixInsight's native and open format XISF.
+                        Learn more about XISF here: <a href="{{ xisf_url }}" target="_blank">{{ xisf_url }}</a>
                     {% endblocktrans %}
                 </p>
 
                 <p>
                     {% blocktrans %}
-                        <strong>Please note:</strong> it's very important that the FITS you upload is aligned to your
-                        processed image that you uploaded to this page, otherwise the object annotations will not match.
+                        <strong>Please note:</strong> it's very important that the XISF or FITS file you upload is
+                        aligned to your processed image, otherwise the object annotations will not match.
+                        To improve your chances at a successful accurate plate-solution, calibrate your file the usual
+                        way (dark/bias/flats) but you don't need to stretch it.
                     {% endblocktrans %}
                 </p>
+
+                <hr/>
 
                 {{ upload_fits_form|as_bootstrap }}
 
