@@ -1,10 +1,8 @@
-# Python
+# -*- coding: utf-8 -*-
 import datetime
 import sys
 
-# Third party
 import pytz
-# Django
 from django.conf import settings
 from django.contrib.gis.geoip2 import GeoIP2
 from django.core.files.images import get_image_dimensions
@@ -224,3 +222,39 @@ def get_image_resolution(image):
         w, h = 0, 0
 
     return w, h
+
+
+def decimal_to_hours_minutes_seconds(value, hour_symbol="h", minute_symbol="'", second_symbol="\""):
+    is_positive = value >= 0
+    value = abs(value)
+    hours = int(value / 15)
+    minutes = int(((value / 15) - hours) * 60)
+    seconds = ((((value / 15) - hours) * 60) - minutes) * 60
+
+    return "%s%d%s %d%s %d%s" % (
+        "" if is_positive else "-",
+        hours, hour_symbol,
+        minutes, minute_symbol,
+        seconds, second_symbol)
+
+
+def decimal_to_degrees_minutes_seconds(value, degree_symbol="°", minute_symbol="'", second_symbol="\""):
+    is_positive = value >= 0
+    value = abs(value)
+    minutes, seconds = divmod(value * 3600, 60)
+    degrees, minutes = divmod(minutes, 60)
+
+    return "%s%d%s %d%s %d%s" % (
+        "+" if is_positive else "-",
+        degrees, degree_symbol,
+        minutes, minute_symbol,
+        seconds, second_symbol)
+
+
+def degrees_minutes_seconds_to_decimal_degrees(degrees, minutes, seconds, direction):
+    dd = float(degrees) + float(minutes) / 60 + float(seconds) / (60 * 60);
+
+    if direction == 'E' or direction == 'N':
+        dd *= -1
+
+    return dd

@@ -8,7 +8,7 @@ from django.utils.translation import ugettext as _
 from subscription.models import UserSubscription, Subscription
 
 from astrobin.gear import *
-from astrobin.utils import get_image_resolution
+from astrobin.utils import get_image_resolution, decimal_to_hours_minutes_seconds, decimal_to_degrees_minutes_seconds
 from astrobin_apps_donations.templatetags.astrobin_apps_donations_tags import is_donor
 from astrobin_apps_premium.templatetags.astrobin_apps_premium_tags import is_premium_2020, is_premium, is_ultimate_2020, \
     is_lite
@@ -407,33 +407,6 @@ def humanize_image_acquisition_type(type):
         if type == choice[0]:
             return choice[1]
     return ""
-
-
-def decimal_to_hours_minutes_seconds(value, hour_symbol="h", minute_symbol="'", second_symbol="\""):
-    is_positive = value >= 0
-    value = abs(value)
-    hours = int(value / 15)
-    minutes = int(((value / 15) - hours) * 60)
-    seconds = ((((value / 15) - hours) * 60) - minutes) * 60
-
-    return "%s%d%s %d%s %d%s" % (
-        "" if is_positive else "-",
-        hours, hour_symbol,
-        minutes, minute_symbol,
-        seconds, second_symbol)
-
-
-def decimal_to_degrees_minutes_seconds(value, degree_symbol="°", minute_symbol="'", second_symbol="\""):
-    is_positive = value >= 0
-    value = abs(value)
-    minutes, seconds = divmod(value * 3600, 60)
-    degrees, minutes = divmod(minutes, 60)
-
-    return "%s%d%s %d%s %d%s" % (
-        "+" if is_positive else "-",
-        degrees, degree_symbol,
-        minutes, minute_symbol,
-        seconds, second_symbol)
 
 
 @register.filter

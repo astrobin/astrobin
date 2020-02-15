@@ -2,7 +2,6 @@ import logging
 
 import requests
 from django.conf import settings
-from django.templatetags.static import get_static_prefix
 from django.urls import reverse
 
 from astrobin_apps_platesolving.backends.base import AbstractPlateSolvingBackend
@@ -35,6 +34,18 @@ class Solver(AbstractPlateSolvingBackend):
         if observation_time is not None:
             task_params.append('observationTime=%sT00:00:00Z' % observation_time)
 
+        latitude = kwargs.pop('latitude')
+        if latitude is not None:
+            task_params.append('obsLatitude=%f' % latitude)
+
+        longitude = kwargs.pop('longitude')
+        if longitude is not None:
+            task_params.append('obsLongitude=%f' % longitude)
+
+        altitude = kwargs.pop('altitude')
+        if altitude is not None:
+            task_params.append('obsHeight=%f' % altitude)
+
         data = {
             'userName': settings.PIXINSIGHT_USERNAME,
             'userPassword': settings.PIXINSIGHT_PASSWORD,
@@ -43,12 +54,15 @@ class Solver(AbstractPlateSolvingBackend):
             'callbackURL': settings.BASE_URL + reverse('astrobin_apps_platesolution.pixinsight_webhook'),
         }
 
+        log.debug("PixInsight plate-solving: sending request %s" % str(data))
+
         r = requests.post(default_url, headers=headers, data=data)
 
         if r.status_code == 200:
-            log.debug("PixInsight plate-solving initiated: %s" % r.text)
             try:
-                return r.text.split('\n')[1].split('serialNumber=')[1]
+                serial_number = r.text.split('\n')[1].split('serialNumber=')[1]
+                log.debug("PixInsight plate-solving initiated: s/n = %s" % serial_number)
+                return serial_number
             except IndexError:
                 log.error("Unable to parse PixInsight response")
                 return None

@@ -122,7 +122,11 @@
                href="{% get_image_url image revision_label %}{% if mod %}{% query_string "mod=mod" "" %}{% endif %}">
                 <object
                         type="image/svg+xml"
-                        data="{{ instance_to_platesolve.solution.pixinsight_svg_annotation.url }}">
+                        data="{{ instance_to_platesolve.solution.pixinsight_svg_annotation.url }}"
+                        style="
+                                max-width: {{ instance_to_platesolve | thumbnail_width:'hd' }}px;
+                                max-height: {{ instance_to_platesolve | thumbnail_height:'hd' }}px;
+                        ">
                 </object>
                 <div id="x-ruler"></div>
                 <div id="y-ruler"></div>
@@ -147,6 +151,9 @@
     <div class="coordinates galactic-coordinates">
         <abbr title="{% trans 'Galactic longitude' %}" class="l"></abbr>
         <abbr title="{% trans 'Galactic latitude' %}" class="b"></abbr>
+    </div>
+    <div class="powered-by-pixinsight">
+        Powered by <a href="https://pixinsight.com/" target="_blank">PixInsight</a>
     </div>
 </div>
 

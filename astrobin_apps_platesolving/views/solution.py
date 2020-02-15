@@ -20,6 +20,7 @@ from rest_framework import generics
 from rest_framework import permissions
 
 from astrobin.models import DeepSky_Acquisition
+from astrobin.utils import degrees_minutes_seconds_to_decimal_degrees
 from astrobin_apps_platesolving.annotate import Annotator
 from astrobin_apps_platesolving.api_filters.image_object_id_filter import ImageObjectIdFilter
 from astrobin_apps_platesolving.models import PlateSolvingSettings
@@ -89,6 +90,9 @@ class SolveAdvancedView(base.View):
             try:
                 url = None
                 observation_time = None
+                latitude = None
+                longitude = None
+                altitude = None
                 image = None
 
                 if target.fits_file:
@@ -108,9 +112,21 @@ class SolveAdvancedView(base.View):
                 if acquisitions.count() > 0:
                     observation_time = acquisitions[0].date.isoformat()
 
+                locations = image.locations.all()
+                if locations.count() > 0:
+                    location = locations[0]  # Type: Location
+                    latitude = degrees_minutes_seconds_to_decimal_degrees(
+                        location.lat_deg, location.lat_min, location.lat_sec, location.lat_side
+                    )
+                    longitude = degrees_minutes_seconds_to_decimal_degrees(
+                        location.lon_deg, location.lon_min, location.lon_sec, location.lon_side
+                    )
+                    altitude = location.altitude
+
                 submission = solver.solve(
                     url, ra=solution.ra, dec=solution.dec,
-                    pixscale=solution.pixscale, observation_time=observation_time)
+                    pixscale=solution.pixscale, observation_time=observation_time,
+                    latitude=latitude, longitude=longitude, altitude=altitude)
 
                 solution.status = Solver.ADVANCED_PENDING
                 solution.pixinsight_serial_number = submission
@@ -252,7 +268,7 @@ class SolutionPixInsightWebhook(base.View):
             resize_ratio = \
                 min(target.w, settings.THUMBNAIL_ALIASES['']['hd']['size'][0]) / \
                 float(settings.THUMBNAIL_ALIASES['']['regular']['size'][0]) / \
-                1.75 # type: float
+                2  # type: float
 
             svg_620 = re.sub(
                 r"font-size=\"(\d+)\"",

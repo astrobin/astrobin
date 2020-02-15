@@ -772,6 +772,59 @@ def image_edit_platesolving_settings(request, id, revision_label):
 
 
 @login_required
+def image_restart_platesolving(request, id, revision_label):
+    image = get_image_or_404(Image.objects_including_wip, id)
+    if request.user != image.user and not request.user.is_superuser:
+        return HttpResponseForbidden()
+
+    if revision_label in (None, 'None', '0'):
+        if image.revisions.count() > 0:
+            return_url = reverse('image_detail', args=(image.get_id(), '0',))
+        else:
+            return_url = reverse('image_detail', args=(image.get_id(),))
+        solution, created = Solution.objects.get_or_create(
+            content_type=ContentType.objects.get_for_model(Image),
+            object_id=image.pk)
+    else:
+        return_url = reverse('image_detail', args=(image.get_id(), revision_label,))
+        revision = ImageRevision.objects.get(image=image, label=revision_label)
+        solution, created = Solution.objects.get_or_create(
+            content_type=ContentType.objects.get_for_model(ImageRevision),
+            object_id=revision.pk)
+
+    solution.delete()
+
+    messages.success(request, _("Success!"))
+    return HttpResponseRedirect(return_url)
+
+
+@login_required
+def image_restart_advanced_platesolving(request, id, revision_label):
+    image = get_image_or_404(Image.objects_including_wip, id)
+    if request.user != image.user and not request.user.is_superuser:
+        return HttpResponseForbidden()
+
+    if revision_label in (None, 'None', '0'):
+        if image.revisions.count() > 0:
+            return_url = reverse('image_detail', args=(image.get_id(), '0',))
+        else:
+            return_url = reverse('image_detail', args=(image.get_id(),))
+        solution, created = Solution.objects.get_or_create(
+            content_type=ContentType.objects.get_for_model(Image),
+            object_id=image.pk)
+    else:
+        return_url = reverse('image_detail', args=(image.get_id(), revision_label,))
+        revision = ImageRevision.objects.get(image=image, label=revision_label)
+        solution, created = Solution.objects.get_or_create(
+            content_type=ContentType.objects.get_for_model(ImageRevision),
+            object_id=revision.pk)
+
+    solution.clear_advanced()
+
+    messages.success(request, _("Success!"))
+    return HttpResponseRedirect(return_url)
+
+@login_required
 @require_POST
 def image_edit_save_watermark(request):
     try:
