@@ -108,7 +108,7 @@ Subscription.objects.get_or_create(
     group=Group.objects.get(name='rawdata-meteor-2020'),
     category='rawdata')
 
-  Subscription.objects.get_or_create(
+Subscription.objects.get_or_create(
     name='AstroBin Raw Data Luna 2020+',
     description="250 GB",
     currency="CHF",
@@ -120,7 +120,7 @@ Subscription.objects.get_or_create(
     group=Group.objects.get(name='rawdata-luna-2020'),
     category='rawdata')
 
-  Subscription.objects.get_or_create(
+Subscription.objects.get_or_create(
     name='AstroBin Raw Data Sol 2020+',
     description="500 GB",
     currency="CHF",
