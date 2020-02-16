@@ -15,6 +15,9 @@ Group.objects.get_or_create(name='astrobin_lite_2020')
 Group.objects.get_or_create(name='astrobin_premium')
 Group.objects.get_or_create(name='astrobin_premium_2020')
 Group.objects.get_or_create(name='astrobin_ultimate_2020')
+Group.objects.get_or_create(name='rawdata-meteor-2020')
+Group.objects.get_or_create(name='rawdata-luna-2020')
+Group.objects.get_or_create(name='rawdata-sol-2020')
 
 Subscription.objects.get_or_create(
     name='AstroBin Lite',
@@ -92,6 +95,42 @@ Subscription.objects.get_or_create(
     recurrence_unit=None,
     group=Group.objects.get(name='astrobin_ultimate_2020'),
     category='premium')
+
+Subscription.objects.get_or_create(
+    name='AstroBin Raw Data Meteor 2020+',
+    description="50 GB",
+    currency="CHF",
+    price=3,
+    trial_period=7,
+    trial_unit="D",
+    recurrence_period=1,
+    recurrence_unit="M",
+    group=Group.objects.get(name='rawdata-meteor-2020'),
+    category='rawdata')
+
+  Subscription.objects.get_or_create(
+    name='AstroBin Raw Data Luna 2020+',
+    description="250 GB",
+    currency="CHF",
+    price=15,
+    trial_period=7,
+    trial_unit="D",
+    recurrence_period=1,
+    recurrence_unit="M",
+    group=Group.objects.get(name='rawdata-luna-2020'),
+    category='rawdata')
+
+  Subscription.objects.get_or_create(
+    name='AstroBin Raw Data Sol 2020+',
+    description="500 GB",
+    currency="CHF",
+    price=30,
+    trial_period=7,
+    trial_unit="D",
+    recurrence_period=1,
+    recurrence_unit="M",
+    group=Group.objects.get(name='rawdata-sol-2020'),
+    category='rawdata')
 EOF
 
 # Create moderation groups
