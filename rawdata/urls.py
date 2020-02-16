@@ -2,12 +2,20 @@
 from django.conf.urls import url
 
 # This app
+from django.contrib.auth.decorators import login_required
+from django.views.generic import TemplateView
+
 import signal_handlers
-from .views.atom import *
-from .views.privatesharedfolders import *
-from .views.publicdatapools import *
-from .views.rawimage import *
-from .views.temporaryarchive import *
+from rawdata.views.atom import atom_activate, atom_deactivate
+from rawdata.views.privatesharedfolders import PrivateSharedFolderListView, PrivateSharedFolderDetailView, \
+    PrivateSharedFolderAddDataView, PrivateSharedFolderRemoveDataView, PrivateSharedFolderAddImageView, \
+    PrivateSharedFolderAddUsersView, PrivateSharedFolderDownloadView, PrivateSharedFolderRemoveUserView, \
+    PrivateSharedFolderCreateView, PrivateSharedFolderDeleteView, PrivateSharedFolderUpdateView
+from rawdata.views.publicdatapools import PublicDataPoolListView, PublicDataPoolDetailView, PublicDataPoolAddDataView, \
+    PublicDataPoolRemoveDataView, PublicDataPoolAddImageView, PublicDataPoolDownloadView, PublicDataPoolCreateView, \
+    PublicDataPoolUpdateView
+from rawdata.views.rawimage import RawImageLibrary, RawImageDetailView, RawImageDownloadView, RawImageDeleteView
+from rawdata.views.temporaryarchive import TemporaryArchiveDetailView
 
 signal_handlers.install()
 

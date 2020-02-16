@@ -1,25 +1,22 @@
 # Python
 import datetime
 
+# Third party apps
+from celery_haystack.indexes import CelerySearchIndex
 # Django
 from django.contrib.auth.models import User
 from django.contrib.contenttypes.models import ContentType
-from django.db.models import Q
-
-# Third party apps
-from celery_haystack.indexes import CelerySearchIndex
-from haystack.indexes import *
+from haystack.constants import Indexable
+from haystack.fields import CharField, IntegerField, FloatField, DateTimeField, BooleanField, MultiValueField
 from hitcount.models import HitCount
 from pybb.models import Post, Topic
 from toggleproperties.models import ToggleProperty
 
+from astrobin.models import CommercialGear
+from astrobin.models import DeepSky_Acquisition
 # This app
 from astrobin.models import Image
-from astrobin.models import DeepSky_Acquisition
 from astrobin.models import SolarSystem_Acquisition
-from astrobin.models import Gear, CommercialGear
-
-
 # Other AstroBin apps
 from nested_comments.models import NestedComment
 
@@ -70,6 +67,7 @@ def _prepare_moon_phase(obj):
 
     return sum(moon_illuminated_list) / float(len(moon_illuminated_list))
 
+
 def _prepare_first_acquisition_date(obj):
     deep_sky_acquisitions = DeepSky_Acquisition.objects.filter(image=obj)
     solar_system_acquisition = None
@@ -90,6 +88,7 @@ def _prepare_first_acquisition_date(obj):
         date = solar_system_acquisition.date
 
     return date if date else datetime.date.min
+
 
 def _prepare_last_acquisition_date(obj):
     deep_sky_acquisitions = DeepSky_Acquisition.objects.filter(image=obj)
@@ -112,14 +111,16 @@ def _prepare_last_acquisition_date(obj):
 
     return date if date else datetime.date.min
 
+
 def _prepare_views(obj, content_type):
     views = 0
     try:
-        views = HitCount.objects.get(object_pk = obj.pk, content_type__name = content_type).hits
-    except: 
+        views = HitCount.objects.get(object_pk=obj.pk, content_type__name=content_type).hits
+    except:
         pass
 
     return views
+
 
 def _prepare_min_aperture(obj):
     d = 0
@@ -127,6 +128,7 @@ def _prepare_min_aperture(obj):
         if telescope.aperture is not None and (d == 0 or telescope.aperture < d):
             d = int(telescope.aperture)
     return d
+
 
 def _prepare_max_aperture(obj):
     import sys
@@ -136,12 +138,14 @@ def _prepare_max_aperture(obj):
             d = int(telescope.aperture)
     return d
 
+
 def _prepare_min_pixel_size(obj):
     s = 0
     for camera in obj.imaging_cameras.all():
         if camera.pixel_size is not None and (s == 0 or camera.pixel_size < s):
             s = int(camera.pixel_size)
     return s
+
 
 def _prepare_max_pixel_size(obj):
     import sys
@@ -151,21 +155,26 @@ def _prepare_max_pixel_size(obj):
             s = int(camera.pixel_size)
     return s
 
+
 def _prepare_telescope_types(obj):
     return [x.type for x in obj.imaging_telescopes.all()]
+
 
 def _prepare_camera_types(obj):
     return [x.type for x in obj.imaging_cameras.all()]
 
+
 def _prepare_comments(obj):
-    ct = ContentType.objects.get(app_label = 'astrobin', model = 'image')
+    ct = ContentType.objects.get(app_label='astrobin', model='image')
     return NestedComment.objects.filter(
-        content_type = ct,
-        object_id = obj.id,
-        deleted = False).count()
+        content_type=ct,
+        object_id=obj.id,
+        deleted=False).count()
+
 
 def _6m_ago():
     return datetime.datetime.now() - datetime.timedelta(183)
+
 
 def _1y_ago():
     return datetime.datetime.now() - datetime.timedelta(365)
@@ -213,38 +222,32 @@ class UserIndex(CelerySearchIndex, Indexable):
     comments = IntegerField()
     comments_written = IntegerField()
 
-    username = CharField(model_attr = 'username')
+    username = CharField(model_attr='username')
 
-    def index_queryset(self, using = None):
+    def index_queryset(self, using=None):
         return self.get_model().objects.all()
-
 
     def get_model(self):
         return User
 
-
     def get_updated_field(self):
         return "userprofile__updated"
 
-
     def prepare_images_6m(self, obj):
-        return Image.objects.filter(user = obj).filter(
-            uploaded__gte = _6m_ago()).count()
-
+        return Image.objects.filter(user=obj).filter(
+            uploaded__gte=_6m_ago()).count()
 
     def prepare_images_1y(self, obj):
-        return Image.objects.filter(user = obj).filter(
-            uploaded__gte = _1y_ago()).count()
-
+        return Image.objects.filter(user=obj).filter(
+            uploaded__gte=_1y_ago()).count()
 
     def prepare_images(self, obj):
-        return Image.objects.filter(user = obj).count()
-
+        return Image.objects.filter(user=obj).count()
 
     def prepare_avg_integration(self, obj):
         integration = 0
         images = 0
-        for i in Image.objects.filter(user = obj):
+        for i in Image.objects.filter(user=obj):
             image_integration = _get_integration(i)
             if image_integration:
                 images += 1
@@ -252,48 +255,41 @@ class UserIndex(CelerySearchIndex, Indexable):
 
         return (integration / 3600.0) / images if images else 0
 
-
     def prepare_likes(self, obj):
         likes = 0
-        for i in Image.objects.filter(user = obj):
+        for i in Image.objects.filter(user=obj):
             likes += ToggleProperty.objects.toggleproperties_for_object("like", i).count()
         return likes
-
 
     def prepare_likes_6m(self, obj):
         likes = 0
-        for i in Image.objects.filter(user = obj, uploaded__gte = _6m_ago()):
+        for i in Image.objects.filter(user=obj, uploaded__gte=_6m_ago()):
             likes += ToggleProperty.objects.toggleproperties_for_object("like", i).count()
         return likes
-
 
     def prepare_likes_1y(self, obj):
         likes = 0
-        for i in Image.objects.filter(user = obj, uploaded__gte = _1y_ago()):
+        for i in Image.objects.filter(user=obj, uploaded__gte=_1y_ago()):
             likes += ToggleProperty.objects.toggleproperties_for_object("like", i).count()
         return likes
 
-
     def prepare_average_likes_6m(self, obj):
         likes = self.prepare_likes_6m(obj)
-        images = Image.objects.filter(user = obj, uploaded__gte = _6m_ago()).count()
+        images = Image.objects.filter(user=obj, uploaded__gte=_6m_ago()).count()
 
         return likes / float(images) if images > 0 else 0
-
 
     def prepare_average_likes_1y(self, obj):
         likes = self.prepare_likes_1y(obj)
-        images = Image.objects.filter(user = obj, uploaded__gte = _1y_ago()).count()
+        images = Image.objects.filter(user=obj, uploaded__gte=_1y_ago()).count()
 
         return likes / float(images) if images > 0 else 0
-
 
     def prepare_average_likes(self, obj):
         likes = self.prepare_likes(obj)
         images = self.prepare_images(obj)
 
         return likes / float(images) if images > 0 else 0
-
 
     def prepare_normalized_likes_6m(self, obj):
         def average(values):
@@ -303,12 +299,12 @@ class UserIndex(CelerySearchIndex, Indexable):
 
         def index(values):
             import math
-            return average(values) * math.log(len(values)+1, 10)
+            return average(values) * math.log(len(values) + 1, 10)
 
         avg = self.prepare_average_likes_6m(obj)
         norm = []
 
-        for i in Image.objects.filter(user = obj).filter(uploaded__gte = _6m_ago()):
+        for i in Image.objects.filter(user=obj).filter(uploaded__gte=_6m_ago()):
             likes = i.likes()
             if likes >= avg:
                 norm.append(likes)
@@ -317,7 +313,6 @@ class UserIndex(CelerySearchIndex, Indexable):
             return 0
 
         return index(norm)
-
 
     def prepare_normalized_likes_1y(self, obj):
         def average(values):
@@ -327,12 +322,12 @@ class UserIndex(CelerySearchIndex, Indexable):
 
         def index(values):
             import math
-            return average(values) * math.log(len(values)+1, 10)
+            return average(values) * math.log(len(values) + 1, 10)
 
         avg = self.prepare_average_likes_1y(obj)
         norm = []
 
-        for i in Image.objects.filter(user = obj).filter(uploaded__gte = _1y_ago()):
+        for i in Image.objects.filter(user=obj).filter(uploaded__gte=_1y_ago()):
             likes = i.likes()
             if likes >= avg:
                 norm.append(likes)
@@ -342,7 +337,6 @@ class UserIndex(CelerySearchIndex, Indexable):
 
         return index(norm)
 
-
     def prepare_normalized_likes(self, obj):
         def average(values):
             if len(values):
@@ -351,12 +345,12 @@ class UserIndex(CelerySearchIndex, Indexable):
 
         def index(values):
             import math
-            return average(values) * math.log(len(values)+1, 10)
+            return average(values) * math.log(len(values) + 1, 10)
 
         avg = self.prepare_average_likes(obj)
         norm = []
 
-        for i in Image.objects.filter(user = obj):
+        for i in Image.objects.filter(user=obj):
             likes = i.likes()
             if likes >= avg:
                 norm.append(likes)
@@ -368,55 +362,49 @@ class UserIndex(CelerySearchIndex, Indexable):
 
     def prepare_followers_6m(self, obj):
         return ToggleProperty.objects.filter(
-            property_type = "follow",
-            content_type = ContentType.objects.get_for_model(User),
-            object_id = obj.pk
-        ).filter(created_on__gte = _6m_ago()).count()
-
+            property_type="follow",
+            content_type=ContentType.objects.get_for_model(User),
+            object_id=obj.pk
+        ).filter(created_on__gte=_6m_ago()).count()
 
     def prepare_followers_1y(self, obj):
         return ToggleProperty.objects.filter(
-            property_type = "follow",
-            content_type = ContentType.objects.get_for_model(User),
-            object_id = obj.pk
-        ).filter(created_on__gte = _1y_ago()).count()
-
+            property_type="follow",
+            content_type=ContentType.objects.get_for_model(User),
+            object_id=obj.pk
+        ).filter(created_on__gte=_1y_ago()).count()
 
     def prepare_followers(self, obj):
         return ToggleProperty.objects.filter(
-            property_type = "follow",
-            content_type = ContentType.objects.get_for_model(User),
-            object_id = obj.pk
+            property_type="follow",
+            content_type=ContentType.objects.get_for_model(User),
+            object_id=obj.pk
         ).count()
-
 
     def prepare_integration_6m(self, obj):
         integration = 0
-        for i in Image.objects.filter(user = obj, uploaded__gte = _6m_ago()):
+        for i in Image.objects.filter(user=obj, uploaded__gte=_6m_ago()):
             integration += _get_integration(i)
 
         return integration / 3600.0
-
 
     def prepare_integration_1y(self, obj):
         integration = 0
-        for i in Image.objects.filter(user = obj, uploaded__gte = _1y_ago()):
+        for i in Image.objects.filter(user=obj, uploaded__gte=_1y_ago()):
             integration += _get_integration(i)
 
         return integration / 3600.0
-
 
     def prepare_integration(self, obj):
         integration = 0
-        for i in Image.objects.filter(user = obj):
+        for i in Image.objects.filter(user=obj):
             integration += _get_integration(i)
 
         return integration / 3600.0
 
-
     def prepare_moon_phase(self, obj):
         l = []
-        for i in Image.objects.filter(user = obj):
+        for i in Image.objects.filter(user=obj):
             l.append(_prepare_moon_phase(i))
         if len(l) == 0:
             return 0
@@ -424,24 +412,24 @@ class UserIndex(CelerySearchIndex, Indexable):
 
     def prepare_views(self, obj):
         views = 0
-        for i in Image.objects.filter(user = obj):
+        for i in Image.objects.filter(user=obj):
             views += _prepare_views(i, 'image')
         return views
 
     def prepare_bookmarks(self, obj):
         bookmarks = 0
-        for i in Image.objects.filter(user = obj):
+        for i in Image.objects.filter(user=obj):
             bookmarks += _prepare_bookmarks(i)
         return bookmarks
 
     def prepare_comments(self, obj):
         comments = 0
-        for i in Image.objects.filter(user = obj):
+        for i in Image.objects.filter(user=obj):
             comments += _prepare_comments(i)
         return comments
 
     def prepare_comments_written(self, obj):
-        return NestedComment.objects.filter(author = obj, deleted = False).count()
+        return NestedComment.objects.filter(author=obj, deleted=False).count()
 
 
 class ImageIndex(CelerySearchIndex, Indexable):
@@ -481,7 +469,7 @@ class ImageIndex(CelerySearchIndex, Indexable):
     is_iotd = BooleanField()
     is_top_pick = BooleanField()
 
-    license = IntegerField(model_attr = 'license')
+    license = IntegerField(model_attr='license')
 
     min_aperture = IntegerField()
     max_aperture = IntegerField()
@@ -498,20 +486,20 @@ class ImageIndex(CelerySearchIndex, Indexable):
 
     is_commercial = BooleanField()
 
-    subject_type = IntegerField(model_attr = 'subject_type')
+    subject_type = IntegerField(model_attr='subject_type')
 
     acquisition_type = CharField(model_attr='acquisition_type')
 
-    data_source = CharField(model_attr = 'data_source')
+    data_source = CharField(model_attr='data_source')
 
     remote_source = CharField(model_attr='remote_source', null=True)
 
-    username = CharField(model_attr = 'user__username')
+    username = CharField(model_attr='user__username')
 
     objects_in_field = CharField()
 
-    def index_queryset(self, using = None):
-        return self.get_model().objects.filter(moderator_decision = 1)
+    def index_queryset(self, using=None):
+        return self.get_model().objects.filter(moderator_decision=1).exclude(corrupted=True)
 
     def get_model(self):
         return Image
@@ -571,7 +559,7 @@ class ImageIndex(CelerySearchIndex, Indexable):
         return _prepare_comments(obj)
 
     def prepare_is_commercial(self, obj):
-        commercial_gear = CommercialGear.objects.filter(image = obj)
+        commercial_gear = CommercialGear.objects.filter(image=obj)
         return commercial_gear.count() > 0
 
     def prepare_is_iotd(self, obj):

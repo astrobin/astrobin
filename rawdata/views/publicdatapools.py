@@ -1,9 +1,5 @@
-# Python
-from os import path
-# Django
 from django.contrib import messages
 from django.contrib.contenttypes.models import ContentType
-from django.core.urlresolvers import reverse
 from django.http import Http404, HttpResponse
 from django.shortcuts import get_object_or_404
 from django.utils.translation import ugettext as _
@@ -15,19 +11,16 @@ from django.views.generic import (
     UpdateView,
 )
 
-# This app
+from astrobin.models import Image
+from common.mixins import AjaxableResponseMixin
 from rawdata.forms import (
     PublicDataPoolForm,
     PublicDataPool_ImagesForm,
     PublicDataPool_SelectExistingForm,
 )
 from rawdata.mixins import RestrictToSubscriberMixin, RestrictToCreatorMixin
-from rawdata.models import PublicDataPool, RawImage, TemporaryArchive
-from rawdata.zip import *
-
-# Other AstroBin apps
-from astrobin.models import Image
-from common.mixins import AjaxableResponseMixin
+from rawdata.models import PublicDataPool, RawImage
+from rawdata.zip import serve_zip
 
 
 class PublicDataPoolCreateView(RestrictToSubscriberMixin, AjaxableResponseMixin, CreateView):
@@ -47,7 +40,7 @@ class PublicDataPoolCreateView(RestrictToSubscriberMixin, AjaxableResponseMixin,
         return context
 
     def form_valid(self, form):
-        pool = form.save(commit = False)
+        pool = form.save(commit=False)
         pool.creator = self.request.user
         pool.save()
 
@@ -69,7 +62,7 @@ class PublicDataPoolAddDataView(RestrictToSubscriberMixin, AjaxableResponseMixin
     form_class = PublicDataPool_ImagesForm
 
     def form_valid(self, form):
-        pool = form.save(commit = False)
+        pool = form.save(commit=False)
         images = form.cleaned_data['images']
         pool.images.add(*images)
         return super(PublicDataPoolAddDataView, self).form_valid(form)
@@ -79,8 +72,8 @@ class PublicDataPoolRemoveDataView(RestrictToSubscriberMixin, base.View):
     model = PublicDataPool
 
     def post(self, request, *args, **kwargs):
-        pool = get_object_or_404(PublicDataPool, pk = kwargs.get('pk'))
-        rawimage = get_object_or_404(RawImage, pk = kwargs.get('rawimage_pk'))
+        pool = get_object_or_404(PublicDataPool, pk=kwargs.get('pk'))
+        rawimage = get_object_or_404(RawImage, pk=kwargs.get('rawimage_pk'))
 
         if request.user != rawimage.user:
             raise Http404
@@ -93,8 +86,8 @@ class PublicDataPoolRemoveDataView(RestrictToSubscriberMixin, base.View):
 
 class PublicDataPoolAddImageView(base.View):
     def post(self, request, *args, **kwargs):
-        pool = get_object_or_404(PublicDataPool, pk = kwargs.get('pk'))
-        image = get_object_or_404(Image, pk = request.POST.get('image'))
+        pool = get_object_or_404(PublicDataPool, pk=kwargs.get('pk'))
+        image = get_object_or_404(Image, pk=request.POST.get('image'))
         pool.processed_images.add(image)
         messages.success(request, _("Your image has been added to the pool."))
 
@@ -111,17 +104,16 @@ class PublicDataPoolDetailView(DetailView):
 
         context['size'] = sum(x.size for x in self.get_object().images.all())
         context['content_type'] = ContentType.objects.get_for_model(self.model)
-        context['update_form'] = PublicDataPoolForm(instance = self.get_object())
+        context['update_form'] = PublicDataPoolForm(instance=self.get_object())
         return context
 
 
 class PublicDataPoolDownloadView(base.View):
     def get(self, request, *args, **kwargs):
-        pool = get_object_or_404(PublicDataPool, pk = kwargs.pop('pk'))
+        pool = get_object_or_404(PublicDataPool, pk=kwargs.pop('pk'))
         response = serve_zip(pool.images.all(), self.request.user, pool)
         return response
 
 
 class PublicDataPoolListView(ListView):
     model = PublicDataPool
-

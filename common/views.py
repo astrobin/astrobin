@@ -1,14 +1,13 @@
-# Django
-
-# Third party apps
+from django.contrib.auth.models import User
+from django.contrib.contenttypes.models import ContentType
 from rest_framework import generics
-# AstroBin
 from rest_framework.filters import DjangoFilterBackend
-from subscription.models import UserSubscription, Subscription
+from subscription.models import Subscription, UserSubscription
 
-# This app
+from astrobin.models import UserProfile
 from .permissions import ReadOnly
-from .serializers import *
+from .serializers import ContentTypeSerializer, UserSerializer, UserProfileSerializer, UserProfileSerializerPrivate, \
+    SubscriptionSerializer, UserSubscriptionSerializer
 
 
 class ContentTypeList(generics.ListAPIView):

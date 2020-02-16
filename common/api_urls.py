@@ -1,7 +1,8 @@
 from django.conf.urls import url
 from rest_framework.urlpatterns import format_suffix_patterns
 
-from .views import *
+from common.views import ContentTypeList, ContentTypeDetail, UserList, UserDetail, UserProfileList, UserProfileDetail, \
+    CurrentUserProfileDetail, SubscriptionList, SubscriptionDetail, UserSubscriptionList, UserSubscriptionDetail
 
 urlpatterns = (
     url(r'^contenttypes/$', ContentTypeList.as_view(), name='contenttype-list'),

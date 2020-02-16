@@ -1,13 +1,14 @@
 # -*- coding: utf-8 -*-
+from datetime import datetime
 
-from math import floor
-
+from django.conf import settings
 from django.core.paginator import Paginator, EmptyPage, PageNotAnInteger
 from django.template import Library
 from django.template.defaultfilters import timesince
 from django.utils.translation import ugettext as _
 
-from astrobin.gear import *
+from astrobin.gear import is_gear_complete, get_correct_gear
+from astrobin.models import GearUserInfo, UserProfile, Image
 
 register = Library()
 

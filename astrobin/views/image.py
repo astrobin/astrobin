@@ -14,7 +14,7 @@ from django.contrib.contenttypes.models import ContentType
 from django.contrib.staticfiles.templatetags.staticfiles import static
 from django.core.exceptions import PermissionDenied
 from django.core.files.images import get_image_dimensions
-from django.core.urlresolvers import reverse_lazy
+from django.core.urlresolvers import reverse_lazy, reverse
 from django.db.models import Q
 from django.db.models.query import QuerySet
 from django.http import Http404, HttpResponseRedirect
@@ -150,11 +150,17 @@ class ImageThumbView(JSONResponseMixin, ImageDetailViewBase):
         if force is not None:
             image.thumbnail_invalidate(False)
 
-        url = image.thumbnail(alias, {
+        opts = {
             'revision_label': r,
             'animated': 'animated' in self.request.GET,
             'insecure': 'insecure' in self.request.GET,
-        })
+        }
+
+        sync = request.GET.get('sync')
+        if sync is not None:
+            opts['sync'] = True
+
+        url = image.thumbnail(alias, opts)
 
         return self.render_json_response({
             'id': image.pk,
@@ -218,6 +224,12 @@ class ImageDetailView(ImageDetailViewBase):
             if not request.user.is_authenticated() or \
                     not request.user.is_superuser and \
                     not request.user.userprofile.is_image_moderator():
+                raise Http404
+
+        if image.corrupted:
+            if request.user == image.user:
+                return redirect(reverse('image_edit_basic', args=(image.get_id(),)) + '?corrupted')
+            else:
                 raise Http404
 
         revision_label = kwargs['r']
@@ -739,6 +751,12 @@ class ImageFullView(ImageDetailView):
         if image.moderator_decision == 2:
             raise Http404
 
+        if image.corrupted:
+            if request.user == image.user:
+                return redirect(reverse('image_edit_basic', args=(image.get_id(),)) + '?corrupted')
+            else:
+                raise Http404
+
         self.revision_label = kwargs['r']
 
         if self.revision_label is None:
@@ -1017,6 +1035,10 @@ class ImageEditBaseView(LoginRequiredMixin, ImageUpdateViewBase):
 class ImageEditBasicView(ImageEditBaseView):
     form_class = ImageEditBasicForm
     template_name = 'image/edit/basic.html'
+
+    def form_valid(self, form):
+        self.object.corrupted = False
+        return super(ImageEditBasicView, self).form_valid(form)
 
     def get_success_url(self):
         image = self.get_object()
