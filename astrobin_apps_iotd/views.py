@@ -1,18 +1,23 @@
+from datetime import timedelta, datetime
+
 from braces.views import (
     GroupRequiredMixin,
     JSONResponseMixin,
     LoginRequiredMixin)
+from django.conf import settings
+from django.contrib.auth.models import Group
+from django.core.exceptions import ValidationError
 from django.http import HttpResponseForbidden
 from django.shortcuts import get_object_or_404, render
-from django.template import RequestContext
 from django.utils import formats
 from django.utils.translation import ugettext
 from django.views.generic import (
     ListView)
 from django.views.generic.base import View
 
-from astrobin_apps_iotd.models import *
-from astrobin_apps_iotd.permissions import *
+from astrobin.models import Image
+from astrobin_apps_iotd.models import Iotd, IotdSubmission, IotdVote
+from astrobin_apps_iotd.permissions import may_elect_iotd
 from astrobin_apps_iotd.templatetags.astrobin_apps_iotd_tags import (
     iotd_submissions_today,
     iotd_votes_today,
@@ -224,7 +229,9 @@ class IotdToggleJudgementAjaxView(
 
 class IotdArchiveView(ListView):
     model = Iotd
-    queryset = Iotd.objects.filter(date__lte=datetime.now().date(), image__deleted = None)
+    queryset = Iotd.objects\
+        .filter(date__lte=datetime.now().date(), image__deleted=None)\
+        .exclude(image__corrupted=True)
     template_name = 'astrobin_apps_iotd/iotd_archive.html'
     paginate_by = 30
 
@@ -239,10 +246,10 @@ class IotdSubmittersForImageAjaxView(
             submitters = [x.submitter for x in IotdSubmission.objects.filter(image=image)]
 
             return render(request, 'astrobin_apps_users/inclusion_tags/user_list.html', {
-                    'view': 'table',
-                    'layout': 'compact',
-                    'user_list': submitters,
-                })
+                'view': 'table',
+                'layout': 'compact',
+                'user_list': submitters,
+            })
 
         return HttpResponseForbidden()
 
@@ -257,9 +264,9 @@ class IotdReviewersForImageAjaxView(
             reviewers = [x.reviewer for x in IotdVote.objects.filter(image=image)]
 
             return render(request, 'astrobin_apps_users/inclusion_tags/user_list.html', {
-                    'view': 'table',
-                    'layout': 'compact',
-                    'user_list': reviewers,
-                })
+                'view': 'table',
+                'layout': 'compact',
+                'user_list': reviewers,
+            })
 
         return HttpResponseForbidden()

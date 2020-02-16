@@ -1,8 +1,6 @@
-# Django
 from django.contrib import admin
 
-# This app
-from astrobin_apps_groups.models import *
+from astrobin_apps_groups.models import Group
 
 
 class GroupAdmin(admin.ModelAdmin):

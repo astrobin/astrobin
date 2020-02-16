@@ -1,6 +1,6 @@
 from django.conf.urls import url
 
-from astrobin_apps_users.views import *
+from astrobin_apps_users.views import TogglePropertyUsersAjaxView, UserSearchView
 
 urlpatterns = (
     url(

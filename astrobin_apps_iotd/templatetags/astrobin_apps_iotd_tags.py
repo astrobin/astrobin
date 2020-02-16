@@ -1,15 +1,10 @@
-# Python
-from datetime import datetime, timedelta
+from datetime import datetime
 
-# Django
-from django.conf import settings
 from django.template import Library
-from django.utils.translation import ugettext_lazy as _
 
-# This app
-from astrobin_apps_iotd.models import *
-from astrobin_apps_iotd.permissions import *
-
+from astrobin_apps_iotd.models import IotdSubmission, IotdVote, Iotd
+from astrobin_apps_iotd.permissions import may_toggle_submission_image, may_toggle_vote_image, may_elect_iotd, \
+    may_unelect_iotd
 
 register = Library()
 
