@@ -15,9 +15,20 @@ Group.objects.get_or_create(name='astrobin_lite_2020')
 Group.objects.get_or_create(name='astrobin_premium')
 Group.objects.get_or_create(name='astrobin_premium_2020')
 Group.objects.get_or_create(name='astrobin_ultimate_2020')
+
 Group.objects.get_or_create(name='rawdata-meteor-2020')
 Group.objects.get_or_create(name='rawdata-luna-2020')
 Group.objects.get_or_create(name='rawdata-sol-2020')
+
+Group.objects.get_or_create(name='astrobin-donor-bronze-monthly')
+Group.objects.get_or_create(name='astrobin-donor-silver-monthly')
+Group.objects.get_or_create(name='astrobin-donor-gold-monthly')
+Group.objects.get_or_create(name='astrobin-donor-platinum-monthly')
+
+Group.objects.get_or_create(name='astrobin-donor-bronze-yearly')
+Group.objects.get_or_create(name='astrobin-donor-silver-yearly')
+Group.objects.get_or_create(name='astrobin-donor-gold-yearly')
+Group.objects.get_or_create(name='astrobin-donor-platinum-yearly')
 
 Subscription.objects.get_or_create(
     name='AstroBin Lite',
@@ -131,6 +142,94 @@ Subscription.objects.get_or_create(
     recurrence_unit="M",
     group=Group.objects.get(name='rawdata-sol-2020'),
     category='rawdata')
+
+Subscription.objects.get_or_create(
+    name='AstroBin Donor Bronze Monthly',
+    currency="CHF",
+    price=2.50,
+    trial_period=0,
+    trial_unit=None,
+    recurrence_period=1,
+    recurrence_unit="M",
+    group=Group.objects.get(name='astrobin-donor-bronze-monthly'),
+    category='donor')
+
+Subscription.objects.get_or_create(
+    name='AstroBin Donor Silver Monthly',
+    currency="CHF",
+    price=5,
+    trial_period=0,
+    trial_unit=None,
+    recurrence_period=1,
+    recurrence_unit="M",
+    group=Group.objects.get(name='astrobin-donor-silver-monthly'),
+    category='donor')
+
+Subscription.objects.get_or_create(
+    name='AstroBin Donor Gold Monthly',
+    currency="CHF",
+    price=10,
+    trial_period=0,
+    trial_unit=None,
+    recurrence_period=1,
+    recurrence_unit="M",
+    group=Group.objects.get(name='astrobin-donor-gold-monthly'),
+    category='donor')
+
+Subscription.objects.get_or_create(
+    name='AstroBin Donor Platinum Monthly',
+    currency="CHF",
+    price=20,
+    trial_period=0,
+    trial_unit=None,
+    recurrence_period=1,
+    recurrence_unit="M",
+    group=Group.objects.get(name='astrobin-donor-platinum-monthly'),
+    category='donor')
+
+Subscription.objects.get_or_create(
+    name='AstroBin Donor Bronze Yearly',
+    currency="CHF",
+    price=27.50,
+    trial_period=0,
+    trial_unit=None,
+    recurrence_period=1,
+    recurrence_unit="Y",
+    group=Group.objects.get(name='astrobin-donor-bronze-yearly'),
+    category='donor')
+
+Subscription.objects.get_or_create(
+    name='AstroBin Donor Silver Yearly',
+    currency="CHF",
+    price=55,
+    trial_period=0,
+    trial_unit=None,
+    recurrence_period=1,
+    recurrence_unit="Y",
+    group=Group.objects.get(name='astrobin-donor-silver-yearly'),
+    category='donor')
+
+Subscription.objects.get_or_create(
+    name='AstroBin Donor Gold Yearly',
+    currency="CHF",
+    price=110,
+    trial_period=0,
+    trial_unit=None,
+    recurrence_period=1,
+    recurrence_unit="Y",
+    group=Group.objects.get(name='astrobin-donor-gold-yearly'),
+    category='donor')
+
+Subscription.objects.get_or_create(
+    name='AstroBin Donor Platinum Yearly',
+    currency="CHF",
+    price=220,
+    trial_period=0,
+    trial_unit=None,
+    recurrence_period=1,
+    recurrence_unit="Y",
+    group=Group.objects.get(name='astrobin-donor-platinum-yearly'),
+    category='donor')
 EOF
 
 # Create moderation groups
