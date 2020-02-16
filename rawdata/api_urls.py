@@ -1,7 +1,7 @@
 from django.conf.urls import url
 from rest_framework.urlpatterns import format_suffix_patterns
 
-from .views.rawimage import *
+from rawdata.views.rawimage import RawImageList, RawImageDetail
 
 urlpatterns = (
     url(r'^rawimages/$', RawImageList.as_view(), name='api.rawdata.rawimage.list'),

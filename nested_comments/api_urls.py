@@ -1,7 +1,7 @@
 from django.conf.urls import url
 from rest_framework.urlpatterns import format_suffix_patterns
 
-from .views import *
+from nested_comments.views import NestedCommentList, NestedCommentDetail
 
 urlpatterns = (
     url(r'^nestedcomments/$', NestedCommentList.as_view(), name='nestedcomment-list'),

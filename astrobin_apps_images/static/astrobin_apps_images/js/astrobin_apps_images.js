@@ -25,7 +25,7 @@ $(document).ready(function () {
                             .attr(
                                 'src',
                                 'https://placehold.it/' + $img.width() + 'x' + $img.height() +
-                                '/ff0000/fff&text=Timeout, please try again')
+                                '/222/e0e0e0&text=:\'(')
                             .attr('data-loaded', 'true');
                         return;
                     }
@@ -35,6 +35,7 @@ $(document).ready(function () {
                         timeout: 0,
                         cache: true,
                         url: url,
+                        timeouot: 30000,
                         success: function (data, status, request) {
                             tries[key] += 1;
                             if (data.url === undefined || data.url === null || data.url.indexOf("placeholder") > -1) {

@@ -1,10 +1,16 @@
 import difflib
-from datetime import timedelta
+from datetime import timedelta, datetime
 
 from django.contrib import admin, messages
+from django.contrib.auth.models import User
+from django.db.models import Q
 from django.http import HttpResponseRedirect
+from django.utils import timezone
 
-from astrobin.models import *
+from astrobin.models import Gear, GearUserInfo, GearAssistedMerge, GearMakeAutoRename, GearHardMergeRedirect, Telescope, \
+    Mount, Camera, FocalReducer, Software, Filter, Accessory, DeepSky_Acquisition, SolarSystem_Acquisition, Image, \
+    ImageRevision, Request, ImageRequest, UserProfile, Location, AppApiKeyRequest, App, ImageOfTheDay, \
+    ImageOfTheDayCandidate, Collection, GlobalStat, BroadcastEmail, CommercialGear, RetailedGear
 from astrobin.tasks import send_broadcast_email
 from astrobin.utils import inactive_accounts
 from astrobin_apps_premium.utils import premium_get_valid_usersubscription
