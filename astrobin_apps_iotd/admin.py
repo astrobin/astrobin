@@ -1,7 +1,6 @@
 from django.contrib import admin
 
-# This app
-from astrobin_apps_iotd.models import *
+from astrobin_apps_iotd.models import IotdSubmission, IotdVote, Iotd
 
 
 class IotdSubmissionAdmin(admin.ModelAdmin):

@@ -1,24 +1,16 @@
-# Python
-from datetime import datetime, timedelta
-
-# Django
-from django.db import models
-from django.conf import settings
 from django.contrib.auth.models import User
 from django.core.exceptions import ValidationError
 from django.core.urlresolvers import reverse_lazy
+from django.db import models
 
-# AstroBin
 from astrobin.models import Image
-
-# This app
-from astrobin_apps_iotd.permissions import *
+from astrobin_apps_iotd.permissions import may_toggle_submission_image, may_toggle_vote_image, may_elect_iotd
 
 
 class IotdSubmission(models.Model):
     submitter = models.ForeignKey(User)
     image = models.ForeignKey(Image)
-    date = models.DateTimeField(auto_now_add = True)
+    date = models.DateTimeField(auto_now_add=True)
 
     class Meta:
         unique_together = ['image', 'submitter']
@@ -31,7 +23,7 @@ class IotdSubmission(models.Model):
 
     @classmethod
     def first_for_image(cls, image):
-        qs = IotdSubmission.objects.filter(image = image).order_by('-date')
+        qs = IotdSubmission.objects.filter(image=image).order_by('-date')
         if qs:
             return qs[0]
         return None
@@ -47,13 +39,13 @@ class IotdSubmission(models.Model):
         return super(IotdSubmission, self).save(*args, **kwargs)
 
     def get_absolute_url(self):
-        return reverse_lazy('iotd_submission_detail', kwargs = {'pk': self.pk})
+        return reverse_lazy('iotd_submission_detail', kwargs={'pk': self.pk})
 
 
 class IotdVote(models.Model):
     reviewer = models.ForeignKey(User)
     image = models.ForeignKey(Image)
-    date = models.DateTimeField(auto_now_add = True)
+    date = models.DateTimeField(auto_now_add=True)
 
     class Meta:
         unique_together = ['reviewer', 'image']
@@ -65,7 +57,7 @@ class IotdVote(models.Model):
 
     @classmethod
     def first_for_image(cls, image):
-        qs = IotdVote.objects.filter(image = image).order_by('-date')
+        qs = IotdVote.objects.filter(image=image).order_by('-date')
         if qs:
             return qs[0]
         return None
@@ -82,10 +74,10 @@ class IotdVote(models.Model):
 
 
 class Iotd(models.Model):
-    judge = models.ForeignKey(User, null = True, on_delete = models.SET_NULL)
+    judge = models.ForeignKey(User, null=True, on_delete=models.SET_NULL)
     image = models.OneToOneField(Image)
-    date = models.DateField(unique = True)
-    created = models.DateTimeField(auto_now_add = True)
+    date = models.DateField(unique=True)
+    created = models.DateTimeField(auto_now_add=True)
 
     class Meta:
         ordering = ['-date']

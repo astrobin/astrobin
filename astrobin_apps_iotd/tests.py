@@ -1,16 +1,16 @@
-# Python
+from datetime import datetime, timedelta
+
 import simplejson as json
 from beautifulsoupselect import BeautifulSoupSelect as BSS
-# Third party
 from bs4 import BeautifulSoup as BS
-# Django
+from django.conf import settings
+from django.contrib.auth.models import Group
 from django.core.cache import cache
 from django.core.management import call_command
 from django.test import TestCase
 from mock import patch
 
 from astrobin_apps_groups.models import Group as AstroBinGroup
-# This app
 from astrobin_apps_iotd.models import *
 
 

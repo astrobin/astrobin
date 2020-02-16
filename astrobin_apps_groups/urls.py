@@ -1,6 +1,9 @@
 from django.conf.urls import url
 
-from astrobin_apps_groups.views import *
+from astrobin_apps_groups.views import GroupListView, GroupCreateView, GroupDetailView, GroupUpdateView, \
+    GroupDeleteView, GroupJoinView, GroupLeaveView, GroupManageMembersView, GroupInviteView, GroupAddRemoveImages, \
+    GroupRevokeInvitationView, GroupAddImage, GroupAddModerator, GroupRemoveModerator, GroupRemoveMember, \
+    GroupMembersListView, GroupModerateJoinRequestsView, GroupApproveJoinRequestView, GroupRejectJoinRequestView
 
 urlpatterns = (
     url(

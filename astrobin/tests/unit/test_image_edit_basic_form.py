@@ -1,3 +1,5 @@
+from django.core.files import File
+from django.core.files.uploadedfile import SimpleUploadedFile
 from django.test import TestCase
 
 from astrobin.forms import ImageEditBasicForm
@@ -17,6 +19,15 @@ class ImageEditBasicFormTest(TestCase):
 
         return data
 
+    def __get_files(self):
+        return {
+            'image_file': SimpleUploadedFile(
+                'test.jpg',
+                open('astrobin/fixtures/test.jpg').read(),
+                'image/jpeg'
+            )
+        }
+
     def setUp(self):
         self.image = Generators.image()
 
@@ -25,7 +36,7 @@ class ImageEditBasicFormTest(TestCase):
 
     def test_parse_key_value_tags_valid_data(self):
         data = self.__get_valid_data({"keyvaluetags": "foo=bar"})
-        form = ImageEditBasicForm(instance=self.image, data=data)
+        form = ImageEditBasicForm(instance=self.image, data=data, files=self.__get_files())
 
         self.assertTrue(form.is_valid())
 
@@ -36,36 +47,36 @@ class ImageEditBasicFormTest(TestCase):
 
     def test_parse_key_value_tags_valid_data_multiple_lines(self):
         data = self.__get_valid_data({"keyvaluetags": "foo=bar\r\ngoo=tar"})
-        form = ImageEditBasicForm(instance=self.image, data=data)
+        form = ImageEditBasicForm(instance=self.image, data=data, files=self.__get_files())
 
         self.assertTrue(form.is_valid())
 
     def test_parse_key_value_tags_empty(self):
         data = self.__get_valid_data({"keyvaluetags": ""})
-        form = ImageEditBasicForm(instance=self.image, data=data)
+        form = ImageEditBasicForm(instance=self.image, data=data, files=self.__get_files())
 
         self.assertTrue(form.is_valid())
 
     def test_parse_key_value_tags_missing_key(self):
         data = self.__get_valid_data({"keyvaluetags": "=bar"})
-        form = ImageEditBasicForm(instance=self.image, data=data)
+        form = ImageEditBasicForm(instance=self.image, data=data, files=self.__get_files())
 
         self.assertFalse(form.is_valid())
 
     def test_parse_key_value_tags_missing_value(self):
         data = self.__get_valid_data({"keyvaluetags": "foo="})
-        form = ImageEditBasicForm(instance=self.image, data=data)
+        form = ImageEditBasicForm(instance=self.image, data=data, files=self.__get_files())
 
         self.assertFalse(form.is_valid())
 
     def test_parse_key_value_tags_missing_key_and_value(self):
         data = self.__get_valid_data({"keyvaluetags": "="})
-        form = ImageEditBasicForm(instance=self.image, data=data)
+        form = ImageEditBasicForm(instance=self.image, data=data, files=self.__get_files())
 
         self.assertFalse(form.is_valid())
 
     def test_parse_key_value_tags_missing_equals_sign(self):
         data = self.__get_valid_data({"keyvaluetags": "foo"})
-        form = ImageEditBasicForm(instance=self.image, data=data)
+        form = ImageEditBasicForm(instance=self.image, data=data, files=self.__get_files())
 
         self.assertFalse(form.is_valid())
