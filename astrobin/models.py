@@ -82,7 +82,8 @@ class HasSolutionMixin(object):
 
 def image_upload_path(instance, filename):
     ext = filename.split('.')[-1]
-    return "images/%d/%d/%s.%s" % (instance.user.id, date.today().year, uuid.uuid4(), ext)
+    user = instance.user if instance._meta.model_name == u'image' else instance.image.user
+    return "images/%d/%d/%s.%s" % (user.id, date.today().year, uuid.uuid4(), ext)
 
 
 def image_hash():
