@@ -1,3 +1,9 @@
+2020-02-17 Salvatore Iovene <salvatore@iovene.com>
+ * v1.54.4
+ * (images) Fix issue when getting thumbnails of original revision without a thumb crop
+ * (images) Add image resolution readonly field on edit basic settings page
+ * (images) Always attempt to fetch corrupted images
+
 2020-02-16 Salvatore Iovene <salvatore@iovene.com>
  * v1.54.3
  * (profile) Fix missing link
