@@ -1,4 +1,7 @@
 # -*- coding: utf-8 -*-
+from datetime import datetime
+
+from django.conf import settings
 import math
 
 from django.core.paginator import Paginator, EmptyPage, PageNotAnInteger
@@ -7,7 +10,8 @@ from django.template.defaultfilters import timesince
 from django.utils.translation import ugettext as _
 from subscription.models import UserSubscription, Subscription
 
-from astrobin.gear import *
+from astrobin.gear import is_gear_complete, get_correct_gear
+from astrobin.models import GearUserInfo, UserProfile, Image
 from astrobin.utils import get_image_resolution, decimal_to_hours_minutes_seconds, decimal_to_degrees_minutes_seconds
 from astrobin_apps_donations.templatetags.astrobin_apps_donations_tags import is_donor
 from astrobin_apps_premium.templatetags.astrobin_apps_premium_tags import is_premium_2020, is_premium, is_ultimate_2020, \
@@ -251,6 +255,7 @@ def show_ads(user):
         return False
 
     return True
+
 
 @register.filter
 def can_remove_ads(user):

@@ -120,12 +120,18 @@ class GroupsTest(TestCase):
         self.assertEqual(response.status_code, 200)
         self.assertIsNotNone(re.search(r'data-id="%d"\s+data-alias="%s"' % (image.pk, "gallery"), response.content))
 
-
         # Test that WIP images are not rendered here
         image.is_wip = True; image.save(keep_deleted=True)
         response = self.client.get(reverse('group_detail', kwargs = {'pk': self.group.pk}))
         self.assertEqual(response.status_code, 200)
         self.assertContains(response, '<li>No images.</li>', html = True)
+
+        # Test that corrupted images are not rendered here
+        image.corrupted = True;
+        image.save(keep_deleted=True)
+        response = self.client.get(reverse('group_detail', kwargs={'pk': self.group.pk}))
+        self.assertEqual(response.status_code, 200)
+        self.assertContains(response, '<li>No images.</li>', html=True)
 
         # Test that the group is not accessible if it's private
         self.group.public = False

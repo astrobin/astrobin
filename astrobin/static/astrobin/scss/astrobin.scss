@@ -3269,10 +3269,6 @@ p.small {
   margin-bottom: 12px;
 }
 
-.alert p {
-  margin-bottom: 2px;
-}
-
 .alert-heading {
   margin: 0 0 12px 0;
 }
@@ -6194,12 +6190,6 @@ table.api-examples {
 
 form.edit-thumbnails {
   .control-group:first-of-type {
-    display: none;
-  }
-}
-
-form.edit-revision {
-  .control-group:nth-of-type(3) {
     display: none;
   }
 }

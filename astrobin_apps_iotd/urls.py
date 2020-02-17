@@ -1,6 +1,8 @@
 from django.conf.urls import url
 
-from astrobin_apps_iotd.views import *
+from astrobin_apps_iotd.views import IotdToggleSubmissionAjaxView, IotdSubmissionQueueView, IotdToggleVoteAjaxView, \
+    IotdReviewQueueView, IotdToggleJudgementAjaxView, IotdJudgementQueueView, IotdArchiveView, \
+    IotdSubmittersForImageAjaxView, IotdReviewersForImageAjaxView
 
 urlpatterns = (
     # Submissions

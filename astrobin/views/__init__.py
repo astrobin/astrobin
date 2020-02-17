@@ -1,16 +1,24 @@
 import csv
+import operator
+import os
 import urllib2
 
 import flickrapi
+import simplejson
 from actstream.models import Action
+from django.conf import settings
 from django.contrib import auth
 from django.contrib import messages
 from django.contrib.auth.decorators import login_required, user_passes_test
+from django.contrib.auth.models import User
+from django.contrib.contenttypes.models import ContentType
+from django.core.cache import cache
 from django.core.exceptions import MultipleObjectsReturned
 from django.core.paginator import Paginator, InvalidPage
 from django.core.urlresolvers import reverse
+from django.db.models import Q
 from django.forms.models import inlineformset_factory
-from django.http import Http404
+from django.http import Http404, HttpResponse
 from django.http import HttpResponseForbidden
 from django.http import HttpResponseRedirect
 from django.shortcuts import get_object_or_404
@@ -26,19 +34,29 @@ from django.views.decorators.http import require_GET, require_POST
 from el_pagination.decorators import page_template
 from haystack.exceptions import SearchFieldError
 from haystack.query import SearchQuerySet
+from reviews.models import Review
 from reviews.views import ReviewAddForm
 from silk.profiling.profiler import silk_profile
+from toggleproperties.models import ToggleProperty
 
 from astrobin.context_processors import notices_count, user_language, user_scores, common_variables
-from astrobin.forms import *
-from astrobin.gear import *
-from astrobin.models import *
-from astrobin.shortcuts import *
-from astrobin.utils import *
-from astrobin_apps_platesolving.forms import PlateSolvingSettingsForm, PlateSolvingAdvancedSettingsForm
-from astrobin_apps_platesolving.models import PlateSolvingSettings, PlateSolvingAdvancedSettings
-from astrobin_apps_premium.templatetags.astrobin_apps_premium_tags import can_perform_advanced_platesolving
-from astrobin_apps_premium.utils import premium_get_max_allowed_image_size, premium_get_max_allowed_revisions
+from astrobin.forms import ImageUploadForm, ImageLicenseForm, PrivateMessageForm, UserProfileEditBasicForm, \
+    DeepSky_AcquisitionBasicForm, SolarSystem_AcquisitionForm, UserProfileEditCommercialForm, \
+    UserProfileEditRetailerForm, DefaultImageLicenseForm, TelescopeEditNewForm, MountEditNewForm, CameraEditNewForm, \
+    FocalReducerEditNewForm, SoftwareEditNewForm, FilterEditNewForm, AccessoryEditNewForm, TelescopeEditForm, \
+    MountEditForm, CameraEditForm, FocalReducerEditForm, SoftwareEditForm, FilterEditForm, AccessoryEditForm, \
+    GearUserInfoForm, LocationEditForm, ImageEditWatermarkForm, DeepSky_AcquisitionForm, ClaimCommercialGearForm, \
+    MergeCommercialGearForm, ClaimRetailedGearForm, MergeRetailedGearForm, UserProfileEditPreferencesForm, \
+    RetailedGearForm, ImageRevisionUploadForm, UserProfileEditGearForm, CommercialGearForm
+from astrobin.gear import is_gear_complete, get_correct_gear
+from astrobin.models import Image, UserProfile, CommercialGear, Gear, Location, ImageRevision, DeepSky_Acquisition, \
+    SolarSystem_Acquisition, RetailedGear, GearUserInfo, Telescope, Mount, Camera, FocalReducer, Software, Filter, \
+    Accessory, GearHardMergeRedirect, GlobalStat, App, GearMakeAutoRename, Acquisition
+from astrobin.shortcuts import ajax_response, ajax_success, ajax_fail
+from astrobin.utils import user_is_producer, user_is_retailer, to_user_timezone, base26_encode, base26_decode
+from astrobin_apps_notifications.utils import push_notification
+from astrobin_apps_platesolving.forms import PlateSolvingSettingsForm
+from astrobin_apps_platesolving.models import PlateSolvingSettings, Solution
 
 
 def get_image_or_404(queryset, id):
@@ -293,8 +311,6 @@ def index(request, template='index/root.html', extra_context=None):
     if not request.user.is_authenticated():
         from django.shortcuts import redirect
         return redirect("https://welcome.astrobin.com/")
-
-    from django.core.cache import cache
 
     image_ct = ContentType.objects.get_for_model(Image)
     image_rev_ct = ContentType.objects.get_for_model(ImageRevision)
@@ -1087,6 +1103,9 @@ def user_page(request, username):
     menu = []
 
     qs = Image.objects.filter(user=user)
+
+    if request.user != user:
+        qs = qs.exclude(corrupted=True)
 
     if 'staging' in request.GET:
         if request.user != user and not request.user.is_superuser:
@@ -2784,17 +2803,17 @@ def gear_fix(request, id):
     # Disable this view for now. We're good.
     return HttpResponseForbidden()
 
-    gear = get_object_or_404(Gear, id=id)
-    form = ModeratorGearFixForm(instance=gear)
-    next_gear = Gear.objects.filter(moderator_fixed=None).order_by('?')[:1].get()
-
-    return render(request, 'gear/fix.html', {
-        'form': form,
-        'gear': gear,
-        'next_gear': next_gear,
-        'already_fixed': Gear.objects.exclude(moderator_fixed=None).count(),
-        'remaining': Gear.objects.filter(moderator_fixed=None).count(),
-    })
+    # gear = get_object_or_404(Gear, id=id)
+    # form = ModeratorGearFixForm(instance=gear)
+    # next_gear = Gear.objects.filter(moderator_fixed=None).order_by('?')[:1].get()
+    #
+    # return render(request, 'gear/fix.html', {
+    #     'form': form,
+    #     'gear': gear,
+    #     'next_gear': next_gear,
+    #     'already_fixed': Gear.objects.exclude(moderator_fixed=None).count(),
+    #     'remaining': Gear.objects.filter(moderator_fixed=None).count(),
+    # })
 
 
 @require_POST
@@ -2803,22 +2822,22 @@ def gear_fix_save(request):
     # Disable this view for now. We're good.
     return HttpResponseForbidden()
 
-    id = request.POST.get('gear_id')
-    gear = get_object_or_404(Gear, id=id)
-    form = ModeratorGearFixForm(data=request.POST, instance=gear)
-    next_gear = Gear.objects.filter(moderator_fixed=None).order_by('?')[:1].get()
-
-    if not form.is_valid():
-        return render(request, 'gear/fix.html', {
-            'form': form,
-            'gear': gear,
-            'next_gear': next_gear,
-            'already_fixed': Gear.objects.exclude(moderator_fixed=None).count(),
-            'remaining': Gear.objects.filter(moderator_fixed=None).count(),
-        })
-
-    form.save()
-    return HttpResponseRedirect('/gear/fix/%d/' % next_gear.id)
+    # id = request.POST.get('gear_id')
+    # gear = get_object_or_404(Gear, id=id)
+    # form = ModeratorGearFixForm(data=request.POST, instance=gear)
+    # next_gear = Gear.objects.filter(moderator_fixed=None).order_by('?')[:1].get()
+    #
+    # if not form.is_valid():
+    #     return render(request, 'gear/fix.html', {
+    #         'form': form,
+    #         'gear': gear,
+    #         'next_gear': next_gear,
+    #         'already_fixed': Gear.objects.exclude(moderator_fixed=None).count(),
+    #         'remaining': Gear.objects.filter(moderator_fixed=None).count(),
+    #     })
+    #
+    # form.save()
+    # return HttpResponseRedirect('/gear/fix/%d/' % next_gear.id)
 
 
 @require_GET

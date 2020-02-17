@@ -1,8 +1,6 @@
-# Django
 from django import forms
 
-# This app
-from astrobin_apps_iotd.models import *
+from astrobin_apps_iotd.models import IotdSubmission
 
 
 class IotdSubmissionCreateForm(forms.ModelForm):

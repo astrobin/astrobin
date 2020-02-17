@@ -1,4 +1,4 @@
-from astrobin.models import *
+from astrobin.models import Telescope, Camera, Software, Filter, Mount, Accessory, FocalReducer
 
 TYPES_LOOKUP = {
     'Telescope': Telescope.TELESCOPE_TYPES,

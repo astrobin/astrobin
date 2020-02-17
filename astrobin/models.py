@@ -4,7 +4,6 @@ import hmac
 import logging
 import operator
 import os
-# Python
 import random
 import string
 import unicodedata
@@ -15,6 +14,7 @@ from datetime import datetime
 from image_cropping import ImageRatioField
 
 from astrobin.services import CloudflareService
+from .fields import CountryField, get_country_name
 
 try:
     from hashlib import sha1
@@ -23,7 +23,6 @@ except ImportError:
 
     sha1 = sha.sha
 
-# Django
 from django.conf import settings
 from django.contrib.auth.models import User
 from django.contrib.contenttypes.models import ContentType
@@ -31,7 +30,7 @@ from django.contrib.staticfiles.templatetags.staticfiles import static
 from django.core.cache import cache
 from django.core.exceptions import ValidationError
 from django.core.validators import MaxLengthValidator
-from django.db import IntegrityError
+from django.db import IntegrityError, models
 from django.db.models import Q
 from django.db.models.signals import post_save
 from django.template.defaultfilters import slugify
@@ -44,8 +43,6 @@ try:
 except ImportError:
     # Django >= 1.10
     from django.contrib.contenttypes.fields import GenericRelation
-
-# Third party
 
 from celery.result import AsyncResult
 from model_utils.managers import InheritanceManager
@@ -60,14 +57,11 @@ except:
     # Django >= 1.10
     from timezones.zones import PRETTY_TIMEZONE_CHOICES
 
-# AstroBin apps
 from astrobin_apps_images.managers import ImagesManager, PublicImagesManager, WipImagesManager
 from astrobin_apps_notifications.utils import push_notification
 from astrobin_apps_platesolving.models import Solution
 from nested_comments.models import NestedComment
 
-# This app
-from .fields import *
 from .utils import user_is_paying
 
 log = logging.getLogger('apps')
@@ -803,6 +797,10 @@ class Image(HasSolutionMixin, SafeDeleteModel):
         'accessories': Accessory,
     }
 
+    corrupted = models.BooleanField(
+        default=False
+    )
+
     hash = models.CharField(
         max_length=6,
         default=image_hash,
@@ -1177,6 +1175,10 @@ class Image(HasSolutionMixin, SafeDeleteModel):
         from easy_thumbnails.files import get_thumbnailer
         from astrobin.s3utils import OverwritingFileSystemStorage
 
+        if self.corrupted:
+            log.debug("Attempted to retrieve raw thumbnail for corrupted image %d" % self.pk)
+            return None
+
         revision_label = thumbnail_settings.get('revision_label', 'final')
 
         if revision_label is None:
@@ -1252,7 +1254,7 @@ class Image(HasSolutionMixin, SafeDeleteModel):
                 except (urllib2.HTTPError, urllib2.URLError):
                     remote_file = None
 
-                # If that didn't work, we'll get the file rebularly via django-storages.
+                # If that didn't work, we'll get the file regularly via django-storages.
                 if remote_file is None:
                     log.debug("Image %d: getting via URL didn't work. Falling back to django-storages..." % self.id)
                     try:
@@ -1314,6 +1316,10 @@ class Image(HasSolutionMixin, SafeDeleteModel):
             return url
 
         from astrobin_apps_images.models import ThumbnailGroup
+
+        if self.corrupted:
+            log.debug("Attempted to retrieve thumbnail for corrupted image %d" % self.pk)
+            return None
 
         options = thumbnail_settings.copy()
 
@@ -1540,6 +1546,10 @@ class ImageRevision(HasSolutionMixin, SafeDeleteModel):
     image = models.ForeignKey(
         Image,
         related_name='revisions'
+    )
+
+    corrupted = models.BooleanField(
+        default=False
     )
 
     image_file = models.ImageField(
@@ -1923,12 +1933,12 @@ class Request(models.Model):
     def __unicode__(self):
         return '%s %s: %s' % (_('Request from'), self.from_user.username, self.message)
 
+    def get_absolute_url(self):
+        return '/requests/detail/' + self.id + '/'
+
     class Meta:
         app_label = 'astrobin'
         ordering = ['-created']
-
-    def get_absolute_url():
-        return '/requests/detail/' + self.id + '/'
 
 
 class ImageRequest(Request):

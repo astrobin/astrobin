@@ -1,36 +1,26 @@
-# Python
 import json
 
-# Django
 from django.contrib.contenttypes.models import ContentType
-from django.http import Http404, HttpResponse
+from django.http import Http404, HttpResponse, HttpResponseRedirect
 from django.views.generic import (
     base,
-    CreateView,
     DetailView,
     TemplateView,
 )
 from django.views.generic.edit import BaseDeleteView
-
-# Third party apps
 from rest_framework import generics
-from rest_framework.decorators import api_view
 from rest_framework import permissions
-from rest_framework.reverse import reverse
-from rest_framework.response import Response
 from toggleproperties.models import ToggleProperty
 
-# This app
-from rawdata.folders import *
+from astrobin.models import Image
+from rawdata.folders import FOLDER_TYPE_LOOKUP
 from rawdata.mixins import RestrictToSubscriberMixin
 from rawdata.models import RawImage
 from rawdata.permissions import IsOwnerOrReadOnly, IsSubscriber
 from rawdata.serializers import RawImageSerializer
-from rawdata.utils import *
-from rawdata.zip import *
-
-# AstroBin
-from astrobin.models import Image
+from rawdata.utils import rawdata_user_used_bytes, rawdata_user_byte_limit, rawdata_user_used_percent, \
+    rawdata_user_is_over_limit, rawdata_user_progress_class
+from rawdata.zip import serve_zip
 
 
 class RawImageDetailView(RestrictToSubscriberMixin, DetailView):
@@ -80,7 +70,7 @@ class RawImageDeleteView(RestrictToSubscriberMixin, BaseDeleteView):
                 context['ids'] = ','.join(ids)
             return HttpResponse(
                 json.dumps(context),
-                content_type = 'application/json')
+                content_type='application/json')
 
         return HttpResponseRedirect(self.get_success_url())
 
@@ -89,10 +79,10 @@ class RawImageLibrary(RestrictToSubscriberMixin, TemplateView):
     template_name = 'rawdata/library.html'
 
     def get_folders_by_type(self, user):
-        images = RawImage.objects.filter(user = user, indexed = True)
+        images = RawImage.objects.filter(user=user, indexed=True)
         folders = {}
         for t in RawImage.TYPE_CHOICES:
-            f = TypeFolder(type = t[0], label = t[1], source = images)
+            f = TypeFolder(type=t[0], label=t[1], source=images)
             f.populate()
             folders[f.get_type()] = {
                 'label': f.get_label(),
@@ -104,7 +94,7 @@ class RawImageLibrary(RestrictToSubscriberMixin, TemplateView):
     def get_context_data(self, **kwargs):
         image_ct = ContentType.objects.get_for_model(Image)
 
-        total_files = RawImage.objects.filter(user = self.request.user)
+        total_files = RawImage.objects.filter(user=self.request.user)
 
         context = super(RawImageLibrary, self).get_context_data(**kwargs)
         context['byte_limit'] = rawdata_user_byte_limit(self.request.user)
@@ -113,33 +103,33 @@ class RawImageLibrary(RestrictToSubscriberMixin, TemplateView):
         context['over_limit'] = rawdata_user_is_over_limit(self.request.user)
         context['progress_class'] = rawdata_user_progress_class(self.request.user)
         context['total_files'] = total_files.count()
-        context['unindexed_count'] = total_files.filter(indexed = False).count()
+        context['unindexed_count'] = total_files.filter(indexed=False).count()
         context['requested_user'] = self.request.user
-        context['public_images_no'] = Image.objects.filter(user = self.request.user).count()
-        context['wip_images_no'] = Image.wip.filter(user = self.request.user).count()
+        context['public_images_no'] = Image.objects.filter(user=self.request.user).count()
+        context['wip_images_no'] = Image.wip.filter(user=self.request.user).count()
         context['bookmarks_no'] = ToggleProperty.objects.toggleproperties_for_user("bookmark", self.request.user) \
-            .filter(content_type = image_ct).count()
+            .filter(content_type=image_ct).count()
         context['likes_no'] = ToggleProperty.objects.toggleproperties_for_user("like", self.request.user) \
-            .filter(content_type = image_ct).count()
+            .filter(content_type=image_ct).count()
 
         for filtering in (
-            'type',
-            'upload',
-            'acquisition',
-            'camera',
-            'temperature',
+                'type',
+                'upload',
+                'acquisition',
+                'camera',
+                'temperature',
         ):
             context['filter_' + filtering] = self.request.GET.get(filtering)
 
-        all_images = RawImage.objects.filter(user = self.request.user)
+        all_images = RawImage.objects.filter(user=self.request.user)
 
         f = self.request.GET.get('f', 'upload')
         if not f or f == 'none':
-            factory = FOLDER_TYPE_LOOKUP['none'](source = all_images)
+            factory = FOLDER_TYPE_LOOKUP['none'](source=all_images)
             context['images'] = factory.filter(self.request.GET)
         else:
             try:
-                factory = FOLDER_TYPE_LOOKUP[f](source = all_images)
+                factory = FOLDER_TYPE_LOOKUP[f](source=all_images)
                 factory.filter(self.request.GET)
 
                 context['folders_header'] = factory.get_label()

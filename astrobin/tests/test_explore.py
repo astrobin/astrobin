@@ -53,6 +53,19 @@ class ExploreTest(TestCase):
         self.image.delete()
         self.user.delete()
 
+    def test_top_picks_excludes_corrupted(self):
+        IotdSubmission.objects.create(submitter=self.submitter, image=self.image)
+        IotdVote.objects.create(reviewer=self.reviewer, image=self.image)
+
+        self.image.corrupted = True
+        self.image.save()
+
+        response = self.client.get(reverse_lazy('top_picks'))
+        self.assertNotContains(response, self.image.title)
+
+        self.image.corrupted = False
+        self.image.save()
+
     @override_settings(PREMIUM_RESTRICTS_IOTD=False)
     def test_top_picks_data_source_filter(self):
         IotdSubmission.objects.create(submitter=self.submitter, image=self.image)

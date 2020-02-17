@@ -1,16 +1,13 @@
-# Python
-from datetime import date
+from datetime import date, timedelta, datetime
 
-# Django
+from django.contrib.auth.models import Group
 from django.core.urlresolvers import reverse
-from django.test import TestCase, override_settings
-from django.utils import timezone, formats
-# Third party
+from django.test import TestCase
+from django.utils import timezone
 from django_bouncy.models import Bounce
 from mock import patch
 from toggleproperties.models import ToggleProperty
 
-# AstroBin
 from astrobin.models import (
     Acquisition,
     CommercialGear,
@@ -450,6 +447,29 @@ class UserTest(TestCase):
         vote.delete()
 
         image.delete()
+
+    @patch("astrobin.tasks.retrieve_primary_thumbnails")
+    def test_corrupted_images_not_shown_to_others(self, retrieve_primary_thumbnails):
+        self.client.login(username="user", password="password")
+        image = self._do_upload('astrobin/fixtures/test.jpg', "TEST IMAGE")
+        image.corrupted = True
+        image.save()
+        self.client.logout()
+
+        response = self.client.get(reverse("user_page", args=(self.user.username,)))
+        self.assertEqual(response.status_code, 200)
+        self.assertNotContains(response, "data-id=\"%d\"" % image.pk)
+
+    @patch("astrobin.tasks.retrieve_primary_thumbnails")
+    def test_corrupted_images_shown_to_owner(self, retrieve_primary_thumbnails):
+        self.client.login(username="user", password="password")
+        image = self._do_upload('astrobin/fixtures/test.jpg', "TEST IMAGE")
+        image.corrupted = True
+        image.save()
+
+        response = self.client.get(reverse("user_page", args=(self.user.username,)))
+        self.assertEqual(response.status_code, 200)
+        self.assertContains(response, "data-id=\"%d\"" % image.pk)
 
     def test_bookmarks(self):
         self.client.login(username="user", password="password")

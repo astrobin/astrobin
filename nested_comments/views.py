@@ -1,23 +1,10 @@
-# Django
-from django.shortcuts import get_object_or_404
-from django.views.generic import *
-
-# Third party apps
 from django_filters.rest_framework import DjangoFilterBackend
 from rest_framework import generics
-from rest_framework.decorators import api_view
 from rest_framework import permissions
-from rest_framework.reverse import reverse
-from rest_framework.response import Response
 
-# Other AstroBin apps
-from common.mixins import AjaxableResponseMixin
-
-# This app
-from .forms import NestedCommentForm
 from .models import NestedComment
 from .permissions import IsOwnerOrReadOnly
-from .serializers import *
+from .serializers import NestedCommentSerializer
 
 
 class NestedCommentList(generics.ListCreateAPIView):
@@ -33,7 +20,7 @@ class NestedCommentList(generics.ListCreateAPIView):
                           IsOwnerOrReadOnly,)
 
     def perform_create(self, serializer):
-        serializer.save(author = self.request.user)
+        serializer.save(author=self.request.user)
 
 
 class NestedCommentDetail(generics.RetrieveUpdateDestroyAPIView):
@@ -47,4 +34,4 @@ class NestedCommentDetail(generics.RetrieveUpdateDestroyAPIView):
                           IsOwnerOrReadOnly,)
 
     def perform_create(self, serializer):
-        serializer.save(user = self.request.user)
+        serializer.save(user=self.request.user)

@@ -91,7 +91,7 @@ def hitcount_cleanup():
 
 @shared_task()
 def contain_imagecache_size():
-    subprocess.call(['scripts/contain_directory_size.sh', '/media/imagecache', '7'])
+    subprocess.call(['scripts/contain_directory_size.sh', '/media/imagecache', '10'])
 
 
 """
@@ -142,6 +142,20 @@ def retrieve_thumbnail(pk, alias, options):
                 thumbnails.save()
                 logger.debug("Image %d: saved generated thumbnail in the database." % image.pk)
                 cache.delete('%s.retrieve' % cache_key)
+            else:
+                logger.debug("Image %d: marking as corrupted." % image.pk)
+                if revision_label == '0':
+                    image.corrupted = True
+                    image.save()
+                elif revision_label == 'final':
+                    corrupted_revision_label = image.get_final_revision_label()  # type: string
+                    corrupted_revision = image.revision.get(label=corrupted_revision_label)  # type: ImageRevision
+                    corrupted_revision.corrupted = True
+                    corrupted_revision.save()
+                else:
+                    corrupted_revision = image.revision.get(label=revision_label)  # type: ImageRevision
+                    corrupted_revision.corrupted = True
+                    corrupted_revision.save()
         finally:
             release_lock()
         return
