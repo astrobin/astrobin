@@ -1,4 +1,5 @@
 from django import forms
+from django.forms import TextInput
 from django.utils.translation import ugettext_lazy as _
 
 from astrobin.forms.utils import parseKeyValueTags
@@ -9,6 +10,12 @@ from astrobin_apps_images.models import KeyValueTag
 
 class ImageEditBasicForm(forms.ModelForm):
     error_css_class = 'error'
+
+    resolution = forms.CharField(
+        label=_("Image resolution"),
+        required=False,
+        widget=TextInput(attrs={'readonly': 'readonly'})
+    )
 
     link = forms.RegexField(
         regex='^(http|https)://',
@@ -52,11 +59,15 @@ class ImageEditBasicForm(forms.ModelForm):
     def __init__(self, *args, **kwargs):
         super(ImageEditBasicForm, self).__init__(*args, **kwargs)
 
+        self.__initResolution()
         self.__initLocations()
         self.__initGroups()
         self.__initMouseHoverImage()
         self.__initRevisions()
         self.__initKeyValueTags()
+
+    def __initResolution(self):
+        self.fields['resolution'].initial = "%d x %d" % (self.instance.w, self.instance.h)
 
     def __initLocations(self):
         locations = Location.objects.filter(user=self.instance.user.userprofile)
@@ -164,6 +175,19 @@ class ImageEditBasicForm(forms.ModelForm):
     class Meta:
         model = Image
         fields = (
-            'image_file', 'title', 'link', 'link_to_fits', 'acquisition_type', 'data_source', 'remote_source',
-            'subject_type','solar_system_main_subject', 'locations', 'groups', 'description', 'keyvaluetags',
-            'mouse_hover_image', 'allow_comments')
+            'resolution',
+            'image_file',
+            'title',
+            'link',
+            'link_to_fits',
+            'acquisition_type',
+            'data_source',
+            'remote_source',
+            'subject_type',
+            'solar_system_main_subject',
+            'locations',
+            'groups',
+            'description',
+            'keyvaluetags',
+            'mouse_hover_image',
+            'allow_comments')
