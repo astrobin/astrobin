@@ -29,6 +29,42 @@
     </div>
     {% endif %}
 
+    {% if requested_user == request.user and has_corrupted_images %}
+        <div class="alert alert-warning">
+            <h4>
+                <i class="icon icon-warning-sign"></i> {% trans "Oh no!" %}
+            </h4>
+
+            <p>
+                {% blocktrans %}
+                    We are very, very sorry, but it appears that some of your images suffered a catastrophic data
+                    corruption, and cannot be retrieved. Please read more <a href="{{ data_corruption_url }}">here</a>.
+                {% endblocktrans %}
+            </p>
+            <p>
+                {% blocktrans %}
+                    Try clicking on the "sad face" thumbnails. If you get to your image's page, please try to use the
+                    Actions menu and click on "Flag malfunctioning thumbnails". In some cases it might work. If you get
+                    redirected to the "Edit basic information" form, you can replace the missing file with a copy that
+                    we hope you still have.
+                {% endblocktrans %}
+            </p>
+
+            <p>
+                {% blocktrans %}
+                    The data associated to your affected images, such as title, description, equipment used, acquisition
+                    details, comments, likes, bookmarks, and so on, is still intact and safe.
+                {% endblocktrans %}
+            </p>
+
+            <p>
+                {% blocktrans %}
+                    AstroBin would like to offer you its sincerest apologies. :(
+                {% endblocktrans %}
+            </p>
+        </div>
+    {% endif %}
+
     <div class="row">
         <div class="span3">
             {% include 'user/profile/meta.html' %}
