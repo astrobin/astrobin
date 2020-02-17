@@ -32,6 +32,6 @@ if DEBUG:
         'debug_toolbar.panels.redirects.RedirectsPanel',
     ]
 
-    CELERY_TASK_ALWAYS_EAGER = True
+    CELERY_ALWAYS_EAGER = True
 
     CORS_ORIGIN_ALLOW_ALL = True
