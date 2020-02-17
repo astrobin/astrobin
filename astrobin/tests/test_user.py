@@ -2,8 +2,8 @@ from datetime import date, timedelta, datetime
 
 from django.contrib.auth.models import Group
 from django.core.urlresolvers import reverse
-from django.test import TestCase
-from django.utils import timezone
+from django.test import TestCase, override_settings
+from django.utils import timezone, formats
 from django_bouncy.models import Bounce
 from mock import patch
 from toggleproperties.models import ToggleProperty

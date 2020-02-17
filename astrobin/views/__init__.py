@@ -57,6 +57,7 @@ from astrobin.utils import user_is_producer, user_is_retailer, to_user_timezone,
 from astrobin_apps_notifications.utils import push_notification
 from astrobin_apps_platesolving.forms import PlateSolvingSettingsForm
 from astrobin_apps_platesolving.models import PlateSolvingSettings, Solution
+from astrobin_apps_premium.utils import premium_get_max_allowed_image_size, premium_get_max_allowed_revisions
 
 
 def get_image_or_404(queryset, id):

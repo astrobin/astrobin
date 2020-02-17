@@ -2,7 +2,7 @@ from django.conf.urls import url, include
 from django.contrib.auth.decorators import login_required
 from django.views.generic import RedirectView
 
-from astrobin_apps_donations.views import CancelView, SuccessView, EditView
+from astrobin_apps_donations.views import CancelView, SuccessView, EditView, DonateView
 
 urlpatterns = (
     url(

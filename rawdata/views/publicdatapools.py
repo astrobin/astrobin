@@ -18,7 +18,7 @@ from rawdata.forms import (
     PublicDataPool_ImagesForm,
     PublicDataPool_SelectExistingForm,
 )
-from rawdata.mixins import RestrictToSubscriberMixin, RestrictToCreatorMixin
+from rawdata.mixins import RestrictToSubscriberMixin, RestrictToCreatorMixin, RestrictToPremiumOrSubscriberMixin
 from rawdata.models import PublicDataPool, RawImage
 from rawdata.zip import serve_zip
 

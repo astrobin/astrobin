@@ -53,6 +53,7 @@ class ExploreTest(TestCase):
         self.image.delete()
         self.user.delete()
 
+    @override_settings(PREMIUM_RESTRICTS_IOTD=False)
     def test_top_picks_excludes_corrupted(self):
         IotdSubmission.objects.create(submitter=self.submitter, image=self.image)
         IotdVote.objects.create(reviewer=self.reviewer, image=self.image)
