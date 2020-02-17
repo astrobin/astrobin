@@ -1186,20 +1186,25 @@ class Image(HasSolutionMixin, SafeDeleteModel):
         options = dict(settings.THUMBNAIL_ALIASES[''][alias].copy(), **thumbnail_settings)
 
         if alias in ("gallery", "gallery_inverted", "collection", "thumb"):
-            if revision_label == '0' and self.square_cropping:
-                options['box'] = self.square_cropping
-                options['crop'] = True
+            if revision_label == '0':
+                if self.square_cropping:
+                    options['box'] = self.square_cropping
+                    options['crop'] = True
             elif revision_label == 'final':
                 try:
                     revision = ImageRevision.objects.get(image=self, label=self.get_final_revision_label())
-                    options['box'] = revision.square_cropping
+                    if revision.square_cropping:
+                        options['box'] = revision.square_cropping
+                        options['crop'] = True
                 except ImageRevision.DoesNotExist:
-                    options['box'] = self.square_cropping
-                options['crop'] = True
+                    if self.square_cropping:
+                        options['box'] = self.square_cropping
+                        options['crop'] = True
             else:
                 revision = ImageRevision.objects.get(image=self, label=revision_label)
-                options['box'] = revision.square_cropping
-                options['crop'] = True
+                if revision.square_cropping:
+                    options['box'] = revision.square_cropping
+                    options['crop'] = True
 
         field = self.get_thumbnail_field(revision_label)
         if not field.name.startswith('images/'):
