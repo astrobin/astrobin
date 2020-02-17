@@ -1168,10 +1168,6 @@ class Image(HasSolutionMixin, SafeDeleteModel):
         from easy_thumbnails.files import get_thumbnailer
         from astrobin.s3utils import OverwritingFileSystemStorage
 
-        if self.corrupted:
-            log.debug("Attempted to retrieve raw thumbnail for corrupted image %d" % self.pk)
-            return None
-
         revision_label = thumbnail_settings.get('revision_label', 'final')
 
         if revision_label is None:
@@ -1314,10 +1310,6 @@ class Image(HasSolutionMixin, SafeDeleteModel):
             return url
 
         from astrobin_apps_images.models import ThumbnailGroup
-
-        if self.corrupted:
-            log.debug("Attempted to retrieve thumbnail for corrupted image %d" % self.pk)
-            return None
 
         options = thumbnail_settings.copy()
 
