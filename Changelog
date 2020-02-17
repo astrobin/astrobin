@@ -1,3 +1,13 @@
+2020-02-16 Salvatore Iovene <salvatore@iovene.com>
+ * v1.54.3
+ * (profile) Fix missing link
+
+2020-02-16 Salvatore Iovene <salvatore@iovene.com>
+ * v1.54.2
+ * (infra) Fix spelling of CELERY_ALWAYS_EAGER setting (in debug)
+ * (images) Attempt thumbnail invalidation once when unable to get thumb right away
+ * (profile) Add warning message about corrupted images
+
 2020-02-15 Salvatore Iovene <salvatore@iovene.com>
  * v1.54.1
  * (images) Allow replacing image revision file field

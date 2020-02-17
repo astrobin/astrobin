@@ -124,38 +124,51 @@ def retrieve_thumbnail(pk, alias, options):
     acquire_lock = lambda: cache.add(lock_id, 'true', LOCK_EXPIRE)
     release_lock = lambda: cache.delete(lock_id)
 
+    def set_thumb():
+        url = thumb.url
+        field = image.get_thumbnail_field(revision_label)
+        if not field.name.startswith('images/'):
+            field.name = 'images/' + field.name
+        cache_key = image.thumbnail_cache_key(field, alias)
+        cache.set(cache_key, url, 60 * 60 * 24 * 365)
+        logger.debug("Image %d: saved generated thumbnail in the cache." % image.pk)
+        thumbnails, created = ThumbnailGroup.objects.get_or_create(image=image, revision=revision_label)
+        setattr(thumbnails, alias, url)
+        thumbnails.save()
+        logger.debug("Image %d: saved generated thumbnail in the database." % image.pk)
+        cache.delete('%s.retrieve' % cache_key)
+
     if acquire_lock():
         try:
             image = Image.all_objects.get(pk=pk)
             thumb = image.thumbnail_raw(alias, options)
 
             if thumb:
-                url = thumb.url
-                field = image.get_thumbnail_field(revision_label)
-                if not field.name.startswith('images/'):
-                    field.name = 'images/' + field.name
-                cache_key = image.thumbnail_cache_key(field, alias)
-                cache.set(cache_key, url, 60 * 60 * 24 * 365)
-                logger.debug("Image %d: saved generated thumbnail in the cache." % image.pk)
-                thumbnails, created = ThumbnailGroup.objects.get_or_create(image=image, revision=revision_label)
-                setattr(thumbnails, alias, url)
-                thumbnails.save()
-                logger.debug("Image %d: saved generated thumbnail in the database." % image.pk)
-                cache.delete('%s.retrieve' % cache_key)
+                set_thumb()
             else:
-                logger.debug("Image %d: marking as corrupted." % image.pk)
-                if revision_label == '0':
-                    image.corrupted = True
-                    image.save()
-                elif revision_label == 'final':
-                    corrupted_revision_label = image.get_final_revision_label()  # type: string
-                    corrupted_revision = image.revision.get(label=corrupted_revision_label)  # type: ImageRevision
-                    corrupted_revision.corrupted = True
-                    corrupted_revision.save()
+                # Attempting thumbnail regeneration
+                image.thumbnail_invalidate()
+                # Need to reread
+                image = Image.all_objects.get(pk=pk)
+                thumb = image.thumbnail_raw(alias, options)
+                if thumb:
+                    set_thumb()
                 else:
-                    corrupted_revision = image.revision.get(label=revision_label)  # type: ImageRevision
-                    corrupted_revision.corrupted = True
-                    corrupted_revision.save()
+                    logger.debug("Image %d: marking as corrupted." % image.pk)
+                    if revision_label == '0':
+                        image.corrupted = True
+                        image.save()
+                    elif revision_label == 'final':
+                        corrupted_revision_label = image.get_final_revision_label()  # type: string
+                        corrupted_revision = image.revision.get(label=corrupted_revision_label)  # type: ImageRevision
+                        corrupted_revision.corrupted = True
+                        corrupted_revision.save()
+                    else:
+                        corrupted_revision = image.revision.get(label=revision_label)  # type: ImageRevision
+                        corrupted_revision.corrupted = True
+                        corrupted_revision.save()
+        except Exception as e:
+            logger.debug("Error retrieving thumbnail: %s" % e.message)
         finally:
             release_lock()
         return

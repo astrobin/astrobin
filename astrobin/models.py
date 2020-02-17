@@ -1384,6 +1384,17 @@ class Image(HasSolutionMixin, SafeDeleteModel):
         if task_id is None:
             result = retrieve_thumbnail.apply_async(args=(self.pk, alias, options), task_id=cache_key)
             cache.set(task_id_cache_key, result.task_id)
+
+            try:
+                # Try again in case of eagerness.
+                thumbnails = self.thumbnails.get(revision=revision_label)
+
+                if thumbnails:
+                    url = getattr(thumbnails, alias)
+                    if url:
+                        return url
+            except ThumbnailGroup.DoesNotExist:
+                pass
         else:
             AsyncResult(task_id_cache_key)
 
