@@ -1174,6 +1174,7 @@ def user_page(request, username):
         'likes_no': ToggleProperty.objects.toggleproperties_for_user("like", user) \
             .filter(content_type=image_ct).count(),
         'alias': 'gallery',
+        'has_corrupted_images': Image.objects_including_wip.filter(corrupted=True, user=user).count() > 0,
     }
 
     template_name = 'user/profile.html'
