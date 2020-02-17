@@ -36,7 +36,7 @@
             </h4>
 
             <p>
-                {% blocktrans %}
+                {% blocktrans with "forum/c/astrobin/annoucements/currently-investigating-a-problem-with-availability-of-thumbnails/" as data_corruption_url %}
                     We are very, very sorry, but it appears that some of your images suffered a catastrophic data
                     corruption, and cannot be retrieved. Please read more <a href="{{ data_corruption_url }}">here</a>.
                 {% endblocktrans %}
