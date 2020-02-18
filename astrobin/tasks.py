@@ -160,11 +160,11 @@ def retrieve_thumbnail(pk, alias, options):
                         image.save()
                     elif revision_label == 'final':
                         corrupted_revision_label = image.get_final_revision_label()  # type: string
-                        corrupted_revision = image.revision.get(label=corrupted_revision_label)  # type: ImageRevision
+                        corrupted_revision = image.revisions.get(label=corrupted_revision_label)  # type: ImageRevision
                         corrupted_revision.corrupted = True
                         corrupted_revision.save()
                     else:
-                        corrupted_revision = image.revision.get(label=revision_label)  # type: ImageRevision
+                        corrupted_revision = image.revisions.get(label=revision_label)  # type: ImageRevision
                         corrupted_revision.corrupted = True
                         corrupted_revision.save()
         except Exception as e:
