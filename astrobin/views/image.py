@@ -226,15 +226,14 @@ class ImageDetailView(ImageDetailViewBase):
                     not request.user.userprofile.is_image_moderator():
                 raise Http404
 
-        if image.corrupted:
+        revision_label = kwargs.get('r')
+        if image.corrupted and (revision_label == '0' or (revision_label in [None, 'final'] and image.is_final)):
             if request.user == image.user:
                 return redirect(reverse('image_edit_basic', args=(image.get_id(),)) + '?corrupted')
             else:
                 raise Http404
 
-        revision_label = kwargs['r']
-
-        if revision_label and revision_label != '0':
+        if revision_label != '0':
             try:
                 revision = image.revisions.get(label=revision_label)
                 if revision.corrupted:
@@ -762,13 +761,25 @@ class ImageFullView(ImageDetailView):
         if image.moderator_decision == 2:
             raise Http404
 
-        if image.corrupted:
+        self.revision_label = kwargs['r']
+
+        if image.corrupted and (self.revision_label == '0' or (self.revision_label in [None, 'final'] and image.is_final)):
             if request.user == image.user:
                 return redirect(reverse('image_edit_basic', args=(image.get_id(),)) + '?corrupted')
             else:
                 raise Http404
 
-        self.revision_label = kwargs['r']
+        if self.revision_label != '0':
+            try:
+                revision = image.revisions.get(label=self.revision_label)
+                if revision.corrupted:
+                    if request.user == image.user:
+                        return redirect(reverse('image_edit_revision', args=(revision.pk,)) + '?corrupted')
+                    else:
+                        raise Http404
+            except ImageRevision.DoesNotExist:
+                pass
+
 
         if self.revision_label is None:
             # No revision specified, let's see if we need to redirect to the
