@@ -1390,7 +1390,7 @@ class Image(HasSolutionMixin, SafeDeleteModel):
 
         return static('astrobin/images/placeholder-gallery.jpg')
 
-    def thumbnail_invalidate_real(self, field, revision_label, delete_remote=True):
+    def thumbnail_invalidate_real(self, field, revision_label, delete_remote=False):
         from easy_thumbnails.files import get_thumbnailer
 
         from astrobin.s3utils import OverwritingFileSystemStorage
@@ -1472,7 +1472,7 @@ class Image(HasSolutionMixin, SafeDeleteModel):
         except ThumbnailGroup.DoesNotExist:
             log.debug("Image %d: thumbnail group missing." % self.id)
 
-    def thumbnail_invalidate(self, delete_remote=True):
+    def thumbnail_invalidate(self, delete_remote=False):
         return self.thumbnail_invalidate_real(self.image_file, '0', delete_remote)
 
     def get_data_source(self):
@@ -1629,7 +1629,7 @@ class ImageRevision(HasSolutionMixin, SafeDeleteModel):
     def thumbnail(self, alias, thumbnail_settings={}):
         return self.image.thumbnail(alias, dict(thumbnail_settings.items() + {'revision_label': self.label}.items()))
 
-    def thumbnail_invalidate(self, delete_remote=True):
+    def thumbnail_invalidate(self, delete_remote=False):
         return self.image.thumbnail_invalidate_real(self.image_file, self.label, delete_remote)
 
 

@@ -28,6 +28,11 @@
             enctype="multipart/form-data">
 
         {% csrf_token %}
+
+        {% if 'corrupted' in request.GET %}
+            {% include './_catastrophic_data_corruption.html' %}
+        {% endif %}
+
         {{ form|as_bootstrap }}
 
         <div class="form-actions">
