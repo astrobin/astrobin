@@ -3113,10 +3113,14 @@ p.small {
       width: 100%;
     }
   }
-}
 
-.alert h4 {
-  margin-bottom: 12px;
+  h4 {
+    margin-bottom: 12px;
+  }
+
+  strong {
+    color: inherit;
+  }
 }
 
 .alert-heading {
@@ -3127,7 +3131,8 @@ p.small {
   color: $background-color;
 }
 
-.alert-error {
+.alert-error,
+.alert-danger {
   a, a:link, a:visited {
     color: #444;
     text-decoration: underline;

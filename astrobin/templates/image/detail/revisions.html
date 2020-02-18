@@ -16,6 +16,14 @@
                         </div>
                     {% endif %}
 
+                    {% ifequal request.user image.user %}
+                        <div class="edit">
+                            <a href="{% url 'image_edit_basic' image.get_id %}">
+                                <i class="icon-pencil"></i>
+                            </a>
+                        </div>
+                    {% endifequal %}
+
                     <div class="image">
                         {% astrobin_image image 'thumb' revision='0' tooltip=False %}
                     </div>

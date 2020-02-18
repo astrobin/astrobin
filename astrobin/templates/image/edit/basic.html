@@ -32,26 +32,7 @@
             enctype="multipart/form-data">{% csrf_token %}
 
         {% if 'corrupted' in request.GET %}
-            <div class="alert alert-danger">
-                <h4 class="alert-heading">
-                    <i class="icon-fire"></i> {% trans "Oh no!" %}
-                </h4>
-
-                <p>
-                    {% blocktrans %}
-                        We are very, very sorry, but it appears that your image suffered a catastrophic data
-                        corruption, and it cannot be retrieved. Hopefully you still have your file (the information on
-                        this form should provide you with enough context).
-                    {% endblocktrans %}
-                </p>
-
-                <p>
-                    {% blocktrans %}
-                        Please use the file input below to upload it again, and then click on the Save button down
-                        below. All the data you had previously associated to your image is still here.
-                    {% endblocktrans %}
-                </p>
-            </div>
+            {% include './_catastrophic_data_corruption.html' %}
         {% endif %}
 
         {{form|as_bootstrap}}

@@ -126,9 +126,9 @@ class ImageFlagThumbsView(
 
     def post(self, request, *args, **kwargs):
         image = self.get_object()
-        image.thumbnail_invalidate(False)
+        image.thumbnail_invalidate()
         for r in image.revisions.all():
-            r.thumbnail_invalidate(False)
+            r.thumbnail_invalidate()
         messages.success(self.request, _("Thanks for reporting the problem. All thumbnails will be generated again."))
         return super(ImageFlagThumbsView, self).post(self.request, args, kwargs)
 
@@ -148,7 +148,7 @@ class ImageThumbView(JSONResponseMixin, ImageDetailViewBase):
 
         force = request.GET.get('force')
         if force is not None:
-            image.thumbnail_invalidate(False)
+            image.thumbnail_invalidate()
 
         opts = {
             'revision_label': r,
@@ -187,7 +187,7 @@ class ImageRawThumbView(ImageDetailViewBase):
 
         force = request.GET.get('force')
         if force is not None:
-            image.thumbnail_invalidate(False)
+            image.thumbnail_invalidate()
 
         sync = request.GET.get('sync')
         if sync is not None:
@@ -233,6 +233,17 @@ class ImageDetailView(ImageDetailViewBase):
                 raise Http404
 
         revision_label = kwargs['r']
+
+        if revision_label and revision_label != '0':
+            try:
+                revision = image.revisions.get(label=revision_label)
+                if revision.corrupted:
+                    if request.user == image.user:
+                        return redirect(reverse('image_edit_revision', args=(revision.pk,)) + '?corrupted')
+                    else:
+                        raise Http404
+            except ImageRevision.DoesNotExist:
+                pass
 
         if revision_label is None:
             # No revision specified, let's see if we need to redirect to the
@@ -1103,11 +1114,12 @@ class ImageEditRevisionView(LoginRequiredMixin, UpdateView):
 
     def form_valid(self, form):
         messages.success(self.request, _("Form saved. Thank you!"))
+        self.object.corrupted = False
         return super(ImageEditRevisionView, self).form_valid(form)
 
     def post(self, request, *args, **kwargs):
         image = self.get_object()  # type: ImageRevision
-        image.thumbnail_invalidate(delete_remote=False)
+        image.thumbnail_invalidate()
 
         return super(ImageEditRevisionView, self).post(request, *args, **kwargs)
 
@@ -1124,6 +1136,6 @@ class ImageEditThumbnailsView(ImageEditBaseView):
 
     def post(self, request, *args, **kwargs):
         image = self.get_object()  # type: Image
-        image.thumbnail_invalidate(delete_remote=False)
+        image.thumbnail_invalidate()
 
         return super(ImageEditThumbnailsView, self).post(request, *args, **kwargs)
