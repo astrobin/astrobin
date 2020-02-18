@@ -954,9 +954,12 @@ def user_page(request, username):
             corrupted_pks.append(i.pk)
             break
 
-        final = i.revisions.get(label=i.get_final_revision_label())
-        if final.corrupted:
-            corrupted_pks.append(i.pk)
+        try:
+            final = i.revisions.get(label=i.get_final_revision_label())
+            if final.corrupted:
+                corrupted_pks.append(i.pk)
+        except ImageRevision.DoesNotExist:
+            pass
 
     if request.user != user:
         qs = qs.exclude(pk__in=corrupted_pks)
