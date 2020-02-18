@@ -948,9 +948,18 @@ def user_page(request, username):
     menu = []
 
     qs = Image.objects.filter(user=user)
+    corrupted_pks = []
+    for i in qs:
+        if i.is_final and i.corrupted:
+            corrupted_pks.append(i.pk)
+            break
+
+        final = i.revisions.get(label=i.get_final_revision_label())
+        if final.corrupted:
+            corrupted_pks.append(i.pk)
 
     if request.user != user:
-        qs = qs.exclude(corrupted=True)
+        qs = qs.exclude(pk__in=corrupted_pks)
 
     if 'staging' in request.GET:
         if request.user != user and not request.user.is_superuser:
