@@ -3733,7 +3733,35 @@ li.revisions {
     padding: 4px;
     border-radius: 14px;
   }
-  &:hover .edit {
+
+  .delete {
+    position: absolute;
+    top: 23px;
+    right: -4px;
+    z-index: 2;
+    visibility: hidden;
+    background: rgba(0, 0, 0, 0.75);
+    padding: 4px;
+    border-radius: 14px;
+
+    i {
+      color: red;
+    }
+
+    form {
+      margin: 0;
+    }
+
+    button {
+      background: none;
+      border: 0;
+      padding: 0;
+      color: red;
+    }
+  }
+
+  &:hover .edit,
+  &:hover .delete {
     visibility: visible;
   }
 
