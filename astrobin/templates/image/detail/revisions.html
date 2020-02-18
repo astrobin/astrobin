@@ -22,6 +22,12 @@
                                 <i class="icon-pencil"></i>
                             </a>
                         </div>
+
+                        <div class="delete">
+                            <a data-toggle="modal" class="danger" href="#delete-original-image-modal">
+                                <i class="icon-trash"></i>
+                            </a>
+                        </div>
                     {% endifequal %}
 
                     <div class="image">
@@ -50,6 +56,15 @@
                                 <a href="{% url 'image_edit_revision' r.pk %}">
                                     <i class="icon-pencil"></i>
                                 </a>
+                            </div>
+
+                            <div class="delete">
+                                <form class="form-inline" action="{% url 'image_delete_revision' r.pk %}"
+                                      method="post">{% csrf_token %}
+                                    <button type="submit">
+                                        <i class="icon-trash"></i>
+                                    </button>
+                                </form>
                             </div>
                         {% endifequal %}
 
