@@ -582,6 +582,7 @@ class UserTest(TestCase):
 
         response = self.client.get(reverse('user_page', args=('user',)))
 
+        self.assertEquals(200, response.status_code)
         self.assertNotContains(response, "CORRUPTED_IMAGE")
 
         image.delete()
@@ -596,6 +597,7 @@ class UserTest(TestCase):
 
         response = self.client.get(reverse('user_page', args=('user',)))
 
+        self.assertEquals(200, response.status_code)
         self.assertNotContains(response, "CORRUPTED_IMAGE")
 
         image.delete()
@@ -611,6 +613,7 @@ class UserTest(TestCase):
 
         response = self.client.get(reverse('user_page', args=('user',)))
 
+        self.assertEquals(200, response.status_code)
         self.assertContains(response, "CORRUPTED_IMAGE")
 
         image.delete()
@@ -631,6 +634,7 @@ class UserTest(TestCase):
 
         response = self.client.get(reverse('user_page', args=('user',)))
 
+        self.assertEquals(200, response.status_code)
         self.assertNotContains(response, "CORRUPTED_IMAGE")
 
         image.delete()
@@ -644,6 +648,7 @@ class UserTest(TestCase):
 
         response = self.client.get(reverse('user_page', args=('user',)))
 
+        self.assertEquals(200, response.status_code)
         self.assertContains(response, "CORRUPTED_IMAGE")
 
         image.delete()
@@ -657,6 +662,7 @@ class UserTest(TestCase):
 
         response = self.client.get(reverse('user_page', args=('user',)))
 
+        self.assertEquals(200, response.status_code)
         self.assertContains(response, "CORRUPTED_IMAGE")
 
         image.delete()
@@ -671,6 +677,7 @@ class UserTest(TestCase):
 
         response = self.client.get(reverse('user_page', args=('user',)))
 
+        self.assertEquals(200, response.status_code)
         self.assertContains(response, "CORRUPTED_IMAGE")
 
         image.delete()
@@ -689,6 +696,7 @@ class UserTest(TestCase):
 
         response = self.client.get(reverse('user_page', args=('user',)))
 
+        self.assertEquals(200, response.status_code)
         self.assertContains(response, "CORRUPTED_IMAGE")
 
         image.delete()
