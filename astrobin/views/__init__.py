@@ -642,7 +642,7 @@ def image_edit_make_final(request, id):
     if request.user != image.user and not request.user.is_superuser:
         return HttpResponseForbidden()
 
-    revisions = ImageRevision.objects.filter(image=image)
+    revisions = ImageRevision.all_objects.filter(image=image)
     for r in revisions:
         r.is_final = False
         r.save(keep_deleted=True)
@@ -659,7 +659,7 @@ def image_edit_revision_make_final(request, id):
     if request.user != r.image.user and not request.user.is_superuser:
         return HttpResponseForbidden()
 
-    other = ImageRevision.objects.filter(image=r.image)
+    other = ImageRevision.all_objects.filter(image=r.image)
     for i in other:
         i.is_final = False
         i.save(keep_deleted=True)
