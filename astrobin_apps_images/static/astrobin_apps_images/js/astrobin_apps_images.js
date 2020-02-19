@@ -20,12 +20,12 @@ $(document).ready(function () {
                         tries[key] = 0;
                     }
 
-                    if (tries[key] >= 5) {
+                    if (tries[key] >= 10) {
                         $img
                             .attr(
                                 'src',
-                                'https://placehold.it/' + $img.width() + 'x' + $img.height() +
-                                '/222/e0e0e0&text=:\'(')
+                                'https://placehold.it/222/e0e0e0/' + $img.width() + 'x' + $img.height() +
+                                '.png&text=%E2%8F%B3')
                             .attr('data-loaded', 'true');
                         return;
                     }
@@ -35,7 +35,7 @@ $(document).ready(function () {
                         timeout: 0,
                         cache: true,
                         url: url,
-                        timeouot: 30000,
+                        timeouot: 60000,
                         success: function (data, status, request) {
                             tries[key] += 1;
                             if (data.url === undefined || data.url === null || data.url.indexOf("placeholder") > -1) {
