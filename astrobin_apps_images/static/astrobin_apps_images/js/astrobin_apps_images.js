@@ -24,7 +24,7 @@ $(document).ready(function () {
                         $img
                             .attr(
                                 'src',
-                                'https://placehold.it/222/e0e0e0/' + $img.width() + 'x' + $img.height() +
+                                'https://placehold.jp/222/e0e0e0/' + $img.width() + 'x' + $img.height() +
                                 '.png&text=%E2%8F%B3')
                             .attr('data-loaded', 'true');
                         return;
