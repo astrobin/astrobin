@@ -941,7 +941,7 @@ class ImageDeleteOriginalView(ImageDeleteView):
         self.image = image
         final.delete()
 
-        messages.success(self.request, _("Revision deleted."));
+        messages.success(self.request, _("Original version deleted!"));
         # We do not call super, because that would delete the Image
         return HttpResponseRedirect(self.get_success_url())
 
