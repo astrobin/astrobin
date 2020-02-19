@@ -17,7 +17,7 @@ from django.core.files.images import get_image_dimensions
 from django.core.urlresolvers import reverse_lazy, reverse
 from django.db.models import Q
 from django.db.models.query import QuerySet
-from django.http import Http404, HttpResponseRedirect
+from django.http import Http404, HttpResponseRedirect, HttpResponseBadRequest
 from django.shortcuts import redirect
 from django.utils.encoding import iri_to_uri, smart_unicode
 from django.utils.translation import ugettext as _
@@ -900,10 +900,10 @@ class ImageDeleteOriginalView(ImageDeleteView):
 
     def post(self, *args, **kwargs):
         image = self.get_object()
-        revisions = image.revisions.all()
+        revisions = ImageRevision.all_objects.filter(image=image)
 
         if not revisions:
-            return ImageDeleteView.as_view()(self.request, *args, **kwargs)
+            return HttpResponseBadRequest()
 
         final = None
         if image.is_final:
