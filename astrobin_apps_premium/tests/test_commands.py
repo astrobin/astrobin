@@ -6,6 +6,7 @@ from django.core.management import call_command
 from django.test import TestCase
 from subscription.models import Subscription, UserSubscription
 
+from astrobin.tests.generators import Generators
 from astrobin_apps_premium.utils import premium_get_valid_usersubscription
 
 
@@ -53,6 +54,8 @@ class CommandsTest(TestCase):
             group=Group.objects.get(name='astrobin_premium'),
             category='premium')
 
+        self.user.image_set.add(Generators.image())
+
     def test_upgrade_free_to_premium_dry_run(self):
         call_command('upgrade_free_and_lite_to_premium', dry_run=True)
         user_subscription = premium_get_valid_usersubscription(self.user)
@@ -75,6 +78,14 @@ class CommandsTest(TestCase):
 
     def test_upgrade_free_to_premium_when_deleted(self):
         self.user.userprofile.delete()
+
+        call_command('upgrade_free_and_lite_to_premium')
+
+        user_subscription = premium_get_valid_usersubscription(self.user)
+        self.assertIsNone(user_subscription)
+
+    def test_upgrade_free_to_premium_when_no_images(self):
+        self.user.image_set.all().delete()
 
         call_command('upgrade_free_and_lite_to_premium')
 
