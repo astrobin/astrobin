@@ -9,6 +9,7 @@ from django.utils.translation import ugettext as _
 
 from astrobin.gear import is_gear_complete, get_correct_gear
 from astrobin.models import GearUserInfo, UserProfile, Image
+from astrobin_apps_premium.utils import premium_get_valid_usersubscription
 
 register = Library()
 
@@ -310,19 +311,11 @@ def has_valid_subscription_in_category(user, category):
 
 @register.filter
 def get_premium_subscription_expiration(user):
-    from subscription.models import UserSubscription
-
     if user.is_anonymous():
         return None
 
-    us = UserSubscription.active_objects.filter(
-        user=user,
-        subscription__group__name__in=['astrobin_premium', 'astrobin_lite'])
-
-    if us.count() == 0:
-        return None
-
-    return us[0].expires
+    us = premium_get_valid_usersubscription(user)
+    return us.expires if us else None
 
 
 @register.filter

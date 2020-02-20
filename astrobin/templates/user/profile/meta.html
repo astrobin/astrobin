@@ -10,7 +10,7 @@
     {% astrobin_user requested_user view='default'%}
 
     {% if PREMIUM_ENABLED and requested_user == request.user %}
-    <div class="subtle-container simple-container">
+    <div class="subtle-container">
         <div class="header">
             <h4>{% trans "Subscription" %}</h4>
         </div>
