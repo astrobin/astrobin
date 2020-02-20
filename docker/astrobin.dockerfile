@@ -76,6 +76,7 @@ RUN chown root:root /etc/logrotate.d/astrobin && chmod 644 /etc/logrotate.d/astr
 
 CMD python manage.py migrate --noinput && gunicorn wsgi:application -w 2 -b :8083
 EXPOSE 8083
+EXPOSE 8084
 COPY . /code
 
 RUN scripts/compilemessages.sh
