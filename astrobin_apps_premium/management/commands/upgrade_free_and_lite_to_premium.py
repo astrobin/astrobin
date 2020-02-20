@@ -1,9 +1,11 @@
-from datetime import datetime, date
+from datetime import date
 
 from dateutil.relativedelta import relativedelta
 from django.contrib.auth.models import User
 from django.core.management.base import BaseCommand
 from subscription.models import UserSubscription, Subscription
+
+from astrobin.models import UserProfile
 
 
 class Command(BaseCommand):
@@ -26,22 +28,23 @@ class Command(BaseCommand):
             action='store_true',
             help='Does not actually upgrade accounts, only prints totals',
         )
+
     def handle(self, *args, **options):
-        users = User.objects.all()
+        user_profiles = UserProfile.objects.filter(user__date_joined__lte=date(2020, 2, 15))
         count = 0
-        for user in users:
-            user_subscriptions = UserSubscription.objects.filter(user=user)
+        for user_profile in user_profiles:
+            user_subscriptions = UserSubscription.objects.filter(user=user_profile.user)
             has_active_premium = False
 
             for user_subscription in user_subscriptions:
                 if "Premium" in user_subscription.subscription.name and \
-                    user_subscription.valid() and \
-                    user_subscription.active:
+                        user_subscription.valid() and \
+                        user_subscription.active:
                     has_active_premium = True
 
             if not has_active_premium:
                 if not options.get('dry_run'):
-                    self.upgrade(user)
+                    self.upgrade(user_profile.user)
                 count += 1
 
         if options.get('dry_run'):
