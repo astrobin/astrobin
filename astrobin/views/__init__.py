@@ -952,7 +952,7 @@ def user_page(request, username):
     for i in qs:
         if i.is_final and i.corrupted:
             corrupted_pks.append(i.pk)
-            break
+            continue
 
         try:
             final = i.revisions.get(label=i.get_final_revision_label())
