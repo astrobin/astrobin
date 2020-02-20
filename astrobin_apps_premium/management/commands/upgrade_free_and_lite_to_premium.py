@@ -33,6 +33,9 @@ class Command(BaseCommand):
         user_profiles = UserProfile.objects.filter(user__date_joined__lte=date(2020, 2, 15))
         count = 0
         for user_profile in user_profiles:
+            if user_profile.user.image_set.count() == 0:
+                continue
+
             user_subscriptions = UserSubscription.objects.filter(user=user_profile.user)
             has_active_premium = False
 
