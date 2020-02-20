@@ -11,7 +11,7 @@ from astrobin_apps_premium.utils import premium_get_valid_usersubscription
 
 class CommandsTest(TestCase):
     def setUp(self):
-        self.user = User.objects.create_user('test', 'test@test.com', 'password')
+        self.user = User.objects.create_user('test', 'test@test.com', 'password', date_joined=date(2020, 1, 1))
 
         self.lite = Subscription.objects.create(
             name='AstroBin Lite',
@@ -53,14 +53,31 @@ class CommandsTest(TestCase):
             group=Group.objects.get(name='astrobin_premium'),
             category='premium')
 
+    def test_upgrade_free_to_premium_dry_run(self):
+        call_command('upgrade_free_and_lite_to_premium', dry_run=True)
+        user_subscription = premium_get_valid_usersubscription(self.user)
+        self.assertIsNone(user_subscription)
+
     def test_upgrade_free_to_premium(self):
         call_command('upgrade_free_and_lite_to_premium')
         user_subscription = premium_get_valid_usersubscription(self.user)
         self.assertEquals("AstroBin Premium", user_subscription.subscription.name)
         self.assertEquals(date.today() + relativedelta(years=1), user_subscription.expires)
 
-    def test_upgrade_free_to_premium_dry_run(self):
-        call_command('upgrade_free_and_lite_to_premium', dry_run=True)
+    def test_upgrade_free_to_premium_when_joined_after_data_loss(self):
+        self.user.date_joined = date(2020, 2, 16)
+        self.user.save()
+
+        call_command('upgrade_free_and_lite_to_premium')
+
+        user_subscription = premium_get_valid_usersubscription(self.user)
+        self.assertIsNone(user_subscription)
+
+    def test_upgrade_free_to_premium_when_deleted(self):
+        self.user.userprofile.delete()
+
+        call_command('upgrade_free_and_lite_to_premium')
+
         user_subscription = premium_get_valid_usersubscription(self.user)
         self.assertIsNone(user_subscription)
 
