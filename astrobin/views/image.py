@@ -1068,6 +1068,21 @@ class ImageEditBasicView(ImageEditBaseView):
             return reverse_lazy('image_edit_gear', kwargs={'id': image.get_id()})
         return image.get_absolute_url()
 
+    def post(self, request, *args, **kwargs):
+        image = self.get_object()  # type: Image
+        previous_url = image.image_file.url
+
+        ret = super(ImageEditBasicView, self).post(request, *args, **kwargs)
+
+        image = self.get_object()  # type: Image
+        new_url = image.image_file.url
+
+        if new_url != previous_url:
+            image.thumbnail_invalidate()
+            image.w, image.h = get_image_dimensions(image.image_file)
+            image.save(keep_deleted=True)
+
+        return ret
 
 class ImageEditGearView(ImageEditBaseView):
     form_class = ImageEditGearForm
@@ -1129,10 +1144,15 @@ class ImageEditRevisionView(LoginRequiredMixin, UpdateView):
         return super(ImageEditRevisionView, self).form_valid(form)
 
     def post(self, request, *args, **kwargs):
-        image = self.get_object()  # type: ImageRevision
-        image.thumbnail_invalidate()
+        ret = super(ImageEditRevisionView, self).post(request, *args, **kwargs)
 
-        return super(ImageEditRevisionView, self).post(request, *args, **kwargs)
+        revision = self.get_object()  # type: ImageRevision
+        revision.thumbnail_invalidate()
+        revision.w, revision.h = get_image_dimensions(revision.image_file)
+        revision.save(keep_deleted=True)
+
+        return ret
+
 
 
 class ImageEditThumbnailsView(ImageEditBaseView):
