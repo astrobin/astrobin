@@ -3,7 +3,7 @@ import time
 import urllib2
 
 import simplejson
-from astrobin_apps_platesolving.api_filters.image_object_id_filter import ImageObjectIdFilter
+from braces.views import CsrfExemptMixin
 from django.conf import settings
 from django.contrib.contenttypes.models import ContentType
 from django.core.files import File
@@ -17,6 +17,7 @@ from rest_framework import generics
 from rest_framework import permissions
 
 from astrobin_apps_platesolving.annotate import Annotator
+from astrobin_apps_platesolving.api_filters.image_object_id_filter import ImageObjectIdFilter
 from astrobin_apps_platesolving.models import PlateSolvingSettings
 from astrobin_apps_platesolving.models import Solution
 from astrobin_apps_platesolving.serializers import SolutionSerializer
@@ -33,8 +34,8 @@ class SolveView(base.View):
         manager = content_type.model_class()
         if hasattr(manager, 'objects_including_wip'):
             manager = manager.objects_including_wip
-        target = get_object_or_404(manager, pk = object_id)
-        solution, created = Solution.objects.get_or_create(object_id = object_id, content_type = content_type)
+        target = get_object_or_404(manager, pk=object_id)
+        solution, created = Solution.objects.get_or_create(object_id=object_id, content_type=content_type)
         if solution.settings is None:
             solution.settings = PlateSolvingSettings.objects.create()
             solution.save()
@@ -49,13 +50,13 @@ class SolveView(base.View):
                     submission = solver.solve(f)
                 else:
                     submission = solver.solve(f,
-                        scale_units = solution.settings.scale_units,
-                        scale_lower = solution.settings.scale_min,
-                        scale_upper = solution.settings.scale_max,
-                        center_ra = solution.settings.center_ra,
-                        center_dec = solution.settings.center_dec,
-                        radius = solution.settings.radius,
-                    )
+                                              scale_units=solution.settings.scale_units,
+                                              scale_lower=solution.settings.scale_min,
+                                              scale_upper=solution.settings.scale_max,
+                                              center_ra=solution.settings.center_ra,
+                                              center_dec=solution.settings.center_dec,
+                                              radius=solution.settings.radius,
+                                              )
                 solution.status = Solver.PENDING
                 solution.submission_id = submission
                 solution.save()
@@ -74,7 +75,7 @@ class SolveView(base.View):
 
 class SolutionUpdateView(base.View):
     def post(self, request, *args, **kwargs):
-        solution = get_object_or_404(Solution, pk = kwargs.pop('pk'))
+        solution = get_object_or_404(Solution, pk=kwargs.pop('pk'))
         solver = Solver()
         status = solver.status(solution.submission_id)
 
@@ -86,9 +87,9 @@ class SolutionUpdateView(base.View):
         return HttpResponse(simplejson.dumps(context), content_type='application/json')
 
 
-class SolutionFinalizeView(base.View):
+class SolutionFinalizeView(CsrfExemptMixin, base.View):
     def post(self, request, *args, **kwargs):
-        solution = get_object_or_404(Solution, pk = kwargs.pop('pk'))
+        solution = get_object_or_404(Solution, pk=kwargs.pop('pk'))
         solver = Solver()
         status = solver.status(solution.submission_id)
 
@@ -97,10 +98,10 @@ class SolutionFinalizeView(base.View):
 
             solution.objects_in_field = ', '.join(info['objects_in_field'])
 
-            solution.ra          = "%.3f" % info['calibration']['ra']
-            solution.dec         = "%.3f" % info['calibration']['dec']
+            solution.ra = "%.3f" % info['calibration']['ra']
+            solution.dec = "%.3f" % info['calibration']['dec']
             solution.orientation = "%.3f" % info['calibration']['orientation']
-            solution.radius      = "%.3f" % info['calibration']['radius']
+            solution.radius = "%.3f" % info['calibration']['radius']
 
             # Get the images 'w' and adjust pixscale
             if solution.content_object:
@@ -112,12 +113,12 @@ class SolutionFinalizeView(base.View):
                         hd_w = w
                     ratio = hd_w / float(w)
                     corrected_scale = float(pixscale) * ratio
-                    solution.pixscale = "%.3f" %  corrected_scale
+                    solution.pixscale = "%.3f" % corrected_scale
                 else:
                     solution.pixscale = None
 
             try:
-                target = solution.content_type.get_object_for_this_type(pk = solution.object_id)
+                target = solution.content_type.get_object_for_this_type(pk=solution.object_id)
             except solution.content_type.model_class().DoesNotExist:
                 # Target image was deleted meanwhile
                 context = {'status': Solver.FAILED}
