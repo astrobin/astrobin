@@ -1079,8 +1079,12 @@ class ImageEditBasicView(ImageEditBaseView):
 
         if new_url != previous_url:
             image.thumbnail_invalidate()
-            image.w, image.h = get_image_dimensions(image.image_file)
-            image.save(keep_deleted=True)
+
+            try:
+                image.w, image.h = get_image_dimensions(image.image_file)
+                image.save(keep_deleted=True)
+            except TypeError:
+                pass
 
         return ret
 
@@ -1148,8 +1152,12 @@ class ImageEditRevisionView(LoginRequiredMixin, UpdateView):
 
         revision = self.get_object()  # type: ImageRevision
         revision.thumbnail_invalidate()
-        revision.w, revision.h = get_image_dimensions(revision.image_file)
-        revision.save(keep_deleted=True)
+
+        try:
+            revision.w, revision.h = get_image_dimensions(revision.image_file)
+            revision.save(keep_deleted=True)
+        except TypeError:
+            pass
 
         return ret
 
