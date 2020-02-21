@@ -44,7 +44,7 @@ class SolveView(base.View):
             solver = Solver()
 
             try:
-                f = getFromStorage(target, 'hd')
+                f = getFromStorage(target, 'hd', '0' if content_type.model == 'image' else target.label)
 
                 if solution.settings.blind:
                     submission = solver.solve(f)

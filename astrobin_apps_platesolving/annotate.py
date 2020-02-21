@@ -1,18 +1,13 @@
-# Python
 import os
-import simplejson
 from StringIO import StringIO
 
-# Django
+import simplejson
+from PIL import Image, ImageDraw, ImageFont
 from django.conf import settings
 from django.core.files.base import ContentFile
 
-# Other
-from PIL import Image, ImageDraw, ImageFont
-
-# This app
-from astrobin_apps_platesolving.utils import getFromStorage
 from astrobin_apps_platesolving.solver import Solver
+from astrobin_apps_platesolving.utils import getFromStorage
 
 
 class Annotator:
@@ -78,20 +73,21 @@ class Annotator:
 
             for o in others:
                 other_box = computeTextBoundingBox(o)
-                collision = (abs(box['x'] - other_box['x']) * 2 < (box['w']+ other_box['w'])) and \
-                            (abs(box['y'] - other_box['y']) * 2 < (box['h']+ other_box['h']))
+                collision = (abs(box['x'] - other_box['x']) * 2 < (box['w'] + other_box['w'])) and \
+                            (abs(box['y'] - other_box['y']) * 2 < (box['h'] + other_box['h']))
                 if collision:
                     return True
 
             return False
 
         supported_types = ['m', 'ic', 'ngc', 'ugc', 'abel', 'bright']
-        annotations.sort(key = lambda x: x['radius'])
+        annotations.sort(key=lambda x: x['radius'])
         for annotation in annotations:
             if annotation['type'] in supported_types:
                 x = annotation['pixelx'] = annotation['pixelx'] * self.resampling_factor
                 y = annotation['pixely'] = annotation['pixely'] * self.resampling_factor
-                radius = annotation['radius'] = annotation['radius'] * self.resampling_factor + 10 * self.resampling_factor;
+                radius = annotation['radius'] = \
+                    annotation['radius'] * self.resampling_factor + 10 * self.resampling_factor
                 white = (255, 255, 255)
                 black = (0, 0, 0)
 
@@ -105,10 +101,10 @@ class Annotator:
                     # Circle
                     draw.ellipse(
                         [x - radius + 1 + i, y - radius + 1 + i, x + radius - 1 - i, y + radius - 1 - i],
-                        outline = black)
+                        outline=black)
                     draw.ellipse(
                         [x - radius - i, y - radius - i, x + radius + i, y + radius + i],
-                        outline = white)
+                        outline=white)
 
                     # Line to text
                     draw.line(
@@ -121,8 +117,8 @@ class Annotator:
                 # Text box
                 draw.rectangle(
                     [box['x'], box['y'], box['x'] + box['w'], box['y'] + box['h']],
-                    outline = (255, 255, 255, 128),
-                    fill = (0, 0, 0, 128))
+                    outline=(255, 255, 255, 128),
+                    fill=(0, 0, 0, 128))
 
                 # Text
                 draw.text((text_x + 1, text_y + 1), text, black, font)
@@ -152,8 +148,12 @@ class Annotator:
                 thumbnail_w = w
                 thumbnail_h = h
 
-            base = Image\
-                .open(getFromStorage(self.solution.content_object, 'hd'))\
+            base = Image \
+                .open(getFromStorage(
+                self.solution.content_object,
+                'hd',
+                '0' if not hasattr(self.solution.content_object, 'label')
+                else self.solution.content_object.label)) \
                 .convert('RGBA')
             if self.resampling_factor != 1:
                 base = base.resize(
@@ -169,7 +169,7 @@ class Annotator:
             image_io = StringIO()
             image = Image.alpha_composite(base, overlay)
             image = image.resize((thumbnail_w, thumbnail_h), Image.ANTIALIAS)
-            image.save(image_io, 'JPEG', quality = 90)
+            image.save(image_io, 'JPEG', quality=90)
 
             return ContentFile(image_io.getvalue())
 
