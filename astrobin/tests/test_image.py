@@ -1842,12 +1842,8 @@ class ImageTest(TestCase):
         # Test when there are no revisions
         self.client.login(username='test', password='password')
         response = self.client.post(post_url((image.get_id(),)))
-        self.assertRedirects(
-            response,
-            reverse('user_page', kwargs={'username': image.user.username}),
-            status_code=302,
-            target_status_code=200)
-        self.assertEquals(Image.objects.filter(pk=image.pk).count(), 0)
+        self.assertEquals(400, response.status_code)
+        self.assertEquals(Image.objects.filter(pk=image.pk).count(), 1)
 
         # Test for success when image was not final
         self._do_upload('astrobin/fixtures/test.jpg')
