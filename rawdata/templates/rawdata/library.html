@@ -41,14 +41,14 @@
 
     {% if over_limit %}
         <div class="alert alert-error">
-            <h4 class="alert-heading"><i class="icon-fire"></i> {% trans "Error!" %}</h3>
+            <h4 class="alert-heading"><i class="icon-fire"></i> {% trans "Error!" %}</h4>
             {% trans "You have no more space left on your Raw Data account. Please delete some files to make room, or upgrade your account." %}
         </div>
     {% endif %} 
 
     {% if unindexed_count %}
         <div class="alert alert-warning">
-            <h4 class="alert-heading"><i class="icon-warning-sign"></i> {% trans "Warning!" %}</h3>
+            <h4 class="alert-heading"><i class="icon-warning-sign"></i> {% trans "Warning!" %}</h4>
             {% blocktrans with unindexed_count as number and total_files as total %}AstroBin is still working to index {{number}} of your {{total}} raw files.{% endblocktrans %}
         </div>
     {% endif %} 
