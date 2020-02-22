@@ -13,6 +13,9 @@ class ThumbnailNotReadyException(Exception):
 def getFromStorage(image, alias, revision_label):
     url = image.thumbnail(alias, {'revision_label': revision_label, 'sync': True})
 
+    if url is None:
+        raise ThumbnailNotReadyException
+
     if "placeholder" in url:
         raise ThumbnailNotReadyException
 
