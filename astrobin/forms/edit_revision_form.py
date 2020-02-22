@@ -13,7 +13,7 @@ class ImageEditRevisionForm(forms.ModelForm):
                     "note: only revisions with the same width and height as this one can be considered."),
     )
 
-    def __init_mouse_hoover_image(self):
+    def __init_mouse_hover_image(self):
         self.fields['mouse_hover_image'].choices = Image.MOUSE_HOVER_CHOICES
 
         revisions = self.instance.image.revisions
@@ -31,19 +31,14 @@ class ImageEditRevisionForm(forms.ModelForm):
                 ("ORIGINAL", _("Original image"))
             ]
 
-    def __init_cropping(self):
-        if not self.instance.corrupted:
-            self.fields.add('square_cropping')
-            self.widgets['image_file'] = ImageCropWidget
-
     def __init__(self, **kwargs):
         super(ImageEditRevisionForm, self).__init__(**kwargs)
-        self.__init_mouse_hoover_image()
-        self.__init_cropping()
+        self.__init_mouse_hover_image()
 
     class Meta:
         model = ImageRevision
-        fields = ['image_file', 'description', 'mouse_hover_image']
+        fields = ('image_file', 'description', 'mouse_hover_image', 'square_cropping')
         widgets = {
             'description': forms.Textarea(attrs={'rows': 4}),
+            'image_file': ImageCropWidget
         }

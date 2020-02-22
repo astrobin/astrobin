@@ -42,7 +42,8 @@ from astrobin.forms import (
     ImagePromoteForm,
     ImageRevisionUploadForm,
     PrivateMessageForm,
-    ImageEditThumbnailsForm)
+    ImageEditThumbnailsForm,
+    ImageEditCorruptedRevisionForm)
 from astrobin.models import (
     Collection,
     Image, ImageRevision,
@@ -588,8 +589,8 @@ class ImageDetailView(ImageDetailViewBase):
                         collection = image.collections.all()[0]
 
                     if collection.order_by_tag:
-                        collection_images = Image.objects\
-                            .filter(user=image.user, collections=collection, keyvaluetags__key=collection.order_by_tag)\
+                        collection_images = Image.objects \
+                            .filter(user=image.user, collections=collection, keyvaluetags__key=collection.order_by_tag) \
                             .order_by('keyvaluetags__value')
 
                         current_index = 0
@@ -599,9 +600,9 @@ class ImageDetailView(ImageDetailViewBase):
                             current_index += 1
 
                         image_next = collection_images.all()[current_index + 1] \
-                            if current_index < collection_images.count() - 1\
+                            if current_index < collection_images.count() - 1 \
                             else None
-                        image_prev = collection_images.all()[current_index - 1]\
+                        image_prev = collection_images.all()[current_index - 1] \
                             if current_index > 0 \
                             else None
                     else:
@@ -647,7 +648,7 @@ class ImageDetailView(ImageDetailViewBase):
             image_prev = None
 
         if image_next and isinstance(image_next, QuerySet):
-                image_next = image_next[0]
+            image_next = image_next[0]
         if image_prev and isinstance(image_prev, QuerySet):
             image_prev = image_prev[0]
 
@@ -763,7 +764,8 @@ class ImageFullView(ImageDetailView):
 
         self.revision_label = kwargs['r']
 
-        if image.corrupted and (self.revision_label == '0' or (self.revision_label in [None, 'final'] and image.is_final)):
+        if image.corrupted and (
+                self.revision_label == '0' or (self.revision_label in [None, 'final'] and image.is_final)):
             if request.user == image.user:
                 return redirect(reverse('image_edit_basic', args=(image.get_id(),)) + '?corrupted')
             else:
@@ -779,7 +781,6 @@ class ImageFullView(ImageDetailView):
                         raise Http404
             except ImageRevision.DoesNotExist:
                 pass
-
 
         if self.revision_label is None:
             # No revision specified, let's see if we need to redirect to the
@@ -1088,6 +1089,7 @@ class ImageEditBasicView(ImageEditBaseView):
 
         return ret
 
+
 class ImageEditGearView(ImageEditBaseView):
     form_class = ImageEditGearForm
     template_name = 'image/edit/gear.html'
@@ -1126,7 +1128,9 @@ class ImageEditRevisionView(LoginRequiredMixin, UpdateView):
     pk_url_kwarg = 'id'
     template_name = 'image/edit/revision.html'
     context_object_name = 'revision'
-    form_class = ImageEditRevisionForm
+
+    def get_form_class(self):
+        return ImageEditCorruptedRevisionForm if self.object.corrupted else ImageEditRevisionForm
 
     def get_success_url(self):
         return reverse_lazy('image_detail', args=(self.object.image.get_id(),))
@@ -1160,7 +1164,6 @@ class ImageEditRevisionView(LoginRequiredMixin, UpdateView):
             pass
 
         return ret
-
 
 
 class ImageEditThumbnailsView(ImageEditBaseView):
