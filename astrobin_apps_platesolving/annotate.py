@@ -7,7 +7,7 @@ from django.conf import settings
 from django.core.files.base import ContentFile
 
 from astrobin_apps_platesolving.solver import Solver
-from astrobin_apps_platesolving.utils import getFromStorage
+from astrobin_apps_platesolving.utils import getFromStorage, ThumbnailNotReadyException
 
 
 class Annotator:
@@ -148,13 +148,17 @@ class Annotator:
                 thumbnail_w = w
                 thumbnail_h = h
 
-            base = Image \
-                .open(getFromStorage(
-                self.solution.content_object,
-                'hd',
-                '0' if not hasattr(self.solution.content_object, 'label')
-                else self.solution.content_object.label)) \
-                .convert('RGBA')
+            try:
+                base = Image \
+                    .open(getFromStorage(
+                    self.solution.content_object,
+                    'hd',
+                    '0' if not hasattr(self.solution.content_object, 'label')
+                    else self.solution.content_object.label)) \
+                    .convert('RGBA')
+            except ThumbnailNotReadyException:
+                return None
+
             if self.resampling_factor != 1:
                 base = base.resize(
                     (int(round(hd_w * self.resampling_factor)),
