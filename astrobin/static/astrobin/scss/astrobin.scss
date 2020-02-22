@@ -3787,6 +3787,7 @@ li.revisions {
 
     form {
       margin: 0;
+      padding: 0 2px;
     }
 
     button {
@@ -3818,7 +3819,7 @@ li.revisions {
     text-align: center;
     font-weight: bold;
 
-    @include rounded-corners(0 0 20px 20px);
+    @include rounded-corners(0 0 12px 12px);
 
     &.active {
       background: white;
