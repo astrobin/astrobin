@@ -1079,13 +1079,15 @@ class ImageEditBasicView(ImageEditBaseView):
         new_url = image.image_file.url
 
         if new_url != previous_url:
-            image.thumbnail_invalidate()
-
             try:
                 image.w, image.h = get_image_dimensions(image.image_file)
-                image.save(keep_deleted=True)
             except TypeError:
                 pass
+
+            image.square_cropping = "0,0,0,0"
+            image.save(keep_deleted=True)
+
+            image.thumbnail_invalidate()
 
         return ret
 
@@ -1152,16 +1154,24 @@ class ImageEditRevisionView(LoginRequiredMixin, UpdateView):
         return super(ImageEditRevisionView, self).form_valid(form)
 
     def post(self, request, *args, **kwargs):
+        revision = self.get_object()  # type: ImageRevision
+        previous_url = revision.image_file.url
+
         ret = super(ImageEditRevisionView, self).post(request, *args, **kwargs)
 
-        revision = self.get_object()  # type: ImageRevision
-        revision.thumbnail_invalidate()
+        revision = self.get_object()
+        new_url = revision.image_file.url
 
-        try:
-            revision.w, revision.h = get_image_dimensions(revision.image_file)
+        if new_url != previous_url:
+            try:
+                revision.w, revision.h = get_image_dimensions(revision.image_file)
+            except TypeError:
+                pass
+
+            revision.square_cropping = "0,0,0,0"
             revision.save(keep_deleted=True)
-        except TypeError:
-            pass
+
+            revision.thumbnail_invalidate()
 
         return ret
 

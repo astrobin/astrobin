@@ -91,7 +91,7 @@
                     {% endif %}
                 </a>
 
-                {% if not is_revision and revisions %}
+                {% if revisions %}
                 <a data-toggle="modal" class="danger" href="#delete-original-image-modal">
                     <i class="icon-remove"></i>
                     {% trans "Delete original image" %}
@@ -101,9 +101,9 @@
                 {% if is_revision %}
                 <a data-toggle="modal" class="danger" href="#delete-revision-modal">
                     <i class="icon-remove"></i>
-                    {% trans "Delete this revision only" %}
+                    {% trans "Delete this revision only" %} ({{ revision_label }})
                 </a>
-                {% endif %} <!--  is_revision -->
+                {% endif %} <!-- is_revision -->
             </li>
 
             {% if request.user == image.user or request.user.is_superuser %}
