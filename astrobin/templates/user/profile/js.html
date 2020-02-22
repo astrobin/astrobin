@@ -1,8 +1,21 @@
 {% load i18n %}
-{% load tags %}
 
 <script type="text/javascript">
 $(document).ready(function() {
     astrobin_common.init('{{requested_user.username}}');
+    astrobin_common.init_ajax_csrf_token();
+
+    $(".corrupted-images-banner .close, .corrupted-images-banner .dont-show-again").click(function() {
+        $.ajax({
+            url: "/json-api/user/mark-corrupted-images-banner-as-seen/",
+            dataType: "json",
+            timeout: 10000,
+            cache: false,
+            type: 'POST',
+            success: function () {
+                $(".corrupted-images-banner").hide();
+            }
+        })
+    });
 });
 </script>
