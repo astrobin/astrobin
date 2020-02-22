@@ -752,6 +752,7 @@ class Image(HasSolutionMixin, SafeDeleteModel):
         (None, "---------"),
         ("AC", "AstroCamp"),
         ("AHK", "Astro Hostel Krasnodar"),
+        ("AOWA", "Astro Observatories Western Australia"),
         ("CS", "ChileScope"),
         ("DSP", "Dark Sky Portal"),
         ("DSC", "DeepSkyChile"),
