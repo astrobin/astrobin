@@ -460,11 +460,11 @@ def solution_post_save(sender, instance, created, **kwargs):
     else:
         return
 
-    push_notification([user], notification,
-                      {'object_url': settings.BASE_URL + target.get_absolute_url()})
+    # push_notification([user], notification,
+    #                   {'object_url': settings.BASE_URL + target.get_absolute_url()})
 
 
-post_save.connect(solution_post_save, sender=Solution)
+#post_save.connect(solution_post_save, sender=Solution)
 
 
 def subscription_subscribed(sender, **kwargs):
