@@ -1,3 +1,4 @@
+import sys
 from datetime import date, timedelta, datetime
 
 from django.contrib.auth.models import Group
@@ -590,6 +591,7 @@ class UserTest(TestCase):
 
         image.delete()
 
+    @override_settings(PREMIUM_MAX_REVISIONS_FREE_2020=sys.maxsize)
     def test_corrupted_final_image_revision_not_shown_to_anon(self):
         self.client.login(username="user", password="password")
         image = self._do_upload('astrobin/fixtures/test.jpg', "CORRUPTED_IMAGE")
@@ -606,6 +608,7 @@ class UserTest(TestCase):
         image.delete()
         revision.delete()
 
+    @override_settings(PREMIUM_MAX_REVISIONS_FREE_2020=sys.maxsize)
     def test_corrupted_image_with_ok_final_revision_shown_to_anon(self):
         self.client.login(username="user", password="password")
         image = self._do_upload('astrobin/fixtures/test.jpg', "CORRUPTED_IMAGE")
@@ -622,6 +625,7 @@ class UserTest(TestCase):
         image.delete()
         revision.delete()
 
+    @override_settings(PREMIUM_MAX_REVISIONS_FREE_2020=sys.maxsize)
     def test_corrupted_image_with_ok_non_final_revision_not_shown_to_anon(self):
         self.client.login(username="user", password="password")
         image = self._do_upload('astrobin/fixtures/test.jpg', "CORRUPTED_IMAGE")
@@ -656,6 +660,7 @@ class UserTest(TestCase):
 
         image.delete()
 
+    @override_settings(PREMIUM_MAX_REVISIONS_FREE_2020=sys.maxsize)
     def test_corrupted_final_image_revision_shown_to_owner(self):
         self.client.login(username="user", password="password")
         image = self._do_upload('astrobin/fixtures/test.jpg', "CORRUPTED_IMAGE")
@@ -671,6 +676,7 @@ class UserTest(TestCase):
         image.delete()
         revision.delete()
 
+    @override_settings(PREMIUM_MAX_REVISIONS_FREE_2020=sys.maxsize)
     def test_corrupted_image_with_ok_final_revision_shown_to_owner(self):
         self.client.login(username="user", password="password")
         image = self._do_upload('astrobin/fixtures/test.jpg', "CORRUPTED_IMAGE")
@@ -686,6 +692,7 @@ class UserTest(TestCase):
         image.delete()
         revision.delete()
 
+    @override_settings(PREMIUM_MAX_REVISIONS_FREE_2020=sys.maxsize)
     def test_corrupted_image_with_ok_non_final_revision_shown_to_owner(self):
         self.client.login(username="user", password="password")
         image = self._do_upload('astrobin/fixtures/test.jpg', "CORRUPTED_IMAGE")

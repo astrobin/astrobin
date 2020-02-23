@@ -2533,6 +2533,7 @@ class ImageTest(TestCase):
         response = self.client.get(reverse('image_detail', kwargs={'id': image.get_id(), 'r': '0'}), follow=True)
         self.assertRedirects(response, reverse('image_edit_basic', kwargs={'id': image.get_id()}) + '?corrupted')
 
+    @override_settings(PREMIUM_MAX_REVISIONS_FREE_2020=sys.maxsize)
     def test_image_revision_corrupted_goes_to_404_if_anon(self):
         self.client.login(username='test', password='password')
 
@@ -2550,6 +2551,7 @@ class ImageTest(TestCase):
         response = self.client.get(reverse('image_detail', kwargs={'id': image.get_id(), 'r': revision.label}))
         self.assertEquals(404, response.status_code)
 
+    @override_settings(PREMIUM_MAX_REVISIONS_FREE_2020=sys.maxsize)
     def test_image_revision_corrupted_ok_if_anon_and_r0(self):
         self.client.login(username='test', password='password')
 
@@ -2567,6 +2569,7 @@ class ImageTest(TestCase):
         response = self.client.get(reverse('image_detail', kwargs={'id': image.get_id(), 'r': '0'}))
         self.assertEquals(200, response.status_code)
 
+    @override_settings(PREMIUM_MAX_REVISIONS_FREE_2020=sys.maxsize)
     def test_image_revision_corrupted_ok_if_owner_and_r0(self):
         self.client.login(username='test', password='password')
 
@@ -2582,6 +2585,7 @@ class ImageTest(TestCase):
         response = self.client.get(reverse('image_detail', kwargs={'id': image.get_id(), 'r': '0'}))
         self.assertEquals(200, response.status_code)
 
+    @override_settings(PREMIUM_MAX_REVISIONS_FREE_2020=sys.maxsize)
     def test_image_revision_corrupted_goes_to_edit_revision_if_owner(self):
         self.client.login(username='test', password='password')
 
@@ -2597,6 +2601,7 @@ class ImageTest(TestCase):
         response = self.client.get(reverse('image_detail', kwargs={'id': image.get_id(), 'r': revision.label}))
         self.assertRedirects(response, reverse('image_edit_revision', kwargs={'id': revision.pk}) + '?corrupted')
 
+    @override_settings(PREMIUM_MAX_REVISIONS_FREE_2020=sys.maxsize)
     def test_image_corrupted_ok_if_final_revision(self):
         self.client.login(username='test', password='password')
 
@@ -2616,6 +2621,7 @@ class ImageTest(TestCase):
         response = self.client.get(reverse('image_detail', kwargs={'id': image.get_id(), 'r': revision.label}))
         self.assertEquals(200, response.status_code)
 
+    @override_settings(PREMIUM_MAX_REVISIONS_FREE_2020=sys.maxsize)
     def test_image_corrupted_404_if_non_final_revision_and_anon(self):
         self.client.login(username='test', password='password')
 
@@ -2637,6 +2643,7 @@ class ImageTest(TestCase):
         response = self.client.get(reverse('image_detail', kwargs={'id': image.get_id()}), follow=True)
         self.assertEquals(404, response.status_code)
 
+    @override_settings(PREMIUM_MAX_REVISIONS_FREE_2020=sys.maxsize)
     def test_image_corrupted_goes_to_edit_if_non_final_revision_and_owner(self):
         self.client.login(username='test', password='password')
 
@@ -2656,6 +2663,7 @@ class ImageTest(TestCase):
         response = self.client.get(reverse('image_detail', kwargs={'id': image.get_id()}), follow=True)
         self.assertRedirects(response, reverse('image_edit_basic', kwargs={'id': image.get_id()}) + '?corrupted')
 
+    @override_settings(PREMIUM_MAX_REVISIONS_FREE_2020=sys.maxsize)
     def test_image_corrupted_ok_if_non_final_revision_direct_link_and_anon(self):
         self.client.login(username='test', password='password')
 
@@ -2677,6 +2685,7 @@ class ImageTest(TestCase):
         response = self.client.get(reverse('image_detail', kwargs={'id': image.get_id(), 'r': revision.label}))
         self.assertEquals(200, response.status_code)
 
+    @override_settings(PREMIUM_MAX_REVISIONS_FREE_2020=sys.maxsize)
     def test_image_corrupted_ok_if_non_final_revision_direct_link_and_owner(self):
         self.client.login(username='test', password='password')
 
@@ -2745,6 +2754,7 @@ class ImageTest(TestCase):
         response = self.client.get(reverse('image_full', kwargs={'id': image.get_id(), 'r': '0'}), follow=True)
         self.assertRedirects(response, reverse('image_edit_basic', kwargs={'id': image.get_id()}) + '?corrupted')
 
+    @override_settings(PREMIUM_MAX_REVISIONS_FREE_2020=sys.maxsize)
     def test_image_full_revision_corrupted_goes_to_404_if_anon(self):
         self.client.login(username='test', password='password')
 
@@ -2762,6 +2772,7 @@ class ImageTest(TestCase):
         response = self.client.get(reverse('image_full', kwargs={'id': image.get_id(), 'r': revision.label}))
         self.assertEquals(404, response.status_code)
 
+    @override_settings(PREMIUM_MAX_REVISIONS_FREE_2020=sys.maxsize)
     def test_image_full_revision_corrupted_ok_if_anon_and_r0(self):
         self.client.login(username='test', password='password')
 
@@ -2779,6 +2790,7 @@ class ImageTest(TestCase):
         response = self.client.get(reverse('image_full', kwargs={'id': image.get_id(), 'r': '0'}))
         self.assertEquals(200, response.status_code)
 
+    @override_settings(PREMIUM_MAX_REVISIONS_FREE_2020=sys.maxsize)
     def test_image_full_revision_corrupted_ok_if_owner_and_r0(self):
         self.client.login(username='test', password='password')
 
@@ -2794,6 +2806,7 @@ class ImageTest(TestCase):
         response = self.client.get(reverse('image_full', kwargs={'id': image.get_id(), 'r': '0'}))
         self.assertEquals(200, response.status_code)
 
+    @override_settings(PREMIUM_MAX_REVISIONS_FREE_2020=sys.maxsize)
     def test_image_full_revision_corrupted_goes_to_edit_revision_if_owner(self):
         self.client.login(username='test', password='password')
 
@@ -2809,6 +2822,7 @@ class ImageTest(TestCase):
         response = self.client.get(reverse('image_full', kwargs={'id': image.get_id(), 'r': revision.label}))
         self.assertRedirects(response, reverse('image_edit_revision', kwargs={'id': revision.pk}) + '?corrupted')
 
+    @override_settings(PREMIUM_MAX_REVISIONS_FREE_2020=sys.maxsize)
     def test_image_full_corrupted_ok_if_final_revision(self):
         self.client.login(username='test', password='password')
 
@@ -2828,6 +2842,7 @@ class ImageTest(TestCase):
         response = self.client.get(reverse('image_full', kwargs={'id': image.get_id(), 'r': revision.label}))
         self.assertEquals(200, response.status_code)
 
+    @override_settings(PREMIUM_MAX_REVISIONS_FREE_2020=sys.maxsize)
     def test_image_full_corrupted_404_if_non_final_revision_and_anon(self):
         self.client.login(username='test', password='password')
 
@@ -2849,6 +2864,7 @@ class ImageTest(TestCase):
         response = self.client.get(reverse('image_full', kwargs={'id': image.get_id()}), follow=True)
         self.assertEquals(404, response.status_code)
 
+    @override_settings(PREMIUM_MAX_REVISIONS_FREE_2020=sys.maxsize)
     def test_image_full_corrupted_goes_to_edit_if_non_final_revision_and_owner(self):
         self.client.login(username='test', password='password')
 
@@ -2868,6 +2884,7 @@ class ImageTest(TestCase):
         response = self.client.get(reverse('image_full', kwargs={'id': image.get_id()}), follow=True)
         self.assertRedirects(response, reverse('image_edit_basic', kwargs={'id': image.get_id()}) + '?corrupted')
 
+    @override_settings(PREMIUM_MAX_REVISIONS_FREE_2020=sys.maxsize)
     def test_image_full_corrupted_ok_if_non_final_revision_direct_link_and_anon(self):
         self.client.login(username='test', password='password')
 
@@ -2889,6 +2906,7 @@ class ImageTest(TestCase):
         response = self.client.get(reverse('image_full', kwargs={'id': image.get_id(), 'r': revision.label}))
         self.assertEquals(200, response.status_code)
 
+    @override_settings(PREMIUM_MAX_REVISIONS_FREE_2020=sys.maxsize)
     def test_image_full_corrupted_ok_if_non_final_revision_direct_link_and_owner(self):
         self.client.login(username='test', password='password')
 
