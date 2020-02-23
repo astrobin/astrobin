@@ -1,3 +1,15 @@
+2020-02-23 Salvatore Iovene <salvatore@iovene.com>
+ * v1.54.6
+ * (images) Allow deleting original revision while on subsequent revision
+ * (images) Fix corner cases when replacing image/revision, relating to file w/h and cropping
+ * (images) Fix rendering of image cropping interface on revisions
+ * (infra) Expose debug port from docker container
+ * (plate-solving) Add script to regenerate annotations that were lost
+ * (plate-solving) Fix issue that caused annotation of wrong revision to be displayed
+ * (premium) Add script to upgrade Free/Lite users affected by data loss to Premium
+ * (premium) Fix display of expiration date in case of multiple subscriptions
+ * (profile) Fix hiding corrupted images beyond the first one
+
 2020-02-20 Salvatore Iovene <salvatore@iovene.com>
  * v1.54.5
  * (images) Improve success message upon deleting original image
