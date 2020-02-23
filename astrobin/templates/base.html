@@ -85,7 +85,7 @@
 
         {% block extra_js %}{% endblock %}
 
-        {% if request.user|show_ads %}
+        {% if request.user|show_ads and not image.user|has_ultimate %}
             {% dfp_footer %}
         {% endif %}
 

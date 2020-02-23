@@ -4,7 +4,7 @@
 {% load dfp_tags %}
 {% load tags %}
 
-{% if request.user|show_ads %}
+{% if request.user|show_ads and not image.user|has_ultimate %}
     <div class="subtle-container advertisement">
         <div class="header">
             <h4><i class="icon-bullhorn"></i></h4>

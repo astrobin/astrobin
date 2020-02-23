@@ -3096,15 +3096,13 @@ class ImageTest(TestCase):
 
     @override_settings(ADS_ENABLED=True)
     @patch("astrobin.tasks.retrieve_primary_thumbnails")
-    def test_image_free_users_dont_see_ads_no_ultimate_2020_images(self, retrieve_primary_thumbnails):
+    def test_image_free_users_dont_see_ads_on_ultimate_2020_images(self, retrieve_primary_thumbnails):
         image = Generators.image()
         image.user = self.user
         image.save()
         us = Generators.premium_subscription(self.user, "AstroBin Ultimate 2020+")
         response = self.client.get(reverse('image_detail', kwargs={'id': image.get_id()}))
         self.assertNotContains(response, "div class=\"subtle-container advertisement\"")
-        image.delete()
-        us.delete()
 
     def test_image_platesolving_not_available_on_free(self):
         image = Generators.image()

@@ -55,8 +55,8 @@ from astrobin.models import Image, UserProfile, CommercialGear, Gear, Location, 
 from astrobin.shortcuts import ajax_response, ajax_success, ajax_fail
 from astrobin.utils import user_is_producer, user_is_retailer, to_user_timezone, base26_encode, base26_decode
 from astrobin_apps_notifications.utils import push_notification
-from astrobin_apps_platesolving.forms import PlateSolvingSettingsForm
-from astrobin_apps_platesolving.models import PlateSolvingSettings, Solution
+from astrobin_apps_platesolving.forms import PlateSolvingSettingsForm, PlateSolvingAdvancedSettingsForm
+from astrobin_apps_platesolving.models import PlateSolvingSettings, Solution, PlateSolvingAdvancedSettings
 from astrobin_apps_premium.templatetags.astrobin_apps_premium_tags import can_restore_from_trash
 from astrobin_apps_premium.utils import premium_get_max_allowed_image_size, premium_get_max_allowed_revisions
 
