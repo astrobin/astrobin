@@ -1,8 +1,6 @@
-# Python
 import datetime
 from itertools import chain
 
-# Django
 from django.conf import settings
 from django.contrib import messages
 from django.contrib.auth.models import User, Group as DjangoGroup
@@ -13,7 +11,6 @@ from django.db import transaction
 from django.db.models.signals import (
     pre_save, post_save, post_delete, m2m_changed)
 from django.utils.translation import ugettext_lazy as _
-# Third party apps
 from gadjo.requestprovider.signals import get_request
 from pybb.models import Forum, Topic, Post
 from rest_framework.authtoken.models import Token
@@ -30,7 +27,6 @@ from astrobin_apps_platesolving.models import Solution
 from astrobin_apps_platesolving.solver import Solver
 from astrobin_apps_premium.templatetags.astrobin_apps_premium_tags import (
     is_free, is_lite, is_premium)
-# Other AstroBin apps
 from nested_comments.models import NestedComment
 from rawdata.models import (
     PrivateSharedFolder,
@@ -38,7 +34,6 @@ from rawdata.models import (
     RawImage,
 )
 from .gear import get_correct_gear
-# This app
 from .models import Image, ImageRevision, Gear, UserProfile
 from .stories import add_story
 
@@ -460,11 +455,11 @@ def solution_post_save(sender, instance, created, **kwargs):
     else:
         return
 
-    # push_notification([user], notification,
-    #                   {'object_url': settings.BASE_URL + target.get_absolute_url()})
+    push_notification([user], notification,
+                      {'object_url': settings.BASE_URL + target.get_absolute_url()})
 
 
-#post_save.connect(solution_post_save, sender=Solution)
+post_save.connect(solution_post_save, sender=Solution)
 
 
 def subscription_subscribed(sender, **kwargs):
