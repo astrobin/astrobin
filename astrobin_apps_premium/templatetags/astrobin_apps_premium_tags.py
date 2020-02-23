@@ -110,11 +110,6 @@ def has_valid_premium_offer(user):
 
 
 @register.filter
-def has_ultimate(user):
-    return is_ultimate_2020(user)
-
-
-@register.filter
 def is_offer(subscription):
     return "offer" in subscription.category
 
