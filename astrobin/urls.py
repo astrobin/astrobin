@@ -500,14 +500,14 @@ urlpatterns = [
 
 urlpatterns += [url(r'^silk/', include('silk.urls', namespace='silk'))]
 
-if (settings.DEBUG or settings.TESTING) and not settings.AWS_S3_ENABLED:
+if not settings.AWS_S3_ENABLED:
     urlpatterns += static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
     urlpatterns += [url(r'^media/(?P<path>.*)$', serve, {
         'document_root': settings.MEDIA_ROOT,
         'show_indexes': True
     })]
 
-if (settings.DEBUG or settings.TESTING) and settings.LOCAL_STATIC_STORAGE:
+if settings.LOCAL_STATIC_STORAGE:
     urlpatterns += static(settings.STATIC_URL, document_root=settings.STATIC_ROOT)
     urlpatterns += [url(r'^static/(?P<path>.*)$', serve, {
         'document_root': settings.STATIC_ROOT,

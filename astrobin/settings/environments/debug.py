@@ -11,7 +11,7 @@ if DEBUG:
 
 
     def show_toolbar(request):
-        return not TESTING
+        return 'ddt=1' in request.path
 
     DEBUG_TOOLBAR_CONFIG = {
         "SHOW_TOOLBAR_CALLBACK": show_toolbar,
@@ -33,5 +33,9 @@ if DEBUG:
     ]
 
     CELERY_ALWAYS_EAGER = True
+    CELERY_RESULT_BACKEND = 'cache'
+    CELERY_CACHE_BACKEND = 'memory'
 
     CORS_ORIGIN_ALLOW_ALL = True
+
+    STATICFILES_STORAGE = 'pipeline.storage.NonPackagingPipelineStorage'
