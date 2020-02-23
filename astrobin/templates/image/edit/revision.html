@@ -37,14 +37,22 @@
 
         <div class="form-actions">
             <input class="btn btn-primary btn-block-mobile" type="submit" value="{% trans "Save" %} &rarr;" />
-            <a class="btn btn-block-mobile"
-               href="{% url 'image_detail' revision.image.get_id %}">{% trans "Back to image" %}</a>
+            <a class="btn btn-danger btn-block-mobile" data-toggle="modal" href="#delete-revision-modal">
+                <i class="icon-remove"></i>
+                {% trans "Delete this revision only" %}
+            </a>
+            <a class="btn btn-block-mobile" href="{% url 'image_detail' revision.image.get_id %}">
+                {% trans "Back to image" %}
+            </a>
         </div>
     </form>
 {% endblock %}
 
 {% block modals %}
     {% include "./_processing_thumbnails_modal.html" %}
+    {% with revision_image=revision is_revision=True %}
+        {% include "image/detail/modals/delete_revision.html" %}
+    {% endwith %}
 {% endblock %}
 
 {% block extra_js %}
