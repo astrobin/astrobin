@@ -1,7 +1,7 @@
 from django import forms
 
 from astrobin.models import UserProfile
-from astrobin.templatetags.tags import can_remove_ads
+from astrobin_apps_premium.templatetags.astrobin_apps_premium_tags import can_remove_ads
 
 
 class UserProfileEditPreferencesForm(forms.ModelForm):

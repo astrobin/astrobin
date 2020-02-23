@@ -2696,6 +2696,10 @@ BODY:first-of-type ul.as-list, x:-moz-any-link, x:default { /* Target FF 3.5+ */
         padding: 0 2px;
         font-size: 90%;
         color: #505050;
+
+        .icon-remove {
+          margin-left: 4px;
+        }
       }
     }
 

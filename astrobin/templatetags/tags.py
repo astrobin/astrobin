@@ -257,17 +257,6 @@ def show_ads(user):
 
 
 @register.filter
-def can_remove_ads(user):
-    if not settings.ADS_ENABLED:
-        return False
-
-    if is_lite(user) or is_premium(user) or is_premium_2020(user) or is_ultimate_2020(user):
-        return True
-
-    return False
-
-
-@register.filter
 def valid_subscriptions(user):
     if user.is_anonymous():
         return []

@@ -67,12 +67,12 @@
         </ul>
     {% endif %}
 
-    {% if request.user|show_ads and not requested_user|has_ultimate %}
+    {% if request.user|show_ads %}
         <div class="subtle-container simple-container advertisement hidden-phone hidden-tablet">
             <div class="header">
                 <h4><i class="icon-bullhorn"></i></h4>
 
-                {% if request.user.is_authenticated and DONATIONS_ENABLED %}
+                {% if request.user|can_remove_ads %}
                     <a class="remove" data-toggle="modal" href="#remove-ads-modal">
                         <i class="icon-remove"></i>
                     </a>

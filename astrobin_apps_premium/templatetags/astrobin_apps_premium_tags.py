@@ -1,5 +1,6 @@
 import datetime
 
+from django.conf import settings
 from django.db.models import QuerySet
 from django.template import Library
 
@@ -176,3 +177,14 @@ def can_see_real_resolution(user):
 @register.filter
 def can_restore_from_trash(user):
     return is_any_premium(user) or is_any_ultimate(user)
+
+
+@register.filter
+def can_remove_ads(user):
+    if not settings.ADS_ENABLED:
+        return False
+
+    if is_lite(user) or is_any_premium(user) or is_any_ultimate(user):
+        return True
+
+    return False
