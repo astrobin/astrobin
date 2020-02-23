@@ -172,3 +172,7 @@ def can_perform_advanced_platesolving(user):
 @register.filter
 def can_see_real_resolution(user):
     return not is_free(user)
+
+@register.filter
+def can_restore_from_trash(user):
+    return is_any_premium(user) or is_any_ultimate(user)

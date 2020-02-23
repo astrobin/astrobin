@@ -1280,7 +1280,9 @@ li.astrobin-thumbnail {
     @include rounded-corners(20px);
   }
 
-  .spam-thumbnail-overlay, .ham-thumbnail-overlay {
+  .spam-thumbnail-overlay,
+  .ham-thumbnail-overlay,
+  .restore-thumbnail-overlay {
     position: absolute;
     top: 11px;
     left: 11px;
@@ -1293,7 +1295,8 @@ li.astrobin-thumbnail {
     justify-content: center;
     visibility: hidden;
 
-    span {
+    span,
+    i {
       color: white;
       font-size: 30px;
       font-weight: bold;
@@ -1307,7 +1310,18 @@ li.astrobin-thumbnail {
     background-color: rgba(0, 255, 0, 0.5);
   }
 
-  &.top-title {
+  .restore-thumbnail-overlay {
+    background-color: rgba(255, 255, 255, 0.5);
+    top: 2px;
+    left: 2px;
+
+    i {
+      @include rotate(0deg);
+      color: green;
+    }
+  }
+
+    &.top-title {
     .image-title {
       position: absolute;
       top: 11px;

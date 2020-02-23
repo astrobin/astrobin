@@ -2093,6 +2093,25 @@ class ImageTest(TestCase):
 
         self.client.logout()
 
+    def test_image_delete_has_permanently_deleted_text(self):
+        self.client.login(username='test', password='password')
+        self._do_upload('astrobin/fixtures/test.jpg')
+        image = self._get_last_image()
+
+        response = self.client.get(reverse('image_detail', args=(image.get_id(),)))
+
+        self.assertContains(response, "The image will be permanently")
+
+    def test_image_delete_has_trash_text(self):
+        self.client.login(username='test', password='password')
+        self._do_upload('astrobin/fixtures/test.jpg')
+        image = self._get_last_image()
+        Generators.premium_subscription(image.user, "AstroBin Premium 2020+")
+
+        response = self.client.get(reverse('image_detail', args=(image.get_id(),)))
+
+        self.assertContains(response, "The image will be moved to the trash")
+
     @patch("astrobin.tasks.retrieve_primary_thumbnails")
     def test_image_delete_view(self, retrieve_primary_thumbnails):
         def post_url(args=None):

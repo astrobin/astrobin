@@ -915,3 +915,50 @@ class UserTest(TestCase):
             'name="allow_astronomy_ads" disabled')
         self.client.logout()
         us.delete()
+
+    def test_user_can_access_trash_free(self):
+        self.client.login(username='user', password='password')
+        response = self.client.get(reverse('user_page', args=('user',)) + "?trash")
+        self.assertEquals(403, response.status_code)
+
+    def test_user_can_access_trash_lite(self):
+        self.client.login(username='user', password='password')
+        Generators.premium_subscription(self.user, "AstroBin Lite")
+        response = self.client.get(reverse('user_page', args=('user',)) + "?trash")
+        self.assertEquals(403, response.status_code)
+
+    def test_user_can_access_trash_lite_autorenew(self):
+        self.client.login(username='user', password='password')
+        Generators.premium_subscription(self.user, "AstroBin Lite (autorenew)")
+        response = self.client.get(reverse('user_page', args=('user',)) + "?trash")
+        self.assertEquals(403, response.status_code)
+
+    def test_user_can_access_trash_lite_2020(self):
+        self.client.login(username='user', password='password')
+        Generators.premium_subscription(self.user, "AstroBin Lite 2020+")
+        response = self.client.get(reverse('user_page', args=('user',)) + "?trash")
+        self.assertEquals(403, response.status_code)
+
+    def test_user_can_access_trash_premium(self):
+        self.client.login(username='user', password='password')
+        Generators.premium_subscription(self.user, "AstroBin Premium")
+        response = self.client.get(reverse('user_page', args=('user',)) + "?trash")
+        self.assertEquals(200, response.status_code)
+
+    def test_user_can_access_trash_premium_autorenew(self):
+        self.client.login(username='user', password='password')
+        Generators.premium_subscription(self.user, "AstroBin Premium (autorenew)")
+        response = self.client.get(reverse('user_page', args=('user',)) + "?trash")
+        self.assertEquals(200, response.status_code)
+
+    def test_user_can_access_trash_premium_2020(self):
+        self.client.login(username='user', password='password')
+        Generators.premium_subscription(self.user, "AstroBin Premium 2020+")
+        response = self.client.get(reverse('user_page', args=('user',)) + "?trash")
+        self.assertEquals(200, response.status_code)
+
+    def test_user_can_access_trash_ultimate_2020(self):
+        self.client.login(username='user', password='password')
+        Generators.premium_subscription(self.user, "AstroBin Ultimate 2020+")
+        response = self.client.get(reverse('user_page', args=('user',)) + "?trash")
+        self.assertEquals(200, response.status_code)

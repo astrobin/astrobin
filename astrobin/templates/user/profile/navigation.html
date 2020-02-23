@@ -1,6 +1,7 @@
 {% load i18n %}
 {% load common_tags %}
 {% load tags %}
+{% load astrobin_apps_premium_tags %}
 
 <div class="subnav subnav-fixed">
     <ul class="nav nav-pills">
@@ -33,7 +34,7 @@
                 <li class="nav-header">{% trans "Gallery" %}</li>
 
                 <li>
-                    <a href="{% url 'user_page' requested_user.username %}{% query_string "" "sub,active,staging" %}">
+                    <a href="{% url 'user_page' requested_user.username %}{% query_string "" "sub,active,staging,trash" %}">
                         <i class="icon-bullhorn"></i>
                         {% trans "Public Area" %}
                         <span class="badge badge-success">
@@ -43,16 +44,31 @@
                 </li>
 
                 {% ifequal requested_user request.user %}
-                <li>
-                    <a href="{% url 'user_page' requested_user.username %}{% query_string "sub=uploaded,staging=" "public,active" %}">
-                        <i class="icon-lock"></i>
-                        {% trans "Staging Area" %}
-                        <span class="badge badge-success">
-                            {{wip_images_no}}
-                        </span>
-                    </a>
-                </li>
+                    <li>
+                        <a href="{% url 'user_page' requested_user.username %}{% query_string "sub=uploaded,staging=" "public,active,trash" %}">
+                            <i class="icon-lock"></i>
+                            {% trans "Staging Area" %}
+                            <span class="badge badge-success">
+                                {{wip_images_no}}
+                            </span>
+                        </a>
+                    </li>
+
+                    {% if request.user|can_restore_from_trash %}
+                        <li>
+                            <a href="{% url 'user_page' requested_user.username %}{% query_string "trash=" "public,active,sub,staging" %}">
+                                <i class="icon-trash"></i>
+                                {% trans "Trash" %}
+                                <span class="badge badge-success">
+                                {{ deleted_images_no }}
+                            </span>
+                            </a>
+                        </li>
+                    {% endif %}
+
                 {% endifequal %}
+
+                <li class="divider"></li>
 
                 <li>
                     <a href="{% url 'user_page_bookmarks' requested_user.username %}">

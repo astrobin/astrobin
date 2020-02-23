@@ -57,6 +57,7 @@ from astrobin.utils import user_is_producer, user_is_retailer, to_user_timezone,
 from astrobin_apps_notifications.utils import push_notification
 from astrobin_apps_platesolving.forms import PlateSolvingSettingsForm
 from astrobin_apps_platesolving.models import PlateSolvingSettings, Solution
+from astrobin_apps_premium.templatetags.astrobin_apps_premium_tags import can_restore_from_trash
 from astrobin_apps_premium.utils import premium_get_max_allowed_image_size, premium_get_max_allowed_revisions
 
 
@@ -1126,6 +1127,12 @@ def user_page(request, username):
         qs = Image.wip.filter(user=user)
         section = 'staging'
         subsection = None
+    if 'trash' in request.GET:
+        if not (request.user == user and can_restore_from_trash(request.user) or request.user.is_superuser):
+            return HttpResponseForbidden()
+        qs = Image.deleted_objects.filter(user=user)
+        section = 'trash'
+        subsection = None
     else:
         #########
         # TITLE #
@@ -1337,6 +1344,7 @@ def user_page(request, username):
         'images_no': data['images'],
         'public_images_no': Image.objects.filter(user=user).count(),
         'wip_images_no': Image.wip.filter(user=user).count(),
+        'deleted_images_no': Image.deleted_objects.filter(user=user).count(),
         'bookmarks_no': ToggleProperty.objects.toggleproperties_for_user("bookmark", user) \
             .filter(content_type=image_ct).count(),
         'likes_no': ToggleProperty.objects.toggleproperties_for_user("like", user) \
@@ -1374,6 +1382,7 @@ def user_page_commercial_products(request, username):
         'merge_retailed_gear_form': MergeRetailedGearForm(user=user),
         'public_images_no': Image.objects.filter(user=user).count(),
         'wip_images_no': Image.wip.filter(user=user).count(),
+        'deleted_images_no': Image.deleted_objects.filter(user=user).count(),
         'bookmarks_no': ToggleProperty.objects.toggleproperties_for_user("bookmark", user) \
             .filter(content_type=image_ct).count(),
         'likes_no': ToggleProperty.objects.toggleproperties_for_user("like", user) \
@@ -1418,6 +1427,7 @@ def user_page_bookmarks(request, username):
         'private_message_form': PrivateMessageForm(),
         'public_images_no': Image.objects.filter(user=user).count(),
         'wip_images_no': Image.wip.filter(user=user).count(),
+        'deleted_images_no': Image.deleted_objects.filter(user=user).count(),
         'bookmarks_no': ToggleProperty.objects.toggleproperties_for_user("bookmark", user) \
                   .filter(content_type=image_ct).count(),
         'likes_no': ToggleProperty.objects.toggleproperties_for_user("like", user) \
@@ -1447,6 +1457,7 @@ def user_page_liked(request, username):
         'private_message_form': PrivateMessageForm(),
         'public_images_no': Image.objects.filter(user=user).count(),
         'wip_images_no': Image.wip.filter(user=user).count(),
+        'deleted_images_no': Image.deleted_objects.filter(user=user).count(),
         'bookmarks_no': ToggleProperty.objects.toggleproperties_for_user("bookmark", user) \
                   .filter(content_type=image_ct).count(),
         'likes_no': ToggleProperty.objects.toggleproperties_for_user("like", user) \
@@ -1487,6 +1498,7 @@ def user_page_following(request, username, extra_context=None):
         'private_message_form': PrivateMessageForm(),
         'public_images_no': Image.objects.filter(user=user).count(),
         'wip_images_no': Image.wip.filter(user=user).count(),
+        'deleted_images_no': Image.deleted_objects.filter(user=user).count(),
         'bookmarks_no': ToggleProperty.objects.toggleproperties_for_user("bookmark", user) \
                   .filter(content_type=image_ct).count(),
         'likes_no': ToggleProperty.objects.toggleproperties_for_user("like", user) \
@@ -1522,6 +1534,7 @@ def user_page_followers(request, username, extra_context=None):
         'private_message_form': PrivateMessageForm(),
         'public_images_no': Image.objects.filter(user=user).count(),
         'wip_images_no': Image.wip.filter(user=user).count(),
+        'deleted_images_no': Image.deleted_objects.filter(user=user).count(),
         'bookmarks_no': ToggleProperty.objects.toggleproperties_for_user("bookmark", user) \
                   .filter(content_type=image_ct).count(),
         'likes_no': ToggleProperty.objects.toggleproperties_for_user("like", user) \
@@ -1541,6 +1554,7 @@ def user_page_plots(request, username):
         'profile': profile,
         'public_images_no': Image.objects.filter(user=user).count(),
         'wip_images_no': Image.wip.filter(user=user).count(),
+        'deleted_images_no': Image.deleted_objects.filter(user=user).count(),
         'bookmarks_no': ToggleProperty.objects.toggleproperties_for_user("bookmark", user) \
                   .filter(content_type=image_ct).count(),
         'likes_no': ToggleProperty.objects.toggleproperties_for_user("like", user) \
@@ -1565,6 +1579,7 @@ def user_page_api_keys(request, username):
         'api_keys': keys,
         'public_images_no': Image.objects.filter(user=user).count(),
         'wip_images_no': Image.wip.filter(user=user).count(),
+        'deleted_images_no': Image.deleted_objects.filter(user=user).count(),
         'bookmarks_no': ToggleProperty.objects.toggleproperties_for_user("bookmark", user) \
                   .filter(content_type=image_ct).count(),
         'likes_no': ToggleProperty.objects.toggleproperties_for_user("like", user) \

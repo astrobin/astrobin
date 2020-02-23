@@ -1,0 +1,42 @@
+{% load i18n %}
+{% load static %}
+{% load astrobin_apps_images_tags %}
+{% load astrobin_apps_users_tags %}
+
+<h3>{% trans "Trash"%}</h3>
+
+{% if image_list %}
+    <ul class="astrobin-thumbnails">
+        {% for image in image_list %}
+            <li
+                    class="thumbnail astrobin-thumbnail trash-thumbnail"
+                    data-pk="{{ image.pk }}"
+                    data-restore="false">
+
+                <a href="#" rel="tooltip"
+                   title="{{ image.title|escape|default:_("(no title)") }}, {% astrobin_username image.user link=False %}">
+                    {% astrobin_image image 'gallery' link=False tooltip=False %}
+
+                    <div class="restore-thumbnail-overlay hide">
+                        <i class="icon-rotate-left"></i>
+                    </div>
+                </a>
+
+            </li>
+        {% endfor %}
+</ul>
+{% else %}
+    {% trans "There doesn't seem to be anything here." %}
+{% endif %}
+
+<form class="form">
+    <div class="form-actions">
+        <button id="restore-from-trash" class="btn btn-primary btn-block-mobile" disabled="disabled">
+            {% trans "Restore selected" %} (<span id="restore-from-trash-number">0</span>)
+        </button>
+        <img
+                class="loading hide"
+                src="{% static 'astrobin/images/ajax-loader.gif' %}"
+                alt="{% trans "Loading" %}" />
+    </div>
+</form>
