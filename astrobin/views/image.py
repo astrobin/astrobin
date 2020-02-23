@@ -17,7 +17,7 @@ from django.core.files.images import get_image_dimensions
 from django.core.urlresolvers import reverse_lazy, reverse
 from django.db.models import Q
 from django.db.models.query import QuerySet
-from django.http import Http404, HttpResponseRedirect
+from django.http import Http404, HttpResponseRedirect, HttpResponseBadRequest
 from django.shortcuts import redirect
 from django.utils.encoding import iri_to_uri, smart_unicode
 from django.utils.translation import ugettext as _
@@ -42,7 +42,9 @@ from astrobin.forms import (
     ImagePromoteForm,
     ImageRevisionUploadForm,
     PrivateMessageForm,
-    ImageEditThumbnailsForm, ImageFitsUploadForm)
+    ImageEditThumbnailsForm,
+    ImageFitsUploadForm,
+    ImageEditCorruptedRevisionForm)
 from astrobin.models import (
     Collection,
     Image, ImageRevision,
@@ -127,9 +129,9 @@ class ImageFlagThumbsView(
 
     def post(self, request, *args, **kwargs):
         image = self.get_object()
-        image.thumbnail_invalidate(False)
+        image.thumbnail_invalidate()
         for r in image.revisions.all():
-            r.thumbnail_invalidate(False)
+            r.thumbnail_invalidate()
         messages.success(self.request, _("Thanks for reporting the problem. All thumbnails will be generated again."))
         return super(ImageFlagThumbsView, self).post(self.request, args, kwargs)
 
@@ -149,7 +151,7 @@ class ImageThumbView(JSONResponseMixin, ImageDetailViewBase):
 
         force = request.GET.get('force')
         if force is not None:
-            image.thumbnail_invalidate(False)
+            image.thumbnail_invalidate()
 
         opts = {
             'revision_label': r,
@@ -188,7 +190,7 @@ class ImageRawThumbView(ImageDetailViewBase):
 
         force = request.GET.get('force')
         if force is not None:
-            image.thumbnail_invalidate(False)
+            image.thumbnail_invalidate()
 
         sync = request.GET.get('sync')
         if sync is not None:
@@ -227,13 +229,23 @@ class ImageDetailView(ImageDetailViewBase):
                     not request.user.userprofile.is_image_moderator():
                 raise Http404
 
-        if image.corrupted:
+        revision_label = kwargs.get('r')
+        if image.corrupted and (revision_label == '0' or (revision_label in [None, 'final'] and image.is_final)):
             if request.user == image.user:
                 return redirect(reverse('image_edit_basic', args=(image.get_id(),)) + '?corrupted')
             else:
                 raise Http404
 
-        revision_label = kwargs['r']
+        if revision_label != '0':
+            try:
+                revision = image.revisions.get(label=revision_label)
+                if revision.corrupted:
+                    if request.user == image.user:
+                        return redirect(reverse('image_edit_revision', args=(revision.pk,)) + '?corrupted')
+                    else:
+                        raise Http404
+            except ImageRevision.DoesNotExist:
+                pass
 
         if revision_label is None:
             # No revision specified, let's see if we need to redirect to the
@@ -746,13 +758,25 @@ class ImageFullView(ImageDetailView):
         if image.moderator_decision == 2:
             raise Http404
 
-        if image.corrupted:
+        self.revision_label = kwargs['r']
+
+        if image.corrupted and (
+                self.revision_label == '0' or (self.revision_label in [None, 'final'] and image.is_final)):
             if request.user == image.user:
                 return redirect(reverse('image_edit_basic', args=(image.get_id(),)) + '?corrupted')
             else:
                 raise Http404
 
-        self.revision_label = kwargs['r']
+        if self.revision_label != '0':
+            try:
+                revision = image.revisions.get(label=self.revision_label)
+                if revision.corrupted:
+                    if request.user == image.user:
+                        return redirect(reverse('image_edit_revision', args=(revision.pk,)) + '?corrupted')
+                    else:
+                        raise Http404
+            except ImageRevision.DoesNotExist:
+                pass
 
         if self.revision_label is None:
             # No revision specified, let's see if we need to redirect to the
@@ -872,10 +896,10 @@ class ImageDeleteOriginalView(ImageDeleteView):
 
     def post(self, *args, **kwargs):
         image = self.get_object()
-        revisions = image.revisions.all()
+        revisions = ImageRevision.all_objects.filter(image=image)
 
         if not revisions:
-            return ImageDeleteView.as_view()(self.request, *args, **kwargs)
+            return HttpResponseBadRequest()
 
         final = None
         if image.is_final:
@@ -913,7 +937,7 @@ class ImageDeleteOriginalView(ImageDeleteView):
         self.image = image
         final.delete()
 
-        messages.success(self.request, _("Revision deleted."));
+        messages.success(self.request, _("Original version deleted!"));
         # We do not call super, because that would delete the Image
         return HttpResponseRedirect(self.get_success_url())
 
@@ -1040,6 +1064,28 @@ class ImageEditBasicView(ImageEditBaseView):
             return reverse_lazy('image_edit_gear', kwargs={'id': image.get_id()})
         return image.get_absolute_url()
 
+    def post(self, request, *args, **kwargs):
+        image = self.get_object()  # type: Image
+        previous_url = image.image_file.url
+
+        ret = super(ImageEditBasicView, self).post(request, *args, **kwargs)
+
+        image = self.get_object()  # type: Image
+        new_url = image.image_file.url
+
+        if new_url != previous_url:
+            try:
+                image.w, image.h = get_image_dimensions(image.image_file)
+            except TypeError:
+                pass
+
+            image.square_cropping = "0,0,0,0"
+            image.save(keep_deleted=True)
+
+            image.thumbnail_invalidate()
+
+        return ret
+
 
 class ImageEditGearView(ImageEditBaseView):
     form_class = ImageEditGearForm
@@ -1079,7 +1125,9 @@ class ImageEditRevisionView(LoginRequiredMixin, UpdateView):
     pk_url_kwarg = 'id'
     template_name = 'image/edit/revision.html'
     context_object_name = 'revision'
-    form_class = ImageEditRevisionForm
+
+    def get_form_class(self):
+        return ImageEditCorruptedRevisionForm if self.object.corrupted else ImageEditRevisionForm
 
     def get_success_url(self):
         return reverse_lazy('image_detail', args=(self.object.image.get_id(),))
@@ -1097,13 +1145,30 @@ class ImageEditRevisionView(LoginRequiredMixin, UpdateView):
 
     def form_valid(self, form):
         messages.success(self.request, _("Form saved. Thank you!"))
+        self.object.corrupted = False
         return super(ImageEditRevisionView, self).form_valid(form)
 
     def post(self, request, *args, **kwargs):
-        image = self.get_object()  # type: ImageRevision
-        image.thumbnail_invalidate(delete_remote=False)
+        revision = self.get_object()  # type: ImageRevision
+        previous_url = revision.image_file.url
 
-        return super(ImageEditRevisionView, self).post(request, *args, **kwargs)
+        ret = super(ImageEditRevisionView, self).post(request, *args, **kwargs)
+
+        revision = self.get_object()
+        new_url = revision.image_file.url
+
+        if new_url != previous_url:
+            try:
+                revision.w, revision.h = get_image_dimensions(revision.image_file)
+            except TypeError:
+                pass
+
+            revision.square_cropping = "0,0,0,0"
+            revision.save(keep_deleted=True)
+
+            revision.thumbnail_invalidate()
+
+        return ret
 
 
 class ImageEditThumbnailsView(ImageEditBaseView):
@@ -1118,6 +1183,6 @@ class ImageEditThumbnailsView(ImageEditBaseView):
 
     def post(self, request, *args, **kwargs):
         image = self.get_object()  # type: Image
-        image.thumbnail_invalidate(delete_remote=False)
+        image.thumbnail_invalidate()
 
         return super(ImageEditThumbnailsView, self).post(request, *args, **kwargs)

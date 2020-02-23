@@ -7,7 +7,7 @@ from django.conf import settings
 from django.core.files.base import ContentFile
 
 from astrobin_apps_platesolving.solver import Solver
-from astrobin_apps_platesolving.utils import get_from_storage, get_target
+from astrobin_apps_platesolving.utils import get_from_storage, get_target, ThumbnailNotReadyException, getFromStorage
 
 
 class Annotator:
@@ -86,8 +86,8 @@ class Annotator:
             if annotation['type'] in supported_types:
                 x = annotation['pixelx'] = annotation['pixelx'] * self.resampling_factor
                 y = annotation['pixely'] = annotation['pixely'] * self.resampling_factor
-                radius = annotation['radius'] = annotation[
-                                                    'radius'] * self.resampling_factor + 10 * self.resampling_factor;
+                radius = annotation['radius'] = \
+                    annotation['radius'] * self.resampling_factor + 10 * self.resampling_factor
                 white = (255, 255, 255)
                 black = (0, 0, 0)
 
@@ -148,12 +148,17 @@ class Annotator:
                 thumbnail_w = w
                 thumbnail_h = h
 
-            image = get_target(self.solution.object_id, self.solution.content_type.id)
+            try:
+                base = Image \
+                    .open(getFromStorage(
+                    self.solution.content_object,
+                    'hd',
+                    '0' if not hasattr(self.solution.content_object, 'label')
+                    else self.solution.content_object.label)) \
+                    .convert('RGBA')
+            except ThumbnailNotReadyException:
+                return None
 
-            base = Image \
-                .open(get_from_storage(self.solution.content_object, 'hd',
-                                     '0' if image._meta.model_name == u'image' else image.label)) \
-                .convert('RGBA')
             if self.resampling_factor != 1:
                 base = base.resize(
                     (int(round(hd_w * self.resampling_factor)),

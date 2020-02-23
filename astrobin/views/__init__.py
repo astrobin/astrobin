@@ -688,7 +688,7 @@ def image_edit_make_final(request, id):
     if request.user != image.user and not request.user.is_superuser:
         return HttpResponseForbidden()
 
-    revisions = ImageRevision.objects.filter(image=image)
+    revisions = ImageRevision.all_objects.filter(image=image)
     for r in revisions:
         r.is_final = False
         r.save(keep_deleted=True)
@@ -705,7 +705,7 @@ def image_edit_revision_make_final(request, id):
     if request.user != r.image.user and not request.user.is_superuser:
         return HttpResponseForbidden()
 
-    other = ImageRevision.objects.filter(image=r.image)
+    other = ImageRevision.all_objects.filter(image=r.image)
     for i in other:
         i.is_final = False
         i.save(keep_deleted=True)
@@ -1104,9 +1104,21 @@ def user_page(request, username):
     menu = []
 
     qs = Image.objects.filter(user=user)
+    corrupted_pks = []
+    for i in qs:
+        if i.is_final and i.corrupted:
+            corrupted_pks.append(i.pk)
+            continue
+
+        try:
+            final = i.revisions.get(label=i.get_final_revision_label())
+            if final.corrupted:
+                corrupted_pks.append(i.pk)
+        except ImageRevision.DoesNotExist:
+            pass
 
     if request.user != user:
-        qs = qs.exclude(corrupted=True)
+        qs = qs.exclude(pk__in=corrupted_pks)
 
     if 'staging' in request.GET:
         if request.user != user and not request.user.is_superuser:

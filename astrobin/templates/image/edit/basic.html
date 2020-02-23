@@ -32,26 +32,7 @@
             enctype="multipart/form-data">{% csrf_token %}
 
         {% if 'corrupted' in request.GET %}
-            <div class="alert alert-danger">
-                <h4 class="alert-heading">
-                    <i class="icon-fire"></i> {% trans "Oh no!" %}
-                </h4>
-
-                <p>
-                    {% blocktrans %}
-                        We are very, very sorry, but it appears that your image suffered a catastrophic data
-                        corruption, and it cannot be retrieved. Hopefully you still have your file (the information on
-                        this form should provide you with enough context).
-                    {% endblocktrans %}
-                </p>
-
-                <p>
-                    {% blocktrans %}
-                        Please use the file input below to upload it again, and then click on the Save button down
-                        below. All the data you had previously associated to your image is still here.
-                    {% endblocktrans %}
-                </p>
-            </div>
+            {% include './_catastrophic_data_corruption.html' %}
         {% endif %}
 
         {{form|as_bootstrap}}
@@ -68,6 +49,10 @@
             {% if image.subject_type < 500 %}
             <input class="btn btn-primary btn-block-mobile" type="submit" name="submit_gear" value="{% trans "Next step: gear used" %} &rarr;" />
             {% endif %}
+
+            <a data-toggle="modal" class="btn btn-danger btn-block-mobile" href="#delete-modal">
+                <i class="icon-remove"></i> {% trans "Delete" %}
+            </a>
 
             <a class="btn btn-block-mobile" href="{{image.get_absolute_url}}">{% trans "Cancel" %}</a>
         </div>
@@ -100,4 +85,8 @@
         $('img.loading').parent().remove();
     });
 </script>
+{% endblock %}
+
+{% block modals %}
+    {% include 'image/detail/modals/delete.html' %}
 {% endblock %}

@@ -5,6 +5,7 @@ import time
 import urllib2
 
 import simplejson
+from braces.views import CsrfExemptMixin
 from django.conf import settings
 from django.core.files import File
 from django.core.files.base import ContentFile
@@ -23,7 +24,8 @@ from astrobin.models import DeepSky_Acquisition
 from astrobin.utils import degrees_minutes_seconds_to_decimal_degrees
 from astrobin_apps_platesolving.annotate import Annotator
 from astrobin_apps_platesolving.api_filters.image_object_id_filter import ImageObjectIdFilter
-from astrobin_apps_platesolving.models import PlateSolvingSettings, PlateSolvingAdvancedSettings
+from astrobin_apps_platesolving.models import PlateSolvingAdvancedSettings
+from astrobin_apps_platesolving.models import PlateSolvingSettings
 from astrobin_apps_platesolving.models import Solution
 from astrobin_apps_platesolving.serializers import SolutionSerializer
 from astrobin_apps_platesolving.solver import Solver, AdvancedSolver, SolverBase
@@ -170,7 +172,7 @@ class SolutionUpdateView(base.View):
         return HttpResponse(simplejson.dumps(context), content_type='application/json')
 
 
-class SolutionFinalizeView(base.View):
+class SolutionFinalizeView(CsrfExemptMixin, base.View):
     def post(self, request, *args, **kwargs):
         solution = get_object_or_404(Solution, pk=kwargs.pop('pk'))
         solver = Solver()

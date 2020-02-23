@@ -1,8 +1,6 @@
-# Python
 import datetime
 from itertools import chain
 
-# Django
 from dateutil.relativedelta import relativedelta
 from django.conf import settings
 from django.contrib import messages
@@ -14,7 +12,6 @@ from django.db import transaction
 from django.db.models.signals import (
     pre_save, post_save, post_delete, m2m_changed)
 from django.utils.translation import ugettext_lazy as _
-# Third party apps
 from gadjo.requestprovider.signals import get_request
 from pybb.models import Forum, Topic, Post
 from rest_framework.authtoken.models import Token
@@ -31,7 +28,6 @@ from astrobin_apps_platesolving.models import Solution
 from astrobin_apps_platesolving.solver import Solver
 from astrobin_apps_premium.templatetags.astrobin_apps_premium_tags import (
     is_lite, is_premium, is_any_premium_subscription, is_ultimate_2020)
-# Other AstroBin apps
 from astrobin_apps_premium.utils import premium_get_valid_usersubscription
 from nested_comments.models import NestedComment
 from rawdata.models import (
@@ -40,7 +36,6 @@ from rawdata.models import (
     RawImage,
 )
 from .gear import get_correct_gear
-# This app
 from .models import Image, ImageRevision, Gear, UserProfile
 from .stories import add_story
 

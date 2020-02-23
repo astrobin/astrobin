@@ -1,0 +1,82 @@
+{% load i18n %}
+
+<div class="alert alert-danger">
+    <h4 class="alert-heading">
+        <i class="icon-fire"></i> {% trans "Oh no!" %}
+    </h4>
+
+    <p>
+        {% blocktrans %}
+            We are very, very sorry, but it appears that your image suffered a catastrophic data
+            corruption, and it cannot be retrieved. Hopefully you still have your file (the information on
+            this form should provide you with enough context).
+        {% endblocktrans %}
+    </p>
+
+    <p>
+        {% blocktrans %}
+            Please use the file input below to upload it again, and then click on the Save button down
+            below. All the data you had previously associated to your image is still here.
+        {% endblocktrans %}
+    </p>
+
+    <p>
+        {% trans "Here's some detail about the image to give you some context." %}
+
+        {% if image %}
+            <ul>
+                <li>
+                    <strong>{% trans "Title" %}:</strong> {{ image.title }}
+                </li>
+
+                <li>
+                    <strong>{% trans "Resolution" %}:</strong>
+                    {% if image.w %}
+                        {{ image.w }}
+                    {% else %}
+                        ?
+                    {% endif %}
+                    x
+                    {% if image.h %}
+                        {{ image.h }}
+                    {% else %}
+                        ?
+                    {% endif %}
+                </li>
+
+                <li>
+                    <strong>{% trans "Uploaded" %}:</strong> {{ image.uploaded|date:"SHORT_DATE_FORMAT" }}
+                </li>
+            </ul>
+        {% elif revision %}
+            <ul>
+                <li>
+                    <strong>{% trans "Title" %}:</strong> {{ revision.image.title }}
+                </li>
+
+                <li>
+                    <strong>{% trans "Resolution" %}:</strong>
+                        {% if revision.w %}
+                            {{ revision.w }}
+                        {% else %}
+                            ?
+                        {% endif %}
+                        x
+                        {% if revision.h %}
+                            {{ revision.h }}
+                        {% else %}
+                            ?
+                        {% endif %}
+                </li>
+
+                <li>
+                    <strong>{% trans "Image uploaded" %}:</strong> {{ revision.image.uploaded|date:"SHORT_DATE_FORMAT" }}
+                </li>
+
+                <li>
+                    <strong>{% trans "Revision uploaded" %}:</strong> {{ revision.uploaded|date:"SHORT_DATE_FORMAT" }}
+                </li>
+            </ul>
+        {% endif %}
+    </p>
+</div>

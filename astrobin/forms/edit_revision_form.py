@@ -1,5 +1,6 @@
 from django import forms
 from django.utils.translation import ugettext_lazy as _
+from image_cropping import ImageCropWidget
 
 from astrobin.models import Image, ImageRevision
 
@@ -12,9 +13,7 @@ class ImageEditRevisionForm(forms.ModelForm):
                     "note: only revisions with the same width and height as this one can be considered."),
     )
 
-    def __init__(self, **kwargs):
-        super(ImageEditRevisionForm, self).__init__(**kwargs)
-
+    def __init_mouse_hover_image(self):
         self.fields['mouse_hover_image'].choices = Image.MOUSE_HOVER_CHOICES
 
         revisions = self.instance.image.revisions
@@ -32,9 +31,14 @@ class ImageEditRevisionForm(forms.ModelForm):
                 ("ORIGINAL", _("Original image"))
             ]
 
+    def __init__(self, **kwargs):
+        super(ImageEditRevisionForm, self).__init__(**kwargs)
+        self.__init_mouse_hover_image()
+
     class Meta:
         model = ImageRevision
         fields = ('image_file', 'fits_file', 'description', 'mouse_hover_image', 'square_cropping')
         widgets = {
             'description': forms.Textarea(attrs={'rows': 4}),
+            'image_file': ImageCropWidget
         }

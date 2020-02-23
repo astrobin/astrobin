@@ -12,7 +12,8 @@ from astrobin.models import (
     Acquisition,
     CommercialGear,
     Telescope,
-    UserProfile
+    UserProfile,
+    ImageRevision
 )
 from astrobin.tests.generators import Generators
 from astrobin_apps_iotd.models import *
@@ -58,6 +59,23 @@ class UserTest(TestCase):
             image.save(keep_deleted=True)
 
         return image
+
+    def _get_last_image_revision(self):
+        return ImageRevision.objects.all().order_by('-id')[0]
+
+    def _do_upload_revision(self, image, filename, description=None):
+        self.client.post(
+            reverse('image_revision_upload_process'),
+            {
+                'image_id': image.get_id(),
+                'image_file': open(filename, 'rb'),
+                'description': description,
+            },
+            follow=True)
+
+        revision = self._get_last_image_revision()
+
+        return revision
 
     @patch("astrobin.tasks.retrieve_primary_thumbnails")
     def test_user_page_view(self, retrieve_primary_thumbnails):
@@ -557,6 +575,135 @@ class UserTest(TestCase):
         self.assertContains(response, "Change your e-mail")
 
         bounce.delete()
+
+    def test_corrupted_image_not_shown_to_anon(self):
+        self.client.login(username="user", password="password")
+        image = self._do_upload('astrobin/fixtures/test.jpg', "CORRUPTED_IMAGE")
+        image.corrupted = True
+        image.save()
+        self.client.logout()
+
+        response = self.client.get(reverse('user_page', args=('user',)))
+
+        self.assertEquals(200, response.status_code)
+        self.assertNotContains(response, "CORRUPTED_IMAGE")
+
+        image.delete()
+
+    def test_corrupted_final_image_revision_not_shown_to_anon(self):
+        self.client.login(username="user", password="password")
+        image = self._do_upload('astrobin/fixtures/test.jpg', "CORRUPTED_IMAGE")
+        revision = self._do_upload_revision(image, 'astrobin/fixtures/test.jpg')
+        revision.corrupted = True
+        revision.save()
+        self.client.logout()
+
+        response = self.client.get(reverse('user_page', args=('user',)))
+
+        self.assertEquals(200, response.status_code)
+        self.assertNotContains(response, "CORRUPTED_IMAGE")
+
+        image.delete()
+        revision.delete()
+
+    def test_corrupted_image_with_ok_final_revision_shown_to_anon(self):
+        self.client.login(username="user", password="password")
+        image = self._do_upload('astrobin/fixtures/test.jpg', "CORRUPTED_IMAGE")
+        image.corrupted = True
+        image.save()
+        revision = self._do_upload_revision(image, 'astrobin/fixtures/test.jpg')
+        self.client.logout()
+
+        response = self.client.get(reverse('user_page', args=('user',)))
+
+        self.assertEquals(200, response.status_code)
+        self.assertContains(response, "CORRUPTED_IMAGE")
+
+        image.delete()
+        revision.delete()
+
+    def test_corrupted_image_with_ok_non_final_revision_not_shown_to_anon(self):
+        self.client.login(username="user", password="password")
+        image = self._do_upload('astrobin/fixtures/test.jpg', "CORRUPTED_IMAGE")
+        revision = self._do_upload_revision(image, 'astrobin/fixtures/test.jpg')
+        revision.is_final = False
+        revision.save()
+
+        image.corrupted = True
+        image.is_final = True
+        image.save()
+
+        self.client.logout()
+
+        response = self.client.get(reverse('user_page', args=('user',)))
+
+        self.assertEquals(200, response.status_code)
+        self.assertNotContains(response, "CORRUPTED_IMAGE")
+
+        image.delete()
+        revision.delete()
+
+    def test_corrupted_image_shown_to_owner(self):
+        self.client.login(username="user", password="password")
+        image = self._do_upload('astrobin/fixtures/test.jpg', "CORRUPTED_IMAGE")
+        image.corrupted = True
+        image.save()
+
+        response = self.client.get(reverse('user_page', args=('user',)))
+
+        self.assertEquals(200, response.status_code)
+        self.assertContains(response, "CORRUPTED_IMAGE")
+
+        image.delete()
+
+    def test_corrupted_final_image_revision_shown_to_owner(self):
+        self.client.login(username="user", password="password")
+        image = self._do_upload('astrobin/fixtures/test.jpg', "CORRUPTED_IMAGE")
+        revision = self._do_upload_revision(image, 'astrobin/fixtures/test.jpg')
+        revision.corrupted = True
+        revision.save()
+
+        response = self.client.get(reverse('user_page', args=('user',)))
+
+        self.assertEquals(200, response.status_code)
+        self.assertContains(response, "CORRUPTED_IMAGE")
+
+        image.delete()
+        revision.delete()
+
+    def test_corrupted_image_with_ok_final_revision_shown_to_owner(self):
+        self.client.login(username="user", password="password")
+        image = self._do_upload('astrobin/fixtures/test.jpg', "CORRUPTED_IMAGE")
+        image.corrupted = True
+        image.save()
+        revision = self._do_upload_revision(image, 'astrobin/fixtures/test.jpg')
+
+        response = self.client.get(reverse('user_page', args=('user',)))
+
+        self.assertEquals(200, response.status_code)
+        self.assertContains(response, "CORRUPTED_IMAGE")
+
+        image.delete()
+        revision.delete()
+
+    def test_corrupted_image_with_ok_non_final_revision_shown_to_owner(self):
+        self.client.login(username="user", password="password")
+        image = self._do_upload('astrobin/fixtures/test.jpg', "CORRUPTED_IMAGE")
+        revision = self._do_upload_revision(image, 'astrobin/fixtures/test.jpg')
+        revision.is_final = False
+        revision.save()
+
+        image.corrupted = True
+        image.is_final = True
+        image.save()
+
+        response = self.client.get(reverse('user_page', args=('user',)))
+
+        self.assertEquals(200, response.status_code)
+        self.assertContains(response, "CORRUPTED_IMAGE")
+
+        image.delete()
+        revision.delete()
 
     @override_settings(PREMIUM_MAX_IMAGES_FREE_2020=123)
     def test_user_page_subscription_free(self):

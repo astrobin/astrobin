@@ -1,3 +1,38 @@
+2020-02-23 Salvatore Iovene <salvatore@iovene.com>
+ * v1.54.6
+ * (images) Allow deleting original revision while on subsequent revision
+ * (images) Fix corner cases when replacing image/revision, relating to file w/h and cropping
+ * (images) Fix rendering of image cropping interface on revisions
+ * (infra) Expose debug port from docker container
+ * (plate-solving) Add script to regenerate annotations that were lost
+ * (plate-solving) Fix issue that caused annotation of wrong revision to be displayed
+ * (premium) Add script to upgrade Free/Lite users affected by data loss to Premium
+ * (premium) Fix display of expiration date in case of multiple subscriptions
+ * (profile) Fix hiding corrupted images beyond the first one
+
+2020-02-20 Salvatore Iovene <salvatore@iovene.com>
+ * v1.54.5
+ * (images) Improve success message upon deleting original image
+ * (images) Do not fallback to deleting whole image when wanting to delete original and there are no revision
+ * (images) Make sure there can never be two final revisions (incl. original)
+ * (images) Fix typo in placeholder image URL
+ * (images) Don't accidentally undelete images when marking them as corrupted
+ * (images) Use placehold.jp because it supports UTF-8 synbols
+ * (images) Increase thumbnail getting timeout and use hourglass instead of sad face
+ * (profile) Account for '0' revision when building corrupted pks list
+ * (profile) Fix showing non corrupted images to visitors
+ * (images) Add delete button to edit basic info page
+ * (images) Fix corruption redirects when the image is corrupted but not the address revision
+ * (images) Add delete buttons to revision list
+ * (images) Fix issues when revisions are corrupted
+ * (images) Fix marking a revision as corrupted
+
+2020-02-17 Salvatore Iovene <salvatore@iovene.com>
+ * v1.54.4
+ * (images) Fix issue when getting thumbnails of original revision without a thumb crop
+ * (images) Add image resolution readonly field on edit basic settings page
+ * (images) Always attempt to fetch corrupted images
+
 2020-02-16 Salvatore Iovene <salvatore@iovene.com>
  * v1.54.3
  * (profile) Fix missing link

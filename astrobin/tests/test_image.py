@@ -2202,12 +2202,8 @@ class ImageTest(TestCase):
         # Test when there are no revisions
         self.client.login(username='test', password='password')
         response = self.client.post(post_url((image.get_id(),)))
-        self.assertRedirects(
-            response,
-            reverse('user_page', kwargs={'username': image.user.username}),
-            status_code=302,
-            target_status_code=200)
-        self.assertEquals(Image.objects.filter(pk=image.pk).count(), 0)
+        self.assertEquals(400, response.status_code)
+        self.assertEquals(Image.objects.filter(pk=image.pk).count(), 1)
 
         # Test for success when image was not final
         self._do_upload('astrobin/fixtures/test.jpg')
@@ -2490,6 +2486,428 @@ class ImageTest(TestCase):
         self.assertEquals(0, image.revisions.count())
         self.assertFalse(ImageRevision.objects.filter(pk=revision.pk).exists())
         self.assertTrue(ImageRevision.all_objects.filter(pk=revision.pk).exists())
+
+    def test_image_corrupted_goes_to_404_if_anon(self):
+        self.client.login(username='test', password='password')
+        self._do_upload('astrobin/fixtures/test.jpg')
+        self.client.logout()
+
+        image = self._get_last_image()
+        image.corrupted = True
+        image.save()
+
+        response = self.client.get(reverse('image_detail', kwargs={'id': image.get_id()}))
+        self.assertEquals(404, response.status_code)
+
+    def test_image_corrupted_goes_to_404_if_anon_and_r0(self):
+        self.client.login(username='test', password='password')
+        self._do_upload('astrobin/fixtures/test.jpg')
+        self.client.logout()
+
+        image = self._get_last_image()
+        image.corrupted = True
+        image.save()
+
+        response = self.client.get(reverse('image_detail', kwargs={'id': image.get_id(), 'r': '0'}), follow=True)
+        self.assertEquals(404, response.status_code)
+
+    def test_image_corrupted_goes_to_edit_if_owner(self):
+        self.client.login(username='test', password='password')
+        self._do_upload('astrobin/fixtures/test.jpg')
+
+        image = self._get_last_image()
+        image.corrupted = True
+        image.save()
+
+        response = self.client.get(reverse('image_detail', kwargs={'id': image.get_id()}), follow=True)
+        self.assertRedirects(response, reverse('image_edit_basic', kwargs={'id': image.get_id()}) + '?corrupted')
+
+    def test_image_corrupted_goes_to_edit_if_owner_and_r0(self):
+        self.client.login(username='test', password='password')
+        self._do_upload('astrobin/fixtures/test.jpg')
+
+        image = self._get_last_image()
+        image.corrupted = True
+        image.save()
+
+        response = self.client.get(reverse('image_detail', kwargs={'id': image.get_id(), 'r': '0'}), follow=True)
+        self.assertRedirects(response, reverse('image_edit_basic', kwargs={'id': image.get_id()}) + '?corrupted')
+
+    def test_image_revision_corrupted_goes_to_404_if_anon(self):
+        self.client.login(username='test', password='password')
+
+        self._do_upload('astrobin/fixtures/test.jpg')
+        image = self._get_last_image()
+
+        self._do_upload_revision(image, 'astrobin/fixtures/test.jpg')
+        revision = self._get_last_image_revision()
+
+        revision.corrupted = True
+        revision.save()
+
+        self.client.logout()
+
+        response = self.client.get(reverse('image_detail', kwargs={'id': image.get_id(), 'r': revision.label}))
+        self.assertEquals(404, response.status_code)
+
+    def test_image_revision_corrupted_ok_if_anon_and_r0(self):
+        self.client.login(username='test', password='password')
+
+        self._do_upload('astrobin/fixtures/test.jpg')
+        image = self._get_last_image()
+
+        self._do_upload_revision(image, 'astrobin/fixtures/test.jpg')
+        revision = self._get_last_image_revision()
+
+        revision.corrupted = True
+        revision.save()
+
+        self.client.logout()
+
+        response = self.client.get(reverse('image_detail', kwargs={'id': image.get_id(), 'r': '0'}))
+        self.assertEquals(200, response.status_code)
+
+    def test_image_revision_corrupted_ok_if_owner_and_r0(self):
+        self.client.login(username='test', password='password')
+
+        self._do_upload('astrobin/fixtures/test.jpg')
+        image = self._get_last_image()
+
+        self._do_upload_revision(image, 'astrobin/fixtures/test.jpg')
+        revision = self._get_last_image_revision()
+
+        revision.corrupted = True
+        revision.save()
+
+        response = self.client.get(reverse('image_detail', kwargs={'id': image.get_id(), 'r': '0'}))
+        self.assertEquals(200, response.status_code)
+
+    def test_image_revision_corrupted_goes_to_edit_revision_if_owner(self):
+        self.client.login(username='test', password='password')
+
+        self._do_upload('astrobin/fixtures/test.jpg')
+        image = self._get_last_image()
+
+        self._do_upload_revision(image, 'astrobin/fixtures/test.jpg')
+        revision = self._get_last_image_revision()
+
+        revision.corrupted = True
+        revision.save()
+
+        response = self.client.get(reverse('image_detail', kwargs={'id': image.get_id(), 'r': revision.label}))
+        self.assertRedirects(response, reverse('image_edit_revision', kwargs={'id': revision.pk}) + '?corrupted')
+
+    def test_image_corrupted_ok_if_final_revision(self):
+        self.client.login(username='test', password='password')
+
+        self._do_upload('astrobin/fixtures/test.jpg')
+        image = self._get_last_image()
+        image.corrupted = True
+        image.save()
+
+        self._do_upload_revision(image, 'astrobin/fixtures/test.jpg')
+        revision = self._get_last_image_revision()
+
+        self.client.logout()
+
+        response = self.client.get(reverse('image_detail', kwargs={'id': image.get_id()}), follow=True)
+        self.assertEquals(200, response.status_code)
+
+        response = self.client.get(reverse('image_detail', kwargs={'id': image.get_id(), 'r': revision.label}))
+        self.assertEquals(200, response.status_code)
+
+    def test_image_corrupted_404_if_non_final_revision_and_anon(self):
+        self.client.login(username='test', password='password')
+
+        self._do_upload('astrobin/fixtures/test.jpg')
+        image = self._get_last_image()
+
+        self._do_upload_revision(image, 'astrobin/fixtures/test.jpg')
+        revision = self._get_last_image_revision()
+
+        image.corrupted = True
+        image.is_final = True
+        image.save()
+
+        revision.is_final = False
+        revision.save()
+
+        self.client.logout()
+
+        response = self.client.get(reverse('image_detail', kwargs={'id': image.get_id()}), follow=True)
+        self.assertEquals(404, response.status_code)
+
+    def test_image_corrupted_goes_to_edit_if_non_final_revision_and_owner(self):
+        self.client.login(username='test', password='password')
+
+        self._do_upload('astrobin/fixtures/test.jpg')
+        image = self._get_last_image()
+
+        self._do_upload_revision(image, 'astrobin/fixtures/test.jpg')
+        revision = self._get_last_image_revision()
+
+        image.corrupted = True
+        image.is_final = True
+        image.save()
+
+        revision.is_final = False
+        revision.save()
+
+        response = self.client.get(reverse('image_detail', kwargs={'id': image.get_id()}), follow=True)
+        self.assertRedirects(response, reverse('image_edit_basic', kwargs={'id': image.get_id()}) + '?corrupted')
+
+    def test_image_corrupted_ok_if_non_final_revision_direct_link_and_anon(self):
+        self.client.login(username='test', password='password')
+
+        self._do_upload('astrobin/fixtures/test.jpg')
+        image = self._get_last_image()
+
+        self._do_upload_revision(image, 'astrobin/fixtures/test.jpg')
+        revision = self._get_last_image_revision()
+
+        image.corrupted = True
+        image.is_final = True
+        image.save()
+
+        revision.is_final = False
+        revision.save()
+
+        self.client.logout()
+
+        response = self.client.get(reverse('image_detail', kwargs={'id': image.get_id(), 'r': revision.label}))
+        self.assertEquals(200, response.status_code)
+
+    def test_image_corrupted_ok_if_non_final_revision_direct_link_and_owner(self):
+        self.client.login(username='test', password='password')
+
+        self._do_upload('astrobin/fixtures/test.jpg')
+        image = self._get_last_image()
+
+        self._do_upload_revision(image, 'astrobin/fixtures/test.jpg')
+        revision = self._get_last_image_revision()
+
+        image.corrupted = True
+        image.is_final = True
+        image.save()
+
+        revision.is_final = False
+        revision.save()
+
+        response = self.client.get(
+            reverse('image_detail', kwargs={'id': image.get_id(), 'r': revision.label}))
+        self.assertEquals(200, response.status_code)
+
+    #
+
+    def test_image_full_corrupted_goes_to_404_if_anon(self):
+        self.client.login(username='test', password='password')
+        self._do_upload('astrobin/fixtures/test.jpg')
+        self.client.logout()
+
+        image = self._get_last_image()
+        image.corrupted = True
+        image.save()
+
+        response = self.client.get(reverse('image_full', kwargs={'id': image.get_id()}))
+        self.assertEquals(404, response.status_code)
+
+    def test_image_full_corrupted_goes_to_404_if_anon_and_r0(self):
+        self.client.login(username='test', password='password')
+        self._do_upload('astrobin/fixtures/test.jpg')
+        self.client.logout()
+
+        image = self._get_last_image()
+        image.corrupted = True
+        image.save()
+
+        response = self.client.get(reverse('image_full', kwargs={'id': image.get_id(), 'r': '0'}), follow=True)
+        self.assertEquals(404, response.status_code)
+
+    def test_image_full_corrupted_goes_to_edit_if_owner(self):
+        self.client.login(username='test', password='password')
+        self._do_upload('astrobin/fixtures/test.jpg')
+
+        image = self._get_last_image()
+        image.corrupted = True
+        image.save()
+
+        response = self.client.get(reverse('image_full', kwargs={'id': image.get_id()}), follow=True)
+        self.assertRedirects(response, reverse('image_edit_basic', kwargs={'id': image.get_id()}) + '?corrupted')
+
+    def test_image_full_corrupted_goes_to_edit_if_owner_and_r0(self):
+        self.client.login(username='test', password='password')
+        self._do_upload('astrobin/fixtures/test.jpg')
+
+        image = self._get_last_image()
+        image.corrupted = True
+        image.save()
+
+        response = self.client.get(reverse('image_full', kwargs={'id': image.get_id(), 'r': '0'}), follow=True)
+        self.assertRedirects(response, reverse('image_edit_basic', kwargs={'id': image.get_id()}) + '?corrupted')
+
+    def test_image_full_revision_corrupted_goes_to_404_if_anon(self):
+        self.client.login(username='test', password='password')
+
+        self._do_upload('astrobin/fixtures/test.jpg')
+        image = self._get_last_image()
+
+        self._do_upload_revision(image, 'astrobin/fixtures/test.jpg')
+        revision = self._get_last_image_revision()
+
+        revision.corrupted = True
+        revision.save()
+
+        self.client.logout()
+
+        response = self.client.get(reverse('image_full', kwargs={'id': image.get_id(), 'r': revision.label}))
+        self.assertEquals(404, response.status_code)
+
+    def test_image_full_revision_corrupted_ok_if_anon_and_r0(self):
+        self.client.login(username='test', password='password')
+
+        self._do_upload('astrobin/fixtures/test.jpg')
+        image = self._get_last_image()
+
+        self._do_upload_revision(image, 'astrobin/fixtures/test.jpg')
+        revision = self._get_last_image_revision()
+
+        revision.corrupted = True
+        revision.save()
+
+        self.client.logout()
+
+        response = self.client.get(reverse('image_full', kwargs={'id': image.get_id(), 'r': '0'}))
+        self.assertEquals(200, response.status_code)
+
+    def test_image_full_revision_corrupted_ok_if_owner_and_r0(self):
+        self.client.login(username='test', password='password')
+
+        self._do_upload('astrobin/fixtures/test.jpg')
+        image = self._get_last_image()
+
+        self._do_upload_revision(image, 'astrobin/fixtures/test.jpg')
+        revision = self._get_last_image_revision()
+
+        revision.corrupted = True
+        revision.save()
+
+        response = self.client.get(reverse('image_full', kwargs={'id': image.get_id(), 'r': '0'}))
+        self.assertEquals(200, response.status_code)
+
+    def test_image_full_revision_corrupted_goes_to_edit_revision_if_owner(self):
+        self.client.login(username='test', password='password')
+
+        self._do_upload('astrobin/fixtures/test.jpg')
+        image = self._get_last_image()
+
+        self._do_upload_revision(image, 'astrobin/fixtures/test.jpg')
+        revision = self._get_last_image_revision()
+
+        revision.corrupted = True
+        revision.save()
+
+        response = self.client.get(reverse('image_full', kwargs={'id': image.get_id(), 'r': revision.label}))
+        self.assertRedirects(response, reverse('image_edit_revision', kwargs={'id': revision.pk}) + '?corrupted')
+
+    def test_image_full_corrupted_ok_if_final_revision(self):
+        self.client.login(username='test', password='password')
+
+        self._do_upload('astrobin/fixtures/test.jpg')
+        image = self._get_last_image()
+        image.corrupted = True
+        image.save()
+
+        self._do_upload_revision(image, 'astrobin/fixtures/test.jpg')
+        revision = self._get_last_image_revision()
+
+        self.client.logout()
+
+        response = self.client.get(reverse('image_full', kwargs={'id': image.get_id()}), follow=True)
+        self.assertEquals(200, response.status_code)
+
+        response = self.client.get(reverse('image_full', kwargs={'id': image.get_id(), 'r': revision.label}))
+        self.assertEquals(200, response.status_code)
+
+    def test_image_full_corrupted_404_if_non_final_revision_and_anon(self):
+        self.client.login(username='test', password='password')
+
+        self._do_upload('astrobin/fixtures/test.jpg')
+        image = self._get_last_image()
+
+        self._do_upload_revision(image, 'astrobin/fixtures/test.jpg')
+        revision = self._get_last_image_revision()
+
+        image.corrupted = True
+        image.is_final = True
+        image.save()
+
+        revision.is_final = False
+        revision.save()
+
+        self.client.logout()
+
+        response = self.client.get(reverse('image_full', kwargs={'id': image.get_id()}), follow=True)
+        self.assertEquals(404, response.status_code)
+
+    def test_image_full_corrupted_goes_to_edit_if_non_final_revision_and_owner(self):
+        self.client.login(username='test', password='password')
+
+        self._do_upload('astrobin/fixtures/test.jpg')
+        image = self._get_last_image()
+
+        self._do_upload_revision(image, 'astrobin/fixtures/test.jpg')
+        revision = self._get_last_image_revision()
+
+        image.corrupted = True
+        image.is_final = True
+        image.save()
+
+        revision.is_final = False
+        revision.save()
+
+        response = self.client.get(reverse('image_full', kwargs={'id': image.get_id()}), follow=True)
+        self.assertRedirects(response, reverse('image_edit_basic', kwargs={'id': image.get_id()}) + '?corrupted')
+
+    def test_image_full_corrupted_ok_if_non_final_revision_direct_link_and_anon(self):
+        self.client.login(username='test', password='password')
+
+        self._do_upload('astrobin/fixtures/test.jpg')
+        image = self._get_last_image()
+
+        self._do_upload_revision(image, 'astrobin/fixtures/test.jpg')
+        revision = self._get_last_image_revision()
+
+        image.corrupted = True
+        image.is_final = True
+        image.save()
+
+        revision.is_final = False
+        revision.save()
+
+        self.client.logout()
+
+        response = self.client.get(reverse('image_full', kwargs={'id': image.get_id(), 'r': revision.label}))
+        self.assertEquals(200, response.status_code)
+
+    def test_image_full_corrupted_ok_if_non_final_revision_direct_link_and_owner(self):
+        self.client.login(username='test', password='password')
+
+        self._do_upload('astrobin/fixtures/test.jpg')
+        image = self._get_last_image()
+
+        self._do_upload_revision(image, 'astrobin/fixtures/test.jpg')
+        revision = self._get_last_image_revision()
+
+        image.corrupted = True
+        image.is_final = True
+        image.save()
+
+        revision.is_final = False
+        revision.save()
+
+        response = self.client.get(
+            reverse('image_full', kwargs={'id': image.get_id(), 'r': revision.label}))
+        self.assertEquals(200, response.status_code)
 
     @override_settings(ADS_ENABLED=True)
     @patch("astrobin.tasks.retrieve_primary_thumbnails")

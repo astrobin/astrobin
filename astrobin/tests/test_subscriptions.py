@@ -70,3 +70,19 @@ class SubscriptionsTest(TestCase):
             s.delete()
             g.delete()
             u.delete()
+
+    def test_subscription_list_view(self):
+        with self.settings(PREMIUM_ENABLED=True):
+            g, created = Group.objects.get_or_create(name="astrobin_premium")
+            s, created = Subscription.objects.get_or_create(
+                name="AstroBin Premium",
+                price=1,
+                group=g,
+                category="premium")
+
+            response = self.client.get(reverse('subscription_list'))
+            self.assertEqual(response.status_code, 200)
+            self.assertContains(response, "<td>AstroBin Premium</td>", html=True)
+
+            s.delete()
+            g.delete()

@@ -752,6 +752,7 @@ class Image(HasSolutionMixin, SafeDeleteModel):
         (None, "---------"),
         ("AC", "AstroCamp"),
         ("AHK", "Astro Hostel Krasnodar"),
+        ("AOWA", "Astro Observatories Western Australia"),
         ("CS", "ChileScope"),
         ("DSP", "Dark Sky Portal"),
         ("DSC", "DeepSkyChile"),
@@ -1175,10 +1176,6 @@ class Image(HasSolutionMixin, SafeDeleteModel):
         from easy_thumbnails.files import get_thumbnailer
         from astrobin.s3utils import OverwritingFileSystemStorage
 
-        if self.corrupted:
-            log.debug("Attempted to retrieve raw thumbnail for corrupted image %d" % self.pk)
-            return None
-
         revision_label = thumbnail_settings.get('revision_label', 'final')
 
         if revision_label is None:
@@ -1193,20 +1190,25 @@ class Image(HasSolutionMixin, SafeDeleteModel):
         options = dict(settings.THUMBNAIL_ALIASES[''][alias].copy(), **thumbnail_settings)
 
         if alias in ("gallery", "gallery_inverted", "collection", "thumb"):
-            if revision_label == '0' and self.square_cropping:
-                options['box'] = self.square_cropping
-                options['crop'] = True
+            if revision_label == '0':
+                if self.square_cropping:
+                    options['box'] = self.square_cropping
+                    options['crop'] = True
             elif revision_label == 'final':
                 try:
                     revision = ImageRevision.objects.get(image=self, label=self.get_final_revision_label())
-                    options['box'] = revision.square_cropping
+                    if revision.square_cropping:
+                        options['box'] = revision.square_cropping
+                        options['crop'] = True
                 except ImageRevision.DoesNotExist:
-                    options['box'] = self.square_cropping
-                options['crop'] = True
+                    if self.square_cropping:
+                        options['box'] = self.square_cropping
+                        options['crop'] = True
             else:
                 revision = ImageRevision.objects.get(image=self, label=revision_label)
-                options['box'] = revision.square_cropping
-                options['crop'] = True
+                if revision.square_cropping:
+                    options['box'] = revision.square_cropping
+                    options['crop'] = True
 
         field = self.get_thumbnail_field(revision_label)
         if not field.name.startswith('images/'):
@@ -1317,10 +1319,6 @@ class Image(HasSolutionMixin, SafeDeleteModel):
 
         from astrobin_apps_images.models import ThumbnailGroup
 
-        if self.corrupted:
-            log.debug("Attempted to retrieve thumbnail for corrupted image %d" % self.pk)
-            return None
-
         options = thumbnail_settings.copy()
 
         revision_label = options.get('revision_label', 'final')
@@ -1374,9 +1372,12 @@ class Image(HasSolutionMixin, SafeDeleteModel):
 
         if "sync" in thumbnail_settings and thumbnail_settings["sync"] is True:
             retrieve_thumbnail.apply(args=(self.pk, alias, options))
-            thumbnails = self.thumbnails.get(revision=revision_label)
-            url = getattr(thumbnails, alias)
-            return url
+            try:
+                thumbnails = self.thumbnails.get(revision=revision_label)
+                url = getattr(thumbnails, alias)
+                return url
+            except ThumbnailGroup.DoesNotExist:
+                return None
 
         # If we got down here, we don't have an url yet, so we start an asynchronous task and return a placeholder.
         task_id_cache_key = '%s.retrieve' % cache_key
@@ -1400,7 +1401,7 @@ class Image(HasSolutionMixin, SafeDeleteModel):
 
         return static('astrobin/images/placeholder-gallery.jpg')
 
-    def thumbnail_invalidate_real(self, field, revision_label, delete_remote=True):
+    def thumbnail_invalidate_real(self, field, revision_label, delete_remote=False):
         from easy_thumbnails.files import get_thumbnailer
 
         from astrobin.s3utils import OverwritingFileSystemStorage
@@ -1482,7 +1483,7 @@ class Image(HasSolutionMixin, SafeDeleteModel):
         except ThumbnailGroup.DoesNotExist:
             log.debug("Image %d: thumbnail group missing." % self.id)
 
-    def thumbnail_invalidate(self, delete_remote=True):
+    def thumbnail_invalidate(self, delete_remote=False):
         return self.thumbnail_invalidate_real(self.image_file, '0', delete_remote)
 
     def get_data_source(self):
@@ -1646,7 +1647,7 @@ class ImageRevision(HasSolutionMixin, SafeDeleteModel):
     def thumbnail(self, alias, thumbnail_settings={}):
         return self.image.thumbnail(alias, dict(thumbnail_settings.items() + {'revision_label': self.label}.items()))
 
-    def thumbnail_invalidate(self, delete_remote=True):
+    def thumbnail_invalidate(self, delete_remote=False):
         return self.image.thumbnail_invalidate_real(self.image_file, self.label, delete_remote)
 
 

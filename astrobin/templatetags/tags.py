@@ -1,9 +1,8 @@
 # -*- coding: utf-8 -*-
+import math
 from datetime import datetime
 
 from django.conf import settings
-import math
-
 from django.core.paginator import Paginator, EmptyPage, PageNotAnInteger
 from django.template import Library
 from django.template.defaultfilters import timesince
@@ -323,7 +322,6 @@ def get_premium_subscription_expiration(user):
         return None
 
     us = premium_get_valid_usersubscription(user)
-
     return us.expires if us else None
 
 
