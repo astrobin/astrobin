@@ -9,6 +9,24 @@ services:
       dockerfile: docker/nginx.${NGINX_MODE}.dockerfile
 
 
+  elasticsearch:
+    image: elasticsearch:2.4.6-alpine
+    volumes:
+      - elasticsearch-data:/usr/share/elasticsearch/data
+
+
+  postgres:
+    image: postgres:alpine
+    environment:
+      - POSTGRES_DB=astrobin
+      - POSTGRES_USER=astrobin
+      - POSTGRES_PASSWORD=astrobin
+    volumes:
+      - postgres-data:/var/lib/postgresql/data
+    ports:
+      - "5432:5432"
+
+
   astrobin:
     build:
       context: ../
