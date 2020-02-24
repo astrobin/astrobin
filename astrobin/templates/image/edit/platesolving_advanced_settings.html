@@ -16,15 +16,23 @@
 {% block content %}
     <h1>{% trans "Advanced plate-solving settings" %}</h1>
 
-    <form id="advanced-platesolving-settings" class="form-horizontal" action="" method="post">{% csrf_token %}
+    <form
+            id="advanced-platesolving-settings"
+            class="form-horizontal"
+            action=""
+            method="post"
+            enctype="multipart/form-data">{% csrf_token %}
+
         {{form|as_bootstrap}}
 
         <div class="form-actions">
-            <input
-                class="btn btn-primary btn-block-mobile"
+            <button
+                class="btn btn-primary btn-block-mobile {% button_loading_class %}"
                 type="submit"
-                name="submit_save"
-                value="{% trans "Save and plate-solve again" %}" />
+                name="submit_save">
+                {% trans "Save and plate-solve again" %}
+                {% button_loading_indicator %}
+            </button>
 
             <a class="btn btn-block-mobile" href="{{return_url}}">
                 {% trans "Back to image" %}

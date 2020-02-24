@@ -156,3 +156,13 @@ truncatechars = stringfilter(truncatechars)
 @register.filter(name='get_class')
 def get_class(value):
   return value.__class__.__name__
+
+
+@register.simple_tag
+def button_loading_class():
+    return "ld-ext-right"
+
+
+@register.simple_tag
+def button_loading_indicator():
+    return mark_safe('<div class="ld ld-ring ld-spin"></div>')

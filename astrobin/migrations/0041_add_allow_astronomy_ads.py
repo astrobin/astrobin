@@ -7,7 +7,7 @@ from django.db import migrations, models
 
 class Migration(migrations.Migration):
     dependencies = [
-        ('astrobin', '0038_update_seeing_and_transparency_help_text'),
+        ('astrobin', '0040_astro_observatories_western_australia'),
     ]
 
     operations = [

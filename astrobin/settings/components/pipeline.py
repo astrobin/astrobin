@@ -60,9 +60,12 @@ PIPELINE = {
                 'astrobin/css/bootstrap-responsive.css',
 
                 'common/fancybox/jquery.fancybox.css',
+                'common/css/ldbtn.min.css',
+                'common/css/loading.min.css',
 
                 'astrobin/scss/astrobin.scss',
                 'astrobin/scss/astrobin-mobile.scss',
+                'astrobin/scss/progress.scss',
             ),
             'output_filename': 'astrobin/css/astrobin_screen.css',
             'extra_content':  {

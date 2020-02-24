@@ -8,12 +8,12 @@ import random
 import string
 import unicodedata
 import uuid
-from datetime import date
 from datetime import datetime
 
 from image_cropping import ImageRatioField
 
 from astrobin.services import CloudflareService
+from common.utils import upload_path
 from .fields import CountryField, get_country_name
 
 try:
@@ -81,9 +81,8 @@ class HasSolutionMixin(object):
 
 
 def image_upload_path(instance, filename):
-    ext = filename.split('.')[-1]
     user = instance.user if instance._meta.model_name == u'image' else instance.image.user
-    return "images/%d/%d/%s.%s" % (user.id, date.today().year, uuid.uuid4(), ext)
+    return upload_path('images', user.pk, filename)
 
 
 def image_hash():
@@ -889,13 +888,6 @@ class Image(HasSolutionMixin, SafeDeleteModel):
         null=True,
     )
 
-    fits_file = models.FileField(
-        upload_to=image_upload_path,
-        max_length=256,
-        null=True,
-        blank=True,
-    )
-
     square_cropping = ImageRatioField(
         'image_file',
         '130x130',
@@ -1570,13 +1562,6 @@ class ImageRevision(HasSolutionMixin, SafeDeleteModel):
         width_field='w',
         null=True,
         max_length=256,
-    )
-
-    fits_file = models.FileField(
-        upload_to=image_upload_path,
-        max_length=256,
-        null=True,
-        blank=True,
     )
 
     square_cropping = ImageRatioField(

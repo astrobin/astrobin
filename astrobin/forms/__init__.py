@@ -24,7 +24,6 @@ from .edit_thumbnails_form import ImageEditThumbnailsForm
 from .edit_watermark_form import ImageEditWatermarkForm
 from .filter_edit_form import FilterEditForm
 from .filter_edit_new_form import FilterEditNewForm
-from .fits_upload_form import ImageFitsUploadForm
 from .flag_thumbs_form import ImageFlagThumbsForm
 from .focal_reducer_edit_form import FocalReducerEditForm
 from .focal_reducer_edit_new_form import FocalReducerEditNewForm

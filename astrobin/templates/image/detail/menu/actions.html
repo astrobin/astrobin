@@ -26,15 +26,6 @@
                 </a>
             </li>
 
-            {% if image.user|can_perform_advanced_platesolving %}
-            <li>
-                <a class="upload-fits" href="#associate-xisf-fits-modal" data-toggle="modal">
-                    <i class="icon-cloud-upload "></i>
-                    {% trans "Associate XISF/FITS file" %}
-                </a>
-            </li>
-            {% endif %}
-
             {% if not is_final %}
                 <li>
                     {% if is_revision %}

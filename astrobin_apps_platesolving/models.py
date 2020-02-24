@@ -1,4 +1,4 @@
-# Django
+from django.conf import settings
 from django.contrib.contenttypes import fields
 from django.contrib.contenttypes.models import ContentType
 from django.core.validators import MinValueValidator, MaxValueValidator
@@ -6,8 +6,17 @@ from django.db import models
 from django.utils.safestring import mark_safe
 from django.utils.translation import ugettext_lazy as _
 
-# This app
 from astrobin_apps_platesolving.solver import Solver
+from common.utils import upload_path
+from common.validators import FileValidator
+
+
+def sample_frame_upload_path(instance, filename):
+    model = instance.solution.content_object._meta.model_name
+    user = instance.solution.content_object.user \
+        if model == u'image' \
+        else instance.solution.content_object.image.user
+    return upload_path('sample_frames', user.pk, filename)
 
 
 class PlateSolvingSettings(models.Model):
@@ -80,7 +89,28 @@ class PlateSolvingSettings(models.Model):
             "Tells the plate-solving engine to look within these many degrees of the given center RA and dec position."),
     )
 
+
 class PlateSolvingAdvancedSettings(models.Model):
+    sample_raw_frame_file = models.FileField(
+        upload_to=sample_frame_upload_path,
+        validators=(FileValidator(allowed_extensions=(settings.ALLOWED_FITS_IMAGE_EXTENSIONS)),),
+        max_length=256,
+        null=True,
+        blank=True,
+        verbose_name=_("Sample raw frame"),
+        help_text=_(
+            "To improve the accuracy of your plate-solution even further, please upload one of the XISF or " +
+            "FITS files from your data set. Such files normally have date and time headers that will allow AstroBin " +
+            "to calculate solar system body ephemerides and find planets and asteroids in your image (provided you " +
+            "also add location information to it).<br/><br/>For maximum accuracy, it's recommended that you use " +
+            "PixInsight's native and open format XISF. Learn more about XISF here:<br/><br/><a " +
+            "href=\"https://pixinsight.com/xisf/\" target=\"_blank\">https://pixinsight.com/xisf/</a><br/><br/> " +
+            "<strong>Please note:</strong> it's very important that the XISF or FITS file you upload is aligned to " +
+            "your processed image, otherwise the object annotations will not match. To improve your chances at a " +
+            "successful accurate plate-solution, calibrate your file the usual way (dark/bias/flats) but do not " +
+            "stretch it.")
+    )
+
     show_grid = models.BooleanField(
         default=True,
         verbose_name=_("Show equatorial grid"),

@@ -96,17 +96,6 @@
                             {% endifequal %}
                         </p>
                     {% endif %}
-
-                    {% if r.fits_file %}
-                        <p>
-                            <strong>{% trans "Associated XISF/FITS file" %}</strong>:
-
-                            <a href="{{r.fits_file.url}}">
-                                {% private_abbr %}
-                                {% trans "Download" %}
-                            </a>
-                        </p>
-                    {% endif %}
                 </div>
             {% endfor %}
         {% endif %}

@@ -101,8 +101,8 @@ class SolveAdvancedView(base.View):
                 altitude = None
                 image = None
 
-                if target.fits_file:
-                    url = target.fits_file.url
+                if solution.advanced_settings.sample_raw_frame_file:
+                    url = solution.advanced_settings.sample_raw_frame_file.url
                 else:
                     url = target.thumbnail('hd', {
                         'sync': True,
