@@ -26,19 +26,25 @@
                 </a>
             </li>
 
-            {% if not is_final %}
-                <li>
-                    {% if is_revision %}
+            <li>
+                {% if is_revision %}
+                    {% if revision_image.is_final %}
+                        <a href="#" class="disabled">
+                    {% else %}
                         <a href="{% url 'image_edit_revision_make_final' revision_image.id %}">
+                    {% endif %}
+                {% else%}
+                    {% if is_final %}
+                        <a href="#" class="disabled">
                     {% else %}
                         <a href="{% url 'image_edit_make_final' image.get_id %}">
                     {% endif %}
+                {% endif %}
 
-                        <i class="icon-ok"></i>
-                        {% trans "Mark this revision as final" %}
-                    </a>
-                </li>
-            {% endif %} <!-- not is_final -->
+                    <i class="icon-ok"></i>
+                    {% trans "Mark this revision as final" %}
+                </a>
+            </li>
 
             <li class="divider"></li>
 
