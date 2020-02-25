@@ -199,6 +199,7 @@ urlpatterns = [
     url(r'^tinymce/', include('tinymce.urls')),
     url(r'^bouncy/', include('django_bouncy.urls')),
     url(r'^paypal/', include('paypal.standard.ipn.urls')),
+    url(r'^progressbarupload/', include('progressbarupload.urls')),
 
     ###########################################################################
     ### API VIEWS                                                           ###

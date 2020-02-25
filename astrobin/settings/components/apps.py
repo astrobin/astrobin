@@ -70,6 +70,7 @@ INSTALLED_APPS = [
     'corsheaders',
     'image_cropping',
     'django_extensions',
+    'progressbarupload',
 
     'astrobin.apps.AstroBinAppConfig',
 ] + ASTROBIN_APPS

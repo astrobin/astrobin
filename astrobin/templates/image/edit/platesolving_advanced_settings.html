@@ -3,8 +3,14 @@
 {% load i18n %}
 {% load bootstrap_toolkit %}
 {% load django_bootstrap_breadcrumbs %}
+{% load progress_bar %}
+{% load common_tags %}
 
 {% block title %}{% trans "Edit your image: advanced plate-solving settings" %}{% endblock %}
+
+{% block extra_head %}
+    {% progress_bar_media %}
+{% endblock %}
 
 {% block breadcrumbs %}
     {{ block.super }}
@@ -24,6 +30,7 @@
             enctype="multipart/form-data">{% csrf_token %}
 
         {{form|as_bootstrap}}
+        {% progress_bar %}
 
         <div class="form-actions">
             <button
