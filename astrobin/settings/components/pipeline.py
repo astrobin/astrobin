@@ -65,7 +65,6 @@ PIPELINE = {
 
                 'astrobin/scss/astrobin.scss',
                 'astrobin/scss/astrobin-mobile.scss',
-                'astrobin/scss/progress.scss',
             ),
             'output_filename': 'astrobin/css/astrobin_screen.css',
             'extra_content':  {

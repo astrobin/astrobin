@@ -1,0 +1,58 @@
+@import "variables";
+@import "mixins";
+
+.modal {
+  background: $dark-panel-color url('../images/dark-panel-tile.png');
+  border: none;
+  @include box-shadow;
+  @include rounded-corners;
+
+  .modal-header {
+    background: #303030 url('../images/darker-panel-tile.png');
+    @include rounded-corners-top;
+    border-bottom: #404040;
+
+    h3 {
+      margin: 0;
+      padding: 0;
+      font-size: $base-font-size;
+
+      [class^="icon-"], [class*=" icon-"] {
+        padding-right: 8px;
+      }
+    }
+
+    .close {
+      color: white;
+    }
+  }
+
+  .modal-body {
+    small {
+      font-size: 87.5%;
+      color: darken($text-color, 15%);
+    }
+
+    ol, {
+      list-style: decimal
+    }
+
+    li {
+      padding: $spacer-large $spacer-xlarge;
+    }
+
+    p {
+      margin-bottom: $spacer-xlarge;
+    }
+  }
+}
+
+.modal-footer {
+  background: #303030 url('../images/darker-panel-tile.png');
+  border-top: 1px solid #303030;
+  @include no-box-shadow;
+
+  form {
+    margin-bottom: 0;
+  }
+}
