@@ -47,7 +47,7 @@
                         <a href="{% url 'image_edit_revision_make_final' revision_image.id %}">
                     {% endif %}
                 {% else%}
-                    {% if is_final %}
+                    {% if is_final or image.revisions.count == 0 %}
                         <a href="#" class="disabled">
                     {% else %}
                         <a href="{% url 'image_edit_make_final' image.get_id %}">
