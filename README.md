@@ -281,7 +281,11 @@ the number of CPUs in your server.
 # Note on building the nginx container
 
 ```bash
-export ENV=prod; docker build -t astrobin/nginx-${ENV} --build-arg ENV=${ENV} -f docker/nginx.dockerfile . && docker push astrobin/nginx-${ENV}
+export ENV=prod
+docker build -t astrobin/nginx-${ENV} \
+    --build-arg ENV=${ENV} \
+    -f docker/nginx.${ENV}.dockerfile . \
+    && docker push astrobin/nginx-${ENV}
 ```
 
 # Docker Swarm deployment
