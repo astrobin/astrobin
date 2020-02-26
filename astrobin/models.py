@@ -14,6 +14,7 @@ from image_cropping import ImageRatioField
 
 from astrobin.services import CloudflareService
 from common.utils import upload_path
+from common.validators import FileValidator
 from .fields import CountryField, get_country_name
 
 try:
@@ -83,6 +84,11 @@ class HasSolutionMixin(object):
 def image_upload_path(instance, filename):
     user = instance.user if instance._meta.model_name == u'image' else instance.image.user
     return upload_path('images', user.pk, filename)
+
+
+def uncompressed_source_upload_path(instance, filename):
+    user = instance.user if instance._meta.model_name == u'image' else instance.image.user
+    return upload_path('uncompressed', user.pk, filename)
 
 
 def image_hash():
@@ -884,6 +890,18 @@ class Image(HasSolutionMixin, SafeDeleteModel):
         upload_to=image_upload_path,
         height_field='h',
         width_field='w',
+        max_length=256,
+        null=True,
+    )
+
+    uncompressed_source_file = models.FileField(
+        upload_to=uncompressed_source_upload_path,
+        validators=(FileValidator(allowed_extensions=(settings.ALLOWED_UNCOMPRESSED_SOURCE_EXTENSIONS)),),
+        verbose_name=_("Uncompressed source"),
+        help_text=_(
+            "You can store the final processed image that came out of your favorite image editor (e.g. PixInsight, "
+            "Adobe Photoshop, etc) here on AstroBin, for archival purposes. This file is stored privately and only you "
+            "will have access to it."),
         max_length=256,
         null=True,
     )

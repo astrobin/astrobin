@@ -183,3 +183,7 @@ def can_remove_ads(user):
         return True
 
     return False
+
+@register.filter
+def can_upload_uncompressed_source(user):
+    return is_any_ultimate(user)

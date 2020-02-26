@@ -95,6 +95,11 @@ def get_query_string(p_list, p_dict, new_params, remove, context):
     return mark_safe('?' + '&amp;'.join([k[1] if k[0] == '' else u'%s=%s' % (k[0], k[1]) for k in p_list if k[1] is not None and k[1] != 'None']).replace(' ', '%20'))
 
 
+@register.simple_tag
+def setvar(val):
+    return val
+
+
 # Taken from lib/utils.py
 def string_to_dict(string):
     kwargs = {}

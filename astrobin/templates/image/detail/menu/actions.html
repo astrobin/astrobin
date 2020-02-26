@@ -20,6 +20,19 @@
         </a>
         <ul class="dropdown-menu">
             <li>
+                <a class="upload-uncompressed-source"
+                   {% if image.user|can_upload_uncompressed_source %}
+                       href="#upload-uncompressed-source-modal"
+                   {% else %}
+                       href="#feature-restricted-modal"
+                   {% endif  %}
+                   data-toggle="modal">
+                    <i class="icon-upload"></i>
+                    {% trans "Upload uncompressed source (XISF/FITS/PSD/TIFF)" %}
+                </a>
+            </li>
+
+            <li>
                 <a class="upload-revision" href="#upload-revision-modal" data-toggle="modal">
                     <i class="icon-upload-alt"></i>
                     {% trans "Upload new revision" %}

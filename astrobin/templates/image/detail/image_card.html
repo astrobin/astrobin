@@ -240,6 +240,15 @@
                     <p><strong class="card-label">{% trans "Locations" %}:</strong> {{ locations }}</p>
                 {% endif %}
 
+                {% if request.user == image.user and image.uncompressed_source_file %}
+                    <p>
+                        <strong class="card-label">{% trans "Uncompressed source file" %}:</strong>
+                        <a href="{{ image.uncompressed_source_file.url }}">
+                            {% private_abbr %} {% trans "Download" %}
+                        </a>
+                    </p>
+                {% endif %}
+
                 {% if request.user|can_view_full_technical_card %}
                     {% if image.data_source and image.data_source != "OTHER" and image.data_source != "UNSET" %}
                         <p><strong class="card-label">{% trans "Data source" %}:</strong> {{ image.get_data_source }}

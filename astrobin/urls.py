@@ -126,7 +126,6 @@ from astrobin.views import (
     stats_subject_total_images_ajax,
     stats_subject_integration_monthly_ajax,
 
-
     api_help,
     trending_astrophotographers,
     stats,
@@ -477,6 +476,7 @@ urlpatterns = [
     url(r'^upload/$', image_upload, name='image_upload'),
     url(r'^upload/process/$', image_upload_process, name='image_upload_process'),
     url(r'^upload/revision/process/$', image_revision_upload_process, name='image_revision_upload_process'),
+    url(r'^upload-uncompressed-source/(?P<id>\w+)/$', image_views.ImageUploadUncompressedSource.as_view(), name='upload_uncompressed_source'),
 
     ###########################################################################
     ### IMAGE VIEWS                                                         ###

@@ -44,6 +44,7 @@ from astrobin.forms import (
     PrivateMessageForm,
     ImageEditThumbnailsForm,
     ImageEditCorruptedRevisionForm)
+from astrobin.forms.uncompressed_source_upload_form import UncompressedSourceUploadForm
 from astrobin.models import (
     Collection,
     Image, ImageRevision,
@@ -699,6 +700,7 @@ class ImageDetailView(ImageDetailViewBase):
             'deep_sky_data': deep_sky_data,
             'private_message_form': PrivateMessageForm(),
             'upload_revision_form': ImageRevisionUploadForm(),
+            'upload_uncompressed_source_form': UncompressedSourceUploadForm(instance=image),
             'dates_label': _("Dates"),
             'published_on': published_on,
             'show_contains': (image.subject_type == 100 and subjects) or (image.subject_type >= 200),
@@ -1184,3 +1186,25 @@ class ImageEditThumbnailsView(ImageEditBaseView):
         image.thumbnail_invalidate()
 
         return super(ImageEditThumbnailsView, self).post(request, *args, **kwargs)
+
+
+class ImageUploadUncompressedSource(ImageEditBaseView):
+    form_class = UncompressedSourceUploadForm
+
+    def form_valid(self, form):
+        if 'clear' in self.request.POST:
+            self.object.uncompressed_source_file.delete()
+            self.object.uncompressed_source_file = None
+            self.object.save(keep_deleted=True)
+            msg = "File removed. Thank you!"
+        else:
+            msg = "File uploaded. In the future, you can download this file from your technical card down below. " \
+                  "Thank you!"
+
+        self.object = form.save()
+        messages.success(self.request, _(msg))
+        return redirect(self.get_success_url())
+
+    def form_invalid(self, form):
+        messages.error(self.request, form.errors["uncompressed_source_file"])
+        return redirect(self.get_success_url())
