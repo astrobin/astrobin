@@ -286,14 +286,14 @@ class Solution(models.Model):
         blank=True,
     )
 
-    pixinsight_svg_annotation = models.ImageField(
-        upload_to='pixinsight-solutions',
+    pixinsight_svg_annotation_hd = models.ImageField(
+        upload_to='pixinsight-solutions-hd',
         null=True,
         blank=True,
     )
 
-    pixinsight_svg_annotation_620 = models.ImageField(
-        upload_to='pixinsight-solutions-620',
+    pixinsight_svg_annotation_regular = models.ImageField(
+        upload_to='pixinsight-solutions-regular',
         null=True,
         blank=True,
     )
@@ -437,10 +437,10 @@ class Solution(models.Model):
         self.annotations = None
 
         self.pixinsight_serial_number = None
-        self.pixinsight_svg_annotation.delete()
-        self.pixinsight_svg_annotation = None
-        self.pixinsight_svg_annotation_620.delete()
-        self.pixinsight_svg_annotation_620 = None
+        self.pixinsight_svg_annotation_hd.delete()
+        self.pixinsight_svg_annotation_hd = None
+        self.pixinsight_svg_annotation_regular.delete()
+        self.pixinsight_svg_annotation_regular = None
 
         self.advanced_ra = None
         self.advanced_ra_bottom_left = None
@@ -467,10 +467,10 @@ class Solution(models.Model):
             self.status = Solver.SUCCESS
 
         self.pixinsight_serial_number = None
-        self.pixinsight_svg_annotation.delete()
-        self.pixinsight_svg_annotation = None
-        self.pixinsight_svg_annotation_620.delete()
-        self.pixinsight_svg_annotation_620 = None
+        self.pixinsight_svg_annotation_hd.delete()
+        self.pixinsight_svg_annotation_hd = None
+        self.pixinsight_svg_annotation_regular.delete()
+        self.pixinsight_svg_annotation_regular = None
 
         self.advanced_ra = None
         self.advanced_ra_bottom_left = None

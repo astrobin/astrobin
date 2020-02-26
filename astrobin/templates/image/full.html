@@ -122,7 +122,7 @@
                href="{% get_image_url image revision_label %}{% if mod %}{% query_string "mod=mod" "" %}{% endif %}">
                 <object
                         type="image/svg+xml"
-                        data="{{ instance_to_platesolve.solution.pixinsight_svg_annotation.url }}"
+                        data="{{ instance_to_platesolve.solution.pixinsight_svg_annotation_hd.url }}"
                         style="
                                 max-width: {{ instance_to_platesolve | thumbnail_width:'hd' }}px;
                                 max-height: {{ instance_to_platesolve | thumbnail_height:'hd' }}px;

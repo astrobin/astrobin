@@ -86,7 +86,7 @@ class SolveAdvancedView(base.View):
         target = get_target(kwargs.get('object_id'), kwargs.get('content_type_id'))
         solution = get_solution(kwargs.get('object_id'), kwargs.get('content_type_id'))
 
-        if solution.settings is None:
+        if solution.advanced_settings is None:
             solution.advanced_settings = PlateSolvingAdvancedSettings.objects.create()
             solution.save()
 
@@ -94,12 +94,10 @@ class SolveAdvancedView(base.View):
             solver = AdvancedSolver()
 
             try:
-                url = None
                 observation_time = None
                 latitude = None
                 longitude = None
                 altitude = None
-                image = None
 
                 if solution.advanced_settings.sample_raw_frame_file:
                     url = solution.advanced_settings.sample_raw_frame_file.url
@@ -133,7 +131,7 @@ class SolveAdvancedView(base.View):
                     url, ra=solution.ra, dec=solution.dec,
                     pixscale=solution.pixscale, observation_time=observation_time,
                     latitude=latitude, longitude=longitude, altitude=altitude,
-                    advanced_settings=solution.advanced_settings)
+                    advanced_settings=solution.advanced_settings, image_width=image.w)
 
                 solution.status = Solver.ADVANCED_PENDING
                 solution.pixinsight_serial_number = submission
@@ -269,29 +267,11 @@ class SolutionPixInsightWebhook(base.View):
         solution = get_object_or_404(Solution, pixinsight_serial_number=serial_number)
 
         if status == 'OK':
-            svg = request.POST.get('svgAnnotation', None)
-            target = get_target(solution.object_id, solution.content_type_id)  # type: Union[Image, ImageRevision]
+            svg_hd = request.POST.get('svgAnnotation', None)
+            svg_regular = request.POST.get('svgAnnotationSmall', None)
 
-            resize_ratio = \
-                min(target.w, settings.THUMBNAIL_ALIASES['']['hd']['size'][0]) / \
-                float(min(target.w, settings.THUMBNAIL_ALIASES['']['regular']['size'][0])) # type: float
-
-            # Divide by magic number at the end because a straight proportion just makes the fonts too big.
-            if resize_ratio > 2:
-                resize_ratio = resize_ratio / 2.0
-
-            svg_620 = re.sub(
-                r"font-size=\"(\d+)\"",
-                lambda m: "font-size=\"" + str(int(m.group(1)) * resize_ratio) + "\"",
-                svg)
-
-            svg_620 = re.sub(
-                r"stroke-width=\"(\d+)\"",
-                lambda m: "stroke-width=\"" + str(int(m.group(1)) * resize_ratio) + "\"",
-                svg_620)
-
-            solution.pixinsight_svg_annotation.save(serial_number + ".svg", ContentFile(svg))
-            solution.pixinsight_svg_annotation_620.save(serial_number + ".svg", ContentFile(svg_620))
+            solution.pixinsight_svg_annotation_hd.save(serial_number + ".svg", ContentFile(svg_hd))
+            solution.pixinsight_svg_annotation_regular.save(serial_number + ".svg", ContentFile(svg_regular))
             solution.status = Solver.ADVANCED_SUCCESS
 
             solution.advanced_ra = request.POST.get('centerRA', None)
