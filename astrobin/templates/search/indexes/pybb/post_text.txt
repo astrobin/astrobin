@@ -1,1 +1,1 @@
-{{object.body}}
+{{object.body|truncatechars:10000}}

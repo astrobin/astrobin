@@ -16,31 +16,11 @@ services:
   memcached:
     image: memcached:alpine
 
-
-  postgres:
-    image: postgres:alpine
-    environment:
-      - POSTGRES_DB=astrobin
-      - POSTGRES_USER=astrobin
-      - POSTGRES_PASSWORD=astrobin
-    volumes:
-      - postgres-data:/var/lib/postgresql/data
-    ports:
-      - "5432:5432"
-
-
   rabbitmq:
     image: rabbitmq:management-alpine
     environment:
       - RABBITMQ_DEFAULT_USER=astrobin
       - RABBITMQ_DEFAULT_PASS=astrobin
-
-
-  elasticsearch:
-    image: elasticsearch:2.4.6-alpine
-    volumes:
-      - elasticsearch-data:/usr/share/elasticsearch/data
-
 
   celery_default:
     image: astrobin/astrobin:v1.54.6-adsense.1
