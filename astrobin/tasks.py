@@ -91,7 +91,7 @@ def hitcount_cleanup():
 
 @shared_task()
 def contain_imagecache_size():
-    subprocess.call(['scripts/contain_directory_size.sh', '/media/imagecache', '10'])
+    subprocess.call(['scripts/contain_directory_size.sh', '/media/imagecache', '30'])
 
 
 """
