@@ -27,9 +27,7 @@ services:
     command: celery worker -A astrobin -Q default,email -c 8 -l debug -f celery_default.log
     links:
       - memcached
-      - postgres
       - rabbitmq
-      - elasticsearch
     env_file:
       - ./astrobin.env
     environment:
@@ -49,9 +47,7 @@ services:
     command: celery worker -A astrobin -Q thumbnails -c 8 -l debug -f celery_thumbnails.log
     links:
       - memcached
-      - postgres
       - rabbitmq
-      - elasticsearch
     env_file:
       - ./astrobin.env
     environment:
@@ -71,9 +67,7 @@ services:
     command: celery worker -A astrobin -Q haystack -c 8 -l debug -f celery_haystack.log
     links:
       - memcached
-      - postgres
       - rabbitmq
-      - elasticsearch
     env_file:
       - ./astrobin.env
     environment:
@@ -91,9 +85,7 @@ services:
     command: celery -A astrobin beat -l debug -f celery_beat.log --pidfile= --scheduler django_celery_beat.schedulers:DatabaseScheduler
     links:
       - memcached
-      - postgres
       - rabbitmq
-      - elasticsearch
     env_file:
       - ./astrobin.env
     environment:
@@ -111,9 +103,7 @@ services:
     command: bash -c "./manage.py migrate --noinput && gunicorn wsgi:application -w 4 -b :8083 --max-requests 1000 --max-requests-jitter 50 --timeout 300 --graceful-timeout 300 -k gevent"
     links:
       - memcached
-      - postgres
       - rabbitmq
-      - elasticsearch
     env_file:
       - ./astrobin.env
     environment:
