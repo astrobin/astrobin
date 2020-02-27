@@ -1,3 +1,12 @@
+2020-02-27 Salvatore Iovene <salvatore@iovene.com>
+ * v1.55.0
+ * (infra) Use self-signed certificate for nginx: production SSL is always coming externally
+ * (infra) Add support for using AWS Elasticsearch
+ * (search) Limit search index of forum posts to 10000 characters
+ * (infra) Fix the custom 502 page
+ * (infra) Make postgres/elasticsearch only part of the build configuration
+ * (infra) Update image cache lifetime to 2h
+
 2020-02-23 Salvatore Iovene <salvatore@iovene.com>
  * v1.54.6
  * (images) Allow deleting original revision while on subsequent revision
