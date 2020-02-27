@@ -1,4 +1,8 @@
 2020-02-27 Salvatore Iovene <salvatore@iovene.com>
+ * v1.55.1
+ * (infra) Reduce image cache to 30 minutes
+
+2020-02-27 Salvatore Iovene <salvatore@iovene.com>
  * v1.55.0
  * (infra) Use self-signed certificate for nginx: production SSL is always coming externally
  * (infra) Add support for using AWS Elasticsearch
