@@ -2868,3 +2868,7 @@ class DataDownloadRequest(models.Model):
         for i in self.STATUS_CHOICES:
             if self.status == i[0]:
                 return i[1]
+
+    class Meta:
+        app_label = 'astrobin'
+        ordering = ('-created',)
