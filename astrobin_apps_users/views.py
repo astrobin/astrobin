@@ -1,20 +1,11 @@
-# Python
-import simplejson
-
-# Django
-from django.db.models import Q
-from django.contrib.auth.models import User
+from braces.views import JSONResponseMixin
 from django.contrib.contenttypes.models import ContentType
 from django.core.urlresolvers import reverse
+from django.db.models import Q
 from django.shortcuts import render
-from django.template import RequestContext
 from django.views.generic import base
-
-# Third party
-from braces.views import JSONResponseMixin
 from toggleproperties.models import ToggleProperty
 
-# AstroBin
 from astrobin.models import UserProfile
 
 

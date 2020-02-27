@@ -55,6 +55,12 @@
                 <i class="icon-chevron-right"></i>
             </a>
         </li>
+        <li class="{% current request '^/profile/download-data/' %}">
+            <a href="{% url 'profile_download_data' %}">
+                <i class="icon-user"></i> {% trans "Download your data" %}
+                <i class="icon-chevron-right"></i>
+            </a>
+        </li>
         <li class="{% current request '^/avatar/' %}">
             <a href="{% url 'avatar_change' %}">
                 <i class="icon-user"></i> {% trans "Avatar" %}

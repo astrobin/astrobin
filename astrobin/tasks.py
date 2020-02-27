@@ -1,21 +1,33 @@
 from __future__ import absolute_import
 
+import csv
+import ntpath
 import subprocess
+import tempfile
+import zipfile
+from StringIO import StringIO
+from tempfile import _TemporaryFileWrapper
 from time import sleep
+from zipfile import ZipFile
 
+import requests
+from celery import shared_task
 from celery.utils.log import get_task_logger
 from django.conf import settings
 from django.contrib.auth.models import User
 from django.core.cache import cache
+from django.core.files import File
 from django.core.mail import EmailMultiAlternatives
 from django.core.management import call_command
+from django.utils import timezone
+from django.utils.text import slugify
 from django_bouncy.models import Bounce
 from haystack.query import SearchQuerySet
+from requests import Response
 
-from astrobin.models import BroadcastEmail
+from astrobin.models import BroadcastEmail, Image, DataDownloadRequest, ImageRevision
 from astrobin.utils import inactive_accounts
 from astrobin_apps_images.models import ThumbnailGroup
-from celery import shared_task
 
 logger = get_task_logger(__name__)
 
@@ -222,3 +234,67 @@ def send_inactive_account_reminder():
         recipients.update(inactive_account_reminder_sent=timezone.now())
     except BroadcastEmail.DoesNotExist:
         pass
+
+
+@shared_task()
+def prepare_download_data_archive(request_id):
+    # type: (basestring) -> None
+
+    data_download_request = DataDownloadRequest.objects.get(id=request_id)
+    temp_zip = tempfile.NamedTemporaryFile()  # type: _TemporaryFileWrapper
+    temp_csv = StringIO()  # type: StringIO
+    archive = zipfile.ZipFile(temp_zip, 'w', zipfile.ZIP_DEFLATED)  # type: ZipFile
+
+    csv_writer = csv.writer(temp_csv)
+    csv_writer.writerow([
+        'id', 'title', 'acquisition_type', 'subject_type', 'data_source', 'remote_source',
+        'solar_system_main_subject', 'locations', 'description', 'link', 'link_to_fits', 'image_file',
+        'uncompressed_source_file', 'uploaded', 'published', 'updated', 'watermark', 'watermark_text',
+        'watermark_opacity', 'imaging_telescopes', 'guiding_telescopes', 'mounts', 'imaging_cameras',
+        'guiding_cameras', 'focal_reducers', 'software', 'filters', 'accessories', 'is_wip', 'w', 'h', 'animated',
+        'license', 'is_final', 'allow_comments', 'mouse_hover_image'
+    ])
+
+    for image in Image.objects_including_wip.filter(user=data_download_request.user, corrupted=False):  # type: Image
+        id = image.get_id()  # type: str
+        title = slugify(image.title)  # type: str
+        path = ntpath.basename(image.image_file.path)  # type: str
+        response = requests.get(image.image_file.url)  # type: Response
+
+        if response.status_code == 200:
+            archive.writestr("%s-%s/%s" % (id, title, path), response.content)
+
+        for revision in ImageRevision.objects.filter(image=image, corrupted=False):  # type: ImageRevision
+            label = revision.label  # type: unicode
+            path = ntpath.basename(revision.image_file.path)  # type: str
+            response = requests.get(revision.image_file.url)  # type: Response
+
+            if response.status_code == 200:
+                archive.writestr("%s-%s/revisions/%s/%s" % (id, title, label, path), response.content)
+
+        csv_writer.writerow([
+            image.get_id(), image.title, image.acquisition_type, image.get_subject_type(), image.data_source,
+            image.remote_source, image.solar_system_main_subject, ';'.join([str(x) for x in image.locations.all()]),
+            image.description, image.link, image.link_to_fits, image.image_file, image.uncompressed_source_file,
+            image.uploaded, image.published, image.updated, image.watermark, image.watermark_text,
+            image.watermark_opacity,
+            ';'.join([str(x) for x in image.imaging_telescopes.all()]),
+            ';'.join([str(x) for x in image.guiding_telescopes.all()]),
+            ';'.join([str(x) for x in image.mounts.all()]),
+            ';'.join([str(x) for x in image.imaging_cameras.all()]),
+            ';'.join([str(x) for x in image.guiding_cameras.all()]),
+            ';'.join([str(x) for x in image.focal_reducers.all()]),
+            ';'.join([str(x) for x in image.software.all()]),
+            ';'.join([str(x) for x in image.filters.all()]),
+            ';'.join([str(x) for x in image.accessories.all()]),
+            image.is_wip, image.w, image.h, image.animated, image.license, image.is_final, image.allow_comments,
+            image.mouse_hover_image
+        ])
+
+    csv_value = temp_csv.getvalue()
+    archive.writestr("data.csv", csv_value)
+    archive.close()
+
+    data_download_request.status = "READY"
+    data_download_request.file_size = len(csv_value.encode('utf-8')) + sum([x.file_size for x in archive.infolist()])
+    data_download_request.zip_file.save("", File(temp_zip))

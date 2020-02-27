@@ -132,6 +132,7 @@ from astrobin.views import (
 
     set_language
 )
+from astrobin.views.profile.download_data_view import DownloadDataView
 
 admin.autodiscover()
 
@@ -308,6 +309,7 @@ urlpatterns = [
     url(r'^profile/edit/license/$', user_profile_edit_license, name='profile_edit_license'),
     url(r'^profile/edit/locations/$', user_profile_edit_locations, name='profile_edit_locations'),
     url(r'^profile/edit/preferences/$', user_profile_edit_preferences, name='profile_edit_preferences'),
+    url(r'^profile/download-data/$', DownloadDataView.as_view(), name='profile_download_data'),
     url(r'^profile/edit/retailer/$', user_profile_edit_retailer, name='profile_edit_retailer'),
     url(r'^profile/save/basic/$', user_profile_save_basic, name='profile_save_basic'),
     url(r'^profile/save/gear/$', user_profile_save_gear, name='profile_save_gear'),

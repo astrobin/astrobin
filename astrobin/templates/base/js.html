@@ -52,7 +52,7 @@
             }
         );
 
-        $("form").on("submit", function (event) {
+        $("form:not(.ajax)").on("submit", function (event) {
             var $target = $(event.target);
             var formId = $target.attr("id");
 

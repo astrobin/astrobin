@@ -18,7 +18,7 @@ from django.core.paginator import Paginator, InvalidPage
 from django.core.urlresolvers import reverse
 from django.db.models import Q
 from django.forms.models import inlineformset_factory
-from django.http import Http404, HttpResponse
+from django.http import Http404, HttpResponse, HttpResponseNotAllowed
 from django.http import HttpResponseForbidden
 from django.http import HttpResponseRedirect
 from django.shortcuts import get_object_or_404
@@ -1689,7 +1689,7 @@ def user_profile_save_basic(request):
     form.save()
 
     messages.success(request, _("Form saved. Thank you!"))
-    return HttpResponseRedirect("/profile/edit/basic/");
+    return HttpResponseRedirect("/profile/edit/basic/")
 
 
 @login_required
@@ -1702,7 +1702,7 @@ def user_profile_edit_commercial(request):
         if form.is_valid():
             form.save()
             messages.success(request, _("Form saved. Thank you!"))
-            return HttpResponseRedirect('/profile/edit/commercial/');
+            return HttpResponseRedirect('/profile/edit/commercial/')
     else:
         form = UserProfileEditCommercialForm(instance=profile)
 
@@ -1721,7 +1721,7 @@ def user_profile_edit_retailer(request):
         if form.is_valid():
             form.save()
             messages.success(request, _("Form saved. Thank you!"))
-            return HttpResponseRedirect('/profile/edit/retailer/');
+            return HttpResponseRedirect('/profile/edit/retailer/')
     else:
         form = UserProfileEditRetailerForm(instance=profile)
 
@@ -1837,7 +1837,7 @@ def user_profile_save_locations(request):
 
     formset.save()
     messages.success(request, _("Form saved. Thank you!"))
-    return HttpResponseRedirect('/profile/edit/locations/');
+    return HttpResponseRedirect('/profile/edit/locations/')
 
 
 @login_required
@@ -2034,7 +2034,7 @@ def user_profile_save_preferences(request):
     profile = request.user.userprofile
     form = UserProfileEditPreferencesForm(data=request.POST, instance=profile)
     response_dict = {'form': form}
-    response = HttpResponseRedirect("/profile/edit/preferences/");
+    response = HttpResponseRedirect("/profile/edit/preferences/")
 
     if form.is_valid():
         form.save()
@@ -2902,7 +2902,7 @@ def commercial_products_claim(request, id):
         if gear.commercial:
             return error(form)
     except Gear.DoesNotExist:
-        return error(form);
+        return error(form)
 
     # We need to add the choice to the field so that the form will validate.
     # If we don't, it won't validate because the selected option, which was
@@ -3084,7 +3084,7 @@ def retailed_products_claim(request, id):
         gear = Gear.objects.get(id=id)
         # Here, instead, we can claim something that's already claimed!
     except Gear.DoesNotExist:
-        return error(form);
+        return error(form)
 
     # We need to add the choice to the field so that the form will validate.
     # If we don't, it won't validate because the selected option, which was

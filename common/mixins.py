@@ -1,7 +1,5 @@
-# Python
 import simplejson as json
 
-# Django
 from django.http import HttpResponse
 
 class AjaxableResponseMixin(object):
@@ -28,4 +26,3 @@ class AjaxableResponseMixin(object):
             return self.render_to_json_response(data)
         else:
             return super(AjaxableResponseMixin, self).form_valid(form)
-

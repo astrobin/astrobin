@@ -91,6 +91,15 @@ def uncompressed_source_upload_path(instance, filename):
     return upload_path('uncompressed', user.pk, filename)
 
 
+def data_download_upload_path(instance, filename):
+    # type: (DataDownloadRequest, str) -> str
+    return "data-download/{}/{}".format(
+        instance.user.pk,
+        'astrobin_data_{}_{}.zip'.format(
+            instance.user.username,
+            instance.created.strftime('%Y-%m-%d-%H-%M')))
+
+
 def image_hash():
     def generate_hash():
         return "".join(random.choice(string.ascii_lowercase + string.digits) for _ in range(6))
@@ -1518,6 +1527,11 @@ class Image(HasSolutionMixin, SafeDeleteModel):
             if self.remote_source == source[0]:
                 return source[1]
 
+    def get_subject_type(self):
+        for subject_type in self.SUBJECT_TYPE_CHOICES:
+            if self.subject_type == subject_type[0]:
+                return subject_type[1]
+
     def get_keyvaluetags(self):
         tags = self.keyvaluetags.all()
 
@@ -2814,3 +2828,43 @@ class BroadcastEmail(models.Model):
 
     def __unicode__(self):
         return self.subject
+
+
+class DataDownloadRequest(models.Model):
+    STATUS_CHOICES = (
+        ("PENDING", _("Pending")),
+        ("PROCESSING", _("Processing")),
+        ("READY", _("Ready")),
+        ("ERROR", _("Error")),
+        ("Expired", _("Expired")),
+    )
+
+    user = models.ForeignKey(User, editable=False)
+
+    created = models.DateTimeField(
+        null=False,
+        blank=False,
+        auto_now_add=True,
+        editable=False,
+    )
+
+    zip_file = models.FileField(
+        upload_to=data_download_upload_path,
+        max_length=256,
+        null=True,
+    )
+
+    file_size = models.IntegerField(
+        null=True,
+    )
+
+    status = models.CharField(
+        max_length=20,
+        default="PENDING",
+        choices=STATUS_CHOICES
+    )
+
+    def status_label(self):
+        for i in self.STATUS_CHOICES:
+            if self.status == i[0]:
+                return i[1]
