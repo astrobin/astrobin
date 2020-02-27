@@ -24,21 +24,7 @@ services:
           - node.labels.default == true
 
 
-  postgres:
-    deploy:
-      placement:
-        constraints:
-          - node.labels.default == true
-
-
   rabbitmq:
-    deploy:
-      placement:
-        constraints:
-          - node.labels.default == true
-
-
-  elasticsearch:
     deploy:
       placement:
         constraints:
