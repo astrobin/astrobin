@@ -1,5 +1,6 @@
 {% load i18n %}
 {% load tags %}
+{% load astrobin_apps_premium_tags %}
 
 <div class="span3">
     <ul class="nav nav-pills nav-stacked">
@@ -56,7 +57,11 @@
             </a>
         </li>
         <li class="{% current request '^/profile/download-data/' %}">
-            <a href="{% url 'profile_download_data' %}">
+            {% if request.user|can_download_data %}
+                <a href="{% url 'profile_download_data' %}">
+            {% else %}
+                <a href="#feature-restricted-modal" data-toggle="modal">
+            {% endif %}
                 <i class="icon-user"></i> {% trans "Download your data" %}
                 <i class="icon-chevron-right"></i>
             </a>

@@ -185,6 +185,13 @@ def can_remove_ads(user):
 
     return False
 
+
 @register.filter
 def can_upload_uncompressed_source(user):
     return is_any_ultimate(user)
+
+
+@register.filter
+def can_download_data(user):
+    # This refers to bulk data export.
+    return is_any_premium(user) or is_any_ultimate(user)
