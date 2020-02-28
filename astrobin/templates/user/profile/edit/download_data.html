@@ -60,7 +60,9 @@
                     <tbody>
                     {% for item in request.user.datadownloadrequest_set.all %}
                         <tr>
-                            <td>{{ item.created|date:"SHORT_DATETIME_FORMAT" }}</td>
+                            <td>
+                                <abbr class="timeago" title="{{ item.created|to_user_timezone:request.user|date:'Y-m-d\TH:i:s' }}"></abbr>
+                            </td>
                             <td>{{ item.status_label }}</td>
                             <td>
                                 {% if item.file_size %}
