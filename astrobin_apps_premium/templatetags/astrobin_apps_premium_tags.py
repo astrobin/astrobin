@@ -18,6 +18,40 @@ def premium_badge(user, size='large'):
 
 
 @register.filter
+def show_renew_message(usersubscription):
+    # type: (UserSubscription) -> bool
+    return usersubscription is not None and usersubscription.valid() and usersubscription.subscription.name in [
+        "AstroBin Lite",
+        "AstroBin Lite 2020+",
+        "AstroBin Premium",
+        "AstroBin Premium 2020+",
+        "AstroBin Ultimate 2020+"
+    ]
+
+@register.filter
+def is_subscription_offered(subscription):
+    # type: (Subscription) -> bool
+    return subscription.name in [
+        "AstroBin Lite 2020+",
+        "AstroBin Premium 2020+",
+        "AstroBin Ultimate 2020+",
+
+        "AstroBin Raw Data Meteor 2020+",
+        "AstroBin Raw Data Luna 2020+",
+        "AstroBin Raw Data Sol 2020+",
+
+        "AstroBin Donor Bronze Monthly",
+        "AstroBin Donor Silver Monthly",
+        "AstroBin Gold Silver Monthly",
+        "AstroBin Platinum Silver Monthly",
+
+        "AstroBin Donor Bronze Yearly",
+        "AstroBin Donor Silver Yearly",
+        "AstroBin Gold Silver Yearly",
+        "AstroBin Platinum Silver Yearly",
+    ]
+
+@register.filter
 def is_any_ultimate(user):
     return is_ultimate_2020(user)
 

@@ -56,7 +56,7 @@ except Subscription.DoesNotExist:
         recurrence_period=1,
         recurrence_unit='Y',
         group=Group.objects.get(name='astrobin_lite'),
-        category='premium')
+        category='premium_autorenew')
 
 try:
     Subscription.objects.get(name='AstroBin Lite 2020+')
@@ -98,7 +98,7 @@ except Subscription.DoesNotExist:
         recurrence_period=1,
         recurrence_unit='Y',
         group=Group.objects.get(name='astrobin_premium'),
-        category='premium')
+        category='premium_autorenew')
 
 try:
     Subscription.objects.get(name='AstroBin Premium 2020+')

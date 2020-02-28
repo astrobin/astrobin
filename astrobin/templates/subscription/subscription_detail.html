@@ -1,7 +1,8 @@
 {% extends 'base.html' %}
 
-{% load i18n %}
 {% load django_bootstrap_breadcrumbs %}
+{% load i18n %}
+{% load astrobin_apps_premium_tags %}
 
 {% block title %}{% trans "Subscription plan" %}: {% trans object.name %}{% endblock %}
 
@@ -94,14 +95,14 @@
             </h1>
         </div>
 
-        {% if object.category == 'premium_autorenew' %}
+        {% if not object|is_subscription_offered %}
         <div class="alert alert-error">
             {% url 'subscription_list' as url %}
-            {% blocktrans %}Auto-renewing subscriptions are not offered anymore on AstroBin. Please visit the <a href="{{url}}">subscriptions page</a> to see the available plans, thanks!{% endblocktrans %}
+            {% blocktrans %}This subscription is not offered anymore on AstroBin. Please visit the <a href="{{url}}">subscriptions page</a> to see the available plans, thanks!{% endblocktrans %}
         </div>
         {% endif %}
 
-        {% if usersubscription and usersubscription.valid %}
+        {% if usersubscription|show_renew_message %}
             <div class="alert alert-info">
                 <em>
                     {% blocktrans %}If you would like to renew your subscription, please visit this page again after
@@ -166,7 +167,7 @@
         {% endif %}
 
         {% comment %} Invalid subscription {% endcomment %}
-        {% if usersubscription and not usersubscription.valid and usersubscription.cancelled and 'autorenew' not in object.category %}
+        {% if usersubscription and not usersubscription.valid and object|is_subscription_offered %}
             {% if usersubscription.subscription.name == "Atom" %}
                 {% include 'subscription/_atom_form.html' %}
             {% else %} <!-- not atom -->
@@ -175,7 +176,7 @@
         {% endif %}
 
         {% comment %} Missing subscription {% endcomment %}
-        {% if not usersubscription and 'autorenew' not in object.category %}
+        {% if not usersubscription and object|is_subscription_offered %}
             {% if change_denied_reasons %}
                 <div class="alert alert-error">
                     <h4 class="alert-heading">
@@ -197,7 +198,7 @@
             {% endif %} <!-- if change_denied_reasons -->
         {% endif %}
 
-        <a class="btn btn-secondary" href="{% url 'subscription_list' %}">
+        <a class="btn btn-secondary btn-block-mobile" href="{% url 'subscription_list' %}">
             {% trans "Back to the plans" %}
         </a>
     {% endif %} {# READONLY #}
