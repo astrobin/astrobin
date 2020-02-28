@@ -78,6 +78,63 @@ class UserTest(TestCase):
 
         return revision
 
+    def test_user_page_view_anon_cannot_access_trash(self):
+        response = self.client.get(reverse('user_page', args=('user',)) + '?trash')
+        self.assertEquals(response.status_code, 403)
+
+    def test_user_page_view_cannot_access_another_users_trash(self):
+        Generators.premium_subscription(self.user, "AstroBin Ultimate 2020+")
+        self.client.login(username="user", password="password")
+        response = self.client.get(reverse('user_page', args=('user_2',)) + '?trash')
+        self.assertEquals(response.status_code, 403)
+
+    def test_user_page_view_free_cannot_access_trash(self):
+        self.client.login(username="user", password="password")
+        response = self.client.get(reverse('user_page', args=('user',)) + '?trash')
+        self.assertEquals(response.status_code, 403)
+
+    def test_user_page_view_lite_cannot_access_trash(self):
+        Generators.premium_subscription(self.user, "AstroBin Lite")
+        self.client.login(username="user", password="password")
+        response = self.client.get(reverse('user_page', args=('user',)) + '?trash')
+        self.assertEquals(response.status_code, 403)
+
+    def test_user_page_view_lite_autorenew_cannot_access_trash(self):
+        Generators.premium_subscription(self.user, "AstroBin Lite (autorenew)")
+        self.client.login(username="user", password="password")
+        response = self.client.get(reverse('user_page', args=('user',)) + '?trash')
+        self.assertEquals(response.status_code, 403)
+
+    def test_user_page_view_lite_2020_cannot_access_trash(self):
+        Generators.premium_subscription(self.user, "AstroBin Lite 2020+")
+        self.client.login(username="user", password="password")
+        response = self.client.get(reverse('user_page', args=('user',)) + '?trash')
+        self.assertEquals(response.status_code, 403)
+
+    def test_user_page_view_premium_cannot_access_trash(self):
+        Generators.premium_subscription(self.user, "AstroBin Premium")
+        self.client.login(username="user", password="password")
+        response = self.client.get(reverse('user_page', args=('user',)) + '?trash')
+        self.assertEquals(response.status_code, 403)
+
+    def test_user_page_view_premium_autorenew_cannot_access_trash(self):
+        Generators.premium_subscription(self.user, "AstroBin Premium (autorenew)")
+        self.client.login(username="user", password="password")
+        response = self.client.get(reverse('user_page', args=('user',)) + '?trash')
+        self.assertEquals(response.status_code, 403)
+
+    def test_user_page_view_premium_2020_cannot_access_trash(self):
+        Generators.premium_subscription(self.user, "AstroBin Premium 2020+")
+        self.client.login(username="user", password="password")
+        response = self.client.get(reverse('user_page', args=('user',)) + '?trash')
+        self.assertEquals(response.status_code, 403)
+
+    def test_user_page_view_ultimate_2020_can_access_trash(self):
+        Generators.premium_subscription(self.user, "AstroBin Ultimate 2020+")
+        self.client.login(username="user", password="password")
+        response = self.client.get(reverse('user_page', args=('user',)) + '?trash')
+        self.assertEquals(response.status_code, 200)
+
     @patch("astrobin.tasks.retrieve_primary_thumbnails")
     def test_user_page_view(self, retrieve_primary_thumbnails):
         today = date.today()
@@ -114,9 +171,9 @@ class UserTest(TestCase):
         # Test "upload time" sorting
         image1 = self._do_upload('astrobin/fixtures/test.jpg', "IMAGE1")
         image2 = self._do_upload('astrobin/fixtures/test.jpg', "IMAGE2")
-        image1.uploaded = today;
+        image1.uploaded = today
         image1.save(keep_deleted=True)
-        image2.uploaded = today + timedelta(1);
+        image2.uploaded = today + timedelta(1)
         image2.save(keep_deleted=True)
 
         response = self.client.get(
@@ -153,17 +210,17 @@ class UserTest(TestCase):
         image5 = self._do_upload('astrobin/fixtures/test.jpg', "IMAGE5_GEAR")
         image6 = self._do_upload('astrobin/fixtures/test.jpg', "IMAGE6_OTHER")
 
-        image1.subject_type = 100;
+        image1.subject_type = 100
         image1.save(keep_deleted=True)
-        image2.subject_type = 200;
+        image2.subject_type = 200
         image2.save(keep_deleted=True)
-        image3.subject_type = 300;
+        image3.subject_type = 300
         image3.save(keep_deleted=True)
-        image4.subject_type = 400;
+        image4.subject_type = 400
         image4.save(keep_deleted=True)
-        image5.subject_type = 500;
+        image5.subject_type = 500
         image5.save(keep_deleted=True)
-        image6.subject_type = 600;
+        image6.subject_type = 600
         image6.save(keep_deleted=True)
 
         response = self.client.get(reverse('user_page', args=('user',)) + "?sub=subject")
@@ -285,9 +342,9 @@ class UserTest(TestCase):
         image3 = self._do_upload('astrobin/fixtures/test.jpg', "IMAGE3")
         image4 = self._do_upload('astrobin/fixtures/test.jpg', "IMAGE4")
 
-        image3.subject_type = 200;
+        image3.subject_type = 200
         image3.save(keep_deleted=True)
-        image4.subject_type = 500;
+        image4.subject_type = 500
         image4.save(keep_deleted=True)
 
         telescope1 = Telescope.objects.create(name="TELESCOPE1")

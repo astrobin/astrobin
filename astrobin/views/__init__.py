@@ -1128,7 +1128,7 @@ def user_page(request, username):
         section = 'staging'
         subsection = None
     if 'trash' in request.GET:
-        if not (request.user == user and can_restore_from_trash(request.user) or request.user.is_superuser):
+        if request.user != user or not can_restore_from_trash(request.user) and not request.user.is_superuser:
             return HttpResponseForbidden()
         qs = Image.deleted_objects.filter(user=user)
         section = 'trash'
