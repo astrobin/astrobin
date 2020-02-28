@@ -27,7 +27,7 @@ from astrobin_apps_notifications.utils import push_notification
 from astrobin_apps_platesolving.models import Solution
 from astrobin_apps_platesolving.solver import Solver
 from astrobin_apps_premium.templatetags.astrobin_apps_premium_tags import (
-    is_lite, is_premium, is_any_premium_subscription, is_ultimate_2020)
+    is_lite, is_any_premium_subscription)
 from astrobin_apps_premium.utils import premium_get_valid_usersubscription
 from nested_comments.models import NestedComment
 from rawdata.models import (
@@ -463,8 +463,7 @@ def subscription_subscribed(sender, **kwargs):
         'astrobin_lite', 'astrobin_premium',
         'astrobin_lite_2020', 'astrobin_premium_2020',
         'astrobin_ultimate_2020'
-    ] and \
-            subscription.recurrence_unit == None:
+    ] and subscription.recurrence_unit is None:
         usersubscription = kwargs.get("usersubscription")
         # AstorBin Premium/Lite/Ultimate are valid for 1 year
         usersubscription.expires = datetime.datetime.now()
