@@ -1000,19 +1000,19 @@ class UserTest(TestCase):
         self.client.login(username='user', password='password')
         Generators.premium_subscription(self.user, "AstroBin Premium")
         response = self.client.get(reverse('user_page', args=('user',)) + "?trash")
-        self.assertEquals(200, response.status_code)
+        self.assertEquals(403, response.status_code)
 
     def test_user_can_access_trash_premium_autorenew(self):
         self.client.login(username='user', password='password')
         Generators.premium_subscription(self.user, "AstroBin Premium (autorenew)")
         response = self.client.get(reverse('user_page', args=('user',)) + "?trash")
-        self.assertEquals(200, response.status_code)
+        self.assertEquals(403, response.status_code)
 
     def test_user_can_access_trash_premium_2020(self):
         self.client.login(username='user', password='password')
         Generators.premium_subscription(self.user, "AstroBin Premium 2020+")
         response = self.client.get(reverse('user_page', args=('user',)) + "?trash")
-        self.assertEquals(200, response.status_code)
+        self.assertEquals(403, response.status_code)
 
     def test_user_can_access_trash_ultimate_2020(self):
         self.client.login(username='user', password='password')
