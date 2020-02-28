@@ -49,6 +49,34 @@
                         <td class="ultimate"><span class="infinity">&infin;</span></td>
                     </tr>
                     <tr>
+                        <th>{% trans "View in original resolution" %}</th>
+                        <td class="free"><i class="icon-remove"></i></td>
+                        <td class="lite"><i class="icon-ok"></i></td>
+                        <td class="premium"><i class="icon-ok"></i></td>
+                        <td class="ultimate"><i class="icon-ok"></i></td>
+                    </tr>
+                    <tr>
+                        <th>{% trans "View full image info" %}</th>
+                        <td class="free"><i class="icon-remove"></i></td>
+                        <td class="lite"><i class="icon-ok"></i></td>
+                        <td class="premium"><i class="icon-ok"></i></td>
+                        <td class="ultimate"><i class="icon-ok"></i></td>
+                    </tr>
+                    <tr>
+                        <th>{% trans "Search" %}</th>
+                        <td class="free">{% trans "Basic" %}</td>
+                        <td class="lite"><span class="green">{% trans "Advanced" %}</span></td>
+                        <td class="premium"><span class="green">{% trans "Advanced" %}</span></td>
+                        <td class="ultimate">{% trans "Full" %}</td>
+                    </tr>
+                    <tr>
+                        <th>{% trans "Social features" %}</th>
+                        <td class="free"><i class="icon-ok"></i></td>
+                        <td class="lite"><i class="icon-ok"></i></td>
+                        <td class="premium"><i class="icon-ok"></i></td>
+                        <td class="ultimate"><i class="icon-ok"></i></td>
+                    </tr>
+                    <tr>
                         <th>{% trans "Revisions" %}</th>
                         <td class="free"><i class="icon-remove"></i></td>
                         <td class="lite">{{ PREMIUM_MAX_REVISIONS_LITE_2020 }}</td>
@@ -56,7 +84,7 @@
                         <td class="ultimate"><span class="infinity">&infin;</span></td>
                     </tr>
                     <tr>
-                        <th>{% trans "View full image info" %}</th>
+                        <th>{% trans "Groups" %}</th>
                         <td class="free"><i class="icon-remove"></i></td>
                         <td class="lite"><i class="icon-ok"></i></td>
                         <td class="premium"><i class="icon-ok"></i></td>
@@ -70,11 +98,25 @@
                         <td class="ultimate">Advanced</td>
                     </tr>
                     <tr>
-                        <th>{% trans "Search" %}</th>
-                        <td class="free">{% trans "Basic" %}</td>
-                        <td class="lite"><span class="green">{% trans "Advanced" %}</span></td>
-                        <td class="premium"><span class="green">{% trans "Advanced" %}</span></td>
-                        <td class="ultimate">{% trans "Advanced" %}</td>
+                        <th>{% trans "Bulk data export" %}</th>
+                        <td class="free"><i class="icon-remove"></i></td>
+                        <td class="lite"><i class="icon-remove"></i></td>
+                        <td class="premium"><i class="icon-ok"></i></td>
+                        <td class="ultimate"><i class="icon-ok"></i></td>
+                    </tr>
+                    <tr>
+                        <th>{% trans "Download public raw data" %}</th>
+                        <td class="free"><i class="icon-remove"></i></td>
+                        <td class="lite"><i class="icon-remove"></i></td>
+                        <td class="premium"><i class="icon-ok"></i></td>
+                        <td class="ultimate"><i class="icon-ok"></i></td>
+                    </tr>
+                    <tr>
+                        <th>IOTD / Top Picks</th>
+                        <td class="free"><i class="icon-remove"></i></td>
+                        <td class="lite"><i class="icon-remove"></i></td>
+                        <td class="premium"><i class="icon-ok"></i></td>
+                        <td class="ultimate"><i class="icon-ok"></i></td>
                     </tr>
                     <tr>
                         <th>{% trans "Hide astronomy ads" %}</th>
@@ -90,64 +132,23 @@
                         <td class="premium"><i class="icon-remove"></i></td>
                         <td class="ultimate"><i class="icon-ok"></i></td>
                     </tr>
+
                     <tr>
-                        <th>{% trans "Social features" %}</th>
-                        <td class="free"><i class="icon-ok"></i></td>
-                        <td class="lite"><i class="icon-ok"></i></td>
-                        <td class="premium"><i class="icon-ok"></i></td>
-                        <td class="ultimate"><i class="icon-ok"></i></td>
-                    </tr>
-                    <tr>
-                        <th>{% trans "Groups" %}</th>
-                        <td class="free"><i class="icon-remove"></i></td>
-                        <td class="lite"><i class="icon-remove"></i></td>
-                        <td class="premium"><i class="icon-ok"></i></td>
-                        <td class="ultimate"><i class="icon-ok"></i></td>
-                    </tr>
-                    <tr>
-                        <th>{% trans "Download public raw data" %}</th>
-                        <td class="free"><i class="icon-remove"></i></td>
-                        <td class="lite"><i class="icon-remove"></i></td>
-                        <td class="premium"><i class="icon-ok"></i></td>
-                        <td class="ultimate"><i class="icon-ok"></i></td>
-                    </tr>
-                    <tr>
-                        <th>
-                            IOTD / Top Picks
-                        </th>
-                        <td class="free"><i class="icon-remove"></i></td>
-                        <td class="lite"><i class="icon-remove"></i></td>
-                        <td class="premium"><i class="icon-ok"></i></td>
-                        <td class="ultimate"><i class="icon-ok"></i></td>
-                    </tr>
-                    <tr>
-                        <th>
-                            {% trans "Community contests" %}
-                            <span class="in-the-future">
-                                {% trans "(in the future)" %}
-                            </span>
-                        </th>
-                        <td class="free"><i class="icon-remove"></i></td>
-                        <td class="lite">{% trans "Vote" %}</td>
-                        <td class="premium"><span class="green">{% trans "Vote / enter" %}</span></td>
-                        <td class="ultimate">{% trans "Vote / enter" %}</td>
-                    </tr>
-                    <tr>
-                        <th>
-                            {% trans "Sell in the Marketplace" %}
-                            <span class="in-the-future">
-                                {% trans "(in the future)" %}
-                            </span>
-                        </th>
+                        <th>{% trans "Full size annotations" %}</th>
                         <td class="free"><i class="icon-remove"></i></td>
                         <td class="lite"><i class="icon-remove"></i></td>
                         <td class="premium"><i class="icon-remove"></i></td>
                         <td class="ultimate"><i class="icon-ok"></i></td>
                     </tr>
                     <tr>
-                        <th>
-                            {% trans "All future features" %}
-                        </th>
+                        <th>{% trans "Upload uncompressed source" %}</th>
+                        <td class="free"><i class="icon-remove"></i></td>
+                        <td class="lite"><i class="icon-remove"></i></td>
+                        <td class="premium"><i class="icon-remove"></i></td>
+                        <td class="ultimate"><i class="icon-ok"></i></td>
+                    </tr>
+                    <tr>
+                        <th>{% trans "Undelete images" %}</th>
                         <td class="free"><i class="icon-remove"></i></td>
                         <td class="lite"><i class="icon-remove"></i></td>
                         <td class="premium"><i class="icon-remove"></i></td>
