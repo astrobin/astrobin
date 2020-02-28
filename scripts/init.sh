@@ -5,10 +5,10 @@ python manage.py migrate --noinput
 python manage.py migrate --run-syncdb --noinput
 python manage.py sync_translation_fields --noinput
 
-# Create Premium subsciptions
+# Create initial data
 python manage.py shell << EOF
 from subscription.models import Subscription
-from django.contrib.auth.models import Group
+from django.contrib.auth.models import Group, User
 
 Group.objects.get_or_create(name='astrobin_lite')
 Group.objects.get_or_create(name='astrobin_lite_2020')
@@ -284,27 +284,22 @@ except Subscription.DoesNotExist:
         recurrence_unit="Y",
         group=Group.objects.get(name='astrobin-donor-platinum-yearly'),
         category='donor')
+
+Group.objects.get_or_create(name='content_moderators')
+Group.objects.get_or_create(name='image_moderators')
+Group.objects.get_or_create(name='rawdata-atom')
+Group.objects.get_or_create(name='iotd_staff')
+Group.objects.get_or_create(name='iotd_submitters')
+Group.objects.get_or_create(name='iotd_reviewers')
+Group.objects.get_or_create(name='iotd_judges')
+
+try:
+    User.objects.get(email='dev@astrobin.com')
+    Group.objects.get(name='content_moderators').user_set.add(u)
+    Group.objects.get(name='image_moderators').user_set.add(u)
+except User.DoesNotExist:
+    u = User.objects.create_superuser('astrobin_dev', 'dev@astrobin.com', 'astrobin_dev')
+
+Site.objects.filter(name="AstroBin").delete()
+Site.objects.create(name='AstroBin', domain='localhost')
 EOF
-
-# Create moderation groups
-echo "from django.contrib.auth.models import Group; Group.objects.get_or_create(name='content_moderators')" | python manage.py shell
-echo "from django.contrib.auth.models import Group; Group.objects.get_or_create(name='image_moderators')" | python manage.py shell
-
-# Create Raw Data groups
-echo "from django.contrib.auth.models import Group; Group.objects.get_or_create(name='rawdata-atom')" | python manage.py shell
-
-# Create IOTD board groups
-echo "from django.contrib.auth.models import Group; Group.objects.get_or_create(name='iotd_staff')" | python manage.py shell
-echo "from django.contrib.auth.models import Group; Group.objects.get_or_create(name='iotd_submitters')" | python manage.py shell
-echo "from django.contrib.auth.models import Group; Group.objects.get_or_create(name='iotd_reviewers')" | python manage.py shell
-echo "from django.contrib.auth.models import Group; Group.objects.get_or_create(name='iotd_judges')" | python manage.py shell
-
-# Create superuser
-echo "from django.contrib.auth.models import User; User.objects.filter(email='dev@astrobin.com').delete(); User.objects.create_superuser('astrobin_dev', 'dev@astrobin.com', 'astrobin_dev')" | python manage.py shell
-
-# Assign superuser to some groups
-echo "from django.contrib.auth.models import User, Group; u = User.objects.get(username='astrobin_dev'); g = Group.objects.get(name='content_moderators'); g.user_set.add(u)" | python manage.py shell
-echo "from django.contrib.auth.models import User, Group; u = User.objects.get(username='astrobin_dev'); g = Group.objects.get(name='image_moderators'); g.user_set.add(u)" | python manage.py shell
-
-# Create Site
-echo "from django.contrib.sites.models import Site; Site.objects.get_or_create(name='AstroBin', domain='localhost')" | python manage.py shell

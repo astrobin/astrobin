@@ -25,6 +25,6 @@ class DownloadDataView(LoginRequiredMixin, UserPassesTestMixin, CreateView):
             self.request,
             _("AstroBin is preparing your data for download. Please check this page again in a while: the more images"
               "you have, the more time it will take."))
-        prepare_download_data_archive.apply(args=(self.object.id,))
+        prepare_download_data_archive.delay(self.object.id)
 
         return response
