@@ -69,6 +69,7 @@ RUN yarn global add \
 
 # Install compass
 RUN gem install compass
+RUN sass astrobin/static/astrobin/scss/astrobin.scss astrobin/static/astrobin/scss/astrobin.css
 
 # Install logrotate file
 COPY docker/astrobin.logrotate.conf /etc/logrotate.d/astrobin
