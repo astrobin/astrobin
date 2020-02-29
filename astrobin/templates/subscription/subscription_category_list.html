@@ -110,19 +110,9 @@
             </td>
 
             <td>
-                {% if "AstroBin Lite" in object.name %}
-                    {% blocktrans with max_allowed=PREMIUM_MAX_IMAGES_LITE %}{{max_allowed}} images per year {% endblocktrans %}
-                {% endif %}
-
-                {% if "AstroBin Premium" in object.name %}
-                    {% blocktrans %}Unlimited images{% endblocktrans %}
-                {% endif %}
-
                 {% if object.category == "rawdata" %}
                     {{object.description}}
-                {% endif %}
-
-                {% if object.category == "donor" %}
+                {% else %}
                     {% trans "n/a" %}
                 {% endif %}
             </td>
