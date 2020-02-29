@@ -243,9 +243,17 @@ def prepare_download_data_archive(request_id):
     logger.debug("prepare_download_data_archive: called for request %d" % request_id)
 
     data_download_request = DataDownloadRequest.objects.get(id=request_id)
+
+    logger.debug("prepare_download_data_archive: got object for request %d" % request_id)
+
     temp_zip = tempfile.NamedTemporaryFile()  # type: _TemporaryFileWrapper
+
+    logger.debug("prepare_download_data_archive: created temp zip file %s" % temp_zip.name)
+
     temp_csv = StringIO()  # type: StringIO
     archive = zipfile.ZipFile(temp_zip, 'w', zipfile.ZIP_DEFLATED)  # type: ZipFile
+
+    logger.debug("prepare_download_data_archive: created zip file")
 
     csv_writer = csv.writer(temp_csv)
     csv_writer.writerow([
@@ -256,6 +264,8 @@ def prepare_download_data_archive(request_id):
         'guiding_cameras', 'focal_reducers', 'software', 'filters', 'accessories', 'is_wip', 'w', 'h', 'animated',
         'license', 'is_final', 'allow_comments', 'mouse_hover_image'
     ])
+
+    logger.debug("prepare_download_data_archive: write CSV header row")
 
     for image in Image.objects_including_wip.filter(user=data_download_request.user, corrupted=False):  # type: Image
         id = image.get_id()  # type: str
