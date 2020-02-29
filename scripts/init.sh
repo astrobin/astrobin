@@ -301,6 +301,8 @@ except User.DoesNotExist:
     Group.objects.get(name='content_moderators').user_set.add(u)
     Group.objects.get(name='image_moderators').user_set.add(u)
 
-Site.objects.filter(name="AstroBin").delete()
-Site.objects.create(name='AstroBin', domain='localhost')
+try:
+    Site.objects.get(name="AstroBin")
+except Site.DoesNotExist:
+    Site.objects.create(name='AstroBin', domain='localhost')
 EOF
