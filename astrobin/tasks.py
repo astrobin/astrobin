@@ -240,105 +240,109 @@ def send_inactive_account_reminder():
 def prepare_download_data_archive(request_id):
     # type: (str) -> None
 
-    logger.debug("prepare_download_data_archive: called for request %d" % request_id)
+    try:
 
-    data_download_request = DataDownloadRequest.objects.get(id=request_id)
+        logger.debug("prepare_download_data_archive: called for request %d" % request_id)
 
-    logger.debug("prepare_download_data_archive: got object for request %d" % request_id)
+        data_download_request = DataDownloadRequest.objects.get(id=request_id)
 
-    temp_zip = tempfile.NamedTemporaryFile()  # type: _TemporaryFileWrapper
+        logger.debug("prepare_download_data_archive: got object for request %d" % request_id)
 
-    logger.debug("prepare_download_data_archive: created temp zip file %s" % temp_zip.name)
+        temp_zip = tempfile.NamedTemporaryFile()  # type: _TemporaryFileWrapper
 
-    temp_csv = StringIO()  # type: StringIO
-    archive = zipfile.ZipFile(temp_zip, 'w', zipfile.ZIP_DEFLATED)  # type: ZipFile
+        logger.debug("prepare_download_data_archive: created temp zip file %s" % temp_zip.name)
 
-    logger.debug("prepare_download_data_archive: created zip file")
+        temp_csv = StringIO()  # type: StringIO
+        archive = zipfile.ZipFile(temp_zip, 'w', zipfile.ZIP_DEFLATED)  # type: ZipFile
 
-    csv_writer = csv.writer(temp_csv)
-    csv_writer.writerow([
-        'id', 'title', 'acquisition_type', 'subject_type', 'data_source', 'remote_source',
-        'solar_system_main_subject', 'locations', 'description', 'link', 'link_to_fits', 'image_file',
-        'uncompressed_source_file', 'uploaded', 'published', 'updated', 'watermark', 'watermark_text',
-        'watermark_opacity', 'imaging_telescopes', 'guiding_telescopes', 'mounts', 'imaging_cameras',
-        'guiding_cameras', 'focal_reducers', 'software', 'filters', 'accessories', 'is_wip', 'w', 'h', 'animated',
-        'license', 'is_final', 'allow_comments', 'mouse_hover_image'
-    ])
+        logger.debug("prepare_download_data_archive: created zip file")
 
-    logger.debug("prepare_download_data_archive: written CSV header row")
-
-    images = Image.objects_including_wip.filter(user=data_download_request.user, corrupted=False)
-
-    logger.debug("prepare_download_data_archive: user has %d images" % images.count)
-
-    for image in images:
-        id = image.get_id()  # type: str
-
-        logger.debug("prepare_download_data_archive: image id = %s" % id)
-
-        title = slugify(image.title)  # type: str
-
-        logger.debug("prepare_download_data_archive: image title = %s" % title)
-
-        path = ntpath.basename(image.image_file.path)  # type: str
-
-        logger.debug("prepare_download_data_archive: image path = %s" % id)
-
-        response = requests.get(image.image_file.url)  # type: Response
-
-        logger.debug("prepare_download_data_archive: response status = " % response.status_code)
-
-        if response.status_code == 200:
-            archive.writestr("%s-%s/%s" % (id, title, path), response.content)
-            logger.debug("prepare_download_data_archive: image %s = written" % id)
-
-        for revision in ImageRevision.objects.filter(image=image, corrupted=False):  # type: ImageRevision
-            label = revision.label  # type: unicode
-            path = ntpath.basename(revision.image_file.path)  # type: str
-
-            logger.debug("prepare_download_data_archive: image %s revision %s = iterating" % (id, label))
-
-            response = requests.get(revision.image_file.url)  # type: Response
-
-            if response.status_code == 200:
-                archive.writestr("%s-%s/revisions/%s/%s" % (id, title, label, path), response.content)
-                logger.debug("prepare_download_data_archive: image %s revision %s = written" % (id, label))
-
+        csv_writer = csv.writer(temp_csv)
         csv_writer.writerow([
-            image.get_id(), image.title, image.acquisition_type, image.get_subject_type(), image.data_source,
-            image.remote_source, image.solar_system_main_subject, ';'.join([str(x) for x in image.locations.all()]),
-            image.description, image.link, image.link_to_fits, image.image_file, image.uncompressed_source_file,
-            image.uploaded, image.published, image.updated, image.watermark, image.watermark_text,
-            image.watermark_opacity,
-            ';'.join([str(x) for x in image.imaging_telescopes.all()]),
-            ';'.join([str(x) for x in image.guiding_telescopes.all()]),
-            ';'.join([str(x) for x in image.mounts.all()]),
-            ';'.join([str(x) for x in image.imaging_cameras.all()]),
-            ';'.join([str(x) for x in image.guiding_cameras.all()]),
-            ';'.join([str(x) for x in image.focal_reducers.all()]),
-            ';'.join([str(x) for x in image.software.all()]),
-            ';'.join([str(x) for x in image.filters.all()]),
-            ';'.join([str(x) for x in image.accessories.all()]),
-            image.is_wip, image.w, image.h, image.animated, image.license, image.is_final, image.allow_comments,
-            image.mouse_hover_image
+            'id', 'title', 'acquisition_type', 'subject_type', 'data_source', 'remote_source',
+            'solar_system_main_subject', 'locations', 'description', 'link', 'link_to_fits', 'image_file',
+            'uncompressed_source_file', 'uploaded', 'published', 'updated', 'watermark', 'watermark_text',
+            'watermark_opacity', 'imaging_telescopes', 'guiding_telescopes', 'mounts', 'imaging_cameras',
+            'guiding_cameras', 'focal_reducers', 'software', 'filters', 'accessories', 'is_wip', 'w', 'h', 'animated',
+            'license', 'is_final', 'allow_comments', 'mouse_hover_image'
         ])
 
-        logger.debug("prepare_download_data_archive: image %s = CSV row added" % id)
+        logger.debug("prepare_download_data_archive: written CSV header row")
 
-    csv_value = temp_csv.getvalue()
-    archive.writestr("data.csv", csv_value)
+        images = Image.objects_including_wip.filter(user=data_download_request.user, corrupted=False)
 
-    logger.debug("prepare_download_data_archive: CSV written")
+        logger.debug("prepare_download_data_archive: user has %d images" % images.count)
 
-    archive.close()
+        for image in images:
+            id = image.get_id()  # type: str
 
-    logger.debug("prepare_download_data_archive: archive closed")
+            logger.debug("prepare_download_data_archive: image id = %s" % id)
 
-    data_download_request.status = "READY"
-    data_download_request.file_size = len(csv_value.encode('utf-8')) + sum([x.file_size for x in archive.infolist()])
+            title = slugify(image.title)  # type: str
 
-    logger.debug("prepare_download_data_archive: file_size = %d" % data_download_request.file_size)
+            logger.debug("prepare_download_data_archive: image title = %s" % title)
 
-    data_download_request.zip_file.save("", File(temp_zip))
+            path = ntpath.basename(image.image_file.path)  # type: str
 
-    logger.debug("prepare_download_data_archive: completed for request %d" % request_id)
+            logger.debug("prepare_download_data_archive: image path = %s" % id)
+
+            response = requests.get(image.image_file.url)  # type: Response
+
+            logger.debug("prepare_download_data_archive: response status = " % response.status_code)
+
+            if response.status_code == 200:
+                archive.writestr("%s-%s/%s" % (id, title, path), response.content)
+                logger.debug("prepare_download_data_archive: image %s = written" % id)
+
+            for revision in ImageRevision.objects.filter(image=image, corrupted=False):  # type: ImageRevision
+                label = revision.label  # type: unicode
+                path = ntpath.basename(revision.image_file.path)  # type: str
+
+                logger.debug("prepare_download_data_archive: image %s revision %s = iterating" % (id, label))
+
+                response = requests.get(revision.image_file.url)  # type: Response
+
+                if response.status_code == 200:
+                    archive.writestr("%s-%s/revisions/%s/%s" % (id, title, label, path), response.content)
+                    logger.debug("prepare_download_data_archive: image %s revision %s = written" % (id, label))
+
+            csv_writer.writerow([
+                image.get_id(), image.title, image.acquisition_type, image.get_subject_type(), image.data_source,
+                image.remote_source, image.solar_system_main_subject, ';'.join([str(x) for x in image.locations.all()]),
+                image.description, image.link, image.link_to_fits, image.image_file, image.uncompressed_source_file,
+                image.uploaded, image.published, image.updated, image.watermark, image.watermark_text,
+                image.watermark_opacity,
+                ';'.join([str(x) for x in image.imaging_telescopes.all()]),
+                ';'.join([str(x) for x in image.guiding_telescopes.all()]),
+                ';'.join([str(x) for x in image.mounts.all()]),
+                ';'.join([str(x) for x in image.imaging_cameras.all()]),
+                ';'.join([str(x) for x in image.guiding_cameras.all()]),
+                ';'.join([str(x) for x in image.focal_reducers.all()]),
+                ';'.join([str(x) for x in image.software.all()]),
+                ';'.join([str(x) for x in image.filters.all()]),
+                ';'.join([str(x) for x in image.accessories.all()]),
+                image.is_wip, image.w, image.h, image.animated, image.license, image.is_final, image.allow_comments,
+                image.mouse_hover_image
+            ])
+
+            logger.debug("prepare_download_data_archive: image %s = CSV row added" % id)
+
+        csv_value = temp_csv.getvalue()
+        archive.writestr("data.csv", csv_value)
+
+        logger.debug("prepare_download_data_archive: CSV written")
+
+        archive.close()
+
+        logger.debug("prepare_download_data_archive: archive closed")
+
+        data_download_request.status = "READY"
+        data_download_request.file_size = len(csv_value.encode('utf-8')) + sum([x.file_size for x in archive.infolist()])
+
+        logger.debug("prepare_download_data_archive: file_size = %d" % data_download_request.file_size)
+
+        data_download_request.zip_file.save("", File(temp_zip))
+
+        logger.debug("prepare_download_data_archive: completed for request %d" % request_id)
+    except Exception as e:
+        logger.exception(e.message)
