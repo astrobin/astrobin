@@ -484,7 +484,7 @@ class PremiumTest(TestCase):
 
             # Deleting an image uploaded before the subscription was created does not decrease the counter.
             image = Image.objects_including_wip.all().order_by('-pk')[1] # Second last element
-            image.uploaded = image.uploaded - datetime.timedelta(days=1)
+            image.uploaded = image.uploaded - datetime.timedelta(days=2)
             image.save(keep_deleted=True)
             image.delete()
             profile = UserProfile.objects.get(pk=profile.pk)
