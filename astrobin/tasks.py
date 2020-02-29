@@ -238,7 +238,7 @@ def send_inactive_account_reminder():
 
 @shared_task()
 def prepare_download_data_archive(request_id):
-    # type: (basestring) -> None
+    # type: (str) -> None
 
     data_download_request = DataDownloadRequest.objects.get(id=request_id)
     temp_zip = tempfile.NamedTemporaryFile()  # type: _TemporaryFileWrapper
