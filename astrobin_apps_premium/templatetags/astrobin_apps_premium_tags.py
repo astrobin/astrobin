@@ -3,6 +3,7 @@ import datetime
 from django.conf import settings
 from django.db.models import QuerySet
 from django.template import Library
+from subscription.models import Subscription
 
 from astrobin_apps_premium.utils import premium_get_valid_usersubscription
 
@@ -28,10 +29,10 @@ def show_renew_message(usersubscription):
         "AstroBin Ultimate 2020+"
     ]
 
-@register.filter
-def is_subscription_offered(subscription):
-    # type: (Subscription) -> bool
-    return subscription.name in [
+@register.simple_tag
+def offered_subscriptions():
+    # type: () -> QuerySet
+    return Subscription.objects.filter(name__in=[
         "AstroBin Lite 2020+",
         "AstroBin Premium 2020+",
         "AstroBin Ultimate 2020+",
@@ -49,7 +50,12 @@ def is_subscription_offered(subscription):
         "AstroBin Donor Silver Yearly",
         "AstroBin Gold Silver Yearly",
         "AstroBin Platinum Silver Yearly",
-    ]
+    ])
+
+@register.filter
+def is_subscription_offered(subscription):
+    # type: (Subscription) -> bool
+    return subscription in offered_subscriptions()
 
 @register.filter
 def is_any_ultimate(user):

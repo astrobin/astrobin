@@ -86,7 +86,8 @@
                         backup securely online.{% endblocktrans %}
                 </li>
             </ul>
-            {% with subscription_category='rawdata' %}
+            {% offered_subscriptions as offered %}
+            {% with subscription_category='rawdata' object_list=offered %}
                 {% include 'subscription/subscription_category_list.html' %}
             {% endwith %}
         </div>
