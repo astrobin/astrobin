@@ -104,6 +104,8 @@ services:
     links:
       - memcached
       - rabbitmq
+    ports:
+      - "8084:8084"
     env_file:
       - ./astrobin.env
     environment:
