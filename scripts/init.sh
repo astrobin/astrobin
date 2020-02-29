@@ -9,6 +9,7 @@ python manage.py sync_translation_fields --noinput
 python manage.py shell << EOF
 from subscription.models import Subscription
 from django.contrib.auth.models import Group, User
+from django.contrib.sites.models import Site
 
 Group.objects.get_or_create(name='astrobin_lite')
 Group.objects.get_or_create(name='astrobin_lite_2020')
