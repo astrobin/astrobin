@@ -240,6 +240,8 @@ def send_inactive_account_reminder():
 def prepare_download_data_archive(request_id):
     # type: (str) -> None
 
+    logger.debug("prepare_download_data_archive: called for request %d" % request_id)
+
     data_download_request = DataDownloadRequest.objects.get(id=request_id)
     temp_zip = tempfile.NamedTemporaryFile()  # type: _TemporaryFileWrapper
     temp_csv = StringIO()  # type: StringIO
@@ -259,18 +261,26 @@ def prepare_download_data_archive(request_id):
         id = image.get_id()  # type: str
         title = slugify(image.title)  # type: str
         path = ntpath.basename(image.image_file.path)  # type: str
+
+        logger.debug("prepare_download_data_archive: image %s = iterating" % id)
+
         response = requests.get(image.image_file.url)  # type: Response
 
         if response.status_code == 200:
             archive.writestr("%s-%s/%s" % (id, title, path), response.content)
+            logger.debug("prepare_download_data_archive: image %s = written" % id)
 
         for revision in ImageRevision.objects.filter(image=image, corrupted=False):  # type: ImageRevision
             label = revision.label  # type: unicode
             path = ntpath.basename(revision.image_file.path)  # type: str
+
+            logger.debug("prepare_download_data_archive: image %s revision %s = iterating" % (id, label))
+
             response = requests.get(revision.image_file.url)  # type: Response
 
             if response.status_code == 200:
                 archive.writestr("%s-%s/revisions/%s/%s" % (id, title, label, path), response.content)
+                logger.debug("prepare_download_data_archive: image %s revision %s = written" % (id, label))
 
         csv_writer.writerow([
             image.get_id(), image.title, image.acquisition_type, image.get_subject_type(), image.data_source,
@@ -291,10 +301,22 @@ def prepare_download_data_archive(request_id):
             image.mouse_hover_image
         ])
 
+        logger.debug("prepare_download_data_archive: image %s = CSV row added" % id)
+
     csv_value = temp_csv.getvalue()
     archive.writestr("data.csv", csv_value)
+
+    logger.debug("prepare_download_data_archive: CSV written")
+
     archive.close()
+
+    logger.debug("prepare_download_data_archive: archive closed")
 
     data_download_request.status = "READY"
     data_download_request.file_size = len(csv_value.encode('utf-8')) + sum([x.file_size for x in archive.infolist()])
+
+    logger.debug("prepare_download_data_archive: file_size = %d" % data_download_request.file_size)
+
     data_download_request.zip_file.save("", File(temp_zip))
+
+    logger.debug("prepare_download_data_archive: completed for request %d" % request_id)
