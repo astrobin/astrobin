@@ -271,7 +271,7 @@ def prepare_download_data_archive(request_id):
 
         images = Image.objects_including_wip.filter(user=data_download_request.user, corrupted=False)
 
-        logger.debug("prepare_download_data_archive: user has %d images" % images.count)
+        logger.debug("prepare_download_data_archive: user has %d images" % images.count())
 
         for image in images:
             id = image.get_id()  # type: str
