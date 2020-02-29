@@ -265,16 +265,28 @@ def prepare_download_data_archive(request_id):
         'license', 'is_final', 'allow_comments', 'mouse_hover_image'
     ])
 
-    logger.debug("prepare_download_data_archive: write CSV header row")
+    logger.debug("prepare_download_data_archive: written CSV header row")
 
-    for image in Image.objects_including_wip.filter(user=data_download_request.user, corrupted=False):  # type: Image
+    images = Image.objects_including_wip.filter(user=data_download_request.user, corrupted=False)
+
+    logger.debug("prepare_download_data_archive: user has %d images" % images.count)
+
+    for image in images:
         id = image.get_id()  # type: str
+
+        logger.debug("prepare_download_data_archive: image id = %s" % id)
+
         title = slugify(image.title)  # type: str
+
+        logger.debug("prepare_download_data_archive: image title = %s" % title)
+
         path = ntpath.basename(image.image_file.path)  # type: str
 
-        logger.debug("prepare_download_data_archive: image %s = iterating" % id)
+        logger.debug("prepare_download_data_archive: image path = %s" % id)
 
         response = requests.get(image.image_file.url)  # type: Response
+
+        logger.debug("prepare_download_data_archive: response status = " % response.status_code)
 
         if response.status_code == 200:
             archive.writestr("%s-%s/%s" % (id, title, path), response.content)
