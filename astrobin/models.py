@@ -2836,7 +2836,7 @@ class DataDownloadRequest(models.Model):
         ("PROCESSING", _("Processing")),
         ("READY", _("Ready")),
         ("ERROR", _("Error")),
-        ("Expired", _("Expired")),
+        ("EXPIRED", _("Expired")),
     )
 
     user = models.ForeignKey(User, editable=False)
@@ -2854,7 +2854,7 @@ class DataDownloadRequest(models.Model):
         null=True,
     )
 
-    file_size = models.IntegerField(
+    file_size = models.BigIntegerField(
         null=True,
     )
 
