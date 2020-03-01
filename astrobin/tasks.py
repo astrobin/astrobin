@@ -259,7 +259,7 @@ def prepare_download_data_archive(request_id):
         logger.debug("prepare_download_data_archive: created temp zip file %s" % temp_zip.name)
 
         temp_csv = StringIO()  # type: StringIO
-        archive = zipfile.ZipFile(temp_zip, 'w', zipfile.ZIP_DEFLATED)  # type: ZipFile
+        archive = zipfile.ZipFile(temp_zip, 'w', zipfile.ZIP_DEFLATED, allowZip64=True)  # type: ZipFile
 
         logger.debug("prepare_download_data_archive: created zip file")
 
