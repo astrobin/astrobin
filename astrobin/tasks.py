@@ -282,7 +282,7 @@ def prepare_download_data_archive(request_id):
 
             logger.debug("prepare_download_data_archive: image title = %s" % title)
 
-            path = ntpath.basename(image.image_file.path)  # type: str
+            path = ntpath.basename(image.image_file.name)  # type: str
 
             logger.debug("prepare_download_data_archive: image path = %s" % id)
 
