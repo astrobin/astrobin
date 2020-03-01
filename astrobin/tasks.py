@@ -296,7 +296,7 @@ def prepare_download_data_archive(request_id):
 
             for revision in ImageRevision.objects.filter(image=image, corrupted=False):  # type: ImageRevision
                 label = revision.label  # type: unicode
-                path = ntpath.basename(revision.image_file.path)  # type: str
+                path = ntpath.basename(revision.image_file.name)  # type: str
 
                 logger.debug("prepare_download_data_archive: image %s revision %s = iterating" % (id, label))
 
