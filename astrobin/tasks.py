@@ -43,7 +43,7 @@ def test_task():
 def update_top100_ids():
     from astrobin.models import Image
 
-    LOCK_EXPIRE = 60 * 5 # Lock expires in 5 minutes
+    LOCK_EXPIRE = 60 * 5  # Lock expires in 5 minutes
     lock_id = 'top100_ids_lock'
 
     # cache.add fails if the key already exists
@@ -110,6 +110,8 @@ def contain_imagecache_size():
 This task will delete all inactive accounts with bounced email
 addresses.
 """
+
+
 @shared_task()
 def delete_inactive_bounced_accounts():
     bounces = Bounce.objects.filter(
@@ -124,6 +126,8 @@ def delete_inactive_bounced_accounts():
 """
 This task gets the raw thumbnail data and sets the cache and ThumbnailGroup object.
 """
+
+
 @shared_task()
 def retrieve_thumbnail(pk, alias, options):
     from astrobin.models import Image
@@ -191,6 +195,8 @@ def retrieve_thumbnail(pk, alias, options):
 """
 This task retrieves all thumbnail data.
 """
+
+
 @shared_task()
 def retrieve_primary_thumbnails(pk, options):
     for alias in ('story', 'thumb', 'gallery', 'regular', 'hd', 'real'):
@@ -259,12 +265,41 @@ def prepare_download_data_archive(request_id):
 
         csv_writer = csv.writer(temp_csv)
         csv_writer.writerow([
-            'id', 'title', 'acquisition_type', 'subject_type', 'data_source', 'remote_source',
-            'solar_system_main_subject', 'locations', 'description', 'link', 'link_to_fits', 'image_file',
-            'uncompressed_source_file', 'uploaded', 'published', 'updated', 'watermark', 'watermark_text',
-            'watermark_opacity', 'imaging_telescopes', 'guiding_telescopes', 'mounts', 'imaging_cameras',
-            'guiding_cameras', 'focal_reducers', 'software', 'filters', 'accessories', 'is_wip', 'w', 'h', 'animated',
-            'license', 'is_final', 'allow_comments', 'mouse_hover_image'
+            'id',
+            'title',
+            'acquisition_type',
+            'subject_type',
+            'data_source',
+            'remote_source',
+            'solar_system_main_subject',
+            'locations',
+            'description',
+            'link',
+            'link_to_fits',
+            'image_file',
+            'uncompressed_source_file',
+            'uploaded', 'published',
+            'updated',
+            'watermark',
+            'watermark_text',
+            'watermark_opacity',
+            'imaging_telescopes',
+            'guiding_telescopes',
+            'mounts',
+            'imaging_cameras',
+            'guiding_cameras',
+            'focal_reducers',
+            'software',
+            'filters',
+            'accessories',
+            'is_wip',
+            'w',
+            'h',
+            'animated',
+            'license',
+            'is_final',
+            'allow_comments',
+            'mouse_hover_image'
         ])
 
         logger.debug("prepare_download_data_archive: written CSV header row")
@@ -307,21 +342,41 @@ def prepare_download_data_archive(request_id):
                     logger.debug("prepare_download_data_archive: image %s revision %s = written" % (id, label))
 
             csv_writer.writerow([
-                image.get_id(), image.title, image.acquisition_type, image.get_subject_type(), image.data_source,
-                image.remote_source, image.solar_system_main_subject, ';'.join([str(x) for x in image.locations.all()]),
-                image.description, image.link, image.link_to_fits, image.image_file, image.uncompressed_source_file,
-                image.uploaded, image.published, image.updated, image.watermark, image.watermark_text,
+                image.get_id(),
+                unicode(image.title).encode('utf-8'),
+                image.acquisition_type,
+                image.get_subject_type(),
+                image.data_source,
+                image.remote_source,
+                image.solar_system_main_subject,
+                ';'.join([unicode(x).encode('utf-8') for x in image.locations.all()]),
+                unicode(image.description).encode('utf-8'),
+                unicode(image.link).encode('utf-8'),
+                unicode(image.link_to_fits).encode('utf-8'),
+                image.image_file.url,
+                image.uncompressed_source_file.url,
+                image.uploaded,
+                image.published,
+                image.updated,
+                image.watermark,
+                unicode(image.watermark_text).encode('utf-8'),
                 image.watermark_opacity,
-                ';'.join([str(x) for x in image.imaging_telescopes.all()]),
-                ';'.join([str(x) for x in image.guiding_telescopes.all()]),
-                ';'.join([str(x) for x in image.mounts.all()]),
-                ';'.join([str(x) for x in image.imaging_cameras.all()]),
-                ';'.join([str(x) for x in image.guiding_cameras.all()]),
-                ';'.join([str(x) for x in image.focal_reducers.all()]),
-                ';'.join([str(x) for x in image.software.all()]),
-                ';'.join([str(x) for x in image.filters.all()]),
-                ';'.join([str(x) for x in image.accessories.all()]),
-                image.is_wip, image.w, image.h, image.animated, image.license, image.is_final, image.allow_comments,
+                ';'.join([unicode(x).encode('utf-8') for x in image.imaging_telescopes.all()]),
+                ';'.join([unicode(x).encode('utf-8') for x in image.guiding_telescopes.all()]),
+                ';'.join([unicode(x).encode('utf-8') for x in image.mounts.all()]),
+                ';'.join([unicode(x).encode('utf-8') for x in image.imaging_cameras.all()]),
+                ';'.join([unicode(x).encode('utf-8') for x in image.guiding_cameras.all()]),
+                ';'.join([unicode(x).encode('utf-8') for x in image.focal_reducers.all()]),
+                ';'.join([unicode(x).encode('utf-8') for x in image.software.all()]),
+                ';'.join([unicode(x).encode('utf-8') for x in image.filters.all()]),
+                ';'.join([unicode(x).encode('utf-8') for x in image.accessories.all()]),
+                image.is_wip,
+                image.w,
+                image.h,
+                image.animated,
+                image.license,
+                image.is_final,
+                image.allow_comments,
                 image.mouse_hover_image
             ])
 
@@ -337,7 +392,8 @@ def prepare_download_data_archive(request_id):
         logger.debug("prepare_download_data_archive: archive closed")
 
         data_download_request.status = "READY"
-        data_download_request.file_size = len(csv_value.encode('utf-8')) + sum([x.file_size for x in archive.infolist()])
+        data_download_request.file_size = len(csv_value.encode('utf-8')) + sum(
+            [x.file_size for x in archive.infolist()])
 
         logger.debug("prepare_download_data_archive: file_size = %d" % data_download_request.file_size)
 
