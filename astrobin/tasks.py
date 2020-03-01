@@ -354,7 +354,7 @@ def prepare_download_data_archive(request_id):
                 unicode(image.link).encode('utf-8'),
                 unicode(image.link_to_fits).encode('utf-8'),
                 image.image_file.url,
-                image.uncompressed_source_file.url,
+                image.uncompressed_source_file.url if image.uncompressed_source_file else "",
                 image.uploaded,
                 image.published,
                 image.updated,
