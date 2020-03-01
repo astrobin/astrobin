@@ -392,8 +392,7 @@ def prepare_download_data_archive(request_id):
         logger.debug("prepare_download_data_archive: archive closed")
 
         data_download_request.status = "READY"
-        data_download_request.file_size = len(csv_value.encode('utf-8')) + sum(
-            [x.file_size for x in archive.infolist()])
+        data_download_request.file_size = sum([x.file_size for x in archive.infolist()])
 
         logger.debug("prepare_download_data_archive: file_size = %d" % data_download_request.file_size)
 
