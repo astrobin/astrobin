@@ -288,7 +288,7 @@ def prepare_download_data_archive(request_id):
 
             response = requests.get(image.image_file.url)  # type: Response
 
-            logger.debug("prepare_download_data_archive: response status = " % response.status_code)
+            logger.debug("prepare_download_data_archive: response status = %d" % response.status_code)
 
             if response.status_code == 200:
                 archive.writestr("%s-%s/%s" % (id, title, path), response.content)
