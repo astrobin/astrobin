@@ -1,5 +1,5 @@
 (function (win) {
-    function PlatesolvingMouseMove(raMatrix, decMatrix, matrixRect, matrixDelta, solvedSizeX, solvedSizeY) {
+    function PlatesolvingMouseMove(raMatrix, decMatrix, matrixRect, matrixDelta, solvedSizeX, solvedSizeY, scale) {
 
         var self = this;
 
@@ -31,7 +31,9 @@
                 matrixRect[1],
                 matrixRect[2],
                 matrixRect[3],
-                matrixDelta);
+                matrixDelta,
+                undefined,
+                scale);
             var interpolationText = interpolation.interpolateAsText(scaledX, scaledY, false, true, true);
 
             self.$tooltip.show();

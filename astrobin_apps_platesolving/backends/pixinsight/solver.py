@@ -4,6 +4,7 @@ import requests
 from django.conf import settings
 from django.urls import reverse
 
+from astrobin.templatetags.tags import thumbnail_scale
 from astrobin_apps_platesolving.backends.base import AbstractPlateSolvingBackend
 
 log = logging.getLogger('apps')
@@ -25,10 +26,7 @@ class Solver(AbstractPlateSolvingBackend):
             'imageURL=%s' % image_url,
             'centerRA=%f' % kwargs.pop('ra'),
             'centerDec=%f' % kwargs.pop('dec'),
-            'smallSizeRatio=%f' % (
-                    min(settings.THUMBNAIL_ALIASES['']['regular']['size'][0], kwargs.get('image_width')) /
-                    float(min(settings.THUMBNAIL_ALIASES['']['hd']['size'][0], kwargs.get('image_width')))
-            ),
+            'smallSizeRatio=%f' % thumbnail_scale(kwargs.pop('image_width'), 'hd', 'regular'),
             'imageResolution=%f' % kwargs.pop('pixscale'),
             'fontsBaseURL=%s' % settings.STATIC_URL + 'astrobin/fonts',
         ]

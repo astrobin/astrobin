@@ -3,6 +3,7 @@ import math
 from datetime import datetime
 
 from django.conf import settings
+from django.contrib.contenttypes.models import ContentType
 from django.core.paginator import Paginator, EmptyPage, PageNotAnInteger
 from django.template import Library
 from django.template.defaultfilters import timesince
@@ -423,6 +424,12 @@ def thumbnail_height(image, alias):
     ratio = w / float(thumb_w)
 
     return math.floor(h / ratio)
+
+
+@register.simple_tag
+def thumbnail_scale(w, from_alias, to_alias):
+    return min(settings.THUMBNAIL_ALIASES[''][to_alias]['size'][0], w) / \
+           float(min(settings.THUMBNAIL_ALIASES[''][from_alias]['size'][0], w))
 
 
 @register.filter
