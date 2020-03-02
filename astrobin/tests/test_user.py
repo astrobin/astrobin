@@ -14,8 +14,8 @@ from astrobin.models import (
     CommercialGear,
     Telescope,
     UserProfile,
-    ImageRevision
-)
+    ImageRevision,
+    DataDownloadRequest)
 from astrobin.tests.generators import Generators
 from astrobin_apps_iotd.models import *
 
@@ -1066,3 +1066,15 @@ class UserTest(TestCase):
         self.client.login(username='user', password='password')
         response = self.client.get(reverse('profile_download_data'))
         self.assertEquals(response.status_code, 200)
+
+    def test_download_data_view_quota(self):
+        Generators.premium_subscription(self.user, "AstroBin Ultimate 2020+")
+        self.client.login(username='user', password='password')
+
+        response = self.client.get(reverse('profile_download_data'))
+        self.assertFalse(response.context["exceeded_requests_quota"])
+
+        DataDownloadRequest.objects.create(user=self.user)
+
+        response = self.client.get(reverse('profile_download_data'))
+        self.assertTrue(response.context["exceeded_requests_quota"])

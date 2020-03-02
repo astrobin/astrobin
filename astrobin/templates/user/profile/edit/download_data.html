@@ -26,8 +26,8 @@
             {% else %}
                 <div class="well">
                     {% blocktrans trimmed %}
-                        You can download all your data off AstroBin, including original uploads, uncompressed source
-                        files, and image information such as description, gear used, acquisition details, and so on.
+                        You can download all your data off AstroBin, including original uploads, all revisions, and
+                        information such as description, gear used, acquisition details, and so on.
                     {% endblocktrans %}
                 </div>
 
@@ -35,12 +35,18 @@
 
                     {{ form|as_bootstrap }}
 
-                    <button
-                            class="btn btn-primary btn-block-mobile {% button_loading_class %}"
-                            type="submit">
-                        {% trans "Request download" %}
-                        {% button_loading_indicator %}
-                    </button>
+                    {% if exceeded_requests_quota %}
+                        <a href="#exceeded-requests-quota-modal" data-toggle="modal" class="btn btn-primary disabled">
+                            <i class="icon-exclamation-sign"></i> {% trans "Request download" %}
+                        </a>
+                    {% else %}
+                        <button
+                                class="btn btn-primary btn-block-mobile {% button_loading_class %}"
+                                type="submit">
+                            {% trans "Request download" %}
+                            {% button_loading_indicator %}
+                        </button>
+                    {% endif %}
                 </form>
             {% endif %} {# READONLY #}
 
@@ -94,3 +100,30 @@
 
 {% endblock %}
 
+{% block modals %}
+    {{ block.super }}
+
+    <div class="modal hide fade" id="exceeded-requests-quota-modal">
+        <div class="modal-header">
+            <a class="close" data-dismiss="modal">&times;</a>
+            <h3>{% trans "Quota exceeded" %}</h3>
+        </div>
+
+        <div class="modal-body">
+            <p>
+                {% blocktrans trimmed %}
+                    To prevent excessive usage of server resources, you can only request one data download per 24 hour
+                    period. If you believe your download is stuck, please email us at
+                    <a href="mailto:astrobin@astrobin.com">astrobin@astrobin.com</a>.
+                {% endblocktrans %}
+            </p>
+
+            <p>
+                {% blocktrans trimmed %}
+                    Please keep in mind that it could take several hours for your download to be ready, depending on the
+                    number and size of your images, and how busy the servers are at the moment.
+                {% endblocktrans %}
+            </p>
+        </div>
+    </div>
+{% endblock %}
