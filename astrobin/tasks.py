@@ -6,6 +6,7 @@ import subprocess
 import tempfile
 import zipfile
 from StringIO import StringIO
+from datetime import datetime, timedelta
 from tempfile import _TemporaryFileWrapper
 from time import sleep
 from zipfile import ZipFile
@@ -246,22 +247,14 @@ def send_inactive_account_reminder():
 def prepare_download_data_archive(request_id):
     # type: (str) -> None
 
+    logger.debug("prepare_download_data_archive: called for request %d" % request_id)
+
+    data_download_request = DataDownloadRequest.objects.get(id=request_id)
+
     try:
-
-        logger.debug("prepare_download_data_archive: called for request %d" % request_id)
-
-        data_download_request = DataDownloadRequest.objects.get(id=request_id)
-
-        logger.debug("prepare_download_data_archive: got object for request %d" % request_id)
-
         temp_zip = tempfile.NamedTemporaryFile()  # type: _TemporaryFileWrapper
-
-        logger.debug("prepare_download_data_archive: created temp zip file %s" % temp_zip.name)
-
         temp_csv = StringIO()  # type: StringIO
         archive = zipfile.ZipFile(temp_zip, 'w', zipfile.ZIP_DEFLATED, allowZip64=True)  # type: ZipFile
-
-        logger.debug("prepare_download_data_archive: created zip file")
 
         csv_writer = csv.writer(temp_csv)
         csv_writer.writerow([
@@ -302,29 +295,16 @@ def prepare_download_data_archive(request_id):
             'mouse_hover_image'
         ])
 
-        logger.debug("prepare_download_data_archive: written CSV header row")
-
         images = Image.objects_including_wip.filter(user=data_download_request.user, corrupted=False)
-
-        logger.debug("prepare_download_data_archive: user has %d images" % images.count())
-
         for image in images:
             id = image.get_id()  # type: str
 
             logger.debug("prepare_download_data_archive: image id = %s" % id)
 
             title = slugify(image.title)  # type: str
-
-            logger.debug("prepare_download_data_archive: image title = %s" % title)
-
             path = ntpath.basename(image.image_file.name)  # type: str
 
-            logger.debug("prepare_download_data_archive: image path = %s" % id)
-
             response = requests.get(image.image_file.url)  # type: Response
-
-            logger.debug("prepare_download_data_archive: response status = %d" % response.status_code)
-
             if response.status_code == 200:
                 archive.writestr("%s-%s/%s" % (id, title, path), response.content)
                 logger.debug("prepare_download_data_archive: image %s = written" % id)
@@ -336,7 +316,6 @@ def prepare_download_data_archive(request_id):
                 logger.debug("prepare_download_data_archive: image %s revision %s = iterating" % (id, label))
 
                 response = requests.get(revision.image_file.url)  # type: Response
-
                 if response.status_code == 200:
                     archive.writestr("%s-%s/revisions/%s/%s" % (id, title, label, path), response.content)
                     logger.debug("prepare_download_data_archive: image %s revision %s = written" % (id, label))
@@ -380,24 +359,24 @@ def prepare_download_data_archive(request_id):
                 image.mouse_hover_image
             ])
 
-            logger.debug("prepare_download_data_archive: image %s = CSV row added" % id)
-
         csv_value = temp_csv.getvalue()
         archive.writestr("data.csv", csv_value)
-
-        logger.debug("prepare_download_data_archive: CSV written")
-
         archive.close()
-
-        logger.debug("prepare_download_data_archive: archive closed")
 
         data_download_request.status = "READY"
         data_download_request.file_size = sum([x.file_size for x in archive.infolist()])
-
-        logger.debug("prepare_download_data_archive: file_size = %d" % data_download_request.file_size)
-
         data_download_request.zip_file.save("", File(temp_zip))
 
         logger.debug("prepare_download_data_archive: completed for request %d" % request_id)
     except Exception as e:
         logger.exception(e.message)
+        data_download_request.status = "ERROR"
+        data_download_request.save()
+
+
+@shared_task()
+def expire_download_data_requests():
+    DataDownloadRequest.objects \
+        .exclude(status = "EXPIRED") \
+        .filter(created__lt=datetime.now() - timedelta(days=7)) \
+        .update(status = "EXPIRED")
