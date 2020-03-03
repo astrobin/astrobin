@@ -40,14 +40,26 @@
         </table>
 
         <div class="form-actions">
+            {% if READONLY_MODE %}
+                <a data-toggle="modal" href="#readonly-mode-modal" class="btn btn-block-mobile disabled">
+            {% else %}
+                <a class="btn btn-block-mobile" href="{% url 'astrobin_apps_notifications.settings' %}">
+            {% endif %}
+                {% trans "Settings" %}
+            </a>
+
             {% if request.user|has_unseen_notifications %}
                 <form action="{% url 'astrobin_apps_notifications.mark_all_as_read' %}" method="post">{% csrf_token %}
-                    <a class="btn btn-block-mobile" href="{% url 'astrobin_apps_notifications.settings' %}">
-                        {% trans "Settings" %}
-                    </a>
-                    <input type="submit"
-                           class="btn btn-danger btn-block-mobile"
-                           value="{% trans "Mark all as read" %}" />
+                    {% if READONLY_MODE %}
+                        <a data-toggle="modal" href="#readonly-mode-modal" class="btn btn-block-mobile disabled">
+                            {% trans "Mark all as read" %}
+                        </a>
+                    {% else %}
+                        <input type="submit"
+                               class="btn btn-danger btn-block-mobile"
+                               value="{% trans "Mark all as read" %}" />
+                    {% endif %}
+
                     <input type="hidden" name="next" value="{{request.path}}">
                 </form>
             {% endif %}
