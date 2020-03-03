@@ -18,14 +18,24 @@
                 {% trans "View all" %}
             </a>
 
-            <a class="btn" href="{% url 'astrobin_apps_notifications.settings' %}">
-                {% trans "Settings" %}
+            {% if READONLY_MODE %}
+                <a class="btn disabled" href="#readonly-mode-modal" data-toggle="modal">
+            {% else %}
+                <a class="btn" href="{% url 'astrobin_apps_notifications.settings' %}">
+            {% endif %}
+            {% trans "Settings" %}
             </a>
 
             {% if request.user|has_unseen_notifications %}
-                <input type="submit"
-                       class="btn btn-danger"
-                       value="{% trans "Mark all as read" %}" />
+                {% if READONLY_MODE %}
+                    <a class="btn disabled" href="#readonly-mode-modal" data-toggle="modal">
+                        {% trans "Mark all as read" %}
+                    </a>
+                {% else %}
+                    <input type="submit"
+                           class="btn btn-danger"
+                           value="{% trans "Mark all as read" %}" />
+                {% endif %}
             {% endif %}
 
             <input type="hidden" name="next" value="{{ request.path }}">
