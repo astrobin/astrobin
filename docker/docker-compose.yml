@@ -12,10 +12,6 @@ services:
       - media:/media
       - letsencrypt:/etc/letsencrypt
 
-
-  memcached:
-    image: memcached:alpine
-
   rabbitmq:
     image: rabbitmq:management-alpine
     environment:
