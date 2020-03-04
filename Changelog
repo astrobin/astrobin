@@ -1,4 +1,8 @@
 2020-03-04 Salvatore Iovene <salvatore@iovene.com>
+ * v1.55.4
+ * (infra) Add support for read replica database
+
+2020-03-04 Salvatore Iovene <salvatore@iovene.com>
  * v1.55.3
  * (infra) Move debug_toolbar url inclusions to the top, fix panel 404
  * (infra) Add MEMCACHED_HOST env setting and turn off memcached docker container in production
