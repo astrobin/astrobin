@@ -17,13 +17,6 @@ services:
           - node.labels.app == true
 
 
-  memcached:
-    deploy:
-      placement:
-        constraints:
-          - node.labels.default == true
-
-
   rabbitmq:
     deploy:
       placement:
