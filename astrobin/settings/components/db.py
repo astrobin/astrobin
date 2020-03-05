@@ -30,6 +30,6 @@ else:
             'PORT': '5432',
             'CONN_MAX_AGE': 60,
         }
-
-        DATABASE_ROUTERS = ['astrobin.db.CustomRouter']
-
+        REPLICA_DATABASES = ['reader']
+        MULTIDB_PINNING_SECONDS = 2
+        DATABASE_ROUTERS = ('multidb.PinningReplicaRouter',)
