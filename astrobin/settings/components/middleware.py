@@ -1,4 +1,5 @@
 MIDDLEWARE_CLASSES = [
+    'multidb.middleware.PinningRouterMiddleware',
     'django.middleware.http.ConditionalGetMiddleware',
     'corsheaders.middleware.CorsMiddleware',
     'django.middleware.common.CommonMiddleware',
