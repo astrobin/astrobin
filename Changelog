@@ -1,4 +1,11 @@
 2020-03-05 Salvatore Iovene <salvatore@iovene.com>
+ * v1.55.7
+ * (cleanup) Remove unused fil
+ * (images) Remove useless and confusing warning message when a large file is uploaded
+ * (search) Fix indexing of solution.objects_in_field
+ * (infra) Increase time of pinning to default database
+
+2020-03-05 Salvatore Iovene <salvatore@iovene.com>
  * v1.55.6
  * (infra) Increase image cache lifetime to 120 minutes
 
