@@ -31,5 +31,5 @@ else:
             'CONN_MAX_AGE': 60,
         }
         REPLICA_DATABASES = ['reader']
-        MULTIDB_PINNING_SECONDS = 2
+        MULTIDB_PINNING_SECONDS = 15
         DATABASE_ROUTERS = ('multidb.PinningReplicaRouter',)
