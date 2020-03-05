@@ -1,4 +1,8 @@
 2020-03-04 Salvatore Iovene <salvatore@iovene.com>
+ * v1.55.5
+ * (infra) Use django-multidb-router for read replica pinning
+
+2020-03-04 Salvatore Iovene <salvatore@iovene.com>
  * v1.55.4
  * (infra) Add support for read replica database
 
