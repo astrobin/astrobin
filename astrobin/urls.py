@@ -146,7 +146,15 @@ v1_api.register(ImageOfTheDayResource())
 v1_api.register(CollectionResource())
 v1_api.register(UserProfileResource())
 
-urlpatterns = [
+urlpatterns = []
+
+if settings.DEBUG or settings.TESTING:
+    import debug_toolbar
+
+    urlpatterns += [url(r'^__debug__/', include(debug_toolbar.urls))]
+    INTERNAL_IPS = ["*"]
+
+urlpatterns += [
     ###########################################################################
     ### DJANGO VIEWS                                                        ###
     ###########################################################################
@@ -515,8 +523,3 @@ if settings.LOCAL_STATIC_STORAGE:
         'show_indexes': True
     })]
 
-if settings.DEBUG or settings.TESTING:
-    import debug_toolbar
-
-    urlpatterns += [url(r'^__debug__/', include(debug_toolbar.urls))]
-    INTERNAL_IPS = ["*"]

@@ -465,7 +465,7 @@ def subscription_subscribed(sender, **kwargs):
         'astrobin_ultimate_2020'
     ] and subscription.recurrence_unit is None:
         usersubscription = kwargs.get("usersubscription")
-        # AstorBin Premium/Lite/Ultimate are valid for 1 year
+        # AstroBin Premium/Lite/Ultimate are valid for 1 year
         usersubscription.expires = datetime.datetime.now()
         usersubscription.extend(datetime.timedelta(days=365.2425))
         usersubscription.save()

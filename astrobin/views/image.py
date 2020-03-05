@@ -1032,6 +1032,9 @@ class ImageEditBaseView(LoginRequiredMixin, ImageUpdateViewBase):
         return self.object.get_absolute_url()
 
     def dispatch(self, request, *args, **kwargs):
+        if settings.READONLY_MODE:
+            raise PermissionDenied
+
         image = self.get_object()
 
         if request.user.is_authenticated() and request.user != image.user and not request.user.is_superuser:

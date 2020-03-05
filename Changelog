@@ -1,6 +1,28 @@
-2020-02-28 Salvatore Iovene <salvatore@iovene.com>
+2020-03-15 Salvatore Iovene <salvatore@iovene.com>
  * v1.56.0
  * (general) Introduce AstroBin Ultimate
+
+2020-03-05 Salvatore Iovene <salvatore@iovene.com>
+ * v1.55.6
+ * (infra) Increase image cache lifetime to 120 minutes
+
+2020-03-04 Salvatore Iovene <salvatore@iovene.com>
+ * v1.55.5
+ * (infra) Use django-multidb-router for read replica pinning
+
+2020-03-04 Salvatore Iovene <salvatore@iovene.com>
+ * v1.55.4
+ * (infra) Add support for read replica database
+
+2020-03-04 Salvatore Iovene <salvatore@iovene.com>
+ * v1.55.3
+ * (infra) Move debug_toolbar url inclusions to the top, fix panel 404
+ * (infra) Add MEMCACHED_HOST env setting and turn off memcached docker container in production
+
+2020-03-03 Salvatore Iovene <salvatore@iovene.com>
+ * v1.55.2
+ * (notifications) Fix typo
+ * (infra) Allow READONLY_MODE to be an environment setting (and improve its coverage)
 
 2020-02-27 Salvatore Iovene <salvatore@iovene.com>
  * v1.55.1
