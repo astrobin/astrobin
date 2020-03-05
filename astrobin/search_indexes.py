@@ -566,12 +566,10 @@ class ImageIndex(CelerySearchIndex, Indexable):
         return hasattr(obj, 'iotd')
 
     def prepare_is_top_pick(self, obj):
-        return obj.iotdvote_set.count() > 0 and not hasattr(obj, 'iotd');
+        return obj.iotdvote_set.count() > 0 and not hasattr(obj, 'iotd')
 
     def prepare_objects_in_field(self, obj):
-        return obj.solution.objects_in_field.join(", ") \
-            if obj.solution and obj.solution.objects_in_field \
-            else None
+        return obj.solution.objects_in_field
 
     def prepare_countries(self, obj):
         return ' '.join([x.country for x in obj.locations.all() if x.country])
