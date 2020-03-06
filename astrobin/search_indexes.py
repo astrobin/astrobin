@@ -234,6 +234,9 @@ class UserIndex(CelerySearchIndex, Indexable):
         return "userprofile__updated"
 
     def prepare_images_6m(self, obj):
+        # Printing here just because it's the first "prepare" function.
+        print "%s: %d" % (obj.__class__.__name__, obj.pk)
+
         return Image.objects.filter(user=obj).filter(
             uploaded__gte=_6m_ago()).count()
 
@@ -508,6 +511,9 @@ class ImageIndex(CelerySearchIndex, Indexable):
         return "updated"
 
     def prepare_imaging_telescopes(self, obj):
+        # Printing here just because it's the first "prepare" function.
+        print "%s: %d" % (obj.__class__.__name__, obj.pk)
+
         return ["%s, %s" % (x.get("make"), x.get("name")) for x in obj.imaging_telescopes.all().values('make', 'name')]
 
     def prepare_guiding_telescopes(self, obj):
