@@ -1,4 +1,8 @@
 2020-03-06 Salvatore Iovene <salvatore@iovene.com>
+ * v1.55.12
+ * (search) Fix issue with search objects having UTF-8 characters not getting indexed
+
+2020-03-06 Salvatore Iovene <salvatore@iovene.com>
  * v1.55.11
  * (search) Print object pk during indexing for debugging purposes
 
