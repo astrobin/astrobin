@@ -2,6 +2,31 @@
  * v1.56.0
  * (general) Introduce AstroBin Ultimate
 
+2020-03-06 Salvatore Iovene <salvatore@iovene.com>
+ * v1.55.11
+ * (search) Print object pk during indexing for debugging purposes
+
+2020-03-06 Salvatore Iovene <salvatore@iovene.com>
+ * v1.55.10
+ * (search) Fix issue with failing to index images without a solution
+
+2020-03-05 Salvatore Iovene <salvatore@iovene.com>
+ * v1.55.9
+ * (general) Remove dead Google+ link from the footer
+ * (cleanup) Remove obsolete commented out code
+ * (profile) Exclude corrupted images from user tag
+
+2020-03-05 Salvatore Iovene <salvatore@iovene.com>
+ * v1.55.8
+ * (forum) Upgrade pybb to include fix for incorrectly using transactions
+
+2020-03-05 Salvatore Iovene <salvatore@iovene.com>
+ * v1.55.7
+ * (cleanup) Remove unused fil
+ * (images) Remove useless and confusing warning message when a large file is uploaded
+ * (search) Fix indexing of solution.objects_in_field
+ * (infra) Increase time of pinning to default database
+
 2020-03-05 Salvatore Iovene <salvatore@iovene.com>
  * v1.55.6
  * (infra) Increase image cache lifetime to 120 minutes
