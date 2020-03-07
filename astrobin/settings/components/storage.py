@@ -3,9 +3,9 @@ import os
 local_path = lambda path: os.path.join(os.path.dirname(__file__), path)
 
 
-AWS_S3_ENABLED = os.environ.get('AWS_S3_ENABLED', 'false') == "true"
+AWS_S3_ENABLED = os.environ.get('AWS_S3_ENABLED', 'false').strip() == "true"
 if AWS_S3_ENABLED:
-    AWS_S3_CUSTOM_DOMAIN = os.environ.get('AWS_S3_CUSTOM_DOMAIN', 'cdn.astrobin.com')
+    AWS_S3_CUSTOM_DOMAIN = os.environ.get('AWS_S3_CUSTOM_DOMAIN', 'cdn.astrobin.com').strip()
     MEDIA_ROOT = '/'
     MEDIA_URL = 'https://%s/' % AWS_S3_CUSTOM_DOMAIN
 
@@ -13,9 +13,9 @@ if AWS_S3_ENABLED:
     STATIC_URL = MEDIA_URL + 'static/'
 
     S3_URL = 's3.amazonaws.com'
-    AWS_ACCESS_KEY_ID = os.environ.get('AWS_ACCESS_KEY_ID', 'invalid')
-    AWS_SECRET_ACCESS_KEY = os.environ.get('AWS_SECRET_ACCESS_KEY', 'invalid')
-    AWS_STORAGE_BUCKET_NAME = os.environ.get('AWS_STORAGE_BUCKET_NAME', 'cdn.astrobin.com')
+    AWS_ACCESS_KEY_ID = os.environ.get('AWS_ACCESS_KEY_ID', 'invalid').strip()
+    AWS_SECRET_ACCESS_KEY = os.environ.get('AWS_SECRET_ACCESS_KEY', 'invalid').strip()
+    AWS_STORAGE_BUCKET_NAME = os.environ.get('AWS_STORAGE_BUCKET_NAME', 'cdn.astrobin.com').strip()
     AWS_STORAGE_BUCKET_CNAME = AWS_STORAGE_BUCKET_NAME
     AWS_S3_SECURE_URLS = True
     AWS_QUERYSTRING_AUTH = False
@@ -40,7 +40,7 @@ IMAGE_CACHE_DIRECTORY = '/media/imagecache/'
 UPLOADS_DIRECTORY = MEDIA_ROOT
 ADMIN_MEDIA_PREFIX = STATIC_URL + 'admin/'
 
-LOCAL_STATIC_STORAGE = os.environ.get('LOCAL_STATIC_STORAGE', 'true') == "true"
+LOCAL_STATIC_STORAGE = os.environ.get('LOCAL_STATIC_STORAGE', 'true').strip() == "true"
 if LOCAL_STATIC_STORAGE:
     STATIC_ROOT = STATIC_URL = '/media/static/'
     STATICFILES_STORAGE = 'astrobin.s3utils.StaticRootLocalStorage'
