@@ -34,24 +34,26 @@
                         <div class="js">
                             <form class="form-horizontal" name="flickr_form" action="">{% csrf_token %}
                                 {% if flickr_sets %}
-                                <p id="flickr_sets">
-                                    <label for="id_flickr_sets">{% trans "Which set" %}:</label>
-                                    <select id="id_flickr_sets">
-                                    {% for title, id in flickr_sets.items %}
-                                        <option value="{{id}}">{{title}}</option>
-                                    {% endfor %}
-                                    </select>
-                                </p>
-                                <p id="flickr_photos" class="hidden"></p>
-                                <p id="flickr_progress" class="hidden"></p>
-                                <p id="flickr_progress_message" class="hidden"></p>
+                                    <p id="flickr_sets">
+                                        <label for="id_flickr_sets">{% trans "Which set" %}:</label>
+                                        <select id="id_flickr_sets">
+                                            {% for title, id in flickr_sets.items %}
+                                                <option value="{{ id }}">{{ title }}</option>
+                                            {% endfor %}
+                                        </select>
+                                    </p>
+                                    <p id="flickr_photos" class="hidden"></p>
+                                    <p id="flickr_progress" class="hidden"></p>
+                                    <p id="flickr_progress_message" class="hidden"></p>
                                 {% endif %}
 
                                 <div class="form-actions">
                                     {% if flickr_sets %}
-                                    <input class="btn btn-primary btn-flickr" type="submit" value="{% trans "Import photos" %} &rarr;"/>
+                                        <input class="btn btn-primary btn-flickr" type="submit"
+                                               value="{% trans "Import photos" %} &rarr;" />
                                     {% else %}
-                                    <input class="btn btn-primary btn-flickr" type="submit" value="{% trans "Authenticate with Flickr" %} &rarr;"/>
+                                        <input class="btn btn-primary btn-flickr" type="submit"
+                                               value="{% trans "Authenticate with Flickr" %} &rarr;" />
                                     {% endif %}
                                 </div>
                             </form>
@@ -81,94 +83,105 @@
 {% endblock %}
 
 {% block extra_js %}
-<script language="javascript">
-$(function() {
-    var selected_photos = [];
-    var phase = 1;
-    var refresh_id;
-    var username = "{{request.user.username}}";
+    <script language="javascript">
+        $(function () {
+            var selected_photos = [];
+            var phase = 1;
+            var refresh_id;
+            var username = "{{request.user.username}}";
 
-    $('.js').css('display', 'block');
+            $('.js').css('display', 'block');
 
-    $('.btn-flickr').click(function() {
-        if (phase == 1) { // Time to ask for the photos in the set.
-            $.ajax({
-                    type: 'POST',
-                    url: '/profile/edit/flickr/',
-                    dataType: 'json',
-                    data: ({'id_flickr_set': $('select option:selected').val()}),
-                    timeout: 5000,
-                    success: function(data) {
-                        var photos = data.flickr_photos;
-                        $('p#flickr_photos').removeClass('hidden');
-                        $('p#flickr_photos').html(function() {
+            $('.btn-flickr').click(function () {
+                if (phase == 1) { // Time to ask for the photos in the set.
+                    $.ajax({
+                        type: 'POST',
+                        url: '/profile/edit/flickr/',
+                        dataType: 'json',
+                        data: ({'id_flickr_set': $('select option:selected').val()}),
+                        timeout: 5000,
+                        success: function (data) {
+                            var photos = data.flickr_photos;
+                            $('p#flickr_photos').removeClass('hidden');
+                            $('p#flickr_photos').html(function () {
                                 var ret = '\
                                     <h3>{% trans "Click to select the photos you want to import" %}</h3> \
                                     <ul class="select-links" style="margin-left: 0; margin-bottom: 10px;"> \
-                                        <li style="display: inline-block"><a class="btn btn-mini" id="all" href="#">{% trans "Select all" %}</a></li> \
-                                        <li style="display: inline-block"><a class="btn btn-mini" id="none" href="#">{% trans "Select none" %}</a></li> \
+                                        <li style="display: inline-block"><button class="btn btn-mini" id="all">{% trans "Select all" %}</button></li> \
+                                        <li style="display: inline-block"><button class="btn btn-mini" id="none">{% trans "Select none" %}</button></li> \
                                     </ul>';
-                                $.each(photos, function(id, url) {
+                                $.each(photos, function (id, url) {
                                     ret += '\
                                         <div style="float:left; width: 77px; height: 77px;"> \
-                                            <a href=""> \
-                                                <img id="' + id + '" class="flickr-photo-to-import" src="' + url + '" width=75 height=75 /> \
-                                            </a> \
+                                            <img id="' + id + '" class="flickr-photo-to-import" src="' + url + '" width=75 height=75 /> \
                                         </div>'
                                 });
                                 return ret +
-                                       '<div style="clear:both"></div>';
-                        });
-                        $('.btn').val('{% trans "Import selected photos" %} \u2192');
-                        $('p#flickr_sets').hide();
-                        phase++;
-                    }
-            });
-        } else if (phase == 2) { // Time to communicate which photos have been selected.
-            $('p#flickr_progress').removeClass('hidden');
-            $('p#flickr_progress').html('<img src="{% static 'astrobin/images/loading-bar.gif' %}" alt="Loading..."/>');
-            $('p#flickr_progress_message').removeClass('hidden');
-            $('.btn-flickr').hide();
-            $('p#flickr_progress_message').html("<strong>{% trans "Importing images." %}</strong> {% trans "Do not navigate away from this window: this might take a while!" %}");
+                                    '<div style="clear:both"></div>';
+                            });
+                            $('.btn').val('{% trans "Import selected photos" %} \u2192');
+                            $('p#flickr_sets').hide();
+                            phase++;
+                        }
+                    });
+                } else if (phase == 2) { // Time to communicate which photos have been selected.
+                    $('p#flickr_progress').removeClass('hidden');
+                    $('p#flickr_progress').html('<img src="{% static 'astrobin/images/loading-bar.gif' %}" alt="Loading..."/>');
+                    $('p#flickr_progress_message').removeClass('hidden');
+                    $('.btn-flickr').hide();
+                    $('p#flickr_progress_message').html("<strong>{% trans "Importing images." %}</strong> {% trans "Do not navigate away from this window: this might take a while!" %}");
 
-            $.ajax({
-                    type: 'POST',
-                    url: '/profile/edit/flickr/',
-                    dataType: 'json',
-                    data: ({'flickr_selected_photos': selected_photos}),
-                    timeout: 60000,
-                    success: function(data) {
-                        $('p#flickr_progress_message').hide();
-                        $('p#flickr_progress').html("{% blocktrans %}Done! Go to <a href=\"/users/" + username + "/?staging&sub=uploaded\">your staging gallery</a> to see the new pictures (and keep an eye on your notifications)!{% endblocktrans %}");
-                    }
+                    $.ajax({
+                        type: 'POST',
+                        url: '/profile/edit/flickr/',
+                        dataType: 'json',
+                        data: ({'flickr_selected_photos': selected_photos}),
+                        timeout: 60000,
+                        success: function (data) {
+                            $('p#flickr_progress_message').hide();
+                            $('p#flickr_progress').html("{% blocktrans %}Done! Go to <a href=\"/users/" + username +
+                                "/?staging&sub=uploaded\">your staging gallery</a> to see the new pictures (and keep an eye on your notifications)!{% endblocktrans %}");
+                        }
+                    });
+                }
+                return false;
             });
-        }
-        return false;
-    });
-    $('img.flickr-photo-to-import').live('click', function() {
-            $(this).removeClass('flickr-photo-to-import');
-            $(this).addClass('flickr-photo-to-import-selected');
-            selected_photos.push($(this).attr('id'));
-    });
-    $('img.flickr-photo-to-import-selected').live('click', function() {
-            $(this).removeClass('flickr-photo-to-import-selected');
-            $(this).addClass('flickr-photo-to-import');
-            selected_photos.splice(selected_photos.indexOf($(this).attr('id')), 1);
-    });
-    $('a#all').live('click', function() {
-            $('img.flickr-photo-to-import').addClass('flickr-photo-to-import-selected');
-            $('img.flickr-photo-to-import').removeClass('flickr-photo-to-import');
-            selected_photos = [];
-            $('img.flickr-photo-to-import-selected').each(function() {
+            $('img.flickr-photo-to-import').live('click', function (e) {
+                e.preventDefault();
+                e.stopPropagation();
+                $(this).removeClass('flickr-photo-to-import');
+                $(this).addClass('flickr-photo-to-import-selected');
+                selected_photos.push($(this).attr('id'));
+                return false;
+            });
+            $('img.flickr-photo-to-import-selected').live('click', function (e) {
+                e.preventDefault();
+                e.stopPropagation();
+                $(this).removeClass('flickr-photo-to-import-selected');
+                $(this).addClass('flickr-photo-to-import');
+                selected_photos.splice(selected_photos.indexOf($(this).attr('id')), 1);
+                return false;
+            });
+            $('#all').live('click', function (e) {
+                e.preventDefault();
+                e.stopPropagation();
+                $('img.flickr-photo-to-import').addClass('flickr-photo-to-import-selected');
+                $('img.flickr-photo-to-import').removeClass('flickr-photo-to-import');
+                selected_photos = [];
+                $('img.flickr-photo-to-import-selected').each(function () {
                     selected_photos.push($(this).attr('id'));
+                });
+                return false;
             });
-    });
-    $('a#none').live('click', function() {
-            $('img.flickr-photo-to-import-selected').addClass('flickr-photo-to-import');
-            $('img.flickr-photo-to-import-selected').removeClass('flickr-photo-to-import-selected');
-            selected_photos = [];
-    });
-});
-</script>
+            $('#none').live('click', function (e) {
+                e.preventDefault();
+                e.stopPropagation();
+                $('img.flickr-photo-to-import-selected').addClass('flickr-photo-to-import');
+                $('img.flickr-photo-to-import-selected').removeClass('flickr-photo-to-import-selected');
+                selected_photos = [];
+                return false;
+            });
+        });
+    </script>
 {% endblock %}
 
