@@ -11,32 +11,32 @@ DEFAULT_CHARSET = 'utf-8'
 TIME_ZONE = 'Europe/London'
 
 # Make this unique, and don't share it with anybody.
-SECRET_KEY = os.environ.get('DJANGO_SECRET_KEY', 'default.key')
+SECRET_KEY = os.environ.get('DJANGO_SECRET_KEY', 'default.key').strip()
 SITE_ID = 1
 
 
 TESTING = len(sys.argv) > 1 and sys.argv[1] == 'test'
-DEBUG = os.environ.get('DEBUG', 'true') == 'true'
+DEBUG = os.environ.get('DEBUG', 'true').strip() == 'true'
 INTERNAL_IPS = ['127.0.0.1', '172.18.0.1'] # localhost and docker gateway
 
 MAINTENANCE_MODE = False
 MAINTENANCE_LOCKFILE_PATH = 'maintenance-lock.file'
 
-READONLY_MODE = os.environ.get("READONLY_MODE", 'false') == 'true'
+READONLY_MODE = os.environ.get("READONLY_MODE", 'false').strip() == 'true'
 LONGPOLL_ENABLED = False
 
 ALLOWED_HOSTS = ['*']
 
-ADS_ENABLED = os.environ.get('ADS_ENABLED', 'false') == 'true'
-DONATIONS_ENABLED = os.environ.get('DONATIONS_ENABLED', 'false') == 'true'
-PREMIUM_ENABLED = os.environ.get('PREMIUM_ENABLED', 'true') == 'true'
+ADS_ENABLED = os.environ.get('ADS_ENABLED', 'false').strip() == 'true'
+DONATIONS_ENABLED = os.environ.get('DONATIONS_ENABLED', 'false').strip() == 'true'
+PREMIUM_ENABLED = os.environ.get('PREMIUM_ENABLED', 'true').strip() == 'true'
 
-BASE_URL = os.environ.get('BASE_URL', 'http://localhost')
-SHORT_BASE_URL = os.environ.get('SHORT_BASE_URL', BASE_URL)
+BASE_URL = os.environ.get('BASE_URL', 'http://localhost').strip()
+SHORT_BASE_URL = os.environ.get('SHORT_BASE_URL', BASE_URL).strip()
 BASE_PATH = os.path.dirname(__file__)
 
-MIN_INDEX_TO_LIKE = float(os.environ.get('MIN_INDEX_TO_LIKE', '1.00'))
-GOOGLE_ANALYTICS_ID = os.environ.get('GOOGLE_ANALYTICS_ID', 'invalid')
+MIN_INDEX_TO_LIKE = float(os.environ.get('MIN_INDEX_TO_LIKE', '1.00').strip())
+GOOGLE_ANALYTICS_ID = os.environ.get('GOOGLE_ANALYTICS_ID', 'invalid').strip()
 
 ROOT_URLCONF = 'astrobin.urls'
 
