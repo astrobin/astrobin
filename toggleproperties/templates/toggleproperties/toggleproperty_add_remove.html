@@ -1,0 +1,88 @@
+<span class="toggleproperty-add-remove property-{{ property_type }}">
+    <button class="btn btn-primary{% if is_toggled %} active{% endif %}"
+            data-toggle="button"
+            id="toggleproperty-{{ property_type }}-{{ content_type_id }}-{{ object_id }}"
+            {% if has_tooltip %}
+            rel="tooltip"
+            {% endif %}
+            title="{% if is_toggled %}{{ property_tooltip_on }}{% else %}{{ property_tooltip_off }}{% endif %}"
+    >
+
+        {% if property_icon %}
+            <i class="{{ property_icon }}"></i>
+        {% endif %}
+
+        {% if property_label_on or property_label_off %}
+            <span class="toggleproperties-label">
+            {% if is_toggled %}
+                {{ property_label_on }}
+            {% else %}
+                {{ property_label_off }}
+            {% endif %}
+        </span>
+        {% endif %}
+
+        {% if show_count %}
+            <span id="count-{{ property_type }}-{{ content_type_id }}-{{ object_id }}"
+                  class="badge badge-important">{{ count }}</span>
+        {% endif %}
+    </button>
+</span>
+
+<script type="text/javascript">
+    $(document).ready(function () {
+        $("#toggleproperty-{{ property_type }}-{{ content_type_id }}-{{ object_id }}").click(function () {
+            {% if request.user and request.user.is_authenticated %}
+                $("#toggleproperty-{{ property_type }}-{{ content_type_id }}-{{ object_id }} .toggleproperties-label").text("...");
+                if ($(this).hasClass("active")) {
+                    $.ajax({
+                        url: "{% url 'toggleproperty_ajax_remove' %}",
+                        type: "POST",
+                        data: {
+                            property_type: "{{ property_type }}",
+                            content_type_id: {{ content_type_id }},
+                            object_id: {{ object_id }}
+                        },
+                        timeout: 10000,
+                        dataType: 'json',
+                        success: function (data) {
+                            $("#toggleproperty-{{ property_type }}-{{ content_type_id }}-{{ object_id }}")
+                                .tooltip('hide')
+                                .attr('data-original-title', "{{ property_tooltip_off }}")
+                                .tooltip('fixTitle')
+                                .tooltip('show');
+                            $("#toggleproperty-{{ property_type }}-{{ content_type_id }}-{{ object_id }} .toggleproperties-label").text("{{ property_label_off }}");
+                            if (data['count'] !== undefined)
+                                $('#count-{{ property_type }}-{{ content_type_id }}-{{ object_id }}').text(data.count);
+                        }
+                    });
+                } else {
+                    $.ajax({
+                        url: "{% url 'toggleproperty_ajax_add' %}",
+                        type: "POST",
+                        data: {
+                            property_type: "{{ property_type }}",
+                            content_type_id: {{ content_type_id }},
+                            object_id: {{ object_id }}
+                        },
+                        timeout: 10000,
+                        dataType: 'json',
+                        success: function (data) {
+                            $("#toggleproperty-{{ property_type }}-{{ content_type_id }}-{{ object_id }}")
+                                .tooltip('hide')
+                                .attr('data-original-title', "{{ property_tooltip_on }}")
+                                .tooltip('fixTitle')
+                                .tooltip('show');
+                            $("#toggleproperty-{{ property_type }}-{{ content_type_id }}-{{ object_id }} .toggleproperties-label").text("{{ property_label_on }}");
+                            if (data['count'] !== undefined)
+                                $('#count-{{ property_type }}-{{ content_type_id }}-{{ object_id }}').text(data.count);
+                        }
+                    });
+                }
+            {% else %} {# Anonymous user #}
+                window.location = '/accounts/login/?next={{request.path}}'
+            {% endif %}
+        });
+    });
+</script>
+
