@@ -92,7 +92,7 @@ def astrobin_username(user, **kwargs):
 @register.inclusion_tag('astrobin_apps_users/inclusion_tags/astrobin_user.html', takes_context = True)
 def astrobin_user(context, user, **kwargs):
     user_ct = ContentType.objects.get_for_model(User)
-    images = Image.objects.filter(user = user).count()
+    images = Image.objects.filter(user = user).exclude(corrupted=True).count()
     followers = ToggleProperty.objects.toggleproperties_for_object("follow", user).count()
     following = ToggleProperty.objects.filter(
         property_type = "follow",

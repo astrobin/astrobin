@@ -1,7 +1,9 @@
+import os
+
 CACHES = {
     'default': {
         'BACKEND': 'django.core.cache.backends.memcached.MemcachedCache',
-        'LOCATION': 'memcached:11211',
+        'LOCATION': '%s:11211' % os.environ.get('MEMCACHED_HOST', 'memcached').strip(),
     },
 }
 

@@ -29,24 +29,24 @@
     </div>
     {% endif %}
 
-    {% if requested_user == request.user and has_corrupted_images %}
-        <div class="alert alert-warning">
+    {% if requested_user == request.user and has_corrupted_images and not request.COOKIES.astrobin_corrupted_images_banner_seen %}
+        <div class="alert alert-warning corrupted-images-banner">
+            <button class="close" data-dismiss="alert">&times;</button>
+
             <h4>
                 <i class="icon icon-warning-sign"></i> {% trans "Oh no!" %}
             </h4>
 
             <p>
-                {% blocktrans with "forum/c/astrobin/annoucements/currently-investigating-a-problem-with-availability-of-thumbnails/" as data_corruption_url %}
+                {% blocktrans with "forum/c/astrobin/annoucements/official-statement-and-post-mortem-about-the-data-loss/" as data_corruption_url %}
                     We are very, very sorry, but it appears that some of your images suffered a catastrophic data
                     corruption, and cannot be retrieved. Please read more <a href="{{ data_corruption_url }}">here</a>.
                 {% endblocktrans %}
             </p>
             <p>
                 {% blocktrans %}
-                    Try clicking on the "sad face" thumbnails. If you get to your image's page, please try to use the
-                    Actions menu and click on "Flag malfunctioning thumbnails". In some cases it might work. If you get
-                    redirected to the "Edit basic information" form, you can replace the missing file with a copy that
-                    we hope you still have.
+                    Please click on the thumbnails stuck with the hourglass icon to upload the image files that you
+                    still have on your computer or backups to their pages again.
                 {% endblocktrans %}
             </p>
 
@@ -61,6 +61,12 @@
                 {% blocktrans %}
                     AstroBin would like to offer you its sincerest apologies. :(
                 {% endblocktrans %}
+            </p>
+
+            <p>
+                <button class="btn btn-primary dont-show-again">
+                    {% trans "Okay, don't show this again" %}
+                </button>
             </p>
         </div>
     {% endif %}

@@ -9,7 +9,7 @@ BeautifulSoup==3.2.1
 beautifulsoup4==4.6.0
 beautifulsoupselect==0.2
 billiard==3.5.0.3
-bleach==2.1.3
+bleach==3.1.1
 boto==2.48.0
 ccy==0.7.0
 celery==4.1.0
@@ -18,7 +18,7 @@ certifi==2017.11.5
 cffi==1.11.4
 chardet==3.0.4
 click==6.7
-codecov==2.0.15
+codecov==2.0.16
 Coffin==2.0.1
 confusable-homoglyphs==3.0.0
 coverage==4.4.2
@@ -65,6 +65,7 @@ django-memcached==0.1.2
 django-model-utils==3.0.0
 django-modeltranslation==0.12.1
 django-mptt==0.8.7
+django-multidb-router==0.9
 -e git+https://github.com/astrobin/django-notification.git@094c7082#egg=django_notification
 django-paypal==0.5.0
 -e git+https://github.com/astrobin/django-persistent-messages.git@624d4d34fb745b96a30e69c02940efb651c84baf#egg=django_persistent_messages
@@ -140,7 +141,7 @@ pem==17.1.0
 Pillow==4.1.1
 ply==3.10
 psycopg2==2.7.1
--e git+https://github.com/siovene/pybbm.git@a6d1a3e1df7208308191927c23c6a3ad71018547#egg=pybbm
+-e git+https://github.com/siovene/pybbm.git@ddf640fc#egg=pybbm
 pycodestyle==2.3.1
 pycparser==2.18
 pyflakes==1.5.0
@@ -162,6 +163,7 @@ PyYAML==5.1
 rcssmin==1.0.6
 redis==2.10.6
 requests==2.20.1
+requests_aws4auth==0.9
 requests-oauthlib==0.8.0
 requests-toolbelt==0.8.0
 rjsmin==1.0.12

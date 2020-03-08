@@ -234,6 +234,9 @@ class UserIndex(CelerySearchIndex, Indexable):
         return "userprofile__updated"
 
     def prepare_images_6m(self, obj):
+        # Printing here just because it's the first "prepare" function.
+        print "%s: %d" % (obj.__class__.__name__, obj.pk)
+
         return Image.objects.filter(user=obj).filter(
             uploaded__gte=_6m_ago()).count()
 
@@ -508,6 +511,9 @@ class ImageIndex(CelerySearchIndex, Indexable):
         return "updated"
 
     def prepare_imaging_telescopes(self, obj):
+        # Printing here just because it's the first "prepare" function.
+        print "%s: %d" % (obj.__class__.__name__, obj.pk)
+
         return ["%s, %s" % (x.get("make"), x.get("name")) for x in obj.imaging_telescopes.all().values('make', 'name')]
 
     def prepare_guiding_telescopes(self, obj):
@@ -566,12 +572,10 @@ class ImageIndex(CelerySearchIndex, Indexable):
         return hasattr(obj, 'iotd')
 
     def prepare_is_top_pick(self, obj):
-        return obj.iotdvote_set.count() > 0 and not hasattr(obj, 'iotd');
+        return obj.iotdvote_set.count() > 0 and not hasattr(obj, 'iotd')
 
     def prepare_objects_in_field(self, obj):
-        return obj.solution.objects_in_field.join(", ") \
-            if obj.solution and obj.solution.objects_in_field \
-            else None
+        return obj.solution.objects_in_field if obj.solution else None
 
     def prepare_countries(self, obj):
         return ' '.join([x.country for x in obj.locations.all() if x.country])

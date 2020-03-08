@@ -1,3 +1,88 @@
+2020-03-07 Salvatore Iovene <salvatore@iovene.com>
+ * v1.55.14
+ * (flickr) Perform additional fixes pertaining to unwanted page redirects
+
+2020-03-07 Salvatore Iovene <salvatore@iovene.com>
+ * v1.55.13
+ * (infra) Strip environment variables
+ * (profile) Fix homepage redirect when clicking on Flickr image to import
+
+2020-03-06 Salvatore Iovene <salvatore@iovene.com>
+ * v1.55.12
+ * (search) Fix issue with search objects having UTF-8 characters not getting indexed
+
+2020-03-06 Salvatore Iovene <salvatore@iovene.com>
+ * v1.55.11
+ * (search) Print object pk during indexing for debugging purposes
+
+2020-03-06 Salvatore Iovene <salvatore@iovene.com>
+ * v1.55.10
+ * (search) Fix issue with failing to index images without a solution
+
+2020-03-05 Salvatore Iovene <salvatore@iovene.com>
+ * v1.55.9
+ * (general) Remove dead Google+ link from the footer
+ * (cleanup) Remove obsolete commented out code
+ * (profile) Exclude corrupted images from user tag
+
+2020-03-05 Salvatore Iovene <salvatore@iovene.com>
+ * v1.55.8
+ * (forum) Upgrade pybb to include fix for incorrectly using transactions
+
+2020-03-05 Salvatore Iovene <salvatore@iovene.com>
+ * v1.55.7
+ * (cleanup) Remove unused fil
+ * (images) Remove useless and confusing warning message when a large file is uploaded
+ * (search) Fix indexing of solution.objects_in_field
+ * (infra) Increase time of pinning to default database
+
+2020-03-05 Salvatore Iovene <salvatore@iovene.com>
+ * v1.55.6
+ * (infra) Increase image cache lifetime to 120 minutes
+
+2020-03-04 Salvatore Iovene <salvatore@iovene.com>
+ * v1.55.5
+ * (infra) Use django-multidb-router for read replica pinning
+
+2020-03-04 Salvatore Iovene <salvatore@iovene.com>
+ * v1.55.4
+ * (infra) Add support for read replica database
+
+2020-03-04 Salvatore Iovene <salvatore@iovene.com>
+ * v1.55.3
+ * (infra) Move debug_toolbar url inclusions to the top, fix panel 404
+ * (infra) Add MEMCACHED_HOST env setting and turn off memcached docker container in production
+
+2020-03-03 Salvatore Iovene <salvatore@iovene.com>
+ * v1.55.2
+ * (notifications) Fix typo
+ * (infra) Allow READONLY_MODE to be an environment setting (and improve its coverage)
+
+2020-02-27 Salvatore Iovene <salvatore@iovene.com>
+ * v1.55.1
+ * (infra) Reduce image cache to 30 minutes
+
+2020-02-27 Salvatore Iovene <salvatore@iovene.com>
+ * v1.55.0
+ * (infra) Use self-signed certificate for nginx: production SSL is always coming externally
+ * (infra) Add support for using AWS Elasticsearch
+ * (search) Limit search index of forum posts to 10000 characters
+ * (infra) Fix the custom 502 page
+ * (infra) Make postgres/elasticsearch only part of the build configuration
+ * (infra) Update image cache lifetime to 2h
+
+2020-02-23 Salvatore Iovene <salvatore@iovene.com>
+ * v1.54.6
+ * (images) Allow deleting original revision while on subsequent revision
+ * (images) Fix corner cases when replacing image/revision, relating to file w/h and cropping
+ * (images) Fix rendering of image cropping interface on revisions
+ * (infra) Expose debug port from docker container
+ * (plate-solving) Add script to regenerate annotations that were lost
+ * (plate-solving) Fix issue that caused annotation of wrong revision to be displayed
+ * (premium) Add script to upgrade Free/Lite users affected by data loss to Premium
+ * (premium) Fix display of expiration date in case of multiple subscriptions
+ * (profile) Fix hiding corrupted images beyond the first one
+
 2020-02-20 Salvatore Iovene <salvatore@iovene.com>
  * v1.54.5
  * (images) Improve success message upon deleting original image

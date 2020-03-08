@@ -510,9 +510,6 @@ def image_upload_process(request):
                     "You uploaded an Indexed PNG file. AstroBin will need to lower the color count to 256 in order to work with it."))
         except:
             return upload_error()
-    else:
-        messages.warning(request, _(
-            "You uploaded a pretty large file. For that reason, AstroBin could not verify that it's a valid image."))
 
     profile = request.user.userprofile
     image = form.save(commit=False)
@@ -1935,9 +1932,6 @@ def image_revision_upload_process(request):
                     "You uploaded an Indexed PNG file. AstroBin will need to lower the color count to 256 in order to work with it."))
         except:
             return upload_error(image)
-    else:
-        messages.warning(request, _(
-            "You uploaded a pretty large file. For that reason, AstroBin could not verify that it's a valid image."))
 
     revisions = ImageRevision.all_objects.filter(image=image).order_by('id')
     highest_label = 'A'

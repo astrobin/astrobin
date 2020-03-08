@@ -154,7 +154,15 @@ v1_api.register(ImageOfTheDayResource())
 v1_api.register(CollectionResource())
 v1_api.register(UserProfileResource())
 
-urlpatterns = [
+urlpatterns = []
+
+if settings.DEBUG or settings.TESTING:
+    import debug_toolbar
+
+    urlpatterns += [url(r'^__debug__/', include(debug_toolbar.urls))]
+    INTERNAL_IPS = ["*"]
+
+urlpatterns += [
     ###########################################################################
     ### DJANGO VIEWS                                                        ###
     ###########################################################################
@@ -503,6 +511,12 @@ urlpatterns = [
         name='image_rawthumb'),
     url(r'^(?P<id>\w+)/(?:(?P<r>\w+)/)?thumb/(?P<alias>\w+)/$', image_views.ImageThumbView.as_view(),
         name='image_thumb'),
+
+    ###########################################################################
+    ### JSON API VIEWS                                                      ###
+    ###########################################################################
+
+    url(r'^json-api/', include('astrobin_apps_json_api.urls')),
 ]
 
 urlpatterns += [url(r'^silk/', include('silk.urls', namespace='silk'))]
@@ -521,8 +535,3 @@ if (settings.DEBUG or settings.TESTING) and settings.LOCAL_STATIC_STORAGE:
         'show_indexes': True
     })]
 
-if settings.DEBUG or settings.TESTING:
-    import debug_toolbar
-
-    urlpatterns += [url(r'^__debug__/', include(debug_toolbar.urls))]
-    INTERNAL_IPS = ["*"]

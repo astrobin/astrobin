@@ -9,6 +9,28 @@ services:
       dockerfile: docker/nginx.${NGINX_MODE}.dockerfile
 
 
+  elasticsearch:
+    image: elasticsearch:2.4.6-alpine
+    volumes:
+      - elasticsearch-data:/usr/share/elasticsearch/data
+
+
+  memcached:
+    image: memcached:alpine
+
+
+  postgres:
+    image: postgres:alpine
+    environment:
+      - POSTGRES_DB=astrobin
+      - POSTGRES_USER=astrobin
+      - POSTGRES_PASSWORD=astrobin
+    volumes:
+      - postgres-data:/var/lib/postgresql/data
+    ports:
+      - "5432:5432"
+
+
   astrobin:
     build:
       context: ../
@@ -22,31 +44,42 @@ services:
       - ..:/code
     links:
       - debug_email
+      - postgres
+      - elasticsearch
 
 
   celery_default:
     build:
       context: ../
       dockerfile: docker/astrobin.dockerfile
+    links:
+      - postgres
+      - elasticsearch
 
 
   celery_thumbnails:
     build:
       context: ../
       dockerfile: docker/astrobin.dockerfile
-
+    links:
+      - postgres
+      - elasticsearch
 
   celery_haystack:
     build:
       context: ../
       dockerfile: docker/astrobin.dockerfile
-
+    links:
+      - postgres
+      - elasticsearch
 
   beat:
     build:
       context: ../
       dockerfile: docker/astrobin.dockerfile
-
+    links:
+      - postgres
+      - elasticsearch
 
   debug_email:
     image: python:2.7-alpine
