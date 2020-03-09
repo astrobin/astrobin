@@ -576,10 +576,14 @@ class ImageDetailView(ImageDetailViewBase):
             if nav_ctx_extra is None:
                 nav_ctx_extra = self.request.session.get('nav_ctx_extra')
 
-            # Always only lookup public images!
+            # Always only lookup public, non corrupted images!
             if nav_ctx == 'user':
-                image_next = Image.objects.filter(user=image.user, pk__gt=image.pk).order_by('pk')[0:1]
-                image_prev = Image.objects.filter(user=image.user, pk__lt=image.pk).order_by('-pk')[0:1]
+                image_next = Image.objects \
+                                 .exclude(corrupted=True) \
+                                 .filter(user=image.user, pk__gt=image.pk).order_by('pk')[0:1]
+                image_prev = Image.objects \
+                                 .exclude(corrupted=True) \
+                                 .filter(user=image.user, pk__lt=image.pk).order_by('-pk')[0:1]
             elif nav_ctx == 'collection':
                 try:
                     try:
@@ -590,6 +594,7 @@ class ImageDetailView(ImageDetailViewBase):
 
                     if collection.order_by_tag:
                         collection_images = Image.objects \
+                            .exclude(corrupted=True) \
                             .filter(user=image.user, collections=collection, keyvaluetags__key=collection.order_by_tag) \
                             .order_by('keyvaluetags__value')
 
@@ -606,10 +611,14 @@ class ImageDetailView(ImageDetailViewBase):
                             if current_index > 0 \
                             else None
                     else:
-                        image_next = Image.objects.filter(user=image.user, collections=collection,
-                                                          pk__gt=image.pk).order_by('pk')[0:1]
-                        image_prev = Image.objects.filter(user=image.user, collections=collection,
-                                                          pk__lt=image.pk).order_by('-pk')[0:1]
+                        image_next = Image.objects \
+                                         .exclude(corrupted=True) \
+                                         .filter(user=image.user, collections=collection,
+                                                 pk__gt=image.pk).order_by('pk')[0:1]
+                        image_prev = Image.objects \
+                                         .exclude(corrupted=True) \
+                                         .filter(user=image.user, collections=collection,
+                                                 pk__lt=image.pk).order_by('-pk')[0:1]
                 except Collection.DoesNotExist:
                     # image_prev and image_next will remain None
                     pass
@@ -617,21 +626,29 @@ class ImageDetailView(ImageDetailViewBase):
                 try:
                     group = image.part_of_group_set.get(pk=nav_ctx_extra)
                     if group.public:
-                        image_next = Image.objects.filter(part_of_group_set=group, pk__gt=image.pk).order_by('pk')[0:1]
-                        image_prev = Image.objects.filter(part_of_group_set=group, pk__lt=image.pk).order_by('-pk')[0:1]
+                        image_next = Image.objects \
+                                         .exclude(corrupted=True) \
+                                         .filter(part_of_group_set=group, pk__gt=image.pk).order_by('pk')[0:1]
+                        image_prev = Image.objects \
+                                         .exclude(corrupted=True) \
+                                         .filter(part_of_group_set=group, pk__lt=image.pk).order_by('-pk')[0:1]
                 except Group.DoesNotExist:
                     # image_prev and image_next will remain None
                     pass
             elif nav_ctx == 'all':
-                image_next = Image.objects.filter(pk__gt=image.pk).order_by('pk')[0:1]
-                image_prev = Image.objects.filter(pk__lt=image.pk).order_by('-pk')[0:1]
+                image_next = Image.objects.exclude(corrupted=True).filter(pk__gt=image.pk).order_by('pk')[0:1]
+                image_prev = Image.objects.exclude(corrupted=True).filter(pk__lt=image.pk).order_by('-pk')[0:1]
             elif nav_ctx == 'iotd':
                 try:
                     iotd = Iotd.objects.get(image=image)
-                    iotd_next = Iotd.objects.filter(date__gt=iotd.date, date__lte=datetime.now().date()).order_by(
-                        'date')[0:1]
-                    iotd_prev = Iotd.objects.filter(date__lt=iotd.date, date__lte=datetime.now().date()).order_by(
-                        '-date')[0:1]
+                    iotd_next = Iotd.objects \
+                                    .exclude(image__corrupted=True) \
+                                    .filter(date__gt=iotd.date, date__lte=datetime.now().date()) \
+                                    .order_by('date')[0:1]
+                    iotd_prev = Iotd.objects \
+                                    .exclude(image__corrupted=True) \
+                                    .filter(date__lt=iotd.date, date__lte=datetime.now().date()) \
+                                    .order_by('-date')[0:1]
 
                     if iotd_next:
                         image_next = [iotd_next[0].image]
@@ -640,7 +657,7 @@ class ImageDetailView(ImageDetailViewBase):
                 except Iotd.DoesNotExist:
                     pass
             elif nav_ctx == 'picks':
-                picks = Image.objects.exclude(iotdvote=None).filter(iotd=None)
+                picks = Image.objects.exclude(iotdvote=None, corrupted=True).filter(iotd=None)
                 image_next = picks.filter(pk__gt=image.pk).order_by('pk')[0:1]
                 image_prev = picks.filter(pk__lt=image.pk).order_by('-pk')[0:1]
         except Image.DoesNotExist:
