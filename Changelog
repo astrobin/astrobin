@@ -1,3 +1,10 @@
+2020-03-09 Salvatore Iovene <salvatore@iovene.com>
+ * v1.55.15
+ * (infra) Pin setuptools at < 45 because newer versions won't support Python 2 (#822)
+ * (social) Move toggleproperties into repo for ease of use and fix IntegrityError issue (#821)
+ * (images) Skip corrupted images when navigating with the next/prev buttons (#817)
+ * (images) Remove user bookmark, I honestly don't know what that was doing there (#824)
+
 2020-03-07 Salvatore Iovene <salvatore@iovene.com>
  * v1.55.14
  * (flickr) Perform additional fixes pertaining to unwanted page redirects

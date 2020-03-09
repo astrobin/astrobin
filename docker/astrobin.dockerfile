@@ -59,8 +59,9 @@ RUN qmake . && make -j4 && make install
 # Install pip dependencies
 COPY requirements.txt /code
 WORKDIR /code
-RUN python -m pip install --upgrade setuptools && \
-    python -m pip install --upgrade pip && \
+RUN python -m pip install --upgrade pip && \
+    apt-get purge -y python-pip && \
+    python -m pip install "setuptools<45" && \
     pip install --no-deps -r requirements.txt --src /src
 
 # Install global node dependencies
