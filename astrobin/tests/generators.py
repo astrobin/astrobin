@@ -22,9 +22,11 @@ class Generators:
         )
 
     @staticmethod
-    def image():
+    def image(*args, **kwargs):
         return Image.objects.create(
-            user=Generators.user()
+            user=kwargs.pop('user', Generators.user()),
+            is_wip=kwargs.pop('is_wip', False),
+            corrupted=kwargs.pop('corrupted', False)
         )
 
     @staticmethod
