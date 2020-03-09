@@ -62,24 +62,6 @@
         {% if request.user != image.user %}
             {% add_remove_toggleproperty "follow" image.user request.user %}
         {% endif %}
-
-        {% if request.user == image.user %}
-            {% if READONLY_MODE %}
-            <span class="toggleproperty-add-remove property-bookmark">
-                <button
-                    class="btn btn-primary disabled"
-                    data-toggle="modal"
-                    data-target="#readonly-mode-modal"
-                    id="toggleproperty-bookmark-3-4"
-                    title=""
-                    data-original-title="Bookmark">
-                    <i class="icon-bookmark"></i>
-                </button>
-            </span>
-            {% else %}
-                {% add_remove_toggleproperty "bookmark" image.user request.user %}
-            {% endif %}
-        {% endif %}
     </div>
 </div>
 
