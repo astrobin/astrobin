@@ -91,6 +91,11 @@ class PlateSolvingSettings(models.Model):
 
 
 class PlateSolvingAdvancedSettings(models.Model):
+    FONT_SIZE_CHOICES = (
+        ("S", _("Small")),
+        ("M", _("Medium")),
+        ("L", _("Large")),
+    )
     sample_raw_frame_file = models.FileField(
         upload_to=sample_frame_upload_path,
         validators=(FileValidator(allowed_extensions=(settings.ALLOWED_FITS_IMAGE_EXTENSIONS)),),
@@ -109,6 +114,14 @@ class PlateSolvingAdvancedSettings(models.Model):
             "your processed image, otherwise the object annotations will not match. To improve your chances at a " +
             "successful accurate plate-solution, calibrate your file the usual way (dark/bias/flats) but do not " +
             "stretch it.")
+    )
+
+    scaled_font_size = models.CharField(
+        default="M",
+        choices=FONT_SIZE_CHOICES,
+        max_length=1,
+        verbose_name=_("Scaled font size"),
+        help_text=_("Font size of the annotations on your main image page")
     )
 
     show_grid = models.BooleanField(

@@ -22,11 +22,13 @@ class Solver(AbstractPlateSolvingBackend):
             'content-type': 'application/x-www-form-urlencoded'
         }
 
+        smallSizeRatio = thumbnail_scale(kwargs.pop('image_width'), 'hd', 'regular')
+
         task_params = [
             'imageURL=%s' % image_url,
             'centerRA=%f' % kwargs.pop('ra'),
             'centerDec=%f' % kwargs.pop('dec'),
-            'smallSizeRatio=%f' % thumbnail_scale(kwargs.pop('image_width'), 'hd', 'regular'),
+            'smallSizeRatio=%f' % smallSizeRatio,
             'imageResolution=%f' % kwargs.pop('pixscale'),
             'fontsBaseURL=%s' % settings.STATIC_URL + 'astrobin/fonts',
         ]
@@ -48,7 +50,7 @@ class Solver(AbstractPlateSolvingBackend):
             task_params.append('obsHeight=%f' % altitude)
 
         layers = []
-        advanced_settings = kwargs.pop('advanced_settings', None)
+        advanced_settings = kwargs.pop('advanced_settings', None)  # type: PlateSolvingAdvancedSettings
         if advanced_settings:
             if advanced_settings.show_grid:
                 layers.append('Grid')
@@ -80,6 +82,16 @@ class Solver(AbstractPlateSolvingBackend):
                 layers.append('Gaia DR2')
             if advanced_settings.show_ppmxl:
                 layers.append('PPMXL')
+
+            if advanced_settings.scaled_font_size == 'S':
+                task_params.append('smallSizeTextRatio=%f' % (smallSizeRatio * .85))
+                task_params.append('smallSizeStrokeRatio=%f' % (smallSizeRatio * .85))
+            elif advanced_settings.scaled_font_size == 'M':
+                task_params.append('smallSizeTextRatio=%f' % smallSizeRatio)
+                task_params.append('smallSizeStrokeRatio=%f' % smallSizeRatio)
+            elif advanced_settings.scaled_font_size == 'L':
+                task_params.append('smallSizeTextRatio=%f' % (smallSizeRatio * 1.15))
+                task_params.append('smallSizeStrokeRatio=%f' % (smallSizeRatio * 1.15))
 
         if len(layers) > 0:
             task_params.append('layers=%s' % '|'.join(layers))

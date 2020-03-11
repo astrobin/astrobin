@@ -57,7 +57,8 @@ from astrobin.utils import user_is_producer, user_is_retailer, to_user_timezone,
 from astrobin_apps_notifications.utils import push_notification
 from astrobin_apps_platesolving.forms import PlateSolvingSettingsForm, PlateSolvingAdvancedSettingsForm
 from astrobin_apps_platesolving.models import PlateSolvingSettings, Solution, PlateSolvingAdvancedSettings
-from astrobin_apps_premium.templatetags.astrobin_apps_premium_tags import can_restore_from_trash
+from astrobin_apps_premium.templatetags.astrobin_apps_premium_tags import can_restore_from_trash, \
+    can_perform_advanced_platesolving
 from astrobin_apps_premium.utils import premium_get_max_allowed_image_size, premium_get_max_allowed_revisions
 
 
@@ -784,8 +785,8 @@ def image_edit_platesolving_settings(request, id, revision_label):
 
         messages.success(
             request,
-            _("Form saved. A new plate-solving process will start when you visit your image again."))
-        return HttpResponseRedirect(url)
+            _("Form saved. A new plate-solving process will start now."))
+        return HttpResponseRedirect(return_url)
 
 
 @login_required
@@ -842,8 +843,8 @@ def image_edit_platesolving_advanced_settings(request, id, revision_label):
 
         messages.success(
             request,
-            _("Form saved. A new advanced plate-solving process will start when you visit your image again."))
-        return HttpResponseRedirect(url)
+            _("Form saved. A new advanced plate-solving process will start now."))
+        return HttpResponseRedirect(return_url)
 
 
 @login_required
