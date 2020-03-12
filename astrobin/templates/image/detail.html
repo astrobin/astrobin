@@ -35,7 +35,7 @@
         <i class="icon icon-paperclip"></i>
         <strong>{% trans "Contains" %}:</strong>&nbsp;
         {% if image.subject_type == 100 or image.subject_type == 200 %}
-            {% for s in subjects_all %}
+            {% for s in subjects %}
                 <a href="/search/?q={{s|escape}}">{{s|escape}}</a>{% if not forloop.last %},{% endif %}
             {% endfor %}
         {% else %}

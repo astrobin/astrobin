@@ -29,6 +29,8 @@ from django.views.generic import (
 )
 from django.views.generic.detail import SingleObjectMixin
 from silk.profiling.profiler import silk_profile
+
+from astrobin_apps_platesolving.services import SolutionService
 from toggleproperties.models import ToggleProperty
 
 # AstroBin
@@ -503,24 +505,16 @@ class ImageDetailView(ImageDetailViewBase):
         if mod == 'inverted':
             alias = 'regular_inverted'
 
-        subjects = image.solution.objects_in_field.split(
-            ',') if image.solution and image.solution.objects_in_field else ''
-        skyplot_zoom1 = None
+        subjects = []
+        if image.solution:
+            subjects = SolutionService(image.solution).get_objects_in_field()
 
-        if is_revision:
-            if revision_image.solution:
-                if revision_image.solution.objects_in_field:
-                    subjects = revision_image.solution.objects_in_field.split(',')
-                if revision_image.solution.skyplot_zoom1:
-                    skyplot_zoom1 = revision_image.solution.skyplot_zoom1
-        else:
-            if image.solution:
-                if image.solution.objects_in_field:
-                    subjects = image.solution.objects_in_field.split(',')
-                if image.solution.skyplot_zoom1:
-                    skyplot_zoom1 = image.solution.skyplot_zoom1
+        skyplot_zoom1 = image.solution.skyplot_zoom1
 
-        subjects_limit = 5
+        if is_revision and revision_image.solution:
+            subjects = SolutionService(revision_image.solution).get_objects_in_field()
+            if revision_image.solution.skyplot_zoom1:
+                skyplot_zoom1 = revision_image.solution.skyplot_zoom1
 
         licenses = (
             (0, 'cc/c.png', LICENSE_CHOICES[0][1]),
@@ -721,10 +715,7 @@ class ImageDetailView(ImageDetailViewBase):
             'dates_label': _("Dates"),
             'published_on': published_on,
             'show_contains': (image.subject_type == 100 and subjects) or (image.subject_type >= 200),
-            'subjects_short': subjects[:subjects_limit],
-            'subjects_reminder': subjects[subjects_limit:],
-            'subjects_all': subjects,
-            'subjects_limit': subjects_limit,
+            'subjects': subjects,
             'subject_type': [x[1] for x in Image.SUBJECT_TYPE_CHOICES if x[0] == image.subject_type][
                 0] if image.subject_type else 0,
             'license_icon': static('astrobin/icons/%s' % licenses[image.license][1]),

@@ -295,6 +295,9 @@ class SolutionPixInsightWebhook(base.View):
             solution.advanced_matrix_delta = request.POST.get('matrixDelta', None)
             solution.advanced_ra_matrix = request.POST.get('raMatrix', None)
             solution.advanced_dec_matrix = request.POST.get('decMatrix', None)
+
+            solution.advanced_annotations = request.POST.get('labelInfo', None)
+            solution.advanced_annotations_regular = request.POST.get('labelInfoSmall', None)
         else:
             solution.status = Solver.ADVANCED_FAILED
             log.error(request.POST.get('errorMessage', 'Unknown error'))

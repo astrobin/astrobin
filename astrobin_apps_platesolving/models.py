@@ -430,10 +430,20 @@ class Solution(models.Model):
         blank=True,
     )
 
+    advanced_annotations = models.TextField(
+        null=True,
+        blank=True,
+    )
+
+    advanced_annotations_regular = models.TextField(
+        null=True,
+        blank=True,
+    )
+
     def __unicode__(self):
         return "solution_%d" % self.id
 
-    def clear(self):
+    def _do_clear_basic(self):
         self.status = Solver.MISSING
         self.submission_id = None
 
@@ -449,33 +459,7 @@ class Solution(models.Model):
         self.radius = None
         self.annotations = None
 
-        self.pixinsight_serial_number = None
-        self.pixinsight_svg_annotation_hd.delete()
-        self.pixinsight_svg_annotation_hd = None
-        self.pixinsight_svg_annotation_regular.delete()
-        self.pixinsight_svg_annotation_regular = None
-
-        self.advanced_ra = None
-        self.advanced_ra_bottom_left = None
-        self.advanced_ra_bottom_right = None
-        self.advanced_ra_top_left = None
-        self.advanced_ra_top_right = None
-        self.advanced_dec = None
-        self.advanced_dec_bottom_left = None
-        self.advanced_dec_bottom_right = None
-        self.advanced_dec_top_left = None
-        self.advanced_dec_top_right = None
-        self.advanced_pixscale = None
-        self.advanced_orientation = None
-        self.advanced_radius = None
-        self.advanced_ra_matrix = None
-        self.advanced_dec_matrix = None
-        self.advanced_matrix_rect = None
-        self.advanced_matrix_delta = None
-
-        self.save()
-
-    def clear_advanced(self):
+    def _do_clear_advanced(self):
         if self.status > Solver.SUCCESS:
             self.status = Solver.SUCCESS
 
@@ -502,7 +486,16 @@ class Solution(models.Model):
         self.advanced_dec_matrix = None
         self.advanced_matrix_rect = None
         self.advanced_matrix_delta = None
+        self.advanced_annotations = None
+        self.advanced_annotations_regular = None
 
+    def clear(self):
+        self._do_clear_basic()
+        self._do_clear_advanced()
+        self.save()
+
+    def clear_advanced(self):
+        self._do_clear_advanced()
         self.save()
 
     class Meta:
