@@ -84,14 +84,9 @@ class Solver(AbstractPlateSolvingBackend):
                 layers.append('PPMXL')
 
             if advanced_settings.scaled_font_size == 'S':
-                task_params.append('smallSizeTextRatio=%f' % (smallSizeRatio * .85))
-                task_params.append('smallSizeStrokeRatio=%f' % (smallSizeRatio * .85))
-            elif advanced_settings.scaled_font_size == 'M':
-                task_params.append('smallSizeTextRatio=%f' % smallSizeRatio)
-                task_params.append('smallSizeStrokeRatio=%f' % smallSizeRatio)
+                task_params.append('smallSizeTextRatio=%f' % .66)
             elif advanced_settings.scaled_font_size == 'L':
-                task_params.append('smallSizeTextRatio=%f' % (smallSizeRatio * 1.15))
-                task_params.append('smallSizeStrokeRatio=%f' % (smallSizeRatio * 1.15))
+                task_params.append('smallSizeTextRatio=%f' % 1.33)
 
         if len(layers) > 0:
             task_params.append('layers=%s' % '|'.join(layers))
