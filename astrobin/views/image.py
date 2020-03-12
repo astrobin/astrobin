@@ -506,10 +506,11 @@ class ImageDetailView(ImageDetailViewBase):
             alias = 'regular_inverted'
 
         subjects = []
+        skyplot_zoom1 = None
+
         if image.solution:
             subjects = SolutionService(image.solution).get_objects_in_field()
-
-        skyplot_zoom1 = image.solution.skyplot_zoom1
+            skyplot_zoom1 = image.solution.skyplot_zoom1
 
         if is_revision and revision_image.solution:
             subjects = SolutionService(revision_image.solution).get_objects_in_field()
