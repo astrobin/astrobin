@@ -6,6 +6,8 @@ from django.test import TestCase
 from django.utils import timezone
 from django_bouncy.models import Bounce
 from mock import patch
+
+from astrobin.tests.generators import Generators
 from toggleproperties.models import ToggleProperty
 
 from astrobin.models import (
@@ -487,21 +489,42 @@ class UserTest(TestCase):
         self.assertContains(response, "data-id=\"%d\"" % image.pk)
 
     def test_bookmarks(self):
+        image = Generators.image(user=self.user_2)
+        image.save()
+        ToggleProperty.objects.create_toggleproperty("bookmark", image, self.user)
+
         self.client.login(username="user", password="password")
         response = self.client.get(reverse("user_page_bookmarks", args=(self.user.username,)))
         self.assertEqual(response.status_code, 200)
-        self.client.logout()
+        self.assertContains(response, 'data-id="%s"' % image.pk)
 
-    @patch("astrobin.tasks.retrieve_primary_thumbnails")
-    def test_liked(self, retrieve_primary_thumbnails):
+    def test_bookmarks_excludes_corrupted(self):
+        image = Generators.image(user=self.user_2, corrupted=True)
+        image.save()
+        ToggleProperty.objects.create_toggleproperty("bookmark", image, self.user)
+
         self.client.login(username="user", password="password")
-        image = self._do_upload('astrobin/fixtures/test.jpg', "TEST IMAGE")
-        self.client.logout()
+        response = self.client.get(reverse("user_page_bookmarks", args=(self.user.username,)))
+        self.assertEqual(response.status_code, 200)
+        self.assertNotContains(response, 'data-id="%s"' % image.pk)
 
-        prop = ToggleProperty.objects.create_toggleproperty('like', image, self.user_2)
-        response = self.client.get(reverse("user_page_liked", args=(self.user_2.username,)))
+    def test_liked(self):
+        image = Generators.image(user=self.user_2)
+        image.save()
+
+        ToggleProperty.objects.create_toggleproperty('like', image, self.user)
+        response = self.client.get(reverse("user_page_liked", args=(self.user.username,)))
         self.assertEqual(response.status_code, 200)
         self.assertContains(response, "data-id=\"%d\"" % image.pk)
+
+    def test_liked_excludes_corrupted(self):
+        image = Generators.image(user=self.user_2, corrupted=True)
+        image.save()
+
+        ToggleProperty.objects.create_toggleproperty('like', image, self.user)
+        response = self.client.get(reverse("user_page_liked", args=(self.user.username,)))
+        self.assertEqual(response.status_code, 200)
+        self.assertNotContains(response, "data-id=\"%d\"" % image.pk)
 
     def test_plots(self):
         self.client.login(username="user", password="password")
