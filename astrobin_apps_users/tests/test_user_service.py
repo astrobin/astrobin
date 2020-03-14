@@ -50,6 +50,25 @@ class TestUserService(TestCase):
 
         self.assertTrue(image in UserService(user).get_corrupted_images())
 
+    def test_get_corrupted_images_when_corrupted_revision_is_deleted(self):
+        user = Generators.user()
+        image = Generators.image(user=user)
+        revision = Generators.imageRevision(image=image, is_final=False, corrupted=True)
+
+        revision.delete()
+
+        self.assertFalse(image in UserService(user).get_corrupted_images())
+
+    def test_get_corrupted_images_when_corrupted_revision_is_deleted_with_multiple(self):
+        user = Generators.user()
+        image = Generators.image(user=user)
+        Generators.imageRevision(image=image, is_final=False)
+        revision = Generators.imageRevision(image=image, is_final=False, corrupted=True, label='C')
+
+        revision.delete()
+
+        self.assertFalse(image in UserService(user).get_corrupted_images())
+
     def test_get_public_images(self):
         user = Generators.user()
         image = Generators.image(user=user)

@@ -16,7 +16,7 @@ class UserService:
     def _corrupted_query(self):
         # type: () -> Q
         return Q(corrupted=True, is_final=True) | \
-               Q(revisions__corrupted=True, revisions__is_final=True)
+               Q(revisions__corrupted=True, revisions__is_final=True, deleted=None)
 
     def get_all_images(self):
         # type: () -> QuerySet
