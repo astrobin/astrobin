@@ -28,6 +28,28 @@ class TestUserService(TestCase):
         self.assertFalse(non_corrupted in UserService(user).get_corrupted_images())
         self.assertTrue(corrupted in UserService(user).get_corrupted_images())
 
+    def test_get_corrupted_images_when_final_revision_is_corrupted(self):
+        user = Generators.user()
+        image = Generators.image(user=user, is_final=False)
+        Generators.imageRevision(image=image, is_final=True, corrupted=True)
+
+        self.assertTrue(image in UserService(user).get_corrupted_images())
+
+    def test_get_corrupted_images_when_non_final_revision_is_corrupted(self):
+        user = Generators.user()
+        image = Generators.image(user=user, is_final=False)
+        Generators.imageRevision(image=image, is_final=False, corrupted=True)
+        Generators.imageRevision(image=image, is_final=True, label='C')
+
+        self.assertFalse(image in UserService(user).get_corrupted_images())
+
+    def test_get_corrupted_images_when_non_final_revision_is_fine(self):
+        user = Generators.user()
+        image = Generators.image(user=user, is_final=True, corrupted=True)
+        Generators.imageRevision(image=image, is_final=False)
+
+        self.assertTrue(image in UserService(user).get_corrupted_images())
+
     def test_get_public_images(self):
         user = Generators.user()
         image = Generators.image(user=user)
