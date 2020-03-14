@@ -30,13 +30,13 @@ class UserService:
         # type: () -> QuerySet
         return Image.objects \
             .filter(user=self.user) \
-            .exclude(self._corrupted_query())
+            .exclude(corrupted=True)
 
     def get_wip_images(self):
         # type: () -> QuerySet
         return Image.wip \
             .filter(user=self.user) \
-            .exclude(self._corrupted_query())
+            .exclude(corrupted=True)
 
     def get_deleted_images(self):
         # type: () -> QuerySet
