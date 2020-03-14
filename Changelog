@@ -1,4 +1,8 @@
 2020-03-14 Salvatore Iovene <salvatore@iovene.com>
+ * v1.55.20
+ * (gallery) Only exclude corrupted images when the original is corrupted, in public/wip galleries
+
+2020-03-14 Salvatore Iovene <salvatore@iovene.com>
  * v1.55.19
  * (images) Stop marking images as corrupted if a thumbnail cannot be generated. They've surely all been found.
 
