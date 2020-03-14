@@ -6,39 +6,41 @@
     <div class="subtle-container">
         <div class="header"><h4><i class="icon-picture"></i> {% trans "Revisions" %}</h4></div>
         <ul class="thumbnails astrobin-thumbnails">
-            <li class="thumbnail astrobin-thumbnail revisions">
-                <div class="revision">
-                    {% if image.is_final %}
-                        <div class="final">
-                            <span class="text">
-                                {% trans "Final" %}
-                            </span>
+            {% if not image.corrupted %}
+                <li class="thumbnail astrobin-thumbnail revisions">
+                    <div class="revision">
+                        {% if image.is_final %}
+                            <div class="final">
+                                <span class="text">
+                                    {% trans "Final" %}
+                                </span>
+                            </div>
+                        {% endif %}
+
+                        {% ifequal request.user image.user %}
+                            <div class="edit">
+                                <a href="{% url 'image_edit_basic' image.get_id %}">
+                                    <i class="icon-pencil"></i>
+                                </a>
+                            </div>
+
+                            <div class="delete">
+                                <a data-toggle="modal" class="danger" href="#delete-original-image-modal">
+                                    <i class="icon-trash"></i>
+                                </a>
+                            </div>
+                        {% endifequal %}
+
+                        <div class="image">
+                            {% astrobin_image image 'thumb' revision='0' tooltip=False %}
                         </div>
-                    {% endif %}
 
-                    {% ifequal request.user image.user %}
-                        <div class="edit">
-                            <a href="{% url 'image_edit_basic' image.get_id %}">
-                                <i class="icon-pencil"></i>
-                            </a>
+                        <div class="label{% if revision_label == '0' %} active{% endif %}">
+                            {% trans "Original" %}
                         </div>
-
-                        <div class="delete">
-                            <a data-toggle="modal" class="danger" href="#delete-original-image-modal">
-                                <i class="icon-trash"></i>
-                            </a>
-                        </div>
-                    {% endifequal %}
-
-                    <div class="image">
-                        {% astrobin_image image 'thumb' revision='0' tooltip=False %}
-                    </div>
-
-                    <div class="label{% if revision_label == '0' %} active{% endif %}">
-                        {% trans "Original" %}
-                    </div>
-                </div> <!-- .revision -->
-            </li>
+                    </div> <!-- .revision -->
+                </li>
+            {% endif %}
 
             {% for r in revisions %}
                 <li class="thumbnail astrobin-thumbnail revisions">

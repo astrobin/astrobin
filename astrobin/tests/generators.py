@@ -26,11 +26,16 @@ class Generators:
         return Image.objects.create(
             user=kwargs.pop('user', Generators.user()),
             is_wip=kwargs.pop('is_wip', False),
+            is_final=kwargs.pop('is_final', True),
             corrupted=kwargs.pop('corrupted', False)
         )
 
     @staticmethod
-    def imageRevision():
+    def imageRevision(*args, **kwargs):
         return ImageRevision.objects.create(
-            image=Generators.image()
+            image=kwargs.pop('image', Generators.image()),
+            is_final=kwargs.pop('is_final', False),
+            corrupted=kwargs.pop('corrupted', False),
+            label=kwargs.pop('label', 'B'),
+            description=kwargs.pop('description', None),
         )

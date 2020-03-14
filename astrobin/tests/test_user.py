@@ -476,7 +476,7 @@ class UserTest(TestCase):
         self.assertNotContains(response, "data-id=\"%d\"" % image.pk)
 
     @patch("astrobin.tasks.retrieve_primary_thumbnails")
-    def test_corrupted_images_shown_to_owner(self, retrieve_primary_thumbnails):
+    def test_corrupted_images_not_shown_to_owner(self, retrieve_primary_thumbnails):
         self.client.login(username="user", password="password")
         image = self._do_upload('astrobin/fixtures/test.jpg', "TEST IMAGE")
         image.corrupted = True
@@ -484,7 +484,7 @@ class UserTest(TestCase):
 
         response = self.client.get(reverse("user_page", args=(self.user.username,)))
         self.assertEqual(response.status_code, 200)
-        self.assertContains(response, "data-id=\"%d\"" % image.pk)
+        self.assertNotContains(response, "data-id=\"%d\"" % image.pk)
 
     def test_bookmarks(self):
         self.client.login(username="user", password="password")
@@ -649,6 +649,11 @@ class UserTest(TestCase):
         response = self.client.get(reverse('user_page', args=('user',)))
 
         self.assertEquals(200, response.status_code)
+        self.assertNotContains(response, "CORRUPTED_IMAGE")
+
+        response = self.client.get(reverse('user_page', args=('user',)) + "?corrupted")
+
+        self.assertEquals(200, response.status_code)
         self.assertContains(response, "CORRUPTED_IMAGE")
 
         image.delete()
@@ -661,6 +666,11 @@ class UserTest(TestCase):
         revision.save()
 
         response = self.client.get(reverse('user_page', args=('user',)))
+
+        self.assertEquals(200, response.status_code)
+        self.assertNotContains(response, "CORRUPTED_IMAGE")
+
+        response = self.client.get(reverse('user_page', args=('user',)) + "?corrupted")
 
         self.assertEquals(200, response.status_code)
         self.assertContains(response, "CORRUPTED_IMAGE")
@@ -680,10 +690,15 @@ class UserTest(TestCase):
         self.assertEquals(200, response.status_code)
         self.assertContains(response, "CORRUPTED_IMAGE")
 
+        response = self.client.get(reverse('user_page', args=('user',)) + "?corrupted")
+
+        self.assertEquals(200, response.status_code)
+        self.assertNotContains(response, "CORRUPTED_IMAGE")
+
         image.delete()
         revision.delete()
 
-    def test_corrupted_image_with_ok_non_final_revision_shown_to_owner(self):
+    def test_corrupted_image_with_ok_non_final_revision_not_shown_to_owner(self):
         self.client.login(username="user", password="password")
         image = self._do_upload('astrobin/fixtures/test.jpg', "CORRUPTED_IMAGE")
         revision = self._do_upload_revision(image, 'astrobin/fixtures/test.jpg')
@@ -695,6 +710,11 @@ class UserTest(TestCase):
         image.save()
 
         response = self.client.get(reverse('user_page', args=('user',)))
+
+        self.assertEquals(200, response.status_code)
+        self.assertNotContains(response, "CORRUPTED_IMAGE")
+
+        response = self.client.get(reverse('user_page', args=('user',)) + "?corrupted")
 
         self.assertEquals(200, response.status_code)
         self.assertContains(response, "CORRUPTED_IMAGE")
