@@ -476,7 +476,7 @@ class UserTest(TestCase):
         self.assertNotContains(response, "data-id=\"%d\"" % image.pk)
 
     @patch("astrobin.tasks.retrieve_primary_thumbnails")
-    def test_corrupted_images_shown_to_owner(self, retrieve_primary_thumbnails):
+    def test_corrupted_images_not_shown_to_owner(self, retrieve_primary_thumbnails):
         self.client.login(username="user", password="password")
         image = self._do_upload('astrobin/fixtures/test.jpg', "TEST IMAGE")
         image.corrupted = True
@@ -484,7 +484,7 @@ class UserTest(TestCase):
 
         response = self.client.get(reverse("user_page", args=(self.user.username,)))
         self.assertEqual(response.status_code, 200)
-        self.assertContains(response, "data-id=\"%d\"" % image.pk)
+        self.assertNotContains(response, "data-id=\"%d\"" % image.pk)
 
     def test_bookmarks(self):
         self.client.login(username="user", password="password")
