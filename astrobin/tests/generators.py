@@ -37,4 +37,5 @@ class Generators:
             is_final=kwargs.pop('is_final', False),
             corrupted=kwargs.pop('corrupted', False),
             label=kwargs.pop('label', 'B'),
+            description=kwargs.pop('description', None),
         )
