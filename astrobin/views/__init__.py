@@ -35,7 +35,6 @@ from haystack.query import SearchQuerySet
 from reviews.models import Review
 from reviews.views import ReviewAddForm
 from silk.profiling.profiler import silk_profile
-from toggleproperties.models import ToggleProperty
 
 from astrobin.context_processors import notices_count, user_language, user_scores, common_variables
 from astrobin.forms import ImageUploadForm, ImageLicenseForm, PrivateMessageForm, UserProfileEditBasicForm, \
@@ -55,6 +54,8 @@ from astrobin.utils import user_is_producer, user_is_retailer, to_user_timezone,
 from astrobin_apps_notifications.utils import push_notification
 from astrobin_apps_platesolving.forms import PlateSolvingSettingsForm
 from astrobin_apps_platesolving.models import PlateSolvingSettings, Solution
+from astrobin_apps_users.services import UserService
+from toggleproperties.models import ToggleProperty
 
 
 def get_image_or_404(queryset, id):
@@ -944,28 +945,23 @@ def user_page(request, username):
     active = request.GET.get('active')
     menu = []
 
-    qs = Image.objects.filter(user=user)
-    corrupted_pks = []
-    for i in qs:
-        if i.is_final and i.corrupted:
-            corrupted_pks.append(i.pk)
-            continue
+    qs = UserService(user).get_public_images()
 
-        try:
-            final = i.revisions.get(label=i.get_final_revision_label())
-            if final.corrupted:
-                corrupted_pks.append(i.pk)
-        except ImageRevision.DoesNotExist:
-            pass
-
-    if request.user != user:
-        qs = qs.exclude(pk__in=corrupted_pks)
+    public_qs = UserService(user).get_public_images()
+    wip_qs = UserService(user).get_wip_images()
+    corrupted_qs = UserService(user).get_corrupted_images()
 
     if 'staging' in request.GET:
         if request.user != user and not request.user.is_superuser:
             return HttpResponseForbidden()
-        qs = Image.wip.filter(user=user)
+        qs = wip_qs
         section = 'staging'
+        subsection = None
+    elif 'corrupted' in request.GET:
+        if request.user != user and not request.user.is_superuser:
+            return HttpResponseForbidden()
+        qs = corrupted_qs
+        section = 'corrupted'
         subsection = None
     else:
         #########
@@ -1176,15 +1172,12 @@ def user_page(request, username):
         'menu': menu,
         'stats': stats,
         'images_no': data['images'],
-        'public_images_no': Image.objects.filter(user=user).count(),
-        'wip_images_no': Image.wip.filter(user=user).count(),
-        'bookmarks_no': ToggleProperty.objects.toggleproperties_for_user("bookmark", user) \
-            .filter(content_type=image_ct).count(),
-        'likes_no': ToggleProperty.objects.toggleproperties_for_user("like", user) \
-            .filter(content_type=image_ct).count(),
         'alias': 'gallery',
-        'has_corrupted_images': Image.objects_including_wip.filter(corrupted=True, user=user).count() > 0,
+        'has_corrupted_images': Image.objects_including_wip.filter(
+            corrupted=True, user=user).count() > 0,
     }
+
+    response_dict.update(UserService(user).get_image_numbers())
 
     template_name = 'user/profile.html'
     if request.is_ajax():
@@ -1213,13 +1206,9 @@ def user_page_commercial_products(request, username):
         'merge_commercial_gear_form': MergeCommercialGearForm(user=user),
         'claim_retailed_gear_form': ClaimRetailedGearForm(user=user),
         'merge_retailed_gear_form': MergeRetailedGearForm(user=user),
-        'public_images_no': Image.objects.filter(user=user).count(),
-        'wip_images_no': Image.wip.filter(user=user).count(),
-        'bookmarks_no': ToggleProperty.objects.toggleproperties_for_user("bookmark", user) \
-            .filter(content_type=image_ct).count(),
-        'likes_no': ToggleProperty.objects.toggleproperties_for_user("like", user) \
-            .filter(content_type=image_ct).count(),
     }
+
+    response_dict.update(UserService(user).get_image_numbers())
 
     return render(request, 'user/profile/commercial/products.html', response_dict)
 
@@ -1241,59 +1230,40 @@ def user_ban(request, username):
 def user_page_bookmarks(request, username):
     user = get_object_or_404(UserProfile, user__username=username).user
 
-    image_ct = ContentType.objects.get(app_label='astrobin', model='image')
-    images = \
-        [x.object_id for x in \
-         ToggleProperty.objects.toggleproperties_for_user("bookmark", user) \
-             .filter(content_type=image_ct) \
-             .order_by('-created_on')
-         ]
-
     template_name = 'user/bookmarks.html'
     if request.is_ajax():
         template_name = 'inclusion_tags/image_list_entries.html'
 
-    return render(request, template_name, {
+    response_dict = {
         'requested_user': user,
-        'image_list': Image.objects.filter(pk__in=images),
+        'image_list': UserService(user).get_bookmarked_images(),
         'private_message_form': PrivateMessageForm(),
-        'public_images_no': Image.objects.filter(user=user).count(),
-        'wip_images_no': Image.wip.filter(user=user).count(),
-        'bookmarks_no': ToggleProperty.objects.toggleproperties_for_user("bookmark", user) \
-                  .filter(content_type=image_ct).count(),
-        'likes_no': ToggleProperty.objects.toggleproperties_for_user("like", user) \
-                  .filter(content_type=image_ct).count(),
         'alias': 'gallery',
-    })
+    }
+
+    response_dict.update(UserService(user).get_image_numbers())
+
+    return render(request, template_name, response_dict)
 
 
 @require_GET
 def user_page_liked(request, username):
     user = get_object_or_404(UserProfile, user__username=username).user
 
-    image_ct = ContentType.objects.get(app_label='astrobin', model='image')
-    images = \
-        [x.object_id for x in \
-         ToggleProperty.objects.toggleproperties_for_user("like", user) \
-             .filter(content_type=image_ct)
-         ]
-
     template_name = 'user/liked.html'
     if request.is_ajax():
         template_name = 'inclusion_tags/image_list_entries.html'
 
-    return render(request, template_name, {
+    response_dict = {
         'requested_user': user,
-        'image_list': Image.objects.filter(pk__in=images),
+        'image_list': UserService(user).get_liked_images(),
         'private_message_form': PrivateMessageForm(),
-        'public_images_no': Image.objects.filter(user=user).count(),
-        'wip_images_no': Image.wip.filter(user=user).count(),
-        'bookmarks_no': ToggleProperty.objects.toggleproperties_for_user("bookmark", user) \
-                  .filter(content_type=image_ct).count(),
-        'likes_no': ToggleProperty.objects.toggleproperties_for_user("like", user) \
-                  .filter(content_type=image_ct).count(),
         'alias': 'gallery',
-    })
+    }
+
+    response_dict.update(UserService(user).get_image_numbers())
+
+    return render(request, template_name, response_dict)
 
 
 @require_GET
@@ -1319,20 +1289,18 @@ def user_page_following(request, username, extra_context=None):
     if request.is_ajax():
         template_name = 'astrobin_apps_users/inclusion_tags/user_list_entries.html'
 
-    return render(request, template_name, {
+    response_dict = {
         'request_user': UserProfile.objects.get(
             user=request.user).user if request.user.is_authenticated() else None,
         'requested_user': user,
         'user_list': followed_users,
         'view': request.GET.get('view', 'default'),
         'private_message_form': PrivateMessageForm(),
-        'public_images_no': Image.objects.filter(user=user).count(),
-        'wip_images_no': Image.wip.filter(user=user).count(),
-        'bookmarks_no': ToggleProperty.objects.toggleproperties_for_user("bookmark", user) \
-                  .filter(content_type=image_ct).count(),
-        'likes_no': ToggleProperty.objects.toggleproperties_for_user("like", user) \
-                  .filter(content_type=image_ct).count(),
-    })
+    }
+
+    response_dict.update(UserService(user).get_image_numbers())
+
+    return render(request, template_name, response_dict)
 
 
 @require_GET
@@ -1354,20 +1322,18 @@ def user_page_followers(request, username, extra_context=None):
     if request.is_ajax():
         template_name = 'astrobin_apps_users/inclusion_tags/user_list_entries.html'
 
-    return render(request, template_name, {
+    response_dict = {
         'request_user': UserProfile.objects.get(
             user=request.user).user if request.user.is_authenticated() else None,
         'requested_user': user,
         'user_list': followers,
         'view': request.GET.get('view', 'default'),
         'private_message_form': PrivateMessageForm(),
-        'public_images_no': Image.objects.filter(user=user).count(),
-        'wip_images_no': Image.wip.filter(user=user).count(),
-        'bookmarks_no': ToggleProperty.objects.toggleproperties_for_user("bookmark", user) \
-                  .filter(content_type=image_ct).count(),
-        'likes_no': ToggleProperty.objects.toggleproperties_for_user("like", user) \
-                  .filter(content_type=image_ct).count(),
-    })
+    }
+
+    response_dict.update(UserService(user).get_image_numbers())
+
+    return render(request, template_name, response_dict)
 
 
 @require_GET
@@ -1377,16 +1343,14 @@ def user_page_plots(request, username):
     profile = user.userprofile
     image_ct = ContentType.objects.get_for_model(Image)
 
-    return render(request, 'user/plots.html', {
+    response_dict = {
         'requested_user': user,
         'profile': profile,
-        'public_images_no': Image.objects.filter(user=user).count(),
-        'wip_images_no': Image.wip.filter(user=user).count(),
-        'bookmarks_no': ToggleProperty.objects.toggleproperties_for_user("bookmark", user) \
-                  .filter(content_type=image_ct).count(),
-        'likes_no': ToggleProperty.objects.toggleproperties_for_user("like", user) \
-                  .filter(content_type=image_ct).count(),
-    })
+    }
+
+    response_dict.update(UserService(user).get_image_numbers())
+
+    return render(request, 'user/plots.html', response_dict)
 
 
 @require_GET
@@ -1400,17 +1364,15 @@ def user_page_api_keys(request, username):
     image_ct = ContentType.objects.get_for_model(Image)
     keys = App.objects.filter(registrar=user)
 
-    return render(request, 'user/api_keys.html', {
+    response_dict = {
         'requested_user': user,
         'profile': profile,
         'api_keys': keys,
-        'public_images_no': Image.objects.filter(user=user).count(),
-        'wip_images_no': Image.wip.filter(user=user).count(),
-        'bookmarks_no': ToggleProperty.objects.toggleproperties_for_user("bookmark", user) \
-                  .filter(content_type=image_ct).count(),
-        'likes_no': ToggleProperty.objects.toggleproperties_for_user("like", user) \
-                  .filter(content_type=image_ct).count(),
-    })
+    }
+
+    response_dict.update(UserService(user).get_image_numbers())
+
+    return render(request, 'user/api_keys.html', response_dict)
 
 
 @require_GET

@@ -27,13 +27,16 @@
             <a class="dropdown-toggle" data-toggle="dropdown" href="#">
                 <i class="icon-eye-open icon-white"></i>
                 <span class="hidden-phone">{% trans "View" %}</span>
+                {% if corrupted_no > 0 %}
+                    <i class="icon-warning-sign hidden-phone"></i>
+                {% endif %}
                 <span class="caret hidden-phone"></span>
             </a>
             <ul class="dropdown-menu">
                 <li class="nav-header">{% trans "Gallery" %}</li>
 
                 <li>
-                    <a href="{% url 'user_page' requested_user.username %}{% query_string "" "sub,active,staging" %}">
+                    <a href="{% url 'user_page' requested_user.username %}{% query_string "" "sub,active,staging,corrupted" %}">
                         <i class="icon-bullhorn"></i>
                         {% trans "Public Area" %}
                         <span class="badge badge-success">
@@ -43,23 +46,37 @@
                 </li>
 
                 {% ifequal requested_user request.user %}
-                <li>
-                    <a href="{% url 'user_page' requested_user.username %}{% query_string "sub=uploaded,staging=" "public,active" %}">
-                        <i class="icon-lock"></i>
-                        {% trans "Staging Area" %}
-                        <span class="badge badge-success">
-                            {{wip_images_no}}
-                        </span>
-                    </a>
-                </li>
+                    <li>
+                        <a href="{% url 'user_page' requested_user.username %}{% query_string "sub=uploaded,staging=" "public,active,corrupted" %}">
+                            <i class="icon-lock"></i>
+                            {% trans "Staging Area" %}
+                            <span class="badge badge-success">
+                                {{wip_images_no}}
+                            </span>
+                        </a>
+                    </li>
+
+                    {% if corrupted_no > 0 %}
+                        <li>
+                            <a href="{% url 'user_page' requested_user.username %}{% query_string "sub=uploaded,corrupted=" "public,active,staging,corrupted" %}">
+                                <i class="icon-ambulance"></i>
+                                {% trans "Corrupted" %}
+                                <span class="badge badge-important">
+                                {{ corrupted_no }}
+                            </span>
+                            </a>
+                        </li>
+                    {% endif %}
                 {% endifequal %}
+
+                <li class="divider"></li>
 
                 <li>
                     <a href="{% url 'user_page_bookmarks' requested_user.username %}">
                         <i class="icon-bookmark"></i>
                         {% trans "Bookmarks" %}
                         <span class="badge badge-success">
-                            {{bookmarks_no}}
+                            {{bookmarked_no}}
                         </span>
                     </a>
                 </li>
@@ -69,7 +86,7 @@
                         <i class="icon-thumbs-up"></i>
                         {% trans "Liked images" %}
                         <span class="badge badge-success">
-                            {{likes_no}}
+                            {{liked_no}}
                         </span>
                     </a>
                 </li>
