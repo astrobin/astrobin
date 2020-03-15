@@ -27,9 +27,6 @@
             <a class="dropdown-toggle" data-toggle="dropdown" href="#">
                 <i class="icon-eye-open icon-white"></i>
                 <span class="hidden-phone">{% trans "View" %}</span>
-                {% if corrupted_no > 0 and request.user == requested_user %}
-                    <i class="icon-warning-sign hidden-phone"></i>
-                {% endif %}
                 <span class="caret hidden-phone"></span>
             </a>
             <ul class="dropdown-menu">
@@ -55,18 +52,6 @@
                             </span>
                         </a>
                     </li>
-
-                    {% if corrupted_no > 0 %}
-                        <li>
-                            <a href="{% url 'user_page' requested_user.username %}{% query_string "sub=uploaded,corrupted=" "public,active,staging,corrupted" %}">
-                                <i class="icon-ambulance"></i>
-                                {% trans "Corrupted" %}
-                                <span class="badge badge-important">
-                                {{ corrupted_no }}
-                            </span>
-                            </a>
-                        </li>
-                    {% endif %}
                 {% endifequal %}
 
                 <li class="divider"></li>
