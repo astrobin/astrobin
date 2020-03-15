@@ -2,6 +2,44 @@
  * v1.56.0
  * (general) Introduce AstroBin Ultimate
 
+2020-03-15 Salvatore Iovene <salvatore@iovene.com>
+ * v1.55.24
+ * (users) Fix count of images on avatar
+
+2020-03-15 Salvatore Iovene <salvatore@iovene.com>
+ * v1.55.23
+ * (images) Mark deleted final revisions as non final, fix corrupted images query
+ * Revert "(gallery) Remove "Corrupted" menu entry
+
+2020-03-15 Salvatore Iovene <salvatore@iovene.com>
+ * v1.55.22
+ * (gallery) Remove "Corrupted" menu entry due to query issues
+
+2020-03-15 Salvatore Iovene <salvatore@iovene.com>
+ * v1.55.21
+ * (gallery) Due to popular demand, put corrupted images back in the gallery
+
+2020-03-14 Salvatore Iovene <salvatore@iovene.com>
+ * v1.55.20
+ * (gallery) Only exclude corrupted images when the original is corrupted, in public/wip galleries
+
+2020-03-14 Salvatore Iovene <salvatore@iovene.com>
+ * v1.55.19
+ * (images) Stop marking images as corrupted if a thumbnail cannot be generated. They've surely all been found.
+
+2020-03-14 Salvatore Iovene <salvatore@iovene.com>
+ * v1.55.18
+ * (images) Improve corrupted images query to exclude deleted revisions
+
+2020-03-14 Salvatore Iovene <salvatore@iovene.com>
+ * v1.55.17
+ * (performance) Improve speed of querying for corrupted images
+
+2020-03-14 Salvatore Iovene <salvatore@iovene.com>
+ * v1.55.16
+ * (gallery) Add "Corrupted" section for corrupted images
+ * (images) Hide corrupted revisions to visitors
+
 2020-03-09 Salvatore Iovene <salvatore@iovene.com>
  * v1.55.15
  * (infra) Pin setuptools at < 45 because newer versions won't support Python 2 (#822)

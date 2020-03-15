@@ -63,6 +63,7 @@ from astrobin.utils import to_user_timezone, get_image_resolution
 # AstroBin apps
 from astrobin_apps_groups.forms import GroupSelectForm
 from astrobin_apps_groups.models import Group
+from astrobin_apps_images.services import ImageService
 from astrobin_apps_iotd.models import Iotd
 from astrobin_apps_notifications.utils import push_notification
 from astrobin_apps_platesolving.models import Solution
@@ -73,6 +74,7 @@ from rawdata.forms import (
     PrivateSharedFolder_SelectExistingForm,
 )
 from rawdata.models import PrivateSharedFolder
+from toggleproperties.models import ToggleProperty
 
 
 class ImageSingleObjectMixin(SingleObjectMixin):
@@ -672,12 +674,12 @@ class ImageDetailView(ImageDetailViewBase):
 
             'alias': alias,
             'mod': mod,
-            'revisions': ImageRevision.objects.select_related('image__user__userprofile').filter(image=image),
-            'revisions_with_description':
-                ImageRevision.objects \
-                    .select_related('image__user__userprofile') \
-                    .filter(image=image) \
-                    .exclude(Q(description=None) | Q(description='')),
+            'revisions': ImageService(image) \
+                .get_revisions(include_corrupted=self.request.user == image.user) \
+                .select_related('image__user__userprofile'),
+            'revisions_with_description': ImageService(image) \
+                .get_revisions_with_description(include_corrupted=self.request.user == image.user) \
+                .select_related('image__user__userprofile'),
             'is_revision': is_revision,
             'revision_image': revision_image,
             'revision_label': r,
@@ -889,6 +891,8 @@ class ImageRevisionDeleteView(LoginRequiredMixin, DeleteView):
         if revision.is_final:
             image.is_final = True
             image.save(keep_deleted=True)
+            revision.is_final = False
+            revision.save(keep_deleted=True)
 
         revision.thumbnail_invalidate()
         messages.success(self.request, _("Revision deleted."))

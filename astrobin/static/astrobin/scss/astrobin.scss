@@ -1539,6 +1539,11 @@ BODY:first-of-type ul.as-list, x:-moz-any-link, x:default { /* Target FF 3.5+ */
       -moz-transition: all .3s ease-in-out;
       -o-transition: all .3s ease-in-out;
       transition: all .3s ease-in-out;
+
+      &.corrupted {
+        opacity: .5;
+        border: 1px solid red;
+      }
     }
 
     figcaption {

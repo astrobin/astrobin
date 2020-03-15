@@ -715,6 +715,11 @@ class UserTest(TestCase):
         self.assertEquals(200, response.status_code)
         self.assertContains(response, "CORRUPTED_IMAGE")
 
+        response = self.client.get(reverse('user_page', args=('user',)) + "?corrupted")
+
+        self.assertEquals(200, response.status_code)
+        self.assertContains(response, "CORRUPTED_IMAGE")
+
         image.delete()
 
     @override_settings(PREMIUM_MAX_REVISIONS_FREE_2020=sys.maxsize)
@@ -726,6 +731,11 @@ class UserTest(TestCase):
         revision.save()
 
         response = self.client.get(reverse('user_page', args=('user',)))
+
+        self.assertEquals(200, response.status_code)
+        self.assertContains(response, "CORRUPTED_IMAGE")
+
+        response = self.client.get(reverse('user_page', args=('user',)) + "?corrupted")
 
         self.assertEquals(200, response.status_code)
         self.assertContains(response, "CORRUPTED_IMAGE")
@@ -746,6 +756,11 @@ class UserTest(TestCase):
         self.assertEquals(200, response.status_code)
         self.assertContains(response, "CORRUPTED_IMAGE")
 
+        response = self.client.get(reverse('user_page', args=('user',)) + "?corrupted")
+
+        self.assertEquals(200, response.status_code)
+        self.assertNotContains(response, "CORRUPTED_IMAGE")
+
         image.delete()
         revision.delete()
 
@@ -762,6 +777,11 @@ class UserTest(TestCase):
         image.save()
 
         response = self.client.get(reverse('user_page', args=('user',)))
+
+        self.assertEquals(200, response.status_code)
+        self.assertContains(response, "CORRUPTED_IMAGE")
+
+        response = self.client.get(reverse('user_page', args=('user',)) + "?corrupted")
 
         self.assertEquals(200, response.status_code)
         self.assertContains(response, "CORRUPTED_IMAGE")

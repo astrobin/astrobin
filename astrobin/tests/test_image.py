@@ -11,7 +11,6 @@ from django.core.urlresolvers import reverse
 from django.test import TestCase, override_settings
 from mock import patch
 from subscription.models import Subscription, UserSubscription
-from toggleproperties.models import ToggleProperty
 
 from astrobin.models import (
     Image,
@@ -32,6 +31,7 @@ from astrobin_apps_notifications.utils import get_unseen_notifications
 from astrobin_apps_platesolving.models import Solution
 from astrobin_apps_platesolving.solver import Solver
 from nested_comments.models import NestedComment
+from toggleproperties.models import ToggleProperty
 
 
 class ImageTest(TestCase):
@@ -2206,7 +2206,8 @@ class ImageTest(TestCase):
             status_code=302,
             target_status_code=200)
         self.assertEquals(ImageRevision.objects.filter(pk=revision.pk).count(), 0)
-        self.assertEquals(image.is_final, True)
+        self.assertTrue(image.is_final)
+        self.assertFalse(ImageRevision.deleted_objects.get(pk=revision.pk).is_final)
         self.client.logout()
 
         image.delete()

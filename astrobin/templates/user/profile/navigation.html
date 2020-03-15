@@ -28,13 +28,16 @@
             <a class="dropdown-toggle" data-toggle="dropdown" href="#">
                 <i class="icon-eye-open icon-white"></i>
                 <span class="hidden-phone">{% trans "View" %}</span>
+                {% if corrupted_no > 0 and request.user == requested_user %}
+                    <i class="icon-warning-sign hidden-phone"></i>
+                {% endif %}
                 <span class="caret hidden-phone"></span>
             </a>
             <ul class="dropdown-menu">
                 <li class="nav-header">{% trans "Gallery" %}</li>
 
                 <li>
-                    <a href="{% url 'user_page' requested_user.username %}{% query_string "" "sub,active,staging,trash" %}">
+                    <a href="{% url 'user_page' requested_user.username %}{% query_string "" "sub,active,staging,corrupted,trash" %}">
                         <i class="icon-bullhorn"></i>
                         {% trans "Public Area" %}
                         <span class="badge badge-success">
@@ -45,7 +48,7 @@
 
                 {% ifequal requested_user request.user %}
                     <li>
-                        <a href="{% url 'user_page' requested_user.username %}{% query_string "sub=uploaded,staging=" "public,active,trash" %}">
+                        <a href="{% url 'user_page' requested_user.username %}{% query_string "sub=uploaded,staging=" "public,active,corrupted,trash" %}">
                             <i class="icon-lock"></i>
                             {% trans "Staging Area" %}
                             <span class="badge badge-success">
@@ -54,20 +57,32 @@
                         </a>
                     </li>
 
+                    {% if corrupted_no > 0 %}
+                        <li>
+                            <a href="{% url 'user_page' requested_user.username %}{% query_string "sub=uploaded,corrupted=" "public,active,staging,trash" %}">
+                                <i class="icon-ambulance"></i>
+                                {% trans "Corrupted" %}
+                                <span class="badge badge-important">
+                                {{ corrupted_no }}
+                            </span>
+                            </a>
+                        </li>
+                    {% endif %}
+
                     <li>
                         {% if request.user|can_restore_from_trash %}
-                            <a href="{% url 'user_page' requested_user.username %}{% query_string "trash=" "public,active,sub,staging" %}">
+                            <a href="
+                                    {% url 'user_page' requested_user.username %}{% query_string "trash=" "public,active,sub,staging,corrupted" %}">
                         {% else %}
                             <a href="#feature-restricted-modal" data-toggle="modal">
                         {% endif %}
-                            <i class="icon-trash"></i>
-                            {% trans "Trash" %}
-                            <span class="badge badge-success">
+                        <i class="icon-trash"></i>
+                        {% trans "Trash" %}
+                        <span class="badge badge-success">
                                 {{ deleted_images_no }}
                             </span>
                         </a>
                     </li>
-
                 {% endifequal %}
 
                 <li class="divider"></li>
@@ -77,7 +92,7 @@
                         <i class="icon-bookmark"></i>
                         {% trans "Bookmarks" %}
                         <span class="badge badge-success">
-                            {{bookmarks_no}}
+                            {{bookmarked_no}}
                         </span>
                     </a>
                 </li>
@@ -87,7 +102,7 @@
                         <i class="icon-thumbs-up"></i>
                         {% trans "Liked images" %}
                         <span class="badge badge-success">
-                            {{likes_no}}
+                            {{liked_no}}
                         </span>
                     </a>
                 </li>
