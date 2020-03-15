@@ -16,8 +16,8 @@ class UserService:
     @staticmethod
     def corrupted_query():
         # type: () -> Q
-        return Q(corrupted=True) | \
-               Q(revisions__corrupted=True, revisions__deleted=None)
+        return Q(corrupted=True, is_final=True) | \
+               Q(revisions__corrupted=True, revisions__is_final=True, revisions__deleted=None)
 
     def get_all_images(self):
         # type: () -> QuerySet
@@ -25,7 +25,7 @@ class UserService:
 
     def get_corrupted_images(self):
         # type: () -> QuerySet
-        return self.get_all_images().filter(UserService.corrupted_query())
+        return self.get_all_images().filter(UserService.corrupted_query()).distinct()
 
     def get_public_images(self):
         # type: () -> QuerySet
