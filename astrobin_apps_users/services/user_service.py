@@ -25,7 +25,7 @@ class UserService:
 
     def get_corrupted_images(self):
         # type: () -> QuerySet
-        return self.get_all_images().filter(UserService.corrupted_query())
+        return self.get_all_images().filter(UserService.corrupted_query()).distinct()
 
     def get_public_images(self):
         # type: () -> QuerySet
