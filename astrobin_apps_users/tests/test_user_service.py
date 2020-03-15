@@ -77,7 +77,7 @@ class TestUserService(TestCase):
 
         self.assertTrue(image in UserService(user).get_public_images())
         self.assertFalse(wip in UserService(user).get_public_images())
-        self.assertFalse(corrupted in UserService(user).get_public_images())
+        self.assertTrue(corrupted in UserService(user).get_public_images())
 
     def test_get_wip_images(self):
         user = Generators.user()
@@ -143,7 +143,7 @@ class TestUserService(TestCase):
 
         image_numbers = UserService(user1).get_image_numbers()
 
-        self.assertEquals(image_numbers['public_images_no'], 1)
+        self.assertEquals(image_numbers['public_images_no'], 2)
         self.assertEquals(image_numbers['wip_images_no'], 1)
         self.assertEquals(image_numbers['corrupted_no'], 1)
         self.assertEquals(image_numbers['bookmarked_no'], 1)
