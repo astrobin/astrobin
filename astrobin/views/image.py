@@ -902,6 +902,8 @@ class ImageRevisionDeleteView(LoginRequiredMixin, DeleteView):
         if revision.is_final:
             image.is_final = True
             image.save(keep_deleted=True)
+            revision.is_final = False
+            revision.save(keep_deleted=True)
 
         revision.thumbnail_invalidate()
         messages.success(self.request, _("Revision deleted."))
