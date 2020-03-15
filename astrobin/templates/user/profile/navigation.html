@@ -27,7 +27,7 @@
             <a class="dropdown-toggle" data-toggle="dropdown" href="#">
                 <i class="icon-eye-open icon-white"></i>
                 <span class="hidden-phone">{% trans "View" %}</span>
-                {% if corrupted_no > 0 %}
+                {% if corrupted_no > 0 and request.user == requested_user %}
                     <i class="icon-warning-sign hidden-phone"></i>
                 {% endif %}
                 <span class="caret hidden-phone"></span>

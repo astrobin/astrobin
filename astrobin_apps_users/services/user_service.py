@@ -13,10 +13,11 @@ class UserService:
         # type: (User) -> None
         self.user = user
 
-    def _corrupted_query(self):
+    @staticmethod
+    def corrupted_query():
         # type: () -> Q
-        return Q(corrupted=True, is_final=True) | \
-               Q(revisions__corrupted=True, revisions__is_final=True, deleted=None)
+        return Q(corrupted=True) | \
+               Q(revisions__corrupted=True, revisions__deleted=None)
 
     def get_all_images(self):
         # type: () -> QuerySet
@@ -24,25 +25,19 @@ class UserService:
 
     def get_corrupted_images(self):
         # type: () -> QuerySet
-        return self.get_all_images().filter(self._corrupted_query())
+        return self.get_all_images().filter(UserService.corrupted_query())
 
     def get_public_images(self):
         # type: () -> QuerySet
-        return Image.objects \
-            .filter(user=self.user) \
-            .exclude(corrupted=True)
+        return Image.objects.filter(user=self.user)
 
     def get_wip_images(self):
         # type: () -> QuerySet
-        return Image.wip \
-            .filter(user=self.user) \
-            .exclude(corrupted=True)
+        return Image.wip.filter(user=self.user)
 
     def get_deleted_images(self):
         # type: () -> QuerySet
-        return Image.all_objects \
-            .filter(user=self.user) \
-            .exclude(deleted=None)
+        return Image.deleted_objects.filter(user=self.user)
 
     def get_bookmarked_images(self):
         # type: () -> QuerySet
@@ -54,7 +49,7 @@ class UserService:
 
         return Image.objects \
             .filter(pk__in=bookmarked_pks) \
-            .exclude(self._corrupted_query())
+            .exclude(UserService.corrupted_query())
 
     def get_liked_images(self):
         # type: () -> QuerySet
@@ -66,7 +61,7 @@ class UserService:
 
         return Image.objects \
             .filter(pk__in=liked_pks) \
-            .exclude(self._corrupted_query())
+            .exclude(UserService.corrupted_query())
 
     def get_image_numbers(self):
         return {

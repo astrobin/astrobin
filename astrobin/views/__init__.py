@@ -946,10 +946,11 @@ def user_page(request, username):
     menu = []
 
     qs = UserService(user).get_public_images()
-
-    public_qs = UserService(user).get_public_images()
     wip_qs = UserService(user).get_wip_images()
     corrupted_qs = UserService(user).get_corrupted_images()
+
+    if request.user != user :
+        qs = qs.exclude(UserService.corrupted_query())
 
     if 'staging' in request.GET:
         if request.user != user and not request.user.is_superuser:
