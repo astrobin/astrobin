@@ -148,3 +148,23 @@ class TestUserService(TestCase):
         self.assertEquals(image_numbers['corrupted_no'], 1)
         self.assertEquals(image_numbers['bookmarked_no'], 1)
         self.assertEquals(image_numbers['liked_no'], 1)
+
+    def test_get_image_numbers_not_including_corrupted(self):
+        user1 = Generators.user()
+        user2 = Generators.user()
+
+        Generators.image(user=user1)
+        Generators.image(user=user1, is_wip=True)
+        Generators.image(user=user1, corrupted=True)
+
+        image2 = Generators.image(user=user2)
+        ToggleProperty.objects.create_toggleproperty("bookmark", image2, user1)
+        ToggleProperty.objects.create_toggleproperty("like", image2, user1)
+
+        image_numbers = UserService(user1).get_image_numbers(include_corrupted=False)
+
+        self.assertEquals(image_numbers['public_images_no'], 1)
+        self.assertEquals(image_numbers['wip_images_no'], 1)
+        self.assertEquals(image_numbers['corrupted_no'], 1)
+        self.assertEquals(image_numbers['bookmarked_no'], 1)
+        self.assertEquals(image_numbers['liked_no'], 1)
