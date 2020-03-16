@@ -97,7 +97,7 @@
                     </li>
                 {% endif %}
 
-                {% if request.user|can_perform_advanced_platesolving and image.solution is not None and  image.solution|has_started_advanced_platesolving %}
+                {% if request.user|can_perform_advanced_platesolving %}
                     <li class="divider"></li>
 
                     <li>

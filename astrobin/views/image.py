@@ -30,9 +30,6 @@ from django.views.generic import (
 from django.views.generic.detail import SingleObjectMixin
 from silk.profiling.profiler import silk_profile
 
-from astrobin_apps_platesolving.services import SolutionService
-from toggleproperties.models import ToggleProperty
-
 # AstroBin
 from astrobin.forms import (
     CopyGearForm,
@@ -67,6 +64,7 @@ from astrobin_apps_images.services import ImageService
 from astrobin_apps_iotd.models import Iotd
 from astrobin_apps_notifications.utils import push_notification
 from astrobin_apps_platesolving.models import Solution
+from astrobin_apps_platesolving.services import SolutionService
 from astrobin_apps_premium.templatetags.astrobin_apps_premium_tags import can_see_real_resolution
 from nested_comments.models import NestedComment
 from rawdata.forms import (
@@ -689,8 +687,8 @@ class ImageDetailView(ImageDetailViewBase):
                              and instance_to_platesolve.solution
                              and instance_to_platesolve.solution.status >= Solver.SUCCESS,
             'show_advanced_solution': instance_to_platesolve.mouse_hover_image == "SOLUTION"
-                             and instance_to_platesolve.solution
-                             and instance_to_platesolve.solution.status == Solver.ADVANCED_SUCCESS,
+                                      and instance_to_platesolve.solution
+                                      and instance_to_platesolve.solution.status == Solver.ADVANCED_SUCCESS,
             'skyplot_zoom1': skyplot_zoom1,
 
             'image_ct': ContentType.objects.get_for_model(Image),
