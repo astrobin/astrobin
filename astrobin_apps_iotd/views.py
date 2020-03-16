@@ -23,7 +23,7 @@ from astrobin_apps_iotd.templatetags.astrobin_apps_iotd_tags import (
     iotd_votes_today,
     iotd_elections_today)
 from astrobin_apps_premium.templatetags.astrobin_apps_premium_tags import is_lite, is_premium, is_premium_2020, \
-    is_ultimate_2020
+    is_ultimate_2020, is_lite_2020
 
 
 class IotdBaseQueueView(View):
@@ -53,6 +53,7 @@ class IotdSubmissionQueueView(
             # Older subscriptions (Lite/Premium) are still allowed, to offer continuity.
             user_has_rights = is_lite(image.user) or \
                               is_premium(image.user) or \
+                              is_lite_2020(image.user) or \
                               is_premium_2020(image.user) or \
                               is_ultimate_2020(image.user)  # type: bool
 
