@@ -63,10 +63,18 @@ class UserService:
             .filter(pk__in=liked_pks) \
             .exclude(UserService.corrupted_query())
 
-    def get_image_numbers(self):
+    def get_image_numbers(self, include_corrupted=True):
+        public = self.get_public_images()
+        if not include_corrupted:
+            public = public.exclude(UserService.corrupted_query())
+
+        wip = self.get_wip_images()
+        if not include_corrupted:
+            wip = wip.exclude(UserService.corrupted_query())
+
         return {
-            'public_images_no': self.get_public_images().count(),
-            'wip_images_no': self.get_wip_images().count(),
+            'public_images_no': public.count(),
+            'wip_images_no': wip.count(),
             'corrupted_no': self.get_corrupted_images().count(),
             'bookmarked_no': self.get_bookmarked_images().count(),
             'liked_no': self.get_liked_images().count(),
