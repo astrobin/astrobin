@@ -127,6 +127,7 @@ def astrobin_user(context, user, **kwargs):
         'request_user': request_user,
         'view': view,
         'layout': layout,
+        'user_is_owner': request.user == user,
         'images': images.count(),
         'followers': followers,
         'following': following,

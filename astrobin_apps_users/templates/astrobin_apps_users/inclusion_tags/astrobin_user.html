@@ -44,12 +44,24 @@
         </div>
 
         <div id="profile-details">
-            {% cache 300 astrobin_user user.username view LANGUAGE_CODE %}
-            <ul>
-                <li><a href="{% url 'user_page' user.username %}?sub=uploaded"><strong>{{images}}</strong> {% trans "Images" %}</a></li>
-                <li><a href="{% url 'user_page_followers' user.username %}"><strong>{{followers}}</strong> {% trans "Followers" %}</a></li>
-                <li><a href="{% url 'user_page_following' user.username %}"><strong>{{following}}</strong> {% trans "Following" %}</a></li>
-            </ul>
+            {% cache 300 astrobin_user user.username view LANGUAGE_CODE user_is_owner %}
+                <ul>
+                    <li>
+                        <a href="{% url 'user_page' user.username %}?sub=uploaded">
+                            <strong>{{ images }}</strong> {% trans "Images" %}
+                        </a>
+                    </li>
+                    <li>
+                        <a href="{% url 'user_page_followers' user.username %}">
+                            <strong>{{ followers }}</strong> {% trans "Followers" %}
+                        </a>
+                    </li>
+                    <li>
+                        <a href="{% url 'user_page_following' user.username %}">
+                            <strong>{{ following }}</strong> {% trans "Following" %}
+                        </a>
+                    </li>
+                </ul>
             {% endcache %}
         </div>
     </div>
