@@ -906,7 +906,7 @@ class Image(HasSolutionMixin, SafeDeleteModel):
     uncompressed_source_file = models.FileField(
         upload_to=uncompressed_source_upload_path,
         validators=(FileValidator(allowed_extensions=(settings.ALLOWED_UNCOMPRESSED_SOURCE_EXTENSIONS)),),
-        verbose_name=_("Uncompressed source"),
+        verbose_name=_("Uncompressed source (max 200 MB)"),
         help_text=_(
             "You can store the final processed image that came out of your favorite image editor (e.g. PixInsight, "
             "Adobe Photoshop, etc) here on AstroBin, for archival purposes. This file is stored privately and only you "

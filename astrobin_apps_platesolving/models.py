@@ -102,7 +102,7 @@ class PlateSolvingAdvancedSettings(models.Model):
         max_length=256,
         null=True,
         blank=True,
-        verbose_name=_("Sample raw frame"),
+        verbose_name=_("Sample raw frame (max 200 MB)"),
         help_text=_(
             "To improve the accuracy of your plate-solution even further, please upload one of the XISF or " +
             "FITS files from your data set. Such files normally have date and time headers that will allow AstroBin " +
