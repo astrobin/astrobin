@@ -1342,7 +1342,7 @@ def user_page(request, username):
             corrupted=True, user=user).count() > 0,
     }
 
-    response_dict.update(UserService(user).get_image_numbers())
+    response_dict.update(UserService(user).get_image_numbers(include_corrupted=request.user == user))
 
     template_name = 'user/profile.html'
     if request.is_ajax():
@@ -1373,7 +1373,7 @@ def user_page_commercial_products(request, username):
         'merge_retailed_gear_form': MergeRetailedGearForm(user=user),
     }
 
-    response_dict.update(UserService(user).get_image_numbers())
+    response_dict.update(UserService(user).get_image_numbers(include_corrupted=request.user == user))
 
     return render(request, 'user/profile/commercial/products.html', response_dict)
 
@@ -1406,7 +1406,7 @@ def user_page_bookmarks(request, username):
         'alias': 'gallery',
     }
 
-    response_dict.update(UserService(user).get_image_numbers())
+    response_dict.update(UserService(user).get_image_numbers(include_corrupted=request.user == user))
 
     return render(request, template_name, response_dict)
 
@@ -1426,7 +1426,7 @@ def user_page_liked(request, username):
         'alias': 'gallery',
     }
 
-    response_dict.update(UserService(user).get_image_numbers())
+    response_dict.update(UserService(user).get_image_numbers(include_corrupted=request.user == user))
 
     return render(request, template_name, response_dict)
 
@@ -1437,7 +1437,6 @@ def user_page_following(request, username, extra_context=None):
     user = get_object_or_404(UserProfile, user__username=username).user
 
     user_ct = ContentType.objects.get_for_model(User)
-    image_ct = ContentType.objects.get_for_model(Image)
     followed_users = []
     properties = ToggleProperty.objects.filter(
         property_type="follow",
@@ -1463,7 +1462,7 @@ def user_page_following(request, username, extra_context=None):
         'private_message_form': PrivateMessageForm(),
     }
 
-    response_dict.update(UserService(user).get_image_numbers())
+    response_dict.update(UserService(user).get_image_numbers(include_corrupted=request.user == user))
 
     return render(request, template_name, response_dict)
 
@@ -1474,7 +1473,6 @@ def user_page_followers(request, username, extra_context=None):
     user = get_object_or_404(UserProfile, user__username=username).user
 
     user_ct = ContentType.objects.get_for_model(User)
-    image_ct = ContentType.objects.get_for_model(Image)
     followers = [
         x.user for x in
         ToggleProperty.objects.filter(
@@ -1496,7 +1494,7 @@ def user_page_followers(request, username, extra_context=None):
         'private_message_form': PrivateMessageForm(),
     }
 
-    response_dict.update(UserService(user).get_image_numbers())
+    response_dict.update(UserService(user).get_image_numbers(include_corrupted=request.user == user))
 
     return render(request, template_name, response_dict)
 
@@ -1506,14 +1504,13 @@ def user_page_plots(request, username):
     """Shows the user's public page"""
     user = get_object_or_404(UserProfile, user__username=username).user
     profile = user.userprofile
-    image_ct = ContentType.objects.get_for_model(Image)
 
     response_dict = {
         'requested_user': user,
         'profile': profile,
     }
 
-    response_dict.update(UserService(user).get_image_numbers())
+    response_dict.update(UserService(user).get_image_numbers(include_corrupted=request.user == user))
 
     return render(request, 'user/plots.html', response_dict)
 
@@ -1526,7 +1523,6 @@ def user_page_api_keys(request, username):
         return HttpResponseForbidden()
 
     profile = user.userprofile
-    image_ct = ContentType.objects.get_for_model(Image)
     keys = App.objects.filter(registrar=user)
 
     response_dict = {
@@ -1535,7 +1531,7 @@ def user_page_api_keys(request, username):
         'api_keys': keys,
     }
 
-    response_dict.update(UserService(user).get_image_numbers())
+    response_dict.update(UserService(user).get_image_numbers(include_corrupted=request.user == user))
 
     return render(request, 'user/api_keys.html', response_dict)
 
