@@ -2,7 +2,7 @@ from django.conf.urls import url
 
 from astrobin_apps_platesolving.views.solution import \
     SolutionFinalizeView, SolveAdvancedView, SolutionUpdateView, \
-    SolveView, SolutionPixInsightWebhook, SolutionFinalizeAdvancedView
+    SolveView, SolutionPixInsightWebhook, SolutionFinalizeAdvancedView, SolutionPixInsightNextTask
 
 urlpatterns = (
     url(
@@ -31,7 +31,12 @@ urlpatterns = (
         name='astrobin_apps_platesolution.finalize'),
 
     url(
-        r'webhooks/pixinsight/$',
+        r'pixinsight/next-task/$',
+        SolutionPixInsightNextTask.as_view(),
+        name='astrobin_apps_platesolution.pixinsight_next_task'),
+
+    url(
+        r'pixinsight/webhook/$',
         SolutionPixInsightWebhook.as_view(),
         name='astrobin_apps_platesolution.pixinsight_webhook'),
 )

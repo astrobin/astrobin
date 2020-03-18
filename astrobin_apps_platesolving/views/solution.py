@@ -1,6 +1,5 @@
 import logging
 import os
-import re
 import time
 import urllib2
 
@@ -11,8 +10,9 @@ from django.core.files import File
 from django.core.files.base import ContentFile
 from django.core.files.temp import NamedTemporaryFile
 from django.db import IntegrityError
-from django.http import HttpResponse
+from django.http import HttpResponse, HttpResponseForbidden
 from django.shortcuts import get_object_or_404
+from django.urls import reverse
 from django.utils.decorators import method_decorator
 from django.views.decorators.csrf import csrf_exempt
 from django.views.generic import base
@@ -24,7 +24,7 @@ from astrobin.models import DeepSky_Acquisition
 from astrobin.utils import degrees_minutes_seconds_to_decimal_degrees
 from astrobin_apps_platesolving.annotate import Annotator
 from astrobin_apps_platesolving.api_filters.image_object_id_filter import ImageObjectIdFilter
-from astrobin_apps_platesolving.models import PlateSolvingAdvancedSettings
+from astrobin_apps_platesolving.models import PlateSolvingAdvancedSettings, PlateSolvingAdvancedTask
 from astrobin_apps_platesolving.models import PlateSolvingSettings
 from astrobin_apps_platesolving.models import Solution
 from astrobin_apps_platesolving.serializers import SolutionSerializer
@@ -251,6 +251,48 @@ class SolutionFinalizeAdvancedView(base.View):
         solution = get_object_or_404(Solution, pk=kwargs.pop('pk'))
         context = {'status': solution.status}
         return HttpResponse(simplejson.dumps(context), content_type='application/json')
+
+
+class SolutionPixInsightNextTask(base.View):
+    @method_decorator(csrf_exempt)
+    def dispatch(self, request, *args, **kwargs):
+        return super(SolutionPixInsightNextTask, self).dispatch(request, *args, **kwargs)
+
+    def post(self, request, *args, **kwargs):
+        username = request.POST.get('userName')
+        password = request.POST.get('userPassword')
+
+        if username != settings.PIXINSIGHT_USERNAME or password != settings.PIXINSIGHT_PASSWORD:
+            return HttpResponseForbidden()
+
+        task = PlateSolvingAdvancedTask.objects.filter(active=True).order_by('-created').first()
+
+        if task is None:
+            log.debug("PixInsight next-task: no active tasks.")
+            return HttpResponse('')
+
+        task.active = False
+        task.save()
+
+        response = \
+            'OK\n' \
+            'serialNumber=%s\n' \
+            'taskType=%s\n' \
+            'taskParams=%s\n' \
+            'requestUser=%s\n' \
+            'requestUTC=%s\n' \
+            'callbackURL=%s\n' % (
+                task.serial_number,
+                'ASTROBIN_SVG_OVERLAY',
+                task.task_params,
+                username,
+                task.created,
+                settings.BASE_URL + reverse('astrobin_apps_platesolution.pixinsight_webhook')
+            )
+
+        log.debug("PixInsight next-task: sending response\n%s" % response)
+
+        return HttpResponse(response)
 
 
 class SolutionPixInsightWebhook(base.View):

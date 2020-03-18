@@ -1,27 +1,17 @@
 import logging
+import urllib
 
-import requests
 from django.conf import settings
-from django.urls import reverse
 
 from astrobin.templatetags.tags import thumbnail_scale
 from astrobin_apps_platesolving.backends.base import AbstractPlateSolvingBackend
+from astrobin_apps_platesolving.models import PlateSolvingAdvancedTask
 
 log = logging.getLogger('apps')
 
-default_url = 'https://pixinsight.com/tasks/new-task.php'
-
 
 class Solver(AbstractPlateSolvingBackend):
-    def __init__(self, apiurl=default_url):
-        self.session = None
-        self.apiurl = apiurl
-
     def start(self, image_url, **kwargs):
-        headers = {
-            'content-type': 'application/x-www-form-urlencoded'
-        }
-
         smallSizeRatio = thumbnail_scale(kwargs.pop('image_width'), 'hd', 'regular')
 
         task_params = [
@@ -91,25 +81,9 @@ class Solver(AbstractPlateSolvingBackend):
         if len(layers) > 0:
             task_params.append('layers=%s' % '|'.join(layers))
 
-        data = {
-            'userName': settings.PIXINSIGHT_USERNAME,
-            'userPassword': settings.PIXINSIGHT_PASSWORD,
-            'taskType': 'ASTROBIN_SVG_OVERLAY',
-            'taskParams': '\n'.join(task_params),
-            'callbackURL': settings.BASE_URL + reverse('astrobin_apps_platesolution.pixinsight_webhook'),
-        }
+        task = PlateSolvingAdvancedTask.objects.create(
+            task_params=urllib.quote_plus('\n'.join(task_params)),
+        )
 
-        log.debug("PixInsight plate-solving: sending request %s" % str(data))
-
-        r = requests.post(default_url, headers=headers, data=data)
-
-        if r.status_code == 200:
-            try:
-                serial_number = r.text.split('\n')[1].split('serialNumber=')[1]
-                log.debug("PixInsight plate-solving initiated: s/n = %s" % serial_number)
-                return serial_number
-            except IndexError:
-                log.error("Unable to parse PixInsight response")
-                return None
-        else:
-            log.error("PixInsight plate-solving could not initiate: %s" % r.text)
+        log.debug("PixInsight plate-solving: created task %s" % task.serial_number)
+        return task.serial_number

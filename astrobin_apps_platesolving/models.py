@@ -1,3 +1,6 @@
+import string
+import random
+
 from django.conf import settings
 from django.contrib.contenttypes import fields
 from django.contrib.contenttypes.models import ContentType
@@ -203,6 +206,28 @@ class PlateSolvingAdvancedSettings(models.Model):
         verbose_name=_("Show PPMXL catalog"),
         help_text=mark_safe(
             '<a href="https://arxiv.org/abs/1003.5852" target="_blank">https://arxiv.org/abs/1003.5852</a>'),
+    )
+
+
+class PlateSolvingAdvancedTask(models.Model):
+    serial_number = models.CharField(
+        max_length=32,
+        null=False,
+        blank=False,
+        default=''.join(random.choice(string.ascii_uppercase + string.digits) for _ in range(32)),
+    )
+
+    created = models.DateTimeField(
+        auto_now_add=True
+    )
+
+    active = models.BooleanField(
+        default=True,
+    )
+
+    task_params = models.TextField(
+        null=False,
+        blank=False,
     )
 
 
