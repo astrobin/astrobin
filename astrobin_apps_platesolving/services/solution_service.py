@@ -17,7 +17,8 @@ class SolutionService:
             advanced_annotations_lines = self.solution.advanced_annotations.split('\n')
             for line in advanced_annotations_lines:
                 advanced_annotation = line.split(',')[-1]
-                if advanced_annotation not in objects and advanced_annotation != '':
+                header = line.split(',')[0]
+                if header == "Label" and advanced_annotation not in objects and advanced_annotation != '':
                     objects.append(advanced_annotation)
                     
         return sorted(objects)
