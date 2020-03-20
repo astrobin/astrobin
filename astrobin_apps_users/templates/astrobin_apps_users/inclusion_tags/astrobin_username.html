@@ -1,9 +1,7 @@
 {% load cache i18n %}
-
 {% load common_tags %}
 
-
-{% cache 3600 astrobin_username user.username link %}
+{% cache 3600 astrobin_username user.username link request.LANGUAGE_CODE %}
     {% if user %}
         {% if link %}
         <a
