@@ -1,6 +1,3 @@
-import string
-import random
-
 from django.conf import settings
 from django.contrib.contenttypes import fields
 from django.contrib.contenttypes.models import ContentType
@@ -198,7 +195,8 @@ class PlateSolvingAdvancedSettings(models.Model):
     show_gaia_dr2 = models.BooleanField(
         default=False,
         verbose_name=_("Show Gaia DR2 objects"),
-        help_text=mark_safe('<a href="https://wikipedia.org/wiki/Gaia_(spacecraft)" target="_blank">https://wikipedia.org/wiki/Gaia_(spacecraft)</a>'),
+        help_text=mark_safe(
+            '<a href="https://wikipedia.org/wiki/Gaia_(spacecraft)" target="_blank">https://wikipedia.org/wiki/Gaia_(spacecraft)</a>'),
     )
 
     show_ppmxl = models.BooleanField(
@@ -214,7 +212,6 @@ class PlateSolvingAdvancedTask(models.Model):
         max_length=32,
         null=False,
         blank=False,
-        default=''.join(random.choice(string.ascii_uppercase + string.digits) for _ in range(32)),
     )
 
     created = models.DateTimeField(

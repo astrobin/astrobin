@@ -6,7 +6,6 @@ from django.db import migrations, models
 
 
 class Migration(migrations.Migration):
-
     dependencies = [
         ('astrobin_apps_platesolving', '0011_update_platesolvingadvanced_settings_sample_raw_frame_file_verbose_name'),
     ]
@@ -16,7 +15,7 @@ class Migration(migrations.Migration):
             name='PlateSolvingAdvancedTask',
             fields=[
                 ('id', models.AutoField(auto_created=True, primary_key=True, serialize=False, verbose_name='ID')),
-                ('serial_number', models.CharField(default=b'O0EIAWRS1ERRCH9440PDI71TDY38DRUM', max_length=32)),
+                ('serial_number', models.CharField(max_length=32)),
                 ('created', models.DateTimeField(auto_now_add=True)),
                 ('active', models.BooleanField(default=True)),
                 ('task_params', models.TextField()),

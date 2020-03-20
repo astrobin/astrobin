@@ -1,4 +1,6 @@
 import logging
+import random
+import string
 import urllib
 
 from django.conf import settings
@@ -75,13 +77,19 @@ class Solver(AbstractPlateSolvingBackend):
 
             if advanced_settings.scaled_font_size == 'S':
                 task_params.append('smallSizeTextRatio=%f' % .66)
+                task_params.append('textScale=%f' % .66)
+            elif advanced_settings.scaled_font_size == 'M':
+                task_params.append('smallSizeTextRatio=%f' % .9)
+                task_params.append('textScale=%f' % .9)
             elif advanced_settings.scaled_font_size == 'L':
                 task_params.append('smallSizeTextRatio=%f' % 1.33)
+                task_params.append('textScale=%f' % 1.33)
 
         if len(layers) > 0:
             task_params.append('layers=%s' % '|'.join(layers))
 
         task = PlateSolvingAdvancedTask.objects.create(
+            serial_number=''.join(random.choice(string.ascii_uppercase + string.digits) for _ in range(32)),
             task_params=urllib.quote_plus('\n'.join(task_params)),
         )
 
