@@ -1729,7 +1729,7 @@ BODY:first-of-type ul.as-list, x:-moz-any-link, x:default { /* Target FF 3.5+ */
     width: calc(50% - 6px);
 
     &:first-child {
-      margin-right: 6px;
+      margin-right: 12px;
     }
   }
 
@@ -1741,7 +1741,7 @@ BODY:first-of-type ul.as-list, x:-moz-any-link, x:default { /* Target FF 3.5+ */
       display: inline-block;
 
       &:first-child {
-        margin-right: 6px;
+        margin-right: 12px;
       }
     }
   }
