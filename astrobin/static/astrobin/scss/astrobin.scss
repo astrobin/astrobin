@@ -1726,15 +1726,23 @@ BODY:first-of-type ul.as-list, x:-moz-any-link, x:default { /* Target FF 3.5+ */
   }
 
   .coordinates > abbr {
-    width: 50%;
+    width: calc(50% - 6px);
+
+    &:first-child {
+      margin-right: 6px;
+    }
   }
 
   .powered-by-pixinsight {
     margin-top: $spacer-small;
 
     > * {
-      width: 50%;
+      width: calc(50% - 6px);
       display: inline-block;
+
+      &:first-child {
+        margin-right: 6px;
+      }
     }
   }
 }
