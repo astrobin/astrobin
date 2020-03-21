@@ -125,12 +125,26 @@ body.full {
 
 /* Fixes dropdowns on IE */
 
-.user-nav .user-dropdown {
-  min-height: 20px;
-}
+.user-nav {
+  .user-dropdown {
+    min-height: 20px;
+  }
 
-.user-nav .upload-button {
-  font-size: 16px;
+  .upload-button {
+    font-size: 16px;
+  }
+
+  .username {
+    max-width: 150px;
+    display: inline-block;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    vertical-align: middle;
+  }
+
+  #donate-header-button {
+    margin-left: $spacer-small;
+  }
 }
 
 /* Subnav */
@@ -269,3 +283,4 @@ li [class*=" icon-"], .nav li [class*=" icon-"] {
 .btn-inverse .caret {
   margin-left: 5px;
 }
+

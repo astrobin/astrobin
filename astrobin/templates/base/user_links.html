@@ -141,7 +141,7 @@
                 <div class="btn-group">
                     <a href="{% url 'user_page' request.user.username %}" class="btn btn-primary">
                         <span class="visible-phone"><i class="icon icon-user"></i></span>
-                        <span class="hidden-phone">{{request.user.userprofile|truncatechars:"20"}}</span>
+                        <span class="hidden-phone username">{{request.user.userprofile|truncatechars:"20"}}</span>
                         <span id="navbar-user-scores">
                             {% if not request.user.userprofile.exclude_from_competitions %}
                             <span id="astrobin-index" rel="tooltip" data-placement="bottom" title="{% trans "AstroBin index" %}">
