@@ -192,18 +192,11 @@ class PlateSolvingAdvancedSettings(models.Model):
         help_text=_("General Catalog of Variable Stars"),
     )
 
-    show_gaia_dr2 = models.BooleanField(
+    show_tycho_2 = models.BooleanField(
         default=False,
-        verbose_name=_("Show Gaia DR2 objects"),
+        verbose_name=_("Show Tycho-2 catalog"),
         help_text=mark_safe(
-            '<a href="https://wikipedia.org/wiki/Gaia_(spacecraft)" target="_blank">https://wikipedia.org/wiki/Gaia_(spacecraft)</a>'),
-    )
-
-    show_ppmxl = models.BooleanField(
-        default=False,
-        verbose_name=_("Show PPMXL catalog"),
-        help_text=mark_safe(
-            '<a href="https://arxiv.org/abs/1003.5852" target="_blank">https://arxiv.org/abs/1003.5852</a>'),
+            '<a href="https://wikipedia.org/wiki/Tycho-2_Catalogue" target="_blank">https://wikipedia.org/wiki/Tycho-2_Catalogue</a>'),
     )
 
 

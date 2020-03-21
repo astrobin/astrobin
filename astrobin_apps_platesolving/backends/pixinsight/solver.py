@@ -70,10 +70,8 @@ class Solver(AbstractPlateSolvingBackend):
                 layers.append('Asteroids')
             if advanced_settings.show_gcvs:
                 layers.append('GCVS')
-            if advanced_settings.show_gaia_dr2:
-                layers.append('Gaia DR2')
-            if advanced_settings.show_ppmxl:
-                layers.append('PPMXL')
+            if advanced_settings.show_tycho_2:
+                layers.append('TYCHO-2')
 
             if advanced_settings.scaled_font_size == 'S':
                 task_params.append('smallSizeTextRatio=%f' % .66)
