@@ -88,7 +88,7 @@ class Solver(AbstractPlateSolvingBackend):
 
         task = PlateSolvingAdvancedTask.objects.create(
             serial_number=''.join(random.choice(string.ascii_uppercase + string.digits) for _ in range(32)),
-            task_params=urllib.quote_plus('\n'.join(task_params)),
+            task_params=urllib.quote('\n'.join(task_params)),
         )
 
         log.debug("PixInsight plate-solving: created task %s" % task.serial_number)
