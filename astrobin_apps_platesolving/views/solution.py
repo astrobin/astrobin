@@ -268,7 +268,6 @@ class SolutionPixInsightNextTask(base.View):
         task = PlateSolvingAdvancedTask.objects.filter(active=True).order_by('-created').first()
 
         if task is None:
-            log.debug("PixInsight next-task: no active tasks.")
             return HttpResponse('')
 
         task.active = False
