@@ -3,7 +3,6 @@ from django.contrib.auth.models import User, Group
 from django.core.urlresolvers import reverse
 from django.test import TestCase
 from mock import patch
-from subscription.models import Subscription
 
 from astrobin.models import Image, UserProfile
 from astrobin_apps_premium.templatetags.astrobin_apps_premium_tags import *
@@ -483,7 +482,7 @@ class PremiumTest(TestCase):
             Image.all_objects.last().undelete()
 
             # Deleting an image uploaded before the subscription was created does not decrease the counter.
-            image = Image.objects_including_wip.all().order_by('-pk')[1] # Second last element
+            image = Image.objects_including_wip.all().order_by('-pk')[1]  # Second last element
             image.uploaded = image.uploaded - datetime.timedelta(days=2)
             image.save(keep_deleted=True)
             image.delete()
@@ -579,7 +578,7 @@ class PremiumTest(TestCase):
             Image.all_objects.last().undelete()
 
             # Deleting an image uploaded before the subscription was created does not decrease the counter.
-            image = Image.objects_including_wip.all().order_by('-pk')[1] # Second last element
+            image = Image.objects_including_wip.all().order_by('-pk')[1]  # Second last element
             image.uploaded = image.uploaded - datetime.timedelta(days=1)
             image.save(keep_deleted=True)
             image.delete()

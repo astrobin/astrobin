@@ -1,0 +1,87 @@
+{% extends "base.html" %}
+
+{% load i18n %}
+{% load django_bootstrap_breadcrumbs %}
+{% load bootstrap_toolkit %}
+{% load common_tags %}
+
+
+{% block title %}
+    {% trans "Data loss compensation request" %}
+{% endblock %}
+
+{% block breadcrumbs %}
+    {{ block.super }}
+    {% breadcrumb 'AstroBin Premium' None %}
+    {% breadcrumb 'Data loss compensation request' None %}
+    {% breadcrumb 'Not eligible' None %}
+{% endblock %}
+
+{% block content %}
+
+    <div class="row section">
+        <div class="span12">
+            <h1>{% trans "Data loss compensation request" %}</h1>
+            <div class="well">
+                <p>
+                    {% blocktrans trimmed %}
+                        You are eligible for compensation due to the data loss that happened on February 16th, 2020.
+                    {% endblocktrans %}
+
+                    {% blocktrans trimmed %}
+                        If you haven't had the chance, please take a minute to read what happened at the following page:
+                    {% endblocktrans %}
+                </p>
+
+                <p>
+                    <a href="https://docs.google.com/document/d/1PzdYQQpR4LueJUMnbyi162xQLAYkr3MiU_7wy4ScdMU/edit?usp=sharing">
+                        {% trans "Official statement and post-mortem" %}
+                    </a>
+                </p>
+
+                <p>
+                    {% blocktrans trimmed %}
+                        Please accept our apology once more.
+                    {% endblocktrans %}
+                </p>
+            </div>
+        </div>
+    </div>
+
+    <div class="row section">
+        <div class="span12">
+            <h3>{% trans "Please chooce your compensation from the list below" %}</h3>
+
+            <div class="well">
+                <p>
+                    {% blocktrans trimmed %}
+                        Compensation is offered in the form of free time on the new AstroBin subscription tier called
+                        "Ultimate".
+                    {% endblocktrans %}
+                </p>
+
+                <p>
+                    {% blocktrans trimmed with url="https://welcome.astrobin.com/pricing" %}
+                        To learn more about AstroBin Ultimate, please visit
+                        <a href="{{ url }}" target="_blank">the pricing page</a>.
+                    {% endblocktrans %}
+                </p>
+            </div>
+
+            <form action="{% url 'astrobin_apps_premium.data_loss_compensation_request' %}" method="post">
+                {% csrf_token %}
+                {{ form | as_bootstrap }}
+
+                <div class="form-actions">
+                    <button
+                            class="btn btn-primary btn-block-mobile {% button_loading_class %}"
+                            type="submit">
+                        {% trans "Submit" %}
+                        {% button_loading_indicator %}
+                    </button>
+                </div>
+            </form>
+        </div>
+    </div>
+
+{% endblock %}
