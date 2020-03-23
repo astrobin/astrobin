@@ -6,6 +6,6 @@
         <a href="{% url 'user_page' image.user.username %}">
             {% avatar image.user 64 %}
         </a>
-        {% premium_badge image 'small' %}
+        {% premium_badge image.user 'small' %}
     </div>
 {% endif %}
