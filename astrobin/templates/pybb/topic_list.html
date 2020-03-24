@@ -6,7 +6,7 @@
     <table class="table table-striped table-condensed topic-list">
         <thead>
             <tr class="topic-row head-row">
-                {%  if request.user|is_content_moderator %}
+                {%  if request.user|is_forum_moderator %}
                     <th class="topic-select">
                         &nbsp;
                     </th>
@@ -50,7 +50,7 @@
         <tbody>
         {% for topic in topic_list|pybb_topic_unread:user %}
             <tr class="topic-row {% if topic.sticky %} sticky {% endif %} {% cycle "odd" "even" %} {% if topic.on_moderation %} on-moderation {% endif %}">
-                {% if request.user|is_content_moderator %}
+                {% if request.user|is_forum_moderator %}
                     <td class="topic-select">
                         <input type="checkbox" name="topic-ids[]" value="{{ topic.id }}">
                     </td>
@@ -118,7 +118,7 @@
         </tbody>
     </table>
 
-    {% if request.user|is_content_moderator %}
+    {% if request.user|is_forum_moderator %}
         <div class="form-actions">
             <input type="submit" class="btn" value="{% trans "Mark as spam" %}" />
         </div>
