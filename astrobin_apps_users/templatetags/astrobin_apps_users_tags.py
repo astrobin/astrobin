@@ -18,8 +18,8 @@ from toggleproperties.models import ToggleProperty
 register = Library()
 
 
-@register.inclusion_tag('astrobin_apps_users/inclusion_tags/astrobin_username.html')
-def astrobin_username(user, **kwargs):
+@register.inclusion_tag('astrobin_apps_users/inclusion_tags/astrobin_username.html', takes_context=True)
+def astrobin_username(context, user, **kwargs):
     if not hasattr(user, 'userprofile'):
         try:
             user = UserProfile.objects.get(user__username = user).user
@@ -79,8 +79,9 @@ def astrobin_username(user, **kwargs):
         classes.append(' astrobin-premium-member')
         titles.append(_('Premium member'))
 
-    context = user_metadata.copy()
+    context.update(user_metadata)
     context.update({
+        'request': context['request'],
         'user': user,
         'classes': classes,
         'titles': titles,

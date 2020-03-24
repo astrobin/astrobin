@@ -76,7 +76,7 @@ class ImageRevisionResource(ModelResource):
 
     class Meta:
         authentication = AppAuthentication()
-        queryset = ImageRevision.objects.filter(image__is_wip = False)
+        queryset = ImageRevision.objects.filter(image__is_wip = False, corrupted=False)
         fields = [
             'uploaded',
             'w',
@@ -185,7 +185,7 @@ class ImageResource(ModelResource):
 
     class Meta:
         authentication = AppAuthentication()
-        queryset = Image.objects.all()
+        queryset = Image.objects.filter(corrupted=False, is_wip=False)
         fields = [
             'id',
             'hash',
@@ -387,7 +387,7 @@ class ImageOfTheDayResource(ModelResource):
 
     class Meta:
         authentication = AppAuthentication()
-        queryset = ImageOfTheDay.objects.all()
+        queryset = ImageOfTheDay.objects.filter(image__corrupted=False)
         fields = [
             'image',
             'runnerup_1',
@@ -406,7 +406,7 @@ class TopPickResource(ModelResource):
 
     class Meta:
         authentication = AppAuthentication()
-        queryset = IotdVote.objects.all()
+        queryset = IotdVote.objects.filter(image__corrupted=False)
         fields = [
             'image',
             'date'
@@ -497,7 +497,7 @@ class UserProfileResource(ModelResource):
         ordering = ['-date_joined']
 
     def dehydrate_image_count(self, bundle):
-        return Image.objects.filter(user=bundle.obj.user).count()
+        return Image.objects.filter(user=bundle.obj.user, corrupted=False, is_wip=False).count()
 
     def dehydrate_received_likes_count(self, bundle):
         likes = 0

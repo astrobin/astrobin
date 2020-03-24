@@ -117,7 +117,7 @@ class ForumModerationMarkAsSpamView(LoginRequiredMixin, GroupRequiredMixin, View
             try:
                 topic = Topic.objects.get(id=id)
                 user = topic.user
-                user.delete()
+                user.userprofile.delete()
             except Topic.DoesNotExist:
                 # Topic already deleted by deleting the user
                 pass

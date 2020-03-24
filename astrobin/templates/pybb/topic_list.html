@@ -5,108 +5,110 @@
 <form method="post" action="{% url 'forum_moderation_mark_as_spam' %}">{% csrf_token %}
     <table class="table table-striped table-condensed topic-list">
         <thead>
-            <tr class="topic-row head-row">
-                {%  if request.user|is_content_moderator %}
-                    <th class="topic-select">
-                        &nbsp;
-                    </th>
-                {% endif %}
-
-                <th class="topic-state">
+        <tr class="topic-row head-row">
+            {% if request.user|is_forum_moderator %}
+                <th class="topic-select">
                     &nbsp;
                 </th>
+            {% endif %}
 
-                {% if not forum %}
-                    <th class="topic-forum hidden-phone">
-                        {% trans "Forum" %}
-                    </th>
-                {% endif %}
+            <th class="topic-state">
+                &nbsp;
+            </th>
 
-                <th class="topic-name">
-                    {% if forum %}
-                        {{forum.name}}
-                    {% else %}
-                        {% trans "Topic" %}
-                    {% endif %}
+            {% if not forum %}
+                <th class="topic-forum hidden-phone">
+                    {% trans "Forum" %}
                 </th>
-                <th class="topic-author hidden-phone hidden-tablet">
-                    {% trans "Author" %}
-                </th>
+            {% endif %}
 
+            <th class="topic-name">
                 {% if forum %}
-                    <th class="topic-post-count hidden-phone">
-                        {% trans "Posts" %}
-                    </th>
-                    <th class="topic-view-count hidden-phone">
-                        {% trans "Views" %}
-                    </th>
+                    {{ forum.name }}
+                {% else %}
+                    {% trans "Topic" %}
                 {% endif %}
+            </th>
+            <th class="topic-author hidden-phone hidden-tablet">
+                {% trans "Author" %}
+            </th>
 
-                <th class="topic-last-post hidden-phone hidden-tablet">
-                    {% trans "Last post" %}
+            {% if forum %}
+                <th class="topic-post-count hidden-phone">
+                    {% trans "Posts" %}
                 </th>
-            </tr>
+                <th class="topic-view-count hidden-phone">
+                    {% trans "Views" %}
+                </th>
+            {% endif %}
+
+            <th class="topic-last-post hidden-phone hidden-tablet">
+                {% trans "Last post" %}
+            </th>
+        </tr>
         </thead>
         <tbody>
         {% for topic in topic_list|pybb_topic_unread:user %}
-            <tr class="topic-row {% if topic.sticky %} sticky {% endif %} {% cycle "odd" "even" %} {% if topic.on_moderation %} on-moderation {% endif %}">
-                {% if request.user|is_content_moderator %}
-                    <td class="topic-select">
-                        <input type="checkbox" name="topic-ids[]" value="{{ topic.id }}">
+            {% if not topic.user.userprofile.deleted %}
+                <tr class="topic-row {% if topic.sticky %} sticky {% endif %} {% cycle "odd" "even" %} {% if topic.on_moderation %} on-moderation {% endif %}">
+                    {% if request.user|is_forum_moderator %}
+                        <td class="topic-select">
+                            <input type="checkbox" name="topic-ids[]" value="{{ topic.id }}">
+                        </td>
+                    {% endif %}
+
+                    <td class="topic-state{% if topic.unread %} topic-unread{% endif %}">
+                        <div class="state-indicator"></div>
                     </td>
-                {% endif %}
 
-                <td class="topic-state{% if topic.unread %} topic-unread{% endif %}">
-                    <div class="state-indicator"></div>
-                </td>
+                    {% if not forum %}
+                        <td class="topic-forum hidden-phone">
+                            <a href="{{ topic.forum.get_absolute_url }}">
+                                [{{ topic.forum.name }}]
+                            </a>
+                        </td>
+                    {% endif %}
 
-                {% if not forum %}
-                    <td class="topic-forum hidden-phone">
-                        <a href="{{topic.forum.get_absolute_url}}">
-                            [{{topic.forum.name}}]
-                        </a>
-                    </td>
-                {% endif %}
-
-                <td class="topic-name{% if topic.unread %} topic-unread{% endif %}">
-                    <a href="{{ topic.get_absolute_url }}?first-unread=1" class="first-unread-post-link">&#8680;</a>
-                    <a href="{{ topic.get_absolute_url }}">{{ topic.name|truncatewords:10 }}</a>
-                    {% if topic.sticky %} &nbsp;[{% trans "Sticky" %}] {% endif %}
-                    {% if topic.closed %} &nbsp;[{% trans "Closed" %}] {% endif %}
-                    {% with topic|pybb_topic_inline_pagination as pages %}
-                        {% if pages|length > 1 %}
-                            <span class="mini-pagination">
+                    <td class="topic-name{% if topic.unread %} topic-unread{% endif %}">
+                        <a href="{{ topic.get_absolute_url }}?first-unread=1" class="first-unread-post-link">&#8680;</a>
+                        <a href="{{ topic.get_absolute_url }}">{{ topic.name|truncatewords:10 }}</a>
+                        {% if topic.sticky %} &nbsp;[{% trans "Sticky" %}] {% endif %}
+                        {% if topic.closed %} &nbsp;[{% trans "Closed" %}] {% endif %}
+                        {% with topic|pybb_topic_inline_pagination as pages %}
+                            {% if pages|length > 1 %}
+                                <span class="mini-pagination">
                                 {% trans "pages" %}:
-                                {% for page in pages %}
-                                    <span class="page">
+                                    {% for page in pages %}
+                                        <span class="page">
                                     {% if page == "..." %}
                                         ...
                                     {% else %}
                                         <a href="{{ topic.get_absolute_url }}?page={{ page }}">{{ page }}</a>
                                     {% endif %}
                                     </span>
-                                {% endfor %}
+                                    {% endfor %}
                             </span>
-                        {% endif %}
-                    {% endwith %}
-                </td>
-                <td class="topic-author hidden-phone hidden-tablet">
-                    {% astrobin_username topic.user %}
-                </td>
-
-                {% if forum %}
-                    <td class="topic-post-count hidden-phone">
-                        {{ topic.post_count }}
+                            {% endif %}
+                        {% endwith %}
                     </td>
-                    <td class="topic-view-count hidden-phone">
-                        {{ topic|pybbm_calc_topic_views }}
+                    <td class="topic-author hidden-phone hidden-tablet">
+                        {% astrobin_username topic.user %}
                     </td>
-                {% endif %}
 
-                <td class="topic-last-post hidden-phone hidden-tablet">
-                    {% include "pybb/topic_last_message_info.html" %}
-                </td>
-            </tr>
+                    {% if forum %}
+                        <td class="topic-post-count hidden-phone">
+                            {{ topic.post_count }}
+                        </td>
+                        <td class="topic-view-count hidden-phone">
+                            {{ topic|pybbm_calc_topic_views }}
+                        </td>
+                    {% endif %}
+
+                    <td class="topic-last-post hidden-phone hidden-tablet">
+                        {% include "pybb/topic_last_message_info.html" %}
+                    </td>
+                </tr>
+            {% endif %}
         {% empty %}
             <tr>
                 <td class="topic-state"></td>
@@ -118,7 +120,7 @@
         </tbody>
     </table>
 
-    {% if request.user|is_content_moderator %}
+    {% if request.user|is_forum_moderator %}
         <div class="form-actions">
             <input type="submit" class="btn" value="{% trans "Mark as spam" %}" />
         </div>
