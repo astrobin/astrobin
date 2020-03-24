@@ -54,9 +54,7 @@
                     {% if instance_to_platesolve.solution|is_advanced_success_status %}
                         <object
                                 type="image/svg+xml"
-                                data="{{ instance_to_platesolve.solution.pixinsight_svg_annotation_regular.url }}"
-                                width="{{ instance_to_platesolve | thumbnail_width:'regular' }}"
-                                height="{{ instance_to_platesolve | thumbnail_height:'regular' }}">
+                                data="{{ instance_to_platesolve.solution.pixinsight_svg_annotation_regular.url }}">
                         </object>
                         <div id="x-ruler"></div>
                         <div id="y-ruler"></div>
