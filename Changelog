@@ -1,3 +1,11 @@
+2020-03-24 Salvatore Iovene <salvatore@iovene.com>
+ * v1.55.28
+ * (forums) Do not delete spammer user, just safe-delete user profile
+ * (forums) Restrict moderation explicitly to forum moderators
+ * (api) Filter out corrupted and WIP images
+ * (general) Cache user names by language code too
+ * (dependencies) Update bleach and codecov
+
 2020-03-17 Salvatore Iovene <salvatore@iovene.com>
  * v1.55.27
  * (images) Remove "corrupted" class, as it incorrectly doesn't account for revisions
