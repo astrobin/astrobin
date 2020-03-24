@@ -9,6 +9,7 @@ from pybb.forms import PostForm
 from subscription.models import Subscription, UserSubscription
 
 # AstroBin
+from astrobin.models import UserProfile
 from astrobin_apps_groups.models import Group as AstroBinGroup
 from astrobin.templatetags.tags import (
     has_valid_subscription)
@@ -178,7 +179,7 @@ class ForumTest(TestCase):
         self.client.logout()
         self.client.login()
 
-        self.assertContains(response, "2 topics deleted");
-        self.assertEquals(0, Topic.objects.filter(id=topic1.id).count())
-        self.assertEquals(0, Topic.objects.filter(id=topic2.id).count())
-        self.assertEquals(0, User.objects.filter(id=self.user.id).count())
+        self.assertContains(response, "2 topics deleted")
+        self.assertEquals(1, Topic.objects.filter(id=topic1.id).count())
+        self.assertEquals(1, Topic.objects.filter(id=topic2.id).count())
+        self.assertEquals(0, UserProfile.objects.filter(user=self.user).count())
