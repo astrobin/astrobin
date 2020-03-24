@@ -357,6 +357,13 @@ def is_image_moderator(user):
 
 
 @register.filter
+def is_forum_moderator(user):
+    if not user.is_authenticated():
+        return False
+
+    return user.groups.filter(name='forum_moderators').count() > 0
+
+@register.filter
 def to_user_timezone(value, user):
     from astrobin.utils import to_user_timezone as tut
     if user.is_authenticated():
