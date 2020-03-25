@@ -706,7 +706,7 @@ class Image(HasSolutionMixin, SafeDeleteModel):
 
     SUBJECT_TYPE_CHOICES = (
         (0, "---------"),
-        (100, _("Deep sky object")),
+        (100, _("Deep sky object or field")),
         (200, _("Solar system body or event")),
         (300, _("Extremely wide field")),
         (400, _("Star trails")),
