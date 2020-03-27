@@ -129,18 +129,10 @@ class IotdTest(TestCase):
 
         # Cannot submit an image authored by:
         # - a free account or
-        # - a lite 2020 account
         with self.assertRaisesRegexp(ValidationError, "a Free membership"):
             IotdSubmission.objects.create(
                 submitter=self.submitter_1,
                 image=self.image)
-
-        us = Generators.premium_subscription(self.image.user, "AstroBin Lite 2020+")
-        with self.assertRaisesRegexp(ValidationError, "a Lite membership"):
-            IotdSubmission.objects.create(
-                submitter=self.submitter_1,
-                image=self.image)
-        us.delete()
 
         us = Generators.premium_subscription(self.user, "AstroBin Ultimate 2020+")
 
@@ -197,18 +189,10 @@ class IotdTest(TestCase):
 
         # Cannot vote an image authored by:
         # - a free account or
-        # - a lite 2020 account
         with self.assertRaisesRegexp(ValidationError, "a Free membership"):
             IotdSubmission.objects.create(
                 submitter=self.submitter_1,
                 image=self.image)
-
-        us = Generators.premium_subscription(self.image.user, "AstroBin Lite 2020+")
-        with self.assertRaisesRegexp(ValidationError, "a Lite membership"):
-            IotdSubmission.objects.create(
-                submitter=self.submitter_1,
-                image=self.image)
-        us.delete()
 
         image_author_us = Generators.premium_subscription(self.image.user, "AstroBin Ultimate 2020+")
 
@@ -375,18 +359,10 @@ class IotdTest(TestCase):
 
         # Cannot elect an image authored by:
         # - a free account or
-        # - a lite 2020 account
         with self.assertRaisesRegexp(ValidationError, "a Free membership"):
             IotdSubmission.objects.create(
                 submitter=self.submitter_1,
                 image=self.image)
-
-        us = Generators.premium_subscription(self.image.user, "AstroBin Lite 2020+")
-        with self.assertRaisesRegexp(ValidationError, "a Lite membership"):
-            IotdSubmission.objects.create(
-                submitter=self.submitter_1,
-                image=self.image)
-        us.delete()
 
         image_author_us = Generators.premium_subscription(self.image.user, "AstroBin Ultimate 2020+")
 
