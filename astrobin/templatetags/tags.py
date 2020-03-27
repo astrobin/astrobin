@@ -1,14 +1,21 @@
 # -*- coding: utf-8 -*-
+import math
 from datetime import datetime
 
 from django.conf import settings
+from django.contrib.contenttypes.models import ContentType
 from django.core.paginator import Paginator, EmptyPage, PageNotAnInteger
 from django.template import Library
 from django.template.defaultfilters import timesince
 from django.utils.translation import ugettext as _
+from subscription.models import UserSubscription, Subscription
 
 from astrobin.gear import is_gear_complete, get_correct_gear
 from astrobin.models import GearUserInfo, UserProfile, Image
+from astrobin.utils import get_image_resolution, decimal_to_hours_minutes_seconds, decimal_to_degrees_minutes_seconds
+from astrobin_apps_donations.templatetags.astrobin_apps_donations_tags import is_donor
+from astrobin_apps_premium.templatetags.astrobin_apps_premium_tags import is_premium_2020, is_premium, is_ultimate_2020, \
+    is_lite
 from astrobin_apps_premium.utils import premium_get_valid_usersubscription
 
 register = Library()
@@ -237,16 +244,14 @@ def gear_type(gear):
 
 @register.filter
 def show_ads(user):
-    from astrobin_apps_donations.templatetags.astrobin_apps_donations_tags import is_donor
-    from astrobin_apps_premium.templatetags.astrobin_apps_premium_tags import is_premium, is_lite
-
     if not settings.ADS_ENABLED:
         return False
 
-    if is_donor(user):
+    if is_donor(user) and not user.userprofile.allow_astronomy_ads:
         return False
 
-    if settings.PREMIUM_ENABLED and (is_lite(user) or is_premium(user)):
+    if (is_lite(user) or is_premium(user) or is_premium_2020(user) or is_ultimate_2020(user)) and \
+            not user.userprofile.allow_astronomy_ads:
         return False
 
     return True
@@ -261,8 +266,6 @@ def show_adsense_ads(context):
 
 @register.filter
 def valid_subscriptions(user):
-    from subscription.models import UserSubscription
-
     if user.is_anonymous():
         return []
 
@@ -273,8 +276,6 @@ def valid_subscriptions(user):
 
 @register.filter
 def inactive_subscriptions(user):
-    from subscription.models import UserSubscription
-
     if user.is_anonymous():
         return []
 
@@ -286,8 +287,6 @@ def inactive_subscriptions(user):
 
 @register.filter
 def has_valid_subscription(user, subscription_pk):
-    from subscription.models import UserSubscription
-
     if user.is_anonymous():
         return False
 
@@ -302,8 +301,6 @@ def has_valid_subscription(user, subscription_pk):
 
 @register.filter
 def has_valid_subscription_in_category(user, category):
-    from subscription.models import UserSubscription
-
     if user.is_anonymous():
         return False
 
@@ -327,8 +324,6 @@ def get_premium_subscription_expiration(user):
 
 @register.filter
 def has_subscription_by_name(user, name):
-    from subscription.models import UserSubscription
-
     if user.is_anonymous():
         return False
 
@@ -337,14 +332,27 @@ def has_subscription_by_name(user, name):
 
 
 @register.filter
-def get_subscription_by_name(user, name):
-    from subscription.models import UserSubscription
-
+def get_usersubscription_by_name(user, name):
     if user.is_anonymous():
         return None
 
     return UserSubscription.objects.get(
         user=user, subscription__name=name)
+
+
+@register.simple_tag
+def get_subscription_by_name(name):
+    return Subscription.objects.filter(name=name).first()
+
+
+@register.simple_tag
+def get_subscription_url_by_name(name):
+    try:
+        sub = Subscription.objects.get(name=name)
+    except Subscription.DoesNotExist:
+        return '#'
+
+    return sub.get_absolute_url()
 
 
 @register.filter
@@ -408,33 +416,6 @@ def humanize_image_acquisition_type(type):
     return ""
 
 
-def decimal_to_hours_minutes_seconds(value, hour_symbol="h", minute_symbol="'", second_symbol="\""):
-    is_positive = value >= 0
-    value = abs(value)
-    hours = int(value / 15)
-    minutes = int(((value / 15) - hours) * 60)
-    seconds = ((((value / 15) - hours) * 60) - minutes) * 60
-
-    return "%s%d%s %d%s %d%s" % (
-        "" if is_positive else "-",
-        hours, hour_symbol,
-        minutes, minute_symbol,
-        seconds, second_symbol)
-
-
-def decimal_to_degrees_minutes_seconds(value, degree_symbol="°", minute_symbol="'", second_symbol="\""):
-    is_positive = value >= 0
-    value = abs(value)
-    minutes, seconds = divmod(value * 3600, 60)
-    degrees, minutes = divmod(minutes, 60)
-
-    return "%s%d%s %d%s %d%s" % (
-        "+" if is_positive else "-",
-        degrees, degree_symbol,
-        minutes, minute_symbol,
-        seconds, second_symbol)
-
-
 @register.filter
 def ra_to_hms(degrees):
     return decimal_to_hours_minutes_seconds(degrees)
@@ -443,3 +424,44 @@ def ra_to_hms(degrees):
 @register.filter
 def dec_to_dms(degrees):
     return decimal_to_degrees_minutes_seconds(degrees)
+
+
+@register.filter
+def thumbnail_width(image, alias):
+    return min(settings.THUMBNAIL_ALIASES[''][alias]['size'][0], image.w)
+
+
+@register.filter
+def thumbnail_height(image, alias):
+    thumb_w = min(settings.THUMBNAIL_ALIASES[''][alias]['size'][0], image.w)
+    w, h = get_image_resolution(image)
+    ratio = w / float(thumb_w)
+
+    return math.floor(h / ratio)
+
+
+@register.simple_tag
+def thumbnail_scale(w, from_alias, to_alias):
+    return min(settings.THUMBNAIL_ALIASES[''][to_alias]['size'][0], w) / \
+           float(min(settings.THUMBNAIL_ALIASES[''][from_alias]['size'][0], w))
+
+
+@register.filter
+def gear_list_has_items(gear_list):
+    for gear in gear_list:
+        if len(gear[1]) > 0:
+            return True
+
+    return False
+
+
+@register.filter
+def content_type(obj):
+    if not obj:
+        return None
+    return ContentType.objects.get_for_model(obj)
+
+
+@register.inclusion_tag('inclusion_tags/private_abbr.html')
+def private_abbr():
+    return None

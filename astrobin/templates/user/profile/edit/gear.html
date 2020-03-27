@@ -88,7 +88,7 @@
                 {% blocktrans %}When you add or edit the make, the name, and the properties of this product, the data is global and shared between all AstroBin users. Do not write any information in there that refers to your personal copy of this product, like "modded", "sold", "broken", "a present from my aunt" and so on. {% endblocktrans %}
             </div>
 
-            <form class="form-horizontal" action="{% url 'save_gear_details' %}" method="post">{% csrf_token %}
+            <form class="form-horizontal ajax" action="{% url 'save_gear_details' %}" method="post">{% csrf_token %}
                 <div class="form-content">
                     <div class="loading">
                         <img src="{% static 'astrobin/images/ajax-loader.gif' %}" alt=""/>

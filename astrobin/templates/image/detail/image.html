@@ -1,6 +1,13 @@
-{% load astrobin_apps_images_tags %}
-{% load common_tags %}
+{% load i18n %}
+{% load static %}
 {% load tags %}
+{% load common_tags %}
+{% load astrobin_apps_images_tags %}
+{% load astrobin_apps_platesolving_tags %}
+
+{% block extra_head %}
+    <script src="{% static 'astrobin_apps_platesolving/js/astrobin_apps_platesolving.js' %}"></script>
+{% endblock %}
 
 <div class="main-image">
     <div class="main-image-inner">
@@ -35,36 +42,86 @@
         {% endif %}
 
         {% if show_solution %}
-            <div class="astrobin-image-container hover-overlay {% if mod == 'solved' %} hover-overlay-fixed{% endif %} hover-overlay-solution">
-                <a href="
-                        {% get_image_url image revision_label 'full' %}{% if mod %}{% query_string "mod=mod" "" %}{% endif %}">
-                    <img
-                            onerror="solution_image_error(this)"
-                            src="{{ IMAGES_URL }}{{ instance_to_platesolve.solution.image_file }}"
-                            alt="{{ image.title|escape }}" />
+            <div
+                    class="astrobin-image-container
+                    show-ra-dec-coordinates
+                    hover-overlay
+                    hover-overlay-solution
+                    {% if instance_to_platesolve.solution|is_advanced_success_status %}
+                        advanced-plate-solution show-ra-dec-coordinates
+                    {% endif %}
+                    {% if mod == 'solved' %}
+                        hover-overlay-fixed
+                    {% endif %}">
+                <a href="{% get_image_url image revision_label 'full' %}{% if mod %}{% query_string "mod=mod" "" %}{% endif %}">
+
+                    {% if instance_to_platesolve.solution|is_advanced_success_status %}
+                        <object
+                                id="advanced-plate-solution-svg"
+                                onload="AstroBinPlatesolving.advancedSvgLoaded()"
+                                type="image/svg+xml"
+                                data="{% url 'astrobin_apps_platesolving.serve_svg' instance_to_platesolve.solution.pk 'regular' %}">
+                        </object>
+                        <div id="x-ruler"></div>
+                        <div id="y-ruler"></div>
+                    {% else %}
+                        <img
+                                onerror="solution_image_error(this)"
+                                src="{{ IMAGES_URL }}{{ instance_to_platesolve.solution.image_file }}"
+                                alt="{{ image.title|escape }}" />
+                    {% endif %}
                 </a>
             </div>
+
+            <div id="ra-dec-coordinates">
+                <div class="coordinates equatorial-coordinates">
+                    <abbr title="{% trans 'Right ascension' %}" class="alpha"></abbr>
+                    <abbr title="{% trans 'Declination' %}" class="delta"></abbr>
+                </div>
+                <div class="powered-by-pixinsight">
+                    <span>Powered by</span>
+                    <a href="https://pixinsight.com/" target="_blank">PixInsight</a>
+                </div>
+            </div>
         {% endif %}
+
     </div> <!-- main-image-inner -->
 </div> <!-- main-image -->
 
+
 {% block extra_js %}
-<script type="text/javascript">
-    var attempts = 0;
+    <script src="{% static 'astrobin_apps_platesolving/js/CoordinateInterpolation.js' %}"></script>
+    <script src="{% static 'astrobin_apps_platesolving/js/astrobin_apps_platesolving_mousemove.js' %}"></script>
+    <script type="text/javascript">
+        var platesolving_attempts = 0;
 
-    function solution_image_error(img) {
-        if (attempts > 1)
-            return;
+        function solution_image_error(img) {
+            if (platesolving_attempts > 1)
+                return;
 
-        if (img.src.indexOf('images/solutions') === -1) {
-            split = img.src.split('solutions');
-            img.src = split[0] + 'images/solutions' + split[1];
-        } else {
-            split = img.src.split('images/solutions');
-            img.src = split[0] + 'solutions' + split[1];
+            if (img.src.indexOf('images/solutions') === -1) {
+                split = img.src.split('solutions');
+                img.src = split[0] + 'images/solutions' + split[1];
+            } else {
+                split = img.src.split('images/solutions');
+                img.src = split[0] + 'solutions' + split[1];
+            }
+
+            platesolving_attempts++;
         }
 
-        attempts++;
-    }
-</script>
+        {% if instance_to_platesolve.solution|is_advanced_success_status %}
+            $(document).ready(function () {
+                new AstroBinPlatesolvingMouseMove(
+                    '{{ instance_to_platesolve.solution.advanced_ra_matrix }}'.split(',').map(parseFloat),
+                    '{{ instance_to_platesolve.solution.advanced_dec_matrix }}'.split(',').map(parseFloat),
+                    '{{ instance_to_platesolve.solution.advanced_matrix_rect }}'.split(',').map(parseFloat),
+                    parseFloat('{{ instance_to_platesolve.solution.advanced_matrix_delta }}'),
+                    {{ instance_to_platesolve | thumbnail_width:'hd' }},
+                    {{ instance_to_platesolve | thumbnail_height:'hd' }},
+                    {% thumbnail_scale image.w 'hd' 'regular' %}
+                );
+            });
+        {% endif %}
+    </script>
 {% endblock %}

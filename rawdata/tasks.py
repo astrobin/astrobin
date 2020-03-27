@@ -1,23 +1,19 @@
 from __future__ import absolute_import
 
-# Python
-import tempfile, zipfile
+import PyABC as abc
+import tempfile
+import zipfile
 
-# Django
+from celery import shared_task
 from django.core.files import File
 
-# Third party apps
-from celery import shared_task
-import PySide.QtCore
-import PyABC as abc
+from .models import RawImage, TemporaryArchive
 
-# This app
-from .models import RawImage, TemporaryArchive, upload_path
 
 @shared_task()
 def index_raw_image(id):
     try:
-        image = RawImage.objects.get(id = id)
+        image = RawImage.objects.get(id=id)
     except RawImage.DoesNotExist:
         return
 

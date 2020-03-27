@@ -1,1 +1,2 @@
 from .mark_corrupted_images_banner_as_seen import MarkCorruptedImagesBannerAsSeen
+from .restore_deleted_images import RestoreDeletedImages

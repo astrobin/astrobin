@@ -1,8 +1,8 @@
+from dateutil.relativedelta import relativedelta
 from django.contrib.auth.models import User, Group
 from django.core.urlresolvers import reverse
 from django.test import TestCase
 from mock import patch
-from subscription.models import Subscription
 
 from astrobin.models import Image, UserProfile
 from astrobin_apps_premium.templatetags.astrobin_apps_premium_tags import *
@@ -23,221 +23,669 @@ class PremiumTest(TestCase):
 
         self.assertEqual(found, True)
 
+    def setUp(self):
+        self.user = User.objects.create_user(username='test', email='test@test.com', password='password')
+        self.lite_group, created = Group.objects.get_or_create(name="astrobin_lite")
+        self.premium_group, created = Group.objects.get_or_create(name="astrobin_premium")
+        self.lite_2020_group, created = Group.objects.get_or_create(name="astrobin_lite_2020")
+        self.premium_2020_group, created = Group.objects.get_or_create(name="astrobin_premium_2020")
+        self.ultimate_2020_group, created = Group.objects.get_or_create(name="astrobin_ultimate_2020")
 
-    def test_premium_get_usersubscription(self):
-        with self.settings(PREMIUM_ENABLED = True):
-            u = User.objects.create_user(username = 'test', email='test@test.com', password = 'password')
-            g, created = Group.objects.get_or_create(name = "astrobin_premium")
+        self.ultimate_2020_sub, created = Subscription.objects.get_or_create(
+            name="AstroBin Ultimate 2020+",
+            price=1,
+            group=self.ultimate_2020_group,
+            category="premium")
 
-            premium_sub, created = Subscription.objects.get_or_create(
-                name = "AstroBin Premium",
-                price = 1,
-                group = g,
-                category = "premium")
+        self.premium_2020_sub, created = Subscription.objects.get_or_create(
+            name="AstroBin Premium 2020+",
+            price=1,
+            group=self.premium_2020_group,
+            category="premium")
 
-            premium_autorenew_sub, created = Subscription.objects.get_or_create(
-                name = "AstroBin Premium (autorenew)",
-                price = 1,
-                group = g,
-                category = "premium_autorenew")
+        self.lite_2020_sub, created = Subscription.objects.get_or_create(
+            name="AstroBin Lite 2020+",
+            price=1,
+            group=self.lite_2020_group,
+            category="premium")
 
-            lite_sub, created = Subscription.objects.get_or_create(
-                name = "AstroBin Lite",
-                price = 1,
-                group = g,
-                category = "premium")
+        self.premium_sub, created = Subscription.objects.get_or_create(
+            name="AstroBin Premium",
+            price=1,
+            group=self.premium_group,
+            category="premium")
 
-            lite_autorenew_sub, created = Subscription.objects.get_or_create(
-                name = "AstroBin Lite (autorenew)",
-                price = 1,
-                group = g,
-                category = "premium_autorenew")
+        self.premium_autorenew_sub, created = Subscription.objects.get_or_create(
+            name="AstroBin Premium (autorenew)",
+            price=1,
+            group=self.premium_group,
+            category="premium_autorenew")
 
-            premium_us, created = UserSubscription.objects.get_or_create(user = u, subscription = premium_sub, cancelled = False)
+        self.lite_sub, created = Subscription.objects.get_or_create(
+            name="AstroBin Lite",
+            price=1,
+            group=self.lite_group,
+            category="premium")
+
+        self.lite_autorenew_sub, created = Subscription.objects.get_or_create(
+            name="AstroBin Lite (autorenew)",
+            price=1,
+            group=self.lite_group,
+            category="premium_autorenew")
+
+    def tearDown(self):
+        self.user.delete()
+
+        self.lite_group.delete()
+        self.premium_group.delete()
+        self.lite_2020_group.delete()
+        self.premium_2020_group.delete()
+        self.ultimate_2020_group.delete()
+
+        self.ultimate_2020_sub.delete()
+        self.premium_sub.delete()
+        self.premium_autorenew_sub.delete()
+        self.lite_sub.delete()
+        self.lite_autorenew_sub.delete()
+
+    def test_premium_get_usersubscription_premium_priority(self):
+        with self.settings(PREMIUM_ENABLED=True):
+            premium_us, created = UserSubscription.objects.get_or_create(
+                user=self.user, subscription=self.premium_sub, cancelled=False)
             premium_us.subscribe()
 
             self.assertEqual(False, premium_us.cancelled)
 
-            self.assertEqual(premium_us, premium_get_usersubscription(u))
-            self.assertEqual(premium_us, premium_get_valid_usersubscription(u))
+            self.assertEqual(premium_us, premium_get_usersubscription(self.user))
+            self.assertEqual(premium_us, premium_get_valid_usersubscription(self.user))
 
-            premium_autorenew_us, created = UserSubscription.objects.get_or_create(user = u, subscription = premium_autorenew_sub, cancelled = False)
+            premium_autorenew_us, created = UserSubscription.objects.get_or_create(
+                user=self.user, subscription=self.premium_autorenew_sub, cancelled=False)
             premium_autorenew_us.subscribe()
 
-            self.assertEqual(premium_us, premium_get_usersubscription(u))
-            self.assertEqual(premium_us, premium_get_valid_usersubscription(u))
+            self.assertEqual(premium_us, premium_get_usersubscription(self.user))
+            self.assertEqual(premium_us, premium_get_valid_usersubscription(self.user))
 
-            lite_us, created = UserSubscription.objects.get_or_create(user = u, subscription = lite_sub, cancelled = False)
+            lite_us, created = UserSubscription.objects.get_or_create(
+                user=self.user, subscription=self.lite_sub, cancelled=False)
             lite_us.subscribe()
 
-            self.assertEqual(premium_us, premium_get_usersubscription(u))
-            self.assertEqual(premium_us, premium_get_valid_usersubscription(u))
+            self.assertEqual(premium_us, premium_get_usersubscription(self.user))
+            self.assertEqual(premium_us, premium_get_valid_usersubscription(self.user))
 
-            lite_autorenew_us, created = UserSubscription.objects.get_or_create(user = u, subscription = lite_autorenew_sub, cancelled = False)
+            lite_autorenew_us, created = UserSubscription.objects.get_or_create(
+                user=self.user, subscription=self.lite_autorenew_sub, cancelled=False)
             lite_autorenew_us.subscribe()
 
-            self.assertEqual(premium_us, premium_get_usersubscription(u))
-            self.assertEqual(premium_us, premium_get_valid_usersubscription(u))
+            self.assertEqual(premium_us, premium_get_usersubscription(self.user))
+            self.assertEqual(premium_us, premium_get_valid_usersubscription(self.user))
 
-            premium_us.active = False; premium_us.save()
-            self.assertEqual(premium_autorenew_us, premium_get_valid_usersubscription(u))
+            premium_us.active = False
+            premium_us.save()
+            self.assertEqual(premium_autorenew_us, premium_get_valid_usersubscription(self.user))
 
+    def test_premium_get_usersubscription_premium_2020_priority(self):
+        with self.settings(PREMIUM_ENABLED=True):
+            premium_2020_us, created = UserSubscription.objects.get_or_create(
+                user=self.user, subscription=self.premium_2020_sub, cancelled=False)
+            premium_2020_us.subscribe()
 
-    def test_subscription_validity(self):
-        with self.settings(PREMIUM_ENABLED = True):
-            u = User.objects.create_user(
-                username = 'test', email='test@test.com', password = 'password')
-            g, created = Group.objects.get_or_create(name = "astrobin_premium")
-            s, created = Subscription.objects.get_or_create(
-                name = "AstroBin Premium",
-                price = 1,
-                group = g,
-                category = "premium")
+            self.assertEqual(premium_2020_us, premium_get_usersubscription(self.user))
+            self.assertEqual(premium_2020_us, premium_get_valid_usersubscription(self.user))
+
+            premium_us, created = UserSubscription.objects.get_or_create(
+                user=self.user, subscription=self.premium_sub, cancelled=False)
+            premium_us.subscribe()
+
+            self.assertEqual(premium_2020_us, premium_get_usersubscription(self.user))
+            self.assertEqual(premium_2020_us, premium_get_valid_usersubscription(self.user))
+
+            premium_autorenew_us, created = UserSubscription.objects.get_or_create(
+                user=self.user, subscription=self.premium_autorenew_sub, cancelled=False)
+            premium_autorenew_us.subscribe()
+
+            self.assertEqual(premium_2020_us, premium_get_usersubscription(self.user))
+            self.assertEqual(premium_2020_us, premium_get_valid_usersubscription(self.user))
+
+            lite_us, created = UserSubscription.objects.get_or_create(
+                user=self.user, subscription=self.lite_sub, cancelled=False)
+            lite_us.subscribe()
+
+            self.assertEqual(premium_2020_us, premium_get_usersubscription(self.user))
+            self.assertEqual(premium_2020_us, premium_get_valid_usersubscription(self.user))
+
+            lite_autorenew_us, created = UserSubscription.objects.get_or_create(
+                user=self.user, subscription=self.lite_autorenew_sub, cancelled=False)
+            lite_autorenew_us.subscribe()
+
+            self.assertEqual(premium_2020_us, premium_get_usersubscription(self.user))
+            self.assertEqual(premium_2020_us, premium_get_valid_usersubscription(self.user))
+
+            premium_2020_us.active = False
+            premium_2020_us.save()
+            self.assertEqual(premium_us, premium_get_valid_usersubscription(self.user))
+
+    def test_premium_get_usersubscription_ultimate_2020_priority(self):
+        with self.settings(PREMIUM_ENABLED=True):
+            ultimate_2020_us, created = UserSubscription.objects.get_or_create(
+                user=self.user, subscription=self.ultimate_2020_sub, cancelled=False)
+            ultimate_2020_us.subscribe()
+
+            self.assertEqual(ultimate_2020_us, premium_get_usersubscription(self.user))
+            self.assertEqual(ultimate_2020_us, premium_get_valid_usersubscription(self.user))
+
+            premium_2020_us, created = UserSubscription.objects.get_or_create(
+                user=self.user, subscription=self.premium_2020_sub, cancelled=False)
+            premium_2020_us.subscribe()
+
+            self.assertEqual(ultimate_2020_us, premium_get_usersubscription(self.user))
+            self.assertEqual(ultimate_2020_us, premium_get_valid_usersubscription(self.user))
+
+            premium_us, created = UserSubscription.objects.get_or_create(
+                user=self.user, subscription=self.premium_sub, cancelled=False)
+            premium_us.subscribe()
+
+            self.assertEqual(ultimate_2020_us, premium_get_usersubscription(self.user))
+            self.assertEqual(ultimate_2020_us, premium_get_valid_usersubscription(self.user))
+
+            premium_autorenew_us, created = UserSubscription.objects.get_or_create(
+                user=self.user, subscription=self.premium_autorenew_sub, cancelled=False)
+            premium_autorenew_us.subscribe()
+
+            self.assertEqual(ultimate_2020_us, premium_get_usersubscription(self.user))
+            self.assertEqual(ultimate_2020_us, premium_get_valid_usersubscription(self.user))
+
+            lite_us, created = UserSubscription.objects.get_or_create(
+                user=self.user, subscription=self.lite_sub, cancelled=False)
+            lite_us.subscribe()
+
+            self.assertEqual(ultimate_2020_us, premium_get_usersubscription(self.user))
+            self.assertEqual(ultimate_2020_us, premium_get_valid_usersubscription(self.user))
+
+            lite_autorenew_us, created = UserSubscription.objects.get_or_create(
+                user=self.user, subscription=self.lite_autorenew_sub, cancelled=False)
+            lite_autorenew_us.subscribe()
+
+            self.assertEqual(ultimate_2020_us, premium_get_usersubscription(self.user))
+            self.assertEqual(ultimate_2020_us, premium_get_valid_usersubscription(self.user))
+
+            ultimate_2020_us.active = False
+            ultimate_2020_us.save()
+            self.assertEqual(premium_2020_us, premium_get_valid_usersubscription(self.user))
+
+    def test_subscription_validity_lite(self):
+        with self.settings(PREMIUM_ENABLED=True):
             us, created = UserSubscription.objects.get_or_create(
-                user = u,
-                subscription = s,
-                cancelled = False)
+                user=self.user,
+                subscription=self.lite_sub,
+                cancelled=False)
             us.subscribe()
 
-            self.assertEqual(premium_get_usersubscription(u), us)
-            self.assertEqual(premium_get_valid_usersubscription(u), us)
-            self.assertEqual(premium_get_invalid_usersubscription(u), None)
-            self.assertEqual(premium_user_has_subscription(u), True)
-            self.assertEqual(premium_user_has_valid_subscription(u), True)
-            self.assertEqual(premium_user_has_invalid_subscription(u), False)
+            self.assertEqual(premium_get_usersubscription(self.user), us)
+            self.assertEqual(premium_get_valid_usersubscription(self.user), us)
+            self.assertEqual(premium_get_invalid_usersubscription(self.user), None)
+            self.assertEqual(premium_user_has_subscription(self.user), True)
+            self.assertEqual(premium_user_has_valid_subscription(self.user), True)
+            self.assertEqual(premium_user_has_invalid_subscription(self.user), False)
 
-            self.assertEqual(is_premium(u), True)
+            self.assertEqual(is_lite(self.user), True)
 
             us.unsubscribe()
             us.delete()
-            s.delete()
-            g.delete()
-            u.delete()
 
-            # Test Lite
-
-            u = User.objects.create_user(
-                username = 'test', email='test@test.com', password = 'password')
-            g, created = Group.objects.get_or_create(name = "astrobin_lite")
-            s, created = Subscription.objects.get_or_create(
-                name = "AstroBin Lite",
-                price = 1,
-                group = g,
-                category = "premium")
+    def test_subscription_validity_premium(self):
+        with self.settings(PREMIUM_ENABLED=True):
             us, created = UserSubscription.objects.get_or_create(
-                user = u,
-                subscription = s)
+                user=self.user,
+                subscription=self.premium_sub,
+                cancelled=False)
             us.subscribe()
 
-            self.assertEqual(is_lite(u), True)
+            self.assertEqual(premium_get_usersubscription(self.user), us)
+            self.assertEqual(premium_get_valid_usersubscription(self.user), us)
+            self.assertEqual(premium_get_invalid_usersubscription(self.user), None)
+            self.assertEqual(premium_user_has_subscription(self.user), True)
+            self.assertEqual(premium_user_has_valid_subscription(self.user), True)
+            self.assertEqual(premium_user_has_invalid_subscription(self.user), False)
 
-            # Test free
+            self.assertEqual(is_premium(self.user), True)
+
             us.unsubscribe()
-            self.assertEqual(is_free(u), True)
-
             us.delete()
-            s.delete()
-            g.delete()
-            u.delete()
+
+    def test_subscription_validity_lite_2020(self):
+        with self.settings(PREMIUM_ENABLED=True):
+            us, created = UserSubscription.objects.get_or_create(
+                user=self.user,
+                subscription=self.lite_2020_sub,
+                cancelled=False)
+            us.subscribe()
+
+            self.assertEqual(premium_get_usersubscription(self.user), us)
+            self.assertEqual(premium_get_valid_usersubscription(self.user), us)
+            self.assertEqual(premium_get_invalid_usersubscription(self.user), None)
+            self.assertEqual(premium_user_has_subscription(self.user), True)
+            self.assertEqual(premium_user_has_valid_subscription(self.user), True)
+            self.assertEqual(premium_user_has_invalid_subscription(self.user), False)
+
+            self.assertEqual(is_lite(self.user), False)
+            self.assertEqual(is_lite_2020(self.user), True)
+
+            us.unsubscribe()
+            us.delete()
+
+    def test_subscription_validity_premium_2020(self):
+        with self.settings(PREMIUM_ENABLED=True):
+            us, created = UserSubscription.objects.get_or_create(
+                user=self.user,
+                subscription=self.premium_2020_sub,
+                cancelled=False)
+            us.subscribe()
+
+            self.assertEqual(premium_get_usersubscription(self.user), us)
+            self.assertEqual(premium_get_valid_usersubscription(self.user), us)
+            self.assertEqual(premium_get_invalid_usersubscription(self.user), None)
+            self.assertEqual(premium_user_has_subscription(self.user), True)
+            self.assertEqual(premium_user_has_valid_subscription(self.user), True)
+            self.assertEqual(premium_user_has_invalid_subscription(self.user), False)
+
+            self.assertEqual(is_premium(self.user), False)
+            self.assertEqual(is_premium_2020(self.user), True)
+
+            us.unsubscribe()
+            us.delete()
+
+    def test_subscription_validity_ultimate_2020(self):
+        with self.settings(PREMIUM_ENABLED=True):
+            us, created = UserSubscription.objects.get_or_create(
+                user=self.user,
+                subscription=self.ultimate_2020_sub,
+                cancelled=False)
+            us.subscribe()
+
+            self.assertEqual(premium_get_usersubscription(self.user), us)
+            self.assertEqual(premium_get_valid_usersubscription(self.user), us)
+            self.assertEqual(premium_get_invalid_usersubscription(self.user), None)
+            self.assertEqual(premium_user_has_subscription(self.user), True)
+            self.assertEqual(premium_user_has_valid_subscription(self.user), True)
+            self.assertEqual(premium_user_has_invalid_subscription(self.user), False)
+
+            self.assertEqual(is_ultimate_2020(self.user), True)
+
+            us.unsubscribe()
+            us.delete()
 
     @patch("astrobin.tasks.retrieve_primary_thumbnails")
-    def test_upload_limits(self, retrieve_primary_thumbnails):
-        user = User.objects.create_user(
-            username = 'test', email='test@test.com', password = 'password')
-        profile = user.userprofile
-        self.client.login(username = 'test', password = 'password')
+    def test_upload_limits_free(self, retrieve_primary_thumbnails):
+        """
+        Free accounts can upload up to PREMIUM_MAX_IMAGES_FREE images.
+        The counter does not decrease when deleting images.
+        """
+        self.client.login(username='test', password='password')
 
-        # Let's start with free
-        self.assertEqual(user.userprofile.premium_counter, 0)
-        for i in range(1, settings.PREMIUM_MAX_IMAGES_FREE + 1):
+        with self.settings(PREMIUM_MAX_IMAGES_FREE=2):
+            self.assertEqual(self.user.userprofile.premium_counter, 0)
+            for i in [1, 2]:
+                self.client.post(
+                    reverse('image_upload_process'),
+                    {'image_file': open('astrobin/fixtures/test.jpg', 'rb')},
+                    follow=True)
+                profile = UserProfile.objects.get(pk=self.user.userprofile.pk)
+                self.assertEqual(profile.premium_counter, i)
+
             response = self.client.post(
                 reverse('image_upload_process'),
-                { 'image_file': open('astrobin/fixtures/test.jpg', 'rb') },
-                follow = True)
-            profile = UserProfile.objects.get(pk = profile.pk)
-            self.assertEqual(profile.premium_counter, i)
+                {'image_file': open('astrobin/fixtures/test.jpg', 'rb')},
+                follow=True)
+            self._assertMessage(response, "error unread", "You have reached your image count limit")
 
-        response = self.client.post(
-            reverse('image_upload_process'),
-            { 'image_file': open('astrobin/fixtures/test.jpg', 'rb') },
-            follow = True)
-        self._assertMessage(response, "error unread", "You have reached your image count limit")
+            # Deleting an image does not decrease the counter.
+            Image.objects_including_wip.all().last().delete()
+            profile = UserProfile.objects.get(pk=profile.pk)
+            self.assertEqual(profile.premium_counter, settings.PREMIUM_MAX_IMAGES_FREE)
 
-        # Promote to Lite
-        group, created = Group.objects.get_or_create(name = "astrobin_lite")
-        sub, created = Subscription.objects.get_or_create(
-            name = "AstroBin Lite",
-            price = 1,
-            recurrence_unit = 'Y',
-            recurrence_period = 1,
-            group = group,
-            category = "premium")
+        Image.all_objects.filter(user=self.user).delete()
+        self.user.userprofile.premium_counter = 0
+        self.user.userprofile.save()
+
+        self.client.logout()
+
+    @patch("astrobin.tasks.retrieve_primary_thumbnails")
+    def test_upload_limits_lite(self, retrieve_primary_thumbnails):
+        """
+        Lite accounts (pre 2020, non-autorenew) can upload up to PREMIUM_MAX_IMAGES_LITE images per year.
+        The counter decreases only when you delete an image uploaded during the current subscription period.
+        """
         usersub, created = UserSubscription.objects.get_or_create(
-            user = user,
-            subscription = sub)
+            user=self.user,
+            subscription=self.lite_sub,
+            expires=datetime.datetime.now() + relativedelta(years=1))
         usersub.subscribe()
-        usersub.extend()
+
+        self.client.login(username='test', password='password')
+
+        with self.settings(PREMIUM_MAX_IMAGES_LITE=2):
+            for i in [1, 2]:
+                self.client.post(
+                    reverse('image_upload_process'),
+                    {'image_file': open('astrobin/fixtures/test.jpg', 'rb')},
+                    follow=True)
+                profile = UserProfile.objects.get(pk=self.user.userprofile.pk)
+                self.assertEqual(profile.premium_counter, i)
+
+            response = self.client.post(
+                reverse('image_upload_process'),
+                {'image_file': open('astrobin/fixtures/test.jpg', 'rb')},
+                follow=True)
+            self._assertMessage(response, "error unread", "You have reached your image count limit")
+
+            # Deleting an image uploaded this year should decrease the counter.
+            Image.objects_including_wip.all().last().delete()
+            profile = UserProfile.objects.get(pk=profile.pk)
+            self.assertEqual(profile.premium_counter, settings.PREMIUM_MAX_IMAGES_LITE - 1)
+            Image.all_objects.last().undelete()
+
+            # Deleting an image uploaded before the subscription was created does not decrease the counter.
+            image = Image.objects_including_wip.all().order_by('-pk')[1]  # Second last element
+            image.uploaded = image.uploaded - datetime.timedelta(days=2)
+            image.save(keep_deleted=True)
+            image.delete()
+            profile = UserProfile.objects.get(pk=profile.pk)
+            self.assertEqual(profile.premium_counter, settings.PREMIUM_MAX_IMAGES_LITE - 1)
+
+        usersub.delete()
+
+        Image.all_objects.filter(user=self.user).delete()
+        self.user.userprofile.premium_counter = 0
+        self.user.userprofile.save()
+
+        self.client.logout()
+
+    @patch("astrobin.tasks.retrieve_primary_thumbnails")
+    def test_upload_limits_premium(self, retrieve_primary_thumbnails):
+        """
+        Premium accounts (pre 2020, non-autorenew) can upload infinite images.
+        The counter never decreases, as it's inconsequential.
+        """
+        usersub, created = UserSubscription.objects.get_or_create(
+            user=self.user,
+            subscription=self.premium_sub,
+            expires=datetime.datetime.now() + relativedelta(years=1))
+        usersub.subscribe()
         usersub.save()
 
-        for i in range(1, settings.PREMIUM_MAX_IMAGES_FREE + 1):
-            response = self.client.post(
-                reverse('image_upload_process'),
-                { 'image_file': open('astrobin/fixtures/test.jpg', 'rb') },
-                follow = True)
-            profile = UserProfile.objects.get(pk = profile.pk)
-            self.assertEqual(profile.premium_counter, i)
+        self.client.login(username='test', password='password')
 
-        response = self.client.post(
-            reverse('image_upload_process'),
-            { 'image_file': open('astrobin/fixtures/test.jpg', 'rb') },
-            follow = True)
-        self._assertMessage(response, "error unread", "You have reached your image count limit")
+        with self.settings(PREMIUM_MAX_IMAGES_PREMIUM=2):
+            for i in [1, 2, 3]:
+                self.client.post(
+                    reverse('image_upload_process'),
+                    {'image_file': open('astrobin/fixtures/test.jpg', 'rb')},
+                    follow=True)
+                profile = UserProfile.objects.get(pk=self.user.userprofile.pk)
+                self.assertEqual(profile.premium_counter, i)
 
-        # Deleting an image uploaded this year decreases the counter as expected
-        Image.objects_including_wip.all().last().delete()
-        profile = UserProfile.objects.get(pk = profile.pk)
-        self.assertEqual(profile.premium_counter, settings.PREMIUM_MAX_IMAGES_FREE - 1)
+            # Deleting an image uploaded this year should decrease the counter.
+            Image.objects_including_wip.all().last().delete()
+            profile = UserProfile.objects.get(pk=profile.pk)
+            self.assertEqual(profile.premium_counter, settings.PREMIUM_MAX_IMAGES_PREMIUM + 1)
 
-        # But deleting an image uploaded before the subscription was created does not
-        image = Image.objects_including_wip.all().order_by('-pk')[1] # Second last element
-        image.uploaded = image.uploaded - datetime.timedelta(days = 1)
-        image.save(keep_deleted=True)
-        image.delete()
-        profile = UserProfile.objects.get(pk = profile.pk)
-        self.assertEqual(profile.premium_counter, settings.PREMIUM_MAX_IMAGES_FREE - 1)
+            # Deleting an image uploaded before the subscription was created does still decrease the counter.
+            image = Image.objects_including_wip.all().order_by('-pk')[1]  # Second last element
+            image.uploaded = image.uploaded - datetime.timedelta(days=1)
+            image.save(keep_deleted=True)
+            image.delete()
+            profile = UserProfile.objects.get(pk=profile.pk)
+            self.assertEqual(profile.premium_counter, settings.PREMIUM_MAX_IMAGES_PREMIUM + 1)
 
-        sub.delete()
         usersub.delete()
 
-        # Promote to Premium
-        group, created = Group.objects.get_or_create(name = "astrobin_premium")
-        sub, created = Subscription.objects.get_or_create(
-            name = "AstroBin Premium",
-            price = 1,
-            group = group,
-            category = "premium")
+        Image.all_objects.filter(user=self.user).delete()
+        self.user.userprofile.premium_counter = 0
+        self.user.userprofile.save()
+
+        self.client.logout()
+
+    @patch("astrobin.tasks.retrieve_primary_thumbnails")
+    def test_upload_limits_lite_autorenew(self, retrieve_primary_thumbnails):
+        """
+        Lite accounts (pre 2020, autorenew) can upload up to PREMIUM_MAX_IMAGES_LITE images per year.
+        The counter decreases only when you delete an image uploaded during the current subscription period.
+        """
         usersub, created = UserSubscription.objects.get_or_create(
-            user = user,
-            subscription = sub)
+            user=self.user,
+            subscription=self.lite_autorenew_sub,
+            expires=datetime.datetime.now() + relativedelta(years=1))
         usersub.subscribe()
 
-        # Counter increases for Premium users too
-        profile = UserProfile.objects.get(pk = profile.pk)
-        counter = profile.premium_counter
-        response = self.client.post(
-            reverse('image_upload_process'),
-            { 'image_file': open('astrobin/fixtures/test.jpg', 'rb') },
-            follow = True)
-        profile = UserProfile.objects.get(pk = profile.pk)
-        self.assertEqual(profile.premium_counter, counter + 1)
+        self.client.login(username='test', password='password')
 
-        # But it never decreases, as it's not necessary
-        image = Image.objects_including_wip.all()[0]
-        image.delete()
-        profile = UserProfile.objects.get(pk = profile.pk)
-        self.assertEqual(profile.premium_counter, counter + 1)
+        with self.settings(PREMIUM_MAX_IMAGES_LITE=2):
+            for i in [1, 2]:
+                self.client.post(
+                    reverse('image_upload_process'),
+                    {'image_file': open('astrobin/fixtures/test.jpg', 'rb')},
+                    follow=True)
+                profile = UserProfile.objects.get(pk=self.user.userprofile.pk)
+                self.assertEqual(profile.premium_counter, i)
 
-        user.delete()
-        group.delete()
-        sub.delete()
+            response = self.client.post(
+                reverse('image_upload_process'),
+                {'image_file': open('astrobin/fixtures/test.jpg', 'rb')},
+                follow=True)
+            self._assertMessage(response, "error unread", "You have reached your image count limit")
+
+            # Deleting an image uploaded this year should decrease the counter.
+            Image.objects_including_wip.all().last().delete()
+            profile = UserProfile.objects.get(pk=profile.pk)
+            self.assertEqual(profile.premium_counter, settings.PREMIUM_MAX_IMAGES_LITE - 1)
+            Image.all_objects.last().undelete()
+
+            # Deleting an image uploaded before the subscription was created does not decrease the counter.
+            image = Image.objects_including_wip.all().order_by('-pk')[1]  # Second last element
+            image.uploaded = image.uploaded - datetime.timedelta(days=2)
+            image.save(keep_deleted=True)
+            image.delete()
+            profile = UserProfile.objects.get(pk=profile.pk)
+            self.assertEqual(profile.premium_counter, settings.PREMIUM_MAX_IMAGES_LITE - 1)
+
         usersub.delete()
+
+        Image.all_objects.filter(user=self.user).delete()
+        self.user.userprofile.premium_counter = 0
+        self.user.userprofile.save()
+
+        self.client.logout()
+
+    @patch("astrobin.tasks.retrieve_primary_thumbnails")
+    def test_upload_limits_premium_autorenew(self, retrieve_primary_thumbnails):
+        """
+        Premium accounts (pre 2020, autorenew) can upload infinite images.
+        The counter never decreases, as it's inconsequential.
+        """
+        usersub, created = UserSubscription.objects.get_or_create(
+            user=self.user,
+            subscription=self.premium_autorenew_sub,
+            expires=datetime.datetime.now() + relativedelta(years=1))
+        usersub.subscribe()
+        usersub.save()
+
+        self.client.login(username='test', password='password')
+
+        with self.settings(PREMIUM_MAX_IMAGES_PREMIUM=2):
+            for i in [1, 2, 3]:
+                self.client.post(
+                    reverse('image_upload_process'),
+                    {'image_file': open('astrobin/fixtures/test.jpg', 'rb')},
+                    follow=True)
+                profile = UserProfile.objects.get(pk=self.user.userprofile.pk)
+                self.assertEqual(profile.premium_counter, i)
+
+            # Deleting an image uploaded this year should not decrease the counter.
+            Image.objects_including_wip.all().last().delete()
+            profile = UserProfile.objects.get(pk=profile.pk)
+            self.assertEqual(profile.premium_counter, settings.PREMIUM_MAX_IMAGES_PREMIUM + 1)
+
+            # Deleting an image uploaded before the subscription was created does still not decrease the counter.
+            image = Image.objects_including_wip.all().order_by('-pk')[1]  # Second last element
+            image.uploaded = image.uploaded - datetime.timedelta(days=1)
+            image.save(keep_deleted=True)
+            image.delete()
+            profile = UserProfile.objects.get(pk=profile.pk)
+            self.assertEqual(profile.premium_counter, settings.PREMIUM_MAX_IMAGES_PREMIUM + 1)
+
+        usersub.delete()
+
+        Image.all_objects.filter(user=self.user).delete()
+        self.user.userprofile.premium_counter = 0
+        self.user.userprofile.save()
+
+        self.client.logout()
+
+    @patch("astrobin.tasks.retrieve_primary_thumbnails")
+    def test_upload_limits_lite_2020(self, retrieve_primary_thumbnails):
+        """
+        Lite 2020+ can upload up to PREMIUM_MAX_IMAGES_LITE_2020 images.
+        The counter never decreases.
+        """
+        usersub, created = UserSubscription.objects.get_or_create(
+            user=self.user,
+            subscription=self.lite_2020_sub,
+            expires=datetime.datetime.now() + relativedelta(years=1))
+        usersub.subscribe()
+
+        self.client.login(username='test', password='password')
+
+        with self.settings(PREMIUM_MAX_IMAGES_LITE_2020=2):
+            for i in [1, 2]:
+                self.client.post(
+                    reverse('image_upload_process'),
+                    {'image_file': open('astrobin/fixtures/test.jpg', 'rb')},
+                    follow=True)
+                profile = UserProfile.objects.get(pk=self.user.userprofile.pk)
+                self.assertEqual(profile.premium_counter, i)
+
+            response = self.client.post(
+                reverse('image_upload_process'),
+                {'image_file': open('astrobin/fixtures/test.jpg', 'rb')},
+                follow=True)
+            self._assertMessage(response, "error unread", "You have reached your image count limit")
+
+            # Deleting an image uploaded this year should not decrease the counter.
+            Image.objects_including_wip.all().last().delete()
+            profile = UserProfile.objects.get(pk=profile.pk)
+            self.assertEqual(profile.premium_counter, settings.PREMIUM_MAX_IMAGES_LITE_2020)
+            Image.all_objects.last().undelete()
+
+            # Deleting an image uploaded before the subscription was created does not decrease the counter.
+            image = Image.objects_including_wip.all().order_by('-pk')[1]  # Second last element
+            image.uploaded = image.uploaded - datetime.timedelta(days=1)
+            image.save(keep_deleted=True)
+            image.delete()
+            profile = UserProfile.objects.get(pk=profile.pk)
+            self.assertEqual(profile.premium_counter, settings.PREMIUM_MAX_IMAGES_LITE_2020)
+
+        usersub.delete()
+
+        Image.all_objects.filter(user=self.user).delete()
+        self.user.userprofile.premium_counter = 0
+        self.user.userprofile.save()
+
+        self.client.logout()
+
+    @patch("astrobin.tasks.retrieve_primary_thumbnails")
+    def test_upload_limits_premium_2020(self, retrieve_primary_thumbnails):
+        """
+        Premium 2020+ can upload up to PREMIUM_MAX_IMAGES_PREMIUM_2020 images.
+        The counter never decreases.
+        """
+        usersub, created = UserSubscription.objects.get_or_create(
+            user=self.user,
+            subscription=self.premium_2020_sub,
+            expires=datetime.datetime.now() + relativedelta(years=1))
+        usersub.subscribe()
+
+        self.client.login(username='test', password='password')
+
+        with self.settings(PREMIUM_MAX_IMAGES_PREMIUM_2020=2):
+            for i in [1, 2]:
+                self.client.post(
+                    reverse('image_upload_process'),
+                    {'image_file': open('astrobin/fixtures/test.jpg', 'rb')},
+                    follow=True)
+                profile = UserProfile.objects.get(pk=self.user.userprofile.pk)
+                self.assertEqual(profile.premium_counter, i)
+
+            response = self.client.post(
+                reverse('image_upload_process'),
+                {'image_file': open('astrobin/fixtures/test.jpg', 'rb')},
+                follow=True)
+            self._assertMessage(response, "error unread", "You have reached your image count limit")
+
+            # Deleting an image uploaded this year should decrease the counter.
+            Image.objects_including_wip.all().last().delete()
+            profile = UserProfile.objects.get(pk=profile.pk)
+            self.assertEqual(profile.premium_counter, settings.PREMIUM_MAX_IMAGES_PREMIUM_2020)
+            Image.all_objects.last().undelete()
+
+            # Deleting an image uploaded before the subscription was created does still decrease the counter.
+            image = Image.objects_including_wip.all().order_by('-pk')[1]  # Second last element
+            image.uploaded = image.uploaded - datetime.timedelta(days=1)
+            image.save(keep_deleted=True)
+            image.delete()
+            profile = UserProfile.objects.get(pk=profile.pk)
+            self.assertEqual(profile.premium_counter, settings.PREMIUM_MAX_IMAGES_PREMIUM_2020)
+
+        usersub.delete()
+
+        Image.all_objects.filter(user=self.user).delete()
+        self.user.userprofile.premium_counter = 0
+        self.user.userprofile.save()
+
+        self.client.logout()
+
+    @patch("astrobin.tasks.retrieve_primary_thumbnails")
+    def test_upload_limits_ultimate_2020(self, retrieve_primary_thumbnails):
+        """
+        Ultimate 2020+ can upload infinite images.
+        The counter never, as it's inconsequential.
+        """
+        usersub, created = UserSubscription.objects.get_or_create(
+            user=self.user,
+            subscription=self.ultimate_2020_sub,
+            expires=datetime.datetime.now() + relativedelta(years=1))
+        usersub.subscribe()
+
+        self.client.login(username='test', password='password')
+
+        with self.settings(ULTIMATE_MAX_IMAGES_PREMIUM_2020=2):
+            # Upload one more than PREMIUM would allow.
+            for i in [1, 2, 3]:
+                self.client.post(
+                    reverse('image_upload_process'),
+                    {'image_file': open('astrobin/fixtures/test.jpg', 'rb')},
+                    follow=True)
+                profile = UserProfile.objects.get(pk=self.user.userprofile.pk)
+                self.assertEqual(profile.premium_counter, i)
+
+            # Deleting an image uploaded this year should not decrease the counter.
+            Image.objects_including_wip.all().last().delete()
+            profile = UserProfile.objects.get(pk=profile.pk)
+            self.assertEqual(profile.premium_counter, settings.ULTIMATE_MAX_IMAGES_PREMIUM_2020 + 1)
+            Image.all_objects.last().undelete()
+
+            # Deleting an image uploaded before the subscription was created does still not decrease the counter.
+            image = Image.objects_including_wip.all().order_by('-pk')[1]  # Second last element
+            image.uploaded = image.uploaded - datetime.timedelta(days=1)
+            image.save(keep_deleted=True)
+            image.delete()
+            profile = UserProfile.objects.get(pk=profile.pk)
+            self.assertEqual(profile.premium_counter, settings.ULTIMATE_MAX_IMAGES_PREMIUM_2020 + 1)
+
+        usersub.delete()
+
+        Image.all_objects.filter(user=self.user).delete()
+        self.user.userprofile.premium_counter = 0
+        self.user.userprofile.save()
+
+        self.client.logout()

@@ -1,9 +1,10 @@
+import sys
 from datetime import date, timedelta, datetime
 
 from django.contrib.auth.models import Group
 from django.core.urlresolvers import reverse
-from django.test import TestCase
-from django.utils import timezone
+from django.test import TestCase, override_settings
+from django.utils import timezone, formats
 from django_bouncy.models import Bounce
 from mock import patch
 from toggleproperties.models import ToggleProperty
@@ -13,7 +14,9 @@ from astrobin.models import (
     CommercialGear,
     Telescope,
     UserProfile,
-    ImageRevision)
+    ImageRevision,
+    DataDownloadRequest)
+from astrobin.tests.generators import Generators
 from astrobin_apps_iotd.models import *
 
 
@@ -75,6 +78,63 @@ class UserTest(TestCase):
 
         return revision
 
+    def test_user_page_view_anon_cannot_access_trash(self):
+        response = self.client.get(reverse('user_page', args=('user',)) + '?trash')
+        self.assertEquals(response.status_code, 403)
+
+    def test_user_page_view_cannot_access_another_users_trash(self):
+        Generators.premium_subscription(self.user, "AstroBin Ultimate 2020+")
+        self.client.login(username="user", password="password")
+        response = self.client.get(reverse('user_page', args=('user_2',)) + '?trash')
+        self.assertEquals(response.status_code, 403)
+
+    def test_user_page_view_free_cannot_access_trash(self):
+        self.client.login(username="user", password="password")
+        response = self.client.get(reverse('user_page', args=('user',)) + '?trash')
+        self.assertEquals(response.status_code, 403)
+
+    def test_user_page_view_lite_cannot_access_trash(self):
+        Generators.premium_subscription(self.user, "AstroBin Lite")
+        self.client.login(username="user", password="password")
+        response = self.client.get(reverse('user_page', args=('user',)) + '?trash')
+        self.assertEquals(response.status_code, 403)
+
+    def test_user_page_view_lite_autorenew_cannot_access_trash(self):
+        Generators.premium_subscription(self.user, "AstroBin Lite (autorenew)")
+        self.client.login(username="user", password="password")
+        response = self.client.get(reverse('user_page', args=('user',)) + '?trash')
+        self.assertEquals(response.status_code, 403)
+
+    def test_user_page_view_lite_2020_cannot_access_trash(self):
+        Generators.premium_subscription(self.user, "AstroBin Lite 2020+")
+        self.client.login(username="user", password="password")
+        response = self.client.get(reverse('user_page', args=('user',)) + '?trash')
+        self.assertEquals(response.status_code, 403)
+
+    def test_user_page_view_premium_cannot_access_trash(self):
+        Generators.premium_subscription(self.user, "AstroBin Premium")
+        self.client.login(username="user", password="password")
+        response = self.client.get(reverse('user_page', args=('user',)) + '?trash')
+        self.assertEquals(response.status_code, 403)
+
+    def test_user_page_view_premium_autorenew_cannot_access_trash(self):
+        Generators.premium_subscription(self.user, "AstroBin Premium (autorenew)")
+        self.client.login(username="user", password="password")
+        response = self.client.get(reverse('user_page', args=('user',)) + '?trash')
+        self.assertEquals(response.status_code, 403)
+
+    def test_user_page_view_premium_2020_cannot_access_trash(self):
+        Generators.premium_subscription(self.user, "AstroBin Premium 2020+")
+        self.client.login(username="user", password="password")
+        response = self.client.get(reverse('user_page', args=('user',)) + '?trash')
+        self.assertEquals(response.status_code, 403)
+
+    def test_user_page_view_ultimate_2020_can_access_trash(self):
+        Generators.premium_subscription(self.user, "AstroBin Ultimate 2020+")
+        self.client.login(username="user", password="password")
+        response = self.client.get(reverse('user_page', args=('user',)) + '?trash')
+        self.assertEquals(response.status_code, 200)
+
     @patch("astrobin.tasks.retrieve_primary_thumbnails")
     def test_user_page_view(self, retrieve_primary_thumbnails):
         today = date.today()
@@ -111,9 +171,9 @@ class UserTest(TestCase):
         # Test "upload time" sorting
         image1 = self._do_upload('astrobin/fixtures/test.jpg', "IMAGE1")
         image2 = self._do_upload('astrobin/fixtures/test.jpg', "IMAGE2")
-        image1.uploaded = today;
+        image1.uploaded = today
         image1.save(keep_deleted=True)
-        image2.uploaded = today + timedelta(1);
+        image2.uploaded = today + timedelta(1)
         image2.save(keep_deleted=True)
 
         response = self.client.get(
@@ -150,17 +210,17 @@ class UserTest(TestCase):
         image5 = self._do_upload('astrobin/fixtures/test.jpg', "IMAGE5_GEAR")
         image6 = self._do_upload('astrobin/fixtures/test.jpg', "IMAGE6_OTHER")
 
-        image1.subject_type = 100;
+        image1.subject_type = 100
         image1.save(keep_deleted=True)
-        image2.subject_type = 200;
+        image2.subject_type = 200
         image2.save(keep_deleted=True)
-        image3.subject_type = 300;
+        image3.subject_type = 300
         image3.save(keep_deleted=True)
-        image4.subject_type = 400;
+        image4.subject_type = 400
         image4.save(keep_deleted=True)
-        image5.subject_type = 500;
+        image5.subject_type = 500
         image5.save(keep_deleted=True)
-        image6.subject_type = 600;
+        image6.subject_type = 600
         image6.save(keep_deleted=True)
 
         response = self.client.get(reverse('user_page', args=('user',)) + "?sub=subject")
@@ -282,9 +342,9 @@ class UserTest(TestCase):
         image3 = self._do_upload('astrobin/fixtures/test.jpg', "IMAGE3")
         image4 = self._do_upload('astrobin/fixtures/test.jpg', "IMAGE4")
 
-        image3.subject_type = 200;
+        image3.subject_type = 200
         image3.save(keep_deleted=True)
-        image4.subject_type = 500;
+        image4.subject_type = 500
         image4.save(keep_deleted=True)
 
         telescope1 = Telescope.objects.create(name="TELESCOPE1")
@@ -408,6 +468,7 @@ class UserTest(TestCase):
 
         self.client.logout()
 
+    @override_settings(PREMIUM_RESTRICTS_IOTD=False)
     @patch("astrobin.tasks.retrieve_primary_thumbnails")
     def test_user_profile_exclude_from_competitions(self, retrieve_primary_thumbnails):
         self.client.login(username="user", password="password")
@@ -587,6 +648,7 @@ class UserTest(TestCase):
 
         image.delete()
 
+    @override_settings(PREMIUM_MAX_REVISIONS_FREE_2020=sys.maxsize)
     def test_corrupted_final_image_revision_not_shown_to_anon(self):
         self.client.login(username="user", password="password")
         image = self._do_upload('astrobin/fixtures/test.jpg', "CORRUPTED_IMAGE")
@@ -603,6 +665,7 @@ class UserTest(TestCase):
         image.delete()
         revision.delete()
 
+    @override_settings(PREMIUM_MAX_REVISIONS_FREE_2020=sys.maxsize)
     def test_corrupted_image_with_ok_final_revision_shown_to_anon(self):
         self.client.login(username="user", password="password")
         image = self._do_upload('astrobin/fixtures/test.jpg', "CORRUPTED_IMAGE")
@@ -619,6 +682,7 @@ class UserTest(TestCase):
         image.delete()
         revision.delete()
 
+    @override_settings(PREMIUM_MAX_REVISIONS_FREE_2020=sys.maxsize)
     def test_corrupted_image_with_ok_non_final_revision_not_shown_to_anon(self):
         self.client.login(username="user", password="password")
         image = self._do_upload('astrobin/fixtures/test.jpg', "CORRUPTED_IMAGE")
@@ -658,6 +722,7 @@ class UserTest(TestCase):
 
         image.delete()
 
+    @override_settings(PREMIUM_MAX_REVISIONS_FREE_2020=sys.maxsize)
     def test_corrupted_final_image_revision_shown_to_owner(self):
         self.client.login(username="user", password="password")
         image = self._do_upload('astrobin/fixtures/test.jpg', "CORRUPTED_IMAGE")
@@ -678,6 +743,7 @@ class UserTest(TestCase):
         image.delete()
         revision.delete()
 
+    @override_settings(PREMIUM_MAX_REVISIONS_FREE_2020=sys.maxsize)
     def test_corrupted_image_with_ok_final_revision_shown_to_owner(self):
         self.client.login(username="user", password="password")
         image = self._do_upload('astrobin/fixtures/test.jpg', "CORRUPTED_IMAGE")
@@ -698,6 +764,7 @@ class UserTest(TestCase):
         image.delete()
         revision.delete()
 
+    @override_settings(PREMIUM_MAX_REVISIONS_FREE_2020=sys.maxsize)
     def test_corrupted_image_with_ok_non_final_revision_shown_to_owner(self):
         self.client.login(username="user", password="password")
         image = self._do_upload('astrobin/fixtures/test.jpg', "CORRUPTED_IMAGE")
@@ -721,3 +788,313 @@ class UserTest(TestCase):
 
         image.delete()
         revision.delete()
+
+    @override_settings(PREMIUM_MAX_IMAGES_FREE_2020=123)
+    def test_user_page_subscription_free(self):
+        image = Generators.image()
+        image.user = self.user
+        image.save()
+
+        self.client.login(username='user', password='password')
+
+        response = self.client.get(reverse('user_page', args=('user',)))
+
+        self.assertContains(response, "<h4>Subscription</h4>", html=True)
+        self.assertContains(response, "<strong data-test='subscription-type'>AstroBin Free</strong>", html=True)
+        self.assertNotContains(response, "data-test=\"expiration-date\"")
+        self.assertContains(response, "<strong data-test='images-used'>0 / 123</strong>", html=True)
+
+        self.client.logout()
+        image.delete()
+
+    @override_settings(PREMIUM_MAX_IMAGES_LITE=123)
+    def test_user_page_subscription_lite(self):
+        image = Generators.image()
+        image.user = self.user
+        image.save()
+
+        us = Generators.premium_subscription(self.user, "AstroBin Lite")
+
+        self.client.login(username='user', password='password')
+
+        response = self.client.get(reverse('user_page', args=('user',)))
+
+        self.assertContains(response, "<h4>Subscription</h4>", html=True)
+        self.assertContains(response, "<strong data-test='subscription-type'>AstroBin Lite</strong>", html=True)
+        self.assertContains(
+            response,
+            "<strong data-test='expiration-date'>" +
+            formats.date_format(us.expires, "SHORT_DATE_FORMAT") +
+            "</strong>",
+            html=True)
+        self.assertContains(response, "<strong data-test='images-used'>0 / 123</strong>", html=True)
+
+        self.client.logout()
+        us.delete()
+        image.delete()
+
+    @override_settings(PREMIUM_MAX_IMAGES_LITE_2020=123)
+    def test_user_page_subscription_lite_2020(self):
+        image = Generators.image()
+        image.user = self.user
+        image.save()
+
+        us = Generators.premium_subscription(self.user, "AstroBin Lite 2020+")
+
+        self.client.login(username='user', password='password')
+
+        response = self.client.get(reverse('user_page', args=('user',)))
+
+        self.assertContains(response, "<h4>Subscription</h4>", html=True)
+        self.assertContains(response, "<strong data-test='subscription-type'>AstroBin Lite</strong>", html=True)
+        self.assertContains(
+            response,
+            "<strong data-test='expiration-date'>" +
+            formats.date_format(us.expires, "SHORT_DATE_FORMAT") +
+            "</strong>",
+            html=True)
+        self.assertContains(response, "<strong data-test='images-used'>0 / 123</strong>", html=True)
+
+        self.client.logout()
+        us.delete()
+        image.delete()
+
+    def test_user_page_subscription_premium(self):
+        image = Generators.image()
+        image.user = self.user
+        image.save()
+
+        us = Generators.premium_subscription(self.user, "AstroBin Premium")
+
+        self.client.login(username='user', password='password')
+
+        response = self.client.get(reverse('user_page', args=('user',)))
+
+        self.assertContains(response, "<h4>Subscription</h4>", html=True)
+        self.assertContains(response, "<strong data-test='subscription-type'>AstroBin Premium</strong>", html=True)
+        self.assertContains(
+            response,
+            "<strong data-test='expiration-date'>" +
+            formats.date_format(us.expires, "SHORT_DATE_FORMAT") +
+            "</strong>",
+            html=True)
+        self.assertContains(response, "<strong data-test='images-used'>0 / &infin;</strong>", html=True)
+
+        self.client.logout()
+        us.delete()
+        image.delete()
+
+    @override_settings(PREMIUM_MAX_IMAGES_PREMIUM_2020=123)
+    def test_user_page_subscription_premium_2020(self):
+        image = Generators.image()
+        image.user = self.user
+        image.save()
+
+        us = Generators.premium_subscription(self.user, "AstroBin Premium 2020+")
+
+        self.client.login(username='user', password='password')
+
+        response = self.client.get(reverse('user_page', args=('user',)))
+
+        self.assertContains(response, "<h4>Subscription</h4>", html=True)
+        self.assertContains(response, "<strong data-test='subscription-type'>AstroBin Premium</strong>", html=True)
+        self.assertContains(
+            response,
+            "<strong data-test='expiration-date'>" +
+            formats.date_format(us.expires, "SHORT_DATE_FORMAT") +
+            "</strong>",
+            html=True)
+        self.assertContains(response, "<strong data-test='images-used'>0 / 123</strong>", html=True)
+
+        self.client.logout()
+        us.delete()
+        image.delete()
+
+    def test_user_page_subscription_ultimate(self):
+        image = Generators.image()
+        image.user = self.user
+        image.save()
+
+        us = Generators.premium_subscription(self.user, "AstroBin Ultimate 2020+")
+
+        self.client.login(username='user', password='password')
+
+        response = self.client.get(reverse('user_page', args=('user',)))
+
+        self.assertContains(response, "<h4>Subscription</h4>", html=True)
+        self.assertContains(response, "<strong data-test='subscription-type'>AstroBin Ultimate</strong>", html=True)
+        self.assertContains(
+            response,
+            "<strong data-test='expiration-date'>" +
+            formats.date_format(us.expires, "SHORT_DATE_FORMAT") +
+            "</strong>",
+            html=True)
+        self.assertContains(response, "<strong data-test='images-used'>0 / &infin;</strong>", html=True)
+
+        self.client.logout()
+        us.delete()
+        image.delete()
+
+    @override_settings(ADS_ENABLED=True)
+    def test_user_preferences_allow_astronomy_ads_free(self):
+        self.client.login(username='user', password='password')
+        self.assertContains(
+            self.client.get(reverse('profile_edit_preferences')),
+            'name="allow_astronomy_ads" disabled')
+        self.client.logout()
+
+    @override_settings(ADS_ENABLED=True)
+    def test_user_preferences_allow_astronomy_ads_lite(self):
+        self.client.login(username='user', password='password')
+        us = Generators.premium_subscription(self.user, "AstroBin Lite")
+        self.assertNotContains(
+            self.client.get(reverse('profile_edit_preferences')),
+            'name="allow_astronomy_ads" disabled')
+        self.client.logout()
+        us.delete()
+
+    @override_settings(ADS_ENABLED=True)
+    def test_user_preferences_allow_astronomy_ads_lite_2020(self):
+        self.client.login(username='user', password='password')
+        us = Generators.premium_subscription(self.user, "AstroBin Lite 2020+")
+        self.assertContains(
+            self.client.get(reverse('profile_edit_preferences')),
+            'name="allow_astronomy_ads" disabled')
+        self.client.logout()
+        us.delete()
+
+    @override_settings(ADS_ENABLED=True)
+    def test_user_preferences_allow_astronomy_ads_premium(self):
+        self.client.login(username='user', password='password')
+        us = Generators.premium_subscription(self.user, "AstroBin Premium")
+        self.assertNotContains(
+            self.client.get(reverse('profile_edit_preferences')),
+            'name="allow_astronomy_ads" disabled')
+        self.client.logout()
+        us.delete()
+
+    @override_settings(ADS_ENABLED=True)
+    def test_user_preferences_allow_astronomy_ads_premium_2020(self):
+        self.client.login(username='user', password='password')
+        us = Generators.premium_subscription(self.user, "AstroBin Premium 2020+")
+        self.assertNotContains(
+            self.client.get(reverse('profile_edit_preferences')),
+            'name="allow_astronomy_ads" disabled')
+        self.client.logout()
+        us.delete()
+
+    @override_settings(ADS_ENABLED=True)
+    def test_user_preferences_allow_astronomy_ads_ultimate_2020(self):
+        self.client.login(username='user', password='password')
+        us = Generators.premium_subscription(self.user, "AstroBin Ultimate 2020+")
+        self.assertNotContains(
+            self.client.get(reverse('profile_edit_preferences')),
+            'name="allow_astronomy_ads" disabled')
+        self.client.logout()
+        us.delete()
+
+    def test_user_can_access_trash_free(self):
+        self.client.login(username='user', password='password')
+        response = self.client.get(reverse('user_page', args=('user',)) + "?trash")
+        self.assertEquals(403, response.status_code)
+
+    def test_user_can_access_trash_lite(self):
+        self.client.login(username='user', password='password')
+        Generators.premium_subscription(self.user, "AstroBin Lite")
+        response = self.client.get(reverse('user_page', args=('user',)) + "?trash")
+        self.assertEquals(403, response.status_code)
+
+    def test_user_can_access_trash_lite_autorenew(self):
+        self.client.login(username='user', password='password')
+        Generators.premium_subscription(self.user, "AstroBin Lite (autorenew)")
+        response = self.client.get(reverse('user_page', args=('user',)) + "?trash")
+        self.assertEquals(403, response.status_code)
+
+    def test_user_can_access_trash_lite_2020(self):
+        self.client.login(username='user', password='password')
+        Generators.premium_subscription(self.user, "AstroBin Lite 2020+")
+        response = self.client.get(reverse('user_page', args=('user',)) + "?trash")
+        self.assertEquals(403, response.status_code)
+
+    def test_user_can_access_trash_premium(self):
+        self.client.login(username='user', password='password')
+        Generators.premium_subscription(self.user, "AstroBin Premium")
+        response = self.client.get(reverse('user_page', args=('user',)) + "?trash")
+        self.assertEquals(403, response.status_code)
+
+    def test_user_can_access_trash_premium_autorenew(self):
+        self.client.login(username='user', password='password')
+        Generators.premium_subscription(self.user, "AstroBin Premium (autorenew)")
+        response = self.client.get(reverse('user_page', args=('user',)) + "?trash")
+        self.assertEquals(403, response.status_code)
+
+    def test_user_can_access_trash_premium_2020(self):
+        self.client.login(username='user', password='password')
+        Generators.premium_subscription(self.user, "AstroBin Premium 2020+")
+        response = self.client.get(reverse('user_page', args=('user',)) + "?trash")
+        self.assertEquals(403, response.status_code)
+
+    def test_user_can_access_trash_ultimate_2020(self):
+        self.client.login(username='user', password='password')
+        Generators.premium_subscription(self.user, "AstroBin Ultimate 2020+")
+        response = self.client.get(reverse('user_page', args=('user',)) + "?trash")
+        self.assertEquals(200, response.status_code)
+
+    def test_user_can_access_data_download_free(self):
+        self.client.login(username='user', password='password')
+        response = self.client.get(reverse('profile_download_data'))
+        self.assertRedirects(response, '/accounts/login/?next=' + reverse('profile_download_data'))
+
+    def test_user_can_access_data_download_lite(self):
+        Generators.premium_subscription(self.user, "AstroBin Lite")
+        self.client.login(username='user', password='password')
+        response = self.client.get(reverse('profile_download_data'))
+        self.assertRedirects(response, '/accounts/login/?next=' + reverse('profile_download_data'))
+
+    def test_user_can_access_data_download_lite_autorenew(self):
+        Generators.premium_subscription(self.user, "AstroBin Lite (autorenew)")
+        self.client.login(username='user', password='password')
+        response = self.client.get(reverse('profile_download_data'))
+        self.assertRedirects(response, '/accounts/login/?next=' + reverse('profile_download_data'))
+
+    def test_user_can_access_data_download_lite_2020(self):
+        Generators.premium_subscription(self.user, "AstroBin Lite 2020+")
+        self.client.login(username='user', password='password')
+        response = self.client.get(reverse('profile_download_data'))
+        self.assertRedirects(response, '/accounts/login/?next=' + reverse('profile_download_data'))
+
+    def test_user_can_access_data_download_premium(self):
+        Generators.premium_subscription(self.user, "AstroBin Premium")
+        self.client.login(username='user', password='password')
+        response = self.client.get(reverse('profile_download_data'))
+        self.assertEquals(response.status_code, 200)
+
+    def test_user_can_access_data_download_premium_autorenew(self):
+        Generators.premium_subscription(self.user, "AstroBin Premium (autorenew)")
+        self.client.login(username='user', password='password')
+        response = self.client.get(reverse('profile_download_data'))
+        self.assertEquals(response.status_code, 200)
+
+    def test_user_can_access_data_download_premium_2020(self):
+        Generators.premium_subscription(self.user, "AstroBin Premium 2020+")
+        self.client.login(username='user', password='password')
+        response = self.client.get(reverse('profile_download_data'))
+        self.assertEquals(response.status_code, 200)
+
+    def test_user_can_access_data_download_ultimate_2020(self):
+        Generators.premium_subscription(self.user, "AstroBin Ultimate 2020+")
+        self.client.login(username='user', password='password')
+        response = self.client.get(reverse('profile_download_data'))
+        self.assertEquals(response.status_code, 200)
+
+    def test_download_data_view_quota(self):
+        Generators.premium_subscription(self.user, "AstroBin Ultimate 2020+")
+        self.client.login(username='user', password='password')
+
+        response = self.client.get(reverse('profile_download_data'))
+        self.assertFalse(response.context["exceeded_requests_quota"])
+
+        DataDownloadRequest.objects.create(user=self.user)
+
+        response = self.client.get(reverse('profile_download_data'))
+        self.assertTrue(response.context["exceeded_requests_quota"])

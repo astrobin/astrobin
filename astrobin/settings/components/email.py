@@ -1,7 +1,8 @@
 import os
 
+SEND_EMAILS = os.environ.get('SEND_EMAILS', 'false').strip()
 
-if os.environ.get('SEND_EMAILS', 'false').strip() == 'true':
+if  SEND_EMAILS == 'true':
     EMAIL_BACKEND = 'djcelery_email.backends.CeleryEmailBackend'
     CELERY_EMAIL_BACKEND = 'django.core.mail.backends.smtp.EmailBackend'
 
@@ -16,7 +17,7 @@ if os.environ.get('SEND_EMAILS', 'false').strip() == 'true':
     EMAIL_HOST_PASSWORD = os.environ.get('EMAIL_HOST_PASSWORD', '').strip()
     EMAIL_PORT = int(os.environ.get('EMAIL_HOST_PORT', '25').strip())
     EMAIL_USE_SSL = os.environ.get('EMAIL_USE_SSL', 'false').strip() == 'true'
-else:
+elif SEND_EMAILS == 'dummy':
     EMAIL_BACKEND = 'django.core.mail.backends.smtp.EmailBackend'
 
     EMAIL_HOST = 'debug_email'
@@ -24,6 +25,8 @@ else:
     EMAIL_HOST_PASSWORD = ''
     EMAIL_PORT = 25
     EMAIL_USE_SSL = False
+else:
+    EMAIL_BACKEND = 'django.core.mail.backends.dummy.EmailBackend'
 
 SERVER_EMAIL = DEFAULT_FROM_EMAIL = os.environ.get('SERVER_EMAIL', 'noreply@astrobin.com').strip()
 EMAIL_SUBJECT_PREFIX = os.environ.get('EMAIL_SUBJECT_PREFIX', '[AstroBin]').strip()

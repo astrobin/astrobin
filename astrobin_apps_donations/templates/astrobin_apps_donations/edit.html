@@ -1,11 +1,18 @@
 {% extends 'base.html' %}
 
 {% load i18n %}
+{% load django_bootstrap_breadcrumbs %}
 
 {% block title %}{% trans "Edit your recurring donation settings" %}{% endblock %}
 
+{% block breadcrumbs %}
+    {{ block.super }}
+    {% breadcrumb_safe 'Donations' None %}
+    {% breadcrumb 'Edit' None %}
+{% endblock %}
+
 {% block content %}
-    <h2>{% trans "Edit your recurring donation settings" %}</h2>
+    <h1>{% trans "Edit your recurring donation settings" %}</h1>
 
     {% include 'astrobin_apps_donations/inclusion_tags/_paypal_button.html' %}
 {% endblock %}

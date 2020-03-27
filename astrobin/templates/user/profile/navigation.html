@@ -1,6 +1,7 @@
 {% load i18n %}
 {% load common_tags %}
 {% load tags %}
+{% load astrobin_apps_premium_tags %}
 
 <div class="subnav subnav-fixed">
     <ul class="nav nav-pills">
@@ -36,7 +37,7 @@
                 <li class="nav-header">{% trans "Gallery" %}</li>
 
                 <li>
-                    <a href="{% url 'user_page' requested_user.username %}{% query_string "" "sub,active,staging,corrupted" %}">
+                    <a href="{% url 'user_page' requested_user.username %}{% query_string "" "sub,active,staging,corrupted,trash" %}">
                         <i class="icon-bullhorn"></i>
                         {% trans "Public Area" %}
                         <span class="badge badge-success">
@@ -47,7 +48,7 @@
 
                 {% ifequal requested_user request.user %}
                     <li>
-                        <a href="{% url 'user_page' requested_user.username %}{% query_string "sub=uploaded,staging=" "public,active,corrupted" %}">
+                        <a href="{% url 'user_page' requested_user.username %}{% query_string "sub=uploaded,staging=" "public,active,corrupted,trash" %}">
                             <i class="icon-lock"></i>
                             {% trans "Staging Area" %}
                             <span class="badge badge-success">
@@ -58,7 +59,7 @@
 
                     {% if corrupted_no > 0 %}
                         <li>
-                            <a href="{% url 'user_page' requested_user.username %}{% query_string "sub=uploaded,corrupted=" "public,active,staging,corrupted" %}">
+                            <a href="{% url 'user_page' requested_user.username %}{% query_string "sub=uploaded,corrupted=" "public,active,staging,trash" %}">
                                 <i class="icon-ambulance"></i>
                                 {% trans "Corrupted" %}
                                 <span class="badge badge-important">
@@ -67,6 +68,21 @@
                             </a>
                         </li>
                     {% endif %}
+
+                    <li>
+                        {% if request.user|can_restore_from_trash %}
+                            <a href="
+                                    {% url 'user_page' requested_user.username %}{% query_string "trash=" "public,active,sub,staging,corrupted" %}">
+                        {% else %}
+                            <a href="#feature-restricted-modal" data-toggle="modal">
+                        {% endif %}
+                        <i class="icon-trash"></i>
+                        {% trans "Trash" %}
+                        <span class="badge badge-success">
+                                {{ deleted_images_no }}
+                            </span>
+                        </a>
+                    </li>
                 {% endifequal %}
 
                 <li class="divider"></li>

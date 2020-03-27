@@ -1,0 +1,129 @@
+{% extends 'base.html' %}
+{% load i18n %}
+{% load bootstrap_toolkit %}
+{% load django_bootstrap_breadcrumbs %}
+{% load tags %}
+{% load common_tags %}
+
+{% block title %}{% trans "Download your data" %}{% endblock %}
+
+{% block breadcrumbs %}
+    {{ block.super }}
+    {% breadcrumb_safe 'Users' None %}
+    {% breadcrumb request.user.userprofile.get_display_name 'user_page' request.user.username %}
+    {% breadcrumb 'Settings' None %}
+    {% breadcrumb 'Download data' None %}
+{% endblock %}
+
+{% block content %}
+    <div class="row">
+
+        {% include 'user/profile/edit/navigation.html' %}
+
+        <div class="span9">
+            {% if READONLY_MODE %}
+                {% include 'readonly_mode.html' %}
+            {% else %}
+                <div class="well">
+                    {% blocktrans trimmed %}
+                        You can download all your data off AstroBin, including original uploads, all revisions, and
+                        information such as description, gear used, acquisition details, and so on.
+                    {% endblocktrans %}
+                </div>
+
+                <form class="form" method="post" action="{% url 'profile_download_data' %}">{% csrf_token %}
+
+                    {{ form|as_bootstrap }}
+
+                    {% if exceeded_requests_quota %}
+                        <a href="#exceeded-requests-quota-modal" data-toggle="modal" class="btn btn-primary disabled">
+                            <i class="icon-exclamation-sign"></i> {% trans "Request download" %}
+                        </a>
+                    {% else %}
+                        <button
+                                class="btn btn-primary btn-block-mobile {% button_loading_class %}"
+                                type="submit">
+                            {% trans "Request download" %}
+                            {% button_loading_indicator %}
+                        </button>
+                    {% endif %}
+                </form>
+            {% endif %} {# READONLY #}
+
+            <hr />
+
+            <h3>{% trans "Your past requests" %}</h3>
+
+            {% if request.user.datadownloadrequest_set.count > 0 %}
+                <table class="table table-striped">
+                    <thead>
+                    <th>{% trans "Request time" %}</th>
+                    <th>{% trans "Status" %}</th>
+                    <th>{% trans "File size" %}</th>
+                    <th>&nbsp;</th>
+                    </thead>
+
+                    <tbody>
+                    {% for item in request.user.datadownloadrequest_set.all %}
+                        <tr>
+                            <td>
+                                <abbr class="timeago" title="{{ item.created|to_user_timezone:request.user|date:'Y-m-d\TH:i:s' }}"></abbr>
+                            </td>
+                            <td>{{ item.status_label }}</td>
+                            <td>
+                                {% if item.file_size %}
+                                    {{ item.file_size|filesizeformat }}
+                                {% endif %}
+                            </td>
+                            <td>
+                                {% if item.status == "READY" and item.zip_file %}
+                                    <a href="{{ item.zip_file.url }}">
+                                        {% private_abbr %} {% trans "Download" %}
+                                    </a>
+                                {% endif %}
+
+                                {% if item.status == "EXPIRED" %}
+                                    <span class="muted">
+                                            {% private_abbr %} {% trans "Download" %}
+                                        </span>
+                                {% endif %}
+                            </td>
+                        </tr>
+                    {% endfor %}
+                    </tbody>
+                </table>
+            {% else %}
+                <p>{% trans "There doesn't seem to be anything here." %}</p>
+            {% endif %}
+        </div>
+    </div>
+
+{% endblock %}
+
+{% block modals %}
+    {{ block.super }}
+
+    <div class="modal hide fade" id="exceeded-requests-quota-modal">
+        <div class="modal-header">
+            <a class="close" data-dismiss="modal">&times;</a>
+            <h3>{% trans "Quota exceeded" %}</h3>
+        </div>
+
+        <div class="modal-body">
+            <p>
+                {% blocktrans trimmed %}
+                    To prevent excessive usage of server resources, you can only request one data download per 24 hour
+                    period. If you believe your download is stuck, please email us at
+                    <a href="mailto:astrobin@astrobin.com">astrobin@astrobin.com</a>.
+                {% endblocktrans %}
+            </p>
+
+            <p>
+                {% blocktrans trimmed %}
+                    Please keep in mind that it could take several hours for your download to be ready, depending on the
+                    number and size of your images, and how busy the servers are at the moment.
+                {% endblocktrans %}
+            </p>
+        </div>
+    </div>
+{% endblock %}

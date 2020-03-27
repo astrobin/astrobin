@@ -12,6 +12,7 @@ class SolutionSerializer(serializers.ModelSerializer):
         read_only_fields = (
             'status',
             'submission_id',
+            'pixinsight_serial_number',
             'content_type',
             'object_id',
             'image_file',
@@ -21,4 +22,9 @@ class SolutionSerializer(serializers.ModelSerializer):
             'pixscale',
             'orientation',
             'radius',
+            'advanced_ra',
+            'advanced_dec',
+            'advanced_pixscale',
+            'advanced_orientation',
+            'advanced_piixscale',
         )

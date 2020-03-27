@@ -339,6 +339,15 @@
         padding-left: 45px;
         width: calc(100% - 45px);
     }
+
+    .subscription-plans-overview {
+        .subtle-container {
+            .logo {
+                top: -15%;
+                width: 100%;
+            }
+        }
+    }
 }
 
 

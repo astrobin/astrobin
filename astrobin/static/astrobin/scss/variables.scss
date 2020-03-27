@@ -1,0 +1,35 @@
+/* Color palette: http://www.colourlovers.com/palette/322645/Mambo_For_Cats */
+$background-color: #333333;
+$link-color: #CC4B2E;
+$strong-text-color: #FCFCFC;
+$logo-color: #3092CF;
+
+$header-color: $strong-text-color;
+$text-color: $strong-text-color - #333;
+$input-color: $background-color;
+
+$hilight-factor: 1.12;
+$strong-hilight-factor: 1.25;
+$strongest-hilight-factor: 1.4;
+$border-color: $background-color / $hilight-factor;
+$border-bottom-color: $background-color * $strong-hilight-factor;
+$border-top-color: $background-color * $strongest-hilight-factor;
+$border-color-inverted: $strong-text-color;
+$border-shadow-color: $background-color / $strong-hilight-factor;
+$border-shadow-color-inverted: $text-color + #030303;
+$dark-panel-color: $background-color / $hilight-factor;
+$regular-panel-color: $background-color / ((1 + $hilight-factor) / 2);
+$light-panel-color: $background-color * $hilight-factor;
+$light-panel-border-color: $background-color / $strong-hilight-factor;
+
+$base-font-size: 14px;
+$spacer-small: 4px;
+$spacer-xsmall: $spacer-small * .5;
+$spacer-medium: $spacer-small * 2;
+$spacer-large: $spacer-small * 3;
+$spacer-xlarge: $spacer-small * 4;
+$spacer-xxlarge: $spacer-small * 7;
+$spacer-xxxlarge: $spacer-small * 13;
+
+$headers_font: "Noto Serif", Georgia, Times, serif;
+$regular_font: "Noto Sans", Helvetica, Arial, sans-serif;

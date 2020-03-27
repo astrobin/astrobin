@@ -1,0 +1,23 @@
+{% extends "base.html" %}
+
+{% load i18n %}
+{% load django_bootstrap_breadcrumbs %}
+
+{% block title %}
+    {% trans "Data loss compensation reauest" %}: {% trans "Success" %}
+{% endblock %}
+
+{% block breadcrumbs %}
+    {{ block.super }}
+    {% breadcrumb 'AstroBin Premium' None %}
+    {% breadcrumb 'Data loss compensation request' None %}
+    {% breadcrumb 'Success' None %}
+{% endblock %}
+
+{% block content %}
+    <h1>{% trans "All done!" %}</h1>
+    <p>
+    {% blocktrans trimmed %}
+        You're preference has been recorded and it has already been applied. Thank you!
+    {% endblocktrans %}
+{% endblock %}

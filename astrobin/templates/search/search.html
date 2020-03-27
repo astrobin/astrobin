@@ -4,6 +4,7 @@
 {% load django_bootstrap_breadcrumbs %}
 {% load common_tags %}
 {% load tags %}
+{% load astrobin_apps_premium_tags %}
 
 {% block title %}{% trans "Search" %}{% endblock %}
 
@@ -24,82 +25,90 @@
     <a class="anchor" name="page_anchor"></a>
 
     {% if request.GET.d == "i" or request.GET.d == None %}
-    <div class="subnav subnav-fixed">
-        <ul class="nav nav-pills">
-            <li class="dropdown">
-                <a class="dropdown-toggle" data-toggle="dropdown" href="#">
-                    <i class="icon-sort icon-white"></i>
-                    {% trans "Sort" %}
-                    <span class="caret"></span>
-                </a>
-                <ul class="dropdown-menu">
-                    <li>
-                        <a href="/search/{% query_string "" "sort" %}">
-                            <i class="icon-search"></i>
-                            {% trans "Relevance" %}
-                        </a>
-                    </li>
+        <div class="subnav subnav-fixed">
+            <ul class="nav nav-pills">
+                <li class="dropdown">
 
-                    <li class="divider"></li>
+                    {% if request.user|can_access_advanced_search %}
+                        <a class="dropdown-toggle" data-toggle="dropdown" href="#">
+                            <i class="icon-sort icon-white"></i>
+                            {% trans "Sort" %}
+                            <span class="caret"></span>
+                    {% else %}
+                        <a data-toggle="modal" href="#feature-restricted-modal">
+                            <i class="icon-sort icon-white"></i>
+                            {% trans "Sort" %}
+                    {% endif %}
+                    </a>
+                    <ul class="dropdown-menu">
+                        <li>
+                            <a href="/search/{% query_string "" "sort" %}">
+                                <i class="icon-search"></i>
+                                {% trans "Relevance" %}
+                            </a>
+                        </li>
 
-                    <li>
-                        <a href="/search/{% query_string "sort='-uploaded'" "" %}">
-                            <i class="icon-upload"></i>
-                            {% trans "Upload time" %}
-                        </a>
-                    </li>
-                    <li>
-                        <a href="/search/{% query_string "sort='-likes'" "" %}">
-                            <i class="icon-thumbs-up"></i>
-                            {% trans "Likes" %}
-                        </a>
-                    </li>
-                    <li>
-                        <a href="/search/{% query_string "sort='-integration'" "" %}">
-                            <i class="icon-time"></i>
-                            {% trans "Integration" %}
-                        </a>
-                    </li>
-                    <li>
-                        <a href="/search/{% query_string "sort='-views'" "" %}">
-                            <i class="icon-eye-open"></i>
-                            {% trans "Views" %}
-                        </a>
-                    </li>
+                        <li class="divider"></li>
 
-                    <li class="divider"></li>
+                        <li>
+                            <a href="/search/{% query_string "sort='-uploaded'" "" %}">
+                                <i class="icon-upload"></i>
+                                {% trans "Upload time" %}
+                            </a>
+                        </li>
+                        <li>
+                            <a href="/search/{% query_string "sort='-likes'" "" %}">
+                                <i class="icon-thumbs-up"></i>
+                                {% trans "Likes" %}
+                            </a>
+                        </li>
+                        <li>
+                            <a href="/search/{% query_string "sort='-integration'" "" %}">
+                                <i class="icon-time"></i>
+                                {% trans "Integration" %}
+                            </a>
+                        </li>
+                        <li>
+                            <a href="/search/{% query_string "sort='-views'" "" %}">
+                                <i class="icon-eye-open"></i>
+                                {% trans "Views" %}
+                            </a>
+                        </li>
 
-                    <li>
-                        <a href="/search/{% query_string "sort='-field_radius'" "" %}">
-                            <i class="icon-zoom-out"></i>
-                            {% trans "Large field radius" %}
-                        </a>
-                    </li>
-                    <li>
-                        <a href="/search/{% query_string "sort='field_radius'" "" %}">
-                            <i class="icon-zoom-in"></i>
-                            {% trans "Small field radius" %}
-                        </a>
-                    </li>
+                        <li class="divider"></li>
 
-                    <li class="divider"></li>
+                        <li>
+                            <a href="/search/{% query_string "sort='-field_radius'" "" %}">
+                                <i class="icon-zoom-out"></i>
+                                {% trans "Large field radius" %}
+                            </a>
+                        </li>
+                        <li>
+                            <a href="/search/{% query_string "sort='field_radius'" "" %}">
+                                <i class="icon-zoom-in"></i>
+                                {% trans "Small field radius" %}
+                            </a>
+                        </li>
 
-                    <li>
-                        <a href="/search/{% query_string "sort='-pixel_scale'" "" %}">
-                            <i class="icon-zoom-out"></i>
-                            {% trans "Large pixel scale" %}
-                        </a>
-                    </li>
-                    <li>
-                        <a href="/search/{% query_string "sort='pixel_scale'" "" %}">
-                            <i class="icon-zoom-in"></i>
-                            {% trans "Small pixel scale" %}
-                        </a>
-                    </li>
-                </ul>
-            </li>
-        </ul> <!-- nav -->
-    </div> <!-- subnav -->
+                        <li class="divider"></li>
+
+                        <li>
+                            <a href="/search/{% query_string "sort='-pixel_scale'" "" %}">
+                                <i class="icon-zoom-out"></i>
+                                {% trans "Large pixel scale" %}
+                            </a>
+                        </li>
+                        <li>
+                            <a href="/search/{% query_string "sort='pixel_scale'" "" %}">
+                                <i class="icon-zoom-in"></i>
+                                {% trans "Small pixel scale" %}
+                            </a>
+                        </li>
+                    </ul>
+                </li>
+
+            </ul> <!-- nav -->
+        </div> <!-- subnav -->
     {% endif %}
 
     <div id="search-app"></div>

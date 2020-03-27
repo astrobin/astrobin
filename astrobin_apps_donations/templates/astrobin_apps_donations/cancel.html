@@ -1,26 +1,29 @@
 {% extends 'base.html' %}
 
 {% load i18n %}
+{% load django_bootstrap_breadcrumbs %}
 
 {% block title %}{% trans "Your recurring donation has been canceled" %}{% endblock %}
 
+{% block breadcrumbs %}
+    {{ block.super }}
+    {% breadcrumb_safe 'Donations' None %}
+    {% breadcrumb 'Canceled' None %}
+{% endblock %}
+
 {% block content %}
     <div class="row">
-        <div class="span6 offset3">
+        <div class="span6 offset2">
             <h1>{% trans "Your recurring donation has been canceled" %}</h1>
 
             <p>
-                {% blocktrans %}We are very grateful for your support so far! Your contribution has helped AstroBin with its ever increasing hosting costs, and served an incentive for us to continue to improve it.{% endblocktrans %}
-            </p>
-
-            <p>
-                {% blocktrans %}From now on, you will again see ads on this website.{% endblocktrans %}
+                {% blocktrans %}I am very grateful for your support so far! Your contribution has helped AstroBin with its ever increasing hosting costs, and served an incentive for me to keep improving it.{% endblocktrans %}
             </p>
 
             <hr/>
 
             <p class="text-right">
-                {% blocktrans %}Whishing you clear skies and excellent seeing!{% endblocktrans %}
+                {% blocktrans %}Wishing you clear skies and excellent seeing!{% endblocktrans %}
             </p>
 
             <p class="text-right">

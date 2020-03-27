@@ -47,18 +47,33 @@ astrobin_common = {
                paramArray = fullQString.split("&");
 
                //Loop through params, check if parameter exists.
-               for (i=0;i<paramArray.length;i++)
-               {
+               for (i=0;i<paramArray.length;i++) {
                    currentParameter = paramArray[i].split("=");
-                   if(currentParameter[0] == parameter) //Parameter already exists in current url
+                   if (currentParameter[0] == parameter) //Parameter already exists in current url
                    {
                        return true;
                    }
                }
            }
 
-           return false;
-       }
+            return false;
+        },
+
+        convertCurrency: function(amount, targetCurrency, precision) {
+            // CHF is the base.
+            var rates = {
+                USD: 1.03,
+                EUR: 0.93,
+                GBP: 0.78
+            };
+
+            if (precision === undefined) {
+                precision = 2;
+            }
+
+            var converted = parseInt(amount, 10) * rates[targetCurrency];
+            return (Math.round(converted * 100) / 100).toFixed(precision);
+        }
     },
 
     listen_for_notifications: function(username, last_modified, etag) {

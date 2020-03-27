@@ -22,11 +22,10 @@
     <div class="row section">
         <div class="span12">
             <p>
-                {% url 'rawdata.help1' as rawdata_url %}
-                {% blocktrans %}A <strong>private shared folder</strong> is a way for subscribers to the <a href="{{rawdata_url}}">AstoBin Raw Data Platform</a> to share raw data, like FIT and digital camera raw files, with other users, to collaborate on processing, get or provide technical help.{% endblocktrans %}
+                {% blocktrans with rawdata_url="https://welcome.astrobin.com/features/raw-data-support" %}A <strong>private shared folder</strong> is a way for subscribers to the <a href="{{rawdata_url}}">AstoBin Raw Data Platform</a> to share raw data, like FIT and digital camera raw files, with other users, to collaborate on processing, get or provide technical help.{% endblocktrans %}
             </p>
             <p>
-                {% blocktrans %}The <a href="{{rawdata_url}}">Raw Data Platform</a> is primarily a way to securely back up your raw files, and keep them neatly and effortlessly organized, but being part of it also means that you support AstroBin and can perhaps contribute your raw files to scientific discoveries.{% endblocktrans %}
+                {% blocktrans with rawdata_url="https://welcome.astrobin.com/features/raw-data-support" %}The <a href="{{rawdata_url}}">Raw Data Platform</a> is primarily a way to securely back up your raw files, and keep them neatly and effortlessly organized, but being part of it also means that you support AstroBin and can perhaps contribute your raw files to scientific discoveries.{% endblocktrans %}
             </p>
         </div>
     </div>

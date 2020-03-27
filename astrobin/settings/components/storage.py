@@ -28,8 +28,11 @@ if AWS_S3_ENABLED:
         'Expires': 'Wed, 31 Dec 2036 23:59:59 GMT'
     }
 else:
-    MEDIA_ROOT = MEDIA_URL = '/media/'
-    STATIC_ROOT = STATIC_URL = MEDIA_ROOT + 'static/'
+    MEDIA_ROOT = '/media/'
+    MEDIA_URL = BASE_URL + MEDIA_ROOT
+
+    STATIC_ROOT = MEDIA_ROOT
+    STATIC_URL = MEDIA_URL + 'static/'
 
 # Normalize
 if not MEDIA_URL.endswith('/'):
@@ -54,3 +57,12 @@ STATICFILES_FINDERS = (
 )
 
 MESSAGE_STORAGE = 'persistent_messages.storage.PersistentMessageStorage'
+
+FILE_UPLOAD_HANDLERS = (
+    "progressbarupload.uploadhandler.ProgressBarUploadHandler",
+    "django.core.files.uploadhandler.MemoryFileUploadHandler",
+    "django.core.files.uploadhandler.TemporaryFileUploadHandler",
+)
+
+PROGRESSBARUPLOAD_INCLUDE_JQUERY = False
+

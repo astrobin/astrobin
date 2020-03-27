@@ -12,6 +12,16 @@ SUBSCRIPTION_NAMES = (
     'AstroBin Donor Pizza Yearly',
     'AstroBin Donor Movie Yearly',
     'AstroBin Donor Dinner Yearly',
+
+    'AstroBin Donor Bronze Monthly',
+    'AstroBin Donor Silver Monthly',
+    'AstroBin Donor Gold Monthly',
+    'AstroBin Donor Platinum Monthly',
+
+    'AstroBin Donor Bronze Yearly',
+    'AstroBin Donor Silver Yearly',
+    'AstroBin Donor Gold Yearly',
+    'AstroBin Donor Platinum Yearly',
 )
 
 

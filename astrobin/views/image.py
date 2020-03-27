@@ -43,6 +43,7 @@ from astrobin.forms import (
     PrivateMessageForm,
     ImageEditThumbnailsForm,
     ImageEditCorruptedRevisionForm)
+from astrobin.forms.uncompressed_source_upload_form import UncompressedSourceUploadForm
 from astrobin.models import (
     Collection,
     Image, ImageRevision,
@@ -55,7 +56,7 @@ from astrobin.models import (
 )
 from astrobin.stories import add_story
 from astrobin.templatetags.tags import can_like
-from astrobin.utils import to_user_timezone
+from astrobin.utils import to_user_timezone, get_image_resolution
 # AstroBin apps
 from astrobin_apps_groups.forms import GroupSelectForm
 from astrobin_apps_groups.models import Group
@@ -63,6 +64,8 @@ from astrobin_apps_images.services import ImageService
 from astrobin_apps_iotd.models import Iotd
 from astrobin_apps_notifications.utils import push_notification
 from astrobin_apps_platesolving.models import Solution
+from astrobin_apps_platesolving.services import SolutionService
+from astrobin_apps_premium.templatetags.astrobin_apps_premium_tags import can_see_real_resolution
 from nested_comments.models import NestedComment
 from rawdata.forms import (
     PublicDataPool_SelectExistingForm,
@@ -137,7 +140,7 @@ class ImageFlagThumbsView(
 
 class ImageThumbView(JSONResponseMixin, ImageDetailViewBase):
     model = Image
-    queryset = Image.objects_including_wip.all()
+    queryset = Image.all_objects.all()
     pk_url_kwarg = 'id'
 
     def get(self, request, *args, **kwargs):
@@ -346,6 +349,11 @@ class ImageDetailView(ImageDetailViewBase):
         image_type = None
         deep_sky_data = {}
 
+        if is_revision:
+            w, h = get_image_resolution(revision_image)
+        else:
+            w, h = get_image_resolution(image)
+
         try:
             ssa = SolarSystem_Acquisition.objects.get(image=image)
         except SolarSystem_Acquisition.DoesNotExist:
@@ -471,20 +479,6 @@ class ImageDetailView(ImageDetailViewBase):
         elif ssa:
             image_type = 'solar_system'
 
-        # Image resolution, aka size in pixels
-        try:
-            if is_revision:
-                w, h = revision_image.w, revision_image.h
-                if not (w and h):
-                    w, h = get_image_dimensions(revision_image.image_file)
-            else:
-                w, h = image.w, image.h
-                if not (w and h):
-                    w, h = get_image_dimensions(image.image_file)
-        except TypeError:
-            # This might happen in unit tests
-            w, h = 0, 0
-
         # Data that's common to both DS and SS images
         basic_data = (
             (_('Resolution'), '%dx%d' % (w, h) if (w and h) else None),
@@ -511,24 +505,17 @@ class ImageDetailView(ImageDetailViewBase):
         if mod == 'inverted':
             alias = 'regular_inverted'
 
-        subjects = image.solution.objects_in_field.split(
-            ',') if image.solution and image.solution.objects_in_field else ''
+        subjects = []
         skyplot_zoom1 = None
 
-        if is_revision:
-            if revision_image.solution:
-                if revision_image.solution.objects_in_field:
-                    subjects = revision_image.solution.objects_in_field.split(',')
-                if revision_image.solution.skyplot_zoom1:
-                    skyplot_zoom1 = revision_image.solution.skyplot_zoom1
-        else:
-            if image.solution:
-                if image.solution.objects_in_field:
-                    subjects = image.solution.objects_in_field.split(',')
-                if image.solution.skyplot_zoom1:
-                    skyplot_zoom1 = image.solution.skyplot_zoom1
+        if image.solution:
+            subjects = SolutionService(image.solution).get_objects_in_field()
+            skyplot_zoom1 = image.solution.skyplot_zoom1
 
-        subjects_limit = 5
+        if is_revision and revision_image.solution:
+            subjects = SolutionService(revision_image.solution).get_objects_in_field()
+            if revision_image.solution.skyplot_zoom1:
+                skyplot_zoom1 = revision_image.solution.skyplot_zoom1
 
         licenses = (
             (0, 'cc/c.png', LICENSE_CHOICES[0][1]),
@@ -698,7 +685,10 @@ class ImageDetailView(ImageDetailViewBase):
             'instance_to_platesolve': instance_to_platesolve,
             'show_solution': instance_to_platesolve.mouse_hover_image == "SOLUTION"
                              and instance_to_platesolve.solution
-                             and instance_to_platesolve.solution.status == Solver.SUCCESS,
+                             and instance_to_platesolve.solution.status >= Solver.SUCCESS,
+            'show_advanced_solution': instance_to_platesolve.mouse_hover_image == "SOLUTION"
+                                      and instance_to_platesolve.solution
+                                      and instance_to_platesolve.solution.status == Solver.ADVANCED_SUCCESS,
             'skyplot_zoom1': skyplot_zoom1,
 
             'image_ct': ContentType.objects.get_for_model(Image),
@@ -722,13 +712,11 @@ class ImageDetailView(ImageDetailViewBase):
             'deep_sky_data': deep_sky_data,
             'private_message_form': PrivateMessageForm(),
             'upload_revision_form': ImageRevisionUploadForm(),
+            'upload_uncompressed_source_form': UncompressedSourceUploadForm(instance=image),
             'dates_label': _("Dates"),
             'published_on': published_on,
             'show_contains': (image.subject_type == 100 and subjects) or (image.subject_type >= 200),
-            'subjects_short': subjects[:subjects_limit],
-            'subjects_reminder': subjects[subjects_limit:],
-            'subjects_all': subjects,
-            'subjects_limit': subjects_limit,
+            'subjects': subjects,
             'subject_type': [x[1] for x in Image.SUBJECT_TYPE_CHOICES if x[0] == image.subject_type][
                 0] if image.subject_type else 0,
             'license_icon': static('astrobin/icons/%s' % licenses[image.license][1]),
@@ -802,7 +790,7 @@ class ImageFullView(ImageDetailView):
         if self.revision_label is None:
             # No revision specified, let's see if we need to redirect to the
             # final.
-            if image.is_final == False:
+            if not image.is_final:
                 final = image.revisions.filter(is_final=True)
                 if final.count() > 0:
                     url = reverse_lazy(
@@ -812,7 +800,6 @@ class ImageFullView(ImageDetailView):
                         url += '?ctx=%s' % request.GET.get('ctx')
                     return redirect(url)
 
-        if self.revision_label is None:
             try:
                 self.revision_label = image.revisions.filter(is_final=True)[0].label
             except IndexError:
@@ -825,7 +812,7 @@ class ImageFullView(ImageDetailView):
         context = super(ImageFullView, self).get_context_data(**kwargs)
 
         mod = self.request.GET.get('mod')
-        real = 'real' in self.request.GET
+        real = 'real' in self.request.GET and can_see_real_resolution(self.request.user)
         if real:
             alias = 'real'
         else:
@@ -1213,3 +1200,25 @@ class ImageEditThumbnailsView(ImageEditBaseView):
         image.thumbnail_invalidate()
 
         return super(ImageEditThumbnailsView, self).post(request, *args, **kwargs)
+
+
+class ImageUploadUncompressedSource(ImageEditBaseView):
+    form_class = UncompressedSourceUploadForm
+
+    def form_valid(self, form):
+        if 'clear' in self.request.POST:
+            self.object.uncompressed_source_file.delete()
+            self.object.uncompressed_source_file = None
+            self.object.save(keep_deleted=True)
+            msg = "File removed. Thank you!"
+        else:
+            msg = "File uploaded. In the future, you can download this file from your technical card down below. " \
+                  "Thank you!"
+
+        self.object = form.save()
+        messages.success(self.request, _(msg))
+        return redirect(self.get_success_url())
+
+    def form_invalid(self, form):
+        messages.error(self.request, form.errors["uncompressed_source_file"])
+        return redirect(self.get_success_url())
