@@ -9,8 +9,8 @@
  * Copyright (C) 2020 Pleiades Astrophoto. All Rights Reserved.
  * Written by Juan Conejero (PTeam)
  *
- * Version 1.2.0
- * Released 2020 February 18
+ * Version 1.2.1
+ * Released 2020 March 11
  */
 
 /*
@@ -253,6 +253,85 @@ EphemUtils.degreesToRadians = function( deg )
 };
 
 /*
+ * Database of TAI-UTC estimates (Delta AT).
+ */
+EphemUtils.deltaAT_data =
+[
+   // http://www.iausofa.org/ - SOFA release 2018-01-30
+   [ 2436934.5,  1.4178180, 37300, 0.001296 ],
+   // http://maia.usno.navy.mil/ser7/tai-utc.dat
+   [ 2437300.5,  1.4228180, 37300, 0.001296 ],
+   [ 2437512.5,  1.3728180, 37300, 0.001296 ],
+   [ 2437665.5,  1.8458580, 37665, 0.0011232 ],
+   [ 2438334.5,  1.9458580, 37665, 0.0011232 ],
+   [ 2438395.5,  3.2401300, 38761, 0.001296 ],
+   [ 2438486.5,  3.3401300, 38761, 0.001296 ],
+   [ 2438639.5,  3.4401300, 38761, 0.001296 ],
+   [ 2438761.5,  3.5401300, 38761, 0.001296 ],
+   [ 2438820.5,  3.6401300, 38761, 0.001296 ],
+   [ 2438942.5,  3.7401300, 38761, 0.001296 ],
+   [ 2439004.5,  3.8401300, 38761, 0.001296 ],
+   [ 2439126.5,  4.3131700, 39126, 0.002592 ],
+   [ 2439887.5,  4.2131700, 39126, 0.002592 ],
+   [ 2441317.5, 10.0 ],
+   [ 2441499.5, 11.0 ],
+   [ 2441683.5, 12.0 ],
+   [ 2442048.5, 13.0 ],
+   [ 2442413.5, 14.0 ],
+   [ 2442778.5, 15.0 ],
+   [ 2443144.5, 16.0 ],
+   [ 2443509.5, 17.0 ],
+   [ 2443874.5, 18.0 ],
+   [ 2444239.5, 19.0 ],
+   [ 2444786.5, 20.0 ],
+   [ 2445151.5, 21.0 ],
+   [ 2445516.5, 22.0 ],
+   [ 2446247.5, 23.0 ],
+   [ 2447161.5, 24.0 ],
+   [ 2447892.5, 25.0 ],
+   [ 2448257.5, 26.0 ],
+   [ 2448804.5, 27.0 ],
+   [ 2449169.5, 28.0 ],
+   [ 2449534.5, 29.0 ],
+   [ 2450083.5, 30.0 ],
+   [ 2450630.5, 31.0 ],
+   [ 2451179.5, 32.0 ],
+   [ 2453736.5, 33.0 ],
+   [ 2454832.5, 34.0 ],
+   [ 2456109.5, 35.0 ],
+   [ 2457204.5, 36.0 ],
+   [ 2457754.5, 37.0 ]
+];
+
+/*
+ * Returns the value of Delta AT, or the difference TAI-UTC, corresponding
+ * to a time point specified as a Julian Date in the UTC timescale.
+ *
+ * UTC does not exist before 1960, so calling this function for a date before
+ * that year is a conceptual error. For convenience, zero is returned in such
+ * case instead of throwing an exception.
+ *
+ * The returned value is the difference TAI-UTC in seconds.
+ */
+EphemUtils.deltaAT = function( jd )
+{
+   let t = jd.jdi + jd.jdf;
+   if ( t >= 2436934.5 ) // 1960
+      for ( let i = EphemUtils.deltaAT_data.length; --i >= 0; )
+      {
+         let D = EphemUtils.deltaAT_data[i];
+         if ( t >= D[0] )
+         {
+            if ( t >= 2441317.5 ) // 1972
+               return D[1];
+            return D[1] + (t - 2400000.5 - D[2])*D[3];
+         }
+      }
+
+   return 0; // pre-UTC
+};
+
+/*
  * Mean obliquity of the ecliptic, IAU 2006 precession model.
  *
  * t  The required time point in the UTC timescale. Can be either a Date object
@@ -263,6 +342,7 @@ EphemUtils.degreesToRadians = function( deg )
 EphemUtils.obliquity = function( t )
 {
    let jd = EphemUtils.julianDate( t );
+   jd.jdf += (EphemUtils.deltaAT( jd ) + 32.184)/86400; // UTC -> TT
    let T = EphemUtils.centuriesSinceJ2000( jd );
    let T2 = T*T;
    let T3 = T2*T;
@@ -286,7 +366,6 @@ EphemUtils.longitudeDegreesConstrained = function( deg )
 
 /*
  * Conversion from spherical to rectangular coordinates.
- *
  *
  * s  The spherical coordinates {lon,lat} in radians.
  *
