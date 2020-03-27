@@ -2,6 +2,7 @@
 
 {% load i18n %}
 {% load django_bootstrap_breadcrumbs %}
+{% load astrobin_apps_groups_tags %}
 
 {% block title %}{% trans "Groups" %}{% endblock %}
 {% block container_extra_classes %}has-subnav{% endblock %}
@@ -23,7 +24,13 @@
                 </a>
                 <ul class="dropdown-menu">
                     <li>
-                        <a href="{% url 'group_create' %}">
+                        <a
+                                {% if request.user|has_access_to_premium_group_features %}
+                                    href="{% url 'group_create' %}"
+                                {% else %}
+                                    href="#feature-restricted-modal" data-toggle="modal"
+                                {% endif %}
+                        >
                             <i class="icon-plus-sign"></i>
                             {% trans "Create new group" %}
                         </a>
@@ -90,7 +97,13 @@
                     </h1>
                 </div>
                 <div class="span3 text-right hidden-phone">
-                    <a href="{% url 'group_create' %}" class="btn btn-primary btn-large create-group">
+                    <a
+                            {% if request.user|has_access_to_premium_group_features %}
+                                href="{% url 'group_create' %}"
+                            {% else %}
+                                href="#feature-restricted-modal" data-toggle="modal"
+                            {% endif %}
+                            class="btn btn-primary btn-large create-group">
                         <i class="icon icon-plus-sign"></i>
                         {% trans "Create private group" context "group" %}
                     </a>
@@ -115,7 +128,13 @@
                     </h1>
                 </div>
                 <div class="span3 text-right hidden-phone">
-                    <a href="{% url 'group_create' %}?public=True" class="btn btn-primary btn-large create-group">
+                    <a
+                            {% if request.user|has_access_to_premium_group_features %}
+                                href="{% url 'group_create' %}?public=True"
+                            {% else %}
+                                href="#feature-restricted-modal" data-toggle="modal"
+                            {% endif %}
+                            class="btn btn-primary btn-large create-group">
                         <i class="icon icon-plus-sign"></i>
                         {% trans "Create public group" context "group" %}
                     </a>

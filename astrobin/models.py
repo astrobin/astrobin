@@ -8,12 +8,13 @@ import random
 import string
 import unicodedata
 import uuid
-from datetime import date
 from datetime import datetime
 
 from image_cropping import ImageRatioField
 
 from astrobin.services import CloudflareService
+from common.utils import upload_path
+from common.validators import FileValidator
 from .fields import CountryField, get_country_name
 
 try:
@@ -81,9 +82,22 @@ class HasSolutionMixin(object):
 
 
 def image_upload_path(instance, filename):
-    ext = filename.split('.')[-1]
     user = instance.user if instance._meta.model_name == u'image' else instance.image.user
-    return "images/%d/%d/%s.%s" % (user.id, date.today().year, uuid.uuid4(), ext)
+    return upload_path('images', user.pk, filename)
+
+
+def uncompressed_source_upload_path(instance, filename):
+    user = instance.user if instance._meta.model_name == u'image' else instance.image.user
+    return upload_path('uncompressed', user.pk, filename)
+
+
+def data_download_upload_path(instance, filename):
+    # type: (DataDownloadRequest, str) -> str
+    return "data-download/{}/{}".format(
+        instance.user.pk,
+        'astrobin_data_{}_{}.zip'.format(
+            instance.user.username,
+            instance.created.strftime('%Y-%m-%d-%H-%M')))
 
 
 def image_hash():
@@ -889,6 +903,18 @@ class Image(HasSolutionMixin, SafeDeleteModel):
         null=True,
     )
 
+    uncompressed_source_file = models.FileField(
+        upload_to=uncompressed_source_upload_path,
+        validators=(FileValidator(allowed_extensions=(settings.ALLOWED_UNCOMPRESSED_SOURCE_EXTENSIONS)),),
+        verbose_name=_("Uncompressed source (max 200 MB)"),
+        help_text=_(
+            "You can store the final processed image that came out of your favorite image editor (e.g. PixInsight, "
+            "Adobe Photoshop, etc) here on AstroBin, for archival purposes. This file is stored privately and only you "
+            "will have access to it."),
+        max_length=256,
+        null=True,
+    )
+
     square_cropping = ImageRatioField(
         'image_file',
         '130x130',
@@ -1500,6 +1526,11 @@ class Image(HasSolutionMixin, SafeDeleteModel):
         for source in self.REMOTE_OBSERVATORY_CHOICES:
             if self.remote_source == source[0]:
                 return source[1]
+
+    def get_subject_type(self):
+        for subject_type in self.SUBJECT_TYPE_CHOICES:
+            if self.subject_type == subject_type[0]:
+                return subject_type[1]
 
     def get_keyvaluetags(self):
         tags = self.keyvaluetags.all()
@@ -2196,6 +2227,14 @@ class UserProfile(SafeDeleteModel):
         help_text=_(u'These emails may contain offers, commercial news, and promotions from AstroBin or its partners.')
     )
 
+    allow_astronomy_ads = models.BooleanField(
+        default=True,
+        verbose_name=_(u'Allow astronomy ads from our partners'),
+        help_text=_(u'It would mean a lot if you chose to allow astronomy relevant, non intrusive ads on this website. '
+                    u'AstroBin is a small business run by a single person, and this kind of support would be amazing. '
+                    u'Thank you in advance!')
+    )
+
     inactive_account_reminder_sent = models.DateTimeField(
         null=True
     )
@@ -2789,3 +2828,47 @@ class BroadcastEmail(models.Model):
 
     def __unicode__(self):
         return self.subject
+
+
+class DataDownloadRequest(models.Model):
+    STATUS_CHOICES = (
+        ("PENDING", _("Pending")),
+        ("PROCESSING", _("Processing")),
+        ("READY", _("Ready")),
+        ("ERROR", _("Error")),
+        ("EXPIRED", _("Expired")),
+    )
+
+    user = models.ForeignKey(User, editable=False)
+
+    created = models.DateTimeField(
+        null=False,
+        blank=False,
+        auto_now_add=True,
+        editable=False,
+    )
+
+    zip_file = models.FileField(
+        upload_to=data_download_upload_path,
+        max_length=256,
+        null=True,
+    )
+
+    file_size = models.BigIntegerField(
+        null=True,
+    )
+
+    status = models.CharField(
+        max_length=20,
+        default="PENDING",
+        choices=STATUS_CHOICES
+    )
+
+    def status_label(self):
+        for i in self.STATUS_CHOICES:
+            if self.status == i[0]:
+                return i[1]
+
+    class Meta:
+        app_label = 'astrobin'
+        ordering = ('-created',)

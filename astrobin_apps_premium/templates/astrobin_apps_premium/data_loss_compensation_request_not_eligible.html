@@ -1,0 +1,24 @@
+{% extends "base.html" %}
+
+{% load i18n %}
+{% load django_bootstrap_breadcrumbs %}
+
+{% block title %}
+    {% trans "Data loss compensation reauest" %}: {% trans "Not eligible" %}
+{% endblock %}
+
+{% block breadcrumbs %}
+    {{ block.super }}
+    {% breadcrumb 'AstroBin Premium' None %}
+    {% breadcrumb 'Data loss compensation request' None %}
+    {% breadcrumb 'Not eligible' None %}
+{% endblock %}
+
+{% block content %}
+    <h1>{% trans "It looks like you're not eligible" %}</h1>
+    <p>
+        {% blocktrans trimmed %}
+            Sorry, but this page is for people who were on AstroBin Premium on the day that the data loss incident
+            happened, and it looks like you aren't among them.
+        {% endblocktrans %}
+{% endblock %}

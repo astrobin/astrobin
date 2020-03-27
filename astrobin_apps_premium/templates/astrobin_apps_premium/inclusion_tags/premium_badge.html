@@ -1,6 +1,6 @@
 {% load astrobin_apps_premium_tags %}
 
-{% if user|is_lite or user|is_premium %}
+{% if user|is_any_premium_subscription %}
     <div class="badge badge-success badge-premium badge-premium-{{size}}">
         <i class="icon-asterisk"></i>
     </div>

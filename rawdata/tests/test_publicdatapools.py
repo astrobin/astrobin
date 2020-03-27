@@ -7,6 +7,7 @@ from django.utils.http import urlencode
 from astrobin.models import Image
 
 # This app
+from astrobin.tests.generators import Generators
 from rawdata.models import PublicDataPool, TemporaryArchive
 
 # Tests
@@ -443,14 +444,11 @@ class PublicDataPoolTest(TransactionTestCase):
 
         self.client.login(username = 'username_unsub', password = 'passw0rd')
         response = self.client.get(reverse('rawdata.publicdatapool_download', args = (pool.id,)), follow = True)
-        newid = max_id(TemporaryArchive)
-        self.assertRedirects(
-            response,
-            reverse('rawdata.temporary_archive_detail', args = (newid,)),
-            status_code = 302, target_status_code = 200)
+        self.assertEquals(response.status_code, 403)
+
         self.client.logout()
 
-    def test_download_sub(self):
+    def test_download_sub_but_not_premium(self):
         rawimage_id = upload_file(self)
 
         pool = PublicDataPool(
@@ -463,9 +461,30 @@ class PublicDataPoolTest(TransactionTestCase):
 
         self.client.login(username = 'username_sub', password = 'passw0rd')
         response = self.client.get(reverse('rawdata.publicdatapool_download', args = (pool.id,)), follow = True)
+        self.assertEquals(response.status_code, 403)
+
+        self.client.logout()
+
+    def test_download_sub_and_premium(self):
+        rawimage_id = upload_file(self)
+
+        pool = PublicDataPool(
+            name="test pool",
+            description="test description",
+            creator=self.subscribed_user)
+        pool.save()
+
+        pool.images.add(rawimage_id)
+
+        us = Generators.premium_subscription(self.subscribed_user, "AstroBin Ultimate 2020+")
+
+        self.client.login(username='username_sub', password='passw0rd')
+        response = self.client.get(reverse('rawdata.publicdatapool_download', args=(pool.id,)), follow=True)
         newid = max_id(TemporaryArchive)
         self.assertRedirects(
             response,
-            reverse('rawdata.temporary_archive_detail', args = (newid,)),
-            status_code = 302, target_status_code = 200)
+            reverse('rawdata.temporary_archive_detail', args=(newid,)),
+            status_code=302, target_status_code=200)
+
         self.client.logout()
+        us.delete()

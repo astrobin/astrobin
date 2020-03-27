@@ -9,39 +9,40 @@
 {% endfor %}
 
 {{object.solution.objects_in_field}}
+{{object.solution.advanced_annotations}}
 
 {% for i in object.imaging_telescopes.all %}
-	{{i}}
+    {{i}}
 {% endfor %}
 
 {% for i in object.imaging_cameras.all %}
-	{{i}}
+    {{i}}
 {% endfor %}
 
 {% for i in object.guiding_telescopes.all %}
-	{{i}}
+    {{i}}
 {% endfor %}
 
 {% for i in object.guiding_cameras.all %}
-	{{i}}
+    {{i}}
 {% endfor %}
 
 {% for i in object.mounts.all %}
-	{{i}}
+    {{i}}
 {% endfor %}
 
 {% for i in object.filters.all %}
-	{{i}}
+    {{i}}
 {% endfor %}
 
 {% for i in object.focal_reducers.all %}
-	{{i}}
+    {{i}}
 {% endfor %}
 
 {% for i in object.software.all %}
-	{{i}}
+    {{i}}
 {% endfor %}
 
 {% for i in object.accessories.all %}
-	{{i}}
+    {{i}}
 {% endfor %}

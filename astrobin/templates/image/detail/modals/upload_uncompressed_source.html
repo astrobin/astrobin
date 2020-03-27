@@ -1,0 +1,61 @@
+{% load astrobin_apps_images_tags %}
+{% load bootstrap_toolkit %}
+{% load i18n %}
+{% load staticfiles %}
+{% load progress_bar %}
+{% load common_tags %}
+
+{% block extra_head %}
+    {% progress_bar_media %}
+{% endblock %}
+
+<div class="modal hide fade" id="upload-uncompressed-source-modal">
+    <form id="upload-uncompressed-source-form" class="form-inline"
+          action="{% url 'upload_uncompressed_source' image.get_id %}" method="post"
+          enctype="multipart/form-data">{% csrf_token %}
+
+        <div class="modal-header">
+            <a class="close" data-dismiss="modal">&times;</a>
+            <h3>{% trans "Upload uncompressed source (XISF/FITS/PSD/TIFF)" %}</h3>
+        </div>
+
+        <div class="modal-body">
+            <p class="well">
+                <em>
+                    {% blocktrans trimmed %}
+                        Please note: AstroBin is not officially a backup service. So please also keep additional copies
+                        of your file. However, by storing your work here, you can have some additional peace of mind.
+                    {% endblocktrans %}
+
+                    {% setvar "https://welcome.astrobin.com/faq" as faq_url %}
+                    {% blocktrans trimmed %}
+                        Read about how AstroBin stores your files safely on the <a href="{{ faq_url }}">FAQ page</a>.
+                    {% endblocktrans %}
+                </em>
+            </p>
+
+            <hr />
+
+            {{ upload_uncompressed_source_form|as_bootstrap }}
+            {% progress_bar %}
+
+            <input type="hidden" name="image_id" value="{{ image.get_id }}" />
+        </div>
+
+        <div class="modal-footer">
+            <button class="btn btn-primary {% button_loading_class %}" type="submit">
+                {% trans "Upload" %}
+                {% button_loading_indicator %}
+            </button>
+
+            {% if image.uncompressed_source_file %}
+                <button class="btn btn-danger {% button_loading_class %}" type="submit" name="clear">
+                    {% trans "Clear" %}
+                    {% button_loading_indicator %}
+                </button>
+            {% endif %}
+
+            <button class="btn" data-dismiss="modal">{% trans "Cancel" %}</button>
+        </div>
+    </form>
+</div>

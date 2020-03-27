@@ -1,19 +1,25 @@
 {% load astrobin_apps_donations_tags %}
+{% load astrobin_apps_premium_tags %}
 {% load i18n %}
 {% load dfp_tags %}
 {% load tags %}
 
-{% comment %} TODO: make an app: astrobin_apps_ads {% endcomment %}
-{% if request.user|show_ads %}
+{% if request.user|show_ads and not image.user|is_any_ultimate %}
     <div class="subtle-container advertisement">
         <div class="header">
             <h4><i class="icon-bullhorn"></i></h4>
 
-            {% if request.user.is_authenticated and DONATIONS_ENABLED %}
-                <a class="remove" data-toggle="modal" href="#remove-ads-modal">
-                    <i class="icon-remove"></i>
+                <a
+                        class="remove"
+                        data-toggle="modal"
+                        {% if request.user|can_remove_ads %}
+                            href="#remove-ads-modal"
+                        {% else %}
+                            href="#feature-restricted-modal"
+                        {% endif %}
+                >
+                    {% trans "Remove ads" %} <i class="icon-remove"></i>
                 </a>
-            {% endif %}
         </div>
 
         {% if request.user_agent.is_tablet %}

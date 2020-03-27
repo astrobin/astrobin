@@ -1,13 +1,19 @@
 {% load i18n %}
+{% load astrobin_apps_premium_tags %}
 
 <script type="text/x-template" id="data-source-filter-template">
-    <div class="form-group" :class="{highlighted: highlighted}">
-        <v-multiselect class="multiselect--grouped" v-model="value" :options="optionGroups" track-by="id" label="label"
-                       group-values="options" group-label="group" selectLabel="" deselectLabel="" selectedLabel=""
-                       :searchable="false" placeholder="{% trans "Select" %}">
-        </v-multiselect>
-        <input type="hidden" name="data_source" :value="value.id">
-    </div>
+    {% if request.user|can_access_full_search %}
+        <div class="form-group" :class="{highlighted: highlighted}">
+            <v-multiselect class="multiselect--grouped" v-model="value" :options="optionGroups" track-by="id"
+                           label="label"
+                           group-values="options" group-label="group" selectLabel="" deselectLabel="" selectedLabel=""
+                           :searchable="false" placeholder="{% trans "Select" %}">
+            </v-multiselect>
+            <input type="hidden" name="data_source" :value="value.id">
+        </div>
+    {% else %}
+        {% include "./_filter_not_allowed.html" %}
+    {% endif %}
 </script>
 
 <script>
@@ -77,7 +83,7 @@
                 ]
             }
         },
-        created: function() {
+        created: function () {
             for (var i = 0; i < this.optionGroups.length; i++) {
                 for (var j = 0; j < this.optionGroups[i].options.length; j++) {
                     if (this.optionGroups[i].options[j].id === this.dataSource) {

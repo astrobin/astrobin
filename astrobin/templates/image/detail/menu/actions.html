@@ -1,5 +1,7 @@
-{% load common_tags %}
 {% load i18n %}
+{% load common_tags %}
+{% load astrobin_apps_premium_tags %}
+
 
 {% if request.user == image.user or request.user.is_superuser %}
     {% if READONLY_MODE %}
@@ -18,25 +20,44 @@
         </a>
         <ul class="dropdown-menu">
             <li>
+                <a class="upload-uncompressed-source"
+                   {% if image.user|can_upload_uncompressed_source %}
+                       href="#upload-uncompressed-source-modal"
+                   {% else %}
+                       href="#feature-restricted-modal"
+                   {% endif  %}
+                   data-toggle="modal">
+                    <i class="icon-upload"></i>
+                    {% trans "Upload uncompressed source (XISF/FITS/PSD/TIFF)" %}
+                </a>
+            </li>
+
+            <li>
                 <a class="upload-revision" href="#upload-revision-modal" data-toggle="modal">
                     <i class="icon-upload-alt"></i>
                     {% trans "Upload new revision" %}
                 </a>
             </li>
 
-            {% if not is_final %}
-                <li>
-                    {% if is_revision %}
+            <li>
+                {% if is_revision %}
+                    {% if revision_image.is_final %}
+                        <a href="#" class="disabled">
+                    {% else %}
                         <a href="{% url 'image_edit_revision_make_final' revision_image.id %}">
+                    {% endif %}
+                {% else%}
+                    {% if image.is_final or image.revisions.count == 0 %}
+                        <a href="#" class="disabled">
                     {% else %}
                         <a href="{% url 'image_edit_make_final' image.get_id %}">
                     {% endif %}
+                {% endif %}
 
-                        <i class="icon-ok"></i>
-                        {% trans "Mark this revision as final" %}
-                    </a>
-                </li>
-            {% endif %} <!-- not is_final -->
+                    <i class="icon-ok"></i>
+                    {% trans "Mark this revision as final" %}
+                </a>
+            </li>
 
             <li class="divider"></li>
 

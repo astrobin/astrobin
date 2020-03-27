@@ -1,4 +1,6 @@
+{% load tags %}
 {% load astrobin_apps_donations_tags %}
+{% load astrobin_apps_premium_tags %}
 {% load pipeline %}
 {% load dfp_tags %}
 {% load django_bootstrap_breadcrumbs %}
@@ -28,7 +30,7 @@
         <link rel="stylesheet" href="https://unpkg.com/vue-multiselect@2.1.0/dist/vue-multiselect.min.css">
         <link rel="stylesheet" href="https://unpkg.com/nouislider@12.1.0/distribute/nouislider.min.css" />
 
-        <link href="https://fonts.googleapis.com/css?family=Noto+Sans:400,400i,700|Noto+Serif:700&subset=latin-ext" rel="stylesheet">
+        <link href="https://fonts.googleapis.com/css?family=Noto+Sans:400,400i,700|Noto+Serif:700|Noto+Sans:400|Roboto+Mono&subset=latin-ext" rel="stylesheet">
         {% stylesheet 'screen' %}
 
         {% include "base/ie6.html" %}
@@ -73,10 +75,6 @@
 
         {% include "base/footer.html" %}
 
-        {% if DONATIONS_ENABLED and not request.user|is_donor %}
-            {% donate_modal %}
-        {% endif %}
-
         {% block base_modals %}
             {% include "base/modals.html" %}
         {% endblock %}
@@ -88,7 +86,7 @@
 
         {% block extra_js %}{% endblock %}
 
-        {% if ADS_ENABLED %}
+        {% if request.user|show_ads and not image.user|is_any_ultimate %}
             {% dfp_footer %}
         {% endif %}
 

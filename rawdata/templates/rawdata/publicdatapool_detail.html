@@ -5,6 +5,7 @@
 {% load django_bootstrap_breadcrumbs %}
 {% load tags %} {% comment %} AstroBin tags {% endcomment %}
 {% load common_tags %}
+{% load astrobin_apps_premium_tags %}
 
 {% block title %}AstroBin - {% blocktrans %}Public data pool{% endblocktrans %} - {{object}}{% endblock %}
 {% block container_extra_classes %}
@@ -109,13 +110,19 @@
         <div class="span6">
             <p>
             {% url 'user_page' object.creator as user_url %}
-            {% url 'rawdata.help1' as rawdata_url %}
-            {% blocktrans with object.creator as user and size|filesizeformat as size and object.images.all|length as image_count and object.created|date:"DATE_FORMAT" as date %}This public data pool was created on {{date}} by <a href="{{user_url}}">{{user}}</a>. It consists of {{size}} in {{image_count}} images. You can contribute by donating your raw files, if you are subscribed to <a href="{{rawdata_url}}">AstroBin Raw Data</a>, or you can download the available data and try to process it!{% endblocktrans %}
+            {% blocktrans with object.creator as user and size|filesizeformat as size and object.images.all|length as image_count and object.created|date:"DATE_FORMAT" as date and "https://welcome.astrobin.com/features/raw-data-support" as rawdata_url %}This public data pool was created on {{date}} by <a href="{{user_url}}">{{user}}</a>. It consists of {{size}} in {{image_count}} images. You can contribute by donating your raw files, if you are subscribed to <a href="{{rawdata_url}}">AstroBin Raw Data</a>, or you can download the available data and try to process it!{% endblocktrans %}
             </p>
 
             <div class="download-with-icon">
                 <div class="data" style="padding-top: 0">
-                    <a class="btn btn-primary btn-large" href="{% url 'rawdata.publicdatapool_download' object.pk %}">
+                    <a
+                            class="btn btn-primary btn-large"
+                            {% if request.user|can_download_rawdata %}
+                                href="{% url 'rawdata.publicdatapool_download' object.pk %}"
+                            {% else %}
+                                href="#feature-restricted-modal" data-toggle="modal"
+                            {% endif %}
+                    >
                         <i class="icon-download-alt"></i>
                         {% trans "Download" %}
                     </a>

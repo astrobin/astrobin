@@ -1,0 +1,33 @@
+@import 'variables';
+
+progress {
+  padding: 4px;
+  border: 0 none;
+  background: #202020;
+  border-radius: 10px;
+  box-shadow: inset 0px 1px 1px rgba(0, 0, 0, 0.5), 0px 1px 0px rgba(255, 255, 255, 0.2);
+}
+
+progress::-moz-progress-bar {
+  border-radius: 10px;
+  background: #eee;
+  box-shadow: inset 0 -2px 4px rgba(0, 0, 0, 0.4), 0 2px 5px 0px rgba(0, 0, 0, 0.3);
+
+}
+
+/* webkit */
+@media screen and (-webkit-min-device-pixel-ratio: 0) {
+  progress {
+    height: 18px;
+  }
+}
+
+progress::-webkit-progress-bar {
+  background: transparent;
+}
+
+progress::-webkit-progress-value {
+  border-radius: 10px;
+  background: #eee;
+  box-shadow: inset 0 -2px 4px rgba(0, 0, 0, 0.4), 0 2px 5px 0px rgba(0, 0, 0, 0.3);
+}

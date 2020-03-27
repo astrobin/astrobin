@@ -1,0 +1,10 @@
+<script type="text/javascript">
+    $(".currency-conversion-value").each(function (i, $el) {
+        var toCurrency = $el.getAttribute("data-to-currency"),
+            value = $el.getAttribute("data-value");
+
+        var converted = astrobin_common.utils.convertCurrency(value, toCurrency);
+
+        $el.innerHTML = converted;
+    });
+</script>

@@ -1,17 +1,20 @@
 {% load i18n %}
 {% load common_tags %}
+{% load astrobin_apps_premium_tags %}
 
 <script type="text/x-template" id="app-template">
     <div class="accordion search-filters-app">
         <div class="accordion-group">
+
+            {% if request.user|can_access_advanced_search %}
             <div class="accordion-heading">
                 <a class="accordion-toggle" @click="toggleCollapsed">
-                        <span v-if="collapsed">
-                            {% trans "Show filters" %} <i class="pull-right icon-angle-down"></i>
-                        </span>
+                    <span v-if="collapsed">
+                        {% trans "Show filters" %} <i class="pull-right icon-angle-down"></i>
+                    </span>
                     <span v-if="!collapsed">
-                            {% trans "Hide filters" %} <i class="pull-right icon-angle-up"></i>
-                        </span>
+                        {% trans "Hide filters" %} <i class="pull-right icon-angle-up"></i>
+                    </span>
                 </a>
             </div>
             <div id="searchFilterCollapsible" class="accordion-body" :class="{collapse: collapsed}">
@@ -19,65 +22,85 @@
                     <form method="get" action="{% url 'haystack_search' %}">
                         <div class="search-filters">
                             <div class="search-filter" v-for="filter in enabledFilters">
-                                <a v-if="filter.removable" class="search-filter-remove"
-                                   @click="onRemoveFilter(filter.name)">
+                                <a
+                                        v-if="filter.removable" class="search-filter-remove"
+                                        @click="onRemoveFilter(filter.name)">
                                     <i class="icon-trash"></i>
                                 </a>
 
                                 <div class="search-filter-title">{% trans "${filter.label}" %}</div>
 
-                                <search-terms-filter v-if="filter.name === 'q'" :q="q"></search-terms-filter>
+                                <search-terms-filter
+                                        v-if="filter.name === 'q'"
+                                        :q="q"></search-terms-filter>
 
-                                <search-domain-filter v-if="filter.name === 'd'"
-                                                    :searchDomain="searchDomain"
-                                                    @input="onSearchDomainChanged($event)"></search-domain-filter>
+                                <search-domain-filter
+                                        v-if="filter.name === 'd'"
+                                        :searchDomain="searchDomain"
+                                        @input="onSearchDomainChanged($event)"></search-domain-filter>
 
-                                <search-by-filter v-if="filter.name === 't'"
-                                                    :searchBy="searchBy"></search-by-filter>
+                                <search-by-filter
+                                        v-if="filter.name === 't'"
+                                        :searchBy="searchBy"></search-by-filter>
 
-                                <animated-filter v-if="filter.name === 'animated'"
-                                                 :animated="animated"></animated-filter>
+                                <animated-filter
+                                        v-if="filter.name === 'animated'"
+                                        :animated="animated"></animated-filter>
 
-                                <award-filter v-if="filter.name === 'award'"
-                                                 :award="award"></award-filter>
+                                <award-filter
+                                        v-if="filter.name === 'award'"
+                                        :award="award"></award-filter>
 
-                                <camera-type-filter v-if="filter.name === 'camera_type'"
-                                                       :camera-type="cameraType"></camera-type-filter>
+                                <camera-type-filter
+                                        v-if="filter.name === 'camera_type'"
+                                        :camera-type="cameraType"></camera-type-filter>
 
-                                <country-filter v-if="filter.name === 'country'"
-                                                    :country="country"></country-filter>
+                                <country-filter
+                                        v-if="filter.name === 'country'"
+                                        :country="country"></country-filter>
 
-                                <acquisition-type-filter v-if="filter.name === 'acquisition_type'"
-                                                    :acquisition-type="acquisitionType"></acquisition-type-filter>
+                                <acquisition-type-filter
+                                        v-if="filter.name === 'acquisition_type'"
+                                        :acquisition-type="acquisitionType"></acquisition-type-filter>
 
-                                <data-source-filter v-if="filter.name === 'data_source'"
-                                                    :data-source="dataSource"></data-source-filter>
+                                <data-source-filter
+                                        v-if="filter.name === 'data_source'"
+                                        :data-source="dataSource"></data-source-filter>
 
-                                <field-radius-filter v-if="filter.name === 'field_radius'"
-                                                     :field-radius-min="fieldRadiusMin"
-                                                     :field-radius-max="fieldRadiusMax"></field-radius-filter>
+                                <field-radius-filter
+                                        v-if="filter.name === 'field_radius'"
+                                        :field-radius-min="fieldRadiusMin"
+                                        :field-radius-max="fieldRadiusMax"></field-radius-filter>
 
-                                <license-filter v-if="filter.name === 'license'" :license="license"></license-filter>
+                                <license-filter
+                                        v-if="filter.name === 'license'"
+                                        :license="license"></license-filter>
 
-                                <minimum-data-filter v-if="filter.name === 'minimum_data'"
-                                                 :minimum-data="minimumData"></minimum-data-filter>
+                                <minimum-data-filter
+                                        v-if="filter.name === 'minimum_data'"
+                                        :minimum-data="minimumData"></minimum-data-filter>
 
-                                <moon-phase-filter v-if="filter.name === 'moon_phase'"
-                                                   :moon-phase-min="moonPhaseMin"
-                                                   :moon-phase-max="moonPhaseMax"></moon-phase-filter>
+                                <moon-phase-filter
+                                        v-if="filter.name === 'moon_phase'"
+                                        :moon-phase-min="moonPhaseMin"
+                                        :moon-phase-max="moonPhaseMax"></moon-phase-filter>
 
-                                <pixel-scale-filter v-if="filter.name === 'pixel_scale'"
-                                                    :pixel-scale-min="pixelScaleMin"
-                                                    :pixel-scale-max="pixelScaleMax"></pixel-scale-filter>
+                                <pixel-scale-filter
+                                        v-if="filter.name === 'pixel_scale'"
+                                        :pixel-scale-min="pixelScaleMin"
+                                        :pixel-scale-max="pixelScaleMax"></pixel-scale-filter>
 
-                                <remote-source-filter v-if="filter.name === 'remote_source'"
-                                                    :remote-source="remoteSource"></remote-source-filter>
+                                <remote-source-filter
+                                        v-if="filter.name === 'remote_source'"
+                                        :remote-source="remoteSource"></remote-source-filter>
 
-                                <subject-type-filter v-if="filter.name === 'subject_type'"
-                                                    :subject-type="subjectType"></subject-type-filter>
+                                <subject-type-filter
+                                        v-if="filter.name === 'subject_type'"
+                                        :subject-type="subjectType"></subject-type-filter>
 
-                                <telescope-type-filter v-if="filter.name === 'telescope_type'"
-                                                     :telescope-type="telescopeType"></telescope-type-filter>
+                                <telescope-type-filter
+                                        v-if="filter.name === 'telescope_type'"
+                                        :telescope-type="telescopeType"></telescope-type-filter>
                             </div>
 
                             <add-filter
@@ -100,6 +123,13 @@
                     </form>
                 </div>
             </div>
+            {% else %}
+                <div class="accordion-heading">
+                    <a class="accordion-toggle" data-toggle="modal" href="#feature-restricted-modal">
+                        {% trans "Show filters" %} <i class="pull-right icon-angle-down"></i>
+                    </a>
+                </div>
+            {% endif %}
         </div>
     </div>
 </script>
@@ -368,7 +398,7 @@
             {% if "moon_phase_min" in request.GET or "moon_phase_max" in request.GET %}
                 this.enabledFilters.push(this.getFilterByName("moon_phase"));
             {% endif %}
-        
+
             {% if "pixel_scale_min" in request.GET or "pixel_scale_max" in request.GET %}
                 this.enabledFilters.push(this.getFilterByName("pixel_scale"));
             {% endif %}
@@ -411,7 +441,7 @@
                     })
                     .indexOf(name) > -1;
             },
-            availableFilters: function() {
+            availableFilters: function () {
                 var availableFilters = [];
                 for (var i = 0; i < this.allFilters.length; i++) {
                     if (!this.hasFilter(this.allFilters[i].name) && this.allFilters[i].removable) {
@@ -421,10 +451,10 @@
 
                 return availableFilters;
             },
-            onAddFilter: function(name) {
+            onAddFilter: function (name) {
                 this.enabledFilters.push(this.getFilterByName(name));
             },
-            onRemoveFilter: function(name) {
+            onRemoveFilter: function (name) {
                 var i = this.enabledFilters.length;
                 while (i--) {
                     if (this.enabledFilters[i].name === name) {
@@ -432,14 +462,14 @@
                     }
                 }
             },
-            isImageSearch: function() {
+            isImageSearch: function () {
                 return this.searchDomain === "i";
             },
 
-            onSearchDomainChanged: function(val) {
+            onSearchDomainChanged: function (val) {
                 this.searchDomain = val;
                 if (this.searchDomain !== "i") {
-                    this.enabledFilters = this.enabledFilters.filter(function(filter) {
+                    this.enabledFilters = this.enabledFilters.filter(function (filter) {
                         return !filter.removable;
                     });
                 }

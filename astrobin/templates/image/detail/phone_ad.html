@@ -1,14 +1,15 @@
 {% load astrobin_apps_donations_tags %}
+{% load astrobin_apps_premium_tags %}
 {% load tags %}
 {% load i18n %}
 {% load dfp_tags %}
 
-{% if request.user|show_ads %}
+{% if request.user|show_ads and not image.user|is_any_ultimate %}
     <div class="subtle-container advertisement">
         <div class="header">
             <h4><i class="icon-bullhorn"></i></h4>
 
-            {% if request.user.is_authenticated and DONATIONS_ENABLED %}
+            {% if request.user|can_remove_ads %}
                 <a class="remove" data-toggle="modal" href="#remove-ads-modal">
                     <i class="icon-remove"></i>
                 </a>

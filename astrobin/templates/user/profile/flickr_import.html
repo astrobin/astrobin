@@ -25,11 +25,13 @@
                 {% if request.user|is_premium or request.user.is_superuser %}
                     {% if readonly %}
                         <div class="alert alert-error">
-                            {% blocktrans %}AstroBin is currently in read-only mode, because of server maintenance. Please try again soon!{% endblocktrans %}
+                            {% blocktrans trimmed %}AstroBin is currently in read-only mode, because of server maintenance.
+                                Please try again soon!{% endblocktrans %}
                         </div>
                     {% else %}
                         <div class="well">
-                            {% blocktrans %}Please note: when importing from Flickr, automatic watermarking of the images it not supported.{% endblocktrans %}
+                            {% blocktrans trimmed %}Please note: when importing from Flickr, automatic watermarking of the
+                                images it not supported.{% endblocktrans %}
                         </div>
                         <div class="js">
                             <form class="form-horizontal" name="flickr_form" action="">{% csrf_token %}
@@ -60,7 +62,8 @@
                         </div>
                         <noscript>
                             <p>
-                                {% blocktrans %}Unfortunately you need to enable Javascript to be able to import photos from Flickr at this time.{% endblocktrans %}
+                                {% blocktrans trimmed %}Unfortunately you need to enable Javascript to be able to import photos
+                                    from Flickr at this time.{% endblocktrans %}
                             </p>
                         </noscript>
                     {% endif %} {# readonly #}

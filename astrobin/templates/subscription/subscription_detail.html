@@ -1,7 +1,8 @@
 {% extends 'base.html' %}
 
-{% load i18n %}
 {% load django_bootstrap_breadcrumbs %}
+{% load i18n %}
+{% load astrobin_apps_premium_tags %}
 
 {% block title %}{% trans "Subscription plan" %}: {% trans object.name %}{% endblock %}
 
@@ -59,8 +60,9 @@
             <h1>
                 {% trans object.name %}
                 <small>
+                    <span class="price">
                     {% if object.price > 0 %}
-                        $ {{object.price}} USD /
+                        {{ object.currency }} {{ object.price }} /
 
                         {% if object.recurrence_unit == 'D' %}
                             {% trans "day" %}
@@ -81,82 +83,34 @@
                         {% if object.recurrence_unit == None %}
                             {% trans "one time" %}
                         {% endif %}
+
+                        {% with subscription=object %}
+                            {% include "./_currency_conversion.html" %}
+                        {% endwith %}
                     {% else %}
                         {% trans "Free" context "At no cost" %}
                     {% endif %}
+                    </span>
                 </small>
             </h1>
         </div>
 
-        {% if object.category == 'premium_autorenew' %}
+        {% if not object|is_subscription_offered %}
         <div class="alert alert-error">
             {% url 'subscription_list' as url %}
-            {% blocktrans %}Auto-renewing subscriptions are not offered anymore on AstroBin. Please visit the <a href="{{url}}">subscriptions page</a> to see the available plans, thanks!{% endblocktrans %}
+            {% blocktrans %}This subscription is not offered anymore on AstroBin. Please visit the <a href="{{url}}">subscriptions page</a> to see the available plans, thanks!{% endblocktrans %}
         </div>
         {% endif %}
 
-        {% if usersubscription and usersubscription.valid %}
+        {% if usersubscription|show_renew_message %}
             <div class="alert alert-info">
                 <em>
-                    {% blocktrans %}If you would like to renew your subscription, please visit this page again after your current subscription's expiration date:{% endblocktrans %}
+                    {% blocktrans %}If you would like to renew your subscription, please visit this page again after
+                        your current subscription's expiration date:{% endblocktrans %}
                     <strong>{{ usersubscription.expires|date:"SHORT_DATE_FORMAT" }}</strong>.
                 </em>
             </div>
         {% endif %}
-
-        <div>
-            {% if 'premium' in object.category %}
-            <p>
-                {% blocktrans with max_allowed=PREMIUM_MAX_IMAGES_FREE %}
-                You can use AstroBin for free up to {{max_allowed}} images. After
-                that you can upgrade to <strong>Lite</strong> if you have a limited
-                yearly output, or <strong>Premium</strong> for a limitless
-                experience.  Paying members will not see ads, and everybody,
-                including non-paying members, have access to all social features of
-                AstroBin.
-                {% endblocktrans %}
-            </p>
-
-            <ul class="subscription-plans-description-list">
-                <li>
-                {% blocktrans with max_allowed=PREMIUM_MAX_IMAGES_FREE %}
-                As a user of <strong>AstroBin Free</strong>, you may have up to
-                {{max_allowed}} images at the same time. You can delete some images
-                to make room for new ones, if you want. For instance you can
-                maintain a window of your latest {{max_allowed}} images, or your
-                best ones.
-                {% endblocktrans %}
-                </li>
-
-                <li>
-                {% blocktrans with max_allowed=PREMIUM_MAX_IMAGES_LITE %}
-                As a user of <strong>AstroBin Lite</strong>, instead, you may have
-                up to {{max_allowed}} images at the same time, per each year of
-                your membership. You may replace images uploaded within the current
-                subsciption period while images uploaded prior to that can only be
-                deleted. Every year that you renew your membership, you get
-                {{max_allowed}} new image credits.
-                {% endblocktrans %}
-                </li>
-
-                <li>
-                {% blocktrans %}
-                As a user of <strong>AstroBin Premium</strong>, instead, there are
-                no limitations whatsoever in the number of images you can upload.
-                {% endblocktrans %}
-                </li>
-            </ul>
-            {% endif %}
-
-            {% if object.category == 'rawdata' %}
-            <p>
-                {% blocktrans %}<strong>AstroBin Raw Data</strong> allows you to store your raw files (<strong>FIT</strong> and <strong>digital camera raw</strong>) on AstroBin. We will keep them neatly organized, and you will have a safe backup of all your work, including calibration files.{% endblocktrans %}
-
-                {% url 'rawdata.help1' as rawdata_url %}
-                {% blocktrans %}Learn more by reading <a href="{{rawdata_url}}">a short introduction.</a>{% endblocktrans %}
-            </p>
-            {% endif %}
-        </div>
 
         {% comment %} Deactivate Atom {% endcomment %}
         {% if usersubscription and usersubscription.valid and usersubscription.subscription.name == "Atom" %}
@@ -213,7 +167,7 @@
         {% endif %}
 
         {% comment %} Invalid subscription {% endcomment %}
-        {% if usersubscription and not usersubscription.valid and usersubscription.cancelled and 'autorenew' not in object.category %}
+        {% if usersubscription and not usersubscription.valid and object|is_subscription_offered %}
             {% if usersubscription.subscription.name == "Atom" %}
                 {% include 'subscription/_atom_form.html' %}
             {% else %} <!-- not atom -->
@@ -222,7 +176,7 @@
         {% endif %}
 
         {% comment %} Missing subscription {% endcomment %}
-        {% if not usersubscription and 'autorenew' not in object.category %}
+        {% if not usersubscription and object|is_subscription_offered %}
             {% if change_denied_reasons %}
                 <div class="alert alert-error">
                     <h4 class="alert-heading">
@@ -244,14 +198,12 @@
             {% endif %} <!-- if change_denied_reasons -->
         {% endif %}
 
-        <div class="thankyou">
-            {% blocktrans %}Thank you for supporting AstroBin!{% endblocktrans %}
-        </div>
-
-        <div class="text-center">
-            <a class="btn btn-mini" href="{% url 'subscription_list' %}">
-                {% trans "Back to the plans" %}
-            </a>
-        </div>
+        <a class="btn btn-secondary btn-block-mobile" href="{% url 'subscription_list' %}">
+            {% trans "Back to the plans" %}
+        </a>
     {% endif %} {# READONLY #}
+{% endblock %}
+
+{% block extra_js %}
+    {% include "subscription/_currency_conversion_js.html" %}
 {% endblock %}

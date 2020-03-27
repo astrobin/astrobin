@@ -1,0 +1,25 @@
+{% load i18n %}
+
+{% if subscription.currency == "CHF" %}
+    <div class="currency-conversion">
+        ({% trans "about" context "approximately" %}
+
+        $ <span
+            class="currency-conversion-value"
+            data-to-currency="USD"
+            data-value="{{ subscription.price }}">&hellip;
+        </span> USD /
+
+        <span
+                class="currency-conversion-value"
+                data-to-currency="EUR"
+                data-value="{{ subscription.price }}">&hellip;
+        </span> € /
+
+        <span
+                class="currency-conversion-value"
+                data-to-currency="GBP"
+                data-value="{{ subscription.price }}">&hellip;
+        </span> £)
+    </div>
+{% endif %}

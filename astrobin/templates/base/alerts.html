@@ -15,7 +15,7 @@
                     {% if message.level == 30 %}<i class="icon-warning-sign"></i> {% trans "Warning!" %}{% endif %}
                     {% if message.level == 40 %}<i class="icon-fire"></i> {% trans "Error!" %}{% endif %}
                 </h4>
-                {{message}}
+                {{message | safe}}
             </div>
         {% endif %}
     {% endfor %}

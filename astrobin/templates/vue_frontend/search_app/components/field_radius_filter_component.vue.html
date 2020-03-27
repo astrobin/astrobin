@@ -1,10 +1,16 @@
-<script type="text/x-template" id="field-radius-filter-template">
-    <div class="form-group" :class="{highlighted: highlighted}">
-        <div id="field-radius-slider" class="slider-filter"></div>
+{% load astrobin_apps_premium_tags %}
 
-        <input id="field-radius-min-value" name="field_radius_min" type="hidden" :value="fieldRadiusMin" />
-        <input id="field-radius-max-value" name="field_radius_max" type="hidden" :value="fieldRadiusMax" />
-    </div>
+<script type="text/x-template" id="field-radius-filter-template">
+    {% if request.user|can_access_full_search %}
+        <div class="form-group" :class="{highlighted: highlighted}">
+            <div id="field-radius-slider" class="slider-filter"></div>
+
+            <input id="field-radius-min-value" name="field_radius_min" type="hidden" :value="fieldRadiusMin" />
+            <input id="field-radius-max-value" name="field_radius_max" type="hidden" :value="fieldRadiusMax" />
+        </div>
+    {% else %}
+        {% include "./_filter_not_allowed.html" %}
+    {% endif %}
 </script>
 
 <script>

@@ -7,7 +7,7 @@ from django.conf import settings
 from django.core.files.base import ContentFile
 
 from astrobin_apps_platesolving.solver import Solver
-from astrobin_apps_platesolving.utils import getFromStorage, ThumbnailNotReadyException
+from astrobin_apps_platesolving.utils import get_from_storage, ThumbnailNotReadyException
 
 
 class Annotator:
@@ -150,7 +150,7 @@ class Annotator:
 
             try:
                 base = Image \
-                    .open(getFromStorage(
+                    .open(get_from_storage(
                     self.solution.content_object,
                     'hd',
                     '0' if not hasattr(self.solution.content_object, 'label')

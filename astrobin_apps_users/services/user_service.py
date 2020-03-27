@@ -76,6 +76,7 @@ class UserService:
             'public_images_no': public.count(),
             'wip_images_no': wip.count(),
             'corrupted_no': self.get_corrupted_images().count(),
+            'deleted_images_no': self.get_deleted_images().count(),
             'bookmarked_no': self.get_bookmarked_images().count(),
             'liked_no': self.get_liked_images().count(),
         }

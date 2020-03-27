@@ -1,18 +1,46 @@
 {% load i18n %}
 
-<div class="well text-center">
-    <h3>
-        {% if object.recurrence_unit != None %}
-            {% blocktrans %}Subscribe with a secure payment provided by PayPal:{% endblocktrans %}
-        {% else %}
-            {% blocktrans %}Buy with a secure payment provided by PayPal:{% endblocktrans %}
-        {% endif %}
-    </h3>
+<div class="subtle-container">
+    <h3>{% trans "Pay securely with PayPal" %}</h3>
 
     {% if PAYPAL_TEST %}
-        {{form.sandbox}}
+        {{ form.sandbox }}
     {% else %}
-        {{form.render}}
+        {{ form.render }}
     {% endif %}
 </div>
 
+{% if object.recurrence_unit == None %}
+
+    {% if object.name == "AstroBin Premium 2020+" or object.name == "AstroBin Ultimate 2020+" %}
+        <div class="subtle-container">
+            <h3>{% trans "Want to upgrade from a lower subscription tier?" %}</h3>
+            <p>
+                {% blocktrans trimmed with name=object.name %}
+                    AstroBin doesn't support subscription upgrades at the moment, but we're happy to make it happen
+                    manually. If you're on a lower subscription tier and would like to upgrade to
+                    <strong>{{ name }}</strong>, please just buy it and then contact us at
+                    <a href="mailto:astrobin@astrobin.com">astrobin@astrobin.com</a> to get a refund for the unused time
+                    on your old subscription. Thanks!
+                {% endblocktrans %}
+            </p>
+        </div>
+    {% endif %}
+
+    <div class="subtle-container">
+        <h3>{% trans "Pay with a bank transfer" %}</h3>
+        <p>
+            {% blocktrans with amount=object.price currency=object.currency email_prefix="<a href='mailto:astrobin@astrobin.com'>" email="astrobin@astrobin.com" email_postfix="</a>" %}
+                Prefer to pay via bank transfer? Please make a deposit of {{ currency }} {{ amount }} to the following
+                bank details and then email us at {{ email_prefix }}{{ email }}{{ email_postfix }} with your username so
+                we may upgrade your account manually. Thanks!
+            {% endblocktrans %}
+        </p>
+
+        <pre>BANK: PostFinance Switzerland
+ACCOUNT HOLDER: Salvatore Iovene
+ADDRESS: Obstgartenstrasse 32, 8136 Gattikon (Switzerland)
+ACCOUNT # (IBAN):  CH97 0900 0000 6922 3618 4
+SWIFT / BIC: POFICHBEXXX</pre>
+    </div>
+{% endif %}
