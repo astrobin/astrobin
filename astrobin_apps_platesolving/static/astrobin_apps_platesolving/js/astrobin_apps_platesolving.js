@@ -31,18 +31,6 @@
     }
 
     Platesolving.prototype = {
-        advancedSvgLoaded: function() {
-            var isSafari = navigator.vendor && navigator.vendor.indexOf('Apple') > -1 &&
-                navigator.userAgent &&
-                navigator.userAgent.indexOf('CriOS') == -1 &&
-                navigator.userAgent.indexOf('FxiOS') == -1;
-
-            if (isSafari) {
-                var contentDocument = document.getElementById("advanced-plate-solution-svg").contentDocument;
-                contentDocument.querySelector("svg > g").removeAttribute("filter");
-            }
-        },
-
         process: function () {
             if (this.solution_id === 0 || this.solution_status === Status.MISSING) {
                 /* The plate-solving has never been attempted on this resource. */
@@ -306,6 +294,18 @@
             setTimeout(function () {
                 self.$root.hide('slow');
             }, 5000);
+        }
+    };
+
+    Platesolving.advancedSvgLoaded = function () {
+        var isSafari = navigator.vendor && navigator.vendor.indexOf('Apple') > -1 &&
+            navigator.userAgent &&
+            navigator.userAgent.indexOf('CriOS') == -1 &&
+            navigator.userAgent.indexOf('FxiOS') == -1;
+
+        if (isSafari) {
+            var contentDocument = document.getElementById("advanced-plate-solution-svg").contentDocument;
+            contentDocument.querySelector("svg > g").removeAttribute("filter");
         }
     };
 
