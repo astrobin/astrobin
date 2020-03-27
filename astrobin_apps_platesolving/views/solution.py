@@ -286,7 +286,7 @@ class SolutionPixInsightNextTask(base.View):
                 task.task_params,
                 username,
                 task.created,
-                settings.BASE_URL + reverse('astrobin_apps_platesolution.pixinsight_webhook')
+                settings.BASE_URL + reverse('astrobin_apps_platesolving.pixinsight_webhook')
             )
 
         log.debug("PixInsight next-task: sending response\n%s" % response)
