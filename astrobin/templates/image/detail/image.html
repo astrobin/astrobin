@@ -53,6 +53,8 @@
 
                     {% if instance_to_platesolve.solution|is_advanced_success_status %}
                         <object
+                                id="advanced-plate-solution-svg"
+                                onload="advancedPlatesolutionSvgLoaded()"
                                 type="image/svg+xml"
                                 data="{{ instance_to_platesolve.solution.pixinsight_svg_annotation_regular.url }}">
                         </object>
@@ -86,7 +88,12 @@
 {% block extra_js %}
     <script src="{% static 'astrobin_apps_platesolving/js/CoordinateInterpolation.js' %}"></script>
     <script src="{% static 'astrobin_apps_platesolving/js/astrobin_apps_platesolving_mousemove.js' %}"></script>
+    <script src="{% static 'astrobin_apps_platesolving/js/astrobin_apps_platesolving.js' %}"></script>
     <script type="text/javascript">
+        function advancedPlatesolutionSvgLoaded() {
+            new AstroBinPlatesolving().advancedSvgLoaded();
+        }
+
         var platesolving_attempts = 0;
 
         function solution_image_error(img) {

@@ -121,6 +121,8 @@
             <a class="advanced-plate-solution"
                href="{% get_image_url image revision_label %}{% if mod %}{% query_string "mod=mod" "" %}{% endif %}">
                 <object
+                        id="advanced-plate-solution-svg"
+                        onload="advancedPlatesolutionSvgLoaded()"
                         type="image/svg+xml"
                         data="{{ instance_to_platesolve.solution.pixinsight_svg_annotation_hd.url }}"
                         style="
@@ -163,9 +165,14 @@
 <script type="text/javascript" src="{% static 'astrobin_apps_images/js/astrobin_apps_images.js' %}"></script>
 <script src="{% static 'astrobin_apps_platesolving/js/CoordinateInterpolation.js' %}"></script>
 <script src="{% static 'astrobin_apps_platesolving/js/astrobin_apps_platesolving_mousemove.js' %}"></script>
+<script src="{% static 'astrobin_apps_platesolving/js/astrobin_apps_platesolving.js' %}"></script>
 <script type="text/javascript" src="{% static 'astrobin/js/astrobin.js' %}"></script>
 {% insert_hit_count_js_variables for image %}
 <script type="text/javascript">
+    function advancedPlatesolutionSvgLoaded() {
+        new AstroBinPlatesolving().advancedSvgLoaded();
+    }
+
     $(document).ready(function () {
         astrobin_common.init_ajax_csrf_token();
 
