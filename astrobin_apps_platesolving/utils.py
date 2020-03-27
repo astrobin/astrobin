@@ -1,35 +1,55 @@
-import urllib2
-from urlparse import urlparse
-
+import requests
 from django.conf import settings
+from django.contrib.contenttypes.models import ContentType
 from django.core.files import File
 from django.core.files.temp import NamedTemporaryFile
+from django.shortcuts import get_object_or_404
+
+from astrobin_apps_platesolving.models import Solution
 
 
 class ThumbnailNotReadyException(Exception):
     pass
 
 
-def getFromStorage(image, alias, revision_label):
-    url = image.thumbnail(alias, {'revision_label': revision_label, 'sync': True})
-
-    if url is None:
-        raise ThumbnailNotReadyException
+def get_from_storage(image, alias, revision_label):
+    url = image.thumbnail(alias, {'sync': True, 'revision_label': revision_label})
 
     if "placeholder" in url:
         raise ThumbnailNotReadyException
 
-    if not settings.AWS_S3_ENABLED:
-        url = settings.BASE_URL + url
+    if settings.MEDIA_URL not in url:
+        media_url = settings.MEDIA_URL
+        if media_url.endswith('/'):
+            media_url = media_url[:-1]
 
-    parsed = urlparse(url)
-    url = "%s://%s%s" % (parsed.scheme, parsed.netloc, urllib2.quote(parsed.path.encode('utf-8')))
+        last_part_of_media = media_url.rsplit('/', 1)[-1]
+        first_part_of_url = url.strip('/').split('/')[0]
 
-    headers = {'User-Agent': 'Mozilla/5.0'}
-    req = urllib2.Request(url, None, headers)
+        if (last_part_of_media == first_part_of_url):
+            media_url = media_url.strip(last_part_of_media).strip('/')
+
+        url = media_url + url
+
+    r = requests.get(url, allow_redirects=True, headers={'User-Agent': 'Mozilla/5.0'})
+
     img = NamedTemporaryFile(delete=True)
-    img.write(urllib2.urlopen(req).read())
+    img.write(r.content)
     img.flush()
     img.seek(0)
 
     return File(img)
+
+
+def get_target(object_id, content_type_id):
+    content_type = ContentType.objects.get_for_id(content_type_id)
+    manager = content_type.model_class()
+    if hasattr(manager, 'objects_including_wip'):
+        manager = manager.objects_including_wip
+    return get_object_or_404(manager, pk=object_id)
+
+
+def get_solution(object_id, content_type_id):
+    content_type = ContentType.objects.get_for_id(content_type_id)
+    solution, created = Solution.objects.get_or_create(object_id=object_id, content_type=content_type)
+    return solution

@@ -1,13 +1,18 @@
 {% load i18n %}
+{% load astrobin_apps_premium_tags %}
 
 <script type="text/x-template" id="minimum-data-filter-template">
-    <div class="form-group" :class="{highlighted: highlighted}">
-        <v-multiselect v-model="value" :options="options" track-by="id" label="label"
-                       selectLabel="" deselectLabel="" selectedLabel="" :multiple="true" :searchable="false"
-                       placeholder="{% trans "Select" %}">
-        </v-multiselect>
-        <input type="hidden" name="minimum_data" :value="getFormValue()">
-    </div>
+    {% if request.user|can_access_full_search %}
+        <div class="form-group" :class="{highlighted: highlighted}">
+            <v-multiselect v-model="value" :options="options" track-by="id" label="label"
+                           selectLabel="" deselectLabel="" selectedLabel="" :multiple="true" :searchable="false"
+                           placeholder="{% trans "Select" %}">
+            </v-multiselect>
+            <input type="hidden" name="minimum_data" :value="getFormValue()">
+        </div>
+    {% else %}
+        {% include "./_filter_not_allowed.html" %}
+    {% endif %}
 </script>
 
 <script>

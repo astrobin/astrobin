@@ -35,7 +35,7 @@
         <i class="icon icon-paperclip"></i>
         <strong>{% trans "Contains" %}:</strong>&nbsp;
         {% if image.subject_type == 100 or image.subject_type == 200 %}
-            {% for s in subjects_all %}
+            {% for s in subjects %}
                 <a href="/search/?q={{s|escape}}">{{s|escape}}</a>{% if not forloop.last %},{% endif %}
             {% endfor %}
         {% else %}
@@ -85,6 +85,7 @@
 {% block modals %}
     {% include 'image/detail/modals/share.html' %}
     {% include 'image/detail/modals/upload_revision.html' %}
+    {% include 'image/detail/modals/upload_uncompressed_source.html' %}
     {% include 'image/detail/modals/delete.html' %}
     {% include 'image/detail/modals/delete_revision.html' %}
     {% include 'image/detail/modals/like_this.html' %}
@@ -96,10 +97,6 @@
     {% include 'image/detail/modals/flag_thumbnails.html' %}
     {% include 'image/detail/modals/demote.html' %}
     {% include 'image/detail/modals/promote.html' %}
-
-    {% if ADS_ENABLED and not request.user|is_donor %}
-        {% remove_ads_modal %}
-    {% endif %}
 {% endblock %}
 
 {% block extra_js %}

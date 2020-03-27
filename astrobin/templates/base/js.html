@@ -32,7 +32,7 @@
 
     var dictionary = {
         'Cancel': '{% trans "Cancel" %}'
-    }
+    };
     $.i18n.setDictionary(dictionary);
 
     $.localise('ui-multiselect', {
@@ -51,6 +51,23 @@
              fileBtnText: '{% trans "Choose file" %}'
             }
         );
+
+        $("form:not(.ajax)").on("submit", function (event) {
+            var $target = $(event.target);
+            var formId = $target.attr("id");
+
+            // let the submit values get submitted before we disable them
+            window.setTimeout(function () {
+
+                // disable all submits inside the form
+                $target.find("[type=submit]")
+                    .prop("disabled", true)
+                    .addClass("running");
+
+                // disable all HTML5 submits outside the form
+                $("[form=" + formId + "][type=submit]").prop("disabled", true);
+            }, 2);
+        });
     });
 </script>
 

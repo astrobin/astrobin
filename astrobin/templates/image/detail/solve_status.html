@@ -1,6 +1,7 @@
 {% load astrobin_apps_platesolving_tags %}
+{% load astrobin_apps_premium_tags %}
 
-{% if image.is_platesolvable and SOLVING_ENABLED %}
+{% if ENABLE_SOLVING and image.is_platesolvable and image.user|can_perform_basic_platesolving %}
     {% platesolving_machinery instance_to_platesolve %}
 {% endif %}
 

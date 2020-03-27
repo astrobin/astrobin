@@ -29,6 +29,14 @@
     </div>
     {% endif %}
 
+    {% if requested_user == request.user and section == 'trash' %}
+        <div class="subtitle">
+            <i class="icon icon-info-sign"></i>
+            {% blocktrans %}These are your "deleted" images: only you can see this list. Click the images you want to
+            restore, and then use the button below to confirm.{% endblocktrans %}
+        </div>
+    {% endif %}
+
     {% if requested_user == request.user and has_corrupted_images and section == 'corrupted' and not request.COOKIES.astrobin_corrupted_images_banner_seen %}
         <div class="alert alert-warning corrupted-images-banner">
             <button class="close" data-dismiss="alert">&times;</button>
@@ -86,7 +94,11 @@
             </div>
             {% endif %}
 
-            {% image_list image_list nav_ctx='user' %}
+            {% if section == 'trash' %}
+                {% include "user/profile/trash_image_list.html" %}
+            {% else %}
+                {% image_list image_list nav_ctx='user' %}
+            {% endif %}
         </div> <!-- images -->
     </div> <!-- row -->
 {% endblock %}
@@ -94,10 +106,6 @@
 {% block modals %}
     {% if request.user == requested_user and requested_user|is_donor %}
         {% cancel_donation_modal %}
-    {% endif %}
-
-    {% if ADS_ENABLED and not request.user|is_donor %}
-        {% remove_ads_modal %}
     {% endif %}
 {% endblock %}
 

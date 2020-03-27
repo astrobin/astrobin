@@ -1,6 +1,7 @@
-{% load astrobin_apps_images_tags %}
-{% load common_tags %}
 {% load i18n %}
+{% load common_tags %}
+{% load astrobin_apps_images_tags %}
+{% load astrobin_apps_premium_tags %}
 
 <li class="dropdown hidden-phone">
     <a class="dropdown-toggle" data-toggle="dropdown" href="#">
@@ -80,12 +81,15 @@
                 {% trans "Large size" %}
             </a>
         </li>
+
+        {% if request.user|can_see_real_resolution %}
         <li>
             <a href="{% url 'image_full' image.get_id revision_label %}{% query_string "real='',mod=mod" "plate_solving_started" %}">
                 <i class="icon-fullscreen"></i>
                 {% trans "Full size" %}
             </a>
         </li>
+        {% endif %}
 
     </ul>
 </li> <!-- view -->

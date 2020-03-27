@@ -1,4 +1,3 @@
-import django
 from django.conf import settings
 from django.conf.urls import url, include
 from django.conf.urls.static import static
@@ -42,6 +41,9 @@ from astrobin.views import (
     image_edit_acquisition_reset,
     image_edit_license,
     image_edit_platesolving_settings,
+    image_restart_platesolving,
+    image_edit_platesolving_advanced_settings,
+    image_restart_advanced_platesolving,
     image_edit_make_final,
     image_edit_revision_make_final,
     image_edit_save_acquisition,
@@ -124,23 +126,13 @@ from astrobin.views import (
     stats_subject_total_images_ajax,
     stats_subject_integration_monthly_ajax,
 
-    affiliates,
-    faq,
-    guidelines,
-    help,
     api_help,
     trending_astrophotographers,
     stats,
-    tos,
 
     set_language
 )
-# AstroBin apps
-from rawdata.views.helppages import (
-    Help1 as RawDataHelp1,
-    Help2 as RawDataHelp2,
-    Help3 as RawDataHelp3,
-)
+from astrobin.views.profile.download_data_view import DownloadDataView
 
 admin.autodiscover()
 
@@ -214,6 +206,8 @@ urlpatterns += [
     url(r'^subscriptions/', include('subscription.urls')),
     url(r'^tinymce/', include('tinymce.urls')),
     url(r'^bouncy/', include('django_bouncy.urls')),
+    url(r'^paypal/', include('paypal.standard.ipn.urls')),
+    url(r'^progressbarupload/', include('progressbarupload.urls')),
 
     ###########################################################################
     ### API VIEWS                                                           ###
@@ -323,6 +317,7 @@ urlpatterns += [
     url(r'^profile/edit/license/$', user_profile_edit_license, name='profile_edit_license'),
     url(r'^profile/edit/locations/$', user_profile_edit_locations, name='profile_edit_locations'),
     url(r'^profile/edit/preferences/$', user_profile_edit_preferences, name='profile_edit_preferences'),
+    url(r'^profile/download-data/$', DownloadDataView.as_view(), name='profile_download_data'),
     url(r'^profile/edit/retailer/$', user_profile_edit_retailer, name='profile_edit_retailer'),
     url(r'^profile/save/basic/$', user_profile_save_basic, name='profile_save_basic'),
     url(r'^profile/save/gear/$', user_profile_save_gear, name='profile_save_gear'),
@@ -445,31 +440,17 @@ urlpatterns += [
     ### PAGES VIEWS                                                         ###
     ###########################################################################
 
-    url(r'^affiliates/$', affiliates, name='affiliates'),
-    url(r'^faq/', faq, name='faq'),
-    url(r'^guidelines/', guidelines, name='guidelines'),
-    url(r'^help/$', help, name='help'),
     url(r'^help/api/$', api_help, name='api'),
-    url(r'^help/rawdata/1/$', RawDataHelp1.as_view(), name='rawdata.help1'),
-    url(r'^help/rawdata/2/$', RawDataHelp2.as_view(), name='rawdata.help2'),
-    url(r'^help/rawdata/3/$', RawDataHelp3.as_view(), name='rawdata.help3'),
     url(r'^trending-astrophotographers/',
         trending_astrophotographers,
         name='trending_astrophotographers'),
     url(r'^stats/', stats, name='stats'),
-    url(r'^tos/', tos, name='tos'),
 
     ###########################################################################
     ### I18N VIEWS                                                          ###
     ###########################################################################
 
     url(r'^language/set/(?P<lang>[\w-]+)/$', set_language, name='set_language'),
-
-    ###########################################################################
-    ### HOME VIEWS                                                          ###
-    ###########################################################################
-
-    url(r'^welcome/', include('astrobin_apps_landing.urls', namespace='landing')),
 
     ###########################################################################
     ### IMAGE EDIT VIEWS                                                    ###
@@ -486,6 +467,12 @@ urlpatterns += [
     url(r'^edit/license/(?P<id>\w+)/$', image_edit_license, name='image_edit_license'),
     url(r'^edit/platesolving/(?P<id>\w+)/(?:(?P<revision_label>\w+)/)?$', image_edit_platesolving_settings,
         name='image_edit_platesolving_settings'),
+    url(r'^edit/platesolving/(?P<id>\w+)/(?:(?P<revision_label>\w+)/)?restart$', image_restart_platesolving,
+        name='image_restart_platesolving'),
+    url(r'^edit/platesolving-advanced/(?P<id>\w+)/(?:(?P<revision_label>\w+)/)?$',
+        image_edit_platesolving_advanced_settings,name='image_edit_platesolving_advanced_settings'),
+    url(r'^edit/platesolving/(?P<id>\w+)/(?:(?P<revision_label>\w+)/)?restart-advanced$',
+        image_restart_advanced_platesolving, name='image_restart_advanced_platesolving'),
     url(r'^edit/makefinal/(?P<id>\w+)/$', image_edit_make_final, name='image_edit_make_final'),
     url(r'^edit/revision/makefinal/(?P<id>\w+)/$', image_edit_revision_make_final,
         name='image_edit_revision_make_final'),
@@ -499,6 +486,7 @@ urlpatterns += [
     url(r'^upload/$', image_upload, name='image_upload'),
     url(r'^upload/process/$', image_upload_process, name='image_upload_process'),
     url(r'^upload/revision/process/$', image_revision_upload_process, name='image_revision_upload_process'),
+    url(r'^upload-uncompressed-source/(?P<id>\w+)/$', image_views.ImageUploadUncompressedSource.as_view(), name='upload_uncompressed_source'),
 
     ###########################################################################
     ### IMAGE VIEWS                                                         ###
@@ -521,14 +509,14 @@ urlpatterns += [
 
 urlpatterns += [url(r'^silk/', include('silk.urls', namespace='silk'))]
 
-if (settings.DEBUG or settings.TESTING) and not settings.AWS_S3_ENABLED:
+if not settings.AWS_S3_ENABLED:
     urlpatterns += static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
     urlpatterns += [url(r'^media/(?P<path>.*)$', serve, {
         'document_root': settings.MEDIA_ROOT,
         'show_indexes': True
     })]
 
-if (settings.DEBUG or settings.TESTING) and settings.LOCAL_STATIC_STORAGE:
+if settings.LOCAL_STATIC_STORAGE:
     urlpatterns += static(settings.STATIC_URL, document_root=settings.STATIC_ROOT)
     urlpatterns += [url(r'^static/(?P<path>.*)$', serve, {
         'document_root': settings.STATIC_ROOT,

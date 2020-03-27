@@ -26,6 +26,7 @@ READONLY_MODE = os.environ.get("READONLY_MODE", 'false').strip() == 'true'
 LONGPOLL_ENABLED = False
 
 ALLOWED_HOSTS = ['*']
+DATA_UPLOAD_MAX_MEMORY_SIZE = 10485760
 
 ADS_ENABLED = os.environ.get('ADS_ENABLED', 'false').strip() == 'true'
 DONATIONS_ENABLED = os.environ.get('DONATIONS_ENABLED', 'false').strip() == 'true'
@@ -41,6 +42,8 @@ GOOGLE_ANALYTICS_ID = os.environ.get('GOOGLE_ANALYTICS_ID', 'invalid').strip()
 ROOT_URLCONF = 'astrobin.urls'
 
 ALLOWED_IMAGE_EXTENSIONS = ('.jpg', '.jpeg', '.png', '.gif')
+ALLOWED_FITS_IMAGE_EXTENSIONS = ('xisf', 'fits', 'fit', 'fts')
+ALLOWED_UNCOMPRESSED_SOURCE_EXTENSIONS = ALLOWED_FITS_IMAGE_EXTENSIONS + ('psd', 'tiff')
 
 GEOIP_PATH = os.path.abspath(os.path.dirname(__name__)) + "/astrobin/geoip2"
 

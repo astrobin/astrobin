@@ -18,14 +18,16 @@ from django.core.paginator import Paginator, InvalidPage
 from django.core.urlresolvers import reverse
 from django.db.models import Q
 from django.forms.models import inlineformset_factory
-from django.http import Http404, HttpResponse
+from django.http import Http404, HttpResponse, HttpResponseNotAllowed
 from django.http import HttpResponseForbidden
 from django.http import HttpResponseRedirect
 from django.shortcuts import get_object_or_404
 from django.shortcuts import render
 from django.template import loader, RequestContext
+from django.template.defaultfilters import filesizeformat
 from django.template.loader import render_to_string
 from django.utils.datastructures import MultiValueDictKeyError
+from django.utils.translation import ngettext as _n
 from django.utils.translation import ugettext as _
 from django.views.decorators.cache import never_cache
 from django.views.decorators.http import require_GET, require_POST
@@ -52,10 +54,13 @@ from astrobin.models import Image, UserProfile, CommercialGear, Gear, Location, 
 from astrobin.shortcuts import ajax_response, ajax_success, ajax_fail
 from astrobin.utils import user_is_producer, user_is_retailer, to_user_timezone, base26_encode, base26_decode
 from astrobin_apps_notifications.utils import push_notification
-from astrobin_apps_platesolving.forms import PlateSolvingSettingsForm
-from astrobin_apps_platesolving.models import PlateSolvingSettings, Solution
 from astrobin_apps_users.services import UserService
 from toggleproperties.models import ToggleProperty
+from astrobin_apps_platesolving.forms import PlateSolvingSettingsForm, PlateSolvingAdvancedSettingsForm
+from astrobin_apps_platesolving.models import PlateSolvingSettings, Solution, PlateSolvingAdvancedSettings
+from astrobin_apps_premium.templatetags.astrobin_apps_premium_tags import can_restore_from_trash, \
+    can_perform_advanced_platesolving
+from astrobin_apps_premium.utils import premium_get_max_allowed_image_size, premium_get_max_allowed_revisions
 
 
 def get_image_or_404(queryset, id):
@@ -256,6 +261,49 @@ def jsonDump(all):
         return []
 
 
+def upload_error(request, image=None):
+    messages.error(request, _("Invalid image or no image provided. Allowed formats are JPG, PNG and GIF."))
+
+    if image is not None:
+        return HttpResponseRedirect(image.get_absolute_url())
+
+    return HttpResponseRedirect('/upload/')
+
+
+def upload_size_error(request, max_size, image=None):
+    subscriptions_url = reverse('subscription_list')
+    open_link = "<a href=\"%s\">" % subscriptions_url
+    close_link = "</a>"
+    msg = "Sorry, but this image is too large. Under your current subscription plan, the maximum allowed image size is %(max_size)s. %(open_link)sWould you like to upgrade?%(close_link)s"
+
+    messages.error(request, _(msg) % {
+        "max_size": filesizeformat(max_size),
+        "open_link": open_link,
+        "close_link": close_link
+    })
+
+    if image is not None:
+        return HttpResponseRedirect(image.get_absolute_url())
+
+    return HttpResponseRedirect('/upload/')
+
+
+def upload_max_revisions_error(request, max_revisions, image):
+    subscriptions_url = reverse('subscription_list')
+    open_link = "<a href=\"%s\">" % subscriptions_url
+    close_link = "</a>"
+    msg_singular = "Sorry, but you have reached the maximum amount of allowed image revisions. Under your current subscription, the limit is %(max_revisions)s revision per image. %(open_link)sWould you like to upgrade?%(close_link)s"
+    msg_plural = "Sorry, but you have reached the maximum amount of allowed image revisions. Under your current subscription, the limit is %(max_revisions)s revisions per image. %(open_link)sWould you like to upgrade?%(close_link)s"
+
+    messages.error(request, _n(msg_singular, msg_plural, max_revisions) % {
+        "max_revisions": max_revisions,
+        "open_link": open_link,
+        "close_link": close_link
+    })
+
+    return HttpResponseRedirect(image.get_absolute_url())
+
+
 # VIEWS
 
 @page_template('index/stream_page.html', key='stream_page')
@@ -266,7 +314,7 @@ def index(request, template='index/root.html', extra_context=None):
 
     if not request.user.is_authenticated():
         from django.shortcuts import redirect
-        return redirect(reverse("landing:main"))
+        return redirect("https://welcome.astrobin.com/")
 
     image_ct = ContentType.objects.get_for_model(Image)
     image_rev_ct = ContentType.objects.get_for_model(ImageRevision)
@@ -469,35 +517,35 @@ def image_upload(request):
 def image_upload_process(request):
     """Process the form"""
 
-    def upload_error():
-        messages.error(request, _("Invalid image or no image provided. Allowed formats are JPG, PNG and GIF."))
-        return HttpResponseRedirect('/upload/')
-
     from astrobin_apps_premium.utils import premium_used_percent
 
     used_percent = premium_used_percent(request.user)
     if used_percent >= 100:
-        messages.error(request, _("You have reached your image count limit. Please upgrade!"));
+        messages.error(request, _("You have reached your image count limit. Please upgrade!"))
         return HttpResponseRedirect('/upload/')
 
     if settings.READONLY_MODE:
         messages.error(request, _(
-            "AstroBin is currently in read-only mode, because of server maintenance. Please try again soon!"));
+            "AstroBin is currently in read-only mode, because of server maintenance. Please try again soon!"))
         return HttpResponseRedirect('/upload/')
 
     if 'image_file' not in request.FILES:
-        return upload_error()
+        return upload_error(request)
 
     form = ImageUploadForm(request.POST, request.FILES)
 
     if not form.is_valid():
-        return upload_error()
+        return upload_error(request)
 
     image_file = request.FILES["image_file"]
     ext = os.path.splitext(image_file.name)[1].lower()
 
     if ext not in settings.ALLOWED_IMAGE_EXTENSIONS:
-        return upload_error()
+        return upload_error(request)
+
+    max_size = premium_get_max_allowed_image_size(request.user)
+    if image_file.size > max_size:
+        return upload_size_error(request, max_size)
 
     if image_file.size < 1e+7:
         try:
@@ -510,7 +558,7 @@ def image_upload_process(request):
                 messages.warning(request, _(
                     "You uploaded an Indexed PNG file. AstroBin will need to lower the color count to 256 in order to work with it."))
         except:
-            return upload_error()
+            return upload_error(request)
 
     profile = request.user.userprofile
     image = form.save(commit=False)
@@ -738,8 +786,118 @@ def image_edit_platesolving_settings(request, id, revision_label):
 
         messages.success(
             request,
-            _("Form saved. A new plate-solving process will start when you visit your image again."))
-        return HttpResponseRedirect(url)
+            _("Form saved. A new plate-solving process will start now."))
+        return HttpResponseRedirect(return_url)
+
+
+@login_required
+def image_edit_platesolving_advanced_settings(request, id, revision_label):
+    image = get_image_or_404(Image.objects_including_wip, id)
+    if request.user != image.user and not request.user.is_superuser and not can_perform_advanced_platesolving(
+            image.user):
+        return HttpResponseForbidden()
+
+    if revision_label in (None, 'None', '0'):
+        url = reverse('image_edit_platesolving_advanced_settings', args=(image.get_id(),))
+        if image.revisions.count() > 0:
+            return_url = reverse('image_detail', args=(image.get_id(), '0',))
+        else:
+            return_url = reverse('image_detail', args=(image.get_id(),))
+        solution, created = Solution.objects.get_or_create(
+            content_type=ContentType.objects.get_for_model(Image),
+            object_id=image.pk)
+    else:
+        url = reverse('image_edit_platesolving_advanced_settings', args=(image.get_id(), revision_label,))
+        return_url = reverse('image_detail', args=(image.get_id(), revision_label,))
+        revision = ImageRevision.objects.get(image=image, label=revision_label)
+        solution, created = Solution.objects.get_or_create(
+            content_type=ContentType.objects.get_for_model(ImageRevision),
+            object_id=revision.pk)
+
+    advanced_settings = solution.advanced_settings
+    if advanced_settings is None:
+        solution.advanced_settings = PlateSolvingAdvancedSettings.objects.create()
+        solution.save()
+
+    if request.method == 'GET':
+        form = PlateSolvingAdvancedSettingsForm(instance=advanced_settings)
+        return render(request, 'image/edit/platesolving_advanced_settings.html', {
+            'form': form,
+            'image': image,
+            'return_url': return_url,
+        })
+
+    if request.method == 'POST':
+        form = PlateSolvingAdvancedSettingsForm(request.POST or None, request.FILES or None, instance=advanced_settings)
+        if not form.is_valid():
+            messages.error(
+                request,
+                _("There was one or more errors processing the form. You may need to scroll down to see them."))
+            return render(request, 'image/edit/platesolving_advanced_settings.html', {
+                'form': form,
+                'image': image,
+                'return_url': return_url,
+            })
+
+        form.save()
+        solution.clear_advanced()
+
+        messages.success(
+            request,
+            _("Form saved. A new advanced plate-solving process will start now."))
+        return HttpResponseRedirect(return_url)
+
+
+@login_required
+def image_restart_platesolving(request, id, revision_label):
+    image = get_image_or_404(Image.objects_including_wip, id)
+    if request.user != image.user and not request.user.is_superuser:
+        return HttpResponseForbidden()
+
+    if revision_label in (None, 'None', '0'):
+        if image.revisions.count() > 0:
+            return_url = reverse('image_detail', args=(image.get_id(), '0',))
+        else:
+            return_url = reverse('image_detail', args=(image.get_id(),))
+        solution, created = Solution.objects.get_or_create(
+            content_type=ContentType.objects.get_for_model(Image),
+            object_id=image.pk)
+    else:
+        return_url = reverse('image_detail', args=(image.get_id(), revision_label,))
+        revision = ImageRevision.objects.get(image=image, label=revision_label)
+        solution, created = Solution.objects.get_or_create(
+            content_type=ContentType.objects.get_for_model(ImageRevision),
+            object_id=revision.pk)
+
+    solution.delete()
+
+    return HttpResponseRedirect(return_url)
+
+
+@login_required
+def image_restart_advanced_platesolving(request, id, revision_label):
+    image = get_image_or_404(Image.objects_including_wip, id)
+    if request.user != image.user and not request.user.is_superuser:
+        return HttpResponseForbidden()
+
+    if revision_label in (None, 'None', '0'):
+        if image.revisions.count() > 0:
+            return_url = reverse('image_detail', args=(image.get_id(), '0',))
+        else:
+            return_url = reverse('image_detail', args=(image.get_id(),))
+        solution, created = Solution.objects.get_or_create(
+            content_type=ContentType.objects.get_for_model(Image),
+            object_id=image.pk)
+    else:
+        return_url = reverse('image_detail', args=(image.get_id(), revision_label,))
+        revision = ImageRevision.objects.get(image=image, label=revision_label)
+        solution, created = Solution.objects.get_or_create(
+            content_type=ContentType.objects.get_for_model(ImageRevision),
+            object_id=revision.pk)
+
+    solution.clear_advanced()
+
+    return HttpResponseRedirect(return_url)
 
 
 @login_required
@@ -957,6 +1115,12 @@ def user_page(request, username):
             return HttpResponseForbidden()
         qs = wip_qs
         section = 'staging'
+        subsection = None
+    if 'trash' in request.GET:
+        if request.user != user or not can_restore_from_trash(request.user) and not request.user.is_superuser:
+            return HttpResponseForbidden()
+        qs = Image.deleted_objects.filter(user=user)
+        section = 'trash'
         subsection = None
     elif 'corrupted' in request.GET:
         if request.user != user and not request.user.is_superuser:
@@ -1474,7 +1638,7 @@ def user_profile_save_basic(request):
     form.save()
 
     messages.success(request, _("Form saved. Thank you!"))
-    return HttpResponseRedirect("/profile/edit/basic/");
+    return HttpResponseRedirect("/profile/edit/basic/")
 
 
 @login_required
@@ -1487,7 +1651,7 @@ def user_profile_edit_commercial(request):
         if form.is_valid():
             form.save()
             messages.success(request, _("Form saved. Thank you!"))
-            return HttpResponseRedirect('/profile/edit/commercial/');
+            return HttpResponseRedirect('/profile/edit/commercial/')
     else:
         form = UserProfileEditCommercialForm(instance=profile)
 
@@ -1506,7 +1670,7 @@ def user_profile_edit_retailer(request):
         if form.is_valid():
             form.save()
             messages.success(request, _("Form saved. Thank you!"))
-            return HttpResponseRedirect('/profile/edit/retailer/');
+            return HttpResponseRedirect('/profile/edit/retailer/')
     else:
         form = UserProfileEditRetailerForm(instance=profile)
 
@@ -1622,7 +1786,7 @@ def user_profile_save_locations(request):
 
     formset.save()
     messages.success(request, _("Form saved. Thank you!"))
-    return HttpResponseRedirect('/profile/edit/locations/');
+    return HttpResponseRedirect('/profile/edit/locations/')
 
 
 @login_required
@@ -1819,7 +1983,7 @@ def user_profile_save_preferences(request):
     profile = request.user.userprofile
     form = UserProfileEditPreferencesForm(data=request.POST, instance=profile)
     response_dict = {'form': form}
-    response = HttpResponseRedirect("/profile/edit/preferences/");
+    response = HttpResponseRedirect("/profile/edit/preferences/")
 
     if form.is_valid():
         form.save()
@@ -1851,11 +2015,6 @@ def user_profile_delete(request):
 @login_required
 @require_POST
 def image_revision_upload_process(request):
-    # TODO: unify Image and ImageRevision
-    def upload_error(image):
-        messages.error(request, _("Invalid image or no image provided. Allowed formats are JPG, PNG and GIF."))
-        return HttpResponseRedirect(image.get_absolute_url())
-
     try:
         image_id = request.POST['image_id']
     except MultiValueDictKeyError:
@@ -1871,13 +2030,21 @@ def image_revision_upload_process(request):
     form = ImageRevisionUploadForm(request.POST, request.FILES)
 
     if not form.is_valid():
-        return upload_error(image)
+        return upload_error(request, image)
+
+    max_revisions = premium_get_max_allowed_revisions(request.user)
+    if image.revisions.count() >= max_revisions:
+        return upload_max_revisions_error(request, max_revisions, image)
 
     image_file = request.FILES["image_file"]
     ext = os.path.splitext(image_file.name)[1].lower()
 
     if ext not in settings.ALLOWED_IMAGE_EXTENSIONS:
-        return upload_error(image)
+        return upload_error(request, image)
+
+    max_size = premium_get_max_allowed_image_size(request.user)
+    if image_file.size > max_size:
+        return upload_size_error(request, max_size, image)
 
     if image_file.size < 1e+7:
         try:
@@ -1890,7 +2057,7 @@ def image_revision_upload_process(request):
                 messages.warning(request, _(
                     "You uploaded an Indexed PNG file. AstroBin will need to lower the color count to 256 in order to work with it."))
         except:
-            return upload_error(image)
+            return upload_error(request, image)
 
     revisions = ImageRevision.all_objects.filter(image=image).order_by('id')
     highest_label = 'A'
@@ -1985,47 +2152,8 @@ def trending_astrophotographers(request):
 
 
 @require_GET
-def help(request):
-    return render(request, 'help.html')
-
-
-@require_GET
 def api_help(request):
     return render(request, 'api.html')
-
-
-@require_GET
-def affiliates(request):
-    return object_list(
-        request,
-        queryset=UserProfile.objects
-            .filter(
-            Q(user__groups__name='Producers') |
-            Q(user__groups__name='Retailers'))
-            .filter(
-            Q(user__groups__name='Paying'))
-            .exclude(
-            Q(company_name=None) |
-            Q(company_name="")).distinct(),
-        template_name='affiliates.html',
-        template_object_name='affiliate',
-        paginate_by=100,
-    )
-
-
-@require_GET
-def faq(request):
-    return render(request, 'faq.html')
-
-
-@require_GET
-def tos(request):
-    return render(request, 'tos.html')
-
-
-@require_GET
-def guidelines(request):
-    return render(request, 'guidelines.html')
 
 
 @login_required
@@ -2720,7 +2848,7 @@ def commercial_products_claim(request, id):
         if gear.commercial:
             return error(form)
     except Gear.DoesNotExist:
-        return error(form);
+        return error(form)
 
     # We need to add the choice to the field so that the form will validate.
     # If we don't, it won't validate because the selected option, which was
@@ -2902,7 +3030,7 @@ def retailed_products_claim(request, id):
         gear = Gear.objects.get(id=id)
         # Here, instead, we can claim something that's already claimed!
     except Gear.DoesNotExist:
-        return error(form);
+        return error(form)
 
     # We need to add the choice to the field so that the form will validate.
     # If we don't, it won't validate because the selected option, which was

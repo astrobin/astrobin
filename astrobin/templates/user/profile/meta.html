@@ -16,17 +16,18 @@
         </div>
         <p>
             {% trans "Type" %}<br/>
-            <strong>
+            <strong data-test="subscription-type">
                 {% if requested_user|is_free %}AstroBin Free{% endif %}
-                {% if requested_user|is_lite %}AstroBin Lite{% endif %}
-                {% if requested_user|is_premium %}AstroBin Premium{% endif %}
+                {% if requested_user|is_any_lite %}AstroBin Lite{% endif %}
+                {% if requested_user|is_any_premium %}AstroBin Premium{% endif %}
+                {% if requested_user|is_any_ultimate %}AstroBin Ultimate{% endif %}
             </strong>
         </p>
 
-        {% if requested_user|is_lite or requested_user|is_premium %}
+        {% if not requested_user|is_free %}
         <p>
             {% trans "Expiration date" %}<br/>
-            <strong>
+            <strong data-test="expiration-date">
                 {% with expiration=requested_user|get_premium_subscription_expiration %}
                     {{expiration|date:"SHORT_DATE_FORMAT"}}
                 {% endwith %}
@@ -34,18 +35,20 @@
         </p>
         {% endif %}
 
-        {% if requested_user|is_free or requested_user|is_lite %}
         <p>
             {% trans "Images used" %}<br/>
-            <strong>
+            <strong data-test="images-used">
                 {{requested_user.userprofile.premium_counter}} /
-                {% if requested_user|is_free %}{{PREMIUM_MAX_IMAGES_FREE}}{% endif %}
+                {% if requested_user|is_free %}{{PREMIUM_MAX_IMAGES_FREE_2020}}{% endif %}
                 {% if requested_user|is_lite %}{{PREMIUM_MAX_IMAGES_LITE}}{% endif %}
+                {% if requested_user|is_lite_2020 %}{{PREMIUM_MAX_IMAGES_LITE_2020}}{% endif %}
+                {% if requested_user|is_premium_2020 %}{{PREMIUM_MAX_IMAGES_PREMIUM_2020}}{% endif %}
+                {% if requested_user|is_premium %}&infin;{% endif %}
+                {% if requested_user|is_ultimate_2020 %}&infin;{% endif %}
             </strong>
         </p>
-        {% endif %}
 
-        {% if requested_user|is_lite or requested_user|is_premium %}
+        {% if requested_user|is_any_premium_subscription %}
         <p class="small"><em>{% trans "Thanks for your support!" %}</em></p>
         {% endif %}
     </div>
@@ -64,12 +67,12 @@
         </ul>
     {% endif %}
 
-    {% if request.user|show_ads %}
+    {% if request.user|show_ads and not image.user|is_any_ultimate %}
         <div class="subtle-container simple-container advertisement hidden-phone hidden-tablet">
             <div class="header">
                 <h4><i class="icon-bullhorn"></i></h4>
 
-                {% if request.user.is_authenticated and DONATIONS_ENABLED %}
+                {% if request.user|can_remove_ads %}
                     <a class="remove" data-toggle="modal" href="#remove-ads-modal">
                         <i class="icon-remove"></i>
                     </a>

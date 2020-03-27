@@ -4,7 +4,7 @@ from mock import patch
 # Django
 from django.contrib.auth.models import User, Group
 from django.core.urlresolvers import reverse_lazy
-from django.test import TestCase
+from django.test import TestCase, override_settings
 
 # Other apps
 from astrobin_apps_iotd.models import IotdSubmission, IotdVote
@@ -53,6 +53,7 @@ class ExploreTest(TestCase):
         self.image.delete()
         self.user.delete()
 
+    @override_settings(PREMIUM_RESTRICTS_IOTD=False)
     def test_top_picks_excludes_corrupted(self):
         IotdSubmission.objects.create(submitter=self.submitter, image=self.image)
         IotdVote.objects.create(reviewer=self.reviewer, image=self.image)
@@ -66,7 +67,7 @@ class ExploreTest(TestCase):
         self.image.corrupted = False
         self.image.save()
 
-
+    @override_settings(PREMIUM_RESTRICTS_IOTD=False)
     def test_top_picks_data_source_filter(self):
         IotdSubmission.objects.create(submitter=self.submitter, image=self.image)
         IotdVote.objects.create(reviewer=self.reviewer, image=self.image)
@@ -115,6 +116,7 @@ class ExploreTest(TestCase):
         response = self.client.get(reverse_lazy('top_picks') + '?source=public-amateur-data')
         self.assertNotContains(response, self.image.title)
 
+    @override_settings(PREMIUM_RESTRICTS_IOTD=False)
     def test_top_picks_acquisition_type_filter(self):
         IotdSubmission.objects.create(submitter=self.submitter, image=self.image)
         IotdVote.objects.create(reviewer=self.reviewer, image=self.image)

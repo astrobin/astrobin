@@ -1,6 +1,7 @@
 import datetime
 from itertools import chain
 
+from dateutil.relativedelta import relativedelta
 from django.conf import settings
 from django.contrib import messages
 from django.contrib.auth.models import User, Group as DjangoGroup
@@ -26,7 +27,8 @@ from astrobin_apps_notifications.utils import push_notification
 from astrobin_apps_platesolving.models import Solution
 from astrobin_apps_platesolving.solver import Solver
 from astrobin_apps_premium.templatetags.astrobin_apps_premium_tags import (
-    is_free, is_lite, is_premium)
+    is_lite, is_any_premium_subscription)
+from astrobin_apps_premium.utils import premium_get_valid_usersubscription
 from nested_comments.models import NestedComment
 from rawdata.models import (
     PrivateSharedFolder,
@@ -73,7 +75,7 @@ def image_post_save(sender, instance, created, **kwargs):
 
     if created:
         user_scores_index = instance.user.userprofile.get_scores()['user_scores_index']
-        if user_scores_index >= 1.00 or is_lite(instance.user) or is_premium(instance.user):
+        if user_scores_index >= 1.00 or is_any_premium_subscription(instance.user):
             instance.moderated_when = datetime.date.today()
             instance.moderator_decision = 1
             instance.save(keep_deleted=True)
@@ -118,16 +120,8 @@ def image_post_delete(sender, instance, **kwargs):
             user.userprofile.save(keep_deleted=True)
 
     try:
-        if is_free(instance.user):
-            decrease_counter(instance.user)
-
         if is_lite(instance.user):
-            usersub = UserSubscription.active_objects.get(
-                user=instance.user,
-                subscription__group__name='astrobin_lite')
-
-            from dateutil.relativedelta import relativedelta
-
+            usersub = premium_get_valid_usersubscription(instance.user)
             usersub_created = usersub.expires - relativedelta(years=1)
             dt = instance.uploaded.date() - usersub_created
             if dt.days >= 0:
@@ -465,10 +459,13 @@ post_save.connect(solution_post_save, sender=Solution)
 def subscription_subscribed(sender, **kwargs):
     subscription = kwargs.get("subscription")
 
-    if subscription.group.name in ['astrobin_lite', 'astrobin_premium'] and \
-            subscription.recurrence_unit == None:
+    if subscription.group.name in [
+        'astrobin_lite', 'astrobin_premium',
+        'astrobin_lite_2020', 'astrobin_premium_2020',
+        'astrobin_ultimate_2020'
+    ] and subscription.recurrence_unit is None:
         usersubscription = kwargs.get("usersubscription")
-        # AstroBin Premium and Lite are valid for 1 year
+        # AstroBin Premium/Lite/Ultimate are valid for 1 year
         usersubscription.expires = datetime.datetime.now()
         usersubscription.extend(datetime.timedelta(days=365.2425))
         usersubscription.save()

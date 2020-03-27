@@ -1,13 +1,18 @@
 {% load i18n %}
+{% load astrobin_apps_premium_tags %}
 
 <script type="text/x-template" id="remote-source-filter-template">
-    <div class="form-group" :class="{highlighted: highlighted}">
-        <v-multiselect v-model="value" :options="options" track-by="id" label="label"
-                       selectLabel="" deselectLabel="" selectedLabel=""
-                       :searchable="true" placeholder="{% trans "Select" %}">
-        </v-multiselect>
-        <input type="hidden" name="remote_source" :value="getValue()">
-    </div>
+    {% if request.user|can_access_full_search %}
+        <div class="form-group" :class="{highlighted: highlighted}">
+            <v-multiselect v-model="value" :options="options" track-by="id" label="label"
+                           selectLabel="" deselectLabel="" selectedLabel=""
+                           :searchable="true" placeholder="{% trans "Select" %}">
+            </v-multiselect>
+            <input type="hidden" name="remote_source" :value="getValue()">
+        </div>
+    {% else %}
+        {% include "./_filter_not_allowed.html" %}
+    {% endif %}
 </script>
 
 <script>
@@ -134,7 +139,7 @@
                 ]
             }
         },
-        created: function() {
+        created: function () {
             for (var i = 0; i < this.options.length; i++) {
                 if (this.options[i].id === this.remoteSource) {
                     this.value = this.options[i];

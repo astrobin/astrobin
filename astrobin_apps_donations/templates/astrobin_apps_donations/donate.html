@@ -1,0 +1,31 @@
+{% extends 'base.html' %}
+
+{% load i18n %}
+{% load django_bootstrap_breadcrumbs %}
+
+{% block title %}{% trans "Donate" %}{% endblock %}
+
+{% block breadcrumbs %}
+    {{ block.super }}
+    {% breadcrumb_safe 'Donations' None %}
+    {% breadcrumb 'Donate' None %}
+{% endblock %}
+
+{% block content %}
+    <h1>{% trans "Thank you in advance for your support" %}</h1>
+
+    <p>
+        {% blocktrans %}Please donate any amount you want, selecting from the options below and subscribing with
+            a recurring monthly payment. You will be able to cancel your subscription whenever you
+            want.{% endblocktrans %}
+    </p>
+
+    <p>
+        {% blocktrans %}If ended up on this page and are not sure what this is about, please read everything about it
+        <a href="https://welcome.astrobin.com/voluntary-donations" target="_blank">here</a>.{% endblocktrans %} {% trans "Thanks!" %}
+    </p>
+
+    <hr />
+
+    {% include 'astrobin_apps_donations/inclusion_tags/_paypal_button.html' %}
+{% endblock %}

@@ -1,4 +1,5 @@
 {% load i18n %}
+{% load astrobin_apps_premium_tags %}
 
 <div class="modal hide fade" id="delete-modal">
     <div class="modal-header">
@@ -7,7 +8,11 @@
     </div>
     <div class="modal-body">
         <div class="well">
-            {% trans "The image will be permanently deleted and cannot be recovered. All its revisions will be deleted too. Are you sure?" %}
+            {% if request.user|can_restore_from_trash %}
+                {% trans "The image will be moved to the trash, and it can be restored later. All its revisions will be there too. Continue?" %}
+            {% else %}
+                {% trans "The image will be permanently deleted and cannot be recovered. All its revisions will be deleted too. Are you sure?" %}
+            {% endif %}
         </div>
 
         <form class="form-inline" action="{% url 'image_delete' image.get_id %}" method="post">{% csrf_token %}

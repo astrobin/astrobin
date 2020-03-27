@@ -6,6 +6,7 @@
 {% load pybb_tags %}
 {% load sanitizer %}
 {% load django_bootstrap_breadcrumbs %}
+{% load astrobin_apps_groups_tags %}
 
 {% block title %}{{object.name}}{% endblock %}
 {% block container_extra_classes %}has-subnav{% endblock %}
@@ -74,7 +75,14 @@
                 <ul class="dropdown-menu">
                     {% if not user_is_member %}
                         <li>
-                            <a href="#join-modal" data-toggle="modal">
+                            <a
+                                    {% if request.user|has_access_to_premium_group_features %}
+                                        href="#join-modal"
+                                    {% else %}
+                                        href="#feature-restricted-modal"
+                                    {% endif %}
+                                    data-toggle="modal"
+                            >
                                 <i class="icon icon-signin"></i>
                                 {% trans "Join group" %}
                             </a>
