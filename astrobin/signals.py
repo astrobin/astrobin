@@ -17,7 +17,7 @@ from pybb.models import Forum, Topic, Post
 from rest_framework.authtoken.models import Token
 from reviews.models import Review
 from safedelete.signals import post_softdelete
-from subscription.models import UserSubscription
+from subscription.models import UserSubscription, Subscription
 from subscription.signals import subscribed, paid, signed_up
 from threaded_messages.models import Thread
 
@@ -488,10 +488,28 @@ def subscription_subscribed(sender, **kwargs):
         profile.premium_counter = 0
         profile.save(keep_deleted=True)
 
-
 subscribed.connect(subscription_subscribed)
 paid.connect(subscription_subscribed)
 signed_up.connect(subscription_subscribed)
+
+
+def reset_lite_and_premium_counter(sender, **kwargs):
+    subscription = kwargs.get("subscription")  # type: Subscription
+    usersubscription = kwargs.get("usersubscription")  # type: UserSubscription
+    user = usersubscription.user  # type: User
+
+    if subscription.group.name in ('astrobin_lite_2020', 'astrobin_premium_2020'):
+        previous = UserSubscription.objects.filter(
+            user__username=user.username,
+            subscription__name__in=("AstroBin Premium", "AstroBin Lite"),
+            expires__gte=datetime.date.today() - datetime.timedelta(days=180)
+        )
+
+        if previous:
+            user.userprofile.premium_counter = 0
+            user.userprofile.save()
+
+signed_up.connect(reset_lite_and_premium_counter)
 
 
 def group_pre_save(sender, instance, **kwargs):
