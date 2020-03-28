@@ -38,20 +38,6 @@ class TestDataLossCompensationRequestView(TestCase):
             status_code=302,
             target_status_code=200)
 
-    def test_not_eligible_premium_not_active(self):
-        user = User.objects.create_user('test', 'test@test.com', 'password')
-        premium = Generators.premium_subscription(user, 'AstroBin Premium')
-        premium.expires = datetime(2020, 2, 16)
-        premium.active = False
-        premium.save()
-        self.client.login(username='test', password='password')
-        response = self.client.get(reverse('astrobin_apps_premium.data_loss_compensation_request'))
-        self.assertRedirects(
-            response,
-            reverse('astrobin_apps_premium.data_loss_compensation_request_not_eligible'),
-            status_code=302,
-            target_status_code=200)
-
     def test_not_eligible_premium_expired_before_incident(self):
         user = User.objects.create_user('test', 'test@test.com', 'password')
         premium = Generators.premium_subscription(user, 'AstroBin Premium')

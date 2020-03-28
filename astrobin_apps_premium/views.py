@@ -130,19 +130,18 @@ class DataLossCompensationRequestView(CreateView):
         compensation_request = get_object_or_None(DataLossCompensationRequest, user=request.user)
 
         if compensation_request is not None:
-            log.debug("User %s attempted data loss compensation request again" % self.request.user)
+            log.debug("User %d attempted data loss compensation request again" % self.request.user.pk)
             return redirect(reverse('astrobin_apps_premium.data_loss_compensation_request_already_done'))
 
         usersubscription = get_object_or_None(
             UserSubscription,
-            user=request.user,
+            user__pk=request.user.pk,
             subscription__name__in=('AstroBin Premium', 'AstroBin Premium (autorenew)'),
-            active=True,
             expires__gte=date(2020, 2, 15)
         )
 
         if usersubscription is None or usersubscription.expires == date(2021, 2, 20):
-            log.debug("User %s attempted data loss compensation but is not eligible" % self.request.user)
+            log.debug("User %d attempted data loss compensation but is not eligible" % self.request.user.pk)
             return redirect(reverse('astrobin_apps_premium.data_loss_compensation_request_not_eligible'))
 
         return super(DataLossCompensationRequestView, self).dispatch(request, *args, **kwargs)
@@ -151,31 +150,33 @@ class DataLossCompensationRequestView(CreateView):
         form.instance.user = self.request.user
         requested_compensation = form.cleaned_data['requested_compensation']
 
-        log.debug("User %s requested data loss compensation: %s" % (self.request.user, requested_compensation))
+        log.debug("User %d requested data loss compensation: %s" % (self.request.user.pk, requested_compensation))
 
         if requested_compensation not in ('NOT_AFFECTED', 'NOT_REQUIRED'):
             ultimate_subscription = self.get_ultimate_subscription()
 
-            premium_user_subscription = UserSubscription.objects.get(
+            premium_user_subscriptions = UserSubscription.objects.filter(
+                user__pk=self.request.user.pk,
                 subscription__name__in=('AstroBin Premium', 'AstroBin Premium (autorenew)'),
-                active=True
-            )
-            user_subscription, created = UserSubscription.objects.get_or_create(
+                active=True)
+
+            ultimate_user_subscription, created = UserSubscription.objects.get_or_create(
                 user=self.request.user,
                 subscription=ultimate_subscription)
 
             expires = date.today()
 
             if created:
-                log.debug("UserSubscription %d created" % user_subscription.pk)
+                log.debug("UserSubscription %d created" % ultimate_user_subscription.pk)
 
-                premium_user_subscription.active = False
-                premium_user_subscription.unsubscribe()
-                premium_user_subscription.save()
+                for premium_user_subscription in premium_user_subscriptions:
+                    premium_user_subscription.active = False
+                    premium_user_subscription.unsubscribe()
+                    premium_user_subscription.save()
             else:
-                log.debug("UserSubscription %d already exists" % user_subscription.pk)
+                log.debug("UserSubscription %d already exists" % ultimate_user_subscription.pk)
 
-                expires = user_subscription.expires
+                expires = ultimate_user_subscription.expires
 
             if requested_compensation == '1_MO_ULTIMATE':
                 expires += timedelta(days=30)
@@ -184,10 +185,10 @@ class DataLossCompensationRequestView(CreateView):
             elif requested_compensation == '6_MO_ULTIMATE':
                 expires += timedelta(days=180)
 
-            user_subscription.active = True
-            user_subscription.expires = expires
-            user_subscription.cancelled = True
-            user_subscription.subscribe()
-            user_subscription.save()
+            ultimate_user_subscription.active = True
+            ultimate_user_subscription.expires = expires
+            ultimate_user_subscription.cancelled = True
+            ultimate_user_subscription.subscribe()
+            ultimate_user_subscription.save()
 
         return super(DataLossCompensationRequestView, self).form_valid(form)
