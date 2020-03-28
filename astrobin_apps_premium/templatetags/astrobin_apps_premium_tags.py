@@ -141,7 +141,7 @@ def is_offer(subscription):
 
 @register.filter
 def can_view_full_technical_card(user):
-    return not is_free(user)
+    return True
 
 
 @register.filter
