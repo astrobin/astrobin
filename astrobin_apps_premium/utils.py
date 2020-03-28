@@ -67,7 +67,7 @@ def premium_get_usersubscription(user):
 
 def premium_get_valid_usersubscription(user):
     us = [obj for obj in UserSubscription.objects.filter(
-        user=user,
+        user__username=user.username,
         subscription__name__in=SUBSCRIPTION_NAMES,
         active=True,
     ) if obj.valid()]
