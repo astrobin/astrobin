@@ -54,7 +54,7 @@ class IotdSubmissionQueueView(
             already_iotd = Iotd.objects.filter(image=x, date__lte=datetime.now().date()).exists()  # type: bool
             user_is_judge = x.user in judges  # type: bool
 
-            return not user_has_rights and not (already_iotd or user_is_judge)
+            return user_has_rights and not (already_iotd or user_is_judge)
 
         for date in (datetime.now().date() - timedelta(n) for n in range(days)):
             image_groups.append({

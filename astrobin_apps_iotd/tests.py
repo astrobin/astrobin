@@ -64,7 +64,6 @@ class IotdTest(TestCase):
         self.judge_1.delete()
         self.judge_2.delete()
 
-        self.image.delete()
         self.user.delete()
 
     # Models
@@ -128,7 +127,7 @@ class IotdTest(TestCase):
         self.image.save(keep_deleted=True)
 
         # Cannot submit an image authored by:
-        # - a free account or
+        # - a free account
         with self.assertRaisesRegexp(ValidationError, "a Free membership"):
             IotdSubmission.objects.create(
                 submitter=self.submitter_1,
@@ -188,7 +187,7 @@ class IotdTest(TestCase):
                 image=self.image)
 
         # Cannot vote an image authored by:
-        # - a free account or
+        # - a free account
         with self.assertRaisesRegexp(ValidationError, "a Free membership"):
             IotdSubmission.objects.create(
                 submitter=self.submitter_1,
@@ -358,7 +357,7 @@ class IotdTest(TestCase):
                 date=datetime.now().date())
 
         # Cannot elect an image authored by:
-        # - a free account or
+        # - a free account
         with self.assertRaisesRegexp(ValidationError, "a Free membership"):
             IotdSubmission.objects.create(
                 submitter=self.submitter_1,
@@ -530,19 +529,23 @@ class IotdTest(TestCase):
         self.assertEqual(response.status_code, 200)
         self.assertContains(response, '<span class="used">0</span>', html=True)
 
-        # Check that images are rendered
+        # Check that images from a free user are not rendered
+        response = self.client.get(url)
+        self.assertNotContains(response, 'data-id="%s"' % self.image.pk)
+
+        us = Generators.premium_subscription(self.user, "AstroBin Ultimate 2020+")
         response = self.client.get(url)
         self.assertContains(response, 'data-id="%s"' % self.image.pk)
 
         # Check for may-not-select class
-        self.image.user = self.submitter_1
-        self.image.save(keep_deleted=True)
-        response = self.client.get(url)
-        bs = BS(response.content)
-        self.assertEqual(len(bs.select('.iotd-queue-item.may-not-select')), 1)
-        self.submitters.user_set.remove(self.reviewer_1)
-        self.image.user = self.user
-        self.image.save(keep_deleted=True)
+        # self.image.user = self.submitter_1
+        # self.image.save(keep_deleted=True)
+        # response = self.client.get(url)
+        # bs = BS(response.content)
+        # self.assertEqual(len(bs.select('.iotd-queue-item.may-not-select')), 1)
+        # self.submitters.user_set.remove(self.reviewer_1)
+        # self.image.user = self.user
+        # self.image.save(keep_deleted=True)
 
         # Check that non-moderated (or spam) images are not rendered
         self.image.moderator_decision = 0
