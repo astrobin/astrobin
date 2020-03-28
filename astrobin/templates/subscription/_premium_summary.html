@@ -18,8 +18,8 @@
     <ul>
         <li>
             <i class="icon-ok"></i>
-            {% blocktrans with number=PREMIUM_MAX_IMAGES_PREMIUM_2020 size=PREMIUM_MAX_IMAGE_SIZE_PREMIUM_2020|filesizeformat %}
-                {{ number }} images, max {{ size }} each{% endblocktrans %}
+            {% blocktrans with size=PREMIUM_MAX_IMAGE_SIZE_PREMIUM_2020|filesizeformat %}
+                Unlimited images, max {{ size }} each{% endblocktrans %}
         </li>
         <li><i class="icon-ok"></i>{% trans "View in original resolution" %}</li>
         <li><i class="icon-ok"></i>{% trans "View full image info" %}</li>

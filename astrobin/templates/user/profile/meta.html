@@ -42,7 +42,7 @@
                 {% if requested_user|is_free %}{{PREMIUM_MAX_IMAGES_FREE_2020}}{% endif %}
                 {% if requested_user|is_lite %}{{PREMIUM_MAX_IMAGES_LITE}}{% endif %}
                 {% if requested_user|is_lite_2020 %}{{PREMIUM_MAX_IMAGES_LITE_2020}}{% endif %}
-                {% if requested_user|is_premium_2020 %}{{PREMIUM_MAX_IMAGES_PREMIUM_2020}}{% endif %}
+                {% if requested_user|is_premium_2020 %}&infin;{% endif %}
                 {% if requested_user|is_premium %}&infin;{% endif %}
                 {% if requested_user|is_ultimate_2020 %}&infin;{% endif %}
             </strong>

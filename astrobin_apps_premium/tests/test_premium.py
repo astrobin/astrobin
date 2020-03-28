@@ -596,7 +596,7 @@ class PremiumTest(TestCase):
     @patch("astrobin.tasks.retrieve_primary_thumbnails")
     def test_upload_limits_premium_2020(self, retrieve_primary_thumbnails):
         """
-        Premium 2020+ can upload up to PREMIUM_MAX_IMAGES_PREMIUM_2020 images.
+        Premium 2020+ can upload unlimited images.
         The counter decreases.
         """
         usersub, created = UserSubscription.objects.get_or_create(
@@ -607,34 +607,27 @@ class PremiumTest(TestCase):
 
         self.client.login(username='test', password='password')
 
-        with self.settings(PREMIUM_MAX_IMAGES_PREMIUM_2020=2):
-            for i in [1, 2]:
-                self.client.post(
-                    reverse('image_upload_process'),
-                    {'image_file': open('astrobin/fixtures/test.jpg', 'rb')},
-                    follow=True)
-                profile = UserProfile.objects.get(pk=self.user.userprofile.pk)
-                self.assertEqual(profile.premium_counter, i)
-
-            response = self.client.post(
+        for i in [1, 2]:
+            self.client.post(
                 reverse('image_upload_process'),
                 {'image_file': open('astrobin/fixtures/test.jpg', 'rb')},
                 follow=True)
-            self._assertMessage(response, "error unread", "You have reached your image count limit")
+            profile = UserProfile.objects.get(pk=self.user.userprofile.pk)
+            self.assertEqual(profile.premium_counter, i)
 
-            # Deleting an image uploaded this year should decrease the counter.
-            Image.objects_including_wip.all().last().delete()
-            profile = UserProfile.objects.get(pk=profile.pk)
-            self.assertEqual(profile.premium_counter, settings.PREMIUM_MAX_IMAGES_PREMIUM_2020 - 1)
-            Image.all_objects.last().undelete()
+        # Deleting an image uploaded this year should decrease the counter.
+        Image.objects_including_wip.all().last().delete()
+        profile = UserProfile.objects.get(pk=profile.pk)
+        self.assertEqual(profile.premium_counter, 1)
+        Image.all_objects.last().undelete()
 
-            # Deleting an image uploaded before the subscription was created does still decrease the counter.
-            image = Image.objects_including_wip.all().order_by('-pk')[1]  # Second last element
-            image.uploaded = image.uploaded - datetime.timedelta(days=1)
-            image.save(keep_deleted=True)
-            image.delete()
-            profile = UserProfile.objects.get(pk=profile.pk)
-            self.assertEqual(profile.premium_counter, settings.PREMIUM_MAX_IMAGES_PREMIUM_2020 - 2)
+        # Deleting an image uploaded before the subscription was created does still decrease the counter.
+        image = Image.objects_including_wip.all().order_by('-pk')[1]  # Second last element
+        image.uploaded = image.uploaded - datetime.timedelta(days=1)
+        image.save(keep_deleted=True)
+        image.delete()
+        profile = UserProfile.objects.get(pk=profile.pk)
+        self.assertEqual(profile.premium_counter, 0)
 
         usersub.delete()
 
