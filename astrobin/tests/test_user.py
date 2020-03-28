@@ -904,7 +904,7 @@ class UserTest(TestCase):
             formats.date_format(us.expires, "SHORT_DATE_FORMAT") +
             "</strong>",
             html=True)
-        self.assertContains(response, "<strong data-test='images-used'>0 / 123</strong>", html=True)
+        self.assertContains(response, "<strong data-test='images-used'>0 / &infin;</strong>", html=True)
 
         self.client.logout()
         us.delete()

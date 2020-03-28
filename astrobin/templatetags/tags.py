@@ -250,8 +250,10 @@ def show_ads(user):
     if is_donor(user) and not user.userprofile.allow_astronomy_ads:
         return False
 
-    if (is_lite(user) or is_premium(user) or is_premium_2020(user) or is_ultimate_2020(user)) and \
-            not user.userprofile.allow_astronomy_ads:
+    if is_lite(user) or is_premium(user):
+        return False
+
+    if (is_premium_2020(user) or is_ultimate_2020(user)) and not user.userprofile.allow_astronomy_ads:
         return False
 
     return True
