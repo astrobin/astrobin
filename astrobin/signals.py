@@ -20,14 +20,13 @@ from safedelete.signals import post_softdelete
 from subscription.models import UserSubscription
 from subscription.signals import subscribed, paid, signed_up
 from threaded_messages.models import Thread
-from toggleproperties.models import ToggleProperty
 
 from astrobin_apps_groups.models import Group
 from astrobin_apps_notifications.utils import push_notification
 from astrobin_apps_platesolving.models import Solution
 from astrobin_apps_platesolving.solver import Solver
 from astrobin_apps_premium.templatetags.astrobin_apps_premium_tags import (
-    is_lite, is_any_premium_subscription)
+    is_lite, is_any_premium_subscription, is_lite_2020, is_any_ultimate, is_premium_2020, is_premium)
 from astrobin_apps_premium.utils import premium_get_valid_usersubscription
 from nested_comments.models import NestedComment
 from rawdata.models import (
@@ -35,6 +34,7 @@ from rawdata.models import (
     PublicDataPool,
     RawImage,
 )
+from toggleproperties.models import ToggleProperty
 from .gear import get_correct_gear
 from .models import Image, ImageRevision, Gear, UserProfile
 from .stories import add_story
@@ -126,6 +126,11 @@ def image_post_delete(sender, instance, **kwargs):
             dt = instance.uploaded.date() - usersub_created
             if dt.days >= 0:
                 decrease_counter(instance.user)
+        elif is_lite_2020(instance.user) or \
+                is_premium(instance.user) or \
+                is_premium_2020(instance.user) or \
+                is_any_ultimate(instance.user):
+            decrease_counter(instance.user)
     except IntegrityError:
         # Possibly the user is being deleted
         pass
