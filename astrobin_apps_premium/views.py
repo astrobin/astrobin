@@ -167,25 +167,27 @@ class DataLossCompensationRequestView(CreateView):
             expires = date.today()
 
             if created:
+                log.debug("UserSubscription %d created" % user_subscription.pk)
+
                 premium_user_subscription.active = False
                 premium_user_subscription.unsubscribe()
                 premium_user_subscription.save()
-
-                if requested_compensation == '1_MO_ULTIMATE':
-                    expires += timedelta(days=30)
-                if requested_compensation == '3_MO_ULTIMATE':
-                    expires += timedelta(days=90)
-                elif requested_compensation == '6_MO_ULTIMATE':
-                    expires += timedelta(days=180)
-
-                user_subscription.active = True
-                user_subscription.expires = expires
-                user_subscription.cancelled = True
-                user_subscription.subscribe()
-                user_subscription.save()
-                log.debug("UserSubscription %d created" % user_subscription.pk)
             else:
-                log.warning("UserSubscription %d already exists" % user_subscription.pk)
+                log.debug("UserSubscription %d already exists" % user_subscription.pk)
 
+                expires = user_subscription.expires
+
+            if requested_compensation == '1_MO_ULTIMATE':
+                expires += timedelta(days=30)
+            if requested_compensation == '3_MO_ULTIMATE':
+                expires += timedelta(days=90)
+            elif requested_compensation == '6_MO_ULTIMATE':
+                expires += timedelta(days=180)
+
+            user_subscription.active = True
+            user_subscription.expires = expires
+            user_subscription.cancelled = True
+            user_subscription.subscribe()
+            user_subscription.save()
 
         return super(DataLossCompensationRequestView, self).form_valid(form)

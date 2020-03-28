@@ -307,11 +307,11 @@ class BroadcastEmailAdmin(admin.ModelAdmin):
         self.submit_email(request, obj, recipients)
 
     def submit_february_2020_data_loss_ultimate_upgrade(self, request, obj):
-        recipients = User.objects \
-            .filter(
+        recipients = User.objects.filter(
             Q(usersubscription__subscription__name__in=("AstroBin Premium", 'AstroBin Premium (autorenew)')),
             Q(usersubscription__active=True),
             Q(usersubscription__expires__gte=date(2020, 2, 15)) & ~Q(usersubscription__expires=date(2021, 2, 20))) \
+            .exclude(usersubscription__subscription__name="AstroBin Ultimate 2020+") \
             .values_list('email', flat=True)
         self.submit_email(request, obj, recipients)
 
