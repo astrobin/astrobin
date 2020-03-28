@@ -14,14 +14,21 @@ log = logging.getLogger('apps')
 
 class Solver(AbstractPlateSolvingBackend):
     def start(self, image_url, **kwargs):
-        smallSizeRatio = thumbnail_scale(kwargs.pop('image_width'), 'hd', 'regular')
+        image_width = kwargs.pop('image_width')  # type: int
+        smallSizeRatio = thumbnail_scale(image_width, 'hd', 'regular')  # type: float
+        pixscale = kwargs.pop('pixscale')  # type: float
+        hd_width = settings.THUMBNAIL_ALIASES['']['hd']['size'][0]  # type: int
+
+        if image_width > hd_width:
+            ratio = image_width / float(hd_width)
+            pixscale = float(pixscale) * ratio
 
         task_params = [
             'imageURL=%s' % image_url,
             'centerRA=%f' % kwargs.pop('ra'),
             'centerDec=%f' % kwargs.pop('dec'),
             'smallSizeRatio=%f' % smallSizeRatio,
-            'imageResolution=%f' % kwargs.pop('pixscale'),
+            'imageResolution=%f' % pixscale,
             'fontsBaseURL=%s' % settings.STATIC_URL + 'astrobin/fonts',
         ]
 
