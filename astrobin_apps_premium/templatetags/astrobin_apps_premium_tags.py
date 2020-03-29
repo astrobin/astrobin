@@ -146,20 +146,11 @@ def can_view_full_technical_card(user):
 
 @register.filter
 def can_view_technical_card_item(user, item):
-    # allowed_items = [
-    #     "Imaging telescope or lens",
-    #     "Imaging camera",
-    #     "Resolution"
-    # ]
-    #
-    # if is_free(user) and item[0] not in allowed_items:
-    #     return False
-    #
-    # if item[1] is None:
-    #     return False
-    #
-    # if isinstance(item[1], QuerySet):
-    #     return len(item[1]) > 0
+    if item[1] is None:
+        return False
+
+    if isinstance(item[1], QuerySet):
+        return len(item[1]) > 0
 
     return True
 
