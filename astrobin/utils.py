@@ -252,6 +252,9 @@ def decimal_to_degrees_minutes_seconds(value, degree_symbol="°", minute_symbol=
 
 
 def degrees_minutes_seconds_to_decimal_degrees(degrees, minutes, seconds, direction):
+    if seconds is None:
+        seconds = 0
+
     dd = float(degrees) + float(minutes) / 60 + float(seconds) / (60 * 60);
 
     if direction == 'E' or direction == 'N':
