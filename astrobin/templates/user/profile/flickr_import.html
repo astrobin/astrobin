@@ -22,7 +22,7 @@
             {% if READONLY_MODE %}
                 {% include 'readonly_mode.html' %}
             {% else %}
-                {% if request.user|is_premium or request.user.is_superuser %}
+                {% if request.user|is_any_premium or request.user|is_any_ultimate %}
                     {% if readonly %}
                         <div class="alert alert-error">
                             {% blocktrans trimmed %}AstroBin is currently in read-only mode, because of server maintenance.
@@ -73,7 +73,7 @@
                             <i class="icon-warning-sign"></i>
                             {% trans "Warning!" %}
                         </h4>
-                        {% trans "Sorry, but importing from Flickr is reserved to AstroBin Premium users." %}
+                        {% trans "Sorry, but importing from Flickr is reserved to AstroBin Premium and Ultimate users." %}
                         <a href="{% url 'subscription_list' %}">
                             {% trans "Would you like to upgrade?" %}
                         </a>
