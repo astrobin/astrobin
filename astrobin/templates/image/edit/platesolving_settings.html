@@ -16,7 +16,11 @@
 {% block content %}
     <h1>{% trans "Plate-solving settings" %}</h1>
 
-    <form id="platesolving-settings" class="form-horizontal" action="" method="post">{% csrf_token %}
+    <form
+            id="platesolving-settings"
+            class="form-horizontal"
+            action="{% url 'image_edit_platesolving_settings' image.get_id revision_label %}"
+            method="post">{% csrf_token %}
         {{form|as_bootstrap}}
 
         <div class="form-actions">
