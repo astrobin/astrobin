@@ -27,7 +27,7 @@
                     <div class="gear">
                         <div class="gear-inner">
                             {% for i in gear_list %}
-                                {% if request.user|can_view_technical_card_item:i or request.user == image.user %}
+                                {% if request.user|can_view_technical_card_item:i %}
                                     <p>
                                         <strong class="card-label">{% trans i.0 %}:</strong>
                                         {% for g in i.1 %}
@@ -44,7 +44,7 @@
                         </div>
                     </div>
 
-                    {% if request.user|can_view_full_technical_card or request.user == image.user %}
+                    {% if request.user|can_view_full_technical_card %}
                         <hr />
                     {% endif %}
                 {% endif %}
@@ -52,7 +52,7 @@
                 <div class="acquisition">
                     <div class="acquisition-inner">
                         {% for data in basic_data %}
-                            {% if request.user|can_view_technical_card_item:data or request.user == image.user %}
+                            {% if request.user|can_view_technical_card_item:data %}
                                 <p>
                                     <strong class="card-label">{{ data.0 }}:</strong> {{ data.1|safe|linebreaksbr }}
                                 </p>
@@ -61,7 +61,7 @@
 
                         {% if image_type == 'deep_sky' %}
                             {% for data in deep_sky_data %}
-                                {% if request.user|can_view_technical_card_item:data or request.user == image.user %}
+                                {% if request.user|can_view_technical_card_item:data %}
                                     <p>
                                         <strong class="card-label">{{ data.0 }}:</strong>
                                         {% if data.0 == dates_label %}
@@ -76,7 +76,7 @@
                                 {% endif %}
                             {% endfor %}
                         {% else %}
-                            {% if request.user|can_view_full_technical_card or request.user == image.user %}
+                            {% if request.user|can_view_full_technical_card %}
                                 {% if ssa.date %}
                                     <p><strong class="card-label">{% trans "Date" %}:</strong> <a
                                             href="/search/{% query_string "q=, start_date=ssa.date, end_date=ssa.date" "plate_solving_started, r, mod" %}">{{ ssa.date|date:"DATE_FORMAT" }}</a>
