@@ -18,7 +18,7 @@ from django.core.paginator import Paginator, InvalidPage
 from django.core.urlresolvers import reverse
 from django.db.models import Q
 from django.forms.models import inlineformset_factory
-from django.http import Http404, HttpResponse, HttpResponseNotAllowed
+from django.http import Http404, HttpResponse
 from django.http import HttpResponseForbidden
 from django.http import HttpResponseRedirect
 from django.shortcuts import get_object_or_404
@@ -54,13 +54,13 @@ from astrobin.models import Image, UserProfile, CommercialGear, Gear, Location, 
 from astrobin.shortcuts import ajax_response, ajax_success, ajax_fail
 from astrobin.utils import user_is_producer, user_is_retailer, to_user_timezone, base26_encode, base26_decode
 from astrobin_apps_notifications.utils import push_notification
-from astrobin_apps_users.services import UserService
-from toggleproperties.models import ToggleProperty
 from astrobin_apps_platesolving.forms import PlateSolvingSettingsForm, PlateSolvingAdvancedSettingsForm
 from astrobin_apps_platesolving.models import PlateSolvingSettings, Solution, PlateSolvingAdvancedSettings
 from astrobin_apps_premium.templatetags.astrobin_apps_premium_tags import can_restore_from_trash, \
     can_perform_advanced_platesolving
 from astrobin_apps_premium.utils import premium_get_max_allowed_image_size, premium_get_max_allowed_revisions
+from astrobin_apps_users.services import UserService
+from toggleproperties.models import ToggleProperty
 
 
 def get_image_or_404(queryset, id):
@@ -766,6 +766,7 @@ def image_edit_platesolving_settings(request, id, revision_label):
         return render(request, 'image/edit/platesolving_settings.html', {
             'form': form,
             'image': image,
+            'revision_label': revision_label,
             'return_url': return_url,
         })
 
@@ -778,6 +779,7 @@ def image_edit_platesolving_settings(request, id, revision_label):
             return render(request, 'image/edit/platesolving_settings.html', {
                 'form': form,
                 'image': image,
+                'revision_label': revision_label,
                 'return_url': return_url,
             })
 
@@ -824,6 +826,7 @@ def image_edit_platesolving_advanced_settings(request, id, revision_label):
         return render(request, 'image/edit/platesolving_advanced_settings.html', {
             'form': form,
             'image': image,
+            'revision_label': revision_label,
             'return_url': return_url,
         })
 
@@ -836,6 +839,7 @@ def image_edit_platesolving_advanced_settings(request, id, revision_label):
             return render(request, 'image/edit/platesolving_advanced_settings.html', {
                 'form': form,
                 'image': image,
+                'revision_label': revision_label,
                 'return_url': return_url,
             })
 
