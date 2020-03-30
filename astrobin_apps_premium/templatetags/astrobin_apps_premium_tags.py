@@ -146,7 +146,7 @@ def can_view_full_technical_card(user):
 
 @register.filter
 def can_view_technical_card_item(user, item):
-    if item[1] is None:
+    if not item[1]:
         return False
 
     if isinstance(item[1], QuerySet):

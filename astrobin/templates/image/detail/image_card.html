@@ -51,14 +51,6 @@
 
                 <div class="acquisition">
                     <div class="acquisition-inner">
-                        {% for data in basic_data %}
-                            {% if request.user|can_view_technical_card_item:data %}
-                                <p>
-                                    <strong class="card-label">{{ data.0 }}:</strong> {{ data.1|safe|linebreaksbr }}
-                                </p>
-                            {% endif %}
-                        {% endfor %}
-
                         {% if image_type == 'deep_sky' %}
                             {% for data in deep_sky_data %}
                                 {% if request.user|can_view_technical_card_item:data %}
@@ -216,6 +208,10 @@
 
                 {% if request.user|can_view_full_technical_card or request.user == image.user %}
                     <hr />
+                {% endif %}
+
+                {% if resolution %}
+                    <p><strong class="card-label">{% trans "Resolution" %}:</strong> {{ resolution }}</p>
                 {% endif %}
 
                 {% if locations %}
