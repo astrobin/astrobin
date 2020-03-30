@@ -65,7 +65,7 @@ from astrobin_apps_iotd.models import Iotd
 from astrobin_apps_notifications.utils import push_notification
 from astrobin_apps_platesolving.models import Solution
 from astrobin_apps_platesolving.services import SolutionService
-from astrobin_apps_premium.templatetags.astrobin_apps_premium_tags import can_see_real_resolution
+from astrobin_apps_premium.templatetags.astrobin_apps_premium_tags import can_see_real_resolution, is_any_ultimate
 from nested_comments.models import NestedComment
 from rawdata.forms import (
     PublicDataPool_SelectExistingForm,
@@ -807,12 +807,12 @@ class ImageFullView(ImageDetailView):
 
         return super(ImageFullView, self).dispatch(request, *args, **kwargs)
 
-    # TODO: this function needs to be rewritten
     def get_context_data(self, **kwargs):
         context = super(ImageFullView, self).get_context_data(**kwargs)
 
         mod = self.request.GET.get('mod')
-        real = 'real' in self.request.GET and can_see_real_resolution(self.request.user)
+        real = 'real' in self.request.GET and \
+               (can_see_real_resolution(self.request.user) or is_any_ultimate(self.object.user))
         if real:
             alias = 'real'
         else:
