@@ -113,7 +113,7 @@ class SolveAdvancedView(base.View):
                     image = target.image
 
                 acquisitions = DeepSky_Acquisition.objects.filter(image=image)
-                if acquisitions.count() > 0:
+                if acquisitions.count() > 0 and acquisitions[0].date:
                     observation_time = acquisitions[0].date.isoformat()
 
                 locations = image.locations.all()
@@ -136,8 +136,8 @@ class SolveAdvancedView(base.View):
                 solution.status = Solver.ADVANCED_PENDING
                 solution.pixinsight_serial_number = submission
                 solution.save()
-            except Exception, e:
-                log.error(e)
+            except Exception as e:
+                log.error("Error during advanced plate-solving: %s" % e.message)
                 solution.status = Solver.MISSING
                 solution.submission_id = None
                 solution.save()
