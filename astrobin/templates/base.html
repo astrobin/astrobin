@@ -48,7 +48,7 @@
         {% block extrahead %}{% endblock %}
     </head>
 
-    <body data-offset="55">
+    <body id="{% block page_body_id %}none{% endblock %}" data-offset="55">
         {% cookielaw_banner %}
 
         <div class="navbar navbar-fixed-top">

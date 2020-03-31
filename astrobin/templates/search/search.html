@@ -20,6 +20,8 @@
     {% breadcrumb 'Search' None %}
 {% endblock %}
 
+{% block page_body_id %}search{% endblock %}
+
 {% block content %}
 
     <a class="anchor" name="page_anchor"></a>
@@ -31,13 +33,13 @@
 
                     {% if request.user|can_access_advanced_search %}
                         <a class="dropdown-toggle" data-toggle="dropdown" href="#">
-                            <i class="icon-sort icon-white"></i>
-                            {% trans "Sort" %}
-                            <span class="caret"></span>
+                        <i class="icon-sort icon-white"></i>
+                        {% trans "Sort" %}
+                        <span class="caret"></span>
                     {% else %}
                         <a data-toggle="modal" href="#feature-restricted-modal">
-                            <i class="icon-sort icon-white"></i>
-                            {% trans "Sort" %}
+                        <i class="icon-sort icon-white"></i>
+                        {% trans "Sort" %}
                     {% endif %}
                     </a>
                     <ul class="dropdown-menu">
@@ -110,6 +112,17 @@
             </ul> <!-- nav -->
         </div> <!-- subnav -->
     {% endif %}
+
+    {% if not request.user|can_access_advanced_search %}
+        <form action="{% url 'haystack_search' %}" method="get">
+            <input type="text"
+                   name="q"
+                   class="main-search-input"
+                   value="{{ request.GET.q }}"
+                   placeholder="{% trans "Search for celestial objects, equipment items, users, etc..." %}" />
+        </form>
+    {% endif %}
+
 
     <div id="search-app"></div>
 
