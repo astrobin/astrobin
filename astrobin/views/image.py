@@ -479,11 +479,6 @@ class ImageDetailView(ImageDetailViewBase):
         elif ssa:
             image_type = 'solar_system'
 
-        # Data that's common to both DS and SS images
-        basic_data = (
-            (_('Resolution'), '%dx%d' % (w, h) if (w and h) else None),
-        )
-
         profile = None
         if self.request.user.is_authenticated():
             profile = self.request.user.userprofile
@@ -708,7 +703,6 @@ class ImageDetailView(ImageDetailViewBase):
             'gear_list_has_paid_commercial': gear_list_has_paid_commercial,
             'image_type': image_type,
             'ssa': ssa,
-            'basic_data': basic_data,
             'deep_sky_data': deep_sky_data,
             'private_message_form': PrivateMessageForm(),
             'upload_revision_form': ImageRevisionUploadForm(),
@@ -721,6 +715,7 @@ class ImageDetailView(ImageDetailViewBase):
                 0] if image.subject_type else 0,
             'license_icon': static('astrobin/icons/%s' % licenses[image.license][1]),
             'license_title': licenses[image.license][2],
+            'resolution': '%dx%d' % (w, h) if (w and h) else None,
             'locations': locations,
             # Because of a regression introduced at
             # revision e1dad12babe5, now we have to
