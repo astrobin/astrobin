@@ -239,17 +239,17 @@ class AstroBinSearchForm(SearchForm):
         if subject_type == "deep_sky":
             results = results.filter(subject_type=100)
         elif subject_type == "solar_system":
-            results = results.filter(subjec_type=200)
+            results = results.filter(subject_type=200)
         elif subject_type == "wide":
-            results = results.filter(subjec_type=300)
+            results = results.filter(subject_type=300)
         elif subject_type == "trails":
-            results = results.filter(subjec_type=400)
+            results = results.filter(subject_type=400)
         elif subject_type == "aurora":
-            results = results.filter(subjec_type=450)
+            results = results.filter(subject_type=450)
         elif subject_type == "gear":
-            results = results.filter(subjec_type=500)
+            results = results.filter(subject_type=500)
         elif subject_type == "other":
-            results = results.filter(subjec_type=600)
+            results = results.filter(subject_type=600)
         elif subject_type == "sun":
             results = results.filter(solar_system_main_subject=0)
         elif subject_type == "moon":
