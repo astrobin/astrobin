@@ -1,0 +1,92 @@
+body#search {
+
+  .main-search-input {
+    width: calc(100% - 34px);
+    color: #bbb;
+    padding: 16px;
+  }
+
+  .search-filters-app {
+    position: relative;
+    margin-bottom: 30px;
+    z-index: 2;
+
+    .search-filter {
+      display: inline-block;
+      border: 1px dashed #494949;
+      padding: 15px;
+      margin: 0 10px 10px 0;
+      position: relative;
+      vertical-align: top;
+
+      .search-filter-remove {
+        color: #848484;
+        position: absolute;
+        right: 0;
+        top: 0;
+        padding: 4px 8px;
+        cursor: pointer;
+
+        &:hover {
+          color: white;
+        }
+      }
+
+      .search-filter-title {
+        color: white;
+        background: #111;
+        padding: 4px 30px 4px 8px;
+        margin: -15px -15px 12px -15px;
+      }
+
+      .form-group {
+        height: 30px;
+        display: table-cell;
+        vertical-align: middle;
+
+        &.highlighted {
+          animation: pop-in 0.3s cubic-bezier(.36, .07, .19, .97) both;
+        }
+      }
+
+      input, select {
+        margin: 0;
+        width: initial;
+      }
+
+      input[type="checkbox"] {
+        margin-right: 4px;
+      }
+
+      .slider-filter {
+        width: 150px;
+        padding: 0 8px;
+
+        &#field-radius-slider {
+          @media screen and (min-width: 481px) {
+            // This must be quite large because otherwise it's too difficult to set finely.
+            width: 300px;
+          }
+        }
+      }
+
+      @media screen and (max-width: 480px) {
+        display: block;
+
+        .form-group {
+          display: block;
+          height: auto;
+        }
+
+        input:not([type='checkbox']), .slider-filter {
+          width: 100%;
+        }
+
+        input[type='text'] {
+          width: calc(100% - 14px);
+        }
+      }
+    }
+  }
+
+}

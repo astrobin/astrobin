@@ -5,7 +5,8 @@
            id="q"
            type="text"
            name="q"
-           value="{% trans "Quick search" %}"
+           value="{{ request.GET.q }}"
+           placeholder="{% trans "Quick search" %}"
            onfocus="astrobin_common.clearText(this)"
            onblur="astrobin_common.clearText(this)"/>
 </form>
