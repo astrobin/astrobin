@@ -83,6 +83,8 @@ class Solver(AbstractPlateSolvingBackend):
                 layers.append('GCVS')
             if advanced_settings.show_tycho_2:
                 layers.append('TYCHO-2')
+            if advanced_settings.show_cgpn:
+                layers.append('CGPN')
 
             if advanced_settings.scaled_font_size == 'S':
                 task_params.append('smallSizeTextRatio=%f' % .66)
