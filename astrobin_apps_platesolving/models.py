@@ -199,6 +199,13 @@ class PlateSolvingAdvancedSettings(models.Model):
             '<a href="https://wikipedia.org/wiki/Tycho-2_Catalogue" target="_blank">https://wikipedia.org/wiki/Tycho-2_Catalogue</a>'),
     )
 
+    show_cgpn = models.BooleanField(
+        default=True,
+        verbose_name=_("Show CGPN objects"),
+        help_text=mark_safe(
+            '<a href="https://ui.adsabs.harvard.edu/abs/2001A%26A...378..843K/abstract">Catalogue of Galactic Planetary Nebulae</a>'),
+    )
+
 
 class PlateSolvingAdvancedTask(models.Model):
     serial_number = models.CharField(
