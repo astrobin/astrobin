@@ -128,10 +128,17 @@ class SolveAdvancedView(base.View):
                     altitude = location.altitude
 
                 submission = solver.solve(
-                    url, ra=solution.ra, dec=solution.dec,
-                    pixscale=solution.pixscale, observation_time=observation_time,
-                    latitude=latitude, longitude=longitude, altitude=altitude,
-                    advanced_settings=solution.advanced_settings, image_width=image.w)
+                    url,
+                    ra=solution.ra,
+                    dec=solution.dec,
+                    pixscale=solution.pixscale,
+                    observation_time=observation_time,
+                    latitude=latitude,
+                    longitude=longitude,
+                    altitude=altitude,
+                    advanced_settings=solution.advanced_settings,
+                    image_width=target.w,
+                    image_height=target.h)
 
                 solution.status = Solver.ADVANCED_PENDING
                 solution.pixinsight_serial_number = submission

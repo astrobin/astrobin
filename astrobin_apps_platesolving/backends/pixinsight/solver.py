@@ -15,18 +15,22 @@ log = logging.getLogger('apps')
 class Solver(AbstractPlateSolvingBackend):
     def start(self, image_url, **kwargs):
         image_width = kwargs.pop('image_width')  # type: int
+        image_height = kwargs.pop('image_height')  # type: int
         smallSizeRatio = thumbnail_scale(image_width, 'hd', 'regular')  # type: float
         pixscale = kwargs.pop('pixscale')  # type: float
-        hd_width = settings.THUMBNAIL_ALIASES['']['hd']['size'][0]  # type: int
+        hd_width = min(image_width, settings.THUMBNAIL_ALIASES['']['hd']['size'][0])  # type: int
+        hd_ratio = max(1, image_width / float(hd_width))  # type: float
+        hd_height = int(image_height / hd_ratio)  # type: int
 
-        if image_width > hd_width:
-            ratio = image_width / float(hd_width)
+        if image_width > settings.THUMBNAIL_ALIASES['']['hd']['size'][0]:
+            ratio = image_width / float(settings.THUMBNAIL_ALIASES['']['hd']['size'][0])
             pixscale = float(pixscale) * ratio
 
         task_params = [
             'imageURL=%s' % image_url,
             'centerRA=%f' % kwargs.pop('ra'),
             'centerDec=%f' % kwargs.pop('dec'),
+            'largeSize=%d' % max(hd_width, hd_height),
             'smallSizeRatio=%f' % smallSizeRatio,
             'imageResolution=%f' % pixscale,
             'fontsBaseURL=%s' % settings.STATIC_URL + 'astrobin/fonts',
