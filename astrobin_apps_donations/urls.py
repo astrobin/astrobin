@@ -1,7 +1,7 @@
 from django.conf.urls import url, include
 from django.contrib.auth.decorators import login_required
+from django.urls import reverse_lazy
 from django.views.generic import RedirectView
-
 from astrobin_apps_donations.views import CancelView, SuccessView, EditView, DonateView
 
 urlpatterns = (
@@ -25,5 +25,8 @@ urlpatterns = (
         login_required(EditView.as_view()),
         name='astrobin_apps_donations.edit'),
 
-    url(r'^paypal/$', RedirectView.as_view(url='/paypal'), name='paypal-ipn-legacy-redirect'),
+    url(
+        r'^paypal/$',
+        RedirectView.as_view(url=reverse_lazy('paypal-ipn')),
+        name='paypal-ipn-legacy-redirect'),
 )

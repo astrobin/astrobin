@@ -16,12 +16,12 @@
     <input type="hidden" name="no_note" value="1">
     <input type="hidden" name="no_shipping" value="1">
     <input type="hidden" name="rm" value="1">
-    <input type="hidden" name="return" value="{{ base_url }}/donations/success/">
-    <input type="hidden" name="cancel_return" value="{{ base_url }}/donations/cancel/">
+    <input type="hidden" name="return" value="{{ request.scheme }}://{{ request.META.HTTP_HOST }}{% url 'astrobin_apps_donations.success' %}">
+    <input type="hidden" name="cancel_return" value="{{ request.scheme }}://{{ request.META.HTTP_HOST }}{% url 'astrobin_apps_donations.cancel' %}">
     <input type="hidden" name="src" value="1">
     <input type="hidden" name="currency_code" value="CHF">
     <input type="hidden" name="bn" value="PP-SubscriptionsBF:btn_subscribe_LG.gif:NonHosted">
-    <input type="hidden" name="notify_url" value="{{ base_url }}/subscriptions/paypal/">
+    <input type="hidden" name="notify_url" value="{{ request.scheme }}://{{ request.META.HTTP_HOST }}{% url 'paypal-ipn' %}">
     <input type="hidden" name="custom" value="{{ request.user.id }}" />
 
     {% if not request.user|is_donor %}
