@@ -1,3 +1,5 @@
+import logging
+
 import persistent_messages
 from django.conf import settings
 from django.core.mail import send_mail
@@ -9,6 +11,8 @@ from django_bouncy.models import Bounce, Complaint
 from gadjo.requestprovider.signals import get_request
 from notification.backends import BaseBackend
 from notification.backends.email import EmailBackend as BaseEmailBackend
+
+log = logging.getLogger('apps')
 
 
 class PersistentMessagesBackend(BaseBackend):
@@ -87,3 +91,5 @@ class EmailBackend(BaseEmailBackend):
             settings.DEFAULT_FROM_EMAIL,
             [recipient.email],
             html_message=html_body)
+
+        log.debug("Email sent to %s: %s" % (recipient.email, subject))
