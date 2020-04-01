@@ -7,7 +7,6 @@ from subscription.models import Subscription
 
 def _context():
     return {
-        'base_url': settings.BASE_URL,
         'business': settings.SUBSCRIPTION_PAYPAL_SETTINGS['business'],
 
         'monthly_bronze_sub': get_object_or_None(Subscription, name='AstroBin Donor Bronze Monthly'),
