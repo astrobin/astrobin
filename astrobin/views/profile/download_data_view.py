@@ -26,7 +26,7 @@ class DownloadDataView(LoginRequiredMixin, UserPassesTestMixin, CreateView):
 
         messages.success(
             self.request,
-            _("AstroBin is preparing your data for download. Please check this page again in a while: the more images"
+            _("AstroBin is preparing your data for download. Please check this page again in a while: the more images "
               "you have, the more time it will take."))
         prepare_download_data_archive.apply_async(queue="default", args=(self.object.id,))
 
