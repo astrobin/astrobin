@@ -5,7 +5,6 @@ from braces.views import (
     JSONResponseMixin,
     LoginRequiredMixin)
 from django.conf import settings
-from django.contrib.auth.models import Group
 from django.core.exceptions import ValidationError
 from django.http import HttpResponseForbidden
 from django.shortcuts import get_object_or_404, render
@@ -42,7 +41,6 @@ class IotdSubmissionQueueView(
 
     def get_queryset(self):
         days = settings.IOTD_SUBMISSION_WINDOW_DAYS
-        judges = Group.objects.get(name='iotd_judges').user_set.all()
         image_groups = []
 
         def can_add(image):
@@ -52,9 +50,8 @@ class IotdSubmissionQueueView(
             user_has_rights = not is_free(image.user)  # type: bool
 
             already_iotd = Iotd.objects.filter(image=x, date__lte=datetime.now().date()).exists()  # type: bool
-            user_is_judge = x.user in judges  # type: bool
 
-            return user_has_rights and not (already_iotd or user_is_judge)
+            return user_has_rights and not already_iotd
 
         for date in (datetime.now().date() - timedelta(n) for n in range(days)):
             image_groups.append({
@@ -110,14 +107,13 @@ class IotdReviewQueueView(
     def get_queryset(self):
         days = settings.IOTD_REVIEW_WINDOW_DAYS
         cutoff = datetime.now() - timedelta(days)
-        judges = Group.objects.get(name='iotd_judges').user_set.all()
         return sorted(list(set([
             x.image
             for x in self.model.objects.filter(date__gte=cutoff)
             if not Iotd.objects.filter(
                 image=x.image,
                 date__lte=datetime.now().date()).exists()
-               and not x.image.user in judges])), key=lambda x: x.published, reverse=True)
+        ])), key=lambda x: x.published, reverse=True)
 
 
 class IotdToggleVoteAjaxView(
@@ -159,14 +155,13 @@ class IotdJudgementQueueView(
     def get_queryset(self):
         days = settings.IOTD_JUDGEMENT_WINDOW_DAYS
         cutoff = datetime.now() - timedelta(days)
-        judges = Group.objects.get(name='iotd_judges').user_set.all()
         return sorted(list(set([
             x.image
             for x in self.model.objects.filter(date__gte=cutoff)
             if not Iotd.objects.filter(
                 image=x.image,
                 date__lte=datetime.now().date()).exists()
-               and not x.image.user in judges])), key=lambda x: x.published, reverse=True)
+        ])), key=lambda x: x.published, reverse=True)
 
 
 class IotdToggleJudgementAjaxView(
