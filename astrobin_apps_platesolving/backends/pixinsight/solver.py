@@ -24,7 +24,7 @@ class Solver(AbstractPlateSolvingBackend):
         hd_height = int(image_height / hd_ratio)  # type: int
         settings_hd_width = settings.THUMBNAIL_ALIASES['']['hd']['size'][0]
 
-        if image_width > settings_hd_width and not advanced_settings.sample_raw_frame_file:
+        if image_width > settings_hd_width and advanced_settings and not advanced_settings.sample_raw_frame_file:
             ratio = image_width / float(settings_hd_width)
             pixscale = float(pixscale) * ratio
 

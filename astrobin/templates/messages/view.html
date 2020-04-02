@@ -5,8 +5,10 @@
 {% load django_bootstrap_breadcrumbs %}
 {% load astrobin_apps_users_tags %}
 {% load staticfiles %}
+{% load common_tags %}
 
-{% block title %}{{thread.subject}}{% endblock %}
+
+{% block title %}{{ thread.subject }}{% endblock %}
 {% block container_extra_classes %}has-subnav{% endblock %}
 
 {% block breadcrumbs %}
@@ -56,11 +58,17 @@
         {% if READONLY_MODE %}
             {% include 'readonly_mode.html' %}
         {% else %}
-            <form class="reply-form form-vertical" method="POST" action="{% url 'message_reply' thread.pk %}" novalidate>{% csrf_token %}
+            <form class="reply-form form-vertical ajax" method="POST" action="{% url 'message_reply' thread.pk %}"
+                  novalidate>{% csrf_token %}
                 <a class="anchor" name="reply"></a>
                 {{ form|as_bootstrap }}
                 <div class="form-actions">
-                    <input type="submit" class="btn btn-primary btn-block-mobile" value="{% trans "Reply" %}"/>
+                    <button
+                            type="submit"
+                            class="btn btn-primary btn-block-mobile submit-button {% button_loading_class %}">
+                        <span class="text">{% trans "Reply" %}</span>
+                        {% button_loading_indicator %}
+                    </button>
                 </div>
             </form>
         {% endif %} {# READONLY #}
@@ -69,47 +77,41 @@
 
 {% block extra_js %}
     <script type="text/javascript">
-    $(document).ready(function(){
-        var textarea = $('#id_body');
-        textarea.wysibb({
-            buttons: "bold,italic,underline,|,img,link,|,bullist,numlist,|,code"
-        });
+        $(document).ready(function () {
+            var textarea = $('#id_body');
+            textarea.wysibb({
+                buttons: "bold,italic,underline,|,img,link,|,bullist,numlist,|,code"
+            });
 
-        $('.reply-form').ajaxForm({
-            resetForm: true,
-            timeout: 5000,
-            beforeSubmit: function () {
-                if ($('.reply-form #id_body').val() != '') {
-                    $('.reply-form .submit-button')
-                        .attr('disabled', 'disabled')
-                        .addClass('btn-disabled')
-                        .val("{% trans "Sending..." %}");
-                }
-            },
-            success: function(data) {
-                var $new_message = $(data);
-                var $container = $('<div/>').addClass('message-container own');
+            $('.reply-form').ajaxForm({
+                resetForm: true,
+                timeout: 5000,
+                beforeSubmit: function () {
+                    if ($('.reply-form #id_body').val() != '') {
+                        $('.reply-form .submit-button')
+                            .attr('disabled', 'disabled')
+                            .addClass('btn-disabled')
+                            .addClass('running');
+                        $('.reply-form .submit-button .text')
+                            .text("{% trans "Sending..." %}");
+                    }
+                },
+                success: function (data) {
+                    var $new_message = $(data);
+                    var $container = $('<div/>').addClass('message-container own');
 
-                $container.append($new_message);
-                $('.message-list').append($container);
-                $('.wysibb-body').text('');
+                    $container.append($new_message);
+                    $('.message-list').append($container);
+                    $('.wysibb-body').text('');
 
-                $('.reply-form .submit-button')
-                    .removeAttr('disabled')
-                    .removeClass('btn-disabled')
-                    .val("{% trans "Reply" %}");
-            },
-            error: function(data) {
-                if (data.status == 400) {
-                    // Invalid form, do nothing, as it was surely empty.
-                } else if (data.status == 500) {
                     $('.reply-form .submit-button')
                         .removeAttr('disabled')
-                        .removeClass('button-disabled')
-                        .val("{% trans "Error. Try again!" %}");
+                        .removeClass('btn-disabled')
+                        .removeClass('running');
+                    $('.reply-form .submit-button .text')
+                        .text("{% trans "Reply" %}");
                 }
-            }
+            })
         })
-    })
     </script>
 {% endblock %}

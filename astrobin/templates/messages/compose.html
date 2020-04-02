@@ -4,6 +4,7 @@
 {% load bootstrap_toolkit %}
 {% load django_bootstrap_breadcrumbs %}
 {% load staticfiles %}
+{% load common_tags %}
 
 {% block title %}{% trans "Compose message" %}{% endblock %}
 
@@ -20,7 +21,10 @@
         <form action="" method="post" class="form-horizontal" novalidate>{% csrf_token %}
             {{form|as_bootstrap }}
             <div class="form-actions">
-                <input class="btn btn-primary btn-block-mobile" type="submit" value="{% trans "Send" %} &raquo;"/>
+                <button class="btn btn-primary btn-block-mobile {% button_loading_class %}" type="submit">
+                    {% trans "Send" %}
+                    {% button_loading_indicator %}
+                </button>
                 {% if 'next' in request.GET %}
                     <a class="btn btn-block-mobile" href="{{request.GET.next}}">{% trans "Cancel" %}</a>
                 {% endif %}
