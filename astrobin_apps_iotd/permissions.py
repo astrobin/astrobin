@@ -23,9 +23,6 @@ def may_toggle_submission_image(user, image):
     if image.user.userprofile.exclude_from_competitions:
         return False, _("This user has chosen to be excluded from competitions.")
 
-    if image.user in Group.objects.get(name='iotd_judges').user_set.all():
-        return False, _("You cannot submit a judge's image.")
-
     days = settings.IOTD_SUBMISSION_WINDOW_DAYS
     if image.published < datetime.now() - timedelta(days):
         return False, _("You cannot submit an image that was published more than %(max_days)s days ago.") % {
@@ -70,9 +67,6 @@ def may_toggle_vote_image(user, image):
 
     if image.user.userprofile.exclude_from_competitions:
         return False, _("This user has chosen to be excluded from competitions.")
-
-    if image.user in Group.objects.get(name='iotd_judges').user_set.all():
-        return False, _("You cannot vote for a judge's image.")
 
     # Import here to avoid circular dependency
     from astrobin_apps_iotd.models import IotdSubmission, IotdVote, Iotd
@@ -125,9 +119,6 @@ def may_elect_iotd(user, image):
 
     if image.user.userprofile.exclude_from_competitions:
         return False, _("This user has chosen to be excluded from competitions.")
-
-    if image.user in Group.objects.get(name='iotd_judges').user_set.all():
-        return False, _("You cannot elect a judge's image.")
 
     if settings.PREMIUM_RESTRICTS_IOTD:
         if is_free(image.user):
