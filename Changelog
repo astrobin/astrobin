@@ -1,3 +1,10 @@
+2020-04-02 Salvatore Iovene <salvatore@iovene.com>
+ * v1.57.0
+ * (donations) Fix PayPal URLs
+ * (plate-solving) Add support for `largeSize` to account for FITS larger than HD size
+ * (plate-solving) Fix revisions by using the correct width and height
+ * (plate-solving) Add support for the CGPN (catalogue of galactic planetary nebulae)
+
 2020-04-01 Salvatore Iovene <salvatore@iovene.com>
  * v1.56.17
  * (emails) Log every sent email
