@@ -29,7 +29,7 @@ from astrobin_apps_platesolving.models import PlateSolvingSettings
 from astrobin_apps_platesolving.models import Solution
 from astrobin_apps_platesolving.serializers import SolutionSerializer
 from astrobin_apps_platesolving.solver import Solver, AdvancedSolver, SolverBase
-from astrobin_apps_platesolving.utils import ThumbnailNotReadyException, get_target, get_solution
+from astrobin_apps_platesolving.utils import ThumbnailNotReadyException, get_target, get_solution, corrected_pixscale
 
 log = logging.getLogger('apps')
 
@@ -192,20 +192,7 @@ class SolutionFinalizeView(CsrfExemptMixin, base.View):
             solution.dec = "%.3f" % info['calibration']['dec']
             solution.orientation = "%.3f" % info['calibration']['orientation']
             solution.radius = "%.3f" % info['calibration']['radius']
-
-            # Get the images 'w' and adjust pixscale
-            if solution.content_object:
-                w = solution.content_object.w
-                pixscale = info['calibration']['pixscale']
-                if w and pixscale:
-                    hd_w = settings.THUMBNAIL_ALIASES['']['hd']['size'][0]
-                    if hd_w > w:
-                        hd_w = w
-                    ratio = hd_w / float(w)
-                    corrected_scale = float(pixscale) * ratio
-                    solution.pixscale = "%.3f" % corrected_scale
-                else:
-                    solution.pixscale = None
+            solution.pixscale = "%.3f" % corrected_pixscale(solution, info['calibration']['pixscale'])
 
             try:
                 target = solution.content_type.get_object_for_this_type(pk=solution.object_id)
@@ -335,7 +322,7 @@ class SolutionPixInsightWebhook(base.View):
             solution.advanced_dec_bottom_right = request.POST.get('bottomRightDec', None)
 
             solution.advanced_orientation = request.POST.get('rotation', None)
-            solution.advanced_pixscale = request.POST.get('resolution', None)
+            solution.advanced_pixscale = corrected_pixscale(solution, request.POST.get('resolution', None))
             solution.advanced_flipped = request.POST.get('flipped', None) == 'true'
             solution.advanced_wcs_transformation = request.POST.get('wcs_transformation', None)
 
