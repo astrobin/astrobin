@@ -96,6 +96,7 @@ class PlateSolvingAdvancedSettings(models.Model):
         ("M", _("Medium")),
         ("L", _("Large")),
     )
+
     sample_raw_frame_file = models.FileField(
         upload_to=sample_frame_upload_path,
         validators=(FileValidator(allowed_extensions=(settings.ALLOWED_FITS_IMAGE_EXTENSIONS)),),

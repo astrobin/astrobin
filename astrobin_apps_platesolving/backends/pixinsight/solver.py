@@ -14,6 +14,7 @@ log = logging.getLogger('apps')
 
 class Solver(AbstractPlateSolvingBackend):
     def start(self, image_url, **kwargs):
+        advanced_settings = kwargs.pop('advanced_settings', None)  # type: PlateSolvingAdvancedSettings
         image_width = kwargs.pop('image_width')  # type: int
         image_height = kwargs.pop('image_height')  # type: int
         smallSizeRatio = thumbnail_scale(image_width, 'hd', 'regular')  # type: float
@@ -21,9 +22,10 @@ class Solver(AbstractPlateSolvingBackend):
         hd_width = min(image_width, settings.THUMBNAIL_ALIASES['']['hd']['size'][0])  # type: int
         hd_ratio = max(1, image_width / float(hd_width))  # type: float
         hd_height = int(image_height / hd_ratio)  # type: int
+        settings_hd_width = settings.THUMBNAIL_ALIASES['']['hd']['size'][0]
 
-        if image_width > settings.THUMBNAIL_ALIASES['']['hd']['size'][0]:
-            ratio = image_width / float(settings.THUMBNAIL_ALIASES['']['hd']['size'][0])
+        if image_width > settings_hd_width and not advanced_settings.sample_raw_frame_file:
+            ratio = image_width / float(settings_hd_width)
             pixscale = float(pixscale) * ratio
 
         task_params = [
@@ -53,7 +55,6 @@ class Solver(AbstractPlateSolvingBackend):
             task_params.append('obsHeight=%f' % altitude)
 
         layers = []
-        advanced_settings = kwargs.pop('advanced_settings', None)  # type: PlateSolvingAdvancedSettings
         if advanced_settings:
             if advanced_settings.show_grid:
                 layers.append('Grid')
