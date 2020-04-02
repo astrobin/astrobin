@@ -1,4 +1,8 @@
 2020-04-02 Salvatore Iovene <salvatore@iovene.com>
+ * v1.57.1
+ * (plate-solving) Do not scale image resolution if raw sample is provided
+
+2020-04-02 Salvatore Iovene <salvatore@iovene.com>
  * v1.57.0
  * (donations) Fix PayPal URLs
  * (plate-solving) Add support for `largeSize` to account for FITS larger than HD size
