@@ -10,7 +10,7 @@ class ThumbnailGroup(models.Model):
     )
 
     revision = models.CharField(
-        max_length=1,
+        max_length=3,
         default='0',
     )
 
@@ -19,13 +19,14 @@ class ThumbnailGroup(models.Model):
     hd = models.CharField(max_length=512, null=True, blank=True)
     hd_anonymized = models.CharField(max_length=512, null=True, blank=True)
     hd_inverted = models.CharField(max_length=512, null=True, blank=True)
+    hd_sharpened = models.CharField(max_length=512, null=True, blank=True)
     regular = models.CharField(max_length=512, null=True, blank=True)
     regular_inverted = models.CharField(max_length=512, null=True, blank=True)
+    regular_sharpened = models.CharField(max_length=512, null=True, blank=True)
     gallery = models.CharField(max_length=512, null=True, blank=True)
     gallery_inverted = models.CharField(max_length=512, null=True, blank=True)
     collection = models.CharField(max_length=512, null=True, blank=True)
     thumb = models.CharField(max_length=512, null=True, blank=True)
-    revision = models.CharField(max_length=512, null=True, blank=True)
     histogram = models.CharField(max_length=512, null=True, blank=True)
     iotd = models.CharField(max_length=512, null=True, blank=True)
     iotd_candidate = models.CharField(max_length=512, null=True, blank=True)

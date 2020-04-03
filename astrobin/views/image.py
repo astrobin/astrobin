@@ -495,7 +495,7 @@ class ImageDetailView(ImageDetailViewBase):
                 to_user_timezone(image.published, profile) \
                     if profile else image.published
 
-        alias = 'regular'
+        alias = 'regular' if not image.sharpen_thumbnails else 'regular_sharpened'
         mod = self.request.GET.get('mod')
         if mod == 'inverted':
             alias = 'regular_inverted'
@@ -805,13 +805,15 @@ class ImageFullView(ImageDetailView):
     def get_context_data(self, **kwargs):
         context = super(ImageFullView, self).get_context_data(**kwargs)
 
+        image = self.get_object()
+
         mod = self.request.GET.get('mod')
         real = 'real' in self.request.GET and \
                (can_see_real_resolution(self.request.user) or is_any_ultimate(self.object.user))
         if real:
             alias = 'real'
         else:
-            alias = 'hd'
+            alias = 'hd' if not image.sharpen_thumbnails else 'hd_sharpened'
 
         if mod in settings.AVAILABLE_IMAGE_MODS:
             alias += "_%s" % mod
@@ -1088,7 +1090,7 @@ class ImageEditBasicView(ImageEditBaseView):
             except TypeError:
                 pass
 
-            image.square_cropping = "0,0,0,0"
+            image.square_cropping = ImageService(image).get_default_cropping()
             image.save(keep_deleted=True)
 
             image.thumbnail_invalidate()
@@ -1138,6 +1140,17 @@ class ImageEditRevisionView(LoginRequiredMixin, UpdateView):
     def get_form_class(self):
         return ImageEditCorruptedRevisionForm if self.object.corrupted else ImageEditRevisionForm
 
+    def get_initial(self):
+        revision = self.get_object()  # type: ImageRevision
+
+        square_cropping = revision.square_cropping
+        if square_cropping == '0,0,0,0':
+            square_cropping = ImageService(revision.image).get_default_cropping(revision.label)
+
+        return {
+            'square_cropping': square_cropping
+        }
+
     def get_success_url(self):
         return reverse_lazy('image_detail', args=(self.object.image.get_id(),))
 
@@ -1160,6 +1173,7 @@ class ImageEditRevisionView(LoginRequiredMixin, UpdateView):
     def post(self, request, *args, **kwargs):
         revision = self.get_object()  # type: ImageRevision
         previous_url = revision.image_file.url
+        previous_square_cropping = revision.square_cropping
 
         ret = super(ImageEditRevisionView, self).post(request, *args, **kwargs)
 
@@ -1172,9 +1186,12 @@ class ImageEditRevisionView(LoginRequiredMixin, UpdateView):
             except TypeError:
                 pass
 
-            revision.square_cropping = "0,0,0,0"
+            revision.square_cropping = ImageService(revision.image).get_default_cropping(revision.label)
             revision.save(keep_deleted=True)
 
+            revision.thumbnail_invalidate()
+
+        if previous_square_cropping != revision.square_cropping:
             revision.thumbnail_invalidate()
 
         return ret
@@ -1183,6 +1200,17 @@ class ImageEditRevisionView(LoginRequiredMixin, UpdateView):
 class ImageEditThumbnailsView(ImageEditBaseView):
     form_class = ImageEditThumbnailsForm
     template_name = 'image/edit/thumbnails.html'
+
+    def get_initial(self):
+        image = self.get_object()  # type: Image
+
+        square_cropping = image.square_cropping
+        if square_cropping == '0,0,0,0':
+            square_cropping = ImageService(image).get_default_cropping()
+
+        return {
+            'square_cropping': square_cropping
+        }
 
     def get_success_url(self):
         image = self.get_object()
