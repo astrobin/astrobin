@@ -61,7 +61,9 @@ class ImageRevisionResource(ModelResource):
     url_thumb = fields.CharField()
     url_gallery = fields.CharField()
     url_regular = fields.CharField()
+    url_regular_sharpened = fields.CharField()
     url_hd = fields.CharField()
+    url_hd_sharpened = fields.CharField()
     url_real = fields.CharField()
     url_duckduckgo = fields.CharField()
     url_duckduckgo_small = fields.CharField()
@@ -85,7 +87,9 @@ class ImageRevisionResource(ModelResource):
             'url_thumb',
             'url_gallery',
             'url_regular',
+            'url_regular_sharpened',
             'url_hd',
+            'url_hd_sharpened',
             'url_real',
             'url_duckduckgo',
             'url_duckduckgo_small',
@@ -111,8 +115,14 @@ class ImageRevisionResource(ModelResource):
     def dehydrate_url_regular(self, bundle):
         return '%s/%s/%s/rawthumb/regular/' % (settings.BASE_URL, bundle.obj.image.get_id(), bundle.obj.label)
 
+    def dehydrate_url_regular_sharpened(self, bundle):
+        return '%s/%s/%s/rawthumb/regular_sharpened/' % (settings.BASE_URL, bundle.obj.image.get_id(), bundle.obj.label)
+
     def dehydrate_url_hd(self, bundle):
         return '%s/%s/%s/rawthumb/hd/' % (settings.BASE_URL, bundle.obj.image.get_id(), bundle.obj.label)
+
+    def dehydrate_url_hd_sharpened(self, bundle):
+        return '%s/%s/%s/rawthumb/hd_sharpened/' % (settings.BASE_URL, bundle.obj.image.get_id(), bundle.obj.label)
 
     def dehydrate_url_real(self, bundle):
         return '%s/%s/%s/rawthumb/real/' % (settings.BASE_URL, bundle.obj.image.get_id(), bundle.obj.label)

@@ -9,7 +9,7 @@ class ImageEditThumbnailsForm(forms.ModelForm):
 
     class Meta:
         model = Image
-        fields = ('image_file', 'square_cropping')
+        fields = ('image_file', 'square_cropping', 'sharpen_thumbnails')
         widgets = {
             'image_file': HiddenImageCropWidget
         }

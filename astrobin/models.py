@@ -922,6 +922,13 @@ class Image(HasSolutionMixin, SafeDeleteModel):
         help_text=_("Select an area of the image to be used as thumbnail in your gallery.")
     )
 
+    sharpen_thumbnails = models.BooleanField(
+        default=False,
+        verbose_name=_('Sharpen thumbnails'),
+        help_text=_('If selected, AstroBin will use a resizing algorithm that slightly sharpens the image\'s '
+                    'thumbnails. This setting applies to all revisions.'),
+    )
+
     uploaded = models.DateTimeField(editable=False, auto_now_add=True)
     published = models.DateTimeField(editable=False, null=True, blank=True)
     updated = models.DateTimeField(editable=False, auto_now=True, null=True, blank=True)
@@ -1360,7 +1367,7 @@ class Image(HasSolutionMixin, SafeDeleteModel):
         # If this is an animated gif, let's just return the full size URL
         # because right now we can't thumbnail gifs preserving animation
         if 'animated' in options and options['animated'] == True:
-            if alias in ('regular', 'hd', 'real'):
+            if alias in ('regular', 'regular_sharpened', 'hd', 'hd_sharpened', 'real'):
                 url = settings.IMAGES_URL + field.name
                 cache.set(cache_key + '_animated', url, 60 * 60 * 24 * 365)
                 return normalize_url_security(url, thumbnail_settings)

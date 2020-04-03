@@ -14,6 +14,7 @@ from django.contrib.auth.models import User
 from django.contrib.contenttypes.models import ContentType
 from django.core.cache import cache
 from django.core.exceptions import MultipleObjectsReturned
+from django.core.files.images import get_image_dimensions
 from django.core.paginator import Paginator, InvalidPage
 from django.core.urlresolvers import reverse
 from django.db.models import Q
@@ -2078,6 +2079,14 @@ def image_revision_upload_process(request):
     image_revision.image = image
     image_revision.is_final = True
     image_revision.label = base26_encode(base26_decode(highest_label) + 1)
+
+    w, h = image_revision.w, image_revision.h
+
+    if w == 0 or h == 0:
+        w, h = get_image_dimensions(image_revision.image_file.file)
+
+    if w == image.w and h == image.h:
+        image_revision.square_cropping = image.square_cropping
 
     image_revision.save(keep_deleted=True)
 

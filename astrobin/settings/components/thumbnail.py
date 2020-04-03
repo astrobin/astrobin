@@ -4,6 +4,9 @@ THUMBNAIL_DEBUG = DEBUG
 THUMBNAIL_NAMER = 'easy_thumbnails.namers.source_hashed'
 THUMBNAIL_ALWAYS_GENERATE = THUMBNAIL_DEBUG
 THUMBNAIL_PROCESSORS = (
+    # Keep before colorspace
+    'astrobin.thumbnail_processors.srgb_processor',
+
     'image_cropping.thumbnail_processors.crop_corners',
 
     # Default processors
@@ -22,16 +25,17 @@ THUMBNAIL_PROCESSORS = (
 THUMBNAIL_ALIASES = {
     '': {
         # Main image thumbnails
-        # TODO: verify what happens with animated GIF
         'real': {'size': (16536, 16536), 'watermark': True},
         'real_inverted': {'size': (16536, 16536), 'invert': True, 'watermark': True},
 
         'hd': {'size': (1824, 0), 'crop': False, 'watermark': True},
         'hd_anonymized': {'size': (1824, 0), 'crop': False, 'watermark': False},
         'hd_inverted': {'size': (1824, 0), 'crop': False, 'invert': True, 'watermark': True},
+        'hd_sharpened': {'size': (1824, 0), 'crop': False, 'watermark': True, 'detail': True},
 
         'regular': {'size': (620, 0), 'crop': False, 'watermark': True},
         'regular_inverted': {'size': (620, 0), 'crop': False, 'invert': True, 'watermark': True},
+        'regular_sharpened': {'size': (620, 0), 'crop': False, 'watermark': True, 'detail': True},
 
         'gallery': {'size': (130, 130), 'crop': 'smart', 'rounded': True, 'quality': 80},
         'gallery_inverted': {'size': (130, 130), 'crop': 'smart', 'rounded': True, 'quality': 80, 'invert': True},

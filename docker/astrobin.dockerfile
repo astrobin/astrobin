@@ -24,6 +24,7 @@ RUN apt-get update && apt-get install -y --no-install-recommends \
     shiboken libshiboken-dev \
     libjpeg62 libjpeg62-dev \
     libfreetype6 libfreetype6-dev \
+    liblcms2-dev \
     zlib1g-dev \
     ruby ruby-dev \
     && apt-get clean && rm -rf /var/lib/apt/lists/*
