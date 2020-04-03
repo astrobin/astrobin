@@ -2,7 +2,7 @@
 from django.test import TestCase
 
 from astrobin_apps_platesolving.backends.pixinsight.solver import Solver
-from astrobin_apps_platesolving.models import PlateSolvingAdvancedTask
+from astrobin_apps_platesolving.models import PlateSolvingAdvancedTask, PlateSolvingAdvancedSettings
 
 
 class PixInsightSolverTest(TestCase):
@@ -19,7 +19,7 @@ class PixInsightSolverTest(TestCase):
             longitude=0,
             altitude=0,
             observation_time=None,
-            advanced_settings=None
+            advanced_settings=PlateSolvingAdvancedSettings()
         )
 
         task = PlateSolvingAdvancedTask.objects.get(pk=1)
@@ -41,7 +41,7 @@ class PixInsightSolverTest(TestCase):
             longitude=0,
             altitude=0,
             observation_time=None,
-            advanced_settings=None
+            advanced_settings=PlateSolvingAdvancedSettings()
         )
 
         task = PlateSolvingAdvancedTask.objects.get(pk=1)
@@ -63,7 +63,7 @@ class PixInsightSolverTest(TestCase):
             longitude=0,
             altitude=0,
             observation_time=None,
-            advanced_settings=None
+            advanced_settings=PlateSolvingAdvancedSettings()
         )
 
         task = PlateSolvingAdvancedTask.objects.get(pk=1)
@@ -85,7 +85,7 @@ class PixInsightSolverTest(TestCase):
             longitude=0,
             altitude=0,
             observation_time=None,
-            advanced_settings=None
+            advanced_settings=PlateSolvingAdvancedSettings()
         )
 
         task = PlateSolvingAdvancedTask.objects.get(pk=1)
