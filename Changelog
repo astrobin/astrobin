@@ -1,3 +1,10 @@
+2020-04-03 Salvatore Iovene <salvatore@iovene.com>
+ * v1.58.0
+ * (images) Add support for embedded color profiles
+ * (images) Add optional sharpening of regular and hd thumbnails
+ * (images) Add default cropping settings after image upload
+ * (images) Have revisions copy cropping settings from mother image if same resolution
+
 2020-04-02 Salvatore Iovene <salvatore@iovene.com>
  * v1.57.3
  * (iotd) Allow judges to enter the IOTD/TP competition
