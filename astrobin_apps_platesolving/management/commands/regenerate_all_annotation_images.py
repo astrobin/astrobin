@@ -19,7 +19,7 @@ class Command(BaseCommand):
                 print "  - %d " % image.pk,
                 if image.solution and image.solution.annotations:
                     try:
-                        r = requests.get(image.solution.image_file.url)
+                        r = requests.get(image.solution.image_file.url, verify=False)
                         if r.status_code != 200:
                             print "X ",
                             requests.post("https://www.astrobin.com/platesolving/finalize/%d/" % image.solution.pk)
@@ -37,7 +37,7 @@ class Command(BaseCommand):
                     print "    - %s " % revision.label,
                     if revision.solution and revision.solution.annotations:
                         try:
-                            r = requests.get(revision.solution.revision_file.url)
+                            r = requests.get(revision.solution.revision_file.url, verify=False)
                             if r.status_code != 200:
                                 print "X ",
                                 requests.post("https://www.astrobin.com/platesolving/finalize/%d/" % revision.solution.pk)

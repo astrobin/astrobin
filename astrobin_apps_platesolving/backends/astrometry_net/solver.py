@@ -132,7 +132,7 @@ class Solver(AbstractPlateSolvingBackend):
     def start(self, image_url, **kwargs):
         self.login(settings.ASTROMETRY_NET_API_KEY)
 
-        r = requests.get(image_url, allow_redirects=True, headers={'User-Agent': 'Mozilla/5.0'})
+        r = requests.get(image_url, verify=False, allow_redirects=True, headers={'User-Agent': 'Mozilla/5.0'})
         f = NamedTemporaryFile(delete=True)
         f.write(r.content)
         f.flush()
