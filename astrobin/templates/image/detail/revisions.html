@@ -62,12 +62,9 @@
                             </div>
 
                             <div class="delete">
-                                <form class="form-inline" action="{% url 'image_delete_revision' r.pk %}"
-                                      method="post">{% csrf_token %}
-                                    <button type="submit">
-                                        <i class="icon-trash"></i>
-                                    </button>
-                                </form>
+                                <a data-toggle="modal" class="danger" href="#delete-revision-modal-{{ r.pk }}">
+                                    <i class="icon-trash"></i>
+                                </a>
                             </div>
                         {% endif %}
 

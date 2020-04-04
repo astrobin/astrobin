@@ -1,20 +1,13 @@
-{% load i18n %}
-
 {% if is_revision and revision_image %}
-    <div class="modal hide fade" id="delete-revision-modal">
-        <div class="modal-header">
-            <a class="close" data-dismiss="modal">&times;</a>
-            <h3>{% trans "Delete this revision?" %}</h3>
-        </div>
-        <div class="modal-body">
-            <div class="well">
-                {% trans "This revision will be permanently deleted and cannot be recovered. Are you sure?" %}
-            </div>
-
-            <form class="form-inline" action="{% url 'image_delete_revision' revision_image.id %}"
-                  method="post">{% csrf_token %}
-                <input class="btn btn-primary" type="submit" value="{% trans "Delete" %}" />
-            </form>
-        </div>
-    </div>
+    {% with pk_of_revision_to_be_deleted=revision_image.pk %}
+        {% include "image/detail/modals/_delete_single_revision.html" %}
+    {% endwith %}
 {% endif %}
+
+{% for single_revision in image.revisions.all %}
+    {% if not is_revision or single_revision.pk != revision_image.pk %}
+        {% with pk_of_revision_to_be_deleted=single_revision.pk %}
+            {% include "image/detail/modals/_delete_single_revision.html" %}
+        {% endwith %}
+    {% endif %}
+{% endfor %}
