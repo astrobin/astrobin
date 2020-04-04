@@ -31,7 +31,7 @@ def get_from_storage(image, alias, revision_label):
 
         url = media_url + url
 
-    r = requests.get(url, allow_redirects=True, headers={'User-Agent': 'Mozilla/5.0'})
+    r = requests.get(url, verify=False, allow_redirects=True, headers={'User-Agent': 'Mozilla/5.0'})
 
     img = NamedTemporaryFile(delete=True)
     img.write(r.content)

@@ -22,7 +22,7 @@ class ServeAdvancedSvg(View):
         else:
             image_file = self.solution.pixinsight_svg_annotation_regular
 
-        response = requests.get(image_file.url, allow_redirects=True, headers={'User-Agent': 'Mozilla/5.0'})
+        response = requests.get(image_file.url, verify=False, allow_redirects=True, headers={'User-Agent': 'Mozilla/5.0'})
 
         ret = HttpResponse(response.content, content_type="image/svg+xml")
         ret['Content-Disposition'] = 'inline; filename=' + os.path.basename(image_file.name)

@@ -304,7 +304,7 @@ def prepare_download_data_archive(request_id):
             title = slugify(image.title)  # type: str
             path = ntpath.basename(image.image_file.name)  # type: str
 
-            response = requests.get(image.image_file.url)  # type: Response
+            response = requests.get(image.image_file.url, verify=False)  # type: Response
             if response.status_code == 200:
                 archive.writestr("%s-%s/%s" % (id, title, path), response.content)
                 logger.debug("prepare_download_data_archive: image %s = written" % id)
@@ -315,7 +315,7 @@ def prepare_download_data_archive(request_id):
 
                 logger.debug("prepare_download_data_archive: image %s revision %s = iterating" % (id, label))
 
-                response = requests.get(revision.image_file.url)  # type: Response
+                response = requests.get(revision.image_file.url, verify=False)  # type: Response
                 if response.status_code == 200:
                     archive.writestr("%s-%s/revisions/%s/%s" % (id, title, label, path), response.content)
                     logger.debug("prepare_download_data_archive: image %s revision %s = written" % (id, label))

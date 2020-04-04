@@ -96,8 +96,10 @@
         var platesolving_attempts = 0;
 
         function solution_image_error(img) {
-            if (platesolving_attempts > 1)
+            if (platesolving_attempts > 1) {
+                img.remove();
                 return;
+            }
 
             if (img.src.indexOf('images/solutions') === -1) {
                 split = img.src.split('solutions');
