@@ -207,7 +207,7 @@ def ensure_srgb(image):
     Process an image file of unknown color profile.
     Transform to sRGB profile and return the result.
     """
-    if not SRGB_PROFILE or image.mode in (u'L', u'LA'):
+    if not SRGB_PROFILE or image.mode in (u'L', u'LA', u'I'):
         return image
 
     with NamedTemporaryFile(suffix='.icc', delete=True) as icc_file:
