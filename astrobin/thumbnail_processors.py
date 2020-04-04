@@ -1,8 +1,12 @@
+import logging
 import os
 from tempfile import NamedTemporaryFile
 
 from PIL import Image, ImageOps, ImageDraw, ImageEnhance, ImageFont, ImageFilter, ImageCms
 from PIL.ImageCms import PyCMSError
+from easy_thumbnails.utils import is_transparent
+
+log = logging.getLogger('apps')
 
 with open(os.path.join(os.getcwd(), 'astrobin/static/astrobin/srgb.icc'), 'rb') as srgb_profile:
     SRGB_BYTES = srgb_profile.read()
@@ -203,7 +207,7 @@ def ensure_srgb(image):
     Process an image file of unknown color profile.
     Transform to sRGB profile and return the result.
     """
-    if not SRGB_PROFILE:
+    if not SRGB_PROFILE or image.mode in (u'L', u'LA'):
         return image
 
     with NamedTemporaryFile(suffix='.icc', delete=True) as icc_file:
@@ -212,7 +216,10 @@ def ensure_srgb(image):
             icc_file.write(profile)
             icc_file.flush()
             try:
-                image = ImageCms.profileToProfile(image, icc_file.name, SRGB_PROFILE, outputMode="RGBA")
+                output_mode = 'RGBA' if is_transparent(image) else 'RGB'
+                image = ImageCms.profileToProfile(image, icc_file.name, SRGB_PROFILE, outputMode=output_mode)
             except PyCMSError:
+                log.error("Unable to apply color profile!")
                 pass
+
     return image
