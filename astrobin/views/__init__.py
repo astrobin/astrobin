@@ -1113,7 +1113,7 @@ def user_page(request, username):
     corrupted_qs = UserService(user).get_corrupted_images()
 
     if request.user != user:
-        qs = qs.exclude(UserService.corrupted_query())
+        qs = qs.exclude(pk__in=[x.pk for x in corrupted_qs])
 
     if 'staging' in request.GET:
         if request.user != user and not request.user.is_superuser:
