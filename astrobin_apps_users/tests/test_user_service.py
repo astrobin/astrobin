@@ -69,6 +69,15 @@ class TestUserService(TestCase):
 
         self.assertFalse(image in UserService(user).get_corrupted_images())
 
+    def test_get_corrupted_images_when_multiple_corrupted_revisions(self):
+        user = Generators.user()
+        image = Generators.image(user=user, is_final=False, corrupted=True)
+        Generators.imageRevision(image=image, is_final=False, corrupted=True, label='B')
+        Generators.imageRevision(image=image, is_final=False, corrupted=True, label='C')
+        Generators.imageRevision(image=image, is_final=True, corrupted=False, label='D')
+
+        self.assertFalse(image in UserService(user).get_corrupted_images())
+
     def test_get_public_images(self):
         user = Generators.user()
         image = Generators.image(user=user)
