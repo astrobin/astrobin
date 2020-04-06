@@ -1,5 +1,6 @@
 from django import forms
 
+from astrobin.enums import SubjectType
 from astrobin.models import CommercialGear, Image
 
 
@@ -14,4 +15,4 @@ class CommercialGearForm(forms.ModelForm):
 
     def __init__(self, user, **kwargs):
         super(CommercialGearForm, self).__init__(**kwargs)
-        self.fields['image'].queryset = Image.objects.filter(user=user, subject_type=500)
+        self.fields['image'].queryset = Image.objects.filter(user=user, subject_type=SubjectType.GEAR)

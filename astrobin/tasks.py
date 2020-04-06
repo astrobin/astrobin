@@ -29,6 +29,7 @@ from requests import Response
 from astrobin.models import BroadcastEmail, Image, DataDownloadRequest, ImageRevision
 from astrobin.utils import inactive_accounts
 from astrobin_apps_images.models import ThumbnailGroup
+from astrobin_apps_images.services import ImageService
 
 logger = get_task_logger(__name__)
 
@@ -324,7 +325,7 @@ def prepare_download_data_archive(request_id):
                 image.get_id(),
                 unicode(image.title).encode('utf-8'),
                 image.acquisition_type,
-                image.get_subject_type(),
+                ImageService(image).get_subject_type_label(),
                 image.data_source,
                 image.remote_source,
                 image.solar_system_main_subject,
