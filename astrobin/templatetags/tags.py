@@ -10,6 +10,7 @@ from django.template.defaultfilters import timesince
 from django.utils.translation import ugettext as _
 from subscription.models import UserSubscription, Subscription
 
+from astrobin.enums import SubjectType
 from astrobin.gear import is_gear_complete, get_correct_gear
 from astrobin.models import GearUserInfo, UserProfile, Image
 from astrobin.utils import get_image_resolution, decimal_to_hours_minutes_seconds, decimal_to_degrees_minutes_seconds
@@ -460,3 +461,15 @@ def content_type(obj):
 @register.inclusion_tag('inclusion_tags/private_abbr.html')
 def private_abbr():
     return None
+
+
+@register.filter
+def show_technical_card_by_subject_type(subject_type):
+    # type: (SubjectType) -> bool
+    return subject_type in (
+        SubjectType.DEEP_SKY,
+        SubjectType.SOLAR_SYSTEM,
+        SubjectType.WIDE_FIELD,
+        SubjectType.STAR_TRAILS,
+        SubjectType.NORTHERN_LIGHTS,
+    )

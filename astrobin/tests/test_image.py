@@ -12,6 +12,7 @@ from django.test import TestCase, override_settings
 from mock import patch
 from subscription.models import Subscription, UserSubscription
 
+from astrobin.enums import SubjectType, SolarSystemSubject
 from astrobin.models import (
     Image,
     ImageRevision,
@@ -284,8 +285,7 @@ class ImageTest(TestCase):
                 'link': "http://www.example.com",
                 'link_to_fits': "http://www.example.com/fits",
                 'acquisition_type': 'TRADITIONAL',
-                'subject_type': 600,
-                'solar_system_main_subject': 0,
+                'subject_type': SubjectType.OTHER,
                 'locations': [location.pk],
                 'description': "Image description",
                 'allow_comments': True
@@ -303,8 +303,7 @@ class ImageTest(TestCase):
                 'link_to_fits': "http://www.example.com/fits",
                 'acquisition_type': 'TRADITIONAL',
                 'data_source': 'AMATEUR_HOSTING',
-                'subject_type': 600,
-                'solar_system_main_subject': 0,
+                'subject_type': SubjectType.OTHER,
                 'locations': [location.pk],
                 'description': "Image description",
                 'allow_comments': True
@@ -321,8 +320,7 @@ class ImageTest(TestCase):
                 'link_to_fits': "http://www.example.com/fits",
                 'acquisition_type': 'TRADITIONAL',
                 'data_source': 'OTHER',
-                'subject_type': 600,
-                'solar_system_main_subject': 0,
+                'subject_type': SubjectType.OTHER,
                 'locations': [location.pk],
                 'description': "Image description",
                 'allow_comments': True
@@ -337,8 +335,8 @@ class ImageTest(TestCase):
         self.assertEqual(image.title, "Test title")
         self.assertEqual(image.link, "http://www.example.com")
         self.assertEqual(image.link_to_fits, "http://www.example.com/fits")
-        self.assertEqual(image.subject_type, 600)
-        self.assertEqual(image.solar_system_main_subject, 0)
+        self.assertEqual(image.subject_type, SubjectType.OTHER)
+        self.assertEqual(image.solar_system_main_subject, None)
         self.assertEqual(image.locations.count(), 1)
         self.assertEqual(image.locations.all().first().pk, location.pk)
         self.assertEqual(image.description, "Image description")
@@ -801,6 +799,8 @@ class ImageTest(TestCase):
         self.client.login(username='test', password='password')
         self._do_upload('astrobin/fixtures/test.jpg')
         image = self._get_last_image()
+        image.subject_type = SubjectType.DEEP_SKY
+        image.save(keep_deleted=True)
         today = time.strftime('%Y-%m-%d')
 
         # Basic view
@@ -974,6 +974,8 @@ class ImageTest(TestCase):
         self.client.login(username='test', password='password')
         self._do_upload('astrobin/fixtures/test.jpg')
         image = self._get_last_image()
+        image.subject_type = SubjectType.DEEP_SKY
+        image.save(keep_deleted=True)
         today = time.strftime('%Y-%m-%d')
 
         us = Generators.premium_subscription(self.user, "AstroBin Ultimate 2020+")
@@ -1405,8 +1407,7 @@ class ImageTest(TestCase):
                 'link_to_fits': "http://www.example.com/fits",
                 'acquisition_type': 'EAA',
                 'data_source': 'OTHER',
-                'subject_type': 600,
-                'solar_system_main_subject': 0,
+                'subject_type': SubjectType.OTHER,
                 'locations': [x.pk for x in image.user.userprofile.location_set.all()],
                 'description': "Image description",
                 'allow_comments': True
@@ -1418,6 +1419,8 @@ class ImageTest(TestCase):
         self.client.login(username='test', password='password')
         self._do_upload('astrobin/fixtures/test.jpg')
         image = self._get_last_image()
+        image.subject_type = SubjectType.DEEP_SKY
+        image.save(keep_deleted=True)
         self.client.logout()
 
         # GET
@@ -1449,9 +1452,9 @@ class ImageTest(TestCase):
         self.assertEqual(image.title, "Test title")
         self.assertEqual(image.link, "http://www.example.com")
         self.assertEqual(image.link_to_fits, "http://www.example.com/fits")
-        self.assertEqual(image.acquisition_type, 'EAA');
-        self.assertEqual(image.subject_type, 600)
-        self.assertEqual(image.solar_system_main_subject, 0)
+        self.assertEqual(image.acquisition_type, 'EAA')
+        self.assertEqual(image.subject_type, SubjectType.OTHER)
+        self.assertEqual(image.solar_system_main_subject, None)
         self.assertEqual(image.locations.count(), 1)
         self.assertEqual(image.locations.all().first().pk, image.user.userprofile.location_set.all().first().pk)
         self.assertEqual(image.description, "Image description")
@@ -3118,7 +3121,7 @@ class ImageTest(TestCase):
     def test_image_platesolving_not_available_on_free(self):
         image = Generators.image()
         image.user = self.user
-        image.subject_type = 100
+        image.subject_type = SubjectType.DEEP_SKY
         image.save()
         response = self.client.get(reverse('image_detail', kwargs={'id': image.get_id()}))
         self.assertNotContains(response, "id=\"platesolving-status\"")
@@ -3127,7 +3130,7 @@ class ImageTest(TestCase):
     def test_image_platesolving_available_on_lite(self):
         image = Generators.image()
         image.user = self.user
-        image.subject_type = 100
+        image.subject_type = SubjectType.DEEP_SKY
         image.save()
         us = Generators.premium_subscription(self.user, "AstroBin Lite")
         response = self.client.get(reverse('image_detail', kwargs={'id': image.get_id()}))
@@ -3137,7 +3140,7 @@ class ImageTest(TestCase):
     def test_image_platesolving_available_on_premium(self):
         image = Generators.image()
         image.user = self.user
-        image.subject_type = 100
+        image.subject_type = SubjectType.DEEP_SKY
         image.save()
         us = Generators.premium_subscription(self.user, "AstroBin Premium")
         response = self.client.get(reverse('image_detail', kwargs={'id': image.get_id()}))
@@ -3147,7 +3150,7 @@ class ImageTest(TestCase):
     def test_image_platesolving_available_on_lite_2020(self):
         image = Generators.image()
         image.user = self.user
-        image.subject_type = 100
+        image.subject_type = SubjectType.DEEP_SKY
         image.save()
         us = Generators.premium_subscription(self.user, "AstroBin Lite 2020+")
         response = self.client.get(reverse('image_detail', kwargs={'id': image.get_id()}))
@@ -3157,7 +3160,7 @@ class ImageTest(TestCase):
     def test_image_platesolving_available_on_premium_2020(self):
         image = Generators.image()
         image.user = self.user
-        image.subject_type = 100
+        image.subject_type = SubjectType.DEEP_SKY
         image.save()
         us = Generators.premium_subscription(self.user, "AstroBin Premium 2020+")
         response = self.client.get(reverse('image_detail', kwargs={'id': image.get_id()}))
@@ -3167,7 +3170,7 @@ class ImageTest(TestCase):
     def test_image_platesolving_available_on_ultimate_2020(self):
         image = Generators.image()
         image.user = self.user
-        image.subject_type = 100
+        image.subject_type = SubjectType.DEEP_SKY
         image.save()
         us = Generators.premium_subscription(self.user, "AstroBin Ultimate 2020+")
         response = self.client.get(reverse('image_detail', kwargs={'id': image.get_id()}))
@@ -3185,6 +3188,7 @@ class ImageTest(TestCase):
         telescope = Generators.telescope()
 
         image.imaging_telescopes.add(telescope)
+        image.subject_type = SubjectType.DEEP_SKY
         image.save()
 
         response = self.client.get(reverse('image_detail', kwargs={'id': image.get_id()}))

@@ -31,10 +31,9 @@
 {% block content %}
     {% if show_contains %}
     <div class="subtitle">
-        {% comment %} TODO: hardcoded subject_type values? So ugly! {% endcomment %}
         <i class="icon icon-paperclip"></i>
         <strong>{% trans "Contains" %}:</strong>&nbsp;
-        {% if image.subject_type == 100 or image.subject_type == 200 %}
+        {% if image.subject_type == enums.SubjectType.DEEP_SKY %}
             {% for s in subjects %}
                 <a href="/search/?q={{s|escape}}">{{s|escape}}</a>{% if not forloop.last %},{% endif %}
             {% endfor %}

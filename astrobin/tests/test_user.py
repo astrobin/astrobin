@@ -7,6 +7,8 @@ from django.test import TestCase, override_settings
 from django.utils import timezone, formats
 from django_bouncy.models import Bounce
 from mock import patch
+
+from astrobin.enums import SubjectType
 from toggleproperties.models import ToggleProperty
 
 from astrobin.models import (
@@ -210,17 +212,17 @@ class UserTest(TestCase):
         image5 = self._do_upload('astrobin/fixtures/test.jpg', "IMAGE5_GEAR")
         image6 = self._do_upload('astrobin/fixtures/test.jpg', "IMAGE6_OTHER")
 
-        image1.subject_type = 100
+        image1.subject_type = SubjectType.DEEP_SKY
         image1.save(keep_deleted=True)
-        image2.subject_type = 200
+        image2.subject_type = SubjectType.SOLAR_SYSTEM
         image2.save(keep_deleted=True)
-        image3.subject_type = 300
+        image3.subject_type = SubjectType.WIDE_FIELD
         image3.save(keep_deleted=True)
-        image4.subject_type = 400
+        image4.subject_type = SubjectType.STAR_TRAILS
         image4.save(keep_deleted=True)
-        image5.subject_type = 500
+        image5.subject_type = SubjectType.GEAR
         image5.save(keep_deleted=True)
-        image6.subject_type = 600
+        image6.subject_type = SubjectType.OTHER
         image6.save(keep_deleted=True)
 
         response = self.client.get(reverse('user_page', args=('user',)) + "?sub=subject")
@@ -342,9 +344,9 @@ class UserTest(TestCase):
         image3 = self._do_upload('astrobin/fixtures/test.jpg', "IMAGE3")
         image4 = self._do_upload('astrobin/fixtures/test.jpg', "IMAGE4")
 
-        image3.subject_type = 200
+        image3.subject_type = SubjectType.SOLAR_SYSTEM
         image3.save(keep_deleted=True)
-        image4.subject_type = 500
+        image4.subject_type = SubjectType.GEAR
         image4.save(keep_deleted=True)
 
         telescope1 = Telescope.objects.create(name="TELESCOPE1")
@@ -395,14 +397,14 @@ class UserTest(TestCase):
 
         # Test "no data" sub-section
         image = self._do_upload('astrobin/fixtures/test.jpg', "IMAGE_NODATA")
-        image.subject_type = 100
+        image.subject_type = SubjectType.DEEP_SKY
         image.save(keep_deleted=True)
         response = self.client.get(
             reverse('user_page', args=('user',)) + "?sub=nodata")
         self.assertEquals(response.status_code, 200)
         self.assertEquals(image.title in response.content, True)
 
-        image.subject_type = 200
+        image.subject_type = SubjectType.SOLAR_SYSTEM
         image.solar_system_main_subject = None
         image.save(keep_deleted=True)
         response = self.client.get(

@@ -138,7 +138,7 @@ class ImageEditBasicForm(forms.ModelForm):
 
     def clean_subject_type(self):
         subject_type = self.cleaned_data['subject_type']
-        if subject_type == 0:
+        if subject_type is None:
             raise forms.ValidationError(_('This field is required.'))
 
         return self.cleaned_data['subject_type']

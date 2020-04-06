@@ -1,7 +1,7 @@
 from django.core.files.images import get_image_dimensions
 from django.db.models import Q
 
-from astrobin.models import Image, ImageRevision
+from astrobin.models import Image, ImageRevision, SOLAR_SYSTEM_SUBJECT_CHOICES
 
 
 class ImageService:
@@ -47,3 +47,16 @@ class ImageService:
         y2 = int(h / 2.0 + shorter_size / 2.0)  # type: int
 
         return '%d,%d,%d,%d' % (x1, y1, x2, y2)
+
+
+    def get_subject_type_label(self):
+        # type: () -> str
+        for subject_type in Image.SUBJECT_TYPE_CHOICES:
+            if self.image.subject_type == subject_type[0]:
+                return subject_type[1]
+
+    def get_solar_system_main_subject_label(self):
+        # type: () -> str
+        for solar_system_subject in SOLAR_SYSTEM_SUBJECT_CHOICES:
+            if self.image.solar_system_main_subject == solar_system_subject[0]:
+                return solar_system_subject[1]

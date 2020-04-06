@@ -1,7 +1,7 @@
-from django.core.files import File
 from django.core.files.uploadedfile import SimpleUploadedFile
 from django.test import TestCase
 
+from astrobin.enums import SubjectType
 from astrobin.forms import ImageEditBasicForm
 from astrobin.tests.generators import Generators
 
@@ -12,7 +12,7 @@ class ImageEditBasicFormTest(TestCase):
             "title": "My image",
             "acquisition_type": "TRADITIONAL",
             "data_source": "BACKYARD",
-            "subject_type": 600
+            "subject_type": SubjectType.OTHER,
         }
 
         data.update(update)

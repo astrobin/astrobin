@@ -40,6 +40,7 @@ from reviews.views import ReviewAddForm
 from silk.profiling.profiler import silk_profile
 
 from astrobin.context_processors import notices_count, user_language, user_scores, common_variables
+from astrobin.enums import SubjectType
 from astrobin.forms import ImageUploadForm, ImageLicenseForm, PrivateMessageForm, UserProfileEditBasicForm, \
     DeepSky_AcquisitionBasicForm, SolarSystem_AcquisitionForm, UserProfileEditCommercialForm, \
     UserProfileEditRetailerForm, DefaultImageLicenseForm, TelescopeEditNewForm, MountEditNewForm, CameraEditNewForm, \
@@ -1173,8 +1174,15 @@ def user_page(request, username):
 
                 if active == '0':
                     qs = qs.filter(
-                        (Q(subject_type__lt=500) | Q(subject_type=600)) &
-                        (Q(acquisition=None) | Q(acquisition__date=None))).distinct()
+                        Q(subject_type__in=(
+                            SubjectType.DEEP_SKY,
+                            SubjectType.SOLAR_SYSTEM,
+                            SubjectType.WIDE_FIELD,
+                            SubjectType.STAR_TRAILS,
+                            SubjectType.NORTHERN_LIGHTS,
+                            SubjectType.OTHER
+                        )) &
+                        Q(acquisition=None) | Q(acquisition__date=None)).distinct()
                 else:
                     if active is None:
                         if years:
@@ -1200,10 +1208,10 @@ def user_page(request, username):
 
             if active == '0':
                 qs = qs.filter(
-                    (Q(subject_type=100) | Q(subject_type=200)) &
+                    (Q(subject_type=SubjectType.DEEP_SKY) | Q(subject_type=SubjectType.SOLAR_SYSTEM)) &
                     (Q(imaging_telescopes=None) | Q(imaging_cameras=None))).distinct()
             elif active == '-1':
-                qs = qs.filter(Q(subject_type=500)).distinct()
+                qs = qs.filter(Q(subject_type=SubjectType.GEAR)).distinct()
             else:
                 if active is None:
                     if telescopes:
@@ -1227,22 +1235,22 @@ def user_page(request, username):
                 active = 'DEEP'
 
             if active == 'DEEP':
-                qs = qs.filter(subject_type=100)
+                qs = qs.filter(subject_type=SubjectType.DEEP_SKY)
 
             elif active == 'SOLAR':
-                qs = qs.filter(subject_type=200)
+                qs = qs.filter(subject_type=SubjectType.SOLAR_SYSTEM)
 
             elif active == 'WIDE':
-                qs = qs.filter(subject_type=300)
+                qs = qs.filter(subject_type=SubjectType.WIDE_FIELD)
 
             elif active == 'TRAILS':
-                qs = qs.filter(subject_type=400)
+                qs = qs.filter(subject_type=SubjectType.STAR_TRAILS)
 
             elif active == 'GEAR':
-                qs = qs.filter(subject_type=500)
+                qs = qs.filter(subject_type=SubjectType.GEAR)
 
             elif active == 'OTHER':
-                qs = qs.filter(subject_type=600)
+                qs = qs.filter(subject_type=SubjectType.OTHER)
 
         ###########
         # NO DATA #
@@ -1257,7 +1265,7 @@ def user_page(request, username):
 
             if active == 'SUB':
                 qs = qs.filter(
-                    (Q(subject_type=100) | Q(subject_type=200)) &
+                    (Q(subject_type=SubjectType.DEEP_SKY) | Q(subject_type=SubjectType.SOLAR_SYSTEM)) &
                     (Q(solar_system_main_subject=None)))
                 qs = [x for x in qs if (x.solution is None or x.solution.objects_in_field is None)]
                 for i in qs:
@@ -1268,12 +1276,24 @@ def user_page(request, username):
 
             elif active == 'GEAR':
                 qs = qs.filter(
-                    Q(subject_type__lt=500) &
+                    Q(subject_type__in=(
+                        SubjectType.DEEP_SKY,
+                        SubjectType.SOLAR_SYSTEM,
+                        SubjectType.WIDE_FIELD,
+                        SubjectType.STAR_TRAILS,
+                        SubjectType.NORTHERN_LIGHTS,
+                    )) &
                     (Q(imaging_telescopes=None) | Q(imaging_cameras=None)))
 
             elif active == 'ACQ':
                 qs = qs.filter(
-                    Q(subject_type__lt=500) &
+                    Q(subject_type__in=(
+                        SubjectType.DEEP_SKY,
+                        SubjectType.SOLAR_SYSTEM,
+                        SubjectType.WIDE_FIELD,
+                        SubjectType.STAR_TRAILS,
+                        SubjectType.NORTHERN_LIGHTS,
+                    )) &
                     Q(acquisition=None))
 
     # Calculate some stats

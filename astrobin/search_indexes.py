@@ -1,24 +1,20 @@
-# Python
 import datetime
 
-# Third party apps
 from celery_haystack.indexes import CelerySearchIndex
-# Django
 from django.contrib.auth.models import User
 from django.contrib.contenttypes.models import ContentType
 from haystack.constants import Indexable
 from haystack.fields import CharField, IntegerField, FloatField, DateTimeField, BooleanField, MultiValueField
 from hitcount.models import HitCount
 from pybb.models import Post, Topic
-from toggleproperties.models import ToggleProperty
 
+from astrobin.enums import SubjectType, SolarSystemSubject
 from astrobin.models import CommercialGear
 from astrobin.models import DeepSky_Acquisition
-# This app
 from astrobin.models import Image
 from astrobin.models import SolarSystem_Acquisition
-# Other AstroBin apps
 from nested_comments.models import NestedComment
+from toggleproperties.models import ToggleProperty
 
 
 def _get_integration(image):
@@ -461,6 +457,7 @@ class ImageIndex(CelerySearchIndex, Indexable):
     views = IntegerField()
 
     solar_system_main_subject = IntegerField()
+    solar_system_main_subject_char = CharField(model_attr='solar_system_main_subject')
 
     is_deep_sky = BooleanField()
     is_solar_system = BooleanField()
@@ -489,7 +486,8 @@ class ImageIndex(CelerySearchIndex, Indexable):
 
     is_commercial = BooleanField()
 
-    subject_type = IntegerField(model_attr='subject_type')
+    subject_type = IntegerField()
+    subject_type = CharField(model_attr='subject_type')
 
     acquisition_type = CharField(model_attr='acquisition_type')
 
@@ -579,6 +577,52 @@ class ImageIndex(CelerySearchIndex, Indexable):
 
     def prepare_countries(self, obj):
         return ' '.join([x.country for x in obj.locations.all() if x.country])
+
+    def prepare_subject_type(self, obj):
+        if obj.subject_type == SubjectType.DEEP_SKY:
+            return 100
+        if obj.subject_type == SubjectType.SOLAR_SYSTEM:
+            return 200
+        if obj.subject_type == SubjectType.WIDE_FIELD:
+            return 300
+        if obj.subject_type == SubjectType.STAR_TRAILS:
+            return 400
+        if obj.subject_type == SubjectType.NORTHERN_LIGHTS:
+            return 450
+        if obj.subject_type == SubjectType.GEAR:
+            return 500
+        if obj.subject_type == SubjectType.OTHER:
+            return 600
+
+        return 0
+
+    def prepare_solar_system_main_subject(self, obj):
+        if obj.solar_system_main_subject == SolarSystemSubject.SUN:
+            return 0
+        if obj.solar_system_main_subject == SolarSystemSubject.MOON:
+            return 1
+        if obj.solar_system_main_subject == SolarSystemSubject.MERCURY:
+            return 2
+        if obj.solar_system_main_subject == SolarSystemSubject.VENUS:
+            return 3
+        if obj.solar_system_main_subject == SolarSystemSubject.MARS:
+            return 4
+        if obj.solar_system_main_subject == SolarSystemSubject.JUPITER:
+            return 5
+        if obj.solar_system_main_subject == SolarSystemSubject.SATURN:
+            return 6
+        if obj.solar_system_main_subject == SolarSystemSubject.URANUS:
+            return 7
+        if obj.solar_system_main_subject == SolarSystemSubject.NEPTUNE:
+            return 8
+        if obj.solar_system_main_subject == SolarSystemSubject.MINOR_PLANET:
+            return 9
+        if obj.solar_system_main_subject == SolarSystemSubject.COMET:
+            return 10
+        if obj.solar_system_main_subject == SolarSystemSubject.OTHER:
+            return 11
+
+        return None
 
 
 class NestedCommentIndex(CelerySearchIndex, Indexable):

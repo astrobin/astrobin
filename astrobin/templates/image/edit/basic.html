@@ -39,7 +39,7 @@
 
         <input type="hidden" name="image_id" value="{{image.get_id}}" />
 
-        {% if image.subject_type and image.subject_type == 500 or image.subject_type == 600 %}
+        {% if image.subject_type and image.subject_type == enums.SubjectType.GEAR or image.subject_type == enums.SubjectType.OTHER %}
             <input type="hidden" name="skip_rest" value="true"/>
         {% endif %}
 

@@ -1,5 +1,6 @@
 from django.conf import settings
 
+from astrobin.enums import SubjectType
 from astrobin.fields import COUNTRIES
 from astrobin.models import Image
 from astrobin.utils import get_client_country_code
@@ -112,6 +113,10 @@ def common_variables(request):
         'HAS_COMPLAINT': complained,
         'COUNTRIES': COUNTRIES,
         'COOKIELAW_ACCEPTED': request.COOKIES.get('cookielaw_accepted', False),
+
+        'enums': {
+            'SubjectType': SubjectType,
+        },
     }
 
     if request.user.is_authenticated() and request.user.userprofile.is_image_moderator():

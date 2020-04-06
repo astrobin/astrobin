@@ -12,10 +12,11 @@ from datetime import datetime
 
 from image_cropping import ImageRatioField
 
+from astrobin.enums import SubjectType, SolarSystemSubject
+from astrobin.fields import CountryField, get_country_name
 from astrobin.services import CloudflareService
 from common.utils import upload_path
 from common.validators import FileValidator
-from .fields import CountryField, get_country_name
 
 try:
     from hashlib import sha1
@@ -186,18 +187,18 @@ SUBJECT_TYPES = {
 }
 
 SOLAR_SYSTEM_SUBJECT_CHOICES = (
-    (0, _("Sun")),
-    (1, _("Earth's Moon")),
-    (2, _("Mercury")),
-    (3, _("Venus")),
-    (4, _("Mars")),
-    (5, _("Jupiter")),
-    (6, _("Saturn")),
-    (7, _("Uranus")),
-    (8, _("Neptune")),
-    (9, _("Minor planet")),
-    (10, _("Comet")),
-    (11, _("Other")),
+    (SolarSystemSubject.SUN, _("Sun")),
+    (SolarSystemSubject.MOON, _("Earth's Moon")),
+    (SolarSystemSubject.MERCURY, _("Mercury")),
+    (SolarSystemSubject.VENUS, _("Venus")),
+    (SolarSystemSubject.MARS, _("Mars")),
+    (SolarSystemSubject.JUPITER, _("Jupiter")),
+    (SolarSystemSubject.SATURN, _("Saturn")),
+    (SolarSystemSubject.URANUS, _("Uranus")),
+    (SolarSystemSubject.NEPTUNE, _("Neptune")),
+    (SolarSystemSubject.MINOR_PLANET, _("Minor planet")),
+    (SolarSystemSubject.COMET, _("Comet")),
+    (SolarSystemSubject.OTHER, _("Other")),
 )
 
 WATERMARK_SIZE_CHOICES = (
@@ -719,14 +720,14 @@ class Image(HasSolutionMixin, SafeDeleteModel):
     )
 
     SUBJECT_TYPE_CHOICES = (
-        (0, "---------"),
-        (100, _("Deep sky object or field")),
-        (200, _("Solar system body or event")),
-        (300, _("Extremely wide field")),
-        (400, _("Star trails")),
-        (450, _("Northern lights")),
-        (500, _("Gear")),
-        (600, _("Other")),
+        (None, "---------"),
+        (SubjectType.DEEP_SKY, _("Deep sky object or field")),
+        (SubjectType.SOLAR_SYSTEM, _("Solar system body or event")),
+        (SubjectType.WIDE_FIELD, _("Extremely wide field")),
+        (SubjectType.STAR_TRAILS, _("Star trails")),
+        (SubjectType.NORTHERN_LIGHTS, _("Northern lights")),
+        (SubjectType.GEAR, _("Gear")),
+        (SubjectType.OTHER, _("Other")),
     )
 
     DATA_SOURCE_TYPES = (
@@ -836,10 +837,11 @@ class Image(HasSolutionMixin, SafeDeleteModel):
         default='TRADITIONAL'
     )
 
-    subject_type = models.IntegerField(
+    subject_type = models.CharField(
         verbose_name=_("Subject type"),
         choices=SUBJECT_TYPE_CHOICES,
-        default=0,
+        max_length=16,
+        null=False,
     )
 
     data_source = models.CharField(
@@ -860,12 +862,13 @@ class Image(HasSolutionMixin, SafeDeleteModel):
         blank=True,
     )
 
-    solar_system_main_subject = models.IntegerField(
+    solar_system_main_subject = models.CharField(
         verbose_name=_("Main solar system subject"),
         help_text=_(
             "If the main subject of your image is a body in the solar system, please select which (or which type) it is."),
         null=True,
         blank=True,
+        max_length=16,
         choices=SOLAR_SYSTEM_SUBJECT_CHOICES,
     )
 
@@ -1534,11 +1537,6 @@ class Image(HasSolutionMixin, SafeDeleteModel):
             if self.remote_source == source[0]:
                 return source[1]
 
-    def get_subject_type(self):
-        for subject_type in self.SUBJECT_TYPE_CHOICES:
-            if self.subject_type == subject_type[0]:
-                return subject_type[1]
-
     def get_keyvaluetags(self):
         tags = self.keyvaluetags.all()
 
@@ -1548,7 +1546,11 @@ class Image(HasSolutionMixin, SafeDeleteModel):
         return '\r\n'.join([str(x) for x in self.keyvaluetags.all()])
 
     def is_platesolvable(self):
-        return self.subject_type in (100, 300)
+        return \
+            (self.subject_type == SubjectType.DEEP_SKY) or \
+            (self.subject_type == SubjectType.WIDE_FIELD) or \
+            (self.subject_type == SubjectType.SOLAR_SYSTEM and \
+             self.solar_system_main_subject == SolarSystemSubject.COMET)
 
     @staticmethod
     def by_gear(gear, gear_type=None):

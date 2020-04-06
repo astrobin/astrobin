@@ -31,6 +31,7 @@ from django.views.generic.detail import SingleObjectMixin
 from silk.profiling.profiler import silk_profile
 
 # AstroBin
+from astrobin.enums import SubjectType
 from astrobin.forms import (
     CopyGearForm,
     ImageDemoteForm,
@@ -709,21 +710,15 @@ class ImageDetailView(ImageDetailViewBase):
             'upload_uncompressed_source_form': UncompressedSourceUploadForm(instance=image),
             'dates_label': _("Dates"),
             'published_on': published_on,
-            'show_contains': (image.subject_type == 100 and subjects) or (image.subject_type >= 200),
+            'show_contains': (image.subject_type == SubjectType.DEEP_SKY and subjects) or
+                             (image.subject_type != SubjectType.DEEP_SKY),
             'subjects': subjects,
-            'subject_type': [x[1] for x in Image.SUBJECT_TYPE_CHOICES if x[0] == image.subject_type][
-                0] if image.subject_type else 0,
+            'subject_type': ImageService(image).get_subject_type_label(),
             'license_icon': static('astrobin/icons/%s' % licenses[image.license][1]),
             'license_title': licenses[image.license][2],
             'resolution': '%dx%d' % (w, h) if (w and h) else None,
             'locations': locations,
-            # Because of a regression introduced at
-            # revision e1dad12babe5, now we have to
-            # implement this ugly hack.
-
-            'solar_system_main_subject_id': image.solar_system_main_subject,
-            'solar_system_main_subject': SOLAR_SYSTEM_SUBJECT_CHOICES[image.solar_system_main_subject][
-                1] if image.solar_system_main_subject is not None else None,
+            'solar_system_main_subject': ImageService(image).get_solar_system_main_subject_label(),
             'content_type': ContentType.objects.get(app_label='astrobin', model='image'),
             'preferred_language': preferred_language,
             'select_group_form': GroupSelectForm(
