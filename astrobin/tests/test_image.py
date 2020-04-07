@@ -1115,11 +1115,43 @@ class ImageTest(TestCase):
         image.delete()
 
     @patch("astrobin.tasks.retrieve_primary_thumbnails")
-    def test_image_real_view_free(self, retrieve_primary_thumbnails):
+    def test_image_real_view_owner(self, retrieve_primary_thumbnails):
         self.client.login(username='test', password='password')
         self._do_upload('astrobin/fixtures/test.jpg')
         image = self._get_last_image()
 
+        response = self.client.get(
+            reverse('image_full', kwargs={'id': image.get_id()}) + "?real")
+        self.assertEqual(200, response.status_code)
+        self.assertEqual('real', response.context[0]['alias'])
+        self.assertIsNotNone(re.search(r'data-id="%d"\s+data-alias="%s"' % (image.pk, "real"), response.content))
+
+        image.delete()
+
+    @patch("astrobin.tasks.retrieve_primary_thumbnails")
+    def test_image_real_view_visitor(self, retrieve_primary_thumbnails):
+        self.client.login(username='test', password='password')
+        self._do_upload('astrobin/fixtures/test.jpg')
+        self.client.logout()
+        image = self._get_last_image()
+
+        response = self.client.get(
+            reverse('image_full', kwargs={'id': image.get_id()}) + "?real")
+        self.assertEqual(200, response.status_code)
+        self.assertEqual('hd', response.context[0]['alias'])
+        self.assertIsNone(re.search(r'data-id="%d"\s+data-alias="%s"' % (image.pk, "real"), response.content))
+
+        image.delete()
+
+    @patch("astrobin.tasks.retrieve_primary_thumbnails")
+    def test_image_real_view_free(self, retrieve_primary_thumbnails):
+        self.client.login(username='test', password='password')
+        self._do_upload('astrobin/fixtures/test.jpg')
+        self.client.logout()
+
+        image = self._get_last_image()
+
+        self.client.login(username='test2', password='password')
         response = self.client.get(
             reverse('image_full', kwargs={'id': image.get_id()}) + "?real")
         self.assertEqual(200, response.status_code)
@@ -1132,10 +1164,13 @@ class ImageTest(TestCase):
     def test_image_real_view_lite(self, retrieve_primary_thumbnails):
         self.client.login(username='test', password='password')
         self._do_upload('astrobin/fixtures/test.jpg')
+        self.client.logout()
+
         image = self._get_last_image()
 
-        us = Generators.premium_subscription(self.user, "AstroBin Lite")
+        us = Generators.premium_subscription(self.user2, "AstroBin Lite")
 
+        self.client.login(username='test2', password='password')
         response = self.client.get(
             reverse('image_full', kwargs={'id': image.get_id()}) + "?real")
         self.assertEqual(200, response.status_code)
@@ -1149,10 +1184,13 @@ class ImageTest(TestCase):
     def test_image_real_view_lite_autorenew(self, retrieve_primary_thumbnails):
         self.client.login(username='test', password='password')
         self._do_upload('astrobin/fixtures/test.jpg')
+        self.client.logout()
+
         image = self._get_last_image()
 
-        us = Generators.premium_subscription(self.user, "AstroBin Lite (autorenew)")
+        us = Generators.premium_subscription(self.user2, "AstroBin Lite (autorenew)")
 
+        self.client.login(username='test2', password='password')
         response = self.client.get(
             reverse('image_full', kwargs={'id': image.get_id()}) + "?real")
         self.assertEqual(200, response.status_code)
@@ -1167,9 +1205,11 @@ class ImageTest(TestCase):
         self.client.login(username='test', password='password')
         self._do_upload('astrobin/fixtures/test.jpg')
         image = self._get_last_image()
+        self.client.logout()
 
-        us = Generators.premium_subscription(self.user, "AstroBin Lite 2020+")
+        us = Generators.premium_subscription(self.user2, "AstroBin Lite 2020+")
 
+        self.client.login(username='test2', password='password')
         response = self.client.get(
             reverse('image_full', kwargs={'id': image.get_id()}) + "?real")
         self.assertEqual(200, response.status_code)
@@ -1183,10 +1223,13 @@ class ImageTest(TestCase):
     def test_image_real_view_premium(self, retrieve_primary_thumbnails):
         self.client.login(username='test', password='password')
         self._do_upload('astrobin/fixtures/test.jpg')
+        self.client.logout()
+
         image = self._get_last_image()
 
-        us = Generators.premium_subscription(self.user, "AstroBin Premium")
+        us = Generators.premium_subscription(self.user2, "AstroBin Premium")
 
+        self.client.login(username='test2', password='password')
         response = self.client.get(
             reverse('image_full', kwargs={'id': image.get_id()}) + "?real")
         self.assertEqual(200, response.status_code)
@@ -1200,10 +1243,13 @@ class ImageTest(TestCase):
     def test_image_real_view_premium_autorenew(self, retrieve_primary_thumbnails):
         self.client.login(username='test', password='password')
         self._do_upload('astrobin/fixtures/test.jpg')
+        self.client.logout()
+
         image = self._get_last_image()
 
-        us = Generators.premium_subscription(self.user, "AstroBin Premium (autorenew)")
+        us = Generators.premium_subscription(self.user2, "AstroBin Premium (autorenew)")
 
+        self.client.login(username='test2', password='password')
         response = self.client.get(
             reverse('image_full', kwargs={'id': image.get_id()}) + "?real")
         self.assertEqual(200, response.status_code)
@@ -1217,10 +1263,13 @@ class ImageTest(TestCase):
     def test_image_real_view_premium_2020(self, retrieve_primary_thumbnails):
         self.client.login(username='test', password='password')
         self._do_upload('astrobin/fixtures/test.jpg')
+        self.client.logout()
+
         image = self._get_last_image()
 
-        us = Generators.premium_subscription(self.user, "AstroBin Premium 2020+")
+        us = Generators.premium_subscription(self.user2, "AstroBin Premium 2020+")
 
+        self.client.login(username='test2', password='password')
         response = self.client.get(
             reverse('image_full', kwargs={'id': image.get_id()}) + "?real")
         self.assertEqual(200, response.status_code)
@@ -1234,10 +1283,113 @@ class ImageTest(TestCase):
     def test_image_real_view_ultimate_2020(self, retrieve_primary_thumbnails):
         self.client.login(username='test', password='password')
         self._do_upload('astrobin/fixtures/test.jpg')
+        self.client.logout()
+
+        image = self._get_last_image()
+
+        us = Generators.premium_subscription(self.user2, "AstroBin Ultimate 2020+")
+
+        self.client.login(username='test2', password='password')
+        response = self.client.get(
+            reverse('image_full', kwargs={'id': image.get_id()}) + "?real")
+        self.assertEqual(200, response.status_code)
+        self.assertEqual('real', response.context[0]['alias'])
+        self.assertIsNotNone(re.search(r'data-id="%d"\s+data-alias="%s"' % (image.pk, "real"), response.content))
+
+        image.delete()
+        us.delete()
+
+    @patch("astrobin.tasks.retrieve_primary_thumbnails")
+    def test_image_real_view_ultimate_2020_owner(self, retrieve_primary_thumbnails):
+        self.client.login(username='test', password='password')
+        self._do_upload('astrobin/fixtures/test.jpg')
+        self.client.logout()
+
         image = self._get_last_image()
 
         us = Generators.premium_subscription(self.user, "AstroBin Ultimate 2020+")
 
+        self.client.login(username='test2', password='password')
+        response = self.client.get(
+            reverse('image_full', kwargs={'id': image.get_id()}) + "?real")
+        self.assertEqual(200, response.status_code)
+        self.assertEqual('real', response.context[0]['alias'])
+        self.assertIsNotNone(re.search(r'data-id="%d"\s+data-alias="%s"' % (image.pk, "real"), response.content))
+
+        image.delete()
+        us.delete()
+
+    @patch("astrobin.tasks.retrieve_primary_thumbnails")
+    def test_image_real_view_premium_owner(self, retrieve_primary_thumbnails):
+        self.client.login(username='test', password='password')
+        self._do_upload('astrobin/fixtures/test.jpg')
+        self.client.logout()
+
+        image = self._get_last_image()
+
+        us = Generators.premium_subscription(self.user, "AstroBin Premium")
+
+        self.client.login(username='test2', password='password')
+        response = self.client.get(
+            reverse('image_full', kwargs={'id': image.get_id()}) + "?real")
+        self.assertEqual(200, response.status_code)
+        self.assertEqual('real', response.context[0]['alias'])
+        self.assertIsNotNone(re.search(r'data-id="%d"\s+data-alias="%s"' % (image.pk, "real"), response.content))
+
+        image.delete()
+        us.delete()
+
+    @patch("astrobin.tasks.retrieve_primary_thumbnails")
+    def test_image_real_view_premium_autorenew_owner(self, retrieve_primary_thumbnails):
+        self.client.login(username='test', password='password')
+        self._do_upload('astrobin/fixtures/test.jpg')
+        self.client.logout()
+
+        image = self._get_last_image()
+
+        us = Generators.premium_subscription(self.user, "AstroBin Premium (autorenew)")
+
+        self.client.login(username='test2', password='password')
+        response = self.client.get(
+            reverse('image_full', kwargs={'id': image.get_id()}) + "?real")
+        self.assertEqual(200, response.status_code)
+        self.assertEqual('real', response.context[0]['alias'])
+        self.assertIsNotNone(re.search(r'data-id="%d"\s+data-alias="%s"' % (image.pk, "real"), response.content))
+
+        image.delete()
+        us.delete()
+
+    @patch("astrobin.tasks.retrieve_primary_thumbnails")
+    def test_image_real_view_ilte_owner(self, retrieve_primary_thumbnails):
+        self.client.login(username='test', password='password')
+        self._do_upload('astrobin/fixtures/test.jpg')
+        self.client.logout()
+
+        image = self._get_last_image()
+
+        us = Generators.premium_subscription(self.user, "AstroBin Lite")
+
+        self.client.login(username='test2', password='password')
+        response = self.client.get(
+            reverse('image_full', kwargs={'id': image.get_id()}) + "?real")
+        self.assertEqual(200, response.status_code)
+        self.assertEqual('real', response.context[0]['alias'])
+        self.assertIsNotNone(re.search(r'data-id="%d"\s+data-alias="%s"' % (image.pk, "real"), response.content))
+
+        image.delete()
+        us.delete()
+
+    @patch("astrobin.tasks.retrieve_primary_thumbnails")
+    def test_image_real_view_lite_autorenew_owner(self, retrieve_primary_thumbnails):
+        self.client.login(username='test', password='password')
+        self._do_upload('astrobin/fixtures/test.jpg')
+        self.client.logout()
+
+        image = self._get_last_image()
+
+        us = Generators.premium_subscription(self.user, "AstroBin Lite (autorenew)")
+
+        self.client.login(username='test2', password='password')
         response = self.client.get(
             reverse('image_full', kwargs={'id': image.get_id()}) + "?real")
         self.assertEqual(200, response.status_code)
