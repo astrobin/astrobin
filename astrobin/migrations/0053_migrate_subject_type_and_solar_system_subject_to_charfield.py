@@ -8,7 +8,6 @@ from astrobin.enums import SubjectType, SolarSystemSubject
 from astrobin.models import Image
 
 SUBJECT_TYPE_MIGRATION_MAP = {
-    0: SubjectType.OTHER,
     100: SubjectType.DEEP_SKY,
     200: SubjectType.SOLAR_SYSTEM,
     300: SubjectType.WIDE_FIELD,
@@ -19,6 +18,7 @@ SUBJECT_TYPE_MIGRATION_MAP = {
 }  # type: Dict[int, str]
 
 SOLAR_SYSTEM_SUBJECT_MIGRATION_MAP = {
+    None: None,
     0: SolarSystemSubject.SUN,
     1: SolarSystemSubject.MOON,
     2: SolarSystemSubject.MERCURY,
@@ -34,33 +34,29 @@ SOLAR_SYSTEM_SUBJECT_MIGRATION_MAP = {
 }  # type: Dict[int, str]
 
 
-def getImages(apps):
+def get_images(apps):
+    # type: (object) -> QuerySet
     return apps.get_model('astrobin', 'Image').objects.all()
 
 
-def migrateSubjectTypeValues(apps, schema_editor):
-    for i in getImages(apps):  # type: Image
-        i.subject_type = SUBJECT_TYPE_MIGRATION_MAP[int(i.subject_type)]
-        i.save()
+def migrate_subject_type_values(apps, schema_editor):
+    for old_value, new_value in SUBJECT_TYPE_MIGRATION_MAP.iteritems():
+        get_images(apps).filter(subject_type=old_value).update(subject_type=new_value)
+    get_images(apps).filter(subject_type=0).update(subject_type=SubjectType.OTHER)
+
+def reverse_migrate_subject_type_values(apps, schema_editor):
+    for old_value, new_value in SUBJECT_TYPE_MIGRATION_MAP.iteritems():
+        get_images(apps).filter(subject_type=new_value).update(subject_type=old_value)
 
 
-def reverseMigrateSubjectTypeValues(apps, schema_editor):
-    for i in getImages(apps).exclude(subject_type=None):  # type: Image
-        i.subject_type = {v: k for k, v in SUBJECT_TYPE_MIGRATION_MAP.iteritems()}[i.subject_type]
-        i.save()
+def migrate_solar_system_subject_values(apps, schema_editor):
+    for old_value, new_value in SOLAR_SYSTEM_SUBJECT_MIGRATION_MAP.iteritems():
+        get_images(apps).filter(solar_system_main_subject=old_value).update(solar_system_main_subject=new_value)
 
 
-def migrateSolarSystemSubjectValues(apps, schema_editor):
-    for i in getImages(apps).exclude(solar_system_main_subject=None):  # type: Image
-        i.solar_system_main_subject = SOLAR_SYSTEM_SUBJECT_MIGRATION_MAP[int(i.solar_system_main_subject)]
-        i.save()
-
-
-def reverseMigrateSolarSystemSubjectValues(apps, schema_editor):
-    for i in getImages(apps).exclude(solar_system_main_subject=None):  # type: Image
-        i.solar_system_main_subject = {v: k for k, v in SOLAR_SYSTEM_SUBJECT_MIGRATION_MAP.iteritems()}[
-            i.solar_system_main_subject]
-        i.save()
+def reverse_migrate_solar_system_subjects_values(apps, schema_editor):
+    for old_value, new_value in SOLAR_SYSTEM_SUBJECT_MIGRATION_MAP.iteritems():
+        get_images(apps).filter(solar_system_main_subject=new_value).update(solar_system_main_subject=old_value)
 
 
 class Migration(migrations.Migration):
@@ -69,6 +65,6 @@ class Migration(migrations.Migration):
     ]
 
     operations = [
-        migrations.RunPython(migrateSubjectTypeValues, reverseMigrateSubjectTypeValues),
-        migrations.RunPython(migrateSolarSystemSubjectValues, reverseMigrateSolarSystemSubjectValues),
+        migrations.RunPython(migrate_subject_type_values, reverse_migrate_subject_type_values),
+        migrations.RunPython(migrate_solar_system_subject_values, reverse_migrate_solar_system_subjects_values),
     ]
