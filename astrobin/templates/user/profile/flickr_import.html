@@ -4,6 +4,7 @@
 {% load astrobin_apps_premium_tags %}
 {% load django_bootstrap_breadcrumbs %}
 {% load staticfiles %}
+{% load common_tags %}
 
 {% block title %}{% trans "Import from Flickr" %}{% endblock %}
 
@@ -34,7 +35,7 @@
                                 images it not supported.{% endblocktrans %}
                         </div>
                         <div class="js">
-                            <form class="form-horizontal" name="flickr_form" action="">{% csrf_token %}
+                            <form class="form form-vertical" name="flickr_form" action="">{% csrf_token %}
                                 {% if flickr_sets %}
                                     <p id="flickr_sets">
                                         <label for="id_flickr_sets">{% trans "Which set" %}:</label>
@@ -51,11 +52,15 @@
 
                                 <div class="form-actions">
                                     {% if flickr_sets %}
-                                        <input class="btn btn-primary btn-flickr" type="submit"
-                                               value="{% trans "Import photos" %} &rarr;" />
+                                        <button class="btn btn-primary btn-flickr {% button_loading_class %}" type="submit">
+                                            <span class="text">{% trans "Import photos" %}</span>
+                                            {% button_loading_indicator %}
+                                        </button>
                                     {% else %}
-                                        <input class="btn btn-primary btn-flickr" type="submit"
-                                               value="{% trans "Authenticate with Flickr" %} &rarr;" />
+                                        <button class="btn btn-primary btn-flickr {% button_loading_class %}" type="submit">
+                                            <span class="text">{% trans "Authenticate with Flickr" %}</span>
+                                            {% button_loading_indicator %}
+                                        </button>
                                     {% endif %}
                                 </div>
                             </form>
@@ -96,6 +101,9 @@
             $('.js').css('display', 'block');
 
             $('.btn-flickr').click(function () {
+                var $btn = $(this);
+                $btn.addClass('running');
+                $btn.attr('disabled', true);
                 if (phase == 1) { // Time to ask for the photos in the set.
                     $.ajax({
                         type: 'POST',
@@ -122,7 +130,9 @@
                                 return ret +
                                     '<div style="clear:both"></div>';
                             });
-                            $('.btn').val('{% trans "Import selected photos" %} \u2192');
+                            $btn.removeClass('running');
+                            $btn.attr('disabled', false);
+                            $btn.find('text').val('{% trans "Import selected photos" %}');
                             $('p#flickr_sets').hide();
                             phase++;
                         }
@@ -140,10 +150,8 @@
                         dataType: 'json',
                         data: ({'flickr_selected_photos': selected_photos}),
                         timeout: 60000,
-                        success: function (data) {
-                            $('p#flickr_progress_message').hide();
-                            $('p#flickr_progress').html("{% blocktrans %}Done! Go to <a href=\"/users/" + username +
-                                "/?staging&sub=uploaded\">your staging gallery</a> to see the new pictures (and keep an eye on your notifications)!{% endblocktrans %}");
+                        success: function () {
+                            window.location.assign("{% url 'user_page' request.user.username %}?staging");
                         }
                     });
                 }

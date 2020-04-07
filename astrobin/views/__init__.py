@@ -1929,7 +1929,7 @@ def user_profile_flickr_import(request):
             selected_photos = request.POST.getlist('flickr_selected_photos[]')
             # Starting the process of importing
             for index, photo_id in enumerate(selected_photos):
-                log.debug("Flickr import (user %s): iterating photo %d" % (request.user.username, photo_id))
+                log.debug("Flickr import (user %s): iterating photo %s" % (request.user.username, photo_id))
                 sizes = flickr.photos_getSizes(photo_id=photo_id)
                 info = flickr.photos_getInfo(photo_id=photo_id).find('photo')
 
@@ -1944,8 +1944,8 @@ def user_profile_flickr_import(request):
                             found_size = size
 
                 if found_size is not None:
-                    log.debug("Flickr import (user %s): found largest side of photo %d: %s" % (
-                        request.user.username, photo_id, found_size))
+                    log.debug("Flickr import (user %s): found largest side of photo %s" % (
+                        request.user.username, photo_id))
                     source = found_size.attrib['source']
 
                     img = NamedTemporaryFile(delete=True)
@@ -1973,6 +1973,7 @@ def user_profile_flickr_import(request):
 
 
 def flickr_auth_callback(request):
+    log.debug("Flickr import (user %s): received auth callback" % request.user.username)
     flickr = flickrapi.FlickrAPI(
         settings.FLICKR_API_KEY, settings.FLICKR_SECRET,
         username=request.user.username)
