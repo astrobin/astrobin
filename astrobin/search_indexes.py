@@ -487,7 +487,7 @@ class ImageIndex(CelerySearchIndex, Indexable):
     is_commercial = BooleanField()
 
     subject_type = IntegerField()
-    subject_type = CharField(model_attr='subject_type')
+    subject_type_char = CharField(model_attr='subject_type')
 
     acquisition_type = CharField(model_attr='acquisition_type')
 
