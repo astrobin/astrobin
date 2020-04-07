@@ -30,51 +30,46 @@
     </div>
 
     <div class="iotd-promotion-queue">
-        {% for image_group in object_list %}
-            <h2>{{image_group.date}}</h2>
-            {% for image in image_group.images %}
-                <div class="iotd-queue-item
-                           {% if request.user|may_toggle_submission:image %} may-select{% else %}may-not-select{% endif %}
-                           {% if request.user|has_submitted:image %} selected{% endif %}">
-                    <a href="#" class="select" data-toggle-url="{% url 'iotd_toggle_submission_ajax' image.pk %}">
-                        {% astrobin_image image 'story' link=False tooltip=False %}
+        {% for image in object_list %}
+            <div class="iotd-queue-item
+                       {% if request.user|may_toggle_submission:image %} may-select{% else %}may-not-select{% endif %}
+                       {% if request.user|has_submitted:image %} selected{% endif %}">
+                <a href="#" class="select" data-toggle-url="{% url 'iotd_toggle_submission_ajax' image.pk %}">
+                    {% astrobin_image image 'story' link=False tooltip=False %}
+                </a>
+
+                <div class="iotd-queue-item-actions">
+                    <a href="{% url 'image_rawthumb' image.get_id '0' 'hd_anonymized' %}{% query_string "sync=" "" %}" class="fancybox">
+                        <i class="icon-zoom-in"></i>
                     </a>
 
-                    <div class="iotd-queue-item-actions">
-                        <a href="{% url 'image_rawthumb' image.get_id '0' 'hd_anonymized' %}{% query_string "sync=" "" %}" class="fancybox">
-                            <i class="icon-zoom-in"></i>
-                        </a>
+                    <a href="{% url 'image_full' image.get_id %}?real" target="_blank">
+                        <i class="icon-fullscreen"></i>
+                    </a>
 
-                        <a href="{% url 'image_full' image.get_id %}?real" target="_blank">
-                            <i class="icon-fullscreen"></i>
-                        </a>
-
-                        <a href="{{ image.get_absolute_url }}" target="_blank">
-                            <i class="icon-link"></i>
-                        </a>
-                    </div>
-
-                    <div class="iotd-queue-item-loading-overlay">
-                        <i class="icon-spinner"></i>
-                    </div>
-
-                    <div class="iotd-queue-item-selected-overlay">
-                        <i class="icon-ok"></i>
-                    </div>
-
-                    <div class="iotd-queue-item-may-not-select-overlay">
-                        <img
-                            src="{% get_static_prefix %}astrobin_apps_iotd/images/iotd_may_not_select_overlay.png"
-                            rel="tooltip"
-                            {% if not request.user|may_toggle_submission:image %}
-                                title="{{request.user|may_not_toggle_submission_reason:image}}"
-                            {% endif %}
-                        />
-                    </div>
+                    <a href="{{ image.get_absolute_url }}" target="_blank">
+                        <i class="icon-link"></i>
+                    </a>
                 </div>
-            {% empty %}
-                {% trans "No images uploaded on this day." %}
-            {% endfor %}
+
+                <div class="iotd-queue-item-loading-overlay">
+                    <i class="icon-spinner"></i>
+                </div>
+
+                <div class="iotd-queue-item-selected-overlay">
+                    <i class="icon-ok"></i>
+                </div>
+
+                <div class="iotd-queue-item-may-not-select-overlay">
+                    <img
+                        src="{% get_static_prefix %}astrobin_apps_iotd/images/iotd_may_not_select_overlay.png"
+                        rel="tooltip"
+                        {% if not request.user|may_toggle_submission:image %}
+                            title="{{request.user|may_not_toggle_submission_reason:image}}"
+                        {% endif %}
+                    />
+                </div>
+            </div>
         {% empty %}
             {% trans "This queue is currently empty." %}
         {% endfor %}

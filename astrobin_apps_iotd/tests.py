@@ -10,6 +10,7 @@ from django.core.management import call_command
 from django.test import TestCase, override_settings
 from mock import patch
 
+from astrobin.enums import SubjectType
 from astrobin.tests.generators import Generators
 from astrobin_apps_groups.models import Group as AstroBinGroup
 from astrobin_apps_iotd.models import *
@@ -44,9 +45,9 @@ class IotdTest(TestCase):
         self.client.logout()
         self.image = Image.objects_including_wip.first()
 
-        # Approve the image and set a title
         self.image.moderator_decision = 1
         self.image.title = "IOTD TEST IMAGE"
+        self.image.subject_type = SubjectType.DEEP_SKY
         self.image.save(keep_deleted=True)
 
     def tearDown(self):
