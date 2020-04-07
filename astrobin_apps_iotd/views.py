@@ -1,4 +1,4 @@
-from datetime import timedelta, datetime
+from datetime import timedelta, datetime, date
 
 from braces.views import (
     GroupRequiredMixin,
@@ -14,6 +14,7 @@ from django.views.generic import (
     ListView)
 from django.views.generic.base import View
 
+from astrobin.enums import SubjectType
 from astrobin.models import Image
 from astrobin_apps_iotd.models import Iotd, IotdSubmission, IotdVote
 from astrobin_apps_iotd.permissions import may_elect_iotd
@@ -40,32 +41,27 @@ class IotdSubmissionQueueView(
     template_name = 'astrobin_apps_iotd/iotd_submission_queue.html'
 
     def get_queryset(self):
-        days = settings.IOTD_SUBMISSION_WINDOW_DAYS
-        image_groups = []
 
         def can_add(image):
             # type: (Image) -> bool
 
             # Since the introduction of the 2020 plans, Free users cannot participate in the IOTD/TP.
-            user_has_rights = not is_free(image.user)  # type: bool
+            user_is_free = is_free(image.user)  # type: bool
+            already_iotd = Iotd.objects.filter(image=image, date__lte=datetime.now().date()).exists()  # type: bool
 
-            already_iotd = Iotd.objects.filter(image=x, date__lte=datetime.now().date()).exists()  # type: bool
+            return not user_is_free and not already_iotd
 
-            return user_has_rights and not already_iotd
+        images = self.model.objects.filter(
+            moderator_decision=1,
+            published__gte=date.today(),
+            published__lt=date.today() + timedelta(days=settings.IOTD_SUBMISSION_WINDOW_DAYS)
+        ).exclude(
+            subject_type__in=(SubjectType.GEAR, SubjectType.OTHER)
+        ).order_by(
+            '-published'
+        )
 
-        for date in (datetime.now().date() - timedelta(n) for n in range(days)):
-            image_groups.append({
-                'date': date,
-                'images': sorted(list(set([
-                    x
-                    for x in self.model.objects \
-                        .filter(
-                        moderator_decision=1,
-                        published__gte=date,
-                        published__lt=date + timedelta(1))
-                    if can_add(x)])), key=lambda x: x.published, reverse=True)})
-
-        return image_groups
+        return [x for x in images if can_add(x)]
 
 
 class IotdToggleSubmissionAjaxView(
