@@ -1359,7 +1359,7 @@ class Image(HasSolutionMixin, SafeDeleteModel):
         if alias in ('revision', 'runnerup'):
             alias = 'thumb'
 
-        if revision_label in (None, 'final'):
+        if revision_label in (None, 'None', 'final'):
             revision_label = self.get_final_revision_label()
             options['revision_label'] = revision_label
 

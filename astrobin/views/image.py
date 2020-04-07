@@ -1,13 +1,10 @@
-# Python
 import re
 from datetime import datetime
 
-# Third party
 from braces.views import (
     JSONResponseMixin,
     LoginRequiredMixin,
 )
-# Django
 from django.conf import settings
 from django.contrib import messages
 from django.contrib.contenttypes.models import ContentType
@@ -30,7 +27,6 @@ from django.views.generic import (
 from django.views.generic.detail import SingleObjectMixin
 from silk.profiling.profiler import silk_profile
 
-# AstroBin
 from astrobin.enums import SubjectType
 from astrobin.forms import (
     CopyGearForm,
@@ -53,12 +49,10 @@ from astrobin.models import (
     UserProfile,
     LANGUAGES,
     LICENSE_CHOICES,
-    SOLAR_SYSTEM_SUBJECT_CHOICES,
 )
 from astrobin.stories import add_story
 from astrobin.templatetags.tags import can_like
 from astrobin.utils import to_user_timezone, get_image_resolution
-# AstroBin apps
 from astrobin_apps_groups.forms import GroupSelectForm
 from astrobin_apps_groups.models import Group
 from astrobin_apps_images.services import ImageService
@@ -66,7 +60,7 @@ from astrobin_apps_iotd.models import Iotd
 from astrobin_apps_notifications.utils import push_notification
 from astrobin_apps_platesolving.models import Solution
 from astrobin_apps_platesolving.services import SolutionService
-from astrobin_apps_premium.templatetags.astrobin_apps_premium_tags import can_see_real_resolution, is_any_ultimate
+from astrobin_apps_premium.templatetags.astrobin_apps_premium_tags import can_see_real_resolution
 from nested_comments.models import NestedComment
 from rawdata.forms import (
     PublicDataPool_SelectExistingForm,
