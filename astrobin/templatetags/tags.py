@@ -464,7 +464,7 @@ def private_abbr():
 
 
 @register.filter
-def show_technical_card(image):
+def can_add_technical_details(image):
     # type: (Image) -> bool
     return image.subject_type in (
         SubjectType.DEEP_SKY,

@@ -2,6 +2,7 @@
 {% load i18n %}
 {% load astrobin_apps_premium_tags %}
 {% load astrobin_apps_platesolving_tags %}
+{% load tags %}
 
 {% if request.user == image.user or request.user.is_superuser %}
     {% if READONLY_MODE %}
@@ -40,7 +41,7 @@
                 </a>
             </li>
 
-            {% if image.subject_type < 500 %}
+            {% if image|can_add_technical_details %}
                 <li>
                     <a href="{% url 'image_edit_gear' image.get_id %}">
                         <i class="icon-cog"></i>
