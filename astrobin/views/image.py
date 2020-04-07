@@ -803,8 +803,7 @@ class ImageFullView(ImageDetailView):
         image = self.get_object()
 
         mod = self.request.GET.get('mod')
-        real = 'real' in self.request.GET and \
-               (can_see_real_resolution(self.request.user) or is_any_ultimate(self.object.user))
+        real = 'real' in self.request.GET and can_see_real_resolution(self.request.user, image)
         if real:
             alias = 'real'
         else:
