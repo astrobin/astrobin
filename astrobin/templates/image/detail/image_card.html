@@ -4,7 +4,7 @@
 {% load i18n %}
 {% load tags %}
 
-{% if image|show_technical_card %}
+{% if image|can_add_technical_details %}
 
     <div class="row technical-card">
         <div class="span8">
@@ -244,5 +244,5 @@
         </div> <!-- span -->
     </div> <!-- row technical-card -->
 
-{% endif %} {# image|show_technical_card #}
+{% endif %} {# image|can_add_technical_details #}
 

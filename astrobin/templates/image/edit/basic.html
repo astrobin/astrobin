@@ -46,7 +46,7 @@
         <div class="form-actions">
             <input class="btn btn-primary btn-block-mobile" type="submit" name="submit_save" value="{% trans "Save" %} &rarr;" />
 
-            {% if image.subject_type < 500 %}
+            {% if image|can_add_technical_details %}
             <input class="btn btn-primary btn-block-mobile" type="submit" name="submit_gear" value="{% trans "Next step: gear used" %} &rarr;" />
             {% endif %}
 
