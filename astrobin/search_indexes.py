@@ -1,4 +1,5 @@
 import datetime
+import logging
 
 from celery_haystack.indexes import CelerySearchIndex
 from django.contrib.auth.models import User
@@ -15,6 +16,8 @@ from astrobin.models import Image
 from astrobin.models import SolarSystem_Acquisition
 from nested_comments.models import NestedComment
 from toggleproperties.models import ToggleProperty
+
+log = logging.getLogger('apps')
 
 
 def _get_integration(image):
@@ -230,8 +233,8 @@ class UserIndex(CelerySearchIndex, Indexable):
         return "userprofile__updated"
 
     def prepare_images_6m(self, obj):
-        # Printing here just because it's the first "prepare" function.
-        print "%s: %d" % (obj.__class__.__name__, obj.pk)
+        # Logging here just because it's the first "prepare" function.
+        log.debug("Indexing user %s: %d" % (obj.__class__.__name__, obj.pk))
 
         return Image.objects.filter(user=obj).filter(
             uploaded__gte=_6m_ago()).count()
@@ -509,8 +512,8 @@ class ImageIndex(CelerySearchIndex, Indexable):
         return "updated"
 
     def prepare_imaging_telescopes(self, obj):
-        # Printing here just because it's the first "prepare" function.
-        print "%s: %d" % (obj.__class__.__name__, obj.pk)
+        # Logging here just because it's the first "prepare" function.
+        log.debug("Indexing image %s: %d" % (obj.__class__.__name__, obj.pk))
 
         return ["%s, %s" % (x.get("make"), x.get("name")) for x in obj.imaging_telescopes.all().values('make', 'name')]
 
