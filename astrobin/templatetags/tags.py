@@ -464,12 +464,12 @@ def private_abbr():
 
 
 @register.filter
-def show_technical_card_by_subject_type(subject_type):
-    # type: (SubjectType) -> bool
-    return subject_type in (
+def show_technical_card(image):
+    # type: (Image) -> bool
+    return image.subject_type in (
         SubjectType.DEEP_SKY,
         SubjectType.SOLAR_SYSTEM,
         SubjectType.WIDE_FIELD,
         SubjectType.STAR_TRAILS,
         SubjectType.NORTHERN_LIGHTS,
-    )
+    ) or image.solar_system_main_subject is not None
