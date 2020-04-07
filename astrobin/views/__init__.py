@@ -1,4 +1,5 @@
 import csv
+import logging
 import operator
 import os
 import urllib2
@@ -63,6 +64,8 @@ from astrobin_apps_premium.templatetags.astrobin_apps_premium_tags import can_re
 from astrobin_apps_premium.utils import premium_get_max_allowed_image_size, premium_get_max_allowed_revisions
 from astrobin_apps_users.services import UserService
 from toggleproperties.models import ToggleProperty
+
+log = logging.getLogger('apps')
 
 
 def get_image_or_404(queryset, id):
@@ -1877,6 +1880,8 @@ def user_profile_flickr_import(request):
         'readonly': settings.READONLY_MODE
     }
 
+    log.debug("Flickr import (user %s): accessed view" % request.user.username)
+
     if not request.user.is_superuser and is_free(request.user) or settings.READONLY_MODE:
         return render(request, "user/profile/flickr_import.html", response_dict)
 
@@ -1887,6 +1892,7 @@ def user_profile_flickr_import(request):
     if not flickr.token_valid(perms=u'read'):
         # We were never authenticated, or authentication expired. We need
         # to reauthenticate.
+        log.debug("Flickr import (user %s): token not valid" % request.user.username)
         flickr.get_request_token(settings.BASE_URL + reverse('flickr_auth_callback'))
         authorize_url = flickr.auth_url(perms=u'read')
         request.session['request_token'] = flickr.flickr_oauth.resource_owner_key
@@ -1898,26 +1904,32 @@ def user_profile_flickr_import(request):
         # If we made it this far (it's a GET request), it means that we
         # are authenticated with flickr. Let's fetch the sets and send them to
         # the template.
+        log.debug("Flickr import (user %s): token valid, GET request, fetching sets" % request.user.username)
 
-        # Hole shit, does it have to be so insane to get the info on the
+        # Does it have to be so insane to get the info on the
         # authenticated user?
         sets = flickr.photosets_getList().find('photosets').findall('photoset')
+
+        log.debug("Flickr import (user %s): token valid, fetched sets" % request.user.username)
         template_sets = {}
         for set in sets:
             template_sets[set.find('title').text] = set.attrib['id']
         response_dict['flickr_sets'] = template_sets
     else:
-        # This is POST!
+        log.debug("Flickr import (user %s): token valid, POST request" % request.user.username)
         if 'id_flickr_set' in request.POST:
+            log.debug("Flickr import (user %s): set in POST request" % request.user.username)
             set_id = request.POST['id_flickr_set']
             urls_sq = {}
             for photo in flickr.walk_set(set_id, extras='url_sq'):
                 urls_sq[photo.attrib['id']] = photo.attrib['url_sq']
                 response_dict['flickr_photos'] = urls_sq
         elif 'flickr_selected_photos[]' in request.POST:
+            log.debug("Flickr import (user %s): photos in POST request" % request.user.username)
             selected_photos = request.POST.getlist('flickr_selected_photos[]')
             # Starting the process of importing
             for index, photo_id in enumerate(selected_photos):
+                log.debug("Flickr import (user %s): iterating photo %s" % (request.user.username, photo_id))
                 sizes = flickr.photos_getSizes(photo_id=photo_id)
                 info = flickr.photos_getInfo(photo_id=photo_id).find('photo')
 
@@ -1932,6 +1944,8 @@ def user_profile_flickr_import(request):
                             found_size = size
 
                 if found_size is not None:
+                    log.debug("Flickr import (user %s): found largest side of photo %s" % (
+                        request.user.username, photo_id))
                     source = found_size.attrib['source']
 
                     img = NamedTemporaryFile(delete=True)
@@ -1949,13 +1963,17 @@ def user_profile_flickr_import(request):
                                   is_wip=True,
                                   license=profile.default_license)
                     image.save(keep_deleted=True)
+                    log.debug("Flickr import (user %s): saved image %d" % (request.user.username, image.pk))
 
+        log.debug("Flickr import (user %s): returning ajax response: %s" % (
+            request.user.username, simplejson.dumps(response_dict)))
         return ajax_response(response_dict)
 
     return render(request, "user/profile/flickr_import.html", response_dict)
 
 
 def flickr_auth_callback(request):
+    log.debug("Flickr import (user %s): received auth callback" % request.user.username)
     flickr = flickrapi.FlickrAPI(
         settings.FLICKR_API_KEY, settings.FLICKR_SECRET,
         username=request.user.username)

@@ -8,8 +8,6 @@ if DEBUG:
             }
         }
 
-    SESSION_ENGINE = "django.contrib.sessions.backends.cached_db"
-
     PYBB_ANONYMOUS_VIEWS_CACHE_BUFFER = 0
 
     def show_toolbar(request):
