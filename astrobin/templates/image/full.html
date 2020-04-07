@@ -91,7 +91,7 @@
                                 <i class="icon-resize-full"></i>
                                 {% trans "Fit to window" %}
                             </a>
-                        {% elif request.user|can_see_real_resolution or image.user|is_any_ultimate %}
+                        {% elif request.user|can_see_real_resolution:image %}
                             <a class="btn btn-primary navbar-btn" href="{% get_image_url image revision_label 'full' %}{% query_string "mod=mod,real=''" "" %}">
                                 <i class="icon-fullscreen"></i>
                                 {% trans "Full resolution" %}

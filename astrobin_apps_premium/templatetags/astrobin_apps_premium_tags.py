@@ -182,8 +182,12 @@ def can_perform_advanced_platesolving(user):
 
 
 @register.filter
-def can_see_real_resolution(user):
-    return not is_free(user)
+def can_see_real_resolution(user, image):
+    return not is_free(user) or \
+           user == image.user or \
+           is_any_ultimate(image.user) or \
+           is_premium(image.user) or \
+           is_lite(image.user)
 
 
 @register.filter
