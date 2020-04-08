@@ -6,13 +6,13 @@ from persistent_messages.models import Message
 from tastypie import fields, http
 from tastypie.authentication import Authentication
 from tastypie.resources import ModelResource, ALL, ALL_WITH_RELATIONS
-from toggleproperties.models import ToggleProperty
 
 from astrobin.models import Location, Image, ImageRevision, ImageOfTheDay, App, Collection, UserProfile
-from astrobin.models import SOLAR_SYSTEM_SUBJECT_CHOICES
 from astrobin.views import get_image_or_404
+from astrobin_apps_images.services import ImageService
 from astrobin_apps_iotd.models import IotdVote
 from astrobin_apps_premium.utils import premium_get_valid_usersubscription
+from toggleproperties.models import ToggleProperty
 
 
 class AppAuthentication(Authentication):
@@ -27,7 +27,7 @@ class AppAuthentication(Authentication):
             return False
 
         try:
-            app = App.objects.get(secret = app_secret, key = app_key)
+            app = App.objects.get(secret=app_secret, key=app_key)
         except App.DoesNotExist:
             return False
 
@@ -78,7 +78,7 @@ class ImageRevisionResource(ModelResource):
 
     class Meta:
         authentication = AppAuthentication()
-        queryset = ImageRevision.objects.filter(image__is_wip = False, corrupted=False)
+        queryset = ImageRevision.objects.filter(image__is_wip=False, corrupted=False)
         fields = [
             'uploaded',
             'w',
@@ -280,12 +280,12 @@ class ImageResource(ModelResource):
             else:
                 subjects = []
 
-            ssms = bundle.obj.solar_system_main_subject
+            solar_system_main_subject = bundle.obj.solar_system_main_subject
 
             ret = subjects
 
-            if ssms:
-                ret.append(SOLAR_SYSTEM_SUBJECT_CHOICES[ssms][1])
+            if solar_system_main_subject:
+                ret.append(ImageService(bundle.obj).get_solar_system_main_subject_label())
 
             return ret
         return []
@@ -343,7 +343,7 @@ class ImageResource(ModelResource):
         bundle = self.alter_detail_data_to_serialize(request, bundle)
         return self.create_response(request, bundle)
 
-    def build_filters(self, filters = None, ignore_bad_filters = False):
+    def build_filters(self, filters=None, ignore_bad_filters=False):
         subjects = None
         ids = None
 
@@ -381,7 +381,7 @@ class ImageResource(ModelResource):
                 return name
 
             r = r"\y{0}\y".format(fix_name(subjects))
-            qs = Solution.objects.filter(objects_in_field__iregex = r)
+            qs = Solution.objects.filter(objects_in_field__iregex=r)
             orm_filters['pk__in'] = [i.object_id for i in qs]
 
         if ids:
@@ -392,8 +392,8 @@ class ImageResource(ModelResource):
 
 class ImageOfTheDayResource(ModelResource):
     image = fields.ForeignKey('astrobin.api.ImageResource', 'image')
-    runnerup_1 = fields.ForeignKey('astrobin.api.ImageResource', 'runnerup_1', null = True)
-    runnerup_2 = fields.ForeignKey('astrobin.api.ImageResource', 'runnerup_2', null = True)
+    runnerup_1 = fields.ForeignKey('astrobin.api.ImageResource', 'runnerup_1', null=True)
+    runnerup_2 = fields.ForeignKey('astrobin.api.ImageResource', 'runnerup_2', null=True)
 
     class Meta:
         authentication = AppAuthentication()
@@ -541,4 +541,3 @@ class UserProfileResource(ModelResource):
     def dehydrate_premium_subscription_expiration(self, bundle):
         user_subscription = premium_get_valid_usersubscription(bundle.obj.user)
         return user_subscription.expires if user_subscription else None
-
