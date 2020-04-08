@@ -11,17 +11,12 @@ RUN apt-get update && apt-get install -y --no-install-recommends \
     curl \
     git \
     build-essential \
+    python-dev \
     pkg-config \
     libxslt1-dev \
     libxml2-dev \
-    cmake \
-    qt4-qmake \
-    libqt4-dev \
     gettext \
     python-pip \
-    python-pyside libpyside-dev \
-    libqjson-dev libraw-dev \
-    shiboken libshiboken-dev \
     libjpeg62 libjpeg62-dev \
     libfreetype6 libfreetype6-dev \
     liblcms2-dev \
@@ -46,18 +41,8 @@ RUN curl -sS https://dl.yarnpkg.com/debian/pubkey.gpg | apt-key add - \
         yarn \
     && apt-get clean && rm -rf /var/lib/apt/lists/*
 
-
-# System hacks
-RUN ln -s /usr/lib/x86_64-linux-gnu/libraw.so /usr/lib/x86_64-linux-gnu/libraw.so.10
-
-# Install abc
-COPY submodules/abc /code/submodules/abc
-WORKDIR /code/submodules/abc/cfitsio
-RUN sed -i -e 's/\r$//' configure && sh configure && make -j4
-WORKDIR /code/submodules/abc
-RUN qmake . && make -j4 && make install
-
 # Install pip dependencies
+RUN mkdir /code
 COPY requirements.txt /code
 WORKDIR /code
 RUN python -m pip install --upgrade pip && \

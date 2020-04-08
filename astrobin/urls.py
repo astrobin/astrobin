@@ -222,7 +222,6 @@ urlpatterns += [
     url(r'^api/v2/common/', include('common.api_urls')),
     url(r'^api/v2/nestedcomments/', include('nested_comments.api_urls')),
     url(r'^api/v2/platesolving/', include('astrobin_apps_platesolving.api_urls')),
-    url(r'^api/v2/rawdata/', include('rawdata.api_urls')),
 
     ###########################################################################
     ### OWN APPS VIEWS                                                      ###
@@ -232,7 +231,6 @@ urlpatterns += [
     url(r'^notifications/', include('astrobin_apps_notifications.urls')),
     url(r'^platesolving/', include('astrobin_apps_platesolving.urls')),
     url(r'^premium/', include('astrobin_apps_premium.urls')),
-    url(r'^rawdata/', include('rawdata.urls')),
     url(r'^toggleproperties/', include('toggleproperties.urls')),
     url(r'^users_app/', include('astrobin_apps_users.urls')),
     url(r'^groups/', include('astrobin_apps_groups.urls')),

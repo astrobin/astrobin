@@ -48,26 +48,6 @@
 
 <li class="divider"></li>
 
-<li class="nav-header">{% trans "Raw data" %}</li>
-
-{% if rawdata_has_subscription %}
-<li>
-    <a href="{% url 'rawdata.library' %}">
-        <i class="icon-book"></i>
-        {% trans "Raw data library" %}
-    </a>
-</li>
-{% endif %}
-
-<li>
-    <a href="{% url 'rawdata.privatesharedfolder_list' %}">
-        <i class="icon-lock"></i>
-        {% trans "Private shared folders" %}
-    </a>
-</li>
-
-<li class="divider"></li>
-
 <li>
     <a href="{% url 'messages_inbox' %}">
         <i class="icon-inbox"></i>
