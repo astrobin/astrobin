@@ -126,7 +126,7 @@ in that container.
 
 ## Step 7: Login!
 
-AstroBin is running! Visit http://127.0.0.1/ from your host. You can login with
+AstroBin is running! Visit http://127.0.0.1/accounts/login from your host. You can login with
 the following credentials:
 
     astrobin_dev:astrobin_dev
