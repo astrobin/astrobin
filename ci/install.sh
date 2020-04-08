@@ -8,22 +8,17 @@ sudo apt-get update && sudo apt-get install -y --no-install-recommends \
     curl \
     git \
     build-essential \
+    python-dev \
     pkg-config \
     libxslt1-dev \
     libxml2-dev \
-    cmake \
-    qt4-qmake \
-    libqt4-dev \
     gettext \
     python-pip \
-    python-pyside libpyside-dev \
-    libqjson-dev libraw-dev \
-    shiboken libshiboken-dev \
     libjpeg62 libjpeg62-dev \
     libfreetype6 libfreetype6-dev \
+    liblcms2-dev \
     zlib1g-dev \
     ruby ruby-dev \
-    chromium-browser \
     && sudo apt-get clean && sudo rm -rf /var/lib/apt/lists/*
 
 sudo locale-gen en_US.UTF-8
@@ -39,12 +34,6 @@ curl -sS https://dl.yarnpkg.com/debian/pubkey.gpg | sudo apt-key add - \
     && sudo apt-get install -y \
         yarn \
     && sudo apt-get clean && sudo rm -rf /var/lib/apt/lists/*
-
-cd submodules/abc/cfitsio
-sed -i -e 's/\r$//' configure && sh configure && make -j4
-cd ..
-qmake . && make -j4 && sudo make install
-cd ../..
 
 pip install --user --no-deps -r requirements.txt --src src
 
