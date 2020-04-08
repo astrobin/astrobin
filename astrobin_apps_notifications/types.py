@@ -103,36 +103,6 @@ NOTICE_TYPES = (
         2,
     ),
     (
-        'rawdata_posted_to_pool',
-        _('New data posted to public pool'),
-        '',
-        2,
-    ),
-    (
-        'rawdata_posted_image_to_public_pool',
-        _('New image posted to public data pool'),
-        '',
-        2,
-    ),
-    (
-        'rawdata_posted_to_private_folder',
-        _('New data posted to shared private folder'),
-        '',
-        2,
-    ),
-    (
-        'rawdata_posted_image_to_private_folder',
-        _('New image posted to shared private folder'),
-        '',
-        2,
-    ),
-    (
-        'rawdata_invited_to_private_folder',
-        _('You are invited to a shared private folder'),
-        '',
-        2,
-    ),
-    (
         'user_joined_public_group',
         _('A user you follow joined a public group'),
         '',

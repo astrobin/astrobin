@@ -1,2 +1,0 @@
-{% load i18n %}
-{% blocktrans %}{{user_name}} has added a new processed image to the public data pool: "{{pool_name}}". Check it out at the following url: {{pool_url}}{% endblocktrans %}

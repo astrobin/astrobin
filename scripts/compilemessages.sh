@@ -2,7 +2,6 @@
 
 APPS="
 astrobin
-rawdata
 nested_comments
 astrobin_apps_users
 astrobin_apps_images

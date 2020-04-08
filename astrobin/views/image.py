@@ -62,11 +62,6 @@ from astrobin_apps_platesolving.models import Solution
 from astrobin_apps_platesolving.services import SolutionService
 from astrobin_apps_premium.templatetags.astrobin_apps_premium_tags import can_see_real_resolution
 from nested_comments.models import NestedComment
-from rawdata.forms import (
-    PublicDataPool_SelectExistingForm,
-    PrivateSharedFolder_SelectExistingForm,
-)
-from rawdata.models import PrivateSharedFolder
 from toggleproperties.models import ToggleProperty
 
 
@@ -718,13 +713,6 @@ class ImageDetailView(ImageDetailViewBase):
             'select_group_form': GroupSelectForm(
                 user=self.request.user) if self.request.user.is_authenticated() else None,
             'in_public_groups': Group.objects.filter(Q(public=True, images=image)),
-            'select_datapool_form': PublicDataPool_SelectExistingForm(),
-            'select_sharedfolder_form': PrivateSharedFolder_SelectExistingForm(
-                user=self.request.user) if self.request.user.is_authenticated() else None,
-            'has_sharedfolders': PrivateSharedFolder.objects.filter(
-                Q(creator=self.request.user) |
-                Q(users=self.request.user)).count() > 0 if self.request.user.is_authenticated() else False,
-
             'image_next': image_next,
             'image_prev': image_prev,
             'nav_ctx': nav_ctx,

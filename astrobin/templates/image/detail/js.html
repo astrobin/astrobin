@@ -137,38 +137,6 @@ $(document).ready(function() {
 
         e.preventDefault();
     });
-
-    $('button#send-to-datapool').click(function(e) {
-        var selected = $('form#select-datapool select option:selected').val();
-
-        $.ajax({
-            type: 'post',
-            dataType: 'json',
-            data: {image: {{image.id}}},
-            url: '/rawdata/publicdatapools/' + selected + '/add-image/',
-            success: function() {
-                window.location.href = '/rawdata/publicdatapools/' + selected + '/';
-            }
-        });
-
-        e.preventDefault();
-    });
-
-    $('button#send-to-sharedfolder').click(function(e) {
-        var selected = $('form#select-sharedfolder select option:selected').val();
-
-        $.ajax({
-            type: 'post',
-            dataType: 'json',
-            data: {image: {{image.id}}},
-            url: '/rawdata/privatesharedfolders/' + selected + '/add-image/',
-            success: function() {
-                window.location.href = '/rawdata/privatesharedfolders/' + selected + '/';
-            }
-        });
-
-        e.preventDefault();
-    });
 });
 </script>
 

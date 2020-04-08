@@ -142,13 +142,6 @@
                     </a>
                 </li>
 
-                <li class="explore-menu-pools">
-                    <a href="{% url 'rawdata.publicdatapool_list' %}">
-                        <i class="icon-book"></i>
-                        {% trans "Public data pools" %}
-                    </a>
-                </li>
-
                 <li class="divider"></li>
 
                 {% if request.user.is_superuser %}
@@ -187,13 +180,6 @@
                         {% trans "FAQ" %}
                     </a>
                 </li>
-                <li>
-                    <a href="https://welcome.astrobin.com/features/raw-data-support" target="_blank">
-                        <i class="icon-book"></i>
-                        {% trans "AstroBin Raw Data" %}
-                    </a>
-                </li>
-
 
                 <li class="divider"></li>
 
