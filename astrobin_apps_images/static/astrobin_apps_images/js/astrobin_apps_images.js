@@ -5,12 +5,13 @@ $(document).ready(function () {
 
         $(fragment).find('img.astrobin-image').each(function (index) {
             var $img = $(this),
+                devicePixelRatio = window.devicePixelRatio,
                 random_timeout = Math.floor(Math.random() * 100) + 100, // 100-200 ms
                 id = $img.data('id'),
                 hash = $img.data('hash'),
                 revision = $img.data('revision'),
                 alias = $img.data('alias'),
-                url = $img.data('get-thumb-url'),
+                url = $img.data('get-enhanced-thumb-url') === undefined && devicePixelRatio > 1 ? $img.data('get-thumb-url') : $img.data('get-enhanced-thumb-url')
                 loaded = $img.data('loaded'),
                 key = id + '.' + revision + '.' + alias;
 
@@ -35,7 +36,7 @@ $(document).ready(function () {
                         timeout: 0,
                         cache: true,
                         url: url,
-                        timeouot: 60000,
+                        timeout: 60000,
                         success: function (data, status, request) {
                             tries[key] += 1;
                             if (data.url === undefined || data.url === null || data.url.indexOf("placeholder") > -1) {
@@ -44,11 +45,10 @@ $(document).ready(function () {
                                 }, random_timeout * Math.pow(2, tries[key]));
                                 return;
                             }
-
                             var $img =
                                 $('img.astrobin-image[data-id=' + data.id +
                                     (data.hash ? '][data-hash=' + data.hash : "") +
-                                    '][data-alias=' + data.alias +
+                                    '][data-alias=' + alias +
                                     '][data-revision=' + data.revision +
                                     ']');
 

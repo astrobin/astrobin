@@ -86,6 +86,11 @@
                      data-alias="{{alias}}"
                      data-revision="{{revision}}"
                      data-get-thumb-url="{{get_thumb_url}}"
+                     
+                     {% if get_enhanced_thumb_url is not None %}
+                         data-get-enhanced-thumb-url="{{get_enhanced_thumb_url}}"
+                     {% endif %}
+                     
                      alt="{{image.title|escape}}, {% astrobin_username image.user link=False %}" />
 
                 {% if show_tooltip %}
