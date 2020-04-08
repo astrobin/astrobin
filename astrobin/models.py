@@ -1341,8 +1341,6 @@ class Image(HasSolutionMixin, SafeDeleteModel):
             insecure = 'insecure' in thumbnail_settings and thumbnail_settings['insecure'] == True
             if insecure and url.startswith('https'):
                 return url.replace('https', 'http', 1)
-            if not insecure and url.startswith('http://'):
-                return url.replace('http', 'https', 1)
 
             return url
 
