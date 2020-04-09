@@ -17,14 +17,14 @@ Executing this script will reset your local development
 build back to scratch.  It will:
 
  * Shutdown your currently running development environment (if any)
- * Delete the PostgreSQL data Docker volume
- * Delete the media cache Docker volume
+ * Delete all AstroBin Docker volumes
  * Delete all of the built Docker container images
 
 You should only proceed if you are SURE you want to start
 over from scratch.
 
 EOF
+
 echo -n "Proceed? "
 read yn
 case $yn in
@@ -35,16 +35,17 @@ case $yn in
         ;;
 esac
 
-echo "Shutting down the development stack"
-docker-compose -f docker/docker-compose.yml down
+echo "Shutting down the development stack..."
+docker-compose -f docker/docker-compose.yml -f docker/docker-compose.build.yml down
 
-echo "Removing data volumes"
+echo "Removing data volumes..."
 docker volume rm docker_media
 docker volume rm docker_postgres-data
+docker volume rm docker_elasticsearch-data
+docker volume rm docker_letsencrypt
 
-echo "Removing container images"
-for image in docker_beat docker_nginx docker_astrobin docker_celery; do
+echo "Removing container images..."
+for image in astrobin/nginx-dev astrobin/astrobin; do
     echo "-- $image"
-    docker image rm $image
+    docker image rm $(docker image ls | grep $image | awk '{print $3}')
 done
-    
