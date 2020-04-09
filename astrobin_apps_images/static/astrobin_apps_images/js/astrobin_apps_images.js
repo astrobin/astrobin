@@ -14,17 +14,13 @@ $(document).ready(function () {
                 url = $img.data('get-enhanced-thumb-url') === undefined || devicePixelRatio <= 1 ? $img.data('get-thumb-url') : $img.data('get-enhanced-thumb-url')
                 loaded = $img.data('loaded'),
                 key = id + '.' + revision + '.' + alias;
-                console.log("devicePixelRatio="+devicePixelRatio);
-                console.log("url="+url);
 
             function load() {
                 if (!loaded && url !== "") {
                     if (tries[key] === undefined) {
                         tries[key] = 0;
                     }
-                    console.log("loading url="+url);
                     if (tries[key] >= 10) {
-                        console.log("giving up");
                         $img
                             .attr(
                                 'src',
@@ -48,7 +44,6 @@ $(document).ready(function () {
                                 }, random_timeout * Math.pow(2, tries[key]));
                                 return;
                             }
-                            console.log("obtained image url="+data.url);
                             var $img =
                                 $('img.astrobin-image[data-id=' + data.id +
                                     (data.hash ? '][data-hash=' + data.hash : "") +
