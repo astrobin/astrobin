@@ -254,7 +254,7 @@ Before you submit your code for review, you should run tests to ensure that your
 have not broken anything important.  Run the test script by executing:
 
 ```
-docker-compose -f docker/docker-compose.yml exec astrobin ./scripts/test.sh
+docker-compose -f docker/docker-compose.yml -f docker/docker-compose.build.yml run --no-deps --rm astrobin ./scripts/test.sh
 ```
 
 # Postgresql

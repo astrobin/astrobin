@@ -14,8 +14,7 @@ TIME_ZONE = 'Europe/London'
 SECRET_KEY = os.environ.get('DJANGO_SECRET_KEY', 'default.key').strip()
 SITE_ID = 1
 
-
-TESTING = len(sys.argv) > 1 and sys.argv[1] == 'test'
+TESTING = os.environ.get("TESTING", 'false').strip() == 'true' or len(sys.argv) > 1 and sys.argv[1] == 'test'
 DEBUG = os.environ.get('DEBUG', 'true').strip() == 'true'
 INTERNAL_IPS = ['127.0.0.1', '172.18.0.1'] # localhost and docker gateway
 
