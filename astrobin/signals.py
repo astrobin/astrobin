@@ -29,11 +29,6 @@ from astrobin_apps_premium.templatetags.astrobin_apps_premium_tags import (
     is_lite, is_any_premium_subscription, is_lite_2020, is_any_ultimate, is_premium_2020, is_premium)
 from astrobin_apps_premium.utils import premium_get_valid_usersubscription
 from nested_comments.models import NestedComment
-from rawdata.models import (
-    PrivateSharedFolder,
-    PublicDataPool,
-    RawImage,
-)
 from toggleproperties.models import ToggleProperty
 from .gear import get_correct_gear
 from .models import Image, ImageRevision, Gear, UserProfile
@@ -303,133 +298,12 @@ def toggleproperty_post_save(sender, instance, created, **kwargs):
 post_save.connect(toggleproperty_post_save, sender=ToggleProperty)
 
 
-def rawdata_publicdatapool_post_save(sender, instance, created, **kwargs):
-    if created:
-        add_story(instance.creator,
-                  verb='VERB_CREATED_DATA_POOL',
-                  action_object=instance)
-
-
-post_save.connect(rawdata_publicdatapool_post_save, sender=PublicDataPool)
-
-
 def create_auth_token(sender, instance, created, **kwargs):
     if created:
         Token.objects.get_or_create(user=instance)
 
 
 post_save.connect(create_auth_token, sender=User)
-
-
-def rawdata_publicdatapool_data_added(sender, instance, action, reverse, model, pk_set, **kwargs):
-    if action == 'post_add' and len(pk_set) > 0:
-        contributors = [i.user for i in instance.images.all()]
-        users = [instance.creator] + contributors
-        submitter = RawImage.objects.get(pk=list(pk_set)[0]).user
-        users[:] = [x for x in users if x != submitter]
-        push_notification(
-            users,
-            'rawdata_posted_to_pool',
-            {
-                'user_name': submitter.userprofile.get_display_name(),
-                'user_url': reverse_url('user_page', kwargs={'username': submitter.username}),
-                'pool_name': instance.name,
-                'pool_url': reverse_url('rawdata.publicdatapool_detail', kwargs={'pk': instance.pk}),
-            },
-        )
-
-        add_story(instance.creator,
-                  verb='VERB_ADDED_DATA_TO_DATA_POOL',
-                  action_object=instance.images.all()[0],
-                  target=instance)
-
-
-m2m_changed.connect(rawdata_publicdatapool_data_added, sender=PublicDataPool.images.through)
-
-
-def rawdata_publicdatapool_image_added(sender, instance, action, reverse, model, pk_set, **kwargs):
-    if action == 'post_add' and len(pk_set) > 0:
-        contributors = [i.user for i in instance.images.all()]
-        users = [instance.creator] + contributors
-        image = Image.objects.get(pk=list(pk_set)[0])
-        submitter = image.user
-        users[:] = [x for x in users if x != submitter]
-        push_notification(
-            users,
-            'rawdata_posted_image_to_public_pool',
-            {
-                'user_name': submitter.userprofile.get_display_name(),
-                'user_url': reverse_url('user_page', kwargs={'username': submitter.username}),
-                'pool_name': instance.name,
-                'pool_url': reverse_url('rawdata.publicdatapool_detail', kwargs={'pk': instance.pk}),
-            },
-        )
-
-        add_story(submitter,
-                  verb='VERB_ADDED_IMAGE_TO_DATA_POOL',
-                  action_object=image,
-                  target=instance)
-
-
-m2m_changed.connect(rawdata_publicdatapool_image_added, sender=PublicDataPool.processed_images.through)
-
-
-def rawdata_privatesharedfolder_data_added(sender, instance, action, reverse, model, pk_set, **kwargs):
-    if action == 'post_add' and len(pk_set) > 0:
-        invitees = instance.users.all()
-        users = [instance.creator] + list(invitees)
-        submitter = RawImage.objects.get(pk=list(pk_set)[0]).user
-        users[:] = [x for x in users if x != submitter]
-        push_notification(
-            users,
-            'rawdata_posted_to_private_folder',
-            {
-                'user_name': submitter.userprofile.get_display_name(),
-                'user_url': reverse_url('user_page', kwargs={'username': submitter.username}),
-                'folder_name': instance.name,
-                'folder_url': reverse_url('rawdata.privatesharedfolder_detail', kwargs={'pk': instance.pk}),
-            },
-        )
-
-
-m2m_changed.connect(rawdata_privatesharedfolder_data_added, sender=PrivateSharedFolder.images.through)
-
-
-def rawdata_privatesharedfolder_image_added(sender, instance, action, reverse, model, pk_set, **kwargs):
-    if action == 'post_add' and len(pk_set) > 0:
-        invitees = instance.users.all()
-        users = [instance.creator] + list(invitees)
-        submitter = Image.objects.get(pk=list(pk_set)[0]).user
-        users[:] = [x for x in users if x != submitter]
-        push_notification(
-            users,
-            'rawdata_posted_image_to_private_folder',
-            {
-                'user_name': submitter.userprofile.get_display_name(),
-                'user_url': reverse_url('user_page', kwargs={'username': submitter.username}),
-                'folder_name': instance.name,
-                'folder_url': reverse_url('rawdata.privatesharedfolder_detail', kwargs={'pk': instance.pk}),
-            },
-        )
-
-
-m2m_changed.connect(rawdata_privatesharedfolder_image_added, sender=PrivateSharedFolder.processed_images.through)
-
-
-def rawdata_privatesharedfolder_user_added(sender, instance, action, reverse, model, pk_set, **kwargs):
-    if action == 'post_add' and len(pk_set) > 0:
-        user = UserProfile.objects.get(user__pk=list(pk_set)[0]).user
-        push_notification(
-            [user],
-            'rawdata_invited_to_private_folder',
-            {
-                'folder_name': instance.name,
-                'folder_url': reverse_url('rawdata.privatesharedfolder_detail', kwargs={'pk': instance.pk}),
-            },
-        )
-
-
-m2m_changed.connect(rawdata_privatesharedfolder_user_added, sender=PrivateSharedFolder.users.through)
 
 
 def solution_post_save(sender, instance, created, **kwargs):

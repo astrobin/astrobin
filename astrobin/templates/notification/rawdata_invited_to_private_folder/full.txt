@@ -1,6 +1,0 @@
-{% load i18n %}
-{% blocktrans %}You are invited to the private shared folder: "{{folder_name}}".
-
-You can now contribute data and processed images to the folder. You can also invite more people.
-
-Visit the folder at the following url: {{folder_url}}{% endblocktrans %}

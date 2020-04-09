@@ -17,10 +17,6 @@ Group.objects.get_or_create(name='astrobin_premium')
 Group.objects.get_or_create(name='astrobin_premium_2020')
 Group.objects.get_or_create(name='astrobin_ultimate_2020')
 
-Group.objects.get_or_create(name='rawdata-meteor-2020')
-Group.objects.get_or_create(name='rawdata-luna-2020')
-Group.objects.get_or_create(name='rawdata-sol-2020')
-
 Group.objects.get_or_create(name='astrobin-donor-bronze-monthly')
 Group.objects.get_or_create(name='astrobin-donor-silver-monthly')
 Group.objects.get_or_create(name='astrobin-donor-gold-monthly')
@@ -128,51 +124,6 @@ except Subscription.DoesNotExist:
         recurrence_unit=None,
         group=Group.objects.get(name='astrobin_ultimate_2020'),
         category='premium')
-
-try:
-    Subscription.objects.get(name='AstroBin Raw Data Meteor 2020+')
-except Subscription.DoesNotExist:
-    Subscription.objects.get_or_create(
-        name='AstroBin Raw Data Meteor 2020+',
-        description="50 GB",
-        currency="CHF",
-        price=3,
-        trial_period=7,
-        trial_unit="D",
-        recurrence_period=1,
-        recurrence_unit="M",
-        group=Group.objects.get(name='rawdata-meteor-2020'),
-        category='rawdata')
-
-try:
-    Subscription.objects.get(name='AstroBin Raw Data Luna 2020+')
-except Subscription.DoesNotExist:
-    Subscription.objects.get_or_create(
-        name='AstroBin Raw Data Luna 2020+',
-        description="250 GB",
-        currency="CHF",
-        price=15,
-        trial_period=7,
-        trial_unit="D",
-        recurrence_period=1,
-        recurrence_unit="M",
-        group=Group.objects.get(name='rawdata-luna-2020'),
-        category='rawdata')
-
-try:
-    Subscription.objects.get(name='AstroBin Raw Data Sol 2020+')
-except Subscription.DoesNotExist:
-    Subscription.objects.get_or_create(
-        name='AstroBin Raw Data Sol 2020+',
-        description="500 GB",
-        currency="CHF",
-        price=30,
-        trial_period=7,
-        trial_unit="D",
-        recurrence_period=1,
-        recurrence_unit="M",
-        group=Group.objects.get(name='rawdata-sol-2020'),
-        category='rawdata')
 
 try:
     Subscription.objects.get(name='AstroBin Donor Bronze Monthly')
@@ -288,7 +239,6 @@ except Subscription.DoesNotExist:
 
 Group.objects.get_or_create(name='content_moderators')
 Group.objects.get_or_create(name='image_moderators')
-Group.objects.get_or_create(name='rawdata-atom')
 Group.objects.get_or_create(name='iotd_staff')
 Group.objects.get_or_create(name='iotd_submitters')
 Group.objects.get_or_create(name='iotd_reviewers')

@@ -469,16 +469,6 @@ def index(request, template='index/root.html', extra_context=None):
 
 @login_required
 def image_upload(request):
-    from rawdata.utils import (
-        rawdata_user_has_subscription,
-        rawdata_user_has_valid_subscription,
-        rawdata_user_has_invalid_subscription,
-        rawdata_user_is_over_limit,
-        rawdata_user_used_percent,
-        rawdata_user_progress_class,
-        rawdata_supported_raw_formats,
-    )
-
     from astrobin_apps_premium.utils import (
         premium_used_percent,
         premium_progress_class,
@@ -486,26 +476,12 @@ def image_upload(request):
         premium_user_has_invalid_subscription,
     )
 
-    rawdata_has_sub = rawdata_user_has_subscription(request.user)
-    rawdata_has_act_sub = rawdata_has_sub and rawdata_user_has_valid_subscription(request.user)
-    rawdata_has_inact_sub = rawdata_has_sub and rawdata_user_has_invalid_subscription(request.user)
-    rawdata_is_over_limit = rawdata_has_act_sub and rawdata_user_is_over_limit(request.user)
-
     tmpl_premium_used_percent = premium_used_percent(request.user)
     tmpl_premium_progress_class = premium_progress_class(tmpl_premium_used_percent)
     tmpl_premium_has_inact_sub = premium_user_has_subscription(request.user) and premium_user_has_invalid_subscription(
         request.user)
 
     response_dict = {
-        'rawdata_has_sub': rawdata_has_sub,
-        'rawdata_has_act_sub': rawdata_has_act_sub,
-        'rawdata_has_inact_sub': rawdata_has_inact_sub,
-        'rawdata_is_over_limit': rawdata_is_over_limit,
-
-        'rawdata_used_percent': rawdata_user_used_percent(request.user) if rawdata_has_act_sub else 100,
-        'rawdata_progress_class': rawdata_user_progress_class(request.user) if rawdata_has_act_sub else '',
-        'rawdata_supported_raw_formats': rawdata_supported_raw_formats(),
-
         'premium_used_percent': tmpl_premium_used_percent,
         'premium_progress_class': tmpl_premium_progress_class,
         'premium_has_inact_sub': tmpl_premium_has_inact_sub,

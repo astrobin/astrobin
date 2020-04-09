@@ -39,59 +39,6 @@
             </div> <!-- well -->
         {% endif %}
 
-        <div class="well">
-            <h2>{% trans "AstroBin Raw Data subscription plans" %}</h2>
-
-            <p>
-                {% blocktrans %}<strong>AstroBin Raw Data</strong> allows you to store your raw files (
-                    <strong>FIT</strong> and <strong>digital camera raw</strong>) on AstroBin. We will keep them neatly
-                    organized, and you will have a safe backup of all your work, including calibration
-                    files.{% endblocktrans %}
-
-                {% blocktrans with rawdata_url="https://welcome.astrobin.com/features/raw-data-support" %}Learn more by reading <a href="{{ rawdata_url }}">a short introduction.</a>{% endblocktrans %}
-            </p>
-
-            <p>
-                {% trans "Here's a short description of each plan:" %}
-            </p>
-
-            <ul class="subscription-plans-description-list">
-                <li>
-                    <strong>Atom</strong><br/>
-                    {% blocktrans %}This plan is free! Choose it to share a small amount of data with other
-                        users.{% endblocktrans %}
-                </li>
-                <li>
-                    <strong>Meteor</strong><br/>
-                    {% blocktrans %} Choose this plan if you want to keep your expenses to a minimum, but still want the
-                        possibility to share your FIT and digital camera raw files with your friends. You can also
-                        participate to public data pools and contribute to the deepest deep sky images ever created, and
-                        you will always know that you support AstroBin.{% endblocktrans %}
-                </li>
-                <li>
-                    <strong>Luna</strong><br/>
-                    {% blocktrans %}Choose this plan if you have started out in the recent year or two, or you don't
-                        want to share and backup your calibration files. Enjoy a lot of room for a convenient
-                        price.{% endblocktrans %}
-                </li>
-                <li>
-                    <strong>Sol</strong><br/>
-                    {% blocktrans %}Choose this plan if you have several years worth of data. You will probably have
-                        enough room for all your calibration files, and will enjoy the full potential of the
-                        platform.{% endblocktrans %}
-                </li>
-                <li>
-                    <strong>Galaxia</strong><br/>
-                    {% blocktrans %}Choose this plan if you have a massive amount of raw data that you want to share and
-                        backup securely online.{% endblocktrans %}
-                </li>
-            </ul>
-            {% offered_subscriptions as offered %}
-            {% with subscription_category='rawdata' object_list=offered %}
-                {% include 'subscription/subscription_category_list.html' %}
-            {% endwith %}
-        </div>
-
         {% if request.user|valid_subscriptions %}
             <div class="well">
                 <h2>{% trans "Your active subscription plans" %}</h2>
