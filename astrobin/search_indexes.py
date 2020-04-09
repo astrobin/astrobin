@@ -459,8 +459,8 @@ class ImageIndex(CelerySearchIndex, Indexable):
     last_acquisition_date = DateTimeField()
     views = IntegerField()
 
-    solar_system_main_subject = IntegerField()
-    solar_system_main_subject_char = CharField(model_attr='solar_system_main_subject')
+    solar_system_main_subject = IntegerField(null=True)
+    solar_system_main_subject_char = CharField(model_attr='solar_system_main_subject', null=True)
 
     is_deep_sky = BooleanField()
     is_solar_system = BooleanField()
