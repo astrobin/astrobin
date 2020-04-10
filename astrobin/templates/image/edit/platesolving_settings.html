@@ -3,6 +3,7 @@
 {% load i18n %}
 {% load bootstrap_toolkit %}
 {% load django_bootstrap_breadcrumbs %}
+{% load common_tags %}
 
 {% block title %}{% trans "Edit your image: plate-solving settings" %}{% endblock %}
 
@@ -16,22 +17,21 @@
 {% block content %}
     <h1>{% trans "Plate-solving settings" %}</h1>
 
-    <form
-            id="platesolving-settings"
-            class="form-horizontal"
-            action="{% url 'image_edit_platesolving_settings' image.get_id revision_label %}"
-            method="post">{% csrf_token %}
-        {{form|as_bootstrap}}
+    <form id="platesolving-settings" class="form-horizontal"
+          action="{% url 'image_edit_platesolving_settings' image.get_id revision_label %}"
+          method="post">{% csrf_token %}
+
+        {{ form|as_bootstrap }}
 
         <div class="form-actions">
-            <input
-                class="btn btn-primary btn-block-mobile"
-                type="submit"
-                name="submit_save"
-                value="{% trans "Save and plate-solve again" %}" />
+            <button class="btn btn-primary btn-block-mobile {% button_loading_class %}" type="submit"
+                    name="submit_save">
+                {% trans "Save and plate-solve again" %}
+                {% button_loading_indicator %}
+            </button>
 
-            <a class="btn btn-block-mobile" href="{{return_url}}">
-                {% trans "Back to image" %}
+            <a class="btn btn-block-mobile" href="{{ return_url }}">
+                {% trans "Cancel" %}
             </a>
         </div>
     </form>
@@ -39,12 +39,12 @@
 
 {% block extra_js %}
     <script language="javascript">
-        $(document).ready(function() {
+        $(document).ready(function () {
             var $form = $('form#platesolving-settings'),
                 $blind = $form.find('input#id_blind');
 
             function disable_all($form) {
-                $form.find('.control-group').each(function(index, group) {
+                $form.find('.control-group').each(function (index, group) {
                     if ($(group).find('input#id_blind').length > 0) {
                         // Skip
                         return;
@@ -55,7 +55,7 @@
             }
 
             function enable_all($form) {
-                $form.find('.control-group').each(function(index, group) {
+                $form.find('.control-group').each(function (index, group) {
                     if ($(group).find('input#id_blind').length > 0) {
                         // Skip
                         return;
@@ -65,7 +65,7 @@
                 });
             }
 
-            $blind.change(function() {
+            $blind.change(function () {
                 if ($(this).is(':checked')) {
                     disable_all($form);
                 } else {
