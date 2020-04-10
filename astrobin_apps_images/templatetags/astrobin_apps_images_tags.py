@@ -257,6 +257,38 @@ def astrobin_image(context, image, alias, **kwargs):
         get_thumb_url = reverse('image_thumb', kwargs = get_thumb_kwargs)
         if animated:
             get_thumb_url += '?animated'
+        
+    get_enhanced_thumb_url = None
+    enhanced_thumb_url = None        
+    if alias == 'regular' or alias == 'regular_sharpened':
+        enhanced_alias = 'hd' if alias == 'regular' else 'hd_sharpened'
+        cache_key = image.thumbnail_cache_key(field, enhanced_alias)
+        if animated:
+            cache_key += '_animated'
+        enhanced_thumb_url = cache.get(cache_key)
+        # Force HTTPS
+        if enhanced_thumb_url and request.is_secure():
+            enhanced_thumb_url = enhanced_thumb_url.replace('http://', 'https://', 1)
+
+        # If we're testing, we want to bypass the placeholder thing and force-get
+        # the enhanced thumb url.
+        if enhanced_thumb_url is None and settings.TESTING:
+            enhanced_thumb = image.thumbnail_raw(enhanced_alias, {'revision_label': revision})
+            if enhanced_thumb:
+                enhanced_thumb_url = enhanced_thumb.url
+        
+        if enhanced_thumb_url is None:
+            get_enhanced_thumb_kwargs = {
+                'id': image.hash if image.hash else image.id,
+                'alias': enhanced_alias,
+            }
+
+            if revision is None or revision != 'final':
+                get_enhanced_thumb_kwargs['r'] = revision
+
+            get_enhanced_thumb_url = reverse('image_thumb', kwargs = get_enhanced_thumb_kwargs)
+            if animated:
+                get_enhanced_thumb_url += '?animated'
 
     return dict(response_dict.items() + {
         'status'        : 'success',
@@ -281,6 +313,8 @@ def astrobin_image(context, image, alias, **kwargs):
         'nav_ctx'       : nav_ctx,
         'nav_ctx_extra' : nav_ctx_extra,
         'classes'       : classes,
+        'enhanced_thumb_url' : enhanced_thumb_url,
+        'get_enhanced_thumb_url' : get_enhanced_thumb_url,
     }.items())
 register.inclusion_tag(
     'astrobin_apps_images/snippets/image.html',
