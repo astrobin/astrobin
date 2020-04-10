@@ -1,4 +1,11 @@
 2020-04-08 Salvatore Iovene <salvatore@iovene.com>
+ * v1.59.1
+ * (search) Fix Image search model by allowing null values for solar system main subject
+ * (infra) Fix execution of test command on pristine build (#907)
+ * (infra) Fix docker-reset.sh script
+ * (docs) Fix testing instructions in README.md
+
+2020-04-08 Salvatore Iovene <salvatore@iovene.com>
  * v1.59.0
  * (docs) Specify direct login link in login instructions
  * (images) Fix unnecessary redirect to secure URL of an image
