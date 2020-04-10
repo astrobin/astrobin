@@ -4,6 +4,7 @@
 {% load tags %}
 {% load bootstrap_toolkit %}
 {% load django_bootstrap_breadcrumbs %}
+{% load common_tags %}
 
 {% block title %}{% trans "Edit your image: basic information" %}{% endblock %}
 {% block container_extra_classes %}has-subnav{% endblock %}
@@ -44,17 +45,31 @@
         {% endif %}
 
         <div class="form-actions">
-            <input class="btn btn-primary btn-block-mobile" type="submit" name="submit_save" value="{% trans "Save" %} &rarr;" />
+            <button
+                    class="btn btn-primary btn-block-mobile {% button_loading_class %}"
+                    type="submit"
+                    name="submit_save">
+                {% trans "Save" %}
+                {% button_loading_indicator %}
+            </button>
 
             {% if image|can_add_technical_details %}
-            <input class="btn btn-primary btn-block-mobile" type="submit" name="submit_gear" value="{% trans "Next step: gear used" %} &rarr;" />
+            <button
+                    class="btn btn-primary btn-block-mobile {% button_loading_class %}"
+                    type="submit"
+                    name="submit_gear">
+                {% trans "Next step: gear used" %} &rarr;
+                {% button_loading_indicator %}
+            </button>
             {% endif %}
 
-            <a data-toggle="modal" class="btn btn-danger btn-block-mobile" href="#delete-modal">
-                <i class="icon-remove"></i> {% trans "Delete" %}
-            </a>
+            {% if image.title %}
+                <a data-toggle="modal" class="btn btn-danger btn-block-mobile" href="#delete-modal">
+                    <i class="icon-remove"></i> {% trans "Delete" %}
+                </a>
 
-            <a class="btn btn-block-mobile" href="{{image.get_absolute_url}}">{% trans "Cancel" %}</a>
+                <a class="btn btn-block-mobile" href="{{image.get_absolute_url}}">{% trans "Cancel" %}</a>
+            {% endif %}
         </div>
     </form>
 {% endblock %}
@@ -73,12 +88,28 @@
         }
     }
 
+    function showHideNextStepGearButton() {
+        var subjectType = $('#id_subject_type').val();
+        var $nextStepGearButton = $('.btn[name="submit_gear"]');
+
+        if ($nextStepGearButton.length > 0 && subjectType === 'OTHER') {
+            $nextStepGearButton.hide();
+        } else {
+            $nextStepGearButton.show();
+        }
+    }
+
     $(document).ready(function() {
         $('.ui-multiselect').show();
 
         showHideRemoteSource();
         $(document).on('change', '#id_data_source', function () {
             showHideRemoteSource();
+        });
+
+        showHideNextStepGearButton();
+        $(document).on('change', '#id_subject_type', function () {
+            showHideNextStepGearButton();
         });
 
         $('form#basic').removeClass("hidden");

@@ -4,6 +4,7 @@
 {% load bootstrap_toolkit %}
 {% load django_bootstrap_breadcrumbs %}
 {% load staticfiles %}
+{% load common_tags %}
 
 {% block title %}{% trans "Edit your image: gear used" %}{% endblock %}
 {% block container_extra_classes %}has-subnav{% endblock %}
@@ -56,10 +57,24 @@
         <input type="hidden" name="image_id" value="{{ image.get_id }}" />
 
         <div class="form-actions">
-            <input class="btn btn-primary btn-block-mobile" type="submit" value="{% trans "Save" %} &rarr;" />
-            <input class="btn btn-primary btn-block-mobile" type="submit" name="submit_acquisition"
-                   value="{% trans "Edit acquisition details" %} &rarr;" />
-            <a class="btn btn-block-mobile" href="{{ image.get_absolute_url }}">{% trans "Cancel" %}</a>
+            <button
+                    class="btn btn-primary btn-block-mobile {% button_loading_class %}"
+                    type="submit">
+                {% trans "Save" %}
+                {% button_loading_indicator %}
+            </button>
+
+            <button
+                    class="btn btn-primary btn-block-mobile {% button_loading_class %}"
+                    type="submit"
+                    name="submit_acquisition">
+                {% trans "Edit acquisition details" %} &rarr;
+                {% button_loading_indicator %}
+            </button>
+
+            {% if image.title %}
+                <a class="btn btn-block-mobile" href="{{ image.get_absolute_url }}">{% trans "Cancel" %}</a>
+            {% endif %}
         </div>
     </form>
 {% endblock %}
