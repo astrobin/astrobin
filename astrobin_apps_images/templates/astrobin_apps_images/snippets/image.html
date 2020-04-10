@@ -87,7 +87,11 @@
                      data-revision="{{revision}}"
                      data-get-thumb-url="{{get_thumb_url}}"
                      
-                     {% if get_enhanced_thumb_url is not None %}
+                     data-hires-loaded="false"
+                     {% if enhanced_thumb_url %}
+                         data-enhanced-thumb-url="{{enhanced_thumb_url}}"
+                     {% endif %}
+                     {% if get_enhanced_thumb_url %}
                          data-get-enhanced-thumb-url="{{get_enhanced_thumb_url}}"
                      {% endif %}
                      
