@@ -102,7 +102,7 @@ $(document).ready(function () {
                         .attr('data-hires-loaded', hires)
                         .attr('src', data.url);
                     delete tries[key];
-                    if (!hires && (alias == 'regular' || alias == 'regular_sharpened')) {
+                    if (!hires && (alias === 'regular' || alias === 'regular_sharpened')) {
                         loadHighDPI($img);
                     }
                 }
