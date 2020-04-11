@@ -467,6 +467,7 @@ def private_abbr():
 def can_add_technical_details(image):
     # type: (Image) -> bool
     return image.subject_type in (
+        "", # Default as it comes from the frontend form.
         SubjectType.DEEP_SKY,
         SubjectType.SOLAR_SYSTEM,
         SubjectType.WIDE_FIELD,

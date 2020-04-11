@@ -1,8 +1,10 @@
 {% extends 'base.html' %}
+
 {% load i18n %}
 {% load tags %}
 {% load bootstrap_toolkit %}
 {% load django_bootstrap_breadcrumbs %}
+{% load common_tags %}
 
 {% block title %}{% trans "Edit your image: acquisition details" %}{% endblock %}
 {% block container_extra_classes %}has-subnav{% endblock %}
@@ -19,93 +21,142 @@
     {% include 'image/edit/menu.html' %}
 
     {% if edit_type == 'solar_system' %}
-        <form class="form-horizontal" id="image_acquisition" action="{% url 'image_edit_save_acquisition' %}" method="post">{% csrf_token %}
-            {{ssa_form|as_bootstrap}}
-            <input type="hidden" name="image_id" value="{{image.get_id}}" />
+        <form class="form-horizontal" id="image_acquisition" action="{% url 'image_edit_save_acquisition' %}"
+              method="post">{% csrf_token %}
+            {{ ssa_form|as_bootstrap }}
+            <input type="hidden" name="image_id" value="{{ image.get_id }}" />
             <input type="hidden" name="edit_type" value="solar_system" />
             <div class="form-actions">
-                <input class="btn btn-primary btn-block-mobile" type="submit" value="{% trans "Save" %} &rarr;" />
-                <a class="btn btn-danger btn-block-mobile" href="{% url 'image_edit_acquisition_reset' image.get_id %}">{% trans "Remove data" %}</a>
-                <a class="btn btn-block-mobile" href="{{image.get_absolute_url}}">{% trans "Cancel" %}</a>
+                <button class="btn btn-primary btn-block-mobile {% button_loading_class %}" type="submit">
+                    {% trans "Save" %}
+                    {% button_loading_indicator %}
+                </button>
+
+                <a class="btn btn-danger btn-block-mobile"
+                   href="{% url 'image_edit_acquisition_reset' image.get_id %}">{% trans "Remove data" %}</a>
+
+                {% if image.title %}
+                    <a class="btn btn-block-mobile" href="{{ image.get_absolute_url }}">{% trans "Cancel" %}</a>
+                {% endif %}
             </div>
         </form>
     {% else %}
-    {% if edit_type == 'deep_sky' %}
-        {% if advanced or request.GET.advanced == 'true' %}
-        <div class="subtitle">
-            <i class="icon icon-info-sign"></i>
-            {% blocktrans %}You can insert as many acquisition sessions as you want, as often images are taken across several nights. An acquisition session is defined primarily by a date and a filter. Fill in your data and then click on <strong>Save</strong> to finish, or on <strong>Add more</strong> to add more acquisition sessions.{% endblocktrans %}
-            {% url 'image_edit_acquisition' image.get_id as basic_form_url %}
-            {% blocktrans %}Is this too much data for you to handle? Go to the <a class="button" href="{{basic_form_url}}?edit_type=deep_sky&advanced=false">basic form</a>.{% endblocktrans %}
-        </div>
-
-        <form class="form-horizontal" id="image_acquisition" action="{% url 'image_edit_save_acquisition' %}" method="post">{% csrf_token %}
-            {% for form in deep_sky_acquisitions %}
-                <div id="acquisition-session-{{forloop.counter0}}" class="acquisition-session">
-                    <h3>{% trans "Acquisition session" %}{% if forloop.first and deep_sky_acquisitions|length > 1 %} {% trans "(scroll down for more)" %}{% endif %}:</h3>
-                    {{form|as_bootstrap}}
+        {% if edit_type == 'deep_sky' %}
+            {% if advanced or request.GET.advanced == 'true' %}
+                <div class="subtitle">
+                    <i class="icon icon-info-sign"></i>
+                    {% blocktrans trimmed %}You can insert as many acquisition sessions as you want, as often images are
+                        taken
+                        across several nights. An acquisition session is defined primarily by a date and a filter. Fill
+                        in your data and then click on <strong>Save</strong> to finish, or on <strong>Add more</strong>
+                        to add more acquisition sessions.{% endblocktrans %}
+                    {% url 'image_edit_acquisition' image.get_id as basic_form_url %}
+                    {% blocktrans trimmed %}Is this too much data for you to handle? Go to the
+                        <a class="button" href="{{ basic_form_url }}?edit_type=deep_sky&advanced=false">basic form</a>.
+                    {% endblocktrans %}
                 </div>
-                <hr/>
-            {% endfor %}
 
-            {{deep_sky_acquisitions.management_form}}
+                <form class="form-horizontal" id="image_acquisition" action="{% url 'image_edit_save_acquisition' %}"
+                      method="post">{% csrf_token %}
+                    {% for form in deep_sky_acquisitions %}
+                        <div id="acquisition-session-{{ forloop.counter0 }}" class="acquisition-session">
+                            <h3>{% trans "Acquisition session" %}
+                                {% if forloop.first and deep_sky_acquisitions|length > 1 %}
+                                    {% trans "(scroll down for more)" %}{% endif %}:</h3>
+                            {{ form|as_bootstrap }}
+                        </div>
+                        <hr />
+                    {% endfor %}
 
-            <input type="hidden" name="image_id" value="{{image.get_id}}" />
-            <input type="hidden" name="edit_type" value="deep_sky" />
-            <input type="hidden" name="advanced" value="true"/>
+                    {{ deep_sky_acquisitions.management_form }}
 
-            <div class="form-actions">
-                <input class="btn btn-primary btn-block-mobile" type="submit" value="{% trans "Save" %} &rarr;" />
-                <input class="btn btn-primary btn-block-mobile" type="submit" value="{% trans "Add more" %}" name="add_more" />
-                <a class="btn btn-block-mobile btn-danger" href="{% url 'image_edit_acquisition_reset' image.get_id %}">{% trans "Remove data" %}</a>
-                <a class="btn btn-block-mobile" href="{{image.get_absolute_url}}">{% trans "Cancel" %}</a>
-            </div>
-        </form>
+                    <input type="hidden" name="image_id" value="{{ image.get_id }}" />
+                    <input type="hidden" name="edit_type" value="deep_sky" />
+                    <input type="hidden" name="advanced" value="true" />
+
+                    <div class="form-actions">
+                        <button class="btn btn-primary btn-block-mobile {% button_loading_class %}" type="submit">
+                            {% trans "Save" %}
+                            {% button_loading_indicator %}
+                        </button>
+
+                        <button class="btn btn-primary btn-block-mobile {% button_loading_class %}" type="submit"
+                                name="add_more">
+                            {% trans "Add more" %}
+                            {% button_loading_indicator %}
+                        </button>
+
+                        <a class="btn btn-block-mobile btn-danger"
+                           href="{% url 'image_edit_acquisition_reset' image.get_id %}">
+                            {% trans "Remove data" %}
+                        </a>
+
+                        {% if image.title %}
+                            <a class="btn btn-block-mobile" href="{{ image.get_absolute_url }}">{% trans "Cancel" %}</a>
+                        {% endif %}
+                    </div>
+                </form>
+            {% else %}
+                {% url 'image_edit_acquisition' image.get_id as advanced_form_url %}
+                <div class="subtitle">
+                    <i class="icon icon-info-sign"></i>
+                    {% blocktrans trimmed %}With this form you can input the basic details for the acquisition of your
+                        image. If you want to be more thorough or fill in separate details for each filter, go to the
+                        <a class="button" href="{{ advanced_form_url }}?edit_type=deep_sky&advanced=true">advanced
+                            form</a>.{% endblocktrans %}
+                </div>
+                <form class="form-horizontal" id="image_acquisition" action="{% url 'image_edit_save_acquisition' %}"
+                      method="post">{% csrf_token %}
+                    {{ deep_sky_acquisition_basic_form|as_bootstrap }}
+
+                    <input type="hidden" name="image_id" value="{{ image.get_id }}" />
+                    <input type="hidden" name="edit_type" value="deep_sky" />
+                    <input type="hidden" name="advanced" value="false" />
+                    <div class="form-actions">
+                        <button class="btn btn-primary btn-block-mobile {% button_loading_class %}" type="submit">
+                            {% trans "Save" %}
+                            {% button_loading_indicator %}
+                        </button>
+
+                        <a class="btn btn-danger btn-block-mobile"
+                           href="{% url 'image_edit_acquisition_reset' image.get_id %}">
+                            {% trans "Remove data" %}
+                        </a>
+
+                        {% if image.title %}
+                            <a class="btn btn-block-mobile" href="{{ image.get_absolute_url }}">{% trans "Cancel" %}</a>
+                        {% endif %}
+                    </div>
+                </form>
+            {% endif %}
         {% else %}
-            {% url 'image_edit_acquisition' image.get_id as advanced_form_url %}
-            <div class="subtitle">
-                <i class="icon icon-info-sign"></i>
-                {% blocktrans %}With this form you can input the basic details for the acquisition of your image. If you want to be more thorough or fill in separate details for each filter, go to the <a class="button" href="{{advanced_form_url}}?edit_type=deep_sky&advanced=true">advanced form</a>.{% endblocktrans %}
-            </div>
-            <form class="form-horizontal" id="image_acquisition" action="{% url 'image_edit_save_acquisition' %}" method="post">{% csrf_token %}
-                {{deep_sky_acquisition_basic_form|as_bootstrap}}
-
-                <input type="hidden" name="image_id" value="{{image.get_id}}" />
-                <input type="hidden" name="edit_type" value="deep_sky" />
-                <input type="hidden" name="advanced" value="false"/>
+            <div class="well">{% trans "What kind of image is this?" %}</div>
+            <form class="form-horizontal">{% csrf_token %}
                 <div class="form-actions">
-                    <input class="btn btn-primary btn-block-mobile" type="submit" value="{% trans "Save" %} &rarr;" />
-                    <a class="btn btn-danger btn-block-mobile" href="{% url 'image_edit_acquisition_reset' image.get_id %}">{% trans "Remove data" %}</a>
-                    <a class="btn btn-block-mobile" href="{{image.get_absolute_url}}">{% trans "Cancel" %}</a>
+                    <a class="btn btn-primary btn-block-mobile"
+                       href="{% url 'image_edit_acquisition' image.get_id %}?edit_type=solar_system">
+                        {% trans "Solar system" %}
+                    </a>
+                    <a class="btn btn-primary btn-block-mobile"
+                       href="{% url 'image_edit_acquisition' image.get_id %}?edit_type=deep_sky">
+                        {% trans "Deep sky" %}
+                    </a>
+                    <a class="btn btn-block-mobile" href="{{ image.get_absolute_url }}">
+                        {% trans "Other" %}
+                    </a>
                 </div>
             </form>
         {% endif %}
-    {% else %}
-        <div class="well">{% trans "What kind of image is this?" %}</div>
-        <form class="form-horizontal">{% csrf_token %}
-            <div class="form-actions">
-                <a class="btn btn-primary btn-block-mobile" href="{% url 'image_edit_acquisition' image.get_id %}?edit_type=solar_system">
-                    {% trans "Solar system" %}
-                </a>
-                <a class="btn btn-primary btn-block-mobile" href="{% url 'image_edit_acquisition' image.get_id %}?edit_type=deep_sky">
-                    {% trans "Deep sky" %}
-                </a>
-                <a class="btn btn-block-mobile" href="{{image.get_absolute_url}}">
-                    {% trans "Other" %}
-                </a>
-            </div>
-        </div>
-    {% endif %}
     {% endif %}
 {% endblock %}
 
 {% block extra_js %}
-{% if next_acquisition_session > 0 %}
-<script type="text/javascript">
-$(document).ready(function() {
-    $(window).scrollTop($('#acquisition-session-{{next_acquisition_session}}').position().top)
-});
-</script>
-{% endif %}
+    {% if next_acquisition_session > 0 %}
+        <script type="text/javascript">
+            $(document).ready(function () {
+                $(window).scrollTop($('#acquisition-session-{{next_acquisition_session}}').position().top)
+            });
+        </script>
+    {% endif %}
 {% endblock %}
 
