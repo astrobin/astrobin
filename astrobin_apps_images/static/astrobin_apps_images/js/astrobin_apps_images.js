@@ -116,7 +116,7 @@ $(document).ready(function () {
                         .attr('src', data.url);
                     if (debug) console.log("load() | image "+key+" : done");
                     delete tries[key];
-                    if (!hires && (alias == 'regular' || alias == 'regular_sharpened')) {
+                    if (!hires && (alias === 'regular' || alias === 'regular_sharpened')) {
                         loadHighDPI($img);
                     }
                 }
