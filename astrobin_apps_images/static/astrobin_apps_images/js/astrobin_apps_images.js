@@ -14,8 +14,8 @@ $(document).ready(function () {
                 url = $img.data('get-thumb-url'),
                 enhanced_thumbnail_url = $img.data('enhanced-thumb-url'),
                 get_enhanced_thumbnail_url = $img.data('get-enhanced-thumb-url'),
-                loaded = $img.data('loaded'),
-            key = getKey(id, revision, alias);
+                loaded = $img.data('loaded');
+
             if (!loaded) {
                 setTimeout(function () {
                     load(url, id, revision, alias, tries, false, random_timeout);
@@ -37,17 +37,14 @@ $(document).ready(function () {
             id = $img.data('id'),
             revision = $img.data('revision'),
             alias = $img.data('alias'),
-            url = $img.data('get-thumb-url'),
             enhanced_thumbnail_url = $img.data('enhanced-thumb-url'),
-            get_enhanced_thumbnail_url = $img.data('get-enhanced-thumb-url'),
-            key = getKey(id, revision, alias);
+            get_enhanced_thumbnail_url = $img.data('get-enhanced-thumb-url');
     
         if (devicePixelRatio > 1) {
             if (enhanced_thumbnail_url !== undefined) {
                 $img.attr('data-hires-loaded', true);
                 $img.attr('src', enhanced_thumbnail_url);
             } else if (get_enhanced_thumbnail_url !== undefined) {
-                url = get_enhanced_thumbnail_url;
                 $img.attr('data-hires-loaded', false);
                 setTimeout(function () {
                     load(get_enhanced_thumbnail_url, id, revision, alias, tries, true, random_timeout);
