@@ -46,7 +46,7 @@ $(document).ready(function () {
             if (enhanced_thumbnail_url !== undefined) {
                 $img.attr('data-hires-loaded', true);
                 $img.attr('src', enhanced_thumbnail_url);
-            } else if (!(get_enhanced_thumbnail_url === undefined)) {
+            } else if (get_enhanced_thumbnail_url !== undefined) {
                 url = get_enhanced_thumbnail_url;
                 $img.attr('data-hires-loaded', false);
                 setTimeout(function () {
