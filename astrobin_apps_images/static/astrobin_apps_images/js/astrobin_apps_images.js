@@ -18,7 +18,7 @@ $(document).ready(function () {
             key = getKey(id, revision, alias);
             if (!loaded) {
                 setTimeout(function () {
-                    load(url, id, revision, alias, tries, false);
+                    load(url, id, revision, alias, tries, false, random_timeout);
                 }, random_timeout);
             } else if (enhanced_thumbnail_url || get_enhanced_thumbnail_url) {
                 loadHighDPI($img);
@@ -46,17 +46,17 @@ $(document).ready(function () {
             if (enhanced_thumbnail_url !== undefined) {
                 $img.attr('data-hires-loaded', true);
                 $img.attr('src', enhanced_thumbnail_url);
-            } else if (!(get_enhanced_thumbnail_url === undefined)) {
+            } else if (get_enhanced_thumbnail_url !== undefined) {
                 url = get_enhanced_thumbnail_url;
                 $img.attr('data-hires-loaded', false);
                 setTimeout(function () {
-                    load(get_enhanced_thumbnail_url, id, revision, alias, tries, true);
+                    load(get_enhanced_thumbnail_url, id, revision, alias, tries, true, random_timeout);
                 }, random_timeout);
             }
         }
     }
 
-    function load(url, id, revision, alias, tries, hires) {       
+    function load(url, id, revision, alias, tries, hires, random_timeout) {       
         if (url !== "") {
             key = getKey(id, revision, alias);
             if (tries[key] === undefined) {
@@ -75,20 +75,22 @@ $(document).ready(function () {
             $.ajax({
                 dataType: 'json',
                 cache: true,
-                context: [id, revision, alias, hires, tries],
+                context: [url, id, revision, alias, hires, tries, random_timeout],
                 url: url,
                 timeout: 60000,
                 success: function (data, status, request) {
-                    var id = this[0],
-                        revision = this[1],
-                        alias = this[2],
-                        hires = this[3],
-                        tries = this[4],
+                    var url = this[0],
+                        id = this[1],
+                        revision = this[2],
+                        alias = this[3],
+                        hires = this[4],
+                        tries = this[5],
+                        random_timeout = this[6],
                         key = getKey(id, revision, alias);
                     tries[key] += 1;
                     if (data.url === undefined || data.url === null || data.url.indexOf("placeholder") > -1) {
                         setTimeout(function () {
-                            load();
+                            load(url, id, revision, alias, tries, hires, random_timeout);
                         }, random_timeout * Math.pow(2, tries[key]));
                         return;
                     }
