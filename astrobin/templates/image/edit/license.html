@@ -1,8 +1,10 @@
 {% extends 'base.html' %}
+
 {% load i18n %}
 {% load tags %}
 {% load bootstrap_toolkit %}
 {% load django_bootstrap_breadcrumbs %}
+{% load common_tags %}
 
 {% block title %}{% trans "Change the license for this image" %}{% endblock %}
 
@@ -16,18 +18,26 @@
 {% block content %}
     <div class="subtitle">
         <i class="icon icon-info-sign"></i>
-        {% blocktrans %}You can associate a Creative Commons license with your content if you wish, to grant people the right to use your work under certain circumstances. For more information on what your options are, please visit the <a target="_blank" href="http://www.creativecommons.org/">Creative Commons website</a>.{% endblocktrans %}
+        {% blocktrans trimmed %}You can associate a Creative Commons license with your content if you wish, to grant
+            people the right to use your work under certain circumstances. For more information on what your options
+            are, please visit the
+            <a target="_blank" href="http://www.creativecommons.org/">Creative Commons website</a>.{% endblocktrans %}
         {% url 'profile_edit_license' as change_default_url %}
-        {% blocktrans %}Remember that you can change your default license <a href="{{change_default_url}}">here</a>.{% endblocktrans %}
+        {% blocktrans trimmed %}Remember that you can change your default license
+            <a href="{{ change_default_url }}">here</a>.{% endblocktrans %}
     </div>
 
     <form class="form-horizontal" action="{% url 'image_edit_save_license' %}" method="post">{% csrf_token %}
-        {{form|as_bootstrap}}
-        <input type="hidden" name="image_id" value="{{image.get_id}}"/>
+        {{ form|as_bootstrap }}
+        <input type="hidden" name="image_id" value="{{ image.get_id }}" />
+
         <div class="form-actions">
-            <input class="btn btn-primary btn-block-mobile" type="submit" value="{% trans "Save" %} &rarr;" />
+            <button class="btn btn-primary btn-block-mobile {% button_loading_class %}" type="submit">
+                {% trans "Save" %}
+                {% button_loading_indicator %}
+            </button>
+
             <a class="btn btn-block-mobile" href="{% url 'image_detail' image.get_id %}">{% trans "Cancel" %}</a>
         </div>
     </form>
 {% endblock %}
-

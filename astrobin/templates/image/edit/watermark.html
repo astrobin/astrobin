@@ -3,6 +3,7 @@
 {% load tags %}
 {% load bootstrap_toolkit %}
 {% load django_bootstrap_breadcrumbs %}
+{% load common_tags %}
 
 {% block title %}{% trans "Apply a watermark to image" %}{% endblock %}
 {% block container_extra_classes %}has-subnav{% endblock %}
@@ -28,16 +29,18 @@
         <input type="hidden" name="image_id" value="{{image.get_id}}" />
 
         <div class="form-actions">
-            <input
-                class="btn btn-primary btn-block-mobile"
-                type="submit"
-                value=
+            <button
+                class="btn btn-primary btn-block-mobile {% button_loading_class %}"
+                type="submit">
                 {% if image.title %}
-                    "{% trans "Save" %} &rarr;"
+                    {% trans "Save" %}
                 {% else %}
-                    "{% trans "Next step: basic information" %} &rarr;"
+                    {% trans "Next step: basic information" %} &rarr;
                 {% endif %}
-            />
+
+                {% button_loading_indicator %}
+            </button>
+
 
             {% if image.title %}
                 <a class="btn btn-block-mobile" href="{{image.get_absolute_url}}">{% trans "Cancel" %}</a>

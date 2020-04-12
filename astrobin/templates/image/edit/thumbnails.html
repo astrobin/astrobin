@@ -3,6 +3,7 @@
 {% load tags %}
 {% load bootstrap_toolkit %}
 {% load django_bootstrap_breadcrumbs %}
+{% load common_tags %}
 
 {% block extra_head %}
     {{ form.media }}
@@ -36,15 +37,17 @@
             <input type="hidden" name="submit_watermark" value="true" />
             {% endif %}
 
-            <input
-                    class="btn btn-primary btn-block-mobile"
-                    type="submit"
-                    {% if image.title %}
-                    value="{% trans "Save" %} &rarr;"
-                    {% else %}
-                    value="{% trans "Next step: edit watermark" %} &rarr;"
-                    {% endif %}
-            />
+            <button
+                    class="btn btn-primary btn-block-mobile {% button_loading_class %}"
+                    type="submit">
+                {% if image.title %}
+                    {% trans "Save" %}
+                {% else %}
+                    {% trans "Next step: edit watermark" %} &rarr;
+                {% endif %}
+
+                {% button_loading_indicator %}
+            </button>
 
             {% if image.title %}
                 <a class="btn btn-block-mobile" href="{% url 'image_detail' image.get_id %}">

@@ -1,7 +1,5 @@
 $(document).ready(function () {
     
-    var debug = true;
-    
     /* TODO: make this a jQuery plugin */
 
     window.loadAstroBinImages = function (fragment) {
@@ -9,7 +7,6 @@ $(document).ready(function () {
 
         $(fragment).find('img.astrobin-image').each(function (index) {
             var $img = $(this),
-                devicePixelRatio = window.devicePixelRatio,
                 random_timeout = Math.floor(Math.random() * 100) + 100, // 100-200 ms
                 id = $img.data('id'),
                 revision = $img.data('revision'),
@@ -18,20 +15,20 @@ $(document).ready(function () {
                 enhanced_thumbnail_url = $img.data('enhanced-thumb-url'),
                 get_enhanced_thumbnail_url = $img.data('get-enhanced-thumb-url'),
                 loaded = $img.data('loaded'),
-                hires_loaded = $img.data('hires-loaded'),
-                key = id + '.' + revision + '.' + alias;
-            if (debug) console.log("loadAstroBinImages() | image "+id+" rev="+revision+" alias="+alias+" : loaded="+loaded+" DPR="+devicePixelRatio+
-                " src="+$img.attr('src')+" get_thumb_url="+url+
-                " enhanced_thumb_url="+enhanced_thumbnail_url+" get_enhanced_thumb_url="+get_enhanced_thumbnail_url);
+            key = getKey(id, revision, alias);
             if (!loaded) {
                 setTimeout(function () {
-                    load(url, id, revision, alias, tries, false);
+                    load(url, id, revision, alias, tries, false, random_timeout);
                 }, random_timeout);
             } else if (enhanced_thumbnail_url || get_enhanced_thumbnail_url) {
                 loadHighDPI($img);
             }
         });
     };
+
+    function getKey(id, revision, alias) {
+        return id + '.' + revision + '.' + alias;
+    }
 
     function loadHighDPI($img) {
         var tries = {},
@@ -43,36 +40,29 @@ $(document).ready(function () {
             url = $img.data('get-thumb-url'),
             enhanced_thumbnail_url = $img.data('enhanced-thumb-url'),
             get_enhanced_thumbnail_url = $img.data('get-enhanced-thumb-url'),
-            key = id + '.' + revision + '.' + alias;
+            key = getKey(id, revision, alias);
     
-        if (debug) console.log("loadHighDPI() | image "+key+" : DPR="+devicePixelRatio+
-            " src="+$img.attr('src')+" get_url="+url+
-            " enhanced_thumb_url="+enhanced_thumbnail_url+" get_enhanced_thumb_url="+get_enhanced_thumbnail_url);
         if (devicePixelRatio > 1) {
-            if (!(enhanced_thumbnail_url === undefined)) {
+            if (enhanced_thumbnail_url !== undefined) {
                 $img.attr('data-hires-loaded', true);
                 $img.attr('src', enhanced_thumbnail_url);
-                if (debug) console.log("loadHighDPI() | image "+key+" : replaced src with "+$img.data('enhanced-thumb-url'));
-            } else if (!(get_enhanced_thumbnail_url === undefined)) {
+            } else if (get_enhanced_thumbnail_url !== undefined) {
                 url = get_enhanced_thumbnail_url;
                 $img.attr('data-hires-loaded', false);
-                if (debug) console.log("loadHighDPI() | image "+key+" : will need to load from "+url);
                 setTimeout(function () {
-                    load(get_enhanced_thumbnail_url, id, revision, alias, tries, true);
+                    load(get_enhanced_thumbnail_url, id, revision, alias, tries, true, random_timeout);
                 }, random_timeout);
             }
         }
     }
 
-    function load(url, id, revision, alias, tries, hires) {       
+    function load(url, id, revision, alias, tries, hires, random_timeout) {       
         if (url !== "") {
-            key = id + '.' + revision + '.' + alias;
-            if (debug) console.log("load() | image "+key+" : loading");
+            key = getKey(id, revision, alias);
             if (tries[key] === undefined) {
                 tries[key] = 0;
             }
             if (tries[key] >= 10) {
-                if (debug) console.log("load() | image "+key+" : giving up");
                 img
                     .attr(
                         'src',
@@ -84,27 +74,26 @@ $(document).ready(function () {
     
             $.ajax({
                 dataType: 'json',
-                timeout: 0,
                 cache: true,
-                context: [id, revision, alias, hires, tries],
+                context: [url, id, revision, alias, hires, tries, random_timeout],
                 url: url,
                 timeout: 60000,
                 success: function (data, status, request) {
-                    var id = this[0],
-                        revision = this[1],
-                        alias = this[2],
-                        hires = this[3],
-                        tries = this[4],
-                        key = id + '.' + revision + '.' + alias;
+                    var url = this[0],
+                        id = this[1],
+                        revision = this[2],
+                        alias = this[3],
+                        hires = this[4],
+                        tries = this[5],
+                        random_timeout = this[6],
+                        key = getKey(id, revision, alias);
                     tries[key] += 1;
                     if (data.url === undefined || data.url === null || data.url.indexOf("placeholder") > -1) {
-                        if (debug) console.log("load() | image "+key+" : placeholder obtained");
                         setTimeout(function () {
-                            load();
+                            load(url, id, revision, alias, tries, hires, random_timeout);
                         }, random_timeout * Math.pow(2, tries[key]));
                         return;
                     }
-                    if (debug) console.log("load() | image "+key+" : obtained - new url="+data.url);
                     var $img =
                         $('img.astrobin-image[data-id=' + data.id +
                         (data.hash ? '][data-hash=' + data.hash : "") +
@@ -114,7 +103,6 @@ $(document).ready(function () {
                     $img.attr('data-loaded', 'true')
                         .attr('data-hires-loaded', hires)
                         .attr('src', data.url);
-                    if (debug) console.log("load() | image "+key+" : done");
                     delete tries[key];
                     if (!hires && (alias === 'regular' || alias === 'regular_sharpened')) {
                         loadHighDPI($img);
