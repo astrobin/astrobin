@@ -1,3 +1,7 @@
+2020-04-15 Salvatore Iovene <salvatore@iovene.com>
+ * v1.60.2
+ * (images) Do not invalidate thumbnails upon failure as it's too expensive
+
 2020-04-12 Salvatore Iovene <salvatore@iovene.com>
  * v1.60.1
  * (images) Fix image loading bug when placeholder is present (#908)
