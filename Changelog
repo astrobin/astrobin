@@ -1,4 +1,8 @@
 2020-04-15 Salvatore Iovene <salvatore@iovene.com>
+ * v1.60.3
+ * (images) Add timeout to request to purge file from CloudFlare
+
+2020-04-15 Salvatore Iovene <salvatore@iovene.com>
  * v1.60.2
  * (images) Do not invalidate thumbnails upon failure as it's too expensive
 
