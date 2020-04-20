@@ -303,7 +303,7 @@ class SolutionPixInsightWebhook(base.View):
 
         if status == 'OK':
             svg_hd = request.POST.get('svgAnnotation', None)
-            svg_regular = request.POST.get('svgAnnotationSmall', None)
+            svg_regular = request.POST.get('svgAnnotationSmall', svg_hd)
 
             solution.pixinsight_svg_annotation_hd.save(serial_number + ".svg", ContentFile(svg_hd))
             solution.pixinsight_svg_annotation_regular.save(serial_number + ".svg", ContentFile(svg_regular))
