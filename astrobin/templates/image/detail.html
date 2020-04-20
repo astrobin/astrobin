@@ -16,7 +16,7 @@
     <meta property="og:title" content="{{image.title}}">
     <meta property="og:description" content="An astrophotograph by {{image.user.userprofile}} on AstroBin">
     <meta property="og:image"
-          content="{{SHARE_PATH}}/{{image.id}}/{{revision_label}}/rawthumb/regular/get.jpg?insecure">
+          content="{{SHARE_PATH}}/{{image.get_id}}/{{revision_label}}/rawthumb/regular/get.jpg?insecure">
 {% endblock %}
 
 {% block title %}{{image.title}} ({% astrobin_username image.user link=False %}){% endblock %}
