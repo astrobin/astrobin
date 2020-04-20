@@ -1,3 +1,10 @@
+2020-04-20 Salvatore Iovene <salvatore@iovene.com>
+ * v1.61.0
+ * (api) Add API to support AstroBin's Angular app (#916)
+ * (plate-solving) Use HD size PI SVG if regular size is not available
+ * (general) Fix Sponsors & Partners links
+ * (sharing) Fix URL or og:image tag to use hash when available
+
 2020-04-15 Salvatore Iovene <salvatore@iovene.com>
  * v1.60.3
  * (images) Add timeout to request to purge file from CloudFlare
