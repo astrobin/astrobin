@@ -18,6 +18,7 @@ class NestedCommentList(generics.ListCreateAPIView):
     filter_fields = ('content_type', 'object_id',)
     permission_classes = (permissions.IsAuthenticatedOrReadOnly,
                           IsOwnerOrReadOnly,)
+    pagination_class = None
 
     def perform_create(self, serializer):
         serializer.save(author=self.request.user)
