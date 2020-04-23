@@ -15,11 +15,14 @@ class TopPickFeed(Feed):
     def items(self):
         return IotdService().get_top_picks()[:10]
 
+    def item_guid(self, item):
+        return "%d" % item.get_id()
+
     def item_title(self, item):
-        return item.title
+        return item.title.encode('ascii', 'ignore').decode('ascii')
 
     def item_description(self, item):
-       item.description
+       item.description.encode('ascii', 'ignore').decode('ascii')
 
     def item_link(self, item):
         return settings.BASE_URL + reverse('image_detail', kwargs={
@@ -29,7 +32,7 @@ class TopPickFeed(Feed):
     def item_author_name(self, item):
         name = item.user.userprofile.get_display_name().encode('ascii', 'ignore').decode('ascii')
         if name == u'':
-            name = item.user.username
+            name = item.user.username.encode('ascii', 'ignore').decode('ascii')
 
         return name
 
@@ -43,8 +46,8 @@ class TopPickFeed(Feed):
         url = item.thumbnail  ('regular', {'sync': True})
         return '<img src="{}" alt="{}"><br>{}, by <a href="{}">{}</a>'.format(
             url,
-            item.title,
-            item.title,
+            self.item_title(item),
+            self.item_title(item),
             reverse('user_page', args=(item.user.username,)),
             self.item_author_name(item)
         )
