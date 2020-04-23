@@ -28,7 +28,7 @@ class TopPickFeed(Feed):
         return settings.BASE_URL + reverse('user_page', args=(item.user.username,))
 
     def item_pubdate(self, item):
-        return item.publikshed
+        return item.published
 
     def item_content_encoded(self, item):
         url = item.thumbnail  ('regular', {'sync': True})
