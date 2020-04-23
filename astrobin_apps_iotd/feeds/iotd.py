@@ -24,10 +24,16 @@ class IotdFeed(Feed):
         return item.image.description
 
     def item_link(self, item):
-        return item.image.get_absolute_url()
+        return settings.BASE_URL + reverse('image_detail', kwargs={
+            'id': item.image.get_id()
+        })
 
     def item_author_name(self, item):
-        return item.image.user.userprofile.get_display_name()
+        name = item.image.user.userprofile.get_display_name().encode('ascii', 'ignore').decode('ascii')
+        if name == u'':
+            name = item.image.user.username
+
+        return name
 
     def item_author_link(self, item):
         return settings.BASE_URL + reverse('user_page', args=(item.image.user.username,))
@@ -42,7 +48,7 @@ class IotdFeed(Feed):
             item.image.title,
             item.image.title,
             reverse('user_page', args=(item.image.user.username,)),
-            item.image.user.userprofile.get_display_name()
+            self.item_author_name(item)
         )
 
     def item_extra_kwargs(self, item):
