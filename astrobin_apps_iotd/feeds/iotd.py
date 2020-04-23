@@ -17,11 +17,14 @@ class IotdFeed(Feed):
     def items(self):
         return IotdService().get_iotds()[:10]
 
+    def item_guid(self, item):
+        return "%d" % item.image.get_id()
+
     def item_title(self, item):
-        return item.image.title
+        return item.image.title.encode('ascii', 'ignore').decode('ascii')
 
     def item_description(self, item):
-        return item.image.description
+        return item.image.description.encode('ascii', 'ignore').decode('ascii')
 
     def item_link(self, item):
         return settings.BASE_URL + reverse('image_detail', kwargs={
@@ -31,7 +34,7 @@ class IotdFeed(Feed):
     def item_author_name(self, item):
         name = item.image.user.userprofile.get_display_name().encode('ascii', 'ignore').decode('ascii')
         if name == u'':
-            name = item.image.user.username
+            name = item.image.user.username.encode('ascii', 'ignore').decode('ascii')
 
         return name
 
@@ -45,8 +48,8 @@ class IotdFeed(Feed):
         url = item.image.thumbnail('regular', {'sync': True})
         return '<img src="{}" alt="{}"><br>{}, by <a href="{}">{}</a>'.format(
             url,
-            item.image.title,
-            item.image.title,
+            self.item_title(item),
+            self.item_title(item),
             reverse('user_page', args=(item.image.user.username,)),
             self.item_author_name(item)
         )
