@@ -21,8 +21,17 @@ class TopPickFeed(Feed):
     def item_description(self, item):
        item.description
 
+    def item_link(self, item):
+        return settings.BASE_URL + reverse('image_detail', kwargs={
+            'id': item.get_id()
+        })
+
     def item_author_name(self, item):
-        return item.user.userprofile.get_display_name()
+        name = item.user.userprofile.get_display_name().encode('ascii', 'ignore').decode('ascii')
+        if name == u'':
+            name = item.user.username
+
+        return name
 
     def item_author_link(self, item):
         return settings.BASE_URL + reverse('user_page', args=(item.user.username,))
@@ -37,7 +46,7 @@ class TopPickFeed(Feed):
             item.title,
             item.title,
             reverse('user_page', args=(item.user.username,)),
-            item.user.userprofile.get_display_name()
+            self.item_author_name(item)
         )
 
     def item_extra_kwargs(self, item):
