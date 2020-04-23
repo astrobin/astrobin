@@ -1,5 +1,7 @@
 from django.conf.urls import url
 
+from astrobin_apps_iotd.feeds.iotd import IotdFeed, IotdAtomFeed
+from astrobin_apps_iotd.feeds.top_picks import TopPickFeed, TopPickAtomFeed
 from astrobin_apps_iotd.views import IotdToggleSubmissionAjaxView, IotdSubmissionQueueView, IotdToggleVoteAjaxView, \
     IotdReviewQueueView, IotdToggleJudgementAjaxView, IotdJudgementQueueView, IotdArchiveView, \
     IotdSubmittersForImageAjaxView, IotdReviewersForImageAjaxView
@@ -50,4 +52,10 @@ urlpatterns = (
         r'^reviewers-for-image-ajax/(?P<pk>\d+)/$',
         IotdReviewersForImageAjaxView.as_view(),
         name='iotd_reviewers_for_image'),
+
+    # Feeds
+    url(r'rss/iotd', IotdFeed()),
+    url(r'atom/iotd', IotdAtomFeed()),
+    url(r'rss/top-picks', TopPickFeed()),
+    url(r'atom/top-picks', TopPickAtomFeed())
 )

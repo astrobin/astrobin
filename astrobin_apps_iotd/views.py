@@ -18,6 +18,7 @@ from astrobin.enums import SubjectType
 from astrobin.models import Image
 from astrobin_apps_iotd.models import Iotd, IotdSubmission, IotdVote
 from astrobin_apps_iotd.permissions import may_elect_iotd
+from astrobin_apps_iotd.services import IotdService
 from astrobin_apps_iotd.templatetags.astrobin_apps_iotd_tags import (
     iotd_submissions_today,
     iotd_votes_today,
@@ -229,12 +230,11 @@ class IotdToggleJudgementAjaxView(
 
 class IotdArchiveView(ListView):
     model = Iotd
-    queryset = Iotd.objects \
-        .filter(date__lte=datetime.now().date(), image__deleted=None) \
-        .exclude(image__corrupted=True)
     template_name = 'astrobin_apps_iotd/iotd_archive.html'
     paginate_by = 30
 
+    def get_queryset(self):
+        return IotdService().get_iotds()
 
 class IotdSubmittersForImageAjaxView(
     LoginRequiredMixin, GroupRequiredMixin, View):
