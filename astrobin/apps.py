@@ -27,5 +27,6 @@ class AstroBinAppConfig(AppConfig):
     def ready(self):
         from astrobin.signals import *
         from astrobin_apps_notifications.signals import *
+        from astrobin.locale_extras import LOCALE_EXTRAS
 
         self.registerActStreamModels()
