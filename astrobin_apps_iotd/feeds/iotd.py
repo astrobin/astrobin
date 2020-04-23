@@ -18,7 +18,7 @@ class IotdFeed(Feed):
         return IotdService().get_iotds()[:10]
 
     def item_guid(self, item):
-        return "%d" % item.image.get_id()
+        return "%d" % item.image.pk
 
     def item_title(self, item):
         return item.image.title.encode('ascii', 'ignore').decode('ascii')
