@@ -16,7 +16,7 @@ class TopPickFeed(Feed):
         return IotdService().get_top_picks()[:10]
 
     def item_guid(self, item):
-        return "%d" % item.get_id()
+        return "%d" % item.pk
 
     def item_title(self, item):
         return item.title.encode('ascii', 'ignore').decode('ascii')
