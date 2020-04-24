@@ -1,3 +1,4 @@
+import os
 from datetime import datetime
 
 from django.conf import settings
@@ -13,6 +14,7 @@ class IotdFeed(Feed):
     feed_type = ExtendedRSSFeed
     title = "AstroBin's Image of the Day feed"
     link = reverse_lazy('iotd_archive')
+    item_enclosure_length = 0 # Unknown
 
     def items(self):
         return IotdService().get_iotds()[:10]
@@ -46,6 +48,24 @@ class IotdFeed(Feed):
 
     def item_thumbnail_url(self, item):
         return item.image.thumbnail('hd', {'sync': True})
+
+    def item_enclosure_url(self, item):
+        return self.item_thumbnail_url(item)
+
+    def item_enclosure_mime_type(self, item):
+        url = self.item_thumbnail_url(item)
+        path, ext =  os.path.splitext(url)
+
+        if ext.lower() in ('.jpg', '.jpeg'):
+            return 'image/jpeg'
+
+        if ext.lower() == '.png':
+            return 'image/png'
+
+        if ext.lower() == '.gif':
+            return 'image/gif'
+
+        return 'application/octet-stream'
 
     def item_content_encoded(self, item):
         url = self.item_thumbnail_url(item)
