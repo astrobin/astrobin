@@ -5,12 +5,9 @@ class ExtendedRSSFeed(Rss201rev2Feed):
     def root_attributes(self):
         attrs = super(ExtendedRSSFeed, self).root_attributes()
         attrs['xmlns:content'] = 'http://purl.org/rss/1.0/modules/content/'
-        attrs['xmlns:media'] = 'http://search.yahoo.com/mrss'
         return attrs
 
     def add_item_elements(self, handler, item):
         super(ExtendedRSSFeed, self).add_item_elements(handler, item)
         handler.addQuickElement(u'content:encoded', item['content_encoded'])
 
-        thumbnail = {'url': item['thumbnail_url']}
-        handler.addQuickElement(u'media:thumbnail', '', thumbnail)
