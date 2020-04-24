@@ -1,3 +1,5 @@
+import os
+
 from django.conf import settings
 from django.contrib.syndication.views import Feed
 from django.urls import reverse_lazy, reverse
@@ -11,6 +13,7 @@ class TopPickFeed(Feed):
     feed_type = ExtendedRSSFeed
     title = "AstroBin's Top Pick feed"
     link = reverse_lazy('top_picks')
+    item_enclosure_length = 0  # Unknown
 
     def items(self):
         return IotdService().get_top_picks()[:10]
@@ -44,6 +47,24 @@ class TopPickFeed(Feed):
 
     def item_thumbnail_url(self, item):
         return item.thumbnail('hd', {'sync': True})
+
+    def item_enclosure_url(self, item):
+        return self.item_thumbnail_url(item)
+
+    def item_enclosure_mime_type(self, item):
+        url = self.item_thumbnail_url(item)
+        path, ext = os.path.splitext(url)
+
+        if ext.lower() in ('.jpg', '.jpeg'):
+            return 'image/jpeg'
+
+        if ext.lower() == '.png':
+            return 'image/png'
+
+        if ext.lower() == '.gif':
+            return 'image/gif'
+
+        return 'application/octet-stream'
 
     def item_content_encoded(self, item):
         url = self.item_thumbnail_url(item)
