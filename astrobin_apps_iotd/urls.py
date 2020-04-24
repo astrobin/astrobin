@@ -54,8 +54,8 @@ urlpatterns = (
         name='iotd_reviewers_for_image'),
 
     # Feeds
-    url(r'rss/iotd', IotdFeed()),
-    url(r'atom/iotd', IotdAtomFeed()),
-    url(r'rss/top-picks', TopPickFeed()),
-    url(r'atom/top-picks', TopPickAtomFeed())
+    url(r'rss/iotd', IotdFeed(), name='iotd_rss_iotd'),
+    url(r'atom/iotd', IotdAtomFeed(), name='iotd_atom_iotd'),
+    url(r'rss/top-picks', TopPickFeed(), name='iotd_rss_top_picks'),
+    url(r'atom/top-picks', TopPickAtomFeed(), name='iotd_atom_top_picks')
 )

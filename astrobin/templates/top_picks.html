@@ -11,6 +11,14 @@
 
 {% block title %}{% trans "Top picks" %}{% endblock %}
 
+{% block extra_head %}
+    {{ block.super }}
+    <link rel="alternate" type="application/rss+xml" title="AstroBin's Top Picks RSS feed"
+          href="{% url 'iotd_rss_top_picks' %}" />
+    <link rel="alternate" type="application/atom+xml" title="AstroBin's Top Picks Atom feed"
+          href="{% url 'iotd_atom_top_picks' %}" />
+{% endblock %}
+
 {% block breadcrumbs %}
     {{ block.super }}
     {% breadcrumb_safe 'Explore' None %}

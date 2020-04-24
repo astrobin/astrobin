@@ -44,8 +44,11 @@ class IotdFeed(Feed):
     def item_pubdate(self, item):
         return datetime(item.date.year, item.date.month, item.date.day)
 
+    def item_thumbnail_url(self, item):
+        return item.image.thumbnail('hd', {'sync': True})
+
     def item_content_encoded(self, item):
-        url = item.image.thumbnail('regular', {'sync': True})
+        url = self.item_thumbnail_url(item)
         return '<img src="{}" alt="{}"><br>{}, by <a href="{}">{}</a>'.format(
             url,
             self.item_title(item),
@@ -55,7 +58,10 @@ class IotdFeed(Feed):
         )
 
     def item_extra_kwargs(self, item):
-        return {'content_encoded': self.item_content_encoded(item)}
+        return {
+            'content_encoded': self.item_content_encoded(item),
+            'thumbnail_url': self.item_thumbnail_url(item)
+        }
 
 
 class IotdAtomFeed(IotdFeed):
