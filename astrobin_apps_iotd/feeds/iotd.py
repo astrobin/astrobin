@@ -26,7 +26,7 @@ class IotdFeed(Feed):
         return item.image.title.encode('ascii', 'ignore').decode('ascii')
 
     def item_description(self, item):
-        return item.image.description.encode('ascii', 'ignore').decode('ascii')
+        return self.item_thumbnail_url(item)
 
     def item_link(self, item):
         return settings.BASE_URL + reverse('image_detail', kwargs={
@@ -69,18 +69,18 @@ class IotdFeed(Feed):
 
     def item_content_encoded(self, item):
         url = self.item_thumbnail_url(item)
-        return '<img src="{}" alt="{}"><br>{}, by <a href="{}">{}</a>'.format(
+        return '<img src="{}" alt="{}"><br>{}, by <a href="{}">{}</a><br>{}'.format(
             url,
             self.item_title(item),
             self.item_title(item),
             reverse('user_page', args=(item.image.user.username,)),
-            self.item_author_name(item)
+            self.item_author_name(item),
+            item.image.description.encode('ascii', 'ignore').decode('ascii')
         )
 
     def item_extra_kwargs(self, item):
         return {
             'content_encoded': self.item_content_encoded(item),
-            'thumbnail_url': self.item_thumbnail_url(item)
         }
 
 
