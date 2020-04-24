@@ -34,6 +34,7 @@ from django.utils.translation import ugettext as _
 from django.views.decorators.cache import never_cache
 from django.views.decorators.http import require_GET, require_POST
 from el_pagination.decorators import page_template
+from flickrapi.auth import FlickrAccessToken
 from haystack.exceptions import SearchFieldError
 from haystack.query import SearchQuerySet
 from reviews.models import Review
@@ -1861,9 +1862,21 @@ def user_profile_flickr_import(request):
     if not request.user.is_superuser and is_free(request.user) or settings.READONLY_MODE:
         return render(request, "user/profile/flickr_import.html", response_dict)
 
+    flickr_token = None
+    if 'flickr_token_token' in request.session:
+        flickr_token = FlickrAccessToken(
+            request.session['flickr_token_token'],
+            request.session['flickr_token_token_secret'],
+            request.session['flickr_token_access_level'],
+            request.session['flickr_token_fullname'],
+            request.session['flickr_token_username'],
+            request.session['flickr_token_token_user_nsid'],
+        )
+
     flickr = flickrapi.FlickrAPI(settings.FLICKR_API_KEY,
                                  settings.FLICKR_SECRET,
-                                 username=request.user.username)
+                                 username=request.user.username,
+                                 token=flickr_token)
 
     if not flickr.token_valid(perms=u'read'):
         # We were never authenticated, or authentication expired. We need
@@ -1958,6 +1971,14 @@ def flickr_auth_callback(request):
     flickr.flickr_oauth.requested_permissions = request.session['requested_permissions']
     verifier = request.GET['oauth_verifier']
     flickr.get_access_token(verifier)
+
+    request.session['flickr_token_token'] = flickr.token_cache.token.token
+    request.session['flickr_token_token_secret'] = flickr.token_cache.token.token_secret
+    request.session['flickr_token_access_level'] = flickr.token_cache.token.access_level
+    request.session['flickr_token_fullname'] = flickr.token_cache.token.fullname
+    request.session['flickr_token_username'] = flickr.token_cache.token.username
+    request.session['flickr_token_token_user_nsid'] = flickr.token_cache.token.user_nsid
+
     return HttpResponseRedirect("/profile/edit/flickr/")
 
 
