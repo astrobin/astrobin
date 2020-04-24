@@ -2,8 +2,6 @@ import os
 import sys
 import logging
 
-TESTING = os.environ.get("TESTING", len(sys.argv) > 1 and sys.argv[1] == 'test') == 'true'
-
 if TESTING:
     DEBUG = False
     AWS_S3_ENABLED = False
@@ -22,11 +20,7 @@ if TESTING:
     }
 
     MIGRATION_MODULES = {
-        "astrobin": None,
-        "rawdata": None,
-        "astrobin_apps_images": None,
-        "astrobin_apps_iotd": None,
-        "astrobin_apps_groups": None,
+        app.split('.')[-1]: None for app in INSTALLED_APPS
     }
 
     CACHES = {

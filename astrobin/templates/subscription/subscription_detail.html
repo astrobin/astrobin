@@ -112,19 +112,6 @@
             </div>
         {% endif %}
 
-        {% comment %} Deactivate Atom {% endcomment %}
-        {% if usersubscription and usersubscription.valid and usersubscription.subscription.name == "Atom" %}
-            <div class="well text-center">
-                <p>
-                    {% blocktrans %}Here you can deactivate your free Raw Data Atom subscription.{% endblocktrans %}
-                </p>
-
-                <form action="{% url 'rawdata.atom_deactivate' %}" method="post">
-                    {% csrf_token %}
-                    <input type="submit" class="btn btn-primary btn-large" value="{% trans "Deactivate" %}"/>
-                </form>
-            </div>
-        {% endif %}
 
         {% comment %} Cancelled subscription {% endcomment %}
         {% if usersubscription and usersubscription.cancelled and object.recurrence_unit %}
@@ -168,11 +155,7 @@
 
         {% comment %} Invalid subscription {% endcomment %}
         {% if usersubscription and not usersubscription.valid and object|is_subscription_offered %}
-            {% if usersubscription.subscription.name == "Atom" %}
-                {% include 'subscription/_atom_form.html' %}
-            {% else %} <!-- not atom -->
-                {% include 'subscription/_paypal_form.html' %}
-            {% endif %} <!-- if atom -->
+            {% include 'subscription/_paypal_form.html' %}
         {% endif %}
 
         {% comment %} Missing subscription {% endcomment %}
@@ -192,8 +175,6 @@
             {% else %} <!-- usersubscription unavailable and no known reason -->
                 {% if form %}
                     {% include 'subscription/_paypal_form.html' %}
-                {% else %} <!-- no form, must be atom -->
-                    {% include 'subscription/_atom_form.html' %}
                 {% endif %} <!-- if form -->
             {% endif %} <!-- if change_denied_reasons -->
         {% endif %}

@@ -17,24 +17,19 @@ from pybb.models import Forum, Topic, Post
 from rest_framework.authtoken.models import Token
 from reviews.models import Review
 from safedelete.signals import post_softdelete
-from subscription.models import UserSubscription
+from subscription.models import UserSubscription, Subscription
 from subscription.signals import subscribed, paid, signed_up
 from threaded_messages.models import Thread
-from toggleproperties.models import ToggleProperty
 
 from astrobin_apps_groups.models import Group
 from astrobin_apps_notifications.utils import push_notification
 from astrobin_apps_platesolving.models import Solution
 from astrobin_apps_platesolving.solver import Solver
 from astrobin_apps_premium.templatetags.astrobin_apps_premium_tags import (
-    is_lite, is_any_premium_subscription)
+    is_lite, is_any_premium_subscription, is_lite_2020, is_any_ultimate, is_premium_2020, is_premium)
 from astrobin_apps_premium.utils import premium_get_valid_usersubscription
 from nested_comments.models import NestedComment
-from rawdata.models import (
-    PrivateSharedFolder,
-    PublicDataPool,
-    RawImage,
-)
+from toggleproperties.models import ToggleProperty
 from .gear import get_correct_gear
 from .models import Image, ImageRevision, Gear, UserProfile
 from .stories import add_story
@@ -126,6 +121,11 @@ def image_post_delete(sender, instance, **kwargs):
             dt = instance.uploaded.date() - usersub_created
             if dt.days >= 0:
                 decrease_counter(instance.user)
+        elif is_lite_2020(instance.user) or \
+                is_premium(instance.user) or \
+                is_premium_2020(instance.user) or \
+                is_any_ultimate(instance.user):
+            decrease_counter(instance.user)
     except IntegrityError:
         # Possibly the user is being deleted
         pass
@@ -298,133 +298,12 @@ def toggleproperty_post_save(sender, instance, created, **kwargs):
 post_save.connect(toggleproperty_post_save, sender=ToggleProperty)
 
 
-def rawdata_publicdatapool_post_save(sender, instance, created, **kwargs):
-    if created:
-        add_story(instance.creator,
-                  verb='VERB_CREATED_DATA_POOL',
-                  action_object=instance)
-
-
-post_save.connect(rawdata_publicdatapool_post_save, sender=PublicDataPool)
-
-
 def create_auth_token(sender, instance, created, **kwargs):
     if created:
         Token.objects.get_or_create(user=instance)
 
 
 post_save.connect(create_auth_token, sender=User)
-
-
-def rawdata_publicdatapool_data_added(sender, instance, action, reverse, model, pk_set, **kwargs):
-    if action == 'post_add' and len(pk_set) > 0:
-        contributors = [i.user for i in instance.images.all()]
-        users = [instance.creator] + contributors
-        submitter = RawImage.objects.get(pk=list(pk_set)[0]).user
-        users[:] = [x for x in users if x != submitter]
-        push_notification(
-            users,
-            'rawdata_posted_to_pool',
-            {
-                'user_name': submitter.userprofile.get_display_name(),
-                'user_url': reverse_url('user_page', kwargs={'username': submitter.username}),
-                'pool_name': instance.name,
-                'pool_url': reverse_url('rawdata.publicdatapool_detail', kwargs={'pk': instance.pk}),
-            },
-        )
-
-        add_story(instance.creator,
-                  verb='VERB_ADDED_DATA_TO_DATA_POOL',
-                  action_object=instance.images.all()[0],
-                  target=instance)
-
-
-m2m_changed.connect(rawdata_publicdatapool_data_added, sender=PublicDataPool.images.through)
-
-
-def rawdata_publicdatapool_image_added(sender, instance, action, reverse, model, pk_set, **kwargs):
-    if action == 'post_add' and len(pk_set) > 0:
-        contributors = [i.user for i in instance.images.all()]
-        users = [instance.creator] + contributors
-        image = Image.objects.get(pk=list(pk_set)[0])
-        submitter = image.user
-        users[:] = [x for x in users if x != submitter]
-        push_notification(
-            users,
-            'rawdata_posted_image_to_public_pool',
-            {
-                'user_name': submitter.userprofile.get_display_name(),
-                'user_url': reverse_url('user_page', kwargs={'username': submitter.username}),
-                'pool_name': instance.name,
-                'pool_url': reverse_url('rawdata.publicdatapool_detail', kwargs={'pk': instance.pk}),
-            },
-        )
-
-        add_story(submitter,
-                  verb='VERB_ADDED_IMAGE_TO_DATA_POOL',
-                  action_object=image,
-                  target=instance)
-
-
-m2m_changed.connect(rawdata_publicdatapool_image_added, sender=PublicDataPool.processed_images.through)
-
-
-def rawdata_privatesharedfolder_data_added(sender, instance, action, reverse, model, pk_set, **kwargs):
-    if action == 'post_add' and len(pk_set) > 0:
-        invitees = instance.users.all()
-        users = [instance.creator] + list(invitees)
-        submitter = RawImage.objects.get(pk=list(pk_set)[0]).user
-        users[:] = [x for x in users if x != submitter]
-        push_notification(
-            users,
-            'rawdata_posted_to_private_folder',
-            {
-                'user_name': submitter.userprofile.get_display_name(),
-                'user_url': reverse_url('user_page', kwargs={'username': submitter.username}),
-                'folder_name': instance.name,
-                'folder_url': reverse_url('rawdata.privatesharedfolder_detail', kwargs={'pk': instance.pk}),
-            },
-        )
-
-
-m2m_changed.connect(rawdata_privatesharedfolder_data_added, sender=PrivateSharedFolder.images.through)
-
-
-def rawdata_privatesharedfolder_image_added(sender, instance, action, reverse, model, pk_set, **kwargs):
-    if action == 'post_add' and len(pk_set) > 0:
-        invitees = instance.users.all()
-        users = [instance.creator] + list(invitees)
-        submitter = Image.objects.get(pk=list(pk_set)[0]).user
-        users[:] = [x for x in users if x != submitter]
-        push_notification(
-            users,
-            'rawdata_posted_image_to_private_folder',
-            {
-                'user_name': submitter.userprofile.get_display_name(),
-                'user_url': reverse_url('user_page', kwargs={'username': submitter.username}),
-                'folder_name': instance.name,
-                'folder_url': reverse_url('rawdata.privatesharedfolder_detail', kwargs={'pk': instance.pk}),
-            },
-        )
-
-
-m2m_changed.connect(rawdata_privatesharedfolder_image_added, sender=PrivateSharedFolder.processed_images.through)
-
-
-def rawdata_privatesharedfolder_user_added(sender, instance, action, reverse, model, pk_set, **kwargs):
-    if action == 'post_add' and len(pk_set) > 0:
-        user = UserProfile.objects.get(user__pk=list(pk_set)[0]).user
-        push_notification(
-            [user],
-            'rawdata_invited_to_private_folder',
-            {
-                'folder_name': instance.name,
-                'folder_url': reverse_url('rawdata.privatesharedfolder_detail', kwargs={'pk': instance.pk}),
-            },
-        )
-
-
-m2m_changed.connect(rawdata_privatesharedfolder_user_added, sender=PrivateSharedFolder.users.through)
 
 
 def solution_post_save(sender, instance, created, **kwargs):
@@ -483,10 +362,28 @@ def subscription_subscribed(sender, **kwargs):
         profile.premium_counter = 0
         profile.save(keep_deleted=True)
 
-
 subscribed.connect(subscription_subscribed)
 paid.connect(subscription_subscribed)
 signed_up.connect(subscription_subscribed)
+
+
+def reset_lite_and_premium_counter(sender, **kwargs):
+    subscription = kwargs.get("subscription")  # type: Subscription
+    usersubscription = kwargs.get("usersubscription")  # type: UserSubscription
+    user = usersubscription.user  # type: User
+
+    if subscription.group.name in ('astrobin_lite_2020', 'astrobin_premium_2020'):
+        previous = UserSubscription.objects.filter(
+            user__username=user.username,
+            subscription__name__in=("AstroBin Premium", "AstroBin Lite"),
+            expires__gte=datetime.date.today() - datetime.timedelta(days=180)
+        )
+
+        if previous:
+            user.userprofile.premium_counter = 0
+            user.userprofile.save()
+
+signed_up.connect(reset_lite_and_premium_counter)
 
 
 def group_pre_save(sender, instance, **kwargs):

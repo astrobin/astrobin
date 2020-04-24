@@ -1,12 +1,16 @@
 {% extends 'base.html' %}
 
-{% load i18n %}
-{% load django_bootstrap_breadcrumbs %}
-{% load astrobin_apps_images_tags %}
-{% load astrobin_apps_users_tags %}
-{% load tags %}
+{% load i18n %}{% load django_bootstrap_breadcrumbs %}{% load astrobin_apps_images_tags %}{% load astrobin_apps_users_tags %}{% load tags %}
 
 {% block title %}{% trans "Image of the day" %}{% endblock %}
+
+{% block extra_head %}
+    {{ block.super }}
+    <link rel="alternate" type="application/rss+xml" title="AstroBin's Image of the Day RSS feed"
+          href="{% url 'iotd_rss_iotd' %}" />
+    <link rel="alternate" type="application/atom+xml" title="AstroBin's Image of the Day Atom feed"
+          href="{% url 'iotd_atom_iotd' %}" />
+{% endblock %}
 
 {% block breadcrumbs %}
     {{ block.super }}
@@ -21,9 +25,9 @@
             {% astrobin_image iotd.image 'iotd' nav_ctx='iotd' %}
 
             <div class="data hidden-phone">
-                <h3>{{iotd.image.title|escape}}</h3>
+                <h3>{{ iotd.image.title|escape }}</h3>
                 <p>
-                    {{iotd.date|date:"SHORT_DATE_FORMAT"}},
+                    {{ iotd.date|date:"SHORT_DATE_FORMAT" }},
                     {% trans "by" %}
                     {% astrobin_username iotd.image.user %}
                 </p>

@@ -69,11 +69,16 @@ class Generators:
             group_name = "astrobin_ultimate_2020"
 
         g, created = Group.objects.get_or_create(name=group_name)
-        s, created = Subscription.objects.get_or_create(
-            name=name,
-            price=1,
-            group=g,
-            category="premium")
+
+        try:
+            s = Subscription.objects.get(name=name)
+        except Subscription.DoesNotExist:
+            s, created = Subscription.objects.get_or_create(
+                name=name,
+                price=1,
+                group=g,
+                category="premium")
+
         us, created = UserSubscription.objects.get_or_create(
             user=user,
             subscription=s)

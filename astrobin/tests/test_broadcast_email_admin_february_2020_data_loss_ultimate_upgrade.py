@@ -80,6 +80,41 @@ class BroadcastEmailAdminFebruary2020DataLossUltimateUpgradeTest(TestCase):
 
     @patch("astrobin.tasks.send_broadcast_email.delay")
     @patch("django.contrib.admin.ModelAdmin.message_user")
+    def test_submit_february_2020_data_loss_ultimate_already_got_ultimate(self, messageUserMock, taskMock):
+        request = RequestFactory().get("/")
+
+        email = BroadcastEmail.objects.create(subject="test")
+        admin = BroadcastEmailAdmin(model=BroadcastEmail, admin_site=AdminSite())
+        user = User.objects.create(username="test", password="test")
+
+        premium = UserSubscription.objects.create(
+            user=user,
+            subscription=Subscription.objects.create(
+                name="AstroBin Premium",
+                price=1,
+                group=Group.objects.create(name="astrobin_premium")),
+            expires=date(2020, 2, 20)
+        )
+
+        premium.subscribe()
+
+        ultimate = UserSubscription.objects.create(
+            user=user,
+            subscription=Subscription.objects.create(
+                name="AstroBin Ultimate 2020+",
+                price=1,
+                group=Group.objects.create(name="astrobin_ultimate_2020")),
+            expires=date(2021, 3, 28)
+        )
+
+        ultimate.subscribe()
+
+        admin.submit_february_2020_data_loss_ultimate_upgrade(request, BroadcastEmail.objects.filter(pk=email.pk))
+
+        taskMock.assert_not_called()
+
+    @patch("astrobin.tasks.send_broadcast_email.delay")
+    @patch("django.contrib.admin.ModelAdmin.message_user")
     def test_submit_february_2020_data_loss_ultimate_upgrade_sent(self, messageUserMock, taskMock):
         request = RequestFactory().get("/")
 

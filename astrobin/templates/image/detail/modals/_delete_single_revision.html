@@ -1,0 +1,27 @@
+{% load common_tags %}
+{% load i18n %}
+
+<div class="modal hide fade" id="delete-revision-modal-{{ pk_of_revision_to_be_deleted }}">
+    <div class="modal-header">
+        <a class="close" data-dismiss="modal">&times;</a>
+        <h3>{% trans "Delete this revision?" %}</h3>
+    </div>
+    <div class="modal-body">
+        <div class="well">
+            {% trans "This revision will be permanently deleted and cannot be recovered. Are you sure?" %}
+        </div>
+
+        <form
+                class="form-inline"
+                action="{% url 'image_delete_revision' pk_of_revision_to_be_deleted %}"
+                method="post">
+            {% csrf_token %}
+            <button
+                    class="btn btn-primary {% button_loading_class %}"
+                    type="submit">
+                {% button_loading_indicator %}
+                {% trans "Delete" %}
+            </button>
+        </form>
+    </div>
+</div>

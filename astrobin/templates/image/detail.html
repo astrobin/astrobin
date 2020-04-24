@@ -16,7 +16,7 @@
     <meta property="og:title" content="{{image.title}}">
     <meta property="og:description" content="An astrophotograph by {{image.user.userprofile}} on AstroBin">
     <meta property="og:image"
-          content="{{SHARE_PATH}}/{{image.id}}/{{revision_label}}/rawthumb/regular/get.jpg?insecure">
+          content="{{SHARE_PATH}}/{{image.get_id}}/{{revision_label}}/rawthumb/regular/get.jpg?insecure">
 {% endblock %}
 
 {% block title %}{{image.title}} ({% astrobin_username image.user link=False %}){% endblock %}
@@ -31,10 +31,9 @@
 {% block content %}
     {% if show_contains %}
     <div class="subtitle">
-        {% comment %} TODO: hardcoded subject_type values? So ugly! {% endcomment %}
         <i class="icon icon-paperclip"></i>
         <strong>{% trans "Contains" %}:</strong>&nbsp;
-        {% if image.subject_type == 100 or image.subject_type == 200 %}
+        {% if image.subject_type == enums.SubjectType.DEEP_SKY %}
             {% for s in subjects %}
                 <a href="/search/?q={{s|escape}}">{{s|escape}}</a>{% if not forloop.last %},{% endif %}
             {% endfor %}
@@ -91,8 +90,6 @@
     {% include 'image/detail/modals/like_this.html' %}
     {% include 'image/detail/modals/bookmarked_this.html' %}
     {% include 'image/detail/modals/send_to_group.html' %}
-    {% include 'image/detail/modals/send_to_datapool.html' %}
-    {% include 'image/detail/modals/send_to_sharedfolder.html' %}
     {% include 'image/detail/modals/cant_like.html' %}
     {% include 'image/detail/modals/flag_thumbnails.html' %}
     {% include 'image/detail/modals/demote.html' %}

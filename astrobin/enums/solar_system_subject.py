@@ -1,0 +1,13 @@
+class SolarSystemSubject:
+    SUN = "SUN"
+    MOON = "MOON"
+    MERCURY = "MERCURY"
+    VENUS = "VENUS"
+    MARS = "MARS"
+    JUPITER = "JUPITER"
+    SATURN = "SATURN"
+    URANUS = "URANUS"
+    NEPTUNE = "NEPTUNE"
+    MINOR_PLANET = "MINOR_PLANET"
+    COMET = "COMET"
+    OTHER = "OTHER"

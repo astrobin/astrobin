@@ -18,7 +18,7 @@
                             </div>
                         {% endif %}
 
-                        {% ifequal request.user image.user %}
+                        {% if request.user == image.user or request.user.is_superuser %}
                             <div class="edit">
                                 <a href="{% url 'image_edit_basic' image.get_id %}">
                                     <i class="icon-pencil"></i>
@@ -30,7 +30,7 @@
                                     <i class="icon-trash"></i>
                                 </a>
                             </div>
-                        {% endifequal %}
+                        {% endif %}
 
                         <div class="image">
                             {% astrobin_image image 'thumb' revision='0' tooltip=False %}
@@ -54,7 +54,7 @@
                             </div>
                         {% endif %}
 
-                        {% ifequal request.user image.user %}
+                        {% if request.user == image.user or request.user.is_superuser %}
                             <div class="edit">
                                 <a href="{% url 'image_edit_revision' r.pk %}">
                                     <i class="icon-pencil"></i>
@@ -62,14 +62,11 @@
                             </div>
 
                             <div class="delete">
-                                <form class="form-inline" action="{% url 'image_delete_revision' r.pk %}"
-                                      method="post">{% csrf_token %}
-                                    <button type="submit">
-                                        <i class="icon-trash"></i>
-                                    </button>
-                                </form>
+                                <a data-toggle="modal" class="danger" href="#delete-revision-modal-{{ r.pk }}">
+                                    <i class="icon-trash"></i>
+                                </a>
                             </div>
-                        {% endifequal %}
+                        {% endif %}
 
                         <div class="image">
                             {% astrobin_image r.image 'thumb' revision=r.label tooltip=False %}
@@ -90,12 +87,12 @@
                     {% if r.description %}
                         <p>
                             <strong>{% trans "Description" %}:</strong> {{r.description|strip_html|safe}}
-                            {% ifequal request.user image.user %}
+                            {% if request.user == image.user or request.user.is_superuser %}
                                 <a href="{% url 'image_edit_revision' r.pk %}">
                                     {% private_abbr %}
                                     {% trans "Edit" %}
                                 </a>
-                            {% endifequal %}
+                            {% endif %}
                         </p>
                     {% endif %}
                 </div>

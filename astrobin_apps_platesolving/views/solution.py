@@ -29,7 +29,7 @@ from astrobin_apps_platesolving.models import PlateSolvingSettings
 from astrobin_apps_platesolving.models import Solution
 from astrobin_apps_platesolving.serializers import SolutionSerializer
 from astrobin_apps_platesolving.solver import Solver, AdvancedSolver, SolverBase
-from astrobin_apps_platesolving.utils import ThumbnailNotReadyException, get_target, get_solution
+from astrobin_apps_platesolving.utils import ThumbnailNotReadyException, get_target, get_solution, corrected_pixscale
 
 log = logging.getLogger('apps')
 
@@ -113,7 +113,7 @@ class SolveAdvancedView(base.View):
                     image = target.image
 
                 acquisitions = DeepSky_Acquisition.objects.filter(image=image)
-                if acquisitions.count() > 0:
+                if acquisitions.count() > 0 and acquisitions[0].date:
                     observation_time = acquisitions[0].date.isoformat()
 
                 locations = image.locations.all()
@@ -128,16 +128,23 @@ class SolveAdvancedView(base.View):
                     altitude = location.altitude
 
                 submission = solver.solve(
-                    url, ra=solution.ra, dec=solution.dec,
-                    pixscale=solution.pixscale, observation_time=observation_time,
-                    latitude=latitude, longitude=longitude, altitude=altitude,
-                    advanced_settings=solution.advanced_settings, image_width=image.w)
+                    url,
+                    ra=solution.ra,
+                    dec=solution.dec,
+                    pixscale=solution.pixscale,
+                    observation_time=observation_time,
+                    latitude=latitude,
+                    longitude=longitude,
+                    altitude=altitude,
+                    advanced_settings=solution.advanced_settings,
+                    image_width=target.w,
+                    image_height=target.h)
 
                 solution.status = Solver.ADVANCED_PENDING
                 solution.pixinsight_serial_number = submission
                 solution.save()
-            except Exception, e:
-                log.error(e)
+            except Exception as e:
+                log.error("Error during advanced plate-solving: %s" % e.message)
                 solution.status = Solver.MISSING
                 solution.submission_id = None
                 solution.save()
@@ -185,20 +192,7 @@ class SolutionFinalizeView(CsrfExemptMixin, base.View):
             solution.dec = "%.3f" % info['calibration']['dec']
             solution.orientation = "%.3f" % info['calibration']['orientation']
             solution.radius = "%.3f" % info['calibration']['radius']
-
-            # Get the images 'w' and adjust pixscale
-            if solution.content_object:
-                w = solution.content_object.w
-                pixscale = info['calibration']['pixscale']
-                if w and pixscale:
-                    hd_w = settings.THUMBNAIL_ALIASES['']['hd']['size'][0]
-                    if hd_w > w:
-                        hd_w = w
-                    ratio = hd_w / float(w)
-                    corrected_scale = float(pixscale) * ratio
-                    solution.pixscale = "%.3f" % corrected_scale
-                else:
-                    solution.pixscale = None
+            solution.pixscale = "%.3f" % corrected_pixscale(solution, info['calibration']['pixscale'])
 
             try:
                 target = solution.content_type.get_object_for_this_type(pk=solution.object_id)
@@ -309,7 +303,7 @@ class SolutionPixInsightWebhook(base.View):
 
         if status == 'OK':
             svg_hd = request.POST.get('svgAnnotation', None)
-            svg_regular = request.POST.get('svgAnnotationSmall', None)
+            svg_regular = request.POST.get('svgAnnotationSmall', svg_hd)
 
             solution.pixinsight_svg_annotation_hd.save(serial_number + ".svg", ContentFile(svg_hd))
             solution.pixinsight_svg_annotation_regular.save(serial_number + ".svg", ContentFile(svg_regular))
@@ -328,7 +322,7 @@ class SolutionPixInsightWebhook(base.View):
             solution.advanced_dec_bottom_right = request.POST.get('bottomRightDec', None)
 
             solution.advanced_orientation = request.POST.get('rotation', None)
-            solution.advanced_pixscale = request.POST.get('resolution', None)
+            solution.advanced_pixscale = corrected_pixscale(solution, request.POST.get('resolution', None))
             solution.advanced_flipped = request.POST.get('flipped', None) == 'true'
             solution.advanced_wcs_transformation = request.POST.get('wcs_transformation', None)
 

@@ -82,7 +82,7 @@
             </a>
         </li>
 
-        {% if request.user|can_see_real_resolution %}
+        {% if request.user|can_see_real_resolution:image %}
         <li>
             <a href="{% url 'image_full' image.get_id revision_label %}{% query_string "real='',mod=mod" "plate_solving_started" %}">
                 <i class="icon-fullscreen"></i>

@@ -1,3 +1,243 @@
+2020-04-24 Salvatore Iovene <salvatore@iovene.com>
+ * v1.62.8
+ * (rss) Remove media:thumbnail and use thumbnail_url as description
+
+2020-04-24 Salvatore Iovene <salvatore@iovene.com>
+ * v1.62.7
+ * (rss) Add image as enclosure
+
+2020-04-24 Salvatore Iovene <salvatore@iovene.com>
+ * v1.62.6
+ * (rss) Add media namespace
+
+2020-04-24 Salvatore Iovene <salvatore@iovene.com>
+ * v1.62.5
+ * (rss) Add link tags and media:thumbnail attribute
+
+2020-04-24 Salvatore Iovene <salvatore@iovene.com>
+ * v1.62.4
+ * (rss) Use image pk as guid instead of hash
+
+2020-04-24 Salvatore Iovene <salvatore@iovene.com>
+ * v1.62.3
+ * (rss) Fix more unicode issues and add correct guid
+
+2020-04-24 Salvatore Iovene <salvatore@iovene.com>
+ * v1.62.2
+ * (rss) Fix unicode issue and image URL
+
+2020-04-23 Salvatore Iovene <salvatore@iovene.com>
+ * v1.62.1
+ * (rss) Fix Top Picks RSS feed broken by typo
+
+2020-04-23 Salvatore Iovene <salvatore@iovene.com>
+ * v1.62.0
+ * (general) Fix stray period in locale_extras.py
+ * (iotd) Add RSS/Atom feeds for IOTD and Top Picks
+
+2020-04-21 Salvatore Iovene <salvatore@iovene.com>
+ * v1.61.2
+ * (api) Use correct CORS variable for host whitelist
+
+2020-04-20 Salvatore Iovene <salvatore@iovene.com>
+ * v1.61.1
+ * (image) Force 620px width on image page also for smaller images
+
+2020-04-20 Salvatore Iovene <salvatore@iovene.com>
+ * v1.61.0
+ * (api) Add API to support AstroBin's Angular app (#916)
+ * (plate-solving) Use HD size PI SVG if regular size is not available
+ * (general) Fix Sponsors & Partners links
+ * (sharing) Fix URL or og:image tag to use hash when available
+
+2020-04-15 Salvatore Iovene <salvatore@iovene.com>
+ * v1.60.3
+ * (images) Add timeout to request to purge file from CloudFlare
+
+2020-04-15 Salvatore Iovene <salvatore@iovene.com>
+ * v1.60.2
+ * (images) Do not invalidate thumbnails upon failure as it's too expensive
+
+2020-04-12 Salvatore Iovene <salvatore@iovene.com>
+ * v1.60.1
+ * (images) Fix image loading bug when placeholder is present (#908)
+ * (images) Remove some unused variables
+
+2020-04-11 Salvatore Iovene <salvatore@iovene.com>
+ * v1.60.0
+ * (images) Improve image resolution for high-dpi screens (#906)
+
+2020-04-11 Salvatore Iovene <salvatore@iovene.com>
+ * v1.59.2
+ * (image) Polish buttons on image upload wizard
+
+2020-04-09 Salvatore Iovene <salvatore@iovene.com>
+ * v1.59.1
+ * (search) Fix Image search model by allowing null values for solar system main subject
+ * (infra) Fix execution of test command on pristine build (#907)
+ * (infra) Fix docker-reset.sh script
+ * (docs) Fix testing instructions in README.md
+
+2020-04-08 Salvatore Iovene <salvatore@iovene.com>
+ * v1.59.0
+ * (docs) Specify direct login link in login instructions
+ * (images) Fix unnecessary redirect to secure URL of an image
+ * (rawdata) Discontinue raw data platform completely
+
+2020-04-08 Salvatore Iovene <salvatore@iovene.com>
+ * v1.58.11
+ * (api) Fix dehydration of solar system subjects
+
+2020-04-07 Salvatore Iovene <salvatore@iovene.com>
+ * v1.58.10
+ * (images) Deal with 'None' passed as revision label when fetching thumbnail
+
+2020-04-07 Salvatore Iovene <salvatore@iovene.com>
+ * v1.58.9
+ * (images) Fix incorrect permissions to view real size images (#903)
+ * (flickr) Update flickr library, add logs
+ * (flickr) slightly polish importer
+ * (search) Fix duplicated property name on index
+ * (infra) keep signed cookie session also on debug, for performance
+
+2020-04-07 Salvatore Iovene <salvatore@iovene.com>
+ * v1.58.8
+ * (images) Fix allowing editing tech detail after charfield model migration
+
+2020-04-07 Salvatore Iovene <salvatore@iovene.com>
+ * v1.58.7
+ * (iotd) Reduce submission queue to 1 day and exclude images tagged Gear or Other
+ * (image) Always show technical card if a solar system subject is tagged
+
+2020-04-06 Salvatore Iovene <salvatore@iovene.com>
+ * v1.58.6
+ * (plate-solving) Add comets to the list of image types that can be plate-solved
+ * (images) Fix empty "Contains:" label on solar system images
+
+2020-04-05 Salvatore Iovene <salvatore@iovene.com>
+ * v1.58.5
+ * (gallery) Use slower but effective query to exclude corrupted images to visitors
+
+2020-04-04 Salvatore Iovene <salvatore@iovene.com>
+ * v1.58.4
+ * (premium) Add task to reactivate previous subscription when free Premium expires
+ * (images) Add confirmation dialog when attempting to delete revisions
+
+2020-04-04 Salvatore Iovene <salvatore@iovene.com>
+ * v1.58.3
+ * (images) Allow superuser to edit/delete any revision
+ * (image) Don't convert interlaced images to sRGB
+
+2020-04-04 Salvatore Iovene <salvatore@iovene.com>
+ * v1.58.2
+ * (images) Fix broken click-thru in case the plate-solving annotation is missing
+
+2020-04-04 Salvatore Iovene <salvatore@iovene.com>
+ * v1.58.1
+ * (images) Do not apply color profiles to images in L or LA mode
+
+2020-04-03 Salvatore Iovene <salvatore@iovene.com>
+ * v1.58.0
+ * (images) Add support for embedded color profiles
+ * (images) Add optional sharpening of regular and hd thumbnails
+ * (images) Add default cropping settings after image upload
+ * (images) Have revisions copy cropping settings from mother image if same resolution
+
+2020-04-02 Salvatore Iovene <salvatore@iovene.com>
+ * v1.57.3
+ * (iotd) Allow judges to enter the IOTD/TP competition
+ * (i18n) Fix typo
+ * (messages) Add loading classes to send/reply buttons
+ * (plate-solving) Fix null pointer in case advanced settings does not exists
+
+2020-04-02 Salvatore Iovene <salvatore@iovene.com>
+ * v1.57.2
+ * (plate-solve) Fix resampling of advanced pixscale
+
+2020-04-02 Salvatore Iovene <salvatore@iovene.com>
+ * v1.57.1
+ * (plate-solving) Do not scale image resolution if raw sample is provided
+
+2020-04-02 Salvatore Iovene <salvatore@iovene.com>
+ * v1.57.0
+ * (donations) Fix PayPal URLs
+ * (plate-solving) Add support for `largeSize` to account for FITS larger than HD size
+ * (plate-solving) Fix revisions by using the correct width and height
+ * (plate-solving) Add support for the CGPN (catalogue of galactic planetary nebulae)
+
+2020-04-01 Salvatore Iovene <salvatore@iovene.com>
+ * v1.56.17
+ * (emails) Log every sent email
+
+2020-03-31 Salvatore Iovene <salvatore@iovene.com>
+ * v1.56.16
+ * (search) Add missing search box for visitors / free members
+
+2020-03-31 Salvatore Iovene <salvatore@iovene.com>
+ * v1.56.15
+ * (search) Fix search by telescope type, camera type, subject type
+ * (images) Hide empty or zero values from acquisition details card (#873)
+
+2020-03-30 Salvatore Iovene <salvatore@iovene.com>
+ * v1.56.14
+ * (plate-solving) Fix exception when location degrees/minutes or acquisition date are missing
+
+2020-03-30 Salvatore Iovene <salvatore@iovene.com>
+ * v1.56.13
+ * (images) Allow images from Ultimate users to be viewed in real resolution by anon/free members
+
+2020-03-30 Salvatore Iovene <salvatore@iovene.com>
+ * v1.56.12
+ * (images) Use explicit URLs for plate-solving settings forms
+
+2020-03-30 Salvatore Iovene <salvatore@iovene.com>
+ * v1.56.11
+ * (images) Don't display technical card items that are empty
+ * (flickr) Allow any Premium and Ultimate subscribers to import from Flickr
+ * (plate-solving) Fix advanced platesolving when coordinate seconds are "None"
+
+2020-03-29 Salvatore Iovene <salvatore@iovene.com>
+ * v1.56.10
+ * (premium) Fix typo
+
+2020-03-29 Salvatore Iovene <salvatore@iovene.com>
+ * v1.56.9
+ * (premium) Fix data loss compensation crash
+
+2020-03-28 Salvatore Iovene <salvatore@iovene.com>
+ * v1.56.8
+ * (premium) Remove image limits on Premium 2020 and fix ads issue
+
+2020-03-28 Salvatore Iovene <salvatore@iovene.com>
+ * v1.56.7
+ * (premium) Remove restriction from viewing technical card item
+
+2020-03-28 Salvatore Iovene <salvatore@iovene.com>
+ * v1.56.6
+ * (premium) Make Premium and Lite/Premium/Ultimate 2020 counter decrease on deletes
+ * (premium) Reset counter of former Lite/Premium users when signing up to new Lite/Premium
+ * (premium) Allow free users to see whole technical card
+
+2020-03-28 Salvatore Iovene <salvatore@iovene.com>
+ * v1.56.5
+ * (premium) Allow people who already bought Ultimate to get the data loss compensation
+
+2020-03-28 Salvatore Iovene <salvatore@iovene.com>
+ * v1.56.4
+ * (premium) Fix not showing ads on pages belonging to Ultimate users
+
+2020-03-28 Salvatore Iovene <salvatore@iovene.com>
+ * v1.56.3
+ * (plate-solving) Send correct image resolution (pixscale) to PixInsight
+
+2020-03-28 Salvatore Iovene <salvatore@iovene.com>
+ * v1.56.2
+ * (iotd) Fix reverted logic to allow non-free users into IOTD queue
+
+2020-03-28 Salvatore Iovene <salvatore@iovene.com>
+ * v1.56.1
+ * (infra) Remove statics collection from launch script because it's too slow
+
 2020-03-27 Salvatore Iovene <salvatore@iovene.com>
  * v1.56.0
  * (general) Introduce AstroBin Ultimate and other plan changes

@@ -10,6 +10,7 @@ from django.template.defaultfilters import timesince
 from django.utils.translation import ugettext as _
 from subscription.models import UserSubscription, Subscription
 
+from astrobin.enums import SubjectType
 from astrobin.gear import is_gear_complete, get_correct_gear
 from astrobin.models import GearUserInfo, UserProfile, Image
 from astrobin.utils import get_image_resolution, decimal_to_hours_minutes_seconds, decimal_to_degrees_minutes_seconds
@@ -250,8 +251,10 @@ def show_ads(user):
     if is_donor(user) and not user.userprofile.allow_astronomy_ads:
         return False
 
-    if (is_lite(user) or is_premium(user) or is_premium_2020(user) or is_ultimate_2020(user)) and \
-            not user.userprofile.allow_astronomy_ads:
+    if is_lite(user) or is_premium(user):
+        return False
+
+    if (is_premium_2020(user) or is_ultimate_2020(user)) and not user.userprofile.allow_astronomy_ads:
         return False
 
     return True
@@ -465,3 +468,16 @@ def content_type(obj):
 @register.inclusion_tag('inclusion_tags/private_abbr.html')
 def private_abbr():
     return None
+
+
+@register.filter
+def can_add_technical_details(image):
+    # type: (Image) -> bool
+    return image.subject_type in (
+        "", # Default as it comes from the frontend form.
+        SubjectType.DEEP_SKY,
+        SubjectType.SOLAR_SYSTEM,
+        SubjectType.WIDE_FIELD,
+        SubjectType.STAR_TRAILS,
+        SubjectType.NORTHERN_LIGHTS,
+    ) or image.solar_system_main_subject is not None

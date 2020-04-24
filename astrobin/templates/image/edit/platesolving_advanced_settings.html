@@ -25,7 +25,7 @@
     <form
             id="advanced-platesolving-settings"
             class="form-horizontal"
-            action=""
+            action="{% url 'image_edit_platesolving_advanced_settings' image.get_id revision_label %}"
             method="post"
             enctype="multipart/form-data">{% csrf_token %}
 
@@ -42,7 +42,7 @@
             </button>
 
             <a class="btn btn-block-mobile" href="{{return_url}}">
-                {% trans "Back to image" %}
+                {% trans "Cancel" %}
             </a>
         </div>
     </form>

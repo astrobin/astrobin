@@ -49,12 +49,9 @@ def add_story(actor, **kwargs):
         'VERB_LIKED_IMAGE',
         'VERB_BOOKMARKED_IMAGE',
         'VERB_COMMENTED_IMAGE',
-        'VERB_ADDED_IMAGE_TO_DATA_POOL',
     ]
 
     DONT_CLEAR_VERBS = [
-        'VERB_CREATED_DATA_POOL',
-        'VERB_CREATED_PUBLIC_GROUP',
     ]
 
     if verb in CLEAR_AS_ACTION_OBJECT_VERBS:

@@ -20,12 +20,12 @@
 
             {% if revision_image.mouse_hover_image|startswith:"REVISION" %}
                 {% with revision_image.mouse_hover_image|split:"__" as revision_label_split %}
-                    {% astrobin_image image "regular" revision=revision_label_split.1 url_size='full' url_revision=revision_image.label classes="hover-overlay hover-overlay-revision-revision" %}
+                    {% astrobin_image image alias revision=revision_label_split.1 url_size='full' url_revision=revision_image.label classes="hover-overlay hover-overlay-revision-revision" %}
                 {% endwith %}
             {% endif %}
 
             {% if revision_image.mouse_hover_image == "ORIGINAL" %}
-                {% astrobin_image image "regular" revision='0' url_size='full' url_revision=revision_image.label classes="hover-overlay hover-overlay-revision-original" %}
+                {% astrobin_image image alias revision='0' url_size='full' url_revision=revision_image.label classes="hover-overlay hover-overlay-revision-original" %}
             {% endif %}
         {% else %}
             {% if image.mouse_hover_image %}
@@ -35,7 +35,7 @@
 
                 {% if image.mouse_hover_image|startswith:"REVISION" %}
                     {% with image.mouse_hover_image|split:"__" as revision_label_split %}
-                        {% astrobin_image image "regular" revision=revision_label_split.1 url_size='full' url_revision=revision_label classes="hover-overlay hover-overlay-original-revision" %}
+                        {% astrobin_image image alias revision=revision_label_split.1 url_size='full' url_revision=revision_label classes="hover-overlay hover-overlay-original-revision" %}
                     {% endwith %}
                 {% endif %}
             {% endif %}
@@ -96,8 +96,10 @@
         var platesolving_attempts = 0;
 
         function solution_image_error(img) {
-            if (platesolving_attempts > 1)
+            if (platesolving_attempts > 1) {
+                img.remove();
                 return;
+            }
 
             if (img.src.indexOf('images/solutions') === -1) {
                 split = img.src.split('solutions');

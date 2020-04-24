@@ -29,6 +29,7 @@ from requests import Response
 from astrobin.models import BroadcastEmail, Image, DataDownloadRequest, ImageRevision
 from astrobin.utils import inactive_accounts
 from astrobin_apps_images.models import ThumbnailGroup
+from astrobin_apps_images.services import ImageService
 
 logger = get_task_logger(__name__)
 
@@ -163,27 +164,7 @@ def retrieve_thumbnail(pk, alias, options):
             if thumb:
                 set_thumb()
             else:
-                # Attempting thumbnail regeneration
-                image.thumbnail_invalidate()
-                # Need to reread
-                image = Image.all_objects.get(pk=pk)
-                thumb = image.thumbnail_raw(alias, options)
-                if thumb:
-                    set_thumb()
-                else:
-                    logger.debug("Image %d: marking as corrupted (not really)." % image.pk)
-                    # if revision_label == '0':
-                    #     image.corrupted = True
-                    #     image.save(keep_deleted=True)
-                    # elif revision_label == 'final':
-                    #     corrupted_revision_label = image.get_final_revision_label()  # type: string
-                    #     corrupted_revision = image.revisions.get(label=corrupted_revision_label)  # type: ImageRevision
-                    #     corrupted_revision.corrupted = True
-                    #     corrupted_revision.save()
-                    # else:
-                    #     corrupted_revision = image.revisions.get(label=revision_label)  # type: ImageRevision
-                    #     corrupted_revision.corrupted = True
-                    #     corrupted_revision.save()
+                logger.debug("Image %d: unable to generate thumbnail." % image.pk)
         except Exception as e:
             logger.debug("Error retrieving thumbnail: %s" % e.message)
         finally:
@@ -304,7 +285,7 @@ def prepare_download_data_archive(request_id):
             title = slugify(image.title)  # type: str
             path = ntpath.basename(image.image_file.name)  # type: str
 
-            response = requests.get(image.image_file.url)  # type: Response
+            response = requests.get(image.image_file.url, verify=False)  # type: Response
             if response.status_code == 200:
                 archive.writestr("%s-%s/%s" % (id, title, path), response.content)
                 logger.debug("prepare_download_data_archive: image %s = written" % id)
@@ -315,7 +296,7 @@ def prepare_download_data_archive(request_id):
 
                 logger.debug("prepare_download_data_archive: image %s revision %s = iterating" % (id, label))
 
-                response = requests.get(revision.image_file.url)  # type: Response
+                response = requests.get(revision.image_file.url, verify=False)  # type: Response
                 if response.status_code == 200:
                     archive.writestr("%s-%s/revisions/%s/%s" % (id, title, label, path), response.content)
                     logger.debug("prepare_download_data_archive: image %s revision %s = written" % (id, label))
@@ -324,7 +305,7 @@ def prepare_download_data_archive(request_id):
                 image.get_id(),
                 unicode(image.title).encode('utf-8'),
                 image.acquisition_type,
-                image.get_subject_type(),
+                ImageService(image).get_subject_type_label(),
                 image.data_source,
                 image.remote_source,
                 image.solar_system_main_subject,

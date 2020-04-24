@@ -31,7 +31,7 @@ def get_from_storage(image, alias, revision_label):
 
         url = media_url + url
 
-    r = requests.get(url, allow_redirects=True, headers={'User-Agent': 'Mozilla/5.0'})
+    r = requests.get(url, verify=False, allow_redirects=True, headers={'User-Agent': 'Mozilla/5.0'})
 
     img = NamedTemporaryFile(delete=True)
     img.write(r.content)
@@ -53,3 +53,15 @@ def get_solution(object_id, content_type_id):
     content_type = ContentType.objects.get_for_id(content_type_id)
     solution, created = Solution.objects.get_or_create(object_id=object_id, content_type=content_type)
     return solution
+
+
+def corrected_pixscale(solution, pixscale):
+    # type: (Solution, float) -> float
+    if solution.content_object:
+        w = solution.content_object.w  # type: int
+        if w and pixscale:
+            hd_w = min(w, settings.THUMBNAIL_ALIASES['']['hd']['size'][0]) # type: int
+            ratio = hd_w / float(w)
+            return float(pixscale) * ratio
+        return pixscale
+    return pixscale

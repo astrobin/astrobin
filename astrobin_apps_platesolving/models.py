@@ -96,6 +96,7 @@ class PlateSolvingAdvancedSettings(models.Model):
         ("M", _("Medium")),
         ("L", _("Large")),
     )
+
     sample_raw_frame_file = models.FileField(
         upload_to=sample_frame_upload_path,
         validators=(FileValidator(allowed_extensions=(settings.ALLOWED_FITS_IMAGE_EXTENSIONS)),),
@@ -197,6 +198,13 @@ class PlateSolvingAdvancedSettings(models.Model):
         verbose_name=_("Show Tycho-2 catalog"),
         help_text=mark_safe(
             '<a href="https://wikipedia.org/wiki/Tycho-2_Catalogue" target="_blank">https://wikipedia.org/wiki/Tycho-2_Catalogue</a>'),
+    )
+
+    show_cgpn = models.BooleanField(
+        default=True,
+        verbose_name=_("Show CGPN objects"),
+        help_text=mark_safe(
+            '<a href="https://ui.adsabs.harvard.edu/abs/2001A%26A...378..843K/abstract">Catalogue of Galactic Planetary Nebulae</a>'),
     )
 
 

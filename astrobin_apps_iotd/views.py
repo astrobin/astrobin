@@ -1,11 +1,10 @@
-from datetime import timedelta, datetime
+from datetime import timedelta, datetime, date
 
 from braces.views import (
     GroupRequiredMixin,
     JSONResponseMixin,
     LoginRequiredMixin)
 from django.conf import settings
-from django.contrib.auth.models import Group
 from django.core.exceptions import ValidationError
 from django.http import HttpResponseForbidden
 from django.shortcuts import get_object_or_404, render
@@ -15,9 +14,11 @@ from django.views.generic import (
     ListView)
 from django.views.generic.base import View
 
+from astrobin.enums import SubjectType
 from astrobin.models import Image
 from astrobin_apps_iotd.models import Iotd, IotdSubmission, IotdVote
 from astrobin_apps_iotd.permissions import may_elect_iotd
+from astrobin_apps_iotd.services import IotdService
 from astrobin_apps_iotd.templatetags.astrobin_apps_iotd_tags import (
     iotd_submissions_today,
     iotd_votes_today,
@@ -41,34 +42,27 @@ class IotdSubmissionQueueView(
     template_name = 'astrobin_apps_iotd/iotd_submission_queue.html'
 
     def get_queryset(self):
-        days = settings.IOTD_SUBMISSION_WINDOW_DAYS
-        judges = Group.objects.get(name='iotd_judges').user_set.all()
-        image_groups = []
 
         def can_add(image):
             # type: (Image) -> bool
 
             # Since the introduction of the 2020 plans, Free users cannot participate in the IOTD/TP.
-            user_has_rights = not is_free(image.user)  # type: bool
+            user_is_free = is_free(image.user)  # type: bool
+            already_iotd = Iotd.objects.filter(image=image, date__lte=datetime.now().date()).exists()  # type: bool
 
-            already_iotd = Iotd.objects.filter(image=x, date__lte=datetime.now().date()).exists()  # type: bool
-            user_is_judge = x.user in judges  # type: bool
+            return not user_is_free and not already_iotd
 
-            return not user_has_rights and not (already_iotd or user_is_judge)
+        images = self.model.objects.filter(
+            moderator_decision=1,
+            published__gte=date.today(),
+            published__lt=date.today() + timedelta(days=settings.IOTD_SUBMISSION_WINDOW_DAYS)
+        ).exclude(
+            subject_type__in=(SubjectType.GEAR, SubjectType.OTHER)
+        ).order_by(
+            '-published'
+        )
 
-        for date in (datetime.now().date() - timedelta(n) for n in range(days)):
-            image_groups.append({
-                'date': date,
-                'images': sorted(list(set([
-                    x
-                    for x in self.model.objects \
-                        .filter(
-                        moderator_decision=1,
-                        published__gte=date,
-                        published__lt=date + timedelta(1))
-                    if can_add(x)])), key=lambda x: x.published, reverse=True)})
-
-        return image_groups
+        return [x for x in images if can_add(x)]
 
 
 class IotdToggleSubmissionAjaxView(
@@ -110,14 +104,13 @@ class IotdReviewQueueView(
     def get_queryset(self):
         days = settings.IOTD_REVIEW_WINDOW_DAYS
         cutoff = datetime.now() - timedelta(days)
-        judges = Group.objects.get(name='iotd_judges').user_set.all()
         return sorted(list(set([
             x.image
             for x in self.model.objects.filter(date__gte=cutoff)
             if not Iotd.objects.filter(
                 image=x.image,
                 date__lte=datetime.now().date()).exists()
-               and not x.image.user in judges])), key=lambda x: x.published, reverse=True)
+        ])), key=lambda x: x.published, reverse=True)
 
 
 class IotdToggleVoteAjaxView(
@@ -159,14 +152,13 @@ class IotdJudgementQueueView(
     def get_queryset(self):
         days = settings.IOTD_JUDGEMENT_WINDOW_DAYS
         cutoff = datetime.now() - timedelta(days)
-        judges = Group.objects.get(name='iotd_judges').user_set.all()
         return sorted(list(set([
             x.image
             for x in self.model.objects.filter(date__gte=cutoff)
             if not Iotd.objects.filter(
                 image=x.image,
                 date__lte=datetime.now().date()).exists()
-               and not x.image.user in judges])), key=lambda x: x.published, reverse=True)
+        ])), key=lambda x: x.published, reverse=True)
 
 
 class IotdToggleJudgementAjaxView(
@@ -238,12 +230,11 @@ class IotdToggleJudgementAjaxView(
 
 class IotdArchiveView(ListView):
     model = Iotd
-    queryset = Iotd.objects \
-        .filter(date__lte=datetime.now().date(), image__deleted=None) \
-        .exclude(image__corrupted=True)
     template_name = 'astrobin_apps_iotd/iotd_archive.html'
     paginate_by = 30
 
+    def get_queryset(self):
+        return IotdService().get_iotds()
 
 class IotdSubmittersForImageAjaxView(
     LoginRequiredMixin, GroupRequiredMixin, View):

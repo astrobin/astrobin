@@ -67,7 +67,7 @@ def premium_get_usersubscription(user):
 
 def premium_get_valid_usersubscription(user):
     us = [obj for obj in UserSubscription.objects.filter(
-        user=user,
+        user__username=user.username,
         subscription__name__in=SUBSCRIPTION_NAMES,
         active=True,
     ) if obj.valid()]
@@ -111,7 +111,7 @@ def premium_used_percent(user):
         percent = counter / float(settings.PREMIUM_MAX_IMAGES_LITE_2020) * 100
 
     elif s.subscription.group.name == "astrobin_premium_2020":
-        percent = counter / float(settings.PREMIUM_MAX_IMAGES_PREMIUM_2020) * 100
+        percent = -1
 
     elif s.subscription.group.name == "astrobin_ultimate_2020":
         # Ultimate 2020 gets unlimited uploads.

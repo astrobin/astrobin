@@ -64,9 +64,6 @@ def is_any_ultimate(user):
 
 @register.filter
 def is_ultimate_2020(user):
-    if not user.is_authenticated():
-        return False
-
     userSubscription = premium_get_valid_usersubscription(user)
     if userSubscription:
         return userSubscription.subscription.group.name == "astrobin_ultimate_2020"
@@ -80,9 +77,6 @@ def is_any_premium(user):
 
 @register.filter
 def is_premium_2020(user):
-    if not user.is_authenticated():
-        return False
-
     userSubscription = premium_get_valid_usersubscription(user)
     if userSubscription:
         return userSubscription.subscription.group.name == "astrobin_premium_2020"
@@ -91,9 +85,6 @@ def is_premium_2020(user):
 
 @register.filter
 def is_premium(user):
-    if not user.is_authenticated():
-        return False
-
     userSubscription = premium_get_valid_usersubscription(user)
     if userSubscription:
         return userSubscription.subscription.group.name == "astrobin_premium"
@@ -107,9 +98,6 @@ def is_any_lite(user):
 
 @register.filter
 def is_lite_2020(user):
-    if not user.is_authenticated():
-        return False
-
     userSubscription = premium_get_valid_usersubscription(user)
     if userSubscription:
         return userSubscription.subscription.group.name == "astrobin_lite_2020"
@@ -118,9 +106,6 @@ def is_lite_2020(user):
 
 @register.filter
 def is_lite(user):
-    if not user.is_authenticated():
-        return False
-
     userSubscription = premium_get_valid_usersubscription(user)
     if userSubscription:
         return userSubscription.subscription.group.name == "astrobin_lite"
@@ -156,21 +141,12 @@ def is_offer(subscription):
 
 @register.filter
 def can_view_full_technical_card(user):
-    return not is_free(user)
+    return True
 
 
 @register.filter
 def can_view_technical_card_item(user, item):
-    allowed_items = [
-        "Imaging telescope or lens",
-        "Imaging camera",
-        "Resolution"
-    ]
-
-    if is_free(user) and item[0] not in allowed_items:
-        return False
-
-    if item[1] is None:
+    if not item[1]:
         return False
 
     if isinstance(item[1], QuerySet):
@@ -190,12 +166,6 @@ def can_access_full_search(user):
 
 
 @register.filter
-def can_download_rawdata(user):
-    # Lite is there for continuity reason. Not available since Lite 2020.
-    return is_lite(user) or is_any_premium(user) or is_any_ultimate(user)
-
-
-@register.filter
 def can_perform_basic_platesolving(user):
     return not is_free(user)
 
@@ -206,8 +176,12 @@ def can_perform_advanced_platesolving(user):
 
 
 @register.filter
-def can_see_real_resolution(user):
-    return not is_free(user)
+def can_see_real_resolution(user, image):
+    return not is_free(user) or \
+           user == image.user or \
+           is_any_ultimate(image.user) or \
+           is_premium(image.user) or \
+           is_lite(image.user)
 
 
 @register.filter

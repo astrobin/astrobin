@@ -19,7 +19,9 @@
         <title>{% block title %}{% endblock %} - AstroBin</title>
         <base href="{% block base_href %}/{% endblock %}">
 
-        {% include "base/meta.html" %}{% block extra_meta %}{% endblock %}
+        {% include "base/meta.html" %}
+        {% block extra_meta %}{% endblock %}
+
         {% include "base/favicon.html" %}
         {% include "base/ie8html5.html" %}
 
@@ -49,7 +51,7 @@
     </head>
 
     {% show_adsense_ads as show_adsense_ads %}
-    <body data-offset="55"
+    <body id="{% block page_body_id %}none{% endblock %}" data-offset="55"
           {% if show_adsense_ads %}
               class="with-ads-sidebar"
           {% endif %}>

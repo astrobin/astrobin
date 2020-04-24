@@ -1,13 +1,10 @@
-# Python
 import re
 from datetime import datetime
 
-# Third party
 from braces.views import (
     JSONResponseMixin,
     LoginRequiredMixin,
 )
-# Django
 from django.conf import settings
 from django.contrib import messages
 from django.contrib.contenttypes.models import ContentType
@@ -30,7 +27,7 @@ from django.views.generic import (
 from django.views.generic.detail import SingleObjectMixin
 from silk.profiling.profiler import silk_profile
 
-# AstroBin
+from astrobin.enums import SubjectType
 from astrobin.forms import (
     CopyGearForm,
     ImageDemoteForm,
@@ -52,12 +49,10 @@ from astrobin.models import (
     UserProfile,
     LANGUAGES,
     LICENSE_CHOICES,
-    SOLAR_SYSTEM_SUBJECT_CHOICES,
 )
 from astrobin.stories import add_story
 from astrobin.templatetags.tags import can_like
 from astrobin.utils import to_user_timezone, get_image_resolution
-# AstroBin apps
 from astrobin_apps_groups.forms import GroupSelectForm
 from astrobin_apps_groups.models import Group
 from astrobin_apps_images.services import ImageService
@@ -67,11 +62,6 @@ from astrobin_apps_platesolving.models import Solution
 from astrobin_apps_platesolving.services import SolutionService
 from astrobin_apps_premium.templatetags.astrobin_apps_premium_tags import can_see_real_resolution
 from nested_comments.models import NestedComment
-from rawdata.forms import (
-    PublicDataPool_SelectExistingForm,
-    PrivateSharedFolder_SelectExistingForm,
-)
-from rawdata.models import PrivateSharedFolder
 from toggleproperties.models import ToggleProperty
 
 
@@ -479,11 +469,6 @@ class ImageDetailView(ImageDetailViewBase):
         elif ssa:
             image_type = 'solar_system'
 
-        # Data that's common to both DS and SS images
-        basic_data = (
-            (_('Resolution'), '%dx%d' % (w, h) if (w and h) else None),
-        )
-
         profile = None
         if self.request.user.is_authenticated():
             profile = self.request.user.userprofile
@@ -500,7 +485,7 @@ class ImageDetailView(ImageDetailViewBase):
                 to_user_timezone(image.published, profile) \
                     if profile else image.published
 
-        alias = 'regular'
+        alias = 'regular' if not image.sharpen_thumbnails else 'regular_sharpened'
         mod = self.request.GET.get('mod')
         if mod == 'inverted':
             alias = 'regular_inverted'
@@ -708,39 +693,26 @@ class ImageDetailView(ImageDetailViewBase):
             'gear_list_has_paid_commercial': gear_list_has_paid_commercial,
             'image_type': image_type,
             'ssa': ssa,
-            'basic_data': basic_data,
             'deep_sky_data': deep_sky_data,
             'private_message_form': PrivateMessageForm(),
             'upload_revision_form': ImageRevisionUploadForm(),
             'upload_uncompressed_source_form': UncompressedSourceUploadForm(instance=image),
             'dates_label': _("Dates"),
             'published_on': published_on,
-            'show_contains': (image.subject_type == 100 and subjects) or (image.subject_type >= 200),
+            'show_contains': (image.subject_type == SubjectType.DEEP_SKY and subjects) or
+                             (image.subject_type != SubjectType.DEEP_SKY),
             'subjects': subjects,
-            'subject_type': [x[1] for x in Image.SUBJECT_TYPE_CHOICES if x[0] == image.subject_type][
-                0] if image.subject_type else 0,
+            'subject_type': ImageService(image).get_subject_type_label(),
             'license_icon': static('astrobin/icons/%s' % licenses[image.license][1]),
             'license_title': licenses[image.license][2],
+            'resolution': '%dx%d' % (w, h) if (w and h) else None,
             'locations': locations,
-            # Because of a regression introduced at
-            # revision e1dad12babe5, now we have to
-            # implement this ugly hack.
-
-            'solar_system_main_subject_id': image.solar_system_main_subject,
-            'solar_system_main_subject': SOLAR_SYSTEM_SUBJECT_CHOICES[image.solar_system_main_subject][
-                1] if image.solar_system_main_subject is not None else None,
+            'solar_system_main_subject': ImageService(image).get_solar_system_main_subject_label(),
             'content_type': ContentType.objects.get(app_label='astrobin', model='image'),
             'preferred_language': preferred_language,
             'select_group_form': GroupSelectForm(
                 user=self.request.user) if self.request.user.is_authenticated() else None,
             'in_public_groups': Group.objects.filter(Q(public=True, images=image)),
-            'select_datapool_form': PublicDataPool_SelectExistingForm(),
-            'select_sharedfolder_form': PrivateSharedFolder_SelectExistingForm(
-                user=self.request.user) if self.request.user.is_authenticated() else None,
-            'has_sharedfolders': PrivateSharedFolder.objects.filter(
-                Q(creator=self.request.user) |
-                Q(users=self.request.user)).count() > 0 if self.request.user.is_authenticated() else False,
-
             'image_next': image_next,
             'image_prev': image_prev,
             'nav_ctx': nav_ctx,
@@ -807,16 +779,17 @@ class ImageFullView(ImageDetailView):
 
         return super(ImageFullView, self).dispatch(request, *args, **kwargs)
 
-    # TODO: this function needs to be rewritten
     def get_context_data(self, **kwargs):
         context = super(ImageFullView, self).get_context_data(**kwargs)
 
+        image = self.get_object()
+
         mod = self.request.GET.get('mod')
-        real = 'real' in self.request.GET and can_see_real_resolution(self.request.user)
+        real = 'real' in self.request.GET and can_see_real_resolution(self.request.user, image)
         if real:
             alias = 'real'
         else:
-            alias = 'hd'
+            alias = 'hd' if not image.sharpen_thumbnails else 'hd_sharpened'
 
         if mod in settings.AVAILABLE_IMAGE_MODS:
             alias += "_%s" % mod
@@ -1093,7 +1066,7 @@ class ImageEditBasicView(ImageEditBaseView):
             except TypeError:
                 pass
 
-            image.square_cropping = "0,0,0,0"
+            image.square_cropping = ImageService(image).get_default_cropping()
             image.save(keep_deleted=True)
 
             image.thumbnail_invalidate()
@@ -1143,6 +1116,17 @@ class ImageEditRevisionView(LoginRequiredMixin, UpdateView):
     def get_form_class(self):
         return ImageEditCorruptedRevisionForm if self.object.corrupted else ImageEditRevisionForm
 
+    def get_initial(self):
+        revision = self.get_object()  # type: ImageRevision
+
+        square_cropping = revision.square_cropping
+        if square_cropping == '0,0,0,0':
+            square_cropping = ImageService(revision.image).get_default_cropping(revision.label)
+
+        return {
+            'square_cropping': square_cropping
+        }
+
     def get_success_url(self):
         return reverse_lazy('image_detail', args=(self.object.image.get_id(),))
 
@@ -1165,6 +1149,7 @@ class ImageEditRevisionView(LoginRequiredMixin, UpdateView):
     def post(self, request, *args, **kwargs):
         revision = self.get_object()  # type: ImageRevision
         previous_url = revision.image_file.url
+        previous_square_cropping = revision.square_cropping
 
         ret = super(ImageEditRevisionView, self).post(request, *args, **kwargs)
 
@@ -1177,9 +1162,12 @@ class ImageEditRevisionView(LoginRequiredMixin, UpdateView):
             except TypeError:
                 pass
 
-            revision.square_cropping = "0,0,0,0"
+            revision.square_cropping = ImageService(revision.image).get_default_cropping(revision.label)
             revision.save(keep_deleted=True)
 
+            revision.thumbnail_invalidate()
+
+        if previous_square_cropping != revision.square_cropping:
             revision.thumbnail_invalidate()
 
         return ret
@@ -1188,6 +1176,17 @@ class ImageEditRevisionView(LoginRequiredMixin, UpdateView):
 class ImageEditThumbnailsView(ImageEditBaseView):
     form_class = ImageEditThumbnailsForm
     template_name = 'image/edit/thumbnails.html'
+
+    def get_initial(self):
+        image = self.get_object()  # type: Image
+
+        square_cropping = image.square_cropping
+        if square_cropping == '0,0,0,0':
+            square_cropping = ImageService(image).get_default_cropping()
+
+        return {
+            'square_cropping': square_cropping
+        }
 
     def get_success_url(self):
         image = self.get_object()

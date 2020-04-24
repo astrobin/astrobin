@@ -3,7 +3,7 @@ import os
 from split_settings.tools import optional, include
 
 BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
-VERSION = "1.36.1"
+VERSION = "v1.62.8"
 
 include(
     # Begin

@@ -1,5 +1,6 @@
 from django.conf import settings
 
+from astrobin.enums import SubjectType
 from astrobin.fields import COUNTRIES
 from astrobin.models import Image
 from astrobin.utils import get_client_country_code
@@ -51,7 +52,6 @@ def user_scores(request):
 
 
 def common_variables(request):
-    from rawdata.utils import rawdata_user_has_valid_subscription
     from django_user_agents.utils import get_and_set_user_agent
     from django_bouncy.models import Bounce, Complaint
 
@@ -75,7 +75,6 @@ def common_variables(request):
         # 'random_gear_item': Gear.objects.filter(moderator_fixed = None).order_by('?')[:1].get(),
         'is_producer': request.user.groups.filter(name='Producers'),
         'is_retailer': request.user.groups.filter(name='Retailers'),
-        'rawdata_has_subscription': rawdata_user_has_valid_subscription(request.user),
         'IMAGES_URL': settings.IMAGES_URL,
         'MEDIA_URL': settings.MEDIA_URL,
         'ADS_ENABLED': settings.ADS_ENABLED,
@@ -112,6 +111,10 @@ def common_variables(request):
         'HAS_COMPLAINT': complained,
         'COUNTRIES': COUNTRIES,
         'COOKIELAW_ACCEPTED': request.COOKIES.get('cookielaw_accepted', False),
+
+        'enums': {
+            'SubjectType': SubjectType,
+        },
     }
 
     if request.user.is_authenticated() and request.user.userprofile.is_image_moderator():

@@ -14,14 +14,27 @@ log = logging.getLogger('apps')
 
 class Solver(AbstractPlateSolvingBackend):
     def start(self, image_url, **kwargs):
-        smallSizeRatio = thumbnail_scale(kwargs.pop('image_width'), 'hd', 'regular')
+        advanced_settings = kwargs.pop('advanced_settings', None)  # type: PlateSolvingAdvancedSettings
+        image_width = kwargs.pop('image_width')  # type: int
+        image_height = kwargs.pop('image_height')  # type: int
+        smallSizeRatio = thumbnail_scale(image_width, 'hd', 'regular')  # type: float
+        pixscale = kwargs.pop('pixscale')  # type: float
+        hd_width = min(image_width, settings.THUMBNAIL_ALIASES['']['hd']['size'][0])  # type: int
+        hd_ratio = max(1, image_width / float(hd_width))  # type: float
+        hd_height = int(image_height / hd_ratio)  # type: int
+        settings_hd_width = settings.THUMBNAIL_ALIASES['']['hd']['size'][0]
+
+        if image_width > settings_hd_width and advanced_settings and not advanced_settings.sample_raw_frame_file:
+            ratio = image_width / float(settings_hd_width)
+            pixscale = float(pixscale) * ratio
 
         task_params = [
             'imageURL=%s' % image_url,
             'centerRA=%f' % kwargs.pop('ra'),
             'centerDec=%f' % kwargs.pop('dec'),
+            'largeSize=%d' % max(hd_width, hd_height),
             'smallSizeRatio=%f' % smallSizeRatio,
-            'imageResolution=%f' % kwargs.pop('pixscale'),
+            'imageResolution=%f' % pixscale,
             'fontsBaseURL=%s' % settings.STATIC_URL + 'astrobin/fonts',
         ]
 
@@ -42,7 +55,6 @@ class Solver(AbstractPlateSolvingBackend):
             task_params.append('obsHeight=%f' % altitude)
 
         layers = []
-        advanced_settings = kwargs.pop('advanced_settings', None)  # type: PlateSolvingAdvancedSettings
         if advanced_settings:
             if advanced_settings.show_grid:
                 layers.append('Grid')
@@ -72,6 +84,8 @@ class Solver(AbstractPlateSolvingBackend):
                 layers.append('GCVS')
             if advanced_settings.show_tycho_2:
                 layers.append('TYCHO-2')
+            if advanced_settings.show_cgpn:
+                layers.append('CGPN')
 
             if advanced_settings.scaled_font_size == 'S':
                 task_params.append('smallSizeTextRatio=%f' % .66)

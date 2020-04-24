@@ -1,3 +1,4 @@
+import logging
 import os
 from StringIO import StringIO
 
@@ -8,6 +9,8 @@ from django.core.files.base import ContentFile
 
 from astrobin_apps_platesolving.solver import Solver
 from astrobin_apps_platesolving.utils import get_from_storage, ThumbnailNotReadyException
+
+log = logging.getLogger('apps')
 
 
 class Annotator:
@@ -156,7 +159,11 @@ class Annotator:
                     '0' if not hasattr(self.solution.content_object, 'label')
                     else self.solution.content_object.label)) \
                     .convert('RGBA')
-            except ThumbnailNotReadyException:
+            except ThumbnailNotReadyException as e:
+                log.warning("annotate.py: ThumbnailNotReadyException when trying to open the image: %s" % e.message)
+                return None
+            except IOError as e:
+                log.warning("annotate.py: IOError when trying to open the image: %s" % e.message)
                 return None
 
             if self.resampling_factor != 1:

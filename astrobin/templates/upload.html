@@ -17,447 +17,159 @@
     {% if READONLY_MODE %}
         {% include 'readonly_mode.html' %}
     {% else %}
-    <div class="page-header text-center">
-        <h1>{% trans "Image upload" %}</h1>
-    </div>
-
-    {% if premium_has_inact_sub %}
-        <div class="row">
-            <div class="span10 offset1">
-                <div class="alert alert-warning">
-                    <h4 class="alert-header">
-                        <i class="icon-warning-sign"></i>
-                        {% trans "Warning!" %}
-                    </h4>
-                    {% trans "Your Lite or Premium subscription is not active, or it has expired. If you have just subscribed, please wait for a few minutes. Thanks for your patience!" %}
-                </div>
-            </div>
+        <div class="page-header text-center">
+            <h1>{% trans "Image upload" %}</h1>
         </div>
-    {% endif %}
 
-    <div class="row section">
-        <div class="span10 offset1">
-            {% if premium_used_percent > -1 %}
-                <div class="progress {{premium_progress_class}}">
-                    <div class="bar" style="width:{{premium_used_percent}}%"></div>
-                </div>
-            {% endif %}
-
-            <p class="text-center">
-                {% if user|is_free %}
-                    {% blocktrans trimmed with premium_counter=user.userprofile.premium_counter max_allowed=PREMIUM_MAX_IMAGES_FREE_2020 %}
-                        You have used <strong>{{premium_counter}}</strong> images of your allowed
-                        <strong>{{max_allowed}}</strong>.{% endblocktrans %}
-                {% elif user|is_lite %}
-                    {% blocktrans trimmed with premium_counter=user.userprofile.premium_counter max_allowed=PREMIUM_MAX_IMAGES_LITE %}
-                        You have used <strong>{{ premium_counter }}</strong> images of your allowed
-                        <strong>{{ max_allowed }}</strong>.{% endblocktrans %}
-                {% elif user|is_lite_2020 %}
-                    {% blocktrans trimmed with premium_counter=user.userprofile.premium_counter max_allowed=PREMIUM_MAX_IMAGES_LITE_2020 %}
-                        You have used <strong>{{ premium_counter }}</strong> images of your allowed
-                        <strong>{{ max_allowed }}</strong>.{% endblocktrans %}
-                {% elif user|is_premium_2020 %}
-                    {% blocktrans trimmed with premium_counter=user.userprofile.premium_counter max_allowed=PREMIUM_MAX_IMAGES_PREMIUM_2020 %}
-                        You have used <strong>{{ premium_counter }}</strong> images of your allowed
-                        <strong>{{ max_allowed }}</strong>.{% endblocktrans %}
-                {% endif %}
-
-                {% if user|is_premium or user|is_ultimate_2020 %}
-                    {% blocktrans %}Thank you for being a premium member! Enjoy your unlimited images.{% endblocktrans %}
-                {% endif %}
-
-
-                {% if not user|is_any_ultimate %}
-                    <a href="{% url 'subscription_list' %}">
-                        {% trans "Would you like to upgrade to a higher plan?" %}
-                    </a>
-                {% endif %}
-            </p>
-        </div>
-    </div>
-
-    {% if upload_form %}
-        <div class="row section">
-            <div class="span10 offset1">
-                <div class="upload-forms">
-                    <div class="upload-form wip-form-box">
-                        <div class="upload-form-inner">
-                            <h3>{% trans "Upload as a work in progress" %}</h3>
-                            <div class="loading"><img src="{% static 'astrobin/images/ajax-loader.gif' %}" alt=""/></div>
-                            <form action="{% url 'image_upload_process' %}" method="post" enctype="multipart/form-data"> {% csrf_token %}
-                                <input type="file" name="image_file" class="file" id="id_file" />
-                                <input class="btn btn-primary" type="submit" value="{% trans "Upload" %}" />
-                                <input type="hidden" name="wip" value="" />
-                            </form>
-                            <div class="progressbar"><img src="{% static 'astrobin/images/loading-bar.gif' %}" alt="{% trans "Uploading..." %}"/></div>
-                            <p>
-                                {% blocktrans %}Use this button to upload an image to the <strong>Staging Area</strong>. It's perfect for works in progress that you want to share on Internet forums. Read more in the <a href="https://welcome.astrobin.com/faq">FAQ</a>.{% endblocktrans %}
-                            </p>
-                        </div> <!-- upload-form-inner -->
-                    </div> <!-- wip-form-box -->
-                    <div class="upload-form final-form-box">
-                        <div class="upload-form-inner">
-                            <h3>{% trans "Upload as a finished image" %}</h3>
-                            <div class="loading"><img src="{% static 'astrobin/images/ajax-loader.gif' %}" alt=""/></div>
-                            <form action="{% url 'image_upload_process' %}" method="post" enctype="multipart/form-data"> {% csrf_token %}
-                                <div class="row-fluid">
-                                    <div class="span12">
-                                        <input type="file" name="image_file" class="file" id="id_file" />
-                                        <input class="btn btn-primary" type="submit" value="{% trans "Upload" %}" />
-                                    </div>
-                                </div>
-                                <div class="row-fluid">
-                                    <div class="span12">
-                                        <label for="id_skip_notifications">
-                                            <input type="checkbox" name="skip_notifications"
-                                                   id="id_skip_notifications" />
-                                            {% trans "Do not notify followers" %}
-                                        </label>
-                                    </div>
-                                </div>
-                            </form>
-                            <div class="progressbar"><img src="{% static 'astrobin/images/loading-bar.gif' %}" alt="{% trans "Uploading..." %}"/></div>
-                            <p>
-                                {% url 'profile_flickr_import' as flickr_url %}
-                                {% url 'me' as profile_url %}
-                                {% blocktrans %}Use this button to upload an image to the <strong>Public Area</strong>. It will be displayed in <a href="{{profile_url}}">your profile</a> and here on the home page. You can <a href="{{flickr_url}}">import from Flickr</a> too.{% endblocktrans %}
-                            </p>
-                        </div> <!-- upload-form-inner -->
-                    </div> <!-- final-form-box -->
-                </div> <!-- upload-forms -->
-            </div> <!-- span10 -->
-        </div> <!-- row -->
-    {% endif %} <!-- upload_form -->
-
-    <hr/>
-
-    <div class="page-header text-center">
-        <h1>{% trans "Raw data upload" %}</h1>
-    </div>
-
-    {% if rawdata_has_act_sub %}
-        {% if rawdata_is_over_limit %}
-            <div class="row section">
-                <div class="span10 offset1">
-                    <div class="alert alert-error">
-                        <h4 class="alert-heading"><i class="icon-fire"></i> {% trans "Error!" %}</h3>
-                        {% trans "You have no more space left on your Raw Data account. Please delete some files to make room, or upgrade your account." %}
-                    </div>
-                </div>
-            </div>
-        {% else %}
-            <div class="row section" id="rawdata-container">
-                <div class="span10 offset1">
-                    <div id="rawdata-file-drop-area">
-                        <div id="rawdata-placeholder">
-        <!--[if lte IE 10]>
-                            <h2>{% trans "Use the button below to choose files" %}</h2>
-        <![endif]-->
-
-        <!--[if !IE]><!-->
-                            <h2>{% trans "Drop your raw data here" %}</h2>
-        <!--<![endif]-->
-                            <small>{% trans "Accepted file types: FIT and digital camera raw files" %}</small>
-                        </div>
-                        <table id="rawdata-filelist" class="table hidden">
-                            <tr class="header">
-                                <th class="filename">{% trans "Filename" %}</th>
-                                <th class="size">{% trans "Size" %}</th>
-                                <th class="status">{% trans "Status" %}</th>
-                            </tr>
-                        </table>
-                    </div>
-
-                    <div id="progress" class="progress progress-info progress-striped active hidden">
-                        <div class="bar" style="width: 0%"></div>
-                    </div>
-
-                    <div id="warning" class="alert alert-warning hidden">
-                        <button type="button" class="close" data-dismiss="alert">×</button>
-                        <span class="content"></span>
-                    </div>
-
-                    <div class="pull-left">
-                        <button id="rawdata-select" class="btn">
-                            <i class="icon-folder-open"></i>
-                            {% trans "Choose files" %}
-                        </button>
-                        <button id="rawdata-clear" class="btn btn-danger">
-                            <i class="icon-trash"></i>
-                            {% trans "Reset" %}
-                        </button>
-                    </div>
-                    <div class="pull-right">
-                        <span id="rawdata-eta" class="hidden"></span>
-                        <button id="rawdata-upload" class="btn btn-primary disabled" disabled="disabled">
-                            <i class="icon-upload"></i>
-                            {% trans "Start upload" %}
-                        </button>
-                    </div>
-                </div>
-            </div>
-        {% endif %}
-
-        {% if rawdata_used_percent > 0 %}
+        {% if premium_has_inact_sub %}
             <div class="row">
                 <div class="span10 offset1">
-                    <div class="progress {{rawdata_progress_class}}">
-                        <div class="bar" style="width:{{rawdata_used_percent}}%"></div>
+                    <div class="alert alert-warning">
+                        <h4 class="alert-header">
+                            <i class="icon-warning-sign"></i>
+                            {% trans "Warning!" %}
+                        </h4>
+                        {% trans "Your Lite or Premium subscription is not active, or it has expired. If you have just subscribed, please wait for a few minutes. Thanks for your patience!" %}
                     </div>
                 </div>
             </div>
         {% endif %}
 
-        <div id="go-to-library" style="text-align: center">
-            <a href="{% url 'rawdata.library' %}">
-                {% trans "Go to your Raw Data Library." %}
-            </a>
-        </div>
-    {% endif %}
-
-    {% if rawdata_has_inact_sub %}
-        <div class="row">
-            <div class="span10 offset1">
-                <div class="alert alert-warning">
-                    <h4 class="alert-header">
-                        <i class="icon-warning-sign"></i>
-                        {% trans "Warning!" %}
-                    </h4>
-                    {% trans "Your Raw Data subscription is not active, or it has expired. If you have just subscribed, please wait for a few minutes. Thanks for your patience!" %}
-                </div>
-
-                <div style="text-align: center">
-                    {% url 'subscription_list' as plans_url %}
-                    {% blocktrans %}Go to the Raw Data <a href="{{plans_url}}">plans page</a>.{% endblocktrans %}
-                </div>
-            </div>
-        </div>
-    {% endif %}
-
-    {% if not rawdata_has_sub %}
         <div class="row section">
-            <div class="span6 offset3">
-                <div class="well">
-                    <h4>{% trans "Did you know that AstroBin can host your FIT and digital camera raw files too?" %}</h4>
-                    <p>
-                        {% blocktrans with rawdata_url="https://welcome.astrobin.com/features/raw-data-support" %}Have a look at <a href="{{rawdata_url}}">AstroBin Raw Data</a> if you want to safely store all your raw files, and have them neatily organized for future reference!{% endblocktrans %}
-                    </p>
-                </div>
+            <div class="span10 offset1">
+                {% if premium_used_percent > -1 %}
+                    <div class="progress {{ premium_progress_class }}">
+                        <div class="bar" style="width:{{ premium_used_percent }}%"></div>
+                    </div>
+                {% endif %}
+
+                <p class="text-center">
+                    {% if user|is_free %}
+                        {% blocktrans trimmed with premium_counter=user.userprofile.premium_counter max_allowed=PREMIUM_MAX_IMAGES_FREE_2020 %}
+                            You have used <strong>{{ premium_counter }}</strong> images of your allowed
+                            <strong>{{ max_allowed }}</strong>.{% endblocktrans %}
+                    {% elif user|is_lite %}
+                        {% blocktrans trimmed with premium_counter=user.userprofile.premium_counter max_allowed=PREMIUM_MAX_IMAGES_LITE %}
+                            You have used <strong>{{ premium_counter }}</strong> images of your allowed
+                            <strong>{{ max_allowed }}</strong>.{% endblocktrans %}
+                    {% elif user|is_lite_2020 %}
+                        {% blocktrans trimmed with premium_counter=user.userprofile.premium_counter max_allowed=PREMIUM_MAX_IMAGES_LITE_2020 %}
+                            You have used <strong>{{ premium_counter }}</strong> images of your allowed
+                            <strong>{{ max_allowed }}</strong>.{% endblocktrans %}
+                    {% endif %}
+
+                    {% if user|is_premium or user|is_premium_2020 or user|is_ultimate_2020 %}
+                        {% blocktrans %}Thank you for being a premium member! Enjoy your unlimited images.
+                        {% endblocktrans %}
+                    {% endif %}
+
+
+                    {% if not user|is_any_ultimate %}
+                        <a href="{% url 'subscription_list' %}">
+                            {% trans "Would you like to upgrade to a higher plan?" %}
+                        </a>
+                    {% endif %}
+                </p>
             </div>
         </div>
 
-        <div class="row">
-            <div class="span6 offset3" style="text-align:center">
-                <a href="https://welcome.astrobin.com/features/raw-data-support">
-                    <img src="{% static 'rawdata/images/astrobin-rawdata-logo-luna.png' %}" />
-                </a>
-            </div>
-        </div>
-    {% endif %}
+        {% if upload_form %}
+            <div class="row section">
+                <div class="span10 offset1">
+                    <div class="upload-forms">
+                        <div class="upload-form wip-form-box">
+                            <div class="upload-form-inner">
+                                <h3>{% trans "Upload as a work in progress" %}</h3>
+                                <div class="loading"><img src="{% static 'astrobin/images/ajax-loader.gif' %}" alt="" />
+                                </div>
+                                <form action="{% url 'image_upload_process' %}" method="post"
+                                      enctype="multipart/form-data"> {% csrf_token %}
+                                    <input type="file" name="image_file" class="file" id="id_file" />
+                                    <input class="btn btn-primary" type="submit" value="{% trans "Upload" %}" />
+                                    <input type="hidden" name="wip" value="" />
+                                </form>
+                                <div class="progressbar"><img src="{% static 'astrobin/images/loading-bar.gif' %}"
+                                                              alt="{% trans "Uploading..." %}" /></div>
+                                <p>
+                                    {% blocktrans %}Use this button to upload an image to the
+                                        <strong>Staging Area</strong>. It's perfect for works in progress that you want
+                                        to share on Internet forums. Read more in the
+                                        <a href="https://welcome.astrobin.com/faq">FAQ</a>.{% endblocktrans %}
+                                </p>
+                            </div> <!-- upload-form-inner -->
+                        </div> <!-- wip-form-box -->
+                        <div class="upload-form final-form-box">
+                            <div class="upload-form-inner">
+                                <h3>{% trans "Upload as a finished image" %}</h3>
+                                <div class="loading"><img src="{% static 'astrobin/images/ajax-loader.gif' %}" alt="" />
+                                </div>
+                                <form action="{% url 'image_upload_process' %}" method="post"
+                                      enctype="multipart/form-data"> {% csrf_token %}
+                                    <div class="row-fluid">
+                                        <div class="span12">
+                                            <input type="file" name="image_file" class="file" id="id_file" />
+                                            <input class="btn btn-primary" type="submit" value="{% trans "Upload" %}" />
+                                        </div>
+                                    </div>
+                                    <div class="row-fluid">
+                                        <div class="span12">
+                                            <label for="id_skip_notifications">
+                                                <input type="checkbox" name="skip_notifications"
+                                                       id="id_skip_notifications" />
+                                                {% trans "Do not notify followers" %}
+                                            </label>
+                                        </div>
+                                    </div>
+                                </form>
+                                <div class="progressbar"><img src="{% static 'astrobin/images/loading-bar.gif' %}"
+                                                              alt="{% trans "Uploading..." %}" /></div>
+                                <p>
+                                    {% url 'profile_flickr_import' as flickr_url %}
+                                    {% url 'me' as profile_url %}
+                                    {% blocktrans %}Use this button to upload an image to the
+                                        <strong>Public Area</strong>. It will be displayed in
+                                        <a href="{{ profile_url }}">your profile</a> and here on the home page. You can
+                                        <a href="{{ flickr_url }}">import from Flickr</a> too.{% endblocktrans %}
+                                </p>
+                            </div> <!-- upload-form-inner -->
+                        </div> <!-- final-form-box -->
+                    </div> <!-- upload-forms -->
+                </div> <!-- span10 -->
+            </div> <!-- row -->
+        {% endif %} <!-- upload_form -->
 
     {% endif %} {# READONLY #}
 {% endblock %}
 
 {% block extra_head %}
-<noscript>
-    <style type="text/css">
-        .upload-forms .loading {
-            display: none;
-        }
-        .upload-forms form {
-            display: block;
-        }
-    </style>
-</noscript>
+    <noscript>
+        <style type="text/css">
+            .upload-forms .loading {
+                display: none;
+            }
+
+            .upload-forms form {
+                display: block;
+            }
+        </style>
+    </noscript>
 {% endblock %}
 
 {% block extra_js %}
-<script src='{% static 'astrobin/js/plupload/plupload.full.js' %}'></script>
-<script type="text/javascript">
-    $(document).ready(function() {
-        $('.upload-forms form').submit(function() {
-            var $form = $(this);
-            var $progressbar = $form.parent().find('.progressbar');
+    <script type="text/javascript">
+        $(document).ready(function () {
+            $('.upload-forms form').submit(function () {
+                var $form = $(this);
+                var $progressbar = $form.parent().find('.progressbar');
 
-            $form.hide();
-            $progressbar.show();
+                $form.hide();
+                $progressbar.show();
 
-            return true;
-        });
-
-        $('.upload-forms .loading').hide();
-        $('.upload-forms form').show();
-
-        {% if rawdata_has_act_sub %}
-        var RawData = function() {
-            this.ui = {
-                $container   : $('#rawdata-container'),
-                $placeholder : $('#rawdata-placeholder'),
-                $filelist    : $('#rawdata-filelist'),
-                $upload_btn  : $('#rawdata-upload'),
-                $browse_btn  : $('#rawdata-select'),
-                $clear_btn   : $('#rawdata-clear'),
-                $drop_element: $('#rawdata-file-drop-area'),
-                $progress    : $('#progress'),
-                $warning     : $('#warning'),
-                $eta         : $('#rawdata-eta'),
-                $goto_lib    : $('#go-to-library')
-            };
-
-            this.hms = function(sec) {
-                if ((sec / 60) < 1) {
-                    return sec + "\"";
-                } else if ((sec / 60) > 1 && (sec / 3600) < 1) {
-                    var min = sec / 60;
-                    sec = sec % 60;
-                    return Math.floor(min) + ":" + Math.floor(sec);
-                } else {
-                    var hou = sec / 3600;
-                    var rmin = sec % 3600;
-                    var min = rmin / 60;
-                    sec = rmin % 60;
-                    return Math.floor(hou) + ":" + Math.floor(min) + ":" + Math.floor(sec);
-                }
-            };
-
-            this.rawdata_uploader = new plupload.Uploader({
-                runtimes            : 'html5,flash,silverlight,html4',
-                container           : this.ui.$container.attr('id'),
-                browse_button       : this.ui.$browse_btn.attr('id'),
-                drop_element        : this.ui.$drop_element.attr('id'),
-                url                 : '{% url 'api.rawdata.rawimage.list' %}',
-                flash_swf_url       : '{% static 'astrobin/js/plupload/plupload.flash.swf' %}',
-                silverlight_xap_url : '{% static 'astrobin/js/plupload/plupload.silverlight.xap' %}',
-                headers             : {
-                    'X-Requested-With' : 'XMLHttpRequest',
-                    'X-CSRFToken'      : '{{csrf_token}}'
-                },
-                filters             : [
-                    {title : "{% trans "Raw files" %}", extensions : "{{rawdata_supported_raw_formats|join:","}}"}
-                ]
+                return true;
             });
 
-            this.reset = function() {
-                this.rawdata_uploader.splice();
-                this.ui.$filelist.find('tr:not(.header)').remove();
-                this.ui.$filelist.addClass('hidden');
-                this.ui.$placeholder.show();
-                this.ui.$upload_btn.addClass('disabled').attr('disabled', 'disabled');
-                this.ui.$progress.addClass('hidden');
-                this.ui.$warning.addClass('hidden');
-                this.ui.$eta.addClass('hidden').text('');
-                this.ui.$goto_lib.show();
-
-                this.enable(this.ui.$browse_btn);
-                this.enable(this.ui.$clear_btn);
-                this.disable(this.ui.$upload_btn);
-
-                this.ui.$progress.find('.bar').width("0%");
-            };
-
-            this.disable = function($el) {
-                $el.addClass('disabled').attr('disabled', 'disabled');
-            };
-
-            this.enable = function($el) {
-                $el.removeClass('disabled').removeAttr('disabled');
-            };
-
-            this.ui.$upload_btn.bind('click',$.proxy(function(e) {
-                this.disable(this.ui.$upload_btn);
-                this.disable(this.ui.$browse_btn);
-                this.disable(this.ui.$clear_btn);
-                this.ui.$warning.addClass('hidden');
-                this.ui.$progress.removeClass('hidden');
-                this.ui.$eta.removeClass('hidden');
-                this.ui.$eta.html("{% trans "Upload started, please wait..." %}");
-                this.ui.$goto_lib.hide();
-                this.rawdata_uploader.start();
-                e.preventDefault();
-            }, this));
-
-            this.ui.$clear_btn.bind('click', $.proxy(function(e) {
-                this.reset();
-                e.preventDefault();
-            }, this));
-
-            this.rawdata_uploader.bind('FilesAdded', $.proxy(function(up, files) {
-                var validFiles = 0;
-                var self = this;
-
-                $.each(files, function(i, file) {
-                    var ext = file.name.split('.').pop();
-                    var valid = $.inArray(ext.toLowerCase(), {{rawdata_supported_raw_formats|safe}}) > -1;
-
-                    if (valid) {
-                        if (validFiles == 0) {
-                            self.ui.$placeholder.hide();
-                            self.ui.$filelist.removeClass('hidden');
-                            self.enable(self.ui.$upload_btn);
-                            self.enable(self.ui.$clear_btn);
-                        }
-
-                        var $row = $('<tr/>');
-                        var $filename = $('<td class="filename"></td>');
-                        var $size = $('<td class="size"></td>');
-                        var $status = $('<td class="status"></td>');
-
-                        $row.attr('id', file.id);
-                        $row.append($filename).append($size).append($status);
-
-                        $filename.text(file.name);
-                        $size.text(plupload.formatSize(file.size));
-                        $status.text("0%");
-
-                        self.ui.$filelist.append($row);
-
-                        validFiles += 1;
-                    } else {
-                        up.removeFile(file);
-                        self.ui.$warning.find('.content').html(
-                            "<h4 class=\"alert-heading\"><i class=\"icon-warning-sign\"></i> {% trans "Warning!" %}</h4> " +
-                            "{% trans "One ore more files were ignored because they did not look like FIT or digital camera raw files." %}");
-                        self.ui.$warning.removeClass('hidden');
-                    }
-                });
-            }, this));
-
-            this.rawdata_uploader.bind('UploadProgress', $.proxy(function(up, file) {
-                $('#' + file.id + " .status").html(file.percent + '%');
-                this.ui.$progress.find('.bar').width(up.total.percent + '%');
-
-                var speed = parseInt(up.total.bytesPerSec / 1024) ;
-                var remaining = up.total.size - up.total.loaded;
-                var eta = this.hms(Math.round(remaining / speed / 1024));
-
-                if (up.total.percent > 0 && eta != "Infinity:NaN:NaN") {
-                    this.ui.$eta.html(
-                        '<strong>' + up.total.percent + '%</strong> ' +
-                        ' (' + speed + ' KB/s, ETA: ' + eta + ')');
-                }
-            }, this));
-
-            this.rawdata_uploader.bind('Error', $.proxy(function(up, err) {
-                up.refresh(); // Reposition Flash/Silverlight
-            }, this));
-
-            this.rawdata_uploader.bind('FileUploaded', $.proxy(function(up, file) {
-                $('#' + file.id + " .status").html("100%");
-            }, this));
-
-            this.rawdata_uploader.bind('UploadComplete', $.proxy(function(up, files) {
-                this.ui.$progress.find('.bar').width('100%');
-                this.enable(this.ui.$clear_btn);
-                this.ui.$eta.html(
-                    "<strong>{% trans "Upload complete!" %}</strong> " +
-                    "<a href=\"{% url 'rawdata.library' %}\">{% trans "Go to your Raw Data Library." %}</a>");
-            }, this));
-
-            this.rawdata_uploader.init();
-        };
-
-        RawData();
-        {% endif %}
-    });
-</script>
+            $('.upload-forms .loading').hide();
+            $('.upload-forms form').show();
+        });
+    </script>
 {% endblock %}

@@ -1,4 +1,5 @@
 import csv
+import logging
 import operator
 import os
 import urllib2
@@ -14,11 +15,12 @@ from django.contrib.auth.models import User
 from django.contrib.contenttypes.models import ContentType
 from django.core.cache import cache
 from django.core.exceptions import MultipleObjectsReturned
+from django.core.files.images import get_image_dimensions
 from django.core.paginator import Paginator, InvalidPage
 from django.core.urlresolvers import reverse
 from django.db.models import Q
 from django.forms.models import inlineformset_factory
-from django.http import Http404, HttpResponse, HttpResponseNotAllowed
+from django.http import Http404, HttpResponse
 from django.http import HttpResponseForbidden
 from django.http import HttpResponseRedirect
 from django.shortcuts import get_object_or_404
@@ -39,6 +41,7 @@ from reviews.views import ReviewAddForm
 from silk.profiling.profiler import silk_profile
 
 from astrobin.context_processors import notices_count, user_language, user_scores, common_variables
+from astrobin.enums import SubjectType
 from astrobin.forms import ImageUploadForm, ImageLicenseForm, PrivateMessageForm, UserProfileEditBasicForm, \
     DeepSky_AcquisitionBasicForm, SolarSystem_AcquisitionForm, UserProfileEditCommercialForm, \
     UserProfileEditRetailerForm, DefaultImageLicenseForm, TelescopeEditNewForm, MountEditNewForm, CameraEditNewForm, \
@@ -54,13 +57,15 @@ from astrobin.models import Image, UserProfile, CommercialGear, Gear, Location, 
 from astrobin.shortcuts import ajax_response, ajax_success, ajax_fail
 from astrobin.utils import user_is_producer, user_is_retailer, to_user_timezone, base26_encode, base26_decode
 from astrobin_apps_notifications.utils import push_notification
-from astrobin_apps_users.services import UserService
-from toggleproperties.models import ToggleProperty
 from astrobin_apps_platesolving.forms import PlateSolvingSettingsForm, PlateSolvingAdvancedSettingsForm
 from astrobin_apps_platesolving.models import PlateSolvingSettings, Solution, PlateSolvingAdvancedSettings
 from astrobin_apps_premium.templatetags.astrobin_apps_premium_tags import can_restore_from_trash, \
     can_perform_advanced_platesolving
 from astrobin_apps_premium.utils import premium_get_max_allowed_image_size, premium_get_max_allowed_revisions
+from astrobin_apps_users.services import UserService
+from toggleproperties.models import ToggleProperty
+
+log = logging.getLogger('apps')
 
 
 def get_image_or_404(queryset, id):
@@ -464,16 +469,6 @@ def index(request, template='index/root.html', extra_context=None):
 
 @login_required
 def image_upload(request):
-    from rawdata.utils import (
-        rawdata_user_has_subscription,
-        rawdata_user_has_valid_subscription,
-        rawdata_user_has_invalid_subscription,
-        rawdata_user_is_over_limit,
-        rawdata_user_used_percent,
-        rawdata_user_progress_class,
-        rawdata_supported_raw_formats,
-    )
-
     from astrobin_apps_premium.utils import (
         premium_used_percent,
         premium_progress_class,
@@ -481,26 +476,12 @@ def image_upload(request):
         premium_user_has_invalid_subscription,
     )
 
-    rawdata_has_sub = rawdata_user_has_subscription(request.user)
-    rawdata_has_act_sub = rawdata_has_sub and rawdata_user_has_valid_subscription(request.user)
-    rawdata_has_inact_sub = rawdata_has_sub and rawdata_user_has_invalid_subscription(request.user)
-    rawdata_is_over_limit = rawdata_has_act_sub and rawdata_user_is_over_limit(request.user)
-
     tmpl_premium_used_percent = premium_used_percent(request.user)
     tmpl_premium_progress_class = premium_progress_class(tmpl_premium_used_percent)
     tmpl_premium_has_inact_sub = premium_user_has_subscription(request.user) and premium_user_has_invalid_subscription(
         request.user)
 
     response_dict = {
-        'rawdata_has_sub': rawdata_has_sub,
-        'rawdata_has_act_sub': rawdata_has_act_sub,
-        'rawdata_has_inact_sub': rawdata_has_inact_sub,
-        'rawdata_is_over_limit': rawdata_is_over_limit,
-
-        'rawdata_used_percent': rawdata_user_used_percent(request.user) if rawdata_has_act_sub else 100,
-        'rawdata_progress_class': rawdata_user_progress_class(request.user) if rawdata_has_act_sub else '',
-        'rawdata_supported_raw_formats': rawdata_supported_raw_formats(),
-
         'premium_used_percent': tmpl_premium_used_percent,
         'premium_progress_class': tmpl_premium_progress_class,
         'premium_has_inact_sub': tmpl_premium_has_inact_sub,
@@ -766,6 +747,7 @@ def image_edit_platesolving_settings(request, id, revision_label):
         return render(request, 'image/edit/platesolving_settings.html', {
             'form': form,
             'image': image,
+            'revision_label': revision_label,
             'return_url': return_url,
         })
 
@@ -778,6 +760,7 @@ def image_edit_platesolving_settings(request, id, revision_label):
             return render(request, 'image/edit/platesolving_settings.html', {
                 'form': form,
                 'image': image,
+                'revision_label': revision_label,
                 'return_url': return_url,
             })
 
@@ -824,6 +807,7 @@ def image_edit_platesolving_advanced_settings(request, id, revision_label):
         return render(request, 'image/edit/platesolving_advanced_settings.html', {
             'form': form,
             'image': image,
+            'revision_label': revision_label,
             'return_url': return_url,
         })
 
@@ -836,6 +820,7 @@ def image_edit_platesolving_advanced_settings(request, id, revision_label):
             return render(request, 'image/edit/platesolving_advanced_settings.html', {
                 'form': form,
                 'image': image,
+                'revision_label': revision_label,
                 'return_url': return_url,
             })
 
@@ -1108,7 +1093,7 @@ def user_page(request, username):
     corrupted_qs = UserService(user).get_corrupted_images()
 
     if request.user != user:
-        qs = qs.exclude(UserService.corrupted_query())
+        qs = qs.exclude(pk__in=[x.pk for x in corrupted_qs])
 
     if 'staging' in request.GET:
         if request.user != user and not request.user.is_superuser:
@@ -1168,8 +1153,15 @@ def user_page(request, username):
 
                 if active == '0':
                     qs = qs.filter(
-                        (Q(subject_type__lt=500) | Q(subject_type=600)) &
-                        (Q(acquisition=None) | Q(acquisition__date=None))).distinct()
+                        Q(subject_type__in=(
+                            SubjectType.DEEP_SKY,
+                            SubjectType.SOLAR_SYSTEM,
+                            SubjectType.WIDE_FIELD,
+                            SubjectType.STAR_TRAILS,
+                            SubjectType.NORTHERN_LIGHTS,
+                            SubjectType.OTHER
+                        )) &
+                        Q(acquisition=None) | Q(acquisition__date=None)).distinct()
                 else:
                     if active is None:
                         if years:
@@ -1195,10 +1187,10 @@ def user_page(request, username):
 
             if active == '0':
                 qs = qs.filter(
-                    (Q(subject_type=100) | Q(subject_type=200)) &
+                    (Q(subject_type=SubjectType.DEEP_SKY) | Q(subject_type=SubjectType.SOLAR_SYSTEM)) &
                     (Q(imaging_telescopes=None) | Q(imaging_cameras=None))).distinct()
             elif active == '-1':
-                qs = qs.filter(Q(subject_type=500)).distinct()
+                qs = qs.filter(Q(subject_type=SubjectType.GEAR)).distinct()
             else:
                 if active is None:
                     if telescopes:
@@ -1222,22 +1214,22 @@ def user_page(request, username):
                 active = 'DEEP'
 
             if active == 'DEEP':
-                qs = qs.filter(subject_type=100)
+                qs = qs.filter(subject_type=SubjectType.DEEP_SKY)
 
             elif active == 'SOLAR':
-                qs = qs.filter(subject_type=200)
+                qs = qs.filter(subject_type=SubjectType.SOLAR_SYSTEM)
 
             elif active == 'WIDE':
-                qs = qs.filter(subject_type=300)
+                qs = qs.filter(subject_type=SubjectType.WIDE_FIELD)
 
             elif active == 'TRAILS':
-                qs = qs.filter(subject_type=400)
+                qs = qs.filter(subject_type=SubjectType.STAR_TRAILS)
 
             elif active == 'GEAR':
-                qs = qs.filter(subject_type=500)
+                qs = qs.filter(subject_type=SubjectType.GEAR)
 
             elif active == 'OTHER':
-                qs = qs.filter(subject_type=600)
+                qs = qs.filter(subject_type=SubjectType.OTHER)
 
         ###########
         # NO DATA #
@@ -1252,7 +1244,7 @@ def user_page(request, username):
 
             if active == 'SUB':
                 qs = qs.filter(
-                    (Q(subject_type=100) | Q(subject_type=200)) &
+                    (Q(subject_type=SubjectType.DEEP_SKY) | Q(subject_type=SubjectType.SOLAR_SYSTEM)) &
                     (Q(solar_system_main_subject=None)))
                 qs = [x for x in qs if (x.solution is None or x.solution.objects_in_field is None)]
                 for i in qs:
@@ -1263,12 +1255,24 @@ def user_page(request, username):
 
             elif active == 'GEAR':
                 qs = qs.filter(
-                    Q(subject_type__lt=500) &
+                    Q(subject_type__in=(
+                        SubjectType.DEEP_SKY,
+                        SubjectType.SOLAR_SYSTEM,
+                        SubjectType.WIDE_FIELD,
+                        SubjectType.STAR_TRAILS,
+                        SubjectType.NORTHERN_LIGHTS,
+                    )) &
                     (Q(imaging_telescopes=None) | Q(imaging_cameras=None)))
 
             elif active == 'ACQ':
                 qs = qs.filter(
-                    Q(subject_type__lt=500) &
+                    Q(subject_type__in=(
+                        SubjectType.DEEP_SKY,
+                        SubjectType.SOLAR_SYSTEM,
+                        SubjectType.WIDE_FIELD,
+                        SubjectType.STAR_TRAILS,
+                        SubjectType.NORTHERN_LIGHTS,
+                    )) &
                     Q(acquisition=None))
 
     # Calculate some stats
@@ -1852,6 +1856,8 @@ def user_profile_flickr_import(request):
         'readonly': settings.READONLY_MODE
     }
 
+    log.debug("Flickr import (user %s): accessed view" % request.user.username)
+
     if not request.user.is_superuser and is_free(request.user) or settings.READONLY_MODE:
         return render(request, "user/profile/flickr_import.html", response_dict)
 
@@ -1862,6 +1868,7 @@ def user_profile_flickr_import(request):
     if not flickr.token_valid(perms=u'read'):
         # We were never authenticated, or authentication expired. We need
         # to reauthenticate.
+        log.debug("Flickr import (user %s): token not valid" % request.user.username)
         flickr.get_request_token(settings.BASE_URL + reverse('flickr_auth_callback'))
         authorize_url = flickr.auth_url(perms=u'read')
         request.session['request_token'] = flickr.flickr_oauth.resource_owner_key
@@ -1873,26 +1880,32 @@ def user_profile_flickr_import(request):
         # If we made it this far (it's a GET request), it means that we
         # are authenticated with flickr. Let's fetch the sets and send them to
         # the template.
+        log.debug("Flickr import (user %s): token valid, GET request, fetching sets" % request.user.username)
 
-        # Hole shit, does it have to be so insane to get the info on the
+        # Does it have to be so insane to get the info on the
         # authenticated user?
         sets = flickr.photosets_getList().find('photosets').findall('photoset')
+
+        log.debug("Flickr import (user %s): token valid, fetched sets" % request.user.username)
         template_sets = {}
         for set in sets:
             template_sets[set.find('title').text] = set.attrib['id']
         response_dict['flickr_sets'] = template_sets
     else:
-        # This is POST!
+        log.debug("Flickr import (user %s): token valid, POST request" % request.user.username)
         if 'id_flickr_set' in request.POST:
+            log.debug("Flickr import (user %s): set in POST request" % request.user.username)
             set_id = request.POST['id_flickr_set']
             urls_sq = {}
             for photo in flickr.walk_set(set_id, extras='url_sq'):
                 urls_sq[photo.attrib['id']] = photo.attrib['url_sq']
                 response_dict['flickr_photos'] = urls_sq
         elif 'flickr_selected_photos[]' in request.POST:
+            log.debug("Flickr import (user %s): photos in POST request" % request.user.username)
             selected_photos = request.POST.getlist('flickr_selected_photos[]')
             # Starting the process of importing
             for index, photo_id in enumerate(selected_photos):
+                log.debug("Flickr import (user %s): iterating photo %s" % (request.user.username, photo_id))
                 sizes = flickr.photos_getSizes(photo_id=photo_id)
                 info = flickr.photos_getInfo(photo_id=photo_id).find('photo')
 
@@ -1907,6 +1920,8 @@ def user_profile_flickr_import(request):
                             found_size = size
 
                 if found_size is not None:
+                    log.debug("Flickr import (user %s): found largest side of photo %s" % (
+                        request.user.username, photo_id))
                     source = found_size.attrib['source']
 
                     img = NamedTemporaryFile(delete=True)
@@ -1924,13 +1939,17 @@ def user_profile_flickr_import(request):
                                   is_wip=True,
                                   license=profile.default_license)
                     image.save(keep_deleted=True)
+                    log.debug("Flickr import (user %s): saved image %d" % (request.user.username, image.pk))
 
+        log.debug("Flickr import (user %s): returning ajax response: %s" % (
+            request.user.username, simplejson.dumps(response_dict)))
         return ajax_response(response_dict)
 
     return render(request, "user/profile/flickr_import.html", response_dict)
 
 
 def flickr_auth_callback(request):
+    log.debug("Flickr import (user %s): received auth callback" % request.user.username)
     flickr = flickrapi.FlickrAPI(
         settings.FLICKR_API_KEY, settings.FLICKR_SECRET,
         username=request.user.username)
@@ -2075,6 +2094,14 @@ def image_revision_upload_process(request):
     image_revision.is_final = True
     image_revision.label = base26_encode(base26_decode(highest_label) + 1)
 
+    w, h = image_revision.w, image_revision.h
+
+    if w == 0 or h == 0:
+        w, h = get_image_dimensions(image_revision.image_file.file)
+
+    if w == image.w and h == image.h:
+        image_revision.square_cropping = image.square_cropping
+
     image_revision.save(keep_deleted=True)
 
     messages.success(request, _("Image uploaded. Thank you!"))
@@ -2169,6 +2196,8 @@ def location_edit(request, id):
 
 
 @require_GET
+@login_required
+@never_cache
 def set_language(request, lang):
     from django.utils.translation import check_for_language, activate
 

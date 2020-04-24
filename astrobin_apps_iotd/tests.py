@@ -1,4 +1,4 @@
-from datetime import datetime, timedelta
+from datetime import datetime, timedelta, date
 
 import simplejson as json
 from beautifulsoupselect import BeautifulSoupSelect as BSS
@@ -10,6 +10,7 @@ from django.core.management import call_command
 from django.test import TestCase, override_settings
 from mock import patch
 
+from astrobin.enums import SubjectType
 from astrobin.tests.generators import Generators
 from astrobin_apps_groups.models import Group as AstroBinGroup
 from astrobin_apps_iotd.models import *
@@ -44,9 +45,9 @@ class IotdTest(TestCase):
         self.client.logout()
         self.image = Image.objects_including_wip.first()
 
-        # Approve the image and set a title
         self.image.moderator_decision = 1
         self.image.title = "IOTD TEST IMAGE"
+        self.image.subject_type = SubjectType.DEEP_SKY
         self.image.save(keep_deleted=True)
 
     def tearDown(self):
@@ -64,79 +65,12 @@ class IotdTest(TestCase):
         self.judge_1.delete()
         self.judge_2.delete()
 
-        self.image.delete()
         self.user.delete()
 
     # Models
 
     def test_submission_model(self):
-        # User must be submitter
-        with self.assertRaisesRegexp(ValidationError, "not a member"):
-            IotdSubmission.objects.create(
-                submitter=self.user,
-                image=self.image)
-
-        # Image must be recent enough
-        self.image.published = \
-            datetime.now() - \
-            timedelta(settings.IOTD_SUBMISSION_WINDOW_DAYS + 1)
-        self.image.save(keep_deleted=True)
-        with self.assertRaisesRegexp(ValidationError, "published more than"):
-            IotdSubmission.objects.create(
-                submitter=self.submitter_1,
-                image=self.image)
-
-        # Image must not be WIP
-        self.image.published = datetime.now()
-        self.image.is_wip = True
-        self.image.save(keep_deleted=True)
-        with self.assertRaisesRegexp(ValidationError, "staging area"):
-            IotdSubmission.objects.create(
-                submitter=self.submitter_1,
-                image=self.image)
-        self.image.is_wip = False
-        self.image.save(keep_deleted=True)
-
-        # Image owner must not be excluded from competitions
-        self.image.user.userprofile.exclude_from_competitions = True
-        self.image.user.userprofile.save(keep_deleted=True)
-        with self.assertRaisesRegexp(ValidationError, "excluded from competitions"):
-            IotdSubmission.objects.create(
-                submitter=self.submitter_1,
-                image=self.image)
-        self.image.user.userprofile.exclude_from_competitions = False
-        self.image.user.userprofile.save(keep_deleted=True)
-
-        # Cannot submit own image
-        self.image.user = self.submitter_1
-        self.image.save(keep_deleted=True)
-        with self.assertRaisesRegexp(ValidationError, "your own image"):
-            IotdSubmission.objects.create(
-                submitter=self.submitter_1,
-                image=self.image)
-        self.image.user = self.user
-        self.image.save(keep_deleted=True)
-
-        # Cannot submit an image authored by a judge
-        self.image.user = self.judge_1
-        self.image.save(keep_deleted=True)
-        with self.assertRaisesRegexp(ValidationError, "a judge's image"):
-            IotdSubmission.objects.create(
-                submitter=self.submitter_1,
-                image=self.image)
-        self.image.user = self.user
-        self.image.save(keep_deleted=True)
-
-        # Cannot submit an image authored by:
-        # - a free account or
-        with self.assertRaisesRegexp(ValidationError, "a Free membership"):
-            IotdSubmission.objects.create(
-                submitter=self.submitter_1,
-                image=self.image)
-
-        us = Generators.premium_subscription(self.user, "AstroBin Ultimate 2020+")
-
-        # All OK
+        Generators.premium_subscription(self.user, "AstroBin Ultimate 2020+")
         submission = IotdSubmission.objects.create(
             submitter=self.submitter_1,
             image=self.image)
@@ -149,7 +83,81 @@ class IotdTest(TestCase):
                 submitter=self.submitter_1,
                 image=self.image)
 
-        # Image must not be past IOTD
+        # Test max daily
+        with self.assertRaisesRegexp(ValidationError, "already submitted.*today"):
+            image2 = Image.objects.create(user=self.user)
+            with self.settings(IOTD_SUBMISSION_MAX_PER_DAY=1):
+                IotdSubmission.objects.create(
+                    submitter=self.submitter_1,
+                    image=image2)
+
+    def test_submission_model_user_must_be_submitter(self):
+        Generators.premium_subscription(self.user, "AstroBin Ultimate 2020+")
+        with self.assertRaisesRegexp(ValidationError, "not a member"):
+            IotdSubmission.objects.create(
+                submitter=self.user,
+                image=self.image)
+
+    def test_submission_model_image_must_be_recent(self):
+        Generators.premium_subscription(self.user, "AstroBin Ultimate 2020+")
+        self.image.published = \
+            datetime.now() - \
+            timedelta(settings.IOTD_SUBMISSION_WINDOW_DAYS + 1)
+        self.image.save(keep_deleted=True)
+        with self.assertRaisesRegexp(ValidationError, "published more than"):
+            IotdSubmission.objects.create(
+                submitter=self.submitter_1,
+                image=self.image)
+
+    def test_submission_model_image_must_be_public(self):
+        Generators.premium_subscription(self.user, "AstroBin Ultimate 2020+")
+        self.image.published = datetime.now()
+        self.image.is_wip = True
+        self.image.save(keep_deleted=True)
+        with self.assertRaisesRegexp(ValidationError, "staging area"):
+            IotdSubmission.objects.create(
+                submitter=self.submitter_1,
+                image=self.image)
+        self.image.is_wip = False
+        self.image.save(keep_deleted=True)
+
+    def test_submission_model_image_owner_must_not_excluded_from_cometitions(self):
+        Generators.premium_subscription(self.user, "AstroBin Ultimate 2020+")
+        self.image.user.userprofile.exclude_from_competitions = True
+        self.image.user.userprofile.save(keep_deleted=True)
+        with self.assertRaisesRegexp(ValidationError, "excluded from competitions"):
+            IotdSubmission.objects.create(
+                submitter=self.submitter_1,
+                image=self.image)
+        self.image.user.userprofile.exclude_from_competitions = False
+        self.image.user.userprofile.save(keep_deleted=True)
+
+    def test_submission_model_cannot_submit_own_image(self):
+        Generators.premium_subscription(self.user, "AstroBin Ultimate 2020+")
+        self.image.user = self.submitter_1
+        self.image.save(keep_deleted=True)
+        with self.assertRaisesRegexp(ValidationError, "your own image"):
+            IotdSubmission.objects.create(
+                submitter=self.submitter_1,
+                image=self.image)
+        self.image.user = self.user
+        self.image.save(keep_deleted=True)
+
+    def test_submission_model_cannot_submit_image_of_free_account(self):
+        with self.assertRaisesRegexp(ValidationError, "a Free membership"):
+            IotdSubmission.objects.create(
+                submitter=self.submitter_1,
+                image=self.image)
+
+    def test_submission_model_image_cannot_be_past_iotd(self):
+        Generators.premium_subscription(self.user, "AstroBin Ultimate 2020+")
+
+        submission = IotdSubmission.objects.create(
+            submitter=self.submitter_1,
+            image=self.image)
+        self.assertEqual(submission.submitter, self.submitter_1)
+        self.assertEqual(submission.image, self.image)
+
         vote = IotdVote.objects.create(
             reviewer=self.reviewer_1,
             image=self.image)
@@ -164,55 +172,65 @@ class IotdTest(TestCase):
         vote.delete()
         iotd.delete()
 
-        # Test max daily
-        with self.assertRaisesRegexp(ValidationError, "already submitted.*today"):
-            image2 = Image.objects.create(user=self.user)
-            with self.settings(IOTD_SUBMISSION_MAX_PER_DAY=1):
-                IotdSubmission.objects.create(
-                    submitter=self.submitter_1,
-                    image=image2)
+    def test_submission_model_can_submit_image_by_judge(self):
+        self.image.user = self.judge_1
+        self.image.save(keep_deleted=True)
 
-        us.delete()
+        Generators.premium_subscription(self.judge_1, "AstroBin Ultimate 2020+")
 
-    def test_vote_model(self):
-        # User must be reviewer
+        try:
+            submission = IotdSubmission.objects.create(
+                submitter=self.submitter_1,
+                image=self.image)
+        except ValidationError as e:
+            self.fail(e)
+
+        self.assertEqual(submission.submitter, self.submitter_1)
+        self.assertEqual(submission.image, self.image)
+
+    def test_vote_model_user_must_be_reviewer(self):
+        Generators.premium_subscription(self.image.user, "AstroBin Ultimate 2020+")
         with self.assertRaisesRegexp(ValidationError, "not a member"):
             IotdVote.objects.create(
                 reviewer=self.user,
                 image=self.image)
 
-        # Image must have been submitted
+    def test_vote_model_image_must_have_been_submitted(self):
+        Generators.premium_subscription(self.image.user, "AstroBin Ultimate 2020+")
         with self.assertRaisesRegexp(ValidationError, "not been submitted"):
             IotdVote.objects.create(
                 reviewer=self.reviewer_1,
                 image=self.image)
 
-        # Cannot vote an image authored by:
-        # - a free account or
+    def test_vote_model_cannot_vote_image_by_free_account(self):
         with self.assertRaisesRegexp(ValidationError, "a Free membership"):
             IotdSubmission.objects.create(
                 submitter=self.submitter_1,
                 image=self.image)
 
-        image_author_us = Generators.premium_subscription(self.image.user, "AstroBin Ultimate 2020+")
+    def test_vote_model_submission_must_be_within_window(self):
+        Generators.premium_subscription(self.image.user, "AstroBin Ultimate 2020+")
+        submission_1 = IotdSubmission.objects.create(
+            submitter=self.submitter_1,
+            image=self.image)
+
+        IotdSubmission.objects.filter(pk=submission_1.pk).update(
+            date= \
+                datetime.now() - \
+                timedelta(settings.IOTD_REVIEW_WINDOW_DAYS + 1))
+
+        with self.assertRaisesRegexp(ValidationError, "in the submission queue for more than"):
+            IotdVote.objects.create(
+                reviewer=self.reviewer_1,
+                image=submission_1.image)
+
+    def test_vote_model_image_must_be_public(self):
+        Generators.premium_subscription(self.image.user, "AstroBin Ultimate 2020+")
 
         submission_1 = IotdSubmission.objects.create(
             submitter=self.submitter_1,
             image=self.image)
 
-        # Submission must be within window
-        IotdSubmission.objects.filter(pk=submission_1.pk).update(
-            date= \
-                datetime.now() - \
-                timedelta(settings.IOTD_REVIEW_WINDOW_DAYS + 1))
-        with self.assertRaisesRegexp(ValidationError, "in the submission queue for more than"):
-            IotdVote.objects.create(
-                reviewer=self.reviewer_1,
-                image=submission_1.image)
-        IotdSubmission.objects.filter(pk=submission_1.pk).update(
-            date=datetime.now())
-
-        # Image must not be WIP
         self.image.is_wip = True
         self.image.save(keep_deleted=True)
         with self.assertRaisesRegexp(ValidationError, "staging area"):
@@ -222,7 +240,7 @@ class IotdTest(TestCase):
         self.image.is_wip = False
         self.image.save(keep_deleted=True)
 
-        # Image owner must not be excluded from competitions
+    def test_vote_model_image_owner_must_not_be_excluded_from_competitions(self):
         self.image.user.userprofile.exclude_from_competitions = True
         self.image.user.userprofile.save(keep_deleted=True)
         with self.assertRaisesRegexp(ValidationError, "excluded from competitions"):
@@ -232,7 +250,13 @@ class IotdTest(TestCase):
         self.image.user.userprofile.exclude_from_competitions = False
         self.image.user.userprofile.save(keep_deleted=True)
 
-        # Cannot vote for own image
+    def test_vote_model_cannot_vote_own_image(self):
+        Generators.premium_subscription(self.image.user, "AstroBin Ultimate 2020+")
+
+        submission_1 = IotdSubmission.objects.create(
+            submitter=self.submitter_1,
+            image=self.image)
+
         self.image.user = self.reviewer_1
         self.image.save(keep_deleted=True)
         with self.assertRaisesRegexp(ValidationError, "your own image"):
@@ -242,17 +266,33 @@ class IotdTest(TestCase):
         self.image.user = self.user
         self.image.save(keep_deleted=True)
 
-        # Cannot vote for an image authored by a judge
+    def test_vote_model_can_vote_image_by_judge(self):
+        Generators.premium_subscription(self.image.user, "AstroBin Ultimate 2020+")
+
+        IotdSubmission.objects.create(
+            submitter=self.submitter_1,
+            image=self.image)
+
         self.image.user = self.judge_1
         self.image.save(keep_deleted=True)
-        with self.assertRaisesRegexp(ValidationError, "a judge's image"):
+        Generators.premium_subscription(self.image.user, "AstroBin Ultimate 2020+")
+
+        try:
             IotdVote.objects.create(
                 reviewer=self.reviewer_1,
                 image=self.image)
+        except ValidationError as e:
+            self.fail(e)
         self.image.user = self.user
         self.image.save(keep_deleted=True)
 
-        # Cannot vote for own submission
+    def test_vote_model_cannot_vote_own_submission(self):
+        Generators.premium_subscription(self.image.user, "AstroBin Ultimate 2020+")
+
+        submission_1 = IotdSubmission.objects.create(
+            submitter=self.submitter_1,
+            image=self.image)
+
         self.submitters.user_set.add(self.reviewer_1)
         submission_1.submitter = self.reviewer_1
         submission_1.save()
@@ -264,7 +304,13 @@ class IotdTest(TestCase):
         submission_1.submitter = self.submitter_1
         submission_1.save()
 
-        # All OK
+    def test_vote_model(self):
+        Generators.premium_subscription(self.image.user, "AstroBin Ultimate 2020+")
+
+        submission_1 = IotdSubmission.objects.create(
+            submitter=self.submitter_1,
+            image=self.image)
+
         vote = IotdVote.objects.create(
             reviewer=self.reviewer_1,
             image=submission_1.image)
@@ -347,7 +393,6 @@ class IotdTest(TestCase):
         submission_1.delete()
         submission_2.delete()
         image2.delete()
-        image_author_us.delete()
 
     def test_iotd_model(self):
         # User must be judge
@@ -358,7 +403,7 @@ class IotdTest(TestCase):
                 date=datetime.now().date())
 
         # Cannot elect an image authored by:
-        # - a free account or
+        # - a free account
         with self.assertRaisesRegexp(ValidationError, "a Free membership"):
             IotdSubmission.objects.create(
                 submitter=self.submitter_1,
@@ -421,13 +466,18 @@ class IotdTest(TestCase):
         self.image.user = self.user
         self.image.save(keep_deleted=True)
 
-        # Cannot elect an image authored by a judge
+        # Can elect an image authored by a judge
         self.image.user = self.judge_2
         self.image.save(keep_deleted=True)
-        with self.assertRaisesRegexp(ValidationError, "a judge's image"):
-            Iotd.objects.create(
+        Generators.premium_subscription(self.image.user, "AstroBin Ultimate 2020+")
+        try:
+            iotd = Iotd.objects.create(
                 judge=self.judge_1,
-                image=self.image)
+                image=self.image,
+                date=date.today())
+            iotd.delete()
+        except ValidationError as e:
+            self.fail(e)
         self.image.user = self.user
         self.image.save(keep_deleted=True)
 
@@ -530,19 +580,23 @@ class IotdTest(TestCase):
         self.assertEqual(response.status_code, 200)
         self.assertContains(response, '<span class="used">0</span>', html=True)
 
-        # Check that images are rendered
+        # Check that images from a free user are not rendered
+        response = self.client.get(url)
+        self.assertNotContains(response, 'data-id="%s"' % self.image.pk)
+
+        Generators.premium_subscription(self.user, "AstroBin Ultimate 2020+")
         response = self.client.get(url)
         self.assertContains(response, 'data-id="%s"' % self.image.pk)
 
         # Check for may-not-select class
-        self.image.user = self.submitter_1
-        self.image.save(keep_deleted=True)
-        response = self.client.get(url)
-        bs = BS(response.content)
-        self.assertEqual(len(bs.select('.iotd-queue-item.may-not-select')), 1)
-        self.submitters.user_set.remove(self.reviewer_1)
-        self.image.user = self.user
-        self.image.save(keep_deleted=True)
+        # self.image.user = self.submitter_1
+        # self.image.save(keep_deleted=True)
+        # response = self.client.get(url)
+        # bs = BS(response.content)
+        # self.assertEqual(len(bs.select('.iotd-queue-item.may-not-select')), 1)
+        # self.submitters.user_set.remove(self.reviewer_1)
+        # self.image.user = self.user
+        # self.image.save(keep_deleted=True)
 
         # Check that non-moderated (or spam) images are not rendered
         self.image.moderator_decision = 0
@@ -566,6 +620,15 @@ class IotdTest(TestCase):
         self.image.moderator_decision = 1
         self.image.save(keep_deleted=True)
 
+        # Images by judges are shown here
+        Generators.premium_subscription(self.judge_1    , "AstroBin Ultimate 2020+")
+        self.image.user = self.judge_1
+        self.image.save(keep_deleted=True)
+        response = self.client.get(url)
+        self.assertContains(response, 'data-id="%s"' % self.image.pk)
+        self.image.user = self.user
+        self.image.save(keep_deleted=True)
+
         # Check that current or past IOTD is not rendered
         submission = IotdSubmission.objects.create(
             submitter=self.submitter_1,
@@ -585,14 +648,6 @@ class IotdTest(TestCase):
             date=datetime.now().date() + timedelta(1))
         response = self.client.get(url)
         self.assertContains(response, 'data-id="%s"' % self.image.pk)
-
-        # Images by judges are now shown here
-        self.image.user = self.judge_1
-        self.image.save(keep_deleted=True)
-        response = self.client.get(url)
-        self.assertNotContains(response, 'data-id="%s"' % self.image.pk)
-        self.image.user = self.user
-        self.image.save(keep_deleted=True)
 
         submission.delete()
         vote.delete()
@@ -704,11 +759,11 @@ class IotdTest(TestCase):
         response = self.client.get(url)
         self.assertContains(response, 'data-id="%s"' % self.image.pk)
 
-        # Images by judges are now shown here
+        # Images by judges are shown here
         self.image.user = self.judge_1
         self.image.save(keep_deleted=True)
         response = self.client.get(url)
-        self.assertNotContains(response, 'data-id="%s"' % self.image.pk)
+        self.assertContains(response, 'data-id="%s"' % self.image.pk)
         self.image.user = self.user
         self.image.save(keep_deleted=True)
 
@@ -823,11 +878,11 @@ class IotdTest(TestCase):
         response = self.client.get(url)
         self.assertContains(response, 'data-id="%s"' % self.image.pk)
 
-        # Images by judges are now shown here
+        # Images by judges are shown here
         self.image.user = self.judge_1
         self.image.save(keep_deleted=True)
         response = self.client.get(url)
-        self.assertNotContains(response, 'data-id="%s"' % self.image.pk)
+        self.assertContains(response, 'data-id="%s"' % self.image.pk)
         self.image.user = self.user
         self.image.save(keep_deleted=True)
 

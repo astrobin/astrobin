@@ -14,8 +14,7 @@ TIME_ZONE = 'Europe/London'
 SECRET_KEY = os.environ.get('DJANGO_SECRET_KEY', 'default.key').strip()
 SITE_ID = 1
 
-
-TESTING = len(sys.argv) > 1 and sys.argv[1] == 'test'
+TESTING = os.environ.get("TESTING", 'false').strip() == 'true' or len(sys.argv) > 1 and sys.argv[1] == 'test'
 DEBUG = os.environ.get('DEBUG', 'true').strip() == 'true'
 INTERNAL_IPS = ['127.0.0.1', '172.18.0.1'] # localhost and docker gateway
 
@@ -47,6 +46,7 @@ ALLOWED_UNCOMPRESSED_SOURCE_EXTENSIONS = ALLOWED_FITS_IMAGE_EXTENSIONS + ('psd',
 
 GEOIP_PATH = os.path.abspath(os.path.dirname(__name__)) + "/astrobin/geoip2"
 
-CORS_ORIGIN_ALLOW_ALL = (
+CORS_ORIGIN_ALLOW_ALL = False
+CORS_ORIGIN_WHITELIST = (
     'app.astrobin.com'
 )

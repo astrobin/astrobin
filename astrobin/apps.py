@@ -19,8 +19,6 @@ class AstroBinAppConfig(AppConfig):
         registry.register('astrobin.focalreducer')
         registry.register('astrobin.image')
         registry.register('astrobin.imagerevision')
-        registry.register('rawdata.PublicDataPool')
-        registry.register('rawdata.RawImage')
         registry.register('nested_comments.nestedcomment')
         registry.register('reviews.review')
         registry.register('toggleproperties.toggleproperty')
@@ -29,6 +27,6 @@ class AstroBinAppConfig(AppConfig):
     def ready(self):
         from astrobin.signals import *
         from astrobin_apps_notifications.signals import *
-        from rawdata.signals import *
+        from astrobin.locale_extras import LOCALE_EXTRAS
 
         self.registerActStreamModels()

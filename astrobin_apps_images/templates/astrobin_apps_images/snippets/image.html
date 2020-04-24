@@ -26,7 +26,7 @@
                 {% if badges %}
                     <ul class="badges">
                         {% for badge in badges %}
-                            {% if badge == 'iotd' and alias != 'regular' %}
+                            {% if badge == 'iotd' and alias != 'regular' and alias != 'regular_sharpened' %}
                                 <li class="iotd-thumb-banner">
                                     <h2>
                                         <i class="icon iotd-badge icon-trophy"></i>
@@ -35,7 +35,7 @@
                             {% endif %}
 
                             {% if badge == 'top-pick' %}
-                                <li class="top-pick-badge{% if alias == 'regular' %} top-pick-badge-large{% endif %}">
+                                <li class="top-pick-badge{% if alias == 'regular' or alias == 'regular_sharpened' %} top-pick-badge-large{% endif %}">
                                     <h2>
                                         <span>Top</span>
                                         <span>pick</span>
@@ -44,7 +44,7 @@
                             {% endif %}
 
                             {% if badge == 'top100' %}
-                                <li class="top100-badge{% if alias == 'regular' %} top100-badge-large{% endif %}">
+                                <li class="top100-badge{% if alias == 'regular' or alias == 'regular_sharpened' %} top100-badge-large{% endif %}">
                                     <h2>
                                         <span>Top</span>
                                         <span>100</span>
@@ -86,6 +86,14 @@
                      data-alias="{{alias}}"
                      data-revision="{{revision}}"
                      data-get-thumb-url="{{get_thumb_url}}"
+                     
+                     data-hires-loaded="false"
+                     {% if enhanced_thumb_url %}
+                         data-enhanced-thumb-url="{{enhanced_thumb_url}}"
+                     {% endif %}
+                     {% if get_enhanced_thumb_url %}
+                         data-get-enhanced-thumb-url="{{get_enhanced_thumb_url}}"
+                     {% endif %}
                      alt="{{image.title|escape}}, {% astrobin_username image.user link=False %}" />
 
                 {% if show_tooltip %}

@@ -3,8 +3,6 @@ from django.conf.urls import url, include
 from django.conf.urls.static import static
 from django.contrib import admin
 from django.contrib.auth import views as auth_views
-from django.views.decorators.cache import cache_page
-from django.views.i18n import json_catalog
 from django.views.static import serve
 from rest_framework.authtoken.views import obtain_auth_token
 from tastypie.api import Api
@@ -161,11 +159,6 @@ urlpatterns += [
 
     url(r'^admin/', include(admin.site.urls)),
 
-    url(r'^jsi18n/$', cache_page(86400, key_prefix="js18n-%s" % settings.VERSION)(json_catalog), {
-        'domain': 'django',
-        'packages': ['astrobin'] + settings.ASTROBIN_APPS
-    }, name='javascript-catalog'),
-
     ###########################################################################
     ### THIRD PARTY APPS VIEWS                                              ###
     ###########################################################################
@@ -222,7 +215,7 @@ urlpatterns += [
     url(r'^api/v2/common/', include('common.api_urls')),
     url(r'^api/v2/nestedcomments/', include('nested_comments.api_urls')),
     url(r'^api/v2/platesolving/', include('astrobin_apps_platesolving.api_urls')),
-    url(r'^api/v2/rawdata/', include('rawdata.api_urls')),
+    url(r'^api/v2/notifications/', include('astrobin_apps_notifications.api.urls')),
 
     ###########################################################################
     ### OWN APPS VIEWS                                                      ###
@@ -232,7 +225,6 @@ urlpatterns += [
     url(r'^notifications/', include('astrobin_apps_notifications.urls')),
     url(r'^platesolving/', include('astrobin_apps_platesolving.urls')),
     url(r'^premium/', include('astrobin_apps_premium.urls')),
-    url(r'^rawdata/', include('rawdata.urls')),
     url(r'^toggleproperties/', include('toggleproperties.urls')),
     url(r'^users_app/', include('astrobin_apps_users.urls')),
     url(r'^groups/', include('astrobin_apps_groups.urls')),
@@ -470,7 +462,7 @@ urlpatterns += [
     url(r'^edit/platesolving/(?P<id>\w+)/(?:(?P<revision_label>\w+)/)?restart$', image_restart_platesolving,
         name='image_restart_platesolving'),
     url(r'^edit/platesolving-advanced/(?P<id>\w+)/(?:(?P<revision_label>\w+)/)?$',
-        image_edit_platesolving_advanced_settings,name='image_edit_platesolving_advanced_settings'),
+        image_edit_platesolving_advanced_settings, name='image_edit_platesolving_advanced_settings'),
     url(r'^edit/platesolving/(?P<id>\w+)/(?:(?P<revision_label>\w+)/)?restart-advanced$',
         image_restart_advanced_platesolving, name='image_restart_advanced_platesolving'),
     url(r'^edit/makefinal/(?P<id>\w+)/$', image_edit_make_final, name='image_edit_make_final'),
@@ -486,7 +478,8 @@ urlpatterns += [
     url(r'^upload/$', image_upload, name='image_upload'),
     url(r'^upload/process/$', image_upload_process, name='image_upload_process'),
     url(r'^upload/revision/process/$', image_revision_upload_process, name='image_revision_upload_process'),
-    url(r'^upload-uncompressed-source/(?P<id>\w+)/$', image_views.ImageUploadUncompressedSource.as_view(), name='upload_uncompressed_source'),
+    url(r'^upload-uncompressed-source/(?P<id>\w+)/$', image_views.ImageUploadUncompressedSource.as_view(),
+        name='upload_uncompressed_source'),
 
     ###########################################################################
     ### IMAGE VIEWS                                                         ###
@@ -522,4 +515,3 @@ if settings.LOCAL_STATIC_STORAGE:
         'document_root': settings.STATIC_ROOT,
         'show_indexes': True
     })]
-

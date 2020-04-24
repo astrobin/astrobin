@@ -1,8 +1,10 @@
 {% extends 'base.html' %}
+
 {% load i18n %}
 {% load tags %}
 {% load bootstrap_toolkit %}
 {% load django_bootstrap_breadcrumbs %}
+{% load common_tags %}
 
 {% block title %}{% trans "Edit revision" %}{% endblock %}
 
@@ -20,12 +22,8 @@
 {% block content %}
     <h1>{% trans "Edit revision" %}</h1>
 
-    <form
-            id="edit-revision-form"
-            class="form-horizontal edit-revision"
-            action="{% url 'image_edit_revision' revision.pk %}"
-            method="post"
-            enctype="multipart/form-data">
+    <form id="edit-revision-form" class="form-horizontal edit-revision"
+          action="{% url 'image_edit_revision' revision.pk %}" method="post" enctype="multipart/form-data">
 
         {% csrf_token %}
 
@@ -36,13 +34,19 @@
         {{ form|as_bootstrap }}
 
         <div class="form-actions">
-            <input class="btn btn-primary btn-block-mobile" type="submit" value="{% trans "Save" %} &rarr;" />
-            <a class="btn btn-danger btn-block-mobile" data-toggle="modal" href="#delete-revision-modal">
+            <button class="btn btn-primary btn-block-mobile {% button_loading_class %}" type="submit">
+                {% trans "Save" %}
+                {% button_loading_indicator %}
+            </button>
+
+            <a class="btn btn-danger btn-block-mobile" data-toggle="modal"
+               href="#delete-revision-modal-{{ revision.pk }}">
                 <i class="icon-remove"></i>
                 {% trans "Delete this revision only" %}
             </a>
+
             <a class="btn btn-block-mobile" href="{% url 'image_detail' revision.image.get_id %}">
-                {% trans "Back to image" %}
+                {% trans "Cancel" %}
             </a>
         </div>
     </form>

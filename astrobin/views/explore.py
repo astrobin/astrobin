@@ -4,6 +4,7 @@ from django.db.models import Q
 from django.views.generic import ListView
 
 from astrobin.models import Image
+from astrobin_apps_iotd.services import IotdService
 
 
 class TopPicksView(ListView):
@@ -12,12 +13,7 @@ class TopPicksView(ListView):
     paginate_by = 30
 
     def get_queryset(self):
-        queryset = self.model.objects \
-            .exclude(
-            Q(iotdvote=None) | Q(corrupted=True)) \
-            .filter(
-            Q(iotd=None) |
-            Q(iotd__date__gt=datetime.now().date())).order_by('-published')
+        queryset = IotdService().get_top_picks()
 
         data_source = self.request.GET.get("source")
         if data_source is not None:

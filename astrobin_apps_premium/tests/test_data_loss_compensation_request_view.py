@@ -38,20 +38,6 @@ class TestDataLossCompensationRequestView(TestCase):
             status_code=302,
             target_status_code=200)
 
-    def test_not_eligible_premium_not_active(self):
-        user = User.objects.create_user('test', 'test@test.com', 'password')
-        premium = Generators.premium_subscription(user, 'AstroBin Premium')
-        premium.expires = datetime(2020, 2, 16)
-        premium.active = False
-        premium.save()
-        self.client.login(username='test', password='password')
-        response = self.client.get(reverse('astrobin_apps_premium.data_loss_compensation_request'))
-        self.assertRedirects(
-            response,
-            reverse('astrobin_apps_premium.data_loss_compensation_request_not_eligible'),
-            status_code=302,
-            target_status_code=200)
-
     def test_not_eligible_premium_expired_before_incident(self):
         user = User.objects.create_user('test', 'test@test.com', 'password')
         premium = Generators.premium_subscription(user, 'AstroBin Premium')
@@ -229,5 +215,43 @@ class TestDataLossCompensationRequestView(TestCase):
         self.assertTrue(ultimate.cancelled)
         self.assertTrue(ultimate.expires > date.today() + timedelta(days=179))
         self.assertTrue(ultimate.expires < date.today() + timedelta(days=181))
+
+        self.assertTrue(is_ultimate_2020(user))
+
+    def test_submit_6_mo_ultimate_when_user_already_has_it(self):
+        user = User.objects.create_user('test', 'test@test.com', 'password')
+        premium = Generators.premium_subscription(user, 'AstroBin Premium')
+        premium.expires = datetime(2020, 2, 16)
+        premium.save()
+
+        ultimate = Generators.premium_subscription(user, 'AstroBin Ultimate 2020+')
+        ultimate.expires = date(2021, 3, 28)
+        ultimate.save()
+
+
+        self.client.login(username='test', password='password')
+
+        response = self.client.post(
+            reverse('astrobin_apps_premium.data_loss_compensation_request'),
+            {
+                'requested_compensation': '6_MO_ULTIMATE'
+            })
+
+        self.assertRedirects(
+            response,
+            reverse('astrobin_apps_premium.data_loss_compensation_request_success'),
+            status_code=302,
+            target_status_code=200)
+
+        compensation_request = DataLossCompensationRequest.objects.get(user=user)
+        self.assertEquals(compensation_request.requested_compensation, '6_MO_ULTIMATE')
+
+        ultimate = get_object_or_None(UserSubscription, user=user, subscription__name='AstroBin Ultimate 2020+')
+
+        self.assertIsNotNone(ultimate)
+        self.assertTrue(ultimate.active)
+        self.assertTrue(ultimate.cancelled)
+        self.assertTrue(ultimate.expires > date(2021, 3, 28) + timedelta(days=179))
+        self.assertTrue(ultimate.expires < date(2021, 3, 28) + timedelta(days=181))
 
         self.assertTrue(is_ultimate_2020(user))
