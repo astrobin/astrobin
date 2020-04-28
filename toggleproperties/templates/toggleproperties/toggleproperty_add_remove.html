@@ -5,7 +5,7 @@
             {% if has_tooltip %}
             rel="tooltip"
             {% endif %}
-            title="{% if is_toggled %}{{ property_tooltip_on }}{% else %}{{ property_tooltip_off }}{% endif %}"
+            title="{% if is_toggled %}{{ property_tooltip_on | safe }}{% else %}{{ property_tooltip_off | safe }}{% endif %}"
     >
 
         {% if property_icon %}
@@ -15,9 +15,9 @@
         {% if property_label_on or property_label_off %}
             <span class="toggleproperties-label">
             {% if is_toggled %}
-                {{ property_label_on }}
+                {{ property_label_on | safe }}
             {% else %}
-                {{ property_label_off }}
+                {{ property_label_off | safe }}
             {% endif %}
         </span>
         {% endif %}
@@ -48,10 +48,10 @@
                         success: function (data) {
                             $("#toggleproperty-{{ property_type }}-{{ content_type_id }}-{{ object_id }}")
                                 .tooltip('hide')
-                                .attr('data-original-title', "{{ property_tooltip_off }}")
+                                .attr('data-original-title', "{{ property_tooltip_off | safe }}")
                                 .tooltip('fixTitle')
                                 .tooltip('show');
-                            $("#toggleproperty-{{ property_type }}-{{ content_type_id }}-{{ object_id }} .toggleproperties-label").text("{{ property_label_off }}");
+                            $("#toggleproperty-{{ property_type }}-{{ content_type_id }}-{{ object_id }} .toggleproperties-label").text("{{ property_label_off | safe }}");
                             if (data['count'] !== undefined)
                                 $('#count-{{ property_type }}-{{ content_type_id }}-{{ object_id }}').text(data.count);
                         }
@@ -70,10 +70,10 @@
                         success: function (data) {
                             $("#toggleproperty-{{ property_type }}-{{ content_type_id }}-{{ object_id }}")
                                 .tooltip('hide')
-                                .attr('data-original-title', "{{ property_tooltip_on }}")
+                                .attr('data-original-title', "{{ property_tooltip_on | safe }}")
                                 .tooltip('fixTitle')
                                 .tooltip('show');
-                            $("#toggleproperty-{{ property_type }}-{{ content_type_id }}-{{ object_id }} .toggleproperties-label").text("{{ property_label_on }}");
+                            $("#toggleproperty-{{ property_type }}-{{ content_type_id }}-{{ object_id }} .toggleproperties-label").text("{{ property_label_on | safe }}");
                             if (data['count'] !== undefined)
                                 $('#count-{{ property_type }}-{{ content_type_id }}-{{ object_id }}').text(data.count);
                         }
