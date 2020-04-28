@@ -73,6 +73,7 @@ class UserTest(TestCase):
                 'image_id': image.get_id(),
                 'image_file': open(filename, 'rb'),
                 'description': description,
+                'mark_as_final': u'on'
             },
             follow=True)
 

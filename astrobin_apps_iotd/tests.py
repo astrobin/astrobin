@@ -592,7 +592,7 @@ class IotdTest(TestCase):
         # self.image.user = self.submitter_1
         # self.image.save(keep_deleted=True)
         # response = self.client.get(url)
-        # bs = BS(response.content)
+        # bs = BS(response.content, "lxml")
         # self.assertEqual(len(bs.select('.iotd-queue-item.may-not-select')), 1)
         # self.submitters.user_set.remove(self.reviewer_1)
         # self.image.user = self.user
@@ -620,8 +620,21 @@ class IotdTest(TestCase):
         self.image.moderator_decision = 1
         self.image.save(keep_deleted=True)
 
+        # Images that are too old are not rendered
+        self.image.published =\
+            datetime.now() - timedelta(days=settings.IOTD_SUBMISSION_WINDOW_DAYS) - timedelta(minutes=1)
+        self.image.save()
+        response = self.client.get(url)
+        self.assertNotContains(response, 'data-id="%s"' % self.image.pk)
+
+        self.image.published = \
+            datetime.now() - timedelta(days=settings.IOTD_SUBMISSION_WINDOW_DAYS) + timedelta(minutes=1)
+        self.image.save()
+        response = self.client.get(url)
+        self.assertContains(response, 'data-id="%s"' % self.image.pk)
+
         # Images by judges are shown here
-        Generators.premium_subscription(self.judge_1    , "AstroBin Ultimate 2020+")
+        Generators.premium_subscription(self.judge_1, "AstroBin Ultimate 2020+")
         self.image.user = self.judge_1
         self.image.save(keep_deleted=True)
         response = self.client.get(url)
@@ -736,7 +749,7 @@ class IotdTest(TestCase):
         self.submitters.user_set.add(self.reviewer_1)
         submission_1.save()
         response = self.client.get(url)
-        bs = BS(response.content)
+        bs = BS(response.content, "lxml")
         self.assertEqual(len(bs.select('.iotd-queue-item.may-not-select')), 1)
         self.submitters.user_set.remove(self.reviewer_1)
         submission_1.submitter = self.submitter_1
@@ -858,7 +871,7 @@ class IotdTest(TestCase):
         vote_1.reviewer = self.judge_1
         vote_1.save()
         response = self.client.get(url)
-        bs = BS(response.content)
+        bs = BS(response.content, "lxml")
         self.assertEqual(len(bs.select('.iotd-queue-item.may-not-select')), 1)
         self.reviewers.user_set.remove(self.judge_1)
         vote_1.reviewer = self.reviewer_1

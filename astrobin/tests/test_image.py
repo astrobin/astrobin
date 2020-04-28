@@ -98,7 +98,7 @@ class ImageTest(TestCase):
     # HELPERS                                                                 #
     ###########################################################################
 
-    def _do_upload(self, filename, wip=False, skip_notifications=False):
+    def _do_upload(self, filename, wip=False):
         # type: (basestring, bool, bool) -> None
 
         data = {'image_file': open(filename, 'rb')}
@@ -106,22 +106,27 @@ class ImageTest(TestCase):
         if wip:
             data['wip'] = True
 
-        if skip_notifications:
-            data['skip_notifications'] = True
-
         return self.client.post(
             reverse('image_upload_process'),
             data,
             follow=True)
 
-    def _do_upload_revision(self, image, filename, description=None):
+    def _do_upload_revision(self, image, filename, description=None, skip_notifications=False, mark_as_final=True):
+        data = {
+            'image_id': image.get_id(),
+            'image_file': open(filename, 'rb'),
+            'description': description,
+        }
+
+        if skip_notifications:
+            data['skip_notifications'] = True
+
+        if mark_as_final:
+            data['mark_as_final'] = u'on'
+
         return self.client.post(
             reverse('image_revision_upload_process'),
-            {
-                'image_id': image.get_id(),
-                'image_file': open(filename, 'rb'),
-                'description': description,
-            },
+            data,
             follow=True)
 
     def _get_last_image(self):
@@ -395,6 +400,7 @@ class ImageTest(TestCase):
 
     @patch("astrobin.tasks.retrieve_primary_thumbnails")
     @patch("astrobin.signals.push_notification")
+    @override_settings(PREMIUM_MAX_REVISIONS_FREE_2020=sys.maxsize)
     def test_image_upload_process_view_skip_notifications(self, push_notification, retrieve_primary_thumbnails):
         self.client.login(username='test', password='password')
 
@@ -405,11 +411,27 @@ class ImageTest(TestCase):
         )
 
         self._do_upload('astrobin/fixtures/test.jpg')
+        image = self._get_last_image()
+
         self.assertTrue(push_notification.called)
         push_notification.reset_mock()
 
-        self._do_upload('astrobin/fixtures/test.jpg', skip_notifications=True)
+        self._do_upload_revision(image, 'astrobin/fixtures/test.jpg', skip_notifications=True)
         self.assertFalse(push_notification.called)
+
+    @patch("astrobin.tasks.retrieve_primary_thumbnails")
+    @override_settings(PREMIUM_MAX_REVISIONS_FREE_2020=sys.maxsize)
+    def test_image_upload_process_view_dont_mark_as_final(self, retrieve_primary_thumbnails):
+        self.client.login(username='test', password='password')
+
+        self._do_upload('astrobin/fixtures/test.jpg')
+        image = self._get_last_image()
+
+        self._do_upload_revision(image, 'astrobin/fixtures/test.jpg', mark_as_final=False)
+        revision = self._get_last_image_revision()
+
+        self.assertTrue(image.is_final)
+        self.assertFalse(revision.is_final)
 
     @patch("astrobin.tasks.retrieve_primary_thumbnails")
     def test_image_upload_process_view_image_too_large_free(self, retrieve_primary_thumbnails):
