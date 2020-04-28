@@ -54,8 +54,7 @@ class IotdSubmissionQueueView(
 
         images = self.model.objects.filter(
             moderator_decision=1,
-            published__gte=date.today(),
-            published__lt=date.today() + timedelta(days=settings.IOTD_SUBMISSION_WINDOW_DAYS)
+            published__gte=datetime.now() - timedelta(days=settings.IOTD_SUBMISSION_WINDOW_DAYS)
         ).exclude(
             subject_type__in=(SubjectType.GEAR, SubjectType.OTHER)
         ).order_by(
