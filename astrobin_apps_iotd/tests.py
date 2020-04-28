@@ -592,7 +592,7 @@ class IotdTest(TestCase):
         # self.image.user = self.submitter_1
         # self.image.save(keep_deleted=True)
         # response = self.client.get(url)
-        # bs = BS(response.content)
+        # bs = BS(response.content, "lxml")
         # self.assertEqual(len(bs.select('.iotd-queue-item.may-not-select')), 1)
         # self.submitters.user_set.remove(self.reviewer_1)
         # self.image.user = self.user
@@ -749,7 +749,7 @@ class IotdTest(TestCase):
         self.submitters.user_set.add(self.reviewer_1)
         submission_1.save()
         response = self.client.get(url)
-        bs = BS(response.content)
+        bs = BS(response.content, "lxml")
         self.assertEqual(len(bs.select('.iotd-queue-item.may-not-select')), 1)
         self.submitters.user_set.remove(self.reviewer_1)
         submission_1.submitter = self.submitter_1
@@ -871,7 +871,7 @@ class IotdTest(TestCase):
         vote_1.reviewer = self.judge_1
         vote_1.save()
         response = self.client.get(url)
-        bs = BS(response.content)
+        bs = BS(response.content, "lxml")
         self.assertEqual(len(bs.select('.iotd-queue-item.may-not-select')), 1)
         self.reviewers.user_set.remove(self.judge_1)
         vote_1.reviewer = self.reviewer_1
