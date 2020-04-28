@@ -2100,19 +2100,25 @@ def image_revision_upload_process(request):
             return upload_error(request, image)
 
     revisions = ImageRevision.all_objects.filter(image=image).order_by('id')
+
+    mark_as_final = request.POST.get(u'mark_as_final', None) == u'on' # type: bool
+
     highest_label = 'A'
     for r in revisions:
-        r.is_final = False
-        r.save(keep_deleted=True)
         highest_label = r.label
-
-    image.is_final = False
-    image.save(keep_deleted=True)
+        if mark_as_final:
+            r.is_final = False
+            r.save(keep_deleted=True)
 
     image_revision = form.save(commit=False)
+
+    if mark_as_final:
+        image.is_final = False
+        image.save(keep_deleted=True)
+        image_revision.is_final = True
+
     image_revision.user = request.user
     image_revision.image = image
-    image_revision.is_final = True
     image_revision.label = base26_encode(base26_decode(highest_label) + 1)
 
     w, h = image_revision.w, image_revision.h
