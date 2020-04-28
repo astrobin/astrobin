@@ -620,8 +620,21 @@ class IotdTest(TestCase):
         self.image.moderator_decision = 1
         self.image.save(keep_deleted=True)
 
+        # Images that are too old are not rendered
+        self.image.published =\
+            datetime.now() - timedelta(days=settings.IOTD_SUBMISSION_WINDOW_DAYS) - timedelta(minutes=1)
+        self.image.save()
+        response = self.client.get(url)
+        self.assertNotContains(response, 'data-id="%s"' % self.image.pk)
+
+        self.image.published = \
+            datetime.now() - timedelta(days=settings.IOTD_SUBMISSION_WINDOW_DAYS) + timedelta(minutes=1)
+        self.image.save()
+        response = self.client.get(url)
+        self.assertContains(response, 'data-id="%s"' % self.image.pk)
+
         # Images by judges are shown here
-        Generators.premium_subscription(self.judge_1    , "AstroBin Ultimate 2020+")
+        Generators.premium_subscription(self.judge_1, "AstroBin Ultimate 2020+")
         self.image.user = self.judge_1
         self.image.save(keep_deleted=True)
         response = self.client.get(url)
