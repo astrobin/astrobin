@@ -13,7 +13,7 @@ $(function() {
             this.commentsApiUrl = this.baseApiUrl + 'nestedcomments/nestedcomments/';
             this.authorsApiUrl = this.baseApiUrl + 'common/users/';
             this.profilesApiUrl = this.baseApiUrl + 'common/userprofiles/';
-            this.usersUrl = '/users/'
+            this.usersUrl = '/users/';
 
             this.userId = parseInt($('#nested-comments-user-id').attr('data-value'));
             this.username = $('#nested-comments-user-name').attr('data-value');
