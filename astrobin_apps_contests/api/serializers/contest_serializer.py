@@ -5,7 +5,7 @@ from astrobin_apps_contests.models import Contest
 
 
 class ContestSerializer(serializers.HyperlinkedModelSerializer):
-    user = serializers.HiddenField(default=serializers.CurrentUserDefault())
+    user = serializers.PrimaryKeyRelatedField(read_only=True, default=serializers.CurrentUserDefault())
     title = serializers.CharField(validators=[UniqueValidator(queryset=Contest.all_objects.all())])
 
     class Meta:

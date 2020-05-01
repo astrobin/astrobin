@@ -14,7 +14,7 @@ class Migration(migrations.Migration):
     initial = True
 
     dependencies = [
-        ('astrobin', '0054_auto_20200428_2034'),
+        ('astrobin', '0053_migrate_subject_type_and_solar_system_subject_to_charfield'),
         migrations.swappable_dependency(settings.AUTH_USER_MODEL),
     ]
 
