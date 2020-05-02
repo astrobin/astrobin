@@ -85,9 +85,10 @@ def image_post_save(sender, instance, created, **kwargs):
                 content_type=ContentType.objects.get_for_model(User),
                 object_id=instance.user.pk)]
 
+            thumb = instance.thumbnail_raw('regular', {'sync': True})
             push_notification(followers, 'new_image', {
                 'image': instance,
-                'image_thumbnail': instance.thumbnail_raw('regular', {'sync': True}).url
+                'image_thumbnail': thumb.url if thumb else None
             })
 
             if instance.moderator_decision == 1:

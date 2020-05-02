@@ -1240,6 +1240,10 @@ class Image(HasSolutionMixin, SafeDeleteModel):
                     options['crop'] = True
 
         field = self.get_thumbnail_field(revision_label)
+        if not field.name:
+            # This can only happen in tests.
+            return None
+
         if not field.name.startswith('images/'):
             field.name = 'images/' + field.name
 
