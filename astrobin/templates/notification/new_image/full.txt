@@ -1,2 +1,11 @@
 {% load i18n %}
-{% blocktrans %}{{originator}} has published a new image! Check it out at the following url: {{object_url}}{% endblocktrans %}
+
+{% blocktrans trimmed with image.user.userprofile.get_display_name as user %}
+    <strong>{{ user }}</strong> has published a new image
+{% endblocktrans %}
+
+{% if image.title %}
+    : {{ image.title }}
+{% endif %}
+
+{{ base_url }}{% url 'image_detail' image.get_id %}

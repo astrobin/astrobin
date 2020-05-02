@@ -79,9 +79,10 @@ class ImageModerationMarkAsHamView(LoginRequiredMixin, GroupRequiredMixin, JSONR
                     content_type=ContentType.objects.get_for_model(User),
                     object_id=image.user.pk)]
 
+                thumb = image.thumbnail_raw('regular', {'sync': True})
                 push_notification(followers, 'new_image', {
-                    'object_url': settings.BASE_URL + image.get_absolute_url(),
-                    'originator': image.user.userprofile.get_display_name(),
+                    'image': image,
+                    'image_thumbnail': thumb.url if thumb else None
                 })
 
                 add_story(image.user, verb='VERB_UPLOADED_IMAGE', action_object=image)
