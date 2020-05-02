@@ -89,7 +89,7 @@ class EmailBackend(BaseEmailBackend):
             subject,
             body,
             settings.DEFAULT_FROM_EMAIL,
-            [recipient.email],
+            [settings.EMAIL_DEV_RECIPIENT if settings.SEND_EMAILS == 'dev' else recipient.email],
             html_message=html_body)
 
         log.debug("Email sent to %s: %s" % (recipient.email, subject))

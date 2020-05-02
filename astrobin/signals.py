@@ -85,11 +85,11 @@ def image_post_save(sender, instance, created, **kwargs):
                 content_type=ContentType.objects.get_for_model(User),
                 object_id=instance.user.pk)]
 
-            push_notification(followers, 'new_image',
-                              {
-                                  'object_url': settings.BASE_URL + instance.get_absolute_url(),
-                                  'originator': instance.user.userprofile.get_display_name(),
-                              })
+            thumb = instance.thumbnail_raw('regular', {'sync': True})
+            push_notification(followers, 'new_image', {
+                'image': instance,
+                'image_thumbnail': thumb.url if thumb else None
+            })
 
             if instance.moderator_decision == 1:
                 add_story(instance.user, verb='VERB_UPLOADED_IMAGE', action_object=instance)

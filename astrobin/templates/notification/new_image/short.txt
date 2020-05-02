@@ -1,2 +1,9 @@
 {% load i18n %}
-{% blocktrans %}New image by {{originator}}{% endblocktrans %}
+
+{% blocktrans trimmed    with image.user.userprofile.get_display_name as user %}
+    New image by {{user}}
+{% endblocktrans %}
+
+{% if image.title %}
+    : {{image.title}}
+{% endif %}
