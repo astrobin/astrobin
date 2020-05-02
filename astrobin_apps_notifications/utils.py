@@ -12,7 +12,10 @@ def clear_notifications_template_cache(username):
 
 
 def push_notification(recipients, notice_type, data):
-    data.update({'notices_url': settings.BASE_URL + '/'})
+    data.update({
+        'notices_url': settings.BASE_URL + '/',
+        'base_url': settings.BASE_URL,
+    })
     notification.send(recipients, notice_type, data)
     for recipient in recipients:
         clear_notifications_template_cache(recipient.username)

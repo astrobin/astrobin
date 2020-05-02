@@ -1,2 +1,12 @@
 {% load i18n %}
-{% blocktrans %}<a href="{{object_url}}"><strong>{{originator}}</strong> has published a new image</a>{% endblocktrans %}
+
+<a href="{{ base_url }}{% url 'image_detail' image.get_id %}">
+    {% blocktrans trimmed with image.user.userprofile.get_display_name as user %}
+        <strong>{{ user }}</strong> has published a new image
+    {% endblocktrans %}
+</a>
+
+{% if image.title %}
+    : {{ image.title }}
+{% endif %}
+

@@ -990,11 +990,10 @@ class ImagePromoteView(LoginRequiredMixin, ImageUpdateViewBase):
                         "follow",
                         UserProfile.objects.get(user__pk=request.user.pk).user)
                 ]
-                push_notification(followers, 'new_image',
-                                  {
-                                      'originator': request.user.userprofile.get_display_name(),
-                                      'object_url': settings.BASE_URL + image.get_absolute_url()
-                                  })
+                push_notification(followers, 'new_image', {
+                    'image': image,
+                    'image_thumbnail': image.thumbnail_raw('regular', {'sync': True}).url
+                })
 
                 add_story(image.user, verb='VERB_UPLOADED_IMAGE', action_object=image)
 
