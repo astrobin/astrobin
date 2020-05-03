@@ -9,7 +9,7 @@
     <script src="{% static 'astrobin_apps_platesolving/js/astrobin_apps_platesolving.js' %}"></script>
 {% endblock %}
 
-<div class="main-image">
+<div class="main-image{% if show_advanced_solution %} has-advanced-solution{% endif %}">
     <div class="main-image-inner">
         {% astrobin_image image alias revision=revision_label url_size='full' %}
 
