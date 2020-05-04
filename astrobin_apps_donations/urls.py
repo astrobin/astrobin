@@ -25,6 +25,6 @@ urlpatterns = (
         name='astrobin_apps_donations.edit'),
 
     url(
-        r'^paypal/$',
+        r'^paypal/',
         include('paypal.standard.ipn.urls')),
 )
