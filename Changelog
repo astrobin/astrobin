@@ -1,13 +1,17 @@
-2020-05-3 Salvatore Iovene <salvatore@iovene.com>
+2020-05-04 Salvatore Iovene <salvatore@iovene.com>
+ * v1.65.2
+ * (paypal) Remove redirect for legacy IPN urls, forward to PayPal URLs directly
+
+2020-05-03 Salvatore Iovene <salvatore@iovene.com>
  * v1.65.1
  * (images) Only upscale images with PI plate-solution on image page
 
-2020-05-2 Salvatore Iovene <salvatore@iovene.com>
+2020-05-02 Salvatore Iovene <salvatore@iovene.com>
  * v1.65.0
  * (comments) Add missing semicolon (#923)
  * (emails) Add title (if available) and thumbnail to 'new image' email (#925)
 
-2020-05-1 Salvatore Iovene <salvatore@iovene.com>
+2020-05-01 Salvatore Iovene <salvatore@iovene.com>
  * v1.64.0
  * (api/v2) Use django_filters backend and camelCase notification API (#922)
 
