@@ -12,7 +12,7 @@ from django.test import TestCase, override_settings
 from mock import patch
 from subscription.models import Subscription, UserSubscription
 
-from astrobin.enums import SubjectType, SolarSystemSubject
+from astrobin.enums import SubjectType
 from astrobin.models import (
     Image,
     ImageRevision,
@@ -1706,6 +1706,35 @@ class ImageTest(TestCase):
             target_status_code=200)
 
         image.delete()
+
+    @patch("astrobin.tasks.retrieve_primary_thumbnails")
+    def test_image_edit_basic_view_replacing_image_deletes_solution(self, retrieve_primary_thumbnails):
+        self.client.login(username='test', password='password')
+        self._do_upload('astrobin/fixtures/test.jpg')
+
+        image = self._get_last_image()
+        Solution.objects.create(
+            status=Solver.SUCCESS,
+            content_object=image
+        )
+
+        data = {
+            'image_file': open('astrobin/fixtures/test.jpg', 'rb'),
+            'title': "Test title",
+            'link': "http://www.example.com",
+            'link_to_fits': "http://www.example.com/fits",
+            'acquisition_type': 'EAA',
+            'data_source': 'OTHER',
+            'subject_type': SubjectType.OTHER,
+            'locations': [],
+            'description': "Image description",
+            'allow_comments': True
+        }
+
+        self.assertIsNotNone(image.solution)
+
+        self.client.post(reverse('image_edit_basic', args=(image.get_id(),)), data, follow=True)
+        self.assertIsNone(image.solution)
 
     @patch("astrobin.tasks.retrieve_primary_thumbnails")
     def test_image_edit_watermark_view(self, retrieve_primary_thumbnails):
