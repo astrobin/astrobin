@@ -1072,6 +1072,9 @@ class ImageEditBasicView(ImageEditBaseView):
 
             image.thumbnail_invalidate()
 
+            if image.solution:
+                image.solution.delete()
+
         return ret
 
 
