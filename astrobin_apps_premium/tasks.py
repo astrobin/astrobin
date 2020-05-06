@@ -42,7 +42,7 @@ def reactivate_previous_subscription_when_ultimate_compensation_expires():
         if compensation_request:
             previous_subscription = UserSubscription.objects.filter(
                 user=ultimate_user_subscription.user,
-                subscription__category="premium",
+                subscription__category__in=('premium', 'premium_autorenew'),
                 expires__gt=date.today()
             ).exclude(
                 subscription__name="AstroBin Ultimate 2020+"
