@@ -77,7 +77,7 @@ class Generators:
                 name=name,
                 price=1,
                 group=g,
-                category="premium")
+                category="premium_autorenew" if "autorenew" in name else "premium")
 
         us, created = UserSubscription.objects.get_or_create(
             user=user,
