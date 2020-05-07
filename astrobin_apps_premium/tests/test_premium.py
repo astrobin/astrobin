@@ -1,7 +1,9 @@
+from datetime import date, timedelta
+
 from dateutil.relativedelta import relativedelta
 from django.contrib.auth.models import User, Group
 from django.core.urlresolvers import reverse
-from django.test import TestCase
+from django.test import TestCase, override_settings
 from mock import patch
 
 from astrobin.models import Image, UserProfile
@@ -314,6 +316,29 @@ class PremiumTest(TestCase):
 
             us.unsubscribe()
             us.delete()
+
+    @override_settings(PREMIUM_ENABLED=True)
+    def test_subscription_validity_with_multiple(self):
+        expired_ultimate, created = UserSubscription.objects.get_or_create(
+            user=self.user,
+            subscription=self.ultimate_2020_sub,
+            cancelled=False)
+        expired_ultimate.subscribe()
+        expired_ultimate.expires = date.today() - timedelta(1)
+        expired_ultimate.save()
+
+        self.assertFalse(expired_ultimate.valid())
+
+        premium, created = UserSubscription.objects.get_or_create(
+            user=self.user,
+            subscription=self.premium_2020_sub,
+            cancelled=False)
+        premium.subscribe()
+
+        self.assertTrue(premium.valid())
+
+        self.assertEqual(premium_get_valid_usersubscription(self.user), premium)
+        self.assertEqual(premium_get_invalid_usersubscription(self.user), expired_ultimate)
 
     @patch("astrobin.tasks.retrieve_primary_thumbnails")
     def test_upload_limits_free(self, retrieve_primary_thumbnails):
