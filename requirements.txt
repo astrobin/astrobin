@@ -22,7 +22,9 @@ chardet==3.0.4
 click==6.7
 codecov==2.0.22
 Coffin==2.0.1
+configparser==4.0.2
 confusable-homoglyphs==3.2.0
+contextlib2==0.6.0.post1
 coverage==4.5.4
 cryptography==2.9.2
 cssmin==0.2.0
@@ -112,6 +114,7 @@ gunicorn-console==0.1.16
 html5lib==0.999999999
 httplib2==0.10.3
 idna==2.5
+importlib-metadata==1.6.0
 importmagic3==0.2.0
 ipaddress==1.0.19
 IPy==0.83
@@ -120,7 +123,7 @@ Jinja2==2.11.2
 jmespath==0.9.5
 js.tinymce==4.5.4
 jsmin==2.2.2
-kombu==4.1.0
+kombu==4.6.8
 lamson==1.3.4
 lockfile==0.12.2
 log-colorizer==1.8.5
@@ -142,6 +145,7 @@ odict==1.5.2
 olefile==0.44
 parso==0.1.1
 Paste==2.0.3
+pathlib2==2.3.5
 pbr==3.0.1
 pem==17.1.0
 Pillow==4.3.0
@@ -174,6 +178,7 @@ requests-oauthlib==0.8.0
 requests-toolbelt==0.8.0
 rjsmin==1.0.12
 s3transfer==0.3.3
+scandir==1.10.0
 sendgrid==5.3.0
 setproctitle==1.1.10
 simplejson==3.10.0
@@ -192,10 +197,11 @@ uncompyle6==2.15.1
 Unidecode==0.04.21
 urllib3==1.24.2
 user-agents==1.1.0
-vine==1.1.4
+vine==1.3.0
 watchtower==0.7.3
 webencodings==0.5.1
 WebOb==1.8.6
 Werkzeug==0.16.1
 xdis==3.6.11
 yolk==0.4.3
+zipp==1.2.0
