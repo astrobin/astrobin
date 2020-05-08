@@ -3,6 +3,7 @@
 import re
 import sys
 import time
+from datetime import date, timedelta
 
 from django.conf import settings
 from django.contrib.auth.models import Group, User
@@ -487,6 +488,29 @@ class ImageTest(TestCase):
             self.assertContains(response, "maximum allowed image size is 10.0")
 
         us.delete()
+
+    def test_image_upload_process_view_inactive_subscription(self):
+        self.client.login(username='test', password='password')
+        premium = Generators.premium_subscription(self.user, "AstroBin Premium 2020+")
+
+        response = self.client.get(reverse('image_upload'))
+        self.assertNotContains(response, "Your Lite or Premium subscription is not active")
+
+        premium.expires = date.today() - timedelta(1)
+        premium.save()
+
+        response = self.client.get(reverse('image_upload'))
+        self.assertContains(response, "Your Lite or Premium subscription is not active")
+
+        premium.expires = date.today() + timedelta(1)
+        premium.save()
+
+        ultimate = Generators.premium_subscription(self.user, "AstroBin Ultimate 2020+")
+        ultimate.expires = date.today() - timedelta(1)
+        ultimate.save()
+
+        response = self.client.get(reverse('image_upload'))
+        self.assertNotContains(response, "Your Lite or Premium subscription is not active")
 
     @patch("astrobin.tasks.retrieve_primary_thumbnails")
     def test_image_upload_process_view_image_too_large_ultimate_2020(self, retrieve_primary_thumbnails):

@@ -85,10 +85,22 @@ def premium_get_valid_usersubscription(user):
 
 
 def premium_get_invalid_usersubscription(user):
-    us = premium_get_usersubscription(user)
-    if not us.valid():
-        return us
-    return None
+    us = [obj for obj in UserSubscription.objects.filter(
+        user__username=user.username,
+        subscription__name__in=SUBSCRIPTION_NAMES,
+        active=True,
+    ) if not obj.valid()]
+
+    if len(us) == 0:
+        return None
+
+    if len(us) == 1:
+        return us[0]
+
+    sortedByName = sorted(us, cmp=_compareNames)
+    sortedByValidity = sorted(sortedByName, cmp=_compareValidity)
+
+    return sortedByName[0]
 
 
 def premium_used_percent(user):
@@ -141,7 +153,7 @@ def premium_user_has_valid_subscription(user):
 
 def premium_user_has_invalid_subscription(user):
     us = premium_get_invalid_usersubscription(user)
-    return us is not None
+    return not premium_user_has_valid_subscription(user) and us is not None
 
 
 def premium_get_max_allowed_image_size(user):
