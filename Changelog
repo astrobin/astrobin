@@ -1,4 +1,17 @@
 2020-05-12 Salvatore Iovene <salvatore@iovene.com>
+ * v1.67.1
+ * (plate-solving) Fix saving Astrometry.net annotation
+ * (deps) Update dependency rjsmin to v1.1.0 (#1042)
+ * (deps) Update dependency tornado to v4.5.3 (#1055)
+ * (deps) Update dependency python-magic to v0.4.18 (#1037)
+ * (deps) Update dependency markdown2 to v2.3.9 (#1054)
+ * (deps) Update dependency pycodestyle to v2.6.0 (#1052)
+ * (deps) Update dependency sqlparse to v0.3.1 (#1053)
+ * (deps) Update dependency spark-parser to v1.8.9 (#1049)
+ * (deps) Update dependency boto3 to v1.13.7 (#1050)
+ * (deps) Update dependency six to v1.14.0 (#1048)
+
+2020-05-12 Salvatore Iovene <salvatore@iovene.com>
  * v1.67.0
  * (forums) Use regular text color for forum names and topics (#1047)
  * (api) Use CamelCaseJSONParser for notifications (#1044)
