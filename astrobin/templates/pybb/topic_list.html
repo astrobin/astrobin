@@ -3,7 +3,7 @@
 {% load tags %}
 
 <form method="post" action="{% url 'forum_moderation_mark_as_spam' %}">{% csrf_token %}
-    <table class="table table-striped table-condensed topic-list">
+    <table class="table table-striped topic-list">
         <thead>
         <tr class="topic-row head-row">
             {% if request.user|is_forum_moderator %}
