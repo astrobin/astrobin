@@ -154,16 +154,16 @@ psycopg2==2.7.1
 -e git+https://github.com/siovene/pybbm.git@ddf640fcae1889601a293c210ec6eb9e624207f3#egg=pybbm
 pycodestyle==2.5.0
 pycparser==2.18
-pyflakes==1.5.0
+pyflakes==1.6.0
 Pygments==2.2.0
 pyOpenSSL==17.5.0
-pyparsing==2.2.0
+pyparsing==2.4.7
 pyquery==1.2.17
 pyrg==0.2.6
 pystache==0.5.4
-python-daemon==2.1.2
+python-daemon==2.2.4
 python-dateutil==2.6.0
-python-http-client==3.0.0
+python-http-client==3.2.7
 python-magic==0.4.15
 python-memcached==1.58
 python-mimeparse==1.6.0
@@ -172,10 +172,10 @@ pytz==2017.3
 PyYAML==5.3.1
 rcssmin==1.0.6
 redis==2.10.6
-requests==2.20.1
+requests==2.23.0
 requests-aws4auth==0.9
 requests-oauthlib==0.8.0
-requests-toolbelt==0.8.0
+requests-toolbelt==0.9.1
 rjsmin==1.1.0
 s3transfer==0.3.3
 scandir==1.10.0
