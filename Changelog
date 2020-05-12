@@ -1,3 +1,103 @@
+2020-05-12 Salvatore Iovene <salvatore@iovene.com>
+ * v1.67.0
+ * (forums) Use regular text color for forum names and topics (#1047)
+ * (api) Use CamelCaseJSONParser for notifications (#1044)
+ * (deps) Update dependency sendgrid to v5.6.0 (#1043)
+ * (deps) Update dependency simplejson to v3.17.0 (#1045)
+ * (deps) Update dependency numpy to v1.16.6 (#1046)
+ * (deps) Update dependency requests-toolbelt to v0.9.1 (#1041)
+ * (deps) Update dependency requests to v2.23.0 (#1040)
+ * (deps) Update dependency python-http-client to v3.2.7 (#1036
+ * (deps) Update dependency pyflakes to v1.6.0 (#1031)
+ * (deps) Update dependency python-daemon to v2.2.4 (#1034)
+ * (deps) Update dependency pyparsing to v2.4.7 (#1032)
+ * (deps) Update dependency pycodestyle to v2.5.0 (#1028)
+ * (deps) Update dependency parso to v0.7.0 (#1024
+ * (deps) Update dependency odict to v1.7.0 (#1022
+ * (deps) Update dependency idna to v2.9 (#1013
+ * (deps) Update dependency ply to v3.11 (#1026)
+ * (deps) Update dependency pbr to v3.1.1 (#1025)
+ * (deps) Update dependency olefile to v0.46 (#1023)
+ * (deps) Update dependency oauthlib to v2.1.0 (#1021)
+ * (deps) Update dependency mwclient to v0.10.0 (#1019)
+ * (deps) Update dependency maxminddb to v1.5.4 (#1017)
+ * (deps) Update dependency log-colorizer to v1.8.6 (#1016
+ * (deps) Update dependency jedi to v0.17.0 (#1015)
+ * (deps) Update dependency ipaddress to v1.0.23 (#1014)
+ * (deps) Update dependency httplib2 to v0.17.3 (#1012)
+ * (deps) Update dependency enum34 to v1.1.10 (#1007)
+ * (deps) Update dependency botocore to v1.16.6 (#1006)
+ * (deps) Update dependency django-user-agents to v0.4.0 (#997
+ * (deps) Update dependency gunicorn to v19.10.0 (#1011)
+ * (deps) Update dependency gevent to v1.5.0 (#1010)
+ * (deps) Update dependency futures to v3.3.0 (#1009)
+ * (deps) Update dependency flickrapi to v2.4.0 (#1008)
+ * (deps) Update dependency boto3 to v1.13.6 (#1005)
+ * (deps) Update dependency elasticsearch to v5.5.3 (#1003)
+ * (deps) Update dependency docutils to v0.16 (#1001)
+ * (deps) Update dependency django-xmlrpc to v0.1.8 (#998)
+ * (deps) Update dependency django-tinymce to v2.9.0 (#996)
+ * (deps) Update dependency django-tastypie to v0.14.3 (#995
+ * (deps) Update dependency django-safedelete to v0.5.4 (#992)
+ * (deps) Update dependency django-celery-email to v2.0.2 (#968)
+
+2020-05-08 Salvatore Iovene <salvatore@iovene.com>
+ * v1.66.1
+ * (deps) Upgrade django-tagging, kombu, and vine
+
+2020-05-08 Salvatore Iovene <salvatore@iovene.com>
+ * v1.66.0
+ * (images) Drop solution when changing image in edit basic info (#927)
+ * (notifications) Redirect all notifications view to Angular app (#936)
+ * (premium) Include autorenew when reactivating previous subscription after free Ultimate expires (#960)
+ * (premium) Fix showing "inactive subscription" message on upload page (#982)
+ * (deps) Update dependency amqp to v2.5.2 (#944)
+ * (deps) Update dependency autopep8 to v1.5.2 (#945)
+ * (deps) Update dependency bbcode to v1.1.0 (#946)
+ * (deps) Update dependency BeautifulSoup to v3.2.2 (#932)
+ * (deps) Update dependency bleach to v3.1.4 (#932)
+ * (deps) Update dependency billiard to v3.6.3.0 (#948)
+ * (deps) Update dependency boto to v2.49.0 (#950)
+ * (deps) Update dependency boto3 to v1.13.5 (#951)
+ * (deps) Update dependency botocore to v1.16.4 (#952)
+ * (deps) Update dependency botocore to v1.16.5 (#983)
+ * (deps) Update dependency celery to v4.4.2 (#953)
+ * (deps) Update dependency cffi to v1.14.0 (#954)
+ * (deps) Update dependency confusable-homoglyphs to v3.2.0 (#955)
+ * (deps) Update dependency coverage to v4.5.4 (#956)
+ * (deps) Update dependency cryptography to v2.9.2 (#957)
+ * (deps) Update dependency cssselect to v1.1.0 (#958)
+ * (deps) Update dependency defusedxml to v0.6.0 (#961)
+ * (deps) Update dependency Django to v1.11.29 (#933)
+ * (deps) Update dependency django-annoying to v0.10.6 (#962)
+ * (deps) Update dependency django-bootstrap-breadcrumbs to v0.9.2 (#964)
+ * (deps) Update dependency django-bouncy to v0.2.8 (#965)
+ * (deps) Update dependency django-braces to v1.14.0 (#966)
+ * (deps) Update dependency django-classy-tags to v0.9.0 (#969)
+ * (deps) Update dependency django-contact-form-gv to v0.7.0 (#970)
+ * (deps) Update dependency django-contrib-comments to v1.9.2 (#971)
+ * (deps) Update dependency django-cookie-law to v2.0.3 (#972)
+ * (deps) Update dependency django-cors-middleware to v1.5.0 (#973)
+ * (deps) Update dependency django-debug-toolbar to v1.11 (#975)
+ * (deps) Update dependency django-el-pagination to v3.3.0 (#976)
+ * (deps) Update dependency django-extensions to v2.2.9 (#977)
+ * (deps) Update dependency django-followit to v0.4.1 (#978)
+ * (deps) Update dependency django-haystack to v2.8.1 (#979)
+ * (deps) Update dependency django-hitcount to v1.3.2 (#980)
+ * (deps) Update dependency django-maintenancemode to v0.11.3 (#984)
+ * (deps) Update dependency django-model-utils to v3.2.0 (#985)
+ * (deps) Update dependency django-modeltranslation to v0.15 (#986)
+ * (deps) Update dependency django-pipeline to v1.7.0 (#988)
+ * (deps) Update dependency django-registration to v2.5.2 (#990)
+ * (deps) Update dependency Jinja2 to v2.11.2 (#934)
+ * (deps) Update dependency Markdown to v2.6.11 (#935)
+ * (deps) Update dependency MarkupSafe to v1.1.1 (#937)
+ * (deps) Update dependency Pillow to v4.3.0 (#938)
+ * (deps) Update dependency PyYAML to v5.3.1 (#939)
+ * (deps) Update dependency SQLAlchemy to v1.3.16 (#941)
+ * (deps) Update dependency Unidecode to v0.04.21 (#942)
+ * (deps) Update dependency WebOb to v1.8.6 (#943)
+
 2020-05-04 Salvatore Iovene <salvatore@iovene.com>
  * v1.65.5
  * (images) Fix overflowing PI annotation on IE
