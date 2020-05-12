@@ -1,3 +1,46 @@
+2020-05-12 Salvatore Iovene <salvatore@iovene.com>
+ * v1.67.0
+ * (forums) Use regular text color for forum names and topics (#1047)
+ * (api) Use CamelCaseJSONParser for notifications (#1044)
+ * (deps) Update dependency sendgrid to v5.6.0 (#1043)
+ * (deps) Update dependency simplejson to v3.17.0 (#1045)
+ * (deps) Update dependency numpy to v1.16.6 (#1046)
+ * (deps) Update dependency requests-toolbelt to v0.9.1 (#1041)
+ * (deps) Update dependency requests to v2.23.0 (#1040)
+ * (deps) Update dependency python-http-client to v3.2.7 (#1036
+ * (deps) Update dependency pyflakes to v1.6.0 (#1031)
+ * (deps) Update dependency python-daemon to v2.2.4 (#1034)
+ * (deps) Update dependency pyparsing to v2.4.7 (#1032)
+ * (deps) Update dependency pycodestyle to v2.5.0 (#1028)
+ * (deps) Update dependency parso to v0.7.0 (#1024
+ * (deps) Update dependency odict to v1.7.0 (#1022
+ * (deps) Update dependency idna to v2.9 (#1013
+ * (deps) Update dependency ply to v3.11 (#1026)
+ * (deps) Update dependency pbr to v3.1.1 (#1025)
+ * (deps) Update dependency olefile to v0.46 (#1023)
+ * (deps) Update dependency oauthlib to v2.1.0 (#1021)
+ * (deps) Update dependency mwclient to v0.10.0 (#1019)
+ * (deps) Update dependency maxminddb to v1.5.4 (#1017)
+ * (deps) Update dependency log-colorizer to v1.8.6 (#1016
+ * (deps) Update dependency jedi to v0.17.0 (#1015)
+ * (deps) Update dependency ipaddress to v1.0.23 (#1014)
+ * (deps) Update dependency httplib2 to v0.17.3 (#1012)
+ * (deps) Update dependency enum34 to v1.1.10 (#1007)
+ * (deps) Update dependency botocore to v1.16.6 (#1006)
+ * (deps) Update dependency django-user-agents to v0.4.0 (#997
+ * (deps) Update dependency gunicorn to v19.10.0 (#1011)
+ * (deps) Update dependency gevent to v1.5.0 (#1010)
+ * (deps) Update dependency futures to v3.3.0 (#1009)
+ * (deps) Update dependency flickrapi to v2.4.0 (#1008)
+ * (deps) Update dependency boto3 to v1.13.6 (#1005)
+ * (deps) Update dependency elasticsearch to v5.5.3 (#1003)
+ * (deps) Update dependency docutils to v0.16 (#1001)
+ * (deps) Update dependency django-xmlrpc to v0.1.8 (#998)
+ * (deps) Update dependency django-tinymce to v2.9.0 (#996)
+ * (deps) Update dependency django-tastypie to v0.14.3 (#995
+ * (deps) Update dependency django-safedelete to v0.5.4 (#992)
+ * (deps) Update dependency django-celery-email to v2.0.2 (#968)
+
 2020-05-08 Salvatore Iovene <salvatore@iovene.com>
  * v1.66.1
  * (deps) Upgrade django-tagging, kombu, and vine
