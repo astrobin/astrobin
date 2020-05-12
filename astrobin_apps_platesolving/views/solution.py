@@ -355,6 +355,7 @@ class SolutionList(generics.ListCreateAPIView):
     filter_backends = (DjangoFilterBackend,)
     filter_fields = ('content_type', 'object_id',)
     filter_class = ImageObjectIdFilter
+    pagination_class = None
 
 
 class SolutionDetail(generics.RetrieveUpdateDestroyAPIView):
