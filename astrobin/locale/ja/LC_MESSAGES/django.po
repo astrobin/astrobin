@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2019-10-15 11:53+0000\n"
+"POT-Creation-Date: 2020-05-13 17:55+0000\n"
 "PO-Revision-Date: 2019-04-12 02:32+0000\n"
 "Last-Translator: BG8JQT <BG8JQT@163.com>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -757,6 +757,54 @@ msgstr "ザンビア"
 msgid "Zimbabwe"
 msgstr "ジンバブエ"
 
+msgid "Users"
+msgstr "ユーザー"
+
+msgid "Make"
+msgstr "製造者"
+
+msgid "The make, brand, producer or developer of this product."
+msgstr "この製品の製造者名やブランド名、開発者の名前。"
+
+msgid "Name"
+msgstr "名前"
+
+msgid "Merge"
+msgstr "結合"
+
+msgid ""
+"Use this field to mark that the item you are claiming really is the same "
+"product (or a variation thereof) of something you have claimed before."
+msgstr ""
+"あなたが前に主張しているものと同じ製品 (またはその変形) であることを示すため"
+"に、このフィールドを使用します。"
+
+#, python-format
+msgid ""
+"You can't create more than %d claims. Consider upgrading your affiliation!"
+msgstr ""
+"あなたは%d以上の主張をすることはできません。あなたのアフィリエイトプログラム"
+"をアップグレードすることを考えてください。"
+
+msgid "You have already claimed this product."
+msgstr "あなたは既にこの製品を主張しています。"
+
+msgid ""
+"Select a tag to order this collection by its value. If you see no optioons "
+"here, it's because none of the images in this collection have key/value "
+"tags. PS: Images that lack this tag will appear at the bottom of the "
+"collection."
+msgstr ""
+
+msgid "Please use the following format: yyyy-mm-dd"
+msgstr "yyyy-mm-ddの形式を使ってください"
+
+msgid "Date"
+msgstr "日付"
+
+msgid "The date cannot be in the future."
+msgstr "未来の日付を入力することはできません。"
+
 msgid "Link"
 msgstr "リンク"
 
@@ -797,6 +845,15 @@ msgid ""
 "original image can be considered."
 msgstr ""
 
+msgid "Key/value tags"
+msgstr ""
+
+msgid ""
+"Provide a list of unique key/value pairs to tag this image with. Use the '=' "
+"symbol between key and value, and provide one pair per line. These tags can "
+"be used to sort images by arbitrary properties."
+msgstr ""
+
 #, fuzzy
 msgid "Revision"
 msgstr "レビュー"
@@ -804,23 +861,11 @@ msgstr "レビュー"
 msgid "This field is required."
 msgstr "この項目は必須です。"
 
+msgid "Unable to parse."
+msgstr ""
+
 msgid "Please select a remote source if this image was acquired remotely."
 msgstr ""
-
-msgid "Opacity"
-msgstr "不透明度"
-
-msgid ""
-"0 means invisible; 100 means completely opaque. Recommended values are: 10 "
-"if the watermark will appear on the dark sky background, 50 if on some "
-"bright object."
-msgstr ""
-"0は透明を意味し、100は不透明を意味します。推奨値は以下のとおりです。10だと、"
-"著作権表記は暗い背景でも表示されます。50だと、明るい天体上でも表示されます。"
-
-msgid "If you want to watermark this image, you must specify some text."
-msgstr ""
-"この画像に著作権表示を望むのであれば、テキストを入力する必要があります。"
 
 msgid "Imaging telescopes or lenses"
 msgstr "望遠鏡／レンズ"
@@ -860,11 +905,45 @@ msgstr ""
 msgid "Original image"
 msgstr "元画像を削除"
 
-msgid "If you have a personal website, put the address here."
-msgstr "あなたが個人サイトを持っているのであれば、そのURLを記入してください。"
+msgid "Opacity"
+msgstr "不透明度"
 
-msgid "Website"
-msgstr "ウェブサイト"
+msgid ""
+"0 means invisible; 100 means completely opaque. Recommended values are: 10 "
+"if the watermark will appear on the dark sky background, 50 if on some "
+"bright object."
+msgstr ""
+"0は透明を意味し、100は不透明を意味します。推奨値は以下のとおりです。10だと、"
+"著作権表記は暗い背景でも表示されます。50だと、明るい天体上でも表示されます。"
+
+msgid "If you want to watermark this image, you must specify some text."
+msgstr ""
+"この画像に著作権表示を望むのであれば、テキストを入力する必要があります。"
+
+msgid "Latitude (degrees)"
+msgstr "緯度 (度)"
+
+msgid "Latitude (minutes)"
+msgstr "緯度 (分)"
+
+msgid "Latitude (seconds)"
+msgstr "緯度 (秒)"
+
+msgid "Longitude (degrees)"
+msgstr "経度 (度)"
+
+msgid "Longitude (minutes)"
+msgstr "経度 (分)"
+
+msgid "Longitude (seconds)"
+msgstr "経度 (秒)"
+
+msgid ""
+"Use this field to mark that the item you are merging really is the same "
+"product (or a variation thereof) of something you have claimed before."
+msgstr ""
+"あなたがマージしたアイテムが、本当にあなたが前に主張しているものと同じ製品 "
+"(またはその変形) であることを示すために、この項目を使用します。"
 
 msgid ""
 "All the telescopes and lenses you own, including the ones you use for "
@@ -892,77 +971,22 @@ msgstr "望遠鏡とレンズ"
 msgid "Cameras"
 msgstr "カメラ"
 
-msgid "Users"
-msgstr "ユーザー"
+msgid "If you have a personal website, put the address here."
+msgstr "あなたが個人サイトを持っているのであれば、そのURLを記入してください。"
 
-msgid "Latitude (degrees)"
-msgstr "緯度 (度)"
+msgid "Website"
+msgstr "ウェブサイト"
 
-msgid "Latitude (minutes)"
-msgstr "緯度 (分)"
-
-msgid "Latitude (seconds)"
-msgstr "緯度 (秒)"
-
-msgid "Longitude (degrees)"
-msgstr "経度 (度)"
-
-msgid "Longitude (minutes)"
-msgstr "経度 (分)"
-
-msgid "Longitude (seconds)"
-msgstr "経度 (秒)"
-
-msgid "Please use the following format: yyyy-mm-dd"
-msgstr "yyyy-mm-ddの形式を使ってください"
-
-msgid "Date"
-msgstr "日付"
+#, fuzzy
+#| msgid "Mark as good"
+msgid "Mark as final"
+msgstr "goodとしてマーク"
 
 msgid "Please enter a value between 1 and 5."
 msgstr "1〜5の間の値を入力してください。"
 
 msgid "Please enter a value between 1 and 10."
 msgstr "1〜10の間の値を入力してください。"
-
-msgid "The date cannot be in the future."
-msgstr "未来の日付を入力することはできません。"
-
-msgid "Make"
-msgstr "製造者"
-
-msgid "The make, brand, producer or developer of this product."
-msgstr "この製品の製造者名やブランド名、開発者の名前。"
-
-msgid "Name"
-msgstr "名前"
-
-msgid "Merge"
-msgstr "結合"
-
-msgid ""
-"Use this field to mark that the item you are claiming really is the same "
-"product (or a variation thereof) of something you have claimed before."
-msgstr ""
-"あなたが前に主張しているものと同じ製品 (またはその変形) であることを示すため"
-"に、このフィールドを使用します。"
-
-#, python-format
-msgid ""
-"You can't create more than %d claims. Consider upgrading your affiliation!"
-msgstr ""
-"あなたは%d以上の主張をすることはできません。あなたのアフィリエイトプログラム"
-"をアップグレードすることを考えてください。"
-
-msgid ""
-"Use this field to mark that the item you are merging really is the same "
-"product (or a variation thereof) of something you have claimed before."
-msgstr ""
-"あなたがマージしたアイテムが、本当にあなたが前に主張しているものと同じ製品 "
-"(またはその変形) であることを示すために、この項目を使用します。"
-
-msgid "You have already claimed this product."
-msgstr "あなたは既にこの製品を主張しています。"
 
 msgid "Recipient"
 msgstr "宛先"
@@ -993,15 +1017,6 @@ msgstr "がLikeしました"
 
 msgid "has written a review on"
 msgstr "レビューが記入された"
-
-msgid "created a new public data pool"
-msgstr "新しい公開データ領域が作られた"
-
-msgid "added new data to public data pool"
-msgstr "新しい公開データ領域が追加された"
-
-msgid "added a new processed image to public data pool"
-msgstr "公開データ領域に新しい処理済み画像が追加された"
 
 #, fuzzy
 msgid "created a new public group"
@@ -1274,6 +1289,11 @@ msgstr "カタディオプトリック式: シュミットカゼクレイン"
 msgid "Catadioptric: ACF Schmidt-Cassegrain"
 msgstr "カタディオプトリック式: ACF シュミットカゼクレイン"
 
+#, fuzzy
+#| msgid "Catadioptric: ACF Schmidt-Cassegrain"
+msgid "Catadioptric: Rowe-Atkinson Schmidt astrograph"
+msgstr "カタディオプトリック式: ACF シュミットカゼクレイン"
+
 msgid "Camera lens"
 msgstr "カメラレンズ"
 
@@ -1417,7 +1437,9 @@ msgstr ""
 msgid "Other/Unknown"
 msgstr ""
 
-msgid "Deep sky object"
+#, fuzzy
+#| msgid "Deep sky object"
+msgid "Deep sky object or field"
 msgstr "遠距離天体"
 
 msgid "Solar system body or event"
@@ -1539,6 +1561,34 @@ msgstr "説明"
 msgid "HTML tags are allowed."
 msgstr "HTMLタグは許可されています。"
 
+msgid "Uncompressed source (max 200 MB)"
+msgstr ""
+
+msgid ""
+"You can store the final processed image that came out of your favorite image "
+"editor (e.g. PixInsight, Adobe Photoshop, etc) here on AstroBin, for "
+"archival purposes. This file is stored privately and only you will have "
+"access to it."
+msgstr ""
+
+#, fuzzy
+#| msgid "Thumbnail"
+msgid "Gallery thumbnail"
+msgstr "サムネイル"
+
+msgid "Select an area of the image to be used as thumbnail in your gallery."
+msgstr ""
+
+#, fuzzy
+#| msgid "Star trails"
+msgid "Sharpen thumbnails"
+msgstr "星の軌跡"
+
+msgid ""
+"If selected, AstroBin will use a resizing algorithm that slightly sharpens "
+"the image's thumbnails. This setting applies to all revisions."
+msgstr ""
+
 msgid "Apply watermark to image"
 msgstr "著作権表記を画像に適用"
 
@@ -1557,16 +1607,19 @@ msgstr "ライセンス"
 msgid "Allow comments"
 msgstr "コメントを許可"
 
+#, fuzzy
+#| msgid "Notifications"
+msgid "Skip notifications"
+msgstr "通知"
+
+msgid "Do not notify your followers about this image upload."
+msgstr ""
+
 msgid "(no title)"
 msgstr "(無題)"
 
 msgid "Mix of multiple source"
 msgstr ""
-
-#, fuzzy
-#| msgid "Notifications"
-msgid "Skip notifications"
-msgstr "通知"
 
 msgid "Do not notify your followers about this revision."
 msgstr ""
@@ -1577,6 +1630,11 @@ msgstr "画像"
 #, fuzzy
 msgid "Cover image"
 msgstr "機材画像"
+
+#, fuzzy
+#| msgid "Other images"
+msgid "Order by image tag"
+msgstr "他の画像"
 
 msgid "Please use the following format: yyyy-mm-dd."
 msgstr "yyyy-mm-ddの形式を使用してください。"
@@ -1734,13 +1792,20 @@ msgstr "第3子午線の経度。"
 msgid "Seeing"
 msgstr "シーイング"
 
-msgid "Your estimation of the seeing, on a scale from 1 to 5."
+#, fuzzy
+#| msgid "Your estimation of the seeing, on a scale from 1 to 5."
+msgid ""
+"Your estimation of the seeing, on a scale from 1 to 5. Larger is better."
 msgstr "あなたが見積もったシーイング（1〜5の間の整数を記入）。"
 
 msgid "Transparency"
 msgstr "透明度"
 
-msgid "Your estimation of the transparency, on a scale from 1 to 10."
+#, fuzzy
+#| msgid "Your estimation of the transparency, on a scale from 1 to 10."
+msgid ""
+"Your estimation of the transparency, on a scale from 1 to 10. Larger is "
+"better."
 msgstr "あなたが見積もった透明度（1〜10の間の整数を記入）。"
 
 msgid "Time"
@@ -1891,6 +1956,15 @@ msgstr ""
 msgid ""
 "These emails may contain offers, commercial news, and promotions from "
 "AstroBin or its partners."
+msgstr ""
+
+msgid "Allow astronomy ads from our partners"
+msgstr ""
+
+msgid ""
+"It would mean a lot if you chose to allow astronomy relevant, non intrusive "
+"ads on this website. AstroBin is a small business run by a single person, "
+"and this kind of support would be amazing. Thank you in advance!"
 msgstr ""
 
 msgid "Language"
@@ -2057,6 +2131,27 @@ msgstr ""
 
 msgid "Commercial gear items"
 msgstr "商業的な機材"
+
+#, fuzzy
+#| msgid "Sending..."
+msgid "Pending"
+msgstr "送信中..."
+
+msgid "Processing"
+msgstr ""
+
+#, fuzzy
+#| msgid "Read all"
+msgid "Ready"
+msgstr "すべてを読む"
+
+#, fuzzy
+#| msgid "Error!"
+msgid "Error"
+msgstr "エラー!"
+
+msgid "Expired"
+msgstr ""
 
 msgid "Message sent"
 msgstr "メッセージを送信"
@@ -2231,30 +2326,6 @@ msgstr ""
 msgid ""
 "\n"
 "                            <a href=\"%(user_page)s\">%(user)s</a> created a "
-"new public data pool.\n"
-"                        "
-msgstr ""
-
-#, python-format
-msgid ""
-"\n"
-"                            <a href=\"%(user_page)s\">%(user)s</a> added "
-"data to a data pool.\n"
-"                        "
-msgstr ""
-
-#, python-format
-msgid ""
-"\n"
-"                            <a href=\"%(user_page)s\">%(user)s</a> added a "
-"processed image to a data pool.\n"
-"                        "
-msgstr ""
-
-#, python-format
-msgid ""
-"\n"
-"                            <a href=\"%(user_page)s\">%(user)s</a> created a "
 "new public group.\n"
 "                        "
 msgstr ""
@@ -2266,12 +2337,6 @@ msgid ""
 "group.\n"
 "                        "
 msgstr ""
-
-msgid "Affiliates"
-msgstr "アフィリエイト"
-
-msgid "The following companies support AstroBin."
-msgstr "以下の会社はAstoBinをサポートしています。"
 
 msgid "Request an API key"
 msgstr "APIキーのリクエスト"
@@ -2288,10 +2353,13 @@ msgstr ""
 msgid "After you submit a request, you will receive a reply within 24 hours."
 msgstr "リクエストを送信後、あなたは24時間以内に返事を受け取れる予定です。"
 
-#, python-format
+#, fuzzy
+#| msgid ""
+#| "Please make sure you have read the section about APIs in the <a href="
+#| "\"%(tos_url)s\">Terms of Service</a>."
 msgid ""
 "Please make sure you have read the section about APIs in the <a href="
-"\"%(tos_url)s\">Terms of Service</a>."
+"\"https://welcome.astrobin.com/terms-of-service\">Terms of Service</a>."
 msgstr ""
 "<a href=\"%(tos_url)s\">利用規約</a>のAPIについての記載を必ず読んでください。"
 
@@ -2388,9 +2456,6 @@ msgstr "ホーム"
 msgid "Forum"
 msgstr "フォーラム"
 
-msgid "Help"
-msgstr "ヘルプ"
-
 msgid "FAQ"
 msgstr "FAQ"
 
@@ -2399,6 +2464,9 @@ msgstr "利用規約"
 
 msgid "Guidelines"
 msgstr "ガイドライン"
+
+msgid "Sponsors"
+msgstr ""
 
 msgid "Source code"
 msgstr "ソースコード"
@@ -2475,6 +2543,73 @@ msgstr "goodとしてマーク"
 msgid "AstroBin is in READ ONLY mode"
 msgstr "AstroBinインデックス"
 
+#, fuzzy
+#| msgid "Sorry"
+msgid "Sorry :-("
+msgstr "申し訳ありません"
+
+#, fuzzy
+#| msgid "Accessories"
+msgid "Access denied"
+msgstr "アクセサリ"
+
+msgid "This feature is only offered at higher membership levels."
+msgstr ""
+
+msgid ""
+"Would you be interested in upgrading? AstroBin is a very small business and "
+"your support would mean a lot!"
+msgstr ""
+
+msgid "No, thanks"
+msgstr "結構です"
+
+msgid "Tell me more!"
+msgstr ""
+
+#, fuzzy
+#| msgid "Are you sure?"
+msgid "Are you really sure?"
+msgstr "本当にいいですか?"
+
+msgid ""
+"We know, we're all used to the fact that ads on the Internet are\n"
+"                    annoying."
+msgstr ""
+
+msgid ""
+"However, please let us offer you two good reasons to allow ads on\n"
+"                    AstroBin:"
+msgstr ""
+
+msgid ""
+"AstroBin is a one-person business. As of the time of writing, in early "
+"2020,\n"
+"                        I'm trying to make AstroBin a full time job, but it "
+"hasn't happened yet. If this dream were to\n"
+"                        become reality, I could invest a lot more time in "
+"the development of AstroBin, and everybody\n"
+"                        would benefit from it!"
+msgstr ""
+
+msgid ""
+"There are only astronomy ads on AstroBin, that are published after my review "
+"and\n"
+"                        approval. Nothing fishy, nothing off-topic, and "
+"nothing that will use any of your private\n"
+"                        information."
+msgstr ""
+
+#, python-format
+msgid ""
+"If you still feel that you would rather not see these ads, you can change "
+"this on\n"
+"                    <a href=\"%(profile_url)s\">your settings page</a>."
+msgstr ""
+
+msgid "Thank you!"
+msgstr "致谢"
+
 msgid "Quick search"
 msgstr "クイック検索"
 
@@ -2520,9 +2655,6 @@ msgstr "詳細検索"
 msgid "Top picks"
 msgstr ""
 
-msgid "Public data pools"
-msgstr "公開データ領域"
-
 msgid "Stats"
 msgstr "ステータス"
 
@@ -2530,11 +2662,8 @@ msgstr "ステータス"
 msgid "Trending astrophotographers"
 msgstr "あなたの天体写真機材を編集"
 
-msgid "What is this site?"
-msgstr "このサイトとは？"
-
-msgid "AstroBin Raw Data"
-msgstr "AstroBin Raw Data"
+msgid "Help"
+msgstr "ヘルプ"
 
 msgid "Contact"
 msgstr "連絡先"
@@ -2560,9 +2689,6 @@ msgstr "あなたの本当の名前を使ってAstroBinを始めようとして�
 msgid "OK"
 msgstr "OK"
 
-msgid "No, thanks"
-msgstr "結構です"
-
 msgid "Login"
 msgstr "ログイン"
 
@@ -2586,15 +2712,6 @@ msgstr "ブックマーク"
 
 msgid "Plots"
 msgstr "分析結果"
-
-msgid "Raw data"
-msgstr "Rawデータ"
-
-msgid "Raw data library"
-msgstr "Rawデータライブラリー"
-
-msgid "Private shared folders"
-msgstr "非公開共有フォルダー"
 
 msgid "My messages"
 msgstr "メッセージ"
@@ -2715,282 +2832,6 @@ msgstr ""
 
 msgid "More"
 msgstr ""
-
-msgid "Frequently Asked Questions"
-msgstr "FAQ"
-
-msgid "Is this website for free?"
-msgstr "このWebサイトは無料ですか？"
-
-msgid "Are there any limits on how large and how many images I can upload?"
-msgstr "アップロードする画像にはファイル容量や数に制限はありますか？"
-
-msgid "What image formats are supported?"
-msgstr "どの画像形式をサポートしていますか？"
-
-msgid "Is my data safe on AstroBin?"
-msgstr "AstroBinでの自分のデータは安全ですか？"
-
-msgid ""
-"I've seen beautiful images on this site. I'm not worthy of posting mine!"
-msgstr ""
-"このサイトですごく美しい画像をみつけました。私の画像を投稿するのを躊躇しま"
-"す！"
-
-msgid "What's the deal with the Staging Area and the Public Area?"
-msgstr "ステージングエリアと公開エリアの詳細を教えてください。"
-
-msgid "Why was AstroBin created?"
-msgstr "どうしてAstroBinを始めたのですか？"
-
-msgid "What are the plans for the future?"
-msgstr "将来のプランを教えてください。"
-
-msgid "How can I format my comments?"
-msgstr "自分のコメントをフォーマット化することはできますか？"
-
-msgid "How is the AstroBin index calculated?"
-msgstr "AstroBinインデックスはどのように計算されていますか？"
-
-msgid "I received some Likes, why is my AstroBin index not updated?"
-msgstr ""
-"Likeをもらったのですが、自分のAstroBinインデックスが更新されないのは何故です"
-"か？"
-
-msgid "How is the Image of the Day selected?"
-msgstr "Image of the Dayはどのように選ばれますか？"
-
-msgid "... and their answers!"
-msgstr "我々からの回答"
-
-msgid ""
-"No. A free account will let you upload up to 10 images, and partake in all "
-"social activities. For unlimited storage, you will need a premium "
-"subscription."
-msgstr ""
-"出来ません。無料アカウントでは10画像以上をアップグレードすることができませ"
-"ん。容量を解除するために、プレミアム会員になる必要があります。"
-
-msgid ""
-"<strong>NO!</strong> If you are a premium member, on AstroBin you can upload "
-"as many images as you want, and as large as you want. In fact, full size "
-"images are encouraged!"
-msgstr ""
-"<strong>いいえ。</strong> もし、プレミアムメンバーであれば、あなたがアップ"
-"ロードする画像の枚数や容量に制限はありません。事実、フルサイズの画像が推奨さ"
-"れています。"
-
-msgid "AstroBin will accept JPEG, PNG and GIF. Animated GIF is supported too."
-msgstr ""
-"AstroBinはJPEGやPNG、GIFファイル形式を許可しています。アニメーションGIFもサ"
-"ポートされてます！"
-
-msgid ""
-"Absolutely. There are multiple ways in which AstroBin can store your data "
-"very safely. First of all, the images you upload are stored on a highly "
-"durable, highly available, redundant backend. The durability of the storage "
-"backend is 99.999999999 percent over a given year. This means that if you "
-"upload 10,000 images, you can expect to lose one image to data corruption "
-"once in 10,000,000 year. The images are duplicated across two different "
-"physical servers, for protection against natural disasters."
-msgstr ""
-"絶対に大丈夫です。AstroBinはあなたのデータをとても安全に保管しておく複数の方"
-"法を持っています。まずはじめに、あなたがアップロードした画像は高耐久性かつ高"
-"可用性かつ冗長化されたストレージシステムにて保管されます。そのストレージは年"
-"間で99.999999999％の耐久性を有しています。これは、もしあたなが毎年1万の画像を"
-"アップロードした場合、1000万年に1回、1つの画像ファイルしか破損しないことを意"
-"味しています。画像は自然災害に対応するために２つの違う物理サーバーに分けて保"
-"管されています。"
-
-msgid ""
-"The actual website, instead, is hosted on a Virtual Machine, so, in case of "
-"severe hardware failure, it can be redeployed to a different server in a "
-"matter of 15 minutes."
-msgstr ""
-"実際のWebサイトは複数のバーチャルマシンにホストされていて、ハードウエアに障害"
-"が発生した場合にも15分以内に別のサーバーに再デプロイされます。"
-
-msgid ""
-"Finally, the database that powers AstroBin (in fact, the whole Virtual "
-"Machine) is backed up daily. In case of severe data loss, the website will "
-"be quickly restored to a snapshot that's never older than 24 hours."
-msgstr ""
-"最終的には、AstroBin（事実、全てバーチャルマシンで構成されています）のデータ"
-"ベースは毎日バックアップをとっています。データ破損が発生した場合、Webサイトは"
-"最大24時間前のスナップショットから速やかにリストアされます。"
-
-msgid ""
-"That said, you should be aware that AstroBin is not a backup service, and "
-"although your data is very safe in our hands, we cannot legally take "
-"responsibility in the event of loss, however unlikely it is. Always keep a "
-"copy of your image on your computer."
-msgstr ""
-"そうは言っても、AstroBinはバックアップサービスではないことを注意する必要があ"
-"りま。そして、あなたのデータを我々の手で非常に安全に管理していますが、損失が"
-"発生した場合には我々は法的な責任を負う事はできません。常に、あなたのPCにはあ"
-"なたの画像のコピーを置いておいてください。"
-
-msgid ""
-"Nonsense. AstroBin has <strong>not</strong> been made to showcase beautiful "
-"image, but to give everybody an opportunity to contribute to a vast and "
-"evergrowing effort of centralization and indexing of important data. That 30 "
-"minute picture of M31 you took last night between the clouds <em>belongs</"
-"em> here! Don't be shy and post it!"
-msgstr ""
-"気にしないで大丈夫です。AstroBinは美しい画像のショーケースには<strong>したく"
-"はない</strong>です、しかし、皆の大切なデータのインデックス化や集中化への努力"
-"に貢献する機会を皆に与えたいです。昨夜、雲の合間に30分だけ撮影したM31もここに"
-"は<em>あります</em>。恥ずかしがらなくても大丈夫です。"
-
-msgid ""
-"On AstroBin you have two places for our images. The Staging Area is where "
-"you can upload images that you want to quickly share on forums, mailing "
-"lists or social networks. The days of scaling down and compressing your "
-"image so you can upload it to a forum for feedback and critique are over! "
-"Just upload to AstroBin's Staging Area, and send the link to anyone you "
-"want. The image will be visible only to the intended recipients, and won't "
-"appear on your profile or AstroBin's home page."
-msgstr ""
-"AstroBinでは我々の画像を2つの場所に持っています。ステージングエリアはフォーラ"
-"ムやメーリングリスト、SNSに素早くシェアしたいときに画像をアップロードできると"
-"ころです。フィードバックや批評を得るためにフォーラムに投稿するために画像を縮"
-"小したり圧縮したりする時代は終わりました。画像は指定した受信者だけに見えるよ"
-"うになりますし、あなたのプロフィールやAstroBinのホームページも表示されませ"
-"ん。"
-
-msgid ""
-"The Public Area, instead, is for your finished products. After you have "
-"received feedback on your favorite forum, you can promote an image from the "
-"Staging Area to the Public Area, and it will appear on your profile. "
-"Remember that you can also move images back and forth from one Area to the "
-"other as many times as you want!"
-msgstr ""
-"公開エリアはフィニッシュした画像に利用します。お気に入りのフォーラムでフィー"
-"ドバックを受け取ったあとでステージングエリアから公開エリアに画像を移動するこ"
-"とができます。公開エリアとステージングエリアを何度も往復できることも忘れない"
-"ようにしてくださいね。"
-
-msgid ""
-"AstroBin was born out of the desire to end something that had been going on "
-"for too long: the waste of incredible material to the sea of chaos that the "
-"Internet can be. For years, fantastic astrophotographs have beeen uploaded "
-"to Internet Forums, often with little or no data, or to general purpose "
-"image hosting websites, invariably with no data attached."
-msgstr ""
-"長期間にわたってインターネットというカオスの海へ大量のゴミを生み出していたこ"
-"とを終わらせたいという希望をもってAstroBinは生まれました。何年もの間、素晴ら"
-"しい天体写真家たちはインターネットの掲示板に投稿してきたが、多くの場合、ほと"
-"んどもしくは全くデータが添付されていなかったり、汎用の画像ホスティングサイト"
-"を利用していました。"
-
-msgid ""
-"Such an image would be seen by some people, then quickly forgotten, and "
-"reduced to nothing more than a bunch of pixel in the giant wasteland of the "
-"Internet."
-msgstr ""
-"そのような画像は、何人かの人に見られ、すぐに忘れ去られ、インターネットの巨大"
-"な荒野でピクセルの束となって消えていくだろう。"
-
-msgid ""
-"This should not be allowed to happen. AstroBin is the response: an effort to "
-"host, collect, index and categorize the output of the astrophotographers all "
-"over the world, so that their precious data would serve a purpose, and have "
-"a meaning forever."
-msgstr ""
-"このようなことが起こることは許されません。世界中の天体写真家のアウトプットを"
-"ホストし、選別し、インデックスし、分類することで、彼らの貴重なデータの目的を"
-"果たし、そして永遠の意味を持つために、その努力をしていくことをAstroBinは始め"
-"ました。"
-
-msgid ""
-"<em>AstroBin</em> is just starting out, and this time we can really say that "
-"the sky is the limit! Tons of ideas are in the pipeline. As the user base "
-"grows, so does the data. Suddenly, things like automated supernovae search "
-"become possible: you could simply upload an image of a galaxy, and AstroBin "
-"could compare it to pictures of the same galaxy taken previously."
-msgstr ""
-"<em>AstroBin</em>は既にスタートし、いまでは夜空には限界があると本当に言うこと"
-"ができます！そして、すごく大きいアイデアが進行中です。利用者が増大すると、"
-"データも増大します。自動化された超新星探索のようなことが突然可能になって、あ"
-"なたは簡単に銀河の画像をアップロードしたり、AstroBinで以前撮影した同じ銀河の"
-"写真と比較できるようになります。"
-
-msgid ""
-"AstroBin could also recommend subjects for you to image! Knowing your "
-"equipment, your location, and comparing what you have imaged to what users "
-"similar to you have, AstroBin could suggest your next challenge!"
-msgstr ""
-"AstroBinは、画像をあなたに推薦することもできます。あなたの機材や場所の知識を"
-"共有したり、あなたと似た他の利用者の画像を比較比較したりすることで、AstroBin"
-"はあなたの次のチャレンジを提案します！"
-
-msgid ""
-"Thanks to the input from the community, more ideas are flowing in and the "
-"list get bigger and bigger."
-msgstr ""
-"コミュニティからの入力のおかげで、たくさんのアイデアが集まり、そのリストがど"
-"んどん大きくなっています。"
-
-msgid ""
-"AstroBin uses the Markdown syntax. Please use the following reference table:"
-msgstr ""
-"AstroBinはMarkdownの記法をつかっています。次の参照テーブルをつかってくださ"
-"い。"
-
-msgid "You type:"
-msgstr "入力した文字列"
-
-msgid "You see:"
-msgstr "参照"
-
-msgid "italics"
-msgstr "斜体"
-
-msgid "bold"
-msgstr "太字"
-
-msgid "(TAB or 4 spaces)"
-msgstr "(TAB or 4*spaces)"
-
-msgid "preformatted text"
-msgstr "整形済みテキスト"
-
-msgid "quoted text"
-msgstr "引用文"
-
-msgid "escape the formatting syntax"
-msgstr "フォーマットを無視"
-
-msgid ""
-"The AstroBin index is a function of the number of Likes and the number of "
-"images posted by a user."
-msgstr ""
-"AstroBinインデックスはユーザーが投稿した画像数やLikeの数によって決定されま"
-"す。"
-
-msgid ""
-"Because it's computationally expensive, the AstroBin index is updated only "
-"every 24 hours. The same applies for the search index, the Big Wall, and "
-"some other user data."
-msgstr ""
-"計算処理には費用がかかりますので、AstroBinインデックスは24時間ごとにアップ"
-"デートされます。検索インデックスやビックウォールやユーザーのデータにも適用さ"
-"れます。"
-
-msgid ""
-"A staff of 52 volunteers goes thru a three-stage process: 30 \"submitters\" "
-"propose images for IOTD; 15 \"reviewers\" advance some of them to the next "
-"stage; finally, any one of 7 judges can select an image from the pool of "
-"finalists as IOTD. There are limitations in place in the system to avoid "
-"abuse and monopoly."
-msgstr ""
-
-msgid ""
-"Do you have a question not covered here! Please <a href=\"/contact/"
-"\">contact us</a>!"
-msgstr ""
-"ここで質問がカバーできない場合、我々に<a href=\"/contact/\">問合せ</a>してく"
-"ださい。"
 
 msgid "Instructions and examples"
 msgstr "手順と例"
@@ -3216,310 +3057,6 @@ msgstr "所有者"
 msgid "just now"
 msgstr "ちょうど今"
 
-msgid ""
-"AstroBin accounts are meant for members to share original images that they "
-"have created."
-msgstr ""
-"AstroBinのアカウントは、自分で作成した元画像を共有する目的をもった人たちに宛"
-"てたものです。"
-
-msgid "What is allowed"
-msgstr "許可されている事"
-
-msgid "Do upload content you have created yourself."
-msgstr "自分自身で作成したコンテンツをアップロードすること。"
-
-msgid ""
-"Respect the copyright of others. Stealing images from other people and "
-"trying to pass them off as yours is not allowed on AstroBin."
-msgstr ""
-"他人の著作権を尊重すること。他の人たちから画像を盗んで、あなたのものとして"
-"偽って通そうと試みようとする事はAstroBinでは禁止されています。"
-
-msgid "Do fill in all the technical details you can."
-msgstr "できるだけ全ての技術的な詳細を記入してください。"
-
-msgid ""
-"AstroBin is founded on the idea that data is important and can't go wasted "
-"in a sea of chaos. As much as you can, please fill in the technical details "
-"of your images."
-msgstr ""
-"データが最重要で、それをカオスの海に埋もれさせてはならないという考えの上に"
-"AstroBinは成り立っています。できるだけ多くすることができるようになるために、"
-"あなたの画像の技術的詳細を入力するようにしてください。"
-
-msgid "Be respectful of other users."
-msgstr "他のユーザーを尊重する事。"
-
-msgid "Be nice and friendly to other users when you send them messages."
-msgstr ""
-"他のユーザーとメッセージをやりとりするときには、良い感じでフレンドリーにしま"
-"しょう。"
-
-msgid "What is forbidden"
-msgstr "禁止されていること"
-
-#, fuzzy
-msgid "Don't upload anything that you did not work on."
-msgstr "著作権をもっていないものをアップロードしてはいけない。"
-
-msgid ""
-"It's simple: if you didn't take or post-process an image yourself, then "
-"don't upload it. Things that are not fine include: reposting other people's "
-"images without any meaningful modifications and without the owner's content; "
-"reposting NASA's (and other similar agencies) images without any meaningful "
-"modifications. Things that are okay include: post-processing freely "
-"available data from NASA and other similar agencies; post-processing a "
-"friend's data; post-processing free data made available by other users."
-msgstr ""
-
-msgid "No nudity, no explicitly sexual content, no illegal content."
-msgstr "ヌードは禁止、明確にセクシャルなもの、非合法なコンテンツ。"
-
-msgid ""
-"Your account will be permanently deleted, and so will all your content, if "
-"you upload any content that is illegal, porn or nudity. We also reserve the "
-"right to report you to the authorities, if we find it necessary."
-msgstr ""
-"もし非合法なものやポルノやヌードといったコンテンツをアップロードしたときに"
-"は、あなたのアカウントと全てのコンテンツを永遠に削除します。我々はまた、我々"
-"が必要とするときには、当局にあなたを報告する権利をもっています。"
-
-msgid "Don't upload images that have nothing to do with astronomy."
-msgstr "天体に関係しない画像をアップロードしないでください。"
-
-msgid ""
-"Images of your equipment are fine, but don't use AstroBin to upload pictures "
-"from your last vacation. Your account won't be deleted, but we will ask you "
-"to remove those pictures."
-msgstr ""
-"機材の画像は素敵ですが、休暇の写真をAstroBinにアップロードしないでください。"
-"あなたのアカウントが削除される可能性がありますが、我々はそれらの写真を削除す"
-"るようにお願いするでしょう。"
-
-msgid "Don't use your account to host images for websites, banners or logos."
-msgstr ""
-"あたなたのアカウントにある画像をWebサイトやバナーやロゴに利用しません。"
-
-msgid ""
-"Banners, logos, icons or other graphic elements that are not "
-"astrophotography are not allowed on AstroBin."
-msgstr ""
-"天体写真に関係のないバナーやロゴやアイコンや他のグラフィック素材をAstroBinに"
-"載せる事を許しません。"
-
-msgid ""
-"In conclusion, these terms are just a way to say \"please be nice and use "
-"common sense\". If you feel you can't abide by them, please let us know what "
-"you feel is wrong."
-msgstr ""
-"結論として、これらのことは「良識と常識を働かせてください」と言っているだけで"
-"す。あなたがそれらを遵守することができないと感じるなら、間違っていると感じる"
-"ものを我々に知らせてください。"
-
-msgid ""
-"Are you an astrophotographer? Do you like to share the outcome of your hard "
-"work with others? As an astrophotographer myself, and a subscriber to "
-"numerous Astrophotography forums, I have found that the Internet is lacking "
-"a centralized place where astrophotographers can share their work."
-msgstr ""
-"あなたは天体写真家ですか？頑張った成果を他人に共有することは好きですか？私も"
-"天体写真家で数多くの天体についての掲示板への投稿をしているのですが、私はイン"
-"ターネットの中では天体写真家が作業を共有し、集まれる場所が無いことを発見して"
-"しまったのです。"
-
-msgid "Well, this is finally over!"
-msgstr "ちょっと、これはオーバーな表現ですね！"
-
-msgid ""
-"<em>AstroBin</em> comes to fill the gap. It's a website built from the "
-"ground up by an astrophotographer, and it provides means to people who want "
-"to share their astrophotographs."
-msgstr ""
-"<em>AstroBin</em>はそのギャップを埋めます。天体写真家によってゼロからWebサイ"
-"トを構築し、天体写真を共有したい人々に手段を提供します。"
-
-msgid "So how is this different from any other image sharing websites?"
-msgstr "他の画像共有サイトとの違いはなんでしょう？"
-
-msgid ""
-"<em>AstroBin</em> provides a number of features that are tailored "
-"specificlly to astrophotography. Here's a quick run down of the main ones:"
-msgstr ""
-"<em>AstroBin</em>には天体写真に特化した機能が多数用意されています。ここでの主"
-"なもののざっと紹介します。"
-
-msgid "Dedication to data"
-msgstr "データへの専念"
-
-msgid ""
-"On a general purpose image sharing site, you would upload your image and be "
-"done with it. <em>AstroBin</em>, instead, has a user interface specifically "
-"designed to enable you to input all the technical data of your image."
-msgstr ""
-"画像共有サイトの一般的な目的では、画像をアップロードすることができます。"
-"<em>AstroBin</em>では全ての技術的データの入力が可能になるようにデザインされた"
-"特別なインターフェースを利用者に提供しています。"
-
-msgid ""
-"<em>AstroBin</em> will autocomplete your input using a vast database: "
-"everything from telescopes, CCDs and filters to astronomical objects in many "
-"catalogues will show in popup dialogs for easy selection when you start "
-"typing their names. <em>AstroBin</em> is connected to the SIMBAD "
-"Astronomical Database, which contains over 5 million objects under over 15 "
-"million names!"
-msgstr ""
-"<em>AstroBin</em>は巨大なデータベースを使ってあなたの入力をオートコンプリート"
-"します。あたながその名前のタイピングをスタートする時、望遠鏡やCCD、フィルター"
-"から沢山のカタログに記載されている天体までを簡単に選択できるようにボップアッ"
-"プダイアログでみせることができます。<em>AstroBin</em>はSIMBADと連携していて、"
-"それは500万以上の天体や1500万以下の名前を含んでいます。"
-
-msgid ""
-"On <em>AstroBin</em>, astronomical subjects have their own page, where you "
-"can see the best images of them, and plots and charts showing trends and "
-"interesting statistics. There is also a page that shows the most popular "
-"subjects organized by month and latitude!"
-msgstr ""
-"<em>AstroBin</em>では、あなたのページに天体に関する主題を設けることができま"
-"す。そこではその主題でのベストな画像を見ることもできますし、描画や図でトレン"
-"ドや興味深い統計情報を見る事もできます。月や緯度による整理がされた最も人気の"
-"ある主題をみられるページも用意されています！"
-
-msgid "Data is strongly interconnected"
-msgstr "データは強力に相互接続されている"
-
-msgid ""
-"Have you ever wanted to see how your next image is going to look like? On "
-"<em>AstroBin</em>, you can search for all images of a certain target that "
-"were taken with a certain telescope and a certain CCD or camera. Or a "
-"certain filter. How about all the images between 6 and 8 hours of "
-"integration? Or with a certain Moon phase? You can do that!"
-msgstr ""
-"次に撮影する画像がどのようにみえるのかを見ようとしたことはありませんか？"
-"<em>AstroBin</em>では、特定の望遠鏡、特定のCCDやカメラ、特定のフィルターで撮"
-"影された特定されたターゲットの全ての画像を検索することができます。6〜8時間露"
-"出した全ての画像についてとか、特定の月齢のものとか、それを叶えることができま"
-"す!"
-
-msgid ""
-"AstroBin can help you with your next telescope or camera purchase, by "
-"searching for gear combinations owned by other users. For instance, you "
-"could search for all images taken with a Canon 5D and any apochromatic "
-"refractor, or a SBIG ST-8300 with any Richtey-Chretien telescope. Or, if you "
-"want, you can search by telescope diameter too!"
-msgstr ""
-"他の利用者が所有している機材の組み合わせを検索することによって、AstroBinは望"
-"遠鏡やカメラの購入のお手伝いをすることができます。例えば、Canon 5Dとアポクロ"
-"マート屈折望遠鏡で撮影された全て画像を検索することができるし、Richtey-"
-"Chretien望遠鏡とSBIG ST-8300 で撮影された画像を検索することもできます。望遠鏡"
-"の口径で検索することだって可能です。"
-
-msgid ""
-"Finally, all this information is collected in interesting plots, that can "
-"help you figure out how some gear items are trending."
-msgstr ""
-"最終的には、これらすべての情報は機材のトレンドを図としてみせたりすることで、"
-"興味深い図画として表示されます。"
-
-msgid "All the data at a glance"
-msgstr "全てのデータを一目する"
-
-msgid ""
-"Each image on <em>AstroBin</em> is annotated of all the technical details "
-"about its acquisition. Telescopes involved, cameras, mounts, filters, "
-"everything is visible at a glance in the Technical Card. Even the Moon age "
-"at the time of the acquisition is displayed."
-msgstr ""
-"<em>AstroBin</em>のそれぞれのイメージは撮影したときの全ての技術的詳細が付けら"
-"れています。望遠鏡、カメラ、赤道儀、フィルターといった全てのものがTechnical "
-"Cardとして一目できるようになっています。"
-
-msgid "More than just an image"
-msgstr "単なる画像を超えて"
-
-msgid ""
-"<em>AstroBin</em> will do more than just host a copy of your image: when you "
-"upload a photograph, a histogram and a black &amp; white inverted version of "
-"the image will be generated on the fly, so it's easier to spot faint "
-"nebulosity regions or spiral arms. Images will also be plate solved, and an "
-"annotated version will appear on the site. <em>AstroBin</em> will know what "
-"are the astronomical objects in your image without you telling!"
-msgstr ""
-"<em>AstroBin</em>は写真をアップロードしたときにコピーをするだけでなく、ヒスト"
-"グラムや白黒バージョンを自動的に生成します。それによって、淡い星雲や渦状腕が"
-"簡単にみつけられます。画像は星図化され、サイト上で注釈付きで表示されます。"
-"<em>AstroBin</em>はあなたが何も教えてくれなくても、あなたの画像のなかに、どん"
-"な天体があるかを知っています!"
-
-msgid "Protection from theft with automatic watermarking"
-msgstr "自動的に著作権表示を加えることで盗難から守る"
-
-msgid ""
-"<em>AstroBin</em>'s upload wizard will offer you to watermark your image "
-"with the text of your choosing. All it takes is a click!"
-msgstr ""
-"<em>AstroBin</em>のアップロードウイザードは、あなたが選んだテキストを著作権表"
-"示として画像に埋め込みます。それもクリックするだけ!"
-
-msgid "AstroBin supports multiple image revisions"
-msgstr "AstroBinは何枚もの修正版の画像管理に対応してます。"
-
-msgid ""
-"Don't tell me you have never gone back to revise the processing of an image "
-"<em>after</em> you had published it. <em>AstroBin</em> embraces this concept "
-"and lets you publish several revisions of the same image easily and "
-"intuitively! Now it's going to be really easy to tell whether your "
-"processing has improved."
-msgstr ""
-"処理画像を公開した<em>あとで</em>、再処理をしたことを知らせる必要はありませ"
-"ん。<em>AstroBin</em>は、そのプロセスを分かっているので、同じ画像の幾つも修正"
-"版を簡単にかつ直感的に公開することができます！今では、あなたの再処理によって"
-"画像が改善されているかを知ることが本当に簡単になりました。"
-
-msgid "AstroBin is social!"
-msgstr "AstroBinはソーシャルだ！"
-
-msgid ""
-"On <em>AstroBin</em> you can message other astrophotographer, follow them "
-"and be notified when they post new images, or perform requests for more data."
-msgstr ""
-"<em>AstroBin</em>では他の天体写真家にメッセージを送ったり、フォローしたり、新"
-"しい画像が投稿されたことを通知してくれたりします。"
-
-msgid ""
-"You can follow gear items or astronomical subjects, and be notified whenever "
-"there's a new image from a certain CCD, or telescope, or filter, and so on. "
-"Or you can monitor all the new images of a certain galaxy or nebula."
-msgstr ""
-"機材や天体題材にフォローすることができ、それによって、特定のCCDや望遠鏡やフィ"
-"ルターによる新しいイメージのアップロードを知らせてくれます。また、特定の銀河"
-"や星雲の新着の監視も可能です。"
-
-msgid ""
-"As you have undoubtly realized by now, <em>AstroBin</em> is way more than an "
-"image hosting service. It's what the Astrophotography community has needed "
-"for a long time. For years, I have seen amazing images scattered all over "
-"the Internet: general purpose image hosting sites, forums, personal websites "
-"and even temporary places. Some of those images contain data that is too "
-"precious to go wasted in a sea of chaos. <em>AstroBin</em> comes to the "
-"rescue to provide a home and a central hub for astrophotographers all over "
-"the world."
-msgstr ""
-"今では<em>AstroBin</em>が最高の画像ホスティングサービスであることを、あなたは"
-"何の疑いもなく理解しているでしょう。これは、長い間、天体写真コミュニティで必"
-"要としていたものです。長い間、私はインターネットに散らばっていた素晴らしい画"
-"像をみてきました。汎用的な画像ホスティングサイトや掲示板、個人のWebサイトや一"
-"時的なスペースもです。それらの画像のなかには、カオスの海で無駄にするのはもっ"
-"たいないぐらい貴重なデータが含まれていました。<em>AstroBin</em>は世界中の天体"
-"写真家の本拠地とハブを提供しているのです。"
-
-msgid "So, what are you waiting for?"
-msgstr "それでもあなたは、まだ何を待つのでしょう？"
-
-msgid "Sign up now!"
-msgstr "いますぐ登録しよう！"
-
 msgid "Additional information requested"
 msgstr "追加情報を求めます"
 
@@ -3538,6 +3075,11 @@ msgstr "画像に戻る"
 
 msgid "Contains"
 msgstr "説明"
+
+#, fuzzy
+#| msgid "Remove data"
+msgid "Remove ads"
+msgstr "データの削除"
 
 #, python-format
 msgid ""
@@ -3561,11 +3103,22 @@ msgstr ""
 msgid "Histogram"
 msgstr "ヒストグラム"
 
+msgid "Right ascension"
+msgstr ""
+
+#, fuzzy
+#| msgid "Description"
+msgid "Declination"
+msgstr "説明"
+
 msgid "Technical card"
 msgstr "Technical card"
 
 msgid "Frames"
 msgstr "撮影フレーム"
+
+msgid "Basic astrometry details"
+msgstr ""
 
 msgid "RA center"
 msgstr "RA center"
@@ -3585,8 +3138,27 @@ msgstr "秒/pixel"
 msgid "Orientation"
 msgstr "方位"
 
+msgid "(flipped)"
+msgstr ""
+
 msgid "Field radius"
 msgstr "視野半径"
+
+#, fuzzy
+#| msgid "Commercial information"
+msgid "WCS transformation"
+msgstr "販売情報"
+
+msgid "Resolution"
+msgstr "解像度"
+
+msgid "Uncompressed source file"
+msgstr ""
+
+#, fuzzy
+#| msgid "Uploaded"
+msgid "Download"
+msgstr "アップロード済み"
 
 msgid "Remote source"
 msgstr ""
@@ -3599,6 +3171,9 @@ msgstr ""
 
 msgid "Actions"
 msgstr "アクション"
+
+msgid "Upload uncompressed source (XISF/FITS/PSD/TIFF)"
+msgstr ""
 
 msgid "Upload new revision"
 msgstr "新しい修正版をアップロード"
@@ -3614,12 +3189,6 @@ msgstr "ステージングエリアに移す"
 
 msgid "Send to group"
 msgstr ""
-
-msgid "Send to public data pool"
-msgstr "公開データ領域に送る"
-
-msgid "Send to private shared folder"
-msgstr "非公開共有フォルダに送る"
 
 #, fuzzy
 msgid "Delete image and all revisions"
@@ -3647,6 +3216,11 @@ msgstr "禁止ユーザー"
 msgid "Edit"
 msgstr "編集"
 
+#, fuzzy
+#| msgid "Thumbnail"
+msgid "Thumbnails"
+msgstr "サムネイル"
+
 msgid "Watermark"
 msgstr "ウォーターマーク"
 
@@ -3657,6 +3231,18 @@ msgid "Acquisition details"
 msgstr "撮影詳細"
 
 msgid "Plate-solving settings"
+msgstr ""
+
+#, fuzzy
+#| msgid "Attempt to plate-solve again"
+msgid "Restart plate-solving"
+msgstr "星図化を再度試みる"
+
+#, fuzzy
+msgid "Advanced plate-solving settings"
+msgstr "画像の編集（撮影情報の詳細）"
+
+msgid "Restart advanced plate-solving"
 msgstr ""
 
 #, fuzzy
@@ -3711,6 +3297,53 @@ msgstr "画像サイズ"
 msgid "Full size"
 msgstr "ピクセルサイズ"
 
+msgid "Delete this revision?"
+msgstr "この修正版を削除しますか？"
+
+msgid ""
+"This revision will be permanently deleted and cannot be recovered. Are you "
+"sure?"
+msgstr "この修正版は永遠に削除され、戻すことはできません。よろしいでしょうか？"
+
+msgid "Associate XISF/FITS file"
+msgstr ""
+
+msgid ""
+"\n"
+"                        To improve the accuracy of your plate-solution even "
+"further, please upload one of the XISF or\n"
+"                        FITS files from your data set. Such files normally "
+"have date and time headers that will allow\n"
+"                        AstroBin to calculate solar system body ephemerides "
+"and find planets and asteroids in your\n"
+"                        image (provided you also add location information to "
+"your image).\n"
+"                    "
+msgstr ""
+
+#, python-format
+msgid ""
+"\n"
+"                        For maximum accuracy, it's recommended that you use "
+"PixInsight's native and open format XISF.\n"
+"                        Learn more about XISF here: <a href=\"%(xisf_url)s\" "
+"target=\"_blank\">%(xisf_url)s</a>\n"
+"                    "
+msgstr ""
+
+msgid ""
+"\n"
+"                        <strong>Please note:</strong> it's very important "
+"that the XISF or FITS file you upload is\n"
+"                        aligned to your processed image, otherwise the "
+"object annotations will not match.\n"
+"                        To improve your chances at a successful accurate "
+"plate-solution, calibrate your file the usual\n"
+"                        way (dark/bias/flats) but you don't need to stretch "
+"it.\n"
+"                    "
+msgstr ""
+
 msgid "The following people bookmarked this image"
 msgstr "この画像をブックマークした人たちをフォローする"
 
@@ -3742,20 +3375,23 @@ msgstr "現在のあなたのAstroBinインデックスは<strong>%(index)s</str
 msgid "Delete image and all its revisions?"
 msgstr "画像や全ての修正版を削除しますか？"
 
+#, fuzzy
+#| msgid ""
+#| "The image will be permanently deleted and cannot be recovered. All its "
+#| "revisions will be deleted too. Are you sure?"
+msgid ""
+"The image will be moved to the trash, and it can be restored later. All its "
+"revisions will be there too. Continue?"
+msgstr ""
+"イメージは完全に削除されますし戻すこともできません。さらに全ての修正版も削除"
+"されます。よろしいでしょうか？"
+
 msgid ""
 "The image will be permanently deleted and cannot be recovered. All its "
 "revisions will be deleted too. Are you sure?"
 msgstr ""
 "イメージは完全に削除されますし戻すこともできません。さらに全ての修正版も削除"
 "されます。よろしいでしょうか？"
-
-msgid "Delete this revision?"
-msgstr "この修正版を削除しますか？"
-
-msgid ""
-"This revision will be permanently deleted and cannot be recovered. Are you "
-"sure?"
-msgstr "この修正版は永遠に削除され、戻すことはできません。よろしいでしょうか？"
 
 msgid "Delete original image?"
 msgstr "元画像を削除しますか？"
@@ -3790,17 +3426,6 @@ msgid ""
 msgstr ""
 
 msgid ""
-"If this image is the result of your processing of a public data pool, you "
-"can send it the pool so it's displayed there."
-msgstr ""
-"この画像はデータ公開領域のあなたの処理の結果であれば、ここに表示されている画"
-"像をその領域に送ることができます。"
-
-msgid "Use this form to select an existing <strong>public data pool</strong>."
-msgstr ""
-"現在の<strong>公開データ領域</strong>を選ぶために、この項目を使ってください。"
-
-msgid ""
 "Sorry, you cannot send images from your Staging Area to a group. You need to "
 "first promote this image to your Public Area, if you want to do that."
 msgstr ""
@@ -3809,23 +3434,6 @@ msgid ""
 "Use this form to select one of your groups. The list includes all public and "
 "private non-autosubmission groups of which you are the owner or a member."
 msgstr ""
-
-msgid ""
-"If this image is the result of your processing of a private shared folder, "
-"you can send it the folder so it's displayed there."
-msgstr ""
-"もし、このイメージがあなたの非公開共有フォルタでのあなたの処理結果であれば、"
-"あなたはそれを表示するためにそれをそのフォルダーに送る事ができる。"
-
-msgid ""
-"Use this form to select a <strong>private shared folder</strong> you have "
-"created or have been invited to."
-msgstr ""
-"あなたが作成し、招待した<strong>非公開共有フォルダ</strong>を選択するためにこ"
-"の項目を使ってください。"
-
-msgid "You don't have access to any shared private folders."
-msgstr "いくつもの非公開共有フォルダにアクセスしないでください。"
 
 msgid "Sharing mode"
 msgstr "共有モード"
@@ -3875,6 +3483,23 @@ msgstr ""
 "しょう!"
 
 msgid ""
+"Please note: AstroBin is not officially a backup service. So please also "
+"keep additional copies of your file. However, by storing your work here, you "
+"can have some additional peace of mind."
+msgstr ""
+
+#, python-format
+msgid ""
+"Read about how AstroBin stores your files safely on the <a href=\"%(faq_url)s"
+"\">FAQ page</a>."
+msgstr ""
+
+#, fuzzy
+#| msgid "Gear images"
+msgid "Clear"
+msgstr "機材画像"
+
+msgid ""
 "This image is pending moderation and is currently not visible on the front "
 "page or search results."
 msgstr ""
@@ -3901,6 +3526,54 @@ msgid ""
 "feedback on it. When you are satisfied, perhaps after uploading some "
 "revisions, <a href=\"#promote-modal\" data-toggle=\"modal\">promote it</a> "
 "to the <a href=\"%(profile_url)s\">Public Area</a>."
+msgstr ""
+
+msgid "Oh no!"
+msgstr ""
+
+msgid ""
+"\n"
+"            We are very, very sorry, but it appears that your image suffered "
+"a catastrophic data\n"
+"            corruption, and it cannot be retrieved. Hopefully you still have "
+"your file (the information on\n"
+"            this form should provide you with enough context).\n"
+"        "
+msgstr ""
+
+msgid ""
+"\n"
+"            Please use the file input below to upload it again, and then "
+"click on the Save button down\n"
+"            below. All the data you had previously associated to your image "
+"is still here.\n"
+"        "
+msgstr ""
+
+#, fuzzy
+#| msgid "Here's some more reading material to get you started"
+msgid "Here's some detail about the image to give you some context."
+msgstr "ここには、あなたがスタートするための沢山の読み物があります"
+
+#, fuzzy
+#| msgid "Upload"
+msgid "Uploaded"
+msgstr "Upload"
+
+#, fuzzy
+#| msgid "Image upload"
+msgid "Image uploaded"
+msgstr "画像アップロード"
+
+#, fuzzy
+#| msgid "Previously uploaded"
+msgid "Revision uploaded"
+msgstr "前にアップロードしたもの"
+
+msgid "Please wait..."
+msgstr "しばらくお待ちください..."
+
+msgid "AstroBin is processing your thumbnails."
 msgstr ""
 
 msgid "Edit your image: acquisition details"
@@ -4056,16 +3729,31 @@ msgid "Gear used"
 msgstr "使用機材"
 
 #, fuzzy
+msgid "Edit your image: advanced plate-solving settings"
+msgstr "画像の編集（撮影情報の詳細）"
+
+#, fuzzy
+#| msgid "Attempt to plate-solve again"
+msgid "Save and plate-solve again"
+msgstr "星図化を再度試みる"
+
+#, fuzzy
 msgid "Edit your image: plate-solving settings"
 msgstr "画像の編集（撮影情報の詳細）"
 
 #, fuzzy
-msgid "Back to image"
-msgstr "Top に戻る"
-
-#, fuzzy
 msgid "Edit revision"
 msgstr "あなたの場所の編集"
+
+#, fuzzy
+#| msgid "Change the license for this image"
+msgid "Change the thumbnails for this image"
+msgstr "この画像のライセンスを変更"
+
+#, fuzzy
+#| msgid "Edit watermark"
+msgid "Next step: edit watermark"
+msgstr "ウォーターマークを編集"
 
 msgid "Apply a watermark to image"
 msgstr "画像に著作権表示を適用"
@@ -4102,6 +3790,24 @@ msgstr "by <a href=\"%(the_url)s\">%(user)s</a>"
 msgid "Fit to window"
 msgstr "ウィンドウに合わせる"
 
+msgid "Abscissa "
+msgstr ""
+
+msgid "Ordinate"
+msgstr ""
+
+msgid "Ecliptic longitude"
+msgstr ""
+
+msgid "Ecliptic latitude"
+msgstr ""
+
+msgid "Galactic longitude"
+msgstr ""
+
+msgid "Galactic latitude"
+msgstr ""
+
 msgid "Remove"
 msgstr "削除"
 
@@ -4114,14 +3820,11 @@ msgstr "まだ機材をもっていない"
 msgid "Add"
 msgstr "追加"
 
-msgid "You have no messages."
-msgstr "メッセージはありません。"
-
-msgid "Show all messages"
-msgstr "すべてのメッセージを表示"
-
 msgid "No images"
 msgstr "画像なし"
+
+msgid "Only you can see this"
+msgstr ""
 
 msgid "Integration"
 msgstr "総露出時間"
@@ -4136,6 +3839,9 @@ msgid "Views"
 msgstr "表示回数"
 
 msgid "link"
+msgstr ""
+
+msgid "Comment of deleted image not shown."
 msgstr ""
 
 msgid "No results. Sorry."
@@ -4178,6 +3884,9 @@ msgstr "あなたの場所の編集"
 msgid "If this location is missing data, or has incorrect data, please fix it."
 msgstr "もしこの場所がまちがっていたり、不正確であれば、それを直してください。"
 
+msgid "What is this site?"
+msgstr "このサイトとは？"
+
 msgid "Commercial information"
 msgstr "販売情報"
 
@@ -4186,6 +3895,11 @@ msgstr "小売り情報"
 
 msgid "Blog"
 msgstr "ブログ"
+
+#, fuzzy
+#| msgid "Terms of Service"
+msgid "Terms of servic"
+msgstr "利用規約"
 
 msgid ""
 "AstroBin is Copyright &copy; 2010-2012 Salvatore Iovene, All Rights "
@@ -4236,9 +3950,6 @@ msgstr "返信"
 
 msgid "Sending..."
 msgstr "送信中..."
-
-msgid "Error. Try again!"
-msgstr "エラーが発生しました。再試行してください!"
 
 msgid ""
 "Please click on the images that you want to mark as SPAM, then click on the "
@@ -4801,42 +4512,17 @@ msgstr ""
 
 #, fuzzy, python-format
 #| msgid ""
-#| "%(originator)s has published a new image! Check it out at the following "
-#| "url: %(object_url)s"
-msgid ""
-"%(originator)s has published a new image! Check it out at the following url: "
-"<a href=\"%(object_url)s\">%(object_url)s</a>"
-msgstr ""
-"%(originator)sが新しい画像を公開しました！以下のURLをチェックしてくださ"
-"い。%(object_url)s"
-
-#, python-format
-msgid ""
-"%(originator)s has published a new image! Check it out at the following url: "
-"%(object_url)s"
-msgstr ""
-"%(originator)sが新しい画像を公開しました！以下のURLをチェックしてくださ"
-"い。%(object_url)s"
-
-#, python-format
-msgid ""
-"<a href=\"%(object_url)s\"><strong>%(originator)s</strong> has published a "
-"new image.</a>"
-msgstr ""
-"<a href=\"%(object_url)s\"><strong>%(originator)s</strong>が新しい画像を公開"
-"しました。</a>"
-
-#, python-format
-msgid ""
-"<a href=\"%(object_url)s\"><strong>%(originator)s</strong> has published a "
-"new image</a>"
+#| "<a href=\"%(object_url)s\"><strong>%(originator)s</strong> has published "
+#| "a new image</a>"
+msgid "<strong>%(user)s</strong> has published a new image"
 msgstr ""
 "<a href=\"%(object_url)s\"><strong>%(originator)s</strong>が新しい画像を公開"
 "しました！</a>"
 
-#, python-format
-msgid "New image by %(originator)s"
-msgstr "%(originator)sの新着画像"
+#, fuzzy, python-format
+#| msgid "New image of %(subject)s"
+msgid "New image by %(user)s"
+msgstr "%(subject)sの新着画像"
 
 #, fuzzy, python-format
 #| msgid ""
@@ -5004,190 +4690,6 @@ msgstr "通知"
 #, fuzzy
 msgid "Notification Type"
 msgstr "通知"
-
-#, fuzzy, python-format
-msgid ""
-"You are invited to the private shared folder: \"%(folder_name)s\".\n"
-"\n"
-"You can now contribute data and processed images to the folder. You can also "
-"invite more people.\n"
-"\n"
-"Visit the folder at the following url: <a href=\"%(folder_url)s\">"
-"%(folder_url)s</a>"
-msgstr ""
-"あなたは非公開共有フォルダ（\"%(folder_name)s\"）に招待されました。\n"
-"\n"
-"あなたはデータを与えられ、そのフォルダの画像を処理できるようになりました。あ"
-"なたはもっと多くの人々を招待することもできます。\n"
-"\n"
-"以下のURLのフォルダを訪問してください。%(folder_url)s"
-
-#, fuzzy, python-format
-msgid ""
-"You are invited to the private shared folder: \"%(folder_name)s\".\n"
-"\n"
-"You can now contribute data and processed images to the folder. You can also "
-"invite more people.\n"
-"\n"
-"Visit the folder at the following url: %(folder_url)s"
-msgstr ""
-"あなたは非公開共有フォルダ（\"%(folder_name)s\"）に招待されました。\n"
-"\n"
-"あなたはデータを与えられ、そのフォルダの画像を処理できるようになりました。あ"
-"なたはもっと多くの人々を招待することもできます。\n"
-"\n"
-"以下のURLのフォルダを訪問してください。%(folder_url)s"
-
-#, fuzzy, python-format
-msgid ""
-"<a href=\"%(folder_url)s\">You are invited to the private shared folder: "
-"<strong>\"%(folder_name)s.\"</strong></a>"
-msgstr ""
-"<a href=\"%(folder_url)s\">あなたは非公開共有フォルダ"
-"<strong>（\"%(folder_name)s\"）</strong>に招待されました。</a>"
-
-#, fuzzy, python-format
-msgid "You are invited to the private shared folder: %(folder_name)s"
-msgstr "あなたは非公開共有フォルダに招待されました。%(folder_name)s"
-
-#, fuzzy, python-format
-#| msgid ""
-#| "%(user_name)s has added a new processed image to the private shared "
-#| "folder: \"%(folder_name)s\". Check it out at the following url: "
-#| "%(folder_url)s"
-msgid ""
-"%(user_name)s has added a new processed image to the private shared folder: "
-"\"%(folder_name)s\". Check it out at the following url: <a href="
-"\"%(folder_url)s\">%(folder_url)s</a>"
-msgstr ""
-"%(user_name)sは非公開共有フォルダ（\"%(folder_name)s\"）に新しい処理画像が追"
-"加しました。以下のURLをチェックしてください。%(folder_url)s"
-
-#, python-format
-msgid ""
-"%(user_name)s has added a new processed image to the private shared folder: "
-"\"%(folder_name)s\". Check it out at the following url: %(folder_url)s"
-msgstr ""
-"%(user_name)sは非公開共有フォルダ（\"%(folder_name)s\"）に新しい処理画像が追"
-"加しました。以下のURLをチェックしてください。%(folder_url)s"
-
-#, python-format
-msgid ""
-"<a href=\"%(folder_url)s\"><strong>%(user_name)s</strong> has added a new "
-"processed image to the private shared folder: <strong>\"%(folder_name)s.\"</"
-"strong></a>"
-msgstr ""
-"<a href=\"%(folder_url)s\"><strong>%(user_name)s</strong>は新しい処理画像を非"
-"公開共有フォルダ<strong>\"%(folder_name)s\"</strong>に追加しました。</a>"
-
-#, python-format
-msgid ""
-"<a href=\"%(folder_url)s\"><strong>%(user_name)s</strong> has added a new "
-"processed image to the private shared folder: <strong>\"%(folder_name)s.\"</"
-"a>"
-msgstr ""
-"<a href=\"%(folder_url)s\"><strong>%(user_name)s</strong>は非公開共有フォルダ"
-"<strong>\"%(folder_name)s\"に新しい処理画像を追加しました。</a>"
-
-#, python-format
-msgid "New processed image in private shared folder: %(folder_name)s"
-msgstr "非公開領域に新しい処理画像が追加:  %(folder_name)s"
-
-#, fuzzy, python-format
-#| msgid ""
-#| "%(user_name)s has added a new processed image to the public data pool: "
-#| "\"%(pool_name)s\". Check it out at the following url: %(pool_url)s"
-msgid ""
-"%(user_name)s has added a new processed image to the public data pool: "
-"\"%(pool_name)s\". Check it out at the following url: <a href=\"%(pool_url)s"
-"\">%(pool_url)s</a>"
-msgstr ""
-"%(user_name)sはデータ公開領域（\"%(pool_name)s\"）に新しい処理画像を追加しま"
-"した。以下のURLをチェックしてください。%(pool_url)s"
-
-#, python-format
-msgid ""
-"%(user_name)s has added a new processed image to the public data pool: "
-"\"%(pool_name)s\". Check it out at the following url: %(pool_url)s"
-msgstr ""
-"%(user_name)sはデータ公開領域（\"%(pool_name)s\"）に新しい処理画像を追加しま"
-"した。以下のURLをチェックしてください。%(pool_url)s"
-
-#, python-format
-msgid ""
-"<a href=\"%(pool_url)s\"><strong>%(user_name)s</strong> has added a new "
-"processed image to the public data pool: <strong>\"%(pool_name)s.\"</"
-"strong></a>"
-msgstr ""
-"<a href=\"%(pool_url)s\"><strong>%(user_name)s</strong>はデータ公開領域"
-"<strong>（\"%(pool_name)s\"）</strong>に新しい処理画像を追加しました。</a>"
-
-#, python-format
-msgid "New processed image in public data pool: %(pool_name)s"
-msgstr "データ公開領域（%(pool_name)s）に新しい処理画像が追加された。"
-
-#, fuzzy, python-format
-#| msgid ""
-#| "%(user_name)s has added new data to the public pool: \"%(pool_name)s\". "
-#| "Check it out at the following url: %(pool_url)s"
-msgid ""
-"%(user_name)s has added new data to the public pool: \"%(pool_name)s\". "
-"Check it out at the following url: <a href=\"%(pool_url)s\">%(pool_url)s</a>"
-msgstr ""
-"%(user_name)sはデータ共有領域（\"%(pool_name)s\"）に新しいデータが追加しまし"
-"た。以下のURLをチェックしてください。%(pool_url)s"
-
-#, python-format
-msgid ""
-"%(user_name)s has added new data to the public pool: \"%(pool_name)s\". "
-"Check it out at the following url: %(pool_url)s"
-msgstr ""
-"%(user_name)sはデータ共有領域（\"%(pool_name)s\"）に新しいデータが追加しまし"
-"た。以下のURLをチェックしてください。%(pool_url)s"
-
-#, python-format
-msgid ""
-"<a href=\"%(pool_url)s\"><strong>%(user_name)s</strong> has added new data "
-"to the public pool: <strong>\"%(pool_name)s.\"</strong></a>"
-msgstr ""
-"<a href=\"%(pool_url)s\"><strong>%(user_name)s</strong>はデータ公開領域"
-"<strong>（\"%(pool_name)s\"）</strong>に新しいデータを追加しました。</a>"
-
-#, python-format
-msgid "New data in public pool: %(pool_name)s"
-msgstr "データ公開領域（%(pool_name)s）の新しいデータ"
-
-#, fuzzy, python-format
-#| msgid ""
-#| "%(user_name)s has added new data to the private shared folder: "
-#| "\"%(folder_name)s\". Check it out at the following url: %(folder_url)s"
-msgid ""
-"%(user_name)s has added new data to the private shared folder: "
-"\"%(folder_name)s\". Check it out at the following url: <a href="
-"\"%(folder_url)s\">%(folder_url)s</a>"
-msgstr ""
-"%(user_name)sは非公開共有フォルダ（\"%(folder_name)s\"）に新しいデータを追加"
-"しました。以下のURLをチェックしてください。%(folder_url)s"
-
-#, python-format
-msgid ""
-"%(user_name)s has added new data to the private shared folder: "
-"\"%(folder_name)s\". Check it out at the following url: %(folder_url)s"
-msgstr ""
-"%(user_name)sは非公開共有フォルダ（\"%(folder_name)s\"）に新しいデータを追加"
-"しました。以下のURLをチェックしてください。%(folder_url)s"
-
-#, python-format
-msgid ""
-"<a href=\"%(folder_url)s\"><strong>%(user_name)s</strong> has added new data "
-"to the private shared folder: <strong>\"%(folder_name)s.\"</strong></a>"
-msgstr ""
-"<a href=\"%(folder_url)s\"><strong>%(user_name)s</strong>は非公開共有フォルダ"
-"<strong>（\"%(folder_name)s\"）</strong>に新しいデータを追加しました。</a>"
-
-#, python-format
-msgid "New data in private shared folder: %(folder_name)s"
-msgstr "非公開シェアフォルダ（\"%(folder_name)s\"）の新しいデータ"
 
 #, fuzzy
 #| msgid ""
@@ -5456,19 +4958,6 @@ msgstr ""
 msgid "Account activation on"
 msgstr "ここでアカウントの有効化"
 
-#, fuzzy
-#| msgid "User"
-msgid "Username"
-msgstr "ユーザー"
-
-msgid "Email"
-msgstr ""
-
-#, fuzzy
-#| msgid "Password changed"
-msgid "Password"
-msgstr "パスワードの変更"
-
 msgid "Reset password"
 msgstr "パスワードのリセット"
 
@@ -5523,10 +5012,13 @@ msgstr ""
 msgid "Register with AstroBin"
 msgstr "Astrobinを登録"
 
-#, python-format
+#, fuzzy
+#| msgid ""
+#| "By registering with AstroBin, you agree to our <a href=\"%(tos_url)s"
+#| "\">terms of service</a>."
 msgid ""
-"By registering with AstroBin, you agree to our <a href=\"%(tos_url)s\">terms "
-"of service</a>."
+"By registering with AstroBin, you agree to our <a href=\"https://welcome."
+"astrobin.com/terms-of-service\">terms of service</a>."
 msgstr ""
 "AstroBinに登録することで、あなたは我々の<a href=\"%(tos_url)s\">利用規約</a>"
 "に同意します。"
@@ -5560,6 +5052,12 @@ msgstr "ピクセルスケール"
 msgid "Small pixel scale"
 msgstr "ピクセルスケール"
 
+#, fuzzy
+#| msgid ""
+#| "Search for astronomical objects, telescopes or lenses, cameras, filters..."
+msgid "Search for celestial objects, equipment items, users, etc..."
+msgstr "天体名や望遠鏡、レンズ、カメラ、フィルターなどで検索"
+
 #, python-format
 msgid ""
 "<strong>%(total_users)s</strong> users uploaded <strong>%(total_images)s</"
@@ -5588,18 +5086,207 @@ msgstr "CCD vs DLSRの全体の傾向"
 msgid "Global trend of telescope types"
 msgstr "望遠鏡タイプの全体の傾向"
 
-msgid "Here you can activate your free Raw Data Atom subscription."
+#, fuzzy
+#| msgid "About"
+msgctxt "approximately"
+msgid "about"
+msgstr "AstroBinについて"
+
+msgid "View feature comparison"
 msgstr ""
 
 #, fuzzy
-msgid "Activate"
-msgstr "有効"
+#| msgid "Pixel size"
+msgid "Max size"
+msgstr "ピクセルサイズ"
 
-msgid "Subscribe with a secure payment provided by PayPal:"
+#, fuzzy
+msgid "View full res"
+msgstr "ページを表示"
+
+msgid "View full image info"
 msgstr ""
 
-msgid "Buy with a secure payment provided by PayPal:"
+msgid "Basic"
 msgstr ""
+
+#, fuzzy
+#| msgid "Advanced search"
+msgid "Advanced"
+msgstr "詳細検索"
+
+#, fuzzy
+#| msgid "Commercial gear items"
+msgid "Social features"
+msgstr "商業的な機材"
+
+msgid "Plate-solving"
+msgstr ""
+
+#, fuzzy
+#| msgid "Public data pools"
+msgid "Bulk data export"
+msgstr "公開データ領域"
+
+msgid "Hide astronomy ads"
+msgstr ""
+
+msgid "No ads on your pages"
+msgstr ""
+
+msgid "Non-members/free users can view your images in full res"
+msgstr ""
+
+#, fuzzy
+#| msgid "Full resolution"
+msgid "Full size annotations"
+msgstr "最大解像度"
+
+#, fuzzy
+#| msgid "Upload complete!"
+msgid "Upload uncompressed source"
+msgstr "アップロード完了!"
+
+#, fuzzy
+#| msgid "Unlimited images"
+msgid "Undelete images"
+msgstr "無制限"
+
+msgid "year"
+msgstr ""
+
+#, python-format
+msgid ""
+"\n"
+"                %(number)s images, max %(size)s each"
+msgstr ""
+
+#, fuzzy
+#| msgid "Higher resolution"
+msgid "View in original resolution"
+msgstr "高解像度"
+
+#, python-format
+msgid ""
+"Up to %(number)s\n"
+"            revisions/image"
+msgstr ""
+
+msgid "Create/join Groups"
+msgstr ""
+
+msgid "Basic plate-solving"
+msgstr ""
+
+msgid "IOTD / Top Picks"
+msgstr ""
+
+msgid "No ads for others on your pages"
+msgstr ""
+
+msgid "Full-size annotations"
+msgstr ""
+
+msgid "All future features"
+msgstr ""
+
+msgid "In the future"
+msgstr ""
+
+#, fuzzy
+#| msgid "Buy it here"
+msgid "Buy in the Marketplace"
+msgstr "ここで購入"
+
+msgid "Vote in contests"
+msgstr ""
+
+msgid "Analytics"
+msgstr ""
+
+msgid "Bulk image editing"
+msgstr ""
+
+msgid "Pay securely with PayPal"
+msgstr ""
+
+msgid "Want to upgrade from a lower subscription tier?"
+msgstr ""
+
+#, python-format
+msgid ""
+"AstroBin doesn't support subscription upgrades at the moment, but we're "
+"happy to make it happen manually. If you're on a lower subscription tier and "
+"would like to upgrade to <strong>%(name)s</strong>, please just buy it and "
+"then contact us at <a href=\"mailto:astrobin@astrobin.com"
+"\">astrobin@astrobin.com</a> to get a refund for the unused time on your old "
+"subscription. Thanks!"
+msgstr ""
+
+msgid "Pay with a bank transfer"
+msgstr ""
+
+#, python-format
+msgid ""
+"\n"
+"                Prefer to pay via bank transfer? Please make a deposit of "
+"%(currency)s %(amount)s to the following\n"
+"                bank details and then email us at %(email_prefix)s%(email)s"
+"%(email_postfix)s with your username so\n"
+"                we may upgrade your account manually. Thanks!\n"
+"            "
+msgstr ""
+
+#, python-format
+msgid ""
+"\n"
+"                ∞ images, max %(size)s each"
+msgstr ""
+
+#, fuzzy
+#| msgid "Basic information"
+msgid "Basic analytics"
+msgstr "基本情報"
+
+msgid "Buy"
+msgstr ""
+
+#, fuzzy
+#| msgid "You are not allowed to see this page."
+msgid "You are already on this plan"
+msgstr "このページの閲覧を許可されていません。"
+
+#, fuzzy
+#| msgid "Image size"
+msgid "∞ images, ∞ size"
+msgstr "画像サイズ"
+
+msgid "View full res (incl. visitors)"
+msgstr ""
+
+#, fuzzy
+msgid "Full search"
+msgstr "ピクセルサイズ"
+
+#, fuzzy
+msgid "Unlimited revisions"
+msgstr "あなたの場所の編集"
+
+#, fuzzy
+#| msgid "Attempt to plate-solve again"
+msgid "Advanced plate-solving"
+msgstr "星図化を再度試みる"
+
+msgid "Sell in the Marketplace"
+msgstr ""
+
+msgid "Vote/enter contests"
+msgstr ""
+
+#, fuzzy
+#| msgid "Advanced search"
+msgid "Advanced analytics"
+msgstr "詳細検索"
 
 msgid "Subscription process canceled"
 msgstr "登録処理はキャンセルされました"
@@ -5640,9 +5327,6 @@ msgid "week"
 msgstr ""
 
 msgid "month"
-msgstr ""
-
-msgid "year"
 msgstr ""
 
 #, fuzzy
@@ -5688,16 +5372,6 @@ msgstr "年"
 msgid "No trial"
 msgstr "試用でない"
 
-#, python-format
-msgid "%(max_allowed)s images per year "
-msgstr "年間%(max_allowed)s画像"
-
-msgid "Unlimited images"
-msgstr "無制限"
-
-msgid "Buy"
-msgstr ""
-
 msgid "Switch to"
 msgstr "切り替え"
 
@@ -5725,9 +5399,6 @@ msgstr ""
 msgid "Invalid"
 msgstr ""
 
-msgid "Expired"
-msgstr ""
-
 #, fuzzy
 msgid "Cancelled"
 msgstr "キャンセル"
@@ -5740,85 +5411,15 @@ msgstr ""
 
 #, python-format
 msgid ""
-"Auto-renewing subscriptions are not offered anymore on AstroBin. Please "
-"visit the <a href=\"%(url)s\">subscriptions page</a> to see the available "
-"plans, thanks!"
-msgstr ""
-
-#, python-format
-msgid ""
-"\n"
-"                You can use AstroBin for free up to %(max_allowed)s images. "
-"After\n"
-"                that you can upgrade to <strong>Lite</strong> if you have a "
-"limited\n"
-"                yearly output, or <strong>Premium</strong> for a limitless\n"
-"                experience.  Paying members will not see ads, and "
-"everybody,\n"
-"                including non-paying members, have access to all social "
-"features of\n"
-"                AstroBin.\n"
-"                "
-msgstr ""
-
-#, python-format
-msgid ""
-"\n"
-"                As a user of <strong>AstroBin Free</strong>, you may have up "
-"to\n"
-"                %(max_allowed)s images at the same time. You can delete some "
-"images\n"
-"                to make room for new ones, if you want. For instance you "
-"can\n"
-"                maintain a window of your latest %(max_allowed)s images, or "
-"your\n"
-"                best ones.\n"
-"                "
-msgstr ""
-
-#, python-format
-msgid ""
-"\n"
-"                As a user of <strong>AstroBin Lite</strong>, instead, you "
-"may have\n"
-"                up to %(max_allowed)s images at the same time, per each year "
-"of\n"
-"                your membership. You may replace images uploaded within the "
-"current\n"
-"                subsciption period while images uploaded prior to that can "
-"only be\n"
-"                deleted. Every year that you renew your membership, you get\n"
-"                %(max_allowed)s new image credits.\n"
-"                "
+"This subscription is not offered anymore on AstroBin. Please visit the <a "
+"href=\"%(url)s\">subscriptions page</a> to see the available plans, thanks!"
 msgstr ""
 
 msgid ""
-"\n"
-"                As a user of <strong>AstroBin Premium</strong>, instead, "
-"there are\n"
-"                no limitations whatsoever in the number of images you can "
-"upload.\n"
-"                "
+"If you would like to renew your subscription, please visit this page again "
+"after\n"
+"                        your current subscription's expiration date:"
 msgstr ""
-
-msgid ""
-"<strong>AstroBin Raw Data</strong> allows you to store your raw files "
-"(<strong>FIT</strong> and <strong>digital camera raw</strong>) on AstroBin. "
-"We will keep them neatly organized, and you will have a safe backup of all "
-"your work, including calibration files."
-msgstr ""
-
-#, python-format
-msgid ""
-"Learn more by reading <a href=\"%(rawdata_url)s\">a short introduction.</a>"
-msgstr ""
-
-msgid "Here you can deactivate your free Raw Data Atom subscription."
-msgstr ""
-
-#, fuzzy
-msgid "Deactivate"
-msgstr "有効"
 
 msgid ""
 "Your subscription is either cancelled or not active yet. If you want to "
@@ -5847,9 +5448,6 @@ msgstr ""
 msgid "You cannot switch to this plan."
 msgstr "このページの閲覧を許可されていません。"
 
-msgid "Thank you for supporting AstroBin!"
-msgstr "AstoBinをサポートいただけてありがとうございます。"
-
 #, fuzzy
 msgid "Back to the plans"
 msgstr "Top に戻る"
@@ -5862,6 +5460,9 @@ msgid ""
 "from PayPal. Your subscription should be active within a few minutes!"
 msgstr ""
 
+msgid "Thank you for supporting AstroBin!"
+msgstr "AstoBinをサポートいただけてありがとうございます。"
+
 msgid "Your active subscription plans"
 msgstr ""
 
@@ -5869,118 +5470,10 @@ msgstr ""
 msgid "Your inactive subscription plans"
 msgstr "AstroBin Raw Data"
 
-msgid "Limited offer for you!"
-msgstr ""
-
-msgid ""
-"For a limited time, you are personally offered AstroBin Premium for one "
-"year, at\n"
-"                            a sizeable discount. Don't miss this opportunity!"
-msgstr ""
-
-#, fuzzy
-msgid "AstroBin Premium subscription plans"
-msgstr "AstroBin Questions"
-
-#, python-format
-msgid ""
-"\n"
-"                    You can use AstroBin for free up to %(max_allowed)s "
-"images. After\n"
-"                    that you can upgrade to <strong>Lite</strong> if you "
-"have a limited\n"
-"                    yearly output, or <strong>Premium</strong> for a "
-"limitless\n"
-"                    experience.  Paying members will not see ads, and "
-"everybody,\n"
-"                    including non-paying members, have access to all social "
-"features of\n"
-"                    AstroBin.\n"
-"                    "
-msgstr ""
-
-#, python-format
-msgid ""
-"\n"
-"                    As a user of <strong>AstroBin Free</strong>, you may "
-"have up to\n"
-"                    %(max_allowed)s images at the same time. You can delete "
-"some images\n"
-"                    to make room for new ones, if you want. For instance you "
-"can\n"
-"                    maintain a window of your latest %(max_allowed)s images, "
-"or your\n"
-"                    best ones.\n"
-"                    "
-msgstr ""
-
-#, python-format
-msgid ""
-"\n"
-"                    As a user of <strong>AstroBin Lite</strong>, instead, "
-"you may have\n"
-"                    up to %(max_allowed)s images at the same time, per each "
-"year of\n"
-"                    your membership. You may replace images uploaded within "
-"the current\n"
-"                    subsciption period while images uploaded prior to that "
-"can only be\n"
-"                    deleted. Every year that you renew your membership, you "
-"get\n"
-"                    %(max_allowed)s new image credits.\n"
-"                    "
-msgstr ""
-
-msgid ""
-"\n"
-"                    As a user of <strong>AstroBin Premium</strong>, instead, "
-"there are\n"
-"                    no limitations whatsoever in the number of images you "
-"can upload.\n"
-"                    "
-msgstr ""
-
-#, fuzzy
-msgid "AstroBin Raw Data subscription plans"
-msgstr "AstroBin Raw Data"
-
-msgid "Here's a short description of each plan:"
-msgstr ""
-
-msgid ""
-"This plan is free! Choose it to share a small amount of data with other "
-"users."
-msgstr ""
-
-msgid ""
-" Choose this plan if you want to keep your expenses to a minimum, but still "
-"want the possibity to share your FIT and digital camera raw files with your "
-"friends. You can also participate to public data pools and contribute to the "
-"deepest deep sky images ever created, and you will always know that you "
-"support AstroBin."
-msgstr ""
-
-msgid ""
-"Choose this plan if you have started out in the recent year or two, or you "
-"don't want to share and backup your calibration files. Enjoy a lot of room "
-"for a convenient price."
-msgstr ""
-
-msgid ""
-"Choose this plan if you have several years worth of data. You will probably "
-"have enough room for all your calibration files, and will enjoy the full "
-"potential of the platform."
-msgstr ""
-
-msgid ""
-"Choose this plan if you have a massive amount of raw data that you want to "
-"share and backup securely online."
-msgstr ""
-
 #, fuzzy
 msgid ""
-"PS: are you interested in larger plans? <a href=\"/contact/\">Let us know!</"
-"a>"
+"PS: are you interested in larger plans?\n"
+"                <a href=\"/contact/\">Let us know!</a>"
 msgstr ""
 "ここで質問がカバーできない場合、我々に<a href=\"/contact/\">問合せ</a>してく"
 "ださい。"
@@ -5993,13 +5486,6 @@ msgstr ""
 
 msgid "This list is currently empty."
 msgstr ""
-
-msgid ""
-"The following Terms are only available in English. It is your responsibility "
-"to comprehend them."
-msgstr ""
-"以下の文章は英語でのみ用意されています。あなたはそれを理解する責任がありま"
-"す。"
 
 #, fuzzy
 msgid "Last 6 months"
@@ -6032,22 +5518,18 @@ msgid ""
 "<strong>%(max_allowed)s</strong>."
 msgstr ""
 
-msgid "Would you like to upgrade?"
-msgstr "アップグレードしたいですか？"
-
-#, fuzzy, python-format
-msgid ""
-"You have used <strong>%(premium_counter)s</strong> images of your allowed "
-"<strong>%(max_allowed)s</strong> for the current subscription period."
-msgstr ""
-" あなたは現在、<strong>%(max_allowed)s</strong>のうち<strong>"
-"%(premium_counter)s</strong> の画像を利用中です。"
-
 #, fuzzy
-msgid "Thank you for being a premium member! Enjoy your unlimited images."
+msgid ""
+"Thank you for being a premium member! Enjoy your unlimited images.\n"
+"                        "
 msgstr ""
 "プレミアムメンバーに登録してくれてありがとうございます。無制限のアップロード"
 "を楽しんでください。"
+
+#, fuzzy
+#| msgid "Would you like to upgrade?"
+msgid "Would you like to upgrade to a higher plan?"
+msgstr "アップグレードしたいですか？"
 
 msgid "Upload as a work in progress"
 msgstr "製作中の作品としてアップロード"
@@ -6055,11 +5537,19 @@ msgstr "製作中の作品としてアップロード"
 msgid "Uploading..."
 msgstr "アップロード中..."
 
-#, python-format
+#, fuzzy
+#| msgid ""
+#| "Use this button to upload an image to the <strong>Staging Area</strong>. "
+#| "It's perfect for works in progress that you want to share on Internet "
+#| "forums. Read more in the <a href=\"%(faq_url)s#6\">FAQ</a>."
 msgid ""
-"Use this button to upload an image to the <strong>Staging Area</strong>. "
-"It's perfect for works in progress that you want to share on Internet "
-"forums. Read more in the <a href=\"%(faq_url)s#6\">FAQ</a>."
+"Use this button to upload an image to the\n"
+"                                        <strong>Staging Area</strong>. It's "
+"perfect for works in progress that you want\n"
+"                                        to share on Internet forums. Read "
+"more in the\n"
+"                                        <a href=\"https://welcome.astrobin."
+"com/faq\">FAQ</a>."
 msgstr ""
 "<strong>ステージング領域</strong>にイメージをアップロードするためにこのボタン"
 "を使ってください。あなたがインターネット掲示板に共有したいような進行中の作品"
@@ -6068,96 +5558,28 @@ msgstr ""
 msgid "Upload as a finished image"
 msgstr "最終化した画像としてアップロード"
 
-#, python-format
+msgid "Do not notify followers"
+msgstr ""
+
+#, fuzzy, python-format
+#| msgid ""
+#| "Use this button to upload an image to the <strong>Public Area</strong>. "
+#| "It will be displayed in <a href=\"%(profile_url)s\">your profile</a> and "
+#| "here on the home page. You can <a href=\"%(flickr_url)s\">import from "
+#| "Flickr</a> too."
 msgid ""
-"Use this button to upload an image to the <strong>Public Area</strong>. It "
-"will be displayed in <a href=\"%(profile_url)s\">your profile</a> and here "
-"on the home page. You can <a href=\"%(flickr_url)s\">import from Flickr</a> "
-"too."
+"Use this button to upload an image to the\n"
+"                                        <strong>Public Area</strong>. It "
+"will be displayed in\n"
+"                                        <a href=\"%(profile_url)s\">your "
+"profile</a> and here on the home page. You can\n"
+"                                        <a href=\"%(flickr_url)s\">import "
+"from Flickr</a> too."
 msgstr ""
 "<strong>公開エリア</strong>に画像をアップロードするために、このボタンを使って"
 "ください。<a href=\"%(profile_url)s\">あなたのプロフィール</a>やホームページ"
 "に表示されます。<a href=\"%(flickr_url)s\">Flickrからインポート</a>を利用する"
 "こともできます。"
-
-msgid "Raw data upload"
-msgstr "Rawデータのアップロード"
-
-msgid ""
-"You have no more space left on your Raw Data account. Please delete some "
-"files to make room, or upgrade your account."
-msgstr ""
-"あなたはRawデータを保管するスペースがなくなっています。いくつかのファイルを削"
-"除するか、あなたのアカウントをアップグレードしてください。"
-
-msgid "Use the button below to choose files"
-msgstr "ファイルを選択するために以下のボタンを使ってください"
-
-msgid "Drop your raw data here"
-msgstr "あなたのRawデータをここにドロップしてください"
-
-msgid "Accepted file types: FIT and digital camera raw files"
-msgstr "許可されたファイル形式：FITとデジカメのRawファイル"
-
-msgid "Filename"
-msgstr "ファイル名"
-
-msgid "Choose files"
-msgstr "ファイルの選択"
-
-msgid "Reset"
-msgstr "リセット"
-
-msgid "Start upload"
-msgstr "アップロード開始"
-
-msgid "Go to your Raw Data Library."
-msgstr "あなたのRawデータライブラリに行く"
-
-msgid ""
-"Your Raw Data subscription is not active, or it has expired. If you have "
-"just subscribed, please wait for a few minutes. Thanks for your patience!"
-msgstr ""
-"あなたのRawデータの申し込みが完了していないか、期限が切れています。もしあなた"
-"が経った今、申し込みをしたのであれば、数分待ってください。待ってくれてありが"
-"とう。"
-
-#, python-format
-msgid "Go to the Raw Data <a href=\"%(plans_url)s\">plans page</a>."
-msgstr "Rawデータの<a href=\"%(plans_url)s\">計画ページ</a>に行く"
-
-msgid ""
-"Did you know that AstroBin can host your FIT and digital camera raw files "
-"too?"
-msgstr ""
-"AstroBinがFITやデジタルカメラのRawファイルもホストできることを知っていました"
-"か？"
-
-#, python-format
-msgid ""
-"Have a look at <a href=\"%(rawdata_url)s\">AstroBin Raw Data</a> if you want "
-"to safely store all your raw files, and have them neatily organized for "
-"future reference!"
-msgstr ""
-"もし、あなたの全てのRawファイルを安全に保管したいのであれば、<a href="
-"\"%(rawdata_url)s\">AstroBin Raw Data</a>をみてください。そこでは、それらは今"
-"後の参照のためにきちんと整理されています!"
-
-msgid "Raw files"
-msgstr "Rawファイル"
-
-msgid "Upload started, please wait..."
-msgstr "アップロードを開始しました。しばらく待ってください..."
-
-msgid ""
-"One ore more files were ignored because they did not look like FIT or "
-"digital camera raw files."
-msgstr ""
-"いくつかのファイルはFITやデジタルカメラのRawファイルのようでなかったので無視"
-"されました。"
-
-msgid "Upload complete!"
-msgstr "アップロード完了!"
 
 msgid "Your API Keys"
 msgstr "あなたのAPIキー"
@@ -6194,9 +5616,6 @@ msgstr ""
 
 msgid "The user was banned."
 msgstr ""
-
-msgid "Thank you!"
-msgstr "致谢"
 
 #, python-format
 msgid "%(user)s's bookmarks"
@@ -6261,6 +5680,50 @@ msgstr ""
 "あなたの処理作業中の画像（あなたにしかみえません）が存在します。<em>共有</em>"
 "メニューを使って、それらを共有することによって個々の画像を人々にみせることが"
 "できます。"
+
+msgid ""
+"These are your \"deleted\" images: only you can see this list. Click the "
+"images you want to\n"
+"            restore, and then use the button below to confirm."
+msgstr ""
+
+#, python-format
+msgid ""
+"\n"
+"                    We are very, very sorry, but it appears that some of "
+"your images suffered a catastrophic data\n"
+"                    corruption, and cannot be retrieved. Please read more <a "
+"href=\"%(data_corruption_url)s\">here</a>.\n"
+"                "
+msgstr ""
+
+msgid ""
+"\n"
+"                    Please click on the thumbnails stuck with the hourglass "
+"icon to upload the image files that you\n"
+"                    still have on your computer or backups to their pages "
+"again.\n"
+"                "
+msgstr ""
+
+msgid ""
+"\n"
+"                    The data associated to your affected images, such as "
+"title, description, equipment used, acquisition\n"
+"                    details, comments, likes, bookmarks, and so on, is still "
+"intact and safe.\n"
+"                "
+msgstr ""
+
+msgid ""
+"\n"
+"                    AstroBin would like to offer you its sincerest "
+"apologies. :(\n"
+"                "
+msgstr ""
+
+msgid "Okay, don't show this again"
+msgstr ""
 
 msgid "These images don't have enough data. It's a shame..."
 msgstr "これらの画像は十分なデータを持っていません。それではみっともないです。"
@@ -6346,9 +5809,6 @@ msgid ""
 "All the properties of this claim will be deleted and cannot be recovered!"
 msgstr "この主張の全ての項目は削除され、元に戻すことはできないでしょう。"
 
-msgid "Please wait..."
-msgstr "しばらくお待ちください..."
-
 #, fuzzy
 msgid "Delete account"
 msgstr "会話を削除"
@@ -6367,6 +5827,53 @@ msgstr "あなたの基本情報を編集"
 
 msgid "Edit your commercial information"
 msgstr "あなたの商売情報を編集"
+
+#, fuzzy
+#| msgid "Uploaded"
+msgid "Download your data"
+msgstr "アップロード済み"
+
+msgid ""
+"You can download all your data off AstroBin, including original uploads, all "
+"revisions, and information such as description, gear used, acquisition "
+"details, and so on."
+msgstr ""
+
+#, fuzzy
+#| msgid "Request from"
+msgid "Request download"
+msgstr "からの依頼"
+
+msgid "Your past requests"
+msgstr ""
+
+#, fuzzy
+#| msgid "Request from"
+msgid "Request time"
+msgstr "からの依頼"
+
+#, fuzzy
+msgid "File size"
+msgstr "ピクセルサイズ"
+
+msgid "There doesn't seem to be anything here."
+msgstr ""
+
+msgid "Quota exceeded"
+msgstr ""
+
+msgid ""
+"To prevent excessive usage of server resources, you can only request one "
+"data download per 24 hour period. If you believe your download is stuck, "
+"please email us at <a href=\"mailto:astrobin@astrobin.com"
+"\">astrobin@astrobin.com</a>."
+msgstr ""
+
+msgid ""
+"Please keep in mind that it could take several hours for your download to be "
+"ready, depending on the number and size of your images, and how busy the "
+"servers are at the moment."
+msgstr ""
 
 msgid "Edit your astrophotography gear"
 msgstr "あなたの天体写真機材を編集"
@@ -6462,8 +5969,13 @@ msgstr ""
 "あいにく今は、Flickrから写真をインポートするためはJavascriotをONにする必要が"
 "あります。"
 
-msgid "Sorry, but importing from Flickr is reserved to AstroBin Premium users."
+msgid ""
+"Sorry, but importing from Flickr is reserved to AstroBin Premium and "
+"Ultimate users."
 msgstr ""
+
+msgid "Would you like to upgrade?"
+msgstr "アップグレードしたいですか？"
 
 msgid "Click to select the photos you want to import"
 msgstr "インポートしたい写真を選んでクリック"
@@ -6486,18 +5998,6 @@ msgstr ""
 "かかるかもしれません！"
 
 #, fuzzy
-#| msgid ""
-#| "Done! Go to <a href=\\\"/me\\\">your profile</a> to see the new pictures "
-#| "(and keep an eye on your notifications)!"
-msgid ""
-"Done! Go to <a href=\\\"/users/\" + username + \"/?staging&sub=uploaded\\"
-"\">your staging gallery</a> to see the new pictures (and keep an eye on your "
-"notifications)!"
-msgstr ""
-"完了しました! 新しい画像（あなたの通知）をみるために<a href=\\\"/me\\\">あな"
-"たのプロフィール</a>に行ってください。"
-
-#, fuzzy
 msgid "Subscription"
 msgstr "説明"
 
@@ -6518,6 +6018,12 @@ msgstr "公開エリア"
 msgid "Staging Area"
 msgstr "ステージングエリア"
 
+msgid "Corrupted"
+msgstr ""
+
+msgid "Trash"
+msgstr ""
+
 #, fuzzy
 #| msgid "Find images"
 msgid "Liked images"
@@ -6535,6 +6041,19 @@ msgstr ""
 #, fuzzy
 msgid "Add/remove images"
 msgstr "いくつかの画像"
+
+#, fuzzy
+#| msgid "Quick search"
+msgid "Quick edit"
+msgstr "クイック検索"
+
+msgid "Key/value pairs"
+msgstr ""
+
+#, fuzzy
+#| msgid "quote selected"
+msgid "Restore selected"
+msgstr "引用を選択済み"
 
 msgid ""
 "Click on the images to include them in this collection (and click again to "
@@ -6555,6 +6074,11 @@ msgid ""
 msgstr ""
 "この画像は永遠に削除され、戻すことはできません。それの修正版は削除されないで"
 "しょう。よろしいでしょうか？"
+
+msgid ""
+"The following images do not have the key/value tag chosen to order this "
+"collection, so they are shown as unsorted here."
+msgstr ""
 
 msgid "This collection contains no images."
 msgstr ""
@@ -6578,6 +6102,9 @@ msgid "Do you want to create a collection now?"
 msgstr ""
 
 msgid "This user does not have any collections."
+msgstr ""
+
+msgid "Quick edit: key/value tags"
 msgstr ""
 
 #, fuzzy
@@ -6647,6 +6174,12 @@ msgstr "秒/pixel"
 
 msgid "Telescope type"
 msgstr "望遠鏡のタイプ"
+
+#, python-format
+msgid ""
+"Sorry, this filter requires an <a href=\"%(url)s\">AstroBin Ultimate</a> "
+"subscription."
+msgstr ""
 
 #, fuzzy
 #| msgid "Select all"
@@ -6816,6 +6349,9 @@ msgstr "カタディオプトリック式: シュミットカゼクレイン"
 msgid "ACF Schmidt-Cassegrain"
 msgstr "カタディオプトリック式: ACF シュミットカゼクレイン"
 
+msgid "Rowe-Ackermann Schmidt astrograph"
+msgstr ""
+
 msgid "minutes"
 msgstr "分"
 
@@ -6847,20 +6383,16 @@ msgstr ""
 "に取り込みためには256色以下に下げる必要があります。"
 
 msgid ""
-"You uploaded a pretty large file. For that reason, AstroBin could not verify "
-"that it's a valid image."
-msgstr ""
-
-msgid ""
 "There was one or more errors processing the form. You may need to scroll "
 "down to see them."
 msgstr ""
 "フォームの処理で、いくつかのエラーが発生しました。画面をスクロールして、それ"
 "を確認してください。"
 
-msgid ""
-"Form saved. A new plate-solving process will start when you visit your image "
-"again."
+msgid "Form saved. A new plate-solving process will start now."
+msgstr ""
+
+msgid "Form saved. A new advanced plate-solving process will start now."
 msgstr ""
 
 msgid "Fill in one session, before adding more."
@@ -6908,6 +6440,10 @@ msgstr ""
 #, fuzzy
 msgid "Collection updated!"
 msgstr "場所"
+
+#, fuzzy
+msgid "Images updated!"
+msgstr "画像サイズ"
 
 #, fuzzy
 msgid "Collection deleted!"
@@ -6966,9 +6502,6 @@ msgstr "平均月齢"
 msgid "Mean SQM"
 msgstr "平均SQM"
 
-msgid "Resolution"
-msgstr "解像度"
-
 msgid "English"
 msgstr "英語"
 
@@ -6976,6 +6509,10 @@ msgid "Image deleted."
 msgstr "イメージを削除しました。"
 
 msgid "Revision deleted."
+msgstr "修正版を削除しました。"
+
+#, fuzzy
+msgid "Original version deleted!"
 msgstr "修正版を削除しました。"
 
 #, fuzzy
@@ -6989,6 +6526,991 @@ msgstr "公開エリアを宣伝する"
 #, python-format
 msgid "%s topics deleted"
 msgstr ""
+
+msgid ""
+"AstroBin is preparing your data for download. Please check this page again "
+"in a while: the more images you have, the more time it will take."
+msgstr ""
+
+#~ msgid "created a new public data pool"
+#~ msgstr "新しい公開データ領域が作られた"
+
+#~ msgid "added new data to public data pool"
+#~ msgstr "新しい公開データ領域が追加された"
+
+#~ msgid "added a new processed image to public data pool"
+#~ msgstr "公開データ領域に新しい処理済み画像が追加された"
+
+#~ msgid "Affiliates"
+#~ msgstr "アフィリエイト"
+
+#~ msgid "The following companies support AstroBin."
+#~ msgstr "以下の会社はAstoBinをサポートしています。"
+
+#~ msgid "AstroBin Raw Data"
+#~ msgstr "AstroBin Raw Data"
+
+#~ msgid "Raw data"
+#~ msgstr "Rawデータ"
+
+#~ msgid "Raw data library"
+#~ msgstr "Rawデータライブラリー"
+
+#~ msgid "Private shared folders"
+#~ msgstr "非公開共有フォルダー"
+
+#~ msgid "Frequently Asked Questions"
+#~ msgstr "FAQ"
+
+#~ msgid "Is this website for free?"
+#~ msgstr "このWebサイトは無料ですか？"
+
+#~ msgid "Are there any limits on how large and how many images I can upload?"
+#~ msgstr "アップロードする画像にはファイル容量や数に制限はありますか？"
+
+#~ msgid "What image formats are supported?"
+#~ msgstr "どの画像形式をサポートしていますか？"
+
+#~ msgid "Is my data safe on AstroBin?"
+#~ msgstr "AstroBinでの自分のデータは安全ですか？"
+
+#~ msgid ""
+#~ "I've seen beautiful images on this site. I'm not worthy of posting mine!"
+#~ msgstr ""
+#~ "このサイトですごく美しい画像をみつけました。私の画像を投稿するのを躊躇しま"
+#~ "す！"
+
+#~ msgid "What's the deal with the Staging Area and the Public Area?"
+#~ msgstr "ステージングエリアと公開エリアの詳細を教えてください。"
+
+#~ msgid "Why was AstroBin created?"
+#~ msgstr "どうしてAstroBinを始めたのですか？"
+
+#~ msgid "What are the plans for the future?"
+#~ msgstr "将来のプランを教えてください。"
+
+#~ msgid "How can I format my comments?"
+#~ msgstr "自分のコメントをフォーマット化することはできますか？"
+
+#~ msgid "How is the AstroBin index calculated?"
+#~ msgstr "AstroBinインデックスはどのように計算されていますか？"
+
+#~ msgid "I received some Likes, why is my AstroBin index not updated?"
+#~ msgstr ""
+#~ "Likeをもらったのですが、自分のAstroBinインデックスが更新されないのは何故で"
+#~ "すか？"
+
+#~ msgid "How is the Image of the Day selected?"
+#~ msgstr "Image of the Dayはどのように選ばれますか？"
+
+#~ msgid "... and their answers!"
+#~ msgstr "我々からの回答"
+
+#~ msgid ""
+#~ "No. A free account will let you upload up to 10 images, and partake in "
+#~ "all social activities. For unlimited storage, you will need a premium "
+#~ "subscription."
+#~ msgstr ""
+#~ "出来ません。無料アカウントでは10画像以上をアップグレードすることができませ"
+#~ "ん。容量を解除するために、プレミアム会員になる必要があります。"
+
+#~ msgid ""
+#~ "<strong>NO!</strong> If you are a premium member, on AstroBin you can "
+#~ "upload as many images as you want, and as large as you want. In fact, "
+#~ "full size images are encouraged!"
+#~ msgstr ""
+#~ "<strong>いいえ。</strong> もし、プレミアムメンバーであれば、あなたがアップ"
+#~ "ロードする画像の枚数や容量に制限はありません。事実、フルサイズの画像が推奨"
+#~ "されています。"
+
+#~ msgid ""
+#~ "AstroBin will accept JPEG, PNG and GIF. Animated GIF is supported too."
+#~ msgstr ""
+#~ "AstroBinはJPEGやPNG、GIFファイル形式を許可しています。アニメーションGIFも"
+#~ "サポートされてます！"
+
+#~ msgid ""
+#~ "Absolutely. There are multiple ways in which AstroBin can store your data "
+#~ "very safely. First of all, the images you upload are stored on a highly "
+#~ "durable, highly available, redundant backend. The durability of the "
+#~ "storage backend is 99.999999999 percent over a given year. This means "
+#~ "that if you upload 10,000 images, you can expect to lose one image to "
+#~ "data corruption once in 10,000,000 year. The images are duplicated across "
+#~ "two different physical servers, for protection against natural disasters."
+#~ msgstr ""
+#~ "絶対に大丈夫です。AstroBinはあなたのデータをとても安全に保管しておく複数の"
+#~ "方法を持っています。まずはじめに、あなたがアップロードした画像は高耐久性か"
+#~ "つ高可用性かつ冗長化されたストレージシステムにて保管されます。そのストレー"
+#~ "ジは年間で99.999999999％の耐久性を有しています。これは、もしあたなが毎年1"
+#~ "万の画像をアップロードした場合、1000万年に1回、1つの画像ファイルしか破損し"
+#~ "ないことを意味しています。画像は自然災害に対応するために２つの違う物理サー"
+#~ "バーに分けて保管されています。"
+
+#~ msgid ""
+#~ "The actual website, instead, is hosted on a Virtual Machine, so, in case "
+#~ "of severe hardware failure, it can be redeployed to a different server in "
+#~ "a matter of 15 minutes."
+#~ msgstr ""
+#~ "実際のWebサイトは複数のバーチャルマシンにホストされていて、ハードウエアに"
+#~ "障害が発生した場合にも15分以内に別のサーバーに再デプロイされます。"
+
+#~ msgid ""
+#~ "Finally, the database that powers AstroBin (in fact, the whole Virtual "
+#~ "Machine) is backed up daily. In case of severe data loss, the website "
+#~ "will be quickly restored to a snapshot that's never older than 24 hours."
+#~ msgstr ""
+#~ "最終的には、AstroBin（事実、全てバーチャルマシンで構成されています）のデー"
+#~ "タベースは毎日バックアップをとっています。データ破損が発生した場合、Webサ"
+#~ "イトは最大24時間前のスナップショットから速やかにリストアされます。"
+
+#~ msgid ""
+#~ "That said, you should be aware that AstroBin is not a backup service, and "
+#~ "although your data is very safe in our hands, we cannot legally take "
+#~ "responsibility in the event of loss, however unlikely it is. Always keep "
+#~ "a copy of your image on your computer."
+#~ msgstr ""
+#~ "そうは言っても、AstroBinはバックアップサービスではないことを注意する必要が"
+#~ "ありま。そして、あなたのデータを我々の手で非常に安全に管理していますが、損"
+#~ "失が発生した場合には我々は法的な責任を負う事はできません。常に、あなたのPC"
+#~ "にはあなたの画像のコピーを置いておいてください。"
+
+#~ msgid ""
+#~ "Nonsense. AstroBin has <strong>not</strong> been made to showcase "
+#~ "beautiful image, but to give everybody an opportunity to contribute to a "
+#~ "vast and evergrowing effort of centralization and indexing of important "
+#~ "data. That 30 minute picture of M31 you took last night between the "
+#~ "clouds <em>belongs</em> here! Don't be shy and post it!"
+#~ msgstr ""
+#~ "気にしないで大丈夫です。AstroBinは美しい画像のショーケースには<strong>した"
+#~ "くはない</strong>です、しかし、皆の大切なデータのインデックス化や集中化へ"
+#~ "の努力に貢献する機会を皆に与えたいです。昨夜、雲の合間に30分だけ撮影した"
+#~ "M31もここには<em>あります</em>。恥ずかしがらなくても大丈夫です。"
+
+#~ msgid ""
+#~ "On AstroBin you have two places for our images. The Staging Area is where "
+#~ "you can upload images that you want to quickly share on forums, mailing "
+#~ "lists or social networks. The days of scaling down and compressing your "
+#~ "image so you can upload it to a forum for feedback and critique are over! "
+#~ "Just upload to AstroBin's Staging Area, and send the link to anyone you "
+#~ "want. The image will be visible only to the intended recipients, and "
+#~ "won't appear on your profile or AstroBin's home page."
+#~ msgstr ""
+#~ "AstroBinでは我々の画像を2つの場所に持っています。ステージングエリアは"
+#~ "フォーラムやメーリングリスト、SNSに素早くシェアしたいときに画像をアップ"
+#~ "ロードできるところです。フィードバックや批評を得るためにフォーラムに投稿す"
+#~ "るために画像を縮小したり圧縮したりする時代は終わりました。画像は指定した受"
+#~ "信者だけに見えるようになりますし、あなたのプロフィールやAstroBinのホーム"
+#~ "ページも表示されません。"
+
+#~ msgid ""
+#~ "The Public Area, instead, is for your finished products. After you have "
+#~ "received feedback on your favorite forum, you can promote an image from "
+#~ "the Staging Area to the Public Area, and it will appear on your profile. "
+#~ "Remember that you can also move images back and forth from one Area to "
+#~ "the other as many times as you want!"
+#~ msgstr ""
+#~ "公開エリアはフィニッシュした画像に利用します。お気に入りのフォーラムで"
+#~ "フィードバックを受け取ったあとでステージングエリアから公開エリアに画像を移"
+#~ "動することができます。公開エリアとステージングエリアを何度も往復できること"
+#~ "も忘れないようにしてくださいね。"
+
+#~ msgid ""
+#~ "AstroBin was born out of the desire to end something that had been going "
+#~ "on for too long: the waste of incredible material to the sea of chaos "
+#~ "that the Internet can be. For years, fantastic astrophotographs have "
+#~ "beeen uploaded to Internet Forums, often with little or no data, or to "
+#~ "general purpose image hosting websites, invariably with no data attached."
+#~ msgstr ""
+#~ "長期間にわたってインターネットというカオスの海へ大量のゴミを生み出していた"
+#~ "ことを終わらせたいという希望をもってAstroBinは生まれました。何年もの間、素"
+#~ "晴らしい天体写真家たちはインターネットの掲示板に投稿してきたが、多くの場"
+#~ "合、ほとんどもしくは全くデータが添付されていなかったり、汎用の画像ホスティ"
+#~ "ングサイトを利用していました。"
+
+#~ msgid ""
+#~ "Such an image would be seen by some people, then quickly forgotten, and "
+#~ "reduced to nothing more than a bunch of pixel in the giant wasteland of "
+#~ "the Internet."
+#~ msgstr ""
+#~ "そのような画像は、何人かの人に見られ、すぐに忘れ去られ、インターネットの巨"
+#~ "大な荒野でピクセルの束となって消えていくだろう。"
+
+#~ msgid ""
+#~ "This should not be allowed to happen. AstroBin is the response: an effort "
+#~ "to host, collect, index and categorize the output of the "
+#~ "astrophotographers all over the world, so that their precious data would "
+#~ "serve a purpose, and have a meaning forever."
+#~ msgstr ""
+#~ "このようなことが起こることは許されません。世界中の天体写真家のアウトプット"
+#~ "をホストし、選別し、インデックスし、分類することで、彼らの貴重なデータの目"
+#~ "的を果たし、そして永遠の意味を持つために、その努力をしていくことをAstroBin"
+#~ "は始めました。"
+
+#~ msgid ""
+#~ "<em>AstroBin</em> is just starting out, and this time we can really say "
+#~ "that the sky is the limit! Tons of ideas are in the pipeline. As the user "
+#~ "base grows, so does the data. Suddenly, things like automated supernovae "
+#~ "search become possible: you could simply upload an image of a galaxy, and "
+#~ "AstroBin could compare it to pictures of the same galaxy taken previously."
+#~ msgstr ""
+#~ "<em>AstroBin</em>は既にスタートし、いまでは夜空には限界があると本当に言う"
+#~ "ことができます！そして、すごく大きいアイデアが進行中です。利用者が増大する"
+#~ "と、データも増大します。自動化された超新星探索のようなことが突然可能になっ"
+#~ "て、あなたは簡単に銀河の画像をアップロードしたり、AstroBinで以前撮影した同"
+#~ "じ銀河の写真と比較できるようになります。"
+
+#~ msgid ""
+#~ "AstroBin could also recommend subjects for you to image! Knowing your "
+#~ "equipment, your location, and comparing what you have imaged to what "
+#~ "users similar to you have, AstroBin could suggest your next challenge!"
+#~ msgstr ""
+#~ "AstroBinは、画像をあなたに推薦することもできます。あなたの機材や場所の知識"
+#~ "を共有したり、あなたと似た他の利用者の画像を比較比較したりすることで、"
+#~ "AstroBinはあなたの次のチャレンジを提案します！"
+
+#~ msgid ""
+#~ "Thanks to the input from the community, more ideas are flowing in and the "
+#~ "list get bigger and bigger."
+#~ msgstr ""
+#~ "コミュニティからの入力のおかげで、たくさんのアイデアが集まり、そのリストが"
+#~ "どんどん大きくなっています。"
+
+#~ msgid ""
+#~ "AstroBin uses the Markdown syntax. Please use the following reference "
+#~ "table:"
+#~ msgstr ""
+#~ "AstroBinはMarkdownの記法をつかっています。次の参照テーブルをつかってくださ"
+#~ "い。"
+
+#~ msgid "You type:"
+#~ msgstr "入力した文字列"
+
+#~ msgid "You see:"
+#~ msgstr "参照"
+
+#~ msgid "italics"
+#~ msgstr "斜体"
+
+#~ msgid "bold"
+#~ msgstr "太字"
+
+#~ msgid "(TAB or 4 spaces)"
+#~ msgstr "(TAB or 4*spaces)"
+
+#~ msgid "preformatted text"
+#~ msgstr "整形済みテキスト"
+
+#~ msgid "quoted text"
+#~ msgstr "引用文"
+
+#~ msgid "escape the formatting syntax"
+#~ msgstr "フォーマットを無視"
+
+#~ msgid ""
+#~ "The AstroBin index is a function of the number of Likes and the number of "
+#~ "images posted by a user."
+#~ msgstr ""
+#~ "AstroBinインデックスはユーザーが投稿した画像数やLikeの数によって決定されま"
+#~ "す。"
+
+#~ msgid ""
+#~ "Because it's computationally expensive, the AstroBin index is updated "
+#~ "only every 24 hours. The same applies for the search index, the Big Wall, "
+#~ "and some other user data."
+#~ msgstr ""
+#~ "計算処理には費用がかかりますので、AstroBinインデックスは24時間ごとにアップ"
+#~ "デートされます。検索インデックスやビックウォールやユーザーのデータにも適用"
+#~ "されます。"
+
+#~ msgid ""
+#~ "Do you have a question not covered here! Please <a href=\"/contact/"
+#~ "\">contact us</a>!"
+#~ msgstr ""
+#~ "ここで質問がカバーできない場合、我々に<a href=\"/contact/\">問合せ</a>して"
+#~ "ください。"
+
+#~ msgid ""
+#~ "AstroBin accounts are meant for members to share original images that "
+#~ "they have created."
+#~ msgstr ""
+#~ "AstroBinのアカウントは、自分で作成した元画像を共有する目的をもった人たちに"
+#~ "宛てたものです。"
+
+#~ msgid "What is allowed"
+#~ msgstr "許可されている事"
+
+#~ msgid "Do upload content you have created yourself."
+#~ msgstr "自分自身で作成したコンテンツをアップロードすること。"
+
+#~ msgid ""
+#~ "Respect the copyright of others. Stealing images from other people and "
+#~ "trying to pass them off as yours is not allowed on AstroBin."
+#~ msgstr ""
+#~ "他人の著作権を尊重すること。他の人たちから画像を盗んで、あなたのものとして"
+#~ "偽って通そうと試みようとする事はAstroBinでは禁止されています。"
+
+#~ msgid "Do fill in all the technical details you can."
+#~ msgstr "できるだけ全ての技術的な詳細を記入してください。"
+
+#~ msgid ""
+#~ "AstroBin is founded on the idea that data is important and can't go "
+#~ "wasted in a sea of chaos. As much as you can, please fill in the "
+#~ "technical details of your images."
+#~ msgstr ""
+#~ "データが最重要で、それをカオスの海に埋もれさせてはならないという考えの上に"
+#~ "AstroBinは成り立っています。できるだけ多くすることができるようになるため"
+#~ "に、あなたの画像の技術的詳細を入力するようにしてください。"
+
+#~ msgid "Be respectful of other users."
+#~ msgstr "他のユーザーを尊重する事。"
+
+#~ msgid "Be nice and friendly to other users when you send them messages."
+#~ msgstr ""
+#~ "他のユーザーとメッセージをやりとりするときには、良い感じでフレンドリーにし"
+#~ "ましょう。"
+
+#~ msgid "What is forbidden"
+#~ msgstr "禁止されていること"
+
+#, fuzzy
+#~ msgid "Don't upload anything that you did not work on."
+#~ msgstr "著作権をもっていないものをアップロードしてはいけない。"
+
+#~ msgid "No nudity, no explicitly sexual content, no illegal content."
+#~ msgstr "ヌードは禁止、明確にセクシャルなもの、非合法なコンテンツ。"
+
+#~ msgid ""
+#~ "Your account will be permanently deleted, and so will all your content, "
+#~ "if you upload any content that is illegal, porn or nudity. We also "
+#~ "reserve the right to report you to the authorities, if we find it "
+#~ "necessary."
+#~ msgstr ""
+#~ "もし非合法なものやポルノやヌードといったコンテンツをアップロードしたときに"
+#~ "は、あなたのアカウントと全てのコンテンツを永遠に削除します。我々はまた、"
+#~ "我々が必要とするときには、当局にあなたを報告する権利をもっています。"
+
+#~ msgid "Don't upload images that have nothing to do with astronomy."
+#~ msgstr "天体に関係しない画像をアップロードしないでください。"
+
+#~ msgid ""
+#~ "Images of your equipment are fine, but don't use AstroBin to upload "
+#~ "pictures from your last vacation. Your account won't be deleted, but we "
+#~ "will ask you to remove those pictures."
+#~ msgstr ""
+#~ "機材の画像は素敵ですが、休暇の写真をAstroBinにアップロードしないでくださ"
+#~ "い。あなたのアカウントが削除される可能性がありますが、我々はそれらの写真を"
+#~ "削除するようにお願いするでしょう。"
+
+#~ msgid ""
+#~ "Don't use your account to host images for websites, banners or logos."
+#~ msgstr ""
+#~ "あたなたのアカウントにある画像をWebサイトやバナーやロゴに利用しません。"
+
+#~ msgid ""
+#~ "Banners, logos, icons or other graphic elements that are not "
+#~ "astrophotography are not allowed on AstroBin."
+#~ msgstr ""
+#~ "天体写真に関係のないバナーやロゴやアイコンや他のグラフィック素材をAstroBin"
+#~ "に載せる事を許しません。"
+
+#~ msgid ""
+#~ "In conclusion, these terms are just a way to say \"please be nice and use "
+#~ "common sense\". If you feel you can't abide by them, please let us know "
+#~ "what you feel is wrong."
+#~ msgstr ""
+#~ "結論として、これらのことは「良識と常識を働かせてください」と言っているだけ"
+#~ "です。あなたがそれらを遵守することができないと感じるなら、間違っていると感"
+#~ "じるものを我々に知らせてください。"
+
+#~ msgid ""
+#~ "Are you an astrophotographer? Do you like to share the outcome of your "
+#~ "hard work with others? As an astrophotographer myself, and a subscriber "
+#~ "to numerous Astrophotography forums, I have found that the Internet is "
+#~ "lacking a centralized place where astrophotographers can share their work."
+#~ msgstr ""
+#~ "あなたは天体写真家ですか？頑張った成果を他人に共有することは好きですか？私"
+#~ "も天体写真家で数多くの天体についての掲示板への投稿をしているのですが、私は"
+#~ "インターネットの中では天体写真家が作業を共有し、集まれる場所が無いことを発"
+#~ "見してしまったのです。"
+
+#~ msgid "Well, this is finally over!"
+#~ msgstr "ちょっと、これはオーバーな表現ですね！"
+
+#~ msgid ""
+#~ "<em>AstroBin</em> comes to fill the gap. It's a website built from the "
+#~ "ground up by an astrophotographer, and it provides means to people who "
+#~ "want to share their astrophotographs."
+#~ msgstr ""
+#~ "<em>AstroBin</em>はそのギャップを埋めます。天体写真家によってゼロからWebサ"
+#~ "イトを構築し、天体写真を共有したい人々に手段を提供します。"
+
+#~ msgid "So how is this different from any other image sharing websites?"
+#~ msgstr "他の画像共有サイトとの違いはなんでしょう？"
+
+#~ msgid ""
+#~ "<em>AstroBin</em> provides a number of features that are tailored "
+#~ "specificlly to astrophotography. Here's a quick run down of the main ones:"
+#~ msgstr ""
+#~ "<em>AstroBin</em>には天体写真に特化した機能が多数用意されています。ここで"
+#~ "の主なもののざっと紹介します。"
+
+#~ msgid "Dedication to data"
+#~ msgstr "データへの専念"
+
+#~ msgid ""
+#~ "On a general purpose image sharing site, you would upload your image and "
+#~ "be done with it. <em>AstroBin</em>, instead, has a user interface "
+#~ "specifically designed to enable you to input all the technical data of "
+#~ "your image."
+#~ msgstr ""
+#~ "画像共有サイトの一般的な目的では、画像をアップロードすることができます。"
+#~ "<em>AstroBin</em>では全ての技術的データの入力が可能になるようにデザインさ"
+#~ "れた特別なインターフェースを利用者に提供しています。"
+
+#~ msgid ""
+#~ "<em>AstroBin</em> will autocomplete your input using a vast database: "
+#~ "everything from telescopes, CCDs and filters to astronomical objects in "
+#~ "many catalogues will show in popup dialogs for easy selection when you "
+#~ "start typing their names. <em>AstroBin</em> is connected to the SIMBAD "
+#~ "Astronomical Database, which contains over 5 million objects under over "
+#~ "15 million names!"
+#~ msgstr ""
+#~ "<em>AstroBin</em>は巨大なデータベースを使ってあなたの入力をオートコンプ"
+#~ "リートします。あたながその名前のタイピングをスタートする時、望遠鏡やCCD、"
+#~ "フィルターから沢山のカタログに記載されている天体までを簡単に選択できるよう"
+#~ "にボップアップダイアログでみせることができます。<em>AstroBin</em>はSIMBAD"
+#~ "と連携していて、それは500万以上の天体や1500万以下の名前を含んでいます。"
+
+#~ msgid ""
+#~ "On <em>AstroBin</em>, astronomical subjects have their own page, where "
+#~ "you can see the best images of them, and plots and charts showing trends "
+#~ "and interesting statistics. There is also a page that shows the most "
+#~ "popular subjects organized by month and latitude!"
+#~ msgstr ""
+#~ "<em>AstroBin</em>では、あなたのページに天体に関する主題を設けることができ"
+#~ "ます。そこではその主題でのベストな画像を見ることもできますし、描画や図でト"
+#~ "レンドや興味深い統計情報を見る事もできます。月や緯度による整理がされた最も"
+#~ "人気のある主題をみられるページも用意されています！"
+
+#~ msgid "Data is strongly interconnected"
+#~ msgstr "データは強力に相互接続されている"
+
+#~ msgid ""
+#~ "Have you ever wanted to see how your next image is going to look like? On "
+#~ "<em>AstroBin</em>, you can search for all images of a certain target that "
+#~ "were taken with a certain telescope and a certain CCD or camera. Or a "
+#~ "certain filter. How about all the images between 6 and 8 hours of "
+#~ "integration? Or with a certain Moon phase? You can do that!"
+#~ msgstr ""
+#~ "次に撮影する画像がどのようにみえるのかを見ようとしたことはありませんか？"
+#~ "<em>AstroBin</em>では、特定の望遠鏡、特定のCCDやカメラ、特定のフィルターで"
+#~ "撮影された特定されたターゲットの全ての画像を検索することができます。6〜8時"
+#~ "間露出した全ての画像についてとか、特定の月齢のものとか、それを叶えることが"
+#~ "できます!"
+
+#~ msgid ""
+#~ "AstroBin can help you with your next telescope or camera purchase, by "
+#~ "searching for gear combinations owned by other users. For instance, you "
+#~ "could search for all images taken with a Canon 5D and any apochromatic "
+#~ "refractor, or a SBIG ST-8300 with any Richtey-Chretien telescope. Or, if "
+#~ "you want, you can search by telescope diameter too!"
+#~ msgstr ""
+#~ "他の利用者が所有している機材の組み合わせを検索することによって、AstroBinは"
+#~ "望遠鏡やカメラの購入のお手伝いをすることができます。例えば、Canon 5Dとアポ"
+#~ "クロマート屈折望遠鏡で撮影された全て画像を検索することができるし、Richtey-"
+#~ "Chretien望遠鏡とSBIG ST-8300 で撮影された画像を検索することもできます。望"
+#~ "遠鏡の口径で検索することだって可能です。"
+
+#~ msgid ""
+#~ "Finally, all this information is collected in interesting plots, that can "
+#~ "help you figure out how some gear items are trending."
+#~ msgstr ""
+#~ "最終的には、これらすべての情報は機材のトレンドを図としてみせたりすること"
+#~ "で、興味深い図画として表示されます。"
+
+#~ msgid "All the data at a glance"
+#~ msgstr "全てのデータを一目する"
+
+#~ msgid ""
+#~ "Each image on <em>AstroBin</em> is annotated of all the technical details "
+#~ "about its acquisition. Telescopes involved, cameras, mounts, filters, "
+#~ "everything is visible at a glance in the Technical Card. Even the Moon "
+#~ "age at the time of the acquisition is displayed."
+#~ msgstr ""
+#~ "<em>AstroBin</em>のそれぞれのイメージは撮影したときの全ての技術的詳細が付"
+#~ "けられています。望遠鏡、カメラ、赤道儀、フィルターといった全てのものが"
+#~ "Technical Cardとして一目できるようになっています。"
+
+#~ msgid "More than just an image"
+#~ msgstr "単なる画像を超えて"
+
+#~ msgid ""
+#~ "<em>AstroBin</em> will do more than just host a copy of your image: when "
+#~ "you upload a photograph, a histogram and a black &amp; white inverted "
+#~ "version of the image will be generated on the fly, so it's easier to spot "
+#~ "faint nebulosity regions or spiral arms. Images will also be plate "
+#~ "solved, and an annotated version will appear on the site. <em>AstroBin</"
+#~ "em> will know what are the astronomical objects in your image without you "
+#~ "telling!"
+#~ msgstr ""
+#~ "<em>AstroBin</em>は写真をアップロードしたときにコピーをするだけでなく、ヒ"
+#~ "ストグラムや白黒バージョンを自動的に生成します。それによって、淡い星雲や渦"
+#~ "状腕が簡単にみつけられます。画像は星図化され、サイト上で注釈付きで表示され"
+#~ "ます。<em>AstroBin</em>はあなたが何も教えてくれなくても、あなたの画像のな"
+#~ "かに、どんな天体があるかを知っています!"
+
+#~ msgid "Protection from theft with automatic watermarking"
+#~ msgstr "自動的に著作権表示を加えることで盗難から守る"
+
+#~ msgid ""
+#~ "<em>AstroBin</em>'s upload wizard will offer you to watermark your image "
+#~ "with the text of your choosing. All it takes is a click!"
+#~ msgstr ""
+#~ "<em>AstroBin</em>のアップロードウイザードは、あなたが選んだテキストを著作"
+#~ "権表示として画像に埋め込みます。それもクリックするだけ!"
+
+#~ msgid "AstroBin supports multiple image revisions"
+#~ msgstr "AstroBinは何枚もの修正版の画像管理に対応してます。"
+
+#~ msgid ""
+#~ "Don't tell me you have never gone back to revise the processing of an "
+#~ "image <em>after</em> you had published it. <em>AstroBin</em> embraces "
+#~ "this concept and lets you publish several revisions of the same image "
+#~ "easily and intuitively! Now it's going to be really easy to tell whether "
+#~ "your processing has improved."
+#~ msgstr ""
+#~ "処理画像を公開した<em>あとで</em>、再処理をしたことを知らせる必要はありま"
+#~ "せん。<em>AstroBin</em>は、そのプロセスを分かっているので、同じ画像の幾つ"
+#~ "も修正版を簡単にかつ直感的に公開することができます！今では、あなたの再処理"
+#~ "によって画像が改善されているかを知ることが本当に簡単になりました。"
+
+#~ msgid "AstroBin is social!"
+#~ msgstr "AstroBinはソーシャルだ！"
+
+#~ msgid ""
+#~ "On <em>AstroBin</em> you can message other astrophotographer, follow them "
+#~ "and be notified when they post new images, or perform requests for more "
+#~ "data."
+#~ msgstr ""
+#~ "<em>AstroBin</em>では他の天体写真家にメッセージを送ったり、フォローした"
+#~ "り、新しい画像が投稿されたことを通知してくれたりします。"
+
+#~ msgid ""
+#~ "You can follow gear items or astronomical subjects, and be notified "
+#~ "whenever there's a new image from a certain CCD, or telescope, or filter, "
+#~ "and so on. Or you can monitor all the new images of a certain galaxy or "
+#~ "nebula."
+#~ msgstr ""
+#~ "機材や天体題材にフォローすることができ、それによって、特定のCCDや望遠鏡や"
+#~ "フィルターによる新しいイメージのアップロードを知らせてくれます。また、特定"
+#~ "の銀河や星雲の新着の監視も可能です。"
+
+#~ msgid ""
+#~ "As you have undoubtly realized by now, <em>AstroBin</em> is way more than "
+#~ "an image hosting service. It's what the Astrophotography community has "
+#~ "needed for a long time. For years, I have seen amazing images scattered "
+#~ "all over the Internet: general purpose image hosting sites, forums, "
+#~ "personal websites and even temporary places. Some of those images contain "
+#~ "data that is too precious to go wasted in a sea of chaos. <em>AstroBin</"
+#~ "em> comes to the rescue to provide a home and a central hub for "
+#~ "astrophotographers all over the world."
+#~ msgstr ""
+#~ "今では<em>AstroBin</em>が最高の画像ホスティングサービスであることを、あな"
+#~ "たは何の疑いもなく理解しているでしょう。これは、長い間、天体写真コミュニ"
+#~ "ティで必要としていたものです。長い間、私はインターネットに散らばっていた素"
+#~ "晴らしい画像をみてきました。汎用的な画像ホスティングサイトや掲示板、個人の"
+#~ "Webサイトや一時的なスペースもです。それらの画像のなかには、カオスの海で無"
+#~ "駄にするのはもったいないぐらい貴重なデータが含まれていました。"
+#~ "<em>AstroBin</em>は世界中の天体写真家の本拠地とハブを提供しているのです。"
+
+#~ msgid "So, what are you waiting for?"
+#~ msgstr "それでもあなたは、まだ何を待つのでしょう？"
+
+#~ msgid "Sign up now!"
+#~ msgstr "いますぐ登録しよう！"
+
+#~ msgid "Send to public data pool"
+#~ msgstr "公開データ領域に送る"
+
+#~ msgid "Send to private shared folder"
+#~ msgstr "非公開共有フォルダに送る"
+
+#~ msgid ""
+#~ "If this image is the result of your processing of a public data pool, you "
+#~ "can send it the pool so it's displayed there."
+#~ msgstr ""
+#~ "この画像はデータ公開領域のあなたの処理の結果であれば、ここに表示されている"
+#~ "画像をその領域に送ることができます。"
+
+#~ msgid ""
+#~ "Use this form to select an existing <strong>public data pool</strong>."
+#~ msgstr ""
+#~ "現在の<strong>公開データ領域</strong>を選ぶために、この項目を使ってくださ"
+#~ "い。"
+
+#~ msgid ""
+#~ "If this image is the result of your processing of a private shared "
+#~ "folder, you can send it the folder so it's displayed there."
+#~ msgstr ""
+#~ "もし、このイメージがあなたの非公開共有フォルタでのあなたの処理結果であれ"
+#~ "ば、あなたはそれを表示するためにそれをそのフォルダーに送る事ができる。"
+
+#~ msgid ""
+#~ "Use this form to select a <strong>private shared folder</strong> you have "
+#~ "created or have been invited to."
+#~ msgstr ""
+#~ "あなたが作成し、招待した<strong>非公開共有フォルダ</strong>を選択するため"
+#~ "にこの項目を使ってください。"
+
+#~ msgid "You don't have access to any shared private folders."
+#~ msgstr "いくつもの非公開共有フォルダにアクセスしないでください。"
+
+#, fuzzy
+#~ msgid "Back to image"
+#~ msgstr "Top に戻る"
+
+#~ msgid "You have no messages."
+#~ msgstr "メッセージはありません。"
+
+#~ msgid "Show all messages"
+#~ msgstr "すべてのメッセージを表示"
+
+#~ msgid "Error. Try again!"
+#~ msgstr "エラーが発生しました。再試行してください!"
+
+#, fuzzy
+#~| msgid ""
+#~| "%(originator)s has published a new image! Check it out at the following "
+#~| "url: %(object_url)s"
+#~ msgid ""
+#~ "%(originator)s has published a new image! Check it out at the following "
+#~ "url: <a href=\"%(object_url)s\">%(object_url)s</a>"
+#~ msgstr ""
+#~ "%(originator)sが新しい画像を公開しました！以下のURLをチェックしてくださ"
+#~ "い。%(object_url)s"
+
+#~ msgid ""
+#~ "%(originator)s has published a new image! Check it out at the following "
+#~ "url: %(object_url)s"
+#~ msgstr ""
+#~ "%(originator)sが新しい画像を公開しました！以下のURLをチェックしてくださ"
+#~ "い。%(object_url)s"
+
+#~ msgid ""
+#~ "<a href=\"%(object_url)s\"><strong>%(originator)s</strong> has published "
+#~ "a new image.</a>"
+#~ msgstr ""
+#~ "<a href=\"%(object_url)s\"><strong>%(originator)s</strong>が新しい画像を公"
+#~ "開しました。</a>"
+
+#~ msgid "New image by %(originator)s"
+#~ msgstr "%(originator)sの新着画像"
+
+#, fuzzy
+#~ msgid ""
+#~ "You are invited to the private shared folder: \"%(folder_name)s\".\n"
+#~ "\n"
+#~ "You can now contribute data and processed images to the folder. You can "
+#~ "also invite more people.\n"
+#~ "\n"
+#~ "Visit the folder at the following url: <a href=\"%(folder_url)s\">"
+#~ "%(folder_url)s</a>"
+#~ msgstr ""
+#~ "あなたは非公開共有フォルダ（\"%(folder_name)s\"）に招待されました。\n"
+#~ "\n"
+#~ "あなたはデータを与えられ、そのフォルダの画像を処理できるようになりました。"
+#~ "あなたはもっと多くの人々を招待することもできます。\n"
+#~ "\n"
+#~ "以下のURLのフォルダを訪問してください。%(folder_url)s"
+
+#, fuzzy
+#~ msgid ""
+#~ "You are invited to the private shared folder: \"%(folder_name)s\".\n"
+#~ "\n"
+#~ "You can now contribute data and processed images to the folder. You can "
+#~ "also invite more people.\n"
+#~ "\n"
+#~ "Visit the folder at the following url: %(folder_url)s"
+#~ msgstr ""
+#~ "あなたは非公開共有フォルダ（\"%(folder_name)s\"）に招待されました。\n"
+#~ "\n"
+#~ "あなたはデータを与えられ、そのフォルダの画像を処理できるようになりました。"
+#~ "あなたはもっと多くの人々を招待することもできます。\n"
+#~ "\n"
+#~ "以下のURLのフォルダを訪問してください。%(folder_url)s"
+
+#, fuzzy
+#~ msgid ""
+#~ "<a href=\"%(folder_url)s\">You are invited to the private shared folder: "
+#~ "<strong>\"%(folder_name)s.\"</strong></a>"
+#~ msgstr ""
+#~ "<a href=\"%(folder_url)s\">あなたは非公開共有フォルダ"
+#~ "<strong>（\"%(folder_name)s\"）</strong>に招待されました。</a>"
+
+#, fuzzy
+#~ msgid "You are invited to the private shared folder: %(folder_name)s"
+#~ msgstr "あなたは非公開共有フォルダに招待されました。%(folder_name)s"
+
+#, fuzzy
+#~| msgid ""
+#~| "%(user_name)s has added a new processed image to the private shared "
+#~| "folder: \"%(folder_name)s\". Check it out at the following url: "
+#~| "%(folder_url)s"
+#~ msgid ""
+#~ "%(user_name)s has added a new processed image to the private shared "
+#~ "folder: \"%(folder_name)s\". Check it out at the following url: <a href="
+#~ "\"%(folder_url)s\">%(folder_url)s</a>"
+#~ msgstr ""
+#~ "%(user_name)sは非公開共有フォルダ（\"%(folder_name)s\"）に新しい処理画像が"
+#~ "追加しました。以下のURLをチェックしてください。%(folder_url)s"
+
+#~ msgid ""
+#~ "%(user_name)s has added a new processed image to the private shared "
+#~ "folder: \"%(folder_name)s\". Check it out at the following url: "
+#~ "%(folder_url)s"
+#~ msgstr ""
+#~ "%(user_name)sは非公開共有フォルダ（\"%(folder_name)s\"）に新しい処理画像が"
+#~ "追加しました。以下のURLをチェックしてください。%(folder_url)s"
+
+#~ msgid ""
+#~ "<a href=\"%(folder_url)s\"><strong>%(user_name)s</strong> has added a new "
+#~ "processed image to the private shared folder: <strong>\"%(folder_name)s."
+#~ "\"</strong></a>"
+#~ msgstr ""
+#~ "<a href=\"%(folder_url)s\"><strong>%(user_name)s</strong>は新しい処理画像"
+#~ "を非公開共有フォルダ<strong>\"%(folder_name)s\"</strong>に追加しました。</"
+#~ "a>"
+
+#~ msgid ""
+#~ "<a href=\"%(folder_url)s\"><strong>%(user_name)s</strong> has added a new "
+#~ "processed image to the private shared folder: <strong>\"%(folder_name)s."
+#~ "\"</a>"
+#~ msgstr ""
+#~ "<a href=\"%(folder_url)s\"><strong>%(user_name)s</strong>は非公開共有フォ"
+#~ "ルダ<strong>\"%(folder_name)s\"に新しい処理画像を追加しました。</a>"
+
+#~ msgid "New processed image in private shared folder: %(folder_name)s"
+#~ msgstr "非公開領域に新しい処理画像が追加:  %(folder_name)s"
+
+#, fuzzy
+#~| msgid ""
+#~| "%(user_name)s has added a new processed image to the public data pool: "
+#~| "\"%(pool_name)s\". Check it out at the following url: %(pool_url)s"
+#~ msgid ""
+#~ "%(user_name)s has added a new processed image to the public data pool: "
+#~ "\"%(pool_name)s\". Check it out at the following url: <a href="
+#~ "\"%(pool_url)s\">%(pool_url)s</a>"
+#~ msgstr ""
+#~ "%(user_name)sはデータ公開領域（\"%(pool_name)s\"）に新しい処理画像を追加し"
+#~ "ました。以下のURLをチェックしてください。%(pool_url)s"
+
+#~ msgid ""
+#~ "%(user_name)s has added a new processed image to the public data pool: "
+#~ "\"%(pool_name)s\". Check it out at the following url: %(pool_url)s"
+#~ msgstr ""
+#~ "%(user_name)sはデータ公開領域（\"%(pool_name)s\"）に新しい処理画像を追加し"
+#~ "ました。以下のURLをチェックしてください。%(pool_url)s"
+
+#~ msgid ""
+#~ "<a href=\"%(pool_url)s\"><strong>%(user_name)s</strong> has added a new "
+#~ "processed image to the public data pool: <strong>\"%(pool_name)s.\"</"
+#~ "strong></a>"
+#~ msgstr ""
+#~ "<a href=\"%(pool_url)s\"><strong>%(user_name)s</strong>はデータ公開領域"
+#~ "<strong>（\"%(pool_name)s\"）</strong>に新しい処理画像を追加しました。</a>"
+
+#~ msgid "New processed image in public data pool: %(pool_name)s"
+#~ msgstr "データ公開領域（%(pool_name)s）に新しい処理画像が追加された。"
+
+#, fuzzy
+#~| msgid ""
+#~| "%(user_name)s has added new data to the public pool: \"%(pool_name)s\". "
+#~| "Check it out at the following url: %(pool_url)s"
+#~ msgid ""
+#~ "%(user_name)s has added new data to the public pool: \"%(pool_name)s\". "
+#~ "Check it out at the following url: <a href=\"%(pool_url)s\">%(pool_url)s</"
+#~ "a>"
+#~ msgstr ""
+#~ "%(user_name)sはデータ共有領域（\"%(pool_name)s\"）に新しいデータが追加しま"
+#~ "した。以下のURLをチェックしてください。%(pool_url)s"
+
+#~ msgid ""
+#~ "%(user_name)s has added new data to the public pool: \"%(pool_name)s\". "
+#~ "Check it out at the following url: %(pool_url)s"
+#~ msgstr ""
+#~ "%(user_name)sはデータ共有領域（\"%(pool_name)s\"）に新しいデータが追加しま"
+#~ "した。以下のURLをチェックしてください。%(pool_url)s"
+
+#~ msgid ""
+#~ "<a href=\"%(pool_url)s\"><strong>%(user_name)s</strong> has added new "
+#~ "data to the public pool: <strong>\"%(pool_name)s.\"</strong></a>"
+#~ msgstr ""
+#~ "<a href=\"%(pool_url)s\"><strong>%(user_name)s</strong>はデータ公開領域"
+#~ "<strong>（\"%(pool_name)s\"）</strong>に新しいデータを追加しました。</a>"
+
+#~ msgid "New data in public pool: %(pool_name)s"
+#~ msgstr "データ公開領域（%(pool_name)s）の新しいデータ"
+
+#, fuzzy
+#~| msgid ""
+#~| "%(user_name)s has added new data to the private shared folder: "
+#~| "\"%(folder_name)s\". Check it out at the following url: %(folder_url)s"
+#~ msgid ""
+#~ "%(user_name)s has added new data to the private shared folder: "
+#~ "\"%(folder_name)s\". Check it out at the following url: <a href="
+#~ "\"%(folder_url)s\">%(folder_url)s</a>"
+#~ msgstr ""
+#~ "%(user_name)sは非公開共有フォルダ（\"%(folder_name)s\"）に新しいデータを追"
+#~ "加しました。以下のURLをチェックしてください。%(folder_url)s"
+
+#~ msgid ""
+#~ "%(user_name)s has added new data to the private shared folder: "
+#~ "\"%(folder_name)s\". Check it out at the following url: %(folder_url)s"
+#~ msgstr ""
+#~ "%(user_name)sは非公開共有フォルダ（\"%(folder_name)s\"）に新しいデータを追"
+#~ "加しました。以下のURLをチェックしてください。%(folder_url)s"
+
+#~ msgid ""
+#~ "<a href=\"%(folder_url)s\"><strong>%(user_name)s</strong> has added new "
+#~ "data to the private shared folder: <strong>\"%(folder_name)s.\"</strong></"
+#~ "a>"
+#~ msgstr ""
+#~ "<a href=\"%(folder_url)s\"><strong>%(user_name)s</strong>は非公開共有フォ"
+#~ "ルダ<strong>（\"%(folder_name)s\"）</strong>に新しいデータを追加しました。"
+#~ "</a>"
+
+#~ msgid "New data in private shared folder: %(folder_name)s"
+#~ msgstr "非公開シェアフォルダ（\"%(folder_name)s\"）の新しいデータ"
+
+#, fuzzy
+#~| msgid "User"
+#~ msgid "Username"
+#~ msgstr "ユーザー"
+
+#, fuzzy
+#~| msgid "Password changed"
+#~ msgid "Password"
+#~ msgstr "パスワードの変更"
+
+#, fuzzy
+#~ msgid "Activate"
+#~ msgstr "有効"
+
+#~ msgid "%(max_allowed)s images per year "
+#~ msgstr "年間%(max_allowed)s画像"
+
+#, fuzzy
+#~ msgid "Deactivate"
+#~ msgstr "有効"
+
+#, fuzzy
+#~ msgid "AstroBin Premium subscription plans"
+#~ msgstr "AstroBin Questions"
+
+#, fuzzy
+#~ msgid "AstroBin Raw Data subscription plans"
+#~ msgstr "AstroBin Raw Data"
+
+#~ msgid ""
+#~ "The following Terms are only available in English. It is your "
+#~ "responsibility to comprehend them."
+#~ msgstr ""
+#~ "以下の文章は英語でのみ用意されています。あなたはそれを理解する責任がありま"
+#~ "す。"
+
+#, fuzzy
+#~ msgid ""
+#~ "You have used <strong>%(premium_counter)s</strong> images of your allowed "
+#~ "<strong>%(max_allowed)s</strong> for the current subscription period."
+#~ msgstr ""
+#~ " あなたは現在、<strong>%(max_allowed)s</strong>のうち<strong>"
+#~ "%(premium_counter)s</strong> の画像を利用中です。"
+
+#~ msgid "Raw data upload"
+#~ msgstr "Rawデータのアップロード"
+
+#~ msgid ""
+#~ "You have no more space left on your Raw Data account. Please delete some "
+#~ "files to make room, or upgrade your account."
+#~ msgstr ""
+#~ "あなたはRawデータを保管するスペースがなくなっています。いくつかのファイル"
+#~ "を削除するか、あなたのアカウントをアップグレードしてください。"
+
+#~ msgid "Use the button below to choose files"
+#~ msgstr "ファイルを選択するために以下のボタンを使ってください"
+
+#~ msgid "Drop your raw data here"
+#~ msgstr "あなたのRawデータをここにドロップしてください"
+
+#~ msgid "Accepted file types: FIT and digital camera raw files"
+#~ msgstr "許可されたファイル形式：FITとデジカメのRawファイル"
+
+#~ msgid "Filename"
+#~ msgstr "ファイル名"
+
+#~ msgid "Choose files"
+#~ msgstr "ファイルの選択"
+
+#~ msgid "Reset"
+#~ msgstr "リセット"
+
+#~ msgid "Start upload"
+#~ msgstr "アップロード開始"
+
+#~ msgid "Go to your Raw Data Library."
+#~ msgstr "あなたのRawデータライブラリに行く"
+
+#~ msgid ""
+#~ "Your Raw Data subscription is not active, or it has expired. If you have "
+#~ "just subscribed, please wait for a few minutes. Thanks for your patience!"
+#~ msgstr ""
+#~ "あなたのRawデータの申し込みが完了していないか、期限が切れています。もしあ"
+#~ "なたが経った今、申し込みをしたのであれば、数分待ってください。待ってくれて"
+#~ "ありがとう。"
+
+#~ msgid "Go to the Raw Data <a href=\"%(plans_url)s\">plans page</a>."
+#~ msgstr "Rawデータの<a href=\"%(plans_url)s\">計画ページ</a>に行く"
+
+#~ msgid ""
+#~ "Did you know that AstroBin can host your FIT and digital camera raw files "
+#~ "too?"
+#~ msgstr ""
+#~ "AstroBinがFITやデジタルカメラのRawファイルもホストできることを知っていまし"
+#~ "たか？"
+
+#~ msgid ""
+#~ "Have a look at <a href=\"%(rawdata_url)s\">AstroBin Raw Data</a> if you "
+#~ "want to safely store all your raw files, and have them neatily organized "
+#~ "for future reference!"
+#~ msgstr ""
+#~ "もし、あなたの全てのRawファイルを安全に保管したいのであれば、<a href="
+#~ "\"%(rawdata_url)s\">AstroBin Raw Data</a>をみてください。そこでは、それら"
+#~ "は今後の参照のためにきちんと整理されています!"
+
+#~ msgid "Raw files"
+#~ msgstr "Rawファイル"
+
+#~ msgid "Upload started, please wait..."
+#~ msgstr "アップロードを開始しました。しばらく待ってください..."
+
+#~ msgid ""
+#~ "One ore more files were ignored because they did not look like FIT or "
+#~ "digital camera raw files."
+#~ msgstr ""
+#~ "いくつかのファイルはFITやデジタルカメラのRawファイルのようでなかったので無"
+#~ "視されました。"
+
+#, fuzzy
+#~| msgid ""
+#~| "Done! Go to <a href=\\\"/me\\\">your profile</a> to see the new pictures "
+#~| "(and keep an eye on your notifications)!"
+#~ msgid ""
+#~ "Done! Go to <a href=\\\"/users/\" + username + \"/?staging&sub=uploaded\\"
+#~ "\">your staging gallery</a> to see the new pictures (and keep an eye on "
+#~ "your notifications)!"
+#~ msgstr ""
+#~ "完了しました! 新しい画像（あなたの通知）をみるために<a href=\\\"/me\\\">あ"
+#~ "なたのプロフィール</a>に行ってください。"
 
 #~ msgid "The perfect home for your astrophotography."
 #~ msgstr "天体写真に最適なサービスです。"
@@ -7033,10 +7555,6 @@ msgstr ""
 
 #~ msgid "Express value in hours"
 #~ msgstr "値を時間で表す"
-
-#~ msgid ""
-#~ "Search for astronomical objects, telescopes or lenses, cameras, filters..."
-#~ msgstr "天体名や望遠鏡、レンズ、カメラ、フィルターなどで検索"
 
 #~ msgid "Min. telescope aperture"
 #~ msgstr "最小口径"
@@ -7349,17 +7867,11 @@ msgstr ""
 #~ msgid "Content moderation"
 #~ msgstr "利用している国"
 
-#~ msgid "Edit watermark"
-#~ msgstr "ウォーターマークを編集"
-
 #~ msgid "Edit basic information"
 #~ msgstr "基本情報を編集"
 
 #~ msgid "Change license"
 #~ msgstr "ライセンスを変更"
-
-#~ msgid "Attempt to plate-solve again"
-#~ msgstr "星図化を再度試みる"
 
 #~ msgid "Date and time"
 #~ msgstr "日付と時刻"
@@ -7411,9 +7923,6 @@ msgstr ""
 
 #~ msgid "Do you want your product here?"
 #~ msgstr "これらの製品が欲しいですか?"
-
-#~ msgid "Read all"
-#~ msgstr "すべてを読む"
 
 #, fuzzy
 #~ msgid "Uploads used"
@@ -7600,9 +8109,6 @@ msgstr ""
 #~ msgstr ""
 #~ "いますぐ参加しよう。そうすれば、あなたは天体写真や天体について学んだり教え"
 #~ "たりすることができます!"
-
-#~ msgid "Here's some more reading material to get you started"
-#~ msgstr "ここには、あなたがスタートするための沢山の読み物があります"
 
 #~ msgid "Frequently Asked Questions about AstroBin Questions"
 #~ msgstr "AstroBin QuestionsについてのFAQ"
