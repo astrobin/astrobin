@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2019-10-15 11:57+0000\n"
+"POT-Creation-Date: 2020-05-13 18:00+0000\n"
 "PO-Revision-Date: 2018-12-04 17:39+0000\n"
 "Last-Translator: Łukasz Sujka <lukasz.sujka83@gmail.com>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -32,9 +32,6 @@ msgstr "Zdjęcia ze strefy oczekującej nie mogą być zgłoszone."
 msgid "This user has chosen to be excluded from competitions."
 msgstr "Ten użytkownik został wyłączony z ubiegania się o IOTD"
 
-msgid "You cannot submit a judge's image."
-msgstr "Nie możesz zgłosić zdjęcia innego oceniającego."
-
 #, python-format
 msgid ""
 "You cannot submit an image that was published more than %(max_days)s days "
@@ -42,6 +39,9 @@ msgid ""
 msgstr ""
 "Nie możesz zgłosić zdjęcia które było opublikowane więcej niż %(max_days)s "
 "dni temu."
+
+msgid "Users with a Free membership cannot participate in the IOTD."
+msgstr ""
 
 msgid "This image has already been an IOTD in the past"
 msgstr "To zdjęcie zdobyło już IOTD w przeszłości"
@@ -58,9 +58,6 @@ msgstr "Nie możesz zagłosować na swoje własne zdjęcie."
 
 msgid "Images in the staging area cannot be voted for."
 msgstr "Zdjęcia ze strefy roboczej nie mogą być oceniane."
-
-msgid "You cannot vote for a judge's image."
-msgstr "Nie możesz głosować na zdjęcie innego oceniającego."
 
 msgid "You cannot vote for an image that has not been submitted."
 msgstr "Nie możesz zagłosować na zdjęcie które nie zostało zgłoszone."
@@ -88,9 +85,6 @@ msgstr "Nie możesz wybrać swojego własnego zdjęcia"
 
 msgid "Images in the staging area cannot be elected."
 msgstr "Zdjęcia ze strefy roboczej nie mogą być wybierane."
-
-msgid "You cannot elect a judge's image."
-msgstr "Nie możesz wybrać zdjęcia innego jurora."
 
 msgid "You cannot elect an image that has not been voted."
 msgstr "Nie możesz zagłosować na zdjęcie które nie było wybrane."
@@ -189,9 +183,6 @@ msgid ""
 msgstr ""
 "Wybierz zdjęcia które proponujesz do wyboru jako IOTD przez kliknięcie w nie."
 
-msgid "No images uploaded on this day."
-msgstr "Żadne zdjęcia nie zostały dzisiaj dodane."
-
 msgid "You cannot unelect an IOTD elected by another judge."
 msgstr "Nie możesz odznaczyć zdjęcia wybranego przez innego jurora."
 
@@ -200,3 +191,15 @@ msgid "All IOTD slots for the next %(days)s days are already filled."
 msgstr ""
 "Wszystkie miejsca do następnego wyboru IOTD na następne %(days)s dni są już "
 "zapełnione"
+
+#~ msgid "You cannot submit a judge's image."
+#~ msgstr "Nie możesz zgłosić zdjęcia innego oceniającego."
+
+#~ msgid "You cannot vote for a judge's image."
+#~ msgstr "Nie możesz głosować na zdjęcie innego oceniającego."
+
+#~ msgid "You cannot elect a judge's image."
+#~ msgstr "Nie możesz wybrać zdjęcia innego jurora."
+
+#~ msgid "No images uploaded on this day."
+#~ msgstr "Żadne zdjęcia nie zostały dzisiaj dodane."
