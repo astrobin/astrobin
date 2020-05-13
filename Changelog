@@ -1,3 +1,14 @@
+2020-05-13 Salvatore Iovene <salvatore@iovene.com>
+ * v1.68.0
+ * (api) Fix regression in Solution API: they should not be paginated (#1067)
+ * (deps) Update dependency IPy to v1 (#1061)
+ * (deps) Update dependency xdis to v3.9.1 (#1059)
+ * (deps) Update dependency urllib3 to v1.25.9 (#1058)
+ * (deps) Update dependency python-memcached to v1.59 (#1038)
+ * (deps) Update dependency python-dateutil to v2.8.1 (#1035)
+ * (deps) Update dependency pycparser to v2.20 (#1030)
+ * (deps) Update dependency ua-parser to v0.10.0 (#1056)
+
 2020-05-12 Salvatore Iovene <salvatore@iovene.com>
  * v1.67.1
  * (plate-solving) Fix saving Astrometry.net annotation
