@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: AstroBin 1.4\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2019-10-15 11:53+0000\n"
+"POT-Creation-Date: 2020-05-13 17:55+0000\n"
 "PO-Revision-Date: 2015-12-30 11:27+0000\n"
 "Last-Translator: Koen_Dierckens <koen.dierckens@pandora.be>\n"
 "Language-Team: Dutch <LL@li.org>\n"
@@ -757,6 +757,54 @@ msgstr "Zambia"
 msgid "Zimbabwe"
 msgstr "Zimbabwe"
 
+msgid "Users"
+msgstr "Gebruikers"
+
+msgid "Make"
+msgstr "Merk"
+
+msgid "The make, brand, producer or developer of this product."
+msgstr "Het merk, de fabrikant, de producent of ontwikkelaar van dit produkt."
+
+msgid "Name"
+msgstr "Naam"
+
+msgid "Merge"
+msgstr "Samenvoegen"
+
+msgid ""
+"Use this field to mark that the item you are claiming really is the same "
+"product (or a variation thereof) of something you have claimed before."
+msgstr ""
+"Gebruik dit veld om aan te geven dat het produkt dat je claimt effectief "
+"hetzelfde (of een variatie ervan) is van iets dat je eerder hebt geclaimd."
+
+#, python-format
+msgid ""
+"You can't create more than %d claims. Consider upgrading your affiliation!"
+msgstr ""
+"Je kan niet meer dan %d claims aanmaken. Overweeg om je peterschap up te "
+"graden!"
+
+msgid "You have already claimed this product."
+msgstr "Je hebt dit produkt al geclaimd."
+
+msgid ""
+"Select a tag to order this collection by its value. If you see no optioons "
+"here, it's because none of the images in this collection have key/value "
+"tags. PS: Images that lack this tag will appear at the bottom of the "
+"collection."
+msgstr ""
+
+msgid "Please use the following format: yyyy-mm-dd"
+msgstr "Gebruik het volgende ISO formaat : yyyy-mm-dd"
+
+msgid "Date"
+msgstr "Datum"
+
+msgid "The date cannot be in the future."
+msgstr "De datum kan niet in de toekomst liggen."
+
 msgid "Link"
 msgstr "Link"
 
@@ -796,6 +844,15 @@ msgid ""
 "original image can be considered."
 msgstr ""
 
+msgid "Key/value tags"
+msgstr ""
+
+msgid ""
+"Provide a list of unique key/value pairs to tag this image with. Use the '=' "
+"symbol between key and value, and provide one pair per line. These tags can "
+"be used to sort images by arbitrary properties."
+msgstr ""
+
 #, fuzzy
 msgid "Revision"
 msgstr "Reviews"
@@ -803,23 +860,11 @@ msgstr "Reviews"
 msgid "This field is required."
 msgstr "Dit veld is verplicht."
 
+msgid "Unable to parse."
+msgstr ""
+
 msgid "Please select a remote source if this image was acquired remotely."
 msgstr ""
-
-msgid "Opacity"
-msgstr "Opaciteit"
-
-msgid ""
-"0 means invisible; 100 means completely opaque. Recommended values are: 10 "
-"if the watermark will appear on the dark sky background, 50 if on some "
-"bright object."
-msgstr ""
-"0 betekent onzichtbaar, 100 is volledig ondoorzichtig. Aanbevolen waarden: "
-"10 als het watermerk op een donkere achtergrond zal verschijnen, 50 indien "
-"het gaat om een helder object."
-
-msgid "If you want to watermark this image, you must specify some text."
-msgstr "Voeg tekst toe als je de foto wil markeren met een watermerk."
 
 msgid "Imaging telescopes or lenses"
 msgstr "Telescopen en/of lenzen die je gebruikt om te fotograferen"
@@ -859,11 +904,45 @@ msgstr ""
 msgid "Original image"
 msgstr "Wis het originele beeld"
 
-msgid "If you have a personal website, put the address here."
-msgstr "Als je een eigen website hebt, vermeld dat dan hier."
+msgid "Opacity"
+msgstr "Opaciteit"
 
-msgid "Website"
-msgstr "Website"
+msgid ""
+"0 means invisible; 100 means completely opaque. Recommended values are: 10 "
+"if the watermark will appear on the dark sky background, 50 if on some "
+"bright object."
+msgstr ""
+"0 betekent onzichtbaar, 100 is volledig ondoorzichtig. Aanbevolen waarden: "
+"10 als het watermerk op een donkere achtergrond zal verschijnen, 50 indien "
+"het gaat om een helder object."
+
+msgid "If you want to watermark this image, you must specify some text."
+msgstr "Voeg tekst toe als je de foto wil markeren met een watermerk."
+
+msgid "Latitude (degrees)"
+msgstr "Breedtegraad (graden)"
+
+msgid "Latitude (minutes)"
+msgstr "Breedtegraad (minuten)"
+
+msgid "Latitude (seconds)"
+msgstr "Breedtegraad (seconden)"
+
+msgid "Longitude (degrees)"
+msgstr "Lengtegraad (graden)"
+
+msgid "Longitude (minutes)"
+msgstr "Lengtegraad (minuten)"
+
+msgid "Longitude (seconds)"
+msgstr "Lengtegraad (seconden)"
+
+msgid ""
+"Use this field to mark that the item you are merging really is the same "
+"product (or a variation thereof) of something you have claimed before."
+msgstr ""
+"Gebruik dit veld om aan te geven dat het produkt dat je samenvoegt effectief "
+"hetzelfde (of een variatie) is van iets dat je eerder hebt geclaimd."
 
 msgid ""
 "All the telescopes and lenses you own, including the ones you use for "
@@ -888,77 +967,22 @@ msgstr "Telescopen en lenzen"
 msgid "Cameras"
 msgstr "Camera's"
 
-msgid "Users"
-msgstr "Gebruikers"
+msgid "If you have a personal website, put the address here."
+msgstr "Als je een eigen website hebt, vermeld dat dan hier."
 
-msgid "Latitude (degrees)"
-msgstr "Breedtegraad (graden)"
+msgid "Website"
+msgstr "Website"
 
-msgid "Latitude (minutes)"
-msgstr "Breedtegraad (minuten)"
-
-msgid "Latitude (seconds)"
-msgstr "Breedtegraad (seconden)"
-
-msgid "Longitude (degrees)"
-msgstr "Lengtegraad (graden)"
-
-msgid "Longitude (minutes)"
-msgstr "Lengtegraad (minuten)"
-
-msgid "Longitude (seconds)"
-msgstr "Lengtegraad (seconden)"
-
-msgid "Please use the following format: yyyy-mm-dd"
-msgstr "Gebruik het volgende ISO formaat : yyyy-mm-dd"
-
-msgid "Date"
-msgstr "Datum"
+#, fuzzy
+#| msgid "Mark as good"
+msgid "Mark as final"
+msgstr "Markeren als correct"
 
 msgid "Please enter a value between 1 and 5."
 msgstr "Vul een waarde in tussen 1 en 5."
 
 msgid "Please enter a value between 1 and 10."
 msgstr "Vul een waarde in tussen 1 en 10."
-
-msgid "The date cannot be in the future."
-msgstr "De datum kan niet in de toekomst liggen."
-
-msgid "Make"
-msgstr "Merk"
-
-msgid "The make, brand, producer or developer of this product."
-msgstr "Het merk, de fabrikant, de producent of ontwikkelaar van dit produkt."
-
-msgid "Name"
-msgstr "Naam"
-
-msgid "Merge"
-msgstr "Samenvoegen"
-
-msgid ""
-"Use this field to mark that the item you are claiming really is the same "
-"product (or a variation thereof) of something you have claimed before."
-msgstr ""
-"Gebruik dit veld om aan te geven dat het produkt dat je claimt effectief "
-"hetzelfde (of een variatie ervan) is van iets dat je eerder hebt geclaimd."
-
-#, python-format
-msgid ""
-"You can't create more than %d claims. Consider upgrading your affiliation!"
-msgstr ""
-"Je kan niet meer dan %d claims aanmaken. Overweeg om je peterschap up te "
-"graden!"
-
-msgid ""
-"Use this field to mark that the item you are merging really is the same "
-"product (or a variation thereof) of something you have claimed before."
-msgstr ""
-"Gebruik dit veld om aan te geven dat het produkt dat je samenvoegt effectief "
-"hetzelfde (of een variatie) is van iets dat je eerder hebt geclaimd."
-
-msgid "You have already claimed this product."
-msgstr "Je hebt dit produkt al geclaimd."
 
 msgid "Recipient"
 msgstr "Ontvanger"
@@ -989,15 +1013,6 @@ msgstr "likes"
 
 msgid "has written a review on"
 msgstr "heeft een review geschreven over"
-
-msgid "created a new public data pool"
-msgstr "maakte een nieuwe publieke gegevensbank aan"
-
-msgid "added new data to public data pool"
-msgstr "voegde nieuwe data toe aan een publieke gegevensbank"
-
-msgid "added a new processed image to public data pool"
-msgstr "voegde een nieuwe bewerkte foto toe aan een publieke gegevensbank"
 
 #, fuzzy
 msgid "created a new public group"
@@ -1274,6 +1289,11 @@ msgstr "Catadioptrisch: Schmidt-Cassegrain"
 msgid "Catadioptric: ACF Schmidt-Cassegrain"
 msgstr "Catadioptrisch: ACF Schmidt-Cassegrain"
 
+#, fuzzy
+#| msgid "Catadioptric: ACF Schmidt-Cassegrain"
+msgid "Catadioptric: Rowe-Atkinson Schmidt astrograph"
+msgstr "Catadioptrisch: ACF Schmidt-Cassegrain"
+
 msgid "Camera lens"
 msgstr "Cameralens"
 
@@ -1417,7 +1437,9 @@ msgstr ""
 msgid "Other/Unknown"
 msgstr ""
 
-msgid "Deep sky object"
+#, fuzzy
+#| msgid "Deep sky object"
+msgid "Deep sky object or field"
 msgstr "Deep-sky object"
 
 msgid "Solar system body or event"
@@ -1539,6 +1561,34 @@ msgstr "Beschrijving"
 msgid "HTML tags are allowed."
 msgstr "HTML tags zijn toegestaan."
 
+msgid "Uncompressed source (max 200 MB)"
+msgstr ""
+
+msgid ""
+"You can store the final processed image that came out of your favorite image "
+"editor (e.g. PixInsight, Adobe Photoshop, etc) here on AstroBin, for "
+"archival purposes. This file is stored privately and only you will have "
+"access to it."
+msgstr ""
+
+#, fuzzy
+#| msgid "Thumbnail"
+msgid "Gallery thumbnail"
+msgstr "Miniatuur (Thumbnail)"
+
+msgid "Select an area of the image to be used as thumbnail in your gallery."
+msgstr ""
+
+#, fuzzy
+#| msgid "Star trails"
+msgid "Sharpen thumbnails"
+msgstr "Sterrensporen"
+
+msgid ""
+"If selected, AstroBin will use a resizing algorithm that slightly sharpens "
+"the image's thumbnails. This setting applies to all revisions."
+msgstr ""
+
 msgid "Apply watermark to image"
 msgstr "Pas watermerk toe"
 
@@ -1557,16 +1607,19 @@ msgstr "Licentie"
 msgid "Allow comments"
 msgstr "Commentaar toestaan"
 
+#, fuzzy
+#| msgid "Notifications"
+msgid "Skip notifications"
+msgstr "Kennisgevingen"
+
+msgid "Do not notify your followers about this image upload."
+msgstr ""
+
 msgid "(no title)"
 msgstr "(geen titel)"
 
 msgid "Mix of multiple source"
 msgstr ""
-
-#, fuzzy
-#| msgid "Notifications"
-msgid "Skip notifications"
-msgstr "Kennisgevingen"
 
 msgid "Do not notify your followers about this revision."
 msgstr ""
@@ -1577,6 +1630,11 @@ msgstr "# Foto's"
 #, fuzzy
 msgid "Cover image"
 msgstr "Geen foto's"
+
+#, fuzzy
+#| msgid "Other images"
+msgid "Order by image tag"
+msgstr "Andere beelden"
 
 msgid "Please use the following format: yyyy-mm-dd."
 msgstr "Gebruik het volgen de ISO formaat : yyyy-mm-dd."
@@ -1739,13 +1797,20 @@ msgstr "Breedte van de derde Centrale Meridiaan."
 msgid "Seeing"
 msgstr "Seeing"
 
-msgid "Your estimation of the seeing, on a scale from 1 to 5."
+#, fuzzy
+#| msgid "Your estimation of the seeing, on a scale from 1 to 5."
+msgid ""
+"Your estimation of the seeing, on a scale from 1 to 5. Larger is better."
 msgstr "Schatting van de seeing, op een schaal van 1 tot 5."
 
 msgid "Transparency"
 msgstr "Transparency"
 
-msgid "Your estimation of the transparency, on a scale from 1 to 10."
+#, fuzzy
+#| msgid "Your estimation of the transparency, on a scale from 1 to 10."
+msgid ""
+"Your estimation of the transparency, on a scale from 1 to 10. Larger is "
+"better."
 msgstr ""
 "Schatting van de doorzichtigheid van de lucht, op een schaal van 1 tot 10."
 
@@ -1898,6 +1963,15 @@ msgstr ""
 msgid ""
 "These emails may contain offers, commercial news, and promotions from "
 "AstroBin or its partners."
+msgstr ""
+
+msgid "Allow astronomy ads from our partners"
+msgstr ""
+
+msgid ""
+"It would mean a lot if you chose to allow astronomy relevant, non intrusive "
+"ads on this website. AstroBin is a small business run by a single person, "
+"and this kind of support would be amazing. Thank you in advance!"
 msgstr ""
 
 msgid "Language"
@@ -2069,6 +2143,29 @@ msgstr ""
 
 msgid "Commercial gear items"
 msgstr "Commercieel materiaal"
+
+#, fuzzy
+#| msgid "Sending..."
+msgid "Pending"
+msgstr "Bezig met versturen..."
+
+msgid "Processing"
+msgstr ""
+
+#, fuzzy
+#| msgid "Read all"
+msgid "Ready"
+msgstr "Alles lezen"
+
+#, fuzzy
+#| msgid "Error!"
+msgid "Error"
+msgstr "Fout!"
+
+#, fuzzy
+#| msgid "Expires"
+msgid "Expired"
+msgstr "Verloopt op"
 
 msgid "Message sent"
 msgstr "Bericht verstuurd"
@@ -2245,30 +2342,6 @@ msgstr ""
 msgid ""
 "\n"
 "                            <a href=\"%(user_page)s\">%(user)s</a> created a "
-"new public data pool.\n"
-"                        "
-msgstr ""
-
-#, python-format
-msgid ""
-"\n"
-"                            <a href=\"%(user_page)s\">%(user)s</a> added "
-"data to a data pool.\n"
-"                        "
-msgstr ""
-
-#, python-format
-msgid ""
-"\n"
-"                            <a href=\"%(user_page)s\">%(user)s</a> added a "
-"processed image to a data pool.\n"
-"                        "
-msgstr ""
-
-#, python-format
-msgid ""
-"\n"
-"                            <a href=\"%(user_page)s\">%(user)s</a> created a "
 "new public group.\n"
 "                        "
 msgstr ""
@@ -2280,12 +2353,6 @@ msgid ""
 "group.\n"
 "                        "
 msgstr ""
-
-msgid "Affiliates"
-msgstr "Peterschap"
-
-msgid "The following companies support AstroBin."
-msgstr "De volgende bedrijven sponsoren AstroBin."
 
 msgid "Request an API key"
 msgstr "Aanvragen van een API Key"
@@ -2304,10 +2371,13 @@ msgstr ""
 "Nadat je je aanvraag hebt verstuurd, zal je binnen 24 uur een antwoord "
 "krijgen."
 
-#, python-format
+#, fuzzy
+#| msgid ""
+#| "Please make sure you have read the section about APIs in the <a href="
+#| "\"%(tos_url)s\">Terms of Service</a>."
 msgid ""
 "Please make sure you have read the section about APIs in the <a href="
-"\"%(tos_url)s\">Terms of Service</a>."
+"\"https://welcome.astrobin.com/terms-of-service\">Terms of Service</a>."
 msgstr ""
 "Vergewis je ervan dat je de sectie over API's in de <a href=\"%(tos_url)s"
 "\">Gebruiksvoorwaarden</a> hebt gelezen."
@@ -2407,9 +2477,6 @@ msgstr "Home"
 msgid "Forum"
 msgstr "Forum"
 
-msgid "Help"
-msgstr "Hulp"
-
 msgid "FAQ"
 msgstr "FAQ"
 
@@ -2418,6 +2485,9 @@ msgstr "Gebruiksvoorwaarden"
 
 msgid "Guidelines"
 msgstr "Richtlijnen"
+
+msgid "Sponsors"
+msgstr ""
 
 msgid "Source code"
 msgstr "Broncode"
@@ -2495,6 +2565,73 @@ msgstr "Alle fora als gelezen markeren"
 msgid "AstroBin is in READ ONLY mode"
 msgstr "AstroBin index"
 
+#, fuzzy
+#| msgid "Sorry"
+msgid "Sorry :-("
+msgstr "Helaas"
+
+#, fuzzy
+#| msgid "Accessories"
+msgid "Access denied"
+msgstr "Accessoires"
+
+msgid "This feature is only offered at higher membership levels."
+msgstr ""
+
+msgid ""
+"Would you be interested in upgrading? AstroBin is a very small business and "
+"your support would mean a lot!"
+msgstr ""
+
+msgid "No, thanks"
+msgstr "Nee, dank je"
+
+msgid "Tell me more!"
+msgstr ""
+
+#, fuzzy
+#| msgid "Are you sure?"
+msgid "Are you really sure?"
+msgstr "Ben je zeker?"
+
+msgid ""
+"We know, we're all used to the fact that ads on the Internet are\n"
+"                    annoying."
+msgstr ""
+
+msgid ""
+"However, please let us offer you two good reasons to allow ads on\n"
+"                    AstroBin:"
+msgstr ""
+
+msgid ""
+"AstroBin is a one-person business. As of the time of writing, in early "
+"2020,\n"
+"                        I'm trying to make AstroBin a full time job, but it "
+"hasn't happened yet. If this dream were to\n"
+"                        become reality, I could invest a lot more time in "
+"the development of AstroBin, and everybody\n"
+"                        would benefit from it!"
+msgstr ""
+
+msgid ""
+"There are only astronomy ads on AstroBin, that are published after my review "
+"and\n"
+"                        approval. Nothing fishy, nothing off-topic, and "
+"nothing that will use any of your private\n"
+"                        information."
+msgstr ""
+
+#, python-format
+msgid ""
+"If you still feel that you would rather not see these ads, you can change "
+"this on\n"
+"                    <a href=\"%(profile_url)s\">your settings page</a>."
+msgstr ""
+
+msgid "Thank you!"
+msgstr "Dank u!"
+
 msgid "Quick search"
 msgstr "Snelzoeken"
 
@@ -2540,9 +2677,6 @@ msgstr "Geavanceerd zoeken"
 msgid "Top picks"
 msgstr ""
 
-msgid "Public data pools"
-msgstr "Publieke gegevensbanken"
-
 msgid "Stats"
 msgstr "Statistieken"
 
@@ -2550,11 +2684,8 @@ msgstr "Statistieken"
 msgid "Trending astrophotographers"
 msgstr "Wijzig je astrofoto materiaal"
 
-msgid "What is this site?"
-msgstr "Wat is het doel van deze site?"
-
-msgid "AstroBin Raw Data"
-msgstr "AstroBin Raw Data"
+msgid "Help"
+msgstr "Hulp"
 
 msgid "Contact"
 msgstr "Contact"
@@ -2580,9 +2711,6 @@ msgstr "Wens je om je echte naam te gebruiken op AstroBin?"
 msgid "OK"
 msgstr "OK"
 
-msgid "No, thanks"
-msgstr "Nee, dank je"
-
 msgid "Login"
 msgstr "Login"
 
@@ -2606,15 +2734,6 @@ msgstr "Bladwijzers"
 
 msgid "Plots"
 msgstr "Grafieken"
-
-msgid "Raw data"
-msgstr "Ruwe data"
-
-msgid "Raw data library"
-msgstr "Raw data verzameling"
-
-msgid "Private shared folders"
-msgstr "Gedeelde privéfolders"
 
 msgid "My messages"
 msgstr "Mijn berichten"
@@ -2736,299 +2855,6 @@ msgstr ""
 
 msgid "More"
 msgstr ""
-
-msgid "Frequently Asked Questions"
-msgstr "FAQ = Meest gestelde vragen"
-
-msgid "Is this website for free?"
-msgstr "Is deze website gratis te gebruiken?"
-
-msgid "Are there any limits on how large and how many images I can upload?"
-msgstr ""
-"Zijn er beperkingen of limieten omtrent de grootte en het aantal foto's die "
-"ik kan uploaden?"
-
-msgid "What image formats are supported?"
-msgstr "Welke beeldformaten worden ondersteund?"
-
-msgid "Is my data safe on AstroBin?"
-msgstr "Zijn mijn gegevens veilig op AstroBin?"
-
-msgid ""
-"I've seen beautiful images on this site. I'm not worthy of posting mine!"
-msgstr ""
-"Ik heb hier prachtige foto's gezien. Mijn beelden zijn het niet waard om "
-"erbij te zetten!"
-
-msgid "What's the deal with the Staging Area and the Public Area?"
-msgstr "Wat is het verschil tussen de Ontwikkelingszone en de Publieke Zone?"
-
-msgid "Why was AstroBin created?"
-msgstr "Waarom is AstroBin uit de grond gestampt?"
-
-msgid "What are the plans for the future?"
-msgstr "Wat zijn de toekomstplannen?"
-
-msgid "How can I format my comments?"
-msgstr "Hoe kan ik een opmaak meegeven aan mijn commentaren?"
-
-msgid "How is the AstroBin index calculated?"
-msgstr "Hoe wordt de AstroBin index berekend?"
-
-msgid "I received some Likes, why is my AstroBin index not updated?"
-msgstr ""
-"Ik heb een paar likes gekregen. Waarom is mijn AstroBin index hier niet mee "
-"upgedated?"
-
-msgid "How is the Image of the Day selected?"
-msgstr "Hoe wordt de Foto van de Dag geselecteerd?"
-
-msgid "... and their answers!"
-msgstr "... en hun antwoorden!"
-
-msgid ""
-"No. A free account will let you upload up to 10 images, and partake in all "
-"social activities. For unlimited storage, you will need a premium "
-"subscription."
-msgstr ""
-"Nee, met een gratis account kun je 10 foto's uploaden en deelnemen aan de "
-"sociale aktiviteiten. Voor onbeperkte opslag heb je een premium account "
-"nodig."
-
-msgid ""
-"<strong>NO!</strong> If you are a premium member, on AstroBin you can upload "
-"as many images as you want, and as large as you want. In fact, full size "
-"images are encouraged!"
-msgstr ""
-"<strong>NEE!</strong> Je kan op AstroBin zoveel foto's zetten als je wil en "
-"hoe groot je wil. We moedigen het zelfs aan om foto's te publiceren in hun "
-"oorspronkelijke 'full size' formaat!"
-
-msgid "AstroBin will accept JPEG, PNG and GIF. Animated GIF is supported too."
-msgstr ""
-"AstroBin accepteert JPEG, PNG en GIF. Ook animated GIF wordt ondersteund."
-
-msgid ""
-"Absolutely. There are multiple ways in which AstroBin can store your data "
-"very safely. First of all, the images you upload are stored on a highly "
-"durable, highly available, redundant backend. The durability of the storage "
-"backend is 99.999999999 percent over a given year. This means that if you "
-"upload 10,000 images, you can expect to lose one image to data corruption "
-"once in 10,000,000 year. The images are duplicated across two different "
-"physical servers, for protection against natural disasters."
-msgstr ""
-"Absoluut. Je foto's op AstroBin worden op verschillende niveaus veilig "
-"bewaard. Ten eerste worden alle beelden op een kwaliteitsvolle, redundante "
-"infrastructuur bewaard die een hoge graad van beschikbaarheid garandeert. De "
-"kwaliteit wordt uitgedrukt als 99.999999999% per jaar. Dit komt erop neer "
-"dat als je 10.000 beelden op onze server plaatst, je mag verwachten dat je 1 "
-"foto verliest aan datacorruptie elke 10.000.000 jaar. De foto's worden "
-"dubbel bewaard en verdeeld op twee afzonderlijke servers zodat we gewapend "
-"zijn tegen natuurrampen."
-
-msgid ""
-"The actual website, instead, is hosted on a Virtual Machine, so, in case of "
-"severe hardware failure, it can be redeployed to a different server in a "
-"matter of 15 minutes."
-msgstr ""
-"De eigenlijke website zelf wordt aangeboden door middel van een virtuele "
-"machine (Virtual Machine). Indien er zich een ernstige systeemfout voordoet, "
-"kan de site opnieuw opgestart worden op een andere server in 15 minuten tijd."
-
-msgid ""
-"Finally, the database that powers AstroBin (in fact, the whole Virtual "
-"Machine) is backed up daily. In case of severe data loss, the website will "
-"be quickly restored to a snapshot that's never older than 24 hours."
-msgstr ""
-"Tenslotte wordt er van de database die achter AstroBin zit (in feite de "
-"volledige Virtual Machine) een dagelijkse reservekopie gemaakt. Moest er een "
-"ernstig verlies aan gegevens plaatsvinden, dan kunnen we deze hestellen door "
-"een kopie terug te zetten die maximaal 24u oud is."
-
-msgid ""
-"That said, you should be aware that AstroBin is not a backup service, and "
-"although your data is very safe in our hands, we cannot legally take "
-"responsibility in the event of loss, however unlikely it is. Always keep a "
-"copy of your image on your computer."
-msgstr ""
-"Dit gezegd zijnde moet je wel weten dat AstroBin geen backup service is. "
-"Hoewel je gegevens zeer zorgvuldig worden behandeld door ons, kunnen we geen "
-"juridische verantwoordelijkheid dragen in het onwaarschijnlijke geval dat we "
-"gegevens verliezen. Je dient zelf altijd een eigen kopie van je foto's op je "
-"eigen computer(s) te bewaren."
-
-msgid ""
-"Nonsense. AstroBin has <strong>not</strong> been made to showcase beautiful "
-"image, but to give everybody an opportunity to contribute to a vast and "
-"evergrowing effort of centralization and indexing of important data. That 30 "
-"minute picture of M31 you took last night between the clouds <em>belongs</"
-"em> here! Don't be shy and post it!"
-msgstr ""
-"Niet waar!! AstroBin is <strong>niet</strong> in het leven geroepen om "
-"alleen maar supermooie foto's te bevatten, maar om iedereen de kans te geven "
-"om bij te dragen tot een aanzienlijke en onophoudelijk groeiende inspanning "
-"tot het centraliseren en indexeren van belangrijke gegevens. Die foto van "
-"M31 tussen de wolken met een belichtingstijd van 30 minuten die je de "
-"voorbije nacht maakte <em>moet</em> hier bijstaan! Wees niet verlegen en "
-"publiceer ze!"
-
-msgid ""
-"On AstroBin you have two places for our images. The Staging Area is where "
-"you can upload images that you want to quickly share on forums, mailing "
-"lists or social networks. The days of scaling down and compressing your "
-"image so you can upload it to a forum for feedback and critique are over! "
-"Just upload to AstroBin's Staging Area, and send the link to anyone you "
-"want. The image will be visible only to the intended recipients, and won't "
-"appear on your profile or AstroBin's home page."
-msgstr ""
-"Astrobin bevat twee zones voor onze foto's. De Ontwikkelingszone kan je "
-"gebruiken om foto's snel te delen op fora, mailing lijsten of sociale "
-"netwerken. De dagen waar je beelden moest verkleinen en comprimeren om ze op "
-"een forum te kunnen zetten zijn voorbij! Laad het beeld in AstroBins "
-"Ontwikkelingszone en stuur de link door naar wie je wil. Zo is de foto enkel "
-"zichtbaar voor het geselecteerde publiek en zal ze niet op je profiel of op "
-"de homepagina van AstroBin verschijnen."
-
-msgid ""
-"The Public Area, instead, is for your finished products. After you have "
-"received feedback on your favorite forum, you can promote an image from the "
-"Staging Area to the Public Area, and it will appear on your profile. "
-"Remember that you can also move images back and forth from one Area to the "
-"other as many times as you want!"
-msgstr ""
-"De Publieke Zone is daarentegen de plaats voor je afgewerkte foto's. Nadat "
-"je op je favoriete forum de nodige commentaren hebt gekregen, kan je een "
-"foto promoveren van de Ontwikkelingszone naar de Publieke Zone zodat ze "
-"zichtbaar is op je profiel. Onthoud dat je foto's herhaaldelijk van de ene "
-"Zone naar de andere kan verplaatsen zonder beperking."
-
-msgid ""
-"AstroBin was born out of the desire to end something that had been going on "
-"for too long: the waste of incredible material to the sea of chaos that the "
-"Internet can be. For years, fantastic astrophotographs have beeen uploaded "
-"to Internet Forums, often with little or no data, or to general purpose "
-"image hosting websites, invariably with no data attached."
-msgstr ""
-"AstroBin is geboren uit het verlangen om een eind te maken aan iets dat al "
-"veel te lang bezig was: het kwijtspelen van prachtig beeldmateriaal in de "
-"zee van chaos die Internet tegenwoordig is. Jaren aan een stuk zijn er "
-"fantastisch mooie beelden gezet op fora of andere image hosting websites "
-"zonder toevoegen van waardevolle en interessante data omtrent de gemaakte "
-"foto's."
-
-msgid ""
-"Such an image would be seen by some people, then quickly forgotten, and "
-"reduced to nothing more than a bunch of pixel in the giant wasteland of the "
-"Internet."
-msgstr ""
-"Op deze manier werden deze foto's slechts door enkelen bekeken en snel terug "
-"vergeten. Mooie foto's werden zo gereduceerd tot niets meer dan een hoopje "
-"pixels op het grote Internet-stort."
-
-msgid ""
-"This should not be allowed to happen. AstroBin is the response: an effort to "
-"host, collect, index and categorize the output of the astrophotographers all "
-"over the world, so that their precious data would serve a purpose, and have "
-"a meaning forever."
-msgstr ""
-"Dit zou niet mogen gebeuren en AstroBin is het antwoord: een poging om het "
-"werk van astrofotografen van over heel de wereld te verzamelen, te tonen, te "
-"indexeren en te categoriseren zodat deze kostbare data voor altijd zinvol en "
-"raadpleegbaar blijven."
-
-msgid ""
-"<em>AstroBin</em> is just starting out, and this time we can really say that "
-"the sky is the limit! Tons of ideas are in the pipeline. As the user base "
-"grows, so does the data. Suddenly, things like automated supernovae search "
-"become possible: you could simply upload an image of a galaxy, and AstroBin "
-"could compare it to pictures of the same galaxy taken previously."
-msgstr ""
-"<em>AstroBin</em> is nog maar pas uit de startblokken gekomen en we kunnen "
-"nu al zeggen: \"The sky is the limit\". Er zitten talloze ideeën te wachten "
-"tot ze worden uitgewerkt. Als het aantal gebruikers groeit, zal ook de "
-"hoeveelheid gegevens toenemen. En dan worden dingen plots mogelijk zoals een "
-"geautomatiseerde zoektocht naar supernova's. Je moet dan enkel maar je foto "
-"van een sterrenstelsel uploaden en AstroBin kan ze vergelijken met alle "
-"foto's die eerder werden gepost."
-
-msgid ""
-"AstroBin could also recommend subjects for you to image! Knowing your "
-"equipment, your location, and comparing what you have imaged to what users "
-"similar to you have, AstroBin could suggest your next challenge!"
-msgstr ""
-"AstroBin zou je ook advies kunnen geven over welke objecten je eventueel nog "
-"zou kunnen fotograferen! Dit omdat de site weet welk materiaal je bezit, "
-"waar je woont en welke beelden je al hebt gemaakt. Door deze gegevens te "
-"vergelijken met de info van gebruikers die overeenkomsten hebben met je "
-"profiel, kan AstroBin je een volgende uitdaging suggereren!"
-
-msgid ""
-"Thanks to the input from the community, more ideas are flowing in and the "
-"list get bigger and bigger."
-msgstr ""
-"En dankzij de inbreng van de gemeenschap komen er steeds meer ideeën binnen, "
-"zodat de lijst met mogelijkheden blijft groeien."
-
-msgid ""
-"AstroBin uses the Markdown syntax. Please use the following reference table:"
-msgstr ""
-"AstroBin gebruikt de \"Markdown syntax\". Hieronder een tabel die de "
-"mogelijkheden toont:"
-
-msgid "You type:"
-msgstr "Je schrijft:"
-
-msgid "You see:"
-msgstr "Je ziet:"
-
-msgid "italics"
-msgstr "schuin"
-
-msgid "bold"
-msgstr "vet"
-
-msgid "(TAB or 4 spaces)"
-msgstr "(TAB of 4 spaties)"
-
-msgid "preformatted text"
-msgstr "code"
-
-msgid "quoted text"
-msgstr "aangehaalde tekst"
-
-msgid "escape the formatting syntax"
-msgstr "keer weer uit de formatterende syntax"
-
-msgid ""
-"The AstroBin index is a function of the number of Likes and the number of "
-"images posted by a user."
-msgstr ""
-"De AstroBin index wordt berekend aan de hand van het aantal Likes en het "
-"aantal geposte beelden van een gebruiker."
-
-msgid ""
-"Because it's computationally expensive, the AstroBin index is updated only "
-"every 24 hours. The same applies for the search index, the Big Wall, and "
-"some other user data."
-msgstr ""
-"Omdat het veel rekenwerk vereist, wordt de AstroBin 1 keer per 24 uur "
-"aangepast. Hetzelfde geldt voor de zoekindex, de Grote Muur en sommige "
-"andere gebruikersgegevens."
-
-msgid ""
-"A staff of 52 volunteers goes thru a three-stage process: 30 \"submitters\" "
-"propose images for IOTD; 15 \"reviewers\" advance some of them to the next "
-"stage; finally, any one of 7 judges can select an image from the pool of "
-"finalists as IOTD. There are limitations in place in the system to avoid "
-"abuse and monopoly."
-msgstr ""
-
-msgid ""
-"Do you have a question not covered here! Please <a href=\"/contact/"
-"\">contact us</a>!"
-msgstr ""
-"Heb je nog een vraag die hier niet bijstaat? Zend ons gerust een <a href=\"/"
-"contact/\">mail</a>!"
 
 msgid "Instructions and examples"
 msgstr "Instructies en voorbeelden"
@@ -3270,327 +3096,6 @@ msgstr "Eigenaars"
 msgid "just now"
 msgstr "momenteel"
 
-msgid ""
-"AstroBin accounts are meant for members to share original images that they "
-"have created."
-msgstr ""
-"AstroBin accounts zijn bedoeld voor leden die hun eigen originele beelden "
-"willen delen."
-
-msgid "What is allowed"
-msgstr "Wat is toegestaan"
-
-msgid "Do upload content you have created yourself."
-msgstr "Upload beelden die je zelf hebt gemaakt."
-
-msgid ""
-"Respect the copyright of others. Stealing images from other people and "
-"trying to pass them off as yours is not allowed on AstroBin."
-msgstr ""
-"Respecteer het copyright van anderen. Beelden stelen van anderen en laten "
-"uitschijnen dat ze jezelf toebehoren is niet toegelaten op AstroBin."
-
-msgid "Do fill in all the technical details you can."
-msgstr "Vul zoveel mogelijk technische details in."
-
-msgid ""
-"AstroBin is founded on the idea that data is important and can't go wasted "
-"in a sea of chaos. As much as you can, please fill in the technical details "
-"of your images."
-msgstr ""
-"De filosofie van AstroBin is gebaseerd op het idee dat gegevens belangrijk "
-"zijn en niet mogen verloren gaan in een zee van chaos. Gelieve dus aub "
-"zoveel mogelijk technische details van je foto's bij te voegen."
-
-msgid "Be respectful of other users."
-msgstr "Toon respect tegenover andere gebruikers."
-
-msgid "Be nice and friendly to other users when you send them messages."
-msgstr "Wees correct en vriendelijk als je anderen berichten stuurt."
-
-msgid "What is forbidden"
-msgstr "Wat is verboden"
-
-#, fuzzy
-msgid "Don't upload anything that you did not work on."
-msgstr "Upload niets waar je geen copyrighthouder van bent."
-
-msgid ""
-"It's simple: if you didn't take or post-process an image yourself, then "
-"don't upload it. Things that are not fine include: reposting other people's "
-"images without any meaningful modifications and without the owner's content; "
-"reposting NASA's (and other similar agencies) images without any meaningful "
-"modifications. Things that are okay include: post-processing freely "
-"available data from NASA and other similar agencies; post-processing a "
-"friend's data; post-processing free data made available by other users."
-msgstr ""
-
-msgid "No nudity, no explicitly sexual content, no illegal content."
-msgstr ""
-"Geen beelden met naakt, geen expliciet sexuele inhoud, geen illegale zaken."
-
-msgid ""
-"Your account will be permanently deleted, and so will all your content, if "
-"you upload any content that is illegal, porn or nudity. We also reserve the "
-"right to report you to the authorities, if we find it necessary."
-msgstr ""
-"Je lidmaatschap wordt voorgoed verwijderd, inclusief alle upgeloade foto's "
-"als je materiaal publiceert dat illegaal is of porno/naaktheid bevat. We "
-"hebben dan ook steeds het recht om je aan te geven bij de bevoegde "
-"instanties als we dit nodig achten."
-
-msgid "Don't upload images that have nothing to do with astronomy."
-msgstr "Publiceer geen foto's die niets te maken hebben met astronomie."
-
-msgid ""
-"Images of your equipment are fine, but don't use AstroBin to upload pictures "
-"from your last vacation. Your account won't be deleted, but we will ask you "
-"to remove those pictures."
-msgstr ""
-"Beelden van je astro-apparatuur zijn OK, maar gebruik AstroBin niet om "
-"foto's van je voorbije vakantie te posten. Dit zal niet direct een "
-"aanleiding zijn om je lidmaatschap te verbreken, maar we zullen vragen om "
-"dit soort van foto's te verwijderen."
-
-msgid "Don't use your account to host images for websites, banners or logos."
-msgstr ""
-"Gebruik je account niet om foto's op te slaan die je gebruikt op websites, "
-"banners of logo's."
-
-msgid ""
-"Banners, logos, icons or other graphic elements that are not "
-"astrophotography are not allowed on AstroBin."
-msgstr ""
-"Banners, logo's, icoontjes of andere grafische elementen die geen "
-"astrofotografie zijn, zijn niet toegelaten op AstroBin."
-
-msgid ""
-"In conclusion, these terms are just a way to say \"please be nice and use "
-"common sense\". If you feel you can't abide by them, please let us know what "
-"you feel is wrong."
-msgstr ""
-"Samengevat, met deze voorwaarden bedoelen we gewoon: \"Wees alstublieft "
-"hoffelijk en gebruik je gezond verstand.\" Als je met een bepaalde "
-"voorwaarde problemen moest hebben, laat het ons dan weten."
-
-msgid ""
-"Are you an astrophotographer? Do you like to share the outcome of your hard "
-"work with others? As an astrophotographer myself, and a subscriber to "
-"numerous Astrophotography forums, I have found that the Internet is lacking "
-"a centralized place where astrophotographers can share their work."
-msgstr ""
-"Ben jij een astrofotograaf? Vind je het leuk om het resultaat van je noeste "
-"werk te delen met anderen? Zelf astrofotograaf zijnde, en lid van talloze "
-"astrofotografie-fora, viel het me op dat er een centrale plaats ontbreekt op "
-"het Internet waar astrofotografen hun werk kunnen delen."
-
-msgid "Well, this is finally over!"
-msgstr "Wel, vanaf nu is dit verleden tijd!"
-
-msgid ""
-"<em>AstroBin</em> comes to fill the gap. It's a website built from the "
-"ground up by an astrophotographer, and it provides means to people who want "
-"to share their astrophotographs."
-msgstr ""
-"<em>AstroBin</em> vult deze leemte. De astrofotograaf die deze website "
-"ontwierp is met een propere lei begonnen om alle behoeften te dekken van "
-"iedereen die astro-foto's wil delen."
-
-msgid "So how is this different from any other image sharing websites?"
-msgstr ""
-"Wat zijn dan de verschillen met andere websites waar foto's gedeeld worden?"
-
-msgid ""
-"<em>AstroBin</em> provides a number of features that are tailored "
-"specificlly to astrophotography. Here's a quick run down of the main ones:"
-msgstr ""
-"<em>AstroBin</em> biedt een aantal functies die specifieke behoeften dekken "
-"voor astrofotografie. Hierbij een kort overzicht van de belangrijkste "
-"mogelijkheden:"
-
-msgid "Dedication to data"
-msgstr "Onderkenning van het belang van (meta-)data"
-
-msgid ""
-"On a general purpose image sharing site, you would upload your image and be "
-"done with it. <em>AstroBin</em>, instead, has a user interface specifically "
-"designed to enable you to input all the technical data of your image."
-msgstr ""
-"Op een gewone foto-sharing site plaats je botweg je foto en klaar is kees. "
-"Maar <em>AstroBin</em> heeft een gebruikserinterface die je toelaat om alle "
-"technische gegevens omtrent je foto toe te voegen."
-
-msgid ""
-"<em>AstroBin</em> will autocomplete your input using a vast database: "
-"everything from telescopes, CCDs and filters to astronomical objects in many "
-"catalogues will show in popup dialogs for easy selection when you start "
-"typing their names. <em>AstroBin</em> is connected to the SIMBAD "
-"Astronomical Database, which contains over 5 million objects under over 15 "
-"million names!"
-msgstr ""
-"<em>AstroBin's</em> autocomplete-functie heeft een grote achterliggende "
-"database die telescopen, CCD's, filters en astronomische objecten uit "
-"verschillende catalogi bevat. Al deze trefwoorden verschijnen in een "
-"selectieveld vanaf het moment dat je een woord begint te typen. "
-"<em>AstroBin</em> is verbonden met de SIMBAD Astronomische Database die meer "
-"dan 5 miljoen objecten bevat die samen gekend zijn onder 15 miljoen namen!"
-
-msgid ""
-"On <em>AstroBin</em>, astronomical subjects have their own page, where you "
-"can see the best images of them, and plots and charts showing trends and "
-"interesting statistics. There is also a page that shows the most popular "
-"subjects organized by month and latitude!"
-msgstr ""
-"Astronomische objecten op <em>AstroBin</em> hebben een eigen pagina waar je "
-"er de mooiste foto's van kunt zien, samen met plots en grafieken over trends "
-"en interessante statistieken. Er is ook een pagina die de meest populaire "
-"objecten laat zien georganizeerd per maand en breedtegraad!"
-
-msgid "Data is strongly interconnected"
-msgstr "Alle data zijn sterk met elkaar verbonden"
-
-msgid ""
-"Have you ever wanted to see how your next image is going to look like? On "
-"<em>AstroBin</em>, you can search for all images of a certain target that "
-"were taken with a certain telescope and a certain CCD or camera. Or a "
-"certain filter. How about all the images between 6 and 8 hours of "
-"integration? Or with a certain Moon phase? You can do that!"
-msgstr ""
-"Heb je je ooit afgevraagd hoe je volgende foto er zal uitzien? Je kan op "
-"<em>AstroBin</em> een zoekopdracht uitvoeren van een specifiek doelobject "
-"die met een zekere telescoop en CCD/camera zijn gemaakt. Of met een zekere "
-"filter. Hoe zit het met foto's die gemaakt zijn met een integratietijd "
-"tussen de 6 en de 8 uur? Of tijdens een bepaalde fase van de Maan? Dit kan "
-"allemaal!"
-
-msgid ""
-"AstroBin can help you with your next telescope or camera purchase, by "
-"searching for gear combinations owned by other users. For instance, you "
-"could search for all images taken with a Canon 5D and any apochromatic "
-"refractor, or a SBIG ST-8300 with any Richtey-Chretien telescope. Or, if you "
-"want, you can search by telescope diameter too!"
-msgstr ""
-"AstroBin kan je helpen met je volgende aankoop van een telescoop of camera "
-"door te zoeken naar materiaalcombinaties die door andere leden in bezit "
-"zijn. Je kan bijvoorbeeld zoeken naar alle foto's die genomen zijn met een "
-"Canon 5D door eender welke apochromatische refractor, of met een SBIG "
-"ST-8300 in combinatie met een Ritchey-Chretien. Je kan ook zoeken op basis "
-"van de telescoopdiameter!"
-
-msgid ""
-"Finally, all this information is collected in interesting plots, that can "
-"help you figure out how some gear items are trending."
-msgstr ""
-"Tenslotte wordt alle informatie verwerkt in interessante grafieken die je "
-"kunnen helpen ontdekken wat de trends zijn in het gebruik van je materiaal."
-
-msgid "All the data at a glance"
-msgstr "Alle nodige gegevens in een oogopslag"
-
-msgid ""
-"Each image on <em>AstroBin</em> is annotated of all the technical details "
-"about its acquisition. Telescopes involved, cameras, mounts, filters, "
-"everything is visible at a glance in the Technical Card. Even the Moon age "
-"at the time of the acquisition is displayed."
-msgstr ""
-"Elk beeld in <em>AstroBin</em> wordt vergezeld door alle technische details "
-"die betrekking hebben op de totstandkoming. Gebruikte telescopen, camera's, "
-"filters, ... Al deze gegevens staan op de technische fiche. Zelfs de "
-"maanleeftijd van het ogenblik waarop de foto werd genomen is vermeld."
-
-msgid "More than just an image"
-msgstr "Meer dan zomaar een foto"
-
-msgid ""
-"<em>AstroBin</em> will do more than just host a copy of your image: when you "
-"upload a photograph, a histogram and a black &amp; white inverted version of "
-"the image will be generated on the fly, so it's easier to spot faint "
-"nebulosity regions or spiral arms. Images will also be plate solved, and an "
-"annotated version will appear on the site. <em>AstroBin</em> will know what "
-"are the astronomical objects in your image without you telling!"
-msgstr ""
-"<em>AstroBin</em> doet meer dan gewoon een kopie bewaren van je foto. Als je "
-"een beeld oplaadt dan wordt er automatisch een histogram en een negatieve "
-"zwart-wit versie gegenereerd zodat je makkelijke zwakke nevels of "
-"spiraalarmen kan zien. Er wordt ook een zogenaamde plate-solving gestart die "
-"achteraf een laag over je foto kan plaatsen met annotaties. <em>AstroBin</"
-"em> zal dus herkennen wat je hebt gefotografeerd zonder dat je het zelf hebt "
-"hoeven te vertellen!"
-
-msgid "Protection from theft with automatic watermarking"
-msgstr ""
-"Anti-diefstalbeveiliging door het automatisch toevoegen van een watermerk"
-
-msgid ""
-"<em>AstroBin</em>'s upload wizard will offer you to watermark your image "
-"with the text of your choosing. All it takes is a click!"
-msgstr ""
-"Bij het opladen van een foto zal de wizard in <em>AstroBin</em> voorstellen "
-"om een watermerk op je beeld te plaatsen met een tekst naar keuze. Gewoon "
-"met één muisklik!"
-
-msgid "AstroBin supports multiple image revisions"
-msgstr "Astrobin ondersteunt verschillende revisies van éénzelfde beeld"
-
-msgid ""
-"Don't tell me you have never gone back to revise the processing of an image "
-"<em>after</em> you had published it. <em>AstroBin</em> embraces this concept "
-"and lets you publish several revisions of the same image easily and "
-"intuitively! Now it's going to be really easy to tell whether your "
-"processing has improved."
-msgstr ""
-"Zeg niet dat je nog nooit een foto opnieuw hebt bewerkt <em>nadat</em> je ze "
-"al had gepubliceerd. <em>AstroBin</em> heeft hieraan gedacht en laat je toe "
-"om op een eenvoudige en intuïtieve manier meerdere revisies van hetzelfde "
-"beeld te bewaren! Nu wordt het eenvoudig om te zien of je bijkomende "
-"processing de moeite waard was."
-
-msgid "AstroBin is social!"
-msgstr "AstroBin is sociaal!"
-
-msgid ""
-"On <em>AstroBin</em> you can message other astrophotographer, follow them "
-"and be notified when they post new images, or perform requests for more data."
-msgstr ""
-"Je kan andere astrofotografen berichten sturen en volgen op <em>AstroBin</"
-"em>. Je kan een berichtje krijgen als ze nieuwe beelden publiceren of je kan "
-"ze bijkomende informatie vragen."
-
-msgid ""
-"You can follow gear items or astronomical subjects, and be notified whenever "
-"there's a new image from a certain CCD, or telescope, or filter, and so on. "
-"Or you can monitor all the new images of a certain galaxy or nebula."
-msgstr ""
-"Je kan materiaal of een astronomisch object markeren zodat je een melding "
-"krijgt als er een nieuw beeld wordt gepost van een zekere CCD, telescoop, "
-"filter, enz. Of je kan in het oog houden wanneer er nieuwe foto's "
-"verschijnen van een bepaald sterrenstelsel of een bepaalde nevel."
-
-msgid ""
-"As you have undoubtly realized by now, <em>AstroBin</em> is way more than an "
-"image hosting service. It's what the Astrophotography community has needed "
-"for a long time. For years, I have seen amazing images scattered all over "
-"the Internet: general purpose image hosting sites, forums, personal websites "
-"and even temporary places. Some of those images contain data that is too "
-"precious to go wasted in a sea of chaos. <em>AstroBin</em> comes to the "
-"rescue to provide a home and a central hub for astrophotographers all over "
-"the world."
-msgstr ""
-"Je hebt nu ongetwijfeld begrepen dat <em>AstroBin</em> veel meer is dan een "
-"website waar je foto's op kan plaatsen. Deze site vervult de behoeften die "
-"de astro-foto gemeenschap reeds lang had. Ik heb jaren aan een stuk "
-"adembenemende foto's gevonden her en der verspreid over het net: op de "
-"gewone fotosites, fora, persoonlijke websites en zelfs tijdelijke dump-"
-"sites. Sommige van deze beelden bevatten informatie die te kostbaar is om te "
-"verdrinken in een zee van chaos. <em>AstroBin</em> snelt ter hulp als een "
-"thuis en centrale ontmoetingsplaats voor alle astrofotografen ter wereld."
-
-msgid "So, what are you waiting for?"
-msgstr "Dus, waar wacht je nog op?"
-
-msgid "Sign up now!"
-msgstr "Registreer nu!"
-
 msgid "Additional information requested"
 msgstr "Aanvragen bijkomende informatie"
 
@@ -3609,6 +3114,11 @@ msgstr "Ga terug naar de foto"
 
 msgid "Contains"
 msgstr "Bevat"
+
+#, fuzzy
+#| msgid "Remove data"
+msgid "Remove ads"
+msgstr "Verwijder gegevens"
 
 #, python-format
 msgid ""
@@ -3633,11 +3143,22 @@ msgstr ""
 msgid "Histogram"
 msgstr "Histogram"
 
+msgid "Right ascension"
+msgstr ""
+
+#, fuzzy
+#| msgid "Description"
+msgid "Declination"
+msgstr "Beschrijving"
+
 msgid "Technical card"
 msgstr "Technische fiche"
 
 msgid "Frames"
 msgstr "Sub-beelden"
+
+msgid "Basic astrometry details"
+msgstr ""
 
 msgid "RA center"
 msgstr "RK centrum"
@@ -3657,8 +3178,27 @@ msgstr "arcsec/pixel"
 msgid "Orientation"
 msgstr "Oriëntatie"
 
+msgid "(flipped)"
+msgstr ""
+
 msgid "Field radius"
 msgstr "Breedte beeldveld"
+
+#, fuzzy
+#| msgid "Commercial information"
+msgid "WCS transformation"
+msgstr "Commerciële informatie"
+
+msgid "Resolution"
+msgstr "Resolutie"
+
+msgid "Uncompressed source file"
+msgstr ""
+
+#, fuzzy
+#| msgid "Uploaded"
+msgid "Download"
+msgstr "Gepost op"
 
 msgid "Remote source"
 msgstr ""
@@ -3671,6 +3211,9 @@ msgstr ""
 
 msgid "Actions"
 msgstr "Acties"
+
+msgid "Upload uncompressed source (XISF/FITS/PSD/TIFF)"
+msgstr ""
 
 msgid "Upload new revision"
 msgstr "Uploaden van een nieuwe revisie"
@@ -3686,12 +3229,6 @@ msgstr "Plaats in Ontwikkelingszone"
 
 msgid "Send to group"
 msgstr ""
-
-msgid "Send to public data pool"
-msgstr "Stuur naar een publieke gegevensbank"
-
-msgid "Send to private shared folder"
-msgstr "Stuur naar een gedeelde privéfolder"
 
 #, fuzzy
 msgid "Delete image and all revisions"
@@ -3719,6 +3256,11 @@ msgstr "Gebruiker uitsluiten"
 msgid "Edit"
 msgstr "Wijzigen"
 
+#, fuzzy
+#| msgid "Thumbnail"
+msgid "Thumbnails"
+msgstr "Miniatuur (Thumbnail)"
+
 msgid "Watermark"
 msgstr "Watermerk"
 
@@ -3731,6 +3273,20 @@ msgstr "Details ivm de realisatie"
 #, fuzzy
 msgid "Plate-solving settings"
 msgstr "Plate-solve (auto-ID)"
+
+#, fuzzy
+#| msgid "Start plate-solving"
+msgid "Restart plate-solving"
+msgstr "Begin de plate-solving"
+
+#, fuzzy
+msgid "Advanced plate-solving settings"
+msgstr "Plate-solve (auto-ID)"
+
+#, fuzzy
+#| msgid "Start plate-solving"
+msgid "Restart advanced plate-solving"
+msgstr "Begin de plate-solving"
 
 #, fuzzy
 msgid "Context"
@@ -3784,6 +3340,53 @@ msgstr "Grootte foto"
 msgid "Full size"
 msgstr "Volledige grootte:"
 
+msgid "Delete this revision?"
+msgstr "Wis deze revisie?"
+
+msgid ""
+"This revision will be permanently deleted and cannot be recovered. Are you "
+"sure?"
+msgstr "Deze revisie wordt onherroepelijk gewist. Ben je zeker?"
+
+msgid "Associate XISF/FITS file"
+msgstr ""
+
+msgid ""
+"\n"
+"                        To improve the accuracy of your plate-solution even "
+"further, please upload one of the XISF or\n"
+"                        FITS files from your data set. Such files normally "
+"have date and time headers that will allow\n"
+"                        AstroBin to calculate solar system body ephemerides "
+"and find planets and asteroids in your\n"
+"                        image (provided you also add location information to "
+"your image).\n"
+"                    "
+msgstr ""
+
+#, python-format
+msgid ""
+"\n"
+"                        For maximum accuracy, it's recommended that you use "
+"PixInsight's native and open format XISF.\n"
+"                        Learn more about XISF here: <a href=\"%(xisf_url)s\" "
+"target=\"_blank\">%(xisf_url)s</a>\n"
+"                    "
+msgstr ""
+
+msgid ""
+"\n"
+"                        <strong>Please note:</strong> it's very important "
+"that the XISF or FITS file you upload is\n"
+"                        aligned to your processed image, otherwise the "
+"object annotations will not match.\n"
+"                        To improve your chances at a successful accurate "
+"plate-solution, calibrate your file the usual\n"
+"                        way (dark/bias/flats) but you don't need to stretch "
+"it.\n"
+"                    "
+msgstr ""
+
 msgid "The following people bookmarked this image"
 msgstr "De volgende mensen hebben deze foto als bladwijzer toegevoegd"
 
@@ -3816,20 +3419,23 @@ msgstr "Momenteel is jouw AstroBin niveau <strong>%(index)s</strong>."
 msgid "Delete image and all its revisions?"
 msgstr "Foto wissen, inclusief alle revisies?"
 
+#, fuzzy
+#| msgid ""
+#| "The image will be permanently deleted and cannot be recovered. All its "
+#| "revisions will be deleted too. Are you sure?"
+msgid ""
+"The image will be moved to the trash, and it can be restored later. All its "
+"revisions will be there too. Continue?"
+msgstr ""
+"Deze foto wordt onherroepelijk gewist. Al zijn revisies zullen ook voorgoed "
+"worden verwijderd. Ben je zeker?"
+
 msgid ""
 "The image will be permanently deleted and cannot be recovered. All its "
 "revisions will be deleted too. Are you sure?"
 msgstr ""
 "Deze foto wordt onherroepelijk gewist. Al zijn revisies zullen ook voorgoed "
 "worden verwijderd. Ben je zeker?"
-
-msgid "Delete this revision?"
-msgstr "Wis deze revisie?"
-
-msgid ""
-"This revision will be permanently deleted and cannot be recovered. Are you "
-"sure?"
-msgstr "Deze revisie wordt onherroepelijk gewist. Ben je zeker?"
 
 msgid "Delete original image?"
 msgstr "Wis het origineel?"
@@ -3864,19 +3470,6 @@ msgid ""
 msgstr ""
 
 msgid ""
-"If this image is the result of your processing of a public data pool, you "
-"can send it the pool so it's displayed there."
-msgstr ""
-"Als deze foto het resultaat is van het bewerken van de beelden uit een "
-"publieke gegevensbank, dan kan je ze naar die pool sturen zodat ze daar "
-"wordt getoond."
-
-msgid "Use this form to select an existing <strong>public data pool</strong>."
-msgstr ""
-"Gebruik dit formulier om een bestaande <strong>publieke gegevensbank</"
-"strong> te selecteren."
-
-msgid ""
 "Sorry, you cannot send images from your Staging Area to a group. You need to "
 "first promote this image to your Public Area, if you want to do that."
 msgstr ""
@@ -3885,24 +3478,6 @@ msgid ""
 "Use this form to select one of your groups. The list includes all public and "
 "private non-autosubmission groups of which you are the owner or a member."
 msgstr ""
-
-msgid ""
-"If this image is the result of your processing of a private shared folder, "
-"you can send it the folder so it's displayed there."
-msgstr ""
-"Als deze foto het resultaat is van het bewerken van de beelden uit een "
-"gedeelde privéfolder, dan kan je ze daarheen sturen zodat ze daar wordt "
-"getoond."
-
-msgid ""
-"Use this form to select a <strong>private shared folder</strong> you have "
-"created or have been invited to."
-msgstr ""
-"Gebruik dit formulier om een <strong>gedeelde privéfolder</strong> te kiezen "
-"die je zelf hebt gemaakt of waar je een uitnodiging voor hebt ontvangen."
-
-msgid "You don't have access to any shared private folders."
-msgstr "Er zijn geen gedeelde privéfolders waar je toegang tot hebt."
 
 msgid "Sharing mode"
 msgstr "Manier van delen"
@@ -3952,6 +3527,23 @@ msgstr ""
 "bij!"
 
 msgid ""
+"Please note: AstroBin is not officially a backup service. So please also "
+"keep additional copies of your file. However, by storing your work here, you "
+"can have some additional peace of mind."
+msgstr ""
+
+#, python-format
+msgid ""
+"Read about how AstroBin stores your files safely on the <a href=\"%(faq_url)s"
+"\">FAQ page</a>."
+msgstr ""
+
+#, fuzzy
+#| msgid "Gear images"
+msgid "Clear"
+msgstr "Foto's van apparatuur"
+
+msgid ""
 "This image is pending moderation and is currently not visible on the front "
 "page or search results."
 msgstr ""
@@ -3987,6 +3579,54 @@ msgstr ""
 "misschien na het maken van een paar revisies- dan kan je het <a href="
 "\"%(promote_url)s\">promoveren</a> naar de <a href=\"%(profile_url)s"
 "\">Publieke Zone</a>."
+
+msgid "Oh no!"
+msgstr ""
+
+msgid ""
+"\n"
+"            We are very, very sorry, but it appears that your image suffered "
+"a catastrophic data\n"
+"            corruption, and it cannot be retrieved. Hopefully you still have "
+"your file (the information on\n"
+"            this form should provide you with enough context).\n"
+"        "
+msgstr ""
+
+msgid ""
+"\n"
+"            Please use the file input below to upload it again, and then "
+"click on the Save button down\n"
+"            below. All the data you had previously associated to your image "
+"is still here.\n"
+"        "
+msgstr ""
+
+#, fuzzy
+#| msgid "Here's some more reading material to get you started"
+msgid "Here's some detail about the image to give you some context."
+msgstr "Hier nog wat lectuur om te kunnen beginnen"
+
+#, fuzzy
+#| msgid "uploaded"
+msgid "Uploaded"
+msgstr "Gepost op"
+
+#, fuzzy
+#| msgid "Image upload"
+msgid "Image uploaded"
+msgstr "Foto uploaden"
+
+#, fuzzy
+#| msgid "Previously uploaded"
+msgid "Revision uploaded"
+msgstr "Eerder upgeloade beelden"
+
+msgid "Please wait..."
+msgstr "Gelieve te wachten..."
+
+msgid "AstroBin is processing your thumbnails."
+msgstr ""
 
 msgid "Edit your image: acquisition details"
 msgstr "Wijzig je foto: details ivm de realisatie"
@@ -4142,16 +3782,31 @@ msgid "Gear used"
 msgstr "Gebruikt materiaal"
 
 #, fuzzy
+msgid "Edit your image: advanced plate-solving settings"
+msgstr "Wijzig je foto: schaal voor plate-solving"
+
+#, fuzzy
+#| msgid "Attempt to plate-solve again"
+msgid "Save and plate-solve again"
+msgstr "Nieuwe poging plate-solving"
+
+#, fuzzy
 msgid "Edit your image: plate-solving settings"
 msgstr "Wijzig je foto: schaal voor plate-solving"
 
 #, fuzzy
-msgid "Back to image"
-msgstr "Terug naar boven"
-
-#, fuzzy
 msgid "Edit revision"
 msgstr "Ja, wis deze revisie"
+
+#, fuzzy
+#| msgid "Change the license for this image"
+msgid "Change the thumbnails for this image"
+msgstr "Verander de licentie voor dit beeld"
+
+#, fuzzy
+#| msgid "Edit watermark"
+msgid "Next step: edit watermark"
+msgstr "Bewerk het watermerk"
 
 msgid "Apply a watermark to image"
 msgstr "Pas watermerk toe"
@@ -4191,6 +3846,30 @@ msgstr "door <a href=\"%(the_url)s\">%(user)s</a>"
 msgid "Fit to window"
 msgstr "Pas aan het venster aan"
 
+msgid "Abscissa "
+msgstr ""
+
+msgid "Ordinate"
+msgstr ""
+
+msgid "Ecliptic longitude"
+msgstr ""
+
+#, fuzzy
+#| msgid "Select latitude"
+msgid "Ecliptic latitude"
+msgstr "Selecteer breedte"
+
+#, fuzzy
+#| msgid "Select latitude"
+msgid "Galactic longitude"
+msgstr "Selecteer breedte"
+
+#, fuzzy
+#| msgid "Select latitude"
+msgid "Galactic latitude"
+msgstr "Selecteer breedte"
+
 msgid "Remove"
 msgstr "Verwijderen"
 
@@ -4203,14 +3882,11 @@ msgstr "Nog geen materiaal."
 msgid "Add"
 msgstr "Toevoegen"
 
-msgid "You have no messages."
-msgstr "Je hebt geen berichten."
-
-msgid "Show all messages"
-msgstr "Toon alle berichten"
-
 msgid "No images"
 msgstr "Geen foto's"
+
+msgid "Only you can see this"
+msgstr ""
 
 msgid "Integration"
 msgstr "Integratie"
@@ -4225,6 +3901,9 @@ msgid "Views"
 msgstr "# keer bekeken"
 
 msgid "link"
+msgstr ""
+
+msgid "Comment of deleted image not shown."
 msgstr ""
 
 msgid "No results. Sorry."
@@ -4267,6 +3946,9 @@ msgstr ""
 "Als het deze locatie aan gegevens onbreekt of er is iets fout, gelieve dit "
 "dan recht te zetten."
 
+msgid "What is this site?"
+msgstr "Wat is het doel van deze site?"
+
 msgid "Commercial information"
 msgstr "Commerciële informatie"
 
@@ -4275,6 +3957,11 @@ msgstr "Informatie distributeur"
 
 msgid "Blog"
 msgstr "Blog (Engelstalig)"
+
+#, fuzzy
+#| msgid "Terms of Service"
+msgid "Terms of servic"
+msgstr "Gebruiksvoorwaarden"
 
 msgid ""
 "AstroBin is Copyright &copy; 2010-2012 Salvatore Iovene, All Rights "
@@ -4325,9 +4012,6 @@ msgstr "Antwoorden"
 
 msgid "Sending..."
 msgstr "Bezig met versturen..."
-
-msgid "Error. Try again!"
-msgstr "Foutje. Probeer opnieuw!"
 
 msgid ""
 "Please click on the images that you want to mark as SPAM, then click on the "
@@ -4918,42 +4602,17 @@ msgstr ""
 
 #, fuzzy, python-format
 #| msgid ""
-#| "%(originator)s has published a new image! Check it out at the following "
-#| "url: %(object_url)s"
-msgid ""
-"%(originator)s has published a new image! Check it out at the following url: "
-"<a href=\"%(object_url)s\">%(object_url)s</a>"
-msgstr ""
-"%(originator)s heeft een nieuw beeld publiek gemaakt! Je kan het bekijken "
-"op: %(object_url)s"
-
-#, python-format
-msgid ""
-"%(originator)s has published a new image! Check it out at the following url: "
-"%(object_url)s"
-msgstr ""
-"%(originator)s heeft een nieuw beeld publiek gemaakt! Je kan het bekijken "
-"op: %(object_url)s"
-
-#, python-format
-msgid ""
-"<a href=\"%(object_url)s\"><strong>%(originator)s</strong> has published a "
-"new image.</a>"
-msgstr ""
-"<a href=\"%(object_url)s\"><strong>%(originator)s</strong> heeft een nieuwe "
-"foto gepost.</a>"
-
-#, python-format
-msgid ""
-"<a href=\"%(object_url)s\"><strong>%(originator)s</strong> has published a "
-"new image</a>"
+#| "<a href=\"%(object_url)s\"><strong>%(originator)s</strong> has published "
+#| "a new image</a>"
+msgid "<strong>%(user)s</strong> has published a new image"
 msgstr ""
 "<a href=\"%(object_url)s\"><strong>%(originator)s</strong> heeft een nieuwe "
 "foto gepost</a>"
 
-#, python-format
-msgid "New image by %(originator)s"
-msgstr "Nieuwe foto van %(originator)s"
+#, fuzzy, python-format
+#| msgid "New image of %(subject)s"
+msgid "New image by %(user)s"
+msgstr "Nieuwe foto van %(subject)s"
 
 #, fuzzy, python-format
 #| msgid ""
@@ -5125,199 +4784,6 @@ msgstr "Kennisgevingen"
 #, fuzzy
 msgid "Notification Type"
 msgstr "Kennisgevingen"
-
-#, fuzzy, python-format
-msgid ""
-"You are invited to the private shared folder: \"%(folder_name)s\".\n"
-"\n"
-"You can now contribute data and processed images to the folder. You can also "
-"invite more people.\n"
-"\n"
-"Visit the folder at the following url: <a href=\"%(folder_url)s\">"
-"%(folder_url)s</a>"
-msgstr ""
-"Je hebt toelating gekregen om volgende gedeelde privéfolder te gebruiken: "
-"\"%(folder_name)s\".\n"
-"\n"
-"Je kan hier nu gegevens en bewerkte foto's aan toevoegen. Je kan ook andere "
-"mensen uitnodigen om de folder te gebruiken.\n"
-"\n"
-"Je kan de folder via volgende url bereiken: %(folder_url)s"
-
-#, fuzzy, python-format
-msgid ""
-"You are invited to the private shared folder: \"%(folder_name)s\".\n"
-"\n"
-"You can now contribute data and processed images to the folder. You can also "
-"invite more people.\n"
-"\n"
-"Visit the folder at the following url: %(folder_url)s"
-msgstr ""
-"Je hebt toelating gekregen om volgende gedeelde privéfolder te gebruiken: "
-"\"%(folder_name)s\".\n"
-"\n"
-"Je kan hier nu gegevens en bewerkte foto's aan toevoegen. Je kan ook andere "
-"mensen uitnodigen om de folder te gebruiken.\n"
-"\n"
-"Je kan de folder via volgende url bereiken: %(folder_url)s"
-
-#, fuzzy, python-format
-msgid ""
-"<a href=\"%(folder_url)s\">You are invited to the private shared folder: "
-"<strong>\"%(folder_name)s.\"</strong></a>"
-msgstr ""
-"<a href=\"%(folder_url)s\">Je bent uitgenodigd op volgende gedeelde "
-"privéfolder: <strong>\"%(folder_name)s.\"</strong></a>"
-
-#, fuzzy, python-format
-msgid "You are invited to the private shared folder: %(folder_name)s"
-msgstr "Je bent uitgenodigd op volgende gedeelde privéfolder: %(folder_name)s"
-
-#, fuzzy, python-format
-#| msgid ""
-#| "%(user_name)s has added a new processed image to the private shared "
-#| "folder: \"%(folder_name)s\". Check it out at the following url: "
-#| "%(folder_url)s"
-msgid ""
-"%(user_name)s has added a new processed image to the private shared folder: "
-"\"%(folder_name)s\". Check it out at the following url: <a href="
-"\"%(folder_url)s\">%(folder_url)s</a>"
-msgstr ""
-"%(user_name)s heeft een nieuwe bewerkte foto toegevoegd aan volgende "
-"gedeelde privéfolder: \"%(folder_name)s\". Je kan ze bekijken op volgende "
-"url: %(folder_url)s"
-
-#, python-format
-msgid ""
-"%(user_name)s has added a new processed image to the private shared folder: "
-"\"%(folder_name)s\". Check it out at the following url: %(folder_url)s"
-msgstr ""
-"%(user_name)s heeft een nieuwe bewerkte foto toegevoegd aan volgende "
-"gedeelde privéfolder: \"%(folder_name)s\". Je kan ze bekijken op volgende "
-"url: %(folder_url)s"
-
-#, python-format
-msgid ""
-"<a href=\"%(folder_url)s\"><strong>%(user_name)s</strong> has added a new "
-"processed image to the private shared folder: <strong>\"%(folder_name)s.\"</"
-"strong></a>"
-msgstr ""
-"<a href=\"%(folder_url)s\"><strong>%(user_name)s</strong> heeft een nieuwe "
-"bewerkte foto toegevoegd aan volgende gedeelde privéfolder: <strong>"
-"\"%(folder_name)s.\"</strong></a>"
-
-#, python-format
-msgid ""
-"<a href=\"%(folder_url)s\"><strong>%(user_name)s</strong> has added a new "
-"processed image to the private shared folder: <strong>\"%(folder_name)s.\"</"
-"a>"
-msgstr ""
-"<a href=\"%(folder_url)s\"><strong>%(user_name)s</strong>heeft een nieuwe "
-"bewerkte foto toegevoegd aan volgende gedeelde privéfolder: <strong>"
-"\"%(folder_name)s.\"</a>"
-
-#, python-format
-msgid "New processed image in private shared folder: %(folder_name)s"
-msgstr "Nieuw bewerkt beeld in gedeelde privéfolder: %(folder_name)s"
-
-#, fuzzy, python-format
-#| msgid ""
-#| "%(user_name)s has added a new processed image to the public data pool: "
-#| "\"%(pool_name)s\". Check it out at the following url: %(pool_url)s"
-msgid ""
-"%(user_name)s has added a new processed image to the public data pool: "
-"\"%(pool_name)s\". Check it out at the following url: <a href=\"%(pool_url)s"
-"\">%(pool_url)s</a>"
-msgstr ""
-"%(user_name)s heeft een nieuwe bewerkte foto toegevoegd aan volgende "
-"publieke gegevensbank: \"%(pool_name)s\". Hier te bekijken: %(pool_url)s"
-
-#, python-format
-msgid ""
-"%(user_name)s has added a new processed image to the public data pool: "
-"\"%(pool_name)s\". Check it out at the following url: %(pool_url)s"
-msgstr ""
-"%(user_name)s heeft een nieuwe bewerkte foto toegevoegd aan volgende "
-"publieke gegevensbank: \"%(pool_name)s\". Hier te bekijken: %(pool_url)s"
-
-#, python-format
-msgid ""
-"<a href=\"%(pool_url)s\"><strong>%(user_name)s</strong> has added a new "
-"processed image to the public data pool: <strong>\"%(pool_name)s.\"</"
-"strong></a>"
-msgstr ""
-"<a href=\"%(pool_url)s\"><strong>%(user_name)s</strong> heeft een nieuwe "
-"bewerkte foto toegevoegd aan volgende publieke gegevensbank: <strong>"
-"\"%(pool_name)s.\"</strong></a>"
-
-#, python-format
-msgid "New processed image in public data pool: %(pool_name)s"
-msgstr "Nieuw bewerkt beeld in publieke gegevensbank: %(pool_name)s"
-
-#, fuzzy, python-format
-#| msgid ""
-#| "%(user_name)s has added new data to the public pool: \"%(pool_name)s\". "
-#| "Check it out at the following url: %(pool_url)s"
-msgid ""
-"%(user_name)s has added new data to the public pool: \"%(pool_name)s\". "
-"Check it out at the following url: <a href=\"%(pool_url)s\">%(pool_url)s</a>"
-msgstr ""
-"%(user_name)s heeft nieuwe data toegevoegd aan de publieke gegevensbank: "
-"\"%(pool_name)s\". Je kan ze raadplegen via volgende url: %(pool_url)s"
-
-#, python-format
-msgid ""
-"%(user_name)s has added new data to the public pool: \"%(pool_name)s\". "
-"Check it out at the following url: %(pool_url)s"
-msgstr ""
-"%(user_name)s heeft nieuwe data toegevoegd aan de publieke gegevensbank: "
-"\"%(pool_name)s\". Je kan ze raadplegen via volgende url: %(pool_url)s"
-
-#, python-format
-msgid ""
-"<a href=\"%(pool_url)s\"><strong>%(user_name)s</strong> has added new data "
-"to the public pool: <strong>\"%(pool_name)s.\"</strong></a>"
-msgstr ""
-"<a href=\"%(pool_url)s\"><strong>%(user_name)s</strong> heeft nieuwe data "
-"toegevoegd aan de publieke gegevensbank: <strong>\"%(pool_name)s.\"</"
-"strong></a>"
-
-#, python-format
-msgid "New data in public pool: %(pool_name)s"
-msgstr "Nieuwe data in publieke gegevensbank: %(pool_name)s"
-
-#, fuzzy, python-format
-#| msgid ""
-#| "%(user_name)s has added new data to the private shared folder: "
-#| "\"%(folder_name)s\". Check it out at the following url: %(folder_url)s"
-msgid ""
-"%(user_name)s has added new data to the private shared folder: "
-"\"%(folder_name)s\". Check it out at the following url: <a href="
-"\"%(folder_url)s\">%(folder_url)s</a>"
-msgstr ""
-"%(user_name)s heeft nieuwe data toegevoegd aan volgende gedeelde "
-"privéfolder: \"%(folder_name)s\". Je kan ze bekijken via: %(folder_url)s"
-
-#, python-format
-msgid ""
-"%(user_name)s has added new data to the private shared folder: "
-"\"%(folder_name)s\". Check it out at the following url: %(folder_url)s"
-msgstr ""
-"%(user_name)s heeft nieuwe data toegevoegd aan volgende gedeelde "
-"privéfolder: \"%(folder_name)s\". Je kan ze bekijken via: %(folder_url)s"
-
-#, python-format
-msgid ""
-"<a href=\"%(folder_url)s\"><strong>%(user_name)s</strong> has added new data "
-"to the private shared folder: <strong>\"%(folder_name)s.\"</strong></a>"
-msgstr ""
-"<a href=\"%(folder_url)s\"><strong>%(user_name)s</strong> heeft nieuwe data "
-"toegevoegd aan volgende gedeelde privéfolder: <strong>\"%(folder_name)s.\"</"
-"strong></a>"
-
-#, python-format
-msgid "New data in private shared folder: %(folder_name)s"
-msgstr "Nieuwe dfata in gedeelde privéfolder: %(folder_name)s"
 
 #, fuzzy
 #| msgid ""
@@ -5584,19 +5050,6 @@ msgstr ""
 msgid "Account activation on"
 msgstr "Activatie van de account op"
 
-#, fuzzy
-#| msgid "User menu"
-msgid "Username"
-msgstr "Gebruikersmenu"
-
-msgid "Email"
-msgstr ""
-
-#, fuzzy
-#| msgid "Password reset"
-msgid "Password"
-msgstr "Paswoord reset"
-
 msgid "Reset password"
 msgstr "Herinitialiseren van het paswoord"
 
@@ -5653,10 +5106,13 @@ msgstr ""
 msgid "Register with AstroBin"
 msgstr "Inschrijven bij AstroBin"
 
-#, python-format
+#, fuzzy
+#| msgid ""
+#| "By registering with AstroBin, you agree to our <a href=\"%(tos_url)s"
+#| "\">terms of service</a>."
 msgid ""
-"By registering with AstroBin, you agree to our <a href=\"%(tos_url)s\">terms "
-"of service</a>."
+"By registering with AstroBin, you agree to our <a href=\"https://welcome."
+"astrobin.com/terms-of-service\">terms of service</a>."
 msgstr ""
 "Door je bij AstroBin te registreren, ga je akkoord met onze <a href="
 "\"%(tos_url)s\">gebruiksvoorwaarden</a>."
@@ -5690,6 +5146,14 @@ msgstr "Pixelschaal"
 msgid "Small pixel scale"
 msgstr "Pixelschaal"
 
+#, fuzzy
+#| msgid ""
+#| "Search for astronomical objects, telescopes or lenses, cameras, filters..."
+msgid "Search for celestial objects, equipment items, users, etc..."
+msgstr ""
+"Zoek naar astronomische objecten, telescopen of lenzen, camera's, "
+"filters, ..."
+
 #, python-format
 msgid ""
 "<strong>%(total_users)s</strong> users uploaded <strong>%(total_images)s</"
@@ -5718,19 +5182,214 @@ msgstr "CCD vs. DSLR: de globale trend"
 msgid "Global trend of telescope types"
 msgstr "De globale trend in telscoop-types"
 
-msgid "Here you can activate your free Raw Data Atom subscription."
-msgstr "Hier kun je je gratis Raw Data Atom abonnement activeren."
+#, fuzzy
+#| msgid "About"
+msgctxt "approximately"
+msgid "about"
+msgstr "Over"
 
-msgid "Activate"
-msgstr "Activeren"
-
-msgid "Subscribe with a secure payment provided by PayPal:"
-msgstr "Abonneer dmv. een veilige betaling met PayPal"
+msgid "View feature comparison"
+msgstr ""
 
 #, fuzzy
-#| msgid "Subscribe with a secure payment provided by PayPal:"
-msgid "Buy with a secure payment provided by PayPal:"
-msgstr "Abonneer dmv. een veilige betaling met PayPal"
+#| msgid "Pixel size"
+msgid "Max size"
+msgstr "Pixel grootte"
+
+#, fuzzy
+msgid "View full res"
+msgstr "Bekijk pagina"
+
+#, fuzzy
+#| msgid "View your images"
+msgid "View full image info"
+msgstr "Bekijk je foto's"
+
+msgid "Basic"
+msgstr "Basisch"
+
+#, fuzzy
+#| msgid "Advanced search"
+msgid "Advanced"
+msgstr "Geavanceerd zoeken"
+
+#, fuzzy
+#| msgid "Commercial gear items"
+msgid "Social features"
+msgstr "Commercieel materiaal"
+
+#, fuzzy
+#| msgid "Start plate-solving"
+msgid "Plate-solving"
+msgstr "Begin de plate-solving"
+
+#, fuzzy
+#| msgid "Public data pools"
+msgid "Bulk data export"
+msgstr "Publieke gegevensbanken"
+
+msgid "Hide astronomy ads"
+msgstr ""
+
+msgid "No ads on your pages"
+msgstr ""
+
+msgid "Non-members/free users can view your images in full res"
+msgstr ""
+
+#, fuzzy
+#| msgid "Full resolution"
+msgid "Full size annotations"
+msgstr "Originele resolutie"
+
+#, fuzzy
+#| msgid "Upload complete!"
+msgid "Upload uncompressed source"
+msgstr "Upload gelukt!"
+
+#, fuzzy
+#| msgid "Unlimited images"
+msgid "Undelete images"
+msgstr "Ongelimiteerd aantal foto's"
+
+msgid "year"
+msgstr "jaar"
+
+#, python-format
+msgid ""
+"\n"
+"                %(number)s images, max %(size)s each"
+msgstr ""
+
+#, fuzzy
+#| msgid "Higher resolution"
+msgid "View in original resolution"
+msgstr "Hogere resolutie"
+
+#, python-format
+msgid ""
+"Up to %(number)s\n"
+"            revisions/image"
+msgstr ""
+
+msgid "Create/join Groups"
+msgstr ""
+
+#, fuzzy
+#| msgid "Start plate-solving"
+msgid "Basic plate-solving"
+msgstr "Begin de plate-solving"
+
+msgid "IOTD / Top Picks"
+msgstr ""
+
+msgid "No ads for others on your pages"
+msgstr ""
+
+msgid "Full-size annotations"
+msgstr ""
+
+msgid "All future features"
+msgstr ""
+
+msgid "In the future"
+msgstr ""
+
+#, fuzzy
+#| msgid "Buy it here"
+msgid "Buy in the Marketplace"
+msgstr "Koop hier"
+
+msgid "Vote in contests"
+msgstr ""
+
+msgid "Analytics"
+msgstr ""
+
+msgid "Bulk image editing"
+msgstr ""
+
+#, fuzzy
+msgid "Pay securely with PayPal"
+msgstr "Afzeggen via PayPal"
+
+msgid "Want to upgrade from a lower subscription tier?"
+msgstr ""
+
+#, python-format
+msgid ""
+"AstroBin doesn't support subscription upgrades at the moment, but we're "
+"happy to make it happen manually. If you're on a lower subscription tier and "
+"would like to upgrade to <strong>%(name)s</strong>, please just buy it and "
+"then contact us at <a href=\"mailto:astrobin@astrobin.com"
+"\">astrobin@astrobin.com</a> to get a refund for the unused time on your old "
+"subscription. Thanks!"
+msgstr ""
+
+msgid "Pay with a bank transfer"
+msgstr ""
+
+#, python-format
+msgid ""
+"\n"
+"                Prefer to pay via bank transfer? Please make a deposit of "
+"%(currency)s %(amount)s to the following\n"
+"                bank details and then email us at %(email_prefix)s%(email)s"
+"%(email_postfix)s with your username so\n"
+"                we may upgrade your account manually. Thanks!\n"
+"            "
+msgstr ""
+
+#, python-format
+msgid ""
+"\n"
+"                ∞ images, max %(size)s each"
+msgstr ""
+
+#, fuzzy
+#| msgid "Basic information"
+msgid "Basic analytics"
+msgstr "Basisinformatie"
+
+msgid "Buy"
+msgstr ""
+
+#, fuzzy
+#| msgid "You have already nominated this image"
+msgid "You are already on this plan"
+msgstr "Je hebt deze foto al genomineerd"
+
+#, fuzzy
+#| msgid "Image size"
+msgid "∞ images, ∞ size"
+msgstr "Grootte foto"
+
+msgid "View full res (incl. visitors)"
+msgstr ""
+
+#, fuzzy
+msgid "Full search"
+msgstr "Volledige grootte:"
+
+#, fuzzy
+msgid "Unlimited revisions"
+msgstr "Ja, wis deze revisie"
+
+#, fuzzy
+#| msgid "Start plate-solving"
+msgid "Advanced plate-solving"
+msgstr "Begin de plate-solving"
+
+msgid "Sell in the Marketplace"
+msgstr ""
+
+msgid "Vote/enter contests"
+msgstr ""
+
+#, fuzzy
+#| msgid "Advanced search"
+msgid "Advanced analytics"
+msgstr "Geavanceerd zoeken"
 
 msgid "Subscription process canceled"
 msgstr "Abonnement proces gestopt."
@@ -5776,9 +5435,6 @@ msgstr "week"
 msgid "month"
 msgstr "maand"
 
-msgid "year"
-msgstr "jaar"
-
 #, fuzzy
 #| msgid "Viewed one time"
 #| msgid_plural "Viewed %(counter)s times"
@@ -5819,16 +5475,6 @@ msgstr "jaren"
 msgid "No trial"
 msgstr "Geen probeerperiode"
 
-#, python-format
-msgid "%(max_allowed)s images per year "
-msgstr "%(max_allowed)s fotos per jaar"
-
-msgid "Unlimited images"
-msgstr "Ongelimiteerd aantal foto's"
-
-msgid "Buy"
-msgstr ""
-
 msgid "Switch to"
 msgstr "Omschakelen naar"
 
@@ -5855,11 +5501,6 @@ msgstr "Verloopt op"
 msgid "Invalid"
 msgstr ""
 
-#, fuzzy
-#| msgid "Expires"
-msgid "Expired"
-msgstr "Verloopt op"
-
 msgid "Cancelled"
 msgstr "Geannuleerd"
 
@@ -5871,115 +5512,15 @@ msgstr "Afgemeld"
 
 #, python-format
 msgid ""
-"Auto-renewing subscriptions are not offered anymore on AstroBin. Please "
-"visit the <a href=\"%(url)s\">subscriptions page</a> to see the available "
-"plans, thanks!"
-msgstr ""
-
-#, fuzzy, python-format
-#| msgid ""
-#| "\n"
-#| "            You can use AstroBin for free up to %(max_allowed)s images. "
-#| "After\n"
-#| "            that you can upgrade to <strong>Lite</strong> if you have a "
-#| "limited\n"
-#| "            yearly output, or <strong>Premium</strong> for a limitless\n"
-#| "            experience.  Paying members will not see ads, and everybody,\n"
-#| "            including non-paying members, have access to all social "
-#| "features of\n"
-#| "            AstroBin.\n"
-#| "            "
-msgid ""
-"\n"
-"                You can use AstroBin for free up to %(max_allowed)s images. "
-"After\n"
-"                that you can upgrade to <strong>Lite</strong> if you have a "
-"limited\n"
-"                yearly output, or <strong>Premium</strong> for a limitless\n"
-"                experience.  Paying members will not see ads, and "
-"everybody,\n"
-"                including non-paying members, have access to all social "
-"features of\n"
-"                AstroBin.\n"
-"                "
-msgstr ""
-"\n"
-"            Je kan AstroBin gratis gebruiken voor %(max_allowed)s foto's. "
-"Vervolgens\n"
-"            kan je upgraden naar <strong>Lite</strong> indien je een beperkt "
-"aantal foto's\n"
-"            per jaar wenst te publiceren of naar <strong>Premium</strong> "
-"voor een\n"
-"            ervaring zonder beperkingen. Betalende leden zullen geen "
-"advertenties zien.\n"
-"            Alle leden, ook niet-betalende, hebben toegang tot alle sociale "
-"functies van\n"
-"            Astrobin.\n"
-"            "
-
-#, python-format
-msgid ""
-"\n"
-"                As a user of <strong>AstroBin Free</strong>, you may have up "
-"to\n"
-"                %(max_allowed)s images at the same time. You can delete some "
-"images\n"
-"                to make room for new ones, if you want. For instance you "
-"can\n"
-"                maintain a window of your latest %(max_allowed)s images, or "
-"your\n"
-"                best ones.\n"
-"                "
-msgstr ""
-
-#, python-format
-msgid ""
-"\n"
-"                As a user of <strong>AstroBin Lite</strong>, instead, you "
-"may have\n"
-"                up to %(max_allowed)s images at the same time, per each year "
-"of\n"
-"                your membership. You may replace images uploaded within the "
-"current\n"
-"                subsciption period while images uploaded prior to that can "
-"only be\n"
-"                deleted. Every year that you renew your membership, you get\n"
-"                %(max_allowed)s new image credits.\n"
-"                "
+"This subscription is not offered anymore on AstroBin. Please visit the <a "
+"href=\"%(url)s\">subscriptions page</a> to see the available plans, thanks!"
 msgstr ""
 
 msgid ""
-"\n"
-"                As a user of <strong>AstroBin Premium</strong>, instead, "
-"there are\n"
-"                no limitations whatsoever in the number of images you can "
-"upload.\n"
-"                "
+"If you would like to renew your subscription, please visit this page again "
+"after\n"
+"                        your current subscription's expiration date:"
 msgstr ""
-
-msgid ""
-"<strong>AstroBin Raw Data</strong> allows you to store your raw files "
-"(<strong>FIT</strong> and <strong>digital camera raw</strong>) on AstroBin. "
-"We will keep them neatly organized, and you will have a safe backup of all "
-"your work, including calibration files."
-msgstr ""
-"<strong>AstroBin Raw Data</strong> laat toe om raw bestanden (<strong>FIT</"
-"strong> en<strong>RAW van digitale camera's</strong>) te bewaren op "
-"AstroBin. We houden ze netjes georganiseerd en je krijgt hiermee een veilige "
-"backup voor al je werk, inclusief je calibratiebestanden."
-
-#, python-format
-msgid ""
-"Learn more by reading <a href=\"%(rawdata_url)s\">a short introduction.</a>"
-msgstr ""
-"Leer hier meer over door de <a href=\"%(rawdata_url)s\">korte inleiding</a> "
-"te lezen."
-
-msgid "Here you can deactivate your free Raw Data Atom subscription."
-msgstr "Hier kan je je gratis Raw Data Atom abonnement desactiveren."
-
-msgid "Deactivate"
-msgstr "Uitschakelen"
 
 msgid ""
 "Your subscription is either cancelled or not active yet. If you want to "
@@ -6012,9 +5553,6 @@ msgstr "Afzeggen via PayPal"
 msgid "You cannot switch to this plan."
 msgstr "Je kan je niet op deze formule abonneren."
 
-msgid "Thank you for supporting AstroBin!"
-msgstr "Bedankt voor het ondersteunen van AstroBin!"
-
 msgid "Back to the plans"
 msgstr "Terug naar de abonnementen"
 
@@ -6028,6 +5566,9 @@ msgstr ""
 "Je aanvraag is ontvangen en we wachten op de bevestiging van PayPal. Uw "
 "abonnement zou binnen een paar minuten in orde moeten zijn!"
 
+msgid "Thank you for supporting AstroBin!"
+msgstr "Bedankt voor het ondersteunen van AstroBin!"
+
 msgid "Your active subscription plans"
 msgstr "Je actieve abonnementen"
 
@@ -6036,156 +5577,13 @@ msgstr "Je actieve abonnementen"
 msgid "Your inactive subscription plans"
 msgstr "Je actieve abonnementen"
 
-msgid "Limited offer for you!"
-msgstr ""
-
-msgid ""
-"For a limited time, you are personally offered AstroBin Premium for one "
-"year, at\n"
-"                            a sizeable discount. Don't miss this opportunity!"
-msgstr ""
-
-msgid "AstroBin Premium subscription plans"
-msgstr "AstroBin Premium abonnementsformules"
-
-#, fuzzy, python-format
+#, fuzzy
 #| msgid ""
-#| "\n"
-#| "            You can use AstroBin for free up to %(max_allowed)s images. "
-#| "After\n"
-#| "            that you can upgrade to <strong>Lite</strong> if you have a "
-#| "limited\n"
-#| "            yearly output, or <strong>Premium</strong> for a limitless\n"
-#| "            experience.  Paying members will not see ads, and everybody,\n"
-#| "            including non-paying members, have access to all social "
-#| "features of\n"
-#| "            AstroBin.\n"
-#| "            "
+#| "PS: are you interested in larger plans? <a href=\"/contact/\">Let us know!"
+#| "</a>"
 msgid ""
-"\n"
-"                    You can use AstroBin for free up to %(max_allowed)s "
-"images. After\n"
-"                    that you can upgrade to <strong>Lite</strong> if you "
-"have a limited\n"
-"                    yearly output, or <strong>Premium</strong> for a "
-"limitless\n"
-"                    experience.  Paying members will not see ads, and "
-"everybody,\n"
-"                    including non-paying members, have access to all social "
-"features of\n"
-"                    AstroBin.\n"
-"                    "
-msgstr ""
-"\n"
-"            Je kan AstroBin gratis gebruiken voor %(max_allowed)s foto's. "
-"Vervolgens\n"
-"            kan je upgraden naar <strong>Lite</strong> indien je een beperkt "
-"aantal foto's\n"
-"            per jaar wenst te publiceren of naar <strong>Premium</strong> "
-"voor een\n"
-"            ervaring zonder beperkingen. Betalende leden zullen geen "
-"advertenties zien.\n"
-"            Alle leden, ook niet-betalende, hebben toegang tot alle sociale "
-"functies van\n"
-"            Astrobin.\n"
-"            "
-
-#, python-format
-msgid ""
-"\n"
-"                    As a user of <strong>AstroBin Free</strong>, you may "
-"have up to\n"
-"                    %(max_allowed)s images at the same time. You can delete "
-"some images\n"
-"                    to make room for new ones, if you want. For instance you "
-"can\n"
-"                    maintain a window of your latest %(max_allowed)s images, "
-"or your\n"
-"                    best ones.\n"
-"                    "
-msgstr ""
-
-#, python-format
-msgid ""
-"\n"
-"                    As a user of <strong>AstroBin Lite</strong>, instead, "
-"you may have\n"
-"                    up to %(max_allowed)s images at the same time, per each "
-"year of\n"
-"                    your membership. You may replace images uploaded within "
-"the current\n"
-"                    subsciption period while images uploaded prior to that "
-"can only be\n"
-"                    deleted. Every year that you renew your membership, you "
-"get\n"
-"                    %(max_allowed)s new image credits.\n"
-"                    "
-msgstr ""
-
-msgid ""
-"\n"
-"                    As a user of <strong>AstroBin Premium</strong>, instead, "
-"there are\n"
-"                    no limitations whatsoever in the number of images you "
-"can upload.\n"
-"                    "
-msgstr ""
-
-msgid "AstroBin Raw Data subscription plans"
-msgstr "AstroBin Raw Data abonnementsformules"
-
-msgid "Here's a short description of each plan:"
-msgstr "Hier is een korte beschrijving van elke formule:"
-
-msgid ""
-"This plan is free! Choose it to share a small amount of data with other "
-"users."
-msgstr ""
-"Dit is een gratis abonnement! Kies dit om een klein aantal foto's te delen "
-"met anderen"
-
-msgid ""
-" Choose this plan if you want to keep your expenses to a minimum, but still "
-"want the possibity to share your FIT and digital camera raw files with your "
-"friends. You can also participate to public data pools and contribute to the "
-"deepest deep sky images ever created, and you will always know that you "
-"support AstroBin."
-msgstr ""
-"Kies dit abonnement om een minimum uit te geven, maar toch de mogelijkheid "
-"te hebben om FIT en RAW bestanden te kunnen delen. Je kan dan ook deelnemen "
-"aan publieke data archieven en zo bijdragen aan het verwezenlijken van de "
-"diepste deep sky beelden ooit gemaakt. En natuurlijk krijg je een goed "
-"gevoel door het steunen van AstroBin."
-
-msgid ""
-"Choose this plan if you have started out in the recent year or two, or you "
-"don't want to share and backup your calibration files. Enjoy a lot of room "
-"for a convenient price."
-msgstr ""
-"Kies deze formule als je een jaar of twee bezig bent en geen "
-"calibratiebestanden wil delen of bewaren. Je krijgt een boel ruimte voor een "
-"eerlijke prijs."
-
-msgid ""
-"Choose this plan if you have several years worth of data. You will probably "
-"have enough room for all your calibration files, and will enjoy the full "
-"potential of the platform."
-msgstr ""
-"Kies voor dit abonnement als je voor meerdere jaren aan gegevens hebt. Je "
-"zal waarschijnlijk genoeg ruimte hebben voor al je calibratiebestanden en "
-"kan van het volle potentieel van dit platform genieten."
-
-msgid ""
-"Choose this plan if you have a massive amount of raw data that you want to "
-"share and backup securely online."
-msgstr ""
-"Kies voor deze formule als je een massieve hoeveelheid aan RAW bestanden "
-"hebt die je wil delen en waarvan je op een veilige plek een online backup "
-"wil hebben."
-
-msgid ""
-"PS: are you interested in larger plans? <a href=\"/contact/\">Let us know!</"
-"a>"
+"PS: are you interested in larger plans?\n"
+"                <a href=\"/contact/\">Let us know!</a>"
 msgstr ""
 "Ben je geïnteresseerd in formules met een grotere capaciteit? Zend ons "
 "gerust een <a href=\"/contact/\">mail</a>!"
@@ -6198,13 +5596,6 @@ msgstr ""
 
 msgid "This list is currently empty."
 msgstr ""
-
-msgid ""
-"The following Terms are only available in English. It is your responsibility "
-"to comprehend them."
-msgstr ""
-"Volgende voorwaarden zijn enkel ter beschikking in het Engels. Het is jouw "
-"verantwoordelijkheid om ze te begrijpen."
 
 #, fuzzy
 msgid "Last 6 months"
@@ -6241,20 +5632,16 @@ msgstr ""
 " Je hebt <strong>%(premium_counter)s</strong> fotos van de toegestane "
 "<strong>%(max_allowed)s</strong>."
 
-msgid "Would you like to upgrade?"
-msgstr "Wil je upgraden ?"
-
-#, fuzzy, python-format
+#, fuzzy
 msgid ""
-"You have used <strong>%(premium_counter)s</strong> images of your allowed "
-"<strong>%(max_allowed)s</strong> for the current subscription period."
-msgstr ""
-"Je hebt <strong>%(premium_counter)s</strong> fotos van de toegestane <strong>"
-"%(max_allowed)s</strong> voor het huidige jaar."
+"Thank you for being a premium member! Enjoy your unlimited images.\n"
+"                        "
+msgstr "Dankjewel voor je Premium account keuze! Geniet van onbeperkte opslag."
 
 #, fuzzy
-msgid "Thank you for being a premium member! Enjoy your unlimited images."
-msgstr "Dankjewel voor je Premium account keuze! Geniet van onbeperkte opslag."
+#| msgid "Would you like to upgrade?"
+msgid "Would you like to upgrade to a higher plan?"
+msgstr "Wil je upgraden ?"
 
 msgid "Upload as a work in progress"
 msgstr "Uploaden van een werk in uitvoering"
@@ -6262,11 +5649,19 @@ msgstr "Uploaden van een werk in uitvoering"
 msgid "Uploading..."
 msgstr "Bezig met uploaden..."
 
-#, python-format
+#, fuzzy
+#| msgid ""
+#| "Use this button to upload an image to the <strong>Staging Area</strong>. "
+#| "It's perfect for works in progress that you want to share on Internet "
+#| "forums. Read more in the <a href=\"%(faq_url)s#6\">FAQ</a>."
 msgid ""
-"Use this button to upload an image to the <strong>Staging Area</strong>. "
-"It's perfect for works in progress that you want to share on Internet "
-"forums. Read more in the <a href=\"%(faq_url)s#6\">FAQ</a>."
+"Use this button to upload an image to the\n"
+"                                        <strong>Staging Area</strong>. It's "
+"perfect for works in progress that you want\n"
+"                                        to share on Internet forums. Read "
+"more in the\n"
+"                                        <a href=\"https://welcome.astrobin."
+"com/faq\">FAQ</a>."
 msgstr ""
 "Gebruik deze knop om een foto op te sturen naar de "
 "<strong>Ontwikkelingszone</strong>. Deze zone is geschikt voor een werk in "
@@ -6276,94 +5671,28 @@ msgstr ""
 msgid "Upload as a finished image"
 msgstr "Uploaden als een afgewerkt beeld"
 
-#, python-format
+msgid "Do not notify followers"
+msgstr ""
+
+#, fuzzy, python-format
+#| msgid ""
+#| "Use this button to upload an image to the <strong>Public Area</strong>. "
+#| "It will be displayed in <a href=\"%(profile_url)s\">your profile</a> and "
+#| "here on the home page. You can <a href=\"%(flickr_url)s\">import from "
+#| "Flickr</a> too."
 msgid ""
-"Use this button to upload an image to the <strong>Public Area</strong>. It "
-"will be displayed in <a href=\"%(profile_url)s\">your profile</a> and here "
-"on the home page. You can <a href=\"%(flickr_url)s\">import from Flickr</a> "
-"too."
+"Use this button to upload an image to the\n"
+"                                        <strong>Public Area</strong>. It "
+"will be displayed in\n"
+"                                        <a href=\"%(profile_url)s\">your "
+"profile</a> and here on the home page. You can\n"
+"                                        <a href=\"%(flickr_url)s\">import "
+"from Flickr</a> too."
 msgstr ""
 "Gebruik deze knop om een foto up te loaden naar de <strong>Publieke Zone</"
 "strong>. Zodoende zal ze getoond worden op <a href=\"%(profile_url)s\">jouw "
 "profiel</a> en hier op de homepage. Je kan ook beelden <a href="
 "\"%(flickr_url)s\">importeren vanuit Flickr</a>."
-
-msgid "Raw data upload"
-msgstr "Upload van RAW-bestanden"
-
-msgid ""
-"You have no more space left on your Raw Data account. Please delete some "
-"files to make room, or upgrade your account."
-msgstr ""
-"Je hebt geen plaats meer op je Raw Data abonnement. Gelieve ofwel andere "
-"bestanden te verwijderen, of je account up te graden."
-
-msgid "Use the button below to choose files"
-msgstr "Gebruik onderstaande knop om bestanden te kiezen"
-
-msgid "Drop your raw data here"
-msgstr "Sleep je Raw Data naar hier"
-
-msgid "Accepted file types: FIT and digital camera raw files"
-msgstr "Volgende type bestanden worden aanvaard: FIT en raw DSLR"
-
-msgid "Filename"
-msgstr "Bestandsnaam"
-
-msgid "Choose files"
-msgstr "Kies bestanden"
-
-msgid "Reset"
-msgstr "Herstel"
-
-msgid "Start upload"
-msgstr "Start met upload"
-
-msgid "Go to your Raw Data Library."
-msgstr "Ga naar je Raw Data Verzameling."
-
-msgid ""
-"Your Raw Data subscription is not active, or it has expired. If you have "
-"just subscribed, please wait for a few minutes. Thanks for your patience!"
-msgstr ""
-"Je Raw Data abonnement is niet actief of is verlopen. Als je je juist hebt "
-"geabonneerd, kan je best enkele minuten wachten. Dank voor je geduld!"
-
-#, python-format
-msgid "Go to the Raw Data <a href=\"%(plans_url)s\">plans page</a>."
-msgstr ""
-"Ga naar de Raw Data <a href=\"%(plans_url)s\">pagina met verschillende "
-"abonnee-formules</a>."
-
-msgid ""
-"Did you know that AstroBin can host your FIT and digital camera raw files "
-"too?"
-msgstr "Wist je dat AstroBin ook je FIT en digitale raw bestanden kan opslaan?"
-
-#, python-format
-msgid ""
-"Have a look at <a href=\"%(rawdata_url)s\">AstroBin Raw Data</a> if you want "
-"to safely store all your raw files, and have them neatily organized for "
-"future reference!"
-msgstr ""
-"Neem een kijkje op <a href=\"%(rawdata_url)s\">AstroBin Raw Data</a> als je "
-"je raw bestanden hier veilig en ordelijk wil bewaren!"
-
-msgid "Raw files"
-msgstr "Raw bestanden"
-
-msgid "Upload started, please wait..."
-msgstr "Uploaden is begonnen. Gelieve te wachten..."
-
-msgid ""
-"One ore more files were ignored because they did not look like FIT or "
-"digital camera raw files."
-msgstr ""
-"Eén of meer bestanden werden niet behandeld omdat ze niet de kenmerken van "
-"een FIT of raw bestand leken te hebben."
-
-msgid "Upload complete!"
-msgstr "Upload gelukt!"
 
 msgid "Your API Keys"
 msgstr "Je API Keys"
@@ -6401,9 +5730,6 @@ msgstr ""
 
 msgid "The user was banned."
 msgstr "De gebruiker werd uitgesloten."
-
-msgid "Thank you!"
-msgstr "Dank u!"
 
 #, python-format
 msgid "%(user)s's bookmarks"
@@ -6469,6 +5795,50 @@ msgstr ""
 "Dit zijn je onafgewerkte foto's. Jij bent de enige die deze lijst kan zien, "
 "maar je kan elke individuele foto met andere mensen delen via het <em>Delen</"
 "em>-menu."
+
+msgid ""
+"These are your \"deleted\" images: only you can see this list. Click the "
+"images you want to\n"
+"            restore, and then use the button below to confirm."
+msgstr ""
+
+#, python-format
+msgid ""
+"\n"
+"                    We are very, very sorry, but it appears that some of "
+"your images suffered a catastrophic data\n"
+"                    corruption, and cannot be retrieved. Please read more <a "
+"href=\"%(data_corruption_url)s\">here</a>.\n"
+"                "
+msgstr ""
+
+msgid ""
+"\n"
+"                    Please click on the thumbnails stuck with the hourglass "
+"icon to upload the image files that you\n"
+"                    still have on your computer or backups to their pages "
+"again.\n"
+"                "
+msgstr ""
+
+msgid ""
+"\n"
+"                    The data associated to your affected images, such as "
+"title, description, equipment used, acquisition\n"
+"                    details, comments, likes, bookmarks, and so on, is still "
+"intact and safe.\n"
+"                "
+msgstr ""
+
+msgid ""
+"\n"
+"                    AstroBin would like to offer you its sincerest "
+"apologies. :(\n"
+"                "
+msgstr ""
+
+msgid "Okay, don't show this again"
+msgstr ""
 
 msgid "These images don't have enough data. It's a shame..."
 msgstr "Deze foto's hebben niet voldoende ingevulde data. Zonde..."
@@ -6555,9 +5925,6 @@ msgid ""
 "All the properties of this claim will be deleted and cannot be recovered!"
 msgstr "Alle eigenschappen van deze claim worden onherroepelijk gewist!"
 
-msgid "Please wait..."
-msgstr "Gelieve te wachten..."
-
 msgid "Delete account"
 msgstr "Account verwijderen"
 
@@ -6578,6 +5945,55 @@ msgstr "Wijzig je basisinformatie"
 
 msgid "Edit your commercial information"
 msgstr "Wijzig je commerciële informatie"
+
+#, fuzzy
+#| msgid "Uploaded"
+msgid "Download your data"
+msgstr "Gepost op"
+
+msgid ""
+"You can download all your data off AstroBin, including original uploads, all "
+"revisions, and information such as description, gear used, acquisition "
+"details, and so on."
+msgstr ""
+
+#, fuzzy
+#| msgid "Request from"
+msgid "Request download"
+msgstr "Vraag van"
+
+#, fuzzy
+#| msgid "You have no requests."
+msgid "Your past requests"
+msgstr "Je hebt geen verzoeken."
+
+#, fuzzy
+#| msgid "Request critique"
+msgid "Request time"
+msgstr "Vraag om kritiek"
+
+#, fuzzy
+msgid "File size"
+msgstr "Volledige grootte:"
+
+msgid "There doesn't seem to be anything here."
+msgstr ""
+
+msgid "Quota exceeded"
+msgstr ""
+
+msgid ""
+"To prevent excessive usage of server resources, you can only request one "
+"data download per 24 hour period. If you believe your download is stuck, "
+"please email us at <a href=\"mailto:astrobin@astrobin.com"
+"\">astrobin@astrobin.com</a>."
+msgstr ""
+
+msgid ""
+"Please keep in mind that it could take several hours for your download to be "
+"ready, depending on the number and size of your images, and how busy the "
+"servers are at the moment."
+msgstr ""
 
 msgid "Edit your astrophotography gear"
 msgstr "Wijzig je astrofoto materiaal"
@@ -6674,8 +6090,13 @@ msgstr ""
 "Spijtig genoeg moet je momenteel Javascript activeren als je foto's van "
 "Flickr wil importeren."
 
-msgid "Sorry, but importing from Flickr is reserved to AstroBin Premium users."
+msgid ""
+"Sorry, but importing from Flickr is reserved to AstroBin Premium and "
+"Ultimate users."
 msgstr ""
+
+msgid "Would you like to upgrade?"
+msgstr "Wil je upgraden ?"
 
 msgid "Click to select the photos you want to import"
 msgstr "Klik op de gewenste foto's om ze te importeren"
@@ -6696,18 +6117,6 @@ msgid "Do not navigate away from this window: this might take a while!"
 msgstr ""
 "Laat dit venster onberoerd. deze procedure kan wel wat tijd in beslag nemen!"
 
-#, fuzzy
-#| msgid ""
-#| "Done! Go to <a href=\\\"/me\\\">your profile</a> to see the new pictures "
-#| "(and keep an eye on your notifications)!"
-msgid ""
-"Done! Go to <a href=\\\"/users/\" + username + \"/?staging&sub=uploaded\\"
-"\">your staging gallery</a> to see the new pictures (and keep an eye on your "
-"notifications)!"
-msgstr ""
-"Klaar! Ga naar <a href=\\\"/me\\\">je profiel</a> om je nieuwe foto's te "
-"bekijken (en hou een oogje op je kennisgevingen)!"
-
 msgid "Subscription"
 msgstr "Abonnement"
 
@@ -6727,6 +6136,12 @@ msgstr "Publieke Zone"
 msgid "Staging Area"
 msgstr "Ontwikkelingszone"
 
+msgid "Corrupted"
+msgstr ""
+
+msgid "Trash"
+msgstr ""
+
 #, fuzzy
 #| msgid "Find images"
 msgid "Liked images"
@@ -6744,6 +6159,19 @@ msgstr ""
 #, fuzzy
 msgid "Add/remove images"
 msgstr "Enkele foto's"
+
+#, fuzzy
+#| msgid "Quick search"
+msgid "Quick edit"
+msgstr "Snelzoeken"
+
+msgid "Key/value pairs"
+msgstr ""
+
+#, fuzzy
+#| msgid "quote selected"
+msgid "Restore selected"
+msgstr "geselecteerd citaat"
 
 msgid ""
 "Click on the images to include them in this collection (and click again to "
@@ -6764,6 +6192,11 @@ msgid ""
 msgstr ""
 "Deze foto wordt onherroepelijk gewist. De revisies blijven bewaard. Ben je "
 "zeker?"
+
+msgid ""
+"The following images do not have the key/value tag chosen to order this "
+"collection, so they are shown as unsorted here."
+msgstr ""
 
 msgid "This collection contains no images."
 msgstr ""
@@ -6787,6 +6220,9 @@ msgid "Do you want to create a collection now?"
 msgstr ""
 
 msgid "This user does not have any collections."
+msgstr ""
+
+msgid "Quick edit: key/value tags"
 msgstr ""
 
 #, fuzzy
@@ -6856,6 +6292,12 @@ msgstr "arcsec/pixel"
 
 msgid "Telescope type"
 msgstr "Telescoop type"
+
+#, python-format
+msgid ""
+"Sorry, this filter requires an <a href=\"%(url)s\">AstroBin Ultimate</a> "
+"subscription."
+msgstr ""
 
 #, fuzzy
 #| msgid "Select all"
@@ -7023,6 +6465,9 @@ msgstr "Catadioptrisch: Schmidt-Cassegrain"
 msgid "ACF Schmidt-Cassegrain"
 msgstr "Catadioptrisch: ACF Schmidt-Cassegrain"
 
+msgid "Rowe-Ackermann Schmidt astrograph"
+msgstr ""
+
 msgid "minutes"
 msgstr "minuten"
 
@@ -7054,20 +6499,16 @@ msgstr ""
 "kleuren terugbrengen naar 256 om dit bestand te kunnen gebruiken."
 
 msgid ""
-"You uploaded a pretty large file. For that reason, AstroBin could not verify "
-"that it's a valid image."
-msgstr ""
-
-msgid ""
 "There was one or more errors processing the form. You may need to scroll "
 "down to see them."
 msgstr ""
 "Er trad minstens één fout op bij het verwerken van het formulier. Het is "
 "mogelijk dat je naar beneden moet scrollen om ze te zien."
 
-msgid ""
-"Form saved. A new plate-solving process will start when you visit your image "
-"again."
+msgid "Form saved. A new plate-solving process will start now."
+msgstr ""
+
+msgid "Form saved. A new advanced plate-solving process will start now."
 msgstr ""
 
 msgid "Fill in one session, before adding more."
@@ -7116,6 +6557,10 @@ msgstr ""
 #, fuzzy
 msgid "Collection updated!"
 msgstr "Locaties"
+
+#, fuzzy
+msgid "Images updated!"
+msgstr "Grootte foto"
 
 #, fuzzy
 msgid "Collection deleted!"
@@ -7181,9 +6626,6 @@ msgstr "Gem. Maanfase"
 msgid "Mean SQM"
 msgstr "Gemiddelde SQM"
 
-msgid "Resolution"
-msgstr "Resolutie"
-
 msgid "English"
 msgstr "Engels"
 
@@ -7191,6 +6633,10 @@ msgid "Image deleted."
 msgstr "Je foto werd gewist."
 
 msgid "Revision deleted."
+msgstr "Registratie is voltooid."
+
+#, fuzzy
+msgid "Original version deleted!"
 msgstr "Registratie is voltooid."
 
 #, fuzzy
@@ -7204,6 +6650,1207 @@ msgstr "Promoveer naar Publieke Zone"
 #, python-format
 msgid "%s topics deleted"
 msgstr ""
+
+msgid ""
+"AstroBin is preparing your data for download. Please check this page again "
+"in a while: the more images you have, the more time it will take."
+msgstr ""
+
+#~ msgid "created a new public data pool"
+#~ msgstr "maakte een nieuwe publieke gegevensbank aan"
+
+#~ msgid "added new data to public data pool"
+#~ msgstr "voegde nieuwe data toe aan een publieke gegevensbank"
+
+#~ msgid "added a new processed image to public data pool"
+#~ msgstr "voegde een nieuwe bewerkte foto toe aan een publieke gegevensbank"
+
+#~ msgid "Affiliates"
+#~ msgstr "Peterschap"
+
+#~ msgid "The following companies support AstroBin."
+#~ msgstr "De volgende bedrijven sponsoren AstroBin."
+
+#~ msgid "AstroBin Raw Data"
+#~ msgstr "AstroBin Raw Data"
+
+#~ msgid "Raw data"
+#~ msgstr "Ruwe data"
+
+#~ msgid "Raw data library"
+#~ msgstr "Raw data verzameling"
+
+#~ msgid "Private shared folders"
+#~ msgstr "Gedeelde privéfolders"
+
+#~ msgid "Frequently Asked Questions"
+#~ msgstr "FAQ = Meest gestelde vragen"
+
+#~ msgid "Is this website for free?"
+#~ msgstr "Is deze website gratis te gebruiken?"
+
+#~ msgid "Are there any limits on how large and how many images I can upload?"
+#~ msgstr ""
+#~ "Zijn er beperkingen of limieten omtrent de grootte en het aantal foto's "
+#~ "die ik kan uploaden?"
+
+#~ msgid "What image formats are supported?"
+#~ msgstr "Welke beeldformaten worden ondersteund?"
+
+#~ msgid "Is my data safe on AstroBin?"
+#~ msgstr "Zijn mijn gegevens veilig op AstroBin?"
+
+#~ msgid ""
+#~ "I've seen beautiful images on this site. I'm not worthy of posting mine!"
+#~ msgstr ""
+#~ "Ik heb hier prachtige foto's gezien. Mijn beelden zijn het niet waard om "
+#~ "erbij te zetten!"
+
+#~ msgid "What's the deal with the Staging Area and the Public Area?"
+#~ msgstr ""
+#~ "Wat is het verschil tussen de Ontwikkelingszone en de Publieke Zone?"
+
+#~ msgid "Why was AstroBin created?"
+#~ msgstr "Waarom is AstroBin uit de grond gestampt?"
+
+#~ msgid "What are the plans for the future?"
+#~ msgstr "Wat zijn de toekomstplannen?"
+
+#~ msgid "How can I format my comments?"
+#~ msgstr "Hoe kan ik een opmaak meegeven aan mijn commentaren?"
+
+#~ msgid "How is the AstroBin index calculated?"
+#~ msgstr "Hoe wordt de AstroBin index berekend?"
+
+#~ msgid "I received some Likes, why is my AstroBin index not updated?"
+#~ msgstr ""
+#~ "Ik heb een paar likes gekregen. Waarom is mijn AstroBin index hier niet "
+#~ "mee upgedated?"
+
+#~ msgid "How is the Image of the Day selected?"
+#~ msgstr "Hoe wordt de Foto van de Dag geselecteerd?"
+
+#~ msgid "... and their answers!"
+#~ msgstr "... en hun antwoorden!"
+
+#~ msgid ""
+#~ "No. A free account will let you upload up to 10 images, and partake in "
+#~ "all social activities. For unlimited storage, you will need a premium "
+#~ "subscription."
+#~ msgstr ""
+#~ "Nee, met een gratis account kun je 10 foto's uploaden en deelnemen aan de "
+#~ "sociale aktiviteiten. Voor onbeperkte opslag heb je een premium account "
+#~ "nodig."
+
+#~ msgid ""
+#~ "<strong>NO!</strong> If you are a premium member, on AstroBin you can "
+#~ "upload as many images as you want, and as large as you want. In fact, "
+#~ "full size images are encouraged!"
+#~ msgstr ""
+#~ "<strong>NEE!</strong> Je kan op AstroBin zoveel foto's zetten als je wil "
+#~ "en hoe groot je wil. We moedigen het zelfs aan om foto's te publiceren in "
+#~ "hun oorspronkelijke 'full size' formaat!"
+
+#~ msgid ""
+#~ "AstroBin will accept JPEG, PNG and GIF. Animated GIF is supported too."
+#~ msgstr ""
+#~ "AstroBin accepteert JPEG, PNG en GIF. Ook animated GIF wordt ondersteund."
+
+#~ msgid ""
+#~ "Absolutely. There are multiple ways in which AstroBin can store your data "
+#~ "very safely. First of all, the images you upload are stored on a highly "
+#~ "durable, highly available, redundant backend. The durability of the "
+#~ "storage backend is 99.999999999 percent over a given year. This means "
+#~ "that if you upload 10,000 images, you can expect to lose one image to "
+#~ "data corruption once in 10,000,000 year. The images are duplicated across "
+#~ "two different physical servers, for protection against natural disasters."
+#~ msgstr ""
+#~ "Absoluut. Je foto's op AstroBin worden op verschillende niveaus veilig "
+#~ "bewaard. Ten eerste worden alle beelden op een kwaliteitsvolle, "
+#~ "redundante infrastructuur bewaard die een hoge graad van beschikbaarheid "
+#~ "garandeert. De kwaliteit wordt uitgedrukt als 99.999999999% per jaar. Dit "
+#~ "komt erop neer dat als je 10.000 beelden op onze server plaatst, je mag "
+#~ "verwachten dat je 1 foto verliest aan datacorruptie elke 10.000.000 jaar. "
+#~ "De foto's worden dubbel bewaard en verdeeld op twee afzonderlijke servers "
+#~ "zodat we gewapend zijn tegen natuurrampen."
+
+#~ msgid ""
+#~ "The actual website, instead, is hosted on a Virtual Machine, so, in case "
+#~ "of severe hardware failure, it can be redeployed to a different server in "
+#~ "a matter of 15 minutes."
+#~ msgstr ""
+#~ "De eigenlijke website zelf wordt aangeboden door middel van een virtuele "
+#~ "machine (Virtual Machine). Indien er zich een ernstige systeemfout "
+#~ "voordoet, kan de site opnieuw opgestart worden op een andere server in 15 "
+#~ "minuten tijd."
+
+#~ msgid ""
+#~ "Finally, the database that powers AstroBin (in fact, the whole Virtual "
+#~ "Machine) is backed up daily. In case of severe data loss, the website "
+#~ "will be quickly restored to a snapshot that's never older than 24 hours."
+#~ msgstr ""
+#~ "Tenslotte wordt er van de database die achter AstroBin zit (in feite de "
+#~ "volledige Virtual Machine) een dagelijkse reservekopie gemaakt. Moest er "
+#~ "een ernstig verlies aan gegevens plaatsvinden, dan kunnen we deze "
+#~ "hestellen door een kopie terug te zetten die maximaal 24u oud is."
+
+#~ msgid ""
+#~ "That said, you should be aware that AstroBin is not a backup service, and "
+#~ "although your data is very safe in our hands, we cannot legally take "
+#~ "responsibility in the event of loss, however unlikely it is. Always keep "
+#~ "a copy of your image on your computer."
+#~ msgstr ""
+#~ "Dit gezegd zijnde moet je wel weten dat AstroBin geen backup service is. "
+#~ "Hoewel je gegevens zeer zorgvuldig worden behandeld door ons, kunnen we "
+#~ "geen juridische verantwoordelijkheid dragen in het onwaarschijnlijke "
+#~ "geval dat we gegevens verliezen. Je dient zelf altijd een eigen kopie van "
+#~ "je foto's op je eigen computer(s) te bewaren."
+
+#~ msgid ""
+#~ "Nonsense. AstroBin has <strong>not</strong> been made to showcase "
+#~ "beautiful image, but to give everybody an opportunity to contribute to a "
+#~ "vast and evergrowing effort of centralization and indexing of important "
+#~ "data. That 30 minute picture of M31 you took last night between the "
+#~ "clouds <em>belongs</em> here! Don't be shy and post it!"
+#~ msgstr ""
+#~ "Niet waar!! AstroBin is <strong>niet</strong> in het leven geroepen om "
+#~ "alleen maar supermooie foto's te bevatten, maar om iedereen de kans te "
+#~ "geven om bij te dragen tot een aanzienlijke en onophoudelijk groeiende "
+#~ "inspanning tot het centraliseren en indexeren van belangrijke gegevens. "
+#~ "Die foto van M31 tussen de wolken met een belichtingstijd van 30 minuten "
+#~ "die je de voorbije nacht maakte <em>moet</em> hier bijstaan! Wees niet "
+#~ "verlegen en publiceer ze!"
+
+#~ msgid ""
+#~ "On AstroBin you have two places for our images. The Staging Area is where "
+#~ "you can upload images that you want to quickly share on forums, mailing "
+#~ "lists or social networks. The days of scaling down and compressing your "
+#~ "image so you can upload it to a forum for feedback and critique are over! "
+#~ "Just upload to AstroBin's Staging Area, and send the link to anyone you "
+#~ "want. The image will be visible only to the intended recipients, and "
+#~ "won't appear on your profile or AstroBin's home page."
+#~ msgstr ""
+#~ "Astrobin bevat twee zones voor onze foto's. De Ontwikkelingszone kan je "
+#~ "gebruiken om foto's snel te delen op fora, mailing lijsten of sociale "
+#~ "netwerken. De dagen waar je beelden moest verkleinen en comprimeren om ze "
+#~ "op een forum te kunnen zetten zijn voorbij! Laad het beeld in AstroBins "
+#~ "Ontwikkelingszone en stuur de link door naar wie je wil. Zo is de foto "
+#~ "enkel zichtbaar voor het geselecteerde publiek en zal ze niet op je "
+#~ "profiel of op de homepagina van AstroBin verschijnen."
+
+#~ msgid ""
+#~ "The Public Area, instead, is for your finished products. After you have "
+#~ "received feedback on your favorite forum, you can promote an image from "
+#~ "the Staging Area to the Public Area, and it will appear on your profile. "
+#~ "Remember that you can also move images back and forth from one Area to "
+#~ "the other as many times as you want!"
+#~ msgstr ""
+#~ "De Publieke Zone is daarentegen de plaats voor je afgewerkte foto's. "
+#~ "Nadat je op je favoriete forum de nodige commentaren hebt gekregen, kan "
+#~ "je een foto promoveren van de Ontwikkelingszone naar de Publieke Zone "
+#~ "zodat ze zichtbaar is op je profiel. Onthoud dat je foto's herhaaldelijk "
+#~ "van de ene Zone naar de andere kan verplaatsen zonder beperking."
+
+#~ msgid ""
+#~ "AstroBin was born out of the desire to end something that had been going "
+#~ "on for too long: the waste of incredible material to the sea of chaos "
+#~ "that the Internet can be. For years, fantastic astrophotographs have "
+#~ "beeen uploaded to Internet Forums, often with little or no data, or to "
+#~ "general purpose image hosting websites, invariably with no data attached."
+#~ msgstr ""
+#~ "AstroBin is geboren uit het verlangen om een eind te maken aan iets dat "
+#~ "al veel te lang bezig was: het kwijtspelen van prachtig beeldmateriaal in "
+#~ "de zee van chaos die Internet tegenwoordig is. Jaren aan een stuk zijn er "
+#~ "fantastisch mooie beelden gezet op fora of andere image hosting websites "
+#~ "zonder toevoegen van waardevolle en interessante data omtrent de gemaakte "
+#~ "foto's."
+
+#~ msgid ""
+#~ "Such an image would be seen by some people, then quickly forgotten, and "
+#~ "reduced to nothing more than a bunch of pixel in the giant wasteland of "
+#~ "the Internet."
+#~ msgstr ""
+#~ "Op deze manier werden deze foto's slechts door enkelen bekeken en snel "
+#~ "terug vergeten. Mooie foto's werden zo gereduceerd tot niets meer dan een "
+#~ "hoopje pixels op het grote Internet-stort."
+
+#~ msgid ""
+#~ "This should not be allowed to happen. AstroBin is the response: an effort "
+#~ "to host, collect, index and categorize the output of the "
+#~ "astrophotographers all over the world, so that their precious data would "
+#~ "serve a purpose, and have a meaning forever."
+#~ msgstr ""
+#~ "Dit zou niet mogen gebeuren en AstroBin is het antwoord: een poging om "
+#~ "het werk van astrofotografen van over heel de wereld te verzamelen, te "
+#~ "tonen, te indexeren en te categoriseren zodat deze kostbare data voor "
+#~ "altijd zinvol en raadpleegbaar blijven."
+
+#~ msgid ""
+#~ "<em>AstroBin</em> is just starting out, and this time we can really say "
+#~ "that the sky is the limit! Tons of ideas are in the pipeline. As the user "
+#~ "base grows, so does the data. Suddenly, things like automated supernovae "
+#~ "search become possible: you could simply upload an image of a galaxy, and "
+#~ "AstroBin could compare it to pictures of the same galaxy taken previously."
+#~ msgstr ""
+#~ "<em>AstroBin</em> is nog maar pas uit de startblokken gekomen en we "
+#~ "kunnen nu al zeggen: \"The sky is the limit\". Er zitten talloze ideeën "
+#~ "te wachten tot ze worden uitgewerkt. Als het aantal gebruikers groeit, "
+#~ "zal ook de hoeveelheid gegevens toenemen. En dan worden dingen plots "
+#~ "mogelijk zoals een geautomatiseerde zoektocht naar supernova's. Je moet "
+#~ "dan enkel maar je foto van een sterrenstelsel uploaden en AstroBin kan ze "
+#~ "vergelijken met alle foto's die eerder werden gepost."
+
+#~ msgid ""
+#~ "AstroBin could also recommend subjects for you to image! Knowing your "
+#~ "equipment, your location, and comparing what you have imaged to what "
+#~ "users similar to you have, AstroBin could suggest your next challenge!"
+#~ msgstr ""
+#~ "AstroBin zou je ook advies kunnen geven over welke objecten je eventueel "
+#~ "nog zou kunnen fotograferen! Dit omdat de site weet welk materiaal je "
+#~ "bezit, waar je woont en welke beelden je al hebt gemaakt. Door deze "
+#~ "gegevens te vergelijken met de info van gebruikers die overeenkomsten "
+#~ "hebben met je profiel, kan AstroBin je een volgende uitdaging suggereren!"
+
+#~ msgid ""
+#~ "Thanks to the input from the community, more ideas are flowing in and the "
+#~ "list get bigger and bigger."
+#~ msgstr ""
+#~ "En dankzij de inbreng van de gemeenschap komen er steeds meer ideeën "
+#~ "binnen, zodat de lijst met mogelijkheden blijft groeien."
+
+#~ msgid ""
+#~ "AstroBin uses the Markdown syntax. Please use the following reference "
+#~ "table:"
+#~ msgstr ""
+#~ "AstroBin gebruikt de \"Markdown syntax\". Hieronder een tabel die de "
+#~ "mogelijkheden toont:"
+
+#~ msgid "You type:"
+#~ msgstr "Je schrijft:"
+
+#~ msgid "You see:"
+#~ msgstr "Je ziet:"
+
+#~ msgid "italics"
+#~ msgstr "schuin"
+
+#~ msgid "bold"
+#~ msgstr "vet"
+
+#~ msgid "(TAB or 4 spaces)"
+#~ msgstr "(TAB of 4 spaties)"
+
+#~ msgid "preformatted text"
+#~ msgstr "code"
+
+#~ msgid "quoted text"
+#~ msgstr "aangehaalde tekst"
+
+#~ msgid "escape the formatting syntax"
+#~ msgstr "keer weer uit de formatterende syntax"
+
+#~ msgid ""
+#~ "The AstroBin index is a function of the number of Likes and the number of "
+#~ "images posted by a user."
+#~ msgstr ""
+#~ "De AstroBin index wordt berekend aan de hand van het aantal Likes en het "
+#~ "aantal geposte beelden van een gebruiker."
+
+#~ msgid ""
+#~ "Because it's computationally expensive, the AstroBin index is updated "
+#~ "only every 24 hours. The same applies for the search index, the Big Wall, "
+#~ "and some other user data."
+#~ msgstr ""
+#~ "Omdat het veel rekenwerk vereist, wordt de AstroBin 1 keer per 24 uur "
+#~ "aangepast. Hetzelfde geldt voor de zoekindex, de Grote Muur en sommige "
+#~ "andere gebruikersgegevens."
+
+#~ msgid ""
+#~ "Do you have a question not covered here! Please <a href=\"/contact/"
+#~ "\">contact us</a>!"
+#~ msgstr ""
+#~ "Heb je nog een vraag die hier niet bijstaat? Zend ons gerust een <a href="
+#~ "\"/contact/\">mail</a>!"
+
+#~ msgid ""
+#~ "AstroBin accounts are meant for members to share original images that "
+#~ "they have created."
+#~ msgstr ""
+#~ "AstroBin accounts zijn bedoeld voor leden die hun eigen originele beelden "
+#~ "willen delen."
+
+#~ msgid "What is allowed"
+#~ msgstr "Wat is toegestaan"
+
+#~ msgid "Do upload content you have created yourself."
+#~ msgstr "Upload beelden die je zelf hebt gemaakt."
+
+#~ msgid ""
+#~ "Respect the copyright of others. Stealing images from other people and "
+#~ "trying to pass them off as yours is not allowed on AstroBin."
+#~ msgstr ""
+#~ "Respecteer het copyright van anderen. Beelden stelen van anderen en laten "
+#~ "uitschijnen dat ze jezelf toebehoren is niet toegelaten op AstroBin."
+
+#~ msgid "Do fill in all the technical details you can."
+#~ msgstr "Vul zoveel mogelijk technische details in."
+
+#~ msgid ""
+#~ "AstroBin is founded on the idea that data is important and can't go "
+#~ "wasted in a sea of chaos. As much as you can, please fill in the "
+#~ "technical details of your images."
+#~ msgstr ""
+#~ "De filosofie van AstroBin is gebaseerd op het idee dat gegevens "
+#~ "belangrijk zijn en niet mogen verloren gaan in een zee van chaos. Gelieve "
+#~ "dus aub zoveel mogelijk technische details van je foto's bij te voegen."
+
+#~ msgid "Be respectful of other users."
+#~ msgstr "Toon respect tegenover andere gebruikers."
+
+#~ msgid "Be nice and friendly to other users when you send them messages."
+#~ msgstr "Wees correct en vriendelijk als je anderen berichten stuurt."
+
+#~ msgid "What is forbidden"
+#~ msgstr "Wat is verboden"
+
+#, fuzzy
+#~ msgid "Don't upload anything that you did not work on."
+#~ msgstr "Upload niets waar je geen copyrighthouder van bent."
+
+#~ msgid "No nudity, no explicitly sexual content, no illegal content."
+#~ msgstr ""
+#~ "Geen beelden met naakt, geen expliciet sexuele inhoud, geen illegale "
+#~ "zaken."
+
+#~ msgid ""
+#~ "Your account will be permanently deleted, and so will all your content, "
+#~ "if you upload any content that is illegal, porn or nudity. We also "
+#~ "reserve the right to report you to the authorities, if we find it "
+#~ "necessary."
+#~ msgstr ""
+#~ "Je lidmaatschap wordt voorgoed verwijderd, inclusief alle upgeloade "
+#~ "foto's als je materiaal publiceert dat illegaal is of porno/naaktheid "
+#~ "bevat. We hebben dan ook steeds het recht om je aan te geven bij de "
+#~ "bevoegde instanties als we dit nodig achten."
+
+#~ msgid "Don't upload images that have nothing to do with astronomy."
+#~ msgstr "Publiceer geen foto's die niets te maken hebben met astronomie."
+
+#~ msgid ""
+#~ "Images of your equipment are fine, but don't use AstroBin to upload "
+#~ "pictures from your last vacation. Your account won't be deleted, but we "
+#~ "will ask you to remove those pictures."
+#~ msgstr ""
+#~ "Beelden van je astro-apparatuur zijn OK, maar gebruik AstroBin niet om "
+#~ "foto's van je voorbije vakantie te posten. Dit zal niet direct een "
+#~ "aanleiding zijn om je lidmaatschap te verbreken, maar we zullen vragen om "
+#~ "dit soort van foto's te verwijderen."
+
+#~ msgid ""
+#~ "Don't use your account to host images for websites, banners or logos."
+#~ msgstr ""
+#~ "Gebruik je account niet om foto's op te slaan die je gebruikt op "
+#~ "websites, banners of logo's."
+
+#~ msgid ""
+#~ "Banners, logos, icons or other graphic elements that are not "
+#~ "astrophotography are not allowed on AstroBin."
+#~ msgstr ""
+#~ "Banners, logo's, icoontjes of andere grafische elementen die geen "
+#~ "astrofotografie zijn, zijn niet toegelaten op AstroBin."
+
+#~ msgid ""
+#~ "In conclusion, these terms are just a way to say \"please be nice and use "
+#~ "common sense\". If you feel you can't abide by them, please let us know "
+#~ "what you feel is wrong."
+#~ msgstr ""
+#~ "Samengevat, met deze voorwaarden bedoelen we gewoon: \"Wees alstublieft "
+#~ "hoffelijk en gebruik je gezond verstand.\" Als je met een bepaalde "
+#~ "voorwaarde problemen moest hebben, laat het ons dan weten."
+
+#~ msgid ""
+#~ "Are you an astrophotographer? Do you like to share the outcome of your "
+#~ "hard work with others? As an astrophotographer myself, and a subscriber "
+#~ "to numerous Astrophotography forums, I have found that the Internet is "
+#~ "lacking a centralized place where astrophotographers can share their work."
+#~ msgstr ""
+#~ "Ben jij een astrofotograaf? Vind je het leuk om het resultaat van je "
+#~ "noeste werk te delen met anderen? Zelf astrofotograaf zijnde, en lid van "
+#~ "talloze astrofotografie-fora, viel het me op dat er een centrale plaats "
+#~ "ontbreekt op het Internet waar astrofotografen hun werk kunnen delen."
+
+#~ msgid "Well, this is finally over!"
+#~ msgstr "Wel, vanaf nu is dit verleden tijd!"
+
+#~ msgid ""
+#~ "<em>AstroBin</em> comes to fill the gap. It's a website built from the "
+#~ "ground up by an astrophotographer, and it provides means to people who "
+#~ "want to share their astrophotographs."
+#~ msgstr ""
+#~ "<em>AstroBin</em> vult deze leemte. De astrofotograaf die deze website "
+#~ "ontwierp is met een propere lei begonnen om alle behoeften te dekken van "
+#~ "iedereen die astro-foto's wil delen."
+
+#~ msgid "So how is this different from any other image sharing websites?"
+#~ msgstr ""
+#~ "Wat zijn dan de verschillen met andere websites waar foto's gedeeld "
+#~ "worden?"
+
+#~ msgid ""
+#~ "<em>AstroBin</em> provides a number of features that are tailored "
+#~ "specificlly to astrophotography. Here's a quick run down of the main ones:"
+#~ msgstr ""
+#~ "<em>AstroBin</em> biedt een aantal functies die specifieke behoeften "
+#~ "dekken voor astrofotografie. Hierbij een kort overzicht van de "
+#~ "belangrijkste mogelijkheden:"
+
+#~ msgid "Dedication to data"
+#~ msgstr "Onderkenning van het belang van (meta-)data"
+
+#~ msgid ""
+#~ "On a general purpose image sharing site, you would upload your image and "
+#~ "be done with it. <em>AstroBin</em>, instead, has a user interface "
+#~ "specifically designed to enable you to input all the technical data of "
+#~ "your image."
+#~ msgstr ""
+#~ "Op een gewone foto-sharing site plaats je botweg je foto en klaar is "
+#~ "kees. Maar <em>AstroBin</em> heeft een gebruikserinterface die je toelaat "
+#~ "om alle technische gegevens omtrent je foto toe te voegen."
+
+#~ msgid ""
+#~ "<em>AstroBin</em> will autocomplete your input using a vast database: "
+#~ "everything from telescopes, CCDs and filters to astronomical objects in "
+#~ "many catalogues will show in popup dialogs for easy selection when you "
+#~ "start typing their names. <em>AstroBin</em> is connected to the SIMBAD "
+#~ "Astronomical Database, which contains over 5 million objects under over "
+#~ "15 million names!"
+#~ msgstr ""
+#~ "<em>AstroBin's</em> autocomplete-functie heeft een grote achterliggende "
+#~ "database die telescopen, CCD's, filters en astronomische objecten uit "
+#~ "verschillende catalogi bevat. Al deze trefwoorden verschijnen in een "
+#~ "selectieveld vanaf het moment dat je een woord begint te typen. "
+#~ "<em>AstroBin</em> is verbonden met de SIMBAD Astronomische Database die "
+#~ "meer dan 5 miljoen objecten bevat die samen gekend zijn onder 15 miljoen "
+#~ "namen!"
+
+#~ msgid ""
+#~ "On <em>AstroBin</em>, astronomical subjects have their own page, where "
+#~ "you can see the best images of them, and plots and charts showing trends "
+#~ "and interesting statistics. There is also a page that shows the most "
+#~ "popular subjects organized by month and latitude!"
+#~ msgstr ""
+#~ "Astronomische objecten op <em>AstroBin</em> hebben een eigen pagina waar "
+#~ "je er de mooiste foto's van kunt zien, samen met plots en grafieken over "
+#~ "trends en interessante statistieken. Er is ook een pagina die de meest "
+#~ "populaire objecten laat zien georganizeerd per maand en breedtegraad!"
+
+#~ msgid "Data is strongly interconnected"
+#~ msgstr "Alle data zijn sterk met elkaar verbonden"
+
+#~ msgid ""
+#~ "Have you ever wanted to see how your next image is going to look like? On "
+#~ "<em>AstroBin</em>, you can search for all images of a certain target that "
+#~ "were taken with a certain telescope and a certain CCD or camera. Or a "
+#~ "certain filter. How about all the images between 6 and 8 hours of "
+#~ "integration? Or with a certain Moon phase? You can do that!"
+#~ msgstr ""
+#~ "Heb je je ooit afgevraagd hoe je volgende foto er zal uitzien? Je kan op "
+#~ "<em>AstroBin</em> een zoekopdracht uitvoeren van een specifiek doelobject "
+#~ "die met een zekere telescoop en CCD/camera zijn gemaakt. Of met een "
+#~ "zekere filter. Hoe zit het met foto's die gemaakt zijn met een "
+#~ "integratietijd tussen de 6 en de 8 uur? Of tijdens een bepaalde fase van "
+#~ "de Maan? Dit kan allemaal!"
+
+#~ msgid ""
+#~ "AstroBin can help you with your next telescope or camera purchase, by "
+#~ "searching for gear combinations owned by other users. For instance, you "
+#~ "could search for all images taken with a Canon 5D and any apochromatic "
+#~ "refractor, or a SBIG ST-8300 with any Richtey-Chretien telescope. Or, if "
+#~ "you want, you can search by telescope diameter too!"
+#~ msgstr ""
+#~ "AstroBin kan je helpen met je volgende aankoop van een telescoop of "
+#~ "camera door te zoeken naar materiaalcombinaties die door andere leden in "
+#~ "bezit zijn. Je kan bijvoorbeeld zoeken naar alle foto's die genomen zijn "
+#~ "met een Canon 5D door eender welke apochromatische refractor, of met een "
+#~ "SBIG ST-8300 in combinatie met een Ritchey-Chretien. Je kan ook zoeken op "
+#~ "basis van de telescoopdiameter!"
+
+#~ msgid ""
+#~ "Finally, all this information is collected in interesting plots, that can "
+#~ "help you figure out how some gear items are trending."
+#~ msgstr ""
+#~ "Tenslotte wordt alle informatie verwerkt in interessante grafieken die je "
+#~ "kunnen helpen ontdekken wat de trends zijn in het gebruik van je "
+#~ "materiaal."
+
+#~ msgid "All the data at a glance"
+#~ msgstr "Alle nodige gegevens in een oogopslag"
+
+#~ msgid ""
+#~ "Each image on <em>AstroBin</em> is annotated of all the technical details "
+#~ "about its acquisition. Telescopes involved, cameras, mounts, filters, "
+#~ "everything is visible at a glance in the Technical Card. Even the Moon "
+#~ "age at the time of the acquisition is displayed."
+#~ msgstr ""
+#~ "Elk beeld in <em>AstroBin</em> wordt vergezeld door alle technische "
+#~ "details die betrekking hebben op de totstandkoming. Gebruikte telescopen, "
+#~ "camera's, filters, ... Al deze gegevens staan op de technische fiche. "
+#~ "Zelfs de maanleeftijd van het ogenblik waarop de foto werd genomen is "
+#~ "vermeld."
+
+#~ msgid "More than just an image"
+#~ msgstr "Meer dan zomaar een foto"
+
+#~ msgid ""
+#~ "<em>AstroBin</em> will do more than just host a copy of your image: when "
+#~ "you upload a photograph, a histogram and a black &amp; white inverted "
+#~ "version of the image will be generated on the fly, so it's easier to spot "
+#~ "faint nebulosity regions or spiral arms. Images will also be plate "
+#~ "solved, and an annotated version will appear on the site. <em>AstroBin</"
+#~ "em> will know what are the astronomical objects in your image without you "
+#~ "telling!"
+#~ msgstr ""
+#~ "<em>AstroBin</em> doet meer dan gewoon een kopie bewaren van je foto. Als "
+#~ "je een beeld oplaadt dan wordt er automatisch een histogram en een "
+#~ "negatieve zwart-wit versie gegenereerd zodat je makkelijke zwakke nevels "
+#~ "of spiraalarmen kan zien. Er wordt ook een zogenaamde plate-solving "
+#~ "gestart die achteraf een laag over je foto kan plaatsen met annotaties. "
+#~ "<em>AstroBin</em> zal dus herkennen wat je hebt gefotografeerd zonder dat "
+#~ "je het zelf hebt hoeven te vertellen!"
+
+#~ msgid "Protection from theft with automatic watermarking"
+#~ msgstr ""
+#~ "Anti-diefstalbeveiliging door het automatisch toevoegen van een watermerk"
+
+#~ msgid ""
+#~ "<em>AstroBin</em>'s upload wizard will offer you to watermark your image "
+#~ "with the text of your choosing. All it takes is a click!"
+#~ msgstr ""
+#~ "Bij het opladen van een foto zal de wizard in <em>AstroBin</em> "
+#~ "voorstellen om een watermerk op je beeld te plaatsen met een tekst naar "
+#~ "keuze. Gewoon met één muisklik!"
+
+#~ msgid "AstroBin supports multiple image revisions"
+#~ msgstr "Astrobin ondersteunt verschillende revisies van éénzelfde beeld"
+
+#~ msgid ""
+#~ "Don't tell me you have never gone back to revise the processing of an "
+#~ "image <em>after</em> you had published it. <em>AstroBin</em> embraces "
+#~ "this concept and lets you publish several revisions of the same image "
+#~ "easily and intuitively! Now it's going to be really easy to tell whether "
+#~ "your processing has improved."
+#~ msgstr ""
+#~ "Zeg niet dat je nog nooit een foto opnieuw hebt bewerkt <em>nadat</em> je "
+#~ "ze al had gepubliceerd. <em>AstroBin</em> heeft hieraan gedacht en laat "
+#~ "je toe om op een eenvoudige en intuïtieve manier meerdere revisies van "
+#~ "hetzelfde beeld te bewaren! Nu wordt het eenvoudig om te zien of je "
+#~ "bijkomende processing de moeite waard was."
+
+#~ msgid "AstroBin is social!"
+#~ msgstr "AstroBin is sociaal!"
+
+#~ msgid ""
+#~ "On <em>AstroBin</em> you can message other astrophotographer, follow them "
+#~ "and be notified when they post new images, or perform requests for more "
+#~ "data."
+#~ msgstr ""
+#~ "Je kan andere astrofotografen berichten sturen en volgen op <em>AstroBin</"
+#~ "em>. Je kan een berichtje krijgen als ze nieuwe beelden publiceren of je "
+#~ "kan ze bijkomende informatie vragen."
+
+#~ msgid ""
+#~ "You can follow gear items or astronomical subjects, and be notified "
+#~ "whenever there's a new image from a certain CCD, or telescope, or filter, "
+#~ "and so on. Or you can monitor all the new images of a certain galaxy or "
+#~ "nebula."
+#~ msgstr ""
+#~ "Je kan materiaal of een astronomisch object markeren zodat je een melding "
+#~ "krijgt als er een nieuw beeld wordt gepost van een zekere CCD, telescoop, "
+#~ "filter, enz. Of je kan in het oog houden wanneer er nieuwe foto's "
+#~ "verschijnen van een bepaald sterrenstelsel of een bepaalde nevel."
+
+#~ msgid ""
+#~ "As you have undoubtly realized by now, <em>AstroBin</em> is way more than "
+#~ "an image hosting service. It's what the Astrophotography community has "
+#~ "needed for a long time. For years, I have seen amazing images scattered "
+#~ "all over the Internet: general purpose image hosting sites, forums, "
+#~ "personal websites and even temporary places. Some of those images contain "
+#~ "data that is too precious to go wasted in a sea of chaos. <em>AstroBin</"
+#~ "em> comes to the rescue to provide a home and a central hub for "
+#~ "astrophotographers all over the world."
+#~ msgstr ""
+#~ "Je hebt nu ongetwijfeld begrepen dat <em>AstroBin</em> veel meer is dan "
+#~ "een website waar je foto's op kan plaatsen. Deze site vervult de "
+#~ "behoeften die de astro-foto gemeenschap reeds lang had. Ik heb jaren aan "
+#~ "een stuk adembenemende foto's gevonden her en der verspreid over het net: "
+#~ "op de gewone fotosites, fora, persoonlijke websites en zelfs tijdelijke "
+#~ "dump-sites. Sommige van deze beelden bevatten informatie die te kostbaar "
+#~ "is om te verdrinken in een zee van chaos. <em>AstroBin</em> snelt ter "
+#~ "hulp als een thuis en centrale ontmoetingsplaats voor alle "
+#~ "astrofotografen ter wereld."
+
+#~ msgid "So, what are you waiting for?"
+#~ msgstr "Dus, waar wacht je nog op?"
+
+#~ msgid "Sign up now!"
+#~ msgstr "Registreer nu!"
+
+#~ msgid "Send to public data pool"
+#~ msgstr "Stuur naar een publieke gegevensbank"
+
+#~ msgid "Send to private shared folder"
+#~ msgstr "Stuur naar een gedeelde privéfolder"
+
+#~ msgid ""
+#~ "If this image is the result of your processing of a public data pool, you "
+#~ "can send it the pool so it's displayed there."
+#~ msgstr ""
+#~ "Als deze foto het resultaat is van het bewerken van de beelden uit een "
+#~ "publieke gegevensbank, dan kan je ze naar die pool sturen zodat ze daar "
+#~ "wordt getoond."
+
+#~ msgid ""
+#~ "Use this form to select an existing <strong>public data pool</strong>."
+#~ msgstr ""
+#~ "Gebruik dit formulier om een bestaande <strong>publieke gegevensbank</"
+#~ "strong> te selecteren."
+
+#~ msgid ""
+#~ "If this image is the result of your processing of a private shared "
+#~ "folder, you can send it the folder so it's displayed there."
+#~ msgstr ""
+#~ "Als deze foto het resultaat is van het bewerken van de beelden uit een "
+#~ "gedeelde privéfolder, dan kan je ze daarheen sturen zodat ze daar wordt "
+#~ "getoond."
+
+#~ msgid ""
+#~ "Use this form to select a <strong>private shared folder</strong> you have "
+#~ "created or have been invited to."
+#~ msgstr ""
+#~ "Gebruik dit formulier om een <strong>gedeelde privéfolder</strong> te "
+#~ "kiezen die je zelf hebt gemaakt of waar je een uitnodiging voor hebt "
+#~ "ontvangen."
+
+#~ msgid "You don't have access to any shared private folders."
+#~ msgstr "Er zijn geen gedeelde privéfolders waar je toegang tot hebt."
+
+#, fuzzy
+#~ msgid "Back to image"
+#~ msgstr "Terug naar boven"
+
+#~ msgid "You have no messages."
+#~ msgstr "Je hebt geen berichten."
+
+#~ msgid "Show all messages"
+#~ msgstr "Toon alle berichten"
+
+#~ msgid "Error. Try again!"
+#~ msgstr "Foutje. Probeer opnieuw!"
+
+#, fuzzy
+#~| msgid ""
+#~| "%(originator)s has published a new image! Check it out at the following "
+#~| "url: %(object_url)s"
+#~ msgid ""
+#~ "%(originator)s has published a new image! Check it out at the following "
+#~ "url: <a href=\"%(object_url)s\">%(object_url)s</a>"
+#~ msgstr ""
+#~ "%(originator)s heeft een nieuw beeld publiek gemaakt! Je kan het bekijken "
+#~ "op: %(object_url)s"
+
+#~ msgid ""
+#~ "%(originator)s has published a new image! Check it out at the following "
+#~ "url: %(object_url)s"
+#~ msgstr ""
+#~ "%(originator)s heeft een nieuw beeld publiek gemaakt! Je kan het bekijken "
+#~ "op: %(object_url)s"
+
+#~ msgid ""
+#~ "<a href=\"%(object_url)s\"><strong>%(originator)s</strong> has published "
+#~ "a new image.</a>"
+#~ msgstr ""
+#~ "<a href=\"%(object_url)s\"><strong>%(originator)s</strong> heeft een "
+#~ "nieuwe foto gepost.</a>"
+
+#~ msgid "New image by %(originator)s"
+#~ msgstr "Nieuwe foto van %(originator)s"
+
+#, fuzzy
+#~ msgid ""
+#~ "You are invited to the private shared folder: \"%(folder_name)s\".\n"
+#~ "\n"
+#~ "You can now contribute data and processed images to the folder. You can "
+#~ "also invite more people.\n"
+#~ "\n"
+#~ "Visit the folder at the following url: <a href=\"%(folder_url)s\">"
+#~ "%(folder_url)s</a>"
+#~ msgstr ""
+#~ "Je hebt toelating gekregen om volgende gedeelde privéfolder te gebruiken: "
+#~ "\"%(folder_name)s\".\n"
+#~ "\n"
+#~ "Je kan hier nu gegevens en bewerkte foto's aan toevoegen. Je kan ook "
+#~ "andere mensen uitnodigen om de folder te gebruiken.\n"
+#~ "\n"
+#~ "Je kan de folder via volgende url bereiken: %(folder_url)s"
+
+#, fuzzy
+#~ msgid ""
+#~ "You are invited to the private shared folder: \"%(folder_name)s\".\n"
+#~ "\n"
+#~ "You can now contribute data and processed images to the folder. You can "
+#~ "also invite more people.\n"
+#~ "\n"
+#~ "Visit the folder at the following url: %(folder_url)s"
+#~ msgstr ""
+#~ "Je hebt toelating gekregen om volgende gedeelde privéfolder te gebruiken: "
+#~ "\"%(folder_name)s\".\n"
+#~ "\n"
+#~ "Je kan hier nu gegevens en bewerkte foto's aan toevoegen. Je kan ook "
+#~ "andere mensen uitnodigen om de folder te gebruiken.\n"
+#~ "\n"
+#~ "Je kan de folder via volgende url bereiken: %(folder_url)s"
+
+#, fuzzy
+#~ msgid ""
+#~ "<a href=\"%(folder_url)s\">You are invited to the private shared folder: "
+#~ "<strong>\"%(folder_name)s.\"</strong></a>"
+#~ msgstr ""
+#~ "<a href=\"%(folder_url)s\">Je bent uitgenodigd op volgende gedeelde "
+#~ "privéfolder: <strong>\"%(folder_name)s.\"</strong></a>"
+
+#, fuzzy
+#~ msgid "You are invited to the private shared folder: %(folder_name)s"
+#~ msgstr ""
+#~ "Je bent uitgenodigd op volgende gedeelde privéfolder: %(folder_name)s"
+
+#, fuzzy
+#~| msgid ""
+#~| "%(user_name)s has added a new processed image to the private shared "
+#~| "folder: \"%(folder_name)s\". Check it out at the following url: "
+#~| "%(folder_url)s"
+#~ msgid ""
+#~ "%(user_name)s has added a new processed image to the private shared "
+#~ "folder: \"%(folder_name)s\". Check it out at the following url: <a href="
+#~ "\"%(folder_url)s\">%(folder_url)s</a>"
+#~ msgstr ""
+#~ "%(user_name)s heeft een nieuwe bewerkte foto toegevoegd aan volgende "
+#~ "gedeelde privéfolder: \"%(folder_name)s\". Je kan ze bekijken op volgende "
+#~ "url: %(folder_url)s"
+
+#~ msgid ""
+#~ "%(user_name)s has added a new processed image to the private shared "
+#~ "folder: \"%(folder_name)s\". Check it out at the following url: "
+#~ "%(folder_url)s"
+#~ msgstr ""
+#~ "%(user_name)s heeft een nieuwe bewerkte foto toegevoegd aan volgende "
+#~ "gedeelde privéfolder: \"%(folder_name)s\". Je kan ze bekijken op volgende "
+#~ "url: %(folder_url)s"
+
+#~ msgid ""
+#~ "<a href=\"%(folder_url)s\"><strong>%(user_name)s</strong> has added a new "
+#~ "processed image to the private shared folder: <strong>\"%(folder_name)s."
+#~ "\"</strong></a>"
+#~ msgstr ""
+#~ "<a href=\"%(folder_url)s\"><strong>%(user_name)s</strong> heeft een "
+#~ "nieuwe bewerkte foto toegevoegd aan volgende gedeelde privéfolder: "
+#~ "<strong>\"%(folder_name)s.\"</strong></a>"
+
+#~ msgid ""
+#~ "<a href=\"%(folder_url)s\"><strong>%(user_name)s</strong> has added a new "
+#~ "processed image to the private shared folder: <strong>\"%(folder_name)s."
+#~ "\"</a>"
+#~ msgstr ""
+#~ "<a href=\"%(folder_url)s\"><strong>%(user_name)s</strong>heeft een nieuwe "
+#~ "bewerkte foto toegevoegd aan volgende gedeelde privéfolder: <strong>"
+#~ "\"%(folder_name)s.\"</a>"
+
+#~ msgid "New processed image in private shared folder: %(folder_name)s"
+#~ msgstr "Nieuw bewerkt beeld in gedeelde privéfolder: %(folder_name)s"
+
+#, fuzzy
+#~| msgid ""
+#~| "%(user_name)s has added a new processed image to the public data pool: "
+#~| "\"%(pool_name)s\". Check it out at the following url: %(pool_url)s"
+#~ msgid ""
+#~ "%(user_name)s has added a new processed image to the public data pool: "
+#~ "\"%(pool_name)s\". Check it out at the following url: <a href="
+#~ "\"%(pool_url)s\">%(pool_url)s</a>"
+#~ msgstr ""
+#~ "%(user_name)s heeft een nieuwe bewerkte foto toegevoegd aan volgende "
+#~ "publieke gegevensbank: \"%(pool_name)s\". Hier te bekijken: %(pool_url)s"
+
+#~ msgid ""
+#~ "%(user_name)s has added a new processed image to the public data pool: "
+#~ "\"%(pool_name)s\". Check it out at the following url: %(pool_url)s"
+#~ msgstr ""
+#~ "%(user_name)s heeft een nieuwe bewerkte foto toegevoegd aan volgende "
+#~ "publieke gegevensbank: \"%(pool_name)s\". Hier te bekijken: %(pool_url)s"
+
+#~ msgid ""
+#~ "<a href=\"%(pool_url)s\"><strong>%(user_name)s</strong> has added a new "
+#~ "processed image to the public data pool: <strong>\"%(pool_name)s.\"</"
+#~ "strong></a>"
+#~ msgstr ""
+#~ "<a href=\"%(pool_url)s\"><strong>%(user_name)s</strong> heeft een nieuwe "
+#~ "bewerkte foto toegevoegd aan volgende publieke gegevensbank: <strong>"
+#~ "\"%(pool_name)s.\"</strong></a>"
+
+#~ msgid "New processed image in public data pool: %(pool_name)s"
+#~ msgstr "Nieuw bewerkt beeld in publieke gegevensbank: %(pool_name)s"
+
+#, fuzzy
+#~| msgid ""
+#~| "%(user_name)s has added new data to the public pool: \"%(pool_name)s\". "
+#~| "Check it out at the following url: %(pool_url)s"
+#~ msgid ""
+#~ "%(user_name)s has added new data to the public pool: \"%(pool_name)s\". "
+#~ "Check it out at the following url: <a href=\"%(pool_url)s\">%(pool_url)s</"
+#~ "a>"
+#~ msgstr ""
+#~ "%(user_name)s heeft nieuwe data toegevoegd aan de publieke gegevensbank: "
+#~ "\"%(pool_name)s\". Je kan ze raadplegen via volgende url: %(pool_url)s"
+
+#~ msgid ""
+#~ "%(user_name)s has added new data to the public pool: \"%(pool_name)s\". "
+#~ "Check it out at the following url: %(pool_url)s"
+#~ msgstr ""
+#~ "%(user_name)s heeft nieuwe data toegevoegd aan de publieke gegevensbank: "
+#~ "\"%(pool_name)s\". Je kan ze raadplegen via volgende url: %(pool_url)s"
+
+#~ msgid ""
+#~ "<a href=\"%(pool_url)s\"><strong>%(user_name)s</strong> has added new "
+#~ "data to the public pool: <strong>\"%(pool_name)s.\"</strong></a>"
+#~ msgstr ""
+#~ "<a href=\"%(pool_url)s\"><strong>%(user_name)s</strong> heeft nieuwe data "
+#~ "toegevoegd aan de publieke gegevensbank: <strong>\"%(pool_name)s.\"</"
+#~ "strong></a>"
+
+#~ msgid "New data in public pool: %(pool_name)s"
+#~ msgstr "Nieuwe data in publieke gegevensbank: %(pool_name)s"
+
+#, fuzzy
+#~| msgid ""
+#~| "%(user_name)s has added new data to the private shared folder: "
+#~| "\"%(folder_name)s\". Check it out at the following url: %(folder_url)s"
+#~ msgid ""
+#~ "%(user_name)s has added new data to the private shared folder: "
+#~ "\"%(folder_name)s\". Check it out at the following url: <a href="
+#~ "\"%(folder_url)s\">%(folder_url)s</a>"
+#~ msgstr ""
+#~ "%(user_name)s heeft nieuwe data toegevoegd aan volgende gedeelde "
+#~ "privéfolder: \"%(folder_name)s\". Je kan ze bekijken via: %(folder_url)s"
+
+#~ msgid ""
+#~ "%(user_name)s has added new data to the private shared folder: "
+#~ "\"%(folder_name)s\". Check it out at the following url: %(folder_url)s"
+#~ msgstr ""
+#~ "%(user_name)s heeft nieuwe data toegevoegd aan volgende gedeelde "
+#~ "privéfolder: \"%(folder_name)s\". Je kan ze bekijken via: %(folder_url)s"
+
+#~ msgid ""
+#~ "<a href=\"%(folder_url)s\"><strong>%(user_name)s</strong> has added new "
+#~ "data to the private shared folder: <strong>\"%(folder_name)s.\"</strong></"
+#~ "a>"
+#~ msgstr ""
+#~ "<a href=\"%(folder_url)s\"><strong>%(user_name)s</strong> heeft nieuwe "
+#~ "data toegevoegd aan volgende gedeelde privéfolder: <strong>"
+#~ "\"%(folder_name)s.\"</strong></a>"
+
+#~ msgid "New data in private shared folder: %(folder_name)s"
+#~ msgstr "Nieuwe dfata in gedeelde privéfolder: %(folder_name)s"
+
+#, fuzzy
+#~| msgid "User menu"
+#~ msgid "Username"
+#~ msgstr "Gebruikersmenu"
+
+#, fuzzy
+#~| msgid "Password reset"
+#~ msgid "Password"
+#~ msgstr "Paswoord reset"
+
+#~ msgid "Here you can activate your free Raw Data Atom subscription."
+#~ msgstr "Hier kun je je gratis Raw Data Atom abonnement activeren."
+
+#~ msgid "Activate"
+#~ msgstr "Activeren"
+
+#~ msgid "Subscribe with a secure payment provided by PayPal:"
+#~ msgstr "Abonneer dmv. een veilige betaling met PayPal"
+
+#, fuzzy
+#~| msgid "Subscribe with a secure payment provided by PayPal:"
+#~ msgid "Buy with a secure payment provided by PayPal:"
+#~ msgstr "Abonneer dmv. een veilige betaling met PayPal"
+
+#~ msgid "%(max_allowed)s images per year "
+#~ msgstr "%(max_allowed)s fotos per jaar"
+
+#, fuzzy
+#~| msgid ""
+#~| "\n"
+#~| "            You can use AstroBin for free up to %(max_allowed)s images. "
+#~| "After\n"
+#~| "            that you can upgrade to <strong>Lite</strong> if you have a "
+#~| "limited\n"
+#~| "            yearly output, or <strong>Premium</strong> for a limitless\n"
+#~| "            experience.  Paying members will not see ads, and "
+#~| "everybody,\n"
+#~| "            including non-paying members, have access to all social "
+#~| "features of\n"
+#~| "            AstroBin.\n"
+#~| "            "
+#~ msgid ""
+#~ "\n"
+#~ "                You can use AstroBin for free up to %(max_allowed)s "
+#~ "images. After\n"
+#~ "                that you can upgrade to <strong>Lite</strong> if you have "
+#~ "a limited\n"
+#~ "                yearly output, or <strong>Premium</strong> for a "
+#~ "limitless\n"
+#~ "                experience.  Paying members will not see ads, and "
+#~ "everybody,\n"
+#~ "                including non-paying members, have access to all social "
+#~ "features of\n"
+#~ "                AstroBin.\n"
+#~ "                "
+#~ msgstr ""
+#~ "\n"
+#~ "            Je kan AstroBin gratis gebruiken voor %(max_allowed)s foto's. "
+#~ "Vervolgens\n"
+#~ "            kan je upgraden naar <strong>Lite</strong> indien je een "
+#~ "beperkt aantal foto's\n"
+#~ "            per jaar wenst te publiceren of naar <strong>Premium</strong> "
+#~ "voor een\n"
+#~ "            ervaring zonder beperkingen. Betalende leden zullen geen "
+#~ "advertenties zien.\n"
+#~ "            Alle leden, ook niet-betalende, hebben toegang tot alle "
+#~ "sociale functies van\n"
+#~ "            Astrobin.\n"
+#~ "            "
+
+#~ msgid ""
+#~ "<strong>AstroBin Raw Data</strong> allows you to store your raw files "
+#~ "(<strong>FIT</strong> and <strong>digital camera raw</strong>) on "
+#~ "AstroBin. We will keep them neatly organized, and you will have a safe "
+#~ "backup of all your work, including calibration files."
+#~ msgstr ""
+#~ "<strong>AstroBin Raw Data</strong> laat toe om raw bestanden "
+#~ "(<strong>FIT</strong> en<strong>RAW van digitale camera's</strong>) te "
+#~ "bewaren op AstroBin. We houden ze netjes georganiseerd en je krijgt "
+#~ "hiermee een veilige backup voor al je werk, inclusief je "
+#~ "calibratiebestanden."
+
+#~ msgid ""
+#~ "Learn more by reading <a href=\"%(rawdata_url)s\">a short introduction.</"
+#~ "a>"
+#~ msgstr ""
+#~ "Leer hier meer over door de <a href=\"%(rawdata_url)s\">korte inleiding</"
+#~ "a> te lezen."
+
+#~ msgid "Here you can deactivate your free Raw Data Atom subscription."
+#~ msgstr "Hier kan je je gratis Raw Data Atom abonnement desactiveren."
+
+#~ msgid "Deactivate"
+#~ msgstr "Uitschakelen"
+
+#~ msgid "AstroBin Premium subscription plans"
+#~ msgstr "AstroBin Premium abonnementsformules"
+
+#, fuzzy
+#~| msgid ""
+#~| "\n"
+#~| "            You can use AstroBin for free up to %(max_allowed)s images. "
+#~| "After\n"
+#~| "            that you can upgrade to <strong>Lite</strong> if you have a "
+#~| "limited\n"
+#~| "            yearly output, or <strong>Premium</strong> for a limitless\n"
+#~| "            experience.  Paying members will not see ads, and "
+#~| "everybody,\n"
+#~| "            including non-paying members, have access to all social "
+#~| "features of\n"
+#~| "            AstroBin.\n"
+#~| "            "
+#~ msgid ""
+#~ "\n"
+#~ "                    You can use AstroBin for free up to %(max_allowed)s "
+#~ "images. After\n"
+#~ "                    that you can upgrade to <strong>Lite</strong> if you "
+#~ "have a limited\n"
+#~ "                    yearly output, or <strong>Premium</strong> for a "
+#~ "limitless\n"
+#~ "                    experience.  Paying members will not see ads, and "
+#~ "everybody,\n"
+#~ "                    including non-paying members, have access to all "
+#~ "social features of\n"
+#~ "                    AstroBin.\n"
+#~ "                    "
+#~ msgstr ""
+#~ "\n"
+#~ "            Je kan AstroBin gratis gebruiken voor %(max_allowed)s foto's. "
+#~ "Vervolgens\n"
+#~ "            kan je upgraden naar <strong>Lite</strong> indien je een "
+#~ "beperkt aantal foto's\n"
+#~ "            per jaar wenst te publiceren of naar <strong>Premium</strong> "
+#~ "voor een\n"
+#~ "            ervaring zonder beperkingen. Betalende leden zullen geen "
+#~ "advertenties zien.\n"
+#~ "            Alle leden, ook niet-betalende, hebben toegang tot alle "
+#~ "sociale functies van\n"
+#~ "            Astrobin.\n"
+#~ "            "
+
+#~ msgid "AstroBin Raw Data subscription plans"
+#~ msgstr "AstroBin Raw Data abonnementsformules"
+
+#~ msgid "Here's a short description of each plan:"
+#~ msgstr "Hier is een korte beschrijving van elke formule:"
+
+#~ msgid ""
+#~ "This plan is free! Choose it to share a small amount of data with other "
+#~ "users."
+#~ msgstr ""
+#~ "Dit is een gratis abonnement! Kies dit om een klein aantal foto's te "
+#~ "delen met anderen"
+
+#~ msgid ""
+#~ " Choose this plan if you want to keep your expenses to a minimum, but "
+#~ "still want the possibity to share your FIT and digital camera raw files "
+#~ "with your friends. You can also participate to public data pools and "
+#~ "contribute to the deepest deep sky images ever created, and you will "
+#~ "always know that you support AstroBin."
+#~ msgstr ""
+#~ "Kies dit abonnement om een minimum uit te geven, maar toch de "
+#~ "mogelijkheid te hebben om FIT en RAW bestanden te kunnen delen. Je kan "
+#~ "dan ook deelnemen aan publieke data archieven en zo bijdragen aan het "
+#~ "verwezenlijken van de diepste deep sky beelden ooit gemaakt. En "
+#~ "natuurlijk krijg je een goed gevoel door het steunen van AstroBin."
+
+#~ msgid ""
+#~ "Choose this plan if you have started out in the recent year or two, or "
+#~ "you don't want to share and backup your calibration files. Enjoy a lot of "
+#~ "room for a convenient price."
+#~ msgstr ""
+#~ "Kies deze formule als je een jaar of twee bezig bent en geen "
+#~ "calibratiebestanden wil delen of bewaren. Je krijgt een boel ruimte voor "
+#~ "een eerlijke prijs."
+
+#~ msgid ""
+#~ "Choose this plan if you have several years worth of data. You will "
+#~ "probably have enough room for all your calibration files, and will enjoy "
+#~ "the full potential of the platform."
+#~ msgstr ""
+#~ "Kies voor dit abonnement als je voor meerdere jaren aan gegevens hebt. Je "
+#~ "zal waarschijnlijk genoeg ruimte hebben voor al je calibratiebestanden en "
+#~ "kan van het volle potentieel van dit platform genieten."
+
+#~ msgid ""
+#~ "Choose this plan if you have a massive amount of raw data that you want "
+#~ "to share and backup securely online."
+#~ msgstr ""
+#~ "Kies voor deze formule als je een massieve hoeveelheid aan RAW bestanden "
+#~ "hebt die je wil delen en waarvan je op een veilige plek een online backup "
+#~ "wil hebben."
+
+#~ msgid ""
+#~ "The following Terms are only available in English. It is your "
+#~ "responsibility to comprehend them."
+#~ msgstr ""
+#~ "Volgende voorwaarden zijn enkel ter beschikking in het Engels. Het is "
+#~ "jouw verantwoordelijkheid om ze te begrijpen."
+
+#, fuzzy
+#~ msgid ""
+#~ "You have used <strong>%(premium_counter)s</strong> images of your allowed "
+#~ "<strong>%(max_allowed)s</strong> for the current subscription period."
+#~ msgstr ""
+#~ "Je hebt <strong>%(premium_counter)s</strong> fotos van de toegestane "
+#~ "<strong>%(max_allowed)s</strong> voor het huidige jaar."
+
+#~ msgid "Raw data upload"
+#~ msgstr "Upload van RAW-bestanden"
+
+#~ msgid ""
+#~ "You have no more space left on your Raw Data account. Please delete some "
+#~ "files to make room, or upgrade your account."
+#~ msgstr ""
+#~ "Je hebt geen plaats meer op je Raw Data abonnement. Gelieve ofwel andere "
+#~ "bestanden te verwijderen, of je account up te graden."
+
+#~ msgid "Use the button below to choose files"
+#~ msgstr "Gebruik onderstaande knop om bestanden te kiezen"
+
+#~ msgid "Drop your raw data here"
+#~ msgstr "Sleep je Raw Data naar hier"
+
+#~ msgid "Accepted file types: FIT and digital camera raw files"
+#~ msgstr "Volgende type bestanden worden aanvaard: FIT en raw DSLR"
+
+#~ msgid "Filename"
+#~ msgstr "Bestandsnaam"
+
+#~ msgid "Choose files"
+#~ msgstr "Kies bestanden"
+
+#~ msgid "Reset"
+#~ msgstr "Herstel"
+
+#~ msgid "Start upload"
+#~ msgstr "Start met upload"
+
+#~ msgid "Go to your Raw Data Library."
+#~ msgstr "Ga naar je Raw Data Verzameling."
+
+#~ msgid ""
+#~ "Your Raw Data subscription is not active, or it has expired. If you have "
+#~ "just subscribed, please wait for a few minutes. Thanks for your patience!"
+#~ msgstr ""
+#~ "Je Raw Data abonnement is niet actief of is verlopen. Als je je juist "
+#~ "hebt geabonneerd, kan je best enkele minuten wachten. Dank voor je geduld!"
+
+#~ msgid "Go to the Raw Data <a href=\"%(plans_url)s\">plans page</a>."
+#~ msgstr ""
+#~ "Ga naar de Raw Data <a href=\"%(plans_url)s\">pagina met verschillende "
+#~ "abonnee-formules</a>."
+
+#~ msgid ""
+#~ "Did you know that AstroBin can host your FIT and digital camera raw files "
+#~ "too?"
+#~ msgstr ""
+#~ "Wist je dat AstroBin ook je FIT en digitale raw bestanden kan opslaan?"
+
+#~ msgid ""
+#~ "Have a look at <a href=\"%(rawdata_url)s\">AstroBin Raw Data</a> if you "
+#~ "want to safely store all your raw files, and have them neatily organized "
+#~ "for future reference!"
+#~ msgstr ""
+#~ "Neem een kijkje op <a href=\"%(rawdata_url)s\">AstroBin Raw Data</a> als "
+#~ "je je raw bestanden hier veilig en ordelijk wil bewaren!"
+
+#~ msgid "Raw files"
+#~ msgstr "Raw bestanden"
+
+#~ msgid "Upload started, please wait..."
+#~ msgstr "Uploaden is begonnen. Gelieve te wachten..."
+
+#~ msgid ""
+#~ "One ore more files were ignored because they did not look like FIT or "
+#~ "digital camera raw files."
+#~ msgstr ""
+#~ "Eén of meer bestanden werden niet behandeld omdat ze niet de kenmerken "
+#~ "van een FIT of raw bestand leken te hebben."
+
+#, fuzzy
+#~| msgid ""
+#~| "Done! Go to <a href=\\\"/me\\\">your profile</a> to see the new pictures "
+#~| "(and keep an eye on your notifications)!"
+#~ msgid ""
+#~ "Done! Go to <a href=\\\"/users/\" + username + \"/?staging&sub=uploaded\\"
+#~ "\">your staging gallery</a> to see the new pictures (and keep an eye on "
+#~ "your notifications)!"
+#~ msgstr ""
+#~ "Klaar! Ga naar <a href=\\\"/me\\\">je profiel</a> om je nieuwe foto's te "
+#~ "bekijken (en hou een oogje op je kennisgevingen)!"
 
 #~ msgid "The perfect home for your astrophotography."
 #~ msgstr "De plek waar je astro-foto's zich thuis voelen."
@@ -7258,12 +7905,6 @@ msgstr ""
 
 #~ msgid "Express value in hours"
 #~ msgstr "Uren"
-
-#~ msgid ""
-#~ "Search for astronomical objects, telescopes or lenses, cameras, filters..."
-#~ msgstr ""
-#~ "Zoek naar astronomische objecten, telescopen of lenzen, camera's, "
-#~ "filters, ..."
 
 #~ msgid "Min. telescope aperture"
 #~ msgstr "Min. opening telescoop"
@@ -7589,17 +8230,11 @@ msgstr ""
 #~ msgid "Content moderation"
 #~ msgstr "Land van de bedrijfszetel"
 
-#~ msgid "Edit watermark"
-#~ msgstr "Bewerk het watermerk"
-
 #~ msgid "Edit basic information"
 #~ msgstr "Wijzigen van de basisinformatie"
 
 #~ msgid "Change license"
 #~ msgstr "Wijzig licentie"
-
-#~ msgid "Attempt to plate-solve again"
-#~ msgstr "Nieuwe poging plate-solving"
 
 #~ msgid "Date and time"
 #~ msgstr "Datum en tijd"
@@ -7650,9 +8285,6 @@ msgstr ""
 
 #~ msgid "Do you want your product here?"
 #~ msgstr "Wil je hier je product plaatsen?"
-
-#~ msgid "Read all"
-#~ msgstr "Alles lezen"
 
 #~ msgid "Go to first unread post"
 #~ msgstr "Ga naar eerste ongelezen bericht"
@@ -7926,9 +8558,6 @@ msgstr ""
 #~ msgstr ""
 #~ "Word lid van de groep en je kan leren en onderwijzen over Astrofotografie "
 #~ "en Astronomie!"
-
-#~ msgid "Here's some more reading material to get you started"
-#~ msgstr "Hier nog wat lectuur om te kunnen beginnen"
 
 #~ msgid "Frequently Asked Questions about AstroBin Questions"
 #~ msgstr "FAQ (Meest gestelde vragen) over AstroBin Questions"
@@ -8361,9 +8990,6 @@ msgstr ""
 #~ "Deze foto bevat meerdere Messier objecten. Gelieve aan te duiden voor "
 #~ "welk je dit beeld wil nomineren."
 
-#~ msgid "You have already nominated this image"
-#~ msgstr "Je hebt deze foto al genomineerd"
-
 #~ msgid "You can't nominate the same image more than once."
 #~ msgstr "Je kan een beeld slechts één keer nomineren."
 
@@ -8496,9 +9122,6 @@ msgstr ""
 #~ "kennis, maar dat zou wel eens lang kunnen duren. Als je bij benadering de "
 #~ "grootte van het beeldveld van je foto kent, dan zal de plate-solving veel "
 #~ "sneller gebeuren en heb je een grotere kans op succes!"
-
-#~ msgid "Start plate-solving"
-#~ msgstr "Begin de plate-solving"
 
 #~ msgid ""
 #~ "<strong>Note</strong>: if you didn't upload a full resolution image, the "
@@ -8649,9 +9272,6 @@ msgstr ""
 #~ msgid "View your favorites"
 #~ msgstr "Bekijk je favorieten"
 
-#~ msgid "View your images"
-#~ msgstr "Bekijk je foto's"
-
 #~ msgid "No images."
 #~ msgstr "Geen foto's."
 
@@ -8681,9 +9301,6 @@ msgstr ""
 
 #~ msgid "A list of all images acquired every night."
 #~ msgstr "Een lijst van foto's per nacht genomen."
-
-#~ msgid "Select latitude"
-#~ msgstr "Selecteer breedte"
 
 #~ msgid "From latitude:"
 #~ msgstr "Van breedte:"
@@ -8761,14 +9378,8 @@ msgstr ""
 #~ msgid "Learn more about AstroBin Questions."
 #~ msgstr "Leer meer over AstroBin Questions."
 
-#~ msgid "Request critique"
-#~ msgstr "Vraag om kritiek"
-
 #~ msgid "Introducing AstroBin Raw Data"
 #~ msgstr "Een introductie over AstroBin Raw Data"
-
-#~ msgid "uploaded"
-#~ msgstr "Gepost op"
 
 #~ msgid ""
 #~ "You will notify <strong>%(username)s</strong> that you would like them to "
@@ -8801,9 +9412,6 @@ msgstr ""
 #~ msgstr ""
 #~ "Je dient gegevens te verstrekken omtrent de lokatie die je hebt "
 #~ "aangemaakt: <strong>%(location)s</strong>"
-
-#~ msgid "You have no requests."
-#~ msgstr "Je hebt geen verzoeken."
 
 #~ msgid "Manage received requests"
 #~ msgstr "Beheren van de ontvangen verzoeken"
@@ -8868,9 +9476,6 @@ msgstr ""
 
 #~ msgid "Producer's description"
 #~ msgstr "Beschrijving van de fabrikant"
-
-#~ msgid "Basic"
-#~ msgstr "Basisch"
 
 #~ msgid "Commercial"
 #~ msgstr "Commerciëel"

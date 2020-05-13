@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2019-10-15 11:53+0000\n"
+"POT-Creation-Date: 2020-05-13 17:55+0000\n"
 "PO-Revision-Date: 2014-01-24 09:40+0000\n"
 "Last-Translator: kookoo_gr <kookoo_gr@yahoo.com>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -758,6 +758,55 @@ msgstr "Ζάμπια"
 msgid "Zimbabwe"
 msgstr "Ζιμπάμπουε"
 
+msgid "Users"
+msgstr "Χρήστες"
+
+msgid "Make"
+msgstr "Μάρκα"
+
+msgid "The make, brand, producer or developer of this product."
+msgstr "Η κατασκευή, μάρκα, παραγωγός ή προγραμματιστής του προϊόντος."
+
+msgid "Name"
+msgstr "Όνομα"
+
+msgid "Merge"
+msgstr "Συγχώνευση"
+
+msgid ""
+"Use this field to mark that the item you are claiming really is the same "
+"product (or a variation thereof) of something you have claimed before."
+msgstr ""
+"Χρησιμοποιείστε αυτό το πεδίο για να σημειώσετε ότι το αντικείμενο που "
+"διεκδικείτε είναι το ίδιο προϊόν (ή ως εκ τούτου μια παραλλαγή) ενός "
+"αντικειμένου που διεκδικήσατε παλαιότερα."
+
+#, python-format
+msgid ""
+"You can't create more than %d claims. Consider upgrading your affiliation!"
+msgstr ""
+"Δεν μπορείτε να δημιουργήσετε %d διεκδικήσεις. Σκεφτείτε να αναβαθμίσετε τον "
+"εμπορικό λογαριασμό σας!"
+
+msgid "You have already claimed this product."
+msgstr "Έχετε ήδη διεκδικήσει αυτό το προϊόν."
+
+msgid ""
+"Select a tag to order this collection by its value. If you see no optioons "
+"here, it's because none of the images in this collection have key/value "
+"tags. PS: Images that lack this tag will appear at the bottom of the "
+"collection."
+msgstr ""
+
+msgid "Please use the following format: yyyy-mm-dd"
+msgstr "Παρακαλώ χρησιμοποιήστε την εξής μορφή: εεεε-μμ-ηη (έτος-μήνας-ημέρα)"
+
+msgid "Date"
+msgstr "Ημερομηνία"
+
+msgid "The date cannot be in the future."
+msgstr "Η ημερομηνία δεν μπορεί να είναι μελλοντική."
+
 msgid "Link"
 msgstr "Σύνδεσμος"
 
@@ -796,6 +845,15 @@ msgid ""
 "original image can be considered."
 msgstr ""
 
+msgid "Key/value tags"
+msgstr ""
+
+msgid ""
+"Provide a list of unique key/value pairs to tag this image with. Use the '=' "
+"symbol between key and value, and provide one pair per line. These tags can "
+"be used to sort images by arbitrary properties."
+msgstr ""
+
 #, fuzzy
 msgid "Revision"
 msgstr "Κριτικές"
@@ -803,25 +861,11 @@ msgstr "Κριτικές"
 msgid "This field is required."
 msgstr "Αυτό το πεδίο είναι προαπαιτούμενο"
 
+msgid "Unable to parse."
+msgstr ""
+
 msgid "Please select a remote source if this image was acquired remotely."
 msgstr ""
-
-msgid "Opacity"
-msgstr "Αδιαφάνεια"
-
-msgid ""
-"0 means invisible; 100 means completely opaque. Recommended values are: 10 "
-"if the watermark will appear on the dark sky background, 50 if on some "
-"bright object."
-msgstr ""
-"0 σημαίνει αόρατο, 100 σημαίνει διάφανο. Συνιστώμενες τιμές: 10 εάν το "
-"υδατογράφημα θα εμφανίζεται σε φόντο σκοτεινού ουρανού, 50 αν εμφανίζεται σε "
-"κάποιο φωτεινό αντικείμενο."
-
-msgid "If you want to watermark this image, you must specify some text."
-msgstr ""
-"Εάν θέλετε να υδατογραφήσετε την εικόνα θα πρέπει να καθορίσετε κάποιο "
-"κείμενο."
 
 msgid "Imaging telescopes or lenses"
 msgstr "Τηλεσκόπια απεικόνισης ή φακοί"
@@ -861,11 +905,48 @@ msgstr ""
 msgid "Original image"
 msgstr "Διαγραφή αρχικής εικόνας"
 
-msgid "If you have a personal website, put the address here."
-msgstr "Εάν έχετε προσωπική ιστοσελίδα, εισάγετε την διεύθυνση εδώ."
+msgid "Opacity"
+msgstr "Αδιαφάνεια"
 
-msgid "Website"
-msgstr "Ιστότοπος"
+msgid ""
+"0 means invisible; 100 means completely opaque. Recommended values are: 10 "
+"if the watermark will appear on the dark sky background, 50 if on some "
+"bright object."
+msgstr ""
+"0 σημαίνει αόρατο, 100 σημαίνει διάφανο. Συνιστώμενες τιμές: 10 εάν το "
+"υδατογράφημα θα εμφανίζεται σε φόντο σκοτεινού ουρανού, 50 αν εμφανίζεται σε "
+"κάποιο φωτεινό αντικείμενο."
+
+msgid "If you want to watermark this image, you must specify some text."
+msgstr ""
+"Εάν θέλετε να υδατογραφήσετε την εικόνα θα πρέπει να καθορίσετε κάποιο "
+"κείμενο."
+
+msgid "Latitude (degrees)"
+msgstr "Γεωγραφικό πλάτος (μοίρες)"
+
+msgid "Latitude (minutes)"
+msgstr "Γεωγραφικό πλάτος (λεπτά)"
+
+msgid "Latitude (seconds)"
+msgstr "Γεωγραφικό πλάτος (δευτερόλεπτα)"
+
+msgid "Longitude (degrees)"
+msgstr "Γεωγραφικό μήκος (μοίρες)"
+
+msgid "Longitude (minutes)"
+msgstr "Γεωγραφικό μήκος (λεπτά)"
+
+msgid "Longitude (seconds)"
+msgstr "Γεωγραφικό μήκος (δευτερόλεπτα)"
+
+msgid ""
+"Use this field to mark that the item you are merging really is the same "
+"product (or a variation thereof) of something you have claimed before."
+msgstr ""
+"Χρησιμοποιείστε αυτό το πεδίο για να σημειώσετε ότι το αντικείμενο που "
+"συγχωνεύετε είναι το ίδιο προϊον (ή ως εκ τούτου μια παραλλαγή) με κάποιο "
+"που έχετε διεκδικήσει παλαιότερα."
 
 msgid ""
 "All the telescopes and lenses you own, including the ones you use for "
@@ -892,79 +973,22 @@ msgstr "Τηλεσκόπια και φακοί"
 msgid "Cameras"
 msgstr "Κάμερες"
 
-msgid "Users"
-msgstr "Χρήστες"
+msgid "If you have a personal website, put the address here."
+msgstr "Εάν έχετε προσωπική ιστοσελίδα, εισάγετε την διεύθυνση εδώ."
 
-msgid "Latitude (degrees)"
-msgstr "Γεωγραφικό πλάτος (μοίρες)"
+msgid "Website"
+msgstr "Ιστότοπος"
 
-msgid "Latitude (minutes)"
-msgstr "Γεωγραφικό πλάτος (λεπτά)"
-
-msgid "Latitude (seconds)"
-msgstr "Γεωγραφικό πλάτος (δευτερόλεπτα)"
-
-msgid "Longitude (degrees)"
-msgstr "Γεωγραφικό μήκος (μοίρες)"
-
-msgid "Longitude (minutes)"
-msgstr "Γεωγραφικό μήκος (λεπτά)"
-
-msgid "Longitude (seconds)"
-msgstr "Γεωγραφικό μήκος (δευτερόλεπτα)"
-
-msgid "Please use the following format: yyyy-mm-dd"
-msgstr "Παρακαλώ χρησιμοποιήστε την εξής μορφή: εεεε-μμ-ηη (έτος-μήνας-ημέρα)"
-
-msgid "Date"
-msgstr "Ημερομηνία"
+#, fuzzy
+#| msgid "Mark as good"
+msgid "Mark as final"
+msgstr "Σημείωση ως ολοκληρωμένο."
 
 msgid "Please enter a value between 1 and 5."
 msgstr "Παρακαλώ εισάγετε μία τιμή από 1 εώς 5."
 
 msgid "Please enter a value between 1 and 10."
 msgstr "Παρακαλώ εισάγετε μία τιμή από 1 εώς 10."
-
-msgid "The date cannot be in the future."
-msgstr "Η ημερομηνία δεν μπορεί να είναι μελλοντική."
-
-msgid "Make"
-msgstr "Μάρκα"
-
-msgid "The make, brand, producer or developer of this product."
-msgstr "Η κατασκευή, μάρκα, παραγωγός ή προγραμματιστής του προϊόντος."
-
-msgid "Name"
-msgstr "Όνομα"
-
-msgid "Merge"
-msgstr "Συγχώνευση"
-
-msgid ""
-"Use this field to mark that the item you are claiming really is the same "
-"product (or a variation thereof) of something you have claimed before."
-msgstr ""
-"Χρησιμοποιείστε αυτό το πεδίο για να σημειώσετε ότι το αντικείμενο που "
-"διεκδικείτε είναι το ίδιο προϊόν (ή ως εκ τούτου μια παραλλαγή) ενός "
-"αντικειμένου που διεκδικήσατε παλαιότερα."
-
-#, python-format
-msgid ""
-"You can't create more than %d claims. Consider upgrading your affiliation!"
-msgstr ""
-"Δεν μπορείτε να δημιουργήσετε %d διεκδικήσεις. Σκεφτείτε να αναβαθμίσετε τον "
-"εμπορικό λογαριασμό σας!"
-
-msgid ""
-"Use this field to mark that the item you are merging really is the same "
-"product (or a variation thereof) of something you have claimed before."
-msgstr ""
-"Χρησιμοποιείστε αυτό το πεδίο για να σημειώσετε ότι το αντικείμενο που "
-"συγχωνεύετε είναι το ίδιο προϊον (ή ως εκ τούτου μια παραλλαγή) με κάποιο "
-"που έχετε διεκδικήσει παλαιότερα."
-
-msgid "You have already claimed this product."
-msgstr "Έχετε ήδη διεκδικήσει αυτό το προϊόν."
 
 msgid "Recipient"
 msgstr "Παραλήπτης"
@@ -995,15 +1019,6 @@ msgstr "αρέσει"
 
 msgid "has written a review on"
 msgstr "έγραψε μια κριτική για"
-
-msgid "created a new public data pool"
-msgstr "δημιουργήθηκε νέα δημόσια περιοχή δεδομένων"
-
-msgid "added new data to public data pool"
-msgstr "προστέθηκαν νέα δεδομένα στην δημόσια περιοχή δεδομένων"
-
-msgid "added a new processed image to public data pool"
-msgstr "προστέθηκε νέα επεξεργασμένη εικόνα στην δημόσια περιοχή δεδομένων"
 
 #, fuzzy
 msgid "created a new public group"
@@ -1280,6 +1295,11 @@ msgstr "Κατοδιοπτρικό: Schmidt-Cassegrain"
 msgid "Catadioptric: ACF Schmidt-Cassegrain"
 msgstr "Κατοδιοπτρικό: ACF Schmidt-Cassegrain"
 
+#, fuzzy
+#| msgid "Catadioptric: ACF Schmidt-Cassegrain"
+msgid "Catadioptric: Rowe-Atkinson Schmidt astrograph"
+msgstr "Κατοδιοπτρικό: ACF Schmidt-Cassegrain"
+
 msgid "Camera lens"
 msgstr "Φακός κάμερας"
 
@@ -1423,7 +1443,9 @@ msgstr ""
 msgid "Other/Unknown"
 msgstr ""
 
-msgid "Deep sky object"
+#, fuzzy
+#| msgid "Deep sky object"
+msgid "Deep sky object or field"
 msgstr "Αντικείμενο βαθύ ουρανού"
 
 msgid "Solar system body or event"
@@ -1547,6 +1569,34 @@ msgstr "Περιγραφή"
 msgid "HTML tags are allowed."
 msgstr "Επιτρέπονται HTML tags."
 
+msgid "Uncompressed source (max 200 MB)"
+msgstr ""
+
+msgid ""
+"You can store the final processed image that came out of your favorite image "
+"editor (e.g. PixInsight, Adobe Photoshop, etc) here on AstroBin, for "
+"archival purposes. This file is stored privately and only you will have "
+"access to it."
+msgstr ""
+
+#, fuzzy
+#| msgid "Thumbnail"
+msgid "Gallery thumbnail"
+msgstr "Μικρογραφία"
+
+msgid "Select an area of the image to be used as thumbnail in your gallery."
+msgstr ""
+
+#, fuzzy
+#| msgid "Star trails"
+msgid "Sharpen thumbnails"
+msgstr "Αστρικά ίχνη"
+
+msgid ""
+"If selected, AstroBin will use a resizing algorithm that slightly sharpens "
+"the image's thumbnails. This setting applies to all revisions."
+msgstr ""
+
 msgid "Apply watermark to image"
 msgstr "Εφαρμογή υδατογαρφήματος στην εικόνα"
 
@@ -1566,16 +1616,19 @@ msgstr "Άδεια χρήσης"
 msgid "Allow comments"
 msgstr "Σχόλια"
 
+#, fuzzy
+#| msgid "Notifications"
+msgid "Skip notifications"
+msgstr "Ειδοποιήσεις"
+
+msgid "Do not notify your followers about this image upload."
+msgstr ""
+
 msgid "(no title)"
 msgstr "(χωρίς τίτλο)"
 
 msgid "Mix of multiple source"
 msgstr ""
-
-#, fuzzy
-#| msgid "Notifications"
-msgid "Skip notifications"
-msgstr "Ειδοποιήσεις"
 
 msgid "Do not notify your followers about this revision."
 msgstr ""
@@ -1586,6 +1639,11 @@ msgstr "Εικόνες"
 #, fuzzy
 msgid "Cover image"
 msgstr "Καμία εικόνα."
+
+#, fuzzy
+#| msgid "Other images"
+msgid "Order by image tag"
+msgstr "Άλλες εικόνες"
 
 msgid "Please use the following format: yyyy-mm-dd."
 msgstr "Παρακαλώ χρησιμοποιήστε την εξής μορφή: εεεε-μμ-ηη (έτος-μήνας-ημέρα)"
@@ -1746,13 +1804,20 @@ msgstr "Γεωγραφικό πλάτος του τρίτου Κεντρικού
 msgid "Seeing"
 msgstr "Ορατότητα (Seeing)"
 
-msgid "Your estimation of the seeing, on a scale from 1 to 5."
+#, fuzzy
+#| msgid "Your estimation of the seeing, on a scale from 1 to 5."
+msgid ""
+"Your estimation of the seeing, on a scale from 1 to 5. Larger is better."
 msgstr "Η εκτίμηση σας, της ορατότητας (seeing), σε κλίμακα από το 1 έως το 5."
 
 msgid "Transparency"
 msgstr "Διαφάνεια (Transparency)"
 
-msgid "Your estimation of the transparency, on a scale from 1 to 10."
+#, fuzzy
+#| msgid "Your estimation of the transparency, on a scale from 1 to 10."
+msgid ""
+"Your estimation of the transparency, on a scale from 1 to 10. Larger is "
+"better."
 msgstr "Η εκτίμηση σας, της διαφάνειας (Transparency), από το 1 έως το 10."
 
 msgid "Time"
@@ -1908,6 +1973,15 @@ msgstr ""
 msgid ""
 "These emails may contain offers, commercial news, and promotions from "
 "AstroBin or its partners."
+msgstr ""
+
+msgid "Allow astronomy ads from our partners"
+msgstr ""
+
+msgid ""
+"It would mean a lot if you chose to allow astronomy relevant, non intrusive "
+"ads on this website. AstroBin is a small business run by a single person, "
+"and this kind of support would be amazing. Thank you in advance!"
 msgstr ""
 
 msgid "Language"
@@ -2088,6 +2162,27 @@ msgstr ""
 msgid "Commercial gear items"
 msgstr "Εμπορικά αντικείμενα εξοπλισμού"
 
+#, fuzzy
+#| msgid "Sending..."
+msgid "Pending"
+msgstr "Γίνεται αποστολή..."
+
+msgid "Processing"
+msgstr ""
+
+#, fuzzy
+#| msgid "Read all"
+msgid "Ready"
+msgstr "Ανάγνωση όλων"
+
+#, fuzzy
+#| msgid "Error!"
+msgid "Error"
+msgstr "Σφάλμα!"
+
+msgid "Expired"
+msgstr ""
+
 msgid "Message sent"
 msgstr "Το μήνυμα εστάλη"
 
@@ -2262,30 +2357,6 @@ msgstr ""
 msgid ""
 "\n"
 "                            <a href=\"%(user_page)s\">%(user)s</a> created a "
-"new public data pool.\n"
-"                        "
-msgstr ""
-
-#, python-format
-msgid ""
-"\n"
-"                            <a href=\"%(user_page)s\">%(user)s</a> added "
-"data to a data pool.\n"
-"                        "
-msgstr ""
-
-#, python-format
-msgid ""
-"\n"
-"                            <a href=\"%(user_page)s\">%(user)s</a> added a "
-"processed image to a data pool.\n"
-"                        "
-msgstr ""
-
-#, python-format
-msgid ""
-"\n"
-"                            <a href=\"%(user_page)s\">%(user)s</a> created a "
 "new public group.\n"
 "                        "
 msgstr ""
@@ -2297,12 +2368,6 @@ msgid ""
 "group.\n"
 "                        "
 msgstr ""
-
-msgid "Affiliates"
-msgstr "Συνεργάτες"
-
-msgid "The following companies support AstroBin."
-msgstr "Οι ακόλουθες εταιρίες υποστηρίζουν το AstroBin."
 
 msgid "Request an API key"
 msgstr "Ζητήστε κλειδί ΑΡΙ"
@@ -2320,10 +2385,13 @@ msgstr ""
 msgid "After you submit a request, you will receive a reply within 24 hours."
 msgstr "Μετά την υποβολή της αίτησης σας, θα λάβετε απάντηση σε 24 ώρες."
 
-#, python-format
+#, fuzzy
+#| msgid ""
+#| "Please make sure you have read the section about APIs in the <a href="
+#| "\"%(tos_url)s\">Terms of Service</a>."
 msgid ""
 "Please make sure you have read the section about APIs in the <a href="
-"\"%(tos_url)s\">Terms of Service</a>."
+"\"https://welcome.astrobin.com/terms-of-service\">Terms of Service</a>."
 msgstr ""
 "Παρακαλώ σιγουρευτείτε ότι έχετε διαβάσει το τμήμα σχετικά με τα ΑΡΙ στους "
 "<a href=\"%(tos_url)s\">Όρους Χρήσης</a>."
@@ -2425,9 +2493,6 @@ msgstr "Κεντρική"
 msgid "Forum"
 msgstr "Forums"
 
-msgid "Help"
-msgstr "Βοήθεια"
-
 msgid "FAQ"
 msgstr "Συχνές Ερωτήσεις"
 
@@ -2436,6 +2501,9 @@ msgstr "Όροι χρήσης"
 
 msgid "Guidelines"
 msgstr "Οδηγίες"
+
+msgid "Sponsors"
+msgstr ""
 
 msgid "Source code"
 msgstr ""
@@ -2514,6 +2582,75 @@ msgstr "Σημείωση ως ολοκληρωμένο."
 msgid "AstroBin is in READ ONLY mode"
 msgstr "Δείκτης AstroBin"
 
+#, fuzzy
+#| msgid "Sorry"
+msgid "Sorry :-("
+msgstr "Συγγνώμη"
+
+#, fuzzy
+#| msgid "Accessories"
+msgid "Access denied"
+msgstr "Λοιπός εξοπλισμός"
+
+msgid "This feature is only offered at higher membership levels."
+msgstr ""
+
+msgid ""
+"Would you be interested in upgrading? AstroBin is a very small business and "
+"your support would mean a lot!"
+msgstr ""
+
+#, fuzzy
+msgid "No, thanks"
+msgstr "Όχι, ευχαριστώ"
+
+msgid "Tell me more!"
+msgstr ""
+
+#, fuzzy
+#| msgid "Are you sure?"
+msgid "Are you really sure?"
+msgstr "Είστε σίγουροι;"
+
+msgid ""
+"We know, we're all used to the fact that ads on the Internet are\n"
+"                    annoying."
+msgstr ""
+
+msgid ""
+"However, please let us offer you two good reasons to allow ads on\n"
+"                    AstroBin:"
+msgstr ""
+
+msgid ""
+"AstroBin is a one-person business. As of the time of writing, in early "
+"2020,\n"
+"                        I'm trying to make AstroBin a full time job, but it "
+"hasn't happened yet. If this dream were to\n"
+"                        become reality, I could invest a lot more time in "
+"the development of AstroBin, and everybody\n"
+"                        would benefit from it!"
+msgstr ""
+
+msgid ""
+"There are only astronomy ads on AstroBin, that are published after my review "
+"and\n"
+"                        approval. Nothing fishy, nothing off-topic, and "
+"nothing that will use any of your private\n"
+"                        information."
+msgstr ""
+
+#, python-format
+msgid ""
+"If you still feel that you would rather not see these ads, you can change "
+"this on\n"
+"                    <a href=\"%(profile_url)s\">your settings page</a>."
+msgstr ""
+
+#, fuzzy
+msgid "Thank you!"
+msgstr "Ευχαριστίες"
+
 msgid "Quick search"
 msgstr "Γρήγορη αναζήτηση"
 
@@ -2559,9 +2696,6 @@ msgstr "Προχωρημένη αναζήτηση"
 msgid "Top picks"
 msgstr ""
 
-msgid "Public data pools"
-msgstr "Δημόσιες περιοχές δεδομένων"
-
 msgid "Stats"
 msgstr "Στατιστικά"
 
@@ -2569,11 +2703,8 @@ msgstr "Στατιστικά"
 msgid "Trending astrophotographers"
 msgstr "Επεξεργαστία του εξοπλισμού αστροφωτογράφησής σας"
 
-msgid "What is this site?"
-msgstr "Τι είναι αυτός ο ιστότοπος;"
-
-msgid "AstroBin Raw Data"
-msgstr "Ανεπεξέργαστα Δεδομένα του AstroBin"
+msgid "Help"
+msgstr "Βοήθεια"
 
 msgid "Contact"
 msgstr "Επικοινωνία"
@@ -2599,10 +2730,6 @@ msgstr "Θα θέλατε να χρησιμοποιήστε το πραγματ�
 msgid "OK"
 msgstr "Εντάξει"
 
-#, fuzzy
-msgid "No, thanks"
-msgstr "Όχι, ευχαριστώ"
-
 msgid "Login"
 msgstr "Είσοδος"
 
@@ -2627,16 +2754,6 @@ msgstr "Αγαπημένα"
 
 msgid "Plots"
 msgstr "Διαγράμματα"
-
-#, fuzzy
-msgid "Raw data"
-msgstr "Βιβλιοθήκη ανεπεξέργαστων δεδομένων"
-
-msgid "Raw data library"
-msgstr "Βιβλιοθήκη ανεπεξέργαστων δεδομένων"
-
-msgid "Private shared folders"
-msgstr "Ιδιωτικοί κοινόχρηστοι φάκελοι"
 
 msgid "My messages"
 msgstr "Μηνύματα"
@@ -2758,292 +2875,6 @@ msgstr ""
 
 msgid "More"
 msgstr ""
-
-msgid "Frequently Asked Questions"
-msgstr "Συχνές Ερωτήσεις"
-
-msgid "Is this website for free?"
-msgstr "Είναι δωρεάν αυτός ο ιστότοπος;"
-
-msgid "Are there any limits on how large and how many images I can upload?"
-msgstr "Υπάρχουν όρια στο πόσο μεγάλα και πόσα αρχεία μπορώ να ανεβάσω;"
-
-msgid "What image formats are supported?"
-msgstr "Τι είδους αρχεία εικόνων υποστηρίζονται;"
-
-msgid "Is my data safe on AstroBin?"
-msgstr "Είναι τα δεδομένα μου ασφαλή στο AstroBin;"
-
-msgid ""
-"I've seen beautiful images on this site. I'm not worthy of posting mine!"
-msgstr ""
-"Έχω δει όμορφες εικόνες σε αυτόν τον ιστότοπο. Δεν είμαι άξιος να ποστάρω "
-"τις δικές μου!"
-
-msgid "What's the deal with the Staging Area and the Public Area?"
-msgstr "Τι είναι η Περιοχή Επεξεργασίας και η Περιοχή Προβολής;"
-
-msgid "Why was AstroBin created?"
-msgstr "Γιατί δημιουργήθηκε το AstroBin;"
-
-msgid "What are the plans for the future?"
-msgstr "Ποια είναι τα μελλοντικά σχέδια;"
-
-msgid "How can I format my comments?"
-msgstr "Πώς μπορώ να μορφοποιήσω τα σχόλια μου;"
-
-msgid "How is the AstroBin index calculated?"
-msgstr "Πως υπολογίζεται ο δείκτης του AstroBin;"
-
-msgid "I received some Likes, why is my AstroBin index not updated?"
-msgstr ""
-"Έλαβα μερικές προτιμήσεις, γιατί δεν ενημερώθηκε ο δείκτης μου του AstroBin;"
-
-msgid "How is the Image of the Day selected?"
-msgstr "Πως γίνεται επιλογή της Εικόνας της Ημέρας;"
-
-msgid "... and their answers!"
-msgstr "... και οι απαντήσεις τους!"
-
-msgid ""
-"No. A free account will let you upload up to 10 images, and partake in all "
-"social activities. For unlimited storage, you will need a premium "
-"subscription."
-msgstr ""
-
-#, fuzzy
-msgid ""
-"<strong>NO!</strong> If you are a premium member, on AstroBin you can upload "
-"as many images as you want, and as large as you want. In fact, full size "
-"images are encouraged!"
-msgstr ""
-"<strong>ΌΧΙ!</strong> Στο AstroBin μπορείτε να ανεβάσετε όσες εικόνες θέλετε "
-"και όσο μεγάλες θέλετε. Στην πραγματικότητα είναι προτιμότερο να υπάρχουν "
-"εικόνες πλήρους μεγέθους!"
-
-msgid "AstroBin will accept JPEG, PNG and GIF. Animated GIF is supported too."
-msgstr ""
-"Το AstroBin δέχεται JPEG, PNG and GIF. Επίσης υποστηρίζονται και κινούμενα "
-"GIF."
-
-msgid ""
-"Absolutely. There are multiple ways in which AstroBin can store your data "
-"very safely. First of all, the images you upload are stored on a highly "
-"durable, highly available, redundant backend. The durability of the storage "
-"backend is 99.999999999 percent over a given year. This means that if you "
-"upload 10,000 images, you can expect to lose one image to data corruption "
-"once in 10,000,000 year. The images are duplicated across two different "
-"physical servers, for protection against natural disasters."
-msgstr ""
-"Απόλυτα. Υπάρχουν πολλαπλοί τρόποι που το AstroBin μπορεί να αποθηκεύσει τα "
-"δεδομένα σας με μεγάλη ασφάλεια. Πρώτα απ' όλα οι εικόνες που ανεβάζετε "
-"αποθηκεύονται σε ένα υψηλής αντοχής, υψηλής διαθεσιμότητας, εφεδρικό server. "
-"Η αντοχή του αποθηκευτικού server είναι 99.999999999% για κάθε χρόνο. Αυτό "
-"σημαίνει ότι αν ανεβάσετε 10.000 εικόνες μπορείτε να περιμένετε την απώλεια "
-"μιας εικόνας λόγω αλλοίωσης δεδομένων μια φορά κάθε 10.000.000 χρόνια. Οι "
-"εικόνες αντιγράφονται σε δυο διαφορετικούς φυσικούς servers, για προστασία "
-"σε πιθανή φυσική καταστροφή."
-
-msgid ""
-"The actual website, instead, is hosted on a Virtual Machine, so, in case of "
-"severe hardware failure, it can be redeployed to a different server in a "
-"matter of 15 minutes."
-msgstr ""
-"Η πραγματική ιστοσελίδα, αντίθετα, είναι σε ένα Εικονικό Μηχάνημα, έτσι ώστε "
-"σε περίπτωση σοβαρής αποτυχίας υλικού, να μπορεί να ξανατοποθετηθεί σε "
-"διαφορετικό server μέσα σε 15 λεπτά."
-
-msgid ""
-"Finally, the database that powers AstroBin (in fact, the whole Virtual "
-"Machine) is backed up daily. In case of severe data loss, the website will "
-"be quickly restored to a snapshot that's never older than 24 hours."
-msgstr ""
-"Τέλος, στην βάση δεδομένων που λειτουργεί το AstroBin (στην πραγματικότητα, "
-"όλο το Εικονικό Μηχάνημα) δημιουργείται αντίγραφο ασφαλείας κάθε μέρα. Σε "
-"περίπτωση μεγάλης απώλειας δεδομένων, ο ιστότοπος θα επανέλθει σε μια "
-"προηγούμενη κατάσταση η οποία δεν είναι παλαιότερη των 24 ωρών."
-
-msgid ""
-"That said, you should be aware that AstroBin is not a backup service, and "
-"although your data is very safe in our hands, we cannot legally take "
-"responsibility in the event of loss, however unlikely it is. Always keep a "
-"copy of your image on your computer."
-msgstr ""
-"Ξεκαθαρίζοντας το αυτό, θα πρέπει να έχετε υπ' όψην ότι το AstroBin δεν "
-"είναι υπηρεσία backup, παρόλο που τα δεδομένα σας είναι πολύ ασφαλή στα "
-"χέρια μας, δεν μπορούμε να πάρουμε νομική ευθύνη σε περίπτωση απώλειας, όσο "
-"απίθανο και αν είναι αυτό. Να κρατάτε πάντα ένα αντίγραφο ασφαλείας της "
-"εικόνας σας στον υπολογιστή σας."
-
-msgid ""
-"Nonsense. AstroBin has <strong>not</strong> been made to showcase beautiful "
-"image, but to give everybody an opportunity to contribute to a vast and "
-"evergrowing effort of centralization and indexing of important data. That 30 "
-"minute picture of M31 you took last night between the clouds <em>belongs</"
-"em> here! Don't be shy and post it!"
-msgstr ""
-"Ανοησίες. Το AstroBin <strong>δεν</strong> δημιουρήθηκε για αν δείξει "
-"όμορφες εικόνες, αλλά να δώσει μια ευκαιρία σε όλους να συμβάλλουν σε μια "
-"τεράστια και συνεχώς αυξανόμενη προσπάθεια συγκέντρωσης και ευρετηρίασης "
-"σημαντικών δεδομένων. Η 30λεπτή φωτογραφία του Μ31 που πήρατε εχθές το βράδυ "
-"ανάμεσα στα σύννεφα<em>ανήκει</em> εδώ! Μην ντρέπεστε και ανεβάστε την!"
-
-msgid ""
-"On AstroBin you have two places for our images. The Staging Area is where "
-"you can upload images that you want to quickly share on forums, mailing "
-"lists or social networks. The days of scaling down and compressing your "
-"image so you can upload it to a forum for feedback and critique are over! "
-"Just upload to AstroBin's Staging Area, and send the link to anyone you "
-"want. The image will be visible only to the intended recipients, and won't "
-"appear on your profile or AstroBin's home page."
-msgstr ""
-"Στο AstroBin έχετε δυο μέρη για τις εικόνες σας. Η Περιοχή Επεξεργασίας όπου "
-"μπορείτε να ανεβάσετε εικόνες που θέλετε να μοιραστείτε γρήγορα σε forums, "
-"λίστες αλληλογραφίας ή κοινωνικά δίκτυα. Οι ημέρες μείωσης του μεγέθους και "
-"συμπίεσης της εικόνας έτσι ώστε να την ανεβάσετε σε ένα forum για σχόλια και "
-"κριτική είναι παρελθόν! Απλά ανεβάστε την στην Περιοχή Επεξεργασίας του "
-"AstroBin και στείλτε τον σύνδεσμο σε όποιον θέλετε. Η εικόνα θα είναι ορατή "
-"μόνο για τους παραλήπτες που προορίζεται και δεν θα εμφανιστεί ούτε στο "
-"προφίλ σας ούτε στην αρχική σελίδα του AstroBin."
-
-msgid ""
-"The Public Area, instead, is for your finished products. After you have "
-"received feedback on your favorite forum, you can promote an image from the "
-"Staging Area to the Public Area, and it will appear on your profile. "
-"Remember that you can also move images back and forth from one Area to the "
-"other as many times as you want!"
-msgstr ""
-"Η Περιοχή Προβολής, αντίθετα, είναι για τα τελειωμένα σας προϊόντα. Αφού "
-"λάβετε σχόλια στο αγαπημένο σας forum, μπορείτε να προωθήσετε μια εικόνα από "
-"την Περιοχή Επεξεργασίας στην Περιοχή Προβολής και θα εμφανιστεί στο προφίλ "
-"σας. Έχετε υπ' όψιν ότι μπορείτε να μεταφέρετε εικόνες από την μια Περιοχή "
-"στην άλλη όσες φορές θέλετε!"
-
-msgid ""
-"AstroBin was born out of the desire to end something that had been going on "
-"for too long: the waste of incredible material to the sea of chaos that the "
-"Internet can be. For years, fantastic astrophotographs have beeen uploaded "
-"to Internet Forums, often with little or no data, or to general purpose "
-"image hosting websites, invariably with no data attached."
-msgstr ""
-"Το AstroBin δημιουργήθηκε από την επιθυμία για να δοθεί τέλος σε κάτι το "
-"οποίο γινόταν για πολύ καιρό: η σπατάλη απίθανου υλικού στην θάλασσα του "
-"χάους που μπορεί το Internet να γίνει . Για χρόνια, φανταστικές "
-"αστροφωτογραφίες έχουν ανέβει σε forums του Internet, συχνά με λίγα ή χωρίς "
-"δεδομένα, ή σε ιστοσελίδες γενικής χρήσης φιλοξενίας εικόνων, κατά κανόνα "
-"χωρίς συνημμένες πληροφορίες."
-
-msgid ""
-"Such an image would be seen by some people, then quickly forgotten, and "
-"reduced to nothing more than a bunch of pixel in the giant wasteland of the "
-"Internet."
-msgstr ""
-"Μια τέτοια εικόνα θα μπορούσε να την δουν μερικοί άνθρωποι, μετά γρήγορα θα "
-"ξεχνιόταν και θα μειωνόταν σε τίποτα άλλο παρά σε ένα τσούρμο από πίξελ στην "
-"τεράστια έρημο του Internet."
-
-msgid ""
-"This should not be allowed to happen. AstroBin is the response: an effort to "
-"host, collect, index and categorize the output of the astrophotographers all "
-"over the world, so that their precious data would serve a purpose, and have "
-"a meaning forever."
-msgstr ""
-"Αυτό δεν θα έπρεπε να συμβαίνει. Το AstroBin είναι η απάντηση: μια "
-"προσπάθεια φιλοξενίας, συλλογής, ευρετηρίασης και κατηγοριοποίησης του "
-"αποτελέσματος των αστροφωτογράφων σε όλον τον κόσμο, έτσι ώστε τα πολύτιμα "
-"δεδομένα τους να υπηρετούν έναν σκοπό και να έχουν ένα νόημα για πάντα."
-
-msgid ""
-"<em>AstroBin</em> is just starting out, and this time we can really say that "
-"the sky is the limit! Tons of ideas are in the pipeline. As the user base "
-"grows, so does the data. Suddenly, things like automated supernovae search "
-"become possible: you could simply upload an image of a galaxy, and AstroBin "
-"could compare it to pictures of the same galaxy taken previously."
-msgstr ""
-"Το <em>AstroBin</em> μόλις ξεκίνησε και αυτή την φορά μπορούμε να πούμε ότι "
-"ο ουρανός είναι το όριο! Πάρα πολλές ιδέες βρίσκονται στα σπάργανα. Καθώς η "
-"βάση των χρηστών μεγαλώνει, άλλο τόσο μεγαλώνουν και τα δεδομένα. Ξαφνικά, "
-"πράγματα όπως η αυτόματη αναζήτηση σουπερνόβα γίνεται δυνατή: θα μπορούσατε "
-"να ανεβάσετε μια εικόνα ενός γαλαξία και το AstroBin να την συγκρίνει με "
-"εικόνες αυτού του γαλαξία που πάρθηκαν παλιότερα."
-
-msgid ""
-"AstroBin could also recommend subjects for you to image! Knowing your "
-"equipment, your location, and comparing what you have imaged to what users "
-"similar to you have, AstroBin could suggest your next challenge!"
-msgstr ""
-"Το AstroBin θα μπορούσε να σας προτείνει και θέματα για να φωτογραφίσετε! "
-"Γνωρίζοντας τον εξοπλισμό σας, την τοποθεσία σας και συγκρίνοντας με το τι "
-"έχετε φωτογραφίσει σε σχέση με άλλους χρήστες, το AstroBin θα μπορούσε να "
-"σας προτείνει την επόμενη σας πρόκληση!"
-
-msgid ""
-"Thanks to the input from the community, more ideas are flowing in and the "
-"list get bigger and bigger."
-msgstr ""
-"Χάρις της εισαγωγής σχολίων από την κοινότητα και άλλες ιδέες ρέουν και η "
-"λίστα όλο και μεγαλώνει."
-
-msgid ""
-"AstroBin uses the Markdown syntax. Please use the following reference table:"
-msgstr ""
-"Το AstroBin χρησιμοποιεί το συντακτικό Markdown. Παρακαλούμε χρησιμοποιήστε "
-"τον ακόλουθο πίνακα αναφοράς:"
-
-msgid "You type:"
-msgstr "Εισάγετε:"
-
-msgid "You see:"
-msgstr "Βλέπετε:"
-
-msgid "italics"
-msgstr "πλάγια"
-
-msgid "bold"
-msgstr "έντονα"
-
-msgid "(TAB or 4 spaces)"
-msgstr "(TAB ή 4 κενά)"
-
-msgid "preformatted text"
-msgstr "προδιαμορφωμένο κείμενο"
-
-msgid "quoted text"
-msgstr "εισηγμένο κείμενο"
-
-msgid "escape the formatting syntax"
-msgstr "έξοδος από το συντακτικό μορφοποίησης"
-
-msgid ""
-"The AstroBin index is a function of the number of Likes and the number of "
-"images posted by a user."
-msgstr ""
-"Ο δείκτης του AstroBin είναι μια συνάρτηση απ΄τον αριθμών των προτιμήσεων "
-"και του αριθμού των εικόνων που αναρτήθηκαν από έναν χρήστη."
-
-msgid ""
-"Because it's computationally expensive, the AstroBin index is updated only "
-"every 24 hours. The same applies for the search index, the Big Wall, and "
-"some other user data."
-msgstr ""
-"Επειδή είναι υπολογιστικά δαπανηρό, το ευρετήριο του AstroBin ανανεώνεται "
-"κάθε 24 ώρες. Το ίδιο ισχύει και για το ευρετήριο αναζήτησης, τον Μεγάλο "
-"Τοίχο, και μερικά άλλα στοιχεία χρηστών."
-
-msgid ""
-"A staff of 52 volunteers goes thru a three-stage process: 30 \"submitters\" "
-"propose images for IOTD; 15 \"reviewers\" advance some of them to the next "
-"stage; finally, any one of 7 judges can select an image from the pool of "
-"finalists as IOTD. There are limitations in place in the system to avoid "
-"abuse and monopoly."
-msgstr ""
-
-msgid ""
-"Do you have a question not covered here! Please <a href=\"/contact/"
-"\">contact us</a>!"
-msgstr ""
-"Έχετε μια απορία που δεν καλύπτετε εδώ; Παρακαλώ <a href=\"/contact/"
-"\">επικοινωνήστε μαζί μας</a>!"
 
 msgid "Instructions and examples"
 msgstr "Οδηγίες και παραδείγματα"
@@ -3280,334 +3111,6 @@ msgstr "Ιδιοκτήτες"
 msgid "just now"
 msgstr "μόλις τώρα"
 
-msgid ""
-"AstroBin accounts are meant for members to share original images that they "
-"have created."
-msgstr ""
-"Οι λογαριασμοί του AstroBin προορίζονται για μέλη ώστε να μοιράζονται "
-"πρωτότυπες εικόνες που έχουν δημιουργήσει."
-
-msgid "What is allowed"
-msgstr "Τι επιτρέπεται"
-
-msgid "Do upload content you have created yourself."
-msgstr "Ανεβάστε περιεχόμενο που έχετε δημιουργήσει μόνοι σας."
-
-msgid ""
-"Respect the copyright of others. Stealing images from other people and "
-"trying to pass them off as yours is not allowed on AstroBin."
-msgstr ""
-"Σεβαστείτε τα πνευματικά δικαιώματα των άλλων. Η κλοπή εικόνων από άλλους "
-"ανθρώπους καθώς και η προσπάθεια να τις δείξετε σαν δικές σας δεν "
-"επιτρέπονται από το AstroBin."
-
-msgid "Do fill in all the technical details you can."
-msgstr "Συμπληρώστε όλες τις τεχνικές πληροφορίες που μπορείτε."
-
-msgid ""
-"AstroBin is founded on the idea that data is important and can't go wasted "
-"in a sea of chaos. As much as you can, please fill in the technical details "
-"of your images."
-msgstr ""
-"Το AstroBin ιδρύθηκε με την ιδέα ότι τα δεδομένα είναι σημαντικά και δεν "
-"πρέπει να πάνε χαμένα σε μια θάλασσα χάους. Όσο μπορείτε, παρακαλούμε "
-"συμπληρώστε τις τεχνικές λεπτομέρειες των εικόνων σας."
-
-msgid "Be respectful of other users."
-msgstr "Να σέβεστε τους άλλους χρήστες."
-
-msgid "Be nice and friendly to other users when you send them messages."
-msgstr ""
-"Να είστε ευγενικοί και φιλικοί προς τους άλλους χρήστες όταν τους στέλνετε "
-"μηνύματα."
-
-msgid "What is forbidden"
-msgstr "Τι απαγορεύετε."
-
-#, fuzzy
-msgid "Don't upload anything that you did not work on."
-msgstr "Μην ανεβάζετε κάτι για το οποίο δεν έχετε πνευματικά δικαιώματα."
-
-msgid ""
-"It's simple: if you didn't take or post-process an image yourself, then "
-"don't upload it. Things that are not fine include: reposting other people's "
-"images without any meaningful modifications and without the owner's content; "
-"reposting NASA's (and other similar agencies) images without any meaningful "
-"modifications. Things that are okay include: post-processing freely "
-"available data from NASA and other similar agencies; post-processing a "
-"friend's data; post-processing free data made available by other users."
-msgstr ""
-
-msgid "No nudity, no explicitly sexual content, no illegal content."
-msgstr ""
-"Απαγορεύονται οι γυμνές εικόνες, απαγορεύετε ρητά το σεξουαλικό περιεχόμενο, "
-"απαγορεύεται παράνομο περιεχόμενο."
-
-msgid ""
-"Your account will be permanently deleted, and so will all your content, if "
-"you upload any content that is illegal, porn or nudity. We also reserve the "
-"right to report you to the authorities, if we find it necessary."
-msgstr ""
-"Ο λογαριασμός σας θα διαγραφεί μόνιμα και κατ' επέκταση και όλο το "
-"περιεχόμενο σας, αν ανεβάσετε περιεχόμενο το οποίο είναι παράνομο, πορνό ή "
-"γυμνές εικόνες. Επίσης έχουμε το δικαίωμα να σας αναφέρουμε στις αρχές, αν "
-"αυτό κριθεί απαραίτητο."
-
-msgid "Don't upload images that have nothing to do with astronomy."
-msgstr "Μην ανεβάζετε εικόνες που δεν έχουν σχέση με την αστρονομία."
-
-msgid ""
-"Images of your equipment are fine, but don't use AstroBin to upload pictures "
-"from your last vacation. Your account won't be deleted, but we will ask you "
-"to remove those pictures."
-msgstr ""
-"Εικόνες του εξοπλισμού σας είναι αποδεκτές, αλλά μην χρησιμοποιείτε το "
-"AstroBin για να ανεβάσετε φωτογραφίες από τις τελευταίες σας διακοπές. Ο "
-"λογαριασμός σας δεν θα διαγραφεί, αλλά θα σας ζητήσουμε να διαγράψετε αυτές "
-"τις φωτογραφίες."
-
-msgid "Don't use your account to host images for websites, banners or logos."
-msgstr ""
-"Μην χρησιμοποιείτε τον λογαριασμό σας για την αποθήκευση εικόνων για "
-"ιστοσελίδες, banners ή λογόσημα."
-
-msgid ""
-"Banners, logos, icons or other graphic elements that are not "
-"astrophotography are not allowed on AstroBin."
-msgstr ""
-"Τα banners, λογόσημα, εικονίδια ή άλλα γραφικά στοιχεία τα οποία δεν "
-"σχετίζονται με την αστροφωτογραφία δεν επιτρέπονται στο AstroBin."
-
-msgid ""
-"In conclusion, these terms are just a way to say \"please be nice and use "
-"common sense\". If you feel you can't abide by them, please let us know what "
-"you feel is wrong."
-msgstr ""
-"Εν κατακλείδι, αυτοί οι όροι είναι ένας τρόπος να πούμε \"παρακαλούμε να "
-"είστε ευγενικοί και χρησιμοποιείτε την κοινή λογική\". Αν νιώθετε πως δεν "
-"μπορείτε να τους ακολουθήσετε, παρακαλούμε να μας ενημερώσετε με το τι "
-"νομίζετε πως είναι λάθος."
-
-msgid ""
-"Are you an astrophotographer? Do you like to share the outcome of your hard "
-"work with others? As an astrophotographer myself, and a subscriber to "
-"numerous Astrophotography forums, I have found that the Internet is lacking "
-"a centralized place where astrophotographers can share their work."
-msgstr ""
-"Είστε αστροφωτογράφος; σας αρέσει να μοιράζεστε το αποτέλεσμα της σκληρής "
-"δουλειάς σας με άλλους; Όντας και εγώ αστροφωτογράφος και μέλος σε πολλά "
-"forum αστροφωτογραφίας, βρήκα πως το Internet έχει έλλειψη ενος κεντρικού "
-"μέρους όπου οι αστροφωτογράφοι μπορούν να μοιραστούν την δουλειά τους."
-
-msgid "Well, this is finally over!"
-msgstr "Επιτέλους, αυτό τελείωσε!"
-
-msgid ""
-"<em>AstroBin</em> comes to fill the gap. It's a website built from the "
-"ground up by an astrophotographer, and it provides means to people who want "
-"to share their astrophotographs."
-msgstr ""
-"Το <em>AstroBin</em> έρχεται να γεμίσει αυτό το κενό. Είναι μια ιστοσελίδα "
-"που φτιάχτηκε από το μηδέν από έναν αστροφωτογράφο και παρέχει τα μέσα για "
-"τον κόσμο που θέλει να μοιραστεί τις αστροφωτογραφίες του."
-
-msgid "So how is this different from any other image sharing websites?"
-msgstr "Πώς είναι διαφορετικό από άλλους ιστότοπους μοιράσματος εικόνων;"
-
-msgid ""
-"<em>AstroBin</em> provides a number of features that are tailored "
-"specificlly to astrophotography. Here's a quick run down of the main ones:"
-msgstr ""
-"Το <em>AstroBin</em> παρέχει ένα αριθμό από χαρακτηριστικά που είναι ραμμένα "
-"ειδικά για τους αστροφωτογράφους. Ορίστε μια περίληψη των κύριων "
-"χαρακτηριστικών:"
-
-msgid "Dedication to data"
-msgstr "Αφοσίωση στα δεδομένα"
-
-msgid ""
-"On a general purpose image sharing site, you would upload your image and be "
-"done with it. <em>AstroBin</em>, instead, has a user interface specifically "
-"designed to enable you to input all the technical data of your image."
-msgstr ""
-"Σε έναν ιστότοπο γενικής χρήσεως μοιράσματος εικόνων, πιθανών θα ανεβάζατε "
-"την εικόνα σας και θα τελειώνατε. Το <em>AstroBin</em>, αντιθέτως, έχει ένα "
-"περιβάλλον χρήσης ειδικά σχεδιασμένο για να σας επιτρέπει να εισάγετε όλα τα "
-"τεχνικά δεδομένα της εικόνας σας."
-
-msgid ""
-"<em>AstroBin</em> will autocomplete your input using a vast database: "
-"everything from telescopes, CCDs and filters to astronomical objects in many "
-"catalogues will show in popup dialogs for easy selection when you start "
-"typing their names. <em>AstroBin</em> is connected to the SIMBAD "
-"Astronomical Database, which contains over 5 million objects under over 15 "
-"million names!"
-msgstr ""
-"Το <em>AstroBin</em> θα τελειώνει αυτόματα την εισαγωγή σας χρησιμοποιώντας "
-"μια μεγάλη βάση δεδομένων: τα πάντα από τηλεσκόπια, CCDs και φίλτρα μέχρι "
-"αστρονομικά αντικείμενα σε πολλούς καταλόγους θα εμφανίζονται σε "
-"αναδυόμενους διαλόγους για εύκολη επιλογή όταν αρχίσετε να γράφετε το όνομα "
-"τους. Το <em>AstroBin</em> είναι συνδεδεμένο με την αστρονομική βάση "
-"δεδομένων SIMBAD, η οποία περιέχει πάνω από 5 εκατομμύρια αντικείμενα και "
-"πάνω από 15 εκατομμύρια ονόματα!"
-
-msgid ""
-"On <em>AstroBin</em>, astronomical subjects have their own page, where you "
-"can see the best images of them, and plots and charts showing trends and "
-"interesting statistics. There is also a page that shows the most popular "
-"subjects organized by month and latitude!"
-msgstr ""
-"Στο <em>AstroBin</em>, τα αστρονομικά θέματα έχουν την δική τους σελίδα, "
-"όπου μπορείτε να δείτε τις καλύτερες εικόνες από αυτά καθώς και διαγράμματα "
-"δείχνοντας τις τάσεις και ενδιαφέροντα στατιστικά. Υπάρχει επίσης και μια "
-"σελίδα όπου δείχνει τα πιο δημοφιλή θέματα οργανωμένα ανά μήνα και "
-"γεωγραφικό πλάτος!"
-
-msgid "Data is strongly interconnected"
-msgstr "Τα δεδομένα είναι διασυνδεδεμένα"
-
-msgid ""
-"Have you ever wanted to see how your next image is going to look like? On "
-"<em>AstroBin</em>, you can search for all images of a certain target that "
-"were taken with a certain telescope and a certain CCD or camera. Or a "
-"certain filter. How about all the images between 6 and 8 hours of "
-"integration? Or with a certain Moon phase? You can do that!"
-msgstr ""
-"Θελήσατε ποτέ σας να δείτε πως θα φανεί η επόμενη σας φωτογραφία; Στο "
-"<em>AstroBin</em>, μπορείτε να ψάξετε για όλες τις εικόνες ενός "
-"συγκεκριμένου στόχου που πάρθηκαν με ένα συγκεκριμένο τηλεσκόπιο και μια "
-"συγκεκριμένη CCD ή κάμερα. Ή ένα συγκεκριμένο φίλτρο. Τι θα λέγατε για όλες "
-"τις εικόνες με ολοκλήρωση από 6 έως 8 ωρών. Ή με μια συγκεκριμένη φάση της "
-"Σελήνης; Μπορείτε να το κάνετε!"
-
-msgid ""
-"AstroBin can help you with your next telescope or camera purchase, by "
-"searching for gear combinations owned by other users. For instance, you "
-"could search for all images taken with a Canon 5D and any apochromatic "
-"refractor, or a SBIG ST-8300 with any Richtey-Chretien telescope. Or, if you "
-"want, you can search by telescope diameter too!"
-msgstr ""
-"Το AstroBin μπορεί να σας βοηθήσει με την επόμενη σας αγορά τηλεσκοπίου ή "
-"κάμερας, με την αναζήτηση συνδυασμών που ανήκουν σε άλλους χρήστες. Για "
-"παράδειγμα, μπορείτε να ψάξετε για όλες τις εικόνες που λήφθηκαν από "
-"οποιοδήποτε αποχρωματικό διοπτρικό, ή την SBIG ST-8300 με οποιοδήποτε "
-"Richtey-Chretien τηλεσκόπιο. Ή, αν θέλετε, μπορείτε να ψάξετε και με την "
-"διάμετρο του τηλεσκοπίου!"
-
-msgid ""
-"Finally, all this information is collected in interesting plots, that can "
-"help you figure out how some gear items are trending."
-msgstr ""
-"Τέλος, όλες οι πληροφορίες είναι συγκεντρωμένες σε ενδιαφέροντα διαγράμματα, "
-"που μπορούν να σας βοηθήσουν να συμπεράνετε την τάση ορισμένων εξοπλισμών."
-
-msgid "All the data at a glance"
-msgstr "Όλα τα δεδομένα με μια ματιά"
-
-msgid ""
-"Each image on <em>AstroBin</em> is annotated of all the technical details "
-"about its acquisition. Telescopes involved, cameras, mounts, filters, "
-"everything is visible at a glance in the Technical Card. Even the Moon age "
-"at the time of the acquisition is displayed."
-msgstr ""
-"Κάθε εικόνα στο <em>AstroBin</em> έχει σχόλια όλων των τεχνικών δεδομένων "
-"σχετικά με την λήψη της. Τα τηλεσκόπια που πήραν μέρος, κάμερες, στηρίξεις, "
-"φίλτρα, όλα είναι ορατά με μια ματιά στην Τεχνική Κάρτα. Ακόμα και η ηλικία "
-"της Σελήνη την ώρα λήψης φαίνεται."
-
-msgid "More than just an image"
-msgstr "Περισσότερο από μια εικόνα"
-
-msgid ""
-"<em>AstroBin</em> will do more than just host a copy of your image: when you "
-"upload a photograph, a histogram and a black &amp; white inverted version of "
-"the image will be generated on the fly, so it's easier to spot faint "
-"nebulosity regions or spiral arms. Images will also be plate solved, and an "
-"annotated version will appear on the site. <em>AstroBin</em> will know what "
-"are the astronomical objects in your image without you telling!"
-msgstr ""
-"Το <em>AstroBin</em> θα κάνει πολύ περισσότερα από την φιλοξενία ενός "
-"αντιγράφου της εικόνας σας: όταν ανεβάζετε μια εικόνα, ένα ιστόγραμμα και "
-"μια ασπρόμαυρη αρνητική έκδοση της εικόνας θα δημιουργηθούν επί τόπου, έτσι "
-"ώστε να είναι ευκολότερο να εντοπίσετε τις περιοχές αραιής νέφωσης ή τις "
-"σπείρες. Οι εικόνες θα αναλυθούν και μια σχολιασμένη έκδοση τους θα "
-"εμφανιστεί στην ιστοσελίδα. Το <em>AstroBin</em> θα γνωρίζει ποια είναι τα "
-"αστρονομικά αντικείμενα στην εικόνα σας χωρίς να του το πείτε!"
-
-msgid "Protection from theft with automatic watermarking"
-msgstr "Προστασία από κλοπή με αυτόματο υδατογράφημα"
-
-msgid ""
-"<em>AstroBin</em>'s upload wizard will offer you to watermark your image "
-"with the text of your choosing. All it takes is a click!"
-msgstr ""
-"Ο οδηγός ανεβάσματος του <em>AstroBin</em> θα σας προσφέρει την δυνατότητα "
-"να υδατογραφήσετε την εικόνα σας με το κείμενο της επιλογής σας. Το μόνο που "
-"χρειάζεται είναι ένα κλικ!"
-
-msgid "AstroBin supports multiple image revisions"
-msgstr "Το AstroBin υποστηρίζει πολλαπλές εκδόσεις εικόνας"
-
-msgid ""
-"Don't tell me you have never gone back to revise the processing of an image "
-"<em>after</em> you had published it. <em>AstroBin</em> embraces this concept "
-"and lets you publish several revisions of the same image easily and "
-"intuitively! Now it's going to be really easy to tell whether your "
-"processing has improved."
-msgstr ""
-"Μην μου πείτε ότι δεν έχετε ξαναπάει πίσω να αναθεωρήσετε την επεξεργασία "
-"μιας εικόνας <em>αφού</em> την εκδόσατε. Το <em>AstroBin</em> αγκαλιάζει "
-"αυτή την αρχή και σας επιτρέπει να εκδόσετε αρκετές εκδόσεις από την ίδια "
-"εικόνα εύκολα και διαισθητικά! Τώρα θα είναι πραγματικά εύκολο να δείτε αν η "
-"επεξεργασία σας έχει βελτιωθεί."
-
-msgid "AstroBin is social!"
-msgstr "Το AstroBin είναι κοινωνικό!"
-
-msgid ""
-"On <em>AstroBin</em> you can message other astrophotographer, follow them "
-"and be notified when they post new images, or perform requests for more data."
-msgstr ""
-"Στο <em>AstroBin</em> μπορείτε να μηνύσετε άλλους αστροφωτογράφους, να τους "
-"ακολουθήστε και να ειδοποιηθείτε όταν ανεβάσουν νέες εικόνες, ή κάνουν "
-"αιτήματα για περισσότερα δεδομένα."
-
-msgid ""
-"You can follow gear items or astronomical subjects, and be notified whenever "
-"there's a new image from a certain CCD, or telescope, or filter, and so on. "
-"Or you can monitor all the new images of a certain galaxy or nebula."
-msgstr ""
-"Μπορείτε να ακολουθήσετε αντικείμενα εξοπλισμού ή αστρονομικά θέματα και να "
-"ειδοποιηθείτε όταν υπάρχει μια νέα εικόνα από μια συγκεκριμένη CCD ή "
-"τηλεσκόπιο, φίλτρο κτλ. ή μπορείτε να παρακολουθήσετε όλες τις νέες εικόνες "
-"ενός συγκεκριμένου γαλαξία ή νεφελώματος."
-
-msgid ""
-"As you have undoubtly realized by now, <em>AstroBin</em> is way more than an "
-"image hosting service. It's what the Astrophotography community has needed "
-"for a long time. For years, I have seen amazing images scattered all over "
-"the Internet: general purpose image hosting sites, forums, personal websites "
-"and even temporary places. Some of those images contain data that is too "
-"precious to go wasted in a sea of chaos. <em>AstroBin</em> comes to the "
-"rescue to provide a home and a central hub for astrophotographers all over "
-"the world."
-msgstr ""
-"Όπως αναμφίβολα καταλάβατε έως τώρα, το <em>AstroBin</em> είναι περισσότερο "
-"από υπηρεσία φιλοξενίας εικόνων. Είναι αυτό που η κοινωνία της "
-"Αστροφωτογραφίας χρειαζόταν για πολύ καιρό. Για χρόνια, έχω δει απίθανες "
-"εικόνες σκορπισμένες παντού στο Internet: σε ιστότοπους γενικής χρήσης "
-"φιλοξενίας εικόνων, forums, προσωπικές ιστοσελίδες, ακόμα μαι σε προσωρινούς "
-"ιστότοπους. Μερικές από αυτές τις εικόνες περιέχουν δεδομένα τα οποία είναι "
-"πολύ πολύτιμα να πάνε χαμένα σε μια θάλασσα χάους. Το <em>AstroBin</em> "
-"έρχεται για την διάσωση παρέχοντας ένα σπίτι και ένα κεντρικό κόμβο για τους "
-"αστροφωτογράφους παντού στον κόσμο."
-
-msgid "So, what are you waiting for?"
-msgstr "Λοιπόν, τι περιμένετε;"
-
-msgid "Sign up now!"
-msgstr "Εγγραφείτε τώρα!"
-
 msgid "Additional information requested"
 msgstr "Χρειάζονται περισσότερες πληροφορίες"
 
@@ -3626,6 +3129,11 @@ msgstr "Επιστροφή στην εικόνα"
 
 msgid "Contains"
 msgstr "Περιέχει"
+
+#, fuzzy
+#| msgid "Remove data"
+msgid "Remove ads"
+msgstr "Αφαίρεση δεδομένων"
 
 #, python-format
 msgid ""
@@ -3650,11 +3158,22 @@ msgstr ""
 msgid "Histogram"
 msgstr "Ιστόγραμμα"
 
+msgid "Right ascension"
+msgstr ""
+
+#, fuzzy
+#| msgid "Description"
+msgid "Declination"
+msgstr "Περιγραφή"
+
 msgid "Technical card"
 msgstr "Τεχνική κάρτα"
 
 msgid "Frames"
 msgstr "Καρέ"
+
+msgid "Basic astrometry details"
+msgstr ""
 
 msgid "RA center"
 msgstr "Κέντρο RA (ορθής αναφοράς)"
@@ -3674,8 +3193,27 @@ msgstr "arcsec/pixel"
 msgid "Orientation"
 msgstr "Προσανατολισμός"
 
+msgid "(flipped)"
+msgstr ""
+
 msgid "Field radius"
 msgstr "Ακτίνα πεδίου"
+
+#, fuzzy
+#| msgid "Commercial information"
+msgid "WCS transformation"
+msgstr "Εμπορικές πληροφορίες"
+
+msgid "Resolution"
+msgstr "Ανάλυση"
+
+msgid "Uncompressed source file"
+msgstr ""
+
+#, fuzzy
+#| msgid "Uploaded"
+msgid "Download"
+msgstr "Ανέβηκε"
 
 msgid "Remote source"
 msgstr ""
@@ -3688,6 +3226,9 @@ msgstr ""
 
 msgid "Actions"
 msgstr "Ενέργειες"
+
+msgid "Upload uncompressed source (XISF/FITS/PSD/TIFF)"
+msgstr ""
 
 msgid "Upload new revision"
 msgstr "Ανέβασμα νέας έκδοσης"
@@ -3703,12 +3244,6 @@ msgstr "Προώθηση στην περιοχή επεξεργασίας"
 
 msgid "Send to group"
 msgstr ""
-
-msgid "Send to public data pool"
-msgstr "Προώθηση στην κοινόχρηστη περιοχή δεδομένων"
-
-msgid "Send to private shared folder"
-msgstr "Αποστολή στον κοινόχρηστο προσωπικό φάκελο"
 
 #, fuzzy
 msgid "Delete image and all revisions"
@@ -3737,6 +3272,11 @@ msgid "Edit"
 msgstr "Επεξεργασία"
 
 #, fuzzy
+#| msgid "Thumbnail"
+msgid "Thumbnails"
+msgstr "Μικρογραφία"
+
+#, fuzzy
 msgid "Watermark"
 msgstr "Δανία"
 
@@ -3749,6 +3289,20 @@ msgstr "Λεπτομέρειες λήψης"
 #, fuzzy
 msgid "Plate-solving settings"
 msgstr "Ανάλυση"
+
+#, fuzzy
+#| msgid "Start plate-solving"
+msgid "Restart plate-solving"
+msgstr "Εκκίνηση ανάλυσης"
+
+#, fuzzy
+msgid "Advanced plate-solving settings"
+msgstr "Ανάλυση"
+
+#, fuzzy
+#| msgid "Start plate-solving"
+msgid "Restart advanced plate-solving"
+msgstr "Εκκίνηση ανάλυσης"
 
 #, fuzzy
 msgid "Context"
@@ -3802,6 +3356,55 @@ msgstr "Μέγεθος εικόνας"
 msgid "Full size"
 msgstr "Μέγεθος πίξελ"
 
+msgid "Delete this revision?"
+msgstr "Διαγραφή αυτής της έκδοσης;"
+
+msgid ""
+"This revision will be permanently deleted and cannot be recovered. Are you "
+"sure?"
+msgstr ""
+"Αυτή η έκδοση θα διαγραφεί μόνιμα και δεν θα μπορεί να ανακτηθεί. Είστε "
+"σίγουροι;"
+
+msgid "Associate XISF/FITS file"
+msgstr ""
+
+msgid ""
+"\n"
+"                        To improve the accuracy of your plate-solution even "
+"further, please upload one of the XISF or\n"
+"                        FITS files from your data set. Such files normally "
+"have date and time headers that will allow\n"
+"                        AstroBin to calculate solar system body ephemerides "
+"and find planets and asteroids in your\n"
+"                        image (provided you also add location information to "
+"your image).\n"
+"                    "
+msgstr ""
+
+#, python-format
+msgid ""
+"\n"
+"                        For maximum accuracy, it's recommended that you use "
+"PixInsight's native and open format XISF.\n"
+"                        Learn more about XISF here: <a href=\"%(xisf_url)s\" "
+"target=\"_blank\">%(xisf_url)s</a>\n"
+"                    "
+msgstr ""
+
+msgid ""
+"\n"
+"                        <strong>Please note:</strong> it's very important "
+"that the XISF or FITS file you upload is\n"
+"                        aligned to your processed image, otherwise the "
+"object annotations will not match.\n"
+"                        To improve your chances at a successful accurate "
+"plate-solution, calibrate your file the usual\n"
+"                        way (dark/bias/flats) but you don't need to stretch "
+"it.\n"
+"                    "
+msgstr ""
+
 msgid "The following people bookmarked this image"
 msgstr "Οι παρακάτω έβαλαν στα αγαπημένα τους αυτή την εικόνα"
 
@@ -3835,22 +3438,23 @@ msgstr ""
 msgid "Delete image and all its revisions?"
 msgstr "Διαγραφή της εικόνας και όλων των εκδόσεων της;"
 
+#, fuzzy
+#| msgid ""
+#| "The image will be permanently deleted and cannot be recovered. All its "
+#| "revisions will be deleted too. Are you sure?"
+msgid ""
+"The image will be moved to the trash, and it can be restored later. All its "
+"revisions will be there too. Continue?"
+msgstr ""
+"Η εικόνα θα διαγραφεί μόνιμα και δεν θα μπορεί να ανακτηθεί. Όλες οι "
+"εκδόσεις της επίσης θα διαγραφούν. Είστε σίγουροι;"
+
 msgid ""
 "The image will be permanently deleted and cannot be recovered. All its "
 "revisions will be deleted too. Are you sure?"
 msgstr ""
 "Η εικόνα θα διαγραφεί μόνιμα και δεν θα μπορεί να ανακτηθεί. Όλες οι "
 "εκδόσεις της επίσης θα διαγραφούν. Είστε σίγουροι;"
-
-msgid "Delete this revision?"
-msgstr "Διαγραφή αυτής της έκδοσης;"
-
-msgid ""
-"This revision will be permanently deleted and cannot be recovered. Are you "
-"sure?"
-msgstr ""
-"Αυτή η έκδοση θα διαγραφεί μόνιμα και δεν θα μπορεί να ανακτηθεί. Είστε "
-"σίγουροι;"
 
 msgid "Delete original image?"
 msgstr "Διαγραφή αρχικής εικόνας;"
@@ -3886,19 +3490,6 @@ msgid ""
 msgstr ""
 
 msgid ""
-"If this image is the result of your processing of a public data pool, you "
-"can send it the pool so it's displayed there."
-msgstr ""
-"Αν αυτή η εικόνα είναι το αποτέλεσμα της επεξεργασίας σας μιας δημόσιας "
-"περιοχής δεδομένων, μπορείτε να την στείλετε στην περιοχή ώστε να εμφανιστεί "
-"εκεί."
-
-msgid "Use this form to select an existing <strong>public data pool</strong>."
-msgstr ""
-"Χρησιμοποιείστε αυτή την φόρμα για την επιλογή μιας υπάρχουσας "
-"<strong>δημόσιας περιοχής δεδομένων</strong>."
-
-msgid ""
 "Sorry, you cannot send images from your Staging Area to a group. You need to "
 "first promote this image to your Public Area, if you want to do that."
 msgstr ""
@@ -3907,24 +3498,6 @@ msgid ""
 "Use this form to select one of your groups. The list includes all public and "
 "private non-autosubmission groups of which you are the owner or a member."
 msgstr ""
-
-msgid ""
-"If this image is the result of your processing of a private shared folder, "
-"you can send it the folder so it's displayed there."
-msgstr ""
-"Αν αυτή η εικόνα είναι το αποτέλεσμα της επεξεργασίας σας ενός ιδιωτικού "
-"κοινόχρηστου φακέλου, μπορείτε να την στείλετε στον φάκελο ώστε να "
-"εμφανιστεί εκεί"
-
-msgid ""
-"Use this form to select a <strong>private shared folder</strong> you have "
-"created or have been invited to."
-msgstr ""
-"Χρησιμοποιήστε αυτή την φόρμα για την επιλογή ενός <strong>ιδιωτικού "
-"κοινόχρηστου φακέλου</strong> που δημιουργήσατε ή που σας έχουν καλέσει."
-
-msgid "You don't have access to any shared private folders."
-msgstr "Δεν έχετε πρόσβαση σε κοινόχρηστους ιδιωτικούς φακέλους."
 
 msgid "Sharing mode"
 msgstr "Τρόπος κοινοποίησης"
@@ -3973,6 +3546,23 @@ msgid ""
 msgstr "Βελτιώσατε την επεξεργασία της εικόνας σας; Ανεβάστε την νέα έκδοση!"
 
 msgid ""
+"Please note: AstroBin is not officially a backup service. So please also "
+"keep additional copies of your file. However, by storing your work here, you "
+"can have some additional peace of mind."
+msgstr ""
+
+#, python-format
+msgid ""
+"Read about how AstroBin stores your files safely on the <a href=\"%(faq_url)s"
+"\">FAQ page</a>."
+msgstr ""
+
+#, fuzzy
+#| msgid "Gear images"
+msgid "Clear"
+msgstr "Εικόνες εξοπλισμού"
+
+msgid ""
 "This image is pending moderation and is currently not visible on the front "
 "page or search results."
 msgstr ""
@@ -4008,6 +3598,53 @@ msgstr ""
 "Internet και να πάρετε σχόλια. Όταν είστε ικανοποιημένοι, ίσως αφού "
 "ανεβάσετε μερικές αναθεωρήσεις, να την <a href=\"%(promote_url)s"
 "\">προωθήσετε</a> στην <a href=\"%(profile_url)s\">Περιοχή Προβολής</a>."
+
+msgid "Oh no!"
+msgstr ""
+
+msgid ""
+"\n"
+"            We are very, very sorry, but it appears that your image suffered "
+"a catastrophic data\n"
+"            corruption, and it cannot be retrieved. Hopefully you still have "
+"your file (the information on\n"
+"            this form should provide you with enough context).\n"
+"        "
+msgstr ""
+
+msgid ""
+"\n"
+"            Please use the file input below to upload it again, and then "
+"click on the Save button down\n"
+"            below. All the data you had previously associated to your image "
+"is still here.\n"
+"        "
+msgstr ""
+
+#, fuzzy
+#| msgid "Here's some more reading material to get you started"
+msgid "Here's some detail about the image to give you some context."
+msgstr "Ορίστε και υλικό για διάβασμα για να ξεκινήσετε"
+
+#, fuzzy
+#| msgid "uploaded"
+msgid "Uploaded"
+msgstr "ανέβηκε"
+
+#, fuzzy
+msgid "Image uploaded"
+msgstr "Ανεβασμένες φωτογραφίες"
+
+#, fuzzy
+#| msgid "Previously uploaded"
+msgid "Revision uploaded"
+msgstr "Ανεβασμένες εικόνες"
+
+msgid "Please wait..."
+msgstr "Παρακαλώ περιμένετε..."
+
+msgid "AstroBin is processing your thumbnails."
+msgstr ""
 
 msgid "Edit your image: acquisition details"
 msgstr "Επεξεργασία της εικόνας σας: Λεπτομέρειες λήψης"
@@ -4165,16 +3802,29 @@ msgid "Gear used"
 msgstr "Εξοπλισμός που χρησιμοποιήθηκε"
 
 #, fuzzy
+msgid "Edit your image: advanced plate-solving settings"
+msgstr "Επεξεργασία της εικόνας σας: κλίμακα ανάλυσης"
+
+#, fuzzy
+msgid "Save and plate-solve again"
+msgstr "Να γίνει ανάλυση ξανά"
+
+#, fuzzy
 msgid "Edit your image: plate-solving settings"
 msgstr "Επεξεργασία της εικόνας σας: κλίμακα ανάλυσης"
 
 #, fuzzy
-msgid "Back to image"
-msgstr "Πίσω στην κορυφή"
-
-#, fuzzy
 msgid "Edit revision"
 msgstr "Ναι, διαγραφή έκδοσης"
+
+#, fuzzy
+#| msgid "Change the license for this image"
+msgid "Change the thumbnails for this image"
+msgstr "Αλλαγή της άδειας χρήσης γι' αυτή την εικόνα"
+
+#, fuzzy
+msgid "Next step: edit watermark"
+msgstr "Επόμενο βήμα: υδατογράφημα"
 
 msgid "Apply a watermark to image"
 msgstr "Εφαρμογή υδατογραφήματος στην εικόνα"
@@ -4215,6 +3865,30 @@ msgstr "από τον/την <a href=\"%(the_url)s\">%(user)s</a>"
 msgid "Fit to window"
 msgstr "Περιορισμός στο παράθυρο"
 
+msgid "Abscissa "
+msgstr ""
+
+msgid "Ordinate"
+msgstr ""
+
+msgid "Ecliptic longitude"
+msgstr ""
+
+#, fuzzy
+#| msgid "Select latitude"
+msgid "Ecliptic latitude"
+msgstr "Επιλέξτε γεωγραφικό πλάτος"
+
+#, fuzzy
+#| msgid "Select latitude"
+msgid "Galactic longitude"
+msgstr "Επιλέξτε γεωγραφικό πλάτος"
+
+#, fuzzy
+#| msgid "Select latitude"
+msgid "Galactic latitude"
+msgstr "Επιλέξτε γεωγραφικό πλάτος"
+
 msgid "Remove"
 msgstr "Αφαίρεση"
 
@@ -4227,14 +3901,11 @@ msgstr "Δεν υπάρχει εξοπλισμός ακόμα"
 msgid "Add"
 msgstr "Προσθήκη"
 
-msgid "You have no messages."
-msgstr "Δεν έχετε μηνύματα."
-
-msgid "Show all messages"
-msgstr "Προβολή όλων των μηνυμάτων"
-
 msgid "No images"
 msgstr "Δεν υπάρχουν εικόνες"
+
+msgid "Only you can see this"
+msgstr ""
 
 msgid "Integration"
 msgstr "Ολοκλήρωση"
@@ -4249,6 +3920,9 @@ msgid "Views"
 msgstr "Προβολές"
 
 msgid "link"
+msgstr ""
+
+msgid "Comment of deleted image not shown."
 msgstr ""
 
 msgid "No results. Sorry."
@@ -4294,6 +3968,9 @@ msgstr ""
 "Εάν σε αυτή την τοποθεσία λείπουν δεδομένα ή αν έχει λάθος δεδομένα, "
 "παρακαλώ διορθώστε τα."
 
+msgid "What is this site?"
+msgstr "Τι είναι αυτός ο ιστότοπος;"
+
 msgid "Commercial information"
 msgstr "Εμπορικές πληροφορίες"
 
@@ -4302,6 +3979,11 @@ msgstr "Πληροφορίες εμπόρου"
 
 msgid "Blog"
 msgstr "Blog"
+
+#, fuzzy
+#| msgid "Terms of Service"
+msgid "Terms of servic"
+msgstr "Όροι χρήσης"
 
 msgid ""
 "AstroBin is Copyright &copy; 2010-2012 Salvatore Iovene, All Rights "
@@ -4352,9 +4034,6 @@ msgstr "Απάντηση"
 
 msgid "Sending..."
 msgstr "Γίνεται αποστολή..."
-
-msgid "Error. Try again!"
-msgstr "Σφάλμα. Προσπαθήστε ξανά!"
 
 msgid ""
 "Please click on the images that you want to mark as SPAM, then click on the "
@@ -4935,42 +4614,17 @@ msgstr ""
 
 #, fuzzy, python-format
 #| msgid ""
-#| "%(originator)s has published a new image! Check it out at the following "
-#| "url: %(object_url)s"
-msgid ""
-"%(originator)s has published a new image! Check it out at the following url: "
-"<a href=\"%(object_url)s\">%(object_url)s</a>"
-msgstr ""
-"Ο/Η %(originator)s ανέβασε μια νέα εικόνα! Δείτε την στο ακόλουθο url: "
-"%(object_url)s"
-
-#, python-format
-msgid ""
-"%(originator)s has published a new image! Check it out at the following url: "
-"%(object_url)s"
-msgstr ""
-"Ο/Η %(originator)s ανέβασε μια νέα εικόνα! Δείτε την στο ακόλουθο url: "
-"%(object_url)s"
-
-#, python-format
-msgid ""
-"<a href=\"%(object_url)s\"><strong>%(originator)s</strong> has published a "
-"new image.</a>"
-msgstr ""
-"Ο/Η <a href=\"%(object_url)s\"><strong>%(originator)s</strong> ανέβασε μια "
-"νέα εικόνα.</a>"
-
-#, python-format
-msgid ""
-"<a href=\"%(object_url)s\"><strong>%(originator)s</strong> has published a "
-"new image</a>"
+#| "<a href=\"%(object_url)s\"><strong>%(originator)s</strong> has published "
+#| "a new image</a>"
+msgid "<strong>%(user)s</strong> has published a new image"
 msgstr ""
 "Ο/Η <a href=\"%(object_url)s\"><strong>%(originator)s</strong> ανέβασε μια "
 "νέα εικόνα</a>"
 
-#, python-format
-msgid "New image by %(originator)s"
-msgstr "Νέα εικόνα από τον/την %(originator)s"
+#, fuzzy, python-format
+#| msgid "New image of %(subject)s"
+msgid "New image by %(user)s"
+msgstr "Νέα εικόνα του %(subject)s"
 
 #, fuzzy, python-format
 #| msgid ""
@@ -5144,200 +4798,6 @@ msgstr "Ειδοποιήσεις"
 #, fuzzy
 msgid "Notification Type"
 msgstr "Ειδοποιήσεις"
-
-#, fuzzy, python-format
-msgid ""
-"You are invited to the private shared folder: \"%(folder_name)s\".\n"
-"\n"
-"You can now contribute data and processed images to the folder. You can also "
-"invite more people.\n"
-"\n"
-"Visit the folder at the following url: <a href=\"%(folder_url)s\">"
-"%(folder_url)s</a>"
-msgstr ""
-"Έχετε μια πρόσκληση στον ιδιωτικό κοινόχρηστο φάκελο: \"%(folder_name)s\".\n"
-"\n"
-"Μπορείτε τώρα να συνεισφέρετε δεδομένα και επεξεργασμένες εικόνες σε αυτόν "
-"τον φάκελο. Μπορείτε επίσης να καλέσετε και άλλα άτομα.\n"
-"\n"
-"Επισκεφτείτε τον φάκελο στο ακόλουθο url: %(folder_url)s"
-
-#, fuzzy, python-format
-msgid ""
-"You are invited to the private shared folder: \"%(folder_name)s\".\n"
-"\n"
-"You can now contribute data and processed images to the folder. You can also "
-"invite more people.\n"
-"\n"
-"Visit the folder at the following url: %(folder_url)s"
-msgstr ""
-"Έχετε μια πρόσκληση στον ιδιωτικό κοινόχρηστο φάκελο: \"%(folder_name)s\".\n"
-"\n"
-"Μπορείτε τώρα να συνεισφέρετε δεδομένα και επεξεργασμένες εικόνες σε αυτόν "
-"τον φάκελο. Μπορείτε επίσης να καλέσετε και άλλα άτομα.\n"
-"\n"
-"Επισκεφτείτε τον φάκελο στο ακόλουθο url: %(folder_url)s"
-
-#, fuzzy, python-format
-msgid ""
-"<a href=\"%(folder_url)s\">You are invited to the private shared folder: "
-"<strong>\"%(folder_name)s.\"</strong></a>"
-msgstr ""
-"<a href=\"%(folder_url)s\">Είστε καλεσμένοι στον ακόλουθο ιδιωτικό "
-"κοινόχρηστο φάκελο: <strong>\"%(folder_name)s.\"</strong></a>"
-
-#, fuzzy, python-format
-msgid "You are invited to the private shared folder: %(folder_name)s"
-msgstr ""
-"Είστε καλεσμένοι στον ακόλουθο ιδιωτικό κοινόχρηστο φάκελο: %(folder_name)s"
-
-#, fuzzy, python-format
-#| msgid ""
-#| "%(user_name)s has added a new processed image to the private shared "
-#| "folder: \"%(folder_name)s\". Check it out at the following url: "
-#| "%(folder_url)s"
-msgid ""
-"%(user_name)s has added a new processed image to the private shared folder: "
-"\"%(folder_name)s\". Check it out at the following url: <a href="
-"\"%(folder_url)s\">%(folder_url)s</a>"
-msgstr ""
-"Ο/Η %(user_name)s έχει προσθέσει μια νέα επεξεργασμένη εικόνα στον ιδιωτικό "
-"κοινόχρηστο φάκελο: \"%(folder_name)s\". Δείτε την στο ακόλουθο url: "
-"%(folder_url)s"
-
-#, python-format
-msgid ""
-"%(user_name)s has added a new processed image to the private shared folder: "
-"\"%(folder_name)s\". Check it out at the following url: %(folder_url)s"
-msgstr ""
-"Ο/Η %(user_name)s έχει προσθέσει μια νέα επεξεργασμένη εικόνα στον ιδιωτικό "
-"κοινόχρηστο φάκελο: \"%(folder_name)s\". Δείτε την στο ακόλουθο url: "
-"%(folder_url)s"
-
-#, python-format
-msgid ""
-"<a href=\"%(folder_url)s\"><strong>%(user_name)s</strong> has added a new "
-"processed image to the private shared folder: <strong>\"%(folder_name)s.\"</"
-"strong></a>"
-msgstr ""
-"Ο/Η <a href=\"%(folder_url)s\"><strong>%(user_name)s</strong> έχει προσθέσει "
-"μια νέα επεξεργασμένη εικόνα στον ιδιωτικό κοινόχρηστο φάκελο: <strong>"
-"\"%(folder_name)s.\"</strong></a>"
-
-#, python-format
-msgid ""
-"<a href=\"%(folder_url)s\"><strong>%(user_name)s</strong> has added a new "
-"processed image to the private shared folder: <strong>\"%(folder_name)s.\"</"
-"a>"
-msgstr ""
-"<a href=\"%(folder_url)s\"><strong>%(user_name)s</strong> έχει προσθέσει μια "
-"νέα επεξεργασμένη εικόνα στον ιδιωτικό κοινόχρηστο φάκελο: <strong>"
-"\"%(folder_name)s.\"</a>"
-
-#, python-format
-msgid "New processed image in private shared folder: %(folder_name)s"
-msgstr ""
-"Νέα επεξεργασμένη εικόνα στον ιδιωτικό κοινόχρηστο φάκελο: %(folder_name)s"
-
-#, fuzzy, python-format
-#| msgid ""
-#| "%(user_name)s has added a new processed image to the public data pool: "
-#| "\"%(pool_name)s\". Check it out at the following url: %(pool_url)s"
-msgid ""
-"%(user_name)s has added a new processed image to the public data pool: "
-"\"%(pool_name)s\". Check it out at the following url: <a href=\"%(pool_url)s"
-"\">%(pool_url)s</a>"
-msgstr ""
-"Ο/Η %(user_name)s έχει προσθέσει μια νέα επεξεργασμένη εικόνα στην δημόσια "
-"περιοχή δεδομένων: \"%(pool_name)s\". Δείτε την στο ακόλουθο url: "
-"%(pool_url)s"
-
-#, python-format
-msgid ""
-"%(user_name)s has added a new processed image to the public data pool: "
-"\"%(pool_name)s\". Check it out at the following url: %(pool_url)s"
-msgstr ""
-"Ο/Η %(user_name)s έχει προσθέσει μια νέα επεξεργασμένη εικόνα στην δημόσια "
-"περιοχή δεδομένων: \"%(pool_name)s\". Δείτε την στο ακόλουθο url: "
-"%(pool_url)s"
-
-#, python-format
-msgid ""
-"<a href=\"%(pool_url)s\"><strong>%(user_name)s</strong> has added a new "
-"processed image to the public data pool: <strong>\"%(pool_name)s.\"</"
-"strong></a>"
-msgstr ""
-"Ο/Η <a href=\"%(pool_url)s\"><strong>%(user_name)s</strong> έχει προσθέσει "
-"μια νέα επεξεργασμένη εικόνα στην δημόσια περιοχή δεδομένων: <strong>"
-"\"%(pool_name)s.\"</strong></a>"
-
-#, python-format
-msgid "New processed image in public data pool: %(pool_name)s"
-msgstr "Νέα επεξεργασμένη εικόνα στην δημόσια περιοχή δεδομένων: %(pool_name)s"
-
-#, fuzzy, python-format
-#| msgid ""
-#| "%(user_name)s has added new data to the public pool: \"%(pool_name)s\". "
-#| "Check it out at the following url: %(pool_url)s"
-msgid ""
-"%(user_name)s has added new data to the public pool: \"%(pool_name)s\". "
-"Check it out at the following url: <a href=\"%(pool_url)s\">%(pool_url)s</a>"
-msgstr ""
-"Ο/Η %(user_name)s έχει προσθέσει νέα δεδομένα στην δημόσια περιοχή: "
-"\"%(pool_name)s\". Δείτε τα στο ακόλουθο url: %(pool_url)s"
-
-#, python-format
-msgid ""
-"%(user_name)s has added new data to the public pool: \"%(pool_name)s\". "
-"Check it out at the following url: %(pool_url)s"
-msgstr ""
-"Ο/Η %(user_name)s έχει προσθέσει νέα δεδομένα στην δημόσια περιοχή: "
-"\"%(pool_name)s\". Δείτε τα στο ακόλουθο url: %(pool_url)s"
-
-#, python-format
-msgid ""
-"<a href=\"%(pool_url)s\"><strong>%(user_name)s</strong> has added new data "
-"to the public pool: <strong>\"%(pool_name)s.\"</strong></a>"
-msgstr ""
-"Ο/Η <a href=\"%(pool_url)s\"><strong>%(user_name)s</strong> έχει προσθέσει "
-"νέα δεδομένα στην δημόσια περιοχή: <strong>\"%(pool_name)s.\"</strong></a>"
-
-#, python-format
-msgid "New data in public pool: %(pool_name)s"
-msgstr "Νέα δεδομένα στην κοινόχρηστη περιοχή: %(pool_name)s"
-
-#, fuzzy, python-format
-#| msgid ""
-#| "%(user_name)s has added new data to the private shared folder: "
-#| "\"%(folder_name)s\". Check it out at the following url: %(folder_url)s"
-msgid ""
-"%(user_name)s has added new data to the private shared folder: "
-"\"%(folder_name)s\". Check it out at the following url: <a href="
-"\"%(folder_url)s\">%(folder_url)s</a>"
-msgstr ""
-"Ο/Η %(user_name)s έχει προσθέσει νέα δεδομένα στον ιδιωτικό κοινόχρηστο "
-"φάκελο: \"%(folder_name)s\". Δείτε τα στο ακόλουθο url: %(folder_url)s"
-
-#, python-format
-msgid ""
-"%(user_name)s has added new data to the private shared folder: "
-"\"%(folder_name)s\". Check it out at the following url: %(folder_url)s"
-msgstr ""
-"Ο/Η %(user_name)s έχει προσθέσει νέα δεδομένα στον ιδιωτικό κοινόχρηστο "
-"φάκελο: \"%(folder_name)s\". Δείτε τα στο ακόλουθο url: %(folder_url)s"
-
-#, python-format
-msgid ""
-"<a href=\"%(folder_url)s\"><strong>%(user_name)s</strong> has added new data "
-"to the private shared folder: <strong>\"%(folder_name)s.\"</strong></a>"
-msgstr ""
-"Ο/Η <a href=\"%(folder_url)s\"><strong>%(user_name)s</strong> έχει προσθέσει "
-"νέα δεδομένα στον ιδιωτικό κοινόχρηστο φάκελο: <strong>\"%(folder_name)s.\"</"
-"strong></a>"
-
-#, python-format
-msgid "New data in private shared folder: %(folder_name)s"
-msgstr "Νέα δεδομένα στον ιδιωτικό κοινόχρηστο φάκελο: %(folder_name)s"
 
 #, fuzzy
 #| msgid ""
@@ -5612,19 +5072,6 @@ msgstr ""
 msgid "Account activation on"
 msgstr "Ενεργοποίηση λογαριασμού στις"
 
-#, fuzzy
-#| msgid "User"
-msgid "Username"
-msgstr "Χρήστης"
-
-msgid "Email"
-msgstr ""
-
-#, fuzzy
-#| msgid "Password changed"
-msgid "Password"
-msgstr "Ο κωδικός σας έχει αλλάξει"
-
 msgid "Reset password"
 msgstr "Επαναφορά κωδικού"
 
@@ -5679,10 +5126,13 @@ msgstr ""
 msgid "Register with AstroBin"
 msgstr "Εγγραφείτε στο AstroBin"
 
-#, python-format
+#, fuzzy
+#| msgid ""
+#| "By registering with AstroBin, you agree to our <a href=\"%(tos_url)s"
+#| "\">terms of service</a>."
 msgid ""
-"By registering with AstroBin, you agree to our <a href=\"%(tos_url)s\">terms "
-"of service</a>."
+"By registering with AstroBin, you agree to our <a href=\"https://welcome."
+"astrobin.com/terms-of-service\">terms of service</a>."
 msgstr ""
 "Με την εγγραφή σας στο AstroBin, συμφωνείτε με τους <a href=\"%(tos_url)s"
 "\">όρους χρήσης</a>."
@@ -5716,6 +5166,14 @@ msgstr "Ανάλυση pixel (pixel scale)"
 msgid "Small pixel scale"
 msgstr "Ανάλυση pixel (pixel scale)"
 
+#, fuzzy
+#| msgid ""
+#| "Search for astronomical objects, telescopes or lenses, cameras, filters..."
+msgid "Search for celestial objects, equipment items, users, etc..."
+msgstr ""
+"Αναζήτηση για αστρονομικά αντικείμενα, τηλεσκόπια ή φακούς, κάμερες, "
+"φίλτρα..."
+
 #, python-format
 msgid ""
 "<strong>%(total_users)s</strong> users uploaded <strong>%(total_images)s</"
@@ -5744,18 +5202,212 @@ msgstr "CCD εναντίον DLSR: η παγκόσμια τάση"
 msgid "Global trend of telescope types"
 msgstr "Παγκόσμια τάση τύπων τηλεσκοπίου"
 
-msgid "Here you can activate your free Raw Data Atom subscription."
+#, fuzzy
+#| msgid "About"
+msgctxt "approximately"
+msgid "about"
+msgstr "Σχετικά"
+
+msgid "View feature comparison"
 msgstr ""
 
 #, fuzzy
-msgid "Activate"
-msgstr "Ενεργό"
+#| msgid "Pixel size"
+msgid "Max size"
+msgstr "Μέγεθος πίξελ"
 
-msgid "Subscribe with a secure payment provided by PayPal:"
+#, fuzzy
+msgid "View full res"
+msgstr "Προβολή σελίδας"
+
+#, fuzzy
+#| msgid "View your images"
+msgid "View full image info"
+msgstr "Δείτε τις εικόνες σας"
+
+msgid "Basic"
 msgstr ""
 
-msgid "Buy with a secure payment provided by PayPal:"
+#, fuzzy
+#| msgid "Advanced search"
+msgid "Advanced"
+msgstr "Προχωρημένη αναζήτηση"
+
+#, fuzzy
+#| msgid "Commercial gear items"
+msgid "Social features"
+msgstr "Εμπορικά αντικείμενα εξοπλισμού"
+
+#, fuzzy
+#| msgid "Start plate-solving"
+msgid "Plate-solving"
+msgstr "Εκκίνηση ανάλυσης"
+
+#, fuzzy
+#| msgid "Public data pools"
+msgid "Bulk data export"
+msgstr "Δημόσιες περιοχές δεδομένων"
+
+msgid "Hide astronomy ads"
 msgstr ""
+
+msgid "No ads on your pages"
+msgstr ""
+
+msgid "Non-members/free users can view your images in full res"
+msgstr ""
+
+#, fuzzy
+#| msgid "Full resolution"
+msgid "Full size annotations"
+msgstr "Πλήρης ανάλυση"
+
+#, fuzzy
+#| msgid "Upload complete!"
+msgid "Upload uncompressed source"
+msgstr "Το ανέβασμα ολοκληρώθηκε!"
+
+#, fuzzy
+msgid "Undelete images"
+msgstr "Ανεβασμένες φωτογραφίες, ημερησίως"
+
+msgid "year"
+msgstr ""
+
+#, python-format
+msgid ""
+"\n"
+"                %(number)s images, max %(size)s each"
+msgstr ""
+
+#, fuzzy
+#| msgid "Higher resolution"
+msgid "View in original resolution"
+msgstr "Υψηλότερη ανάλυση"
+
+#, python-format
+msgid ""
+"Up to %(number)s\n"
+"            revisions/image"
+msgstr ""
+
+msgid "Create/join Groups"
+msgstr ""
+
+#, fuzzy
+#| msgid "Start plate-solving"
+msgid "Basic plate-solving"
+msgstr "Εκκίνηση ανάλυσης"
+
+msgid "IOTD / Top Picks"
+msgstr ""
+
+msgid "No ads for others on your pages"
+msgstr ""
+
+msgid "Full-size annotations"
+msgstr ""
+
+msgid "All future features"
+msgstr ""
+
+msgid "In the future"
+msgstr ""
+
+#, fuzzy
+#| msgid "Buy it here"
+msgid "Buy in the Marketplace"
+msgstr "Αγοράστε το εδώ"
+
+msgid "Vote in contests"
+msgstr ""
+
+msgid "Analytics"
+msgstr ""
+
+msgid "Bulk image editing"
+msgstr ""
+
+msgid "Pay securely with PayPal"
+msgstr ""
+
+msgid "Want to upgrade from a lower subscription tier?"
+msgstr ""
+
+#, python-format
+msgid ""
+"AstroBin doesn't support subscription upgrades at the moment, but we're "
+"happy to make it happen manually. If you're on a lower subscription tier and "
+"would like to upgrade to <strong>%(name)s</strong>, please just buy it and "
+"then contact us at <a href=\"mailto:astrobin@astrobin.com"
+"\">astrobin@astrobin.com</a> to get a refund for the unused time on your old "
+"subscription. Thanks!"
+msgstr ""
+
+msgid "Pay with a bank transfer"
+msgstr ""
+
+#, python-format
+msgid ""
+"\n"
+"                Prefer to pay via bank transfer? Please make a deposit of "
+"%(currency)s %(amount)s to the following\n"
+"                bank details and then email us at %(email_prefix)s%(email)s"
+"%(email_postfix)s with your username so\n"
+"                we may upgrade your account manually. Thanks!\n"
+"            "
+msgstr ""
+
+#, python-format
+msgid ""
+"\n"
+"                ∞ images, max %(size)s each"
+msgstr ""
+
+#, fuzzy
+#| msgid "Basic information"
+msgid "Basic analytics"
+msgstr "Βασικές πληροφορίες"
+
+msgid "Buy"
+msgstr ""
+
+#, fuzzy
+#| msgid "You have already nominated this image"
+msgid "You are already on this plan"
+msgstr "Έχετε ήδη προτείνει αυτή την εικόνα"
+
+#, fuzzy
+#| msgid "Image size"
+msgid "∞ images, ∞ size"
+msgstr "Μέγεθος εικόνας"
+
+msgid "View full res (incl. visitors)"
+msgstr ""
+
+#, fuzzy
+msgid "Full search"
+msgstr "Μέγεθος πίξελ"
+
+#, fuzzy
+msgid "Unlimited revisions"
+msgstr "Ναι, διαγραφή έκδοσης"
+
+#, fuzzy
+#| msgid "Start plate-solving"
+msgid "Advanced plate-solving"
+msgstr "Εκκίνηση ανάλυσης"
+
+msgid "Sell in the Marketplace"
+msgstr ""
+
+msgid "Vote/enter contests"
+msgstr ""
+
+#, fuzzy
+#| msgid "Advanced search"
+msgid "Advanced analytics"
+msgstr "Προχωρημένη αναζήτηση"
 
 msgid "Subscription process canceled"
 msgstr ""
@@ -5802,9 +5454,6 @@ msgstr ""
 msgid "month"
 msgstr "Μηνιαίως"
 
-msgid "year"
-msgstr ""
-
 #, fuzzy
 #| msgid "Viewed one time"
 #| msgid_plural "Viewed %(counter)s times"
@@ -5847,17 +5496,6 @@ msgstr ""
 msgid "No trial"
 msgstr ""
 
-#, python-format
-msgid "%(max_allowed)s images per year "
-msgstr ""
-
-#, fuzzy
-msgid "Unlimited images"
-msgstr "Ανεβασμένες φωτογραφίες, ημερησίως"
-
-msgid "Buy"
-msgstr ""
-
 msgid "Switch to"
 msgstr ""
 
@@ -5885,9 +5523,6 @@ msgstr ""
 msgid "Invalid"
 msgstr ""
 
-msgid "Expired"
-msgstr ""
-
 #, fuzzy
 msgid "Cancelled"
 msgstr "Άκυρο"
@@ -5900,85 +5535,15 @@ msgstr ""
 
 #, python-format
 msgid ""
-"Auto-renewing subscriptions are not offered anymore on AstroBin. Please "
-"visit the <a href=\"%(url)s\">subscriptions page</a> to see the available "
-"plans, thanks!"
-msgstr ""
-
-#, python-format
-msgid ""
-"\n"
-"                You can use AstroBin for free up to %(max_allowed)s images. "
-"After\n"
-"                that you can upgrade to <strong>Lite</strong> if you have a "
-"limited\n"
-"                yearly output, or <strong>Premium</strong> for a limitless\n"
-"                experience.  Paying members will not see ads, and "
-"everybody,\n"
-"                including non-paying members, have access to all social "
-"features of\n"
-"                AstroBin.\n"
-"                "
-msgstr ""
-
-#, python-format
-msgid ""
-"\n"
-"                As a user of <strong>AstroBin Free</strong>, you may have up "
-"to\n"
-"                %(max_allowed)s images at the same time. You can delete some "
-"images\n"
-"                to make room for new ones, if you want. For instance you "
-"can\n"
-"                maintain a window of your latest %(max_allowed)s images, or "
-"your\n"
-"                best ones.\n"
-"                "
-msgstr ""
-
-#, python-format
-msgid ""
-"\n"
-"                As a user of <strong>AstroBin Lite</strong>, instead, you "
-"may have\n"
-"                up to %(max_allowed)s images at the same time, per each year "
-"of\n"
-"                your membership. You may replace images uploaded within the "
-"current\n"
-"                subsciption period while images uploaded prior to that can "
-"only be\n"
-"                deleted. Every year that you renew your membership, you get\n"
-"                %(max_allowed)s new image credits.\n"
-"                "
+"This subscription is not offered anymore on AstroBin. Please visit the <a "
+"href=\"%(url)s\">subscriptions page</a> to see the available plans, thanks!"
 msgstr ""
 
 msgid ""
-"\n"
-"                As a user of <strong>AstroBin Premium</strong>, instead, "
-"there are\n"
-"                no limitations whatsoever in the number of images you can "
-"upload.\n"
-"                "
+"If you would like to renew your subscription, please visit this page again "
+"after\n"
+"                        your current subscription's expiration date:"
 msgstr ""
-
-msgid ""
-"<strong>AstroBin Raw Data</strong> allows you to store your raw files "
-"(<strong>FIT</strong> and <strong>digital camera raw</strong>) on AstroBin. "
-"We will keep them neatly organized, and you will have a safe backup of all "
-"your work, including calibration files."
-msgstr ""
-
-#, python-format
-msgid ""
-"Learn more by reading <a href=\"%(rawdata_url)s\">a short introduction.</a>"
-msgstr ""
-
-msgid "Here you can deactivate your free Raw Data Atom subscription."
-msgstr ""
-
-#, fuzzy
-msgid "Deactivate"
-msgstr "Ενεργό"
 
 msgid ""
 "Your subscription is either cancelled or not active yet. If you want to "
@@ -6008,10 +5573,6 @@ msgid "You cannot switch to this plan."
 msgstr "Δεν έχετε πρόσβαση σε αυτή τη σελίδα."
 
 #, fuzzy
-msgid "Thank you for supporting AstroBin!"
-msgstr "Οι ακόλουθες εταιρίες υποστηρίζουν το AstroBin."
-
-#, fuzzy
 msgid "Back to the plans"
 msgstr "Πίσω στην κορυφή"
 
@@ -6023,6 +5584,10 @@ msgid ""
 "from PayPal. Your subscription should be active within a few minutes!"
 msgstr ""
 
+#, fuzzy
+msgid "Thank you for supporting AstroBin!"
+msgstr "Οι ακόλουθες εταιρίες υποστηρίζουν το AstroBin."
+
 msgid "Your active subscription plans"
 msgstr ""
 
@@ -6030,118 +5595,10 @@ msgstr ""
 msgid "Your inactive subscription plans"
 msgstr "Ανεπεξέργαστα Δεδομένα του AstroBin"
 
-msgid "Limited offer for you!"
-msgstr ""
-
-msgid ""
-"For a limited time, you are personally offered AstroBin Premium for one "
-"year, at\n"
-"                            a sizeable discount. Don't miss this opportunity!"
-msgstr ""
-
-#, fuzzy
-msgid "AstroBin Premium subscription plans"
-msgstr "Ερωτήσεις του AstroBin"
-
-#, python-format
-msgid ""
-"\n"
-"                    You can use AstroBin for free up to %(max_allowed)s "
-"images. After\n"
-"                    that you can upgrade to <strong>Lite</strong> if you "
-"have a limited\n"
-"                    yearly output, or <strong>Premium</strong> for a "
-"limitless\n"
-"                    experience.  Paying members will not see ads, and "
-"everybody,\n"
-"                    including non-paying members, have access to all social "
-"features of\n"
-"                    AstroBin.\n"
-"                    "
-msgstr ""
-
-#, python-format
-msgid ""
-"\n"
-"                    As a user of <strong>AstroBin Free</strong>, you may "
-"have up to\n"
-"                    %(max_allowed)s images at the same time. You can delete "
-"some images\n"
-"                    to make room for new ones, if you want. For instance you "
-"can\n"
-"                    maintain a window of your latest %(max_allowed)s images, "
-"or your\n"
-"                    best ones.\n"
-"                    "
-msgstr ""
-
-#, python-format
-msgid ""
-"\n"
-"                    As a user of <strong>AstroBin Lite</strong>, instead, "
-"you may have\n"
-"                    up to %(max_allowed)s images at the same time, per each "
-"year of\n"
-"                    your membership. You may replace images uploaded within "
-"the current\n"
-"                    subsciption period while images uploaded prior to that "
-"can only be\n"
-"                    deleted. Every year that you renew your membership, you "
-"get\n"
-"                    %(max_allowed)s new image credits.\n"
-"                    "
-msgstr ""
-
-msgid ""
-"\n"
-"                    As a user of <strong>AstroBin Premium</strong>, instead, "
-"there are\n"
-"                    no limitations whatsoever in the number of images you "
-"can upload.\n"
-"                    "
-msgstr ""
-
-#, fuzzy
-msgid "AstroBin Raw Data subscription plans"
-msgstr "Ανεπεξέργαστα Δεδομένα του AstroBin"
-
-msgid "Here's a short description of each plan:"
-msgstr ""
-
-msgid ""
-"This plan is free! Choose it to share a small amount of data with other "
-"users."
-msgstr ""
-
-msgid ""
-" Choose this plan if you want to keep your expenses to a minimum, but still "
-"want the possibity to share your FIT and digital camera raw files with your "
-"friends. You can also participate to public data pools and contribute to the "
-"deepest deep sky images ever created, and you will always know that you "
-"support AstroBin."
-msgstr ""
-
-msgid ""
-"Choose this plan if you have started out in the recent year or two, or you "
-"don't want to share and backup your calibration files. Enjoy a lot of room "
-"for a convenient price."
-msgstr ""
-
-msgid ""
-"Choose this plan if you have several years worth of data. You will probably "
-"have enough room for all your calibration files, and will enjoy the full "
-"potential of the platform."
-msgstr ""
-
-msgid ""
-"Choose this plan if you have a massive amount of raw data that you want to "
-"share and backup securely online."
-msgstr ""
-
 #, fuzzy
 msgid ""
-"PS: are you interested in larger plans? <a href=\"/contact/\">Let us know!</"
-"a>"
+"PS: are you interested in larger plans?\n"
+"                <a href=\"/contact/\">Let us know!</a>"
 msgstr ""
 "Έχετε μια απορία που δεν καλύπτετε εδώ; Παρακαλώ <a href=\"/contact/"
 "\">επικοινωνήστε μαζί μας</a>!"
@@ -6154,13 +5611,6 @@ msgstr ""
 
 msgid "This list is currently empty."
 msgstr ""
-
-msgid ""
-"The following Terms are only available in English. It is your responsibility "
-"to comprehend them."
-msgstr ""
-"Οι παρακάτω Όροι είναι διαθέσιμοι μόνο στα Αγγλικά. Είναι ευθύνη σας να τους "
-"κατανοήσετε."
 
 #, fuzzy
 msgid "Last 6 months"
@@ -6197,17 +5647,14 @@ msgid ""
 "<strong>%(max_allowed)s</strong>."
 msgstr ""
 
-msgid "Would you like to upgrade?"
-msgstr ""
-
-#, python-format
 msgid ""
-"You have used <strong>%(premium_counter)s</strong> images of your allowed "
-"<strong>%(max_allowed)s</strong> for the current subscription period."
+"Thank you for being a premium member! Enjoy your unlimited images.\n"
+"                        "
 msgstr ""
 
-msgid "Thank you for being a premium member! Enjoy your unlimited images."
-msgstr ""
+#, fuzzy
+msgid "Would you like to upgrade to a higher plan?"
+msgstr "Θα θέλατε να χρησιμοποιήστε το πραγματικό σας όνομα στο AstroBin;"
 
 msgid "Upload as a work in progress"
 msgstr "Ανέβασμα σαν εργασία σε εξέλιξη"
@@ -6215,11 +5662,19 @@ msgstr "Ανέβασμα σαν εργασία σε εξέλιξη"
 msgid "Uploading..."
 msgstr "Γίνεται ανέβασμα..."
 
-#, python-format
+#, fuzzy
+#| msgid ""
+#| "Use this button to upload an image to the <strong>Staging Area</strong>. "
+#| "It's perfect for works in progress that you want to share on Internet "
+#| "forums. Read more in the <a href=\"%(faq_url)s#6\">FAQ</a>."
 msgid ""
-"Use this button to upload an image to the <strong>Staging Area</strong>. "
-"It's perfect for works in progress that you want to share on Internet "
-"forums. Read more in the <a href=\"%(faq_url)s#6\">FAQ</a>."
+"Use this button to upload an image to the\n"
+"                                        <strong>Staging Area</strong>. It's "
+"perfect for works in progress that you want\n"
+"                                        to share on Internet forums. Read "
+"more in the\n"
+"                                        <a href=\"https://welcome.astrobin."
+"com/faq\">FAQ</a>."
 msgstr ""
 "Χρησιμοποιήστε αυτό το κουμπί για να ανεβάσετε μια εικόνα στην "
 "<strong>Περιοχή Επεξεργασίας</strong>. Είναι ιδανική για εργασίες σε εξέλιξη "
@@ -6229,100 +5684,28 @@ msgstr ""
 msgid "Upload as a finished image"
 msgstr "Ανέβασμα σαν ολοκληρωμένη εικόνα"
 
-#, python-format
+msgid "Do not notify followers"
+msgstr ""
+
+#, fuzzy, python-format
+#| msgid ""
+#| "Use this button to upload an image to the <strong>Public Area</strong>. "
+#| "It will be displayed in <a href=\"%(profile_url)s\">your profile</a> and "
+#| "here on the home page. You can <a href=\"%(flickr_url)s\">import from "
+#| "Flickr</a> too."
 msgid ""
-"Use this button to upload an image to the <strong>Public Area</strong>. It "
-"will be displayed in <a href=\"%(profile_url)s\">your profile</a> and here "
-"on the home page. You can <a href=\"%(flickr_url)s\">import from Flickr</a> "
-"too."
+"Use this button to upload an image to the\n"
+"                                        <strong>Public Area</strong>. It "
+"will be displayed in\n"
+"                                        <a href=\"%(profile_url)s\">your "
+"profile</a> and here on the home page. You can\n"
+"                                        <a href=\"%(flickr_url)s\">import "
+"from Flickr</a> too."
 msgstr ""
 "Χρησιμοποιείστε αυτό το κουμπί για να ανεβάσετε μια εικόνα στην "
 "<strong>Περιοχή Προβολής</strong>. Θα εμφανιστεί στο <a href="
 "\"%(profile_url)s\">προφίλ σας</a> καθώς και στην αρχική σελίδα. Επίσης "
 "μπορείτε να <a href=\"%(flickr_url)s\">εισάγετε από το Flickr</a>."
-
-#, fuzzy
-msgid "Raw data upload"
-msgstr "Βιβλιοθήκη ανεπεξέργαστων δεδομένων"
-
-msgid ""
-"You have no more space left on your Raw Data account. Please delete some "
-"files to make room, or upgrade your account."
-msgstr ""
-"Δεν έχετε άλλο διαθέσιμο χώρο στον λογαριασμό των Ανεπεξέργαστων Δεδομένων. "
-"Παρακαλώ διαγράψτε μερικά αρχεία για να κάνετε χώρο, ή αναβαθμίστε τον "
-"λογαριασμό σας."
-
-msgid "Use the button below to choose files"
-msgstr "Χρησιμοποιήστε το παρακάτω κουμπί για να διαλέξετε αρχεία"
-
-msgid "Drop your raw data here"
-msgstr "Τοποθετήστε τα ανεπεξέργαστα δεδομένα σας εδώ"
-
-msgid "Accepted file types: FIT and digital camera raw files"
-msgstr "Αποδεκτοί τύποι αρχείων: FIT και αρχεία raw ψηφιακών καμερών"
-
-msgid "Filename"
-msgstr "Όνομα αρχείου"
-
-msgid "Choose files"
-msgstr "Επιλέξτε αρχεία"
-
-msgid "Reset"
-msgstr "Επαναφορά"
-
-msgid "Start upload"
-msgstr "Εκκίνηση ανεβάσματος"
-
-msgid "Go to your Raw Data Library."
-msgstr "Μετάβαση την Βιβλιοθήκη Ανεπεξέργαστων Δεδομένων"
-
-msgid ""
-"Your Raw Data subscription is not active, or it has expired. If you have "
-"just subscribed, please wait for a few minutes. Thanks for your patience!"
-msgstr ""
-"Η συνδρομή σας στα Ανεπεξέργαστα Δεδομένα δεν είναι ενεργοποιημένη. Αν μόλις "
-"τώρα γίνατε μέλος, παρακαλώ περιμένετε μερικά λεπτά. Σας ευχαριστούμε για "
-"την υπομονή σας!"
-
-#, python-format
-msgid "Go to the Raw Data <a href=\"%(plans_url)s\">plans page</a>."
-msgstr ""
-"Μετάβαση στη <a href=\"%(plans_url)s\">σελίδα πλάνων</a> των Ανεπεξέργαστων "
-"Δεδομένων"
-
-msgid ""
-"Did you know that AstroBin can host your FIT and digital camera raw files "
-"too?"
-msgstr ""
-"Γνωρίζατε ότι το AstroBin μπορεί να φιλοξενήσει τα αρχεία FIT όπως και τα "
-"raw αρχεία από τις ψηφιακές κάμερες;"
-
-#, python-format
-msgid ""
-"Have a look at <a href=\"%(rawdata_url)s\">AstroBin Raw Data</a> if you want "
-"to safely store all your raw files, and have them neatily organized for "
-"future reference!"
-msgstr ""
-"Ρίξτε μια ματιά στα <a href=\"%(rawdata_url)s\">Ανεπεξέργαστα Δεδομένα του "
-"AstroBin</a> αν θέλετε να αποθηκεύσετε με ασφάλεια όλα τα ανεπεξέργαστα "
-"δεδομένα σας, και να τα έχετε τακτοποιημένα για μελλοντική αναφορά!"
-
-msgid "Raw files"
-msgstr "Ανεπεξέργαστα αρχεία"
-
-msgid "Upload started, please wait..."
-msgstr "Το ανέβασμα ξεκίνησε, παρακαλώ περιμένετε..."
-
-msgid ""
-"One ore more files were ignored because they did not look like FIT or "
-"digital camera raw files."
-msgstr ""
-"Ένα ή περισσότερα αρχεία παραβλέφθηκαν επειδή δεν έμοιαζαν να είναι FIT ή "
-"raw αρχεία από ψηφιακή κάμερα."
-
-msgid "Upload complete!"
-msgstr "Το ανέβασμα ολοκληρώθηκε!"
 
 msgid "Your API Keys"
 msgstr "Τα API Κλειδιά σας"
@@ -6359,10 +5742,6 @@ msgstr ""
 
 msgid "The user was banned."
 msgstr ""
-
-#, fuzzy
-msgid "Thank you!"
-msgstr "Ευχαριστίες"
 
 #, python-format
 msgid "%(user)s's bookmarks"
@@ -6430,6 +5809,50 @@ msgstr ""
 "Αυτές είναι οι εικόνες σας που είναι \"δουλειά σε εξέλιξη\": μόνο εσείς "
 "μπορείτε να δείτε αυτή την λίστα. μπορείτε να δείξετε σε άτομα μεμονωμένες "
 "εικόνες χρησιμοποιώντας το μενού <em>Κοινοποίηση</em> ."
+
+msgid ""
+"These are your \"deleted\" images: only you can see this list. Click the "
+"images you want to\n"
+"            restore, and then use the button below to confirm."
+msgstr ""
+
+#, python-format
+msgid ""
+"\n"
+"                    We are very, very sorry, but it appears that some of "
+"your images suffered a catastrophic data\n"
+"                    corruption, and cannot be retrieved. Please read more <a "
+"href=\"%(data_corruption_url)s\">here</a>.\n"
+"                "
+msgstr ""
+
+msgid ""
+"\n"
+"                    Please click on the thumbnails stuck with the hourglass "
+"icon to upload the image files that you\n"
+"                    still have on your computer or backups to their pages "
+"again.\n"
+"                "
+msgstr ""
+
+msgid ""
+"\n"
+"                    The data associated to your affected images, such as "
+"title, description, equipment used, acquisition\n"
+"                    details, comments, likes, bookmarks, and so on, is still "
+"intact and safe.\n"
+"                "
+msgstr ""
+
+msgid ""
+"\n"
+"                    AstroBin would like to offer you its sincerest "
+"apologies. :(\n"
+"                "
+msgstr ""
+
+msgid "Okay, don't show this again"
+msgstr ""
 
 msgid "These images don't have enough data. It's a shame..."
 msgstr "Αυτές οι εικόνες δεν έχουν αρκετά δεδομένα. Είναι κρίμα..."
@@ -6518,9 +5941,6 @@ msgstr ""
 "Όλες οι ιδιότητες αυτής της διεκδίκησης θα διαγραφούν και δεν θα μπορούν να "
 "επανέλθουν!"
 
-msgid "Please wait..."
-msgstr "Παρακαλώ περιμένετε..."
-
 #, fuzzy
 msgid "Delete account"
 msgstr "Διαγραφή συζήτησης"
@@ -6539,6 +5959,55 @@ msgstr "Επεξεργασία των βασικών σας πληροφοριώ
 
 msgid "Edit your commercial information"
 msgstr "Επεξεργαστία των εμπορικών σας πληροφοριών"
+
+#, fuzzy
+#| msgid "Uploaded"
+msgid "Download your data"
+msgstr "Ανέβηκε"
+
+msgid ""
+"You can download all your data off AstroBin, including original uploads, all "
+"revisions, and information such as description, gear used, acquisition "
+"details, and so on."
+msgstr ""
+
+#, fuzzy
+#| msgid "Request from"
+msgid "Request download"
+msgstr "Ζητήστε από"
+
+#, fuzzy
+#| msgid "You have no requests."
+msgid "Your past requests"
+msgstr "Δεν έχετε αιτήσεις."
+
+#, fuzzy
+#| msgid "Request critique"
+msgid "Request time"
+msgstr "Ζητήστε κριτική"
+
+#, fuzzy
+msgid "File size"
+msgstr "Μέγεθος πίξελ"
+
+msgid "There doesn't seem to be anything here."
+msgstr ""
+
+msgid "Quota exceeded"
+msgstr ""
+
+msgid ""
+"To prevent excessive usage of server resources, you can only request one "
+"data download per 24 hour period. If you believe your download is stuck, "
+"please email us at <a href=\"mailto:astrobin@astrobin.com"
+"\">astrobin@astrobin.com</a>."
+msgstr ""
+
+msgid ""
+"Please keep in mind that it could take several hours for your download to be "
+"ready, depending on the number and size of your images, and how busy the "
+"servers are at the moment."
+msgstr ""
 
 msgid "Edit your astrophotography gear"
 msgstr "Επεξεργαστία του εξοπλισμού αστροφωτογράφησής σας"
@@ -6639,7 +6108,12 @@ msgstr ""
 "Δυστυχώς πρέπει να ενεργοποιήσετε τις εντολές Javascript για να μπορέσετε να "
 "εισάγετε φωτογραφίες από το Flickr."
 
-msgid "Sorry, but importing from Flickr is reserved to AstroBin Premium users."
+msgid ""
+"Sorry, but importing from Flickr is reserved to AstroBin Premium and "
+"Ultimate users."
+msgstr ""
+
+msgid "Would you like to upgrade?"
 msgstr ""
 
 msgid "Click to select the photos you want to import"
@@ -6660,18 +6134,6 @@ msgstr "Γίνεται εισαγωγή εικόνων"
 msgid "Do not navigate away from this window: this might take a while!"
 msgstr ""
 "Μην φύγετε από αυτό το παράθυρο: Η διαδικασία μπορεί να διαρκέσει λίγη ώρα!"
-
-#, fuzzy
-#| msgid ""
-#| "Done! Go to <a href=\\\"/me\\\">your profile</a> to see the new pictures "
-#| "(and keep an eye on your notifications)!"
-msgid ""
-"Done! Go to <a href=\\\"/users/\" + username + \"/?staging&sub=uploaded\\"
-"\">your staging gallery</a> to see the new pictures (and keep an eye on your "
-"notifications)!"
-msgstr ""
-"Ολοκληρώθηκε! Πηγαίνετε στο <a href=\\\"/me\\>προφίλ σας</a> για να δείτε "
-"τις νέες εικόνες (και να δείτε τις ειδοποιήσεις σας)!"
 
 #, fuzzy
 msgid "Subscription"
@@ -6695,6 +6157,12 @@ msgstr "Περιοχή Προβολής"
 msgid "Staging Area"
 msgstr "Περιοχή Επεξεργασίας"
 
+msgid "Corrupted"
+msgstr ""
+
+msgid "Trash"
+msgstr ""
+
 #, fuzzy
 #| msgid "Find images"
 msgid "Liked images"
@@ -6712,6 +6180,18 @@ msgstr ""
 #, fuzzy
 msgid "Add/remove images"
 msgstr "Μερικές εικόνες"
+
+#, fuzzy
+#| msgid "Quick search"
+msgid "Quick edit"
+msgstr "Γρήγορη αναζήτηση"
+
+msgid "Key/value pairs"
+msgstr ""
+
+#, fuzzy
+msgid "Restore selected"
+msgstr "# έχουν επιλεχθεί"
 
 msgid ""
 "Click on the images to include them in this collection (and click again to "
@@ -6732,6 +6212,11 @@ msgid ""
 msgstr ""
 "Αυτή η εικόνα θα διαγραφεί μόνιμα και δεν θα μπορεί να ανακτηθεί. Οι "
 "εκδόσεις της δεν θα διαγραφούν. Είστε σίγουροι;"
+
+msgid ""
+"The following images do not have the key/value tag chosen to order this "
+"collection, so they are shown as unsorted here."
+msgstr ""
 
 msgid "This collection contains no images."
 msgstr ""
@@ -6755,6 +6240,9 @@ msgid "Do you want to create a collection now?"
 msgstr ""
 
 msgid "This user does not have any collections."
+msgstr ""
+
+msgid "Quick edit: key/value tags"
 msgstr ""
 
 #, fuzzy
@@ -6824,6 +6312,12 @@ msgstr "arcsec/pixel"
 
 msgid "Telescope type"
 msgstr "Τύπος τηλεσκοπίου"
+
+#, python-format
+msgid ""
+"Sorry, this filter requires an <a href=\"%(url)s\">AstroBin Ultimate</a> "
+"subscription."
+msgstr ""
 
 #, fuzzy
 #| msgid "Select all"
@@ -6991,6 +6485,9 @@ msgstr "Κατοδιοπτρικό: Schmidt-Cassegrain"
 msgid "ACF Schmidt-Cassegrain"
 msgstr "Κατοδιοπτρικό: ACF Schmidt-Cassegrain"
 
+msgid "Rowe-Ackermann Schmidt astrograph"
+msgstr ""
+
 msgid "minutes"
 msgstr "λεπτά"
 
@@ -7021,20 +6518,16 @@ msgstr ""
 "αναλύση χρώματος στα 256 για να μπορέσει να το επεξεργαστεί."
 
 msgid ""
-"You uploaded a pretty large file. For that reason, AstroBin could not verify "
-"that it's a valid image."
-msgstr ""
-
-msgid ""
 "There was one or more errors processing the form. You may need to scroll "
 "down to see them."
 msgstr ""
 "Υπήρξε ένα ή περισσότερα σφάλματα στην επεξεργασία της φόρμας. Μπορεί να "
 "χρειαστεί να κατεβείτε πιο κάτω στην σελίδα για να τα δείτε."
 
-msgid ""
-"Form saved. A new plate-solving process will start when you visit your image "
-"again."
+msgid "Form saved. A new plate-solving process will start now."
+msgstr ""
+
+msgid "Form saved. A new advanced plate-solving process will start now."
 msgstr ""
 
 msgid "Fill in one session, before adding more."
@@ -7083,6 +6576,10 @@ msgstr ""
 #, fuzzy
 msgid "Collection updated!"
 msgstr "Τοποθεσίες"
+
+#, fuzzy
+msgid "Images updated!"
+msgstr "Μέγεθος εικόνας"
 
 #, fuzzy
 msgid "Collection deleted!"
@@ -7148,9 +6645,6 @@ msgstr "Μέση φάση Σελήνης"
 msgid "Mean SQM"
 msgstr "Μέσο SQM"
 
-msgid "Resolution"
-msgstr "Ανάλυση"
-
 msgid "English"
 msgstr "Αγγλικά"
 
@@ -7158,6 +6652,10 @@ msgid "Image deleted."
 msgstr "Η εικόνα διαγράφηκε"
 
 msgid "Revision deleted."
+msgstr "Η αναθεώρηση διαγράφτηκε."
+
+#, fuzzy
+msgid "Original version deleted!"
 msgstr "Η αναθεώρηση διαγράφτηκε."
 
 #, fuzzy
@@ -7171,6 +6669,1035 @@ msgstr "Προώθηση στην περιοχή προβολής"
 #, python-format
 msgid "%s topics deleted"
 msgstr ""
+
+msgid ""
+"AstroBin is preparing your data for download. Please check this page again "
+"in a while: the more images you have, the more time it will take."
+msgstr ""
+
+#~ msgid "created a new public data pool"
+#~ msgstr "δημιουργήθηκε νέα δημόσια περιοχή δεδομένων"
+
+#~ msgid "added new data to public data pool"
+#~ msgstr "προστέθηκαν νέα δεδομένα στην δημόσια περιοχή δεδομένων"
+
+#~ msgid "added a new processed image to public data pool"
+#~ msgstr "προστέθηκε νέα επεξεργασμένη εικόνα στην δημόσια περιοχή δεδομένων"
+
+#~ msgid "Affiliates"
+#~ msgstr "Συνεργάτες"
+
+#~ msgid "The following companies support AstroBin."
+#~ msgstr "Οι ακόλουθες εταιρίες υποστηρίζουν το AstroBin."
+
+#~ msgid "AstroBin Raw Data"
+#~ msgstr "Ανεπεξέργαστα Δεδομένα του AstroBin"
+
+#, fuzzy
+#~ msgid "Raw data"
+#~ msgstr "Βιβλιοθήκη ανεπεξέργαστων δεδομένων"
+
+#~ msgid "Raw data library"
+#~ msgstr "Βιβλιοθήκη ανεπεξέργαστων δεδομένων"
+
+#~ msgid "Private shared folders"
+#~ msgstr "Ιδιωτικοί κοινόχρηστοι φάκελοι"
+
+#~ msgid "Frequently Asked Questions"
+#~ msgstr "Συχνές Ερωτήσεις"
+
+#~ msgid "Is this website for free?"
+#~ msgstr "Είναι δωρεάν αυτός ο ιστότοπος;"
+
+#~ msgid "Are there any limits on how large and how many images I can upload?"
+#~ msgstr "Υπάρχουν όρια στο πόσο μεγάλα και πόσα αρχεία μπορώ να ανεβάσω;"
+
+#~ msgid "What image formats are supported?"
+#~ msgstr "Τι είδους αρχεία εικόνων υποστηρίζονται;"
+
+#~ msgid "Is my data safe on AstroBin?"
+#~ msgstr "Είναι τα δεδομένα μου ασφαλή στο AstroBin;"
+
+#~ msgid ""
+#~ "I've seen beautiful images on this site. I'm not worthy of posting mine!"
+#~ msgstr ""
+#~ "Έχω δει όμορφες εικόνες σε αυτόν τον ιστότοπο. Δεν είμαι άξιος να ποστάρω "
+#~ "τις δικές μου!"
+
+#~ msgid "What's the deal with the Staging Area and the Public Area?"
+#~ msgstr "Τι είναι η Περιοχή Επεξεργασίας και η Περιοχή Προβολής;"
+
+#~ msgid "Why was AstroBin created?"
+#~ msgstr "Γιατί δημιουργήθηκε το AstroBin;"
+
+#~ msgid "What are the plans for the future?"
+#~ msgstr "Ποια είναι τα μελλοντικά σχέδια;"
+
+#~ msgid "How can I format my comments?"
+#~ msgstr "Πώς μπορώ να μορφοποιήσω τα σχόλια μου;"
+
+#~ msgid "How is the AstroBin index calculated?"
+#~ msgstr "Πως υπολογίζεται ο δείκτης του AstroBin;"
+
+#~ msgid "I received some Likes, why is my AstroBin index not updated?"
+#~ msgstr ""
+#~ "Έλαβα μερικές προτιμήσεις, γιατί δεν ενημερώθηκε ο δείκτης μου του "
+#~ "AstroBin;"
+
+#~ msgid "How is the Image of the Day selected?"
+#~ msgstr "Πως γίνεται επιλογή της Εικόνας της Ημέρας;"
+
+#~ msgid "... and their answers!"
+#~ msgstr "... και οι απαντήσεις τους!"
+
+#, fuzzy
+#~ msgid ""
+#~ "<strong>NO!</strong> If you are a premium member, on AstroBin you can "
+#~ "upload as many images as you want, and as large as you want. In fact, "
+#~ "full size images are encouraged!"
+#~ msgstr ""
+#~ "<strong>ΌΧΙ!</strong> Στο AstroBin μπορείτε να ανεβάσετε όσες εικόνες "
+#~ "θέλετε και όσο μεγάλες θέλετε. Στην πραγματικότητα είναι προτιμότερο να "
+#~ "υπάρχουν εικόνες πλήρους μεγέθους!"
+
+#~ msgid ""
+#~ "AstroBin will accept JPEG, PNG and GIF. Animated GIF is supported too."
+#~ msgstr ""
+#~ "Το AstroBin δέχεται JPEG, PNG and GIF. Επίσης υποστηρίζονται και "
+#~ "κινούμενα GIF."
+
+#~ msgid ""
+#~ "Absolutely. There are multiple ways in which AstroBin can store your data "
+#~ "very safely. First of all, the images you upload are stored on a highly "
+#~ "durable, highly available, redundant backend. The durability of the "
+#~ "storage backend is 99.999999999 percent over a given year. This means "
+#~ "that if you upload 10,000 images, you can expect to lose one image to "
+#~ "data corruption once in 10,000,000 year. The images are duplicated across "
+#~ "two different physical servers, for protection against natural disasters."
+#~ msgstr ""
+#~ "Απόλυτα. Υπάρχουν πολλαπλοί τρόποι που το AstroBin μπορεί να αποθηκεύσει "
+#~ "τα δεδομένα σας με μεγάλη ασφάλεια. Πρώτα απ' όλα οι εικόνες που "
+#~ "ανεβάζετε αποθηκεύονται σε ένα υψηλής αντοχής, υψηλής διαθεσιμότητας, "
+#~ "εφεδρικό server. Η αντοχή του αποθηκευτικού server είναι 99.999999999% "
+#~ "για κάθε χρόνο. Αυτό σημαίνει ότι αν ανεβάσετε 10.000 εικόνες μπορείτε να "
+#~ "περιμένετε την απώλεια μιας εικόνας λόγω αλλοίωσης δεδομένων μια φορά "
+#~ "κάθε 10.000.000 χρόνια. Οι εικόνες αντιγράφονται σε δυο διαφορετικούς "
+#~ "φυσικούς servers, για προστασία σε πιθανή φυσική καταστροφή."
+
+#~ msgid ""
+#~ "The actual website, instead, is hosted on a Virtual Machine, so, in case "
+#~ "of severe hardware failure, it can be redeployed to a different server in "
+#~ "a matter of 15 minutes."
+#~ msgstr ""
+#~ "Η πραγματική ιστοσελίδα, αντίθετα, είναι σε ένα Εικονικό Μηχάνημα, έτσι "
+#~ "ώστε σε περίπτωση σοβαρής αποτυχίας υλικού, να μπορεί να ξανατοποθετηθεί "
+#~ "σε διαφορετικό server μέσα σε 15 λεπτά."
+
+#~ msgid ""
+#~ "Finally, the database that powers AstroBin (in fact, the whole Virtual "
+#~ "Machine) is backed up daily. In case of severe data loss, the website "
+#~ "will be quickly restored to a snapshot that's never older than 24 hours."
+#~ msgstr ""
+#~ "Τέλος, στην βάση δεδομένων που λειτουργεί το AstroBin (στην "
+#~ "πραγματικότητα, όλο το Εικονικό Μηχάνημα) δημιουργείται αντίγραφο "
+#~ "ασφαλείας κάθε μέρα. Σε περίπτωση μεγάλης απώλειας δεδομένων, ο ιστότοπος "
+#~ "θα επανέλθει σε μια προηγούμενη κατάσταση η οποία δεν είναι παλαιότερη "
+#~ "των 24 ωρών."
+
+#~ msgid ""
+#~ "That said, you should be aware that AstroBin is not a backup service, and "
+#~ "although your data is very safe in our hands, we cannot legally take "
+#~ "responsibility in the event of loss, however unlikely it is. Always keep "
+#~ "a copy of your image on your computer."
+#~ msgstr ""
+#~ "Ξεκαθαρίζοντας το αυτό, θα πρέπει να έχετε υπ' όψην ότι το AstroBin δεν "
+#~ "είναι υπηρεσία backup, παρόλο που τα δεδομένα σας είναι πολύ ασφαλή στα "
+#~ "χέρια μας, δεν μπορούμε να πάρουμε νομική ευθύνη σε περίπτωση απώλειας, "
+#~ "όσο απίθανο και αν είναι αυτό. Να κρατάτε πάντα ένα αντίγραφο ασφαλείας "
+#~ "της εικόνας σας στον υπολογιστή σας."
+
+#~ msgid ""
+#~ "Nonsense. AstroBin has <strong>not</strong> been made to showcase "
+#~ "beautiful image, but to give everybody an opportunity to contribute to a "
+#~ "vast and evergrowing effort of centralization and indexing of important "
+#~ "data. That 30 minute picture of M31 you took last night between the "
+#~ "clouds <em>belongs</em> here! Don't be shy and post it!"
+#~ msgstr ""
+#~ "Ανοησίες. Το AstroBin <strong>δεν</strong> δημιουρήθηκε για αν δείξει "
+#~ "όμορφες εικόνες, αλλά να δώσει μια ευκαιρία σε όλους να συμβάλλουν σε μια "
+#~ "τεράστια και συνεχώς αυξανόμενη προσπάθεια συγκέντρωσης και ευρετηρίασης "
+#~ "σημαντικών δεδομένων. Η 30λεπτή φωτογραφία του Μ31 που πήρατε εχθές το "
+#~ "βράδυ ανάμεσα στα σύννεφα<em>ανήκει</em> εδώ! Μην ντρέπεστε και ανεβάστε "
+#~ "την!"
+
+#~ msgid ""
+#~ "On AstroBin you have two places for our images. The Staging Area is where "
+#~ "you can upload images that you want to quickly share on forums, mailing "
+#~ "lists or social networks. The days of scaling down and compressing your "
+#~ "image so you can upload it to a forum for feedback and critique are over! "
+#~ "Just upload to AstroBin's Staging Area, and send the link to anyone you "
+#~ "want. The image will be visible only to the intended recipients, and "
+#~ "won't appear on your profile or AstroBin's home page."
+#~ msgstr ""
+#~ "Στο AstroBin έχετε δυο μέρη για τις εικόνες σας. Η Περιοχή Επεξεργασίας "
+#~ "όπου μπορείτε να ανεβάσετε εικόνες που θέλετε να μοιραστείτε γρήγορα σε "
+#~ "forums, λίστες αλληλογραφίας ή κοινωνικά δίκτυα. Οι ημέρες μείωσης του "
+#~ "μεγέθους και συμπίεσης της εικόνας έτσι ώστε να την ανεβάσετε σε ένα "
+#~ "forum για σχόλια και κριτική είναι παρελθόν! Απλά ανεβάστε την στην "
+#~ "Περιοχή Επεξεργασίας του AstroBin και στείλτε τον σύνδεσμο σε όποιον "
+#~ "θέλετε. Η εικόνα θα είναι ορατή μόνο για τους παραλήπτες που προορίζεται "
+#~ "και δεν θα εμφανιστεί ούτε στο προφίλ σας ούτε στην αρχική σελίδα του "
+#~ "AstroBin."
+
+#~ msgid ""
+#~ "The Public Area, instead, is for your finished products. After you have "
+#~ "received feedback on your favorite forum, you can promote an image from "
+#~ "the Staging Area to the Public Area, and it will appear on your profile. "
+#~ "Remember that you can also move images back and forth from one Area to "
+#~ "the other as many times as you want!"
+#~ msgstr ""
+#~ "Η Περιοχή Προβολής, αντίθετα, είναι για τα τελειωμένα σας προϊόντα. Αφού "
+#~ "λάβετε σχόλια στο αγαπημένο σας forum, μπορείτε να προωθήσετε μια εικόνα "
+#~ "από την Περιοχή Επεξεργασίας στην Περιοχή Προβολής και θα εμφανιστεί στο "
+#~ "προφίλ σας. Έχετε υπ' όψιν ότι μπορείτε να μεταφέρετε εικόνες από την μια "
+#~ "Περιοχή στην άλλη όσες φορές θέλετε!"
+
+#~ msgid ""
+#~ "AstroBin was born out of the desire to end something that had been going "
+#~ "on for too long: the waste of incredible material to the sea of chaos "
+#~ "that the Internet can be. For years, fantastic astrophotographs have "
+#~ "beeen uploaded to Internet Forums, often with little or no data, or to "
+#~ "general purpose image hosting websites, invariably with no data attached."
+#~ msgstr ""
+#~ "Το AstroBin δημιουργήθηκε από την επιθυμία για να δοθεί τέλος σε κάτι το "
+#~ "οποίο γινόταν για πολύ καιρό: η σπατάλη απίθανου υλικού στην θάλασσα του "
+#~ "χάους που μπορεί το Internet να γίνει . Για χρόνια, φανταστικές "
+#~ "αστροφωτογραφίες έχουν ανέβει σε forums του Internet, συχνά με λίγα ή "
+#~ "χωρίς δεδομένα, ή σε ιστοσελίδες γενικής χρήσης φιλοξενίας εικόνων, κατά "
+#~ "κανόνα χωρίς συνημμένες πληροφορίες."
+
+#~ msgid ""
+#~ "Such an image would be seen by some people, then quickly forgotten, and "
+#~ "reduced to nothing more than a bunch of pixel in the giant wasteland of "
+#~ "the Internet."
+#~ msgstr ""
+#~ "Μια τέτοια εικόνα θα μπορούσε να την δουν μερικοί άνθρωποι, μετά γρήγορα "
+#~ "θα ξεχνιόταν και θα μειωνόταν σε τίποτα άλλο παρά σε ένα τσούρμο από "
+#~ "πίξελ στην τεράστια έρημο του Internet."
+
+#~ msgid ""
+#~ "This should not be allowed to happen. AstroBin is the response: an effort "
+#~ "to host, collect, index and categorize the output of the "
+#~ "astrophotographers all over the world, so that their precious data would "
+#~ "serve a purpose, and have a meaning forever."
+#~ msgstr ""
+#~ "Αυτό δεν θα έπρεπε να συμβαίνει. Το AstroBin είναι η απάντηση: μια "
+#~ "προσπάθεια φιλοξενίας, συλλογής, ευρετηρίασης και κατηγοριοποίησης του "
+#~ "αποτελέσματος των αστροφωτογράφων σε όλον τον κόσμο, έτσι ώστε τα "
+#~ "πολύτιμα δεδομένα τους να υπηρετούν έναν σκοπό και να έχουν ένα νόημα για "
+#~ "πάντα."
+
+#~ msgid ""
+#~ "<em>AstroBin</em> is just starting out, and this time we can really say "
+#~ "that the sky is the limit! Tons of ideas are in the pipeline. As the user "
+#~ "base grows, so does the data. Suddenly, things like automated supernovae "
+#~ "search become possible: you could simply upload an image of a galaxy, and "
+#~ "AstroBin could compare it to pictures of the same galaxy taken previously."
+#~ msgstr ""
+#~ "Το <em>AstroBin</em> μόλις ξεκίνησε και αυτή την φορά μπορούμε να πούμε "
+#~ "ότι ο ουρανός είναι το όριο! Πάρα πολλές ιδέες βρίσκονται στα σπάργανα. "
+#~ "Καθώς η βάση των χρηστών μεγαλώνει, άλλο τόσο μεγαλώνουν και τα δεδομένα. "
+#~ "Ξαφνικά, πράγματα όπως η αυτόματη αναζήτηση σουπερνόβα γίνεται δυνατή: θα "
+#~ "μπορούσατε να ανεβάσετε μια εικόνα ενός γαλαξία και το AstroBin να την "
+#~ "συγκρίνει με εικόνες αυτού του γαλαξία που πάρθηκαν παλιότερα."
+
+#~ msgid ""
+#~ "AstroBin could also recommend subjects for you to image! Knowing your "
+#~ "equipment, your location, and comparing what you have imaged to what "
+#~ "users similar to you have, AstroBin could suggest your next challenge!"
+#~ msgstr ""
+#~ "Το AstroBin θα μπορούσε να σας προτείνει και θέματα για να φωτογραφίσετε! "
+#~ "Γνωρίζοντας τον εξοπλισμό σας, την τοποθεσία σας και συγκρίνοντας με το "
+#~ "τι έχετε φωτογραφίσει σε σχέση με άλλους χρήστες, το AstroBin θα μπορούσε "
+#~ "να σας προτείνει την επόμενη σας πρόκληση!"
+
+#~ msgid ""
+#~ "Thanks to the input from the community, more ideas are flowing in and the "
+#~ "list get bigger and bigger."
+#~ msgstr ""
+#~ "Χάρις της εισαγωγής σχολίων από την κοινότητα και άλλες ιδέες ρέουν και η "
+#~ "λίστα όλο και μεγαλώνει."
+
+#~ msgid ""
+#~ "AstroBin uses the Markdown syntax. Please use the following reference "
+#~ "table:"
+#~ msgstr ""
+#~ "Το AstroBin χρησιμοποιεί το συντακτικό Markdown. Παρακαλούμε "
+#~ "χρησιμοποιήστε τον ακόλουθο πίνακα αναφοράς:"
+
+#~ msgid "You type:"
+#~ msgstr "Εισάγετε:"
+
+#~ msgid "You see:"
+#~ msgstr "Βλέπετε:"
+
+#~ msgid "italics"
+#~ msgstr "πλάγια"
+
+#~ msgid "bold"
+#~ msgstr "έντονα"
+
+#~ msgid "(TAB or 4 spaces)"
+#~ msgstr "(TAB ή 4 κενά)"
+
+#~ msgid "preformatted text"
+#~ msgstr "προδιαμορφωμένο κείμενο"
+
+#~ msgid "quoted text"
+#~ msgstr "εισηγμένο κείμενο"
+
+#~ msgid "escape the formatting syntax"
+#~ msgstr "έξοδος από το συντακτικό μορφοποίησης"
+
+#~ msgid ""
+#~ "The AstroBin index is a function of the number of Likes and the number of "
+#~ "images posted by a user."
+#~ msgstr ""
+#~ "Ο δείκτης του AstroBin είναι μια συνάρτηση απ΄τον αριθμών των προτιμήσεων "
+#~ "και του αριθμού των εικόνων που αναρτήθηκαν από έναν χρήστη."
+
+#~ msgid ""
+#~ "Because it's computationally expensive, the AstroBin index is updated "
+#~ "only every 24 hours. The same applies for the search index, the Big Wall, "
+#~ "and some other user data."
+#~ msgstr ""
+#~ "Επειδή είναι υπολογιστικά δαπανηρό, το ευρετήριο του AstroBin ανανεώνεται "
+#~ "κάθε 24 ώρες. Το ίδιο ισχύει και για το ευρετήριο αναζήτησης, τον Μεγάλο "
+#~ "Τοίχο, και μερικά άλλα στοιχεία χρηστών."
+
+#~ msgid ""
+#~ "Do you have a question not covered here! Please <a href=\"/contact/"
+#~ "\">contact us</a>!"
+#~ msgstr ""
+#~ "Έχετε μια απορία που δεν καλύπτετε εδώ; Παρακαλώ <a href=\"/contact/"
+#~ "\">επικοινωνήστε μαζί μας</a>!"
+
+#~ msgid ""
+#~ "AstroBin accounts are meant for members to share original images that "
+#~ "they have created."
+#~ msgstr ""
+#~ "Οι λογαριασμοί του AstroBin προορίζονται για μέλη ώστε να μοιράζονται "
+#~ "πρωτότυπες εικόνες που έχουν δημιουργήσει."
+
+#~ msgid "What is allowed"
+#~ msgstr "Τι επιτρέπεται"
+
+#~ msgid "Do upload content you have created yourself."
+#~ msgstr "Ανεβάστε περιεχόμενο που έχετε δημιουργήσει μόνοι σας."
+
+#~ msgid ""
+#~ "Respect the copyright of others. Stealing images from other people and "
+#~ "trying to pass them off as yours is not allowed on AstroBin."
+#~ msgstr ""
+#~ "Σεβαστείτε τα πνευματικά δικαιώματα των άλλων. Η κλοπή εικόνων από άλλους "
+#~ "ανθρώπους καθώς και η προσπάθεια να τις δείξετε σαν δικές σας δεν "
+#~ "επιτρέπονται από το AstroBin."
+
+#~ msgid "Do fill in all the technical details you can."
+#~ msgstr "Συμπληρώστε όλες τις τεχνικές πληροφορίες που μπορείτε."
+
+#~ msgid ""
+#~ "AstroBin is founded on the idea that data is important and can't go "
+#~ "wasted in a sea of chaos. As much as you can, please fill in the "
+#~ "technical details of your images."
+#~ msgstr ""
+#~ "Το AstroBin ιδρύθηκε με την ιδέα ότι τα δεδομένα είναι σημαντικά και δεν "
+#~ "πρέπει να πάνε χαμένα σε μια θάλασσα χάους. Όσο μπορείτε, παρακαλούμε "
+#~ "συμπληρώστε τις τεχνικές λεπτομέρειες των εικόνων σας."
+
+#~ msgid "Be respectful of other users."
+#~ msgstr "Να σέβεστε τους άλλους χρήστες."
+
+#~ msgid "Be nice and friendly to other users when you send them messages."
+#~ msgstr ""
+#~ "Να είστε ευγενικοί και φιλικοί προς τους άλλους χρήστες όταν τους "
+#~ "στέλνετε μηνύματα."
+
+#~ msgid "What is forbidden"
+#~ msgstr "Τι απαγορεύετε."
+
+#, fuzzy
+#~ msgid "Don't upload anything that you did not work on."
+#~ msgstr "Μην ανεβάζετε κάτι για το οποίο δεν έχετε πνευματικά δικαιώματα."
+
+#~ msgid "No nudity, no explicitly sexual content, no illegal content."
+#~ msgstr ""
+#~ "Απαγορεύονται οι γυμνές εικόνες, απαγορεύετε ρητά το σεξουαλικό "
+#~ "περιεχόμενο, απαγορεύεται παράνομο περιεχόμενο."
+
+#~ msgid ""
+#~ "Your account will be permanently deleted, and so will all your content, "
+#~ "if you upload any content that is illegal, porn or nudity. We also "
+#~ "reserve the right to report you to the authorities, if we find it "
+#~ "necessary."
+#~ msgstr ""
+#~ "Ο λογαριασμός σας θα διαγραφεί μόνιμα και κατ' επέκταση και όλο το "
+#~ "περιεχόμενο σας, αν ανεβάσετε περιεχόμενο το οποίο είναι παράνομο, πορνό "
+#~ "ή γυμνές εικόνες. Επίσης έχουμε το δικαίωμα να σας αναφέρουμε στις αρχές, "
+#~ "αν αυτό κριθεί απαραίτητο."
+
+#~ msgid "Don't upload images that have nothing to do with astronomy."
+#~ msgstr "Μην ανεβάζετε εικόνες που δεν έχουν σχέση με την αστρονομία."
+
+#~ msgid ""
+#~ "Images of your equipment are fine, but don't use AstroBin to upload "
+#~ "pictures from your last vacation. Your account won't be deleted, but we "
+#~ "will ask you to remove those pictures."
+#~ msgstr ""
+#~ "Εικόνες του εξοπλισμού σας είναι αποδεκτές, αλλά μην χρησιμοποιείτε το "
+#~ "AstroBin για να ανεβάσετε φωτογραφίες από τις τελευταίες σας διακοπές. Ο "
+#~ "λογαριασμός σας δεν θα διαγραφεί, αλλά θα σας ζητήσουμε να διαγράψετε "
+#~ "αυτές τις φωτογραφίες."
+
+#~ msgid ""
+#~ "Don't use your account to host images for websites, banners or logos."
+#~ msgstr ""
+#~ "Μην χρησιμοποιείτε τον λογαριασμό σας για την αποθήκευση εικόνων για "
+#~ "ιστοσελίδες, banners ή λογόσημα."
+
+#~ msgid ""
+#~ "Banners, logos, icons or other graphic elements that are not "
+#~ "astrophotography are not allowed on AstroBin."
+#~ msgstr ""
+#~ "Τα banners, λογόσημα, εικονίδια ή άλλα γραφικά στοιχεία τα οποία δεν "
+#~ "σχετίζονται με την αστροφωτογραφία δεν επιτρέπονται στο AstroBin."
+
+#~ msgid ""
+#~ "In conclusion, these terms are just a way to say \"please be nice and use "
+#~ "common sense\". If you feel you can't abide by them, please let us know "
+#~ "what you feel is wrong."
+#~ msgstr ""
+#~ "Εν κατακλείδι, αυτοί οι όροι είναι ένας τρόπος να πούμε \"παρακαλούμε να "
+#~ "είστε ευγενικοί και χρησιμοποιείτε την κοινή λογική\". Αν νιώθετε πως δεν "
+#~ "μπορείτε να τους ακολουθήσετε, παρακαλούμε να μας ενημερώσετε με το τι "
+#~ "νομίζετε πως είναι λάθος."
+
+#~ msgid ""
+#~ "Are you an astrophotographer? Do you like to share the outcome of your "
+#~ "hard work with others? As an astrophotographer myself, and a subscriber "
+#~ "to numerous Astrophotography forums, I have found that the Internet is "
+#~ "lacking a centralized place where astrophotographers can share their work."
+#~ msgstr ""
+#~ "Είστε αστροφωτογράφος; σας αρέσει να μοιράζεστε το αποτέλεσμα της σκληρής "
+#~ "δουλειάς σας με άλλους; Όντας και εγώ αστροφωτογράφος και μέλος σε πολλά "
+#~ "forum αστροφωτογραφίας, βρήκα πως το Internet έχει έλλειψη ενος κεντρικού "
+#~ "μέρους όπου οι αστροφωτογράφοι μπορούν να μοιραστούν την δουλειά τους."
+
+#~ msgid "Well, this is finally over!"
+#~ msgstr "Επιτέλους, αυτό τελείωσε!"
+
+#~ msgid ""
+#~ "<em>AstroBin</em> comes to fill the gap. It's a website built from the "
+#~ "ground up by an astrophotographer, and it provides means to people who "
+#~ "want to share their astrophotographs."
+#~ msgstr ""
+#~ "Το <em>AstroBin</em> έρχεται να γεμίσει αυτό το κενό. Είναι μια "
+#~ "ιστοσελίδα που φτιάχτηκε από το μηδέν από έναν αστροφωτογράφο και παρέχει "
+#~ "τα μέσα για τον κόσμο που θέλει να μοιραστεί τις αστροφωτογραφίες του."
+
+#~ msgid "So how is this different from any other image sharing websites?"
+#~ msgstr "Πώς είναι διαφορετικό από άλλους ιστότοπους μοιράσματος εικόνων;"
+
+#~ msgid ""
+#~ "<em>AstroBin</em> provides a number of features that are tailored "
+#~ "specificlly to astrophotography. Here's a quick run down of the main ones:"
+#~ msgstr ""
+#~ "Το <em>AstroBin</em> παρέχει ένα αριθμό από χαρακτηριστικά που είναι "
+#~ "ραμμένα ειδικά για τους αστροφωτογράφους. Ορίστε μια περίληψη των κύριων "
+#~ "χαρακτηριστικών:"
+
+#~ msgid "Dedication to data"
+#~ msgstr "Αφοσίωση στα δεδομένα"
+
+#~ msgid ""
+#~ "On a general purpose image sharing site, you would upload your image and "
+#~ "be done with it. <em>AstroBin</em>, instead, has a user interface "
+#~ "specifically designed to enable you to input all the technical data of "
+#~ "your image."
+#~ msgstr ""
+#~ "Σε έναν ιστότοπο γενικής χρήσεως μοιράσματος εικόνων, πιθανών θα "
+#~ "ανεβάζατε την εικόνα σας και θα τελειώνατε. Το <em>AstroBin</em>, "
+#~ "αντιθέτως, έχει ένα περιβάλλον χρήσης ειδικά σχεδιασμένο για να σας "
+#~ "επιτρέπει να εισάγετε όλα τα τεχνικά δεδομένα της εικόνας σας."
+
+#~ msgid ""
+#~ "<em>AstroBin</em> will autocomplete your input using a vast database: "
+#~ "everything from telescopes, CCDs and filters to astronomical objects in "
+#~ "many catalogues will show in popup dialogs for easy selection when you "
+#~ "start typing their names. <em>AstroBin</em> is connected to the SIMBAD "
+#~ "Astronomical Database, which contains over 5 million objects under over "
+#~ "15 million names!"
+#~ msgstr ""
+#~ "Το <em>AstroBin</em> θα τελειώνει αυτόματα την εισαγωγή σας "
+#~ "χρησιμοποιώντας μια μεγάλη βάση δεδομένων: τα πάντα από τηλεσκόπια, CCDs "
+#~ "και φίλτρα μέχρι αστρονομικά αντικείμενα σε πολλούς καταλόγους θα "
+#~ "εμφανίζονται σε αναδυόμενους διαλόγους για εύκολη επιλογή όταν αρχίσετε "
+#~ "να γράφετε το όνομα τους. Το <em>AstroBin</em> είναι συνδεδεμένο με την "
+#~ "αστρονομική βάση δεδομένων SIMBAD, η οποία περιέχει πάνω από 5 "
+#~ "εκατομμύρια αντικείμενα και πάνω από 15 εκατομμύρια ονόματα!"
+
+#~ msgid ""
+#~ "On <em>AstroBin</em>, astronomical subjects have their own page, where "
+#~ "you can see the best images of them, and plots and charts showing trends "
+#~ "and interesting statistics. There is also a page that shows the most "
+#~ "popular subjects organized by month and latitude!"
+#~ msgstr ""
+#~ "Στο <em>AstroBin</em>, τα αστρονομικά θέματα έχουν την δική τους σελίδα, "
+#~ "όπου μπορείτε να δείτε τις καλύτερες εικόνες από αυτά καθώς και "
+#~ "διαγράμματα δείχνοντας τις τάσεις και ενδιαφέροντα στατιστικά. Υπάρχει "
+#~ "επίσης και μια σελίδα όπου δείχνει τα πιο δημοφιλή θέματα οργανωμένα ανά "
+#~ "μήνα και γεωγραφικό πλάτος!"
+
+#~ msgid "Data is strongly interconnected"
+#~ msgstr "Τα δεδομένα είναι διασυνδεδεμένα"
+
+#~ msgid ""
+#~ "Have you ever wanted to see how your next image is going to look like? On "
+#~ "<em>AstroBin</em>, you can search for all images of a certain target that "
+#~ "were taken with a certain telescope and a certain CCD or camera. Or a "
+#~ "certain filter. How about all the images between 6 and 8 hours of "
+#~ "integration? Or with a certain Moon phase? You can do that!"
+#~ msgstr ""
+#~ "Θελήσατε ποτέ σας να δείτε πως θα φανεί η επόμενη σας φωτογραφία; Στο "
+#~ "<em>AstroBin</em>, μπορείτε να ψάξετε για όλες τις εικόνες ενός "
+#~ "συγκεκριμένου στόχου που πάρθηκαν με ένα συγκεκριμένο τηλεσκόπιο και μια "
+#~ "συγκεκριμένη CCD ή κάμερα. Ή ένα συγκεκριμένο φίλτρο. Τι θα λέγατε για "
+#~ "όλες τις εικόνες με ολοκλήρωση από 6 έως 8 ωρών. Ή με μια συγκεκριμένη "
+#~ "φάση της Σελήνης; Μπορείτε να το κάνετε!"
+
+#~ msgid ""
+#~ "AstroBin can help you with your next telescope or camera purchase, by "
+#~ "searching for gear combinations owned by other users. For instance, you "
+#~ "could search for all images taken with a Canon 5D and any apochromatic "
+#~ "refractor, or a SBIG ST-8300 with any Richtey-Chretien telescope. Or, if "
+#~ "you want, you can search by telescope diameter too!"
+#~ msgstr ""
+#~ "Το AstroBin μπορεί να σας βοηθήσει με την επόμενη σας αγορά τηλεσκοπίου ή "
+#~ "κάμερας, με την αναζήτηση συνδυασμών που ανήκουν σε άλλους χρήστες. Για "
+#~ "παράδειγμα, μπορείτε να ψάξετε για όλες τις εικόνες που λήφθηκαν από "
+#~ "οποιοδήποτε αποχρωματικό διοπτρικό, ή την SBIG ST-8300 με οποιοδήποτε "
+#~ "Richtey-Chretien τηλεσκόπιο. Ή, αν θέλετε, μπορείτε να ψάξετε και με την "
+#~ "διάμετρο του τηλεσκοπίου!"
+
+#~ msgid ""
+#~ "Finally, all this information is collected in interesting plots, that can "
+#~ "help you figure out how some gear items are trending."
+#~ msgstr ""
+#~ "Τέλος, όλες οι πληροφορίες είναι συγκεντρωμένες σε ενδιαφέροντα "
+#~ "διαγράμματα, που μπορούν να σας βοηθήσουν να συμπεράνετε την τάση "
+#~ "ορισμένων εξοπλισμών."
+
+#~ msgid "All the data at a glance"
+#~ msgstr "Όλα τα δεδομένα με μια ματιά"
+
+#~ msgid ""
+#~ "Each image on <em>AstroBin</em> is annotated of all the technical details "
+#~ "about its acquisition. Telescopes involved, cameras, mounts, filters, "
+#~ "everything is visible at a glance in the Technical Card. Even the Moon "
+#~ "age at the time of the acquisition is displayed."
+#~ msgstr ""
+#~ "Κάθε εικόνα στο <em>AstroBin</em> έχει σχόλια όλων των τεχνικών δεδομένων "
+#~ "σχετικά με την λήψη της. Τα τηλεσκόπια που πήραν μέρος, κάμερες, "
+#~ "στηρίξεις, φίλτρα, όλα είναι ορατά με μια ματιά στην Τεχνική Κάρτα. Ακόμα "
+#~ "και η ηλικία της Σελήνη την ώρα λήψης φαίνεται."
+
+#~ msgid "More than just an image"
+#~ msgstr "Περισσότερο από μια εικόνα"
+
+#~ msgid ""
+#~ "<em>AstroBin</em> will do more than just host a copy of your image: when "
+#~ "you upload a photograph, a histogram and a black &amp; white inverted "
+#~ "version of the image will be generated on the fly, so it's easier to spot "
+#~ "faint nebulosity regions or spiral arms. Images will also be plate "
+#~ "solved, and an annotated version will appear on the site. <em>AstroBin</"
+#~ "em> will know what are the astronomical objects in your image without you "
+#~ "telling!"
+#~ msgstr ""
+#~ "Το <em>AstroBin</em> θα κάνει πολύ περισσότερα από την φιλοξενία ενός "
+#~ "αντιγράφου της εικόνας σας: όταν ανεβάζετε μια εικόνα, ένα ιστόγραμμα και "
+#~ "μια ασπρόμαυρη αρνητική έκδοση της εικόνας θα δημιουργηθούν επί τόπου, "
+#~ "έτσι ώστε να είναι ευκολότερο να εντοπίσετε τις περιοχές αραιής νέφωσης ή "
+#~ "τις σπείρες. Οι εικόνες θα αναλυθούν και μια σχολιασμένη έκδοση τους θα "
+#~ "εμφανιστεί στην ιστοσελίδα. Το <em>AstroBin</em> θα γνωρίζει ποια είναι "
+#~ "τα αστρονομικά αντικείμενα στην εικόνα σας χωρίς να του το πείτε!"
+
+#~ msgid "Protection from theft with automatic watermarking"
+#~ msgstr "Προστασία από κλοπή με αυτόματο υδατογράφημα"
+
+#~ msgid ""
+#~ "<em>AstroBin</em>'s upload wizard will offer you to watermark your image "
+#~ "with the text of your choosing. All it takes is a click!"
+#~ msgstr ""
+#~ "Ο οδηγός ανεβάσματος του <em>AstroBin</em> θα σας προσφέρει την "
+#~ "δυνατότητα να υδατογραφήσετε την εικόνα σας με το κείμενο της επιλογής "
+#~ "σας. Το μόνο που χρειάζεται είναι ένα κλικ!"
+
+#~ msgid "AstroBin supports multiple image revisions"
+#~ msgstr "Το AstroBin υποστηρίζει πολλαπλές εκδόσεις εικόνας"
+
+#~ msgid ""
+#~ "Don't tell me you have never gone back to revise the processing of an "
+#~ "image <em>after</em> you had published it. <em>AstroBin</em> embraces "
+#~ "this concept and lets you publish several revisions of the same image "
+#~ "easily and intuitively! Now it's going to be really easy to tell whether "
+#~ "your processing has improved."
+#~ msgstr ""
+#~ "Μην μου πείτε ότι δεν έχετε ξαναπάει πίσω να αναθεωρήσετε την επεξεργασία "
+#~ "μιας εικόνας <em>αφού</em> την εκδόσατε. Το <em>AstroBin</em> αγκαλιάζει "
+#~ "αυτή την αρχή και σας επιτρέπει να εκδόσετε αρκετές εκδόσεις από την ίδια "
+#~ "εικόνα εύκολα και διαισθητικά! Τώρα θα είναι πραγματικά εύκολο να δείτε "
+#~ "αν η επεξεργασία σας έχει βελτιωθεί."
+
+#~ msgid "AstroBin is social!"
+#~ msgstr "Το AstroBin είναι κοινωνικό!"
+
+#~ msgid ""
+#~ "On <em>AstroBin</em> you can message other astrophotographer, follow them "
+#~ "and be notified when they post new images, or perform requests for more "
+#~ "data."
+#~ msgstr ""
+#~ "Στο <em>AstroBin</em> μπορείτε να μηνύσετε άλλους αστροφωτογράφους, να "
+#~ "τους ακολουθήστε και να ειδοποιηθείτε όταν ανεβάσουν νέες εικόνες, ή "
+#~ "κάνουν αιτήματα για περισσότερα δεδομένα."
+
+#~ msgid ""
+#~ "You can follow gear items or astronomical subjects, and be notified "
+#~ "whenever there's a new image from a certain CCD, or telescope, or filter, "
+#~ "and so on. Or you can monitor all the new images of a certain galaxy or "
+#~ "nebula."
+#~ msgstr ""
+#~ "Μπορείτε να ακολουθήσετε αντικείμενα εξοπλισμού ή αστρονομικά θέματα και "
+#~ "να ειδοποιηθείτε όταν υπάρχει μια νέα εικόνα από μια συγκεκριμένη CCD ή "
+#~ "τηλεσκόπιο, φίλτρο κτλ. ή μπορείτε να παρακολουθήσετε όλες τις νέες "
+#~ "εικόνες ενός συγκεκριμένου γαλαξία ή νεφελώματος."
+
+#~ msgid ""
+#~ "As you have undoubtly realized by now, <em>AstroBin</em> is way more than "
+#~ "an image hosting service. It's what the Astrophotography community has "
+#~ "needed for a long time. For years, I have seen amazing images scattered "
+#~ "all over the Internet: general purpose image hosting sites, forums, "
+#~ "personal websites and even temporary places. Some of those images contain "
+#~ "data that is too precious to go wasted in a sea of chaos. <em>AstroBin</"
+#~ "em> comes to the rescue to provide a home and a central hub for "
+#~ "astrophotographers all over the world."
+#~ msgstr ""
+#~ "Όπως αναμφίβολα καταλάβατε έως τώρα, το <em>AstroBin</em> είναι "
+#~ "περισσότερο από υπηρεσία φιλοξενίας εικόνων. Είναι αυτό που η κοινωνία "
+#~ "της Αστροφωτογραφίας χρειαζόταν για πολύ καιρό. Για χρόνια, έχω δει "
+#~ "απίθανες εικόνες σκορπισμένες παντού στο Internet: σε ιστότοπους γενικής "
+#~ "χρήσης φιλοξενίας εικόνων, forums, προσωπικές ιστοσελίδες, ακόμα μαι σε "
+#~ "προσωρινούς ιστότοπους. Μερικές από αυτές τις εικόνες περιέχουν δεδομένα "
+#~ "τα οποία είναι πολύ πολύτιμα να πάνε χαμένα σε μια θάλασσα χάους. Το "
+#~ "<em>AstroBin</em> έρχεται για την διάσωση παρέχοντας ένα σπίτι και ένα "
+#~ "κεντρικό κόμβο για τους αστροφωτογράφους παντού στον κόσμο."
+
+#~ msgid "So, what are you waiting for?"
+#~ msgstr "Λοιπόν, τι περιμένετε;"
+
+#~ msgid "Sign up now!"
+#~ msgstr "Εγγραφείτε τώρα!"
+
+#~ msgid "Send to public data pool"
+#~ msgstr "Προώθηση στην κοινόχρηστη περιοχή δεδομένων"
+
+#~ msgid "Send to private shared folder"
+#~ msgstr "Αποστολή στον κοινόχρηστο προσωπικό φάκελο"
+
+#~ msgid ""
+#~ "If this image is the result of your processing of a public data pool, you "
+#~ "can send it the pool so it's displayed there."
+#~ msgstr ""
+#~ "Αν αυτή η εικόνα είναι το αποτέλεσμα της επεξεργασίας σας μιας δημόσιας "
+#~ "περιοχής δεδομένων, μπορείτε να την στείλετε στην περιοχή ώστε να "
+#~ "εμφανιστεί εκεί."
+
+#~ msgid ""
+#~ "Use this form to select an existing <strong>public data pool</strong>."
+#~ msgstr ""
+#~ "Χρησιμοποιείστε αυτή την φόρμα για την επιλογή μιας υπάρχουσας "
+#~ "<strong>δημόσιας περιοχής δεδομένων</strong>."
+
+#~ msgid ""
+#~ "If this image is the result of your processing of a private shared "
+#~ "folder, you can send it the folder so it's displayed there."
+#~ msgstr ""
+#~ "Αν αυτή η εικόνα είναι το αποτέλεσμα της επεξεργασίας σας ενός ιδιωτικού "
+#~ "κοινόχρηστου φακέλου, μπορείτε να την στείλετε στον φάκελο ώστε να "
+#~ "εμφανιστεί εκεί"
+
+#~ msgid ""
+#~ "Use this form to select a <strong>private shared folder</strong> you have "
+#~ "created or have been invited to."
+#~ msgstr ""
+#~ "Χρησιμοποιήστε αυτή την φόρμα για την επιλογή ενός <strong>ιδιωτικού "
+#~ "κοινόχρηστου φακέλου</strong> που δημιουργήσατε ή που σας έχουν καλέσει."
+
+#~ msgid "You don't have access to any shared private folders."
+#~ msgstr "Δεν έχετε πρόσβαση σε κοινόχρηστους ιδιωτικούς φακέλους."
+
+#, fuzzy
+#~ msgid "Back to image"
+#~ msgstr "Πίσω στην κορυφή"
+
+#~ msgid "You have no messages."
+#~ msgstr "Δεν έχετε μηνύματα."
+
+#~ msgid "Show all messages"
+#~ msgstr "Προβολή όλων των μηνυμάτων"
+
+#~ msgid "Error. Try again!"
+#~ msgstr "Σφάλμα. Προσπαθήστε ξανά!"
+
+#, fuzzy
+#~| msgid ""
+#~| "%(originator)s has published a new image! Check it out at the following "
+#~| "url: %(object_url)s"
+#~ msgid ""
+#~ "%(originator)s has published a new image! Check it out at the following "
+#~ "url: <a href=\"%(object_url)s\">%(object_url)s</a>"
+#~ msgstr ""
+#~ "Ο/Η %(originator)s ανέβασε μια νέα εικόνα! Δείτε την στο ακόλουθο url: "
+#~ "%(object_url)s"
+
+#~ msgid ""
+#~ "%(originator)s has published a new image! Check it out at the following "
+#~ "url: %(object_url)s"
+#~ msgstr ""
+#~ "Ο/Η %(originator)s ανέβασε μια νέα εικόνα! Δείτε την στο ακόλουθο url: "
+#~ "%(object_url)s"
+
+#~ msgid ""
+#~ "<a href=\"%(object_url)s\"><strong>%(originator)s</strong> has published "
+#~ "a new image.</a>"
+#~ msgstr ""
+#~ "Ο/Η <a href=\"%(object_url)s\"><strong>%(originator)s</strong> ανέβασε "
+#~ "μια νέα εικόνα.</a>"
+
+#~ msgid "New image by %(originator)s"
+#~ msgstr "Νέα εικόνα από τον/την %(originator)s"
+
+#, fuzzy
+#~ msgid ""
+#~ "You are invited to the private shared folder: \"%(folder_name)s\".\n"
+#~ "\n"
+#~ "You can now contribute data and processed images to the folder. You can "
+#~ "also invite more people.\n"
+#~ "\n"
+#~ "Visit the folder at the following url: <a href=\"%(folder_url)s\">"
+#~ "%(folder_url)s</a>"
+#~ msgstr ""
+#~ "Έχετε μια πρόσκληση στον ιδιωτικό κοινόχρηστο φάκελο: \"%(folder_name)s"
+#~ "\".\n"
+#~ "\n"
+#~ "Μπορείτε τώρα να συνεισφέρετε δεδομένα και επεξεργασμένες εικόνες σε "
+#~ "αυτόν τον φάκελο. Μπορείτε επίσης να καλέσετε και άλλα άτομα.\n"
+#~ "\n"
+#~ "Επισκεφτείτε τον φάκελο στο ακόλουθο url: %(folder_url)s"
+
+#, fuzzy
+#~ msgid ""
+#~ "You are invited to the private shared folder: \"%(folder_name)s\".\n"
+#~ "\n"
+#~ "You can now contribute data and processed images to the folder. You can "
+#~ "also invite more people.\n"
+#~ "\n"
+#~ "Visit the folder at the following url: %(folder_url)s"
+#~ msgstr ""
+#~ "Έχετε μια πρόσκληση στον ιδιωτικό κοινόχρηστο φάκελο: \"%(folder_name)s"
+#~ "\".\n"
+#~ "\n"
+#~ "Μπορείτε τώρα να συνεισφέρετε δεδομένα και επεξεργασμένες εικόνες σε "
+#~ "αυτόν τον φάκελο. Μπορείτε επίσης να καλέσετε και άλλα άτομα.\n"
+#~ "\n"
+#~ "Επισκεφτείτε τον φάκελο στο ακόλουθο url: %(folder_url)s"
+
+#, fuzzy
+#~ msgid ""
+#~ "<a href=\"%(folder_url)s\">You are invited to the private shared folder: "
+#~ "<strong>\"%(folder_name)s.\"</strong></a>"
+#~ msgstr ""
+#~ "<a href=\"%(folder_url)s\">Είστε καλεσμένοι στον ακόλουθο ιδιωτικό "
+#~ "κοινόχρηστο φάκελο: <strong>\"%(folder_name)s.\"</strong></a>"
+
+#, fuzzy
+#~ msgid "You are invited to the private shared folder: %(folder_name)s"
+#~ msgstr ""
+#~ "Είστε καλεσμένοι στον ακόλουθο ιδιωτικό κοινόχρηστο φάκελο: "
+#~ "%(folder_name)s"
+
+#, fuzzy
+#~| msgid ""
+#~| "%(user_name)s has added a new processed image to the private shared "
+#~| "folder: \"%(folder_name)s\". Check it out at the following url: "
+#~| "%(folder_url)s"
+#~ msgid ""
+#~ "%(user_name)s has added a new processed image to the private shared "
+#~ "folder: \"%(folder_name)s\". Check it out at the following url: <a href="
+#~ "\"%(folder_url)s\">%(folder_url)s</a>"
+#~ msgstr ""
+#~ "Ο/Η %(user_name)s έχει προσθέσει μια νέα επεξεργασμένη εικόνα στον "
+#~ "ιδιωτικό κοινόχρηστο φάκελο: \"%(folder_name)s\". Δείτε την στο ακόλουθο "
+#~ "url: %(folder_url)s"
+
+#~ msgid ""
+#~ "%(user_name)s has added a new processed image to the private shared "
+#~ "folder: \"%(folder_name)s\". Check it out at the following url: "
+#~ "%(folder_url)s"
+#~ msgstr ""
+#~ "Ο/Η %(user_name)s έχει προσθέσει μια νέα επεξεργασμένη εικόνα στον "
+#~ "ιδιωτικό κοινόχρηστο φάκελο: \"%(folder_name)s\". Δείτε την στο ακόλουθο "
+#~ "url: %(folder_url)s"
+
+#~ msgid ""
+#~ "<a href=\"%(folder_url)s\"><strong>%(user_name)s</strong> has added a new "
+#~ "processed image to the private shared folder: <strong>\"%(folder_name)s."
+#~ "\"</strong></a>"
+#~ msgstr ""
+#~ "Ο/Η <a href=\"%(folder_url)s\"><strong>%(user_name)s</strong> έχει "
+#~ "προσθέσει μια νέα επεξεργασμένη εικόνα στον ιδιωτικό κοινόχρηστο φάκελο: "
+#~ "<strong>\"%(folder_name)s.\"</strong></a>"
+
+#~ msgid ""
+#~ "<a href=\"%(folder_url)s\"><strong>%(user_name)s</strong> has added a new "
+#~ "processed image to the private shared folder: <strong>\"%(folder_name)s."
+#~ "\"</a>"
+#~ msgstr ""
+#~ "<a href=\"%(folder_url)s\"><strong>%(user_name)s</strong> έχει προσθέσει "
+#~ "μια νέα επεξεργασμένη εικόνα στον ιδιωτικό κοινόχρηστο φάκελο: <strong>"
+#~ "\"%(folder_name)s.\"</a>"
+
+#~ msgid "New processed image in private shared folder: %(folder_name)s"
+#~ msgstr ""
+#~ "Νέα επεξεργασμένη εικόνα στον ιδιωτικό κοινόχρηστο φάκελο: %(folder_name)s"
+
+#, fuzzy
+#~| msgid ""
+#~| "%(user_name)s has added a new processed image to the public data pool: "
+#~| "\"%(pool_name)s\". Check it out at the following url: %(pool_url)s"
+#~ msgid ""
+#~ "%(user_name)s has added a new processed image to the public data pool: "
+#~ "\"%(pool_name)s\". Check it out at the following url: <a href="
+#~ "\"%(pool_url)s\">%(pool_url)s</a>"
+#~ msgstr ""
+#~ "Ο/Η %(user_name)s έχει προσθέσει μια νέα επεξεργασμένη εικόνα στην "
+#~ "δημόσια περιοχή δεδομένων: \"%(pool_name)s\". Δείτε την στο ακόλουθο url: "
+#~ "%(pool_url)s"
+
+#~ msgid ""
+#~ "%(user_name)s has added a new processed image to the public data pool: "
+#~ "\"%(pool_name)s\". Check it out at the following url: %(pool_url)s"
+#~ msgstr ""
+#~ "Ο/Η %(user_name)s έχει προσθέσει μια νέα επεξεργασμένη εικόνα στην "
+#~ "δημόσια περιοχή δεδομένων: \"%(pool_name)s\". Δείτε την στο ακόλουθο url: "
+#~ "%(pool_url)s"
+
+#~ msgid ""
+#~ "<a href=\"%(pool_url)s\"><strong>%(user_name)s</strong> has added a new "
+#~ "processed image to the public data pool: <strong>\"%(pool_name)s.\"</"
+#~ "strong></a>"
+#~ msgstr ""
+#~ "Ο/Η <a href=\"%(pool_url)s\"><strong>%(user_name)s</strong> έχει "
+#~ "προσθέσει μια νέα επεξεργασμένη εικόνα στην δημόσια περιοχή δεδομένων: "
+#~ "<strong>\"%(pool_name)s.\"</strong></a>"
+
+#~ msgid "New processed image in public data pool: %(pool_name)s"
+#~ msgstr ""
+#~ "Νέα επεξεργασμένη εικόνα στην δημόσια περιοχή δεδομένων: %(pool_name)s"
+
+#, fuzzy
+#~| msgid ""
+#~| "%(user_name)s has added new data to the public pool: \"%(pool_name)s\". "
+#~| "Check it out at the following url: %(pool_url)s"
+#~ msgid ""
+#~ "%(user_name)s has added new data to the public pool: \"%(pool_name)s\". "
+#~ "Check it out at the following url: <a href=\"%(pool_url)s\">%(pool_url)s</"
+#~ "a>"
+#~ msgstr ""
+#~ "Ο/Η %(user_name)s έχει προσθέσει νέα δεδομένα στην δημόσια περιοχή: "
+#~ "\"%(pool_name)s\". Δείτε τα στο ακόλουθο url: %(pool_url)s"
+
+#~ msgid ""
+#~ "%(user_name)s has added new data to the public pool: \"%(pool_name)s\". "
+#~ "Check it out at the following url: %(pool_url)s"
+#~ msgstr ""
+#~ "Ο/Η %(user_name)s έχει προσθέσει νέα δεδομένα στην δημόσια περιοχή: "
+#~ "\"%(pool_name)s\". Δείτε τα στο ακόλουθο url: %(pool_url)s"
+
+#~ msgid ""
+#~ "<a href=\"%(pool_url)s\"><strong>%(user_name)s</strong> has added new "
+#~ "data to the public pool: <strong>\"%(pool_name)s.\"</strong></a>"
+#~ msgstr ""
+#~ "Ο/Η <a href=\"%(pool_url)s\"><strong>%(user_name)s</strong> έχει "
+#~ "προσθέσει νέα δεδομένα στην δημόσια περιοχή: <strong>\"%(pool_name)s.\"</"
+#~ "strong></a>"
+
+#~ msgid "New data in public pool: %(pool_name)s"
+#~ msgstr "Νέα δεδομένα στην κοινόχρηστη περιοχή: %(pool_name)s"
+
+#, fuzzy
+#~| msgid ""
+#~| "%(user_name)s has added new data to the private shared folder: "
+#~| "\"%(folder_name)s\". Check it out at the following url: %(folder_url)s"
+#~ msgid ""
+#~ "%(user_name)s has added new data to the private shared folder: "
+#~ "\"%(folder_name)s\". Check it out at the following url: <a href="
+#~ "\"%(folder_url)s\">%(folder_url)s</a>"
+#~ msgstr ""
+#~ "Ο/Η %(user_name)s έχει προσθέσει νέα δεδομένα στον ιδιωτικό κοινόχρηστο "
+#~ "φάκελο: \"%(folder_name)s\". Δείτε τα στο ακόλουθο url: %(folder_url)s"
+
+#~ msgid ""
+#~ "%(user_name)s has added new data to the private shared folder: "
+#~ "\"%(folder_name)s\". Check it out at the following url: %(folder_url)s"
+#~ msgstr ""
+#~ "Ο/Η %(user_name)s έχει προσθέσει νέα δεδομένα στον ιδιωτικό κοινόχρηστο "
+#~ "φάκελο: \"%(folder_name)s\". Δείτε τα στο ακόλουθο url: %(folder_url)s"
+
+#~ msgid ""
+#~ "<a href=\"%(folder_url)s\"><strong>%(user_name)s</strong> has added new "
+#~ "data to the private shared folder: <strong>\"%(folder_name)s.\"</strong></"
+#~ "a>"
+#~ msgstr ""
+#~ "Ο/Η <a href=\"%(folder_url)s\"><strong>%(user_name)s</strong> έχει "
+#~ "προσθέσει νέα δεδομένα στον ιδιωτικό κοινόχρηστο φάκελο: <strong>"
+#~ "\"%(folder_name)s.\"</strong></a>"
+
+#~ msgid "New data in private shared folder: %(folder_name)s"
+#~ msgstr "Νέα δεδομένα στον ιδιωτικό κοινόχρηστο φάκελο: %(folder_name)s"
+
+#, fuzzy
+#~| msgid "User"
+#~ msgid "Username"
+#~ msgstr "Χρήστης"
+
+#, fuzzy
+#~| msgid "Password changed"
+#~ msgid "Password"
+#~ msgstr "Ο κωδικός σας έχει αλλάξει"
+
+#, fuzzy
+#~ msgid "Activate"
+#~ msgstr "Ενεργό"
+
+#, fuzzy
+#~ msgid "Deactivate"
+#~ msgstr "Ενεργό"
+
+#, fuzzy
+#~ msgid "AstroBin Premium subscription plans"
+#~ msgstr "Ερωτήσεις του AstroBin"
+
+#, fuzzy
+#~ msgid "AstroBin Raw Data subscription plans"
+#~ msgstr "Ανεπεξέργαστα Δεδομένα του AstroBin"
+
+#~ msgid ""
+#~ "The following Terms are only available in English. It is your "
+#~ "responsibility to comprehend them."
+#~ msgstr ""
+#~ "Οι παρακάτω Όροι είναι διαθέσιμοι μόνο στα Αγγλικά. Είναι ευθύνη σας να "
+#~ "τους κατανοήσετε."
+
+#, fuzzy
+#~ msgid "Raw data upload"
+#~ msgstr "Βιβλιοθήκη ανεπεξέργαστων δεδομένων"
+
+#~ msgid ""
+#~ "You have no more space left on your Raw Data account. Please delete some "
+#~ "files to make room, or upgrade your account."
+#~ msgstr ""
+#~ "Δεν έχετε άλλο διαθέσιμο χώρο στον λογαριασμό των Ανεπεξέργαστων "
+#~ "Δεδομένων. Παρακαλώ διαγράψτε μερικά αρχεία για να κάνετε χώρο, ή "
+#~ "αναβαθμίστε τον λογαριασμό σας."
+
+#~ msgid "Use the button below to choose files"
+#~ msgstr "Χρησιμοποιήστε το παρακάτω κουμπί για να διαλέξετε αρχεία"
+
+#~ msgid "Drop your raw data here"
+#~ msgstr "Τοποθετήστε τα ανεπεξέργαστα δεδομένα σας εδώ"
+
+#~ msgid "Accepted file types: FIT and digital camera raw files"
+#~ msgstr "Αποδεκτοί τύποι αρχείων: FIT και αρχεία raw ψηφιακών καμερών"
+
+#~ msgid "Filename"
+#~ msgstr "Όνομα αρχείου"
+
+#~ msgid "Choose files"
+#~ msgstr "Επιλέξτε αρχεία"
+
+#~ msgid "Reset"
+#~ msgstr "Επαναφορά"
+
+#~ msgid "Start upload"
+#~ msgstr "Εκκίνηση ανεβάσματος"
+
+#~ msgid "Go to your Raw Data Library."
+#~ msgstr "Μετάβαση την Βιβλιοθήκη Ανεπεξέργαστων Δεδομένων"
+
+#~ msgid ""
+#~ "Your Raw Data subscription is not active, or it has expired. If you have "
+#~ "just subscribed, please wait for a few minutes. Thanks for your patience!"
+#~ msgstr ""
+#~ "Η συνδρομή σας στα Ανεπεξέργαστα Δεδομένα δεν είναι ενεργοποιημένη. Αν "
+#~ "μόλις τώρα γίνατε μέλος, παρακαλώ περιμένετε μερικά λεπτά. Σας "
+#~ "ευχαριστούμε για την υπομονή σας!"
+
+#~ msgid "Go to the Raw Data <a href=\"%(plans_url)s\">plans page</a>."
+#~ msgstr ""
+#~ "Μετάβαση στη <a href=\"%(plans_url)s\">σελίδα πλάνων</a> των "
+#~ "Ανεπεξέργαστων Δεδομένων"
+
+#~ msgid ""
+#~ "Did you know that AstroBin can host your FIT and digital camera raw files "
+#~ "too?"
+#~ msgstr ""
+#~ "Γνωρίζατε ότι το AstroBin μπορεί να φιλοξενήσει τα αρχεία FIT όπως και τα "
+#~ "raw αρχεία από τις ψηφιακές κάμερες;"
+
+#~ msgid ""
+#~ "Have a look at <a href=\"%(rawdata_url)s\">AstroBin Raw Data</a> if you "
+#~ "want to safely store all your raw files, and have them neatily organized "
+#~ "for future reference!"
+#~ msgstr ""
+#~ "Ρίξτε μια ματιά στα <a href=\"%(rawdata_url)s\">Ανεπεξέργαστα Δεδομένα "
+#~ "του AstroBin</a> αν θέλετε να αποθηκεύσετε με ασφάλεια όλα τα "
+#~ "ανεπεξέργαστα δεδομένα σας, και να τα έχετε τακτοποιημένα για μελλοντική "
+#~ "αναφορά!"
+
+#~ msgid "Raw files"
+#~ msgstr "Ανεπεξέργαστα αρχεία"
+
+#~ msgid "Upload started, please wait..."
+#~ msgstr "Το ανέβασμα ξεκίνησε, παρακαλώ περιμένετε..."
+
+#~ msgid ""
+#~ "One ore more files were ignored because they did not look like FIT or "
+#~ "digital camera raw files."
+#~ msgstr ""
+#~ "Ένα ή περισσότερα αρχεία παραβλέφθηκαν επειδή δεν έμοιαζαν να είναι FIT ή "
+#~ "raw αρχεία από ψηφιακή κάμερα."
+
+#, fuzzy
+#~| msgid ""
+#~| "Done! Go to <a href=\\\"/me\\\">your profile</a> to see the new pictures "
+#~| "(and keep an eye on your notifications)!"
+#~ msgid ""
+#~ "Done! Go to <a href=\\\"/users/\" + username + \"/?staging&sub=uploaded\\"
+#~ "\">your staging gallery</a> to see the new pictures (and keep an eye on "
+#~ "your notifications)!"
+#~ msgstr ""
+#~ "Ολοκληρώθηκε! Πηγαίνετε στο <a href=\\\"/me\\>προφίλ σας</a> για να δείτε "
+#~ "τις νέες εικόνες (και να δείτε τις ειδοποιήσεις σας)!"
 
 #~ msgid "The perfect home for your astrophotography."
 #~ msgstr "Το τέλειο σπίτι για την αστροφωτογραφία σας."
@@ -7226,12 +7753,6 @@ msgstr ""
 
 #~ msgid "Express value in hours"
 #~ msgstr "Εκφράστε την τιμή σε ώρες"
-
-#~ msgid ""
-#~ "Search for astronomical objects, telescopes or lenses, cameras, filters..."
-#~ msgstr ""
-#~ "Αναζήτηση για αστρονομικά αντικείμενα, τηλεσκόπια ή φακούς, κάμερες, "
-#~ "φίλτρα..."
 
 #~ msgid "Min. telescope aperture"
 #~ msgstr "Ελάχιστη διάμετρος τηλεσκοπίου"
@@ -7515,19 +8036,11 @@ msgstr ""
 #~ msgid "Content moderation"
 #~ msgstr "Χώρα δραστηριότητας"
 
-#, fuzzy
-#~ msgid "Edit watermark"
-#~ msgstr "Επόμενο βήμα: υδατογράφημα"
-
 #~ msgid "Edit basic information"
 #~ msgstr "Επεξεργασία βασικών πληροφοριών"
 
 #~ msgid "Change license"
 #~ msgstr "Αλλαγή άδειας χρήσης"
-
-#, fuzzy
-#~ msgid "Attempt to plate-solve again"
-#~ msgstr "Να γίνει ανάλυση ξανά"
 
 #~ msgid "Date and time"
 #~ msgstr "Ημερομηνία και ώρα"
@@ -7574,9 +8087,6 @@ msgstr ""
 
 #~ msgid "Do you want your product here?"
 #~ msgstr "Θέλετε το προϊόν σας εδώ;"
-
-#~ msgid "Read all"
-#~ msgstr "Ανάγνωση όλων"
 
 #, fuzzy
 #~ msgid "Uploads used"
@@ -7789,9 +8299,6 @@ msgstr ""
 #~ msgstr ""
 #~ "Παρακαλούμε λάβετε μέρος, και μπορείτε να μάθετε και να διδάξετε για την "
 #~ "Αστροφωτογραφία και την Αστρονομία!"
-
-#~ msgid "Here's some more reading material to get you started"
-#~ msgstr "Ορίστε και υλικό για διάβασμα για να ξεκινήσετε"
 
 #~ msgid "Frequently Asked Questions about AstroBin Questions"
 #~ msgstr "Συχνές Ερωτήσεις σχετικά με τις Ερωτήσεις του AstroBin"
@@ -8211,9 +8718,6 @@ msgstr ""
 #~ "Αυτή η εικόνα περιέχει πολλαπλά αντικείμενα Messier. Παρακαλώ επιλέξτε το "
 #~ "ένα από αυτά που προτείνετε για την εικόνα."
 
-#~ msgid "You have already nominated this image"
-#~ msgstr "Έχετε ήδη προτείνει αυτή την εικόνα"
-
 #~ msgid "You can't nominate the same image more than once."
 #~ msgstr "Δεν μπορείτε να προτείνετε την ίδια εικόνα πάνω από μια φορά."
 
@@ -8336,9 +8840,6 @@ msgstr ""
 #~ "τίποτα γι' αυτήν, αλλά αυτό μπορεί να είναι μεγάλη διαδικασία. Εάν "
 #~ "γνωρίζετε περίπου το μέγεθος του πεδίου της εικόνας σας, η ανάλυση θα "
 #~ "γίνει πιο γρήγορα και θα έχει περισσότερες πιθανότητες επιτυχίας!"
-
-#~ msgid "Start plate-solving"
-#~ msgstr "Εκκίνηση ανάλυσης"
 
 #~ msgid ""
 #~ "<strong>Note</strong>: if you didn't upload a full resolution image, the "
@@ -8490,9 +8991,6 @@ msgstr ""
 #~ msgid "View your favorites"
 #~ msgstr "Δείτε τα αγαπημένα σας"
 
-#~ msgid "View your images"
-#~ msgstr "Δείτε τις εικόνες σας"
-
 #~ msgid "No images."
 #~ msgstr "Καμία εικόνα."
 
@@ -8523,9 +9021,6 @@ msgstr ""
 
 #~ msgid "A list of all images acquired every night."
 #~ msgstr "Μια λίστα με όλες τις εικόνες που λήφθηκαν κάθε βράδυ."
-
-#~ msgid "Select latitude"
-#~ msgstr "Επιλέξτε γεωγραφικό πλάτος"
 
 #~ msgid "From latitude:"
 #~ msgstr "Από γεωγραφικό πλάτος:"
@@ -8607,14 +9102,8 @@ msgstr ""
 #~ msgid "Learn more about AstroBin Questions."
 #~ msgstr "Μάθετε περισσότερα για τις Ερωτήσεις του AstroBin."
 
-#~ msgid "Request critique"
-#~ msgstr "Ζητήστε κριτική"
-
 #~ msgid "Introducing AstroBin Raw Data"
 #~ msgstr "Παρουσιάζουμε τα Ανεπεξέργαστα Δεδομένα του AstroBin"
-
-#~ msgid "uploaded"
-#~ msgstr "ανέβηκε"
 
 #~ msgid ""
 #~ "You will notify <strong>%(username)s</strong> that you would like them to "
@@ -8648,9 +9137,6 @@ msgstr ""
 #~ msgstr ""
 #~ "Πρέπει να εισάγετε δεδομένα για την τοποθεσία που δημιουργήσατε: <strong>"
 #~ "%(location)s</strong>"
-
-#~ msgid "You have no requests."
-#~ msgstr "Δεν έχετε αιτήσεις."
 
 #~ msgid "Manage received requests"
 #~ msgstr "Διαχείριση ληφθέντων αιτήσεων"
