@@ -8,8 +8,8 @@ msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2019-10-15 11:53+0000\n"
-"PO-Revision-Date: 2018-12-12 12:55+0000\n"
-"Last-Translator: Łukasz Sujka <lukasz.sujka83@gmail.com>\n"
+"PO-Revision-Date: 2020-05-04 15:16+0000\n"
+"Last-Translator: Milosz Wasilewski <milosz.wasilewski@gmail.com>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
 "Language: pl\n"
 "MIME-Version: 1.0\n"
@@ -18,7 +18,7 @@ msgstr ""
 "Plural-Forms: nplurals=3; plural=(n==1 ? 0 : n%10>=2 && n%10<=4 && (n%100<10 "
 "|| n%100>=20) ? 1 : 2);\n"
 "X-Generator: Pootle 2.8\n"
-"X-POOTLE-MTIME: 1544619301.000000\n"
+"X-POOTLE-MTIME: 1588605396.000000\n"
 
 msgid "United Kingdom"
 msgstr "Zjednoczone Królestwo Wielkiej Brytanii i Irlandii Północnej"
@@ -794,9 +794,8 @@ msgid ""
 "original image can be considered."
 msgstr ""
 
-#, fuzzy
 msgid "Revision"
-msgstr "Recenzje"
+msgstr "Wersja"
 
 msgid "This field is required."
 msgstr "To pole jest wymagane."
@@ -852,10 +851,9 @@ msgid ""
 "one can be considered."
 msgstr ""
 
-#, fuzzy
 #| msgid "Delete original image"
 msgid "Original image"
-msgstr "Usuń pierwowzór"
+msgstr "Oryginalne zdjęcie"
 
 msgid "If you have a personal website, put the address here."
 msgstr "Jeśli posiadasz własną stronę internetową, wprowadź adres."
@@ -1408,7 +1406,7 @@ msgstr ""
 msgid "Other/Unknown"
 msgstr "Nieznane"
 
-msgid "Deep sky object or field"
+msgid "Deep sky object"
 msgstr "Obiekt głębokiego nieba."
 
 msgid "Solar system body or event"
@@ -1463,7 +1461,7 @@ msgid "Non-commercial independent facility"
 msgstr ""
 
 msgid "Nothing"
-msgstr ""
+msgstr "Brak"
 
 msgid "Plate-solution annotations (if available)"
 msgstr ""
@@ -1544,10 +1542,9 @@ msgstr "(brak tytułu)"
 msgid "Mix of multiple source"
 msgstr "Mix różnych źródeł"
 
-#, fuzzy
 #| msgid "Notifications"
 msgid "Skip notifications"
-msgstr "Powiadomienia"
+msgstr "Pomiń powiadomienia"
 
 msgid "Do not notify your followers about this revision."
 msgstr ""
@@ -2761,7 +2758,7 @@ msgid ""
 msgstr ""
 
 msgid "I agree"
-msgstr ""
+msgstr "Zgadzam się"
 
 msgid "More"
 msgstr "Więcej"
@@ -3731,9 +3728,8 @@ msgstr "Szczegóły naświetlania"
 msgid "Plate-solving settings"
 msgstr "Rozpocznij automatyczną fotoastrometię"
 
-#, fuzzy
 msgid "Context"
-msgstr "Kontakt"
+msgstr "Kontekst"
 
 msgid "Navigation context"
 msgstr ""
@@ -3945,14 +3941,15 @@ msgstr "Kopiuj"
 msgid "Image mode"
 msgstr "Tryb zdjęcia"
 
-#, fuzzy
 #| msgid ""
 #| "Did you improve the post-processing of your image? Upload the new "
 #| "revision!"
 msgid ""
 "Did you improve the post-processing of your image? Upload the new\n"
 "                    revision!"
-msgstr "Poprawiłeś obróbkę swojego zdjęcia? Opublikuj nową wersję!"
+msgstr ""
+"Poprawiłeś obróbkę swojego zdjęcia? Opublikuj nową \n"
+"wersję!"
 
 msgid ""
 "This image is pending moderation and is currently not visible on the front "
@@ -3961,9 +3958,8 @@ msgstr ""
 "Ten obraz oczekuje na moderację i obecnie nie jest widoczny na pierwszej "
 "stronie i wynikach wyszukiwania"
 
-#, fuzzy
 msgid "Revisions"
-msgstr "Recenzje"
+msgstr "Wersje"
 
 msgid "Final"
 msgstr "Wersja ostateczna"
@@ -4062,7 +4058,7 @@ msgstr "Następny krok: użyty sprzęt"
 msgid "Edit your image: gear used"
 msgstr "Edytuj zdjęcie: użyty sprzęt"
 
-#, fuzzy, python-format
+#, python-format
 #| msgid ""
 #| "Can't see anything here? Perhaps you should first add some gear in your "
 #| "<a href=\"%(the_url)s\">profile</a>!"
@@ -4070,10 +4066,9 @@ msgid ""
 "Can't see anything here? Perhaps you should first add some gear in your\n"
 "                <a href=\"%(the_url)s\">profile</a>!"
 msgstr ""
-"Brakuje sprzętu? Może powinieneś najpierw dodać sprzęt w swoim <a href="
-"\"%(the_url)s\">profilu</a>!"
+"Brakuje sprzętu? Może powinieneś najpierw dodać sprzęt w swoim\n"
+" <a href=\"%(the_url)s\">profilu</a>!"
 
-#, fuzzy
 #| msgid ""
 #| "To choose the gear used for this image, drag items from the right side to "
 #| "left side, or click the plus sign."
@@ -4083,7 +4078,8 @@ msgid ""
 "                click the plus sign."
 msgstr ""
 "Aby wybrać użyty sprzęt, przeciągnij wybrane elementy z prawej strony na "
-"lewą lub klinkij w znak plusa."
+"lewą lub \n"
+"klinkij w znak plusa."
 
 msgid ""
 "Use this button to import the gear settings from another image of yours."
@@ -4098,7 +4094,6 @@ msgstr "Edytuj dane ekspozycji"
 msgid "Copy gear"
 msgstr "Kopiuj sprzęt"
 
-#, fuzzy
 #| msgid ""
 #| "Copying the gear from another image will populate the gear selection form "
 #| "for you, but you will still need to save it in the end."
@@ -4108,7 +4103,8 @@ msgid ""
 "                    you will still need to save it in the end."
 msgstr ""
 "Kopiowanie ustawień sprzętu z innego zdjęcia uzupełni formularz za Ciebie, "
-"jednak nadal będzie trzeba na końcu zapisać zmiany."
+"jednak\n"
+" nadal będzie trzeba na końcu zapisać zmiany."
 
 msgid "Copy"
 msgstr "Kopiuj"
@@ -4143,17 +4139,14 @@ msgstr "Informacje podstawowe"
 msgid "Gear used"
 msgstr "Użyty sprzęt"
 
-#, fuzzy
 msgid "Edit your image: plate-solving settings"
-msgstr "Edytuj zdjęcie: skala zdjęcia do automatycznej fotoastrometrii"
+msgstr "Edytuj zdjęcie: ustawienia do automatycznej fotoastrometrii"
 
-#, fuzzy
 msgid "Back to image"
-msgstr "Wróć do grup"
+msgstr "Wróć do zdjęcia"
 
-#, fuzzy
 msgid "Edit revision"
-msgstr "Tak, usuń tą wersję"
+msgstr "Edytuj wersję"
 
 msgid "Apply a watermark to image"
 msgstr "Wstaw znak wodny do zdjęcia"
@@ -4224,7 +4217,7 @@ msgid "Views"
 msgstr "Wyświetleń"
 
 msgid "link"
-msgstr ""
+msgstr "odnośnik"
 
 msgid "No results. Sorry."
 msgstr "Nie znaleziono."
@@ -4300,15 +4293,14 @@ msgstr "Wiadomości"
 msgid "Participants"
 msgstr "Uczestnicy"
 
-#, fuzzy
 msgid "Last message"
-msgstr "Moje wiadomości"
+msgstr "Ostatnia wiadomość"
 
 msgid "No messages"
 msgstr "Brak wiadomości"
 
 msgid "Back"
-msgstr ""
+msgstr "Wstecz"
 
 msgid "Delete conversation"
 msgstr "Usuń konwersację"
@@ -4337,10 +4329,9 @@ msgstr ""
 "Proszę zaznacz zdjęcia które chcesz oznaczyć jako SPAM, następnie kliknij "
 "przycisk Zatwierdź żeby zaakceptować wszystkie pozostałe zdjęcia"
 
-#, fuzzy
 #| msgid "Finnish"
 msgid "Finish"
-msgstr "Fiński"
+msgstr "Zakończ"
 
 msgid "The moderation queue is empty, hooray! Come back later."
 msgstr "Kolejka zdjęć do moderacji jest pusta! Wróć później."
@@ -4381,11 +4372,11 @@ msgstr ""
 "Twój klucz: %(key)s\n"
 "Twoje hasło: %(secret)s\n"
 "\n"
-"Zapoznaj się z dokumentacją API na <a href=\"%(api_docs_url)s\">"
-"%(api_docs_url)s</a>\n"
+"Zapoznaj się z dokumentacją API na  <a href=\"%(api_docs_url)s\""
+">%(api_docs_url)s</a>\n"
 "\n"
-"Możesz sprawdzić swój klucz do API na <a href=\"%(api_keys_url)s\">"
-"%(api_keys_url)s</a>\n"
+"Możesz sprawdzić swój klucz do API na <a href=\"%(api_keys_url)s\""
+">%(api_keys_url)s</a>\n"
 "\n"
 "Dziękujemy za używanie API AstroBin!"
 
@@ -4424,24 +4415,21 @@ msgstr ""
 msgid "API Key request approved"
 msgstr "Aplikacja o klucz API została zaakceptowana"
 
-#, fuzzy
 #| msgid "You have a new follower"
 msgid "You have a new notification on AstroBin"
-msgstr "Masz nowego obserwatora"
+msgstr "Masz nowe powiadomienia na AstroBin"
 
 #, fuzzy
 #| msgid "Here are your notifications"
 msgid "See all your notifications"
 msgstr "Twoje powiadomienia"
 
-#, fuzzy
 msgid "Edit your notification preferences"
-msgstr "Edytuj ustawienia strony"
+msgstr "Edytuj ustawienia powiadomień"
 
-#, fuzzy
 #| msgid "Gear images"
 msgid "Clear skies"
-msgstr "Zdjęcia sprzętu"
+msgstr "Pogodnego nieba"
 
 #, fuzzy
 #| msgid "Follow AstroBin on Twitter"
@@ -4493,7 +4481,7 @@ msgid ""
 msgstr ""
 "Twój wniosek o dołączenie do grupy \"%(group_name)s\" został zaakceptowany.\n"
 "\n"
-"Odwiedź grupę pod tym linkiem: <a href=\"%(url)s\">%(url)s</a>"
+"Odwiedź grupę pod tym linkiem:  <a href=\"%(url)s\">%(url)s</a>"
 
 #, python-format
 msgid ""
@@ -4541,12 +4529,12 @@ msgstr "Automatyczna fotoastrometria Twojego zdjęcia nie powiodła się."
 msgid "<a href=\"%(object_url)s\">Your image has been processed.</a>"
 msgstr "<a href=\"%(object_url)s\">Twoje zdjęcie zostało przetworzone.</a>"
 
-#, fuzzy, python-format
+#, python-format
 #| msgid "<a href=\"%(object_url)s\">Your image could not be plate-solved.</a>"
 msgid "<a href=\"%(object_url)s\">Your image</a> was plate-solved."
 msgstr ""
-"<a href=\"%(object_url)s\">Automatyczna fotoastrometria Twojego zdjęcia nie "
-"powiodła się.</a>"
+"Automatyczna fotoastrometria <a href=\"%(object_url)s\">Twojego zdjęcia</a> "
+"powiodła się."
 
 #, python-format
 msgid "Your image at %(object_url)s was plate-solved."
@@ -4767,7 +4755,7 @@ msgid ""
 "<a href=\"%(object_url)s\"><strong>%(object)s</strong> is now following you."
 "</a>"
 msgstr ""
-"<a href=\"%(object_url)s\"><strong>%(object)s</strong> obserują Cię.</a>"
+"<a href=\"%(object_url)s\"><strong>%(object)s</strong> obserwują Cię.</a>"
 
 msgid "You have a new follower!"
 msgstr "Masz nowego obserwatora!"
@@ -5031,7 +5019,7 @@ msgstr "<a href=\"%(url)s\"><strong>%(user)s</strong> lubi Twoje zdjęcie!</a>"
 
 #, python-format
 msgid "%(user)s likes your image: %(title)s"
-msgstr ""
+msgstr "%(user)s polubił(a) Twoje zdjęcie: %(title)s"
 
 #, python-format
 msgid "%(creator)s created a new public group: \"%(group_name)s\""
@@ -5077,13 +5065,11 @@ msgstr ""
 msgid "%(user)s posted a new topic to the group: \"%(group_name)s\""
 msgstr ""
 
-#, fuzzy
 msgid "Notification settings"
-msgstr "Powiadomienia"
+msgstr "Ustawienia powiadomień"
 
-#, fuzzy
 msgid "Notification Type"
-msgstr "Powiadomienia"
+msgstr "Typ powiadomienia"
 
 #, python-format
 msgid ""
@@ -5119,18 +5105,18 @@ msgstr ""
 "\n"
 "Folder jest dostępny pod adresem: %(folder_url)s"
 
-#, fuzzy, python-format
+#, python-format
 msgid ""
 "<a href=\"%(folder_url)s\">You are invited to the private shared folder: "
 "<strong>\"%(folder_name)s.\"</strong></a>"
 msgstr ""
 "<a href=\"%(folder_url)s\">Zostałeś zaproszony do współdzielenia prywatnego "
-"folderu  <strong>\"%(folder_name)s.\"</strong></a>"
+"folderu: <strong>\"%(folder_name)s.\"</strong></a>"
 
-#, fuzzy, python-format
+#, python-format
 msgid "You are invited to the private shared folder: %(folder_name)s"
 msgstr ""
-"Zostałeś zaproszony do prywatnego folderu współdzielonego: %(folder_name)s"
+"Zostałeś zaproszony do prywatnego, współdzielonego folderu: %(folder_name)s"
 
 #, python-format
 msgid ""
@@ -5333,15 +5319,13 @@ msgstr "%(user)s dołączył do grupy publicznej: \"%(group_name)s\""
 msgid "Object not found"
 msgstr "Obiekt nie znaleziony"
 
-#, fuzzy
 #| msgid "Previously uploaded"
 msgid "Previous page"
-msgstr "Poprzednio załadowany"
+msgstr "Poprzednia strona"
 
-#, fuzzy
 #| msgid "View page"
 msgid "Next page"
-msgstr "Zobacz stronę"
+msgstr "Następna strona"
 
 msgid "Find images"
 msgstr "Znajdź zdjęcia"
@@ -5466,10 +5450,9 @@ msgstr "Ostatni wpis"
 msgid "This forum does not have any topics."
 msgstr "Nie masz żadnych nowych powiadomień."
 
-#, fuzzy
 #| msgid "Mark as good"
 msgid "Mark as spam"
-msgstr "Zaznacz jako poprawne."
+msgstr "Oznacz jako spam"
 
 msgid ""
 "This page or operation is not available at the moment, because AstroBin is "
@@ -5526,7 +5509,7 @@ msgid "Username"
 msgstr "Menu użytkownika"
 
 msgid "Email"
-msgstr ""
+msgstr "E-mail"
 
 #, fuzzy
 #| msgid "Password reset"
@@ -5728,7 +5711,7 @@ msgid "Daily"
 msgstr "Dziennie"
 
 msgid "Weekly"
-msgstr ""
+msgstr "Co tydzień"
 
 msgid "Monthly"
 msgstr "Miesięcznie"
@@ -5759,7 +5742,7 @@ msgid "Unlimited images"
 msgstr "Nieskończona liczba zdjęć"
 
 msgid "Buy"
-msgstr ""
+msgstr "Kup"
 
 msgid "Switch to"
 msgstr "przełącz do"
@@ -5785,12 +5768,11 @@ msgid "Expires"
 msgstr "Wygasa"
 
 msgid "Invalid"
-msgstr ""
+msgstr "Nieprawidłowy"
 
-#, fuzzy
 #| msgid "Expires"
 msgid "Expired"
-msgstr "Wygasa"
+msgstr "Wygasł"
 
 msgid "Cancelled"
 msgstr "Anulowano"

@@ -5,71 +5,75 @@
 #
 msgid ""
 msgstr ""
-"Project-Id-Version: PACKAGE VERSION\n"
+"Project-Id-Version: \n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2019-10-15 11:55+0000\n"
-"PO-Revision-Date: 2016-01-01 11:38+0000\n"
+"PO-Revision-Date: 2020-05-13 09:00+0200\n"
 "Last-Translator: Niels <astrobin.com@n13l5.de>\n"
-"Language-Team: LANGUAGE <LL@li.org>\n"
 "Language: de\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=(n != 1);\n"
-"X-Generator: Pootle 2.5.0\n"
+"X-Generator: Poedit 2.2.4\n"
 "X-POOTLE-MTIME: 1451648333.468895\n"
+"Language-Team: \n"
 
 msgid "Perform a blind solve"
-msgstr ""
+msgstr "Eine blinde Metrierung durchführen"
 
 msgid ""
 "Attempt to solve with no hints. In most cases this will work, but it will "
 "take longer."
 msgstr ""
+"Metrierungsversuch ohne Hinweise. In den meisten Fällen wird das "
+"funktionieren, aber es wird länger dauern."
 
 msgid "Width of the field in degrees"
-msgstr ""
+msgstr "Breite des Feldes in Grad"
 
 msgid "Width of the field in arcminutes"
-msgstr ""
+msgstr "Breite des Feldes in Bogenminuten"
 
 msgid "Resolution of the field in arcseconds/pixel"
-msgstr ""
+msgstr "Auflösung des Halbbildes in Bogensekunden/Pixel"
 
 msgid "Field size units"
-msgstr ""
+msgstr "Feldgrößeneinheiten"
 
 msgid "Min field size"
-msgstr ""
+msgstr "Min. Feldgröße"
 
 msgid "Estimate the lower bound for the width of this field."
-msgstr ""
+msgstr "Schätze die untere Grenze für die Breite dieses Feldes."
 
 msgid "Max field size"
-msgstr ""
+msgstr "Maximale Feldgröße"
 
 msgid "Estimate the upper bound for the width of this field."
-msgstr ""
+msgstr "Schätze die obere Grenze für die Breite dieses Feldes."
 
 msgid "Center RA"
-msgstr ""
+msgstr "Zentrum RA"
 
 msgid "Center RA of the field in degrees, 0.000 to 360.000"
-msgstr ""
+msgstr "Zentrum RA des Feldes in Grad, 0.000 bis 360.000"
 
 msgid "Center dec"
-msgstr ""
+msgstr "Mitte Dez"
 
 msgid "Center dec of the field in degrees, -90.000 to +90.000"
-msgstr ""
+msgstr "Mitte Dez des Feldes in Grad, -90.000 bis +90.000"
 
 msgid "Radius"
-msgstr ""
+msgstr "Radius"
 
 msgid ""
 "Tells the plate-solving engine to look within these many degrees of the "
 "given center RA and dec position."
 msgstr ""
+"Weist die Astrometrierungsengine an, innerhalb dieser vielen Grade der "
+"vorgegebenen mittleren RA- und Dez-Position zu suchen."
 
 msgid "Getting plate-solving status, please wait..."
 msgstr "Status der Astrometrierung abrufen, bitte warten..."
@@ -85,7 +89,7 @@ msgid "Plate-solving almost ready, please do not leave this page..."
 msgstr "Astrometrierung fast fertig, bitte NICHT diese Seite verlassen..."
 
 msgid "This image could not be plate-solved."
-msgstr "Dieses Bild kann nicht astrometriert werden,"
+msgstr "Dieses Bild kann nicht astrometriert werden."
 
 msgid ""
 "This image has been successfully plate-solved. Please refresh the page to "
