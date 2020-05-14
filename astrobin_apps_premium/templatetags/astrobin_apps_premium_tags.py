@@ -162,7 +162,8 @@ def can_access_advanced_search(user):
 
 @register.filter
 def can_access_full_search(user):
-    return is_any_ultimate(user)
+    # Pre 2020 Lite and Premium for continuity reasons
+    return is_lite(user) or is_premium(user) or is_any_ultimate(user)
 
 
 @register.filter
