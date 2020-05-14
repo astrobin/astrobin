@@ -85,7 +85,7 @@ def image_post_save(sender, instance, created, **kwargs):
                 content_type=ContentType.objects.get_for_model(User),
                 object_id=instance.user.pk)]
 
-            thumb = instance.thumbnail_raw('regular', {'sync': True})
+            thumb = instance.thumbnail_raw('gallery', {'sync': True})
             push_notification(followers, 'new_image', {
                 'image': instance,
                 'image_thumbnail': thumb.url if thumb else None
