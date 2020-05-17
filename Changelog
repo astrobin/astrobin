@@ -1,3 +1,19 @@
+2020-05-17 Salvatore Iovene <salvatore@iovene.com>
+ * v1.69.4
+ * (images) Add missing migration regarding sharpened inverted thumbnails
+ * (i18n) Update languages (Spanish achieves 100%)
+ * (deps) Update dependency html5lib to v1 (#1103)
+ * (deps) Update dependency django-robots to v4 (#1088)
+ * (deps) Update dependency gprof2dot to v2019 (#1099)
+ * (deps) Update dependency geoip2 to v3 (#1097)
+ * (deps) Update dependency botocore to v1.16.10 (#1101)
+ * (deps) Update dependency boto3 to v1.13.10 (#1100)
+ * (deps) Update dependency elasticsearch to v7 (#1095)
+ * (deps) Update dependency django-easysettings to v2 (#1083)
+ * (deps) Update dependency gevent to v20 (#1098)
+ * (deps) Update dependency fanstatic to v1 (#1096)
+ * (deps) Update dependency django-safedelete to v0.5.5 (#1092)
+
 2020-05-14 Salvatore Iovene <salvatore@iovene.com>
  * v1.69.3
  * (images) Add settings and fields to handle {hd,regular}_sharpened_inverted thumbnails

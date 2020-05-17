@@ -11,8 +11,8 @@ beautifulsoupselect==0.2
 billiard==3.6.3.0
 bleach==3.1.4
 boto==2.49.0
-boto3==1.13.9
-botocore==1.16.9
+boto3==1.13.10
+botocore==1.16.10
 ccy==1.1.0
 celery==4.4.2
 celery-haystack==0.10
@@ -52,7 +52,7 @@ django-crispy-forms==1.7.0
 django-debug-toolbar==1.11
 django-debug-toolbar-template-timings==0.9
 -e git+https://github.com/siovene/django-dfp.git@1da94954a6f2211538fcdde2b8e98497357220e9#egg=django_dfp
-django-easysettings==1.1
+django-easysettings==2.0.1
 django-el-pagination==3.3.0
 -e git+https://github.com/siovene/django-ember.git@b925ecd22c8008ccb339a4977d0081972c58f39f#egg=django_ember
 django-extensions==2.2.9
@@ -80,8 +80,8 @@ django-progressbarupload==0.1.7
 django-recaptcha-works==0.3.4
 django-registration==2.5.2
 django-reviews==1.2.1
-django-robots==3.1.0
-django-safedelete==0.5.4
+django-robots==4.0
+django-safedelete==0.5.5
 django-silk==2.0.0
 django-split-settings==0.3.0
 django-staticfiles==1.2.1
@@ -99,19 +99,19 @@ djangorestframework==3.6.3
 djangorestframework-camel-case==1.0.3
 docutils==0.16
 easy-thumbnails==2.4.1
-elasticsearch==5.5.3
+elasticsearch==7.7.0
 enum34==1.1.10
-fanstatic==0.16
+fanstatic==1.1
 flickrapi==2.4.0
 funcsigs==1.0.2
 futures==3.3.0
-geoip2==2.9.0
-gevent==1.5.0
-gprof2dot==2016.10.13
+geoip2==3.0.0
+gevent==20.5.0
+gprof2dot==2019.11.30
 greenlet==0.4.15
 gunicorn==19.10.0
 gunicorn-console==0.1.16
-html5lib==0.999999999
+html5lib==1.0.1
 httplib2==0.17.3
 idna==2.9
 importlib-metadata==1.6.0
