@@ -290,6 +290,13 @@ def prepare_download_data_archive(request_id):
                 archive.writestr("%s-%s/%s" % (id, title, path), response.content)
                 logger.debug("prepare_download_data_archive: image %s = written" % id)
 
+            if image.solution and image.solution.image_file:
+                response = requests.get(image.solution.image_file.url, verify=False)  # type: Response
+                if response.status_code == 200:
+                    path = ntpath.basename(image.solution.image_file.name)  # type: str
+                    archive.writestr("%s-%s/solution/%s" % (id, title, path), response.content)
+                    logger.debug("prepare_download_data_archive: solution of image %s = written" % id)
+
             for revision in ImageRevision.objects.filter(image=image, corrupted=False):  # type: ImageRevision
                 label = revision.label  # type: unicode
                 path = ntpath.basename(revision.image_file.name)  # type: str
@@ -300,6 +307,17 @@ def prepare_download_data_archive(request_id):
                 if response.status_code == 200:
                     archive.writestr("%s-%s/revisions/%s/%s" % (id, title, label, path), response.content)
                     logger.debug("prepare_download_data_archive: image %s revision %s = written" % (id, label))
+
+                if revision.solution and image.solution.image_file:
+                    response = requests.get(revision.solution.image_file.url, verify=False)  # type: Response
+                    if response.status_code == 200:
+                        path = ntpath.basename(revision.solution.image_file.name)  # type: str
+                        archive.writestr("%s-%s/revisions/%s/solution/%s" % (id, title, label, path), response.content)
+                        logger.debug(
+                            "prepare_download_data_archive: solution image of image %s revision %s = written" % (
+                                id, label
+                            )
+                        )
 
             csv_writer.writerow([
                 image.get_id(),
@@ -358,6 +376,6 @@ def prepare_download_data_archive(request_id):
 @shared_task()
 def expire_download_data_requests():
     DataDownloadRequest.objects \
-        .exclude(status = "EXPIRED") \
+        .exclude(status="EXPIRED") \
         .filter(created__lt=datetime.now() - timedelta(days=7)) \
-        .update(status = "EXPIRED")
+        .update(status="EXPIRED")
