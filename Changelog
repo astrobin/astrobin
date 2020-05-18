@@ -1,3 +1,26 @@
+2020-05-18 Salvatore Iovene <salvatore@iovene.com>
+ * v1.70.0
+ * (images) Export solution images too, during bulk data export
+ * (deps) Update dependency boto3 to v1.13.11 (#1114)
+ * (deps) Update dependency botocore to v1.16.11 (#1115)
+ * (deps) Update dependency codecov to v2.1.0 (#1128)
+ * (deps) Update dependency lxml to v4 (#1104)
+ * (deps) Update dependency newrelic to v5 (#1106)
+ * (deps) Update dependency oauthlib to v3 (#1107)
+ * (deps) Update dependency pbr to v5 (#1108)
+ * (deps) Update dependency pem to v20 (#1109)
+ * (deps) Update dependency pyflakes to v2 (#1111)
+ * (deps) Update dependency pyOpenSSL to v19 (#1110)
+ * (deps) Update dependency pyquery to v1.4.1 (#1033)
+ * (deps) Update dependency pytz to v2020 (#1112)
+ * (deps) Update dependency qtip2 to v3 (#1113)
+ * (deps) Update dependency redis to v3 (#1116)
+ * (deps) Update dependency requests-oauthlib to v1 (#1117)
+ * (deps) Update dependency sendgrid to v6 (#1119)
+ * (deps) Update dependency uncompyle6 to v3 (#1122)
+ * (deps) Update dependency user-agents to v2 (#1123)
+ * (deps) Update dependency xdis to v4 (#1124)
+
 2020-05-17 Salvatore Iovene <salvatore@iovene.com>
  * v1.69.4
  * (images) Add missing migration regarding sharpened inverted thumbnails
