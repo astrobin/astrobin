@@ -6,7 +6,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: AstroBin 1.0\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2020-05-13 17:55+0000\n"
+"POT-Creation-Date: 2020-05-19 08:02+0000\n"
 "PO-Revision-Date: 2020-05-15 21:55+0000\n"
 "Last-Translator: Salvatore Iovene <salvatore@iovene.com>\n"
 "Language-Team: Pepe Chambó <jjchambo@hotmail.com>\n"
@@ -984,7 +984,6 @@ msgstr "Si tienes una página web personal, introduce aquí su dirección."
 msgid "Website"
 msgstr "Página web"
 
-#| msgid "Mark as good"
 msgid "Mark as final"
 msgstr "Marcar como final"
 
@@ -1290,7 +1289,6 @@ msgstr "Catadióptrico: Schmidt-Cassegrain"
 msgid "Catadioptric: ACF Schmidt-Cassegrain"
 msgstr "Catadióptrico: Schmidt-Cassegrain ACF"
 
-#| msgid "Catadioptric: ACF Schmidt-Cassegrain"
 msgid "Catadioptric: Rowe-Atkinson Schmidt astrograph"
 msgstr "Catadióptrico: Rowe-Atkinson Schmidt astrograph"
 
@@ -1435,7 +1433,6 @@ msgstr "Dibujo/Bosquejo"
 msgid "Other/Unknown"
 msgstr "Otro/Desconocido"
 
-#| msgid "Deep sky object"
 msgid "Deep sky object or field"
 msgstr "Objetos de cielo profundo"
 
@@ -1472,7 +1469,6 @@ msgstr "Descargado"
 msgid "Amateur hosting facility"
 msgstr "Instalación de alojamiento amateur"
 
-#| msgid "Public data pools"
 msgid "Public amateur data"
 msgstr "Carpetas públicas amateur"
 
@@ -1482,7 +1478,6 @@ msgstr "Datos profesionales y científicos"
 msgid "Mix of multiple sources"
 msgstr "Mezcla de varias fuentes"
 
-#| msgid "Image of the day"
 msgid "None of the above"
 msgstr "Ninguna de las anteriores"
 
@@ -1504,7 +1499,6 @@ msgstr "Monocroma invertida"
 msgid "Title"
 msgstr "Título"
 
-#| msgid "Acquisition time"
 msgid "Acquisition type"
 msgstr "Tipo de adquisición"
 
@@ -1514,11 +1508,9 @@ msgstr "Tipo de objeto"
 msgid "Data source"
 msgstr "Origen de datos"
 
-#| msgid "Where did you get the idea for this site?"
 msgid "Where does the data for this image come from?"
 msgstr "¿De dónde vienen los datos de esta imagen?"
 
-#| msgid "Remove data"
 msgid "Remote data source"
 msgstr "Fuente de datos remota"
 
@@ -1567,7 +1559,6 @@ msgstr ""
 "para fines de archivo. Este archivo se almacena de forma privada y solo "
 "usted tendrá acceso a él."
 
-#| msgid "Thumbnail"
 msgid "Gallery thumbnail"
 msgstr "Miniatura"
 
@@ -1575,7 +1566,6 @@ msgid "Select an area of the image to be used as thumbnail in your gallery."
 msgstr ""
 "Seleccione un área de la imagen que será usada como miniatura de su galería"
 
-#| msgid "Star trails"
 msgid "Sharpen thumbnails"
 msgstr "Enfocar miniaturas"
 
@@ -1606,7 +1596,6 @@ msgstr "Licencia"
 msgid "Allow comments"
 msgstr "Permitir comentarios"
 
-#| msgid "Notifications"
 msgid "Skip notifications"
 msgstr "Saltar notificaciones"
 
@@ -1628,7 +1617,6 @@ msgstr "Imágenes"
 msgid "Cover image"
 msgstr "Imagen de la portada"
 
-#| msgid "Other images"
 msgid "Order by image tag"
 msgstr "Ordenar por etiqueta de imagen"
 
@@ -1668,7 +1656,6 @@ msgstr "9 - Centro urbano (blanco)"
 msgid "Synthetic channel"
 msgstr "Canal sintético"
 
-#| msgid "Filter"
 msgid "Filter"
 msgid_plural "Filters"
 msgstr[0] "Filtro"
@@ -1790,7 +1777,6 @@ msgstr "Latitud del tercer Meridiano Central."
 msgid "Seeing"
 msgstr "Seeing"
 
-#| msgid "Your estimation of the seeing, on a scale from 1 to 5."
 msgid ""
 "Your estimation of the seeing, on a scale from 1 to 5. Larger is better."
 msgstr ""
@@ -1799,7 +1785,6 @@ msgstr ""
 msgid "Transparency"
 msgstr "Transparencia"
 
-#| msgid "Your estimation of the transparency, on a scale from 1 to 10."
 msgid ""
 "Your estimation of the transparency, on a scale from 1 to 10. Larger is "
 "better."
@@ -2146,22 +2131,18 @@ msgstr ""
 msgid "Commercial gear items"
 msgstr "Elementos de instrumental comerciales"
 
-#| msgid "Sending..."
 msgid "Pending"
 msgstr "Enviando..."
 
 msgid "Processing"
 msgstr "Procesando"
 
-#| msgid "Read all"
 msgid "Ready"
 msgstr "Listo"
 
-#| msgid "Error!"
 msgid "Error"
 msgstr "Error"
 
-#| msgid "Expires"
 msgid "Expired"
 msgstr "Caducado"
 
@@ -2406,16 +2387,13 @@ msgstr ""
 msgid "After you submit a request, you will receive a reply within 24 hours."
 msgstr "Tras enviar una petición, recibirás una respuesta en 24 horas."
 
-#| msgid ""
-#| "Please make sure you have read the section about APIs in the <a href="
-#| "\"%(tos_url)s\">Terms of Service</a>."
 msgid ""
 "Please make sure you have read the section about APIs in the <a href="
 "\"https://welcome.astrobin.com/terms-of-service\">Terms of Service</a>."
 msgstr ""
 "Por favor, asegúrate de haber leído la sección sobre las APIs en las <a href="
-"\"https://welcome.astrobin.com/terms-of-service\">Condiciones del "
-"Servicio</a>."
+"\"https://welcome.astrobin.com/terms-of-service\">Condiciones del Servicio</"
+"a>."
 
 msgid "Submit"
 msgstr "Enviar"
@@ -2454,7 +2432,6 @@ msgstr "Imagen de avatar"
 msgid "Upload"
 msgstr "Subir"
 
-#| msgid "Select the language in which you would like to see this website:"
 msgid "Please select the avatars that you would like to delete."
 msgstr "Selecciona los avatares que quieres eliminar."
 
@@ -2598,15 +2575,12 @@ msgstr "Configuración"
 msgid "Mark all as read"
 msgstr "Marcar todos como leídos"
 
-#| msgid "AstroBin index"
 msgid "AstroBin is in READ ONLY mode"
 msgstr "AstroBin está en modo SOLO LECTURA"
 
-#| msgid "Sorry"
 msgid "Sorry :-("
 msgstr "Disculpa :-("
 
-#| msgid "Accessories"
 msgid "Access denied"
 msgstr "Acceso denegado"
 
@@ -2626,7 +2600,6 @@ msgstr "No, gracias"
 msgid "Tell me more!"
 msgstr "¡Dime más!"
 
-#| msgid "Are you sure?"
 msgid "Are you really sure?"
 msgstr "¿Está seguro?"
 
@@ -2682,8 +2655,8 @@ msgid ""
 "                    <a href=\"%(profile_url)s\">your settings page</a>."
 msgstr ""
 "Si aún sientes que preferirías no ver publicidad, puedes cambiar esto en\n"
-"                    <a href=\"%(profile_url)s\">tu configuración de "
-"página</a>."
+"                    <a href=\"%(profile_url)s\">tu configuración de página</"
+"a>."
 
 msgid "Thank you!"
 msgstr "¡Gracias!"
@@ -2811,7 +2784,6 @@ msgstr ""
 "Por favor confirme que usted desea eliminar la siguiente solicitud de cambio "
 "de correo."
 
-#| msgid "New Zealand"
 msgid "New e-mail"
 msgstr "Nuevo correo"
 
@@ -3186,7 +3158,6 @@ msgstr "Volver a la imagen"
 msgid "Contains"
 msgstr "Contiene"
 
-#| msgid "Remove data"
 msgid "Remove ads"
 msgstr "Eliminar publicidad"
 
@@ -3216,7 +3187,6 @@ msgstr "Histograma"
 msgid "Right ascension"
 msgstr "Ascensión recta"
 
-#| msgid "Description"
 msgid "Declination"
 msgstr "Declinación"
 
@@ -3253,7 +3223,6 @@ msgstr "(volteado)"
 msgid "Field radius"
 msgstr "Radio del campo"
 
-#| msgid "Commercial information"
 msgid "WCS transformation"
 msgstr "Transformación WCS"
 
@@ -3263,7 +3232,6 @@ msgstr "Resolución"
 msgid "Uncompressed source file"
 msgstr "Archivo original sin comprimir"
 
-#| msgid "Downloaded"
 msgid "Download"
 msgstr "Descargar"
 
@@ -3321,7 +3289,6 @@ msgstr "Expulsar usuario"
 msgid "Edit"
 msgstr "Editar"
 
-#| msgid "Thumbnail"
 msgid "Thumbnails"
 msgstr "Miniaturas"
 
@@ -3337,14 +3304,12 @@ msgstr "Detalles de adquisición"
 msgid "Plate-solving settings"
 msgstr "Configuración de plate-solving"
 
-#| msgid "Start plate-solving"
 msgid "Restart plate-solving"
 msgstr "Comenzar de nuevo el plate-solving"
 
 msgid "Advanced plate-solving settings"
 msgstr "Configuración avanzada de plate-solving"
 
-#| msgid "Start plate-solving"
 msgid "Restart advanced plate-solving"
 msgstr "Comenzar de nuevo el plate-solving avanzado"
 
@@ -3441,8 +3406,8 @@ msgstr ""
 "\n"
 "                        Para precisión máxima, se recomienda que usted use "
 "PixInsight's nativo y abra el formato XISF.\n"
-"                        Aprenda más acerca de XISF aquí: <a href=\""
-"%(xisf_url)s\" target=\"_blank\">%(xisf_url)s</a>\n"
+"                        Aprenda más acerca de XISF aquí: <a href="
+"\"%(xisf_url)s\" target=\"_blank\">%(xisf_url)s</a>\n"
 "                    "
 
 msgid ""
@@ -3499,9 +3464,6 @@ msgstr "Actualmente tu índice AstroBin es <strong>%(index)s</strong>."
 msgid "Delete image and all its revisions?"
 msgstr "¿Borrar la imagen y todas sus revisiones?"
 
-#| msgid ""
-#| "The image will be permanently deleted and cannot be recovered. All its "
-#| "revisions will be deleted too. Are you sure?"
 msgid ""
 "The image will be moved to the trash, and it can be restored later. All its "
 "revisions will be there too. Continue?"
@@ -3627,7 +3589,6 @@ msgstr ""
 "Lea acerca de cómo AstroBin almacena sus archivos de forma segura en <a href="
 "\"%(faq_url)s\">FAQ page</a>"
 
-#| msgid "Gear images"
 msgid "Clear"
 msgstr "Limpiar"
 
@@ -3703,19 +3664,15 @@ msgstr ""
 "están ahí.\n"
 "        "
 
-#| msgid "Here's some more reading material to get you started"
 msgid "Here's some detail about the image to give you some context."
 msgstr "Aquí hay algunos detalles sobre la imagen para darle contexto."
 
-#| msgid "uploaded"
 msgid "Uploaded"
 msgstr "Subido"
 
-#| msgid "Image upload"
 msgid "Image uploaded"
 msgstr "Imagen subida"
 
-#| msgid "Previously uploaded"
 msgid "Revision uploaded"
 msgstr "Revisión subida"
 
@@ -3804,9 +3761,6 @@ msgstr ""
 "¿No ves nada aquí? ¡Quizá deberías primero añadir algún instrumento en tu <a "
 "href=\"%(the_url)s\">Perfil</a>!"
 
-#| msgid ""
-#| "To choose the gear used for this image, drag items from the right side to "
-#| "left side, or click the plus sign."
 msgid ""
 "To choose the gear used for this image, drag items from the right side to "
 "left side, or\n"
@@ -3874,7 +3828,6 @@ msgstr "Equipo utilizado"
 msgid "Edit your image: advanced plate-solving settings"
 msgstr "Editar tu imagen: configuración de plate-solving avanzado"
 
-#| msgid "Attempt to plate-solve again"
 msgid "Save and plate-solve again"
 msgstr "Guardar y repetir plate-solving"
 
@@ -3884,11 +3837,9 @@ msgstr "Editar tu imagen: configuración de plate-solving"
 msgid "Edit revision"
 msgstr "Editar revisión"
 
-#| msgid "Change the license for this image"
 msgid "Change the thumbnails for this image"
 msgstr "Cambiar las miniaturas para esta imagen"
 
-#| msgid "Edit watermark"
 msgid "Next step: edit watermark"
 msgstr "Próximo paso: Editar marca de agua"
 
@@ -3936,15 +3887,12 @@ msgstr "Ordenada"
 msgid "Ecliptic longitude"
 msgstr "longitud eclíptica"
 
-#| msgid "Select latitude"
 msgid "Ecliptic latitude"
 msgstr "Latitudo eclíptica"
 
-#| msgid "Select latitude"
 msgid "Galactic longitude"
 msgstr "Longitud galáctica"
 
-#| msgid "Select latitude"
 msgid "Galactic latitude"
 msgstr "Latitud galáctica"
 
@@ -4034,7 +3982,6 @@ msgstr "Información del vendedor"
 msgid "Blog"
 msgstr "Blog in English"
 
-#| msgid "Terms of Service"
 msgid "Terms of servic"
 msgstr "Términos del Servicio"
 
@@ -4180,22 +4127,18 @@ msgstr ""
 msgid "API Key request approved"
 msgstr "Petición de Llave API aprobada"
 
-#| msgid "You have a new follower"
 msgid "You have a new notification on AstroBin"
 msgstr "Tienes una nueva notificación en AstroBin"
 
-#| msgid "Here are your notifications"
 msgid "See all your notifications"
 msgstr "Ver todas las notificaciones"
 
 msgid "Edit your notification preferences"
 msgstr "Editar tus preferencias de notificaciones"
 
-#| msgid "Gear images"
 msgid "Clear skies"
 msgstr "Cielo claro"
 
-#| msgid "Follow AstroBin on Twitter"
 msgid "Follow AstroBin"
 msgstr "Sigue AstroBin "
 
@@ -4269,7 +4212,6 @@ msgid "Your image has been deleted."
 msgstr "Tu imagen ha sido borrada."
 
 #, python-format
-#| msgid "<a href=\"%(object_url)s\">Your image could not be plate-solved.</a>"
 msgid "<a href=\"%(object_url)s\">Your image</a> could not be plate-solved."
 msgstr ""
 "<a href=\"%(object_url)s\">A tu imagen</a> no pudo aplicársele plate-solving."
@@ -4291,7 +4233,6 @@ msgid "<a href=\"%(object_url)s\">Your image has been processed.</a>"
 msgstr "<a href=\"%(object_url)s\">Tu imagen ha sido procesada.</a>"
 
 #, python-format
-#| msgid "<a href=\"%(object_url)s\">Your image could not be plate-solved.</a>"
 msgid "<a href=\"%(object_url)s\">Your image</a> was plate-solved."
 msgstr ""
 "<a href=\"%(object_url)s\">A tu imagen</a> pudo aplicársele plate-solving."
@@ -4654,14 +4595,10 @@ msgid "%(requester)s requested to join the group: \"%(group_name)s\""
 msgstr "%(requester)s solicitó unirse al grupo: \"%(group_name)s\""
 
 #, python-format
-#| msgid ""
-#| "<a href=\"%(object_url)s\"><strong>%(originator)s</strong> has published "
-#| "a new image</a>"
 msgid "<strong>%(user)s</strong> has published a new image"
 msgstr "<strong>%(user)s</strong> ha publicado una nueva imagen"
 
 #, python-format
-#| msgid "New image of %(subject)s"
 msgid "New image by %(user)s"
 msgstr "Nueva imagen de %(user)s"
 
@@ -4820,8 +4757,8 @@ msgstr ""
 msgid ""
 "<strong>%(user)s</strong> posted a new topic to the group: \"%(group_name)s\""
 msgstr ""
-"<strong>%(user)s</strong> publicó un nuevo tema en el grupo: \"%(group_name)"
-"s\""
+"<strong>%(user)s</strong> publicó un nuevo tema en el grupo: \"%(group_name)s"
+"\""
 
 #, python-format
 msgid "%(user)s posted a new topic to the group: \"%(group_name)s\""
@@ -4843,8 +4780,8 @@ msgstr ""
 "Has recibido un mensaje privado en AstroBin!\n"
 "Léelo en el siguiente enlace:\n"
 "\n"
-"<a href=\"https://www.astrobin.com/messages/inbox/\""
-">https://astrobin.com/messages/inbox/</a>"
+"<a href=\"https://www.astrobin.com/messages/inbox/\">https://astrobin.com/"
+"messages/inbox/</a>"
 
 msgid ""
 "You have received a private message on AstroBin!\n"
@@ -4903,11 +4840,9 @@ msgstr "%(user)s se unió al grupo público: \"%(group_name)s\""
 msgid "Object not found"
 msgstr "Objeto no encontrado"
 
-#| msgid "Previously uploaded"
 msgid "Previous page"
 msgstr "Subidas previamente"
 
-#| msgid "View page"
 msgid "Next page"
 msgstr "Siguiente página"
 
@@ -5039,7 +4974,6 @@ msgstr "Última entrada"
 msgid "This forum does not have any topics."
 msgstr "Este foro no tiene ningún tema"
 
-#| msgid "Mark as good"
 msgid "Mark as spam"
 msgstr "Marcar como spam"
 
@@ -5053,7 +4987,6 @@ msgstr ""
 msgid "For more information, please check out our Twitter feed:"
 msgstr "Para mayor información, por favor revise nuestro feed en Twitter:"
 
-#| msgid "Account activation on"
 msgid "Account activation"
 msgstr "Activación de cuenta"
 
@@ -5149,15 +5082,12 @@ msgstr ""
 msgid "Register with AstroBin"
 msgstr "Registrarse en AstroBin"
 
-#| msgid ""
-#| "By registering with AstroBin, you agree to our <a href=\"%(tos_url)s"
-#| "\">terms of service</a>."
 msgid ""
 "By registering with AstroBin, you agree to our <a href=\"https://welcome."
 "astrobin.com/terms-of-service\">terms of service</a>."
 msgstr ""
-"Al registrarte con AstroBin, aceptas nuestros <a href=\""
-"https://welcome.astrobin.com/terms-of-service\">términos de servicio</a>."
+"Al registrarte con AstroBin, aceptas nuestros <a href=\"https://welcome."
+"astrobin.com/terms-of-service\">términos de servicio</a>."
 
 msgid "Search"
 msgstr "Buscar"
@@ -5168,24 +5098,18 @@ msgstr "Ordenar"
 msgid "Relevance"
 msgstr "Relevancia"
 
-#| msgid "Field radius"
 msgid "Large field radius"
 msgstr "Radio amplio de campo"
 
-#| msgid "Field radius"
 msgid "Small field radius"
 msgstr "Radio pequeño de campo"
 
-#| msgid "Pixel scale"
 msgid "Large pixel scale"
 msgstr "Escala grande del píxel"
 
-#| msgid "Pixel scale"
 msgid "Small pixel scale"
 msgstr "Escala pequeña de píxel"
 
-#| msgid ""
-#| "Search for astronomical objects, telescopes or lenses, cameras, filters..."
 msgid "Search for celestial objects, equipment items, users, etc..."
 msgstr "Busca por objetos celestes, equipamiento, usuarios, etc..."
 
@@ -5217,7 +5141,6 @@ msgstr "CCD vs DSLR: tendencia global"
 msgid "Global trend of telescope types"
 msgstr "Tendencia global de tipos de telescopio"
 
-#| msgid "About"
 msgctxt "approximately"
 msgid "about"
 msgstr "Acerca de"
@@ -5225,33 +5148,27 @@ msgstr "Acerca de"
 msgid "View feature comparison"
 msgstr "Ver comparación de característica"
 
-#| msgid "Pixel size"
 msgid "Max size"
 msgstr "Tamaño máximo"
 
 msgid "View full res"
 msgstr "Ver resolución completa"
 
-#| msgid "View your images"
 msgid "View full image info"
 msgstr "Ver información completa de la imagen"
 
 msgid "Basic"
 msgstr "Básico"
 
-#| msgid "Advanced search"
 msgid "Advanced"
 msgstr "Avanzado"
 
-#| msgid "Commercial gear items"
 msgid "Social features"
 msgstr "Funciones sociales"
 
-#| msgid "Start plate-solving"
 msgid "Plate-solving"
 msgstr "Plate-solving"
 
-#| msgid "Public data pools"
 msgid "Bulk data export"
 msgstr "Exportación masiva de datos"
 
@@ -5266,15 +5183,12 @@ msgstr ""
 "Los usuarios no miembros/libres pueden ver sus imágenes en resolución "
 "completa"
 
-#| msgid "Full resolution"
 msgid "Full size annotations"
 msgstr "Anotaciones en tamaño completo"
 
-#| msgid "Upload complete!"
 msgid "Upload uncompressed source"
 msgstr "Subir fuente sin comprimir"
 
-#| msgid "Unlimited images"
 msgid "Undelete images"
 msgstr "Restaurar imágenes"
 
@@ -5289,7 +5203,6 @@ msgstr ""
 "\n"
 "                %(number)s imágenes, max %(size)s cada una"
 
-#| msgid "Higher resolution"
 msgid "View in original resolution"
 msgstr "Ver en resolución original"
 
@@ -5304,7 +5217,6 @@ msgstr ""
 msgid "Create/join Groups"
 msgstr "Crear/unirse a Grupos"
 
-#| msgid "Start plate-solving"
 msgid "Basic plate-solving"
 msgstr "Plate-solving básico"
 
@@ -5323,7 +5235,6 @@ msgstr "Todas las futuras características"
 msgid "In the future"
 msgstr "en el futuro"
 
-#| msgid "Buy it here"
 msgid "Buy in the Marketplace"
 msgstr "Comprar en el Mercado"
 
@@ -5333,7 +5244,6 @@ msgstr "Votar en concurso"
 msgid "Analytics"
 msgstr "Analíticas"
 
-#| msgid "Lucky imaging"
 msgid "Bulk image editing"
 msgstr "Edición masiva de imágenes"
 
@@ -5354,11 +5264,10 @@ msgid ""
 msgstr ""
 "AstroBin no admite actualizaciones de suscripción en este momento, pero "
 "estamos encantados de hacerlo realidad manualmente. Si usted está en un "
-"nivel de suscripción más bajo y le gustaría actualizar a "
-"<strong>%(name)s</strong> por favor cómprelo y luego póngase en contacto con "
-"nosotros en <a href=\"mailto:astrobin@astrobin.com\""
-">astrobin@astrobin.com</a> para obtener un reembolso por el tiempo no "
-"utilizado en su suscripción anterior. ¡Gracias!"
+"nivel de suscripción más bajo y le gustaría actualizar a <strong>%(name)s</"
+"strong> por favor cómprelo y luego póngase en contacto con nosotros en <a "
+"href=\"mailto:astrobin@astrobin.com\">astrobin@astrobin.com</a> para obtener "
+"un reembolso por el tiempo no utilizado en su suscripción anterior. ¡Gracias!"
 
 msgid "Pay with a bank transfer"
 msgstr "Pagar con una transferencia bancaria"
@@ -5376,8 +5285,8 @@ msgstr ""
 "\n"
 "                ¿Prefiere pagar por transferencia bancaria? Por favor, haga "
 "un depósito de %(currency)s %(amount)s con los siguientes\n"
-"                detalles bancarios y luego escríbanos a "
-"%(email_prefix)s%(email)s%(email_postfix)s con su nombre de usuario\n"
+"                detalles bancarios y luego escríbanos a %(email_prefix)s"
+"%(email)s%(email_postfix)s con su nombre de usuario\n"
 "                para que podamos subir de nivel su cuenta manualmente. "
 "¡Gracias!\n"
 "            "
@@ -5390,18 +5299,15 @@ msgstr ""
 "\n"
 "                ∞ imágenes, max %(size)s cada una"
 
-#| msgid "Basic information"
 msgid "Basic analytics"
 msgstr "Análisis básicos"
 
 msgid "Buy"
 msgstr "Comprar"
 
-#| msgid "You have already nominated this image"
 msgid "You are already on this plan"
 msgstr "Ya estás en este plan"
 
-#| msgid "Image size"
 msgid "∞ images, ∞ size"
 msgstr "∞ imágenes, ∞ tamaño"
 
@@ -5414,7 +5320,6 @@ msgstr "Búsqueda completa"
 msgid "Unlimited revisions"
 msgstr "Revisiones ilimitadas"
 
-#| msgid "Start plate-solving"
 msgid "Advanced plate-solving"
 msgstr "Plate-solving avanzado"
 
@@ -5424,7 +5329,6 @@ msgstr "Vender en el Mercado"
 msgid "Vote/enter contests"
 msgstr "Votar/entrar en concursos"
 
-#| msgid "Advanced search"
 msgid "Advanced analytics"
 msgstr "Análisis avanzados"
 
@@ -5470,8 +5374,6 @@ msgstr "semana"
 msgid "month"
 msgstr "mes"
 
-#| msgid "Viewed one time"
-#| msgid_plural "Viewed %(counter)s times"
 msgid "one time"
 msgstr "Una sola vez"
 
@@ -5551,8 +5453,8 @@ msgid ""
 "This subscription is not offered anymore on AstroBin. Please visit the <a "
 "href=\"%(url)s\">subscriptions page</a> to see the available plans, thanks!"
 msgstr ""
-"Esta suscripción ya no se ofrece en AstroBin. Por favor, visite la <a href=\""
-"%(url)s\">subscriptions page</a>para ver los planes disponibles, ¡gracias!"
+"Esta suscripción ya no se ofrece en AstroBin. Por favor, visite la <a href="
+"\"%(url)s\">subscriptions page</a>para ver los planes disponibles, ¡gracias!"
 
 msgid ""
 "If you would like to renew your subscription, please visit this page again "
@@ -5617,13 +5519,9 @@ msgstr "¡Gracias por apoyar a AstroBin!"
 msgid "Your active subscription plans"
 msgstr "Tus planes de suscripción activos"
 
-#| msgid "Your active subscription plans"
 msgid "Your inactive subscription plans"
 msgstr "Tus planes de suscripción inactivos"
 
-#| msgid ""
-#| "PS: are you interested in larger plans? <a href=\"/contact/\">Let us know!"
-#| "</a>"
 msgid ""
 "PS: are you interested in larger plans?\n"
 "                <a href=\"/contact/\">Let us know!</a>"
@@ -5679,7 +5577,6 @@ msgstr ""
 "¡Gracias por ser un miembro premium! Disfruta tus imágenes ilimitadas.\n"
 "                        "
 
-#| msgid "Would you like to upgrade?"
 msgid "Would you like to upgrade to a higher plan?"
 msgstr "¿Te gustaría subir de categoría tu cuenta?"
 
@@ -5689,10 +5586,6 @@ msgstr "Subir como trabajo en curso"
 msgid "Uploading..."
 msgstr "Subiendo..."
 
-#| msgid ""
-#| "Use this button to upload an image to the <strong>Staging Area</strong>. "
-#| "It's perfect for works in progress that you want to share on Internet "
-#| "forums. Read more in the <a href=\"%(faq_url)s#6\">FAQ</a>."
 msgid ""
 "Use this button to upload an image to the\n"
 "                                        <strong>Staging Area</strong>. It's "
@@ -5707,8 +5600,8 @@ msgstr ""
 "perfecto para trabajos en progreso que quieres\n"
 "                                        compartir en foros de internet. Lee "
 "más en\n"
-"                                        <a href=\""
-"https://welcome.astrobin.com/faq\">FAQ</a>."
+"                                        <a href=\"https://welcome.astrobin."
+"com/faq\">FAQ</a>."
 
 msgid "Upload as a finished image"
 msgstr "Subir una imagen terminada"
@@ -5717,11 +5610,6 @@ msgid "Do not notify followers"
 msgstr "No notificar a seguidores"
 
 #, python-format
-#| msgid ""
-#| "Use this button to upload an image to the <strong>Public Area</strong>. "
-#| "It will be displayed in <a href=\"%(profile_url)s\">your profile</a> and "
-#| "here on the home page. You can <a href=\"%(flickr_url)s\">import from "
-#| "Flickr</a> too."
 msgid ""
 "Use this button to upload an image to the\n"
 "                                        <strong>Public Area</strong>. It "
@@ -5789,7 +5677,6 @@ msgid "%(user)s's followed users"
 msgstr "Usuarios seguidos por %(user)s"
 
 #, python-format
-#| msgid "%(user)s's followed users"
 msgid "%(user)s's liked images"
 msgstr "%(user)s's le gustó las imágenes"
 
@@ -6017,7 +5904,6 @@ msgstr "Edita tu información básica"
 msgid "Edit your commercial information"
 msgstr "Edita tu información comercial"
 
-#| msgid "Downloaded"
 msgid "Download your data"
 msgstr "Descargue sus datos"
 
@@ -6030,15 +5916,12 @@ msgstr ""
 "originales, todas las revisiones e información como la descripción, el "
 "equipo utilizado, los detalles de adquisición, etc."
 
-#| msgid "Request from"
 msgid "Request download"
 msgstr "Solicitud de descarga"
 
-#| msgid "You have no requests."
 msgid "Your past requests"
 msgstr "No tienes peticiones."
 
-#| msgid "Request critique"
 msgid "Request time"
 msgstr "Solicitar tiempo"
 
@@ -6059,8 +5942,8 @@ msgid ""
 msgstr ""
 "Para evitar el uso excesivo de los recursos del servidor, solo puedes "
 "solicitar una descarga de datos por período de 24 horas. Si crees que tu "
-"descarga está bloqueada, envíanos un correo electrónico a <a href=\""
-"mailto:astrobin@astrobin.com\">astrobin@astrobin.com</a>."
+"descarga está bloqueada, envíanos un correo electrónico a <a href=\"mailto:"
+"astrobin@astrobin.com\">astrobin@astrobin.com</a>."
 
 msgid ""
 "Please keep in mind that it could take several hours for your download to be "
@@ -6222,7 +6105,6 @@ msgstr "Corrupto"
 msgid "Trash"
 msgstr "Papelera"
 
-#| msgid "Find images"
 msgid "Liked images"
 msgstr "Imágenes que te gustaron"
 
@@ -6238,14 +6120,12 @@ msgstr "Colección de herramientas"
 msgid "Add/remove images"
 msgstr "Añadir/eliminar imágenes"
 
-#| msgid "Quick search"
 msgid "Quick edit"
 msgstr "Edición rápida"
 
 msgid "Key/value pairs"
 msgstr "Pares clave/de valor"
 
-#| msgid "quote selected"
 msgid "Restore selected"
 msgstr "Restaurar seleccionados"
 
@@ -6303,11 +6183,9 @@ msgstr "Edición rápida: etiquetas clave/de valor"
 msgid "Edit collection"
 msgstr "Editar colección"
 
-#| msgid "Show signatures"
 msgid "Show filters"
 msgstr "Mostrar filtro"
 
-#| msgid "Remove filter"
 msgid "Hide filters"
 msgstr "Ocultar filtro"
 
@@ -6315,19 +6193,15 @@ msgstr "Ocultar filtro"
 msgid "${filter.label}"
 msgstr "${filter.label}"
 
-#| msgid "No results"
 msgid "Results"
 msgstr "Resultados"
 
-#| msgid "Search type"
 msgid "Search terms"
 msgstr "términos de búsqueda"
 
-#| msgid "Searching"
 msgid "Search domain"
 msgstr "Dominio de búsqueda"
 
-#| msgid "Search type"
 msgid "Search by"
 msgstr "Buscar por"
 
@@ -6340,7 +6214,6 @@ msgstr "Premio"
 msgid "Camera type"
 msgstr "Tipo de cámara"
 
-#| msgid "Field radius"
 msgid "Field radius (deg)"
 msgstr "Radio de campo"
 
@@ -6348,11 +6221,9 @@ msgid "Minimum data"
 msgstr "Datos mínimos"
 
 #, python-format
-#| msgid "Min. Moon phase %"
 msgid "Moon phase (%%)"
 msgstr "Fase lunar (%%)"
 
-#| msgid "arcsec/pixel"
 msgid "Pixel scale (arcsec/pixel)"
 msgstr "Escala de pixel (arcsec/pixel)"
 
@@ -6367,7 +6238,6 @@ msgstr ""
 "Lo sentimos, este filtro requiere de una <a href=\"%(url)s\">AstroBin "
 "Ultimate</a> suscripción."
 
-#| msgid "Select all"
 msgid "Select"
 msgstr "Seleccionar"
 
@@ -6380,23 +6250,18 @@ msgstr "Imagen del día"
 msgid "Top Pick"
 msgstr "Top seleccionadas"
 
-#| msgid "Guider/Planetary"
 msgid "Guider/planetary"
 msgstr "Guía/planetaria"
 
-#| msgid "Imaging telescope or lens"
-#| msgid_plural "Imaging telescopes or lenses"
 msgid "Imaging telescopes"
 msgstr "telescopios de imagen"
 
 msgid "Astrometry"
 msgstr "Astrometría"
 
-#| msgid "Everything is static"
 msgid "Everything"
 msgstr "Todo"
 
-#| msgid "Basic information"
 msgid "By basic information"
 msgstr "Por información básica"
 
@@ -6406,105 +6271,81 @@ msgstr "Por detalles de astrometría"
 msgid "Objects in field"
 msgstr "Objetos en el campo"
 
-#| msgid "Edit gear used"
 msgid "By gear used"
 msgstr "Por equipo utilizado"
 
-#| msgid "Guiding telescope or lens"
-#| msgid_plural "Guiding telescopes or lenses"
 msgid "Guiding telescopes"
 msgstr "Telescopio guiado"
 
-#| msgid "Comments are closed."
 msgid "Comments & forums"
 msgstr "Comentarios y foros"
 
-#| msgid "Earth's Moon"
 msgid "Earth's moon"
 msgstr "La Luna"
 
-#| msgid "Main solar system subject"
 msgid "Other solar system object"
 msgstr "Otro objeto del Sistema Solar"
 
 msgid "Achromatic"
 msgstr "Acromático"
 
-#| msgid "Refractor: semi-apochromatic"
 msgid "Semi-apochromatic"
 msgstr "semi-apocromático"
 
-#| msgid "Refractor: apochromatic"
 msgid "Apochromatic"
 msgstr "Apocromático"
 
-#| msgid "Refractor: non-achromatic Galilean"
 msgid "Non-achromatic Galilean"
 msgstr "Galileano no-acromático"
 
-#| msgid "Refractor: non-achromatic Keplerian"
 msgid "Non-achromatic Keplerian"
 msgstr "Kepleriano no-acromático"
 
-#| msgid "Refractor: superachromat"
 msgid "Superchromat"
 msgstr "Super-acromático"
 
-#| msgid "Reflector: Dall-Kirkham"
 msgid "Dall-Kirkham"
 msgstr "Dall-Kirkham"
 
 msgid "Nasmyth"
 msgstr "Nasmyth"
 
-#| msgid "Reflector: Ritchey Chretien"
 msgid "Ritchey Chretien"
 msgstr "Ritchey-Chrétien"
 
-#| msgid "Reflector: Gregorian"
 msgid "Gregorian"
 msgstr "Gregoriano"
 
-#| msgid "Reflector: Herschellian"
 msgid "Herschellian"
 msgstr "Herscheliano"
 
-#| msgid "New Caledonia"
 msgid "Newtonian"
 msgstr "Newtoniano"
 
-#| msgid "Catadioptric: Argunov-Cassegrain"
 msgid "Argunov-Cassegrain"
 msgstr "Argunov-Cassegrain"
 
-#| msgid "Catadioptric: Klevtsov-Cassegrain"
 msgid "Klevtsov-Cassegrain"
 msgstr "Klevtsov-Cassegrain"
 
-#| msgid "Catadioptric: Lurie-Houghton"
 msgid "Lurie-Houghton"
 msgstr "Lurie-Houghton"
 
 msgid "Maksutov"
 msgstr "Maksutov"
 
-#| msgid "Catadioptric: Maksutov-Cassegrain"
 msgid "Maksutov-Cassegrain"
 msgstr "Maksutov-Cassegrain"
 
-#| msgid "Catadioptric: modified Dall-Kirkham"
 msgid "Modified Dall-Kirkham"
 msgstr "Dall-Kirkham modificado"
 
-#| msgid "Video camera"
 msgid "Schmidt camera"
 msgstr "Cámara Schmidt"
 
-#| msgid "Catadioptric: Schmidt-Cassegrain"
 msgid "Schmidt-Cassegrain"
 msgstr "Schmidt-Cassegrain"
 
-#| msgid "Catadioptric: ACF Schmidt-Cassegrain"
 msgid "ACF Schmidt-Cassegrain"
 msgstr "Schmidt-Cassegrain"
 
