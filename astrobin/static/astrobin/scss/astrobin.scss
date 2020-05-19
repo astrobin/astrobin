@@ -3,6 +3,7 @@
 @import "mixins";
 
 @import "modal";
+@import "multiselect";
 @import "nav";
 @import "progress";
 
@@ -5290,105 +5291,6 @@ table.api-examples {
     padding: 10px 15px;
     border-radius: 0 0 4px 4px;
   }
-}
-
-.multiselect, .multiselect__tags, .multiselect__single {
-  min-height: 25px;
-}
-
-.multiselect * {
-  box-sizing: initial;
-}
-
-.multiselect--grouped .multiselect__option--disabled {
-  font-weight: bold;
-  color: white;
-}
-
-.multiselect--grouped .multiselect__option:not(.multiselect__option--disabled) {
-  padding-left: 25px;
-}
-
-.multiselect__select {
-  width: auto;
-  height: auto;
-  min-height: unset;
-  max-height: unset;
-
-  &:before {
-    top: 14px;
-    right: 0;
-  }
-}
-
-.multiselect--active {
-  z-index: 1;
-}
-
-.multiselect--above .multiselect__content-wrapper,
-.multiselect__content-wrapper {
-  width: auto;
-  background: #404040;
-  border-color: #282828;
-  color: #f0f0f0;
-  position: absolute;
-  z-index: 1;
-}
-
-.multiselect__tags {
-  padding-top: 0;
-  border-color: #282828;
-  background: #404040;
-  color: #f0f0f0;
-}
-
-.multiselect__tag {
-  margin-top: 2px;
-  margin-bottom: 0;
-  font-size: 13px;
-  background-color: $link-color;
-}
-
-.multiselect__tag-icon::after {
-  color: $text-color;
-}
-
-.multiselect__tag-icon:focus,
-.multiselect__tag-icon:hover {
-  color: $strong-text-color;
-  background-color: $link-color;
-}
-
-.multiselect__single {
-  font-size: 13px;
-  margin-bottom: 0;
-  padding-top: 2px;
-  background: none;
-  min-height: unset;
-  max-height: unset;
-}
-
-.multiselect__option {
-  font-size: 13px;
-  height: unset;
-  min-height: unset;
-  padding: 8px 12px;
-}
-
-.multiselect__option--disabled {
-  background: none;
-}
-
-.multiselect__option--highlight,
-.multiselect__option--selected,
-.multiselect__option--highlight.multiselect__option--selected {
-  background-color: $link-color;
-  color: $strong-text-color;
-  font-weight: normal;
-}
-
-.multiselect__option--highlight {
-  background-color: lighten($link-color, 5%);
 }
 
 .noUi-target {
