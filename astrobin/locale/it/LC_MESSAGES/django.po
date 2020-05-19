@@ -8,7 +8,7 @@ msgstr ""
 "Project-Id-Version: AstroBin 1.0\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2020-05-13 17:55+0000\n"
-"PO-Revision-Date: 2020-05-13 22:04+0000\n"
+"PO-Revision-Date: 2020-05-17 08:35+0000\n"
 "Last-Translator: Salvatore Iovene <salvatore@iovene.com>\n"
 "Language-Team: Salvatore Iovene <salvatore@iovene.com>\n"
 "Language: it\n"
@@ -17,7 +17,7 @@ msgstr ""
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=(n != 1);\n"
 "X-Generator: Pootle 2.8\n"
-"X-POOTLE-MTIME: 1589407488.000000\n"
+"X-POOTLE-MTIME: 1589704529.000000\n"
 
 msgid "United Kingdom"
 msgstr "Regno Unito"
@@ -2640,6 +2640,11 @@ msgid ""
 "the development of AstroBin, and everybody\n"
 "                        would benefit from it!"
 msgstr ""
+"AstroBin è un'azienda a proprietari singolo. Mentre questo testo viene stato "
+"scritto, all'inizio del 2020, sto cercando di rendere AstroBin il mio unico "
+"lavoro a tempo pieno, ma non è ancora successo. Se questo sogno dovesse "
+"realizzarsi, potrei investire molto di più nello sviluppo di AstroBin, e "
+"tutti ne trarrebbero beneficio!"
 
 msgid ""
 "There are only astronomy ads on AstroBin, that are published after my review "
@@ -2648,6 +2653,11 @@ msgid ""
 "nothing that will use any of your private\n"
 "                        information."
 msgstr ""
+"Ci sono solo pubblicità a carattere astronomico su AstroBin, che sono "
+"pubblicato dopo il mio controllo ed\n"
+"approvazione. Niente di equivoco, off-topic, o che usi le vostre "
+"informazioni\n"
+"private."
 
 #, python-format
 msgid ""
@@ -2655,6 +2665,9 @@ msgid ""
 "this on\n"
 "                    <a href=\"%(profile_url)s\">your settings page</a>."
 msgstr ""
+"Se senti comunque di non voler vedere le pubblicità, puoi cambiarlo nella "
+"tua\n"
+"<a href=\"%(profile_url)s\">pagina delle preferenze</a>."
 
 msgid "Thank you!"
 msgstr "Grazie!"
@@ -3148,10 +3161,9 @@ msgstr "Torna all'immagine"
 msgid "Contains"
 msgstr "Contiene"
 
-#, fuzzy
 #| msgid "Remove data"
 msgid "Remove ads"
-msgstr "Rimuovi dati"
+msgstr "Rimuovi pubblicità"
 
 #, python-format
 msgid ""
@@ -3176,12 +3188,11 @@ msgid "Histogram"
 msgstr "Istogramma"
 
 msgid "Right ascension"
-msgstr ""
+msgstr "Ascensione retta"
 
-#, fuzzy
 #| msgid "Description"
 msgid "Declination"
-msgstr "Descrizione"
+msgstr "Declinazione"
 
 msgid "Technical card"
 msgstr "Scheda tecnica"
@@ -3189,10 +3200,9 @@ msgstr "Scheda tecnica"
 msgid "Frames"
 msgstr "Pose"
 
-#, fuzzy
 #| msgid "By astrometry details"
 msgid "Basic astrometry details"
-msgstr "Dettagli astrometrici"
+msgstr "Dettagli astrometrici di base"
 
 msgid "RA center"
 msgstr "Centro AR"
@@ -3213,26 +3223,24 @@ msgid "Orientation"
 msgstr "Orientazione"
 
 msgid "(flipped)"
-msgstr ""
+msgstr "(invertito)"
 
 msgid "Field radius"
 msgstr "Raggio del campo"
 
-#, fuzzy
 #| msgid "Commercial information"
 msgid "WCS transformation"
-msgstr "Informazioni commerciali"
+msgstr "Trasformazione WCS"
 
 msgid "Resolution"
 msgstr "Risoluzione"
 
 msgid "Uncompressed source file"
-msgstr ""
+msgstr "Origine dati non compressa"
 
-#, fuzzy
 #| msgid "Downloaded"
 msgid "Download"
-msgstr "Scaricata"
+msgstr "Scarica"
 
 msgid "Remote source"
 msgstr "Origine dei dati remoti"
@@ -3247,7 +3255,7 @@ msgid "Actions"
 msgstr "Azioni"
 
 msgid "Upload uncompressed source (XISF/FITS/PSD/TIFF)"
-msgstr ""
+msgstr "Carica origine dati non compressa (XISF/FITS/PSD/TIFF)"
 
 msgid "Upload new revision"
 msgstr "Carica nuova versione"
@@ -3288,10 +3296,9 @@ msgstr "Banna utente"
 msgid "Edit"
 msgstr "Modifica"
 
-#, fuzzy
 #| msgid "Thumbnail"
 msgid "Thumbnails"
-msgstr "Miniatura"
+msgstr "Miniature"
 
 msgid "Watermark"
 msgstr "Watermark"
@@ -3305,20 +3312,17 @@ msgstr "Dettagli d'acquisizione"
 msgid "Plate-solving settings"
 msgstr "Impostazioni riduzione astrometrica"
 
-#, fuzzy
 #| msgid "Start plate-solving"
 msgid "Restart plate-solving"
-msgstr "Avvia la riduzione"
+msgstr "Riavvia la riduzione astrometrica"
 
-#, fuzzy
 #| msgid "Plate-solving settings"
 msgid "Advanced plate-solving settings"
-msgstr "Impostazioni riduzione astrometrica"
+msgstr "Impostazioni riduzione astrometrica avanzata"
 
-#, fuzzy
 #| msgid "Start plate-solving"
 msgid "Restart advanced plate-solving"
-msgstr "Avvia la riduzione"
+msgstr "Riavvia riduzione astrometrica avanzata"
 
 msgid "Context"
 msgstr "Contesto"
@@ -3376,7 +3380,7 @@ msgstr ""
 "recuperata. Sei sicuro?"
 
 msgid "Associate XISF/FITS file"
-msgstr ""
+msgstr "Associa file XISF/FITS"
 
 msgid ""
 "\n"
@@ -3390,6 +3394,16 @@ msgid ""
 "your image).\n"
 "                    "
 msgstr ""
+"\n"
+"Per migliorare l'accuratezza della tua riduzione astrometrica ancora di più, "
+"per favore carico uno dei file XISF o\n"
+"FITS dal tuo set di dati. Questi file normalmente hanno header di data e "
+"tempo che permetteranno\n"
+"ad AstroBin di calcolare le efemiridi di corpi del sistema solare ed "
+"identificate pianeti ed asteroidi nella tua\n"
+"immagine (assumendo che tu abbia le informazioni sull luogo di aquisizioni "
+"associate alla tua immagine).\n"
+"                    "
 
 #, python-format
 msgid ""
@@ -3400,6 +3414,12 @@ msgid ""
 "target=\"_blank\">%(xisf_url)s</a>\n"
 "                    "
 msgstr ""
+"\n"
+"Per la massima accuratezza, si raccomanda che usi il formato open e nativo "
+"di PixInsight: XISF.\n"
+"Scopri di più riguardo XISF qui: <a href=\"%(xisf_url)s\" target=\"_blank\""
+">%(xisf_url)s</a>\n"
+"                    "
 
 msgid ""
 "\n"
@@ -3413,6 +3433,15 @@ msgid ""
 "it.\n"
 "                    "
 msgstr ""
+"\n"
+"<strong>Nota bene:</strong> è molto importante che il file XISF o FITS che "
+"carichi sia\n"
+"allineato alla tua immagine elaborata, altrimenti le annotazioni "
+"astrometriche non combaceranno.\n"
+"Per migliorare le possibilità di una riduzione astrometrica accurata, "
+"calibra i tuoi file come al solito\n"
+"(dark/bias/flat) ma non farne lo stretch.\n"
+"                    "
 
 msgid "The following people bookmarked this image"
 msgstr "Le seguenti persone hanno aggiunto la tua immagine ai segnalibri"
@@ -3446,7 +3475,6 @@ msgstr "Al momento, il tuo Indice AstroBin è <strong>%(index)s</strong>."
 msgid "Delete image and all its revisions?"
 msgstr "Cancellare l'immagine e tutte le sue versioni?"
 
-#, fuzzy
 #| msgid ""
 #| "The image will be permanently deleted and cannot be recovered. All its "
 #| "revisions will be deleted too. Are you sure?"
@@ -3454,8 +3482,8 @@ msgid ""
 "The image will be moved to the trash, and it can be restored later. All its "
 "revisions will be there too. Continue?"
 msgstr ""
-"L'immagine verrà cancellata permanentemente e non potrà più essere "
-"recuperata. Tutte le sue versioni verranno cancellate. Sei sicuro?"
+"L'immagine sarà spostata nel cestino, e potrà essere recuperata in seguito. "
+"Anche tutte le sue versioni saranno lì. Continuare?"
 
 msgid ""
 "The image will be permanently deleted and cannot be recovered. All its "
@@ -3564,17 +3592,21 @@ msgid ""
 "keep additional copies of your file. However, by storing your work here, you "
 "can have some additional peace of mind."
 msgstr ""
+"Nota bene: AstroBin non è ufficialmente un servizio di backup. Quindi per "
+"favore conserva copie del tuo file. Ad ogni modo, nell'allottiare qui il tuo "
+"lavoro, puoi avere un po' di tranquillità in più."
 
 #, python-format
 msgid ""
 "Read about how AstroBin stores your files safely on the <a href=\"%(faq_url)s"
 "\">FAQ page</a>."
 msgstr ""
+"Scopri come AstroBin preserva con sicurezza le que immagini alla <a href=\""
+"%(faq_url)s\">pagina delle FAQ</a>."
 
-#, fuzzy
 #| msgid "Clear skies"
 msgid "Clear"
-msgstr "Cieli sereni"
+msgstr "Pulisci"
 
 msgid ""
 "This image is pending moderation and is currently not visible on the front "
@@ -3615,7 +3647,7 @@ msgstr ""
 "\"%(profile_url)s\">Area Pubblica</a>."
 
 msgid "Oh no!"
-msgstr ""
+msgstr "Oh, no!"
 
 msgid ""
 "\n"
@@ -3626,6 +3658,13 @@ msgid ""
 "            this form should provide you with enough context).\n"
 "        "
 msgstr ""
+"\n"
+"Ci dispiace molto, ma parrebbe che la tua immagine abbia sofferto di una "
+"corruzione di dati\n"
+"catastrofica, e non può essere recuperata. Speriamo che tu abbia ancora il "
+"tuo file (le informazione su\n"
+"questo modulo dovrebbo fornirti abbastanza contesto).\n"
+"        "
 
 msgid ""
 "\n"
@@ -3635,32 +3674,34 @@ msgid ""
 "is still here.\n"
 "        "
 msgstr ""
+"\n"
+"Per favore usa l'input di fille qui stto per caricarla di nuv, e poi clicca "
+"il bottone Salva in fondo.\n"
+"Tutti i dati che hai precedentemente associato alla tua immagine sono ancora "
+"qui.\n"
+"        "
 
-#, fuzzy
 #| msgid "Here's some more reading material to get you started"
 msgid "Here's some detail about the image to give you some context."
-msgstr "Ecco un po' di letture consigliate per iniziare"
+msgstr "Ecco alcuni dettagli sulla tua immagine per darti del contesto."
 
-#, fuzzy
 #| msgid "uploaded"
 msgid "Uploaded"
-msgstr "ha caricato"
+msgstr "Caricata"
 
-#, fuzzy
 #| msgid "Image upload"
 msgid "Image uploaded"
-msgstr "Caricamento immagine"
+msgstr "Immagine caricata"
 
-#, fuzzy
 #| msgid "Previously uploaded"
 msgid "Revision uploaded"
-msgstr "Caricati precentemente"
+msgstr "Versine caricata"
 
 msgid "Please wait..."
 msgstr "Attendi, per favore..."
 
 msgid "AstroBin is processing your thumbnails."
-msgstr ""
+msgstr "AstroBin sta elaborando le tue miniature."
 
 msgid "Edit your image: acquisition details"
 msgstr "Modifica l'immagine: dettagli d'acquisizione"
@@ -3804,15 +3845,13 @@ msgstr "Informazioni di base"
 msgid "Gear used"
 msgstr "Strumentazione usata"
 
-#, fuzzy
 #| msgid "Edit your image: plate-solving settings"
 msgid "Edit your image: advanced plate-solving settings"
-msgstr "Modifica l'immagine: impostazioni riduzione astrometrica"
+msgstr "Modifica l'immagine: impostazioni riduzione astrometrica avanzata"
 
-#, fuzzy
 #| msgid "Attempt to plate-solve again"
 msgid "Save and plate-solve again"
-msgstr "Riprova la risoluzione astrometrica"
+msgstr "Salva e ripeti la riduzione astrometrica"
 
 msgid "Edit your image: plate-solving settings"
 msgstr "Modifica l'immagine: impostazioni riduzione astrometrica"
@@ -3820,15 +3859,13 @@ msgstr "Modifica l'immagine: impostazioni riduzione astrometrica"
 msgid "Edit revision"
 msgstr "Modifica versione"
 
-#, fuzzy
 #| msgid "Change the license for this image"
 msgid "Change the thumbnails for this image"
-msgstr "Cambia la licenza di quest'immagine"
+msgstr "Cambia le miniature di questa immagine"
 
-#, fuzzy
 #| msgid "Edit watermark"
 msgid "Next step: edit watermark"
-msgstr "Modifica watermark"
+msgstr "Prossimo passo: modifica watermark"
 
 msgid "Apply a watermark to image"
 msgstr "Applica un watermark all'immagine"
@@ -3869,28 +3906,25 @@ msgid "Fit to window"
 msgstr "Adatta alla finestra"
 
 msgid "Abscissa "
-msgstr ""
+msgstr "Ascissa"
 
 msgid "Ordinate"
-msgstr ""
+msgstr "Ordinata"
 
 msgid "Ecliptic longitude"
-msgstr ""
+msgstr "Longitudine eclittica"
 
-#, fuzzy
 #| msgid "Select latitude"
 msgid "Ecliptic latitude"
-msgstr "Seleziona latitudine"
+msgstr "Latitudine eclittica"
 
-#, fuzzy
 #| msgid "Select latitude"
 msgid "Galactic longitude"
-msgstr "Seleziona latitudine"
+msgstr "Longitudine galattica"
 
-#, fuzzy
 #| msgid "Select latitude"
 msgid "Galactic latitude"
-msgstr "Seleziona latitudine"
+msgstr "Latitudine galattica"
 
 msgid "Remove"
 msgstr "Rimuovi"
@@ -3908,7 +3942,7 @@ msgid "No images"
 msgstr "Nessuna immagine"
 
 msgid "Only you can see this"
-msgstr ""
+msgstr "Solo tu puoi vederlo"
 
 msgid "Integration"
 msgstr "Integrazione"
@@ -3926,7 +3960,7 @@ msgid "link"
 msgstr "link"
 
 msgid "Comment of deleted image not shown."
-msgstr ""
+msgstr "Commento di immagine cancellata non mostrato."
 
 msgid "No results. Sorry."
 msgstr "Nessun risultato. Spiacente."
@@ -3978,7 +4012,6 @@ msgstr "Informazioni venditore"
 msgid "Blog"
 msgstr "Blog in English"
 
-#, fuzzy
 #| msgid "Terms of service"
 msgid "Terms of servic"
 msgstr "Condizioni d'uso"
@@ -5135,11 +5168,10 @@ msgstr "Campionamento grande"
 msgid "Small pixel scale"
 msgstr "Campionamento piccolo"
 
-#, fuzzy
 #| msgid ""
 #| "Search for astronomical objects, telescopes or lenses, cameras, filters..."
 msgid "Search for celestial objects, equipment items, users, etc..."
-msgstr "Cerca oggetti astronomici, telescopi o obiettivi, camere, filtri..."
+msgstr "Cerca oggetti astronomici, strumentazione, tenti, ecc..."
 
 #, python-format
 msgid ""
@@ -5169,76 +5201,67 @@ msgstr "CCD contro DSLR: il trend globale"
 msgid "Global trend of telescope types"
 msgstr "Trend globale di tipi di telescopio"
 
-#, fuzzy
 #| msgid "About"
 msgctxt "approximately"
 msgid "about"
-msgstr "Informazioni"
+msgstr "informazioni"
 
 msgid "View feature comparison"
-msgstr ""
+msgstr "Vedi confronto delle caratteristiche"
 
-#, fuzzy
 #| msgid "Pixel size"
 msgid "Max size"
-msgstr "Dimensione del pixel"
+msgstr "Dimensione massima"
 
-#, fuzzy
 #| msgid "View all"
 msgid "View full res"
-msgstr "Mostra tutto"
+msgstr "Vedi risoluzione piena"
 
-#, fuzzy
 #| msgid "View your images"
 msgid "View full image info"
-msgstr "Le tue immagini"
+msgstr "Vedi informazioni immagini complete"
 
 msgid "Basic"
 msgstr "Di base"
 
-#, fuzzy
 #| msgid "Advanced search"
 msgid "Advanced"
-msgstr "Ricerca avanzata"
+msgstr "Avanzata"
 
-#, fuzzy
 #| msgid "Commercial gear items"
 msgid "Social features"
-msgstr "Strumenti commerciali"
+msgstr "Funzionalità sociali"
 
-#, fuzzy
 #| msgid "Start plate-solving"
 msgid "Plate-solving"
-msgstr "Avvia la riduzione"
+msgstr "Riduzione astrometrica"
 
-#, fuzzy
 #| msgid "Public data pools"
 msgid "Bulk data export"
-msgstr "Gruppi di dati pubblici"
+msgstr "Export dati"
 
 msgid "Hide astronomy ads"
-msgstr ""
+msgstr "Nascondi pubblicità astronomiche"
 
 msgid "No ads on your pages"
-msgstr ""
+msgstr "Nessuna pubblicità sulle tue pagine"
 
 msgid "Non-members/free users can view your images in full res"
 msgstr ""
+"Utenti non registrati o con account Free possono vedere le tue immagini a "
+"risoluzione piena"
 
-#, fuzzy
 #| msgid "Full resolution"
 msgid "Full size annotations"
-msgstr "Piena risoluzione"
+msgstr "Annotazioni ad alta risoluzione"
 
-#, fuzzy
 #| msgid "Upload complete!"
 msgid "Upload uncompressed source"
-msgstr "Caricamento completato!"
+msgstr "Caricamento origine dati non compressa"
 
-#, fuzzy
 #| msgid "Unlimited images"
 msgid "Undelete images"
-msgstr "Immagini illimitate"
+msgstr "Ripristino immagini cancellate"
 
 msgid "year"
 msgstr "anno"
@@ -5248,66 +5271,64 @@ msgid ""
 "\n"
 "                %(number)s images, max %(size)s each"
 msgstr ""
+"\n"
+"%(number)s immagini, max %(size)s ciascuna"
 
-#, fuzzy
 #| msgid "Higher resolution"
 msgid "View in original resolution"
-msgstr "Risoluzione superiore"
+msgstr "Vedi a risoluzione originale"
 
 #, python-format
 msgid ""
 "Up to %(number)s\n"
 "            revisions/image"
 msgstr ""
+"Fino a %(number)s\n"
+"versioni/immagine"
 
 msgid "Create/join Groups"
-msgstr ""
+msgstr "Crea/unisciti a Gruppi"
 
-#, fuzzy
 #| msgid "Start plate-solving"
 msgid "Basic plate-solving"
-msgstr "Avvia la riduzione"
+msgstr "Riduzione astrometrica di base"
 
-#, fuzzy
 #| msgid "Top Pick"
 msgid "IOTD / Top Picks"
-msgstr "Top Pick"
+msgstr "IOTD / Top Picks"
 
 msgid "No ads for others on your pages"
-msgstr ""
+msgstr "Nessuna pubblicità ad altri sulle tue pagine"
 
 msgid "Full-size annotations"
-msgstr ""
+msgstr "Annotazioni ad alta risoluzione"
 
 msgid "All future features"
-msgstr ""
+msgstr "Tutte le funzionalità future"
 
 msgid "In the future"
-msgstr ""
+msgstr "In futuro"
 
-#, fuzzy
 #| msgid "Buy it here"
 msgid "Buy in the Marketplace"
-msgstr "Compralo qua"
+msgstr "Comprare al Mercatino"
 
 msgid "Vote in contests"
-msgstr ""
+msgstr "Votare in concorsi"
 
 msgid "Analytics"
-msgstr ""
+msgstr "Analisi"
 
-#, fuzzy
 #| msgid "Lucky imaging"
 msgid "Bulk image editing"
-msgstr "Lucky imaging"
+msgstr "Modifica immagini in bulk"
 
-#, fuzzy
 #| msgid "Cancel via PayPal"
 msgid "Pay securely with PayPal"
-msgstr "Annulla tramite PayPal"
+msgstr "Paga con sicurezza tramite PayPal"
 
 msgid "Want to upgrade from a lower subscription tier?"
-msgstr ""
+msgstr "Vuoi fare l'upgrade da un abbonamento più basso?"
 
 #, python-format
 msgid ""
@@ -5318,9 +5339,15 @@ msgid ""
 "\">astrobin@astrobin.com</a> to get a refund for the unused time on your old "
 "subscription. Thanks!"
 msgstr ""
+"AstroBin non supporta upgrades di abbonamenti al momento, ma siamo felici di "
+"farlo manualmente. Se sei in un abbonamento inferire e vorresti fare "
+"l'upgrade a <strong>%(name)s</strong>, semplicemente compralo e poi "
+"contattaci a <a href=\"mailto:astrobin@astrobin.com\""
+">astrobin@astrobin.com</a> per ottenere un rimborso per il tempo "
+"inutilizzato sul tuo abbonamento precedente. Grazie!"
 
 msgid "Pay with a bank transfer"
-msgstr ""
+msgstr "Paga con deposito bancario"
 
 #, python-format
 msgid ""
@@ -5332,59 +5359,61 @@ msgid ""
 "                we may upgrade your account manually. Thanks!\n"
 "            "
 msgstr ""
+"\n"
+"Preferisci pagare tramite deposito bancario? Fai un pagamento di %(currency)"
+"s %(amount)s verso i seguenti\n"
+"dettagli bancari e poi scrivici a %(email_prefix)s%(email)s%(email_postfix)s "
+"con il tuo nome utente così\n"
+"possiamo fare l'upgrade del tuo account a mano. Grazie!\n"
+"            "
 
 #, python-format
 msgid ""
 "\n"
 "                ∞ images, max %(size)s each"
 msgstr ""
+"\n"
+"Immagini ∞, max %(size)s ciascuna"
 
-#, fuzzy
 #| msgid "Basic information"
 msgid "Basic analytics"
-msgstr "Informazioni di base"
+msgstr "Analisi di base"
 
 msgid "Buy"
 msgstr "Acquista"
 
-#, fuzzy
 #| msgid "You have already nominated this image"
 msgid "You are already on this plan"
-msgstr "Hai già nominato questa immagine"
+msgstr "Hai già questo abbonamento"
 
-#, fuzzy
 #| msgid "Image size"
 msgid "∞ images, ∞ size"
-msgstr "Dimensione immagine"
+msgstr "Immagini ∞, dimensione ∞"
 
 msgid "View full res (incl. visitors)"
-msgstr ""
+msgstr "Vedi risoluzione piena (incl. visitatori)"
 
-#, fuzzy
 #| msgid "Full size"
 msgid "Full search"
-msgstr "Dimensione intera"
+msgstr "Ricerca completa"
 
-#, fuzzy
 #| msgid "Edit revision"
 msgid "Unlimited revisions"
-msgstr "Modifica versione"
+msgstr "Versioni illimitate"
 
-#, fuzzy
 #| msgid "Start plate-solving"
 msgid "Advanced plate-solving"
-msgstr "Avvia la riduzione"
+msgstr "Riduzione astrometrica avanzata"
 
 msgid "Sell in the Marketplace"
-msgstr ""
+msgstr "Vendi al Mercatino"
 
 msgid "Vote/enter contests"
-msgstr ""
+msgstr "Vota/partecipa ai concorsi"
 
-#, fuzzy
 #| msgid "Advanced search"
 msgid "Advanced analytics"
-msgstr "Ricerca avanzata"
+msgstr "Analisi avanzata"
 
 msgid "Subscription process canceled"
 msgstr "Processo di abbonamento annullato"
@@ -5504,7 +5533,7 @@ msgstr "Non disponibile"
 msgid "Unsubscribed"
 msgstr "Non abbonato"
 
-#, fuzzy, python-format
+#, python-format
 #| msgid ""
 #| "Auto-renewing subscriptions are not offered anymore on AstroBin. Please "
 #| "visit the <a href=\"%(url)s\">subscriptions page</a> to see the available "
@@ -5513,9 +5542,8 @@ msgid ""
 "This subscription is not offered anymore on AstroBin. Please visit the <a "
 "href=\"%(url)s\">subscriptions page</a> to see the available plans, thanks!"
 msgstr ""
-"Gli abbonamenti con rinnovo automatico non sono più offerti su AstroBin. "
-"Visita la <a href=\"%(url)s\">pagina degli abbonamenti</a> per vedere quelli "
-"disponibili, grazie!"
+"Questo abbonamento non è più offerto su AstroBin. Visita la <a href=\"%(url)"
+"s\">pagina degli abbonamenti</a> per scoprire le offerte disponibili, grazie!"
 
 msgid ""
 "If you would like to renew your subscription, please visit this page again "

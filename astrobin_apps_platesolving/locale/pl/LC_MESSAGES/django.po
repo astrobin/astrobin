@@ -8,8 +8,8 @@ msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2020-05-13 17:58+0000\n"
-"PO-Revision-Date: 2018-12-04 11:40+0000\n"
-"Last-Translator: Łukasz Sujka <lukasz.sujka83@gmail.com>\n"
+"PO-Revision-Date: 2020-05-18 12:03+0000\n"
+"Last-Translator: Milosz Wasilewski <milosz.wasilewski@gmail.com>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
 "Language: pl\n"
 "MIME-Version: 1.0\n"
@@ -18,7 +18,7 @@ msgstr ""
 "Plural-Forms: nplurals=3; plural=(n==1 ? 0 : n%10>=2 && n%10<=4 && (n%100<10 "
 "|| n%100>=20) ? 1 : 2);\n"
 "X-Generator: Pootle 2.8\n"
-"X-POOTLE-MTIME: 1543923609.000000\n"
+"X-POOTLE-MTIME: 1589803411.000000\n"
 
 msgid "Perform a blind solve"
 msgstr "Uruchom losową astrometrię"
@@ -77,16 +77,16 @@ msgstr ""
 "pozycji RA i DEC"
 
 msgid "Small"
-msgstr ""
+msgstr "Mały"
 
 msgid "Medium"
-msgstr ""
+msgstr "Średni"
 
 msgid "Large"
-msgstr ""
+msgstr "Duży"
 
 msgid "Sample raw frame (max 200 MB)"
-msgstr ""
+msgstr "Przykładowa surowa klatka (max 200 MB)"
 
 msgid ""
 "To improve the accuracy of your plate-solution even further, please upload "
@@ -107,40 +107,40 @@ msgid "Scaled font size"
 msgstr ""
 
 msgid "Font size of the annotations on your main image page"
-msgstr ""
+msgstr "Rozmiar czcionki podpisów na głównej stronie ze zdjęciami"
 
 msgid "Show equatorial grid"
-msgstr ""
+msgstr "Pokaż siatkę równikową"
 
 msgid "Show constellation borders"
-msgstr ""
+msgstr "Pokaż granice konstelacji"
 
 msgid "Show constellation lines"
-msgstr ""
+msgstr "Pokaż linie gwiazdozbiorów"
 
 msgid "Show named stars"
-msgstr ""
+msgstr "Pokaż nazwy gwiazd"
 
 msgid "Show Messier objects"
-msgstr ""
+msgstr "Pokaż obiekty z katalogu Messiera"
 
 msgid "Show NGC and IC objects"
-msgstr ""
+msgstr "Pokaż obiekty z katalogów NGC i IC"
 
 msgid "Show VdB objects"
-msgstr ""
+msgstr "Pokaż obiekty z katalogu VdB"
 
 msgid "Show Sharpless objects"
-msgstr ""
+msgstr "Pokaż obiekty z katalogu Sharpless"
 
 msgid "Show Barnard objects"
-msgstr ""
+msgstr "Pokaż obiekty z katalogy Barnarda"
 
 msgid "Show PGC objects"
-msgstr ""
+msgstr "Pokaż obiekty z katalogu PGC"
 
 msgid "Show planets"
-msgstr ""
+msgstr "Pokaż planety"
 
 msgid ""
 "Only available if your image at least an acquisition time and an accurate "
@@ -148,39 +148,38 @@ msgid ""
 msgstr ""
 
 msgid "Show asteroids"
-msgstr ""
+msgstr "Pokaż planetoidy"
 
 msgid "Show GCVS stars"
-msgstr ""
+msgstr "Pokaż gwiazdy GCVS"
 
 msgid "General Catalog of Variable Stars"
 msgstr ""
 
 msgid "Show Tycho-2 catalog"
-msgstr ""
+msgstr "Pokaż katalog Tycho-2"
 
 msgid "Show CGPN objects"
-msgstr ""
+msgstr "Pokaż obiekty z katalogy CGPN"
 
 msgid "Getting plate-solving status, please wait..."
 msgstr "Pobieram status mapowania szczegółów zdjęcia, proszę czekać..."
 
-#, fuzzy
 #| msgid "Plate-solving process starting, please do not leave this page..."
 msgid "Plate-solving starting, please do not leave this page..."
 msgstr ""
-"Mapowanie szczegółów zdjęcia rozpoczęte, proszę nie opuszczać strony..."
+"Redukcja astrometryczna zdjęcia rozpoczęta, proszę nie opuszczać strony..."
 
-#, fuzzy
 #| msgid "Plate-solving process starting, please do not leave this page..."
 msgid "Advanced plate-solving starting, please do not leave this page..."
 msgstr ""
-"Mapowanie szczegółów zdjęcia rozpoczęte, proszę nie opuszczać strony..."
+"Zaawansowana redukcja astrometryczna zdjęcia rozpoczęta, proszę nie "
+"opuszczać strony..."
 
-#, fuzzy
 #| msgid "Plate-solving started in the background. You may leave this page."
 msgid "Plate-solving started. You may leave this page."
-msgstr "Mapowanie szczegółów zdjęcia uruchomione w tle. Możesz opuścić stronę."
+msgstr ""
+"Redukcja astrometryczna zdjęcia uruchomiona w tle. Możesz opuścić stronę."
 
 #, fuzzy
 #| msgid "Plate-solving started in the background. You may leave this page."

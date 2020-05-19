@@ -7,44 +7,23 @@ msgid ""
 msgstr ""
 "Project-Id-Version: \n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2020-05-13 17:59+0000\n"
-"PO-Revision-Date: 2020-05-13 09:04+0200\n"
+"POT-Creation-Date: 2019-10-15 11:56+0000\n"
+"PO-Revision-Date: 2020-05-19 00:24+0200\n"
 "Last-Translator: Niels <astrobin.com@n13l5.de>\n"
-"Language-Team: \n"
 "Language: de\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=(n != 1);\n"
-"X-Generator: Poedit 2.2.4\n"
+"X-Generator: Poedit 2.3.1\n"
 "X-POOTLE-MTIME: 1451334697.736593\n"
-
-msgid "I wasn't really affected by the data loss"
-msgstr ""
-
-msgid "I don't require compensation: I want to support AstroBin"
-msgstr ""
-
-msgid "I would like to try AstroBin Ultimate for free for 1 month"
-msgstr ""
-
-msgid "I feel entitled to AstroBin Ultimate for free for 3 months"
-msgstr ""
-
-msgid "I feel entitled to AstroBin Ultimate for free for 6 months"
-msgstr ""
-
-msgid "Requested compensation"
-msgstr ""
-
-msgid "Please indicate if and how much you would like to be compensated."
-msgstr ""
+"Language-Team: \n"
 
 msgid "Your migration data"
-msgstr "Deine migrierten Daten."
+msgstr "Deine Migrationsdaten"
 
 msgid "Total amount donated last year"
-msgstr "Gesamte Spenden letztes Jahr."
+msgstr "Gesamte Spenden letztes Jahr"
 
 msgid "First payment"
 msgstr "Erste Zahlung"
@@ -69,76 +48,6 @@ msgstr "Datum"
 
 msgid "Subscription"
 msgstr "Abonnement"
-
-msgid "Data loss compensation request"
-msgstr ""
-
-msgid ""
-"You are eligible for compensation due to the data loss that happened on "
-"February 16th, 2020."
-msgstr ""
-
-msgid ""
-"If you haven't had the chance, please take a minute to read what happened at "
-"the following page:"
-msgstr ""
-
-msgid "Official statement and post-mortem"
-msgstr ""
-
-msgid "Please accept our apology once more."
-msgstr ""
-
-msgid "Please chooce your compensation from the list below"
-msgstr ""
-
-msgid ""
-"Compensation is offered in the form of free time on the new AstroBin "
-"subscription tier called \"Ultimate\"."
-msgstr ""
-
-#, python-format
-msgid ""
-"To learn more about AstroBin Ultimate, please visit <a href=\"%(url)s\" "
-"target=\"_blank\">the pricing page</a>."
-msgstr ""
-
-msgid "Submit"
-msgstr ""
-
-msgid "Data loss compensation reauest"
-msgstr ""
-
-msgid "Already done"
-msgstr ""
-
-msgid "Sorry, you can't do this again."
-msgstr ""
-
-msgid "Your preference was already recorded and cannot be changed."
-msgstr ""
-
-msgid "Not eligible"
-msgstr ""
-
-msgid "It looks like you're not eligible"
-msgstr ""
-
-msgid ""
-"Sorry, but this page is for people who were on AstroBin Premium on the day "
-"that the data loss incident happened, and it looks like you aren't among "
-"them."
-msgstr ""
-
-msgid "Success"
-msgstr "Erfolgreich"
-
-msgid "All done!"
-msgstr ""
-
-msgid ""
-"Your preference has been recorded and it has already been applied. Thank you!"
-msgstr ""
 
 msgid "Migrate donations"
 msgstr "Spenden übertragen"
@@ -190,7 +99,10 @@ msgstr ""
 "Das liegt ganz bei dir!"
 
 msgid "No, I want to pay for Premium"
-msgstr "Nein, ich möchte für die Premium Mitgliedschaft bezahlen."
+msgstr "Nein, ich möchte für Premium bezahlen"
+
+msgid "Success"
+msgstr "Erfolgreich"
 
 msgid "Your migration was successful."
 msgstr "Deine Migration war erfolgreich."
@@ -198,12 +110,10 @@ msgstr "Deine Migration war erfolgreich."
 msgid "Thanks for supporting AstroBin!"
 msgstr "Danke für die Unterstützung von AstroBin!"
 
-#, fuzzy, python-format
-#| msgid ""
-#| "Your \"%(subscription_name)s\" subscription on AstroBin will expire in "
-#| "one week."
+#, python-format
 msgid ""
-"Your \"%(subscription_name)s\" subscription on AstroBin has just expired."
+"Your \"%(subscription_name)s\" subscription on AstroBin will expire in one "
+"week."
 msgstr ""
 "Dein \"%(subscription_name)s\"-Abonnement bei AstroBin läuft in einer Woche "
 "ab."
@@ -227,19 +137,6 @@ msgid ""
 msgstr ""
 "Wenn Du bereit bist, Dein Abonnement zu erneuern, besuche bitte die folgende "
 "Seite:"
-
-#, fuzzy
-#| msgid "Your premium subscription will expire in one week"
-msgid "Your premium subscription has just expired"
-msgstr "Dein Premium-Abonnement läuft in einer Woche ab"
-
-#, python-format
-msgid ""
-"Your \"%(subscription_name)s\" subscription on AstroBin will expire in one "
-"week."
-msgstr ""
-"Dein \"%(subscription_name)s\"-Abonnement bei AstroBin läuft in einer Woche "
-"ab."
 
 msgid "Your premium subscription will expire in one week"
 msgstr "Dein Premium-Abonnement läuft in einer Woche ab"
