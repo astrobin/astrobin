@@ -991,7 +991,7 @@ class ImagePromoteView(LoginRequiredMixin, ImageUpdateViewBase):
                         UserProfile.objects.get(user__pk=request.user.pk).user)
                 ]
 
-                thumb = image.thumbnail_raw('regular', {'sync': True})
+                thumb = image.thumbnail_raw('gallery', {'sync': True})
                 push_notification(followers, 'new_image', {
                     'image': image,
                     'image_thumbnail': thumb.url if thumb else None
