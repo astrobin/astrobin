@@ -35,7 +35,7 @@
         });
 
         {% if GOOGLE_ADS_ID != "invalid" %}
-            gtag('config', {{ GOOGLE_ADS_ID }});
+            gtag("config", "{{ GOOGLE_ADS_ID }}");
         {% endif %}
     </script>
 {% endif %}
