@@ -147,9 +147,9 @@
             function checkAds() {
                 var ad = document.getElementById('adsense');
                 if(!ad || ad.innerHTML.length == 0 || ad.clientHeight === 0) {
-                    document.write("<script>_gaq.push(['_setCustomVar', 5, 'Adblock','Blocked',2]);<\/sc" + "ript>");
+                    document.write("<script>gtag('set', {'Adblock': 'Blocked'});<\/sc" + "ript>");
                 } else {
-                    document.write("<script>_gaq.push(['_setCustomVar', 5, 'Adblock','UnBlocked',2]);<\/sc" + "ript>");
+                    document.write("<script>gtag('set', {'Adblock': 'Unblocked'});<\/sc" + "ript>");
                 }
             }
             /* End Adblock Check */
