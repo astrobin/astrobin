@@ -106,6 +106,7 @@ def common_variables(request):
         'IOTD_SHOW_CHOOSING_JUDGE': settings.IOTD_SHOW_CHOOSING_JUDGE,
         'ENABLE_SOLVING': settings.ENABLE_SOLVING,
         'GOOGLE_ANALYTICS_ID': settings.GOOGLE_ANALYTICS_ID,
+        'GOOGLE_ADS_ID': settings.GOOGLE_ADS_ID,
         'READONLY_MODE': settings.READONLY_MODE,
         'HAS_BOUNCED_EMAILS': bounced,
         'HAS_COMPLAINT': complained,

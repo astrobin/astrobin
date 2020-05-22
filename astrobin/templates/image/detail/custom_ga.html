@@ -1,6 +1,6 @@
 {% block extra_gaq_push %}
     {% if image.is_wip %}
-        _gaq.push(['_setCustomVar', 3, 'Staging Image', 'Yes']);
+        gtag("set", {"Staging Image": "Yes"});
     {% endif %}
 {% endblock %}
 
