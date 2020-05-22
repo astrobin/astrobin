@@ -16,8 +16,6 @@
             gtag("set", {"User Type": "Anonymous"});
         {% endif %}
 
-        {% block extra_gaq_push %}{% endblock %}
-
         gtag("config", "{{GOOGLE_ANALYTICS_ID}}", {
             "linker": {
                 "domains": [
