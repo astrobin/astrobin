@@ -3,6 +3,8 @@ from django.conf.urls import url, include
 from django.conf.urls.static import static
 from django.contrib import admin
 from django.contrib.auth import views as auth_views
+from django.contrib.staticfiles.storage import staticfiles_storage
+from django.views.generic import RedirectView
 from django.views.static import serve
 from rest_framework.authtoken.views import obtain_auth_token
 from tastypie.api import Api
@@ -241,6 +243,9 @@ urlpatterns += [
     ###########################################################################
 
     url(r'^ads.txt$', special_views.AdsTxtView.as_view(), name='ads_txt'),
+    url(r'^favicon.ico$',
+        RedirectView.as_view(url=staticfiles_storage.url('astrobin/favicon.ico'), permanent=False),
+        name='favicon'),
 
     ###########################################################################
     ### SEARCH VIEWS                                                        ###
