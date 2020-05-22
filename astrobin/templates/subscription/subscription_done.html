@@ -3,6 +3,17 @@
 
 {% block title %}{% trans "Subscription confirmed" %}{% endblock %}
 
+{% block extra_gtag %}
+    {% if GOOGLE_ADS_ID != "invalid" %}
+        <!-- Event snippet Subscription created conversion page -->
+        <script>
+            gtag('event', 'conversion', {
+                'send_to': '{{ GOOGLE_ADS_ID }}/iAg6CLiKo9EBEJrDxfoD'
+            });
+        </script>
+    {% endif %}
+{% endblock %}
+
 {% block content %}
     <div class="page-header">
         <h1>{% trans "Subscription confirmed" %}</h1>
