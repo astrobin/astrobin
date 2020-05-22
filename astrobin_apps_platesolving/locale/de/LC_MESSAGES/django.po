@@ -8,16 +8,16 @@ msgstr ""
 "Project-Id-Version: \n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2020-05-19 08:04+0000\n"
-"PO-Revision-Date: 2020-05-19 00:23+0200\n"
-"Last-Translator: Niels <astrobin.com@n13l5.de>\n"
+"PO-Revision-Date: 2020-05-21 20:30+0000\n"
+"Last-Translator: Kvoo <kevindorrer@hotmail.com>\n"
 "Language-Team: \n"
 "Language: de\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=(n != 1);\n"
-"X-Generator: Poedit 2.3.1\n"
-"X-POOTLE-MTIME: 1451648333.468895\n"
+"X-Generator: Pootle 2.8\n"
+"X-POOTLE-MTIME: 1590093034.000000\n"
 
 msgid "Perform a blind solve"
 msgstr "Eine blinde Metrierung durchführen"
@@ -76,16 +76,16 @@ msgstr ""
 "vorgegebenen mittleren RA- und Dez-Position zu suchen."
 
 msgid "Small"
-msgstr ""
+msgstr "Klein"
 
 msgid "Medium"
-msgstr ""
+msgstr "Mittel"
 
 msgid "Large"
-msgstr ""
+msgstr "Groß"
 
 msgid "Sample raw frame (max 200 MB)"
-msgstr ""
+msgstr "Sample raw frame (max 200 MB)"
 
 msgid ""
 "To improve the accuracy of your plate-solution even further, please upload "
@@ -101,90 +101,101 @@ msgid ""
 "match. To improve your chances at a successful accurate plate-solution, "
 "calibrate your file the usual way (dark/bias/flats) but do not stretch it."
 msgstr ""
+"Um die Genauigkeit deiner Plattenauflösung noch weiter zu verbessern, lade "
+"bitte eine der XISF- oder FITS-Dateien aus deinem Datensatz hoch. Solche "
+"Dateien haben normalerweise Datums- und Zeitheader, die es AstroBin "
+"ermöglichen, die Ephemeriden von Sonnensystemkörpern zu berechnen und "
+"Planeten und Asteroiden in deinem Bild zu finden (vorausgesetzt, du fügst "
+"auch Ortsinformationen hinzu).<br/><br/> Für maximale Genauigkeit wird "
+"empfohlen, das native und offene Format XISF von PixInsight zu verwenden. "
+"Erfahre hier mehr über XISF:<br/><br/><a href=\"https://pixinsight.com/xisf/"
+"\" target=\"_blank\">https://pixinsight.com/xisf/</a><br/><br/> <strong>"
+"Bitte beachte:</strong> es ist sehr wichtig, dass die XISF- oder FITS-Datei, "
+"die du hochlädst, an deinem bearbeiteten Bild ausgerichtet ist, sonst "
+"stimmen die Objektanmerkungen nicht überein. Um deine Chancen auf eine "
+"erfolgreiche akkurate Plattenlösung zu verbessern, kalibriere deine Datei "
+"auf die übliche Weise (dunkel/vorbelastet/flach), aber strecke sie nicht."
 
 msgid "Scaled font size"
-msgstr ""
+msgstr "Skalierte Schriftgröße"
 
 msgid "Font size of the annotations on your main image page"
-msgstr ""
+msgstr "Schriftgröße der Anmerkungen auf deiner Hauptbildseite"
 
 msgid "Show equatorial grid"
-msgstr ""
+msgstr "Äquatoriales Koordinatennetz anzeigen"
 
 msgid "Show constellation borders"
-msgstr ""
+msgstr "Konstellationsgrenzen anzeigen"
 
 msgid "Show constellation lines"
-msgstr ""
+msgstr "Konstellationslinien anzeigen"
 
 msgid "Show named stars"
-msgstr ""
+msgstr "Benannte Sterne anzeigen"
 
 msgid "Show Messier objects"
-msgstr ""
+msgstr "Messier-Objekte anzeigen"
 
 msgid "Show NGC and IC objects"
-msgstr ""
+msgstr "NGC- und IC-Objekte anzeigen"
 
 msgid "Show VdB objects"
-msgstr ""
+msgstr "VdB-Objekte anzeigen"
 
 msgid "Show Sharpless objects"
-msgstr ""
+msgstr "Sharpless-Objekte anzeigen"
 
 msgid "Show Barnard objects"
-msgstr ""
+msgstr "Barnard-Objekte anzeigen"
 
 msgid "Show PGC objects"
-msgstr ""
+msgstr "PGC-Objekte anzeigen"
 
 msgid "Show planets"
-msgstr ""
+msgstr "Planeten anzeigen"
 
 msgid ""
 "Only available if your image at least an acquisition time and an accurate "
 "location"
 msgstr ""
+"Nur verfügbar, wenn Ihr Bild mindestens eine Aufnahmezeit und einen genauen "
+"Standort aufweist"
 
 msgid "Show asteroids"
-msgstr ""
+msgstr "Asteroiden anzeigen"
 
 msgid "Show GCVS stars"
-msgstr ""
+msgstr "GCVS-Sterne anzeigen"
 
 msgid "General Catalog of Variable Stars"
-msgstr ""
+msgstr "Allgemeiner Katalog der variablen Sterne"
 
 msgid "Show Tycho-2 catalog"
-msgstr ""
+msgstr "Tycho-2-Katalog anzeigen"
 
 msgid "Show CGPN objects"
-msgstr ""
+msgstr "CGPN-Objekte anzeigen"
 
 msgid "Getting plate-solving status, please wait..."
 msgstr "Status der Astrometrierung abrufen, bitte warten..."
 
-#, fuzzy
 #| msgid "Plate-solving process starting, please do not leave this page..."
 msgid "Plate-solving starting, please do not leave this page..."
-msgstr "Astrometrierung gestertet, bitte NICHT diese Seite verlassen..."
+msgstr "Plattenauflösung beginnt, bitte NICHT diese Seite verlassen..."
 
-#, fuzzy
 #| msgid "Plate-solving process starting, please do not leave this page..."
 msgid "Advanced plate-solving starting, please do not leave this page..."
-msgstr "Astrometrierung gestertet, bitte NICHT diese Seite verlassen..."
+msgstr ""
+"Erweiterte Plattenauflösung beginnt, bitte NICHT diese Seite verlassen..."
 
-#, fuzzy
 #| msgid "Plate-solving started in the background. You may leave this page."
 msgid "Plate-solving started. You may leave this page."
-msgstr ""
-"Astrometrierung im Hintergrund gestartet. Du kannst diese Seite verlassen."
+msgstr "Plattenauflösung gestartet. Du kannst diese Seite verlassen."
 
-#, fuzzy
 #| msgid "Plate-solving started in the background. You may leave this page."
 msgid "Advanced plate-solving started. You may leave this page."
-msgstr ""
-"Astrometrierung im Hintergrund gestartet. Du kannst diese Seite verlassen."
+msgstr "Erweiterte Plattenauflösung gestartet. Du kannst diese Seite verlassen."
 
 msgid "Plate-solving almost ready, please do not leave this page..."
 msgstr "Astrometrierung fast fertig, bitte NICHT diese Seite verlassen..."
@@ -193,22 +204,20 @@ msgid "This image could not be plate-solved."
 msgstr "Dieses Bild kann nicht astrometriert werden."
 
 msgid "The advanced plate-solving failed."
-msgstr ""
+msgstr "Erweiterte Plattenauflösung fehlgeschlagen."
 
-#, fuzzy
 #| msgid ""
 #| "This image has been successfully plate-solved. Please refresh the page to "
 #| "see the new data."
 msgid "This image has been plate-solved. Refresh the page to see new data!"
 msgstr ""
-"Dieses Bild wurde astrometriert. Bitte lade die Seite neu um die "
-"Aktualisierungen zu sehen."
+"Dieses Bild wurde plattenaufgelöst. Aktualisiere die Seite, um neue Daten zu "
+"sehen!"
 
-#, fuzzy
 #| msgid ""
 #| "This image has been successfully plate-solved. Please refresh the page to "
 #| "see the new data."
 msgid "The advanced plate-solved finished. Refresh the page to see new data!"
 msgstr ""
-"Dieses Bild wurde astrometriert. Bitte lade die Seite neu um die "
-"Aktualisierungen zu sehen."
+"Erweiterte Plattenauflösung beendet. Lade die Seite neu um neue Daten zu "
+"sehen."

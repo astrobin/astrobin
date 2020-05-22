@@ -8,37 +8,41 @@ msgstr ""
 "Project-Id-Version: \n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2020-05-19 08:05+0000\n"
-"PO-Revision-Date: 2020-05-19 00:24+0200\n"
-"Last-Translator: Niels <astrobin.com@n13l5.de>\n"
+"PO-Revision-Date: 2020-05-21 20:37+0000\n"
+"Last-Translator: Kvoo <kevindorrer@hotmail.com>\n"
 "Language-Team: \n"
 "Language: de\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=(n != 1);\n"
-"X-Generator: Poedit 2.3.1\n"
-"X-POOTLE-MTIME: 1451334697.736593\n"
+"X-Generator: Pootle 2.8\n"
+"X-POOTLE-MTIME: 1590093451.000000\n"
 
 msgid "I wasn't really affected by the data loss"
-msgstr ""
+msgstr "Ich war von dem Datenverlust nicht wirklich betroffen"
 
 msgid "I don't require compensation: I want to support AstroBin"
-msgstr ""
+msgstr "Ich verlange keine Entschädigung: Ich möchte AstroBin unterstützen"
 
 msgid "I would like to try AstroBin Ultimate for free for 1 month"
-msgstr ""
+msgstr "Ich möchte AstroBin Ultimate 1 Monat lang kostenlos testen"
 
 msgid "I feel entitled to AstroBin Ultimate for free for 3 months"
 msgstr ""
+"Ich fühle mich berechtigt, AstroBin Ultimate 3 Monate lang kostenlos zu "
+"erhalten."
 
 msgid "I feel entitled to AstroBin Ultimate for free for 6 months"
 msgstr ""
+"Ich fühle mich berechtigt, AstroBin Ultimate 6 Monate lang kostenlos zu "
+"erhalten."
 
 msgid "Requested compensation"
-msgstr ""
+msgstr "Gewünschte Entschädigung"
 
 msgid "Please indicate if and how much you would like to be compensated."
-msgstr ""
+msgstr "Bitte gib an, ob und in welcher Höhe du entschädigt werden möchtest."
 
 msgid "Your migration data"
 msgstr "Deine Migrationsdaten"
@@ -71,74 +75,86 @@ msgid "Subscription"
 msgstr "Abonnement"
 
 msgid "Data loss compensation request"
-msgstr ""
+msgstr "Antrag auf Entschädigung bei Datenverlust"
 
 msgid ""
 "You are eligible for compensation due to the data loss that happened on "
 "February 16th, 2020."
 msgstr ""
+"Du hast Anspruch auf Entschädigung aufgrund des Datenverlusts, der am 16. "
+"Februar 2020 eingetreten ist."
 
 msgid ""
 "If you haven't had the chance, please take a minute to read what happened at "
 "the following page:"
 msgstr ""
+"Wenn du noch keine Gelegenheit dazu hattest, nimm dir bitte eine Minute "
+"Zeit, um zu lesen, was auf der folgenden Seite passiert ist:"
 
 msgid "Official statement and post-mortem"
-msgstr ""
+msgstr "Offizielle Stellungnahme und Obduktion"
 
 msgid "Please accept our apology once more."
-msgstr ""
+msgstr "Bitte akzeptiere noch einmal unsere Entschuldigung."
 
 msgid "Please chooce your compensation from the list below"
-msgstr ""
+msgstr "Bitte wähle deine Entschädigung aus der folgenden Liste"
 
 msgid ""
 "Compensation is offered in the form of free time on the new AstroBin "
 "subscription tier called \"Ultimate\"."
 msgstr ""
+"Die Entschädigung wird in Form von kostenloser Zeit auf der neuen AstroBin-"
+"Abonnementstufe \"Ultimate\" angeboten."
 
 #, python-format
 msgid ""
 "To learn more about AstroBin Ultimate, please visit <a href=\"%(url)s\" "
 "target=\"_blank\">the pricing page</a>."
 msgstr ""
+"Um mehr über AstroBin Ultimate zu erfahren, besuche bitte <a href=\"%(url)s\""
+" target=\"_blank\">die Preisseite</a>."
 
 msgid "Submit"
-msgstr ""
+msgstr "Absenden"
 
 msgid "Data loss compensation reauest"
-msgstr ""
+msgstr "Antrag auf Entschädigung bei Datenverlust"
 
 msgid "Already done"
-msgstr ""
+msgstr "Bereits erledigt."
 
 msgid "Sorry, you can't do this again."
-msgstr ""
+msgstr "Tut mir leid, du darfst das nicht noch einmal tun."
 
 msgid "Your preference was already recorded and cannot be changed."
-msgstr ""
+msgstr "Deine Einstellung wurde bereits erfasst und kann nicht geändert werden."
 
 msgid "Not eligible"
-msgstr ""
+msgstr "Nicht berechtigt"
 
 msgid "It looks like you're not eligible"
-msgstr ""
+msgstr "Es sieht so aus, als wärst du nicht berechtigt"
 
 msgid ""
 "Sorry, but this page is for people who were on AstroBin Premium on the day "
 "that the data loss incident happened, and it looks like you aren't among "
 "them."
 msgstr ""
+"Tut mir leid, aber diese Seite ist für Leute, die an dem Tag, an dem der "
+"Datenverlust passierte, bei AstroBin Premium waren, und es sieht so aus, als "
+"würdest du nicht zu ihnen gehören."
 
 msgid "Success"
 msgstr "Erfolgreich"
 
 msgid "All done!"
-msgstr ""
+msgstr "Fertig!"
 
 msgid ""
 "Your preference has been recorded and it has already been applied. Thank you!"
 msgstr ""
+"Deine Einstellung wurde registriert und bereits angewendet. Wir danken dir!"
 
 msgid "Migrate donations"
 msgstr "Spenden übertragen"
@@ -198,15 +214,14 @@ msgstr "Deine Migration war erfolgreich."
 msgid "Thanks for supporting AstroBin!"
 msgstr "Danke für die Unterstützung von AstroBin!"
 
-#, fuzzy, python-format
+#, python-format
 #| msgid ""
 #| "Your \"%(subscription_name)s\" subscription on AstroBin will expire in "
 #| "one week."
 msgid ""
 "Your \"%(subscription_name)s\" subscription on AstroBin has just expired."
 msgstr ""
-"Dein \"%(subscription_name)s\"-Abonnement bei AstroBin läuft in einer Woche "
-"ab."
+"Dein \"%(subscription_name)s\"-Abonnement bei AstroBin ist gerade abgelaufen."
 
 msgid ""
 "When a Premium or Lite subscription on AstroBin expires, nothing happens to "
@@ -228,10 +243,9 @@ msgstr ""
 "Wenn Du bereit bist, Dein Abonnement zu erneuern, besuche bitte die folgende "
 "Seite:"
 
-#, fuzzy
 #| msgid "Your premium subscription will expire in one week"
 msgid "Your premium subscription has just expired"
-msgstr "Dein Premium-Abonnement läuft in einer Woche ab"
+msgstr "Dein Premium-Abonnement ist gerade abgelaufen"
 
 #, python-format
 msgid ""
