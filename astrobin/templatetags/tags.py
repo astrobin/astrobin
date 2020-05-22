@@ -480,6 +480,7 @@ def can_add_technical_details(image):
 @register.simple_tag
 def get_language_flag_icon(language_code, size=16):
     flags = {
+        '': 'United-States.png',
         'en': 'United-States.png',
         'en-US': 'United-States.png',
         'en-GB': 'United-Kingdom.png',
