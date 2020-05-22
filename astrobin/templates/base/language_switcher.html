@@ -1,0 +1,132 @@
+{% load static %}
+{% load i18n %}
+{% load tags %}
+
+<li class="dropdown hidden-phone">
+    <a href="#" class="dropdown-toggle" data-toggle="dropdown">
+        <img src="{% get_language_flag_icon request.LANGUAGE_CODE %}" />
+    </a>
+    <ul class="dropdown-menu">
+
+        <li>
+            <a href="{% url 'set_language' "en" %}" title="English">
+                <img src="{% get_language_flag_icon 'en' %}" alt="English (US)" /> English (US)
+            </a>
+        </li>
+
+        <li>
+            <a href="{% url 'set_language' "en-GB" %}" title="English">
+                <img src="{% get_language_flag_icon 'en-GB' %}" alt="English (GB)" />
+                English (GB)
+            </a>
+        </li>
+
+        <li class="divider"></li>
+
+        <li>
+            <a href="{% url 'set_language' "de" %}" title="Deutsch">
+                <img src="{% get_language_flag_icon 'de' %}" alt="Deutsch" /> Deutsch
+            </a>
+        <li>
+
+        <li>
+            <a href="{% url 'set_language' "es" %}" title="Español">
+                <img src="{% get_language_flag_icon 'es' %}" alt="Español" /> Español
+            </a>
+        </li>
+
+        <li>
+            <a href="{% url 'set_language' "fr" %}" title="Français">
+                <img src="{% get_language_flag_icon 'fr' %}" alt="Français" /> Français
+            </a>
+        </li>
+
+        <li>
+            <a href="{% url 'set_language' "it" %}" title="Italiano">
+                <img src="{% get_language_flag_icon 'it' %}" alt="Italiano" /> Italiano
+            </a>
+        </li>
+
+        <li class="divider"></li>
+
+        <li>
+            <a href="{% url 'set_language' "el" %}" title="Ελληνικά">
+                <img src="{% get_language_flag_icon 'el' %}" alt="Ελληνικά" /> Ελληνικά
+            </a>
+        </li>
+
+        <li>
+            <a href="{% url 'set_language' "nl" %}" title="Nederlands">
+                <img src="{% get_language_flag_icon 'nl' %}" alt="Nederlands" /> Nederlands
+            </a>
+        </li>
+
+
+        <li>
+            <a href="{% url 'set_language' "pl" %}" title="Polski">
+                <img src="{% get_language_flag_icon 'pl' %}" alt="Polski" /> Polski
+            </a>
+        </li>
+
+        <li>
+            <a href="{% url 'set_language' "pt-BR" %}" title="Português brasileiro">
+                <img src="{% get_language_flag_icon 'pt-BR' %}" alt="Português brasileiro" /> Português
+                brasileiro
+            </a>
+        </li>
+
+        <li>
+            <a href="{% url 'set_language' "ru" %}" title="Русский">
+                <img src="{% get_language_flag_icon 'ru' %}" alt="Русский" /> Русский
+            </a>
+        </li>
+
+        <li>
+            <a href="{% url 'set_language' "sq" %}" title="Shqipe">
+                <img src="{% get_language_flag_icon 'sq' %}" alt="Shqipe" /> Shqipe
+            </a>
+        </li>
+
+        <li>
+            <a href="{% url 'set_language' "fi" %}" title="Suomi">
+                <img src="{% get_language_flag_icon 'fi' %}" alt="Suomi" /> Suomi
+            </a>
+        </li>
+
+        <li>
+            <a href="{% url 'set_language' "tr" %}" title="Türk">
+                <img src="{% get_language_flag_icon 'tr' %}" alt="Türk" /> Türk
+            </a>
+        </li>
+
+        <li>
+            <a href="{% url 'set_language' "ar" %}" title="العربية">
+                <img src="{% get_language_flag_icon 'ar' %}" alt="العربية" /> العربية
+            </a>
+        </li>
+
+        <li>
+            <a href="{% url 'set_language' "ja" %}" title="日本語">
+                <img src="{% get_language_flag_icon 'ja' %}" alt="日本語" /> 日本語
+            </a>
+        </li>
+
+        <li class="divider"></li>
+
+        <li>
+            <a href="https://translate.astrobin.com/projects" target="_blank">
+                <i class="icon-tasks"></i>
+                {% trans "Help with translations!" %}
+            </a>
+        </li>
+
+    </ul>
+
+    {% if request.user.is_authenticated and not user_language %}
+        <div id="language-prompt">
+            <div class="bubble">
+                {% blocktrans %}Please select your language from the options above.{% endblocktrans %}
+            </div>
+        </div>
+    {% endif %}
+</li>

@@ -2226,7 +2226,6 @@ def location_edit(request, id):
 
 
 @require_GET
-@login_required
 @never_cache
 def set_language(request, lang):
     from django.utils.translation import check_for_language, activate

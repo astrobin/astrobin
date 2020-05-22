@@ -665,15 +665,13 @@ body.full {
 
 .cookielaw-banner {
   position: fixed;
-  top: 0;
+  padding: 40px 0;
+  bottom: 0;
   left: 0;
   right: 0;
-  width: calc(100% - 40px);
-  z-index: 1040;
-
-  background: #111 url('../images/darker-panel-tile.png');
+  z-index: 1021;
+  background: #111 url(../images/darker-panel-tile.png);
   color: #a0a0a0;
-  padding: 30px 20px;
 
   h6 {
     color: $strong-text-color;
