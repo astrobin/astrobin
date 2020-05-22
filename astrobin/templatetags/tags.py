@@ -4,6 +4,7 @@ from datetime import datetime
 
 from django.conf import settings
 from django.contrib.contenttypes.models import ContentType
+from django.contrib.staticfiles.templatetags.staticfiles import static
 from django.core.paginator import Paginator, EmptyPage, PageNotAnInteger
 from django.template import Library
 from django.template.defaultfilters import timesince
@@ -502,3 +503,30 @@ def can_add_technical_details(image):
         SubjectType.STAR_TRAILS,
         SubjectType.NORTHERN_LIGHTS,
     ) or image.solar_system_main_subject is not None
+
+
+@register.simple_tag
+def get_language_flag_icon(language_code, size=16):
+    flags = {
+        '': 'United-States.png',
+        'en': 'United-States.png',
+        'en-US': 'United-States.png',
+        'en-GB': 'United-Kingdom.png',
+
+        'ar': 'Saudi-Arabia.png',
+        'de': 'Germany.png',
+        'el': 'Greece.png',
+        'es': 'Spain.png',
+        'fi': 'Finland.png',
+        'fr': 'France.png',
+        'it': 'Italy.png',
+        'ja': 'Japan.png',
+        'nl': 'Netherlands.png',
+        'pl': 'Poland.png',
+        'pt-BR': 'Brazil.png',
+        'ru': 'Russia.png',
+        'sq': 'Albania.png',
+        'tr': 'Turkey.png',
+    }
+
+    return static('astrobin/icons/flags/%s/%s' % (size, flags[language_code]))
