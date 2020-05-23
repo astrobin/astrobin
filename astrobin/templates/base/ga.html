@@ -1,36 +1,40 @@
-<script type="text/javascript">
-  var _gaq = _gaq || [];
-  _gaq.push(['_setAccount', '{{GOOGLE_ANALYTICS_ID}}']);
-  _gaq.push(['_setDomainName', 'astrobin.com']);
-  _gaq.push(['_setAllowLinker', true]);
+{% if GOOGLE_ANALYTICS_ID != "invalid" %}
+    <script async src="https://www.googletagmanager.com/gtag/js?id={{ GOOGLE_ANALYTICS_ID }}"></script>
+    <script>
+        window.dataLayer = window.dataLayer || [];
 
-  {% if user.is_authenticated %}
-  _gaq.push(['_setCustomVar', 1, 'User Type', 'Member']);
-  _gaq.push(['_setCustomVar', 2, 'Username', '{{user.username}}']);
-  {% else %}
-  _gaq.push(['_setCustomVar', 1, 'User Type', 'Anonymous']);
-  {% endif %}
+        function gtag() {
+            dataLayer.push(arguments);
+        }
 
-  // Reset the custom variables that might be then overriden later.
-  _gaq.push(['_setCustomVar', 3, 'Staging Image', 'No']);
-  {% block extra_gaq_push %}{% endblock %}
+        gtag("js", new Date());
 
-  _gaq.push(['_trackPageview']);
+        {% if user.is_authenticated %}
+            gtag("set", {"User Type": "Member"});
+            gtag("set", {"Username": "{{ user.username }}"});
+        {% else %}
+            gtag("set", {"User Type": "Anonymous"});
+        {% endif %}
 
-  (function() {
-    var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
-    ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
-    var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
-  })();
+        gtag("config", "{{GOOGLE_ANALYTICS_ID}}", {
+            "linker": {
+                "domains": [
+                    "www.astrobin.com",
+                    "app.astrobin.com",
+                    "welcome.astrobin.com",
+                    "de.welcome.astrobin.com",
+                    "es.welcome.astrobin.com",
+                    "fr.welcome.astrobin.com",
+                    "it.welcome.astrobin.com",
+                    "pt.welcome.astrobin.com"
+                ],
+                "accept_incoming": true
+            }
+        });
 
-  function trackOutboundLink(link, category, action) {
-    try {
-      _gaq.push(['_trackEvent', category , action]);
-    } catch(err){}
-
-    setTimeout(function() {
-      document.location.href = link.href;
-    }, 100);
-  }
-</script>
+        {% if GOOGLE_ADS_ID != "invalid" %}
+            gtag("config", "{{ GOOGLE_ADS_ID }}");
+        {% endif %}
+    </script>
+{% endif %}
 

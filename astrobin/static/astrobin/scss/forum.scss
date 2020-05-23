@@ -1,0 +1,290 @@
+@import 'variables';
+
+table.forums, table.topic-list {
+  td {
+    @media screen and (min-width: 980px) {
+      white-space: nowrap;
+      text-overflow: clip;
+      overflow: hidden;
+    }
+  }
+
+  td, th {
+    &.forum-topic-count, &.forum-post-count, &.topic-post-count, &.topic-view-count {
+      width: 10%;
+    }
+
+    &.forum-last-post, &.topic-last-post, &.topic-author {
+      width: 15%;
+    }
+  }
+
+  .topic-name {
+    text-align: left !important;
+  }
+
+  .topic-forum {
+    width: 20%;
+    padding-right: 20px;
+  }
+
+  .on-moderation a {
+    color: $strong-text-color;
+  }
+}
+
+th.forum-name {
+  font-size: 18px;
+}
+
+.forum-description {
+  margin: 5px;
+  font-size: $base-font-size - 2;
+}
+
+.forum-row, .topic-row {
+  width: 100%;
+}
+
+.forum-topic-count, .forum-post-count, .topic-post-count, .topic-view-count {
+  text-align: center !important;
+}
+
+.forum-last-post, .topic-last-post {
+  text-align: right !important;
+}
+
+.first-unread-post-link {
+  color: lighten($link-color, 40%);
+  text-decoration: none;
+  font-weight: bold;
+  padding-right: 4px;
+}
+
+.first-unread-post-link {
+  color: lighten($link-color, 10%);
+}
+
+.posts {
+}
+
+.post {
+  margin: 0 0 12px 0;
+}
+
+.post-header {
+  th {
+    position: relative;
+    padding: 0 20px !important;
+    height: 60px;
+    vertical-align: middle !important;
+  }
+
+  img {
+    position: absolute;
+    top: 0;
+    right: 0;
+  }
+
+  .post-author {
+    font-size: 16px;
+    line-height: 18px;
+  }
+
+  .post-updated {
+    color: #999;
+    font-size: 11px;
+    font-weight: normal;
+  }
+}
+
+.post tbody tr:hover td {
+  background-color: inherit !important; // Cancel bootstrap's on-hover highlight
+}
+
+.post-info {
+  width: 220px;
+
+  .post-author {
+    font-size: $base-font-size + 1;
+    padding: 5px 0;
+  }
+
+  .post-extra-info {
+    font-size: $base-font-size - 2;
+    color: #777;
+  }
+}
+
+.post-content {
+  padding: 18px !important;
+
+  /* These are technically the same, but use both */
+  overflow-wrap: break-word;
+  word-wrap: break-word;
+  word-break: break-word;
+
+  /* Adds a hyphen where the word breaks, if supported (No Blink) */
+  -ms-hyphens: auto;
+  -moz-hyphens: auto;
+  -webkit-hyphens: auto;
+  hyphens: auto;
+
+  ul, ol {
+    list-style: initial;
+  }
+
+  blockquote {
+    background-color: #222;
+    padding: 10px 20px 10px 60px;
+    border: 1px solid #555;
+    position: relative;
+    min-height: 34px;
+  }
+
+  blockquote:before {
+    display: block;
+    content: "\201C";
+    font-size: 120px;
+    position: absolute;
+    left: 4px;
+    top: 50px;
+    color: #444;
+    font-family: Georgia;
+  }
+}
+
+.post-signature {
+  color: #CCC;
+  margin-top: 15px;
+  border-top: 1px dotted #CCC;
+  display: block;
+}
+
+.post-related {
+  margin-top: 20px;
+
+  .btn {
+    font-size: 10px;
+    text-transform: uppercase;
+    font-style: italic;
+    background: #3C3C3C;
+    border: 1px solid #323232;
+    color: #B0B0B0;
+    text-shadow: 0 0 2px black;
+  }
+
+  .btn-primary {
+    color: white;
+    background: $link-color;
+  }
+
+  .btn-danger {
+    color: white;
+    background: red;
+  }
+}
+
+.forum-headline {
+  margin-top: 10px;
+}
+
+.attachments-form {
+  padding-bottom: 15px;
+}
+
+.attachment-link {
+  border-bottom: 1px dotted;
+}
+
+/* --- Unread --- */
+
+.state-indicator {
+  display: block;
+  float: left;
+  background-color: #555;
+  height: 10px;
+  width: 10px;
+  @include border-radius(5px);
+  margin: 3px 5px;
+}
+
+.topic-unread, .forum-unread, .message-unread {
+  a {
+    font-weight: bold;
+  }
+
+  .state-indicator {
+    background-color: $link-color;
+  }
+}
+
+/* --- Moderation --- */
+.on-moderation {
+  background: #d65454;
+
+  .post-content {
+    color: black;
+  }
+}
+
+/* --- Mini pagination --- */
+.mini-pagination {
+  padding: 3px 0 3px 10px;
+  font-size: $base-font-size - 2;
+}
+
+.topic-select, .topic-state, .forum-status, .notification-state, .message-state {
+  width: 20px;
+}
+
+table.post th.post-avatar {
+  width: 80px;
+}
+
+.post-form {
+  margin-top: 40px;
+
+  li {
+    list-style: initial;
+  }
+
+  input, textarea, select {
+    width: 98%;
+  }
+
+  input[type="submit"] {
+    width: auto;
+  }
+
+  .submit {
+    margin-top: 24px;
+  }
+}
+
+.topic h1, .forum h1, .category h1 {
+  margin: 24px 0 8px 0;
+  font-size: 24px;
+}
+
+.post-content .updated-message {
+  color: #777;
+  font-size: x-small;
+  margin-top: 20px;
+}
+
+
+.forums .forum-name,
+.forum .topic-forum,
+.forum .topic-name {
+  > a {
+    color: $text-color;
+    padding-top: 6px;
+    padding-bottom: 6px;
+
+    &:hover {
+      color: $link-color;
+    }
+  }
+}
+

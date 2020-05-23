@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2019-10-15 11:53+0000\n"
+"POT-Creation-Date: 2020-05-19 08:02+0000\n"
 "PO-Revision-Date: 2019-01-28 09:00+0000\n"
 "Last-Translator: sypai <sypai@mail.ru>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -758,6 +758,54 @@ msgstr "Замбия"
 msgid "Zimbabwe"
 msgstr "Зимбабве"
 
+msgid "Users"
+msgstr "Пользователи"
+
+msgid "Make"
+msgstr "Изготовлено"
+
+msgid "The make, brand, producer or developer of this product."
+msgstr "Изготовитель, марка, производитель или разработчик данного продукта."
+
+msgid "Name"
+msgstr "Название"
+
+msgid "Merge"
+msgstr "Объединить"
+
+msgid ""
+"Use this field to mark that the item you are claiming really is the same "
+"product (or a variation thereof) of something you have claimed before."
+msgstr ""
+"Используйте это поле, чтобы отметить, что пункт, который вы вносите, на "
+"самом деле тот же продукт (или его вариант), который вы заявляли ранее."
+
+#, python-format
+msgid ""
+"You can't create more than %d claims. Consider upgrading your affiliation!"
+msgstr ""
+"Вы не можете создавать более чем %d заявок. Рассмотрите апгрейд вашего "
+"членства!"
+
+msgid "You have already claimed this product."
+msgstr "Вы уже заявляли об этом продукте."
+
+msgid ""
+"Select a tag to order this collection by its value. If you see no optioons "
+"here, it's because none of the images in this collection have key/value "
+"tags. PS: Images that lack this tag will appear at the bottom of the "
+"collection."
+msgstr ""
+
+msgid "Please use the following format: yyyy-mm-dd"
+msgstr "Пожалуйста, используйте формат ГГГГ-ММ-ДД"
+
+msgid "Date"
+msgstr "Дата"
+
+msgid "The date cannot be in the future."
+msgstr "Дата не может быть в будущем."
+
 msgid "Link"
 msgstr "Ссылка"
 
@@ -796,6 +844,15 @@ msgid ""
 "original image can be considered."
 msgstr ""
 
+msgid "Key/value tags"
+msgstr ""
+
+msgid ""
+"Provide a list of unique key/value pairs to tag this image with. Use the '=' "
+"symbol between key and value, and provide one pair per line. These tags can "
+"be used to sort images by arbitrary properties."
+msgstr ""
+
 #, fuzzy
 #| msgid "Revisions"
 msgid "Revision"
@@ -804,24 +861,11 @@ msgstr "Версии"
 msgid "This field is required."
 msgstr "Это обязательное поле."
 
+msgid "Unable to parse."
+msgstr ""
+
 msgid "Please select a remote source if this image was acquired remotely."
 msgstr "Выберите место получения, если изображение получено удалённо."
-
-msgid "Opacity"
-msgstr "Непрозрачность"
-
-msgid ""
-"0 means invisible; 100 means completely opaque. Recommended values are: 10 "
-"if the watermark will appear on the dark sky background, 50 if on some "
-"bright object."
-msgstr ""
-"0 означает невидимость, 100 полную непрозрачность. Рекомендуемые значения: "
-"10 если водяной знак будет стоять на темном фоне неба, 50 если на каком-либо "
-"ярком объекте."
-
-msgid "If you want to watermark this image, you must specify some text."
-msgstr ""
-"Если вы хотите поставить на изображение водяной знак, укажите его текст."
 
 msgid "Imaging telescopes or lenses"
 msgstr "Телескоп/объектив съёмки"
@@ -861,11 +905,46 @@ msgstr ""
 msgid "Original image"
 msgstr "Удалить оригинальное изображение"
 
-msgid "If you have a personal website, put the address here."
-msgstr "Если у вас есть личный веб-сайт, напишите здесь его адрес."
+msgid "Opacity"
+msgstr "Непрозрачность"
 
-msgid "Website"
-msgstr "Веб-сайт"
+msgid ""
+"0 means invisible; 100 means completely opaque. Recommended values are: 10 "
+"if the watermark will appear on the dark sky background, 50 if on some "
+"bright object."
+msgstr ""
+"0 означает невидимость, 100 полную непрозрачность. Рекомендуемые значения: "
+"10 если водяной знак будет стоять на темном фоне неба, 50 если на каком-либо "
+"ярком объекте."
+
+msgid "If you want to watermark this image, you must specify some text."
+msgstr ""
+"Если вы хотите поставить на изображение водяной знак, укажите его текст."
+
+msgid "Latitude (degrees)"
+msgstr "Широта (градусы)"
+
+msgid "Latitude (minutes)"
+msgstr "Широта (минуты)"
+
+msgid "Latitude (seconds)"
+msgstr "Широта (секунды)"
+
+msgid "Longitude (degrees)"
+msgstr "Долгота (градусы)"
+
+msgid "Longitude (minutes)"
+msgstr "Долгота (минуты)"
+
+msgid "Longitude (seconds)"
+msgstr "Долгота (секунды)"
+
+msgid ""
+"Use this field to mark that the item you are merging really is the same "
+"product (or a variation thereof) of something you have claimed before."
+msgstr ""
+"Используйте это поле, чтобы отметить тот пункт, что вы объединяете "
+"действительно тот же продукт (или их вариации) или который вы вносили ранее."
 
 msgid ""
 "All the telescopes and lenses you own, including the ones you use for "
@@ -893,77 +972,22 @@ msgstr "Телескопы и объективы"
 msgid "Cameras"
 msgstr "Камеры"
 
-msgid "Users"
-msgstr "Пользователи"
+msgid "If you have a personal website, put the address here."
+msgstr "Если у вас есть личный веб-сайт, напишите здесь его адрес."
 
-msgid "Latitude (degrees)"
-msgstr "Широта (градусы)"
+msgid "Website"
+msgstr "Веб-сайт"
 
-msgid "Latitude (minutes)"
-msgstr "Широта (минуты)"
-
-msgid "Latitude (seconds)"
-msgstr "Широта (секунды)"
-
-msgid "Longitude (degrees)"
-msgstr "Долгота (градусы)"
-
-msgid "Longitude (minutes)"
-msgstr "Долгота (минуты)"
-
-msgid "Longitude (seconds)"
-msgstr "Долгота (секунды)"
-
-msgid "Please use the following format: yyyy-mm-dd"
-msgstr "Пожалуйста, используйте формат ГГГГ-ММ-ДД"
-
-msgid "Date"
-msgstr "Дата"
+#, fuzzy
+#| msgid "Mark as good"
+msgid "Mark as final"
+msgstr "Пометить как хорошую"
 
 msgid "Please enter a value between 1 and 5."
 msgstr "Введите значение от 1 до 5."
 
 msgid "Please enter a value between 1 and 10."
 msgstr "Введите значение от 1 до 10."
-
-msgid "The date cannot be in the future."
-msgstr "Дата не может быть в будущем."
-
-msgid "Make"
-msgstr "Изготовлено"
-
-msgid "The make, brand, producer or developer of this product."
-msgstr "Изготовитель, марка, производитель или разработчик данного продукта."
-
-msgid "Name"
-msgstr "Название"
-
-msgid "Merge"
-msgstr "Объединить"
-
-msgid ""
-"Use this field to mark that the item you are claiming really is the same "
-"product (or a variation thereof) of something you have claimed before."
-msgstr ""
-"Используйте это поле, чтобы отметить, что пункт, который вы вносите, на "
-"самом деле тот же продукт (или его вариант), который вы заявляли ранее."
-
-#, python-format
-msgid ""
-"You can't create more than %d claims. Consider upgrading your affiliation!"
-msgstr ""
-"Вы не можете создавать более чем %d заявок. Рассмотрите апгрейд вашего "
-"членства!"
-
-msgid ""
-"Use this field to mark that the item you are merging really is the same "
-"product (or a variation thereof) of something you have claimed before."
-msgstr ""
-"Используйте это поле, чтобы отметить тот пункт, что вы объединяете "
-"действительно тот же продукт (или их вариации) или который вы вносили ранее."
-
-msgid "You have already claimed this product."
-msgstr "Вы уже заявляли об этом продукте."
 
 msgid "Recipient"
 msgstr "Получатель"
@@ -994,15 +1018,6 @@ msgstr "нравится"
 
 msgid "has written a review on"
 msgstr "написал обзор о"
-
-msgid "created a new public data pool"
-msgstr "создал новое общее хранилище данных"
-
-msgid "added new data to public data pool"
-msgstr "добавил новые данные в общее хранилище"
-
-msgid "added a new processed image to public data pool"
-msgstr "добавил новое обработанное изображение в общее хранилище"
 
 msgid "created a new public group"
 msgstr "создал новую общую группу"
@@ -1273,6 +1288,11 @@ msgstr "Катадиоптрик Шмидта-Кассегрена"
 msgid "Catadioptric: ACF Schmidt-Cassegrain"
 msgstr "Катадиоптрик Шмидта-Кассегрена свободный от комы (ACF)"
 
+#, fuzzy
+#| msgid "Catadioptric: ACF Schmidt-Cassegrain"
+msgid "Catadioptric: Rowe-Atkinson Schmidt astrograph"
+msgstr "Катадиоптрик Шмидта-Кассегрена свободный от комы (ACF)"
+
 msgid "Camera lens"
 msgstr "Фотообъектив"
 
@@ -1418,6 +1438,8 @@ msgstr ""
 msgid "Other/Unknown"
 msgstr "Неизвестно"
 
+#, fuzzy
+#| msgid "Deep sky object"
 msgid "Deep sky object or field"
 msgstr "Объекты глубокого космоса"
 
@@ -1530,6 +1552,34 @@ msgstr "Описание"
 msgid "HTML tags are allowed."
 msgstr "Допускаются HTML-теги."
 
+msgid "Uncompressed source (max 200 MB)"
+msgstr ""
+
+msgid ""
+"You can store the final processed image that came out of your favorite image "
+"editor (e.g. PixInsight, Adobe Photoshop, etc) here on AstroBin, for "
+"archival purposes. This file is stored privately and only you will have "
+"access to it."
+msgstr ""
+
+#, fuzzy
+#| msgid "Thumbnail"
+msgid "Gallery thumbnail"
+msgstr "Миниатюра"
+
+msgid "Select an area of the image to be used as thumbnail in your gallery."
+msgstr ""
+
+#, fuzzy
+#| msgid "Star trails"
+msgid "Sharpen thumbnails"
+msgstr "Треки звезд"
+
+msgid ""
+"If selected, AstroBin will use a resizing algorithm that slightly sharpens "
+"the image's thumbnails. This setting applies to all revisions."
+msgstr ""
+
 msgid "Apply watermark to image"
 msgstr "Разместить водяной знак на изображении"
 
@@ -1548,16 +1598,19 @@ msgstr "Лицензия"
 msgid "Allow comments"
 msgstr "Разрешить комментарии"
 
+#, fuzzy
+#| msgid "Notifications"
+msgid "Skip notifications"
+msgstr "Уведомления"
+
+msgid "Do not notify your followers about this image upload."
+msgstr ""
+
 msgid "(no title)"
 msgstr "(без заголовка)"
 
 msgid "Mix of multiple source"
 msgstr "Сочетание нескольких источников данных"
-
-#, fuzzy
-#| msgid "Notifications"
-msgid "Skip notifications"
-msgstr "Уведомления"
 
 msgid "Do not notify your followers about this revision."
 msgstr ""
@@ -1567,6 +1620,11 @@ msgstr "Изображения"
 
 msgid "Cover image"
 msgstr "Изображение обложки"
+
+#, fuzzy
+#| msgid "Other images"
+msgid "Order by image tag"
+msgstr "Другие изображения"
 
 msgid "Please use the following format: yyyy-mm-dd."
 msgstr "Пожалуйста, используйте формат: гггг-мм-дд."
@@ -1726,13 +1784,20 @@ msgstr "Широта третьего Главного Меридиана."
 msgid "Seeing"
 msgstr "Сиинг"
 
-msgid "Your estimation of the seeing, on a scale from 1 to 5."
+#, fuzzy
+#| msgid "Your estimation of the seeing, on a scale from 1 to 5."
+msgid ""
+"Your estimation of the seeing, on a scale from 1 to 5. Larger is better."
 msgstr "Оцените сиинг по шкале от 1 до 5."
 
 msgid "Transparency"
 msgstr "Прозрачность"
 
-msgid "Your estimation of the transparency, on a scale from 1 to 10."
+#, fuzzy
+#| msgid "Your estimation of the transparency, on a scale from 1 to 10."
+msgid ""
+"Your estimation of the transparency, on a scale from 1 to 10. Larger is "
+"better."
 msgstr "Ваша оценка прозрачности по шкале от 1 до 10."
 
 msgid "Time"
@@ -1890,6 +1955,15 @@ msgid ""
 msgstr ""
 "Эти письма могут содержать коммерческие предложения, новости и другие "
 "материалы от AstroBin и его партнёров."
+
+msgid "Allow astronomy ads from our partners"
+msgstr ""
+
+msgid ""
+"It would mean a lot if you chose to allow astronomy relevant, non intrusive "
+"ads on this website. AstroBin is a small business run by a single person, "
+"and this kind of support would be amazing. Thank you in advance!"
+msgstr ""
 
 msgid "Language"
 msgstr "Язык"
@@ -2059,6 +2133,27 @@ msgstr ""
 
 msgid "Commercial gear items"
 msgstr "Рекламные элементы оборудования"
+
+#, fuzzy
+#| msgid "Sending..."
+msgid "Pending"
+msgstr "Отправка..."
+
+msgid "Processing"
+msgstr ""
+
+#, fuzzy
+#| msgid "Read all"
+msgid "Ready"
+msgstr "Прочитать всё"
+
+#, fuzzy
+#| msgid "Error!"
+msgid "Error"
+msgstr "Ошибка!"
+
+msgid "Expired"
+msgstr "Истекло"
 
 msgid "Message sent"
 msgstr "Сообщение отправлено"
@@ -2261,41 +2356,6 @@ msgstr ""
 msgid ""
 "\n"
 "                            <a href=\"%(user_page)s\">%(user)s</a> created a "
-"new public data pool.\n"
-"                        "
-msgstr ""
-"\n"
-"                            <a href=\"%(user_page)s\">%(user)s</a> создал "
-"новое открытое хранилище данных.\n"
-"                        "
-
-#, python-format
-msgid ""
-"\n"
-"                            <a href=\"%(user_page)s\">%(user)s</a> added "
-"data to a data pool.\n"
-"                        "
-msgstr ""
-"\n"
-"<a href=\"%(user_page)s\">%(user)s</a> добавил данные в хранилище.\n"
-"                        "
-
-#, python-format
-msgid ""
-"\n"
-"                            <a href=\"%(user_page)s\">%(user)s</a> added a "
-"processed image to a data pool.\n"
-"                        "
-msgstr ""
-"\n"
-"<a href=\"%(user_page)s\">%(user)s</a> добавил обработанное изображение в "
-"хранилище.\n"
-"                        "
-
-#, python-format
-msgid ""
-"\n"
-"                            <a href=\"%(user_page)s\">%(user)s</a> created a "
 "new public group.\n"
 "                        "
 msgstr ""
@@ -2315,12 +2375,6 @@ msgstr ""
 "<a href=\"%(user_page)s\">%(user)s</a> вступил в группу.\n"
 "                        "
 
-msgid "Affiliates"
-msgstr "Партнёрство"
-
-msgid "The following companies support AstroBin."
-msgstr "Следующие организации поддерживают AstroBin."
-
 msgid "Request an API key"
 msgstr "Запрос API-ключа"
 
@@ -2337,10 +2391,13 @@ msgid "After you submit a request, you will receive a reply within 24 hours."
 msgstr ""
 "После подтверждения вами запроса, вы получите ответ в течение 24 часов."
 
-#, python-format
+#, fuzzy
+#| msgid ""
+#| "Please make sure you have read the section about APIs in the <a href="
+#| "\"%(tos_url)s\">Terms of Service</a>."
 msgid ""
 "Please make sure you have read the section about APIs in the <a href="
-"\"%(tos_url)s\">Terms of Service</a>."
+"\"https://welcome.astrobin.com/terms-of-service\">Terms of Service</a>."
 msgstr ""
 "Пожалуйста, убедитесь что вы прочли раздел об API в <a href=\"%(tos_url)s"
 "\">Условиях предоставления услуг</a>."
@@ -2437,9 +2494,6 @@ msgstr "На главную"
 msgid "Forum"
 msgstr "Форум"
 
-msgid "Help"
-msgstr "Справка"
-
 msgid "FAQ"
 msgstr "FAQ"
 
@@ -2448,6 +2502,9 @@ msgstr "Условия предоставления услуг"
 
 msgid "Guidelines"
 msgstr "Правила"
+
+msgid "Sponsors"
+msgstr ""
 
 msgid "Source code"
 msgstr "Исходный код"
@@ -2530,6 +2587,73 @@ msgstr "Отметить все прочитанным"
 msgid "AstroBin is in READ ONLY mode"
 msgstr "AstroBin в режиме ТОЛЬКО ЧТЕНИЕ"
 
+#, fuzzy
+#| msgid "Sorry"
+msgid "Sorry :-("
+msgstr "Извините"
+
+#, fuzzy
+#| msgid "Accessories"
+msgid "Access denied"
+msgstr "Принадлежности"
+
+msgid "This feature is only offered at higher membership levels."
+msgstr ""
+
+msgid ""
+"Would you be interested in upgrading? AstroBin is a very small business and "
+"your support would mean a lot!"
+msgstr ""
+
+msgid "No, thanks"
+msgstr "Нет, спасибо"
+
+msgid "Tell me more!"
+msgstr ""
+
+#, fuzzy
+#| msgid "Are you sure?"
+msgid "Are you really sure?"
+msgstr "Вы уверены?"
+
+msgid ""
+"We know, we're all used to the fact that ads on the Internet are\n"
+"                    annoying."
+msgstr ""
+
+msgid ""
+"However, please let us offer you two good reasons to allow ads on\n"
+"                    AstroBin:"
+msgstr ""
+
+msgid ""
+"AstroBin is a one-person business. As of the time of writing, in early "
+"2020,\n"
+"                        I'm trying to make AstroBin a full time job, but it "
+"hasn't happened yet. If this dream were to\n"
+"                        become reality, I could invest a lot more time in "
+"the development of AstroBin, and everybody\n"
+"                        would benefit from it!"
+msgstr ""
+
+msgid ""
+"There are only astronomy ads on AstroBin, that are published after my review "
+"and\n"
+"                        approval. Nothing fishy, nothing off-topic, and "
+"nothing that will use any of your private\n"
+"                        information."
+msgstr ""
+
+#, python-format
+msgid ""
+"If you still feel that you would rather not see these ads, you can change "
+"this on\n"
+"                    <a href=\"%(profile_url)s\">your settings page</a>."
+msgstr ""
+
+msgid "Thank you!"
+msgstr "Спасибо!"
+
 msgid "Quick search"
 msgstr "Быстрый поиск"
 
@@ -2572,20 +2696,14 @@ msgstr "Расширенный поиск"
 msgid "Top picks"
 msgstr "Лучшие изображения"
 
-msgid "Public data pools"
-msgstr "Общее хранилище данных"
-
 msgid "Stats"
 msgstr "Статистика"
 
 msgid "Trending astrophotographers"
 msgstr "Ведущие астрофотографы"
 
-msgid "What is this site?"
-msgstr "Что это за сайт?"
-
-msgid "AstroBin Raw Data"
-msgstr "AstroBin Raw Data"
+msgid "Help"
+msgstr "Справка"
 
 msgid "Contact"
 msgstr "Контакты"
@@ -2611,9 +2729,6 @@ msgstr "Хотите начать использовать своё настоя
 msgid "OK"
 msgstr "OK"
 
-msgid "No, thanks"
-msgstr "Нет, спасибо"
-
 msgid "Login"
 msgstr "Войти"
 
@@ -2637,16 +2752,6 @@ msgstr "Закладки"
 
 msgid "Plots"
 msgstr "Графики"
-
-msgid "Raw data"
-msgstr "RAW данные"
-
-# Строка из меню пользователя, там все пункты с большой буквы
-msgid "Raw data library"
-msgstr "Библиотека RAW данных"
-
-msgid "Private shared folders"
-msgstr "Личные каталоги"
 
 msgid "My messages"
 msgstr "Мои сообщения"
@@ -2790,299 +2895,6 @@ msgstr "Я согласен"
 
 msgid "More"
 msgstr "Еще"
-
-msgid "Frequently Asked Questions"
-msgstr "Часто задаваемые вопросы"
-
-msgid "Is this website for free?"
-msgstr "Этот веб-сайт бесплатен?"
-
-msgid "Are there any limits on how large and how many images I can upload?"
-msgstr ""
-"Есть ли какие-то ограничения на то, какие по размеру и как много изображений "
-"я могу закачать?"
-
-msgid "What image formats are supported?"
-msgstr "Какие форматы изображений поддерживаются?"
-
-msgid "Is my data safe on AstroBin?"
-msgstr "Мои данные на AstroBin в безопасности?"
-
-msgid ""
-"I've seen beautiful images on this site. I'm not worthy of posting mine!"
-msgstr ""
-"Я видел прекрасные изображения на этом сайте. Мне кажется я не достоин "
-"размещать свои!"
-
-msgid "What's the deal with the Staging Area and the Public Area?"
-msgstr "В чём разница между Staging Area и Public Area?"
-
-msgid "Why was AstroBin created?"
-msgstr "Зачем был создан AstroBin?"
-
-msgid "What are the plans for the future?"
-msgstr "Какие планы на будущее?"
-
-msgid "How can I format my comments?"
-msgstr "Как я могу форматировать свои комментарии?"
-
-msgid "How is the AstroBin index calculated?"
-msgstr "Как вычисляется индекс AstroBin?"
-
-msgid "I received some Likes, why is my AstroBin index not updated?"
-msgstr ""
-"Почему мой индекс AstroBin не обновляется, когда мои изображения лайкают, то "
-"есть, отмечают как «Нравится»?"
-
-msgid "How is the Image of the Day selected?"
-msgstr "Как выбираются Изображения Дня?"
-
-msgid "... and their answers!"
-msgstr "... и их ответы!"
-
-msgid ""
-"No. A free account will let you upload up to 10 images, and partake in all "
-"social activities. For unlimited storage, you will need a premium "
-"subscription."
-msgstr ""
-"Нет. Бесплатный аккаунт позволит загружать до 10 изображений, и принимать "
-"участие во всех соц-активностях.  Для безлимитного хранения вам понадобится "
-"подписка на Премиум."
-
-msgid ""
-"<strong>NO!</strong> If you are a premium member, on AstroBin you can upload "
-"as many images as you want, and as large as you want. In fact, full size "
-"images are encouraged!"
-msgstr ""
-"<strong>НЕТ!</strong> Если вы премиум участник, вы можете закачивать на "
-"AstroBin столько изображений, сколько пожелаете, и какого угодно размера. "
-"Более того, изображения больших размеров рекомендуются!"
-
-msgid "AstroBin will accept JPEG, PNG and GIF. Animated GIF is supported too."
-msgstr ""
-"AstroBin принимает JPEG, PNG и GIF файлы. Анимированные GIF-файлы также "
-"поддерживаются."
-
-msgid ""
-"Absolutely. There are multiple ways in which AstroBin can store your data "
-"very safely. First of all, the images you upload are stored on a highly "
-"durable, highly available, redundant backend. The durability of the storage "
-"backend is 99.999999999 percent over a given year. This means that if you "
-"upload 10,000 images, you can expect to lose one image to data corruption "
-"once in 10,000,000 year. The images are duplicated across two different "
-"physical servers, for protection against natural disasters."
-msgstr ""
-"Абсолютно. Существует много способов, которыми AstroBin старается сохранить "
-"ваши данные в безопасности. Прежде всего, изображения, которые вы закачали "
-"находятся на прочном, доступном и резервируемом оборудовании. Прочность "
-"выражается в 99.999999999 процентов надежности в год. То есть, если вы "
-"загрузите 10 000 изображений, то можно ожидать потерю одного изображения с "
-"повреждением данных раз в 10 000 000 лет. Изображения дублируются на двух "
-"разных физических серверах, для защиты от стихийных бедствий."
-
-msgid ""
-"The actual website, instead, is hosted on a Virtual Machine, so, in case of "
-"severe hardware failure, it can be redeployed to a different server in a "
-"matter of 15 minutes."
-msgstr ""
-"Фактически веб-сайт, размещается на виртуальной машине, чтобы, в случае "
-"серьезного сбоя оборудования, он мог быть переведен на другой сервер за "
-"какие-то 15 минут."
-
-msgid ""
-"Finally, the database that powers AstroBin (in fact, the whole Virtual "
-"Machine) is backed up daily. In case of severe data loss, the website will "
-"be quickly restored to a snapshot that's never older than 24 hours."
-msgstr ""
-"Наконец, база данных поддерживаемая AstroBin (на самом деле, вся виртуальная "
-"машина) ежедневно копируются для восстановления. В случае тяжелой потери "
-"базы данных, веб-сайт будет быстро восстановлен из​ резервного образа не "
-"старше 24 часов."
-
-msgid ""
-"That said, you should be aware that AstroBin is not a backup service, and "
-"although your data is very safe in our hands, we cannot legally take "
-"responsibility in the event of loss, however unlikely it is. Always keep a "
-"copy of your image on your computer."
-msgstr ""
-"Тем не менее, вы должны знать, что AstroBin не предоставляет услуг "
-"резервного копирования, и хотя ваши данные находятся в достаточной "
-"безопасности в наших руках, мы не можем юридически нести ответственность в "
-"случае потерь, но такое и не должно случиться. Всегда держите копию "
-"изображения на компьютере."
-
-msgid ""
-"Nonsense. AstroBin has <strong>not</strong> been made to showcase beautiful "
-"image, but to give everybody an opportunity to contribute to a vast and "
-"evergrowing effort of centralization and indexing of important data. That 30 "
-"minute picture of M31 you took last night between the clouds <em>belongs</"
-"em> here! Don't be shy and post it!"
-msgstr ""
-"Ерунда. AstroBin <strong>не был</strong> создан для демонстрации красивых "
-"изображений, он даёт каждому возможность заявить свои достижения среди "
-"обширной и всевозрастающей попытки централизации и индексации важных данных. "
-"Это 30-минутное изображение M31 вы получили вчера вечером сквозь облака "
-"<em>принадлежит</em> здесь! Не стесняйтесь и размещайте его!"
-
-msgid ""
-"On AstroBin you have two places for our images. The Staging Area is where "
-"you can upload images that you want to quickly share on forums, mailing "
-"lists or social networks. The days of scaling down and compressing your "
-"image so you can upload it to a forum for feedback and critique are over! "
-"Just upload to AstroBin's Staging Area, and send the link to anyone you "
-"want. The image will be visible only to the intended recipients, and won't "
-"appear on your profile or AstroBin's home page."
-msgstr ""
-"На AstroBin у вас есть два места для наших изображений. Staging Area, где вы "
-"можете загрузить изображения, которыми вы хотите быстро обмениваться на "
-"форумах, в списках рассылок или социальных сетях. Дни масштабируются и "
-"сжимают ваши изображения, так что вы можете закачивать их на форум для "
-"обратной связи и обсуждения дальше! Просто загрузите в Staging Area на "
-"AstroBin, и отправьте ссылку кому угодно. Изображение будет виден только "
-"адресату, и не появится в вашем профиле или на домашней странице AstroBin."
-
-msgid ""
-"The Public Area, instead, is for your finished products. After you have "
-"received feedback on your favorite forum, you can promote an image from the "
-"Staging Area to the Public Area, and it will appear on your profile. "
-"Remember that you can also move images back and forth from one Area to the "
-"other as many times as you want!"
-msgstr ""
-"Public Area, в свою очередь, для ваших законченных достижений. После того "
-"как вы получили отзывы на избранном форуме, вы можете перенести изображение "
-"из Staging Area в Public Area, и оно появится в вашем профиле. Помните, что "
-"вы также можете перемещать изображения и обратно из одной области в другую "
-"столько раз, сколько вы хотите!"
-
-msgid ""
-"AstroBin was born out of the desire to end something that had been going on "
-"for too long: the waste of incredible material to the sea of chaos that the "
-"Internet can be. For years, fantastic astrophotographs have beeen uploaded "
-"to Internet Forums, often with little or no data, or to general purpose "
-"image hosting websites, invariably with no data attached."
-msgstr ""
-"AstroBin родился из желания прекратить то, что уже длилось долгое время: "
-"огромное количество невероятного материала в море хаоса, которое есть в "
-"Интернете. В течение многих лет, фантастические астрофотографы пользовались "
-"Интернет-форумами, часто с малым количеством данных и описаний, с "
-"ненадёжными хостингами и прочими неудобствами."
-
-msgid ""
-"Such an image would be seen by some people, then quickly forgotten, and "
-"reduced to nothing more than a bunch of pixel in the giant wasteland of the "
-"Internet."
-msgstr ""
-"Такое изображение посмотрит некоторое количество людей, но быстро "
-"забывается, и превращается в очередной незаметный пиксель на чудовищных "
-"просторах Интернета."
-
-msgid ""
-"This should not be allowed to happen. AstroBin is the response: an effort to "
-"host, collect, index and categorize the output of the astrophotographers all "
-"over the world, so that their precious data would serve a purpose, and have "
-"a meaning forever."
-msgstr ""
-"Такое не должно долго продолжаться. AstroBin является попыткой: провести, "
-"собрать, индексировать и классифицировать выхлоп всех астрофотографов в "
-"мире, так что их драгоценные данные будут служить целенаправленно, и "
-"навсегда останутся непотерянными."
-
-msgid ""
-"<em>AstroBin</em> is just starting out, and this time we can really say that "
-"the sky is the limit! Tons of ideas are in the pipeline. As the user base "
-"grows, so does the data. Suddenly, things like automated supernovae search "
-"become possible: you could simply upload an image of a galaxy, and AstroBin "
-"could compare it to pictures of the same galaxy taken previously."
-msgstr ""
-"<em>AstroBin</em> только начинает свою деятельность, и на этот раз мы "
-"действительно можем сказать, что небо это предел! У нас тонны идей. Как "
-"пользовательская база растет, так и её наполнение растёт. Внезапно стали "
-"удобными и доступными такие вещи как поиск сверхновых: достаточно загрузить "
-"изображение галактики, и AstroBin сравнит его с галактиками на других ранее "
-"загруженных изображениях её же."
-
-msgid ""
-"AstroBin could also recommend subjects for you to image! Knowing your "
-"equipment, your location, and comparing what you have imaged to what users "
-"similar to you have, AstroBin could suggest your next challenge!"
-msgstr ""
-"AstroBin так же может рекомендовать вам объекты для съёмки! Знание вашего "
-"оборудования, вашего местоположения, и сравнивание ваших изображений с "
-"похожими у других пользователей, AstroBin может формировать рекомендации к "
-"следующему шагу!"
-
-msgid ""
-"Thanks to the input from the community, more ideas are flowing in and the "
-"list get bigger and bigger."
-msgstr ""
-"Благодарности вносимые сообществом, больше идей появляется и список "
-"становится больше и больше."
-
-msgid ""
-"AstroBin uses the Markdown syntax. Please use the following reference table:"
-msgstr ""
-"AstroBin использует синтаксис Markdown. Пожалуйста, используйте данные из "
-"таблицы:"
-
-msgid "You type:"
-msgstr "Вы печатаете:"
-
-msgid "You see:"
-msgstr "Получается:"
-
-msgid "italics"
-msgstr "курсив"
-
-msgid "bold"
-msgstr "жирный"
-
-msgid "(TAB or 4 spaces)"
-msgstr "(табуляция или 4 пробела)"
-
-msgid "preformatted text"
-msgstr "форматированный текст"
-
-msgid "quoted text"
-msgstr "цитируемый текст"
-
-msgid "escape the formatting syntax"
-msgstr "избегайте форматирования синтаксиса"
-
-msgid ""
-"The AstroBin index is a function of the number of Likes and the number of "
-"images posted by a user."
-msgstr ""
-"Индекс AstroBin это функция, зависящая от количества лайков и количества "
-"изображений опубликованных пользователем."
-
-msgid ""
-"Because it's computationally expensive, the AstroBin index is updated only "
-"every 24 hours. The same applies for the search index, the Big Wall, and "
-"some other user data."
-msgstr ""
-"Так как это требует вычислительных ресурсов, индекс AstroBin обновляется раз "
-"в 24 часа. То же самое относится и к индексации поиска, Большой Стене и "
-"некоторым другим пользовательским данным."
-
-msgid ""
-"A staff of 52 volunteers goes thru a three-stage process: 30 \"submitters\" "
-"propose images for IOTD; 15 \"reviewers\" advance some of them to the next "
-"stage; finally, any one of 7 judges can select an image from the pool of "
-"finalists as IOTD. There are limitations in place in the system to avoid "
-"abuse and monopoly."
-msgstr ""
-"Коллектив из 52 добровольцев проходит через три стадии: 30 \"сабмиттеров\" "
-"предлагают изображение для Изображения Дня (IOTD); 15 \"ревьюверов\" "
-"продвигают их на следующую ступень; в итоге, один из 7 судей может выбрать "
-"изображение из пула финалистов в качестве Изображения Дня. В системе "
-"существуют ограничения, позволяющие избежать злоупотреблений и монополии."
-
-msgid ""
-"Do you have a question not covered here! Please <a href=\"/contact/"
-"\">contact us</a>!"
-msgstr ""
-"У вас есть вопросы не затронутые здесь?! Пожалуйста, <a href=\"/contact/"
-"\">свяжитесь с нами</a>!"
 
 msgid "Instructions and examples"
 msgstr "Инструкции и примеры"
@@ -3312,329 +3124,6 @@ msgstr "Владельцы"
 msgid "just now"
 msgstr "только сейчас"
 
-msgid ""
-"AstroBin accounts are meant for members to share original images that they "
-"have created."
-msgstr ""
-"Аккаунт AstroBin предоставляется для желающих поделиться оригинальными "
-"изображениями, которые они создали."
-
-msgid "What is allowed"
-msgstr "Что разрешено"
-
-msgid "Do upload content you have created yourself."
-msgstr "Закачивайте данные, созданные вами лично."
-
-msgid ""
-"Respect the copyright of others. Stealing images from other people and "
-"trying to pass them off as yours is not allowed on AstroBin."
-msgstr ""
-"Уважать авторские права других. Воровство изображений у других людей и "
-"попытка выдать их за свои - недопустимо на AstroBin."
-
-msgid "Do fill in all the technical details you can."
-msgstr "Заполнять все технические детали по возможности."
-
-msgid ""
-"AstroBin is founded on the idea that data is important and can't go wasted "
-"in a sea of chaos. As much as you can, please fill in the technical details "
-"of your images."
-msgstr ""
-"AstroBin основан как попытка упорядочить важные данные в море хаоса. "
-"Постарайтесь заполнять как можно больше деталей для ваших изображений."
-
-msgid "Be respectful of other users."
-msgstr "Уважайте других пользователей."
-
-msgid "Be nice and friendly to other users when you send them messages."
-msgstr ""
-"Будьте вежливы и дружелюбны к другим пользователям, когда отсылаете им "
-"сообщения."
-
-msgid "What is forbidden"
-msgstr "Что запрещено"
-
-msgid "Don't upload anything that you did not work on."
-msgstr "Не загружайте изображения, к получению которых вы непричастны."
-
-msgid ""
-"It's simple: if you didn't take or post-process an image yourself, then "
-"don't upload it. Things that are not fine include: reposting other people's "
-"images without any meaningful modifications and without the owner's content; "
-"reposting NASA's (and other similar agencies) images without any meaningful "
-"modifications. Things that are okay include: post-processing freely "
-"available data from NASA and other similar agencies; post-processing a "
-"friend's data; post-processing free data made available by other users."
-msgstr ""
-"Все просто: если вы не участвовали в съемке или обработке изображения лично, "
-"не загружайте его. Например: репост чужих изображений без каких либо "
-"значимых изменений и согласия автора; репост материалов NASA и аналогичных "
-"организаций без значительных изменений. Разрешается выкладывать следующие "
-"материалы: постобработка свободно доступных материалов NASA и аналогичных "
-"организаций; постобработка изображений друзей или изображений других "
-"пользователей, находящихся в свободном доступе."
-
-msgid "No nudity, no explicitly sexual content, no illegal content."
-msgstr ""
-"Никакой обнажёнки, никакого сексуального содержимого, нелегального "
-"содержимого."
-
-msgid ""
-"Your account will be permanently deleted, and so will all your content, if "
-"you upload any content that is illegal, porn or nudity. We also reserve the "
-"right to report you to the authorities, if we find it necessary."
-msgstr ""
-"Ваш аккаунт будет немедленно удалён, а также ваше содержимое, если вы "
-"закачаете нелегальные изображения, порнографию или обнажёнку. Мы также "
-"оставляем право сообщить вам авторство, если мы найдём это необходимым."
-
-msgid "Don't upload images that have nothing to do with astronomy."
-msgstr "Не загружайте изображения не связанные ничем с астрономией."
-
-msgid ""
-"Images of your equipment are fine, but don't use AstroBin to upload pictures "
-"from your last vacation. Your account won't be deleted, but we will ask you "
-"to remove those pictures."
-msgstr ""
-"Изображения вашего оборудования это нормально, но не используйте AstroBin "
-"для закачки картинок с вашего отпуска. Ваш аккаунт не будет удалён, но мы "
-"попросим вас убрать эти изображения."
-
-msgid "Don't use your account to host images for websites, banners or logos."
-msgstr ""
-"Не используйте свой аккаунт для размещения изображений для веб-сайтов, "
-"баннеров или логотипов."
-
-msgid ""
-"Banners, logos, icons or other graphic elements that are not "
-"astrophotography are not allowed on AstroBin."
-msgstr ""
-"Баннеры, логотипы, иконки или другие графические элементы не связанные с "
-"астрофотографией недопустимы на AstroBin."
-
-msgid ""
-"In conclusion, these terms are just a way to say \"please be nice and use "
-"common sense\". If you feel you can't abide by them, please let us know what "
-"you feel is wrong."
-msgstr ""
-"В заключение хочется заметить, что эти правила просто способ сказать "
-"«пожалуйста, будьте хорошим и используйте здравый смысл». Если вы "
-"чувствуете, что вы не сможете соблюдать их, пожалуйста, сообщите нам, что "
-"вам не нравится в них."
-
-msgid ""
-"Are you an astrophotographer? Do you like to share the outcome of your hard "
-"work with others? As an astrophotographer myself, and a subscriber to "
-"numerous Astrophotography forums, I have found that the Internet is lacking "
-"a centralized place where astrophotographers can share their work."
-msgstr ""
-"Ты астрофотограф? Тебе нравится делиться своими достижениями с другими? "
-"Будучи сам астрофотографом, и подписчиком множества Астрофотографических "
-"форумов, я искал место в Интернете для удобного и централизованного способа "
-"размещать и делиться своими работами с другими астрофотографами."
-
-msgid "Well, this is finally over!"
-msgstr "Ну, наконец-то оно есть!"
-
-msgid ""
-"<em>AstroBin</em> comes to fill the gap. It's a website built from the "
-"ground up by an astrophotographer, and it provides means to people who want "
-"to share their astrophotographs."
-msgstr ""
-"<em>AstroBin</em> появился чтобы заполнить этот пробел. Этот веб-сайт "
-"построен с нуля астрофотографом, и предоставляет средства для людей, которые "
-"хотят делиться своими астрофото."
-
-msgid "So how is this different from any other image sharing websites?"
-msgstr "Так в чём отличия от других сайтов для обмена изображениями?"
-
-msgid ""
-"<em>AstroBin</em> provides a number of features that are tailored "
-"specificlly to astrophotography. Here's a quick run down of the main ones:"
-msgstr ""
-"<em>AstroBin</em> предоставляет ряд особенностей, учитывая специфичность "
-"астрофотографии. Вот быстренько основные из них:"
-
-msgid "Dedication to data"
-msgstr "Верность данным"
-
-msgid ""
-"On a general purpose image sharing site, you would upload your image and be "
-"done with it. <em>AstroBin</em>, instead, has a user interface specifically "
-"designed to enable you to input all the technical data of your image."
-msgstr ""
-"На обычных сайтах по обмену изображениями вы можете только загрузить их и "
-"всё на этом. <em>AstroBin</em>, в свою очередь, даёт интерфейс для ввода "
-"всех необходимых данных и деталей к вашему изображению."
-
-msgid ""
-"<em>AstroBin</em> will autocomplete your input using a vast database: "
-"everything from telescopes, CCDs and filters to astronomical objects in many "
-"catalogues will show in popup dialogs for easy selection when you start "
-"typing their names. <em>AstroBin</em> is connected to the SIMBAD "
-"Astronomical Database, which contains over 5 million objects under over 15 "
-"million names!"
-msgstr ""
-"<em>AstroBin</em> позволяет автозаполнять ваш ввод используя обширную базу "
-"данных: разнообразные телескопы, ПЗС и фильтры для астрономических объектов "
-"из большого каталога отображаются во всплывающих подсказках в то время как "
-"вы начинаете печатать их названия. <em>AstroBin</em> подключён к "
-"астрономический базе SIMBAD, которая содержит свыше 5 миллионов объектов и "
-"свыше 15 миллионов названий!"
-
-msgid ""
-"On <em>AstroBin</em>, astronomical subjects have their own page, where you "
-"can see the best images of them, and plots and charts showing trends and "
-"interesting statistics. There is also a page that shows the most popular "
-"subjects organized by month and latitude!"
-msgstr ""
-"На <em>AstroBin</em> каждый астрономический объект имеет свою страницу, на "
-"которой вы можете найти лучшие их фотографии, построить графики и таблицы, "
-"показывающие занятную статистику. Так же есть страницы показывающие "
-"популярные объекты сортированные по месяцам и широте."
-
-msgid "Data is strongly interconnected"
-msgstr "Данные сильно связаны друг с другом"
-
-msgid ""
-"Have you ever wanted to see how your next image is going to look like? On "
-"<em>AstroBin</em>, you can search for all images of a certain target that "
-"were taken with a certain telescope and a certain CCD or camera. Or a "
-"certain filter. How about all the images between 6 and 8 hours of "
-"integration? Or with a certain Moon phase? You can do that!"
-msgstr ""
-"Вы когда-нибудь хотели узнать, как будет выглядеть ваше будущее фото? На "
-"<em>AstroBin</em>, вы можете искать все изображения определенной цели, "
-"которые были взяты с определенным телескопом и определенной ПЗС или камерой. "
-"Или с конкретным фильтром. Как насчет всех изображений с 6 до 8 часов "
-"посещаемости? Или с определенной фазой Луны? Вы можете сделать это!"
-
-msgid ""
-"AstroBin can help you with your next telescope or camera purchase, by "
-"searching for gear combinations owned by other users. For instance, you "
-"could search for all images taken with a Canon 5D and any apochromatic "
-"refractor, or a SBIG ST-8300 with any Richtey-Chretien telescope. Or, if you "
-"want, you can search by telescope diameter too!"
-msgstr ""
-"AstroBin может помочь вам с вашим следующим выбором телескопа или камерой "
-"для покупки, путем поиска комбинаций оборудования, принадлежащих другим "
-"пользователям. Например, вы могли бы искать все фотографии, сделанных с "
-"помощью Canon 5D и любым апохроматическим рефрактором, или SBIG ST-8300 с "
-"любым телескопом Ричи-Кретьена. Или, если вы хотите, вы так же можете "
-"осуществлять поиск по диаметру телескопа!"
-
-msgid ""
-"Finally, all this information is collected in interesting plots, that can "
-"help you figure out how some gear items are trending."
-msgstr ""
-"Наконец, вся эта информация собрана в интересные графики, которые помогают "
-"вам представить какое оборудование популярно."
-
-msgid "All the data at a glance"
-msgstr "Все данные одним взглядом"
-
-msgid ""
-"Each image on <em>AstroBin</em> is annotated of all the technical details "
-"about its acquisition. Telescopes involved, cameras, mounts, filters, "
-"everything is visible at a glance in the Technical Card. Even the Moon age "
-"at the time of the acquisition is displayed."
-msgstr ""
-"Кажое изображение на <em>AstroBin</em> подписывается техническими деталями "
-"его получения. Используемые телескопы, камеры, монтировки, фильтры, всё "
-"сразу видно на Технической Карточке. Даже возраст Луны в момент получения "
-"изображения."
-
-msgid "More than just an image"
-msgstr "Более, чем просто изображение"
-
-msgid ""
-"<em>AstroBin</em> will do more than just host a copy of your image: when you "
-"upload a photograph, a histogram and a black &amp; white inverted version of "
-"the image will be generated on the fly, so it's easier to spot faint "
-"nebulosity regions or spiral arms. Images will also be plate solved, and an "
-"annotated version will appear on the site. <em>AstroBin</em> will know what "
-"are the astronomical objects in your image without you telling!"
-msgstr ""
-"<em>AstroBin</em> старается делать больше, чем просто хранить копии ваших "
-"изображений: когда вы загружаете фотографию, гистограмма, ч/б "
-"инвертированная версия изображения генерируется на лету, так что это удобно "
-"для регистрации слабых участков туманных объектов и спиральных рукавов. "
-"Изображения также вычисляются по координатам, и покрывается подписями тут же "
-"на сайте. <em>AstroBin</em> будет знать, что у вас за астрономические "
-"объекты на изображении без вашего на то указывания!"
-
-msgid "Protection from theft with automatic watermarking"
-msgstr "Защита от воровства с автоматическим размещением водяного знака"
-
-msgid ""
-"<em>AstroBin</em>'s upload wizard will offer you to watermark your image "
-"with the text of your choosing. All it takes is a click!"
-msgstr ""
-"<em>AstroBin</em> и его помощник закачки предложит вам разместить водяной "
-"знак на вашем изображении с текстом на выбор. Всё это делается за один клик!"
-
-msgid "AstroBin supports multiple image revisions"
-msgstr "AstroBin поддерживает множественные версии изображения"
-
-msgid ""
-"Don't tell me you have never gone back to revise the processing of an image "
-"<em>after</em> you had published it. <em>AstroBin</em> embraces this concept "
-"and lets you publish several revisions of the same image easily and "
-"intuitively! Now it's going to be really easy to tell whether your "
-"processing has improved."
-msgstr ""
-"Только не говорите мне, что никогда не возвращались к переосмыслению "
-"обработки вашего изображения <em>после</em> того как опубликовали его. "
-"<em>AstroBin</em> развил эту идею и позволяет публиковать другие версии "
-"вашего изображения просто и интуитивно! Теперь будет гораздо легче видеть "
-"ваши изменения и улучшения."
-
-msgid "AstroBin is social!"
-msgstr "AstroBin социальный!"
-
-msgid ""
-"On <em>AstroBin</em> you can message other astrophotographer, follow them "
-"and be notified when they post new images, or perform requests for more data."
-msgstr ""
-"На <em>AstroBin</em>-е вы можете общаться с другими астрофотографами, "
-"подписываться на них и получать уведомления о их новых изображениях, или "
-"просить о дополнительных данных."
-
-msgid ""
-"You can follow gear items or astronomical subjects, and be notified whenever "
-"there's a new image from a certain CCD, or telescope, or filter, and so on. "
-"Or you can monitor all the new images of a certain galaxy or nebula."
-msgstr ""
-"Вы можете подписываться на элементы оборудования или астрономические "
-"объекты, и получать уведомления когда будут новые фотографии с конкретной "
-"модели ПЗС, или телескопа, или с фильтром и так далее. Или вы можете "
-"отслеживать новые фотографии конкретной галактики или туманности."
-
-msgid ""
-"As you have undoubtly realized by now, <em>AstroBin</em> is way more than an "
-"image hosting service. It's what the Astrophotography community has needed "
-"for a long time. For years, I have seen amazing images scattered all over "
-"the Internet: general purpose image hosting sites, forums, personal websites "
-"and even temporary places. Some of those images contain data that is too "
-"precious to go wasted in a sea of chaos. <em>AstroBin</em> comes to the "
-"rescue to provide a home and a central hub for astrophotographers all over "
-"the world."
-msgstr ""
-"Бесспорно вам уже известно, что <em>AstroBin</em> — это более чем просто "
-"хостинг изображений. Это то, в чём общество Астрофотографии нуждалось в "
-"течение долгого времени. В течение многих лет, я видел удивительные "
-"фотографии, разбросанные по всему Интернету: обычные хостинги картинок, "
-"форумы, личные веб-сайты и даже какие-то временные места. Некоторые из этих "
-"изображений содержат данные, которые слишком ценны, для того чтобы впустую "
-"исчезнуть в море информационного хаоса. <em>AstroBin</em> приходит на "
-"помощь, чтобы стать домом и центральным местом для всех астрофотографов мира."
-
-msgid "So, what are you waiting for?"
-msgstr "Так чего вы ждёте?"
-
-msgid "Sign up now!"
-msgstr "Присоединяйтесь сейчас!"
-
 msgid "Additional information requested"
 msgstr "Требуется дополнительная информация"
 
@@ -3653,6 +3142,11 @@ msgstr "Вернуться к изображению"
 
 msgid "Contains"
 msgstr "Содержит"
+
+#, fuzzy
+#| msgid "Remove data"
+msgid "Remove ads"
+msgstr "Удалить данные"
 
 #, python-format
 msgid ""
@@ -3676,11 +3170,24 @@ msgstr "В этих открытых группах"
 msgid "Histogram"
 msgstr "Гистограмма"
 
+msgid "Right ascension"
+msgstr ""
+
+#, fuzzy
+#| msgid "Description"
+msgid "Declination"
+msgstr "Описание"
+
 msgid "Technical card"
 msgstr "Техническая карточка"
 
 msgid "Frames"
 msgstr "Кадры"
+
+#, fuzzy
+#| msgid "By astrometry details"
+msgid "Basic astrometry details"
+msgstr "По деталям астрометрии"
 
 msgid "RA center"
 msgstr "RA центр"
@@ -3700,8 +3207,27 @@ msgstr "угл. сек/пиксель"
 msgid "Orientation"
 msgstr "Направление"
 
+msgid "(flipped)"
+msgstr ""
+
 msgid "Field radius"
 msgstr "Радиус поля"
+
+#, fuzzy
+#| msgid "Commercial information"
+msgid "WCS transformation"
+msgstr "Рекламная информация"
+
+msgid "Resolution"
+msgstr "Разрешение"
+
+msgid "Uncompressed source file"
+msgstr ""
+
+#, fuzzy
+#| msgid "Downloaded"
+msgid "Download"
+msgstr "Загружено"
 
 msgid "Remote source"
 msgstr "Удаленный источник"
@@ -3714,6 +3240,9 @@ msgstr "выбрано"
 
 msgid "Actions"
 msgstr "Действия"
+
+msgid "Upload uncompressed source (XISF/FITS/PSD/TIFF)"
+msgstr ""
 
 msgid "Upload new revision"
 msgstr "Загрузить другую версию"
@@ -3729,12 +3258,6 @@ msgstr "Переместить в Staging Area"
 
 msgid "Send to group"
 msgstr "Отправить в группу"
-
-msgid "Send to public data pool"
-msgstr "Отправить в общее хранилище"
-
-msgid "Send to private shared folder"
-msgstr "Отправить в закрытый каталог"
 
 msgid "Delete image and all revisions"
 msgstr "Удалить изображение и все его версии"
@@ -3760,6 +3283,11 @@ msgstr "Заблокировать пользователя"
 msgid "Edit"
 msgstr "Править"
 
+#, fuzzy
+#| msgid "Thumbnail"
+msgid "Thumbnails"
+msgstr "Миниатюра"
+
 msgid "Watermark"
 msgstr "\"Водяной знак\""
 
@@ -3771,6 +3299,19 @@ msgstr "Детали съёмки"
 
 msgid "Plate-solving settings"
 msgstr "Определение по координатам"
+
+#, fuzzy
+#| msgid "Attempt to plate-solve again"
+msgid "Restart plate-solving"
+msgstr "Попытаться определить координаты снова"
+
+#, fuzzy
+#| msgid "Plate-solving settings"
+msgid "Advanced plate-solving settings"
+msgstr "Определение по координатам"
+
+msgid "Restart advanced plate-solving"
+msgstr ""
 
 msgid "Context"
 msgstr "Контекст"
@@ -3817,6 +3358,53 @@ msgstr "Большой размер"
 msgid "Full size"
 msgstr "Полный размер"
 
+msgid "Delete this revision?"
+msgstr "Удалить эту версию?"
+
+msgid ""
+"This revision will be permanently deleted and cannot be recovered. Are you "
+"sure?"
+msgstr "Эта версия будет полностью удалено и невосстановимо. Вы уверены?"
+
+msgid "Associate XISF/FITS file"
+msgstr ""
+
+msgid ""
+"\n"
+"                        To improve the accuracy of your plate-solution even "
+"further, please upload one of the XISF or\n"
+"                        FITS files from your data set. Such files normally "
+"have date and time headers that will allow\n"
+"                        AstroBin to calculate solar system body ephemerides "
+"and find planets and asteroids in your\n"
+"                        image (provided you also add location information to "
+"your image).\n"
+"                    "
+msgstr ""
+
+#, python-format
+msgid ""
+"\n"
+"                        For maximum accuracy, it's recommended that you use "
+"PixInsight's native and open format XISF.\n"
+"                        Learn more about XISF here: <a href=\"%(xisf_url)s\" "
+"target=\"_blank\">%(xisf_url)s</a>\n"
+"                    "
+msgstr ""
+
+msgid ""
+"\n"
+"                        <strong>Please note:</strong> it's very important "
+"that the XISF or FITS file you upload is\n"
+"                        aligned to your processed image, otherwise the "
+"object annotations will not match.\n"
+"                        To improve your chances at a successful accurate "
+"plate-solution, calibrate your file the usual\n"
+"                        way (dark/bias/flats) but you don't need to stretch "
+"it.\n"
+"                    "
+msgstr ""
+
 msgid "The following people bookmarked this image"
 msgstr "Следующие люди добавили в закладки это изображение"
 
@@ -3850,20 +3438,23 @@ msgstr ""
 msgid "Delete image and all its revisions?"
 msgstr "Удалить изображение и все его версии?"
 
+#, fuzzy
+#| msgid ""
+#| "The image will be permanently deleted and cannot be recovered. All its "
+#| "revisions will be deleted too. Are you sure?"
+msgid ""
+"The image will be moved to the trash, and it can be restored later. All its "
+"revisions will be there too. Continue?"
+msgstr ""
+"Это изображение будет полностью удалено и невосстановимо. Все его версии "
+"будут удалены тоже. Вы уверены?"
+
 msgid ""
 "The image will be permanently deleted and cannot be recovered. All its "
 "revisions will be deleted too. Are you sure?"
 msgstr ""
 "Это изображение будет полностью удалено и невосстановимо. Все его версии "
 "будут удалены тоже. Вы уверены?"
-
-msgid "Delete this revision?"
-msgstr "Удалить эту версию?"
-
-msgid ""
-"This revision will be permanently deleted and cannot be recovered. Are you "
-"sure?"
-msgstr "Эта версия будет полностью удалено и невосстановимо. Вы уверены?"
 
 msgid "Delete original image?"
 msgstr "Удалить оригинальное изображение?"
@@ -3904,18 +3495,6 @@ msgstr ""
 "ваших работ и уведомит ваших подписчиков."
 
 msgid ""
-"If this image is the result of your processing of a public data pool, you "
-"can send it the pool so it's displayed there."
-msgstr ""
-"Если это изображение результат вашей обработки из общего хранилища, вы "
-"можете отправить его туда и оно там отобразится."
-
-msgid "Use this form to select an existing <strong>public data pool</strong>."
-msgstr ""
-"Воспользуйтесь эту форму для выбора существующего <strong>общего хранилища "
-"данных</strong>."
-
-msgid ""
 "Sorry, you cannot send images from your Staging Area to a group. You need to "
 "first promote this image to your Public Area, if you want to do that."
 msgstr ""
@@ -3929,23 +3508,6 @@ msgstr ""
 "Используйте эту форму, чтобы выбрать одну из ваших групп. Список содержит "
 "все открытые и закрытые группы без автодобавления в которых вы являетесь "
 "владельцем или участником."
-
-msgid ""
-"If this image is the result of your processing of a private shared folder, "
-"you can send it the folder so it's displayed there."
-msgstr ""
-"Если это изображение является результатом работы в закрытом каталоге, вы "
-"можете отправить это в каталог и оно отобразится там."
-
-msgid ""
-"Use this form to select a <strong>private shared folder</strong> you have "
-"created or have been invited to."
-msgstr ""
-"Используйте эту форму для выбора <strong>приватного общего каталога</strong> "
-"которые вы создали или хотите пригласить."
-
-msgid "You don't have access to any shared private folders."
-msgstr "У вас нет доступа ни к одному закрытому каталогу обмена."
 
 msgid "Sharing mode"
 msgstr "Способ поделиться"
@@ -3993,6 +3555,23 @@ msgid ""
 msgstr "Вы улучшили пост-обработку вашего изображения? Закачайте новую версию!"
 
 msgid ""
+"Please note: AstroBin is not officially a backup service. So please also "
+"keep additional copies of your file. However, by storing your work here, you "
+"can have some additional peace of mind."
+msgstr ""
+
+#, python-format
+msgid ""
+"Read about how AstroBin stores your files safely on the <a href=\"%(faq_url)s"
+"\">FAQ page</a>."
+msgstr ""
+
+#, fuzzy
+#| msgid "Clear skies"
+msgid "Clear"
+msgstr "Чистое небо"
+
+msgid ""
 "This image is pending moderation and is currently not visible on the front "
 "page or search results."
 msgstr ""
@@ -4028,6 +3607,54 @@ msgstr ""
 "получать отзывы. Когда вас все устроит, возможно, после загрузки нескольких "
 "версий, <a href=\"#promote-modal\" data-toggle=\"modal\">переместите его</a> "
 "в <a href=\"%(profile_url)s\">Public Area</a>."
+
+msgid "Oh no!"
+msgstr ""
+
+msgid ""
+"\n"
+"            We are very, very sorry, but it appears that your image suffered "
+"a catastrophic data\n"
+"            corruption, and it cannot be retrieved. Hopefully you still have "
+"your file (the information on\n"
+"            this form should provide you with enough context).\n"
+"        "
+msgstr ""
+
+msgid ""
+"\n"
+"            Please use the file input below to upload it again, and then "
+"click on the Save button down\n"
+"            below. All the data you had previously associated to your image "
+"is still here.\n"
+"        "
+msgstr ""
+
+#, fuzzy
+#| msgid "Here's some more reading material to get you started"
+msgid "Here's some detail about the image to give you some context."
+msgstr "Здесь некоторые материалы для прочтения, чтобы начать"
+
+#, fuzzy
+#| msgid "Upload"
+msgid "Uploaded"
+msgstr "Закачать"
+
+#, fuzzy
+#| msgid "Image upload"
+msgid "Image uploaded"
+msgstr "Загрузка изображения"
+
+#, fuzzy
+#| msgid "Previously uploaded"
+msgid "Revision uploaded"
+msgstr "Ранее закачанная"
+
+msgid "Please wait..."
+msgstr "Пожалуйста, ждите..."
+
+msgid "AstroBin is processing your thumbnails."
+msgstr ""
 
 msgid "Edit your image: acquisition details"
 msgstr "Правка вашего изображения: детали получения"
@@ -4182,14 +3809,31 @@ msgstr "Основная информация"
 msgid "Gear used"
 msgstr "Используемое оборудование"
 
+#, fuzzy
+#| msgid "Edit your image: plate-solving settings"
+msgid "Edit your image: advanced plate-solving settings"
+msgstr "Правка вашего изображения: координаты"
+
+#, fuzzy
+#| msgid "Attempt to plate-solve again"
+msgid "Save and plate-solve again"
+msgstr "Попытаться определить координаты снова"
+
 msgid "Edit your image: plate-solving settings"
 msgstr "Правка вашего изображения: координаты"
 
-msgid "Back to image"
-msgstr "Назад к изображению"
-
 msgid "Edit revision"
 msgstr "Править версию"
+
+#, fuzzy
+#| msgid "Change the license for this image"
+msgid "Change the thumbnails for this image"
+msgstr "Сменить лицензию для этого изображения"
+
+#, fuzzy
+#| msgid "Edit watermark"
+msgid "Next step: edit watermark"
+msgstr "Править \"водяной знак\""
 
 msgid "Apply a watermark to image"
 msgstr "Применить водяной знак к изображению"
@@ -4229,6 +3873,24 @@ msgstr "от <a href=\"%(the_url)s\">%(user)s</a>"
 msgid "Fit to window"
 msgstr "Под размеры окна"
 
+msgid "Abscissa "
+msgstr ""
+
+msgid "Ordinate"
+msgstr ""
+
+msgid "Ecliptic longitude"
+msgstr ""
+
+msgid "Ecliptic latitude"
+msgstr ""
+
+msgid "Galactic longitude"
+msgstr ""
+
+msgid "Galactic latitude"
+msgstr ""
+
 msgid "Remove"
 msgstr "Убрать"
 
@@ -4241,14 +3903,11 @@ msgstr "Ещё нет оборудования."
 msgid "Add"
 msgstr "Добавить"
 
-msgid "You have no messages."
-msgstr "У вас нет сообщений."
-
-msgid "Show all messages"
-msgstr "Показать все сообщения"
-
 msgid "No images"
 msgstr "Нет изображений"
+
+msgid "Only you can see this"
+msgstr ""
 
 msgid "Integration"
 msgstr "Накопление"
@@ -4264,6 +3923,9 @@ msgstr "Просмотры"
 
 msgid "link"
 msgstr "ссылка"
+
+msgid "Comment of deleted image not shown."
+msgstr ""
 
 msgid "No results. Sorry."
 msgstr "Безрезультатно. Извините."
@@ -4302,6 +3964,9 @@ msgid "If this location is missing data, or has incorrect data, please fix it."
 msgstr ""
 "Если это местоположение отсутствует или неверное, пожалуйста, исправьте."
 
+msgid "What is this site?"
+msgstr "Что это за сайт?"
+
 msgid "Commercial information"
 msgstr "Рекламная информация"
 
@@ -4310,6 +3975,11 @@ msgstr "Информация о продавце"
 
 msgid "Blog"
 msgstr "Дневник"
+
+#, fuzzy
+#| msgid "Terms of Service"
+msgid "Terms of servic"
+msgstr "Условия предоставления услуг"
 
 msgid ""
 "AstroBin is Copyright &copy; 2010-2012 Salvatore Iovene, All Rights "
@@ -4358,9 +4028,6 @@ msgstr "Ответить"
 
 msgid "Sending..."
 msgstr "Отправка..."
-
-msgid "Error. Try again!"
-msgstr "Ошибка. Попробуйте ещё!"
 
 msgid ""
 "Please click on the images that you want to mark as SPAM, then click on the "
@@ -4921,41 +4588,19 @@ msgid "%(requester)s requested to join the group: \"%(group_name)s\""
 msgstr ""
 "%(requester)s запросил разрешение вступить в группу: \"%(group_name)s\""
 
-#, python-format
-msgid ""
-"%(originator)s has published a new image! Check it out at the following url: "
-"<a href=\"%(object_url)s\">%(object_url)s</a>"
-msgstr ""
-"%(originator)s опубликовал изображение! Оцените его по ссылке: <a href="
-"\"%(object_url)s\">%(object_url)s</a>"
-
-#, python-format
-msgid ""
-"%(originator)s has published a new image! Check it out at the following url: "
-"%(object_url)s"
-msgstr ""
-"%(originator)s опубликовал изображение! Зацените его по адресу: "
-"%(object_url)s"
-
-#, python-format
-msgid ""
-"<a href=\"%(object_url)s\"><strong>%(originator)s</strong> has published a "
-"new image.</a>"
-msgstr ""
-"<a href=\"%(object_url)s\"><strong>%(originator)s</strong> разместил НОВОЕ "
-"изображение.</a>"
-
-#, python-format
-msgid ""
-"<a href=\"%(object_url)s\"><strong>%(originator)s</strong> has published a "
-"new image</a>"
+#, fuzzy, python-format
+#| msgid ""
+#| "<a href=\"%(object_url)s\"><strong>%(originator)s</strong> has published "
+#| "a new image</a>"
+msgid "<strong>%(user)s</strong> has published a new image"
 msgstr ""
 "<a href=\"%(object_url)s\"><strong>%(originator)s</strong> разместил НОВОЕ "
 "изображение</a>"
 
-#, python-format
-msgid "New image by %(originator)s"
-msgstr "НОВОЕ изображение от %(originator)s"
+#, fuzzy, python-format
+#| msgid "New image of %(subject)s"
+msgid "New image by %(user)s"
+msgstr "Новое изображение %(subject)s"
 
 #, python-format
 msgid ""
@@ -5123,179 +4768,6 @@ msgstr "Настройки уведомлений"
 
 msgid "Notification Type"
 msgstr "Тип уведомлений"
-
-#, python-format
-msgid ""
-"You are invited to the private shared folder: \"%(folder_name)s\".\n"
-"\n"
-"You can now contribute data and processed images to the folder. You can also "
-"invite more people.\n"
-"\n"
-"Visit the folder at the following url: <a href=\"%(folder_url)s\">"
-"%(folder_url)s</a>"
-msgstr ""
-"Вы приглашены в закрытый каталог обмена: \"%(folder_name)s\".\n"
-"\n"
-"Вы можете добавлять данные и обработанные изображения в каталог. Вы также "
-"можете приглашать других людей.\n"
-"\n"
-"Посетите каталог по адресу: <a href=\"%(folder_url)s\">%(folder_url)s</a>"
-
-#, python-format
-msgid ""
-"You are invited to the private shared folder: \"%(folder_name)s\".\n"
-"\n"
-"You can now contribute data and processed images to the folder. You can also "
-"invite more people.\n"
-"\n"
-"Visit the folder at the following url: %(folder_url)s"
-msgstr ""
-"Вы приглашены в закрытый каталог обмена: \"%(folder_name)s\".\n"
-"\n"
-"Вы можете добавлять данные и обработанные изображения в каталоге. Вы также "
-"можете приглашать других людей.\n"
-"\n"
-"Посетите каталог по ссылке: %(folder_url)s"
-
-#, python-format
-msgid ""
-"<a href=\"%(folder_url)s\">You are invited to the private shared folder: "
-"<strong>\"%(folder_name)s.\"</strong></a>"
-msgstr ""
-"<a href=\"%(folder_url)s\">Вы приглашены в закрытый каталог обмена: <strong>"
-"\"%(folder_name)s.\"</strong></a>"
-
-#, python-format
-msgid "You are invited to the private shared folder: %(folder_name)s"
-msgstr "Вы приглашены в закрытый каталог обмена: %(folder_name)s"
-
-#, python-format
-msgid ""
-"%(user_name)s has added a new processed image to the private shared folder: "
-"\"%(folder_name)s\". Check it out at the following url: <a href="
-"\"%(folder_url)s\">%(folder_url)s</a>"
-msgstr ""
-"%(user_name)s добавил новое обработанное изображение в закрытый каталог: "
-"\"%(folder_name)s\".Оцените его по ссылке: <a href=\"%(folder_url)s\">"
-"%(folder_url)s</a>"
-
-#, python-format
-msgid ""
-"%(user_name)s has added a new processed image to the private shared folder: "
-"\"%(folder_name)s\". Check it out at the following url: %(folder_url)s"
-msgstr ""
-"%(user_name)s добавил новое рабочее изображение в закрытый каталог обмена: "
-"«%(folder_name)s». Зацените его по адресу: %(folder_url)s"
-
-#, python-format
-msgid ""
-"<a href=\"%(folder_url)s\"><strong>%(user_name)s</strong> has added a new "
-"processed image to the private shared folder: <strong>\"%(folder_name)s.\"</"
-"strong></a>"
-msgstr ""
-"<a href=\"%(folder_url)s\"><strong>%(user_name)s</strong> добавил рабочее "
-"изображение в закрытый каталог: <strong>\"%(folder_name)s.\"</strong></a>"
-
-#, python-format
-msgid ""
-"<a href=\"%(folder_url)s\"><strong>%(user_name)s</strong> has added a new "
-"processed image to the private shared folder: <strong>\"%(folder_name)s.\"</"
-"a>"
-msgstr ""
-"<a href=\"%(folder_url)s\"><strong>%(user_name)s</strong> добавил "
-"изображение закрытый каталог: <strong>\"%(folder_name)s.\"</a>"
-
-#, python-format
-msgid "New processed image in private shared folder: %(folder_name)s"
-msgstr "Новое рабочее изображение в закрытом каталоге: %(folder_name)s"
-
-#, python-format
-msgid ""
-"%(user_name)s has added a new processed image to the public data pool: "
-"\"%(pool_name)s\". Check it out at the following url: <a href=\"%(pool_url)s"
-"\">%(pool_url)s</a>"
-msgstr ""
-"%(user_name)s добавил новое обработанное изображение в открытое хранилище: "
-"\"%(pool_name)s\". Оцените его по ссылке: <a href=\"%(pool_url)s\">"
-"%(pool_url)s</a>"
-
-#, python-format
-msgid ""
-"%(user_name)s has added a new processed image to the public data pool: "
-"\"%(pool_name)s\". Check it out at the following url: %(pool_url)s"
-msgstr ""
-"%(user_name)s добавил новое рабочее изображение в общее хранилище: "
-"«%(pool_name)s». Подробности: %(pool_url)s "
-
-#, python-format
-msgid ""
-"<a href=\"%(pool_url)s\"><strong>%(user_name)s</strong> has added a new "
-"processed image to the public data pool: <strong>\"%(pool_name)s.\"</"
-"strong></a>"
-msgstr ""
-"<a href=\"%(pool_url)s\"><strong>%(user_name)s</strong> добавил рабочее "
-"изображение в общее хранилище: <strong>\"%(pool_name)s.\"</strong></a>"
-
-#, python-format
-msgid "New processed image in public data pool: %(pool_name)s"
-msgstr "Новое рабочее изображение в общем хранилище: %(pool_name)s"
-
-#, python-format
-msgid ""
-"%(user_name)s has added new data to the public pool: \"%(pool_name)s\". "
-"Check it out at the following url: <a href=\"%(pool_url)s\">%(pool_url)s</a>"
-msgstr ""
-"%(user_name)s добавил данные в открытое хранилище: \"%(pool_name)s\". "
-"Оцените его по ссылке: <a href=\"%(pool_url)s\">%(pool_url)s</a>"
-
-#, python-format
-msgid ""
-"%(user_name)s has added new data to the public pool: \"%(pool_name)s\". "
-"Check it out at the following url: %(pool_url)s"
-msgstr ""
-"%(user_name)s добавил обновления в общее хранилище: «%(pool_name)s». "
-"Подробнее по адресу: %(pool_url)s"
-
-#, python-format
-msgid ""
-"<a href=\"%(pool_url)s\"><strong>%(user_name)s</strong> has added new data "
-"to the public pool: <strong>\"%(pool_name)s.\"</strong></a>"
-msgstr ""
-"<a href=\"%(pool_url)s\"><strong>%(user_name)s</strong> добавил обновления в "
-"общее хранилище: <strong>\"%(pool_name)s.\"</strong></a>"
-
-#, python-format
-msgid "New data in public pool: %(pool_name)s"
-msgstr "Обновления в общем хранилище: %(pool_name)s"
-
-#, python-format
-msgid ""
-"%(user_name)s has added new data to the private shared folder: "
-"\"%(folder_name)s\". Check it out at the following url: <a href="
-"\"%(folder_url)s\">%(folder_url)s</a>"
-msgstr ""
-"%(user_name)s добавил данные в закрытый каталог: \"%(folder_name)s\". "
-"Оцените по ссылке: <a href=\"%(folder_url)s\">%(folder_url)s</a>"
-
-#, python-format
-msgid ""
-"%(user_name)s has added new data to the private shared folder: "
-"\"%(folder_name)s\". Check it out at the following url: %(folder_url)s"
-msgstr ""
-"%(user_name)s добавил данных в закрытый каталог: «%(folder_name)s». "
-"Просмотрите это по ссылке: %(folder_url)s"
-
-#, python-format
-msgid ""
-"<a href=\"%(folder_url)s\"><strong>%(user_name)s</strong> has added new data "
-"to the private shared folder: <strong>\"%(folder_name)s.\"</strong></a>"
-msgstr ""
-"<a href=\"%(folder_url)s\"><strong>%(user_name)s</strong> добавил новые "
-"данные в закрытый каталог: <strong>\"%(folder_name)s.\"</strong></a>"
-
-#, python-format
-msgid "New data in private shared folder: %(folder_name)s"
-msgstr "Обновление в закрытом каталоге обмена: %(folder_name)s"
 
 msgid ""
 "You have received a private message on AstroBin!\n"
@@ -5555,15 +5027,6 @@ msgstr ""
 msgid "Account activation on"
 msgstr "Активация учётной записи включена"
 
-msgid "Username"
-msgstr "Имя пользователя"
-
-msgid "Email"
-msgstr "Email"
-
-msgid "Password"
-msgstr "Пароль"
-
 msgid "Reset password"
 msgstr "Сбросить пароль"
 
@@ -5618,10 +5081,13 @@ msgstr ""
 msgid "Register with AstroBin"
 msgstr "Регистрироваться на AstroBin"
 
-#, python-format
+#, fuzzy
+#| msgid ""
+#| "By registering with AstroBin, you agree to our <a href=\"%(tos_url)s"
+#| "\">terms of service</a>."
 msgid ""
-"By registering with AstroBin, you agree to our <a href=\"%(tos_url)s\">terms "
-"of service</a>."
+"By registering with AstroBin, you agree to our <a href=\"https://welcome."
+"astrobin.com/terms-of-service\">terms of service</a>."
 msgstr ""
 "Регистрируясь на AstroBin, вы соглашаетесь с нашими <a href=\"%(tos_url)s"
 "\">условиями предоставления услуг</a>."
@@ -5646,6 +5112,14 @@ msgstr "Наибольший пиксельный масштаб"
 
 msgid "Small pixel scale"
 msgstr "Наименьший пиксельный масштаб"
+
+#, fuzzy
+#| msgid ""
+#| "Search for astronomical objects, telescopes or lenses, cameras, filters..."
+msgid "Search for celestial objects, equipment items, users, etc..."
+msgstr ""
+"Поиск по астрономическим объектам, телескопам или объективам, камерам, "
+"фильтрам..."
 
 #, python-format
 msgid ""
@@ -5675,17 +5149,216 @@ msgstr "ПЗС против DSLR-камер: глобальная тенденц
 msgid "Global trend of telescope types"
 msgstr "Общая тенденция по типам телескопов"
 
-msgid "Here you can activate your free Raw Data Atom subscription."
-msgstr "Здесь вы можете активировать вашу бесплатную Raw Data Atom подписку."
+#, fuzzy
+#| msgid "About"
+msgctxt "approximately"
+msgid "about"
+msgstr "Описание"
 
-msgid "Activate"
-msgstr "Активировать"
+msgid "View feature comparison"
+msgstr ""
 
-msgid "Subscribe with a secure payment provided by PayPal:"
-msgstr "Подпишитесь с помощью безопасной оплаты через PayPal:"
+#, fuzzy
+#| msgid "Pixel size"
+msgid "Max size"
+msgstr "Размер пикселя"
 
-msgid "Buy with a secure payment provided by PayPal:"
-msgstr "Оплатите с помощью безопасной системы PayPal:"
+#, fuzzy
+#| msgid "View all"
+msgid "View full res"
+msgstr "Смотреть все"
+
+msgid "View full image info"
+msgstr ""
+
+msgid "Basic"
+msgstr ""
+
+#, fuzzy
+#| msgid "Advanced search"
+msgid "Advanced"
+msgstr "Расширенный поиск"
+
+#, fuzzy
+#| msgid "Commercial gear items"
+msgid "Social features"
+msgstr "Рекламные элементы оборудования"
+
+#, fuzzy
+#| msgid "Plate-solving settings"
+msgid "Plate-solving"
+msgstr "Определение по координатам"
+
+#, fuzzy
+#| msgid "Public data pools"
+msgid "Bulk data export"
+msgstr "Общее хранилище данных"
+
+msgid "Hide astronomy ads"
+msgstr ""
+
+msgid "No ads on your pages"
+msgstr ""
+
+msgid "Non-members/free users can view your images in full res"
+msgstr ""
+
+#, fuzzy
+#| msgid "Full resolution"
+msgid "Full size annotations"
+msgstr "Полное разрешение"
+
+#, fuzzy
+#| msgid "Upload complete!"
+msgid "Upload uncompressed source"
+msgstr "Закачка завершена!"
+
+#, fuzzy
+#| msgid "Unlimited images"
+msgid "Undelete images"
+msgstr "Неограниченные изображения"
+
+msgid "year"
+msgstr "год"
+
+#, python-format
+msgid ""
+"\n"
+"                %(number)s images, max %(size)s each"
+msgstr ""
+
+#, fuzzy
+#| msgid "Higher resolution"
+msgid "View in original resolution"
+msgstr "Наивысшее разрешение"
+
+#, python-format
+msgid ""
+"Up to %(number)s\n"
+"            revisions/image"
+msgstr ""
+
+msgid "Create/join Groups"
+msgstr ""
+
+msgid "Basic plate-solving"
+msgstr ""
+
+#, fuzzy
+#| msgid "Top Pick"
+msgid "IOTD / Top Picks"
+msgstr "Лучший Выбор"
+
+msgid "No ads for others on your pages"
+msgstr ""
+
+msgid "Full-size annotations"
+msgstr ""
+
+msgid "All future features"
+msgstr ""
+
+msgid "In the future"
+msgstr ""
+
+#, fuzzy
+#| msgid "Buy it here"
+msgid "Buy in the Marketplace"
+msgstr "Купить это здесь"
+
+msgid "Vote in contests"
+msgstr ""
+
+msgid "Analytics"
+msgstr ""
+
+msgid "Bulk image editing"
+msgstr ""
+
+#, fuzzy
+#| msgid "Cancel via PayPal"
+msgid "Pay securely with PayPal"
+msgstr "Отмена через PayPal"
+
+msgid "Want to upgrade from a lower subscription tier?"
+msgstr ""
+
+#, python-format
+msgid ""
+"AstroBin doesn't support subscription upgrades at the moment, but we're "
+"happy to make it happen manually. If you're on a lower subscription tier and "
+"would like to upgrade to <strong>%(name)s</strong>, please just buy it and "
+"then contact us at <a href=\"mailto:astrobin@astrobin.com"
+"\">astrobin@astrobin.com</a> to get a refund for the unused time on your old "
+"subscription. Thanks!"
+msgstr ""
+
+msgid "Pay with a bank transfer"
+msgstr ""
+
+#, python-format
+msgid ""
+"\n"
+"                Prefer to pay via bank transfer? Please make a deposit of "
+"%(currency)s %(amount)s to the following\n"
+"                bank details and then email us at %(email_prefix)s%(email)s"
+"%(email_postfix)s with your username so\n"
+"                we may upgrade your account manually. Thanks!\n"
+"            "
+msgstr ""
+
+#, python-format
+msgid ""
+"\n"
+"                ∞ images, max %(size)s each"
+msgstr ""
+
+#, fuzzy
+#| msgid "Basic information"
+msgid "Basic analytics"
+msgstr "Основная информация"
+
+msgid "Buy"
+msgstr "Оплатить"
+
+#, fuzzy
+#| msgid "You are not allowed to see this page."
+msgid "You are already on this plan"
+msgstr "Вам не разрешено просматривать эту страницу."
+
+#, fuzzy
+#| msgid "Image size"
+msgid "∞ images, ∞ size"
+msgstr "Размер изображения"
+
+msgid "View full res (incl. visitors)"
+msgstr ""
+
+#, fuzzy
+#| msgid "Full size"
+msgid "Full search"
+msgstr "Полный размер"
+
+#, fuzzy
+#| msgid "Edit revision"
+msgid "Unlimited revisions"
+msgstr "Править версию"
+
+#, fuzzy
+#| msgid "Attempt to plate-solve again"
+msgid "Advanced plate-solving"
+msgstr "Попытаться определить координаты снова"
+
+msgid "Sell in the Marketplace"
+msgstr ""
+
+msgid "Vote/enter contests"
+msgstr ""
+
+#, fuzzy
+#| msgid "Advanced search"
+msgid "Advanced analytics"
+msgstr "Расширенный поиск"
 
 msgid "Subscription process canceled"
 msgstr "Процесс подписки отменён"
@@ -5730,9 +5403,6 @@ msgstr "неделя"
 msgid "month"
 msgstr "месяц"
 
-msgid "year"
-msgstr "год"
-
 msgid "one time"
 msgstr "один раз"
 
@@ -5770,16 +5440,6 @@ msgstr "лет"
 msgid "No trial"
 msgstr "Не пробный"
 
-#, python-format
-msgid "%(max_allowed)s images per year "
-msgstr "%(max_allowed)s изображений в год"
-
-msgid "Unlimited images"
-msgstr "Неограниченные изображения"
-
-msgid "Buy"
-msgstr "Оплатить"
-
 msgid "Switch to"
 msgstr "Переключиться на"
 
@@ -5806,9 +5466,6 @@ msgstr "Истекает"
 msgid "Invalid"
 msgstr "Неверно"
 
-msgid "Expired"
-msgstr "Истекло"
-
 msgid "Cancelled"
 msgstr "Отменено"
 
@@ -5818,127 +5475,24 @@ msgstr "Недоступно"
 msgid "Unsubscribed"
 msgstr "Отменена подписка"
 
-#, python-format
+#, fuzzy, python-format
+#| msgid ""
+#| "Auto-renewing subscriptions are not offered anymore on AstroBin. Please "
+#| "visit the <a href=\"%(url)s\">subscriptions page</a> to see the available "
+#| "plans, thanks!"
 msgid ""
-"Auto-renewing subscriptions are not offered anymore on AstroBin. Please "
-"visit the <a href=\"%(url)s\">subscriptions page</a> to see the available "
-"plans, thanks!"
+"This subscription is not offered anymore on AstroBin. Please visit the <a "
+"href=\"%(url)s\">subscriptions page</a> to see the available plans, thanks!"
 msgstr ""
 "Авто-обновление подписки больше не предлагается на AstroBin. Пожалуйста, "
 "посетите <a href=\"%(url)s\">страницу планов подписки</a> чтобы увидеть "
 "доступные вам, спасибо!"
 
-#, python-format
 msgid ""
-"\n"
-"                You can use AstroBin for free up to %(max_allowed)s images. "
-"After\n"
-"                that you can upgrade to <strong>Lite</strong> if you have a "
-"limited\n"
-"                yearly output, or <strong>Premium</strong> for a limitless\n"
-"                experience.  Paying members will not see ads, and "
-"everybody,\n"
-"                including non-paying members, have access to all social "
-"features of\n"
-"                AstroBin.\n"
-"                "
+"If you would like to renew your subscription, please visit this page again "
+"after\n"
+"                        your current subscription's expiration date:"
 msgstr ""
-"\n"
-"                На AstroBin вам доступно до %(max_allowed)s загрузок "
-"изображений. Далее\n"
-"                вы можете обновиться на <strong>Lite</strong> если у вас "
-"ограниченный\n"
-"                ежегодный результат, или на <strong>Premium</strong> для "
-"самых \n"
-"                опытных.  Платные участники не видят рекламу, и все,\n"
-"                включая не платящих участников, имеют доступ ко всем "
-"социальным возможностям \n"
-"                AstroBin.\n"
-"            "
-
-#, python-format
-msgid ""
-"\n"
-"                As a user of <strong>AstroBin Free</strong>, you may have up "
-"to\n"
-"                %(max_allowed)s images at the same time. You can delete some "
-"images\n"
-"                to make room for new ones, if you want. For instance you "
-"can\n"
-"                maintain a window of your latest %(max_allowed)s images, or "
-"your\n"
-"                best ones.\n"
-"                "
-msgstr ""
-"\n"
-"Как пользователь <strong>AstroBin Free</strong>, вы можете иметь до\n"
-"%(max_allowed)s изображений одновременно. Если хотите, вы можете удалять\n"
-"какие-либо изображения, чтобы освободить место для новых.\n"
-"Например, вы можете держать тут топ учших или %(max_allowed)s самых свежих \n"
-"изображений.\n"
-"            "
-
-#, python-format
-msgid ""
-"\n"
-"                As a user of <strong>AstroBin Lite</strong>, instead, you "
-"may have\n"
-"                up to %(max_allowed)s images at the same time, per each year "
-"of\n"
-"                your membership. You may replace images uploaded within the "
-"current\n"
-"                subsciption period while images uploaded prior to that can "
-"only be\n"
-"                deleted. Every year that you renew your membership, you get\n"
-"                %(max_allowed)s new image credits.\n"
-"                "
-msgstr ""
-"\n"
-"Как пользователь <strong>AstroBin Lite</strong>, вы можете иметь\n"
-"до %(max_allowed)s изображений ежегодно, согласно\n"
-"использованию тарифа. Вы можете заменять изображения, загруженные в текущем\n"
-"периоде, тогда как изображения, загруженные ранее могут быть\n"
-"только удалены. Каждый год, обновляя подписку, вы получаете\n"
-"%(max_allowed)s новых слотов для изображений.\n"
-"            "
-
-msgid ""
-"\n"
-"                As a user of <strong>AstroBin Premium</strong>, instead, "
-"there are\n"
-"                no limitations whatsoever in the number of images you can "
-"upload.\n"
-"                "
-msgstr ""
-"\n"
-"                Как пользователь <strong>AstroBin Premium</strong>, к вас не "
-"существует\n"
-"                ограничений на количество изображений, которые вы можете "
-"загрузить.\n"
-"                "
-
-msgid ""
-"<strong>AstroBin Raw Data</strong> allows you to store your raw files "
-"(<strong>FIT</strong> and <strong>digital camera raw</strong>) on AstroBin. "
-"We will keep them neatly organized, and you will have a safe backup of all "
-"your work, including calibration files."
-msgstr ""
-"<strong>AstroBin Raw Data</strong> позволяет вам хранить ваши raw файлы "
-"(<strong>FIT</strong> и <strong>цифрокамерный raw</strong>) на AstroBin. Мы "
-"будем их хранить аккуратно организовав, и вам будет доступен бекап всех "
-"ваших работ, включая калибровочные файлы."
-
-#, python-format
-msgid ""
-"Learn more by reading <a href=\"%(rawdata_url)s\">a short introduction.</a>"
-msgstr ""
-"Узнайте больше, прочитав <a href=\"%(rawdata_url)s\">короткое введение.</a>"
-
-msgid "Here you can deactivate your free Raw Data Atom subscription."
-msgstr "Здесь вы можете деактивировать свою бесплатную Raw Data Atom подписку."
-
-msgid "Deactivate"
-msgstr "Отключить"
 
 msgid ""
 "Your subscription is either cancelled or not active yet. If you want to "
@@ -5973,9 +5527,6 @@ msgstr "Отмена через PayPal"
 msgid "You cannot switch to this plan."
 msgstr "Вы не можете переключиться на этот план."
 
-msgid "Thank you for supporting AstroBin!"
-msgstr "Спасибо за поддержку AstroBin!"
-
 msgid "Back to the plans"
 msgstr "Обратно к планам"
 
@@ -5989,217 +5540,22 @@ msgstr ""
 "Ваш запрос отправлен, и мы ожидаем окончательного подтверждения от PayPal. "
 "Ваша подписка будет активирована в течение нескольких минут!"
 
+msgid "Thank you for supporting AstroBin!"
+msgstr "Спасибо за поддержку AstroBin!"
+
 msgid "Your active subscription plans"
 msgstr "Ваши активные планы подписки"
 
 msgid "Your inactive subscription plans"
 msgstr "Ваши неактивные планы подписки"
 
-msgid "Limited offer for you!"
-msgstr ""
-
-msgid ""
-"For a limited time, you are personally offered AstroBin Premium for one "
-"year, at\n"
-"                            a sizeable discount. Don't miss this opportunity!"
-msgstr ""
-
-msgid "AstroBin Premium subscription plans"
-msgstr "Планы AstroBin Премиум подписки"
-
-#, fuzzy, python-format
-#| msgid ""
-#| "\n"
-#| "                You can use AstroBin for free up to %(max_allowed)s "
-#| "images. After\n"
-#| "                that you can upgrade to <strong>Lite</strong> if you have "
-#| "a limited\n"
-#| "                yearly output, or <strong>Premium</strong> for a "
-#| "limitless\n"
-#| "                experience.  Paying members will not see ads, and "
-#| "everybody,\n"
-#| "                including non-paying members, have access to all social "
-#| "features of\n"
-#| "                AstroBin.\n"
-#| "                "
-msgid ""
-"\n"
-"                    You can use AstroBin for free up to %(max_allowed)s "
-"images. After\n"
-"                    that you can upgrade to <strong>Lite</strong> if you "
-"have a limited\n"
-"                    yearly output, or <strong>Premium</strong> for a "
-"limitless\n"
-"                    experience.  Paying members will not see ads, and "
-"everybody,\n"
-"                    including non-paying members, have access to all social "
-"features of\n"
-"                    AstroBin.\n"
-"                    "
-msgstr ""
-"\n"
-"                На AstroBin вам доступно до %(max_allowed)s загрузок "
-"изображений. Далее\n"
-"                вы можете обновиться на <strong>Lite</strong> если у вас "
-"ограниченный\n"
-"                ежегодный результат, или на <strong>Premium</strong> для "
-"самых \n"
-"                опытных.  Платные участники не видят рекламу, и все,\n"
-"                включая не платящих участников, имеют доступ ко всем "
-"социальным возможностям \n"
-"                AstroBin.\n"
-"            "
-
-#, fuzzy, python-format
-#| msgid ""
-#| "\n"
-#| "                As a user of <strong>AstroBin Free</strong>, you may have "
-#| "up to\n"
-#| "                %(max_allowed)s images at the same time. You can delete "
-#| "some images\n"
-#| "                to make room for new ones, if you want. For instance you "
-#| "can\n"
-#| "                maintain a window of your latest %(max_allowed)s images, "
-#| "or your\n"
-#| "                best ones.\n"
-#| "                "
-msgid ""
-"\n"
-"                    As a user of <strong>AstroBin Free</strong>, you may "
-"have up to\n"
-"                    %(max_allowed)s images at the same time. You can delete "
-"some images\n"
-"                    to make room for new ones, if you want. For instance you "
-"can\n"
-"                    maintain a window of your latest %(max_allowed)s images, "
-"or your\n"
-"                    best ones.\n"
-"                    "
-msgstr ""
-"\n"
-"Как пользователь <strong>AstroBin Free</strong>, вы можете иметь до\n"
-"%(max_allowed)s изображений одновременно. Если хотите, вы можете удалять\n"
-"какие-либо изображения, чтобы освободить место для новых.\n"
-"Например, вы можете держать тут топ учших или %(max_allowed)s самых свежих \n"
-"изображений.\n"
-"            "
-
-#, fuzzy, python-format
-#| msgid ""
-#| "\n"
-#| "                As a user of <strong>AstroBin Lite</strong>, instead, you "
-#| "may have\n"
-#| "                up to %(max_allowed)s images at the same time, per each "
-#| "year of\n"
-#| "                your membership. You may replace images uploaded within "
-#| "the current\n"
-#| "                subsciption period while images uploaded prior to that "
-#| "can only be\n"
-#| "                deleted. Every year that you renew your membership, you "
-#| "get\n"
-#| "                %(max_allowed)s new image credits.\n"
-#| "                "
-msgid ""
-"\n"
-"                    As a user of <strong>AstroBin Lite</strong>, instead, "
-"you may have\n"
-"                    up to %(max_allowed)s images at the same time, per each "
-"year of\n"
-"                    your membership. You may replace images uploaded within "
-"the current\n"
-"                    subsciption period while images uploaded prior to that "
-"can only be\n"
-"                    deleted. Every year that you renew your membership, you "
-"get\n"
-"                    %(max_allowed)s new image credits.\n"
-"                    "
-msgstr ""
-"\n"
-"Как пользователь <strong>AstroBin Lite</strong>, вы можете иметь\n"
-"до %(max_allowed)s изображений ежегодно, согласно\n"
-"использованию тарифа. Вы можете заменять изображения, загруженные в текущем\n"
-"периоде, тогда как изображения, загруженные ранее могут быть\n"
-"только удалены. Каждый год, обновляя подписку, вы получаете\n"
-"%(max_allowed)s новых слотов для изображений.\n"
-"            "
-
 #, fuzzy
 #| msgid ""
-#| "\n"
-#| "                As a user of <strong>AstroBin Premium</strong>, instead, "
-#| "there are\n"
-#| "                no limitations whatsoever in the number of images you can "
-#| "upload.\n"
-#| "                "
+#| "PS: are you interested in larger plans? <a href=\"/contact/\">Let us know!"
+#| "</a>"
 msgid ""
-"\n"
-"                    As a user of <strong>AstroBin Premium</strong>, instead, "
-"there are\n"
-"                    no limitations whatsoever in the number of images you "
-"can upload.\n"
-"                    "
-msgstr ""
-"\n"
-"                Как пользователь <strong>AstroBin Premium</strong>, к вас не "
-"существует\n"
-"                ограничений на количество изображений, которые вы можете "
-"загрузить.\n"
-"                "
-
-msgid "AstroBin Raw Data subscription plans"
-msgstr "Планы подписки AstroBin Raw Data"
-
-msgid "Here's a short description of each plan:"
-msgstr "Вот немного описания по каждому плану:"
-
-msgid ""
-"This plan is free! Choose it to share a small amount of data with other "
-"users."
-msgstr ""
-"Это план бесплатный! Выберите его чтобы иметь возможность делиться небольшим "
-"количеством данных с другими пользователями."
-
-msgid ""
-" Choose this plan if you want to keep your expenses to a minimum, but still "
-"want the possibity to share your FIT and digital camera raw files with your "
-"friends. You can also participate to public data pools and contribute to the "
-"deepest deep sky images ever created, and you will always know that you "
-"support AstroBin."
-msgstr ""
-"Выберите этот план, если вы хотите свести свои расходы до минимума, но в "
-"тоже время хотите иметь возможность делиться своими FIT и цифрокамерными raw "
-"файлами с друзьями. Вы также сможете участвовать общем хранилище данных для "
-"вклада в снимки глубокого космоса, которые были созданы, понимая, что вы "
-"поддерживаете AstroBin."
-
-msgid ""
-"Choose this plan if you have started out in the recent year or two, or you "
-"don't want to share and backup your calibration files. Enjoy a lot of room "
-"for a convenient price."
-msgstr ""
-"Выберите это план, если вы начали в последние год или два, или вы не хотите "
-"делиться и бекапить свои калибровочные файлы. Наслаждайтесь доступным местом "
-"за удобную цену."
-
-msgid ""
-"Choose this plan if you have several years worth of data. You will probably "
-"have enough room for all your calibration files, and will enjoy the full "
-"potential of the platform."
-msgstr ""
-"Выберите этот план, если у вас есть за спиной несколько лет данных. Вам "
-"должно хватить места для всех калибровочных файлов, и вы сможете насладиться "
-"полным потенциалом платформы."
-
-msgid ""
-"Choose this plan if you have a massive amount of raw data that you want to "
-"share and backup securely online."
-msgstr ""
-"Выберите этот план, если у вас массивное количество raw данных, которые вы "
-"хотите безопасно бекапить или делиться ими."
-
-msgid ""
-"PS: are you interested in larger plans? <a href=\"/contact/\">Let us know!</"
-"a>"
+"PS: are you interested in larger plans?\n"
+"                <a href=\"/contact/\">Let us know!</a>"
 msgstr ""
 "PS: Вы заинтересованы в продвинутых планах? <a href=\"/contact/\">Дайте нам "
 "знать!</a>"
@@ -6212,13 +5568,6 @@ msgstr "Коллекция великолепных изображений, не
 
 msgid "This list is currently empty."
 msgstr "Этот список пока пуст."
-
-msgid ""
-"The following Terms are only available in English. It is your responsibility "
-"to comprehend them."
-msgstr ""
-"Нижеследующее Соглашение доступно только на английском. Ответственность за "
-"их понимание на вас."
 
 msgid "Last 6 months"
 msgstr "За 6 месяцев"
@@ -6251,21 +5600,19 @@ msgstr ""
 "Вы использовали <strong>%(premium_counter)s</strong> изобр. из допустимых "
 "<strong>%(max_allowed)s</strong>."
 
-msgid "Would you like to upgrade?"
-msgstr "Желаете улучшить?"
-
-#, python-format
+#, fuzzy
+#| msgid "Thank you for being a premium member! Enjoy your unlimited images."
 msgid ""
-"You have used <strong>%(premium_counter)s</strong> images of your allowed "
-"<strong>%(max_allowed)s</strong> for the current subscription period."
-msgstr ""
-"Вы использовали <strong>%(premium_counter)s</strong> изображений из "
-"допустимых <strong>%(max_allowed)s</strong> в текущем периоде подписки."
-
-msgid "Thank you for being a premium member! Enjoy your unlimited images."
+"Thank you for being a premium member! Enjoy your unlimited images.\n"
+"                        "
 msgstr ""
 "Мы благодарны за покупку Премиум аккаунта! Наслаждайтесь безлимитными "
 "закачками изображений."
+
+#, fuzzy
+#| msgid "Would you like to upgrade?"
+msgid "Would you like to upgrade to a higher plan?"
+msgstr "Желаете улучшить?"
 
 msgid "Upload as a work in progress"
 msgstr "Закачать как работу в процессе"
@@ -6273,11 +5620,19 @@ msgstr "Закачать как работу в процессе"
 msgid "Uploading..."
 msgstr "Закачка..."
 
-#, python-format
+#, fuzzy
+#| msgid ""
+#| "Use this button to upload an image to the <strong>Staging Area</strong>. "
+#| "It's perfect for works in progress that you want to share on Internet "
+#| "forums. Read more in the <a href=\"%(faq_url)s#6\">FAQ</a>."
 msgid ""
-"Use this button to upload an image to the <strong>Staging Area</strong>. "
-"It's perfect for works in progress that you want to share on Internet "
-"forums. Read more in the <a href=\"%(faq_url)s#6\">FAQ</a>."
+"Use this button to upload an image to the\n"
+"                                        <strong>Staging Area</strong>. It's "
+"perfect for works in progress that you want\n"
+"                                        to share on Internet forums. Read "
+"more in the\n"
+"                                        <a href=\"https://welcome.astrobin."
+"com/faq\">FAQ</a>."
 msgstr ""
 "Используйте эту кнопку для закачки изображения в <strong>Staging Area</"
 "strong>. Это идеально для незаконченных работ, которыми вы хотите поделиться "
@@ -6286,95 +5641,28 @@ msgstr ""
 msgid "Upload as a finished image"
 msgstr "Закачать как окончательное изображение"
 
-#, python-format
+msgid "Do not notify followers"
+msgstr ""
+
+#, fuzzy, python-format
+#| msgid ""
+#| "Use this button to upload an image to the <strong>Public Area</strong>. "
+#| "It will be displayed in <a href=\"%(profile_url)s\">your profile</a> and "
+#| "here on the home page. You can <a href=\"%(flickr_url)s\">import from "
+#| "Flickr</a> too."
 msgid ""
-"Use this button to upload an image to the <strong>Public Area</strong>. It "
-"will be displayed in <a href=\"%(profile_url)s\">your profile</a> and here "
-"on the home page. You can <a href=\"%(flickr_url)s\">import from Flickr</a> "
-"too."
+"Use this button to upload an image to the\n"
+"                                        <strong>Public Area</strong>. It "
+"will be displayed in\n"
+"                                        <a href=\"%(profile_url)s\">your "
+"profile</a> and here on the home page. You can\n"
+"                                        <a href=\"%(flickr_url)s\">import "
+"from Flickr</a> too."
 msgstr ""
 "Используйте эту кнопку для закачки изображения в <strong>Public Area</"
 "strong>. Оно отобразится в <a href=\"%(profile_url)s\">вашем профиле</a> и "
 "здесь на главной странице. Вы также можете <a href=\"%(flickr_url)s"
 "\">импортировать из Flickr</a>."
-
-# Строка из меню пользователя, там все пункты с большой буквы
-msgid "Raw data upload"
-msgstr "Загрузка RAW Данных"
-
-msgid ""
-"You have no more space left on your Raw Data account. Please delete some "
-"files to make room, or upgrade your account."
-msgstr "Загрузка RAW Данных"
-
-msgid "Use the button below to choose files"
-msgstr "Используйте кнопку снизу для выбора файлов"
-
-msgid "Drop your raw data here"
-msgstr "Перетащите ваши RAW данные сюда"
-
-msgid "Accepted file types: FIT and digital camera raw files"
-msgstr "Принимаемые типы файлов: FIT и RAW файлы цифровых камер."
-
-msgid "Filename"
-msgstr "Имя файла"
-
-msgid "Choose files"
-msgstr "Выбрать файлы"
-
-msgid "Reset"
-msgstr "Сбросить"
-
-msgid "Start upload"
-msgstr "Начать закачку"
-
-msgid "Go to your Raw Data Library."
-msgstr "Перейти в вашу библиотеку RAW данных."
-
-msgid ""
-"Your Raw Data subscription is not active, or it has expired. If you have "
-"just subscribed, please wait for a few minutes. Thanks for your patience!"
-msgstr ""
-"Ваша подписка на RAW-пространство неактивна или истекла. Если вы только "
-"подписались, подождите несколько минут. Спасибо за ваше терпение!"
-
-# Предлагаю RAW-данные. Самый точный перевод и имя продукта вроде тоже подходящее. Смысл не теряется.
-#, python-format
-msgid "Go to the Raw Data <a href=\"%(plans_url)s\">plans page</a>."
-msgstr "Перейти к <a href=\"%(plans_url)s\">странице планов</a> RAW-данных."
-
-msgid ""
-"Did you know that AstroBin can host your FIT and digital camera raw files "
-"too?"
-msgstr ""
-"А знаете ли вы что, AstroBin также может размещать ваши FIT и RAW файлы "
-"цифровых камер?"
-
-#, python-format
-msgid ""
-"Have a look at <a href=\"%(rawdata_url)s\">AstroBin Raw Data</a> if you want "
-"to safely store all your raw files, and have them neatily organized for "
-"future reference!"
-msgstr ""
-"Оцените <a href=\"%(rawdata_url)s\">AstroBin Raw Data</a>, если вы хотите "
-"безопасно хранить все ваши RAW файлы и тщательно организовывать их для "
-"будущих работ!"
-
-msgid "Raw files"
-msgstr "RAW файлы"
-
-msgid "Upload started, please wait..."
-msgstr "Закачка началась, пожалуйста ждите..."
-
-msgid ""
-"One ore more files were ignored because they did not look like FIT or "
-"digital camera raw files."
-msgstr ""
-"Один или несколько файлов были проигнорированы, потому что они не выглядят "
-"как FIT или RAW файлы."
-
-msgid "Upload complete!"
-msgstr "Закачка завершена!"
 
 msgid "Your API Keys"
 msgstr "Ваши API-ключи"
@@ -6412,9 +5700,6 @@ msgstr ""
 
 msgid "The user was banned."
 msgstr "Пользователь заблокирован"
-
-msgid "Thank you!"
-msgstr "Спасибо!"
 
 #, python-format
 msgid "%(user)s's bookmarks"
@@ -6479,6 +5764,52 @@ msgstr ""
 "Это ваши изображения в «работе»: только вы видите этот список. Вы можете "
 "показать отдельные изображения другим людям, поделившись ими с помощью меню "
 "<em>Поделиться</em>."
+
+msgid ""
+"These are your \"deleted\" images: only you can see this list. Click the "
+"images you want to\n"
+"            restore, and then use the button below to confirm."
+msgstr ""
+
+#, python-format
+msgid ""
+"\n"
+"                    We are very, very sorry, but it appears that some of "
+"your images suffered a catastrophic data\n"
+"                    corruption, and cannot be retrieved. Please read more <a "
+"href=\"%(data_corruption_url)s\">here</a>.\n"
+"                "
+msgstr ""
+
+msgid ""
+"\n"
+"                    Please click on the thumbnails stuck with the hourglass "
+"icon to upload the image files that you\n"
+"                    still have on your computer or backups to their pages "
+"again.\n"
+"                "
+msgstr ""
+
+msgid ""
+"\n"
+"                    The data associated to your affected images, such as "
+"title, description, equipment used, acquisition\n"
+"                    details, comments, likes, bookmarks, and so on, is still "
+"intact and safe.\n"
+"                "
+msgstr ""
+
+msgid ""
+"\n"
+"                    AstroBin would like to offer you its sincerest "
+"apologies. :(\n"
+"                "
+msgstr ""
+
+#, fuzzy
+#| msgid "Don't show again"
+msgid "Okay, don't show this again"
+msgstr "Не показывать"
 
 msgid "These images don't have enough data. It's a shame..."
 msgstr "Эти изображения слабо наполнены деталями. Стыдно-о..."
@@ -6566,9 +5897,6 @@ msgid ""
 "All the properties of this claim will be deleted and cannot be recovered!"
 msgstr "Все свойства этой заявки будут удалены без возможности восстановления!"
 
-msgid "Please wait..."
-msgstr "Пожалуйста, ждите..."
-
 msgid "Delete account"
 msgstr "Удалить аккаунт"
 
@@ -6588,6 +5916,54 @@ msgstr "Править вашу основную информацию"
 
 msgid "Edit your commercial information"
 msgstr "Править вашу коммерческую информацию"
+
+#, fuzzy
+#| msgid "Downloaded"
+msgid "Download your data"
+msgstr "Загружено"
+
+msgid ""
+"You can download all your data off AstroBin, including original uploads, all "
+"revisions, and information such as description, gear used, acquisition "
+"details, and so on."
+msgstr ""
+
+#, fuzzy
+#| msgid "Request from"
+msgid "Request download"
+msgstr "Запрос от"
+
+msgid "Your past requests"
+msgstr ""
+
+#, fuzzy
+#| msgid "Request from"
+msgid "Request time"
+msgstr "Запрос от"
+
+#, fuzzy
+#| msgid "Full size"
+msgid "File size"
+msgstr "Полный размер"
+
+msgid "There doesn't seem to be anything here."
+msgstr ""
+
+msgid "Quota exceeded"
+msgstr ""
+
+msgid ""
+"To prevent excessive usage of server resources, you can only request one "
+"data download per 24 hour period. If you believe your download is stuck, "
+"please email us at <a href=\"mailto:astrobin@astrobin.com"
+"\">astrobin@astrobin.com</a>."
+msgstr ""
+
+msgid ""
+"Please keep in mind that it could take several hours for your download to be "
+"ready, depending on the number and size of your images, and how busy the "
+"servers are at the moment."
+msgstr ""
 
 msgid "Edit your astrophotography gear"
 msgstr "Править ваше астрофотографическое оборудование"
@@ -6685,8 +6061,16 @@ msgstr ""
 "К сожалению, вам необходимо включить Javascript, чтобы иметь возможность "
 "импортировать фото с Flickr в данный момент."
 
-msgid "Sorry, but importing from Flickr is reserved to AstroBin Premium users."
+#, fuzzy
+#| msgid ""
+#| "Sorry, but importing from Flickr is reserved to AstroBin Premium users."
+msgid ""
+"Sorry, but importing from Flickr is reserved to AstroBin Premium and "
+"Ultimate users."
 msgstr "Извините, но импорт из Flickr доступен только Premium пользователям."
+
+msgid "Would you like to upgrade?"
+msgstr "Желаете улучшить?"
 
 msgid "Click to select the photos you want to import"
 msgstr "Щёлкните, чтобы выбрать фотографии для импорта"
@@ -6706,15 +6090,6 @@ msgstr "Импорт изображений."
 msgid "Do not navigate away from this window: this might take a while!"
 msgstr "Не покидайте это окно: это может занять некоторое время!"
 
-msgid ""
-"Done! Go to <a href=\\\"/users/\" + username + \"/?staging&sub=uploaded\\"
-"\">your staging gallery</a> to see the new pictures (and keep an eye on your "
-"notifications)!"
-msgstr ""
-"Готово! Перейти к <a href=\\\"/users/\" + username + \"/?staging&sub=uploaded"
-"\\\">вашей галерее</a>, чтобы посмотреть новые изображения (и следите за "
-"своими уведомлениями)!"
-
 msgid "Subscription"
 msgstr "Подписка"
 
@@ -6733,6 +6108,12 @@ msgstr "Public Area"
 msgid "Staging Area"
 msgstr "Staging Area"
 
+msgid "Corrupted"
+msgstr ""
+
+msgid "Trash"
+msgstr ""
+
 msgid "Liked images"
 msgstr "Понравившиеся изображения"
 
@@ -6747,6 +6128,19 @@ msgstr "Инструменты коллекций"
 
 msgid "Add/remove images"
 msgstr "Добавление/удаление изображений"
+
+#, fuzzy
+#| msgid "Quick search"
+msgid "Quick edit"
+msgstr "Быстрый поиск"
+
+msgid "Key/value pairs"
+msgstr ""
+
+#, fuzzy
+#| msgid "quote selected"
+msgid "Restore selected"
+msgstr "цитата выбрана"
 
 msgid ""
 "Click on the images to include them in this collection (and click again to "
@@ -6768,6 +6162,11 @@ msgstr ""
 "Эта коллекция будет навсегда удалена, и восстановить ее будет невозможно. "
 "Изображения, входящие в коллекцию, удалены НЕ будут. Вы уверены?"
 
+msgid ""
+"The following images do not have the key/value tag chosen to order this "
+"collection, so they are shown as unsorted here."
+msgstr ""
+
 msgid "This collection contains no images."
 msgstr "Эта коллекция не содержит изображений."
 
@@ -6788,6 +6187,9 @@ msgstr "Вы хотите создать коллекцию сейчас?"
 
 msgid "This user does not have any collections."
 msgstr "У этого пользователя нет ни одной коллекции."
+
+msgid "Quick edit: key/value tags"
+msgstr ""
 
 msgid "Edit collection"
 msgstr "Править коллекцию"
@@ -6838,6 +6240,12 @@ msgstr "Масштаб угл.сек/пиксель"
 
 msgid "Telescope type"
 msgstr "Тип телескопа"
+
+#, python-format
+msgid ""
+"Sorry, this filter requires an <a href=\"%(url)s\">AstroBin Ultimate</a> "
+"subscription."
+msgstr ""
 
 msgid "Select"
 msgstr "Выбрать"
@@ -6950,6 +6358,9 @@ msgstr "Катадиоптрик Шмидт-Кассегрен"
 msgid "ACF Schmidt-Cassegrain"
 msgstr "Шмидт-Кассегрен свободный от комы (ACF)"
 
+msgid "Rowe-Ackermann Schmidt astrograph"
+msgstr ""
+
 msgid "minutes"
 msgstr "минут"
 
@@ -6980,20 +6391,26 @@ msgstr ""
 "количество цветов до 256 для работы с ним."
 
 msgid ""
-"You uploaded a pretty large file. For that reason, AstroBin could not verify "
-"that it's a valid image."
-msgstr ""
-
-msgid ""
 "There was one or more errors processing the form. You may need to scroll "
 "down to see them."
 msgstr ""
 "При обработке формы произошла одна или несколько ошибок. Прокрутите страницу "
 "вниз, чтобы увидеть их."
 
-msgid ""
-"Form saved. A new plate-solving process will start when you visit your image "
-"again."
+#, fuzzy
+#| msgid ""
+#| "Form saved. A new plate-solving process will start when you visit your "
+#| "image again."
+msgid "Form saved. A new plate-solving process will start now."
+msgstr ""
+"Форма сохранена. Размещение по координатам начнётся, когда вы заново "
+"посетите эту страницу."
+
+#, fuzzy
+#| msgid ""
+#| "Form saved. A new plate-solving process will start when you visit your "
+#| "image again."
+msgid "Form saved. A new advanced plate-solving process will start now."
 msgstr ""
 "Форма сохранена. Размещение по координатам начнётся, когда вы заново "
 "посетите эту страницу."
@@ -7044,6 +6461,11 @@ msgstr "У вас уже есть коллекция с таким назван�
 
 msgid "Collection updated!"
 msgstr "Коллекция обновлена!"
+
+#, fuzzy
+#| msgid "Images used"
+msgid "Images updated!"
+msgstr "Использованные изображения"
 
 msgid "Collection deleted!"
 msgstr "Коллекция удалена!"
@@ -7107,9 +6529,6 @@ msgstr "Средн. Фаза Луны"
 msgid "Mean SQM"
 msgstr "Средний SQM"
 
-msgid "Resolution"
-msgstr "Разрешение"
-
 msgid "English"
 msgstr "Английский"
 
@@ -7118,6 +6537,11 @@ msgstr "Изображение удалено."
 
 msgid "Revision deleted."
 msgstr "Версия удалена."
+
+#, fuzzy
+#| msgid "Collection deleted!"
+msgid "Original version deleted!"
+msgstr "Коллекция удалена!"
 
 msgid "Image moved to the staging area."
 msgstr "Изображение перемещено в Staging Area."
@@ -7128,6 +6552,1359 @@ msgstr "Изображение перемещено в Public Area."
 #, python-format
 msgid "%s topics deleted"
 msgstr ""
+
+msgid ""
+"AstroBin is preparing your data for download. Please check this page again "
+"in a while: the more images you have, the more time it will take."
+msgstr ""
+
+#~ msgid "created a new public data pool"
+#~ msgstr "создал новое общее хранилище данных"
+
+#~ msgid "added new data to public data pool"
+#~ msgstr "добавил новые данные в общее хранилище"
+
+#~ msgid "added a new processed image to public data pool"
+#~ msgstr "добавил новое обработанное изображение в общее хранилище"
+
+#~ msgid ""
+#~ "\n"
+#~ "                            <a href=\"%(user_page)s\">%(user)s</a> "
+#~ "created a new public data pool.\n"
+#~ "                        "
+#~ msgstr ""
+#~ "\n"
+#~ "                            <a href=\"%(user_page)s\">%(user)s</a> создал "
+#~ "новое открытое хранилище данных.\n"
+#~ "                        "
+
+#~ msgid ""
+#~ "\n"
+#~ "                            <a href=\"%(user_page)s\">%(user)s</a> added "
+#~ "data to a data pool.\n"
+#~ "                        "
+#~ msgstr ""
+#~ "\n"
+#~ "<a href=\"%(user_page)s\">%(user)s</a> добавил данные в хранилище.\n"
+#~ "                        "
+
+#~ msgid ""
+#~ "\n"
+#~ "                            <a href=\"%(user_page)s\">%(user)s</a> added "
+#~ "a processed image to a data pool.\n"
+#~ "                        "
+#~ msgstr ""
+#~ "\n"
+#~ "<a href=\"%(user_page)s\">%(user)s</a> добавил обработанное изображение в "
+#~ "хранилище.\n"
+#~ "                        "
+
+#~ msgid "Affiliates"
+#~ msgstr "Партнёрство"
+
+#~ msgid "The following companies support AstroBin."
+#~ msgstr "Следующие организации поддерживают AstroBin."
+
+#~ msgid "AstroBin Raw Data"
+#~ msgstr "AstroBin Raw Data"
+
+#~ msgid "Raw data"
+#~ msgstr "RAW данные"
+
+# Строка из меню пользователя, там все пункты с большой буквы
+#~ msgid "Raw data library"
+#~ msgstr "Библиотека RAW данных"
+
+#~ msgid "Private shared folders"
+#~ msgstr "Личные каталоги"
+
+#~ msgid "Frequently Asked Questions"
+#~ msgstr "Часто задаваемые вопросы"
+
+#~ msgid "Is this website for free?"
+#~ msgstr "Этот веб-сайт бесплатен?"
+
+#~ msgid "Are there any limits on how large and how many images I can upload?"
+#~ msgstr ""
+#~ "Есть ли какие-то ограничения на то, какие по размеру и как много "
+#~ "изображений я могу закачать?"
+
+#~ msgid "What image formats are supported?"
+#~ msgstr "Какие форматы изображений поддерживаются?"
+
+#~ msgid "Is my data safe on AstroBin?"
+#~ msgstr "Мои данные на AstroBin в безопасности?"
+
+#~ msgid ""
+#~ "I've seen beautiful images on this site. I'm not worthy of posting mine!"
+#~ msgstr ""
+#~ "Я видел прекрасные изображения на этом сайте. Мне кажется я не достоин "
+#~ "размещать свои!"
+
+#~ msgid "What's the deal with the Staging Area and the Public Area?"
+#~ msgstr "В чём разница между Staging Area и Public Area?"
+
+#~ msgid "Why was AstroBin created?"
+#~ msgstr "Зачем был создан AstroBin?"
+
+#~ msgid "What are the plans for the future?"
+#~ msgstr "Какие планы на будущее?"
+
+#~ msgid "How can I format my comments?"
+#~ msgstr "Как я могу форматировать свои комментарии?"
+
+#~ msgid "How is the AstroBin index calculated?"
+#~ msgstr "Как вычисляется индекс AstroBin?"
+
+#~ msgid "I received some Likes, why is my AstroBin index not updated?"
+#~ msgstr ""
+#~ "Почему мой индекс AstroBin не обновляется, когда мои изображения лайкают, "
+#~ "то есть, отмечают как «Нравится»?"
+
+#~ msgid "How is the Image of the Day selected?"
+#~ msgstr "Как выбираются Изображения Дня?"
+
+#~ msgid "... and their answers!"
+#~ msgstr "... и их ответы!"
+
+#~ msgid ""
+#~ "No. A free account will let you upload up to 10 images, and partake in "
+#~ "all social activities. For unlimited storage, you will need a premium "
+#~ "subscription."
+#~ msgstr ""
+#~ "Нет. Бесплатный аккаунт позволит загружать до 10 изображений, и принимать "
+#~ "участие во всех соц-активностях.  Для безлимитного хранения вам "
+#~ "понадобится подписка на Премиум."
+
+#~ msgid ""
+#~ "<strong>NO!</strong> If you are a premium member, on AstroBin you can "
+#~ "upload as many images as you want, and as large as you want. In fact, "
+#~ "full size images are encouraged!"
+#~ msgstr ""
+#~ "<strong>НЕТ!</strong> Если вы премиум участник, вы можете закачивать на "
+#~ "AstroBin столько изображений, сколько пожелаете, и какого угодно размера. "
+#~ "Более того, изображения больших размеров рекомендуются!"
+
+#~ msgid ""
+#~ "AstroBin will accept JPEG, PNG and GIF. Animated GIF is supported too."
+#~ msgstr ""
+#~ "AstroBin принимает JPEG, PNG и GIF файлы. Анимированные GIF-файлы также "
+#~ "поддерживаются."
+
+#~ msgid ""
+#~ "Absolutely. There are multiple ways in which AstroBin can store your data "
+#~ "very safely. First of all, the images you upload are stored on a highly "
+#~ "durable, highly available, redundant backend. The durability of the "
+#~ "storage backend is 99.999999999 percent over a given year. This means "
+#~ "that if you upload 10,000 images, you can expect to lose one image to "
+#~ "data corruption once in 10,000,000 year. The images are duplicated across "
+#~ "two different physical servers, for protection against natural disasters."
+#~ msgstr ""
+#~ "Абсолютно. Существует много способов, которыми AstroBin старается "
+#~ "сохранить ваши данные в безопасности. Прежде всего, изображения, которые "
+#~ "вы закачали находятся на прочном, доступном и резервируемом оборудовании. "
+#~ "Прочность выражается в 99.999999999 процентов надежности в год. То есть, "
+#~ "если вы загрузите 10 000 изображений, то можно ожидать потерю одного "
+#~ "изображения с повреждением данных раз в 10 000 000 лет. Изображения "
+#~ "дублируются на двух разных физических серверах, для защиты от стихийных "
+#~ "бедствий."
+
+#~ msgid ""
+#~ "The actual website, instead, is hosted on a Virtual Machine, so, in case "
+#~ "of severe hardware failure, it can be redeployed to a different server in "
+#~ "a matter of 15 minutes."
+#~ msgstr ""
+#~ "Фактически веб-сайт, размещается на виртуальной машине, чтобы, в случае "
+#~ "серьезного сбоя оборудования, он мог быть переведен на другой сервер за "
+#~ "какие-то 15 минут."
+
+#~ msgid ""
+#~ "Finally, the database that powers AstroBin (in fact, the whole Virtual "
+#~ "Machine) is backed up daily. In case of severe data loss, the website "
+#~ "will be quickly restored to a snapshot that's never older than 24 hours."
+#~ msgstr ""
+#~ "Наконец, база данных поддерживаемая AstroBin (на самом деле, вся "
+#~ "виртуальная машина) ежедневно копируются для восстановления. В случае "
+#~ "тяжелой потери базы данных, веб-сайт будет быстро восстановлен из​ "
+#~ "резервного образа не старше 24 часов."
+
+#~ msgid ""
+#~ "That said, you should be aware that AstroBin is not a backup service, and "
+#~ "although your data is very safe in our hands, we cannot legally take "
+#~ "responsibility in the event of loss, however unlikely it is. Always keep "
+#~ "a copy of your image on your computer."
+#~ msgstr ""
+#~ "Тем не менее, вы должны знать, что AstroBin не предоставляет услуг "
+#~ "резервного копирования, и хотя ваши данные находятся в достаточной "
+#~ "безопасности в наших руках, мы не можем юридически нести ответственность "
+#~ "в случае потерь, но такое и не должно случиться. Всегда держите копию "
+#~ "изображения на компьютере."
+
+#~ msgid ""
+#~ "Nonsense. AstroBin has <strong>not</strong> been made to showcase "
+#~ "beautiful image, but to give everybody an opportunity to contribute to a "
+#~ "vast and evergrowing effort of centralization and indexing of important "
+#~ "data. That 30 minute picture of M31 you took last night between the "
+#~ "clouds <em>belongs</em> here! Don't be shy and post it!"
+#~ msgstr ""
+#~ "Ерунда. AstroBin <strong>не был</strong> создан для демонстрации красивых "
+#~ "изображений, он даёт каждому возможность заявить свои достижения среди "
+#~ "обширной и всевозрастающей попытки централизации и индексации важных "
+#~ "данных. Это 30-минутное изображение M31 вы получили вчера вечером сквозь "
+#~ "облака <em>принадлежит</em> здесь! Не стесняйтесь и размещайте его!"
+
+#~ msgid ""
+#~ "On AstroBin you have two places for our images. The Staging Area is where "
+#~ "you can upload images that you want to quickly share on forums, mailing "
+#~ "lists or social networks. The days of scaling down and compressing your "
+#~ "image so you can upload it to a forum for feedback and critique are over! "
+#~ "Just upload to AstroBin's Staging Area, and send the link to anyone you "
+#~ "want. The image will be visible only to the intended recipients, and "
+#~ "won't appear on your profile or AstroBin's home page."
+#~ msgstr ""
+#~ "На AstroBin у вас есть два места для наших изображений. Staging Area, где "
+#~ "вы можете загрузить изображения, которыми вы хотите быстро обмениваться "
+#~ "на форумах, в списках рассылок или социальных сетях. Дни масштабируются и "
+#~ "сжимают ваши изображения, так что вы можете закачивать их на форум для "
+#~ "обратной связи и обсуждения дальше! Просто загрузите в Staging Area на "
+#~ "AstroBin, и отправьте ссылку кому угодно. Изображение будет виден только "
+#~ "адресату, и не появится в вашем профиле или на домашней странице AstroBin."
+
+#~ msgid ""
+#~ "The Public Area, instead, is for your finished products. After you have "
+#~ "received feedback on your favorite forum, you can promote an image from "
+#~ "the Staging Area to the Public Area, and it will appear on your profile. "
+#~ "Remember that you can also move images back and forth from one Area to "
+#~ "the other as many times as you want!"
+#~ msgstr ""
+#~ "Public Area, в свою очередь, для ваших законченных достижений. После того "
+#~ "как вы получили отзывы на избранном форуме, вы можете перенести "
+#~ "изображение из Staging Area в Public Area, и оно появится в вашем "
+#~ "профиле. Помните, что вы также можете перемещать изображения и обратно из "
+#~ "одной области в другую столько раз, сколько вы хотите!"
+
+#~ msgid ""
+#~ "AstroBin was born out of the desire to end something that had been going "
+#~ "on for too long: the waste of incredible material to the sea of chaos "
+#~ "that the Internet can be. For years, fantastic astrophotographs have "
+#~ "beeen uploaded to Internet Forums, often with little or no data, or to "
+#~ "general purpose image hosting websites, invariably with no data attached."
+#~ msgstr ""
+#~ "AstroBin родился из желания прекратить то, что уже длилось долгое время: "
+#~ "огромное количество невероятного материала в море хаоса, которое есть в "
+#~ "Интернете. В течение многих лет, фантастические астрофотографы "
+#~ "пользовались Интернет-форумами, часто с малым количеством данных и "
+#~ "описаний, с ненадёжными хостингами и прочими неудобствами."
+
+#~ msgid ""
+#~ "Such an image would be seen by some people, then quickly forgotten, and "
+#~ "reduced to nothing more than a bunch of pixel in the giant wasteland of "
+#~ "the Internet."
+#~ msgstr ""
+#~ "Такое изображение посмотрит некоторое количество людей, но быстро "
+#~ "забывается, и превращается в очередной незаметный пиксель на чудовищных "
+#~ "просторах Интернета."
+
+#~ msgid ""
+#~ "This should not be allowed to happen. AstroBin is the response: an effort "
+#~ "to host, collect, index and categorize the output of the "
+#~ "astrophotographers all over the world, so that their precious data would "
+#~ "serve a purpose, and have a meaning forever."
+#~ msgstr ""
+#~ "Такое не должно долго продолжаться. AstroBin является попыткой: провести, "
+#~ "собрать, индексировать и классифицировать выхлоп всех астрофотографов в "
+#~ "мире, так что их драгоценные данные будут служить целенаправленно, и "
+#~ "навсегда останутся непотерянными."
+
+#~ msgid ""
+#~ "<em>AstroBin</em> is just starting out, and this time we can really say "
+#~ "that the sky is the limit! Tons of ideas are in the pipeline. As the user "
+#~ "base grows, so does the data. Suddenly, things like automated supernovae "
+#~ "search become possible: you could simply upload an image of a galaxy, and "
+#~ "AstroBin could compare it to pictures of the same galaxy taken previously."
+#~ msgstr ""
+#~ "<em>AstroBin</em> только начинает свою деятельность, и на этот раз мы "
+#~ "действительно можем сказать, что небо это предел! У нас тонны идей. Как "
+#~ "пользовательская база растет, так и её наполнение растёт. Внезапно стали "
+#~ "удобными и доступными такие вещи как поиск сверхновых: достаточно "
+#~ "загрузить изображение галактики, и AstroBin сравнит его с галактиками на "
+#~ "других ранее загруженных изображениях её же."
+
+#~ msgid ""
+#~ "AstroBin could also recommend subjects for you to image! Knowing your "
+#~ "equipment, your location, and comparing what you have imaged to what "
+#~ "users similar to you have, AstroBin could suggest your next challenge!"
+#~ msgstr ""
+#~ "AstroBin так же может рекомендовать вам объекты для съёмки! Знание вашего "
+#~ "оборудования, вашего местоположения, и сравнивание ваших изображений с "
+#~ "похожими у других пользователей, AstroBin может формировать рекомендации "
+#~ "к следующему шагу!"
+
+#~ msgid ""
+#~ "Thanks to the input from the community, more ideas are flowing in and the "
+#~ "list get bigger and bigger."
+#~ msgstr ""
+#~ "Благодарности вносимые сообществом, больше идей появляется и список "
+#~ "становится больше и больше."
+
+#~ msgid ""
+#~ "AstroBin uses the Markdown syntax. Please use the following reference "
+#~ "table:"
+#~ msgstr ""
+#~ "AstroBin использует синтаксис Markdown. Пожалуйста, используйте данные из "
+#~ "таблицы:"
+
+#~ msgid "You type:"
+#~ msgstr "Вы печатаете:"
+
+#~ msgid "You see:"
+#~ msgstr "Получается:"
+
+#~ msgid "italics"
+#~ msgstr "курсив"
+
+#~ msgid "bold"
+#~ msgstr "жирный"
+
+#~ msgid "(TAB or 4 spaces)"
+#~ msgstr "(табуляция или 4 пробела)"
+
+#~ msgid "preformatted text"
+#~ msgstr "форматированный текст"
+
+#~ msgid "quoted text"
+#~ msgstr "цитируемый текст"
+
+#~ msgid "escape the formatting syntax"
+#~ msgstr "избегайте форматирования синтаксиса"
+
+#~ msgid ""
+#~ "The AstroBin index is a function of the number of Likes and the number of "
+#~ "images posted by a user."
+#~ msgstr ""
+#~ "Индекс AstroBin это функция, зависящая от количества лайков и количества "
+#~ "изображений опубликованных пользователем."
+
+#~ msgid ""
+#~ "Because it's computationally expensive, the AstroBin index is updated "
+#~ "only every 24 hours. The same applies for the search index, the Big Wall, "
+#~ "and some other user data."
+#~ msgstr ""
+#~ "Так как это требует вычислительных ресурсов, индекс AstroBin обновляется "
+#~ "раз в 24 часа. То же самое относится и к индексации поиска, Большой Стене "
+#~ "и некоторым другим пользовательским данным."
+
+#~ msgid ""
+#~ "A staff of 52 volunteers goes thru a three-stage process: 30 \"submitters"
+#~ "\" propose images for IOTD; 15 \"reviewers\" advance some of them to the "
+#~ "next stage; finally, any one of 7 judges can select an image from the "
+#~ "pool of finalists as IOTD. There are limitations in place in the system "
+#~ "to avoid abuse and monopoly."
+#~ msgstr ""
+#~ "Коллектив из 52 добровольцев проходит через три стадии: 30 \"сабмиттеров"
+#~ "\" предлагают изображение для Изображения Дня (IOTD); 15 \"ревьюверов\" "
+#~ "продвигают их на следующую ступень; в итоге, один из 7 судей может "
+#~ "выбрать изображение из пула финалистов в качестве Изображения Дня. В "
+#~ "системе существуют ограничения, позволяющие избежать злоупотреблений и "
+#~ "монополии."
+
+#~ msgid ""
+#~ "Do you have a question not covered here! Please <a href=\"/contact/"
+#~ "\">contact us</a>!"
+#~ msgstr ""
+#~ "У вас есть вопросы не затронутые здесь?! Пожалуйста, <a href=\"/contact/"
+#~ "\">свяжитесь с нами</a>!"
+
+#~ msgid ""
+#~ "AstroBin accounts are meant for members to share original images that "
+#~ "they have created."
+#~ msgstr ""
+#~ "Аккаунт AstroBin предоставляется для желающих поделиться оригинальными "
+#~ "изображениями, которые они создали."
+
+#~ msgid "What is allowed"
+#~ msgstr "Что разрешено"
+
+#~ msgid "Do upload content you have created yourself."
+#~ msgstr "Закачивайте данные, созданные вами лично."
+
+#~ msgid ""
+#~ "Respect the copyright of others. Stealing images from other people and "
+#~ "trying to pass them off as yours is not allowed on AstroBin."
+#~ msgstr ""
+#~ "Уважать авторские права других. Воровство изображений у других людей и "
+#~ "попытка выдать их за свои - недопустимо на AstroBin."
+
+#~ msgid "Do fill in all the technical details you can."
+#~ msgstr "Заполнять все технические детали по возможности."
+
+#~ msgid ""
+#~ "AstroBin is founded on the idea that data is important and can't go "
+#~ "wasted in a sea of chaos. As much as you can, please fill in the "
+#~ "technical details of your images."
+#~ msgstr ""
+#~ "AstroBin основан как попытка упорядочить важные данные в море хаоса. "
+#~ "Постарайтесь заполнять как можно больше деталей для ваших изображений."
+
+#~ msgid "Be respectful of other users."
+#~ msgstr "Уважайте других пользователей."
+
+#~ msgid "Be nice and friendly to other users when you send them messages."
+#~ msgstr ""
+#~ "Будьте вежливы и дружелюбны к другим пользователям, когда отсылаете им "
+#~ "сообщения."
+
+#~ msgid "What is forbidden"
+#~ msgstr "Что запрещено"
+
+#~ msgid "Don't upload anything that you did not work on."
+#~ msgstr "Не загружайте изображения, к получению которых вы непричастны."
+
+#~ msgid ""
+#~ "It's simple: if you didn't take or post-process an image yourself, then "
+#~ "don't upload it. Things that are not fine include: reposting other "
+#~ "people's images without any meaningful modifications and without the "
+#~ "owner's content; reposting NASA's (and other similar agencies) images "
+#~ "without any meaningful modifications. Things that are okay include: post-"
+#~ "processing freely available data from NASA and other similar agencies; "
+#~ "post-processing a friend's data; post-processing free data made available "
+#~ "by other users."
+#~ msgstr ""
+#~ "Все просто: если вы не участвовали в съемке или обработке изображения "
+#~ "лично, не загружайте его. Например: репост чужих изображений без каких "
+#~ "либо значимых изменений и согласия автора; репост материалов NASA и "
+#~ "аналогичных организаций без значительных изменений. Разрешается "
+#~ "выкладывать следующие материалы: постобработка свободно доступных "
+#~ "материалов NASA и аналогичных организаций; постобработка изображений "
+#~ "друзей или изображений других пользователей, находящихся в свободном "
+#~ "доступе."
+
+#~ msgid "No nudity, no explicitly sexual content, no illegal content."
+#~ msgstr ""
+#~ "Никакой обнажёнки, никакого сексуального содержимого, нелегального "
+#~ "содержимого."
+
+#~ msgid ""
+#~ "Your account will be permanently deleted, and so will all your content, "
+#~ "if you upload any content that is illegal, porn or nudity. We also "
+#~ "reserve the right to report you to the authorities, if we find it "
+#~ "necessary."
+#~ msgstr ""
+#~ "Ваш аккаунт будет немедленно удалён, а также ваше содержимое, если вы "
+#~ "закачаете нелегальные изображения, порнографию или обнажёнку. Мы также "
+#~ "оставляем право сообщить вам авторство, если мы найдём это необходимым."
+
+#~ msgid "Don't upload images that have nothing to do with astronomy."
+#~ msgstr "Не загружайте изображения не связанные ничем с астрономией."
+
+#~ msgid ""
+#~ "Images of your equipment are fine, but don't use AstroBin to upload "
+#~ "pictures from your last vacation. Your account won't be deleted, but we "
+#~ "will ask you to remove those pictures."
+#~ msgstr ""
+#~ "Изображения вашего оборудования это нормально, но не используйте AstroBin "
+#~ "для закачки картинок с вашего отпуска. Ваш аккаунт не будет удалён, но мы "
+#~ "попросим вас убрать эти изображения."
+
+#~ msgid ""
+#~ "Don't use your account to host images for websites, banners or logos."
+#~ msgstr ""
+#~ "Не используйте свой аккаунт для размещения изображений для веб-сайтов, "
+#~ "баннеров или логотипов."
+
+#~ msgid ""
+#~ "Banners, logos, icons or other graphic elements that are not "
+#~ "astrophotography are not allowed on AstroBin."
+#~ msgstr ""
+#~ "Баннеры, логотипы, иконки или другие графические элементы не связанные с "
+#~ "астрофотографией недопустимы на AstroBin."
+
+#~ msgid ""
+#~ "In conclusion, these terms are just a way to say \"please be nice and use "
+#~ "common sense\". If you feel you can't abide by them, please let us know "
+#~ "what you feel is wrong."
+#~ msgstr ""
+#~ "В заключение хочется заметить, что эти правила просто способ сказать "
+#~ "«пожалуйста, будьте хорошим и используйте здравый смысл». Если вы "
+#~ "чувствуете, что вы не сможете соблюдать их, пожалуйста, сообщите нам, что "
+#~ "вам не нравится в них."
+
+#~ msgid ""
+#~ "Are you an astrophotographer? Do you like to share the outcome of your "
+#~ "hard work with others? As an astrophotographer myself, and a subscriber "
+#~ "to numerous Astrophotography forums, I have found that the Internet is "
+#~ "lacking a centralized place where astrophotographers can share their work."
+#~ msgstr ""
+#~ "Ты астрофотограф? Тебе нравится делиться своими достижениями с другими? "
+#~ "Будучи сам астрофотографом, и подписчиком множества Астрофотографических "
+#~ "форумов, я искал место в Интернете для удобного и централизованного "
+#~ "способа размещать и делиться своими работами с другими астрофотографами."
+
+#~ msgid "Well, this is finally over!"
+#~ msgstr "Ну, наконец-то оно есть!"
+
+#~ msgid ""
+#~ "<em>AstroBin</em> comes to fill the gap. It's a website built from the "
+#~ "ground up by an astrophotographer, and it provides means to people who "
+#~ "want to share their astrophotographs."
+#~ msgstr ""
+#~ "<em>AstroBin</em> появился чтобы заполнить этот пробел. Этот веб-сайт "
+#~ "построен с нуля астрофотографом, и предоставляет средства для людей, "
+#~ "которые хотят делиться своими астрофото."
+
+#~ msgid "So how is this different from any other image sharing websites?"
+#~ msgstr "Так в чём отличия от других сайтов для обмена изображениями?"
+
+#~ msgid ""
+#~ "<em>AstroBin</em> provides a number of features that are tailored "
+#~ "specificlly to astrophotography. Here's a quick run down of the main ones:"
+#~ msgstr ""
+#~ "<em>AstroBin</em> предоставляет ряд особенностей, учитывая специфичность "
+#~ "астрофотографии. Вот быстренько основные из них:"
+
+#~ msgid "Dedication to data"
+#~ msgstr "Верность данным"
+
+#~ msgid ""
+#~ "On a general purpose image sharing site, you would upload your image and "
+#~ "be done with it. <em>AstroBin</em>, instead, has a user interface "
+#~ "specifically designed to enable you to input all the technical data of "
+#~ "your image."
+#~ msgstr ""
+#~ "На обычных сайтах по обмену изображениями вы можете только загрузить их и "
+#~ "всё на этом. <em>AstroBin</em>, в свою очередь, даёт интерфейс для ввода "
+#~ "всех необходимых данных и деталей к вашему изображению."
+
+#~ msgid ""
+#~ "<em>AstroBin</em> will autocomplete your input using a vast database: "
+#~ "everything from telescopes, CCDs and filters to astronomical objects in "
+#~ "many catalogues will show in popup dialogs for easy selection when you "
+#~ "start typing their names. <em>AstroBin</em> is connected to the SIMBAD "
+#~ "Astronomical Database, which contains over 5 million objects under over "
+#~ "15 million names!"
+#~ msgstr ""
+#~ "<em>AstroBin</em> позволяет автозаполнять ваш ввод используя обширную "
+#~ "базу данных: разнообразные телескопы, ПЗС и фильтры для астрономических "
+#~ "объектов из большого каталога отображаются во всплывающих подсказках в то "
+#~ "время как вы начинаете печатать их названия. <em>AstroBin</em> подключён "
+#~ "к астрономический базе SIMBAD, которая содержит свыше 5 миллионов "
+#~ "объектов и свыше 15 миллионов названий!"
+
+#~ msgid ""
+#~ "On <em>AstroBin</em>, astronomical subjects have their own page, where "
+#~ "you can see the best images of them, and plots and charts showing trends "
+#~ "and interesting statistics. There is also a page that shows the most "
+#~ "popular subjects organized by month and latitude!"
+#~ msgstr ""
+#~ "На <em>AstroBin</em> каждый астрономический объект имеет свою страницу, "
+#~ "на которой вы можете найти лучшие их фотографии, построить графики и "
+#~ "таблицы, показывающие занятную статистику. Так же есть страницы "
+#~ "показывающие популярные объекты сортированные по месяцам и широте."
+
+#~ msgid "Data is strongly interconnected"
+#~ msgstr "Данные сильно связаны друг с другом"
+
+#~ msgid ""
+#~ "Have you ever wanted to see how your next image is going to look like? On "
+#~ "<em>AstroBin</em>, you can search for all images of a certain target that "
+#~ "were taken with a certain telescope and a certain CCD or camera. Or a "
+#~ "certain filter. How about all the images between 6 and 8 hours of "
+#~ "integration? Or with a certain Moon phase? You can do that!"
+#~ msgstr ""
+#~ "Вы когда-нибудь хотели узнать, как будет выглядеть ваше будущее фото? На "
+#~ "<em>AstroBin</em>, вы можете искать все изображения определенной цели, "
+#~ "которые были взяты с определенным телескопом и определенной ПЗС или "
+#~ "камерой. Или с конкретным фильтром. Как насчет всех изображений с 6 до 8 "
+#~ "часов посещаемости? Или с определенной фазой Луны? Вы можете сделать это!"
+
+#~ msgid ""
+#~ "AstroBin can help you with your next telescope or camera purchase, by "
+#~ "searching for gear combinations owned by other users. For instance, you "
+#~ "could search for all images taken with a Canon 5D and any apochromatic "
+#~ "refractor, or a SBIG ST-8300 with any Richtey-Chretien telescope. Or, if "
+#~ "you want, you can search by telescope diameter too!"
+#~ msgstr ""
+#~ "AstroBin может помочь вам с вашим следующим выбором телескопа или камерой "
+#~ "для покупки, путем поиска комбинаций оборудования, принадлежащих другим "
+#~ "пользователям. Например, вы могли бы искать все фотографии, сделанных с "
+#~ "помощью Canon 5D и любым апохроматическим рефрактором, или SBIG ST-8300 с "
+#~ "любым телескопом Ричи-Кретьена. Или, если вы хотите, вы так же можете "
+#~ "осуществлять поиск по диаметру телескопа!"
+
+#~ msgid ""
+#~ "Finally, all this information is collected in interesting plots, that can "
+#~ "help you figure out how some gear items are trending."
+#~ msgstr ""
+#~ "Наконец, вся эта информация собрана в интересные графики, которые "
+#~ "помогают вам представить какое оборудование популярно."
+
+#~ msgid "All the data at a glance"
+#~ msgstr "Все данные одним взглядом"
+
+#~ msgid ""
+#~ "Each image on <em>AstroBin</em> is annotated of all the technical details "
+#~ "about its acquisition. Telescopes involved, cameras, mounts, filters, "
+#~ "everything is visible at a glance in the Technical Card. Even the Moon "
+#~ "age at the time of the acquisition is displayed."
+#~ msgstr ""
+#~ "Кажое изображение на <em>AstroBin</em> подписывается техническими "
+#~ "деталями его получения. Используемые телескопы, камеры, монтировки, "
+#~ "фильтры, всё сразу видно на Технической Карточке. Даже возраст Луны в "
+#~ "момент получения изображения."
+
+#~ msgid "More than just an image"
+#~ msgstr "Более, чем просто изображение"
+
+#~ msgid ""
+#~ "<em>AstroBin</em> will do more than just host a copy of your image: when "
+#~ "you upload a photograph, a histogram and a black &amp; white inverted "
+#~ "version of the image will be generated on the fly, so it's easier to spot "
+#~ "faint nebulosity regions or spiral arms. Images will also be plate "
+#~ "solved, and an annotated version will appear on the site. <em>AstroBin</"
+#~ "em> will know what are the astronomical objects in your image without you "
+#~ "telling!"
+#~ msgstr ""
+#~ "<em>AstroBin</em> старается делать больше, чем просто хранить копии ваших "
+#~ "изображений: когда вы загружаете фотографию, гистограмма, ч/б "
+#~ "инвертированная версия изображения генерируется на лету, так что это "
+#~ "удобно для регистрации слабых участков туманных объектов и спиральных "
+#~ "рукавов. Изображения также вычисляются по координатам, и покрывается "
+#~ "подписями тут же на сайте. <em>AstroBin</em> будет знать, что у вас за "
+#~ "астрономические объекты на изображении без вашего на то указывания!"
+
+#~ msgid "Protection from theft with automatic watermarking"
+#~ msgstr "Защита от воровства с автоматическим размещением водяного знака"
+
+#~ msgid ""
+#~ "<em>AstroBin</em>'s upload wizard will offer you to watermark your image "
+#~ "with the text of your choosing. All it takes is a click!"
+#~ msgstr ""
+#~ "<em>AstroBin</em> и его помощник закачки предложит вам разместить водяной "
+#~ "знак на вашем изображении с текстом на выбор. Всё это делается за один "
+#~ "клик!"
+
+#~ msgid "AstroBin supports multiple image revisions"
+#~ msgstr "AstroBin поддерживает множественные версии изображения"
+
+#~ msgid ""
+#~ "Don't tell me you have never gone back to revise the processing of an "
+#~ "image <em>after</em> you had published it. <em>AstroBin</em> embraces "
+#~ "this concept and lets you publish several revisions of the same image "
+#~ "easily and intuitively! Now it's going to be really easy to tell whether "
+#~ "your processing has improved."
+#~ msgstr ""
+#~ "Только не говорите мне, что никогда не возвращались к переосмыслению "
+#~ "обработки вашего изображения <em>после</em> того как опубликовали его. "
+#~ "<em>AstroBin</em> развил эту идею и позволяет публиковать другие версии "
+#~ "вашего изображения просто и интуитивно! Теперь будет гораздо легче видеть "
+#~ "ваши изменения и улучшения."
+
+#~ msgid "AstroBin is social!"
+#~ msgstr "AstroBin социальный!"
+
+#~ msgid ""
+#~ "On <em>AstroBin</em> you can message other astrophotographer, follow them "
+#~ "and be notified when they post new images, or perform requests for more "
+#~ "data."
+#~ msgstr ""
+#~ "На <em>AstroBin</em>-е вы можете общаться с другими астрофотографами, "
+#~ "подписываться на них и получать уведомления о их новых изображениях, или "
+#~ "просить о дополнительных данных."
+
+#~ msgid ""
+#~ "You can follow gear items or astronomical subjects, and be notified "
+#~ "whenever there's a new image from a certain CCD, or telescope, or filter, "
+#~ "and so on. Or you can monitor all the new images of a certain galaxy or "
+#~ "nebula."
+#~ msgstr ""
+#~ "Вы можете подписываться на элементы оборудования или астрономические "
+#~ "объекты, и получать уведомления когда будут новые фотографии с конкретной "
+#~ "модели ПЗС, или телескопа, или с фильтром и так далее. Или вы можете "
+#~ "отслеживать новые фотографии конкретной галактики или туманности."
+
+#~ msgid ""
+#~ "As you have undoubtly realized by now, <em>AstroBin</em> is way more than "
+#~ "an image hosting service. It's what the Astrophotography community has "
+#~ "needed for a long time. For years, I have seen amazing images scattered "
+#~ "all over the Internet: general purpose image hosting sites, forums, "
+#~ "personal websites and even temporary places. Some of those images contain "
+#~ "data that is too precious to go wasted in a sea of chaos. <em>AstroBin</"
+#~ "em> comes to the rescue to provide a home and a central hub for "
+#~ "astrophotographers all over the world."
+#~ msgstr ""
+#~ "Бесспорно вам уже известно, что <em>AstroBin</em> — это более чем просто "
+#~ "хостинг изображений. Это то, в чём общество Астрофотографии нуждалось в "
+#~ "течение долгого времени. В течение многих лет, я видел удивительные "
+#~ "фотографии, разбросанные по всему Интернету: обычные хостинги картинок, "
+#~ "форумы, личные веб-сайты и даже какие-то временные места. Некоторые из "
+#~ "этих изображений содержат данные, которые слишком ценны, для того чтобы "
+#~ "впустую исчезнуть в море информационного хаоса. <em>AstroBin</em> "
+#~ "приходит на помощь, чтобы стать домом и центральным местом для всех "
+#~ "астрофотографов мира."
+
+#~ msgid "So, what are you waiting for?"
+#~ msgstr "Так чего вы ждёте?"
+
+#~ msgid "Sign up now!"
+#~ msgstr "Присоединяйтесь сейчас!"
+
+#~ msgid "Send to public data pool"
+#~ msgstr "Отправить в общее хранилище"
+
+#~ msgid "Send to private shared folder"
+#~ msgstr "Отправить в закрытый каталог"
+
+#~ msgid ""
+#~ "If this image is the result of your processing of a public data pool, you "
+#~ "can send it the pool so it's displayed there."
+#~ msgstr ""
+#~ "Если это изображение результат вашей обработки из общего хранилища, вы "
+#~ "можете отправить его туда и оно там отобразится."
+
+#~ msgid ""
+#~ "Use this form to select an existing <strong>public data pool</strong>."
+#~ msgstr ""
+#~ "Воспользуйтесь эту форму для выбора существующего <strong>общего "
+#~ "хранилища данных</strong>."
+
+#~ msgid ""
+#~ "If this image is the result of your processing of a private shared "
+#~ "folder, you can send it the folder so it's displayed there."
+#~ msgstr ""
+#~ "Если это изображение является результатом работы в закрытом каталоге, вы "
+#~ "можете отправить это в каталог и оно отобразится там."
+
+#~ msgid ""
+#~ "Use this form to select a <strong>private shared folder</strong> you have "
+#~ "created or have been invited to."
+#~ msgstr ""
+#~ "Используйте эту форму для выбора <strong>приватного общего каталога</"
+#~ "strong> которые вы создали или хотите пригласить."
+
+#~ msgid "You don't have access to any shared private folders."
+#~ msgstr "У вас нет доступа ни к одному закрытому каталогу обмена."
+
+#~ msgid "Back to image"
+#~ msgstr "Назад к изображению"
+
+#~ msgid "You have no messages."
+#~ msgstr "У вас нет сообщений."
+
+#~ msgid "Show all messages"
+#~ msgstr "Показать все сообщения"
+
+#~ msgid "Error. Try again!"
+#~ msgstr "Ошибка. Попробуйте ещё!"
+
+#~ msgid ""
+#~ "%(originator)s has published a new image! Check it out at the following "
+#~ "url: <a href=\"%(object_url)s\">%(object_url)s</a>"
+#~ msgstr ""
+#~ "%(originator)s опубликовал изображение! Оцените его по ссылке: <a href="
+#~ "\"%(object_url)s\">%(object_url)s</a>"
+
+#~ msgid ""
+#~ "%(originator)s has published a new image! Check it out at the following "
+#~ "url: %(object_url)s"
+#~ msgstr ""
+#~ "%(originator)s опубликовал изображение! Зацените его по адресу: "
+#~ "%(object_url)s"
+
+#~ msgid ""
+#~ "<a href=\"%(object_url)s\"><strong>%(originator)s</strong> has published "
+#~ "a new image.</a>"
+#~ msgstr ""
+#~ "<a href=\"%(object_url)s\"><strong>%(originator)s</strong> разместил "
+#~ "НОВОЕ изображение.</a>"
+
+#~ msgid "New image by %(originator)s"
+#~ msgstr "НОВОЕ изображение от %(originator)s"
+
+#~ msgid ""
+#~ "You are invited to the private shared folder: \"%(folder_name)s\".\n"
+#~ "\n"
+#~ "You can now contribute data and processed images to the folder. You can "
+#~ "also invite more people.\n"
+#~ "\n"
+#~ "Visit the folder at the following url: <a href=\"%(folder_url)s\">"
+#~ "%(folder_url)s</a>"
+#~ msgstr ""
+#~ "Вы приглашены в закрытый каталог обмена: \"%(folder_name)s\".\n"
+#~ "\n"
+#~ "Вы можете добавлять данные и обработанные изображения в каталог. Вы также "
+#~ "можете приглашать других людей.\n"
+#~ "\n"
+#~ "Посетите каталог по адресу: <a href=\"%(folder_url)s\">%(folder_url)s</a>"
+
+#~ msgid ""
+#~ "You are invited to the private shared folder: \"%(folder_name)s\".\n"
+#~ "\n"
+#~ "You can now contribute data and processed images to the folder. You can "
+#~ "also invite more people.\n"
+#~ "\n"
+#~ "Visit the folder at the following url: %(folder_url)s"
+#~ msgstr ""
+#~ "Вы приглашены в закрытый каталог обмена: \"%(folder_name)s\".\n"
+#~ "\n"
+#~ "Вы можете добавлять данные и обработанные изображения в каталоге. Вы "
+#~ "также можете приглашать других людей.\n"
+#~ "\n"
+#~ "Посетите каталог по ссылке: %(folder_url)s"
+
+#~ msgid ""
+#~ "<a href=\"%(folder_url)s\">You are invited to the private shared folder: "
+#~ "<strong>\"%(folder_name)s.\"</strong></a>"
+#~ msgstr ""
+#~ "<a href=\"%(folder_url)s\">Вы приглашены в закрытый каталог обмена: "
+#~ "<strong>\"%(folder_name)s.\"</strong></a>"
+
+#~ msgid "You are invited to the private shared folder: %(folder_name)s"
+#~ msgstr "Вы приглашены в закрытый каталог обмена: %(folder_name)s"
+
+#~ msgid ""
+#~ "%(user_name)s has added a new processed image to the private shared "
+#~ "folder: \"%(folder_name)s\". Check it out at the following url: <a href="
+#~ "\"%(folder_url)s\">%(folder_url)s</a>"
+#~ msgstr ""
+#~ "%(user_name)s добавил новое обработанное изображение в закрытый каталог: "
+#~ "\"%(folder_name)s\".Оцените его по ссылке: <a href=\"%(folder_url)s\">"
+#~ "%(folder_url)s</a>"
+
+#~ msgid ""
+#~ "%(user_name)s has added a new processed image to the private shared "
+#~ "folder: \"%(folder_name)s\". Check it out at the following url: "
+#~ "%(folder_url)s"
+#~ msgstr ""
+#~ "%(user_name)s добавил новое рабочее изображение в закрытый каталог "
+#~ "обмена: «%(folder_name)s». Зацените его по адресу: %(folder_url)s"
+
+#~ msgid ""
+#~ "<a href=\"%(folder_url)s\"><strong>%(user_name)s</strong> has added a new "
+#~ "processed image to the private shared folder: <strong>\"%(folder_name)s."
+#~ "\"</strong></a>"
+#~ msgstr ""
+#~ "<a href=\"%(folder_url)s\"><strong>%(user_name)s</strong> добавил рабочее "
+#~ "изображение в закрытый каталог: <strong>\"%(folder_name)s.\"</strong></a>"
+
+#~ msgid ""
+#~ "<a href=\"%(folder_url)s\"><strong>%(user_name)s</strong> has added a new "
+#~ "processed image to the private shared folder: <strong>\"%(folder_name)s."
+#~ "\"</a>"
+#~ msgstr ""
+#~ "<a href=\"%(folder_url)s\"><strong>%(user_name)s</strong> добавил "
+#~ "изображение закрытый каталог: <strong>\"%(folder_name)s.\"</a>"
+
+#~ msgid "New processed image in private shared folder: %(folder_name)s"
+#~ msgstr "Новое рабочее изображение в закрытом каталоге: %(folder_name)s"
+
+#~ msgid ""
+#~ "%(user_name)s has added a new processed image to the public data pool: "
+#~ "\"%(pool_name)s\". Check it out at the following url: <a href="
+#~ "\"%(pool_url)s\">%(pool_url)s</a>"
+#~ msgstr ""
+#~ "%(user_name)s добавил новое обработанное изображение в открытое "
+#~ "хранилище: \"%(pool_name)s\". Оцените его по ссылке: <a href="
+#~ "\"%(pool_url)s\">%(pool_url)s</a>"
+
+#~ msgid ""
+#~ "%(user_name)s has added a new processed image to the public data pool: "
+#~ "\"%(pool_name)s\". Check it out at the following url: %(pool_url)s"
+#~ msgstr ""
+#~ "%(user_name)s добавил новое рабочее изображение в общее хранилище: "
+#~ "«%(pool_name)s». Подробности: %(pool_url)s "
+
+#~ msgid ""
+#~ "<a href=\"%(pool_url)s\"><strong>%(user_name)s</strong> has added a new "
+#~ "processed image to the public data pool: <strong>\"%(pool_name)s.\"</"
+#~ "strong></a>"
+#~ msgstr ""
+#~ "<a href=\"%(pool_url)s\"><strong>%(user_name)s</strong> добавил рабочее "
+#~ "изображение в общее хранилище: <strong>\"%(pool_name)s.\"</strong></a>"
+
+#~ msgid "New processed image in public data pool: %(pool_name)s"
+#~ msgstr "Новое рабочее изображение в общем хранилище: %(pool_name)s"
+
+#~ msgid ""
+#~ "%(user_name)s has added new data to the public pool: \"%(pool_name)s\". "
+#~ "Check it out at the following url: <a href=\"%(pool_url)s\">%(pool_url)s</"
+#~ "a>"
+#~ msgstr ""
+#~ "%(user_name)s добавил данные в открытое хранилище: \"%(pool_name)s\". "
+#~ "Оцените его по ссылке: <a href=\"%(pool_url)s\">%(pool_url)s</a>"
+
+#~ msgid ""
+#~ "%(user_name)s has added new data to the public pool: \"%(pool_name)s\". "
+#~ "Check it out at the following url: %(pool_url)s"
+#~ msgstr ""
+#~ "%(user_name)s добавил обновления в общее хранилище: «%(pool_name)s». "
+#~ "Подробнее по адресу: %(pool_url)s"
+
+#~ msgid ""
+#~ "<a href=\"%(pool_url)s\"><strong>%(user_name)s</strong> has added new "
+#~ "data to the public pool: <strong>\"%(pool_name)s.\"</strong></a>"
+#~ msgstr ""
+#~ "<a href=\"%(pool_url)s\"><strong>%(user_name)s</strong> добавил "
+#~ "обновления в общее хранилище: <strong>\"%(pool_name)s.\"</strong></a>"
+
+#~ msgid "New data in public pool: %(pool_name)s"
+#~ msgstr "Обновления в общем хранилище: %(pool_name)s"
+
+#~ msgid ""
+#~ "%(user_name)s has added new data to the private shared folder: "
+#~ "\"%(folder_name)s\". Check it out at the following url: <a href="
+#~ "\"%(folder_url)s\">%(folder_url)s</a>"
+#~ msgstr ""
+#~ "%(user_name)s добавил данные в закрытый каталог: \"%(folder_name)s\". "
+#~ "Оцените по ссылке: <a href=\"%(folder_url)s\">%(folder_url)s</a>"
+
+#~ msgid ""
+#~ "%(user_name)s has added new data to the private shared folder: "
+#~ "\"%(folder_name)s\". Check it out at the following url: %(folder_url)s"
+#~ msgstr ""
+#~ "%(user_name)s добавил данных в закрытый каталог: «%(folder_name)s». "
+#~ "Просмотрите это по ссылке: %(folder_url)s"
+
+#~ msgid ""
+#~ "<a href=\"%(folder_url)s\"><strong>%(user_name)s</strong> has added new "
+#~ "data to the private shared folder: <strong>\"%(folder_name)s.\"</strong></"
+#~ "a>"
+#~ msgstr ""
+#~ "<a href=\"%(folder_url)s\"><strong>%(user_name)s</strong> добавил новые "
+#~ "данные в закрытый каталог: <strong>\"%(folder_name)s.\"</strong></a>"
+
+#~ msgid "New data in private shared folder: %(folder_name)s"
+#~ msgstr "Обновление в закрытом каталоге обмена: %(folder_name)s"
+
+#~ msgid "Username"
+#~ msgstr "Имя пользователя"
+
+#~ msgid "Email"
+#~ msgstr "Email"
+
+#~ msgid "Password"
+#~ msgstr "Пароль"
+
+#~ msgid "Here you can activate your free Raw Data Atom subscription."
+#~ msgstr ""
+#~ "Здесь вы можете активировать вашу бесплатную Raw Data Atom подписку."
+
+#~ msgid "Activate"
+#~ msgstr "Активировать"
+
+#~ msgid "Subscribe with a secure payment provided by PayPal:"
+#~ msgstr "Подпишитесь с помощью безопасной оплаты через PayPal:"
+
+#~ msgid "Buy with a secure payment provided by PayPal:"
+#~ msgstr "Оплатите с помощью безопасной системы PayPal:"
+
+#~ msgid "%(max_allowed)s images per year "
+#~ msgstr "%(max_allowed)s изображений в год"
+
+#~ msgid ""
+#~ "\n"
+#~ "                You can use AstroBin for free up to %(max_allowed)s "
+#~ "images. After\n"
+#~ "                that you can upgrade to <strong>Lite</strong> if you have "
+#~ "a limited\n"
+#~ "                yearly output, or <strong>Premium</strong> for a "
+#~ "limitless\n"
+#~ "                experience.  Paying members will not see ads, and "
+#~ "everybody,\n"
+#~ "                including non-paying members, have access to all social "
+#~ "features of\n"
+#~ "                AstroBin.\n"
+#~ "                "
+#~ msgstr ""
+#~ "\n"
+#~ "                На AstroBin вам доступно до %(max_allowed)s загрузок "
+#~ "изображений. Далее\n"
+#~ "                вы можете обновиться на <strong>Lite</strong> если у вас "
+#~ "ограниченный\n"
+#~ "                ежегодный результат, или на <strong>Premium</strong> для "
+#~ "самых \n"
+#~ "                опытных.  Платные участники не видят рекламу, и все,\n"
+#~ "                включая не платящих участников, имеют доступ ко всем "
+#~ "социальным возможностям \n"
+#~ "                AstroBin.\n"
+#~ "            "
+
+#~ msgid ""
+#~ "\n"
+#~ "                As a user of <strong>AstroBin Free</strong>, you may have "
+#~ "up to\n"
+#~ "                %(max_allowed)s images at the same time. You can delete "
+#~ "some images\n"
+#~ "                to make room for new ones, if you want. For instance you "
+#~ "can\n"
+#~ "                maintain a window of your latest %(max_allowed)s images, "
+#~ "or your\n"
+#~ "                best ones.\n"
+#~ "                "
+#~ msgstr ""
+#~ "\n"
+#~ "Как пользователь <strong>AstroBin Free</strong>, вы можете иметь до\n"
+#~ "%(max_allowed)s изображений одновременно. Если хотите, вы можете удалять\n"
+#~ "какие-либо изображения, чтобы освободить место для новых.\n"
+#~ "Например, вы можете держать тут топ учших или %(max_allowed)s самых "
+#~ "свежих \n"
+#~ "изображений.\n"
+#~ "            "
+
+#~ msgid ""
+#~ "\n"
+#~ "                As a user of <strong>AstroBin Lite</strong>, instead, you "
+#~ "may have\n"
+#~ "                up to %(max_allowed)s images at the same time, per each "
+#~ "year of\n"
+#~ "                your membership. You may replace images uploaded within "
+#~ "the current\n"
+#~ "                subsciption period while images uploaded prior to that "
+#~ "can only be\n"
+#~ "                deleted. Every year that you renew your membership, you "
+#~ "get\n"
+#~ "                %(max_allowed)s new image credits.\n"
+#~ "                "
+#~ msgstr ""
+#~ "\n"
+#~ "Как пользователь <strong>AstroBin Lite</strong>, вы можете иметь\n"
+#~ "до %(max_allowed)s изображений ежегодно, согласно\n"
+#~ "использованию тарифа. Вы можете заменять изображения, загруженные в "
+#~ "текущем\n"
+#~ "периоде, тогда как изображения, загруженные ранее могут быть\n"
+#~ "только удалены. Каждый год, обновляя подписку, вы получаете\n"
+#~ "%(max_allowed)s новых слотов для изображений.\n"
+#~ "            "
+
+#~ msgid ""
+#~ "\n"
+#~ "                As a user of <strong>AstroBin Premium</strong>, instead, "
+#~ "there are\n"
+#~ "                no limitations whatsoever in the number of images you can "
+#~ "upload.\n"
+#~ "                "
+#~ msgstr ""
+#~ "\n"
+#~ "                Как пользователь <strong>AstroBin Premium</strong>, к вас "
+#~ "не существует\n"
+#~ "                ограничений на количество изображений, которые вы можете "
+#~ "загрузить.\n"
+#~ "                "
+
+#~ msgid ""
+#~ "<strong>AstroBin Raw Data</strong> allows you to store your raw files "
+#~ "(<strong>FIT</strong> and <strong>digital camera raw</strong>) on "
+#~ "AstroBin. We will keep them neatly organized, and you will have a safe "
+#~ "backup of all your work, including calibration files."
+#~ msgstr ""
+#~ "<strong>AstroBin Raw Data</strong> позволяет вам хранить ваши raw файлы "
+#~ "(<strong>FIT</strong> и <strong>цифрокамерный raw</strong>) на AstroBin. "
+#~ "Мы будем их хранить аккуратно организовав, и вам будет доступен бекап "
+#~ "всех ваших работ, включая калибровочные файлы."
+
+#~ msgid ""
+#~ "Learn more by reading <a href=\"%(rawdata_url)s\">a short introduction.</"
+#~ "a>"
+#~ msgstr ""
+#~ "Узнайте больше, прочитав <a href=\"%(rawdata_url)s\">короткое введение.</"
+#~ "a>"
+
+#~ msgid "Here you can deactivate your free Raw Data Atom subscription."
+#~ msgstr ""
+#~ "Здесь вы можете деактивировать свою бесплатную Raw Data Atom подписку."
+
+#~ msgid "Deactivate"
+#~ msgstr "Отключить"
+
+#~ msgid "AstroBin Premium subscription plans"
+#~ msgstr "Планы AstroBin Премиум подписки"
+
+#, fuzzy
+#~| msgid ""
+#~| "\n"
+#~| "                You can use AstroBin for free up to %(max_allowed)s "
+#~| "images. After\n"
+#~| "                that you can upgrade to <strong>Lite</strong> if you "
+#~| "have a limited\n"
+#~| "                yearly output, or <strong>Premium</strong> for a "
+#~| "limitless\n"
+#~| "                experience.  Paying members will not see ads, and "
+#~| "everybody,\n"
+#~| "                including non-paying members, have access to all social "
+#~| "features of\n"
+#~| "                AstroBin.\n"
+#~| "                "
+#~ msgid ""
+#~ "\n"
+#~ "                    You can use AstroBin for free up to %(max_allowed)s "
+#~ "images. After\n"
+#~ "                    that you can upgrade to <strong>Lite</strong> if you "
+#~ "have a limited\n"
+#~ "                    yearly output, or <strong>Premium</strong> for a "
+#~ "limitless\n"
+#~ "                    experience.  Paying members will not see ads, and "
+#~ "everybody,\n"
+#~ "                    including non-paying members, have access to all "
+#~ "social features of\n"
+#~ "                    AstroBin.\n"
+#~ "                    "
+#~ msgstr ""
+#~ "\n"
+#~ "                На AstroBin вам доступно до %(max_allowed)s загрузок "
+#~ "изображений. Далее\n"
+#~ "                вы можете обновиться на <strong>Lite</strong> если у вас "
+#~ "ограниченный\n"
+#~ "                ежегодный результат, или на <strong>Premium</strong> для "
+#~ "самых \n"
+#~ "                опытных.  Платные участники не видят рекламу, и все,\n"
+#~ "                включая не платящих участников, имеют доступ ко всем "
+#~ "социальным возможностям \n"
+#~ "                AstroBin.\n"
+#~ "            "
+
+#, fuzzy
+#~| msgid ""
+#~| "\n"
+#~| "                As a user of <strong>AstroBin Free</strong>, you may "
+#~| "have up to\n"
+#~| "                %(max_allowed)s images at the same time. You can delete "
+#~| "some images\n"
+#~| "                to make room for new ones, if you want. For instance you "
+#~| "can\n"
+#~| "                maintain a window of your latest %(max_allowed)s images, "
+#~| "or your\n"
+#~| "                best ones.\n"
+#~| "                "
+#~ msgid ""
+#~ "\n"
+#~ "                    As a user of <strong>AstroBin Free</strong>, you may "
+#~ "have up to\n"
+#~ "                    %(max_allowed)s images at the same time. You can "
+#~ "delete some images\n"
+#~ "                    to make room for new ones, if you want. For instance "
+#~ "you can\n"
+#~ "                    maintain a window of your latest %(max_allowed)s "
+#~ "images, or your\n"
+#~ "                    best ones.\n"
+#~ "                    "
+#~ msgstr ""
+#~ "\n"
+#~ "Как пользователь <strong>AstroBin Free</strong>, вы можете иметь до\n"
+#~ "%(max_allowed)s изображений одновременно. Если хотите, вы можете удалять\n"
+#~ "какие-либо изображения, чтобы освободить место для новых.\n"
+#~ "Например, вы можете держать тут топ учших или %(max_allowed)s самых "
+#~ "свежих \n"
+#~ "изображений.\n"
+#~ "            "
+
+#, fuzzy
+#~| msgid ""
+#~| "\n"
+#~| "                As a user of <strong>AstroBin Lite</strong>, instead, "
+#~| "you may have\n"
+#~| "                up to %(max_allowed)s images at the same time, per each "
+#~| "year of\n"
+#~| "                your membership. You may replace images uploaded within "
+#~| "the current\n"
+#~| "                subsciption period while images uploaded prior to that "
+#~| "can only be\n"
+#~| "                deleted. Every year that you renew your membership, you "
+#~| "get\n"
+#~| "                %(max_allowed)s new image credits.\n"
+#~| "                "
+#~ msgid ""
+#~ "\n"
+#~ "                    As a user of <strong>AstroBin Lite</strong>, instead, "
+#~ "you may have\n"
+#~ "                    up to %(max_allowed)s images at the same time, per "
+#~ "each year of\n"
+#~ "                    your membership. You may replace images uploaded "
+#~ "within the current\n"
+#~ "                    subsciption period while images uploaded prior to "
+#~ "that can only be\n"
+#~ "                    deleted. Every year that you renew your membership, "
+#~ "you get\n"
+#~ "                    %(max_allowed)s new image credits.\n"
+#~ "                    "
+#~ msgstr ""
+#~ "\n"
+#~ "Как пользователь <strong>AstroBin Lite</strong>, вы можете иметь\n"
+#~ "до %(max_allowed)s изображений ежегодно, согласно\n"
+#~ "использованию тарифа. Вы можете заменять изображения, загруженные в "
+#~ "текущем\n"
+#~ "периоде, тогда как изображения, загруженные ранее могут быть\n"
+#~ "только удалены. Каждый год, обновляя подписку, вы получаете\n"
+#~ "%(max_allowed)s новых слотов для изображений.\n"
+#~ "            "
+
+#, fuzzy
+#~| msgid ""
+#~| "\n"
+#~| "                As a user of <strong>AstroBin Premium</strong>, instead, "
+#~| "there are\n"
+#~| "                no limitations whatsoever in the number of images you "
+#~| "can upload.\n"
+#~| "                "
+#~ msgid ""
+#~ "\n"
+#~ "                    As a user of <strong>AstroBin Premium</strong>, "
+#~ "instead, there are\n"
+#~ "                    no limitations whatsoever in the number of images you "
+#~ "can upload.\n"
+#~ "                    "
+#~ msgstr ""
+#~ "\n"
+#~ "                Как пользователь <strong>AstroBin Premium</strong>, к вас "
+#~ "не существует\n"
+#~ "                ограничений на количество изображений, которые вы можете "
+#~ "загрузить.\n"
+#~ "                "
+
+#~ msgid "AstroBin Raw Data subscription plans"
+#~ msgstr "Планы подписки AstroBin Raw Data"
+
+#~ msgid "Here's a short description of each plan:"
+#~ msgstr "Вот немного описания по каждому плану:"
+
+#~ msgid ""
+#~ "This plan is free! Choose it to share a small amount of data with other "
+#~ "users."
+#~ msgstr ""
+#~ "Это план бесплатный! Выберите его чтобы иметь возможность делиться "
+#~ "небольшим количеством данных с другими пользователями."
+
+#~ msgid ""
+#~ " Choose this plan if you want to keep your expenses to a minimum, but "
+#~ "still want the possibity to share your FIT and digital camera raw files "
+#~ "with your friends. You can also participate to public data pools and "
+#~ "contribute to the deepest deep sky images ever created, and you will "
+#~ "always know that you support AstroBin."
+#~ msgstr ""
+#~ "Выберите этот план, если вы хотите свести свои расходы до минимума, но в "
+#~ "тоже время хотите иметь возможность делиться своими FIT и цифрокамерными "
+#~ "raw файлами с друзьями. Вы также сможете участвовать общем хранилище "
+#~ "данных для вклада в снимки глубокого космоса, которые были созданы, "
+#~ "понимая, что вы поддерживаете AstroBin."
+
+#~ msgid ""
+#~ "Choose this plan if you have started out in the recent year or two, or "
+#~ "you don't want to share and backup your calibration files. Enjoy a lot of "
+#~ "room for a convenient price."
+#~ msgstr ""
+#~ "Выберите это план, если вы начали в последние год или два, или вы не "
+#~ "хотите делиться и бекапить свои калибровочные файлы. Наслаждайтесь "
+#~ "доступным местом за удобную цену."
+
+#~ msgid ""
+#~ "Choose this plan if you have several years worth of data. You will "
+#~ "probably have enough room for all your calibration files, and will enjoy "
+#~ "the full potential of the platform."
+#~ msgstr ""
+#~ "Выберите этот план, если у вас есть за спиной несколько лет данных. Вам "
+#~ "должно хватить места для всех калибровочных файлов, и вы сможете "
+#~ "насладиться полным потенциалом платформы."
+
+#~ msgid ""
+#~ "Choose this plan if you have a massive amount of raw data that you want "
+#~ "to share and backup securely online."
+#~ msgstr ""
+#~ "Выберите этот план, если у вас массивное количество raw данных, которые "
+#~ "вы хотите безопасно бекапить или делиться ими."
+
+#~ msgid ""
+#~ "The following Terms are only available in English. It is your "
+#~ "responsibility to comprehend them."
+#~ msgstr ""
+#~ "Нижеследующее Соглашение доступно только на английском. Ответственность "
+#~ "за их понимание на вас."
+
+#~ msgid ""
+#~ "You have used <strong>%(premium_counter)s</strong> images of your allowed "
+#~ "<strong>%(max_allowed)s</strong> for the current subscription period."
+#~ msgstr ""
+#~ "Вы использовали <strong>%(premium_counter)s</strong> изображений из "
+#~ "допустимых <strong>%(max_allowed)s</strong> в текущем периоде подписки."
+
+# Строка из меню пользователя, там все пункты с большой буквы
+#~ msgid "Raw data upload"
+#~ msgstr "Загрузка RAW Данных"
+
+#~ msgid ""
+#~ "You have no more space left on your Raw Data account. Please delete some "
+#~ "files to make room, or upgrade your account."
+#~ msgstr "Загрузка RAW Данных"
+
+#~ msgid "Use the button below to choose files"
+#~ msgstr "Используйте кнопку снизу для выбора файлов"
+
+#~ msgid "Drop your raw data here"
+#~ msgstr "Перетащите ваши RAW данные сюда"
+
+#~ msgid "Accepted file types: FIT and digital camera raw files"
+#~ msgstr "Принимаемые типы файлов: FIT и RAW файлы цифровых камер."
+
+#~ msgid "Filename"
+#~ msgstr "Имя файла"
+
+#~ msgid "Choose files"
+#~ msgstr "Выбрать файлы"
+
+#~ msgid "Reset"
+#~ msgstr "Сбросить"
+
+#~ msgid "Start upload"
+#~ msgstr "Начать закачку"
+
+#~ msgid "Go to your Raw Data Library."
+#~ msgstr "Перейти в вашу библиотеку RAW данных."
+
+#~ msgid ""
+#~ "Your Raw Data subscription is not active, or it has expired. If you have "
+#~ "just subscribed, please wait for a few minutes. Thanks for your patience!"
+#~ msgstr ""
+#~ "Ваша подписка на RAW-пространство неактивна или истекла. Если вы только "
+#~ "подписались, подождите несколько минут. Спасибо за ваше терпение!"
+
+# Предлагаю RAW-данные. Самый точный перевод и имя продукта вроде тоже подходящее. Смысл не теряется.
+#~ msgid "Go to the Raw Data <a href=\"%(plans_url)s\">plans page</a>."
+#~ msgstr "Перейти к <a href=\"%(plans_url)s\">странице планов</a> RAW-данных."
+
+#~ msgid ""
+#~ "Did you know that AstroBin can host your FIT and digital camera raw files "
+#~ "too?"
+#~ msgstr ""
+#~ "А знаете ли вы что, AstroBin также может размещать ваши FIT и RAW файлы "
+#~ "цифровых камер?"
+
+#~ msgid ""
+#~ "Have a look at <a href=\"%(rawdata_url)s\">AstroBin Raw Data</a> if you "
+#~ "want to safely store all your raw files, and have them neatily organized "
+#~ "for future reference!"
+#~ msgstr ""
+#~ "Оцените <a href=\"%(rawdata_url)s\">AstroBin Raw Data</a>, если вы хотите "
+#~ "безопасно хранить все ваши RAW файлы и тщательно организовывать их для "
+#~ "будущих работ!"
+
+#~ msgid "Raw files"
+#~ msgstr "RAW файлы"
+
+#~ msgid "Upload started, please wait..."
+#~ msgstr "Закачка началась, пожалуйста ждите..."
+
+#~ msgid ""
+#~ "One ore more files were ignored because they did not look like FIT or "
+#~ "digital camera raw files."
+#~ msgstr ""
+#~ "Один или несколько файлов были проигнорированы, потому что они не "
+#~ "выглядят как FIT или RAW файлы."
+
+#~ msgid ""
+#~ "Done! Go to <a href=\\\"/users/\" + username + \"/?staging&sub=uploaded\\"
+#~ "\">your staging gallery</a> to see the new pictures (and keep an eye on "
+#~ "your notifications)!"
+#~ msgstr ""
+#~ "Готово! Перейти к <a href=\\\"/users/\" + username + \"/?"
+#~ "staging&sub=uploaded\\\">вашей галерее</a>, чтобы посмотреть новые "
+#~ "изображения (и следите за своими уведомлениями)!"
 
 #~ msgid "The perfect home for your astrophotography."
 #~ msgstr "Идеальное место для ваших астрофотографий."
@@ -7182,12 +7959,6 @@ msgstr ""
 
 #~ msgid "Express value in hours"
 #~ msgstr "Введите значение в часах"
-
-#~ msgid ""
-#~ "Search for astronomical objects, telescopes or lenses, cameras, filters..."
-#~ msgstr ""
-#~ "Поиск по астрономическим объектам, телескопам или объективам, камерам, "
-#~ "фильтрам..."
 
 #~ msgid "Min. telescope aperture"
 #~ msgstr "Минимальная апертура"
@@ -7520,17 +8291,11 @@ msgstr ""
 #~ msgid "Content moderation"
 #~ msgstr "Модерация контента"
 
-#~ msgid "Edit watermark"
-#~ msgstr "Править \"водяной знак\""
-
 #~ msgid "Edit basic information"
 #~ msgstr "Править основную информацию"
 
 #~ msgid "Change license"
 #~ msgstr "Сменить лицензию"
-
-#~ msgid "Attempt to plate-solve again"
-#~ msgstr "Попытаться определить координаты снова"
 
 #~ msgid "Date and time"
 #~ msgstr "Дата и время"
@@ -7589,9 +8354,6 @@ msgstr ""
 
 #~ msgid "Do you want your product here?"
 #~ msgstr "Вы хотите видеть ваш продукт здесь?"
-
-#~ msgid "Read all"
-#~ msgstr "Прочитать всё"
 
 #~ msgid "Go to first unread post"
 #~ msgstr "Перейти к первому непрочитанному сообщению"
@@ -7849,9 +8611,6 @@ msgstr ""
 #~ msgstr ""
 #~ "Пожалуйста присоединяйтесь, и вы сможете научиться и научить "
 #~ "Астрофотографии и Астрономии!"
-
-#~ msgid "Here's some more reading material to get you started"
-#~ msgstr "Здесь некоторые материалы для прочтения, чтобы начать"
 
 #~ msgid "Frequently Asked Questions about AstroBin Questions"
 #~ msgstr "Часто Задаваемые Вопросы об AstroBin Questions"

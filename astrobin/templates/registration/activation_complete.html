@@ -12,6 +12,21 @@
     {% breadcrumb 'Activated' None %}
 {% endblock %}
 
+{% block extra_gtag %}
+    {% if GOOGLE_ADS_ID != "invalid" %}
+        <!-- Event snippet for Sign-up conversion page -->
+        <script type="text/javascript">
+            gtag('event', 'conversion', {'send_to': '{{ GOOGLE_ADS_ID }}/qFlnCMarhtEBEJrDxfoD'});
+        </script>
+    {% endif %}
+{% endblock %}
+
 {% block content %}
-<p>{% trans "Your profile is now active." %} <a class="btn btn-primary" href="{% url 'auth_login' %}">{% trans "Login" %}.</a></p>
+    <p>
+        {% trans "Your profile is now active." %} {% trans "Thank you!" %}
+    </p>
+
+    <a class="btn btn-primary" href="{% url 'auth_login' %}">
+        {% trans "Login" %}.
+    </a>
 {% endblock %}

@@ -990,11 +990,12 @@ class ImagePromoteView(LoginRequiredMixin, ImageUpdateViewBase):
                         "follow",
                         UserProfile.objects.get(user__pk=request.user.pk).user)
                 ]
-                push_notification(followers, 'new_image',
-                                  {
-                                      'originator': request.user.userprofile.get_display_name(),
-                                      'object_url': settings.BASE_URL + image.get_absolute_url()
-                                  })
+
+                thumb = image.thumbnail_raw('gallery', {'sync': True})
+                push_notification(followers, 'new_image', {
+                    'image': image,
+                    'image_thumbnail': thumb.url if thumb else None
+                })
 
                 add_story(image.user, verb='VERB_UPLOADED_IMAGE', action_object=image)
 
@@ -1070,6 +1071,9 @@ class ImageEditBasicView(ImageEditBaseView):
             image.save(keep_deleted=True)
 
             image.thumbnail_invalidate()
+
+            if image.solution:
+                image.solution.delete()
 
         return ret
 

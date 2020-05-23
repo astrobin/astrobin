@@ -7,17 +7,40 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2019-10-15 11:56+0000\n"
-"PO-Revision-Date: 2015-12-29 09:55+0000\n"
-"Last-Translator: PepeChambo <jjchambo@hotmail.com>\n"
+"POT-Creation-Date: 2020-05-19 08:05+0000\n"
+"PO-Revision-Date: 2020-05-15 21:38+0000\n"
+"Last-Translator: DanielaDGR <danieladgr.5r@gmail.com>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
 "Language: es\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=(n != 1);\n"
-"X-Generator: Pootle 2.5.0\n"
-"X-POOTLE-MTIME: 1451382915.265810\n"
+"X-Generator: Pootle 2.8\n"
+"X-POOTLE-MTIME: 1589578717.000000\n"
+
+msgid "I wasn't really affected by the data loss"
+msgstr "No me afectó mucho la pérdida de datos"
+
+msgid "I don't require compensation: I want to support AstroBin"
+msgstr "No requiero compensación. Deseo apoyar a AstroBin"
+
+msgid "I would like to try AstroBin Ultimate for free for 1 month"
+msgstr "Me gustaría probar AstroBin Ultimate gratis durante 1 mes"
+
+msgid "I feel entitled to AstroBin Ultimate for free for 3 months"
+msgstr ""
+"Me siento con derecho de obtener AstroBin Ultimate gratis durante 3 meses"
+
+msgid "I feel entitled to AstroBin Ultimate for free for 6 months"
+msgstr ""
+"Me siento con derecho de obtener AstroBin Ultimate gratis durante 6 meses"
+
+msgid "Requested compensation"
+msgstr "Compensación solicitada"
+
+msgid "Please indicate if and how much you would like to be compensated."
+msgstr "Por favor, indique si y cuánto cuánto le gustaría ser compensado."
 
 msgid "Your migration data"
 msgstr "Tus datos migrados"
@@ -48,6 +71,87 @@ msgstr "Fecha"
 
 msgid "Subscription"
 msgstr "Suscripción "
+
+msgid "Data loss compensation request"
+msgstr "Solicitud de compensación por pérdida de datos."
+
+msgid ""
+"You are eligible for compensation due to the data loss that happened on "
+"February 16th, 2020."
+msgstr ""
+"Usted es elegible para una compensación debido a la pérdida de datos que "
+"ocurrió el 16 de febrero de 2020."
+
+msgid ""
+"If you haven't had the chance, please take a minute to read what happened at "
+"the following page:"
+msgstr ""
+"Si no ha tenido la oportunidad, por favor tómese un minuto para leer lo que "
+"sucedió en la siguiente página:"
+
+msgid "Official statement and post-mortem"
+msgstr "Declaración oficial y póstuma"
+
+msgid "Please accept our apology once more."
+msgstr "Por favor, acepte nuestras disculpas una vez más."
+
+msgid "Please chooce your compensation from the list below"
+msgstr "Por favor, escoja su compensación de la lista a continuación"
+
+msgid ""
+"Compensation is offered in the form of free time on the new AstroBin "
+"subscription tier called \"Ultimate\"."
+msgstr ""
+"La compensación se ofrece en forma de tiempo gratis en el nuevo nivel de "
+"suscripción de AstroBin llamado \"Ultimate\"."
+
+#, python-format
+msgid ""
+"To learn more about AstroBin Ultimate, please visit <a href=\"%(url)s\" "
+"target=\"_blank\">the pricing page</a>."
+msgstr ""
+"Para obtener más información sobre AstroBin Ultimate, visite <a href="
+"\"%(url)s\" target=\"_blank\"> la página de precios</a>."
+
+msgid "Submit"
+msgstr "Enviar"
+
+msgid "Data loss compensation reauest"
+msgstr "Solicitud de compensación por pérdida de datos"
+
+msgid "Already done"
+msgstr "Hecho"
+
+msgid "Sorry, you can't do this again."
+msgstr "Lo siento, no puede hacer esto otra vez."
+
+msgid "Your preference was already recorded and cannot be changed."
+msgstr "Su preferencia ya fue grabada y no puede ser cambiada."
+
+msgid "Not eligible"
+msgstr "No elegible"
+
+msgid "It looks like you're not eligible"
+msgstr "Parece que usted no es elegible"
+
+msgid ""
+"Sorry, but this page is for people who were on AstroBin Premium on the day "
+"that the data loss incident happened, and it looks like you aren't among "
+"them."
+msgstr ""
+"Lo sentimos, pero esta página es para aquellos que estaban en AstroBin "
+"Premium el día del incidente de pérdida de datos y parece que usted no está "
+"entre estas personas."
+
+msgid "Success"
+msgstr "Realizado con éxito "
+
+msgid "All done!"
+msgstr "¡Ya está todo hecho!"
+
+msgid ""
+"Your preference has been recorded and it has already been applied. Thank you!"
+msgstr "Su preferencia ha sido registrada y ha sido aplicada. ¡Gracias!"
 
 msgid "Migrate donations"
 msgstr "Migrar donaciones"
@@ -99,9 +203,6 @@ msgstr ""
 msgid "No, I want to pay for Premium"
 msgstr "No, quiero pagar por una cuenta Premium "
 
-msgid "Success"
-msgstr "Realizado con éxito "
-
 msgid "Your migration was successful."
 msgstr "La migración se ha llevado a cabo con éxito."
 
@@ -110,9 +211,8 @@ msgstr "¡Gracias por apoyar AstroBin!"
 
 #, python-format
 msgid ""
-"Your \"%(subscription_name)s\" subscription on AstroBin will expire in one "
-"week."
-msgstr ""
+"Your \"%(subscription_name)s\" subscription on AstroBin has just expired."
+msgstr "Su \"%(subscription_name)s\" suscripción en AstroBin acaba de caducar."
 
 msgid ""
 "When a Premium or Lite subscription on AstroBin expires, nothing happens to "
@@ -121,20 +221,40 @@ msgid ""
 "to use AstroBin in all other aspects if you do not have any new images to "
 "share at the moment."
 msgstr ""
+"Cuando una suscripción Premium o Lite en AstroBin expira, no le pasa nada a "
+"sus imágenes ni a su contenido. Usted es llevado a AstroBin Free y no será "
+"capaz de subir nuevas imágenes hasta que la renueve, pero puede seguir "
+"utilizando AstroBin en todos los demás aspectos si no tiene ninguna nueva "
+"imagen para compartir en el momento."
 
 msgid ""
 "When you are ready to renew your subscription, please visit the following "
 "page:"
 msgstr ""
+"Cuando esté listo para renovar su suscripción, por favor visite la siguiente "
+"página:"
+
+msgid "Your premium subscription has just expired"
+msgstr "Su suscripción premium acaba de expirar"
+
+#, python-format
+msgid ""
+"Your \"%(subscription_name)s\" subscription on AstroBin will expire in one "
+"week."
+msgstr ""
+"Tu suscripción a '\"%(subscription_name)s\" en AstroBin expirará en una "
+"semana."
 
 msgid "Your premium subscription will expire in one week"
-msgstr ""
+msgstr "Su suscripción premium expirará en una semana"
 
 #, python-format
 msgid ""
 "Your \"%(subscription_name)s\" subscription on AstroBin will be "
 "automatically renewed in one week."
 msgstr ""
+"Su suscripción a \"%(subscription_name)s\" en AstroBin se renovará "
+"automáticamente en una semana."
 
 msgid ""
 "You have an automatically renewing subscription on AstroBin, and we will "
@@ -142,14 +262,20 @@ msgid ""
 "regular way, via PayPal, then PayPal will attempt to charge your credit card "
 "or retrieve funds that are available in your account."
 msgstr ""
+"Usted tiene una suscripción de renovación automática en AstroBin, e "
+"intentaremos renovarla automáticamente. Si su suscripción se creó de la "
+"manera regular, a través de PayPal, PayPal intentará cargar su tarjeta de "
+"crédito o recuperar fondos que están disponibles en su cuenta."
 
 msgid ""
 "If your subscription was created manually via a bank transfer, please get in "
 "touch for a new payment."
 msgstr ""
+"Si su suscripción se creó manualmente a través de una transferencia "
+"bancaria, póngase en contacto con nosotros para un nuevo pago."
 
 msgid "Thank you!"
-msgstr ""
+msgstr "¡Gracias!"
 
 msgid "Your premium subscription will be automatically renewed in one week"
-msgstr ""
+msgstr "Su suscripción premium se renovará automáticamente en una semana"

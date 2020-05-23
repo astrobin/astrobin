@@ -7,8 +7,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2019-10-15 11:57+0000\n"
-"PO-Revision-Date: 2018-12-04 22:57+0000\n"
+"POT-Creation-Date: 2020-05-19 08:07+0000\n"
+"PO-Revision-Date: 2020-05-13 21:48+0000\n"
 "Last-Translator: Salvatore Iovene <salvatore@iovene.com>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
 "Language: it\n"
@@ -17,7 +17,7 @@ msgstr ""
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=(n != 1);\n"
 "X-Generator: Pootle 2.8\n"
-"X-POOTLE-MTIME: 1543964277.000000\n"
+"X-POOTLE-MTIME: 1589406512.000000\n"
 
 msgid "You are not a member of the IOTD Submitters board."
 msgstr "Non sei un membro del gruppo di submitter Foto del Giorno."
@@ -31,9 +31,6 @@ msgstr "Le immagini nell'area di lavoro non possono essere proposte."
 msgid "This user has chosen to be excluded from competitions."
 msgstr "Questo utente ha scelto di essere escluso dalle competizioni."
 
-msgid "You cannot submit a judge's image."
-msgstr "Non puoi proporre l'immagine di un giudice."
-
 #, python-format
 msgid ""
 "You cannot submit an image that was published more than %(max_days)s days "
@@ -41,6 +38,9 @@ msgid ""
 msgstr ""
 "Non puoi proporre un'immagine che è stata pubblicata più di %(max_days)s "
 "giorni fa."
+
+msgid "Users with a Free membership cannot participate in the IOTD."
+msgstr "Utenti con abbonamento Free non possono partecipare alla IOTD."
 
 msgid "This image has already been an IOTD in the past"
 msgstr "Questa immagine è già stata Foto del Giorno in passato"
@@ -57,9 +57,6 @@ msgstr "Non puoi votare per la tua immagine."
 
 msgid "Images in the staging area cannot be voted for."
 msgstr "Le immagini nell'area di lavoro non possono essere votate."
-
-msgid "You cannot vote for a judge's image."
-msgstr "Non puoi votare l'immagine di un giudice."
 
 msgid "You cannot vote for an image that has not been submitted."
 msgstr "Non puoi votare un'immagine che non è stata proposta."
@@ -87,9 +84,6 @@ msgstr "Non puoi eleggere la tua immagine."
 
 msgid "Images in the staging area cannot be elected."
 msgstr "Le immagini nell'area di lavoro non possono essere elette."
-
-msgid "You cannot elect a judge's image."
-msgstr "Non puoi eleggere l'immagine di un giudice."
 
 msgid "You cannot elect an image that has not been voted."
 msgstr "Non puoi eleggere una immagine che non è stata votata."
@@ -191,9 +185,6 @@ msgid ""
 msgstr ""
 "Scegli le immagini che vuoi proporre per la considerazione a Foto del Giorno."
 
-msgid "No images uploaded on this day."
-msgstr "Nessuna immagine caricata questo giorno."
-
 msgid "You cannot unelect an IOTD elected by another judge."
 msgstr ""
 "Non puoi rimuovere l'elezione a Foto del Giorno eletta da un altro giudice."
@@ -203,3 +194,15 @@ msgid "All IOTD slots for the next %(days)s days are already filled."
 msgstr ""
 "Tutte le posizioni per Foto del Giorno per i prossimi %(days)s sono state "
 "occupate."
+
+#~ msgid "You cannot submit a judge's image."
+#~ msgstr "Non puoi proporre l'immagine di un giudice."
+
+#~ msgid "You cannot vote for a judge's image."
+#~ msgstr "Non puoi votare l'immagine di un giudice."
+
+#~ msgid "You cannot elect a judge's image."
+#~ msgstr "Non puoi eleggere l'immagine di un giudice."
+
+#~ msgid "No images uploaded on this day."
+#~ msgstr "Nessuna immagine caricata questo giorno."

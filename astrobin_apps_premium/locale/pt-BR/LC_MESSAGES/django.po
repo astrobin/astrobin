@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2019-10-15 11:56+0000\n"
+"POT-Creation-Date: 2020-05-19 08:05+0000\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -16,6 +16,27 @@ msgstr ""
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
+
+msgid "I wasn't really affected by the data loss"
+msgstr ""
+
+msgid "I don't require compensation: I want to support AstroBin"
+msgstr ""
+
+msgid "I would like to try AstroBin Ultimate for free for 1 month"
+msgstr ""
+
+msgid "I feel entitled to AstroBin Ultimate for free for 3 months"
+msgstr ""
+
+msgid "I feel entitled to AstroBin Ultimate for free for 6 months"
+msgstr ""
+
+msgid "Requested compensation"
+msgstr ""
+
+msgid "Please indicate if and how much you would like to be compensated."
+msgstr ""
 
 msgid "Your migration data"
 msgstr ""
@@ -45,6 +66,76 @@ msgid "Date"
 msgstr ""
 
 msgid "Subscription"
+msgstr ""
+
+msgid "Data loss compensation request"
+msgstr ""
+
+msgid ""
+"You are eligible for compensation due to the data loss that happened on "
+"February 16th, 2020."
+msgstr ""
+
+msgid ""
+"If you haven't had the chance, please take a minute to read what happened at "
+"the following page:"
+msgstr ""
+
+msgid "Official statement and post-mortem"
+msgstr ""
+
+msgid "Please accept our apology once more."
+msgstr ""
+
+msgid "Please chooce your compensation from the list below"
+msgstr ""
+
+msgid ""
+"Compensation is offered in the form of free time on the new AstroBin "
+"subscription tier called \"Ultimate\"."
+msgstr ""
+
+#, python-format
+msgid ""
+"To learn more about AstroBin Ultimate, please visit <a href=\"%(url)s\" "
+"target=\"_blank\">the pricing page</a>."
+msgstr ""
+
+msgid "Submit"
+msgstr ""
+
+msgid "Data loss compensation reauest"
+msgstr ""
+
+msgid "Already done"
+msgstr ""
+
+msgid "Sorry, you can't do this again."
+msgstr ""
+
+msgid "Your preference was already recorded and cannot be changed."
+msgstr ""
+
+msgid "Not eligible"
+msgstr ""
+
+msgid "It looks like you're not eligible"
+msgstr ""
+
+msgid ""
+"Sorry, but this page is for people who were on AstroBin Premium on the day "
+"that the data loss incident happened, and it looks like you aren't among "
+"them."
+msgstr ""
+
+msgid "Success"
+msgstr ""
+
+msgid "All done!"
+msgstr ""
+
+msgid ""
+"Your preference has been recorded and it has already been applied. Thank you!"
 msgstr ""
 
 msgid "Migrate donations"
@@ -88,9 +179,6 @@ msgstr ""
 msgid "No, I want to pay for Premium"
 msgstr ""
 
-msgid "Success"
-msgstr ""
-
 msgid "Your migration was successful."
 msgstr ""
 
@@ -99,8 +187,7 @@ msgstr ""
 
 #, python-format
 msgid ""
-"Your \"%(subscription_name)s\" subscription on AstroBin will expire in one "
-"week."
+"Your \"%(subscription_name)s\" subscription on AstroBin has just expired."
 msgstr ""
 
 msgid ""
@@ -114,6 +201,15 @@ msgstr ""
 msgid ""
 "When you are ready to renew your subscription, please visit the following "
 "page:"
+msgstr ""
+
+msgid "Your premium subscription has just expired"
+msgstr ""
+
+#, python-format
+msgid ""
+"Your \"%(subscription_name)s\" subscription on AstroBin will expire in one "
+"week."
 msgstr ""
 
 msgid "Your premium subscription will expire in one week"

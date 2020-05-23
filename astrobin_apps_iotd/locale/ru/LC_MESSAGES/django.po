@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2019-10-15 11:57+0000\n"
+"POT-Creation-Date: 2020-05-19 08:07+0000\n"
 "PO-Revision-Date: 2019-02-25 18:41+0000\n"
 "Last-Translator: BG8JQT <BG8JQT@163.com>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -32,9 +32,6 @@ msgstr "Изображения в Staging Area не могут быть номи
 msgid "This user has chosen to be excluded from competitions."
 msgstr "Этот пользователь хочет быть исключенным из соревнования."
 
-msgid "You cannot submit a judge's image."
-msgstr "Вы не можете номинировать изображения судей."
-
 #, python-format
 msgid ""
 "You cannot submit an image that was published more than %(max_days)s days "
@@ -42,6 +39,9 @@ msgid ""
 msgstr ""
 "Вы не можете номинировать изображения которые были опубликованы более, чем "
 "%(max_days)s дней назад."
+
+msgid "Users with a Free membership cannot participate in the IOTD."
+msgstr ""
 
 msgid "This image has already been an IOTD in the past"
 msgstr "Это изображение уже было Изображением Дня в прошлом"
@@ -58,9 +58,6 @@ msgstr "Вы не можете голосовать за собственные 
 
 msgid "Images in the staging area cannot be voted for."
 msgstr "За изображения в Staging Area нельзя голосовать."
-
-msgid "You cannot vote for a judge's image."
-msgstr "Вы не можете голосовать за изображения судей."
 
 msgid "You cannot vote for an image that has not been submitted."
 msgstr "Вы не можете голосовать за изображения, которые не были номинированы."
@@ -88,9 +85,6 @@ msgstr "Вы не можете выбирать собственные изоб�
 
 msgid "Images in the staging area cannot be elected."
 msgstr "Изображения в Staging Area не могут быть выбраны."
-
-msgid "You cannot elect a judge's image."
-msgstr "Вы не можете выбирать изображения судей."
 
 msgid "You cannot elect an image that has not been voted."
 msgstr "Вы не можете выбирать изображения за которые нет голосов."
@@ -193,12 +187,21 @@ msgstr ""
 "Пожалуйста, отметьте изображения, которые вы хотите номинировать на "
 "рассмотрение в качестве ИД."
 
-msgid "No images uploaded on this day."
-msgstr "Нет изображений для этого дня."
-
 msgid "You cannot unelect an IOTD elected by another judge."
 msgstr "Вы не можете отменить выбор ИД от другого судьи."
 
 #, python-format
 msgid "All IOTD slots for the next %(days)s days are already filled."
 msgstr "Все места для ИД на следующие %(days)s дней уже заполнены."
+
+#~ msgid "You cannot submit a judge's image."
+#~ msgstr "Вы не можете номинировать изображения судей."
+
+#~ msgid "You cannot vote for a judge's image."
+#~ msgstr "Вы не можете голосовать за изображения судей."
+
+#~ msgid "You cannot elect a judge's image."
+#~ msgstr "Вы не можете выбирать изображения судей."
+
+#~ msgid "No images uploaded on this day."
+#~ msgstr "Нет изображений для этого дня."

@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2019-10-15 11:57+0000\n"
+"POT-Creation-Date: 2020-05-19 08:06+0000\n"
 "PO-Revision-Date: 2019-01-26 16:06+0000\n"
 "Last-Translator: sypai <sypai@mail.ru>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -77,21 +77,6 @@ msgstr "Новое в обсуждении вашего оборудования
 msgid "New review of a gear item you own"
 msgstr "Новый обзор на ваше оборудование"
 
-msgid "New data posted to public pool"
-msgstr "Новые данные в открытом хранилище"
-
-msgid "New image posted to public data pool"
-msgstr "Новое изображение опубликовано в открытом хранилище данных"
-
-msgid "New data posted to shared private folder"
-msgstr "Новые данные опубликованы в закрытом каталоге"
-
-msgid "New image posted to shared private folder"
-msgstr "Новое изображение опубликовано в закрытом каталоге"
-
-msgid "You are invited to a shared private folder"
-msgstr "Вы приглашены в закрытый каталог"
-
 msgid "A user you follow joined a public group"
 msgstr "Пользователь, на которого вы подписаны вступил в открытую группу"
 
@@ -119,6 +104,11 @@ msgstr "У вас новое личное сообщение"
 msgid "Your premium subscription will expire in one week"
 msgstr "Ваша премиум подписка истекает через неделю"
 
+#, fuzzy
+#| msgid "Your premium subscription will expire in one week"
+msgid "Your premium subscription has just expired"
+msgstr "Ваша премиум подписка истекает через неделю"
+
 msgid "Your subscription will be renewed in one week"
 msgstr "Ваша подписка будет обновлена в течение недели"
 
@@ -127,3 +117,18 @@ msgstr "У вас есть изображения без данных "
 
 msgid "You have images with a missing \"Remote source\""
 msgstr "У вас есть изображения без информации \"Удаленный источник\""
+
+#~ msgid "New data posted to public pool"
+#~ msgstr "Новые данные в открытом хранилище"
+
+#~ msgid "New image posted to public data pool"
+#~ msgstr "Новое изображение опубликовано в открытом хранилище данных"
+
+#~ msgid "New data posted to shared private folder"
+#~ msgstr "Новые данные опубликованы в закрытом каталоге"
+
+#~ msgid "New image posted to shared private folder"
+#~ msgstr "Новое изображение опубликовано в закрытом каталоге"
+
+#~ msgid "You are invited to a shared private folder"
+#~ msgstr "Вы приглашены в закрытый каталог"

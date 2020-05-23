@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2019-10-15 11:56+0000\n"
+"POT-Creation-Date: 2020-05-19 08:05+0000\n"
 "PO-Revision-Date: 2014-02-14 13:09+0000\n"
 "Last-Translator: ohmishonin <kasuzen@gmail.com>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -22,57 +22,87 @@ msgstr ""
 msgid "Your recurring donation has been canceled"
 msgstr "あなたの定期的な寄付はキャンセルされました"
 
+#, fuzzy
+#| msgid ""
+#| "We are very grateful for your support so far! Your contribution has "
+#| "helped AstroBin with its ever increasing hosting costs, and served an "
+#| "incentive for us to continue to improve it."
 msgid ""
-"We are very grateful for your support so far! Your contribution has helped "
+"I am very grateful for your support so far! Your contribution has helped "
 "AstroBin with its ever increasing hosting costs, and served an incentive for "
-"us to continue to improve it."
+"me to keep improving it."
 msgstr ""
 "我々はこれまでのご支援に非常に感謝しています！あなたの貢献は、ホスティングコ"
 "ストが増え続けるAstroBinを助け、我々にそれを改善し続ける刺激を与えています。"
 
-msgid "From now on, you will again see ads on this website."
-msgstr "今からは、もう一度、このWebサイトに広告が表示されます。"
-
-msgid "Whishing you clear skies and excellent seeing!"
+#, fuzzy
+#| msgid "Whishing you clear skies and excellent seeing!"
+msgid "Wishing you clear skies and excellent seeing!"
 msgstr "晴天と優れたシーイングをあなたのために！"
 
 msgid "Founder of AstroBin"
 msgstr "AstroBinの創始者"
 
+msgid "Donate"
+msgstr ""
+
+#, fuzzy
+#| msgid "Thank you for your support!"
+msgid "Thank you in advance for your support"
+msgstr "支援してくれてありがとう!"
+
+msgid ""
+"Please donate any amount you want, selecting from the options below and "
+"subscribing with\n"
+"            a recurring monthly payment. You will be able to cancel your "
+"subscription whenever you\n"
+"            want."
+msgstr ""
+
+msgid ""
+"If ended up on this page and are not sure what this is about, please read "
+"everything about it\n"
+"        <a href=\"https://welcome.astrobin.com/voluntary-donations\" target="
+"\"_blank\">here</a>."
+msgstr ""
+
+#, fuzzy
+#| msgid "Thank you!"
+msgid "Thanks!"
+msgstr "ありがとうございます!"
+
 #, fuzzy
 msgid "Edit your recurring donation settings"
 msgstr "あなたの定期的な寄付はキャンセルされました"
 
-msgid "What is AstroBin worth to you?"
-msgstr "AstroBinはあなたにとってどんな価値がありますか？"
-
 msgid "Monthly contributions"
 msgstr "毎月の寄付"
 
-#, python-format
-msgid "$%(amount)s/month"
+msgid "Bronze"
+msgstr ""
+
+#, fuzzy, python-format
+#| msgid "$%(amount)s/month"
+msgid "CHF %(amount)s / month"
 msgstr "$%(amount)s/1ヶ月"
 
-msgid "A coffee"
-msgstr "一杯のコーヒー"
+msgid "Silver"
+msgstr ""
 
-msgid "A snack"
-msgstr "一皿のつまみ"
+msgid "Gold"
+msgstr ""
 
-msgid "A pizza"
-msgstr "1枚のピザ"
+msgid "Platinum"
+msgstr ""
 
-msgid "A movie night for one"
-msgstr "一人の夜の映画"
-
-msgid "A frugal dinner out for one"
-msgstr "一人の質素な夕食"
-
-msgid "Yearly contributions (cheaper!)"
+#, fuzzy
+#| msgid "Yearly contributions (cheaper!)"
+msgid "Yearly contributions (cheaper)"
 msgstr "年間一括払い(安い!)"
 
-#, python-format
-msgid "$%(amount)s/year"
+#, fuzzy, python-format
+#| msgid "$%(amount)s/year"
+msgid "CHF %(amount)s / year"
 msgstr "$%(amount)s/1年間"
 
 msgid "IMPORTANT"
@@ -83,83 +113,34 @@ msgid ""
 "your existing subscription, not create a new one."
 msgstr ""
 
+msgid "Pay with a bank transfer"
+msgstr ""
+
+msgid ""
+"\n"
+"            Prefer to donate via bank transfer? Please make a deposit of the "
+"amount you wish to donate to the following\n"
+"            bank details. Thanks!\n"
+"        "
+msgstr ""
+
 msgid "Cancel your recurring donation"
 msgstr ""
 
 msgid ""
-"Thank you so much for your donations so far! We, and the whole AstroBin "
+"Thank you so much for your donations so far! I, and the whole AstroBin "
 "community, really appreciate your support."
 msgstr ""
 
 msgid ""
 "Are you sure you want to cancel your subscription? AstroBin is a resource "
-"hungry website, and every small donation helps us with the hosting costs."
+"hungry website, and every small donation helps with the hosting costs."
 msgstr ""
 
 msgid ""
 "If you really have made up your mind about it, use the button below to "
-"cancel your PayPal subscription. After the operation has been processed by "
-"PayPal, you will start seeing ads again."
+"cancel your PayPal subscription."
 msgstr ""
-
-msgid "Please donate!"
-msgstr ""
-
-msgid ""
-"Hosting this website is getting more and more expensive as new users sign up "
-"all the time."
-msgstr ""
-
-msgid ""
-"AstroBin stores images at full size and quality, and with no limitations, "
-"because quality is important when it comes to astrophotography. But such "
-"files can be large, and bandwidth is expensive."
-msgstr ""
-
-msgid ""
-"If you too would hate for AstroBin to cease to exist, we kindly ask you for "
-"a contribution. It would help us with the hosting bills, as they grow fatter "
-"and fatter each month, and who knows, maybe offer a little compensation for "
-"the thousands of hours that were put into the project."
-msgstr ""
-
-msgid ""
-"Please donate any amount you want, selecting from the options below and "
-"subscribing with a recurring monthly payment. You will be able to cancel "
-"your subscription whenever you want."
-msgstr ""
-
-msgid "Thank you!"
-msgstr "ありがとうございます!"
-
-msgid ""
-"Although we have tried to keep AstroBin ad free, as of right now the only "
-"way we can keep the website running is with commercial support by "
-"advertisers and your donations."
-msgstr ""
-"AstroBinを広告無しにする試みをし続けているのだが、広告による援助とあなたの寄"
-"付によってのみWebサイトを稼動しつづけることができています。"
-
-msgid ""
-"The ads you will see on AstroBin come from legitimate advertisers whose "
-"business we support, and each image and word is reviewed and approved before "
-"it's published. AstroBin will not share any personal information about you "
-"to its advertisers."
-msgstr ""
-"我々も作業をサポートし、画像やコピーをチェックし、公開される前に承認する過程"
-"を得た、正当な広告主からの広告をAstroBinに表示しています。"
-
-msgid ""
-"However, if you still feel that you would rather not see these ads, we "
-"kindly ask you for a small donation. It will keep our servers running and "
-"help with the hosting costs."
-msgstr ""
-"しかし、まだあなたが広告をみたくないと感じるのであれば、少額でいいので寄付を"
-"お願いします。それで、サーバーの稼動を続けられ、ホスティング費用を助けること"
-"ができます。"
-
-msgid "If you donate, you will not be shown ads anymore."
-msgstr "あなたが寄付をすれば、すべての広告を表示しません。"
 
 #, fuzzy
 msgid "Thank you for your donations!"
@@ -171,20 +152,72 @@ msgstr "キャンセルを望みますか？"
 msgid "Thank you for your donation!"
 msgstr "あなたの寄付に感謝します!"
 
+#, fuzzy
+#| msgid ""
+#| "We are very grateful for your support! Your contribution will help "
+#| "AstroBin with its ever increasing hosting costs, and will serve an "
+#| "incentive for us to continue to improve it."
 msgid ""
-"We are very grateful for your support! Your contribution will help AstroBin "
-"with its ever increasing hosting costs, and will serve an incentive for us "
-"to continue to improve it."
+"I am very grateful for your support! Your contribution will help AstroBin "
+"with its ever increasing hosting costs, and will serve an incentive for me "
+"to keep improving it."
 msgstr ""
 "我々はあなたの支援を非常に感謝しています！あなたの貢献は、ホスティングコスト"
 "の増加に対応しているAstroBinを助け、それを改善し続ける刺激を我々に与えます。"
 
-msgid ""
-"In a few minutes, once your PayPal transaction is processed, we will stop "
-"showing you ads on this website."
-msgstr ""
-"数分後、あなたのPayPalの処理が完了し、このWebサイト上の広告の表示がなくなりま"
-"す。"
+#~ msgid "From now on, you will again see ads on this website."
+#~ msgstr "今からは、もう一度、このWebサイトに広告が表示されます。"
 
-#~ msgid "Thank you for your support!"
-#~ msgstr "支援してくれてありがとう!"
+#~ msgid "What is AstroBin worth to you?"
+#~ msgstr "AstroBinはあなたにとってどんな価値がありますか？"
+
+#~ msgid "A coffee"
+#~ msgstr "一杯のコーヒー"
+
+#~ msgid "A snack"
+#~ msgstr "一皿のつまみ"
+
+#~ msgid "A pizza"
+#~ msgstr "1枚のピザ"
+
+#~ msgid "A movie night for one"
+#~ msgstr "一人の夜の映画"
+
+#~ msgid "A frugal dinner out for one"
+#~ msgstr "一人の質素な夕食"
+
+#~ msgid ""
+#~ "Although we have tried to keep AstroBin ad free, as of right now the only "
+#~ "way we can keep the website running is with commercial support by "
+#~ "advertisers and your donations."
+#~ msgstr ""
+#~ "AstroBinを広告無しにする試みをし続けているのだが、広告による援助とあなたの"
+#~ "寄付によってのみWebサイトを稼動しつづけることができています。"
+
+#~ msgid ""
+#~ "The ads you will see on AstroBin come from legitimate advertisers whose "
+#~ "business we support, and each image and word is reviewed and approved "
+#~ "before it's published. AstroBin will not share any personal information "
+#~ "about you to its advertisers."
+#~ msgstr ""
+#~ "我々も作業をサポートし、画像やコピーをチェックし、公開される前に承認する過"
+#~ "程を得た、正当な広告主からの広告をAstroBinに表示しています。"
+
+#~ msgid ""
+#~ "However, if you still feel that you would rather not see these ads, we "
+#~ "kindly ask you for a small donation. It will keep our servers running and "
+#~ "help with the hosting costs."
+#~ msgstr ""
+#~ "しかし、まだあなたが広告をみたくないと感じるのであれば、少額でいいので寄付"
+#~ "をお願いします。それで、サーバーの稼動を続けられ、ホスティング費用を助ける"
+#~ "ことができます。"
+
+#~ msgid "If you donate, you will not be shown ads anymore."
+#~ msgstr "あなたが寄付をすれば、すべての広告を表示しません。"
+
+#~ msgid ""
+#~ "In a few minutes, once your PayPal transaction is processed, we will stop "
+#~ "showing you ads on this website."
+#~ msgstr ""
+#~ "数分後、あなたのPayPalの処理が完了し、このWebサイト上の広告の表示がなくな"
+#~ "ります。"

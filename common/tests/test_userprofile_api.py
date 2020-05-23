@@ -1,10 +1,8 @@
-# Django
+import simplejson as json
+
 from django.contrib.auth.models import User
 from django.core.urlresolvers import reverse_lazy
 from django.test import TestCase
-
-# Third party
-import simplejson as json
 
 
 class CommonTest(TestCase):

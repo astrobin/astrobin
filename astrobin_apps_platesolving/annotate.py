@@ -180,6 +180,7 @@ class Annotator:
             image_io = StringIO()
             image = Image.alpha_composite(base, overlay)
             image = image.resize((thumbnail_w, thumbnail_h), Image.ANTIALIAS)
+            image = image.convert('RGB')
             image.save(image_io, 'JPEG', quality=90)
 
             return ContentFile(image_io.getvalue())

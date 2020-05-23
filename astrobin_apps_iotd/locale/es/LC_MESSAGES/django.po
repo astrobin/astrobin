@@ -3,185 +3,193 @@
 # This file is distributed under the same license as the PACKAGE package.
 # FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
 #
-#, fuzzy
 msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2019-10-15 11:57+0000\n"
-"PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
-"Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
+"POT-Creation-Date: 2020-05-19 08:07+0000\n"
+"PO-Revision-Date: 2020-05-15 20:18+0000\n"
+"Last-Translator: DanielaDGR <danieladgr.5r@gmail.com>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
-"Language: \n"
+"Language: es\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=(n != 1);\n"
+"X-Generator: Pootle 2.8\n"
+"X-POOTLE-MTIME: 1589573930.000000\n"
 
 msgid "You are not a member of the IOTD Submitters board."
-msgstr ""
+msgstr "Usted no es miembro de la junta de remitentes del IOTD."
 
 msgid "You cannot submit your own image."
-msgstr ""
+msgstr "No puede enviar su propia imagen."
 
 msgid "Images in the staging area cannot be submitted."
-msgstr ""
+msgstr "Las imágenes en la zona de prueba no pueden enviarse."
 
 msgid "This user has chosen to be excluded from competitions."
-msgstr ""
-
-msgid "You cannot submit a judge's image."
-msgstr ""
+msgstr "Este usuario ha optado por ser excluido de los concursos."
 
 #, python-format
 msgid ""
 "You cannot submit an image that was published more than %(max_days)s days "
 "ago."
 msgstr ""
+"No puede enviar una imagen que se publicó hace más de %(max_days)s días "
+"atrás."
+
+msgid "Users with a Free membership cannot participate in the IOTD."
+msgstr ""
+"Los usuarios con una membresía gratuita no pueden participar en el IOTD."
 
 msgid "This image has already been an IOTD in the past"
-msgstr ""
+msgstr "Esta imagen ya ha sido un IOTD en el pasado"
 
 #, python-format
 msgid "You have already submitted %(max_allowed)s images today."
-msgstr ""
+msgstr "Ya ha enviado %(max_allowed)s imágenes hoy."
 
 msgid "You are not a member of the IOTD Reviewers board."
-msgstr ""
+msgstr "Usted no es miembro de la junta de Revisores del IOTD."
 
 msgid "You cannot vote for your own image."
-msgstr ""
+msgstr "No puede votar por su propia imagen."
 
 msgid "Images in the staging area cannot be voted for."
-msgstr ""
-
-msgid "You cannot vote for a judge's image."
-msgstr ""
+msgstr "Las imágenes que están en el área de ensayo no pueden recibir votos."
 
 msgid "You cannot vote for an image that has not been submitted."
-msgstr ""
+msgstr "No puede votar por una imagen que no se ha enviado."
 
 msgid "You cannot vote for your own submission."
-msgstr ""
+msgstr "No puede votar por su propia publicación."
 
 #, python-format
 msgid ""
 "You cannot vote for an image that has been in the submission queue for more "
 "than %(max_days)s days."
 msgstr ""
+"No puede votar por una imagen que ha estado en la cola de envío durante más "
+"de %(max_days)s días."
 
 #, python-format
 msgid "You have already voted for %(max_allowed)s images today."
-msgstr ""
+msgstr "Ya has votado por las %(max_allowed)s imágenes de hoy."
 
 msgid "You are not a member of the IOTD Judges board."
-msgstr ""
+msgstr "Usted no es miembro de la Junta de Jueces de IOTD."
 
 msgid "You cannot elect your own image."
-msgstr ""
+msgstr "No puedes elegir tu propia imagen."
 
 msgid "Images in the staging area cannot be elected."
-msgstr ""
-
-msgid "You cannot elect a judge's image."
-msgstr ""
+msgstr "Imágenes en el área de prueba no pueden ser elegidas."
 
 msgid "You cannot elect an image that has not been voted."
-msgstr ""
+msgstr "No se puede elegir una imagen que no haya sido votada."
 
 msgid "You cannot elect your own submission."
-msgstr ""
+msgstr "No puede elegir su propia publicación."
 
 msgid "You cannot elect an image you voted for."
-msgstr ""
+msgstr "No puede elegir una imagen por la que votó."
 
 #, python-format
 msgid ""
 "You cannot elect an image that has been in the review queue for more than "
 "%(max_days)s days."
 msgstr ""
+"No puede elegir una imagen que haya estado en la cola de revisión durante "
+"más de %(max_days)s días."
 
 #, python-format
 msgid "You have already elected %(max_allowed)s images today."
-msgstr ""
+msgstr "Ya has elegido las %(max_allowed)s imágenes de hoy."
 
 #, python-format
 msgid "You have already scheduled %(max_allowed)s IOTDs."
-msgstr ""
+msgstr "Ya ha programado%(max_allowed)s IOTD."
 
 msgid "You cannot unelect your own submission."
-msgstr ""
+msgstr "No puede anular su propio envío."
 
 msgid "You cannot unelect an image you voted for."
-msgstr ""
+msgstr "No puede anular la elección de la imagen por la que votó."
 
 msgid "You cannot unelect an image elected by another judge."
-msgstr ""
+msgstr "No se puede anular el elección de una imagen elegida por otro juez."
 
 msgid "You cannot unelect a past or current IOTD."
-msgstr ""
+msgstr "No puede anular un IOTD pasado o actual."
 
 msgid "Submit for IOTD"
-msgstr ""
+msgstr "Enviar para IOTD"
 
 msgid ""
 "You will submit this image to the IOTD Submissions Queue. From there, a "
 "member of the IOTD Reviewers Board will consider promoting it for final "
 "evaluation from an IOTD Judge"
 msgstr ""
+"Enviará esta imagen a la cola de envíos IOTD. A partir de ahí, un miembro de "
+"la Junta de Revisores de IOTD considerará promoverlo para la evaluación "
+"final de un Juez IOTD"
 
 msgid "Submit"
-msgstr ""
+msgstr "Enviar"
 
 msgid "Image of the day"
-msgstr ""
+msgstr "Imagen del día"
 
 msgid "by"
-msgstr ""
+msgstr "por"
 
 msgid "IOTD Judgement Queue"
-msgstr ""
+msgstr "Cola de evaluación IOTD"
 
 msgid ""
 "Please select the images that you want to elect to IOTD by clicking on them."
 msgstr ""
+"Por favor seleccione las imágenes que usted desea elegir para IOTD haciendo "
+"clic sobre estas."
 
 msgid "This queue is currently empty."
-msgstr ""
+msgstr "Esta cola está vacía actualmente."
 
 msgid "Reviewers"
-msgstr ""
+msgstr "Revisores"
 
 msgid "Loading"
-msgstr ""
+msgstr "Cargando"
 
 msgid "Error"
-msgstr ""
+msgstr "Error"
 
 msgid "IOTD Review Queue"
-msgstr ""
+msgstr "Cola de Revisión IOTD"
 
 msgid ""
 "Please select the images that you want to promote for final judgement by "
 "clicking on them."
 msgstr ""
+"Por favor seleccione las imágenes que usted desea promover para una "
+"evaluación final haciendo clic sobre estas."
 
 msgid "Submitters"
-msgstr ""
+msgstr "Remitentes"
 
 msgid "IOTD Submission Queue"
-msgstr ""
+msgstr "Cola de envío IOTD"
 
 msgid ""
 "Please select the images that you want to propose for IOTD consideration."
 msgstr ""
-
-msgid "No images uploaded on this day."
-msgstr ""
+"Por favor, seleccione las imágenes que usted desea proponer para "
+"consideración del IOTD."
 
 msgid "You cannot unelect an IOTD elected by another judge."
-msgstr ""
+msgstr "No puede anular un IOTD elegido por otro juez."
 
 #, python-format
 msgid "All IOTD slots for the next %(days)s days are already filled."
-msgstr ""
+msgstr "Todos los puestos IOTD para los próximos %(days)s días están llenos."

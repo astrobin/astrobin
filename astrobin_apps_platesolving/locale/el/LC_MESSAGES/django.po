@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2019-10-15 11:55+0000\n"
+"POT-Creation-Date: 2020-05-19 08:04+0000\n"
 "PO-Revision-Date: 2014-01-06 13:19+0000\n"
 "Last-Translator: kookoo_gr <kookoo_gr@yahoo.com>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -71,14 +71,117 @@ msgid ""
 "given center RA and dec position."
 msgstr ""
 
+msgid "Small"
+msgstr ""
+
+msgid "Medium"
+msgstr ""
+
+msgid "Large"
+msgstr ""
+
+msgid "Sample raw frame (max 200 MB)"
+msgstr ""
+
+msgid ""
+"To improve the accuracy of your plate-solution even further, please upload "
+"one of the XISF or FITS files from your data set. Such files normally have "
+"date and time headers that will allow AstroBin to calculate solar system "
+"body ephemerides and find planets and asteroids in your image (provided you "
+"also add location information to it).<br/><br/>For maximum accuracy, it's "
+"recommended that you use PixInsight's native and open format XISF. Learn "
+"more about XISF here:<br/><br/><a href=\"https://pixinsight.com/xisf/\" "
+"target=\"_blank\">https://pixinsight.com/xisf/</a><br/><br/> <strong>Please "
+"note:</strong> it's very important that the XISF or FITS file you upload is "
+"aligned to your processed image, otherwise the object annotations will not "
+"match. To improve your chances at a successful accurate plate-solution, "
+"calibrate your file the usual way (dark/bias/flats) but do not stretch it."
+msgstr ""
+
+msgid "Scaled font size"
+msgstr ""
+
+msgid "Font size of the annotations on your main image page"
+msgstr ""
+
+msgid "Show equatorial grid"
+msgstr ""
+
+msgid "Show constellation borders"
+msgstr ""
+
+msgid "Show constellation lines"
+msgstr ""
+
+msgid "Show named stars"
+msgstr ""
+
+msgid "Show Messier objects"
+msgstr ""
+
+msgid "Show NGC and IC objects"
+msgstr ""
+
+msgid "Show VdB objects"
+msgstr ""
+
+msgid "Show Sharpless objects"
+msgstr ""
+
+msgid "Show Barnard objects"
+msgstr ""
+
+msgid "Show PGC objects"
+msgstr ""
+
+msgid "Show planets"
+msgstr ""
+
+msgid ""
+"Only available if your image at least an acquisition time and an accurate "
+"location"
+msgstr ""
+
+msgid "Show asteroids"
+msgstr ""
+
+msgid "Show GCVS stars"
+msgstr ""
+
+msgid "General Catalog of Variable Stars"
+msgstr ""
+
+msgid "Show Tycho-2 catalog"
+msgstr ""
+
+msgid "Show CGPN objects"
+msgstr ""
+
 msgid "Getting plate-solving status, please wait..."
 msgstr "Γίνεται λήψη δεδομένων ανάλυσης, παρακαλώ περιμένετε..."
 
-msgid "Plate-solving process starting, please do not leave this page..."
+#, fuzzy
+#| msgid "Plate-solving process starting, please do not leave this page..."
+msgid "Plate-solving starting, please do not leave this page..."
 msgstr ""
 "Έναρξη διαδικασίας ανάλυσης, παρακαλώ μην φύγετε από αυτή την σελίδα..."
 
-msgid "Plate-solving started in the background. You may leave this page."
+#, fuzzy
+#| msgid "Plate-solving process starting, please do not leave this page..."
+msgid "Advanced plate-solving starting, please do not leave this page..."
+msgstr ""
+"Έναρξη διαδικασίας ανάλυσης, παρακαλώ μην φύγετε από αυτή την σελίδα..."
+
+#, fuzzy
+#| msgid "Plate-solving started in the background. You may leave this page."
+msgid "Plate-solving started. You may leave this page."
+msgstr ""
+"Έναρξη διαδικασίας ανάλυσης στο υπόβαθρο. Μπορείτε να φύγετε από αυτή την "
+"σελίδα."
+
+#, fuzzy
+#| msgid "Plate-solving started in the background. You may leave this page."
+msgid "Advanced plate-solving started. You may leave this page."
 msgstr ""
 "Έναρξη διαδικασίας ανάλυσης στο υπόβαθρο. Μπορείτε να φύγετε από αυτή την "
 "σελίδα."
@@ -90,9 +193,23 @@ msgstr ""
 msgid "This image could not be plate-solved."
 msgstr "Η εικόνα δεν μπορούσε να αναλυθεί."
 
-msgid ""
-"This image has been successfully plate-solved. Please refresh the page to "
-"see the new data."
+msgid "The advanced plate-solving failed."
+msgstr ""
+
+#, fuzzy
+#| msgid ""
+#| "This image has been successfully plate-solved. Please refresh the page to "
+#| "see the new data."
+msgid "This image has been plate-solved. Refresh the page to see new data!"
+msgstr ""
+"Η εικόνα αναλύθηκε με επιτυχία. Μπορείτε να ανανεώσετε την σελίδα για να "
+"δείτε τα νέα δεδομένα."
+
+#, fuzzy
+#| msgid ""
+#| "This image has been successfully plate-solved. Please refresh the page to "
+#| "see the new data."
+msgid "The advanced plate-solved finished. Refresh the page to see new data!"
 msgstr ""
 "Η εικόνα αναλύθηκε με επιτυχία. Μπορείτε να ανανεώσετε την σελίδα για να "
 "δείτε τα νέα δεδομένα."

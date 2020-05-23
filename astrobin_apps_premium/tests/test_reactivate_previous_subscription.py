@@ -150,6 +150,31 @@ class TestReactivatePreviousSubscription(TestCase):
         self.assertFalse(is_ultimate_2020(user))
         self.assertTrue(is_premium(user))
 
+    def test_with_compensation_1_mo_and_premium_autorenew(self):
+        user = User.objects.create_user(username="test", password="test")
+        premium = Generators.premium_subscription(user, "AstroBin Premium (autorenew)")
+        ultimate = Generators.premium_subscription(user, "AstroBin Ultimate 2020+")
+
+        premium.expires = date.today() + timedelta(days=30)
+        premium.unsubscribe()
+        premium.save()
+
+        ultimate.expires = date.today()
+        ultimate.save()
+
+        self.assertTrue(is_ultimate_2020(user))
+        self.assertFalse(is_premium(user))
+
+        DataLossCompensationRequest.objects.create(
+            user=user,
+            requested_compensation="1_MO_ULTIMATE"
+        )
+
+        reactivate_previous_subscription_when_ultimate_compensation_expires.apply()
+
+        self.assertFalse(is_ultimate_2020(user))
+        self.assertTrue(is_premium(user))
+
     def test_with_compensation_1_mo_and_premium_non_autorenew(self):
         user = User.objects.create_user(username="test", password="test")
         premium = Generators.premium_subscription(user, "AstroBin Premium")

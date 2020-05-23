@@ -7,81 +7,189 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2019-10-15 11:55+0000\n"
-"PO-Revision-Date: 2013-11-01 22:38+0100\n"
-"Last-Translator: Bufot <bufote@hotmail.com>\n"
+"POT-Creation-Date: 2020-05-19 08:04+0000\n"
+"PO-Revision-Date: 2020-05-15 21:11+0000\n"
+"Last-Translator: DanielaDGR <danieladgr.5r@gmail.com>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
 "Language: es\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=(n != 1);\n"
-"X-Generator: Pootle 2.1.6\n"
+"X-Generator: Pootle 2.8\n"
+"X-POOTLE-MTIME: 1589577090.000000\n"
 
 msgid "Perform a blind solve"
-msgstr ""
+msgstr "Llevar a cabo un plate solving ciego"
 
 msgid ""
 "Attempt to solve with no hints. In most cases this will work, but it will "
 "take longer."
 msgstr ""
+"Intenta resolver sin pistas. En la mayoría de los casos esto funcionará, "
+"pero tomará más tiempo."
 
 msgid "Width of the field in degrees"
-msgstr ""
+msgstr "Anchura del campo en grados"
 
 msgid "Width of the field in arcminutes"
-msgstr ""
+msgstr "Ancho del campo en minutos de arco "
 
 msgid "Resolution of the field in arcseconds/pixel"
-msgstr ""
+msgstr "Resolución del campo en segundos de arco/pixel"
 
 msgid "Field size units"
-msgstr ""
+msgstr "Unidades de tamaño de campo "
 
 msgid "Min field size"
-msgstr ""
+msgstr "Tamaño mínimo del campo"
 
 msgid "Estimate the lower bound for the width of this field."
-msgstr ""
+msgstr "Estima el límite inferior para el ancho de este campo."
 
 msgid "Max field size"
-msgstr ""
+msgstr "Tamaño máximo de campo"
 
 msgid "Estimate the upper bound for the width of this field."
-msgstr ""
+msgstr "Estima el límite superior del ancho del campo."
 
 msgid "Center RA"
-msgstr ""
+msgstr "Centrar AR"
 
 msgid "Center RA of the field in degrees, 0.000 to 360.000"
-msgstr ""
+msgstr "Centrar AR del campo en grados, 0.000 a 360.000"
 
 msgid "Center dec"
-msgstr ""
+msgstr "Centrar Dec"
 
 msgid "Center dec of the field in degrees, -90.000 to +90.000"
-msgstr ""
+msgstr "Centrar dec del campo en grados, -90.000 a +90.000"
 
 msgid "Radius"
-msgstr ""
+msgstr "Radio"
 
 msgid ""
 "Tells the plate-solving engine to look within these many degrees of the "
 "given center RA and dec position."
 msgstr ""
+"Le dice al motor de plate-solving que mire dentro de estos muchos grados de "
+"la posición de AR y dec central dada."
+
+msgid "Small"
+msgstr "Pequeño"
+
+msgid "Medium"
+msgstr "Mediano"
+
+msgid "Large"
+msgstr "Grande"
+
+msgid "Sample raw frame (max 200 MB)"
+msgstr "Marco sin procesar de muestra (máx. 200 MB)"
+
+msgid ""
+"To improve the accuracy of your plate-solution even further, please upload "
+"one of the XISF or FITS files from your data set. Such files normally have "
+"date and time headers that will allow AstroBin to calculate solar system "
+"body ephemerides and find planets and asteroids in your image (provided you "
+"also add location information to it).<br/><br/>For maximum accuracy, it's "
+"recommended that you use PixInsight's native and open format XISF. Learn "
+"more about XISF here:<br/><br/><a href=\"https://pixinsight.com/xisf/\" "
+"target=\"_blank\">https://pixinsight.com/xisf/</a><br/><br/> <strong>Please "
+"note:</strong> it's very important that the XISF or FITS file you upload is "
+"aligned to your processed image, otherwise the object annotations will not "
+"match. To improve your chances at a successful accurate plate-solution, "
+"calibrate your file the usual way (dark/bias/flats) but do not stretch it."
+msgstr ""
+"Para mejorar aún más la precisión de su plate-solving, cargue uno de los "
+"archivos XISF o FITS de su conjunto de datos. Estos archivos normalmente "
+"tienen encabezados de fecha y hora que permitirán a AstroBin calcular "
+"cuerpos de efemérides del sistema solar y encontrar planetas y asteroides en "
+"su imagen (siempre que también agregue información de ubicación a ella)..<br/"
+"><br/>Para obtener la máxima precisión, se recomienda utilizar el formato "
+"nativo y abierto XISF de PixInsight. Obtenga más información sobre XISF aquí:"
+"<br/><br/><a href=\"https://pixinsight.com/xisf/\" target=\"_blank\">https://"
+"pixinsight.com/xisf/</a><br/><br/> <strong>Tenga en cuenta:</strong> es muy "
+"importante que el archivo XISF o FITS que cargue esté alineado con la imagen "
+"procesada, de lo contrario las anotaciones de objeto no coincidirán. Para "
+"mejorar sus posibilidades de plate-solving preciso y exitoso, calibre su "
+"archivo de la manera habitual (dark/bias/flats) pero no lo estire."
+
+msgid "Scaled font size"
+msgstr "Tamaño de letra escalado"
+
+msgid "Font size of the annotations on your main image page"
+msgstr "Tamaño de fuente de las anotaciones en su página principal de imágenes"
+
+msgid "Show equatorial grid"
+msgstr "Mostrar cuadrícula ecuatorial"
+
+msgid "Show constellation borders"
+msgstr "Mostrar los bordes de las constelaciones"
+
+msgid "Show constellation lines"
+msgstr "Mostrar las líneas de las constelaciones"
+
+msgid "Show named stars"
+msgstr "Mostrar estrellas nombradas "
+
+msgid "Show Messier objects"
+msgstr "Mostrar objetos Messier"
+
+msgid "Show NGC and IC objects"
+msgstr "Mostrar objetos NGC e IC "
+
+msgid "Show VdB objects"
+msgstr "Mostrar objetos VdB"
+
+msgid "Show Sharpless objects"
+msgstr "Mostrar objetos sin refinar"
+
+msgid "Show Barnard objects"
+msgstr "Mostrar objetos Barnard"
+
+msgid "Show PGC objects"
+msgstr "Mostrar objetos PGC"
+
+msgid "Show planets"
+msgstr "Mostrar planetas"
+
+msgid ""
+"Only available if your image at least an acquisition time and an accurate "
+"location"
+msgstr ""
+"Solo está disponible si su imagen al menos un tiempo de adquisición y una "
+"ubicación precisa"
+
+msgid "Show asteroids"
+msgstr "Mostrar asteroides"
+
+msgid "Show GCVS stars"
+msgstr "Mostrar estrellas GCVS "
+
+msgid "General Catalog of Variable Stars"
+msgstr "Catálogo General de Estrellas Variables"
+
+msgid "Show Tycho-2 catalog"
+msgstr "Mostrar catálogo Tycho-2"
+
+msgid "Show CGPN objects"
+msgstr "Mostrar objetos CGPN"
 
 msgid "Getting plate-solving status, please wait..."
 msgstr "Obteniendo el estado de la resolución de campo, por favor espere..."
 
-msgid "Plate-solving process starting, please do not leave this page..."
-msgstr ""
-"Iniciando el proceso para resolver el campo, por favor no abandone la "
-"página... "
+msgid "Plate-solving starting, please do not leave this page..."
+msgstr "Iniciando plate-solving, por favor no salga de esta página.."
 
-msgid "Plate-solving started in the background. You may leave this page."
-msgstr ""
-"La resolución de campo se ha iniciado en segundo plano. Puede abandonar la "
-"página."
+msgid "Advanced plate-solving starting, please do not leave this page..."
+msgstr "Iniciando plate-solving avanzado, por favor no abandone la página... "
+
+msgid "Plate-solving started. You may leave this page."
+msgstr "Se dio inicio al plate-solving. Puede abandonar la página."
+
+msgid "Advanced plate-solving started. You may leave this page."
+msgstr "Se dio inicio al plate-solving avanzado. Puede abandonar la página."
 
 msgid "Plate-solving almost ready, please do not leave this page..."
 msgstr ""
@@ -90,9 +198,15 @@ msgstr ""
 msgid "This image could not be plate-solved."
 msgstr "No se puede resolver el campo de ésta imagen."
 
-msgid ""
-"This image has been successfully plate-solved. Please refresh the page to "
-"see the new data."
+msgid "The advanced plate-solving failed."
+msgstr "El plate-solving avanzado falló."
+
+msgid "This image has been plate-solved. Refresh the page to see new data!"
 msgstr ""
-"Se ha resuelto el campo de esta imagen. Por favor recargue la página para "
-"ver los nuevos datos."
+"Esta imagen ha sido tratada por plate-solving. ¡Recargue la página para ver "
+"los nuevos datos!"
+
+msgid "The advanced plate-solved finished. Refresh the page to see new data!"
+msgstr ""
+"Esta imagen ha sido tratada por plate-solving avanzado. ¡Recargue la página "
+"para ver los nuevos datos!"

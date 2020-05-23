@@ -62,7 +62,8 @@ from astrobin_apps_platesolving.forms import PlateSolvingSettingsForm, PlateSolv
 from astrobin_apps_platesolving.models import PlateSolvingSettings, Solution, PlateSolvingAdvancedSettings
 from astrobin_apps_premium.templatetags.astrobin_apps_premium_tags import can_restore_from_trash, \
     can_perform_advanced_platesolving
-from astrobin_apps_premium.utils import premium_get_max_allowed_image_size, premium_get_max_allowed_revisions
+from astrobin_apps_premium.utils import premium_get_max_allowed_image_size, premium_get_max_allowed_revisions, \
+    premium_user_has_valid_subscription
 from astrobin_apps_users.services import UserService
 from toggleproperties.models import ToggleProperty
 
@@ -479,13 +480,15 @@ def image_upload(request):
 
     tmpl_premium_used_percent = premium_used_percent(request.user)
     tmpl_premium_progress_class = premium_progress_class(tmpl_premium_used_percent)
-    tmpl_premium_has_inact_sub = premium_user_has_subscription(request.user) and premium_user_has_invalid_subscription(
-        request.user)
+    tmpl_premium_has_inactive_subscription = \
+        premium_user_has_subscription(request.user) and \
+        premium_user_has_invalid_subscription(request.user) and \
+        not premium_user_has_valid_subscription(request.user)
 
     response_dict = {
         'premium_used_percent': tmpl_premium_used_percent,
         'premium_progress_class': tmpl_premium_progress_class,
-        'premium_has_inact_sub': tmpl_premium_has_inact_sub,
+        'premium_has_inactive_subscription': tmpl_premium_has_inactive_subscription,
     }
 
     if tmpl_premium_used_percent < 100:
@@ -2223,7 +2226,6 @@ def location_edit(request, id):
 
 
 @require_GET
-@login_required
 @never_cache
 def set_language(request, lang):
     from django.utils.translation import check_for_language, activate

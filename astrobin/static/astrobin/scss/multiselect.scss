@@ -1,0 +1,128 @@
+.multiselect * {
+  box-sizing: initial;
+  cursor: pointer;
+}
+
+.multiselect, .multiselect__tags, .multiselect__single {
+  min-height: 25px !important;
+}
+
+.multiselect--grouped .multiselect__option--disabled {
+  font-weight: bold;
+  color: white !important;
+}
+
+.multiselect--grouped .multiselect__option:not(.multiselect__option--disabled) > span {
+  padding-left: 25px;
+}
+
+.multiselect__select {
+  width: auto;
+  height: auto;
+  min-height: unset;
+  max-height: unset;
+
+  &:before {
+    top: 14px;
+    right: 0;
+  }
+}
+
+.multiselect--active {
+  z-index: 1;
+}
+
+.multiselect__content {
+  margin: 0;
+}
+
+.multiselect--above .multiselect__content-wrapper,
+.multiselect__content-wrapper {
+  width: auto;
+  background: #404040;
+  border-color: #282828;
+  color: #f0f0f0;
+  position: absolute;
+  z-index: 1;
+  overflow: auto;
+}
+
+.multiselect__placeholder {
+  margin-bottom: 0;
+}
+
+.multiselect__tags {
+  padding-top: 0;
+  border-color: #282828;
+  background: #404040;
+  color: #f0f0f0;
+}
+
+.multiselect__tags-wrap {
+  padding: 2px;
+}
+
+.multiselect__tag {
+  margin-top: 2px;
+  margin-bottom: 0;
+  font-size: 13px;
+  background-color: $link-color;
+  margin-right: 6px;
+  border-radius: 4px;
+  display: inline-block;
+}
+
+.multiselect__tag-icon::after {
+  color: $text-color;
+}
+
+.multiselect__tag-icon:focus,
+.multiselect__tag-icon:hover {
+  color: $strong-text-color;
+  background-color: $link-color;
+}
+
+.multiselect__single {
+  font-size: 13px;
+  margin-top: 2px;
+  margin-bottom: 0;
+  padding: 0;
+  background: none;
+  min-height: unset;
+  max-height: unset;
+}
+
+.multiselect__option,
+.multiselect__element {
+  font-size: 13px;
+  line-height: initial;
+  height: unset;
+  min-height: unset;
+  padding: 0;
+}
+
+.multiselect__option > span {
+  padding: 12px;
+  white-space: nowrap;
+  display: block;
+}
+
+.multiselect__option > span:empty {
+  padding: 0;
+}
+
+.multiselect__option--disabled {
+  background: none !important;
+}
+
+.multiselect__option--highlight,
+.multiselect__option--selected,
+.multiselect__option--highlight.multiselect__option--selected {
+  background-color: $link-color;
+  color: $strong-text-color;
+  font-weight: normal;
+}
+
+.multiselect__option--highlight {
+  background-color: lighten($link-color, 5%);
+}

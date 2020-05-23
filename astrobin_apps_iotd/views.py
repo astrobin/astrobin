@@ -1,4 +1,5 @@
-from datetime import timedelta, datetime, date
+import logging
+from datetime import timedelta, datetime
 
 from braces.views import (
     GroupRequiredMixin,
@@ -25,6 +26,8 @@ from astrobin_apps_iotd.templatetags.astrobin_apps_iotd_tags import (
     iotd_elections_today)
 from astrobin_apps_premium.templatetags.astrobin_apps_premium_tags import is_free
 
+log = logging.getLogger('apps')
+
 
 class IotdBaseQueueView(View):
     def get_context_data(self, **kwargs):
@@ -42,7 +45,6 @@ class IotdSubmissionQueueView(
     template_name = 'astrobin_apps_iotd/iotd_submission_queue.html'
 
     def get_queryset(self):
-
         def can_add(image):
             # type: (Image) -> bool
 
@@ -78,10 +80,12 @@ class IotdToggleSubmissionAjaxView(
                     image=image)
                 if not created:
                     submission.delete()
+                    log.debug("User %s deleted IOTD submission for image %s" % (request.user.username, image.get_id()))
                     return self.render_json_response({
                         'used_today': iotd_submissions_today(request.user),
                     })
                 else:
+                    log.debug("User %s added IOTD submission for image %s" % (request.user.username, image.get_id()))
                     return self.render_json_response({
                         'submission': submission.pk,
                         'used_today': iotd_submissions_today(request.user),
@@ -126,10 +130,12 @@ class IotdToggleVoteAjaxView(
                     image=image)
                 if not created:
                     vote.delete()
+                    log.debug("User %s deleted IOTD vote for image %s" % (request.user.username, image.get_id()))
                     return self.render_json_response({
                         'used_today': iotd_votes_today(request.user),
                     })
                 else:
+                    log.debug("User %s added IOTD vote for image %s" % (request.user.username, image.get_id()))
                     return self.render_json_response({
                         'vote': vote.pk,
                         'used_today': iotd_votes_today(request.user),
@@ -190,6 +196,7 @@ class IotdToggleJudgementAjaxView(
                     }
                 else:
                     iotd.delete()
+                    log.debug("User %s deleted IOTD for image %s" % (request.user.username, image.get_id()))
                     ret = {
                         'used_today': iotd_elections_today(request.user),
                     }
@@ -205,6 +212,7 @@ class IotdToggleJudgementAjaxView(
                                 judge=request.user,
                                 image=image,
                                 date=date)
+                            log.debug("User %s added IOTD for image %s" % ( request.user.username, image.get_id()))
                             ret = {
                                 'iotd': iotd.pk,
                                 'date': formats.date_format(iotd.date, "SHORT_DATE_FORMAT"),
@@ -234,6 +242,7 @@ class IotdArchiveView(ListView):
 
     def get_queryset(self):
         return IotdService().get_iotds()
+
 
 class IotdSubmittersForImageAjaxView(
     LoginRequiredMixin, GroupRequiredMixin, View):

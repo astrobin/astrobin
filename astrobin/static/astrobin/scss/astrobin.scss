@@ -3,9 +3,11 @@
 @import "mixins";
 
 @import "modal";
+@import "multiselect";
 @import "nav";
 @import "progress";
 
+@import "forum";
 @import "search";
 
 strong, .strong {
@@ -663,15 +665,13 @@ body.full {
 
 .cookielaw-banner {
   position: fixed;
-  top: 0;
+  padding: 40px 0;
+  bottom: 0;
   left: 0;
   right: 0;
-  width: calc(100% - 40px);
-  z-index: 1040;
-
-  background: #111 url('../images/darker-panel-tile.png');
+  z-index: 1021;
+  background: #111 url(../images/darker-panel-tile.png);
   color: #a0a0a0;
-  padding: 30px 20px;
 
   h6 {
     color: $strong-text-color;
@@ -1752,6 +1752,7 @@ BODY:first-of-type ul.as-list, x:-moz-any-link, x:default { /* Target FF 3.5+ */
 
 .main-image {
   max-width: 620px;
+  overflow: hidden;
 
   .main-image-inner {
     z-index: 1;
@@ -1764,8 +1765,11 @@ BODY:first-of-type ul.as-list, x:-moz-any-link, x:default { /* Target FF 3.5+ */
       top: 0;
       left: 0;
       z-index: 1;
-      width: 620px;
     }
+  }
+
+  &.has-advanced-solution img {
+    width: 620px;
   }
 }
 
@@ -4543,280 +4547,6 @@ img.flickr-photo-to-import-selected {
   }
 }
 
-/* --- Topic/Forum table --- */
-table.forums, table.topic-list {
-  td {
-    @media screen and (min-width: 980px) {
-      white-space: nowrap;
-      text-overflow: clip;
-      overflow: hidden;
-    }
-  }
-
-  td, th {
-    &.forum-topic-count, &.forum-post-count, &.topic-post-count, &.topic-view-count {
-      width: 10%;
-    }
-
-    &.forum-last-post, &.topic-last-post, &.topic-author {
-      width: 15%;
-    }
-  }
-
-  .topic-name {
-    text-align: left !important;
-  }
-
-  .topic-forum {
-    width: 20%;
-    padding-right: 20px;
-  }
-
-  .on-moderation a {
-    color: white;
-  }
-}
-
-th.forum-name {
-  font-size: 18px;
-}
-
-.forum-description {
-  margin: 5px;
-  font-size: $base-font-size - 2;
-}
-
-.forum-row, .topic-row {
-  width: 100%;
-}
-
-.forum-topic-count, .forum-post-count, .topic-post-count, .topic-view-count {
-  text-align: center !important;
-}
-
-.forum-last-post, .topic-last-post {
-  text-align: right !important;
-}
-
-.first-unread-post-link {
-  color: lighten($link-color, 40%);
-  text-decoration: none;
-  font-weight: bold;
-  padding-right: 4px;
-}
-
-.first-unread-post-link {
-  color: lighten($link-color, 10%);
-}
-
-.posts {
-}
-
-.post {
-  margin: 0 0 12px 0;
-}
-
-.post-header {
-  th {
-    position: relative;
-    padding: 0 20px !important;
-    height: 60px;
-    vertical-align: middle !important;
-  }
-
-  img {
-    position: absolute;
-    top: 0;
-    right: 0;
-  }
-
-  .post-author {
-    font-size: 16px;
-    line-height: 18px;
-  }
-
-  .post-updated {
-    color: #999;
-    font-size: 11px;
-    font-weight: normal;
-  }
-}
-
-.post tbody tr:hover td {
-  background-color: inherit !important; // Cancel bootstrap's on-hover highlight
-}
-
-.post-info {
-  width: 220px;
-
-  .post-author {
-    font-size: $base-font-size + 1;
-    padding: 5px 0;
-  }
-
-  .post-extra-info {
-    font-size: $base-font-size - 2;
-    color: #777;
-  }
-}
-
-.post-content {
-  padding: 18px !important;
-
-  /* These are technically the same, but use both */
-  overflow-wrap: break-word;
-  word-wrap: break-word;
-  word-break: break-word;
-
-  /* Adds a hyphen where the word breaks, if supported (No Blink) */
-  -ms-hyphens: auto;
-  -moz-hyphens: auto;
-  -webkit-hyphens: auto;
-  hyphens: auto;
-
-  ul, ol {
-    list-style: initial;
-  }
-
-  blockquote {
-    background-color: #222;
-    padding: 10px 20px 10px 60px;
-    border: 1px solid #555;
-    position: relative;
-    min-height: 34px;
-  }
-
-  blockquote:before {
-    display: block;
-    content: "\201C";
-    font-size: 120px;
-    position: absolute;
-    left: 4px;
-    top: 50px;
-    color: #444;
-    font-family: Georgia;
-  }
-}
-
-.post-signature {
-  color: #CCC;
-  margin-top: 15px;
-  border-top: 1px dotted #CCC;
-  display: block;
-}
-
-.post-related {
-  margin-top: 20px;
-
-  .btn {
-    font-size: 10px;
-    text-transform: uppercase;
-    font-style: italic;
-    background: #3C3C3C;
-    border: 1px solid #323232;
-    color: #B0B0B0;
-    text-shadow: 0 0 2px black;
-  }
-
-  .btn-primary {
-    color: white;
-    background: $link-color;
-  }
-
-  .btn-danger {
-    color: white;
-    background: red;
-  }
-}
-
-.forum-headline {
-  margin-top: 10px;
-}
-
-.attachments-form {
-  padding-bottom: 15px;
-}
-
-.attachment-link {
-  border-bottom: 1px dotted;
-}
-
-/* --- Unread --- */
-
-.state-indicator {
-  display: block;
-  float: left;
-  background-color: #555;
-  height: 10px;
-  width: 10px;
-  @include border-radius(5px);
-  margin: 3px 5px;
-}
-
-.topic-unread, .forum-unread, .message-unread {
-  a {
-    font-weight: bold;
-  }
-
-  .state-indicator {
-    background-color: $link-color;
-  }
-}
-
-/* --- Moderation --- */
-.on-moderation {
-  background: #d65454;
-
-  .post-content {
-    color: black;
-  }
-}
-
-/* --- Mini pagination --- */
-.mini-pagination {
-  padding: 3px 0 3px 10px;
-  font-size: $base-font-size - 2;
-}
-
-.topic-select, .topic-state, .forum-status, .notification-state, .message-state {
-  width: 20px;
-}
-
-table.post th.post-avatar {
-  width: 80px;
-}
-
-.post-form {
-  margin-top: 40px;
-
-  li {
-    list-style: initial;
-  }
-
-  input, textarea, select {
-    width: 98%;
-  }
-
-  input[type="submit"] {
-    width: auto;
-  }
-
-  .submit {
-    margin-top: 24px;
-  }
-}
-
-.topic h1, .forum h1, .category h1 {
-  margin: 24px 0 8px 0;
-  font-size: 24px;
-}
-
-.post-content .updated-message {
-  color: #777;
-  font-size: x-small;
-  margin-top: 20px;
-}
-
 .breadcrumb {
   position: relative;
   padding-left: 30px;
@@ -5559,105 +5289,6 @@ table.api-examples {
     padding: 10px 15px;
     border-radius: 0 0 4px 4px;
   }
-}
-
-.multiselect, .multiselect__tags, .multiselect__single {
-  min-height: 25px;
-}
-
-.multiselect * {
-  box-sizing: initial;
-}
-
-.multiselect--grouped .multiselect__option--disabled {
-  font-weight: bold;
-  color: white;
-}
-
-.multiselect--grouped .multiselect__option:not(.multiselect__option--disabled) {
-  padding-left: 25px;
-}
-
-.multiselect__select {
-  width: auto;
-  height: auto;
-  min-height: unset;
-  max-height: unset;
-
-  &:before {
-    top: 14px;
-    right: 0;
-  }
-}
-
-.multiselect--active {
-  z-index: 1;
-}
-
-.multiselect--above .multiselect__content-wrapper,
-.multiselect__content-wrapper {
-  width: auto;
-  background: #404040;
-  border-color: #282828;
-  color: #f0f0f0;
-  position: absolute;
-  z-index: 1;
-}
-
-.multiselect__tags {
-  padding-top: 0;
-  border-color: #282828;
-  background: #404040;
-  color: #f0f0f0;
-}
-
-.multiselect__tag {
-  margin-top: 2px;
-  margin-bottom: 0;
-  font-size: 13px;
-  background-color: $link-color;
-}
-
-.multiselect__tag-icon::after {
-  color: $text-color;
-}
-
-.multiselect__tag-icon:focus,
-.multiselect__tag-icon:hover {
-  color: $strong-text-color;
-  background-color: $link-color;
-}
-
-.multiselect__single {
-  font-size: 13px;
-  margin-bottom: 0;
-  padding-top: 2px;
-  background: none;
-  min-height: unset;
-  max-height: unset;
-}
-
-.multiselect__option {
-  font-size: 13px;
-  height: unset;
-  min-height: unset;
-  padding: 8px 12px;
-}
-
-.multiselect__option--disabled {
-  background: none;
-}
-
-.multiselect__option--highlight,
-.multiselect__option--selected,
-.multiselect__option--highlight.multiselect__option--selected {
-  background-color: $link-color;
-  color: $strong-text-color;
-  font-weight: normal;
-}
-
-.multiselect__option--highlight {
-  background-color: lighten($link-color, 5%);
 }
 
 .noUi-target {

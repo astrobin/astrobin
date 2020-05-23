@@ -3,125 +3,131 @@
 # This file is distributed under the same license as the PACKAGE package.
 # FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
 #
-#, fuzzy
 msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2019-10-15 11:57+0000\n"
-"PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
-"Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
+"POT-Creation-Date: 2020-05-19 08:06+0000\n"
+"PO-Revision-Date: 2020-05-09 05:47+0000\n"
+"Last-Translator: leticiastalling <leticiastalling@gmail.com>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
-"Language: \n"
+"Language: fr\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=(n > 1);\n"
+"X-Generator: Pootle 2.8\n"
+"X-POOTLE-MTIME: 1589003230.000000\n"
 
 msgid "Notifications"
-msgstr ""
+msgstr "Avis"
 
 msgid "You have no notifications."
-msgstr ""
+msgstr "Vous n'avez pas de préavis. "
 
 msgid "Settings"
-msgstr ""
+msgstr "Réglages"
 
 msgid "Mark all as read"
-msgstr ""
+msgstr "Marquer tous comme lu"
 
 msgid "You have no new notifications."
-msgstr ""
+msgstr "Vous n'avez aucune nouvelle notification."
 
 msgid "You have a new follower"
-msgstr ""
+msgstr "Vous avez un nouvel adepte"
 
 msgid "New image from a user you follow"
-msgstr ""
+msgstr "Nouvelle image d'un utilisateur que vous suivez"
 
 msgid "New image revision from a user you follow"
-msgstr ""
+msgstr "Révision d'une nouvelle image par un utilisateur que vous suivez"
 
 msgid "Your image was plate-solved"
-msgstr ""
+msgstr "Votre image a été résolue à la plaque"
 
 msgid "Your image could not be plate-solved"
-msgstr ""
+msgstr "Votre image n'a pas pu être résolue à la plaque"
 
 msgid "Your image received a new comment"
-msgstr ""
+msgstr "Votre image a reçu un nouveau commentaire"
 
 msgid "There was a reply to your comment"
-msgstr ""
+msgstr "Il y a eu une réponse à votre remarque"
 
 msgid "Your image was bookmarked"
-msgstr ""
+msgstr "Votre image a été mise en signet"
 
 msgid "Your image was liked"
-msgstr ""
+msgstr "Votre image a été aimée"
 
 msgid "New image with some gear you follow"
-msgstr ""
+msgstr "Nouvelle image avec quelques engins que vous suivez"
 
 msgid "New image of a subject you follow"
-msgstr ""
+msgstr "Nouvelle image d'un sujet que vous poursuivez"
 
 msgid "Your API Key request has been approved"
-msgstr ""
+msgstr "Votre demande de clé API a été acceptée"
 
 msgid "New discussion about a gear item you own"
-msgstr ""
+msgstr "Nouvelle discussion sur un engin que vous possédez"
 
 msgid "New review of a gear item you own"
-msgstr ""
-
-msgid "New data posted to public pool"
-msgstr ""
-
-msgid "New image posted to public data pool"
-msgstr ""
-
-msgid "New data posted to shared private folder"
-msgstr ""
-
-msgid "New image posted to shared private folder"
-msgstr ""
-
-msgid "You are invited to a shared private folder"
-msgstr ""
+msgstr "Nouvel examen d'un article d'équipement que vous détenez"
 
 msgid "A user you follow joined a public group"
-msgstr ""
+msgstr "Un internaute que vous suivez a rejoint un groupe public"
 
 msgid "You are invited to a group"
-msgstr ""
+msgstr "Vous êtes invité à un groupe"
 
 msgid "A user requested to join a group you moderate"
-msgstr ""
+msgstr "Un utilisateur a demandé à rejoindre un groupe que vous modérez"
 
 msgid "A group moderator approved your request to join"
-msgstr ""
+msgstr "Un modérateur de groupe a accepté votre demande d'adhésion"
 
 msgid "A group moderator rejected your request to join"
-msgstr ""
+msgstr "Un modérateur de groupe a rejeté votre demande d'adhésion"
 
 msgid "A user you follow created a new public group"
-msgstr ""
+msgstr "Un utilisateur que vous suivez a généré un nouveau groupe public"
 
 msgid "New forum topic in a group you are a member of"
-msgstr ""
+msgstr "Ajout d'un nouveau sujet de forum dans un groupe dont vous êtes membre"
 
 msgid "You have received a new private message"
-msgstr ""
+msgstr "Vous avez reçu un nouveau message privé"
 
 msgid "Your premium subscription will expire in one week"
-msgstr ""
+msgstr "Votre abonnement premium arrivera à échéance dans une semaine"
+
+#, fuzzy
+#| msgid "Your premium subscription will expire in one week"
+msgid "Your premium subscription has just expired"
+msgstr "Votre abonnement premium arrivera à échéance dans une semaine"
 
 msgid "Your subscription will be renewed in one week"
-msgstr ""
+msgstr "Votre abonnement sera reconduit dans une semaine"
 
 msgid "You have images with a missing \"Data source\""
-msgstr ""
+msgstr "Vous avez des images avec une \"source de données\" absente"
 
 msgid "You have images with a missing \"Remote source\""
-msgstr ""
+msgstr "Vous avez des images avec une \"source distante\" manquante"
+
+#~ msgid "New data posted to public pool"
+#~ msgstr "Nouvelles données publiées dans le pool public"
+
+#~ msgid "New image posted to public data pool"
+#~ msgstr "Nouvelle image publiée dans le pool de données publiques"
+
+#~ msgid "New data posted to shared private folder"
+#~ msgstr "Nouvelles données postées dans un dossier privé partagé"
+
+#~ msgid "New image posted to shared private folder"
+#~ msgstr "Nouvelle image publiée dans un dossier privé partagé"
+
+#~ msgid "You are invited to a shared private folder"
+#~ msgstr "Vous êtes invité à accéder à un dossier privé partagé"

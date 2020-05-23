@@ -7,9 +7,9 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2019-10-15 11:57+0000\n"
-"PO-Revision-Date: 2016-10-25 11:12+0000\n"
-"Last-Translator: Lukasz83 <lukasz.sujka83@gmail.com>\n"
+"POT-Creation-Date: 2020-05-19 08:06+0000\n"
+"PO-Revision-Date: 2020-05-04 09:04+0000\n"
+"Last-Translator: Milosz Wasilewski <milosz.wasilewski@gmail.com>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
 "Language: pl\n"
 "MIME-Version: 1.0\n"
@@ -17,8 +17,8 @@ msgstr ""
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=3; plural=(n==1 ? 0 : n%10>=2 && n%10<=4 && (n%100<10 "
 "|| n%100>=20) ? 1 : 2);\n"
-"X-Generator: Pootle 2.5.0\n"
-"X-POOTLE-MTIME: 1477393938.61458\n"
+"X-Generator: Pootle 2.8\n"
+"X-POOTLE-MTIME: 1588583063.000000\n"
 
 msgid "Autosubmission deactivation strategy"
 msgstr "Strategia deaktywacji autowysyłania"
@@ -61,45 +61,49 @@ msgid "Ad-hoc collaboration"
 msgstr "Tymczasowa współpraca"
 
 msgid "Specific to an imaging technique"
-msgstr ""
+msgstr "Wyodrębnij na podstawie techniki rejestracji"
 
 msgid "Specific to an astrophotography target"
-msgstr ""
+msgstr "Wyodrębnij na podstawie celu astrofotografii"
 
 msgid "Specific to certain equipment"
-msgstr ""
+msgstr "Wyodrębnij na podstawie sprzętu"
 
 msgid "Other"
-msgstr ""
+msgstr "Inne"
 
 msgid "Name"
-msgstr ""
+msgstr "Imię"
 
 msgid "Description"
-msgstr ""
+msgstr "Opis"
 
 msgid "HTML tags are allowed."
-msgstr ""
+msgstr "Tagi HTML są dozwolone"
 
 msgid "Category"
-msgstr ""
+msgstr "Kategoria"
 
 msgid "Public group"
-msgstr ""
+msgstr "Grupa publiczna"
 
 msgid ""
 "Public groups can be searched by anyone, and all their content is public."
 msgstr ""
+"Grupy publiczne mogą być przeszukiwane przez wszystkich a ich zawartość jest "
+"ogólnodostępna"
 
 msgid "Moderated group"
-msgstr ""
+msgstr "Grupa moderowana"
 
 msgid ""
 "Moderated groups have a moderation queue for posted images and join requests."
 msgstr ""
+"Moderowane grupy wymagają zatwierdzenia uczestnictwa w celu pisania postów i "
+"zamieszczania zdjęć"
 
 msgid "Automatic submission"
-msgstr ""
+msgstr "Automatyczne zgłoszenie"
 
 msgid ""
 "Groups with automatic submissions always contain all public images from all "
@@ -108,34 +112,34 @@ msgid ""
 msgstr ""
 
 msgid "Last activity"
-msgstr ""
+msgstr "Ostatnia aktywność"
 
 msgid "Members"
-msgstr ""
+msgstr "Członkowie"
 
 msgid "Images"
-msgstr ""
+msgstr "Obrazy"
 
 msgid "Forum posts"
-msgstr ""
+msgstr "Posty na forum"
 
 msgid "Owner"
-msgstr ""
+msgstr "Właściciel"
 
 msgid "Moderator"
-msgstr ""
+msgstr "Moderator"
 
 msgid "Member"
-msgstr ""
+msgstr "Członek"
 
 msgid "Invited"
-msgstr ""
+msgstr "Zaproszony"
 
 msgid "Join request pending approval"
-msgstr ""
+msgstr "Wspólne zgłoszenie oczekuje na akceptację"
 
 msgid "Add/remove images"
-msgstr ""
+msgstr "Dodaj / usuń obrazy"
 
 msgid ""
 "Click on the images to include them in this group (and click again to "
@@ -143,16 +147,16 @@ msgid ""
 msgstr ""
 
 msgid "(no title)"
-msgstr ""
+msgstr "(brak tytułu)"
 
 msgid "Save"
-msgstr ""
+msgstr "Zapisz"
 
 msgid "Cancel"
-msgstr ""
+msgstr "Anuluj"
 
 msgid "Delete group?"
-msgstr ""
+msgstr "Usunąć grupę?"
 
 msgid ""
 "Careful! Do you really want to delete this group? This operation cannot be "
@@ -160,7 +164,7 @@ msgid ""
 msgstr ""
 
 msgid "Delete group"
-msgstr ""
+msgstr "Usuń grupę"
 
 msgid "Create new group"
 msgstr ""
@@ -172,7 +176,7 @@ msgid "Edit group"
 msgstr ""
 
 msgid "Manage members"
-msgstr ""
+msgstr "Zarządzaj członkami"
 
 msgid "Actions"
 msgstr ""
@@ -181,22 +185,22 @@ msgid "Join group"
 msgstr ""
 
 msgid "Leave group"
-msgstr ""
+msgstr "Opuść grupę"
 
 msgid "Moderate join requests"
 msgstr ""
 
 msgid "This group is public"
-msgstr ""
+msgstr "Dostęp do grupy jest publiczny"
 
 msgid "This group is private"
-msgstr ""
+msgstr "Dostęp do grupy dla jej członków"
 
 msgid "This group is moderated"
-msgstr ""
+msgstr "Ta grupa jest moderowana"
 
 msgid "This group is not moderated"
-msgstr ""
+msgstr "Ta grupa nie jest moderowana"
 
 msgid "This group has automatic submission"
 msgstr ""
@@ -205,19 +209,21 @@ msgid "This group does not have automatic submission"
 msgstr ""
 
 msgid "Invited users"
-msgstr ""
+msgstr "Zaproszeni użytkownicy"
 
 msgid "Join requests"
-msgstr ""
+msgstr "Prośby o dostęp"
 
 #, python-format
 msgid ""
 "A group created on %(date_created)s, owned by <a href=\"%(owner_url)s\">"
 "%(owner)s</a>, categorized as <strong>%(category)s</strong>."
 msgstr ""
+"Grupa utworzona %(date_created)s, zarządzana przez <a href=\"%(owner_url)s\">"
+"%(owner)s</a>, sklasyfikowana jako <strong>%(category)s</strong>."
 
 msgid "Group forum"
-msgstr ""
+msgstr "Forum grupy"
 
 #, python-format
 msgid ""
@@ -368,10 +374,16 @@ msgstr ""
 msgid "This group has no join requests."
 msgstr ""
 
-msgid "Your new group was created successfully"
+msgid "You cannot add images that are not yours!"
 msgstr ""
 
-msgid "Form saved"
+msgid "Your image was added to the group."
+msgstr ""
+
+msgid "Group updated with your selection of images."
+msgstr ""
+
+msgid "Your new group was created successfully"
 msgstr ""
 
 msgid "Group deleted"
@@ -391,11 +403,5 @@ msgstr ""
 msgid "You have left the group"
 msgstr ""
 
-msgid "Group updated with your selection of images."
-msgstr ""
-
-msgid "You cannot add images that are not yours!"
-msgstr ""
-
-msgid "Your image was added to the group."
+msgid "Form saved"
 msgstr ""

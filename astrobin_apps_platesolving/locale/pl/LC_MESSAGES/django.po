@@ -7,9 +7,9 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2019-10-15 11:55+0000\n"
-"PO-Revision-Date: 2018-12-04 11:40+0000\n"
-"Last-Translator: Łukasz Sujka <lukasz.sujka83@gmail.com>\n"
+"POT-Creation-Date: 2020-05-19 08:04+0000\n"
+"PO-Revision-Date: 2020-05-18 12:03+0000\n"
+"Last-Translator: Milosz Wasilewski <milosz.wasilewski@gmail.com>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
 "Language: pl\n"
 "MIME-Version: 1.0\n"
@@ -18,7 +18,7 @@ msgstr ""
 "Plural-Forms: nplurals=3; plural=(n==1 ? 0 : n%10>=2 && n%10<=4 && (n%100<10 "
 "|| n%100>=20) ? 1 : 2);\n"
 "X-Generator: Pootle 2.8\n"
-"X-POOTLE-MTIME: 1543923609.000000\n"
+"X-POOTLE-MTIME: 1589803411.000000\n"
 
 msgid "Perform a blind solve"
 msgstr "Uruchom losową astrometrię"
@@ -76,14 +76,111 @@ msgstr ""
 "Wskaż silnikowi do astrometrii żeby przeglądał zakres wewnątrz wskazanych "
 "pozycji RA i DEC"
 
+msgid "Small"
+msgstr "Mały"
+
+msgid "Medium"
+msgstr "Średni"
+
+msgid "Large"
+msgstr "Duży"
+
+msgid "Sample raw frame (max 200 MB)"
+msgstr "Przykładowa surowa klatka (max 200 MB)"
+
+msgid ""
+"To improve the accuracy of your plate-solution even further, please upload "
+"one of the XISF or FITS files from your data set. Such files normally have "
+"date and time headers that will allow AstroBin to calculate solar system "
+"body ephemerides and find planets and asteroids in your image (provided you "
+"also add location information to it).<br/><br/>For maximum accuracy, it's "
+"recommended that you use PixInsight's native and open format XISF. Learn "
+"more about XISF here:<br/><br/><a href=\"https://pixinsight.com/xisf/\" "
+"target=\"_blank\">https://pixinsight.com/xisf/</a><br/><br/> <strong>Please "
+"note:</strong> it's very important that the XISF or FITS file you upload is "
+"aligned to your processed image, otherwise the object annotations will not "
+"match. To improve your chances at a successful accurate plate-solution, "
+"calibrate your file the usual way (dark/bias/flats) but do not stretch it."
+msgstr ""
+
+msgid "Scaled font size"
+msgstr ""
+
+msgid "Font size of the annotations on your main image page"
+msgstr "Rozmiar czcionki podpisów na głównej stronie ze zdjęciami"
+
+msgid "Show equatorial grid"
+msgstr "Pokaż siatkę równikową"
+
+msgid "Show constellation borders"
+msgstr "Pokaż granice konstelacji"
+
+msgid "Show constellation lines"
+msgstr "Pokaż linie gwiazdozbiorów"
+
+msgid "Show named stars"
+msgstr "Pokaż nazwy gwiazd"
+
+msgid "Show Messier objects"
+msgstr "Pokaż obiekty z katalogu Messiera"
+
+msgid "Show NGC and IC objects"
+msgstr "Pokaż obiekty z katalogów NGC i IC"
+
+msgid "Show VdB objects"
+msgstr "Pokaż obiekty z katalogu VdB"
+
+msgid "Show Sharpless objects"
+msgstr "Pokaż obiekty z katalogu Sharpless"
+
+msgid "Show Barnard objects"
+msgstr "Pokaż obiekty z katalogy Barnarda"
+
+msgid "Show PGC objects"
+msgstr "Pokaż obiekty z katalogu PGC"
+
+msgid "Show planets"
+msgstr "Pokaż planety"
+
+msgid ""
+"Only available if your image at least an acquisition time and an accurate "
+"location"
+msgstr ""
+
+msgid "Show asteroids"
+msgstr "Pokaż planetoidy"
+
+msgid "Show GCVS stars"
+msgstr "Pokaż gwiazdy GCVS"
+
+msgid "General Catalog of Variable Stars"
+msgstr ""
+
+msgid "Show Tycho-2 catalog"
+msgstr "Pokaż katalog Tycho-2"
+
+msgid "Show CGPN objects"
+msgstr "Pokaż obiekty z katalogy CGPN"
+
 msgid "Getting plate-solving status, please wait..."
 msgstr "Pobieram status mapowania szczegółów zdjęcia, proszę czekać..."
 
-msgid "Plate-solving process starting, please do not leave this page..."
+msgid "Plate-solving starting, please do not leave this page..."
 msgstr ""
-"Mapowanie szczegółów zdjęcia rozpoczęte, proszę nie opuszczać strony..."
+"Redukcja astrometryczna zdjęcia rozpoczęta, proszę nie opuszczać strony..."
 
-msgid "Plate-solving started in the background. You may leave this page."
+msgid "Advanced plate-solving starting, please do not leave this page..."
+msgstr ""
+"Zaawansowana redukcja astrometryczna zdjęcia rozpoczęta, proszę nie "
+"opuszczać strony..."
+
+msgid "Plate-solving started. You may leave this page."
+msgstr ""
+"Redukcja astrometryczna zdjęcia uruchomiona w tle. Możesz opuścić stronę."
+
+#, fuzzy
+#| msgid "Plate-solving started in the background. You may leave this page."
+msgid "Advanced plate-solving started. You may leave this page."
 msgstr "Mapowanie szczegółów zdjęcia uruchomione w tle. Możesz opuścić stronę."
 
 msgid "Plate-solving almost ready, please do not leave this page..."
@@ -93,9 +190,23 @@ msgstr ""
 msgid "This image could not be plate-solved."
 msgstr "Mapowanie szczegółów nie jest możliwe dla tego zdjęcia."
 
-msgid ""
-"This image has been successfully plate-solved. Please refresh the page to "
-"see the new data."
+msgid "The advanced plate-solving failed."
+msgstr ""
+
+#, fuzzy
+#| msgid ""
+#| "This image has been successfully plate-solved. Please refresh the page to "
+#| "see the new data."
+msgid "This image has been plate-solved. Refresh the page to see new data!"
+msgstr ""
+"Mapowanie szczegółów zdjęcia zostało pozytywnie zakończone. Proszę odświeżyć "
+"stronę aby zobaczyć efekty zmian."
+
+#, fuzzy
+#| msgid ""
+#| "This image has been successfully plate-solved. Please refresh the page to "
+#| "see the new data."
+msgid "The advanced plate-solved finished. Refresh the page to see new data!"
 msgstr ""
 "Mapowanie szczegółów zdjęcia zostało pozytywnie zakończone. Proszę odświeżyć "
 "stronę aby zobaczyć efekty zmian."

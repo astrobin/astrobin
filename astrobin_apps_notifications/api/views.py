@@ -1,3 +1,5 @@
+from djangorestframework_camel_case.parser import CamelCaseJSONParser
+from djangorestframework_camel_case.render import CamelCaseJSONRenderer
 from djangorestframework_camel_case.render import CamelCaseJSONRenderer
 from persistent_messages.models import Message
 from rest_framework import viewsets, permissions
@@ -12,6 +14,7 @@ class NotificationViewSet(viewsets.ModelViewSet):
     serializer_class = NotificationSerializer
     permission_classes = [permissions.IsAuthenticated]
     renderer_classes = [BrowsableAPIRenderer, CamelCaseJSONRenderer]
+    parser_classes = [CamelCaseJSONParser]
 
     def get_queryset(self):
         return Message.objects.filter(user=self.request.user).order_by('-created')

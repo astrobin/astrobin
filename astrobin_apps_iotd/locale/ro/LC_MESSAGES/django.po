@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2019-10-15 11:57+0000\n"
+"POT-Creation-Date: 2020-05-19 08:07+0000\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -31,13 +31,13 @@ msgstr ""
 msgid "This user has chosen to be excluded from competitions."
 msgstr ""
 
-msgid "You cannot submit a judge's image."
-msgstr ""
-
 #, python-format
 msgid ""
 "You cannot submit an image that was published more than %(max_days)s days "
 "ago."
+msgstr ""
+
+msgid "Users with a Free membership cannot participate in the IOTD."
 msgstr ""
 
 msgid "This image has already been an IOTD in the past"
@@ -54,9 +54,6 @@ msgid "You cannot vote for your own image."
 msgstr ""
 
 msgid "Images in the staging area cannot be voted for."
-msgstr ""
-
-msgid "You cannot vote for a judge's image."
 msgstr ""
 
 msgid "You cannot vote for an image that has not been submitted."
@@ -82,9 +79,6 @@ msgid "You cannot elect your own image."
 msgstr ""
 
 msgid "Images in the staging area cannot be elected."
-msgstr ""
-
-msgid "You cannot elect a judge's image."
 msgstr ""
 
 msgid "You cannot elect an image that has not been voted."
@@ -175,9 +169,6 @@ msgstr ""
 
 msgid ""
 "Please select the images that you want to propose for IOTD consideration."
-msgstr ""
-
-msgid "No images uploaded on this day."
 msgstr ""
 
 msgid "You cannot unelect an IOTD elected by another judge."

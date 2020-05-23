@@ -7,79 +7,188 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2019-10-15 11:55+0000\n"
-"PO-Revision-Date: 2013-11-15 18:48+0000\n"
-"Last-Translator: Tannhauser <tannhauser@sfr.fr>\n"
+"POT-Creation-Date: 2020-05-19 08:04+0000\n"
+"PO-Revision-Date: 2020-05-09 05:50+0000\n"
+"Last-Translator: leticiastalling <leticiastalling@gmail.com>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
 "Language: fr\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=(n > 1);\n"
-"X-Generator: Pootle 2.5.0\n"
-"X-POOTLE-MTIME: 1384541338.785898\n"
+"X-Generator: Pootle 2.8\n"
+"X-POOTLE-MTIME: 1589003454.000000\n"
 
 msgid "Perform a blind solve"
-msgstr ""
+msgstr "Effectuer une résolution à l'aveugle"
 
 msgid ""
 "Attempt to solve with no hints. In most cases this will work, but it will "
 "take longer."
 msgstr ""
+"Tentative de résolution sans indices. Dans la plupart des cas, cela "
+"marchera, mais cela prendra plus de temps."
 
 msgid "Width of the field in degrees"
-msgstr ""
+msgstr "Largeur du champ de vue en degrés"
 
 msgid "Width of the field in arcminutes"
-msgstr ""
+msgstr "Largeur du champ en minutes d'arc"
 
 msgid "Resolution of the field in arcseconds/pixel"
-msgstr ""
+msgstr "Résolution du champ de vue en secondes d'arc/pixel"
 
 msgid "Field size units"
-msgstr ""
+msgstr "Unités de taille des champs"
 
 msgid "Min field size"
-msgstr ""
+msgstr "Taille minimale du champ"
 
 msgid "Estimate the lower bound for the width of this field."
-msgstr ""
+msgstr "Evaluez la limite inférieure de la largeur de ce champ."
 
 msgid "Max field size"
-msgstr ""
+msgstr "Taille maximale du champ"
 
 msgid "Estimate the upper bound for the width of this field."
-msgstr ""
+msgstr "Evaluez la limite supérieure de la largeur de ce champ."
 
 msgid "Center RA"
-msgstr ""
+msgstr "Centre RA"
 
 msgid "Center RA of the field in degrees, 0.000 to 360.000"
-msgstr ""
+msgstr "Centre RA du champ en degrés, 0.000 à 360.000"
 
 msgid "Center dec"
-msgstr ""
+msgstr "Centre déc"
 
 msgid "Center dec of the field in degrees, -90.000 to +90.000"
-msgstr ""
+msgstr "Centre dec du champ en degrés, -90.000 à +90.000"
 
 msgid "Radius"
-msgstr ""
+msgstr "Radius"
 
 msgid ""
 "Tells the plate-solving engine to look within these many degrees of the "
 "given center RA and dec position."
 msgstr ""
+"Il indique au moteur de résolution des plaques de regarder à l'intérieur de "
+"ces nombreux degrés de la position centrale RA et de la position de dec "
+"donnée."
+
+msgid "Small"
+msgstr ""
+
+msgid "Medium"
+msgstr ""
+
+msgid "Large"
+msgstr ""
+
+msgid "Sample raw frame (max 200 MB)"
+msgstr ""
+
+msgid ""
+"To improve the accuracy of your plate-solution even further, please upload "
+"one of the XISF or FITS files from your data set. Such files normally have "
+"date and time headers that will allow AstroBin to calculate solar system "
+"body ephemerides and find planets and asteroids in your image (provided you "
+"also add location information to it).<br/><br/>For maximum accuracy, it's "
+"recommended that you use PixInsight's native and open format XISF. Learn "
+"more about XISF here:<br/><br/><a href=\"https://pixinsight.com/xisf/\" "
+"target=\"_blank\">https://pixinsight.com/xisf/</a><br/><br/> <strong>Please "
+"note:</strong> it's very important that the XISF or FITS file you upload is "
+"aligned to your processed image, otherwise the object annotations will not "
+"match. To improve your chances at a successful accurate plate-solution, "
+"calibrate your file the usual way (dark/bias/flats) but do not stretch it."
+msgstr ""
+
+msgid "Scaled font size"
+msgstr ""
+
+msgid "Font size of the annotations on your main image page"
+msgstr ""
+
+msgid "Show equatorial grid"
+msgstr ""
+
+msgid "Show constellation borders"
+msgstr ""
+
+msgid "Show constellation lines"
+msgstr ""
+
+msgid "Show named stars"
+msgstr ""
+
+msgid "Show Messier objects"
+msgstr ""
+
+msgid "Show NGC and IC objects"
+msgstr ""
+
+msgid "Show VdB objects"
+msgstr ""
+
+msgid "Show Sharpless objects"
+msgstr ""
+
+msgid "Show Barnard objects"
+msgstr ""
+
+msgid "Show PGC objects"
+msgstr ""
+
+msgid "Show planets"
+msgstr ""
+
+msgid ""
+"Only available if your image at least an acquisition time and an accurate "
+"location"
+msgstr ""
+
+msgid "Show asteroids"
+msgstr ""
+
+msgid "Show GCVS stars"
+msgstr ""
+
+msgid "General Catalog of Variable Stars"
+msgstr ""
+
+msgid "Show Tycho-2 catalog"
+msgstr ""
+
+msgid "Show CGPN objects"
+msgstr ""
 
 msgid "Getting plate-solving status, please wait..."
 msgstr "Accès à la réduction astrométrique, merci de patienter..."
 
-msgid "Plate-solving process starting, please do not leave this page..."
+#, fuzzy
+#| msgid "Plate-solving process starting, please do not leave this page..."
+msgid "Plate-solving starting, please do not leave this page..."
 msgstr ""
 "Initialisation de la réduction astrométrique, merci de ne pas quitter cette "
 "page..."
 
-msgid "Plate-solving started in the background. You may leave this page."
+#, fuzzy
+#| msgid "Plate-solving process starting, please do not leave this page..."
+msgid "Advanced plate-solving starting, please do not leave this page..."
+msgstr ""
+"Initialisation de la réduction astrométrique, merci de ne pas quitter cette "
+"page..."
+
+#, fuzzy
+#| msgid "Plate-solving started in the background. You may leave this page."
+msgid "Plate-solving started. You may leave this page."
+msgstr ""
+"Réduction astrométrique lancée en arrière-plan. Vous pouvez quitter cette "
+"page."
+
+#, fuzzy
+#| msgid "Plate-solving started in the background. You may leave this page."
+msgid "Advanced plate-solving started. You may leave this page."
 msgstr ""
 "Réduction astrométrique lancée en arrière-plan. Vous pouvez quitter cette "
 "page."
@@ -92,9 +201,23 @@ msgstr ""
 msgid "This image could not be plate-solved."
 msgstr "Réduction astrométrique impossible pour cette image."
 
-msgid ""
-"This image has been successfully plate-solved. Please refresh the page to "
-"see the new data."
+msgid "The advanced plate-solving failed."
+msgstr ""
+
+#, fuzzy
+#| msgid ""
+#| "This image has been successfully plate-solved. Please refresh the page to "
+#| "see the new data."
+msgid "This image has been plate-solved. Refresh the page to see new data!"
+msgstr ""
+"Réduction astrométrique réussie. Merci de rafraîchir la page pour visualiser "
+"les données."
+
+#, fuzzy
+#| msgid ""
+#| "This image has been successfully plate-solved. Please refresh the page to "
+#| "see the new data."
+msgid "The advanced plate-solved finished. Refresh the page to see new data!"
 msgstr ""
 "Réduction astrométrique réussie. Merci de rafraîchir la page pour visualiser "
 "les données."
