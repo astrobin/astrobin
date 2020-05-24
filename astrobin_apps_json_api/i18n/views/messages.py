@@ -18,6 +18,10 @@ class I18nMessages(HeaderMixin, View):
 
     def get(self, request, *args, **kwargs):
         code = kwargs.pop('code', 'en')  # type: str
+
+        if code not in [x[0] for x in settings.LANGUAGES]:
+            code = 'en'
+
         project_root = get_project_root()  # type: str
 
         content = ''
