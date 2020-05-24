@@ -1,4 +1,10 @@
 2020-05-24 Salvatore Iovene <salvatore@iovene.com>
+ * v1.70.13
+ * (api) Add i18n hash to app config API
+ * (api) Fix issue with i18n messages API not returning all apps
+ * (api) Cache i18n messages
+
+2020-05-24 Salvatore Iovene <salvatore@iovene.com>
  * v1.70.12
  * (api) Return en messages if querying for unsupported language
 
