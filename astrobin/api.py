@@ -346,6 +346,7 @@ class ImageResource(ModelResource):
     def build_filters(self, filters=None, ignore_bad_filters=False):
         subjects = None
         ids = None
+        user = None
 
         if filters is None:
             filters = {}
@@ -357,6 +358,10 @@ class ImageResource(ModelResource):
         if 'ids' in filters:
             ids = filters['ids']
             del filters['ids']
+
+        if 'user' in filters:
+            user = filters['user']
+            del filters['user']
 
         orm_filters = super(ImageResource, self).build_filters(filters, ignore_bad_filters)
 
@@ -386,6 +391,9 @@ class ImageResource(ModelResource):
 
         if ids:
             orm_filters['pk__in'] = ids.split(',')
+
+        if user:
+            orm_filters['user__username'] = user
 
         return orm_filters
 
