@@ -87,7 +87,24 @@ class SolveAdvancedView(base.View):
         solution = get_solution(kwargs.get('object_id'), kwargs.get('content_type_id'))
 
         if solution.advanced_settings is None:
-            solution.advanced_settings = PlateSolvingAdvancedSettings.objects.create()
+            latest_settings = None
+
+            if target._meta.model_name == u'image':
+                images = target._meta.model.objects.filter(user=target.user).order_by('-pk')
+                for image in images:
+                    if image.solution and image.solution.advanced_settings:
+                        latest_settings = image.solution.advanced_settings
+                        break
+            elif target.image.solution and target.image.solution.advanced_settings:
+                    latest_settings = target.image.solution.advanced_settings
+
+            if latest_settings is not None:
+                latest_settings.pk = None
+                latest_settings.save()
+            else:
+                latest_settings = PlateSolvingAdvancedSettings.objects.create()
+
+            solution.advanced_settings = latest_settings
             solution.save()
 
         if solution.pixinsight_serial_number is None or solution.status == SolverBase.SUCCESS:
