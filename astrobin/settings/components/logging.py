@@ -77,7 +77,7 @@ LOGGING = {
     }
 }
 
-if AWS_ACCESS_KEY_ID != 'invalid' and AWS_SECRET_ACCESS_KEY != 'invalid':
+if AWS_ACCESS_KEY_ID != 'invalid' and AWS_SECRET_ACCESS_KEY != 'invalid' and 'localhost' not in BASE_URL:
     LOGGING['handlers']['watchtower'] = {
         'level': 'DEBUG',
         'class': 'watchtower.CloudWatchLogHandler',
