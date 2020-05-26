@@ -1,4 +1,9 @@
 2020-05-25 Salvatore Iovene <salvatore@iovene.com>
+ * v1.72.1
+ * (deps) Update dependency gevent to v20.5.1 (#1157)
+ * (infra) Fix logging of celery tasks
+
+2020-05-25 Salvatore Iovene <salvatore@iovene.com>
  * v1.72.0
  * (v1 api) Add filter for username
 
