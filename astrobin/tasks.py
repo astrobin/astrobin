@@ -280,44 +280,54 @@ def prepare_download_data_archive(request_id):
         for image in images:
             id = image.get_id()  # type: str
 
-            logger.debug("prepare_download_data_archive: image id = %s" % id)
+            try:
+                logger.debug("prepare_download_data_archive: image id = %s" % id)
 
-            title = slugify(image.title)  # type: str
-            path = ntpath.basename(image.image_file.name)  # type: str
+                title = slugify(image.title)  # type: str
+                path = ntpath.basename(image.image_file.name)  # type: str
 
-            response = requests.get(image.image_file.url, verify=False)  # type: Response
-            if response.status_code == 200:
-                archive.writestr("%s-%s/%s" % (id, title, path), response.content)
-                logger.debug("prepare_download_data_archive: image %s = written" % id)
-
-            if image.solution and image.solution.image_file:
-                response = requests.get(image.solution.image_file.url, verify=False)  # type: Response
+                response = requests.get(image.image_file.url, verify=False)  # type: Response
                 if response.status_code == 200:
-                    path = ntpath.basename(image.solution.image_file.name)  # type: str
-                    archive.writestr("%s-%s/solution/%s" % (id, title, path), response.content)
-                    logger.debug("prepare_download_data_archive: solution of image %s = written" % id)
+                    archive.writestr("%s-%s/%s" % (id, title, path), response.content)
+                    logger.debug("prepare_download_data_archive: image %s = written" % id)
 
-            for revision in ImageRevision.objects.filter(image=image, corrupted=False):  # type: ImageRevision
-                label = revision.label  # type: unicode
-                path = ntpath.basename(revision.image_file.name)  # type: str
-
-                logger.debug("prepare_download_data_archive: image %s revision %s = iterating" % (id, label))
-
-                response = requests.get(revision.image_file.url, verify=False)  # type: Response
-                if response.status_code == 200:
-                    archive.writestr("%s-%s/revisions/%s/%s" % (id, title, label, path), response.content)
-                    logger.debug("prepare_download_data_archive: image %s revision %s = written" % (id, label))
-
-                if revision.solution and image.solution.image_file:
-                    response = requests.get(revision.solution.image_file.url, verify=False)  # type: Response
+                if image.solution and image.solution.image_file:
+                    response = requests.get(image.solution.image_file.url, verify=False)  # type: Response
                     if response.status_code == 200:
-                        path = ntpath.basename(revision.solution.image_file.name)  # type: str
-                        archive.writestr("%s-%s/revisions/%s/solution/%s" % (id, title, label, path), response.content)
-                        logger.debug(
-                            "prepare_download_data_archive: solution image of image %s revision %s = written" % (
-                                id, label
-                            )
-                        )
+                        path = ntpath.basename(image.solution.image_file.name)  # type: str
+                        archive.writestr("%s-%s/solution/%s" % (id, title, path), response.content)
+                        logger.debug("prepare_download_data_archive: solution of image %s = written" % id)
+
+                for revision in ImageRevision.objects.filter(image=image, corrupted=False):  # type: ImageRevision
+                    try:
+                        label = revision.label  # type: unicode
+                        path = ntpath.basename(revision.image_file.name)  # type: str
+
+                        logger.debug("prepare_download_data_archive: image %s revision %s = iterating" % (id, label))
+
+                        response = requests.get(revision.image_file.url, verify=False)  # type: Response
+                        if response.status_code == 200:
+                            archive.writestr("%s-%s/revisions/%s/%s" % (id, title, label, path), response.content)
+                            logger.debug("prepare_download_data_archive: image %s revision %s = written" % (id, label))
+
+                        if revision.solution and image.solution.image_file:
+                            response = requests.get(revision.solution.image_file.url, verify=False)  # type: Response
+                            if response.status_code == 200:
+                                path = ntpath.basename(revision.solution.image_file.name)  # type: str
+                                archive.writestr("%s-%s/revisions/%s/solution/%s" % (id, title, label, path), response.content)
+                                logger.debug(
+                                    "prepare_download_data_archive: solution image of image %s revision %s = written" % (
+                                        id, label
+                                    )
+                                )
+                    except Exception as e:
+                        logger.exception("prepare_download_data_archive error: %s" % e.message)
+                        logger.debug("prepare_download_data_archive: skipping revision %s" % label)
+                        continue
+            except Exception as e:
+                logger.exception("prepare_download_data_archive error: %s" % e.message)
+                logger.debug("prepare_download_data_archive: skipping image %s" % id)
+                continue
 
             csv_writer.writerow([
                 image.get_id(),
