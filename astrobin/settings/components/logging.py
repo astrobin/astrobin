@@ -64,6 +64,10 @@ LOGGING = {
             'handlers': ['console', 'logfile'],
             'level': 'DEBUG',
         },
+        'astrobin.tasks': {
+            'handlers': ['console', 'logfile'],
+            'level': 'DEBUG',
+        },
         'django.request': {
             'handlers': ['mail_admins'],
             'level': 'ERROR',
@@ -89,3 +93,4 @@ if AWS_ACCESS_KEY_ID != 'invalid' and AWS_SECRET_ACCESS_KEY != 'invalid' and 'lo
 
     LOGGING['loggers']['django']['handlers'].append('watchtower')
     LOGGING['loggers']['apps']['handlers'].append('watchtower')
+    LOGGING['loggers']['astrobin.tasks']['handlers'].append('watchtower')

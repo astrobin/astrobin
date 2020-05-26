@@ -368,7 +368,7 @@ def prepare_download_data_archive(request_id):
 
         logger.debug("prepare_download_data_archive: completed for request %d" % request_id)
     except Exception as e:
-        logger.exception(e.message)
+        logger.exception("prepare_download_data_archive error: %s" % e.message)
         data_download_request.status = "ERROR"
         data_download_request.save()
 
