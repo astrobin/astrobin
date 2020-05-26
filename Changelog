@@ -1,4 +1,8 @@
-2020-05-25 Salvatore Iovene <salvatore@iovene.com>
+2020-05-26 Salvatore Iovene <salvatore@iovene.com>
+ * v1.72.2
+ * Revert "Update dependency gevent to v20.5.1 (#1157)"
+
+2020-05-26 Salvatore Iovene <salvatore@iovene.com>
  * v1.72.1
  * (deps) Update dependency gevent to v20.5.1 (#1157)
  * (infra) Fix logging of celery tasks
