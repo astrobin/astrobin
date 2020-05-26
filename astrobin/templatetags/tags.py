@@ -482,8 +482,8 @@ def get_language_flag_icon(language_code, size=16):
     flags = {
         '': 'United-States.png',
         'en': 'United-States.png',
-        'en-US': 'United-States.png',
-        'en-GB': 'United-Kingdom.png',
+        'en-us': 'United-States.png',
+        'en-gb': 'United-Kingdom.png',
 
         'ar': 'Saudi-Arabia.png',
         'de': 'Germany.png',
@@ -495,10 +495,10 @@ def get_language_flag_icon(language_code, size=16):
         'ja': 'Japan.png',
         'nl': 'Netherlands.png',
         'pl': 'Poland.png',
-        'pt-BR': 'Brazil.png',
+        'pt-br': 'Brazil.png',
         'ru': 'Russia.png',
         'sq': 'Albania.png',
         'tr': 'Turkey.png',
     }
 
-    return static('astrobin/icons/flags/%s/%s' % (size, flags[language_code]))
+    return static('astrobin/icons/flags/%s/%s' % (size, flags[language_code.lower()]))
