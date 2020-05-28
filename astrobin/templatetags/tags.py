@@ -478,27 +478,62 @@ def can_add_technical_details(image):
 
 
 @register.simple_tag
-def get_language_flag_icon(language_code, size=16):
-    flags = {
-        '': 'United-States.png',
-        'en': 'United-States.png',
-        'en-us': 'United-States.png',
-        'en-gb': 'United-Kingdom.png',
+def get_native_languages():
+    return ('en', 'en-GB')
 
-        'ar': 'Saudi-Arabia.png',
-        'de': 'Germany.png',
-        'el': 'Greece.png',
-        'es': 'Spain.png',
-        'fi': 'Finland.png',
-        'fr': 'France.png',
-        'it': 'Italy.png',
-        'ja': 'Japan.png',
-        'nl': 'Netherlands.png',
-        'pl': 'Poland.png',
-        'pt-br': 'Brazil.png',
-        'ru': 'Russia.png',
-        'sq': 'Albania.png',
-        'tr': 'Turkey.png',
+
+@register.simple_tag
+def get_officially_supported_languages():
+    return (
+        'de',
+        'es',
+        'fr',
+        'it'
+    )
+
+
+@register.simple_tag
+def get_other_languages():
+    return (
+        'ar',
+        'el',
+        'fi',
+        'ja',
+        'nl',
+        'pl',
+        'pt',
+        'ru',
+        'sq',
+        'tr',
+    )
+
+
+@register.simple_tag
+def get_language_name(language_code):
+    languages = {
+        '': 'English',
+        'en': 'English',
+        'en-us': 'English (US)',
+        'en-gb': 'English (GB)',
+
+        'ar': 'العربية',
+        'de': 'Deutsch',
+        'el': 'Ελληνικά',
+        'es': 'Español',
+        'fi': 'Suomi',
+        'fr': 'Français',
+        'it': 'Italiano',
+        'ja': '日本語',
+        'nl': 'Nederlands',
+        'pl': 'Polski',
+        'pt': 'Português',
+        'pt-br': 'Português',
+        'ru': 'Русский',
+        'sq': 'Shqipe',
+        'tr': 'Türk',
     }
 
-    return static('astrobin/icons/flags/%s/%s' % (size, flags[language_code.lower()]))
+    try:
+        return languages[language_code.lower()]
+    except KeyError:
+        return 'English'
