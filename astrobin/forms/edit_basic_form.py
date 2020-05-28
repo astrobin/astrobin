@@ -1,5 +1,6 @@
 from django import forms
 from django.utils.translation import ugettext_lazy as _
+from django.utils.translation import ugettext as __
 
 from astrobin.forms.utils import parseKeyValueTags
 from astrobin.models import Location, Image
@@ -85,7 +86,7 @@ class ImageEditBasicForm(forms.ModelForm):
             for revision in revisions.all():
                 if revision.w == self.instance.w and revision.h == self.instance.h:
                     self.fields['mouse_hover_image'].choices = self.fields['mouse_hover_image'].choices + [
-                        ("REVISION__%s" % revision.label, "%s %s" % (_("Revision"), revision.label))
+                        ("REVISION__%s" % revision.label, "%s %s" % (__("Revision"), revision.label))
                     ]
 
     def __initKeyValueTags(self):
