@@ -535,5 +535,5 @@ def get_language_name(language_code):
 
     try:
         return languages[language_code.lower()]
-    except ValueError:
+    except KeyError:
         return 'English'
