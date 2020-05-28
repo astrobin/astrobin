@@ -1,3 +1,12 @@
+2020-05-28 Salvatore Iovene <salvatore@iovene.com>
+ * v1.72.5
+ * (general) Remove usage of flags to express language (#1161)
+ * (images) Fix unicode issue in edit basic info (#1165)
+ * (deps) Update dependency mwclient to v0.10.1 (#1164)
+ * (deps) Update dependency gevent to v20.5.2 (#1163)
+ * (deps) Update dependency botocore to v1.16.18 (#1159)
+ * (deps) Update dependency boto3 to v1.13.18 (#1162)
+
 2020-05-26 Salvatore Iovene <salvatore@iovene.com>
  * v1.72.4
  * (general) Deal with missing file exception during data archive download
