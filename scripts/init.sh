@@ -1,9 +1,9 @@
 #!/bin/sh
 
 # Migrate
+python manage.py sync_translation_fields --noinput
 python manage.py migrate --noinput
 python manage.py migrate --run-syncdb --noinput
-python manage.py sync_translation_fields --noinput
 
 # Create initial data
 python manage.py shell << EOF
