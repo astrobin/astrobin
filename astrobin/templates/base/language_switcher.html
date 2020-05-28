@@ -2,13 +2,13 @@
 {% load i18n %}
 {% load tags %}
 
-<li class="dropdown">
+<li class="dropdown language-switcher">
     <a href="#" class="dropdown-toggle" data-toggle="dropdown">
         <i class="icon-globe"></i>
         {% if not request.user.is_authenticated %}
             <span class="hidden-phone">
                 {% get_language_name request.LANGUAGE_CODE %}
-                <span class="caret"></span>
+                <i class="icon-caret-down"></i>
             </span>
         {% endif %}
     </a>
