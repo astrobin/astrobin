@@ -335,3 +335,54 @@ li [class*=" icon-"], .nav li [class*=" icon-"] {
 .nav .language-switcher {
   margin-right: .5rem;
 }
+.navbar-fixed-top .container {
+  max-height: 40px;
+}
+
+.nav-pills.nav-stacked, .nav-tabs.nav-stacked {
+  .icon-chevron-right {
+    float: right;
+    margin-top: 1px;
+    margin-right: -6px;
+    @include opacity(0.5);
+  }
+}
+
+.nav-tabs li a {
+  border-color: #404040 !important;
+}
+
+.nav-tabs .active a,
+.nav-tabs .active a:hover,
+.nav-tabs .active a:focus {
+  background-color: #ddd;
+  color: #222;
+  font-style: italic;
+  font-weight: bold;
+}
+
+.navbar .navbar-inner {
+  border-top: 4px solid #3092cf;
+  background: #303030 url('../images/darker-panel-tile.png');
+  -webkit-box-shadow: 0 0 12px rgba(0, 0, 0, 1);
+  -moz-box-shadow: 0 0 12px rgba(0, 0, 0, 1);
+  box-shadow: 0 0 12px rgba(0, 0, 0, 1);
+}
+
+.navbar .nav > li > a {
+  color: $link-color;
+  padding: 12px 8px;
+  text-shadow: 0 1px 0 darken($link-color, 20%);
+
+  &:hover {
+    color: darken($link-color, 5%);
+  }
+}
+
+.navbar .nav > li.open > a {
+  text-shadow: 0 1px 0 darken($text-color, 20%);
+}
+
+.nav .language-switcher {
+  margin-right: .5rem;
+}
