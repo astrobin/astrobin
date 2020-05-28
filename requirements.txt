@@ -106,7 +106,7 @@ flickrapi==2.4.0
 funcsigs==1.0.2
 futures==3.3.0
 geoip2==3.0.0
-gevent==20.5.0
+gevent==20.5.2
 gprof2dot==2019.11.30
 greenlet==0.4.15
 gunicorn==19.10.0
@@ -205,3 +205,5 @@ Werkzeug==1.0.1
 xdis==4.6.0
 yolk==0.4.3
 zipp==1.2.0
+zope.event==4.4
+zope.interface==5.1.0
