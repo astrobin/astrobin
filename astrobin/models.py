@@ -769,6 +769,7 @@ class Image(HasSolutionMixin, SafeDeleteModel):
         ("AHK", "Astro Hostel Krasnodar"),
         ("AOWA", "Astro Observatories Western Australia"),
         ("CS", "ChileScope"),
+        ("DSNM", "Dark Sky New Mexico"),
         ("DSP", "Dark Sky Portal"),
         ("DSC", "DeepSkyChile"),
         ("DSW", "DeepSkyWest"),
