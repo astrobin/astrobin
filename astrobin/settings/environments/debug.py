@@ -36,6 +36,4 @@ if DEBUG:
     CELERY_RESULT_BACKEND = 'cache'
     CELERY_CACHE_BACKEND = 'memory'
 
-    CORS_ORIGIN_ALLOW_ALL = True
-
     STATICFILES_STORAGE = 'pipeline.storage.NonPackagingPipelineStorage'
