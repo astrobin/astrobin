@@ -784,6 +784,7 @@ class Image(HasSolutionMixin, SafeDeleteModel):
         ("NMS", "New Mexico Skies"),
         ("OES", "Observatorio El Sauce"),
         ("PSA", "PixelSkies"),
+        ("REM", "RemoteSkies.net"),
         ("RLD", "Riverland Dingo Observatory"),
         ("SS", "Sahara Sky"),
         ("SPVO", "San Pedro Valley Observatory"),
