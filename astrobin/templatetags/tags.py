@@ -539,8 +539,8 @@ def get_other_languages():
 @register.simple_tag
 def get_language_name(language_code):
     languages = {
-        '': 'English',
-        'en': 'English',
+        '': 'English (US)',
+        'en': 'English (US)',
         'en-us': 'English (US)',
         'en-gb': 'English (GB)',
 
@@ -564,4 +564,4 @@ def get_language_name(language_code):
     try:
         return languages[language_code.lower()]
     except KeyError:
-        return 'English'
+        return 'English (US)'
