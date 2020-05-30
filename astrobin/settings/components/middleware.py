@@ -1,7 +1,7 @@
 MIDDLEWARE_CLASSES = [
+    'corsheaders.middleware.CorsMiddleware',
     'multidb.middleware.PinningRouterMiddleware',
     'django.middleware.http.ConditionalGetMiddleware',
-    'corsheaders.middleware.CorsMiddleware',
     'django.middleware.common.CommonMiddleware',
     'django.contrib.sessions.middleware.SessionMiddleware',
     'silk.middleware.SilkyMiddleware',
