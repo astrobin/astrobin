@@ -1,4 +1,8 @@
 2020-05-30 Salvatore Iovene <salvatore@iovene.com>
+ * v1.73.1
+ * (api) Move CorsMiddleware above ConditionalGetMiddleware to prevent etag stripping cors header
+
+2020-05-30 Salvatore Iovene <salvatore@iovene.com>
  * v1.73.0
  * (general) Do specify English (US) in language selector (#1171)
  * (images) Add RemoteSkies.net to list of remote sources (#1172)
