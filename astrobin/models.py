@@ -778,6 +778,7 @@ class Image(HasSolutionMixin, SafeDeleteModel):
         ("HMO", "Heaven's Mirror Observatory"),
         ("IC", "IC Astronomy Observatories"),
         ("ITU", "Image The Universe"),
+        ("INS", "Insight Observatory"),
         ("iT", "iTelescope"),
         ("LGO", "Lijiang Gemini Observatory"),
         ("MARIO", "Marathon Remote Imaging Observatory (MaRIO)"),
