@@ -41,7 +41,13 @@
         </form>
     {% endif %}
 
-    <form class="form-horizontal" id="gear" method="post" action="">{% csrf_token %}
+    <form
+            class="form-horizontal"
+            id="gear"
+            method="post"
+            action=""
+            novalidate>
+        {% csrf_token %}
         {{ form.non_field_errors }}
         {% for field in form %}
             <div class="control-group">

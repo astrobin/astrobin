@@ -27,7 +27,12 @@
             <a href="{{ change_default_url }}">here</a>.{% endblocktrans %}
     </div>
 
-    <form class="form-horizontal" action="{% url 'image_edit_save_license' %}" method="post">{% csrf_token %}
+    <form
+            class="form-horizontal"
+            action="{% url 'image_edit_save_license' %}"
+            method="post"
+            novalidate>
+        {% csrf_token %}
         {{ form|as_bootstrap }}
         <input type="hidden" name="image_id" value="{{ image.get_id }}" />
 
