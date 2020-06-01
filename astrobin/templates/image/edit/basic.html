@@ -30,7 +30,9 @@
             id="basic"
             action=""
             method="post"
-            enctype="multipart/form-data">{% csrf_token %}
+            novalidate
+            enctype="multipart/form-data">
+        {% csrf_token %}
 
         {% if 'corrupted' in request.GET %}
             {% include './_catastrophic_data_corruption.html' %}

@@ -21,8 +21,13 @@
     {% include 'image/edit/menu.html' %}
 
     {% if edit_type == 'solar_system' %}
-        <form class="form-horizontal" id="image_acquisition" action="{% url 'image_edit_save_acquisition' %}"
-              method="post">{% csrf_token %}
+        <form
+                class="form-horizontal"
+                id="image_acquisition"
+                action="{% url 'image_edit_save_acquisition' %}"
+                method="post"
+                novalidate>
+            {% csrf_token %}
             {{ ssa_form|as_bootstrap }}
             <input type="hidden" name="image_id" value="{{ image.get_id }}" />
             <input type="hidden" name="edit_type" value="solar_system" />

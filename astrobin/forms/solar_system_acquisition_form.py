@@ -10,7 +10,7 @@ class SolarSystem_AcquisitionForm(forms.ModelForm):
     date = forms.DateField(
         required=False,
         input_formats=['%Y-%m-%d'],
-        widget=forms.TextInput(attrs={'class': 'datepickerclass'}),
+        widget=forms.TextInput(attrs={'class': 'datepickerclass', 'autocomplete': 'off'}),
         help_text=_("Please use the following format: yyyy-mm-dd"),
         label=_("Date"),
     )
@@ -44,6 +44,6 @@ class SolarSystem_AcquisitionForm(forms.ModelForm):
             'transparency',
         )
         widgets = {
-            'date': forms.TextInput(attrs={'class': 'datepickerclass'}),
-            'time': forms.TextInput(attrs={'class': 'timepickerclass'}),
+            'date': forms.TextInput(attrs={'class': 'datepickerclass', 'autocomplete': 'off'}),
+            'time': forms.TextInput(attrs={'class': 'timepickerclass', 'autocomplete': 'off'}),
         }
