@@ -1,6 +1,5 @@
 @import "variables";
 
-select,
 input[type="text"],
 input[type="password"],
 input[type="datetime"],
@@ -19,6 +18,10 @@ input[type="color"],
   height: 24px;
 }
 
+select {
+  height: 34px;
+}
+
 .form-inline {
   display: table;
   width: auto;
@@ -28,7 +31,6 @@ input[type="color"],
     width: 100%;
   }
 }
-
 
 input:focus, textarea:focus {
   border-color: rgba(204, 75, 46, 0.8);
@@ -67,7 +69,7 @@ input:focus, textarea:focus {
 
   select {
     width: 624px;
-    max-width: 96%;
+    max-width: 99%;
   }
 
   .control-label {
