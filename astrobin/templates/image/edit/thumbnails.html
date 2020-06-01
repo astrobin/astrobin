@@ -27,7 +27,8 @@
             class="form-horizontal edit-thumbnails"
             action=""
             method="post"
-            enctype="multipart/form-data">
+            enctype="multipart/form-data"
+            novalidate>
 
         {% csrf_token %}
         {{ form|as_bootstrap }}

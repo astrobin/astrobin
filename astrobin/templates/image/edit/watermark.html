@@ -24,7 +24,12 @@
         {% blocktrans %}Please note: animated GIFs cannot be watermarked at this time.{% endblocktrans %}
     </div>
 
-    <form class="form-horizontal" action="{% url 'image_edit_save_watermark' %}" method="post">{% csrf_token %}
+    <form
+            class="form-horizontal"
+            action="{% url 'image_edit_save_watermark' %}"
+            method="post"
+            novalidate>
+        {% csrf_token %}
         {{form|as_bootstrap}}
         <input type="hidden" name="image_id" value="{{image.get_id}}" />
 

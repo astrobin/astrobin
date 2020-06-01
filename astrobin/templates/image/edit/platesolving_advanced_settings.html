@@ -27,8 +27,9 @@
             class="form-horizontal"
             action="{% url 'image_edit_platesolving_advanced_settings' image.get_id revision_label %}"
             method="post"
-            enctype="multipart/form-data">{% csrf_token %}
-
+            novalidate
+            enctype="multipart/form-data">
+        {% csrf_token %}
         {{form|as_bootstrap}}
         {% progress_bar %}
 
