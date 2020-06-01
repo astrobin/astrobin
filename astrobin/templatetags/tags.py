@@ -516,7 +516,8 @@ def get_officially_supported_languages():
         'de',
         'es',
         'fr',
-        'it'
+        'it',
+        'pt'
     )
 
 
@@ -529,7 +530,6 @@ def get_other_languages():
         'ja',
         'nl',
         'pl',
-        'pt',
         'ru',
         'sq',
         'tr',
