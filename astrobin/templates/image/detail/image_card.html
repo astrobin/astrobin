@@ -1,6 +1,7 @@
 {% load common_tags %}
 {% load astrobin_apps_premium_tags %}
 {% load astrobin_apps_platesolving_tags %}
+{% load astrobin_apps_remote_source_affiliation_tags %}
 {% load i18n %}
 {% load tags %}
 
@@ -229,13 +230,30 @@
 
                 {% if request.user|can_view_full_technical_card or request.user == image.user %}
                     {% if image.data_source and image.data_source != "OTHER" and image.data_source != "UNSET" %}
-                        <p><strong class="card-label">{% trans "Data source" %}:</strong> {{ image.get_data_source }}
+                        <p>
+                            <strong class="card-label">{% trans "Data source" %}:</strong>
+                            {% if image.data_source == 'AMATEUR_HOSTING' or image.data_source == 'OWN_REMOTE' %}
+                                <a href="https://welcome.astrobin.com/remote-astrophotography" target="_blank">
+                                    {{ image.get_data_source }}
+                                </a>
+                            {% else %}
+                                {{ image.get_data_source }}
+                            {% endif %}
                         </p>
                     {% endif %}
 
                     {% if image.remote_source and image.remote_source != "OTHER" %}
-                        <p><strong
-                                class="card-label">{% trans "Remote source" %}:</strong> {{ image.get_remote_source }}
+                        <p>
+                            <strong class="card-label">{% trans "Remote source" %}:</strong>
+                            {% if image.remote_source|is_remote_source_affiliate %}
+                                <a href="{{ image.remote_source|remote_source_affiliate_url }}?utm_source=astrobin&utm_medium=technical-card&utm_campaign=hosting-facility"
+                                   onclick="getOutboundLink('{{ image.remote_source|remote_source_affiliate_url }}?utm_source=astrobin&utm_medium=technical-card&utm_campaign=hosting-facility')"
+                                   target="_blank">
+                                    {{ image.get_remote_source }}
+                                </a>
+                            {% else %}
+                                {{ image.get_remote_source }}
+                            {% endif %}
                         </p>
                     {% endif %}
                 {% endif %}
