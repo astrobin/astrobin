@@ -144,14 +144,12 @@
 
                 <li class="divider"></li>
 
-                {% if request.user.is_superuser %}
-                <li class="explore-menu-stats">
-                    <a href="{% url 'stats' %}">
-                        <i class="icon-bar-chart"></i>
-                        {% trans "Stats" %}
+                <li class="explore-menu-remote-astrophotography">
+                    <a href="https://welcome.astrobin.com/remote-astrophotography">
+                        <i class="icon-laptop"></i>
+                        {% trans "Remote astrophotography" %}
                     </a>
                 </li>
-                {% endif %}
 
                 <li class="explore-menu-trending-astrophotographers">
                     <a href="{% url 'trending_astrophotographers' %}">
@@ -159,6 +157,17 @@
                         {% trans "Trending astrophotographers" %}
                     </a>
                 </li>
+
+                {% if request.user.is_superuser %}
+                    <li class="divider"></li>
+
+                    <li class="explore-menu-stats">
+                        <a href="{% url 'stats' %}">
+                            <i class="icon-bar-chart"></i>
+                            {% trans "Stats" %}
+                        </a>
+                    </li>
+                {% endif %}
             </ul>
         </li>
 
