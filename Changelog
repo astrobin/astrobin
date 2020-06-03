@@ -1,3 +1,15 @@
+2020-06-03 Salvatore Iovene <salvatore@iovene.com>
+ * v1.77.0
+ * (general) Add db migration to match model for sorted remote_sources (#1185)
+ * (images) Add remote source affiliation (#1189)
+ * (i18n) Fix "optioons" typo (#1186)
+ * (deps) Update dependency codecov to v2.1.4 (#1192)
+ * (deps) Update dependency kombu to v4.6.10 (#1191)
+ * (deps) Update dependency botocore to v1.16.21 (#1188)
+ * (deps) Update dependency boto3 to v1.13.21 (#1187)
+ * (deps) Update dependency newrelic to v5.14.0.142 (#1184)
+ * (deps) Update dependency redis to v3.5.3 (#1183)
+
 2020-06-01 Salvatore Iovene <salvatore@iovene.com>
  * v1.76.0
  * (i18n) Move pt to the list of officially supported languages

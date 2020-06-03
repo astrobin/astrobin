@@ -1,25 +1,19 @@
-{% load astrobin_apps_donations_tags %}
-{% load astrobin_apps_premium_tags %}
-{% load i18n %}
-{% load dfp_tags %}
-{% load tags %}
+{% load astrobin_apps_donations_tags %}{% load astrobin_apps_premium_tags %}{% load astrobin_apps_remote_source_affiliation_tags %}{% load i18n %}{% load dfp_tags %}{% load tags %}
 
 {% if request.user|show_ads and not image.user|is_any_ultimate %}
     <div class="subtle-container advertisement">
         <div class="header">
             <h4><i class="icon-bullhorn"></i></h4>
 
-                <a
-                        class="remove"
-                        data-toggle="modal"
-                        {% if request.user|can_remove_ads %}
-                            href="#remove-ads-modal"
-                        {% else %}
-                            href="#feature-restricted-modal"
-                        {% endif %}
-                >
-                    {% trans "Remove ads" %} <i class="icon-remove"></i>
-                </a>
+            <a class="remove" data-toggle="modal"
+                    {% if request.user|can_remove_ads %}
+               href="#remove-ads-modal"
+                    {% else %}
+               href="#feature-restricted-modal"
+                    {% endif %}
+            >
+                {% trans "Remove ads" %} <i class="icon-remove"></i>
+            </a>
         </div>
 
         {% if request.user_agent.is_tablet %}
@@ -30,5 +24,31 @@
             {% dfp_tag '47890729/image-page' 300 250 brands=makes_list display="desktop" %}
         {% endif %}
     </div>
+
+    {% if image.remote_source|is_remote_source_affiliate and image.remote_source|remote_source_affiliate_image %}
+
+        <div class="subtle-container advertisement remote-source-affiliate">
+            <div class="header">
+                <h4><i class="icon-star"></i> {% trans "Acquired at" %}</h4>
+
+                <a class="remove" data-toggle="modal"
+                        {% if request.user|can_remove_ads %}
+                   href="#remove-ads-modal"
+                        {% else %}
+                   href="#feature-restricted-modal"
+                        {% endif %}
+                >
+                    {% trans "Remove" %} <i class="icon-remove"></i>
+                </a>
+            </div>
+
+            <a href="{{ image.remote_source|remote_source_affiliate_url }}?utm_source=astrobin&utm_medium=banner&utm_campaign=hosting-facility"
+               onclick="getOutboundLink('{{ image.remote_source|remote_source_affiliate_url }}?utm_source=astrobin&utm_medium=banner&utm_campaign=hosting-facility')"
+               target="_blank">
+                <img width="300" height="125" src="{{ image.remote_source|remote_source_affiliate_image }}" />
+            </a>
+        </div>
+    {% endif %}
+
 {% endif %}
 

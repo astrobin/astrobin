@@ -11,7 +11,7 @@ class CollectionUpdateForm(forms.ModelForm):
 
     order_by_tag = forms.ChoiceField(
         required=False,
-        help_text=_("Select a tag to order this collection by its value. If you see no optioons here, it's because "
+        help_text=_("Select a tag to order this collection by its value. If you see no options here, it's because "
                     "none of the images in this collection have key/value tags. PS: Images that lack this tag will "
                     "appear at the bottom of the collection.")
     )
