@@ -11,7 +11,6 @@ class RemoteSourceAffiliateAdmin(admin.ModelAdmin):
         'affiliation_start',
         'affiliation_expiration',
         'image_file',
-        'dropdown_image_file',
     )
 
     list_display = (
