@@ -1491,9 +1491,11 @@ BODY:first-of-type ul.as-list, x:-moz-any-link, x:default { /* Target FF 3.5+ */
     border: none;
     @include no-box-shadow;
 
+    /* Hide by default, will be shown if ad is rendered. */
+    display: none;
+
     &:not(.remote-source-affiliate) {
-      /* Hide by default, will be shown if ad is rendered. */
-      display: none;
+      display: block;
     }
 
     .header {
