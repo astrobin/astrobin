@@ -12,7 +12,7 @@ class DeepSky_AcquisitionBasicForm(forms.ModelForm):
     date = forms.DateField(
         required=False,
         input_formats=['%Y-%m-%d'],
-        widget=forms.TextInput(attrs={'class': 'datepickerclass'}),
+        widget=forms.TextInput(attrs={'class': 'datepickerclass', 'autocomplete': 'off'}),
         help_text=_("Please use the following format: yyyy-mm-dd"),
         label=_("Date"),
     )
@@ -27,5 +27,5 @@ class DeepSky_AcquisitionBasicForm(forms.ModelForm):
         model = DeepSky_Acquisition
         fields = ('date', 'number', 'duration',)
         widgets = {
-            'date': forms.TextInput(attrs={'class': 'datepickerclass'}),
+            'date': forms.TextInput(attrs={'class': 'datepickerclass', 'autocomplete': 'off'}),
         }

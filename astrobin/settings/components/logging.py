@@ -64,6 +64,10 @@ LOGGING = {
             'handlers': ['console', 'logfile'],
             'level': 'DEBUG',
         },
+        'astrobin.tasks': {
+            'handlers': ['console', 'logfile'],
+            'level': 'DEBUG',
+        },
         'django.request': {
             'handlers': ['mail_admins'],
             'level': 'ERROR',
@@ -77,7 +81,7 @@ LOGGING = {
     }
 }
 
-if AWS_ACCESS_KEY_ID != 'invalid' and AWS_SECRET_ACCESS_KEY != 'invalid':
+if AWS_ACCESS_KEY_ID != 'invalid' and AWS_SECRET_ACCESS_KEY != 'invalid' and 'localhost' not in BASE_URL:
     LOGGING['handlers']['watchtower'] = {
         'level': 'DEBUG',
         'class': 'watchtower.CloudWatchLogHandler',
@@ -89,3 +93,4 @@ if AWS_ACCESS_KEY_ID != 'invalid' and AWS_SECRET_ACCESS_KEY != 'invalid':
 
     LOGGING['loggers']['django']['handlers'].append('watchtower')
     LOGGING['loggers']['apps']['handlers'].append('watchtower')
+    LOGGING['loggers']['astrobin.tasks']['handlers'].append('watchtower')

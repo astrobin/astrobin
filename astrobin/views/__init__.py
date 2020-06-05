@@ -785,7 +785,6 @@ def image_edit_platesolving_advanced_settings(request, id, revision_label):
         return HttpResponseForbidden()
 
     if revision_label in (None, 'None', '0'):
-        url = reverse('image_edit_platesolving_advanced_settings', args=(image.get_id(),))
         if image.revisions.count() > 0:
             return_url = reverse('image_detail', args=(image.get_id(), '0',))
         else:
@@ -794,7 +793,6 @@ def image_edit_platesolving_advanced_settings(request, id, revision_label):
             content_type=ContentType.objects.get_for_model(Image),
             object_id=image.pk)
     else:
-        url = reverse('image_edit_platesolving_advanced_settings', args=(image.get_id(), revision_label,))
         return_url = reverse('image_detail', args=(image.get_id(), revision_label,))
         revision = ImageRevision.objects.get(image=image, label=revision_label)
         solution, created = Solution.objects.get_or_create(

@@ -329,6 +329,10 @@ astrobin_common = {
 
         $('abbr.timeago').timeago();
 
+        if (window.innerWidth >= 980) {
+            $("select:not([multiple])").select2({theme: "flat"});
+        }
+
         $("select[multiple]").not('*[name="license"]').multiselect({
             searchable: false,
             dividerLocation: 0.5

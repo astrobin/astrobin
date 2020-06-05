@@ -1,0 +1,115 @@
+@import "variables";
+
+input[type="text"],
+input[type="password"],
+input[type="datetime"],
+input[type="datetime-local"],
+input[type="date"],
+input[type="month"],
+input[type="time"],
+input[type="week"],
+input[type="number"],
+input[type="email"],
+input[type="url"],
+input[type="search"],
+input[type="tel"],
+input[type="color"],
+.uneditable-input {
+  height: 24px;
+}
+
+select {
+  height: 34px;
+}
+
+.form-inline {
+  display: table;
+  width: auto;
+  margin: 0 auto;
+
+  textarea {
+    width: 100%;
+  }
+}
+
+input:focus, textarea:focus {
+  border-color: rgba(204, 75, 46, 0.8);
+  -webkit-box-shadow: inset 0 1px 1px rgba(0, 0, 0, 0.75), 0 0 8px rgba(204, 75, 46, 0.6);
+  -moz-box-shadow: inset 0 1px 1px rgba(0, 0, 0, 0.75), 0 0 8px rgba(204, 75, 46, 0.6);
+  box-shadow: inset 0 1px 1px rgba(0, 0, 0, 0.75), 0 0 8px rgba(204, 75, 46, 0.6);
+
+}
+
+.help-block, .help-inline {
+  margin-top: $spacer-medium;
+  color: #866158;
+}
+
+.form-actions {
+  background: #333 url('../images/dark-panel-tile.png');
+  border-color: #393939;
+
+  form {
+    margin-bottom: 0;
+  }
+
+  .btn {
+    margin-right: $spacer-small;
+  }
+}
+
+.form-horizontal {
+  input[type=text],
+  input[type=password],
+  textarea,
+  .help-block {
+    width: 610px;
+    max-width: 96%;
+  }
+
+  select {
+    width: 624px;
+    max-width: 99%;
+  }
+
+  .control-label {
+    font-weight: bold;
+    padding-top: 9px;
+
+    &.checkbox {
+      padding-left: 0;
+    }
+  }
+
+  .wysibb {
+    width: 622px;
+    max-width: 98%;
+  }
+
+  .radio,
+  .checkbox {
+    padding-left: 0 !important;
+  }
+}
+
+.form-inline {
+  label {
+    margin-right: $spacer-medium;
+  }
+
+  .btn {
+    margin-left: $spacer-medium;
+  }
+}
+
+.form-vertical {
+  .form-actions {
+    padding-left: 0;
+  }
+}
+
+.form-content {
+  .loading {
+    text-align: center;
+  }
+}

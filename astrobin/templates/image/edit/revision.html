@@ -22,8 +22,13 @@
 {% block content %}
     <h1>{% trans "Edit revision" %}</h1>
 
-    <form id="edit-revision-form" class="form-horizontal edit-revision"
-          action="{% url 'image_edit_revision' revision.pk %}" method="post" enctype="multipart/form-data">
+    <form
+            id="edit-revision-form"
+            class="form-horizontal edit-revision"
+            action="{% url 'image_edit_revision' revision.pk %}"
+            method="post"
+            enctype="multipart/form-data"
+            novalidate>
 
         {% csrf_token %}
 

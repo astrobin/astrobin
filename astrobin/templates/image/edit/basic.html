@@ -5,6 +5,7 @@
 {% load bootstrap_toolkit %}
 {% load django_bootstrap_breadcrumbs %}
 {% load common_tags %}
+{% load astrobin_apps_remote_source_affiliation_tags %}
 
 {% block title %}{% trans "Edit your image: basic information" %}{% endblock %}
 {% block container_extra_classes %}has-subnav{% endblock %}
@@ -30,7 +31,9 @@
             id="basic"
             action=""
             method="post"
-            enctype="multipart/form-data">{% csrf_token %}
+            novalidate
+            enctype="multipart/form-data">
+        {% csrf_token %}
 
         {% if 'corrupted' in request.GET %}
             {% include './_catastrophic_data_corruption.html' %}
@@ -101,6 +104,24 @@
 
     $(document).ready(function() {
         $('.ui-multiselect').show();
+
+        function formatRemoteSource(remoteSource) {
+            var affiliates = {% remote_source_affiliates %};
+
+            if (remoteSource.id && affiliates.indexOf(remoteSource.id) > -1) {
+                return $(
+                    '<span class="remote-source-affiliate">' + remoteSource.text + '</span>' +
+                    '&nbsp;<span class="remote-source-affiliate-sponsor">({% trans "sponsor" %})</span>'
+                );
+            }
+
+            return remoteSource.text;
+        }
+
+        $("#id_remote_source").select2({
+            templateResult: formatRemoteSource,
+            theme: "flat"
+        });
 
         showHideRemoteSource();
         $(document).on('change', '#id_data_source', function () {
