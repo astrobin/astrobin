@@ -1,4 +1,10 @@
 2020-06-05 Salvatore Iovene <salvatore@iovene.com>
+ * v1.77.5
+ * (infra) Add "annoucements" URL rewrite and update nginx version in docker compose
+ * (deps) Update dependency botocore to v1.16.23 (#1198)
+ * (deps) Update dependency Paste to v3.4.1 (#1196)
+
+2020-06-05 Salvatore Iovene <salvatore@iovene.com>
  * v1.77.4
  * (i18n) Update French translation
  * (deps) Update dependency greenlet to v0.4.16 (#1199)
