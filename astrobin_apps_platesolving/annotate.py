@@ -145,12 +145,6 @@ class Annotator:
                 hd_w = w
                 hd_h = h
 
-            thumbnail_w = settings.THUMBNAIL_ALIASES['']['regular']['size'][0]
-            thumbnail_h = int(round(h * thumbnail_w / float(w)))
-            if thumbnail_w > w:
-                thumbnail_w = w
-                thumbnail_h = h
-
             try:
                 base = Image \
                     .open(get_from_storage(
@@ -179,7 +173,7 @@ class Annotator:
 
             image_io = StringIO()
             image = Image.alpha_composite(base, overlay)
-            image = image.resize((thumbnail_w, thumbnail_h), Image.ANTIALIAS)
+            image = image.resize((hd_w, hd_h), Image.ANTIALIAS)
             image = image.convert('RGB')
             image.save(image_io, 'JPEG', quality=90)
 

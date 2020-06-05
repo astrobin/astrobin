@@ -39,6 +39,11 @@ class SolveView(base.View):
         target = get_target(kwargs.get('object_id'), kwargs.get('content_type_id'))
         solution = get_solution(kwargs.get('object_id'), kwargs.get('content_type_id'))
 
+        if target._meta.model_name == u'image':
+            image = target
+        else:
+            image = target.image
+
         if solution.settings is None:
             solution.settings = PlateSolvingSettings.objects.create()
             solution.save()
@@ -47,7 +52,7 @@ class SolveView(base.View):
             solver = Solver()
 
             try:
-                url = target.thumbnail('hd', {
+                url = target.thumbnail('hd_sharpened' if image.sharpen_thumbnails else 'hd', {
                     'sync': True,
                     'revision_label': '0' if target._meta.model_name == u'image' else target.label
                 })
@@ -116,18 +121,18 @@ class SolveAdvancedView(base.View):
                 longitude = None
                 altitude = None
 
-                if solution.advanced_settings.sample_raw_frame_file:
-                    url = solution.advanced_settings.sample_raw_frame_file.url
-                else:
-                    url = target.thumbnail('hd', {
-                        'sync': True,
-                        'revision_label': '0' if target._meta.model_name == u'image' else target.label
-                    })
-
                 if target._meta.model_name == u'image':
                     image = target
                 else:
                     image = target.image
+
+                if solution.advanced_settings.sample_raw_frame_file:
+                    url = solution.advanced_settings.sample_raw_frame_file.url
+                else:
+                    url = target.thumbnail('hd_sharpened' if image.sharpen_thumbnails else 'hd', {
+                        'sync': True,
+                        'revision_label': '0' if target._meta.model_name == u'image' else target.label
+                    })
 
                 acquisitions = DeepSky_Acquisition.objects.filter(image=image)
                 if acquisitions.count() > 0 and acquisitions[0].date:
