@@ -1,3 +1,10 @@
+2020-06-06 Salvatore Iovene <salvatore@iovene.com>
+ * v1.77.6
+ * (plate-solving) Use HD (and when available, sharpened) image to annotate (#1204)
+ * Update dependency botocore to v1.16.24 (#1202)
+ * Update dependency importlib-metadata to v1.6.1 (#1203)
+ * Update dependency boto3 to v1.13.24 (#1201)
+
 2020-06-05 Salvatore Iovene <salvatore@iovene.com>
  * v1.77.5
  * (infra) Add "annoucements" URL rewrite and update nginx version in docker compose
