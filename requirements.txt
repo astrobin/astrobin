@@ -107,7 +107,7 @@ funcsigs==1.0.2
 future==0.18.2
 futures==3.3.0
 geoip2==3.0.0
-gevent==20.5.2
+gevent==20.6.0
 gprof2dot==2019.11.30
 greenlet==0.4.16
 gunicorn==19.10.0
@@ -152,7 +152,7 @@ pem==20.1.0
 Pillow==4.3.0
 ply==3.11
 psycopg2==2.7.1
--e git+https://github.com/siovene/pybbm.git@ddf640fcae1889601a293c210ec6eb9e624207f3#egg=pybbm
+-e git+https://github.com/siovene/pybbm.git@0a61d341#egg=pybbm
 pycodestyle==2.6.0
 pycparser==2.20
 pyflakes==2.2.0
@@ -174,7 +174,7 @@ PyYAML==5.3.1
 rcssmin==1.0.6
 redis==3.5.3
 requests==2.23.0
-requests-aws4auth==0.9
+requests-aws4auth==1.0
 requests-oauthlib==1.3.0
 requests-toolbelt==0.9.1
 rjsmin==1.1.0
