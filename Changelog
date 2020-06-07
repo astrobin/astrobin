@@ -1,4 +1,11 @@
 2020-06-06 Salvatore Iovene <salvatore@iovene.com>
+ * v1.78.0
+ * (forums) Forbid editing posts 5 minutes after creation (#1208)
+ * (performance) Improve performance on dev by caching docker volumes (#1210)
+ * (deps) Update dependency requests-aws4auth to v1 (#1209)
+ * (deps) Update dependency gevent to v20.6.0 (#1205)
+
+2020-06-06 Salvatore Iovene <salvatore@iovene.com>
  * v1.77.6
  * (plate-solving) Use HD (and when available, sharpened) image to annotate (#1204)
  * Update dependency botocore to v1.16.24 (#1202)
