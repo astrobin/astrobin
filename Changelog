@@ -1,4 +1,8 @@
 2020-06-06 Salvatore Iovene <salvatore@iovene.com>
+ * v1.78.1
+ * (deps) Upgrade pybbm with fix for missing import
+
+2020-06-06 Salvatore Iovene <salvatore@iovene.com>
  * v1.78.0
  * (forums) Forbid editing posts 5 minutes after creation (#1208)
  * (performance) Improve performance on dev by caching docker volumes (#1210)
