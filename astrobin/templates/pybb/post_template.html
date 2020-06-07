@@ -1,7 +1,11 @@
-{% load i18n pybb_tags %}
+{% load i18n %}
+{% load static %}
+
 {% load avatar_tags %}
+{% load pybb_tags %}
 
 {% load astrobin_apps_users_tags %}
+{% load common_tags %}
 
 
 {% pybb_get_profile user=post.user as post_user_profile %}
@@ -55,9 +59,21 @@
                     <a href="#" class="btn btn-mini bb-quote-selected-link">{% trans "quote selected" %}</a>
                 {% endif %}
 
-                {% if user.is_moderator or post|pybb_posted_by:user %}
-                    <a class="btn btn-mini btn-primary" href="{% url 'pybb:edit_post' pk=post.id %}">{% trans "Edit" %}</a>
+                {% if post|pybb_posted_by:user or user.is_moderator %}
+                    {% if  post.created|more_recent_than:300 or user.is_moderator %}
+                        <a href="{% url 'pybb:edit_post' pk=post.id %}"
+                           class="btn btn-mini btn-primary">
+                            {% trans "Edit" %}
+                        </a>
+                    {% else %}
+                        <a data-toggle="modal"
+                           href="#post-editing-not-allowed-modal"
+                           class="btn btn-mini btn-primary disabled">
+                            {% trans "Edit" %}
+                        </a>
+                    {% endif %}
                 {% endif %}
+
                 {% if user.is_moderator %}
                     <a class="btn btn-mini btn-danger" onclick="pybb_delete_post('{% url 'pybb:delete_post' post.id %}',
                             'post-{{ post.id }}', '{% trans 'Delete post?' %}'); return false;"
@@ -75,3 +91,17 @@
     </tr>
     </tbody>
 </table>
+
+{% block modals %}
+    <div class="modal hide fade" id="post-editing-not-allowed-modal">
+        <div class="modal-header">
+            <a class="close" data-dismiss="modal">&times;</a>
+            <h3>{% trans "Sorry :-(" %}</h3>
+        </div>
+        <div class="modal-body">
+            {% blocktrans trimmed with minutes=5 %}
+                Editing a post is only allowed within {{ minutes }} minutes after creating it.
+            {% endblocktrans %}
+        </div>
+    </div>
+{% endblock %}
