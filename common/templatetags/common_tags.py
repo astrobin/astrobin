@@ -181,3 +181,8 @@ def more_recent_than(t, seconds):
     delta = datetime.timedelta(seconds=seconds)
     return t > now - delta
 
+
+@register.filter
+def get_pks(qs):
+    # type: (QuerySet) -> list[int]
+    return [x.pk for x in qs]

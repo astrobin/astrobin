@@ -1,17 +1,13 @@
-# Third party apps
 from rest_framework import serializers
 
-# Other AstroBin apps
 from common.serializers import AvatarField
-
-# This app
 from .models import NestedComment
 
 
 class NestedCommentSerializer(serializers.ModelSerializer):
     parent = serializers.PrimaryKeyRelatedField(
-        queryset = NestedComment.objects.all(),
-        allow_null = True)
+        queryset=NestedComment.objects.all(),
+        allow_null=True)
 
     author_avatar = AvatarField(source='author', required=False)
 
@@ -29,4 +25,3 @@ class NestedCommentSerializer(serializers.ModelSerializer):
             'deleted',
             'parent',
         )
-
