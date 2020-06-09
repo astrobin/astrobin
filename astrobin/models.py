@@ -2070,6 +2070,11 @@ class UserProfile(SafeDeleteModel):
         help_text=_("Write something about yourself. HTML tags are allowed."),
     )
 
+    shadow_bans = models.ManyToManyField(
+        "self",
+        symmetrical=False
+    )
+
     # Counter for uploaded images.
     premium_counter = models.PositiveIntegerField(
         default=0,

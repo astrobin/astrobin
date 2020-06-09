@@ -1,7 +1,8 @@
 {% load i18n %}
+
+{% load astrobin_apps_premium_tags %}
 {% load common_tags %}
 {% load tags %}
-{% load astrobin_apps_premium_tags %}
 
 <div class="subnav subnav-fixed">
     <ul class="nav nav-pills">
@@ -167,6 +168,30 @@
                         {% trans "Send private message" %}
                     </a>
                 </li>
+
+                {% if not request.user|shadow_bans:requested_user %}
+                    <li>
+                        <a class="shadow-ban danger"
+                           href="#"
+                           data-toggle="modal"
+                           data-target="#shadow-ban-modal"
+                           data-user-pk="{{ requested_user.pk }}">
+                            <i class="icon-ban-circle"></i>
+                            {% trans "Shadow-ban" %}
+                        </a>
+                    </li>
+                {% else %}
+                    <li>
+                        <a class="remove-shadow-ban"
+                           href="#"
+                           data-toggle="modal"
+                           data-target="#remove-shadow-ban-modal"
+                           data-user-pk="{{ requested_user.pk }}">
+                            <i class="icon-ban-circle"></i>
+                            {% trans "Remove shadow-ban" %}
+                        </a>
+                    </li>
+                {% endif %}
             </ul>
         </li>
         {% endif %}
