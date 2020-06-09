@@ -4,12 +4,12 @@ from datetime import datetime
 
 from django.conf import settings
 from django.contrib.contenttypes.models import ContentType
-from django.contrib.staticfiles.templatetags.staticfiles import static
 from django.core.paginator import Paginator, EmptyPage, PageNotAnInteger
 from django.template import Library
 from django.template.defaultfilters import timesince
 from django.utils.translation import ugettext as _
 from subscription.models import UserSubscription, Subscription
+from threaded_messages.models import Participant
 
 from astrobin.enums import SubjectType
 from astrobin.gear import is_gear_complete, get_correct_gear
@@ -19,6 +19,7 @@ from astrobin_apps_donations.templatetags.astrobin_apps_donations_tags import is
 from astrobin_apps_premium.templatetags.astrobin_apps_premium_tags import is_premium_2020, is_premium, is_ultimate_2020, \
     is_lite, is_any_ultimate
 from astrobin_apps_premium.utils import premium_get_valid_usersubscription
+from astrobin_apps_users.services import UserService
 
 register = Library()
 
@@ -403,6 +404,7 @@ def is_forum_moderator(user):
 
     return user.groups.filter(name='forum_moderators').count() > 0
 
+
 @register.filter
 def to_user_timezone(value, user):
     from astrobin.utils import to_user_timezone as tut
@@ -496,7 +498,7 @@ def private_abbr():
 def can_add_technical_details(image):
     # type: (Image) -> bool
     return image.subject_type in (
-        "", # Default as it comes from the frontend form.
+        "",  # Default as it comes from the frontend form.
         SubjectType.DEEP_SKY,
         SubjectType.SOLAR_SYSTEM,
         SubjectType.WIDE_FIELD,
@@ -565,3 +567,17 @@ def get_language_name(language_code):
         return languages[language_code.lower()]
     except KeyError:
         return 'English (US)'
+
+
+@register.filter
+def shadow_bans(a, b):
+    # type: (User, User) -> bool
+    return UserService(a).shadow_bans(b)
+
+
+@register.filter
+def skip_thread_list_shadow_bans(thread_list, user):
+    # type: (QuerySet, User) -> QuerySet
+    return Participant.objects.filter(pk__in=[
+        x.pk for x in thread_list if not UserService(user).shadow_bans(x.thread.creator)
+    ])

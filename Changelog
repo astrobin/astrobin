@@ -1,3 +1,11 @@
+2020-06-09 Salvatore Iovene <salvatore@iovene.com>
+ * v1.79.0
+ * (general) Add support for shadow-banning users (#1215)
+ * (deps) Update dependency botocore to v1.16.25 (#1217)
+ * (deps) Update dependency boto3 to v1.13.25 (#1216)
+ * (deps) Update dependency celery to v4.4.5 (#1214)
+ * (deps) Update dependency certifi to v2020.4.5.2 (#1212)
+
 2020-06-07 Salvatore Iovene <salvatore@iovene.com>
  * v1.78.2
  * (deps) Fix hash of pybbm dependency

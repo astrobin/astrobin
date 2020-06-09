@@ -68,6 +68,16 @@
                 $("[form=" + formId + "][type=submit]").prop("disabled", true);
             }, 2);
         });
+
+        $(".shadow-ban").click(function () {
+            var userPk = $(this).data('user-pk');
+            $("#shadow-ban-modal #userPk").val(userPk);
+        });
+
+        $(".remove-shadow-ban").click(function () {
+            var userPk = $(this).data('user-pk');
+            $("#remove-shadow-ban-modal #userPk").val(userPk);
+        });
     });
 </script>
 

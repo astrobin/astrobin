@@ -17,7 +17,8 @@
 {% endblock %}
 
 {% block content %}
-    {% paginate 50 thread_list %}
+    {% setvar thread_list|skip_thread_list_shadow_bans:request.user as filtered_thread_list %}
+    {% paginate 50 filtered_thread_list %}
 
     <div class="subnav subnav-fixed">
         <ul class="nav nav-pills">
@@ -42,7 +43,7 @@
             </tr>
         </thead>
         <tbody>
-        {% for message in thread_list %}
+        {% for message in filtered_thread_list %}
             <tr>
                 <td class="message-state{% if message.new %} message-unread{% endif %}">
                     <div class="state-indicator"></div>
