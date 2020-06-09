@@ -1,5 +1,8 @@
-{% load common_tags %}
 {% load i18n %}
+
+{% load common_tags %}
+{% load tags %}
+
 
 {% if request.user != image.user %}
 <li class="dropdown hidden-phone">
@@ -15,12 +18,31 @@
                 {% trans "View profile" %}
             </a>
         </li>
+
         <li>
             <a class="send-private-message" href="{% url 'messages_compose_to' image.user.username %}{% query_string "next=request.path, subject=image.title" "" %}">
                 <i class="icon-envelope"></i>
                 {% trans "Send private message" %}
             </a>
         </li>
+
+        {% if not request.user|shadow_bans:image.user %}
+            <li>
+                <a class="shadow-ban danger" href="#" data-toggle="modal" data-target="#shadow-ban-modal"
+                   data-user-pk="{{ image.user.pk }}">
+                    <i class="icon-ban-circle"></i>
+                    {% trans "Shadow-ban" %}
+                </a>
+            </li>
+        {% else %}
+            <li>
+                <a class="remove-shadow-ban" href="#" data-toggle="modal" data-target="#remove-shadow-ban-modal"
+                   data-user-pk="{{ image.user.pk }}">
+                    <i class="icon-ban-circle"></i>
+                    {% trans "Remove shadow-ban" %}
+                </a>
+            </li>
+        {% endif %}
     </ul>
 </li> <!-- user -->
 {% endif %} <!-- not owner -->

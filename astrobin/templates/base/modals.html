@@ -2,6 +2,7 @@
 {% load static %}
 {% load astrobin_apps_notifications_tags %}
 {% load astrobin_apps_premium_tags %}
+{% load common_tags %}
 
 <div class="modal hide fade" id="notifications-modal">
     <div class="modal-header">
@@ -125,3 +126,63 @@
     </div>
 {% endif %}
 
+<div class="modal hide fade" id="shadow-ban-modal">
+    <div class="modal-header">
+        <a class="close" data-dismiss="modal">&times;</a>
+        <h3><i class="icon-ban-circle"></i> {% trans "Are you really sure?" %}</h3>
+    </div>
+    <div class="modal-body">
+        <p>
+            {% blocktrans trimmed %}
+                If this user has been harassing you, and you shadow-ban them, all their activities on your content will
+                be invisible to everyone except themselves.
+            {% endblocktrans %}
+        </p>
+
+        <p>
+            {% blocktrans trimmed %}
+                They will not know that they have been shadow-banned, and the goal is that eventually they will get
+                bored while having caused no harm, since nobody saw what they posted.
+            {% endblocktrans %}
+        </p>
+    </div>
+    <div class="modal-footer">
+        <form action="{% url 'profile_shadow_ban' %}" method="post">
+            {% csrf_token %}
+            <input type="hidden" name="userPk" id="userPk" value="" />
+            <input type="hidden" name="next" id="next" value="{{ request.path }}" />
+            <button class="btn btn-secondary btn-block-mobile" data-dismiss="modal">{% trans "Cancel" %}</button>
+            <button type="submit" class="btn btn-primary btn-block-mobile {% button_loading_class %}">
+                {% trans 'Continue' %}
+                {% button_loading_indicator %}
+            </button>
+        </form>
+    </div>
+</div>
+
+<div class="modal hide fade" id="remove-shadow-ban-modal">
+    <div class="modal-header">
+        <a class="close" data-dismiss="modal">&times;</a>
+        <h3><i class="icon-ban-circle"></i> {% trans "Are you really sure?" %}</h3>
+    </div>
+    <div class="modal-body">
+        <p>
+            {% blocktrans trimmed %}
+                You will remove your shadow-ban on this user, and their comments, messages, etc, will appear again on
+                your content.
+            {% endblocktrans %}
+        </p>
+    </div>
+    <div class="modal-footer">
+        <form action="{% url 'profile_remove_shadow_ban' %}" method="post">
+            {% csrf_token %}
+            <input type="hidden" name="userPk" id="userPk" value="" />
+            <input type="hidden" name="next" id="next" value="{{ request.path }}" />
+            <button class="btn btn-secondary btn-block-mobile" data-dismiss="modal">{% trans "Cancel" %}</button>
+            <button type="submit" class="btn btn-primary btn-block-mobile {% button_loading_class %}">
+                {% trans 'Continue' %}
+                {% button_loading_indicator %}
+            </button>
+        </form>
+    </div>
+</div>

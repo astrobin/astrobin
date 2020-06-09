@@ -20,7 +20,7 @@ from django.core.paginator import Paginator, InvalidPage
 from django.core.urlresolvers import reverse
 from django.db.models import Q
 from django.forms.models import inlineformset_factory
-from django.http import Http404, HttpResponse
+from django.http import Http404, HttpResponse, HttpResponseBadRequest
 from django.http import HttpResponseForbidden
 from django.http import HttpResponseRedirect
 from django.shortcuts import get_object_or_404
@@ -2004,6 +2004,54 @@ def user_profile_seen_email_permissions(request):
 
 
 @login_required
+@require_POST
+def user_profile_shadow_ban(request):
+    user_pk = request.POST.get('userPk')
+
+    if user_pk == request.user.pk:
+        return HttpResponseForbidden()
+
+    user_to_ban = User.objects.get(pk=user_pk)
+    profile_to_ban = user_to_ban.userprofile
+
+    requester_profile = request.user.userprofile
+
+    if profile_to_ban in requester_profile.shadow_bans.all():
+        return HttpResponseBadRequest()
+
+    requester_profile.shadow_bans.add(profile_to_ban)
+
+    msg = "You have shadow-banned %s. They will not be notified about it."
+    messages.success(request, _(msg) % profile_to_ban.get_display_name())
+
+    return HttpResponseRedirect(request.POST.get('next', '/'))
+
+
+@login_required
+@require_POST
+def user_profile_remove_shadow_ban(request):
+    user_pk = request.POST.get('userPk')
+
+    if user_pk == request.user.pk:
+        return HttpResponseForbidden()
+
+    user_to_unban = User.objects.get(pk=user_pk)
+    profile_to_unban = user_to_unban.userprofile
+
+    requester_profile = request.user.userprofile
+
+    if not profile_to_unban in requester_profile.shadow_bans.all():
+        return HttpResponseBadRequest()
+
+    requester_profile.shadow_bans.remove(profile_to_unban)
+
+    msg = "You have removed your shadow-ban for %s. They will not be notified about it."
+    messages.success(request, _(msg) % profile_to_unban.get_display_name())
+
+    return HttpResponseRedirect(request.POST.get('next', '/'))
+
+
+@login_required
 @require_GET
 def user_profile_edit_preferences(request):
     """Edits own preferences"""
@@ -2102,7 +2150,7 @@ def image_revision_upload_process(request):
 
     revisions = ImageRevision.all_objects.filter(image=image).order_by('id')
 
-    mark_as_final = request.POST.get(u'mark_as_final', None) == u'on' # type: bool
+    mark_as_final = request.POST.get(u'mark_as_final', None) == u'on'  # type: bool
 
     highest_label = 'A'
     for r in revisions:

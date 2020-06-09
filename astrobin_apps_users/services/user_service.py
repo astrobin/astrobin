@@ -80,3 +80,7 @@ class UserService:
             'bookmarked_no': self.get_bookmarked_images().count(),
             'liked_no': self.get_liked_images().count(),
         }
+
+    def shadow_bans(self, other):
+        # type: (User) -> bool
+        return other.userprofile in self.user.userprofile.shadow_bans.all()
