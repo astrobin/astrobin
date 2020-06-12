@@ -3,7 +3,6 @@
 {% load astrobin_apps_groups_tags %}
 {% load astrobin_apps_users_tags %}
 
-{% lazy_paginate 50 object.members.all as members %}
 
 {% for user in members %}
     <tr>
@@ -18,9 +17,3 @@
         </td>
     </tr>
 {% endfor %}
-
-<tr class="pagination">
-    <td colspan="3">
-        {% show_pages %}
-    </td>
-</tr>
