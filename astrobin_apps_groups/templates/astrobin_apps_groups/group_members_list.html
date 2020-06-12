@@ -6,8 +6,11 @@
 {% load staticfiles %}
 
 {% block title %}{{object.name}}: {% trans "members list" %}{% endblock %}
+{% block container_extra_classes %}has-subnav{% endblock %}
 
 {% block content %}
+    {% paginate 50 members %}
+
     <div class="subnav subnav-fixed">
         <ul class="nav nav-pills">
             <li>
@@ -35,6 +38,10 @@
             {% include 'astrobin_apps_groups/group_members_list_entries.html' %}
         </tbody>
     </table>
+
+    <div class="pagination pagination-centered">
+        {% show_pages %}
+    </div>
 {% endblock %}
 
 {% block extra_js %}
