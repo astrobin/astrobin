@@ -1,5 +1,5 @@
 <ul>
 {% for page in pages %}
-    {{ page|default_if_none:'<li class="ellipsis disabled"><a href="#">...</a></li>' }}
+    {{ page.render_link|default:'<li class="ellipsis disabled"><a href="#">...</a></li>' }}
 {% endfor %}
 </ul>
