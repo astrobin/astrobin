@@ -19,5 +19,5 @@ class IotdService:
         is_corrupted = Q(corrupted=True)
 
         return Image.objects \
-            .filter(Q(~is_iotd | is_future_iotd) & is_top_pick & ~is_corrupted) \
+            .filter(~Q(is_iotd | is_future_iotd) & is_top_pick & ~is_corrupted) \
             .order_by('-published')
