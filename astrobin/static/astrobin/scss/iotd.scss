@@ -32,7 +32,7 @@
       border-bottom: none;
 
       .date {
-        color: #fff;
+        color: $white;
       }
 
       .chosen-by {
@@ -197,12 +197,12 @@
   h1 > .todays-count {
     font-size: 22px;
     font-style: italic;
-    color: #ddd;
+    color: $grey-2;
   }
 
   h2 {
     padding: 20px 10px;
-    background: #303030 url('../images/darker-panel-tile.png');
+    background: $grey-6-dark url('../images/darker-panel-tile.png');
   }
 }
 

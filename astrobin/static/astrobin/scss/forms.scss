@@ -46,7 +46,7 @@ input:focus, textarea:focus {
 }
 
 .form-actions {
-  background: #333 url('../images/dark-panel-tile.png');
+  background: $grey-6 url('../images/dark-panel-tile.png');
   border-color: #393939;
 
   form {
