@@ -573,7 +573,7 @@ class ImageIndex(CelerySearchIndex, Indexable):
         return hasattr(obj, 'iotd')
 
     def prepare_is_top_pick(self, obj):
-        return obj.iotdvote_set.count() > 0 and not hasattr(obj, 'iotd')
+        return obj.iotd_votes.count() > 0 and not hasattr(obj, 'iotd')
 
     def prepare_objects_in_field(self, obj):
         return obj.solution.objects_in_field if obj.solution else None

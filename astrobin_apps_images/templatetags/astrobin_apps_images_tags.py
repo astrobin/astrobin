@@ -211,8 +211,8 @@ def astrobin_image(context, image, alias, **kwargs):
             badges.append('iotd')
 
         if  ((not hasattr(image, 'iotd') or image.iotd.date > datetime.now().date()) and
-            hasattr(image, 'iotdvote_set') and
-            image.iotdvote_set.count() > 0 and
+            hasattr(image, 'iotd_votes') and
+            image.iotd_votes.count() > 0 and
             not image.user.userprofile.exclude_from_competitions):
             badges.append('top-pick')
 

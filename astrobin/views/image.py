@@ -630,7 +630,7 @@ class ImageDetailView(ImageDetailViewBase):
                 except Iotd.DoesNotExist:
                     pass
             elif nav_ctx == 'picks':
-                picks = Image.objects.exclude(iotdvote=None, corrupted=True).filter(iotd=None)
+                picks = Image.objects.exclude(iotd_votes=None, corrupted=True).filter(iotd=None)
                 image_next = picks.filter(pk__gt=image.pk).order_by('pk')[0:1]
                 image_prev = picks.filter(pk__lt=image.pk).order_by('-pk')[0:1]
         except Image.DoesNotExist:
