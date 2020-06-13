@@ -65,7 +65,7 @@ body.full {
   }
 
   &.disabled {
-    color: #999999;
+    color: $grey-4;
     pointer-events: none;
   }
 
@@ -96,7 +96,7 @@ body.full {
 
 .navbar .nav .open.dropdown .dropdown-toggle,
 .navbar .nav .open.dropdown .dropdown-toggle:hover {
-  background-color: #222;
+  background-color: $grey-8;
 }
 
 .navbar-search {
@@ -107,7 +107,7 @@ body.full {
 .navbar input {
   color: #b8b8b8;
   background-color: #404040;
-  border-color: #333;
+  border-color: $grey-6;
   -webkit-border-radius: 8px;
   -moz-border-radius: 8px;
   border-radius: 8px;
@@ -118,7 +118,7 @@ body.full {
   @include rounded-corners(2px);
   width: auto;
   color: #555;
-  border-color: #aaa;
+  border-color: $grey-3;
   padding: 2px 6px;
 }
 
@@ -176,7 +176,7 @@ body.full {
 }
 
 .subnav .nav > li > a:hover, .subnav .nav > li > a:focus {
-  color: #fff;
+  color: $white;
   background: darken($link-color, 5%);
 }
 
@@ -253,7 +253,7 @@ body.full {
 }
 
 .dropdown-menu li > a:hover, .dropdown-menu .active > a, .dropdown-menu .active > a:hover {
-  background-color: #CC4B2E;
+  background-color: $orange;
 }
 
 li [class^="icon-"], .nav li [class^="icon-"],
@@ -308,15 +308,15 @@ li [class*=" icon-"], .nav li [class*=" icon-"] {
 .nav-tabs .active a,
 .nav-tabs .active a:hover,
 .nav-tabs .active a:focus {
-  background-color: #ddd;
-  color: #222;
+  background-color: $grey-2;
+  color: $grey-8;
   font-style: italic;
   font-weight: bold;
 }
 
 .navbar .navbar-inner {
   border-top: 4px solid #3092cf;
-  background: #303030 url('../images/darker-panel-tile.png');
+  background: $grey-6-dark url('../images/darker-panel-tile.png');
   -webkit-box-shadow: 0 0 12px rgba(0, 0, 0, 1);
   -moz-box-shadow: 0 0 12px rgba(0, 0, 0, 1);
   box-shadow: 0 0 12px rgba(0, 0, 0, 1);

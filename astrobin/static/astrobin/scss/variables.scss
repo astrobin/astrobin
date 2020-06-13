@@ -1,16 +1,28 @@
 /* Color palette: http://www.colourlovers.com/palette/322645/Mambo_For_Cats */
-$background-color: #333333;
-$link-color: #CC4B2E;
-$strong-text-color: #FCFCFC;
-$logo-color: #3092CF;
+$black: #000;
+$blue: #3092CF;
+$orange: #CC4B2E;
+$dark-orange: #B74329;
+$white: #FCFCFC;
+
+$grey-1: #EEE;
+$grey-2: #DDD;
+$grey-3: #AAA;
+$grey-4: #999;
+$grey-5: #444;
+$grey-6: #333;
+$grey-6-dark: #303030;
+$grey-7: #282828;
+$grey-8: #222;
+
+$background-color: $grey-6;
+$link-color: $orange;
+$strong-text-color: $white;
+$logo-color: $blue;
 
 $header-color: $strong-text-color;
-$text-color: $strong-text-color - #333;
+$text-color: $strong-text-color - $grey-6;
 $input-color: $background-color;
-
-$grey: #444444;
-$dark-grey: #333333;
-$darker-grey: #282828;
 
 $hilight-factor: 1.12;
 $strong-hilight-factor: 1.25;

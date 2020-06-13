@@ -126,7 +126,7 @@ body.full {
   -webkit-box-shadow: 0 0 16px rgba(0, 0, 0, 0.5);
   -moz-box-shadow: 0 0 16px rgba(0, 0, 0, 0.5);
   box-shadow: 0 0 16px rgba(0, 0, 0, 0.5);
-  background: #333 url('../images/dark-panel-tile.png');
+  background: $grey-6 url('../images/dark-panel-tile.png');
   @include rounded-corners;
 
   &.has-subnav {
@@ -140,8 +140,8 @@ body.full {
     margin-bottom: 20px;
     width: 100%;
     background-color: rgba(255, 255, 255, 0.02);
-    border-bottom: 1px solid #333;
-    color: #999;
+    border-bottom: 1px solid $grey-6;
+    color: $grey-4;
     font-size: 13px;
     font-style: italic;
 
@@ -258,7 +258,7 @@ li.astrobin-thumbnail {
   color: #cdcdce;
 
   strong {
-    color: #fff;
+    color: $white;
   }
 }
 
@@ -285,7 +285,7 @@ li.astrobin-thumbnail {
   margin-bottom: 0;
 
   &.table-bordered {
-    border-color: #292929;
+    border-color: $grey-7;
   }
 
   .pagination {
@@ -307,7 +307,7 @@ li.astrobin-thumbnail {
   font-size: 16px;
   line-height: 32px;
   font-weight: bold;
-  background: #303030 url('../images/darker-panel-tile.png');
+  background: $grey-6-dark url('../images/darker-panel-tile.png');
   padding: 4px 8px;
 }
 
@@ -414,7 +414,7 @@ footer .container {
   margin: 0 auto;
   padding: 20px 30px 10px 30px;
   max-width: 940px;
-  background: #303030 url('../images/darker-panel-tile.png');
+  background: $grey-6-dark url('../images/darker-panel-tile.png');
   @include rounded-corners-top;
 }
 
@@ -441,7 +441,7 @@ ul.as-selections {
   max-width: 100%;
   overflow: auto;
   background: #404040;
-  border: 1px solid $darker-grey;
+  border: 1px solid $grey-7;
 
   li {
     float: left;
@@ -674,7 +674,7 @@ BODY:first-of-type ul.as-list, x:-moz-any-link, x:default { /* Target FF 3.5+ */
   border: none;
 
   div.available {
-    border-color: $darker-grey;
+    border-color: $grey-7;
   }
 
   ul.available, ul.selected {
@@ -714,7 +714,7 @@ BODY:first-of-type ul.as-list, x:-moz-any-link, x:default { /* Target FF 3.5+ */
 }
 
 .ui-widget-overlay {
-  background: #222;
+  background: $grey-8;
 }
 
 .ui-dialog {
@@ -777,7 +777,7 @@ BODY:first-of-type ul.as-list, x:-moz-any-link, x:default { /* Target FF 3.5+ */
 
     .upload-form-inner {
       padding: $spacer-medium;
-      border-left: 1px solid #333;
+      border-left: 1px solid $grey-6;
       border-right: none;
 
       label {
@@ -842,7 +842,7 @@ BODY:first-of-type ul.as-list, x:-moz-any-link, x:default { /* Target FF 3.5+ */
       height: calc(100% - 24px);
       width: calc(100% - 24px);
       font-size: .7em;
-      color: #fff;
+      color: $white;
       background-color: rgba(0, 0, 0, .7);
       opacity: 0;
       filter: alpha(opacity=0);
@@ -891,7 +891,7 @@ BODY:first-of-type ul.as-list, x:-moz-any-link, x:default { /* Target FF 3.5+ */
         }
 
         td {
-          color: #ddd;
+          color: $grey-2;
         }
       }
 
@@ -1191,7 +1191,7 @@ BODY:first-of-type ul.as-list, x:-moz-any-link, x:default { /* Target FF 3.5+ */
 
   .header {
     color: $strong-text-color;
-    background: #303030 url('../images/darker-panel-tile.png');
+    background: $grey-6-dark url('../images/darker-panel-tile.png');
     padding: $spacer-medium $spacer-small;
     @include stitched-box;
     border-bottom: 0;
@@ -1467,7 +1467,7 @@ BODY:first-of-type ul.as-list, x:-moz-any-link, x:default { /* Target FF 3.5+ */
   overflow: hidden;
 
   .header {
-    background: #303030 url('../images/darker-panel-tile.png');
+    background: $grey-6-dark url('../images/darker-panel-tile.png');
     @include rounded-corners-top;
     border-bottom: #404040;
     margin: -12px -12px 12px;
@@ -1487,13 +1487,13 @@ BODY:first-of-type ul.as-list, x:-moz-any-link, x:default { /* Target FF 3.5+ */
 
     .separator {
       margin-right: 6px;
-      color: #999;
+      color: $grey-4;
     }
 
     &.sub-header {
       background: none;
       margin-top: 20px;
-      border-top: 1px solid #444;
+      border-top: 1px solid $grey-5;
       padding-top: 20px;
 
       h4 {
@@ -1637,7 +1637,7 @@ BODY:first-of-type ul.as-list, x:-moz-any-link, x:default { /* Target FF 3.5+ */
 
   .header {
     color: $strong-text-color;
-    background: #303030 url('../images/darker-panel-tile.png');
+    background: $grey-6-dark url('../images/darker-panel-tile.png');
     padding: $spacer-medium $spacer-small;
     @include stitched-box;
 
@@ -1702,7 +1702,7 @@ BODY:first-of-type ul.as-list, x:-moz-any-link, x:default { /* Target FF 3.5+ */
     float: right;
     width: 16px;
     padding: 0 0 0 $spacer-medium;
-    border-left: 1px solid #ddd;
+    border-left: 1px solid $grey-2;
     border-top: 0;
   }
 }
@@ -1821,7 +1821,7 @@ ul.token-input-list {
   margin: $spacer-small 0;
   overflow: auto;
   background-color: #404040;
-  border: 1px solid $darker-grey;
+  border: 1px solid $grey-7;
   width: 610px;
   max-width: 97%;
 
@@ -1833,7 +1833,7 @@ ul.token-input-list {
 
     span {
       padding-left: $spacer-medium;
-      color: #eee;
+      color: $grey-1;
       font-weight: bold;
     }
   }
@@ -1998,7 +1998,7 @@ form.copy {
       top: -1px;
       display: none;
       padding: 0 6px;
-      background: #222;
+      background: $grey-8;
       border: 1px solid #111;
       color: $text-color;
       font-size: 80%;
@@ -2027,7 +2027,7 @@ p.small {
 
 .ui-tooltip-default .ui-tooltip-titlebar,
 .ui-tooltip-default .ui-tooltip-content {
-  background: #303030 url('../images/darker-panel-tile.png');
+  background: $grey-6-dark url('../images/darker-panel-tile.png');
   border-color: #111;
   @include box-shadow-subtle;
   color: $text-color;
@@ -2152,12 +2152,12 @@ p.small {
 .alert-error,
 .alert-danger {
   a, a:link, a:visited {
-    color: #444;
+    color: $grey-5;
     text-decoration: underline;
   }
 
   a:hover, a:active {
-    color: #333;
+    color: $grey-6;
     text-decoration: underline;
   }
 }
@@ -2194,8 +2194,8 @@ a.button {
   -webkit-user-select: text;
   background-attachment: scroll;
   background-clip: border-box;
-  background-color: #B74329;
-  background-image: -webkit-linear-gradient(top, #CC4B2E, #B74329);
+  background-color: $dark-orange;
+  background-image: -webkit-linear-gradient(top, $orange, $dark-orange);
   background-origin: padding-box;
   background-position: 0px -15px;
   background-repeat: repeat-x;
@@ -2270,7 +2270,7 @@ form.avatar-change label.control-label {
     h2 {
       margin: 0;
       font-size: 12px;
-      color: #fff;
+      color: $white;
       background: #e3a936;
       @include box-shadow;
       @include rounded-corners(16px);
@@ -2327,7 +2327,7 @@ form.avatar-change label.control-label {
       font-size: 6px;
       line-height: 6px;
 
-      color: #fff;
+      color: $white;
       background: darkred;
       @include box-shadow;
       @include rounded-corners(16px);
@@ -2385,7 +2385,7 @@ form.avatar-change label.control-label {
   overflow-y: hidden;
 
   h3 {
-    background: #303030 url('../images/darker-panel-tile.png');
+    background: $grey-6-dark url('../images/darker-panel-tile.png');
     text-transform: uppercase;
     font-size: 1.75em;
     padding: $spacer-medium $spacer-large;
@@ -2653,7 +2653,7 @@ li.revisions {
     padding: 2px 0;
     width: 80px;
 
-    background: #303030;
+    background: $grey-6-dark;
     background-color: rgba(0, 0, 0, 0.3);
     filter: "progid:DXImageTransform.Microsoft.gradient(GradientType=0,startColorstr='#4c000000', endColorstr='#4c000000')";
 
@@ -2692,7 +2692,7 @@ li.revisions {
   }
 
   th, td {
-    border-color: #222;
+    border-color: $grey-8;
   }
 }
 
@@ -2727,7 +2727,7 @@ li.revisions {
 .gear-page {
   .page-header h4 {
     margin-top: -20px;
-    color: #ddd;
+    color: $grey-2;
   }
 
   .gear-image {
@@ -2748,7 +2748,7 @@ li.revisions {
   }
 
   .header {
-    background: #303030 url('../images/darker-panel-tile.png');
+    background: $grey-6-dark url('../images/darker-panel-tile.png');
     height: 22px;
     padding: $spacer-medium $spacer-small 0;
     margin: -8px -8px 12px;
@@ -2806,7 +2806,7 @@ li.revisions {
 }
 
 .community-bulletin {
-  color: #333;
+  color: $grey-6;
   background-color: #FFEEBB;
   border: 1px solid #ECB;
   padding: $spacer-medium;
@@ -2831,7 +2831,7 @@ li.revisions {
   min-height: 180px;
   margin-top: 20px;
   margin-bottom: 20px;
-  border: 2px dashed #444;
+  border: 2px dashed $grey-5;
   @include rounded-corners;
   text-align: center;
   color: #555;
@@ -2846,7 +2846,7 @@ li.revisions {
   color: #e5e5e5;
 
   th {
-    background: #303030 url('../images/darker-panel-tile.png');
+    background: $grey-6-dark url('../images/darker-panel-tile.png');
   }
 
   .filename {
@@ -2881,7 +2881,7 @@ li.revisions {
         text-transform: uppercase;
         margin-bottom: 50px;
         padding-bottom: 20px;
-        border-bottom: 1px solid #333;
+        border-bottom: 1px solid $grey-6;
       }
 
       .price {
@@ -2976,7 +2976,7 @@ li.revisions {
   color: #555;
 
   .currency-conversion-value {
-    color: #aaa;
+    color: $grey-3;
   }
 }
 
@@ -3125,7 +3125,7 @@ li.revisions {
   }
 
   p {
-    color: #ddd;
+    color: $grey-2;
     font-size: 11px;
     line-height: 11px;
   }
@@ -3387,8 +3387,8 @@ table#private-shared-folders tr:hover a.delete-folder {
   .progress {
     height: 32px;
     position: relative;
-    background-color: #333;
-    background-image: linear-gradient(to bottom, #222222, #444444);
+    background-color: $grey-6;
+    background-image: linear-gradient(to bottom, $grey-8, $grey-5);
 
     .progress-content {
       color: gold;
@@ -3687,7 +3687,7 @@ img.flickr-photo-to-import-selected {
 
 pre {
   background-color: #191919;
-  color: #eee;
+  color: $grey-1;
 }
 
 .post-form #emoticons {
@@ -3695,9 +3695,9 @@ pre {
 }
 
 .wysibb {
-  color: #ddd;
+  color: $grey-2;
   background: #404040 !important;
-  border: 1px solid $darker-grey !important;
+  border: 1px solid $grey-7 !important;
   @include rounded-corners(4px);
 
   .wysibb-toolbar, .wysibb-toolbar-container {
@@ -3708,7 +3708,7 @@ pre {
   .wysibb-toolbar-container:hover,
   .wysibb-toolbar-container .wysibb-toolbar-btn:hover,
   .wysibb-toolbar-container .wysibb-toolbar-btn .btn-text:hover {
-    color: #333;
+    color: $grey-6;
   }
 
   .wysibb-text-editor {
@@ -3731,7 +3731,7 @@ pre {
 }
 
 .wysibb .wysibb-toolbar .wysibb-toolbar-container .wysibb-toolbar-btn .fonticon {
-  color: #ddd;
+  color: $grey-2;
   text-shadow: 0 1px 0 black;
 }
 
@@ -3781,7 +3781,7 @@ pre {
       }
 
       > a {
-        color: #ddd;
+        color: $grey-2;
         display: block;
 
         &:hover {
@@ -3805,7 +3805,7 @@ pre {
       background-color: rgba(255, 255, 255, 0.1);
       border-top: 1px solid #555;
       text-align: center;
-      text-shadow: 1px 1px 1px #222;
+      text-shadow: 1px 1px 1px $grey-8;
       font-size: 15px;
 
       a {
@@ -3825,7 +3825,7 @@ pre {
       overflow: hidden;
 
       a {
-        color: #ddd;
+        color: $grey-2;
 
         &:hover {
           color: $link-color;
@@ -3944,7 +3944,7 @@ pre {
 }
 
 .group-description {
-  color: #ddd;
+  color: $grey-2;
 }
 
 .group-forum h2 small strong {
@@ -4123,7 +4123,7 @@ table.search-table {
 .filter-toggle-group {
   text-align: right;
   padding: 10px 10px 10px 0;
-  background-color: #222;
+  background-color: $grey-8;
   background-color: rgba(0, 0, 0, 0.35);
 
   .filter-toggle {
@@ -4178,7 +4178,7 @@ table.api-examples {
   }
 
   code {
-    background: #222;
+    background: $grey-8;
     color: white;
     border-color: #555;
     padding: .5rem 1rem;
@@ -4219,7 +4219,7 @@ table.api-examples {
   }
 
   .accordion-heading {
-    background-color: #222;
+    background-color: $grey-8;
   }
 
   .accordion-inner {
@@ -4227,7 +4227,7 @@ table.api-examples {
   }
 
   .accordion-footer {
-    background: #222;
+    background: $grey-8;
     margin: 15px -15px -27px -15px;
     padding: 10px 15px;
     border-radius: 0 0 4px 4px;
@@ -4235,7 +4235,7 @@ table.api-examples {
 }
 
 .noUi-target {
-  background: #292929;
+  background: $grey-7;
   border-color: #3a3a3a;
   box-shadow: none;
   z-index: 0;

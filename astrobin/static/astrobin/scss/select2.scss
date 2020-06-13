@@ -1,7 +1,7 @@
 @import "variables";
 
-$flat-theme-light-color: $grey;
-$flat-theme-dark-color: $dark-grey;
+$flat-theme-light-color: $grey-5;
+$flat-theme-dark-color: $grey-6;
 
 .select2-container {
   min-width: 200px;
@@ -24,7 +24,7 @@ $flat-theme-dark-color: $dark-grey;
 .select2-container--open .select2-dropdown--below,
 .select2-container--open .select2-dropdown--above {
   background: $flat-theme-light-color;
-  border-color: $darker-grey;
+  border-color: $grey-7;
   box-shadow: 8px 8px 8px rgba(0, 0, 0, 0.33)
 }
 
@@ -187,7 +187,7 @@ $flat-theme-dark-color: $dark-grey;
     .select2-selection__rendered {
       color: $strong-text-color;
       line-height: 34px;
-      border: 1px solid $darker-grey;
+      border: 1px solid $grey-7;
       border-radius: 4px;
     }
 

@@ -462,12 +462,12 @@ div.uploader input {
 }
 
 div.uploader.disabled span.action {
-  color: #aaa;
+  color: $grey-3;
 }
 
 div.uploader.disabled span.filename {
-  border-color: #ddd;
-  color: #aaa;
+  border-color: $grey-2;
+  color: $grey-3;
 }
 
 /*
