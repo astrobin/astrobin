@@ -1,4 +1,5 @@
 from django import forms
+from django.utils.translation import ugettext as __
 from django.utils.translation import ugettext_lazy as _
 from image_cropping import ImageCropWidget
 
@@ -23,7 +24,7 @@ class ImageEditRevisionForm(forms.ModelForm):
                         and revision.w == self.instance.w \
                         and revision.h == self.instance.h:
                     self.fields['mouse_hover_image'].choices = self.fields['mouse_hover_image'].choices + [
-                        ("REVISION__%s" % revision.label, "%s %s" % (_("Revision"), revision.label))
+                        ("REVISION__%s" % revision.label, "%s %s" % (__("Revision"), revision.label))
                     ]
 
         if self.instance.w == self.instance.image.w and self.instance.h == self.instance.image.h:
