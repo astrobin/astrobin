@@ -8,7 +8,7 @@
   @include rounded-corners;
 
   .modal-header {
-    background: #303030 url('../images/darker-panel-tile.png');
+    background: $grey-6-dark url('../images/darker-panel-tile.png');
     @include rounded-corners-top;
     border-bottom: #404040;
 
@@ -48,8 +48,8 @@
 }
 
 .modal-footer {
-  background: #303030 url('../images/darker-panel-tile.png');
-  border-top: 1px solid #303030;
+  background: $grey-6-dark url('../images/darker-panel-tile.png');
+  border-top: 1px solid $grey-6-dark;
   @include no-box-shadow;
 
   form {

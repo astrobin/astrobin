@@ -92,7 +92,7 @@ th.forum-name {
   }
 
   .post-updated {
-    color: #999;
+    color: $grey-4;
     font-size: 11px;
     font-weight: normal;
   }
@@ -135,7 +135,7 @@ th.forum-name {
   }
 
   blockquote {
-    background-color: #222;
+    background-color: $grey-8;
     padding: 10px 20px 10px 60px;
     border: 1px solid #555;
     position: relative;
@@ -149,7 +149,7 @@ th.forum-name {
     position: absolute;
     left: 4px;
     top: 50px;
-    color: #444;
+    color: $grey-5;
     font-family: Georgia;
   }
 }
