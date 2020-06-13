@@ -113,7 +113,7 @@ class IotdReviewQueueView(
             if not Iotd.objects.filter(
                 image=x.image,
                 date__lte=datetime.now().date()).exists()
-        ])), key=lambda x: x.published, reverse=True)
+        ])), key=lambda x: x.iotd_submissions.first().date)
 
 
 class IotdToggleVoteAjaxView(
@@ -163,7 +163,7 @@ class IotdJudgementQueueView(
             if not Iotd.objects.filter(
                 image=x.image,
                 date__lte=datetime.now().date()).exists()
-        ])), key=lambda x: x.published, reverse=True)
+        ])), key=lambda x: x.iotd_votes.first().date)
 
 
 class IotdToggleJudgementAjaxView(

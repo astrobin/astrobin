@@ -1,3 +1,13 @@
+2020-06-13 Salvatore Iovene <salvatore@iovene.com>
+ * v1.80.0
+ * (general) Fix pagination issue (#1224)
+ * (iotd) Sort images in review/judgement queue by first submission/vote (#1225)
+ * (iotd) Add remaining time indicator to Vote and Judgement queues (#1225)
+ * (images) Fix unicode issue in edit revision (#1229)
+ * (deps) Update dependency codecov to v2.1.5 (#1223)
+ * (deps) Update dependency xdis to v4.7.0 (#1226)
+ * (deps) Update dependency uncompyle6 to v3.7.1 (#1227)
+
 2020-06-09 Salvatore Iovene <salvatore@iovene.com>
  * v1.79.0
  * (general) Add support for shadow-banning users (#1215)
