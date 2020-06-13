@@ -6,6 +6,7 @@
 {% load astrobin_apps_iotd_tags %}
 {% load astrobin_apps_images_tags %}
 {% load common_tags %}
+{% load tags %}
 
 {% block title %}{% trans "IOTD Judgement Queue" %}{% endblock %}
 
@@ -86,6 +87,17 @@
                             title="{{request.user|may_not_elect_reason:image}}"
                         {% endif %}
                     />
+                </div>
+
+                <div class="available-until">
+                    {% trans "Available until:" %}
+
+                    {% with date=image.iotd_votes.first.date|to_user_timezone:request.user %}
+                        <abbr class="timeago"
+                              title="{{ date|add_days:IOTD_JUDGEMENT_WINDOW_DAYS|date:'Y-m-d\TH:i:s' }}">
+                            ...
+                        </abbr>
+                    {% endwith %}
                 </div>
             </div>
         {% empty %}
