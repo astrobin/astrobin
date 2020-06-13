@@ -3,6 +3,7 @@ from datetime import datetime, timedelta, date
 import simplejson as json
 from beautifulsoupselect import BeautifulSoupSelect as BSS
 from bs4 import BeautifulSoup as BS
+from dateutil.utils import today
 from django.conf import settings
 from django.contrib.auth.models import Group
 from django.core.cache import cache
@@ -330,7 +331,7 @@ class IotdTest(TestCase):
         iotd = Iotd.objects.create(
             judge=self.judge_1,
             image=self.image,
-            date=datetime.now().date() + timedelta(1))
+            date=today() + timedelta(1))
         response = self.client.get(reverse_lazy('image_detail', args=(self.image.get_id(),)))
         self.assertContains(response, 'top-pick-badge')
 
