@@ -13,9 +13,11 @@ class IotdService:
             .exclude(image__corrupted=True)
 
     def get_top_picks(self):
+        is_iotd = ~Q(iotd=None)
+        is_future_iotd = Q(iotd__date__gt=datetime.now().date())
+        is_top_pick = ~Q(iotd_votes=None)
+        is_corrupted = Q(corrupted=True)
+
         return Image.objects \
-            .exclude(
-            Q(iotd_votes=None) | Q(corrupted=True)) \
-            .filter(
-            Q(iotd=None) |
-            Q(iotd__date__gt=datetime.now().date())).order_by('-published')
+            .filter(Q(~is_iotd | is_future_iotd) & is_top_pick & ~is_corrupted) \
+            .order_by('-published')
