@@ -15,7 +15,7 @@ class IotdService:
     def get_top_picks(self):
         return Image.objects \
             .exclude(
-            Q(iotdvote=None) | Q(corrupted=True)) \
+            Q(iotd_votes=None) | Q(corrupted=True)) \
             .filter(
             Q(iotd=None) |
             Q(iotd__date__gt=datetime.now().date())).order_by('-published')
