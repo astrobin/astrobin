@@ -11,7 +11,10 @@ if DEBUG:
     PYBB_ANONYMOUS_VIEWS_CACHE_BUFFER = 0
 
     def show_toolbar(request):
-        return 'ddt=1' in request.path
+        if request.is_ajax():
+            return False
+
+        return request.GET.get('ddt', None) is not None
 
     DEBUG_TOOLBAR_CONFIG = {
         "SHOW_TOOLBAR_CALLBACK": show_toolbar,
