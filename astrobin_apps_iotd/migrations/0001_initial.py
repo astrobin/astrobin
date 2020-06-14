@@ -49,11 +49,11 @@ class Migration(migrations.Migration):
             ],
         ),
         migrations.AlterUniqueTogether(
-            name='iotd_votes',
+            name='iotdvote',
             unique_together=set([('reviewer', 'image')]),
         ),
         migrations.AlterUniqueTogether(
-            name='iotd_submissions',
+            name='iotdsubmission',
             unique_together=set([('image', 'submitter')]),
         ),
     ]

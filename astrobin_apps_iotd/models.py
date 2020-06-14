@@ -9,12 +9,11 @@ from astrobin_apps_iotd.permissions import may_toggle_submission_image, may_togg
 
 class IotdSubmission(models.Model):
     submitter = models.ForeignKey(User)
-    image = models.ForeignKey(Image, related_name='iotd_submissions')
+    image = models.ForeignKey(Image)
     date = models.DateTimeField(auto_now_add=True)
 
     class Meta:
         unique_together = ['image', 'submitter']
-        ordering = ['-date']
 
     def __unicode__(self):
         return "IOTD submission by %s: %s (%d)" % (
@@ -45,12 +44,11 @@ class IotdSubmission(models.Model):
 
 class IotdVote(models.Model):
     reviewer = models.ForeignKey(User)
-    image = models.ForeignKey(Image, related_name='iotd_votes')
+    image = models.ForeignKey(Image)
     date = models.DateTimeField(auto_now_add=True)
 
     class Meta:
         unique_together = ['reviewer', 'image']
-        ordering = ['-date']
 
     def __unicode__(self):
         return "IOTD vote by %s: %s" % (
