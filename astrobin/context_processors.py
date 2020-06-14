@@ -113,10 +113,6 @@ def common_variables(request):
         'COUNTRIES': COUNTRIES,
         'COOKIELAW_ACCEPTED': request.COOKIES.get('cookielaw_accepted', False),
 
-        'IOTD_SUBMISSION_WINDOW_DAYS': settings.IOTD_SUBMISSION_WINDOW_DAYS,
-        'IOTD_REVIEW_WINDOW_DAYS': settings.IOTD_REVIEW_WINDOW_DAYS,
-        'IOTD_JUDGEMENT_WINDOW_DAYS': settings.IOTD_JUDGEMENT_WINDOW_DAYS,
-
         'enums': {
             'SubjectType': SubjectType,
         },
