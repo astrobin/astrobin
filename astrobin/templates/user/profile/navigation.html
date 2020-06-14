@@ -92,9 +92,6 @@
                     <a href="{% url 'user_page_bookmarks' requested_user.username %}">
                         <i class="icon-bookmark"></i>
                         {% trans "Bookmarks" %}
-                        <span class="badge badge-success">
-                            {{bookmarked_no}}
-                        </span>
                     </a>
                 </li>
 
@@ -102,9 +99,6 @@
                     <a href="{% url 'user_page_liked' requested_user.username %}">
                         <i class="icon-thumbs-up"></i>
                         {% trans "Liked images" %}
-                        <span class="badge badge-success">
-                            {{liked_no}}
-                        </span>
                     </a>
                 </li>
 
