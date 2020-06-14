@@ -60,10 +60,6 @@ class UserCollectionsBase(View):
         context['requested_user'] = user
         context['public_images_no'] = Image.objects.filter(user = user).count()
         context['wip_images_no'] = Image.wip.filter(user = user).count()
-        context['bookmarks_no'] = ToggleProperty.objects.toggleproperties_for_user("bookmark", user) \
-            .filter(content_type = image_ct).count()
-        context['likes_no'] = ToggleProperty.objects.toggleproperties_for_user("like", user) \
-            .filter(content_type = image_ct).count()
 
         # TODO: stats
 

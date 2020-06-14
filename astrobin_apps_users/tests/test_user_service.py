@@ -155,8 +155,6 @@ class TestUserService(TestCase):
         self.assertEquals(image_numbers['public_images_no'], 2)
         self.assertEquals(image_numbers['wip_images_no'], 1)
         self.assertEquals(image_numbers['corrupted_no'], 1)
-        self.assertEquals(image_numbers['bookmarked_no'], 1)
-        self.assertEquals(image_numbers['liked_no'], 1)
 
     def test_get_image_numbers_not_including_corrupted(self):
         user1 = Generators.user()
@@ -175,5 +173,3 @@ class TestUserService(TestCase):
         self.assertEquals(image_numbers['public_images_no'], 1)
         self.assertEquals(image_numbers['wip_images_no'], 1)
         self.assertEquals(image_numbers['corrupted_no'], 1)
-        self.assertEquals(image_numbers['bookmarked_no'], 1)
-        self.assertEquals(image_numbers['liked_no'], 1)
