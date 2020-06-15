@@ -14,7 +14,7 @@ from django.core.files.images import get_image_dimensions
 from django.core.urlresolvers import reverse_lazy, reverse
 from django.db.models import Q
 from django.db.models.query import QuerySet
-from django.http import Http404, HttpResponseRedirect, HttpResponseBadRequest
+from django.http import Http404, HttpResponseRedirect, HttpResponseBadRequest, HttpResponseForbidden
 from django.shortcuts import redirect
 from django.utils.encoding import iri_to_uri, smart_unicode
 from django.utils.translation import ugettext as _
@@ -24,6 +24,7 @@ from django.views.generic import (
     DetailView,
     UpdateView,
 )
+from django.views.generic.base import View
 from django.views.generic.detail import SingleObjectMixin
 from silk.profiling.profiler import silk_profile
 
@@ -924,6 +925,55 @@ class ImageDeleteOriginalView(ImageDeleteView):
         messages.success(self.request, _("Original version deleted!"));
         # We do not call super, because that would delete the Image
         return HttpResponseRedirect(self.get_success_url())
+
+
+class ImageDeleteOtherVersionsView(LoginRequiredMixin, View):
+    def post(self, *args, **kwargs):
+        image = Image.objects_including_wip.get(pk=kwargs.get('id'))  # type: Image
+
+        if self.request.user != image.user and not self.request.user.is_superuser:
+            return HttpResponseForbidden();
+
+        revisions = ImageRevision.all_objects.filter(image=image)
+
+        if not revisions:
+            return HttpResponseBadRequest()
+
+        revision_label = self.request.POST.get('revision', None)
+        image_modified = False
+
+        if revision_label:
+            # Delete all other revisions, and original.
+            revision = ImageRevision.objects.get(image=image, label=revision_label)  # type: ImageRevision
+
+            image.image_file = revision.image_file
+            image.updated = revision.uploaded
+            image.w = revision.w
+            image.h = revision.h
+            if revision.description:
+                image.description = image.description + '\n' + revision.description
+            image_modified = True
+
+            if revision.solution:
+                if image.solution:
+                    image.solution.delete()
+                content_type = ContentType.objects.get_for_model(ImageRevision)
+                solution = Solution.objects.get(content_type=content_type, object_id=revision.pk)
+                solution.content_object = image
+                solution.save()
+
+        ImageRevision.objects.filter(image=image).delete()
+
+        if not image.is_final:
+            image.is_final = True
+            image_modified = True
+
+        if image_modified:
+            image.save(keep_deleted=True)
+
+        return HttpResponseRedirect(
+            reverse_lazy('image_detail', args=(image.get_id(),))
+        )
 
 
 class ImageDemoteView(LoginRequiredMixin, ImageUpdateViewBase):

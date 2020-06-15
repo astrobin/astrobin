@@ -98,17 +98,31 @@
                 </a>
 
                 {% if revisions %}
-                <a data-toggle="modal" class="danger" href="#delete-original-image-modal">
-                    <i class="icon-remove"></i>
-                    {% trans "Delete original image" %}
-                </a>
+                    <a data-toggle="modal" class="danger" href="#delete-original-image-modal">
+                        <i class="icon-remove"></i>
+                        {% trans "Delete original image" %}
+                    </a>
                 {% endif %} <!-- revisions -->
 
                 {% if is_revision %}
-                <a data-toggle="modal" class="danger" href="#delete-revision-modal-{{ revision_image.pk }}">
-                    <i class="icon-remove"></i>
-                    {% trans "Delete this revision only" %} ({{ revision_label }})
-                </a>
+                    <a data-toggle="modal" class="danger" href="#delete-revision-modal-{{ revision_image.pk }}">
+                        <i class="icon-remove"></i>
+                        {% trans "Delete this revision only" %} ({{ revision_label }})
+                    </a>
+
+                    <a data-toggle="modal"
+                       class="danger delete-all-other-versions"
+                       data-target="#delete-all-other-versions-modal"
+                       data-revision-label="{{ revision_label }}"
+                       href="#">
+                        <i class="icon-remove"></i>
+                        {% trans "Delete all other versions" %}
+                    </a>
+                {% else %}
+                    <a data-toggle="modal" class="danger" href="#delete-all-revisions-modal">
+                        <i class="icon-remove"></i>
+                        {% trans "Delete all revisions" %}
+                    </a>
                 {% endif %} <!-- is_revision -->
             </li>
 

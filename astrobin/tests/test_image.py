@@ -2502,6 +2502,143 @@ class ImageTest(TestCase):
         self.client.logout()
 
     @patch("astrobin.tasks.retrieve_primary_thumbnails")
+    def test_image_delete_other_versions_view_wrong_user(self, retrieve_primary_thumbnails):
+        self.client.login(username='test', password='password')
+        self._do_upload('astrobin/fixtures/test.jpg')
+        image = self._get_last_image()
+        self.client.logout()
+
+        self.client.login(username='test2', password='password')
+        response = self.client.post(reverse('image_delete_other_versions', args=(image.pk,)))
+        self.assertEqual(403, response.status_code)
+
+    @patch("astrobin.tasks.retrieve_primary_thumbnails")
+    def test_image_delete_other_versions_view_no_revisions(self, retrieve_primary_thumbnails):
+        self.client.login(username='test', password='password')
+        self._do_upload('astrobin/fixtures/test.jpg')
+        image = self._get_last_image()
+
+        self.client.login(username='test', password='password')
+        response = self.client.post(reverse('image_delete_other_versions', args=(image.pk,)))
+        self.assertEquals(400, response.status_code)
+        self.assertEquals(1, Image.objects.filter(pk=image.pk).count())
+
+    @override_settings(PREMIUM_MAX_REVISIONS_FREE_2020=sys.maxsize)
+    @patch("astrobin.tasks.retrieve_primary_thumbnails")
+    def test_image_delete_other_versions_view_on_original_with_one_final_revision(self, retrieve_primary_thumbnails):
+        self.client.login(username='test', password='password')
+        self._do_upload('astrobin/fixtures/test.jpg')
+        image = self._get_last_image()
+        image.description = "foo"
+        image.save(keep_deleted=True)
+
+        self._do_upload_revision(image, 'astrobin/fixtures/test.jpg')
+        revision = self._get_last_image_revision()
+        revision.description = "bar"
+        revision.save(keep_deleted=True)
+
+        response = self.client.post(reverse('image_delete_other_versions', args=(image.pk,)), follow=True)
+
+        self.assertEquals(200, response.status_code)
+
+        image = Image.objects_including_wip.get(pk=image.pk)
+
+        self.assertEquals(0, image.revisions.count())
+        self.assertEquals("foo", image.description)
+        self.assertTrue(image.is_final)
+
+    @override_settings(PREMIUM_MAX_REVISIONS_FREE_2020=sys.maxsize)
+    @patch("astrobin.tasks.retrieve_primary_thumbnails")
+    def test_image_delete_other_versions_view_on_original_with_two_revisions_one_of_which_is_final(
+        self, retrieve_primary_thumbnails):
+        self.client.login(username='test', password='password')
+        self._do_upload('astrobin/fixtures/test.jpg')
+        image = self._get_last_image()
+        image.description = "foo"
+        image.save(keep_deleted=True)
+
+        self._do_upload_revision(image, 'astrobin/fixtures/test.jpg')
+        revision = self._get_last_image_revision()
+        revision.description = "bar1"
+        revision.save(keep_deleted=True)
+
+        self._do_upload_revision(image, 'astrobin/fixtures/test.jpg')
+        revision = self._get_last_image_revision()
+        revision.description = "bar2"
+        revision.save(keep_deleted=True)
+
+        response = self.client.post(reverse('image_delete_other_versions', args=(image.pk,)), follow=True)
+
+        self.assertEquals(200, response.status_code)
+
+        image = Image.objects_including_wip.get(pk=image.pk)
+
+        self.assertEquals(0, image.revisions.count())
+        self.assertTrue(image.is_final)
+
+    @override_settings(PREMIUM_MAX_REVISIONS_FREE_2020=sys.maxsize)
+    @patch("astrobin.tasks.retrieve_primary_thumbnails")
+    def test_image_delete_other_versions_view_on_original_with_two_revisions_none_of_which_is_final(
+            self, retrieve_primary_thumbnails):
+        self.client.login(username='test', password='password')
+        self._do_upload('astrobin/fixtures/test.jpg')
+        image = self._get_last_image()
+        image.description = "foo"
+        image.save(keep_deleted=True)
+
+        self._do_upload_revision(image, 'astrobin/fixtures/test.jpg')
+        revision = self._get_last_image_revision()
+        revision.description = "bar1"
+        revision.save(keep_deleted=True)
+
+        self._do_upload_revision(image, 'astrobin/fixtures/test.jpg')
+        revision = self._get_last_image_revision()
+        revision.description = "bar2"
+        revision.save(keep_deleted=True)
+
+        image.revisions.update(is_final=False)
+        image.is_final = True
+        image.save(keep_deleted=True)
+
+        response = self.client.post(reverse('image_delete_other_versions', args=(image.pk,)), follow=True)
+
+        self.assertEquals(200, response.status_code)
+
+        image = Image.objects_including_wip.get(pk=image.pk)
+
+        self.assertEquals(0, image.revisions.count())
+        self.assertTrue(image.is_final)
+
+    @override_settings(PREMIUM_MAX_REVISIONS_FREE_2020=sys.maxsize)
+    @patch("astrobin.tasks.retrieve_primary_thumbnails")
+    def test_image_delete_other_versions_view_on_final_revision(self, retrieve_primary_thumbnails):
+        self.client.login(username='test', password='password')
+        self._do_upload('astrobin/fixtures/test.jpg')
+        image = self._get_last_image()
+        image.description = "foo"
+        image.save(keep_deleted=True)
+
+        self._do_upload_revision(image, 'astrobin/fixtures/test.jpg')
+        revision = self._get_last_image_revision()
+        revision.description = "bar"
+        revision.save(keep_deleted=True)
+
+        response = self.client.post(
+            reverse('image_delete_other_versions', args=(image.pk,)),
+            {
+                'revision': 'B'
+            },
+            follow=True)
+
+        self.assertEquals(200, response.status_code)
+
+        image = Image.objects_including_wip.get(pk=image.pk)
+
+        self.assertEquals(0, image.revisions.count())
+        self.assertEquals("foo\nbar", image.description)
+        self.assertTrue(image.is_final)
+
+    @patch("astrobin.tasks.retrieve_primary_thumbnails")
     def test_image_promote_view(self, retrieve_primary_thumbnails):
         def post_url(args=None):
             return reverse('image_promote', args=args)
