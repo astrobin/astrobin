@@ -137,6 +137,11 @@ $(document).ready(function() {
 
         e.preventDefault();
     });
+
+    $(".delete-all-other-versions").click(function () {
+        var revisionLabel = $(this).data("revision-label");
+        $("#delete-all-other-versions-modal #id_revision").val(revisionLabel);
+    });
 });
 </script>
 
