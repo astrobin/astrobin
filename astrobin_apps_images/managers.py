@@ -6,6 +6,7 @@ class ImagesManager(SafeDeleteManager):
         select_related = (
             'user',
             'user__userprofile',
+            'iotd',
         )
 
         prefetch_related = (
@@ -13,6 +14,7 @@ class ImagesManager(SafeDeleteManager):
             'revisions',
             'thumbnails',
             'solutions',
+            'iotdvote_set',
         )
 
         return super(ImagesManager, self) \
