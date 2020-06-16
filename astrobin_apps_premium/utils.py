@@ -1,6 +1,7 @@
 import sys
 
 from django.conf import settings
+from django.core.cache import cache
 from subscription.models import UserSubscription
 
 SUBSCRIPTION_NAMES = (
@@ -66,6 +67,12 @@ def premium_get_usersubscription(user):
 
 
 def premium_get_valid_usersubscription(user):
+    cache_key = "astrobin_valid_usersubscription_%d" % user.pk
+
+    cached = cache.get(cache_key)
+    if cached is None:
+        return cached
+
     us = [obj for obj in UserSubscription.objects.filter(
         user__username=user.username,
         subscription__name__in=SUBSCRIPTION_NAMES,
@@ -81,7 +88,11 @@ def premium_get_valid_usersubscription(user):
     sortedByName = sorted(us, cmp=_compareNames)
     sortedByValidity = sorted(sortedByName, cmp=_compareValidity)
 
-    return sortedByName[0]
+    result = sortedByName[0]
+
+    cache.set(cache_key, result, 1)
+
+    return result
 
 
 def premium_get_invalid_usersubscription(user):
