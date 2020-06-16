@@ -460,6 +460,7 @@ urlpatterns += [
     url(r'^delete/(?P<id>\w+)/$', image_views.ImageDeleteView.as_view(), name='image_delete'),
     url(r'^delete/original/(?P<id>\w+)/$', image_views.ImageDeleteOriginalView.as_view(), name='image_delete_original'),
     url(r'^delete/revision/(?P<id>\w+)/$', image_views.ImageRevisionDeleteView.as_view(), name='image_delete_revision'),
+    url(r'^delete/other-versions/(?P<id>\w+)/$', image_views.ImageDeleteOtherVersionsView.as_view(), name='image_delete_other_versions'),
     url(r'^demote/(?P<id>\w+)/$', image_views.ImageDemoteView.as_view(), name='image_demote'),
     url(r'^edit/acquisition/(?P<id>\w+)/$', image_edit_acquisition, name='image_edit_acquisition'),
     url(r'^edit/acquisition/reset/(?P<id>\w+)/$', image_edit_acquisition_reset, name='image_edit_acquisition_reset'),

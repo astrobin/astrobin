@@ -106,28 +106,25 @@
                                 <tr>
                                     <th><i class="icon-calendar"></i></th>
                                     {% if image.published %}
-                                        <td>{{image.published|date:"SHORT_DATE_FORMAT"}}</td>
+                                        <td colspan="3">{{image.published|date:"SHORT_DATE_FORMAT"}}</td>
                                     {% else %}
-                                        <td>{{image.uploaded|date:"SHORT_DATE_FORMAT"}}</td>
+                                        <td colspan="3">{{image.uploaded|date:"SHORT_DATE_FORMAT"}}</td>
                                     {% endif %}
                                 </tr>
 
                                 <tr>
                                     <th><i class="icon-thumbs-up"></i></th>
                                     <td>{{image.likes}}</td>
+                                    <th><i class="icon-bookmark"></i></th>
+                                    <td>{{ image.bookmarks }}</td>
                                 </tr>
 
                                 <tr>
-                                    <th><i class="icon-bookmark"></i></th>
-                                    <td>{{image.bookmarks}}</td>
+                                    <th><i class="icon-comments-alt"></i></th>
+                                    <td>{{ image.comments }}</td>
+                                    <th><i class="icon-th"></i></th>
+                                    <td>{{ image.revisions.count }}</td>
                                 </tr>
-
-                                {% if image.views %}
-                                    <tr>
-                                        <th><i class="icon-eye-open"></i></th>
-                                        <td>{{image.view}}</td>
-                                    </tr>
-                                {% endif %}
                             </table>
                             {% endcache %}
                         {% endif %}
