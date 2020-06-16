@@ -37,23 +37,6 @@
             </li>
             {% endif %}
 
-            {% if image|is_iotd and not image.user.userprofile.exclude_from_competitions %}
-            <li>
-                <a{% if nav_ctx == 'iotd' %} class="active"{% endif %} href="{{ request.path }}{% query_string "nc='iotd'" "nce" %}">
-                    <i class="icon-trophy"></i>
-                    {% trans "Image of the day" %}
-                </a>
-            </li>
-            {% endif %}
-
-            {% if image|votes_count %}
-            <li>
-                <a{% if nav_ctx == 'picks' %} class="active"{% endif %} href="{{ request.path }}{% query_string "nc='picks'" "nce" %}">
-                    <i class="icon-star"></i>
-                    {% trans "Top picks" %}
-                </a>
-            </li>
-            {% endif %}
 
             <li>
                 <a{% if nav_ctx == 'all' %} class="active"{% endif %} href="{{ request.path }}{% query_string "nc='all'" "nce" %}">

@@ -612,28 +612,6 @@ class ImageDetailView(ImageDetailViewBase):
             elif nav_ctx == 'all':
                 image_next = Image.objects.exclude(corrupted=True).filter(pk__gt=image.pk).order_by('pk')[0:1]
                 image_prev = Image.objects.exclude(corrupted=True).filter(pk__lt=image.pk).order_by('-pk')[0:1]
-            elif nav_ctx == 'iotd':
-                try:
-                    iotd = Iotd.objects.get(image=image)
-                    iotd_next = Iotd.objects \
-                                    .exclude(image__corrupted=True) \
-                                    .filter(date__gt=iotd.date, date__lte=datetime.now().date()) \
-                                    .order_by('date')[0:1]
-                    iotd_prev = Iotd.objects \
-                                    .exclude(image__corrupted=True) \
-                                    .filter(date__lt=iotd.date, date__lte=datetime.now().date()) \
-                                    .order_by('-date')[0:1]
-
-                    if iotd_next:
-                        image_next = [iotd_next[0].image]
-                    if iotd_prev:
-                        image_prev = [iotd_prev[0].image]
-                except Iotd.DoesNotExist:
-                    pass
-            elif nav_ctx == 'picks':
-                picks = Image.objects.exclude(iotdvote=None, corrupted=True).filter(iotd=None)
-                image_next = picks.filter(pk__gt=image.pk).order_by('pk')[0:1]
-                image_prev = picks.filter(pk__lt=image.pk).order_by('-pk')[0:1]
         except Image.DoesNotExist:
             image_next = None
             image_prev = None
