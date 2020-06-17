@@ -67,6 +67,9 @@ def premium_get_usersubscription(user):
 
 
 def premium_get_valid_usersubscription(user):
+    if user is None or user.pk is None:
+        return None
+
     cache_key = "astrobin_valid_usersubscription_%d" % user.pk
 
     cached = cache.get(cache_key)
