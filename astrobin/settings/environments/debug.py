@@ -11,7 +11,6 @@ if DEBUG:
     PYBB_ANONYMOUS_VIEWS_CACHE_BUFFER = 0
 
     def show_toolbar(request):
-        return True
         if request.is_ajax():
             return False
 
