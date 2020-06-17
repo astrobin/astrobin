@@ -74,10 +74,10 @@ class HasSolutionMixin(object):
     def solution(self):
         cache_key = "astrobin_solution_%s_%d" % (self.__class__.__name__, self.pk)
         cached = cache.get(cache_key)
-        if cached is None:
+        if cached is not None:
             return cached
 
-        result = self.solutions.get()
+        result = self.solutions.first()
         cache.set(cache_key, result, 1)
         return result
 

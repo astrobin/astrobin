@@ -70,7 +70,7 @@ def premium_get_valid_usersubscription(user):
     cache_key = "astrobin_valid_usersubscription_%d" % user.pk
 
     cached = cache.get(cache_key)
-    if cached is None:
+    if cached is not None:
         return cached
 
     us = [obj for obj in UserSubscription.objects.filter(
