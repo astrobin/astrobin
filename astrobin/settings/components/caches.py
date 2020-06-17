@@ -6,3 +6,5 @@ CACHES = {
         'LOCATION': '%s:11211' % os.environ.get('MEMCACHED_HOST', 'memcached').strip(),
     },
 }
+
+CACHALOT_ENABLED = os.environ.get('CACHALOT_ENABLED', 'true').strip() == 'true'
