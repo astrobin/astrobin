@@ -71,6 +71,7 @@ INSTALLED_APPS = [
     'image_cropping',
     'django_extensions',
     'progressbarupload',
+    'cachalot',
 
     'astrobin.apps.AstroBinAppConfig',
 ] + ASTROBIN_APPS

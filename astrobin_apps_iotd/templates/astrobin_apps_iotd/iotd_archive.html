@@ -22,7 +22,7 @@
     <a class="anchor" name="page_anchor"></a>
     {% for iotd in object_list %}
         <div class="iotd-archive-image">
-            {% astrobin_image iotd.image 'iotd' nav_ctx='iotd' %}
+            {% astrobin_image iotd.image 'iotd' %}
 
             <div class="data hidden-phone">
                 <h3>{{ iotd.image.title|escape }}</h3>

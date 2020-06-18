@@ -72,15 +72,14 @@ log = logging.getLogger('apps')
 class HasSolutionMixin(object):
     @property
     def solution(self):
-        ctype = ContentType.objects.get_for_model(self.__class__)
+        cache_key = "astrobin_solution_%s_%d" % (self.__class__.__name__, self.pk)
+        cached = cache.get(cache_key)
+        if cached is not None:
+            return cached
 
-        try:
-            solution = Solution.objects.get(content_type=ctype, object_id=self.id)
-        except:
-            return None
-
-        return solution
-
+        result = self.solutions.first()
+        cache.set(cache_key, result, 1)
+        return result
 
 def image_upload_path(instance, filename):
     user = instance.user if instance._meta.model_name == u'image' else instance.image.user
@@ -815,6 +814,8 @@ class Image(HasSolutionMixin, SafeDeleteModel):
         'filters': Filter,
         'accessories': Accessory,
     }
+
+    solutions = GenericRelation(Solution)
 
     corrupted = models.BooleanField(
         default=False
@@ -1597,6 +1598,8 @@ class ImageRevision(HasSolutionMixin, SafeDeleteModel):
         Image,
         related_name='revisions'
     )
+
+    solutions = GenericRelation(Solution)
 
     corrupted = models.BooleanField(
         default=False
