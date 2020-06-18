@@ -1,4 +1,14 @@
 2020-06-16 Salvatore Iovene <salvatore@iovene.com>
+ * v1.82.0
+ * (performance) Improve queries on image page, user page, introduce cachalot (#1235)
+ * (infra) Force renovate to python 2.7 compatibility (#1236)
+ * (deps) Update dependency requests to v2.24.0 (#1234)
+ * (deps) Update dependency Pygments to v2.5.2 (#1237)
+ * (deps) Update dependency django-precise-bbcode to v1.2.10 (#1240)
+ * (deps) Update dependency easy-thumbnails to v2.6 (#1242)
+ * (deps) Update dependency mock to v3 (#1245)
+
+2020-06-16 Salvatore Iovene <salvatore@iovene.com>
  * v1.81.0
  * (general) Fix broken import in collectins view
  * (image) Add Actions menu to delete all other versions (#1231)
