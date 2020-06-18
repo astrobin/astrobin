@@ -3,16 +3,24 @@ from safedelete.managers import SafeDeleteManager
 
 class ImagesManager(SafeDeleteManager):
     def get_queryset(self):
-        return super(ImagesManager, self).get_queryset() \
-            .select_related(
+        select_related = (
+            'user',
             'user__userprofile',
-        ) \
-            .prefetch_related(
-            'image_of_the_day',
+            'iotd',
+        )
+
+        prefetch_related = (
             'featured_gear',
             'revisions',
             'thumbnails',
+            'solutions',
+            'iotdvote_set',
         )
+
+        return super(ImagesManager, self) \
+            .get_queryset() \
+            .select_related(*select_related) \
+            .prefetch_related(*prefetch_related)
 
 
 class PublicImagesManager(ImagesManager):

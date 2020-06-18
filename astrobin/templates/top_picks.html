@@ -138,7 +138,7 @@
         {% cache 3600 top_picks source page_obj.number  %}
             {% for image in object_list %}
                 <div class="top-picks-item">
-                    {% astrobin_image image 'story' tooltip=False nav_ctx='picks' %}
+                    {% astrobin_image image 'story' tooltip=False %}
                     <div class="overlay">
                         <div class="inner">
                             <div class="image-title">{{image.title|default:_("(no title)")}}</div>

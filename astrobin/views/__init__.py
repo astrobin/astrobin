@@ -1048,8 +1048,13 @@ def me(request):
 @require_GET
 @silk_profile('User page')
 def user_page(request, username):
-    """Shows the user's public page"""
-    user = get_object_or_404(UserProfile, user__username=username).user
+    user = get_object_or_404(
+        User.objects.select_related('userprofile').prefetch_related('groups'),
+        username=username)
+    profile = user.userprofile
+
+    if profile.deleted:
+        raise Http404
 
     if Image.objects_including_wip.filter(user=user, moderator_decision=2).count() > 0:
         if (not request.user.is_authenticated() or \
@@ -1057,7 +1062,6 @@ def user_page(request, username):
                 not request.user.userprofile.is_image_moderator()):
             raise Http404
 
-    profile = user.userprofile
     user_ct = ContentType.objects.get_for_model(User)
     image_ct = ContentType.objects.get_for_model(Image)
 
