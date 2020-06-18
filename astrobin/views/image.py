@@ -1,5 +1,4 @@
 import re
-from datetime import datetime
 
 from braces.views import (
     JSONResponseMixin,
@@ -18,7 +17,6 @@ from django.http import Http404, HttpResponseRedirect, HttpResponseBadRequest, H
 from django.shortcuts import redirect
 from django.utils.encoding import iri_to_uri, smart_unicode
 from django.utils.translation import ugettext as _
-from django.utils.translation import ungettext
 from django.views.generic import (
     DeleteView,
     DetailView,
@@ -57,7 +55,6 @@ from astrobin.utils import to_user_timezone, get_image_resolution
 from astrobin_apps_groups.forms import GroupSelectForm
 from astrobin_apps_groups.models import Group
 from astrobin_apps_images.services import ImageService
-from astrobin_apps_iotd.models import Iotd
 from astrobin_apps_notifications.utils import push_notification
 from astrobin_apps_platesolving.models import Solution
 from astrobin_apps_platesolving.services import SolutionService
@@ -281,39 +278,59 @@ class ImageDetailView(ImageDetailViewBase):
         from astrobin.moon import MoonPhase;
 
         gear_list = (
-            (ungettext('Imaging telescope or lens',
-                       'Imaging telescopes or lenses',
-                       len(image.imaging_telescopes.all())),
-             image.imaging_telescopes.all(), 'imaging_telescopes'),
-            (ungettext('Imaging camera',
-                       'Imaging cameras',
-                       len(image.imaging_cameras.all())),
-             image.imaging_cameras.all(), 'imaging_cameras'),
-            (ungettext('Mount',
-                       'Mounts',
-                       len(image.mounts.all())),
-             image.mounts.all(), 'mounts'),
-            (ungettext('Guiding telescope or lens',
-                       'Guiding telescopes or lenses',
-                       len(image.guiding_telescopes.all())),
-             image.guiding_telescopes.all(), 'guiding_telescopes'),
-            (ungettext('Guiding camera',
-                       'Guiding cameras',
-                       len(image.guiding_cameras.all())),
-             image.guiding_cameras.all(), 'guiding_cameras'),
-            (ungettext('Focal reducer',
-                       'Focal reducers',
-                       len(image.focal_reducers.all())),
-             image.focal_reducers.all(), 'focal_reducers'),
-            (_('Software'), image.software.all(), 'software'),
-            (ungettext('Filter',
-                       'Filters',
-                       len(image.filters.all())),
-             image.filters.all(), 'filters'),
-            (ungettext('Accessory',
-                       'Accessories',
-                       len(image.accessories.all())),
-             image.accessories.all(), 'accessories'),
+            (
+                _('Imaging telescopes or lenses'),
+                image.imaging_telescopes.all(),
+                'imaging_telescopes'
+            ),
+
+            (
+                _('Imaging cameras'),
+                image.imaging_cameras.all(),
+                'imaging_cameras'
+            ),
+
+            (
+                _('Mounts'),
+                image.mounts.all(),
+                'mounts'
+            ),
+
+            (
+                _('Guiding telescopes or lenses'),
+                image.guiding_telescopes.all(),
+                'guiding_telescopes'
+            ),
+
+            (
+                _('Guiding cameras'),
+                image.guiding_cameras.all(),
+                'guiding_cameras'
+            ),
+
+            (
+                _('Focal reducers'),
+                image.focal_reducers.all(),
+                'focal_reducers'
+            ),
+
+            (
+                _('Software'),
+                image.software.all(),
+                'software'
+            ),
+
+            (
+                _('Filters'),
+                image.filters.all(),
+                'filters'
+            ),
+
+            (
+                _('Accessory'),
+                image.accessories.all(),
+                'accessories'
+            ),
         )
 
         gear_list_has_commercial = False
@@ -612,28 +629,6 @@ class ImageDetailView(ImageDetailViewBase):
             elif nav_ctx == 'all':
                 image_next = Image.objects.exclude(corrupted=True).filter(pk__gt=image.pk).order_by('pk')[0:1]
                 image_prev = Image.objects.exclude(corrupted=True).filter(pk__lt=image.pk).order_by('-pk')[0:1]
-            elif nav_ctx == 'iotd':
-                try:
-                    iotd = Iotd.objects.get(image=image)
-                    iotd_next = Iotd.objects \
-                                    .exclude(image__corrupted=True) \
-                                    .filter(date__gt=iotd.date, date__lte=datetime.now().date()) \
-                                    .order_by('date')[0:1]
-                    iotd_prev = Iotd.objects \
-                                    .exclude(image__corrupted=True) \
-                                    .filter(date__lt=iotd.date, date__lte=datetime.now().date()) \
-                                    .order_by('-date')[0:1]
-
-                    if iotd_next:
-                        image_next = [iotd_next[0].image]
-                    if iotd_prev:
-                        image_prev = [iotd_prev[0].image]
-                except Iotd.DoesNotExist:
-                    pass
-            elif nav_ctx == 'picks':
-                picks = Image.objects.exclude(iotdvote=None, corrupted=True).filter(iotd=None)
-                image_next = picks.filter(pk__gt=image.pk).order_by('pk')[0:1]
-                image_prev = picks.filter(pk__lt=image.pk).order_by('-pk')[0:1]
         except Image.DoesNotExist:
             image_next = None
             image_prev = None
