@@ -27,7 +27,7 @@ EOF
 
 echo -n "Proceed? "
 read yn
-case $yn in
+case ${yn} in
     y*|Y*) : ;;
     *)
         echo "Aborting!"
@@ -47,5 +47,5 @@ docker volume rm docker_letsencrypt
 echo "Removing container images..."
 for image in astrobin/nginx-dev astrobin/astrobin; do
     echo "-- $image"
-    docker image rm $(docker image ls | grep $image | awk '{print $3}')
+    docker image rm $(docker image ls | grep ${image} | awk '{print $3}')
 done
