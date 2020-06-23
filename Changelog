@@ -1,3 +1,11 @@
+2020-06-12 Salvatore Iovene <salvatore@iovene.com>
+ * v1.82.1
+ * (donations) Fix getting is_donor result from cache
+ * (deps) Update dependency certifi to v2020.6.20 (#1251)
+ * (deps) Update dependency jedi to v0.17.1 (#1250)
+ * (deps) Update dependency elasticsearch to v7.8.0 (#1247)
+ * (deps) Update dependency newrelic to v5.14.1.144 (#1248)
+
 2020-06-16 Salvatore Iovene <salvatore@iovene.com>
  * v1.82.0
  * (performance) Improve queries on image page, user page, introduce cachalot (#1235)
