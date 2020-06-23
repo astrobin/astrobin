@@ -38,7 +38,7 @@ def is_donor(user):
     if settings.DONATIONS_ENABLED and user.is_authenticated():
         cache_key = "astrobin_is_donor_%d" % user.pk
         cached = cache.get(cache_key)
-        if cached is None:
+        if cached is not None:
             return cached
 
         us = UserSubscription.objects.filter(
