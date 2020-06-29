@@ -56,6 +56,7 @@ from astrobin.models import Image, UserProfile, CommercialGear, Gear, Location, 
     SolarSystem_Acquisition, RetailedGear, GearUserInfo, Telescope, Mount, Camera, FocalReducer, Software, Filter, \
     Accessory, GearHardMergeRedirect, GlobalStat, App, GearMakeAutoRename, Acquisition
 from astrobin.shortcuts import ajax_response, ajax_success, ajax_fail
+from astrobin.templatetags.tags import in_upload_wizard
 from astrobin.utils import user_is_producer, user_is_retailer, to_user_timezone, base26_encode, base26_decode
 from astrobin_apps_notifications.utils import push_notification
 from astrobin_apps_platesolving.forms import PlateSolvingSettingsForm, PlateSolvingAdvancedSettingsForm
@@ -919,9 +920,9 @@ def image_edit_save_watermark(request):
     profile.default_watermark_opacity = form.cleaned_data['watermark_opacity']
     profile.save(keep_deleted=True)
 
-    if not image.title:
+    if in_upload_wizard(image, request):
         return HttpResponseRedirect(
-            reverse('image_edit_basic', kwargs={'id': image.get_id()}))
+            reverse('image_edit_basic', kwargs={'id': image.get_id()}) + "?upload")
 
     # Force new thumbnails
     image.thumbnail_invalidate()

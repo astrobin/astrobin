@@ -30,31 +30,37 @@
             method="post"
             novalidate>
         {% csrf_token %}
+
         {{form|as_bootstrap}}
+
         <input type="hidden" name="image_id" value="{{image.get_id}}" />
+
+        {% if image|in_upload_wizard:request %}
+            <input type="hidden" name="upload" value="true" />
+        {% endif %}
 
         <div class="form-actions">
             <button
                 class="btn btn-primary btn-block-mobile {% button_loading_class %}"
                 type="submit">
-                {% if image.title %}
-                    {% trans "Save" %}
-                {% else %}
+                {% if image|in_upload_wizard:request %}
                     {% trans "Next step: basic information" %} &rarr;
+                {% else %}
+                    {% trans "Save" %}
                 {% endif %}
 
                 {% button_loading_indicator %}
             </button>
 
 
-            {% if image.title %}
+            {% if not image|in_upload_wizard:request %}
                 <a class="btn btn-block-mobile" href="{{image.get_absolute_url}}">{% trans "Cancel" %}</a>
-
-                <p class="help-block">
-                    {% trans "Warning!" %}
-                    {% trans "This operation might take several seconds." %}
-                </p>
             {% endif %}
+
+            <p class="help-block">
+                {% trans "Warning!" %}
+                {% trans "This operation might take several seconds." %}
+            </p>
         </div>
     </form>
 {% endblock %}

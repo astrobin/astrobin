@@ -991,7 +991,7 @@ class Image(HasSolutionMixin, SafeDeleteModel):
     user = models.ForeignKey(User)
 
     plot_is_overlay = models.BooleanField(editable=False, default=False)
-    is_wip = models.BooleanField(editable=False, default=False)
+    is_wip = models.BooleanField(default=False)
 
     # Size of the image in bytes
     size = models.PositiveIntegerField(editable=False, default=0)

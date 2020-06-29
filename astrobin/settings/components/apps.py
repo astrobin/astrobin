@@ -14,7 +14,6 @@ ASTROBIN_APPS = [
 ]
 
 INSTALLED_APPS = [
-    # Django apps
     'django.contrib.admin',
     'django.contrib.auth',
     'django.contrib.contenttypes',
@@ -22,7 +21,6 @@ INSTALLED_APPS = [
     'django.contrib.sites',
     'django.contrib.staticfiles',
 
-    # Third party apps
     'registration',
     'haystack',
     'notification',
@@ -52,9 +50,9 @@ INSTALLED_APPS = [
     'rest_framework.authtoken',
     'easy_thumbnails',
     'el_pagination',
-    'dfp',  # For Google DFP
+    'dfp',
     'django_user_agents',
-    'pybb',  # Forum
+    'pybb',
     'markup_deprecated',
     'sanitizer',
     'precise_bbcode',
@@ -74,9 +72,11 @@ INSTALLED_APPS = [
     'cachalot',
 
     'astrobin.apps.AstroBinAppConfig',
-] + ASTROBIN_APPS
+]
+
+INSTALLED_APPS += ASTROBIN_APPS
 
 if DEBUG:
-     INSTALLED_APPS += [
-          'debug_toolbar',
-     ]
+    INSTALLED_APPS += [
+        'debug_toolbar',
+    ]
