@@ -248,7 +248,7 @@ class ImageTest(TestCase):
         image = Image.objects.get(pk=image.pk)
         self.assertRedirects(
             response,
-            reverse('image_edit_watermark', kwargs={'id': image.get_id()}),
+            reverse('image_edit_watermark', kwargs={'id': image.get_id()}) + "?upload",
             status_code=302,
             target_status_code=200)
 
@@ -266,7 +266,7 @@ class ImageTest(TestCase):
             follow=True)
         self.assertRedirects(
             response,
-            reverse('image_edit_basic', kwargs={'id': image.get_id()}),
+            reverse('image_edit_basic', kwargs={'id': image.get_id()}) + "?upload",
             status_code=302,
             target_status_code=200)
         image = Image.objects.get(pk=image.pk)
@@ -335,7 +335,7 @@ class ImageTest(TestCase):
         image = Image.objects.get(pk=image.pk)
         self.assertRedirects(
             response,
-            reverse('image_edit_gear', kwargs={'id': image.get_id()}),
+            reverse('image_edit_gear', kwargs={'id': image.get_id()}) + "?upload",
             status_code=302,
             target_status_code=200)
         self.assertEqual(image.title, "Test title")
@@ -368,7 +368,7 @@ class ImageTest(TestCase):
         image = Image.objects.get(pk=image.pk)
         self.assertRedirects(
             response,
-            reverse('image_edit_acquisition', kwargs={'id': image.get_id()}),
+            reverse('image_edit_acquisition', kwargs={'id': image.get_id()}) + "?upload",
             status_code=302,
             target_status_code=200)
 
