@@ -76,6 +76,15 @@
         {% if upload_form %}
             <div class="row section">
                 <div class="span10 offset1">
+
+                    {% if request.user|is_any_ultimate %}
+                        <div class="alert alert-info">
+                            {% blocktrans trimmed with url="https://app.astrobin.com/uploader" %}
+                                Try the <a href="{{ url }}">new uploader</a>: robust, with real progress bar, and 4 GB file size limit!
+                            {% endblocktrans %}
+                        </div>
+                    {% endif %}
+
                     <div class="upload-forms">
                         <div class="upload-form wip-form-box">
                             <div class="upload-form-inner">
