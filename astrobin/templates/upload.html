@@ -77,7 +77,6 @@
             <div class="row section">
                 <div class="span10 offset1">
 
-                    {% comment %}
                     {% if request.user|is_any_ultimate %}
                         <div class="alert alert-info">
                             {% blocktrans trimmed with url="https://app.astrobin.com/uploader" %}
@@ -85,7 +84,6 @@
                             {% endblocktrans %}
                         </div>
                     {% endif %}
-                    {% endcomment %}
 
                     <div class="upload-forms">
                         <div class="upload-form wip-form-box">
