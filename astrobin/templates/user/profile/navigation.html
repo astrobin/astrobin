@@ -70,20 +70,17 @@
                         </li>
                     {% endif %}
 
-                    <li>
-                        {% if request.user|can_restore_from_trash %}
-                            <a href="
-                                    {% url 'user_page' requested_user.username %}{% query_string "trash=" "public,active,sub,staging,corrupted" %}">
-                        {% else %}
-                            <a href="#feature-restricted-modal" data-toggle="modal">
-                        {% endif %}
-                        <i class="icon-trash"></i>
-                        {% trans "Trash" %}
-                        <span class="badge badge-success">
-                                {{ deleted_images_no }}
-                            </span>
-                        </a>
-                    </li>
+                    {% if request.user|can_restore_from_trash %}
+                        <li>
+                            <a href="{% url 'user_page' requested_user.username %}{% query_string "trash=" "public,active,sub,staging,corrupted" %}">
+                                <i class="icon-trash"></i>
+                                {% trans "Trash" %}
+                                <span class="badge badge-success">
+                                    {{ deleted_images_no }}
+                                </span>
+                            </a>
+                        </li>
+                    {% endif %}
                 {% endifequal %}
 
                 <li class="divider"></li>
