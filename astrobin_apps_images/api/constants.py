@@ -1,0 +1,17 @@
+from dateutil.relativedelta import relativedelta
+
+TUS_API_VERSION = '1.0.0'
+TUS_RESUMABLE_FIELD_NAME = 'HTTP_TUS_RESUMABLE'
+TUS_API_EXTENSIONS = ['creation', 'creation-defer-length', 'termination', 'checksum', 'expiration']
+TUS_MAX_FILE_SIZE = 4 * 1024 * 1024 * 1024
+TUS_API_CHECKSUM_ALGORITHMS = ['md5', 'sha1', 'sha224', 'sha256', 'sha384', 'sha512']
+UPLOAD_DEFER_LENGTH_FIELD_NAME = 'tus_upload_defer_length'
+UPLOAD_LENGTH_FIELD_NAME = 'HTTP_UPLOAD_LENGTH'
+UPLOAD_OFFSET_NAME = 'HTTP_UPLOAD_OFFSET'
+UPLOAD_METADATA_FIELD_NAME = 'HTTP_UPLOAD_METADATA'
+UPLOAD_CHECKSUM_FIELD_NAME = 'tus_upload_checksum'
+TUS_NAME_METADATA_FIELD = 'name'
+TUS_FILENAME_METADATA_FIELD = 'filename'
+TUS_UPLOAD_EXPIRES = relativedelta(hours=1)
+TUS_CACHE_TIMEOUT = 3600
+TUS_RESPONSE_BODY_ENABLED = True
