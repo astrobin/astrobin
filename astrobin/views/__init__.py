@@ -269,8 +269,13 @@ def jsonDump(all):
         return []
 
 
-def upload_error(request, image=None):
-    messages.error(request, _("Invalid image or no image provided. Allowed formats are JPG, PNG and GIF."))
+def upload_error(request, image=None, errors=None):
+    message = _("Invalid image or no image provided. Allowed formats are JPG, PNG and GIF.")
+
+    if errors and 'image_file' in errors and errors['image_file'][0]:
+        message += " " + errors['image_file'][0]
+
+    messages.error(request, message)
 
     if image is not None:
         return HttpResponseRedirect(image.get_absolute_url())
@@ -521,7 +526,7 @@ def image_upload_process(request):
     form = ImageUploadForm(request.POST, request.FILES)
 
     if not form.is_valid():
-        return upload_error(request)
+        return upload_error(request, None, form.errors)
 
     image_file = request.FILES["image_file"]
     ext = os.path.splitext(image_file.name)[1].lower()
@@ -2124,7 +2129,7 @@ def image_revision_upload_process(request):
     form = ImageRevisionUploadForm(request.POST, request.FILES)
 
     if not form.is_valid():
-        return upload_error(request, image)
+        return upload_error(request, image, form.errors)
 
     max_revisions = premium_get_max_allowed_revisions(request.user)
     if image.revisions.count() >= max_revisions:
