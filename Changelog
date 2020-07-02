@@ -1,4 +1,9 @@
 2020-07-02 Salvatore Iovene <salvatore@iovene.com>
+ * v1.83.1
+ * (images) Report more specific error message and set PIL size limit to 16536*16536 pixels
+ * (uploader) Publish notice about new uploader being available to Ultimate users
+
+2020-07-02 Salvatore Iovene <salvatore@iovene.com>
  * v1.83.0
  * (uploader) Add support for API based chunked uploader (Tus protocol) (#1269)
  * (infra) Make USE_CACHE_IN_DEBUG True by default
