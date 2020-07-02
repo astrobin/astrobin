@@ -1,7 +1,7 @@
 import os
 
 if DEBUG:
-    if os.environ.get('USE_CACHE_IN_DEBUG', 'false') != 'true':
+    if os.environ.get('USE_CACHE_IN_DEBUG', 'true') != 'true':
         CACHES = {
             'default': {
                 'BACKEND': 'django.core.cache.backends.dummy.DummyCache',
