@@ -32,6 +32,7 @@ class TusHeadMixin(TusCacheMixin, object):
             headers['Upload-Metadata'] = encode_upload_metadata(json.loads(image.upload_metadata))
 
         # Add upload expiry to headers
-        add_expiry_header("tus-uploads/{}/expires".format(image.pk), headers)
+        expiration = self.get_cached_property("expires", image)
+        add_expiry_header(expiration, headers)
 
         return Response(headers=headers, status=status.HTTP_200_OK)
