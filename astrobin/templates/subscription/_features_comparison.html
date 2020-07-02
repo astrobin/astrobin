@@ -1,6 +1,6 @@
 {% load i18n %}
 
-<div class="accordion" id="features-accordtion">
+<div class="accordion" id="features-accordion">
     <div class="accordion-group">
         <div class="accordion-heading">
             <a class="accordion-toggle" data-toggle="collapse" data-parent="#features-accordion" href="#features-body">
@@ -36,7 +36,7 @@
                     <tbody>
                     <tr>
                         <th>{% trans "Images" %}</th>
-                        <td class="free">{{ PREMIUM_MAX_IMAGES_FREE_2020 }}</td>
+                        <td class="free">{{ PREMIUM_MAX_IMAGES_FREE_2020 }} uploads*</td>
                         <td class="lite">{{ PREMIUM_MAX_IMAGES_LITE_2020 }}</td>
                         <td class="premium"><span class="infinity">&infin;</span></td>
                         <td class="ultimate"><span class="infinity">&infin;</span></td>
@@ -155,6 +155,15 @@
                     </tr>
                     </tbody>
                 </table>
+
+                <p class="alert alert-info" style="margin-top: 2rem">
+                    <strong>*</strong>
+                    {% blocktrans trimmed %}
+                        The FREE account is to be considered a trial period. You can upload images 10 times, after which
+                        you can't upload anymore. Deleting images doesn't decrease your upload counter: the FREE account
+                        is not meant to be used as a way to keep your latest 10 images.
+                    {% endblocktrans %}
+                </p>
 
             </div>
         </div>
