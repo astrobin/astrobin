@@ -1,4 +1,9 @@
 2020-07-02 Salvatore Iovene <salvatore@iovene.com>
+ * v1.83.2
+ * (subscription) Be more clear that FREE gets 10 uploads, not 10 images
+ * (gallery) Do not display Trash link at all if user lacks rights
+
+2020-07-02 Salvatore Iovene <salvatore@iovene.com>
  * v1.83.1
  * (images) Report more specific error message and set PIL size limit to 16536*16536 pixels
  * (uploader) Publish notice about new uploader being available to Ultimate users
