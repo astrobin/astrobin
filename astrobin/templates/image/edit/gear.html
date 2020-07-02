@@ -48,7 +48,9 @@
             action=""
             novalidate>
         {% csrf_token %}
+
         {{ form.non_field_errors }}
+
         {% for field in form %}
             <div class="control-group">
                 <label class="control-label" for="id_{{ field.name }}">{{ field.label }}:</label>
@@ -63,22 +65,18 @@
         <input type="hidden" name="image_id" value="{{ image.get_id }}" />
 
         <div class="form-actions">
-            <button
-                    class="btn btn-primary btn-block-mobile {% button_loading_class %}"
-                    type="submit">
+            <button class="btn btn-primary btn-block-mobile {% button_loading_class %}" type="submit">
                 {% trans "Save" %}
                 {% button_loading_indicator %}
             </button>
 
-            <button
-                    class="btn btn-primary btn-block-mobile {% button_loading_class %}"
-                    type="submit"
-                    name="submit_acquisition">
-                {% trans "Edit acquisition details" %} &rarr;
-                {% button_loading_indicator %}
-            </button>
-
-            {% if image.title %}
+            {% if image|in_upload_wizard:request %}
+                <button class="btn btn-primary btn-block-mobile {% button_loading_class %}" type="submit"
+                        name="submit_acquisition">
+                    {% trans "Edit acquisition details" %} &rarr; {% button_loading_indicator %}
+                </button>
+                <input type="hidden" name="upload" value="true" />
+            {% else %}
                 <a class="btn btn-block-mobile" href="{{ image.get_absolute_url }}">{% trans "Cancel" %}</a>
             {% endif %}
         </div>

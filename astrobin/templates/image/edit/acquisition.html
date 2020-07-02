@@ -40,9 +40,7 @@
                 <a class="btn btn-danger btn-block-mobile"
                    href="{% url 'image_edit_acquisition_reset' image.get_id %}">{% trans "Remove data" %}</a>
 
-                {% if image.title %}
-                    <a class="btn btn-block-mobile" href="{{ image.get_absolute_url }}">{% trans "Cancel" %}</a>
-                {% endif %}
+                <a class="btn btn-block-mobile" href="{{ image.get_absolute_url }}">{% trans "Cancel" %}</a>
             </div>
         </form>
     {% else %}
@@ -96,9 +94,7 @@
                             {% trans "Remove data" %}
                         </a>
 
-                        {% if image.title %}
-                            <a class="btn btn-block-mobile" href="{{ image.get_absolute_url }}">{% trans "Cancel" %}</a>
-                        {% endif %}
+                        <a class="btn btn-block-mobile" href="{{ image.get_absolute_url }}">{% trans "Cancel" %}</a>
                     </div>
                 </form>
             {% else %}
@@ -128,9 +124,7 @@
                             {% trans "Remove data" %}
                         </a>
 
-                        {% if image.title %}
-                            <a class="btn btn-block-mobile" href="{{ image.get_absolute_url }}">{% trans "Cancel" %}</a>
-                        {% endif %}
+                        <a class="btn btn-block-mobile" href="{{ image.get_absolute_url }}">{% trans "Cancel" %}</a>
                     </div>
                 </form>
             {% endif %}

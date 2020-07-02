@@ -553,3 +553,10 @@ def skip_thread_list_shadow_bans(thread_list, user):
     return Participant.objects.filter(pk__in=[
         x.pk for x in thread_list if not UserService(user).shadow_bans(x.thread.creator)
     ])
+
+
+@register.filter
+def in_upload_wizard(image, request):
+    return not image.title or \
+           "upload" in request.GET or \
+           "upload" in request.POST

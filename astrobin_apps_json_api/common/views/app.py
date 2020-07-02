@@ -2,10 +2,10 @@ import hashlib
 from os.path import join
 
 from braces.views import JSONResponseMixin
+from django.conf import settings
 from django.core.cache import cache
 from django.views.generic.base import View
 
-from astrobin import settings
 from common.utils import get_project_root
 
 
@@ -14,6 +14,7 @@ class AppConfig(JSONResponseMixin, View):
         return self.render_json_response({
             u"version": self.__get_version__(),
             u"i18nHash": self.__get_i18n_hash__(),
+            u"readOnly": self.__get_read_only_mode__(),
         })
 
     def __get_version__(self):
@@ -54,3 +55,6 @@ class AppConfig(JSONResponseMixin, View):
         cache.set(cache_key, digest, 3600)
 
         return digest
+
+    def __get_read_only_mode__(self):
+        return settings.READONLY_MODE
