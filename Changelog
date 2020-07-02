@@ -1,3 +1,20 @@
+2020-07-02 Salvatore Iovene <salvatore@iovene.com>
+ * v1.83.0
+ * (uploader) Add support for API based chunked uploader (Tus protocol) (#1269)
+ * (infra) Make USE_CACHE_IN_DEBUG True by default
+ * (deps) Update dependency celery to v4.4.6 (#1256)
+ * (deps) Update dependency html5lib to v1.1 (#1254)
+ * (deps) Update dependency idna to v2.10 (#1263)
+ * (deps) Update dependency importlib-metadata to v1.7.0 (#1261)
+ * (deps) Update dependency kombu to v4.6.11 (#1257)
+ * (deps) Update dependency Pillow to v6 (#1243)
+ * (deps) Update dependency sendgrid to v6.4.1 (#1258)
+ * (deps) Update dependency SQLAlchemy to v1.3.18 (#1259)
+ * (deps) Update dependency tornado to v5 (#1246)
+ * (deps) Update dependency uncompyle6 to v3.7.2 (#1265)
+ * (deps) Update dependency watchtower to v0.8.0 (#1267)
+ * (deps) Update dependency xdis to v5 (#1264)
+
 2020-06-12 Salvatore Iovene <salvatore@iovene.com>
  * v1.82.1
  * (donations) Fix getting is_donor result from cache

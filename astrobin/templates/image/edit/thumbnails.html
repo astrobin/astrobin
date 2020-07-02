@@ -34,23 +34,24 @@
         {{ form|as_bootstrap }}
 
         <div class="form-actions">
-            {% if not image.title %}
-            <input type="hidden" name="submit_watermark" value="true" />
+            {% if image|in_upload_wizard:request %}
+                <input type="hidden" name="submit_watermark" value="true" />
+                <input type="hidden" name="upload" value="true" />
             {% endif %}
 
             <button
                     class="btn btn-primary btn-block-mobile {% button_loading_class %}"
                     type="submit">
-                {% if image.title %}
-                    {% trans "Save" %}
-                {% else %}
+                {% if image|in_upload_wizard:request %}
                     {% trans "Next step: edit watermark" %} &rarr;
+                {% else %}
+                    {% trans "Save" %}
                 {% endif %}
 
                 {% button_loading_indicator %}
             </button>
 
-            {% if image.title %}
+            {% if not image|in_upload_wizard:request %}
                 <a class="btn btn-block-mobile" href="{% url 'image_detail' image.get_id %}">
                     {% trans "Cancel" %}
                 </a>

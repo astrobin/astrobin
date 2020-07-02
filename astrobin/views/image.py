@@ -1094,7 +1094,8 @@ class ImageEditBasicView(ImageEditBaseView):
     def get_success_url(self):
         image = self.get_object()
         if 'submit_gear' in self.request.POST:
-            return reverse_lazy('image_edit_gear', kwargs={'id': image.get_id()})
+            return reverse_lazy('image_edit_gear', kwargs={'id': image.get_id()}) + "?upload"
+
         return image.get_absolute_url()
 
     def post(self, request, *args, **kwargs):
@@ -1140,7 +1141,8 @@ class ImageEditGearView(ImageEditBaseView):
     def get_success_url(self):
         image = self.object
         if 'submit_acquisition' in self.request.POST:
-            return reverse_lazy('image_edit_acquisition', kwargs={'id': image.get_id()})
+            return reverse_lazy('image_edit_acquisition', kwargs={'id': image.get_id()}) + "?upload"
+
         return image.get_absolute_url()
 
     def get_form(self, form_class=None):
@@ -1240,7 +1242,7 @@ class ImageEditThumbnailsView(ImageEditBaseView):
     def get_success_url(self):
         image = self.get_object()
         if 'submit_watermark' in self.request.POST:
-            return reverse_lazy('image_edit_watermark', kwargs={'id': image.get_id()})
+            return reverse_lazy('image_edit_watermark', kwargs={'id': image.get_id()}) + "?upload"
         return image.get_absolute_url()
 
     def post(self, request, *args, **kwargs):
