@@ -77,7 +77,7 @@
             <div class="row section">
                 <div class="span10 offset1">
 
-                    {% if request.user|is_any_ultimate %}
+                    {% if request.user|is_any_ultimate or request.user|is_premium %}
                         <div class="alert alert-info">
                             {% blocktrans trimmed with url="https://app.astrobin.com/uploader" %}
                                 Try the <a href="{{ url }}">new beta uploader</a>: robust, with real progress bar, and 4 GB file size limit!
