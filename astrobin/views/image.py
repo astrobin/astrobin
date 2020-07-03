@@ -395,15 +395,15 @@ class ImageDetailView(ImageDetailViewBase):
 
                 if a.number and a.duration:
                     key = ""
-                    if a.filter:
+                    if a.filter is not None:
                         key = "filter(%s)" % a.filter.get_name()
-                    if a.iso:
+                    if a.iso is not None:
                         key += '-ISO(%d)' % a.iso
-                    if a.gain:
+                    if a.gain is not None:
                         key += '-gain(%.2f)' % a.gain
-                    if a.sensor_cooling:
+                    if a.sensor_cooling is not None:
                         key += '-temp(%d)' % a.sensor_cooling
-                    if a.binning:
+                    if a.binning is not None:
                         key += '-bin(%d)' % a.binning
                     key += '-duration(%d)' % a.duration
 
@@ -416,12 +416,12 @@ class ImageDetailView(ImageDetailViewBase):
                     current_number = int(integration_re.group(1))
 
                     dsa_data['frames'][key] = {}
-                    dsa_data['frames'][key]['filter_url'] = a.filter.get_absolute_url() if a.filter else '#'
-                    dsa_data['frames'][key]['filter'] = a.filter if a.filter else ''
-                    dsa_data['frames'][key]['iso'] = 'ISO%d' % a.iso if a.iso else ''
-                    dsa_data['frames'][key]['gain'] = '(gain: %.2f)' % a.gain if a.gain else ''
-                    dsa_data['frames'][key]['sensor_cooling'] = '%dC' % a.sensor_cooling if a.sensor_cooling else ''
-                    dsa_data['frames'][key]['binning'] = 'bin %sx%s' % (a.binning, a.binning) if a.binning else ''
+                    dsa_data['frames'][key]['filter_url'] = a.filter.get_absolute_url() if a.filter is not None else '#'
+                    dsa_data['frames'][key]['filter'] = a.filter if a.filter is not None else ''
+                    dsa_data['frames'][key]['iso'] = 'ISO%d' % a.iso if a.iso is not None else ''
+                    dsa_data['frames'][key]['gain'] = '(gain: %.2f)' % a.gain if a.gain is not None else ''
+                    dsa_data['frames'][key]['sensor_cooling'] = '%dC' % a.sensor_cooling if a.sensor_cooling is not None else ''
+                    dsa_data['frames'][key]['binning'] = 'bin %sx%s' % (a.binning, a.binning) if a.binning is not None else ''
                     dsa_data['frames'][key]['integration'] = '%sx%s"' % (current_number + a.number, a.duration)
 
                     dsa_data['integration'] += (a.duration * a.number / 3600.0)
