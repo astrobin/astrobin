@@ -4,6 +4,7 @@ from __future__ import unicode_literals
 from djangorestframework_camel_case.render import CamelCaseJSONRenderer
 from rest_framework import viewsets
 from rest_framework.metadata import BaseMetadata
+from rest_framework.permissions import IsAuthenticatedOrReadOnly
 from rest_framework.renderers import BrowsableAPIRenderer
 
 from astrobin.models import Image
@@ -12,6 +13,7 @@ from astrobin_apps_images.api.constants import TUS_API_VERSION, TUS_API_EXTENSIO
 from astrobin_apps_images.api.filters import ImageFilter
 from astrobin_apps_images.api.mixins import TusCreateMixin, TusPatchMixin, TusHeadMixin, TusTerminateMixin
 from astrobin_apps_images.api.parsers import TusUploadStreamParser
+from astrobin_apps_images.api.permissions import HasUploaderAccessOrReadOnly
 from astrobin_apps_images.api.serializers import ImageSerializer
 
 
@@ -43,3 +45,7 @@ class ImageViewSet(TusCreateMixin,
     filter_class = ImageFilter
     metadata_class = UploadMetadata
     parser_classes = [TusUploadStreamParser]
+    permission_classes = [
+        IsAuthenticatedOrReadOnly,
+        HasUploaderAccessOrReadOnly
+    ]
