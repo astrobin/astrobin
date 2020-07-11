@@ -10,7 +10,7 @@ progress {
 
 progress::-moz-progress-bar {
   border-radius: 10px;
-  background: #eee;
+  background: $grey-1;
   box-shadow: inset 0 -2px 4px rgba(0, 0, 0, 0.4), 0 2px 5px 0px rgba(0, 0, 0, 0.3);
 
 }
@@ -28,6 +28,6 @@ progress::-webkit-progress-bar {
 
 progress::-webkit-progress-value {
   border-radius: 10px;
-  background: #eee;
+  background: $grey-1;
   box-shadow: inset 0 -2px 4px rgba(0, 0, 0, 0.4), 0 2px 5px 0px rgba(0, 0, 0, 0.3);
 }

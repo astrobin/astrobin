@@ -19,12 +19,14 @@ $(function() {
             this.username = $('#nested-comments-user-name').attr('data-value');
             this.userIsAuthenticated = $('#nested-comments-user-is-authenticated').attr('data-value') == "True";
             this.userIsSuperuser = $('#nested-comments-user-is-superuser').attr('data-value') == "True";
+            this.shadowBans = JSON.parse($('#nested-comments-shadow-bans').attr('data-value'));
             this.page_url = $('#nested-comments-page-url').attr('data-value');
             this.loaderGif = $('#nested-comments-loaderGif-url').attr('data-value');
             this.contentTypeId = $(this.rootElement).attr('data-content-type-id');
             this.objectId = $(this.rootElement).attr('data-object-id');
 
             this.markdownConverter = new Markdown.Converter();
+            this.commentStore = [];
         }
     });
 
@@ -342,7 +344,34 @@ $(function() {
                             comment.set('authorIsRequestingUser', nc_app.userId == comment.get('author'));
                             comment.set('deleted', nc_data.deleted);
                             self.fetchAuthor(comment);
-                            self.addComment(comment);
+
+                            nc_app.commentStore.push(comment);
+
+                            function commentIsShadowBanned(commentId) {
+                                if (commentId === null) {
+                                    return false;
+                                }
+
+                                var comments = nc_app.commentStore.filter(function(comment) {
+                                    return comment.id === commentId;
+                                });
+
+                                if (comments) {
+                                    var comment = comments[0];
+
+                                    if (nc_app.userId !== comment.author && nc_app.shadowBans.indexOf(comment.author) > -1) {
+                                        return true;
+                                    } else {
+                                        return commentIsShadowBanned(comment.parent);
+                                    }
+                                }
+
+                                return false;
+                            }
+
+                            if (nc_app.shadowBans && !commentIsShadowBanned(comment.id)) {
+                                self.addComment(comment);
+                            }
                         });
 
                         if (!self.get('ready')) {

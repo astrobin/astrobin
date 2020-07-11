@@ -1,4 +1,5 @@
 import datetime
+import logging
 from itertools import chain
 
 from dateutil.relativedelta import relativedelta
@@ -28,11 +29,14 @@ from astrobin_apps_platesolving.solver import Solver
 from astrobin_apps_premium.templatetags.astrobin_apps_premium_tags import (
     is_lite, is_any_premium_subscription, is_lite_2020, is_any_ultimate, is_premium_2020, is_premium)
 from astrobin_apps_premium.utils import premium_get_valid_usersubscription
+from astrobin_apps_users.services import UserService
 from nested_comments.models import NestedComment
 from toggleproperties.models import ToggleProperty
 from .gear import get_correct_gear
 from .models import Image, ImageRevision, Gear, UserProfile
 from .stories import add_story
+
+log = logging.getLogger('apps')
 
 
 def image_pre_save(sender, instance, **kwargs):
@@ -165,6 +169,10 @@ def nested_comment_post_save(sender, instance, created, **kwargs):
         if model_class == Image:
             image = instance.content_type.get_object_for_this_type(id=instance.object_id)
             if image.is_wip:
+                return
+
+            if UserService(obj.user).shadow_bans(instance.author):
+                log.debug("Skipping notification for comment because %s shadow-bans %s" % (obj.user, instance.author))
                 return
 
             if instance.author != obj.user:
@@ -362,6 +370,7 @@ def subscription_subscribed(sender, **kwargs):
         profile.premium_counter = 0
         profile.save(keep_deleted=True)
 
+
 subscribed.connect(subscription_subscribed)
 paid.connect(subscription_subscribed)
 signed_up.connect(subscription_subscribed)
@@ -382,6 +391,7 @@ def reset_lite_and_premium_counter(sender, **kwargs):
         if previous:
             user.userprofile.premium_counter = 0
             user.userprofile.save()
+
 
 signed_up.connect(reset_lite_and_premium_counter)
 
@@ -642,7 +652,7 @@ def threaded_messages_thread_post_save(sender, instance, created, **kwargs):
     if created:
         try:
             request = get_request()
-        except InexError:
+        except IndexError:
             # This may happen during unit testing
             return
 

@@ -1,6 +1,7 @@
-# Django
 from django.apps import AppConfig
 
+from PIL import Image
+Image.MAX_IMAGE_PIXELS = 16536*16536
 
 class AstroBinAppConfig(AppConfig):
     name = 'astrobin'

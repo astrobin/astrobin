@@ -1,7 +1,7 @@
 import os
 
 if DEBUG:
-    if os.environ.get('USE_CACHE_IN_DEBUG', 'false') != 'true':
+    if os.environ.get('USE_CACHE_IN_DEBUG', 'true') != 'true':
         CACHES = {
             'default': {
                 'BACKEND': 'django.core.cache.backends.dummy.DummyCache',
@@ -11,7 +11,10 @@ if DEBUG:
     PYBB_ANONYMOUS_VIEWS_CACHE_BUFFER = 0
 
     def show_toolbar(request):
-        return 'ddt=1' in request.path
+        if request.is_ajax():
+            return False
+
+        return request.GET.get('ddt', None) is not None
 
     DEBUG_TOOLBAR_CONFIG = {
         "SHOW_TOOLBAR_CALLBACK": show_toolbar,
@@ -30,6 +33,7 @@ if DEBUG:
         'debug_toolbar.panels.signals.SignalsPanel',
         'debug_toolbar.panels.logging.LoggingPanel',
         'debug_toolbar.panels.redirects.RedirectsPanel',
+        'cachalot.panels.CachalotPanel',
     ]
 
     CELERY_ALWAYS_EAGER = True

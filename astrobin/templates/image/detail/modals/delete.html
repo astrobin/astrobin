@@ -1,22 +1,28 @@
 {% load i18n %}
 {% load astrobin_apps_premium_tags %}
+{% load common_tags %}
 
 <div class="modal hide fade" id="delete-modal">
     <div class="modal-header">
         <a class="close" data-dismiss="modal">&times;</a>
         <h3>{% trans "Delete image and all its revisions?" %}</h3>
     </div>
-    <div class="modal-body">
-        <div class="well">
-            {% if request.user|can_restore_from_trash %}
-                {% trans "The image will be moved to the trash, and it can be restored later. All its revisions will be there too. Continue?" %}
-            {% else %}
-                {% trans "The image will be permanently deleted and cannot be recovered. All its revisions will be deleted too. Are you sure?" %}
-            {% endif %}
-        </div>
 
-        <form class="form-inline" action="{% url 'image_delete' image.get_id %}" method="post">{% csrf_token %}
-            <input class="btn btn-primary" type="submit" value="{% trans "Delete" %}"/>
+    <div class="modal-body">
+        {% if request.user|can_restore_from_trash %}
+            {% trans "The image will be moved to the trash, and it can be restored later. All its revisions will be there too. Continue?" %}
+        {% else %}
+            {% trans "The image will be permanently deleted and cannot be recovered. All its revisions will be deleted too. Are you sure?" %}
+        {% endif %}
+    </div>
+
+    <div class="modal-footer">
+        <form action="{% url 'image_delete' image.get_id %}" method="post">{% csrf_token %}
+            <button class="btn" data-dismiss="modal">{% trans "Cancel" %}</button>
+            <button class="btn btn-primary {% button_loading_class %}" type="submit">
+                {% trans "Delete" %}
+                {% button_loading_indicator %}
+            </button>
         </form>
     </div>
 </div>
@@ -26,13 +32,67 @@
         <a class="close" data-dismiss="modal">&times;</a>
         <h3>{% trans "Delete original image?" %}</h3>
     </div>
-    <div class="modal-body">
-        <div class="well">
-            {% trans "The image will be permanently deleted and cannot be recovered. Its revisions will not be deleted. Are you sure?"%}
-        </div>
 
-        <form class="form-inline" action="{% url 'image_delete_original' image.get_id %}" method="post">{% csrf_token %}
-            <input class="btn btn-primary" type="submit" value="{% trans "Delete" %}"/>
+    <div class="modal-body">
+        {% trans "The image will be permanently deleted and cannot be recovered. Its revisions will not be deleted. Are you sure?"%}
+    </div>
+
+    <div class="modal-footer">
+        <form action="{% url 'image_delete_original' image.get_id %}" method="post">{% csrf_token %}
+            <button class="btn" data-dismiss="modal">{% trans "Cancel" %}</button>
+            <button class="btn btn-primary {% button_loading_class %}" type="submit">
+                {% trans "Delete" %}
+                {% button_loading_indicator %}
+            </button>
+        </form>
+    </div>
+</div>
+
+<div class="modal hide fade" id="delete-all-other-versions-modal">
+    <div class="modal-header">
+        <a class="close" data-dismiss="modal">&times;</a>
+        <h3>{% trans "Delete all other versions?" %}</h3>
+    </div>
+
+    <div class="modal-body">
+        {% blocktrans trimmed %}
+            You will delete all other revisions (if any), and the originally uploaded image, leaving the current
+            revision as the final and only version of this image.
+        {% endblocktrans %}
+    </div>
+
+    <div class="modal-footer">
+        <form action="{% url 'image_delete_other_versions' image.pk %}" method="post">{% csrf_token %}
+            <input type="hidden" name="revision" id="id_revision" value="" />
+            <button class="btn" data-dismiss="modal">{% trans "Cancel" %}</button>
+            <button class="btn btn-primary {% button_loading_class %}" type="submit">
+                {% trans "Delete" %}
+                {% button_loading_indicator %}
+            </button>
+        </form>
+    </div>
+</div>
+
+<div class="modal hide fade" id="delete-all-revisions-modal">
+    <div class="modal-header">
+        <a class="close" data-dismiss="modal">&times;</a>
+        <h3>{% trans "Delete all revisions?" %}</h3>
+    </div>
+
+    <div class="modal-body">
+        {% blocktrans trimmed %}
+            You will delete all revisions, leaving the originally uploaded image as the final and only version of this
+            image.
+        {% endblocktrans %}
+    </div>
+
+    <div class="modal-footer">
+        <form action="{% url 'image_delete_other_versions' image.pk %}" method="post">{% csrf_token %}
+            <button class="btn" data-dismiss="modal">{% trans "Cancel" %}</button>
+            <button class="btn btn-primary {% button_loading_class %}" type="submit">
+                {% trans "Delete" %}
+                {% button_loading_indicator %}
+            </button>
         </form>
     </div>
 </div>

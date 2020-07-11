@@ -1,4 +1,6 @@
 # Django
+import datetime
+
 from django import template
 from django.template import Library, Node
 from django.template.defaultfilters import stringfilter
@@ -171,3 +173,16 @@ def button_loading_class():
 @register.simple_tag
 def button_loading_indicator():
     return mark_safe('<div class="ld ld-ring ld-spin"></div>')
+
+
+@register.filter
+def more_recent_than(t, seconds):
+    now = datetime.datetime.now()
+    delta = datetime.timedelta(seconds=seconds)
+    return t > now - delta
+
+
+@register.filter
+def get_pks(qs):
+    # type: (QuerySet) -> list[int]
+    return [x.pk for x in qs]

@@ -1,3 +1,122 @@
+2020-07-07 Salvatore Iovene <salvatore@iovene.com>
+ * v1.83.4
+ * (api) Fix permission issue on image upload API
+
+2020-07-03 Salvatore Iovene <salvatore@iovene.com>
+ * v1.83.3
+ * (images) Do display gain also when it's 0 (#1274)
+ * (uploader) Let Premium subscribers (pre 2020) in on the new uploader
+
+2020-07-02 Salvatore Iovene <salvatore@iovene.com>
+ * v1.83.2
+ * (subscription) Be more clear that FREE gets 10 uploads, not 10 images
+ * (gallery) Do not display Trash link at all if user lacks rights
+
+2020-07-02 Salvatore Iovene <salvatore@iovene.com>
+ * v1.83.1
+ * (images) Report more specific error message and set PIL size limit to 16536*16536 pixels
+ * (uploader) Publish notice about new uploader being available to Ultimate users
+
+2020-07-02 Salvatore Iovene <salvatore@iovene.com>
+ * v1.83.0
+ * (uploader) Add support for API based chunked uploader (Tus protocol) (#1269)
+ * (infra) Make USE_CACHE_IN_DEBUG True by default
+ * (deps) Update dependency celery to v4.4.6 (#1256)
+ * (deps) Update dependency html5lib to v1.1 (#1254)
+ * (deps) Update dependency idna to v2.10 (#1263)
+ * (deps) Update dependency importlib-metadata to v1.7.0 (#1261)
+ * (deps) Update dependency kombu to v4.6.11 (#1257)
+ * (deps) Update dependency Pillow to v6 (#1243)
+ * (deps) Update dependency sendgrid to v6.4.1 (#1258)
+ * (deps) Update dependency SQLAlchemy to v1.3.18 (#1259)
+ * (deps) Update dependency tornado to v5 (#1246)
+ * (deps) Update dependency uncompyle6 to v3.7.2 (#1265)
+ * (deps) Update dependency watchtower to v0.8.0 (#1267)
+ * (deps) Update dependency xdis to v5 (#1264)
+
+2020-06-12 Salvatore Iovene <salvatore@iovene.com>
+ * v1.82.1
+ * (donations) Fix getting is_donor result from cache
+ * (deps) Update dependency certifi to v2020.6.20 (#1251)
+ * (deps) Update dependency jedi to v0.17.1 (#1250)
+ * (deps) Update dependency elasticsearch to v7.8.0 (#1247)
+ * (deps) Update dependency newrelic to v5.14.1.144 (#1248)
+
+2020-06-16 Salvatore Iovene <salvatore@iovene.com>
+ * v1.82.0
+ * (performance) Improve queries on image page, user page, introduce cachalot (#1235)
+ * (infra) Force renovate to python 2.7 compatibility (#1236)
+ * (deps) Update dependency requests to v2.24.0 (#1234)
+ * (deps) Update dependency Pygments to v2.5.2 (#1237)
+ * (deps) Update dependency django-precise-bbcode to v1.2.10 (#1240)
+ * (deps) Update dependency easy-thumbnails to v2.6 (#1242)
+ * (deps) Update dependency mock to v3 (#1245)
+
+2020-06-16 Salvatore Iovene <salvatore@iovene.com>
+ * v1.81.0
+ * (general) Fix broken import in collectins view
+ * (image) Add Actions menu to delete all other versions (#1231)
+ * (deps) Update dependency codecov to v2.1.7 (#1230)
+
+2020-06-14 Salvatore Iovene <salvatore@iovene.com>
+ * v1.80.3
+ * (general) Remove number of bookmarks/likes in menu for performance reasons
+
+2020-06-14 Salvatore Iovene <salvatore@iovene.com>
+ * v1.80.2
+ * (iotd) Revert reordering of queue due to performance issue
+ * (infra) Fix showing the debug toolbar
+
+2020-06-13 Salvatore Iovene <salvatore@iovene.com>
+ * v1.80.1
+ * (general) Use more variables for colors
+
+2020-06-13 Salvatore Iovene <salvatore@iovene.com>
+ * v1.80.0
+ * (general) Fix pagination issue (#1224)
+ * (iotd) Sort images in review/judgement queue by first submission/vote (#1225)
+ * (iotd) Add remaining time indicator to Vote and Judgement queues (#1225)
+ * (images) Fix unicode issue in edit revision (#1229)
+ * (deps) Update dependency codecov to v2.1.5 (#1223)
+ * (deps) Update dependency xdis to v4.7.0 (#1226)
+ * (deps) Update dependency uncompyle6 to v3.7.1 (#1227)
+
+2020-06-09 Salvatore Iovene <salvatore@iovene.com>
+ * v1.79.0
+ * (general) Add support for shadow-banning users (#1215)
+ * (deps) Update dependency botocore to v1.16.25 (#1217)
+ * (deps) Update dependency boto3 to v1.13.25 (#1216)
+ * (deps) Update dependency celery to v4.4.5 (#1214)
+ * (deps) Update dependency certifi to v2020.4.5.2 (#1212)
+
+2020-06-07 Salvatore Iovene <salvatore@iovene.com>
+ * v1.78.2
+ * (deps) Fix hash of pybbm dependency
+
+2020-06-07 Salvatore Iovene <salvatore@iovene.com>
+ * v1.78.1
+ * (deps) Upgrade pybbm with fix for missing import
+
+2020-06-06 Salvatore Iovene <salvatore@iovene.com>
+ * v1.78.0
+ * (forums) Forbid editing posts 5 minutes after creation (#1208)
+ * (performance) Improve performance on dev by caching docker volumes (#1210)
+ * (deps) Update dependency requests-aws4auth to v1 (#1209)
+ * (deps) Update dependency gevent to v20.6.0 (#1205)
+
+2020-06-06 Salvatore Iovene <salvatore@iovene.com>
+ * v1.77.6
+ * (plate-solving) Use HD (and when available, sharpened) image to annotate (#1204)
+ * Update dependency botocore to v1.16.24 (#1202)
+ * Update dependency importlib-metadata to v1.6.1 (#1203)
+ * Update dependency boto3 to v1.13.24 (#1201)
+
+2020-06-05 Salvatore Iovene <salvatore@iovene.com>
+ * v1.77.5
+ * (infra) Add "annoucements" URL rewrite and update nginx version in docker compose
+ * (deps) Update dependency botocore to v1.16.23 (#1198)
+ * (deps) Update dependency Paste to v3.4.1 (#1196)
+
 2020-06-05 Salvatore Iovene <salvatore@iovene.com>
  * v1.77.4
  * (i18n) Update French translation

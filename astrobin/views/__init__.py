@@ -20,7 +20,7 @@ from django.core.paginator import Paginator, InvalidPage
 from django.core.urlresolvers import reverse
 from django.db.models import Q
 from django.forms.models import inlineformset_factory
-from django.http import Http404, HttpResponse
+from django.http import Http404, HttpResponse, HttpResponseBadRequest
 from django.http import HttpResponseForbidden
 from django.http import HttpResponseRedirect
 from django.shortcuts import get_object_or_404
@@ -56,6 +56,7 @@ from astrobin.models import Image, UserProfile, CommercialGear, Gear, Location, 
     SolarSystem_Acquisition, RetailedGear, GearUserInfo, Telescope, Mount, Camera, FocalReducer, Software, Filter, \
     Accessory, GearHardMergeRedirect, GlobalStat, App, GearMakeAutoRename, Acquisition
 from astrobin.shortcuts import ajax_response, ajax_success, ajax_fail
+from astrobin.templatetags.tags import in_upload_wizard
 from astrobin.utils import user_is_producer, user_is_retailer, to_user_timezone, base26_encode, base26_decode
 from astrobin_apps_notifications.utils import push_notification
 from astrobin_apps_platesolving.forms import PlateSolvingSettingsForm, PlateSolvingAdvancedSettingsForm
@@ -268,8 +269,13 @@ def jsonDump(all):
         return []
 
 
-def upload_error(request, image=None):
-    messages.error(request, _("Invalid image or no image provided. Allowed formats are JPG, PNG and GIF."))
+def upload_error(request, image=None, errors=None):
+    message = _("Invalid image or no image provided. Allowed formats are JPG, PNG and GIF.")
+
+    if errors and 'image_file' in errors and errors['image_file'][0]:
+        message += " " + errors['image_file'][0]
+
+    messages.error(request, message)
 
     if image is not None:
         return HttpResponseRedirect(image.get_absolute_url())
@@ -520,7 +526,7 @@ def image_upload_process(request):
     form = ImageUploadForm(request.POST, request.FILES)
 
     if not form.is_valid():
-        return upload_error(request)
+        return upload_error(request, None, form.errors)
 
     image_file = request.FILES["image_file"]
     ext = os.path.splitext(image_file.name)[1].lower()
@@ -919,9 +925,9 @@ def image_edit_save_watermark(request):
     profile.default_watermark_opacity = form.cleaned_data['watermark_opacity']
     profile.save(keep_deleted=True)
 
-    if not image.title:
+    if in_upload_wizard(image, request):
         return HttpResponseRedirect(
-            reverse('image_edit_basic', kwargs={'id': image.get_id()}))
+            reverse('image_edit_basic', kwargs={'id': image.get_id()}) + "?upload")
 
     # Force new thumbnails
     image.thumbnail_invalidate()
@@ -1048,8 +1054,13 @@ def me(request):
 @require_GET
 @silk_profile('User page')
 def user_page(request, username):
-    """Shows the user's public page"""
-    user = get_object_or_404(UserProfile, user__username=username).user
+    user = get_object_or_404(
+        User.objects.select_related('userprofile').prefetch_related('groups'),
+        username=username)
+    profile = user.userprofile
+
+    if profile.deleted:
+        raise Http404
 
     if Image.objects_including_wip.filter(user=user, moderator_decision=2).count() > 0:
         if (not request.user.is_authenticated() or \
@@ -1057,7 +1068,6 @@ def user_page(request, username):
                 not request.user.userprofile.is_image_moderator()):
             raise Http404
 
-    profile = user.userprofile
     user_ct = ContentType.objects.get_for_model(User)
     image_ct = ContentType.objects.get_for_model(Image)
 
@@ -2004,6 +2014,54 @@ def user_profile_seen_email_permissions(request):
 
 
 @login_required
+@require_POST
+def user_profile_shadow_ban(request):
+    user_pk = request.POST.get('userPk')
+
+    if user_pk == request.user.pk:
+        return HttpResponseForbidden()
+
+    user_to_ban = User.objects.get(pk=user_pk)
+    profile_to_ban = user_to_ban.userprofile
+
+    requester_profile = request.user.userprofile
+
+    if profile_to_ban in requester_profile.shadow_bans.all():
+        return HttpResponseBadRequest()
+
+    requester_profile.shadow_bans.add(profile_to_ban)
+
+    msg = "You have shadow-banned %s. They will not be notified about it."
+    messages.success(request, _(msg) % profile_to_ban.get_display_name())
+
+    return HttpResponseRedirect(request.POST.get('next', '/'))
+
+
+@login_required
+@require_POST
+def user_profile_remove_shadow_ban(request):
+    user_pk = request.POST.get('userPk')
+
+    if user_pk == request.user.pk:
+        return HttpResponseForbidden()
+
+    user_to_unban = User.objects.get(pk=user_pk)
+    profile_to_unban = user_to_unban.userprofile
+
+    requester_profile = request.user.userprofile
+
+    if not profile_to_unban in requester_profile.shadow_bans.all():
+        return HttpResponseBadRequest()
+
+    requester_profile.shadow_bans.remove(profile_to_unban)
+
+    msg = "You have removed your shadow-ban for %s. They will not be notified about it."
+    messages.success(request, _(msg) % profile_to_unban.get_display_name())
+
+    return HttpResponseRedirect(request.POST.get('next', '/'))
+
+
+@login_required
 @require_GET
 def user_profile_edit_preferences(request):
     """Edits own preferences"""
@@ -2071,7 +2129,7 @@ def image_revision_upload_process(request):
     form = ImageRevisionUploadForm(request.POST, request.FILES)
 
     if not form.is_valid():
-        return upload_error(request, image)
+        return upload_error(request, image, form.errors)
 
     max_revisions = premium_get_max_allowed_revisions(request.user)
     if image.revisions.count() >= max_revisions:
@@ -2102,7 +2160,7 @@ def image_revision_upload_process(request):
 
     revisions = ImageRevision.all_objects.filter(image=image).order_by('id')
 
-    mark_as_final = request.POST.get(u'mark_as_final', None) == u'on' # type: bool
+    mark_as_final = request.POST.get(u'mark_as_final', None) == u'on'  # type: bool
 
     highest_label = 'A'
     for r in revisions:

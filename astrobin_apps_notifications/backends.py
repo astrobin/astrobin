@@ -15,6 +15,17 @@ from notification.backends.email import EmailBackend as BaseEmailBackend
 log = logging.getLogger('apps')
 
 
+def shadow_ban_applies(notice_type, recipient, context):
+    from astrobin_apps_users.services import UserService
+
+    if notice_type.label == 'received_email':
+        message_sender = context.get('message').sender
+        if UserService(recipient).shadow_bans(message_sender):
+            return True
+
+    return False
+
+
 class PersistentMessagesBackend(BaseBackend):
     spam_sensitivity = 1
 
@@ -27,6 +38,10 @@ class PersistentMessagesBackend(BaseBackend):
 
         context = self.default_context()
         context.update(extra_context)
+
+        if shadow_ban_applies(notice_type, recipient, context):
+            return
+
         messages = self.get_formatted_messages(
             ['notice.html'],
             notice_type.label, context)
@@ -60,6 +75,9 @@ class EmailBackend(BaseEmailBackend):
             "notice": ugettext(notice_type.display),
         })
         context.update(extra_context)
+
+        if shadow_ban_applies(notice_type, recipient, context):
+            return
 
         messages = self.get_formatted_messages((
             "short.txt",

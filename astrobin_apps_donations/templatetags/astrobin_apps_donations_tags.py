@@ -2,6 +2,7 @@
 
 # Django
 from django.conf import settings
+from django.core.cache import cache
 from django.db.models import Q
 from django.template import Library
 
@@ -35,6 +36,11 @@ def donor_badge(user, size='large'):
 @register.filter
 def is_donor(user):
     if settings.DONATIONS_ENABLED and user.is_authenticated():
+        cache_key = "astrobin_is_donor_%d" % user.pk
+        cached = cache.get(cache_key)
+        if cached is not None:
+            return cached
+
         us = UserSubscription.objects.filter(
             Q(user=user) &
             Q(
@@ -61,11 +67,13 @@ def is_donor(user):
                 Q(subscription__name='AstroBin Donor Platinum Yearly')
             ))
 
-        if us.count() == 0:
+        if not us.exists():
             return False
 
         us = us[0]
-        return us.valid()
+        result = us.valid()
+        cache.set(cache_key, result, 1)
+        return result
 
     return False
 

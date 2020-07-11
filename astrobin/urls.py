@@ -88,6 +88,8 @@ from astrobin.views import (
     user_profile_save_preferences,
     user_profile_seen_realname,
     user_profile_seen_email_permissions,
+    user_profile_shadow_ban,
+    user_profile_remove_shadow_ban,
 
     commercial_products_claim,
     commercial_products_edit,
@@ -218,6 +220,7 @@ urlpatterns += [
     url(r'^api/v2/nestedcomments/', include('nested_comments.api_urls')),
     url(r'^api/v2/platesolving/', include('astrobin_apps_platesolving.api_urls')),
     url(r'^api/v2/notifications/', include('astrobin_apps_notifications.api.urls')),
+    url(r'^api/v2/images/', include('astrobin_apps_images.api.urls', namespace="astrobin_apps_images")),
     url(r'^api/v2/contests/', include('astrobin_apps_contests.api.urls')),
 
     ###########################################################################
@@ -325,6 +328,8 @@ urlpatterns += [
     url(r'^profile/seen/realname/$', user_profile_seen_realname, name='profile_seen_realname'),
     url(r'^profile/seen/email-permissions/$', user_profile_seen_email_permissions,
         name='profile_seen_email_permissions'),
+    url(r'^profile/shadow-ban/', user_profile_shadow_ban, name='profile_shadow_ban'),
+    url(r'^profile/remove-shadow-ban/', user_profile_remove_shadow_ban, name='profile_remove_shadow_ban'),
 
     ###########################################################################
     ### AUTOCOMPLETE VIEWS                                                 ###
@@ -457,6 +462,7 @@ urlpatterns += [
     url(r'^delete/(?P<id>\w+)/$', image_views.ImageDeleteView.as_view(), name='image_delete'),
     url(r'^delete/original/(?P<id>\w+)/$', image_views.ImageDeleteOriginalView.as_view(), name='image_delete_original'),
     url(r'^delete/revision/(?P<id>\w+)/$', image_views.ImageRevisionDeleteView.as_view(), name='image_delete_revision'),
+    url(r'^delete/other-versions/(?P<id>\w+)/$', image_views.ImageDeleteOtherVersionsView.as_view(), name='image_delete_other_versions'),
     url(r'^demote/(?P<id>\w+)/$', image_views.ImageDemoteView.as_view(), name='image_demote'),
     url(r'^edit/acquisition/(?P<id>\w+)/$', image_edit_acquisition, name='image_edit_acquisition'),
     url(r'^edit/acquisition/reset/(?P<id>\w+)/$', image_edit_acquisition_reset, name='image_edit_acquisition_reset'),

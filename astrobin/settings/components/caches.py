@@ -7,5 +7,4 @@ CACHES = {
     },
 }
 
-JOHNNY_MIDDLEWARE_KEY_PREFIX='jc_astrobin'
-
+CACHALOT_ENABLED = os.environ.get('CACHALOT_ENABLED', 'true').strip() == 'true'
