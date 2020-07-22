@@ -489,13 +489,13 @@ class Migration(migrations.Migration):
         ),
         migrations.AddField(
             model_name='gearassistedmerge',
-            name='master',
-            field=models.ForeignKey(null=True, on_delete=django.db.models.deletion.CASCADE, related_name='assisted_master', to='astrobin.Gear'),
+            name='main',
+            field=models.ForeignKey(null=True, on_delete=django.db.models.deletion.CASCADE, related_name='assisted_main', to='astrobin.Gear'),
         ),
         migrations.AddField(
             model_name='gearassistedmerge',
-            name='slave',
-            field=models.ForeignKey(null=True, on_delete=django.db.models.deletion.CASCADE, related_name='assisted_slave', to='astrobin.Gear'),
+            name='subordinate',
+            field=models.ForeignKey(null=True, on_delete=django.db.models.deletion.CASCADE, related_name='assisted_subordinate', to='astrobin.Gear'),
         ),
         migrations.AddField(
             model_name='gear',
@@ -504,7 +504,7 @@ class Migration(migrations.Migration):
         ),
         migrations.AddField(
             model_name='gear',
-            name='master',
+            name='main',
             field=models.ForeignKey(editable=False, null=True, on_delete=django.db.models.deletion.CASCADE, to='astrobin.Gear'),
         ),
         migrations.AddField(
