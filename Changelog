@@ -1,3 +1,7 @@
+2020-07-27 Salvatore Iovene <salvatore@iovene.com>
+ * v1.83.6
+ * (infra) Raise gunicorn workers to 4 and max requests per worker to 500
+
 2020-07-22 Salvatore Iovene <salvatore@iovene.com>
  * v1.83.5
  * (infra) Apply memory optimization tricks
