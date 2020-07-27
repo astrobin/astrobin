@@ -96,7 +96,7 @@ services:
 
   astrobin:
     image: astrobin/astrobin:v1.83.5-adsense.1
-    command: bash -c "./scripts/init.sh && gunicorn wsgi:application -w 2 -b :8083 --max-requests 200 --max-requests-jitter 50 --timeout 300 --graceful-timeout 300 -k gevent"
+    command: bash -c "./scripts/init.sh && gunicorn wsgi:application -w 4 -b :8083 --max-requests 500 --max-requests-jitter 50 --timeout 300 --graceful-timeout 300 -k gevent"
     links:
       - memcached
       - rabbitmq
