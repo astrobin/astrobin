@@ -63,7 +63,7 @@ class UserProfileAdmin(admin.ModelAdmin):
 
 
 class GearAdmin(admin.ModelAdmin):
-    list_display = ('id', 'make', 'name', 'master', 'updated', 'moderator_fixed')
+    list_display = ('id', 'make', 'name', 'main', 'updated', 'moderator_fixed')
     list_editable = ('make', 'name',)
     search_fields = ('id', 'make', 'name',)
     actions = ['assisted_merge', 'soft_merge', ]
@@ -74,20 +74,20 @@ class GearAdmin(admin.ModelAdmin):
         if queryset.count() > 1:
             return
 
-        orphans = queryset.filter(master=None)
+        orphans = queryset.filter(main=None)
         for orphan in orphans:
             matches = difflib.get_close_matches(orphan.name, [x.name for x in queryset], cutoff=0.6)
             for match in matches:
-                slaves = Gear.objects.filter(name=match).exclude(pk=orphan.pk)
-                for slave in slaves:
+                subordinates = Gear.objects.filter(name=match).exclude(pk=orphan.pk)
+                for subordinate in subordinates:
                     # The following line needs some explaining:
-                    # With the first Q(), I exclude mutual master/slave
+                    # With the first Q(), I exclude mutual main/subordinate
                     # relationship (like a -> b and b -> a).
                     # With the second Q(), I exclude dependencies that generate
                     # a tree deeper than 2 level (a -> b -> c).
-                    if not GearAssistedMerge.objects.filter(Q(slave=orphan) | Q(master=slave)):
+                    if not GearAssistedMerge.objects.filter(Q(subordinate=orphan) | Q(main=subordinate)):
                         s = difflib.SequenceMatcher(None, orphan.name, match)
-                        merge, created = GearAssistedMerge.objects.get_or_create(master=orphan, slave=slave)
+                        merge, created = GearAssistedMerge.objects.get_or_create(main=orphan, subordinate=subordinate)
                         merge.cutoff = s.quick_ratio()
                         merge.save()
 
@@ -96,45 +96,45 @@ class GearAdmin(admin.ModelAdmin):
     assisted_merge.short_description = 'Assisted hard merge'
 
     def soft_merge(modeladmin, request, queryset):
-        masters = [x.master for x in queryset]
-        if not all(x == masters[0] for x in masters):
+        mains = [x.main for x in queryset]
+        if not all(x == mains[0] for x in mains):
             # They're not all the same!
             return
 
-        master = masters[0]
-        slaves = [x.slave for x in queryset if x != master]
+        main = mains[0]
+        subordinates = [x.subordinate for x in queryset if x != main]
 
-        for slave in slaves:
-            # These are all the items that are slave to this slave.
-            slaves_slaves = Gear.objects.filter(master=slave)
+        for subordinate in subordinates:
+            # These are all the items that are subordinate to this subordinate.
+            subordinates_subordinates = Gear.objects.filter(main=subordinate)
 
-            if slave.master:
-                slave.master.master = master
-                slave.master.master.save()
+            if subordinate.main:
+                subordinate.main.main = main
+                subordinate.main.main.save()
 
-            for slaves_slave in slaves_slaves:
-                slaves_slave.master = master
-                slaves_slave.save()
+            for subordinates_subordinate in subordinates_subordinates:
+                subordinates_subordinate.main = main
+                subordinates_subordinate.save()
 
-            slave.master = master
-            slave.save()
+            subordinate.main = main
+            subordinate.save()
 
     soft_merge.short_description = 'Soft merge'
 
 
 class GearAssistedMergeAdmin(admin.ModelAdmin):
-    list_display = ('id', 'master', 'slave', 'cutoff')
+    list_display = ('id', 'main', 'subordinate', 'cutoff')
     list_per_page = 10
-    ordering = ('-cutoff', 'master')
-    search_fields = ('master',)
+    ordering = ('-cutoff', 'main')
+    search_fields = ('main',)
     actions = ['hard_merge', 'invert', 'delete_gear_items', ]
 
     def invert(modeladmin, request, queryset):
         for merge in queryset:
-            master = merge.master
-            slave = merge.slave
-            merge.master = slave
-            merge.slave = master
+            main = merge.main
+            subordinate = merge.subordinate
+            merge.main = subordinate
+            merge.subordinate = main
             merge.save()
 
     invert.short_description = 'Invert'
@@ -142,8 +142,8 @@ class GearAssistedMergeAdmin(admin.ModelAdmin):
     def delete_gear_items(modeladmin, request, queryset):
         for merge in queryset:
             try:
-                merge.master.delete()
-                merge.slave.delete()
+                merge.main.delete()
+                merge.subordinate.delete()
             except Gear.DoesNotExist:
                 pass
             merge.delete()
@@ -152,13 +152,13 @@ class GearAssistedMergeAdmin(admin.ModelAdmin):
 
     def hard_merge(modeladmin, request, queryset):
         from utils import unique_items
-        masters = unique_items([x.master for x in queryset])
-        if len(masters) > 1:
+        mains = unique_items([x.main for x in queryset])
+        if len(mains) > 1:
             return
 
-        master = masters[0]
+        main = mains[0]
         for merge in queryset:
-            master.hard_merge(merge.slave)
+            main.hard_merge(merge.subordinate)
 
         # Finally, clear up the temporary model
         queryset.delete()
@@ -169,7 +169,7 @@ class GearAssistedMergeAdmin(admin.ModelAdmin):
 
 
 class MountAdmin(admin.ModelAdmin):
-    list_display = ('id', 'make', 'name', 'master', 'updated', 'moderator_fixed')
+    list_display = ('id', 'make', 'name', 'main', 'updated', 'moderator_fixed')
     list_editable = ('make', 'name',)
     search_fields = ('id', 'make', 'name',)
 
