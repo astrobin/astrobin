@@ -257,7 +257,7 @@ class Gear(models.Model):
         blank=False,
     )
 
-    master = models.ForeignKey('self', null=True, editable=False)
+    main = models.ForeignKey('self', null=True, editable=False)
 
     commercial = models.ForeignKey(
         'CommercialGear',
@@ -303,19 +303,19 @@ class Gear(models.Model):
     def slug(self):
         return slugify("%s %s" % (self.get_make(), self.get_name()))
 
-    def hard_merge(self, slave):
+    def hard_merge(self, subordinate):
         from astrobin.gear import get_correct_gear
-        unused, master_gear_type = get_correct_gear(self.id)
-        unused, slave_gear_type = get_correct_gear(slave.id)
+        unused, main_gear_type = get_correct_gear(self.id)
+        unused, subordinate_gear_type = get_correct_gear(subordinate.id)
 
-        if master_gear_type != slave_gear_type:
+        if main_gear_type != subordinate_gear_type:
             return
 
-        # Find matching slaves in images
-        images = Image.by_gear(slave)
+        # Find matching subordinates in images
+        images = Image.by_gear(subordinate)
         for image in images:
             for name, klass in Image.GEAR_CLASS_LOOKUP.iteritems():
-                s = getattr(image, name).filter(pk=slave.pk)
+                s = getattr(image, name).filter(pk=subordinate.pk)
                 if s:
                     try:
                         getattr(image, name).add(klass.objects.get(pk=self.pk))
@@ -323,12 +323,12 @@ class Gear(models.Model):
                     except klass.DoesNotExist:
                         continue
 
-        # Find matching slaves in user profiles
-        filters = reduce(operator.or_, [Q(**{'%s__gear_ptr__pk' % t: slave.pk}) for t in UserProfile.GEAR_CLASS_LOOKUP])
+        # Find matching subordinates in user profiles
+        filters = reduce(operator.or_, [Q(**{'%s__gear_ptr__pk' % t: subordinate.pk}) for t in UserProfile.GEAR_CLASS_LOOKUP])
         owners = UserProfile.objects.filter(filters).distinct()
         for owner in owners:
             for name, klass in UserProfile.GEAR_CLASS_LOOKUP.iteritems():
-                s = getattr(owner, name).filter(pk=slave.pk)
+                s = getattr(owner, name).filter(pk=subordinate.pk)
                 if s:
                     try:
                         getattr(owner, name).add(klass.objects.get(pk=self.pk))
@@ -336,42 +336,42 @@ class Gear(models.Model):
                     except klass.DoesNotExist:
                         continue
 
-        # Find matching slaves in deep sky acquisitions
+        # Find matching subordinates in deep sky acquisitions
         try:
             filter = Filter.objects.get(pk=self.pk)
-            DeepSky_Acquisition.objects.filter(filter__pk=slave.pk).update(
+            DeepSky_Acquisition.objects.filter(filter__pk=subordinate.pk).update(
                 filter=filter)
         except Filter.DoesNotExist:
             pass
 
-        # Find matching comments and move them to the master
+        # Find matching comments and move them to the main
         NestedComment.objects.filter(
             content_type=ContentType.objects.get(app_label='astrobin', model='gear'),
-            object_id=slave.id
+            object_id=subordinate.id
         ).update(object_id=self.id)
 
-        # Find matching gear reviews and move them to the master
+        # Find matching gear reviews and move them to the main
         reviews = Review.objects.filter(
             content_type=ContentType.objects.get(app_label='astrobin', model='gear'),
-            content_id=slave.id
+            content_id=subordinate.id
         ).update(content_id=self.id)
 
-        # Fetch slave's master if this hard-merge's master doesn't have a soft-merge master
-        if not self.master:
-            self.master = slave.master
+        # Fetch subordinate's main if this hard-merge's main doesn't have a soft-merge main
+        if not self.main:
+            self.main = subordinate.main
             self.save()
 
         # Steal the commercial gear and all the retailers
         if not self.commercial:
-            self.commercial = slave.commercial
+            self.commercial = subordinate.commercial
             self.save()
 
-        for retailed in slave.retailed.all():
+        for retailed in subordinate.retailed.all():
             if retailed not in self.retailed.all():
                 self.retailed.add(retailed)
 
-        GearHardMergeRedirect(fro=slave.pk, to=self.pk).save()
-        slave.delete()
+        GearHardMergeRedirect(fro=subordinate.pk, to=self.pk).save()
+        subordinate.delete()
 
     def save(self, *args, **kwargs):
         try:
@@ -434,12 +434,12 @@ class GearUserInfo(models.Model):
 
 
 class GearAssistedMerge(models.Model):
-    master = models.ForeignKey(Gear, related_name='assisted_master', null=True)
-    slave = models.ForeignKey(Gear, related_name='assisted_slave', null=True)
+    main = models.ForeignKey(Gear, related_name='assisted_main', null=True)
+    subordinate = models.ForeignKey(Gear, related_name='assisted_subordinate', null=True)
     cutoff = models.DecimalField(default=0, max_digits=3, decimal_places=2)
 
     def __unicode__(self):
-        return self.master.name
+        return self.main.name
 
     class Meta:
         app_label = 'astrobin'

@@ -118,12 +118,12 @@ class GearTest(TestCase):
         g1, created = Filter.objects.get_or_create(name = "1")
         g2, created = Filter.objects.get_or_create(name = "2")
 
-        # Assign slave to profile
+        # Assign subordinate to profile
         u = User.objects.create_user('test', 'test@test.com', 'password')
         u.userprofile.filters.add(g2)
         u.userprofile.save(keep_deleted=True)
 
-        # Assign slave to image
+        # Assign subordinate to image
         i, created  = Image.objects.get_or_create(user = u)
         i.filters.add(g2)
         i.save(keep_deleted=True)
