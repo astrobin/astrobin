@@ -11,6 +11,7 @@ from astrobin.models import Location, Image, ImageRevision, ImageOfTheDay, App, 
 from astrobin.views import get_image_or_404
 from astrobin_apps_images.services import ImageService
 from astrobin_apps_iotd.models import IotdVote
+from astrobin_apps_platesolving.services import SolutionService
 from astrobin_apps_premium.utils import premium_get_valid_usersubscription
 from toggleproperties.models import ToggleProperty
 
@@ -274,12 +275,7 @@ class ImageResource(ModelResource):
 
     def dehydrate_subjects(self, bundle):
         if bundle.obj.solution:
-            subjects = bundle.obj.solution.objects_in_field
-            if subjects:
-                subjects = subjects.split(',')
-            else:
-                subjects = []
-
+            subjects = SolutionService(bundle.obj.solution).get_objects_in_field()
             solar_system_main_subject = bundle.obj.solar_system_main_subject
 
             ret = subjects
