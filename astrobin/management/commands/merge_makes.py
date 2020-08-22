@@ -50,17 +50,17 @@ class Command(BaseCommand):
             if new_make == '':
                 new_make = item.make
 
-            mains = Gear.objects.filter(make = item.make)
-            for main in mains:
-                main.make = new_make
-                main.save()
+            masters = Gear.objects.filter(make = item.make)
+            for master in masters:
+                master.make = new_make
+                master.save()
                 number_merged += 1
 
             for i in shlex.split(to_merge):
-                subordinates = Gear.objects.filter(make = matches[int(i)])
-                for subordinate in subordinates:
-                    subordinate.make = new_make
-                    subordinate.save()
+                slaves = Gear.objects.filter(make = matches[int(i)])
+                for slave in slaves:
+                    slave.make = new_make
+                    slave.save()
                     number_merged += 1
 
             print "Merged %d makes." % number_merged
