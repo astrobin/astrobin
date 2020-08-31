@@ -2,6 +2,7 @@ from django.core.files.images import get_image_dimensions
 from django.db.models import Q
 
 from astrobin.models import Image, ImageRevision, SOLAR_SYSTEM_SUBJECT_CHOICES
+from astrobin.utils import base26_encode, base26_decode
 
 
 class ImageService:
@@ -18,6 +19,13 @@ class ImageService:
             revisions = revisions.filter(corrupted=False)
 
         return revisions
+
+    def get_next_available_revision_label(self):
+        highest_label = 'A'
+        for r in self.get_revisions():
+            highest_label = r.label
+
+        return base26_encode(base26_decode(highest_label) + 1)
 
     def get_revisions_with_description(self, include_corrupted=False):
         return self.get_revisions(include_corrupted).exclude(Q(description=None) | Q(description=''))

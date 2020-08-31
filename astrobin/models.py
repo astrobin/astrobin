@@ -10,6 +10,7 @@ import unicodedata
 import uuid
 from datetime import datetime
 
+from django.core.files.images import get_image_dimensions
 from image_cropping import ImageRatioField
 
 from astrobin.enums import SubjectType, SolarSystemSubject
@@ -1666,6 +1667,28 @@ class ImageRevision(HasSolutionMixin, SafeDeleteModel):
 
     def __unicode__(self):
         return self.image.title
+
+    def save(self, *args, **kwargs):
+        if self.w == 0 or self.h == 0:
+            try:
+                self.w, self.h = get_image_dimensions(self.image_file.file)
+            except:
+                pass
+
+        if self.w == self.image.w and self.h == self.image.h and not self.square_cropping:
+            self.square_cropping = self.image.square_cropping
+
+        if self.is_final:
+            if self.image.is_final:
+                self.image.is_final = False
+                self.image.save(keep_deleted=True)
+            from astrobin_apps_images.services import ImageService
+            ImageService(self.image).get_revisions() \
+                .filter(is_final=True) \
+                .exclude(label=self.label) \
+                .update(is_final=False)
+
+        super(ImageRevision, self).save(*args, **kwargs)
 
     def get_absolute_url(self, revision='nd', size='regular'):
         # We can ignore the revision argument of course

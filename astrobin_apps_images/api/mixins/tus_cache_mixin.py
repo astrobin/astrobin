@@ -1,11 +1,9 @@
-from django.core.cache import cache
-
-from astrobin_apps_images.api import constants
+from astrobin_apps_images.api import utils
 
 
 class TusCacheMixin():
-    def get_cached_property(self, property, image):
-        return cache.get("tus-uploads/{}/{}".format(image.pk, property))
+    def get_cached_property(self, property, object):
+        return utils.get_cached_property(property, object)
 
-    def set_cached_property(self, property, image, value):
-        cache.set("tus-uploads/{}/{}".format(image.pk, property), value, constants.TUS_CACHE_TIMEOUT)
+    def set_cached_property(self, property, object, value):
+        utils.set_cached_property(property, object, value)
