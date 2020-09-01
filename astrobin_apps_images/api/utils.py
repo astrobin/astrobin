@@ -172,26 +172,23 @@ def checksum_matches(checksum_algorithm, checksum, bytes):
 
 
 def get_or_create_temporary_file(image):
-    if not cache.get("tus-uploads/{}/temporary-file-path".format(image.pk)):
+    if not get_cached_property("temporary-file-path", image):
         fd, path = tempfile.mkstemp(prefix="tus-upload-")
         os.close(fd)
-        cache.set("tus-uploads/{}/temporary-file-path".format(image.pk), path, constants.TUS_CACHE_TIMEOUT)
+        set_cached_property("temporary-file-path", image, path)
 
-    cached = cache.get("tus-uploads/{}/temporary-file-path".format(image.pk))
+    cached = get_cached_property("temporary-file-path", image)
     assert os.path.isfile(cached)
     return cached
 
 
 def write_data(image, bytes):
-    temporary_file_path = cache.get("tus-uploads/{}/temporary-file-path".format(image.pk))
-    upload_offset = cache.get("tus-uploads/{}/offset".format(image.pk))
+    temporary_file_path = get_cached_property("temporary-file-path", image)
+    upload_offset = get_cached_property("offset", image)
     num_bytes_written = write_bytes_to_file(temporary_file_path, upload_offset, bytes, makedirs=True)
 
     if num_bytes_written > 0:
-        cache.set(
-            "tus-uploads/{}/offset".format(image.pk),
-            upload_offset + num_bytes_written,
-            constants.TUS_CACHE_TIMEOUT)
+        set_cached_property("offset", image, upload_offset + num_bytes_written)
 
 
 def apply_headers_to_response(response, headers):
@@ -199,3 +196,11 @@ def apply_headers_to_response(response, headers):
         response[item[0]] = item[1]
 
     return response
+
+
+def get_cached_property(property, object):
+    return cache.get("tus-uploads/{}/{}/{}".format(object.__class__.__name__, object.pk, property))
+
+def set_cached_property(property, object, value):
+    cache.set("tus-uploads/{}/{}/{}".format(
+        object.__class__.__name__, object.pk, property), value, constants.TUS_CACHE_TIMEOUT)

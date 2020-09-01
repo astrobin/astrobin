@@ -1,1 +1,3 @@
 from .image_view_set import ImageViewSet
+from .image_revision_view_set import ImageRevisionViewSet
+from .thumbnail_group_view_set import ThumbnailGroupViewSet

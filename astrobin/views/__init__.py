@@ -58,6 +58,7 @@ from astrobin.models import Image, UserProfile, CommercialGear, Gear, Location, 
 from astrobin.shortcuts import ajax_response, ajax_success, ajax_fail
 from astrobin.templatetags.tags import in_upload_wizard
 from astrobin.utils import user_is_producer, user_is_retailer, to_user_timezone, base26_encode, base26_decode
+from astrobin_apps_images.services import ImageService
 from astrobin_apps_notifications.utils import push_notification
 from astrobin_apps_platesolving.forms import PlateSolvingSettingsForm, PlateSolvingAdvancedSettingsForm
 from astrobin_apps_platesolving.models import PlateSolvingSettings, Solution, PlateSolvingAdvancedSettings
@@ -2158,40 +2159,15 @@ def image_revision_upload_process(request):
         except:
             return upload_error(request, image)
 
-    revisions = ImageRevision.all_objects.filter(image=image).order_by('id')
-
-    mark_as_final = request.POST.get(u'mark_as_final', None) == u'on'  # type: bool
-
-    highest_label = 'A'
-    for r in revisions:
-        highest_label = r.label
-        if mark_as_final:
-            r.is_final = False
-            r.save(keep_deleted=True)
-
-    image_revision = form.save(commit=False)
-
-    if mark_as_final:
-        image.is_final = False
-        image.save(keep_deleted=True)
-        image_revision.is_final = True
-
+    image_revision = form.save(commit=False)  # type: ImageRevision
     image_revision.user = request.user
     image_revision.image = image
-    image_revision.label = base26_encode(base26_decode(highest_label) + 1)
-
-    w, h = image_revision.w, image_revision.h
-
-    if w == 0 or h == 0:
-        w, h = get_image_dimensions(image_revision.image_file.file)
-
-    if w == image.w and h == image.h:
-        image_revision.square_cropping = image.square_cropping
-
+    image_revision.label = ImageService(image).get_next_available_revision_label()
+    image_revision.is_final = request.POST.get(u'mark_as_final', None) == u'on'
     image_revision.save(keep_deleted=True)
 
     messages.success(request, _("Image uploaded. Thank you!"))
-    return HttpResponseRedirect(image_revision.get_absolute_url())
+    return HttpResponseRedirect(reverse('image_edit_revision', args=(image_revision.pk,)))
 
 
 @require_GET
