@@ -17,4 +17,6 @@ class ImageSerializer(serializers.HyperlinkedModelSerializer):
             'image_file',
             'is_wip',
             'skip_notifications',
+            'w',
+            'h',
         )
