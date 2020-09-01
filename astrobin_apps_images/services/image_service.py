@@ -12,8 +12,9 @@ class ImageService:
         # type: (Image) -> None
         self.image = image
 
-    def get_revisions(self, include_corrupted=False):
-        revisions = ImageRevision.objects.filter(image=self.image)
+    def get_revisions(self, include_corrupted=False, include_deleted=False):
+        manager = ImageRevision.all_objects if include_deleted else ImageRevision.objects
+        revisions = manager.filter(image=self.image)
 
         if not include_corrupted:
             revisions = revisions.filter(corrupted=False)
@@ -22,7 +23,7 @@ class ImageService:
 
     def get_next_available_revision_label(self):
         highest_label = 'A'
-        for r in self.get_revisions():
+        for r in self.get_revisions(False, True):
             highest_label = r.label
 
         return base26_encode(base26_decode(highest_label) + 1)

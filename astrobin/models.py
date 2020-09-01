@@ -1683,7 +1683,7 @@ class ImageRevision(HasSolutionMixin, SafeDeleteModel):
                 self.image.is_final = False
                 self.image.save(keep_deleted=True)
             from astrobin_apps_images.services import ImageService
-            ImageService(self.image).get_revisions() \
+            ImageService(self.image).get_revisions(True, True) \
                 .filter(is_final=True) \
                 .exclude(label=self.label) \
                 .update(is_final=False)
