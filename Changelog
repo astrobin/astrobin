@@ -1,3 +1,23 @@
+2020-09-01 Salvatore Iovene <salvatore@iovene.com>
+ * v1.84.0
+ * (api) Include output of advanced solving in Image.subjects field
+ * (infra) Add db migration to default is_wip to false
+ * (images) Add support for chunked image revision uploads (#1305)
+ * (search) Fix remote source filter for Astro Observatories Western Australia
+ * (deps) Remove unused dependency: sendgrid
+ * (deps) Update dependency celery to v4.4.7 (#1295)
+ * (deps) Update dependency codecov to v2.1.9 (#1307)
+ * (deps) Update dependency coverage to v5.2.1 (#1292)
+ * (deps) Update dependency django-safedelete to v0.5.6 (#1285)
+ * (deps) Update dependency elasticsearch to v7.9.1 (#1299)
+ * (deps) Update dependency jedi to v0.17.2 (#1284)
+ * (deps) Update dependency newrelic to v5.18.0.148 (#1308)
+ * (deps) Update dependency Paste to v3.4.3 (#1281)
+ * (deps) Update dependency simplejson to v3.17.2 (#1283)
+ * (deps) Update dependency typing to v3.7.4.3 (#1278)
+ * (deps) Update dependency urllib3 to v1.25.10 (#1290)
+
+
 2020-07-27 Salvatore Iovene <salvatore@iovene.com>
  * v1.83.6
  * (infra) Raise gunicorn workers to 4 and max requests per worker to 500
