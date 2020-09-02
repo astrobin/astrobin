@@ -107,8 +107,6 @@ class TusPatchMixin(TusCacheMixin, mixins.UpdateModelMixin):
             temporary_file_path = get_or_create_temporary_file(image)
             os.remove(temporary_file_path)
 
-            headers["Image-ID"] = image.get_id()
-
         # Add upload expiry to headers
         add_expiry_header(self.get_cached_property("expires", image), headers)
 

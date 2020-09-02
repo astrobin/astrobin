@@ -25,3 +25,13 @@ class TestImageService(TestCase):
         Generators.imageRevision(image=image, label='C', description='Foo')
 
         self.assertEquals(ImageService(image).get_revisions_with_description().count(), 1)
+
+    def test_get_next_available_revision_label(self):
+        image = Generators.image()
+        Generators.imageRevision(image=image)
+        self.assertEquals(ImageService(image).get_next_available_revision_label(), 'C')
+
+    def test_get_next_available_revision_label_after_z(self):
+        image = Generators.image()
+        Generators.imageRevision(image=image, label='Z')
+        self.assertEquals(ImageService(image).get_next_available_revision_label(), 'BA')

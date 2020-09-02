@@ -1,8 +1,5 @@
-import json
-
 import simplejson
 from django.http import HttpResponse
-from django.urls import reverse
 from django.utils import timezone
 from rest_framework import mixins, status
 
@@ -13,6 +10,9 @@ from astrobin_apps_images.api.utils import has_required_tus_header, add_expiry_h
 
 
 class TusCreateMixin(TusCacheMixin, mixins.CreateModelMixin):
+    def get_object_serializer(self, request, filename, upload_length, upload_metadata):
+        raise NotImplemented
+
     def create(self, request, *args, **kwargs):
         # Validate tus header
         if not has_required_tus_header(request):
@@ -43,16 +43,7 @@ class TusCreateMixin(TusCacheMixin, mixins.CreateModelMixin):
         filename = self.validate_filename(filename)
 
         # Retrieve serializer
-        serializer = self.get_serializer(data={
-            'upload_length': upload_length,
-            'upload_metadata': json.dumps(upload_metadata),
-            'filename': filename,
-            'title': upload_metadata['title'],
-            'is_wip': upload_metadata['is_wip'] if 'is_wip' in upload_metadata else False,
-            'skip_notifications': upload_metadata[
-                'skip_notifications'] if 'skip_notifications' in upload_metadata else False,
-            'user_id': request.user.id,
-        })
+        serializer = self.get_object_serializer(request, filename, upload_length, upload_metadata)
 
         # Validate serializer
         serializer.is_valid(raise_exception=True)
@@ -97,10 +88,7 @@ class TusCreateMixin(TusCacheMixin, mixins.CreateModelMixin):
         return response
 
     def get_success_headers(self, data):
-        try:
-            return {'Location': reverse('astrobin_apps_images:image-detail', kwargs={'pk': data['pk']})}
-        except (TypeError, KeyError):
-            return {}
+        raise NotImplemented
 
     def validate_success_headers(self, headers):
         """

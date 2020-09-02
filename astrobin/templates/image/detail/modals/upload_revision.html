@@ -1,4 +1,6 @@
 {% load astrobin_apps_images_tags %}
+{% load astrobin_apps_premium_tags %}
+{% load common_tags %}
 {% load bootstrap_toolkit %}
 {% load i18n %}
 {% load staticfiles %}
@@ -17,6 +19,14 @@
                 {% blocktrans %}Did you improve the post-processing of your image? Upload the new
                     revision!{% endblocktrans %}
             </div>
+
+            {% if request.user|is_any_ultimate or request.user|is_premium %}
+                <div class="alert alert-info">
+                    {% blocktrans trimmed with url="https://app.astrobin.com/uploader/revision" id=image.pk %}
+                        Over 100 MB? Try the <a href="{{ url }}/{{ id }}">new beta uploader</a>!
+                    {% endblocktrans %}
+                </div>
+            {% endif %}
 
             {{ upload_revision_form|as_bootstrap }}
             <input type="hidden" name="image_id" value="{{ image.get_id }}" />

@@ -1499,14 +1499,14 @@ class ImageTest(TestCase):
 
         # Test successful upload
         response = self._do_upload_revision(image, 'astrobin/fixtures/test.jpg')
+        image = self._get_last_image()
+        revision = self._get_last_image_revision()
         self.assertRedirects(
             response,
-            reverse('image_detail', kwargs={'id': image.get_id(), 'r': 'B'}),
+            reverse('image_edit_revision', kwargs={'id': revision.pk}),
             status_code=302,
             target_status_code=200)
         self._assert_message(response, "success unread", "Image uploaded")
-        image = self._get_last_image()
-        revision = self._get_last_image_revision()
         self.assertEqual(1, image.revisions.count())
         self.assertEqual('B', revision.label)
 
@@ -1521,13 +1521,13 @@ class ImageTest(TestCase):
         self.assertEqual(0, image.revisions.count())
 
         response = self._do_upload_revision(image, 'astrobin/fixtures/test.jpg')
+        revision = self._get_last_image_revision()
         self.assertRedirects(
             response,
-            reverse('image_detail', kwargs={'id': image.get_id(), 'r': 'C'}),
+            reverse('image_edit_revision', kwargs={'id': revision.pk}),
             status_code=302,
             target_status_code=200)
         self._assert_message(response, "success unread", "Image uploaded")
-        revision = self._get_last_image_revision()
         self.assertEqual(1, ImageRevision.objects.filter(image=image).count())
         image = Image.objects.get(pk=image.pk)
         self.assertEqual(1, image.revisions.count())
