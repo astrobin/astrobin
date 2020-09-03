@@ -33,6 +33,10 @@ FIELDS = (
     'moon_phase_min',
     'moon_phase_max',
     'license',
+    'coord_ra_min',
+    'coord_ra_max',
+    'coord_dec_min',
+    'coord_dec_max',
     'pixel_scale_min',
     'pixel_scale_max',
     'remote_source',
@@ -62,6 +66,10 @@ class AstroBinSearchForm(SearchForm):
     moon_phase_min = forms.IntegerField(required=False)
     moon_phase_max = forms.IntegerField(required=False)
     license = forms.CharField(required=False)
+    coord_ra_min = forms.FloatField(required=False)
+    coord_ra_max = forms.FloatField(required=False)
+    coord_dec_min = forms.FloatField(required=False)
+    coord_dec_max = forms.FloatField(required=False)
     pixel_scale_min = forms.FloatField(required=False)
     pixel_scale_max = forms.FloatField(required=False)
     remote_source = forms.CharField(required=False)
@@ -210,6 +218,26 @@ class AstroBinSearchForm(SearchForm):
 
         return results
 
+    def filterByCoords(self, results):
+        # Intersection between the filter ra,dec area and the image area.
+        try:
+            ra_min = float(self.cleaned_data.get("coord_ra_min"))
+            ra_max = float(self.cleaned_data.get("coord_ra_max"))
+            results = results.filter(coord_ra_min__lte=ra_max)
+            results = results.filter(coord_ra_max__gte=ra_min)
+        except TypeError:
+            pass
+
+        try:
+            dec_min = float(self.cleaned_data.get("coord_dec_min"))
+            dec_max = float(self.cleaned_data.get("coord_dec_max"))
+            results = results.filter(coord_dec_min__lte=dec_max)
+            results = results.filter(coord_dec_max__gte=dec_min)
+        except TypeError:
+            pass
+
+        return results
+
     def filterByPixelScale(self, results):
         try:
             min = float(self.cleaned_data.get("pixel_scale_min"))
@@ -343,6 +371,7 @@ class AstroBinSearchForm(SearchForm):
         sqs = self.filterByFieldRadius(sqs)
         sqs = self.filterByMinimumData(sqs)
         sqs = self.filterByMoonPhase(sqs)
+        sqs = self.filterByCoords(sqs)
         sqs = self.filterByPixelScale(sqs)
         sqs = self.filterByRemoteSource(sqs)
         sqs = self.filterBySubjectType(sqs)

@@ -64,7 +64,9 @@ body#search {
         width: 150px;
         padding: 0 8px;
 
-        &#field-radius-slider {
+        &#field-radius-slider,
+        &#coord-ra-slider,
+        &#coord-dec-slider {
           @media screen and (min-width: 481px) {
             // This must be quite large because otherwise it's too difficult to set finely.
             width: 300px;
