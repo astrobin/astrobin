@@ -1,0 +1,49 @@
+{% load astrobin_apps_premium_tags %}
+
+<script type="text/x-template" id="coord-ra-filter-template">
+    {% if request.user|can_access_full_search %}
+        <div class="form-group" :class="{highlighted: highlighted}">
+            <div id="coord-ra-slider" class="slider-filter"></div>
+
+            <input id="coord-ra-min-value" name="coord_ra_min" type="hidden" :value="coordRaMin" />
+            <input id="coord-ra-max-value" name="coord_ra_max" type="hidden" :value="coordRaMax" />
+        </div>
+    {% else %}
+        {% include "./_filter_not_allowed.html" %}
+    {% endif %}
+</script>
+
+<script>
+    Vue.component("coord-ra-filter", {
+        template: "#coord-ra-filter-template",
+        props: [
+            "coordRaMin",
+            "coordRaMax"
+        ],
+        mixins: [
+            FilterComponentMixin
+        ],
+        mounted() {
+            function raFmt(value) {
+                value = value / 15;
+                var hours = Math.floor(value);
+                value = (value - hours) * 60;
+                var minutes = Math.round(value);
+                if (minutes >= 60) {hours = hours + 1; minutes = minutes - 60;}
+                if (minutes < 10) minutes = "0" + minutes;
+                return hours + "h" + minutes + "m";
+            }
+            var slider = noUiSlider.create($('#coord-ra-slider')[0], {
+                start: [this.coordRaMin, this.coordRaMax],
+                range: {min: 0, max: 360},
+                step: 15.0 / 12.0, // Step in degrees. Equal to 1h/12 = 5m.
+                tooltips: [{to: raFmt}, {to: raFmt}]
+            });
+
+            slider.on("change", function () {
+                $("#coord-ra-min-value").val(slider.get()[0]);
+                $("#coord-ra-max-value").val(slider.get()[1]);
+            });
+        }
+    });
+</script>
