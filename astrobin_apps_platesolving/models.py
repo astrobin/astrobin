@@ -466,6 +466,17 @@ class Solution(models.Model):
     def __unicode__(self):
         return "solution_%d" % self.id
 
+    def save(self, *args, **kwargs):
+        super(Solution, self).save(*args, **kwargs)
+
+        # Save target to trigger index update if applicable.
+        if (self.status in (
+                Solver.SUCCESS,
+                Solver.FAILED,
+                Solver.ADVANCED_SUCCESS,
+                Solver.ADVANCED_FAILED)):
+            self.content_object.save(keep_deleted=True)
+
     def _do_clear_basic(self):
         self.status = Solver.MISSING
         self.submission_id = None

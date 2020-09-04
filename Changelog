@@ -1,3 +1,8 @@
+2020-09-04 Salvatore Iovene <salvatore@iovene.com>
+ * v1.85.0
+ * (search) Add RA/dec filters (#1312)
+ * (images) Fix display of "bin 0x0" when binning has not been specified (#1314)
+
 2020-09-01 Salvatore Iovene <salvatore@iovene.com>
  * v1.84.0
  * (api) Include output of advanced solving in Image.subjects field

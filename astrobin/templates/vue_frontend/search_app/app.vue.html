@@ -85,6 +85,16 @@
                                         :moon-phase-min="moonPhaseMin"
                                         :moon-phase-max="moonPhaseMax"></moon-phase-filter>
 
+                                <coord-ra-filter
+                                        v-if="filter.name === 'coord_ra'"
+                                        :coord-ra-min="coordRaMin"
+                                        :coord-ra-max="coordRaMax"></coord-ra-filter>
+
+                                <coord-dec-filter
+                                        v-if="filter.name === 'coord_dec'"
+                                        :coord-dec-min="coordDecMin"
+                                        :coord-dec-max="coordDecMax"></coord-dec-filter>
+
                                 <pixel-scale-filter
                                         v-if="filter.name === 'pixel_scale'"
                                         :pixel-scale-min="pixelScaleMin"
@@ -233,6 +243,30 @@
                 {% else %}
                     100
                 {% endif %},
+            coordRaMin:
+                {% if "coord_ra_min" in request.GET and request.GET.coord_ra_min %}
+                    {{ request.GET.coord_ra_min }}
+                {% else %}
+                    0
+                {% endif %},
+            coordRaMax:
+                {% if "coord_ra_max" in request.GET and request.GET.coord_ra_max %}
+                    {{ request.GET.coord_ra_max }}
+                {% else %}
+                    360
+                {% endif %},
+            coordDecMin:
+                {% if "coord_dec_min" in request.GET and request.GET.coord_dec_min %}
+                    {{ request.GET.coord_dec_min }}
+                {% else %}
+                    -90
+                {% endif %},
+            coordDecMax:
+                {% if "coord_dec_max" in request.GET and request.GET.coord_dec_max %}
+                    {{ request.GET.coord_dec_max }}
+                {% else %}
+                    90
+                {% endif %},
             pixelScaleMin:
                 {% if "pixel_scale_min" in request.GET and request.GET.pixel_scale_min %}
                     {{ request.GET.pixel_scale_min }}
@@ -329,6 +363,16 @@
                     removable: true
                 },
                 {
+                    name: "coord_ra",
+                    label: "{% trans "Right ascension" %}",
+                    removable: true
+                },
+                {
+                    name: "coord_dec",
+                    label: "{% trans "Declination" %}",
+                    removable: true
+                },
+                {
                     name: "pixel_scale",
                     label: "{% trans "Pixel scale (arcsec/pixel)" %}",
                     removable: true
@@ -397,6 +441,14 @@
 
             {% if "moon_phase_min" in request.GET or "moon_phase_max" in request.GET %}
                 this.enabledFilters.push(this.getFilterByName("moon_phase"));
+            {% endif %}
+
+            {% if "coord_ra_min" in request.GET or "coord_ra_max" in request.GET %}
+                this.enabledFilters.push(this.getFilterByName("coord_ra"));
+            {% endif %}
+
+            {% if "coord_dec_min" in request.GET or "coord_dec_max" in request.GET %}
+                this.enabledFilters.push(this.getFilterByName("coord_dec"));
             {% endif %}
 
             {% if "pixel_scale_min" in request.GET or "pixel_scale_max" in request.GET %}
