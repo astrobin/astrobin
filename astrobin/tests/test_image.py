@@ -1070,6 +1070,33 @@ class ImageTest(TestCase):
         us.delete()
 
     @patch("astrobin.tasks.retrieve_primary_thumbnails")
+    def test_image_no_binning(self, retrieve_primary_thumbnails):
+        self.client.login(username='test', password='password')
+        self._do_upload('astrobin/fixtures/test.jpg')
+        image = self._get_last_image()
+        image.subject_type = SubjectType.DEEP_SKY
+        image.save(keep_deleted=True)
+        today = time.strftime('%Y-%m-%d')
+
+        us = Generators.premium_subscription(self.user, "AstroBin Ultimate 2020+")
+
+        # DSA data
+        dsa, created = DeepSky_Acquisition.objects.get_or_create(
+            image=image,
+            date=today,
+            number=10,
+            duration=1200,
+        )
+        response = self.client.get(reverse('image_detail', kwargs={'id': image.get_id()}))
+        self.assertEqual(response.status_code, 200)
+        self.assertContains(response, '10x1200"')
+        self.assertNotContains(response, 'bin 0x0')
+
+        dsa.delete()
+        image.delete()
+        us.delete()
+
+    @patch("astrobin.tasks.retrieve_primary_thumbnails")
     @override_settings(PREMIUM_MAX_REVISIONS_FREE_2020=sys.maxsize)
     def test_image_flag_thumbs_view(self, retrieve_primary_thumbnails):
         self.user.is_superuser = True
