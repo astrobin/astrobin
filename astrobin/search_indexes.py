@@ -446,6 +446,10 @@ class ImageIndex(CelerySearchIndex, Indexable):
     mounts = CharField()
     imaging_cameras = CharField()
     guiding_cameras = CharField()
+    coord_ra_min = FloatField()
+    coord_ra_max = FloatField()
+    coord_dec_min = FloatField()
+    coord_dec_max = FloatField()
     pixel_scale = FloatField()
     field_radius = FloatField()
     countries = CharField()
@@ -528,6 +532,26 @@ class ImageIndex(CelerySearchIndex, Indexable):
 
     def prepare_guiding_cameras(self, obj):
         return ["%s, %s" % (x.get("make"), x.get("name")) for x in obj.guiding_cameras.all().values('make', 'name')]
+
+    def prepare_coord_ra_min(self, obj):
+        if obj.solution is not None and obj.solution.ra is not None and obj.solution.radius is not None:
+            return obj.solution.ra - obj.solution.radius
+        return None
+
+    def prepare_coord_ra_max(self, obj):
+        if obj.solution is not None and obj.solution.ra is not None and obj.solution.radius is not None:
+            return obj.solution.ra + obj.solution.radius
+        return None
+
+    def prepare_coord_dec_min(self, obj):
+        if obj.solution is not None and obj.solution.dec is not None and obj.solution.radius is not None:
+            return obj.solution.dec - obj.solution.radius
+        return None
+
+    def prepare_coord_dec_max(self, obj):
+        if obj.solution is not None and obj.solution.dec is not None and obj.solution.radius is not None:
+            return obj.solution.dec + obj.solution.radius
+        return None
 
     def prepare_pixel_scale(self, obj):
         return obj.solution.pixscale if obj.solution else None
