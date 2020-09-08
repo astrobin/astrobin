@@ -1,3 +1,4 @@
 from .image_serializer import ImageSerializer
 from .image_revision_serializer import ImageRevisionSerializer
 from .thumbnail_group_serializer import ThumbnailGroupSerializer
+from .uncompressed_source_upload_serializer import UncompressedSourceUploadSerializer

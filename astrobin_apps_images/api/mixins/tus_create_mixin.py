@@ -1,9 +1,11 @@
+import json
+
 import simplejson
 from django.http import HttpResponse
 from django.utils import timezone
 from rest_framework import mixins, status
 
-from astrobin_apps_images.api import constants
+from astrobin_apps_images.api import constants, signals
 from astrobin_apps_images.api.mixins import TusCacheMixin
 from astrobin_apps_images.api.utils import has_required_tus_header, add_expiry_header, decode_upload_metadata, \
     apply_headers_to_response
@@ -11,7 +13,12 @@ from astrobin_apps_images.api.utils import has_required_tus_header, add_expiry_h
 
 class TusCreateMixin(TusCacheMixin, mixins.CreateModelMixin):
     def get_object_serializer(self, request, filename, upload_length, upload_metadata):
-        raise NotImplemented
+        return self.get_serializer(data={
+            'upload_length': upload_length,
+            'upload_metadata': json.dumps(upload_metadata),
+            'filename': filename,
+            'image': upload_metadata['image_id'],
+        })
 
     def create(self, request, *args, **kwargs):
         # Validate tus header
@@ -52,19 +59,21 @@ class TusCreateMixin(TusCacheMixin, mixins.CreateModelMixin):
         self.perform_create(serializer)
 
         # Get upload from serializer
-        image = serializer.instance
+        object = serializer.instance
+
+        signals.receiving.send(object)
 
         # Prepare response headers
         headers = self.get_success_headers(serializer.data)
 
         expiration = timezone.now() + constants.TUS_UPLOAD_EXPIRES
 
-        self.set_cached_property("name", image, name)
-        self.set_cached_property("filename", image, filename)
-        self.set_cached_property("upload-length", image, upload_length)
-        self.set_cached_property("offset", image, 0)
-        self.set_cached_property("expires", image, expiration)
-        self.set_cached_property("metadata", image, upload_metadata)
+        self.set_cached_property("name", object, name)
+        self.set_cached_property("filename", object, filename)
+        self.set_cached_property("upload-length", object, upload_length)
+        self.set_cached_property("offset", object, 0)
+        self.set_cached_property("expires", object, expiration)
+        self.set_cached_property("metadata", object, upload_metadata)
 
         # Add upload expiry to headers
         add_expiry_header(expiration, headers)
@@ -85,6 +94,9 @@ class TusCreateMixin(TusCacheMixin, mixins.CreateModelMixin):
             content_type='application/javascript',
             status=status.HTTP_201_CREATED)
         response = apply_headers_to_response(response, headers)
+
+        signals.received.send(object)
+
         return response
 
     def get_success_headers(self, data):
