@@ -6,7 +6,6 @@ from django.http import HttpResponse
 from rest_framework import mixins, status
 from rest_framework.exceptions import MethodNotAllowed
 
-from astrobin.models import image_upload_path
 from astrobin_apps_images.api import constants, signals
 from astrobin_apps_images.api.constants import TUS_API_CHECKSUM_ALGORITHMS
 from astrobin_apps_images.api.exceptions import Conflict
@@ -17,6 +16,12 @@ from astrobin_apps_images.api.utils import has_required_tus_header, checksum_mat
 
 
 class TusPatchMixin(TusCacheMixin, mixins.UpdateModelMixin):
+    def get_file_field_name(self):
+        raise NotImplementedError
+
+    def get_upload_path_function(self):
+        raise NotImplementedError
+
     def get_chunk(self, request):
         if TusUploadStreamParser in self.parser_classes:
             return request.data['chunk']
@@ -46,17 +51,17 @@ class TusPatchMixin(TusCacheMixin, mixins.UpdateModelMixin):
                 request.META['CONTENT_TYPE'], TusUploadStreamParser.media_type), status=status.HTTP_400_BAD_REQUEST)
 
         # Retrieve object
-        image = self.get_object()
+        object = self.get_object()
 
         # Get upload_offset
         upload_offset = int(request.META.get(constants.UPLOAD_OFFSET_NAME, 0))
 
         # Validate upload_offset
-        if upload_offset != self.get_cached_property("offset", image):
+        if upload_offset != self.get_cached_property("offset", object):
             raise Conflict
 
         # Make sure there is a tempfile for the upload
-        assert get_or_create_temporary_file(image)
+        assert get_or_create_temporary_file(object)
 
         # Get chunk from request
         chunk_bytes = self.get_chunk(request)
@@ -84,31 +89,35 @@ class TusPatchMixin(TusCacheMixin, mixins.UpdateModelMixin):
 
         # Write file
         try:
-            write_data(image, chunk_bytes)
+            write_data(object, chunk_bytes)
         except Exception as e:
             return HttpResponse(str(e), status=status.HTTP_400_BAD_REQUEST)
 
         headers = {
-            'Upload-Offset': self.get_cached_property("offset", image)
+            'Upload-Offset': self.get_cached_property("offset", object)
         }
 
-        if self.get_cached_property("upload-length", image) == self.get_cached_property("offset", image):
+        if self.get_cached_property("upload-length", object) == self.get_cached_property("offset", object):
             # Trigger signal
-            signals.received.send(sender=image.__class__, instance=image)
+            signals.saving.send(object)
 
             # Save file
-            data = get_or_create_temporary_file(image)
-            image.image_file.save(
-                image_upload_path(image, self.get_cached_property("name", image)),
+            data = get_or_create_temporary_file(object)
+            getattr(object, self.get_file_field_name()).save(
+                self.get_upload_path_function()(object, self.get_cached_property("name", object)),
                 File(open(data))
             )
 
+            signals.saved.send(object)
+
             # Clean up
-            temporary_file_path = get_or_create_temporary_file(image)
+            temporary_file_path = get_or_create_temporary_file(object)
             os.remove(temporary_file_path)
 
+            signals.finished.send(object)
+
         # Add upload expiry to headers
-        add_expiry_header(self.get_cached_property("expires", image), headers)
+        add_expiry_header(self.get_cached_property("expires", object), headers)
 
         # By default, don't include a response body
         if not constants.TUS_RESPONSE_BODY_ENABLED:
@@ -119,7 +128,7 @@ class TusPatchMixin(TusCacheMixin, mixins.UpdateModelMixin):
             return response
 
         # Create serializer
-        serializer = self.get_serializer(instance=image)
+        serializer = self.get_serializer(instance=object)
 
         response = HttpResponse(
             simplejson.dumps(serializer.data),
