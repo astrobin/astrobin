@@ -14,10 +14,11 @@ from astrobin_apps_images.api.filters import ImageRevisionFilter
 from astrobin_apps_images.api.mixins import TusPatchMixin, TusHeadMixin, TusTerminateMixin, \
     TusCreateMixin
 from astrobin_apps_images.api.parsers import TusUploadStreamParser
-from astrobin_apps_images.api.permissions import HasUploaderAccessOrReadOnly
+from astrobin_apps_images.api.permissions import HasUploaderAccessOrReadOnly, IsImageOwnerOrReadOnly
 from astrobin_apps_images.api.serializers import ImageRevisionSerializer
 from astrobin_apps_images.api.views.image_view_set import UploadMetadata
 from astrobin_apps_images.services import ImageService
+from common.upload_paths import image_upload_path
 
 
 class ImageRevisionViewSet(TusCreateMixin,
@@ -33,8 +34,15 @@ class ImageRevisionViewSet(TusCreateMixin,
     parser_classes = [TusUploadStreamParser]
     permission_classes = [
         IsAuthenticatedOrReadOnly,
-        HasUploaderAccessOrReadOnly
+        HasUploaderAccessOrReadOnly,
+        IsImageOwnerOrReadOnly
     ]
+
+    def get_file_field_name(self):
+        return "image_file"
+
+    def get_upload_path_function(self):
+        return image_upload_path
 
     def get_object_serializer(self, request, filename, upload_length, upload_metadata):
         image_id = upload_metadata['image_id']

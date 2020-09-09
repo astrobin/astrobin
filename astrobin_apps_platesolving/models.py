@@ -7,7 +7,7 @@ from django.utils.safestring import mark_safe
 from django.utils.translation import ugettext_lazy as _
 
 from astrobin_apps_platesolving.solver import Solver
-from common.utils import upload_path
+from common.upload_paths import upload_path
 from common.validators import FileValidator
 
 
@@ -103,7 +103,7 @@ class PlateSolvingAdvancedSettings(models.Model):
         max_length=256,
         null=True,
         blank=True,
-        verbose_name=_("Sample raw frame (max 200 MB)"),
+        verbose_name=_("Sample raw frame (max 100 MB)"),
         help_text=_(
             "To improve the accuracy of your plate-solution even further, please upload one of the XISF or " +
             "FITS files from your data set. Such files normally have date and time headers that will allow AstroBin " +

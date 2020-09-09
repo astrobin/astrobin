@@ -16,7 +16,7 @@ from image_cropping import ImageRatioField
 from astrobin.enums import SubjectType, SolarSystemSubject
 from astrobin.fields import CountryField, get_country_name
 from astrobin.services import CloudflareService
-from common.utils import upload_path
+from common.upload_paths import uncompressed_source_upload_path, image_upload_path, data_download_upload_path
 from common.validators import FileValidator
 
 try:
@@ -81,24 +81,6 @@ class HasSolutionMixin(object):
         result = self.solutions.first()
         cache.set(cache_key, result, 1)
         return result
-
-def image_upload_path(instance, filename):
-    user = instance.user if instance._meta.model_name == u'image' else instance.image.user
-    return upload_path('images', user.pk, filename)
-
-
-def uncompressed_source_upload_path(instance, filename):
-    user = instance.user if instance._meta.model_name == u'image' else instance.image.user
-    return upload_path('uncompressed', user.pk, filename)
-
-
-def data_download_upload_path(instance, filename):
-    # type: (DataDownloadRequest, str) -> str
-    return "data-download/{}/{}".format(
-        instance.user.pk,
-        'astrobin_data_{}_{}.zip'.format(
-            instance.user.username,
-            instance.created.strftime('%Y-%m-%d-%H-%M')))
 
 
 def image_hash():
@@ -914,7 +896,7 @@ class Image(HasSolutionMixin, SafeDeleteModel):
     uncompressed_source_file = models.FileField(
         upload_to=uncompressed_source_upload_path,
         validators=(FileValidator(allowed_extensions=(settings.ALLOWED_UNCOMPRESSED_SOURCE_EXTENSIONS)),),
-        verbose_name=_("Uncompressed source (max 200 MB)"),
+        verbose_name=_("Uncompressed source (max 100 MB)"),
         help_text=_(
             "You can store the final processed image that came out of your favorite image editor (e.g. PixInsight, "
             "Adobe Photoshop, etc) here on AstroBin, for archival purposes. This file is stored privately and only you "
