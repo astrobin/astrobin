@@ -769,6 +769,7 @@ class Image(HasSolutionMixin, SafeDeleteModel):
         ("PSA", "PixelSkies"),
         ("REM", "RemoteSkies.net"),
         ("RLD", "Riverland Dingo Observatory"),
+        ("ROBO", "RoboScopes"),
         ("SS", "Sahara Sky"),
         ("SPVO", "San Pedro Valley Observatory"),
         ("SRO", "Sierra Remote Observatories"),
