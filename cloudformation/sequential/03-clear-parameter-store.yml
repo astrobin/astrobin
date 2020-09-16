@@ -45,13 +45,6 @@ Resources:
       Type: String
       Value: true
 
-  ElasticSearchUrl:
-    Type: AWS::SSM::Parameter
-    Properties:
-      Name: ELASTICSEARCH_URL
-      Type: String
-      Value: elasticsearch.services.astrobin.com
-
   LocalStaticStorage:
     Type: AWS::SSM::Parameter
     Properties:

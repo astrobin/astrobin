@@ -12,7 +12,7 @@ do
     PARAMS=()
 
     if [[ $STACK_NAME == "01-secret-parameter-store" ]]; then
-        PARAMS+=(--parameters file:///${PWD}/beta-secret-parameters.env.json)
+        PARAMS+=(--parameters file:///${PWD}/secret-parameters.env.json)
     fi
 
     echo Crating stack ${PREFIX}-${STACK_NAME}...

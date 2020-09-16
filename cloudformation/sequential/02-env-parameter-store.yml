@@ -12,7 +12,7 @@ Parameters:
 
   BaseUrlParameter:
     Type: String
-    Default: https://beta.astrobin.com/
+    Default: https://www.astrobin.com
 
   DebugParameter:
     Type: String
@@ -30,17 +30,17 @@ Parameters:
 
   RegionNameParameter:
     Type: String
-    Default: us-east-2
+    Default: us-east-1
 
   SendEmailsParameter:
     Type: String
-    Default: false
+    Default: true
       - true
       - false
 
   ShortBaseUrlParameter:
     Type: String
-    Default: https://beta.astrobin.com/
+    Default: https://www.astrob.in
 
 Resources:
 
