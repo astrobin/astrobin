@@ -1,6 +1,11 @@
 AWSTemplateFormatVersion: '2010-09-09'
 Description: AstroBin App service
 
+Parameters:
+
+  CertificateArnParameter:
+    Type: String
+
 Resources:
 
   AstroBinAppLogGroup:
@@ -130,6 +135,10 @@ Resources:
           FromPort: 80
           ToPort: 80
           CidrIp: 0.0.0.0/0
+        - IpProtocol: tcp
+          FromPort: 443
+          ToPort: 443
+          CidrIp: 0.0.0.0/0
 
   AstroBinAppLoadBalancer:
     Type: AWS::ElasticLoadBalancingV2::LoadBalancer
@@ -141,6 +150,18 @@ Resources:
       SecurityGroups:
         - !Ref AstroBinAppLoadBalancerSecurityGroup
 
+  AstroBinAppLoadBalancerSecureListener:
+    Type: AWS::ElasticLoadBalancingV2::Listener
+    Properties:
+      LoadBalancerArn: !Ref AstroBinAppLoadBalancer
+      Port: 443
+      Protocol: HTTPS
+      Certificates:
+        - CertificateArn: !Ref CertificateArnParameter
+      DefaultActions:
+        - Type: forward
+          TargetGroupArn: !Ref AstroBinAppTargetGroup
+
   AstroBinAppLoadBalancerListener:
     Type: AWS::ElasticLoadBalancingV2::Listener
     Properties:
@@ -148,8 +169,14 @@ Resources:
       Port: 80
       Protocol: HTTP
       DefaultActions:
-        - Type: forward
-          TargetGroupArn: !Ref AstroBinAppTargetGroup
+        - RedirectConfig:
+            Host: "#{host}"
+            Path: "/#{path}"
+            Port: 443
+            Protocol: "HTTPS"
+            Query: "#{query}"
+            StatusCode: HTTP_301
+          Type: "redirect"
 
   AstroBinAppTargetGroup:
     Type: AWS::ElasticLoadBalancingV2::TargetGroup
@@ -163,7 +190,7 @@ Resources:
 
   AstroBinAppService:
     Type: AWS::ECS::Service
-    DependsOn: AstroBinAppLoadBalancerListener
+    DependsOn: AstroBinAppLoadBalancerSecureListener
     Properties:
       Cluster: !ImportValue Cluster
       LaunchType: "FARGATE"
