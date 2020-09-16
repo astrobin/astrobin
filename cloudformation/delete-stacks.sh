@@ -1,8 +1,8 @@
 #!/usr/bin/env bash
 
-REGION=$(cat ./region.txt)
 PREFIX=$(cat ./stack-prefix.txt)
 CF="aws --region ${REGION} cloudformation"
+REGION=$1
 
 for STACK_FILE in $(find ./parallel -name '*.yml' | sort -r | xargs)
 do
