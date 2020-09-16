@@ -1,0 +1,96 @@
+AWSTemplateFormatVersion: '2010-09-09'
+Description: AstroBin Memcached service
+
+Resources:
+
+  MemcachedLogGroup:
+    Type: AWS::Logs::LogGroup
+    Properties:
+      LogGroupName: /ecs/memcached-task
+      RetentionInDays: 30
+
+  MemcachedSecurityGroup:
+    Type: AWS::EC2::SecurityGroup
+    Properties:
+      GroupDescription: Memcached security group
+      VpcId: !ImportValue VPC
+      SecurityGroupIngress:
+        - IpProtocol: tcp
+          FromPort: 11211
+          ToPort: 11211
+          CidrIp: 0.0.0.0/0
+
+  MemcachedTaskDefinition:
+    Type: AWS::ECS::TaskDefinition
+    Properties:
+      NetworkMode: "awsvpc"
+      RequiresCompatibilities: ["FARGATE"]
+      Cpu: 256
+      Memory: 512
+      ExecutionRoleArn: !ImportValue ExecutionRole
+      ContainerDefinitions:
+        - Name: "memcached"
+          Image: "memcached:alpine"
+          Essential: true
+          PortMappings:
+            - ContainerPort: 11211
+              HostPort: 11211
+          LogConfiguration:
+            LogDriver: awslogs
+            Options:
+              awslogs-group: /ecs/memcached-task
+              awslogs-region: !Sub ${AWS::Region}
+              awslogs-stream-prefix: memcached-task
+
+  MemcachedServiceDiscovery:
+    Type: AWS::ServiceDiscovery::Service
+    Properties:
+      Name: memcached
+      NamespaceId: !ImportValue PrivateDnsNamespace
+      DnsConfig:
+        RoutingPolicy: MULTIVALUE
+        DnsRecords:
+          - Type: A
+            TTL: "10"
+          - Type: SRV
+            TTL: "10"
+
+  MemcachedService:
+    Type: AWS::ECS::Service
+    Properties:
+      Cluster: !ImportValue Cluster
+      LaunchType: "FARGATE"
+      DeploymentConfiguration:
+        MaximumPercent: 200
+        MinimumHealthyPercent: 100
+      DesiredCount: 1
+      TaskDefinition: !Ref MemcachedTaskDefinition
+      NetworkConfiguration:
+        AwsvpcConfiguration:
+          AssignPublicIp: "ENABLED"
+          SecurityGroups:
+            - !Ref MemcachedSecurityGroup
+          Subnets:
+            - !ImportValue Subnet1
+            - !ImportValue Subnet2
+      ServiceRegistries:
+        - RegistryArn: !GetAtt MemcachedServiceDiscovery.Arn
+          ContainerName: memcached
+          ContainerPort: 11211
+
+Outputs:
+
+  MemcachedSecurityGroup:
+    Value: !Ref MemcachedSecurityGroup
+    Export:
+      Name: 'MemcachedSecurityGroup'
+
+  MemcachedTaskDefinition:
+    Value: !Ref MemcachedTaskDefinition
+    Export:
+      Name: 'MemcachedTaskDefinition'
+
+  MemcachedService:
+    Value: !Ref MemcachedService
+    Export:
+      Name: 'MemcachedService'

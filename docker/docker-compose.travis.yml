@@ -34,12 +34,6 @@ services:
     entrypoint: "/true"
 
 
-  nginx:
-    image: tianon/true
-    command: "/true"
-    entrypoint: "/true"
-
-
   memcached:
     image: tianon/true
     command: "/true"

@@ -1,0 +1,96 @@
+AWSTemplateFormatVersion: '2010-09-09'
+Description: AstroBin ElasticSearch service
+
+Resources:
+
+  ElasticSearchLogGroup:
+    Type: AWS::Logs::LogGroup
+    Properties:
+      LogGroupName: /ecs/elasticsearch-task
+      RetentionInDays: 30
+
+  ElasticSearchSecurityGroup:
+    Type: AWS::EC2::SecurityGroup
+    Properties:
+      GroupDescription: ElasticSearch security group
+      VpcId: !ImportValue VPC
+      SecurityGroupIngress:
+        - IpProtocol: tcp
+          FromPort: 9200
+          ToPort: 9200
+          CidrIp: 0.0.0.0/0
+
+  ElasticSearchTaskDefinition:
+    Type: AWS::ECS::TaskDefinition
+    Properties:
+      NetworkMode: "awsvpc"
+      RequiresCompatibilities: ["FARGATE"]
+      Cpu: 1024
+      Memory: 2048
+      ExecutionRoleArn: !ImportValue ExecutionRole
+      ContainerDefinitions:
+        - Name: "elasticsearch"
+          Image: "elasticsearch:2.4.6-alpine"
+          Essential: true
+          PortMappings:
+            - ContainerPort: 9200
+              HostPort: 9200
+          LogConfiguration:
+            LogDriver: awslogs
+            Options:
+              awslogs-group: /ecs/elasticsearch-task
+              awslogs-region: !Sub ${AWS::Region}
+              awslogs-stream-prefix: elasticsearch-task
+
+  ElasticSearchServiceDiscovery:
+    Type: AWS::ServiceDiscovery::Service
+    Properties:
+      Name: elasticsearch
+      NamespaceId: !ImportValue PrivateDnsNamespace
+      DnsConfig:
+        RoutingPolicy: MULTIVALUE
+        DnsRecords:
+          - Type: A
+            TTL: "10"
+          - Type: SRV
+            TTL: "10"
+
+  ElasticSearchService:
+    Type: AWS::ECS::Service
+    Properties:
+      Cluster: !ImportValue Cluster
+      LaunchType: "FARGATE"
+      DeploymentConfiguration:
+        MaximumPercent: 200
+        MinimumHealthyPercent: 100
+      DesiredCount: 1
+      TaskDefinition: !Ref ElasticSearchTaskDefinition
+      NetworkConfiguration:
+        AwsvpcConfiguration:
+          AssignPublicIp: "ENABLED"
+          SecurityGroups:
+            - !Ref ElasticSearchSecurityGroup
+          Subnets:
+            - !ImportValue Subnet1
+            - !ImportValue Subnet2
+      ServiceRegistries:
+        - RegistryArn: !GetAtt ElasticSearchServiceDiscovery.Arn
+          ContainerName: elasticsearch
+          ContainerPort: 9200
+
+Outputs:
+
+  ElasticSearchSecurityGroup:
+    Value: !Ref ElasticSearchSecurityGroup
+    Export:
+      Name: 'ElasticSearchSecurityGroup'
+
+  ElasticSearchTaskDefinition:
+    Value: !Ref ElasticSearchTaskDefinition
+    Export:
+      Name: 'ElasticSearchTaskDefinition'
+
+  ElasticSearchService:
+    Value: !Ref ElasticSearchService
+    Export:
+      Name: 'ElasticSearchService'

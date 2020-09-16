@@ -1,0 +1,94 @@
+AWSTemplateFormatVersion: '2010-09-09'
+Description: AstroBin Parameter store
+
+Parameters:
+
+  AdsEnabledParameter:
+    Type: String
+    Default: true
+    AllowedValues:
+      - true
+      - false
+
+  BaseUrlParameter:
+    Type: String
+    Default: https://beta.astrobin.com/
+
+  DebugParameter:
+    Type: String
+    Default: false
+    AllowedValues:
+      - true
+      - false
+
+  ReadOnlyModeParameter:
+    Type: String
+    Default: false
+    AllowedValues:
+      - true
+      - false
+
+  RegionNameParameter:
+    Type: String
+    Default: us-east-2
+
+  SendEmailsParameter:
+    Type: String
+    Default: false
+      - true
+      - false
+
+  ShortBaseUrlParameter:
+    Type: String
+    Default: https://beta.astrobin.com/
+
+Resources:
+
+  AdsEnabled:
+    Type: AWS::SSM::Parameter
+    Properties:
+      Name: ADS_ENABLED
+      Type: String
+      Value: !Ref AdsEnabledParameter
+
+  BaseUrl:
+    Type: AWS::SSM::Parameter
+    Properties:
+      Name: BASE_URL
+      Type: String
+      Value: !Ref BaseUrlParameter
+
+  Debug:
+    Type: AWS::SSM::Parameter
+    Properties:
+      Name: DEBUG
+      Type: String
+      Value: !Ref DebugParameter
+
+  ReadOnlyMode:
+    Type: AWS::SSM::Parameter
+    Properties:
+      Name: READONLY_MODE
+      Type: String
+      Value: !Ref ReadOnlyModeParameter
+
+  RegionName:
+    Type: AWS::SSM::Parameter
+    Properties:
+      Name: REGION_NAME
+      Type: String
+      Value: !Ref RegionNameParameter
+
+  SendEmails:
+    Type: AWS::SSM::Parameter
+    Properties:
+      Name: SEND_EMAILS
+      Type: String
+      Value: !Ref SendEmailsParameter
+
+  ShortBaseUrl:
+    Type: AWS::SSM::Parameter
+    Properties:
+      Name: SHORT_BASE_URL
+      Type: String
+      Value: !Ref ShortBaseUrlParameter

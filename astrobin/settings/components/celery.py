@@ -8,7 +8,7 @@ BROKER_TRANSPORT_OPTIONS = {
     'fanout_prefix': True,
     'fanout_patterns': True,
 }
-CELERY_RESULT_BACKEND = 'cache+memcached://memcached:11211/'
+CELERY_RESULT_BACKEND = 'cache+memcached://%s:11211/' % os.environ.get('MEMCACHED_HOST', 'memcached').strip()
 CELERY_IMPORTS = ('astrobin.tasks', 'djcelery_email.tasks')
 CELERY_DEFAULT_QUEUE = 'default'
 CELERY_HAYSTACK_QUEUE = 'haystack'

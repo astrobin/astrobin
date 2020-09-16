@@ -44,8 +44,5 @@ docker volume rm docker_postgres-data
 docker volume rm docker_elasticsearch-data
 docker volume rm docker_letsencrypt
 
-echo "Removing container images..."
-for image in astrobin/nginx-dev astrobin/astrobin; do
-    echo "-- $image"
-    docker image rm $(docker image ls | grep $image | awk '{print $3}')
-done
+echo "Removing container image..."
+docker image rm $(docker image ls | grep astrobin/astrobin | awk '{print $3}')
