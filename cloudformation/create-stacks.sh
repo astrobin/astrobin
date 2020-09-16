@@ -1,9 +1,10 @@
 #!/usr/bin/env bash
 
-PREFIX=$(cat ./stack-prefix.txt)
-CF="aws --region ${REGION} cloudformation"
 REGION=$1
 CERTIFICATE_ARN=$2
+
+PREFIX=$(cat ./stack-prefix.txt)
+CF="aws --region ${REGION} cloudformation"
 
 for STACK_FILE in $(find ./sequential -name '*.yml' | sort | xargs)
 do
