@@ -6,7 +6,7 @@ Resources:
   VPC:
     Type: 'AWS::EC2::VPC'
     Properties:
-      CidrBlock: '10.0.0.0/16'
+      CidrBlock: '10.1.0.0/16'
       EnableDnsSupport: true
       EnableDnsHostnames: true
       InstanceTenancy: default
@@ -16,7 +16,7 @@ Resources:
     Properties:
       VpcId: !Ref VPC
       AvailabilityZone: !Select [0, !GetAZs '']
-      CidrBlock: !Sub '10.0.0.0/20'
+      CidrBlock: !Sub '10.1.0.0/20'
       MapPublicIpOnLaunch: true
 
   Subnet2:
@@ -24,7 +24,7 @@ Resources:
     Properties:
       VpcId: !Ref VPC
       AvailabilityZone: !Select [1, !GetAZs '']
-      CidrBlock: !Sub '10.0.32.0/20'
+      CidrBlock: !Sub '10.1.32.0/20'
       MapPublicIpOnLaunch: true
 
   InternetGateway:
