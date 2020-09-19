@@ -1,4 +1,10 @@
 2020-09-19 Salvatore Iovene <salvatore@iovene.com>
+ * v1.90.0
+ * (images) Add Remote Skygems as remote data source (#1324)
+ * (images) When ads are not allowed on a page, show "Acquired at" withoug banner (#1326)
+ * (infra) Do not perform real time indexing in DEBUG mode (#1325)
+
+2020-09-19 Salvatore Iovene <salvatore@iovene.com>
  * v1.89.0
  * (uploader) Let 30% of all users thru the beta uploader (#1322)
 
