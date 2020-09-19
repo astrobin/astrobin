@@ -50,5 +50,21 @@
         </div>
     {% endif %}
 
-{% endif %}
+{% else %}
 
+    {% if image.remote_source|is_remote_source_affiliate %}
+        <div class="subtle-container remote-source-affiliate">
+            <div class="header">
+                <h4><i class="icon-star"></i> {% trans "Acquired at" %}</h4>
+            </div>
+
+            <a href="{{ image.remote_source|remote_source_affiliate_url }}?utm_source=astrobin&utm_medium=banner&utm_campaign=hosting-facility"
+               onclick="getOutboundLink('{{ image.remote_source|remote_source_affiliate_url }}?utm_source=astrobin&utm_medium=banner&utm_campaign=hosting-facility')"
+               target="_blank">
+                {{ image.get_remote_source }}
+            </a>
+        </div>
+
+    {% endif %}
+
+{% endif %}
