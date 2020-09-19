@@ -28,7 +28,7 @@ from django.template import loader, RequestContext
 from django.template.defaultfilters import filesizeformat
 from django.template.loader import render_to_string
 from django.utils.datastructures import MultiValueDictKeyError
-from django.utils.translation import ngettext as _n
+from django.utils.translation import ngettext as _n, get_language
 from django.utils.translation import ugettext as _
 from django.views.decorators.cache import never_cache
 from django.views.decorators.http import require_GET, require_POST
@@ -478,7 +478,11 @@ def index(request, template='index/root.html', extra_context=None):
 
 @login_required
 def image_upload(request):
-    if request.user.pk % 10 < 3 and "forceClassicUploader" not in request.GET:
+    thirty_percent = request.user.pk % 10 < 3
+    force = "forceClassicUploader" in request.GET
+    language_match = get_language() in ["en", "en-GB", "it"]
+
+    if thirty_percent and language_match and not force:
         return redirect(AppRedirectionService.redirect(request, "/uploader"))
 
     from astrobin_apps_premium.utils import (
