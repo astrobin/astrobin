@@ -15,6 +15,21 @@ class AppConfig(JSONResponseMixin, View):
             u"version": self.__get_version__(),
             u"i18nHash": self.__get_i18n_hash__(),
             u"readOnly": self.__get_read_only_mode__(),
+            u"PREMIUM_MAX_IMAGES_FREE": settings.PREMIUM_MAX_IMAGES_FREE,
+            u"PREMIUM_MAX_IMAGES_LITE": settings.PREMIUM_MAX_IMAGES_LITE,
+            u"PREMIUM_MAX_IMAGES_FREE_2020": settings.PREMIUM_MAX_IMAGES_FREE_2020,
+            u"PREMIUM_MAX_IMAGES_LITE_2020": settings.PREMIUM_MAX_IMAGES_LITE_2020,
+            u"PREMIUM_MAX_IMAGES_PREMIUM_2020": settings.PREMIUM_MAX_IMAGES_PREMIUM_2020,
+            u"PREMIUM_MAX_IMAGE_SIZE_FREE_2020": settings.PREMIUM_MAX_IMAGE_SIZE_FREE_2020,
+            u"PREMIUM_MAX_IMAGE_SIZE_LITE_2020": settings.PREMIUM_MAX_IMAGE_SIZE_LITE_2020,
+            u"PREMIUM_MAX_IMAGE_SIZE_PREMIUM_2020": settings.PREMIUM_MAX_IMAGE_SIZE_PREMIUM_2020,
+            u"PREMIUM_MAX_REVISIONS_FREE_2020": settings.PREMIUM_MAX_REVISIONS_FREE_2020,
+            u"PREMIUM_MAX_REVISIONS_LITE_2020": settings.PREMIUM_MAX_REVISIONS_LITE_2020,
+            u"PREMIUM_MAX_REVISIONS_PREMIUM_2020": settings.PREMIUM_MAX_REVISIONS_PREMIUM_2020,
+            u"PREMIUM_PRICE_FREE_2020": settings.PREMIUM_PRICE_FREE_2020,
+            u"PREMIUM_PRICE_LITE_2020": settings.PREMIUM_PRICE_LITE_2020,
+            u"PREMIUM_PRICE_PREMIUM_2020": settings.PREMIUM_PRICE_PREMIUM_2020,
+            u"PREMIUM_PRICE_ULTIMATE_2020": settings.PREMIUM_PRICE_ULTIMATE_2020,
         })
 
     def __get_version__(self):
