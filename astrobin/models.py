@@ -769,6 +769,7 @@ class Image(HasSolutionMixin, SafeDeleteModel):
         ("OES", "Observatorio El Sauce"),
         ("PSA", "PixelSkies"),
         ("REM", "RemoteSkies.net"),
+        ("REMSG", "Remote Skygems"),
         ("RLD", "Riverland Dingo Observatory"),
         ("ROBO", "RoboScopes"),
         ("SS", "Sahara Sky"),
