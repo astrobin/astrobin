@@ -478,11 +478,11 @@ def index(request, template='index/root.html', extra_context=None):
 
 @login_required
 def image_upload(request):
-    thirty_percent = request.user.pk % 10 < 3
+    threshold = request.user.pk % 10 < 5
     force = "forceClassicUploader" in request.GET
-    language_match = get_language() in ["en", "en-GB", "it"]
+    language_match = get_language() in ["en", "en-GB", "it", "es"]
 
-    if thirty_percent and language_match and not force:
+    if threshold and language_match and not force:
         return redirect(AppRedirectionService.redirect(request, "/uploader"))
 
     from astrobin_apps_premium.utils import (
