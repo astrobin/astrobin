@@ -14,6 +14,7 @@ include(
     'components/ads.py',
     'components/apps.py',
     'components/caches.py',
+    'components/cors.py',
     'components/db.py',
     'components/email.py',
     'components/languages.py',
