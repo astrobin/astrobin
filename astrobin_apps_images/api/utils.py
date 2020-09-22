@@ -20,7 +20,8 @@ def has_required_tus_header(request):
 
 
 def add_expiry_header(expiration, headers):
-    headers['Upload-Expires'] = expiration.strftime('%a, %d %b %Y %H:%M:%S %Z')
+    if expiration:
+        headers['Upload-Expires'] = expiration.strftime('%a, %d %b %Y %H:%M:%S %Z')
 
 
 def encode_base64_to_string(data):
