@@ -20,7 +20,10 @@ class Command(BaseCommand):
     def handle(self, *args, **kwargs):
         user_subscriptions = UserSubscription.objects\
             .filter(
-                subscription__group__name__in = ['astrobin_lite', 'astrobin_premium'],
+                subscription__name__in = [
+                    "AstroBin Lite (autorenew)",
+                    "AstroBin Premium (autorenew)",
+                ],
                 expires = datetime.now() + timedelta(days = 7))\
             .exclude(subscription__recurrence_unit = None)
 
