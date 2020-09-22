@@ -19,8 +19,13 @@ class Command(BaseCommand):
 
     def handle(self, *args, **kwargs):
         user_subscriptions = UserSubscription.objects.filter(
-            subscription__group__name__in = ['astrobin_lite', 'astrobin_premium'],
-            subscription__recurrence_unit = None,
+            subscription__name__in = [
+                "AstroBin Lite",
+                "AstroBin Premium",
+                "AstroBin Lite 2020+",
+                "AstroBin Premium 2020+",
+                "AstroBin Ultimate 2020+",
+            ],
             expires = datetime.now() - timedelta(days = 1))
 
         for user_subscription in user_subscriptions:
