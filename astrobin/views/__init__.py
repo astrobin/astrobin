@@ -478,11 +478,11 @@ def index(request, template='index/root.html', extra_context=None):
 
 @login_required
 def image_upload(request):
-    threshold = request.user.pk % 10 <= 7
-    force = "forceClassicUploader" in request.GET
-
-    if threshold and not force:
-        return redirect(AppRedirectionService.redirect(request, "/uploader"))
+    # threshold = request.user.pk % 10 <= 7
+    # force = "forceClassicUploader" in request.GET
+    #
+    # if threshold and not force:
+    #     return redirect(AppRedirectionService.redirect(request, "/uploader"))
 
     from astrobin_apps_premium.utils import (
         premium_used_percent,
