@@ -1,4 +1,8 @@
 2020-09-23 Salvatore Iovene <salvatore@iovene.com>
+ * v1.91.6
+ * (api) Deal with chunked file missing using error 423
+
+2020-09-23 Salvatore Iovene <salvatore@iovene.com>
  * v1.91.5
  * (api) Allow credentials via CORS
  * (api) Remove unnecessary variable assignment
