@@ -179,7 +179,6 @@ def get_or_create_temporary_file(image):
         set_cached_property("temporary-file-path", image, path)
 
     cached = get_cached_property("temporary-file-path", image)
-    assert os.path.isfile(cached)
     return cached
 
 
