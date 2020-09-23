@@ -102,18 +102,16 @@ class TusPatchMixin(TusCacheMixin, mixins.UpdateModelMixin):
             signals.saving.send(object)
 
             # Save file
-            data = get_or_create_temporary_file(object)
+            temporary_file = get_or_create_temporary_file(object)
             getattr(object, self.get_file_field_name()).save(
                 self.get_upload_path_function()(object, self.get_cached_property("name", object)),
-                File(open(data))
+                File(open(temporary_file))
             )
 
             signals.saved.send(object)
 
             # Clean up
-            temporary_file_path = get_or_create_temporary_file(object)
-            os.remove(temporary_file_path)
-
+            os.remove(temporary_file)
             signals.finished.send(object)
 
         # Add upload expiry to headers
