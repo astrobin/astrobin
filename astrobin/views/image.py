@@ -623,7 +623,7 @@ class ImageDetailView(ImageDetailViewBase):
                         image_prev = Image.objects \
                                          .exclude(corrupted=True) \
                                          .filter(part_of_group_set=group, pk__lt=image.pk).order_by('-pk')[0:1]
-                except Group.DoesNotExist:
+                except (Group.DoesNotExist, ValueError):
                     # image_prev and image_next will remain None
                     pass
             elif nav_ctx == 'all':
