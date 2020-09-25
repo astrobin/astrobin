@@ -8,7 +8,7 @@ msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2020-05-19 08:05+0000\n"
-"PO-Revision-Date: 2020-05-13 21:51+0000\n"
+"PO-Revision-Date: 2020-09-25 07:21+0000\n"
 "Last-Translator: Salvatore Iovene <salvatore@iovene.com>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
 "Language: it\n"
@@ -17,12 +17,11 @@ msgstr ""
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=(n != 1);\n"
 "X-Generator: Pootle 2.8\n"
-"X-POOTLE-MTIME: 1589406679.000000\n"
+"X-POOTLE-MTIME: 1601018489.000000\n"
 
 msgid "Your recurring donation has been canceled"
 msgstr "La tua donazione ricorrente è stata cancellata"
 
-#, fuzzy
 #| msgid ""
 #| "We are very grateful for your support so far! Your contribution has "
 #| "helped AstroBin with its ever increasing hosting costs, and served an "
@@ -32,25 +31,23 @@ msgid ""
 "AstroBin with its ever increasing hosting costs, and served an incentive for "
 "me to keep improving it."
 msgstr ""
-"Siamo molto grati per il tuo supporto finora! Il tuo contributo ha aiutato "
+"Sono molto grato per il tuo supporto finora! Il tuo contributo ha aiutato "
 "AstroBin con i suoi costi di hosting sempre in aumento, ed è stato un "
-"incentivo per farci continuare a migliorarlo."
+"incentivo per farmi continuare a migliorarlo."
 
-#, fuzzy
 #| msgid "Whishing you clear skies and excellent seeing!"
 msgid "Wishing you clear skies and excellent seeing!"
-msgstr "Ti auguriamo cieli sereni ed ottimo seeing!"
+msgstr "Ti auguro cieli sereni ed ottimo seeing!"
 
 msgid "Founder of AstroBin"
 msgstr "Fondatore di AstroBin"
 
 msgid "Donate"
-msgstr ""
+msgstr "Dona"
 
-#, fuzzy
 #| msgid "Thank you for your support!"
 msgid "Thank you in advance for your support"
-msgstr "Grazie per il tuo supporto!"
+msgstr "Grazie anticipatamene per il tuo supporto!"
 
 msgid ""
 "Please donate any amount you want, selecting from the options below and "
@@ -69,8 +66,11 @@ msgid ""
 "        <a href=\"https://welcome.astrobin.com/voluntary-donations\" target="
 "\"_blank\">here</a>."
 msgstr ""
+"Se sei finito su questa pagina e non sei sicuro di cosa si tratta, leggi "
+"tutto\n"
+"<a href=\"https://it.welcome.astrobin.com/voluntary-donations\" target=\""
+"_blank\">qui</a>."
 
-#, fuzzy
 #| msgid "Thank you!"
 msgid "Thanks!"
 msgstr "Grazie!"
@@ -82,31 +82,30 @@ msgid "Monthly contributions"
 msgstr "Contributi mensili"
 
 msgid "Bronze"
-msgstr ""
+msgstr "Bronzo"
 
-#, fuzzy, python-format
+#, python-format
 #| msgid "$%(amount)s/month"
 msgid "CHF %(amount)s / month"
-msgstr "$%(amount)s/mese"
+msgstr "CHF %(amount)s/mese"
 
 msgid "Silver"
-msgstr ""
+msgstr "Argento"
 
 msgid "Gold"
-msgstr ""
+msgstr "Oro"
 
 msgid "Platinum"
-msgstr ""
+msgstr "Platino"
 
-#, fuzzy
 #| msgid "Yearly contributions (cheaper!)"
 msgid "Yearly contributions (cheaper)"
-msgstr "Contributi annuali (più economico!)"
+msgstr "Contributi annuali (più economico)"
 
-#, fuzzy, python-format
+#, python-format
 #| msgid "$%(amount)s/year"
 msgid "CHF %(amount)s / year"
-msgstr "$%(amount)s/anno"
+msgstr "CHF %(amount)s/anno"
 
 msgid "IMPORTANT"
 msgstr "IMPORTANTE"
@@ -119,7 +118,7 @@ msgstr ""
 "sottoscrizione esistenze, senza crearne una nuova."
 
 msgid "Pay with a bank transfer"
-msgstr ""
+msgstr "Paga con un deposito bancario"
 
 msgid ""
 "\n"
@@ -128,11 +127,13 @@ msgid ""
 "            bank details. Thanks!\n"
 "        "
 msgstr ""
+"\n"
+"Preferisci donare tramite deposito bancario? Fai un pagamento\n"
+"a piacere al seguente acconto. grazie!\n"
 
 msgid "Cancel your recurring donation"
 msgstr "Cancella la tua donazione ricorrente"
 
-#, fuzzy
 #| msgid ""
 #| "Thank you so much for your donations so far! We, and the whole AstroBin "
 #| "community, really appreciate your support."
@@ -140,10 +141,9 @@ msgid ""
 "Thank you so much for your donations so far! I, and the whole AstroBin "
 "community, really appreciate your support."
 msgstr ""
-"Grazie per le tue donazioni finora! Noi, e tutta la comunità AstroBin, "
-"appreziamo molto il tuo supporto."
+"Grazie per le tue donazioni finora! Io, e tutta la comunità AstroBin, "
+"apprezzo molto il tuo supporto."
 
-#, fuzzy
 #| msgid ""
 #| "Are you sure you want to cancel your subscription? AstroBin is a resource "
 #| "hungry website, and every small donation helps us with the hosting costs."
@@ -152,10 +152,9 @@ msgid ""
 "hungry website, and every small donation helps with the hosting costs."
 msgstr ""
 "Sei sicuro di voler cancellare la tua sottoscrizione? AstroBin è un sito che "
-"necessita molte risorse, ed ogni piccola donazione ci aiuta con i costi di "
+"necessita molte risorse, ed ogni piccola donazione aiuta con i costi di "
 "hosting."
 
-#, fuzzy
 #| msgid ""
 #| "If you really have made up your mind about it, use the button below to "
 #| "cancel your PayPal subscription. After the operation has been processed "
@@ -164,9 +163,8 @@ msgid ""
 "If you really have made up your mind about it, use the button below to "
 "cancel your PayPal subscription."
 msgstr ""
-"Se ne sei davvero convinto, uso il bottone qui sotto per cancellare la tua "
-"sottoscrizione con PayPal. Dopo che l'operazione sarà stata processata da "
-"PayPal, inizierai a vedere di nuovo le pubblicità."
+"Se ne sei davvero convinto, usa il bottone qui sotto per cancellare la tua "
+"sottoscrizione con PayPal."
 
 msgid "Thank you for your donations!"
 msgstr "Grazie per le tue donazioni!"
@@ -177,7 +175,6 @@ msgstr "Vuoi cancellare?"
 msgid "Thank you for your donation!"
 msgstr "Grazie per la tua donazione!"
 
-#, fuzzy
 #| msgid ""
 #| "We are very grateful for your support! Your contribution will help "
 #| "AstroBin with its ever increasing hosting costs, and will serve an "
@@ -187,9 +184,9 @@ msgid ""
 "with its ever increasing hosting costs, and will serve an incentive for me "
 "to keep improving it."
 msgstr ""
-"Siamo molto grati per il tuo supporto! Il tuo contributo ha aiutato AstroBin "
+"Sono molto grati per il tuo supporto! Il tuo contributo ha aiutato AstroBin "
 "con i suoi costi di hosting sempre in aumento, ed è stato un incentivo per "
-"farci continuare a migliorarlo."
+"farmi continuare a migliorarlo."
 
 #~ msgid "From now on, you will again see ads on this website."
 #~ msgstr "D'ora in poi, vedrai di nuovo le pubblicità su questo sito."
