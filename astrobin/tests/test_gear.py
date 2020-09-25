@@ -19,20 +19,13 @@ class GearTest(TestCase):
     ###########################################################################
 
     def test_get_make(self):
-        u = User.objects.create_user('test', 'test@test.com', 'password')
-        g, created = Gear.objects.get_or_create(
+        g = Gear.objects.create(
             make = "Test make",
             name = "Test name")
         self.assertEqual(g.get_make(), "Test make")
 
-        g, created = Gear.objects.get_or_create(
-            name = "Test name")
-        self.assertEqual(g.get_make(), "")
-
     def test_get_name(self):
-        u = User.objects.create_user('test', 'test@test.com', 'password')
-
-        g, created = Gear.objects.get_or_create(
+        g = Gear.objects.create(
             name = "Test name")
         self.assertEqual(g.get_name(), "Test name")
 
