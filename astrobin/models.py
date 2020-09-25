@@ -65,8 +65,6 @@ from astrobin_apps_notifications.utils import push_notification
 from astrobin_apps_platesolving.models import Solution
 from nested_comments.models import NestedComment
 
-from .utils import user_is_paying
-
 log = logging.getLogger('apps')
 
 
