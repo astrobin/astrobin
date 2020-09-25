@@ -1,3 +1,9 @@
+2020-09-25 Salvatore Iovene <salvatore@iovene.com>
+ * v1.92.0
+ * (notifications) Sort out expired/-ing subscription notifications (#1330)
+ * (notifications) Send notification about account never activated, delete if non responsive (#1331)
+ * (i18n) Update translations (#1332)
+
 2020-09-24 Salvatore Iovene <salvatore@iovene.com>
  * v1.91.10
  * (deps) Upgrade django-subscription to the latest

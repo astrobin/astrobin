@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2020-05-19 08:02+0000\n"
+"POT-Creation-Date: 2020-09-25 09:04+0000\n"
 "PO-Revision-Date: 2015-12-30 10:07+0000\n"
 "Last-Translator: marmotstar <marmot.subaru@gmail.com>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -786,7 +786,7 @@ msgid "You have already claimed this product."
 msgstr ""
 
 msgid ""
-"Select a tag to order this collection by its value. If you see no optioons "
+"Select a tag to order this collection by its value. If you see no options "
 "here, it's because none of the images in this collection have key/value "
 "tags. PS: Images that lack this tag will appear at the bottom of the "
 "collection."
@@ -841,9 +841,6 @@ msgid ""
 "Provide a list of unique key/value pairs to tag this image with. Use the '=' "
 "symbol between key and value, and provide one pair per line. These tags can "
 "be used to sort images by arbitrary properties."
-msgstr ""
-
-msgid "Revision"
 msgstr ""
 
 msgid "This field is required."
@@ -1073,8 +1070,10 @@ msgstr ""
 msgid "Polish"
 msgstr ""
 
-msgid "Brazilian Portuguese"
-msgstr ""
+#, fuzzy
+#| msgid "Portugal"
+msgid "Portuguese"
+msgstr "葡萄牙"
 
 msgid "Greek"
 msgstr ""
@@ -1609,9 +1608,7 @@ msgid "Synthetic channel"
 msgstr ""
 
 msgid "Filter"
-msgid_plural "Filters"
-msgstr[0] ""
-msgstr[1] ""
+msgstr ""
 
 msgid "Binning"
 msgstr ""
@@ -2397,6 +2394,12 @@ msgstr ""
 msgid "Choose file"
 msgstr ""
 
+msgid "Help with translations!"
+msgstr ""
+
+msgid "Please select your language from the options above."
+msgstr ""
+
 msgid "Notifications"
 msgstr ""
 
@@ -2476,6 +2479,25 @@ msgstr ""
 msgid "Thank you!"
 msgstr ""
 
+msgid ""
+"If this user has been harassing you, and you shadow-ban them, all their "
+"activities on your content will be invisible to everyone except themselves."
+msgstr ""
+
+msgid ""
+"They will not know that they have been shadow-banned, and the goal is that "
+"eventually they will get bored while having caused no harm, since nobody saw "
+"what they posted."
+msgstr ""
+
+msgid "Continue"
+msgstr ""
+
+msgid ""
+"You will remove your shadow-ban on this user, and their comments, messages, "
+"etc, will appear again on your content."
+msgstr ""
+
 msgid "Quick search"
 msgstr ""
 
@@ -2520,10 +2542,13 @@ msgstr ""
 msgid "Top picks"
 msgstr ""
 
-msgid "Stats"
+msgid "Remote astrophotography"
 msgstr ""
 
 msgid "Trending astrophotographers"
+msgstr ""
+
+msgid "Stats"
 msgstr ""
 
 msgid "Help"
@@ -2533,12 +2558,6 @@ msgid "Contact"
 msgstr ""
 
 msgid "User"
-msgstr ""
-
-msgid "Help with translations!"
-msgstr ""
-
-msgid "Please select your language from the options above."
 msgstr ""
 
 msgid "AstroBin index"
@@ -2894,6 +2913,12 @@ msgstr ""
 msgid "Remove ads"
 msgstr ""
 
+msgid "Acquired at"
+msgstr ""
+
+msgid "Remove"
+msgstr ""
+
 #, python-format
 msgid ""
 "<strong>Leave a comment here</strong>, and remember that AstroBin is an "
@@ -3008,6 +3033,13 @@ msgstr ""
 msgid "Delete this revision only"
 msgstr ""
 
+msgid "Delete all other versions"
+msgstr ""
+
+#, fuzzy
+msgid "Delete all revisions"
+msgstr "英國"
+
 msgid "Flag malfunctioning thumbnails"
 msgstr ""
 
@@ -3072,6 +3104,12 @@ msgid "View profile"
 msgstr ""
 
 msgid "Send private message"
+msgstr ""
+
+msgid "Shadow-ban"
+msgstr ""
+
+msgid "Remove shadow-ban"
 msgstr ""
 
 msgid "View"
@@ -3184,12 +3222,27 @@ msgid ""
 "will not be deleted. Are you sure?"
 msgstr ""
 
+msgid "Delete all other versions?"
+msgstr ""
+
+msgid ""
+"You will delete all other revisions (if any), and the originally uploaded "
+"image, leaving the current revision as the final and only version of this "
+"image."
+msgstr ""
+
+#, fuzzy
+msgid "Delete all revisions?"
+msgstr "英國"
+
+msgid ""
+"You will delete all revisions, leaving the originally uploaded image as the "
+"final and only version of this image."
+msgstr ""
+
 msgid ""
 "This will move this image to your staging area, making it unlisted. The "
 "image will be accessible by anyone with a direct link."
-msgstr ""
-
-msgid "Continue"
 msgstr ""
 
 msgid ""
@@ -3254,6 +3307,10 @@ msgstr ""
 msgid ""
 "Did you improve the post-processing of your image? Upload the new\n"
 "                    revision!"
+msgstr ""
+
+#, python-format
+msgid "Over 100 MB? Try the <a href=\"%(url)s/%(id)s\">new beta uploader</a>!"
 msgstr ""
 
 msgid ""
@@ -3395,6 +3452,9 @@ msgstr ""
 msgid "Next step: gear used"
 msgstr ""
 
+msgid "sponsor"
+msgstr ""
+
 msgid "Edit your image: gear used"
 msgstr ""
 
@@ -3519,9 +3579,6 @@ msgid "Galactic longitude"
 msgstr ""
 
 msgid "Galactic latitude"
-msgstr ""
-
-msgid "Remove"
 msgstr ""
 
 msgid "View page"
@@ -3876,6 +3933,46 @@ msgid ""
 msgstr ""
 
 msgid "You have images on AstroBin missing the \"Remote source\" information"
+msgstr ""
+
+msgid "Hi!"
+msgstr ""
+
+#, python-format
+msgid ""
+"We noticed that on <strong>%(date)s GMT</strong> you created an account on "
+"AstroBin, the image hosting service and social community for "
+"astrophotographers, but never got the chance to activate it."
+msgstr ""
+
+msgid "The account that you created has the following username:"
+msgstr ""
+
+msgid ""
+"If you would like to activate it now, please click on the following link:"
+msgstr ""
+
+msgid "Activate my account"
+msgstr ""
+
+msgid ""
+"If you don't, we will delete this account in a week. But don't worry, you're "
+"always welcome to join again!"
+msgstr ""
+
+msgid ""
+"If you already have another active account on AstroBin, please feel free to "
+"ignore this message."
+msgstr ""
+
+#, python-format
+msgid ""
+"We noticed that on %(date)s GMT you created an account on AstroBin, the "
+"image hosting service and social community for astrophotographers, but never "
+"got the chance to activate it."
+msgstr ""
+
+msgid "Would you like to activate your account on AstroBin?"
 msgstr ""
 
 #, python-format
@@ -4362,6 +4459,11 @@ msgstr ""
 msgid "Approve post"
 msgstr ""
 
+#, python-format
+msgid ""
+"Editing a post is only allowed within %(minutes)s minutes after creating it."
+msgstr ""
+
 msgid "Topics you subscribe to"
 msgstr ""
 
@@ -4600,6 +4702,13 @@ msgstr ""
 #, fuzzy
 msgid "Undelete images"
 msgstr "英國"
+
+msgid ""
+"The FREE account is to be considered a trial period. You can upload images "
+"10 times, after which you can't upload anymore. Deleting images doesn't "
+"decrease your upload counter: the FREE account is not meant to be used as a "
+"way to keep your latest 10 images."
+msgstr ""
 
 msgid "year"
 msgstr ""
@@ -4939,6 +5048,12 @@ msgid ""
 msgstr ""
 
 msgid "Would you like to upgrade to a higher plan?"
+msgstr ""
+
+#, python-format
+msgid ""
+"Try the <a href=\"%(url)s\">new beta uploader</a>: robust, with real "
+"progress bar, and 4 GB file size limit!"
 msgstr ""
 
 msgid "Upload as a work in progress"
@@ -5724,46 +5839,8 @@ msgid ""
 msgstr ""
 
 #, fuzzy
-msgid "Imaging telescope or lens"
-msgid_plural "Imaging telescopes or lenses"
-msgstr[0] "拍攝用的天文望遠鏡或是一般鏡頭"
-msgstr[1] "拍攝用的天文望遠鏡或是一般鏡頭"
-
-#, fuzzy
-msgid "Imaging camera"
-msgid_plural "Imaging cameras"
-msgstr[0] "拍攝用的相機"
-msgstr[1] "拍攝用的相機"
-
-#, fuzzy
-msgid "Mount"
-msgid_plural "Mounts"
-msgstr[0] "載具(赤道儀/經緯儀)"
-msgstr[1] "載具(赤道儀/經緯儀)"
-
-#, fuzzy
-msgid "Guiding telescope or lens"
-msgid_plural "Guiding telescopes or lenses"
-msgstr[0] "導星用的天文望遠鏡或鏡頭"
-msgstr[1] "導星用的天文望遠鏡或鏡頭"
-
-#, fuzzy
-msgid "Guiding camera"
-msgid_plural "Guiding cameras"
-msgstr[0] "導星用的相機"
-msgstr[1] "導星用的相機"
-
-#, fuzzy
-msgid "Focal reducer"
-msgid_plural "Focal reducers"
-msgstr[0] "減焦鏡"
-msgstr[1] "減焦鏡"
-
-#, fuzzy
 msgid "Accessory"
-msgid_plural "Accessories"
-msgstr[0] "配件"
-msgstr[1] "配件"
+msgstr "配件"
 
 msgid "Dates"
 msgstr ""
@@ -5804,6 +5881,42 @@ msgid ""
 "AstroBin is preparing your data for download. Please check this page again "
 "in a while: the more images you have, the more time it will take."
 msgstr ""
+
+#, fuzzy
+#~ msgid "Imaging telescope or lens"
+#~ msgid_plural "Imaging telescopes or lenses"
+#~ msgstr[0] "拍攝用的天文望遠鏡或是一般鏡頭"
+#~ msgstr[1] "拍攝用的天文望遠鏡或是一般鏡頭"
+
+#, fuzzy
+#~ msgid "Imaging camera"
+#~ msgid_plural "Imaging cameras"
+#~ msgstr[0] "拍攝用的相機"
+#~ msgstr[1] "拍攝用的相機"
+
+#, fuzzy
+#~ msgid "Mount"
+#~ msgid_plural "Mounts"
+#~ msgstr[0] "載具(赤道儀/經緯儀)"
+#~ msgstr[1] "載具(赤道儀/經緯儀)"
+
+#, fuzzy
+#~ msgid "Guiding telescope or lens"
+#~ msgid_plural "Guiding telescopes or lenses"
+#~ msgstr[0] "導星用的天文望遠鏡或鏡頭"
+#~ msgstr[1] "導星用的天文望遠鏡或鏡頭"
+
+#, fuzzy
+#~ msgid "Guiding camera"
+#~ msgid_plural "Guiding cameras"
+#~ msgstr[0] "導星用的相機"
+#~ msgstr[1] "導星用的相機"
+
+#, fuzzy
+#~ msgid "Focal reducer"
+#~ msgid_plural "Focal reducers"
+#~ msgstr[0] "減焦鏡"
+#~ msgstr[1] "減焦鏡"
 
 #, fuzzy
 #~| msgid "Suriname"

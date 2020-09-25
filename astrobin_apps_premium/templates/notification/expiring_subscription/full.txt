@@ -7,3 +7,8 @@
 {% blocktrans %}When you are ready to renew your subscription, please visit the following page:{% endblocktrans %}
 
 {{url}}
+
+{% blocktrans trimmed %}
+    PLEASE NOTE! At the moment, you cannot renew a subscription while it is still ongoing. Please wait until it is
+    expired. Thank you!
+{% endblocktrans %}

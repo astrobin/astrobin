@@ -20,16 +20,19 @@ from django.core.cache import cache
 from django.core.files import File
 from django.core.mail import EmailMultiAlternatives
 from django.core.management import call_command
+from django.urls import reverse
 from django.utils import timezone
 from django.utils.text import slugify
 from django_bouncy.models import Bounce
 from haystack.query import SearchQuerySet
+from registration.backends.hmac.views import RegistrationView
 from requests import Response
 
 from astrobin.models import BroadcastEmail, Image, DataDownloadRequest, ImageRevision
-from astrobin.utils import inactive_accounts
+from astrobin.utils import inactive_accounts, never_activated_accounts, never_activated_accounts_to_be_deleted
 from astrobin_apps_images.models import ThumbnailGroup
 from astrobin_apps_images.services import ImageService
+from astrobin_apps_notifications.utils import push_notification
 
 logger = get_task_logger(__name__)
 
@@ -225,6 +228,32 @@ def send_inactive_account_reminder():
 
 
 @shared_task()
+def send_never_activated_account_reminder():
+    users = never_activated_accounts()
+    for user in users:
+        push_notification([user], 'never_activated_account', {
+            'date': user.date_joined,
+            'username': user.username,
+            'activation_link': '%s/%s' % (
+                settings.BASE_URL,
+                reverse('registration_activate', args=(RegistrationView().get_activation_key(user),)),
+            )
+        })
+
+        user.userprofile.never_activated_account_reminder_sent = timezone.now()
+        user.userprofile.save()
+
+        logger.debug("Sent 'never activated account reminder' to %s" % user.username)
+
+
+@shared_task()
+def delete_never_activated_accounts():
+    users = never_activated_accounts_to_be_deleted()
+    count = users.count()
+    users.delete()
+    logger.debug("Deleted %d inactive accounts" % count)
+
+@shared_task()
 def prepare_download_data_archive(request_id):
     # type: (str) -> None
 
@@ -252,7 +281,8 @@ def prepare_download_data_archive(request_id):
             'link_to_fits',
             'image_file',
             'uncompressed_source_file',
-            'uploaded', 'published',
+            'uploaded',
+            'published',
             'updated',
             'watermark',
             'watermark_text',

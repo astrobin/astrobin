@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: 0.9\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2020-05-19 08:02+0000\n"
+"POT-Creation-Date: 2020-09-25 09:04+0000\n"
 "PO-Revision-Date: 2015-12-30 10:50+0000\n"
 "Last-Translator: Samuli <samuli.vuorinen@iki.fi>\n"
 "Language-Team: Finnish <tanja@iovene.com>\n"
@@ -790,7 +790,7 @@ msgid "You have already claimed this product."
 msgstr "Olet jo ilmoittautunut tämän tuotteen valmistajaksi."
 
 msgid ""
-"Select a tag to order this collection by its value. If you see no optioons "
+"Select a tag to order this collection by its value. If you see no options "
 "here, it's because none of the images in this collection have key/value "
 "tags. PS: Images that lack this tag will appear at the bottom of the "
 "collection."
@@ -850,10 +850,6 @@ msgid ""
 "symbol between key and value, and provide one pair per line. These tags can "
 "be used to sort images by arbitrary properties."
 msgstr ""
-
-#, fuzzy
-msgid "Revision"
-msgstr "Arvostelut"
 
 msgid "This field is required."
 msgstr "Tämä kenttä on pakollinen."
@@ -1097,7 +1093,9 @@ msgstr "Albania"
 msgid "Polish"
 msgstr "Puola"
 
-msgid "Brazilian Portuguese"
+#, fuzzy
+#| msgid "Brazilian Portuguese"
+msgid "Portuguese"
 msgstr "Brasilian Portugali"
 
 msgid "Greek"
@@ -1557,8 +1555,10 @@ msgstr "Kuvaus"
 msgid "HTML tags are allowed."
 msgstr "HTML-tagit sallittu."
 
+#, fuzzy
+#| msgid "Upload complete!"
 msgid "Uncompressed source (max 100 MB)"
-msgstr ""
+msgstr "Lataus on valmis!"
 
 msgid ""
 "You can store the final processed image that came out of your favorite image "
@@ -1671,9 +1671,7 @@ msgstr "Synteettinen kanava"
 #, fuzzy
 #| msgid "Filter"
 msgid "Filter"
-msgid_plural "Filters"
-msgstr[0] "Suodatin"
-msgstr[1] "Suodatin"
+msgstr "Suodatin"
 
 msgid "Binning"
 msgstr "Binnaus"
@@ -2524,6 +2522,12 @@ msgstr "Yhtään tiedostoa ei ole valittu"
 msgid "Choose file"
 msgstr "Valitse tiedosto"
 
+msgid "Help with translations!"
+msgstr "Auta käännöstöiden kanssa!"
+
+msgid "Please select your language from the options above."
+msgstr "Valitse kieli ylläolevista vaihtoehdoista."
+
 msgid "Notifications"
 msgstr "Ilmoitukset"
 
@@ -2613,6 +2617,25 @@ msgstr ""
 msgid "Thank you!"
 msgstr "Kiitokset"
 
+msgid ""
+"If this user has been harassing you, and you shadow-ban them, all their "
+"activities on your content will be invisible to everyone except themselves."
+msgstr ""
+
+msgid ""
+"They will not know that they have been shadow-banned, and the goal is that "
+"eventually they will get bored while having caused no harm, since nobody saw "
+"what they posted."
+msgstr ""
+
+msgid "Continue"
+msgstr "Jatka"
+
+msgid ""
+"You will remove your shadow-ban on this user, and their comments, messages, "
+"etc, will appear again on your content."
+msgstr ""
+
 msgid "Quick search"
 msgstr "Pikahaku"
 
@@ -2658,12 +2681,16 @@ msgstr "Laajennettu haku"
 msgid "Top picks"
 msgstr ""
 
-msgid "Stats"
-msgstr "Tilastot"
+#, fuzzy
+msgid "Remote astrophotography"
+msgstr "Muokkaa tähtikuvauslaitteitasi"
 
 #, fuzzy
 msgid "Trending astrophotographers"
 msgstr "Muokkaa tähtikuvauslaitteitasi"
+
+msgid "Stats"
+msgstr "Tilastot"
 
 msgid "Help"
 msgstr "Ohjeita"
@@ -2673,12 +2700,6 @@ msgstr "Ota yhteyttä"
 
 msgid "User"
 msgstr "Käyttäjä"
-
-msgid "Help with translations!"
-msgstr "Auta käännöstöiden kanssa!"
-
-msgid "Please select your language from the options above."
-msgstr "Valitse kieli ylläolevista vaihtoehdoista."
 
 msgid "AstroBin index"
 msgstr "AstroBin-indeksi"
@@ -3089,6 +3110,14 @@ msgstr "Sisältää"
 msgid "Remove ads"
 msgstr "Poista tiedot"
 
+#, fuzzy
+#| msgid "Acquired after"
+msgid "Acquired at"
+msgstr "Kuvattu myöhemmin kuin"
+
+msgid "Remove"
+msgstr "Poista"
+
 #, python-format
 msgid ""
 "<strong>Leave a comment here</strong>, and remember that AstroBin is an "
@@ -3213,6 +3242,15 @@ msgstr "Poista alkuperäinen kuva"
 msgid "Delete this revision only"
 msgstr "Poista tämä versio"
 
+#, fuzzy
+#| msgid "Delete conversation"
+msgid "Delete all other versions"
+msgstr "Poista keskustelu"
+
+#, fuzzy
+msgid "Delete all revisions"
+msgstr "Poista kuva kaikkine versioineen?"
+
 msgid "Flag malfunctioning thumbnails"
 msgstr ""
 
@@ -3289,6 +3327,14 @@ msgstr "Katsele profiilia"
 
 msgid "Send private message"
 msgstr "Lähetä yksityisviesti"
+
+msgid "Shadow-ban"
+msgstr ""
+
+#, fuzzy
+#| msgid "Remove data"
+msgid "Remove shadow-ban"
+msgstr "Poista tiedot"
 
 msgid "View"
 msgstr "Katsele"
@@ -3420,13 +3466,31 @@ msgstr ""
 "Kuva poistetaan pysyvästi eikä sitä voida enää palauttaa. Myös kaikki "
 "versiot kuvasta poistetaan. Oletko varma?"
 
+#, fuzzy
+#| msgid "Delete this revision?"
+msgid "Delete all other versions?"
+msgstr "Poista tämä versio?"
+
+msgid ""
+"You will delete all other revisions (if any), and the originally uploaded "
+"image, leaving the current revision as the final and only version of this "
+"image."
+msgstr ""
+
+#, fuzzy
+#| msgid "Delete this revision?"
+msgid "Delete all revisions?"
+msgstr "Poista tämä versio?"
+
+msgid ""
+"You will delete all revisions, leaving the originally uploaded image as the "
+"final and only version of this image."
+msgstr ""
+
 msgid ""
 "This will move this image to your staging area, making it unlisted. The "
 "image will be accessible by anyone with a direct link."
 msgstr ""
-
-msgid "Continue"
-msgstr "Jatka"
 
 msgid ""
 "This will trigger the regeneration of all thumbnails for this image and all "
@@ -3496,6 +3560,10 @@ msgid ""
 "Did you improve the post-processing of your image? Upload the new\n"
 "                    revision!"
 msgstr "Teitkö muutoksia kuvaasi? Lataa uusi versio!"
+
+#, python-format
+msgid "Over 100 MB? Try the <a href=\"%(url)s/%(id)s\">new beta uploader</a>!"
+msgstr ""
 
 msgid ""
 "Please note: AstroBin is not officially a backup service. So please also "
@@ -3661,6 +3729,9 @@ msgstr "Ladataan..."
 
 msgid "Next step: gear used"
 msgstr "Seuraava vaihe: muokkaa käytettyjä laitteita"
+
+msgid "sponsor"
+msgstr ""
 
 msgid "Edit your image: gear used"
 msgstr "Muokkaa kuvaasi: käytetyt laitteet"
@@ -3830,9 +3901,6 @@ msgstr "Valitse leveyspiiri (latitudi)"
 #| msgid "Select latitude"
 msgid "Galactic latitude"
 msgstr "Valitse leveyspiiri (latitudi)"
-
-msgid "Remove"
-msgstr "Poista"
 
 msgid "View page"
 msgstr "Katso sivu"
@@ -4294,6 +4362,50 @@ msgstr ""
 
 msgid "You have images on AstroBin missing the \"Remote source\" information"
 msgstr ""
+
+msgid "Hi!"
+msgstr ""
+
+#, python-format
+msgid ""
+"We noticed that on <strong>%(date)s GMT</strong> you created an account on "
+"AstroBin, the image hosting service and social community for "
+"astrophotographers, but never got the chance to activate it."
+msgstr ""
+
+msgid "The account that you created has the following username:"
+msgstr ""
+
+msgid ""
+"If you would like to activate it now, please click on the following link:"
+msgstr ""
+
+#, fuzzy
+#| msgid "Activate account at"
+msgid "Activate my account"
+msgstr "Aktivoi tunnus  sivustolle"
+
+msgid ""
+"If you don't, we will delete this account in a week. But don't worry, you're "
+"always welcome to join again!"
+msgstr ""
+
+msgid ""
+"If you already have another active account on AstroBin, please feel free to "
+"ignore this message."
+msgstr ""
+
+#, python-format
+msgid ""
+"We noticed that on %(date)s GMT you created an account on AstroBin, the "
+"image hosting service and social community for astrophotographers, but never "
+"got the chance to activate it."
+msgstr ""
+
+#, fuzzy
+#| msgid "Would you like to start using your real name on AstroBin?"
+msgid "Would you like to activate your account on AstroBin?"
+msgstr "Haluaisitko käyttää AstroBinissä oikeaa nimeäsi?"
 
 #, fuzzy, python-format
 #| msgid ""
@@ -4907,6 +5019,11 @@ msgstr "Poista keskustelu"
 msgid "Approve post"
 msgstr ""
 
+#, python-format
+msgid ""
+"Editing a post is only allowed within %(minutes)s minutes after creating it."
+msgstr ""
+
 msgid "Topics you subscribe to"
 msgstr ""
 
@@ -5191,6 +5308,13 @@ msgstr "Lataus on valmis!"
 #, fuzzy
 msgid "Undelete images"
 msgstr "Ladatut kuvat"
+
+msgid ""
+"The FREE account is to be considered a trial period. You can upload images "
+"10 times, after which you can't upload anymore. Deleting images doesn't "
+"decrease your upload counter: the FREE account is not meant to be used as a "
+"way to keep your latest 10 images."
+msgstr ""
 
 msgid "year"
 msgstr ""
@@ -5575,6 +5699,12 @@ msgstr "Kiitos Premium-jäsenyydestä! Nauti rajattomasta kuvalatauksesta."
 #| msgid "Would you like to upgrade?"
 msgid "Would you like to upgrade to a higher plan?"
 msgstr "Haluaisitko päivittää käyttäjätilisi?"
+
+#, python-format
+msgid ""
+"Try the <a href=\"%(url)s\">new beta uploader</a>: robust, with real "
+"progress bar, and 4 GB file size limit!"
+msgstr ""
 
 msgid "Upload as a work in progress"
 msgstr "Lataa keskeneräisenä vedoksena"
@@ -6495,46 +6625,8 @@ msgstr ""
 "Kiitos kun raportoit ongelman. Kaikki esikatselukuvat generoidaan uudestaan."
 
 #, fuzzy
-msgid "Imaging telescope or lens"
-msgid_plural "Imaging telescopes or lenses"
-msgstr[0] "Kuvauskaukoputket"
-msgstr[1] "Kuvauskaukoputket"
-
-#, fuzzy
-msgid "Imaging camera"
-msgid_plural "Imaging cameras"
-msgstr[0] "Kuvauskamerat"
-msgstr[1] "Kuvauskamerat"
-
-#, fuzzy
-msgid "Mount"
-msgid_plural "Mounts"
-msgstr[0] "Jalustat"
-msgstr[1] "Jalustat"
-
-#, fuzzy
-msgid "Guiding telescope or lens"
-msgid_plural "Guiding telescopes or lenses"
-msgstr[0] "Seurantakaukoputket"
-msgstr[1] "Seurantakaukoputket"
-
-#, fuzzy
-msgid "Guiding camera"
-msgid_plural "Guiding cameras"
-msgstr[0] "Seurantakamerat"
-msgstr[1] "Seurantakamerat"
-
-#, fuzzy
-msgid "Focal reducer"
-msgid_plural "Focal reducers"
-msgstr[0] "Polttovälin lyhentäjät"
-msgstr[1] "Polttovälin lyhentäjät"
-
-#, fuzzy
 msgid "Accessory"
-msgid_plural "Accessories"
-msgstr[0] "Oheislaitteet"
-msgstr[1] "Oheislaitteet"
+msgstr "Oheislaitteet"
 
 msgid "Dates"
 msgstr "Päivämäärät"
@@ -6577,6 +6669,46 @@ msgid ""
 "AstroBin is preparing your data for download. Please check this page again "
 "in a while: the more images you have, the more time it will take."
 msgstr ""
+
+#, fuzzy
+#~ msgid "Revision"
+#~ msgstr "Arvostelut"
+
+#, fuzzy
+#~ msgid "Imaging telescope or lens"
+#~ msgid_plural "Imaging telescopes or lenses"
+#~ msgstr[0] "Kuvauskaukoputket"
+#~ msgstr[1] "Kuvauskaukoputket"
+
+#, fuzzy
+#~ msgid "Imaging camera"
+#~ msgid_plural "Imaging cameras"
+#~ msgstr[0] "Kuvauskamerat"
+#~ msgstr[1] "Kuvauskamerat"
+
+#, fuzzy
+#~ msgid "Mount"
+#~ msgid_plural "Mounts"
+#~ msgstr[0] "Jalustat"
+#~ msgstr[1] "Jalustat"
+
+#, fuzzy
+#~ msgid "Guiding telescope or lens"
+#~ msgid_plural "Guiding telescopes or lenses"
+#~ msgstr[0] "Seurantakaukoputket"
+#~ msgstr[1] "Seurantakaukoputket"
+
+#, fuzzy
+#~ msgid "Guiding camera"
+#~ msgid_plural "Guiding cameras"
+#~ msgstr[0] "Seurantakamerat"
+#~ msgstr[1] "Seurantakamerat"
+
+#, fuzzy
+#~ msgid "Focal reducer"
+#~ msgid_plural "Focal reducers"
+#~ msgstr[0] "Polttovälin lyhentäjät"
+#~ msgstr[1] "Polttovälin lyhentäjät"
 
 #~ msgid "created a new public data pool"
 #~ msgstr "luo uusi julkinen datakirjasto"
@@ -7521,9 +7653,6 @@ msgstr ""
 
 #~ msgid "Max. telescope aperture"
 #~ msgstr "Kaukoputken maksimiapertuuri"
-
-#~ msgid "Acquired after"
-#~ msgstr "Kuvattu myöhemmin kuin"
 
 #~ msgid "Acquired before"
 #~ msgstr "Kuvattu ennen"
@@ -8722,9 +8851,6 @@ msgstr ""
 
 #~ msgid "Mark as done."
 #~ msgstr "Merkitse valmiiksi."
-
-#~ msgid "Activate account at"
-#~ msgstr "Aktivoi tunnus  sivustolle"
 
 #~ msgid "You are now registered. Activation email sent."
 #~ msgstr ""
