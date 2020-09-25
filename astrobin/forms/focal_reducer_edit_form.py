@@ -8,4 +8,4 @@ class FocalReducerEditForm(forms.ModelForm):
 
     class Meta:
         model = FocalReducer
-        exclude = ('make', 'name', 'retailed')
+        exclude = ('make', 'name')

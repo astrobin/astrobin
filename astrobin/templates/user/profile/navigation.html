@@ -101,17 +101,6 @@
 
                 <li class="divider"></li>
 
-                {% ifequal request.user requested_user %}
-                    {% if is_producer or is_retailer %}
-                        <li>
-                            <a href="{% url 'user_page_commercial_products' request.user.username %}">
-                                <i class="icon-barcode"></i>
-                                {% trans "Commercial products" %}
-                            </a>
-                        </li>
-                    {% endif %}
-                {% endifequal %}
-
                 <li>
                     <a href="{% url 'user_page_plots' requested_user.username %}">
                         <i class="icon-bar-chart"></i>

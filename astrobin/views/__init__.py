@@ -43,20 +43,20 @@ from silk.profiling.profiler import silk_profile
 from astrobin.context_processors import notices_count, user_language, user_scores, common_variables
 from astrobin.enums import SubjectType
 from astrobin.forms import ImageUploadForm, ImageLicenseForm, PrivateMessageForm, UserProfileEditBasicForm, \
-    DeepSky_AcquisitionBasicForm, SolarSystem_AcquisitionForm, UserProfileEditCommercialForm, \
-    UserProfileEditRetailerForm, DefaultImageLicenseForm, TelescopeEditNewForm, MountEditNewForm, CameraEditNewForm, \
+    DeepSky_AcquisitionBasicForm, SolarSystem_AcquisitionForm, \
+    DefaultImageLicenseForm, TelescopeEditNewForm, MountEditNewForm, CameraEditNewForm, \
     FocalReducerEditNewForm, SoftwareEditNewForm, FilterEditNewForm, AccessoryEditNewForm, TelescopeEditForm, \
     MountEditForm, CameraEditForm, FocalReducerEditForm, SoftwareEditForm, FilterEditForm, AccessoryEditForm, \
-    GearUserInfoForm, LocationEditForm, ImageEditWatermarkForm, DeepSky_AcquisitionForm, ClaimCommercialGearForm, \
-    MergeCommercialGearForm, ClaimRetailedGearForm, MergeRetailedGearForm, UserProfileEditPreferencesForm, \
-    RetailedGearForm, ImageRevisionUploadForm, UserProfileEditGearForm, CommercialGearForm
+    GearUserInfoForm, LocationEditForm, ImageEditWatermarkForm, DeepSky_AcquisitionForm, \
+    UserProfileEditPreferencesForm, \
+    ImageRevisionUploadForm, UserProfileEditGearForm
 from astrobin.gear import is_gear_complete, get_correct_gear
-from astrobin.models import Image, UserProfile, CommercialGear, Gear, Location, ImageRevision, DeepSky_Acquisition, \
-    SolarSystem_Acquisition, RetailedGear, GearUserInfo, Telescope, Mount, Camera, FocalReducer, Software, Filter, \
+from astrobin.models import Image, UserProfile, Gear, Location, ImageRevision, DeepSky_Acquisition, \
+    SolarSystem_Acquisition, GearUserInfo, Telescope, Mount, Camera, FocalReducer, Software, Filter, \
     Accessory, GearHardMergeRedirect, GlobalStat, App, GearMakeAutoRename, Acquisition
 from astrobin.shortcuts import ajax_response, ajax_success, ajax_fail
 from astrobin.templatetags.tags import in_upload_wizard
-from astrobin.utils import user_is_producer, user_is_retailer, to_user_timezone, base26_encode, base26_decode
+from astrobin.utils import to_user_timezone
 from astrobin_apps_images.services import ImageService
 from astrobin_apps_notifications.utils import push_notification
 from astrobin_apps_platesolving.forms import PlateSolvingSettingsForm, PlateSolvingAdvancedSettingsForm
@@ -1371,33 +1371,6 @@ def user_page(request, username):
     return render(request, template_name, response_dict)
 
 
-@require_GET
-def user_page_commercial_products(request, username):
-    user = get_object_or_404(UserProfile, user__username=username).user
-    if user != request.user:
-        return HttpResponseForbidden()
-
-    profile = user.userprofile
-    image_ct = ContentType.objects.get_for_model(Image)
-
-    response_dict = {
-        'requested_user': user,
-        'profile': profile,
-        'user_is_producer': user_is_producer(user),
-        'user_is_retailer': user_is_retailer(user),
-        'commercial_gear_list': CommercialGear.objects.filter(producer=user).exclude(base_gear=None),
-        'retailed_gear_list': RetailedGear.objects.filter(retailer=user).exclude(gear=None),
-        'claim_commercial_gear_form': ClaimCommercialGearForm(user=user),
-        'merge_commercial_gear_form': MergeCommercialGearForm(user=user),
-        'claim_retailed_gear_form': ClaimRetailedGearForm(user=user),
-        'merge_retailed_gear_form': MergeRetailedGearForm(user=user),
-    }
-
-    response_dict.update(UserService(user).get_image_numbers(include_corrupted=request.user == user))
-
-    return render(request, 'user/profile/commercial/products.html', response_dict)
-
-
 @user_passes_test(lambda u: u.is_superuser)
 def user_ban(request, username):
     user = get_object_or_404(UserProfile, user__username=username).user
@@ -1659,44 +1632,6 @@ def user_profile_save_basic(request):
 
     messages.success(request, _("Form saved. Thank you!"))
     return HttpResponseRedirect("/profile/edit/basic/")
-
-
-@login_required
-@user_passes_test(lambda u: user_is_producer(u) or user_is_retailer(u))
-def user_profile_edit_commercial(request):
-    profile = request.user.userprofile
-    if request.method == 'POST':
-        form = UserProfileEditCommercialForm(data=request.POST, instance=profile)
-
-        if form.is_valid():
-            form.save()
-            messages.success(request, _("Form saved. Thank you!"))
-            return HttpResponseRedirect('/profile/edit/commercial/')
-    else:
-        form = UserProfileEditCommercialForm(instance=profile)
-
-    return render(request, "user/profile/edit/commercial.html", {
-        'form': form,
-    })
-
-
-@login_required
-@user_passes_test(lambda u: user_is_retailer(u))
-def user_profile_edit_retailer(request):
-    profile = request.user.userprofile
-    if request.method == 'POST':
-        form = UserProfileEditRetailerForm(data=request.POST, instance=profile)
-
-        if form.is_valid():
-            form.save()
-            messages.success(request, _("Form saved. Thank you!"))
-            return HttpResponseRedirect('/profile/edit/retailer/')
-    else:
-        form = UserProfileEditRetailerForm(instance=profile)
-
-    return render(request, "user/profile/edit/retailer.html", {
-        'form': form,
-    })
 
 
 @login_required
@@ -2598,8 +2533,6 @@ def gear_page(request, id, slug):
     from astrobin.gear import CLASS_LOOKUP
 
     all_images = Image.by_gear(gear, gear_type).filter(is_wip=False)
-    show_commercial = (gear.commercial and gear.commercial.is_paid()) or (
-            gear.commercial and gear.commercial.producer == request.user)
     content_type = ContentType.objects.get(app_label='astrobin', model='gear')
     reviews = Review.objects.filter(content_id=id, content_type=content_type)
 
@@ -2616,12 +2549,6 @@ def gear_page(request, id, slug):
             (_(CLASS_LOOKUP[gear_type]._meta.get_field(k[0]).verbose_name),
              getattr(gear, k[0]),
              k[1]) for k in gear.attributes()],
-
-        'show_tagline': show_commercial and gear.commercial.tagline,
-        'show_link': show_commercial and gear.commercial.link,
-        'show_image': show_commercial and gear.commercial.image,
-        'show_other_images': show_commercial and gear.commercial.image and gear.commercial.image.revisions.all(),
-        'show_description': show_commercial and gear.commercial.description,
     }
 
     return render(request, 'gear/page.html', response_dict)
@@ -2765,7 +2692,6 @@ def gear_by_image(request, image_id):
 @require_GET
 def gear_by_make(request, make):
     klass = request.GET.get('klass', Gear)
-    unclaimed = request.GET.get('unclaimed', False)
 
     ret = {
         'make': make,
@@ -2784,9 +2710,6 @@ def gear_by_make(request, make):
         klass = CLASS_LOOKUP[klass]
 
     gear = klass.objects.filter(make=ret['make']).order_by('name')
-
-    if unclaimed == 'true':
-        gear = gear.filter(commercial=None)
 
     ret['gear'] = [{'id': x.id, 'name': x.get_name()} for x in gear]
 
@@ -2916,356 +2839,3 @@ def gear_review_save(request):
             content_type='application/javascript')
 
     return ajax_fail()
-
-
-@require_POST
-@login_required
-@user_passes_test(lambda u: user_is_producer(u))
-def commercial_products_claim(request, id):
-    from astrobin.templatetags.tags import gear_owners, gear_images
-
-    def error(form):
-        from bootstrap_toolkit.templatetags.bootstrap_toolkit import as_bootstrap
-        response_dict = {
-            'form': as_bootstrap(form, 'horizontal') if form else '',
-            'success': False,
-        }
-        return HttpResponse(
-            simplejson.dumps(response_dict),
-            content_type='application/javascript')
-
-    form = ClaimCommercialGearForm(data=request.POST, user=request.user)
-    try:
-        gear = Gear.objects.get(id=id)
-        # Can't claim something that's already claimed:
-        if gear.commercial:
-            return error(form)
-    except Gear.DoesNotExist:
-        return error(form)
-
-    # We need to add the choice to the field so that the form will validate.
-    # If we don't, it won't validate because the selected option, which was
-    # added via AJAX, is not among those available.
-    form.fields['name'].choices += [(gear.id, gear.get_name())]
-    if request.POST.get('merge_with'):
-        merge_with = CommercialGear.objects.get(id=int(request.POST.get('merge_with')))
-        proper_name = merge_with.proper_name if merge_with.proper_name else merge_with.gear_set.all()[0].get_name()
-        form.fields['merge_with'].choices += [(merge_with.id, proper_name)]
-
-    if not form.is_valid():
-        return error(form)
-
-    if form.cleaned_data['merge_with'] != '':
-        commercial_gear = CommercialGear.objects.get(id=int(form.cleaned_data['merge_with']))
-    else:
-        commercial_gear = CommercialGear(
-            producer=request.user,
-            proper_name=gear.get_name(),
-        )
-        commercial_gear.save()
-
-    gear.commercial = commercial_gear
-    gear.save()
-
-    claimed_gear = Gear.objects.filter(commercial=commercial_gear).values_list('id', flat=True)
-    return HttpResponse(
-        simplejson.dumps({
-            'success': True,
-            'id': commercial_gear.id,
-            'claimed_gear_id': gear.id,
-            'gear_ids': u','.join(str(x) for x in claimed_gear),
-            'gear_ids_links': u', '.join('<a href="/gear/%s/">%s</a>' % (x, x) for x in claimed_gear),
-            'make': gear.get_make(),
-            'name': gear.get_name(),
-            'owners': gear_owners(gear),
-            'images': gear_images(gear),
-            'is_merge': form.cleaned_data['merge_with'] != '',
-        }),
-        content_type='application/javascript')
-
-
-@require_GET
-@login_required
-@user_passes_test(lambda u: user_is_producer(u))
-def commercial_products_unclaim(request, id):
-    try:
-        gear = Gear.objects.get(id=id)
-    except Gear.DoesNotExist:
-        return HttpResponseForbidden()
-
-    commercial = gear.commercial
-    commercial_id = commercial.id
-    commercial_was_removed = False
-
-    if commercial is None or commercial.producer != request.user:
-        return HttpResponseForbidden()
-
-    all_gear = Gear.objects.filter(commercial=commercial)
-    if all_gear.count() == 1:
-        commercial.delete()
-        commercial_was_removed = True
-
-    gear.commercial = None
-    gear.save()
-
-    if commercial_was_removed:
-        claimed_gear = []
-    else:
-        claimed_gear = Gear.objects.filter(commercial=commercial).values_list('id', flat=True)
-
-    return HttpResponse(
-        simplejson.dumps({
-            'success': True,
-            'gear_id': id,
-            'commercial_id': commercial_id,
-            'commercial_was_removed': commercial_was_removed,
-            'claimed_gear_ids': u','.join(str(x) for x in claimed_gear),
-            'claimed_gear_ids_links': u', '.join('<a href="/gear/%s/">%s</a>' % (x, x) for x in claimed_gear),
-        }),
-        content_type='application/javascript')
-
-
-@require_GET
-@login_required
-@user_passes_test(lambda u: user_is_producer(u))
-def commercial_products_merge(request, from_id, to_id):
-    if from_id != to_id:
-        try:
-            from_cg = CommercialGear.objects.get(id=int(from_id))
-            to_cg = CommercialGear.objects.get(id=int(to_id))
-        except CommercialGear.DoesNotExist:
-            return HttpResponseForbidden()
-
-        if from_cg.producer != request.user or to_cg.producer != request.user:
-            return HttpResponseForbidden()
-
-        Gear.objects.filter(commercial=from_cg).update(commercial=to_cg)
-        from_cg.delete()
-
-        claimed_gear = Gear.objects.filter(commercial=to_cg).values_list('id', flat=True)
-
-        return HttpResponse(
-            simplejson.dumps({
-                'success': True,
-                'claimed_gear_ids': u','.join(str(x) for x in claimed_gear),
-                'claimed_gear_ids_links': u', '.join('<a href="/gear/%s/">%s</a>' % (x, x) for x in claimed_gear),
-            }),
-            content_type='application/javascript')
-
-    return HttpResponse(
-        simplejson.dumps({
-            'success': False,
-            'message': _("You can't merge a product to itself."),
-        }),
-        content_type='application/javascript')
-
-
-@require_GET
-@login_required
-@user_passes_test(lambda u: user_is_producer(u))
-def commercial_products_edit(request, id):
-    product = get_object_or_404(CommercialGear, id=id)
-    if product.producer != request.user:
-        return HttpResponseForbidden()
-
-    form = CommercialGearForm(instance=product, user=request.user)
-
-    return render(request, 'commercial/products/edit.html', {
-        'form': form,
-        'product': product,
-        'gear': Gear.objects.filter(commercial=product)[0],
-    })
-
-
-@require_POST
-@login_required
-@user_passes_test(lambda u: user_is_producer(u))
-def commercial_products_save(request, id):
-    product = get_object_or_404(CommercialGear, id=id)
-    if product.producer != request.user:
-        return HttpResponseForbidden()
-
-    form = CommercialGearForm(
-        data=request.POST,
-        instance=product,
-        user=request.user)
-
-    if form.is_valid():
-        form.save()
-        messages.success(request, _("Form saved. Thank you!"))
-        return HttpResponseRedirect('/commercial/products/edit/%i/' % product.id)
-
-    return render(request, 'commercial/products/edit.html', {
-        'form': form,
-        'product': product,
-        'gear': Gear.objects.filter(commercial=product)[0],
-    })
-
-
-@require_POST
-@login_required
-@user_passes_test(lambda u: user_is_retailer(u))
-def retailed_products_claim(request, id):
-    from astrobin.templatetags.tags import gear_owners, gear_images
-
-    def error(form):
-        from bootstrap_toolkit.templatetags.bootstrap_toolkit import as_bootstrap
-        response_dict = {
-            'form': as_bootstrap(form, 'horizontal') if form else '',
-            'success': False,
-        }
-        return HttpResponse(
-            simplejson.dumps(response_dict),
-            content_type='application/javascript')
-
-    form = ClaimRetailedGearForm(data=request.POST, user=request.user)
-    try:
-        gear = Gear.objects.get(id=id)
-        # Here, instead, we can claim something that's already claimed!
-    except Gear.DoesNotExist:
-        return error(form)
-
-    # We need to add the choice to the field so that the form will validate.
-    # If we don't, it won't validate because the selected option, which was
-    # added via AJAX, is not among those available.
-    form.fields['name'].choices += [(gear.id, gear.get_name())]
-    if request.POST.get('merge_with'):
-        merge_with = RetailedGear.objects.get(id=int(request.POST.get('merge_with')))
-        proper_name = merge_with.gear_set.all()[0].get_name()
-        form.fields['merge_with'].choices += [(merge_with.id, proper_name)]
-
-    if not form.is_valid():
-        return error(form)
-
-    if form.cleaned_data['merge_with'] != '':
-        retailed_gear = RetailedGear.objects.get(id=int(form.cleaned_data['merge_with']))
-    else:
-        retailed_gear = RetailedGear(
-            retailer=request.user,
-        )
-        retailed_gear.save()
-
-    gear.retailed.add(retailed_gear)
-    gear.save()
-
-    claimed_gear = Gear.objects.filter(retailed=retailed_gear).values_list('id', flat=True)
-    return HttpResponse(
-        simplejson.dumps({
-            'success': True,
-            'id': retailed_gear.id,
-            'claimed_gear_id': gear.id,
-            'gear_ids': u','.join(str(x) for x in claimed_gear),
-            'gear_ids_links': u', '.join('<a href="/gear/%s/">%s</a>' % (x, x) for x in claimed_gear),
-            'make': gear.get_make(),
-            'name': gear.get_name(),
-            'owners': gear_owners(gear),
-            'images': gear_images(gear),
-            'is_merge': form.cleaned_data['merge_with'] != '',
-        }),
-        content_type='application/javascript')
-
-
-@require_GET
-@login_required
-@user_passes_test(lambda u: user_is_retailer(u))
-def retailed_products_unclaim(request, id):
-    try:
-        gear = Gear.objects.get(id=id)
-    except Gear.DoesNotExist:
-        return HttpResponseForbidden()
-
-    try:
-        retailed = RetailedGear.objects.get(retailer=request.user, gear=gear)
-    except RetailedGear.DoesNotExist:
-        return HttpResponseForbidden()
-
-    retailed_id = retailed.id
-    retailed_was_removed = False
-
-    if retailed is None or retailed.retailer != request.user:
-        return HttpResponseForbidden()
-
-    all_gear = Gear.objects.filter(retailed=retailed)
-    if all_gear.count() == 1:
-        retailed.delete()
-        retailed_was_removed = True
-
-    gear.retailed.remove(retailed)
-
-    if retailed_was_removed:
-        claimed_gear = []
-    else:
-        claimed_gear = Gear.objects.filter(retailed=retailed).values_list('id', flat=True)
-
-    return HttpResponse(
-        simplejson.dumps({
-            'success': True,
-            'gear_id': id,
-            'retailed_id': retailed_id,
-            'retailed_was_removed': retailed_was_removed,
-            'claimed_gear_ids': u','.join(str(x) for x in claimed_gear),
-            'claimed_gear_ids_links': u', '.join('<a href="/gear/%s/">%s</a>' % (x, x) for x in claimed_gear),
-        }),
-        content_type='application/javascript')
-
-
-@require_GET
-@login_required
-@user_passes_test(lambda u: user_is_retailer(u))
-def retailed_products_merge(request, from_id, to_id):
-    if from_id != to_id:
-        try:
-            from_rg = RetailedGear.objects.get(id=int(from_id))
-            to_rg = RetailedGear.objects.get(id=int(to_id))
-        except RetailedGear.DoesNotExist:
-            return HttpResponseForbidden()
-
-        if from_rg.retailer != request.user or to_rg.retailer != request.user:
-            return HttpResponseForbidden()
-
-        all_gear = Gear.objects.filter(retailed=from_rg)
-        for g in all_gear:
-            g.retailed.add(to_rg)
-
-        from_rg.delete()
-
-        claimed_gear = Gear.objects.filter(retailed=to_rg).values_list('id', flat=True)
-
-        return HttpResponse(
-            simplejson.dumps({
-                'success': True,
-                'claimed_gear_ids': u','.join(str(x) for x in claimed_gear),
-                'claimed_gear_ids_links': u', '.join('<a href="/gear/%s/">%s</a>' % (x, x) for x in claimed_gear),
-            }),
-            content_type='application/javascript')
-
-    return HttpResponse(
-        simplejson.dumps({
-            'success': False,
-            'message': _("You can't merge a product to itself."),
-        }),
-        content_type='application/javascript')
-
-
-@login_required
-@user_passes_test(lambda u: user_is_retailer(u))
-def retailed_products_edit(request, id):
-    product = get_object_or_404(RetailedGear, id=id)
-    if product.retailer != request.user:
-        return HttpResponseForbidden()
-
-    if request.method == 'POST':
-        form = RetailedGearForm(data=request.POST, instance=product)
-
-        if form.is_valid():
-            form.save()
-            messages.success(request, _("Form saved. Thank you!"))
-            return HttpResponseRedirect('/commercial/products/retailed/edit/%i/' % product.id)
-    else:
-        form = RetailedGearForm(instance=product)
-
-    return render(request, 'commercial/products/retailed/edit.html', {
-        'form': form,
-        'product': product,
-        'gear': Gear.objects.filter(retailed=product)[0],
-    })

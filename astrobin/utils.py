@@ -111,64 +111,6 @@ def get_client_country_code(request):
         return "UNKNOWN"
 
 
-#################################
-# TODO: move to affiliation app #
-#################################
-def user_is_producer(user):
-    is_producer = False
-    if user:
-        is_producer = user.groups.filter(name='Producers').count() > 0
-    return is_producer
-
-
-def user_is_retailer(user):
-    if user:
-        return user.groups.filter(name='Retailers').count() > 0
-    return False
-
-
-def user_is_paying(user):
-    if user:
-        return user.groups.filter(name='Paying').count() > 0
-    return False
-
-
-def affiliate_limit(user):
-    if not user:
-        return 0
-
-    if user.groups.filter(name='affiliate-1'):
-        return 1
-    if user.groups.filter(name='affiliate-10'):
-        return 10
-    if user.groups.filter(name='affiliate-50'):
-        return 50
-    if user.groups.filter(name='affiliate-100'):
-        return 100
-    if user.groups.filter(name='affiliate-inf'):
-        return sys.maxint
-
-    return 0
-
-
-def retailer_affiliate_limit(user):
-    if not user:
-        return 0
-
-    if user.groups.filter(name='retailer-affiliate-1'):
-        return 1
-    if user.groups.filter(name='retailer-affiliate-10'):
-        return 10
-    if user.groups.filter(name='retailer-affiliate-50'):
-        return 50
-    if user.groups.filter(name='retailer-affiliate-100'):
-        return 100
-    if user.groups.filter(name='retailer-affiliate-inf'):
-        return sys.maxint
-
-    return 0
-
-
 def inactive_accounts():
     """Gets all the user profiles of users with at least one image, who haven't uploaded in over 2 months"""
 

@@ -23,42 +23,10 @@
                     <small>{% trans "by" %} {{gear.get_make}}</small>
                 {% endif %}
             </h1>
-            {% if show_tagline %}
-                <h4>{{gear.commercial.tagline}}</h4>
-            {% endif %}
         </div>
 
         <div class="row section">
             <div class="span8">
-                {% if show_image %}
-                    <div class="gear-image">
-                        {% astrobin_image gear.commercial.image 'regular' %}
-                    </div>
-                {% endif %}
-
-                {% if show_other_images %}
-                    <div class="subtle-container">
-                        <div class="header">
-                            <h4><i class="icon-picture"></i> {% trans "Other images" %}</h4>
-                        </div>
-                        <ul class="thumbnails astrobin-thumbnails">
-                        {% for r in gear.commercial.image.revisions.all %}
-                            <li class="thumbnail astrobin-thumbnail revisions">
-                                {% astrobin_image gear.commercial.image 'thumb' revision=r.label %}
-                            </li>
-                        {% endfor %}
-                    </div>
-                {% endif %}
-
-                {% if show_description %}
-                    <div class="subtle-container">
-                        <div class="header">
-                            <h4><i class="icon-align-left"></i> {% trans "Description" %}</h4>
-                        </div>
-                        {{gear.commercial.description|markdown|linebreaks}}
-                    </div>
-                {% endif %}
-
                 {% if examples %}
                     <div class="subtle-container">
                         <div class="header">
@@ -147,72 +115,11 @@
 
             <div class="span4">
 
-                {% if gear.retailed.all %}
-                    <div class="subtle-container">
-                        <div class="header">
-                            <h4><i class="icon-credit-card"></i> {% trans "Buy it here" %}</h4>
-                        </div>
-                        <table class="table">
-                            {% for retailed in gear.retailed.all %}
-                                {% with retailed.retailer.userprofile as profile %}
-                                    {% if profile.company_name %}
-                                        <tr>
-                                            <th>
-                                                <div class="company-name">
-                                                    {% if profile.company_website %}
-                                                        <a href="{{profile.company_website}}" target="_blank"
-                                                           rel="tooltip" title="{{profile.company_website}}">
-                                                    {% endif %}
-                                                        {{profile.company_name}}
-                                                    {% if profile.company_website %}
-                                                        </a>
-                                                    {% endif %}
-                                                <div class="reailer-country">
-                                                    {% if profile.retailer_country %}
-                                                        {% trans profile.get_retailer_country_display %}
-                                                    {% endif %}
-                                                </div>
-                                            </th>
-                                            <td>
-                                                {{retailed.price|default:"-"}}
-                                                {% if retailed.price %}
-                                                    {{retailed.currency}}
-                                                {% endif %}
-                                            </td>
-                                            <td>
-                                                {% if retailed.link %}
-                                                    <a class="btn btn-primary btn-mini" href="{{retailed.link}}" target="_blank" rel="tooltip" title="{{retailed.link}}">
-                                                        &nbsp;<i class="icon-external-link"></i>&nbsp;
-                                                    </a>
-                                                {% else %}
-                                                    -
-                                                {% endif %}
-                                            </td>
-                                        </tr>
-                                    {% endif %}
-                                {% endwith %}
-                            {% endfor %}
-                        </table>
-                    </div>
-                {% endif %}
-
                 <div class="subtle-container">
                     <div class="header">
                         <h4><i class="icon-tags"></i> {% trans "Properties" %}</h4>
                     </div>
                     <table class="table">
-                        {% if show_link %}
-                        <tr>
-                            <th>{% trans "Link" %}</th>
-                            <td>
-                                <a class="commercial-link btn btn-primary btn-mini" href="{{gear.commercial.link}}" target="_blank"
-                                   rel="tooltip" title="{{gear.commercial.link}}">
-                                    &nbsp;<i class="icon-external-link"></i>&nbsp;
-                                </a>
-                            </td>
-                        </tr>
-                        {% endif %}
-
                         <tr>
                             <th>{% trans "Type" %}</th>
                             <td>{% gear_type gear %}</td>
@@ -220,13 +127,9 @@
                         <tr>
                             <th>{% trans "Make" %}</th>
                             <td>
-                                {% if gear.commercial and gear.commercial.is_paid or gear.commercial.producer == request.user  %}
-                                    <a href="/search/?q={{gear.get_make}}">
-                                {% endif %}
+                                <a href="/search/?q={{gear.get_make}}">
                                     {{gear.get_make}}
-                                {% if gear.commercial and gear.commercial.is_paid or gear.commercial.producer == request.user %}
-                                    </a>
-                                {% endif %}
+                                </a>
                             </td>
                         </tr>
                         {% for attribute in attributes %}

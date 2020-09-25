@@ -4,13 +4,6 @@
 {% load toggleproperty_tags %}
 
 <div class="gear_popover">
-    {% if gear.commercial and gear.commercial.image and gear.commercial.is_paid or gear.commercial.producer == user %}
-        <div class="thumbnail astrobin-thumbnail">
-            {% with gear.commercial.image as image %}
-                {% astrobin_image image 'gallery' %}
-            {% endwith %}
-        </div>
-    {% endif %}
     <div class="data">
 		<h3>{{gear.name}}</h3>
 		{% if gear.make %}<p><strong>{% trans "Make" %}</strong>: <a href="/search/?q={{gear.get_make}}">{{gear.get_make}}</a></p>{% endif %}

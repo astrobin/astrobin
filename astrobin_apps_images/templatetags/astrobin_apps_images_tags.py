@@ -14,27 +14,6 @@ from astrobin.models import Image, ImageRevision
 
 register = Library()
 
-# Returns the URL of an image, taking into account the fact that it might be
-# a commercial gear image.
-@register.simple_tag
-def get_image_url(image, revision='final', size='regular'):
-    def commercial_gear_url(commercial_gear):
-        gear = commercial_gear.base_gear.all()
-        if gear:
-            return gear[0].get_absolute_url()
-        return None
-
-    try:
-        commercial_gear = image.featured_gear.all()[0]
-        url = commercial_gear_url(commercial_gear)
-        if url:
-            return url
-
-    except IndexError:
-        pass
-
-    return image.get_absolute_url(revision, size)
-
 
 @register.filter
 def gallery_thumbnail(image, revision_label):

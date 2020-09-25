@@ -33,7 +33,7 @@
                                         <strong class="card-label">{% trans i.0 %}:</strong>
                                         {% for g in i.1 %}
                                             <a rel="popover"
-                                               class="gear-popover{% if g.commercial and g.commercial.is_paid or g.commercial.producer == request.user %} btn btn-mini btn-warning{% endif %}"
+                                               class="gear-popover"
                                                data-load="{% url 'gear_popover_ajax' g.id %}"
                                                href="{% url 'gear_page' g.id g.slug %}">{{ g }}</a>
                                             {% if not forloop.last %}
