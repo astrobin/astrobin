@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2020-05-19 08:02+0000\n"
+"POT-Creation-Date: 2020-09-25 09:04+0000\n"
 "PO-Revision-Date: 2020-05-18 08:50+0000\n"
 "Last-Translator: Milosz Wasilewski <milosz.wasilewski@gmail.com>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -791,7 +791,7 @@ msgid "You have already claimed this product."
 msgstr "Prawo do tego produktu rościłeś już wcześniej."
 
 msgid ""
-"Select a tag to order this collection by its value. If you see no optioons "
+"Select a tag to order this collection by its value. If you see no options "
 "here, it's because none of the images in this collection have key/value "
 "tags. PS: Images that lack this tag will appear at the bottom of the "
 "collection."
@@ -850,9 +850,6 @@ msgid ""
 "symbol between key and value, and provide one pair per line. These tags can "
 "be used to sort images by arbitrary properties."
 msgstr ""
-
-msgid "Revision"
-msgstr "Wersja"
 
 msgid "This field is required."
 msgstr "To pole jest wymagane."
@@ -1088,7 +1085,9 @@ msgstr "Albański"
 msgid "Polish"
 msgstr "Polski"
 
-msgid "Brazilian Portuguese"
+#, fuzzy
+#| msgid "Brazilian Portuguese"
+msgid "Portuguese"
 msgstr "Brazylijski Portugalski"
 
 msgid "Greek"
@@ -1526,7 +1525,9 @@ msgstr "Opis"
 msgid "HTML tags are allowed."
 msgstr "Tagi HTML są dozwolone"
 
-msgid "Uncompressed source (max 200 MB)"
+#, fuzzy
+#| msgid "Uncompressed source (max 200 MB)"
+msgid "Uncompressed source (max 100 MB)"
 msgstr "Nieskompresowane źródła (max 200 MB)"
 
 msgid ""
@@ -1633,11 +1634,11 @@ msgstr "9 - Centrum miasta (BIAŁE)"
 msgid "Synthetic channel"
 msgstr "Kanał syntetyczny"
 
+#, fuzzy
+#| msgid "Filter"
+#| msgid_plural "Filters"
 msgid "Filter"
-msgid_plural "Filters"
-msgstr[0] "Filtr"
-msgstr[1] "Filtr"
-msgstr[2] "Filtr"
+msgstr "Filtr"
 
 msgid "Binning"
 msgstr "Binning"
@@ -2528,6 +2529,12 @@ msgstr "Brak zaznaczonych plików"
 msgid "Choose file"
 msgstr "Zaznacz plik"
 
+msgid "Help with translations!"
+msgstr "Pomóż w tłumaczeniu!"
+
+msgid "Please select your language from the options above."
+msgstr "Wybierz język z powyższych opcji do wyboru."
+
 msgid "Notifications"
 msgstr "Powiadomienia"
 
@@ -2610,6 +2617,25 @@ msgstr ""
 msgid "Thank you!"
 msgstr "Dziękujemy"
 
+msgid ""
+"If this user has been harassing you, and you shadow-ban them, all their "
+"activities on your content will be invisible to everyone except themselves."
+msgstr ""
+
+msgid ""
+"They will not know that they have been shadow-banned, and the goal is that "
+"eventually they will get bored while having caused no harm, since nobody saw "
+"what they posted."
+msgstr ""
+
+msgid "Continue"
+msgstr "Kontynuuj"
+
+msgid ""
+"You will remove your shadow-ban on this user, and their comments, messages, "
+"etc, will appear again on your content."
+msgstr ""
+
 msgid "Quick search"
 msgstr "Szybkie szukanie"
 
@@ -2652,11 +2678,16 @@ msgstr "Zaawansowane wyszukiwanie"
 msgid "Top picks"
 msgstr "Najlepsze zdjęcia"
 
-msgid "Stats"
-msgstr "Statystyki"
+#, fuzzy
+#| msgid "Home of Astrophotography"
+msgid "Remote astrophotography"
+msgstr "Dom dla Astrofotografii"
 
 msgid "Trending astrophotographers"
 msgstr "Najlepsi astrofotografowie"
+
+msgid "Stats"
+msgstr "Statystyki"
 
 msgid "Help"
 msgstr "Pomoc"
@@ -2666,12 +2697,6 @@ msgstr "Kontakt"
 
 msgid "User"
 msgstr "Użytkownik"
-
-msgid "Help with translations!"
-msgstr "Pomóż w tłumaczeniu!"
-
-msgid "Please select your language from the options above."
-msgstr "Wybierz język z powyższych opcji do wyboru."
 
 msgid "AstroBin index"
 msgstr "Indeks AstroBin"
@@ -3094,6 +3119,14 @@ msgstr "Zawiera"
 msgid "Remove ads"
 msgstr "Usuń dane"
 
+#, fuzzy
+#| msgid "Acquired after"
+msgid "Acquired at"
+msgstr "Wykonane po"
+
+msgid "Remove"
+msgstr "Usuń"
+
 #, python-format
 msgid ""
 "<strong>Leave a comment here</strong>, and remember that AstroBin is an "
@@ -3218,6 +3251,16 @@ msgstr "Usuń pierwowzór"
 msgid "Delete this revision only"
 msgstr "Usuń tylko tą wersję"
 
+#, fuzzy
+#| msgid "Delete conversation"
+msgid "Delete all other versions"
+msgstr "Usuń konwersację"
+
+#, fuzzy
+#| msgid "Delete image and all revisions"
+msgid "Delete all revisions"
+msgstr "Usunąć zdjęcie wraz ze wszystkimi wersjami?"
+
 msgid "Flag malfunctioning thumbnails"
 msgstr "Zgłoś nieaktywne miniaturki"
 
@@ -3291,6 +3334,14 @@ msgstr "Zobacz profil"
 
 msgid "Send private message"
 msgstr "Wyślij prywatną wiadomość"
+
+msgid "Shadow-ban"
+msgstr ""
+
+#, fuzzy
+#| msgid "Remove data"
+msgid "Remove shadow-ban"
+msgstr "Usuń dane"
 
 msgid "View"
 msgstr "Widok"
@@ -3421,15 +3472,33 @@ msgstr ""
 "Zdjecie zostanie całkowicie usunięte i nie będzie go można przywrócić. "
 "Wszystkie pozostałe wersje również zostaną usunięte. Czy jesteś pewny?"
 
+#, fuzzy
+#| msgid "Delete this revision?"
+msgid "Delete all other versions?"
+msgstr "Usunąć tą wersję?"
+
+msgid ""
+"You will delete all other revisions (if any), and the originally uploaded "
+"image, leaving the current revision as the final and only version of this "
+"image."
+msgstr ""
+
+#, fuzzy
+#| msgid "Delete this revision?"
+msgid "Delete all revisions?"
+msgstr "Usunąć tą wersję?"
+
+msgid ""
+"You will delete all revisions, leaving the originally uploaded image as the "
+"final and only version of this image."
+msgstr ""
+
 msgid ""
 "This will move this image to your staging area, making it unlisted. The "
 "image will be accessible by anyone with a direct link."
 msgstr ""
 "Twoje zdjęcie będzie przeniesione do strefy roboczej i nie będzie widoczne w "
 "wynikach wyszukiwania. Zdjęcie będzie dostępne poprzez bezpośredni link."
-
-msgid "Continue"
-msgstr "Kontynuuj"
 
 msgid ""
 "This will trigger the regeneration of all thumbnails for this image and all "
@@ -3504,6 +3573,10 @@ msgid ""
 msgstr ""
 "Poprawiłeś obróbkę swojego zdjęcia? Opublikuj nową \n"
 "wersję!"
+
+#, python-format
+msgid "Over 100 MB? Try the <a href=\"%(url)s/%(id)s\">new beta uploader</a>!"
+msgstr ""
 
 msgid ""
 "Please note: AstroBin is not officially a backup service. So please also "
@@ -3674,6 +3747,9 @@ msgstr "Ładowanie..."
 msgid "Next step: gear used"
 msgstr "Następny krok: użyty sprzęt"
 
+msgid "sponsor"
+msgstr ""
+
 msgid "Edit your image: gear used"
 msgstr "Edytuj zdjęcie: użyty sprzęt"
 
@@ -3833,9 +3909,6 @@ msgstr "Okreść szerokość geograficzną"
 #| msgid "Select latitude"
 msgid "Galactic latitude"
 msgstr "Okreść szerokość geograficzną"
-
-msgid "Remove"
-msgstr "Usuń"
 
 msgid "View page"
 msgstr "Zobacz stronę"
@@ -4282,6 +4355,51 @@ msgstr ""
 
 msgid "You have images on AstroBin missing the \"Remote source\" information"
 msgstr ""
+
+msgid "Hi!"
+msgstr ""
+
+#, python-format
+msgid ""
+"We noticed that on <strong>%(date)s GMT</strong> you created an account on "
+"AstroBin, the image hosting service and social community for "
+"astrophotographers, but never got the chance to activate it."
+msgstr ""
+
+msgid "The account that you created has the following username:"
+msgstr ""
+
+msgid ""
+"If you would like to activate it now, please click on the following link:"
+msgstr ""
+
+#, fuzzy
+#| msgid "Activate account at"
+msgid "Activate my account"
+msgstr "Aktywuj konto klikając"
+
+msgid ""
+"If you don't, we will delete this account in a week. But don't worry, you're "
+"always welcome to join again!"
+msgstr ""
+
+msgid ""
+"If you already have another active account on AstroBin, please feel free to "
+"ignore this message."
+msgstr ""
+
+#, python-format
+msgid ""
+"We noticed that on %(date)s GMT you created an account on AstroBin, the "
+"image hosting service and social community for astrophotographers, but never "
+"got the chance to activate it."
+msgstr ""
+
+#, fuzzy
+#| msgid "Would you like to start using your real name on AstroBin?"
+msgid "Would you like to activate your account on AstroBin?"
+msgstr ""
+"Czy chcesz używać swojego imienia i nazwiska zamiast nicka na AstroBin ?"
 
 #, python-format
 msgid ""
@@ -4861,6 +4979,11 @@ msgstr "Usuń post"
 msgid "Approve post"
 msgstr "Zatwierdź post"
 
+#, python-format
+msgid ""
+"Editing a post is only allowed within %(minutes)s minutes after creating it."
+msgstr ""
+
 msgid "Topics you subscribe to"
 msgstr "Tematy które subskrybujesz"
 
@@ -5142,6 +5265,13 @@ msgstr "Plik załadowany!"
 #| msgid "Unlimited images"
 msgid "Undelete images"
 msgstr "Nieskończona liczba zdjęć"
+
+msgid ""
+"The FREE account is to be considered a trial period. You can upload images "
+"10 times, after which you can't upload anymore. Deleting images doesn't "
+"decrease your upload counter: the FREE account is not meant to be used as a "
+"way to keep your latest 10 images."
+msgstr ""
 
 msgid "year"
 msgstr "rok"
@@ -5536,6 +5666,12 @@ msgstr ""
 #| msgid "Would you like to upgrade?"
 msgid "Would you like to upgrade to a higher plan?"
 msgstr "Czy chcesz ulepszyć swoje konto?"
+
+#, python-format
+msgid ""
+"Try the <a href=\"%(url)s\">new beta uploader</a>: robust, with real "
+"progress bar, and 4 GB file size limit!"
+msgstr ""
 
 msgid "Upload as a work in progress"
 msgstr "Publikuj jako niedokończone"
@@ -6460,47 +6596,11 @@ msgstr ""
 "Dziękujemy za raport o problemie. Wszystkie miniaturki będę wygenerowane "
 "jeszcze raz."
 
-msgid "Imaging telescope or lens"
-msgid_plural "Imaging telescopes or lenses"
-msgstr[0] "Teleskop główny"
-msgstr[1] "Teleskop główny"
-msgstr[2] "Teleskop główny"
-
-msgid "Imaging camera"
-msgid_plural "Imaging cameras"
-msgstr[0] "Kamery główne"
-msgstr[1] "Kamery główne"
-msgstr[2] "Kamery główne"
-
-msgid "Mount"
-msgid_plural "Mounts"
-msgstr[0] "Montaże"
-msgstr[1] "Montaże"
-msgstr[2] "Montaże"
-
-msgid "Guiding telescope or lens"
-msgid_plural "Guiding telescopes or lenses"
-msgstr[0] "Teleskop prowadzący"
-msgstr[1] "Teleskop prowadzący"
-msgstr[2] "Teleskop prowadzący"
-
-msgid "Guiding camera"
-msgid_plural "Guiding cameras"
-msgstr[0] "Kamera guidująca, prowadząca"
-msgstr[1] "Kamera guidująca, prowadząca"
-msgstr[2] "Kamera guidująca, prowadząca"
-
-msgid "Focal reducer"
-msgid_plural "Focal reducers"
-msgstr[0] "Reduktory ogniskowej"
-msgstr[1] "Reduktory ogniskowej"
-msgstr[2] "Reduktory ogniskowej"
-
+#, fuzzy
+#| msgid "Accessory"
+#| msgid_plural "Accessories"
 msgid "Accessory"
-msgid_plural "Accessories"
-msgstr[0] "Akcesoria"
-msgstr[1] "Akcesoria"
-msgstr[2] "Akcesoria"
+msgstr "Akcesoria"
 
 msgid "Dates"
 msgstr "Daty"
@@ -6543,6 +6643,45 @@ msgid ""
 "AstroBin is preparing your data for download. Please check this page again "
 "in a while: the more images you have, the more time it will take."
 msgstr ""
+
+#~ msgid "Revision"
+#~ msgstr "Wersja"
+
+#~ msgid "Imaging telescope or lens"
+#~ msgid_plural "Imaging telescopes or lenses"
+#~ msgstr[0] "Teleskop główny"
+#~ msgstr[1] "Teleskop główny"
+#~ msgstr[2] "Teleskop główny"
+
+#~ msgid "Imaging camera"
+#~ msgid_plural "Imaging cameras"
+#~ msgstr[0] "Kamery główne"
+#~ msgstr[1] "Kamery główne"
+#~ msgstr[2] "Kamery główne"
+
+#~ msgid "Mount"
+#~ msgid_plural "Mounts"
+#~ msgstr[0] "Montaże"
+#~ msgstr[1] "Montaże"
+#~ msgstr[2] "Montaże"
+
+#~ msgid "Guiding telescope or lens"
+#~ msgid_plural "Guiding telescopes or lenses"
+#~ msgstr[0] "Teleskop prowadzący"
+#~ msgstr[1] "Teleskop prowadzący"
+#~ msgstr[2] "Teleskop prowadzący"
+
+#~ msgid "Guiding camera"
+#~ msgid_plural "Guiding cameras"
+#~ msgstr[0] "Kamera guidująca, prowadząca"
+#~ msgstr[1] "Kamera guidująca, prowadząca"
+#~ msgstr[2] "Kamera guidująca, prowadząca"
+
+#~ msgid "Focal reducer"
+#~ msgid_plural "Focal reducers"
+#~ msgstr[0] "Reduktory ogniskowej"
+#~ msgstr[1] "Reduktory ogniskowej"
+#~ msgstr[2] "Reduktory ogniskowej"
 
 #~ msgid "created a new public data pool"
 #~ msgstr "Utworzono nowy zestaw danych publicznych"
@@ -7793,9 +7932,6 @@ msgstr ""
 
 #~ msgid "Max. telescope aperture"
 #~ msgstr "Maksymalna apertura teleskopu"
-
-#~ msgid "Acquired after"
-#~ msgstr "Wykonane po"
 
 #~ msgid "Acquired before"
 #~ msgstr "Wykonane przed"
@@ -9299,9 +9435,6 @@ msgstr ""
 
 #~ msgid "Mark as done."
 #~ msgstr "Zaznacz jako wykonane."
-
-#~ msgid "Activate account at"
-#~ msgstr "Aktywuj konto klikając"
 
 #~ msgid "You are now registered. Activation email sent."
 #~ msgstr ""

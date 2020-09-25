@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2020-05-19 08:05+0000\n"
+"POT-Creation-Date: 2020-09-25 09:11+0000\n"
 "PO-Revision-Date: 2020-09-25 07:27+0000\n"
 "Last-Translator: Salvatore Iovene <salvatore@iovene.com>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -149,7 +149,8 @@ msgstr "Tutto fatto!"
 
 msgid ""
 "Your preference has been recorded and it has already been applied. Thank you!"
-msgstr "La tua preferenza è stata registrata ed è stata già appllicata. Grazie!"
+msgstr ""
+"La tua preferenza è stata registrata ed è stata già appllicata. Grazie!"
 
 msgid "Migrate donations"
 msgstr "Migra donazioni"
@@ -210,19 +211,23 @@ msgid "Thanks for supporting AstroBin!"
 msgstr "Grazie per il tuo supporto ad AstroBin!"
 
 #, python-format
-#| msgid ""
-#| "Your \"%(subscription_name)s\" subscription on AstroBin will expire in "
-#| "one week."
 msgid ""
 "Your \"%(subscription_name)s\" subscription on AstroBin has just expired."
 msgstr "Il tuo abbonamento \"%(subscription_name)s\" è appena scaduto."
 
+#, fuzzy
+#| msgid ""
+#| "When a Premium or Lite subscription on AstroBin expires, nothing happens "
+#| "to your images or any of your content. You are reverted to AstroBin Free "
+#| "and will not be able to upload new images until you renew, but you may "
+#| "continue to use AstroBin in all other aspects if you do not have any new "
+#| "images to share at the moment."
 msgid ""
-"When a Premium or Lite subscription on AstroBin expires, nothing happens to "
-"your images or any of your content. You are reverted to AstroBin Free and "
-"will not be able to upload new images until you renew, but you may continue "
-"to use AstroBin in all other aspects if you do not have any new images to "
-"share at the moment."
+"When a subscription on AstroBin expires, nothing happens to your images or "
+"any of your content. You are reverted to AstroBin Free and will not be able "
+"to upload new images until you renew, but you may continue to use AstroBin "
+"in all other aspects if you do not have any new images to share at the "
+"moment."
 msgstr ""
 "Quando un abbonamento Premium o Lite scade, non accade nulla alle tuo "
 "immagini o altro. Ritorni ad AstroBin Free e non potrai caricare nuove "
@@ -236,8 +241,9 @@ msgstr ""
 "Quando sarai pronto a rinnovare il tuo abbonamento, visita la seguente "
 "pagina:"
 
-#| msgid "Your premium subscription will expire in one week"
-msgid "Your premium subscription has just expired"
+#, fuzzy
+#| msgid "Your premium subscription has just expired"
+msgid "Your AstroBin subscription has just expired"
 msgstr "Il tuo abbonamento premium è appena scaduto"
 
 #, python-format
@@ -246,7 +252,14 @@ msgid ""
 "week."
 msgstr "Il tuo abbonamento \"%(subscription_name)s\" scadrà tra una settimana."
 
-msgid "Your premium subscription will expire in one week"
+msgid ""
+"PLEASE NOTE! At the moment, you cannot renew a subscription while it is "
+"still ongoing. Please wait until it is expired. Thank you!"
+msgstr ""
+
+#, fuzzy
+#| msgid "Your premium subscription will expire in one week"
+msgid "Your AstroBin subscription will expire in one week"
 msgstr "Il tuo abbonamento a Premium scadrà tra una settimana"
 
 #, python-format
@@ -278,6 +291,8 @@ msgstr ""
 msgid "Thank you!"
 msgstr "Grazie!"
 
-msgid "Your premium subscription will be automatically renewed in one week"
+#, fuzzy
+#| msgid "Your premium subscription will be automatically renewed in one week"
+msgid "Your AstroBin subscription will be automatically renewed in one week"
 msgstr ""
 "Il tuo abbonamento Premium sarà rinnovato automaticamente in una settimana"

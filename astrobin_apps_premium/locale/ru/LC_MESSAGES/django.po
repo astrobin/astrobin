@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2020-05-19 08:05+0000\n"
+"POT-Creation-Date: 2020-09-25 09:11+0000\n"
 "PO-Revision-Date: 2019-01-26 16:36+0000\n"
 "Last-Translator: sypai <sypai@mail.ru>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -207,12 +207,19 @@ msgid ""
 msgstr ""
 "Ваша \"%(subscription_name)s\" подписка на AstroBin истекает на неделе."
 
+#, fuzzy
+#| msgid ""
+#| "When a Premium or Lite subscription on AstroBin expires, nothing happens "
+#| "to your images or any of your content. You are reverted to AstroBin Free "
+#| "and will not be able to upload new images until you renew, but you may "
+#| "continue to use AstroBin in all other aspects if you do not have any new "
+#| "images to share at the moment."
 msgid ""
-"When a Premium or Lite subscription on AstroBin expires, nothing happens to "
-"your images or any of your content. You are reverted to AstroBin Free and "
-"will not be able to upload new images until you renew, but you may continue "
-"to use AstroBin in all other aspects if you do not have any new images to "
-"share at the moment."
+"When a subscription on AstroBin expires, nothing happens to your images or "
+"any of your content. You are reverted to AstroBin Free and will not be able "
+"to upload new images until you renew, but you may continue to use AstroBin "
+"in all other aspects if you do not have any new images to share at the "
+"moment."
 msgstr ""
 "Когда на AstroBin истекает Premium или Lite подписка, с вашими изображениями "
 "или любым содержимым ничего не случается. Вы возвращаетесь на AstroBin Free "
@@ -228,7 +235,7 @@ msgstr ""
 
 #, fuzzy
 #| msgid "Your premium subscription will expire in one week"
-msgid "Your premium subscription has just expired"
+msgid "Your AstroBin subscription has just expired"
 msgstr "Ваша премиум подписка истекает на неделе."
 
 #, python-format
@@ -238,7 +245,14 @@ msgid ""
 msgstr ""
 "Ваша \"%(subscription_name)s\" подписка на AstroBin истекает на неделе."
 
-msgid "Your premium subscription will expire in one week"
+msgid ""
+"PLEASE NOTE! At the moment, you cannot renew a subscription while it is "
+"still ongoing. Please wait until it is expired. Thank you!"
+msgstr ""
+
+#, fuzzy
+#| msgid "Your premium subscription will expire in one week"
+msgid "Your AstroBin subscription will expire in one week"
 msgstr "Ваша премиум подписка истекает на неделе."
 
 #, python-format
@@ -270,5 +284,7 @@ msgstr ""
 msgid "Thank you!"
 msgstr "Благодарим!"
 
-msgid "Your premium subscription will be automatically renewed in one week"
+#, fuzzy
+#| msgid "Your premium subscription will be automatically renewed in one week"
+msgid "Your AstroBin subscription will be automatically renewed in one week"
 msgstr "Ваша премиум подписка будет автоматически обновлена на неделе."

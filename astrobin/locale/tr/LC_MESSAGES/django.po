@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: 1.4\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2020-05-19 08:02+0000\n"
+"POT-Creation-Date: 2020-09-25 09:04+0000\n"
 "PO-Revision-Date: 2015-12-29 23:52+0000\n"
 "Last-Translator: bilgebay <bilgebay@gmail.com>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -787,7 +787,7 @@ msgid "You have already claimed this product."
 msgstr "Bu resmi zaten daha önce aday göstermiştiniz"
 
 msgid ""
-"Select a tag to order this collection by its value. If you see no optioons "
+"Select a tag to order this collection by its value. If you see no options "
 "here, it's because none of the images in this collection have key/value "
 "tags. PS: Images that lack this tag will appear at the bottom of the "
 "collection."
@@ -846,10 +846,6 @@ msgid ""
 "symbol between key and value, and provide one pair per line. These tags can "
 "be used to sort images by arbitrary properties."
 msgstr ""
-
-#, fuzzy
-msgid "Revision"
-msgstr "Görüntülenme"
 
 msgid "This field is required."
 msgstr ""
@@ -1091,8 +1087,10 @@ msgstr "Arnavutça"
 msgid "Polish"
 msgstr "Lehçe"
 
-msgid "Brazilian Portuguese"
-msgstr ""
+#, fuzzy
+#| msgid "Portugal"
+msgid "Portuguese"
+msgstr "Portekiz"
 
 #, fuzzy
 msgid "Greek"
@@ -1551,8 +1549,9 @@ msgstr "Açıklama"
 msgid "HTML tags are allowed."
 msgstr "HTML kodlarına izin verilmektedir."
 
-msgid "Uncompressed source (max 200 MB)"
-msgstr ""
+#, fuzzy
+msgid "Uncompressed source (max 100 MB)"
+msgstr "Yükleme zamanı"
 
 msgid ""
 "You can store the final processed image that came out of your favorite image "
@@ -1665,9 +1664,7 @@ msgstr "Yapay kanal"
 #, fuzzy
 #| msgid "Filter"
 msgid "Filter"
-msgid_plural "Filters"
-msgstr[0] "Filtre"
-msgstr[1] "Filtre"
+msgstr "Filtre"
 
 msgid "Binning"
 msgstr "Binning"
@@ -2504,6 +2501,12 @@ msgstr "Dosya seçilmedi"
 msgid "Choose file"
 msgstr "Dosya seçiniz"
 
+msgid "Help with translations!"
+msgstr "Çeviri yardımı!"
+
+msgid "Please select your language from the options above."
+msgstr "Yukarıdaki dil seçeneklerinden birini seçiniz."
+
 msgid "Notifications"
 msgstr "Bilgilendirmeler"
 
@@ -2587,6 +2590,25 @@ msgstr ""
 msgid "Thank you!"
 msgstr "Teşekkürler"
 
+msgid ""
+"If this user has been harassing you, and you shadow-ban them, all their "
+"activities on your content will be invisible to everyone except themselves."
+msgstr ""
+
+msgid ""
+"They will not know that they have been shadow-banned, and the goal is that "
+"eventually they will get bored while having caused no harm, since nobody saw "
+"what they posted."
+msgstr ""
+
+msgid "Continue"
+msgstr "Devam"
+
+msgid ""
+"You will remove your shadow-ban on this user, and their comments, messages, "
+"etc, will appear again on your content."
+msgstr ""
+
 msgid "Quick search"
 msgstr "Hızlı arama"
 
@@ -2632,12 +2654,16 @@ msgstr "Gelişmiş arama"
 msgid "Top picks"
 msgstr ""
 
-msgid "Stats"
-msgstr "İstatistikler"
+#, fuzzy
+msgid "Remote astrophotography"
+msgstr "Astrofotoğrafi ekipmanlarınızı düzenleyin"
 
 #, fuzzy
 msgid "Trending astrophotographers"
 msgstr "Astrofotoğrafi ekipmanlarınızı düzenleyin"
+
+msgid "Stats"
+msgstr "İstatistikler"
 
 msgid "Help"
 msgstr "Yardım"
@@ -2647,12 +2673,6 @@ msgstr "Bağlantı"
 
 msgid "User"
 msgstr "Kullanıcı"
-
-msgid "Help with translations!"
-msgstr "Çeviri yardımı!"
-
-msgid "Please select your language from the options above."
-msgstr "Yukarıdaki dil seçeneklerinden birini seçiniz."
 
 #, fuzzy
 msgid "AstroBin index"
@@ -3027,6 +3047,15 @@ msgstr "İçeriyor"
 msgid "Remove ads"
 msgstr "Verileri sil"
 
+#, fuzzy
+#| msgid "Acquired after"
+msgid "Acquired at"
+msgstr "Şu tarihten sonra çekilmiş"
+
+#, fuzzy
+msgid "Remove"
+msgstr "Verileri sil"
+
 #, python-format
 msgid ""
 "<strong>Leave a comment here</strong>, and remember that AstroBin is an "
@@ -3150,6 +3179,15 @@ msgstr "Orijinal resmi sil"
 msgid "Delete this revision only"
 msgstr "Bu revizyonu sil"
 
+#, fuzzy
+#| msgid "Delete conversation"
+msgid "Delete all other versions"
+msgstr "Diyaloğu sil"
+
+#, fuzzy
+msgid "Delete all revisions"
+msgstr "Resmi ve tüm revizyonlarını silmek istiyor musunuz?"
+
 msgid "Flag malfunctioning thumbnails"
 msgstr ""
 
@@ -3226,6 +3264,14 @@ msgstr "Profile gözat"
 
 msgid "Send private message"
 msgstr "Özel mesaj gönder"
+
+msgid "Shadow-ban"
+msgstr ""
+
+#, fuzzy
+#| msgid "Remove data"
+msgid "Remove shadow-ban"
+msgstr "Verileri sil"
 
 msgid "View"
 msgstr "Görünüm"
@@ -3352,13 +3398,31 @@ msgstr ""
 "Bu resim kalıcı olarak silinecektir ve bu işlem geri alınamaz. Revizyonları "
 "ise silinmeyecektir. Silmek istediğinizden emin misiniz?"
 
+#, fuzzy
+#| msgid "Delete this revision?"
+msgid "Delete all other versions?"
+msgstr "Bu revizyonu silmek istiyor musunuz?"
+
+msgid ""
+"You will delete all other revisions (if any), and the originally uploaded "
+"image, leaving the current revision as the final and only version of this "
+"image."
+msgstr ""
+
+#, fuzzy
+#| msgid "Delete this revision?"
+msgid "Delete all revisions?"
+msgstr "Bu revizyonu silmek istiyor musunuz?"
+
+msgid ""
+"You will delete all revisions, leaving the originally uploaded image as the "
+"final and only version of this image."
+msgstr ""
+
 msgid ""
 "This will move this image to your staging area, making it unlisted. The "
 "image will be accessible by anyone with a direct link."
 msgstr ""
-
-msgid "Continue"
-msgstr "Devam"
 
 msgid ""
 "This will trigger the regeneration of all thumbnails for this image and all "
@@ -3429,6 +3493,10 @@ msgid ""
 msgstr ""
 "Fotoğrafınız üzerinde uyguladığınız işleme tekniğinizi geliştirdiniz mi? O "
 "halde fotoğrafınızın yeni revizyonunu yükleyin!"
+
+#, python-format
+msgid "Over 100 MB? Try the <a href=\"%(url)s/%(id)s\">new beta uploader</a>!"
+msgstr ""
 
 msgid ""
 "Please note: AstroBin is not officially a backup service. So please also "
@@ -3595,6 +3663,9 @@ msgstr "Yükleniyor..."
 
 msgid "Next step: gear used"
 msgstr "Sonraki adım: kullanılan donanımlar"
+
+msgid "sponsor"
+msgstr ""
 
 msgid "Edit your image: gear used"
 msgstr "Resminizi düzenleyin: kullanılan donanımlar"
@@ -3767,10 +3838,6 @@ msgstr "Enlemi seçin"
 #| msgid "Select latitude"
 msgid "Galactic latitude"
 msgstr "Enlemi seçin"
-
-#, fuzzy
-msgid "Remove"
-msgstr "Verileri sil"
 
 msgid "View page"
 msgstr "Sayfaya gözat"
@@ -4234,6 +4301,48 @@ msgid ""
 msgstr ""
 
 msgid "You have images on AstroBin missing the \"Remote source\" information"
+msgstr ""
+
+msgid "Hi!"
+msgstr ""
+
+#, python-format
+msgid ""
+"We noticed that on <strong>%(date)s GMT</strong> you created an account on "
+"AstroBin, the image hosting service and social community for "
+"astrophotographers, but never got the chance to activate it."
+msgstr ""
+
+msgid "The account that you created has the following username:"
+msgstr ""
+
+msgid ""
+"If you would like to activate it now, please click on the following link:"
+msgstr ""
+
+#, fuzzy
+#| msgid "Activate account at"
+msgid "Activate my account"
+msgstr "Hesabınızı etkinleştirin -"
+
+msgid ""
+"If you don't, we will delete this account in a week. But don't worry, you're "
+"always welcome to join again!"
+msgstr ""
+
+msgid ""
+"If you already have another active account on AstroBin, please feel free to "
+"ignore this message."
+msgstr ""
+
+#, python-format
+msgid ""
+"We noticed that on %(date)s GMT you created an account on AstroBin, the "
+"image hosting service and social community for astrophotographers, but never "
+"got the chance to activate it."
+msgstr ""
+
+msgid "Would you like to activate your account on AstroBin?"
 msgstr ""
 
 #, fuzzy, python-format
@@ -4861,6 +4970,11 @@ msgstr "Diyaloğu sil"
 msgid "Approve post"
 msgstr ""
 
+#, python-format
+msgid ""
+"Editing a post is only allowed within %(minutes)s minutes after creating it."
+msgstr ""
+
 msgid "Topics you subscribe to"
 msgstr ""
 
@@ -5134,6 +5248,13 @@ msgstr "Yükleme zamanı"
 #, fuzzy
 msgid "Undelete images"
 msgstr "Amerika Birleşik Devletleri"
+
+msgid ""
+"The FREE account is to be considered a trial period. You can upload images "
+"10 times, after which you can't upload anymore. Deleting images doesn't "
+"decrease your upload counter: the FREE account is not meant to be used as a "
+"way to keep your latest 10 images."
+msgstr ""
 
 msgid "year"
 msgstr ""
@@ -5507,6 +5628,12 @@ msgid ""
 msgstr ""
 
 msgid "Would you like to upgrade to a higher plan?"
+msgstr ""
+
+#, python-format
+msgid ""
+"Try the <a href=\"%(url)s\">new beta uploader</a>: robust, with real "
+"progress bar, and 4 GB file size limit!"
 msgstr ""
 
 msgid "Upload as a work in progress"
@@ -6425,46 +6552,8 @@ msgid ""
 msgstr ""
 
 #, fuzzy
-msgid "Imaging telescope or lens"
-msgid_plural "Imaging telescopes or lenses"
-msgstr[0] "Fotoğraflayan teleskop ya da lensler"
-msgstr[1] "Fotoğraflayan teleskop ya da lensler"
-
-#, fuzzy
-msgid "Imaging camera"
-msgid_plural "Imaging cameras"
-msgstr[0] "Fotoğraflayan Kameralar"
-msgstr[1] "Fotoğraflayan Kameralar"
-
-#, fuzzy
-msgid "Mount"
-msgid_plural "Mounts"
-msgstr[0] "Kundaklar"
-msgstr[1] "Kundaklar"
-
-#, fuzzy
-msgid "Guiding telescope or lens"
-msgid_plural "Guiding telescopes or lenses"
-msgstr[0] "Kılavuz teleskoplar ya da lensler"
-msgstr[1] "Kılavuz teleskoplar ya da lensler"
-
-#, fuzzy
-msgid "Guiding camera"
-msgid_plural "Guiding cameras"
-msgstr[0] "Rehber Kameralar"
-msgstr[1] "Rehber Kameralar"
-
-#, fuzzy
-msgid "Focal reducer"
-msgid_plural "Focal reducers"
-msgstr[0] "Odak düşürücüler"
-msgstr[1] "Odak düşürücüler"
-
-#, fuzzy
 msgid "Accessory"
-msgid_plural "Accessories"
-msgstr[0] "Aksesuarlar"
-msgstr[1] "Aksesuarlar"
+msgstr "Aksesuarlar"
 
 msgid "Dates"
 msgstr "Tarihler"
@@ -6508,6 +6597,46 @@ msgid ""
 "AstroBin is preparing your data for download. Please check this page again "
 "in a while: the more images you have, the more time it will take."
 msgstr ""
+
+#, fuzzy
+#~ msgid "Revision"
+#~ msgstr "Görüntülenme"
+
+#, fuzzy
+#~ msgid "Imaging telescope or lens"
+#~ msgid_plural "Imaging telescopes or lenses"
+#~ msgstr[0] "Fotoğraflayan teleskop ya da lensler"
+#~ msgstr[1] "Fotoğraflayan teleskop ya da lensler"
+
+#, fuzzy
+#~ msgid "Imaging camera"
+#~ msgid_plural "Imaging cameras"
+#~ msgstr[0] "Fotoğraflayan Kameralar"
+#~ msgstr[1] "Fotoğraflayan Kameralar"
+
+#, fuzzy
+#~ msgid "Mount"
+#~ msgid_plural "Mounts"
+#~ msgstr[0] "Kundaklar"
+#~ msgstr[1] "Kundaklar"
+
+#, fuzzy
+#~ msgid "Guiding telescope or lens"
+#~ msgid_plural "Guiding telescopes or lenses"
+#~ msgstr[0] "Kılavuz teleskoplar ya da lensler"
+#~ msgstr[1] "Kılavuz teleskoplar ya da lensler"
+
+#, fuzzy
+#~ msgid "Guiding camera"
+#~ msgid_plural "Guiding cameras"
+#~ msgstr[0] "Rehber Kameralar"
+#~ msgstr[1] "Rehber Kameralar"
+
+#, fuzzy
+#~ msgid "Focal reducer"
+#~ msgid_plural "Focal reducers"
+#~ msgstr[0] "Odak düşürücüler"
+#~ msgstr[1] "Odak düşürücüler"
 
 #, fuzzy
 #~ msgid "AstroBin Raw Data"
@@ -7383,9 +7512,6 @@ msgstr ""
 
 #~ msgid "Max. telescope aperture"
 #~ msgstr "Max. teleskop açıklığı"
-
-#~ msgid "Acquired after"
-#~ msgstr "Şu tarihten sonra çekilmiş"
 
 #~ msgid "Acquired before"
 #~ msgstr "Şu tarihten önce çekilmiş"
@@ -8473,9 +8599,6 @@ msgstr ""
 
 #~ msgid "Mark as done."
 #~ msgstr "Tamamlandı olarak işaretle."
-
-#~ msgid "Activate account at"
-#~ msgstr "Hesabınızı etkinleştirin -"
 
 #~ msgid "You are now registered. Activation email sent."
 #~ msgstr "Kayıt işlemi tamamlandı. Etkinelştirme için e-posta gönderildi."

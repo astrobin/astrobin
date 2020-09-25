@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: AstroBin 1.4\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2020-05-19 08:02+0000\n"
+"POT-Creation-Date: 2020-09-25 09:04+0000\n"
 "PO-Revision-Date: 2015-12-30 11:27+0000\n"
 "Last-Translator: Koen_Dierckens <koen.dierckens@pandora.be>\n"
 "Language-Team: Dutch <LL@li.org>\n"
@@ -790,7 +790,7 @@ msgid "You have already claimed this product."
 msgstr "Je hebt dit produkt al geclaimd."
 
 msgid ""
-"Select a tag to order this collection by its value. If you see no optioons "
+"Select a tag to order this collection by its value. If you see no options "
 "here, it's because none of the images in this collection have key/value "
 "tags. PS: Images that lack this tag will appear at the bottom of the "
 "collection."
@@ -852,10 +852,6 @@ msgid ""
 "symbol between key and value, and provide one pair per line. These tags can "
 "be used to sort images by arbitrary properties."
 msgstr ""
-
-#, fuzzy
-msgid "Revision"
-msgstr "Reviews"
 
 msgid "This field is required."
 msgstr "Dit veld is verplicht."
@@ -1098,7 +1094,9 @@ msgstr "Albanisch"
 msgid "Polish"
 msgstr "Pools"
 
-msgid "Brazilian Portuguese"
+#, fuzzy
+#| msgid "Brazilian Portuguese"
+msgid "Portuguese"
 msgstr "Braziliaans Portugees"
 
 msgid "Greek"
@@ -1561,8 +1559,10 @@ msgstr "Beschrijving"
 msgid "HTML tags are allowed."
 msgstr "HTML tags zijn toegestaan."
 
-msgid "Uncompressed source (max 200 MB)"
-msgstr ""
+#, fuzzy
+#| msgid "Upload complete!"
+msgid "Uncompressed source (max 100 MB)"
+msgstr "Upload gelukt!"
 
 msgid ""
 "You can store the final processed image that came out of your favorite image "
@@ -1677,9 +1677,7 @@ msgstr "Synthetisch kanaal"
 #, fuzzy
 #| msgid "Filter"
 msgid "Filter"
-msgid_plural "Filters"
-msgstr[0] "Filter"
-msgstr[1] "Filter"
+msgstr "Filter"
 
 msgid "Binning"
 msgstr "Binning"
@@ -2545,6 +2543,12 @@ msgstr "Geen bestand geselecteerd"
 msgid "Choose file"
 msgstr "Kies bestand"
 
+msgid "Help with translations!"
+msgstr "Help met vertalen!"
+
+msgid "Please select your language from the options above."
+msgstr "Gelieve uw taal te kiezen uit bovenstaande opties."
+
 msgid "Notifications"
 msgstr "Kennisgevingen"
 
@@ -2632,6 +2636,25 @@ msgstr ""
 msgid "Thank you!"
 msgstr "Dank u!"
 
+msgid ""
+"If this user has been harassing you, and you shadow-ban them, all their "
+"activities on your content will be invisible to everyone except themselves."
+msgstr ""
+
+msgid ""
+"They will not know that they have been shadow-banned, and the goal is that "
+"eventually they will get bored while having caused no harm, since nobody saw "
+"what they posted."
+msgstr ""
+
+msgid "Continue"
+msgstr "Verdergaan"
+
+msgid ""
+"You will remove your shadow-ban on this user, and their comments, messages, "
+"etc, will appear again on your content."
+msgstr ""
+
 msgid "Quick search"
 msgstr "Snelzoeken"
 
@@ -2677,12 +2700,16 @@ msgstr "Geavanceerd zoeken"
 msgid "Top picks"
 msgstr ""
 
-msgid "Stats"
-msgstr "Statistieken"
+#, fuzzy
+msgid "Remote astrophotography"
+msgstr "Wijzig je astrofoto materiaal"
 
 #, fuzzy
 msgid "Trending astrophotographers"
 msgstr "Wijzig je astrofoto materiaal"
+
+msgid "Stats"
+msgstr "Statistieken"
 
 msgid "Help"
 msgstr "Hulp"
@@ -2692,12 +2719,6 @@ msgstr "Contact"
 
 msgid "User"
 msgstr "Gebruiker"
-
-msgid "Help with translations!"
-msgstr "Help met vertalen!"
-
-msgid "Please select your language from the options above."
-msgstr "Gelieve uw taal te kiezen uit bovenstaande opties."
 
 msgid "AstroBin index"
 msgstr "AstroBin index"
@@ -3120,6 +3141,14 @@ msgstr "Bevat"
 msgid "Remove ads"
 msgstr "Verwijder gegevens"
 
+#, fuzzy
+#| msgid "Acquired after"
+msgid "Acquired at"
+msgstr "Vastgelegd na"
+
+msgid "Remove"
+msgstr "Verwijderen"
+
 #, python-format
 msgid ""
 "<strong>Leave a comment here</strong>, and remember that AstroBin is an "
@@ -3244,6 +3273,15 @@ msgstr "Wis het originele beeld"
 msgid "Delete this revision only"
 msgstr "Wis deze revisie"
 
+#, fuzzy
+#| msgid "Delete conversation"
+msgid "Delete all other versions"
+msgstr "Conversatie verwijderen"
+
+#, fuzzy
+msgid "Delete all revisions"
+msgstr "Foto wissen, inclusief alle revisies?"
+
 msgid "Flag malfunctioning thumbnails"
 msgstr "Signaleer niet werkende voorbeeldfoto's"
 
@@ -3319,6 +3357,14 @@ msgstr "Bekijk profiel"
 
 msgid "Send private message"
 msgstr "Stuur privébericht"
+
+msgid "Shadow-ban"
+msgstr ""
+
+#, fuzzy
+#| msgid "Remove data"
+msgid "Remove shadow-ban"
+msgstr "Verwijder gegevens"
 
 msgid "View"
 msgstr "Bekijken"
@@ -3447,13 +3493,31 @@ msgstr ""
 "Deze foto wordt onherroepelijk gewist. De revisies blijven bewaard. Ben je "
 "zeker?"
 
+#, fuzzy
+#| msgid "Delete this revision?"
+msgid "Delete all other versions?"
+msgstr "Wis deze revisie?"
+
+msgid ""
+"You will delete all other revisions (if any), and the originally uploaded "
+"image, leaving the current revision as the final and only version of this "
+"image."
+msgstr ""
+
+#, fuzzy
+#| msgid "Delete this revision?"
+msgid "Delete all revisions?"
+msgstr "Wis deze revisie?"
+
+msgid ""
+"You will delete all revisions, leaving the originally uploaded image as the "
+"final and only version of this image."
+msgstr ""
+
 msgid ""
 "This will move this image to your staging area, making it unlisted. The "
 "image will be accessible by anyone with a direct link."
 msgstr ""
-
-msgid "Continue"
-msgstr "Verdergaan"
 
 msgid ""
 "This will trigger the regeneration of all thumbnails for this image and all "
@@ -3525,6 +3589,10 @@ msgid ""
 msgstr ""
 "Heb je gesleuteld aan het bewerken van je foto? Zet de nieuwe versie er dan "
 "bij!"
+
+#, python-format
+msgid "Over 100 MB? Try the <a href=\"%(url)s/%(id)s\">new beta uploader</a>!"
+msgstr ""
 
 msgid ""
 "Please note: AstroBin is not officially a backup service. So please also "
@@ -3694,6 +3762,9 @@ msgstr "Bezig met laden..."
 
 msgid "Next step: gear used"
 msgstr "Volgende stap: gebruikt materiaal"
+
+msgid "sponsor"
+msgstr ""
 
 msgid "Edit your image: gear used"
 msgstr "Wijzig je foto: gebruikt materiaal"
@@ -3869,9 +3940,6 @@ msgstr "Selecteer breedte"
 #| msgid "Select latitude"
 msgid "Galactic latitude"
 msgstr "Selecteer breedte"
-
-msgid "Remove"
-msgstr "Verwijderen"
 
 msgid "View page"
 msgstr "Bekijk pagina"
@@ -4334,6 +4402,50 @@ msgstr ""
 
 msgid "You have images on AstroBin missing the \"Remote source\" information"
 msgstr ""
+
+msgid "Hi!"
+msgstr ""
+
+#, python-format
+msgid ""
+"We noticed that on <strong>%(date)s GMT</strong> you created an account on "
+"AstroBin, the image hosting service and social community for "
+"astrophotographers, but never got the chance to activate it."
+msgstr ""
+
+msgid "The account that you created has the following username:"
+msgstr ""
+
+msgid ""
+"If you would like to activate it now, please click on the following link:"
+msgstr ""
+
+#, fuzzy
+#| msgid "Activate account at"
+msgid "Activate my account"
+msgstr "Activeer account op"
+
+msgid ""
+"If you don't, we will delete this account in a week. But don't worry, you're "
+"always welcome to join again!"
+msgstr ""
+
+msgid ""
+"If you already have another active account on AstroBin, please feel free to "
+"ignore this message."
+msgstr ""
+
+#, python-format
+msgid ""
+"We noticed that on %(date)s GMT you created an account on AstroBin, the "
+"image hosting service and social community for astrophotographers, but never "
+"got the chance to activate it."
+msgstr ""
+
+#, fuzzy
+#| msgid "Would you like to start using your real name on AstroBin?"
+msgid "Would you like to activate your account on AstroBin?"
+msgstr "Wens je om je echte naam te gebruiken op AstroBin?"
 
 #, fuzzy, python-format
 #| msgid ""
@@ -4962,6 +5074,11 @@ msgstr "Bericht verwijderen?"
 msgid "Approve post"
 msgstr "Bericht goedkeuren"
 
+#, python-format
+msgid ""
+"Editing a post is only allowed within %(minutes)s minutes after creating it."
+msgstr ""
+
 msgid "Topics you subscribe to"
 msgstr "Onderwerpen waarop je je hebt geabonneerd"
 
@@ -5251,6 +5368,13 @@ msgstr "Upload gelukt!"
 #| msgid "Unlimited images"
 msgid "Undelete images"
 msgstr "Ongelimiteerd aantal foto's"
+
+msgid ""
+"The FREE account is to be considered a trial period. You can upload images "
+"10 times, after which you can't upload anymore. Deleting images doesn't "
+"decrease your upload counter: the FREE account is not meant to be used as a "
+"way to keep your latest 10 images."
+msgstr ""
 
 msgid "year"
 msgstr "jaar"
@@ -5642,6 +5766,12 @@ msgstr "Dankjewel voor je Premium account keuze! Geniet van onbeperkte opslag."
 #| msgid "Would you like to upgrade?"
 msgid "Would you like to upgrade to a higher plan?"
 msgstr "Wil je upgraden ?"
+
+#, python-format
+msgid ""
+"Try the <a href=\"%(url)s\">new beta uploader</a>: robust, with real "
+"progress bar, and 4 GB file size limit!"
+msgstr ""
 
 msgid "Upload as a work in progress"
 msgstr "Uploaden van een werk in uitvoering"
@@ -6573,46 +6703,8 @@ msgstr ""
 "worden gegenereerd."
 
 #, fuzzy
-msgid "Imaging telescope or lens"
-msgid_plural "Imaging telescopes or lenses"
-msgstr[0] "Telescopen en/of lenzen die je gebruikt om te fotograferen"
-msgstr[1] "Telescopen en/of lenzen die je gebruikt om te fotograferen"
-
-#, fuzzy
-msgid "Imaging camera"
-msgid_plural "Imaging cameras"
-msgstr[0] "Hoofdcamera's"
-msgstr[1] "Hoofdcamera's"
-
-#, fuzzy
-msgid "Mount"
-msgid_plural "Mounts"
-msgstr[0] "Monteringen"
-msgstr[1] "Monteringen"
-
-#, fuzzy
-msgid "Guiding telescope or lens"
-msgid_plural "Guiding telescopes or lenses"
-msgstr[0] "Volgtelescopen en/of lenzen"
-msgstr[1] "Volgtelescopen en/of lenzen"
-
-#, fuzzy
-msgid "Guiding camera"
-msgid_plural "Guiding cameras"
-msgstr[0] "Volgcamera's"
-msgstr[1] "Volgcamera's"
-
-#, fuzzy
-msgid "Focal reducer"
-msgid_plural "Focal reducers"
-msgstr[0] "Focal Reducers"
-msgstr[1] "Focal Reducers"
-
-#, fuzzy
 msgid "Accessory"
-msgid_plural "Accessories"
-msgstr[0] "Accessoires"
-msgstr[1] "Accessoires"
+msgstr "Accessoires"
 
 msgid "Dates"
 msgstr "Datums"
@@ -6655,6 +6747,46 @@ msgid ""
 "AstroBin is preparing your data for download. Please check this page again "
 "in a while: the more images you have, the more time it will take."
 msgstr ""
+
+#, fuzzy
+#~ msgid "Revision"
+#~ msgstr "Reviews"
+
+#, fuzzy
+#~ msgid "Imaging telescope or lens"
+#~ msgid_plural "Imaging telescopes or lenses"
+#~ msgstr[0] "Telescopen en/of lenzen die je gebruikt om te fotograferen"
+#~ msgstr[1] "Telescopen en/of lenzen die je gebruikt om te fotograferen"
+
+#, fuzzy
+#~ msgid "Imaging camera"
+#~ msgid_plural "Imaging cameras"
+#~ msgstr[0] "Hoofdcamera's"
+#~ msgstr[1] "Hoofdcamera's"
+
+#, fuzzy
+#~ msgid "Mount"
+#~ msgid_plural "Mounts"
+#~ msgstr[0] "Monteringen"
+#~ msgstr[1] "Monteringen"
+
+#, fuzzy
+#~ msgid "Guiding telescope or lens"
+#~ msgid_plural "Guiding telescopes or lenses"
+#~ msgstr[0] "Volgtelescopen en/of lenzen"
+#~ msgstr[1] "Volgtelescopen en/of lenzen"
+
+#, fuzzy
+#~ msgid "Guiding camera"
+#~ msgid_plural "Guiding cameras"
+#~ msgstr[0] "Volgcamera's"
+#~ msgstr[1] "Volgcamera's"
+
+#, fuzzy
+#~ msgid "Focal reducer"
+#~ msgid_plural "Focal reducers"
+#~ msgstr[0] "Focal Reducers"
+#~ msgstr[1] "Focal Reducers"
 
 #~ msgid "created a new public data pool"
 #~ msgstr "maakte een nieuwe publieke gegevensbank aan"
@@ -7911,9 +8043,6 @@ msgstr ""
 
 #~ msgid "Max. telescope aperture"
 #~ msgstr "Max. opening telescoop"
-
-#~ msgid "Acquired after"
-#~ msgstr "Vastgelegd na"
 
 #~ msgid "Acquired before"
 #~ msgstr "Vastgelegd voor"
@@ -9451,9 +9580,6 @@ msgstr ""
 
 #~ msgid "Mark as done."
 #~ msgstr "Markeren als uitgevoerd."
-
-#~ msgid "Activate account at"
-#~ msgstr "Activeer account op"
 
 #~ msgid "You are now registered. Activation email sent."
 #~ msgstr "Je bent nu ingeschreven. Er werd een email naar je gestuurd."
