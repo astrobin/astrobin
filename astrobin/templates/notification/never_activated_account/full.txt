@@ -1,0 +1,34 @@
+{% load i18n %}
+
+{% blocktrans trimmed %}
+    Hi!
+{% endblocktrans %}
+
+{% blocktrans trimmed %}
+    We noticed that on {{ date }} GMT you created an account on AstroBin, the image hosting service and social community
+    for astrophotographers, but never got the chance to activate it.
+{% endblocktrans %}
+
+{% blocktrans trimmed %}
+    The account that you created has the following username:
+{% endblocktrans %}
+
+{{ username }}
+
+{% blocktrans trimmed %}
+    If you would like to activate it now, please click on the following link:
+{% endblocktrans %}
+
+{{ activation_link }}
+
+{% blocktrans trimmed %}
+    If you don't, we will delete this account in a week. But don't worry, you're always welcome to join again!
+{% endblocktrans %}
+
+{% blocktrans trimmed %}
+    If you already have another active account on AstroBin, please feel free to ignore this message.
+{% endblocktrans %}
+
+{% blocktrans trimmed %}
+    Thank you!
+{% endblocktrans %}

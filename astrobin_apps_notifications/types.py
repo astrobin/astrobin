@@ -179,5 +179,11 @@ NOTICE_TYPES = (
         _('You have images with a missing "Remote source"'),
         '',
         2
+    ),
+    (
+        'never_activated_account',
+        _('Would you like to activate your account?"'),
+        '',
+        2
     )
 )

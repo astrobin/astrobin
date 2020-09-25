@@ -2269,6 +2269,10 @@ class UserProfile(SafeDeleteModel):
         null=True
     )
 
+    never_activated_account_reminder_sent = models.DateTimeField(
+        null=True
+    )
+
     # Preferences (notification preferences are stored in the django
     # notification model)
     language = models.CharField(
