@@ -1,10 +1,11 @@
+from datetime import timedelta
+
+from django.test import TestCase
+from django.utils import timezone
 from mock import patch
 
-# Django
-from django.test import TestCase
-
-# AstroBin
-from astrobin.utils import get_client_country_code
+from astrobin import utils
+from astrobin.tests.generators import Generators
 
 
 class UtilsTest(TestCase):
@@ -14,4 +15,66 @@ class UtilsTest(TestCase):
         mock_country.return_value = "CH"
         mock_get_client_ip.return_value = "123.123.123.123"
 
-        self.assertEquals("CH", get_client_country_code(None))
+        self.assertEquals("CH", utils.get_client_country_code(None))
+
+    def test_never_activated_accounts_no_users(self):
+        self.assertEquals(0, utils.never_activated_accounts().count())
+
+    def test_never_activated_accounts_none_found_too_recent(self):
+        u = Generators.user()
+        u.is_active = False
+        u.date_joined = timezone.now() - timedelta(1)
+        u.save()
+
+        accounts = utils.never_activated_accounts()
+
+        self.assertEquals(0, accounts.count())
+
+    def test_never_activated_accounts_none_found_already_activated(self):
+        u = Generators.user()
+        u.is_active = True
+        u.date_joined = timezone.now() - timedelta(15)
+        u.save()
+
+        accounts = utils.never_activated_accounts()
+
+        self.assertEquals(0, accounts.count())
+
+    def test_never_activated_accounts_none_found_already_sent_reminder(self):
+        u = Generators.user()
+        u.is_active = False
+        u.date_joined = timezone.now() - timedelta(15)
+        u.save()
+
+        u.userprofile.never_activated_account_reminder_sent = timezone.now()
+        u.userprofile.save()
+
+        accounts = utils.never_activated_accounts()
+
+        self.assertEquals(0, accounts.count())
+
+    def test_never_activated_accounts_one_found(self):
+        u = Generators.user()
+        u.is_active = False
+        u.date_joined = timezone.now() - timedelta(15)
+        u.save()
+
+        accounts = utils.never_activated_accounts()
+
+        self.assertEquals(1, accounts.count())
+        self.assertEquals(u, accounts.first())
+
+    def test_never_activated_accounts_two_found(self):
+        first = Generators.user()
+        first.is_active = False
+        first.date_joined = timezone.now() - timedelta(15)
+        first.save()
+
+        second = Generators.user()
+        second.is_active = False
+        second.date_joined = timezone.now() - timedelta(15)
+        second.save()
+
+        accounts = utils.never_activated_accounts()
+
+        self.assertEquals(2, accounts.count())

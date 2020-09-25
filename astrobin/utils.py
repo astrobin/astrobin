@@ -4,6 +4,7 @@ import sys
 
 import pytz
 from django.conf import settings
+from django.contrib.auth.models import User
 from django.contrib.gis.geoip2 import GeoIP2
 from django.core.files.images import get_image_dimensions
 from django.db.models import Count
@@ -173,7 +174,7 @@ def inactive_accounts():
 
     from astrobin.models import Image, UserProfile
 
-    recipientPks = []
+    recipient_pks = []
     profiles = UserProfile.objects \
         .annotate(num_images=Count("user__image")) \
         .filter(num_images__gt=0)
@@ -188,9 +189,20 @@ def inactive_accounts():
                     and (profile.inactive_account_reminder_sent is None
                          or profile.inactive_account_reminder_sent < two_months_ago):
                 # This user has at least 1 upload but all of them are older than 2 months
-                recipientPks.append(profile.pk)
+                recipient_pks.append(profile.pk)
 
-    return UserProfile.objects.filter(pk__in=recipientPks)
+    return UserProfile.objects.filter(pk__in=recipient_pks)
+
+
+def never_activated_accounts():
+    """Gets all the users who created account over 2 weeks ago but never activated it."""
+
+    two_weeks_ago = timezone.now() - datetime.timedelta(days=14)
+    return User.objects.filter(
+        is_active=False,
+        date_joined__lt=two_weeks_ago,
+        userprofile__never_activated_account_reminder_sent=None
+    )
 
 
 def uniq(seq):
