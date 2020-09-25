@@ -205,6 +205,18 @@ def never_activated_accounts():
     )
 
 
+def never_activated_accounts_to_be_deleted():
+    """Gets all the users who created account over 3 weeks ago but never activated it."""
+
+    three_weeks_ago = timezone.now() - datetime.timedelta(days=21)
+    return User.objects.filter(
+        is_active=False,
+        date_joined__lt=three_weeks_ago,
+    ).exclude(
+        userprofile__never_activated_account_reminder_sent=None
+    )
+
+
 def uniq(seq):
     # Not order preserving
     keys = {}

@@ -29,7 +29,7 @@ from registration.backends.hmac.views import RegistrationView
 from requests import Response
 
 from astrobin.models import BroadcastEmail, Image, DataDownloadRequest, ImageRevision
-from astrobin.utils import inactive_accounts, never_activated_accounts
+from astrobin.utils import inactive_accounts, never_activated_accounts, never_activated_accounts_to_be_deleted
 from astrobin_apps_images.models import ThumbnailGroup
 from astrobin_apps_images.services import ImageService
 from astrobin_apps_notifications.utils import push_notification
@@ -243,6 +243,15 @@ def send_never_activated_account_reminder():
         user.userprofile.never_activated_account_reminder_sent = timezone.now()
         user.userprofile.save()
 
+        logger.debug("Sent 'never activated account reminder' to %s" % user.username)
+
+
+@shared_task()
+def delete_never_activated_accounts():
+    users = never_activated_accounts_to_be_deleted()
+    count = users.count()
+    users.delete()
+    logger.debug("Deleted %d inactive accounts" % count)
 
 @shared_task()
 def prepare_download_data_archive(request_id):

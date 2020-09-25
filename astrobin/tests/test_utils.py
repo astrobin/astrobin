@@ -78,3 +78,77 @@ class UtilsTest(TestCase):
         accounts = utils.never_activated_accounts()
 
         self.assertEquals(2, accounts.count())
+
+    def test_never_activated_accounts_to_be_deleted_no_users(self):
+        self.assertEquals(0, utils.never_activated_accounts_to_be_deleted().count())
+
+    def test_never_activated_accounts_to_be_deleted_none_found_too_recent(self):
+        u = Generators.user()
+        u.is_active = False
+        u.date_joined = timezone.now() - timedelta(20)
+        u.save()
+
+        u.userprofile.never_activated_account_reminder_sent = timezone.now()
+        u.userprofile.save()
+
+        accounts = utils.never_activated_accounts_to_be_deleted()
+
+        self.assertEquals(0, accounts.count())
+
+    def test_never_activated_accounts_to_be_deleted_none_found_already_activated(self):
+        u = Generators.user()
+        u.is_active = True
+        u.date_joined = timezone.now() - timedelta(22)
+        u.save()
+
+        u.userprofile.never_activated_account_reminder_sent = timezone.now()
+        u.userprofile.save()
+
+        accounts = utils.never_activated_accounts_to_be_deleted()
+
+        self.assertEquals(0, accounts.count())
+
+    def test_never_activated_accounts_to_be_deleted_none_does_not_have_already_sent_reminder(self):
+        u = Generators.user()
+        u.is_active = False
+        u.date_joined = timezone.now() - timedelta(22)
+        u.save()
+
+        accounts = utils.never_activated_accounts_to_be_deleted()
+
+        self.assertEquals(0, accounts.count())
+
+    def test_never_activated_accounts_to_be_deleted_one_found(self):
+        u = Generators.user()
+        u.is_active = False
+        u.date_joined = timezone.now() - timedelta(22)
+        u.save()
+
+        u.userprofile.never_activated_account_reminder_sent = timezone.now()
+        u.userprofile.save()
+
+        accounts = utils.never_activated_accounts_to_be_deleted()
+
+        self.assertEquals(1, accounts.count())
+        self.assertEquals(u, accounts.first())
+
+    def test_never_activated_accounts_to_be_deleted_two_found(self):
+        first = Generators.user()
+        first.is_active = False
+        first.date_joined = timezone.now() - timedelta(22)
+        first.save()
+
+        first.userprofile.never_activated_account_reminder_sent = timezone.now()
+        first.userprofile.save()
+
+        second = Generators.user()
+        second.is_active = False
+        second.date_joined = timezone.now() - timedelta(22)
+        second.save()
+
+        second.userprofile.never_activated_account_reminder_sent = timezone.now()
+        second.userprofile.save()
+
+        accounts = utils.never_activated_accounts_to_be_deleted()
+
+        self.assertEquals(2, accounts.count())
