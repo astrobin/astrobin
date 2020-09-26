@@ -98,7 +98,7 @@ def get_client_ip(request):
 def get_client_country_code(request):
     try:
         DEBUG_COUNTRY = request.GET.get('DEBUG_COUNTRY', None)
-        if DEBUG_COUNTRY is not None:
+        if DEBUG_COUNTRY:
             return DEBUG_COUNTRY
     except AttributeError:
         pass

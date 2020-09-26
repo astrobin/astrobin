@@ -1046,6 +1046,10 @@ BODY:first-of-type ul.as-list, x:-moz-any-link, x:default { /* Target FF 3.5+ */
 }
 
 .technical-card {
+  .subtle-container {
+    overflow: visible;
+  }
+
   p {
     margin: $spacer-small 0;
   }
@@ -2844,9 +2848,11 @@ li.revisions {
     padding: 1rem;
 
     .equipment-brand-listing {
-      .shop-button {
-        margin-top: 1rem;
+      .logo {
+        margin-bottom: .75rem;
+      }
 
+      .shop-button {
         i {
           margin-right: .25rem;
         }

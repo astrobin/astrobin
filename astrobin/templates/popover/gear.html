@@ -2,6 +2,7 @@
 {% load tags %}
 {% load astrobin_apps_images_tags %}
 {% load astrobin_apps_equipment_tags %}
+{% load astrobin_apps_premium_tags %}
 {% load toggleproperty_tags %}
 
 <div class="gear-popover">
@@ -67,9 +68,11 @@
         <div class="equipment-brand-listings">
             {% for listing in gear|equipment_brand_listings:REQUEST_COUNTRY %}
                 <div class="equipment-brand-listing">
-                    <a href="{{ listing.url }}?{% equipment_brand_listing_utm_tags %}" target="_blank">
-                        <img class="logo" src="{{ listing.retailer.logo.url }}" alt="{{ listing.retailer }}">
-                    </a>
+                    {% if request.user|show_ads and not image.user|is_any_ultimate %}
+                        <a href="{{ listing.url }}?{% equipment_brand_listing_utm_tags %}" target="_blank">
+                            <img class="logo" src="{{ listing.retailer.logo.url }}" alt="{{ listing.retailer }}">
+                        </a>
+                    {% endif %}
 
                     <a href="{{ listing.url }}?{% equipment_brand_listing_utm_tags %}" target="_blank"
                        class="shop-button btn btn-block">
