@@ -1,0 +1,51 @@
+@import "variables";
+
+.ui-tooltip {
+  width: auto !important;
+}
+
+.ui-tooltip-default .ui-tooltip-titlebar,
+.ui-tooltip-default .ui-tooltip-content {
+  background: $grey-8;
+  border-color: $grey-7;
+  @include box-shadow-subtle;
+  color: $text-color;
+  padding: 1rem;
+
+  .header {
+    background: linear-gradient($grey-8, $grey-9);
+    border-bottom: 1px solid $grey-7;
+    margin: -1rem -1rem 0;
+    padding: 1rem;
+
+    h3 {
+      color: $strong-text-color;
+      margin: 0;
+    }
+
+    p {
+      margin: 0;
+    }
+  }
+
+  .data {
+    padding: .5rem 0;
+
+    p {
+      margin: .5rem 0;
+    }
+  }
+
+  .actions {
+    margin: 0;
+    padding-top: $spacer-large;
+    border-top: 1px solid $grey-7;
+    text-align: right;
+  }
+}
+
+.ui-tooltip .ui-tooltip-tip,
+.ui-tooltip .ui-tooltip-tip * {
+  background: $grey-8;
+  border-color: $grey-7;
+}

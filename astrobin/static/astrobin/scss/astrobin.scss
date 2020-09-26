@@ -10,6 +10,7 @@
 @import "progress";
 @import "select2";
 @import "uniform";
+@import "ui-tooltip";
 
 @import "forum";
 @import "search";
@@ -1981,43 +1982,6 @@ p.small {
   position: relative;
 }
 
-.ui-tooltip, .qtip {
-  //max-width: 400px;
-  //min-width: 250px;
-}
-
-.ui-tooltip-default .ui-tooltip-titlebar,
-.ui-tooltip-default .ui-tooltip-content {
-  background: $grey-8;
-  border-color: $grey-7;
-  @include box-shadow-subtle;
-  color: $text-color;
-
-  h3 {
-    color: $strong-text-color;
-    border-bottom: 1px solid $grey-7;
-    margin: 1rem 0;
-  }
-
-  p {
-    margin: .5rem 0;
-  }
-
-  .actions {
-    margin-top: $spacer-large;
-    padding-top: $spacer-large;
-    padding-bottom: $spacer-medium;
-    border-top: 1px solid $grey-7;
-    text-align: right;
-  }
-}
-
-.ui-tooltip .ui-tooltip-tip,
-.ui-tooltip .ui-tooltip-tip * {
-  background: $grey-8;
-  border-color: $grey-7;
-}
-
 .row.section {
   margin-bottom: $spacer-xlarge;
 }
@@ -2862,6 +2826,23 @@ li.revisions {
 
   th, td {
     border-color: $grey-8;
+  }
+
+  .equipment-brand-listings {
+    border-top: 1px solid $grey-7;
+    background: $grey-6 url(../images/background-tile.png);
+    margin: 0 -1rem;
+    padding: 1rem;
+
+    .equipment-brand-listing {
+      .shop-button {
+        margin-top: 1rem;
+
+        i {
+          margin-right: .25rem;
+        }
+      }
+    }
   }
 }
 
