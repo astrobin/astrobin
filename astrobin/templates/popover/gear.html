@@ -1,6 +1,7 @@
 {% load i18n %}
 {% load tags %}
 {% load astrobin_apps_images_tags %}
+{% load astrobin_apps_equipment_tags %}
 {% load toggleproperty_tags %}
 
 <div class="gear-popover">
@@ -62,18 +63,19 @@
         {% endif %}
     </div>
 
-    {% if gear.equipment_brand_listings %}
+    {% if gear|equipment_brand_listings:REQUEST_COUNTRY %}
         <div class="equipment-brand-listings">
-            {% for listing in gear.equipment_brand_listings.all %}
+            {% for listing in gear|equipment_brand_listings:REQUEST_COUNTRY %}
                 <div class="equipment-brand-listing">
-                    <a href="{{ listing.url }}" target="_blank">
+                    <a href="{{ listing.url }}?{% equipment_brand_listing_utm_tags %}" target="_blank">
                         <img class="logo" src="{{ listing.retailer.logo.url }}" alt="{{ listing.retailer }}">
                     </a>
 
-                    <a href="{{ listing.url }}" target="_blank" class="shop-button btn btn-block">
+                    <a href="{{ listing.url }}?{% equipment_brand_listing_utm_tags %}" target="_blank"
+                       class="shop-button btn btn-block">
                         <i class="icon-shopping-cart"></i>
                         {% blocktrans trimmed with brand=listing.brand retailer=listing.retailer %}
-                            Shop <strong>{{ brand }}</strong> at <strong>{{ retailer }}</strong>
+                            Shop {{ brand }} at {{ retailer }}
                         {% endblocktrans %}
                     </a>
                 </div>

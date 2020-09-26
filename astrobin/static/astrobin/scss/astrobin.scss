@@ -1064,6 +1064,15 @@ BODY:first-of-type ul.as-list, x:-moz-any-link, x:default { /* Target FF 3.5+ */
   .image-histogram {
     margin-top: $spacer-xxlarge;
   }
+
+  .gear {
+    .icon-shopping-cart {
+      padding: 2px 4px;
+      margin-left: .25rem;
+      color: goldenrod;
+      text-shadow: 0 0 3px rgba(0, 0, 0, .33);
+    }
+  }
 }
 
 .card-label {

@@ -35,8 +35,8 @@ class EquipmentBrandRetailer(SafeDeleteModel):
     # CSV list of country codes where this retailer operates.
     countries = models.CharField(
         max_length=120,
-        null=False,
-        blank=False,
+        null=True,
+        blank=True,
     )
 
     def __unicode__(self):

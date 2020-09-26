@@ -56,7 +56,7 @@ from astrobin.models import Image, UserProfile, Gear, Location, ImageRevision, D
     Accessory, GearHardMergeRedirect, GlobalStat, App, GearMakeAutoRename, Acquisition
 from astrobin.shortcuts import ajax_response, ajax_success, ajax_fail
 from astrobin.templatetags.tags import in_upload_wizard
-from astrobin.utils import to_user_timezone
+from astrobin.utils import to_user_timezone, get_client_country_code
 from astrobin_apps_images.services import ImageService
 from astrobin_apps_notifications.utils import push_notification
 from astrobin_apps_platesolving.forms import PlateSolvingSettingsForm, PlateSolvingAdvancedSettingsForm
@@ -2442,6 +2442,7 @@ def gear_popover_ajax(request, id):
         'gear': gear,
         'is_authenticated': request.user.is_authenticated(),
         'IMAGES_URL': settings.IMAGES_URL,
+        'REQUEST_COUNTRY': get_client_country_code(request),
     })
 
     response_dict = {

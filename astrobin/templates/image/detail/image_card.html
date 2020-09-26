@@ -1,4 +1,5 @@
 {% load common_tags %}
+{% load astrobin_apps_equipment_tags %}
 {% load astrobin_apps_premium_tags %}
 {% load astrobin_apps_platesolving_tags %}
 {% load astrobin_apps_remote_source_affiliation_tags %}
@@ -33,7 +34,24 @@
                                         <strong class="card-label">{% trans i.0 %}:</strong>
                                         {% for g in i.1 %}
                                             <span rel="popover" class="gear-popover-label"
-                                                  data-load="{% url 'gear_popover_ajax' g.id %}">{{ g }}</span>{% if not forloop.last %},&nbsp;{% endif %}
+                                                  data-load="{% url 'gear_popover_ajax' g.id %}{% query_string 'DEBUG_COUNTRY=' '' %}">
+                                                {{ g }}
+                                            </span>
+
+                                            {% with g|equipment_brand_listings:REQUEST_COUNTRY as listings %}
+                                                {% if listings|length == 1 %}
+                                                    <a href="{{ listings.all.0.url }}?{% equipment_brand_listing_utm_tags %}" target="_blank">
+                                                        <i class="icon-shopping-cart" rel="tooltip"
+                                                           data-placement="bottom" title="
+                                                           {% blocktrans trimmed with brand=listings.all.0.brand retailer=listings.all.0.retailer %}
+                                                               Shop {{ brand }} at {{ retailer }}
+                                                           {% endblocktrans %}
+                                                        "></i>
+                                                    </a>
+                                                {% endif %}
+                                            {% endwith %}
+
+                                            {% if not forloop.last %}&nbsp;&middot;&nbsp;{% endif %}
                                         {% endfor %}
                                     </p>
                                 {% endif %}
