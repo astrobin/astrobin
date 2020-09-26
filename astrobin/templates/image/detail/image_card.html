@@ -32,12 +32,8 @@
                                     <p>
                                         <strong class="card-label">{% trans i.0 %}:</strong>
                                         {% for g in i.1 %}
-                                            <a rel="popover"
-                                               class="gear-popover"
-                                               data-load="{% url 'gear_popover_ajax' g.id %}"
-                                               href="{% url 'gear_page' g.id g.slug %}">{{ g }}</a>
-                                            {% if not forloop.last %}
-                                                ,&nbsp;{% endif %}
+                                            <span rel="popover" class="gear-popover-label"
+                                                  data-load="{% url 'gear_popover_ajax' g.id %}">{{ g }}</span>{% if not forloop.last %},&nbsp;{% endif %}
                                         {% endfor %}
                                     </p>
                                 {% endif %}

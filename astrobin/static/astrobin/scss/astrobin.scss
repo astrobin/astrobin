@@ -1988,32 +1988,34 @@ p.small {
 
 .ui-tooltip-default .ui-tooltip-titlebar,
 .ui-tooltip-default .ui-tooltip-content {
-  background: $grey-6-dark url('../images/darker-panel-tile.png');
-  border-color: #111;
+  background: $grey-8;
+  border-color: $grey-7;
   @include box-shadow-subtle;
   color: $text-color;
 
   h3 {
     color: $strong-text-color;
-    border-bottom: 1px solid #232323;
+    border-bottom: 1px solid $grey-7;
+    margin: 1rem 0;
   }
 
   p {
-    margin-bottom: 2px;
+    margin: .5rem 0;
   }
 
   .actions {
     margin-top: $spacer-large;
     padding-top: $spacer-large;
     padding-bottom: $spacer-medium;
-    border-top: 1px solid #232323;
+    border-top: 1px solid $grey-7;
     text-align: right;
   }
 }
 
 .ui-tooltip .ui-tooltip-tip,
 .ui-tooltip .ui-tooltip-tip * {
-  display: none;
+  background: $grey-8;
+  border-color: $grey-7;
 }
 
 .row.section {
@@ -2839,6 +2841,17 @@ li.revisions {
     color: #c3c3c3;
     font-size: 13px;
     line-height: 15px;
+  }
+}
+
+.gear-popover-label {
+  padding: 0;
+  color: $link-color;
+  cursor: pointer;
+
+
+  &:hover {
+    border-bottom: 1px dotted $link-color;
   }
 }
 

@@ -19,7 +19,7 @@
     {% if is_authenticated %}
         {% add_remove_toggleproperty "follow" subject request.user %}
     {% endif %}
-    <a class="btn btn-mini btn-primary" href="/search/?q={{subject.mainId|escape|cut:" "}}">{% trans "Find images" %}</a>
-    <a class="btn btn-mini" href="{% url 'subject_page' subject.id %}">{% trans "View page" %}</a>
+    <a class="btn btn-primary" href="/search/?q={{subject.mainId|escape|cut:" "}}">{% trans "Find images" %}</a>
+    <a class="btn" href="{% url 'subject_page' subject.id %}">{% trans "View page" %}</a>
 </div>
 
