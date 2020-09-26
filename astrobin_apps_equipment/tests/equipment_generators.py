@@ -2,7 +2,7 @@ from django.template.defaultfilters import slugify
 
 from astrobin_apps_equipment.models.equipment_brand import EquipmentBrand
 from astrobin_apps_equipment.models.equipment_brand_listing import EquipmentBrandListing
-from astrobin_apps_equipment.models.equipment_brand_retailer import EquipmentBrandRetailer
+from astrobin_apps_equipment.models.equipment_retailer import EquipmentRetailer
 
 
 class EquipmentGenerators:
@@ -16,8 +16,8 @@ class EquipmentGenerators:
         )
 
     @staticmethod
-    def equipmentBrandRetailer():
-        return EquipmentBrandRetailer.objects.create(
+    def equipmentRetailer():
+        return EquipmentRetailer.objects.create(
             name="Test retailer",
             website="https://www.test-retailer.com",
         )
@@ -25,7 +25,7 @@ class EquipmentGenerators:
     @staticmethod
     def equipmentBrandListing():
         brand = EquipmentGenerators.equipmentBrand()
-        retailer = EquipmentGenerators.equipmentBrandRetailer()
+        retailer = EquipmentGenerators.equipmentRetailer()
 
         return EquipmentBrandListing.objects.create(
             brand=brand,

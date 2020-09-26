@@ -5,7 +5,7 @@ from django.contrib import admin
 
 from astrobin_apps_equipment.models.equipment_brand import EquipmentBrand
 from astrobin_apps_equipment.models.equipment_brand_listing import EquipmentBrandListing
-from astrobin_apps_equipment.models.equipment_brand_retailer import EquipmentBrandRetailer
+from astrobin_apps_equipment.models.equipment_retailer import EquipmentRetailer
 
 
 class EquipmentBrandAdmin(admin.ModelAdmin):
@@ -16,7 +16,7 @@ class EquipmentBrandAdmin(admin.ModelAdmin):
     )
 
 
-class EquipmentBrandRetailerAdmin(admin.ModelAdmin):
+class EquipmentRetailerAdmin(admin.ModelAdmin):
     list_display = (
         'name',
         'website',
@@ -35,5 +35,5 @@ class EquipmentBrandListingAdmin(admin.ModelAdmin):
 
 
 admin.site.register(EquipmentBrand, EquipmentBrandAdmin)
-admin.site.register(EquipmentBrandRetailer, EquipmentBrandRetailerAdmin)
+admin.site.register(EquipmentRetailer, EquipmentRetailerAdmin)
 admin.site.register(EquipmentBrandListing, EquipmentBrandListingAdmin)

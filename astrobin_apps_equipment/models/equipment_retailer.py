@@ -1,11 +1,26 @@
 # -*- coding: utf-8 -*-
 from __future__ import unicode_literals
 
+from django.contrib.auth.models import User
 from django.db import models
+from django.db.models import SET_NULL
 from safedelete.models import SafeDeleteModel
 
+from common.upload_paths import upload_path
 
-class EquipmentBrandRetailer(SafeDeleteModel):
+
+def logo_upload_path(instance, filename):
+    return upload_path('uncompressed', instance.created_by.pk, filename)
+
+
+class EquipmentRetailer(SafeDeleteModel):
+    created_by = models.ForeignKey(
+        User,
+        related_name='created_equipment_retailers',
+        on_delete=SET_NULL,
+        null=True
+    )
+
     created = models.DateTimeField(
         auto_now_add=True,
         null=False,
@@ -27,7 +42,7 @@ class EquipmentBrandRetailer(SafeDeleteModel):
     website = models.URLField()
 
     logo = models.ImageField(
-        upload_to='equipment_brand_retailer_logos',
+        upload_to=logo_upload_path,
         null=True,
         blank=True,
     )

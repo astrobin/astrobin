@@ -10,7 +10,7 @@ from safedelete.models import SafeDeleteModel
 class EquipmentBrand(SafeDeleteModel):
     created_by = models.ForeignKey(
         User,
-        related_name='create_equipment_brands',
+        related_name='created_equipment_brands',
         on_delete=SET_NULL,
         null=True
     )
