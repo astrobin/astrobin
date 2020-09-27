@@ -4607,6 +4607,19 @@ table.api-examples {
     color: black;
     padding: 0 4px;
   }
+
+  .equipment-brand-listing-search-result {
+    width: calc(100% - 2rem);
+    padding: 1rem;
+    margin: 0 0 2rem;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+
+    .text i {
+      margin-right: .5rem;
+    }
+  }
 }
 
 form.edit-thumbnails {

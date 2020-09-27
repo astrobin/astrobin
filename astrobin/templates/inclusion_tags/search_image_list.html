@@ -1,18 +1,40 @@
+{% load astrobin_apps_equipment_tags %}
 {% load astrobin_apps_images_tags %}
 {% load astrobin_apps_users_tags %}
 {% load highlight %}
 {% load i18n %}
 {% load avatar_tags %}
+{% load common_tags %}
+{% load tags %}
 
 {% if paginator.object_list %}
 
     {% if search_domain == None or search_domain == 'i' %}
         <ul class="thumbnails astrobin-thumbnails">
-            {% for result in page_obj.object_list %}
-                {% if result.object %}
-                    <li class="thumbnail astrobin-thumbnail">
-                        {% astrobin_image result.object 'gallery' %}
+            {% regroup paginator.object_list|dictsort:"verbose_name_plural" by verbose_name_plural as grouped_objects %}
+            {% for content_type in grouped_objects %}
+                {% if content_type.grouper == "Equipment brand listings" and REQUEST_COUNTRY in content_type.list.0.object.retailer.countries and request.user|show_ads %}
+                    <li class="equipment-brand-listing-search-result alert alert-info">
+                        <span class="text">
+                            <i class="icon-bullhorn"></i>
+                            {% blocktrans trimmed with brand=content_type.list.0.object.brand retailer=content_type.list.0.object.retailer %}
+                                Interested in <strong>{{ brand }}</strong>? Our sponsor
+                                <strong>{{ retailer }}</strong> sells this brand!
+                            {% endblocktrans %}
+                        </span>
+
+                        <a class="btn btn-primary" href="{{ content_type.list.0.object.url }}?{% equipment_brand_listing_utm_tags %}" target="_blank">
+                            {% trans "Shop now" %}
+                        </a>
                     </li>
+                {% endif %}
+
+                {% if content_type.grouper == "Images" %}
+                    {% for result in content_type.list %}
+                        <li class="thumbnail astrobin-thumbnail">
+                            {% astrobin_image result.object 'gallery' %}
+                        </li>
+                    {% endfor %}
                 {% endif %}
             {% endfor %}
         </ul>

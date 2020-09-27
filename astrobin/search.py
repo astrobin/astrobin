@@ -1,20 +1,16 @@
-# Python
 import unicodedata
 
-# Django
-from django.contrib.auth.models import User
 from django import forms
-
-# Third party apps
-from haystack.query import SearchQuerySet
+from django.contrib.auth.models import User
 from haystack.forms import SearchForm
 from haystack.generic_views import SearchView
+from haystack.query import SearchQuerySet
 from pybb.models import Post, Topic
 
-from nested_comments.models import NestedComment
-
+from astrobin.utils import get_client_country_code
+from astrobin_apps_equipment.models.equipment_brand_listing import EquipmentBrandListing
 from models import Image
-
+from nested_comments.models import NestedComment
 
 FIELDS = (
     # Filtering
@@ -50,10 +46,11 @@ FIELDS = (
 
 class AstroBinSearchForm(SearchForm):
     # q is inherited from the parent form.
+    request = None
 
     d = forms.CharField(required=False)
     t = forms.CharField(required=False)
-    
+
     animated = forms.BooleanField(required=False)
     award = forms.CharField(required=False)
     camera_type = forms.CharField(required=False)
@@ -87,7 +84,15 @@ class AstroBinSearchForm(SearchForm):
             d = "i"
 
         if d == "i":
-            results = results.models(Image)
+            images = results.models(Image)
+            equipment_brand_listings = results \
+                .models(EquipmentBrandListing) \
+                .filter(countries__icontains=get_client_country_code(self.request))
+            results = (
+                    results.models(Image).filter(django_id__in=[x.pk for x in list(images)]) |
+                    results.models(EquipmentBrandListing).filter(
+                        django_id__in=[x.pk for x in list(equipment_brand_listings)])
+            ).models(Image, EquipmentBrandListing)
         elif d == "u":
             results = results.models(User)
         elif d == "cf":
@@ -388,7 +393,9 @@ class AstroBinSearchView(SearchView):
     form_class = AstroBinSearchForm
 
     def get_form(self, form_class=None):
-        return self.get_form_class()(**{x: self.request.GET.get(x, None) for x in FIELDS})
+        form = self.get_form_class()(**{x: self.request.GET.get(x, None) for x in FIELDS})
+        form.request = self.request
+        return form
 
     def get_context_data(self, **kwargs):
         context = super(AstroBinSearchView, self).get_context_data(**kwargs)
