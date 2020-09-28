@@ -40,7 +40,6 @@ INSTALLED_APPS = [
     'contact_form',
     'pipeline',
     'tastypie',
-    'reviews',
     'actstream',
     'modeltranslation',
     'paypal.standard.ipn',

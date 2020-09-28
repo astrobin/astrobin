@@ -88,7 +88,6 @@ from astrobin.views import (
     user_profile_shadow_ban,
     user_profile_remove_shadow_ban,
 
-    gear_page,
     gear_by_ids,
     gear_by_image,
     gear_by_make,
@@ -325,14 +324,12 @@ urlpatterns += [
     ### GEAR VIEWS                                                          ###
     ###########################################################################
 
-    url(r'^gear/(?P<id>\d+)/(?:(?P<slug>[a-z0-9-_]+)/)?$', gear_page, name='gear_page'),
     url(r'^gear/by-ids/(?P<ids>([0-9]+,?)+)/$', gear_by_ids, name='gear_by_ids'),
     url(r'^gear/by-image/(?P<image_id>\d+)/$', gear_by_image, name='gear_by_image'),
     url(r'^gear/by-make/(?P<make>[(\w|\W).+-]*)/$', gear_by_make, name='gear_by_make'),
     url(r'^gear/fix/(?P<id>\d+)/$', gear_fix, name='gear_fix'),
     url(r'^gear/fix/save/$', gear_fix_save, name='gear_fix_save'),
     url(r'^gear/fix/thanks/$', gear_fix_thanks, name='gear_fix_thanks'),
-    url(r'^gear/review/save/$', gear_review_save, name='gear_review_save'),
     url(r'^gear_popover_ajax/(?P<id>\d+)/$', gear_popover_ajax, name='gear_popover_ajax'),
     url(r'^get-makes-by-type/(?P<klass>\w+)/$', get_makes_by_type, name='get_makes_by_type'),
     url(r'^get_edit_gear_form/(?P<id>\d+)/$', get_edit_gear_form, name='get_edit_gear_form'),

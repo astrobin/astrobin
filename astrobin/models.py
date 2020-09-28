@@ -50,7 +50,6 @@ except ImportError:
 
 from celery.result import AsyncResult
 from model_utils.managers import InheritanceManager
-from reviews.models import Review
 from safedelete.models import SafeDeleteModel
 from toggleproperties.models import ToggleProperty
 
@@ -325,12 +324,6 @@ class Gear(models.Model):
             content_type=ContentType.objects.get(app_label='astrobin', model='gear'),
             object_id=slave.id
         ).update(object_id=self.id)
-
-        # Find matching gear reviews and move them to the master
-        reviews = Review.objects.filter(
-            content_type=ContentType.objects.get(app_label='astrobin', model='gear'),
-            content_id=slave.id
-        ).update(content_id=self.id)
 
         # Fetch slave's master if this hard-merge's master doesn't have a soft-merge master
         if not self.master:

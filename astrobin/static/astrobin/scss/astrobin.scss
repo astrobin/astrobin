@@ -1159,7 +1159,7 @@ BODY:first-of-type ul.as-list, x:-moz-any-link, x:default { /* Target FF 3.5+ */
   }
 }
 
-.explore-comment-container, .explore-review-container {
+.explore-comment-container {
   width: 460px;
   padding: $spacer-small;
   display: inline-block;
@@ -1186,15 +1186,11 @@ BODY:first-of-type ul.as-list, x:-moz-any-link, x:default { /* Target FF 3.5+ */
   }
 }
 
-.explore-review-container {
-  width: 302px;
-}
-
 .nested-comments-container {
   overflow: visible !important;
 }
 
-.reviews, .comments {
+.comments {
   margin-top: $spacer-large;
   margin-left: $spacer-large;
 
@@ -1209,7 +1205,7 @@ BODY:first-of-type ul.as-list, x:-moz-any-link, x:default { /* Target FF 3.5+ */
   }
 }
 
-.comment, .review {
+.comment {
   position: relative;
   font-size: 1em;
   margin: 0;
@@ -1359,11 +1355,6 @@ BODY:first-of-type ul.as-list, x:-moz-any-link, x:default { /* Target FF 3.5+ */
   margin-left: $spacer-large;
 }
 
-.review {
-  border-bottom: 1px dashed #555;
-  padding-bottom: $spacer-large;
-}
-
 @keyframes bounceCommentIndicator {
   from {
     left: -30px;
@@ -1383,7 +1374,7 @@ BODY:first-of-type ul.as-list, x:-moz-any-link, x:default { /* Target FF 3.5+ */
   }
 }
 
-.comment.newlyAdded, .comment.hilight, .review.hilight {
+.comment.newlyAdded, .comment.hilight {
   &:before {
     content: "\279F";
     position: absolute;
@@ -1399,12 +1390,6 @@ BODY:first-of-type ul.as-list, x:-moz-any-link, x:default { /* Target FF 3.5+ */
   .content {
     font-weight: bold;
     color: yellow;
-  }
-}
-
-.review-form {
-  textarea, select {
-    width: 96%;
   }
 }
 

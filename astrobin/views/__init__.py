@@ -36,8 +36,6 @@ from el_pagination.decorators import page_template
 from flickrapi.auth import FlickrAccessToken
 from haystack.exceptions import SearchFieldError
 from haystack.query import SearchQuerySet
-from reviews.models import Review
-from reviews.views import ReviewAddForm
 from silk.profiling.profiler import silk_profile
 
 from astrobin.context_processors import notices_count, user_language, user_scores, common_variables
@@ -2488,55 +2486,6 @@ def user_popover_ajax(request, username):
     return HttpResponse(
         simplejson.dumps(response_dict),
         content_type='application/javascript')
-
-
-@require_GET
-def gear_page(request, id, slug):
-    gear, gear_type = get_correct_gear(id)
-    if not gear:
-        try:
-            redirect = GearHardMergeRedirect.objects.get(fro=id)
-        except GearHardMergeRedirect.DoesNotExist:
-            raise Http404
-
-        gear, gear_type = get_correct_gear(redirect.to)
-        if not gear:
-            raise Http404
-        else:
-            return HttpResponseRedirect(gear.get_absolute_url())
-
-    user_attr_lookup = {
-        'Telescope': 'telescopes',
-        'Camera': 'cameras',
-        'Mount': 'mounts',
-        'FocalReducer': 'focal_reducers',
-        'Software': 'software',
-        'Filter': 'filters',
-        'Accessory': 'accessories',
-    }
-
-    from astrobin.gear import CLASS_LOOKUP
-
-    all_images = Image.by_gear(gear, gear_type).filter(is_wip=False)
-    content_type = ContentType.objects.get(app_label='astrobin', model='gear')
-    reviews = Review.objects.filter(content_id=id, content_type=content_type)
-
-    response_dict = {
-        'gear': gear,
-        'examples': all_images[:28],
-        'review_form': ReviewAddForm(
-            instance=Review(content_type=ContentType.objects.get_for_model(Gear), content=gear)),
-        'reviews': reviews,
-        'content_type': ContentType.objects.get_for_model(Gear),
-        'owners_count': UserProfile.objects.filter(**{user_attr_lookup[gear_type]: gear}).count(),
-        'images_count': all_images.count(),
-        'attributes': [
-            (_(CLASS_LOOKUP[gear_type]._meta.get_field(k[0]).verbose_name),
-             getattr(gear, k[0]),
-             k[1]) for k in gear.attributes()],
-    }
-
-    return render(request, 'gear/page.html', response_dict)
 
 
 @require_GET
