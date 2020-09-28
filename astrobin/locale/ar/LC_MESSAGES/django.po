@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2020-05-19 08:02+0000\n"
+"POT-Creation-Date: 2020-09-25 09:04+0000\n"
 "PO-Revision-Date: 2014-02-05 12:48+0000\n"
 "Last-Translator: Omar <thekingosm168@hotmail.com>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -789,7 +789,7 @@ msgid "You have already claimed this product."
 msgstr "لقد قمت بادّعاء هذا المنتج من قبل."
 
 msgid ""
-"Select a tag to order this collection by its value. If you see no optioons "
+"Select a tag to order this collection by its value. If you see no options "
 "here, it's because none of the images in this collection have key/value "
 "tags. PS: Images that lack this tag will appear at the bottom of the "
 "collection."
@@ -851,10 +851,6 @@ msgid ""
 "symbol between key and value, and provide one pair per line. These tags can "
 "be used to sort images by arbitrary properties."
 msgstr ""
-
-#, fuzzy
-msgid "Revision"
-msgstr "الآراء النقدية"
 
 msgid "This field is required."
 msgstr "هذا الحقل مطلوب."
@@ -1096,7 +1092,9 @@ msgstr "الألبانية"
 msgid "Polish"
 msgstr "البولندية"
 
-msgid "Brazilian Portuguese"
+#, fuzzy
+#| msgid "Brazilian Portuguese"
+msgid "Portuguese"
 msgstr "برتغالية البرازيل"
 
 msgid "Greek"
@@ -1557,8 +1555,10 @@ msgstr "الوصف"
 msgid "HTML tags are allowed."
 msgstr "مسموح باستخدام HTML tags."
 
+#, fuzzy
+#| msgid "Upload complete!"
 msgid "Uncompressed source (max 100 MB)"
-msgstr ""
+msgstr "اكتمل الرفع"
 
 msgid ""
 "You can store the final processed image that came out of your favorite image "
@@ -1672,13 +1672,7 @@ msgstr "مُجمعة من ألوان أولية"
 #, fuzzy
 #| msgid "Filter"
 msgid "Filter"
-msgid_plural "Filters"
-msgstr[0] "مرشِّح"
-msgstr[1] "مرشِّح"
-msgstr[2] "مرشِّح"
-msgstr[3] "مرشِّح"
-msgstr[4] "مرشِّح"
-msgstr[5] "مرشِّح"
+msgstr "مرشِّح"
 
 msgid "Binning"
 msgstr "تجميع البكسلات"
@@ -2523,6 +2517,12 @@ msgstr "لم يُحدَّد أي ملف"
 msgid "Choose file"
 msgstr "اختيار ملف"
 
+msgid "Help with translations!"
+msgstr "المساعدة في الترجمة!"
+
+msgid "Please select your language from the options above."
+msgstr "من فضلك اختر لغتك من الخيارات بالأعلي."
+
 msgid "Notifications"
 msgstr "إشعاراتك"
 
@@ -2612,6 +2612,25 @@ msgstr ""
 msgid "Thank you!"
 msgstr "شكر خاص لـ"
 
+msgid ""
+"If this user has been harassing you, and you shadow-ban them, all their "
+"activities on your content will be invisible to everyone except themselves."
+msgstr ""
+
+msgid ""
+"They will not know that they have been shadow-banned, and the goal is that "
+"eventually they will get bored while having caused no harm, since nobody saw "
+"what they posted."
+msgstr ""
+
+msgid "Continue"
+msgstr "استمر"
+
+msgid ""
+"You will remove your shadow-ban on this user, and their comments, messages, "
+"etc, will appear again on your content."
+msgstr ""
+
 msgid "Quick search"
 msgstr "بحث سريع"
 
@@ -2657,12 +2676,16 @@ msgstr "بحث متقدّم"
 msgid "Top picks"
 msgstr ""
 
-msgid "Stats"
-msgstr "الإحصائيّات"
+#, fuzzy
+msgid "Remote astrophotography"
+msgstr "تعديل أجهزتك للتصوير الفلكي"
 
 #, fuzzy
 msgid "Trending astrophotographers"
 msgstr "تعديل أجهزتك للتصوير الفلكي"
+
+msgid "Stats"
+msgstr "الإحصائيّات"
 
 msgid "Help"
 msgstr "مساعدة"
@@ -2672,12 +2695,6 @@ msgstr "تواصل معنا"
 
 msgid "User"
 msgstr "المستخدم"
-
-msgid "Help with translations!"
-msgstr "المساعدة في الترجمة!"
-
-msgid "Please select your language from the options above."
-msgstr "من فضلك اختر لغتك من الخيارات بالأعلي."
 
 msgid "AstroBin index"
 msgstr "مؤشر AstroBin"
@@ -3069,6 +3086,14 @@ msgstr "يحتوي على"
 msgid "Remove ads"
 msgstr "حذف البيانات"
 
+#, fuzzy
+#| msgid "Acquired after"
+msgid "Acquired at"
+msgstr "تم التقاطها بعد"
+
+msgid "Remove"
+msgstr "حذف"
+
 #, python-format
 msgid ""
 "<strong>Leave a comment here</strong>, and remember that AstroBin is an "
@@ -3192,6 +3217,15 @@ msgstr "حذف النسخة الأصلية"
 msgid "Delete this revision only"
 msgstr "حذف هذه المراجعة"
 
+#, fuzzy
+#| msgid "Delete conversation"
+msgid "Delete all other versions"
+msgstr "حذف المحادثة"
+
+#, fuzzy
+msgid "Delete all revisions"
+msgstr "حذف الصورة و كل مراجعاتها؟"
+
 msgid "Flag malfunctioning thumbnails"
 msgstr "تعليم الصور المصغرة غير الصالحة"
 
@@ -3263,6 +3297,14 @@ msgstr "عرض الملف التعريفي"
 
 msgid "Send private message"
 msgstr "ارسال رسالة خاصة"
+
+msgid "Shadow-ban"
+msgstr ""
+
+#, fuzzy
+#| msgid "Remove data"
+msgid "Remove shadow-ban"
+msgstr "حذف البيانات"
 
 msgid "View"
 msgstr "عرض"
@@ -3390,13 +3432,31 @@ msgstr ""
 "سيتم حذف الصورة نهائياً و لن يمكن استعادتها بعد ذلك ، لكن لن يتم حذف "
 "المراجعات. هل أنت متأكد؟"
 
+#, fuzzy
+#| msgid "Delete this revision?"
+msgid "Delete all other versions?"
+msgstr "حذف هذه المراجعة؟"
+
+msgid ""
+"You will delete all other revisions (if any), and the originally uploaded "
+"image, leaving the current revision as the final and only version of this "
+"image."
+msgstr ""
+
+#, fuzzy
+#| msgid "Delete this revision?"
+msgid "Delete all revisions?"
+msgstr "حذف هذه المراجعة؟"
+
+msgid ""
+"You will delete all revisions, leaving the originally uploaded image as the "
+"final and only version of this image."
+msgstr ""
+
 msgid ""
 "This will move this image to your staging area, making it unlisted. The "
 "image will be accessible by anyone with a direct link."
 msgstr ""
-
-msgid "Continue"
-msgstr "استمر"
 
 msgid ""
 "This will trigger the regeneration of all thumbnails for this image and all "
@@ -3466,6 +3526,10 @@ msgid ""
 "Did you improve the post-processing of your image? Upload the new\n"
 "                    revision!"
 msgstr "هل تمكنت من تحسين معالجة صورتك؟ ارفع المراجعة الجديدة!"
+
+#, python-format
+msgid "Over 100 MB? Try the <a href=\"%(url)s/%(id)s\">new beta uploader</a>!"
+msgstr ""
 
 msgid ""
 "Please note: AstroBin is not officially a backup service. So please also "
@@ -3633,6 +3697,9 @@ msgstr "تحميل..."
 msgid "Next step: gear used"
 msgstr "الخطوة التالية: الأجهزة المُستخدمة"
 
+msgid "sponsor"
+msgstr ""
+
 msgid "Edit your image: gear used"
 msgstr "تحرير صورتك: الأجهزة المُستخدمة"
 
@@ -3791,9 +3858,6 @@ msgstr ""
 
 msgid "Galactic latitude"
 msgstr ""
-
-msgid "Remove"
-msgstr "حذف"
 
 msgid "View page"
 msgstr "عرض الصفحة"
@@ -4215,6 +4279,49 @@ msgstr ""
 
 msgid "You have images on AstroBin missing the \"Remote source\" information"
 msgstr ""
+
+msgid "Hi!"
+msgstr ""
+
+#, python-format
+msgid ""
+"We noticed that on <strong>%(date)s GMT</strong> you created an account on "
+"AstroBin, the image hosting service and social community for "
+"astrophotographers, but never got the chance to activate it."
+msgstr ""
+
+msgid "The account that you created has the following username:"
+msgstr ""
+
+msgid ""
+"If you would like to activate it now, please click on the following link:"
+msgstr ""
+
+#, fuzzy
+msgid "Activate my account"
+msgstr "حذف المحادثة"
+
+msgid ""
+"If you don't, we will delete this account in a week. But don't worry, you're "
+"always welcome to join again!"
+msgstr ""
+
+msgid ""
+"If you already have another active account on AstroBin, please feel free to "
+"ignore this message."
+msgstr ""
+
+#, python-format
+msgid ""
+"We noticed that on %(date)s GMT you created an account on AstroBin, the "
+"image hosting service and social community for astrophotographers, but never "
+"got the chance to activate it."
+msgstr ""
+
+#, fuzzy
+#| msgid "Would you like to start using your real name on AstroBin?"
+msgid "Would you like to activate your account on AstroBin?"
+msgstr "هل تريد أن تبدأ باستخدام اسمك الحقيقي علي AstroBin؟"
 
 #, fuzzy, python-format
 #| msgid ""
@@ -4803,6 +4910,11 @@ msgstr "حذف المحادثة"
 msgid "Approve post"
 msgstr ""
 
+#, python-format
+msgid ""
+"Editing a post is only allowed within %(minutes)s minutes after creating it."
+msgstr ""
+
 msgid "Topics you subscribe to"
 msgstr ""
 
@@ -5081,6 +5193,13 @@ msgstr "اكتمل الرفع"
 #, fuzzy
 msgid "Undelete images"
 msgstr "الولايات المتّحدة"
+
+msgid ""
+"The FREE account is to be considered a trial period. You can upload images "
+"10 times, after which you can't upload anymore. Deleting images doesn't "
+"decrease your upload counter: the FREE account is not meant to be used as a "
+"way to keep your latest 10 images."
+msgstr ""
 
 msgid "year"
 msgstr ""
@@ -5456,6 +5575,12 @@ msgstr ""
 #, fuzzy
 msgid "Would you like to upgrade to a higher plan?"
 msgstr "هل تريد أن تبدأ باستخدام اسمك الحقيقي علي AstroBin؟"
+
+#, python-format
+msgid ""
+"Try the <a href=\"%(url)s\">new beta uploader</a>: robust, with real "
+"progress bar, and 4 GB file size limit!"
+msgstr ""
 
 msgid "Upload as a work in progress"
 msgstr "رفع صورة لعمل غير مكتمل"
@@ -6366,74 +6491,8 @@ msgid ""
 msgstr "شكرا للتبليغ عن المشكلة. كل الصورة المصغرة يمكن انشائها مرة أخرى."
 
 #, fuzzy
-msgid "Imaging telescope or lens"
-msgid_plural "Imaging telescopes or lenses"
-msgstr[0] "تلسكوب أو عدسة التصوير"
-msgstr[1] "تلسكوب أو عدسة التصوير"
-msgstr[2] "تلسكوب أو عدسة التصوير"
-msgstr[3] "تلسكوب أو عدسة التصوير"
-msgstr[4] "تلسكوب أو عدسة التصوير"
-msgstr[5] "تلسكوب أو عدسة التصوير"
-
-#, fuzzy
-msgid "Imaging camera"
-msgid_plural "Imaging cameras"
-msgstr[0] "كاميرا التصوير"
-msgstr[1] "كاميرا التصوير"
-msgstr[2] "كاميرا التصوير"
-msgstr[3] "كاميرا التصوير"
-msgstr[4] "كاميرا التصوير"
-msgstr[5] "كاميرا التصوير"
-
-#, fuzzy
-msgid "Mount"
-msgid_plural "Mounts"
-msgstr[0] "المحور المُستخدم"
-msgstr[1] "المحور المُستخدم"
-msgstr[2] "المحور المُستخدم"
-msgstr[3] "المحور المُستخدم"
-msgstr[4] "المحور المُستخدم"
-msgstr[5] "المحور المُستخدم"
-
-#, fuzzy
-msgid "Guiding telescope or lens"
-msgid_plural "Guiding telescopes or lenses"
-msgstr[0] "تلسكوب أو عدسة الإرشاد"
-msgstr[1] "تلسكوب أو عدسة الإرشاد"
-msgstr[2] "تلسكوب أو عدسة الإرشاد"
-msgstr[3] "تلسكوب أو عدسة الإرشاد"
-msgstr[4] "تلسكوب أو عدسة الإرشاد"
-msgstr[5] "تلسكوب أو عدسة الإرشاد"
-
-#, fuzzy
-msgid "Guiding camera"
-msgid_plural "Guiding cameras"
-msgstr[0] "كاميرا الارشاد"
-msgstr[1] "كاميرا الارشاد"
-msgstr[2] "كاميرا الارشاد"
-msgstr[3] "كاميرا الارشاد"
-msgstr[4] "كاميرا الارشاد"
-msgstr[5] "كاميرا الارشاد"
-
-#, fuzzy
-msgid "Focal reducer"
-msgid_plural "Focal reducers"
-msgstr[0] "مختزل البعد البؤري"
-msgstr[1] "مختزل البعد البؤري"
-msgstr[2] "مختزل البعد البؤري"
-msgstr[3] "مختزل البعد البؤري"
-msgstr[4] "مختزل البعد البؤري"
-msgstr[5] "مختزل البعد البؤري"
-
-#, fuzzy
 msgid "Accessory"
-msgid_plural "Accessories"
-msgstr[0] "الملحقات"
-msgstr[1] "الملحقات"
-msgstr[2] "الملحقات"
-msgstr[3] "الملحقات"
-msgstr[4] "الملحقات"
-msgstr[5] "الملحقات"
+msgstr "الملحقات"
 
 msgid "Dates"
 msgstr "التّواريخ"
@@ -6477,6 +6536,70 @@ msgid ""
 "AstroBin is preparing your data for download. Please check this page again "
 "in a while: the more images you have, the more time it will take."
 msgstr ""
+
+#, fuzzy
+#~ msgid "Revision"
+#~ msgstr "الآراء النقدية"
+
+#, fuzzy
+#~ msgid "Imaging telescope or lens"
+#~ msgid_plural "Imaging telescopes or lenses"
+#~ msgstr[0] "تلسكوب أو عدسة التصوير"
+#~ msgstr[1] "تلسكوب أو عدسة التصوير"
+#~ msgstr[2] "تلسكوب أو عدسة التصوير"
+#~ msgstr[3] "تلسكوب أو عدسة التصوير"
+#~ msgstr[4] "تلسكوب أو عدسة التصوير"
+#~ msgstr[5] "تلسكوب أو عدسة التصوير"
+
+#, fuzzy
+#~ msgid "Imaging camera"
+#~ msgid_plural "Imaging cameras"
+#~ msgstr[0] "كاميرا التصوير"
+#~ msgstr[1] "كاميرا التصوير"
+#~ msgstr[2] "كاميرا التصوير"
+#~ msgstr[3] "كاميرا التصوير"
+#~ msgstr[4] "كاميرا التصوير"
+#~ msgstr[5] "كاميرا التصوير"
+
+#, fuzzy
+#~ msgid "Mount"
+#~ msgid_plural "Mounts"
+#~ msgstr[0] "المحور المُستخدم"
+#~ msgstr[1] "المحور المُستخدم"
+#~ msgstr[2] "المحور المُستخدم"
+#~ msgstr[3] "المحور المُستخدم"
+#~ msgstr[4] "المحور المُستخدم"
+#~ msgstr[5] "المحور المُستخدم"
+
+#, fuzzy
+#~ msgid "Guiding telescope or lens"
+#~ msgid_plural "Guiding telescopes or lenses"
+#~ msgstr[0] "تلسكوب أو عدسة الإرشاد"
+#~ msgstr[1] "تلسكوب أو عدسة الإرشاد"
+#~ msgstr[2] "تلسكوب أو عدسة الإرشاد"
+#~ msgstr[3] "تلسكوب أو عدسة الإرشاد"
+#~ msgstr[4] "تلسكوب أو عدسة الإرشاد"
+#~ msgstr[5] "تلسكوب أو عدسة الإرشاد"
+
+#, fuzzy
+#~ msgid "Guiding camera"
+#~ msgid_plural "Guiding cameras"
+#~ msgstr[0] "كاميرا الارشاد"
+#~ msgstr[1] "كاميرا الارشاد"
+#~ msgstr[2] "كاميرا الارشاد"
+#~ msgstr[3] "كاميرا الارشاد"
+#~ msgstr[4] "كاميرا الارشاد"
+#~ msgstr[5] "كاميرا الارشاد"
+
+#, fuzzy
+#~ msgid "Focal reducer"
+#~ msgid_plural "Focal reducers"
+#~ msgstr[0] "مختزل البعد البؤري"
+#~ msgstr[1] "مختزل البعد البؤري"
+#~ msgstr[2] "مختزل البعد البؤري"
+#~ msgstr[3] "مختزل البعد البؤري"
+#~ msgstr[4] "مختزل البعد البؤري"
+#~ msgstr[5] "مختزل البعد البؤري"
 
 #~ msgid "created a new public data pool"
 #~ msgstr "أنشأ مساحة بيانات عامة جديد"
@@ -7382,9 +7505,6 @@ msgstr ""
 
 #~ msgid "Max. telescope aperture"
 #~ msgstr "أكبر قطر للتلسكوب"
-
-#~ msgid "Acquired after"
-#~ msgstr "تم التقاطها بعد"
 
 #~ msgid "Acquired before"
 #~ msgstr "تم التقاطها قبل"

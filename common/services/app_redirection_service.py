@@ -10,7 +10,7 @@ class AppRedirectionService:
         # type: (HttpRequest) -> str
 
         host = None
-        if 'astrobin.com' in request.META['HTTP_HOST']:
+        if 'HTTP_HOST' in request.META and 'astrobin.com' in request.META['HTTP_HOST']:
             host = 'app.astrobin.com'
         else:
             host = 'localhost:4400'

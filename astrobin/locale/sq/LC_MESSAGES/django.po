@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: AstroBin 1.4\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2020-05-19 08:02+0000\n"
+"POT-Creation-Date: 2020-09-25 09:04+0000\n"
 "PO-Revision-Date: 2015-01-20 21:30+0000\n"
 "Last-Translator: jordi <jordi.inyigo@gmail.com>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -787,7 +787,7 @@ msgid "You have already claimed this product."
 msgstr "E ke percaktuar nje here kete foto"
 
 msgid ""
-"Select a tag to order this collection by its value. If you see no optioons "
+"Select a tag to order this collection by its value. If you see no options "
 "here, it's because none of the images in this collection have key/value "
 "tags. PS: Images that lack this tag will appear at the bottom of the "
 "collection."
@@ -849,10 +849,6 @@ msgid ""
 "symbol between key and value, and provide one pair per line. These tags can "
 "be used to sort images by arbitrary properties."
 msgstr ""
-
-#, fuzzy
-msgid "Revision"
-msgstr "Shikime"
 
 msgid "This field is required."
 msgstr ""
@@ -1097,8 +1093,10 @@ msgstr "Shqiperia"
 msgid "Polish"
 msgstr "Anglisht"
 
-msgid "Brazilian Portuguese"
-msgstr ""
+#, fuzzy
+#| msgid "Portugal"
+msgid "Portuguese"
+msgstr "Portugali"
 
 #, fuzzy
 msgid "Greek"
@@ -1559,8 +1557,9 @@ msgstr "Përshkrimi"
 msgid "HTML tags are allowed."
 msgstr "Kodet HTML lejohen."
 
+#, fuzzy
 msgid "Uncompressed source (max 100 MB)"
-msgstr ""
+msgstr "Koha ngarkimit"
 
 msgid ""
 "You can store the final processed image that came out of your favorite image "
@@ -1671,9 +1670,7 @@ msgstr "Kanal sintetik"
 #, fuzzy
 #| msgid "Filter"
 msgid "Filter"
-msgid_plural "Filters"
-msgstr[0] "Filtër"
-msgstr[1] "Filtër"
+msgstr "Filtër"
 
 msgid "Binning"
 msgstr "Binning"
@@ -2513,6 +2510,12 @@ msgstr "Asnje dosje e zgjedhur"
 msgid "Choose file"
 msgstr "Zgjidh dosjen"
 
+msgid "Help with translations!"
+msgstr ""
+
+msgid "Please select your language from the options above."
+msgstr "Ju lutem zgjidhni nje gjuhe nga opsionet e mëposhtme."
+
 msgid "Notifications"
 msgstr "Lajmerime"
 
@@ -2595,6 +2598,25 @@ msgstr ""
 msgid "Thank you!"
 msgstr "Falenderime"
 
+msgid ""
+"If this user has been harassing you, and you shadow-ban them, all their "
+"activities on your content will be invisible to everyone except themselves."
+msgstr ""
+
+msgid ""
+"They will not know that they have been shadow-banned, and the goal is that "
+"eventually they will get bored while having caused no harm, since nobody saw "
+"what they posted."
+msgstr ""
+
+msgid "Continue"
+msgstr "Vazhdo"
+
+msgid ""
+"You will remove your shadow-ban on this user, and their comments, messages, "
+"etc, will appear again on your content."
+msgstr ""
+
 msgid "Quick search"
 msgstr "Kërkim i shpejtë"
 
@@ -2641,12 +2663,16 @@ msgstr ""
 msgid "Top picks"
 msgstr ""
 
-msgid "Stats"
-msgstr "Statistikat"
+#, fuzzy
+msgid "Remote astrophotography"
+msgstr "Modifiko mekanizmin tend astrofotografik"
 
 #, fuzzy
 msgid "Trending astrophotographers"
 msgstr "Modifiko mekanizmin tend astrofotografik"
+
+msgid "Stats"
+msgstr "Statistikat"
 
 msgid "Help"
 msgstr "Ndihmë"
@@ -2657,12 +2683,6 @@ msgstr "Permban"
 
 msgid "User"
 msgstr "Perdorues"
-
-msgid "Help with translations!"
-msgstr ""
-
-msgid "Please select your language from the options above."
-msgstr "Ju lutem zgjidhni nje gjuhe nga opsionet e mëposhtme."
 
 #, fuzzy
 msgid "AstroBin index"
@@ -3042,6 +3062,15 @@ msgstr "Permban"
 msgid "Remove ads"
 msgstr "Hiqini te dhenet"
 
+#, fuzzy
+#| msgid "Acquired after"
+msgid "Acquired at"
+msgstr "Blere mbas"
+
+#, fuzzy
+msgid "Remove"
+msgstr "Hiqini te dhenet"
+
 #, python-format
 msgid ""
 "<strong>Leave a comment here</strong>, and remember that AstroBin is an "
@@ -3166,6 +3195,15 @@ msgstr "Fshije foton origjinale"
 msgid "Delete this revision only"
 msgstr "Fshije rishikimin"
 
+#, fuzzy
+#| msgid "Delete conversation"
+msgid "Delete all other versions"
+msgstr "Fshini biiseden"
+
+#, fuzzy
+msgid "Delete all revisions"
+msgstr "Fshi foton dhe gjithe rishikimet e saj?"
+
 msgid "Flag malfunctioning thumbnails"
 msgstr ""
 
@@ -3241,6 +3279,14 @@ msgstr "Shiko profilin"
 
 msgid "Send private message"
 msgstr "Dergo mesazh privat"
+
+msgid "Shadow-ban"
+msgstr ""
+
+#, fuzzy
+#| msgid "Remove data"
+msgid "Remove shadow-ban"
+msgstr "Hiqini te dhenet"
 
 msgid "View"
 msgstr "Shiko"
@@ -3368,13 +3414,31 @@ msgstr ""
 "Foto do te fshihet perfundimisht dhe nuk mund te rikuperohet me. A jeni te "
 "sigurt?"
 
+#, fuzzy
+#| msgid "Delete this revision?"
+msgid "Delete all other versions?"
+msgstr "Fshi kete rishikim?"
+
+msgid ""
+"You will delete all other revisions (if any), and the originally uploaded "
+"image, leaving the current revision as the final and only version of this "
+"image."
+msgstr ""
+
+#, fuzzy
+#| msgid "Delete this revision?"
+msgid "Delete all revisions?"
+msgstr "Fshi kete rishikim?"
+
+msgid ""
+"You will delete all revisions, leaving the originally uploaded image as the "
+"final and only version of this image."
+msgstr ""
+
 msgid ""
 "This will move this image to your staging area, making it unlisted. The "
 "image will be accessible by anyone with a direct link."
 msgstr ""
-
-msgid "Continue"
-msgstr "Vazhdo"
 
 msgid ""
 "This will trigger the regeneration of all thumbnails for this image and all "
@@ -3449,6 +3513,10 @@ msgid ""
 "Did you improve the post-processing of your image? Upload the new\n"
 "                    revision!"
 msgstr "A e keni permiresuar perpunimin e fotos tuaj? Ngarko rishikimin e ri!"
+
+#, python-format
+msgid "Over 100 MB? Try the <a href=\"%(url)s/%(id)s\">new beta uploader</a>!"
+msgstr ""
 
 msgid ""
 "Please note: AstroBin is not officially a backup service. So please also "
@@ -3612,6 +3680,9 @@ msgstr "Duke karikuar..."
 msgid "Next step: gear used"
 msgstr "Hapi tjeter: mekanizmi i perdorur"
 
+msgid "sponsor"
+msgstr ""
+
 msgid "Edit your image: gear used"
 msgstr "Modifiko foton tuaj: mekanizmi i perdorur"
 
@@ -3774,10 +3845,6 @@ msgstr "Zgjidh liçencat"
 #, fuzzy
 msgid "Galactic latitude"
 msgstr "Zgjidh liçencat"
-
-#, fuzzy
-msgid "Remove"
-msgstr "Hiqini te dhenet"
 
 #, fuzzy
 msgid "View page"
@@ -4198,6 +4265,48 @@ msgid ""
 msgstr ""
 
 msgid "You have images on AstroBin missing the \"Remote source\" information"
+msgstr ""
+
+msgid "Hi!"
+msgstr ""
+
+#, python-format
+msgid ""
+"We noticed that on <strong>%(date)s GMT</strong> you created an account on "
+"AstroBin, the image hosting service and social community for "
+"astrophotographers, but never got the chance to activate it."
+msgstr ""
+
+msgid "The account that you created has the following username:"
+msgstr ""
+
+msgid ""
+"If you would like to activate it now, please click on the following link:"
+msgstr ""
+
+#, fuzzy
+#| msgid "Activate account at"
+msgid "Activate my account"
+msgstr "Aktivizoni llogarine tek"
+
+msgid ""
+"If you don't, we will delete this account in a week. But don't worry, you're "
+"always welcome to join again!"
+msgstr ""
+
+msgid ""
+"If you already have another active account on AstroBin, please feel free to "
+"ignore this message."
+msgstr ""
+
+#, python-format
+msgid ""
+"We noticed that on %(date)s GMT you created an account on AstroBin, the "
+"image hosting service and social community for astrophotographers, but never "
+"got the chance to activate it."
+msgstr ""
+
+msgid "Would you like to activate your account on AstroBin?"
 msgstr ""
 
 #, fuzzy, python-format
@@ -4798,6 +4907,11 @@ msgstr "Fshini biiseden"
 msgid "Approve post"
 msgstr ""
 
+#, python-format
+msgid ""
+"Editing a post is only allowed within %(minutes)s minutes after creating it."
+msgstr ""
+
 msgid "Topics you subscribe to"
 msgstr ""
 
@@ -5068,6 +5182,13 @@ msgstr "Koha ngarkimit"
 #, fuzzy
 msgid "Undelete images"
 msgstr "Shtetet e Bashkuara te Amerikes"
+
+msgid ""
+"The FREE account is to be considered a trial period. You can upload images "
+"10 times, after which you can't upload anymore. Deleting images doesn't "
+"decrease your upload counter: the FREE account is not meant to be used as a "
+"way to keep your latest 10 images."
+msgstr ""
 
 msgid "year"
 msgstr ""
@@ -5436,6 +5557,12 @@ msgid ""
 msgstr ""
 
 msgid "Would you like to upgrade to a higher plan?"
+msgstr ""
+
+#, python-format
+msgid ""
+"Try the <a href=\"%(url)s\">new beta uploader</a>: robust, with real "
+"progress bar, and 4 GB file size limit!"
 msgstr ""
 
 msgid "Upload as a work in progress"
@@ -6352,46 +6479,8 @@ msgid ""
 msgstr ""
 
 #, fuzzy
-msgid "Imaging telescope or lens"
-msgid_plural "Imaging telescopes or lenses"
-msgstr[0] "Teleskope fotografik ose lentet"
-msgstr[1] "Teleskope fotografik ose lentet"
-
-#, fuzzy
-msgid "Imaging camera"
-msgid_plural "Imaging cameras"
-msgstr[0] "Kamera fotografike"
-msgstr[1] "Kamera fotografike"
-
-#, fuzzy
-msgid "Mount"
-msgid_plural "Mounts"
-msgstr[0] "Montatura"
-msgstr[1] "Montatura"
-
-#, fuzzy
-msgid "Guiding telescope or lens"
-msgid_plural "Guiding telescopes or lenses"
-msgstr[0] "Teleskopi ndjekes ose lentet"
-msgstr[1] "Teleskopi ndjekes ose lentet"
-
-#, fuzzy
-msgid "Guiding camera"
-msgid_plural "Guiding cameras"
-msgstr[0] "Kamera per Ndjekje"
-msgstr[1] "Kamera per Ndjekje"
-
-#, fuzzy
-msgid "Focal reducer"
-msgid_plural "Focal reducers"
-msgstr[0] "Reduktori fokales"
-msgstr[1] "Reduktori fokales"
-
-#, fuzzy
 msgid "Accessory"
-msgid_plural "Accessories"
-msgstr[0] "Paisje"
-msgstr[1] "Paisje"
+msgstr "Paisje"
 
 msgid "Dates"
 msgstr "Te dhenat"
@@ -6435,6 +6524,46 @@ msgid ""
 "AstroBin is preparing your data for download. Please check this page again "
 "in a while: the more images you have, the more time it will take."
 msgstr ""
+
+#, fuzzy
+#~ msgid "Revision"
+#~ msgstr "Shikime"
+
+#, fuzzy
+#~ msgid "Imaging telescope or lens"
+#~ msgid_plural "Imaging telescopes or lenses"
+#~ msgstr[0] "Teleskope fotografik ose lentet"
+#~ msgstr[1] "Teleskope fotografik ose lentet"
+
+#, fuzzy
+#~ msgid "Imaging camera"
+#~ msgid_plural "Imaging cameras"
+#~ msgstr[0] "Kamera fotografike"
+#~ msgstr[1] "Kamera fotografike"
+
+#, fuzzy
+#~ msgid "Mount"
+#~ msgid_plural "Mounts"
+#~ msgstr[0] "Montatura"
+#~ msgstr[1] "Montatura"
+
+#, fuzzy
+#~ msgid "Guiding telescope or lens"
+#~ msgid_plural "Guiding telescopes or lenses"
+#~ msgstr[0] "Teleskopi ndjekes ose lentet"
+#~ msgstr[1] "Teleskopi ndjekes ose lentet"
+
+#, fuzzy
+#~ msgid "Guiding camera"
+#~ msgid_plural "Guiding cameras"
+#~ msgstr[0] "Kamera per Ndjekje"
+#~ msgstr[1] "Kamera per Ndjekje"
+
+#, fuzzy
+#~ msgid "Focal reducer"
+#~ msgid_plural "Focal reducers"
+#~ msgstr[0] "Reduktori fokales"
+#~ msgstr[1] "Reduktori fokales"
 
 #, fuzzy
 #~ msgid "AstroBin Raw Data"
@@ -7260,9 +7389,6 @@ msgstr ""
 
 #~ msgid "Max. telescope aperture"
 #~ msgstr "Max. hapja teleskopit"
-
-#~ msgid "Acquired after"
-#~ msgstr "Blere mbas"
 
 #~ msgid "Acquired before"
 #~ msgstr "Blere perpara"
@@ -8299,9 +8425,6 @@ msgstr ""
 
 #~ msgid "Mark as done."
 #~ msgstr "Shëno si e bërë."
-
-#~ msgid "Activate account at"
-#~ msgstr "Aktivizoni llogarine tek"
 
 #~ msgid "You are now registered. Activation email sent."
 #~ msgstr "Ju tani u rregjistruat. E-maili i aktivizimit u dërgua."

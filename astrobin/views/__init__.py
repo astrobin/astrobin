@@ -15,7 +15,6 @@ from django.contrib.auth.models import User
 from django.contrib.contenttypes.models import ContentType
 from django.core.cache import cache
 from django.core.exceptions import MultipleObjectsReturned
-from django.core.files.images import get_image_dimensions
 from django.core.paginator import Paginator, InvalidPage
 from django.core.urlresolvers import reverse
 from django.db.models import Q
@@ -23,13 +22,13 @@ from django.forms.models import inlineformset_factory
 from django.http import Http404, HttpResponse, HttpResponseBadRequest
 from django.http import HttpResponseForbidden
 from django.http import HttpResponseRedirect
-from django.shortcuts import get_object_or_404
+from django.shortcuts import get_object_or_404, redirect
 from django.shortcuts import render
 from django.template import loader, RequestContext
 from django.template.defaultfilters import filesizeformat
 from django.template.loader import render_to_string
 from django.utils.datastructures import MultiValueDictKeyError
-from django.utils.translation import ngettext as _n
+from django.utils.translation import ngettext as _n, get_language
 from django.utils.translation import ugettext as _
 from django.views.decorators.cache import never_cache
 from django.views.decorators.http import require_GET, require_POST
@@ -67,6 +66,7 @@ from astrobin_apps_premium.templatetags.astrobin_apps_premium_tags import can_re
 from astrobin_apps_premium.utils import premium_get_max_allowed_image_size, premium_get_max_allowed_revisions, \
     premium_user_has_valid_subscription
 from astrobin_apps_users.services import UserService
+from common.services import AppRedirectionService
 from toggleproperties.models import ToggleProperty
 
 log = logging.getLogger('apps')
@@ -478,6 +478,9 @@ def index(request, template='index/root.html', extra_context=None):
 
 @login_required
 def image_upload(request):
+    if not settings.TESTING and "forceClassicUploader" not in request.GET:
+        return redirect(AppRedirectionService.redirect(request, "/uploader"))
+
     from astrobin_apps_premium.utils import (
         premium_used_percent,
         premium_progress_class,

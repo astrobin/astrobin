@@ -769,6 +769,7 @@ class Image(HasSolutionMixin, SafeDeleteModel):
         ("OES", "Observatorio El Sauce"),
         ("PSA", "PixelSkies"),
         ("REM", "RemoteSkies.net"),
+        ("REMSG", "Remote Skygems"),
         ("RLD", "Riverland Dingo Observatory"),
         ("ROBO", "RoboScopes"),
         ("SS", "Sahara Sky"),
@@ -2265,6 +2266,10 @@ class UserProfile(SafeDeleteModel):
     )
 
     inactive_account_reminder_sent = models.DateTimeField(
+        null=True
+    )
+
+    never_activated_account_reminder_sent = models.DateTimeField(
         null=True
     )
 

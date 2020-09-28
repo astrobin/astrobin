@@ -1,3 +1,62 @@
+2020-09-25 Salvatore Iovene <salvatore@iovene.com>
+ * v1.92.0
+ * (notifications) Sort out expired/-ing subscription notifications (#1330)
+ * (notifications) Send notification about account never activated, delete if non responsive (#1331)
+ * (i18n) Update translations (#1332)
+
+2020-09-24 Salvatore Iovene <salvatore@iovene.com>
+ * v1.91.10
+ * (deps) Upgrade django-subscription to the latest
+ * (images) Deal with invalid navigation context extras
+
+2020-09-24 Salvatore Iovene <salvatore@iovene.com>
+ * v1.91.9
+ * (deps) Upgrade django-subscription to the latest
+
+2020-09-23 Salvatore Iovene <salvatore@iovene.com>
+ * v1.91.8
+ * (deps) Upgrade django-subscription to the latest
+
+2020-09-23 Salvatore Iovene <salvatore@iovene.com>
+ * v1.91.6
+ * (api) Deal with chunked file missing using error 423
+
+2020-09-23 Salvatore Iovene <salvatore@iovene.com>
+ * v1.91.5
+ * (api) Allow credentials via CORS
+ * (api) Remove unnecessary variable assignment
+
+2020-09-22 Salvatore Iovene <salvatore@iovene.com>
+ * v1.91.4
+ * (premium) Fix expired/expiring subscription notification to be generic (#1328)
+ * (uploader) Fix upload HEAD API (#1329)
+
+2020-09-22 Salvatore Iovene <salvatore@iovene.com>
+ * v1.91.3
+ * (uploader) Temporarily remove redirect to beta uploader
+
+2020-09-21 Salvatore Iovene <salvatore@iovene.com>
+ * v1.91.2
+ * (uploader) Let 70% or all users thru the beta uploader
+
+2020-09-21 Salvatore Iovene <salvatore@iovene.com>
+ * v1.91.1
+ * (general) Use font-awesome from cdn
+
+2020-09-20 Salvatore Iovene <salvatore@iovene.com>
+ * v1.91.0
+ * (uploader) Up the beta uploader influx to 50% and add spanish, french speakers (#1327)
+
+2020-09-19 Salvatore Iovene <salvatore@iovene.com>
+ * v1.90.0
+ * (images) Add Remote Skygems as remote data source (#1324)
+ * (images) When ads are not allowed on a page, show "Acquired at" withoug banner (#1326)
+ * (infra) Do not perform real time indexing in DEBUG mode (#1325)
+
+2020-09-19 Salvatore Iovene <salvatore@iovene.com>
+ * v1.89.0
+ * (uploader) Let 30% of all users thru the beta uploader (#1322)
+
 2020-09-17 Salvatore Iovene <salvatore@iovene.com>
  * v1.88.0
  * (images) Add Goldfield Astronomical Observatory to list of remote sources (#1321)

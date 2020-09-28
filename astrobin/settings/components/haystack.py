@@ -58,5 +58,5 @@ else:
         'port': 9200
     }
 
-if not TESTING:
+if not TESTING and not DEBUG:
     HAYSTACK_SIGNAL_PROCESSOR = 'celery_haystack.signals.CelerySignalProcessor'

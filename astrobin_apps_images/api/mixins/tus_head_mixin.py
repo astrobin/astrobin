@@ -9,30 +9,34 @@ from astrobin_apps_images.api.utils import has_required_tus_header, add_expiry_h
 
 
 class TusHeadMixin(TusCacheMixin, object):
-    def info(self, request, *args, **kwargs):
+    def head(self, request, *args, **kwargs):
         # Validate tus header
         if not has_required_tus_header(request):
             return Response('Missing "{}" header.'.format('Tus-Resumable'), status=status.HTTP_400_BAD_REQUEST)
 
         try:
-            image = self.get_object()
+            object = self.get_object()
         except Http404:
-            # Instead of simply trowing a 404, we need to add a cache-control header to the response
+            # Instead of simply throwing a 404, we need to add a cache-control header to the response
             return Response('Not found.', headers={'Cache-Control': 'no-store'}, status=status.HTTP_404_NOT_FOUND)
 
+        offset = self.get_cached_property("offset", object)
+
+        if offset is None:
+            offset = 0
+            self.set_cached_property("offset", object, offset)
+
         headers = {
-            'Upload-Offset': self.get_cached_property("offset", image),
+            'Upload-Offset': offset,
             'Cache-Control': 'no-store'
         }
 
-        if self.get_cached_property("upload-length", image) >= 0:
-            headers['Upload-Length'] = image.upload_length
-
-        if self.get_cached_property("metadata", image):
-            headers['Upload-Metadata'] = encode_upload_metadata(json.loads(image.upload_metadata))
+        upload_metadata = self.get_cached_property("metadata", object)
+        if upload_metadata:
+            headers['Upload-Metadata'] = encode_upload_metadata(upload_metadata)
 
         # Add upload expiry to headers
-        expiration = self.get_cached_property("expires", image)
+        expiration = self.get_cached_property("expires", object)
         add_expiry_header(expiration, headers)
 
         return Response(headers=headers, status=status.HTTP_200_OK)

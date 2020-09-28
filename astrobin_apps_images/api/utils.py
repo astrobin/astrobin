@@ -20,7 +20,8 @@ def has_required_tus_header(request):
 
 
 def add_expiry_header(expiration, headers):
-    headers['Upload-Expires'] = expiration.strftime('%a, %d %b %Y %H:%M:%S %Z')
+    if expiration:
+        headers['Upload-Expires'] = expiration.strftime('%a, %d %b %Y %H:%M:%S %Z')
 
 
 def encode_base64_to_string(data):
@@ -178,7 +179,6 @@ def get_or_create_temporary_file(image):
         set_cached_property("temporary-file-path", image, path)
 
     cached = get_cached_property("temporary-file-path", image)
-    assert os.path.isfile(cached)
     return cached
 
 

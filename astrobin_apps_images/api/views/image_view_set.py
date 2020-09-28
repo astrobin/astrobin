@@ -17,7 +17,6 @@ from astrobin_apps_images.api.filters import ImageFilter
 from astrobin_apps_images.api.mixins import TusPatchMixin, TusHeadMixin, TusTerminateMixin, \
     TusCreateMixin
 from astrobin_apps_images.api.parsers import TusUploadStreamParser
-from astrobin_apps_images.api.permissions import HasUploaderAccessOrReadOnly
 from astrobin_apps_images.api.serializers import ImageSerializer
 from common.upload_paths import image_upload_path
 
@@ -52,7 +51,6 @@ class ImageViewSet(TusCreateMixin,
     parser_classes = [TusUploadStreamParser]
     permission_classes = [
         IsAuthenticatedOrReadOnly,
-        HasUploaderAccessOrReadOnly
     ]
 
     def get_file_field_name(self):
@@ -67,9 +65,8 @@ class ImageViewSet(TusCreateMixin,
             'upload_metadata': json.dumps(upload_metadata),
             'filename': filename,
             'title': upload_metadata['title'],
-            'is_wip': upload_metadata['is_wip'] if 'is_wip' in upload_metadata else False,
-            'skip_notifications': upload_metadata[
-                'skip_notifications'] if 'skip_notifications' in upload_metadata else False,
+            'is_wip': True,
+            'skip_notifications': True,
             'user_id': request.user.id,
         })
 

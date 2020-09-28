@@ -60,8 +60,12 @@ class TusPatchMixin(TusCacheMixin, mixins.UpdateModelMixin):
         if upload_offset != self.get_cached_property("offset", object):
             raise Conflict
 
-        # Make sure there is a tempfile for the upload
-        assert get_or_create_temporary_file(object)
+        temporary_file = get_or_create_temporary_file(object)
+        if not os.path.isfile(temporary_file):
+            # Initial request in the series of PATCH request was handled on a different server instance.
+            return HttpResponse(
+                'Previous chunks not found on this server.',
+                status=status.HTTP_423_LOCKED)
 
         # Get chunk from request
         chunk_bytes = self.get_chunk(request)
@@ -102,18 +106,16 @@ class TusPatchMixin(TusCacheMixin, mixins.UpdateModelMixin):
             signals.saving.send(object)
 
             # Save file
-            data = get_or_create_temporary_file(object)
+            temporary_file = get_or_create_temporary_file(object)
             getattr(object, self.get_file_field_name()).save(
                 self.get_upload_path_function()(object, self.get_cached_property("name", object)),
-                File(open(data))
+                File(open(temporary_file))
             )
 
             signals.saved.send(object)
 
             # Clean up
-            temporary_file_path = get_or_create_temporary_file(object)
-            os.remove(temporary_file_path)
-
+            os.remove(temporary_file)
             signals.finished.send(object)
 
         # Add upload expiry to headers
