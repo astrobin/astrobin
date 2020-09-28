@@ -197,7 +197,7 @@ Resources:
       DeploymentConfiguration:
         MaximumPercent: 200
         MinimumHealthyPercent: 100
-      DesiredCount: 2
+      DesiredCount: 1
       TaskDefinition: !Ref AstroBinAppTaskDefinition
       LoadBalancers:
         - TargetGroupArn: !Ref AstroBinAppTargetGroup
