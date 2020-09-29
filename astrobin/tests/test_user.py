@@ -167,7 +167,7 @@ class UserTest(TestCase):
 
         response = self.client.get(reverse('user_page', args=('user',)))
         self.assertEquals(response.status_code, 200)
-        self.assertEquals(image.title in response.content, False)
+        self.assertEquals(image.title in response.content, True)
 
         image.delete()
 
@@ -431,6 +431,17 @@ class UserTest(TestCase):
 
         image.delete()
         self.client.logout()
+
+    @patch("astrobin.tasks.retrieve_primary_thumbnails")
+    def test_user_page_view_wip_image_not_visible_by_others(self, retrieve_primary_thumbnails):
+        self.client.login(username="user", password="password")
+        image = self._do_upload('astrobin/fixtures/test.jpg', "TEST STAGING IMAGE", True)
+
+        self.client.logout()
+
+        response = self.client.get(reverse('user_page', args=('user',)))
+        self.assertEquals(response.status_code, 200)
+        self.assertEquals(image.title in response.content, False)
 
     def test_user_page_commercial_products_view(self):
         url = reverse(
