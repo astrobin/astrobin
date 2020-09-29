@@ -29,7 +29,7 @@ Resources:
     Type: AWS::ECS::TaskDefinition
     Properties:
       NetworkMode: "awsvpc"
-      RequiresCompatibilities: ["FARGATE"]
+      RequiresCompatibilities: [ "FARGATE" ]
       Cpu: 2048
       Memory: 4096
       ExecutionRoleArn: !ImportValue ExecutionRole
@@ -140,6 +140,19 @@ Resources:
           ToPort: 443
           CidrIp: 0.0.0.0/0
 
+  AstroBinAppListener2:
+    Type: AWS::ElasticLoadBalancingV2::ListenerRule
+    Properties:
+      Actions:
+        - Type: forward
+          TargetGroupArn: !Ref AstroBinAppTargetGroup2
+      Conditions:
+        - Field: path-pattern
+          PathPatternConfig:
+            Values: [ "/api/v2/images/*" ]
+      ListenerArn: !Ref AstroBinAppLoadBalancerSecureListener
+      Priority: 1
+
   AstroBinAppLoadBalancer:
     Type: AWS::ElasticLoadBalancingV2::LoadBalancer
     Properties:
@@ -160,7 +173,12 @@ Resources:
         - CertificateArn: !Ref CertificateArnParameter
       DefaultActions:
         - Type: forward
-          TargetGroupArn: !Ref AstroBinAppTargetGroup
+          ForwardConfig:
+            TargetGroups:
+              - TargetGroupArn: !Ref AstroBinAppTargetGroup
+                Weight: 1
+              - TargetGroupArn: !Ref AstroBinAppTargetGroup2
+                Weight: 1
 
   AstroBinAppLoadBalancerListener:
     Type: AWS::ElasticLoadBalancingV2::Listener
@@ -188,6 +206,16 @@ Resources:
       Protocol: HTTP
       VpcId: !ImportValue VPC
 
+  AstroBinAppTargetGroup2:
+    Type: AWS::ElasticLoadBalancingV2::TargetGroup
+    Properties:
+      TargetType: ip
+      Name: astrobin-app-target-group-2
+      HealthCheckPath: /api/v2/image/image
+      Port: 80
+      Protocol: HTTP
+      VpcId: !ImportValue VPC
+
   AstroBinAppService:
     Type: AWS::ECS::Service
     DependsOn: AstroBinAppLoadBalancerSecureListener
@@ -209,8 +237,33 @@ Resources:
           SecurityGroups:
             - !Ref AstroBinAppSecurityGroup
           Subnets:
-            - !ImportValue Subnet1
-            - !ImportValue Subnet2
+            - "subnet-07b8b1066146d22d4"
+            - "subnet-0ce1c2e70f61878d2"
+
+  AstroBinAppService2:
+    Type: AWS::ECS::Service
+    DependsOn: AstroBinAppLoadBalancerSecureListener
+    Properties:
+      Cluster: !ImportValue Cluster
+      LaunchType: "FARGATE"
+      DeploymentConfiguration:
+        MaximumPercent: 200
+        MinimumHealthyPercent: 100
+      DesiredCount: 1
+      TaskDefinition: !Ref AstroBinAppTaskDefinition
+      LoadBalancers:
+        - TargetGroupArn: !Ref AstroBinAppTargetGroup2
+          ContainerPort: 8083
+          ContainerName: astrobin-app-container
+      NetworkConfiguration:
+        AwsvpcConfiguration:
+          AssignPublicIp: "ENABLED"
+          SecurityGroups:
+            - !Ref AstroBinAppSecurityGroup
+          Subnets:
+            - "subnet-07b8b1066146d22d4"
+            - "subnet-0ce1c2e70f61878d2"
+
 
 Outputs:
 
@@ -228,3 +281,8 @@ Outputs:
     Value: !Ref AstroBinAppService
     Export:
       Name: 'AstroBinAppService'
+
+  AstroBinAppService2:
+    Value: !Ref AstroBinAppService2
+    Export:
+      Name: 'AstroBinAppService2'
