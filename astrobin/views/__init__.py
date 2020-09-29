@@ -1073,11 +1073,6 @@ def user_page(request, username):
             raise Http404
 
     user_ct = ContentType.objects.get_for_model(User)
-    image_ct = ContentType.objects.get_for_model(Image)
-
-    viewer_profile = None
-    if request.user.is_authenticated():
-        viewer_profile = request.user.userprofile
 
     section = 'public'
     subsection = request.GET.get('sub')
@@ -1104,12 +1099,14 @@ def user_page(request, username):
     active = request.GET.get('active')
     menu = []
 
-    qs = UserService(user).get_public_images()
+    qs = UserService(user).get_all_images()
     wip_qs = UserService(user).get_wip_images()
     corrupted_qs = UserService(user).get_corrupted_images()
 
     if request.user != user:
-        qs = qs.exclude(pk__in=[x.pk for x in corrupted_qs])
+        qs = qs \
+            .exclude(is_wip=True) \
+            .exclude(pk__in=[x.pk for x in corrupted_qs])
 
     if 'staging' in request.GET:
         if request.user != user and not request.user.is_superuser:
@@ -1295,7 +1292,6 @@ def user_page(request, username):
     from django.template.defaultfilters import timesince
     from pybb.models import Post
 
-    member_since = None
     date_time = user.date_joined.replace(tzinfo=None)
     span = timesince(date_time)
     if span == "0 " + _("minutes"):

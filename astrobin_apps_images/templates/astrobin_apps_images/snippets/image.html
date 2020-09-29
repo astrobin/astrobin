@@ -6,7 +6,7 @@
 {% load staticfiles %}
 
 {% if status != 'error' %}
-    <div class="astrobin-image-container{% if classes %} {{classes}}{% endif %}">
+    <div class="astrobin-image-container{% if classes %} {{classes}}{% endif %}{% if image.is_wip %} wip{% endif %}">
         {% if error_message %}
             <div class="alert alert-error">
                 <h4 class="alert-heading">
@@ -27,7 +27,7 @@
                     <ul class="badges">
                         {% for badge in badges %}
                             {% if badge == 'iotd' and alias != 'regular' and alias != 'regular_sharpened' %}
-                                <li class="iotd-thumb-banner">
+                                <li class="iotd-badge">
                                     <h2>
                                         <i class="icon iotd-badge icon-trophy"></i>
                                     </h2>
@@ -39,6 +39,14 @@
                                     <h2>
                                         <span>Top</span>
                                         <span>pick</span>
+                                    </h2>
+                                </li>
+                            {% endif %}
+
+                            {% if badge == 'wip' %}
+                                <li class="wip-badge{% if alias == 'regular' or alias == 'regular_sharpened' %} wip-badge-large{% endif %}">
+                                    <h2>
+                                        <i class="icon icon-lock" rel="tooltip" title="{% trans "Staging area" %}"></i>
                                     </h2>
                                 </li>
                             {% endif %}

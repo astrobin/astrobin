@@ -216,6 +216,9 @@ def astrobin_image(context, image, alias, **kwargs):
             not image.user.userprofile.exclude_from_competitions):
             badges.append('top-pick')
 
+        if image.is_wip:
+            badges.append('wip')
+
         # Temporarily disable this because it hogs the default celery queue.
         """
         cache_key = 'top100_ids'
