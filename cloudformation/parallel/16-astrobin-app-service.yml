@@ -211,7 +211,7 @@ Resources:
     Properties:
       TargetType: ip
       Name: astrobin-app-target-group-2
-      HealthCheckPath: /api/v2/image/image
+      HealthCheckPath: /accounts/login/
       Port: 80
       Protocol: HTTP
       VpcId: !ImportValue VPC
@@ -237,8 +237,8 @@ Resources:
           SecurityGroups:
             - !Ref AstroBinAppSecurityGroup
           Subnets:
-            - "subnet-07b8b1066146d22d4"
-            - "subnet-0ce1c2e70f61878d2"
+            - !ImportValue Subnet1
+            - !ImportValue Subnet2
 
   AstroBinAppService2:
     Type: AWS::ECS::Service
@@ -261,8 +261,8 @@ Resources:
           SecurityGroups:
             - !Ref AstroBinAppSecurityGroup
           Subnets:
-            - "subnet-07b8b1066146d22d4"
-            - "subnet-0ce1c2e70f61878d2"
+            - !ImportValue Subnet1
+            - !ImportValue Subnet2
 
 
 Outputs:

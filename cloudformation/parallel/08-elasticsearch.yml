@@ -1,0 +1,47 @@
+AWSTemplateFormatVersion: '2010-09-09'
+Description: AstroBin ElasticSearch domain
+
+Resources:
+
+  ElasticSearchDomain:
+    Type: AWS::Elasticsearch::Domain
+    Properties:
+      DomainName: "astrobin"
+      ElasticsearchClusterConfig:
+        DedicatedMasterEnabled: "true"
+        InstanceCount: "2"
+        ZoneAwarenessEnabled: "true"
+        InstanceType: "m4.large.elasticsearch"
+        DedicatedMasterType: "m4.large.elasticsearch"
+        DedicatedMasterCount: "3"
+      ElasticsearchVersion: 2.3
+      EBSOptions:
+        EBSEnabled: true
+        Iops: 0
+        VolumeSize: 10
+        VolumeType: "gp2"
+      SnapshotOptions:
+        AutomatedSnapshotStartHour: "0"
+      AccessPolicies:
+        Version: "2012-10-17"
+        Statement:
+          - Effect: "Allow"
+            Action: "es:*"
+            Principal:
+              AWS: !Sub ${AWS::AccountId}
+            Resource: "*"
+            Condition:
+              IpAddress:
+                aws:SourceIp: [
+                    "10.1.0.0/0"
+                ]
+      AdvancedOptions:
+        rest.action.multi.allow_explicit_index: "true"
+
+
+Outputs:
+
+  ElasticSearchDomain:
+    Value: !Ref ElasticSearchDomain
+    Export:
+      Name: 'ElasticSearchDomain'

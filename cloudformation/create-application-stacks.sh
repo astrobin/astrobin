@@ -1,5 +1,7 @@
 #!/usr/bin/env bash
 
+set -x
+
 REGION=$1
 CERTIFICATE_ARN=$2
 
@@ -11,7 +13,7 @@ do
     STACK_NAME=$(basename ${STACK_FILE%.*})
     PARAMS=()
 
-    if [[ $STACK_NAME == "15-astrobin-app-service" ]]; then
+    if [[ $STACK_NAME == "16-astrobin-app-service" ]]; then
         PARAMS+=(--parameters ParameterKey=CertificateArnParameter,ParameterValue=${CERTIFICATE_ARN})
     fi
 
