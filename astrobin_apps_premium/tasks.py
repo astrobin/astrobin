@@ -55,6 +55,8 @@ def reactivate_previous_subscription_when_ultimate_compensation_expires():
                 previous_subscription.active = True
                 previous_subscription.save()
                 ultimate_user_subscription.unsubscribe()
+                ultimate_user_subscription.active = False
+                ultimate_user_subscription.save()
                 log.debug(
                     "Reactivated subscription %s for user %s as Ultimate compensation expired" % (
                         previous_subscription.subscription.name,
