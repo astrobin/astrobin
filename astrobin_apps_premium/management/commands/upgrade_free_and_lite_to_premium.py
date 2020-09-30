@@ -41,7 +41,7 @@ class Command(BaseCommand):
 
             for user_subscription in user_subscriptions:
                 if "Premium" in user_subscription.subscription.name and \
-                        user_subscription.valid() and \
+                        user_subscription.expires >= date.today() and \
                         user_subscription.active:
                     has_active_premium = True
 
