@@ -2192,6 +2192,13 @@ class UserProfile(SafeDeleteModel):
         verbose_name=_("Default gallery sorting"),
     )
 
+    display_wip_images_on_public_gallery = models.NullBooleanField(
+        verbose_name=_("See your own Staging Area images on your gallery"),
+        help_text=_("Select if you want your Staging Area images to appear on your own view of your gallery when you "
+                    "are logged. If you choose 'No', your Staging Area images can be located via the 'View' menu entry "
+                    "on your gallery page."),
+    )
+
     default_license = models.IntegerField(
         choices=LICENSE_CHOICES,
         default=0,
