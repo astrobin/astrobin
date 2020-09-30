@@ -1,6 +1,8 @@
 # Python
 
 # Django
+from datetime import date
+
 from django.conf import settings
 from django.core.cache import cache
 from django.db.models import Q
@@ -71,7 +73,7 @@ def is_donor(user):
             return False
 
         us = us[0]
-        result = us.valid()
+        result = us.active and us.expires >= date.today()
         cache.set(cache_key, result, 1)
         return result
 
@@ -88,7 +90,7 @@ def has_donation_subscription(user, name):
             return False
 
         us = us[0]
-        return us.valid()
+        return us.active and us.expires >= date.today()
 
     return False
 

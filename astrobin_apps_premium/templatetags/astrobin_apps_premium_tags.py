@@ -126,6 +126,10 @@ def is_any_premium_subscription(user):
         is_premium_2020(user) or \
         is_ultimate_2020(user)
 
+@register.filter
+def is_usersubscription_current(userSubscription):
+    # type: (UserSubscription) -> bool
+    return userSubscription and userSubscription.active and userSubscription.expires >= datetime.date.today()
 
 @register.filter
 def has_valid_premium_offer(user):
