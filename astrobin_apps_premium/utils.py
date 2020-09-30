@@ -1,7 +1,9 @@
 import sys
+from datetime import datetime
 
 from django.conf import settings
 from django.core.cache import cache
+from django.db.models import Q
 from subscription.models import UserSubscription
 
 SUBSCRIPTION_NAMES = (
@@ -80,7 +82,8 @@ def premium_get_valid_usersubscription(user):
         user__username=user.username,
         subscription__name__in=SUBSCRIPTION_NAMES,
         active=True,
-    ) if obj.valid()]
+        expires__gte=datetime.today()
+    )]
 
     if len(us) == 0:
         return None
@@ -100,10 +103,10 @@ def premium_get_valid_usersubscription(user):
 
 def premium_get_invalid_usersubscription(user):
     us = [obj for obj in UserSubscription.objects.filter(
+        Q(active=False) | Q(expires__lt=datetime.today()),
         user__username=user.username,
         subscription__name__in=SUBSCRIPTION_NAMES,
-        active=True,
-    ) if not obj.valid()]
+    )]
 
     if len(us) == 0:
         return None
