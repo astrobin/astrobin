@@ -11,6 +11,7 @@ class UserProfileEditPreferencesForm(forms.ModelForm):
             'language',
             'default_frontpage_section',
             'default_gallery_sorting',
+            'display_wip_images_on_public_gallery',
             'exclude_from_competitions',
             'receive_forum_emails',
             'receive_important_communications',
