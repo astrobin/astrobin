@@ -1099,7 +1099,10 @@ def user_page(request, username):
     active = request.GET.get('active')
     menu = []
 
-    qs = UserService(user).get_all_images()
+    if user.userprofile.display_wip_images_on_public_gallery in (None, True):
+        qs = UserService(user).get_all_images()
+    else:
+        qs = UserService(user).get_public_images()
     wip_qs = UserService(user).get_wip_images()
     corrupted_qs = UserService(user).get_corrupted_images()
 
