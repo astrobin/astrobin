@@ -110,4 +110,4 @@ class EmailBackend(BaseEmailBackend):
             [settings.EMAIL_DEV_RECIPIENT if settings.SEND_EMAILS == 'dev' else recipient.email],
             html_message=html_body)
 
-        log.debug("Email sent to %s: %s" % (recipient.email, subject))
+        log.info("Email sent to %s: %s" % (recipient.email, subject))
