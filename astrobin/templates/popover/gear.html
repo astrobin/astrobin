@@ -69,13 +69,19 @@
             {% for listing in gear|equipment_brand_listings:REQUEST_COUNTRY %}
                 <div class="equipment-brand-listing">
                     {% if request.user|show_ads and not image.user|is_any_ultimate %}
-                        <a href="{{ listing.url }}?{% equipment_brand_listing_utm_tags %}" target="_blank">
+                        <a
+                            href="{{ listing.url }}?{% equipment_brand_listing_utm_tags %}"
+                            onclick="getOutboundLink('{{ listing.url }}', '{{ request.path }}')"
+                            target="_blank">
                             <img class="logo" src="{{ listing.retailer.logo.url }}" alt="{{ listing.retailer }}">
                         </a>
                     {% endif %}
 
-                    <a href="{{ listing.url }}?{% equipment_brand_listing_utm_tags %}" target="_blank"
-                       class="shop-button btn btn-block">
+                    <a
+                        href="{{ listing.url }}?{% equipment_brand_listing_utm_tags %}"
+                        onclick="getOutboundLink('{{ listing.url }}', '{{ request.path }}')"
+                        target="_blank"
+                        class="shop-button btn btn-block">
                         <i class="icon-shopping-cart"></i>
                         {% blocktrans trimmed with brand=listing.brand retailer=listing.retailer %}
                             Shop {{ brand }} at {{ retailer }}

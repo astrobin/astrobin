@@ -41,7 +41,6 @@ INSTALLED_APPS = [
     'pipeline',
     'tastypie',
     'actstream',
-    'modeltranslation',
     'paypal.standard.ipn',
     'subscription',
     'ember',
