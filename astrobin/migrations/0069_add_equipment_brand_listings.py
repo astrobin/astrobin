@@ -8,7 +8,7 @@ from django.db import migrations, models
 class Migration(migrations.Migration):
 
     dependencies = [
-        ('astrobin', '0067_remove_commercial_and_related_gear_models'),
+        ('astrobin', '0068_remove_commercial_and_related_gear_models'),
     ]
 
     operations = [

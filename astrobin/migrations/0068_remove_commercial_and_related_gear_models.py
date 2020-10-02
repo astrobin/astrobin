@@ -8,7 +8,7 @@ from django.db import migrations, models
 class Migration(migrations.Migration):
 
     dependencies = [
-        ('astrobin', '0066_add_never_activated_account_reminder_sent'),
+        ('astrobin', '0067_add_display_wip_images_on_public_gallery'),
     ]
 
     operations = [

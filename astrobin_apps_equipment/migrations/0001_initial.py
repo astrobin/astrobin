@@ -14,7 +14,7 @@ class Migration(migrations.Migration):
 
     dependencies = [
         migrations.swappable_dependency(settings.AUTH_USER_MODEL),
-        ('astrobin', '0067_remove_commercial_and_related_gear_models'),
+        ('astrobin', '0069_add_equipment_brand_listings'),
     ]
 
     operations = [
