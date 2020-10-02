@@ -99,7 +99,7 @@ django-xmlrpc==0.1.8
 djangorestframework==3.6.3
 djangorestframework-camel-case==1.0.3
 docutils==0.16
-easy-thumbnails==2.6
+-e git+https://github.com/astrobin/easy-thumbnails.git@1b5b3e4faa96054e9a2923f98549cbe9db1586c8#egg=easy-thumbnails
 elasticsearch==7.9.1
 enum34==1.1.10
 fanstatic==1.1
