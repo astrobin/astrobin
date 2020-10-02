@@ -1,0 +1,5 @@
+{{ object.brand.name }}
+
+{% for item in object.gear_items.all %}
+    {{ item }}
+{% endfor %}
