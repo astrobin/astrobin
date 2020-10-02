@@ -23,7 +23,7 @@ class ImageService:
 
     def get_next_available_revision_label(self):
         highest_label = 'A'
-        for r in self.get_revisions(False, True):
+        for r in self.get_revisions(True, True):
             highest_label = r.label
 
         return base26_encode(base26_decode(highest_label) + 1)
