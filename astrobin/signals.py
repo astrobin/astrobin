@@ -16,7 +16,6 @@ from django.utils.translation import ugettext_lazy as _
 from gadjo.requestprovider.signals import get_request
 from pybb.models import Forum, Topic, Post
 from rest_framework.authtoken.models import Token
-from reviews.models import Review
 from safedelete.signals import post_softdelete
 from subscription.models import UserSubscription, Subscription
 from subscription.signals import subscribed, paid, signed_up
@@ -634,18 +633,6 @@ def forum_post_post_save(sender, instance, created, **kwargs):
 
 
 post_save.connect(forum_post_post_save, sender=Post)
-
-
-def review_post_save(sender, instance, created, **kwargs):
-    verb = "VERB_WROTE_REVIEW"
-    if created:
-        add_story(instance.user,
-                  verb=verb,
-                  action_object=instance,
-                  target=instance.content_object)
-
-
-post_save.connect(review_post_save, sender=Review)
 
 
 def threaded_messages_thread_post_save(sender, instance, created, **kwargs):

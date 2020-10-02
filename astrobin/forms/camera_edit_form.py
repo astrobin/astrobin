@@ -8,4 +8,4 @@ class CameraEditForm(forms.ModelForm):
 
     class Meta:
         model = Camera
-        exclude = ('make', 'name', 'retailed')
+        exclude = ('make', 'name')

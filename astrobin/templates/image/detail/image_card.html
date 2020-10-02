@@ -1,4 +1,5 @@
 {% load common_tags %}
+{% load astrobin_apps_equipment_tags %}
 {% load astrobin_apps_premium_tags %}
 {% load astrobin_apps_platesolving_tags %}
 {% load astrobin_apps_remote_source_affiliation_tags %}
@@ -14,11 +15,30 @@
                     <h4>
                         <i class="icon-list-alt"></i> {% trans "Technical card" %}
 
-                        {% if not request.user|can_view_full_technical_card and not request.user == image.user %}
+                        {% if not request.user|show_ads or image.user|is_any_ultimate %}
                             <div class="actions">
-                                <a href="#feature-restricted-modal" data-toggle="modal">
-                                    {% trans "More" %}
-                                </a>
+                                {% if image|gear_items_with_listings:REQUEST_COUNTRY|length %}
+                                    <div class="dropdown">
+                                        <a href="#" class="dropdown-toggle" data-toggle="dropdown">
+                                            <i class="icon-shopping-cart"></i>
+                                        </a>
+                                        <ul class="dropdown-menu">
+                                            {% with image|unique_equipment_brand_listings:REQUEST_COUNTRY as listings %}
+                                                {% for listing in listings %}
+                                                    <li>
+                                                        <a href="{{ listing.url }}?{% equipment_brand_listing_utm_tags %}"
+                                                           onclick="getOutboundLink('{{ listing.url }}', '{{ request.path }}')"
+                                                           target="_blank">
+                                                           {% blocktrans trimmed with brand=listing.brand retailer=listing.retailer %}
+                                                               Shop {{ brand }} at {{ retailer }}
+                                                           {% endblocktrans %}
+                                                        </a>
+                                                    </li>
+                                                {% endfor %}
+                                            {% endwith %}
+                                        </ul>
+                                    </div>
+                                {% endif %}
                             </div>
                         {% endif %}
                     </h4>
@@ -32,12 +52,32 @@
                                     <p>
                                         <strong class="card-label">{% trans i.0 %}:</strong>
                                         {% for g in i.1 %}
-                                            <a rel="popover"
-                                               class="gear-popover{% if g.commercial and g.commercial.is_paid or g.commercial.producer == request.user %} btn btn-mini btn-warning{% endif %}"
-                                               data-load="{% url 'gear_popover_ajax' g.id %}"
-                                               href="{% url 'gear_page' g.id g.slug %}">{{ g }}</a>
-                                            {% if not forloop.last %}
-                                                ,&nbsp;{% endif %}
+                                            <span rel="popover" class="gear-popover-label"
+                                                  data-load="{% url 'gear_popover_ajax' g.id %}{% if 'DEBUG_COUNTRY' in request.GET %}?DEBUG_COUNTRY={{ request.GET|get_item:'DEBUG_COUNTRY' }}{% endif %}">
+                                                {{ g }}
+                                            </span>
+
+                                            {% if request.user|show_ads and not image.user|is_any_ultimate %}
+                                                {% with g|equipment_brand_listings:REQUEST_COUNTRY as listings %}
+                                                    {% if listings|length == 1 %}
+                                                        {% with url=listings.all.0.url %}
+                                                            <a
+                                                                href="{{ url }}?{% equipment_brand_listing_utm_tags %}"
+                                                                onclick="getOutboundLink('{{ url }}', '{{ request.path }}')"
+                                                                target="_blank">
+                                                                <i class="icon-shopping-cart" rel="tooltip"
+                                                                   data-placement="bottom" title="
+                                                                   {% blocktrans trimmed with brand=listings.all.0.brand retailer=listings.all.0.retailer %}
+                                                                       Shop {{ brand }} at {{ retailer }}
+                                                                   {% endblocktrans %}
+                                                                "></i>
+                                                            </a>
+                                                        {% endwith %}
+                                                    {% endif %}
+                                                {% endwith %}
+                                            {% endif %}
+
+                                            {% if not forloop.last %}&nbsp;&middot;&nbsp;{% endif %}
                                         {% endfor %}
                                     </p>
                                 {% endif %}
@@ -246,8 +286,8 @@
                         <p>
                             <strong class="card-label">{% trans "Remote source" %}:</strong>
                             {% if image.remote_source|is_remote_source_affiliate %}
-                                <a href="{{ image.remote_source|remote_source_affiliate_url }}?utm_source=astrobin&utm_medium=technical-card&utm_campaign=hosting-facility"
-                                   onclick="getOutboundLink('{{ image.remote_source|remote_source_affiliate_url }}?utm_source=astrobin&utm_medium=technical-card&utm_campaign=hosting-facility')"
+                                <a href="{{ image.remote_source|remote_source_affiliate_url }}?{% remote_source_affiliate_utm_tags %}"
+                                   onclick="getOutboundLink('{{ image.remote_source|remote_source_affiliate_url }}', '{{ request.path }}')"
                                    target="_blank">
                                     {{ image.get_remote_source }}
                                 </a>

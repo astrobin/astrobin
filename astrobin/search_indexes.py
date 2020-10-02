@@ -10,7 +10,6 @@ from hitcount.models import HitCount
 from pybb.models import Post, Topic
 
 from astrobin.enums import SubjectType, SolarSystemSubject
-from astrobin.models import CommercialGear
 from astrobin.models import DeepSky_Acquisition
 from astrobin.models import Image
 from astrobin.models import SolarSystem_Acquisition
@@ -491,8 +490,6 @@ class ImageIndex(CelerySearchIndex, Indexable):
 
     comments = IntegerField()
 
-    is_commercial = BooleanField()
-
     subject_type = IntegerField()
     subject_type_char = CharField(model_attr='subject_type')
 
@@ -588,10 +585,6 @@ class ImageIndex(CelerySearchIndex, Indexable):
 
     def prepare_comments(self, obj):
         return _prepare_comments(obj)
-
-    def prepare_is_commercial(self, obj):
-        commercial_gear = CommercialGear.objects.filter(image=obj)
-        return commercial_gear.count() > 0
 
     def prepare_is_iotd(self, obj):
         return hasattr(obj, 'iotd')

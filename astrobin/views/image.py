@@ -333,20 +333,6 @@ class ImageDetailView(ImageDetailViewBase):
             ),
         )
 
-        gear_list_has_commercial = False
-        gear_list_has_paid_commercial = False
-        for g in gear_list:
-            if g[1].exclude(commercial=None).count() > 0:
-                gear_list_has_commercial = True
-                break
-        for g in gear_list:
-            for i in g[1].exclude(commercial=None):
-                if i.commercial.is_paid() or i.commercial.producer == self.request.user:
-                    gear_list_has_paid_commercial = True
-                    # It would be faster if we exited the outer loop, but really,
-                    # how many gear items can an image have?
-                    break
-
         makes_list = ','.join(
             filter(None, reduce(
                 lambda x, y: x + y,
@@ -685,8 +671,6 @@ class ImageDetailView(ImageDetailViewBase):
                 object_id=image.id).count(),
             'gear_list': gear_list,
             'makes_list': makes_list,
-            'gear_list_has_commercial': gear_list_has_commercial,
-            'gear_list_has_paid_commercial': gear_list_has_paid_commercial,
             'image_type': image_type,
             'ssa': ssa,
             'deep_sky_data': deep_sky_data,

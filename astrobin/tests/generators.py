@@ -4,7 +4,7 @@ import string
 from django.contrib.auth.models import User, Group
 from subscription.models import Subscription, UserSubscription
 
-from astrobin.models import Image, ImageRevision, Telescope
+from astrobin.models import Image, ImageRevision, Telescope, Mount
 
 
 class Generators:
@@ -49,6 +49,13 @@ class Generators:
             aperture=100,
             focal_length=1000,
             type="REFR ACHRO",
+        )
+
+    @staticmethod
+    def mount():
+        return Mount.objects.create(
+            make="Brand XYZ",
+            name="Mount Pro 1000",
         )
 
     @staticmethod

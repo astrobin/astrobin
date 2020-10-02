@@ -10,6 +10,7 @@
 @import "progress";
 @import "select2";
 @import "uniform";
+@import "ui-tooltip";
 
 @import "forum";
 @import "search";
@@ -1045,6 +1046,10 @@ BODY:first-of-type ul.as-list, x:-moz-any-link, x:default { /* Target FF 3.5+ */
 }
 
 .technical-card {
+  .subtle-container {
+    overflow: visible;
+  }
+
   p {
     margin: $spacer-small 0;
   }
@@ -1062,6 +1067,15 @@ BODY:first-of-type ul.as-list, x:-moz-any-link, x:default { /* Target FF 3.5+ */
 
   .image-histogram {
     margin-top: $spacer-xxlarge;
+  }
+
+  .gear {
+    .icon-shopping-cart {
+      padding: 2px 4px;
+      margin-left: .25rem;
+      color: goldenrod;
+      text-shadow: 0 0 3px rgba(0, 0, 0, .33);
+    }
   }
 }
 
@@ -1145,7 +1159,7 @@ BODY:first-of-type ul.as-list, x:-moz-any-link, x:default { /* Target FF 3.5+ */
   }
 }
 
-.explore-comment-container, .explore-review-container {
+.explore-comment-container {
   width: 460px;
   padding: $spacer-small;
   display: inline-block;
@@ -1172,15 +1186,11 @@ BODY:first-of-type ul.as-list, x:-moz-any-link, x:default { /* Target FF 3.5+ */
   }
 }
 
-.explore-review-container {
-  width: 302px;
-}
-
 .nested-comments-container {
   overflow: visible !important;
 }
 
-.reviews, .comments {
+.comments {
   margin-top: $spacer-large;
   margin-left: $spacer-large;
 
@@ -1195,7 +1205,7 @@ BODY:first-of-type ul.as-list, x:-moz-any-link, x:default { /* Target FF 3.5+ */
   }
 }
 
-.comment, .review {
+.comment {
   position: relative;
   font-size: 1em;
   margin: 0;
@@ -1345,11 +1355,6 @@ BODY:first-of-type ul.as-list, x:-moz-any-link, x:default { /* Target FF 3.5+ */
   margin-left: $spacer-large;
 }
 
-.review {
-  border-bottom: 1px dashed #555;
-  padding-bottom: $spacer-large;
-}
-
 @keyframes bounceCommentIndicator {
   from {
     left: -30px;
@@ -1369,7 +1374,7 @@ BODY:first-of-type ul.as-list, x:-moz-any-link, x:default { /* Target FF 3.5+ */
   }
 }
 
-.comment.newlyAdded, .comment.hilight, .review.hilight {
+.comment.newlyAdded, .comment.hilight {
   &:before {
     content: "\279F";
     position: absolute;
@@ -1385,12 +1390,6 @@ BODY:first-of-type ul.as-list, x:-moz-any-link, x:default { /* Target FF 3.5+ */
   .content {
     font-weight: bold;
     color: yellow;
-  }
-}
-
-.review-form {
-  textarea, select {
-    width: 96%;
   }
 }
 
@@ -1979,41 +1978,6 @@ p.small {
 
 *[rel="popover"] {
   position: relative;
-}
-
-.ui-tooltip, .qtip {
-  //max-width: 400px;
-  //min-width: 250px;
-}
-
-.ui-tooltip-default .ui-tooltip-titlebar,
-.ui-tooltip-default .ui-tooltip-content {
-  background: $grey-6-dark url('../images/darker-panel-tile.png');
-  border-color: #111;
-  @include box-shadow-subtle;
-  color: $text-color;
-
-  h3 {
-    color: $strong-text-color;
-    border-bottom: 1px solid #232323;
-  }
-
-  p {
-    margin-bottom: 2px;
-  }
-
-  .actions {
-    margin-top: $spacer-large;
-    padding-top: $spacer-large;
-    padding-bottom: $spacer-medium;
-    border-top: 1px solid #232323;
-    text-align: right;
-  }
-}
-
-.ui-tooltip .ui-tooltip-tip,
-.ui-tooltip .ui-tooltip-tip * {
-  display: none;
 }
 
 .row.section {
@@ -2884,6 +2848,17 @@ li.revisions {
   }
 }
 
+.gear-popover-label {
+  padding: 0;
+  color: $link-color;
+  cursor: pointer;
+
+
+  &:hover {
+    border-bottom: 1px dotted $link-color;
+  }
+}
+
 .gear-popover, .user-popover, .subject-popover {
   .thumbnail {
     border: 0;
@@ -2891,6 +2866,25 @@ li.revisions {
 
   th, td {
     border-color: $grey-8;
+  }
+
+  .equipment-brand-listings {
+    border-top: 1px solid $grey-7;
+    background: $grey-6 url(../images/background-tile.png);
+    margin: 0 -1rem;
+    padding: 1rem;
+
+    .equipment-brand-listing {
+      .logo {
+        margin-bottom: .75rem;
+      }
+
+      .shop-button {
+        i {
+          margin-right: .25rem;
+        }
+      }
+    }
   }
 }
 
@@ -2993,10 +2987,6 @@ li.revisions {
 
 .gear-business-card {
   height: 150px;
-}
-
-.commercial-gear-items.table, .retailed-gear-items.table {
-  table-layout: fixed;
 }
 
 #more-subjects .hide, #more-subjects .reminder {
@@ -4643,6 +4633,19 @@ table.api-examples {
     background: yellow;
     color: black;
     padding: 0 4px;
+  }
+
+  .equipment-brand-listing-search-result {
+    width: calc(100% - 2rem);
+    padding: 1rem;
+    margin: 0 0 2rem;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+
+    .text i {
+      margin-right: .5rem;
+    }
   }
 }
 

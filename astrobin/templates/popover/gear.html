@@ -1,12 +1,104 @@
 {% load i18n %}
 {% load tags %}
+{% load astrobin_apps_images_tags %}
+{% load astrobin_apps_equipment_tags %}
+{% load astrobin_apps_premium_tags %}
+{% load toggleproperty_tags %}
 
-<h3>{{gear.name}}</h3>
-<p><strong>{% trans "Make" %}</strong>: {{gear.make}}</p>
+<div class="gear-popover">
 
-<div class="actions">
-    <a class="btn btn-mini btn-primary" href="/search/?q={{gear.name}}">
-        {% trans "Find images" %}
-    </a>
+    <div class="header">
+        <h3>{{ gear }}</h3>
+        <p>{% gear_type gear %}</p>
+    </div>
+
+    <div class="data">
+        {# Camera #}
+
+        {% if gear.pixel_size %}
+            <p><strong>{% trans "Pixel size" %}</strong>: {{ gear.pixel_size }} &mu;m</p>
+        {% endif %}
+
+        {% if gear.sensor_width %}
+            <p><strong>{% trans "Sensor width" %}</strong>: {{ gear.sensor_width }} mm</p>
+        {% endif %}
+
+        {% if gear.sensor_height %}
+            <p><strong>{% trans "Sensor height" %}</strong>: {{ gear.sensor_height }} mm</p>
+        {% endif %}
+
+        {# Filter #}
+
+        {% if gear.bandwidth %}
+            <p><strong>{% trans "Bandwidth" %}</strong>: {{ gear.bandwidth }} nm</p>
+        {% endif %}
+
+        {# Mount #}
+
+        {% if gear.max_payload %}
+            <p><strong>{% trans "Max. payload" %}</strong>: {{ gear.max_payload }} kg</p>
+        {% endif %}
+
+        {% if gear.pe %}
+            <p><strong>{% trans "Periodic error" %}</strong>: {{ gear.pe }}"</p>
+        {% endif %}
+
+        {# Software #}
+
+        {% if gear.type %}
+            <p><strong>{% trans "Type" %}</strong>: {{ gear.type }}</p>
+        {% endif %}
+
+        {# Telescope #}
+
+        {% if gear.aperture %}
+            <p><strong>{% trans "Aperture" %}</strong>: {{ gear.aperture }} mm</p>
+        {% endif %}
+
+        {% if gear.focal_length %}
+            <p><strong>{% trans "Focal length" %}</strong>: {{ gear.focal_length }} mm</p>
+        {% endif %}
+
+        {% if not gear.pixel_size and not gear.sensor_height and not gear.sensor_width and not gear.bandwidth and not gear.max_payload and not gear.pe and not gear.type and not gear.aperture and not gear.focal_length %}
+            {% trans "No additional information available for this item." %}
+        {% endif %}
+    </div>
+
+    {% if gear|equipment_brand_listings:REQUEST_COUNTRY %}
+        <div class="equipment-brand-listings">
+            {% for listing in gear|equipment_brand_listings:REQUEST_COUNTRY %}
+                <div class="equipment-brand-listing">
+                    {% if request.user|show_ads and not image.user|is_any_ultimate %}
+                        <a
+                            href="{{ listing.url }}?{% equipment_brand_listing_utm_tags %}"
+                            onclick="getOutboundLink('{{ listing.url }}', '{{ request.path }}')"
+                            target="_blank">
+                            <img class="logo" src="{{ listing.retailer.logo.url }}" alt="{{ listing.retailer }}">
+                        </a>
+                    {% endif %}
+
+                    <a
+                        href="{{ listing.url }}?{% equipment_brand_listing_utm_tags %}"
+                        onclick="getOutboundLink('{{ listing.url }}', '{{ request.path }}')"
+                        target="_blank"
+                        class="shop-button btn btn-block">
+                        <i class="icon-shopping-cart"></i>
+                        {% blocktrans trimmed with brand=listing.brand retailer=listing.retailer %}
+                            Shop {{ brand }} at {{ retailer }}
+                        {% endblocktrans %}
+                    </a>
+                </div>
+            {% endfor %}
+        </div>
+    {% endif %}
+
+    <div class="actions">
+        {% if is_authenticated %}
+            {% add_remove_toggleproperty "follow" gear request.user %}
+        {% endif %}
+
+        <a class="btn btn-primary" href="/search/?q={% gear_name_iriencoded gear %}">
+            {% trans "Find images" %}
+        </a>
+    </div>
 </div>
-

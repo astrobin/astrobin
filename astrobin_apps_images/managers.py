@@ -10,7 +10,6 @@ class ImagesManager(SafeDeleteManager):
         )
 
         prefetch_related = (
-            'featured_gear',
             'revisions',
             'thumbnails',
             'solutions',
