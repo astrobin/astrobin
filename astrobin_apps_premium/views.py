@@ -63,7 +63,7 @@ class MigrateDonationsView(FormView):
                 days_paid = int(float(amount) / float(premium_sub.price) * 365.25)
                 expiration = (first_payment + timedelta(days_paid)).date()
 
-            if us is not None and us.valid():
+            if us is not None and us.active and us.expires >= date.today():
                 migration_impossible = True
                 migration_impossible_reason = "ALREADY_PREMIUM"
             elif transactions.count() == 0:

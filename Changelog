@@ -1,3 +1,32 @@
+2020-10-01 Salvatore Iovene <salvatore@iovene.com>
+ * v1.94.4
+ * (subscriptions) Fix subscription detail view
+
+2020-10-01 Salvatore Iovene <salvatore@iovene.com>
+ * v1.94.3
+ * (subscriptions) Fix user subscription validity template tags (#1341)
+
+2020-09-30 Salvatore Iovene <salvatore@iovene.com>
+ * v1.94.2
+ * (i18n) Update translations (#1339)
+ * (subscription) Actively consider expiration to evaluate subscription validity (#1340)
+
+2020-09-30 Salvatore Iovene <salvatore@iovene.com>
+ * v1.94.1
+ * (premium) Delete expired subscriptions after 1 day (7 days for auto-renewals)
+
+2020-09-30 Salvatore Iovene <salvatore@iovene.com>
+ * v1.94.0
+ * (gallery) Add setting to show/hide Staging Area images from own view of own gallery
+
+2020-09-29 Salvatore Iovene <salvatore@iovene.com>
+ * v1.93.1
+ * (images) Deal with DecompressionBombError by marking the image as corrupted
+
+2020-09-29 Salvatore Iovene <salvatore@iovene.com>
+ * v1.93.0
+ * (images) Show WIP images in main gallery with lock icon (#1338)
+
 2020-09-25 Salvatore Iovene <salvatore@iovene.com>
  * v1.92.0
  * (notifications) Sort out expired/-ing subscription notifications (#1330)

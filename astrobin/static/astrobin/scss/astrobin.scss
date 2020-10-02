@@ -2177,7 +2177,7 @@ form.avatar-change label.control-label {
 }
 
 .astrobin-image-container ul.badges {
-  list-display: none;
+  list-style-type: none;
   margin: 0;
   position: absolute;
   top: 8px;
@@ -2187,94 +2187,132 @@ form.avatar-change label.control-label {
   li {
     margin-right: 3px;
     float: left;
-  }
 
-  li.iotd-thumb-banner {
-    text-align: center;
+    &.iotd-badge,
+    &.top-pick-badge,
+    &.wip-badge {
+      text-align: center;
 
-    h2 {
-      margin: 0;
-      border-bottom: none;
-      font-size: 12px;
-      color: $white;
-      background: #e3a936;
-      @include box-shadow;
-      @include rounded-corners(16px);
-      height: 20px;
-      width: 20px;
-      border: 1px solid white;
+      h2 {
+        margin: 0;
+        @include box-shadow;
+        @include rounded-corners(16px);
+        font-size: 16px;
+        height: 20px;
+        width: 20px;
+      }
+    }
+
+    &.wip-badge {
+      h2 {
+        background: $link-color;
+      }
 
       .icon {
         padding: 0;
         position: absolute;
-        top: 5px;
-        left: 3.5px;
+        top: 2px;
+        left: 0;
       }
-    }
-  }
 
-  li.top-pick-badge {
-    text-align: center;
+      &.wip-badge-large {
+        h2 {
+          font-size: 24px;
+          line-height: 12px;
+          padding: 8px;
+          @include rounded-corners(26px);
+        }
 
-    h2 {
-      margin: 0;
-      border-bottom: none;
-      font-size: 6px;
-      line-height: 6px;
-
-      color: #4a4a4a;
-      background: #c1c1c1;
-      @include box-shadow;
-      @include rounded-corners(16px);
-      border: 1px solid white;
-      padding: 4px;
-      text-transform: uppercase;
-
-      span {
-        display: block;
+        .icon {
+          top: 5px;
+          left: 3px;
+        }
       }
     }
 
-    &.top100-badge-large {
+    &.iotd-badge {
       h2 {
-        font-size: 16px;
-        line-height: 12px;
-        padding: 12px 8px;
-        @include rounded-corners(26px);
-        width: 34px;
-      }
-    }
-  }
+        font-size: 12px;
+        color: $white;
+        background: #e3a936;
 
-  li.top100-badge {
-    text-align: center;
+        height: 20px;
+        width: 20px;
+        border: 1px solid white;
 
-    h2 {
-      margin: 0;
-      border-bottom: none;
-      font-size: 6px;
-      line-height: 6px;
-
-      color: $white;
-      background: darkred;
-      @include box-shadow;
-      @include rounded-corners(16px);
-      border: 1px solid white;
-      padding: 4px;
-      text-transform: uppercase;
-
-      span {
-        display: block;
+        .icon {
+          padding: 0;
+          position: absolute;
+          top: 5px;
+          left: 3.5px;
+        }
       }
     }
 
-    &.top100-badge-large {
+    &.top-pick-badge {
       h2 {
-        font-size: 16px;
-        line-height: 12px;
-        padding: 12px 8px;
-        @include rounded-corners(26px);
-        width: 34px;
+        font-size: 6px;
+        line-height: 4px;
+        color: #4a4a4a;
+        background: #c1c1c1;
+        border: 1px solid white;
+        padding: 0;
+        text-transform: uppercase;
+
+        span {
+          display: block;
+          margin-top: 2px;
+
+          &:first-child {
+            margin-top: 5px;
+          }
+        }
+      }
+
+      &.top-pick-badge-large {
+        h2 {
+          font-size: 10px;
+          line-height: 10px;
+          padding: 10px;
+          @include rounded-corners(26px);
+          text-align: center;
+
+          span {
+            margin: 0;
+          }
+        }
+      }
+    }
+
+    &.top100-badge {
+      text-align: center;
+
+      h2 {
+        margin: 0;
+        font-size: 6px;
+        line-height: 6px;
+
+        color: $white;
+        background: darkred;
+        @include box-shadow;
+        @include rounded-corners(16px);
+        border: 1px solid white;
+        padding: 4px;
+        text-transform: uppercase;
+
+        span {
+          display: block;
+        }
+      }
+
+      &.top100-badge-large {
+        h2 {
+          font-size: 16px;
+          line-height: 12px;
+          padding: 12px 8px;
+          @include rounded-corners(26px);
+          width: 34px;
+        }
       }
     }
   }
@@ -2404,6 +2442,10 @@ form.avatar-change label.control-label {
       @include rounded-corners-top;
     }
   }
+}
+
+.user-gallery .astrobin-image-container.wip figure img {
+  opacity: .4;
 }
 
 .iotd-archive-image {

@@ -1,6 +1,6 @@
 # -*- coding: utf-8 -*-
 import math
-from datetime import datetime
+from datetime import datetime, date
 
 from django.conf import settings
 from django.contrib.contenttypes.models import ContentType
@@ -268,7 +268,7 @@ def valid_subscriptions(user):
         return []
 
     us = UserSubscription.active_objects.filter(user=user)
-    subs = [x.subscription for x in us if x.valid()]
+    subs = [x.subscription for x in us if x.active and x.expires >= date.today()]
     return subs
 
 
@@ -280,7 +280,7 @@ def inactive_subscriptions(user):
     return [x.subscription
             for x
             in UserSubscription.objects.filter(user=user)
-            if not x.valid() or not x.active]
+            if not x.active or x.expires < date.today()]
 
 
 @register.filter
@@ -294,7 +294,7 @@ def has_valid_subscription(user, subscription_pk):
     if us.count() == 0:
         return False
 
-    return us[0].valid()
+    return us[0].active and us[0].expires >= date.today()
 
 
 @register.filter
@@ -308,7 +308,7 @@ def has_valid_subscription_in_category(user, category):
     if us.count() == 0:
         return False
 
-    return us[0].valid()
+    return us[0].active and us[0].expires >= date.today()
 
 
 @register.filter

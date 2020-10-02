@@ -4,6 +4,7 @@ import zlib
 from datetime import datetime
 
 from PIL import Image as PILImage
+from PIL.Image import DecompressionBombError
 from django.conf import settings
 from django.core.cache import cache
 from django.core.urlresolvers import reverse
@@ -120,7 +121,7 @@ def astrobin_image(context, image, alias, **kwargs):
             image_revision.w = w
             image_revision.h = h
             image_revision.save(keep_deleted=True)
-        except (IOError, ValueError):
+        except (IOError, ValueError, DecompressionBombError):
             w = size[0]
             h = size[1] if size[1] > 0 else w
             response_dict['status'] = 'error'
@@ -201,6 +202,9 @@ def astrobin_image(context, image, alias, **kwargs):
             image.iotdvote_set.count() > 0 and
             not image.user.userprofile.exclude_from_competitions):
             badges.append('top-pick')
+
+        if image.is_wip:
+            badges.append('wip')
 
         # Temporarily disable this because it hogs the default celery queue.
         """
