@@ -1,14 +1,27 @@
 {% extends 'base.html' %}
+
 {% load i18n %}
+{% load tags %}
 
 {% block title %}{% trans "Subscription confirmed" %}{% endblock %}
 
 {% block extra_gtag %}
     {% if GOOGLE_ADS_ID != "invalid" %}
-        <!-- Event snippet Subscription created conversion page -->
+        {% get_subscription_by_name "AstroBin Ultimate 2020+" as ultimate %}
+        {% get_subscription_by_name "AstroBin Premium 2020+" as premium %}
+        {% get_subscription_by_name "AstroBin Lite 2020+" as lite %}
         <script>
-            gtag('event', 'conversion', {
-                'send_to': '{{ GOOGLE_ADS_ID }}/iAg6CLiKo9EBEJrDxfoD'
+            gtag("event", "conversion", {
+                "send_to":
+                {% if "item_number" in request.GET and request.GET.item_number == ultimate.pk|stringformat:"i" %}
+                    "{{ GOOGLE_ADS_ID }}/pDXJCMvpo-EBEJS5qawC"
+                {% elif "item_number" in request.GET and request.GET.item_number == premium.pk|stringformat:"i" %}
+                    "{{ GOOGLE_ADS_ID }}/-0o-CKetv-EBEJS5qawC"
+                {% elif "item_number" in request.GET and request.GET.item_number == lite.pk|stringformat:"i" %}
+                    "{{ GOOGLE_ADS_ID }}/LddRCIuvv-EBEJS5qawC"
+                {% else %}
+                    "{{ GOOGLE_ADS_ID }}/iAg6CLiKo9EBEJrDxfoD"
+                {% endif %}
             });
         </script>
     {% endif %}
