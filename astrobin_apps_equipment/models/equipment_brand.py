@@ -12,7 +12,8 @@ class EquipmentBrand(SafeDeleteModel):
         User,
         related_name='created_equipment_brands',
         on_delete=SET_NULL,
-        null=True
+        null=True,
+        editable=False,
     )
 
     created = models.DateTimeField(

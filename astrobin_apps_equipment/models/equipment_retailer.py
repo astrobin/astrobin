@@ -18,7 +18,8 @@ class EquipmentRetailer(SafeDeleteModel):
         User,
         related_name='created_equipment_retailers',
         on_delete=SET_NULL,
-        null=True
+        null=True,
+        editable=False,
     )
 
     created = models.DateTimeField(
