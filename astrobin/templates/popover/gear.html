@@ -68,7 +68,7 @@
         <div class="equipment-brand-listings">
             {% for listing in gear|equipment_brand_listings:REQUEST_COUNTRY %}
                 <div class="equipment-brand-listing">
-                    {% if request.user|show_ads and not image.user|is_any_ultimate %}
+                    {% if request.user|show_ads and not image.user|is_any_ultimate and listing.retailer.logo %}
                         <a
                             href="{{ listing.url }}?{% equipment_brand_listing_utm_tags %}"
                             onclick="getOutboundLink('{{ listing.url }}', '{{ request.path }}')"
