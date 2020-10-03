@@ -1177,8 +1177,6 @@ class Image(HasSolutionMixin, SafeDeleteModel):
         if alias in ('revision', 'runnerup'):
             alias = 'thumb'
 
-        log.debug("Image %d: requested raw thumbnail: %s / %s" % (self.id, alias, revision_label))
-
         options = dict(settings.THUMBNAIL_ALIASES[''][alias].copy(), **thumbnail_settings)
 
         if alias in ("gallery", "gallery_inverted", "collection", "thumb"):
@@ -1216,34 +1214,26 @@ class Image(HasSolutionMixin, SafeDeleteModel):
         if settings.AWS_S3_ENABLED:
             name_hash = field.storage.generate_local_name(name)
 
-            log.debug("Image %s: starting with name = %s, local path = %s" % (self.id, name, local_path))
-
             # Try to generate the thumbnail starting from the file cache locally.
             if local_path is None:
                 local_path = field.storage.local_storage.path(name_hash)
 
             try:
-                log.debug("Image %s: trying local path %s" % (self.id, local_path))
                 size = os.path.getsize(local_path)
                 if size == 0:
-                    log.debug("Image %s: size 0 in local path %s" % (self.id, local_path))
                     raise IOError("Empty file")
 
                 with open(local_path):
                     thumbnailer = get_thumbnailer(
                         OverwritingFileSystemStorage(location=settings.IMAGE_CACHE_DIRECTORY),
                         name_hash)
-                    log.debug("Image %d: got thumbnail from local file %s." % (self.id, name_hash))
             except (OSError, IOError, UnicodeEncodeError) as e:
-                log.debug("Image %d: unable to get thumbnail from local file: %s" % (self.id, repr(e)))
                 # If things go awry, fallback to getting the file from the remote
                 # storage. But download it locally first if it doesn't exist, so
                 # it can be used again later.
-                log.debug("Image %d: getting remote file..." % self.id)
 
                 # First try to get the file via URL, because that might hit the CloudFlare cache.
                 url = settings.IMAGES_URL + name
-                log.debug("Image %d: trying URL %s..." % (self.id, url))
                 headers = {'User-Agent': 'Mozilla/5.0'}
                 req = urllib2.Request(url, None, headers)
 
@@ -1254,7 +1244,6 @@ class Image(HasSolutionMixin, SafeDeleteModel):
 
                 # If that didn't work, we'll get the file regularly via django-storages.
                 if remote_file is None:
-                    log.debug("Image %d: getting via URL didn't work. Falling back to django-storages..." % self.id)
                     try:
                         remote_file = field.storage._open(name)
                     except IOError:
@@ -1267,9 +1256,7 @@ class Image(HasSolutionMixin, SafeDeleteModel):
                     thumbnailer = get_thumbnailer(
                         OverwritingFileSystemStorage(location=settings.IMAGE_CACHE_DIRECTORY),
                         name_hash)
-                    log.debug("Image %d: saved local file %s." % (self.id, name_hash))
                 except (OSError, UnicodeEncodeError):
-                    log.error("Image %d: unable to save the local file." % self.id)
                     pass
         else:
             thumbnailer = get_thumbnailer(OverwritingFileSystemStorage(
@@ -1283,7 +1270,6 @@ class Image(HasSolutionMixin, SafeDeleteModel):
 
         try:
             thumb = thumbnailer.get_thumbnail(options)
-            log.debug("Image %d: thumbnail generated." % self.id)
         except Exception as e:
             log.error("Image %d: unable to generate thumbnail: %s." % (self.id, e.message))
             return None
@@ -1328,8 +1314,6 @@ class Image(HasSolutionMixin, SafeDeleteModel):
             revision_label = self.get_final_revision_label()
             options['revision_label'] = revision_label
 
-        log.debug("Image %d: requested thumbnail: %s / %s" % (self.id, alias, revision_label))
-
         cache_key = self.thumbnail_cache_key(field, alias)
 
         # If this is an animated gif, let's just return the full size URL
@@ -1342,20 +1326,16 @@ class Image(HasSolutionMixin, SafeDeleteModel):
 
         url = cache.get(cache_key)
         if url:
-            log.debug("Image %d: got URL from cache entry %s" % (self.id, cache_key))
             return normalize_url_security(url, thumbnail_settings)
 
         # Not found in cache, attempt to fetch from database
-        log.debug("Image %d: thumbnail not found in cache %s" % (self.id, cache_key))
         try:
             thumbnails = self.thumbnails.get(revision=revision_label)
             url = getattr(thumbnails, alias)
             if url:
                 cache.set(cache_key, url, 60 * 60 * 24 * 365)
-                log.debug("Image %d: thumbnail url found in database and saved into cache: %s" % (self.id, url))
                 return normalize_url_security(url, thumbnail_settings)
         except ThumbnailGroup.DoesNotExist:
-            log.debug("Image %d: there are no thumbnails in database." % self.id)
             try:
                 ThumbnailGroup.objects.create(image=self, revision=revision_label)
             except IntegrityError:
@@ -1421,40 +1401,30 @@ class Image(HasSolutionMixin, SafeDeleteModel):
             # First we delete it from the cache
             cache_key = self.thumbnail_cache_key(field, alias)
             if cache.get(cache_key):
-                log.debug("Image %d: deleting cache key %s" % (self.id, cache_key))
                 cache.delete(cache_key)
-            else:
-                log.debug("Image %d: unable to find cache key %s" % (self.id, cache_key))
 
             # Then we delete the remote thumbnail
             if delete_remote:
                 filename1 = thumbnailer.get_thumbnail_name(options)
                 filename2 = thumbnailer.get_thumbnail_name(options, transparent=True)
                 field.storage.delete(filename1)
-                log.debug("Image %d: deleted remote file %s" % (self.id, filename1))
                 field.storage.delete(filename2)
-                log.debug("Image %d: deleted remote file %s" % (self.id, filename2))
 
                 filename1 = local_thumbnailer.get_thumbnail_name(options)
                 filename2 = local_thumbnailer.get_thumbnail_name(options, transparent=True)
                 field.storage.delete(filename1)
-                log.debug("Image %d: deleted remote file %s" % (self.id, filename1))
                 field.storage.delete(filename2)
-                log.debug("Image %d: deleted remote file %s" % (self.id, filename2))
 
                 # Then delete local static storage image
                 filenameLocal = os.path.join(field.storage.location, local_filename)
                 field.storage.delete(filenameLocal)
-                log.debug("Image %d: deleted remote file %s" % (self.id, filenameLocal))
 
             # Then we delete the local file cache
             if settings.AWS_S3_ENABLED:
                 field.storage.local_storage.delete(local_filename)
-                log.debug("Image %d: deleted local file %s" % (self.id, local_filename))
 
                 try:
                     os.remove(os.path.join(field.storage.local_storage.location, local_filename))
-                    log.debug("Image %d: removed local cache %s" % (self.id, local_filename))
                 except OSError:
                     log.debug("Image %d: locally cached file not found." % self.id)
 
@@ -1468,14 +1438,13 @@ class Image(HasSolutionMixin, SafeDeleteModel):
                     for url in all_urls:
                         cloudflare_service.purge_resource(url)
                 except ThumbnailGroup.DoesNotExist:
-                    log.debug("Image %d: thumbnail group missing." % self.id)
+                    pass
 
         # Then we remove the database entries
         try:
             thumbnailgroup = self.thumbnails.get(revision=revision_label).delete()
-            log.debug("Image %d: removed thumbnail group." % self.id)
         except ThumbnailGroup.DoesNotExist:
-            log.debug("Image %d: thumbnail group missing." % self.id)
+            pass
 
     def thumbnail_invalidate(self, delete_remote=False):
         return self.thumbnail_invalidate_real(self.image_file, '0', delete_remote)

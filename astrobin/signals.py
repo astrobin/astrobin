@@ -171,7 +171,7 @@ def nested_comment_post_save(sender, instance, created, **kwargs):
                 return
 
             if UserService(obj.user).shadow_bans(instance.author):
-                log.debug("Skipping notification for comment because %s shadow-bans %s" % (obj.user, instance.author))
+                log.info("Skipping notification for comment because %s shadow-bans %s" % (obj.user, instance.author))
                 return
 
             if instance.author != obj.user:

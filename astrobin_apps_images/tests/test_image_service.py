@@ -35,3 +35,16 @@ class TestImageService(TestCase):
         image = Generators.image()
         Generators.imageRevision(image=image, label='Z')
         self.assertEquals(ImageService(image).get_next_available_revision_label(), 'BA')
+
+    def test_get_next_available_revision_label_with_corrupted_revision(self):
+        image = Generators.image()
+        Generators.imageRevision(image=image)
+        Generators.imageRevision(image=image, corrupted=True, label='C')
+        self.assertEquals(ImageService(image).get_next_available_revision_label(), 'D')
+
+    def test_get_next_available_revision_label_with_deleted_revision(self):
+        image = Generators.image()
+        Generators.imageRevision(image=image)
+        to_delete = Generators.imageRevision(image=image, corrupted=True, label='C')
+        to_delete.delete()
+        self.assertEquals(ImageService(image).get_next_available_revision_label(), 'D')
