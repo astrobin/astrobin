@@ -1,0 +1,1 @@
+from .contest_serializer import ContestSerializer

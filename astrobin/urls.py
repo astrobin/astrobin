@@ -221,6 +221,7 @@ urlpatterns += [
     url(r'^api/v2/platesolving/', include('astrobin_apps_platesolving.api_urls')),
     url(r'^api/v2/notifications/', include('astrobin_apps_notifications.api.urls')),
     url(r'^api/v2/images/', include('astrobin_apps_images.api.urls', namespace="astrobin_apps_images")),
+    url(r'^api/v2/contests/', include('astrobin_apps_contests.api.urls')),
 
     ###########################################################################
     ### OWN APPS VIEWS                                                      ###

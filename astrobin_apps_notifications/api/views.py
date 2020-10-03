@@ -1,5 +1,6 @@
 from djangorestframework_camel_case.parser import CamelCaseJSONParser
 from djangorestframework_camel_case.render import CamelCaseJSONRenderer
+from djangorestframework_camel_case.render import CamelCaseJSONRenderer
 from persistent_messages.models import Message
 from rest_framework import viewsets, permissions
 from rest_framework.decorators import list_route
