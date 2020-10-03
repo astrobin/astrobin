@@ -36,10 +36,13 @@ class EquipmentRetailer(SafeDeleteModel):
     name = models.CharField(
         max_length=128,
         null=False,
-        blank=False
+        blank=False,
+        unique=True,
     )
 
-    website = models.URLField()
+    website = models.URLField(
+        unique=True,
+    )
 
     logo = models.ImageField(
         upload_to=logo_upload_path,

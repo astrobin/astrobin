@@ -46,3 +46,9 @@ class EquipmentBrandListing(SafeDeleteModel):
 
     def __unicode__(self):
         return "%s by %s" % (self.brand, self.retailer)
+
+    class Meta:
+        unique_together = (
+            'brand',
+            'retailer',
+        )
