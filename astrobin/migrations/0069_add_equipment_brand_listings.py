@@ -9,6 +9,7 @@ class Migration(migrations.Migration):
 
     dependencies = [
         ('astrobin', '0068_remove_commercial_and_related_gear_models'),
+        ('astrobin_apps_equipment', '0001_initial'),
     ]
 
     operations = [
