@@ -37,7 +37,7 @@
                         {% with url=content_type.list.0.object.url %}
                             <a
                                 class="btn btn-primary"
-                                href="{{ url }}?{% equipment_brand_listing_utm_tags %}"
+                                href="{{ url }}?{% equipment_listing_utm_tags %}"
                                 onclick="getOutboundLink('{{ url }}', '{{ request.path }}')"
                                 target="_blank">
                                 {% trans "Shop now" %}

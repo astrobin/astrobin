@@ -18,39 +18,62 @@
                         {% if request.user|allow_lite_retailer_integration:image.user %}
                             {# Lighter retailer integration for those who disabled ads. #}
                             <div class="actions">
-                                {% if image|gear_items_with_listings:REQUEST_COUNTRY|length %}
+                                {% if image|gear_items_with_brand_listings:REQUEST_COUNTRY|length or image|gear_items_with_item_listings:REQUEST_COUNTRY|length %}
                                     <div class="dropdown retailer-affiliate-products-lite">
                                         <a href="#" class="dropdown-toggle" data-toggle="dropdown">
                                             <i class="icon-shopping-cart"></i>
                                         </a>
                                         <ul class="dropdown-menu">
-                                            {% with image|unique_equipment_brand_listings:REQUEST_COUNTRY as listings %}
-                                                {% for listing in listings %}
-                                                    <li>
-                                                        <a href="{{ listing.url }}?{% equipment_brand_listing_utm_tags %}"
-                                                           onclick="getOutboundLink('{{ listing.url }}', '{{ request.path }}')"
-                                                           target="_blank">
-                                                           {% blocktrans trimmed with brand=listing.brand retailer=listing.retailer %}
-                                                               Shop {{ brand }} at {{ retailer }}
-                                                           {% endblocktrans %}
-                                                        </a>
-                                                    </li>
-                                                {% endfor %}
+                                            {% if image|gear_items_with_brand_listings:REQUEST_COUNTRY|length %}
+                                                <li class="nav-header">{% trans "Sponsored brands" %}</li>
+                                                {% with image|unique_equipment_brand_listings:REQUEST_COUNTRY as listings %}
+                                                    {% for listing in listings %}
+                                                        <li>
+                                                            <a href="{{ listing.url }}?{% equipment_listing_utm_tags %}"
+                                                               onclick="getOutboundLink('{{ listing.url }}', '{{ request.path }}')"
+                                                               target="_blank">
+                                                               {% blocktrans trimmed with name=listing.brand retailer=listing.retailer %}
+                                                                   Shop <strong>{{ name }}</strong> at {{ retailer }}
+                                                               {% endblocktrans %}
+                                                            </a>
+                                                        </li>
+                                                    {% endfor %}
 
+
+                                                {% endwith %}
+                                            {% endif %}
+
+                                            {% if image|gear_items_with_item_listings:REQUEST_COUNTRY|length %}
                                                 <li class="divider"></li>
+                                                <li class="nav-header">{% trans "Sponsored items" %}</li>
+                                                {% with image|unique_equipment_item_listings:REQUEST_COUNTRY as listings %}
+                                                    {% for listing in listings %}
+                                                        <li>
+                                                            <a href="{{ listing.url }}?{% equipment_listing_utm_tags %}"
+                                                               onclick="getOutboundLink('{{ listing.url }}', '{{ request.path }}')"
+                                                               target="_blank">
+                                                                {% blocktrans trimmed with name=listing.name retailer=listing.retailer %}
+                                                                    Shop <strong>{{ name }}</strong> at {{ retailer }}
+                                                                {% endblocktrans %}
+                                                            </a>
+                                                        </li>
+                                                    {% endfor %}
+                                                {% endwith %}
+                                            {% endif %}
 
-                                                <li>
-                                                    <a data-toggle="modal"
-                                                    {% if request.user|can_remove_ads %}
-                                                       href="#remove-ads-modal"
-                                                    {% else %}
-                                                       href="#feature-restricted-modal"
-                                                    {% endif %}
-                                                    >
-                                                        {% trans "Disable retailer integration" %}
-                                                    </a>
-                                                </li>
-                                            {% endwith %}
+                                            <li class="divider"></li>
+
+                                            <li>
+                                                <a data-toggle="modal"
+                                                        {% if request.user|can_remove_ads %}
+                                                   href="#remove-ads-modal"
+                                                        {% else %}
+                                                   href="#feature-restricted-modal"
+                                                        {% endif %}
+                                                >
+                                                    {% trans "Disable retailer integration" %}
+                                                </a>
+                                            </li>
                                         </ul>
                                     </div>
                                 {% endif %}
@@ -73,24 +96,40 @@
                                             </span>
 
                                             {% if request.user|allow_full_retailer_integration:image.user %}
-                                                {% with g|equipment_brand_listings:REQUEST_COUNTRY as listings %}
-                                                    {% if listings|length == 1 %}
+                                                {% if g|equipment_item_listings:REQUEST_COUNTRY|length %}
+                                                    {% with g|equipment_item_listings:REQUEST_COUNTRY as listings %}
+                                                        {% with url=listings.all.0.url %}
+                                                            <a class="retailer-affiliate-cart-link"
+                                                               href="{{ url }}?{% equipment_listing_utm_tags %}"
+                                                               onclick="getOutboundLink('{{ url }}', '{{ request.path }}')"
+                                                               target="_blank">
+                                                                <i class="icon-shopping-cart" rel="tooltip"
+                                                                   data-placement="bottom" title="
+                                                                       {% blocktrans trimmed with name=listings.all.0.name retailer=listings.all.0.retailer %}
+                                                                           Shop {{ name }} at {{ retailer }}
+                                                                       {% endblocktrans %}
+                                                                    "></i>
+                                                            </a>
+                                                        {% endwith %}
+                                                    {% endwith %}
+                                                {% elif g|equipment_brand_listings:REQUEST_COUNTRY|length %}
+                                                    {% with g|equipment_brand_listings:REQUEST_COUNTRY as listings %}
                                                         {% with url=listings.all.0.url %}
                                                             <a
                                                                 class="retailer-affiliate-cart-link"
-                                                                href="{{ url }}?{% equipment_brand_listing_utm_tags %}"
+                                                                href="{{ url }}?{% equipment_listing_utm_tags %}"
                                                                 onclick="getOutboundLink('{{ url }}', '{{ request.path }}')"
                                                                 target="_blank">
                                                                 <i class="icon-shopping-cart" rel="tooltip"
                                                                    data-placement="bottom" title="
-                                                                   {% blocktrans trimmed with brand=listings.all.0.brand retailer=listings.all.0.retailer %}
-                                                                       Shop {{ brand }} at {{ retailer }}
+                                                                   {% blocktrans trimmed with name=listings.all.0.brand retailer=listings.all.0.retailer %}
+                                                                       Shop {{ name }} at {{ retailer }}
                                                                    {% endblocktrans %}
                                                                 "></i>
                                                             </a>
                                                         {% endwith %}
-                                                    {% endif %}
-                                                {% endwith %}
+                                                    {% endwith %}
+                                                {% endif %}
                                             {% endif %}
 
                                             {% if not forloop.last %}&nbsp;&middot;&nbsp;{% endif %}

@@ -17,6 +17,7 @@ from astrobin.enums import SubjectType, SolarSystemSubject
 from astrobin.fields import CountryField, get_country_name
 from astrobin.services import CloudflareService
 from astrobin_apps_equipment.models.equipment_brand_listing import EquipmentBrandListing
+from astrobin_apps_equipment.models.equipment_item_listing import EquipmentItemListing
 from common.upload_paths import uncompressed_source_upload_path, image_upload_path, data_download_upload_path
 from common.validators import FileValidator
 
@@ -255,6 +256,12 @@ class Gear(models.Model):
 
     equipment_brand_listings = models.ManyToManyField(
         EquipmentBrandListing,
+        related_name='gear_items',
+        editable=False,
+    )
+
+    equipment_item_listings = models.ManyToManyField(
+        EquipmentItemListing,
         related_name='gear_items',
         editable=False,
     )

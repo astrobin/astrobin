@@ -11,7 +11,7 @@ class TestTagEquipmentBrandListings(TestCase):
         self.assertEquals(0, equipment_brand_listings(telescope, 'us').count())
 
     def test_listing_in_wrong_country(self):
-        listing = EquipmentGenerators.equipmentBrandListing()
+        listing = EquipmentGenerators.equipment_brand_listing()
         listing.retailer.countries = "it,ch,fi"
         listing.retailer.save()
 
@@ -21,7 +21,7 @@ class TestTagEquipmentBrandListings(TestCase):
         self.assertEquals(0, equipment_brand_listings(telescope, 'us').count())
 
     def test_listing_correct_country(self):
-        listing = EquipmentGenerators.equipmentBrandListing()
+        listing = EquipmentGenerators.equipment_brand_listing()
         listing.retailer.countries = "us"
         listing.retailer.save()
 
@@ -31,7 +31,7 @@ class TestTagEquipmentBrandListings(TestCase):
         self.assertEquals(1, equipment_brand_listings(telescope, 'us').count())
 
     def test_listing_no_country(self):
-        listing = EquipmentGenerators.equipmentBrandListing()
+        listing = EquipmentGenerators.equipment_brand_listing()
 
         telescope = Generators.telescope()
         telescope.equipment_brand_listings.add(listing)

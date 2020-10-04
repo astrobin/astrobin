@@ -14,7 +14,7 @@ class ImageRetailerAffiliatesWhenOwnerIsLiteAndAllowsTest(TestCase):
         Generators.premium_subscription(self.image.user, "AstroBin Lite")
 
         telescope = Generators.telescope()
-        equipment_brand_listing = EquipmentGenerators.equipmentBrandListing()
+        equipment_brand_listing = EquipmentGenerators.equipment_brand_listing()
         telescope.equipment_brand_listings.add(equipment_brand_listing)
 
         self.image.user.userprofile.telescopes.add(telescope)
