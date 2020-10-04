@@ -1,5 +1,6 @@
 {% load astrobin_apps_equipment_tags %}
 {% load astrobin_apps_images_tags %}
+{% load astrobin_apps_premium_tags %}
 {% load astrobin_apps_users_tags %}
 {% load highlight %}
 {% load i18n %}
@@ -15,6 +16,16 @@
             {% for content_type in grouped_objects %}
                 {% if content_type.grouper == "Equipment brand listings" and REQUEST_COUNTRY in content_type.list.0.object.retailer.countries and request.user|show_ads %}
                     <li class="equipment-brand-listing-search-result alert alert-info">
+                        <a class="close" data-toggle="modal" title="{% trans "Remove ads" %}"
+                        {% if request.user|can_remove_ads %}
+                           href="#remove-ads-modal"
+                        {% else %}
+                           href="#feature-restricted-modal"
+                        {% endif %}
+                        >
+                            &times;
+                        </a>
+
                         <span class="text">
                             <i class="icon-bullhorn"></i>
                             {% blocktrans trimmed with brand=content_type.list.0.object.brand retailer=content_type.list.0.object.retailer %}

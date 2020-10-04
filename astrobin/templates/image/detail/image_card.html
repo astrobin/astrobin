@@ -36,6 +36,20 @@
                                                         </a>
                                                     </li>
                                                 {% endfor %}
+
+                                                <li class="divider"></li>
+
+                                                <li>
+                                                    <a data-toggle="modal"
+                                                    {% if request.user|can_remove_ads %}
+                                                       href="#remove-ads-modal"
+                                                    {% else %}
+                                                       href="#feature-restricted-modal"
+                                                    {% endif %}
+                                                    >
+                                                        {% trans "Disable retailer integration" %}
+                                                    </a>
+                                                </li>
                                             {% endwith %}
                                         </ul>
                                     </div>
