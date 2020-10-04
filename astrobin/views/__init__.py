@@ -2429,14 +2429,16 @@ def save_gear_user_info(request):
 
 @require_GET
 @never_cache
-def gear_popover_ajax(request, id):
+def gear_popover_ajax(request, id, image_id):
     gear, gear_type = get_correct_gear(id)
+    image = get_object_or_404(Image.objects_including_wip, id=image_id)
     template = 'popover/gear.html'
 
     html = render_to_string(template, {
         'request': request,
         'user': request.user,
         'gear': gear,
+        'image': image,
         'is_authenticated': request.user.is_authenticated(),
         'IMAGES_URL': settings.IMAGES_URL,
         'REQUEST_COUNTRY': get_client_country_code(request),

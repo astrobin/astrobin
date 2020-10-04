@@ -10,7 +10,7 @@ from common.upload_paths import upload_path
 
 
 def logo_upload_path(instance, filename):
-    return upload_path('uncompressed', instance.created_by.pk, filename)
+    return upload_path('equipment_retailer_logos', instance.created_by.pk if instance.created_by else 0, filename)
 
 
 class EquipmentRetailer(SafeDeleteModel):

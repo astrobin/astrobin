@@ -2182,6 +2182,14 @@ class UserProfile(SafeDeleteModel):
                     u'Thank you in advance!')
     )
 
+    allow_retailer_integration = models.BooleanField(
+        default=True,
+        verbose_name=_(u'Allow retailer integration'),
+        help_text=_(u'AstroBin may associate with retailers of astronomy and astrophotography equipment to enhance '
+                    u'the display of equipment items with links to sponsoring partners. The integration is subtle '
+                    u'and non intrusive, and it would help a lot if you didn\'t disable it. Thank you in advance!')
+    )
+
     inactive_account_reminder_sent = models.DateTimeField(
         null=True
     )

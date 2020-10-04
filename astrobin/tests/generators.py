@@ -1,5 +1,6 @@
 import random
 import string
+from datetime import timedelta, date
 
 from django.contrib.auth.models import User, Group
 from subscription.models import Subscription, UserSubscription
@@ -17,9 +18,10 @@ class Generators:
 
     @staticmethod
     def user():
-        return User.objects.create(
+        return User.objects.create_user(
+            email="%s@%s.com" % (Generators.randomString(), Generators.randomString()),
             username=Generators.randomString(),
-            password=Generators.randomString()
+            password="password"
         )
 
     @staticmethod
@@ -88,7 +90,8 @@ class Generators:
 
         us, created = UserSubscription.objects.get_or_create(
             user=user,
-            subscription=s)
+            subscription=s,
+            expires=date.today() + timedelta(days=1))
         us.subscribe()
 
         return us

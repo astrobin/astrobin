@@ -1,7 +1,8 @@
 from django import forms
 
 from astrobin.models import UserProfile
-from astrobin_apps_premium.templatetags.astrobin_apps_premium_tags import can_remove_ads
+from astrobin_apps_premium.templatetags.astrobin_apps_premium_tags import can_remove_ads, \
+    can_remove_retailer_integration
 
 
 class UserProfileEditPreferencesForm(forms.ModelForm):
@@ -18,10 +19,15 @@ class UserProfileEditPreferencesForm(forms.ModelForm):
             'receive_newsletter',
             'receive_marketing_and_commercial_material',
             'allow_astronomy_ads',
+            'allow_retailer_integration',
         ]
 
     def __init__(self, **kwargs):
         super(UserProfileEditPreferencesForm, self).__init__(**kwargs)
         profile = getattr(self, 'instance', None)
+
         if not can_remove_ads(profile.user):
             self.fields['allow_astronomy_ads'].widget.attrs['disabled'] = True
+
+        if not can_remove_retailer_integration(profile.user):
+            self.fields['allow_retailer_integration'].widget.attrs['disabled'] = True

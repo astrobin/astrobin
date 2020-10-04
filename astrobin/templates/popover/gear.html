@@ -65,31 +65,34 @@
     </div>
 
     {% if gear|equipment_brand_listings:REQUEST_COUNTRY %}
-        <div class="equipment-brand-listings">
-            {% for listing in gear|equipment_brand_listings:REQUEST_COUNTRY %}
-                <div class="equipment-brand-listing">
-                    {% if request.user|show_ads and not image.user|is_any_ultimate and listing.retailer.logo %}
+        {% if request.user|allow_lite_retailer_integration:image.user or image.user|allow_full_retailer_integration:image.user %}
+            <div class="equipment-brand-listings">
+                {% for listing in gear|equipment_brand_listings:REQUEST_COUNTRY %}
+                    <div class="equipment-brand-listing">
+
+                        {% if request.user|allow_full_retailer_integration:image.user and listing.retailer.logo %}
+                            <a
+                                href="{{ listing.url }}?{% equipment_brand_listing_utm_tags %}"
+                                onclick="getOutboundLink('{{ listing.url }}', '{{ request.path }}')"
+                                target="_blank">
+                                <img class="logo" src="{{ listing.retailer.logo.url }}" alt="{{ listing.retailer }}">
+                            </a>
+                        {% endif %}
+
                         <a
                             href="{{ listing.url }}?{% equipment_brand_listing_utm_tags %}"
                             onclick="getOutboundLink('{{ listing.url }}', '{{ request.path }}')"
-                            target="_blank">
-                            <img class="logo" src="{{ listing.retailer.logo.url }}" alt="{{ listing.retailer }}">
+                            target="_blank"
+                            class="shop-button btn btn-block">
+                            <i class="icon-shopping-cart"></i>
+                            {% blocktrans trimmed with brand=listing.brand retailer=listing.retailer %}
+                                Shop {{ brand }} at {{ retailer }}
+                            {% endblocktrans %}
                         </a>
-                    {% endif %}
-
-                    <a
-                        href="{{ listing.url }}?{% equipment_brand_listing_utm_tags %}"
-                        onclick="getOutboundLink('{{ listing.url }}', '{{ request.path }}')"
-                        target="_blank"
-                        class="shop-button btn btn-block">
-                        <i class="icon-shopping-cart"></i>
-                        {% blocktrans trimmed with brand=listing.brand retailer=listing.retailer %}
-                            Shop {{ brand }} at {{ retailer }}
-                        {% endblocktrans %}
-                    </a>
-                </div>
-            {% endfor %}
-        </div>
+                    </div>
+                {% endfor %}
+            </div>
+        {% endif %}
     {% endif %}
 
     <div class="actions">
