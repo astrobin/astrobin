@@ -1,5 +1,6 @@
 from django.template.defaultfilters import slugify
 
+from astrobin.tests.generators import Generators
 from astrobin_apps_equipment.models.equipment_brand import EquipmentBrand
 from astrobin_apps_equipment.models.equipment_brand_listing import EquipmentBrandListing
 from astrobin_apps_equipment.models.equipment_retailer import EquipmentRetailer
@@ -12,14 +13,14 @@ class EquipmentGenerators:
     @staticmethod
     def equipmentBrand():
         return EquipmentBrand.objects.create(
-            name="Test brand"
+            name=Generators.randomString()
         )
 
     @staticmethod
     def equipmentRetailer():
         return EquipmentRetailer.objects.create(
-            name="Test retailer",
-            website="https://www.test-retailer.com",
+            name=Generators.randomString(),
+            website="https://www.%s.com" % Generators.randomString(),
         )
 
     @staticmethod
