@@ -7,4 +7,4 @@ CACHES = {
     },
 }
 
-CACHALOT_ENABLED = os.environ.get('CACHALOT_ENABLED', 'true').strip() == 'true'
+CACHALOT_ENABLED = os.environ.get('CACHALOT_ENABLED', 'false').strip() == 'true'
