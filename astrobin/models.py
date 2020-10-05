@@ -222,6 +222,11 @@ class GearMakeAutoRename(models.Model):
 
 
 class Gear(models.Model):
+    created = models.DateTimeField(
+        auto_now_add=True,
+        editable=False,
+    )
+
     make = models.CharField(
         verbose_name=_("Make"),
         help_text=_("The make, brand, producer or developer of this product."),
