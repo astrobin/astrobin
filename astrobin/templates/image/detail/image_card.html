@@ -42,7 +42,11 @@
                                             {% endif %}
 
                                             {% if image|gear_items_with_item_listings:REQUEST_COUNTRY|length %}
-                                                <li class="divider"></li>
+
+                                                {% if image|gear_items_with_brand_listings:REQUEST_COUNTRY|length %}
+                                                    <li class="divider"></li>
+                                                {% endif %}
+
                                                 <li class="nav-header">{% trans "Sponsored items" %}</li>
                                                 {% with image|unique_equipment_item_listings:REQUEST_COUNTRY as listings %}
                                                     {% for listing in listings %}
