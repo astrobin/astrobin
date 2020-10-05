@@ -123,10 +123,10 @@ body.full {
 
 ul.astrobin-thumbnails {
   margin-left: 0;
+  clear: both;
 }
 
 li.astrobin-thumbnail {
-  float: none;
   position: relative;
   padding: 2px;
   margin: 0;
@@ -4604,7 +4604,7 @@ table.api-examples {
     padding: 0 4px;
   }
 
-  .equipment-brand-listing-search-result {
+  .equipment-listing-search-result {
     width: calc(100% - 2rem);
     padding: 1rem;
     margin: 0 0 2rem;
