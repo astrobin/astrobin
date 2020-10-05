@@ -652,7 +652,7 @@ class GroupsTest(TestCase):
         self.assertEqual(response.status_code, 200)
         self.assertEqual(self.group.images.count(), 0)
 
-        # Clean upg
+        # Clean up
         image.delete()
         self.group.members.remove(self.user1)
         self.group.autosubmission = True
