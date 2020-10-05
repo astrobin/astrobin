@@ -94,7 +94,6 @@ from astrobin.views import (
     gear_fix,
     gear_fix_save,
     gear_fix_thanks,
-    gear_review_save,
     gear_popover_ajax,
     get_makes_by_type,
     get_edit_gear_form,
