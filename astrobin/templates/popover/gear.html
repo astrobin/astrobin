@@ -64,7 +64,7 @@
         {% endif %}
     </div>
 
-    {% if gear|equipment_brand_listings:REQUEST_COUNTRY %}
+    {% if gear|equipment_brand_listings:REQUEST_COUNTRY or gear|equipment_item_listings:REQUEST_COUNTRY %}
         {% if request.user|allow_lite_retailer_integration:image.user or request.user|allow_full_retailer_integration:image.user %}
             <div class="equipment-brand-listings">
                 {% if gear|equipment_item_listings:REQUEST_COUNTRY|length %}
