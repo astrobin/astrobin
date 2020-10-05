@@ -37,6 +37,12 @@ class EquipmentItemListing(SafeDeleteModel):
         blank=False,
     )
 
+    name_de = models.CharField(
+        max_length=256,
+        null=True,
+        blank=True,
+    )
+
     retailer = models.ForeignKey(
         EquipmentRetailer,
         on_delete=CASCADE,
@@ -44,6 +50,11 @@ class EquipmentItemListing(SafeDeleteModel):
     )
 
     url = models.URLField()
+
+    url_de = models.URLField(
+        null=True,
+        blank=True,
+    )
 
     def __unicode__(self):
         return "%s by %s" % (self.name, self.retailer)

@@ -45,6 +45,11 @@ class EquipmentBrandListing(SafeDeleteModel):
 
     url = models.URLField()
 
+    url_de = models.URLField(
+        null=True,
+        blank=True,
+    )
+
     def __unicode__(self):
         return "%s by %s" % (self.brand, self.retailer)
 
