@@ -84,15 +84,7 @@ class AstroBinSearchForm(SearchForm):
             d = "i"
 
         if d == "i":
-            images = results.models(Image)
-            equipment_brand_listings = results \
-                .models(EquipmentBrandListing) \
-                .filter(countries__icontains=get_client_country_code(self.request))
-            results = (
-                    results.models(Image).filter(django_id__in=[x.pk for x in list(images)]) |
-                    results.models(EquipmentBrandListing).filter(
-                        django_id__in=[x.pk for x in list(equipment_brand_listings)])
-            ).models(Image, EquipmentBrandListing)
+            results = results.models(Image, EquipmentBrandListing)
         elif d == "u":
             results = results.models(User)
         elif d == "cf":

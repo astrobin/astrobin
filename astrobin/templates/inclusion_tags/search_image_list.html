@@ -14,37 +14,42 @@
         <ul class="thumbnails astrobin-thumbnails">
             {% regroup paginator.object_list|dictsort:"verbose_name_plural" by verbose_name_plural as grouped_objects %}
             {% for content_type in grouped_objects %}
-                {% if not listing_already_shown and content_type.grouper == "Equipment brand listings" and REQUEST_COUNTRY in content_type.list.0.object.retailer.countries and request.user|show_ads %}
-                    {% setvar True as listing_already_shown %}
-                    <li class="equipment-listing-search-result alert alert-info">
-                        <a class="close" data-toggle="modal" title="{% trans "Remove ads" %}"
-                        {% if request.user|can_remove_ads %}
-                           href="#remove-ads-modal"
-                        {% else %}
-                           href="#feature-restricted-modal"
+
+                {% if not listing_already_shown and content_type.grouper == "Equipment brand listings" and request.user|show_ads %}
+                    {% for result in content_type.list %}
+                        {% if REQUEST_COUNTRY in result.object.retailer.countries %}
+                            {% setvar True as listing_already_shown %}
+                            <li class="equipment-listing-search-result alert alert-info">
+                                <a class="close" data-toggle="modal" title="{% trans "Remove ads" %}"
+                                {% if request.user|can_remove_ads %}
+                                   href="#remove-ads-modal"
+                                {% else %}
+                                   href="#feature-restricted-modal"
+                                {% endif %}
+                                >
+                                    &times;
+                                </a>
+
+                                <span class="text">
+                                    <i class="icon-bullhorn"></i>
+                                    {% blocktrans trimmed with brand=result.object.brand retailer=result.object.retailer %}
+                                        Interested in <strong>{{ brand }}</strong>? Our sponsor
+                                        <strong>{{ retailer }}</strong> sells this brand!
+                                    {% endblocktrans %}
+                                </span>
+
+                                {% with url=result.object.url %}
+                                    <a
+                                        class="btn btn-primary"
+                                        href="{{ url }}?{% equipment_listing_utm_tags %}"
+                                        onclick="getOutboundLink('{{ url }}', '{{ request.path }}')"
+                                        target="_blank">
+                                        {% trans "Shop now" %}
+                                    </a>
+                                {% endwith %}
+                            </li>
                         {% endif %}
-                        >
-                            &times;
-                        </a>
-
-                        <span class="text">
-                            <i class="icon-bullhorn"></i>
-                            {% blocktrans trimmed with brand=content_type.list.0.object.brand retailer=content_type.list.0.object.retailer %}
-                                Interested in <strong>{{ brand }}</strong>? Our sponsor
-                                <strong>{{ retailer }}</strong> sells this brand!
-                            {% endblocktrans %}
-                        </span>
-
-                        {% with url=content_type.list.0.object.url %}
-                            <a
-                                class="btn btn-primary"
-                                href="{{ url }}?{% equipment_listing_utm_tags %}"
-                                onclick="getOutboundLink('{{ url }}', '{{ request.path }}')"
-                                target="_blank">
-                                {% trans "Shop now" %}
-                            </a>
-                        {% endwith %}
-                    </li>
+                    {% endfor %}
                 {% endif %}
 
                 {% if content_type.grouper == "Images" %}
@@ -54,6 +59,7 @@
                         </li>
                     {% endfor %}
                 {% endif %}
+
             {% endfor %}
         </ul>
     {% endif %}
