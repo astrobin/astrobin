@@ -2254,9 +2254,9 @@ form.avatar-change label.control-label {
 
       &.wip-badge-large {
         h2 {
-          font-size: 24px;
+          font-size: 18px;
           line-height: 12px;
-          padding: 8px;
+          padding: 4px;
           @include rounded-corners(26px);
         }
 
@@ -2308,9 +2308,9 @@ form.avatar-change label.control-label {
 
       &.top-pick-badge-large {
         h2 {
-          font-size: 10px;
+          font-size: 8px;
           line-height: 10px;
-          padding: 10px;
+          padding: 4px;
           @include rounded-corners(26px);
           text-align: center;
 
