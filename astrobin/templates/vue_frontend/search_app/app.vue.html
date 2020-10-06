@@ -124,7 +124,7 @@
                             <input class="btn btn-primary search-button" type="submit"
                                    value="{% trans "Search" %}" />
 
-                            {% if paginator and request.GET.q %}
+                            {% if paginator and request.GET.q and paginator.count > 100 %}
                                 <span class="result-count pull-right">
                                     {% trans "Results" %}: ~{{ paginator.count }}
                                 </span>
