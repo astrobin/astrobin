@@ -12,54 +12,43 @@
 
     {% if search_domain == None or search_domain == 'i' %}
         <ul class="thumbnails astrobin-thumbnails">
-            {% regroup paginator.object_list|dictsort:"verbose_name_plural" by verbose_name_plural as grouped_objects %}
-            {% for content_type in grouped_objects %}
+            {% for result in paginator.object_list %}
+                {% if result.model_name == 'equipmentbrandlisting' and not listing_already_shown and not image_already_shown %}
+                    {% setvar True as listing_already_shown %}
 
-                {% if not listing_already_shown and content_type.grouper == "Equipment brand listings" and request.user|show_ads %}
-                    {% for result in content_type.list %}
-                        {% if REQUEST_COUNTRY in result.object.retailer.countries %}
-                            {% setvar True as listing_already_shown %}
-                            <li class="equipment-listing-search-result alert alert-info">
-                                <a class="close" data-toggle="modal" title="{% trans "Remove ads" %}"
+                    <li class="equipment-listing-search-result alert alert-info">
+                        <a class="close" data-toggle="modal" title="{% trans "Remove ads" %}"
                                 {% if request.user|can_remove_ads %}
-                                   href="#remove-ads-modal"
+                           href="#remove-ads-modal"
                                 {% else %}
-                                   href="#feature-restricted-modal"
+                           href="#feature-restricted-modal"
                                 {% endif %}
-                                >
-                                    &times;
-                                </a>
+                        >
+                            &times;
+                        </a>
 
-                                <span class="text">
+                        <span class="text">
                                     <i class="icon-bullhorn"></i>
-                                    {% blocktrans trimmed with brand=result.object.brand retailer=result.object.retailer %}
-                                        Interested in <strong>{{ brand }}</strong>? Our sponsor
-                                        <strong>{{ retailer }}</strong> sells this brand!
-                                    {% endblocktrans %}
+                            {% blocktrans trimmed with brand=result.object.brand retailer=result.object.retailer %}
+                                Interested in <strong>{{ brand }}</strong>? Our sponsor
+                                <strong>{{ retailer }}</strong> sells this brand!
+                            {% endblocktrans %}
                                 </span>
 
-                                {% with url=result.object.url %}
-                                    <a
-                                        class="btn btn-primary"
-                                        href="{{ url }}?{% equipment_listing_utm_tags %}"
-                                        onclick="getOutboundLink('{{ url }}', '{{ request.path }}')"
-                                        target="_blank">
-                                        {% trans "Shop now" %}
-                                    </a>
-                                {% endwith %}
-                            </li>
-                        {% endif %}
-                    {% endfor %}
-                {% endif %}
+                        {% with url=result.object.url %}
+                            <a class="btn btn-primary" href="{{ url }}?{% equipment_listing_utm_tags %}"
+                               onclick="getOutboundLink('{{ url }}', '{{ request.path }}')" target="_blank">
+                                {% trans "Shop now" %}
+                            </a>
+                        {% endwith %}
+                    </li>
+                {% elif result.model_name == 'image' %}
+                    {% setvar True as image_already_shown %}
 
-                {% if content_type.grouper == "Images" %}
-                    {% for result in content_type.list %}
-                        <li class="thumbnail astrobin-thumbnail">
-                            {% astrobin_image result.object 'gallery' %}
-                        </li>
-                    {% endfor %}
+                    <li class="thumbnail astrobin-thumbnail">
+                        {% astrobin_image result.object 'gallery' %}
+                    </li>
                 {% endif %}
-
             {% endfor %}
         </ul>
     {% endif %}
