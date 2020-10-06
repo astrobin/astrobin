@@ -13,6 +13,12 @@
     {% if search_domain == None or search_domain == 'i' %}
         <ul class="thumbnails astrobin-thumbnails">
             {% for result in paginator.object_list %}
+                {% if result %}
+                    <li class="thumbnail astrobin-thumbnail">
+                        {% astrobin_image result.object 'gallery' %}
+                    </li>
+                {% endif %}
+                {% comment %}
                 {% if result.model_name == 'equipmentbrandlisting' and REQUEST_COUNTRY in result.object.retailer.countries and not listing_already_shown and not image_already_shown %}
                     {% setvar True as listing_already_shown %}
 
@@ -49,6 +55,7 @@
                         {% astrobin_image result.object 'gallery' %}
                     </li>
                 {% endif %}
+                {% endcomment %}
             {% endfor %}
         </ul>
     {% endif %}
