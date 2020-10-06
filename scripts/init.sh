@@ -1,7 +1,6 @@
 #!/bin/sh
 
 # Migrate
-python manage.py sync_translation_fields --noinput
 python manage.py migrate --noinput
 python manage.py migrate --run-syncdb --noinput
 
