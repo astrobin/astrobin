@@ -7,7 +7,6 @@ from haystack.generic_views import SearchView
 from haystack.query import SearchQuerySet
 from pybb.models import Post, Topic
 
-from astrobin.utils import get_client_country_code
 from astrobin_apps_equipment.models.equipment_brand_listing import EquipmentBrandListing
 from models import Image
 from nested_comments.models import NestedComment
@@ -46,7 +45,6 @@ FIELDS = (
 
 class AstroBinSearchForm(SearchForm):
     # q is inherited from the parent form.
-    request = None
 
     d = forms.CharField(required=False)
     t = forms.CharField(required=False)
@@ -84,7 +82,7 @@ class AstroBinSearchForm(SearchForm):
             d = "i"
 
         if d == "i":
-            results = results.models(Image, EquipmentBrandListing)
+            results = results.models(Image) #, EquipmentBrandListing)
         elif d == "u":
             results = results.models(User)
         elif d == "cf":
@@ -385,9 +383,7 @@ class AstroBinSearchView(SearchView):
     form_class = AstroBinSearchForm
 
     def get_form(self, form_class=None):
-        form = self.get_form_class()(**{x: self.request.GET.get(x, None) for x in FIELDS})
-        form.request = self.request
-        return form
+        return self.get_form_class()(**{x: self.request.GET.get(x, None) for x in FIELDS})
 
     def get_context_data(self, **kwargs):
         context = super(AstroBinSearchView, self).get_context_data(**kwargs)

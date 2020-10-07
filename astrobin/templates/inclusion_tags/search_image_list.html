@@ -10,6 +10,8 @@
 
 {% if paginator.object_list %}
 
+    {{ paginator.object_list }}
+
     {% if search_domain == None or search_domain == 'i' %}
         <ul class="thumbnails astrobin-thumbnails">
             {% for result in paginator.object_list %}
