@@ -16,6 +16,8 @@ from image_cropping import ImageRatioField
 from astrobin.enums import SubjectType, SolarSystemSubject
 from astrobin.fields import CountryField, get_country_name
 from astrobin.services import CloudflareService
+from astrobin_apps_equipment.models.equipment_brand_listing import EquipmentBrandListing
+from astrobin_apps_equipment.models.equipment_item_listing import EquipmentItemListing
 from common.upload_paths import uncompressed_source_upload_path, image_upload_path, data_download_upload_path
 from common.validators import FileValidator
 
@@ -49,7 +51,6 @@ except ImportError:
 
 from celery.result import AsyncResult
 from model_utils.managers import InheritanceManager
-from reviews.models import Review
 from safedelete.models import SafeDeleteModel
 from toggleproperties.models import ToggleProperty
 
@@ -64,8 +65,6 @@ from astrobin_apps_images.managers import ImagesManager, PublicImagesManager, Wi
 from astrobin_apps_notifications.utils import push_notification
 from astrobin_apps_platesolving.models import Solution
 from nested_comments.models import NestedComment
-
-from .utils import user_is_paying
 
 log = logging.getLogger('apps')
 
@@ -223,6 +222,11 @@ class GearMakeAutoRename(models.Model):
 
 
 class Gear(models.Model):
+    created = models.DateTimeField(
+        auto_now_add=True,
+        editable=False,
+    )
+
     make = models.CharField(
         verbose_name=_("Make"),
         help_text=_("The make, brand, producer or developer of this product."),
@@ -242,18 +246,6 @@ class Gear(models.Model):
 
     master = models.ForeignKey('self', null=True, editable=False)
 
-    commercial = models.ForeignKey(
-        'CommercialGear',
-        null=True,
-        editable=False,
-        on_delete=models.SET_NULL,
-        related_name='base_gear',
-    )
-
-    retailed = models.ManyToManyField(
-        'RetailedGear',
-    )
-
     updated = models.DateTimeField(
         editable=False,
         auto_now=True,
@@ -265,6 +257,18 @@ class Gear(models.Model):
         editable=False,
         null=True,
         blank=True,
+    )
+
+    equipment_brand_listings = models.ManyToManyField(
+        EquipmentBrandListing,
+        related_name='gear_items',
+        editable=False,
+    )
+
+    equipment_item_listings = models.ManyToManyField(
+        EquipmentItemListing,
+        related_name='gear_items',
+        editable=False,
     )
 
     def __unicode__(self):
@@ -333,25 +337,10 @@ class Gear(models.Model):
             object_id=slave.id
         ).update(object_id=self.id)
 
-        # Find matching gear reviews and move them to the master
-        reviews = Review.objects.filter(
-            content_type=ContentType.objects.get(app_label='astrobin', model='gear'),
-            content_id=slave.id
-        ).update(content_id=self.id)
-
         # Fetch slave's master if this hard-merge's master doesn't have a soft-merge master
         if not self.master:
             self.master = slave.master
             self.save()
-
-        # Steal the commercial gear and all the retailers
-        if not self.commercial:
-            self.commercial = slave.commercial
-            self.save()
-
-        for retailed in slave.retailed.all():
-            if retailed not in self.retailed.all():
-                self.retailed.add(retailed)
 
         GearHardMergeRedirect(fro=slave.pk, to=self.pk).save()
         slave.delete()
@@ -366,15 +355,11 @@ class Gear(models.Model):
         super(Gear, self).save(*args, **kwargs)
 
     def get_make(self):
-        if self.commercial and self.commercial.proper_make:
-            return self.commercial.proper_make
         if self.make:
             return self.make
         return ''
 
     def get_name(self):
-        if self.commercial and self.commercial.proper_name:
-            return self.commercial.proper_name
         return self.name
 
     class Meta:
@@ -1204,8 +1189,6 @@ class Image(HasSolutionMixin, SafeDeleteModel):
         if alias in ('revision', 'runnerup'):
             alias = 'thumb'
 
-        log.debug("Image %d: requested raw thumbnail: %s / %s" % (self.id, alias, revision_label))
-
         options = dict(settings.THUMBNAIL_ALIASES[''][alias].copy(), **thumbnail_settings)
 
         if alias in ("gallery", "gallery_inverted", "collection", "thumb"):
@@ -1243,34 +1226,26 @@ class Image(HasSolutionMixin, SafeDeleteModel):
         if settings.AWS_S3_ENABLED:
             name_hash = field.storage.generate_local_name(name)
 
-            log.debug("Image %s: starting with name = %s, local path = %s" % (self.id, name, local_path))
-
             # Try to generate the thumbnail starting from the file cache locally.
             if local_path is None:
                 local_path = field.storage.local_storage.path(name_hash)
 
             try:
-                log.debug("Image %s: trying local path %s" % (self.id, local_path))
                 size = os.path.getsize(local_path)
                 if size == 0:
-                    log.debug("Image %s: size 0 in local path %s" % (self.id, local_path))
                     raise IOError("Empty file")
 
                 with open(local_path):
                     thumbnailer = get_thumbnailer(
                         OverwritingFileSystemStorage(location=settings.IMAGE_CACHE_DIRECTORY),
                         name_hash)
-                    log.debug("Image %d: got thumbnail from local file %s." % (self.id, name_hash))
             except (OSError, IOError, UnicodeEncodeError) as e:
-                log.debug("Image %d: unable to get thumbnail from local file: %s" % (self.id, repr(e)))
                 # If things go awry, fallback to getting the file from the remote
                 # storage. But download it locally first if it doesn't exist, so
                 # it can be used again later.
-                log.debug("Image %d: getting remote file..." % self.id)
 
                 # First try to get the file via URL, because that might hit the CloudFlare cache.
                 url = settings.IMAGES_URL + name
-                log.debug("Image %d: trying URL %s..." % (self.id, url))
                 headers = {'User-Agent': 'Mozilla/5.0'}
                 req = urllib2.Request(url, None, headers)
 
@@ -1281,7 +1256,6 @@ class Image(HasSolutionMixin, SafeDeleteModel):
 
                 # If that didn't work, we'll get the file regularly via django-storages.
                 if remote_file is None:
-                    log.debug("Image %d: getting via URL didn't work. Falling back to django-storages..." % self.id)
                     try:
                         remote_file = field.storage._open(name)
                     except IOError:
@@ -1294,9 +1268,7 @@ class Image(HasSolutionMixin, SafeDeleteModel):
                     thumbnailer = get_thumbnailer(
                         OverwritingFileSystemStorage(location=settings.IMAGE_CACHE_DIRECTORY),
                         name_hash)
-                    log.debug("Image %d: saved local file %s." % (self.id, name_hash))
                 except (OSError, UnicodeEncodeError):
-                    log.error("Image %d: unable to save the local file." % self.id)
                     pass
         else:
             thumbnailer = get_thumbnailer(OverwritingFileSystemStorage(
@@ -1310,7 +1282,6 @@ class Image(HasSolutionMixin, SafeDeleteModel):
 
         try:
             thumb = thumbnailer.get_thumbnail(options)
-            log.debug("Image %d: thumbnail generated." % self.id)
         except Exception as e:
             log.error("Image %d: unable to generate thumbnail: %s." % (self.id, e.message))
             return None
@@ -1355,8 +1326,6 @@ class Image(HasSolutionMixin, SafeDeleteModel):
             revision_label = self.get_final_revision_label()
             options['revision_label'] = revision_label
 
-        log.debug("Image %d: requested thumbnail: %s / %s" % (self.id, alias, revision_label))
-
         cache_key = self.thumbnail_cache_key(field, alias)
 
         # If this is an animated gif, let's just return the full size URL
@@ -1369,20 +1338,16 @@ class Image(HasSolutionMixin, SafeDeleteModel):
 
         url = cache.get(cache_key)
         if url:
-            log.debug("Image %d: got URL from cache entry %s" % (self.id, cache_key))
             return normalize_url_security(url, thumbnail_settings)
 
         # Not found in cache, attempt to fetch from database
-        log.debug("Image %d: thumbnail not found in cache %s" % (self.id, cache_key))
         try:
             thumbnails = self.thumbnails.get(revision=revision_label)
             url = getattr(thumbnails, alias)
             if url:
                 cache.set(cache_key, url, 60 * 60 * 24 * 365)
-                log.debug("Image %d: thumbnail url found in database and saved into cache: %s" % (self.id, url))
                 return normalize_url_security(url, thumbnail_settings)
         except ThumbnailGroup.DoesNotExist:
-            log.debug("Image %d: there are no thumbnails in database." % self.id)
             try:
                 ThumbnailGroup.objects.create(image=self, revision=revision_label)
             except IntegrityError:
@@ -1448,40 +1413,30 @@ class Image(HasSolutionMixin, SafeDeleteModel):
             # First we delete it from the cache
             cache_key = self.thumbnail_cache_key(field, alias)
             if cache.get(cache_key):
-                log.debug("Image %d: deleting cache key %s" % (self.id, cache_key))
                 cache.delete(cache_key)
-            else:
-                log.debug("Image %d: unable to find cache key %s" % (self.id, cache_key))
 
             # Then we delete the remote thumbnail
             if delete_remote:
                 filename1 = thumbnailer.get_thumbnail_name(options)
                 filename2 = thumbnailer.get_thumbnail_name(options, transparent=True)
                 field.storage.delete(filename1)
-                log.debug("Image %d: deleted remote file %s" % (self.id, filename1))
                 field.storage.delete(filename2)
-                log.debug("Image %d: deleted remote file %s" % (self.id, filename2))
 
                 filename1 = local_thumbnailer.get_thumbnail_name(options)
                 filename2 = local_thumbnailer.get_thumbnail_name(options, transparent=True)
                 field.storage.delete(filename1)
-                log.debug("Image %d: deleted remote file %s" % (self.id, filename1))
                 field.storage.delete(filename2)
-                log.debug("Image %d: deleted remote file %s" % (self.id, filename2))
 
                 # Then delete local static storage image
                 filenameLocal = os.path.join(field.storage.location, local_filename)
                 field.storage.delete(filenameLocal)
-                log.debug("Image %d: deleted remote file %s" % (self.id, filenameLocal))
 
             # Then we delete the local file cache
             if settings.AWS_S3_ENABLED:
                 field.storage.local_storage.delete(local_filename)
-                log.debug("Image %d: deleted local file %s" % (self.id, local_filename))
 
                 try:
                     os.remove(os.path.join(field.storage.local_storage.location, local_filename))
-                    log.debug("Image %d: removed local cache %s" % (self.id, local_filename))
                 except OSError:
                     log.debug("Image %d: locally cached file not found." % self.id)
 
@@ -1495,14 +1450,13 @@ class Image(HasSolutionMixin, SafeDeleteModel):
                     for url in all_urls:
                         cloudflare_service.purge_resource(url)
                 except ThumbnailGroup.DoesNotExist:
-                    log.debug("Image %d: thumbnail group missing." % self.id)
+                    pass
 
         # Then we remove the database entries
         try:
             thumbnailgroup = self.thumbnails.get(revision=revision_label).delete()
-            log.debug("Image %d: removed thumbnail group." % self.id)
         except ThumbnailGroup.DoesNotExist:
-            log.debug("Image %d: thumbnail group missing." % self.id)
+            pass
 
     def thumbnail_invalidate(self, delete_remote=False):
         return self.thumbnail_invalidate_real(self.image_file, '0', delete_remote)
@@ -2110,38 +2064,6 @@ class UserProfile(SafeDeleteModel):
         null=True
     )
 
-    # Commercial information
-    company_name = models.CharField(
-        max_length=128,
-        null=True,
-        blank=True,
-        verbose_name=_("Company name"),
-        help_text=_("The name of the company you represent on AstroBin."),
-    )
-
-    company_description = models.TextField(
-        null=True,
-        blank=True,
-        verbose_name=_("Company description"),
-        help_text=_(
-            "A short description of the company you represent on AstroBin. You can use some <a href=\"/faq/#comments\">formatting rules</a>."),
-        validators=[MaxLengthValidator(1000)],
-    )
-
-    company_website = models.URLField(
-        max_length=512,
-        null=True,
-        blank=True,
-        verbose_name=_("Company website"),
-        help_text=_("The website of the company you represent on AstroBin."),
-    )
-
-    retailer_country = CountryField(
-        verbose_name=_("Country of operation"),
-        null=True,
-        blank=True,
-    )
-
     # Avatar
     avatar = models.CharField(max_length=64, editable=False, null=True, blank=True)
 
@@ -2270,6 +2192,14 @@ class UserProfile(SafeDeleteModel):
         help_text=_(u'It would mean a lot if you chose to allow astronomy relevant, non intrusive ads on this website. '
                     u'AstroBin is a small business run by a single person, and this kind of support would be amazing. '
                     u'Thank you in advance!')
+    )
+
+    allow_retailer_integration = models.BooleanField(
+        default=True,
+        verbose_name=_(u'Allow retailer integration'),
+        help_text=_(u'AstroBin may associate with retailers of astronomy and astrophotography equipment to enhance '
+                    u'the display of equipment items with links to sponsoring partners. The integration is subtle '
+                    u'and non intrusive, and it would help a lot if you didn\'t disable it. Thank you in advance!')
     )
 
     inactive_account_reminder_sent = models.DateTimeField(
@@ -2715,150 +2645,6 @@ class GlobalStat(models.Model):
     def __unicode__(self):
         return u"%d users, %d images, %d hours of integration time" % (
             self.users, self.images, self.integration)
-
-
-###############################################################################
-# Commercial models.                                                          #
-###############################################################################
-class RetailedGear(models.Model):
-    CURRENCY_CHOICES = (
-        ('AUD', _('AUD - Australian dollars')),
-        ('CAD', _('CAD - Canadian dollars')),
-        ('CHF', _('CHF - Swiss francs')),
-        ('EUR', _('EUR - Euros')),
-        ('GBP', _('GPB - Pound stelings')),
-        ('PLN', _('PLN - Polish zloty')),
-        ('SEK', _('SEK - Swedish krona')),
-        ('USD', _('USD - American dollars')),
-    )
-
-    retailer = models.ForeignKey(
-        User,
-        null=False,
-        verbose_name=_("Producer"),
-        related_name='retailed_gear',
-        editable=False
-    )
-
-    link = models.URLField(
-        max_length=512,
-        null=True,
-        blank=True,
-        verbose_name=_("Link"),
-        help_text=_("The link to this product's page on your website."),
-    )
-
-    price = models.DecimalField(
-        max_digits=10,
-        decimal_places=2,
-        null=True,
-        blank=True,
-        verbose_name=_("Price"),
-    )
-
-    currency = models.CharField(
-        max_length=3,
-        choices=CURRENCY_CHOICES,
-        default='EUR',
-        blank=False,
-        verbose_name=_("Currency"),
-    )
-
-    created = models.DateTimeField(
-        auto_now_add=True,
-        editable=False,
-    )
-
-    updated = models.DateTimeField(
-        auto_now=True,
-        editable=False,
-    )
-
-    class Meta:
-        app_label = 'astrobin'
-        ordering = ['created']
-        verbose_name_plural = _("Retailed gear items")
-
-
-class CommercialGear(models.Model):
-    producer = models.ForeignKey(
-        User,
-        null=False,
-        verbose_name=_("Producer"),
-        related_name='commercial_gear',
-        editable=False
-    )
-
-    proper_make = models.CharField(
-        null=True,
-        blank=True,
-        max_length=128,
-        verbose_name=_("Proper make"),
-        help_text=_(
-            "Sometimes, product make/brand/producer/developer names are not written properly by the users. Write here the proper make/brand/producer/developer name."),
-    )
-
-    proper_name = models.CharField(
-        null=True,
-        blank=True,
-        max_length=128,
-        verbose_name=_("Proper name"),
-        help_text=_(
-            "Sometimes, product names are not written properly by the users. Write here the proper product name, not including the make/brand/producer/developer name.<br/>It is recommended that you try to group as many items as possible, so try to use a generic version of your product's name."),
-    )
-
-    image = models.ForeignKey(
-        Image,
-        null=True,
-        blank=True,
-        verbose_name=_("Image"),
-        help_text=_(
-            "The official, commercial image for this product. Upload an image via the regular uploading interface, set its subject type to \"Gear\", and then choose it from this list. If you upload several revisions, they will also appear in the commercial page."),
-        related_name='featured_gear',
-        on_delete=models.SET_NULL,
-    )
-
-    tagline = models.CharField(
-        max_length=256,
-        null=True,
-        blank=True,
-        verbose_name=_("Tagline"),
-        help_text=_("A memorable phrase that will sum up this product, for marketing purposes."),
-    )
-
-    link = models.URLField(
-        max_length=256,
-        null=True,
-        blank=True,
-        verbose_name=_("Link"),
-        help_text=_("The link to this product's page on your website."),
-    )
-
-    description = models.TextField(
-        null=True,
-        blank=True,
-        verbose_name=_("Description"),
-        help_text=_(
-            "Here you can write the full commercial description of your product. You can use some <a href=\"/faq/#comments\">formatting rules</a>."),
-    )
-
-    created = models.DateTimeField(
-        auto_now_add=True,
-        editable=False,
-    )
-
-    updated = models.DateTimeField(
-        auto_now=True,
-        editable=False,
-    )
-
-    def is_paid(self):
-        return user_is_paying(self.producer)
-
-    class Meta:
-        app_label = 'astrobin'
-        ordering = ['created']
-        verbose_name_plural = _("Commercial gear items")
 
 
 class BroadcastEmail(models.Model):

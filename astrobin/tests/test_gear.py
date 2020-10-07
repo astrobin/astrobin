@@ -7,7 +7,6 @@ from django.test import TestCase
 from astrobin.models import (
     Image,
     DeepSky_Acquisition,
-    CommercialGear,
     Gear,
     Telescope,
     Camera,
@@ -20,49 +19,15 @@ class GearTest(TestCase):
     ###########################################################################
 
     def test_get_make(self):
-        u = User.objects.create_user('test', 'test@test.com', 'password')
-        cg, created = CommercialGear.objects.get_or_create(
-            producer = u,
-            proper_make = "Proper make",)
-        g, created = Gear.objects.get_or_create(
-            make = "Test make",
-            name = "Test name",
-            commercial = cg)
-        self.assertEqual(g.get_make(), "Proper make")
-        g.delete()
-
-        g, created = Gear.objects.get_or_create(
+        g = Gear.objects.create(
             make = "Test make",
             name = "Test name")
         self.assertEqual(g.get_make(), "Test make")
-        g.delete()
-
-        g, created = Gear.objects.get_or_create(
-            name = "Test name")
-        self.assertEqual(g.get_make(), "")
-        g.delete()
-
-        cg.delete()
-        u.delete()
 
     def test_get_name(self):
-        u = User.objects.create_user('test', 'test@test.com', 'password')
-        cg, created = CommercialGear.objects.get_or_create(
-            producer = u,
-            proper_name = "Proper name")
-        g, created = Gear.objects.get_or_create(
-            name = "Test name",
-            commercial = cg)
-        self.assertEqual(g.get_name(), "Proper name")
-        g.delete()
-
-        g, created = Gear.objects.get_or_create(
+        g = Gear.objects.create(
             name = "Test name")
         self.assertEqual(g.get_name(), "Test name")
-        g.delete()
-
-        cg.delete()
-        u.delete()
 
     def test_unicode(self):
         g, created = Gear.objects.get_or_create(
@@ -144,15 +109,3 @@ class GearTest(TestCase):
         g1.delete()
         i.delete()
         u.delete()
-
-
-    ###########################################################################
-    # VIEW TESTS                                                              #
-    ###########################################################################
-
-    def test_gear_page_view(self):
-        g, created = Telescope.objects.get_or_create(name = "Test telescope")
-        response = self.client.get(reverse('gear_page', kwargs = {'id': g.pk}))
-        self.assertEqual(response.status_code, 200)
-        self.assertContains(response, "<h1>Test telescope</h1>", html = True)
-

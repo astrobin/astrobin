@@ -8,4 +8,4 @@ class SoftwareEditForm(forms.ModelForm):
 
     class Meta:
         model = Software
-        exclude = ('make', 'name', 'retailed')
+        exclude = ('make', 'name')

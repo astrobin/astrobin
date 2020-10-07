@@ -97,12 +97,6 @@ NOTICE_TYPES = (
         2,
     ),
     (
-        'new_gear_review',
-        _('New review of a gear item you own'),
-        '',
-        2,
-    ),
-    (
         'user_joined_public_group',
         _('A user you follow joined a public group'),
         '',

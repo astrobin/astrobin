@@ -8,4 +8,4 @@ class TelescopeEditForm(forms.ModelForm):
 
     class Meta:
         model = Telescope
-        exclude = ('make', 'name', 'retailed')
+        exclude = ('make', 'name')

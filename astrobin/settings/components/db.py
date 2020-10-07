@@ -11,7 +11,7 @@ else:
     DATABASES = {
         'default': {
             'ENGINE': 'django.db.backends.postgresql_psycopg2',
-            'NAME': 'astrobin',
+            'NAME': os.environ.get('POSTGRES_DB', 'astrobin').strip(),
             'USER': 'astrobin',
             'PASSWORD': os.environ.get('POSTGRES_PASSWORD', 'astrobin').strip(),
             'HOST': os.environ.get('POSTGRES_HOST', 'postgres').strip(),
@@ -23,7 +23,7 @@ else:
     if os.environ.get('POSTGRES_READ_REPLICA_HOST'):
         DATABASES['reader'] = {
             'ENGINE': 'django.db.backends.postgresql_psycopg2',
-            'NAME': 'astrobin',
+            'NAME': os.environ.get('POSTGRES_DB', 'astrobin').strip(),
             'USER': 'astrobin',
             'PASSWORD': os.environ.get('POSTGRES_PASSWORD', 'astrobin').strip(),
             'HOST': os.environ.get('POSTGRES_READ_REPLICA_HOST', 'postgres').strip(),

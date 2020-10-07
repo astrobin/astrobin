@@ -80,12 +80,12 @@ class IotdToggleSubmissionAjaxView(
                     image=image)
                 if not created:
                     submission.delete()
-                    log.debug("User %s deleted IOTD submission for image %s" % (request.user.username, image.get_id()))
+                    log.info("User %s deleted IOTD submission for image %s" % (request.user.username, image.get_id()))
                     return self.render_json_response({
                         'used_today': iotd_submissions_today(request.user),
                     })
                 else:
-                    log.debug("User %s added IOTD submission for image %s" % (request.user.username, image.get_id()))
+                    log.info("User %s added IOTD submission for image %s" % (request.user.username, image.get_id()))
                     return self.render_json_response({
                         'submission': submission.pk,
                         'used_today': iotd_submissions_today(request.user),
@@ -130,12 +130,12 @@ class IotdToggleVoteAjaxView(
                     image=image)
                 if not created:
                     vote.delete()
-                    log.debug("User %s deleted IOTD vote for image %s" % (request.user.username, image.get_id()))
+                    log.info("User %s deleted IOTD vote for image %s" % (request.user.username, image.get_id()))
                     return self.render_json_response({
                         'used_today': iotd_votes_today(request.user),
                     })
                 else:
-                    log.debug("User %s added IOTD vote for image %s" % (request.user.username, image.get_id()))
+                    log.info("User %s added IOTD vote for image %s" % (request.user.username, image.get_id()))
                     return self.render_json_response({
                         'vote': vote.pk,
                         'used_today': iotd_votes_today(request.user),
@@ -196,7 +196,7 @@ class IotdToggleJudgementAjaxView(
                     }
                 else:
                     iotd.delete()
-                    log.debug("User %s deleted IOTD for image %s" % (request.user.username, image.get_id()))
+                    log.info("User %s deleted IOTD for image %s" % (request.user.username, image.get_id()))
                     ret = {
                         'used_today': iotd_elections_today(request.user),
                     }
@@ -212,7 +212,7 @@ class IotdToggleJudgementAjaxView(
                                 judge=request.user,
                                 image=image,
                                 date=date)
-                            log.debug("User %s added IOTD for image %s" % ( request.user.username, image.get_id()))
+                            log.info("User %s added IOTD for image %s" % ( request.user.username, image.get_id()))
                             ret = {
                                 'iotd': iotd.pk,
                                 'date': formats.date_format(iotd.date, "SHORT_DATE_FORMAT"),

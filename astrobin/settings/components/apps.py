@@ -10,6 +10,7 @@ ASTROBIN_APPS = [
     'astrobin_apps_groups',
     'astrobin_apps_iotd',
     'astrobin_apps_remote_source_affiliation',
+    'astrobin_apps_equipment',
     'toggleproperties'
 ]
 
@@ -39,9 +40,7 @@ INSTALLED_APPS = [
     'contact_form',
     'pipeline',
     'tastypie',
-    'reviews',
     'actstream',
-    'modeltranslation',
     'paypal.standard.ipn',
     'subscription',
     'ember',

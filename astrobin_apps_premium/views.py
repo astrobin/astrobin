@@ -130,7 +130,7 @@ class DataLossCompensationRequestView(CreateView):
         compensation_request = get_object_or_None(DataLossCompensationRequest, user=request.user)
 
         if compensation_request is not None:
-            log.debug("User %d attempted data loss compensation request again" % self.request.user.pk)
+            log.info("User %d attempted data loss compensation request again" % self.request.user.pk)
             return redirect(reverse('astrobin_apps_premium.data_loss_compensation_request_already_done'))
 
         usersubscription = get_object_or_None(
@@ -141,7 +141,7 @@ class DataLossCompensationRequestView(CreateView):
         )
 
         if usersubscription is None or usersubscription.expires == date(2021, 2, 20):
-            log.debug("User %d attempted data loss compensation but is not eligible" % self.request.user.pk)
+            log.info("User %d attempted data loss compensation but is not eligible" % self.request.user.pk)
             return redirect(reverse('astrobin_apps_premium.data_loss_compensation_request_not_eligible'))
 
         return super(DataLossCompensationRequestView, self).dispatch(request, *args, **kwargs)
@@ -150,7 +150,7 @@ class DataLossCompensationRequestView(CreateView):
         form.instance.user = self.request.user
         requested_compensation = form.cleaned_data['requested_compensation']
 
-        log.debug("User %d requested data loss compensation: %s" % (self.request.user.pk, requested_compensation))
+        log.info("User %d requested data loss compensation: %s" % (self.request.user.pk, requested_compensation))
 
         if requested_compensation not in ('NOT_AFFECTED', 'NOT_REQUIRED'):
             ultimate_subscription = self.get_ultimate_subscription()
@@ -167,14 +167,14 @@ class DataLossCompensationRequestView(CreateView):
             expires = date.today()
 
             if created:
-                log.debug("UserSubscription %d created" % ultimate_user_subscription.pk)
+                log.info("UserSubscription %d created" % ultimate_user_subscription.pk)
 
                 for premium_user_subscription in premium_user_subscriptions:
                     premium_user_subscription.active = False
                     premium_user_subscription.unsubscribe()
                     premium_user_subscription.save()
             else:
-                log.debug("UserSubscription %d already exists" % ultimate_user_subscription.pk)
+                log.info("UserSubscription %d already exists" % ultimate_user_subscription.pk)
 
                 expires = ultimate_user_subscription.expires
 

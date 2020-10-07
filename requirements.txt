@@ -69,7 +69,6 @@ django-maintenancemode==0.11.3
 django-markup-deprecated==0.0.3
 django-memcached==0.1.2
 django-model-utils==3.2.0
-django-modeltranslation==0.15
 django-mptt==0.8.7
 django-multidb-router==0.9
 -e git+https://github.com/astrobin/django-notification.git@094c70829e2540f13268adf006b2f0f040cb3b27#egg=django_notification
@@ -80,14 +79,13 @@ django-precise-bbcode==1.2.10
 django-progressbarupload==0.1.7
 django-recaptcha-works==0.3.4
 django-registration==2.5.2
-django-reviews==1.2.1
 django-robots==4.0
 django-safedelete==0.5.6
 django-silk==2.0.0
 django-split-settings==0.3.0
 django-staticfiles==1.2.1
 django-storages==1.7.1
--e git+https://github.com/siovene/django-subscription.git@f9f03fef5f00ec2a6c99ff2628066ae40e06d2f7#egg=django_subscription
+-e git+https://github.com/astrobin/django-subscription.git@5e4c128494f6de7c1ba254d500e100567d8aee55#egg=django_subscription
 django-tagging==0.5.0
 django-tastypie==0.14.3
 -e git+https://github.com/astrobin/django-threaded-messages.git@da86dea6dd854f9ab37201d3953f9d028faa85e9#egg=django_threaded_messages
@@ -107,6 +105,7 @@ flickrapi==2.4.0
 funcsigs==1.0.2
 future==0.18.2
 futures==3.3.0
+fuzzywuzzy[speedup]==0.18
 geoip2==3.0.0
 gevent==20.6.0
 gprof2dot==2019.11.30
@@ -166,6 +165,7 @@ pystache==0.5.4
 python-daemon==2.2.4
 python-dateutil==2.8.1
 python-http-client==3.2.7
+python-Levenshtein==0.12.0
 python-magic==0.4.18
 python-memcached==1.59
 python-mimeparse==1.6.0

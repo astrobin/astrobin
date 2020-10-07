@@ -10,7 +10,6 @@ LOCALE_EXTRAS = (
     _("commented on gear item"),
     _("bookmarked"),
     _("likes"),
-    _("has written a review on"),
     _("created a new public group"),
     _("joined the public group"),
     _("Remove from bookmarks"),

@@ -231,7 +231,6 @@ class SolutionFinalizeView(CsrfExemptMixin, base.View):
             try:
                 annotated_image = annotator.annotate()
             except ThumbnailNotReadyException:
-                log.debug("Solution annotation %d: thumbnail not ready" % solution.id)
                 solution.status = Solver.PENDING
                 solution.save()
                 context = {'status': solution.status}
@@ -305,7 +304,7 @@ class SolutionPixInsightNextTask(base.View):
                 settings.BASE_URL + reverse('astrobin_apps_platesolving.pixinsight_webhook')
             )
 
-        log.debug("PixInsight next-task: sending response\n%s" % response)
+        log.info("PixInsight next-task: sending response\n%s" % response)
 
         return HttpResponse(response)
 

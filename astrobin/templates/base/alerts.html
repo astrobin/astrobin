@@ -20,28 +20,3 @@
         {% endif %}
     {% endfor %}
 {% endif %}
-
-{% if is_producer or is_retailer %}
-    {% with request.user.userprofile as profile %}
-        {% if not profile.company_name or not profile.company_description or not profile.company_website %}
-            <div class="alert alert-warning">
-                <h4 class="alert-heading"><i class="icon-warning-sign"></i> {% trans "Warning!" %}</h4>
-                {% url 'profile_edit_commercial' as the_url %}
-                {% blocktrans %}As a producer and/or a retailer on AstroBin, it's very important that you fill in all of your company details! Click <a href="{{the_url}}">here</a> to do it now.{% endblocktrans %}
-            </div>
-        {% endif %}
-    {% endwith %}
-{% endif %}
-
-{% if is_retailer %}
-    {% with request.user.userprofile as profile %}
-        {% if not profile.retailer_country %}
-            <div class="alert alert-warning">
-                <h4 class="alert-heading"><i class="icon-warning-sign"></i> {% trans "Warning!" %}</h4>
-                {% url 'profile_edit_retailer' as the_url %}
-                {% blocktrans %}As a retailer on AstroBin, it's very important that you fill in your country of operation! Click <a href="{{the_url}}">here</a> to do it now.{% endblocktrans %}
-            </div>
-        {% endif %}
-    {% endwith %}
-{% endif %}
-
