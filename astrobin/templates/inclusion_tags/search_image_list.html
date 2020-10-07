@@ -10,8 +10,6 @@
 
 {% if paginator.object_list %}
 
-    {{ paginator.object_list }}
-
     {% if search_domain == None or search_domain == 'i' %}
         <ul class="thumbnails astrobin-thumbnails">
             {% for result in paginator.object_list %}
@@ -20,44 +18,6 @@
                         {% astrobin_image result.object 'gallery' %}
                     </li>
                 {% endif %}
-                {% comment %}
-                {% if result.model_name == 'equipmentbrandlisting' and REQUEST_COUNTRY in result.object.retailer.countries and not listing_already_shown and not image_already_shown %}
-                    {% setvar True as listing_already_shown %}
-
-                    <li class="equipment-listing-search-result alert alert-info">
-                        <a class="close" data-toggle="modal" title="{% trans "Remove ads" %}"
-                                {% if request.user|can_remove_ads %}
-                           href="#remove-ads-modal"
-                                {% else %}
-                           href="#feature-restricted-modal"
-                                {% endif %}
-                        >
-                            &times;
-                        </a>
-
-                        <span class="text">
-                                    <i class="icon-bullhorn"></i>
-                            {% blocktrans trimmed with brand=result.object.brand retailer=result.object.retailer %}
-                                Interested in <strong>{{ brand }}</strong>? Our sponsor
-                                <strong>{{ retailer }}</strong> sells this brand!
-                            {% endblocktrans %}
-                                </span>
-
-                        {% with url=result.object.url %}
-                            <a class="btn btn-primary" href="{{ url }}?{% equipment_listing_utm_tags %}"
-                               onclick="getOutboundLink('{{ url }}', '{{ request.path }}')" target="_blank">
-                                {% trans "Shop now" %}
-                            </a>
-                        {% endwith %}
-                    </li>
-                {% elif result.model_name == 'image' %}
-                    {% setvar True as image_already_shown %}
-
-                    <li class="thumbnail astrobin-thumbnail">
-                        {% astrobin_image result.object 'gallery' %}
-                    </li>
-                {% endif %}
-                {% endcomment %}
             {% endfor %}
         </ul>
     {% endif %}
