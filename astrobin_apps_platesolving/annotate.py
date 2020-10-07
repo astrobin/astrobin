@@ -175,7 +175,7 @@ class Annotator:
             image = Image.alpha_composite(base, overlay)
             image = image.resize((hd_w, hd_h), Image.ANTIALIAS)
             image = image.convert('RGB')
-            image.save(image_io, 'JPEG', quality=90)
+            image.save(image_io, 'JPEG', quality=90, icc_profile=base.info.get('icc_profile'))
 
             return ContentFile(image_io.getvalue())
 

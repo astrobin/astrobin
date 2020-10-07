@@ -25,18 +25,19 @@ THUMBNAIL_PROCESSORS = (
 THUMBNAIL_ALIASES = {
     '': {
         # Main image thumbnails
-        'real': {'size': (16536, 16536), 'watermark': True},
+        'real': {'size': (16536, 16536), 'watermark': True, 'keep_icc_profile': True},
         'real_inverted': {'size': (16536, 16536), 'invert': True, 'watermark': True},
 
-        'hd': {'size': (1824, 0), 'crop': False, 'watermark': True},
-        'hd_anonymized': {'size': (1824, 0), 'crop': False, 'watermark': False},
+        'hd': {'size': (1824, 0), 'crop': False, 'watermark': True, 'keep_icc_profile': True},
+        'hd_anonymized': {'size': (1824, 0), 'crop': False, 'watermark': False, 'keep_icc_profile': True},
         'hd_inverted': {'size': (1824, 0), 'crop': False, 'invert': True, 'watermark': True},
-        'hd_sharpened': {'size': (1824, 0), 'crop': False, 'watermark': True, 'detail': True},
+        'hd_sharpened': {'size': (1824, 0), 'crop': False, 'watermark': True, 'detail': True, 'keep_icc_profile': True},
         'hd_sharpened_inverted': {'size': (1824, 0), 'crop': False, 'watermark': True, 'detail': True, 'invert': True},
 
-        'regular': {'size': (620, 0), 'crop': False, 'watermark': True},
+        'regular': {'size': (620, 0), 'crop': False, 'watermark': True, 'keep_icc_profile': True},
         'regular_inverted': {'size': (620, 0), 'crop': False, 'invert': True, 'watermark': True},
-        'regular_sharpened': {'size': (620, 0), 'crop': False, 'watermark': True, 'detail': True},
+        'regular_sharpened': {'size': (620, 0), 'crop': False, 'watermark': True, 'detail': True,
+                              'keep_icc_profile': True},
         'regular_sharpened_inverted': {'size': (620, 0), 'crop': False, 'watermark': True, 'detail': True, 'invert': True},
 
         'gallery': {'size': (130, 130), 'crop': 'smart', 'rounded': True, 'quality': 80},
@@ -48,8 +49,8 @@ THUMBNAIL_ALIASES = {
         'histogram': {'size': (274, 120), 'histogram': True},
 
         # IOTD
-        'iotd': {'size': (1000, 380), 'crop': 'smart', 'watermark': True},
-        'iotd_candidate': {'size': (960, 0), 'crop': 'smart', 'watermark': False},
+        'iotd': {'size': (1000, 380), 'crop': 'smart', 'watermark': True, 'keep_icc_profile': True},
+        'iotd_candidate': {'size': (960, 0), 'crop': 'smart', 'watermark': False, 'keep_icc_profile': True},
 
         # Activity stream
         'story': {'size': (460, 320), 'crop': 'smart', 'quality': 90},
