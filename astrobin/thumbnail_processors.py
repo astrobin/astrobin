@@ -191,15 +191,15 @@ def histogram(image, histogram=False, **kwargs):
     return im
 
 
-def srgb_processor(image, keep_profile=False, **kwargs):
+def srgb_processor(image, keep_icc_profile=False, **kwargs):
     """
     Easy-thumbnails processor to convert the image to an sRGB profile (so that stripping
     the profile doesn't look as bad)
     """
-    if keep_profile:
-        return image
-    else:
+    if not keep_icc_profile:
         return ensure_srgb(image)
+
+    return image
 
 
 def ensure_srgb(image):

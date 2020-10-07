@@ -1,8 +1,12 @@
+{% load astrobin_apps_equipment_tags %}
 {% load astrobin_apps_images_tags %}
+{% load astrobin_apps_premium_tags %}
 {% load astrobin_apps_users_tags %}
 {% load highlight %}
 {% load i18n %}
 {% load avatar_tags %}
+{% load common_tags %}
+{% load tags %}
 
 {% if paginator.object_list %}
 
@@ -10,9 +14,42 @@
         <ul class="thumbnails astrobin-thumbnails">
             {% for result in page_obj.object_list %}
                 {% if result.object %}
-                    <li class="thumbnail astrobin-thumbnail">
-                        {% astrobin_image result.object 'gallery' %}
-                    </li>
+                    {% if result.model_name == 'equipmentbrandlisting' and REQUEST_COUNTRY in result.object.retailer.countries and not listing_already_shown and not image_already_shown %}
+                        {% setvar True as listing_already_shown %}
+
+                        <li class="equipment-listing-search-result alert alert-info">
+                            <a class="close" data-toggle="modal" title="{% trans "Remove ads" %}"
+                                    {% if request.user|can_remove_ads %}
+                               href="#remove-ads-modal"
+                                    {% else %}
+                               href="#feature-restricted-modal"
+                                    {% endif %}
+                            >
+                                &times;
+                            </a>
+
+                            <span class="text">
+                                        <i class="icon-bullhorn"></i>
+                                {% blocktrans trimmed with brand=result.object.brand retailer=result.object.retailer %}
+                                    Interested in <strong>{{ brand }}</strong>? Our sponsor
+                                    <strong>{{ retailer }}</strong> sells this brand!
+                                {% endblocktrans %}
+                                    </span>
+
+                            {% with url=result.object.url %}
+                                <a class="btn btn-primary" href="{{ url }}?{% equipment_listing_utm_tags %}"
+                                   onclick="getOutboundLink('{{ url }}', '{{ request.path }}')" target="_blank">
+                                    {% trans "Shop now" %}
+                                </a>
+                            {% endwith %}
+                        </li>
+                    {% elif result.model_name == 'image' %}
+                        {% setvar True as image_already_shown %}
+
+                        <li class="thumbnail astrobin-thumbnail">
+                            {% astrobin_image result.object 'gallery' %}
+                        </li>
+                    {% endif %}
                 {% endif %}
             {% endfor %}
         </ul>

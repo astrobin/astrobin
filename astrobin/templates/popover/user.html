@@ -25,7 +25,7 @@
             {% if is_authenticated %}
                 {% add_remove_toggleproperty "follow" user request.user %}
             {% endif %}
-            <a class="btn btn-mini btn-primary" href="{% url 'user_page' user %}">
+            <a class="btn btn-primary" href="{% url 'user_page' user %}">
                 <i class="icon-picture"></i>
                 {% trans "Gallery" %}
             </a>

@@ -23,6 +23,8 @@ if TESTING:
         app.split('.')[-1]: None for app in INSTALLED_APPS
     }
 
+    MIGRATION_MODULES['astrobin'] = None
+
     CACHES = {
         'default': {
             'BACKEND': 'django.core.cache.backends.dummy.DummyCache',

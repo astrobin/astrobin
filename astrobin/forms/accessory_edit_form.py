@@ -8,4 +8,4 @@ class AccessoryEditForm(forms.ModelForm):
 
     class Meta:
         model = Accessory
-        exclude = ('make', 'name', 'retailed')
+        exclude = ('make', 'name')

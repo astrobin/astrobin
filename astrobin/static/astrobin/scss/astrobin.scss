@@ -2,6 +2,7 @@
 @import "variables";
 @import "mixins";
 
+@import "alert";
 @import "buttons";
 @import "forms";
 @import "modal";
@@ -10,6 +11,7 @@
 @import "progress";
 @import "select2";
 @import "uniform";
+@import "ui-tooltip";
 
 @import "forum";
 @import "search";
@@ -159,10 +161,10 @@ body.full {
 
 ul.astrobin-thumbnails {
   margin-left: 0;
+  clear: both;
 }
 
 li.astrobin-thumbnail {
-  float: none;
   position: relative;
   padding: 2px;
   margin: 0;
@@ -1083,6 +1085,10 @@ BODY:first-of-type ul.as-list, x:-moz-any-link, x:default { /* Target FF 3.5+ */
 }
 
 .technical-card {
+  .subtle-container {
+    overflow: visible;
+  }
+
   p {
     margin: $spacer-small 0;
   }
@@ -1100,6 +1106,15 @@ BODY:first-of-type ul.as-list, x:-moz-any-link, x:default { /* Target FF 3.5+ */
 
   .image-histogram {
     margin-top: $spacer-xxlarge;
+  }
+
+  .gear {
+    .icon-shopping-cart {
+      padding: 2px 4px;
+      margin-left: .25rem;
+      color: goldenrod;
+      text-shadow: 0 0 3px rgba(0, 0, 0, .33);
+    }
   }
 }
 
@@ -1183,7 +1198,7 @@ BODY:first-of-type ul.as-list, x:-moz-any-link, x:default { /* Target FF 3.5+ */
   }
 }
 
-.explore-comment-container, .explore-review-container {
+.explore-comment-container {
   width: 460px;
   padding: $spacer-small;
   display: inline-block;
@@ -1210,15 +1225,11 @@ BODY:first-of-type ul.as-list, x:-moz-any-link, x:default { /* Target FF 3.5+ */
   }
 }
 
-.explore-review-container {
-  width: 302px;
-}
-
 .nested-comments-container {
   overflow: visible !important;
 }
 
-.reviews, .comments {
+.comments {
   margin-top: $spacer-large;
   margin-left: $spacer-large;
 
@@ -1233,7 +1244,7 @@ BODY:first-of-type ul.as-list, x:-moz-any-link, x:default { /* Target FF 3.5+ */
   }
 }
 
-.comment, .review {
+.comment {
   position: relative;
   font-size: 1em;
   margin: 0;
@@ -1383,11 +1394,6 @@ BODY:first-of-type ul.as-list, x:-moz-any-link, x:default { /* Target FF 3.5+ */
   margin-left: $spacer-large;
 }
 
-.review {
-  border-bottom: 1px dashed #555;
-  padding-bottom: $spacer-large;
-}
-
 @keyframes bounceCommentIndicator {
   from {
     left: -30px;
@@ -1407,7 +1413,7 @@ BODY:first-of-type ul.as-list, x:-moz-any-link, x:default { /* Target FF 3.5+ */
   }
 }
 
-.comment.newlyAdded, .comment.hilight, .review.hilight {
+.comment.newlyAdded, .comment.hilight {
   &:before {
     content: "\279F";
     position: absolute;
@@ -1423,12 +1429,6 @@ BODY:first-of-type ul.as-list, x:-moz-any-link, x:default { /* Target FF 3.5+ */
   .content {
     font-weight: bold;
     color: yellow;
-  }
-}
-
-.review-form {
-  textarea, select {
-    width: 96%;
   }
 }
 
@@ -2019,41 +2019,6 @@ p.small {
   position: relative;
 }
 
-.ui-tooltip, .qtip {
-  //max-width: 400px;
-  //min-width: 250px;
-}
-
-.ui-tooltip-default .ui-tooltip-titlebar,
-.ui-tooltip-default .ui-tooltip-content {
-  background: $grey-6-dark url('../images/darker-panel-tile.png');
-  border-color: #111;
-  @include box-shadow-subtle;
-  color: $text-color;
-
-  h3 {
-    color: $strong-text-color;
-    border-bottom: 1px solid #232323;
-  }
-
-  p {
-    margin-bottom: 2px;
-  }
-
-  .actions {
-    margin-top: $spacer-large;
-    padding-top: $spacer-large;
-    padding-bottom: $spacer-medium;
-    border-top: 1px solid #232323;
-    text-align: right;
-  }
-}
-
-.ui-tooltip .ui-tooltip-tip,
-.ui-tooltip .ui-tooltip-tip * {
-  display: none;
-}
-
 .row.section {
   margin-bottom: $spacer-xlarge;
 }
@@ -2119,61 +2084,6 @@ p.small {
 
   .bubble:after {
     left: 20px;
-  }
-}
-
-.alert {
-  form {
-    margin-bottom: $spacer-small;
-
-    input[type=submit] {
-      width: 100%;
-    }
-  }
-
-  h4 {
-    margin-bottom: 12px;
-  }
-
-  strong {
-    color: inherit;
-  }
-}
-
-.alert-heading {
-  margin: 0 0 12px 0;
-}
-
-.alert-info strong {
-  color: $background-color;
-}
-
-.alert-error,
-.alert-danger {
-  a, a:link, a:visited {
-    color: $grey-5;
-    text-decoration: underline;
-  }
-
-  a:hover, a:active {
-    color: $grey-6;
-    text-decoration: underline;
-  }
-}
-
-.alert-actions {
-  margin-top: 20px;
-}
-
-.global-alert {
-  margin-top: $spacer-medium;
-  padding-top: 20px;
-  padding-bottom: 20px;
-
-  a {
-    font-weight: bold;
-    text-decoration: underline;
-    margin-left: $spacer-medium;
   }
 }
 
@@ -2292,9 +2202,9 @@ form.avatar-change label.control-label {
 
       &.wip-badge-large {
         h2 {
-          font-size: 24px;
+          font-size: 18px;
           line-height: 12px;
-          padding: 8px;
+          padding: 4px;
           @include rounded-corners(26px);
         }
 
@@ -2346,9 +2256,9 @@ form.avatar-change label.control-label {
 
       &.top-pick-badge-large {
         h2 {
-          font-size: 10px;
+          font-size: 8px;
           line-height: 10px;
-          padding: 10px;
+          padding: 4px;
           @include rounded-corners(26px);
           text-align: center;
 
@@ -2923,6 +2833,17 @@ li.revisions {
   }
 }
 
+.gear-popover-label {
+  padding: 0;
+  color: $link-color;
+  cursor: pointer;
+
+
+  &:hover {
+    border-bottom: 1px dotted $link-color;
+  }
+}
+
 .gear-popover, .user-popover, .subject-popover {
   .thumbnail {
     border: 0;
@@ -2930,6 +2851,47 @@ li.revisions {
 
   th, td {
     border-color: $grey-8;
+  }
+
+  .equipment-brand-listings {
+    border-top: 1px solid $grey-7;
+    background: $grey-6 url(../images/background-tile.png);
+    margin: 0 -1rem;
+    padding: 1rem;
+
+    .equipment-brand-listing {
+      position: relative;
+      padding: .5rem;
+      background: $white;
+      border: 1px solid $grey-7;
+      box-shadow: 0 0 1rem rgba(0, 0, 0, .5);
+
+      .close {
+        position: absolute;
+        top: -.75rem;
+        right: -.75rem;
+        background: $white;
+        border: 1px solid $grey-7;
+        border-radius: 1rem;
+        padding: 0;
+        opacity: 1;
+        width: 1.25rem;
+        height: 1.25rem;
+        text-align: center;
+        color: $grey-5;
+        font-size: 1.1rem;
+        box-shadow: 0 0 0.5rem rgba(0, 0, 0, .5);
+      }
+      .logo {
+        margin-bottom: .75rem;
+      }
+
+      .shop-button {
+        i {
+          margin-right: .25rem;
+        }
+      }
+    }
   }
 }
 
@@ -3032,10 +2994,6 @@ li.revisions {
 
 .gear-business-card {
   height: 150px;
-}
-
-.commercial-gear-items.table, .retailed-gear-items.table {
-  table-layout: fixed;
 }
 
 #more-subjects .hide, #more-subjects .reminder {
@@ -4682,6 +4640,20 @@ table.api-examples {
     background: yellow;
     color: black;
     padding: 0 4px;
+  }
+
+  .equipment-listing-search-result {
+    width: calc(100% - 2rem);
+    padding: 1rem;
+    margin: 0 0 2rem;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    position: relative;
+
+    .text i {
+      margin-right: .5rem;
+    }
   }
 }
 
