@@ -22,8 +22,6 @@ LANGUAGES = (
     ('ar', gettext('Arabic')),
     ('ja', gettext('Japanese')),
 )
-MODELTRANSLATION_TRANSLATION_REGISTRY = 'astrobin.translation'
-
 # If you set this to False, Django will make some optimizations so as not
 # to load the internationalization machinery.
 USE_I18N = True

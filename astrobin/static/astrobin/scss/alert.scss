@@ -1,0 +1,73 @@
+@import "variables";
+
+.alert {
+  form {
+    margin-bottom: $spacer-small;
+
+    input[type=submit] {
+      width: 100%;
+    }
+  }
+
+  h4 {
+    margin-bottom: 12px;
+  }
+
+  strong {
+    color: inherit;
+  }
+
+  .close {
+    position: absolute;
+    top: -.75rem;
+    right: -.75rem;
+    background: $white;
+    border: 1px solid $grey-7;
+    border-radius: 1rem;
+    padding: 0;
+    opacity: 1;
+    width: 1.25rem;
+    height: 1.25rem;
+    text-align: center;
+    color: $grey-5;
+    font-size: 1.1rem;
+    box-shadow: 0 0 0.5rem rgba(0, 0, 0, .5);
+  }
+}
+
+.alert-heading {
+  margin: 0 0 12px 0;
+}
+
+.alert-info strong {
+  color: $background-color;
+}
+
+.alert-error,
+.alert-danger {
+  a, a:link, a:visited {
+    color: $grey-5;
+    text-decoration: underline;
+  }
+
+  a:hover, a:active {
+    color: $grey-6;
+    text-decoration: underline;
+  }
+}
+
+.alert-actions {
+  margin-top: 20px;
+}
+
+.global-alert {
+  margin-top: $spacer-medium;
+  padding-top: 20px;
+  padding-bottom: 20px;
+
+  a {
+    font-weight: bold;
+    text-decoration: underline;
+    margin-left: $spacer-medium;
+  }
+}

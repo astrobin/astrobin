@@ -72,9 +72,6 @@ def common_variables(request):
         'DEBUG_MODE': settings.DEBUG,
         'REQUEST_COUNTRY': get_client_country_code(request),
 
-        # 'random_gear_item': Gear.objects.filter(moderator_fixed = None).order_by('?')[:1].get(),
-        'is_producer': request.user.groups.filter(name='Producers'),
-        'is_retailer': request.user.groups.filter(name='Retailers'),
         'IMAGES_URL': settings.IMAGES_URL,
         'MEDIA_URL': settings.MEDIA_URL,
         'ADS_ENABLED': settings.ADS_ENABLED,

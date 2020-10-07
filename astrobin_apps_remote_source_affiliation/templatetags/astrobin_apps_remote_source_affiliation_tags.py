@@ -48,3 +48,8 @@ def remote_source_affiliate_image(code):
         return None
 
     return remote_source.image_file.url
+
+
+@register.simple_tag
+def remote_source_affiliate_utm_tags():
+    return "utm_source=astrobin&utm_medium=technical-card&utm_campaign=hosting-facility"

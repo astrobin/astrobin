@@ -8,4 +8,4 @@ class MountEditForm(forms.ModelForm):
 
     class Meta:
         model = Mount
-        exclude = ('make', 'name', 'retailed')
+        exclude = ('make', 'name')

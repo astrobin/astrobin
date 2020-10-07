@@ -21,7 +21,6 @@ class AstroBinAppConfig(AppConfig):
         registry.register('astrobin.image')
         registry.register('astrobin.imagerevision')
         registry.register('nested_comments.nestedcomment')
-        registry.register('reviews.review')
         registry.register('toggleproperties.toggleproperty')
         registry.register('astrobin_apps_groups.group')
 

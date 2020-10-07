@@ -42,8 +42,8 @@
                 </a>
             </div>
 
-            <a href="{{ image.remote_source|remote_source_affiliate_url }}?utm_source=astrobin&utm_medium=banner&utm_campaign=hosting-facility"
-               onclick="getOutboundLink('{{ image.remote_source|remote_source_affiliate_url }}?utm_source=astrobin&utm_medium=banner&utm_campaign=hosting-facility')"
+            <a href="{{ image.remote_source|remote_source_affiliate_url }}?{% remote_source_affiliate_utm_tags %}"
+               onclick="getOutboundLink('{{ image.remote_source|remote_source_affiliate_url }}', '{{ request.path }}')"
                target="_blank">
                 <img width="300" height="125" src="{{ image.remote_source|remote_source_affiliate_image }}" />
             </a>
@@ -58,8 +58,8 @@
                 <h4><i class="icon-star"></i> {% trans "Acquired at" %}</h4>
             </div>
 
-            <a href="{{ image.remote_source|remote_source_affiliate_url }}?utm_source=astrobin&utm_medium=banner&utm_campaign=hosting-facility"
-               onclick="getOutboundLink('{{ image.remote_source|remote_source_affiliate_url }}?utm_source=astrobin&utm_medium=banner&utm_campaign=hosting-facility')"
+            <a href="{{ image.remote_source|remote_source_affiliate_url }}?{% remote_source_affiliate_utm_tags %}"
+               onclick="getOutboundLink('{{ image.remote_source|remote_source_affiliate_url }}', '{{ request.path }}')"
                target="_blank">
                 {{ image.get_remote_source }}
             </a>

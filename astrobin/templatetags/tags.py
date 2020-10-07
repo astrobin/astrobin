@@ -238,11 +238,11 @@ def gear_type(gear):
     if real_gear and gear_type and hasattr(real_gear, 'type') and real_gear.type:
         try:
             t = [item for item in TYPES_LOOKUP[gear_type] if item[0] == real_gear.type][0][1]
-            return t
+            return '%s (%s)' % (gear_type, t)
         except KeyError:
             pass
 
-    return '-'
+    return gear_type
 
 
 @register.filter
