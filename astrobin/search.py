@@ -82,7 +82,7 @@ class AstroBinSearchForm(SearchForm):
             d = "i"
 
         if d == "i":
-            results = results.models(Image)
+            results = results.models(Image, EquipmentBrandListing)
         elif d == "u":
             results = results.models(User)
         elif d == "cf":
