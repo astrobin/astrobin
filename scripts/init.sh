@@ -255,3 +255,5 @@ try:
 except Site.DoesNotExist:
     Site.objects.create(name='AstroBin', domain='localhost')
 EOF
+
+python manage.py collectstatic --noinput
