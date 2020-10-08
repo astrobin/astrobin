@@ -20,7 +20,7 @@ services:
 
   celery_default:
     image: astrobin/astrobin:v1.96.4-adsense.1
-    command: celery worker -A astrobin -Q default,email -c 2 -l debug -f celery_default.log
+    command: bash -c "python manage.py collectstatic --noinput && celery worker -A astrobin -Q default,email -c 2 -l debug -f celery_default.log"
     links:
       - memcached
       - rabbitmq
@@ -40,7 +40,7 @@ services:
 
   celery_thumbnails:
     image: astrobin/astrobin:v1.96.4-adsense.1
-    command: celery worker -A astrobin -Q thumbnails -c 2 -l debug -f celery_thumbnails.log
+    command: bash -c "python manage.py collectstatic --noinput && celery worker -A astrobin -Q thumbnails -c 2 -l debug -f celery_thumbnails.log"
     links:
       - memcached
       - rabbitmq
@@ -60,7 +60,7 @@ services:
 
   celery_haystack:
     image: astrobin/astrobin:v1.96.4-adsense.1
-    command: celery worker -A astrobin -Q haystack -c 2 -l debug -f celery_haystack.log
+    command: bash -c "python manage.py collectstatic --noinput && celery worker -A astrobin -Q haystack -c 2 -l debug -f celery_haystack.log"
     links:
       - memcached
       - rabbitmq
@@ -74,11 +74,13 @@ services:
       - CELERY_RDB_PORT=6900
       - POSTGRES_DB=astrobin
       - POSTGRES_USER=astrobin
+    volumes:
+      - media:/media
 
 
   beat:
     image: astrobin/astrobin:v1.96.4-adsense.1
-    command: celery -A astrobin beat -l debug -f celery_beat.log --pidfile= --scheduler django_celery_beat.schedulers:DatabaseScheduler
+    command: bash -c "python manage.py collectstatic --noinput && celery -A astrobin beat -l debug -f celery_beat.log --pidfile= --scheduler django_celery_beat.schedulers:DatabaseScheduler"
     links:
       - memcached
       - rabbitmq
@@ -92,6 +94,8 @@ services:
       - CELERY_RDB_PORT=6900
       - POSTGRES_DB=astrobin
       - POSTGRES_USER=astrobin
+    volumes:
+      - media:/media
 
 
   astrobin:
