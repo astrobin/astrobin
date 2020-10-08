@@ -7,6 +7,7 @@ from haystack.generic_views import SearchView
 from haystack.query import SearchQuerySet
 from pybb.models import Post, Topic
 
+from astrobin_apps_equipment.models import EquipmentBrandListing
 from models import Image
 from nested_comments.models import NestedComment
 
@@ -81,7 +82,7 @@ class AstroBinSearchForm(SearchForm):
             d = "i"
 
         if d == "i":
-            results = results.models(Image)
+            results = results.models(Image, EquipmentBrandListing).order_by('-django_ct')
         elif d == "u":
             results = results.models(User)
         elif d == "cf":
