@@ -51,6 +51,11 @@
                                         v-if="filter.name === 'award'"
                                         :award="award"></award-filter>
 
+                                <date-published-filter
+                                        v-if="filter.name === 'date_published'"
+                                        :date-published-min="datePublishedMin"
+                                        :date-published-max="datePublishedMax"></date-published-filter>
+
                                 <camera-type-filter
                                         v-if="filter.name === 'camera_type'"
                                         :camera-type="cameraType"></camera-type-filter>
@@ -121,8 +126,10 @@
                         </div>
 
                         <div class="accordion-footer">
-                            <input class="btn btn-primary search-button" type="submit"
-                                   value="{% trans "Search" %}" />
+                            <button class="btn btn-primary search-button {% button_loading_class %}" type="submit">
+                                {% trans "Search" %}
+                                {% button_loading_indicator %}
+                            </button>
 
                             {% if paginator and request.GET.q and paginator.count > 100 %}
                                 <span class="result-count pull-right">
@@ -182,6 +189,18 @@
                     "{{ request.GET.award }}"
                 {% else %}
                     undefined
+                {% endif %},
+            datePublishedMin:
+                {% if "date_published_min" in request.GET %}
+                    "{{ request.GET.date_published_min }}"
+                {% else %}
+                    "2011-11-09"
+                {% endif %},
+            datePublishedMax:
+                {% if "date_published_max" in request.GET %}
+                    "{{ request.GET.date_published_max }}"
+                {% else %}
+                    new Date().toISOString().split('T')[0]
                 {% endif %},
             cameraType:
                 {% if "camera_type" in request.GET and request.GET.camera_type %}
@@ -323,6 +342,11 @@
                     removable: true
                 },
                 {
+                    name: "date_published",
+                    label: "{% trans "Publication date range" %}",
+                    removable: true
+                },
+                {
                     name: "camera_type",
                     label: "{% trans "Camera type" %}",
                     removable: true
@@ -417,6 +441,10 @@
 
             if (this.award) {
                 this.enabledFilters.push(this.getFilterByName("award"));
+            }
+
+            if (this.datePublishedMin || this.datePublishedMax) {
+                this.enabledFilters.push(this.getFilterByName("date_published"));
             }
 
             if (this.cameraType) {

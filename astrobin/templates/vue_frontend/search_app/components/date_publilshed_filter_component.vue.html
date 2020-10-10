@@ -1,0 +1,28 @@
+<script type="text/x-template" id="date-published-filter-template">
+    <div class="form-group date-published-filter" :class="{highlighted: highlighted}">
+        <input id="date-published-min-value" name="date_published_min" autocomplete="off" class="datepickerclass"
+               type="text" :value="datePublishedMin" />
+        <input id="date-published-max-value" name="date_published_max" autocomplete="off" class="datepickerclass"
+               type="text" :value="datePublishedMax" />
+    </div>
+</script>
+
+<script>
+    Vue.component("date-published-filter", {
+        template: "#date-published-filter-template",
+        props: [
+            "datePublishedMin",
+            "datePublishedMax"
+        ],
+        mixins: [
+            FilterComponentMixin
+        ],
+        mounted() {
+            $('.date-published-filter .datepickerclass').datepicker({
+                dateFormat: 'yy-mm-dd',
+                changeMonth: true,
+                changeYear: true
+            });
+        }
+    });
+</script>

@@ -325,7 +325,11 @@ astrobin_common = {
 
         // date and time pickers
         $('input').filter('.timepickerclass').timepicker({});
-        $('input').filter('.datepickerclass').datepicker({'dateFormat':'yy-mm-dd'});
+        $('input').filter('.datepickerclass').datepicker({
+            dateFormat: 'yy-mm-dd',
+            changeMonth: true,
+            changeYear: true
+        });
 
         $('abbr.timeago').timeago();
 

@@ -1,0 +1,17 @@
+@import "variables";
+
+.ui-datepicker {
+  .ui-datepicker-header {
+    background: $grey-9;
+    color: $white;
+    border: 0;
+    margin: -3px;
+    padding: .5rem;
+    border-radius: 0
+  }
+
+  .ui-datepicker-prev,
+  .ui-datepicker-next {
+    top: 1rem;
+  }
+}
