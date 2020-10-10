@@ -75,6 +75,7 @@ def common_variables(request):
         'IMAGES_URL': settings.IMAGES_URL,
         'MEDIA_URL': settings.MEDIA_URL,
         'ADS_ENABLED': settings.ADS_ENABLED,
+        'ADSENSE_ENABLED': settings.ADSENSE_ENABLED,
         'DONATIONS_ENABLED': settings.DONATIONS_ENABLED,
 
         'PREMIUM_ENABLED': settings.PREMIUM_ENABLED,
