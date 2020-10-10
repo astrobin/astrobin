@@ -219,6 +219,7 @@ urlpatterns += [
     url(r'^users_app/', include('astrobin_apps_users.urls')),
     url(r'^groups/', include('astrobin_apps_groups.urls')),
     url(r'^iotd/', include('astrobin_apps_iotd.urls')),
+    url(r'^images/', include('astrobin_apps_images.urls')),
 
     ###########################################################################
     ### HOME VIEWS                                                          ###
