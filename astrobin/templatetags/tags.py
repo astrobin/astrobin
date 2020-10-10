@@ -264,6 +264,9 @@ def show_ads(user):
 
 @register.simple_tag(takes_context=True)
 def show_adsense_ads(context):
+    if not settings.ADSENSE_ENABLED:
+        return False
+
     is_anon = not context['request'].user.is_authenticated()
     image_owner_is_ultimate = False
 
