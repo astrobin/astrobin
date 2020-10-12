@@ -4,8 +4,18 @@
     {% if image.is_wip %}
         <div class="alert alert-warning">
             <p>
-            {% blocktrans %}This image is a <strong>work in progress</strong> from your <a href="{{profile_url}}?staging">Staging Area</a>. This means nobody can see it unless you give them one of the links you can find in the <em>Share</em> menu below. Use that link to post this image to Internet forums and get feedback on it. When you are satisfied, perhaps after uploading some revisions, <a href="#promote-modal" data-toggle="modal">promote it</a> to the <a href="{{profile_url}}">Public Area</a>.{% endblocktrans %}
+                {% url 'user_page' request.user as profile_url %}
+                {% blocktrans trimmed %}
+                    This image is a <strong>work in progress</strong> from your
+                    <a href="{{ profile_url }}?staging">Staging Area</a>. This means nobody can see it unless you give
+                    them one of the links you can find in the <em>Share</em> menu below. Use that link to post this
+                    image to Internet forums and get feedback on it. When you are satisfied, perhaps after uploading
+                    some revisions, promote it to the <a href="{{ profile_url }}">Public Area</a>.
+                {% endblocktrans %}
             </p>
+            <a class="btn btn-primary" data-toggle="modal" href="#promote-modal">
+                {% trans "Promote to public area" %}
+            </a>
         </div>
     {% endif %}
 {% endifequal %}
