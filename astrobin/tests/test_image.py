@@ -2724,7 +2724,8 @@ class ImageTest(TestCase):
 
         # Test public image
         self.client.login(username='test', password='password')
-        response = self.client.post(post_url((public_image.get_id(),)))
+        response = self.client.post(post_url((public_image.get_id(),)), follow=True)
+        self.assertEqual(response.status_code, 200)
         image = Image.objects.get(pk=public_image.pk)
         self.assertEquals(image.is_wip, False)
         self.assertEquals(len(get_unseen_notifications(self.user2)), 0)
@@ -2732,7 +2733,8 @@ class ImageTest(TestCase):
         # Test WIP image
         self.assertIsNone(wip_image.published)
         self.assertTrue(wip_image.is_wip)
-        response = self.client.post(post_url((wip_image.get_id(),)))
+        response = self.client.post(post_url((wip_image.get_id(),)), follow=True)
+        self.assertEqual(response.status_code, 200)
         wip_image = Image.objects.get(pk=wip_image.pk)
         self.assertFalse(wip_image.is_wip)
         self.assertIsNotNone(wip_image.published)
@@ -2743,7 +2745,18 @@ class ImageTest(TestCase):
         # Test that previously published images don't trigger a notification
         wip_image.is_wip = True
         wip_image.save(keep_deleted=True)
-        response = self.client.post(post_url((wip_image.get_id(),)))
+        response = self.client.post(post_url((wip_image.get_id(),)), follow=True)
+        self.assertEqual(response.status_code, 200)
+        wip_image = Image.objects.get(pk=wip_image.pk)
+        self.assertFalse(wip_image.is_wip)
+        self.assertIsNotNone(wip_image.published)
+        self.assertEquals(len(get_unseen_notifications(self.user2)), 1)  # Same as before
+
+        # Test that skip_notifications doesn't trigger a notification
+        wip_image.is_wip = True
+        wip_image.save(keep_deleted=True)
+        response = self.client.post(post_url((wip_image.get_id(),)), data={'skip_notifications': 'on'}, follow=True)
+        self.assertEqual(response.status_code, 200)
         wip_image = Image.objects.get(pk=wip_image.pk)
         self.assertFalse(wip_image.is_wip)
         self.assertIsNotNone(wip_image.published)
