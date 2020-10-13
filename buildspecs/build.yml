@@ -11,3 +11,9 @@ phases:
       - buildspecs/build.sh
       - buildspecs/cypress.sh
       - buildspecs/push-image.sh
+
+artifacts:
+  base-directory: $CODEBUILD_SRC_DIR/cypress/
+  files:
+    - videos/*
+    - screenshots/*
