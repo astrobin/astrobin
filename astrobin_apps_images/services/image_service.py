@@ -89,7 +89,7 @@ class ImageService:
         return '%d,%d,%d,%d' % (x1, y1, x2, y2)
 
     def get_crop_box(self, alias, revision_label=None):
-        if revision_label is None or revision_label == '0':
+        if revision_label in (None, '0', 0):
             target = self.image
         elif revision_label == 'final':
             target = self.get_final_revision()
