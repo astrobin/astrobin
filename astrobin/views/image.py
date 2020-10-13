@@ -136,6 +136,8 @@ class ImageThumbView(JSONResponseMixin, ImageDetailViewBase):
 
         alias = kwargs.pop('alias')
         revision_label = kwargs.pop('r', 'final')
+        if revision_label is None:
+            revision_label = 'final'
 
         force = request.GET.get('force')
         if force is not None:
@@ -174,6 +176,9 @@ class ImageRawThumbView(ImageDetailViewBase):
         image = self.get_object()
         alias = kwargs.pop('alias')
         revision_label = kwargs.pop('r')
+        if revision_label is None:
+            revision_label = 'final'
+
         opts = {
             'revision_label': revision_label,
             'animated': 'animated' in self.request.GET,
