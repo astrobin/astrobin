@@ -35,7 +35,7 @@ class Generators:
 
     @staticmethod
     def imageRevision(*args, **kwargs):
-        image = kwargs.pop('image')
+        image = kwargs.pop('image', None)
         if image is None:
             image = Generators.image()
 
