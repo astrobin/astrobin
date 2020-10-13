@@ -1,0 +1,11 @@
+version: 0.2
+
+phases:
+  install:
+    runtime-versions:
+      docker: 18
+
+  build:
+    commands:
+      - docker pull $ECR_URL/astrobin:latest
+      - docker compose -f docker/docker-compose.yml -f docker/docker-compose.build.yml up -d

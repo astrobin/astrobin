@@ -7,15 +7,10 @@ phases:
 
   build:
     commands:
+      - docker build -t astrobin:$CODEBUILD_RESOLVED_SOURCE_VERSION -f docker/astrobin.dockerfile .
       - |
-        docker build --no-cache \
-            -t astrobin/astrobin:$CODEBUILD_RESOLVED_SOURCE_VERSION \
-            -f docker/astrobin.dockerfile .
-      - |
-        docker run astrobin/astrobin:$CODEBUILD_RESOLVED_SOURCE_VERSION bash -c "\
-            USE_SQLITE=true TESTING=true ./scripts/test.sh && \
-            coverage xml && \
-            codecov --commit=$CODEBUILD_RESOLVED_SOURCE_VERSION -t $CODECOV_TOKEN"
-      - echo "$DOCKER_PASSWORD" | docker login -u "$DOCKER_USERNAME" --password-stdin
-      - docker push astrobin/astrobin:$CODEBUILD_RESOLVED_SOURCE_VERSION
-      - docker logout
+        aws ecr get-login-password --region us-east-1 | docker login \
+            --username AWS \
+            --password-stdin \
+            $ECR_URL
+      - docker push $ECR_URL/astrobin:$CODEBUILD_RESOLVED_SOURCE_VERSION
