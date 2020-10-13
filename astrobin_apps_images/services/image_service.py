@@ -96,7 +96,7 @@ class ImageService:
         else:
             target = self.get_revision(label=revision_label)
 
-        square_cropping = self.image.square_cropping if self.image.square_cropping else self.get_default_cropping(
+        square_cropping = target.square_cropping if target.square_cropping else self.get_default_cropping(
             revision_label)
         square_cropping_x0 = int(square_cropping.split(',')[0])
         square_cropping_y0 = int(square_cropping.split(',')[1])
