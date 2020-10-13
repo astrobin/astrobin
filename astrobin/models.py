@@ -1163,22 +1163,13 @@ class Image(HasSolutionMixin, SafeDeleteModel):
 
         return field
 
-    def get_final_revision_label(self):
-        # Avoid hitting the db by potentially exiting early
-        if self.is_final:
-            return '0'
-
-        for r in self.revisions.all():
-            if r.is_final:
-                return r.label
-
-        return '0'
 
     def thumbnail_raw(self, alias, thumbnail_settings={}):
         import urllib2
         from django.core.files.base import ContentFile
         from easy_thumbnails.files import get_thumbnailer
         from astrobin.s3utils import OverwritingFileSystemStorage
+        from astrobin_apps_images.services import ImageService
 
         revision_label = thumbnail_settings.get('revision_label', 'final')
 
@@ -1190,27 +1181,10 @@ class Image(HasSolutionMixin, SafeDeleteModel):
             alias = 'thumb'
 
         options = dict(settings.THUMBNAIL_ALIASES[''][alias].copy(), **thumbnail_settings)
-
-        if alias in ("gallery", "gallery_inverted", "collection", "thumb"):
-            if revision_label == '0':
-                if self.square_cropping:
-                    options['box'] = self.square_cropping
-                    options['crop'] = True
-            elif revision_label == 'final':
-                try:
-                    revision = ImageRevision.objects.get(image=self, label=self.get_final_revision_label())
-                    if revision.square_cropping:
-                        options['box'] = revision.square_cropping
-                        options['crop'] = True
-                except ImageRevision.DoesNotExist:
-                    if self.square_cropping:
-                        options['box'] = self.square_cropping
-                        options['crop'] = True
-            else:
-                revision = ImageRevision.objects.get(image=self, label=revision_label)
-                if revision.square_cropping:
-                    options['box'] = revision.square_cropping
-                    options['crop'] = True
+        crop_box = ImageService(self).get_crop_box(alias, revision_label=revision_label)
+        if crop_box:
+            options['box'] = crop_box
+            options['crop'] = True
 
         field = self.get_thumbnail_field(revision_label)
         if not field.name:
@@ -1323,7 +1297,8 @@ class Image(HasSolutionMixin, SafeDeleteModel):
             alias = 'thumb'
 
         if revision_label in (None, 'None', 'final'):
-            revision_label = self.get_final_revision_label()
+            from astrobin_apps_images.services import ImageService
+            revision_label = ImageService(self).get_final_revision_label()
             options['revision_label'] = revision_label
 
         cache_key = self.thumbnail_cache_key(field, alias)
