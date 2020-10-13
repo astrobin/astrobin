@@ -67,7 +67,7 @@ class ImageService:
             if w == 0 or h == 0:
                 try:
                     (w, h) = get_image_dimensions(self.image.image_file.file)
-                except ValueError:
+                except (ValueError, IOError):
                     return '0,0,0,0'
         else:
             try:
