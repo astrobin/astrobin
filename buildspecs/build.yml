@@ -16,9 +16,6 @@ phases:
             USE_SQLITE=true TESTING=true ./scripts/test.sh && \
             coverage xml && \
             codecov --commit=$CODEBUILD_RESOLVED_SOURCE_VERSION -t $CODECOV_TOKEN"
-
-  post_build:
-    commands:
       - echo "$DOCKER_PASSWORD" | docker login -u "$DOCKER_USERNAME" --password-stdin
       - docker push astrobin/astrobin:$CODEBUILD_RESOLVED_SOURCE_VERSION
       - docker logout
