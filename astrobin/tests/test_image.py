@@ -1152,7 +1152,7 @@ class ImageTest(TestCase):
 
         def get_expected_url(image):
             thumb = image.thumbnail_raw(opts['alias'], {
-                'revision_label': 0,
+                'revision_label': 'final',
                 'animated': False,
                 'insecure': False
             })
