@@ -1,3 +1,4 @@
+from django.conf import settings
 from django.core.files.images import get_image_dimensions
 from django.db.models import Q
 
@@ -12,7 +13,33 @@ class ImageService:
         # type: (Image) -> None
         self.image = image
 
+    def get_revision(self, label):
+        # type: (str) -> ImageRevision
+        return ImageRevision.objects.get(label=label)
+
+    def get_final_revision_label(self):
+        # type: () -> str
+        # Avoid hitting the db by potentially exiting early
+        if self.image.is_final:
+            return '0'
+
+        for r in self.image.revisions.all():
+            if r.is_final:
+                return r.label
+
+        return '0'
+
+    def get_final_revision(self):
+        # type: () -> union[Image, ImageRevision]
+        label = self.get_final_revision_label()
+
+        if label == '0':
+            return self.image
+
+        return self.get_revision(label)
+
     def get_revisions(self, include_corrupted=False, include_deleted=False):
+        # type: (bool, bool) -> QuerySet
         manager = ImageRevision.all_objects if include_deleted else ImageRevision.objects
         revisions = manager.filter(image=self.image)
 
@@ -22,6 +49,7 @@ class ImageService:
         return revisions
 
     def get_next_available_revision_label(self):
+        # type: () -> str
         highest_label = 'A'
         for r in self.get_revisions(True, True):
             highest_label = r.label
@@ -29,18 +57,21 @@ class ImageService:
         return base26_encode(base26_decode(highest_label) + 1)
 
     def get_revisions_with_description(self, include_corrupted=False):
+        # type: (bool) -> QuerySet
         return self.get_revisions(include_corrupted).exclude(Q(description=None) | Q(description=''))
 
-
-    def get_default_cropping(self, revision_label = None):
+    def get_default_cropping(self, revision_label=None):
         if revision_label is None or revision_label == '0':
             w, h = self.image.w, self.image.h
 
             if w == 0 or h == 0:
-                (w, h) = get_image_dimensions(self.image.image_file.file)
+                try:
+                    (w, h) = get_image_dimensions(self.image.image_file.file)
+                except (ValueError, IOError):
+                    return '0,0,0,0'
         else:
             try:
-                revision = self.image.revisions.get(label=revision_label)
+                revision = self.get_revision(label=revision_label)
             except ImageRevision.DoesNotExist:
                 return '0,0,0,0'
 
@@ -57,6 +88,71 @@ class ImageService:
 
         return '%d,%d,%d,%d' % (x1, y1, x2, y2)
 
+    def get_crop_box(self, alias, revision_label=None):
+        if revision_label in (None, '0', 0):
+            target = self.image
+        elif revision_label == 'final':
+            target = self.get_final_revision()
+        else:
+            target = self.get_revision(label=revision_label)
+
+        square_cropping = self.image.square_cropping if self.image.square_cropping else self.get_default_cropping(
+            revision_label)
+        square_cropping_x0 = int(square_cropping.split(',')[0])
+        square_cropping_y0 = int(square_cropping.split(',')[1])
+        square_cropping_x1 = int(square_cropping.split(',')[2])
+        square_cropping_y1 = int(square_cropping.split(',')[3])
+        point_of_interest = {
+            'x': int((square_cropping_x1 + square_cropping_x0) / 2),
+            'y': int((square_cropping_y1 + square_cropping_y0) / 2),
+        }
+
+        w, h = target.w, target.h
+        if w == 0 or h == 0:
+            try:
+                (w, h) = get_image_dimensions(target.image_file.file)
+            except (ValueError, IOError):
+                return None
+
+        crop_width = settings.THUMBNAIL_ALIASES[''][alias]['size'][0]
+        crop_height = settings.THUMBNAIL_ALIASES[''][alias]['size'][1]
+
+        if crop_width == 0 or crop_height == 0:
+            return None
+
+        crop_proportion = crop_width / float(crop_height)
+
+        if crop_proportion == 1:
+            return square_cropping
+        else:
+            if crop_width > crop_height:
+                adjusted_crop_width = w
+                adjusted_crop_height = int(w / crop_proportion)
+            else:
+                adjusted_crop_width = int(h / crop_proportion)
+                adjusted_crop_height = h
+
+        # Do x.
+        remaining_width = w - adjusted_crop_width
+        if remaining_width < 0:
+            box_x0 = 0
+            box_x1 = w
+        else:
+            box_x0_in_infinite_canvas = point_of_interest['x'] - (adjusted_crop_width / 2)
+            box_x0 = max(0, min(box_x0_in_infinite_canvas, remaining_width))
+            box_x1 = box_x0 + adjusted_crop_width
+
+        # Do y.
+        remaining_height = h - adjusted_crop_height
+        if remaining_height < 0:
+            box_y0 = 0
+            box_y1 = h
+        else:
+            box_y0_in_infinite_canvas = point_of_interest['y'] - (adjusted_crop_height / 2)
+            box_y0 = max(0, min(box_y0_in_infinite_canvas, remaining_height))
+            box_y1 = box_y0 + adjusted_crop_height
+
+        return '%d,%d,%d,%d' % (box_x0, box_y0, box_x1, box_y1)
 
     def get_subject_type_label(self):
         # type: () -> str
