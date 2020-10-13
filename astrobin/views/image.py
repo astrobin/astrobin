@@ -135,16 +135,18 @@ class ImageThumbView(JSONResponseMixin, ImageDetailViewBase):
         image = self.get_object()
 
         alias = kwargs.pop('alias')
-        r = kwargs.pop('r')
-        if r is None:
-            r = 'final'
+        revision_label = kwargs.pop('r', 'final')
 
         force = request.GET.get('force')
         if force is not None:
-            image.thumbnail_invalidate()
+            if revision_label in (None, 'None', 0, '0'):
+                image.thumbnail_invalidate()
+            else:
+                revision = ImageService(image).get_revision(revision_label)
+                revision.thumbnail_invalidate()
 
         opts = {
-            'revision_label': r,
+            'revision_label': revision_label,
             'animated': 'animated' in self.request.GET,
             'insecure': 'insecure' in self.request.GET,
         }
@@ -158,7 +160,7 @@ class ImageThumbView(JSONResponseMixin, ImageDetailViewBase):
         return self.render_json_response({
             'id': image.pk,
             'alias': alias,
-            'revision': r,
+            'revision': revision_label,
             'url': iri_to_uri(url)
         })
 
@@ -171,16 +173,20 @@ class ImageRawThumbView(ImageDetailViewBase):
     def get(self, request, *args, **kwargs):
         image = self.get_object()
         alias = kwargs.pop('alias')
-        r = kwargs.pop('r')
+        revision_label = kwargs.pop('r')
         opts = {
-            'revision_label': r,
+            'revision_label': revision_label,
             'animated': 'animated' in self.request.GET,
             'insecure': 'insecure' in self.request.GET,
         }
 
         force = request.GET.get('force')
         if force is not None:
-            image.thumbnail_invalidate()
+            if revision_label in (None, 'None', 0, '0'):
+                image.thumbnail_invalidate()
+            else:
+                revision = ImageService(image).get_revision(revision_label)
+                revision.thumbnail_invalidate()
 
         sync = request.GET.get('sync')
         if sync is not None:
