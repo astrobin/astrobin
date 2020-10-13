@@ -111,7 +111,7 @@ class ImageService:
         if w == 0 or h == 0:
             try:
                 (w, h) = get_image_dimensions(target.image_file.file)
-            except ValueError:
+            except (ValueError, IOError):
                 return None
 
         crop_width = settings.THUMBNAIL_ALIASES[''][alias]['size'][0]
