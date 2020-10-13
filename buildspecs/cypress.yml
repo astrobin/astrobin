@@ -7,5 +7,6 @@ phases:
 
   build:
     commands:
-      - docker pull $ECR_URL/astrobin:latest
+      - export ASTROBIN_BUILD=$CODEBUILD_RESOLVED_SOURCE_VERSION
+      - docker build -t astrobin:$CODEBUILD_RESOLVED_SOURCE_VERSION -f docker/astrobin.dockerfile .
       - docker compose -f docker/docker-compose.yml -f docker/docker-compose.build.yml up -d
