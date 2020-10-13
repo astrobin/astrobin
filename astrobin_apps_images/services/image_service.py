@@ -15,7 +15,7 @@ class ImageService:
 
     def get_revision(self, label):
         # type: (str) -> ImageRevision
-        return ImageRevision.objects.get(label=label)
+        return ImageRevision.objects.get(image=self.image, label=label)
 
     def get_final_revision_label(self):
         # type: () -> str

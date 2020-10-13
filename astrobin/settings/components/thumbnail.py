@@ -28,36 +28,36 @@ THUMBNAIL_ALIASES = {
         'real': {'size': (16536, 16536), 'watermark': True, 'keep_icc_profile': True},
         'real_inverted': {'size': (16536, 16536), 'invert': True, 'watermark': True},
 
-        'hd': {'size': (1824, 0), 'crop': False, 'watermark': True, 'keep_icc_profile': True},
-        'hd_anonymized': {'size': (1824, 0), 'crop': False, 'watermark': False, 'keep_icc_profile': True},
-        'hd_inverted': {'size': (1824, 0), 'crop': False, 'invert': True, 'watermark': True},
-        'hd_sharpened': {'size': (1824, 0), 'crop': False, 'watermark': True, 'detail': True, 'keep_icc_profile': True},
-        'hd_sharpened_inverted': {'size': (1824, 0), 'crop': False, 'watermark': True, 'detail': True, 'invert': True},
+        'hd': {'size': (1824, 0), 'crop': 'smart', 'watermark': True, 'keep_icc_profile': True},
+        'hd_anonymized': {'size': (1824, 0), 'crop': 'smart', 'watermark': False, 'keep_icc_profile': True},
+        'hd_inverted': {'size': (1824, 0), 'crop': 'smart', 'invert': True, 'watermark': True},
+        'hd_sharpened': {'size': (1824, 0), 'crop': 'smart', 'watermark': True, 'detail': True, 'keep_icc_profile': True},
+        'hd_sharpened_inverted': {'size': (1824, 0), 'crop': 'smart', 'watermark': True, 'detail': True, 'invert': True},
 
-        'regular': {'size': (620, 0), 'crop': False, 'watermark': True, 'keep_icc_profile': True},
-        'regular_inverted': {'size': (620, 0), 'crop': False, 'invert': True, 'watermark': True},
-        'regular_sharpened': {'size': (620, 0), 'crop': False, 'watermark': True, 'detail': True,
+        'regular': {'size': (620, 0), 'crop': 'smart', 'watermark': True, 'keep_icc_profile': True},
+        'regular_inverted': {'size': (620, 0), 'crop': 'smart', 'invert': True, 'watermark': True},
+        'regular_sharpened': {'size': (620, 0), 'crop': 'smart', 'watermark': True, 'detail': True,
                               'keep_icc_profile': True},
-        'regular_sharpened_inverted': {'size': (620, 0), 'crop': False, 'watermark': True, 'detail': True, 'invert': True},
+        'regular_sharpened_inverted': {'size': (620, 0), 'crop': 'smart', 'watermark': True, 'detail': True, 'invert': True},
 
-        'gallery': {'size': (130, 130), 'crop': False, 'rounded': True, 'quality': 80},
-        'gallery_inverted': {'size': (130, 130), 'crop': False, 'rounded': True, 'quality': 80, 'invert': True},
-        'collection': {'size': (123, 123), 'crop': False, 'quality': 60},
+        'gallery': {'size': (130, 130), 'crop': 'smart', 'rounded': True, 'quality': 80},
+        'gallery_inverted': {'size': (130, 130), 'crop': 'smart', 'rounded': True, 'quality': 80, 'invert': True},
+        'collection': {'size': (123, 123), 'crop': 'smart', 'quality': 60},
         'thumb': {'size': (80, 80), 'crop': True, 'rounded': 'smart', 'quality': 60},
 
         # Tricks
         'histogram': {'size': (274, 120), 'histogram': True},
 
         # IOTD
-        'iotd': {'size': (1000, 380), 'crop': False, 'watermark': True, 'keep_icc_profile': True},
-        'iotd_candidate': {'size': (960, 0), 'crop': False, 'watermark': False, 'keep_icc_profile': True},
+        'iotd': {'size': (1000, 380), 'crop': 'smart', 'watermark': True, 'keep_icc_profile': True},
+        'iotd_candidate': {'size': (960, 0), 'crop': 'smart', 'watermark': False, 'keep_icc_profile': True},
 
         # Activity stream
-        'story': {'size': (460, 320), 'crop': False, 'quality': 90},
+        'story': {'size': (460, 320), 'crop': 'smart', 'quality': 90},
 
         # Duckduckgo
-        'duckduckgo': {'size': (250, 200), 'crop': False, 'quality': 80},
-        'duckduckgo_small': {'size': (113, 90), 'crop': False, 'quality': 80},
+        'duckduckgo': {'size': (250, 200), 'crop': 'smart', 'quality': 80},
+        'duckduckgo_small': {'size': (113, 90), 'crop': 'smart', 'quality': 80},
     },
 }
 THUMBNAIL_QUALITY = 100
