@@ -35,12 +35,8 @@ class Generators:
 
     @staticmethod
     def imageRevision(*args, **kwargs):
-        image = kwargs.pop('image', None)
-        if image is None:
-            image = Generators.image()
-
         return ImageRevision.objects.create(
-            image=image,
+            image=kwargs.pop('image', Generators.image()),
             is_final=kwargs.pop('is_final', False),
             corrupted=kwargs.pop('corrupted', False),
             label=kwargs.pop('label', 'B'),
