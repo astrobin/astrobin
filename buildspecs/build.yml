@@ -4,6 +4,7 @@ phases:
   install:
     runtime-versions:
       docker: 18
+      nodejs: 12
 
   build:
     commands:
