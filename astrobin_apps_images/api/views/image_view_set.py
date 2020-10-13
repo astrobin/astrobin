@@ -66,7 +66,7 @@ class ImageViewSet(TusCreateMixin,
             'filename': filename,
             'title': upload_metadata['title'],
             'is_wip': True,
-            'skip_notifications': True,
+            'skip_notifications': False,
             'user_id': request.user.id,
         })
 
