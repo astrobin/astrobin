@@ -1,20 +1,33 @@
 {% load i18n %}
 
+{% load common_tags %}
+
 {% if request.user.is_superuser or request.user == image.user %}
-<div class="modal hide fade" id="demote-modal">
-    <div class="modal-header">
-        <a class="close" data-dismiss="modal">&times;</a>
-        <h3>{% trans "Move to staging area" %}</h3>
-    </div>
-    <div class="modal-body">
-        <div class="well">
-            {% trans "This will move this image to your staging area, making it unlisted. The image will be accessible by anyone with a direct link." %}
-        </div>
+
+    <div class="modal hide fade" id="demote-modal">
 
         <form class="form-inline" action="{% url 'image_demote' image.get_id %}" method="post">{% csrf_token %}
-            <input class="btn btn-primary" type="submit" value="{% trans "Continue" %}"/>
+            <div class="modal-header">
+                <a class="close" data-dismiss="modal">&times;</a>
+                <h3><i class="icon-lock"></i> {% trans "Move to staging area" %}</h3>
+            </div>
+
+            <div class="modal-body">
+                <p>
+                    {% blocktrans trimmed %}
+                        This will move this image to your staging area, making it unlisted. The image will be accessible
+                        by anyone with a direct link.
+                    {% endblocktrans %}
+                </p>
+            </div>
+
+            <div class="modal-footer">
+                <button class="btn btn-primary {% button_loading_class %}" type="submit">
+                    {% trans "Continue" %}
+                    {% button_loading_indicator %}
+                </button>
+            </div>
         </form>
     </div>
-</div>
-{% endif %}
 
+{% endif %}

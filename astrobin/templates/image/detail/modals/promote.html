@@ -1,20 +1,44 @@
 {% load i18n %}
+{% load bootstrap_toolkit %}
+
+{% load common_tags %}
 
 {% if request.user.is_superuser or request.user == image.user %}
-<div class="modal hide fade" id="promote-modal">
-    <div class="modal-header">
-        <a class="close" data-dismiss="modal">&times;</a>
-        <h3>{% trans "Promote to public area" %}</h3>
-    </div>
-    <div class="modal-body">
-        <div class="well">
-            {% trans "This will move this image to your public area, making it listed and notifying your followers." %}
-        </div>
+
+    <div class="modal hide fade" id="promote-modal">
 
         <form class="form-inline" action="{% url 'image_promote' image.get_id %}" method="post">{% csrf_token %}
-            <input class="btn btn-primary" type="submit" value="{% trans "Continue" %}"/>
-        </form>
-    </div>
-</div>
-{% endif %}
+            <div class="modal-header">
+                <a class="close" data-dismiss="modal">&times;</a>
+                <h3>{% trans "Promote to public area" %}</h3>
+            </div>
 
+            <div class="modal-body">
+                <p>
+                    {% if image.published %}
+                        {% blocktrans trimmed %}
+                            This will move this image to your public area, making it listed. As this image had already
+                            been published before, your followers will not be notified.
+                        {% endblocktrans %}
+                    {% else %}
+                        {%  blocktrans trimmed %}
+                            This will move this image to your public area, making it listed and optionally notifying
+                            your followers.
+                        {% endblocktrans%}
+                    {% endif %}
+                </p>
+
+                {{ promote_form|as_bootstrap }}
+            </div>
+
+            <div class="modal-footer">
+                <button class="btn btn-primary {% button_loading_class %}" type="submit">
+                    {% trans "Continue" %}
+                    {% button_loading_indicator %}
+                </button>
+            </div>
+        </form>
+
+    </div>
+
+{% endif %}
