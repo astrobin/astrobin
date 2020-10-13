@@ -65,7 +65,10 @@ class ImageService:
             w, h = self.image.w, self.image.h
 
             if w == 0 or h == 0:
-                (w, h) = get_image_dimensions(self.image.image_file.file)
+                try:
+                    (w, h) = get_image_dimensions(self.image.image_file.file)
+                except ValueError:
+                    return '0,0,0,0'
         else:
             try:
                 revision = self.get_revision(label=revision_label)
