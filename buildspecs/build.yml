@@ -4,11 +4,9 @@ phases:
   install:
     runtime-versions:
       docker: 18
-      nodejs: 12
 
   build:
     commands:
       - buildspecs/build.sh
-      - buildspecs/test.sh
       - buildspecs/cypress.sh
       - buildspecs/push-image.sh
