@@ -135,7 +135,7 @@ class ImageThumbView(JSONResponseMixin, ImageDetailViewBase):
         image = self.get_object()
 
         alias = kwargs.pop('alias')
-        revision_label = kwargs.pop('r', 'final')
+        revision_label = kwargs.pop('r', None)
 
         force = request.GET.get('force')
         if force is not None:
@@ -144,6 +144,9 @@ class ImageThumbView(JSONResponseMixin, ImageDetailViewBase):
             else:
                 revision = ImageService(image).get_revision(revision_label)
                 revision.thumbnail_invalidate()
+
+        if revision_label is None:
+            revision_label = 'final'
 
         opts = {
             'revision_label': revision_label,
@@ -173,12 +176,7 @@ class ImageRawThumbView(ImageDetailViewBase):
     def get(self, request, *args, **kwargs):
         image = self.get_object()
         alias = kwargs.pop('alias')
-        revision_label = kwargs.pop('r')
-        opts = {
-            'revision_label': revision_label,
-            'animated': 'animated' in self.request.GET,
-            'insecure': 'insecure' in self.request.GET,
-        }
+        revision_label = kwargs.pop('r', None)
 
         force = request.GET.get('force')
         if force is not None:
@@ -187,6 +185,15 @@ class ImageRawThumbView(ImageDetailViewBase):
             else:
                 revision = ImageService(image).get_revision(revision_label)
                 revision.thumbnail_invalidate()
+
+        if revision_label is None:
+            revision_label = 'final'
+
+        opts = {
+            'revision_label': revision_label,
+            'animated': 'animated' in self.request.GET,
+            'insecure': 'insecure' in self.request.GET,
+        }
 
         sync = request.GET.get('sync')
         if sync is not None:
