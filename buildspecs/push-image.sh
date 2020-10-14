@@ -1,6 +1,5 @@
 #!/bin/bash
 
-docker tag astrobin:$CODEBUILD_RESOLVED_SOURCE_VERSION $DOCKER_REGISTRY/astrobin:$CODEBUILD_RESOLVED_SOURCE_VERSION &&
 aws ecr get-login-password --region us-east-1 | docker login \
     --username AWS \
     --password-stdin \
