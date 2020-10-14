@@ -36,7 +36,7 @@
                                 </span>
 
                         {% with url=result.object.url %}
-                            <a class="btn btn-primary" href="{{ url }}?{% equipment_listing_utm_tags %}"
+                            <a class="btn btn-primary" href="{% equipment_listing_url_with_utm_tags url %}"
                                onclick="getOutboundLink('{{ url }}', '{{ request.path }}')" target="_blank">
                                 {% trans "Shop now" %}
                             </a>

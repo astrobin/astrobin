@@ -29,8 +29,12 @@ def equipment_item_listings(gear, country):
 
 
 @register.simple_tag
-def equipment_listing_utm_tags():
-    return "utm_source=astrobin&utm_medium=link&utm_campaign=webshop-integration"
+def equipment_listing_url_with_utm_tags(url):
+    tags_separator = '?'
+    if tags_separator in url:
+        tags_separator = '&'
+
+    return "%s%sutm_source=astrobin&utm_medium=link&utm_campaign=webshop-integration" % (url, tags_separator)
 
 
 @register.filter
