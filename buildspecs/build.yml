@@ -9,6 +9,7 @@ phases:
   build:
     commands:
       - buildspecs/build.sh
+      - buildspecs/test.sh
       - buildspecs/cypress.sh
       - buildspecs/push-image.sh
 
