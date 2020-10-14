@@ -792,6 +792,11 @@ class Image(HasSolutionMixin, SafeDeleteModel):
         default=False
     )
 
+    recovered = models.DateTimeField(
+        null=True,
+        blank=True
+    )
+
     hash = models.CharField(
         max_length=6,
         default=image_hash,
@@ -1518,6 +1523,11 @@ class ImageRevision(HasSolutionMixin, SafeDeleteModel):
 
     corrupted = models.BooleanField(
         default=False
+    )
+
+    recovered = models.DateTimeField(
+        null=True,
+        blank=True
     )
 
     image_file = models.ImageField(
