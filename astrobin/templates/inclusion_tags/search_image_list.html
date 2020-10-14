@@ -13,7 +13,7 @@
     {% if search_domain == None or search_domain == 'i' %}
         <ul class="thumbnails astrobin-thumbnails">
             {% for result in page_obj.object_list %}
-                {% if 'q' in request.GET and result.model_name == 'equipmentbrandlisting' and REQUEST_COUNTRY in result.object.retailer.countries and not listing_already_shown and not image_already_shown %}
+                {% if 'q' in request.GET and result.model_name == 'equipmentbrandlisting' and REQUEST_COUNTRY|lower in result.object.retailer.countries and not listing_already_shown and not image_already_shown %}
                     {% setvar True as listing_already_shown %}
 
                     <li class="equipment-listing-search-result alert alert-info">
