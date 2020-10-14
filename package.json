@@ -1,0 +1,25 @@
+{
+  "name": "astrobin",
+  "version": "1.0.0",
+  "description": "Image hosting and social network for astrophotographers",
+  "main": "index.js",
+  "directories": {
+    "test": "tests"
+  },
+  "scripts": {
+    "test": "cypress run"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/astrobin/astrobin.git"
+  },
+  "author": "Salvatore Iovene <salvatore@iovene.com>",
+  "license": "AGPL-3.0-or-later",
+  "bugs": {
+    "url": "https://github.com/astrobin/astrobin/issues"
+  },
+  "homepage": "https://github.com/astrobin/astrobin#readme",
+  "devDependencies": {
+    "cypress": "^5.3.0"
+  }
+}
