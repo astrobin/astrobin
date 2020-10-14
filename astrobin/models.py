@@ -1186,8 +1186,9 @@ class Image(HasSolutionMixin, SafeDeleteModel):
             alias = 'thumb'
 
         options = dict(settings.THUMBNAIL_ALIASES[''][alias].copy(), **thumbnail_settings)
+
         crop_box = ImageService(self).get_crop_box(alias, revision_label=revision_label)
-        if crop_box:
+        if crop_box and alias not in ('real', 'real_inverted'):
             options['box'] = crop_box
             options['crop'] = True
 
