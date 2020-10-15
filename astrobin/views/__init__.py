@@ -1049,8 +1049,7 @@ def image_edit_save_license(request):
 @login_required
 @require_GET
 def me(request):
-    return HttpResponseRedirect(
-        '/users/%s/%s' % (request.user.username, '?staging' if 'staging' in request.GET else ''))
+    return HttpResponseRedirect('/users/%s/?%s' % (request.user.username, request.META['QUERY_STRING']))
 
 
 @require_GET
