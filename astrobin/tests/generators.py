@@ -30,7 +30,8 @@ class Generators:
             user=kwargs.pop('user', Generators.user()),
             is_wip=kwargs.pop('is_wip', False),
             is_final=kwargs.pop('is_final', True),
-            corrupted=kwargs.pop('corrupted', False)
+            corrupted=kwargs.pop('corrupted', False),
+            recovered=kwargs.pop('recovered', None),
         )
 
     @staticmethod

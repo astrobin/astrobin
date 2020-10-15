@@ -6,7 +6,12 @@
 {% load staticfiles %}
 
 {% if status != 'error' %}
-    <div class="astrobin-image-container{% if classes %} {{classes}}{% endif %}{% if image.is_wip %} wip{% endif %}">
+    <div class="astrobin-image-container
+            {% if classes %} {{classes}}{% endif %}
+            {% if image.is_wip %} wip{% endif %}
+            {% if image.corrupted %} corrupted{% endif %}
+            {% if image.recovered %} recovered{% endif %}"
+    >
         {% if error_message %}
             <div class="alert alert-error">
                 <h4 class="alert-heading">

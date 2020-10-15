@@ -27,6 +27,10 @@ class UserService:
         # type: () -> QuerySet
         return self.get_all_images().filter(UserService.corrupted_query()).distinct()
 
+    def get_recovered_images(self):
+        # type: () -> QuerySet
+        return self.get_all_images().filter(corrupted=True).exclude(recovered=None)
+
     def get_public_images(self):
         # type: () -> QuerySet
         return Image.objects.filter(user=self.user)
@@ -76,6 +80,7 @@ class UserService:
             'public_images_no': public.count(),
             'wip_images_no': wip.count(),
             'corrupted_no': self.get_corrupted_images().count(),
+            'recovered_no': self.get_recovered_images().count(),
             'deleted_images_no': self.get_deleted_images().count(),
         }
 

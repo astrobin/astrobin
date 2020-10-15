@@ -1,3 +1,5 @@
+from datetime import datetime
+
 from django.test import TestCase
 
 from astrobin.tests.generators import Generators
@@ -145,6 +147,7 @@ class TestUserService(TestCase):
         Generators.image(user=user1)
         Generators.image(user=user1, is_wip=True)
         Generators.image(user=user1, corrupted=True)
+        Generators.image(user=user1, corrupted=True, recovered=datetime.now())
 
         image2 = Generators.image(user=user2)
         ToggleProperty.objects.create_toggleproperty("bookmark", image2, user1)
@@ -152,9 +155,10 @@ class TestUserService(TestCase):
 
         image_numbers = UserService(user1).get_image_numbers()
 
-        self.assertEquals(image_numbers['public_images_no'], 2)
+        self.assertEquals(image_numbers['public_images_no'], 3)
         self.assertEquals(image_numbers['wip_images_no'], 1)
-        self.assertEquals(image_numbers['corrupted_no'], 1)
+        self.assertEquals(image_numbers['corrupted_no'], 2)
+        self.assertEquals(image_numbers['recovered_no'], 1)
 
     def test_get_image_numbers_not_including_corrupted(self):
         user1 = Generators.user()

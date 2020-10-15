@@ -1103,6 +1103,7 @@ def user_page(request, username):
         qs = UserService(user).get_public_images()
     wip_qs = UserService(user).get_wip_images()
     corrupted_qs = UserService(user).get_corrupted_images()
+    recovered_qs = UserService(user).get_recovered_images()
 
     if request.user != user:
         qs = qs \
@@ -1126,6 +1127,12 @@ def user_page(request, username):
             return HttpResponseForbidden()
         qs = corrupted_qs
         section = 'corrupted'
+        subsection = None
+    elif 'recovered' in request.GET:
+        if request.user != user and not request.user.is_superuser:
+            return HttpResponseForbidden()
+        qs = recovered_qs
+        section = 'recovered'
         subsection = None
     else:
         #########
@@ -1355,8 +1362,10 @@ def user_page(request, username):
         'stats': stats,
         'images_no': data['images'],
         'alias': 'gallery',
-        'has_corrupted_images': Image.objects_including_wip.filter(
-            corrupted=True, user=user).count() > 0,
+        'has_corrupted_images': Image.objects_including_wip.filter(corrupted=True, user=user).count() > 0,
+        'has_recovered_images': Image.objects_including_wip\
+                                    .filter(corrupted=True, user=user)\
+                                    .exclude(recovered=None).count() > 0,
     }
 
     response_dict.update(UserService(user).get_image_numbers(include_corrupted=request.user == user))

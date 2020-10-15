@@ -6,14 +6,35 @@
   strong {
     color: $black;
   }
+
+  &.active:not(.btn-link), &:active:not(.btn-link) {
+    box-shadow: 0 8px 8px rgba(0, 0, 0, 0.33) inset, 0 -2px 2px rgba(255, 255, 255, 0.1) inset;
+  }
+
+  &:focus:not(.btn-link) {
+    outline: none;
+    box-shadow: 0 0 2rem transparentize($link-color, .5);
+  }
 }
 
 .btn-primary {
   strong {
     color: $white;
   }
+
+  &.active, &:active {
+    color: lighten($link-color, 5%);
+  }
 }
 
 .btn-mini {
   padding: 2px 6px;
+}
+
+.btn-link {
+  text-shadow: none;
+
+  &:focus {
+    outline: none;
+  }
 }
