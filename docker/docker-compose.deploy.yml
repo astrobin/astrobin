@@ -55,6 +55,9 @@ services:
 
   astrobin:
     deploy:
+      resources:
+        limits:
+          memory: 2g
       placement:
         constraints:
           - node.labels.app == true
