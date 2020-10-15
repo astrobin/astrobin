@@ -25,7 +25,7 @@ Resources:
             - /bin/sh
             - -c
           Command:
-            - /bin/sh -c "useradd astrobin && chown -R astrobin:astrobin /code && celery worker --uid astrobin --gid astrobin -A astrobin -Q default -c 4 -l debug"
+            - /bin/sh -c "useradd astrobin && chown -R astrobin:astrobin /code && python manage.py collectstatic --noinput && celery worker --uid astrobin --gid astrobin -A astrobin -Q default -c 4 -l debug"
           LogConfiguration:
             LogDriver: awslogs
             Options:
