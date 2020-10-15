@@ -6,7 +6,7 @@ from django.views.generic import View
 class AdsTxtView(View):
     def get(self, request):
         publisher = settings.ADSENSE_PUBLISHER_ID
-        if settings.ADS_ENABLED and publisher:
+        if settings.ADSENSE_ENABLED and publisher:
             return HttpResponse(
                 "google.com, pub-%s, DIRECT, f08c47fec0942fa0" % publisher,
                 content_type='text/plain')

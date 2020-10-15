@@ -379,9 +379,6 @@
                                                 <a href="#edit-gear-modal" class="edit" data-toggle="modal" rel="tooltip" title="{% trans "Edit" %}">\
                                                     <i class="icon-pencil"></i>\
                                                 </a>\
-                                                <a href="#" class="page" rel="tooltip" title="{% trans "View page" %}">\
-                                                    <i class="icon-info-sign"></i>\
-                                                </a>\
                                             </div>\
                                         </div>'
                                     var $new_button = $(template);
@@ -389,7 +386,6 @@
                                     $new_button.find('.make').text(responseJson['make']);
                                     $new_button.find('.name').text(responseJson['name']);
                                     $new_button.find('.alias').text('(' + responseJson['alias'] + ')');
-                                    $new_button.find('.page').attr('href', '/gear/' + responseJson['id'] + '/');
 
                                     if(responseJson['complete'] == false) {
                                         $new_button.addClass('incomplete');

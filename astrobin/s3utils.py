@@ -52,7 +52,6 @@ class CachedS3BotoStorage(S3BotoStorage):
 
     def generate_local_name(self, name):
         local_name = hashlib.md5(unidecode(name)).hexdigest()
-        log.debug("Generated localname: %s -> %s" % (name, local_name))
         return local_name
 
     def _save(self, name, content):

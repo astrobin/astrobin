@@ -186,3 +186,8 @@ def more_recent_than(t, seconds):
 def get_pks(qs):
     # type: (QuerySet) -> list[int]
     return [x.pk for x in qs]
+
+
+@register.filter
+def get_item(dictionary, key):
+    return dictionary.get(key)

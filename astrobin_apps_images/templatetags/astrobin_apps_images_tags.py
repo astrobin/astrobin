@@ -4,6 +4,7 @@ import zlib
 from datetime import datetime
 
 from PIL import Image as PILImage
+from PIL.Image import DecompressionBombError
 from django.conf import settings
 from django.core.cache import cache
 from django.core.urlresolvers import reverse
@@ -14,25 +15,11 @@ from astrobin.models import Image, ImageRevision
 
 register = Library()
 
+
 # Returns the URL of an image, taking into account the fact that it might be
 # a commercial gear image.
 @register.simple_tag
 def get_image_url(image, revision='final', size='regular'):
-    def commercial_gear_url(commercial_gear):
-        gear = commercial_gear.base_gear.all()
-        if gear:
-            return gear[0].get_absolute_url()
-        return None
-
-    try:
-        commercial_gear = image.featured_gear.all()[0]
-        url = commercial_gear_url(commercial_gear)
-        if url:
-            return url
-
-    except IndexError:
-        pass
-
     return image.get_absolute_url(revision, size)
 
 
@@ -134,7 +121,7 @@ def astrobin_image(context, image, alias, **kwargs):
             image_revision.w = w
             image_revision.h = h
             image_revision.save(keep_deleted=True)
-        except (IOError, ValueError):
+        except (IOError, ValueError, DecompressionBombError):
             w = size[0]
             h = size[1] if size[1] > 0 else w
             response_dict['status'] = 'error'
@@ -215,6 +202,9 @@ def astrobin_image(context, image, alias, **kwargs):
             image.iotdvote_set.count() > 0 and
             not image.user.userprofile.exclude_from_competitions):
             badges.append('top-pick')
+
+        if image.is_wip:
+            badges.append('wip')
 
         # Temporarily disable this because it hogs the default celery queue.
         """

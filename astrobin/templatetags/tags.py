@@ -1,6 +1,6 @@
 # -*- coding: utf-8 -*-
 import math
-from datetime import datetime
+from datetime import datetime, date
 
 from django.conf import settings
 from django.contrib.contenttypes.models import ContentType
@@ -17,7 +17,7 @@ from astrobin.models import GearUserInfo, UserProfile, Image
 from astrobin.utils import get_image_resolution, decimal_to_hours_minutes_seconds, decimal_to_degrees_minutes_seconds
 from astrobin_apps_donations.templatetags.astrobin_apps_donations_tags import is_donor
 from astrobin_apps_premium.templatetags.astrobin_apps_premium_tags import is_premium_2020, is_premium, is_ultimate_2020, \
-    is_lite
+    is_lite, is_any_ultimate
 from astrobin_apps_premium.utils import premium_get_valid_usersubscription
 from astrobin_apps_users.services import UserService
 
@@ -238,11 +238,11 @@ def gear_type(gear):
     if real_gear and gear_type and hasattr(real_gear, 'type') and real_gear.type:
         try:
             t = [item for item in TYPES_LOOKUP[gear_type] if item[0] == real_gear.type][0][1]
-            return t
+            return '%s (%s)' % (gear_type, t)
         except KeyError:
             pass
 
-    return '-'
+    return gear_type
 
 
 @register.filter
@@ -262,13 +262,44 @@ def show_ads(user):
     return True
 
 
+@register.simple_tag(takes_context=True)
+def show_adsense_ads(context):
+    if not settings.ADSENSE_ENABLED:
+        return False
+
+    is_anon = not context['request'].user.is_authenticated()
+    image_owner_is_ultimate = False
+
+    if context.template_name == 'image/detail.html':
+        for data in context.dicts:
+            if 'image' in data:
+                image_owner_is_ultimate = is_any_ultimate(data['image'].user)
+    elif context.template_name in (
+            'user/profile.html',
+            'user_collections_list.html',
+            'user_collections_detail.html',
+            'user/bookmarks.html',
+            'user/liked.html',
+            'user/following.html',
+            'user/followers.html',
+            'user/plots.html',
+    ):
+        for data in context.dicts:
+            if 'requested_user' in data:
+                image_owner_is_ultimate = is_any_ultimate(data['requested_user'])
+
+    return is_anon and not image_owner_is_ultimate and \
+           context["COOKIELAW_ACCEPTED"] is not False and \
+           not context['request'].get_host().startswith("localhost")
+
+
 @register.filter
 def valid_subscriptions(user):
     if user.is_anonymous():
         return []
 
     us = UserSubscription.active_objects.filter(user=user)
-    subs = [x.subscription for x in us if x.valid()]
+    subs = [x.subscription for x in us if x.active and x.expires >= date.today()]
     return subs
 
 
@@ -280,7 +311,7 @@ def inactive_subscriptions(user):
     return [x.subscription
             for x
             in UserSubscription.objects.filter(user=user)
-            if not x.valid() or not x.active]
+            if not x.active or x.expires < date.today()]
 
 
 @register.filter
@@ -294,7 +325,7 @@ def has_valid_subscription(user, subscription_pk):
     if us.count() == 0:
         return False
 
-    return us[0].valid()
+    return us[0].active and us[0].expires >= date.today()
 
 
 @register.filter
@@ -308,7 +339,7 @@ def has_valid_subscription_in_category(user, category):
     if us.count() == 0:
         return False
 
-    return us[0].valid()
+    return us[0].active and us[0].expires >= date.today()
 
 
 @register.filter

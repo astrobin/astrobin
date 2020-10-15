@@ -1,0 +1,20 @@
+version: 0.2
+
+phases:
+  install:
+    runtime-versions:
+      docker: 18
+      nodejs: 12
+
+  build:
+    commands:
+      - buildspecs/build.sh
+      - buildspecs/test.sh
+      - buildspecs/cypress.sh
+      - buildspecs/push-image.sh
+
+artifacts:
+  base-directory: $CODEBUILD_SRC_DIR/cypress/
+  files:
+    - videos/*
+    - screenshots/*

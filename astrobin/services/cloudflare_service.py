@@ -21,7 +21,7 @@ class CloudflareService:
         """
 
         if not self.token or not self.zone_id:
-            log.debug("CloudflareService cannot work without token and zone_id")
+            log.warning("CloudflareService cannot work without token and zone_id")
             return
 
         headers = {
@@ -38,7 +38,6 @@ class CloudflareService:
         })
 
         try:
-            log.debug("Requesting to purge Cloudflare cache for file %s" % path)
-            requests.get(url, data, verify=False, headers=headers, timeout=0.5)
+            requests.get(url, data, headers=headers, timeout=0.5)
         except Exception as e:
             log.warning("Unable to purge Cloudflare cache for file %s: %s" % (path, e.message))

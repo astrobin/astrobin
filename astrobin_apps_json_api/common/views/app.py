@@ -12,7 +12,6 @@ from common.utils import get_project_root
 class AppConfig(JSONResponseMixin, View):
     def get(self, request, *args, **kwargs):
         return self.render_json_response({
-            u"version": self.__get_version__(),
             u"i18nHash": self.__get_i18n_hash__(),
             u"readOnly": self.__get_read_only_mode__(),
             u"PREMIUM_MAX_IMAGES_FREE": settings.PREMIUM_MAX_IMAGES_FREE,
@@ -31,16 +30,6 @@ class AppConfig(JSONResponseMixin, View):
             u"PREMIUM_PRICE_PREMIUM_2020": settings.PREMIUM_PRICE_PREMIUM_2020,
             u"PREMIUM_PRICE_ULTIMATE_2020": settings.PREMIUM_PRICE_ULTIMATE_2020,
         })
-
-    def __get_version__(self):
-        # type: () -> str
-        version_file = join(get_project_root(), 'VERSION')  # type: str
-
-        f = open(version_file, 'r')  # type: BinaryIO
-        version = f.read().strip()  # type: str
-        f.close()
-
-        return version
 
     def __get_i18n_hash__(self):
         cache_key = "astrobin_i18n_hash"

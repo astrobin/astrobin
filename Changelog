@@ -1,3 +1,78 @@
+2020-10-10 Salvatore Iovene <salvatore@iovene.com>
+ * This is the end of the Changelog, due to a move to continuous delivery.
+
+2020-10-09 Salvatore Iovene <salvatore@iovene.com>
+ * v1.96.6
+ * (general) Serve jQuery from local file instead of Google CDN
+
+2020-10-08 Salvatore Iovene <salvatore@iovene.com>
+ * v1.96.5
+ * (infra) Collect static from all astrobin images (incl. celery) so that they start cleanly
+
+2020-10-08 Salvatore Iovene <salvatore@iovene.com>
+ * v1.96.4
+ * (search) No need to check for object's presence if we delete stale records
+
+2020-10-08 Salvatore Iovene <salvatore@iovene.com>
+ * v1.96.3
+ * (search) Don't index every gear item with equipment brand listings
+
+2020-10-08 Salvatore Iovene <salvatore@iovene.com>
+ * v1.96.2
+ * (search) Temporarily disable equipment brand listings search
+
+2020-10-07 Salvatore Iovene <salvatore@iovene.com>
+ * v1.96.1
+ * (infra) Collect static on init
+
+2020-10-07 Salvatore Iovene <salvatore@iovene.com>
+ * v1.96.0
+ * (general) Overhaul retailer affiliation platform (#1348)
+ * (images) Keep ICC profile if present (#1346)
+ * (images) Make WIP and TP large badges a bit smaller (#1354)
+
+2020-10-03 Salvatore Iovene <salvatore@iovene.com>
+ * v1.95.2
+ * (images) Fix elongated IOTD/Staging area badge on mobile devices
+
+2020-10-03 Salvatore Iovene <salvatore@iovene.com>
+ * v1.95.1
+ * (images) Do take corrupted revision into account when getting next available label (#1350)
+
+2020-10-02 Salvatore Iovene <salvatore@iovene.com>
+ * v1.95.0
+ * (infra) Make logs less noisy (#1347)
+ * (subscriptions) Add item number to "done" page to track Google Ads conversion values (#1349)
+
+2020-10-01 Salvatore Iovene <salvatore@iovene.com>
+ * v1.94.4
+ * (subscriptions) Fix subscription detail view
+
+2020-10-01 Salvatore Iovene <salvatore@iovene.com>
+ * v1.94.3
+ * (subscriptions) Fix user subscription validity template tags (#1341)
+
+2020-09-30 Salvatore Iovene <salvatore@iovene.com>
+ * v1.94.2
+ * (i18n) Update translations (#1339)
+ * (subscription) Actively consider expiration to evaluate subscription validity (#1340)
+
+2020-09-30 Salvatore Iovene <salvatore@iovene.com>
+ * v1.94.1
+ * (premium) Delete expired subscriptions after 1 day (7 days for auto-renewals)
+
+2020-09-30 Salvatore Iovene <salvatore@iovene.com>
+ * v1.94.0
+ * (gallery) Add setting to show/hide Staging Area images from own view of own gallery
+
+2020-09-29 Salvatore Iovene <salvatore@iovene.com>
+ * v1.93.1
+ * (images) Deal with DecompressionBombError by marking the image as corrupted
+
+2020-09-29 Salvatore Iovene <salvatore@iovene.com>
+ * v1.93.0
+ * (images) Show WIP images in main gallery with lock icon (#1338)
+
 2020-09-25 Salvatore Iovene <salvatore@iovene.com>
  * v1.92.0
  * (notifications) Sort out expired/-ing subscription notifications (#1330)

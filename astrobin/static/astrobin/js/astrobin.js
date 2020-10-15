@@ -186,18 +186,19 @@ astrobin_common = {
     },
 
     setup_gear_popovers: function() {
-        $('.gear-popover').each(function() {
+        $('.gear-popover-label').each(function() {
             $(this).qtip({
                 position: {
-                    my: "left center",
-                    at: "right center"
+                    viewport: $(window)
                 },
-                show: {
-                    solo: true
-                },
-                hide: {
-                    fixed: true,
-                    delay: 1000
+                show: "click",
+                hide: "unfocus",
+                style: {
+                    tip: {
+                        width: 16,
+                        height: 16,
+                        offset: 8
+                    }
                 },
                 content: {
                     text: "...",
@@ -209,7 +210,6 @@ astrobin_common = {
                         timeout: 5000,
                         success: function(data, status) {
                             this.set('content.text', data.html);
-                            window.loadAstroBinImages(data.html);
                         }
                     }
                 }
@@ -325,7 +325,11 @@ astrobin_common = {
 
         // date and time pickers
         $('input').filter('.timepickerclass').timepicker({});
-        $('input').filter('.datepickerclass').datepicker({'dateFormat':'yy-mm-dd'});
+        $('input').filter('.datepickerclass').datepicker({
+            dateFormat: 'yy-mm-dd',
+            changeMonth: true,
+            changeYear: true
+        });
 
         $('abbr.timeago').timeago();
 

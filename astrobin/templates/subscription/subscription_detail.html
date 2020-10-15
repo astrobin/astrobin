@@ -21,7 +21,7 @@
             {% trans "Status" %}:
 
             {% if usersubscription %}
-                {% if usersubscription.valid %}
+                {% if usersubscription|is_usersubscription_current %}
                     <span class="label label-success">
                         {% trans "Subscribed" %}
                     </span>
@@ -154,7 +154,7 @@
         {% endif %}
 
         {% comment %} Invalid subscription {% endcomment %}
-        {% if usersubscription and not usersubscription.valid and object|is_subscription_offered %}
+        {% if usersubscription and not usersubscription|is_usersubscription_current and object|is_subscription_offered %}
             {% include 'subscription/_paypal_form.html' %}
         {% endif %}
 

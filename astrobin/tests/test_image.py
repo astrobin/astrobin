@@ -1152,7 +1152,7 @@ class ImageTest(TestCase):
 
         def get_expected_url(image):
             thumb = image.thumbnail_raw(opts['alias'], {
-                'revision_label': 0,
+                'revision_label': 'final',
                 'animated': False,
                 'insecure': False
             })
@@ -2724,7 +2724,8 @@ class ImageTest(TestCase):
 
         # Test public image
         self.client.login(username='test', password='password')
-        response = self.client.post(post_url((public_image.get_id(),)))
+        response = self.client.post(post_url((public_image.get_id(),)), follow=True)
+        self.assertEqual(response.status_code, 200)
         image = Image.objects.get(pk=public_image.pk)
         self.assertEquals(image.is_wip, False)
         self.assertEquals(len(get_unseen_notifications(self.user2)), 0)
@@ -2732,7 +2733,8 @@ class ImageTest(TestCase):
         # Test WIP image
         self.assertIsNone(wip_image.published)
         self.assertTrue(wip_image.is_wip)
-        response = self.client.post(post_url((wip_image.get_id(),)))
+        response = self.client.post(post_url((wip_image.get_id(),)), follow=True)
+        self.assertEqual(response.status_code, 200)
         wip_image = Image.objects.get(pk=wip_image.pk)
         self.assertFalse(wip_image.is_wip)
         self.assertIsNotNone(wip_image.published)
@@ -2743,7 +2745,18 @@ class ImageTest(TestCase):
         # Test that previously published images don't trigger a notification
         wip_image.is_wip = True
         wip_image.save(keep_deleted=True)
-        response = self.client.post(post_url((wip_image.get_id(),)))
+        response = self.client.post(post_url((wip_image.get_id(),)), follow=True)
+        self.assertEqual(response.status_code, 200)
+        wip_image = Image.objects.get(pk=wip_image.pk)
+        self.assertFalse(wip_image.is_wip)
+        self.assertIsNotNone(wip_image.published)
+        self.assertEquals(len(get_unseen_notifications(self.user2)), 1)  # Same as before
+
+        # Test that skip_notifications doesn't trigger a notification
+        wip_image.is_wip = True
+        wip_image.save(keep_deleted=True)
+        response = self.client.post(post_url((wip_image.get_id(),)), data={'skip_notifications': 'on'}, follow=True)
+        self.assertEqual(response.status_code, 200)
         wip_image = Image.objects.get(pk=wip_image.pk)
         self.assertFalse(wip_image.is_wip)
         self.assertIsNotNone(wip_image.published)
@@ -3377,164 +3390,6 @@ class ImageTest(TestCase):
         response = self.client.get(
             reverse('image_full', kwargs={'id': image.get_id(), 'r': revision.label}))
         self.assertEquals(200, response.status_code)
-
-    @override_settings(ADS_ENABLED=True)
-    @patch("astrobin.tasks.retrieve_primary_thumbnails")
-    def test_image_anon_see_ads(self, retrieve_primary_thumbnails):
-        image = Generators.image()
-        response = self.client.get(reverse('image_detail', kwargs={'id': image.get_id()}))
-        self.assertContains(response, "div class=\"subtle-container advertisement\"")
-        image.delete()
-
-    @override_settings(ADS_ENABLED=True)
-    @patch("astrobin.tasks.retrieve_primary_thumbnails")
-    def test_image_free_see_ads(self, retrieve_primary_thumbnails):
-        image = Generators.image()
-        response = self.client.get(reverse('image_detail', kwargs={'id': image.get_id()}))
-        self.assertContains(response, "div class=\"subtle-container advertisement\"")
-        image.delete()
-
-    @override_settings(ADS_ENABLED=True)
-    @patch("astrobin.tasks.retrieve_primary_thumbnails")
-    def test_image_free_see_ads_with_allow_ads_as_false(self, retrieve_primary_thumbnails):
-        image = Generators.image()
-        self.user.userprofile.allow_astronomy_ads = False
-        self.user.userprofile.save()
-        self.client.login(username='test', password='password')
-        response = self.client.get(reverse('image_detail', kwargs={'id': image.get_id()}))
-        self.assertContains(response, "div class=\"subtle-container advertisement\"")
-        self.client.logout()
-        image.delete()
-
-    @override_settings(ADS_ENABLED=True)
-    @patch("astrobin.tasks.retrieve_primary_thumbnails")
-    def test_image_lite_see_ads(self, retrieve_primary_thumbnails):
-        image = Generators.image()
-        us = Generators.premium_subscription(self.user, "AstroBin Lite")
-        response = self.client.get(reverse('image_detail', kwargs={'id': image.get_id()}))
-        self.assertContains(response, "div class=\"subtle-container advertisement\"")
-        image.delete()
-        us.delete()
-
-    @override_settings(ADS_ENABLED=True)
-    @patch("astrobin.tasks.retrieve_primary_thumbnails")
-    def test_image_lite_dont_see_ads_with_allow_ads_as_false(self, retrieve_primary_thumbnails):
-        image = Generators.image()
-        us = Generators.premium_subscription(self.user, "AstroBin Lite")
-        self.user.userprofile.allow_astronomy_ads = False
-        self.user.userprofile.save()
-        self.client.login(username='test', password='password')
-        response = self.client.get(reverse('image_detail', kwargs={'id': image.get_id()}))
-        self.assertNotContains(response, "div class=\"subtle-container advertisement\"")
-        self.client.logout()
-        image.delete()
-        us.delete()
-
-    @override_settings(ADS_ENABLED=True)
-    @patch("astrobin.tasks.retrieve_primary_thumbnails")
-    def test_image_lite_2020_see_ads(self, retrieve_primary_thumbnails):
-        image = Generators.image()
-        us = Generators.premium_subscription(self.user, "AstroBin Lite 2020+")
-        response = self.client.get(reverse('image_detail', kwargs={'id': image.get_id()}))
-        self.assertContains(response, "div class=\"subtle-container advertisement\"")
-        image.delete()
-        us.delete()
-
-    @override_settings(ADS_ENABLED=True)
-    @patch("astrobin.tasks.retrieve_primary_thumbnails")
-    def test_image_lite_2020_see_ads_with_allow_ads_as_false(self, retrieve_primary_thumbnails):
-        image = Generators.image()
-        us = Generators.premium_subscription(self.user, "AstroBin Lite 2020+")
-        self.user.userprofile.allow_astronomy_ads = False
-        self.user.userprofile.save()
-        self.client.login(username='test', password='password')
-        response = self.client.get(reverse('image_detail', kwargs={'id': image.get_id()}))
-        self.assertContains(response, "div class=\"subtle-container advertisement\"")
-        self.client.logout()
-        image.delete()
-        us.delete()
-
-    @override_settings(ADS_ENABLED=True)
-    @patch("astrobin.tasks.retrieve_primary_thumbnails")
-    def test_image_premium_see_ads(self, retrieve_primary_thumbnails):
-        image = Generators.image()
-        us = Generators.premium_subscription(self.user, "AstroBin Premium")
-        response = self.client.get(reverse('image_detail', kwargs={'id': image.get_id()}))
-        self.assertContains(response, "div class=\"subtle-container advertisement\"")
-        image.delete()
-        us.delete()
-
-    @override_settings(ADS_ENABLED=True)
-    @patch("astrobin.tasks.retrieve_primary_thumbnails")
-    def test_image_premium_dont_see_ads_with_allow_ads_as_false(self, retrieve_primary_thumbnails):
-        image = Generators.image()
-        us = Generators.premium_subscription(self.user, "AstroBin Premium")
-        self.user.userprofile.allow_astronomy_ads = False
-        self.user.userprofile.save()
-        self.client.login(username='test', password='password')
-        response = self.client.get(reverse('image_detail', kwargs={'id': image.get_id()}))
-        self.assertNotContains(response, "div class=\"subtle-container advertisement\"")
-        self.client.logout()
-        image.delete()
-        us.delete()
-
-    @override_settings(ADS_ENABLED=True)
-    @patch("astrobin.tasks.retrieve_primary_thumbnails")
-    def test_image_premium_2020_see_ads(self, retrieve_primary_thumbnails):
-        image = Generators.image()
-        us = Generators.premium_subscription(self.user, "AstroBin Premium 2020+")
-        response = self.client.get(reverse('image_detail', kwargs={'id': image.get_id()}))
-        self.assertContains(response, "div class=\"subtle-container advertisement\"")
-        image.delete()
-        us.delete()
-
-    @override_settings(ADS_ENABLED=True)
-    @patch("astrobin.tasks.retrieve_primary_thumbnails")
-    def test_image_premium_2020_dont_see_ads_with_allow_ads_as_false(self, retrieve_primary_thumbnails):
-        image = Generators.image()
-        us = Generators.premium_subscription(self.user, "AstroBin Premium 2020+")
-        self.user.userprofile.allow_astronomy_ads = False
-        self.user.userprofile.save()
-        self.client.login(username='test', password='password')
-        response = self.client.get(reverse('image_detail', kwargs={'id': image.get_id()}))
-        self.assertNotContains(response, "div class=\"subtle-container advertisement\"")
-        self.client.logout()
-        image.delete()
-        us.delete()
-
-    @override_settings(ADS_ENABLED=True)
-    @patch("astrobin.tasks.retrieve_primary_thumbnails")
-    def test_image_ultimate_2020_see_ads(self, retrieve_primary_thumbnails):
-        image = Generators.image()
-        us = Generators.premium_subscription(self.user, "AstroBin Ultimate 2020+")
-        response = self.client.get(reverse('image_detail', kwargs={'id': image.get_id()}))
-        self.assertContains(response, "div class=\"subtle-container advertisement\"")
-        image.delete()
-        us.delete()
-
-    @override_settings(ADS_ENABLED=True)
-    @patch("astrobin.tasks.retrieve_primary_thumbnails")
-    def test_image_ultimate_2020_dont_see_ads_with_allow_ads_as_false(self, retrieve_primary_thumbnails):
-        image = Generators.image()
-        us = Generators.premium_subscription(self.user, "AstroBin Ultimate 2020+")
-        self.user.userprofile.allow_astronomy_ads = False
-        self.user.userprofile.save()
-        self.client.login(username='test', password='password')
-        response = self.client.get(reverse('image_detail', kwargs={'id': image.get_id()}))
-        self.assertNotContains(response, "div class=\"subtle-container advertisement\"")
-        self.client.logout()
-        image.delete()
-        us.delete()
-
-    @override_settings(ADS_ENABLED=True)
-    @patch("astrobin.tasks.retrieve_primary_thumbnails")
-    def test_image_free_users_dont_see_ads_on_ultimate_2020_images(self, retrieve_primary_thumbnails):
-        image = Generators.image()
-        image.user = self.user
-        image.save()
-        us = Generators.premium_subscription(self.user, "AstroBin Ultimate 2020+")
-        response = self.client.get(reverse('image_detail', kwargs={'id': image.get_id()}))
-        self.assertNotContains(response, "div class=\"subtle-container advertisement\"")
 
     def test_image_platesolving_not_available_on_free(self):
         image = Generators.image()

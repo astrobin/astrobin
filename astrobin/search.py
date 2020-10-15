@@ -1,20 +1,15 @@
-# Python
 import unicodedata
 
-# Django
-from django.contrib.auth.models import User
 from django import forms
-
-# Third party apps
-from haystack.query import SearchQuerySet
+from django.contrib.auth.models import User
 from haystack.forms import SearchForm
 from haystack.generic_views import SearchView
+from haystack.query import SearchQuerySet
 from pybb.models import Post, Topic
 
-from nested_comments.models import NestedComment
-
+from astrobin_apps_equipment.models import EquipmentBrandListing
 from models import Image
-
+from nested_comments.models import NestedComment
 
 FIELDS = (
     # Filtering
@@ -27,6 +22,8 @@ FIELDS = (
     'country',
     'acquisition_type',
     'data_source',
+    'date_published_min',
+    'date_published_max',
     'field_radius_min',
     'field_radius_max',
     'minimum_data',
@@ -53,13 +50,15 @@ class AstroBinSearchForm(SearchForm):
 
     d = forms.CharField(required=False)
     t = forms.CharField(required=False)
-    
+
     animated = forms.BooleanField(required=False)
     award = forms.CharField(required=False)
     camera_type = forms.CharField(required=False)
     country = forms.CharField(required=False)
     acquisition_type = forms.CharField(required=False)
     data_source = forms.CharField(required=False)
+    date_published_min = forms.CharField(required=False)
+    date_published_max = forms.CharField(required=False)
     field_radius_min = forms.IntegerField(required=False)
     field_radius_max = forms.IntegerField(required=False)
     minimum_data = forms.CharField(required=False)
@@ -87,7 +86,7 @@ class AstroBinSearchForm(SearchForm):
             d = "i"
 
         if d == "i":
-            results = results.models(Image)
+            results = results.models(Image, EquipmentBrandListing).order_by('-django_ct')
         elif d == "u":
             results = results.models(User)
         elif d == "cf":
@@ -158,6 +157,18 @@ class AstroBinSearchForm(SearchForm):
 
         if data_source is not None and data_source != "":
             results = results.filter(data_source=data_source)
+
+        return results
+
+    def filterByDatePublished(self, results):
+        date_published_min = self.cleaned_data.get("date_published_min")
+        date_published_max = self.cleaned_data.get("date_published_max")
+
+        if date_published_min is not None and date_published_min != "":
+            results = results.filter(published__gte=date_published_min)
+
+        if date_published_max is not None and date_published_max != "":
+            results = results.filter(published__lte=date_published_max)
 
         return results
 
@@ -367,6 +378,7 @@ class AstroBinSearchForm(SearchForm):
         sqs = self.filterByCountry(sqs)
         sqs = self.filterByAcquisitionType(sqs)
         sqs = self.filterByDataSource(sqs)
+        sqs = self.filterByDatePublished(sqs)
         sqs = self.filterByLicense(sqs)
         sqs = self.filterByFieldRadius(sqs)
         sqs = self.filterByMinimumData(sqs)

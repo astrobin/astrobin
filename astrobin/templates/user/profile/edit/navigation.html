@@ -10,22 +10,6 @@
                 <i class="icon-chevron-right"></i>
             </a>
         </li>
-        {% if is_producer or is_retailer %}
-        <li class="{% current request '^/profile/(edit|save)/commercial/$' %}">
-            <a href="{% url 'profile_edit_commercial' %}">
-                <i class="icon-briefcase"></i> {% trans "Commercial information" %}
-                <i class="icon-chevron-right"></i>
-            </a>
-        </li>
-        {% endif %}
-        {% if is_retailer %}
-        <li class="{% current request '^/profile/edit/retailer/$' %}">
-            <a href="{% url 'profile_edit_retailer' %}">
-                <i class="icon-truck"></i> {% trans "Retailer information" %}
-                <i class="icon-chevron-right"></i>
-            </a>
-        </li>
-        {% endif %}
         <li class="{% current request '^/profile/(edit|save)/gear/$' %}">
             <a href="{% url 'profile_edit_gear' %}">
                 <i class="icon-cog"></i> {% trans "Gear" %}

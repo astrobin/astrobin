@@ -135,16 +135,21 @@ class ImageThumbView(JSONResponseMixin, ImageDetailViewBase):
         image = self.get_object()
 
         alias = kwargs.pop('alias')
-        r = kwargs.pop('r')
-        if r is None:
-            r = 'final'
+        revision_label = kwargs.pop('r', None)
 
         force = request.GET.get('force')
         if force is not None:
-            image.thumbnail_invalidate()
+            if revision_label in (None, 'None', 0, '0'):
+                image.thumbnail_invalidate()
+            else:
+                revision = ImageService(image).get_revision(revision_label)
+                revision.thumbnail_invalidate()
+
+        if revision_label is None:
+            revision_label = 'final'
 
         opts = {
-            'revision_label': r,
+            'revision_label': revision_label,
             'animated': 'animated' in self.request.GET,
             'insecure': 'insecure' in self.request.GET,
         }
@@ -158,7 +163,7 @@ class ImageThumbView(JSONResponseMixin, ImageDetailViewBase):
         return self.render_json_response({
             'id': image.pk,
             'alias': alias,
-            'revision': r,
+            'revision': revision_label,
             'url': iri_to_uri(url)
         })
 
@@ -171,16 +176,24 @@ class ImageRawThumbView(ImageDetailViewBase):
     def get(self, request, *args, **kwargs):
         image = self.get_object()
         alias = kwargs.pop('alias')
-        r = kwargs.pop('r')
-        opts = {
-            'revision_label': r,
-            'animated': 'animated' in self.request.GET,
-            'insecure': 'insecure' in self.request.GET,
-        }
+        revision_label = kwargs.pop('r', None)
 
         force = request.GET.get('force')
         if force is not None:
-            image.thumbnail_invalidate()
+            if revision_label in (None, 'None', 0, '0'):
+                image.thumbnail_invalidate()
+            else:
+                revision = ImageService(image).get_revision(revision_label)
+                revision.thumbnail_invalidate()
+
+        if revision_label is None:
+            revision_label = 'final'
+
+        opts = {
+            'revision_label': revision_label,
+            'animated': 'animated' in self.request.GET,
+            'insecure': 'insecure' in self.request.GET,
+        }
 
         sync = request.GET.get('sync')
         if sync is not None:
@@ -332,20 +345,6 @@ class ImageDetailView(ImageDetailViewBase):
                 'accessories'
             ),
         )
-
-        gear_list_has_commercial = False
-        gear_list_has_paid_commercial = False
-        for g in gear_list:
-            if g[1].exclude(commercial=None).count() > 0:
-                gear_list_has_commercial = True
-                break
-        for g in gear_list:
-            for i in g[1].exclude(commercial=None):
-                if i.commercial.is_paid() or i.commercial.producer == self.request.user:
-                    gear_list_has_paid_commercial = True
-                    # It would be faster if we exited the outer loop, but really,
-                    # how many gear items can an image have?
-                    break
 
         makes_list = ','.join(
             filter(None, reduce(
@@ -685,12 +684,11 @@ class ImageDetailView(ImageDetailViewBase):
                 object_id=image.id).count(),
             'gear_list': gear_list,
             'makes_list': makes_list,
-            'gear_list_has_commercial': gear_list_has_commercial,
-            'gear_list_has_paid_commercial': gear_list_has_paid_commercial,
             'image_type': image_type,
             'ssa': ssa,
             'deep_sky_data': deep_sky_data,
             'private_message_form': PrivateMessageForm(),
+            'promote_form': ImagePromoteForm(instance=image),
             'upload_revision_form': ImageRevisionUploadForm(),
             'upload_uncompressed_source_form': UncompressedSourceUploadForm(instance=image),
             'dates_label': _("Dates"),
@@ -1024,11 +1022,12 @@ class ImagePromoteView(LoginRequiredMixin, ImageUpdateViewBase):
     def post(self, request, *args, **kwargs):
         image = self.get_object()
         if image.is_wip:
+            skip_notifications = request.POST.get('skip_notifications', 'off').lower() == 'on'
             previously_published = image.published
             image.is_wip = False
             image.save(keep_deleted=True)
 
-            if not previously_published:
+            if not previously_published and not skip_notifications:
                 followers = [
                     x.user for x in
                     ToggleProperty.objects.toggleproperties_for_object(

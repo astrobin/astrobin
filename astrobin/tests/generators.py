@@ -1,10 +1,11 @@
 import random
 import string
+from datetime import timedelta, date
 
 from django.contrib.auth.models import User, Group
 from subscription.models import Subscription, UserSubscription
 
-from astrobin.models import Image, ImageRevision, Telescope
+from astrobin.models import Image, ImageRevision, Telescope, Mount
 
 
 class Generators:
@@ -17,9 +18,10 @@ class Generators:
 
     @staticmethod
     def user():
-        return User.objects.create(
+        return User.objects.create_user(
+            email="%s@%s.com" % (Generators.randomString(), Generators.randomString()),
             username=Generators.randomString(),
-            password=Generators.randomString()
+            password="password"
         )
 
     @staticmethod
@@ -33,8 +35,12 @@ class Generators:
 
     @staticmethod
     def imageRevision(*args, **kwargs):
+        image = kwargs.pop('image', None)
+        if image is None:
+            image = Generators.image()
+
         return ImageRevision.objects.create(
-            image=kwargs.pop('image', Generators.image()),
+            image=image,
             is_final=kwargs.pop('is_final', False),
             corrupted=kwargs.pop('corrupted', False),
             label=kwargs.pop('label', 'B'),
@@ -49,6 +55,13 @@ class Generators:
             aperture=100,
             focal_length=1000,
             type="REFR ACHRO",
+        )
+
+    @staticmethod
+    def mount():
+        return Mount.objects.create(
+            make="Brand XYZ",
+            name="Mount Pro 1000",
         )
 
     @staticmethod
@@ -81,7 +94,8 @@ class Generators:
 
         us, created = UserSubscription.objects.get_or_create(
             user=user,
-            subscription=s)
+            subscription=s,
+            expires=date.today() + timedelta(days=1))
         us.subscribe()
 
         return us

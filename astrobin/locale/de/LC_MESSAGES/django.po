@@ -7,8 +7,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: AstroBin 1.4\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2020-09-25 09:04+0000\n"
-"PO-Revision-Date: 2020-09-25 09:33+0000\n"
+"POT-Creation-Date: 2020-09-30 09:02+0000\n"
+"PO-Revision-Date: 2020-09-28 12:29+0200\n"
 "Last-Translator: Salvatore Iovene <salvatore@iovene.com>\n"
 "Language-Team: German <LL@li.org>\n"
 "Language: de\n"
@@ -16,7 +16,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=(n != 1);\n"
-"X-Generator: Pootle 2.8\n"
+"X-Generator: Poedit 2.3.1\n"
 "X-POOTLE-MTIME: 1601026391.000000\n"
 
 msgid "United Kingdom"
@@ -788,12 +788,6 @@ msgstr ""
 msgid "You have already claimed this product."
 msgstr "Du hast dieses Produkt bereits beansprucht."
 
-#, fuzzy
-#| msgid ""
-#| "Select a tag to order this collection by its value. If you see no "
-#| "optioons here, it's because none of the images in this collection have "
-#| "key/value tags. PS: Images that lack this tag will appear at the bottom "
-#| "of the collection."
 msgid ""
 "Select a tag to order this collection by its value. If you see no options "
 "here, it's because none of the images in this collection have key/value "
@@ -801,9 +795,9 @@ msgid ""
 "collection."
 msgstr ""
 "Wählen Sie ein Tag aus, um diese Sammlung nach seinem Wert zu ordnen. Wenn "
-"Sie hier keine Optionen sehen, liegt es daran, dass keines der Bilder in "
+"Sie hier keine Optionen sehen, liegt das daran, dass keines der Bilder in "
 "dieser Sammlung Schlüssel/Wert-Tags hat. PS: Bilder, denen dieser Tag fehlt, "
-"erscheinen unten in der Sammlung."
+"erscheinen ganz unten in der Sammlung."
 
 msgid "Please use the following format: yyyy-mm-dd"
 msgstr "Bitte im Format JJJJ-MM-TT eingeben"
@@ -1116,7 +1110,6 @@ msgstr "Albanisch"
 msgid "Polish"
 msgstr "Polnisch"
 
-#| msgid "Brazilian Portuguese"
 msgid "Portuguese"
 msgstr "Portugiesisch"
 
@@ -1559,7 +1552,6 @@ msgstr "Beschreibung"
 msgid "HTML tags are allowed."
 msgstr "HTML Tags sind erlaubt."
 
-#| msgid "Uncompressed source (max 200 MB)"
 msgid "Uncompressed source (max 100 MB)"
 msgstr "Unkomprimierte Quelle (max. 100 MB)"
 
@@ -1672,9 +1664,6 @@ msgstr "9 - Innenstadt-Himmel (WEISS)"
 msgid "Synthetic channel"
 msgstr "Synthetischer Kanal"
 
-#, fuzzy
-#| msgid "Filter"
-#| msgid_plural "Filters"
 msgid "Filter"
 msgstr "Filter"
 
@@ -1926,6 +1915,15 @@ msgstr "Sammlungen"
 
 msgid "Default gallery sorting"
 msgstr "Standard-Sortierung der Galerie"
+
+msgid "See your own Staging Area images on your gallery"
+msgstr ""
+
+msgid ""
+"Select if you want your Staging Area images to appear on your own view of "
+"your gallery when you are logged. If you choose 'No', your Staging Area "
+"images can be located via the 'View' menu entry on your gallery page."
+msgstr ""
 
 msgid "Default license"
 msgstr "Standard Lizenz"
@@ -2695,12 +2693,18 @@ msgid ""
 "If this user has been harassing you, and you shadow-ban them, all their "
 "activities on your content will be invisible to everyone except themselves."
 msgstr ""
+"Wenn dieser Benutzer Dich belästigt hat und Du ihn Schatten-blockierst, sind "
+"alle seine Aktivitäten auf Deinen Inhalten für alle außer ihn selbst "
+"unsichtbar."
 
 msgid ""
 "They will not know that they have been shadow-banned, and the goal is that "
 "eventually they will get bored while having caused no harm, since nobody saw "
 "what they posted."
 msgstr ""
+"Sie werden nicht sehen, dass sie Schatten-blockiert wurden, und das Ziel "
+"ist, dass sie sich irgendwann langweilen, ohne Schaden angerichtet zu haben, "
+"da niemand sehen konnte, was sie gepostet haben."
 
 msgid "Continue"
 msgstr "Weiter"
@@ -2709,6 +2713,8 @@ msgid ""
 "You will remove your shadow-ban on this user, and their comments, messages, "
 "etc, will appear again on your content."
 msgstr ""
+"Du entfernst die Schatten-Blockierung dieses Benutzers und seine Kommentare, "
+"Nachrichten usw. werden wieder unter Deinen Inhalt erscheinen."
 
 msgid "Quick search"
 msgstr "Schnellsuche"
@@ -2752,10 +2758,8 @@ msgstr "Erweiterte Suche"
 msgid "Top picks"
 msgstr "Top Picks"
 
-#, fuzzy
-#| msgid "Home of Astrophotography"
 msgid "Remote astrophotography"
-msgstr "Home of Astrophotography"
+msgstr "Fern-Astrofotografie"
 
 msgid "Trending astrophotographers"
 msgstr "Astrofotografen im Trend"
@@ -3217,10 +3221,8 @@ msgstr "Beinhaltet"
 msgid "Remove ads"
 msgstr "Werbung entfernen"
 
-#, fuzzy
-#| msgid "Acquired after"
 msgid "Acquired at"
-msgstr "Aufgenommen nach"
+msgstr "Erworben bei"
 
 msgid "Remove"
 msgstr "Entfernen"
@@ -3340,15 +3342,11 @@ msgstr "Das Original-Bild löschen"
 msgid "Delete this revision only"
 msgstr "Nur diese Revision löschen"
 
-#, fuzzy
-#| msgid "Delete conversation"
 msgid "Delete all other versions"
-msgstr "Unterhaltung löschen"
+msgstr "Alle anderen Versionen löschen"
 
-#, fuzzy
-#| msgid "Delete image and all revisions"
 msgid "Delete all revisions"
-msgstr "Bild und alle Revisionen löschen"
+msgstr "Alle Revisionen löschen"
 
 msgid "Flag malfunctioning thumbnails"
 msgstr "Defekte miniatur Bilder markieren"
@@ -3414,12 +3412,10 @@ msgid "Send private message"
 msgstr "Private Nachricht senden"
 
 msgid "Shadow-ban"
-msgstr ""
+msgstr "Schatten-Blockierung"
 
-#, fuzzy
-#| msgid "Remove ads"
 msgid "Remove shadow-ban"
-msgstr "Werbung entfernen"
+msgstr "Schatten-Blockierung entfernen"
 
 msgid "View"
 msgstr "Anzeigen"
@@ -3572,26 +3568,27 @@ msgstr ""
 "Das Bild wird permanent gelöscht und kann nicht wieder hergestellt werden. "
 "Die Versionen werden nicht gelöscht. Bist Du sicher?"
 
-#, fuzzy
-#| msgid "Delete this revision?"
 msgid "Delete all other versions?"
-msgstr "Diese Version löschen?"
+msgstr "Alle anderen Versionen löschen?"
 
 msgid ""
 "You will delete all other revisions (if any), and the originally uploaded "
 "image, leaving the current revision as the final and only version of this "
 "image."
 msgstr ""
+"Du löschst alle anderen Revisionen (falls vorhanden) und das ursprünglich "
+"hochgeladene Bild, wobei die aktuelle Revision die endgültige und einzige "
+"Version dieses Bildes bleibt."
 
-#, fuzzy
-#| msgid "Delete this revision?"
 msgid "Delete all revisions?"
-msgstr "Diese Version löschen?"
+msgstr "Alle Revisionen löschen?"
 
 msgid ""
 "You will delete all revisions, leaving the originally uploaded image as the "
 "final and only version of this image."
 msgstr ""
+"Du löschst alle Revisionen und belässt das ursprünglich hochgeladene Bild "
+"als die endgültige und einzige Version dieses Bildes."
 
 msgid ""
 "This will move this image to your staging area, making it unlisted. The "
@@ -3679,6 +3676,7 @@ msgstr ""
 #, python-format
 msgid "Over 100 MB? Try the <a href=\"%(url)s/%(id)s\">new beta uploader</a>!"
 msgstr ""
+"Über 100 MB? Teste den <a href=\"%(url)s/%(id)s\">neuen Beta-Uploader</a>!"
 
 msgid ""
 "Please note: AstroBin is not officially a backup service. So please also "
@@ -3859,10 +3857,8 @@ msgstr "Lädt..."
 msgid "Next step: gear used"
 msgstr "Nächster Schritt: verwendete Ausrüstung"
 
-#, fuzzy
-#| msgid "Sponsors"
 msgid "sponsor"
-msgstr "Sponsoren"
+msgstr "Sponsor"
 
 msgid "Edit your image: gear used"
 msgstr "Bild bearbeiten: verwendete Ausrüstung"
@@ -4458,7 +4454,7 @@ msgstr ""
 "Du hast Bilder auf AstroBin, bei denen die Information \"Fernquelle\" fehlt"
 
 msgid "Hi!"
-msgstr ""
+msgstr "Hallo!"
 
 #, python-format
 msgid ""
@@ -4466,28 +4462,35 @@ msgid ""
 "AstroBin, the image hosting service and social community for "
 "astrophotographers, but never got the chance to activate it."
 msgstr ""
+"Wir haben bemerkt, dass Du am <strong>%(date)s MEZ</strong> ein Konto bei "
+"AstroBin, dem Bildhosting-Dienst und der sozialen Community für "
+"Astrofotografen, eingerichtet hast, aber nie die Möglichkeit hattest, es zu "
+"aktivieren."
 
 msgid "The account that you created has the following username:"
-msgstr ""
+msgstr "Das Konto, das Du angelegt hast, hat den folgenden Benutzernamen:"
 
 msgid ""
 "If you would like to activate it now, please click on the following link:"
 msgstr ""
+"Wenn Du es jetzt aktivieren möchtest, klicke bitte auf den folgenden Link:"
 
-#, fuzzy
-#| msgid "Activate account at"
 msgid "Activate my account"
-msgstr "Aktiviere den Zugang auf"
+msgstr "Mein Konto aktivieren"
 
 msgid ""
 "If you don't, we will delete this account in a week. But don't worry, you're "
 "always welcome to join again!"
 msgstr ""
+"Wenn Du das nicht tust, werden wir dieses Konto in einer Woche löschen. Aber "
+"keine Sorge, Du bist jederzeit willkommen, Dich erneut anzumelden!"
 
 msgid ""
 "If you already have another active account on AstroBin, please feel free to "
 "ignore this message."
 msgstr ""
+"Wenn du bereits ein anderes aktives Konto bei AstroBin hast, kannst Du diese "
+"Nachricht einfach ignorieren."
 
 #, python-format
 msgid ""
@@ -4495,12 +4498,12 @@ msgid ""
 "image hosting service and social community for astrophotographers, but never "
 "got the chance to activate it."
 msgstr ""
+"Wir haben bemerkt, dass Du am %(date)s MEZ ein Konto bei AstroBin, dem "
+"Bildhosting-Dienst und der sozialen Community für Astrofotografen, "
+"eingerichtet hast, aber nie die Möglichkeit hattest, es zu aktivieren."
 
-#, fuzzy
-#| msgid "Would you like to start using your real name on AstroBin?"
 msgid "Would you like to activate your account on AstroBin?"
-msgstr ""
-"Möchtest Du anfangen, Deinen richtigen Namen auf AstroBin zu verwenden?"
+msgstr "Möchtest Du dein Konto bei AstroBin aktivieren?"
 
 #, python-format
 msgid ""
@@ -5118,6 +5121,8 @@ msgstr "Beitrag genehmigen"
 msgid ""
 "Editing a post is only allowed within %(minutes)s minutes after creating it."
 msgstr ""
+"Die Bearbeitung eines Beitrags ist nur innerhalb von %(minutes)s Minuten "
+"nach seiner Erstellung möglich."
 
 msgid "Topics you subscribe to"
 msgstr "Themen, die Du abonniert hast"
@@ -5378,6 +5383,10 @@ msgid ""
 "decrease your upload counter: the FREE account is not meant to be used as a "
 "way to keep your latest 10 images."
 msgstr ""
+"Das KOSTENLOSE Konto ist als Probezeit zu betrachten. Du kannst zehn Mal "
+"Bilder hochladen, danach kannst Du nichts mehr hochladen. Das Löschen von "
+"Bildern verringert Deinen Upload-Zähler nicht: Das KOSTENLOSE Konto ist "
+"nicht dazu gedacht, Deine letzten 10 Bilder zu zeigen."
 
 msgid "year"
 msgstr "Jahr"
@@ -5774,6 +5783,8 @@ msgid ""
 "Try the <a href=\"%(url)s\">new beta uploader</a>: robust, with real "
 "progress bar, and 4 GB file size limit!"
 msgstr ""
+"Teste den <a href=\"%(url)s\">neuen Beta-Uploader</a>: robust, mit echtem "
+"Fortschrittsbalken und einer Dateigrößenbeschränkung von 4 GB!"
 
 msgid "Upload as a work in progress"
 msgstr "Ein in Bearbeitung befindliches Bild hochladen"
@@ -6658,9 +6669,6 @@ msgstr ""
 "Danke, dass du dieses Problem gemeldet hast. Alle Miniaturansichten werden "
 "erneut generiert."
 
-#, fuzzy
-#| msgid "Accessory"
-#| msgid_plural "Accessories"
 msgid "Accessory"
 msgstr "Zubehör"
 

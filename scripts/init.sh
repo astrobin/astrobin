@@ -1,7 +1,6 @@
 #!/bin/sh
 
 # Migrate
-python manage.py sync_translation_fields --noinput
 python manage.py migrate --noinput
 python manage.py migrate --run-syncdb --noinput
 
@@ -256,3 +255,5 @@ try:
 except Site.DoesNotExist:
     Site.objects.create(name='AstroBin', domain='localhost')
 EOF
+
+python manage.py collectstatic --noinput

@@ -1,6 +1,7 @@
 import datetime
 
 from django.conf import settings
+from django.contrib.auth.models import User
 from django.db.models import QuerySet
 from django.template import Library
 from subscription.models import Subscription
@@ -126,6 +127,10 @@ def is_any_premium_subscription(user):
         is_premium_2020(user) or \
         is_ultimate_2020(user)
 
+@register.filter
+def is_usersubscription_current(userSubscription):
+    # type: (UserSubscription) -> bool
+    return userSubscription and userSubscription.active and userSubscription.expires >= datetime.date.today()
 
 @register.filter
 def has_valid_premium_offer(user):
@@ -199,6 +204,57 @@ def can_remove_ads(user):
         return True
 
     return False
+
+
+@register.filter
+def allow_full_retailer_integration(viewer, owner):
+    # type: (User, User) -> bool
+
+    if not settings.ADS_ENABLED:
+        return False
+
+    if is_ultimate_2020(viewer) or is_ultimate_2020(owner):
+        return False
+
+    if is_free(viewer) or is_lite_2020(viewer):
+        return True
+
+    if is_lite(viewer) or is_premium(viewer) or is_premium_2020(viewer):
+        return viewer.userprofile.allow_retailer_integration
+
+    return True
+
+
+@register.filter
+def allow_lite_retailer_integration(viewer, owner):
+    # type: (User, User) -> bool
+
+    if not settings.ADS_ENABLED:
+        return False
+
+    if is_lite(viewer) or is_premium(viewer) or is_premium_2020(viewer):
+        return viewer.userprofile.allow_retailer_integration and is_ultimate_2020(owner)
+
+    if is_lite_2020(viewer):
+        if is_ultimate_2020(owner):
+            return owner.userprofile.allow_retailer_integration
+        return False
+
+    if is_ultimate_2020(viewer):
+        return viewer.userprofile.allow_retailer_integration
+
+    if is_ultimate_2020(owner):
+        return owner.userprofile.allow_retailer_integration
+
+    if is_free(viewer) or not viewer.is_authenticated:
+        return False
+
+    return True
+
+
+@register.filter
+def can_remove_retailer_integration(user):
+    return is_lite(user) or is_premium(user) or is_any_ultimate(user)
 
 
 @register.filter
