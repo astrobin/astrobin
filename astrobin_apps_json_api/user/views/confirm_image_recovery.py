@@ -18,6 +18,9 @@ class ConfirmImageRecovery(JsonRequestResponseMixin, LoginRequiredMixin, View):
 
             images.update(corrupted=False)
 
+            for image in images.iterator():
+                image.revisions.exclude(recovered=None).update(corrupted=False)
+
             messages.success(request, _("%(number)s image(s) recovered." % {"number": len(pks)}))
 
         return self.render_json_response({u"status": u"OK"})
