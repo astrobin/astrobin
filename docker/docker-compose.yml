@@ -12,15 +12,37 @@ services:
       - media:/media
       - letsencrypt:/etc/letsencrypt
 
+
   rabbitmq:
     image: rabbitmq:management-alpine
     environment:
       - RABBITMQ_DEFAULT_USER=astrobin
       - RABBITMQ_DEFAULT_PASS=astrobin
 
+
   celery_default:
     image: ${DOCKER_REGISTRY}/astrobin:${ASTROBIN_BUILD}
-    command: bash -c "python manage.py collectstatic --noinput && celery worker -A astrobin -Q default,email -c 2 -l debug -f celery_default.log"
+    command: bash -c "python manage.py collectstatic --noinput && celery worker -A astrobin -Q default -c 1 -l debug -f celery_default.log"
+    links:
+      - memcached
+      - rabbitmq
+    env_file:
+      - ./astrobin.env
+    environment:
+      - C_FORCE_ROOT=true
+      - PYTHONPATH=/usr/lib/python2.7/dist-packages
+      - DJANGO_SETTINGS_MODULE=astrobin.settings
+      - CELERY_RDB_HOST=0.0.0.0
+      - CELERY_RDB_PORT=6900
+      - POSTGRES_DB=astrobin
+      - POSTGRES_USER=astrobin
+    volumes:
+      - media:/media
+
+
+  celery_email:
+    image: ${DOCKER_REGISTRY}/astrobin:${ASTROBIN_BUILD}
+    command: bash -c "python manage.py collectstatic --noinput && celery worker -A astrobin -Q email -c 1 -l debug -f celery_email.log"
     links:
       - memcached
       - rabbitmq

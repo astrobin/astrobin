@@ -32,6 +32,14 @@ services:
           - node.labels.app == true
 
 
+  celery_email:
+    deploy:
+      placement:
+        constraints:
+          # Must be together with the AstroBin app because they share the media directory.
+          - node.labels.app == true
+
+
   celery_thumbnails:
     deploy:
       placement:
@@ -45,6 +53,7 @@ services:
       placement:
         constraints:
           - node.labels.default == true
+
 
   beat:
     deploy:
