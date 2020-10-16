@@ -318,17 +318,19 @@ class BroadcastEmailAdmin(admin.ModelAdmin):
     def submit_recovered_images_notice_de(self, request, obj):
         recipients = User.objects \
             .filter(userprofile__deleted=None, userprofile__language='de',
-                    userprofile__recovered_images_notice_sent=None) \
-            .exclude(image__recovered=None) \
+                    userprofile__recovered_images_notice_sent=None,
+                    image__recovered__isnull=False) \
+            .distinct() \
             .values_list('email', flat=True)
         self.submit_email(request, obj, recipients)
         UserProfile.objects.filter(user__email__in=recipients).update(recovered_images_notice_sent=datetime.now())
 
     def submit_recovered_images_notice_en(self, request, obj):
         recipients = User.objects \
-            .filter(userprofile__deleted=None, userprofile__recovered_images_notice_sent=None) \
+            .filter(userprofile__deleted=None, userprofile__recovered_images_notice_sent=None,
+                    image__recovered__isnull=False) \
             .exclude(userprofile__language__in=['it', 'fr', 'de', 'es', 'pt']) \
-            .exclude(image__recovered=None) \
+            .distinct() \
             .values_list('email', flat=True)
         self.submit_email(request, obj, recipients)
         UserProfile.objects.filter(user__email__in=recipients).update(recovered_images_notice_sent=datetime.now())
@@ -336,8 +338,9 @@ class BroadcastEmailAdmin(admin.ModelAdmin):
     def submit_recovered_images_notice_es(self, request, obj):
         recipients = User.objects \
             .filter(userprofile__deleted=None, userprofile__language='es',
-                    userprofile__recovered_images_notice_sent=None) \
-            .exclude(image__recovered=None) \
+                    userprofile__recovered_images_notice_sent=None,
+                    image__recovered__isnull=False) \
+            .distinct() \
             .values_list('email', flat=True)
         self.submit_email(request, obj, recipients)
         UserProfile.objects.filter(user__email__in=recipients).update(recovered_images_notice_sent=datetime.now())
@@ -345,8 +348,9 @@ class BroadcastEmailAdmin(admin.ModelAdmin):
     def submit_recovered_images_notice_fr(self, request, obj):
         recipients = User.objects \
             .filter(userprofile__deleted=None, userprofile__language='fr',
-                    userprofile__recovered_images_notice_sent=None) \
-            .exclude(image__recovered=None) \
+                    userprofile__recovered_images_notice_sent=None,
+                    image__recovered__isnull=False) \
+            .distinct() \
             .values_list('email', flat=True)
         self.submit_email(request, obj, recipients)
         UserProfile.objects.filter(user__email__in=recipients).update(recovered_images_notice_sent=datetime.now())
@@ -354,8 +358,9 @@ class BroadcastEmailAdmin(admin.ModelAdmin):
     def submit_recovered_images_notice_it(self, request, obj):
         recipients = User.objects \
             .filter(userprofile__deleted=None, userprofile__language='it',
-                    userprofile__recovered_images_notice_sent=None) \
-            .exclude(image__recovered=None) \
+                    userprofile__recovered_images_notice_sent=None,
+                    image__recovered__isnull=False) \
+            .distinct() \
             .values_list('email', flat=True)
         self.submit_email(request, obj, recipients)
         UserProfile.objects.filter(user__email__in=recipients).update(recovered_images_notice_sent=datetime.now())
@@ -363,8 +368,9 @@ class BroadcastEmailAdmin(admin.ModelAdmin):
     def submit_recovered_images_notice_pt(self, request, obj):
         recipients = User.objects \
             .filter(userprofile__deleted=None, userprofile__language='pt',
-                    userprofile__recovered_images_notice_sent=None) \
-            .exclude(image__recovered=None) \
+                    userprofile__recovered_images_notice_sent=None,
+                    image__recovered__isnull=False) \
+            .distinct() \
             .values_list('email', flat=True)
         self.submit_email(request, obj, recipients)
         UserProfile.objects.filter(user__email__in=recipients).update(recovered_images_notice_sent=datetime.now())
