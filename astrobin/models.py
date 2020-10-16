@@ -741,6 +741,7 @@ class Image(HasSolutionMixin, SafeDeleteModel):
         ("DSC", "DeepSkyChile"),
         ("DSW", "DeepSkyWest"),
         ("eEyE", "e-EyE Extremadura"),
+        ("EITS", "Eye In The Sky"),
         ("GFA", "Goldfield Astronomical Observatory"),
         ("GMO", "Grand Mesa Observatory"),
         ("HMO", "Heaven's Mirror Observatory"),
