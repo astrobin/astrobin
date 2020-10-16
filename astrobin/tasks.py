@@ -204,7 +204,7 @@ def send_missing_remote_source_notifications():
     call_command("send_missing_remote_source_notifications")
 
 
-@shared_task(rate_limit="1/s")
+@shared_task(rate_limit="2/s")
 def send_broadcast_email(broadcastEmail, recipients):
     for recipient in list(recipients):
         msg = EmailMultiAlternatives(
@@ -214,6 +214,7 @@ def send_broadcast_email(broadcastEmail, recipients):
             [recipient])
         msg.attach_alternative(broadcastEmail.message_html, "text/html")
         msg.send()
+        logger.info("Email sent to %s: %s" % (recipient.email, broadcastEmail.subject))
 
 
 @shared_task()
