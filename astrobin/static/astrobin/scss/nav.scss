@@ -51,6 +51,7 @@ body.full {
 
 .dropdown-menu > li > a {
   color: $background-color;
+  padding: 4px 20px;
 
   strong {
     color: $background-color;
@@ -250,6 +251,10 @@ body.full {
 
 .dropdown-menu {
   max-width: 940px;
+
+  @media (max-width: 600px) {
+    min-width: unset;
+  }
 }
 
 .dropdown-menu li > a:hover, .dropdown-menu .active > a, .dropdown-menu .active > a:hover {
