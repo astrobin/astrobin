@@ -4,6 +4,7 @@ from django.utils.translation import ugettext_lazy as _
 from django.views import View
 
 from astrobin.models import Image
+from astrobin_apps_images.services import ImageService
 
 
 class ConfirmImageRecovery(JsonRequestResponseMixin, LoginRequiredMixin, View):
@@ -16,10 +17,13 @@ class ConfirmImageRecovery(JsonRequestResponseMixin, LoginRequiredMixin, View):
             if len(pks) != images.count():
                 return self.render_bad_request_response()
 
-            images.update(corrupted=False)
-
             for image in images.iterator():
-                image.revisions.exclude(recovered=None).update(corrupted=False)
+                ImageService(image) \
+                        .get_revisions(include_corrupted=True, include_deleted=True) \
+                        .exclude(recovered=None) \
+                        .update(corrupted=False)
+
+            images.update(corrupted=False)
 
             messages.success(request, _("%(number)s image(s) recovered." % {"number": len(pks)}))
 
