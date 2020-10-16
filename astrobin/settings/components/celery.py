@@ -20,6 +20,7 @@ CELERY_WORKER_MAX_TASKS_PER_CHILD = 100
 
 CELERY_QUEUES = (
     Queue('main', Exchange('main'), routing_key='main'),
+    Queue('email', Exchange('email'), routing_key='email'),
     Queue('haystack', Exchange('haystack'), routing_key='haystack'),
     Queue('thumbnails', Exchange('thumbnails'), routing_key='thumbnails'),
 )
