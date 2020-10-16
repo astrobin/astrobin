@@ -20,9 +20,9 @@ services:
       - RABBITMQ_DEFAULT_PASS=astrobin
 
 
-  celery_default:
+  celery_main:
     image: ${DOCKER_REGISTRY}/astrobin:${ASTROBIN_BUILD}
-    command: bash -c "python manage.py collectstatic --noinput && celery worker -A astrobin -Q default -c 1 -l debug -f celery_default.log"
+    command: bash -c "python manage.py collectstatic --noinput && celery worker -A astrobin -Q main -c 1 -l debug -f celery_main.log"
     links:
       - memcached
       - rabbitmq
