@@ -19,6 +19,7 @@ CELERY_TIMEZONE = TIME_ZONE
 CELERY_WORKER_MAX_TASKS_PER_CHILD = 100
 
 CELERY_QUEUES = (
+    Queue('main', Exchange('main'), routing_key='main'),
     Queue('haystack', Exchange('haystack'), routing_key='haystack'),
     Queue('thumbnails', Exchange('thumbnails'), routing_key='thumbnails'),
 )
@@ -31,4 +32,17 @@ CELERY_ROUTES = {
         'queue': 'thumbnails',
         'routing_key': 'thumbnails',
     },
+    'celery_haystack.tasks.CeleryHaystackSignalHandler': {
+        'queue': 'haystack',
+        'routing_key': 'haystack',
+    },
+    'celery_haystack.tasks.CeleryHaystackUpdateIndex': {
+        'queue': 'haystack',
+        'routing_key': 'haystack',
+    },
+    'djcelery_email_send_multiple': {
+        'queue': 'email',
+        'routing_key': 'email',
+    },
+
 }
