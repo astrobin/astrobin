@@ -2197,6 +2197,10 @@ class UserProfile(SafeDeleteModel):
         null=True
     )
 
+    recovered_images_notice_sent = models.DateTimeField(
+        null=True
+    )
+
     # Preferences (notification preferences are stored in the django
     # notification model)
     language = models.CharField(
