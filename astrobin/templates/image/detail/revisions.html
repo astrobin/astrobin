@@ -4,7 +4,7 @@
 {% load astrobin_apps_images_tags %}
 
 {% if revisions %}
-    <div class="subtle-container">
+    <div class="subtle-container revisions-container">
         <div class="header"><h4><i class="icon-picture"></i> {% trans "Revisions" %}</h4></div>
         <ul class="thumbnails astrobin-thumbnails">
             {% if not image.corrupted %}
@@ -19,16 +19,31 @@
                         {% endif %}
 
                         {% if request.user == image.user or request.user.is_superuser %}
-                            <div class="edit">
-                                <a href="{% url 'image_edit_basic' image.get_id %}">
-                                    <i class="icon-pencil"></i>
+                            <div class="contextual-menu">
+                                <a class="dropdown-toggle" data-toggle="dropdown" href="#">
+                                    <i class="icon-ellipsis-vertical icon-white"></i>
                                 </a>
-                            </div>
+                                <ul class="dropdown-menu">
+                                    {% if not image.is_final %}
+                                        <li>
+                                            <a href="{% url 'image_edit_make_final' image.get_id %}">
+                                                <i class="icon-ok"></i>
+                                                <span class="hidden-phone">
+                                                    {% trans "Mark this revision as final" %}
+                                                </span>
+                                            </a>
+                                        </li>
+                                    {% endif %}
 
-                            <div class="delete">
-                                <a data-toggle="modal" class="danger" href="#delete-original-image-modal">
-                                    <i class="icon-trash"></i>
-                                </a>
+                                    <li>
+                                        <a data-toggle="modal" class="danger" href="#delete-original-image-modal">
+                                            <i class="icon-trash"></i>
+                                            <span class="hidden-phone">
+                                                {% trans "Delete" %}
+                                            </span>
+                                        </a>
+                                    </li>
+                                </ul>
                             </div>
                         {% endif %}
 
@@ -55,16 +70,40 @@
                         {% endif %}
 
                         {% if request.user == image.user or request.user.is_superuser %}
-                            <div class="edit">
-                                <a href="{% url 'image_edit_revision' r.pk %}">
-                                    <i class="icon-pencil"></i>
+                            <div class="contextual-menu">
+                                <a class="dropdown-toggle" data-toggle="dropdown" href="#">
+                                    <i class="icon-ellipsis-vertical icon-white"></i>
                                 </a>
-                            </div>
+                                <ul class="dropdown-menu">
+                                    {% if not r.is_final %}
+                                    <li>
+                                        <a href="{% url 'image_edit_revision_make_final' r.pk %}">
+                                            <i class="icon-ok"></i>
+                                            <span class="hidden-phone">
+                                                {% trans "Mark this revision as final" %}
+                                            </span>
+                                        </a>
+                                    </li>
+                                    {% endif %}
 
-                            <div class="delete">
-                                <a data-toggle="modal" class="danger" href="#delete-revision-modal-{{ r.pk }}">
-                                    <i class="icon-trash"></i>
-                                </a>
+                                    <li>
+                                        <a href="{% url 'image_edit_revision' r.pk %}">
+                                            <i class="icon-pencil"></i>
+                                            <span class="hidden-phone">
+                                                {% trans "Edit" %}
+                                            </span>
+                                        </a>
+                                    </li>
+
+                                    <li>
+                                        <a data-toggle="modal" class="danger" href="#delete-revision-modal-{{ r.pk }}">
+                                            <i class="icon-trash"></i>
+                                            <span class="hidden-phone">
+                                                {% trans "Delete" %}
+                                            </span>
+                                        </a>
+                                    </li>
+                                </ul>
                             </div>
                         {% endif %}
 

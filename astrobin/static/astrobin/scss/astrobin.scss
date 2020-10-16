@@ -2762,6 +2762,10 @@ li.revisions {
   padding: 4px;
 }
 
+.revisions-container {
+  overflow: visible;
+}
+
 .revision {
   position: relative;
 
@@ -2787,46 +2791,24 @@ li.revisions {
     }
   }
 
-  .edit {
-    position: absolute;
-    top: -4px;
-    right: -4px;
-    z-index: 2;
+  .contextual-menu {
     visibility: hidden;
-    background: rgba(0, 0, 0, 0.75);
-    padding: 4px;
-    border-radius: 14px;
-  }
-
-  .delete {
     position: absolute;
-    top: 23px;
-    right: -4px;
+    top: -10px;
+    right: -10px;
     z-index: 2;
-    visibility: hidden;
+    font-size: 1.15rem;
+    padding: .25rem .33rem;
     background: rgba(0, 0, 0, 0.75);
-    padding: 4px;
-    border-radius: 14px;
+    border-radius: 1.45rem;
+    border: 1px solid rgba(255, 255, 255, .2);
 
-    i {
-      color: red;
-    }
-
-    form {
-      margin: 0;
-      padding: 0 2px;
-    }
-
-    button {
-      background: none;
-      border: 0;
-      padding: 0;
-      color: red;
+    * {
+      font-size: 1rem;
     }
   }
 
-  &:hover .edit,
-  &:hover .delete {
+  &:hover .contextual-menu {
     visibility: visible;
   }
 
