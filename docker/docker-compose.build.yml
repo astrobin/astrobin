@@ -57,6 +57,15 @@ services:
       - elasticsearch
 
 
+  celery_email:
+    build:
+      context: ../
+      dockerfile: docker/astrobin.dockerfile
+    links:
+      - postgres
+      - elasticsearch
+
+
   celery_thumbnails:
     build:
       context: ../
@@ -64,6 +73,7 @@ services:
     links:
       - postgres
       - elasticsearch
+
 
   celery_haystack:
     build:
@@ -73,6 +83,7 @@ services:
       - postgres
       - elasticsearch
 
+
   beat:
     build:
       context: ../
@@ -80,6 +91,7 @@ services:
     links:
       - postgres
       - elasticsearch
+
 
   debug_email:
     image: python:2.7-alpine
