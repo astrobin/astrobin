@@ -14,7 +14,7 @@
             }
         }
 
-        $(".astrobin-image-container.corrupted.recovered").click(function () {
+        $(".recovery-process-thumbnails .astrobin-image-container.corrupted.recovered").click(function () {
             if ($(this).hasClass("recovery-process-recover-selected")) {
                 $(this).removeClass("recovery-process-recover-selected");
                 $(this).addClass("recovery-process-delete-selected");
