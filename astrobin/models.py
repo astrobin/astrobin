@@ -1420,7 +1420,7 @@ class Image(HasSolutionMixin, SafeDeleteModel):
                 try:
                     os.remove(os.path.join(field.storage.local_storage.location, local_filename))
                 except OSError:
-                    log.debug("Image %d: locally cached file not found." % self.id)
+                    pass
 
                 # Then we purge the Cloudflare cache
                 try:
