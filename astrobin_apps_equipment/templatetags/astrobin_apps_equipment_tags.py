@@ -12,6 +12,9 @@ register = Library()
 def equipment_brand_listings(gear, country):
     # type: (Gear, str) -> QuerySet
 
+    if country is None:
+        return EquipmentBrandListing.objects.none()
+
     return gear.equipment_brand_listings.filter(
         Q(retailer__countries__icontains=country) |
         Q(retailer__countries=None)
@@ -21,6 +24,9 @@ def equipment_brand_listings(gear, country):
 @register.filter
 def equipment_item_listings(gear, country):
     # type: (Gear, str) -> QuerySet
+
+    if country is None:
+        return EquipmentItemListing.objects.none()
 
     return gear.equipment_item_listings.filter(
         Q(retailer__countries__icontains=country) |
