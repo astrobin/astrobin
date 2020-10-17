@@ -33,6 +33,10 @@ CELERY_ROUTES = {
         'queue': 'thumbnails',
         'routing_key': 'thumbnails',
     },
+    'astrobin.tasks.send_broadcast_email': {
+        'queue': 'email',
+        'routing_key': 'email',
+    },
     'celery_haystack.tasks.CeleryHaystackSignalHandler': {
         'queue': 'haystack',
         'routing_key': 'haystack',
