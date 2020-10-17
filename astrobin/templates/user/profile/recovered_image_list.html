@@ -24,17 +24,111 @@
 {% endif %}
 
 {% if image_list %}
-    <ul class="astrobin-thumbnails recovery-process-thumbnails">
+    <div class="recovery-process">
         {% for image in image_list %}
-            <li class="thumbnail astrobin-thumbnail">
-                <span
-                    rel="tooltip"
-                    title="{{ image.title|escape|default:_("(no title)") }}">
-                    {% astrobin_image image 'gallery' link=False tooltip=False %}
-                </span>
-            </li>
+            <div class="row section">
+                <div class="span9">
+                    <h2>{{ image.title|escape|default:_("(no title)") }}</h2>
+                </div>
+
+                <div class="span5">
+                    {% astrobin_image image 'story' revision='0' link=False tooltip=False %}
+                </div>
+                <div class="span4">
+                    <dl>
+                        <dt>{% trans "Link" %}</dt>
+                        <dd>
+                            <a href="{% url 'image_detail' image.get_id '0' %}" target="_blank">
+                                <i class="icon-link"></i>
+                            </a>
+                        </dd>
+
+                        <dt>{% trans "Staging area" %}</dt>
+                        <dd>
+                            {% if image.is_wip %}
+                                <i class="icon-ok"></i>
+                            {% else %}
+                                <i class="icon-remove"></i>
+                            {% endif %}
+                        </dd>
+
+                        <dt>{% trans "Corrupted" %}</dt>
+                        <dd>
+                            {% if image.corrupted %}
+                                <span class="corrupted-yes">{% trans "Yes" %}</span>
+                            {% else %}
+                                <span class="corrupted-no">{% trans "No" %}</span>
+                            {% endif %}
+                        </dd>
+
+                        {% if image.corrupted %}
+                            <dt>{% trans "Recovered" %}</dt>
+                            <dd>
+                                {% if image.recovered %}
+                                    <span class="recovered-yes">{% trans "Yes" %}</span>
+                                {% else %}
+                                    <span class="recovered-no">{% trans "No" %}</span>
+                                {% endif %}
+                            </dd>
+                        {% endif %}
+                    </dl>
+                </div>
+            </div>
+            {% if image.revisions.all.count > 0 %}
+                {% for revision in image.revisions.all %}
+                    <div class="row section">
+                        <div class="span2">
+                            {% astrobin_image image 'story' revision=revision.label link=False tooltip=False %}
+                        </div>
+                        <div class="span4">
+                            <dl>
+                                <dt>{% trans "Revision" %}</dt>
+                                <dd>{{ revision.label }}</dd>
+
+                                <dt>{% trans "Link" %}</dt>
+                                <dd>
+                                    <a href="{% url 'image_detail' image.get_id revision.label %}" target="_blank">
+                                        <i class="icon-link"></i>
+                                    </a>
+                                </dd>
+
+                                <dt>{% trans "Final" %}</dt>
+                                <dd>
+                                    {% if revision.final %}
+                                        <i class="icon-ok"></i>
+                                    {% else %}
+                                        <i class="icon-remove"></i>
+                                    {% endif %}
+                                </dd>
+
+                                <dt>{% trans "Corrupted" %}</dt>
+                                <dd>
+                                    {% if revision.corrupted %}
+                                        <span class="corrupted-yes">{% trans "Yes" %}</span>
+                                    {% else %}
+                                        <span class="corrupted-no">{% trans "No" %}</span>
+                                    {% endif %}
+                                </dd>
+
+                                {% if revision.corrupted %}
+                                    <dt>{% trans "Recovered" %}</dt>
+                                    <dd>
+                                        {% if revision.recovered %}
+                                            <span class="recovered-yes">{% trans "Yes" %}</span>
+                                        {% else %}
+                                            <span class="recovered-no">{% trans "No" %}</span>
+                                        {% endif %}
+                                    </dd>
+                                {% endif %}
+                            </dl>
+                        </div>
+                    </div>
+                {% endfor %}
+            {% endif %}
+
+            <hr />
         {% endfor %}
-    </ul>
+    </div>
 {% else %}
     {% trans "There doesn't seem to be anything here." %}
 {% endif %}
