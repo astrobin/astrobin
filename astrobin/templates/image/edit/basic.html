@@ -35,7 +35,7 @@
             enctype="multipart/form-data">
         {% csrf_token %}
 
-        {% if 'corrupted' in request.GET %}
+        {% if 'corrupted' in request.GET and image.corrupted and not image.recovered %}
             {% include './_catastrophic_data_corruption.html' %}
         {% endif %}
 
