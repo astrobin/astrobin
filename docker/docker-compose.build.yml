@@ -48,7 +48,7 @@ services:
       - elasticsearch
 
 
-  celery_default:
+  celery_main:
     build:
       context: ../
       dockerfile: docker/astrobin.dockerfile

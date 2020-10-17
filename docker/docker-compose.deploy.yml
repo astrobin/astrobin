@@ -24,7 +24,7 @@ services:
           - node.labels.default == true
 
 
-  celery_default:
+  celery_main:
     deploy:
       placement:
         constraints:
