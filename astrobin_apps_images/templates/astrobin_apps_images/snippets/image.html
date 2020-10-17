@@ -9,8 +9,9 @@
     <div class="astrobin-image-container
             {% if classes %} {{classes}}{% endif %}
             {% if image.is_wip %} wip{% endif %}
-            {% if image.corrupted %} corrupted{% endif %}
-            {% if image.recovered %} recovered{% endif %}"
+            {% if corrupted %} corrupted{% endif %}
+            {% if recovered %} recovered{% endif %}
+            {% if is_revision %} revision{% endif %}"
     >
         {% if error_message %}
             <div class="alert alert-error">
@@ -98,6 +99,9 @@
                      data-id="{{image.id}}"
                      data-alias="{{alias}}"
                      data-revision="{{revision}}"
+                     {% if is_revision %}
+                        data-revision-id="{{ revision_id }}"
+                     {% endif %}
                      data-get-thumb-url="{{get_thumb_url}}"
                      
                      data-hires-loaded="false"

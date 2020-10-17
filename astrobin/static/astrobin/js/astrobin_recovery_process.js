@@ -14,14 +14,39 @@
             }
         }
 
-        $(".recovery-process-thumbnails .astrobin-image-container.corrupted.recovered").click(function () {
-            if ($(this).hasClass("recovery-process-recover-selected")) {
-                $(this).removeClass("recovery-process-recover-selected");
-                $(this).addClass("recovery-process-delete-selected");
-            } else if ($(this).hasClass("recovery-process-delete-selected")) {
-                $(this).removeClass("recovery-process-delete-selected");
+        $(".recovery-process .astrobin-image-container.corrupted.recovered").click(function () {
+            var $self = $(this);
+            
+            if ($self.hasClass("recovery-process-recover-selected")) {
+                $self.removeClass("recovery-process-recover-selected");
+                $self.addClass("recovery-process-delete-selected");
+            } else if ($self.hasClass("recovery-process-delete-selected")) {
+                if ($self.hasClass("revision")) {
+                    $self.removeClass("recovery-process-delete-selected");
+                    $self.addClass("recovery-process-recover-selected");
+                } else {
+                    $self.removeClass("recovery-process-delete-selected");
+                }
             } else {
-                $(this).addClass("recovery-process-recover-selected");
+                $self.addClass("recovery-process-recover-selected");
+            }
+            
+            if (!$self.hasClass("revision")) {
+                var id = $self.find(".astrobin-image").data("id");
+                var $revisions = $(".astrobin-image-container.revision.corrupted.recovered .astrobin-image[data-id=" + id + "]");
+                $revisions.each(function(index, $revision) {
+                    var $container = $($revision.closest(".astrobin-image-container"));
+                    if ($self.hasClass("recovery-process-recover-selected")) {
+                        $container.removeClass("recovery-process-delete-selected");
+                        $container.addClass("recovery-process-recover-selected");
+                    } else if ($self.hasClass("recovery-process-delete-selected")) {
+                        $container.removeClass("recovery-process-recover-selected");
+                        $container.addClass("recovery-process-delete-selected");
+                    } else {
+                        $container.removeClass("recovery-process-recover-selected");
+                        $container.removeClass("recovery-process-delete-selected");
+                    }
+                });
             }
 
             updateSelectedNumber();
@@ -60,37 +85,69 @@
         $submitSelectedButton.click(function (e) {
             e.preventDefault();
 
-            var recoverPks = $(".recovery-process-recover-selected").map(function (index, item) {
+            var imageRecoverPks = $(".recovery-process-recover-selected:not(.revision)").map(function (index, item) {
                 return parseInt($(item).find('.astrobin-image').attr("data-id"), 10);
             }).get();
 
-            var deletePks = $(".recovery-process-delete-selected").map(function (index, item) {
+            var revisionRecoverPks = $(".recovery-process-recover-selected.revision").map(function (index, item) {
+                return parseInt($(item).find('.astrobin-image').attr("data-revision-id"), 10);
+            }).get();
+
+            var imageDeletePks = $(".recovery-process-delete-selected:not(.revision)").map(function (index, item) {
                 return parseInt($(item).find('.astrobin-image').attr("data-id"), 10);
+            }).get();
+
+            var revisionDeletePks = $(".recovery-process-delete-selected.revision").map(function (index, item) {
+                return parseInt($(item).find('.astrobin-image').attr("data-revision-id"), 10);
             }).get();
 
             $(this).prop("disabled", "disabled").addClass("running");
 
             $.ajax({
-                url: "/json-api/user/confirm-image-recovery/",
+                url: "/json-api/user/confirm-revision-recovery/",
                 type: "POST",
                 cache: false,
                 timeout: 30000,
                 data: JSON.stringify({
-                    images: recoverPks
+                    revisions: revisionRecoverPks
                 }),
                 dataType: "json",
-                success: function() {
+                success: function () {
                     $.ajax({
-                        url: "/json-api/user/delete-images/",
+                        url: "/json-api/user/delete-revisions/",
                         type: "POST",
                         cache: false,
                         timeout: 30000,
                         data: JSON.stringify({
-                            images: deletePks
+                            revisions: revisionDeletePks
                         }),
                         dataType: "json",
                         success: function () {
-                            window.location.reload();
+                            $.ajax({
+                                url: "/json-api/user/confirm-image-recovery/",
+                                type: "POST",
+                                cache: false,
+                                timeout: 30000,
+                                data: JSON.stringify({
+                                    images: imageRecoverPks
+                                }),
+                                dataType: "json",
+                                success: function () {
+                                    $.ajax({
+                                        url: "/json-api/user/delete-images/",
+                                        type: "POST",
+                                        cache: false,
+                                        timeout: 30000,
+                                        data: JSON.stringify({
+                                            images: imageDeletePks
+                                        }),
+                                        dataType: "json",
+                                        success: function () {
+                                            window.location.reload();
+                                        }
+                                    });
+                                }
+                            });
                         }
                     });
                 }

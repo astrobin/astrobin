@@ -100,6 +100,9 @@ def astrobin_image(context, image, alias, **kwargs):
             'nav_ctx': nav_ctx,
             'nav_ctx_extra': nav_ctx_extra,
             'classes': classes,
+            'corrupted': False,
+            'recovered': False,
+            'is_revision': False,
         }
 
     # Old images might not have a size in the database, let's fix it.
@@ -165,6 +168,9 @@ def astrobin_image(context, image, alias, **kwargs):
                 'nav_ctx': nav_ctx,
                 'nav_ctx_extra': nav_ctx_extra,
                 'classes': classes,
+                'corrupted': False,
+                'recovered': False,
+                'is_revision': False,
             }
 
         try:
@@ -305,6 +311,10 @@ def astrobin_image(context, image, alias, **kwargs):
         'classes'       : classes,
         'enhanced_thumb_url' : enhanced_thumb_url,
         'get_enhanced_thumb_url' : get_enhanced_thumb_url,
+        'corrupted': image_revision.corrupted,
+        'recovered': image_revision.recovered is not None,
+        'is_revision': hasattr(image_revision, 'label'),
+        'revision_id': image_revision.pk,
     }.items())
 register.inclusion_tag(
     'astrobin_apps_images/snippets/image.html',
