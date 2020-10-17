@@ -7,7 +7,6 @@ import tempfile
 import zipfile
 from StringIO import StringIO
 from datetime import datetime, timedelta
-from tempfile import _TemporaryFileWrapper
 from time import sleep
 from zipfile import ZipFile
 
@@ -205,17 +204,22 @@ def send_missing_remote_source_notifications():
 
 
 @shared_task(rate_limit="2/s")
-def send_broadcast_email(broadcastEmail, recipients):
+def send_broadcast_email(broadcast_email_id, recipients):
+    try:
+        broadcast_email = BroadcastEmail.objects.get(id=broadcast_email_id)
+    except BroadcastEmail.DoesNotExist:
+        logger.error("Attempted to send broadcast email that does not exist: %d" % broadcast_email_id)
+        return
+
     for recipient in list(recipients):
         msg = EmailMultiAlternatives(
-            broadcastEmail.subject,
-            broadcastEmail.message,
+            broadcast_email.subject,
+            broadcast_email.message,
             settings.DEFAULT_FROM_EMAIL,
             [recipient])
-        msg.attach_alternative(broadcastEmail.message_html, "text/html")
+        msg.attach_alternative(broadcast_email.message_html, "text/html")
         msg.send()
-        logger.info("Email sent to %s: %s" % (recipient.email, broadcastEmail.subject))
-
+        logger.info("Email sent to %s: %s" % (recipient.email, broadcast_email.subject))
 
 @shared_task()
 def send_inactive_account_reminder():
@@ -263,7 +267,7 @@ def prepare_download_data_archive(request_id):
     data_download_request = DataDownloadRequest.objects.get(id=request_id)
 
     try:
-        temp_zip = tempfile.NamedTemporaryFile()  # type: _TemporaryFileWrapper
+        temp_zip = tempfile.NamedTemporaryFile()
         temp_csv = StringIO()  # type: StringIO
         archive = zipfile.ZipFile(temp_zip, 'w', zipfile.ZIP_DEFLATED, allowZip64=True)  # type: ZipFile
 

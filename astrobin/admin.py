@@ -243,7 +243,7 @@ class BroadcastEmailAdmin(admin.ModelAdmin):
                 "Please select exactly one email",
                 messages.ERROR)
         elif recipients.count() > 0:
-            send_broadcast_email.delay(obj[0], recipients)
+            send_broadcast_email.delay(obj[0].id, recipients)
             self.message_user(
                 request,
                 "Email enqueued to be sent to %d users" % len(recipients))
