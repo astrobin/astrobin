@@ -32,7 +32,7 @@
 
         {% csrf_token %}
 
-        {% if 'corrupted' in request.GET %}
+        {% if 'corrupted' in request.GET and revision.corrupted and not revision.recovered %}
             {% include './_catastrophic_data_corruption.html' %}
         {% endif %}
 
