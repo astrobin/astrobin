@@ -16,14 +16,23 @@
 
         $(".recovery-process .astrobin-image-container.corrupted.recovered").click(function () {
             var $self = $(this);
+            var id;
+            var $container;
             
             if ($self.hasClass("recovery-process-recover-selected")) {
                 $self.removeClass("recovery-process-recover-selected");
                 $self.addClass("recovery-process-delete-selected");
             } else if ($self.hasClass("recovery-process-delete-selected")) {
                 if ($self.hasClass("revision")) {
-                    $self.removeClass("recovery-process-delete-selected");
-                    $self.addClass("recovery-process-recover-selected");
+                    id = $self.find(".astrobin-image").data("id");
+                    $container = $(".astrobin-image-container:not(.revision).corrupted.recovered .astrobin-image[data-id=" + id + "]").closest(".astrobin-image-container");
+
+                    if ($container.hasClass("recovery-process-delete-selected")) {
+                        // Revision cannot be anything but deleted if parent is marked for deletion.
+                    } else {
+                        $self.removeClass("recovery-process-delete-selected");
+                        $self.addClass("recovery-process-recover-selected");
+                    }
                 } else {
                     $self.removeClass("recovery-process-delete-selected");
                 }
@@ -32,10 +41,10 @@
             }
             
             if (!$self.hasClass("revision")) {
-                var id = $self.find(".astrobin-image").data("id");
+                id = $self.find(".astrobin-image").data("id");
                 var $revisions = $(".astrobin-image-container.revision.corrupted.recovered .astrobin-image[data-id=" + id + "]");
                 $revisions.each(function(index, $revision) {
-                    var $container = $($revision.closest(".astrobin-image-container"));
+                    $container = $($revision.closest(".astrobin-image-container"));
                     if ($self.hasClass("recovery-process-recover-selected")) {
                         $container.removeClass("recovery-process-delete-selected");
                         $container.addClass("recovery-process-recover-selected");
@@ -44,6 +53,16 @@
                         $container.addClass("recovery-process-delete-selected");
                     } else {
                         $container.removeClass("recovery-process-recover-selected");
+                        $container.removeClass("recovery-process-delete-selected");
+                    }
+                });
+
+                var $nonCorruptedRevisions = $(".astrobin-image-container.revision .astrobin-image[data-id=" + id + "]");
+                $nonCorruptedRevisions.each(function (index, $revision) {
+                    $container = $($revision.closest(".astrobin-image-container"));
+                    if ($self.hasClass("recovery-process-delete-selected")) {
+                        $container.addClass("recovery-process-delete-selected");
+                    } else {
                         $container.removeClass("recovery-process-delete-selected");
                     }
                 });

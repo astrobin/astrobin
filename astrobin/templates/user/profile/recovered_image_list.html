@@ -31,6 +31,10 @@
                     <h2>{{ image.title|escape|default:_("(no title)") }}</h2>
                 </div>
 
+                <div class="span9">
+                    <h4>{% trans "Original upload" %}</h4>
+                </div>
+
                 <div class="span5">
                     {% astrobin_image image 'story' revision='0' link=False tooltip=False %}
                 </div>
@@ -75,6 +79,12 @@
                 </div>
             </div>
             {% if image.revisions.all.count > 0 %}
+                <div class="row">
+                    <div class="span9">
+                        <h4>{% trans "Revisions" %}</h4>
+                    </div>
+                </div>
+
                 {% for revision in image.revisions.all %}
                     <div class="row section">
                         <div class="span2">
