@@ -249,7 +249,10 @@ def toggleproperty_post_delete(sender, instance, **kwargs):
     if hasattr(instance.content_object, "updated"):
         # This will trigger the auto_now fields in the content_object
         try:
-            instance.content_object.save(keep_deleted=True)
+            kwargs = {}
+            if hasattr(instance.content_object, 'deleted'):
+                kwargs['keep_deleted'] = True
+            instance.content_object.save(**kwargs)
         except instance.content_object.DoesNotExist:
             pass
 
