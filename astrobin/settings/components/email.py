@@ -9,7 +9,7 @@ if SEND_EMAILS == 'true':
     CELERY_EMAIL_TASK_CONFIG = {
         'queue': 'email',
         'delivery_mode': 1,  # non persistent
-        'rate_limit': '30/m',  # 30 chunks per minute
+        'rate_limit': '150/m',  # 15 chunks per minute
     }
 
     EMAIL_HOST = os.environ.get('EMAIL_HOST', 'localhost').strip()

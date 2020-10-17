@@ -203,7 +203,7 @@ def send_missing_remote_source_notifications():
     call_command("send_missing_remote_source_notifications")
 
 
-@shared_task(rate_limit="2/s")
+@shared_task(rate_limit="3/s")
 def send_broadcast_email(broadcast_email_id, recipients):
     try:
         broadcast_email = BroadcastEmail.objects.get(id=broadcast_email_id)
