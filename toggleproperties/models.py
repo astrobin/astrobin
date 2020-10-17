@@ -1,7 +1,11 @@
+import logging
+
 from django.contrib.auth.models import User
 from django.contrib.contenttypes.models import ContentType
-from django.db import models
+from django.db import models, IntegrityError
 from django.dispatch import receiver
+
+log = logging.getLogger("apps")
 
 try:
     from django.contrib.contenttypes.generic import GenericForeignKey
@@ -71,7 +75,12 @@ class TogglePropertyManager(models.Manager):
                 object_id=content_object.pk,
                 content_object=content_object
             )
-            tp.save()
+
+            try:
+                tp.save()
+            except IntegrityError as e:
+                log.warning("Integrity error while trying to save ToggleProperty: " % e.message)
+                pass
 
         return tp
 
