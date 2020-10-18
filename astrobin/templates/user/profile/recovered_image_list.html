@@ -5,9 +5,9 @@
 {% load common_tags %}
 
 
-{% if requested_user == request.user and has_recovered_images and section == 'recovered' %}
+{% if image_list %}
     <div class="alert alert-info">
-        <h3>{% trans "Good news!" %}</h3>
+        <h3>{% trans "Please confirm your recovered images" %}</h3>
 
         <p>
             {% blocktrans trimmed with url='https://docs.google.com/document/d/1PzdYQQpR4LueJUMnbyi162xQLAYkr3MiU_7wy4ScdMU/edit?usp=sharing' %}
@@ -16,7 +16,13 @@
             {% endblocktrans %}
         </p>
 
-        <hr/>
+        <p>
+            {% blocktrans trimmed %}
+                Now you need to <strong>manually confirm or reject</strong> them.
+            {% endblocktrans %}
+        </p>
+
+        <hr />
 
         <h4>{% trans "Instructions" %}</h4>
 
@@ -61,9 +67,7 @@
             {% endblocktrans %}
         </p>
     </div>
-{% endif %}
 
-{% if image_list %}
     <div class="recovery-process">
         {% for image in image_list %}
             <div class="row section">
