@@ -13,6 +13,11 @@
     margin-bottom: 12px;
   }
 
+  ul,
+  ol {
+    list-style: initial;
+  }
+
   strong {
     color: inherit;
   }
@@ -39,8 +44,14 @@
   margin: 0 0 12px 0;
 }
 
-.alert-info strong {
-  color: $background-color;
+.alert-info {
+  h3 {
+    color: $black;
+  }
+
+  strong {
+    color: $background-color;
+  }
 }
 
 .alert-error,
