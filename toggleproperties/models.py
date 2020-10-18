@@ -79,7 +79,7 @@ class TogglePropertyManager(models.Manager):
             try:
                 tp.save()
             except IntegrityError as e:
-                log.warning("Integrity error while trying to save ToggleProperty: " % e.message)
+                log.warning("Integrity error while trying to save ToggleProperty: %s" % e.message)
                 pass
 
         return tp
