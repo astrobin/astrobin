@@ -762,7 +762,7 @@ class Image(HasSolutionMixin, SafeDeleteModel):
         ("SPVO", "San Pedro Valley Observatory"),
         ("SRO", "Sierra Remote Observatories"),
         ("SRO2", "Sky Ranch Observatory"),
-        ("SPOO", "SkyPi Online Observatory"),
+        ("SPOO", "SkyPi Remote Observatory"),
         ("SLO", "Slooh"),
         ("SSLLC", "Stellar Skies LLC"),
 
