@@ -16,7 +16,7 @@ class ConfirmImageRecovery(JsonRequestResponseMixin, LoginRequiredMixin, View):
             if len(pks) != images.count():
                 return self.render_bad_request_response()
 
-            images.update(corrupted=False)
+            images.update(corrupted=False, deleted=None)
 
             messages.success(request, _("%(number)s image(s) recovered." % {"number": len(pks)}))
 
