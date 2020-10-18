@@ -7,17 +7,57 @@
 
 {% if requested_user == request.user and has_recovered_images and section == 'recovered' %}
     <div class="alert alert-info">
-        <h4>{% trans "Good news!" %}</h4>
+        <h3>{% trans "Good news!" %}</h3>
 
         <p>
             {% blocktrans trimmed with url='https://docs.google.com/document/d/1PzdYQQpR4LueJUMnbyi162xQLAYkr3MiU_7wy4ScdMU/edit?usp=sharing' %}
                 Following the <a href="{{ url }}" target="_blank">data loss incident in February 2020</a>, these images
-                <strong>were recovered</strong> from a copy kept by our plate-solving partner.
+                <strong>were automatically recovered</strong>.
             {% endblocktrans %}
         </p>
+
+        <hr/>
+
+        <h4>{% trans "Instructions" %}</h4>
+
+        <ol>
+            <li>
+                {% blocktrans trimmed %}
+                    Below, you see the list of all your images impacted by the automatic recovery process.
+                {% endblocktrans %}
+            </li>
+            <li>
+                {% blocktrans trimmed %}
+                    The big thumbnail represents the original upload, and the small thumbnails represent revisions.
+                {% endblocktrans %}
+            </li>
+            <li>
+                {% blocktrans trimmed %}
+                    Click on a thumbnail once to mark it for recovery, again to mark it for deletion, once more to
+                    return to the "do nothing" state.
+                {% endblocktrans %}
+            </li>
+            <li>
+                {% blocktrans trimmed %}
+                    You can also use the "Recover all" and "Delete all" buttons at the bottom.
+                {% endblocktrans %}
+            </li>
+            <li>
+                {% blocktrans trimmed %}
+                    When you are ready, click on the "Submit selected" button to confirm your selection.
+                {% endblocktrans %}
+            </li>
+            <li>
+                {% blocktrans trimmed %}
+                    You will return to this page, and the images for which you didn't make a selection will still be
+                    here.
+                {% endblocktrans %}
+            </li>
+        </ol>
         <p>
             {% blocktrans trimmed %}
-                Please click on the images below to make your selection to recover or delete them.
+                The recovered images will return to your gallery (public or staging, depending on where they were before
+                the data loss).
             {% endblocktrans %}
         </p>
     </div>
@@ -138,33 +178,30 @@
 
             <hr />
         {% endfor %}
+
+        <form class="form">
+            <div class="form-actions text-right">
+                <button id="recovery-process-recover-all" class="btn btn-link btn-block-mobile">
+                    {% trans "Recover all" %}
+                </button>
+
+                <button id="recovery-process-delete-all" class="btn btn-link btn-block-mobile">
+                    {% trans "Delete all" %}
+                </button>
+
+                <button id="recovery-process-reset" class="btn btn-link btn-block-mobile">
+                    {% trans "Reset" %}
+                </button>
+
+                <button id="recovery-process-submit-button"
+                        class="btn btn-primary btn-block-mobile {% button_loading_class %}" disabled="disabled">
+                    {% trans "Submit selected" %} (<span id="recovery-process-selected-number">0</span>)
+                    {% button_loading_indicator %}
+                </button>
+            </div>
+        </form>
     </div>
 {% else %}
     {% trans "There doesn't seem to be anything here." %}
 {% endif %}
 
-<form class="form">
-    <div class="form-actions text-right">
-        <button
-            id="recovery-process-recover-all"
-            class="btn btn-link btn-block-mobile">
-            {% trans "Recover all" %}
-        </button>
-
-        <button id="recovery-process-delete-all" class="btn btn-link btn-block-mobile">
-            {% trans "Delete all" %}
-        </button>
-
-        <button id="recovery-process-reset" class="btn btn-link btn-block-mobile">
-            {% trans "Reset" %}
-        </button>
-
-        <button
-            id="recovery-process-submit-button"
-            class="btn btn-primary btn-block-mobile {% button_loading_class %}"
-            disabled="disabled">
-            {% trans "Submit selected" %} (<span id="recovery-process-selected-number">0</span>)
-            {% button_loading_indicator %}
-        </button>
-    </div>
-</form>
