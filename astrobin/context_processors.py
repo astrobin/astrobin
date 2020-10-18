@@ -1,3 +1,5 @@
+from datetime import timedelta
+
 from django.conf import settings
 
 from astrobin.enums import SubjectType
@@ -110,6 +112,21 @@ def common_variables(request):
         'HAS_COMPLAINT': complained,
         'COUNTRIES': COUNTRIES,
         'COOKIELAW_ACCEPTED': request.COOKIES.get('cookielaw_accepted', False),
+        'HAS_RECOVERED_IMAGES': request.user.is_authenticated() and \
+                                Image.all_objects.filter(
+                                    user=request.user,
+                                    corrupted=True,
+                                    recovered__isnull=False).exists(),
+        'AUTOMATIC_RECOVERY_CONFIRMATION_BEGINS': Image.all_objects.filter(
+            user=request.user,
+            corrupted=True,
+            recovered__isnull=False).order_by('recovered').first().recovered + timedelta(days=14) \
+            if request.user.is_authenticated() and \
+               Image.all_objects.filter(
+                   user=request.user,
+                   corrupted=True,
+                   recovered__isnull=False).exists() \
+            else None,
 
         'enums': {
             'SubjectType': SubjectType,

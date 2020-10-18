@@ -39,3 +39,19 @@
         </a>.
     </div>
 {% endif %}
+
+{% if HAS_RECOVERED_IMAGES %}
+    <div class="container alert alert-info global-alert">
+        <p>
+            {% blocktrans trimmed with date=AUTOMATIC_RECOVERY_CONFIRMATION_BEGINS|date:"SHORT_DATE_FORMAT" %}
+                <strong>Good news!</strong> AstroBin automatically recovered some of your images that were lost in the
+                data loss incident of February 2020. Please review them to confirm the recovery. If you do nothing, your
+                recovered images will be confirmed automatically starting from <strong>{{ date }}</strong>.
+            {% endblocktrans %}
+        </p>
+
+        <a class="btn btn-primary" href="{% url 'me' %}?recovered">
+            {% trans "Review recovered images" %}
+        </a>
+    </div>
+{% endif %}

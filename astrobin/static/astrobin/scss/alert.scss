@@ -76,9 +76,13 @@
   padding-top: 20px;
   padding-bottom: 20px;
 
-  a {
+  a:not(.btn) {
     font-weight: bold;
     text-decoration: underline;
     margin-left: $spacer-medium;
+  }
+
+  .btn {
+    margin-top: 1rem;
   }
 }
