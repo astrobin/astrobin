@@ -4723,13 +4723,15 @@ form.edit-thumbnails {
 
     .icon-ok,
     .corrupted-no,
-    .recovered-yes {
+    .recovered-yes,
+    .deleted-no {
       color: $green;
     }
 
     .icon-remove,
     .corrupted-yes,
-    .recovered-no {
+    .recovered-no,
+    .deleted-yes {
       color: $red;
     }
   }

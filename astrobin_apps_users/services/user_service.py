@@ -29,7 +29,7 @@ class UserService:
 
     def get_recovered_images(self):
         # type: () -> QuerySet
-        return self.get_all_images().filter(corrupted=True).exclude(recovered=None)
+        return Image.all_objects.filter(user=self.user).filter(corrupted=True).exclude(recovered=None)
 
     def get_public_images(self):
         # type: () -> QuerySet

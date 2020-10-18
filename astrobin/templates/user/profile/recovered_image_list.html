@@ -114,6 +114,15 @@
                                     <span class="recovered-no">{% trans "No" %}</span>
                                 {% endif %}
                             </dd>
+
+                            <dt>{% trans "Deleted" %}</dt>
+                            <dd>
+                                {% if image.deleted %}
+                                    <span class="deleted-yes">{% trans "Yes" %}</span>
+                                {% else %}
+                                    <span class="deleted-no">{% trans "No" %}</span>
+                                {% endif %}
+                            </dd>
                         {% endif %}
                     </dl>
                 </div>
