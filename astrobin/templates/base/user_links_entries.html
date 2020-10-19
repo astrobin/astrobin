@@ -20,7 +20,14 @@
 <li>
     <a href="{% url 'user_page' request.user.username %}">
         <i class="icon-picture"></i>
-        {% trans "Gallery" %}
+        {% trans "Public Gallery" %}
+    </a>
+</li>
+
+<li>
+    <a href="{% url 'user_page' request.user.username %}?staging">
+        <i class="icon-lock"></i>
+        {% trans "Staging Gallery" %}
     </a>
 </li>
 
