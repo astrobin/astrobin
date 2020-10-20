@@ -6,9 +6,11 @@ python manage.py migrate --run-syncdb --noinput
 
 # Create initial data
 python manage.py shell << EOF
-from subscription.models import Subscription
 from django.contrib.auth.models import Group, User
 from django.contrib.sites.models import Site
+
+from pybb.models import Category, Forum
+from subscription.models import Subscription
 
 Group.objects.get_or_create(name='astrobin_lite')
 Group.objects.get_or_create(name='astrobin_lite_2020')
@@ -249,6 +251,16 @@ except User.DoesNotExist:
     u = User.objects.create_superuser('astrobin_dev', 'dev@astrobin.com', 'astrobin_dev')
     Group.objects.get(name='content_moderators').user_set.add(u)
     Group.objects.get(name='image_moderators').user_set.add(u)
+
+try:
+    User.objects.get(email='dev2@astrobin.com')
+except User.DoesNotExist:
+    u = User.objects.create_superuser('astrobin_dev2', 'dev2@astrobin.com', 'astrobin_dev2')
+    Group.objects.get(name='content_moderators').user_set.add(u)
+    Group.objects.get(name='image_moderators').user_set.add(u)
+
+category, created = Category.objects.get_or_create(name="AstroBin Meta Forums", slug="astrobin")
+Forum.objects.get_or_create(category=category, name="Announcements", slug="announcements")
 
 try:
     Site.objects.get(name="AstroBin")
