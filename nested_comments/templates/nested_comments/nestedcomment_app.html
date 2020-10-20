@@ -67,14 +67,16 @@
 
 
 {% handlebars "singleComment" %}
-    <div class="avatar visible-desktop">
-        <a class="author" {{bindAttr href="view.node.author_url"}}>
-            <img
-                {{bindAttr src="view.node.author_avatar"}}
-                {{bindAttr alt="view.node.author_username"}}
-                width="40" height="40" />
-        </a>
-    </div>
+    {{#unless view.node.deleted}}
+        <div class="avatar visible-desktop">
+            <a class="author" {{bindAttr href="view.node.author_url"}}>
+                <img
+                    {{bindAttr src="view.node.author_avatar"}}
+                    {{bindAttr alt="view.node.author_username"}}
+                    width="40" height="40" />
+            </a>
+        </div>
+    {{/unless}}
     <div class="comment-container" {{bindAttr id="view.node.cid"}}>
         <div class="meta">
             {{#if view.node.deleted}}
