@@ -8,4 +8,10 @@ Cypress.Commands.add('login', (username, password) => {
     cy.get(".login-form input[type='submit']").click();
 
     cy.url().should("contain", "/users/" + username + "/");
+
+    cy.get("body").then((body) => {
+        if (body.find("#realname-prompt").length > 0) {
+            cy.get("#realname-prompt input[type='submit']").click();
+        }
+    });
 });
