@@ -14,7 +14,7 @@
 {% endblock %}
 
 {% block content %}
-    <form class="form-horizontal" method="post" action="">{% csrf_token %}
+    <form class="form-horizontal login-form" method="post" action="">{% csrf_token %}
 
         {{ form | as_bootstrap }}
 
