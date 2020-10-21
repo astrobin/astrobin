@@ -32,7 +32,8 @@ class ImageModerationListView(LoginRequiredMixin, GroupRequiredMixin, ListView):
     group_required = "image_moderators"
     raise_exception = True
     model = Image
-    queryset = Image.objects_including_wip.filter(moderator_decision=0)
+    queryset = Image.objects_including_wip.filter(
+        moderator_decision=0, uploaded__lt=datetime.datetime.now() - datetime.timedelta(minutes=10))
     template_name = "moderation/image_list.html"
 
 
