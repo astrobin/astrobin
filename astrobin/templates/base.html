@@ -18,7 +18,6 @@
 <html lang="{% if request.user.is_authenticated and user_language %}{{user_language}}{% else %}en{% endif %}">
     <head>
         <title>{% block title %}{% endblock %} - AstroBin</title>
-        <base href="{% block base_href %}/{% endblock %}">
 
         {% include "base/meta.html" %}
         {% block extra_meta %}{% endblock %}
