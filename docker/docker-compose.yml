@@ -13,19 +13,19 @@ services:
       - letsencrypt:/etc/letsencrypt
 
 
-  rabbitmq:
-    image: rabbitmq:management-alpine
-    environment:
-      - RABBITMQ_DEFAULT_USER=astrobin
-      - RABBITMQ_DEFAULT_PASS=astrobin
-
+  redis:
+    image: redis:6.0.8-alpine
+    expose:
+      - 6379
+    ports:
+      - "6379:6379"
 
   celery_main:
     image: ${DOCKER_REGISTRY}/astrobin:${ASTROBIN_BUILD}
     command: bash -c "python manage.py collectstatic --noinput && celery worker -A astrobin -Q main -c 1 -l debug"
     links:
       - memcached
-      - rabbitmq
+      - redis
     env_file:
       - ./astrobin.env
     environment:
@@ -44,8 +44,7 @@ services:
     image: ${DOCKER_REGISTRY}/astrobin:${ASTROBIN_BUILD}
     command: bash -c "python manage.py collectstatic --noinput && celery worker -A astrobin -Q email -c 1 -l debug"
     links:
-      - memcached
-      - rabbitmq
+      - redis
     env_file:
       - ./astrobin.env
     environment:
@@ -64,8 +63,7 @@ services:
     image: ${DOCKER_REGISTRY}/astrobin:${ASTROBIN_BUILD}
     command: bash -c "python manage.py collectstatic --noinput && celery worker -A astrobin -Q thumbnails -c 2 -l debug"
     links:
-      - memcached
-      - rabbitmq
+      - redis
     env_file:
       - ./astrobin.env
     environment:
@@ -84,8 +82,7 @@ services:
     image: ${DOCKER_REGISTRY}/astrobin:${ASTROBIN_BUILD}
     command: bash -c "python manage.py collectstatic --noinput && celery worker -A astrobin -Q haystack -c 2 -l debug"
     links:
-      - memcached
-      - rabbitmq
+      - redis
     env_file:
       - ./astrobin.env
     environment:
@@ -104,8 +101,7 @@ services:
     image: ${DOCKER_REGISTRY}/astrobin:${ASTROBIN_BUILD}
     command: bash -c "python manage.py collectstatic --noinput && celery -A astrobin beat -l debug --pidfile= --scheduler django_celery_beat.schedulers:DatabaseScheduler"
     links:
-      - memcached
-      - rabbitmq
+      - redis
     env_file:
       - ./astrobin.env
     environment:
@@ -125,7 +121,7 @@ services:
     command: bash -c "./scripts/init.sh && gunicorn wsgi:application -w 4 -b :8083 --max-requests 500 --max-requests-jitter 50 --timeout 300 --graceful-timeout 300 -k gevent"
     links:
       - memcached
-      - rabbitmq
+      - redis
     ports:
       - "8084:8084"
     env_file:
@@ -138,23 +134,6 @@ services:
     volumes:
       - media:/media
       - tmp:/tmp
-
-
-  flower:
-    image: totem/celery-flower-docker
-    links:
-      - rabbitmq
-    env_file:
-      - ./astrobin.env
-    environment:
-      - AMQP_HOST=rabbitmq
-      - AMQP_USERNAME=astrobin
-      - AMQP_PASSWORD=astrobin
-      - AMQP_ADMIN_HOST=rabbitmq
-      - AMQP_ADMIN_USERNAME=astrobin
-      - AMQP_ADMIN_PASSWORD=astrobin
-    ports:
-      - "5555:5555"
 
 
 volumes:

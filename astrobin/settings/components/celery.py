@@ -2,18 +2,18 @@ import os
 from kombu import Exchange, Queue
 
 
-BROKER_URL = os.environ.get('BROKER_URL', 'amqp://astrobin:astrobin@rabbitmq:5672').strip()
+BROKER_URL = os.environ.get('BROKER_URL', 'redis://redis:6379/0').strip()
 BROKER_TRANSPORT_OPTIONS = {
     'visibility_timeout': 3600,
     'fanout_prefix': True,
     'fanout_patterns': True,
 }
-CELERY_RESULT_BACKEND = 'cache+memcached://memcached:11211/'
+CELERY_RESULT_BACKEND = BROKER_URL
 CELERY_IMPORTS = ('astrobin.tasks', 'djcelery_email.tasks')
 CELERY_DEFAULT_QUEUE = 'main'
 CELERY_HAYSTACK_QUEUE = 'haystack'
-CELERY_ACCEPT_CONTENT = ['pickle', 'json']
-CELERY_TASK_SERIALIZER = 'pickle'
+CELERY_ACCEPT_CONTENT = ['json']
+CELERY_TASK_SERIALIZER = 'json'
 CELERY_ENABLE_UTC = True
 CELERY_TIMEZONE = TIME_ZONE
 CELERY_WORKER_MAX_TASKS_PER_CHILD = 100
