@@ -211,7 +211,7 @@ def send_broadcast_email(broadcast_email_id, recipients):
         logger.error("Attempted to send broadcast email that does not exist: %d" % broadcast_email_id)
         return
 
-    for recipient in list(recipients):
+    for recipient in recipients:
         msg = EmailMultiAlternatives(
             broadcast_email.subject,
             broadcast_email.message,
@@ -226,7 +226,7 @@ def send_inactive_account_reminder():
     try:
         email = BroadcastEmail.objects.get(subject="We miss your astrophotographs!")
         recipients = inactive_accounts()
-        send_broadcast_email.delay(email, recipients.values_list('user__email', flat=True))
+        send_broadcast_email.delay(email, list(recipients.values_list('user__email', flat=True)))
         recipients.update(inactive_account_reminder_sent=timezone.now())
     except BroadcastEmail.DoesNotExist:
         pass
