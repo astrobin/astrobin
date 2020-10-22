@@ -6,6 +6,7 @@ from astrobin.enums import SubjectType
 from astrobin.fields import COUNTRIES
 from astrobin.models import Image
 from astrobin.utils import get_client_country_code
+from astrobin_apps_images.services import ImageService
 from astrobin_apps_notifications.utils import get_unseen_notifications
 
 
@@ -134,6 +135,6 @@ def common_variables(request):
     }
 
     if request.user.is_authenticated() and request.user.userprofile.is_image_moderator():
-        d['images_pending_moderation_no'] = Image.objects_including_wip.filter(moderator_decision=0).count()
+        d['images_pending_moderation_no'] = ImageService().get_images_pending_moderation().count()
 
     return d

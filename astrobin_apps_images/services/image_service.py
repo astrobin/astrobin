@@ -1,3 +1,5 @@
+from datetime import datetime, timedelta
+
 from django.conf import settings
 from django.core.files.images import get_image_dimensions
 from django.db.models import Q
@@ -9,7 +11,7 @@ from astrobin.utils import base26_encode, base26_decode
 class ImageService:
     image = None  # type: Image
 
-    def __init__(self, image):
+    def __init__(self, image=None):
         # type: (Image) -> None
         self.image = image
 
@@ -165,3 +167,8 @@ class ImageService:
         for solar_system_subject in SOLAR_SYSTEM_SUBJECT_CHOICES:
             if self.image.solar_system_main_subject == solar_system_subject[0]:
                 return solar_system_subject[1]
+
+    def get_images_pending_moderation(self):
+        return Image.objects_including_wip.filter(
+            moderator_decision=0,
+            uploaded__lt = datetime.now() - timedelta(minutes=10))

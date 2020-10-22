@@ -1,7 +1,11 @@
-# Python
 import datetime
 
-# Django
+from braces.views import (
+    LoginRequiredMixin,
+    GroupRequiredMixin,
+    JSONResponseMixin,
+    SuperuserRequiredMixin,
+)
 from django.conf import settings
 from django.contrib import messages
 from django.contrib.auth.models import User
@@ -11,29 +15,20 @@ from django.shortcuts import redirect
 from django.utils.translation import ugettext_lazy as _
 from django.views.generic import View
 from django.views.generic.list import ListView
-
-# Third party
-from braces.views import (
-    LoginRequiredMixin,
-    GroupRequiredMixin,
-    JSONResponseMixin,
-    SuperuserRequiredMixin,
-)
 from pybb.models import Topic
-from toggleproperties.models import ToggleProperty
 
-# AstroBin
 from astrobin.models import Image
 from astrobin.stories import add_story
+from astrobin_apps_images.services import ImageService
 from astrobin_apps_notifications.utils import push_notification
+from toggleproperties.models import ToggleProperty
 
 
 class ImageModerationListView(LoginRequiredMixin, GroupRequiredMixin, ListView):
     group_required = "image_moderators"
     raise_exception = True
     model = Image
-    queryset = Image.objects_including_wip.filter(
-        moderator_decision=0, uploaded__lt=datetime.datetime.now() - datetime.timedelta(minutes=10))
+    queryset = ImageService().get_images_pending_moderation()
     template_name = "moderation/image_list.html"
 
 
