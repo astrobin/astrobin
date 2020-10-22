@@ -20,8 +20,8 @@ The proxy server that sits in front of the app and forwards the requests.
 ### AstroBin app
 The actual main app.
 
-### rabbitmq
-The asynchronous message queue used to orchestrate background tasks.
+### redis
+Used as broker and results backend for celery.
 
 ### celery beat
 The periodic task scheduler. Think of it as a cron daemon.
@@ -44,8 +44,6 @@ The Elasticsearch engine that handles the search index. It's accessed by
 the AstroBin app directly for queries, and by the celery worker to update
 the index.
 
-### flower
-A monitor that sits on top of rabbitmq and monitors the celery tasks.
 
 # Development Environment
 

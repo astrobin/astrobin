@@ -17,7 +17,7 @@ services:
           - node.labels.app == true
 
 
-  rabbitmq:
+  redis:
     deploy:
       placement:
         constraints:
@@ -70,10 +70,3 @@ services:
       placement:
         constraints:
           - node.labels.app == true
-
-
-  flower:
-    deploy:
-      placement:
-        constraints:
-          - node.labels.default == true
