@@ -17,13 +17,6 @@ services:
           - node.labels.app == true
 
 
-  redis:
-    deploy:
-      placement:
-        constraints:
-          - node.labels.default == true
-
-
   celery_main:
     deploy:
       placement:
