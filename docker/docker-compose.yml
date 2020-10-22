@@ -13,13 +13,6 @@ services:
       - letsencrypt:/etc/letsencrypt
 
 
-  redis:
-    image: redis:6.0.8-alpine
-    expose:
-      - 6379
-    ports:
-      - "6379:6379"
-
   celery_main:
     image: ${DOCKER_REGISTRY}/astrobin:${ASTROBIN_BUILD}
     command: bash -c "python manage.py collectstatic --noinput && celery worker -A astrobin -Q main -c 1 -l debug"
