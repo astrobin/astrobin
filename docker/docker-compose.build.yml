@@ -54,6 +54,7 @@ services:
       - debug_email
       - postgres
       - elasticsearch
+      - redis
 
 
   celery_main:
@@ -63,6 +64,7 @@ services:
     links:
       - postgres
       - elasticsearch
+      - redis
 
 
   celery_email:
@@ -72,6 +74,7 @@ services:
     links:
       - postgres
       - elasticsearch
+      - redis
 
 
   celery_thumbnails:
@@ -81,6 +84,7 @@ services:
     links:
       - postgres
       - elasticsearch
+      - redis
 
 
   celery_haystack:
@@ -90,6 +94,7 @@ services:
     links:
       - postgres
       - elasticsearch
+      - redis
 
 
   beat:
@@ -99,6 +104,7 @@ services:
     links:
       - postgres
       - elasticsearch
+      - redis
 
 
   debug_email:

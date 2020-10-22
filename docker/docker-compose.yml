@@ -18,7 +18,6 @@ services:
     command: bash -c "python manage.py collectstatic --noinput && celery worker -A astrobin -Q main -c 1 -l debug"
     links:
       - memcached
-      - redis
     env_file:
       - ./astrobin.env
     environment:
@@ -36,8 +35,6 @@ services:
   celery_email:
     image: ${DOCKER_REGISTRY}/astrobin:${ASTROBIN_BUILD}
     command: bash -c "python manage.py collectstatic --noinput && celery worker -A astrobin -Q email -c 1 -l debug"
-    links:
-      - redis
     env_file:
       - ./astrobin.env
     environment:
@@ -55,8 +52,6 @@ services:
   celery_thumbnails:
     image: ${DOCKER_REGISTRY}/astrobin:${ASTROBIN_BUILD}
     command: bash -c "python manage.py collectstatic --noinput && celery worker -A astrobin -Q thumbnails -c 2 -l debug"
-    links:
-      - redis
     env_file:
       - ./astrobin.env
     environment:
@@ -74,8 +69,6 @@ services:
   celery_haystack:
     image: ${DOCKER_REGISTRY}/astrobin:${ASTROBIN_BUILD}
     command: bash -c "python manage.py collectstatic --noinput && celery worker -A astrobin -Q haystack -c 2 -l debug"
-    links:
-      - redis
     env_file:
       - ./astrobin.env
     environment:
@@ -93,8 +86,6 @@ services:
   beat:
     image: ${DOCKER_REGISTRY}/astrobin:${ASTROBIN_BUILD}
     command: bash -c "python manage.py collectstatic --noinput && celery -A astrobin beat -l debug --pidfile= --scheduler django_celery_beat.schedulers:DatabaseScheduler"
-    links:
-      - redis
     env_file:
       - ./astrobin.env
     environment:
@@ -114,7 +105,6 @@ services:
     command: bash -c "./scripts/init.sh && gunicorn wsgi:application -w 4 -b :8083 --max-requests 500 --max-requests-jitter 50 --timeout 300 --graceful-timeout 300 -k gevent"
     links:
       - memcached
-      - redis
     ports:
       - "8084:8084"
     env_file:
