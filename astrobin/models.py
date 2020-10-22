@@ -2277,6 +2277,18 @@ class UserProfile(SafeDeleteModel):
         _('Receive e-mails from subscribed forum topics'),
         default=True)
 
+    image_recovery_process_started = models.DateTimeField(
+        null=True,
+        blank=True,
+        editable=False,
+    )
+
+    image_recovery_process_completed = models.DateTimeField(
+        null=True,
+        blank=True,
+        editable=False,
+    )
+
     def get_display_name(self):
         return self.real_name if self.real_name else self.user.__unicode__()
 
